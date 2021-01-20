@@ -9,7 +9,7 @@
             <b-tab title="Posts" active>
               <Post></Post>
             </b-tab>
-            <b-tab title="About"><p>I'm the second tab</p></b-tab>
+            <b-tab title="About"><About/></b-tab>
             <b-tab title="Business"><p>I'm the first tab</p></b-tab>
             <b-tab title="Media"><p>I'm the second tab</p></b-tab>
             <b-tab title="Following"><p>I'm the second tab</p></b-tab>
@@ -24,13 +24,15 @@
 import navbar from "@/components/navbar";
 import headPage from "@/components/headPage";
 import Post from "@/components/tabs/posts";
+import About from "@/components/tabs/about";
 
 export default {
   name: "Home",
   components: {
     navbar,
     headPage,
-    Post
+    Post,
+    About
   },
   data() {
     return {};

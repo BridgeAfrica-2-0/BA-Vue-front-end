@@ -7,6 +7,7 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
+    recoverData:"",
     login: false,
     isToi: false,
     count: "",
@@ -106,6 +107,7 @@ export default new Vuex.Store({
   },
   plugins: [createPersistedState()],
   mutations: {
+    recoverData: (state, data) => state.recoverData = data,
     increment(state, payload) {
       state.count += payload.amount;
     },
@@ -190,9 +192,16 @@ export default new Vuex.Store({
     },
     storeService(context, payload) {
       context.commit("keepService", payload);
+    },
+    recoverPassword2(context, mydata){
+      console.log("heyyyy")
+        context.commit("recoverData", mydata);
     }
   },
   getters: {
+    recoverPassData: state => {
+        return state.recoverData;
+    },
     doneTodos: state => {
       return state.todos.filter(todo => todo.done);
     },

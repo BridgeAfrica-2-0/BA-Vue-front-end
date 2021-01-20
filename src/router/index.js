@@ -3,10 +3,14 @@ import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
 import Login from "../views/login.vue";
 import SignIn from "../views/signIn.vue";
+import RecoverPass1 from "../views/recoverPassword1.vue";
+import RecoverPass2 from "../views/recoverPassword2.vue";
+import RecoverPass3 from "../views/recoverPassword3.vue";
 import createService from "@/views/createService";
 import service from "@/views/service";
 import Modifier from "@/views/Modifier";
 import store from "@/store/index.js";
+import Follower from "../views/follower.vue";
 
 Vue.use(VueRouter);
 
@@ -25,6 +29,21 @@ const routes = [
     path: "/signin",
     name: "SignIn",
     component: SignIn
+  },
+  {
+    path: "/recoverPass1",
+    name: "RecoverPass1",
+    component: RecoverPass1
+  },
+  {
+    path: "/recoverPass2",
+    name: "RecoverPass2",
+    component: RecoverPass2
+  },
+  {
+    path: "/recoverPass3",
+    name: "RecoverPass3",
+    component: RecoverPass3
   },
   {
     path: "/services/create",
@@ -62,17 +81,16 @@ const routes = [
       } else {
         next({ name: "Login" });
       }
-    }
+    },
+    
   },
+
   {
-    path: "/about",
-    name: "About",
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () =>
-      import(/* webpackChunkName: "about" */ "../views/About.vue")
-  }
+    path: "/follower",
+    name: "Follower",
+    component: Follower,
+  },
+ 
 ];
 
 const router = new VueRouter({

@@ -12,7 +12,7 @@
             <b-tab title="About"><About/></b-tab>
             <b-tab title="Business"><p>I'm the second tab</p></b-tab>
             <b-tab title="Media"><Media/></b-tab>
-            <b-tab title="Following"><p>I'm the second tab</p></b-tab>
+            <b-tab title="Following"><Following/></b-tab>
           </b-tabs>
         </b-col>
       </b-row>
@@ -23,9 +23,10 @@
 <script>
 import navbar from "@/components/navbar";
 import headPage from "@/components/headPage";
-import Post from "@/components/owner/tabs/posts";
-import About from "@/components/owner/tabs/about";
-import Media from "@/components/owner/tabs/media"
+import Post from "@/components/follower/tabs/posts";
+import About from "@/components/follower/tabs/about";
+import Media from "@/components/follower/tabs/media";
+import Following from "@/components/follower/tabs/following"
 
 export default {
   name: "Home",
@@ -34,7 +35,8 @@ export default {
     headPage,
     Post,
     About,
-    Media
+    Media,
+    Following
   },
   data() {
     return {};

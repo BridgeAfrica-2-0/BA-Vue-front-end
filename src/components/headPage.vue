@@ -14,7 +14,7 @@
         <h5 class="font-weight-bolder">User Name</h5>
         <p>@User Name Alias</p>
       </div>
-      <b-button-group class="float-right mr-5 mt-2">
+      <b-button-group class="float-right mr-5 mt-2" size="sm">
         <b-button variant="outline-primary">
           <b-icon icon="person-plus-fill"></b-icon> Follow
         </b-button>

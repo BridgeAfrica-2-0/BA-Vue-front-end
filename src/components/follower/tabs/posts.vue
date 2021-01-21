@@ -1,7 +1,7 @@
 <template>
-  <div>
+  <div >
     <b-row>
-      <b-col md="4">
+      <b-col md="4" class="p-0 m-0">
         <b-card title="" header-tag="header" footer-tag="footer">
           <template #header>
             <h6 class="mb-0">Intro</h6>
@@ -107,17 +107,17 @@
           </b-card-text>
         </b-card>
       </b-col>
-      <b-col md="8">
+      <b-col md="8" class="m-0 p-0">
         <b-card>
           <b-row>
-            <b-col cols="1" class="m-0 p-0">
+            <b-col cols="2" md="1" class="m-0 p-0">
               <b-avatar
                 class="d-inline-block"
                 variant="info"
                 src="https://placekitten.com/300/300"
               ></b-avatar>
             </b-col>
-            <b-col cols="11" class="m-0 p-0">
+            <b-col cols="10" md="11" class="m-0 p-0">
               <b-form-textarea
                 id="textarea-small"
                 size="sm"
@@ -168,7 +168,7 @@
           <b-row class="mt-3">
             <b-col cols="12">
               <b-row>
-                <b-col cols="1" class="m-0 p-0">
+                <b-col cols="2" md="1" class="m-0 p-0">
                   <b-avatar
                     class="d-inline-block"
                     variant="info"
@@ -176,7 +176,7 @@
                     size="4rem"
                   ></b-avatar>
                 </b-col>
-                <b-col cols="11" class="pt-2">
+                <b-col cols="10" md="11" class="pt-2">
                   <h5 class="m-0 font-weight-bolder">
                     John Doe
                     <span class="float-right">
@@ -261,14 +261,13 @@
                 </b-col>
               </b-row>
               <b-row class="mt-2">
-                <b-col cols="1">
+                <b-col cols="3" md="1" class="">
                   <b-avatar
                     variant="info"
                     src="https://placekitten.com/300/300"
-                    size="2rem"
                   ></b-avatar>
                 </b-col>
-                <b-col cols="11">
+                <b-col cols="9" md="11" class="p-0 m-0 pr-3">
                   <b-input-group class="my-auto w-100 rounded">
                     <template #append>
                       <b-input-group-text class=""

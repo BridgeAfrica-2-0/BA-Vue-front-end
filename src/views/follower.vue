@@ -10,7 +10,7 @@
               <Post/>
             </b-tab>
             <b-tab title="About"><About/></b-tab>
-            <b-tab title="Business"><p>I'm the second tab</p></b-tab>
+            <b-tab title="Business"><Businesses/></b-tab>
             <b-tab title="Media"><Media/></b-tab>
             <b-tab title="Following"><Following/></b-tab>
           </b-tabs>
@@ -27,6 +27,7 @@ import Post from "@/components/follower/tabs/posts";
 import About from "@/components/follower/tabs/about";
 import Media from "@/components/follower/tabs/media";
 import Following from "@/components/follower/tabs/following"
+import Businesses from "@/components/follower/tabs/businesses";
 
 export default {
   name: "Home",
@@ -36,7 +37,8 @@ export default {
     Post,
     About,
     Media,
-    Following
+    Following,
+    Businesses
   },
   data() {
     return {};

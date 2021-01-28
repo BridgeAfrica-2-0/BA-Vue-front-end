@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b-navbar toggleable="lg" variant="light" class="py-2 my-auto">
+    <b-navbar toggleable="lg" variant="light" class="py-1 ml-4">
       <b-navbar-brand href="#">
         <img
           src="@/assets/img/logo_bridge_africa.png"
@@ -12,9 +12,9 @@
 
       <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
-      <b-collapse id="nav-collapse" is-nav>
-        <b-navbar-nav>
-          <b-input-group class="my-auto" style="width: 401px;">
+      <b-collapse id="nav-collapse" class="row" is-nav>
+        <b-navbar-nav class="col">
+          <b-input-group class="my-auto" style="width: 401px; margin-left: 200px">
             <template #append>
               <b-input-group-text class=""
                 ><strong style="color: #E75C18">
@@ -29,7 +29,7 @@
         </b-navbar-nav>
 
         <!-- Right aligned nav items -->
-        <b-navbar-nav class="ml-5 pl-5 my-auto">
+        <b-navbar-nav class="ml-5 pl-5 my-auto col">
           <b-nav-item href="#" class="ml-3"
             ><b-icon-house-door-fill class="col-bg"></b-icon-house-door-fill>
             Home

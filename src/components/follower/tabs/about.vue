@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b-alert show variant="primary">
+    <b-alert class="alert" show variant="primary">
       <b-icon icon="person-fill" variant="primary"></b-icon>
       <b>
         About
@@ -33,4 +33,14 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped>
+
+
+@media only screen and (max-width: 600px) {
+    .alert{
+  width: 100%;
+  
+}
+}
+
+</style>

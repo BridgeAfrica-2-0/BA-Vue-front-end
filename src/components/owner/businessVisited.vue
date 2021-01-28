@@ -31,7 +31,7 @@
           <b-icon icon="plus" variant="primary"></b-icon>Add Other
           Businesses</b-link
         >
-        <b-modal class="modal" hide-footer id="modal-5" title="Add other Business" >
+        <b-modal class="modal w-25" hide-footer id="modal-5" title="Add other Business" >
          <b-form>
             <div>
             <div class="row">

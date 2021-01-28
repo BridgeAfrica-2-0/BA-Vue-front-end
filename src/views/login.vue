@@ -1,6 +1,6 @@
 <template>
   <b-container
-    class="container p-5 h-100 w-100 mx-auto my-auto reset-back"
+    class="container p-5 h-100 w-100 mx-auto my-auto"
     fluid
   >
     <div class="w-100 h-100 my-auto mx-auto">
@@ -38,6 +38,9 @@
           <b-button type="submit" variant="outline-primary" @click="logIn">
             Login
           </b-button>
+         <div>
+            <b-link href="recoverPass1">Forgot Password</b-link>
+         </div>
         </div>
       </b-card>
     </div>

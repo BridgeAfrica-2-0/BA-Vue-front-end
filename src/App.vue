@@ -25,4 +25,11 @@
     }
   }
 }
+
+@media only screen and (max-width: 600px) {
+  .nav-link{
+        font-size: xx-small;
+  }
+  
+}
 </style>

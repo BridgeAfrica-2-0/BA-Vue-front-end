@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b>WorkPlace</b>
+    <b class="work">WorkPlace</b>
     <hr />
    
     <b-list-group-item
@@ -44,7 +44,10 @@ export default {
 @media only screen and (max-width: 600px) {
   .avatar {
     position: relative;
-    top: -100px;
+    top: -60px;
+  }
+  .work{
+    margin-left: 20px;
   }
 }
 </style>

@@ -1,9 +1,9 @@
 <template>
   <div>
-    <b>Places you lived</b>
+    <b class="place">Places you lived</b>
     <hr />
-    <p><b>Cameroon, South Africa</b></p>
-    <p>
+    <p class="place"><b>Cameroon, South Africa</b></p>
+    <p class="place">
       Current City
     </p>
   </div>
@@ -18,4 +18,11 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped>
+
+@media only screen and (max-width: 600px) {
+  .place{
+    margin-left: 20px;
+  }
+}
+</style>

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b>Profession</b>
+    <b class="profession">Profession</b>
     <hr />
     <b-list-group-item
       class="d-flex align-items-center mb-4 "
@@ -36,6 +36,8 @@ export default {
 <style scoped>
 
 @media only screen and (max-width: 600px) {
-
+  .profession{
+    margin-left: 20px;
+  }
 }
 </style>

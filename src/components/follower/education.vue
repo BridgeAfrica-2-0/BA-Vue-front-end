@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b>Education</b>
+    <b class="education">Education</b>
     <hr />
   
     <b-list-group-item
@@ -43,7 +43,10 @@ export default {
 @media only screen and (max-width: 600px) {
   .avatar {
     position: relative;
-    top: -100px;
+    top: -60px;
+  }
+  .education{
+    margin-left: 20px;
   }
 }
 </style>

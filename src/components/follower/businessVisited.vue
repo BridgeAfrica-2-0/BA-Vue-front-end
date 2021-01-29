@@ -1,11 +1,11 @@
 <template>
   <div>
-    <b>Business Visited</b>
+    <b class="business">Business Visited</b>
     <hr />
     <div class="row">
       <div class="col">
         <b-list-group-item class="d-flex align-items-center mb-4 " style="border: none">
-          <b-avatar class="mr-3"></b-avatar>
+          <b-avatar class=" profile mr-3"></b-avatar>
           <div class="datails">
             <div class="row">
               <div class="col">
@@ -37,6 +37,14 @@ export default {
 .details {
   display: flex;
 }
+
+.profile{
+  position: relative;
+  top: -30px;
+}
 @media only screen and (max-width: 600px) {
+  .business{
+    margin-left: 20px;
+  }
 }
 </style>

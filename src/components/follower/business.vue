@@ -54,7 +54,7 @@ a {
   .btns {
     position: relative;
     top: 180px;
-    left: -140px;
+    left: -110px;
   }
   img {
     width: 270px;

@@ -1,15 +1,15 @@
 <template>
   <div>
-    <b>Web & Soial Links</b>
+    <b class="social">Web & Soial Links</b>
     <hr />
-    <div>
+    <div class="social">
       <b-link style="text-decoration: none" v-b-modal.modal-7
         ><b-icon icon="globe" variant="primary"></b-icon>
         https://www.yourwebsite.com</b-link
       >
     </div>
 
-      <div>
+      <div class="social">
       <b-link style="text-decoration: none, position:relative; top:10px" v-b-modal.modal-7
         ><b-icon icon="facebook" variant="primary"></b-icon>
         https://www.facebook.com/yourid</b-link
@@ -42,4 +42,10 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped>
+@media only screen and (max-width: 600px) {
+  .social{
+    margin-left: 20px;
+  }
+}
+</style>

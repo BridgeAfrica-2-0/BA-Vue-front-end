@@ -10,7 +10,9 @@
       <b-tabs pills card vertical>
         <b-tab title="BIOGRAPHY" active><Biography /></b-tab>
         <b-tab title="CONTACT & BASIC INFO"> <ContactandInfo /> </b-tab>
-        <b-tab title="WORK & EDUCATION"><WorkAndEducation/></b-tab>
+        <b-tab title="WORK & EDUCATION"
+          ><WorkAndEducation/></b-tab
+        >
       </b-tabs>
     </b-card>
   </div>
@@ -31,17 +33,4 @@ export default {
 };
 </script>
 
-
-<style scoped>
-
-
-@media only screen and (max-width: 600px) {
-    .alert{
-  width: 100%;
-  
-}
-}
-
-</style>
-
-
+<style></style>

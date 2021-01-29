@@ -1,12 +1,6 @@
-<<<<<<< HEAD
 <template>
   <div>
-    <b-alert class="alert" show variant="primary">
-=======
- <template>
-  <div>
     <b-alert show variant="primary">
->>>>>>> de075d57c412525aabae94d7932a6d8651db7b4e
       <b-icon icon="person-fill" variant="primary"></b-icon>
       <b>
         About
@@ -16,13 +10,7 @@
       <b-tabs pills card vertical>
         <b-tab title="BIOGRAPHY" active><Biography /></b-tab>
         <b-tab title="CONTACT & BASIC INFO"> <ContactandInfo /> </b-tab>
-        <b-tab title="WORK & EDUCATION"
-<<<<<<< HEAD
-          ><WorkAndEducation/></b-tab
-        >
-=======
-          ><WorkAndEducation/></b-tab>
->>>>>>> de075d57c412525aabae94d7932a6d8651db7b4e
+        <b-tab title="WORK & EDUCATION"><WorkAndEducation/></b-tab>
       </b-tabs>
     </b-card>
   </div>
@@ -43,7 +31,7 @@ export default {
 };
 </script>
 
-<<<<<<< HEAD
+
 <style scoped>
 
 
@@ -55,6 +43,5 @@ export default {
 }
 
 </style>
-=======
-<style></style>
->>>>>>> de075d57c412525aabae94d7932a6d8651db7b4e
+
+

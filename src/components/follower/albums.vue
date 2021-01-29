@@ -7,20 +7,15 @@
           <div>
             <span class="text-hover">
               <div>Album Name</div>
-              <span> {{images.length}} item(s)</span>
+              <span> {{ images.length }} item(s)</span>
             </span>
           </div>
         </div>
+        <span class="text-static">
+          <div>Album Name</div>
+          <span> {{ images.length }} item(s)</span>
+        </span>
       </div>
-      <b-modal hide-footer ref="modal-1">
-        <b-img fluid-grow src="https://picsum.photos/300/150/?image=41"></b-img>
-        <h3>Post Title</h3>
-        <p class="text">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum
-          quisquam sequi, ullam aliquam ab illo suscipit, earum quam, doloribus
-          id sit consequuntur tempora molestiae blanditiis.
-        </p>
-      </b-modal>
     </div>
     <div v-if="pictureShow">
       <b-button @click="back" variant="primary">Back</b-button>
@@ -28,12 +23,27 @@
       <div style="text-align: center" class="album-name">Album Name</div>
       <div style="display: flex; flex-wrap:wrap">
         <div v-for="item in images" :key="item.id" class="p-4">
-          <b-img
-            src="https://picsum.photos/300/150/?image=41"
-            rounded
-            fluid
-          ></b-img>
+          <span class="sp">
+            <b-img
+            @click="modalShow = !modalShow"
+              src="https://picsum.photos/300/150/?image=41"
+              rounded
+              fluid
+              class="pic"
+            ></b-img>
+
+            <span class="pic-name"
+              ><button class="btn-view">Picture Name</button></span
+            >
+          </span>
         </div>
+        <b-modal hide-footer v-model="modalShow">
+          <b-img
+            fluid-grow
+            src="https://picsum.photos/300/150/?image=41"
+          ></b-img>
+          <h3>Picture Title</h3>
+        </b-modal>
       </div>
     </div>
   </div>
@@ -45,6 +55,7 @@ export default {
     return {
       albumShow: true,
       pictureShow: false,
+      modalShow: false,
       posts: [
         {
           id: 1,
@@ -71,7 +82,7 @@ export default {
       this.pictureShow = true;
       this.albumShow = false;
     },
-    back(){
+    back() {
       this.pictureShow = false;
       this.albumShow = true;
     },
@@ -97,13 +108,57 @@ export default {
 }
 .album:hover .overlay {
   opacity: 0.5;
+  color: #e75d29;
 }
 .text-hover {
   position: relative;
   top: 80px;
 }
 
-.album-name{
-    color: #E75D29;
+.text-static {
+  position: relative;
+  top: -220px;
+  left: 100px;
+  color: white;
+  font-weight: 200;
+}
+
+.album:hover .text-static {
+  display: none;
+}
+
+.btn-view {
+  background-color: transparent;
+  border: none;
+  color: white;
+}
+
+.btn-view:focus {
+  outline-color: transparent;
+  border: none;
+}
+
+.album-name {
+  color: #e75d29;
+}
+
+.pic-name {
+  position: relative;
+  left: -200px;
+  color: white;
+  font-weight: 200;
+  opacity: 0;
+}
+
+.sp:hover .pic-name {
+  opacity: 1;
+}
+
+.pic {
+  cursor: pointer;
+  background-color: transparent;
+}
+.pic:hover {
+  box-shadow: 5px 10px 8px 2px #888888;
 }
 </style>

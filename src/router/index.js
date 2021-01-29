@@ -92,7 +92,7 @@ const routes = [
   },
 
   {
-    path: "/follower",
+    path: "/profilefollower",
     name: "Follower",
     component: Follower,
   },

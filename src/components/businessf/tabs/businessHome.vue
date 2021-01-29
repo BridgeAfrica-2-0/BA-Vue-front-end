@@ -7,7 +7,8 @@
         <Personalise/>
       </b-col>
       <b-col md="8">
-       <Chat/>
+       <CreatePost/>
+       <Post/>
       </b-col>
     </b-row>
   </div>
@@ -16,15 +17,17 @@
 <script>
 import Intro from "../intro";
 import Invite from "../invite";
-import Personalise from "../personalise"
-import Chat from "../chat";
+import Personalise from "../personalise";
+import CreatePost from "../../createPost";
+import Post from "../../post";
 export default {
   name: "posts",
   components: {
     Intro,
     Invite,
-    Chat,
-    Personalise
+    CreatePost,
+    Personalise,
+    Post
   }
 };
 </script>

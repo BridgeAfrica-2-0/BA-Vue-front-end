@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="row">
+    <div class="row follow">
       <div class="col">
         <b-list-group-item
           class="d-flex align-items-center mb-4 "
@@ -30,6 +30,9 @@ export default {};
 </script>
 
 <style scoped>
+.follow{
+  cursor: pointer;
+}
 @media only screen and (max-width: 600px) {
  .btn{
    display: flex;

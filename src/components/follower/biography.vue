@@ -1,7 +1,6 @@
 <template>
   <div>
      <b-list-group-item class="d-flex align-items-center mb-4 " style="border: none">
-          <b-avatar style="position:relative; top:-10px" class="mr-3"></b-avatar>
           <div>
             <div class="row">
               <div class="col">

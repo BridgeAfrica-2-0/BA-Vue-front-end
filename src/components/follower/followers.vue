@@ -2,10 +2,7 @@
   <div>
     <div class="row follower">
       <div class="col">
-        <b-list-group-item
-          class="d-flex align-items-center mb-4 "
-          style="border: none"
-        >
+        <b-list-group-item class="d-flex align-items-center mb-4 item">
           <b-avatar class="mr-3"></b-avatar>
           <div class="datails">
             <div class="row">
@@ -17,9 +14,10 @@
         </b-list-group-item>
       </div>
       <div class="col-2">
-           <b-button class="btn" variant="outline-primary">
-               <b-icon icon="chat" class="mr-1"></b-icon>
-               Message</b-button>
+        <b-button class="btn" variant="outline-primary">
+          <b-icon icon="chat" class="mr-1"></b-icon>
+          Message</b-button
+        >
       </div>
     </div>
   </div>
@@ -30,14 +28,16 @@ export default {};
 </script>
 
 <style scoped>
-
-.follower{
+.item {
+  border: none;
+}
+.follower {
   cursor: pointer;
 }
-  @media only screen and (max-width: 600px) {
- .btn{
-   display: flex;
-   margin-left: -70px;
+@media only screen and (max-width: 600px) {
+  .btn {
+    display: flex;
+    margin-left: -70px;
   }
 }
 </style>

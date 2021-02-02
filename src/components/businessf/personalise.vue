@@ -1,9 +1,7 @@
 <template>
   <div>
     <b-card
-     style="background-color: #ccc"
-     
-      class="text-center mt-2 p-1"
+      class="text-center mt-2 p-1 item"
     >
       <b-card-text>
         <h5> <b>Create your personalized website</b></h5>
@@ -26,4 +24,8 @@
 export default {};
 </script>
 
-<style></style>
+<style scoped>
+.item{
+  background-color: #ccc;
+}
+</style>

@@ -2,10 +2,7 @@
   <div>
     <b class="profession">Profession</b>
     <hr />
-    <b-list-group-item
-      class="d-flex align-items-center mb-4 "
-      style="border: none"
-    >
+    <b-list-group-item class="d-flex align-items-center mb-4 item">
       <div class="datails">
         <div class="row">
           <div class="col">
@@ -14,7 +11,6 @@
         </div>
       </div>
     </b-list-group-item>
-
   </div>
 </template>
 
@@ -34,9 +30,11 @@ export default {
 </script>
 
 <style scoped>
-
+.item {
+  border: none;
+}
 @media only screen and (max-width: 600px) {
-  .profession{
+  .profession {
     margin-left: 20px;
   }
 }

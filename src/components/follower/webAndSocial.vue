@@ -3,19 +3,18 @@
     <b class="social">Web & Soial Links</b>
     <hr />
     <div class="social">
-      <b-link style="text-decoration: none" v-b-modal.modal-7
+      <b-link class="link" v-b-modal.modal-7
         ><b-icon icon="globe" variant="primary"></b-icon>
         https://www.yourwebsite.com</b-link
       >
     </div>
 
-      <div class="social">
-      <b-link style="text-decoration: none, position:relative; top:10px" v-b-modal.modal-7
+    <div class="social">
+      <b-link class="link-1" v-b-modal.modal-7
         ><b-icon icon="facebook" variant="primary"></b-icon>
         https://www.facebook.com/yourid</b-link
       >
     </div>
-  
   </div>
 </template>
 
@@ -30,7 +29,7 @@ export default {
         { value: "private", text: "Private" },
         { value: "public", text: "Public" },
       ],
-       socials: [
+      socials: [
         { value: null, text: "Select" },
         { value: "instagram", text: "Instagram" },
         { value: "facebook", text: "FaceBook" },
@@ -43,8 +42,16 @@ export default {
 </script>
 
 <style scoped>
+.link {
+  text-decoration: none;
+}
+.link-1 {
+  text-decoration: none;
+  position: relative;
+  top: 10px;
+}
 @media only screen and (max-width: 600px) {
-  .social{
+  .social {
     margin-left: 20px;
   }
 }

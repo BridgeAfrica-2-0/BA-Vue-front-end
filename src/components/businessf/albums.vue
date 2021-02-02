@@ -1,6 +1,10 @@
 <template>
   <div>
-    <div v-if="albumShow" class="main-album">
+    <div v-if="albumShow" class="albums">
+      <div class="create">
+        <b-icon icon="plus" variant="primary"></b-icon>
+        <p>Create Album</p>
+      </div>
       <div class="p-4 album" v-for="post in posts" :key="post.id">
         <b-img v-if="post.image" :src="post.image" rounded fluid></b-img>
         <div @click="openAlbum" class="overlay">
@@ -94,7 +98,7 @@ export default {
 </script>
 
 <style scoped>
-.main-album {
+.albums {
   display: flex;
   flex-wrap: wrap;
 }
@@ -125,11 +129,6 @@ export default {
   left: 100px;
   color: white;
   font-weight: 200;
-}
-
-.albums {
-  display: flex;
-  flex-wrap: wrap;
 }
 
 .album:hover .text-static {
@@ -170,5 +169,15 @@ export default {
 }
 .pic:hover {
   box-shadow: 5px 10px 8px 2px #888888;
+}
+
+.create {
+  position: relative;
+  height: 150px;
+  color: #fff;
+  background-color: #bbb;
+  padding: 20px;
+  width: 300px;
+  top: 1000px;
 }
 </style>

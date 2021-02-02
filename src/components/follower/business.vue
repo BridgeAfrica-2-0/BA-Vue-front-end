@@ -6,9 +6,7 @@
       </div>
       <div class="col details">
         <h3>
-          <b-link style="text-decoration: none; color: #000"
-            >Business Name</b-link
-          >
+          <b-link class="link">Business Name</b-link>
         </h3>
         <p>
           <a href="">mywebsite.com</a> <br />
@@ -24,7 +22,8 @@
 
           <b-button class="ml-3" variant="outline-primary">
             <b-icon icon="plus"></b-icon>
-            Follow</b-button>
+            Follow</b-button
+          >
         </span>
       </div>
     </div>
@@ -36,12 +35,16 @@ export default {};
 </script>
 
 <style scoped>
+.link {
+  text-decoration: none;
+  color: #000;
+}
 a {
   text-decoration: black;
 }
 
 .btns {
-    display: flex;
+  display: flex;
   margin-left: 120px;
 }
 

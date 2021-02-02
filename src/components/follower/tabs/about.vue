@@ -24,8 +24,8 @@
 
 <script>
 import Biography from "../biography";
-import ContactandInfo from "../contactandbasicinfo";
-import WorkAndEducation from "../workandeducation";
+import ContactandInfo from "../contactAndBasicInfo";
+import WorkAndEducation from "../workAndEducation";
 export default {
   components: {
     Biography,

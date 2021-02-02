@@ -1,14 +1,31 @@
 <template>
-  <div class="col">
-    <div class="row">
+  <div>
+    <div class="images">
       <div>
-        <img class="ml-4" fluid src="../../assets/img/about2.jpg" alt="" />
-        <img class="ml-2" src="../../assets/img/about2.jpg" alt="" />
-        <img class="ml-2" src="../../assets/img/about2.jpg" alt="" />
+        <img fluid src="../../assets/img/about2.jpg" alt="" />
       </div>
-      <div class="container"></div>
+      <div>
+        <img fluid src="../../assets/img/about2.jpg" alt="" />
+      </div>
+      <div>
+        <img fluid src="../../assets/img/about2.jpg" alt="" />
+      </div>
+      <div>
+        <img fluid src="../../assets/img/about2.jpg" alt="" />
+      </div>
+      <div>
+        <img fluid src="../../assets/img/about2.jpg" alt="" />
+      </div>
+      <div>
+        <img fluid src="../../assets/img/about2.jpg" alt="" />
+      </div>
+      
     </div>
-    <div class="row mt-2">
+    <div class="photo-btns">
+        <b-button class="sm" size="sm"> <b-icon icon="plus"></b-icon>Add Photos</b-button>
+        <b-button class="ml-2" size="sm">See All</b-button>
+      </div>
+    <div class="row mt-4">
       <div class="col">
         <div>
           <b-avatar
@@ -16,7 +33,7 @@
             class="owner-profile-image-profile float-left"
             badge-variant="primary"
             badge-offset="10px"
-            size="100"
+            size="80"
           >
           </b-avatar>
         </div>
@@ -25,12 +42,14 @@
           <p>@User Name Alias</p>
         </div>
       </div>
-      <div class="col- mt-4">
-        <div>
-          <b-button class="mr-2" variant="danger">Promote</b-button>
-          <b-button class="mr-2" variant="success">Contact</b-button>
-          <b-button variant="primary">Website</b-button>
-        </div>
+    </div>
+    <div class="btns">
+      <div>
+        <b-button class="mr-2" variant="success">Promote</b-button>
+        <b-button class="mr-2 cnt-btn" variant="warning" 
+          >Contact</b-button
+        >
+        <b-button variant="danger">Website</b-button>
       </div>
     </div>
     <div class="row">
@@ -39,8 +58,8 @@
           <b-col cols="12">
             <b-tabs content-class="mt-3" fill pills card>
               <b-tab title="Home"><HomePage /></b-tab>
-              <b-tab title="About"></b-tab>
-              <b-tab title="Media"></b-tab>
+              <b-tab title="About"><About/></b-tab>
+              <b-tab title="Media"><Media/></b-tab>
               <b-tab title="Market Place"></b-tab>
               <b-tab title="Networks"></b-tab>
               <b-tab title="Followers"></b-tab>
@@ -54,11 +73,15 @@
 
 <script>
 import HomePage from "../businessf/tabs/businessHome";
+import About from "./tabs/about";
+import Media from "./tabs/media";
 
 export default {
   name: "Home",
   components: {
     HomePage,
+    About,
+    Media
   },
   data() {
     return {};
@@ -67,3 +90,37 @@ export default {
   methods: {},
 };
 </script>
+
+<style scoped>
+.images {
+  display: flex;
+  width: 100%;
+}
+
+img {
+  width: 100%;
+}
+
+.btns {
+  position: relative;
+  left: 75%;
+}
+
+.photo-btns{
+  margin-left: 80%;
+  margin-top: -50px;
+}
+.cnt-btn{
+  color: white;
+}
+@media only screen and (max-width: 600px) {
+  .btns {
+    position: relative;
+    left: 15%;
+  }
+  .photo-btns{
+  margin-left: 50%;
+  margin-top: 10px;
+}
+}
+</style>

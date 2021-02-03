@@ -45,10 +45,7 @@
     </div>
     <div class="btns">
       <div>
-        <b-button class="mr-2" variant="success">Promote</b-button>
-        <b-button class="mr-2 cnt-btn" variant="warning" 
-          >Contact</b-button
-        >
+        <b-button class="mr-4" variant="success">Promote</b-button>
         <b-button variant="danger">Website</b-button>
       </div>
     </div>
@@ -60,9 +57,9 @@
               <b-tab title="Home"><HomePage /></b-tab>
               <b-tab title="About"><About/></b-tab>
               <b-tab title="Media"><Media/></b-tab>
-              <b-tab title="Market Place"></b-tab>
-              <b-tab title="Networks"></b-tab>
-              <b-tab title="Followers"></b-tab>
+              <b-tab title="Market Place"><MarketPlace/></b-tab>
+              <b-tab title="Networks"><Networks/></b-tab>
+              <b-tab title="Followers"><Followers/></b-tab>
             </b-tabs>
           </b-col>
         </b-row>
@@ -75,13 +72,20 @@
 import HomePage from "../businessf/tabs/businessHome";
 import About from "./tabs/about";
 import Media from "./tabs/media";
+import MarketPlace from "./tabs/marketPlace";
+import Followers from "./tabs/followers";
+import Networks from "./tabs/networks";
+
 
 export default {
   name: "Home",
   components: {
     HomePage,
     About,
-    Media
+    Media,
+    MarketPlace,
+    Followers,
+    Networks
   },
   data() {
     return {};
@@ -116,7 +120,7 @@ img {
 @media only screen and (max-width: 600px) {
   .btns {
     position: relative;
-    left: 15%;
+    left: 25%;
   }
   .photo-btns{
   margin-left: 50%;

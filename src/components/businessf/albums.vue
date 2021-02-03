@@ -1,32 +1,59 @@
 <template>
   <div>
-    <div v-if="albumShow" class="albums">
-      <div class="create">
-        <b-icon icon="plus" variant="primary"></b-icon>
-        <p>Create Album</p>
-      </div>
-      <div class="p-4 album" v-for="post in posts" :key="post.id">
-        <b-img v-if="post.image" :src="post.image" rounded fluid></b-img>
-        <div @click="openAlbum" class="overlay">
-          <div>
-            <span class="text-hover">
-              <div>Album Name</div>
-              <span> {{ images.length }} item(s)</span>
-            </span>
-          </div>
+    <div v-if="albumShow" class="albums ml-4">
+      <div class="create" @click="showModal = !showModal">
+        <div class="text">
+          <b-icon icon="plus"></b-icon>
+          <p>Create Album</p>
         </div>
-        <span class="text-static">
+      </div>
+
+      <div class="p-1 album ml-2" v-for="post in posts" :key="post.id">
+        <b-img
+          @click="openAlbum"
+          v-if="post.image"
+          :src="post.image"
+          rounded
+          fluid
+        ></b-img>
+        <span class="album-text">
           <div>Album Name</div>
           <span> {{ images.length }} item(s)</span>
         </span>
+        <b-dropdown
+          class="options"
+          variant="outline"
+          size="sm"
+          id="dropdown-left"
+        >
+          <template #button-content>
+            <b-icon icon="three-dots" aria-hidden="true"></b-icon>
+          </template>
+          <b-dropdown-item-button>
+            <b-icon icon="pencil-fill" aria-hidden="true"></b-icon>
+            Edit
+          </b-dropdown-item-button>
+          <b-dropdown-item-button>
+            <b-icon icon="trash-fill" aria-hidden="true"></b-icon>
+            Delete
+          </b-dropdown-item-button>
+        </b-dropdown>
       </div>
     </div>
+
     <div v-if="pictureShow">
       <b-button @click="back" variant="primary">Back</b-button>
 
       <div class="album-name">Album Name</div>
       <div class="albums">
-        <div v-for="item in images" :key="item.id" class="p-4">
+        <div class="create sec" @click="chooseFile">
+          <input id="default-btn" type="file">
+          <div class="text">
+            <b-icon icon="plus"></b-icon>
+            <p>Add Photo</p>
+          </div>
+        </div>
+        <div v-for="item in images" :key="item.id" class=" ml-5 album">
           <span class="sp">
             <b-img
               @click="modalShow = !modalShow"
@@ -35,10 +62,6 @@
               fluid
               class="pic"
             ></b-img>
-
-            <span class="pic-name"
-              ><button class="btn-view">Picture Name</button></span
-            >
           </span>
         </div>
         <b-modal hide-footer v-model="modalShow">
@@ -50,6 +73,13 @@
         </b-modal>
       </div>
     </div>
+
+    <b-modal hide-footer title="Create album" v-model="showModal">
+      <b-form>
+        <b-form-input v-model="text" placeholder="Album name"></b-form-input>
+        <b-button class="mt-2" variant="primary"> Create</b-button>
+      </b-form>
+    </b-modal>
   </div>
 </template>
 
@@ -60,7 +90,44 @@ export default {
       albumShow: true,
       pictureShow: false,
       modalShow: false,
+      showModal: false,
+      text: "",
       posts: [
+        {
+          id: 1,
+          image: "https://picsum.photos/300/150/?image=41",
+          title: "Title 2",
+          text:
+            " Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum quam, doloribus id sit consequuntur tempora molestiae blanditiis.",
+        },
+        {
+          id: 1,
+          image: "https://picsum.photos/300/150/?image=41",
+          title: "Title 2",
+          text:
+            " Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum quam, doloribus id sit consequuntur tempora molestiae blanditiis.",
+        },
+        {
+          id: 1,
+          image: "https://picsum.photos/300/150/?image=41",
+          title: "Title 2",
+          text:
+            " Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum quam, doloribus id sit consequuntur tempora molestiae blanditiis.",
+        },
+        {
+          id: 1,
+          image: "https://picsum.photos/300/150/?image=41",
+          title: "Title 2",
+          text:
+            " Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum quam, doloribus id sit consequuntur tempora molestiae blanditiis.",
+        },
+        {
+          id: 1,
+          image: "https://picsum.photos/300/150/?image=41",
+          title: "Title 2",
+          text:
+            " Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum quam, doloribus id sit consequuntur tempora molestiae blanditiis.",
+        },
         {
           id: 1,
           image: "https://picsum.photos/300/150/?image=41",
@@ -90,9 +157,10 @@ export default {
       this.pictureShow = false;
       this.albumShow = true;
     },
-    showModal() {
-      this.$refs["modal-1"].show();
-    },
+    chooseFile(){
+      var defaultBtn = document.getElementById('default-btn')
+      defaultBtn.click()
+    }
   },
 };
 </script>
@@ -101,54 +169,6 @@ export default {
 .albums {
   display: flex;
   flex-wrap: wrap;
-}
-.overlay {
-  width: 300px;
-  height: 150px;
-  background-color: #000;
-  border-radius: 5px;
-  position: relative;
-  opacity: 0;
-  top: -150px;
-  color: #fff;
-  text-align: center;
-  cursor: pointer;
-}
-.album:hover .overlay {
-  opacity: 0.5;
-  color: #e75d29;
-}
-.text-hover {
-  position: relative;
-  top: 80px;
-}
-
-.text-static {
-  position: relative;
-  top: -220px;
-  left: 100px;
-  color: white;
-  font-weight: 200;
-}
-
-.album:hover .text-static {
-  display: none;
-}
-
-.btn-view {
-  background-color: transparent;
-  border: none;
-  color: white;
-}
-
-.btn-view:focus {
-  outline-color: transparent;
-  border: none;
-}
-
-.album-name {
-  color: #e75d29;
-  text-align: center;
 }
 
 .pic-name {
@@ -159,16 +179,11 @@ export default {
   opacity: 0;
 }
 
-.sp:hover .pic-name {
-  opacity: 1;
-}
-
-.pic {
-  cursor: pointer;
-  background-color: transparent;
-}
-.pic:hover {
-  box-shadow: 5px 10px 8px 2px #888888;
+.album-text {
+  position: relative;
+  left: 50px;
+  top: -60px;
+  color: white;
 }
 
 .create {
@@ -178,6 +193,68 @@ export default {
   background-color: #bbb;
   padding: 20px;
   width: 300px;
-  top: 1000px;
+  top: 5px;
+  border-radius: 5px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.album-name {
+  position: relative;
+  color: #e75d29;
+  text-align: center;
+  top: -40px;
+}
+
+.text {
+  margin-top: 20px;
+}
+
+.album {
+  height: 160px;
+  cursor: pointer;
+}
+.options {
+  position: relative;
+  top: -170px;
+  left: 190px;
+}
+
+input[type="file"]{
+  display: none;
+}
+@media only screen and (max-width: 600px) {
+  .albums {
+    position: relative;
+    left: -25px;
+  }
+
+  .album {
+    margin-top: 10px;
+  }
+
+  .create {
+    left: 15px;
+    cursor: pointer;
+    bottom: 10px;
+  }
+  .options {
+  position: relative;
+  top: -150px;
+  left: 120px;
+}
+
+.create {
+  margin-left: -1px;
+  height: 120px;
+  width: 250px;
+  
+}
+.sec{
+  position: relative;
+  left: 50px;
+  width: 245px;
+}
+
 }
 </style>

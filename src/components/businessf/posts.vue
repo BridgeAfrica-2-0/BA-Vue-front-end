@@ -1,6 +1,6 @@
 <template>
   <div class="posts">
-    <div class="p-4" v-for="post in posts" :key="post.id">
+    <div class="p-1" v-for="post in posts" :key="post.id">
       <b-img
         v-if="post.image"
         class="image"

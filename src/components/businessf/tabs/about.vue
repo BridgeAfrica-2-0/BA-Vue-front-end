@@ -1,20 +1,12 @@
 <template>
   <div>
     <b-card>
-      <div>
-        <iframe
-          src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d48389.732999183005!2d-74.006227!3d40.710128!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xb89d1fe6bc499443!2sDowntown%20Conference%20Center!5e0!3m2!1sen!2sbg!4v1612237569797!5m2!1sen!2sbg"
-          height="450"
-          frameborder="0"
-          class="map"
-          allowfullscreen=""
-          aria-hidden="false"
-          tabindex="0"
-        ></iframe>
-      </div>
       <b-row>
         <b-col>
           <b-card class="mb-2">
+            <div class="edit" @click="edit1 = !edit1">
+              <b-icon icon="pencil-fill" variant="primary"></b-icon>
+            </div>
             <h4>About Mapoure Agrobusiness</h4>
             <p>
               Lorem ipsum dolor sit amet consectetur adipisicing elit.
@@ -32,6 +24,9 @@
         </b-col>
         <b-col>
           <b-card>
+            <div class="edit" @click="edit2 = !edit2">
+              <b-icon icon="pencil-fill" variant="primary"></b-icon>
+            </div>
             <b-card-text>
               <p>
                 <b-icon icon="briefcase-fill" variant="primary"></b-icon> Work
@@ -84,12 +79,54 @@
           </b-card>
         </b-col>
       </b-row>
+      <div>
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d48389.732999183005!2d-74.006227!3d40.710128!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xb89d1fe6bc499443!2sDowntown%20Conference%20Center!5e0!3m2!1sen!2sbg!4v1612237569797!5m2!1sen!2sbg"
+          height="450"
+          frameborder="0"
+          class="map mt-1"
+          allowfullscreen=""
+          aria-hidden="false"
+          tabindex="0"
+        ></iframe>
+      </div>
     </b-card>
+
+    <b-modal hide-footer title="Edit About" v-model="edit1">
+      <b-form>
+        <b-form-textarea
+          id="textarea"
+          v-model="text"
+          placeholder="Enter something..."
+          rows="3"
+          max-rows="6"
+        ></b-form-textarea>
+        <b-button class="mt-2" variant="primary"> Edit</b-button>
+      </b-form>
+    </b-modal>
+    <b-modal hide-footer title="Edt Address" v-model="edit2">
+      <b-form>
+        <b-form-input class="mt-2" v-model="text" placeholder="Worked at"></b-form-input>
+        <b-form-input class="mt-2" v-model="text" placeholder="Studied at"></b-form-input>
+        <b-form-input class="mt-2" v-model="text" placeholder="Home Town"></b-form-input>
+        <b-form-input class="mt-2" v-model="text" placeholder="Current City"></b-form-input>
+        <b-form-input class="mt-2" v-model="text" placeholder="Contact"></b-form-input>
+        <b-form-input class="mt-2" v-model="text" placeholder="Email"></b-form-input>
+        <b-button class="mt-2" variant="primary"> Edit</b-button>
+      </b-form>
+    </b-modal>
   </div>
 </template>
 
 <script>
-export default {};
+export default {
+  data() {
+    return {
+      edit1: false,
+      edit2: false,
+    };
+  },
+};
 </script>
 
 <style scoped>
@@ -100,5 +137,15 @@ export default {};
 
 .btn-item {
   color: green;
+}
+
+.edit {
+  position: relative;
+  left: 98%;
+  cursor: pointer;
+}
+
+h4, p{
+  text-align: left;
 }
 </style>

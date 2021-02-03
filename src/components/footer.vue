@@ -1,6 +1,6 @@
 <template>
   <div class="foot">
-    <b-card>
+    <b-card class="card">
       <div class="top">
         <b-container>
           <b-row>
@@ -63,9 +63,11 @@ li {
 }
 
 
+
 .bottom {
   border-top: solid 1px #ccc;
   padding: 10px;
+  text-align: center;
 }
 .top {
   padding: 50px;
@@ -76,7 +78,11 @@ li {
   .top {
   padding: 50px;
   position: relative;
-  left: -100px;
+  left: -40px;
+}
+
+.card{
+  width: 500px;
 }
 }
 </style>

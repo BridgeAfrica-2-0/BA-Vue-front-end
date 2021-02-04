@@ -2,6 +2,7 @@
   <div>
     <navbar></navbar>
     <head-page></head-page>
+    <br>
     <b-container fluid="md" class="text-justify" style="margin-top: 6rem !important;">
       <b-row>
         <b-col cols="12">

@@ -1,7 +1,7 @@
 <template>
   <div>
     <b-container fluid>
-      <img src="@/assets/img/banner.jpg" class="img-fluid" alt="Kitten" />
+      <img src="@/assets/img/banner.jpg" class="img-fluid" alt="header image" />
       <b-avatar
         src="https://placekitten.com/300/300"
         class="owner-profile-image-profile float-left"

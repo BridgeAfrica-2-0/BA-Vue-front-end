@@ -11,7 +11,7 @@
       </b-avatar>
       <div class="d-inline-block mt-2 float-left">
         <h5 class="font-weight-bolder">User Name</h5>
-        <p>@User Name Alias</p>
+        <p>@UserNameAlias</p>
       </div>
       <b-button-group class="float-right mr-5 mt-2" size="sm">
         <b-button variant="outline-primary">

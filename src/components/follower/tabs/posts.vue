@@ -1,5 +1,5 @@
 <template>
-  <div >
+  <div>
     <b-row>
       <b-col md="4" class="p-0 m-0">
         <b-card title="" header-tag="header" footer-tag="footer">

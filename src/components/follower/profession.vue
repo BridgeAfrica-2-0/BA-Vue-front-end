@@ -14,7 +14,6 @@
         </div>
       </div>
     </b-list-group-item>
-
   </div>
 </template>
 
@@ -26,16 +25,14 @@ export default {
       options: [
         { value: null, text: "Select" },
         { value: "private", text: "Private" },
-        { value: "public", text: "Public" },
-      ],
+        { value: "public", text: "Public" }
+      ]
     };
-  },
+  }
 };
 </script>
 
 <style scoped>
-
 @media only screen and (max-width: 600px) {
-
 }
 </style>

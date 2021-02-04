@@ -17,9 +17,10 @@
         </b-list-group-item>
       </div>
       <div class="col-2">
-           <b-button variant="outline-primary">
-               <b-icon icon="chat"></b-icon>
-               Message</b-button>
+        <b-button variant="outline-primary">
+          <b-icon icon="chat"></b-icon>
+          Message</b-button
+        >
       </div>
     </div>
   </div>
@@ -29,6 +30,4 @@
 export default {};
 </script>
 
-<style>
-
-</style>
+<style></style>

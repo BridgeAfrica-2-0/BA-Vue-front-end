@@ -24,7 +24,8 @@
 
           <b-button class="ml-3" variant="outline-primary">
             <b-icon icon="plus"></b-icon>
-            Follow</b-button>
+            Follow</b-button
+          >
         </span>
       </div>
     </div>
@@ -41,7 +42,7 @@ a {
 }
 
 .btns {
-    display: flex;
+  display: flex;
   margin-left: 120px;
 }
 

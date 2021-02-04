@@ -23,14 +23,14 @@
 <script>
 import Business from "../business";
 export default {
-  data(){
-    return{
-      noBusiness: false,
-    }
+  data() {
+    return {
+      noBusiness: false
+    };
   },
   components: {
-    Business,
-  },
+    Business
+  }
 };
 </script>
 
@@ -50,7 +50,7 @@ p {
 
 @media only screen and (max-width: 600px) {
   .no-business {
-      width: 100%;
+    width: 100%;
     margin-left: 0px;
   }
 }

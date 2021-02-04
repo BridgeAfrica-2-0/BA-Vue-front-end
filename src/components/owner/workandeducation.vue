@@ -1,24 +1,22 @@
 <template>
   <div>
-      <WorkPlace/>
-      <Education/>
-      <Profession/>
+    <WorkPlace />
+    <Education />
+    <Profession />
   </div>
 </template>
 
 <script>
 import WorkPlace from "./workplace";
 import Education from "./education";
-import Profession from "./profession"
+import Profession from "./profession";
 export default {
- components:{
-     WorkPlace,
-     Education,
-     Profession
- }
-}
+  components: {
+    WorkPlace,
+    Education,
+    Profession
+  }
+};
 </script>
 
-<style>
-
-</style>
+<style></style>

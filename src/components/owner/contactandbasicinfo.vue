@@ -20,8 +20,8 @@ export default {
     ContactInfo,
     BusinessVisited,
     PlacesLived,
-    WebAndSocials,
-  },
+    WebAndSocials
+  }
 };
 </script>
 

@@ -1,16 +1,18 @@
 <template>
   <div>
-     <b-list-group-item class="d-flex align-items-center mb-4 " style="border: none">
-          <b-avatar style="position:relative; top:-10px" class="mr-3"></b-avatar>
-          <div>
-            <div class="row">
-              <div class="col">
-                <p>{{ defaultbio }}</p>
-              </div>
-
-            </div>
+    <b-list-group-item
+      class="d-flex align-items-center mb-4 "
+      style="border: none"
+    >
+      <b-avatar style="position:relative; top:-10px" class="mr-3"></b-avatar>
+      <div>
+        <div class="row">
+          <div class="col">
+            <p>{{ defaultbio }}</p>
           </div>
-        </b-list-group-item >
+        </div>
+      </div>
+    </b-list-group-item>
   </div>
 </template>
 
@@ -18,14 +20,10 @@
 export default {
   data() {
     return {
-   
-      defaultbio:"no additional infomation to show !!",
-       
+      defaultbio: "no additional infomation to show !!"
     };
   },
-  methods: {
-  
-  },
+  methods: {}
 };
 </script>
 

@@ -96,8 +96,13 @@
           <b-nav-item-dropdown right>
             <!-- Using 'button-content' slot -->
             <template #button-content class="my-auto">
-              <b-avatar size="sm" class="my-auto" src="https://placekitten.com/300/300"></b-avatar>&nbsp;
-              <em>Maxine   </em>
+              <b-avatar
+                size="sm"
+                class="my-auto"
+                src="https://placekitten.com/300/300"
+              ></b-avatar
+              >&nbsp;
+              <em>Maxine </em>
             </template>
             <b-dropdown-item href="#">Profile</b-dropdown-item>
             <b-dropdown-item href="#">Sign Out</b-dropdown-item>

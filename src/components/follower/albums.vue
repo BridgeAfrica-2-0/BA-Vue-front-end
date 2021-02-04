@@ -7,7 +7,7 @@
           <div>
             <span class="text-hover">
               <div>Album Name</div>
-              <span> {{images.length}} item(s)</span>
+              <span> {{ images.length }} item(s)</span>
             </span>
           </div>
         </div>
@@ -51,19 +51,19 @@ export default {
           image: "https://picsum.photos/300/150/?image=41",
           title: "Title 2",
           text:
-            " Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum quam, doloribus id sit consequuntur tempora molestiae blanditiis.",
-        },
+            " Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum quam, doloribus id sit consequuntur tempora molestiae blanditiis."
+        }
       ],
       images: [
         {
           id: 1,
-          image: "https://picsum.photos/300/150/?image=41",
+          image: "https://picsum.photos/300/150/?image=41"
         },
         {
           id: 2,
-          image: "https://picsum.photos/300/150/?image=41",
-        },
-      ],
+          image: "https://picsum.photos/300/150/?image=41"
+        }
+      ]
     };
   },
   methods: {
@@ -71,14 +71,14 @@ export default {
       this.pictureShow = true;
       this.albumShow = false;
     },
-    back(){
+    back() {
       this.pictureShow = false;
       this.albumShow = true;
     },
     showModal() {
       this.$refs["modal-1"].show();
-    },
-  },
+    }
+  }
 };
 </script>
 
@@ -103,7 +103,7 @@ export default {
   top: 80px;
 }
 
-.album-name{
-    color: #E75D29;
+.album-name {
+  color: #e75d29;
 }
 </style>

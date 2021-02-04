@@ -35,13 +35,13 @@
     <b-link style="text-decoration: none" v-b-modal.modal-4
       ><b-icon icon="plus" variant="primary"></b-icon> Add Other Phones</b-link
     >
-    
-      <b-modal
-        ref="add-contact"
-        hide-footer
-        id="modal-4"
-        title="Add Other Contact"
-      >
+
+    <b-modal
+      ref="add-contact"
+      hide-footer
+      id="modal-4"
+      title="Add Other Contact"
+    >
       <b-form @submit="add">
         <div class="row">
           <div class="col-4">
@@ -68,9 +68,8 @@
           variant="primary"
           >Add</b-button
         >
-         </b-form>
-      </b-modal>
-   
+      </b-form>
+    </b-modal>
   </div>
 </template>
 
@@ -84,33 +83,33 @@ export default {
       business: "",
       addContact: {
         code: "",
-        contact: "",
+        contact: ""
       },
       code: null,
       contacts: [],
       options: [
         { value: null, text: "Select" },
         { value: "private", text: "Private" },
-        { value: "public", text: "Public" },
+        { value: "public", text: "Public" }
       ],
       genders: [
         { value: null, text: "Select" },
         { value: "Male", text: "Male" },
-        { value: "Female", text: "Female" },
+        { value: "Female", text: "Female" }
       ],
       codes: [
         { value: "+1", text: "USA(+1)" },
-        { value: "+91", text: "India(+91)" },
-      ],
+        { value: "+91", text: "India(+91)" }
+      ]
     };
   },
   methods: {
     add(e) {
-      e.preventDefault()
+      e.preventDefault();
       this.contacts.push(this.addContact);
       this.$refs["add-contact"].hide();
-    },
-  },
+    }
+  }
 };
 </script>
 

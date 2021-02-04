@@ -11,6 +11,7 @@ import service from "@/views/service";
 import Modifier from "@/views/Modifier";
 import store from "@/store/index.js";
 import Follower from "../views/follower.vue";
+import profile_owner from "@/views/profile_owner";
 
 Vue.use(VueRouter);
 
@@ -19,6 +20,11 @@ const routes = [
     path: "/",
     name: "Home",
     component: Home
+  },
+  {
+    path: "/profile-owner",
+    name: "profile_owner",
+    component: profile_owner
   },
   {
     path: "/login",
@@ -81,16 +87,14 @@ const routes = [
       } else {
         next({ name: "Login" });
       }
-    },
-    
+    }
   },
 
   {
     path: "/follower",
     name: "Follower",
-    component: Follower,
-  },
- 
+    component: Follower
+  }
 ];
 
 const router = new VueRouter({

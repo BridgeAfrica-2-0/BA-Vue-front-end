@@ -32,7 +32,7 @@ import About from "@/components/owner/tabs/about";
 import Media from "@/components/owner/tabs/media";
 
 export default {
-  name: "Home",
+  name: "profile_owner",
   components: {
     navbar,
     headPage,
@@ -47,3 +47,5 @@ export default {
   methods: {}
 };
 </script>
+
+<style scoped></style>

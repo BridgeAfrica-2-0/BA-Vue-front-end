@@ -2,7 +2,7 @@
   <div>
     <b>Education</b>
     <hr />
-  
+
     <b-list-group-item
       class="d-flex align-items-center mb-4 "
       style="border: none"
@@ -21,17 +21,14 @@
         </div>
       </div>
     </b-list-group-item>
-
   </div>
 </template>
 
 <script>
 export default {
   data() {
-    return {
-    
-    };
-  },
+    return {};
+  }
 };
 </script>
 

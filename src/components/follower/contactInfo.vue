@@ -2,9 +2,9 @@
   <div>
     <b>Contact Infomation</b>
     <hr />
-    <div class="row" >
+    <div class="row">
       <div class="col">
-        Mobile Phone: 
+        Mobile Phone:
       </div>
       <div class="col">
         +1 644841545
@@ -16,13 +16,9 @@
 <script>
 export default {
   data() {
-    return {
-  
-    };
+    return {};
   },
-  methods: {
-   
-  },
+  methods: {}
 };
 </script>
 

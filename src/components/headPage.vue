@@ -6,7 +6,6 @@
         src="https://placekitten.com/300/300"
         class="owner-profile-image-profile float-left"
         badge-variant="primary"
-        badge-offset="10px"
       >
         <template #badge><b-icon icon="camera-fill" style="width: 3em;height: 3em;"></b-icon></template>
       </b-avatar>

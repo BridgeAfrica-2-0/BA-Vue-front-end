@@ -10,7 +10,7 @@
         <template #badge><b-icon icon="camera-fill" style="width: 3em;height: 3em;"></b-icon></template>
       </b-avatar>
       <div class="d-inline-block mt-2 float-left">
-        <h5 class="font-weight-bolder">User Name</h5>
+        <h5 class="font-weight-bolder">UserNameOO0</h5>
         <p>@UserNameAlias</p>
       </div>
       <b-button-group class="float-right mr-5 mt-2" size="sm">

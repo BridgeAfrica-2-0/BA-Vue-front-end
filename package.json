@@ -16,6 +16,7 @@
     "register-service-worker": "^1.7.1",
     "secure-ls": "^1.2.6",
     "vue": "^2.6.12",
+    "vue-gallery-slideshow": "^1.5.2",
     "vue-lottie": "^0.2.1",
     "vue-router": "^3.2.0",
     "vuex": "^3.4.0",

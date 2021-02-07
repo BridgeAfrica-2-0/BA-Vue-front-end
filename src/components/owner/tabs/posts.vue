@@ -11,7 +11,7 @@
               ><b-icon icon="pencil-fill" variant="primary"></b-icon> Edit</span
             >
           </template>
-          <b-card-text>
+          <b-card-text class="text-left">
             <p>
               <b-icon icon="briefcase-fill" variant="primary"></b-icon> Work at:
               Current or Last Organization

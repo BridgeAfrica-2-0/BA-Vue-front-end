@@ -16,10 +16,10 @@
             ><b-icon icon="camera-fill" class="avatar-header-icon"></b-icon
           ></template>
         </b-avatar>
-        <div class="mt-2">
-          <b-row>
-            <b-col cols="9"
-              ><h5
+        <div class="">
+          <div>
+            <span>
+              <h5
                 class="font-weight-bolder m-0 p-0 d-inline-block header-text1"
               >
                 User Name
@@ -27,9 +27,9 @@
               <br />
               <p class="m-0  d-inline-block header-text2">
                 @User Name Alias
-              </p></b-col
-            >
-            <b-col cols="3">
+              </p>
+            </span>
+            <span>
               <b-button-group class="header-group" size="sm">
                 <b-button variant="outline-primary">
                   <b-icon icon="person-plus-fill"></b-icon>
@@ -37,7 +37,7 @@
                 </b-button>
                 <b-button variant="outline-primary">
                   <b-icon icon="chat-square-dots-fill"></b-icon>
-                  <span class="show">Message</span>
+                  <span class="show"> Message</span>
                 </b-button>
                 <b-dropdown variant="outline-primary">
                   <template #button-content>
@@ -74,8 +74,8 @@
                   </b-dropdown-item-button>
                 </b-dropdown>
               </b-button-group>
-            </b-col>
-          </b-row>
+            </span>
+          </div>
         </div>
       </div>
     </b-container>
@@ -89,7 +89,7 @@ export default {
 </script>
 
 <style scoped>
-@media (max-width: 575px) {
+@media (max-width: 369px) {
   .header-pic {
     height: 100px;
     width: 100%;
@@ -106,7 +106,8 @@ export default {
   }
 
   .header-group {
-    margin-top: -20px;
+    margin-top: -59px;
+    margin-left: 102px;
   }
 
   .owner-profile-image-profile {
@@ -120,7 +121,58 @@ export default {
   .show {
     display: none;
   }
-  .avatar-header-icon{
+  .avatar-header-icon {
+    width: 2em;
+    height: 2em;
+  }
+  .b-avatar .b-avatar-badge {
+    position: absolute;
+    min-height: 1.5em;
+    min-width: 1.5em;
+    padding: 0.25em;
+    line-height: 1;
+    border-radius: 10em;
+    font-size: 70%;
+    font-weight: 700;
+    z-index: 1;
+    bottom: -2px;
+    right: 2px;
+  }
+}
+
+@media (min-width: 370px) and (max-width: 575px){
+  .header-pic {
+    height: 100px;
+    width: 100%;
+  }
+
+  .header-text1 {
+    font-size: 14px;
+    float: left;
+  }
+
+  .header-text2 {
+    font-size: 10px;
+    float: left;
+  }
+
+  .header-group {
+    margin-top: -30px;
+    margin-left: 30px;
+  }
+
+  .owner-profile-image-profile {
+    margin: -30px 10px 0px 5px;
+    z-index: 9;
+    width: 5rem;
+    height: 5rem;
+    border: 1px solid #e75c18;
+    /*   box-shadow: 0 .5rem 1rem rgba(0,0,0,.15) !important; */
+  }
+  .show {
+    display: none;
+  }
+  .avatar-header-icon {
     width: 2em;
     height: 2em;
   }
@@ -139,7 +191,7 @@ export default {
   }
 }
 @media (min-width: 576px) {
-  .avatar-header-icon{
+  .avatar-header-icon {
     width: 3em;
     height: 3em;
   }
@@ -187,7 +239,7 @@ export default {
     margin-right: 20px;
   }
 
-  .avatar-header-icon{
+  .avatar-header-icon {
     width: 3em;
     height: 3em;
   }

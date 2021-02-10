@@ -25,6 +25,7 @@
               <b-icon icon="people-fill" variant="primary"></b-icon> Followed
               by: 525
             </p>
+         
           </b-card-text>
         </b-card>
   </div>

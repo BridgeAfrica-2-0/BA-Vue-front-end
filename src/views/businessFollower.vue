@@ -8,7 +8,6 @@
           <b-tab title="Business" active><Business /></b-tab>
           <b-tab title="Inbox"><p>I'm the second tab</p></b-tab>
           <b-tab title="Notification"><p>I'm a disabled tab!</p></b-tab>
-          <b-tab title="Pending Posts"><p>I'm a disabled tab!</p></b-tab>
           <b-tab title="Insights"><p>I'm a disabled tab!</p></b-tab>
         </b-tabs>
       </div>

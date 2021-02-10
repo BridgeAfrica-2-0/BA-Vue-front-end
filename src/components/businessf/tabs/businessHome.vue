@@ -7,7 +7,6 @@
         <Personalise/>
       </b-col>
       <b-col md="8">
-       <CreatePost/>
        <Post/>
       </b-col>
     </b-row>
@@ -18,14 +17,13 @@
 import Intro from "../intro";
 import Invite from "../invite";
 import Personalise from "../personalise";
-import CreatePost from "../../createPost";
-import Post from "../../post";
+import Post from "../ownerPost";
 export default {
   name: "posts",
   components: {
     Intro,
     Invite,
-    CreatePost,
+
     Personalise,
     Post
   }

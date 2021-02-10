@@ -1,23 +1,23 @@
 <template>
   <div>
-        <div class="comment">
+    <div class="comment">
       <b-dropdown
         class="options float-right"
         variant="outline"
         size="sm"
         id="dropdown-left"
       >
-        <template #button-content>
-          <b-icon icon="three-dots" aria-hidden="true"></b-icon>
-        </template>
-        <b-dropdown-item-button>
-          <b-icon icon="pencil-fill" aria-hidden="true"></b-icon>
-          Edit
-        </b-dropdown-item-button>
-        <b-dropdown-item-button>
-          <b-icon icon="trash-fill" aria-hidden="true"></b-icon>
-          Delete
-        </b-dropdown-item-button>
+            <template #button-content>
+              <b-icon icon="three-dots" aria-hidden="true"></b-icon>
+            </template>
+            <b-dropdown-item-button>
+              <b-icon icon="pencil-fill" aria-hidden="true"></b-icon>
+              Edit
+            </b-dropdown-item-button>
+            <b-dropdown-item-button>
+              <b-icon icon="trash-fill" aria-hidden="true"></b-icon>
+              Delete
+            </b-dropdown-item-button>
       </b-dropdown>
       <h4>Username</h4>
       <p>
@@ -40,7 +40,6 @@
         <span class="reply">Reply</span>
       </b-col>
     </b-row>
-
   </div>
 </template>
 
@@ -56,8 +55,8 @@ export default {};
   margin-top: 10px;
   background-color: #ccc;
 }
-.reply{
-    color: blue;
-    cursor: pointer;
+.reply {
+  color: blue;
+  cursor: pointer;
 }
 </style>

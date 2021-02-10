@@ -4,7 +4,7 @@
       <b-row>
         <b-col>
           <b-card class="mb-2">
-            <div class="edit" @click="edit1 = !edit1">
+            <div class="edit" @click="editBio">
               <b-icon icon="pencil-fill" variant="primary"></b-icon>
             </div>
             <h4>About Mapoure Agrobusiness</h4>
@@ -24,7 +24,7 @@
         </b-col>
         <b-col>
           <b-card>
-            <div class="edit" @click="edit2 = !edit2">
+            <div class="edit" @click="editContact">
               <b-icon icon="pencil-fill" variant="primary"></b-icon>
             </div>
             <b-card-text>
@@ -126,6 +126,22 @@ export default {
       edit2: false,
     };
   },
+  methods:{
+    /**
+     * Used to edit biography
+     * @return void
+    */
+   editBio(){
+      this.edit1 = !this.edit1
+   },
+     /**
+     * Used to edit contact info
+     * @return void
+    */
+   editContact(){
+      this.edit2 = !this.edit2
+   }
+  }
 };
 </script>
 

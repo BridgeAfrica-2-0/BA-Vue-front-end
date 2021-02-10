@@ -117,7 +117,7 @@ img {
 .cnt-btn{
   color: white;
 }
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 768px) {
   .btns {
     position: relative;
     left: 25%;

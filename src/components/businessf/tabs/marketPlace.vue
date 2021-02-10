@@ -2,7 +2,7 @@
   <div>
     <b-card>
       <div class="products ml-4">
-        <div class="create" @click="showModal = !showModal">
+        <div class="create" @click="createProduct">
           <div class="text">
             <b-icon icon="plus"></b-icon>
             <p>Add product/ Services</p>
@@ -86,8 +86,8 @@ export default {
     Product
   },
   methods: {
-    productDetails() {
-      this.viewProduct = true
+    createProduct() {
+      this.showModal = !this.showModal
     },
   },
 };
@@ -183,7 +183,7 @@ export default {
   cursor: pointer;
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 768px) {
   .products {
     position: relative;
     left: -25px;

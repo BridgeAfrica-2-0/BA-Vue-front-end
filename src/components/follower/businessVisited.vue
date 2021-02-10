@@ -44,7 +44,7 @@ export default {
   position: relative;
   top: -30px;
 }
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 768px) {
   .business {
     margin-left: 20px;
   }

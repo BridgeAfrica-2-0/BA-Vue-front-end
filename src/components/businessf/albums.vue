@@ -1,7 +1,7 @@
 <template>
   <div>
     <div v-if="albumShow" class="albums ml-4">
-      <div class="create" @click="showModal = !showModal">
+      <div class="create" @click="createAlbum">
         <div class="text">
           <b-icon icon="plus"></b-icon>
           <p>Create Album</p>
@@ -47,7 +47,7 @@
       <div class="album-name">Album Name</div>
       <div class="albums">
         <div class="create sec" @click="chooseFile">
-          <input id="default-btn" type="file">
+          <input id="default-btn" type="file" />
           <div class="text">
             <b-icon icon="plus"></b-icon>
             <p>Add Photo</p>
@@ -56,7 +56,7 @@
         <div v-for="item in images" :key="item.id" class=" ml-5 album">
           <span class="sp">
             <b-img
-              @click="modalShow = !modalShow"
+              @click="view"
               src="https://picsum.photos/300/150/?image=41"
               rounded
               fluid
@@ -149,18 +149,55 @@ export default {
     };
   },
   methods: {
+    /**
+
+     Use to view the photo in the album
+     @param id
+    @return void
+    */
+    view() {
+      this.modalShow = !this.modalShow;
+    },
+
+    /**
+        Used for opening album
+         @param id
+        @return void
+    */
     openAlbum() {
       this.pictureShow = true;
       this.albumShow = false;
     },
+
+    /**
+
+     Shows modal and create Album
+    @param id
+    @return void
+    */
+    createAlbum() {
+      this.showModal = !this.showModal;
+    },
+
+    /**
+     Used to leave an opened Album
+    @param id
+    @return void
+    */
     back() {
       this.pictureShow = false;
       this.albumShow = true;
     },
-    chooseFile(){
-      var defaultBtn = document.getElementById('default-btn')
-      defaultBtn.click()
-    }
+
+    /**
+      Used for Choosing a file from device file system
+       @param id
+      @return void
+      */
+    chooseFile() {
+      var defaultBtn = document.getElementById("default-btn");
+      defaultBtn.click();
+    },
   },
 };
 </script>
@@ -220,10 +257,10 @@ export default {
   left: 190px;
 }
 
-input[type="file"]{
+input[type="file"] {
   display: none;
 }
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 768px) {
   .albums {
     position: relative;
     left: -25px;
@@ -239,22 +276,20 @@ input[type="file"]{
     bottom: 10px;
   }
   .options {
-  position: relative;
-  top: -150px;
-  left: 120px;
-}
+    position: relative;
+    top: -150px;
+    left: 120px;
+  }
 
-.create {
-  margin-left: -1px;
-  height: 120px;
-  width: 250px;
-  
-}
-.sec{
-  position: relative;
-  left: 50px;
-  width: 245px;
-}
-
+  .create {
+    margin-left: -1px;
+    height: 120px;
+    width: 250px;
+  }
+  .sec {
+    position: relative;
+    left: 50px;
+    width: 245px;
+  }
 }
 </style>

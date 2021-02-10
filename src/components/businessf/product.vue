@@ -119,6 +119,11 @@ export default {
       Comment
   },
   methods: {
+    /**
+     * Used to view produduct details
+     * @param id
+     * @return void
+    */
     productDetails() {
       this.viewProduct = true;
     },

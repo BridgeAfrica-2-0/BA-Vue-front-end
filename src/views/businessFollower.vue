@@ -43,7 +43,7 @@ export default {
   top: 40px;
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 768px) {
   .settings{
     top: -5px;
     left: -20px;

@@ -35,7 +35,7 @@ export default {};
 .follow{
   cursor: pointer;
 }
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 768px) {
  .btn{
    display: flex;
    margin-left: -70px;

@@ -20,7 +20,7 @@ export default {
 
 <style scoped>
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 768px) {
   .place{
     margin-left: 20px;
   }

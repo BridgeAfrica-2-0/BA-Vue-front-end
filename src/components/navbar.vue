@@ -14,10 +14,10 @@
 
       <b-collapse id="nav-collapse" class="row" is-nav>
         <b-navbar-nav class="col">
-          <b-input-group class="my-auto" style="width: 401px; margin-left: 200px">
+          <b-input-group class="my-auto head">
             <template #append>
               <b-input-group-text class=""
-                ><strong style="color: #E75C18">
+                ><strong class="text">
                   <b-icon-search></b-icon-search> </strong
               ></b-input-group-text>
             </template>
@@ -96,8 +96,13 @@
           <b-nav-item-dropdown right>
             <!-- Using 'button-content' slot -->
             <template #button-content class="my-auto">
-              <b-avatar size="sm" class="my-auto" src="https://placekitten.com/300/300"></b-avatar>&nbsp;
-              <em>Maxine   </em>
+              <b-avatar
+                size="sm"
+                class="my-auto"
+                src="https://placekitten.com/300/300"
+              ></b-avatar
+              >&nbsp;
+              <em>Maxine </em>
             </template>
             <b-dropdown-item href="#">Profile</b-dropdown-item>
             <b-dropdown-item href="#">Sign Out</b-dropdown-item>
@@ -110,12 +115,19 @@
 
 <script>
 export default {
-  name: "navbar"
+  name: "navbar",
 };
 </script>
 
 <style scoped>
 .col-bg {
   color: #e75c18;
+}
+.text{
+  color: #E75C18
+}
+.head {
+  width: 401px;
+  margin-left: 200px;
 }
 </style>

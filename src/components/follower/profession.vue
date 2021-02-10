@@ -33,7 +33,7 @@ export default {
 .item {
   border: none;
 }
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 768px) {
   .profession {
     margin-left: 20px;
   }

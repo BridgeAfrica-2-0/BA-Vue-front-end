@@ -61,9 +61,6 @@ li {
   text-align: start;
   list-style: none;
 }
-
-
-
 .bottom {
   border-top: solid 1px #ccc;
   padding: 10px;
@@ -74,7 +71,7 @@ li {
   position: relative;
   left: 230px;
 }
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 768px) {
   .top {
   padding: 50px;
   position: relative;

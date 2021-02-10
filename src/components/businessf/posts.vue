@@ -45,6 +45,11 @@ export default {
     };
   },
   methods: {
+    /**
+    Used for opening modal to have a proper view of the picture
+    @param id
+    @return void
+*/
     showModal() {
       this.$refs["modal-1"].show();
     },

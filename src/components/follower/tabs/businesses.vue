@@ -48,7 +48,7 @@ p {
   text-align: center;
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 768px) {
   .no-business {
       width: 100%;
     margin-left: 0px;

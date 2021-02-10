@@ -30,7 +30,7 @@ export default {
 .details {
   display: flex;
 }
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 768px) {
   .contact{
     margin-left: 20px;
   }

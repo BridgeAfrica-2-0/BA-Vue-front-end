@@ -37,7 +37,7 @@ export default {
   position: relative;
   top: -28px;
 }
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 768px) {
   .avatar {
     position: relative;
     top: -60px;

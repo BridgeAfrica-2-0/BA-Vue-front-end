@@ -2,7 +2,7 @@
   <div>
     <b-card v-if="networkshow">
       <div class="networks ml-4">
-        <div class="create" @click="showModal = !showModal">
+        <div class="create" @click="addNetwork">
           <div class="text">
             <b-icon icon="plus"></b-icon>
             <p>Add Network</p>
@@ -44,7 +44,7 @@
       <b-form>
         <b-form-input v-model="text" placeholder="network name"></b-form-input>
         <b-form-file class="mt-1" id="file-small" size="sm"></b-form-file>
-        <b-button class="mt-2" variant="primary"> Add</b-button>
+        <b-button class="mt-2 " variant="primary"> Add</b-button>
       </b-form>
     </b-modal>
   </div>
@@ -100,6 +100,9 @@ export default {
     opennetwork() {
       this.networkShow = false;
     },
+    addNetwork(){
+      this.showModal = !this.showModal
+    }
   },
 };
 </script>
@@ -215,7 +218,7 @@ p {
   cursor: pointer;
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 768px) {
   .networks {
     position: relative;
     left: -25px;

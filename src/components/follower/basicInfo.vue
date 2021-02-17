@@ -1,8 +1,8 @@
 <template>
   <div>
-    <b>Basic Infomation</b>
+    <b class="basic">Basic Infomation</b>
     <hr />
-    <div class="row">
+    <div class="basic row">
       <div class="col">
         Date Of Birth:
       </div>
@@ -12,7 +12,7 @@
     
      
     </div>
-    <div class="row">
+    <div class=" basic row">
       <div class="col">
         Gender:
       </div>
@@ -39,6 +39,9 @@ export default {
 .details {
   display: flex;
 }
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 768px) {
+  .basic{
+    margin-left: 20px;
+  }
 }
 </style>

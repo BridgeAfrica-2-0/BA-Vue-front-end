@@ -9,8 +9,8 @@
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
   color: #2c3e50;
+  margin-left: 5px;
 }
 
 #nav {
@@ -24,5 +24,12 @@
       color: #42b983;
     }
   }
+}
+
+@media only screen and (max-width: 768px) {
+  .nav-link{
+        font-size: 9px;
+  }
+  
 }
 </style>

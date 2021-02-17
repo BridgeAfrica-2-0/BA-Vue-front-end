@@ -1,8 +1,8 @@
 <template>
   <div>
-    <b>Contact Infomation</b>
+    <b class="contact">Contact Infomation</b>
     <hr />
-    <div class="row" >
+    <div class="contact row" >
       <div class="col">
         Mobile Phone: 
       </div>
@@ -30,6 +30,9 @@ export default {
 .details {
   display: flex;
 }
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 768px) {
+  .contact{
+    margin-left: 20px;
+  }
 }
 </style>

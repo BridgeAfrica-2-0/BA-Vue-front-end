@@ -1,6 +1,6 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import Home from "../views/Home.vue";
+import Home from "../views/home.vue";
 import Login from "../views/login.vue";
 import SignIn from "../views/signIn.vue";
 import RecoverPass1 from "../views/recoverPassword1.vue";
@@ -8,9 +8,10 @@ import RecoverPass2 from "../views/recoverPassword2.vue";
 import RecoverPass3 from "../views/recoverPassword3.vue";
 import createService from "@/views/createService";
 import service from "@/views/service";
-import Modifier from "@/views/Modifier";
+import Modifier from "@/views/modifier";
 import store from "@/store/index.js";
 import Follower from "../views/follower.vue";
+import businessFollower from "../views/businessFollower.vue"
 
 Vue.use(VueRouter);
 
@@ -44,6 +45,11 @@ const routes = [
     path: "/recoverPass3",
     name: "RecoverPass3",
     component: RecoverPass3
+  },
+  {
+    path: "/businessfollower",
+    name: "BusinessFollower",
+    component: businessFollower
   },
   {
     path: "/services/create",
@@ -86,7 +92,7 @@ const routes = [
   },
 
   {
-    path: "/follower",
+    path: "/profilefollower",
     name: "Follower",
     component: Follower,
   },

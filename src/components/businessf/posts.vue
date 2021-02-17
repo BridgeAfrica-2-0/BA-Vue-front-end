@@ -1,6 +1,6 @@
 <template>
-  <div class="media-post">
-    <div class="p-4" v-for="post in posts" :key="post.id">
+  <div class="posts">
+    <div class="p-1" v-for="post in posts" :key="post.id">
       <b-img
         v-if="post.image"
         class="image"
@@ -9,18 +9,6 @@
         fluid
         @click="showModal"
       ></b-img>
-
-      <iframe
-        class="image"
-        v-if="post.video"
-        width="300"
-        height="200"
-        rounded
-        :src="post.video"
-        frameborder="0"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        allowfullscreen
-      ></iframe>
     </div>
     <b-modal hide-footer ref="modal-1">
       <b-img fluid-grow src="https://picsum.photos/300/150/?image=41"></b-img>
@@ -57,6 +45,11 @@ export default {
     };
   },
   methods: {
+    /**
+    Used for opening modal to have a proper view of the picture
+    @param id
+    @return void
+*/
     showModal() {
       this.$refs["modal-1"].show();
     },
@@ -65,7 +58,7 @@ export default {
 </script>
 
 <style scoped>
-.media-post {
+.posts {
   display: flex;
   flex-wrap: wrap;
 }

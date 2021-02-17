@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b-navbar toggleable="lg" variant="light" class="py-2 my-auto">
+    <b-navbar toggleable="lg" variant="light" class="py-1 ml-4">
       <b-navbar-brand href="#">
         <img
           src="@/assets/img/logo_bridge_africa.png"
@@ -12,12 +12,12 @@
 
       <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
-      <b-collapse id="nav-collapse" is-nav>
-        <b-navbar-nav>
-          <b-input-group class="my-auto" style="width: 401px;">
+      <b-collapse id="nav-collapse" class="row" is-nav>
+        <b-navbar-nav class="col">
+          <b-input-group class="my-auto head">
             <template #append>
               <b-input-group-text class=""
-                ><strong style="color: #E75C18">
+                ><strong class="text">
                   <b-icon-search></b-icon-search> </strong
               ></b-input-group-text>
             </template>
@@ -29,7 +29,7 @@
         </b-navbar-nav>
 
         <!-- Right aligned nav items -->
-        <b-navbar-nav class="ml-5 pl-5 my-auto">
+        <b-navbar-nav class="ml-5 pl-5 my-auto col">
           <b-nav-item href="#" class="ml-3"
             ><b-icon-house-door-fill class="col-bg"></b-icon-house-door-fill>
             Home
@@ -96,8 +96,13 @@
           <b-nav-item-dropdown right>
             <!-- Using 'button-content' slot -->
             <template #button-content class="my-auto">
-              <b-avatar size="sm" class="my-auto" src="https://placekitten.com/300/300"></b-avatar>&nbsp;
-              <em>Maxine   </em>
+              <b-avatar
+                size="sm"
+                class="my-auto"
+                src="https://placekitten.com/300/300"
+              ></b-avatar
+              >&nbsp;
+              <em>Maxine </em>
             </template>
             <b-dropdown-item href="#">Profile</b-dropdown-item>
             <b-dropdown-item href="#">Sign Out</b-dropdown-item>
@@ -110,12 +115,19 @@
 
 <script>
 export default {
-  name: "navbar"
+  name: "navbar",
 };
 </script>
 
 <style scoped>
 .col-bg {
   color: #e75c18;
+}
+.text{
+  color: #E75C18
+}
+.head {
+  width: 401px;
+  margin-left: 200px;
 }
 </style>

@@ -7,18 +7,18 @@
       </b></b-alert
     >
   <b-tabs content-class="mt-3">
-    <b-tab title="Followers" active><Followers/></b-tab>
+    <b-tab title="Following" active><Following/></b-tab>
     <b-tab title="Follow"><Follow/></b-tab>
   </b-tabs>
 </div>
 </template>
 
 <script>
-import Followers from "../followers"
+import Following from "../followers"
 import Follow from "../follow"
 export default {
  components:{
-   Followers,
+   Following,
    Follow,
  }
 }

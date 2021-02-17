@@ -31,7 +31,7 @@
                 required
               />
             </b-form-group>
-            <b-button type="submit" variant="outline-primary">
+            <b-button class="button" type="submit" variant="outline-primary">
               Finish
             </b-button>
           </b-form>
@@ -75,8 +75,11 @@ export default {
 .image {
   width: 80%;
 }
+.button{
+  margin-left: 265px;
 
-@media only screen and (max-width: 600px) {
+}
+@media only screen and (max-width: 768px) {
   .btn {
     margin-left: -20px;
   }

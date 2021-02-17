@@ -18,7 +18,7 @@
             />
 
             <br />
-            <b-button type="submit" variant="outline-primary">
+            <b-button class="button" type="submit" variant="outline-primary">
               Next
             </b-button>
           </b-form>
@@ -50,5 +50,10 @@ export default {
 <style scoped>
 .image {
   width: 80%;
+}
+
+.button{
+  margin-left: 265px;
+
 }
 </style>

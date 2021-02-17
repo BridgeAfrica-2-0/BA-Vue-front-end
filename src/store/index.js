@@ -194,7 +194,6 @@ export default new Vuex.Store({
       context.commit("keepService", payload);
     },
     recoverPassword2(context, mydata){
-      console.log("heyyyy")
         context.commit("recoverData", mydata);
     }
   },

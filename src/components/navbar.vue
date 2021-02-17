@@ -49,7 +49,7 @@
               <b-icon-chat-dots-fill class="col-bg"></b-icon-chat-dots-fill>
             </template>
             <b-dropdown-item-button>
-              Messages
+           <b-link class="link" href="/message"> Messages</b-link>
             </b-dropdown-item-button>
             <b-dropdown-divider></b-dropdown-divider>
             <b-dropdown-group id="dropdown-group-1">
@@ -129,5 +129,10 @@ export default {
 .head {
   width: 401px;
   margin-left: 200px;
+}
+
+.link{
+  text-decoration: none;
+  color: #000;
 }
 </style>

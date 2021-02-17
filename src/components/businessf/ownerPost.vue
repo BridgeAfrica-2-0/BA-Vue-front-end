@@ -70,7 +70,7 @@
                   <b-input-group class="my-auto w-100 rounded">
                     <template #append>
                       <b-input-group-text class=""
-                        ><strong style="color: #E75C18">
+                        ><strong class="icon-color">
                           <b-icon-cursor-fill></b-icon-cursor-fill> </strong
                       ></b-input-group-text>
                     </template>
@@ -96,5 +96,8 @@ export default {
 <style scoped>
 p{
   text-align: left;
+}
+.icon-color{
+  color: #E75C18;
 }
 </style>

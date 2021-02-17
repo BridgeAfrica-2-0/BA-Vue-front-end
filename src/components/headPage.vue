@@ -140,7 +140,7 @@ export default {
   }
 }
 
-@media (min-width: 370px) and (max-width: 575px){
+@media (min-width: 370px) and (max-width: 575px) {
   .header-pic {
     height: 100px;
     width: 100%;

@@ -5,7 +5,7 @@ import router from "./router";
 import store from "./store";
 import { BootstrapVue, IconsPlugin } from "bootstrap-vue";
 import "@morioh/v-lightbox/dist/lightbox.css";
-import VueGallerySlideshow from 'vue-gallery-slideshow'
+import VueGallerySlideshow from "vue-gallery-slideshow";
 
 import Lightbox from "@morioh/v-lightbox";
 

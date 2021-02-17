@@ -1,11 +1,11 @@
 <template>
   <div>
-<!--    <vue-gallery-slideshow :images="images" :index="index" @close="index = null"></vue-gallery-slideshow>-->
+    <!--    <vue-gallery-slideshow :images="images" :index="index" @close="index = null"></vue-gallery-slideshow>-->
     <b-tabs content-class="mt-3">
       <b-tab title="Posts" active>
         <b-row>
           <b-col cols="4" v-for="(image, i) in images" :key="i" class="p-3 m-0">
-            <img class="img-fluid" :src="image" @click="onClick(i)">
+            <img class="img-fluid" :src="image" @click="onClick(i)" />
           </b-col>
         </b-row>
       </b-tab>
@@ -21,10 +21,8 @@
 </template>
 
 <script>
-
 export default {
-  components: {
-  },
+  components: {},
   methods: {
     onClick(i) {
       this.index = i;

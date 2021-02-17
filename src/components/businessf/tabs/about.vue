@@ -1,0 +1,300 @@
+<template>
+  <div>
+    <b-card>
+      <b-row>
+        <b-col>
+          <b-card class="mb-2">
+            <div class="edit" @click="editBio">
+              <b-icon icon="pencil-fill" variant="primary"></b-icon>
+            </div>
+            <h4 class="mb-4 text-center">{{ leftTitle }}</h4>
+            <p class="text-justify">
+              {{ textToo }}
+            </p>
+          </b-card>
+        </b-col>
+        <b-col>
+          <b-card>
+            <div class="edit" @click="editContact">
+              <b-icon icon="pencil-fill" variant="primary"></b-icon>
+            </div>
+            <b-card-text>
+              <p>
+                <b-icon icon="briefcase-fill" variant="primary"></b-icon> Work
+                at: {{ workedAt }}
+              </p>
+              <p>
+                <b-icon icon="book-fill" variant="primary"></b-icon> Studied at:
+                {{ lastEducation }}
+              </p>
+              <p>
+                <b-icon icon="house-fill" variant="primary"></b-icon> Home Town
+                Name: {{ homeTown }}
+              </p>
+              <p>
+                <b-icon icon="geo-alt-fill" variant="primary"></b-icon> Current
+                City Name: {{ cityName }}
+              </p>
+              <p>
+                <b-icon icon="people-fill" variant="primary"></b-icon> Followed
+                by: {{ followed }}
+              </p>
+              <p>
+                <b-icon icon="phone-fill" variant="primary"></b-icon>
+                {{ telephone }}
+              </p>
+              <p>
+                <b-icon icon="envelope-fill" variant="primary"></b-icon>
+                {{ email }}
+              </p>
+              <p>
+                <b-icon icon="clock" variant="primary"></b-icon>
+                <span class="ml-2 btn-item">Open Now</span>
+              </p>
+              <p>
+                <b-dropdown
+                  size="sm"
+                  variant="outline"
+                  text="6:00AM - 7:00PM"
+                  class="ml-2"
+                >
+                  <b-dropdown-item-button
+                    >6:00AM - 7:00PM</b-dropdown-item-button
+                  >
+                  <b-dropdown-item-button
+                    >6:00AM - 7:00PM</b-dropdown-item-button
+                  >
+                </b-dropdown>
+              </p>
+            </b-card-text>
+          </b-card>
+        </b-col>
+      </b-row>
+      <div>
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d48389.732999183005!2d-74.006227!3d40.710128!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xb89d1fe6bc499443!2sDowntown%20Conference%20Center!5e0!3m2!1sen!2sbg!4v1612237569797!5m2!1sen!2sbg"
+          height="450"
+          frameborder="0"
+          class="map mt-1"
+          allowfullscreen=""
+          aria-hidden="false"
+          tabindex="0"
+        ></iframe>
+      </div>
+    </b-card>
+
+    <b-modal
+      id="bv-modal-example1"
+      hide-footer
+      title="Edit About"
+      v-model="edit1"
+      size="md"
+    >
+      <b-form>
+        <b-form-group
+          id="input-group-1"
+          label="About Title"
+          label-for="input-1"
+          label-size="sm"
+        >
+          <b-form-input
+            id="input-1"
+            class="mt-2"
+            v-model="leftTitle"
+            type="text"
+            required
+          ></b-form-input>
+        </b-form-group>
+        <b-form-group
+          id="input-group-2"
+          label="About Description"
+          label-for="textarea"
+          label-size="sm"
+        >
+          <b-form-textarea
+            id="textarea"
+            class="mt-2"
+            v-model="textToo"
+            rows="6"
+            max-rows="6"
+          ></b-form-textarea>
+        </b-form-group>
+        <b-button
+          class="mt-2 btn-block btn-primary"
+          variant="primary"
+          @click="$bvModal.hide('bv-modal-example1')"
+        >
+          Edit</b-button
+        >
+      </b-form>
+    </b-modal>
+    <b-modal
+      id="bv-modal-example2"
+      hide-footer
+      title="Edit Address"
+      v-model="edit2"
+    >
+      <b-form>
+        <b-form-group
+          id="input-group-1"
+          label="Worked At"
+          label-for="input-1"
+          label-size="sm"
+        >
+          <b-form-input
+            id="input-1"
+            class="mt-1"
+            v-model="workedAt"
+            type="text"
+            required
+          ></b-form-input>
+        </b-form-group>
+        <b-form-group
+          id="input-group-2"
+          label="Studied At"
+          label-for="input-2"
+          label-size="sm"
+        >
+          <b-form-input
+            id="input-1"
+            class="mt-1"
+            v-model="lastEducation"
+            type="text"
+            required
+          ></b-form-input>
+        </b-form-group>
+        <b-form-group
+          id="input-group-2"
+          label="Home Town"
+          label-for="input-2"
+          label-size="sm"
+        >
+          <b-form-input
+            id="input-1"
+            class="mt-1"
+            v-model="homeTown"
+            type="text"
+            required
+          ></b-form-input>
+        </b-form-group>
+        <b-form-group
+          id="input-group-2"
+          label="Current City"
+          label-for="input-2"
+          label-size="sm"
+        >
+          <b-form-input
+            id="input-1"
+            class="mt-1"
+            v-model="cityName"
+            type="text"
+            required
+          ></b-form-input>
+        </b-form-group>
+        <b-form-group
+          id="input-group-2"
+          label="Phone Contact"
+          label-for="input-2"
+          label-size="sm"
+        >
+          <b-form-input
+            id="input-1"
+            class="mt-1"
+            v-model="telephone"
+            type="tel"
+            required
+          ></b-form-input>
+        </b-form-group>
+        <b-form-group
+          id="input-group-2"
+          label="Business Email"
+          label-for="input-2"
+          label-size="sm"
+        >
+          <b-form-input
+            id="input-1"
+            class="mt-1"
+            v-model="email"
+            type="email"
+            required
+          ></b-form-input>
+        </b-form-group>
+        <b-button
+          class="mt-3 btn-block"
+          variant="primary"
+          @click="$bvModal.hide('bv-modal-example2')"
+        >
+          Modify
+        </b-button>
+      </b-form>
+    </b-modal>
+  </div>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      edit1: false,
+      edit2: false,
+      leftTitle: "About Mapoure Agrobusiness",
+      textToo:
+        "Lorem ipsum dolor sit amet consectetur adipisicing elit.\n" +
+        "              Asperiores temporibus, rerum iste id obcaecati quae odit accusamus\n" +
+        "              reprehenderit, ipsa nam laudantium pariatur. Harum, soluta. Nam\n" +
+        "              accusantium hic numquam architecto debitis. Lorem ipsum dolor sit\n" +
+        "              amet consectetur adipisicing elit. Asperiores temporibus, rerum\n" +
+        "              iste id obcaecati quae odit accusamus reprehenderit, ipsa nam\n" +
+        "              laudantium pariatur. Harum, soluta. Nam accusantium hic numquam\n" +
+        "              architecto debitis. Asperiores temporibus, rerum iste id obcaecati\n" +
+        "              quae odit accusamus reprehenderit, ipsa nam laudantium pariatur.\n" +
+        "              Harum, soluta. Nam accusantium hic numquam architecto debitis.",
+      workedAt: "Current or Last Organization",
+      lastEducation: "Last Education",
+      homeTown: "Dummy",
+      cityName: "Dummy",
+      followed: "525",
+      telephone: "+1 (234) 567-8974",
+      email: "info@businessname.com"
+    };
+  },
+  methods: {
+    /**
+     * Used to edit biography
+     * @return void
+     */
+    editBio() {
+      this.edit1 = !this.edit1;
+    },
+    /**
+     * Used to edit contact info
+     * @return void
+     */
+    editContact() {
+      this.edit2 = !this.edit2;
+    }
+  }
+};
+</script>
+
+<style scoped>
+.map {
+  border: 0;
+  width: 100%;
+}
+
+.btn-item {
+  color: green;
+}
+
+.edit {
+  position: relative;
+  left: 98%;
+  cursor: pointer;
+}
+
+h4,
+p {
+  text-align: left;
+}
+</style>

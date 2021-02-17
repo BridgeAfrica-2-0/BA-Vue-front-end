@@ -2,20 +2,21 @@
   <div class="mx-auto">
     <navbar></navbar>
     <head-page></head-page>
-    <b-container
-      fluid="md"
-      class="text-justify mx-auto mt-4 corps"
-    >
+    <b-container fluid="md" class="text-justify mx-auto mt-4 corps">
       <b-row>
         <b-col cols="12">
           <b-tabs content-class="mt-3" pills card small fill>
             <b-tab title="Posts" active>
               <Post />
             </b-tab>
-            <b-tab title="About" class="toto"><About /></b-tab>
-            <b-tab title="Business" class="m-0 p-0 toto"><bussiness></bussiness></b-tab>
-            <b-tab title="Media" class="toto"><Media /></b-tab>
-            <b-tab title="Following" class="m-0 p-0 toto"><following></following>  </b-tab>
+            <b-tab title="About"><About /></b-tab>
+            <b-tab title="Business" class="m-0 p-0"
+              ><bussiness></bussiness
+            ></b-tab>
+            <b-tab title="Media"><Media /></b-tab>
+            <b-tab title="Following" class="m-0 p-0"
+              ><following></following>
+            </b-tab>
           </b-tabs>
         </b-col>
       </b-row>
@@ -33,7 +34,7 @@ import Following from "@/components/owner/tabs/following";
 import Bussiness from "@/components/owner/tabs/bussiness";
 
 export default {
-  name: "profile_owner",
+  name: "profileOwner",
   components: {
     Bussiness,
     Following,

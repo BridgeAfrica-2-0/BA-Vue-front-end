@@ -11,7 +11,9 @@ import service from "@/views/service";
 import Modifier from "@/views/Modifier";
 import store from "@/store/index.js";
 import Follower from "../views/follower.vue";
-import profile_owner from "@/views/profile_owner";
+import profile_owner from "@/views/profileOwner";
+import businessFollower from "@/views/businessFollower";
+import businessOwner from "@/views/businessOwner";
 
 Vue.use(VueRouter);
 
@@ -25,6 +27,16 @@ const routes = [
     path: "/profile-owner",
     name: "profile_owner",
     component: profile_owner
+  },
+  {
+    path: "/business-follower",
+    name: "BusinessFollower",
+    component: businessFollower
+  },
+  {
+    path: "/business-owner",
+    name: "BusinessOwner",
+    component: businessOwner
   },
   {
     path: "/login",

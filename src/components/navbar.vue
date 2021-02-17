@@ -7,17 +7,16 @@
           class="w-50 h-50 m-0"
           alt="Kitten"
         />
-        <!--        <span style="color: #2e2e2e;" class="font-weight-bold website-logo-name ml-2">BRIDGE AFRICA</span>-->
       </b-navbar-brand>
 
       <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
       <b-collapse id="nav-collapse" is-nav>
         <b-navbar-nav>
-          <b-input-group class="my-auto" style="width: 401px;">
+          <b-input-group class="my-auto input-size">
             <template #append>
               <b-input-group-text class=""
-                ><strong style="color: #E75C18">
+                ><strong class="color-site">
                   <b-icon-search></b-icon-search> </strong
               ></b-input-group-text>
             </template>
@@ -94,7 +93,6 @@
           </b-dropdown>
 
           <b-nav-item-dropdown right>
-            <!-- Using 'button-content' slot -->
             <template #button-content class="my-auto">
               <b-avatar
                 size="sm"
@@ -119,7 +117,6 @@
             class="w-100 h-100 m-0 px-3 py-2"
             alt="Kitten"
           />
-          <!--        <span style="color: #2e2e2e;" class="font-weight-bold website-logo-name ml-2">BRIDGE AFRICA</span>-->
         </b-navbar-brand>
       </b-col>
       <b-col cols="3" class="mx-auto my-auto">
@@ -132,10 +129,10 @@
     </b-row>
     <b-sidebar id="sidebar-right" title="Menu" right shadow>
       <div class="px-3 py-2">
-        <b-input-group class="my-auto" style="width: 250px;">
+        <b-input-group class="my-auto input-size-phone">
           <template #append>
             <b-input-group-text class=""
-              ><strong style="color: #E75C18">
+              ><strong class="color-site">
                 <b-icon-search></b-icon-search> </strong
             ></b-input-group-text>
           </template>
@@ -225,6 +222,18 @@ export default {
 </script>
 
 <style scoped>
+.input-size{
+  width: 401px;
+}
+
+.input-size-phone{
+  width: 401px;
+}
+
+.color-site{
+  color: #E75C18;
+}
+
 .col-bg {
   color: #e75c18;
 }

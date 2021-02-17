@@ -1,6 +1,5 @@
 <template>
   <div>
-    <!--    <vue-gallery-slideshow :images="images" :index="index" @close="index = null"></vue-gallery-slideshow>-->
     <b-tabs content-class="mt-3">
       <b-tab title="Posts" active>
         <b-row>
@@ -24,6 +23,10 @@
 export default {
   components: {},
   methods: {
+    /**
+     *
+     * @param i
+     */
     onClick(i) {
       this.index = i;
     }
@@ -70,7 +73,7 @@ export default {
 </script>
 
 <style>
-.test {
+.img-size {
   width: 100px;
   height: 100px;
   background-size: contain;

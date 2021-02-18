@@ -38,8 +38,9 @@
                 <div class="messages-mobile">
                   <b-row
                     v-for="message in messages"
-                    :key="message"
+                    :key="message.id"
                     class="p-2 message"
+                    @click="showMessages(false)"
                   >
                     <b-col class="col-3">
                       <b-avatar
@@ -60,6 +61,7 @@
               </div>
             </b-col>
           </div>
+
           <b-col class="pr-0">
             <div class="right">
               <b-row>
@@ -74,7 +76,6 @@
                     class="new-message"
                     icon="pencil-fill"
                     variant="primary"
-                     @click="showMessages(false)" 
                   ></b-icon>
                 </b-col>
               </b-row>
@@ -85,12 +86,12 @@
               />
             </div>
             <div>
-              <div class="messages"  @click="showMessages(false)" >
+              <div class="messages">
                 <b-row
                   v-for="message in messages"
-                  :key="message"
+                  :key="message.id"
                   class="p-2 message"
-                
+                  @click="showInfo(false)"
                 >
                   <b-col class="col-3">
                     <b-avatar variant="primary" text="BV" size="60"></b-avatar>
@@ -106,7 +107,7 @@
               </div>
             </div>
           </b-col>
-          <b-col v-if="show == false">
+          <b-col v-if="show == false && info == false">
             <div class="chat-nav">
               <b-row class="mobile">
                 <b-col class="col-1">
@@ -133,7 +134,11 @@
                       <b-icon icon="telephone-fill" variant="primary"></b-icon>
                     </b-col>
                     <b-col class="col-2">
-                      <b-icon icon="info-circle" variant="primary"></b-icon>
+                      <b-icon
+                        @click="showInfo(true)"
+                        icon="info-circle"
+                        variant="primary"
+                      ></b-icon>
                     </b-col>
                   </b-row>
                 </b-col>
@@ -164,6 +169,7 @@
                     </b-col>
                     <b-col>
                       <b-icon
+                        @click="showInfo(true)"
                         class="msg-icon"
                         icon="info-circle"
                         variant="primary"
@@ -173,8 +179,9 @@
                 </b-col>
               </b-row>
             </div>
+
             <section class="chats">
-              <div v-for="chat in chats" :key="chat">
+              <div v-for="chat in chats" :key="chat.id">
                 <div v-if="chat.type == 'received'" id="received">
                   <b-row class="p-4">
                     <b-avatar variant="primary" text="BV"></b-avatar>
@@ -245,6 +252,82 @@
               </b-row>
             </div>
           </b-col>
+          <b-col v-if="info">
+            <div class="info-nav">
+              <b-button variant="primary" @click="showInfo(false)"
+                >Back</b-button
+              >
+              <span class=""> Contact Info</span>
+            </div>
+            <div class="info-bottom">
+              <b-avatar
+                class="info-avatar"
+                variant="primary"
+                text="BV"
+                size="200"
+              ></b-avatar>
+              <div class="info-detail">
+                <h1 class="info-name">Louis Litt</h1>
+                <b-link>View Profile</b-link>
+              </div>
+            </div>
+            <div>
+              <ul>
+                <li>Options</li>
+                <li>
+                  <b-row
+                    ><b-col>
+                      Block Messages
+                    </b-col>
+                    <b-col>
+                      <b-form-checkbox
+                        v-model="checked"
+                        name="check-button"
+                        switch
+                      >
+                      </b-form-checkbox>
+                    </b-col>
+                  </b-row>
+                </li>
+                <li>Report User</li>
+              </ul>
+            </div>
+            <div class="info-media">
+              Media
+              <div class="media">
+                <img
+                  src="../assets/img/about1.jpg"
+                  height="100"
+                  alt=""
+                  srcset=""
+                />
+                <img
+                  src="../assets/img/about1.jpg"
+                  height="100"
+                  alt=""
+                  srcset=""
+                />
+                <img
+                  src="../assets/img/about1.jpg"
+                  height="100"
+                  alt=""
+                  srcset=""
+                />
+                <img
+                  src="../assets/img/about1.jpg"
+                  height="100"
+                  alt=""
+                  srcset=""
+                />
+                <img
+                  src="../assets/img/about1.jpg"
+                  height="100"
+                  alt=""
+                  srcset=""
+                />
+              </div>
+            </div>
+          </b-col>
         </b-row>
       </div>
     </b-container>
@@ -269,9 +352,12 @@ export default {
         message: "",
       },
       show: false,
+      info: false,
+      checked: false,
       text: "",
       chats: [
         {
+          id: 0,
           type: "received",
           name: "Louis Litt",
           timeStamp: "3:00 PM",
@@ -279,6 +365,7 @@ export default {
             "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Explicabo, quos? Fuga, nam dolores? Tempora, qui.",
         },
         {
+          id: 1,
           type: "sent",
           name: "Louis Litt",
           timeStamp: "3:00 PM",
@@ -286,6 +373,7 @@ export default {
             "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Explicabo, quos? Fuga, nam dolores? Tempora, qui.",
         },
         {
+          id: 2,
           type: "received",
           name: "Louis Litt",
           timeStamp: "3:00 PM",
@@ -293,6 +381,7 @@ export default {
             "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Explicabo, quos? Fuga, nam dolores? Tempora, qui.",
         },
         {
+          id: 3,
           type: "sent",
           name: "Louis Litt",
           timeStamp: "3:00 PM",
@@ -300,6 +389,7 @@ export default {
             "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Explicabo, quos? Fuga, nam dolores? Tempora, qui.",
         },
         {
+          id: 4,
           type: "received",
           name: "Louis Litt",
           timeStamp: "3:00 PM",
@@ -307,6 +397,7 @@ export default {
             "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Explicabo, quos? Fuga, nam dolores? Tempora, qui.",
         },
         {
+          id: 5,
           type: "sent",
           name: "Louis Litt",
           timeStamp: "3:00 PM",
@@ -316,47 +407,56 @@ export default {
       ],
       messages: [
         {
+          id: 0,
           name: "Louis Litt",
           startMessage: "Lorem ipsum dolor sit amet.",
           timeStamp: "7:00am",
         },
         {
+          id: 1,
           name: "Louis Litt",
           startMessage: "Lorem ipsum dolor sit amet.",
           timeStamp: "7:00am",
         },
 
         {
+          id: 3,
           name: "Louis Litt",
           startMessage: "Lorem ipsum dolor sit amet.",
           timeStamp: "7:00am",
         },
         {
+          id: 4,
           name: "Louis Litt",
           startMessage: "Lorem ipsum dolor sit amet.",
           timeStamp: "7:00am",
         },
         {
+          id: 5,
           name: "Louis Litt",
           startMessage: "Lorem ipsum dolor sit amet.",
           timeStamp: "7:00am",
         },
         {
+          id: 6,
           name: "Louis Litt",
           startMessage: "Lorem ipsum dolor sit amet.",
           timeStamp: "7:00am",
         },
         {
+          id: 7,
           name: "Louis Litt",
           startMessage: "Lorem ipsum dolor sit amet.",
           timeStamp: "7:00am",
         },
         {
+          id: 8,
           name: "Louis Litt",
           startMessage: "Lorem ipsum dolor sit amet.",
           timeStamp: "7:00am",
         },
         {
+          id: 9,
           name: "Louis Litt",
           startMessage: "Lorem ipsum dolor sit amet.",
           timeStamp: "7:00am",
@@ -366,8 +466,10 @@ export default {
   },
   methods: {
     showMessages(arg) {
-        console.log("heyyy ausgd");
       this.show = arg;
+    },
+    showInfo(arg) {
+      this.info = arg;
     },
   },
 };
@@ -481,6 +583,28 @@ h1 {
   display: none;
 }
 
+.info-nav {
+  position: relative;
+  min-height: 70px;
+  background-color: rgb(232, 232, 232);
+  width: 550px;
+  padding: 10px;
+}
+
+.info-bottom {
+  padding: 20px;
+  border-bottom: 1px solid #ccc;
+}
+.info-avatar {
+  margin-left: 150px;
+}
+.info-detail {
+  text-align: center;
+}
+li {
+  list-style: none;
+  margin-top: 10px;
+}
 @media only screen and (max-width: 768px) {
   .mobile {
     display: flex;
@@ -550,6 +674,35 @@ h1 {
   }
   h1 {
     font-size: 25px;
+  }
+  .info-nav {
+    position: relative;
+    min-height: 70px;
+    background-color: rgb(232, 232, 232);
+    width: 325px;
+    padding: 10px;
+  }
+
+  .info-bottom {
+    padding: 20px;
+    border-bottom: 1px solid #ccc;
+  }
+  .info-avatar {
+    margin-left: 40px;
+  }
+  .info-detail {
+    text-align: center;
+  }
+  li {
+    list-style: none;
+    margin-top: 10px;
+  }
+  .info-media {
+    padding: 10px;
+  }
+  .media {
+    display: flex;
+    flex-wrap: wrap;
   }
 }
 </style>

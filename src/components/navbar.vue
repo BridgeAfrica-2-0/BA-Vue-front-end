@@ -222,16 +222,16 @@ export default {
 </script>
 
 <style scoped>
-.input-size{
+.input-size {
   width: 401px;
 }
 
-.input-size-phone{
+.input-size-phone {
   width: 401px;
 }
 
-.color-site{
-  color: #E75C18;
+.color-site {
+  color: #e75c18;
 }
 
 .col-bg {

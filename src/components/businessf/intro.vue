@@ -26,7 +26,7 @@
           525
         </p>
         <p>
-        <b-icon icon="geo-alt-fill" variant="primary"></b-icon> 
+          <b-icon icon="geo-alt-fill" variant="primary"></b-icon>
           Word1, Word2, Word3
         </p>
       </b-card-text>

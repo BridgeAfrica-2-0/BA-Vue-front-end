@@ -1,10 +1,7 @@
 <template>
   <div>
-    <b-list-group-item
-      class="d-flex align-items-center mb-4 "
-      style="border: none"
-    >
-      <b-avatar style="position:relative; top:-10px" class="mr-3"></b-avatar>
+    <b-list-group-item class="d-flex align-items-center mb-4 style-group">
+      <b-avatar class="mr-3 avatar-style"></b-avatar>
       <div>
         <div class="row">
           <div class="col">
@@ -36,7 +33,16 @@ export default {
   margin-left: 80%;
 }
 
-@media only screen and (max-width: 600px) {
+.style-group {
+  border: none;
+}
+
+.avatar-style {
+  position: relative;
+  top: -10px;
+}
+
+@media only screen and (max-width: 768px) {
   .edit-btn {
     margin-left: 129px;
   }

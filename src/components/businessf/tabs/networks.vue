@@ -10,7 +10,6 @@
         </div>
         <div class="ml-2 mt-2" v-for="post in posts" :key="post.id">
           <b-card
-          
             title="Group name"
             img-src="https://picsum.photos/600/300/?image=25"
             img-alt="Image"
@@ -63,47 +62,48 @@ export default {
           image: "https://picsum.photos/300/150/?image=41",
           title: "Title 2",
           text:
-            " Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum quam, doloribus id sit consequuntur tempora molestiae blanditiis.",
+            " Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum quam, doloribus id sit consequuntur tempora molestiae blanditiis."
         },
         {
           id: 1,
           image: "https://picsum.photos/300/150/?image=41",
           title: "Title 2",
           text:
-            " Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum quam, doloribus id sit consequuntur tempora molestiae blanditiis.",
+            " Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum quam, doloribus id sit consequuntur tempora molestiae blanditiis."
         },
         {
           id: 1,
           image: "https://picsum.photos/300/150/?image=41",
           title: "Title 2",
           text:
-            " Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum quam, doloribus id sit consequuntur tempora molestiae blanditiis.",
+            " Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum quam, doloribus id sit consequuntur tempora molestiae blanditiis."
         },
         {
           id: 1,
           image: "https://picsum.photos/300/150/?image=41",
           title: "Title 2",
           text:
-            " Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum quam, doloribus id sit consequuntur tempora molestiae blanditiis.",
+            " Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum quam, doloribus id sit consequuntur tempora molestiae blanditiis."
         },
         {
           id: 1,
           image: "https://picsum.photos/300/150/?image=41",
           title: "Title 2",
           text:
-            " Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum quam, doloribus id sit consequuntur tempora molestiae blanditiis.",
-        },
-      ],
+            " Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum quam, doloribus id sit consequuntur tempora molestiae blanditiis."
+        }
+      ]
     };
   },
   methods: {
-    opennetwork() {
+    openNetwork() {
       this.networkShow = false;
     },
-    addNetwork(){
-      this.showModal = !this.showModal
+
+    addNetwork() {
+      this.showModal = !this.showModal;
     }
-  },
+  }
 };
 </script>
 

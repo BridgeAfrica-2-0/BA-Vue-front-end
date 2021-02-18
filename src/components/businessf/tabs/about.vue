@@ -122,7 +122,7 @@
         <b-button
           class="mt-2 btn-block btn-primary"
           variant="primary"
-          @click="$bvModal.hide('bv-modal-example1')"
+          @click="validate('bv-modal-example1')"
         >
           Edit</b-button
         >
@@ -222,7 +222,7 @@
         <b-button
           class="mt-3 btn-block"
           variant="primary"
-          @click="$bvModal.hide('bv-modal-example2')"
+          @click="validate('bv-modal-example2')"
         >
           Modify
         </b-button>
@@ -272,6 +272,14 @@ export default {
      */
     editContact() {
       this.edit2 = !this.edit2;
+    },
+
+    /**
+     *
+     * @param idForm
+     */
+    validate(idForm) {
+      this.$bvModal.hide(idForm);
     }
   }
 };

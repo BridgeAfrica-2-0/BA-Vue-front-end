@@ -89,18 +89,16 @@
 
           <b-row>
             <b-avatar class="mr-3"></b-avatar>
-            <span class="mr-auto"
-              >
-              <input type="text" name="" placeholder="Post a Comment">
+            <span class="mr-auto">
+              <input type="text" name="" placeholder="Post a Comment" />
               <b-icon
                 icon="cursor-fill"
                 variant="primary"
                 class="post"
                 aria-hidden="true"
-              ></b-icon>
-              </span
+              ></b-icon> </span
           ></b-row>
-          <Comment/>
+          <Comment />
         </b-col>
       </b-row>
     </b-modal>
@@ -108,26 +106,26 @@
 </template>
 
 <script>
-import Comment from "./comment"
+import Comment from "./comment";
 export default {
   data() {
     return {
-      viewProduct: false,
+      viewProduct: false
     };
   },
-  components:{
-      Comment
+  components: {
+    Comment
   },
   methods: {
     /**
      * Used to view produduct details
      * @param id
      * @return void
-    */
+     */
     productDetails() {
       this.viewProduct = true;
-    },
-  },
+    }
+  }
 };
 </script>
 
@@ -140,26 +138,26 @@ p {
   text-align: left;
 }
 
-input{
-    border-radius: 15px;
-    padding: 5px;
-    border: solid 1px #ccc;
-    width: 250px;
+input {
+  border-radius: 15px;
+  padding: 5px;
+  border: solid 1px #ccc;
+  width: 250px;
 }
-input:focus{
-    outline-color: none;
-    border: none;
+input:focus {
+  outline-color: none;
+  border: none;
 }
-.post{
-    position: relative;
-    left: -24px;
+.post {
+  position: relative;
+  left: -24px;
 }
 
-.prod{
-    max-width: 14rem;
-    cursor: pointer;
+.prod {
+  max-width: 14rem;
+  cursor: pointer;
 }
-.stock{
-    color: green;
+.stock {
+  color: green;
 }
 </style>

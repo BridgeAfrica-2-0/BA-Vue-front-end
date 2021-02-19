@@ -94,10 +94,6 @@ export default {
 </script>
 
 <style scoped>
-/*.posts {*/
-/*  display: flex;*/
-/*  flex-wrap: wrap;*/
-/*}*/
 .image {
   cursor: pointer;
   width: inherit;

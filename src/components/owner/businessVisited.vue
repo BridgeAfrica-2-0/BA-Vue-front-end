@@ -5,8 +5,7 @@
     <div class="row">
       <div class="col">
         <b-list-group-item
-          class="d-flex align-items-center mb-4 "
-          style="border: none"
+          class="d-flex align-items-center mb-4 border-0"
         >
           <b-avatar class="mr-3"></b-avatar>
           <div class="datails">
@@ -20,17 +19,17 @@
                   id="dropdown-dropup"
                   dropdown
                   variant="primary-outline"
-                  style="position: relative; left:320px"
+                  class="dropdown-style"
                 >
                   <b-dropdown-item href="#">Edit</b-dropdown-item>
                   <b-dropdown-item href="#">Delete</b-dropdown-item>
                 </b-dropdown>
               </div>
             </div>
-            <b-link style="text-decoration: none">Get Directions</b-link>
+            <b-link class="text-decoration-none">Get Directions</b-link>
           </div>
         </b-list-group-item>
-        <b-link style="text-decoration: none" class="mt-4 " v-b-modal.modal-5>
+        <b-link class="mt-4 text-decoration-none" v-b-modal.modal-5>
           <b-icon icon="plus" variant="primary"></b-icon>Add Other
           Businesses</b-link
         >
@@ -80,6 +79,7 @@ export default {
   data() {
     return {
       selected: null,
+      business: '',
       options: [
         { value: null, text: "Select" },
         { value: "private", text: "Private" },
@@ -94,6 +94,12 @@ export default {
 .details {
   display: flex;
 }
+
+.dropdown-style {
+  position: relative;
+  left:320px;
+}
+
 @media only screen and (max-width: 600px) {
 }
 </style>

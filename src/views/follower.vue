@@ -4,8 +4,7 @@
     <head-page></head-page>
     <b-container
       fluid="md"
-      class="text-justify"
-      style="margin-top: 6rem !important;"
+      class="text-justify mx-auto mt-4 corps"
     >
       <b-row>
         <b-col cols="12">

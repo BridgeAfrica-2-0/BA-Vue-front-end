@@ -4,8 +4,7 @@
     <head-page></head-page>
     <b-container
       fluid="md"
-      class="text-justify mx-auto"
-      style="margin-top: 6rem !important;"
+      class="text-justify mx-auto mt-4 corps"
     >
       <b-row>
         <b-col cols="12">
@@ -47,3 +46,10 @@ export default {
   methods: {}
 };
 </script>
+
+<style scoped>
+
+.corps {
+  margin-top: 2rem !important;
+}
+</style>

@@ -32,7 +32,7 @@
       </b-button>
     </div>
 
-    <b-link style="text-decoration: none" v-b-modal.modal-4
+    <b-link class="text-decoration-none" v-b-modal.modal-4
       ><b-icon icon="plus" variant="primary"></b-icon> Add Other Phones</b-link
     >
 

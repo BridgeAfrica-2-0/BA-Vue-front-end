@@ -106,7 +106,7 @@
               <b-input-group class="my-auto w-100 rounded">
                 <template #append>
                   <b-input-group-text class=""
-                    ><strong style="color: #E75C18">
+                    ><strong class="color-site">
                       <b-icon-cursor-fill></b-icon-cursor-fill> </strong
                   ></b-input-group-text>
                 </template>
@@ -128,6 +128,15 @@ export default {};
 </script>
 
 <style scoped>
+
+.corps {
+  margin-top: 2rem !important;
+}
+
+.color-site{
+  color: #E75C18;
+}
+
 p {
   text-align: left;
 }

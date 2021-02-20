@@ -20,6 +20,7 @@
                   </b-col>
                   <b-col>
                     <b-icon
+                      @click="newMessage(true)"
                       class="new-message"
                       icon="pencil-fill"
                       variant="primary"
@@ -73,6 +74,7 @@
                 </b-col>
                 <b-col>
                   <b-icon
+                    @click="newMessage(true)"
                     class="new-message"
                     icon="pencil-fill"
                     variant="primary"
@@ -107,7 +109,7 @@
               </div>
             </div>
           </b-col>
-          <b-col v-if="show == false && info == false">
+          <b-col v-if="show == false && info == false && newMsg == false">
             <div class="chat-nav">
               <b-row class="mobile">
                 <b-col class="col-1">
@@ -212,8 +214,8 @@
                 </div>
               </div>
             </section>
-            <div class="bottom">
-              <b-row>
+            <div  class="bottom">
+              <b-row v-if="!checked">
                 <b-col class="col-2 user">
                   <b-avatar variant="primary" text="BV" size="60"></b-avatar>
                 </b-col>
@@ -242,6 +244,7 @@
                     </b-col>
                     <b-col class="col-2">
                       <b-icon
+                        @click="send"
                         class="msg-icon"
                         icon="cursor-fill"
                         variant="primary"
@@ -250,6 +253,7 @@
                   </b-row>
                 </b-col>
               </b-row>
+              <p v-if="checked" class="ml-5">You have blocked messages and calls from this user. <b-link @click="showInfo(true)">Unblock Now</b-link></p>
             </div>
           </b-col>
           <b-col v-if="info">
@@ -328,6 +332,64 @@
               </div>
             </div>
           </b-col>
+          <b-col v-if="newMsg == true && info == false">
+            <div class="new-msg">
+              <div class="info-nav">
+                <b-row>
+                  <b-col class="col-1 mt-3">
+                    To
+                  </b-col>
+                  <b-col>
+                    <input
+                      type="text"
+                      name=""
+                      class="form-control"
+                      placeholder="Type the name of person or group"
+                    />
+                  </b-col>
+                </b-row>
+              </div>
+              <div class="bottom newMsg-bottom">
+                <b-row>
+                  <b-col class="col-2 user">
+                    <b-avatar variant="primary" text="BV" size="60"></b-avatar>
+                  </b-col>
+                  <b-col>
+                    <b-form-textarea
+                      id="text-area"
+                      v-model="text"
+                      placeholder="Enter something..."
+                    ></b-form-textarea>
+                  </b-col>
+                  <b-col class="col-2">
+                    <b-row class="p-2 icons">
+                      <b-col class="col-2">
+                        <b-icon
+                          class="msg-icon"
+                          icon="smiley"
+                          variant="primary"
+                        ></b-icon>
+                      </b-col>
+                      <b-col class="col-3">
+                        <b-icon
+                          class="msg-icon"
+                          icon="paperclip"
+                          variant="primary"
+                        ></b-icon>
+                      </b-col>
+                      <b-col class="col-2">
+                        <b-icon
+                          class="msg-icon"
+                          icon="cursor-fill"
+                          variant="primary"
+                        ></b-icon>
+                      </b-col>
+                    </b-row>
+                  </b-col>
+                </b-row>
+              </div>
+            </div>
+          </b-col>
         </b-row>
       </div>
     </b-container>
@@ -351,6 +413,7 @@ export default {
         timeStamp: "",
         message: "",
       },
+      newMsg: false,
       show: false,
       info: false,
       checked: false,
@@ -470,6 +533,23 @@ export default {
     },
     showInfo(arg) {
       this.info = arg;
+      this.newMsg = arg;
+      console.log(this.checked);
+    },
+    newMessage(arg) {
+      console.log("hey");
+      this.newMsg = arg;
+      this.show = false;
+    },
+    send() {
+      this.message.type = "sent";
+      var today = new Date();
+      var h = today.getHours();
+      var m = today.getMinutes();
+      this.message.timeStamp = h + ":" + m
+      this.message.message = this.text;
+      this.chats.push(this.message);
+      this.text = "";
     },
   },
 };
@@ -604,6 +684,15 @@ h1 {
 li {
   list-style: none;
   margin-top: 10px;
+}
+#text-area {
+  width: 100%;
+}
+.newMsg-bottom {
+  margin-top: 717px;
+}
+.new-msg {
+  background-color: #ccc;
 }
 @media only screen and (max-width: 768px) {
   .mobile {

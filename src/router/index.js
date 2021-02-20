@@ -12,7 +12,9 @@ import Modifier from "@/views/modifier";
 import store from "@/store/index.js";
 import Follower from "../views/follower.vue";
 import businessFollower from "../views/businessFollower.vue"
-import Messaging from "../views/navMessaging.vue"
+import Messaging from "../views/navMessaging.vue";
+import AccountSettings from "../views/accountSettings.vue";
+import notifications from "../views/notifications.vue";
 
 Vue.use(VueRouter);
 
@@ -101,6 +103,16 @@ const routes = [
     path: "/message",
     name: "Messanger",
     component: Messaging
+  },
+  {
+    path: "/accountsettings",
+    name: "AccountSettings",
+    component: AccountSettings
+  },
+  {
+    path: "/notification",
+    name: "Notifications",
+    component: notifications
   }
  
 ];

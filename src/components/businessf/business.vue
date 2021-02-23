@@ -26,15 +26,15 @@
       >
       <b-button class="ml-2" size="sm">See All</b-button>
     </div>
-    <div class="row mt-4">
-      <div class="col">
+    <b-row class="mt-4">
+      <b-col cols="8">
         <div>
           <b-avatar
-            src="https://placekitten.com/400/300"
-            class="owner-profile-image-profile float-left"
-            badge-variant="primary"
-            badge-offset="10px"
-            size="80"
+              src="https://placekitten.com/400/300"
+              class="owner-profile-image-profile float-left"
+              badge-variant="primary"
+              badge-offset="10px"
+              size="80"
           >
           </b-avatar>
         </div>
@@ -42,14 +42,15 @@
           <h5 class="font-weight-bolder">User Name</h5>
           <p>@User Name Alias</p>
         </div>
-      </div>
-    </div>
-    <div class="btns">
-      <div>
-        <b-button class="mr-4" variant="success">Promote</b-button>
-        <b-button variant="danger">Website</b-button>
-      </div>
-    </div>
+      </b-col>
+      <b-col cols="4">
+        <p class="float-right">
+          <b-button class="mr-1" variant="success">Promote</b-button>
+          <b-button class="mr-1" variant="warning">Contact</b-button>
+          <b-button variant="primary">Website</b-button>
+        </p>
+      </b-col>
+    </b-row>
     <div class="row">
       <b-container fluid="md" class="text-justify mt-2">
         <b-row>

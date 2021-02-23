@@ -24,17 +24,17 @@ const routes = [
     component: Home
   },
   {
-    path: "/profile-owner",
+    path: "/profile_owner",
     name: "profile_owner",
     component: profile_owner
   },
   {
-    path: "/business-follower",
+    path: "/business_follower",
     name: "BusinessFollower",
     component: businessFollower
   },
   {
-    path: "/business-owner",
+    path: "/business_owner",
     name: "BusinessOwner",
     component: businessOwner
   },

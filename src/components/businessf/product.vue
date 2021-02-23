@@ -26,28 +26,28 @@
       v-model="viewProduct"
       hide-footer
       title="Product Details"
-      size="lg"
+      size="xl"
     >
       <b-row>
-        <b-col class="col-5">
+        <b-col cols="5" class="mx-auto">
           <b-img
-            width="300"
-            height="300"
+            class="img-fluid"
             src="https://picsum.photos/600/300/?image=25"
           ></b-img>
         </b-col>
         <b-col>
-          <h2>Product Name</h2>
+          <h2 class="mb-4 text-center">Product Name</h2>
           <p>$ 0.00 <span class="stock">In Stock</span></p>
+          <p><strike>$ 0.00</strike></p>
           <hr />
           <b-row>
             <b-col>
-              <b-button variant="warning">Message</b-button>
+              <b-button variant="primary">Message</b-button>
 
               <b-button class="ml-2" variant="success">Call Now</b-button>
             </b-col>
             <b-col>
-              <b-button variant="outline-dark">Checkout on website</b-button>
+              <b-button variant="outline-dark" class="float-right">Checkout on website</b-button>
             </b-col>
           </b-row>
           <hr />
@@ -60,7 +60,7 @@
           </p>
           <hr />
           <b-row>
-            <b-col class="mt-1">
+            <b-col class="">
               <span class="mr-3"
                 ><b-icon
                   icon="suit-heart"
@@ -78,26 +78,35 @@
                 123</span
               >
             </b-col>
-            <b-col class="col-2">
+            <b-col class="">
               <b-icon
+                  class="float-right"
                 icon="share-fill"
                 variant="primary"
                 aria-hidden="true"
               ></b-icon>
             </b-col>
           </b-row>
-
+          <br>
           <b-row>
-            <b-avatar class="mr-3"></b-avatar>
-            <span class="mr-auto">
-              <input type="text" name="" placeholder="Post a Comment" />
-              <b-icon
-                icon="cursor-fill"
-                variant="primary"
-                class="post"
-                aria-hidden="true"
-              ></b-icon> </span
-          ></b-row>
+            <b-col cols="1" class="mx-auto">
+              <b-avatar class="mr-2" size=""></b-avatar>
+            </b-col>
+            <b-col cols="11">
+              <b-input-group class="my-auto">
+                <template #append>
+                  <b-input-group-text class=""
+                  ><strong class="color-site">
+                    <b-icon-cursor-fill></b-icon-cursor-fill> </strong
+                  ></b-input-group-text>
+                </template>
+                <b-form-input
+                    placeholder="Search Bridge Africa"
+                    class="border-right-0"
+                ></b-form-input>
+              </b-input-group>
+            </b-col>
+          </b-row>
           <Comment />
         </b-col>
       </b-row>

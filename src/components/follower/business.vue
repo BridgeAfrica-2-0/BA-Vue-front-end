@@ -4,7 +4,7 @@
       <div class="col-3">
         <img src="../../assets/img/follow.jpg" height="200" alt="" />
       </div>
-      <div class="col details">
+      <div class="col details ml-3">
         <h3>
           <b-link class="link">Business Name</b-link>
         </h3>

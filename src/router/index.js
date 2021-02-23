@@ -15,6 +15,7 @@ import businessFollower from "../views/businessFollower.vue"
 import Messaging from "../views/navMessaging.vue";
 import AccountSettings from "../views/accountSettings.vue";
 import notifications from "../views/notifications.vue";
+import search from "../views/search.vue";
 
 Vue.use(VueRouter);
 
@@ -113,6 +114,11 @@ const routes = [
     path: "/notification",
     name: "Notifications",
     component: notifications
+  },
+  {
+    path: "/search",
+    name: "Search",
+    component: search
   }
  
 ];

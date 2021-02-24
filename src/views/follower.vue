@@ -1,7 +1,7 @@
 <template>
   <div>
     <navbar></navbar>
-    <head-page></head-page> 
+    <!-- <head-page></head-page>  -->
         <b-container
       fluid="md"
       class="text-justify mt-1"
@@ -25,7 +25,7 @@
 
 <script>
 import navbar from "@/components/navbar";
-import headPage from "@/components/headPage";
+// import headPage from "@/components/headPage";
 import Post from "@/components/follower/tabs/posts";
 import About from "@/components/follower/tabs/about";
 import Media from "@/components/follower/tabs/media";
@@ -36,7 +36,7 @@ export default {
   name: "Home",
   components: {
     navbar,
-    headPage,
+    // headPage,
     Post,
     About,
     Media,

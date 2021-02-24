@@ -22,6 +22,9 @@
               </small>
             </p>
           </b-col>
+          <b-col class="col-2">
+            <b-button variant="primary">Message</b-button>
+          </b-col>
         </b-row>
         <div class="mb-3">
           <span>Text:</span> Lorem ipsum dolor sit amet consectetur adipisicing
@@ -66,6 +69,9 @@
                 <span>Following</span>
               </small>
             </p>
+          </b-col>
+            <b-col class="col-2">
+            <b-button variant="outline-primary">Follow</b-button>
           </b-col>
         </b-row>
         <div class="mb-3">

@@ -8,88 +8,109 @@
             <p>Add product/ Services</p>
           </div>
         </div>
-        <div  class="ml-4" v-for="post in posts" :key="post.id">
-         <Product/>
+        <div class="ml-4" v-for="post in posts" :key="post.id">
+          <Product />
         </div>
       </div>
     </b-card>
 
     <b-modal hide-footer title="Add product" v-model="showModal">
       <b-form>
-        <b-form-input v-model="text" placeholder="product name"></b-form-input>
-        <b-form-file class="mt-1" id="file-small" size="sm"></b-form-file>
-        <b-button class="mt-2" variant="primary"> Add</b-button>
+          <b-form-group
+              id="input-group-1"
+              label="Product Name"
+              label-for="input-1"
+              label-size="sm"
+          >
+            <b-form-input
+                id="input-1"
+                class="mt-2"
+                v-model="text"
+                type="text"
+                required
+            ></b-form-input>
+          </b-form-group>
+          <b-form-group
+              id="input-group-1"
+              label="image File"
+              label-for="input-1"
+              label-size="sm"
+          >
+            <b-form-file class="mt-1" id="file-small" v-model="image"></b-form-file>
+          </b-form-group>
+
+        <b-button class="mt-2 btn-block" variant="primary"> Add</b-button>
       </b-form>
     </b-modal>
-
   </div>
 </template>
 
 <script>
-import Product from "../product"
+import Product from "../product";
 export default {
   data() {
     return {
       showModal: false,
-     
+
       text: "",
+      image: "",
       posts: [
         {
           id: 1,
           image: "https://picsum.photos/300/150/?image=41",
           title: "Title 2",
           text:
-            " Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum quam, doloribus id sit consequuntur tempora molestiae blanditiis.",
+            " Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum quam, doloribus id sit consequuntur tempora molestiae blanditiis."
         },
         {
           id: 1,
           image: "https://picsum.photos/300/150/?image=41",
           title: "Title 2",
           text:
-            " Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum quam, doloribus id sit consequuntur tempora molestiae blanditiis.",
+            " Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum quam, doloribus id sit consequuntur tempora molestiae blanditiis."
         },
         {
           id: 1,
           image: "https://picsum.photos/300/150/?image=41",
           title: "Title 2",
           text:
-            " Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum quam, doloribus id sit consequuntur tempora molestiae blanditiis.",
+            " Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum quam, doloribus id sit consequuntur tempora molestiae blanditiis."
         },
         {
           id: 1,
           image: "https://picsum.photos/300/150/?image=41",
           title: "Title 2",
           text:
-            " Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum quam, doloribus id sit consequuntur tempora molestiae blanditiis.",
+            " Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum quam, doloribus id sit consequuntur tempora molestiae blanditiis."
         },
         {
           id: 1,
           image: "https://picsum.photos/300/150/?image=41",
           title: "Title 2",
           text:
-            " Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum quam, doloribus id sit consequuntur tempora molestiae blanditiis.",
-        },
+            " Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum quam, doloribus id sit consequuntur tempora molestiae blanditiis."
+        }
       ],
       images: [
         {
           id: 1,
-          image: "https://picsum.photos/300/150/?image=41",
+          image: "https://picsum.photos/300/150/?image=41"
         },
         {
           id: 2,
-          image: "https://picsum.photos/300/150/?image=41",
-        },
-      ],
+          image: "https://picsum.photos/300/150/?image=41"
+        }
+      ]
     };
   },
-  components:{
+  components: {
     Product
   },
   methods: {
     createProduct() {
-      this.showModal = !this.showModal
-    },
-  },
+      this.showModal = !this.showModal;
+    }
+  }
 };
 </script>
 
@@ -116,12 +137,9 @@ export default {
   font-weight: 200;
 }
 
-
 .product:hover .text-static {
   display: none;
 }
-
-
 
 .btn-view {
   background-color: transparent;

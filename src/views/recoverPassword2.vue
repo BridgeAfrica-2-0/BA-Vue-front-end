@@ -9,13 +9,13 @@
               <div class="col">
                 {{ recoverPassData }}
               </div>
-            
+
               <div class="col-4">
                 <b-button variant="outline-primary" class="btn" @click="change">
                   Change
                 </b-button>
               </div>
-                Enter the that you received.
+              Enter the that you received.
             </div>
           </b-card-text>
           <b-form @submit="next" class="w-75 mx-auto">
@@ -28,11 +28,10 @@
                 required
               />
             </b-form-group>
-                 <b-button class="button" type="submit" variant="outline-primary">
-            Next
-          </b-button>
+            <b-button type="submit" variant="outline-primary">
+              Next
+            </b-button>
           </b-form>
-     
         </div>
       </b-card>
     </div>
@@ -42,10 +41,10 @@
 <script>
 import { mapGetters } from "vuex";
 export default {
-  data(){
-    return{
-      code:''
-    }
+  data() {
+    return {
+      code: ""
+    };
   },
   computed: mapGetters(["recoverPassData"]),
   methods: {
@@ -53,11 +52,11 @@ export default {
       e.preventDefault();
       window.location.href = "recoverPass1";
     },
-     next(e) {
+    next(e) {
       e.preventDefault();
       window.location.href = "recoverPass3";
-    },
-  },
+    }
+  }
 };
 </script>
 
@@ -66,13 +65,8 @@ export default {
   width: 80%;
 }
 
-.button{
-  margin-left: 265px;
-
-}
-
-@media only screen and (max-width: 768px) {
-  .btn{
+@media only screen and (max-width: 600px) {
+  .btn {
     margin-left: -20px;
   }
 }

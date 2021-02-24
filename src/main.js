@@ -4,6 +4,14 @@ import "./registerServiceWorker";
 import router from "./router";
 import store from "./store";
 import { BootstrapVue, IconsPlugin } from "bootstrap-vue";
+import "@morioh/v-lightbox/dist/lightbox.css";
+import VueGallerySlideshow from "vue-gallery-slideshow";
+
+import Lightbox from "@morioh/v-lightbox";
+
+// global register
+Vue.use(VueGallerySlideshow);
+Vue.use(Lightbox);
 
 // Import Bootstrap an BootstrapVue CSS files (order is important)
 import "bootstrap/dist/css/bootstrap.css";

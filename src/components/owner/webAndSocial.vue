@@ -32,8 +32,10 @@
       </div>
     </b-modal>
 
-      <div>
-      <b-link style="text-decoration: none, position:relative; top:10px" v-b-modal.modal-7
+    <div>
+      <b-link
+        style="text-decoration: none, position:relative; top:10px"
+        v-b-modal.modal-7
         ><b-icon icon="facebook" variant="primary"></b-icon>
         https://www.facebook.com/yourid</b-link
       >
@@ -54,14 +56,14 @@
           </div>
         </div>
         <div class="row">
-            <div class="col">
+          <div class="col">
             <b-form-input
               v-model="business"
               placeholder="Social link"
             ></b-form-input>
           </div>
           <div class="col">
-              <b-form-select
+            <b-form-select
               class="mb-2"
               size="sm"
               v-model="socialSelected"
@@ -83,17 +85,17 @@ export default {
       options: [
         { value: null, text: "Select" },
         { value: "private", text: "Private" },
-        { value: "public", text: "Public" },
+        { value: "public", text: "Public" }
       ],
-       socials: [
+      socials: [
         { value: null, text: "Select" },
         { value: "instagram", text: "Instagram" },
         { value: "facebook", text: "FaceBook" },
         { value: "twitter", text: "Twitter" },
-        { value: "google-plus", text: "Google+" },
-      ],
+        { value: "google-plus", text: "Google+" }
+      ]
     };
-  },
+  }
 };
 </script>
 

@@ -18,7 +18,7 @@
       <b-modal hide-footer id="modal-1" title="Date Of Birth">
         <div>
           <label>Choose a date</label>
-          <b-form  @submit="add">
+          <b-form @submit="add">
             <div class="row">
               <div class="col">
                 <b-form-datepicker
@@ -63,40 +63,40 @@
         >Edit
       </b-button>
       <b-modal hide-footer id="modal-2" title="Gender">
-         <b-form   @submit="add">
-        <div>
-          <div class="row">
-            <div class="col">
-              <b-form-select
-                class="mb-2"
-                size="sm"
-                v-model="gender"
-                :options="genders"
-                required
-              ></b-form-select>
-            </div>
-            <div class="col-4">
-              <b-form-select
-                class="mb-2"
-                size="sm"
-                v-model="selected"
-                :options="options"
-                required
-              ></b-form-select>
+        <b-form>
+          <div>
+            <div class="row">
+              <div class="col">
+                <b-form-select
+                  class="mb-2"
+                  size="sm"
+                  v-model="gender"
+                  :options="genders"
+                  required
+                ></b-form-select>
+              </div>
+              <div class="col-4">
+                <b-form-select
+                  class="mb-2"
+                  size="sm"
+                  v-model="selected"
+                  :options="options"
+                  required
+                ></b-form-select>
+              </div>
             </div>
           </div>
-        </div>
-         <b-button
-              class="ml-2 mt-2"
-              style="position:relative; left: 400px"
-              type="submit"
-              variant="primary"
-              >Add</b-button
-            >
-         </b-form>
+          <b-button
+            class="ml-2 mt-2"
+            style="position:relative; left: 400px"
+            type="submit"
+            variant="primary"
+            >Add</b-button
+          >
+        </b-form>
       </b-modal>
     </div>
-    </div>
+  </div>
 </template>
 
 <script>
@@ -110,16 +110,16 @@ export default {
       options: [
         { value: null, text: "Select" },
         { value: "private", text: "Private" },
-        { value: "public", text: "Public" },
+        { value: "public", text: "Public" }
       ],
       genders: [
         { value: null, text: "Select" },
         { value: "Male", text: "Male" },
-        { value: "Female", text: "Female" },
-      ],
+        { value: "Female", text: "Female" }
+      ]
     };
   },
-  methods: {},
+  methods: {}
 };
 </script>
 

@@ -16,9 +16,10 @@
         </b-list-group-item>
       </div>
       <div class="col-2">
-           <b-button class="btn" variant="outline-primary">
-               <b-icon icon="plus" class="mr-1"></b-icon>
-               Follow</b-button>
+        <b-button variant="outline-primary">
+          <b-icon icon="plus"></b-icon>
+          Follow</b-button
+        >
       </div>
     </div>
   </div>
@@ -28,17 +29,4 @@
 export default {};
 </script>
 
-<style scoped>
-.item{
-    border: none;
-}
-.follow{
-  cursor: pointer;
-}
-@media only screen and (max-width: 768px) {
- .btn{
-   display: flex;
-   margin-left: -70px;
-  }
-}
-</style>
+<style></style>

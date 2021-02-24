@@ -11,11 +11,10 @@ import service from "@/views/service";
 import Modifier from "@/views/modifier";
 import store from "@/store/index.js";
 import Follower from "../views/follower.vue";
-import businessFollower from "../views/businessFollower.vue"
-import Messaging from "../views/navMessaging.vue";
-import AccountSettings from "../views/accountSettings.vue";
-import notifications from "../views/notifications.vue";
-import search from "../views/search.vue";
+import profile_owner from "@/views/profileOwner";
+import businessFollower from "@/views/businessFollower";
+import businessOwner from "@/views/businessOwner";
+import search from "@/views/search";
 
 Vue.use(VueRouter);
 
@@ -23,37 +22,47 @@ const routes = [
   {
     path: "/",
     name: "Home",
-    component: Home
+    component: Home,
+  },
+  {
+    path: "/profile_owner",
+    name: "profile_owner",
+    component: profile_owner,
+  },
+  {
+    path: "/business_owner",
+    name: "BusinessOwner",
+    component: businessOwner,
   },
   {
     path: "/login",
     name: "Login",
-    component: Login
+    component: Login,
   },
   {
     path: "/signin",
     name: "SignIn",
-    component: SignIn
+    component: SignIn,
   },
   {
     path: "/recoverPass1",
     name: "RecoverPass1",
-    component: RecoverPass1
+    component: RecoverPass1,
   },
   {
     path: "/recoverPass2",
     name: "RecoverPass2",
-    component: RecoverPass2
+    component: RecoverPass2,
   },
   {
     path: "/recoverPass3",
     name: "RecoverPass3",
-    component: RecoverPass3
+    component: RecoverPass3,
   },
   {
     path: "/businessfollower",
     name: "BusinessFollower",
-    component: businessFollower
+    component: businessFollower,
   },
   {
     path: "/services/create",
@@ -65,12 +74,12 @@ const routes = [
       } else {
         next({ name: "Login" });
       }
-    }
+    },
   },
   {
     path: "/services/:id",
     name: "Service",
-    component: service
+    component: service,
     // beforeEnter: (to, from, next) => {
     //   console.log("dedans");
     //   if (store.state.login) {
@@ -92,7 +101,6 @@ const routes = [
         next({ name: "Login" });
       }
     },
-    
   },
 
   {
@@ -101,31 +109,15 @@ const routes = [
     component: Follower,
   },
   {
-    path: "/message",
-    name: "Messanger",
-    component: Messaging
-  },
-  {
-    path: "/accountsettings",
-    name: "AccountSettings",
-    component: AccountSettings
-  },
-  {
-    path: "/notification",
-    name: "Notifications",
-    component: notifications
-  },
-  {
     path: "/search",
     name: "Search",
-    component: search
-  }
- 
+    component: search,
+  },
 ];
 
 const router = new VueRouter({
   routes,
-  mode: "history"
+  mode: "history",
 });
 
 export default router;

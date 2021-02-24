@@ -73,13 +73,13 @@ li {
 }
 @media only screen and (max-width: 768px) {
   .top {
-  padding: 50px;
-  position: relative;
-  left: -40px;
-}
+    padding: 50px;
+    position: relative;
+    left: -40px;
+  }
 
-.card{
-  width: 500px;
-}
+  .card {
+    width: 500px;
+  }
 }
 </style>

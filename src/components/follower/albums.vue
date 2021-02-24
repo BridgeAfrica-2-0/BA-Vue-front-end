@@ -62,19 +62,19 @@ export default {
           image: "https://picsum.photos/300/150/?image=41",
           title: "Title 2",
           text:
-            " Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum quam, doloribus id sit consequuntur tempora molestiae blanditiis.",
-        },
+            " Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum quam, doloribus id sit consequuntur tempora molestiae blanditiis."
+        }
       ],
       images: [
         {
           id: 1,
-          image: "https://picsum.photos/300/150/?image=41",
+          image: "https://picsum.photos/300/150/?image=41"
         },
         {
           id: 2,
-          image: "https://picsum.photos/300/150/?image=41",
-        },
-      ],
+          image: "https://picsum.photos/300/150/?image=41"
+        }
+      ]
     };
   },
   methods: {
@@ -88,8 +88,8 @@ export default {
     },
     showModal() {
       this.$refs["modal-1"].show();
-    },
-  },
+    }
+  }
 };
 </script>
 
@@ -119,56 +119,7 @@ export default {
   top: 80px;
 }
 
-.text-static {
-  position: relative;
-  top: -220px;
-  left: 100px;
-  color: white;
-  font-weight: 200;
-}
-
-.albums {
-  display: flex;
-  flex-wrap: wrap;
-}
-
-.album:hover .text-static {
-  display: none;
-}
-
-.btn-view {
-  background-color: transparent;
-  border: none;
-  color: white;
-}
-
-.btn-view:focus {
-  outline-color: transparent;
-  border: none;
-}
-
 .album-name {
   color: #e75d29;
-  text-align: center;
-}
-
-.pic-name {
-  position: relative;
-  left: -200px;
-  color: white;
-  font-weight: 200;
-  opacity: 0;
-}
-
-.sp:hover .pic-name {
-  opacity: 1;
-}
-
-.pic {
-  cursor: pointer;
-  background-color: transparent;
-}
-.pic:hover {
-  box-shadow: 5px 10px 8px 2px #888888;
 }
 </style>

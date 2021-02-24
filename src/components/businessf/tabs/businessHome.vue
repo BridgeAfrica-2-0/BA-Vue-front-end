@@ -1,13 +1,13 @@
 <template>
-  <div >
+  <div>
     <b-row>
-      <b-col md="4" >
-        <Intro/>
+      <b-col md="4">
+        <Intro />
         <Invite />
-        <Personalise/>
+        <Personalise />
       </b-col>
       <b-col md="8">
-       <Post/>
+        <Post />
       </b-col>
     </b-row>
   </div>

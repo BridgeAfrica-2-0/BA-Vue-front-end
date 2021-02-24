@@ -29,21 +29,21 @@
 </template>
 
 <script>
-import {mapActions} from "vuex"
+import { mapActions } from "vuex";
 export default {
   data() {
     return {
-      data: "",
+      data: ""
     };
   },
   methods: {
-      ...mapActions(['recoverPassword2']),
+    ...mapActions(["recoverPassword2"]),
     next(e) {
       e.preventDefault();
       this.recoverPassword2(this.data);
       window.location.href = "recoverPass2";
-    },
-  },
+    }
+  }
 };
 </script>
 

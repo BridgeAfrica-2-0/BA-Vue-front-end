@@ -75,7 +75,7 @@
         v-model="to"
         class="mb-2"
       ></b-form-datepicker>
-       <b-form-input
+      <b-form-input
         class="mt-2"
         v-model="major"
         placeholder="Major"
@@ -93,10 +93,10 @@ export default {
       options: [
         { value: null, text: "Select" },
         { value: "private", text: "Private" },
-        { value: "public", text: "Public" },
-      ],
+        { value: "public", text: "Public" }
+      ]
     };
-  },
+  }
 };
 </script>
 

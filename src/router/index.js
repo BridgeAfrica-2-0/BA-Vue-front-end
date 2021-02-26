@@ -15,7 +15,8 @@ import profile_owner from "@/views/profileOwner";
 import businessFollower from "@/views/businessFollower";
 import businessOwner from "@/views/businessOwner";
 import search from "@/views/search";
-import forgotPassword from "@/views/forgotPassword"
+import forgotPassword from "@/views/forgotPassword";
+import navMessage from "@/views/navMessaging"
 
 Vue.use(VueRouter);
 
@@ -118,6 +119,11 @@ const routes = [
     path: "/forgotpass",
     name: "ForgotPassword",
     component: forgotPassword,
+  },
+  {
+    path: "/messaging",
+    name: "Nav Meassage",
+    component: navMessage,
   },
 ];
 

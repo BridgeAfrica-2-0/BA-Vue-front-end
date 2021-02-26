@@ -21,9 +21,8 @@
                   <b-col>
                     <b-icon
                       @click="newMessage(true)"
-                      class="new-message"
+                      class="new-message primary"
                       icon="pencil-fill"
-                      variant="primary"
                     ></b-icon>
                   </b-col>
                 </b-row>
@@ -75,9 +74,9 @@
                 <b-col>
                   <b-icon
                     @click="newMessage(true)"
-                    class="new-message"
+                    class="new-message primary"
                     icon="pencil-fill"
-                    variant="primary"
+      
                   ></b-icon>
                 </b-col>
               </b-row>
@@ -115,9 +114,9 @@
                 <b-col class="col-1">
                   <b-icon
                     @click="showMessages(true)"
-                    variant="primary"
                     icon="three-dots"
                     aria-hidden="true"
+                    class="primary"
                   ></b-icon>
                 </b-col>
                 <b-col class="col-2">
@@ -130,16 +129,17 @@
                 <b-col>
                   <b-row class="mt-3">
                     <b-col class="col-3">
-                      <b-icon icon="search" variant="primary"></b-icon>
+                      <b-icon icon="search" class="primary"></b-icon>
                     </b-col>
                     <b-col class="col-3">
-                      <b-icon icon="telephone-fill" variant="primary"></b-icon>
+                      <b-icon icon="telephone-fill" class="primary"></b-icon>
                     </b-col>
                     <b-col class="col-2">
                       <b-icon
                         @click="showInfo(true)"
                         icon="info-circle"
-                        variant="primary"
+                        class="primary"
+            
                       ></b-icon>
                     </b-col>
                   </b-row>
@@ -157,24 +157,24 @@
                   <b-row class="mt-3 ml-5">
                     <b-col class="col-3">
                       <b-icon
-                        class="msg-icon"
+                        class="msg-icon primary"
                         icon="search"
-                        variant="primary"
+ 
                       ></b-icon>
                     </b-col>
                     <b-col class="col-3">
                       <b-icon
-                        class="msg-icon"
+                        class="msg-icon primary"
                         icon="telephone-fill"
-                        variant="primary"
+    
                       ></b-icon>
                     </b-col>
                     <b-col>
                       <b-icon
                         @click="showInfo(true)"
-                        class="msg-icon"
+                        class="msg-icon primary"
                         icon="info-circle"
-                        variant="primary"
+        
                       ></b-icon>
                     </b-col>
                   </b-row>
@@ -237,17 +237,15 @@
                     </b-col>
                     <b-col class="col-3">
                       <b-icon
-                        class="msg-icon"
+                        class="msg-icon primary"
                         icon="paperclip"
-                        variant="primary"
                       ></b-icon>
                     </b-col>
                     <b-col class="col-2">
                       <b-icon
                         @click="send"
-                        class="msg-icon"
+                        class="msg-icon primary"
                         icon="cursor-fill"
-                        variant="primary"
                       ></b-icon>
                     </b-col>
                   </b-row>
@@ -258,7 +256,7 @@
           </b-col>
           <b-col v-if="info">
             <div class="info-nav">
-              <b-button variant="primary" @click="showInfo(false)"
+              <b-button class="primary-bg" @click="showInfo(false)"
                 >Back</b-button
               >
               <span class=""> Contact Info</span>
@@ -272,7 +270,7 @@
               ></b-avatar>
               <div class="info-detail">
                 <h1 class="info-name">Louis Litt</h1>
-                <b-link>View Profile</b-link>
+                <b-link class="primary">View Profile</b-link>
               </div>
             </div>
             <div>
@@ -287,6 +285,7 @@
                       <b-form-checkbox
                         v-model="checked"
                         name="check-button"
+                        class="primary"
                         switch
                       >
                       </b-form-checkbox>
@@ -365,23 +364,22 @@
                     <b-row class="p-2 icons">
                       <b-col class="col-2">
                         <b-icon
-                          class="msg-icon"
+                          class="msg-icon primary"
                           icon="smiley"
-                          variant="primary"
                         ></b-icon>
                       </b-col>
                       <b-col class="col-3">
                         <b-icon
-                          class="msg-icon"
+                          class="msg-icon primary"
                           icon="paperclip"
-                          variant="primary"
+     
                         ></b-icon>
                       </b-col>
                       <b-col class="col-2">
                         <b-icon
-                          class="msg-icon"
+                          class="msg-icon primary"
                           icon="cursor-fill"
-                          variant="primary"
+                        
                         ></b-icon>
                       </b-col>
                     </b-row>
@@ -559,6 +557,11 @@ export default {
 .right {
   padding: 10px;
 }
+.primary-bg, .primary-bg:hover{
+  background-color: #e75c18;
+  border: none;
+}
+
 .chat-box {
   position: relative;
   top: 30px;

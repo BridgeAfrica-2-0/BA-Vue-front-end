@@ -2,12 +2,6 @@
   <div>
     <b-card v-if="networkshow">
       <div class="networks ml-4">
-        <div class="create" @click="addNetwork">
-          <div class="text">
-            <b-icon icon="plus"></b-icon>
-            <p>Add Network</p>
-          </div>
-        </div>
         <div class="ml-2 mt-2" v-for="post in posts" :key="post.id">
           <b-card
             title="Group name"

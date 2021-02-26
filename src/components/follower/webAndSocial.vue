@@ -4,16 +4,16 @@
     <hr />
     <div class="social">
       <b-link class="link" v-b-modal.modal-7
-        ><b-icon icon="globe" variant="primary"></b-icon>
+        ><b-icon icon="globe" class="primary"></b-icon>
         https://www.yourwebsite.com</b-link
       >
     </div>
 
     <div>
       <b-link
-        style="text-decoration: none, position:relative; top:10px"
+        class="link"
         v-b-modal.modal-7
-        ><b-icon icon="facebook" variant="primary"></b-icon>
+        ><b-icon icon="facebook" class="primary"></b-icon>
         https://www.facebook.com/yourid</b-link
       >
     </div>
@@ -46,6 +46,7 @@ export default {
 <style scoped>
 .link {
   text-decoration: none;
+  color: #e75c18;
 }
 .link-1 {
   text-decoration: none;

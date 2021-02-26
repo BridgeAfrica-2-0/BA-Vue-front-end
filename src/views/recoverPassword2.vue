@@ -11,7 +11,7 @@
               </div>
 
               <div class="col-4">
-                <b-button variant="outline-primary" class="btn" @click="change">
+                <b-button class="btnz" @click="change">
                   Change
                 </b-button>
               </div>
@@ -24,11 +24,11 @@
                 id="input-4"
                 v-model="code"
                 type="text"
-                placeholder="Enter Code"
+                placeholder="Enter the code that your received"
                 required
               />
             </b-form-group>
-            <b-button type="submit" variant="outline-primary">
+            <b-button class="button" type="submit">
               Next
             </b-button>
           </b-form>
@@ -43,7 +43,7 @@ import { mapGetters } from "vuex";
 export default {
   data() {
     return {
-      code: ""
+      code: "",
     };
   },
   computed: mapGetters(["recoverPassData"]),
@@ -55,8 +55,8 @@ export default {
     next(e) {
       e.preventDefault();
       window.location.href = "recoverPass3";
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -65,9 +65,27 @@ export default {
   width: 80%;
 }
 
+.button {
+  margin-left: 265px;
+  background-color: #e75c18;
+  border: none;
+}
+.btnz {
+  border: solid 1px #e75c18;
+  color: #e75c18;
+  background-color: #fff;
+}
+
+.btnz:hover {
+  color: #fff;
+  background-color: #e75c18;
+  border: none;
+}
+
 @media only screen and (max-width: 600px) {
   .btn {
     margin-left: -20px;
+    border: solid 1px #e75c18;
   }
 }
 </style>

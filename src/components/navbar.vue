@@ -1,7 +1,7 @@
 <template>
   <div>
-    <b-navbar toggleable="lg" variant="light" class="py-2 my-auto montre">
-      <b-navbar-brand href="#">
+    <b-navbar toggleable="lg" class="py-2 my-auto montre color">
+      <b-navbar-brand href="#" class="nav-logo">
         <img
           src="@/assets/img/logo_bridge_africa.png"
           class="w-50 h-50 m-0"
@@ -12,85 +12,84 @@
       <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
       <b-collapse id="nav-collapse" is-nav>
-        <b-navbar-nav>
+        <b-navbar-nav class="move-search">
           <b-input-group class="my-auto input-size">
-            <template #append>
-              <b-input-group-text class=""
-                ><strong class="color-site">
-                  <b-icon-search></b-icon-search> </strong
-              ></b-input-group-text>
-            </template>
             <b-form-input
               placeholder="Search Bridge Africa"
-              class="border-right-0"
+              class=""
             ></b-form-input>
           </b-input-group>
+          <fas-icon class="primary search" :icon="['fas', 'search']" />
         </b-navbar-nav>
 
         <!-- Right aligned nav items -->
-        <b-navbar-nav class="ml-5 pl-5 my-auto col">
-          <b-nav-item href="#" class="ml-3"
-            ><b-icon-house-door-fill class="col-bg"></b-icon-house-door-fill>
-            Home
+        <b-navbar-nav class="ml-5 pl-5 my-auto col nav-move">
+          <div class="home">
+            <b-nav-item href="#" class="ml-3 home-icon"
+              ><fas-icon class="primary" :icon="['fas', 'home']" />
+              <span class="ml-1">Home</span>
+            </b-nav-item>
+          </div>
+          <b-nav-item href="#" class="ml-2">
+            <fas-icon class="primary" :icon="['fas', 'store']" />
+            <span class="ml-1">MarketPlace</span>
           </b-nav-item>
-          <b-nav-item href="#" class="ml-2"
-            ><b-icon-shop class="col-bg font-weight-bolder"></b-icon-shop>
-            MarketPlace
-          </b-nav-item>
-          <b-dropdown
-            size="sm"
-            variant="link"
-            class="p-0 ml-2"
-            toggle-class="text-decoration-none"
-            no-caret
-          >
-            <template #button-content>
-              <b-icon-chat-dots-fill class="col-bg"></b-icon-chat-dots-fill>
-            </template>
-            <b-dropdown-item-button>
-           <b-link class="link" href="/message"> Messages</b-link>
-            </b-dropdown-item-button>
-            <b-dropdown-divider></b-dropdown-divider>
-            <b-dropdown-group id="dropdown-group-1">
-              <b-dropdown-item-button
-                >First Grouped item</b-dropdown-item-button
-              >
-              <b-dropdown-item-button
-                >Second Grouped Item</b-dropdown-item-button
-              >
-            </b-dropdown-group>
-            <b-dropdown-divider></b-dropdown-divider>
-            <b-dropdown-item-button>
-              See Others Messages
-            </b-dropdown-item-button>
-          </b-dropdown>
-          <b-dropdown
-            size="sm"
-            variant="link"
-            class="p-0 ml-1"
-            toggle-class="text-decoration-none"
-            no-caret
-          >
-            <template #button-content>
-              <b-icon-bell-fill class="col-bg"></b-icon-bell-fill>
-            </template>
-            <b-dropdown-item-button>
-              Messages
-            </b-dropdown-item-button>
-            <b-dropdown-divider></b-dropdown-divider>
-            <b-dropdown-group id="dropdown-group-1">
-              <b-dropdown-item-button
-                >First Grouped item</b-dropdown-item-button
-              >
-              <b-dropdown-item-button
-                >Second Grouped Item</b-dropdown-item-button
-              >
-            </b-dropdown-group>
-            <b-dropdown-divider></b-dropdown-divider>
-            <b-dropdown-item-button>
-              See Others Messages
-            </b-dropdown-item-button>
-          </b-dropdown>
+          <div class="msg-bell-icon mt-2 home-icon">
+            <b-dropdown
+              size="sm"
+              variant="link"
+              class="p-0 ml-2"
+              toggle-class="text-decoration-none"
+              no-caret
+            >
+              <template #button-content>
+                <fas-icon class="primary" :icon="['fas', 'comment']" />
+              </template>
+              <b-dropdown-item-button>
+                <b-link class="link" href="/message"> Messages</b-link>
+              </b-dropdown-item-button>
+              <b-dropdown-divider></b-dropdown-divider>
+              <b-dropdown-group id="dropdown-group-1">
+                <b-dropdown-item-button
+                  >First Grouped item</b-dropdown-item-button
+                >
+                <b-dropdown-item-button
+                  >Second Grouped Item</b-dropdown-item-button
+                >
+              </b-dropdown-group>
+              <b-dropdown-divider></b-dropdown-divider>
+              <b-dropdown-item-button>
+                See Others Messages
+              </b-dropdown-item-button>
+            </b-dropdown>
+            <b-dropdown
+              size="sm"
+              variant="link"
+              class="p-0 ml-1"
+              toggle-class="text-decoration-none"
+              no-caret
+            >
+              <template #button-content>
+                <b-icon-bell-fill class="col-bg"></b-icon-bell-fill>
+              </template>
+              <b-dropdown-item-button>
+                Messages
+              </b-dropdown-item-button>
+              <b-dropdown-divider></b-dropdown-divider>
+              <b-dropdown-group id="dropdown-group-1">
+                <b-dropdown-item-button
+                  >First Grouped item</b-dropdown-item-button
+                >
+                <b-dropdown-item-button
+                  >Second Grouped Item</b-dropdown-item-button
+                >
+              </b-dropdown-group>
+              <b-dropdown-divider></b-dropdown-divider>
+              <b-dropdown-item-button>
+                See Others Messages
+              </b-dropdown-item-button>
+            </b-dropdown>
+          </div>
 
           <b-nav-item-dropdown right>
             <template #button-content class="my-auto">
@@ -141,9 +140,8 @@
             class="border-right-0"
           ></b-form-input>
         </b-input-group>
-
-        <b-nav-item href="#" class="ml-3"
-          ><b-icon-house-door-fill class="col-bg"></b-icon-house-door-fill>
+        <fas-icon class="primary" :icon="['fas', 'home']" />
+        <b-nav-item href="#" class="ml-3">
           Home
         </b-nav-item>
         <b-nav-item href="#" class="ml-2"
@@ -234,8 +232,55 @@ export default {
   color: #e75c18;
 }
 
+.msg-bell-icon {
+  border-left: 1px solid rgb(230, 230, 230);
+  border-right: 1px solid rgb(230, 230, 230);
+  height: 20px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.home {
+  border-left: 1px solid rgb(230, 230, 230);
+  border-right: 1px solid rgb(230, 230, 230);
+  height: 20px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin-top: 10px;
+}
+
+.home-icon{
+  margin-top: -10px;
+}
+
 .col-bg {
   color: #e75c18;
+}
+
+.color {
+  background-color: #fff;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+}
+
+.nav-move {
+  position: relative;
+  left: 380px;
+}
+
+.move-search {
+  position: relative;
+  left: 300px;
+}
+
+.search{
+  margin-top: 10px;
+  margin-left: -25px;
+  z-index: 3;
+  cursor: pointer;
+}
+.nav-logo {
+  position: relative;
+  left: 140px;
 }
 
 /*Responsive Side*/

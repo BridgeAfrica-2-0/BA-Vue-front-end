@@ -2,14 +2,7 @@
   <div>
     <b-row>
       <div v-if="albumShow" class="albums ml-4">
-        <b-col cols="4">
-          <div class="create" @click="createAlbum">
-            <div class="text">
-              <b-icon icon="plus"></b-icon>
-              <p>Create Album</p>
-            </div>
-          </div>
-        </b-col>
+  
         <b-col cols="4" class="my-auto" v-for="post in albums" :key="post.id">
           <b-img
             @click="openAlbum(post.id)"
@@ -21,24 +14,6 @@
             <div>{{ post.name }}</div>
             <span> {{ post.items.length }} item(s)</span>
           </span>
-          <b-dropdown
-            class="options"
-            variant="primary"
-            size="sm"
-            id="dropdown-left"
-          >
-            <template #button-content>
-              <b-icon icon="three-dots" aria-hidden="true"></b-icon>
-            </template>
-            <b-dropdown-item-button @click="openAlbum">
-              <b-icon icon="pencil-fill" aria-hidden="true"></b-icon>
-              Edit
-            </b-dropdown-item-button>
-            <b-dropdown-item-button>
-              <b-icon icon="trash-fill" aria-hidden="true"></b-icon>
-              Delete
-            </b-dropdown-item-button>
-          </b-dropdown>
         </b-col>
       </div>
     </b-row>
@@ -361,7 +336,7 @@ export default {
 .options {
   position: relative;
   top: -187px;
-  left: 174px;
+  left: 62px;
 }
 .image-album {
   width: inherit;

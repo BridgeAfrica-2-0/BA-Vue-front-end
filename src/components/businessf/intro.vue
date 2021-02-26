@@ -6,27 +6,27 @@
       </template>
       <b-card-text>
         <p>
-          <b-icon icon="briefcase-fill" variant="primary"></b-icon> Work at:
+          <b-icon icon="briefcase-fill" class="primary"></b-icon> Work at:
           Current or Last Organization
         </p>
         <p>
-          <b-icon icon="book-fill" variant="primary"></b-icon> Studied at: Last
+          <b-icon icon="book-fill" class="primary"></b-icon> Studied at: Last
           Education
         </p>
         <p>
-          <b-icon icon="house-fill" variant="primary"></b-icon> Home Town
+          <b-icon icon="house-fill" class="primary"></b-icon> Home Town
           Name:Dummy
         </p>
         <p>
-          <b-icon icon="geo-alt-fill" variant="primary"></b-icon> Current City
+          <b-icon icon="geo-alt-fill" class="primary"></b-icon> Current City
           Name:Dummy
         </p>
         <p>
-          <b-icon icon="people-fill" variant="primary"></b-icon> Followed by:
+          <b-icon icon="people-fill" class="primary"></b-icon> Followed by:
           525
         </p>
         <p>
-          <b-icon icon="geo-alt-fill" variant="primary"></b-icon>
+          <b-icon icon="geo-alt-fill" class="primary"></b-icon>
           Word1, Word2, Word3
         </p>
       </b-card-text>

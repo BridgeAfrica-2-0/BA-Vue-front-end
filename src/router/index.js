@@ -15,6 +15,7 @@ import profile_owner from "@/views/profileOwner";
 import businessFollower from "@/views/businessFollower";
 import businessOwner from "@/views/businessOwner";
 import search from "@/views/search";
+import forgotPassword from "@/views/forgotPassword"
 
 Vue.use(VueRouter);
 
@@ -112,6 +113,11 @@ const routes = [
     path: "/search",
     name: "Search",
     component: search,
+  },
+  {
+    path: "/forgotpass",
+    name: "ForgotPassword",
+    component: forgotPassword,
   },
 ];
 

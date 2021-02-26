@@ -2,12 +2,6 @@
   <div>
     <b-card>
       <div class="products ml-4">
-        <div class="create" @click="createProduct">
-          <div class="text">
-            <b-icon icon="plus"></b-icon>
-            <p>Add product/ Services</p>
-          </div>
-        </div>
         <div class="ml-4" v-for="post in posts" :key="post.id">
           <Product />
         </div>

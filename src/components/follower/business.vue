@@ -11,18 +11,18 @@
         <p>
           <a href="">mywebsite.com</a> <br />
           Business Category <br />
-          1.1M Follower <br />
+          1.1M Community <br />
           Neighbourhood, city country <br />
-          Keywords
+          Keyword 1  Keyword 2  Keyword 3
         </p>
       </div>
       <div class="col">
         <span class="btns">
-          <b-button variant="primary">Connect</b-button>
+          <b-button class="primary-bg">Contact</b-button>
 
-          <b-button class="ml-3" variant="outline-primary">
+          <b-button class="ml-3 community">
             <b-icon icon="plus"></b-icon>
-            Follow</b-button
+            Community</b-button
           >
         </span>
       </div>
@@ -41,11 +41,25 @@ export default {};
 }
 a {
   text-decoration: black;
+  color: #e75c18;
 }
 
 .btns {
   display: flex;
   margin-left: 120px;
+}
+
+.primary-bg {
+  background-color: #e75c18;
+  height: 40px;
+  border: none;
+}
+
+.community {
+  background-color: rgb(240, 240, 240);
+  color: #000;
+  border: none;  
+  display: flex;
 }
 
 @media only screen and (max-width: 768px) {

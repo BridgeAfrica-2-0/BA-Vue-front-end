@@ -19,20 +19,6 @@
           fluid
           @click="showModal"
         ></b-img>
-        <b-dropdown
-          class="options"
-          variant="primary"
-          size="sm"
-          id="dropdown-left"
-        >
-          <template #button-content>
-            <b-icon icon="three-dots" aria-hidden="true"></b-icon>
-          </template>
-          <b-dropdown-item-button v-on:click="deletePost(post.id)">
-            <b-icon icon="trash-fill" aria-hidden="true"></b-icon>
-            Delete
-          </b-dropdown-item-button>
-        </b-dropdown>
       </b-col>
     </b-row>
     <b-modal hide-footer ref="modal-1">
@@ -108,7 +94,7 @@ export default {
 }
 .options {
   position: relative;
-  top: -34px;
-  left: 25px;
+  top: -154px;
+  left: 260px;
 }
 </style>

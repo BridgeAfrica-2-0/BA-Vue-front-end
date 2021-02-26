@@ -12,7 +12,7 @@
         <div class="row">
           <div class="col">
             <span class="mr-auto"> <b>Company</b> </span>
-            <p>Position</p>
+            <p><b>Position - 7 Feb</b></p>
             <p>
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas
               quibusdam harum maxime!

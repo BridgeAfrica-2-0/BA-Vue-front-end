@@ -1,9 +1,8 @@
 <template>
   <div>
     <navbar />
-    <b-container fluid="md" class="text-justify mt-1">
+    <b-container fluid="md" class="text-justify mt-3">
       <div>
-        <a class="settings" href="#">Settings</a>
         <b-tabs content-class="mt-3">
           <b-tab title="Business" active><Business /></b-tab>
           <b-tab title="Inbox"><p>I'm the second tab</p></b-tab>

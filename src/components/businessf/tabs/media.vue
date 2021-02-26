@@ -1,7 +1,7 @@
 <template>
   <div>
     <b-card show variant="primary">
-      <b-icon icon="image" variant="primary"></b-icon>
+      <b-icon icon="image" class="primary"></b-icon>
       <b>
         Media
       </b>

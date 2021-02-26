@@ -28,13 +28,14 @@
 export default {
   data() {
     return {};
-  }
+  },
 };
 </script>
 
 <style scoped>
 .link {
   text-decoration: none;
+  color: #e75c18;
 }
 .bus-visited {
   border: none;

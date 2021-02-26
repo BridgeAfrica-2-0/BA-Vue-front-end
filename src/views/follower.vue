@@ -20,6 +20,7 @@
         </b-col>
       </b-row>
     </b-container>
+    <Footer/>
   </div>
 </template>
 
@@ -31,6 +32,7 @@ import About from "@/components/follower/tabs/about";
 import Media from "@/components/follower/tabs/media";
 import Following from "@/components/follower/tabs/following";
 import Businesses from "@/components/follower/tabs/businesses";
+import Footer from "@/components/footer"
 
 export default {
   name: "Home",
@@ -41,13 +43,18 @@ export default {
     About,
     Media,
     Following,
-    Businesses
+    Businesses,
+    Footer
   },
  
 };
 </script>
 
 <style scoped>
+.nav-link{
+    background-color: #e75c18;
+
+}
 @media only screen and (max-width: 768px) {
  
 }

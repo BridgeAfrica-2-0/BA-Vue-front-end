@@ -1,11 +1,11 @@
 <template>
   <div>
-    <b-container fluid>
+  
       <img
         src="@/assets/img/banner.jpg"
         class="img-fluid header-pic"
-        alt="Kitten"
       />
+        <b-container fluid>
       <div>
         <b-avatar
           src="https://placekitten.com/300/300"
@@ -26,29 +26,30 @@
               </h5>
               <br />
               <p class="m-0  d-inline-block header-text2">
-                @User Name Alias
+                @User Name Alias <br>
+                <small>2.5k Community</small>
               </p>
             </span>
             <span>
               <b-button-group class="header-group" size="sm">
-                <b-button variant="outline-primary">
-                  <b-icon icon="person-plus-fill"></b-icon>
-                  <span class="show">Follow</span>
+                <b-button class="primary btn">
+                  <b-icon class="primary" icon="person-plus-fill"></b-icon>
+                  <span class="show primary">Community</span>
                 </b-button>
-                <b-button variant="outline-primary">
-                  <b-icon icon="chat-square-dots-fill"></b-icon>
-                  <span class="show"> Message</span>
+                <b-button>
+                  <b-icon icon="chat-square-dots-fill" class="primary"></b-icon>
+                  <span class="show primary"> Message</span>
                 </b-button>
-                <b-dropdown variant="outline-primary">
-                  <template #button-content>
-                    <b-icon icon="three-dots" aria-hidden="true"></b-icon>
+                <b-dropdown class="drop-down dots btns">
+                  <template class="btns" #button-content>
+                    <b-icon class="primary btns" icon="three-dots" aria-hidden="true"></b-icon>
                   </template>
-                  <b-dropdown-item-button>
+                  <b-dropdown-item-button >
                     <b-icon icon="lock-fill" aria-hidden="true"></b-icon>
                     Locked <span class="sr-only">(Click to unlock)</span>
                   </b-dropdown-item-button>
                   <b-dropdown-divider></b-dropdown-divider>
-                  <b-dropdown-group hseader="Choose options" class="small">
+                  <b-dropdown-group header="Choose options" class="small">
                     <b-dropdown-item-button>
                       <b-icon icon="blank" aria-hidden="true"></b-icon>
                       Option A <span class="sr-only">(Not selected)</span>
@@ -89,6 +90,23 @@ export default {
 </script>
 
 <style scoped>
+.btn {
+  background-color: #fff;
+  opacity: 0.8;
+  border: solid 1px  #e75c18;
+}
+.dots{
+  border: solid 1px  #e75c18;
+}
+.btns{
+  background-color: #fff;
+  opacity: 0.8;
+}
+.header-group{
+  position: relative;
+  top: -100px;
+  left: -50px;
+}
 @media (max-width: 369px) {
   .header-pic {
     height: 100px;
@@ -217,12 +235,12 @@ export default {
 }
 @media (min-width: 1400px) {
   .owner-profile-image-profile {
-    margin: -103px 10px 0px 228px;
+    margin: 0px 10px 0px 228px;
     z-index: 9;
     width: 12rem;
     height: 12rem;
     border: 3px solid #fff;
-    /*   box-shadow: 0 .5rem 1rem rgba(0,0,0,.15) !important; */
+    
   }
 
   .header-text1 {

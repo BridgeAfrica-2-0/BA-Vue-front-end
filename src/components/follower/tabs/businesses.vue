@@ -1,7 +1,7 @@
 <template>
   <div>
-    <b-alert show variant="primary">
-      <b-icon icon="building" variant="primary"></b-icon>
+    <b-alert show class="primary-bg">
+      <b-icon icon="building" class="purple"></b-icon>
       <b>
         Businesses
       </b></b-alert
@@ -10,7 +10,7 @@
     <div v-if="noBusiness == false">
       <Business />
     </div>
-    <div v-if="noBusiness" class="no-business">
+    <div class="no-business">
       <b-container>
         <h2>No Businesses Listed</h2>
         <hr />
@@ -41,6 +41,14 @@ export default {
   height: 40%;
   padding: 40px;
   margin-left: 270px;
+}
+
+.purple{
+  color: purple;
+}
+.primary-bg {
+  background-color: rgb(242, 242, 242);
+  border: none;
 }
 
 h2,

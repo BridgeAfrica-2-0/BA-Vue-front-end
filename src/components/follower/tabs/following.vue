@@ -1,7 +1,7 @@
 <template>
   <div>
-    <b-alert show variant="primary">
-      <b-icon icon="people-fill" variant="primary"></b-icon>
+    <b-alert show class="primary-bg">
+      <b-icon class="purple" icon="people-fill"></b-icon>
       <b>
         Following
       </b></b-alert
@@ -19,9 +19,20 @@ import Follow from "../follow";
 export default {
   components: {
     Followers,
-    Follow
-  }
+    Follow,
+  },
 };
 </script>
 
-<style></style>
+<style scoped>
+.primary {
+  color: #e75c18;
+}
+.purple{
+  color: purple;
+}
+.primary-bg {
+  background-color: rgb(242, 242, 242);
+  border: none;
+}
+</style>

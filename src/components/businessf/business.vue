@@ -2,29 +2,15 @@
   <div>
     <div class="images">
       <div>
-        <img fluid src="../../assets/img/about2.jpg" alt="" />
+       <img
+        src="@/assets/img/banner.jpg"
+        class="img-fluid header-pic"
+      />
       </div>
-      <div>
-        <img fluid src="../../assets/img/about2.jpg" alt="" />
-      </div>
-      <div>
-        <img fluid src="../../assets/img/about2.jpg" alt="" />
-      </div>
-      <div>
-        <img fluid src="../../assets/img/about2.jpg" alt="" />
-      </div>
-      <div>
-        <img fluid src="../../assets/img/about2.jpg" alt="" />
-      </div>
-      <div>
-        <img fluid src="../../assets/img/about2.jpg" alt="" />
-      </div>
+   
     </div>
     <div class="photo-btns">
-      <b-button class="sm" size="sm">
-        <b-icon icon="plus"></b-icon>Add Photos</b-button
-      >
-      <b-button class="ml-2" size="sm">See All</b-button>
+      <b-button class="see" size="sm">See All</b-button>
     </div>
     <b-row class="mt-4">
       <b-col cols="8">
@@ -47,7 +33,7 @@
         <p class="float-right">
           <b-button class="mr-1" variant="success">Promote</b-button>
           <b-button class="mr-1" variant="warning">Contact</b-button>
-          <b-button variant="primary">Website</b-button>
+          <b-button variant="primary">Community</b-button>
         </p>
       </b-col>
     </b-row>
@@ -59,9 +45,9 @@
               <b-tab title="Home"><HomePage /></b-tab>
               <b-tab title="About"><About /></b-tab>
               <b-tab title="Media"><Media /></b-tab>
-              <b-tab title="Market Place"><MarketPlace /></b-tab>
+              <b-tab title="Market"><MarketPlace /></b-tab>
               <b-tab title="Networks"><Networks /></b-tab>
-              <b-tab title="Followers"><Followers /></b-tab>
+              <b-tab title="Community"><Followers /></b-tab>
             </b-tabs>
           </b-col>
         </b-row>
@@ -101,7 +87,12 @@ export default {
   display: flex;
   width: 100%;
 }
-
+.see{
+  margin-left: 120px;
+  background-color: #fff;
+  color: black;
+  border: none;
+}
 img {
   width: 100%;
 }

@@ -1,7 +1,7 @@
 <template>
   <div>
-    <b-alert show variant="primary">
-      <b-icon icon="image" variant="primary"></b-icon>
+    <b-alert show class="primary-bg">
+      <b-icon icon="image" class="purple"></b-icon>
       <b>
         Media
       </b></b-alert
@@ -24,4 +24,12 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped>
+.purple{
+  color: purple;
+}
+.primary-bg {
+  background-color: rgb(242, 242, 242);
+  border: none;
+}
+</style>

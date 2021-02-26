@@ -11,10 +11,6 @@
             </span>
           </div>
         </div>
-        <span class="text-static">
-          <div>Album Name</div>
-          <span> {{ images.length }} item(s)</span>
-        </span>
       </div>
     </div>
     <div v-if="pictureShow">
@@ -32,9 +28,6 @@
               class="pic"
             ></b-img>
 
-            <span class="pic-name"
-              ><button class="btn-view">Picture Name</button></span
-            >
           </span>
         </div>
         <b-modal hide-footer v-model="modalShow">
@@ -121,5 +114,10 @@ export default {
 
 .album-name {
   color: #e75d29;
+  margin-left: 400px;
+}
+.albums{
+  display: flex;
+  flex-wrap: wrap;
 }
 </style>

@@ -3,7 +3,7 @@
     <b>Web & Soial Links</b>
     <hr />
     <div>
-      <b-link style="text-decoration: none" v-b-modal.modal-7
+      <b-link class="text-decoration-none" v-b-modal.modal-7
         ><b-icon icon="globe" variant="primary"></b-icon>
         https://www.yourwebsite.com</b-link
       >
@@ -11,7 +11,7 @@
 
     <div>
       <b-link
-        style="text-decoration: none, position:relative; top:10px"
+        class="text-decoration-none position-relative top-10"
         v-b-modal.modal-7
         ><b-icon icon="facebook" variant="primary"></b-icon>
         https://www.facebook.com/yourid</b-link

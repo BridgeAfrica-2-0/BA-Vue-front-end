@@ -47,7 +47,9 @@
               <b-button class="ml-2" variant="success">Call Now</b-button>
             </b-col>
             <b-col>
-              <b-button variant="outline-dark" class="float-right">Checkout on website</b-button>
+              <b-button variant="outline-dark" class="float-right"
+                >Checkout on website</b-button
+              >
             </b-col>
           </b-row>
           <hr />
@@ -80,14 +82,14 @@
             </b-col>
             <b-col class="">
               <b-icon
-                  class="float-right"
+                class="float-right"
                 icon="share-fill"
                 variant="primary"
                 aria-hidden="true"
               ></b-icon>
             </b-col>
           </b-row>
-          <br>
+          <br />
           <b-row>
             <b-col cols="1" class="mx-auto">
               <b-avatar class="mr-2" size=""></b-avatar>
@@ -96,13 +98,13 @@
               <b-input-group class="my-auto">
                 <template #append>
                   <b-input-group-text class=""
-                  ><strong class="color-site">
-                    <b-icon-cursor-fill></b-icon-cursor-fill> </strong
+                    ><strong class="color-site">
+                      <b-icon-cursor-fill></b-icon-cursor-fill> </strong
                   ></b-input-group-text>
                 </template>
                 <b-form-input
-                    placeholder="Search Bridge Africa"
-                    class="border-right-0"
+                  placeholder="Search Bridge Africa"
+                  class="border-right-0"
                 ></b-form-input>
               </b-input-group>
             </b-col>

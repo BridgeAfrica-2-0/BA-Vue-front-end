@@ -14,6 +14,11 @@ import Follower from "../views/follower.vue";
 import profile_owner from "@/views/profileOwner";
 import businessFollower from "@/views/businessFollower";
 import businessOwner from "@/views/businessOwner";
+import templateView from "@/views/templateView";
+import webSiteCreate from "@/views/webSiteCreate";
+import webSiteCreateTwo from "@/views/webSiteCreateTwo";
+import paidPlan from "@/views/paidPlan";
+import confirmPayment from "@/views/confirmPayment";
 
 Vue.use(VueRouter);
 
@@ -34,9 +39,34 @@ const routes = [
     component: businessFollower
   },
   {
+    path: "/template_viewer",
+    name: "templateViewer",
+    component: templateView
+  },
+  {
     path: "/business_owner",
     name: "BusinessOwner",
     component: businessOwner
+  },
+  {
+    path: "/business_owner/create_website_step_one",
+    name: "createWebSite",
+    component: webSiteCreate
+  },
+  {
+    path: "/business_owner/create_website_step_two",
+    name: "createWebSiteTwo",
+    component: webSiteCreateTwo
+  },
+  {
+    path: "/business_owner/create_website_plan",
+    name: "payPlan",
+    component: paidPlan
+  },
+  {
+    path: "/business_owner/create_website_confirm_payment",
+    name: "confirmPayment",
+    component: confirmPayment
   },
   {
     path: "/login",

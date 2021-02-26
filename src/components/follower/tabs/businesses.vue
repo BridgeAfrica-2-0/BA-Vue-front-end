@@ -47,11 +47,4 @@ h2,
 p {
   text-align: center;
 }
-
-@media only screen and (max-width: 600px) {
-  .no-business {
-    width: 100%;
-    margin-left: 0px;
-  }
-}
 </style>

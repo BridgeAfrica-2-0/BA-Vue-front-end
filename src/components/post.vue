@@ -128,13 +128,12 @@ export default {};
 </script>
 
 <style scoped>
-
 .corps {
   margin-top: 2rem !important;
 }
 
-.color-site{
-  color: #E75C18;
+.color-site {
+  color: #e75c18;
 }
 
 p {

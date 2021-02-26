@@ -2,10 +2,7 @@
   <div>
     <navbar></navbar>
     <head-page></head-page>
-    <b-container
-      fluid="md"
-      class="text-justify mx-auto mt-4 corps"
-    >
+    <b-container fluid="md" class="text-justify mx-auto mt-4 corps">
       <b-row>
         <b-col cols="12">
           <b-tabs content-class="mt-3" pills card small fill>
@@ -48,7 +45,6 @@ export default {
 </script>
 
 <style scoped>
-
 .corps {
   margin-top: 2rem !important;
 }

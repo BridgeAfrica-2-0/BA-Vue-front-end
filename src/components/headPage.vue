@@ -116,7 +116,6 @@ export default {
     width: 5rem;
     height: 5rem;
     border: 1px solid #e75c18;
-    /*   box-shadow: 0 .5rem 1rem rgba(0,0,0,.15) !important; */
   }
   .show {
     display: none;
@@ -167,7 +166,6 @@ export default {
     width: 5rem;
     height: 5rem;
     border: 1px solid #e75c18;
-    /*   box-shadow: 0 .5rem 1rem rgba(0,0,0,.15) !important; */
   }
   .show {
     display: none;
@@ -222,7 +220,6 @@ export default {
     width: 12rem;
     height: 12rem;
     border: 3px solid #fff;
-    /*   box-shadow: 0 .5rem 1rem rgba(0,0,0,.15) !important; */
   }
 
   .header-text1 {

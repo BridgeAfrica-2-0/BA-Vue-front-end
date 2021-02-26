@@ -5,9 +5,7 @@
         <b-card title="" header-tag="header" footer-tag="footer">
           <template #header>
             <h6 class="mb-0 d-inline-block">Intro</h6>
-            <span
-              class="float-right btn m-0 p-0"
-              style="font-size: 1rem; font-family: Avenir, Helvetica, Arial, sans-serif;"
+            <span class="float-right btn m-0 p-0 action-intro"
               ><b-icon icon="pencil-fill" variant="primary"></b-icon> Edit</span
             >
           </template>
@@ -273,7 +271,7 @@
                   <b-input-group class="my-auto w-100 rounded">
                     <template #append>
                       <b-input-group-text class=""
-                        ><strong style="color: #E75C18">
+                        ><strong class="color-site">
                           <b-icon-cursor-fill></b-icon-cursor-fill> </strong
                       ></b-input-group-text>
                     </template>
@@ -390,7 +388,7 @@
                   <b-input-group class="my-auto w-100 rounded">
                     <template #append>
                       <b-input-group-text class=""
-                        ><strong style="color: #E75C18">
+                        ><strong class="color-site">
                           <b-icon-cursor-fill></b-icon-cursor-fill> </strong
                       ></b-input-group-text>
                     </template>
@@ -507,7 +505,7 @@
                   <b-input-group class="my-auto w-100 rounded">
                     <template #append>
                       <b-input-group-text class=""
-                        ><strong style="color: #E75C18">
+                        ><strong class="color-site">
                           <b-icon-cursor-fill></b-icon-cursor-fill> </strong
                       ></b-input-group-text>
                     </template>
@@ -565,6 +563,15 @@ export default {
 </script>
 
 <style>
+.action-intro {
+  font-size: 1rem;
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+}
+
+.color-site {
+  color: #e75c18;
+}
+
 @media (max-width: 576px) {
   .lb-grid {
     height: 200px;

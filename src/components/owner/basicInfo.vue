@@ -39,8 +39,7 @@
               </div>
             </div>
             <b-button
-              class="ml-2 mt-2"
-              style="position:relative; left: 400px"
+              class="ml-2 mt-2 button-design"
               type="submit"
               variant="primary"
               >Add</b-button
@@ -87,8 +86,7 @@
             </div>
           </div>
           <b-button
-            class="ml-2 mt-2"
-            style="position:relative; left: 400px"
+            class="ml-2 mt-2 button-design"
             type="submit"
             variant="primary"
             >Add</b-button
@@ -127,6 +125,12 @@ export default {
 .details {
   display: flex;
 }
+
+.button-design {
+  position: relative;
+  left: 400px;
+}
+
 @media only screen and (max-width: 600px) {
 }
 </style>

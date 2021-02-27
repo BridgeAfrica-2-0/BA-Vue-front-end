@@ -16,7 +16,8 @@ import businessFollower from "@/views/businessFollower";
 import businessOwner from "@/views/businessOwner";
 import search from "@/views/search";
 import forgotPassword from "@/views/forgotPassword";
-import navMessage from "@/views/navMessaging"
+import navMessage from "@/views/navMessaging";
+import memberNetworkFollower from "@/views/memberNetworkFollower"
 
 Vue.use(VueRouter);
 
@@ -124,6 +125,11 @@ const routes = [
     path: "/messaging",
     name: "Nav Meassage",
     component: navMessage,
+  },
+  {
+    path: "/memberNetworkFollower",
+    name: "Membar Network Follower",
+    component: memberNetworkFollower,
   },
 ];
 

@@ -47,7 +47,7 @@
               <b-tab title="Media"><Media /></b-tab>
               <b-tab title="Market"><MarketPlace /></b-tab>
               <b-tab title="Networks"><Networks /></b-tab>
-              <b-tab title="Community"><Followers /></b-tab>
+              <b-tab title="Community"><Community /></b-tab>
             </b-tabs>
           </b-col>
         </b-row>
@@ -61,7 +61,7 @@ import HomePage from "../businessf/tabs/businessHome";
 import About from "./tabs/about";
 import Media from "./tabs/media";
 import MarketPlace from "./tabs/marketPlace";
-import Followers from "./tabs/followers";
+import Community from "./tabs/community";
 import Networks from "./tabs/networks";
 
 export default {
@@ -71,7 +71,7 @@ export default {
     About,
     Media,
     MarketPlace,
-    Followers,
+    Community,
     Networks
   },
   data() {

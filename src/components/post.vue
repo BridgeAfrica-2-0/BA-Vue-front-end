@@ -15,43 +15,6 @@
             <b-col cols="11" class="pt-2">
               <h5 class="m-0 font-weight-bolder">
                 John Doe
-                <span class="float-right">
-                  <b-dropdown variant="outline-primary" size="sm">
-                    <template #button-content>
-                      <b-icon icon="three-dots" aria-hidden="true"></b-icon>
-                      More
-                    </template>
-                    <b-dropdown-item-button>
-                      <b-icon icon="lock-fill" aria-hidden="true"></b-icon>
-                      Locked <span class="sr-only">(Click to unlock)</span>
-                    </b-dropdown-item-button>
-                    <b-dropdown-divider></b-dropdown-divider>
-                    <b-dropdown-group header="Choose options" class="small">
-                      <b-dropdown-item-button>
-                        <b-icon icon="blank" aria-hidden="true"></b-icon>
-                        Option A <span class="sr-only">(Not selected)</span>
-                      </b-dropdown-item-button>
-                      <b-dropdown-item-button>
-                        <b-icon icon="check" aria-hidden="true"></b-icon>
-                        Option B <span class="sr-only">(Selected)</span>
-                      </b-dropdown-item-button>
-                      <b-dropdown-item-button>
-                        <b-icon icon="blank" aria-hidden="true"></b-icon>
-                        Option C <span class="sr-only">(Not selected)</span>
-                      </b-dropdown-item-button>
-                    </b-dropdown-group>
-                    <b-dropdown-divider></b-dropdown-divider>
-                    <b-dropdown-item-button>Some action</b-dropdown-item-button>
-                    <b-dropdown-item-button
-                      >Some other action</b-dropdown-item-button
-                    >
-                    <b-dropdown-divider></b-dropdown-divider>
-                    <b-dropdown-item-button variant="danger">
-                      <b-icon icon="trash-fill" aria-hidden="true"></b-icon>
-                      Delete
-                    </b-dropdown-item-button>
-                  </b-dropdown>
-                </span>
               </h5>
               <p>1h Ago</p>
             </b-col>
@@ -103,18 +66,16 @@
               ></b-avatar>
             </b-col>
             <b-col cols="11">
-              <b-input-group class="my-auto w-100 rounded">
-                <template #append>
-                  <b-input-group-text class=""
-                    ><strong class="color-site">
-                      <b-icon-cursor-fill></b-icon-cursor-fill> </strong
-                  ></b-input-group-text>
-                </template>
-                <b-form-input
-                  placeholder="Add A Comment"
-                  class="border-right-0"
-                ></b-form-input>
-              </b-input-group>
+              <input placeholder="Post a Comment" class="comment" type="text" />
+
+              <fas-icon class="primary send-cmt" :icon="['fas', 'paper-plane']" />
+            </b-col>
+          </b-row>
+          <Comment />
+          <b-row>
+            <b-col class="col-1"></b-col>
+            <b-col>
+              <Comment />
             </b-col>
           </b-row>
         </b-col>
@@ -124,20 +85,41 @@
 </template>
 
 <script>
-export default {};
+import Comment from "../components/comment";
+export default {
+  components: {
+    Comment,
+  },
+};
 </script>
 
 <style scoped>
-
 .corps {
   margin-top: 2rem !important;
 }
 
-.color-site{
-  color: #E75C18;
+.color-site {
+  color: #e75c18;
 }
 
 p {
   text-align: left;
+}
+.comment {
+  width: 100%;
+  border: solid 1px #ccc;
+  border-radius: 25px;
+  background-color: #ddd;
+  height: 35px;
+  padding-left: 10px;
+}
+.comment:focus {
+  outline: none;
+}
+.send-cmt {
+  position: relative;
+  margin-left: 95%;
+  top: -28px;
+  cursor: pointer;
 }
 </style>

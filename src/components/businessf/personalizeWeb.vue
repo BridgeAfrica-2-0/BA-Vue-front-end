@@ -1,9 +1,8 @@
 <template>
   <div>
     <b-card class="mt-4" header-tag="header" footer-tag="footer">
-      <template #header>
-        <h6 class="mb-0 d-inline-block"><b>Your personalized website</b></h6>
-      </template>
+      <h6 class="mb-2 "><b>Your personalized website</b></h6>
+
       <fas-icon class="view" :icon="['fas', 'eye']" />
       <b-img
         src="https://business.bridgeafrica.info/assets/img/portfolio/portfoliu2.png"
@@ -28,7 +27,7 @@ p {
 }
 .view {
   position: relative;
-  top: -60px;
+  top: -30px;
   left: 270px;
   cursor: pointer;
 }

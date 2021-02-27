@@ -1,9 +1,9 @@
 <template>
   <div>
     <b-card title="" header-tag="header" footer-tag="footer">
-      <template #header>
-        <h6 class="mb-0">Intro</h6>
-      </template>
+     
+        <h6 class="mb-2"><b>Intro</b></h6>
+  
       <b-card-text>
         <p>
           <b-icon icon="briefcase-fill" variant="primary"></b-icon> Work at:

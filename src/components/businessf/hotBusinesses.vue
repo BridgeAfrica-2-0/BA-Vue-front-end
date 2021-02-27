@@ -2,7 +2,7 @@
   <div class="hot mt-2 p-2">
     <b-row>
       <b-col>
-        <h6>Hot Businesses</h6>
+        <p><b>Hot Businesses</b></p>
       </b-col>
       <b-col class="col-2">
         <fas-icon :icon="['fas', 'angle-left']" />

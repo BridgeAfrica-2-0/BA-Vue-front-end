@@ -34,7 +34,7 @@ export default {};
   background-color: #ffd200;
 }
 .nav-link {
-  color: #e75c18;
+  color: #000;
 }
 li .nav-link:hover{
   background-color: #e75c18;
@@ -60,6 +60,10 @@ li .nav-link:hover{
 }
 .purple-bg {
   background-color: #6263;
+}
+.card-header{
+  border: none;
+  background-color: red;
 }
 #nav {
   padding: 30px;

@@ -1,9 +1,6 @@
 <template>
   <div>
     <b-card class="mt-4" header-tag="header" footer-tag="footer">
-      <template #header>
-        <h6 class="mb-0 d-inline-block">Invite</h6>
-      </template>
       <p><b>Invite your followers to follow this business</b></p>
       <input class="form-control mb-2" placeholder="Search ..." type="text" />
       <fas-icon class="primary search" :icon="['fas', 'search']" />

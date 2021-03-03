@@ -19,6 +19,7 @@ import webSiteCreate from "@/views/webSiteCreate";
 import webSiteCreateTwo from "@/views/webSiteCreateTwo";
 import paidPlan from "@/views/paidPlan";
 import confirmPayment from "@/views/confirmPayment";
+import networks from "@/views/networks";
 
 Vue.use(VueRouter);
 
@@ -67,6 +68,11 @@ const routes = [
     path: "/business_owner/create_website_confirm_payment",
     name: "confirmPayment",
     component: confirmPayment
+  },
+  {
+    path: "/business_owner/network",
+    name: "networks",
+    component: networks
   },
   {
     path: "/login",

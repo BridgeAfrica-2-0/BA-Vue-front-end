@@ -18,7 +18,7 @@
 import Intro from "../intro";
 import Invite from "../invite";
 import HotBusiness from "../hotBusinesses";
-import Post from "../ownerPost";
+import Post from "../../post";
 import Personalize from "../personalizeWeb";
 export default {
   name: "posts",

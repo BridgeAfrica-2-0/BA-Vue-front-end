@@ -102,7 +102,7 @@ export default {
 .reset {
   background-color: #bbb;
   border: none;
-  color: black;
+  color: white;
 }
 .apply {
   border: none;

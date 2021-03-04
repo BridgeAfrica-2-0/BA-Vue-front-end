@@ -2,38 +2,43 @@
   <div>
     <div class="images">
       <div>
-       <img
-        src="@/assets/img/banner.jpg"
-        class="img-fluid header-pic"
-      />
+        <img src="@/assets/img/banner.jpg" class="img-fluid header-pic" />
       </div>
-   
     </div>
     <div class="photo-btns">
       <b-button class="see" size="sm">See All</b-button>
     </div>
     <b-row class="mt-4">
-      <b-col cols="8">
+      <b-col cols="6">
         <div>
           <b-avatar
-              src="https://placekitten.com/400/300"
-              class="owner-profile-image-profile float-left"
-              badge-variant="primary"
-              badge-offset="10px"
-              size="80"
+            src="https://placekitten.com/400/300"
+            class="owner-profile-image-profile float-left"
+            badge-variant="primary"
+            badge-offset="10px"
+            size="80"
           >
           </b-avatar>
         </div>
-        <div class="d-inline-block mt-4 ml-4 float-left">
+        <div class="d-inline-block ml-4 float-left">
           <h5 class="font-weight-bolder">User Name</h5>
-          <p>@User Name Alias</p>
+          <p>
+            website <br />
+            1.5k Community
+          </p>
         </div>
       </b-col>
-      <b-col cols="4">
+      <b-col cols="6">
         <p class="float-right">
-          <b-button class="mr-1" variant="success">Promote</b-button>
-          <b-button class="mr-1" variant="warning">Contact</b-button>
-          <b-button variant="primary">Community</b-button>
+          <b-button class="mr-1" variant="success">
+            <b-icon icon="house-fill" variant="white"></b-icon>
+            Get Direction</b-button
+          >
+          <b-button class="mr-1" variant="warning">
+            <b-icon icon="chat" variant="white"></b-icon>
+            Message</b-button
+          >
+          <b-button variant="primary">+ Community</b-button>
         </p>
       </b-col>
     </b-row>
@@ -72,13 +77,13 @@ export default {
     Media,
     MarketPlace,
     Community,
-    Networks
+    Networks,
   },
   data() {
     return {};
   },
   computed: {},
-  methods: {}
+  methods: {},
 };
 </script>
 
@@ -87,7 +92,7 @@ export default {
   display: flex;
   width: 100%;
 }
-.see{
+.see {
   margin-left: 120px;
   background-color: #fff;
   color: black;

@@ -6,16 +6,14 @@
           <b-row class="d-inline-block">
             <b-col cols="12">
               <b-row>
-                <b-col class="col-4">
-                  <b-avatar variant="primary" text="BV"></b-avatar>
-                </b-col>
                 <b-col>
-                  <span><b-link class="mt-2">J. Circlehead</b-link></span>
+                  <b-avatar variant="primary" text="BV" size="80"></b-avatar>
+                  <span><b-link class="mt-2 name">J. Circlehead</b-link></span>
                 </b-col>
               </b-row>
               <b-row>
                 <b-col cols="12">
-                  <p class="">
+                  <p class="detail">
                     Cameroon,
                     <span class="desktop"
                       ><b-icon icon="house" class="primary"></b-icon> 2,
@@ -37,7 +35,10 @@
             >
           </b-col>
           <b-col>
-            <b-button variant="outline-primary" size="sm">Message</b-button>
+            <b-button variant="outline-primary" size="sm">
+              <b-icon icon="chat-fill"></b-icon>
+              Message</b-button
+            >
           </b-col>
         </b-row>
       </b-col>
@@ -50,5 +51,14 @@ export default {};
 </script>
 
 <style scoped>
-
+.detail {
+  position: relative;
+  left: 92px;
+  top: -30px;
+}
+.name {
+  position: relative;
+  top: -10px;
+  left: 10px;
+}
 </style>

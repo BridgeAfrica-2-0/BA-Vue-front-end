@@ -4,19 +4,18 @@
       <b-row class="mt-3">
         <b-col cols="12">
           <b-row>
-            <b-col cols="1" class="m-0 p-0">
+            <b-col class="name-time">
               <b-avatar
                 class="d-inline-block"
                 variant="info"
                 src="https://placekitten.com/300/300"
                 size="4rem"
               ></b-avatar>
-            </b-col>
-            <b-col cols="11" class="pt-2">
-              <h5 class="m-0 font-weight-bolder">
+              <span class="ml-2 font-weight-bolder name">
                 John Doe
-              </h5>
-              <p>1h Ago</p>
+              </span>
+              <br />
+              <span class="time">1h Ago</span>
             </b-col>
           </b-row>
           <b-row>
@@ -68,7 +67,10 @@
             <b-col cols="11">
               <input placeholder="Post a Comment" class="comment" type="text" />
 
-              <fas-icon class="primary send-cmt" :icon="['fas', 'paper-plane']" />
+              <fas-icon
+                class="primary send-cmt"
+                :icon="['fas', 'paper-plane']"
+              />
             </b-col>
           </b-row>
           <Comment />
@@ -122,4 +124,11 @@ p {
   top: -28px;
   cursor: pointer;
 }
+
+.time {
+  position: relative;
+  margin-left: 80px;
+  top: -20px;
+}
+
 </style>

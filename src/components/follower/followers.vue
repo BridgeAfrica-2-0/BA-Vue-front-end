@@ -27,4 +27,8 @@
 export default {};
 </script>
 
-<style></style>
+<style scoped>
+.item{
+  border: none;
+}
+</style>

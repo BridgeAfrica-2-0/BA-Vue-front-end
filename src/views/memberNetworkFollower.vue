@@ -22,10 +22,10 @@
             </strong>
             <div class="mt-2">
               <p>
-                <fas-icon :icon="['fas', 'briefcase']" /> Business Name Here
+                <fas-icon class="icon-color" :icon="['fas', 'briefcase']" /> Business Name Here
               </p>
-              <p><fas-icon :icon="['fas', 'globe']" /> Private</p>
-              <p><fas-icon :icon="['fas', 'users']" /> 3.5k Members</p>
+              <p><fas-icon class="icon-color" :icon="['fas', 'globe']" /> Private</p>
+              <p><fas-icon class="icon-color" :icon="['fas', 'users']" /> 3.5k Members</p>
               <h5><b>About</b></h5>
               <p>
                 Lorem ipsum dolor sit amet consectetur, adipisicing elit. Velit
@@ -99,5 +99,9 @@ export default {
 }
 h3 {
   text-align: center;
+}
+
+.icon-color{
+  color: #e75c18;
 }
 </style>

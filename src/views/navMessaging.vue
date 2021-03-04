@@ -16,7 +16,7 @@
                     ></b-avatar>
                   </b-col>
                   <b-col>
-                    <h1>Messages</h1>
+                    <h4>Messages</h4>
                   </b-col>
                   <b-col>
                     <b-icon
@@ -50,7 +50,7 @@
                       ></b-avatar>
                     </b-col>
                     <b-col>
-                      <h4>{{ message.name }}</h4>
+                      <h6>{{ message.name }}</h6>
                       <p class="txt">{{ message.startMessage }}</p>
                     </b-col>
                     <b-col class="col-3">
@@ -69,14 +69,13 @@
                   <b-avatar variant="primary" text="BV" size="6rem"></b-avatar>
                 </b-col>
                 <b-col>
-                  <h1>Messages</h1>
+                  <h3 class="mt-4">Messages</h3>
                 </b-col>
                 <b-col>
                   <b-icon
                     @click="newMessage(true)"
                     class="new-message primary"
                     icon="pencil-fill"
-      
                   ></b-icon>
                 </b-col>
               </b-row>
@@ -98,7 +97,7 @@
                     <b-avatar variant="primary" text="BV" size="60"></b-avatar>
                   </b-col>
                   <b-col>
-                    <h4>{{ message.name }}</h4>
+                    <h6>{{ message.name }}</h6>
                     <p class="txt">{{ message.startMessage }}</p>
                   </b-col>
                   <b-col class="col-3">
@@ -123,13 +122,13 @@
                   <b-avatar variant="primary" text="BV" size="30"></b-avatar>
                 </b-col>
                 <b-col class="detale">
-                  <h5>Louis Litt</h5>
+                  <h6>Louis Litt</h6>
                   <small>Online</small>
                 </b-col>
                 <b-col>
                   <b-row class="mt-3">
                     <b-col class="col-3">
-                      <b-icon icon="search" class="primary"></b-icon>
+                      <b-icon icon="search" class="primary" size="20"></b-icon>
                     </b-col>
                     <b-col class="col-3">
                       <b-icon icon="telephone-fill" class="primary"></b-icon>
@@ -139,7 +138,6 @@
                         @click="showInfo(true)"
                         icon="info-circle"
                         class="primary"
-            
                       ></b-icon>
                     </b-col>
                   </b-row>
@@ -150,7 +148,7 @@
                   <b-avatar variant="primary" text="BV" size="60"></b-avatar>
                 </b-col>
                 <b-col class="detail">
-                  <h4>Louis Litt</h4>
+                  <h5>Louis Litt</h5>
                   <p>Online</p>
                 </b-col>
                 <b-col class="col-4">
@@ -159,14 +157,13 @@
                       <b-icon
                         class="msg-icon primary"
                         icon="search"
- 
+                        size="10"
                       ></b-icon>
                     </b-col>
                     <b-col class="col-3">
                       <b-icon
                         class="msg-icon primary"
                         icon="telephone-fill"
-    
                       ></b-icon>
                     </b-col>
                     <b-col>
@@ -174,7 +171,6 @@
                         @click="showInfo(true)"
                         class="msg-icon primary"
                         icon="info-circle"
-        
                       ></b-icon>
                     </b-col>
                   </b-row>
@@ -188,11 +184,11 @@
                   <b-row class="p-4">
                     <b-avatar variant="primary" text="BV"></b-avatar>
                     <b-col>
-                      <h5>
+                      <p>
                         <span class="name"> {{ chat.name }} </span>,
                         {{ chat.timeStamp }}
-                      </h5>
-                      <p class="msg-text">
+                      </p>
+                      <p class="msg-text mt-0">
                         {{ chat.message }}
                       </p>
                     </b-col>
@@ -201,10 +197,10 @@
                 <div v-if="chat.type == 'sent'">
                   <b-row class="p-4">
                     <b-col>
-                      <h5 class="sent-name">
+                      <p class="sent-name">
                         <span class="name">{{ chat.name }}</span
                         >, {{ chat.timeStamp }}
-                      </h5>
+                      </p>
                       <p id="sent" class="msg-text-sent">
                         {{ chat.message }}
                       </p>
@@ -214,7 +210,7 @@
                 </div>
               </div>
             </section>
-            <div  class="bottom">
+            <div class="bottom">
               <b-row v-if="!checked">
                 <b-col class="col-2 user">
                   <b-avatar variant="primary" text="BV" size="60"></b-avatar>
@@ -251,15 +247,18 @@
                   </b-row>
                 </b-col>
               </b-row>
-              <p v-if="checked" class="ml-5">You have blocked messages and calls from this user. <b-link @click="showInfo(true)">Unblock Now</b-link></p>
+              <p v-if="checked" class="ml-5">
+                You have blocked messages and calls from this user.
+                <b-link @click="showInfo(true)">Unblock Now</b-link>
+              </p>
             </div>
           </b-col>
           <b-col v-if="info">
             <div class="info-nav">
-              <b-button class="primary-bg" @click="showInfo(false)"
-                >Back</b-button
-              >
-              <span class=""> Contact Info</span>
+              <b-button class="primary-bg" @click="showInfo(false)">
+               <fas-icon :icon="['fas', 'arrow-left']" />
+              </b-button>
+              <span class="cnt-info"> Contact Info</span>
             </div>
             <div class="info-bottom">
               <b-avatar
@@ -296,7 +295,14 @@
               </ul>
             </div>
             <div class="info-media">
-              Media
+             <b-row>
+               <b-col>
+                  Media
+               </b-col>
+               <b-col cols="3">
+                 <b-link>See All</b-link>
+               </b-col>
+             </b-row>
               <div class="media">
                 <img
                   src="../assets/img/about1.jpg"
@@ -363,23 +369,18 @@
                   <b-col class="col-2">
                     <b-row class="p-2 icons">
                       <b-col class="col-2">
-                        <b-icon
-                          class="msg-icon primary"
-                          icon="smiley"
-                        ></b-icon>
+                        <b-icon class="msg-icon primary" icon="smiley"></b-icon>
                       </b-col>
                       <b-col class="col-3">
                         <b-icon
                           class="msg-icon primary"
                           icon="paperclip"
-     
                         ></b-icon>
                       </b-col>
                       <b-col class="col-2">
                         <b-icon
                           class="msg-icon primary"
                           icon="cursor-fill"
-                        
                         ></b-icon>
                       </b-col>
                     </b-row>
@@ -544,7 +545,7 @@ export default {
       var today = new Date();
       var h = today.getHours();
       var m = today.getMinutes();
-      this.message.timeStamp = h + ":" + m
+      this.message.timeStamp = h + ":" + m;
       this.message.message = this.text;
       this.chats.push(this.message);
       this.text = "";
@@ -557,7 +558,8 @@ export default {
 .right {
   padding: 10px;
 }
-.primary-bg, .primary-bg:hover{
+.primary-bg,
+.primary-bg:hover {
   background-color: #e75c18;
   border: none;
 }
@@ -617,7 +619,7 @@ h1 {
   margin-top: 5px;
 }
 .msg-icon {
-  font-size: 30px;
+  font-size: 20px;
   cursor: pointer;
 }
 
@@ -631,6 +633,7 @@ h1 {
   color: #fff;
   background-color: #e75d29;
   padding: 10px;
+  font-size: 12px;
 }
 .msg-text-sent {
   position: relative;
@@ -638,6 +641,7 @@ h1 {
   border-radius: 25px;
   background-color: #fff;
   padding: 10px;
+  font-size: 12px;
 }
 .name {
   font-weight: bold;
@@ -669,11 +673,14 @@ h1 {
 .info-nav {
   position: relative;
   min-height: 70px;
-  background-color: rgb(232, 232, 232);
   width: 550px;
   padding: 10px;
 }
-
+.cnt-info {
+  margin-left: 130px;
+  font-weight: bold;
+  font-size: 20px;
+}
 .info-bottom {
   padding: 20px;
   border-bottom: 1px solid #ccc;
@@ -722,10 +729,10 @@ li {
     margin-left: 100px;
   }
   .sent-name {
-    margin-left: 100px;
+    margin-left: 10px;
   }
   h5 {
-    font-size: 15px;
+    font-size: 10px;
   }
   .user {
     display: none;

@@ -2,14 +2,7 @@
   <div>
     <navbar />
     <b-container fluid="md" class="text-justify mt-3">
-      <div>
-        <b-tabs content-class="mt-3">
-          <b-tab title="Business" active><Business /></b-tab>
-          <b-tab title="Inbox"><p>I'm the second tab</p></b-tab>
-          <b-tab title="Notification"><p>I'm a disabled tab!</p></b-tab>
-          <b-tab title="Insights"><p>I'm a disabled tab!</p></b-tab>
-        </b-tabs>
-      </div>
+      <Business />
     </b-container>
     <Footer />
   </div>
@@ -24,13 +17,13 @@ export default {
   components: {
     navbar,
     Business,
-    Footer
+    Footer,
   },
   data() {
     return {};
   },
   computed: {},
-  methods: {}
+  methods: {},
 };
 </script>
 

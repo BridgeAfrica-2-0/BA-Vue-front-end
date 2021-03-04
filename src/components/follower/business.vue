@@ -18,7 +18,8 @@
       </div>
       <div class="col">
         <span class="btns">
-          <b-button class="primary-bg">Contact</b-button>
+          <b-button class="primary-bg"><b-icon icon="chat-fill" class="avatar-header-icon"></b-icon
+          > Message</b-button>
 
           <b-button class="ml-3 community">
             <b-icon icon="plus"></b-icon>

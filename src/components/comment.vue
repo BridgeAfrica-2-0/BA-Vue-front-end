@@ -1,14 +1,12 @@
 <template>
   <div>
     <b-row class="mt-2">
-      <b-col cols="1">
-        <b-avatar
+      <b-col>
+          <b-avatar
           variant="info"
           src="https://placekitten.com/300/300"
           size="2rem"
         ></b-avatar>
-      </b-col>
-      <b-col cols="11">
         <span class="float-right">
           <b-dropdown size="sm" variant="outline">
             <template class="more" #button-content>
@@ -18,7 +16,7 @@
             <b-dropdown-item>Second Action</b-dropdown-item>
           </b-dropdown>
         </span>
-        <p>
+        <p class="msg">
           Lorem ipsum dolor sit, amet consectetur adipisicing elit. Est qui a,
           consectetur explicabo atque totam ea facilis perferendis libero ab
           officiis sint culpa cum similique adipisci doloremque recusandae,
@@ -67,11 +65,13 @@ export default {
 </script>
 
 <style scoped>
-p {
+.msg{
   background-color: #ddd;
   padding: 20px;
   border-radius: 25px;
   border: solid 1px #ccc;
+  margin-left: 40px;
+  margin-top: -40px;
 }
 .reply {
   cursor: pointer;

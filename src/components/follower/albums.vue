@@ -16,9 +16,12 @@
     <div v-if="pictureShow">
       <b-button @click="back" variant="primary">Back</b-button>
 
-      <div class="album-name">Album Name</div>
+      <div class="album-detail">
+        <div class="album-name"><b>Album Name</b></div>
+        <span> {{ images.length }} Pictures </span>
+      </div>
       <div class="albums">
-        <div v-for="item in images" :key="item.id" class="p-4">
+        <div v-for="item in images" :key="item.id" class="p-4 image">
           <span class="sp">
             <b-img
               @click="modalShow = !modalShow"
@@ -27,7 +30,6 @@
               fluid
               class="pic"
             ></b-img>
-
           </span>
         </div>
         <b-modal hide-footer v-model="modalShow">
@@ -55,19 +57,19 @@ export default {
           image: "https://picsum.photos/300/150/?image=41",
           title: "Title 2",
           text:
-            " Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum quam, doloribus id sit consequuntur tempora molestiae blanditiis."
-        }
+            " Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum quam, doloribus id sit consequuntur tempora molestiae blanditiis.",
+        },
       ],
       images: [
         {
           id: 1,
-          image: "https://picsum.photos/300/150/?image=41"
+          image: "https://picsum.photos/300/150/?image=41",
         },
         {
           id: 2,
-          image: "https://picsum.photos/300/150/?image=41"
-        }
-      ]
+          image: "https://picsum.photos/300/150/?image=41",
+        },
+      ],
     };
   },
   methods: {
@@ -81,8 +83,8 @@ export default {
     },
     showModal() {
       this.$refs["modal-1"].show();
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -111,13 +113,19 @@ export default {
   position: relative;
   top: 80px;
 }
-
+.album-detail{
+  text-align: center;
+}
 .album-name {
   color: #e75d29;
-  margin-left: 400px;
+  margin-top: -30px;
 }
-.albums{
+.albums {
   display: flex;
   flex-wrap: wrap;
+}
+
+.image{
+  cursor: pointer;
 }
 </style>

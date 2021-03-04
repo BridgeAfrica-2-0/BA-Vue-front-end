@@ -2,7 +2,7 @@
   <div>
     <b-row>
       <div v-if="albumShow" class="albums ml-4">
-        <b-col cols="4">
+        <b-col cols="6">
           <div class="create" @click="createAlbum">
             <div class="text">
               <b-icon icon="plus"></b-icon>
@@ -10,7 +10,7 @@
             </div>
           </div>
         </b-col>
-        <b-col cols="4" class="my-auto" v-for="post in albums" :key="post.id">
+        <b-col cols="6" class="my-auto" v-for="post in albums" :key="post.id">
           <b-img
             @click="openAlbum(post.id)"
             class="image-album"
@@ -57,7 +57,7 @@
             <h3>Picture Title</h3>
           </b-modal>
         </div>
-        <b-col md="4" class="mt-2">
+        <b-col md="6" class="mt-2">
           <div class="create sec" @click="chooseFile">
             <input id="default-btn" type="file" @change="onFileChange" />
             <div class="text">
@@ -66,7 +66,7 @@
             </div>
           </div>
         </b-col>
-        <b-col md="4" v-if="image" class="album mt-2">
+        <b-col md="6" v-if="image" class="album mt-2">
           <b-img @click="view" :src="image" class="image-album"></b-img>
         </b-col>
         <b-col
@@ -91,6 +91,7 @@
 
 <script>
 export default {
+  name: 'albumsPosts',
   data() {
     return {
       albumShow: true,
@@ -275,7 +276,7 @@ export default {
       @return void
       */
     chooseFile() {
-      let defaultBtn = document.getElementById("default-btn");
+      var defaultBtn = document.getElementById("default-btn");
       defaultBtn.click();
     },
     /**
@@ -292,8 +293,9 @@ export default {
      * @param file
      */
     createImage(file) {
-      let reader = new FileReader();
-      let vm = this;
+      // const image = new Image();
+      var reader = new FileReader();
+      var vm = this;
 
       reader.onload = e => {
         vm.image = e.target.result;
@@ -331,6 +333,7 @@ export default {
 
 .create {
   position: relative;
+   height: 85%;
   color: #fff;
   background-color: #bbb;
   padding: 20px;
@@ -348,16 +351,18 @@ export default {
 }
 
 .text {
-  margin-top: 15%;
+  margin-top: 35%;
 }
 
 .album {
+  /*width: inherit;*/
+  /*height: auto;*/
   cursor: pointer;
 }
 .options {
   position: relative;
-  top: -187px;
-  left: 174px;
+  top: -323px;
+  left: 202px;
 }
 .image-album {
   width: inherit;

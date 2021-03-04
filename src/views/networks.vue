@@ -99,7 +99,7 @@
                 <h5 class="float-left">Admin tools</h5>
               </template>
               <b-card-text>
-                <p class="p-0 m-0">
+                <p class="p-0 m-0 nav-text" v-on:click="currentTabComponent = 'MemberShip'">
                   <span class="float-left">
                   <b-icon-person-plus></b-icon-person-plus> Membership Request
                   </span>
@@ -109,25 +109,25 @@
                 </p>
                 <br>
                 <br>
-                <p class="text-primary font-weight-bolder">
+                <p class="text-primary font-weight-bolder nav-text" v-on:click="currentTabComponent = 'PendingPost'">
                   <span class="float-left">
                   <b-icon-chat-fill></b-icon-chat-fill> Pending Posts
                   </span>
                 </p>
                 <br>
-                <p class="">
+                <p class="nav-text" v-on:click="currentTabComponent = 'PendingFeedback'">
                   <span class="float-left">
                   <b-icon-star-fill></b-icon-star-fill> Pending Feedbacks
                   </span>
                 </p>
                 <br>
-                <p class="">
+                <p class="nav-text" v-on:click="currentTabComponent = 'KeywordAlert'">
                   <span class="float-left">
                   <b-icon-bell-fill></b-icon-bell-fill> Keywords Alerts
                   </span>
                 </p>
                 <br>
-                <p class="">
+                <p class="nav-text">
                   <span class="float-left">
                   <b-icon-gear-fill></b-icon-gear-fill> Settings
                   </span>
@@ -140,20 +140,7 @@
       <b-col md="8" class="order-sm-0">
         <b-row>
           <b-col cols="12">
-            <b-tabs content-class="mt-1" fill pills>
-              <b-tab title="Posts" active>
-                <post-network></post-network>
-              </b-tab>
-              <b-tab title="Media">
-                <media-network></media-network>
-              </b-tab>
-              <b-tab title="Members">
-                <member-network></member-network>
-              </b-tab>
-              <b-tab title="Feedback">
-                <feedback-network></feedback-network>
-              </b-tab>
-            </b-tabs>
+            <component v-bind:is="currentTabComponent"></component>
           </b-col>
         </b-row>
       </b-col>
@@ -166,21 +153,29 @@
 <script>
 import navbar from "@/components/navbar";
 import Footer from "@/components/footer";
-import FeedbackNetwork from "@/components/businessf/tabs/owner/networks/feedbackNetwork";
-import MediaNetwork from "@/components/businessf/tabs/owner/networks/mediaNetwork";
-import MemberNetwork from "@/components/businessf/tabs/owner/networks/memberNetwork";
-import PostNetwork from "@/components/businessf/tabs/owner/networks/postNetwork";
+import Default from "@/components/businessf/tabs/owner/networks/defaultNetworks";
+import MemberShip from "@/components/businessf/tabs/owner/networks/memberShip";
+import KeywordAlert from "@/components/businessf/tabs/owner/networks/keywordAlert";
+import PendingFeedback from "@/components/businessf/tabs/owner/networks/pendingFeedback";
+import PendingPost from "@/components/businessf/tabs/owner/networks/pendingPost";
 
 export default {
 name: "networks",
   components: {
-    PostNetwork,
-    MemberNetwork,
-    MediaNetwork,
-    FeedbackNetwork,
+    PendingPost,
+    PendingFeedback,
+    KeywordAlert,
+    MemberShip,
+    Default,
     navbar,
     Footer
   },
+  data(){
+    return {
+      currentTabComponent: 'Default'
+    };
+  }
+
 }
 </script>
 
@@ -211,6 +206,10 @@ name: "networks",
   background: #ce4b0b;
   border-radius: 24px;
   color: white;
+}
+
+.nav-text {
+  cursor: pointer;
 }
 
 </style>

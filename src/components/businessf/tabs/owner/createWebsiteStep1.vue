@@ -180,7 +180,7 @@ export default {
   },
   computed: {
     filteredItems: function() {
-      var filter = this.currentTag;
+      let filter = this.currentTag;
       return this.items.filter(function(item) {
         return item.tags.indexOf(filter) !== -1;
       });
@@ -223,10 +223,7 @@ export default {
 .list-complete-item {
   transition: transform 1s;
   flex: 1 1 25%;
-  /*height: 200px;*/
   padding: 10px;
-  /*   display: inline-block;
-    margin-right: 10px; */
 }
 .list-complete-img {
   object-fit: cover;
@@ -234,7 +231,7 @@ export default {
   width: 100%;
 }
 .list-complete-enter, .list-complete-leave-to
-  /* .list-complete-leave-active for <2.1.8 */ {
+ {
   opacity: 0;
   transform: translateY(30px);
 }

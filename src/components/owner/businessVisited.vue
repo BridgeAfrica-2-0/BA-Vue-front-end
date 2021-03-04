@@ -4,9 +4,7 @@
     <hr />
     <div class="row">
       <div class="col">
-        <b-list-group-item
-          class="d-flex align-items-center mb-4 border-0"
-        >
+        <b-list-group-item class="d-flex align-items-center mb-4 border-0">
           <b-avatar class="mr-3"></b-avatar>
           <div class="datails">
             <div class="row">
@@ -60,11 +58,7 @@
                 </div>
               </div>
             </div>
-            <b-button
-              class="ml-2 mt-2"
-              style="position:relative;"
-              type="submit"
-              variant="primary"
+            <b-button class="ml-2 mt-2 add-btn" type="submit" variant="primary"
               >Add</b-button
             >
           </b-form>
@@ -79,14 +73,14 @@ export default {
   data() {
     return {
       selected: null,
-      business: '',
+      business: "",
       options: [
         { value: null, text: "Select" },
         { value: "private", text: "Private" },
-        { value: "public", text: "Public" }
-      ]
+        { value: "public", text: "Public" },
+      ],
     };
-  }
+  },
 };
 </script>
 
@@ -97,9 +91,11 @@ export default {
 
 .dropdown-style {
   position: relative;
-  left:320px;
+  left: 320px;
 }
-
+.add-btn {
+  position: relative;
+}
 @media only screen and (max-width: 600px) {
 }
 </style>

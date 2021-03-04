@@ -38,11 +38,7 @@
                 ></b-form-select>
               </div>
             </div>
-            <b-button
-              class="ml-2 mt-2"
-              style="position:relative; left: 400px"
-              type="submit"
-              variant="primary"
+            <b-button class="ml-2 mt-2 add-btn" type="submit" variant="primary"
               >Add</b-button
             >
           </b-form>
@@ -110,22 +106,26 @@ export default {
       options: [
         { value: null, text: "Select" },
         { value: "private", text: "Private" },
-        { value: "public", text: "Public" }
+        { value: "public", text: "Public" },
       ],
       genders: [
         { value: null, text: "Select" },
         { value: "Male", text: "Male" },
-        { value: "Female", text: "Female" }
-      ]
+        { value: "Female", text: "Female" },
+      ],
     };
   },
-  methods: {}
+  methods: {},
 };
 </script>
 
 <style scoped>
 .details {
   display: flex;
+}
+.add-btn {
+  position: relative;
+  left: 400px;
 }
 @media only screen and (max-width: 768px) {
 }

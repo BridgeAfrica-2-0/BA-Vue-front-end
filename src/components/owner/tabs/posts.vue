@@ -284,8 +284,8 @@
                 <b-col cols="9" md="11" class="p-0 m-0 pr-3">
                   <b-input-group class="my-auto w-100 rounded">
                     <template #append>
-                      <b-input-group-text class=""
-                        ><strong style="color: #E75C18">
+                      <b-input-group-text>
+                        ><strong class="clr">
                           <b-icon-cursor-fill></b-icon-cursor-fill> </strong
                       ></b-input-group-text>
                     </template>
@@ -402,7 +402,7 @@
                   <b-input-group class="my-auto w-100 rounded">
                     <template #append>
                       <b-input-group-text class=""
-                        ><strong style="color: #E75C18">
+                        ><strong class="clr">
                           <b-icon-cursor-fill></b-icon-cursor-fill> </strong
                       ></b-input-group-text>
                     </template>
@@ -466,7 +466,11 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+
+.clr{
+  color: #E75C18;
+}
 @media (max-width: 576px) {
   .lb-grid {
     height: 200px;

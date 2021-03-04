@@ -173,7 +173,7 @@
                 ></b-form-select>
               </div>
             </b-col>
-              <b-col class=" mt-2">
+            <b-col class=" mt-2">
               <small> Stock:</small>
             </b-col>
             <b-col>
@@ -187,7 +187,7 @@
                 ></b-form-select>
               </div>
             </b-col>
-             <b-col class=" mt-2">
+            <b-col class=" mt-2">
               <small> Condition:</small>
             </b-col>
             <b-col>
@@ -201,7 +201,7 @@
                 ></b-form-select>
               </div>
             </b-col>
-             <b-col class=" mt-2">
+            <b-col class=" mt-2">
               <small> Business:</small>
             </b-col>
             <b-col>
@@ -261,7 +261,7 @@
               width="400"
               height="500"
               frameborder="0"
-              style="border:0;"
+              class="frame"
               allowfullscreen=""
               aria-hidden="false"
               tabindex="0"
@@ -321,7 +321,7 @@
               width="400"
               height="500"
               frameborder="0"
-              style="border:0;"
+              class="frame"
               allowfullscreen=""
               aria-hidden="false"
               tabindex="0"
@@ -377,7 +377,7 @@
               width="400"
               height="500"
               frameborder="0"
-              style="border:0;"
+              class="frame"
               allowfullscreen=""
               aria-hidden="false"
               tabindex="0"
@@ -507,5 +507,9 @@ export default {
 .control-size {
   width: 90%;
   margin-left: 20px;
+}
+
+.frame {
+  border: 0;
 }
 </style>

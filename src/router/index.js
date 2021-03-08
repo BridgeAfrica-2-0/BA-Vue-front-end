@@ -20,6 +20,9 @@ import webSiteCreateTwo from "@/views/webSiteCreateTwo";
 import paidPlan from "@/views/paidPlan";
 import confirmPayment from "@/views/confirmPayment";
 import networks from "@/views/networks";
+import dashboard from "@/views/dashboard";
+import dashboardInfo from "@/views/dashboardInfo";
+import dashboardWelcome from "@/views/dashboardWelcome";
 
 Vue.use(VueRouter);
 
@@ -68,6 +71,21 @@ const routes = [
     path: "/business_owner/create_website_confirm_payment",
     name: "confirmPayment",
     component: confirmPayment
+  },
+  {
+    path: "/dashboard",
+    name: "dashboard",
+    component: dashboard
+  },
+  {
+    path: "/dashboard_info",
+    name: "dashboard_Info",
+    component: dashboardInfo
+  },
+  {
+    path: "/dashboard_welcome",
+    name: "dashboard_welcome",
+    component: dashboardWelcome
   },
   {
     path: "/business_owner/network",

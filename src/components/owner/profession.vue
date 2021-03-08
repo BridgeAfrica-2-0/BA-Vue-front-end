@@ -25,6 +25,7 @@
       </div>
     </b-list-group-item>
 
+
     <b-modal ref="add-contact" id="modal-11" title="Add Profession">
       <div style="width: 100px">
         <b-form-select

@@ -1,218 +1,61 @@
 <template>
-  <div>
-    <b-navbar toggleable="lg" variant="light" class="py-2 my-auto montre">
-      <b-navbar-brand href="#">
-        <img
-          src="@/assets/img/logo_bridge_africa.png"
-          class="w-50 h-50 m-0"
-          alt="Kitten"
-        />
-      </b-navbar-brand>
-
-      <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
-
-      <b-collapse id="nav-collapse" is-nav>
-        <b-navbar-nav>
-          <b-input-group class="my-auto input-size">
-            <template #append>
-              <b-input-group-text class=""
-                ><strong class="color-site">
-                  <b-icon-search></b-icon-search> </strong
-              ></b-input-group-text>
-            </template>
-            <b-form-input
-              placeholder="Search Bridge Africa"
-              class="border-right-0"
-            ></b-form-input>
-          </b-input-group>
-        </b-navbar-nav>
-
-        <!-- Right aligned nav items -->
-        <b-navbar-nav class="ml-5 pl-5 my-auto">
-          <b-nav-item href="#" class="ml-3"
-            ><b-icon-house-door-fill class="col-bg"></b-icon-house-door-fill>
-            Home
-          </b-nav-item>
-          <b-nav-item href="#" class="ml-2"
-            ><b-icon-shop class="col-bg font-weight-bolder"></b-icon-shop>
-            MarketPlace
-          </b-nav-item>
-          <b-dropdown
-            size="sm"
-            variant="link"
-            class="p-0 ml-2"
-            toggle-class="text-decoration-none"
-            no-caret
-          >
-            <template #button-content>
-              <b-icon-chat-dots-fill class="col-bg"></b-icon-chat-dots-fill>
-            </template>
-            <b-dropdown-item-button>
-              Messages
-            </b-dropdown-item-button>
-            <b-dropdown-divider></b-dropdown-divider>
-            <b-dropdown-group id="dropdown-group-1">
-              <b-dropdown-item-button
-                >First Grouped item</b-dropdown-item-button
-              >
-              <b-dropdown-item-button
-                >Second Grouped Item</b-dropdown-item-button
-              >
-            </b-dropdown-group>
-            <b-dropdown-divider></b-dropdown-divider>
-            <b-dropdown-item-button>
-              See Others Messages
-            </b-dropdown-item-button>
-          </b-dropdown>
-          <b-dropdown
-            size="sm"
-            variant="link"
-            class="p-0 ml-1"
-            toggle-class="text-decoration-none"
-            no-caret
-          >
-            <template #button-content>
-              <b-icon-bell-fill class="col-bg"></b-icon-bell-fill>
-            </template>
-            <b-dropdown-item-button>
-              Messages
-            </b-dropdown-item-button>
-            <b-dropdown-divider></b-dropdown-divider>
-            <b-dropdown-group id="dropdown-group-1">
-              <b-dropdown-item-button
-                >First Grouped item</b-dropdown-item-button
-              >
-              <b-dropdown-item-button
-                >Second Grouped Item</b-dropdown-item-button
-              >
-            </b-dropdown-group>
-            <b-dropdown-divider></b-dropdown-divider>
-            <b-dropdown-item-button>
-              See Others Messages
-            </b-dropdown-item-button>
-          </b-dropdown>
-
-          <b-nav-item-dropdown right>
-            <template #button-content class="my-auto">
-              <b-avatar
-                size="sm"
-                class="my-auto"
-                src="https://placekitten.com/300/300"
-              ></b-avatar
-              >&nbsp;
-              <em>Maxine </em>
-            </template>
-            <b-dropdown-item href="#">Profile</b-dropdown-item>
-            <b-dropdown-item href="#">Sign Out</b-dropdown-item>
-          </b-nav-item-dropdown>
-        </b-navbar-nav>
-      </b-collapse>
-    </b-navbar>
-
-    <b-row class="show">
-      <b-col cols="9">
-        <b-navbar-brand href="#">
-          <img
-            src="@/assets/img/logo_bridge_africa.png"
-            class="w-100 h-100 m-0 px-3 py-2"
-            alt="Kitten"
-          />
-        </b-navbar-brand>
-      </b-col>
-      <b-col cols="3" class="mx-auto my-auto">
-        <b-icon
-          icon="three-dots-vertical"
-          font-scale="2"
-          v-b-toggle.sidebar-right
-        ></b-icon>
-      </b-col>
-    </b-row>
-    <b-sidebar id="sidebar-right" title="Menu" right shadow>
-      <div class="px-3 py-2">
-        <b-input-group class="my-auto input-size-phone">
-          <template #append>
-            <b-input-group-text class=""
-              ><strong class="color-site">
-                <b-icon-search></b-icon-search> </strong
-            ></b-input-group-text>
-          </template>
-          <b-form-input
-            placeholder="Search Bridge Africa"
-            class="border-right-0"
-          ></b-form-input>
-        </b-input-group>
-
-        <b-nav-item href="#" class="ml-3"
-          ><b-icon-house-door-fill class="col-bg"></b-icon-house-door-fill>
-          Home
-        </b-nav-item>
-        <b-nav-item href="#" class="ml-2"
-          ><b-icon-shop class="col-bg font-weight-bolder"></b-icon-shop>
-          MarketPlace
-        </b-nav-item>
-        <b-dropdown
-          size="sm"
-          variant="link"
-          class="p-0 ml-2"
-          toggle-class="text-decoration-none"
-          no-caret
-        >
-          <template #button-content>
-            <b-icon-chat-dots-fill class="col-bg"></b-icon-chat-dots-fill>
-          </template>
-          <b-dropdown-item-button>
-            Messages
-          </b-dropdown-item-button>
-          <b-dropdown-divider></b-dropdown-divider>
-          <b-dropdown-group id="dropdown-group-1">
-            <b-dropdown-item-button>First Grouped item</b-dropdown-item-button>
-            <b-dropdown-item-button>Second Grouped Item</b-dropdown-item-button>
-          </b-dropdown-group>
-          <b-dropdown-divider></b-dropdown-divider>
-          <b-dropdown-item-button>
-            See Others Messages
-          </b-dropdown-item-button>
-        </b-dropdown>
-        <b-dropdown
-          size="sm"
-          variant="link"
-          class="p-0 ml-1"
-          toggle-class="text-decoration-none"
-          no-caret
-        >
-          <template #button-content>
-            <b-icon-bell-fill class="col-bg"></b-icon-bell-fill>
-          </template>
-          <b-dropdown-item-button>
-            Messages
-          </b-dropdown-item-button>
-          <b-dropdown-divider></b-dropdown-divider>
-          <b-dropdown-group id="dropdown-group-1">
-            <b-dropdown-item-button>First Grouped item</b-dropdown-item-button>
-            <b-dropdown-item-button>Second Grouped Item</b-dropdown-item-button>
-          </b-dropdown-group>
-          <b-dropdown-divider></b-dropdown-divider>
-          <b-dropdown-item-button>
-            See Others Messages
-          </b-dropdown-item-button>
-        </b-dropdown>
-
-        <b-nav-item-dropdown>
-          <template #button-content class="my-auto">
-            <b-avatar
-              size="sm"
-              class="my-auto"
-              src="https://placekitten.com/300/300"
-            ></b-avatar
-            >&nbsp;
-            <em>Maxine </em>
-          </template>
-          <b-dropdown-item href="#">Profile</b-dropdown-item>
-          <b-dropdown-item href="#">Sign Out</b-dropdown-item>
-        </b-nav-item-dropdown>
+  <nav class="navbar navbar-expand-lg shadow-nav p-3 mb-3 rounded">
+    <div class="container">
+      <a class="navbar-brand" href="#">
+        <img src="@/assets/img/logo3.png" alt="" class="d-inline-block align-top mt-1" loading="lazy" width="30" height="30">
+        <span class="font-weight-bold website-logo-name ml-2">BRIDGE AFRICA</span>
+      </a>
+      <div class="col-md-4">
+        <form class="form-inline input-group">
+          <input id="search-ba" type="search" data-toggle="popover" class="form-control border-right-0" placeholder="search bridge africa" aria-label="search bridge africa" data-original-title="" title="">
+          <div class="input-group-append">
+            <span class="input-group-text border-left-0 bg-white"><a class="search text-ored" href=""><fas-icon class="primary search" :icon="['fas', 'search']" /></a></span>
+          </div>
+        </form>
+        <div id="search-popover" class="d-none"></div>
       </div>
-    </b-sidebar>
-  </div>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMenu" aria-controls="navbarMenu" aria-expanded="false" aria-label="Toggle navigation">
+        <!-- <span class="navbar-toggler-icon"></span> -->
+        <fas-icon class="primary search" :icon="['fas', 'bars']" />
+      </button>
+      <div class="collapse navbar-collapse ml-4" id="navbarMenu">
+        <div class="vl"></div>
+        <div class="nav-item">
+          <a class="nav-link text-dark" href="">
+            <span class="text-ored"><fas-icon class="primary" :icon="['fas', 'home']" /></span>
+            Home
+          </a>
+        </div>
+        <div class="vl"></div>
+        <div class="nav-item">
+          <a class="nav-link text-dark" href="">
+            <span class="text-ored"><fas-icon class="primary" :icon="['fas', 'store']" /></span>
+            Market
+          </a>
+        </div>
+        <div class="vl"></div>
+        <div class="nav-item">
+          <a id="messages" class="nav-link" data-toggle="popover" role="button" data-original-title="" title=""><span class="text-ored"><fas-icon class="primary" :icon="['fas', 'comment']" /></span></a>
+        </div>
+        <div class="nav-item">
+          <a id="notif" class="nav-link" data-toggle="popover" role="button" data-original-title="" title=""><span class="text-ored"><b-icon-bell-fill class="col-bg"></b-icon-bell-fill></span></a>
+        </div>
+        <div class="vl"></div>
+        <div class="nav-item">
+          <a class="nav-link text-dark" href="">
+            <span><img src="@/assets/img/profile-pic.jpg" class="rounded-circle" alt="" width="30" height="30"></span>
+            Maxine
+          </a>
+        </div>
+        <div class="vl"></div>
+        <div class="nav-item">
+          <a id="other-menu" class="nav-link text-dark arrow-down" data-toggle="popover" role="button" data-original-title="" title="">
+            <fas-icon class="primary search" :icon="['fas', 'chevron-down']" />
+          </a>
+        </div>
+      </div>
+    </div>
+  </nav>
 </template>
 
 <script>
@@ -300,5 +143,24 @@ export default {
   .show {
     display: none;
   }
+}
+.shadow-nav {
+  box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.10) !important;
+}
+.website-logo-name {
+  font-size: 24px;
+  color: #2e2e2e;
+  margin-top: 2px;
+}
+.vl {
+  border-left: 1px solid #dee2e6;
+  height: 20px;
+}
+.text-ored {
+  color: #E75C18;
+}
+.text-dark {
+  color: #343a40 !important;
+  font-size: smaller;
 }
 </style>

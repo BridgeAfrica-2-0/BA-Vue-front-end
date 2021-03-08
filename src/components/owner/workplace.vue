@@ -8,24 +8,41 @@
     >
     <b-list-group-item
       class="d-flex align-items-center mb-4 "
-      style="border: none"
     >
-      <b-avatar class="mr-3 avatar"></b-avatar>
-      <div class="datails">
+      <div class="">
         <div class="row">
-          <div class="col">
-            <span class="mr-auto"> <b>Company</b> </span>
-            <p>Position</p>
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas
-              quibusdam harum maxime!
-            </p>
+          <div class="media border-botmediatom mt-3 mb-4">
+            <img src="@/assets/img/about3.jpg" alt="John Doe" class="mr-2" style="width:60px;">
+            <div class="media-body">
+              <h6 class="mb-0"><b>Coca Cla Pvt Ltd. Team Lead</b></h6>
+              <b>Team Lead - 7 Feb 2011</b>
+              <p class="mb-1">Job descrioption dummny textJob descrioption dummny textJob descrioption dummny text</p>
+            </div>
+            <ul class="navbar-nav pull-right">
+              <li class="nav-item dropdown">
+                <b-dropdown id="dropdown-dropup" dropdown variant="primary-outline">
+                  <b-dropdown-item href="#">Edit</b-dropdown-item>
+                  <b-dropdown-item href="#">Delete</b-dropdown-item>
+                </b-dropdown>
+              </li>
+            </ul>
           </div>
-          <div class="col-1">
-            <b-dropdown id="dropdown-dropup" dropdown variant="primary-outline">
-              <b-dropdown-item href="#">Edit</b-dropdown-item>
-              <b-dropdown-item href="#">Delete</b-dropdown-item>
-            </b-dropdown>
+
+          <div class="media mb-4">
+            <img src="@/assets/img/about1.jpg" alt="John Doe" class="mr-2" style="width:60px;">
+            <div class="media-body">
+              <h6 class="mb-0"><b>Ericson Pvt Ltd. Team Lead</b></h6>
+              <b>Team Lead - 7 Feb 2011</b>
+              <p class="mb-1">Job descrioption dummny textJob descrioption dummny textJob descrioption dummny text</p>
+            </div>
+            <ul class="navbar-nav pull-right">
+              <li class="nav-item dropdown">
+                <b-dropdown id="dropdown-dropup" dropdown variant="primary-outline">
+                  <b-dropdown-item href="#">Edit</b-dropdown-item>
+                  <b-dropdown-item href="#">Delete</b-dropdown-item>
+                </b-dropdown>
+              </li>
+            </ul>
           </div>
         </div>
       </div>

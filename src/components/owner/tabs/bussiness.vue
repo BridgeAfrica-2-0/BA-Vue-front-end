@@ -1,95 +1,82 @@
 <template>
   <div class="p-0 m-0">
-    <b-card
-      header-bg-variant="primary"
-      header-tag="header"
-      footer-tag="footer"
-      class="m-0 p-0"
-    >
-      <template #header>
-        <h6 class="mb-0"><b-icon icon="people-fill"></b-icon> Bussiness</h6>
-      </template>
-      <b-row>
-        <b-col sm="12" md="12" v-for="i in 12" :key="i" class="mb-2">
-          <b-card no-body class="overflow-hidden">
-            <b-row no-gutters>
-              <b-col md="3" class="my-auto">
-                <img
-                  src="@/assets/img/photo1.jpg"
-                  alt="Image"
-                  class="rounded-0 img-fluid"
-                />
-              </b-col>
-              <b-col md="9">
-                <b-row>
-                  <b-col md="6" class="ml-md-3">
-                    <b-card-body class="m-0">
-                      <h4 class="text-sm-center text-md-left">
-                        Business Name Here1
-                      </h4>
-                      <p class="m-1">
-                        <a
-                          href="mywebsitebridegeafrica.com"
-                          class="text-primary"
-                          >mywebsitebridegeafrica.com</a
-                        >
-                      </p>
+    <div class="col-md-12 ">
 
-                      <p class="m-1">Business Category</p>
+      <div class="row mb-4">
+        <div class="col">
+          <h6 class="mb-0"><b></b></h6>
+          <hr>
+          <div id="btnContainer">
+            <button class="btn primary" onclick="listView()"> <fas-icon
+                class="primary float-left mr-1 mt-1"
+                :icon="['fas', 'list']"
+            /> List</button>
+            <button class="btn activegrid" onclick="gridView()"><fas-icon
+                class="primary float-left mr-1 mt-1"
+                :icon="['fas', 'th-large']"
+            />Grid</button>
+          </div>
+          <div class=" row border shadow pt-3  pb-3 pl-0 mb-4">
+            <div class="d-flex col-md-3">
+              <img class="img-fluid" src="@/assets/img/about1.jpg">
+            </div>
+            <div class="col-md-5 pl-md-0">
+              <b>Business Name Here1</b>
+              <p class="mb-1"><a href="#">mywebsitebridegeafrica.com</a></p>
+              <p class="mb-1">Business Category</p>
+              <p class="mb-1">1.1 M Followers </p>
+              <p class="mb-1">Neighbourhood, city, country</p>
+              <p class="mb-1">keyword 1, keyword 2, keyword 3</p>
+            </div>
+            <div class="text-right col-md-4"><a href="#">Editor</a>
+              <ul class="list-unstyled text-left ulpost-bus">
+                <li><a href="#"><i aria-hidden="true" class="fa fa-envelope mr-2 pt-1"></i> Inbox <span class="badge bg-dark pull-right text-light border-radius">5</span></a></li>
+                <li><a href="#"><i aria-hidden="true" class="fa fa-globe mr-2 pt-1"></i> Notification <span class="badge pull-right bg-dark text-light border-radius">2</span></a></li>
+              </ul>
+            </div>
+          </div>
+          <div class=" row border shadow pt-3  pb-3 pl-0 mb-4">
+            <div class="d-flex col-md-3">
+              <img class="img-fluid" src="@/assets/img/about2.jpg">
+            </div>
+            <div class="col-md-5 pl-md-0">
+              <b>Business Name Here2</b>
+              <p class="mb-1"><a href="#">mywebsitebridegeafrica.com</a></p>
+              <p class="mb-1">Business Category</p>
+              <p class="mb-1">1.1 M Followers </p>
+              <p class="mb-1">Neighbourhood, city, country</p>
+              <p class="mb-1">keyword 1, keyword 2, keyword 3</p>
+            </div>
+            <div class="text-right col-md-4"><a href="#">Admin</a>
+              <ul class="list-unstyled text-left ulpost-bus">
+                <li><a href="#"><i aria-hidden="true" class="fa fa-envelope mr-2 pt-1"></i> Inbox <span class="badge bg-dark pull-right text-light border-radius">5</span></a></li>
+                <li><a href="#"><i aria-hidden="true" class="fa fa-globe mr-2 pt-1"></i> Notification <span class="badge pull-right bg-dark text-light border-radius">2</span></a></li>
+              </ul>
 
-                      <p class="m-1">1.1 M Followers</p>
+            </div>
 
-                      <p class="m-1">Neighbourhood, city, country</p>
+          </div>
+          <div class=" row border shadow pt-3 pb-3 pl-0 mb-4">
+            <div class="d-flex col-md-3">
+              <img class="img-fluid" src="@/assets/img/photo2.jpg">
+            </div>
+            <div class="col-md-5 pl-md-0">
+              <b>Business Name Here2</b>
+              <p class="mb-1"><a href="#">mywebsitebridegeafrica.com</a></p>
+              <p class="mb-1">Business Category</p>
+              <p class="mb-1">1.1 M Followers </p>
+              <p class="mb-1">Neighbourhood, city, country</p>
+              <p class="mb-1">keyword 1, keyword 2, keyword 3</p>
+            </div>
+            <div class="text-right col-md-4"><a href="#">Editor</a>
+              <ul class="list-unstyled text-left ulpost-bus">
+                <li><a href="#"><i aria-hidden="true" class="fa fa-envelope mr-2 pt-1"></i> Inbox <span class="badge bg-dark pull-right text-light border-radius">5</span></a></li>
+                <li><a href="#"><i aria-hidden="true" class="fa fa-globe mr-2 pt-1"></i> Notification <span class="badge pull-right bg-dark text-light border-radius">2</span></a></li>
+              </ul></div></div>
+        </div>
 
-                      <p class="m-1">keyword 1, keyword 2, keyword 3</p>
-                    </b-card-body>
-                  </b-col>
-                  <b-col md="5" class="my-md-auto mx-sm-auto">
-                    <b-card-body>
-                      <h4 class="">Contacts</h4>
-                      <p class="m-1">
-                        <b-icon
-                          icon="chat-dots-fill"
-                          aria-hidden="true"
-                        ></b-icon>
-                        <span class="show">Message</span>
-                      </p>
-
-                      <p class="m-1">
-                        <b-icon
-                          icon="telephone-fill"
-                          aria-hidden="true"
-                        ></b-icon>
-                        <span class="show">Call-Him</span>
-                      </p>
-
-                      <p class="m-1">
-                        <b-icon icon="geo-alt-fill" aria-hidden="true"></b-icon>
-                        <span class="show">Position</span>
-                      </p>
-
-                      <p class="m-1">
-                        <b-button
-                          variant="outline-primary"
-                          class="mb-2"
-                          size="sm"
-                        >
-                          <b-icon
-                            icon="person-plus-fill"
-                            aria-hidden="true"
-                          ></b-icon>
-                          <span class="show">Add</span>
-                        </b-button>
-                      </p>
-                    </b-card-body>
-                  </b-col>
-                </b-row>
-              </b-col>
-            </b-row>
-          </b-card>
-        </b-col>
-      </b-row>
-    </b-card>
+      </div>
+    </div>
   </div>
 </template>
 

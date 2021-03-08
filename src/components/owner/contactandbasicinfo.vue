@@ -118,10 +118,7 @@
                         class="primary float-left mr-1 mt-1"
                         :icon="['fas', 'plus-circle']"
                     /> Add a social link</a><br>
-              <a href="#"><fas-icon
-                  class="primary  mr-1 mt-1"
-                  :icon="['fab', 'snapchat']"
-              /> www.instagram.com/bridgeafrica</a><br>
+              <a href="#">www.instagram.com/bridgeafrica</a><br>
               <a href="#"><fas-icon
                   class="primary float-left mr-1 mt-1"
                   :icon="['fab', 'instagram']"

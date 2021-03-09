@@ -6,16 +6,16 @@
           <b-row>
             <b-col>
               <ul>
-                <li><a href="">Home</a></li>
-                <li><a href="">About Us</a></li>
-                <li><a href="">Privacy Policy</a></li>
-                <li><a href="">Contact Us</a></li>
-                <li><a href="">Blog</a></li>
+                <li><a class="pages" href="">Home</a></li>
+                <li><a class="pages" href="">About Us</a></li>
+                <li><a class="pages" href="">Privacy Policy</a></li>
+                <li><a class="pages" href="">Contact Us</a></li>
+                <li><a class="pages" href="">Blog</a></li>
               </ul>
             </b-col>
             <b-col>
               <ul>
-                <li><b-link>Language</b-link></li>
+                <li><b-link class="link">Language</b-link></li>
                 <li>
                   <b-dropdown
                     size="sm"
@@ -28,7 +28,7 @@
                   </b-dropdown>
                 </li>
 
-                <li><b-link>Country</b-link></li>
+                <li><b-link class="link">Country</b-link></li>
                 <li>
                   <b-dropdown
                     size="sm"
@@ -71,15 +71,27 @@ li {
   position: relative;
   left: 230px;
 }
+
+.pages {
+  color: black;
+  text-decoration: none;
+}
+.pages:hover{
+  color: #e75c18;
+}
+.link {
+  color: #e75c18;
+  text-decoration: none;
+}
 @media only screen and (max-width: 768px) {
   .top {
-  padding: 50px;
-  position: relative;
-  left: -40px;
-}
+    padding: 50px;
+    position: relative;
+    left: -40px;
+  }
 
-.card{
-  width: 500px;
-}
+  .card {
+    width: 500px;
+  }
 }
 </style>

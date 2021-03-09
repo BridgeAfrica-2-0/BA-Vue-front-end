@@ -11,18 +11,17 @@
             </span>
           </div>
         </div>
-        <span class="text-static">
-          <div>Album Name</div>
-          <span> {{ images.length }} item(s)</span>
-        </span>
       </div>
     </div>
     <div v-if="pictureShow">
       <b-button @click="back" variant="primary">Back</b-button>
 
-      <div class="album-name">Album Name</div>
+      <div class="album-detail">
+        <div class="album-name"><b>Album Name</b></div>
+        <span> {{ images.length }} Pictures </span>
+      </div>
       <div class="albums">
-        <div v-for="item in images" :key="item.id" class="p-4">
+        <div v-for="item in images" :key="item.id" class="p-4 image">
           <span class="sp">
             <b-img
               @click="modalShow = !modalShow"
@@ -31,10 +30,6 @@
               fluid
               class="pic"
             ></b-img>
-
-            <span class="pic-name"
-              ><button class="btn-view">Picture Name</button></span
-            >
           </span>
         </div>
         <b-modal hide-footer v-model="modalShow">
@@ -118,57 +113,19 @@ export default {
   position: relative;
   top: 80px;
 }
-
-.text-static {
-  position: relative;
-  top: -220px;
-  left: 100px;
-  color: white;
-  font-weight: 200;
+.album-detail{
+  text-align: center;
 }
-
+.album-name {
+  color: #e75d29;
+  margin-top: -30px;
+}
 .albums {
   display: flex;
   flex-wrap: wrap;
 }
 
-.album:hover .text-static {
-  display: none;
-}
-
-.btn-view {
-  background-color: transparent;
-  border: none;
-  color: white;
-}
-
-.btn-view:focus {
-  outline-color: transparent;
-  border: none;
-}
-
-.album-name {
-  color: #e75d29;
-  text-align: center;
-}
-
-.pic-name {
-  position: relative;
-  left: -200px;
-  color: white;
-  font-weight: 200;
-  opacity: 0;
-}
-
-.sp:hover .pic-name {
-  opacity: 1;
-}
-
-.pic {
+.image{
   cursor: pointer;
-  background-color: transparent;
-}
-.pic:hover {
-  box-shadow: 5px 10px 8px 2px #888888;
 }
 </style>

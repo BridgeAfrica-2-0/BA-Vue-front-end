@@ -9,13 +9,13 @@
               <div class="col">
                 {{ recoverPassData }}
               </div>
-            
+
               <div class="col-4">
-                <b-button variant="outline-primary" class="btn" @click="change">
+                <b-button class="btnz" @click="change">
                   Change
                 </b-button>
               </div>
-                Enter the that you received.
+              Enter the that you received.
             </div>
           </b-card-text>
           <b-form @submit="next" class="w-75 mx-auto">
@@ -24,15 +24,14 @@
                 id="input-4"
                 v-model="code"
                 type="text"
-                placeholder="Enter Code"
+                placeholder="Enter the code that your received"
                 required
               />
             </b-form-group>
-                 <b-button class="button" type="submit" variant="outline-primary">
-            Next
-          </b-button>
+            <b-button class="button" type="submit">
+              Next
+            </b-button>
           </b-form>
-     
         </div>
       </b-card>
     </div>
@@ -42,10 +41,10 @@
 <script>
 import { mapGetters } from "vuex";
 export default {
-  data(){
-    return{
-      code:''
-    }
+  data() {
+    return {
+      code: "",
+    };
   },
   computed: mapGetters(["recoverPassData"]),
   methods: {
@@ -53,7 +52,7 @@ export default {
       e.preventDefault();
       window.location.href = "recoverPass1";
     },
-     next(e) {
+    next(e) {
       e.preventDefault();
       window.location.href = "recoverPass3";
     },
@@ -66,14 +65,27 @@ export default {
   width: 80%;
 }
 
-.button{
+.button {
   margin-left: 265px;
+  background-color: #e75c18;
+  border: none;
+}
+.btnz {
+  border: solid 1px #e75c18;
+  color: #e75c18;
+  background-color: #fff;
+}
 
+.btnz:hover {
+  color: #fff;
+  background-color: #e75c18;
+  border: none;
 }
 
 @media only screen and (max-width: 768px) {
-  .btn{
+  .btn {
     margin-left: -20px;
+    border: solid 1px #e75c18;
   }
 }
 </style>

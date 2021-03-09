@@ -2,31 +2,14 @@
   <div>
     <div class="images">
       <div>
-        <img fluid src="../../assets/img/about2.jpg" alt="" />
+        <img src="@/assets/img/banner.jpg" class="img-fluid header-pic" />
       </div>
-      <div>
-        <img fluid src="../../assets/img/about2.jpg" alt="" />
-      </div>
-      <div>
-        <img fluid src="../../assets/img/about2.jpg" alt="" />
-      </div>
-      <div>
-        <img fluid src="../../assets/img/about2.jpg" alt="" />
-      </div>
-      <div>
-        <img fluid src="../../assets/img/about2.jpg" alt="" />
-      </div>
-      <div>
-        <img fluid src="../../assets/img/about2.jpg" alt="" />
-      </div>
-      
     </div>
     <div class="photo-btns">
-        <b-button class="sm" size="sm"> <b-icon icon="plus"></b-icon>Add Photos</b-button>
-        <b-button class="ml-2" size="sm">See All</b-button>
-      </div>
-    <div class="row mt-4">
-      <div class="col">
+      <b-button class="see" size="sm">See All</b-button>
+    </div>
+    <b-row class="mt-4">
+      <b-col cols="6">
         <div>
           <b-avatar
             src="https://placekitten.com/400/300"
@@ -37,29 +20,39 @@
           >
           </b-avatar>
         </div>
-        <div class="d-inline-block mt-4 ml-4 float-left">
+        <div class="d-inline-block ml-4 float-left">
           <h5 class="font-weight-bolder">User Name</h5>
-          <p>@User Name Alias</p>
+          <p>
+            website <br />
+            1.5k Community
+          </p>
         </div>
-      </div>
-    </div>
-    <div class="btns">
-      <div>
-        <b-button class="mr-4" variant="success">Promote</b-button>
-        <b-button variant="danger">Website</b-button>
-      </div>
-    </div>
+      </b-col>
+      <b-col cols="6">
+        <p class="float-right">
+          <b-button class="mr-1" variant="success">
+            <b-icon icon="house-fill" variant="white"></b-icon>
+            Get Direction</b-button
+          >
+          <b-button class="mr-1" variant="warning">
+            <b-icon icon="chat" variant="white"></b-icon>
+            Message</b-button
+          >
+          <b-button variant="primary">+ Community</b-button>
+        </p>
+      </b-col>
+    </b-row>
     <div class="row">
       <b-container fluid="md" class="text-justify mt-2">
         <b-row>
           <b-col cols="12">
             <b-tabs content-class="mt-3" fill pills card>
               <b-tab title="Home"><HomePage /></b-tab>
-              <b-tab title="About"><About/></b-tab>
-              <b-tab title="Media"><Media/></b-tab>
-              <b-tab title="Market Place"><MarketPlace/></b-tab>
-              <b-tab title="Networks"><Networks/></b-tab>
-              <b-tab title="Followers"><Followers/></b-tab>
+              <b-tab title="About"><About /></b-tab>
+              <b-tab title="Media"><Media /></b-tab>
+              <b-tab title="Market"><MarketPlace /></b-tab>
+              <b-tab title="Networks"><Networks /></b-tab>
+              <b-tab title="Community"><Community /></b-tab>
             </b-tabs>
           </b-col>
         </b-row>
@@ -73,9 +66,8 @@ import HomePage from "../businessf/tabs/businessHome";
 import About from "./tabs/about";
 import Media from "./tabs/media";
 import MarketPlace from "./tabs/marketPlace";
-import Followers from "./tabs/followers";
+import Community from "./tabs/community";
 import Networks from "./tabs/networks";
-
 
 export default {
   name: "Home",
@@ -84,8 +76,8 @@ export default {
     About,
     Media,
     MarketPlace,
-    Followers,
-    Networks
+    Community,
+    Networks,
   },
   data() {
     return {};
@@ -100,7 +92,12 @@ export default {
   display: flex;
   width: 100%;
 }
-
+.see {
+  margin-left: 120px;
+  background-color: #fff;
+  color: black;
+  border: none;
+}
 img {
   width: 100%;
 }
@@ -110,11 +107,11 @@ img {
   left: 75%;
 }
 
-.photo-btns{
+.photo-btns {
   margin-left: 80%;
   margin-top: -50px;
 }
-.cnt-btn{
+.cnt-btn {
   color: white;
 }
 @media only screen and (max-width: 768px) {
@@ -122,9 +119,9 @@ img {
     position: relative;
     left: 25%;
   }
-  .photo-btns{
-  margin-left: 50%;
-  margin-top: 10px;
-}
+  .photo-btns {
+    margin-left: 50%;
+    margin-top: 10px;
+  }
 }
 </style>

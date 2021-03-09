@@ -1,57 +1,127 @@
 <template>
   <div>
     <navbar></navbar>
-    <head-page></head-page> 
-        <b-container
-      fluid="md"
-      class="text-justify mt-1"
-    >
+
+      <div class="images">
+        <div>
+          <img src="@/assets/img/banner.jpg" class="img-fluid header-pic" />
+        </div>
+      </div>
+      <div class="photo-btns">
+        <b-button class="see" size="sm">See All</b-button>
+      </div>
+      <div class="below-head mx-auto">
+        <b-row class="mt-4">
+          <b-col cols="6">
+            <div>
+              <b-avatar
+                src="https://placekitten.com/400/300"
+                class="owner-profile-image-profile float-left"
+                badge-variant="primary"
+                badge-offset="10px"
+                size="120"
+              >
+              </b-avatar>
+            </div>
+            <div class="d-inline-block mt-4 ml-4 float-left">
+              <h5 class="font-weight-bolder">User Name</h5>
+              <p>website <br>
+              1.5k Community
+              </p>
+            </div>
+          </b-col>
+          <b-col cols="6">
+            <p class="float-right">
+              <b-button class="mr-1" variant="success">
+                 <b-icon icon="house-fill" variant="white"></b-icon> 
+                Get Direction</b-button>
+              <b-button class="mr-1" variant="warning">
+                 <b-icon icon="chat" variant="white"></b-icon> 
+                Message</b-button>
+              <b-button variant="primary">+ Community</b-button>
+            </p>
+          </b-col>
+        </b-row>
+      </div>
+
+    <b-container fluid="md" class="text-justify mx-auto mt-4 corps">
       <b-row>
         <b-col cols="12">
           <b-tabs content-class="mt-3" fill pills card>
-            <b-tab class="tab" title="Posts" active>
-              <Post/>
+            <b-tab title="Posts" active>
+              <Post />
             </b-tab>
-            <b-tab class="tab" title="About"><About/></b-tab>
-            <b-tab class="tab" title="Business"><Businesses/></b-tab>
-            <b-tab class="tab" title="Media"><Media/></b-tab>
-            <b-tab class="tab" title="Following"><Following/></b-tab>
+            <b-tab title="About"><About /></b-tab>
+            <b-tab title="Business"><Businesses /></b-tab>
+            <b-tab title="Media"><Media /></b-tab>
+            <b-tab title="Following"><Following /></b-tab>
           </b-tabs>
         </b-col>
       </b-row>
     </b-container>
+    <Footer />
   </div>
 </template>
 
 <script>
 import navbar from "@/components/navbar";
-import headPage from "@/components/headPage";
+
 import Post from "@/components/follower/tabs/posts";
 import About from "@/components/follower/tabs/about";
 import Media from "@/components/follower/tabs/media";
-import Following from "@/components/follower/tabs/following"
+import Following from "@/components/follower/tabs/following";
 import Businesses from "@/components/follower/tabs/businesses";
+import Footer from "@/components/footer";
 
 export default {
   name: "Home",
   components: {
     navbar,
-    headPage,
+
     Post,
     About,
     Media,
     Following,
-    Businesses
+    Businesses,
+    Footer,
   },
- 
 };
 </script>
 
 <style scoped>
+.nav-link {
+  background-color: #e75c18;
+}
+.images {
+  display: flex;
+  width: 100%;
+}
+.see {
+  margin-left: 120px;
+  background-color: #fff;
+  color: black;
+  border: none;
+}
+img {
+  width: 100%;
+}
+
+.btns {
+  position: relative;
+  left: 75%;
+}
+
+.photo-btns {
+  margin-left: 80%;
+  margin-top: -50px;
+}
+.cnt-btn {
+  color: white;
+}
+
+.below-head{
+  width: 80%;
+}
 @media only screen and (max-width: 768px) {
- 
 }
 </style>
-
-
-

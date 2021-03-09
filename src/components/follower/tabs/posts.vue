@@ -7,7 +7,6 @@
        <Media/>
       </b-col>
       <b-col md="8">
-       <CreatePost/>
        <Post/>
       </b-col>
     </b-row>
@@ -18,7 +17,7 @@
 import Intro from "../../intro";
 import Followers from "../../followers";
 import Media from "../../media";
-import CreatePost from "../../createPost";
+
 import Post from "../../post"
 export default {
   name: "posts",
@@ -26,7 +25,7 @@ export default {
     Intro,
     Followers,
     Media,
-    CreatePost,
+
     Post
   }
 };

@@ -18,7 +18,7 @@
             />
 
             <br />
-            <b-button class="button" type="submit" variant="outline-primary">
+            <b-button class="button" type="submit" >
               Next
             </b-button>
           </b-form>
@@ -29,21 +29,21 @@
 </template>
 
 <script>
-import {mapActions} from "vuex"
+import { mapActions } from "vuex";
 export default {
   data() {
     return {
-      data: "",
+      data: ""
     };
   },
   methods: {
-      ...mapActions(['recoverPassword2']),
+    ...mapActions(["recoverPassword2"]),
     next(e) {
       e.preventDefault();
       this.recoverPassword2(this.data);
       window.location.href = "recoverPass2";
-    },
-  },
+    }
+  }
 };
 </script>
 
@@ -54,6 +54,8 @@ export default {
 
 .button{
   margin-left: 265px;
+  background-color: #e75c18;
+  border: none;
 
 }
 </style>

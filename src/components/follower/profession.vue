@@ -22,20 +22,14 @@ export default {
       options: [
         { value: null, text: "Select" },
         { value: "private", text: "Private" },
-        { value: "public", text: "Public" },
-      ],
+        { value: "public", text: "Public" }
+      ]
     };
-  },
+  }
 };
 </script>
 
 <style scoped>
-.item {
-  border: none;
-}
-@media only screen and (max-width: 768px) {
-  .profession {
-    margin-left: 20px;
-  }
+@media only screen and (max-width: 600px) {
 }
 </style>

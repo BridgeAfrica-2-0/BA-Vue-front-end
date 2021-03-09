@@ -14,8 +14,8 @@
         </b-list-group-item>
       </div>
       <div class="col-2">
-        <b-button class="btn" variant="outline-primary">
-          <b-icon icon="chat" class="mr-1"></b-icon>
+        <b-button variant="outline-primary">
+          <b-icon icon="chat"></b-icon>
           Message</b-button
         >
       </div>
@@ -28,16 +28,7 @@ export default {};
 </script>
 
 <style scoped>
-.item {
+.item{
   border: none;
-}
-.follower {
-  cursor: pointer;
-}
-@media only screen and (max-width: 768px) {
-  .btn {
-    display: flex;
-    margin-left: -70px;
-  }
 }
 </style>

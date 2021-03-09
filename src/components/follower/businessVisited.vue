@@ -4,8 +4,11 @@
     <hr />
     <div class="row">
       <div class="col">
-        <b-list-group-item class="d-flex align-items-center mb-4  bus-visited">
-          <b-avatar class=" profile mr-3"></b-avatar>
+        <b-list-group-item
+          class="d-flex align-items-center mb-4 "
+          style="border: none"
+        >
+          <b-avatar class="mr-3"></b-avatar>
           <div class="datails">
             <div class="row">
               <div class="col">
@@ -32,6 +35,7 @@ export default {
 <style scoped>
 .link {
   text-decoration: none;
+  color: #e75c18;
 }
 .bus-visited {
   border: none;

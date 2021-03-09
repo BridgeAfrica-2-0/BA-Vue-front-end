@@ -4,25 +4,26 @@
       <div class="col-3">
         <img src="../../assets/img/follow.jpg" height="200" alt="" />
       </div>
-      <div class="col details">
+      <div class="col details ml-3">
         <h3>
           <b-link class="link">Business Name</b-link>
         </h3>
         <p>
           <a href="">mywebsite.com</a> <br />
           Business Category <br />
-          1.1M Follower <br />
+          1.1M Community <br />
           Neighbourhood, city country <br />
-          Keywords
+          Keyword 1  Keyword 2  Keyword 3
         </p>
       </div>
       <div class="col">
         <span class="btns">
-          <b-button variant="primary">Connect</b-button>
+          <b-button class="primary-bg"><b-icon icon="chat-fill" class="avatar-header-icon"></b-icon
+          > Message</b-button>
 
-          <b-button class="ml-3" variant="outline-primary">
+          <b-button class="ml-3 community">
             <b-icon icon="plus"></b-icon>
-            Follow</b-button
+            Community</b-button
           >
         </span>
       </div>
@@ -41,11 +42,25 @@ export default {};
 }
 a {
   text-decoration: black;
+  color: #e75c18;
 }
 
 .btns {
   display: flex;
   margin-left: 120px;
+}
+
+.primary-bg {
+  background-color: #e75c18;
+  height: 40px;
+  border: none;
+}
+
+.community {
+  background-color: rgb(240, 240, 240);
+  color: #000;
+  border: none;  
+  display: flex;
 }
 
 @media only screen and (max-width: 768px) {

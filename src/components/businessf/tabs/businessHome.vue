@@ -1,13 +1,14 @@
 <template>
-  <div >
+  <div>
     <b-row>
-      <b-col md="4" >
-        <Intro/>
+      <b-col md="4">
+        <Intro />
+        <Personalize />
         <Invite />
-        <Personalise/>
+        <HotBusiness />
       </b-col>
       <b-col md="8">
-       <Post/>
+        <Post />
       </b-col>
     </b-row>
   </div>
@@ -16,17 +17,18 @@
 <script>
 import Intro from "../intro";
 import Invite from "../invite";
-import Personalise from "../personalise";
-import Post from "../ownerPost";
+import HotBusiness from "../hotBusinesses";
+import Post from "../../post";
+import Personalize from "../personalizeWeb";
 export default {
   name: "posts",
   components: {
     Intro,
     Invite,
-
-    Personalise,
-    Post
-  }
+    HotBusiness,
+    Post,
+    Personalize,
+  },
 };
 </script>
 

@@ -1,11 +1,9 @@
 <template>
   <div>
     <b-card class="mt-4" header-tag="header" footer-tag="footer">
-      <template #header>
-        <h6 class="mb-0 d-inline-block">Invite</h6>
-      </template>
       <p><b>Invite your followers to follow this business</b></p>
-       <input class="form-control mb-2" placeholder="Search ..." type="text">
+      <input class="form-control mb-2" placeholder="Search ..." type="text" />
+      <fas-icon class="primary search" :icon="['fas', 'search']" />
       <b-card-text>
         <b-list-group-item class="d-flex align-items-center m-0 p-2">
           <b-avatar
@@ -14,7 +12,7 @@
             class="mr-3"
           ></b-avatar>
           <span class="mr-auto font-weight-bolder">Username</span>
-          <b-button variant="outline-primary" size="sm"> Invite</b-button>
+          <b-button class="btn-primary" size="sm"> Invite</b-button>
         </b-list-group-item>
         <b-list-group-item class="d-flex align-items-center m-0 p-2">
           <b-avatar
@@ -23,7 +21,7 @@
             class="mr-3"
           ></b-avatar>
           <span class="mr-auto font-weight-bolder">Username</span>
-          <b-button variant="outline-primary" size="sm"> Invite</b-button>
+          <b-button class="btn-primary" size="sm"> Invite</b-button>
         </b-list-group-item>
         <b-list-group-item class="d-flex align-items-center m-0 p-2">
           <b-avatar
@@ -32,11 +30,11 @@
             class="mr-3"
           ></b-avatar>
           <span class="mr-auto font-weight-bolder">Username</span>
-          <b-button variant="outline-primary" size="sm"> Invite</b-button>
+          <b-button class="btn-primary" size="sm"> Invite</b-button>
         </b-list-group-item>
       </b-card-text>
       <template #footer>
-        <span class="float-right"> <a href="#">See More</a> </span>
+        <span class="float-right"> <a class="primary" href="#">See More</a> </span>
       </template>
     </b-card>
   </div>
@@ -47,7 +45,24 @@ export default {};
 </script>
 
 <style scoped>
-p{
+p {
   text-align: left;
+}
+.search{
+  position: relative;
+  top: -40px;
+  left: 270px;
+  cursor: pointer;
+}
+.btn-primary{
+  background-color: #fff;
+  border: solid 1px #e75c18;
+  color: #e75c18;
+}
+
+.btn-primary:hover{
+  background-color: #e75c18;
+  color: #fff;
+  border: none;
 }
 </style>

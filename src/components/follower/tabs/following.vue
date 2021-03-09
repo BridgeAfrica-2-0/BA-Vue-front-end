@@ -1,29 +1,38 @@
 <template>
   <div>
-    <b-alert show variant="primary">
-      <b-icon icon="people-fill" variant="primary"></b-icon>
+    <b-alert show class="primary-bg">
+      <b-icon class="purple" icon="people-fill"></b-icon>
       <b>
         Following
       </b></b-alert
     >
-  <b-tabs content-class="mt-3">
-    <b-tab title="Following" active><Following/></b-tab>
-    <b-tab title="Follow"><Follow/></b-tab>
-  </b-tabs>
-</div>
+    <b-tabs content-class="mt-3">
+      <b-tab title="Followers" active><Followers /></b-tab>
+      <b-tab title="Follow"><Follow /></b-tab>
+    </b-tabs>
+  </div>
 </template>
 
 <script>
-import Following from "../followers"
-import Follow from "../follow"
+import Followers from "../followers";
+import Follow from "../follow";
 export default {
- components:{
-   Following,
-   Follow,
- }
-}
+  components: {
+    Followers,
+    Follow,
+  },
+};
 </script>
 
-<style>
-
+<style scoped>
+.primary {
+  color: #e75c18;
+}
+.purple{
+  color: purple;
+}
+.primary-bg {
+  background-color: rgb(242, 242, 242);
+  border: none;
+}
 </style>

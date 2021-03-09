@@ -1,10 +1,11 @@
 <template>
   <div>
-    <b-list-group-item class="d-flex align-items-center mb-4 biography ">
+    <b-list-group-item class="d-flex align-items-center mb-4 style-group">
+      <b-avatar class="mr-3 avatar-style"></b-avatar>
       <div>
         <div class="row">
           <div class="col">
-            <p>{{ defaultBio }}</p>
+            <p>{{ defaultbio }}</p>
           </div>
         </div>
       </div>
@@ -16,10 +17,10 @@
 export default {
   data() {
     return {
-      defaultBio: "no additional infomation to show !!",
+      defaultbio: "no additional infomation to show !!"
     };
   },
-  methods: {},
+  methods: {}
 };
 </script>
 
@@ -33,6 +34,15 @@ export default {
 }
 .action-btn {
   margin-left: 80%;
+}
+
+.style-group {
+  border: none;
+}
+
+.avatar-style {
+  position: relative;
+  top: -10px;
 }
 
 @media only screen and (max-width: 768px) {

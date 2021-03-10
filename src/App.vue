@@ -7,6 +7,7 @@
 <style>
 @import "./assets/css/main.css";
 @import "./assets/css/style.css";
+@import "./assets/css/bootstrap.css";
 
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;

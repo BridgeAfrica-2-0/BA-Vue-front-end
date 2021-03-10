@@ -7,10 +7,10 @@
       </b></b-alert
     >
 
-    <div v-if="noBusiness == false">
+    <div class="business" v-if="noBusiness == false">
       <Business />
     </div>
-    <div class="no-business">
+    <div v-show="false" class="no-business">
       <b-container>
         <h2>No Businesses Listed</h2>
         <hr />
@@ -54,6 +54,10 @@ export default {
 h2,
 p {
   text-align: center;
+}
+
+.business{
+  min-height: 450px;
 }
 
 @media only screen and (max-width: 768px) {

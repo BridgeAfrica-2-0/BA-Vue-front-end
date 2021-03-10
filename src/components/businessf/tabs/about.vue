@@ -19,7 +19,7 @@
                <b-icon icon="person-fill" class="primary mr-2"></b-icon>
               <b>{{ leftTitle }}</b>
             </h4>
-            <p class="text-justify">
+            <p class="txt">
               {{ textToo }}
             </p>
           </b-card>
@@ -158,5 +158,14 @@ export default {
 h4,
 p {
   text-align: left;
+}
+
+.mobile {
+  display: none;
+}
+@media only screen and (max-width: 768px) {
+.txt{
+  text-align: left;
+}
 }
 </style>

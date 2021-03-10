@@ -3,7 +3,7 @@
     <b-card class="card">
       <div class="top">
         <b-container>
-          <b-row>
+          <b-row class="row">
             <b-col>
               <ul>
                 <li><a class="pages" href="">Home</a></li>
@@ -93,5 +93,12 @@ li {
   .card {
     width: 500px;
   }
+  .row{
+    display: flex;
+    flex-direction: column;
+  }
+  .bottom {
+  margin-left: -150px;
+}
 }
 </style>

@@ -1,7 +1,7 @@
 <template>
   <div>
     <b-card v-if="networkshow">
-      <div class="networks ml-4">
+      <div class="networks ml-4 box">
         <div class="ml-4 sub" v-for="(post, index) in posts" :key="index">
           <b-card>
             <b-img width="230" :src="post.image"></b-img>
@@ -13,9 +13,16 @@
                 <p><small>Public - 397 Members</small></p>
               </b-col>
               <b-col class="col-1">
-                <b-button class="btnz" v-if="post.state" size="sm" variant="primary"
+                <b-button
+                  class="btnz"
+                  v-if="post.state"
+                  size="sm"
+                  variant="primary"
                   ><small>
-                    <fas-icon class="mr-2" :icon="['fas', 'check']" />Joined</small
+                    <fas-icon
+                      class="mr-2"
+                      :icon="['fas', 'check']"
+                    />Joined</small
                   ></b-button
                 >
                 <b-button v-if="!post.state" size="sm" variant="success"
@@ -34,7 +41,7 @@
         <h2>Builds networks around your Business</h2>
         <p>Create network to stay in touch with just the people</p>
         <p>you want Engage, share, Make Plans and much more</p>
-        <b-button class="btn" variant="primary">Add network</b-button>
+        <b-button class="btn-add" variant="primary">Add Network</b-button>
       </div>
     </div>
 
@@ -114,16 +121,17 @@ export default {
   height: 500px;
   background-color: #ccc;
   border-radius: 10px;
+  padding: 30px;
+  margin-top: 10px;
 }
 
 .sub {
   width: 280px;
 }
-.btnz:hover{
- background-color: #e75c18;
- border: none;
- color: black;
-
+.btnz:hover {
+  background-color: #e75c18;
+  border: none;
+  color: black;
 }
 
 .prod {
@@ -146,6 +154,14 @@ export default {
   cursor: pointer;
 }
 
+.btn-add{
+  margin-left: 0px;
+  margin-top: 10px;
+}
 @media only screen and (max-width: 768px) {
+  .box {
+    position: relative;
+    left: -62px;
+  }
 }
 </style>

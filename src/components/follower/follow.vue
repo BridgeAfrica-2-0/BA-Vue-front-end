@@ -16,7 +16,7 @@
         </b-list-group-item>
       </div>
       <div class="col-2">
-        <b-button variant="outline-primary">
+        <b-button class="btn" variant="outline-primary">
           <b-icon icon="plus"></b-icon>
           Follow</b-button
         >
@@ -32,5 +32,10 @@ export default {};
 <style scoped>
 .item{
   border: none;
+}
+@media only screen and (max-width: 768px) {
+  .btn {
+    margin-left: -45px;
+  }
 }
 </style>

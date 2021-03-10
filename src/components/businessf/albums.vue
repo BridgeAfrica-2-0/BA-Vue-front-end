@@ -1,14 +1,17 @@
 <template>
   <div>
     <div v-if="albumShow" class="main-album">
-      <div class="p-4 album" v-for="post in posts" :key="post.id">
-        <b-img v-if="post.image" :src="post.image" rounded fluid></b-img>
-        <div @click="openAlbum" class="overlay">
-          <div>
-            <span class="text-hover">
-              <div>Album Name</div>
-              <span> {{ images.length }} item(s)</span>
-            </span>
+      <div v-if="albumShow" class="main-album">
+        <div class="p-4 album" v-for="post in posts" :key="post.id">
+          <img :src="post.image" alt="" srcset="" class="imag" />
+
+          <div @click="openAlbum" class="overlay">
+            <div>
+              <span class="text-hover">
+                <div>Album Name</div>
+                <span> {{ images.length }} item(s)</span>
+              </span>
+            </div>
           </div>
         </div>
       </div>
@@ -94,13 +97,13 @@ export default {
   flex-wrap: wrap;
 }
 .overlay {
-  width: 300px;
-  height: 150px;
+  width: 250px;
+  height: 125px;
   background-color: #000;
   border-radius: 5px;
   position: relative;
   opacity: 0;
-  top: -150px;
+  top: -125px;
   color: #fff;
   text-align: center;
   cursor: pointer;
@@ -111,9 +114,9 @@ export default {
 }
 .text-hover {
   position: relative;
-  top: 80px;
+  top: 40px;
 }
-.album-detail{
+.album-detail {
   text-align: center;
 }
 .album-name {
@@ -125,7 +128,22 @@ export default {
   flex-wrap: wrap;
 }
 
-.image{
+.image {
   cursor: pointer;
+}
+
+.imag {
+  width: 250px;
+}
+
+@media only screen and (max-width: 768px) {
+  .imag {
+    width: 200px;
+  }
+  .overlay {
+    width: 200px;
+    height: 100px;
+    top: -100px;
+  }
 }
 </style>

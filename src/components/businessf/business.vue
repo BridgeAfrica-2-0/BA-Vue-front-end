@@ -8,7 +8,7 @@
     <div class="photo-btns">
       <b-button class="see" size="sm">See All</b-button>
     </div>
-    <b-row class="mt-4">
+    <b-row class="mt-4 options">
       <b-col cols="6">
         <div>
           <b-avatar
@@ -42,6 +42,50 @@
         </p>
       </b-col>
     </b-row>
+    <div class="mobile">
+      <b-row>
+        <b-col>
+          <div>
+            <b-avatar
+              src="https://placekitten.com/400/300"
+              class="owner-profile-image-profile float-left avat"
+              badge-variant="primary"
+              badge-offset="10px"
+              size="70"
+            >
+            </b-avatar>
+          </div>
+          <div class="d-inline-block mt-4 ml-4 float-left texts">
+            <h6 class="font-weight-bolder ">User Name</h6>
+            <p class="details">
+              website <br />
+              1.5k Community
+            </p>
+          </div>
+        </b-col>
+        <b-col cols="3">
+          <div class="more">
+            <b-dropdown size="sm" variant="outline">
+              <template #button-content>
+                <b-icon icon="three-dots" aria-hidden="true"></b-icon>
+              </template>
+              <b-dropdown-item>
+                <b-icon icon="house-fill" variant="primary"></b-icon> Get
+                Direction</b-dropdown-item
+              >
+              <b-dropdown-item>
+                <b-icon icon="chat" variant="primary"></b-icon>
+                Message</b-dropdown-item
+              >
+              <b-dropdown-item>
+                <b-icon icon="plus" variant="primary"></b-icon>
+                Community</b-dropdown-item
+              >
+            </b-dropdown>
+          </div>
+        </b-col>
+      </b-row>
+    </div>
     <div class="row">
       <b-container fluid="md" class="text-justify mt-2">
         <b-row>
@@ -114,14 +158,36 @@ img {
 .cnt-btn {
   color: white;
 }
+.mobile {
+  display: none;
+}
 @media only screen and (max-width: 768px) {
-  .btns {
-    position: relative;
-    left: 25%;
+  .mobile {
+    display: block;
   }
+  .options {
+    display: none;
+  }
+  .avat {
+    margin-top: 20px;
+  }
+  .details {
+    font-size: 10px;
+  }
+  .texts {
+    position: relative;
+    left: -15px;
+  }
+  .more {
+    position: relative;
+    top: 20px;
+    left: -100px;
+  }
+
   .photo-btns {
-    margin-left: 50%;
-    margin-top: 10px;
+    position: relative;
+    left: -100px;
+    top: 60px;
   }
 }
 </style>

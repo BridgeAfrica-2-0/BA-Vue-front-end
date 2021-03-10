@@ -17,7 +17,6 @@
 import Intro from "../../intro";
 import Followers from "../../followers";
 import Media from "../../media";
-
 import Post from "../../post"
 export default {
   name: "posts",
@@ -25,7 +24,6 @@ export default {
     Intro,
     Followers,
     Media,
-
     Post
   }
 };

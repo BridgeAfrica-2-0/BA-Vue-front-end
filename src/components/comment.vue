@@ -96,4 +96,9 @@ export default {
   top: -28px;
   cursor: pointer;
 }
+@media only screen and (max-width: 768px) {
+  .send-cmt {
+    margin-left: 88%;
+  }
+}
 </style>

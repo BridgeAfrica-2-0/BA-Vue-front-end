@@ -2,7 +2,7 @@
   <div>
     <div v-if="albumShow" class="main-album">
       <div class="p-4 album" v-for="post in posts" :key="post.id">
-        <b-img v-if="post.image" :src="post.image" rounded fluid></b-img>
+        <b-img v-if="post.image" :src="post.image" width="250" rounded fluid></b-img>
         <div @click="openAlbum" class="overlay">
           <div>
             <span class="text-hover">
@@ -94,13 +94,13 @@ export default {
   flex-wrap: wrap;
 }
 .overlay {
-  width: 300px;
-  height: 150px;
+  width: 250px;
+  height: 125px;
   background-color: #000;
   border-radius: 5px;
   position: relative;
   opacity: 0;
-  top: -150px;
+  top: -125px;
   color: #fff;
   text-align: center;
   cursor: pointer;
@@ -111,7 +111,7 @@ export default {
 }
 .text-hover {
   position: relative;
-  top: 80px;
+  top: 60px;
 }
 .album-detail{
   text-align: center;

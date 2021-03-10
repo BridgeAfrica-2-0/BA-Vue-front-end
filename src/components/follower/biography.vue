@@ -44,7 +44,9 @@ export default {
   position: relative;
   top: -10px;
 }
-
+p{
+  text-align: left;
+}
 @media only screen and (max-width: 768px) {
   .edit-btn {
     margin-left: 129px;

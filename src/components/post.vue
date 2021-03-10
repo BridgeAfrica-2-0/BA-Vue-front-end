@@ -1,7 +1,7 @@
 <template>
   <div>
-    <b-card>
-      <b-row class="mt-3">
+    <b-card class="post">
+      <b-row class="mt-2">
         <b-col cols="12">
           <b-row>
             <b-col class="name-time">
@@ -131,4 +131,12 @@ p {
   top: -20px;
 }
 
+@media only screen and (max-width: 768px) {
+  .send-cmt {
+    margin-left: 88%;
+  }
+  .post{
+    margin-top: 10px;
+  }
+}
 </style>

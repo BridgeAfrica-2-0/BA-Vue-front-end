@@ -6,10 +6,17 @@
         About
       </b></b-alert
     >
-    <b-card no-body>
+    <b-card no-body class="desktop">
       <b-tabs pills card vertical>
         <b-tab title="BIOGRAPHY" active><Biography /></b-tab>
-        <b-tab title="CONTACT & BASIC INFO"><ContactAndInfo/> </b-tab>
+        <b-tab title="CONTACT & BASIC INFO"><ContactAndInfo /> </b-tab>
+        <b-tab title="WORK & EDUCATION"><WorkAndEducation /></b-tab>
+      </b-tabs>
+    </b-card>
+    <b-card no-body class="mobile p-2">
+      <b-tabs pills card justified>
+        <b-tab title="BIOGRAPHY" active><Biography /></b-tab>
+        <b-tab title="CONTACT & BASIC INFO"><ContactAndInfo /> </b-tab>
         <b-tab title="WORK & EDUCATION"><WorkAndEducation /></b-tab>
       </b-tabs>
     </b-card>
@@ -24,9 +31,8 @@ export default {
   components: {
     Biography,
     ContactAndInfo,
-    WorkAndEducation
-
-  }
+    WorkAndEducation,
+  },
 };
 </script>
 
@@ -35,7 +41,7 @@ export default {
   display: none;
 }
 
-.purple{
+.purple {
   color: purple;
 }
 .primary-bg {
@@ -51,6 +57,5 @@ export default {
   .mobile {
     display: block;
   }
-
 }
 </style>

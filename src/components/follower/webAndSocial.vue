@@ -2,7 +2,7 @@
   <div>
     <b class="social">Web & Soial Links</b>
     <hr />
-    <div class="social">
+    <div>
       <b-link class="link" v-b-modal.modal-7
         ><b-icon icon="globe" class="primary"></b-icon>
         https://www.yourwebsite.com</b-link

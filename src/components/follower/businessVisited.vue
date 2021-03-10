@@ -8,7 +8,7 @@
           class="d-flex align-items-center mb-4 "
           style="border: none"
         >
-          <b-avatar class="mr-3"></b-avatar>
+          <b-avatar class="mr-3 avat"></b-avatar>
           <div class="datails">
             <div class="row">
               <div class="col">
@@ -51,6 +51,10 @@ export default {
 @media only screen and (max-width: 768px) {
   .business {
     margin-left: 20px;
+  }
+
+  .avat{
+    margin-top: -120px;
   }
 }
 </style>

@@ -2,47 +2,95 @@
   <div>
     <navbar></navbar>
 
-      <div class="images">
-        <div>
-          <img src="@/assets/img/banner.jpg" class="img-fluid header-pic" />
-        </div>
+    <div class="images">
+      <div>
+        <img src="@/assets/img/banner.jpg" class="img-fluid header-pic" />
       </div>
-      <div class="photo-btns">
-        <b-button class="see" size="sm">See All</b-button>
-      </div>
-      <div class="below-head mx-auto">
-        <b-row class="mt-4">
-          <b-col cols="6">
-            <div>
-              <b-avatar
-                src="https://placekitten.com/400/300"
-                class="owner-profile-image-profile float-left"
-                badge-variant="primary"
-                badge-offset="10px"
-                size="120"
-              >
-              </b-avatar>
-            </div>
-            <div class="d-inline-block mt-4 ml-4 float-left">
-              <h5 class="font-weight-bolder">User Name</h5>
-              <p>website <br>
+    </div>
+    <div class="photo-btns">
+      <b-button class="see" size="sm" variant="primary">See All</b-button>
+    </div>
+    <div class="below-head mx-auto options">
+      <b-row class="mt-4">
+        <b-col cols="6">
+          <div>
+            <b-avatar
+              src="https://placekitten.com/400/300"
+              class="owner-profile-image-profile float-left"
+              badge-variant="primary"
+              badge-offset="10px"
+              size="120"
+            >
+            </b-avatar>
+          </div>
+          <div class="d-inline-block mt-4 ml-4 float-left">
+            <h5 class="font-weight-bolder">User Name</h5>
+            <p>
+              website <br />
               1.5k Community
-              </p>
-            </div>
-          </b-col>
-          <b-col cols="6">
-            <p class="float-right">
-              <b-button class="mr-1" variant="success">
-                 <b-icon icon="house-fill" variant="white"></b-icon> 
-                Get Direction</b-button>
-              <b-button class="mr-1" variant="warning">
-                 <b-icon icon="chat" variant="white"></b-icon> 
-                Message</b-button>
-              <b-button variant="primary">+ Community</b-button>
             </p>
-          </b-col>
-        </b-row>
-      </div>
+          </div>
+        </b-col>
+        <b-col cols="6">
+          <p class="float-right">
+            <b-button class="mr-1" variant="success">
+              <b-icon icon="house-fill" variant="white"></b-icon>
+              Get Direction</b-button
+            >
+            <b-button class="mr-1" variant="warning">
+              <b-icon icon="chat" variant="white"></b-icon>
+              Message</b-button
+            >
+            <b-button variant="primary">+ Community</b-button>
+          </p>
+        </b-col>
+      </b-row>
+    </div>
+
+    <div class="mobile">
+      <b-row>
+        <b-col>
+          <div>
+            <b-avatar
+              src="https://placekitten.com/400/300"
+              class="owner-profile-image-profile float-left avat"
+              badge-variant="primary"
+              badge-offset="10px"
+              size="70"
+            >
+            </b-avatar>
+          </div>
+          <div class="d-inline-block mt-4 ml-4 float-left texts">
+            <h6 class="font-weight-bolder ">User Name</h6>
+            <p class="details">
+              website <br />
+              1.5k Community
+            </p>
+          </div>
+        </b-col>
+        <b-col cols="3">
+          <div class="more">
+            <b-dropdown size="sm" variant="outline">
+              <template #button-content>
+                <b-icon icon="three-dots" aria-hidden="true"></b-icon>
+              </template>
+              <b-dropdown-item>
+                <b-icon icon="house-fill" variant="primary"></b-icon> Get
+                Direction</b-dropdown-item
+              >
+              <b-dropdown-item>
+                <b-icon icon="chat" variant="primary"></b-icon>
+                Message</b-dropdown-item
+              >
+              <b-dropdown-item>
+                <b-icon icon="plus" variant="primary"></b-icon>
+                Community</b-dropdown-item
+              >
+            </b-dropdown>
+          </div>
+        </b-col>
+      </b-row>
+    </div>
 
     <b-container fluid="md" class="text-justify mx-auto mt-4 corps">
       <b-row>
@@ -77,7 +125,6 @@ export default {
   name: "Home",
   components: {
     navbar,
-
     Post,
     About,
     Media,
@@ -119,9 +166,40 @@ img {
   color: white;
 }
 
-.below-head{
+.below-head {
   width: 80%;
 }
+
+.mobile {
+  display: none;
+}
 @media only screen and (max-width: 768px) {
+  .mobile {
+    display: block;
+  }
+  .options {
+    display: none;
+  }
+  .avat {
+    margin-top: 20px;
+  }
+  .details {
+    font-size: 10px;
+  }
+  .texts {
+    position: relative;
+    left: -15px;
+  }
+  .more {
+    position: relative;
+    top: 20px;
+    left: -100px;
+  }
+
+  .photo-btns {
+    position: relative;
+    left: -100px;
+    top: 60px;
+  }
 }
 </style>

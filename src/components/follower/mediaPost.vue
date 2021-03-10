@@ -13,8 +13,8 @@
       <iframe
         class="image"
         v-if="post.video"
-        width="300"
-        height="200"
+        width="240"
+        height="150"
         rounded
         :src="post.video"
         frameborder="0"

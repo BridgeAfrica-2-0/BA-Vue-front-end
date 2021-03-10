@@ -4,10 +4,7 @@
   </div>
 </template>
 
-<style>
-@import "./assets/css/main.css";
-@import "./assets/css/style.css";
-
+<style lang="less">
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -27,9 +24,5 @@
       color: #42b983;
     }
   }
-}
-
-.violet {
-  color: #630460;
 }
 </style>

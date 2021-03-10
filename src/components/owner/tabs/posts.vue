@@ -6,29 +6,29 @@
           <template #header>
             <h6 class="mb-0 d-inline-block">Intro</h6>
             <span class="float-right btn m-0 p-0 action-intro"
-              ><b-icon icon="pencil-fill" class="violet"></b-icon> Edit</span
+              ><b-icon icon="pencil-fill" variant="primary"></b-icon> Edit</span
             >
           </template>
           <b-card-text class="text-left">
             <p>
-              <b-icon icon="briefcase-fill" class="violet"></b-icon> Work at:
+              <b-icon icon="briefcase-fill" variant="primary"></b-icon> Work at:
               Current or Last Organization
             </p>
             <p>
-              <b-icon icon="book-fill" class="violet"></b-icon> Studied at: Last
-              Education
+              <b-icon icon="book-fill" variant="primary"></b-icon> Studied at:
+              Last Education
             </p>
             <p>
-              <b-icon icon="house-fill" class="violet"></b-icon> Home Town
+              <b-icon icon="house-fill" variant="primary"></b-icon> Home Town
               Name:Dummy
             </p>
             <p>
-              <b-icon icon="geo-alt-fill" class="violet"></b-icon> Current City
-              Name:Dummy
+              <b-icon icon="geo-alt-fill" variant="primary"></b-icon> Current
+              City Name:Dummy
             </p>
             <p>
-              <b-icon icon="people-fill" class="violet"></b-icon> Followed by:
-              525
+              <b-icon icon="people-fill" variant="primary"></b-icon> Followed
+              by: 525
             </p>
           </b-card-text>
         </b-card>
@@ -94,7 +94,7 @@
           <template #header>
             <h6 class="mb-0 d-inline-block">Media</h6>
             <span class="float-right"
-              ><b-icon icon="eye-fill" class="violet"></b-icon> See All</span
+              ><b-icon icon="eye-fill" variant="primary"></b-icon> See All</span
             >
           </template>
           <b-card-text>
@@ -117,7 +117,7 @@
               <b-avatar
                 class="d-inline-block"
                 variant="info"
-                src="https://profile.bridgeafrica.info/assets/img/wankue-filler.jpg"
+                src="https://placekitten.com/300/300"
               ></b-avatar>
             </b-col>
             <b-col cols="10" md="11" class="m-0 p-0">
@@ -128,56 +128,98 @@
                 placeholder="Whats On Your, <Name Here> ?"
               ></b-form-textarea>
               <span class="float-left">
-                <b-button-group size="sm" class="border-0 violet">
-                  <b-button title="Add Image" size="sm" variant="light">
-                    <b-icon
-                      icon="card-image"
-                      aria-hidden="true"
-                      class="violet"
-                    ></b-icon>
+                <b-button-group size="sm" class="">
+                  <b-button
+                    title="Add Image"
+                    size="sm"
+                    variant="outline-primary"
+                  >
+                    <b-icon icon="card-image" aria-hidden="true"></b-icon>
                   </b-button>
-                  <b-button title="Add Movie" size="sm" variant="light">
+                  <b-button
+                    title="Add Movie"
+                    size="sm"
+                    variant="outline-primary"
+                  >
                     <b-icon
                       icon="camera-video-fill"
                       aria-hidden="true"
-                      class="violet"
                     ></b-icon>
                   </b-button>
-                  <b-button title="Add Hyperlink" size="sm" variant="light">
-                    <b-icon
-                      icon="link-45deg"
-                      aria-hidden="true"
-                      class="violet"
-                    ></b-icon>
+                  <b-button
+                    title="Add Hyperlink"
+                    size="sm"
+                    variant="outline-primary"
+                  >
+                    <b-icon icon="link-45deg" aria-hidden="true"></b-icon>
                   </b-button>
                 </b-button-group>
               </span>
               <span class="float-right">
-                <b-button
-                  variant="outline-primary"
-                  size="sm"
-                  class="border-none"
-                >
+                <b-button variant="outline-primary" size="sm"
+                  ><b-icon icon="cursor-fill" variant="primary"></b-icon>
                   Publish</b-button
                 >
               </span>
             </b-col>
           </b-row>
 
-          <b-row class="mt-2">
+          <b-row class="mt-4">
             <b-col cols="12" class="mt-4">
               <b-row>
-                <div class="media">
-                  <img
-                    src="@/assets/img/wankue-filler.jpg"
-                    alt="John Doe"
-                    class="mr-2 rounded-circle avatar-size"
-                  />
-                  <div class="media-body">
-                    <h4 class="mb-0">John Doe</h4>
-                    <p>Lorem ipsum...</p>
-                  </div>
-                </div>
+                <b-col cols="2" md="1" class="m-0 p-0">
+                  <b-avatar
+                    class="d-inline-block"
+                    variant="info"
+                    src="https://placekitten.com/300/300"
+                    size="3.5rem"
+                  ></b-avatar>
+                </b-col>
+                <b-col cols="10" md="11" class="pt-2">
+                  <h5 class="m-0 font-weight-bolder">
+                    John Doe
+                    <span class="float-right">
+                      <b-dropdown variant="outline-primary" size="sm">
+                        <template #button-content>
+                          <b-icon icon="three-dots" aria-hidden="true"></b-icon>
+                          More
+                        </template>
+                        <b-dropdown-item-button>
+                          <b-icon icon="lock-fill" aria-hidden="true"></b-icon>
+                          Locked <span class="sr-only">(Click to unlock)</span>
+                        </b-dropdown-item-button>
+                        <b-dropdown-divider></b-dropdown-divider>
+                        <b-dropdown-group header="Choose options" class="small">
+                          <b-dropdown-item-button>
+                            <b-icon icon="blank" aria-hidden="true"></b-icon>
+                            Option A <span class="sr-only">(Not selected)</span>
+                          </b-dropdown-item-button>
+                          <b-dropdown-item-button>
+                            <b-icon icon="check" aria-hidden="true"></b-icon>
+                            Option B <span class="sr-only">(Selected)</span>
+                          </b-dropdown-item-button>
+                          <b-dropdown-item-button>
+                            <b-icon icon="blank" aria-hidden="true"></b-icon>
+                            Option C <span class="sr-only">(Not selected)</span>
+                          </b-dropdown-item-button>
+                        </b-dropdown-group>
+                        <b-dropdown-divider></b-dropdown-divider>
+                        <b-dropdown-item-button
+                          >Some action</b-dropdown-item-button
+                        >
+                        <b-dropdown-item-button
+                          >Some other action</b-dropdown-item-button
+                        >
+                        <b-dropdown-divider></b-dropdown-divider>
+                        <b-dropdown-item-button variant="danger">
+                          <b-icon icon="trash-fill" aria-hidden="true"></b-icon>
+                          Delete
+                        </b-dropdown-item-button>
+                      </b-dropdown>
+                    </span>
+                  </h5>
+                  <p>1h Ago</p>
+                </b-col>
               </b-row>
               <b-row>
                 <b-col cols="12" class="mt-2">
@@ -217,210 +259,88 @@
                   >
                 </b-col>
               </b-row>
-              <div class="col-md-12 pt-2 pb-2 m-0">
-                <div class="post-footer">
-                  <div class="input-group post-div">
-                    <a class="pull-left pr-2" href="#">
-                      <img
-                        class="post-userim"
-                        src="@/assets/img/photo1.jpg"
-                        alt="avatar"
-                      />
-                    </a>
-                    <input
-                      placeholder="Post a Comment"
-                      class="form-control adco comment"
-                      type="text"
-                    />
-
-                    <fas-icon
-                      class="primary send-cmt"
-                      :icon="['fas', 'paper-plane']"
-                    />
-                  </div>
-                  <ul class="comments-list allcomment pl-0 mt-4">
-                    <li class="comment">
-                      <a class="pull-left pr-4" href="#">
-                        <img
-                          class="post-userim"
-                          src="@/assets/img/photo2.jpg"
-                          alt="avatar"
-                        />
-                      </a>
-                      <div class="comment-body">
-                        <div class="comment-body-in">
-                          <div class="comment-heading">
-                            <div class="pull-left">
-                              <h5 class="user">Gavino Free</h5>
-                              <h5 class="time">5 minutes ago</h5>
-                            </div>
-                          </div>
-                          <p>
-                            Lorem Ipsum has been the industry's standard dummy
-                            text ever since the 1500s, when an unknown printer
-                            took a galley of type and scrambled it to make a
-                            type specimen book. It has survived not only five
-                            centuries<span class="text-size">😛</span>
-                          </p>
-                        </div>
-                        <div class="col-md-12 pt-2 pl-0 mb-3">
-                          <b-icon
-                            icon="suit-heart"
-                            variant="primary"
-                            aria-hidden="true"
-                          ></b-icon>
-                          23 &nbsp; &nbsp; &nbsp; <a href="#">Reply</a>
-                        </div>
-                      </div>
-                      <ul class="comments-list">
-                        <li class="comment">
-                          <a class="pull-left pr-4" href="#">
-                            <img
-                              class="post-userim"
-                              src="@/assets/img/photo2.jpg"
-                              alt="avatar"
-                            />
-                          </a>
-                          <div class="comment-body">
-                            <div class="comment-body-in">
-                              <div class="comment-heading">
-                                <div class="pull-left">
-                                  <h5 class="user">Gavino Free</h5>
-                                  <h5 class="time">5 minutes ago</h5>
-                                </div>
-                              </div>
-                              <p>
-                                Lorem Ipsum has been the industry's standard
-                                dummy text ever since the 1500s, when an unknown
-                                printer took a galley of type and scrambled it
-                                to make a type specimen book. It has survived
-                                not only five centuries<span class="text-size"
-                                  >😛</span
-                                >
-                              </p>
-                            </div>
-                            <div class="col-md-12 pt-2 pl-0 mb-3">
-                              <b-icon
-                                icon="suit-heart"
-                                variant="primary"
-                                aria-hidden="true"
-                              ></b-icon>
-                              23 &nbsp; &nbsp; &nbsp; <a href="#">Reply</a>
-                            </div>
-                          </div>
-                        </li>
-                        <li class="comment">
-                          <a class="pull-left pr-4" href="#">
-                            <img
-                              class="post-userim"
-                              src="@/assets/img/photo2.jpg"
-                              alt="avatar"
-                            />
-                          </a>
-                          <div class="comment-body">
-                            <div class="comment-body-in">
-                              <div class="comment-heading">
-                                <div class="pull-left">
-                                  <h5 class="user">Gavino Free</h5>
-                                  <h5 class="time">5 minutes ago</h5>
-                                </div>
-                              </div>
-                              <p>
-                                Lorem Ipsum has been the industry's standard
-                                dummy text ever since the 1500s, when an unknown
-                                printer took a galley of type and scrambled it
-                                to make a type specimen book. It has survived
-                                not only five centuries<span class="text-size"
-                                  >😛</span
-                                >
-                              </p>
-                            </div>
-                            <div class="col-md-12 pt-2 pl-0 mb-3">
-                              <i
-                                class="fa heart  fa-heart-o"
-                                aria-hidden="true"
-                              ></i>
-                              23 &nbsp; &nbsp; &nbsp; <a href="#">Reply</a>
-                            </div>
-                          </div>
-                        </li>
-                        <div class="input-group post-div">
-                          <a class="pull-left pr-4" href="#">
-                            <img
-                              class="post-userim"
-                              src="@/assets/img/photo1.jpg"
-                              alt="avatar"
-                            />
-                          </a>
-                          <input
-                            placeholder="Post a Comment"
-                            class="form-control adco comment"
-                            type="text"
-                          />
-
-                          <fas-icon
-                            class="primary send-cmt"
-                            :icon="['fas', 'paper-plane']"
-                          />
-                        </div>
-                      </ul>
-                    </li>
-                  </ul>
-                  <ul class="comments-list allcomment pl-0 mt-4">
-                    <li class="comment">
-                      <a class="pull-left pr-4" href="#">
-                        <img
-                          class="post-userim"
-                          src="@/assets/img/photo2.jpg"
-                          alt="avatar"
-                        />
-                      </a>
-                      <div class="comment-body">
-                        <div class="comment-body-in">
-                          <div class="comment-heading">
-                            <div class="pull-left">
-                              <h5 class="user">Gavino Free</h5>
-                              <h5 class="time">5 minutes ago</h5>
-                            </div>
-                          </div>
-                          <p>
-                            Lorem Ipsum has been the industry's standard dummy
-                            text ever since the 1500s, when an unknown printer
-                            took a galley of type and scrambled it to make a
-                            type specimen book. It has survived not only five
-                            centuries<span class="text-size">😛</span>
-                          </p>
-                        </div>
-                        <div class="col-md-12 pt-2 pl-0 mb-3">
-                          <b-icon
-                            icon="suit-heart"
-                            variant="primary"
-                            aria-hidden="true"
-                          ></b-icon>
-                          23 &nbsp; &nbsp; &nbsp; <a href="#">Reply</a>
-                        </div>
-                      </div>
-                    </li>
-                  </ul>
-                </div>
-              </div>
+              <b-row class="mt-2">
+                <b-col cols="3" md="1" class="m-md-0 p-md-0">
+                  <b-avatar
+                    variant="info"
+                    class="img-fluid"
+                    src="https://placekitten.com/300/300"
+                  ></b-avatar>
+                </b-col>
+                <b-col cols="9" md="11" class="p-0 m-0 pr-3">
+                  <b-input-group class="my-auto w-100 rounded">
+                    <template #append>
+                      <b-input-group-text class=""
+                        ><strong class="color-site">
+                          <b-icon-cursor-fill></b-icon-cursor-fill> </strong
+                      ></b-input-group-text>
+                    </template>
+                    <b-form-input
+                      placeholder="Add A Comment"
+                      class="border-right-0"
+                    ></b-form-input>
+                  </b-input-group>
+                </b-col>
+              </b-row>
             </b-col>
           </b-row>
 
-          <b-row class="mt-2">
+          <b-row class="mt-4">
             <b-col cols="12" class="mt-4">
               <b-row>
-                <div class="media">
-                  <img
-                    src="@/assets/img/wankue-filler.jpg"
-                    alt="John Doe"
-                    class="mr-2 rounded-circle avatar-size"
-                  />
-                  <div class="media-body">
-                    <h4 class="mb-0">John Doe</h4>
-                    <p>Lorem ipsum...</p>
-                  </div>
-                </div>
+                <b-col cols="2" md="1" class="m-0 p-0">
+                  <b-avatar
+                    class="d-inline-block"
+                    variant="info"
+                    src="https://placekitten.com/300/300"
+                    size="3.5rem"
+                  ></b-avatar>
+                </b-col>
+                <b-col cols="10" md="11" class="pt-2">
+                  <h5 class="m-0 font-weight-bolder">
+                    John Doe
+                    <span class="float-right">
+                      <b-dropdown variant="outline-primary" size="sm">
+                        <template #button-content>
+                          <b-icon icon="three-dots" aria-hidden="true"></b-icon>
+                          More
+                        </template>
+                        <b-dropdown-item-button>
+                          <b-icon icon="lock-fill" aria-hidden="true"></b-icon>
+                          Locked <span class="sr-only">(Click to unlock)</span>
+                        </b-dropdown-item-button>
+                        <b-dropdown-divider></b-dropdown-divider>
+                        <b-dropdown-group header="Choose options" class="small">
+                          <b-dropdown-item-button>
+                            <b-icon icon="blank" aria-hidden="true"></b-icon>
+                            Option A <span class="sr-only">(Not selected)</span>
+                          </b-dropdown-item-button>
+                          <b-dropdown-item-button>
+                            <b-icon icon="check" aria-hidden="true"></b-icon>
+                            Option B <span class="sr-only">(Selected)</span>
+                          </b-dropdown-item-button>
+                          <b-dropdown-item-button>
+                            <b-icon icon="blank" aria-hidden="true"></b-icon>
+                            Option C <span class="sr-only">(Not selected)</span>
+                          </b-dropdown-item-button>
+                        </b-dropdown-group>
+                        <b-dropdown-divider></b-dropdown-divider>
+                        <b-dropdown-item-button
+                          >Some action</b-dropdown-item-button
+                        >
+                        <b-dropdown-item-button
+                          >Some other action</b-dropdown-item-button
+                        >
+                        <b-dropdown-divider></b-dropdown-divider>
+                        <b-dropdown-item-button variant="danger">
+                          <b-icon icon="trash-fill" aria-hidden="true"></b-icon>
+                          Delete
+                        </b-dropdown-item-button>
+                      </b-dropdown>
+                    </span>
+                  </h5>
+                  <p>1h Ago</p>
+                </b-col>
               </b-row>
               <b-row>
                 <b-col cols="12" class="mt-2">
@@ -456,210 +376,88 @@
                   >
                 </b-col>
               </b-row>
-              <div class="col-md-12 pt-2 pb-2 m-0">
-                <div class="post-footer">
-                  <div class="input-group post-div">
-                    <a class="pull-left pr-2" href="#">
-                      <img
-                        class="post-userim"
-                        src="@/assets/img/photo1.jpg"
-                        alt="avatar"
-                      />
-                    </a>
-                    <input
-                      placeholder="Post a Comment"
-                      class="form-control adco comment"
-                      type="text"
-                    />
-
-                    <fas-icon
-                      class="primary send-cmt"
-                      :icon="['fas', 'paper-plane']"
-                    />
-                  </div>
-                  <ul class="comments-list allcomment pl-0 mt-4">
-                    <li class="comment">
-                      <a class="pull-left pr-4" href="#">
-                        <img
-                          class="post-userim"
-                          src="@/assets/img/photo2.jpg"
-                          alt="avatar"
-                        />
-                      </a>
-                      <div class="comment-body">
-                        <div class="comment-body-in">
-                          <div class="comment-heading">
-                            <div class="pull-left">
-                              <h5 class="user">Gavino Free</h5>
-                              <h5 class="time">5 minutes ago</h5>
-                            </div>
-                          </div>
-                          <p>
-                            Lorem Ipsum has been the industry's standard dummy
-                            text ever since the 1500s, when an unknown printer
-                            took a galley of type and scrambled it to make a
-                            type specimen book. It has survived not only five
-                            centuries<span class="text-size">😛</span>
-                          </p>
-                        </div>
-                        <div class="col-md-12 pt-2 pl-0 mb-3">
-                          <b-icon
-                            icon="suit-heart"
-                            variant="primary"
-                            aria-hidden="true"
-                          ></b-icon>
-                          23 &nbsp; &nbsp; &nbsp; <a href="#">Reply</a>
-                        </div>
-                      </div>
-                      <ul class="comments-list">
-                        <li class="comment">
-                          <a class="pull-left pr-4" href="#">
-                            <img
-                              class="post-userim"
-                              src="@/assets/img/photo2.jpg"
-                              alt="avatar"
-                            />
-                          </a>
-                          <div class="comment-body">
-                            <div class="comment-body-in">
-                              <div class="comment-heading">
-                                <div class="pull-left">
-                                  <h5 class="user">Gavino Free</h5>
-                                  <h5 class="time">5 minutes ago</h5>
-                                </div>
-                              </div>
-                              <p>
-                                Lorem Ipsum has been the industry's standard
-                                dummy text ever since the 1500s, when an unknown
-                                printer took a galley of type and scrambled it
-                                to make a type specimen book. It has survived
-                                not only five centuries<span class="text-size"
-                                  >😛</span
-                                >
-                              </p>
-                            </div>
-                            <div class="col-md-12 pt-2 pl-0 mb-3">
-                              <b-icon
-                                icon="suit-heart"
-                                variant="primary"
-                                aria-hidden="true"
-                              ></b-icon>
-                              23 &nbsp; &nbsp; &nbsp; <a href="#">Reply</a>
-                            </div>
-                          </div>
-                        </li>
-                        <li class="comment">
-                          <a class="pull-left pr-4" href="#">
-                            <img
-                              class="post-userim"
-                              src="@/assets/img/photo2.jpg"
-                              alt="avatar"
-                            />
-                          </a>
-                          <div class="comment-body">
-                            <div class="comment-body-in">
-                              <div class="comment-heading">
-                                <div class="pull-left">
-                                  <h5 class="user">Gavino Free</h5>
-                                  <h5 class="time">5 minutes ago</h5>
-                                </div>
-                              </div>
-                              <p>
-                                Lorem Ipsum has been the industry's standard
-                                dummy text ever since the 1500s, when an unknown
-                                printer took a galley of type and scrambled it
-                                to make a type specimen book. It has survived
-                                not only five centuries<span class="text-size"
-                                  >😛</span
-                                >
-                              </p>
-                            </div>
-                            <div class="col-md-12 pt-2 pl-0 mb-3">
-                              <i
-                                class="fa heart  fa-heart-o"
-                                aria-hidden="true"
-                              ></i>
-                              23 &nbsp; &nbsp; &nbsp; <a href="#">Reply</a>
-                            </div>
-                          </div>
-                        </li>
-                        <div class="input-group post-div">
-                          <a class="pull-left pr-4" href="#">
-                            <img
-                              class="post-userim"
-                              src="@/assets/img/photo1.jpg"
-                              alt="avatar"
-                            />
-                          </a>
-                          <input
-                            placeholder="Post a Comment"
-                            class="form-control adco comment"
-                            type="text"
-                          />
-
-                          <fas-icon
-                            class="primary send-cmt"
-                            :icon="['fas', 'paper-plane']"
-                          />
-                        </div>
-                      </ul>
-                    </li>
-                  </ul>
-                  <ul class="comments-list allcomment pl-0 mt-4">
-                    <li class="comment">
-                      <a class="pull-left pr-4" href="#">
-                        <img
-                          class="post-userim"
-                          src="@/assets/img/photo2.jpg"
-                          alt="avatar"
-                        />
-                      </a>
-                      <div class="comment-body">
-                        <div class="comment-body-in">
-                          <div class="comment-heading">
-                            <div class="pull-left">
-                              <h5 class="user">Gavino Free</h5>
-                              <h5 class="time">5 minutes ago</h5>
-                            </div>
-                          </div>
-                          <p>
-                            Lorem Ipsum has been the industry's standard dummy
-                            text ever since the 1500s, when an unknown printer
-                            took a galley of type and scrambled it to make a
-                            type specimen book. It has survived not only five
-                            centuries<span class="text-size">😛</span>
-                          </p>
-                        </div>
-                        <div class="col-md-12 pt-2 pl-0 mb-3">
-                          <b-icon
-                            icon="suit-heart"
-                            variant="primary"
-                            aria-hidden="true"
-                          ></b-icon>
-                          23 &nbsp; &nbsp; &nbsp; <a href="#">Reply</a>
-                        </div>
-                      </div>
-                    </li>
-                  </ul>
-                </div>
-              </div>
+              <b-row class="mt-2">
+                <b-col cols="3" md="1" class="m-md-0 p-md-0">
+                  <b-avatar
+                    variant="info"
+                    class="img-fluid"
+                    src="https://placekitten.com/300/300"
+                  ></b-avatar>
+                </b-col>
+                <b-col cols="9" md="11" class="p-0 m-0 pr-3">
+                  <b-input-group class="my-auto w-100 rounded">
+                    <template #append>
+                      <b-input-group-text class=""
+                        ><strong class="color-site">
+                          <b-icon-cursor-fill></b-icon-cursor-fill> </strong
+                      ></b-input-group-text>
+                    </template>
+                    <b-form-input
+                      placeholder="Add A Comment"
+                      class="border-right-0"
+                    ></b-form-input>
+                  </b-input-group>
+                </b-col>
+              </b-row>
             </b-col>
           </b-row>
 
-          <b-row class="mt-2">
+          <b-row class="mt-4">
             <b-col cols="12" class="mt-4">
               <b-row>
-                <div class="media">
-                  <img
-                    src="@/assets/img/wankue-filler.jpg"
-                    alt="John Doe"
-                    class="mr-2 rounded-circle avatar-size"
-                  />
-                  <div class="media-body">
-                    <h4 class="mb-0">John Doe</h4>
-                    <p>Lorem ipsum...</p>
-                  </div>
-                </div>
+                <b-col cols="2" md="1" class="m-0 p-0">
+                  <b-avatar
+                    class="d-inline-block"
+                    variant="info"
+                    src="https://placekitten.com/300/300"
+                    size="3.5rem"
+                  ></b-avatar>
+                </b-col>
+                <b-col cols="10" md="11" class="pt-2">
+                  <h5 class="m-0 font-weight-bolder">
+                    John Doe
+                    <span class="float-right">
+                      <b-dropdown variant="outline-primary" size="sm">
+                        <template #button-content>
+                          <b-icon icon="three-dots" aria-hidden="true"></b-icon>
+                          More
+                        </template>
+                        <b-dropdown-item-button>
+                          <b-icon icon="lock-fill" aria-hidden="true"></b-icon>
+                          Locked <span class="sr-only">(Click to unlock)</span>
+                        </b-dropdown-item-button>
+                        <b-dropdown-divider></b-dropdown-divider>
+                        <b-dropdown-group header="Choose options" class="small">
+                          <b-dropdown-item-button>
+                            <b-icon icon="blank" aria-hidden="true"></b-icon>
+                            Option A <span class="sr-only">(Not selected)</span>
+                          </b-dropdown-item-button>
+                          <b-dropdown-item-button>
+                            <b-icon icon="check" aria-hidden="true"></b-icon>
+                            Option B <span class="sr-only">(Selected)</span>
+                          </b-dropdown-item-button>
+                          <b-dropdown-item-button>
+                            <b-icon icon="blank" aria-hidden="true"></b-icon>
+                            Option C <span class="sr-only">(Not selected)</span>
+                          </b-dropdown-item-button>
+                        </b-dropdown-group>
+                        <b-dropdown-divider></b-dropdown-divider>
+                        <b-dropdown-item-button
+                          >Some action</b-dropdown-item-button
+                        >
+                        <b-dropdown-item-button
+                          >Some other action</b-dropdown-item-button
+                        >
+                        <b-dropdown-divider></b-dropdown-divider>
+                        <b-dropdown-item-button variant="danger">
+                          <b-icon icon="trash-fill" aria-hidden="true"></b-icon>
+                          Delete
+                        </b-dropdown-item-button>
+                      </b-dropdown>
+                    </span>
+                  </h5>
+                  <p>1h Ago</p>
+                </b-col>
               </b-row>
               <b-row>
                 <b-col cols="12" class="mt-2">
@@ -695,25 +493,29 @@
                   >
                 </b-col>
               </b-row>
-              <div class="input-group post-div mt-2">
-                <a class="pull-left pr-2" href="#">
-                  <img
-                    class="post-userim"
-                    src="@/assets/img/photo1.jpg"
-                    alt="avatar"
-                  />
-                </a>
-                <input
-                  placeholder="Post a Comment"
-                  class="form-control adco comment"
-                  type="text"
-                />
-
-                <fas-icon
-                  class="primary send-cmt"
-                  :icon="['fas', 'paper-plane']"
-                />
-              </div>
+              <b-row class="mt-2">
+                <b-col cols="3" md="1" class="m-md-0 p-md-0">
+                  <b-avatar
+                    variant="info"
+                    class="img-fluid"
+                    src="https://placekitten.com/300/300"
+                  ></b-avatar>
+                </b-col>
+                <b-col cols="9" md="11" class="p-0 m-0 pr-3">
+                  <b-input-group class="my-auto w-100 rounded">
+                    <template #append>
+                      <b-input-group-text class=""
+                        ><strong class="color-site">
+                          <b-icon-cursor-fill></b-icon-cursor-fill> </strong
+                      ></b-input-group-text>
+                    </template>
+                    <b-form-input
+                      placeholder="Add A Comment"
+                      class="border-right-0"
+                    ></b-form-input>
+                  </b-input-group>
+                </b-col>
+              </b-row>
             </b-col>
           </b-row>
         </b-card>
@@ -766,16 +568,8 @@ export default {
   font-family: Avenir, Helvetica, Arial, sans-serif;
 }
 
-.text-size {
-  font-size: 14px;
-}
-
 .color-site {
   color: #e75c18;
-}
-
-.pull-left {
-  float: left;
 }
 
 @media (max-width: 576px) {
@@ -807,11 +601,5 @@ export default {
   .lb-grid {
     height: 500px;
   }
-}
-.send-cmt {
-  position: relative;
-  margin-left: 95%;
-  top: -28px;
-  cursor: pointer;
 }
 </style>

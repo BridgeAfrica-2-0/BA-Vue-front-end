@@ -1,16 +1,31 @@
 <template>
   <div>
     <b-tabs content-class="mt-1" fill pills>
-      <b-tab title="Posts" active>
+      <b-tab active>
+        <template slot="title" class="t-color">
+          <h6 class="t-color">Posts</h6>
+        </template>
+
         <post-network></post-network>
       </b-tab>
-      <b-tab title="Media">
+      <b-tab>
+        <template slot="title" class="t-color">
+          <h6 class="t-color">Media</h6>
+        </template>
+
         <media-network></media-network>
       </b-tab>
-      <b-tab title="Members">
+      <b-tab>
+        <template slot="title" class="t-color">
+          <h6 class="t-color">Community</h6>
+        </template>
+
         <member-network></member-network>
       </b-tab>
-      <b-tab title="Feedback">
+      <b-tab>
+        <template slot="title" class="t-color">
+          <h6 class="t-color">Feedback</h6>
+        </template>
         <feedback-network></feedback-network>
       </b-tab>
     </b-tabs>
@@ -34,4 +49,8 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.t-color {
+  color: black;
+}
+</style>

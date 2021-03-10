@@ -49,7 +49,7 @@
 
 <script>
 export default {
-  name: "networkPosts",
+  name: 'networkPosts',
   data() {
     return {
       posts: [

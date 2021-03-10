@@ -1,15 +1,20 @@
 <template>
   <div>
-    <h5 class="font-weight-bolder d-inline-block">
-      <b-icon-chat-fill></b-icon-chat-fill> Pending Posts
-    </h5>
-    <span class="float-right">35 Pending</span>
+    <b-row>
+      <b-col class="f-left">
+        <h5 class=" d-inline-block">
+          Pending Posts
+        </h5>
+      </b-col>
+      <b-col class="f-right"> <span class="">35 Pending</span> </b-col>
+    </b-row>
+
     <hr width="100%" />
     <b-row>
-      <b-col cols="12">
+      <b-col cols="12" class="f-left">
         <div v-for="i in 4" :key="i" class="mb-4">
           <b-card class="mb-2">
-            <b-card-text>
+            <b-card-text class="f-left">
               <b-row class="px-md-3">
                 <b-col cols="2" md="1" class="m-0 p-0">
                   <b-avatar
@@ -20,7 +25,7 @@
                   ></b-avatar>
                 </b-col>
                 <b-col cols="10" md="11" class="pt-2">
-                  <h5 class="m-0 font-weight-bolder">
+                  <h6 class="m-0 font-weight-bolder">
                     Mapoure Agrobusiness
                     <span class="float-right">
                       <b-dropdown
@@ -47,7 +52,7 @@
                         </b-dropdown-item>
                       </b-dropdown>
                     </span>
-                  </h5>
+                  </h6>
                   <p>
                     1h Ago -
                     <span class="text-primary">Commented on a Post</span>
@@ -85,4 +90,12 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.f-right {
+  text-align: right;
+}
+
+.f-left {
+  text-align: left;
+}
+</style>

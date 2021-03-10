@@ -91,7 +91,7 @@
 
 <script>
 export default {
-  name: "albumsPosts",
+  name: 'albumsPosts',
   data() {
     return {
       albumShow: true,
@@ -333,7 +333,7 @@ export default {
 
 .create {
   position: relative;
-  height: 85%;
+   height: 85%;
   color: #fff;
   background-color: #bbb;
   padding: 20px;

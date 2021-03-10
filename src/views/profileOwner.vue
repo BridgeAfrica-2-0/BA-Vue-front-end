@@ -2,33 +2,31 @@
   <div class="mx-auto">
     <navbar></navbar>
     <head-page></head-page>
-    <b-container fluid="md" class="text-justify mx-auto mt-3">
+    <b-container fluid="md" class="text-justify mx-auto mt-4 corps">
       <b-row>
         <b-col cols="12">
-          <b-tabs content-class="mt-3" pills card fill>
+          <b-tabs content-class="mt-3" pills card small fill>
             <b-tab title="Posts" active>
               <Post />
             </b-tab>
-            <b-tab title="About" class="text-dark"><About /></b-tab>
-            <b-tab title="Business" class="m-0 p-0 text-dark"
+            <b-tab title="About"><About /></b-tab>
+            <b-tab title="Business" class="m-0 p-0"
               ><bussiness></bussiness
             ></b-tab>
-            <b-tab title="Media" class="text-dark"><Media /></b-tab>
-            <b-tab title="Following" class="m-0 p-0 text-dark"
+            <b-tab title="Media"><Media /></b-tab>
+            <b-tab title="Following" class="m-0 p-0"
               ><following></following>
             </b-tab>
           </b-tabs>
         </b-col>
       </b-row>
     </b-container>
-    <pied></pied>
   </div>
 </template>
 
 <script>
 import navbar from "@/components/navbar";
 import headPage from "@/components/headPage";
-import pied from "@/components/footer";
 import Post from "@/components/owner/tabs/posts";
 import About from "@/components/owner/tabs/about";
 import Media from "@/components/owner/tabs/media";
@@ -44,8 +42,7 @@ export default {
     headPage,
     Post,
     About,
-    Media,
-    pied
+    Media
   },
   data() {
     return {};
@@ -55,12 +52,7 @@ export default {
 };
 </script>
 
-<style>
-.nav-link {
-  color: black;
-  display: block;
-  padding: 0.5rem 1rem;
-}
+<style scoped>
 @media (max-width: 576px) {
   .lb-grid {
     height: 200px;

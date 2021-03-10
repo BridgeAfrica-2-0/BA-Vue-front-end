@@ -1,28 +1,30 @@
 <template>
   <div>
     <b-container>
-      <b-row>
-        <b-col>
-          <div class="b-bottomn f-left">
-            <b-form-checkbox
-              id="checkbox-1"
-              v-model="status"
-              name="checkbox-1"
-              value="accepted"
-              unchecked-value="not_accepted"
-            >
-              Select All
-            </b-form-checkbox>
-          </div>
-        </b-col>
-        <b-col>
-          <div class="b-bottomn f-right">
-            <b-button variant="success" class="a-button-l">
-              Mark as Read</b-button
-            >
-          </div>
-        </b-col>
-      </b-row>
+      <b-container class="b-bottom">
+        <b-row>
+          <b-col>
+            <div class="b-bottomn f-left">
+              <b-form-checkbox
+                id="checkbox-1"
+                v-model="status"
+                name="checkbox-1"
+                value="accepted"
+                unchecked-value="not_accepted"
+              >
+                Select All
+              </b-form-checkbox>
+            </div>
+          </b-col>
+          <b-col>
+            <div class="b-bottomn f-right">
+              <b-button variant="primary" class="a-button-l">
+                Mark as Read</b-button
+              >
+            </div>
+          </b-col>
+        </b-row>
+      </b-container>
       <br />
 
       <b-container>
@@ -37,10 +39,14 @@
               unchecked-value="not_accepted"
             >
             </b-form-checkbox>
-            <b-avatar class="mr-3" size="4em"></b-avatar>
+            <b-avatar
+              class="mr-3"
+              src="https://business.bridgeafrica.info/assets/img/team/3.png"
+              size="3.5em"
+            ></b-avatar>
             <span class="mr-auto"
               >J. Circlehead
-              <p>1hr</p>
+              <p>1hr ago</p>
             </span>
             <span class=" ">
               <div>
@@ -85,10 +91,14 @@
               unchecked-value="not_accepted"
             >
             </b-form-checkbox>
-            <b-avatar class="mr-3" size="4em"></b-avatar>
+            <b-avatar
+              class="mr-3"
+              src="https://business.bridgeafrica.info/assets/img/team/3.png"
+              size="3.5em"
+            ></b-avatar>
             <span class="mr-auto"
-              >J. Circlehead
-              <p>1hr</p>
+              >J. itz blezour blecc
+              <p>2 weeks ago</p>
             </span>
             <span class=" ">
               <div>
@@ -157,5 +167,16 @@ export default {
 
 .m-left {
   margin-left: -20px;
+}
+
+.b-bottom {
+  border-bottom: 1px solid;
+}
+
+.bb-bottom {
+  border-bottom: 0.5px solid;
+  border-color: aqua;
+  margin-bottom: 7px;
+  margin-top: 5px;
 }
 </style>

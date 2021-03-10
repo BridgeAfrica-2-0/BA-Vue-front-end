@@ -15,20 +15,20 @@
               Current or Last Organization
             </p>
             <p>
-              <b-icon icon="book-fill" class="violet"></b-icon> Studied at:
-              Last Education
+              <b-icon icon="book-fill" class="violet"></b-icon> Studied at: Last
+              Education
             </p>
             <p>
               <b-icon icon="house-fill" class="violet"></b-icon> Home Town
               Name:Dummy
             </p>
             <p>
-              <b-icon icon="geo-alt-fill" class="violet"></b-icon> Current
-              City Name:Dummy
+              <b-icon icon="geo-alt-fill" class="violet"></b-icon> Current City
+              Name:Dummy
             </p>
             <p>
-              <b-icon icon="people-fill" class="violet"></b-icon> Followed
-              by: 525
+              <b-icon icon="people-fill" class="violet"></b-icon> Followed by:
+              525
             </p>
           </b-card-text>
         </b-card>
@@ -129,36 +129,35 @@
               ></b-form-textarea>
               <span class="float-left">
                 <b-button-group size="sm" class="border-0 violet">
-                  <b-button
-                    title="Add Image"
-                    size="sm"
-                    variant="light"
-                  >
-                    <b-icon icon="card-image" aria-hidden="true" class="violet"></b-icon>
-                  </b-button>
-                  <b-button
-                    title="Add Movie"
-                    size="sm"
-                    variant="light"
-
-                  >
+                  <b-button title="Add Image" size="sm" variant="light">
                     <b-icon
-                      icon="camera-video-fill"
-                      aria-hidden="true" class="violet"
+                      icon="card-image"
+                      aria-hidden="true"
+                      class="violet"
                     ></b-icon>
                   </b-button>
-                  <b-button
-                    title="Add Hyperlink"
-                    size="sm"
-                    variant="light"
-                  >
-                    <b-icon icon="link-45deg" aria-hidden="true" class="violet"></b-icon>
+                  <b-button title="Add Movie" size="sm" variant="light">
+                    <b-icon
+                      icon="camera-video-fill"
+                      aria-hidden="true"
+                      class="violet"
+                    ></b-icon>
+                  </b-button>
+                  <b-button title="Add Hyperlink" size="sm" variant="light">
+                    <b-icon
+                      icon="link-45deg"
+                      aria-hidden="true"
+                      class="violet"
+                    ></b-icon>
                   </b-button>
                 </b-button-group>
               </span>
               <span class="float-right">
-                <b-button variant="outline-primary" size="sm" class="border-none"
-                  >
+                <b-button
+                  variant="outline-primary"
+                  size="sm"
+                  class="border-none"
+                >
                   Publish</b-button
                 >
               </span>
@@ -169,7 +168,11 @@
             <b-col cols="12" class="mt-4">
               <b-row>
                 <div class="media">
-                  <img src="@/assets/img/wankue-filler.jpg" alt="John Doe" class="mr-2 rounded-circle" style="width:60px;">
+                  <img
+                    src="@/assets/img/wankue-filler.jpg"
+                    alt="John Doe"
+                    class="mr-2 rounded-circle avatar-size"
+                  />
                   <div class="media-body">
                     <h4 class="mb-0">John Doe</h4>
                     <p>Lorem ipsum...</p>
@@ -217,17 +220,33 @@
               <div class="col-md-12 pt-2 pb-2 m-0">
                 <div class="post-footer">
                   <div class="input-group post-div">
-                    <a class="pull-left pr-2" href="#"> <img class="post-userim" src="@/assets/img/photo1.jpg" alt="avatar"> </a>
-                    <input placeholder="Post a Comment" class="form-control adco comment" type="text" />
+                    <a class="pull-left pr-2" href="#">
+                      <img
+                        class="post-userim"
+                        src="@/assets/img/photo1.jpg"
+                        alt="avatar"
+                      />
+                    </a>
+                    <input
+                      placeholder="Post a Comment"
+                      class="form-control adco comment"
+                      type="text"
+                    />
 
                     <fas-icon
-                        class="primary send-cmt"
-                        :icon="['fas', 'paper-plane']"
+                      class="primary send-cmt"
+                      :icon="['fas', 'paper-plane']"
                     />
                   </div>
                   <ul class="comments-list allcomment pl-0 mt-4">
                     <li class="comment">
-                      <a class="pull-left pr-4" href="#"> <img class="post-userim" src="@/assets/img/photo2.jpg" alt="avatar"> </a>
+                      <a class="pull-left pr-4" href="#">
+                        <img
+                          class="post-userim"
+                          src="@/assets/img/photo2.jpg"
+                          alt="avatar"
+                        />
+                      </a>
                       <div class="comment-body">
                         <div class="comment-body-in">
                           <div class="comment-heading">
@@ -236,17 +255,32 @@
                               <h5 class="time">5 minutes ago</h5>
                             </div>
                           </div>
-                          <p>Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries<span style="font-size:14px;">😛</span></p>
+                          <p>
+                            Lorem Ipsum has been the industry's standard dummy
+                            text ever since the 1500s, when an unknown printer
+                            took a galley of type and scrambled it to make a
+                            type specimen book. It has survived not only five
+                            centuries<span class="text-size">😛</span>
+                          </p>
                         </div>
-                        <div class="col-md-12 pt-2 pl-0 mb-3"> <b-icon
+                        <div class="col-md-12 pt-2 pl-0 mb-3">
+                          <b-icon
                             icon="suit-heart"
                             variant="primary"
                             aria-hidden="true"
-                        ></b-icon>  23 &nbsp; &nbsp; &nbsp; <a href="#">Reply</a> </div>
+                          ></b-icon>
+                          23 &nbsp; &nbsp; &nbsp; <a href="#">Reply</a>
+                        </div>
                       </div>
                       <ul class="comments-list">
                         <li class="comment">
-                          <a class="pull-left pr-4" href="#"> <img class="post-userim" src="@/assets/img/photo2.jpg" alt="avatar"> </a>
+                          <a class="pull-left pr-4" href="#">
+                            <img
+                              class="post-userim"
+                              src="@/assets/img/photo2.jpg"
+                              alt="avatar"
+                            />
+                          </a>
                           <div class="comment-body">
                             <div class="comment-body-in">
                               <div class="comment-heading">
@@ -255,17 +289,34 @@
                                   <h5 class="time">5 minutes ago</h5>
                                 </div>
                               </div>
-                              <p>Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries<span style="font-size:14px;">😛</span></p>
+                              <p>
+                                Lorem Ipsum has been the industry's standard
+                                dummy text ever since the 1500s, when an unknown
+                                printer took a galley of type and scrambled it
+                                to make a type specimen book. It has survived
+                                not only five centuries<span class="text-size"
+                                  >😛</span
+                                >
+                              </p>
                             </div>
-                            <div class="col-md-12 pt-2 pl-0 mb-3"> <b-icon
+                            <div class="col-md-12 pt-2 pl-0 mb-3">
+                              <b-icon
                                 icon="suit-heart"
                                 variant="primary"
                                 aria-hidden="true"
-                            ></b-icon> 23 &nbsp; &nbsp; &nbsp; <a href="#">Reply</a> </div>
+                              ></b-icon>
+                              23 &nbsp; &nbsp; &nbsp; <a href="#">Reply</a>
+                            </div>
                           </div>
                         </li>
                         <li class="comment">
-                          <a class="pull-left pr-4" href="#"> <img class="post-userim" src="@/assets/img/photo2.jpg" alt="avatar"> </a>
+                          <a class="pull-left pr-4" href="#">
+                            <img
+                              class="post-userim"
+                              src="@/assets/img/photo2.jpg"
+                              alt="avatar"
+                            />
+                          </a>
                           <div class="comment-body">
                             <div class="comment-body-in">
                               <div class="comment-heading">
@@ -274,25 +325,56 @@
                                   <h5 class="time">5 minutes ago</h5>
                                 </div>
                               </div>
-                              <p>Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries<span style="font-size:14px;">😛</span></p>
+                              <p>
+                                Lorem Ipsum has been the industry's standard
+                                dummy text ever since the 1500s, when an unknown
+                                printer took a galley of type and scrambled it
+                                to make a type specimen book. It has survived
+                                not only five centuries<span class="text-size"
+                                  >😛</span
+                                >
+                              </p>
                             </div>
-                            <div class="col-md-12 pt-2 pl-0 mb-3"><i class="fa heart  fa-heart-o" aria-hidden="true" style="color: red;"></i>   23 &nbsp; &nbsp; &nbsp; <a href="#">Reply</a> </div>
+                            <div class="col-md-12 pt-2 pl-0 mb-3">
+                              <i
+                                class="fa heart  fa-heart-o"
+                                aria-hidden="true"
+                              ></i>
+                              23 &nbsp; &nbsp; &nbsp; <a href="#">Reply</a>
+                            </div>
                           </div>
                         </li>
                         <div class="input-group post-div">
-                          <a class="pull-left pr-4" href="#"> <img class="post-userim" src="@/assets/img/photo1.jpg" alt="avatar"> </a>
-                          <input placeholder="Post a Comment" class="form-control adco comment" type="text" />
+                          <a class="pull-left pr-4" href="#">
+                            <img
+                              class="post-userim"
+                              src="@/assets/img/photo1.jpg"
+                              alt="avatar"
+                            />
+                          </a>
+                          <input
+                            placeholder="Post a Comment"
+                            class="form-control adco comment"
+                            type="text"
+                          />
 
                           <fas-icon
-                              class="primary send-cmt"
-                              :icon="['fas', 'paper-plane']"
-                          /></div>
+                            class="primary send-cmt"
+                            :icon="['fas', 'paper-plane']"
+                          />
+                        </div>
                       </ul>
                     </li>
                   </ul>
                   <ul class="comments-list allcomment pl-0 mt-4">
                     <li class="comment">
-                      <a class="pull-left pr-4" href="#"> <img class="post-userim" src="@/assets/img/photo2.jpg" alt="avatar"> </a>
+                      <a class="pull-left pr-4" href="#">
+                        <img
+                          class="post-userim"
+                          src="@/assets/img/photo2.jpg"
+                          alt="avatar"
+                        />
+                      </a>
                       <div class="comment-body">
                         <div class="comment-body-in">
                           <div class="comment-heading">
@@ -301,13 +383,22 @@
                               <h5 class="time">5 minutes ago</h5>
                             </div>
                           </div>
-                          <p>Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries<span style="font-size:14px;">😛</span></p>
+                          <p>
+                            Lorem Ipsum has been the industry's standard dummy
+                            text ever since the 1500s, when an unknown printer
+                            took a galley of type and scrambled it to make a
+                            type specimen book. It has survived not only five
+                            centuries<span class="text-size">😛</span>
+                          </p>
                         </div>
-                        <div class="col-md-12 pt-2 pl-0 mb-3"> <b-icon
+                        <div class="col-md-12 pt-2 pl-0 mb-3">
+                          <b-icon
                             icon="suit-heart"
                             variant="primary"
                             aria-hidden="true"
-                        ></b-icon>   23 &nbsp; &nbsp; &nbsp; <a href="#">Reply</a> </div>
+                          ></b-icon>
+                          23 &nbsp; &nbsp; &nbsp; <a href="#">Reply</a>
+                        </div>
                       </div>
                     </li>
                   </ul>
@@ -320,7 +411,11 @@
             <b-col cols="12" class="mt-4">
               <b-row>
                 <div class="media">
-                  <img src="@/assets/img/wankue-filler.jpg" alt="John Doe" class="mr-2 rounded-circle" style="width:60px;">
+                  <img
+                    src="@/assets/img/wankue-filler.jpg"
+                    alt="John Doe"
+                    class="mr-2 rounded-circle avatar-size"
+                  />
                   <div class="media-body">
                     <h4 class="mb-0">John Doe</h4>
                     <p>Lorem ipsum...</p>
@@ -364,17 +459,33 @@
               <div class="col-md-12 pt-2 pb-2 m-0">
                 <div class="post-footer">
                   <div class="input-group post-div">
-                    <a class="pull-left pr-2" href="#"> <img class="post-userim" src="@/assets/img/photo1.jpg" alt="avatar"> </a>
-                    <input placeholder="Post a Comment" class="form-control adco comment" type="text" />
+                    <a class="pull-left pr-2" href="#">
+                      <img
+                        class="post-userim"
+                        src="@/assets/img/photo1.jpg"
+                        alt="avatar"
+                      />
+                    </a>
+                    <input
+                      placeholder="Post a Comment"
+                      class="form-control adco comment"
+                      type="text"
+                    />
 
                     <fas-icon
-                        class="primary send-cmt"
-                        :icon="['fas', 'paper-plane']"
+                      class="primary send-cmt"
+                      :icon="['fas', 'paper-plane']"
                     />
                   </div>
                   <ul class="comments-list allcomment pl-0 mt-4">
                     <li class="comment">
-                      <a class="pull-left pr-4" href="#"> <img class="post-userim" src="@/assets/img/photo2.jpg" alt="avatar"> </a>
+                      <a class="pull-left pr-4" href="#">
+                        <img
+                          class="post-userim"
+                          src="@/assets/img/photo2.jpg"
+                          alt="avatar"
+                        />
+                      </a>
                       <div class="comment-body">
                         <div class="comment-body-in">
                           <div class="comment-heading">
@@ -383,17 +494,32 @@
                               <h5 class="time">5 minutes ago</h5>
                             </div>
                           </div>
-                          <p>Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries<span style="font-size:14px;">😛</span></p>
+                          <p>
+                            Lorem Ipsum has been the industry's standard dummy
+                            text ever since the 1500s, when an unknown printer
+                            took a galley of type and scrambled it to make a
+                            type specimen book. It has survived not only five
+                            centuries<span class="text-size">😛</span>
+                          </p>
                         </div>
-                        <div class="col-md-12 pt-2 pl-0 mb-3"> <b-icon
-                      icon="suit-heart"
-                      variant="primary"
-                      aria-hidden="true"
-                    ></b-icon>  23 &nbsp; &nbsp; &nbsp; <a href="#">Reply</a> </div>
+                        <div class="col-md-12 pt-2 pl-0 mb-3">
+                          <b-icon
+                            icon="suit-heart"
+                            variant="primary"
+                            aria-hidden="true"
+                          ></b-icon>
+                          23 &nbsp; &nbsp; &nbsp; <a href="#">Reply</a>
+                        </div>
                       </div>
                       <ul class="comments-list">
                         <li class="comment">
-                          <a class="pull-left pr-4" href="#"> <img class="post-userim" src="@/assets/img/photo2.jpg" alt="avatar"> </a>
+                          <a class="pull-left pr-4" href="#">
+                            <img
+                              class="post-userim"
+                              src="@/assets/img/photo2.jpg"
+                              alt="avatar"
+                            />
+                          </a>
                           <div class="comment-body">
                             <div class="comment-body-in">
                               <div class="comment-heading">
@@ -402,17 +528,34 @@
                                   <h5 class="time">5 minutes ago</h5>
                                 </div>
                               </div>
-                              <p>Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries<span style="font-size:14px;">😛</span></p>
+                              <p>
+                                Lorem Ipsum has been the industry's standard
+                                dummy text ever since the 1500s, when an unknown
+                                printer took a galley of type and scrambled it
+                                to make a type specimen book. It has survived
+                                not only five centuries<span class="text-size"
+                                  >😛</span
+                                >
+                              </p>
                             </div>
-                            <div class="col-md-12 pt-2 pl-0 mb-3"> <b-icon
-                      icon="suit-heart"
-                      variant="primary"
-                      aria-hidden="true"
-                    ></b-icon> 23 &nbsp; &nbsp; &nbsp; <a href="#">Reply</a> </div>
+                            <div class="col-md-12 pt-2 pl-0 mb-3">
+                              <b-icon
+                                icon="suit-heart"
+                                variant="primary"
+                                aria-hidden="true"
+                              ></b-icon>
+                              23 &nbsp; &nbsp; &nbsp; <a href="#">Reply</a>
+                            </div>
                           </div>
                         </li>
                         <li class="comment">
-                          <a class="pull-left pr-4" href="#"> <img class="post-userim" src="@/assets/img/photo2.jpg" alt="avatar"> </a>
+                          <a class="pull-left pr-4" href="#">
+                            <img
+                              class="post-userim"
+                              src="@/assets/img/photo2.jpg"
+                              alt="avatar"
+                            />
+                          </a>
                           <div class="comment-body">
                             <div class="comment-body-in">
                               <div class="comment-heading">
@@ -421,25 +564,56 @@
                                   <h5 class="time">5 minutes ago</h5>
                                 </div>
                               </div>
-                              <p>Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries<span style="font-size:14px;">😛</span></p>
+                              <p>
+                                Lorem Ipsum has been the industry's standard
+                                dummy text ever since the 1500s, when an unknown
+                                printer took a galley of type and scrambled it
+                                to make a type specimen book. It has survived
+                                not only five centuries<span class="text-size"
+                                  >😛</span
+                                >
+                              </p>
                             </div>
-                            <div class="col-md-12 pt-2 pl-0 mb-3"><i class="fa heart  fa-heart-o" aria-hidden="true" style="color: red;"></i>   23 &nbsp; &nbsp; &nbsp; <a href="#">Reply</a> </div>
+                            <div class="col-md-12 pt-2 pl-0 mb-3">
+                              <i
+                                class="fa heart  fa-heart-o"
+                                aria-hidden="true"
+                              ></i>
+                              23 &nbsp; &nbsp; &nbsp; <a href="#">Reply</a>
+                            </div>
                           </div>
                         </li>
                         <div class="input-group post-div">
-                          <a class="pull-left pr-4" href="#"> <img class="post-userim" src="@/assets/img/photo1.jpg" alt="avatar"> </a>
-                          <input placeholder="Post a Comment" class="form-control adco comment" type="text" />
+                          <a class="pull-left pr-4" href="#">
+                            <img
+                              class="post-userim"
+                              src="@/assets/img/photo1.jpg"
+                              alt="avatar"
+                            />
+                          </a>
+                          <input
+                            placeholder="Post a Comment"
+                            class="form-control adco comment"
+                            type="text"
+                          />
 
                           <fas-icon
-                              class="primary send-cmt"
-                              :icon="['fas', 'paper-plane']"
-                          /></div>
+                            class="primary send-cmt"
+                            :icon="['fas', 'paper-plane']"
+                          />
+                        </div>
                       </ul>
                     </li>
                   </ul>
                   <ul class="comments-list allcomment pl-0 mt-4">
                     <li class="comment">
-                      <a class="pull-left pr-4" href="#"> <img class="post-userim" src="@/assets/img/photo2.jpg" alt="avatar"> </a>
+                      <a class="pull-left pr-4" href="#">
+                        <img
+                          class="post-userim"
+                          src="@/assets/img/photo2.jpg"
+                          alt="avatar"
+                        />
+                      </a>
                       <div class="comment-body">
                         <div class="comment-body-in">
                           <div class="comment-heading">
@@ -448,13 +622,22 @@
                               <h5 class="time">5 minutes ago</h5>
                             </div>
                           </div>
-                          <p>Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries<span style="font-size:14px;">😛</span></p>
+                          <p>
+                            Lorem Ipsum has been the industry's standard dummy
+                            text ever since the 1500s, when an unknown printer
+                            took a galley of type and scrambled it to make a
+                            type specimen book. It has survived not only five
+                            centuries<span class="text-size">😛</span>
+                          </p>
                         </div>
-                        <div class="col-md-12 pt-2 pl-0 mb-3"> <b-icon
-                      icon="suit-heart"
-                      variant="primary"
-                      aria-hidden="true"
-                    ></b-icon>   23 &nbsp; &nbsp; &nbsp; <a href="#">Reply</a> </div>
+                        <div class="col-md-12 pt-2 pl-0 mb-3">
+                          <b-icon
+                            icon="suit-heart"
+                            variant="primary"
+                            aria-hidden="true"
+                          ></b-icon>
+                          23 &nbsp; &nbsp; &nbsp; <a href="#">Reply</a>
+                        </div>
                       </div>
                     </li>
                   </ul>
@@ -467,7 +650,11 @@
             <b-col cols="12" class="mt-4">
               <b-row>
                 <div class="media">
-                  <img src="@/assets/img/wankue-filler.jpg" alt="John Doe" class="mr-2 rounded-circle" style="width:60px;">
+                  <img
+                    src="@/assets/img/wankue-filler.jpg"
+                    alt="John Doe"
+                    class="mr-2 rounded-circle avatar-size"
+                  />
                   <div class="media-body">
                     <h4 class="mb-0">John Doe</h4>
                     <p>Lorem ipsum...</p>
@@ -509,12 +696,22 @@
                 </b-col>
               </b-row>
               <div class="input-group post-div mt-2">
-                <a class="pull-left pr-2" href="#"> <img class="post-userim" src="@/assets/img/photo1.jpg" alt="avatar"> </a>
-                <input placeholder="Post a Comment" class="form-control adco comment" type="text" />
+                <a class="pull-left pr-2" href="#">
+                  <img
+                    class="post-userim"
+                    src="@/assets/img/photo1.jpg"
+                    alt="avatar"
+                  />
+                </a>
+                <input
+                  placeholder="Post a Comment"
+                  class="form-control adco comment"
+                  type="text"
+                />
 
                 <fas-icon
-                    class="primary send-cmt"
-                    :icon="['fas', 'paper-plane']"
+                  class="primary send-cmt"
+                  :icon="['fas', 'paper-plane']"
                 />
               </div>
             </b-col>
@@ -569,14 +766,17 @@ export default {
   font-family: Avenir, Helvetica, Arial, sans-serif;
 }
 
+.text-size {
+  font-size: 14px;
+}
+
 .color-site {
   color: #e75c18;
 }
 
-.pull-left{
+.pull-left {
   float: left;
 }
-
 
 @media (max-width: 576px) {
   .lb-grid {

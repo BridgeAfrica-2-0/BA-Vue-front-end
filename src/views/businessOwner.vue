@@ -24,7 +24,6 @@ import Business from "../components/businessf/business";
 import Footer from "../components/footer";
 import Notification from "@/components/businessf/notification";
 
-
 export default {
   name: "Home",
   components: {

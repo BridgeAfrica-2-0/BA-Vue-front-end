@@ -29,8 +29,7 @@
   }
 }
 
-.violet{
+.violet {
   color: #630460;
 }
-
 </style>

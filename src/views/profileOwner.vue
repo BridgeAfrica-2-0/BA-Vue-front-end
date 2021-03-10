@@ -21,12 +21,14 @@
         </b-col>
       </b-row>
     </b-container>
+    <pied></pied>
   </div>
 </template>
 
 <script>
 import navbar from "@/components/navbar";
 import headPage from "@/components/headPage";
+import pied from "@/components/footer";
 import Post from "@/components/owner/tabs/posts";
 import About from "@/components/owner/tabs/about";
 import Media from "@/components/owner/tabs/media";
@@ -42,7 +44,8 @@ export default {
     headPage,
     Post,
     About,
-    Media
+    Media,
+    pied
   },
   data() {
     return {};

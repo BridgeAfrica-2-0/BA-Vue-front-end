@@ -1,71 +1,229 @@
 <template>
   <div>
+    <h2 class="p-3 bg-light shadow-sm mb-4">
+      <b-icon icon="people-fill" class="mr-2 pt-1 violet"></b-icon> Following
+    </h2>
     <b-card header-bg-variant="primary" header-tag="header" footer-tag="footer">
-      <template #header>
-        <h6 class="mb-0"><b-icon icon="people-fill"></b-icon> Following</h6>
-      </template>
       <b-tabs content-class="mt-3">
         <b-tab title="People Who Follow Me" active>
-          <b-row>
-            <b-col sm="12" md="4" v-for="i in 12" :key="i" class="mb-2">
-              <b-list-group-item class="d-flex align-items-center">
-                <b-avatar
-                  variant="info"
-                  src="https://placekitten.com/300/300"
-                  class="mr-3"
-                ></b-avatar>
-                <span class="mr-auto">Super Kitty</span>
-                <b-button variant="outline-primary" class="mb-2 ml-2" size="sm">
-                  <b-icon icon="chat-dots-fill" aria-hidden="true"></b-icon>
-                  <span class="show">Message</span>
-                </b-button>
-              </b-list-group-item>
-
-              <b-list-group-item class="d-flex align-items-center">
-                <b-avatar
-                  variant="info"
-                  src="https://placekitten.com/300/300"
-                  class="mr-3"
-                ></b-avatar>
-                <span class="mr-auto">Super Kitty</span>
-                <b-button variant="outline-primary" class="mb-2 ml-2" size="sm">
-                  <b-icon icon="person-plus-fill" aria-hidden="true"></b-icon>
-                  <span class="show">Add</span>
-                </b-button>
-              </b-list-group-item>
-            </b-col>
-          </b-row>
+          <div class="row">
+            <div class="container mt-4">
+              <div class="media border-botmediatom mb-4">
+                <img
+                  src="@/assets/img/alima.jpg"
+                  alt="John Doe"
+                  class="avatar-size mr-2 rounded-circle"
+                />
+                <div class="media-body">
+                  <b>Alima</b>
+                </div>
+                <button type="button" class="btn btn-outline-orange pull-right">
+                  <b-icon-plus-circle-fill></b-icon-plus-circle-fill> Follow
+                </button>
+              </div>
+              <div class="media border-botmediatom mb-4">
+                <img
+                  src="@/assets/img/filler.jpg"
+                  alt="John Doe"
+                  class="avatar-size mr-2 rounded-circle"
+                />
+                <div class="media-body">
+                  <b>Filler</b>
+                </div>
+                <button type="button" class="btn btn-outline-orange pull-right">
+                  <b-icon-plus-circle-fill></b-icon-plus-circle-fill> Follow
+                </button>
+              </div>
+              <div class="media border-botmediatom mb-4">
+                <img
+                  src="@/assets/img/filler-ali.jpg"
+                  alt="John Doe"
+                  class="avatar-size mr-2 rounded-circle"
+                />
+                <div class="media-body">
+                  <b>Filler Ali</b>
+                </div>
+                <button type="button" class="btn btn-outline-orange pull-right">
+                  <b-icon-plus-circle-fill></b-icon-plus-circle-fill> Follow
+                </button>
+              </div>
+              <div class="media border-botmediatom mb-4">
+                <img
+                  src="@/assets/img/wankue-filler.jpg"
+                  alt="John Doe"
+                  class="avatar-size mr-2 rounded-circle"
+                />
+                <div class="media-body">
+                  <b>Jhon Barrrows</b>
+                </div>
+                <button type="button" class="btn btn-outline-orange pull-right">
+                  Message
+                </button>
+              </div>
+              <div class="media border-botmediatom mb-4">
+                <img
+                  src="@/assets/img/wankue-filler.jpg"
+                  alt="John Doe"
+                  class="avatar-size mr-2 rounded-circle"
+                />
+                <div class="media-body">
+                  <b>Jhon Barrrows</b>
+                </div>
+                <button type="button" class="btn btn-outline-orange pull-right">
+                  <b-icon-plus-circle-fill></b-icon-plus-circle-fill> Follow
+                </button>
+              </div>
+              <div class="media border-botmediatom mb-4">
+                <img
+                  src="@/assets/img/wankue-filler.jpg"
+                  alt="John Doe"
+                  class="avatar-size mr-2 rounded-circle"
+                />
+                <div class="media-body">
+                  <b>Jhon Barrrows</b>
+                </div>
+                <button type="button" class="btn btn-outline-orange pull-right">
+                  Message
+                </button>
+              </div>
+              <div class="media border-botmediatom mb-4">
+                <img
+                  src="@/assets/img/wankue-filler.jpg"
+                  alt="John Doe"
+                  class="avatar-size mr-2 rounded-circle"
+                />
+                <div class="media-body">
+                  <b>Jhon Barrrows</b>
+                </div>
+                <button type="button" class="btn btn-outline-orange pull-right">
+                  <b-icon-plus-circle-fill></b-icon-plus-circle-fill> Follow
+                </button>
+              </div>
+              <div class="media border-botmediatom mb-4">
+                <img
+                  src="@/assets/img/wankue-filler.jpg"
+                  alt="John Doe"
+                  class="avatar-size mr-2 rounded-circle"
+                />
+                <div class="media-body">
+                  <b>Jhon Barrrows</b>
+                </div>
+                <button type="button" class="btn btn-outline-orange pull-right">
+                  Message
+                </button>
+              </div>
+            </div>
+          </div>
         </b-tab>
         <b-tab title="People I Am Following">
-          <b-row>
-            <b-col sm="12" md="4" v-for="i in 12" :key="i" class="mb-2">
-              <b-list-group-item class="d-flex align-items-center">
-                <b-avatar
-                  variant="info"
-                  src="https://placekitten.com/300/300"
-                  class="mr-3"
-                ></b-avatar>
-                <span class="mr-auto">Super Kitty</span>
-                <b-button variant="outline-primary" class="mb-2 ml-2" size="sm">
-                  <b-icon icon="chat-dots-fill" aria-hidden="true"></b-icon>
-                  <span class="show">Message</span>
-                </b-button>
-              </b-list-group-item>
-
-              <b-list-group-item class="d-flex align-items-center">
-                <b-avatar
-                  variant="info"
-                  src="https://placekitten.com/300/300"
-                  class="mr-3"
-                ></b-avatar>
-                <span class="mr-auto">Super Kitty</span>
-                <b-button variant="outline-primary" class="mb-2 ml-2" size="sm">
-                  <b-icon icon="person-plus-fill" aria-hidden="true"></b-icon>
-                  <span class="show">Add</span>
-                </b-button>
-              </b-list-group-item>
-            </b-col>
-          </b-row>
+          <div class="row">
+            <div class="container mt-4">
+              <div class="media border-botmediatom mb-4">
+                <img
+                  src="@/assets/img/wankue-filler.jpg"
+                  alt="John Doe"
+                  class="avatar-size mr-2 rounded-circle"
+                />
+                <div class="media-body">
+                  <b>Jhon Barrrows</b>
+                </div>
+                <button type="button" class="btn btn-outline-orange pull-right">
+                  <b-icon-plus-circle-fill></b-icon-plus-circle-fill> Follow
+                </button>
+              </div>
+              <div class="media border-botmediatom mb-4">
+                <img
+                  src="@/assets/img/wankue-filler.jpg"
+                  alt="John Doe"
+                  class="avatar-size mr-2 rounded-circle"
+                />
+                <div class="media-body">
+                  <b>Jhon Barrrows</b>
+                </div>
+                <button type="button" class="btn btn-outline-orange pull-right">
+                  <b-icon-plus-circle-fill></b-icon-plus-circle-fill> Follow
+                </button>
+              </div>
+              <div class="media border-botmediatom mb-4">
+                <img
+                  src="@/assets/img/wankue-filler.jpg"
+                  alt="John Doe"
+                  class="avatar-size mr-2 rounded-circle"
+                />
+                <div class="media-body">
+                  <b>Jhon Barrrows</b>
+                </div>
+                <button type="button" class="btn btn-outline-orange pull-right">
+                  <b-icon-plus-circle-fill></b-icon-plus-circle-fill> Follow
+                </button>
+              </div>
+              <div class="media border-botmediatom mb-4">
+                <img
+                  src="@/assets/img/wankue-filler.jpg"
+                  alt="John Doe"
+                  class="avatar-size mr-2 rounded-circle"
+                />
+                <div class="media-body">
+                  <b>Jhon Barrrows</b>
+                </div>
+                <button type="button" class="btn btn-outline-orange pull-right">
+                  Message
+                </button>
+              </div>
+              <div class="media border-botmediatom mb-4">
+                <img
+                  src="@/assets/img/wankue-filler.jpg"
+                  alt="John Doe"
+                  class="avatar-size mr-2 rounded-circle"
+                />
+                <div class="media-body">
+                  <b>Jhon Barrrows</b>
+                </div>
+                <button type="button" class="btn btn-outline-orange pull-right">
+                  <b-icon-plus-circle-fill></b-icon-plus-circle-fill> Follow
+                </button>
+              </div>
+              <div class="media border-botmediatom mb-4">
+                <img
+                  src="@/assets/img/wankue-filler.jpg"
+                  alt="John Doe"
+                  class="avatar-size mr-2 rounded-circle"
+                />
+                <div class="media-body">
+                  <b>Jhon Barrrows</b>
+                </div>
+                <button type="button" class="btn btn-outline-orange pull-right">
+                  Message
+                </button>
+              </div>
+              <div class="media border-botmediatom mb-4">
+                <img
+                  src="@/assets/img/wankue-filler.jpg"
+                  alt="John Doe"
+                  class="avatar-size mr-2 rounded-circle"
+                />
+                <div class="media-body">
+                  <b>Jhon Barrrows</b>
+                </div>
+                <button type="button" class="btn btn-outline-orange pull-right">
+                  <b-icon-plus-circle-fill></b-icon-plus-circle-fill> Follow
+                </button>
+              </div>
+              <div class="media border-botmediatom mb-4">
+                <img
+                  src="@/assets/img/wankue-filler.jpg"
+                  alt="John Doe"
+                  class="avatar-size mr-2 rounded-circle"
+                />
+                <div class="media-body">
+                  <b>Jhon Barrrows</b>
+                </div>
+                <button type="button" class="btn btn-outline-orange pull-right">
+                  Message
+                </button>
+              </div>
+            </div>
+          </div>
         </b-tab>
       </b-tabs>
     </b-card>
@@ -78,17 +236,14 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
+.avatar-size {
+  width: 60px;
+}
+
 @media (max-width: 576px) {
   .show {
     display: none;
-  }
-
-  .nav-tabs .nav-link {
-    border: 1px solid transparent;
-    border-top-left-radius: 0.25rem;
-    border-top-right-radius: 0.25rem;
-    font-size: 10px;
   }
 }
 @media (min-width: 576px) {

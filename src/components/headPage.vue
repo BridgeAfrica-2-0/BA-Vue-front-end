@@ -10,45 +10,53 @@
         <b-row class="mt-md-2">
           <b-col cols="6">
             <b-avatar
-                src="https://placekitten.com/300/300"
-                class="float-left"
-                badge-variant="primary"
-                size="8rem"
+              src="https://placekitten.com/300/300"
+              class="float-left"
+              badge-variant="primary"
+              size="8rem"
             ></b-avatar>
             <b-icon icon="camera-fill" class="avatar-header-icon"></b-icon>
             <div class="my-auto">
               <div class="mt-4">
-            <span>
-              <h5
-                  class="font-weight-bolder m-0 p-0 ml-2 d-inline-block header-text1"
-              >
-                User Name
-              </h5>
-              <br />
-              <p class="m-0 ml-2 d-inline-block header-text2">
-                Website
-              </p>
-              <br />
-              <p class="m-0 ml-2 d-inline-block header-text2">
-                1.5k Community
-              </p>
-            </span>
+                <span>
+                  <h5
+                    class="font-weight-bolder m-0 p-0 ml-2 d-inline-block header-text1"
+                  >
+                    User Name
+                  </h5>
+                  <br />
+                  <p class="m-0 ml-2 d-inline-block header-text2">
+                    Website
+                  </p>
+                  <br />
+                  <p class="m-0 ml-2 d-inline-block header-text2">
+                    1.5k Community
+                  </p>
+                </span>
               </div>
             </div>
           </b-col>
           <b-col cols="6" class="">
             <div class="my-auto">
               <span class="float-right">
-            <b-button class="mr-1" variant="success"> <b-icon-person-plus-fill></b-icon-person-plus-fill> Community</b-button>
-            <b-button class="mr-1" variant="warning"><fas-icon class="primary" :icon="['fas', 'comment']" /> Message</b-button>
-                  <b-dropdown id="dropdown-1" class="" variant="primary">
-                    <template #button-content>
-                      <b-icon-three-dots></b-icon-three-dots> Options
-                    </template>
-                    <b-dropdown-item>Invite Friends On Bridge Africa</b-dropdown-item>
-                    <b-dropdown-item>View As</b-dropdown-item>
-                  </b-dropdown>
-            </span>
+                <b-button class="mr-1" variant="success">
+                  <b-icon-person-plus-fill></b-icon-person-plus-fill>
+                  Community</b-button
+                >
+                <b-button class="mr-1" variant="warning"
+                  ><fas-icon class="primary" :icon="['fas', 'comment']" />
+                  Message</b-button
+                >
+                <b-dropdown id="dropdown-1" class="" variant="primary">
+                  <template #button-content>
+                    <b-icon-three-dots></b-icon-three-dots> Options
+                  </template>
+                  <b-dropdown-item
+                    >Invite Friends On Bridge Africa</b-dropdown-item
+                  >
+                  <b-dropdown-item>View As</b-dropdown-item>
+                </b-dropdown>
+              </span>
             </div>
           </b-col>
         </b-row>
@@ -196,6 +204,5 @@ export default {
     border-radius: 24px;
     padding: 6px;
   }
-
 }
 </style>

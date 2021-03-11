@@ -1,7 +1,7 @@
 <template>
   <div class="mx-auto">
     <navbar></navbar>
-    <head-page></head-page>
+    <head-page class="mt-header"></head-page>
     <b-container fluid="md" class="text-justify mx-auto mt-3">
       <b-row>
         <b-col cols="12">

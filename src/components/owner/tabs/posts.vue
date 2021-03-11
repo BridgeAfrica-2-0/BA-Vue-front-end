@@ -1,7 +1,7 @@
 <template>
   <div>
     <b-row>
-      <b-col md="4" class="p-0 m-0">
+      <b-col md="3" class="p-0 m-0">
         <b-card title="" header-tag="header" footer-tag="footer">
           <template #header>
             <h6 class="mb-0 d-inline-block">Intro</h6>
@@ -110,7 +110,7 @@
           </b-card-text>
         </b-card>
       </b-col>
-      <b-col md="8" class="m-0 p-0">
+      <b-col md="9" class="m-0 p-0 px-lg-4">
         <b-card class="px-md-3">
           <b-row>
             <b-col cols="2" md="1" class="m-0 p-0">
@@ -177,6 +177,27 @@
                     <h4 class="mb-0">John Doe</h4>
                     <p>Lorem ipsum...</p>
                   </div>
+                  <ul class="navbar-nav pull-right purple float-right my-auto">
+                    <li class="nav-item dropdown">
+                      <b-dropdown size="sm" class="" variant="link" toggle-class="text-decoration-none" no-caret>
+                        <template #button-content>
+                          <fas-icon
+                              class="drop-color font-weight-bolder"
+                              :icon="['fas', 'ellipsis-v']"
+                          />
+                        </template>
+                        <b-dropdown-item href="#"> <fas-icon
+                            class="drop-color font-weight-bolder"
+                            :icon="['fas', 'edit']"
+                        /> Edit</b-dropdown-item>
+                        <b-dropdown-item href="#">
+                          <fas-icon
+                              class="drop-color font-weight-bolder"
+                              :icon="['fas', 'trash-alt']"
+                          /> Delete</b-dropdown-item>
+                      </b-dropdown>
+                    </li>
+                  </ul>
                 </div>
               </b-row>
               <b-row>
@@ -420,6 +441,27 @@
                     <h4 class="mb-0">John Doe</h4>
                     <p>Lorem ipsum...</p>
                   </div>
+                  <ul class="navbar-nav pull-right purple float-right my-auto">
+                    <li class="nav-item dropdown">
+                      <b-dropdown size="sm" class="" variant="link" toggle-class="text-decoration-none" no-caret>
+                        <template #button-content>
+                          <fas-icon
+                              class="drop-color font-weight-bolder"
+                              :icon="['fas', 'ellipsis-v']"
+                          />
+                        </template>
+                        <b-dropdown-item href="#"> <fas-icon
+                            class="drop-color font-weight-bolder"
+                            :icon="['fas', 'edit']"
+                        /> Edit</b-dropdown-item>
+                        <b-dropdown-item href="#">
+                          <fas-icon
+                              class="drop-color font-weight-bolder"
+                              :icon="['fas', 'trash-alt']"
+                          /> Delete</b-dropdown-item>
+                      </b-dropdown>
+                    </li>
+                  </ul>
                 </div>
               </b-row>
               <b-row>
@@ -659,6 +701,27 @@
                     <h4 class="mb-0">John Doe</h4>
                     <p>Lorem ipsum...</p>
                   </div>
+                  <ul class="navbar-nav pull-right purple float-right my-auto">
+                    <li class="nav-item dropdown">
+                      <b-dropdown size="sm" class="" variant="link" toggle-class="text-decoration-none" no-caret>
+                        <template #button-content>
+                          <fas-icon
+                              class="drop-color font-weight-bolder"
+                              :icon="['fas', 'ellipsis-v']"
+                          />
+                        </template>
+                        <b-dropdown-item href="#"> <fas-icon
+                            class="drop-color font-weight-bolder"
+                            :icon="['fas', 'edit']"
+                        /> Edit</b-dropdown-item>
+                        <b-dropdown-item href="#">
+                          <fas-icon
+                              class="drop-color font-weight-bolder"
+                              :icon="['fas', 'trash-alt']"
+                          /> Delete</b-dropdown-item>
+                      </b-dropdown>
+                    </li>
+                  </ul>
                 </div>
               </b-row>
               <b-row>

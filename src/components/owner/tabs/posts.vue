@@ -168,7 +168,7 @@
                   <b-input-group class="my-auto w-100 rounded">
                     <template #append>
                       <b-input-group-text class=""
-                        ><strong style="color: #E75C18">
+                        ><strong class="clr">
                           <b-icon-cursor-fill></b-icon-cursor-fill> </strong
                       ></b-input-group-text>
                     </template>

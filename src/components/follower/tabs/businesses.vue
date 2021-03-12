@@ -10,7 +10,7 @@
     <div class="business" v-if="noBusiness == false">
       <Business />
     </div>
-    <div v-show="false" class="no-business">
+    <div v-show="noBusiness" class="no-business">
       <b-container>
         <h2>No Businesses Listed</h2>
         <hr />

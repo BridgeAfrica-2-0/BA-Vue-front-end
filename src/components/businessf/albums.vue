@@ -27,7 +27,7 @@
         <div v-for="item in images" :key="item.id" class="p-4 image">
           <span class="sp">
             <b-img
-              @click="modalShow = !modalShow"
+              @click="open"
               src="https://picsum.photos/300/150/?image=41"
               rounded
               fluid
@@ -87,6 +87,9 @@ export default {
     showModal() {
       this.$refs["modal-1"].show();
     },
+    open(){
+      this.modalShow = !this.modalShow
+    }
   },
 };
 </script>

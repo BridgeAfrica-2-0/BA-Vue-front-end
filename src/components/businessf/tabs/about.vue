@@ -259,25 +259,16 @@ export default {
     };
   },
   methods: {
-    /**
-     * Used to edit biography
-     * @return void
-     */
+   
     editBio() {
       this.edit1 = !this.edit1;
     },
-    /**
-     * Used to edit contact info
-     * @return void
-     */
+    
     editContact() {
       this.edit2 = !this.edit2;
     },
 
-    /**
-     *
-     * @param idForm
-     */
+    
     validate(idForm) {
       this.$bvModal.hide(idForm);
     }

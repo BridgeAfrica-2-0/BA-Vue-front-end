@@ -534,9 +534,9 @@ export default {
     },
     send() {
       this.message.type = "sent";
-      var today = new Date();
-      var h = today.getHours();
-      var m = today.getMinutes();
+      let today = new Date();
+      let h = today.getHours();
+      let m = today.getMinutes();
       this.message.timeStamp = h + ":" + m;
       this.message.message = this.text;
       this.chats.push(this.message);

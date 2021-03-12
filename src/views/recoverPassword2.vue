@@ -65,7 +65,7 @@ export default {
   width: 80%;
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 768px) {
   .btn {
     margin-left: -20px;
   }

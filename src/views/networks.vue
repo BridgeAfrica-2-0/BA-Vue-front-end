@@ -29,10 +29,12 @@
           <b-tab>
             <template slot="title">
               <p class="t-color">
-                
                 <b-icon icon="envelope" scale="1" variant="primary"></b-icon>
-                
-                Inbox  <span class="m-badge" > <b-badge pill variant="primary" >4</b-badge>  </span>
+
+                Inbox
+                <span class="m-badge">
+                  <b-badge pill variant="primary">4</b-badge>
+                </span>
               </p>
             </template>
 
@@ -45,7 +47,7 @@
             <template slot="title">
               <p class="t-color">
                 <b-icon icon="bell" scale="1" variant="primary"></b-icon>
-                Notification <b-badge pill variant="primary" >9</b-badge>  
+                Notification <b-badge pill variant="primary">9</b-badge>
               </p>
             </template>
 
@@ -107,23 +109,6 @@
               </b-row>
             </b-container>
           </b-tab>
-
-          <!--
-
-          <b-tab title="Pending Feedbacks ">    <b-container>
-              <b-row>
-                <b-col cols="" class="text-center px-3">
-                  <Parent />
-                </b-col>
-
-                <b-col md="8" class="order-sm-0">
-                 <PendingFeedback />
-                </b-col>
-              </b-row>
-            </b-container>
-
-
-  </b-tab>    -->
 
           <b-tab>
             <template slot="title">
@@ -242,7 +227,7 @@ export default {
   right: 5px;
 }
 
-.m-badge{
+.m-badge {
   margin-top: -10px;
 }
 .network-avatar-icon {

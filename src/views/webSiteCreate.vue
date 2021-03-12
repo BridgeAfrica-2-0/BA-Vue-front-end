@@ -36,7 +36,7 @@
                 <b-button
                     variant="outline-dark"
                     class="float-left"
-                    @click="show=false"
+                    @click='stat'
                 >
                   No, Thanks
                 </b-button>
@@ -44,7 +44,7 @@
                 <b-button
                     variant="primary"
                     class="float-right"
-                    @click="show=false"
+                    @click="stat"
                 >
                   Subscribe
                 </b-button>
@@ -76,7 +76,12 @@ export default {
     return {};
   },
   computed: {},
-  methods: {}
+  methods: {
+
+    stat() {
+      return show=false;
+    }
+  }
 };
 </script>
 

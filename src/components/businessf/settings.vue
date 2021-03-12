@@ -80,11 +80,12 @@ export default {
   name: "settings",
   components: {
     General,
-    Website,
+    Roles,
+
     Info,
-    Blocking,
+    Website,
     Payment,
-    Roles
+    Blocking
   },
   data() {
     return {};

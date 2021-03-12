@@ -71,19 +71,15 @@ export default {
     };
   },
   methods: {
-    /**
-    Used for opening modal to have a proper view of the picture
-    @param id
-    @return void
-*/
+  
     showModal() {
       this.$refs["modal-1"].show();
     },
 
-    /**
-     *
-     * @param id
-     */
+    postDescription(id){
+        var post=this.posts(id);
+        return post.text;
+    },
     deletePost(id) {
       const index = id - 1;
       if (index > -1) {

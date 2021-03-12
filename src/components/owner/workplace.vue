@@ -2,7 +2,7 @@
   <div>
     <b>WorkPlace</b>
     <hr />
-    <b-link style="text-decoration: none" class="mt-4" v-b-modal.modal-9>
+    <b-link class="mt-4 text-decoration-none" v-b-modal.modal-9>
       <b-icon icon="plus" variant="primary"></b-icon>
       Add Workplace</b-link
     >
@@ -13,8 +13,7 @@
             <img
               src="@/assets/img/about3.jpg"
               alt="John Doe"
-              class="mr-2"
-              style="width:60px;"
+              class="mr-2 picture-size"
             />
             <div class="media-body">
               <h6 class="mb-0"><b>Coca Cla Pvt Ltd. Team Lead</b></h6>
@@ -42,8 +41,7 @@
             <img
               src="@/assets/img/about1.jpg"
               alt="John Doe"
-              class="mr-2"
-              style="width:60px;"
+              class="mr-2 picture-size"
             />
             <div class="media-body">
               <h6 class="mb-0"><b>Ericson Pvt Ltd. Team Lead</b></h6>
@@ -71,7 +69,7 @@
     </b-list-group-item>
 
     <b-modal ref="add-contact" id="modal-9" title="Add Workplace ">
-      <div style="width: 100px">
+      <div class="div-design">
         <b-form-select
           class="mb-2"
           size="sm"
@@ -141,6 +139,15 @@ export default {
   position: relative;
   top: -50px;
 }
+
+.div-design{
+  width: 100px
+}
+
+.picture-size{
+  width:60px;
+}
+
 @media only screen and (max-width: 600px) {
   .avatar {
     position: relative;

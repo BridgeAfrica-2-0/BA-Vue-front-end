@@ -3,8 +3,7 @@
     <b>Profession</b>
     <hr />
     <b-list-group-item
-      class="d-flex align-items-center mb-4 "
-      style="border: none"
+      class="d-flex align-items-center mb-4 border-none"
     >
       <div class="datails">
         <div class="row">
@@ -33,6 +32,4 @@ export default {
 </script>
 
 <style scoped>
-@media only screen and (max-width: 600px) {
-}
 </style>

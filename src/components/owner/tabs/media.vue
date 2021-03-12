@@ -267,7 +267,7 @@
                 </a>
               </div>
             </div>
-            <div class="two2" style="display: none;">
+            <div class="two2 d-none">
               <div class="row">
                 <div class="container">
                   <div class="col-md-4 mx-auto">
@@ -284,7 +284,7 @@
                         </ul>
                       </div>
                       <div class="input-group col-md-12 text-center mb-4 selec">
-                        <label class="col-md-4 control-label pr-0" style="align-items: first baseline;" for="name">14 Items - </label>
+                        <label class="col-md-4 control-label pr-0 text-design" for="name">14 Items - </label>
                         <div class="col-md-5 pl-0 pr-0">
                           <select id="gender" class="form-control w-100">
                             <option>Public</option>
@@ -497,6 +497,10 @@ export default {
 </script>
 
 <style>
+
+.text-design{
+  align-items: first baseline;
+}
 
 .drop-color{
   color: black;

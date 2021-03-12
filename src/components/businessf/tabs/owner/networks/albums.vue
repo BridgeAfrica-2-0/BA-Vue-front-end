@@ -276,7 +276,7 @@ export default {
       @return void
       */
     chooseFile() {
-      var defaultBtn = document.getElementById("default-btn");
+      let defaultBtn = document.getElementById("default-btn");
       defaultBtn.click();
     },
     /**
@@ -293,9 +293,8 @@ export default {
      * @param file
      */
     createImage(file) {
-      // const image = new Image();
-      var reader = new FileReader();
-      var vm = this;
+      let reader = new FileReader();
+      let vm = this;
 
       reader.onload = e => {
         vm.image = e.target.result;

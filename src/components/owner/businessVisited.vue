@@ -96,7 +96,4 @@ export default {
   position: relative;
   left: 320px;
 }
-
-@media only screen and (max-width: 600px) {
-}
 </style>

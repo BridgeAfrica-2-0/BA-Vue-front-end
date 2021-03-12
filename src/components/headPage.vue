@@ -151,8 +151,6 @@ export default {
     padding: 0.25em;
     line-height: 1;
     border-radius: 10em;
-    font-size: 70%;
-    font-weight: 700;
     z-index: 1;
     bottom: -2px;
     right: 2px;

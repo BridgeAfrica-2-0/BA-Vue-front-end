@@ -46,8 +46,7 @@
         class="row sub-sidebar-2 pending-post-view mt-4 pb-0 border-dark border-2"
       >
         <div
-          class="col-md-12 col-lg-12 d-flex align-items-stretch mb-lg-0"
-          style="padding-left: 0; padding-top: 3px;"
+          class="col-md-12 col-lg-12 d-flex align-items-stretch mb-lg-0 position-define"
         >
           <a
             class="nav-link text-dark"
@@ -63,7 +62,7 @@
             <p>
               Your 3 Post(s) are pending for approval.&nbsp;&nbsp;&nbsp;&nbsp;<a
                 href="#"
-                style="color: #e75c18; text-decoration:underline;"
+                class="text-design"
                 >View All</a
               >
             </p>
@@ -589,6 +588,16 @@ export default {
 
 .color-site {
   color: #e75c18;
+}
+
+.position-define {
+  padding-left: 0;
+  padding-top: 3px;
+}
+
+.text-design{
+  color: #e75c18;
+  text-decoration:underline;
 }
 
 @media (max-width: 576px) {

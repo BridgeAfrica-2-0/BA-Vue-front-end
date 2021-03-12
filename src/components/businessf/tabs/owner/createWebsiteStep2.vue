@@ -187,18 +187,14 @@ export default {
 .list-complete-item {
   transition: transform 1s;
   flex: 1 1 25%;
-  /*height: 200px;*/
   padding: 10px;
-  /*   display: inline-block;
-    margin-right: 10px; */
 }
 .list-complete-img {
   object-fit: cover;
   height: 100%;
   width: 100%;
 }
-.list-complete-enter, .list-complete-leave-to
-  /* .list-complete-leave-active for <2.1.8 */ {
+.list-complete-enter, .list-complete-leave-to{
   opacity: 0;
   transform: translateY(30px);
 }
@@ -221,8 +217,8 @@ export default {
 }
 .template-pic {
   width: 100%;
-  width: -moz-available; /* WebKit-based browsers will ignore this. */
-  width: -webkit-fill-available; /* Mozilla-based browsers will ignore this. */
+  width: -moz-available;
+  width: -webkit-fill-available;
   border: 3px solid black;
 }
 .customInputFile {

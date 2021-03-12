@@ -45,7 +45,6 @@
             aria-expanded="false"
             aria-label="Toggle navigation"
         >
-          <!-- <span class="navbar-toggler-icon"></span> -->
           <fas-icon class="primary search" :icon="['fas', 'bars']" />
         </button>
         <div class="collapse navbar-collapse ml-4" id="navbarMenu">

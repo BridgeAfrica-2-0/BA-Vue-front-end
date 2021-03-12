@@ -110,11 +110,7 @@
       <div class="col">
         <h6 class="mb-0"><b>Places you lived</b></h6>
         <hr />
-        <!--  <h6><b>Cameroon, South Africa</b></h6>
-           <p>Current City</p> -->
         <hr />
-        <!-- <h6><b>New York, United States</b></h6>
-          <p>Home City</p> -->
         <a href="#" data-toggle="modal" data-target="#currentcityModal">
           <fas-icon
             class="primary float-left mr-1 mt-1"

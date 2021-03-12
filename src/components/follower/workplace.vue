@@ -4,8 +4,7 @@
     <hr />
 
     <b-list-group-item
-      class="d-flex align-items-center mb-4 "
-      style="border: none"
+      class="d-flex align-items-center mb-4 border-none"
     >
       <b-avatar class="mr-3 avatar"></b-avatar>
       <div class="datails">

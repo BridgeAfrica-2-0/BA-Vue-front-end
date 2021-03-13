@@ -1,5 +1,8 @@
 <template>
-  <b-container class="container p-5 h-100 w-100 mx-auto my-auto" fluid>
+  <b-container
+    class="container p-5 h-100 w-100 mx-auto my-auto"
+    fluid
+  >
     <div class="w-100 h-100 my-auto mx-auto">
       <b-card
         title="BridGe Login"
@@ -17,7 +20,7 @@
                 id="input-4"
                 v-model="name"
                 type="text"
-                placeholder="BrideTest"
+                placeholder="BridgeTest"
                 required
               />
             </b-form-group>
@@ -35,9 +38,9 @@
           <b-button type="submit" variant="outline-primary" @click="logIn">
             Login
           </b-button>
-          <div>
+         <div>
             <b-link href="recoverPass1">Forgot Password</b-link>
-          </div>
+         </div>
         </div>
       </b-card>
     </div>

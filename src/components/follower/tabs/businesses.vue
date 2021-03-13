@@ -1,16 +1,16 @@
 <template>
   <div>
-    <b-alert show class="primary-bg">
-      <b-icon icon="building" class="purple"></b-icon>
+    <b-alert show variant="primary">
+      <b-icon icon="building" variant="primary"></b-icon>
       <b>
         Businesses
       </b></b-alert
     >
 
-    <div class="business" v-if="noBusiness == false">
+    <div v-if="noBusiness == false">
       <Business />
     </div>
-    <div v-show="noBusiness" class="no-business">
+    <div v-if="noBusiness" class="no-business">
       <b-container>
         <h2>No Businesses Listed</h2>
         <hr />
@@ -23,14 +23,14 @@
 <script>
 import Business from "../business";
 export default {
-  data() {
-    return {
-      noBusiness: false
-    };
+  data(){
+    return{
+      noBusiness: false,
+    }
   },
   components: {
-    Business
-  }
+    Business,
+  },
 };
 </script>
 
@@ -43,26 +43,14 @@ export default {
   margin-left: 270px;
 }
 
-.purple{
-  color: purple;
-}
-.primary-bg {
-  background-color: rgb(242, 242, 242);
-  border: none;
-}
-
 h2,
 p {
   text-align: center;
 }
 
-.business{
-  min-height: 450px;
-}
-
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 600px) {
   .no-business {
-    width: 100%;
+      width: 100%;
     margin-left: 0px;
   }
 }

@@ -5,9 +5,7 @@
         <img src="../assets/img/logo_bridge_africa.png" class="image" alt="" />
         <div class="step-2">
           <b-card-text class="w-75 mx-auto mt-5">
-            <b-alert show v-if="!match" variant="danger"
-              >Passwords do not match</b-alert
-            >
+             <b-alert show v-if="!match" variant="danger">Passwords do not match</b-alert>
             <div class="row">
               <div class="col">
                 Create New Password
@@ -33,7 +31,7 @@
                 required
               />
             </b-form-group>
-            <b-button class="btnz" type="submit" variant="outline-primary">
+            <b-button type="submit" variant="outline-primary">
               Finish
             </b-button>
           </b-form>
@@ -44,13 +42,14 @@
 </template>
 
 <script>
+
 export default {
   data() {
     return {
       code: "",
-      password1: "",
-      password2: "",
-      match: true
+      password1:"",
+      password2:"",
+      match: true,
     };
   },
   methods: {
@@ -58,17 +57,17 @@ export default {
       e.preventDefault();
       window.location.href = "recoverPass1";
     },
-    recover(e) {
+  recover(e){
       e.preventDefault();
-      if (this.password1 == this.password2) {
-        window.location.href = "login";
-      } else {
-        this.match = false;
-        this.password1 = "";
-        this.password2 = "";
-      }
+    if(this.password1 == this.password2){
+      window.location.href = "login";
+    }else{
+     this.match = false
+     this.password1 = ""
+     this.password2 = ""
     }
   }
+  },
 };
 </script>
 
@@ -77,19 +76,7 @@ export default {
   width: 80%;
 }
 
-.btnz {
-  border: solid 1px #e75c18;
-  color: #e75c18;
-  background-color: #fff;
-   margin-left: 265px;
-}
-
-.btnz:hover {
-  color: #fff;
-  background-color: #e75c18;
-  border: none;
-}
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 600px) {
   .btn {
     margin-left: -20px;
   }

@@ -1,8 +1,8 @@
 <template>
   <div>
-    <b class="education">Education</b>
+    <b>Education</b>
     <hr />
-
+  
     <b-list-group-item
       class="d-flex align-items-center mb-4 "
       style="border: none"
@@ -21,32 +21,29 @@
         </div>
       </div>
     </b-list-group-item>
+
   </div>
 </template>
 
 <script>
 export default {
   data() {
-    return {};
-  }
+    return {
+    
+    };
+  },
 };
 </script>
 
 <style scoped>
-.education {
-  border: none;
-}
 .avatar {
   position: relative;
   top: -28px;
 }
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 600px) {
   .avatar {
     position: relative;
-    top: -80px;
-  }
-  .education {
-    margin-left: 20px;
+    top: -100px;
   }
 }
 </style>

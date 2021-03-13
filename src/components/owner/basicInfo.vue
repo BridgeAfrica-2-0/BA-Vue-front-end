@@ -18,7 +18,7 @@
       <b-modal hide-footer id="modal-1" title="Date Of Birth">
         <div>
           <label>Choose a date</label>
-          <b-form @submit="add">
+          <b-form  @submit="add">
             <div class="row">
               <div class="col">
                 <b-form-datepicker
@@ -38,7 +38,11 @@
                 ></b-form-select>
               </div>
             </div>
-            <b-button class="ml-2 mt-2 add-btn" type="submit" variant="primary"
+            <b-button
+              class="ml-2 mt-2"
+              style="position:relative; left: 400px"
+              type="submit"
+              variant="primary"
               >Add</b-button
             >
           </b-form>
@@ -59,40 +63,40 @@
         >Edit
       </b-button>
       <b-modal hide-footer id="modal-2" title="Gender">
-        <b-form>
-          <div>
-            <div class="row">
-              <div class="col">
-                <b-form-select
-                  class="mb-2"
-                  size="sm"
-                  v-model="gender"
-                  :options="genders"
-                  required
-                ></b-form-select>
-              </div>
-              <div class="col-4">
-                <b-form-select
-                  class="mb-2"
-                  size="sm"
-                  v-model="selected"
-                  :options="options"
-                  required
-                ></b-form-select>
-              </div>
+         <b-form   @submit="add">
+        <div>
+          <div class="row">
+            <div class="col">
+              <b-form-select
+                class="mb-2"
+                size="sm"
+                v-model="gender"
+                :options="genders"
+                required
+              ></b-form-select>
+            </div>
+            <div class="col-4">
+              <b-form-select
+                class="mb-2"
+                size="sm"
+                v-model="selected"
+                :options="options"
+                required
+              ></b-form-select>
             </div>
           </div>
-          <b-button
-            class="ml-2 mt-2"
-            style="position:relative; left: 400px"
-            type="submit"
-            variant="primary"
-            >Add</b-button
-          >
-        </b-form>
+        </div>
+         <b-button
+              class="ml-2 mt-2"
+              style="position:relative; left: 400px"
+              type="submit"
+              variant="primary"
+              >Add</b-button
+            >
+         </b-form>
       </b-modal>
     </div>
-  </div>
+    </div>
 </template>
 
 <script>
@@ -123,10 +127,6 @@ export default {
 .details {
   display: flex;
 }
-.add-btn {
-  position: relative;
-  left: 400px;
-}
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 600px) {
 }
 </style>

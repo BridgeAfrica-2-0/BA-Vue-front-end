@@ -1,8 +1,11 @@
 <template>
   <div>
-    <b class="profession">Profession</b>
+    <b>Profession</b>
     <hr />
-    <b-list-group-item class="d-flex align-items-center mb-4 item">
+    <b-list-group-item
+      class="d-flex align-items-center mb-4 "
+      style="border: none"
+    >
       <div class="datails">
         <div class="row">
           <div class="col">
@@ -11,6 +14,7 @@
         </div>
       </div>
     </b-list-group-item>
+
   </div>
 </template>
 
@@ -22,14 +26,16 @@ export default {
       options: [
         { value: null, text: "Select" },
         { value: "private", text: "Private" },
-        { value: "public", text: "Public" }
-      ]
+        { value: "public", text: "Public" },
+      ],
     };
-  }
+  },
 };
 </script>
 
 <style scoped>
+
 @media only screen and (max-width: 600px) {
+
 }
 </style>

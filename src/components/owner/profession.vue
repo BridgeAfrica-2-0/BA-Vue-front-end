@@ -4,7 +4,7 @@
     <hr />
     <b-link style="text-decoration: none" class="mt-4" v-b-modal.modal-11>
       <b-icon icon="plus" variant="primary"></b-icon>
-      Add Profession</b-link
+     Add Profession</b-link
     >
     <b-list-group-item
       class="d-flex align-items-center mb-4 "
@@ -51,14 +51,16 @@ export default {
       options: [
         { value: null, text: "Select" },
         { value: "private", text: "Private" },
-        { value: "public", text: "Public" }
-      ]
+        { value: "public", text: "Public" },
+      ],
     };
-  }
+  },
 };
 </script>
 
 <style scoped>
-@media only screen and (max-width: 768px){
+
+@media only screen and (max-width: 600px) {
+
 }
 </style>

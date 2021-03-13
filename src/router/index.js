@@ -1,6 +1,6 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import Home from "../views/home.vue";
+import Home from "../views/Home.vue";
 import Login from "../views/login.vue";
 import SignIn from "../views/signIn.vue";
 import RecoverPass1 from "../views/recoverPassword1.vue";
@@ -8,16 +8,15 @@ import RecoverPass2 from "../views/recoverPassword2.vue";
 import RecoverPass3 from "../views/recoverPassword3.vue";
 import createService from "@/views/createService";
 import service from "@/views/service";
-import Modifier from "@/views/modifier";
+import Modifier from "@/views/Modifier";
 import store from "@/store/index.js";
 import Follower from "../views/follower.vue";
-import profile_owner from "@/views/profileOwner";
-import businessFollower from "@/views/businessFollower";
-import businessOwner from "@/views/businessOwner";
-import search from "@/views/search";
-import forgotPassword from "@/views/forgotPassword";
-import navMessage from "@/views/navMessaging";
-import memberNetworkFollower from "@/views/memberNetworkFollower"
+import Visitor from "@/views/visitor";
+import businessVisitor from "@/views/businessVisitor.vue";
+import dashboard from "@/views/dashboard.vue";
+import dashboardInfo from "@/views/dashboardInfo.vue";
+import dashboardWelcome from "@/views/dashboardWelcome.vue";
+import memberNetworkVisitor from "@/views/memberNetworkVisitor.vue"
 
 Vue.use(VueRouter);
 
@@ -25,47 +24,62 @@ const routes = [
   {
     path: "/",
     name: "Home",
-    component: Home,
+    component: Home
   },
   {
-    path: "/profile_owner",
-    name: "profile_owner",
-    component: profile_owner,
+    path: "/visitor",
+    name: "visitor",
+    component: Visitor
   },
   {
-    path: "/business_owner",
-    name: "BusinessOwner",
-    component: businessOwner,
+    path: "/businessvisitor",
+    name: "businessVisitor",
+    component: businessVisitor
+  },
+  {
+    path: "/membernetworkvisitor",
+    name: "member Network Visitor",
+    component: memberNetworkVisitor
+  },
+  {
+    path: "/dashboard",
+    name: "dashboard",
+    component: dashboard
+  },
+  {
+    path: "/dashboardinfo",
+    name: "dashboard_Info",
+    component: dashboardInfo
+  },
+  {
+    path: "/dashboardwelcome",
+    name: "dashboard_welcome",
+    component: dashboardWelcome
   },
   {
     path: "/login",
     name: "Login",
-    component: Login,
+    component: Login
   },
   {
     path: "/signin",
     name: "SignIn",
-    component: SignIn,
+    component: SignIn
   },
   {
     path: "/recoverPass1",
     name: "RecoverPass1",
-    component: RecoverPass1,
+    component: RecoverPass1
   },
   {
     path: "/recoverPass2",
     name: "RecoverPass2",
-    component: RecoverPass2,
+    component: RecoverPass2
   },
   {
     path: "/recoverPass3",
     name: "RecoverPass3",
-    component: RecoverPass3,
-  },
-  {
-    path: "/businessfollower",
-    name: "BusinessFollower",
-    component: businessFollower,
+    component: RecoverPass3
   },
   {
     path: "/services/create",
@@ -77,12 +91,20 @@ const routes = [
       } else {
         next({ name: "Login" });
       }
-    },
+    }
   },
   {
     path: "/services/:id",
     name: "Service",
-    component: service,
+    component: service
+    // beforeEnter: (to, from, next) => {
+    //   console.log("dedans");
+    //   if (store.state.login) {
+    //     next();
+    //   } else {
+    //     next({ name: "Login" });
+    //   }
+    // }
   },
   {
     path: "/services/modify/:id",
@@ -96,38 +118,20 @@ const routes = [
         next({ name: "Login" });
       }
     },
+    
   },
 
   {
-    path: "/profilefollower",
+    path: "/follower",
     name: "Follower",
     component: Follower,
   },
-  {
-    path: "/search",
-    name: "Search",
-    component: search,
-  },
-  {
-    path: "/forgotpass",
-    name: "ForgotPassword",
-    component: forgotPassword,
-  },
-  {
-    path: "/messaging",
-    name: "Nav Meassage",
-    component: navMessage,
-  },
-  {
-    path: "/memberNetworkFollower",
-    name: "Membar Network Follower",
-    component: memberNetworkFollower,
-  },
+ 
 ];
 
 const router = new VueRouter({
   routes,
-  mode: "history",
+  mode: "history"
 });
 
 export default router;

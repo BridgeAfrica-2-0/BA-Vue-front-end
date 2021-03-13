@@ -1,15 +1,16 @@
 <template>
   <div>
-    <b-list-group-item class="d-flex align-items-center mb-4 style-group">
-      <b-avatar class="mr-3 avatar-style"></b-avatar>
-      <div>
-        <div class="row">
-          <div class="col">
-            <p>{{ defaultbio }}</p>
+     <b-list-group-item class="d-flex align-items-center mb-4 " style="border: none">
+          <b-avatar style="position:relative; top:-10px" class="mr-3"></b-avatar>
+          <div>
+            <div class="row">
+              <div class="col">
+                <p>{{ defaultbio }}</p>
+              </div>
+
+            </div>
           </div>
-        </div>
-      </div>
-    </b-list-group-item>
+        </b-list-group-item >
   </div>
 </template>
 
@@ -17,17 +18,18 @@
 export default {
   data() {
     return {
-      defaultbio: "no additional infomation to show !!"
+   
+      defaultbio:"no additional infomation to show !!",
+       
     };
   },
-  methods: {}
+  methods: {
+  
+  },
 };
 </script>
 
 <style scoped>
-.biography {
-  border: none;
-}
 .edit-btn {
   margin-left: 660px;
   margin-bottom: 20px;
@@ -36,18 +38,7 @@ export default {
   margin-left: 80%;
 }
 
-.style-group {
-  border: none;
-}
-
-.avatar-style {
-  position: relative;
-  top: -10px;
-}
-p{
-  text-align: left;
-}
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 600px) {
   .edit-btn {
     margin-left: 129px;
   }

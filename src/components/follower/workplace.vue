@@ -1,8 +1,8 @@
 <template>
   <div>
-    <b class="work">WorkPlace</b>
+    <b>WorkPlace</b>
     <hr />
-
+   
     <b-list-group-item
       class="d-flex align-items-center mb-4 "
       style="border: none"
@@ -12,7 +12,7 @@
         <div class="row">
           <div class="col">
             <span class="mr-auto"> <b>Company</b> </span>
-            <p><b>Position - 7 Feb</b></p>
+            <p>Position</p>
             <p>
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas
               quibusdam harum maxime!
@@ -21,32 +21,30 @@
         </div>
       </div>
     </b-list-group-item>
+
+   
   </div>
 </template>
 
 <script>
 export default {
   data() {
-    return {};
-  }
+    return {
+      
+    };
+  },
 };
 </script>
 
 <style scoped>
-.item {
-  border: none;
-}
 .avatar {
   position: relative;
   top: -28px;
 }
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 600px) {
   .avatar {
     position: relative;
-    top: -80px;
-  }
-  .work {
-    margin-left: 20px;
+    top: -100px;
   }
 }
 </style>

@@ -32,8 +32,8 @@
       </div>
     </b-modal>
 
-    <div>
-      <b-link class="link" v-b-modal.modal-7
+      <div>
+      <b-link style="text-decoration: none, position:relative; top:10px" v-b-modal.modal-7
         ><b-icon icon="facebook" variant="primary"></b-icon>
         https://www.facebook.com/yourid</b-link
       >
@@ -54,14 +54,14 @@
           </div>
         </div>
         <div class="row">
-          <div class="col">
+            <div class="col">
             <b-form-input
               v-model="business"
               placeholder="Social link"
             ></b-form-input>
           </div>
           <div class="col">
-            <b-form-select
+              <b-form-select
               class="mb-2"
               size="sm"
               v-model="socialSelected"
@@ -85,7 +85,7 @@ export default {
         { value: "private", text: "Private" },
         { value: "public", text: "Public" },
       ],
-      socials: [
+       socials: [
         { value: null, text: "Select" },
         { value: "instagram", text: "Instagram" },
         { value: "facebook", text: "FaceBook" },
@@ -97,10 +97,4 @@ export default {
 };
 </script>
 
-<style scoped>
-.link {
-  text-decoration: none;
-  position: relative;
-  top: 10px;
-}
-</style>
+<style></style>

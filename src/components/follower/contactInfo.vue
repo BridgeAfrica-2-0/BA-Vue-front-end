@@ -1,10 +1,10 @@
 <template>
   <div>
-    <b class="contact">Contact Infomation</b>
+    <b>Contact Infomation</b>
     <hr />
-    <div class="row">
+    <div class="row" >
       <div class="col">
-        Mobile Phone:
+        Mobile Phone: 
       </div>
       <div class="col">
         +1 644841545
@@ -16,9 +16,13 @@
 <script>
 export default {
   data() {
-    return {};
+    return {
+  
+    };
   },
-  methods: {}
+  methods: {
+   
+  },
 };
 </script>
 
@@ -26,9 +30,6 @@ export default {
 .details {
   display: flex;
 }
-@media only screen and (max-width: 768px) {
-  .contact{
-    margin-left: 20px;
-  }
+@media only screen and (max-width: 600px) {
 }
 </style>

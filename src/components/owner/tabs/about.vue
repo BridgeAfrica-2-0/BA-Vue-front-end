@@ -10,7 +10,9 @@
       <b-tabs pills card vertical>
         <b-tab title="BIOGRAPHY" active><Biography /></b-tab>
         <b-tab title="CONTACT & BASIC INFO"> <ContactandInfo /> </b-tab>
-        <b-tab title="WORK & EDUCATION"><WorkAndEducation /></b-tab>
+        <b-tab title="WORK & EDUCATION"
+          ><WorkAndEducation/></b-tab
+        >
       </b-tabs>
     </b-card>
   </div>
@@ -19,13 +21,15 @@
 <script>
 import Biography from "../biography";
 import ContactandInfo from "../contactandbasicinfo";
-import WorkAndEducation from "../workandeducation";
+import WorkAndEducation from "../workandeducation"
 export default {
   components: {
     Biography,
     ContactandInfo,
     WorkAndEducation
-  }
+
+
+  },
 };
 </script>
 

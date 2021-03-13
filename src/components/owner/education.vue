@@ -75,7 +75,7 @@
         v-model="to"
         class="mb-2"
       ></b-form-datepicker>
-      <b-form-input
+       <b-form-input
         class="mt-2"
         v-model="major"
         placeholder="Major"
@@ -93,10 +93,10 @@ export default {
       options: [
         { value: null, text: "Select" },
         { value: "private", text: "Private" },
-        { value: "public", text: "Public" }
-      ]
+        { value: "public", text: "Public" },
+      ],
     };
-  }
+  },
 };
 </script>
 
@@ -105,7 +105,7 @@ export default {
   position: relative;
   top: -50px;
 }
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 600px) {
   .avatar {
     position: relative;
     top: -100px;

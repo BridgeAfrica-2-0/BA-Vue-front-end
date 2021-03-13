@@ -4,27 +4,27 @@
       <div class="col-3">
         <img src="../../assets/img/follow.jpg" height="200" alt="" />
       </div>
-      <div class="col details ml-3">
+      <div class="col details">
         <h3>
-          <b-link class="link">Business Name</b-link>
+          <b-link style="text-decoration: none; color: #000"
+            >Business Name</b-link
+          >
         </h3>
         <p>
           <a href="">mywebsite.com</a> <br />
           Business Category <br />
-          1.1M Community <br />
+          1.1M Follower <br />
           Neighbourhood, city country <br />
-          Keyword 1  Keyword 2  Keyword 3
+          Keywords
         </p>
       </div>
       <div class="col">
         <span class="btns">
-          <b-button class="primary-bg"><b-icon icon="chat-fill" class="avatar-header-icon"></b-icon
-          > Message</b-button>
+          <b-button variant="primary">Connect</b-button>
 
-          <b-button class="ml-3 community">
+          <b-button class="ml-3" variant="outline-primary">
             <b-icon icon="plus"></b-icon>
-            Community</b-button
-          >
+            Follow</b-button>
         </span>
       </div>
     </div>
@@ -36,34 +36,16 @@ export default {};
 </script>
 
 <style scoped>
-.link {
-  text-decoration: none;
-  color: #000;
-}
 a {
   text-decoration: black;
-  color: #e75c18;
 }
 
 .btns {
-  display: flex;
+    display: flex;
   margin-left: 120px;
 }
 
-.primary-bg {
-  background-color: #e75c18;
-  height: 40px;
-  border: none;
-}
-
-.community {
-  background-color: rgb(240, 240, 240);
-  color: #000;
-  border: none;  
-  display: flex;
-}
-
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 600px) {
   .details {
     position: relative;
     top: 200px;
@@ -72,7 +54,7 @@ a {
   .btns {
     position: relative;
     top: 180px;
-    left: -110px;
+    left: -140px;
   }
   img {
     width: 270px;

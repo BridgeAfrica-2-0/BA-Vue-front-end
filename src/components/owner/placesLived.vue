@@ -14,9 +14,12 @@
       <div>
         <div class="row">
           <div class="col">
-            <b-form-input v-model="city" placeholder="City"></b-form-input>
             <b-form-input
-              class="mt-2"
+              v-model="city"
+              placeholder="City"
+            ></b-form-input>
+             <b-form-input
+             class="mt-2"
               v-model="hometown"
               placeholder="Hometown"
             ></b-form-input>
@@ -40,15 +43,15 @@ export default {
   data() {
     return {
       selected: null,
-      city: "",
+      city:"",
       hometown: "",
       options: [
         { value: null, text: "Select" },
         { value: "private", text: "Private" },
-        { value: "public", text: "Public" }
-      ]
+        { value: "public", text: "Public" },
+      ],
     };
-  }
+  },
 };
 </script>
 

@@ -18,10 +18,15 @@
       </b-card-text>
       <b-row>
         <b-col>
-          <b-button href="#" variant="primary">Contact</b-button>
+          <b-button class="btn" href="#" variant="primary" size="sm"
+            ><b-icon icon="chat-fill" variant="white"></b-icon>
+             <span class="ml-1">Message</span></b-button
+          >
         </b-col>
         <b-col>
-          <b-button href="#">+ Follow</b-button>
+          <b-button href="#" size="sm"
+            ><b-icon icon="plus" variant="white"></b-icon> Follow</b-button
+          >
         </b-col>
       </b-row>
     </b-card>
@@ -44,5 +49,8 @@ export default {
 }
 .stock {
   color: green;
+}
+.btn{
+  display: flex;
 }
 </style>

@@ -3,19 +3,19 @@
     <b-card>
       <b-row>
         <b-col>
-          <h2>Marketplace</h2>
+          <h4>Marketplace</h4>
         </b-col>
-        <b-col class="col-2">
-          <b-link>See All</b-link>
+        <b-col class="col">
+          <b-link class="lnk">See All</b-link>
         </b-col>
       </b-row>
       <div>
         <b-row>
           <b-col>
-            <h4>Business Name</h4>
+            <h6><b>Business Name</b></h6>
           </b-col>
-          <b-col class="col-2">
-            <b-link>Visit Shop</b-link>
+          <b-col class="col">
+            <b-link class="lnk">Visit Shop</b-link>
           </b-col>
         </b-row>
         <div class="products">
@@ -62,5 +62,13 @@ export default {
 .products{
     display: flex;
     flex-wrap: wrap;
+}
+  .lnk{
+    margin-left: 280px;
+  }
+@media only screen and (max-width: 768px) {
+  .lnk{
+    margin-left: 30px;
+  }
 }
 </style>

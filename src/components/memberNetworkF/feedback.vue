@@ -43,7 +43,7 @@
 
     <b-card class="mt-5">
       <b-row>
-        <b-col class="col-2">
+        <b-col class="col">
           <b-avatar
             class="mt-2"
             src="https://placekitten.com/300/300"
@@ -61,7 +61,14 @@
           </div>
         </b-col>
       </b-row>
-      <p class="mt-2">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Earum quis ad assumenda soluta, fuga vel minus pariatur neque, aut doloribus culpa ipsum quos facilis sunt. Iusto aliquid dolor repudiandae eum doloremque, vero, placeat reiciendis ullam expedita pariatur quae quis necessitatibus est minus quasi quibusdam sapiente commodi. Consectetur dicta nobis voluptas?</p>
+      <p class="mt-2">
+        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Earum quis ad
+        assumenda soluta, fuga vel minus pariatur neque, aut doloribus culpa
+        ipsum quos facilis sunt. Iusto aliquid dolor repudiandae eum doloremque,
+        vero, placeat reiciendis ullam expedita pariatur quae quis
+        necessitatibus est minus quasi quibusdam sapiente commodi. Consectetur
+        dicta nobis voluptas?
+      </p>
     </b-card>
   </div>
 </template>
@@ -107,8 +114,14 @@ export default {
 .apply {
   border: none;
 }
-.detail{
+.detail {
+  position: relative;
+  left: -197px;
+}
+@media only screen and (max-width: 768px) {
+  .detail {
     position: relative;
-    left: -60px;
+    left: -70px;
+  }
 }
 </style>

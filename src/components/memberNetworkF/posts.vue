@@ -1,18 +1,16 @@
 <template>
   <div>
-<posts/>
+    <Posts />
   </div>
 </template>
 
 <script>
 import Posts from "../post";
 export default {
- components:{
-     Posts
- }
-}
+  components: {
+    Posts,
+  },
+};
 </script>
 
-<style>
-
-</style>
+<style></style>

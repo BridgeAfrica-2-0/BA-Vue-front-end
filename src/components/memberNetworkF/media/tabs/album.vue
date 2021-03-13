@@ -201,7 +201,6 @@ export default {
   },
   methods: {
     /**
-
      Use to view the photo in the album
      @param id
     @return void
@@ -225,7 +224,6 @@ export default {
     },
 
     /**
-
      Shows modal and create Album
     @param id
     @return void
@@ -250,7 +248,7 @@ export default {
       @return void
       */
     chooseFile() {
-      var defaultBtn = document.getElementById("default-btn");
+      let defaultBtn = document.getElementById("default-btn");
       defaultBtn.click();
     },
     /**
@@ -268,8 +266,8 @@ export default {
      */
     createImage(file) {
       // const image = new Image();
-      var reader = new FileReader();
-      var vm = this;
+      let reader = new FileReader();
+      let vm = this;
 
       reader.onload = e => {
         vm.image = e.target.result;

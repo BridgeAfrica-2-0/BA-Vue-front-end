@@ -5,8 +5,7 @@
       type="text"
       placeholder="Search Member"
       class="search-member"
-      name=""
-      id=""
+ 
     />
     <p class="mt-2">
       <strong>Metwork Admins ({{ admins.length }})</strong>

@@ -2,15 +2,15 @@
   <div>
     <b-card>
       <b-row>
-          <b-col>
-               <h2>Networks</h2>
-          </b-col>
-          <b-col class="col-2">
-              <b-link>See All</b-link>
-          </b-col>
+        <b-col>
+          <h4>Networks</h4>
+        </b-col>
+        <b-col class="col">
+          <b-link class="lnk">See All</b-link>
+        </b-col>
       </b-row>
       <b-row class="business">
-        <b-col class="col-1">
+        <b-col class="col">
           <b-avatar variant="primary" text="BV"></b-avatar>
         </b-col>
         <b-col>
@@ -22,11 +22,13 @@
           </p>
         </b-col>
         <b-col class="col-4">
-          <b-button class="button" variant="outline-primary">Join</b-button>
+          <b-button class="button" variant="outline-primary" size="sm"
+            ><b-icon icon="plus" variant="primary"></b-icon> Follower</b-button
+          >
         </b-col>
       </b-row>
       <b-row class="business mt-3">
-        <b-col class="col-1">
+        <b-col class="col">
           <b-avatar variant="primary" text="BV"></b-avatar>
         </b-col>
         <b-col>
@@ -38,7 +40,9 @@
           </p>
         </b-col>
         <b-col class="col-4">
-          <b-button class="button" variant="primary">Joined</b-button>
+          <b-button class="button" variant="primary" size="sm">
+            <b-icon icon="chat-fill" variant="white"></b-icon> Message</b-button
+          >
         </b-col>
       </b-row>
     </b-card>
@@ -56,5 +60,22 @@ export default {};
 }
 .button {
   margin-left: 120px;
+}
+.lnk {
+  margin-left: 260px;
+}
+p {
+  margin-left: -210px;
+}
+@media only screen and (max-width: 768px) {
+  .button {
+    margin-left: 0px;
+  }
+  .lnk {
+    margin-left: 50px;
+  }
+  p {
+    margin-left: -50px;
+  }
 }
 </style>

@@ -235,7 +235,7 @@
           <Posts class="mt-4" />
           <Marketplace class="mt-4 mb-2" />
         </b-col>
-        <b-col class="col-3">
+        <b-col class="col-3 adds">
           <Advertisement />
         </b-col>
       </b-row>
@@ -270,33 +270,31 @@
         </b-row>
         <b-row class="mt-3 mb-2">
           <b-col>
-            <b-card>
-              <span class="title"> All Businesses</span>
+            <b-card class="crd">
+              <span class="title"> </span>
               <span class="ml-5 result"><small>398 Results found</small></span>
-              <Business class="mb-3" />
-              <Business class="mb-3" />
-              <Business class="mb-3" />
-              <Business class="mb-3" />
-              <Business class="mb-3" />
+              <Business class="mb-3 busi" />
+              <Business class="mb-3 busi" />
+              <Business class="mb-3 busi" />
+              <Business class="mb-3 busi" />
+              <Business class="mb-3 busi" />
             </b-card>
           </b-col>
-          <b-col class="col-3">
-            <Advertisement />
+          <b-col class="col-3 adds">
+            <Advertisement class="adds" />
           </b-col>
         </b-row>
       </b-col>
       <b-col v-if="selected == 'people'">
         <b-row class="mt-3 mb-2">
           <b-col>
-            <b-card>
-              <span class="title"> All Businesses</span>
-              <span class="ml-5 result"><small>398 Results found</small></span>
+            <span class="title"> </span>
+            <span class="ml-5 result"><small>398 Results found</small></span>
 
-              <People class="mt-4" />
-            </b-card>
+            <People class="mt-4" />
           </b-col>
-          <b-col class="col-3">
-            <Advertisement />
+          <b-col class="col-3 adds">
+            <Advertisement class="adds" />
           </b-col>
         </b-row>
       </b-col>
@@ -330,29 +328,25 @@
         </b-row>
         <b-row class="mt-3 mb-2">
           <b-col>
-            <b-card>
-              <span class="title"> All Businesses</span>
-              <span class="ml-5 result"><small>398 Results found</small></span>
-              <Networks class="mt-4" />
-            </b-card>
+            <span class="title"> </span>
+            <span class="ml-5 result"><small>398 Results found</small></span>
+            <Networks class="mt-4" />
           </b-col>
-          <b-col class="col-3">
-            <Advertisement />
+          <b-col class="col-3 adds">
+            <Advertisement class="adds" />
           </b-col>
         </b-row>
       </b-col>
       <b-col v-if="selected == 'posts'">
         <b-row class="mt-3 mb-2">
           <b-col>
-            <b-card>
-              <span class="title"> All Businesses</span>
-              <span class="ml-5 result"><small>398 Results found</small></span>
+            <span class="title"> </span>
+            <span class="ml-5 result"><small>398 Results found</small></span>
 
-              <Posts class="mt-4" />
-            </b-card>
+            <Posts class="mt-4" />
           </b-col>
-          <b-col class="col-3">
-            <Advertisement />
+          <b-col class="col-3 adds">
+            <Advertisement class="adds" />
           </b-col>
         </b-row>
       </b-col>
@@ -386,14 +380,12 @@
         </b-row>
         <b-row class="mt-3 mb-2">
           <b-col>
-            <b-card>
-              <span class="title"> All Businesses</span>
-              <span class="ml-5 result"><small>398 Results found</small></span>
-              <Marketplace class="mt-4 mb-2" />
-            </b-card>
+            <span class="title"> </span>
+            <span class="ml-5 result"><small>398 Results found</small></span>
+            <Marketplace class="mt-4 mb-2" />
           </b-col>
-          <b-col class="col-3">
-            <Advertisement />
+          <b-col class="col-3 aads">
+            <Advertisement class="adds" />
           </b-col>
         </b-row>
       </b-col>
@@ -412,7 +404,7 @@ import People from "@/components/search/people";
 import Marketplace from "@/components/search/marketplace";
 import SponsoredBusinesses from "@/components/search/sponsoredBusiness";
 import SponsoredNetwork from "@/components/search/sponsoredNetwork";
-import Business from "@/components/follower/business";
+import Business from "@/components/search/businessmain";
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
 
@@ -511,5 +503,13 @@ export default {
 
 .frame {
   border: 0;
+}
+@media only screen and (max-width: 768px) {
+  .adds {
+    display: none;
+  }
+  .busi {
+    margin-bottom: 190px;
+  }
 }
 </style>

@@ -3,15 +3,15 @@
     <b-card>
       <b-row>
         <b-col>
-          <h2>Posts</h2>
+          <h4>Posts</h4>
         </b-col>
-        <b-col class="col-2">
-          <b-link>See All</b-link>
+        <b-col class="col">
+          <b-link class="lnk">See All</b-link>
         </b-col>
       </b-row>
       <b-col class="posts mt-3">
         <b-row>
-          <b-col class="col-1">
+          <b-col class="col">
             <b-avatar variant="primary" text="BV"></b-avatar>
           </b-col>
           <b-col>
@@ -23,7 +23,7 @@
             </p>
           </b-col>
           <b-col class="col-2">
-            <b-button variant="primary">Message</b-button>
+            <b-button class="btn" variant="primary" size="sm"><b-icon icon="chat-fill" variant="white"></b-icon> Message</b-button>
           </b-col>
         </b-row>
         <div class="mb-3">
@@ -59,7 +59,7 @@
       </b-col>
       <b-col class="posts  mt-3">
         <b-row>
-          <b-col class="col-1">
+          <b-col class="col">
             <b-avatar variant="primary" text="BV"></b-avatar>
           </b-col>
           <b-col>
@@ -70,8 +70,10 @@
               </small>
             </p>
           </b-col>
-            <b-col class="col-2">
-            <b-button variant="outline-primary">Follow</b-button>
+          <b-col class="col-2">
+            <b-button variant="outline-primary" size="sm">
+              <b-icon icon="plus" variant="primary"></b-icon> Follow</b-button
+            >
           </b-col>
         </b-row>
         <div class="mb-3">
@@ -120,5 +122,26 @@ export default {};
 }
 .button {
   margin-left: 120px;
+}
+p {
+  margin-left: -280px;
+}
+.lnk {
+  margin-left: 280px;
+}
+@media only screen and (max-width: 768px) {
+  p {
+    margin-left: -60px;
+  }
+  .button {
+    margin-left: -10px;
+  }
+  .btn {
+    position: relative;
+    left: -50px;
+  }
+  .lnk {
+    margin-left: 50px;
+  }
 }
 </style>

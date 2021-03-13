@@ -3,7 +3,7 @@
     <Navbar />
     <b-container class="mt-3">
       <b-row>
-        <b-col class="col-4">
+        <b-col class="col mb-3">
           <div>
             <b-avatar
               class="avatar"
@@ -22,10 +22,16 @@
             </strong>
             <div class="mt-2">
               <p>
-                <fas-icon class="icon-color" :icon="['fas', 'briefcase']" /> Business Name Here
+                <fas-icon class="icon-color" :icon="['fas', 'briefcase']" />
+                Business Name Here
               </p>
-              <p><fas-icon class="icon-color" :icon="['fas', 'globe']" /> Private</p>
-              <p><fas-icon class="icon-color" :icon="['fas', 'users']" /> 3.5k Members</p>
+              <p>
+                <fas-icon class="icon-color" :icon="['fas', 'globe']" /> Private
+              </p>
+              <p>
+                <fas-icon class="icon-color" :icon="['fas', 'users']" /> 3.5k
+                Members
+              </p>
               <h5><b>About</b></h5>
               <p>
                 Lorem ipsum dolor sit amet consectetur, adipisicing elit. Velit
@@ -50,13 +56,15 @@
                 </b-avatar-group>
               </b-col>
               <b-col class="col-4">
-                <b-button variant="outline-primary">+ Invite</b-button>
+                <b-button variant="outline-primary" size="sm"
+                  >+ Invite</b-button
+                >
               </b-col>
             </b-row>
             <b-link>View All Members</b-link>
           </div>
         </b-col>
-        <b-col>
+        <b-col class="col">
           <b-tabs content-class="mt-3" fill pills card>
             <b-tab title="Posts"><Posts /></b-tab>
             <b-tab title="Media"><Media /></b-tab>
@@ -84,24 +92,32 @@ export default {
     Posts,
     Media,
     Members,
-    Feedback
+    Feedback,
   },
 };
 </script>
 
 <style scoped>
 .avatar {
-  margin-left: 100px;
+  margin-left: 190px;
 }
 
 .join-btn {
-  margin-left: 130px;
+  margin-left: 220px;
 }
 h3 {
   text-align: center;
 }
 
-.icon-color{
+.icon-color {
   color: #e75c18;
+}
+@media only screen and (max-width: 768px) {
+  .avatar {
+    margin-left: 90px;
+  }
+  .join-btn {
+    margin-left: 120px;
+  }
 }
 </style>

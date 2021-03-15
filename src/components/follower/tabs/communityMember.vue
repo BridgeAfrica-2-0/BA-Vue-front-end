@@ -42,7 +42,7 @@
                 Message</b-dropdown-item
               >
               <b-dropdown-item>
-                <b-icon icon="telephone-fill" variant="primary"></b-icon> Call
+                <b-icon icon="telephone-fill" variant="primary"></b-icon>  Call
                 Now</b-dropdown-item
               >
               <b-dropdown-item>

@@ -21,7 +21,7 @@
           </b-avatar>
         </div>
         <div class="d-inline-block ml-4 float-left">
-          <h5 class="font-weight-bolder">User Name</h5>
+          <h5 class="font-weight-bolder name">User Name</h5>
           <p>
             website <br />
             1.5k Community
@@ -31,7 +31,7 @@
       <b-col cols="6">
         <p class="float-right">
           <b-button class="mr-1" variant="success">
-            <b-icon icon="house-fill" variant="white"></b-icon>
+            <b-icon icon="geo-alt" variant="white"></b-icon>
             Get Direction</b-button
           >
           <b-button class="mr-1 txt" variant="warning">
@@ -71,7 +71,7 @@
                 <b-icon icon="three-dots" aria-hidden="true"></b-icon>
               </template>
               <b-dropdown-item>
-                <b-icon icon="house-fill" variant="primary"></b-icon> Get
+                <b-icon icon="geo-alt" variant="primary"></b-icon> Get
                 Direction</b-dropdown-item
               >
               <b-dropdown-item>
@@ -98,7 +98,7 @@
             <b-tab title="About"><About /></b-tab>
             <b-tab title="Business"><Businesses /></b-tab>
             <b-tab title="Media"><Media /></b-tab>
-            <b-tab title="Following"><Following /></b-tab>
+            <b-tab title="Community"><Community /></b-tab>
           </b-tabs>
         </b-col>
       </b-row>
@@ -110,7 +110,7 @@
 import Post from "@/components/follower/tabs/posts";
 import About from "@/components/follower/tabs/about";
 import Media from "@/components/follower/tabs/media";
-import Following from "@/components/follower/tabs/following";
+import Community from "@/components/follower/tabs/community";
 import Businesses from "@/components/follower/tabs/businesses";
 
 export default {
@@ -119,7 +119,7 @@ export default {
     Post,
     About,
     Media,
-    Following,
+    Community,
     Businesses,
   },
 };
@@ -165,6 +165,11 @@ img {
 }
 .txt{
   color: #fff;
+}
+
+.name{
+  position: relative;
+  top: 11px;
 }
 @media only screen and (max-width: 768px) {
   .mobile {

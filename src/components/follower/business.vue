@@ -18,15 +18,36 @@
       </div>
       <div class="col">
         <span class="btns">
-          <b-button class="primary-bg" size="sm"
-            ><b-icon icon="chat-fill" class="avatar-header-icon"></b-icon>
-            Message</b-button
-          >
-
-           <b-button class="ml-3 community" size="sm">
-            <b-icon icon="plus"></b-icon>
-             Community</b-button
-          >
+          <b-row>
+            <b-col>
+              <b-dropdown
+                id="dropdown-1"
+                text="Contact"
+                class="m-md-2"
+                variant="primary"
+                size="sm"
+              >
+                <b-dropdown-item>
+                  <b-icon icon="chat-fill" variant="primary"></b-icon>
+                  Message</b-dropdown-item
+                >
+                <b-dropdown-item>
+                  <b-icon icon="telephone-fill" variant="primary"></b-icon>  Call
+                  Now</b-dropdown-item
+                >
+                <b-dropdown-item>
+                  <b-icon icon="geo-alt" variant="primary"></b-icon> Get
+                  Direction</b-dropdown-item
+                >
+              </b-dropdown>
+            </b-col>
+            <b-col>
+              <b-button class=" community  mt-2" size="sm">
+                <b-icon icon="plus"></b-icon>
+                Community</b-button
+              >
+            </b-col>
+          </b-row>
         </span>
       </div>
     </div>
@@ -68,6 +89,9 @@ a {
 h3,
 p {
   margin-left: -60px;
+}
+.btn {
+  display: flex;
 }
 
 @media only screen and (max-width: 768px) {

@@ -3,36 +3,41 @@
     <b-card v-if="networkshow">
       <div class="networks ml-4 box">
         <div class="ml-4 sub" v-for="(post, index) in posts" :key="index">
-          <b-card>
-            <b-img width="230" :src="post.image"></b-img>
+          <b-card class="mb-2">
+     
+              <b-img width="230" :src="post.image"></b-img>
+  
+            <div>
+              <h1>{{ post.title }}</h1>
+              <b-row>
+                <b-col>
+                  <p><small>Public - 397 Members</small></p>
+                </b-col>
+                <b-col class="col-1">
+                  <b-button
+                    class="btnz"
+                    v-if="post.state"
+                    size="sm"
+                    variant="primary"
+                    ><small>
+                      <fas-icon
+                        class="mr-2"
+                        :icon="['fas', 'check']"
+                      />Joined</small
+                    ></b-button
+                  >
+                  <b-button v-if="!post.state" size="sm" variant="success"
+                    ><small>
+                      <fas-icon
+                        class="mr-2"
+                        :icon="['fas', 'plus']"
+                      />Join</small
+                    ></b-button
+                  >
+                </b-col>
+              </b-row>
+            </div>
           </b-card>
-          <div>
-            <h1>{{ post.title }}</h1>
-            <b-row>
-              <b-col>
-                <p><small>Public - 397 Members</small></p>
-              </b-col>
-              <b-col class="col-1">
-                <b-button
-                  class="btnz"
-                  v-if="post.state"
-                  size="sm"
-                  variant="primary"
-                  ><small>
-                    <fas-icon
-                      class="mr-2"
-                      :icon="['fas', 'check']"
-                    />Joined</small
-                  ></b-button
-                >
-                <b-button v-if="!post.state" size="sm" variant="success"
-                  ><small>
-                    <fas-icon class="mr-2" :icon="['fas', 'plus']" />Join</small
-                  ></b-button
-                >
-              </b-col>
-            </b-row>
-          </div>
         </div>
       </div>
     </b-card>
@@ -154,7 +159,7 @@ export default {
   cursor: pointer;
 }
 
-.btn-add{
+.btn-add {
   margin-left: 0px;
   margin-top: 10px;
 }

@@ -128,9 +128,13 @@ p {
 .time {
   position: relative;
   margin-left: 80px;
-  top: -20px;
+  top: -28px;
 }
 
+.name{
+  position: relative;
+  top: -10px;
+}
 @media only screen and (max-width: 768px) {
   .send-cmt {
     margin-left: 88%;

@@ -18,10 +18,26 @@
       </b-card-text>
       <b-row>
         <b-col>
-          <b-button class="btn" href="#" variant="primary" size="sm"
-            ><b-icon icon="chat-fill" variant="white"></b-icon>
-             <span class="ml-1">Message</span></b-button
+          <b-dropdown
+            id="dropdown-1"
+            text="Contact"
+            class="m-md-2 drop"
+            variant="primary"
+            size="sm"
           >
+            <b-dropdown-item>
+              <b-icon icon="chat-fill" variant="primary"></b-icon>
+              Message</b-dropdown-item
+            >
+            <b-dropdown-item>
+              <b-icon icon="telephone-fill" variant="primary"></b-icon>Call
+              Now</b-dropdown-item
+            >
+            <b-dropdown-item>
+              <b-icon icon="geo-alt" variant="primary"></b-icon> Get
+              Direction</b-dropdown-item
+            >
+          </b-dropdown>
         </b-col>
         <b-col>
           <b-button href="#" size="sm"
@@ -50,7 +66,10 @@ export default {
 .stock {
   color: green;
 }
-.btn{
+.btn {
   display: flex;
+}
+.drop {
+  top: -8px;
 }
 </style>

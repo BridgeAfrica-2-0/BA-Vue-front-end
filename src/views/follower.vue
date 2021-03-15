@@ -2,7 +2,7 @@
   <div>
     <navbar />
     <b-container fluid="md" class="text-justify mt-3">
-      <Business />
+      <Profile />
     </b-container>
     <Footer />
   </div>
@@ -10,13 +10,13 @@
 
 <script>
 import navbar from "@/components/navbar";
-import Business from "../components/follower/follower";
+import Profile from "../components/follower/follower";
 import Footer from "../components/footer";
 export default {
   name: "Home",
   components: {
     navbar,
-    Business,
+    Profile,
     Footer,
   },
   data() {

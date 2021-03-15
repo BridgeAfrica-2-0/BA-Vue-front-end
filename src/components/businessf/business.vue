@@ -21,7 +21,7 @@
           </b-avatar>
         </div>
         <div class="d-inline-block ml-4 float-left">
-          <h5 class="font-weight-bolder">User Name</h5>
+          <h5 class="font-weight-bolder name">User Name</h5>
           <p>
             website <br />
             1.5k Community
@@ -56,7 +56,7 @@
             </b-avatar>
           </div>
           <div class="d-inline-block mt-4 ml-4 float-left texts">
-            <h6 class="font-weight-bolder ">User Name</h6>
+            <h6 class="font-weight-bolder name">User Name</h6>
             <p class="details">
               website <br />
               1.5k Community
@@ -163,6 +163,10 @@ img {
 }
 .txt{
   color: #fff;
+}
+.name{
+  position: relative;
+  top: 11px;
 }
 @media only screen and (max-width: 768px) {
   .mobile {

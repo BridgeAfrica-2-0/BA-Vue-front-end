@@ -17,9 +17,9 @@
         <span class="discount price"><strike>1500XAF</strike></span>
         <p class="price">1400XAF</p>
       </b-card-text>
-      <b-card-action>
+      <div>
         <b-button variant="primary" class="buy">Buy Now</b-button>
-      </b-card-action>
+      </div>
     </b-card>
 
     <b-modal

@@ -35,7 +35,7 @@
                 Message</b-dropdown-item
               >
               <b-dropdown-item>
-                <b-icon icon="phone" variant="primary"></b-icon> Call
+                <b-icon icon="telephone-fill" variant="primary"></b-icon>Call
                 Now</b-dropdown-item
               >
               <b-dropdown-item>
@@ -43,56 +43,6 @@
                 Direction</b-dropdown-item
               >
             </b-dropdown>
-          </b-col>
-        </b-row>
-        <div class="mb-3">
-          <span>Text:</span> Lorem ipsum dolor sit amet consectetur adipisicing
-          elit. Laudantium reiciendis ex maiores perspiciatis rem est, libero
-          error veritatis ea aspernatur nihil officia facere saepe voluptas ad
-          adipisci veniam, consequuntur sed facilis excepturi quae harum. Natus,
-          ex quo. Minima possimus at, repellendus eos quia aspernatur eaque qui,
-          ducimus sit perspiciatis fugiat!
-          <div>
-            <b-row>
-              <b-col class="mt-1">
-                <span class="mr-3"
-                  ><b-icon
-                    icon="suit-heart"
-                    variant="primary"
-                    aria-hidden="true"
-                  ></b-icon>
-                  23</span
-                >
-                <span
-                  ><b-icon
-                    icon="chat-fill"
-                    variant="primary"
-                    aria-hidden="true"
-                  ></b-icon>
-                  123</span
-                >
-              </b-col>
-            </b-row>
-          </div>
-        </div>
-      </b-col>
-      <b-col class="posts  mt-3">
-        <b-row>
-          <b-col class="col">
-            <b-avatar variant="primary" text="BV"></b-avatar>
-          </b-col>
-          <b-col>
-            <p>
-              <strong>Jane Wright</strong> <br />
-              <small>
-                <span>Following</span>
-              </small>
-            </p>
-          </b-col>
-          <b-col class="col-2">
-            <b-button variant="outline-primary follow" size="sm">
-              <b-icon icon="plus" variant="primary"></b-icon> Follow</b-button
-            >
           </b-col>
         </b-row>
         <div class="mb-3">
@@ -149,10 +99,9 @@ p {
   margin-left: 280px;
 }
 
-.follow{
+.follow {
   display: flex;
 }
-
 
 @media only screen and (max-width: 768px) {
   p {
@@ -169,8 +118,8 @@ p {
     margin-left: 50px;
   }
 
-.drop {
-  left: -50px;
-}
+  .drop {
+    left: -50px;
+  }
 }
 </style>

@@ -9,37 +9,20 @@
           <b-link class="lnk">See All</b-link>
         </b-col>
       </b-row>
-      <b-row class="business">
-        <b-col class="col">
-          <b-avatar variant="primary" text="BV"></b-avatar>
-        </b-col>
-        <b-col>
-          <p>
-            <strong>Business 1</strong> <br />
-            <small>
-              <span>Business category - 36k Followers</span>
-            </small>
-          </p>
-        </b-col>
-        <b-col class="col-4">
-          <b-button class="button" variant="outline-primary" size="sm"
-            ><b-icon icon="plus" variant="primary"></b-icon> Follower</b-button
-          >
-        </b-col>
-      </b-row>
+
       <b-row class="business mt-3">
         <b-col class="col">
           <b-avatar variant="primary" text="BV"></b-avatar>
         </b-col>
-        <b-col>
+        <b-col class="min">
           <p>
-            <strong>Business 2</strong> <br />
+            <strong>Business </strong> <br />
             <small>
               <span>Business category - 36k Followers</span>
             </small>
           </p>
         </b-col>
-        <b-col class="col-4">
+        <b-col class="ml-4  btns min">
           <b-dropdown
             id="dropdown-1"
             text="Contact"
@@ -52,7 +35,7 @@
               Message</b-dropdown-item
             >
             <b-dropdown-item>
-              <b-icon icon="phone" variant="primary"></b-icon> Call
+              <b-icon icon="telephone-fill" variant="primary"></b-icon> Call
               Now</b-dropdown-item
             >
             <b-dropdown-item>
@@ -60,6 +43,10 @@
               Direction</b-dropdown-item
             >
           </b-dropdown>
+
+          <b-button size="sm" class="community">
+            <b-icon icon="plus"></b-icon> Community
+          </b-button>
         </b-col>
       </b-row>
     </b-card>
@@ -86,8 +73,17 @@ p {
   margin-left: -210px;
 }
 
-.drop{
-  left: 118px;
+.drop {
+  left: 1px;
+}
+.community {
+  background-color: #f0f0f0;
+  color: #000;
+  border: none;
+  display: flex;
+  margin-left: 100px;
+  margin-top: -38px;
+  
 }
 @media only screen and (max-width: 768px) {
   .button {
@@ -98,9 +94,22 @@ p {
   }
   p {
     margin-left: -50px;
+    font-size: 15px;
   }
-  .drop{
-  left: 0px;
-}
+  .drop {
+    left: 10px;
+  }
+  .community{
+    position: relative;
+    top: 8px;
+  }
+
+  .btns{
+    margin-bottom: 20px;
+    left: 45px;
+  }
+  .min{
+    margin-left: -50px;
+  }
 }
 </style>

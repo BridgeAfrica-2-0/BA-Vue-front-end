@@ -1,14 +1,14 @@
 <template>
   <div>
-  <CommunityMembers/>
+  <Business/>
   </div>
 </template>
 
 <script>
-import CommunityMembers from "../../communityMember"
+import Business from "../businessmain"
 export default {
   components:{
-      CommunityMembers
+      Business
   }
 }
 </script>

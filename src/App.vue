@@ -77,6 +77,11 @@ li .nav-link:hover{
     }
   }
 }
+.toggle {
+  color: #fff;
+  background-color: #000;
+  border-color: #005cbf;
+}
 
 @media only screen and (max-width: 768px) {
   .nav-link {

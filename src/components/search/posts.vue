@@ -23,7 +23,26 @@
             </p>
           </b-col>
           <b-col class="col-2">
-            <b-button class="btn" variant="primary" size="sm"><b-icon icon="chat-fill" variant="white"></b-icon> Message</b-button>
+            <b-dropdown
+              id="dropdown-1"
+              text="Contact"
+              class="m-md-2 drop"
+              variant="primary"
+              size="sm"
+            >
+              <b-dropdown-item>
+                <b-icon icon="chat-fill" variant="primary"></b-icon>
+                Message</b-dropdown-item
+              >
+              <b-dropdown-item>
+                <b-icon icon="phone" variant="primary"></b-icon> Call
+                Now</b-dropdown-item
+              >
+              <b-dropdown-item>
+                <b-icon icon="geo-alt" variant="primary"></b-icon> Get
+                Direction</b-dropdown-item
+              >
+            </b-dropdown>
           </b-col>
         </b-row>
         <div class="mb-3">
@@ -71,7 +90,7 @@
             </p>
           </b-col>
           <b-col class="col-2">
-            <b-button variant="outline-primary" size="sm">
+            <b-button variant="outline-primary follow" size="sm">
               <b-icon icon="plus" variant="primary"></b-icon> Follow</b-button
             >
           </b-col>
@@ -129,6 +148,12 @@ p {
 .lnk {
   margin-left: 280px;
 }
+
+.follow{
+  display: flex;
+}
+
+
 @media only screen and (max-width: 768px) {
   p {
     margin-left: -60px;
@@ -143,5 +168,9 @@ p {
   .lnk {
     margin-left: 50px;
   }
+
+.drop {
+  left: -50px;
+}
 }
 </style>

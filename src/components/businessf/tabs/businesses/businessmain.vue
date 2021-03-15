@@ -2,12 +2,12 @@
   <div>
     <div class="row">
       <div class="col-3">
-        <img src="../../assets/img/follow.jpg" height="200" alt="" />
+        <img src="../../../../assets/img/follow.jpg" height="200" alt="" />
       </div>
-      <div class="col details ml-3">
-        <h3>
+      <div class=" col details">
+        <h4>
           <b-link class="link">Business Name</b-link>
-        </h3>
+        </h4>
         <p>
           <a href="">mywebsite.com</a> <br />
           Business Category <br />
@@ -16,14 +16,14 @@
           Keyword 1 Keyword 2 Keyword 3
         </p>
       </div>
-      <div class="col">
+      <div>
         <span class="btns">
-          <b-button class="primary-bg" size="sm"
+          <b-button class="primary-bg" size="sm" variant="primary"
             ><b-icon icon="chat-fill" class="avatar-header-icon"></b-icon>
-            Message</b-button
+            <span class="ml-1"> Message</span></b-button
           >
 
-           <b-button class="ml-3 community" size="sm">
+          <b-button class="ml-3 community" size="sm">
             <b-icon icon="plus"></b-icon>
              Community</b-button
           >
@@ -54,20 +54,18 @@ a {
 
 .primary-bg {
   background-color: #e75c18;
-  height: 40px;
   border: none;
+  display: flex;
 }
 
+.primary-bg:hover{
+    color: #fff;
+}
 .community {
   background-color: rgb(240, 240, 240);
   color: #000;
   border: none;
   display: flex;
-}
-
-h3,
-p {
-  margin-left: -60px;
 }
 
 @media only screen and (max-width: 768px) {

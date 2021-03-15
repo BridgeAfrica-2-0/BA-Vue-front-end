@@ -40,9 +40,26 @@
           </p>
         </b-col>
         <b-col class="col-4">
-          <b-button class="button" variant="primary" size="sm">
-            <b-icon icon="chat-fill" variant="white"></b-icon> Message</b-button
+          <b-dropdown
+            id="dropdown-1"
+            text="Contact"
+            class="m-md-2 drop"
+            variant="primary"
+            size="sm"
           >
+            <b-dropdown-item>
+              <b-icon icon="chat-fill" variant="primary"></b-icon>
+              Message</b-dropdown-item
+            >
+            <b-dropdown-item>
+              <b-icon icon="phone" variant="primary"></b-icon> Call
+              Now</b-dropdown-item
+            >
+            <b-dropdown-item>
+              <b-icon icon="geo-alt" variant="primary"></b-icon> Get
+              Direction</b-dropdown-item
+            >
+          </b-dropdown>
         </b-col>
       </b-row>
     </b-card>
@@ -60,12 +77,17 @@ export default {};
 }
 .button {
   margin-left: 120px;
+  display: flex;
 }
 .lnk {
   margin-left: 260px;
 }
 p {
   margin-left: -210px;
+}
+
+.drop {
+  left: 118px;
 }
 @media only screen and (max-width: 768px) {
   .button {
@@ -76,6 +98,9 @@ p {
   }
   p {
     margin-left: -50px;
+  }
+  .drop {
+    left: 0px;
   }
 }
 </style>

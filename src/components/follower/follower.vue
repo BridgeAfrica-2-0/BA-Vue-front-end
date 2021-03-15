@@ -42,6 +42,7 @@
         </p>
       </b-col>
     </b-row>
+
     <div class="mobile">
       <b-row>
         <b-col>
@@ -74,7 +75,7 @@
                 Direction</b-dropdown-item
               >
               <b-dropdown-item>
-                <b-icon icon="chat" variant="primary"></b-icon>
+                <b-icon icon="chat-fill" variant="primary"></b-icon>
                 Message</b-dropdown-item
               >
               <b-dropdown-item>
@@ -86,52 +87,48 @@
         </b-col>
       </b-row>
     </div>
-    <div class="row">
-      <b-container fluid="md" class="text-justify mt-2">
-        <b-row>
-          <b-col cols="12">
-            <b-tabs content-class="mt-3" fill pills card>
-              <b-tab title="Home"><HomePage /></b-tab>
-              <b-tab title="About"><About /></b-tab>
-              <b-tab title="Media"><Media /></b-tab>
-              <b-tab title="Market"><MarketPlace /></b-tab>
-              <b-tab title="Networks"><Networks /></b-tab>
-              <b-tab title="Community"><Community /></b-tab>
-            </b-tabs>
-          </b-col>
-        </b-row>
-      </b-container>
-    </div>
+
+    <b-container fluid="md" class="text-justify mx-auto mt-4 corps">
+      <b-row>
+        <b-col cols="12">
+          <b-tabs content-class="mt-3" fill pills card>
+            <b-tab title="Posts" active>
+              <Post />
+            </b-tab>
+            <b-tab title="About"><About /></b-tab>
+            <b-tab title="Business"><Businesses /></b-tab>
+            <b-tab title="Media"><Media /></b-tab>
+            <b-tab title="Following"><Following /></b-tab>
+          </b-tabs>
+        </b-col>
+      </b-row>
+    </b-container>
   </div>
 </template>
 
 <script>
-import HomePage from "../businessf/tabs/businessHome";
-import About from "./tabs/about";
-import Media from "./tabs/media";
-import MarketPlace from "./tabs/marketPlace";
-import Community from "./tabs/community";
-import Networks from "./tabs/networks";
+import Post from "@/components/follower/tabs/posts";
+import About from "@/components/follower/tabs/about";
+import Media from "@/components/follower/tabs/media";
+import Following from "@/components/follower/tabs/following";
+import Businesses from "@/components/follower/tabs/businesses";
 
 export default {
   name: "Home",
   components: {
-    HomePage,
+    Post,
     About,
     Media,
-    MarketPlace,
-    Community,
-    Networks,
+    Following,
+    Businesses,
   },
-  data() {
-    return {};
-  },
-  computed: {},
-  methods: {},
 };
 </script>
 
 <style scoped>
+.nav-link {
+  background-color: #e75c18;
+}
 .images {
   display: flex;
   width: 100%;
@@ -158,6 +155,11 @@ img {
 .cnt-btn {
   color: white;
 }
+
+.below-head {
+  width: 80%;
+}
+
 .mobile {
   display: none;
 }

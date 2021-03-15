@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b-card>
+    <b-card class="card">
       <b-row>
         <b-col>
           <h4>Businesses</h4>
@@ -9,57 +9,24 @@
           <b-link class="lnk">See All</b-link>
         </b-col>
       </b-row>
-      <b-row class="business">
-        <b-col class="col">
-          <b-avatar variant="primary" text="BV"></b-avatar>
-        </b-col>
-        <b-col>
-          <p>
-            <strong>Business 1</strong> <br />
-            <small>
-              <span>Business category - 36k Followers</span>
-            </small>
-          </p>
-        </b-col>
-        <b-col class="col-4">
-          <b-button class="button" variant="outline-primary" size="sm"
-            ><b-icon icon="plus" variant="primary"></b-icon
-            > Follower</b-button
-          >
-        </b-col>
-      </b-row>
-      <b-row class="business mt-3">
-        <b-col class="col">
-          <b-avatar variant="primary" text="BV"></b-avatar>
-        </b-col>
-        <b-col>
-          <p>
-            <strong>Business 2</strong> <br />
-            <small>
-              <span>Business category - 36k Followers</span>
-            </small>
-          </p>
-        </b-col>
-        <b-col class="col-4">
-          <b-button class="button" variant="primary" size="sm"
-            ><b-icon icon="chat-fill" variant="white"></b-icon
-            > Message</b-button
-          >
-        </b-col>
-      </b-row>
+      <div>
+        <Businesses class="busi" />
+        <Businesses class="mb-2" />
+      </div>
     </b-card>
   </div>
 </template>
 
 <script>
-/* eslint-disable */
-export default {};
+import Businesses from "./businessmain";
+export default {
+  components: {
+    Businesses,
+  },
+};
 </script>
 
 <style scoped>
-.business {
-  border-bottom: 1px solid #ccc;
-}
 .button {
   margin-left: 120px;
 }
@@ -78,6 +45,12 @@ p {
   }
   p {
     margin-left: -50px;
+  }
+  .card{
+    height: 1020px;
+  }
+  .busi{
+    margin-bottom: 160px;
   }
 }
 </style>

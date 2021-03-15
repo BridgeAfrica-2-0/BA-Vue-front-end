@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="row">
+    <div class="row mb-2">
       <div class="col-3">
         <img src="../../assets/img/follow.jpg" height="200" alt="" />
       </div>

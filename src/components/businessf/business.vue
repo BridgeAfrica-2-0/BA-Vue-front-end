@@ -61,7 +61,7 @@
               <b-tab title="Media"><Media /></b-tab>
               <b-tab title="Market Place"><MarketPlace /></b-tab>
               <b-tab title="Networks"><Networks /></b-tab>
-              <b-tab title="Followers"><Followers /></b-tab>
+              <b-tab title="Communities"><Followers /></b-tab>
             </b-tabs>
           </b-col>
         </b-row>

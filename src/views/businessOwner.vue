@@ -1,7 +1,7 @@
 <template>
   <div class="container-fluid">
     <navbar />
-    <b-container class="text-justify">
+    <b-container class="text-justify mt-header">
       <b-row>
         <b-col cols="12">
           <a class="settings" href="#">Settings</a>

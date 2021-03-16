@@ -15,7 +15,25 @@
               badge-variant="primary"
               size="8rem"
             ></b-avatar>
-            <b-icon icon="camera-fill" class="avatar-header-icon"></b-icon>
+            <b-icon icon="camera-fill" class="avatar-header-icon btn cursor-pointer" v-b-modal.modal-4></b-icon>
+
+            <b-modal id="modal-4" title="Upload Profile Picture">
+              <div class="w3-container">
+                <div class="row pb-3">
+
+                  <div class="col-sm-6 text-center" style="border-right:1px solid #dee2e6;">
+                    <h1><fas-icon class="primary" :icon="['fas', 'upload']" /></h1>
+                    <div><input type="file" id="img" name="img" accept="image/*"></div>
+                    <h4>Upload a New picture</h4>
+                  </div>
+
+                  <div class="col-sm-6 text-center">
+                    <h1><fas-icon class="primary" :icon="['fas', 'edit']" /></h1>
+                    <h4>Edit Your New picture</h4>
+                  </div>
+                </div>
+              </div>
+            </b-modal>
             <div class="my-auto">
               <div class="mt-4">
                 <span>

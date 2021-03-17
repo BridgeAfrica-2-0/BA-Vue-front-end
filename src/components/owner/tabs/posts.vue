@@ -179,22 +179,33 @@
                   </div>
                   <ul class="navbar-nav pull-right purple float-right my-auto">
                     <li class="nav-item dropdown">
-                      <b-dropdown size="sm" class="" variant="link" toggle-class="text-decoration-none" no-caret>
+                      <b-dropdown
+                        size="sm"
+                        class=""
+                        variant="link"
+                        toggle-class="text-decoration-none"
+                        no-caret
+                      >
                         <template #button-content>
                           <fas-icon
-                              class="drop-color font-weight-bolder"
-                              :icon="['fas', 'ellipsis-v']"
+                            class="drop-color font-weight-bolder"
+                            :icon="['fas', 'ellipsis-v']"
                           />
                         </template>
-                        <b-dropdown-item href="#"> <fas-icon
-                            class="drop-color font-weight-bolder"
-                            :icon="['fas', 'edit']"
-                        /> Edit</b-dropdown-item>
                         <b-dropdown-item href="#">
                           <fas-icon
-                              class="drop-color font-weight-bolder"
-                              :icon="['fas', 'trash-alt']"
-                          /> Delete</b-dropdown-item>
+                            class="drop-color font-weight-bolder"
+                            :icon="['fas', 'edit']"
+                          />
+                          Edit</b-dropdown-item
+                        >
+                        <b-dropdown-item href="#">
+                          <fas-icon
+                            class="drop-color font-weight-bolder"
+                            :icon="['fas', 'trash-alt']"
+                          />
+                          Delete</b-dropdown-item
+                        >
                       </b-dropdown>
                     </li>
                   </ul>
@@ -443,22 +454,33 @@
                   </div>
                   <ul class="navbar-nav pull-right purple float-right my-auto">
                     <li class="nav-item dropdown">
-                      <b-dropdown size="sm" class="" variant="link" toggle-class="text-decoration-none" no-caret>
+                      <b-dropdown
+                        size="sm"
+                        class=""
+                        variant="link"
+                        toggle-class="text-decoration-none"
+                        no-caret
+                      >
                         <template #button-content>
                           <fas-icon
-                              class="drop-color font-weight-bolder"
-                              :icon="['fas', 'ellipsis-v']"
+                            class="drop-color font-weight-bolder"
+                            :icon="['fas', 'ellipsis-v']"
                           />
                         </template>
-                        <b-dropdown-item href="#"> <fas-icon
-                            class="drop-color font-weight-bolder"
-                            :icon="['fas', 'edit']"
-                        /> Edit</b-dropdown-item>
                         <b-dropdown-item href="#">
                           <fas-icon
-                              class="drop-color font-weight-bolder"
-                              :icon="['fas', 'trash-alt']"
-                          /> Delete</b-dropdown-item>
+                            class="drop-color font-weight-bolder"
+                            :icon="['fas', 'edit']"
+                          />
+                          Edit</b-dropdown-item
+                        >
+                        <b-dropdown-item href="#">
+                          <fas-icon
+                            class="drop-color font-weight-bolder"
+                            :icon="['fas', 'trash-alt']"
+                          />
+                          Delete</b-dropdown-item
+                        >
                       </b-dropdown>
                     </li>
                   </ul>
@@ -703,22 +725,33 @@
                   </div>
                   <ul class="navbar-nav pull-right purple float-right my-auto">
                     <li class="nav-item dropdown">
-                      <b-dropdown size="sm" class="" variant="link" toggle-class="text-decoration-none" no-caret>
+                      <b-dropdown
+                        size="sm"
+                        class=""
+                        variant="link"
+                        toggle-class="text-decoration-none"
+                        no-caret
+                      >
                         <template #button-content>
                           <fas-icon
-                              class="drop-color font-weight-bolder"
-                              :icon="['fas', 'ellipsis-v']"
+                            class="drop-color font-weight-bolder"
+                            :icon="['fas', 'ellipsis-v']"
                           />
                         </template>
-                        <b-dropdown-item href="#"> <fas-icon
-                            class="drop-color font-weight-bolder"
-                            :icon="['fas', 'edit']"
-                        /> Edit</b-dropdown-item>
                         <b-dropdown-item href="#">
                           <fas-icon
-                              class="drop-color font-weight-bolder"
-                              :icon="['fas', 'trash-alt']"
-                          /> Delete</b-dropdown-item>
+                            class="drop-color font-weight-bolder"
+                            :icon="['fas', 'edit']"
+                          />
+                          Edit</b-dropdown-item
+                        >
+                        <b-dropdown-item href="#">
+                          <fas-icon
+                            class="drop-color font-weight-bolder"
+                            :icon="['fas', 'trash-alt']"
+                          />
+                          Delete</b-dropdown-item
+                        >
                       </b-dropdown>
                     </li>
                   </ul>

@@ -1,229 +1,286 @@
 <template>
   <div>
-    <h2 class="p-3 bg-light shadow-sm mb-4">
-      <b-icon icon="people-fill" class="mr-2 pt-1 violet"></b-icon> Following
-    </h2>
-    <b-card header-bg-variant="primary" header-tag="header" footer-tag="footer">
+    <b-card>
       <b-tabs content-class="mt-3">
-        <b-tab title="People Who Follow Me" active>
-          <div class="row">
-            <div class="container mt-4">
+        <b-tab title="People" active>
+          <b-tabs content-class="mt-3" fill pills>
+            <b-tab title="Followers (2)" active>
               <div class="media border-botmediatom mb-4">
                 <img
                   src="@/assets/img/alima.jpg"
                   alt="John Doe"
-                  class="avatar-size mr-2 rounded-circle"
+                  class="mr-2 rounded-circle"
+                  style="width:60px;"
                 />
                 <div class="media-body">
-                  <b>Alima</b>
+                  <b><b-link>J. Circlehead</b-link></b>
+                  <p class="">
+                    Cameroon,
+                    <span class="desktop"
+                      ><b-icon icon="house" variant="primary"></b-icon> 2,
+                      <b-icon icon="globe" variant="primary"></b-icon> 3,
+                      <b-icon icon="people" variant="primary"></b-icon> 3,
+                    </span>
+                  </p>
                 </div>
-                <button type="button" class="btn btn-outline-orange pull-right">
-                  <b-icon-plus-circle-fill></b-icon-plus-circle-fill> Follow
-                </button>
+
+                <span class="pull-right my-auto">
+                  <b-dropdown
+                    id="dropdown-1"
+                    text="Contact"
+                    class="m-md-2 drop"
+                    variant="primary"
+                    size="sm"
+                  >
+                    <b-dropdown-item>
+                      <b-icon icon="chat-fill" variant="primary"></b-icon>
+                      Message</b-dropdown-item
+                    >
+                    <b-dropdown-item>
+                      <b-icon icon="telephone-fill" variant="primary"></b-icon>
+                      Call Now</b-dropdown-item
+                    >
+                    <b-dropdown-item>
+                      <b-icon icon="geo-alt" variant="primary"></b-icon> Get
+                      Direction</b-dropdown-item
+                    >
+                  </b-dropdown>
+                  <b-button variant="outline-primary" size="sm"
+                    ><b-icon-plus></b-icon-plus> Community</b-button
+                  >
+                </span>
               </div>
               <div class="media border-botmediatom mb-4">
                 <img
-                  src="@/assets/img/filler.jpg"
+                  src="@/assets/img/alima.jpg"
                   alt="John Doe"
-                  class="avatar-size mr-2 rounded-circle"
+                  class="mr-2 rounded-circle"
+                  style="width:60px;"
                 />
                 <div class="media-body">
-                  <b>Filler</b>
+                  <b><b-link>J. Circlehead</b-link></b>
+                  <p class="">
+                    Cameroon,
+                    <span class="desktop"
+                      ><b-icon icon="house" variant="primary"></b-icon> 2,
+                      <b-icon icon="globe" variant="primary"></b-icon> 3,
+                      <b-icon icon="people" variant="primary"></b-icon> 3,
+                    </span>
+                  </p>
                 </div>
-                <button type="button" class="btn btn-outline-orange pull-right">
-                  <b-icon-plus-circle-fill></b-icon-plus-circle-fill> Follow
-                </button>
+
+                <span class="pull-right my-auto">
+                  <b-dropdown
+                    id="dropdown-1"
+                    text="Contact"
+                    class="m-md-2 drop"
+                    variant="primary"
+                    size="sm"
+                  >
+                    <b-dropdown-item>
+                      <b-icon icon="chat-fill" variant="primary"></b-icon>
+                      Message</b-dropdown-item
+                    >
+                    <b-dropdown-item>
+                      <b-icon icon="telephone-fill" variant="primary"></b-icon>
+                      Call Now</b-dropdown-item
+                    >
+                    <b-dropdown-item>
+                      <b-icon icon="geo-alt" variant="primary"></b-icon> Get
+                      Direction</b-dropdown-item
+                    >
+                  </b-dropdown>
+                  <b-button variant="outline-primary" size="sm"
+                    ><b-icon-plus></b-icon-plus> Community</b-button
+                  >
+                </span>
               </div>
+            </b-tab>
+            <b-tab title="Following (1)">
               <div class="media border-botmediatom mb-4">
                 <img
-                  src="@/assets/img/filler-ali.jpg"
+                  src="@/assets/img/alima.jpg"
                   alt="John Doe"
-                  class="avatar-size mr-2 rounded-circle"
+                  class="mr-2 rounded-circle"
+                  style="width:60px;"
                 />
                 <div class="media-body">
-                  <b>Filler Ali</b>
+                  <b><b-link>J. Circlehead</b-link></b>
+                  <p class="">
+                    Cameroon,
+                    <span class="desktop"
+                      ><b-icon icon="house" variant="primary"></b-icon> 2,
+                      <b-icon icon="globe" variant="primary"></b-icon> 3,
+                      <b-icon icon="people" variant="primary"></b-icon> 3,
+                    </span>
+                  </p>
                 </div>
-                <button type="button" class="btn btn-outline-orange pull-right">
-                  <b-icon-plus-circle-fill></b-icon-plus-circle-fill> Follow
-                </button>
+
+                <span class="pull-right my-auto">
+                  <b-dropdown
+                    id="dropdown-1"
+                    text="Contact"
+                    class="m-md-2 drop"
+                    variant="primary"
+                    size="sm"
+                  >
+                    <b-dropdown-item>
+                      <b-icon icon="chat-fill" variant="primary"></b-icon>
+                      Message</b-dropdown-item
+                    >
+                    <b-dropdown-item>
+                      <b-icon icon="telephone-fill" variant="primary"></b-icon>
+                      Call Now</b-dropdown-item
+                    >
+                    <b-dropdown-item>
+                      <b-icon icon="geo-alt" variant="primary"></b-icon> Get
+                      Direction</b-dropdown-item
+                    >
+                  </b-dropdown>
+                  <b-button variant="outline-primary" size="sm"
+                    ><b-icon-plus></b-icon-plus> Community</b-button
+                  >
+                </span>
               </div>
-              <div class="media border-botmediatom mb-4">
-                <img
-                  src="@/assets/img/wankue-filler.jpg"
-                  alt="John Doe"
-                  class="avatar-size mr-2 rounded-circle"
-                />
-                <div class="media-body">
-                  <b>Jhon Barrrows</b>
-                </div>
-                <button type="button" class="btn btn-outline-orange pull-right">
-                  Message
-                </button>
-              </div>
-              <div class="media border-botmediatom mb-4">
-                <img
-                  src="@/assets/img/wankue-filler.jpg"
-                  alt="John Doe"
-                  class="avatar-size mr-2 rounded-circle"
-                />
-                <div class="media-body">
-                  <b>Jhon Barrrows</b>
-                </div>
-                <button type="button" class="btn btn-outline-orange pull-right">
-                  <b-icon-plus-circle-fill></b-icon-plus-circle-fill> Follow
-                </button>
-              </div>
-              <div class="media border-botmediatom mb-4">
-                <img
-                  src="@/assets/img/wankue-filler.jpg"
-                  alt="John Doe"
-                  class="avatar-size mr-2 rounded-circle"
-                />
-                <div class="media-body">
-                  <b>Jhon Barrrows</b>
-                </div>
-                <button type="button" class="btn btn-outline-orange pull-right">
-                  Message
-                </button>
-              </div>
-              <div class="media border-botmediatom mb-4">
-                <img
-                  src="@/assets/img/wankue-filler.jpg"
-                  alt="John Doe"
-                  class="avatar-size mr-2 rounded-circle"
-                />
-                <div class="media-body">
-                  <b>Jhon Barrrows</b>
-                </div>
-                <button type="button" class="btn btn-outline-orange pull-right">
-                  <b-icon-plus-circle-fill></b-icon-plus-circle-fill> Follow
-                </button>
-              </div>
-              <div class="media border-botmediatom mb-4">
-                <img
-                  src="@/assets/img/wankue-filler.jpg"
-                  alt="John Doe"
-                  class="avatar-size mr-2 rounded-circle"
-                />
-                <div class="media-body">
-                  <b>Jhon Barrrows</b>
-                </div>
-                <button type="button" class="btn btn-outline-orange pull-right">
-                  Message
-                </button>
-              </div>
-            </div>
-          </div>
+            </b-tab>
+          </b-tabs>
         </b-tab>
-        <b-tab title="People I Am Following">
-          <div class="row">
-            <div class="container mt-4">
-              <div class="media border-botmediatom mb-4">
-                <img
-                  src="@/assets/img/wankue-filler.jpg"
-                  alt="John Doe"
-                  class="avatar-size mr-2 rounded-circle"
-                />
-                <div class="media-body">
-                  <b>Jhon Barrrows</b>
+        <b-tab title="Bussiness">
+          <b-tabs content-class="mt-3" fill pills>
+            <b-tab title="Followers (2)" active>
+              <div class=" row border shadow pt-3 pb-3 pl-0 mb-4">
+                <div class="d-flex col-md-3">
+                  <img class="img-fluid" src="@/assets/img/photo2.jpg" />
                 </div>
-                <button type="button" class="btn btn-outline-orange pull-right">
-                  <b-icon-plus-circle-fill></b-icon-plus-circle-fill> Follow
-                </button>
-              </div>
-              <div class="media border-botmediatom mb-4">
-                <img
-                  src="@/assets/img/wankue-filler.jpg"
-                  alt="John Doe"
-                  class="avatar-size mr-2 rounded-circle"
-                />
-                <div class="media-body">
-                  <b>Jhon Barrrows</b>
+                <div class="col-md-5 pl-md-0">
+                  <b>Business Name Here2</b>
+                  <p class="mb-1"><a href="#">mywebsitebridegeafrica.com</a></p>
+                  <p class="mb-1">Business Category</p>
+                  <p class="mb-1">1.1 M Followers</p>
+                  <p class="mb-1">Neighbourhood, city, country</p>
+                  <p class="mb-1">keyword 1, keyword 2, keyword 3</p>
                 </div>
-                <button type="button" class="btn btn-outline-orange pull-right">
-                  <b-icon-plus-circle-fill></b-icon-plus-circle-fill> Follow
-                </button>
-              </div>
-              <div class="media border-botmediatom mb-4">
-                <img
-                  src="@/assets/img/wankue-filler.jpg"
-                  alt="John Doe"
-                  class="avatar-size mr-2 rounded-circle"
-                />
-                <div class="media-body">
-                  <b>Jhon Barrrows</b>
+                <div class="text-right col-md-4 my-auto">
+                  <span class="pull-right my-auto">
+                    <b-dropdown
+                      id="dropdown-1"
+                      text="Contact"
+                      class="m-md-2 drop"
+                      variant="primary"
+                      size="sm"
+                    >
+                      <b-dropdown-item>
+                        <b-icon icon="chat-fill" variant="primary"></b-icon>
+                        Message</b-dropdown-item
+                      >
+                      <b-dropdown-item>
+                        <b-icon
+                          icon="telephone-fill"
+                          variant="primary"
+                        ></b-icon>
+                        Call Now</b-dropdown-item
+                      >
+                      <b-dropdown-item>
+                        <b-icon icon="geo-alt" variant="primary"></b-icon> Get
+                        Direction</b-dropdown-item
+                      >
+                    </b-dropdown>
+                    <b-button variant="outline-primary" size="sm"
+                      ><b-icon-plus></b-icon-plus> Community</b-button
+                    >
+                  </span>
                 </div>
-                <button type="button" class="btn btn-outline-orange pull-right">
-                  <b-icon-plus-circle-fill></b-icon-plus-circle-fill> Follow
-                </button>
               </div>
-              <div class="media border-botmediatom mb-4">
-                <img
-                  src="@/assets/img/wankue-filler.jpg"
-                  alt="John Doe"
-                  class="avatar-size mr-2 rounded-circle"
-                />
-                <div class="media-body">
-                  <b>Jhon Barrrows</b>
+              <div class=" row border shadow pt-3 pb-3 pl-0 mb-4">
+                <div class="d-flex col-md-3">
+                  <img class="img-fluid" src="@/assets/img/photo2.jpg" />
                 </div>
-                <button type="button" class="btn btn-outline-orange pull-right">
-                  Message
-                </button>
-              </div>
-              <div class="media border-botmediatom mb-4">
-                <img
-                  src="@/assets/img/wankue-filler.jpg"
-                  alt="John Doe"
-                  class="avatar-size mr-2 rounded-circle"
-                />
-                <div class="media-body">
-                  <b>Jhon Barrrows</b>
+                <div class="col-md-5 pl-md-0">
+                  <b>Business Name Here2</b>
+                  <p class="mb-1"><a href="#">mywebsitebridegeafrica.com</a></p>
+                  <p class="mb-1">Business Category</p>
+                  <p class="mb-1">1.1 M Followers</p>
+                  <p class="mb-1">Neighbourhood, city, country</p>
+                  <p class="mb-1">keyword 1, keyword 2, keyword 3</p>
                 </div>
-                <button type="button" class="btn btn-outline-orange pull-right">
-                  <b-icon-plus-circle-fill></b-icon-plus-circle-fill> Follow
-                </button>
-              </div>
-              <div class="media border-botmediatom mb-4">
-                <img
-                  src="@/assets/img/wankue-filler.jpg"
-                  alt="John Doe"
-                  class="avatar-size mr-2 rounded-circle"
-                />
-                <div class="media-body">
-                  <b>Jhon Barrrows</b>
+                <div class="text-right col-md-4 my-auto">
+                  <span class="pull-right my-auto">
+                    <b-dropdown
+                      id="dropdown-1"
+                      text="Contact"
+                      class="m-md-2 drop"
+                      variant="primary"
+                      size="sm"
+                    >
+                      <b-dropdown-item>
+                        <b-icon icon="chat-fill" variant="primary"></b-icon>
+                        Message</b-dropdown-item
+                      >
+                      <b-dropdown-item>
+                        <b-icon
+                          icon="telephone-fill"
+                          variant="primary"
+                        ></b-icon>
+                        Call Now</b-dropdown-item
+                      >
+                      <b-dropdown-item>
+                        <b-icon icon="geo-alt" variant="primary"></b-icon> Get
+                        Direction</b-dropdown-item
+                      >
+                    </b-dropdown>
+                    <b-button variant="outline-primary" size="sm"
+                      ><b-icon-plus></b-icon-plus> Community</b-button
+                    >
+                  </span>
                 </div>
-                <button type="button" class="btn btn-outline-orange pull-right">
-                  Message
-                </button>
               </div>
-              <div class="media border-botmediatom mb-4">
-                <img
-                  src="@/assets/img/wankue-filler.jpg"
-                  alt="John Doe"
-                  class="avatar-size mr-2 rounded-circle"
-                />
-                <div class="media-body">
-                  <b>Jhon Barrrows</b>
+            </b-tab>
+            <b-tab title="Following (1)">
+              <div class=" row border shadow pt-3 pb-3 pl-0 mb-4">
+                <div class="d-flex col-md-3">
+                  <img class="img-fluid" src="@/assets/img/photo2.jpg" />
                 </div>
-                <button type="button" class="btn btn-outline-orange pull-right">
-                  <b-icon-plus-circle-fill></b-icon-plus-circle-fill> Follow
-                </button>
-              </div>
-              <div class="media border-botmediatom mb-4">
-                <img
-                  src="@/assets/img/wankue-filler.jpg"
-                  alt="John Doe"
-                  class="avatar-size mr-2 rounded-circle"
-                />
-                <div class="media-body">
-                  <b>Jhon Barrrows</b>
+                <div class="col-md-5 pl-md-0">
+                  <b>Business Name Here2</b>
+                  <p class="mb-1"><a href="#">mywebsitebridegeafrica.com</a></p>
+                  <p class="mb-1">Business Category</p>
+                  <p class="mb-1">1.1 M Followers</p>
+                  <p class="mb-1">Neighbourhood, city, country</p>
+                  <p class="mb-1">keyword 1, keyword 2, keyword 3</p>
                 </div>
-                <button type="button" class="btn btn-outline-orange pull-right">
-                  Message
-                </button>
+                <div class="text-right col-md-4 my-auto">
+                  <span class="pull-right my-auto">
+                    <b-dropdown
+                      id="dropdown-1"
+                      text="Contact"
+                      class="m-md-2 drop"
+                      variant="primary"
+                      size="sm"
+                    >
+                      <b-dropdown-item>
+                        <b-icon icon="chat-fill" variant="primary"></b-icon>
+                        Message</b-dropdown-item
+                      >
+                      <b-dropdown-item>
+                        <b-icon
+                          icon="telephone-fill"
+                          variant="primary"
+                        ></b-icon>
+                        Call Now</b-dropdown-item
+                      >
+                      <b-dropdown-item>
+                        <b-icon icon="geo-alt" variant="primary"></b-icon> Get
+                        Direction</b-dropdown-item
+                      >
+                    </b-dropdown>
+                    <b-button variant="outline-primary" size="sm"
+                      ><b-icon-plus></b-icon-plus> Community</b-button
+                    >
+                  </span>
+                </div>
               </div>
-            </div>
-          </div>
+            </b-tab>
+          </b-tabs>
         </b-tab>
       </b-tabs>
     </b-card>

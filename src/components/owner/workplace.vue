@@ -140,12 +140,12 @@ export default {
   top: -50px;
 }
 
-.div-design{
-  width: 100px
+.div-design {
+  width: 100px;
 }
 
-.picture-size{
-  width:60px;
+.picture-size {
+  width: 60px;
 }
 
 @media only screen and (max-width: 600px) {

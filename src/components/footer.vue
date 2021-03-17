@@ -4,7 +4,6 @@
       <div class="footer-top">
         <div class="container">
           <div class="row col-md-6 mx-auto">
-
             <div class="col-lg-9">
               <ul class="list-group list-unstyled">
                 <li><a href="#">Home</a></li>
@@ -13,28 +12,28 @@
                 <li><a href="#">Contact Us</a></li>
                 <li><a href="#">Blog</a></li>
               </ul>
-
             </div>
             <div class="col-lg-3">
               <ul class="list-group list-unstyled">
-
-                <li class="nav-item dropdown show"><b>Language</b>
+                <li class="nav-item dropdown show">
+                  <b>Language</b>
                   <b-dropdown
-                      size="sm"
-                      variant="outline"
-                      text="English"
-                      class="m-2"
+                    size="sm"
+                    variant="outline"
+                    text="English"
+                    class="m-2"
                   >
                     <b-dropdown-item-button>English</b-dropdown-item-button>
                     <b-dropdown-item-button>French</b-dropdown-item-button>
                   </b-dropdown>
                 </li>
-                <li class="nav-item dropdown show"><b>Country</b>
+                <li class="nav-item dropdown show">
+                  <b>Country</b>
                   <b-dropdown
-                      size="sm"
-                      variant="outline"
-                      text="Cameroon"
-                      class="ml-2"
+                    size="sm"
+                    variant="outline"
+                    text="Cameroon"
+                    class="ml-2"
                   >
                     <b-dropdown-item-button>Cameroon</b-dropdown-item-button>
                     <b-dropdown-item-button>Nageria</b-dropdown-item-button>
@@ -43,17 +42,13 @@
               </ul>
             </div>
           </div>
-
         </div>
         <div class="mt-5 border-top">
           <div class="col-lg-12 mt-3">
             <p class="text-center">© Copyright all rights reserved</p>
-
           </div>
         </div>
       </div>
-
-
     </footer>
   </div>
 </template>

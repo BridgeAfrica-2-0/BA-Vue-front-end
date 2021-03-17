@@ -194,7 +194,8 @@ export default {
   height: 100%;
   width: 100%;
 }
-.list-complete-enter, .list-complete-leave-to{
+.list-complete-enter,
+.list-complete-leave-to {
   opacity: 0;
   transform: translateY(30px);
 }

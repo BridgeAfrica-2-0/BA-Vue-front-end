@@ -595,9 +595,9 @@ export default {
   padding-top: 3px;
 }
 
-.text-design{
+.text-design {
   color: #e75c18;
-  text-decoration:underline;
+  text-decoration: underline;
 }
 
 @media (max-width: 576px) {

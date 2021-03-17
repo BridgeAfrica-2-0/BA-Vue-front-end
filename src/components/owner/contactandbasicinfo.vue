@@ -22,7 +22,9 @@
         <div class="modal-body">
           <form class="form-inline" action="" method="post">
             <div class="input-group col-md-12 pl-0 pr-0 mb-4 selec">
-              <label class="col-md-3 pl-0 pr-0 control-label">Birth Day / Month</label>
+              <label class="col-md-3 pl-0 pr-0 control-label"
+                >Birth Day / Month</label
+              >
               <div class="col-md-3 pr-0 pl-0">
                 <div class="form-group">
                   <select id="DOBDay" class="form-control">
@@ -225,7 +227,12 @@
           <div class="modal-body">
             <form class="form-inline" action="" method="post">
               <div class="input-group col-md-12 mb-4 selec">
-                <label class="col-md-4 control-label" style="align-items: first baseline;" for="name">Gender</label>
+                <label
+                  class="col-md-4 control-label"
+                  style="align-items: first baseline;"
+                  for="name"
+                  >Gender</label
+                >
                 <div class="col-md-8 pl-0 pr-0">
                   <select id="gender" class="form-control w-100">
                     <option>Male</option>
@@ -235,7 +242,9 @@
               </div>
               <!-- End number In input-->
               <div class="fosrm-group text-right w-100">
-                <button type="button" class="btn btn-primary orange">Save</button>
+                <button type="button" class="btn btn-primary orange">
+                  Save
+                </button>
               </div>
             </form>
           </div>

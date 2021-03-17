@@ -2,9 +2,7 @@
   <div>
     <b>Profession</b>
     <hr />
-    <b-list-group-item
-      class="d-flex align-items-center mb-4 border-none"
-    >
+    <b-list-group-item class="d-flex align-items-center mb-4 border-none">
       <div class="datails">
         <div class="row">
           <div class="col">
@@ -31,5 +29,4 @@ export default {
 };
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

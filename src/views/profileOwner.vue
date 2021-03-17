@@ -14,7 +14,7 @@
               ><bussiness></bussiness
             ></b-tab>
             <b-tab title="Media" class="text-dark"><Media /></b-tab>
-            <b-tab title="Following" class="m-0 p-0 text-dark"
+            <b-tab title="Community" class="m-0 p-0 text-dark"
               ><following></following>
             </b-tab>
           </b-tabs>

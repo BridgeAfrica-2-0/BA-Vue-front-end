@@ -210,7 +210,7 @@ export default {
   content: "";
   background-color: rgb(100 161 72);
   width: 72%;
-  left: -14px;
+  left: 106px;
   top: 36px;
 }
 .color-site {

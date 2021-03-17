@@ -146,15 +146,29 @@
           <b-col md="6" class="">
             <div class="my-auto options">
               <span class="float-right">
-                <b-button class="mr-1" variant="success">
-                  <b-icon icon="geo-alt" variant="white"></b-icon>
-                  Get Direction</b-button
+                <b-dropdown
+                  id="dropdown-1"
+                  text="Contact"
+                  class="m-md-2 drop"
+                  variant="primary"
+                  size="sm"
                 >
-                <b-button class="mr-1 txt" variant="warning">
-                  <b-icon icon="chat-fill" variant="white"></b-icon>
-                  Message</b-button
+                  <b-dropdown-item>
+                    <b-icon icon="chat-fill" variant="primary"></b-icon>
+                    Message</b-dropdown-item
+                  >
+                  <b-dropdown-item>
+                    <b-icon icon="telephone-fill" variant="primary"></b-icon>
+                    Call Now</b-dropdown-item
+                  >
+                  <b-dropdown-item>
+                    <b-icon icon="geo-alt" variant="primary"></b-icon> Get
+                    Direction</b-dropdown-item
+                  >
+                </b-dropdown>
+                <b-button variant="outline-primary" size="sm"
+                  ><b-icon-plus></b-icon-plus> Community</b-button
                 >
-                <b-button variant="primary">+ Community</b-button>
               </span>
             </div>
           </b-col>

@@ -405,53 +405,9 @@
               />Grid
             </button>
           </div>
-          <div class=" row border shadow pt-3  pb-3 pl-0 mb-4">
+          <div class=" row border shadow pt-3 pb-3 pl-0 mb-4">
             <div class="d-flex col-md-3">
-              <img class="img-fluid" src="@/assets/img/about1.jpg" />
-            </div>
-            <div class="col-md-5 pl-md-0">
-              <b>Business Name Here1</b>
-              <p class="mb-1"><a href="#">mywebsitebridegeafrica.com</a></p>
-              <p class="mb-1">Business Category</p>
-              <p class="mb-1">1.1 M Followers</p>
-              <p class="mb-1">Neighbourhood, city, country</p>
-              <p class="mb-1">keyword 1, keyword 2, keyword 3</p>
-            </div>
-            <div class="text-right col-md-4">
-              <a href="#">Editor</a>
-              <ul class="list-unstyled text-left ulpost-bus">
-                <li>
-                  <a href="#"
-                    ><fas-icon
-                      class="primary float-left mr-1 mt-1"
-                      :icon="['fas', 'envelope']"
-                    />
-                    Inbox
-                    <span
-                      class="badge bg-dark pull-right text-light border-radius float-right"
-                      >5</span
-                    ></a
-                  >
-                </li>
-                <li>
-                  <a href="#"
-                    ><fas-icon
-                      class="primary float-left mr-1 mt-1"
-                      :icon="['fas', 'globe']"
-                    />
-                    Notification
-                    <span
-                      class="badge pull-right bg-dark text-light border-radius float-right"
-                      >2</span
-                    ></a
-                  >
-                </li>
-              </ul>
-            </div>
-          </div>
-          <div class=" row border shadow pt-3  pb-3 pl-0 mb-4">
-            <div class="d-flex col-md-3">
-              <img class="img-fluid" src="@/assets/img/about2.jpg" />
+              <img class="img-fluid" src="@/assets/img/photo2.jpg" />
             </div>
             <div class="col-md-5 pl-md-0">
               <b>Business Name Here2</b>
@@ -461,36 +417,32 @@
               <p class="mb-1">Neighbourhood, city, country</p>
               <p class="mb-1">keyword 1, keyword 2, keyword 3</p>
             </div>
-            <div class="text-right col-md-4">
-              <a href="#">Admin</a>
-              <ul class="list-unstyled text-left ulpost-bus">
-                <li>
-                  <a href="#"
-                    ><fas-icon
-                      class="primary float-left mr-1 mt-1"
-                      :icon="['fas', 'envelope']"
-                    />
-                    Inbox
-                    <span
-                      class="badge bg-dark pull-right text-light border-radius float-right"
-                      >5</span
-                    ></a
+            <div class="text-right col-md-4 my-auto">
+              <span class="pull-right my-auto">
+                <b-dropdown
+                  id="dropdown-1"
+                  text="Contact"
+                  class="m-md-2 drop"
+                  variant="primary"
+                  size="sm"
+                >
+                  <b-dropdown-item>
+                    <b-icon icon="chat-fill" variant="primary"></b-icon>
+                    Message</b-dropdown-item
                   >
-                </li>
-                <li>
-                  <a href="#"
-                    ><fas-icon
-                      class="primary float-left mr-1 mt-1"
-                      :icon="['fas', 'globe']"
-                    />
-                    Notification
-                    <span
-                      class="badge pull-right bg-dark text-light border-radius float-right"
-                      >2</span
-                    ></a
+                  <b-dropdown-item>
+                    <b-icon icon="telephone-fill" variant="primary"></b-icon>
+                    Call Now</b-dropdown-item
                   >
-                </li>
-              </ul>
+                  <b-dropdown-item>
+                    <b-icon icon="geo-alt" variant="primary"></b-icon> Get
+                    Direction</b-dropdown-item
+                  >
+                </b-dropdown>
+                <b-button variant="outline-primary" size="sm"
+                  ><b-icon-plus></b-icon-plus> Community</b-button
+                >
+              </span>
             </div>
           </div>
           <div class=" row border shadow pt-3 pb-3 pl-0 mb-4">
@@ -505,36 +457,72 @@
               <p class="mb-1">Neighbourhood, city, country</p>
               <p class="mb-1">keyword 1, keyword 2, keyword 3</p>
             </div>
-            <div class="text-right col-md-4">
-              <a href="#">Editor</a>
-              <ul class="list-unstyled text-left ulpost-bus">
-                <li>
-                  <a href="#"
-                    ><fas-icon
-                      class="primary float-left mr-1 mt-1"
-                      :icon="['fas', 'envelope']"
-                    />
-                    Inbox
-                    <span
-                      class="badge bg-dark pull-right text-light border-radius float-right"
-                      >5</span
-                    ></a
+            <div class="text-right col-md-4 my-auto">
+              <span class="pull-right my-auto">
+                <b-dropdown
+                  id="dropdown-1"
+                  text="Contact"
+                  class="m-md-2 drop"
+                  variant="primary"
+                  size="sm"
+                >
+                  <b-dropdown-item>
+                    <b-icon icon="chat-fill" variant="primary"></b-icon>
+                    Message</b-dropdown-item
                   >
-                </li>
-                <li>
-                  <a href="#"
-                    ><fas-icon
-                      class="primary float-left mr-1 mt-1"
-                      :icon="['fas', 'globe']"
-                    />
-                    Notification
-                    <span
-                      class="badge pull-right bg-dark text-light border-radius float-right"
-                      >2</span
-                    ></a
+                  <b-dropdown-item>
+                    <b-icon icon="telephone-fill" variant="primary"></b-icon>
+                    Call Now</b-dropdown-item
                   >
-                </li>
-              </ul>
+                  <b-dropdown-item>
+                    <b-icon icon="geo-alt" variant="primary"></b-icon> Get
+                    Direction</b-dropdown-item
+                  >
+                </b-dropdown>
+                <b-button variant="outline-primary" size="sm"
+                  ><b-icon-plus></b-icon-plus> Community</b-button
+                >
+              </span>
+            </div>
+          </div>
+          <div class=" row border shadow pt-3 pb-3 pl-0 mb-4">
+            <div class="d-flex col-md-3">
+              <img class="img-fluid" src="@/assets/img/photo2.jpg" />
+            </div>
+            <div class="col-md-5 pl-md-0">
+              <b>Business Name Here2</b>
+              <p class="mb-1"><a href="#">mywebsitebridegeafrica.com</a></p>
+              <p class="mb-1">Business Category</p>
+              <p class="mb-1">1.1 M Followers</p>
+              <p class="mb-1">Neighbourhood, city, country</p>
+              <p class="mb-1">keyword 1, keyword 2, keyword 3</p>
+            </div>
+            <div class="text-right col-md-4 my-auto">
+              <span class="pull-right my-auto">
+                <b-dropdown
+                  id="dropdown-1"
+                  text="Contact"
+                  class="m-md-2 drop"
+                  variant="primary"
+                  size="sm"
+                >
+                  <b-dropdown-item>
+                    <b-icon icon="chat-fill" variant="primary"></b-icon>
+                    Message</b-dropdown-item
+                  >
+                  <b-dropdown-item>
+                    <b-icon icon="telephone-fill" variant="primary"></b-icon>
+                    Call Now</b-dropdown-item
+                  >
+                  <b-dropdown-item>
+                    <b-icon icon="geo-alt" variant="primary"></b-icon> Get
+                    Direction</b-dropdown-item
+                  >
+                </b-dropdown>
+                <b-button variant="outline-primary" size="sm"
+                  ><b-icon-plus></b-icon-plus> Community</b-button
+                >
+              </span>
             </div>
           </div>
         </div>

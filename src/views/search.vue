@@ -274,7 +274,7 @@
               <span class="title"> </span>
               <span class="ml-5 result"><small>398 Results found</small></span>
               <Business class="mb-3" />
-              <Business class="mb-3" />
+              <Business class="mb-3 btn-busi" />
             </b-card>
           </b-col>
           <b-col class="col-3 adds">
@@ -507,7 +507,13 @@ export default {
   }
   .busi {
     position: relative;
-    bottom: 100px;
+    bottom: 1000px;
+  }
+  .crd{
+   height: 1250px;
+  }
+  .btn-busi{
+    margin-top: 150px;
   }
 }
 </style>

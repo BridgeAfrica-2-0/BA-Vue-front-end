@@ -47,7 +47,7 @@ p {
     margin-left: -50px;
   }
   .card{
-    height: 1020px;
+    height: 1250px;
   }
   .busi{
     margin-bottom: 160px;

@@ -1,56 +1,6 @@
 <template>
   <div>
-    <div class="images">
-      <div>
-        <img fluid src="../../assets/img/about2.jpg" alt="" />
-      </div>
-      <div>
-        <img fluid src="../../assets/img/about2.jpg" alt="" />
-      </div>
-      <div>
-        <img fluid src="../../assets/img/about2.jpg" alt="" />
-      </div>
-      <div>
-        <img fluid src="../../assets/img/about2.jpg" alt="" />
-      </div>
-      <div>
-        <img fluid src="../../assets/img/about2.jpg" alt="" />
-      </div>
-      <div>
-        <img fluid src="../../assets/img/about2.jpg" alt="" />
-      </div>
-    </div>
-    <div class="photo-btns">
-      <b-button class="sm" size="sm">
-        <b-icon icon="plus"></b-icon>Add Photos</b-button
-      >
-      <b-button class="ml-2" size="sm">See All</b-button>
-    </div>
-    <b-row class="mt-4">
-      <b-col cols="8">
-        <div>
-          <b-avatar
-            src="https://placekitten.com/400/300"
-            class="owner-profile-image-profile float-left"
-            badge-variant="primary"
-            badge-offset="10px"
-            size="80"
-          >
-          </b-avatar>
-        </div>
-        <div class="d-inline-block mt-4 ml-4 float-left">
-          <h5 class="font-weight-bolder">User Name</h5>
-          <p>@User Name Alias</p>
-        </div>
-      </b-col>
-      <b-col cols="4">
-        <p class="float-right">
-          <b-button class="mr-1" variant="success">Promote</b-button>
-          <b-button class="mr-1" variant="warning">Contact</b-button>
-          <b-button variant="primary">Website</b-button>
-        </p>
-      </b-col>
-    </b-row>
+    <head-page-owner></head-page-owner>
     <div class="row">
       <b-container fluid="md" class="text-justify mt-2">
         <b-row>
@@ -77,10 +27,12 @@ import Media from "./tabs/media";
 import MarketPlace from "./tabs/marketPlace";
 import Followers from "./tabs/followers";
 import Networks from "./tabs/networks";
+import HeadPageOwner from "@/components/businessf/headPageOwner";
 
 export default {
   name: "Home",
   components: {
+    HeadPageOwner,
     HomePage,
     About,
     Media,

@@ -11,9 +11,11 @@ import service from "@/views/service";
 import Modifier from "@/views/modifier";
 import store from "@/store/index.js";
 import Follower from "../views/follower.vue";
+import Visitor from "../views/visitor.vue";
 import profile_owner from "@/views/profileOwner";
 import businessFollower from "@/views/businessFollower";
 import businessOwner from "@/views/businessOwner";
+import businessVisitor from "@/views/businessVisitor";
 import search from "@/views/search";
 import forgotPassword from "@/views/forgotPassword";
 import navMessage from "@/views/navMessaging";
@@ -68,6 +70,11 @@ const routes = [
     component: businessFollower,
   },
   {
+    path: "/businessvisitor",
+    name: "BusinessVisitor",
+    component: businessVisitor,
+  },
+  {
     path: "/services/create",
     name: "Create",
     component: createService,
@@ -102,6 +109,11 @@ const routes = [
     path: "/profilefollower",
     name: "Follower",
     component: Follower,
+  },
+  {
+    path: "/profilevisitor",
+    name: "visitor",
+    component: Visitor,
   },
   {
     path: "/search",

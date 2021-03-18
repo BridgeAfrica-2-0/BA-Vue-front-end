@@ -30,15 +30,29 @@
       </b-col>
       <b-col cols="6">
         <p class="float-right">
-          <b-button class="mr-1" variant="success">
-            <b-icon icon="house-fill" variant="white"></b-icon>
-            Get Direction</b-button
+          <b-button size="sm">
+            <b-icon icon="check" variant="grey"></b-icon> Following</b-button
           >
-          <b-button class="mr-1 txt" variant="warning">
-            <b-icon icon="chat-fill" variant="white"></b-icon>
-            Message</b-button
+          <b-dropdown
+            id="dropdown-1"
+            text="Contact"
+            class="m-md-2 drop"
+            size="sm"
           >
-          <b-button variant="primary">+ Community</b-button>
+            <b-dropdown-item>
+              <b-icon icon="chat-fill" variant="primary"></b-icon>
+              Message</b-dropdown-item>
+            <b-dropdown-item>
+              <b-icon icon="geo-alt" variant="primary"></b-icon> Get
+              Direction</b-dropdown-item
+            >
+          </b-dropdown>
+          <b-dropdown size="sm">
+            <template #button-content>
+              <b-icon icon="three-dots" aria-hidden="true"></b-icon>
+            </template>
+            <b-dropdown-item> Report</b-dropdown-item>
+          </b-dropdown>
         </p>
       </b-col>
     </b-row>
@@ -161,10 +175,10 @@ img {
 .mobile {
   display: none;
 }
-.txt{
+.txt {
   color: #fff;
 }
-.name{
+.name {
   position: relative;
   top: 11px;
 }

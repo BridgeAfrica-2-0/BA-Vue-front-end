@@ -2,9 +2,10 @@
   <div >
     <b-row>
       <b-col md="4" >
-        <Intro/>
+     <Intro />
+        <Personalize />
         <Invite />
-        <Personalise/>
+        <HotBusiness />
       </b-col>
       <b-col md="8">
        <Post/>
@@ -16,16 +17,18 @@
 <script>
 import Intro from "../intro";
 import Invite from "../invite";
-import Personalise from "../personalise";
-import Post from "../ownerPost";
+import HotBusiness from "../hotBusiness";
+import Post from "../../post";
+import Personalize from "../personalise";
 export default {
   name: "posts",
   components: {
     Intro,
     Invite,
-    Personalise,
-    Post
-  }
+    HotBusiness,
+    Post,
+    Personalize,
+  },
 };
 </script>
 

@@ -15,7 +15,7 @@
             <b-tab title="About" class="toto"><About /></b-tab>
             <b-tab title="Business" class="m-0 p-0 toto"><bussiness></bussiness></b-tab>
             <b-tab title="Media" class="toto"><Media /></b-tab>
-            <b-tab title="Following" class="m-0 p-0 toto"><following></following>  </b-tab>
+            <b-tab title="Community" class="m-0 p-0 toto"><following></following>  </b-tab>
           </b-tabs>
         </b-col>
       </b-row>

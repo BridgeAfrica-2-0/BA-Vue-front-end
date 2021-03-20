@@ -1,10 +1,25 @@
 <template>
   <div>
     <b-card>
+      <h2 class="p-3 bg-light shadow-sm mb-4 my-auto">
+        <fas-icon
+          class="text-primary mr-2 pt-1"
+          :icon="['fas', 'user-friends']"
+        />COMMUNITY
+        <h6 class="text-primary mr-5">7k</h6>
+      </h2>
       <b-tabs content-class="mt-3">
-        <b-tab title="People" active>
+        <b-tab active>
+          <template #title>
+            <p>People</p>
+            <p>3.5k</p>
+          </template>
           <b-tabs content-class="mt-3" fill pills>
-            <b-tab title="Followers (2)" active>
+            <b-tab active>
+              <template #title>
+                <p>Followers</p>
+                <p>1.5k</p>
+              </template>
               <div class="media border-botmediatom mb-4">
                 <img
                   src="@/assets/img/alima.jpg"
@@ -148,7 +163,7 @@
         <b-tab title="Bussiness">
           <b-tabs content-class="mt-3" fill pills>
             <b-tab title="Followers (2)" active>
-              <div class="row border shadow pt-3 pb-3 pl-0 mb-4">
+              <div class=" row border shadow pt-3 pb-3 pl-0 mb-4">
                 <div class="d-flex col-md-3">
                   <img class="img-fluid" src="@/assets/img/photo2.jpg" />
                 </div>
@@ -191,7 +206,7 @@
                   </span>
                 </div>
               </div>
-              <div class="row border shadow pt-3 pb-3 pl-0 mb-4">
+              <div class=" row border shadow pt-3 pb-3 pl-0 mb-4">
                 <div class="d-flex col-md-3">
                   <img class="img-fluid" src="@/assets/img/photo2.jpg" />
                 </div>
@@ -288,18 +303,13 @@
 </template>
 
 <script>
-export default {};
+export default {
+  name: "comunitiDashboard"
+};
 </script>
 
 <style scoped>
-.d-flex img {
-  width: 100% !important;
-  border-radius: 10px;
-}
-@media only screen and (max-width: 768px) {
-  .options {
-    position: relative;
-    left: -75px;
-  }
+.avatar-size {
+  width: 90px;
 }
 </style>

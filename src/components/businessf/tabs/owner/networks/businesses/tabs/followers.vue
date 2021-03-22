@@ -16,15 +16,15 @@
     <br/>
 
     <br/>
-  <CommunityMembers/>
+  <CommunityBusiness/>
   </div>
 </template>
 
 <script>
-import CommunityMembers from "../../communityMember"
+import CommunityBusiness from "../../communitybusiness"
 export default {
   components:{
-      CommunityMembers
+      CommunityBusiness
   }
 }
 </script>

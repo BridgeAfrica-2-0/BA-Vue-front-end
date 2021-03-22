@@ -3,9 +3,9 @@
     <navbar />
     <br />
 
-    <b-container fluid="xl" class="f-width">
+    <b-container  class="full-width">
       <b-row>
-        <b-tabs content-class="mt-3 f-width">
+        <b-tabs  pills  fill  class="yaya" content-class="mt-3 f-width" active-nav-item-class=" box-item" >
           <b-tab active>
             <template slot="title">
               <p class="t-color">
@@ -32,9 +32,7 @@
                 <b-icon icon="envelope" scale="1" variant="primary"></b-icon>
 
                 Inbox
-                <span class="m-badge">
-                  <b-badge pill variant="primary">4</b-badge>
-                </span>
+               
               </p>
             </template>
 
@@ -68,7 +66,7 @@
             <template slot="title">
               <p class="t-color">
                 <b-icon icon="person-plus" scale="1" variant="primary"></b-icon>
-                Community Request
+                Community Management
               </p>
             </template>
 
@@ -103,7 +101,7 @@
                   <Parent />
                 </b-col>
 
-                <b-col md="8" class="order-sm-0">
+                <b-col md="8" class="order-sm-0">  
                   <PendingPost />
                 </b-col>
               </b-row>
@@ -219,7 +217,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style >
 .network-profile-image-profile {
   width: 12rem;
   height: 12rem;
@@ -250,12 +248,15 @@ export default {
   width: 100%;
 }
 
-.count_number {
-  padding: 0px 5px;
-  float: right;
-  background: #ce4b0b;
-  border-radius: 24px;
-  color: white;
+.nav {
+    display: flex;
+    flex-wrap: wrap;
+    padding-left: 0;
+    margin-bottom: 0;
+    list-style: none;
+    background-clip: border-box;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  
 }
 
 .a-left {
@@ -268,9 +269,42 @@ export default {
 
 .t-color {
   color: black;
+  padding-top: 8px;
 }
 
 .tab-title-class {
   color: #ffffff !important;
 }
+
+.box-item{
+     
+       border-bottom: 1px solid red;
+    background-color:white;
+}
+
+.yaya{
+   
+   
+    border-bottom: 1px solid red;
+    background-color:white;
+}
+
+.active-nav-item-class{
+
+    color: #fff;
+   
+    border-bottom: 1px solid red;
+}
+
+
+
+
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+    color: #fff;
+    background-color: white;
+    border-bottom: 4px solid red;
+    border-top: 3px solid red;
+}
+
+
 </style>

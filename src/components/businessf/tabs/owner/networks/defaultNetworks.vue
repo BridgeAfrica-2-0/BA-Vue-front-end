@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="t-left">
     <b-tabs content-class="mt-1" fill pills>
       <b-tab active>
         <template slot="title" class="t-color">
@@ -52,5 +52,10 @@ export default {
 <style scoped>
 .t-color {
   color: black;
+}
+
+.t-left{
+
+  text-align: left;
 }
 </style>

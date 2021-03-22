@@ -3,9 +3,9 @@
     <b-container>
       <b-row>
         <b-col class="f-left">
-          <h5 class=" d-inline-block">
+          <h6 class=" d-inline-block">
             Membership Requests
-          </h5>
+          </h6>
         </b-col>
         <b-col class="f-right"> <span class="">35 Pending</span> </b-col>
       </b-row>
@@ -13,7 +13,46 @@
 
     <hr width="100%" />
 
-    <div v-for="i in 6" class="f-left" :key="i">
+
+
+
+
+
+
+
+    <b-row>
+           
+      <b-col cols="9" class="mx-auto">
+
+
+        <b-input-group class="mb-2 px-md-3 mx-auto">
+          <b-input-group-prepend is-text>
+            <b-icon-search class="text-primary border-none"></b-icon-search>
+          </b-input-group-prepend>
+          <b-form-input
+            aria-label="Text input with checkbox"
+            placeholder="Search Something"
+          ></b-form-input>
+        </b-input-group>
+
+
+      </b-col>
+
+      <b-col cols="3">  <b-button variant="primary" block > Send Request </b-button>   </b-col>
+
+    </b-row>
+
+    <br/>
+
+
+
+
+
+
+
+
+
+    <div v-for="i in 6" class="f-left" :key="i">  
       <p class="">
         <span class="">
           <b-avatar

@@ -14,16 +14,16 @@ from '@/components/owner/tabs/bussiness';
         <b-icon-plus class="network-avatar-icon"></b-icon-plus>
       </b-container>
 
-      <br />
+      <br />      
 
       <b-container>
         <b-row>
-          <b-col>
-            <h6 class="font-weight-bolder m-0 p-0">Marketers</h6>
+          <b-col cols="6">
+            <h6 class="font-weight-bolder m-0 p-0 t-align">  MARKETERS UNION </h6>
           </b-col>
-          <b-col>
-            <b-button variant="primary" size="sm">
-              <b-icon-check class=""></b-icon-check> Joined
+          <b-col cols="6">
+            <b-button variant="primary" size="sm"   style="width: 120px;"  >
+              <b-icon icon="plus-circle"></b-icon> Community
             </b-button>
           </b-col>
         </b-row>
@@ -32,16 +32,7 @@ from '@/components/owner/tabs/bussiness';
       <br />
 
       <b-card-text class="text-left">
-        <b-container>
-          <b-row>
-            <b-col>
-              <p><b-icon icon="person" variant="primary"></b-icon> Owner</p>
-            </b-col>
-            <b-col>
-              <p><b-icon icon="briefcase" variant="primary"></b-icon> Name</p>
-            </b-col>
-          </b-row>
-        </b-container>
+        
 
         <b-container>
           <b-row>
@@ -72,107 +63,33 @@ from '@/components/owner/tabs/bussiness';
 
     <b-card
       class="mt-4"
-      title="Community"
+      title=""
       header-tag="header"
       footer-tag="footer"
     >
-      <b-list-group-item class="d-flex align-items-center m-0 p-2 b-none">
-        <b-avatar
-          variant="info"
-          src="https://placekitten.com/300/300"
-          class="mr-3"
-        ></b-avatar>
-        <span class="mr-auto font-weight-bolder">Itz blec blec</span>
-      </b-list-group-item>
 
-      <b-list-group-item class="d-flex align-items-center m-0 p-2 b-none">
-        <b-avatar
-          variant="info"
-          src="https://placekitten.com/300/300"
-          class="mr-3"
-        ></b-avatar>
-        <span class="mr-auto font-weight-bolder">do wilflow</span>
-      </b-list-group-item>
-      <b-list-group-item class="d-flex align-items-center m-0 p-2 b-none">
-        <b-avatar
-          variant="info"
-          src="https://placekitten.com/300/300"
-          class="mr-3"
-        ></b-avatar>
-        <span class="mr-auto font-weight-bolder">blezour blec</span>
-      </b-list-group-item>
-      <b-list-group-item class="d-flex align-items-center m-0 p-2 b-none">
-        <b-avatar
-          variant="info"
-          src="https://placekitten.com/300/300"
-          class="mr-3"
-        ></b-avatar>
-        <span class="mr-auto font-weight-bolder">John Deo</span>
-      </b-list-group-item>
-      <b-card-text class="mt-2">
-        <span class="float-left"> <a href="">View All Members</a> </span>
-        <span class="float-right">
-          <b-button variant="outline-primary" size="sm">
-            <b-icon-plus class=""></b-icon-plus> Invite
-          </b-button>
-        </span>
-      </b-card-text>
+    <h4> <b-icon icon="people" class="i-color">   </b-icon>  Community          <span class="i-color"> 7k </span> </H4> 
+
+     <SidebarCommunity/> 
+     
     </b-card>
 
-    <b-card
-      class="mt-4"
-      title="Businesses"
-      header-tag="header"
-      footer-tag="footer"
-    >
-      <b-list-group-item class="d-flex align-items-center m-0 p-2 b-none">
-        <b-avatar
-          variant="info"
-          src="https://placekitten.com/300/300"
-          class="mr-3"
-        ></b-avatar>
-        <span class="mr-auto font-weight-bolder"> Business name</span>
-      </b-list-group-item>
-
-      <b-list-group-item class="d-flex align-items-center m-0 p-2 b-none">
-        <b-avatar
-          variant="info"
-          src="https://placekitten.com/300/300"
-          class="mr-3"
-        ></b-avatar>
-        <span class="mr-auto font-weight-bolder"> Business name </span>
-      </b-list-group-item>
-      <b-list-group-item class="d-flex align-items-center m-0 p-2 b-none">
-        <b-avatar
-          variant="info"
-          src="https://placekitten.com/300/300"
-          class="mr-3"
-        ></b-avatar>
-        <span class="mr-auto font-weight-bolder"> Business name </span>
-      </b-list-group-item>
-      <b-list-group-item class="d-flex align-items-center m-0 p-2 b-none">
-        <b-avatar
-          variant="info"
-          src="https://placekitten.com/300/300"
-          class="mr-3"
-        ></b-avatar>
-        <span class="mr-auto font-weight-bolder"> Business name </span>
-      </b-list-group-item>
-      <b-card-text class="mt-2">
-        <span class="float-left"> <a href="">View All Bussiness</a> </span>
-        <span class="float-right">
-          <b-button variant="outline-primary" size="sm">
-            <b-icon-plus class=""></b-icon-plus> Invite
-          </b-button>
-        </span>
-      </b-card-text>
-    </b-card>
   </b-container>
 </template>
 
 <script>
+
+import SidebarCommunity from "@/components/businessf/tabs/owner/networks/sidebarcommunity";
+
+
 export default {
-  name: "pendingFeedback"
+  name: "parent",
+
+   components: {
+    SidebarCommunity,
+   
+  }
+
 };
 </script>
 
@@ -187,7 +104,9 @@ export default {
 .b-none {
   border-style: none;
 }
-
+.t-align{
+  text-align: center;
+}
 .network-avatar-icon {
   position: absolute;
   width: 2rem;
@@ -199,5 +118,10 @@ export default {
   background: #e75c18;
   border-radius: 25px;
   border: 4px solid #ffff;
+}
+
+
+.i-color{
+  color:#e75c18;
 }
 </style>

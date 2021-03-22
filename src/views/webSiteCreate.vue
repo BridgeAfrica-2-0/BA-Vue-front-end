@@ -79,7 +79,7 @@ export default {
   methods: {
 
     stat() {
-      return show=false;
+      return false;
     }
   }
 };

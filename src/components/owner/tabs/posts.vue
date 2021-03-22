@@ -6,7 +6,7 @@
           <template #header>
             <h6 class="mb-0 d-inline-block">Intro</h6>
             <span class="float-right btn m-0 p-0 action-intro"
-              ><b-icon icon="pencil-fill" class="violet"></b-icon> Edit</span
+              ><b-icon icon="pencil-fill" variant="primary"></b-icon> Edit</span
             >
           </template>
           <b-card-text class="text-left">
@@ -15,20 +15,20 @@
               Current or Last Organization
             </p>
             <p>
-              <b-icon icon="book-fill" class="violet"></b-icon> Studied at: Last
-              Education
+              <b-icon icon="book-fill" class="violet"></b-icon> Studied at:
+              Last Education
             </p>
             <p>
               <b-icon icon="house-fill" class="violet"></b-icon> Home Town
               Name:Dummy
             </p>
             <p>
-              <b-icon icon="geo-alt-fill" class="violet"></b-icon> Current City
-              Name:Dummy
+              <b-icon icon="geo-alt-fill" class="violet"></b-icon> Current
+              City Name:Dummy
             </p>
             <p>
-              <b-icon icon="people-fill" class="violet"></b-icon> Followed by:
-              525
+              <b-icon icon="people-fill" class="violet"></b-icon> Followed
+              by: 525
             </p>
           </b-card-text>
         </b-card>
@@ -94,7 +94,7 @@
           <template #header>
             <h6 class="mb-0 d-inline-block">Media</h6>
             <span class="float-right"
-              ><b-icon icon="eye-fill" class="violet"></b-icon> See All</span
+              ><b-icon icon="eye-fill" variant="primary"></b-icon> See All</span
             >
           </template>
           <b-card-text>

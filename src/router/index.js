@@ -7,6 +7,10 @@ import RecoverPass1 from "../views/recoverPassword1.vue";
 import RecoverPass2 from "../views/recoverPassword2.vue";
 import RecoverPass3 from "../views/recoverPassword3.vue";
 import createService from "@/views/createService";
+
+import businessOwnerSettingGeneral from "@/views/businessOwnerSettingGeneral";
+
+
 import service from "@/views/service";
 import Modifier from "@/views/modifier";
 import store from "@/store/index.js";
@@ -51,6 +55,16 @@ const routes = [
     name: "BusinessOwner",
     component: businessOwner,
   },
+
+  {
+    path: "/business_owner_setting_general",
+    name: "businessOwnerSettingGeneral",
+    component: businessOwnerSettingGeneral
+  },
+
+
+
+
   {
     path: "/business_owner/create_website_step_one",
     name: "createWebSite",

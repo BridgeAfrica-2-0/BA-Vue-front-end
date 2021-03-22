@@ -2,13 +2,13 @@
   <div>
     <b>Profession</b>
     <hr />
-    <b-link style="text-decoration: none" class="mt-4" v-b-modal.modal-11>
+    <b-link  class="mt-4 doc" v-b-modal.modal-11>
       <b-icon icon="plus" variant="primary"></b-icon>
       Add Profession</b-link
     >
     <b-list-group-item
-      class="d-flex align-items-center mb-4 "
-      style="border: none"
+      class="d-flex align-items-center mb-4 b-none"
+     
     >
       <div class="datails">
         <div class="row">
@@ -26,7 +26,7 @@
     </b-list-group-item>
 
     <b-modal ref="add-contact" id="modal-11" title="Add Profession">
-      <div style="width: 100px">
+      <div class="width">
         <b-form-select
           class="mb-2"
           size="sm"
@@ -63,4 +63,19 @@ export default {
 @media only screen and (max-width: 768px) {
 
 }
+
+.width{
+   width:100px;
+}
+
+.b-none{
+
+  border: none;
+}
+
+.doc{
+
+  text-decoration: none;
+}
+
 </style>

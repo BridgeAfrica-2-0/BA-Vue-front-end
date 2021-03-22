@@ -237,6 +237,19 @@ export default {
 @media (min-width: 992px) {
 }
 @media (min-width: 1200px) {
+  .b-avatar .b-avatar-badge {
+    position: absolute;
+    min-height: 1.5em;
+    min-width: 1.5em;
+    padding: 0.25em;
+    line-height: 1;
+    border-radius: 10em;
+    font-size: 70%;
+    font-weight: 700;
+    z-index: 1;
+    bottom: 10px;
+    right: 10px;
+  }
 }
 @media (min-width: 1400px) {
   .img-avatar {

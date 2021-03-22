@@ -302,6 +302,13 @@ export default {
   .show {
     display: none;
   }
+
+  .nav-tabs .nav-link {
+    border: 1px solid transparent;
+    border-top-left-radius: 0.25rem;
+    border-top-right-radius: 0.25rem;
+    font-size: 10px;
+  }
 }
 @media (min-width: 576px) {
   .lb-grid {

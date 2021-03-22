@@ -1,8 +1,8 @@
 <template>
-  <div>
-    <h4 class="font-weight-bolder d-inline-block">
-      <b-icon-bell-fill></b-icon-bell-fill> Keywords Alerts
-    </h4>
+  <div class="a-left">
+    <h5 class=" d-inline-block">
+      Keywords Alerts
+    </h5>
 
     <hr width="100%" />
     <b-row>
@@ -85,4 +85,8 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.a-left {
+  text-align: left;
+}
+</style>

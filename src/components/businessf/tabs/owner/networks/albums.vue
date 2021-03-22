@@ -226,21 +226,10 @@ export default {
     };
   },
   methods: {
-    /**
-
-     Use to view the photo in the album
-     @param id
-    @return void
-    */
     view() {
       this.modalShow = !this.modalShow;
     },
 
-    /**
-        Used for opening album
-         @param id
-        @return void
-    */
     openAlbum(id) {
       id = id - 1;
       this.pictureShow = true;
@@ -250,48 +239,26 @@ export default {
       console.log(this.album);
     },
 
-    /**
-
-     Shows modal and create Album
-    @param id
-    @return void
-    */
     createAlbum() {
       this.showModal = !this.showModal;
     },
 
-    /**
-     Used to leave an opened Album
-    @param id
-    @return void
-    */
     back() {
       this.pictureShow = false;
       this.albumShow = true;
     },
 
-    /**
-      Used for Choosing a file from device file system
-       @param id
-      @return void
-      */
     chooseFile() {
       let defaultBtn = document.getElementById("default-btn");
       defaultBtn.click();
     },
-    /**
-     *
-     * @param e
-     */
+
     onFileChange(e) {
       let files = e.target.files || e.dataTransfer.files;
       if (!files.length) return;
       this.createImage(files[0]);
     },
-    /**
-     *
-     * @param file
-     */
+
     createImage(file) {
       let reader = new FileReader();
       let vm = this;
@@ -354,8 +321,6 @@ export default {
 }
 
 .album {
-  /*width: inherit;*/
-  /*height: auto;*/
   cursor: pointer;
 }
 .options {

@@ -1,57 +1,161 @@
 <template>
-  <div class="px-3">
-    <b-row class="mt-4">
-      <b-col cols="12">
-        <h4 class="font-weight-bolder d-inline-block">
-          <b-icon-person-plus></b-icon-person-plus> Membership Requests
-        </h4>
-        <span class="float-right">35 Pending</span>
+  <div>
+    <b-container>
+      <b-row>
+        <b-col>
+          <div class="b-bottomn f-left">
+            <b-form-checkbox
+              id="checkbox-1"
+              v-model="status"
+              name="checkbox-1"
+              value="accepted"
+              unchecked-value="not_accepted"
+            >
+              Select All
+            </b-form-checkbox>
+          </div>
+        </b-col>
+        <b-col>
+          <div class="b-bottomn f-right">
+            <b-button variant="success" class="a-button-l">
+              Mark as Read</b-button
+            >
+          </div>
+        </b-col>
+      </b-row>
+      <br />
 
-        <hr width="100%" />
-        <div v-for="i in 6" :key="i">
-          <p class="">
-            <span class="">
-              <b-avatar
-                class="d-inline-block"
-                variant="info"
-                src="https://business.bridgeafrica.info/assets/img/team/3.png"
-                size="3.5rem"
-              ></b-avatar>
-              <h5 class="m-0 font-weight-bolder d-inline-block ml-2">
-                Mapoure Agrobusiness
-              </h5>
+      <b-container>
+        <b-container class="bb-bottom">
+          <b-list class="d-flex align-items-center m-list">
+            <b-form-checkbox
+              class="m-left"
+              id="checkbox-1"
+              v-model="status"
+              name="checkbox-1"
+              value="accepted"
+              unchecked-value="not_accepted"
+            >
+            </b-form-checkbox>
+            <b-avatar class="mr-3" size="4em"></b-avatar>
+            <span class="mr-auto"
+              >J. Circlehead
+              <p>1hr</p>
             </span>
-            <span class="float-right mt-1">
-              <b-dropdown
-                size="lg"
-                variant="link"
-                toggle-class="text-decoration-none"
-                no-caret
-              >
-                <template #button-content>
-                  <b-icon-three-dots-vertical></b-icon-three-dots-vertical
-                  ><span class="sr-only">Settings</span>
-                </template>
-                <b-dropdown-item href="#">
-                  Approve
-                </b-dropdown-item>
-                <b-dropdown-item href="#">
-                  Reject
-                </b-dropdown-item>
-              </b-dropdown>
+            <span class=" ">
+              <div>
+                <b-dropdown
+                  size="lg"
+                  variant="link"
+                  toggle-class="text-decoration-none"
+                  no-caret
+                >
+                  <template #button-content>
+                    <b-icon
+                      icon="three-dots-vertical"
+                      animation="cylon-vertical"
+                      font-scale="1"
+                    ></b-icon>
+                  </template>
+
+                  <b-dropdown-item href="#"> Delete </b-dropdown-item>
+                  <b-dropdown-item href="#"> Read </b-dropdown-item>
+                </b-dropdown>
+              </div>
             </span>
+          </b-list>
+          <p>
+            Lorem Ipsum is this is just a dummy text to post simply dummy text
+            of the printing and typesetting industry. Lorem Ipsum has been the
+            industry's standard dummy text ever since the 1500s, Lorem Ipsum is
+            simply dummy text of the printing and typesetting industry. Lorem
+            Ipsum has been the industry's standard dummy text ever since the
+            1500s,
           </p>
-          <hr width="100%" />
-        </div>
-      </b-col>
-    </b-row>
+        </b-container>
+
+        <b-container class="bb-bottom">
+          <b-list class="d-flex align-items-center m-list">
+            <b-form-checkbox
+              class="m-left"
+              id="checkbox-1"
+              v-model="status"
+              name="checkbox-1"
+              value="accepted"
+              unchecked-value="not_accepted"
+            >
+            </b-form-checkbox>
+            <b-avatar class="mr-3" size="4em"></b-avatar>
+            <span class="mr-auto"
+              >J. Circlehead
+              <p>1hr</p>
+            </span>
+            <span class=" ">
+              <div>
+                <b-dropdown
+                  size="lg"
+                  variant="link"
+                  toggle-class="text-decoration-none"
+                  no-caret
+                >
+                  <template #button-content>
+                    <b-icon
+                      icon="three-dots-vertical"
+                      animation="cylon-vertical"
+                      font-scale="1"
+                    ></b-icon>
+                  </template>
+
+                  <b-dropdown-item href="#"> Delete </b-dropdown-item>
+                  <b-dropdown-item href="#"> Read </b-dropdown-item>
+                </b-dropdown>
+              </div>
+            </span>
+          </b-list>
+          <p>
+            Lorem Ipsum is this is just a dummy text to post simply dummy text
+            of the printing and typesetting industry. Lorem Ipsum has been the
+            industry's standard dummy text ever since the 1500s, Lorem Ipsum is
+            simply dummy text of the printing and typesetting industry. Lorem
+            Ipsum has been the industry's standard dummy text ever since the
+            1500s,
+          </p>
+        </b-container>
+      </b-container>
+    </b-container>
   </div>
 </template>
 
 <script>
 export default {
-  name: "notification"
+  name: "notification",
+  components: {},
+  data() {
+    return {};
+  },
+  computed: {},
+  methods: {}
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.f-left {
+  float: left;
+}
+
+.f-right {
+  float: right;
+}
+.b-bottom {
+  margin-top: 20px;
+  margin-bottom: 30px;
+  padding-bottom: 10px;
+
+  border-bottom: 0.5px solid;
+  border-color: gray;
+}
+
+.m-left {
+  margin-left: -20px;
+}
+</style>

@@ -1,50 +1,91 @@
 <template>
   <div>
-    <b-row class="mt-4">
-      <b-col cols="12">
-        <h4 class="font-weight-bolder d-inline-block">
-          <b-icon-person-plus></b-icon-person-plus> Membership Requests
-        </h4>
-        <span class="float-right">35 Pending</span>
+    <b-container>
+      <b-row>
+        <b-col class="f-left">
+          <h6 class=" d-inline-block">
+            Membership Requests
+          </h6>
+        </b-col>
+        <b-col class="f-right"> <span class="">35 Pending</span> </b-col>
+      </b-row>
+    </b-container>
 
-        <hr width="100%" />
-        <div v-for="i in 6" :key="i">
-          <p class="">
-            <span class="">
-              <b-avatar
-                class="d-inline-block"
-                variant="info"
-                src="https://business.bridgeafrica.info/assets/img/team/3.png"
-                size="3.5rem"
-              ></b-avatar>
-              <h5 class="m-0 font-weight-bolder d-inline-block ml-2">
-                Mapoure Agrobusiness
-              </h5>
-            </span>
-            <span class="float-right mt-1">
-              <b-dropdown
-                size="lg"
-                variant="link"
-                toggle-class="text-decoration-none"
-                no-caret
-              >
-                <template #button-content>
-                  <b-icon-three-dots-vertical></b-icon-three-dots-vertical
-                  ><span class="sr-only">Settings</span>
-                </template>
-                <b-dropdown-item href="#">
-                  Approve
-                </b-dropdown-item>
-                <b-dropdown-item href="#">
-                  Reject
-                </b-dropdown-item>
-              </b-dropdown>
-            </span>
-          </p>
-          <hr width="100%" />
-        </div>
+    <hr width="100%" />
+
+
+
+
+
+
+
+
+    <b-row>
+           
+      <b-col cols="9" class="mx-auto">
+
+
+        <b-input-group class="mb-2 px-md-3 mx-auto">
+          <b-input-group-prepend is-text>
+            <b-icon-search class="text-primary border-none"></b-icon-search>
+          </b-input-group-prepend>
+          <b-form-input
+            aria-label="Text input with checkbox"
+            placeholder="Search Something"
+          ></b-form-input>
+        </b-input-group>
+
+
       </b-col>
+
+      <b-col cols="3">  <b-button variant="primary" block > Send Request </b-button>   </b-col>
+
     </b-row>
+
+    <br/>
+
+
+
+
+
+
+
+
+
+    <div v-for="i in 6" class="f-left" :key="i">  
+      <p class="">
+        <span class="">
+          <b-avatar
+            class="d-inline-block"
+            variant="info"
+            src="https://business.bridgeafrica.info/assets/img/team/3.png"
+            size="3.5rem"
+          ></b-avatar>
+          <p class="m-0  d-inline-block ml-2">
+            Mapoure Agrobusiness
+          </p>
+        </span>
+        <span class="float-right mt-1">
+          <b-dropdown
+            size="lg"
+            variant="link"
+            toggle-class="text-decoration-none"
+            no-caret
+          >
+            <template #button-content>
+              <b-icon-three-dots-vertical></b-icon-three-dots-vertical
+              ><span class="sr-only">Settings</span>
+            </template>
+            <b-dropdown-item href="#">
+              Approve
+            </b-dropdown-item>
+            <b-dropdown-item href="#">
+              Reject
+            </b-dropdown-item>
+          </b-dropdown>
+        </span>
+      </p>
+    </div>
 
     <b-row>
       <b-col cols="12">
@@ -89,4 +130,17 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.a-center {
+  text-align: center;
+  align-content: center;
+}
+
+.f-left {
+  text-align: left;
+}
+
+.f-right {
+  text-align: right;
+}
+</style>

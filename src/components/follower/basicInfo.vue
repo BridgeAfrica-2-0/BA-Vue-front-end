@@ -9,8 +9,6 @@
       <div class="col">
         {{ dateOfBirth }}
       </div>
-    
-     
     </div>
     <div class=" basic row">
       <div class="col">
@@ -20,7 +18,7 @@
         {{ gender }}
       </div>
     </div>
-    </div>
+  </div>
 </template>
 
 <script>
@@ -28,10 +26,10 @@ export default {
   data() {
     return {
       dateOfBirth: "20/20/2020",
-      gender: "Male",
+      gender: "Male"
     };
   },
-  methods: {},
+  methods: {}
 };
 </script>
 

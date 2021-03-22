@@ -11,7 +11,16 @@ import service from "@/views/service";
 import Modifier from "@/views/modifier";
 import store from "@/store/index.js";
 import Follower from "../views/follower.vue";
-import businessFollower from "../views/businessFollower.vue"
+import profile_owner from "@/views/profileOwner";
+import businessFollower from "@/views/businessFollower";
+import businessOwner from "@/views/businessOwner";
+import templateView from "@/views/templateView";
+import webSiteCreate from "@/views/webSiteCreate";
+import webSiteCreateTwo from "@/views/webSiteCreateTwo";
+import paidPlan from "@/views/paidPlan";
+import confirmPayment from "@/views/confirmPayment";
+import networks from "@/views/networks";
+import dashboard from "@/views/dashboard";
 
 Vue.use(VueRouter);
 
@@ -22,9 +31,59 @@ const routes = [
     component: Home
   },
   {
+    path: "/profile_owner",
+    name: "profile_owner",
+    component: profile_owner
+  },
+  {
+    path: "/business_follower",
+    name: "BusinessFollower",
+    component: businessFollower
+  },
+  {
+    path: "/template_viewer",
+    name: "templateViewer",
+    component: templateView
+  },
+  {
+    path: "/business_owner",
+    name: "BusinessOwner",
+    component: businessOwner
+  },
+  {
+    path: "/business_owner/create_website_step_one",
+    name: "createWebSite",
+    component: webSiteCreate
+  },
+  {
+    path: "/business_owner/create_website_step_two",
+    name: "createWebSiteTwo",
+    component: webSiteCreateTwo
+  },
+  {
+    path: "/business_owner/create_website_plan",
+    name: "payPlan",
+    component: paidPlan
+  },
+  {
+    path: "/business_owner/create_website_confirm_payment",
+    name: "confirmPayment",
+    component: confirmPayment
+  },
+  {
+    path: "/business_owner/network",
+    name: "networks",
+    component: networks
+  },
+  {
     path: "/login",
     name: "Login",
     component: Login
+  },
+  {
+    path: "/dashboard",
+    name: "dashboard",
+    component: dashboard
   },
   {
     path: "/signin",
@@ -45,11 +104,6 @@ const routes = [
     path: "/recoverPass3",
     name: "RecoverPass3",
     component: RecoverPass3
-  },
-  {
-    path: "/businessfollower",
-    name: "BusinessFollower",
-    component: businessFollower
   },
   {
     path: "/services/create",
@@ -87,16 +141,14 @@ const routes = [
       } else {
         next({ name: "Login" });
       }
-    },
-    
+    }
   },
 
   {
-    path: "/profilefollower",
+    path: "/follower",
     name: "Follower",
-    component: Follower,
-  },
- 
+    component: Follower
+  }
 ];
 
 const router = new VueRouter({

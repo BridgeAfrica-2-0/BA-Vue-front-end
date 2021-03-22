@@ -1,22 +1,22 @@
 <template>
-  <div class="foot">
-    <b-card class="card">
-      <div class="top">
-        <b-container>
-          <b-row>
-            <b-col>
-              <ul>
-                <li><a href="">Home</a></li>
-                <li><a href="">About Us</a></li>
-                <li><a href="">Privacy Policy</a></li>
-                <li><a href="">Contact Us</a></li>
-                <li><a href="">Blog</a></li>
+  <div class>
+    <footer id="footer" class="shadow pt-5">
+      <div class="footer-top">
+        <div class="container">
+          <div class="row col-md-6 mx-auto">
+            <div class="col-lg-9">
+              <ul class="list-group list-unstyled">
+                <li><a href="#">Home</a></li>
+                <li><a href="#">About Us</a></li>
+                <li><a href="#">Privacy Policy</a></li>
+                <li><a href="#">Contact Us</a></li>
+                <li><a href="#">Blog</a></li>
               </ul>
-            </b-col>
-            <b-col>
-              <ul>
-                <li><b-link>Language</b-link></li>
-                <li>
+            </div>
+            <div class="col-lg-3">
+              <ul class="list-group list-unstyled">
+                <li class="nav-item dropdown show">
+                  <b>Language</b>
                   <b-dropdown
                     size="sm"
                     variant="outline"
@@ -27,9 +27,8 @@
                     <b-dropdown-item-button>French</b-dropdown-item-button>
                   </b-dropdown>
                 </li>
-
-                <li><b-link>Country</b-link></li>
-                <li>
+                <li class="nav-item dropdown show">
+                  <b>Country</b>
                   <b-dropdown
                     size="sm"
                     variant="outline"
@@ -41,14 +40,16 @@
                   </b-dropdown>
                 </li>
               </ul>
-            </b-col>
-          </b-row>
-        </b-container>
+            </div>
+          </div>
+        </div>
+        <div class="mt-5 border-top">
+          <div class="col-lg-12 mt-3">
+            <p class="text-center">© Copyright all rights reserved</p>
+          </div>
+        </div>
       </div>
-      <div class="bottom">
-        © Copyright all rights reserved
-      </div>
-    </b-card>
+    </footer>
   </div>
 </template>
 
@@ -73,13 +74,13 @@ li {
 }
 @media only screen and (max-width: 768px) {
   .top {
-  padding: 50px;
-  position: relative;
-  left: -40px;
-}
+    padding: 50px;
+    position: relative;
+    left: -40px;
+  }
 
-.card{
-  width: 500px;
-}
+  .card {
+    width: 500px;
+  }
 }
 </style>

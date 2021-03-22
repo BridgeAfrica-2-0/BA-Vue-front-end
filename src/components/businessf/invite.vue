@@ -5,7 +5,7 @@
         <h6 class="mb-0 d-inline-block">Invite</h6>
       </template>
       <p><b>Invite your followers to follow this business</b></p>
-       <input class="form-control mb-2" placeholder="Search ..." type="text">
+      <input class="form-control mb-2" placeholder="Search ..." type="text" />
       <b-card-text>
         <b-list-group-item class="d-flex align-items-center m-0 p-2">
           <b-avatar
@@ -47,7 +47,7 @@ export default {};
 </script>
 
 <style scoped>
-p{
+p {
   text-align: left;
 }
 </style>

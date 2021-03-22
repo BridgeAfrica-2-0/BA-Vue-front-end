@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b-card v-if="networkshow">
+    <b-card v-if="networkShow">
       <div class="networks ml-4">
         <div class="create" @click="addNetwork">
           <div class="text">
@@ -10,7 +10,6 @@
         </div>
         <div class="ml-2 mt-2" v-for="post in posts" :key="post.id">
           <b-card
-          
             title="Group name"
             img-src="https://picsum.photos/600/300/?image=25"
             img-alt="Image"
@@ -31,12 +30,12 @@
         </div>
       </div>
     </b-card>
-    <div class="no-network" v-if="networkShow">
-      <div class="white-box">
-        <h2>Builds networks around your Business</h2>
-        <p>Create network to stay in touch with just the people</p>
-        <p>you want Engage, share, Make Plans and much more</p>
-        <b-button class="btn" variant="primary">Add network</b-button>
+    <div class="h-100 w-100" v-if="!networkShow">
+      <div class="mx-auto text-center my-5">
+        <h2 class="my-3">Builds networks around your Business</h2>
+        <p class="my-2">Create network to stay in touch with just the people</p>
+        <p class="my-2">you want Engage, share, Make Plans and much more</p>
+        <p class="my-3"><b-button variant="primary">Add network</b-button></p>
       </div>
     </div>
 
@@ -54,7 +53,7 @@
 export default {
   data() {
     return {
-      networkshow: true,
+      networkShow: true,
       showModal: false,
       text: "",
       posts: [
@@ -63,47 +62,48 @@ export default {
           image: "https://picsum.photos/300/150/?image=41",
           title: "Title 2",
           text:
-            " Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum quam, doloribus id sit consequuntur tempora molestiae blanditiis.",
+            " Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum quam, doloribus id sit consequuntur tempora molestiae blanditiis."
         },
         {
           id: 1,
           image: "https://picsum.photos/300/150/?image=41",
           title: "Title 2",
           text:
-            " Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum quam, doloribus id sit consequuntur tempora molestiae blanditiis.",
+            " Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum quam, doloribus id sit consequuntur tempora molestiae blanditiis."
         },
         {
           id: 1,
           image: "https://picsum.photos/300/150/?image=41",
           title: "Title 2",
           text:
-            " Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum quam, doloribus id sit consequuntur tempora molestiae blanditiis.",
+            " Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum quam, doloribus id sit consequuntur tempora molestiae blanditiis."
         },
         {
           id: 1,
           image: "https://picsum.photos/300/150/?image=41",
           title: "Title 2",
           text:
-            " Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum quam, doloribus id sit consequuntur tempora molestiae blanditiis.",
+            " Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum quam, doloribus id sit consequuntur tempora molestiae blanditiis."
         },
         {
           id: 1,
           image: "https://picsum.photos/300/150/?image=41",
           title: "Title 2",
           text:
-            " Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum quam, doloribus id sit consequuntur tempora molestiae blanditiis.",
-        },
-      ],
+            " Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum quam, doloribus id sit consequuntur tempora molestiae blanditiis."
+        }
+      ]
     };
   },
   methods: {
-    opennetwork() {
+    openNetwork() {
       this.networkShow = false;
     },
-    addNetwork(){
-      this.showModal = !this.showModal
+
+    addNetwork() {
+      this.showModal = !this.showModal;
     }
-  },
+  }
 };
 </script>
 
@@ -135,9 +135,6 @@ p {
   text-align: center;
 }
 
-.btn {
-  margin-left: 250px;
-}
 .networks {
   display: flex;
   flex-wrap: wrap;

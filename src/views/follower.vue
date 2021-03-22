@@ -1,7 +1,9 @@
 <template>
   <div>
     <navbar></navbar>
-    <head-page></head-page> 
+    <head-page></head-page>
+    <b-container fluid="md" class="text-justify mx-auto mt-4 corps">
+    <head-page></head-page>
         <b-container
       fluid="md"
       class="text-justify mt-1"
@@ -29,7 +31,7 @@ import headPage from "@/components/headPage";
 import Post from "@/components/follower/tabs/posts";
 import About from "@/components/follower/tabs/about";
 import Media from "@/components/follower/tabs/media";
-import Following from "@/components/follower/tabs/following"
+import Following from "@/components/follower/tabs/following";
 import Businesses from "@/components/follower/tabs/businesses";
 
 export default {
@@ -43,13 +45,13 @@ export default {
     Following,
     Businesses
   },
- 
+
 };
 </script>
 
 <style scoped>
 @media only screen and (max-width: 768px) {
- 
+
 }
 </style>
 

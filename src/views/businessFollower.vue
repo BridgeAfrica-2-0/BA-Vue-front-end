@@ -12,7 +12,7 @@
         </b-tabs>
       </div>
     </b-container>
-    <Footer/>
+    <Footer />
   </div>
 </template>
 
@@ -20,18 +20,19 @@
 import navbar from "@/components/navbar";
 import Business from "../components/businessf/business";
 import Footer from "../components/footer";
+
 export default {
   name: "Home",
   components: {
     navbar,
     Business,
-    Footer,
+    Footer
   },
   data() {
     return {};
   },
   computed: {},
-  methods: {},
+  methods: {}
 };
 </script>
 
@@ -43,7 +44,7 @@ export default {
 }
 
 @media only screen and (max-width: 768px) {
-  .settings{
+  .settings {
     top: -5px;
     left: -20px;
   }

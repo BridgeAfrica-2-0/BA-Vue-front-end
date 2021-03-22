@@ -4,7 +4,7 @@
     <hr />
     <div class="row">
       <div class="col">
-        <b-list-group-item class="d-flex align-items-center mb-4  bus-visited">
+        <b-list-group-item class="d-flex align-items-center mb-4  bus-visited border-0">
           <b-avatar class=" profile mr-3"></b-avatar>
           <div class="datails">
             <div class="row">
@@ -13,7 +13,7 @@
                 <p>Category Name here - 1.1 M Followers</p>
               </div>
             </div>
-            <b-link class="link">Get Directions</b-link>
+            <b-link class="link text-decoration-none">Get Directions</b-link>
           </div>
         </b-list-group-item>
       </div>
@@ -25,7 +25,7 @@
 export default {
   data() {
     return {};
-  },
+  }
 };
 </script>
 

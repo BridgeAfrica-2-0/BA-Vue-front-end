@@ -2,7 +2,7 @@
   <div>
     <b class="profession">Profession</b>
     <hr />
-    <b-list-group-item class="d-flex align-items-center mb-4 item">
+    <b-list-group-item class="d-flex align-items-center mb-4 item border-none">
       <div class="datails">
         <div class="row">
           <div class="col">
@@ -22,10 +22,10 @@ export default {
       options: [
         { value: null, text: "Select" },
         { value: "private", text: "Private" },
-        { value: "public", text: "Public" },
-      ],
+        { value: "public", text: "Public" }
+      ]
     };
-  },
+  }
 };
 </script>
 

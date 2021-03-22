@@ -23,14 +23,14 @@
 <script>
 import Business from "../business";
 export default {
-  data(){
-    return{
-      noBusiness: false,
-    }
+  data() {
+    return {
+      noBusiness: false
+    };
   },
   components: {
-    Business,
-  },
+    Business
+  }
 };
 </script>
 

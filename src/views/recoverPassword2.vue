@@ -32,7 +32,6 @@
             Next
           </b-button>
           </b-form>
-     
         </div>
       </b-card>
     </div>
@@ -53,11 +52,11 @@ export default {
       e.preventDefault();
       window.location.href = "recoverPass1";
     },
-     next(e) {
+    next(e) {
       e.preventDefault();
       window.location.href = "recoverPass3";
-    },
-  },
+    }
+  }
 };
 </script>
 

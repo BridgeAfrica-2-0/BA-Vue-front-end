@@ -2,7 +2,7 @@
   <div>
     <div class="row follower">
       <div class="col">
-        <b-list-group-item class="d-flex align-items-center mb-4 item">
+        <b-list-group-item class="d-flex align-items-center mb-4 item border-0">
           <b-avatar class="mr-3"></b-avatar>
           <div class="datails">
             <div class="row">

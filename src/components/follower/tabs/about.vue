@@ -7,7 +7,7 @@
       </b></b-alert
     >
     <b-card no-body>
-      <b-tabs pills card vertical class="desktop">
+       <b-tabs pills card vertical class="desktop">
         <b-tab title="BIOGRAPHY" active><Biography/></b-tab>
         <b-tab title="CONTACT & BASIC INFO"> <ContactandInfo/> </b-tab>
         <b-tab title="WORK & EDUCATION"><WorkAndEducation/></b-tab>
@@ -30,8 +30,8 @@ export default {
   components: {
     Biography,
     ContactandInfo,
-    WorkAndEducation,
-  },
+    WorkAndEducation
+  }
 };
 </script>
 

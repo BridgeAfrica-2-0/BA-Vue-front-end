@@ -5,7 +5,9 @@
         <img src="../assets/img/logo_bridge_africa.png" class="image" alt="" />
         <div class="step-2">
           <b-card-text class="w-75 mx-auto mt-5">
-             <b-alert show v-if="!match" variant="danger">Passwords do not match</b-alert>
+            <b-alert show v-if="!match" variant="danger"
+              >Passwords do not match</b-alert
+            >
             <div class="row">
               <div class="col">
                 Create New Password
@@ -42,14 +44,13 @@
 </template>
 
 <script>
-
 export default {
   data() {
     return {
       code: "",
-      password1:"",
-      password2:"",
-      match: true,
+      password1: "",
+      password2: "",
+      match: true
     };
   },
   methods: {
@@ -57,17 +58,17 @@ export default {
       e.preventDefault();
       window.location.href = "recoverPass1";
     },
-  recover(e){
+    recover(e) {
       e.preventDefault();
-    if(this.password1 == this.password2){
-      window.location.href = "login";
-    }else{
-     this.match = false
-     this.password1 = ""
-     this.password2 = ""
+      if (this.password1 == this.password2) {
+        window.location.href = "login";
+      } else {
+        this.match = false;
+        this.password1 = "";
+        this.password2 = "";
+      }
     }
   }
-  },
 };
 </script>
 

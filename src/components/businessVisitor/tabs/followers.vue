@@ -1,42 +1,37 @@
 <template>
   <div>
     <b-card>
-      <b-row class="mb-1">
-        <b-col>
-          <b-avatar class="mr-3"></b-avatar>
-          <span><b-link>J. James</b-link></span> <p class="ml-5">
-            Cameroon,
-            <span class="desktop"
-              ><b-icon icon="house" variant="primary"></b-icon> 2,
-              <b-icon icon="globe" variant="primary"></b-icon> 3,
-              <b-icon icon="people" variant="primary"></b-icon> 3,
-            </span>
-          </p>
-        </b-col>
-      </b-row>
-      <b-row>
-        <b-col>
-          <b-avatar class="mr-3"></b-avatar>
-          <span><b-link>J. Jordan</b-link></span>
-          <p class="ml-5">
-            Cameroon,
-            <span class="desktop"
-              ><b-icon icon="house" variant="primary"></b-icon> 2,
-              <b-icon icon="globe" variant="primary"></b-icon> 3,
-              <b-icon icon="people" variant="primary"></b-icon> 3,
-            </span>
-          </p>
-        </b-col>
-      </b-row>
+     <b-tabs content-class="mt-3">
+    <b-tab title="People" active><People/></b-tab>
+    <b-tab title="Businesses"><Businesses/></b-tab>
+  </b-tabs>
     </b-card>
   </div>
 </template>
 
 <script>
-export default {};
+import People from "./people/people";
+import Businesses from "./businesses/businesses";
+export default {
+  components:{
+    People,
+    Businesses
+  }
+};
 </script>
 
 <style scoped>
+.btn {
+  background-color: #fff;
+  color: #e75c18;
+  border: solid 1px #e75c18;
+}
+
+.btn:hover {
+  color: #fff;
+  border: none;
+  background-color: #e75c18;
+}
 @media only screen and (max-width: 768px) {
   .options {
     position: relative;

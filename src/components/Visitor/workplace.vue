@@ -2,27 +2,49 @@
   <div>
     <b>WorkPlace</b>
     <hr />
-    <b-list-group-item
-      class="d-flex align-items-center mb-4 "
-      style="border: none"
-    >
-      <b-avatar class="mr-3 avatar"></b-avatar>
-      <div class="datails">
+  
+    <b-list-group-item class="d-flex align-items-center mb-4 ">
+      <div class="">
         <div class="row">
-          <div class="col">
-            <span class="mr-auto"> <b>Company</b> </span>
-            <p>Position</p>
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas
-              quibusdam harum maxime!
-            </p>
+          <div class="media border-botmediatom mt-3 mb-4">
+            <img
+              src="@/assets/img/about3.jpg"
+              alt="John Doe"
+              class="mr-2 picture-size"
+            />
+            <div class="media-body">
+              <h6 class="mb-0"><b>Coca Cla Pvt Ltd. Team Lead</b></h6>
+              <b>Team Lead - 7 Feb 2011</b>
+              <p class="mb-1">
+                Job descrioption dummny textJob descrioption dummny textJob
+                descrioption dummny text
+              </p>
+            </div>
+          
+          </div>
+
+          <div class="media mb-4">
+            <img
+              src="@/assets/img/about1.jpg"
+              alt="John Doe"
+              class="mr-2 picture-size"
+            />
+            <div class="media-body">
+              <h6 class="mb-0"><b>Ericson Pvt Ltd. Team Lead</b></h6>
+              <b>Team Lead - 7 Feb 2011</b>
+              <p class="mb-1">
+                Job descrioption dummny textJob descrioption dummny textJob
+                descrioption dummny text
+              </p>
+            </div>
+           
           </div>
         </div>
       </div>
     </b-list-group-item>
 
     <b-modal ref="add-contact" id="modal-9" title="Add Workplace ">
-      <div style="width: 100px">
+      <div class="div-design">
         <b-form-select
           class="mb-2"
           size="sm"
@@ -80,10 +102,10 @@ export default {
       options: [
         { value: null, text: "Select" },
         { value: "private", text: "Private" },
-        { value: "public", text: "Public" },
-      ],
+        { value: "public", text: "Public" }
+      ]
     };
-  },
+  }
 };
 </script>
 
@@ -92,6 +114,15 @@ export default {
   position: relative;
   top: -50px;
 }
+
+.div-design {
+  width: 100px;
+}
+
+.picture-size {
+  width: 60px;
+}
+
 @media only screen and (max-width: 600px) {
   .avatar {
     position: relative;

@@ -12,20 +12,20 @@
         </b-col>
         <b-col cols="4" class="my-auto" v-for="post in albums" :key="post.id">
           <b-img
-            @click="openAlbum(post.id)"
-            class="image-album"
-            v-if="post.items[0].image"
-            :src="post.items[0].image"
+              @click="openAlbum(post.id)"
+              class="image-album"
+              v-if="post.items[0].image"
+              :src="post.items[0].image"
           ></b-img>
           <span class="album-text">
             <div>{{ post.name }}</div>
             <span> {{ post.items.length }} item(s)</span>
           </span>
           <b-dropdown
-            class="options"
-            variant="primary"
-            size="sm"
-            id="dropdown-left"
+              class="options"
+              variant="primary"
+              size="sm"
+              id="dropdown-left"
           >
             <template #button-content>
               <b-icon icon="three-dots" aria-hidden="true"></b-icon>
@@ -51,8 +51,8 @@
         <div class="albums">
           <b-modal hide-footer v-model="modalShow">
             <b-img
-              fluid-grow
-              src="https://picsum.photos/300/150/?image=41"
+                fluid-grow
+                src="https://picsum.photos/300/150/?image=41"
             ></b-img>
             <h3>Picture Title</h3>
           </b-modal>
@@ -70,10 +70,10 @@
           <b-img @click="view" :src="image" class="image-album"></b-img>
         </b-col>
         <b-col
-          md="4"
-          v-for="item in album[0]"
-          :key="item.id"
-          class="album mt-2"
+            md="4"
+            v-for="item in album[0]"
+            :key="item.id"
+            class="album mt-2"
         >
           <b-img @click="view" :src="item.image" class="image-album"></b-img>
         </b-col>
@@ -96,132 +96,25 @@ export default {
       albumShow: true,
       pictureShow: false,
       modalShow: false,
-      showModal: false,
-      text: "",
       posts: [
         {
           id: 1,
           image: "https://picsum.photos/300/150/?image=41",
           title: "Title 2",
           text:
-            " Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum quam, doloribus id sit consequuntur tempora molestiae blanditiis."
+            " Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum quam, doloribus id sit consequuntur tempora molestiae blanditiis.",
         },
-        {
-          id: 1,
-          image: "https://picsum.photos/300/150/?image=41",
-          title: "Title 2",
-          text:
-            " Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum quam, doloribus id sit consequuntur tempora molestiae blanditiis."
-        },
-        {
-          id: 1,
-          image: "https://picsum.photos/300/150/?image=41",
-          title: "Title 2",
-          text:
-            " Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum quam, doloribus id sit consequuntur tempora molestiae blanditiis."
-        },
-        {
-          id: 1,
-          image: "https://picsum.photos/300/150/?image=41",
-          title: "Title 2",
-          text:
-            " Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum quam, doloribus id sit consequuntur tempora molestiae blanditiis."
-        },
-        {
-          id: 1,
-          image: "https://picsum.photos/300/150/?image=41",
-          title: "Title 2",
-          text:
-            " Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum quam, doloribus id sit consequuntur tempora molestiae blanditiis."
-        },
-        {
-          id: 1,
-          image: "https://picsum.photos/300/150/?image=41",
-          title: "Title 2",
-          text:
-            " Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum quam, doloribus id sit consequuntur tempora molestiae blanditiis."
-        }
       ],
       images: [
         {
           id: 1,
-          image: "https://picsum.photos/300/150/?image=41"
+          image: "https://picsum.photos/300/150/?image=41",
         },
         {
           id: 2,
-          image: "https://picsum.photos/300/150/?image=41"
-        }
-      ],
-
-      albums: [
-        {
-          id: 1,
-          name: "Album 1",
-          items: [
-            {
-              id: 1,
-              image:
-                "https://business.bridgeafrica.info/assets/img/portfolio/media2.png"
-            },
-            {
-              id: 2,
-              image:
-                "https://business.bridgeafrica.info/assets/img/portfolio/media3.png"
-            }
-          ]
+          image: "https://picsum.photos/300/150/?image=41",
         },
-        {
-          id: 2,
-          name: "Album 2",
-          items: [
-            {
-              id: 1,
-              image:
-                "https://business.bridgeafrica.info/assets/img/portfolio/media.png"
-            },
-            {
-              id: 2,
-              image:
-                "https://business.bridgeafrica.info/assets/img/portfolio/media2.png"
-            },
-            {
-              id: 3,
-              image:
-                "https://business.bridgeafrica.info/assets/img/portfolio/media3.png"
-            }
-          ]
-        },
-
-        {
-          id: 3,
-          name: "Album 3",
-          items: [
-            {
-              id: 1,
-              image:
-                "https://business.bridgeafrica.info/assets/img/portfolio/media2.png"
-            },
-            {
-              id: 2,
-              image:
-                "https://business.bridgeafrica.info/assets/img/portfolio/media3.png"
-            },
-            {
-              id: 3,
-              image:
-                "https://business.bridgeafrica.info/assets/img/portfolio/media.png"
-            },
-            {
-              id: 4,
-              image:
-                "https://business.bridgeafrica.info/assets/img/portfolio/media3.png"
-            }
-          ]
-        }
       ],
-
-      album: [],
-      image: ""
     };
   },
   methods: {
@@ -229,17 +122,17 @@ export default {
 
      Use to view the photo in the album
      @param id
-    @return void
-    */
+     @return void
+     */
     view() {
       this.modalShow = !this.modalShow;
     },
 
     /**
-        Used for opening album
-         @param id
-        @return void
-    */
+     Used for opening album
+     @param id
+     @return void
+     */
     openAlbum(id) {
       id = id - 1;
       this.pictureShow = true;
@@ -248,32 +141,15 @@ export default {
       this.album.push(this.albums[id].items);
       console.log(this.album);
     },
-
-    /**
-
-     Shows modal and create Album
-    @param id
-    @return void
-    */
-    createAlbum() {
-      this.showModal = !this.showModal;
-    },
-
-    /**
-     Used to leave an opened Album
-    @param id
-    @return void
-    */
     back() {
       this.pictureShow = false;
       this.albumShow = true;
     },
-
     /**
-      Used for Choosing a file from device file system
-       @param id
-      @return void
-      */
+     Used for Choosing a file from device file system
+     @param id
+     @return void
+     */
     chooseFile() {
       let defaultBtn = document.getElementById("default-btn");
       defaultBtn.click();
@@ -304,7 +180,7 @@ export default {
     removeImage: function() {
       this.image = "";
     }
-  }
+  },
 };
 </script>
 
@@ -313,12 +189,12 @@ export default {
   display: flex;
   flex-wrap: wrap;
 }
-
-.pic-name {
+.overlay {
+  width: 250px;
+  height: 125px;
+  background-color: #000;
+  border-radius: 5px;
   position: relative;
-  left: -200px;
-  color: white;
-  font-weight: 200;
   opacity: 0;
 }
 
@@ -331,6 +207,7 @@ export default {
 
 .create {
   position: relative;
+  top: -125px;
   color: #fff;
   background-color: #bbb;
   padding: 20px;
@@ -339,9 +216,18 @@ export default {
   text-align: center;
   cursor: pointer;
 }
-
-.album-name {
+.album:hover .overlay {
+  opacity: 0.5;
+  color: #e75d29;
+}
+.text-hover {
   position: relative;
+  top: 40px;
+}
+.album-detail {
+  text-align: center;
+}
+.album-name {
   color: #e75d29;
   text-align: center;
   top: -40px;
@@ -358,6 +244,11 @@ export default {
   position: relative;
   top: -187px;
   left: 174px;
+  margin-top: -30px;
+}
+.albums {
+  display: flex;
+  flex-wrap: wrap;
 }
 .image-album {
   width: inherit;
@@ -367,6 +258,14 @@ export default {
 input[type="file"] {
   display: none;
 }
+.image {
+  cursor: pointer;
+}
+
+.imag {
+  width: 250px;
+}
+
 @media only screen and (max-width: 768px) {
   .albums {
     position: relative;
@@ -397,6 +296,14 @@ input[type="file"] {
     position: relative;
     left: 50px;
     width: 245px;
+  }
+  .imag {
+    width: 200px;
+  }
+  .overlay {
+    width: 200px;
+    height: 100px;
+    top: -100px;
   }
 }
 </style>

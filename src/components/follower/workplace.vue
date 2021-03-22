@@ -9,7 +9,7 @@
         <div class="row">
           <div class="col">
             <span class="mr-auto"> <b>Company</b> </span>
-            <p>Position</p>
+            <p><b>Position - 7 Feb</b></p>
             <p>
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas
               quibusdam harum maxime!
@@ -40,7 +40,7 @@ export default {
 @media only screen and (max-width: 768px) {
   .avatar {
     position: relative;
-    top: -60px;
+    top: -80px;
   }
   .work {
     margin-left: 20px;

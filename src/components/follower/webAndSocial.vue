@@ -2,9 +2,9 @@
   <div>
     <b class="social">Web & Soial Links</b>
     <hr />
-    <div class="social">
-      <b-link class="link text-decoration-none" v-b-modal.modal-7
-        ><b-icon icon="globe" variant="primary"></b-icon>
+    <div>
+      <b-link class="link" v-b-modal.modal-7
+        ><b-icon icon="globe" class="primary"></b-icon>
         https://www.yourwebsite.com</b-link
       >
     </div>
@@ -44,6 +44,7 @@ export default {
 <style scoped>
 .link {
   text-decoration: none;
+  color: #e75c18;
 }
 .link-1 {
   text-decoration: none;

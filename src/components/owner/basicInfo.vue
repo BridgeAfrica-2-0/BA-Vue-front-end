@@ -108,16 +108,16 @@ export default {
       options: [
         { value: null, text: "Select" },
         { value: "private", text: "Private" },
-        { value: "public", text: "Public" }
+        { value: "public", text: "Public" },
       ],
       genders: [
         { value: null, text: "Select" },
         { value: "Male", text: "Male" },
-        { value: "Female", text: "Female" }
-      ]
+        { value: "Female", text: "Female" },
+      ],
     };
   },
-  methods: {}
+  methods: {},
 };
 </script>
 

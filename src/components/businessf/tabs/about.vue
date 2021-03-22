@@ -12,55 +12,52 @@
           tabindex="0"
         ></iframe>
       </div>
-
       <b-row>
         <b-col>
           <b-card class="mb-2">
-            <div class="edit" @click="editBio">
-              <b-icon icon="pencil-fill" variant="primary"></b-icon>
-            </div>
-            <h4 class="mb-4 text-center">{{ leftTitle }}</h4>
-            <p class="text-justify">
+            <h4 class="mb-4 text-center edit" @click="editBio">
+               <b-icon icon="pencil-fill" class="primary mr-2"></b-icon>
+              <b class="mb-4 text-center">{{ leftTitle }}</b>
+            </h4>
+            <p class="txt">
               {{ textToo }}
             </p>
           </b-card>
         </b-col>
         <b-col>
           <b-card>
-            <div class="edit" @click="editContact">
-              <b-icon icon="pencil-fill" variant="primary"></b-icon>
-            </div>
+
             <b-card-text>
               <p>
-                <b-icon icon="briefcase-fill" variant="primary"></b-icon> Work
+                <b-icon icon="briefcase-fill" class="primary"></b-icon> Work
                 at: {{ workedAt }}
               </p>
               <p>
-                <b-icon icon="book-fill" variant="primary"></b-icon> Studied at:
+                <b-icon icon="book-fill" class="primary"></b-icon> Studied at:
                 {{ lastEducation }}
               </p>
               <p>
-                <b-icon icon="house-fill" variant="primary"></b-icon> Home Town
+                <b-icon icon="house-fill" class="primary"></b-icon> Home Town
                 Name: {{ homeTown }}
               </p>
               <p>
-                <b-icon icon="geo-alt-fill" variant="primary"></b-icon> Current
+                <b-icon icon="geo-alt-fill" class="primary"></b-icon> Current
                 City Name: {{ cityName }}
               </p>
               <p>
-                <b-icon icon="people-fill" variant="primary"></b-icon> Followed
+                <b-icon icon="people-fill" class="primary"></b-icon> Followed
                 by: {{ followed }}
               </p>
               <p>
-                <b-icon icon="phone-fill" variant="primary"></b-icon>
+                <b-icon icon="phone-fill" class="primary"></b-icon>
                 {{ telephone }}
               </p>
               <p>
-                <b-icon icon="envelope-fill" variant="primary"></b-icon>
+                <b-icon icon="envelope-fill" class="primary"></b-icon>
                 {{ email }}
               </p>
               <p>
-                <b-icon icon="clock" variant="primary"></b-icon>
+                <b-icon icon="clock" class="primary"></b-icon>
                 <span class="ml-2 btn-item">Open Now</span>
               </p>
               <p>
@@ -83,6 +80,7 @@
         </b-col>
       </b-row>
     </b-card>
+
 
     <b-modal
       id="bv-modal-example1"
@@ -256,7 +254,7 @@ export default {
       cityName: "Dummy",
       followed: "525",
       telephone: "+1 (234) 567-8974",
-      email: "info@businessname.com"
+      email: "info@businessname.com",
     };
   },
   methods: {
@@ -305,5 +303,14 @@ export default {
 h4,
 p {
   text-align: left;
+}
+
+.mobile {
+  display: none;
+}
+@media only screen and (max-width: 768px) {
+.txt{
+  text-align: left;
+}
 }
 </style>

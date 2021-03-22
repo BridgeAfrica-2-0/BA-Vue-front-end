@@ -6,10 +6,9 @@ import store from "./store";
 import { BootstrapVue, IconsPlugin } from "bootstrap-vue";
 import "@morioh/v-lightbox/dist/lightbox.css";
 import VueGallerySlideshow from "vue-gallery-slideshow";
-import { library } from "@fortawesome/fontawesome-svg-core";
-import { fas } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
-
+import {library} from '@fortawesome/fontawesome-svg-core';
+import {fas} from '@fortawesome/free-solid-svg-icons';
+import {FontAwesomeIcon} from '@fortawesome/vue-fontawesome'
 import Lightbox from "@morioh/v-lightbox";
 
 // global register
@@ -18,7 +17,7 @@ Vue.use(Lightbox);
 
 // Configuring font awesome
 library.add(fas);
-Vue.component("fas-icon", FontAwesomeIcon);
+Vue.component('fas-icon', FontAwesomeIcon);
 
 // Import Bootstrap an BootstrapVue CSS files (order is important)
 import "bootstrap/dist/css/bootstrap.css";

@@ -4,7 +4,7 @@
     <hr />
     <div class="contact row" >
       <div class="col">
-        Mobile Phone: 
+        Mobile Phone:
       </div>
       <div class="col">
         +1 644841545

@@ -40,7 +40,7 @@ export default {
 @media only screen and (max-width: 768px) {
   .avatar {
     position: relative;
-    top: -60px;
+    top: -80px;
   }
   .education {
     margin-left: 20px;

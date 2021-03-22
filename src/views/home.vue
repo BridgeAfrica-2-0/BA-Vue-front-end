@@ -17,6 +17,7 @@
         </b-col>
       </b-row>
     </b-container>
+    <Footer/>
   </div>
 </template>
 
@@ -26,6 +27,7 @@ import headPage from "@/components/headPage";
 import Post from "@/components/owner/tabs/posts";
 import About from "@/components/owner/tabs/about";
 import Media from "@/components/owner/tabs/media";
+import Footer from "@/components/footer"
 
 export default {
   name: "Home",
@@ -34,7 +36,8 @@ export default {
     headPage,
     Post,
     About,
-    Media
+    Media,
+    Footer
   },
   data() {
     return {};

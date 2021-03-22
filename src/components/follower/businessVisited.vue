@@ -32,6 +32,7 @@ export default {
 <style scoped>
 .link {
   text-decoration: none;
+  color: #e75c18;
 }
 .bus-visited {
   border: none;
@@ -47,6 +48,10 @@ export default {
 @media only screen and (max-width: 768px) {
   .business {
     margin-left: 20px;
+  }
+
+  .avat{
+    margin-top: -120px;
   }
 }
 </style>

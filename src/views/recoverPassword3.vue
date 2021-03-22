@@ -33,7 +33,7 @@
                 required
               />
             </b-form-group>
-            <b-button class="button" type="submit" variant="outline-primary">
+            <b-button class="btnz" type="submit" variant="outline-primary">
               Finish
             </b-button>
           </b-form>
@@ -76,9 +76,18 @@ export default {
 .image {
   width: 80%;
 }
-.button{
-  margin-left: 265px;
 
+.btnz {
+  border: solid 1px #e75c18;
+  color: #e75c18;
+  background-color: #fff;
+   margin-left: 265px;
+}
+
+.btnz:hover {
+  color: #fff;
+  background-color: #e75c18;
+  border: none;
 }
 @media only screen and (max-width: 768px) {
   .btn {

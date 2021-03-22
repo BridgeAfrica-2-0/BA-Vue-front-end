@@ -14,10 +14,10 @@
         </b-list-group-item>
       </div>
       <div class="col-2">
-        <b-button class="btn" variant="outline-primary">
+        <b-button class="btn" variant="outline-primary" size="sm">
           <b-icon icon="chat" class="mr-1"></b-icon>
-          Message</b-button
-        >
+          Message
+        </b-button>
       </div>
     </div>
   </div>
@@ -31,13 +31,9 @@ export default {};
 .item {
   border: none;
 }
-.follower {
-  cursor: pointer;
-}
 @media only screen and (max-width: 768px) {
   .btn {
-    display: flex;
-    margin-left: -70px;
+    margin-left: -45px;
   }
 }
 </style>

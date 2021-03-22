@@ -16,32 +16,28 @@
 
     <b-modal hide-footer title="Add product" v-model="showModal">
       <b-form>
-        <b-form-group
-          id="input-group-1"
-          label="Product Name"
-          label-for="input-1"
-          label-size="sm"
-        >
-          <b-form-input
-            id="input-1"
-            class="mt-2"
-            v-model="text"
-            type="text"
-            required
-          ></b-form-input>
-        </b-form-group>
-        <b-form-group
-          id="input-group-1"
-          label="image File"
-          label-for="input-1"
-          label-size="sm"
-        >
-          <b-form-file
-            class="mt-1"
-            id="file-small"
-            v-model="image"
-          ></b-form-file>
-        </b-form-group>
+          <b-form-group
+              id="input-group-1"
+              label="Product Name"
+              label-for="input-1"
+              label-size="sm"
+          >
+            <b-form-input
+                id="input-1"
+                class="mt-2"
+                v-model="text"
+                type="text"
+                required
+            ></b-form-input>
+          </b-form-group>
+          <b-form-group
+              id="input-group-1"
+              label="image File"
+              label-for="input-1"
+              label-size="sm"
+          >
+            <b-form-file class="mt-1" id="file-small" v-model="image"></b-form-file>
+          </b-form-group>
 
         <b-button class="mt-2 btn-block" variant="primary"> Add</b-button>
       </b-form>

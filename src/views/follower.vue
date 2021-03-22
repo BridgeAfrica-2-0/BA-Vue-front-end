@@ -1,59 +1,44 @@
 <template>
   <div>
-    <navbar></navbar>
-    <head-page></head-page>
-    <b-container fluid="md" class="text-justify mx-auto mt-4 corps">
-    <head-page></head-page>
-        <b-container
-      fluid="md"
-      class="text-justify mt-1"
-    >
-      <b-row>
-        <b-col cols="12">
-          <b-tabs content-class="mt-3" fill pills card>
-            <b-tab class="tab" title="Posts" active>
-              <Post/>
-            </b-tab>
-            <b-tab class="tab" title="About"><About/></b-tab>
-            <b-tab class="tab" title="Business"><Businesses/></b-tab>
-            <b-tab class="tab" title="Media"><Media/></b-tab>
-            <b-tab class="tab" title="Following"><Following/></b-tab>
-          </b-tabs>
-        </b-col>
-      </b-row>
+    <navbar />
+    <b-container fluid="md" class="text-justify mt-3">
+      <Profile />
     </b-container>
+    <Footer />
   </div>
 </template>
 
 <script>
 import navbar from "@/components/navbar";
-import headPage from "@/components/headPage";
-import Post from "@/components/follower/tabs/posts";
-import About from "@/components/follower/tabs/about";
-import Media from "@/components/follower/tabs/media";
-import Following from "@/components/follower/tabs/following";
-import Businesses from "@/components/follower/tabs/businesses";
-
+import Profile from "../components/follower/follower";
+import Footer from "../components/footer";
 export default {
   name: "Home",
   components: {
     navbar,
-    headPage,
-    Post,
-    About,
-    Media,
-    Following,
-    Businesses
+    Profile,
+    Footer,
   },
-
+  data() {
+    return {};
+  },
+  computed: {},
+  methods: {},
 };
 </script>
 
 <style scoped>
+.settings {
+  margin-left: 90%;
+  position: relative;
+  top: 40px;
+}
+
 @media only screen and (max-width: 768px) {
 
+  .settings {
+    top: -5px;
+    left: -20px;
+  }
 }
 </style>
-
-
-

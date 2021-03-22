@@ -72,6 +72,18 @@ li {
   position: relative;
   left: 230px;
 }
+
+.pages {
+  color: black;
+  text-decoration: none;
+}
+.pages:hover{
+  color: #e75c18;
+}
+.link {
+  color: #e75c18;
+  text-decoration: none;
+}
 @media only screen and (max-width: 768px) {
   .top {
     padding: 50px;
@@ -82,5 +94,12 @@ li {
   .card {
     width: 500px;
   }
+  .row{
+    display: flex;
+    flex-direction: column;
+  }
+  .bottom {
+  margin-left: -150px;
+}
 }
 </style>

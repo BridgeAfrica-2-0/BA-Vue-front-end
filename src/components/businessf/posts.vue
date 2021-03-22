@@ -1,40 +1,27 @@
 <template>
-  <div class="posts">
-    <b-row>
-      <b-col cols="4" class="" v-for="post in posts" :key="post.id">
-        <div class="container-fluid" v-if="post.video">
-          <b-embed
-            type="iframe"
-            aspect="16by9"
-            :src="post.video"
-            allowfullscreen
-          ></b-embed>
-        </div>
+  <div class="media-post">
+    <div class="p-4" v-for="post in posts" :key="post.id">
+      <b-img
+        v-if="post.image"
+        class="image"
+        :src="post.image"
+        rounded
+        fluid
+        @click="showModal"
+      ></b-img>
 
-        <b-img
-          v-if="post.image"
-          class="image img-fluid"
-          :src="post.image"
-          rounded
-          fluid
-          @click="showModal"
-        ></b-img>
-        <b-dropdown
-          class="options"
-          variant="primary"
-          size="sm"
-          id="dropdown-left"
-        >
-          <template #button-content>
-            <b-icon icon="three-dots" aria-hidden="true"></b-icon>
-          </template>
-          <b-dropdown-item-button v-on:click="deletePost(post.id)">
-            <b-icon icon="trash-fill" aria-hidden="true"></b-icon>
-            Delete
-          </b-dropdown-item-button>
-        </b-dropdown>
-      </b-col>
-    </b-row>
+      <iframe
+        class="image"
+        v-if="post.video"
+        width="210"
+        height="150"
+        rounded
+        :src="post.video"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen
+      ></iframe>
+    </div>
     <b-modal hide-footer ref="modal-1">
       <b-img fluid-grow src="https://picsum.photos/300/150/?image=41"></b-img>
       <h3>Post Title</h3>
@@ -70,11 +57,6 @@ export default {
     };
   },
   methods: {
-    /**
-    Used for opening modal to have a proper view of the picture
-    @param id
-    @return void
-*/
     showModal() {
       this.$refs["modal-1"].show();
     },
@@ -94,6 +76,10 @@ export default {
 </script>
 
 <style scoped>
+.media-post {
+  display: flex;
+  flex-wrap: wrap;
+}
 .image {
   cursor: pointer;
   width: inherit;

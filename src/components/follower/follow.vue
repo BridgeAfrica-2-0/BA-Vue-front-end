@@ -30,15 +30,11 @@ export default {};
 
 <style scoped>
 .item{
-    border: none;
-}
-.follow{
-  cursor: pointer;
+  border: none;
 }
 @media only screen and (max-width: 768px) {
- .btn{
-   display: flex;
-   margin-left: -70px;
+  .btn {
+    margin-left: -45px;
   }
 }
 </style>

@@ -53,7 +53,12 @@ export default {
   display: flex;
   width: 100%;
 }
-
+.see {
+  margin-left: 120px;
+  background-color: #fff;
+  color: black;
+  border: none;
+}
 img {
   width: 100%;
 }
@@ -70,14 +75,43 @@ img {
 .cnt-btn {
   color: white;
 }
+.mobile {
+  display: none;
+}
+.txt {
+  color: #fff;
+}
+.name {
+  position: relative;
+  top: 11px;
+}
 @media only screen and (max-width: 768px) {
-  .btns {
-    position: relative;
-    left: 25%;
+  .mobile {
+    display: block;
   }
+  .options {
+    display: none;
+  }
+  .avat {
+    margin-top: 20px;
+  }
+  .details {
+    font-size: 10px;
+  }
+  .texts {
+    position: relative;
+    left: -15px;
+  }
+  .more {
+    position: relative;
+    top: 20px;
+    left: -100px;
+  }
+
   .photo-btns {
-    margin-left: 50%;
-    margin-top: 10px;
+    position: relative;
+    left: -100px;
+    top: 60px;
   }
 }
 </style>

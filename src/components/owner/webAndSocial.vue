@@ -85,18 +85,24 @@ export default {
       options: [
         { value: null, text: "Select" },
         { value: "private", text: "Private" },
-        { value: "public", text: "Public" }
+        { value: "public", text: "Public" },
       ],
       socials: [
         { value: null, text: "Select" },
         { value: "instagram", text: "Instagram" },
         { value: "facebook", text: "FaceBook" },
         { value: "twitter", text: "Twitter" },
-        { value: "google-plus", text: "Google+" }
-      ]
+        { value: "google-plus", text: "Google+" },
+      ],
     };
-  }
+  },
 };
 </script>
 
-<style></style>
+<style scoped>
+.link {
+  text-decoration: none;
+  position: relative;
+  top: 10px;
+}
+</style>

@@ -2,7 +2,7 @@
   <div>
     <div v-if="albumShow" class="main-album">
       <div class="p-4 album" v-for="post in posts" :key="post.id">
-        <b-img v-if="post.image" :src="post.image" rounded fluid></b-img>
+        <b-img v-if="post.image" :src="post.image" width="250" rounded fluid></b-img>
         <div @click="openAlbum" class="overlay">
           <div>
             <span class="text-hover">
@@ -11,18 +11,17 @@
             </span>
           </div>
         </div>
-        <span class="text-static">
-          <div>Album Name</div>
-          <span> {{ images.length }} item(s)</span>
-        </span>
       </div>
     </div>
     <div v-if="pictureShow">
       <b-button @click="back" variant="primary">Back</b-button>
 
-      <div class="album-name">Album Name</div>
+      <div class="album-detail">
+        <div class="album-name"><b>Album Name</b></div>
+        <span> {{ images.length }} Pictures </span>
+      </div>
       <div class="albums">
-        <div v-for="item in images" :key="item.id" class="p-4">
+        <div v-for="item in images" :key="item.id" class="p-4 image">
           <span class="sp">
             <b-img
               @click="modalShow = !modalShow"
@@ -31,10 +30,6 @@
               fluid
               class="pic"
             ></b-img>
-
-            <span class="pic-name"
-              ><button class="btn-view">Picture Name</button></span
-            >
           </span>
         </div>
         <b-modal hide-footer v-model="modalShow">
@@ -62,19 +57,19 @@ export default {
           image: "https://picsum.photos/300/150/?image=41",
           title: "Title 2",
           text:
-            " Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum quam, doloribus id sit consequuntur tempora molestiae blanditiis."
-        }
+            " Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum quam, doloribus id sit consequuntur tempora molestiae blanditiis.",
+        },
       ],
       images: [
         {
           id: 1,
-          image: "https://picsum.photos/300/150/?image=41"
+          image: "https://picsum.photos/300/150/?image=41",
         },
         {
           id: 2,
-          image: "https://picsum.photos/300/150/?image=41"
-        }
-      ]
+          image: "https://picsum.photos/300/150/?image=41",
+        },
+      ],
     };
   },
   methods: {
@@ -82,14 +77,14 @@ export default {
       this.pictureShow = true;
       this.albumShow = false;
     },
-    back(){
+    back() {
       this.pictureShow = false;
       this.albumShow = true;
     },
     showModal() {
       this.$refs["modal-1"].show();
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -99,13 +94,13 @@ export default {
   flex-wrap: wrap;
 }
 .overlay {
-  width: 300px;
-  height: 150px;
+  width: 250px;
+  height: 125px;
   background-color: #000;
   border-radius: 5px;
   position: relative;
   opacity: 0;
-  top: -150px;
+  top: -125px;
   color: #fff;
   text-align: center;
   cursor: pointer;
@@ -116,9 +111,19 @@ export default {
 }
 .text-hover {
   position: relative;
-  top: 80px;
+  top: 60px;
 }
-
+.album-detail{
+  text-align: center;
+}
+.album-name {
+  color: #e75d29;
+  margin-top: -30px;
+}
+.albums {
+  display: flex;
+  flex-wrap: wrap;
+}
 .text-static {
   position: relative;
   top: -220px;
@@ -126,44 +131,9 @@ export default {
   color: white;
   font-weight: 200;
 }
-
-.albums {
-  display: flex;
-  flex-wrap: wrap;
+.image{
+  cursor: pointer;
 }
-
-.album:hover .text-static {
-  display: none;
-}
-
-.btn-view {
-  background-color: transparent;
-  border: none;
-  color: white;
-}
-
-.btn-view:focus {
-  outline-color: transparent;
-  border: none;
-}
-
-.album-name {
-  color: #e75d29;
-  text-align: center;
-}
-
-.pic-name {
-  position: relative;
-  left: -200px;
-  color: white;
-  font-weight: 200;
-  opacity: 0;
-}
-
-.sp:hover .pic-name {
-  opacity: 1;
-}
-
 .pic {
   cursor: pointer;
   background-color: transparent;

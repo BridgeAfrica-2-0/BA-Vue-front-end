@@ -4,7 +4,6 @@
       <img
         src="@/assets/img/banner.jpg"
         class="img-fluid header-pic"
-        alt="Kitten"
       />
       <b-container fluid="md">
         <b-row class="mt-md-2">
@@ -249,6 +248,24 @@ export default {
     float: right;
     margin-top: -20px;
     margin-right: 20px;
+  }
+
+  .avatar-header-icon {
+    width: 3em;
+    height: 3em;
+  }
+  .b-avatar .b-avatar-badge {
+    position: absolute;
+    min-height: 1.5em;
+    min-width: 1.5em;
+    padding: 0.25em;
+    line-height: 1;
+    border-radius: 10em;
+    font-size: 70px;
+    font-weight: 700;
+    z-index: 1;
+    bottom: 5px;
+    right: 10px;
   }
 }
 </style>

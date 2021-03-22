@@ -1,22 +1,23 @@
 <template>
   <div>
-    <b-alert show variant="primary">
-      <b-icon icon="person-fill" variant="primary"></b-icon>
+    <b-alert show class="primary-bg">
+      <b-icon class="purple" icon="person-fill"></b-icon>
       <b>
         About
       </b></b-alert
     >
-    <b-card no-body>
-       <b-tabs pills card vertical class="desktop">
-        <b-tab title="BIOGRAPHY" active><Biography/></b-tab>
-        <b-tab title="CONTACT & BASIC INFO"> <ContactandInfo/> </b-tab>
-        <b-tab title="WORK & EDUCATION"><WorkAndEducation/></b-tab>
+    <b-card no-body class="desktop">
+      <b-tabs pills card vertical>
+        <b-tab title="BIOGRAPHY" active><Biography /></b-tab>
+        <b-tab title="CONTACT & BASIC INFO"><ContactandInfo /> </b-tab>
+        <b-tab title="WORK & EDUCATION"><WorkAndEducation /></b-tab>
       </b-tabs>
-
-      <b-tabs class="mobile">
-        <b-tab title="BIOGRAPHY" active><Biography/></b-tab>
-        <b-tab title="CONTACT & BASIC INFO"> <ContactandInfo class="mt-2"/> </b-tab>
-        <b-tab title="WORK & EDUCATION"><WorkAndEducation class="mt-2" /></b-tab>
+    </b-card>
+    <b-card no-body class="mobile p-2">
+      <b-tabs pills card justified>
+        <b-tab title="BIOGRAPHY" active><Biography /></b-tab>
+        <b-tab title="CONTACT & BASIC INFO"><ContactAndInfo /> </b-tab>
+        <b-tab title="WORK & EDUCATION"><WorkAndEducation /></b-tab>
       </b-tabs>
     </b-card>
   </div>
@@ -30,14 +31,22 @@ export default {
   components: {
     Biography,
     ContactandInfo,
-    WorkAndEducation
-  }
+    WorkAndEducation,
+  },
 };
 </script>
 
 <style scoped>
 .mobile {
   display: none;
+}
+
+.purple {
+  color: purple;
+}
+.primary-bg {
+  background-color: rgb(242, 242, 242);
+  border: none;
 }
 
 @media only screen and (max-width: 768px) {
@@ -48,6 +57,5 @@ export default {
   .mobile {
     display: block;
   }
-
 }
 </style>

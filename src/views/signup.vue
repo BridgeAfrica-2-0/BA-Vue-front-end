@@ -4,7 +4,7 @@
      
       <md-card class="md-layout-item md-size-50 md-small-size-100 p-card">
         <md-card-header>
-          <div class="md-title">Login To Bridge Africa</div>
+          <div class="md-title">Sign Up On Bridge Africa</div>
         </md-card-header>
 
         <md-card-content>
@@ -13,13 +13,54 @@
 
            <div>
      
-      <md-button class="  md-raised md-primary">  <b-icon icon="facebook" aria-hidden="true"></b-icon> Login With Facebook</md-button>
-      <md-button class="  b-color" style="color:white;" > <b-icon icon="google" aria-hidden="true"></b-icon> Login with Google</md-button>
+      <md-button class="  md-raised md-primary">  <b-icon icon="facebook" aria-hidden="true"></b-icon> Sign Up With Facebook</md-button>
+      <md-button class="  b-color" style="color:white;" > <b-icon icon="google" aria-hidden="true"></b-icon> Sign Up with Google</md-button>
     </div>
 
     <br/>
 
 <p class="t-center"> -OR- </p>
+
+
+
+
+          <div class="md-layout md-gutter">
+            <div class="md-layout-item md-small-size-100 m-left">
+             
+
+                <md-field >
+            <label for="first_name">First Name</label>
+            <md-input type="text" name="firstName" id="firstName"  v-model="form.firstName" :disabled="sending" />
+            <span class="md-error" v-if="!$v.form.firstName.required">First Name  is required</span>
+           
+          </md-field>
+
+
+            </div>
+
+            <div class="md-layout-item md-small-size-100">
+              
+
+
+
+                <md-field >
+            <label for="lastName"> Last Name</label>
+            <md-input type="text" name="lastName" id="lastName"  v-model="form.lastName" :disabled="sending" />
+            <span class="md-error" v-if="!$v.form.lastName.required">First Name  is required</span>
+           
+          </md-field>
+
+
+
+            </div>
+          </div>
+
+
+
+
+
+
+
 
             <md-field :class="getValidationClass('email')">
             <label for="email">Email</label>
@@ -27,6 +68,16 @@
             <span class="md-error" v-if="!$v.form.email.required">The email is required</span>
             <span class="md-error" v-else-if="!$v.form.email.email">Invalid email</span>
           </md-field>
+
+
+
+          <md-field >
+            <label for="tel">Tel</label>
+            <md-input type="number" name="tel" id="tel" v-model="form.tel"  />
+           
+          </md-field>
+
+
 
 
 
@@ -39,25 +90,16 @@
 
          
 
+   
+           <md-field >
+            <label for="re-password">Confirm Password</label>
+            <md-input type="password" name="password" id="password"  v-model="form.password" :disabled="sending" />
+           
+          </md-field>
 
 
 
-
-          <div class="md-layout md-gutter">
-            <div class="md-layout-item md-small-size-100 m-left">
-             
-
-                 <md-checkbox v-model="boolean" class="md-primary">Remeber Me</md-checkbox>
-
-
-            </div>
-
-            <div class="md-layout-item md-small-size-100">
-              <br/>
-              <label >Forget Password</label>
-            </div>
-          </div>
-
+       
 
 
 
@@ -70,8 +112,8 @@
 
     <div>
      
-      <md-button type="submit" :disabled="sending" class="b-color "  style="color:white;" >Login</md-button>
-     <b-link href="/signup"> <md-button class=" md-raised ">Sign Up</md-button>  </b-link>
+      <md-button  type="submit" class="b-color "  style="color:white;"  :disabled="sending" >  Sign Up </md-button>
+       <b-link href="/login">  <md-button class=" md-raised ">Login</md-button>  </b-link>
     </div>
 
 
@@ -81,14 +123,12 @@
       <br/>
       
 
-      <label> By Loging in you agree to Bridge Africa's  </label> <br/>  
+      <label> By Signing Up  you agree to Bridge Africa's  </label> <br/>  
       
        <label>  <b-link href="#">Terms and conditions </b-link> &    <b-link href="#">Privacy policies</b-link>    </label>  </div>
 
 
-        <md-card-actions>
-          <md-button type="submit" class="md-primary" :disabled="sending">Create user</md-button>
-        </md-card-actions>
+       
       </md-card>
 
 
@@ -224,8 +264,8 @@
   .p-card{
     padding-left: 90px;
     padding-right:90px;
-    padding-top: 80px;
-    padding-bottom: 80px;
+    padding-top: 30px;
+    padding-bottom: 30px;
   }
   .b-div{
     background-image: url("ash.jpg");
@@ -238,4 +278,10 @@
 
     text-align: center;
   }
+
+  .b-primary{
+
+    background-color: #425e9e ;
+  }
+  
 </style>

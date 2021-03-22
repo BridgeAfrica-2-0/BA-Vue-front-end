@@ -22,26 +22,36 @@
         <b-col>
           <b-card>
             <b-card-text>
+              
+
+
+
+
+
+
               <p>
-                <b-icon icon="briefcase-fill" variant="primary"></b-icon> Work
-                at: Current or Last Organization
-              </p>
-              <p>
-                <b-icon icon="book-fill" variant="primary"></b-icon> Studied at:
-                Last Education
-              </p>
-              <p>
-                <b-icon icon="house-fill" variant="primary"></b-icon> Home Town
-                Name:Dummy
-              </p>
-              <p>
-                <b-icon icon="geo-alt-fill" variant="primary"></b-icon> Current
-                City Name:Dummy
-              </p>
-              <p>
-                <b-icon icon="people-fill" variant="primary"></b-icon> Followed
-                by: 525
-              </p>
+          <b-icon icon="briefcase-fill" variant="primary"></b-icon>  category :
+          Business category
+        </p>
+       
+        
+
+        <p>
+          <b-icon icon="geo-alt-fill" variant="primary"></b-icon> Current City
+          Name:Dummy
+        </p>
+        
+        <p>
+          <b-icon icon="people-fill" variant="primary"></b-icon> Followed by:
+          525
+        </p>
+        <p>
+        <b-icon icon="geo-alt-fill" variant="primary"></b-icon> 
+          Word1, Word2, Word3
+        </p>
+
+
+
               <p>
                 <b-icon icon="phone-fill" variant="primary"></b-icon> +1 (234)
                 567-8974

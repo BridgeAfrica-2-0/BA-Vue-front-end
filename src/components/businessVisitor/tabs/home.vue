@@ -3,8 +3,9 @@
     <b-row>
       <b-col md="4" >
         <Intro/>
-        <Invite />
-        <Personalise/>
+
+        <hotBusiness/>
+        
       </b-col>
       <b-col md="8">
        <Post/>
@@ -14,16 +15,16 @@
 </template>
 
 <script>
-import Intro from "../intro";
-import Invite from "../invite";
-import Personalise from "../personalise";
+import Intro from "../bfintro";
+
+import hotBusiness from "../hotBusiness";
 import Post from "../ownerPost";
 export default {
   name: "posts",
   components: {
     Intro,
-    Invite,
-    Personalise,
+  
+    hotBusiness,
     Post
   }
 };

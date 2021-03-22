@@ -23,7 +23,9 @@
     "vue": "^2.6.12",
     "vue-gallery-slideshow": "^1.5.2",
     "vue-lottie": "^0.2.1",
+    "vue-material": "^1.0.0-beta-15",
     "vue-router": "^3.2.0",
+    "vuelidate": "^0.7.6",
     "vuex": "^3.4.0",
     "vuex-persistedstate": "^4.0.0-beta.1"
   },

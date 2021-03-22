@@ -2,7 +2,7 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
 import Login from "../views/login.vue";
-import SignIn from "../views/signIn.vue";
+import Signup from "../views/signup.vue";
 import RecoverPass1 from "../views/recoverPassword1.vue";
 import RecoverPass2 from "../views/recoverPassword2.vue";
 import RecoverPass3 from "../views/recoverPassword3.vue";
@@ -62,9 +62,9 @@ const routes = [
     component: Login
   },
   {
-    path: "/signin",
-    name: "SignIn",
-    component: SignIn
+    path: "/signup",
+    name: "signup",
+    component: Signup
   },
   {
     path: "/recoverPass1",

@@ -1,27 +1,38 @@
 <template>
   <div>
     <b-card v-if="networkshow">
-      <div class="networks ml-4">
-        <div class="ml-2 mt-2" v-for="post in posts" :key="post.id">
-          <b-card
-          
-            title="Group name"
-            img-src="https://picsum.photos/600/300/?image=25"
-            img-alt="Image"
-            img-top
-            tag="article"
-            class="mb-5 prod"
-          >
-            <b-card-text>
-              <b-row>
-                <b-col>
-                  <p class="small">public - 397 Members</p>
-                </b-col>
-
-                <p class="approved small">Approved</p>
-              </b-row>
-            </b-card-text>
+      <div class="networks ml-4 box">
+        <div class="ml-4 sub" v-for="(post, index) in posts" :key="index">
+          <b-card>
+            <b-img width="230" :src="post.image"></b-img>
           </b-card>
+          <div>
+            <h1>{{ post.title }}</h1>
+            <b-row>
+              <b-col>
+                <p><small>Public - 397 Members</small></p>
+              </b-col>
+              <b-col class="col-1">
+                <b-button
+                  class="btnz"
+                  v-if="post.state"
+                  size="sm"
+                  variant="primary"
+                  ><small>
+                    <fas-icon
+                      class="mr-2"
+                      :icon="['fas', 'check']"
+                    />Joined</small
+                  ></b-button
+                >
+                <b-button v-if="!post.state" size="sm" variant="success"
+                  ><small>
+                    <fas-icon class="mr-2" :icon="['fas', 'plus']" />Join</small
+                  ></b-button
+                >
+              </b-col>
+            </b-row>
+          </div>
         </div>
       </div>
     </b-card>
@@ -30,7 +41,7 @@
         <h2>Builds networks around your Business</h2>
         <p>Create network to stay in touch with just the people</p>
         <p>you want Engage, share, Make Plans and much more</p>
-        <b-button class="btn" variant="primary">Add network</b-button>
+        <b-button class="btn-add" variant="primary">Add Network</b-button>
       </div>
     </div>
 
@@ -72,6 +83,7 @@ export default {
           title: "Title 2",
           text:
             " Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum quam, doloribus id sit consequuntur tempora molestiae blanditiis.",
+          state: "1",
         },
         {
           id: 1,
@@ -86,13 +98,17 @@ export default {
           title: "Title 2",
           text:
             " Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum quam, doloribus id sit consequuntur tempora molestiae blanditiis.",
+          state: "1",
         },
       ],
     };
   },
   methods: {
-    opennetwork() {
+    openNetwork() {
       this.networkShow = false;
+    },
+    addNetwork() {
+      this.showModal = !this.showModal;
     },
   },
 };
@@ -104,139 +120,42 @@ export default {
   height: 500px;
   background-color: #ccc;
   border-radius: 10px;
+  padding: 30px;
+  margin-top: 10px;
 }
-
-.white-box {
-  position: relative;
-  width: 60%;
-  background-color: #fff;
-  min-height: 200px;
-  left: 200px;
-  top: 100px;
-  padding: 20px;
+.sub {
+  width: 280px;
 }
-
+.btnz:hover {
+  background-color: #e75c18;
+  border: none;
+  color: black;
+}
 .prod {
   max-width: 14rem;
   cursor: pointer;
 }
-
-h2,
-p {
-  text-align: center;
-}
-
 .btn {
-  margin-left: 250px;
+  width: 100px;
+  margin-top: -20px;
+  margin-left: -100px;
 }
 .networks {
   display: flex;
   flex-wrap: wrap;
 }
-
-.approved {
-  color: green;
-}
-.pending {
-  color: yellow;
-}
-
-.network:hover .overlay {
-  opacity: 0.5;
-  color: #e75d29;
-}
-
-.network:hover .text-static {
-  display: none;
-}
-
-.btn-view {
-  background-color: transparent;
-  border: none;
-  color: white;
-}
-
-.btn-view:focus {
-  outline-color: transparent;
-  border: none;
-}
-
-.network-name {
-  color: #e75d29;
-  text-align: center;
-}
-
-.pic-name {
-  position: relative;
-  left: -200px;
-  color: white;
-  font-weight: 200;
-  opacity: 0;
-}
-
-.sp:hover .pic-name {
-  opacity: 1;
-}
-
-.pic {
-  cursor: pointer;
-  background-color: transparent;
-}
-.pic:hover {
-  box-shadow: 5px 10px 8px 2px #888888;
-}
-
-.create {
-  position: relative;
-  height: 210px;
-  color: #fff;
-  background-color: #bbb;
-  padding: 20px;
-  width: 300px;
-  top: 5px;
-  border-radius: 5px;
-  text-align: center;
-  cursor: pointer;
-  margin-bottom: 10;
-}
-
-.text {
-  margin-top: 50px;
-}
-
 .network {
   height: 190px;
   cursor: pointer;
 }
-
+.btn-add{
+  margin-left: 0px;
+  margin-top: 10px;
+}
 @media only screen and (max-width: 768px) {
-  .networks {
+  .box {
     position: relative;
-    left: -25px;
-  }
-
-  .network {
-    margin-top: 20px;
-  }
-
-  .create {
-    height: 150px;
-  }
-  .text {
-    margin-top: 30px;
-  }
-
-  .white-box {
-    position: relative;
-    width: 80%;
-    background-color: #fff;
-    min-height: 200px;
-    left: 35px;
-    top: 100px;
-    padding: 20px;
-  }
-  .btn {
-    margin-left: 60px;
+    left: -62px;
   }
 }
 </style>

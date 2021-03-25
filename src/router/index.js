@@ -24,6 +24,7 @@ import webSiteCreateTwo from "@/views/webSiteCreateTwo";
 import paidPlan from "@/views/paidPlan";
 import confirmPayment from "@/views/confirmPayment";
 import networks from "@/views/networks";
+import dashboard from "@/views/dashboard";
 
 Vue.use(VueRouter);
 
@@ -33,6 +34,13 @@ const routes = [
     name: "Home",
     component: Home
   },
+
+  {
+    path: "/dashboard",
+    name: "dashboard",
+    component: dashboard
+  },
+
   {
     path: "/profile_owner",
     name: "profile_owner",

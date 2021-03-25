@@ -7,7 +7,11 @@ import { BootstrapVue, IconsPlugin } from "bootstrap-vue";
 import "@morioh/v-lightbox/dist/lightbox.css";
 import VueGallerySlideshow from "vue-gallery-slideshow";
 
+import VueGoogleMap from 'vuejs-google-maps'
+import 'vuejs-google-maps/dist/vuejs-google-maps.css'
+
 import Lightbox from "@morioh/v-lightbox";
+import * as VueGoogleMaps from 'vue2-google-maps'
 
 // global register
 Vue.use(VueGallerySlideshow);
@@ -21,6 +25,26 @@ import "bootstrap-vue/dist/bootstrap-vue.css";
 Vue.use(BootstrapVue);
 // Optionally install the BootstrapVue icon components plugin
 Vue.use(IconsPlugin);
+
+
+
+
+Vue.use(VueGoogleMap, {
+  load: {
+      apiKey: 'your-api-key',
+      libraries: ['places']
+  }
+});
+
+
+
+Vue.use(VueGoogleMaps, {
+  load: {
+    key: '774df247-de9f-45db-93ee-be42120bf04f',
+    libraries: 'places',
+  }
+});
+
 
 Vue.config.productionTip = false;
 

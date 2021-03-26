@@ -270,9 +270,9 @@
         </b-row>
         <b-row class="mt-3 mb-2">
           <b-col>
-            <b-card class="crd">
+            <b-card class="crd card">
               <span class="title"> </span>
-              <span class="ml-5 result"><small>398 Results found</small></span>
+              <span class="ml-5 result "><small>398 Results found</small></span>
               <Business class="mb-3" />
               <Business class="mb-3 btn-busi" />
             </b-card>
@@ -490,8 +490,11 @@ export default {
 }
 .result {
   position: relative;
+  font-size: 20px;
   top: -5px;
-  color: orange;
+  left: 596px;
+  color: green;
+  font-weight: bold;
 }
 .control-size {
   width: 90%;
@@ -501,6 +504,9 @@ export default {
 .frame {
   border: 0;
 }
+.crd {
+  box-shadow: -1px 4px 20px -6px rgba(0, 0, 0, 0.7);
+}
 @media only screen and (max-width: 768px) {
   .adds {
     display: none;
@@ -509,10 +515,10 @@ export default {
     position: relative;
     bottom: 1000px;
   }
-  .crd{
-   height: 1250px;
+  .crd {
+    height: 1250px;
   }
-  .btn-busi{
+  .btn-busi {
     margin-top: 150px;
   }
 }

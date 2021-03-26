@@ -6,7 +6,7 @@
       img-alt="Image"
       img-top
       tag="article"
-      class="mb-2 "
+      class="mb-2 card"
     >
       <b-card-text class="text">
         <p>
@@ -59,6 +59,7 @@ export default {
 .card {
   max-width: 250px;
   color: orange;
+  box-shadow: -1px 4px 20px -6px rgba(0, 0, 0, 0.7);
 }
 .text {
   color: #000;

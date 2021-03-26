@@ -19,33 +19,27 @@
         </p>
       </div>
       <div>
-        <span class="btns mt-2">
-          <b-row>
-            <b-col>
-              <b-dropdown
-                id="dropdown-1"
-                text="Contact"
-                class="m-md-2"
-                variant="primary"
-                size="sm"
+        <span class="btns mt-2 mr-4">
+          <b-col>
+            <b-row>
+              <b-button class=" community  mt-2" variant="primary" size="sm">
+                <b-icon icon="plus-circle"></b-icon>
+                <span class="company"> Company</span></b-button
               >
-                <b-dropdown-item>
-                  <b-icon icon="chat-fill" variant="primary"></b-icon>
-                  Message</b-dropdown-item
-                >
-                <b-dropdown-item>
-                  <b-icon icon="geo-alt" variant="primary"></b-icon> Get
-                  Direction</b-dropdown-item
-                >
-              </b-dropdown>
-            </b-col>
-            <b-col>
-              <b-button class=" community  mt-2" size="sm">
-                <b-icon icon="plus"></b-icon>
-                Community</b-button
+            </b-row>
+            <b-row>
+              <b-button class=" community  mt-3" variant="primary" size="sm">
+                <b-icon icon="chat"></b-icon>
+                <span class="ml-1"> Message</span></b-button
               >
-            </b-col>
-          </b-row>
+            </b-row>
+            <b-row>
+              <b-button class=" community  mt-3" variant="primary" size="sm">
+                <b-icon icon="geo-alt"></b-icon>
+                <span class="ml-1"> Direction</span></b-button
+              >
+            </b-row>
+          </b-col>
         </span>
       </div>
     </div>
@@ -68,7 +62,7 @@ a {
 
 .btns {
   display: flex;
-  margin-left: 120px;
+  margin-left: 50px;
 }
 
 .primary-bg {
@@ -81,8 +75,6 @@ a {
   color: #fff;
 }
 .community {
-  background-color: rgb(240, 240, 240);
-  color: #000;
   border: none;
   display: flex;
 }
@@ -92,7 +84,9 @@ a {
   background-color: #000;
   border-color: #005cbf;
 }
-
+.company{
+  margin-left: 4px;
+}
 @media only screen and (max-width: 768px) {
   .details {
     position: relative;

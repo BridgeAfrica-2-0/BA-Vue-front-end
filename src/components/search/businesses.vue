@@ -3,7 +3,10 @@
     <b-card class="card">
       <b-row>
         <b-col>
-          <h4>Businesses</h4>
+          <h4>
+            <b-icon icon="shop" variant="primary"></b-icon>
+            <span class="ml-2">BUSINESSES</span>
+          </h4>
         </b-col>
         <b-col class="col">
           <b-link class="lnk">See All</b-link>
@@ -36,6 +39,10 @@ export default {
 p {
   margin-left: -210px;
 }
+
+.card {
+  box-shadow: -1px 4px 20px -6px rgba(0, 0, 0, 0.7);
+}
 @media only screen and (max-width: 768px) {
   .button {
     margin-left: 0px;
@@ -46,10 +53,10 @@ p {
   p {
     margin-left: -50px;
   }
-  .card{
+  .card {
     height: 1250px;
   }
-  .busi{
+  .busi {
     margin-bottom: 160px;
   }
 }

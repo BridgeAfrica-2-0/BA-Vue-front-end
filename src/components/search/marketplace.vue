@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b-card>
+    <b-card class="card">
       <b-row>
         <b-col>
           <h4>Marketplace</h4>
@@ -59,15 +59,19 @@ export default {
 .button {
   margin-left: 120px;
 }
-.products{
-    display: flex;
-    flex-wrap: wrap;
+.products {
+  display: flex;
+  flex-wrap: wrap;
 }
-  .lnk{
-    margin-left: 280px;
-  }
+.lnk {
+  margin-left: 280px;
+}
+
+.card {
+  box-shadow: -1px 4px 20px -6px rgba(0, 0, 0, 0.7);
+}
 @media only screen and (max-width: 768px) {
-  .lnk{
+  .lnk {
     margin-left: 30px;
   }
 }

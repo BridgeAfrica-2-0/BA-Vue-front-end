@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b-card>
+    <b-card class="card">
       <b-row>
         <b-col>
           <h4>
@@ -28,7 +28,7 @@
         <b-col class="buttons">
           <span class="box ml-5">
             <b-button size="sm" class="message" variant="primary">
-              <b-icon icon="chat"></b-icon> Message
+              <b-icon icon="chat"></b-icon> <span class="ml-3">Message</span>
             </b-button>
 
             <b-button size="sm" class="ml-5 mb-1 mt-2" variant="primary">
@@ -67,7 +67,9 @@ p {
   border: none;
   display: flex;
 }
-.box {
+
+.card {
+  box-shadow: -1px 4px 20px -6px rgba(0, 0, 0, 0.7);
 }
 @media only screen and (max-width: 768px) {
   .button {

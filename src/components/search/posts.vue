@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b-card>
+    <b-card class="card">
       <b-row>
         <b-col>
           <h4>Posts</h4>
@@ -15,7 +15,7 @@
             <b-avatar variant="primary" text="BV"></b-avatar>
           </b-col>
           <b-col>
-            <p>
+            <p class="txt">
               <strong>Jane Wright</strong> <br />
               <small>
                 <span>Following</span>
@@ -103,6 +103,13 @@ p {
   display: flex;
 }
 
+.card {
+  box-shadow: -1px 4px 20px -6px rgba(0, 0, 0, 0.7);
+}
+.txt{
+  position: relative;
+  left: 10px;
+}
 @media only screen and (max-width: 768px) {
   p {
     margin-left: -60px;

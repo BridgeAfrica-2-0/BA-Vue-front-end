@@ -3,7 +3,7 @@
     <b-card>
       <b-row>
         <b-col>
-          <h4>People</h4>
+          <h4><b-icon icon="people" variant="primary"></b-icon> <span class="ml-2">Networks</span></h4>
         </b-col>
         <b-col class="col">
           <b-link class="lnk">See All</b-link>
@@ -83,7 +83,6 @@ p {
   display: flex;
   margin-left: 100px;
   margin-top: -38px;
-  
 }
 @media only screen and (max-width: 768px) {
   .button {
@@ -99,16 +98,16 @@ p {
   .drop {
     left: 10px;
   }
-  .community{
+  .community {
     position: relative;
     top: 8px;
   }
 
-  .btns{
+  .btns {
     margin-bottom: 20px;
     left: 45px;
   }
-  .min{
+  .min {
     margin-left: -50px;
   }
 }

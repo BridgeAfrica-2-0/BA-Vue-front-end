@@ -3,7 +3,10 @@
     <b-card>
       <b-row>
         <b-col>
-          <h4>People</h4>
+          <h4>
+            <b-icon icon="person" variant="primary"></b-icon>
+            <span class="ml-2">People</span>
+          </h4>
         </b-col>
         <b-col class="col">
           <b-link class="lnk">See All</b-link>
@@ -14,7 +17,7 @@
         <b-col class="col">
           <b-avatar variant="primary" text="BV"></b-avatar>
         </b-col>
-        <b-col class="min">
+        <b-col class="min ml-5">
           <p>
             <strong>Business </strong> <br />
             <small>
@@ -22,31 +25,16 @@
             </small>
           </p>
         </b-col>
-        <b-col class="ml-4  btns min">
-          <b-dropdown
-            id="dropdown-1"
-            text="Contact"
-            class="m-md-2 drop"
-            variant="primary"
-            size="sm"
-          >
-            <b-dropdown-item>
-              <b-icon icon="chat-fill" variant="primary"></b-icon>
-              Message</b-dropdown-item
-            >
-            <b-dropdown-item>
-              <b-icon icon="telephone-fill" variant="primary"></b-icon> Call
-              Now</b-dropdown-item
-            >
-            <b-dropdown-item>
-              <b-icon icon="geo-alt" variant="primary"></b-icon> Get
-              Direction</b-dropdown-item
-            >
-          </b-dropdown>
+        <b-col class="buttons">
+          <span class="box ml-5">
+            <b-button size="sm" class="message" variant="primary">
+              <b-icon icon="chat"></b-icon> Message
+            </b-button>
 
-          <b-button size="sm" class="community">
-            <b-icon icon="plus"></b-icon> Community
-          </b-button>
+            <b-button size="sm" class="ml-5 mb-1 mt-2" variant="primary">
+              <b-icon icon="plus"></b-icon> Community
+            </b-button>
+          </span>
         </b-col>
       </b-row>
     </b-card>
@@ -62,9 +50,8 @@ export default {};
 .business {
   border-bottom: 1px solid #ccc;
 }
-.button {
+.buttons {
   margin-left: 120px;
-  display: flex;
 }
 .lnk {
   margin-left: 260px;
@@ -77,13 +64,10 @@ p {
   left: 1px;
 }
 .community {
-  background-color: #f0f0f0;
-  color: #000;
   border: none;
   display: flex;
-  margin-left: 100px;
-  margin-top: -38px;
-  
+}
+.box {
 }
 @media only screen and (max-width: 768px) {
   .button {
@@ -99,16 +83,16 @@ p {
   .drop {
     left: 10px;
   }
-  .community{
+  .community {
     position: relative;
     top: 8px;
   }
 
-  .btns{
+  .btns {
     margin-bottom: 20px;
     left: 45px;
   }
-  .min{
+  .min {
     margin-left: -50px;
   }
 }

@@ -15,7 +15,7 @@
         <b-col v-if="selected != 'marketplace'" class="col-5 filter">
           <b-row>
             <b-col class="col-4 mt-2">
-              <small> Filter Location:</small>
+              <small> Filter:</small>
             </b-col>
             <b-col>
               <div class="control-size">
@@ -435,7 +435,7 @@ export default {
         { item: "posts", name: "Posts" },
       ],
       filters: [
-        { item: "any", name: "Any" },
+        { item: "any", name: "Location: Any" },
         { item: "yaounde", name: "Yaounde, Cameroon" },
         { item: "dhaka ", name: "Dhaka, Bangladesh" },
         { item: "new york", name: "New York, United States" },

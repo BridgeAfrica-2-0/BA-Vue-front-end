@@ -36,9 +36,9 @@
               </p>
             </template>
 
-            <b-container>
+            <div>
               <Inbox />
-            </b-container>
+            </div>
           </b-tab>
 
           <b-tab>

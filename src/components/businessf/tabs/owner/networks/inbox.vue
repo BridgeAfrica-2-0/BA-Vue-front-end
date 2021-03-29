@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b-container>
+   
       <div class="chat-box">
         <b-row class="row">
           <div v-if="show">
@@ -390,7 +390,7 @@
           </b-col>
         </b-row>
       </div>
-    </b-container>
+    
   </div>
 </template>
 

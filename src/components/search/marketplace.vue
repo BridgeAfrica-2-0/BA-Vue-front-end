@@ -3,7 +3,7 @@
     <b-card class="card">
       <b-row>
         <b-col>
-          <h4>Marketplace</h4>
+          <h4>Market</h4>
         </b-col>
         <b-col class="col">
           <b-link class="lnk">See All</b-link>

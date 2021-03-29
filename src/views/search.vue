@@ -231,7 +231,7 @@
         <b-col>
           <Businesses />
           <People class="mt-4" />
-          <Networks class="mt-4" />
+          <Networks :data="networks" class="mt-4" />
           <Posts class="mt-4" />
           <Marketplace class="mt-4 mb-2" />
         </b-col>
@@ -327,7 +327,7 @@
           <b-col>
             <span class="title"> </span>
             <span class="ml-5 result"><small>398 Results found</small></span>
-            <Networks class="mt-4" />
+            <Networks :data="networks" class="mt-4" />
           </b-col>
           <b-col class="col-3 adds">
             <Advertisement class="adds" />
@@ -426,6 +426,7 @@ export default {
       category: "any",
       post: "any",
       map: false,
+      networks: [{ type: "minus" }, { type: "plus" }],
       options: [
         { item: "all", name: "All" },
         { item: "business", name: "Business" },

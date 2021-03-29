@@ -3,79 +3,72 @@
     <b-card class="card">
       <b-row>
         <b-col>
-          <h4>Posts</h4>
+          <h4>
+            <b-icon icon="book" variant="primary"></b-icon>
+            <span class="ml-2">Posts</span>
+          </h4>
         </b-col>
         <b-col class="col">
           <b-link class="lnk">See All</b-link>
         </b-col>
       </b-row>
-      <b-col class="posts mt-3">
-        <b-row>
-          <b-col class="col">
-            <b-avatar variant="primary" text="BV"></b-avatar>
-          </b-col>
-          <b-col>
-            <p class="txt">
-              <strong>Jane Wright</strong> <br />
-              <small>
-                <span>Following</span>
-              </small>
-            </p>
-          </b-col>
-          <b-col class="col-2">
-            <b-dropdown
-              id="dropdown-1"
-              text="Contact"
-              class="m-md-2 drop"
-              variant="primary"
-              size="sm"
-            >
-              <b-dropdown-item>
-                <b-icon icon="chat-fill" variant="primary"></b-icon>
-                Message</b-dropdown-item
-              >
-              <b-dropdown-item>
-                <b-icon icon="telephone-fill" variant="primary"></b-icon>Call
-                Now</b-dropdown-item
-              >
-              <b-dropdown-item>
-                <b-icon icon="geo-alt" variant="primary"></b-icon> Get
-                Direction</b-dropdown-item
-              >
-            </b-dropdown>
-          </b-col>
-        </b-row>
-        <div class="mb-3">
-          <span>Text:</span> Lorem ipsum dolor sit amet consectetur adipisicing
-          elit. Laudantium reiciendis ex maiores perspiciatis rem est, libero
-          error veritatis ea aspernatur nihil officia facere saepe voluptas ad
-          adipisci veniam, consequuntur sed facilis excepturi quae harum. Natus,
-          ex quo. Minima possimus at, repellendus eos quia aspernatur eaque qui,
-          ducimus sit perspiciatis fugiat!
+      <b-row>
+        <b-col cols="2">
+          <b-avatar
+            size="60"
+            class="ml-4"
+            variant="primary"
+            text="BV"
+          ></b-avatar>
+        </b-col>
+        <b-col>
           <div>
-            <b-row>
-              <b-col class="mt-1">
-                <span class="mr-3"
-                  ><b-icon
-                    icon="suit-heart"
-                    variant="primary"
-                    aria-hidden="true"
-                  ></b-icon>
-                  23</span
-                >
-                <span
-                  ><b-icon
-                    icon="chat-fill"
-                    variant="primary"
-                    aria-hidden="true"
-                  ></b-icon>
-                  123</span
-                >
-              </b-col>
-            </b-row>
+            <b
+              >Owner's name <br />
+              <small>1 day ago</small>
+            </b>
           </div>
-        </div>
-      </b-col>
+          <div class="mb-3">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium
+            reiciendis ex maiores perspiciatis rem est, libero error veritatis
+            ea aspernatur nihil officia facere saepe voluptas ad adipisci
+            veniam, consequuntur sed facilis excepturi quae harum. Natus, ex
+            quo. Minima possimus at, repellendus eos quia aspernatur eaque qui,
+            ducimus sit perspiciatis fugiat!
+            <div>
+              <b-row>
+                <b-col class="mt-1">
+                  <span class="mr-3"
+                    ><b-icon
+                      icon="suit-heart-fill"
+                      variant="primary"
+                      aria-hidden="true"
+                    ></b-icon>
+                    23</span
+                  >
+                  <span
+                    ><b-icon
+                      icon="chat"
+                      variant="primary"
+                      aria-hidden="true"
+                    ></b-icon>
+                    123</span
+                  >
+                </b-col>
+              </b-row>
+            </div>
+          </div>
+        </b-col>
+        <b-col cols="3">
+          <b-img
+            src="https://images-us.nivea.com/~/images/media-center-items/8/b/2-340911-1.png"
+            height="200"
+          ></b-img>
+          <b-link class="ml-5">
+            View More
+          </b-link>
+        </b-col>
+      </b-row>
     </b-card>
   </div>
 </template>
@@ -106,7 +99,7 @@ p {
 .card {
   box-shadow: -1px 4px 20px -6px rgba(0, 0, 0, 0.7);
 }
-.txt{
+.txt {
   position: relative;
   left: 10px;
 }

@@ -17,31 +17,15 @@
         </p>
       </b-card-text>
       <b-row>
-        <b-col>
-          <b-dropdown
-            id="dropdown-1"
-            text="Contact"
-            class="m-md-2 drop"
-            variant="primary"
-            size="sm"
-          >
-            <b-dropdown-item>
-              <b-icon icon="chat-fill" variant="primary"></b-icon>
-              Message</b-dropdown-item
-            >
-            <b-dropdown-item>
-              <b-icon icon="telephone-fill" variant="primary"></b-icon>Call
-              Now</b-dropdown-item
-            >
-            <b-dropdown-item>
-              <b-icon icon="geo-alt" variant="primary"></b-icon> Get
-              Direction</b-dropdown-item
-            >
-          </b-dropdown>
+        <b-col class="mb-2 align-text-center">
+          <b-button variant="primary" href="#" size="sm"
+            ><b-icon icon="chat" variant="white"></b-icon>
+            <span class="ml-1"> Message</span>
+          </b-button>
         </b-col>
         <b-col>
           <b-button href="#" size="sm"
-            ><b-icon icon="plus" variant="white"></b-icon> Follow</b-button
+            ><b-icon icon="plus" variant="white"></b-icon> Community</b-button
           >
         </b-col>
       </b-row>

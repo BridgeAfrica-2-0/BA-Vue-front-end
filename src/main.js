@@ -7,8 +7,9 @@ import { BootstrapVue, IconsPlugin } from "bootstrap-vue";
 import "@morioh/v-lightbox/dist/lightbox.css";
 import VueGallerySlideshow from "vue-gallery-slideshow";
 
-import VueGoogleMap from 'vuejs-google-maps'
-import 'vuejs-google-maps/dist/vuejs-google-maps.css'
+import vSelect from 'vue-select';
+
+
 
 import Lightbox from "@morioh/v-lightbox";
 import * as VueGoogleMaps from 'vue2-google-maps'
@@ -20,6 +21,8 @@ Vue.use(Lightbox);
 // Import Bootstrap an BootstrapVue CSS files (order is important)
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap-vue/dist/bootstrap-vue.css";
+import 'vue-select/dist/vue-select.css';
+
 
 // Make BootstrapVue available throughout your project
 Vue.use(BootstrapVue);
@@ -29,21 +32,16 @@ Vue.use(IconsPlugin);
 
 
 
-Vue.use(VueGoogleMap, {
-  load: {
-      apiKey: 'your-api-key',
-      libraries: ['places']
-  }
-});
-
 
 
 Vue.use(VueGoogleMaps, {
   load: {
-    key: '774df247-de9f-45db-93ee-be42120bf04f',
+    key: 'AIzaSyAGZU6cqra18t1fhN1AbzRsEc_pgt7n2C8',
     libraries: 'places',
   }
 });
+
+Vue.component('v-select', vSelect);
 
 
 Vue.config.productionTip = false;

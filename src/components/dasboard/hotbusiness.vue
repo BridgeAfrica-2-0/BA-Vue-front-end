@@ -1,14 +1,15 @@
+import Businesses from '@/components/follower/tabs/businesses';
 <template>
   <div>
 
-      <b-card class="border shadow s-card"> 
+      <b-card class="border shadow "> 
 
-        <span> <h4> HOT BUSINESS  <h6 style="float:right">    <b-link> <u> see all </u>  </b-link>    </h6>  </h4>   </span>
-
-
+        <span> <h4>   <img class="img-fluid picture" src="@/assets/icons/bus.png" style="width: 60px;" />  HOT BUSINESSES  <h6 style="float:right">    <b-link> <u> see all </u>  </b-link>    </h6>  </h4>   </span>
 
 
-           <div class="   p-tab">
+
+
+           <div class=" s-card  p-tab">
 
     <div class="people-style border shadow ">
       <b-row>
@@ -220,6 +221,11 @@ export default {
   color: orange;
 }
 
+
+h4{
+
+  color: black;
+}
 .s-button {
   align-content: center;
   text-align: center;

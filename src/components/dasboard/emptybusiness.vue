@@ -3,7 +3,7 @@ import Businesses from '@/components/follower/tabs/businesses';
 <template>
   <div>
     <b-card class="border shadow " style="height:250px">
-     <span> <h4> My Businesses  </h4>  </span>
+     <span> <h4>    <img class="img-fluid picture" src="@/assets/icons/bus.png" style="width: 60px;" />  My Businesses  </h4>  </span>
 
 
      <div> 

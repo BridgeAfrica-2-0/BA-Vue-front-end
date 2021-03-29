@@ -2,13 +2,15 @@
   <div>
     <b-card class="px-md-3 border shadow "  >
 
-      <span> <h4>    <img class="img-fluid picture" src="@/assets/icons/post.png" style="width: 60px;" />  COMMUNITY ACTIVITY  <h6 style="float:right">   <b-link> <u> see all </u>  </b-link>    </h6>  </h4>   </span>
+      <span> <h4>   <img class="img-fluid picture" src="@/assets/icons/post.png" style="width: 60px;" />  Post  <h6 style="float:right">   <b-link> <u> see all </u>  </b-link>    </h6>  </h4>   </span>
 
-   <div class="s-card " >
+
      
 
+     <div  class="s-card"> 
+
       <b-row class="mt-2 m-0 p-0">
-        <b-col cols="12" class="mt-4 m-0 p-0" style="margin-right:20px">
+        <b-col cols="12" class="mt-4 m-0 p-0">
           <b-row class="">
             <b-col cols="2" md="2">
               <b-avatar
@@ -268,11 +270,13 @@
       
 
 
+ </div>
 
 
 
 
-   </div>
+
+
 
       
       
@@ -379,11 +383,11 @@ export default {
 
 
 .s-card{
-  height:570px; 
+  height:550px; 
   overflow: auto; 
   overflow-x: hidden;
-
-  margin-right: 10px;
+  padding-left:20%;
+  padding-right:20%;
 
 }
 

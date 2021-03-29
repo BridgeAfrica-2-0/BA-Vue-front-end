@@ -5,10 +5,9 @@
       <span>    
       
           <h3 class="mb-3">
-                <fas-icon
-                  class="text-primary mr-2 pt-1"
-                  :icon="['fas', 'handshake']"
-                />Business
+                  <img class="img-fluid picture" src="@/assets/icons/bus.png" style="width: 60px;" /> 
+
+                Business
                 <h6 class="float-right text-success font-weight-bolder">
                   <b-button variant="outline-primary" size="sm"
                     ><b-icon-star></b-icon-star> &nbsp;&nbsp;Upgrade
@@ -96,8 +95,8 @@ export default {
 }
 
 .text-lost {
-  flex-basis: 60%;
-  padding-left: 10px;
+  flex-basis: 90%;
+  padding-left: 30px;
 }
 
 .colum {

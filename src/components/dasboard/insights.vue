@@ -4,13 +4,12 @@
 
       <span>   
                 <h3 class="mb-3 pl-1">
-                  <fas-icon
-                    class="text-primary mr-2 pt-1"
-                    :icon="['fas', 'chart-line']"
-                  />INSIGHTS
+
+                    <img class="img-fluid picture" src="@/assets/icons/insight.png" style="width: 70px;" /> 
+                  INSIGHTS
                 </h3>  </span>  <p>  Discover How Customers Finds And Interact With You  </p>
 
-        
+        <div class="a-content"> 
             
             <line-chart
                     ref="skills_chart"
@@ -20,7 +19,7 @@
                   ></line-chart>
                   
                   
-                  
+             </div>      
      
 
           
@@ -51,13 +50,13 @@ export default {
   name: "businessDashboard",
   components: { LineChart },
   data() {
-    return {
+    return {    
       options,
       chartData: {
         labels: ["Posts 33k", "Visit 1.4k", "Share 870"],
         datasets: [
           {
-            backgroundColor: ["#f87979", "#ed2541", "#025410"],
+            backgroundColor: ["#f2f200", "#8c008a", "#40c600"],
             data: [100, 50, 20]
           }
         ]
@@ -95,5 +94,10 @@ export default {
 }
 .text-design {
   line-height: 40px;
+}
+
+.a-content{
+  align-content: center;
+  text-align:center;
 }
 </style>

@@ -4,7 +4,7 @@
     <b-card class="border shadow " >    
     
 
-<span> <h4>   <img class="img-fluid picture" src="@/assets/icons/network.png" style="width: 40px;" />  NETWORKS  <h6 style="float:right">  666 result found   <b-link> <u> see all </u>  </b-link>    </h6>  </h4>   </span>
+<span> <h4>   <img class="img-fluid picture" src="@/assets/icons/network.png" style="width: 60px;" />  NETWORKS  <h6 style="float:right">  666 result found    </h6>  </h4>   </span>
 
 
 
@@ -423,5 +423,9 @@ height: 100%;
   overflow: auto; 
   overflow-x: hidden;
   border-radius:10px;
+}
+
+h4{
+  color:black;
 }
 </style>

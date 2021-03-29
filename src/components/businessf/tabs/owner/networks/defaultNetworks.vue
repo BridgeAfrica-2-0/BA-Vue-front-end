@@ -1,5 +1,5 @@
 <template>
-  <div class="t-left">
+  <div class="t-left yolo">
     <b-tabs content-class="mt-1" fill pills>
       <b-tab active>
         <template slot="title" class="t-color">
@@ -49,7 +49,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style >
 .t-color {
   color: black;
 }
@@ -57,5 +57,13 @@ export default {
 .t-left{
 
   text-align: left;
+}
+
+.bongo .yolo .nav {
+   
+   
+ 
+  border-style: hidden;
+  
 }
 </style>

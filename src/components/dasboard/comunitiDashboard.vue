@@ -1,18 +1,25 @@
 <template>
-  <div >
+  <div  class="lala">
 
     
     <b-card class="border-0">
 
 
 
-
+ 
      
 
-     <div class=" border shadow   p-tab">
+     <div class=" border shadow   p-tab" style="padding:20px">
+
+        <span> <h4>    <img class="img-fluid picture" src="@/assets/icons/people.png" style="width: 60px;" />  COMMUNITY   <span class="h4-color"> 7K </span> </h4>   </span>
+
 
       <b-tabs  pills content-class="mt-3  f-left ">
-        <b-tab title="People" active>
+        <b-tab  active>
+
+         <template slot="title"  >
+             People  <span class="spa-color">  7K   </span>
+            </template>
 
 
  
@@ -22,16 +29,26 @@
          <b-col> 
       <b-tabs fill pills content-class="mt-3  f-left m-up">
 
-        <b-tab title="Followers" active>
+        <b-tab  active>
+          
+            <template slot="title"  >
+             Followers  <span class="spa-color">  7K   </span>
+            </template>
 
-          <div  class="s-card">    <b-row>  <b-col>  <b-container >  <People />   </b-container>   </b-col> <b-col>  <b-container>   <People />   </b-container>   </b-col>    </b-row>   </div>
-
+         
+         <div class="s-comcard">    <b-row>  <b-col>   <b-container >  <People />    </b-container >  </b-col> <b-col>   <b-container > <People />    </b-container >  </b-col>    </b-row>   </div>
+ 
          
          
         </b-tab>
 
-        <b-tab title="Following"> 
-      <div class="s-card">    <b-row>  <b-col>   <b-container > <People />   </b-container >  </b-col> <b-col>   <b-container >  <People />    </b-container >  </b-col>    </b-row>   </div>
+        <b-tab > 
+
+            <template slot="title"  >
+             Following  <span class="spa-color">  7K   </span>
+            </template>
+
+      <div class="s-comcard">    <b-row>  <b-col>   <b-container > <People />   </b-container >  </b-col> <b-col>   <b-container >  <People />    </b-container >  </b-col>    </b-row>   </div>
 
         
         
@@ -44,24 +61,34 @@
          
         </b-tab>
 
-        <b-tab title="Businesses">
+        <b-tab >
+
+            <template slot="title"  >
+             Businesses  <span class="spa-color">  7K   </span>
+            </template>
         
         
      <div>
-      <b-tabs fill pills content-class="mt-3  f-left m-up">
-        <b-tab title="Followers" active>
+      <b-tabs fill pills content-class="mt-3  f-left m-up checkcheck">
+        <b-tab  active>
 
-       
+         <template slot="title"  >
+             Followers  <span class="spa-color">  7K   </span>
+            </template>
         
-         <div class="s-card">    <b-row>  <b-col>   <b-container >  <Business />    </b-container >  </b-col> <b-col>   <b-container > <Business />    </b-container >  </b-col>    </b-row>   </div>
+         <div class="s-comcard">    <b-row>  <b-col>   <b-container >  <Business />    </b-container >  </b-col> <b-col>   <b-container > <Business />    </b-container >  </b-col>    </b-row>   </div>
  
          
         </b-tab>
 
-        <b-tab title="Following">
+        <b-tab >
         
+
+            <template slot="title"  >
+             Following  <span class="spa-color">  7K   </span>
+            </template>
         
-         <div class="s-card">    <b-row>  <b-col>  <b-container>  <Business />   </b-container>   </b-col> <b-col>  <b-container>  <Business />    </b-container >   </b-col>    </b-row>   </div>
+         <div class="s-comcard">    <b-row>  <b-col>  <b-container>  <Business />   </b-container>   </b-col> <b-col>  <b-container>  <Business />    </b-container >   </b-col>    </b-row>   </div>
  
         </b-tab>
       </b-tabs>
@@ -121,21 +148,25 @@ export default {
 };
 </script>
 
-<style scoped>
-.avatar-size {
-  width: 90px;
-}
-  .p-tab{
-    padding: 15px;
-    padding-left: 15px;
+<style >
+
+  
+
+
+   .lala .nav-fill{
+   
+    margin-top: -19px;
+     border: 1px solid rgba(0, 0, 0, 0.125);
   }
 
-  m-tabs{
 
-    margin: 20px;
-  }
 
-  .s-card{
+
+
+
+
+
+  .s-comcard{
   height:350px; 
   overflow: auto; 
   overflow-x: hidden;
@@ -143,9 +174,24 @@ export default {
 }
 
 
+.spa-color{
+  color: white;
+  margin-left: 10px;
+  font-size: 14px;
+}
+
+
+.h4-color{
+  color: orangered;
+  margin-left: 10px;
+  font-size: 14px;
+}
+
 .m-up{
 
   margin-top:-5px;
 }
+
+
 
 </style>

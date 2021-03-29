@@ -1,19 +1,60 @@
 <template>
-  <div class="mt-3">
+  <div class="mt-3 lala">
     <b-container>
-      <b-tabs fill pills content-class="mt-3  f-left">
-        <b-tab title="People" active>
-          
-            
 
+
+      <b-tabs  pills content-class="mt-3  f-left">
+        <b-tab title="People" active>
+           
+
+
+
+
+            <b-tabs fill pills content-class="mt-3  f-left">
+        <b-tab title="Followers" active>
+        
 
         <People />
 
-          <b-link class="f-right"> see more </b-link>
+         
         </b-tab>
 
-        <b-tab title="Businesses"> <Business /> </b-tab>
+        <b-tab title="Following">  <People /> </b-tab>
       </b-tabs>
+
+
+
+
+
+       
+
+         
+        </b-tab>
+
+        <b-tab title="Businesses">
+          
+          
+      <b-tabs fill pills content-class="mt-3  f-left">
+       
+           
+
+        <b-tab title="Followers" active>
+        
+
+         <Business /> 
+
+         
+        </b-tab>
+
+        <b-tab title="Following">   <Business />  </b-tab>
+      </b-tabs>
+            
+          
+          
+          </b-tab>
+      </b-tabs>
+
+      
     </b-container>
   </div>
 </template>

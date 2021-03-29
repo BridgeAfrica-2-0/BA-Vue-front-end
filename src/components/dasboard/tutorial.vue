@@ -1,11 +1,12 @@
 <template>
-  <div class="posts">
+  <div>
 
-      <b-card class=" border shadow s-card">
+      <b-card class=" border shadow ">
 
-        <span> <h4> TUTORIALS  <h6 style="float:right">    <b-link> <u> see all </u>  </b-link>    </h6>  </h4>   </span>
+        <span> <h4>   <img class="img-fluid picture" src="@/assets/icons/tutorials.png" style="width: 60px;" />  TUTORIALS  <h6 style="float:right">    <b-link> <u> see all </u>  </b-link>    </h6>  </h4>   </span>
 
 
+ <div class="s-card">
 
     <b-row>
       <b-col cols="6" class="m-media" v-for="post in posts" :key="post.id">
@@ -25,6 +26,9 @@
        
       </b-col>
     </b-row>
+
+
+ </div>
 
     </b-card>
     
@@ -81,7 +85,7 @@ export default {
             " Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum quam, doloribus id sit consequuntur tempora molestiae blanditiis."
         },
         {
-          id: 2,
+          id: 7,
           image: "https://picsum.photos/300/150/?image=41",
           title: "Title 2",
           text:
@@ -125,29 +129,14 @@ export default {
    border-radius:10px;
  
 }
-.image {
-  cursor: pointer;
-  width: inherit;
-  height: auto;
-}
-.image:hover {
-  box-shadow: 5px 10px 8px 2px #888888;
-}
 
-.text {
-  margin-top: 10px;
-}
-.options {
-  position: relative;
-  top: -34px;
-  left: 25px;
-}
+
 
 
 
 
 .s-card{
-  height:550px; 
+  height:540px; 
   overflow: auto; 
   overflow-x: hidden;
 

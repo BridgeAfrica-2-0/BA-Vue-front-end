@@ -4,11 +4,8 @@
      
       <span>    
       
-          <h3 class="mb-3">
-                <fas-icon
-                  class="text-primary mr-2 pt-1"
-                  :icon="['fas', 'handshake']"
-                />Profile
+          <h3 class="">    <img class="img-fluid picture" src="@/assets/icons/person.png" style="width: 60px;" /> 
+                 Profile
                 <h6 class="float-right text-success font-weight-bolder">
                   <b-button variant="outline-primary" size="sm"
                     ><b-icon-star></b-icon-star> &nbsp;&nbsp;Upgrade

@@ -17,8 +17,7 @@
       background="#ababab"
       
       style="text-shadow: 1px 1px 2px #333; border-radius:10px;"
-      @sliding-start="onSlideStart"
-      @sliding-end="onSlideEnd"
+     
     >
       <!-- Text slides with image -->
       <b-carousel-slide

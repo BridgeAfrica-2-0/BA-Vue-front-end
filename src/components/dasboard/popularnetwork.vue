@@ -1,61 +1,14 @@
 <template>
   <div>
 
-    <b-card class="border shadow s-card">    
+    <b-card class="border shadow ">    
     
 
 
 
-  <span> <h4> POPULAR NETWORKS  <h6 style="float:right">    <b-link> <u> see all </u>  </b-link>    </h6>  </h4>   </span>
+  <span> <h4>   <img class="img-fluid picture" src="@/assets/icons/network.png" style="width: 60px;" />  POPULAR NETWORKS  <h6 style="float:right">    <b-link> <u> see all </u>  </b-link>    </h6>  </h4>   </span>
 
-
-
-
- <div class="people-style  border shadow">
-      <b-row>
-        <b-col cols="3">
-          
-            <img
-              src="http://www.seafreightagenciesbarbados.com/files/2014/12/shiping.jpg"
-              width="100%"
-              height="90%"
-              class="r-image"
-            />
-        
-        </b-col>
-        <b-col cols="6">
-          <p class="text">
-            <strong> Shipping Network </strong> <br />  <br />
-            Public <br />
-             20k Members <br />
-             Business Name <br />
-            
-          </p>
-        </b-col>
-
-        <b-col cols="3">
-          <div class="s-button">
-            <b-button block size="sm" class="b-background" variant="primary">
-              <b-icon class="ico" icon="plus-circle"> </b-icon> Community
-            </b-button>
-
-            <b-button block size="sm" class="b-background" variant="primary">
-              <b-icon class="ico" icon="chat"> </b-icon> Message
-            </b-button>
-
-          </div>
-        </b-col>
-      </b-row>
-    </div>
-
-
-
-
-
-
-
-
-
+ <div class="s-card">
 
 
  <div class="people-style  border shadow">
@@ -105,10 +58,6 @@
 
 
 
-
-
-
-
  <div class="people-style  border shadow">
       <b-row>
         <b-col cols="3">
@@ -145,10 +94,6 @@
         </b-col>
       </b-row>
     </div>
-
-
-
-
 
 
 
@@ -213,6 +158,61 @@
 
 
 
+
+
+
+
+
+
+ <div class="people-style  border shadow">
+      <b-row>
+        <b-col cols="3">
+          
+            <img
+              src="http://www.seafreightagenciesbarbados.com/files/2014/12/shiping.jpg"
+              width="100%"
+              height="90%"
+              class="r-image"
+            />
+        
+        </b-col>
+        <b-col cols="6">
+          <p class="text">
+            <strong> Shipping Network </strong> <br />  <br />
+            Public <br />
+             20k Members <br />
+             Business Name <br />
+            
+          </p>
+        </b-col>
+
+        <b-col cols="3">
+          <div class="s-button">
+            <b-button block size="sm" class="b-background" variant="primary">
+              <b-icon class="ico" icon="plus-circle"> </b-icon> Community
+            </b-button>
+
+            <b-button block size="sm" class="b-background" variant="primary">
+              <b-icon class="ico" icon="chat"> </b-icon> Message
+            </b-button>
+
+          </div>
+        </b-col>
+      </b-row>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+ </div>
 
 
  </b-card>
@@ -303,10 +303,14 @@ height: 100%;
   background-clip: border-box;
   border: 1px solid rgba(0, 0, 0, 0.125);
   margin-bottom: 10px;
+  margin-right: 8px;
  
 
 }
 
+h4{
+  color: black;
+}
 
 
 .s-card{

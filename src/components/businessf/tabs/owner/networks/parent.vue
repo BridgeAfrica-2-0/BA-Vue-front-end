@@ -19,10 +19,10 @@ from '@/components/owner/tabs/bussiness';
       <b-container>
         <b-row>
           <b-col cols="6">
-            <h6 class="font-weight-bolder m-0 p-0 t-align">  MARKETERS UNION </h6>
+            <h6 class="font-weight-bolder m-0 p-0 t-align">  Maketers Union Network</h6>
           </b-col>
           <b-col cols="6">
-            <b-button variant="primary" size="sm"   style="width: 120px;"  >
+            <b-button variant="primary" block  size="sm"   style="width: 120px;"  >
               <b-icon icon="plus-circle"></b-icon> Community
             </b-button>
           </b-col>
@@ -93,7 +93,17 @@ export default {
 };
 </script>
 
-<style scoped>
+<style >
+
+
+.lala .nav-fill{
+   
+    margin-top: -19px;
+     border: 1px solid rgba(0, 0, 0, 0.125);
+  }
+
+
+
 .a-center {
   text-align: center;
   align-content: center;
@@ -105,14 +115,14 @@ export default {
   border-style: none;
 }
 .t-align{
-  text-align: center;
+  text-align: left;
 }
 .network-avatar-icon {
   position: absolute;
   width: 2rem;
   height: 2rem;
   top: 77px;
-  right: 98px;
+  right: 158px;
   padding: 0px 0px;
   color: #ffff;
   background: #e75c18;

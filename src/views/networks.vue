@@ -1,9 +1,9 @@
 <template>
   <div>
     <navbar />
-    <br />
+   
 
-    <b-container  class="full-width">
+    <div  class="full-width  m-top bongo" style="padding:50px;" >
       <b-row>
         <b-tabs  pills  fill  class="yaya" content-class="mt-3 f-width" active-nav-item-class=" box-item" >
           <b-tab active>
@@ -13,7 +13,7 @@
               </p>
             </template>
 
-            <b-container>
+            <div style="padding:10px;">
               <b-row>
                 <b-col cols="" class="text-center px-3">
                   <Parent />
@@ -23,7 +23,7 @@
                   <Default />
                 </b-col>
               </b-row>
-            </b-container>
+            </div>
           </b-tab>
 
           <b-tab>
@@ -176,7 +176,7 @@
           </b-tab>
         </b-tabs>
       </b-row>
-    </b-container>
+    </div>
 
     <Footer />
   </div>
@@ -217,29 +217,23 @@ export default {
 };
 </script>
 
-<style >
-.network-profile-image-profile {
-  width: 12rem;
-  height: 12rem;
-  bottom: 5px;
-  right: 5px;
+<style  >
+
+
+ .m-top{
+
+
+
+  margin-top:50px;
 }
+
+
+
 
 .m-badge {
   margin-top: -10px;
 }
-.network-avatar-icon {
-  position: absolute;
-  width: 3rem;
-  height: 3rem;
-  top: 77px;
-  right: 81px;
-  padding: 0px 0px;
-  color: #ffff;
-  background: #e75c18;
-  border-radius: 25px;
-  border: 4px solid #ffff;
-}
+
 
 .tabs {
   width: 100%;
@@ -248,12 +242,8 @@ export default {
   width: 100%;
 }
 
-.nav {
-    display: flex;
-    flex-wrap: wrap;
-    padding-left: 0;
-    margin-bottom: 0;
-    list-style: none;
+.bongo .nav {
+   
     background-clip: border-box;
   border: 1px solid rgba(0, 0, 0, 0.125);
   
@@ -298,13 +288,6 @@ export default {
 
 
 
-
-.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
-    color: #fff;
-    background-color: white;
-    border-bottom: 4px solid red;
-    border-top: 3px solid red;
-}
 
 
 </style>

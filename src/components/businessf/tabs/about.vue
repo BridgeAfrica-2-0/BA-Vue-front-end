@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b-card>
+    <div>
       <div>
         <iframe
           src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d48389.732999183005!2d-74.006227!3d40.710128!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xb89d1fe6bc499443!2sDowntown%20Conference%20Center!5e0!3m2!1sen!2sbg!4v1612237569797!5m2!1sen!2sbg"
@@ -14,74 +14,63 @@
       </div>
       <b-row>
         <b-col>
-          <b-card class="mb-2">
+          <div class="mb-2 p-4">
             <h4 class="mb-4 text-center">
-               <b-icon icon="person-fill" class="primary mr-2"></b-icon>
+              <b-icon icon="info-circle-fill" class="primary mr-2"></b-icon>
               <b>{{ leftTitle }}</b>
             </h4>
             <p class="txt">
               {{ textToo }}
             </p>
-          </b-card>
+          </div>
         </b-col>
         <b-col>
-          <b-card>
-       
-            <b-card-text>
-              <p>
-                <b-icon icon="briefcase-fill" class="primary"></b-icon> Work
-                at: {{ workedAt }}
-              </p>
-              <p>
-                <b-icon icon="book-fill" class="primary"></b-icon> Studied at:
-                {{ lastEducation }}
-              </p>
-              <p>
-                <b-icon icon="house-fill" class="primary"></b-icon> Home Town
-                Name: {{ homeTown }}
-              </p>
-              <p>
-                <b-icon icon="geo-alt-fill" class="primary"></b-icon> Current
-                City Name: {{ cityName }}
-              </p>
-              <p>
-                <b-icon icon="people-fill" class="primary"></b-icon> Followed
-                by: {{ followed }}
-              </p>
-              <p>
-                <b-icon icon="phone-fill" class="primary"></b-icon>
-                {{ telephone }}
-              </p>
-              <p>
-                <b-icon icon="envelope-fill" class="primary"></b-icon>
-                {{ email }}
-              </p>
-              <p>
-                <b-icon icon="clock" class="primary"></b-icon>
-                <span class="ml-2 btn-item">Open Now</span>
-              </p>
-              <p>
-                <b-dropdown
-                  size="sm"
-                  variant="outline"
-                  text="6:00AM - 7:00PM"
-                  class="ml-2"
-                >
-                  <b-dropdown-item-button
-                    >6:00AM - 7:00PM</b-dropdown-item-button
-                  >
-                  <b-dropdown-item-button
-                    >6:00AM - 7:00PM</b-dropdown-item-button
-                  >
-                </b-dropdown>
-              </p>
-            </b-card-text>
-          </b-card>
+          <div class="p-4">
+            <p>
+              <b-icon icon="briefcase-fill" class="primary"></b-icon>
+              Agriculture
+            </p>
+            <p>
+              <b-icon icon="search" class="primary"></b-icon> Chicken Seller
+            </p>
+            <p>
+              <b-icon icon="geo-alt-fill" class="primary"></b-icon> Mokolo,
+              Yaounde, Cameroon
+            </p>
+            <p>
+              <b-icon icon="link" class="primary"></b-icon> www.business.com
+            </p>
+            <p>
+              <b-icon icon="people-fill" class="primary"></b-icon> 1.1M
+              Community
+            </p>
+            <p>
+              <b-icon icon="telephone-fill" class="primary"></b-icon>
+              +1(542) 565- 536
+            </p>
+            <p>
+              <b-icon icon="envelope-fill" class="primary"></b-icon>
+              info@business.com
+            </p>
+            <p>
+              <b-icon icon="clock" class="primary"></b-icon>
+              <span class="ml-2 btn-item">Open Now</span>
+            </p>
+            <p>
+              <b-dropdown
+                size="sm"
+                variant="outline"
+                text="6:00AM - 7:00PM"
+                class="ml-2"
+              >
+                <b-dropdown-item-button>6:00AM - 7:00PM</b-dropdown-item-button>
+                <b-dropdown-item-button>6:00AM - 7:00PM</b-dropdown-item-button>
+              </b-dropdown>
+            </p>
+          </div>
         </b-col>
       </b-row>
-    </b-card>
-
-  
+    </div>
   </div>
 </template>
 
@@ -164,8 +153,8 @@ p {
   display: none;
 }
 @media only screen and (max-width: 768px) {
-.txt{
-  text-align: left;
-}
+  .txt {
+    text-align: left;
+  }
 }
 </style>

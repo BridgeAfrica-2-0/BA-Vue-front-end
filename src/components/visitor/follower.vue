@@ -23,7 +23,7 @@
         <div class="d-inline-block ml-4 float-left">
           <h5 class="font-weight-bolder name">User Name</h5>
           <p>
-            website <br />
+            www.bridgeafrica.com <br />
             1.5k Community
           </p>
         </div>
@@ -74,7 +74,7 @@
           <div class="d-inline-block mt-4 ml-4 float-left texts">
             <h6 class="font-weight-bolder ">User Name</h6>
             <p class="details">
-              website <br />
+              www.bridgeafrica.com <br />
               1.5k Community
             </p>
           </div>

@@ -23,31 +23,21 @@
         <div class="d-inline-block ml-4 float-left">
           <h5 class="font-weight-bolder name">User Name</h5>
           <p>
-            website <br />
+            www.bridgeafrica.com <br />
             1.5k Community
           </p>
         </div>
       </b-col>
       <b-col cols="6">
         <p class="float-right">
-          <b-button size="sm">
-            <b-icon icon="check" variant="grey"></b-icon> Following</b-button
+          <b-button class="following" size="sm">
+            <b-icon icon="dash" variant="grey"></b-icon> community</b-button
           >
-          <b-dropdown
-            id="dropdown-1"
-            text="Contact"
-            class="m-md-2 drop"
-            size="sm"
+          <b-button class="message ml-1" size="sm">
+            <b-icon icon="chat" variant="grey"></b-icon> Message</b-button
           >
-            <b-dropdown-item>
-              <b-icon icon="chat-fill" variant="primary"></b-icon>
-              Message</b-dropdown-item>
-            <b-dropdown-item>
-              <b-icon icon="geo-alt" variant="primary"></b-icon> Get
-              Direction</b-dropdown-item
-            >
-          </b-dropdown>
-          <b-dropdown size="sm">
+
+          <b-dropdown size="sm" class="ml-2" variant="primary">
             <template #button-content>
               <b-icon icon="three-dots" aria-hidden="true"></b-icon>
             </template>
@@ -72,7 +62,7 @@
           <div class="d-inline-block mt-4 ml-4 float-left texts">
             <h6 class="font-weight-bolder name">User Name</h6>
             <p class="details">
-              website <br />
+              www.bridgeafrica.com <br />
               1.5k Community
             </p>
           </div>
@@ -181,6 +171,18 @@ img {
 .name {
   position: relative;
   top: 11px;
+}
+.following {
+  color: #fff;
+  background-color: #e4c229;
+  border: none;
+  border-radius: none;
+}
+.message {
+  color: #fff !important;
+  background-color: #32a400;
+  border: none;
+  border-radius: none;
 }
 @media only screen and (max-width: 768px) {
   .mobile {

@@ -1,45 +1,43 @@
 <template>
   <div>
-    <b-card v-if="networkshow">
-      <div class="networks ml-4 box">
-        <div class="ml-4 sub" v-for="(post, index) in posts" :key="index">
-          <b-card class="mb-2">
-     
-              <b-img width="230" :src="post.image"></b-img>
-  
-            <div>
-              <h1>{{ post.title }}</h1>
-              <b-row>
-                <b-col>
-                  <p><small>Public - 397 Members</small></p>
-                </b-col>
-                <b-col class="col-1">
-                  <b-button
-                    class="btnz"
-                    v-if="post.state"
-                    size="sm"
-                    variant="primary"
-                    ><small>
-                      <fas-icon
-                        class="mr-2"
-                        :icon="['fas', 'check']"
-                      />Joined</small
-                    ></b-button
-                  >
-                  <b-button v-if="!post.state" size="sm" variant="success"
-                    ><small>
-                      <fas-icon
-                        class="mr-2"
-                        :icon="['fas', 'plus']"
-                      />Join</small
-                    ></b-button
-                  >
-                </b-col>
-              </b-row>
-            </div>
-          </b-card>
-        </div>
-      </div>
+    <b-card class="card" v-if="!networkShow">
+      <span v-for="(network, index) in data" :key="index">
+        <b-row class="business mt-3">
+          <b-col>
+            <b-avatar variant="primary" text="BV"></b-avatar>
+          </b-col>
+          <b-col class="min ">
+            <p>
+              <strong>Business </strong> <br />
+              <small>
+                <span>Business category - 36k Followers</span>
+              </small>
+            </p>
+          </b-col>
+          <b-col class="buttons">
+            <span v-if="network.type == 'minus'" class="box ml-5">
+              <b-button class="community ml-5" size="sm" variant="primary">
+                <b-icon icon="dash-circle" class="pr-1"></b-icon>
+                community
+              </b-button>
+
+              <b-button size="sm" class="ml-5 mb-1 mt-2" variant="primary">
+                <b-icon icon="chat"></b-icon> Message
+              </b-button>
+            </span>
+            <span v-if="network.type == 'plus'">
+              <b-button
+                class="ml-5 mb-1 mt-2 community"
+                size="sm"
+                variant="primary"
+              >
+                <b-icon icon="plus-circle" class="pr-1"></b-icon>
+                Community
+              </b-button>
+            </span>
+          </b-col>
+        </b-row>
+      </span>
     </b-card>
     <div class="no-network" v-if="networkShow">
       <div class="white-box">
@@ -67,6 +65,7 @@ export default {
       networkshow: true,
       showModal: false,
       text: "",
+      data: [{ type: "minus" }, { type: "plus" }],
       posts: [
         {
           id: 1,
@@ -163,10 +162,61 @@ export default {
   margin-left: 0px;
   margin-top: 10px;
 }
+
+.business {
+  border-bottom: 1px solid #ccc;
+}
+.button {
+  margin-left: 120px;
+  display: flex;
+}
+.lnk {
+  margin-left: 260px;
+}
+p {
+  margin-left: -210px;
+}
+
+.drop {
+  left: 1px;
+}
+.buttons {
+  margin-left: 120px;
+}
+.community {
+  border: none;
+  display: flex;
+}
+
 @media only screen and (max-width: 768px) {
   .box {
     position: relative;
     left: -62px;
+  }
+  .button {
+    margin-left: 0px;
+  }
+  .lnk {
+    margin-left: 50px;
+  }
+  p {
+    margin-left: -50px;
+    font-size: 15px;
+  }
+  .drop {
+    left: 10px;
+  }
+  .community {
+    position: relative;
+    top: 8px;
+  }
+
+  .btns {
+    margin-bottom: 20px;
+    left: 45px;
+  }
+  .min {
+    margin-left: -50px;
   }
 }
 </style>

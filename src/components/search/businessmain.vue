@@ -77,6 +77,7 @@ a {
 .community {
   border: none;
   display: flex;
+  border-radius: 5px;
 }
 
 .toggle {
@@ -84,8 +85,11 @@ a {
   background-color: #000;
   border-color: #005cbf;
 }
-.company{
+.company {
   margin-left: 4px;
+}
+img {
+  border-radius: 10px;
 }
 @media only screen and (max-width: 768px) {
   .details {

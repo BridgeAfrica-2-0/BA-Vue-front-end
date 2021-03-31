@@ -22,7 +22,7 @@
                 <b-form-select
                   v-model="location"
                   :options="filters"
-                  class="mb-3 filter-select"
+                  class="mb-3 filter-select with"
                   value-field="item"
                   text-field="name"
                 ></b-form-select>
@@ -130,100 +130,76 @@
           </b-row>
         </b-col>
         <b-col v-if="selected == 'marketplace'" class="col filter mb-2">
-          <b-row>
-            <b-col class=" mt-2">
-              <small> Type:</small>
-            </b-col>
-            <b-col>
-              <div class="control-size">
-                <b-form-select
-                  v-model="category"
-                  :options="categories"
-                  class="mb-3 filter-select"
-                  value-field="item"
-                  text-field="name"
-                ></b-form-select>
-              </div>
-            </b-col>
-            <b-col class=" mt-2">
-              <small> category:</small>
-            </b-col>
-            <b-col>
-              <div class="control-size">
-                <b-form-select
-                  v-model="category"
-                  :options="categories"
-                  class="mb-3 filter-select"
-                  value-field="item"
-                  text-field="name"
-                ></b-form-select>
-              </div>
-            </b-col>
-            <b-col class=" mt-2">
-              <small> Price:</small>
-            </b-col>
-            <b-col>
-              <div class="control-size">
-                <b-form-select
-                  v-model="category"
-                  :options="categories"
-                  class="mb-3 filter-select"
-                  value-field="item"
-                  text-field="name"
-                ></b-form-select>
-              </div>
-            </b-col>
-            <b-col class=" mt-2">
-              <small> Stock:</small>
-            </b-col>
-            <b-col>
-              <div class="control-size">
-                <b-form-select
-                  v-model="category"
-                  :options="categories"
-                  class="mb-3 filter-select"
-                  value-field="item"
-                  text-field="name"
-                ></b-form-select>
-              </div>
-            </b-col>
-            <b-col class=" mt-2">
-              <small> Condition:</small>
-            </b-col>
-            <b-col>
-              <div class="control-size">
-                <b-form-select
-                  v-model="category"
-                  :options="categories"
-                  class="mb-3 filter-select"
-                  value-field="item"
-                  text-field="name"
-                ></b-form-select>
-              </div>
-            </b-col>
-            <b-col class=" mt-2">
-              <small> Business:</small>
-            </b-col>
-            <b-col>
-              <div class="">
-                <b-form-select
-                  v-model="category"
-                  :options="categories"
-                  class="mb-3 filter-select"
-                  value-field="item"
-                  text-field="name"
-                ></b-form-select>
-              </div>
-            </b-col>
-            <b-col>
-              <b-button variant="primary" v-if="!map" @click="showMap(true)">
-                Show map
-              </b-button>
-              <b-button variant="primary" v-if="map" @click="showMap(false)">
-                Hide map
-              </b-button>
-            </b-col>
-          </b-row>
+          <div class="uptions">
+            <div class="control-size">
+              <b-form-select
+                v-model="category"
+                :options="categories"
+                class="mb-3 filter-select"
+                value-field="item"
+                text-field="name"
+              ></b-form-select>
+            </div>
+
+            <div class="control-size">
+              <b-form-select
+                v-model="category"
+                :options="categories"
+                class="mb-3 filter-select"
+                value-field="item"
+                text-field="name"
+              ></b-form-select>
+            </div>
+
+            <div class="control-size">
+              <b-form-select
+                v-model="category"
+                :options="categories"
+                class="mb-3 filter-select"
+                value-field="item"
+                text-field="name"
+              ></b-form-select>
+            </div>
+
+            <div class="control-size">
+              <b-form-select
+                v-model="category"
+                :options="categories"
+                class="mb-3 filter-select"
+                value-field="item"
+                text-field="name"
+              ></b-form-select>
+            </div>
+
+            <div class="control-size">
+              <b-form-select
+                v-model="category"
+                :options="categories"
+                class="mb-3 filter-select"
+                value-field="item"
+                text-field="name"
+              ></b-form-select>
+            </div>
+
+            <b-button
+              size="sm"
+              variant="primary"
+              v-if="!map"
+              @click="showMap(true)"
+              class="ml-2"
+            >
+              Show map
+            </b-button>
+            <b-button
+              size="sm"
+              variant="primary"
+              v-if="map"
+              class="ml-2"
+              @click="showMap(false)"
+            >
+              Hide map
+            </b-button>
+          </div>
         </b-col>
       </b-row>
 
@@ -246,12 +222,23 @@
             <b-card>
               <h3>Sponsored Businesses</h3>
               <div class="s-business">
-                <SponsoredBusinesses
-                  class="ml-2"
-                  v-for="(sbusiness, index) in sponsoredBusinesses"
-                  :key="index"
-                  :title="sbusiness.title"
-                />
+                <b-row class="ml-3">
+                  <div class="left">
+                    <b-icon icon="arrow-left-circle"></b-icon>
+                  </div>
+                  <b-col class="ml-5">
+                    <b-row>
+                      <SponsoredBusinesses
+                        class="ml-2"
+                        v-for="(sbusiness, index) in sponsoredBusinesses"
+                        :key="index"
+                        :title="sbusiness.title"
+                    /></b-row>
+                  </b-col>
+                  <div class="left ml-5">
+                    <b-icon icon="arrow-right-circle"></b-icon>
+                  </div>
+                </b-row>
               </div>
             </b-card>
           </b-col>
@@ -301,12 +288,23 @@
             <b-card>
               <h3>Sponsored Networks</h3>
               <div class="s-business">
-                <SponsoredNetwork
-                  class="ml-2"
-                  v-for="(sbusiness, index) in sponsoredBusinesses"
-                  :key="index"
-                  :title="sbusiness.title"
-                />
+                <b-row class="ml-3">
+                  <div class="left">
+                    <b-icon icon="arrow-left-circle"></b-icon>
+                  </div>
+                  <b-col class="ml-5">
+                    <b-row>
+                      <SponsoredNetwork
+                        class="ml-2"
+                        v-for="(sbusiness, index) in sponsoredBusinesses"
+                        :key="index"
+                        :title="sbusiness.title"
+                    /></b-row>
+                  </b-col>
+                  <div class="left ml-5">
+                    <b-icon icon="arrow-right-circle"></b-icon>
+                  </div>
+                </b-row>
               </div>
             </b-card>
           </b-col>
@@ -353,12 +351,23 @@
             <b-card>
               <h3>Sponsored Businesses</h3>
               <div class="s-business">
-                <SponsoredBusinesses
-                  class="ml-2"
-                  v-for="(sbusiness, index) in sponsoredBusinesses"
-                  :key="index"
-                  :title="sbusiness.title"
-                />
+                <b-row class="ml-3">
+                  <div class="left">
+                    <b-icon icon="arrow-left-circle"></b-icon>
+                  </div>
+                  <b-col class="ml-5">
+                    <b-row>
+                      <SponsoredBusinesses
+                        class="ml-2"
+                        v-for="(sbusiness, index) in sponsoredBusinesses"
+                        :key="index"
+                        :title="sbusiness.title"
+                    /></b-row>
+                  </b-col>
+                  <div class="left ml-5">
+                    <b-icon icon="arrow-right-circle"></b-icon>
+                  </div>
+                </b-row>
               </div>
             </b-card>
           </b-col>
@@ -461,7 +470,6 @@ export default {
         { title: "Business 1" },
         { title: "Business 2" },
         { title: "Business 3" },
-        { title: "Business 4" },
       ],
     };
   },
@@ -481,6 +489,7 @@ export default {
 }
 .filter-select {
   margin-left: -70px;
+  width: 100px;
 }
 .s-business {
   display: flex;
@@ -498,8 +507,14 @@ export default {
   font-weight: bold;
 }
 .control-size {
-  width: 90%;
-  margin-left: 20px;
+  position: relative;
+  margin-left: 90px;
+}
+
+.with {
+  position: relative;
+  width: 200px;
+  left: -140px;
 }
 
 .frame {
@@ -507,6 +522,21 @@ export default {
 }
 .crd {
   box-shadow: -1px 4px 20px -6px rgba(0, 0, 0, 0.7);
+}
+.uptions {
+  display: flex;
+  margin-left: 30px;
+}
+.left {
+  background-color: #e75d29;
+  box-shadow: -1px 4px 20px -6px rgba(0, 0, 0, 0.7);
+  height: 40px;
+  padding: 10px;
+  color: #fff;
+  border-radius: 20px;
+  margin-top: 120px;
+  cursor: pointer;
+  margin-left: 10px;
 }
 @media only screen and (max-width: 768px) {
   .adds {

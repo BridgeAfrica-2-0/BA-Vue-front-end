@@ -1,33 +1,39 @@
 <template>
   <div>
     <b-card title="" header-tag="header" footer-tag="footer">
-
-        <h6 class="mb-2">Intro</h6>
+      <h6 class="mb-2"><b>Intro</b></h6>
 
       <b-card-text>
         <p>
-          <b-icon icon="briefcase-fill" class="primary"></b-icon> Work at:
-          Current or Last Organization
+          <b-icon icon="briefcase-fill" class="primary"></b-icon> Agriculture
+        </p>
+        <p><b-icon icon="search" class="primary"></b-icon> Chicken Seller</p>
+        <p>
+          <b-icon icon="geo-alt-fill" class="primary"></b-icon> Mokolo, Yaounde,
+          Cameroon
+        </p>
+        <p><b-icon icon="link" class="primary"></b-icon> www.business.com</p>
+        <p>
+          <b-icon icon="people-fill" class="primary"></b-icon> 1.1M Community
         </p>
         <p>
-          <b-icon icon="book-fill" class="primary"></b-icon> Studied at: Last
-          Education
+          <b-icon icon="telephone-fill" class="primary"></b-icon>
+          +1(542) 565- 536
         </p>
         <p>
-          <b-icon icon="house-fill" class="primary"></b-icon> Home Town
-          Name:Dummy
+          <b-icon icon="envelope-fill" class="primary"></b-icon>
+          info@business.com
         </p>
         <p>
-          <b-icon icon="geo-alt-fill" class="primary"></b-icon> Current City
-          Name:Dummy
-        </p>
-        <p>
-          <b-icon icon="people-fill" class="primary"></b-icon> Followed by:
-          525
-        </p>
-        <p>
-          <b-icon icon="geo-alt-fill" class="primary"></b-icon>
-          Word1, Word2, Word3
+          <b-icon icon="clock" class="primary"></b-icon>
+          <b-link> Open now</b-link>
+          <br />
+          <b-dropdown size="sm" variant="transperent">
+            <template #button-content>
+              10:00AM - 7:00PM
+            </template>
+            <b-dropdown-item> 10:00AM - 7:00PM</b-dropdown-item>
+          </b-dropdown>
         </p>
       </b-card-text>
       <iframe

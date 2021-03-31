@@ -51,7 +51,7 @@
             </b-col>
           </b-row>
           <hr />
-          <h5>Product Detail</h5>
+          <h5>Product Description</h5>
           <p>
             Lorem, ipsum dolor sit amet consectetur adipisicing elit. Corporis
             quod, reprehenderit neque atque recusandae laborum quia vel,

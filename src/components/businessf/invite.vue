@@ -33,9 +33,10 @@
           <b-button class="btn-primary" size="sm"> Invite</b-button>
         </b-list-group-item>
       </b-card-text>
-      <template #footer>
-        <span class="float-right"> <a class="primary" href="#">See More</a> </span>
-      </template>
+
+      <span class="float-right">
+        <a class="primary" href="#">See More</a>
+      </span>
     </b-card>
   </div>
 </template>
@@ -48,19 +49,19 @@ export default {};
 p {
   text-align: left;
 }
-.search{
+.search {
   position: relative;
   top: -40px;
   left: 270px;
   cursor: pointer;
 }
-.btn-primary{
+.btn-primary {
   background-color: #fff;
   border: solid 1px #e75c18;
   color: #e75c18;
 }
 
-.btn-primary:hover{
+.btn-primary:hover {
   background-color: #e75c18;
   color: #fff;
   border: none;

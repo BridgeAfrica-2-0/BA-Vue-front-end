@@ -12,31 +12,35 @@
           <b-link class="lnk">See All</b-link>
         </b-col>
       </b-row>
-
-      <b-row class="business mt-3">
-        <b-col class="col">
-          <b-avatar variant="primary" text="BV"></b-avatar>
-        </b-col>
-        <b-col class="min ml-5">
-          <p>
-            <strong>Business </strong> <br />
-            <small>
-              <span>Business category - 36k Followers</span>
-            </small>
-          </p>
-        </b-col>
-        <b-col class="buttons">
-          <span class="box ml-5">
-            <b-button size="sm" class="message" variant="primary">
-              <b-icon icon="chat"></b-icon> <span class="ml-3">Message</span>
+      <div class="people">
+        <b-row>
+          <b-col>
+            <b-avatar
+              variant="primary"
+              src="https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg"
+              size="5em"
+              class="avata"
+            ></b-avatar>
+          </b-col>
+          <b-col>
+            <div class="details">
+              <h4>Maxine Moffet</h4>
+              <p>74 Community</p>
+            </div>
+          </b-col>
+          <b-col class="btns">
+            <b-button variant="primary" size="sm" class="mb-2">
+              <b-icon icon="chat" class="ico"> </b-icon>
+              <span> Message</span>
             </b-button>
-
-            <b-button size="sm" class="ml-5 mb-1 mt-2" variant="primary">
-              <b-icon icon="plus"></b-icon> Community
+            <br />
+            <b-button variant="primary" size="sm">
+              <b-icon icon="plus-circle" class="ico"> </b-icon>
+              <span> Community</span>
             </b-button>
-          </span>
-        </b-col>
-      </b-row>
+          </b-col>
+        </b-row>
+      </div>
     </b-card>
   </div>
 </template>
@@ -70,6 +74,35 @@ p {
 
 .card {
   box-shadow: -1px 4px 20px -6px rgba(0, 0, 0, 0.7);
+}
+
+.people {
+  border-top-left-radius: 40px;
+  border-bottom-left-radius: 40px;
+  border-top-right-radius: 45px;
+  border-bottom-right-radius: 45px;
+  background: white;
+  background-color: #fff;
+  background-clip: border-box;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  margin-bottom: 10px;
+}
+
+.btns {
+  position: relative;
+  left: 100px;
+  top: 5px;
+}
+.details {
+  position: relative;
+  left: -180px;
+  top: 20px;
+}
+.details p {
+  position: relative;
+  left: 210px;
+  font-size: 15px;
+  top: -10px;
 }
 @media only screen and (max-width: 768px) {
   .button {

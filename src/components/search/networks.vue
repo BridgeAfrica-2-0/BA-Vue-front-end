@@ -15,14 +15,21 @@
       <span v-for="(network, index) in data" :key="index">
         <b-row class="business mt-3">
           <b-col class="col">
-            <b-avatar variant="primary" text="BV"></b-avatar>
+            <img src="../../assets/img/follow.jpg" height="200" alt="" />
           </b-col>
           <b-col class="min  ml-5">
             <p>
-              <strong>Business </strong> <br />
-              <small>
-                <span>Business category - 36k Followers</span>
-              </small>
+              <strong>Network Name </strong> <br />
+              <br />
+              <small>Public</small>
+
+              <br />
+              <small>36k Members</small>
+              <br />
+
+              <small>36k Members</small>
+              <br />
+              <small>Business Name</small>
             </p>
           </b-col>
           <b-col class="buttons">
@@ -59,6 +66,7 @@ export default {
 <style scoped>
 .business {
   border-bottom: 1px solid #ccc;
+  padding: 10px;
 }
 .button {
   margin-left: 120px;
@@ -84,6 +92,13 @@ p {
 
 .card {
   box-shadow: -1px 4px 20px -6px rgba(0, 0, 0, 0.7);
+}
+img {
+  border-radius: 10px;
+}
+.min {
+  position: relative;
+  left: 150px;
 }
 @media only screen and (max-width: 768px) {
   .button {

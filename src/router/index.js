@@ -19,11 +19,17 @@ import businessVisitor from "@/views/businessVisitor";
 import search from "@/views/search";
 import forgotPassword from "@/views/forgotPassword";
 import navMessage from "@/views/navMessaging";
-import memberNetworkFollower from "@/views/memberNetworkFollower"
+import memberNetworkFollower from "@/views/memberNetworkFollower";
+// import Test from "@/views/test";
 
 Vue.use(VueRouter);
 
 const routes = [
+  // {
+  //   path: "/test",
+  //   name: "Home",
+  //   component: Test,
+  // },
   {
     path: "/",
     name: "Home",

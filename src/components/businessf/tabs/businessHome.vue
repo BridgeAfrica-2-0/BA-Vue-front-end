@@ -3,6 +3,7 @@
     <b-row>
       <b-col md="4">
         <Intro />
+        <Media />
         <Personalize />
         <Invite />
         <HotBusiness />
@@ -20,6 +21,7 @@ import Invite from "../invite";
 import HotBusiness from "../hotBusinesses";
 import Post from "../../post";
 import Personalize from "../personalizeWeb";
+import Media from "../../media";
 export default {
   name: "posts",
   components: {
@@ -28,6 +30,7 @@ export default {
     HotBusiness,
     Post,
     Personalize,
+    Media,
   },
 };
 </script>

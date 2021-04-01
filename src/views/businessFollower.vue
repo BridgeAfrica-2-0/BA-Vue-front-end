@@ -1,9 +1,9 @@
 <template>
   <div>
     <navbar />
-    <b-container fluid="md" class="text-justify mt-3">
-      <Business />
-    </b-container>
+
+    <Business />
+
     <Footer />
   </div>
 </template>

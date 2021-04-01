@@ -1,231 +1,460 @@
 <template>
-  <div>
-    <v-container>
-      <b-navbar toggleable="lg" class="py-2 my-auto montre color">
-        <b-navbar-brand href="#" class="nav-logo">
+  <header class="fixed-top bg-white">
+    <nav
+      class="navbar bg-light navbar-expand-lg shadow-nav p-3 mb-3 rounded fixed-top"
+    >
+      <div class="container">
+        <a class="navbar-brand" href="#">
           <img
-            src="@/assets/img/logo_bridge_africa.png"
-            class="w-50 h-50 m-0"
-            alt="Kitten"
+            src="@/assets/img/logo3.png"
+            alt=""
+            class="d-inline-block align-top mt-1"
+            loading="lazy"
+            width="30"
+            height="30"
           />
-        </b-navbar-brand>
-
-        <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
-
-        <b-collapse id="nav-collapse" is-nav>
-          <b-navbar-nav class="move-search">
-            <b-input-group class="my-auto input-size">
-              <b-form-input
-                placeholder="Search Bridge Africa"
-                class=""
-              ></b-form-input>
-            </b-input-group>
-            <fas-icon class="primary search" :icon="['fas', 'search']" />
-          </b-navbar-nav>
-
-          <!-- Right aligned nav items -->
-          <b-navbar-nav class="ml-5 pl-5 my-auto col nav-move">
-            <div class="home">
-              <b-nav-item href="#" class="ml-3 home-icon"
-                ><fas-icon class="primary" :icon="['fas', 'home']" />
-                <span class="ml-1">Home</span>
-              </b-nav-item>
-            </div>
-            <b-nav-item href="#" class="ml-2">
-              <fas-icon class="primary" :icon="['fas', 'store']" />
-              <span class="ml-1">MarketPlace</span>
-            </b-nav-item>
-            
-              <b-dropdown
-                size="sm"
-                variant="link"
-                class="p-0 ml-2"
-                toggle-class="text-decoration-none"
-                no-caret
-              >
-                <template #button-content>
-                  <fas-icon class="primary" :icon="['fas', 'comment']" />
-                </template>
-                <b-dropdown-item-button>
-                  <b-link class="link" href="/message"> Messages</b-link>
-                </b-dropdown-item-button>
-                <b-dropdown-divider></b-dropdown-divider>
-                <b-dropdown-group id="dropdown-group-1">
-                  <b-dropdown-item-button
-                    >First Grouped item</b-dropdown-item-button
-                  >
-                  <b-dropdown-item-button
-                    >Second Grouped Item</b-dropdown-item-button
-                  >
-                </b-dropdown-group>
-                <b-dropdown-divider></b-dropdown-divider>
-                <b-dropdown-item-button>
-                  See Others Messages
-                </b-dropdown-item-button>
-              </b-dropdown>
-              <b-dropdown
-                size="sm"
-                variant="link"
-                class="p-0 ml-1"
-                toggle-class="text-decoration-none"
-                no-caret
-              >
-                <template #button-content>
-                  <b-icon-bell-fill class="col-bg"></b-icon-bell-fill>
-                </template>
-                <b-dropdown-item-button>
-                  Messages
-                </b-dropdown-item-button>
-                <b-dropdown-divider></b-dropdown-divider>
-                <b-dropdown-group id="dropdown-group-1">
-                  <b-dropdown-item-button
-                    >First Grouped item</b-dropdown-item-button
-                  >
-                  <b-dropdown-item-button
-                    >Second Grouped Item</b-dropdown-item-button
-                  >
-                </b-dropdown-group>
-                <b-dropdown-divider></b-dropdown-divider>
-                <b-dropdown-item-button>
-                  See Others Messages
-                </b-dropdown-item-button>
-              </b-dropdown>
-
-
-            <b-nav-item-dropdown right>
-              <template #button-content class="my-auto">
-                <b-avatar
-                  size="sm"
-                  class="my-auto"
-                  src="https://placekitten.com/300/300"
-                ></b-avatar
-                >&nbsp;
-                <em>Maxine </em>
-              </template>
-              <b-dropdown-item href="#">Profile</b-dropdown-item>
-              <b-dropdown-item href="#">Sign Out</b-dropdown-item>
-            </b-nav-item-dropdown>
-          </b-navbar-nav>
-        </b-collapse>
-      </b-navbar>
-
-      <b-row class="show">
-        <b-col cols="9">
-          <b-navbar-brand href="#">
-            <img
-              src="@/assets/img/logo_bridge_africa.png"
-              class="w-100 h-100 m-0 px-3 py-2"
-              alt="Kitten"
+          <span class="font-weight-bold website-logo-name ml-2"
+            >BRIDGE AFRICA</span
+          >
+        </a>
+        <div class="col-md-4">
+          <form class="form-inline input-group">
+            <input
+              id="search-ba"
+              type="search"
+              data-toggle="popover"
+              class="form-control border-right-0"
+              placeholder="search bridge africa"
+              aria-label="search bridge africa"
+              data-original-title=""
+              title=""
             />
-          </b-navbar-brand>
-        </b-col>
-        <b-col cols="3" class="mx-auto my-auto">
-          <b-icon
-            icon="three-dots-vertical"
-            font-scale="2"
-            v-b-toggle.sidebar-right
-          ></b-icon>
-        </b-col>
-      </b-row>
-      <b-sidebar id="sidebar-right" title="Menu" right shadow>
-        <div class="px-3 py-2">
-          <b-input-group class="my-auto input-size-phone">
-            <template #append>
-              <b-input-group-text class=""
-                ><strong class="color-site">
-                  <b-icon-search></b-icon-search> </strong
-              ></b-input-group-text>
-            </template>
-            <b-form-input
-              placeholder="Search Bridge Africa"
-              class="border-right-0"
-            ></b-form-input>
-          </b-input-group>
-          <fas-icon class="primary" :icon="['fas', 'home']" />
-          <b-nav-item href="#" class="ml-3">
-            Home
-          </b-nav-item>
-          <b-nav-item href="#" class="ml-2"
-            ><b-icon-shop class="col-bg font-weight-bolder"></b-icon-shop>
-            MarketPlace
-          </b-nav-item>
-          <b-dropdown
-            size="sm"
-            variant="link"
-            class="p-0 ml-2"
-            toggle-class="text-decoration-none"
-            no-caret
-          >
-            <template #button-content>
-              <b-icon-chat-dots-fill class="col-bg"></b-icon-chat-dots-fill>
-            </template>
-            <b-dropdown-item-button>
-              Messages
-            </b-dropdown-item-button>
-            <b-dropdown-divider></b-dropdown-divider>
-            <b-dropdown-group id="dropdown-group-1">
-              <b-dropdown-item-button
-                >First Grouped item</b-dropdown-item-button
-              >
-              <b-dropdown-item-button
-                >Second Grouped Item</b-dropdown-item-button
-              >
-            </b-dropdown-group>
-            <b-dropdown-divider></b-dropdown-divider>
-            <b-dropdown-item-button>
-              See Others Messages
-            </b-dropdown-item-button>
-          </b-dropdown>
-          <b-dropdown
-            size="sm"
-            variant="link"
-            class="p-0 ml-1"
-            toggle-class="text-decoration-none"
-            no-caret
-          >
-            <template #button-content>
-              <b-icon-bell-fill class="col-bg"></b-icon-bell-fill>
-            </template>
-            <b-dropdown-item-button>
-              Messages
-            </b-dropdown-item-button>
-            <b-dropdown-divider></b-dropdown-divider>
-            <b-dropdown-group id="dropdown-group-1">
-              <b-dropdown-item-button
-                >First Grouped item</b-dropdown-item-button
-              >
-              <b-dropdown-item-button
-                >Second Grouped Item</b-dropdown-item-button
-              >
-            </b-dropdown-group>
-            <b-dropdown-divider></b-dropdown-divider>
-            <b-dropdown-item-button>
-              See Others Messages
-            </b-dropdown-item-button>
-          </b-dropdown>
-
-          <b-nav-item-dropdown>
-            <template #button-content class="my-auto">
-              <b-avatar
-                size="sm"
-                class="my-auto"
-                src="https://placekitten.com/300/300"
-              ></b-avatar
-              >&nbsp;
-              <em>Maxine </em>
-            </template>
-            <b-dropdown-item href="#">Profile</b-dropdown-item>
-            <b-dropdown-item href="#">Sign Out</b-dropdown-item>
-          </b-nav-item-dropdown>
+            <div class="input-group-append">
+              <span class="input-group-text border-left-0 bg-white"
+                ><a class="search text-ored" href=""
+                  ><fas-icon
+                    class="primary search"
+                    :icon="['fas', 'search']"/></a
+              ></span>
+            </div>
+          </form>
+          <div id="search-popover" class="d-none"></div>
         </div>
-      </b-sidebar>
-    </v-container>
-  </div>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarMenu"
+          aria-controls="navbarMenu"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <fas-icon class="primary search" :icon="['fas', 'bars']" />
+        </button>
+        <div class="collapse navbar-collapse ml-4" id="navbarMenu">
+          <div class="vl"></div>
+          <div class="nav-item">
+            <a class="nav-link text-dark" href="">
+              <span class="text-ored"
+                ><fas-icon class="primary" :icon="['fas', 'home']"
+              /></span>
+              Home
+            </a>
+          </div>
+          <div class="vl"></div>
+          <div class="nav-item">
+            <a class="nav-link text-dark" href="">
+              <span class="text-ored"
+                ><fas-icon class="primary" :icon="['fas', 'store']"
+              /></span>
+              Market
+            </a>
+          </div>
+          <div class="vl"></div>
+          <div class="nav-item">
+            <a
+              id="messages"
+              class="nav-link"
+              data-toggle="popover"
+              role="button"
+              data-original-title=""
+              title=""
+              ><span class="text-ored"
+                ><fas-icon class="primary" :icon="['fas', 'comment']"/></span
+            ></a>
+            <b-popover target="messages" triggers="hover" placement="top">
+              <div class="popover-body">
+                <p class="font-weight-bold">Messages</p>
+                <hr class="h-divider" />
+                <div
+                  class="d-inline-flex flex-row justify-content-between align-items-center suggest-item cursor-pointer"
+                >
+                  <div class="d-inline-flex flex-row align-items-center">
+                    <div>
+                      <img
+                        src="@/assets/img/profile-pic.jpg"
+                        class="rounded-circle"
+                        alt=""
+                        width="30"
+                        height="30"
+                      />
+                    </div>
+                    <div class="d-flex flex-column ml-1 line-size">
+                      <div class="font-weight-bold">David</div>
+                      <div class="small text-muted">Hi</div>
+                    </div>
+                  </div>
+                  <div class="small text-muted">1 min ago</div>
+                </div>
+                <hr class="h-divider" />
+                <div
+                  class="d-inline-flex flex-row justify-content-between align-items-center suggest-item cursor-pointer"
+                >
+                  <div class="d-inline-flex flex-row align-items-center">
+                    <div>
+                      <img
+                        src="@/assets/img/profile-pic.jpg"
+                        class="rounded-circle"
+                        alt=""
+                        width="30"
+                        height="30"
+                      />
+                    </div>
+                    <div class="d-flex flex-column ml-1 line-size">
+                      <div class="font-weight-bold">Alina</div>
+                      <div class="small text-muted">How are you</div>
+                    </div>
+                  </div>
+                  <div class="small text-muted">3 hours ago</div>
+                </div>
+                <hr class="h-divider" />
+                <div
+                  class="d-inline-flex flex-row justify-content-between align-items-center suggest-item cursor-pointer"
+                >
+                  <div class="d-inline-flex flex-row align-items-center">
+                    <div>
+                      <img
+                        src="@/assets/img/profile-pic.jpg"
+                        class="rounded-circle"
+                        alt=""
+                        width="30"
+                        height="30"
+                      />
+                    </div>
+                    <div class="d-flex flex-column ml-1 line-size">
+                      <div class="font-weight-bold">Maxine</div>
+                      <div class="small text-muted">Please call me</div>
+                    </div>
+                  </div>
+                  <div class="small text-muted">Yesterday</div>
+                </div>
+                <hr class="h-divider" />
+                <div
+                  class="d-inline-flex flex-row justify-content-between align-items-center suggest-item cursor-pointer"
+                >
+                  <div class="d-inline-flex flex-row align-items-center">
+                    <div>
+                      <img
+                        src="@/assets/img/profile-pic.jpg"
+                        class="rounded-circle"
+                        alt=""
+                        width="30"
+                        height="30"
+                      />
+                    </div>
+                    <div class="d-flex flex-column ml-1 line-size">
+                      <div class="font-weight-bold">Ali</div>
+                      <div class="small text-muted">Hello</div>
+                    </div>
+                  </div>
+                  <div class="small text-muted">20-Jan</div>
+                </div>
+                <hr class="h-divider" />
+                <div
+                  class="d-inline-flex flex-row justify-content-between align-items-center suggest-item cursor-pointer"
+                >
+                  <div class="d-inline-flex flex-row align-items-center">
+                    <div>
+                      <img
+                        src="@/assets/img/profile-pic.jpg"
+                        class="rounded-circle"
+                        alt=""
+                        width="30"
+                        height="30"
+                      />
+                    </div>
+                    <div class="d-flex flex-column ml-1 line-size">
+                      <div class="font-weight-bold">Paul</div>
+                      <div class="small text-muted">1m</div>
+                    </div>
+                  </div>
+                  <div class="small text-muted">1-Apr-19</div>
+                </div>
+                <hr class="h-divider" />
+                <a
+                  href="https://bridgeafrica.info/nav/inbox.html"
+                  class="text-ored"
+                  ><u>See Inbox</u></a
+                >
+              </div>
+            </b-popover>
+          </div>
+          <div class="nav-item">
+            <a
+              id="notif"
+              class="nav-link"
+              data-toggle="popover"
+              role="button"
+              data-original-title=""
+              title=""
+              ><span class="text-ored"
+                ><b-icon-bell-fill class="col-bg"></b-icon-bell-fill></span
+            ></a>
+            <b-popover target="notif" triggers="hover" placement="top">
+              <div class="popover-body">
+                <p class="font-weight-bold">Notifications</p>
+                <hr class="h-divider" />
+                <div
+                  class="d-inline-flex flex-row align-items-center suggest-item cursor-pointer"
+                >
+                  <div>
+                    <img
+                      src="@/assets/img/profile-pic.jpg"
+                      class="rounded-circle"
+                      alt=""
+                      width="30"
+                      height="30"
+                    />
+                  </div>
+                  <div class="d-flex flex-column ml-3">
+                    <div>
+                      <span class="font-weight-bold">David</span> started
+                      following you
+                    </div>
+                    <div class="small text-muted">1m</div>
+                  </div>
+                </div>
+                <hr class="h-divider" />
+                <div
+                  class="d-inline-flex flex-row align-items-center suggest-item cursor-pointer"
+                >
+                  <div>
+                    <img
+                      src="@/assets/img/profile-pic.jpg"
+                      class="rounded-circle"
+                      alt=""
+                      width="30"
+                      height="30"
+                    />
+                  </div>
+                  <div class="d-flex flex-column ml-3">
+                    <div>
+                      <span class="font-weight-bold">Alina</span> commented on
+                      your post
+                    </div>
+                    <div class="small text-muted">1m</div>
+                  </div>
+                </div>
+                <hr class="h-divider" />
+                <div
+                  class="d-inline-flex flex-row align-items-center suggest-item cursor-pointer"
+                >
+                  <div>
+                    <img
+                      src="@/assets/img/profile-pic.jpg"
+                      class="rounded-circle"
+                      alt=""
+                      width="30"
+                      height="30"
+                    />
+                  </div>
+                  <div class="d-flex flex-column ml-3">
+                    <div>
+                      <span class="font-weight-bold">Maxine</span> liked your
+                      post
+                    </div>
+                    <div class="small text-muted">1m</div>
+                  </div>
+                </div>
+                <hr class="h-divider" />
+                <div
+                  class="d-inline-flex flex-row align-items-center suggest-item cursor-pointer"
+                >
+                  <div>
+                    <img
+                      src="@/assets/img/profile-pic.jpg"
+                      class="rounded-circle"
+                      alt=""
+                      width="30"
+                      height="30"
+                    />
+                  </div>
+                  <div class="d-flex flex-column ml-3">
+                    <div>
+                      <span class="font-weight-bold">Paul</span> approuved your
+                      request to join the network
+                    </div>
+                    <div class="small text-muted">1m</div>
+                  </div>
+                </div>
+                <hr class="h-divider" />
+                <div
+                  class="d-inline-flex flex-row align-items-center suggest-item cursor-pointer"
+                >
+                  <div>
+                    <img
+                      src="@/assets/img/profile-pic.jpg"
+                      class="rounded-circle"
+                      alt=""
+                      width="30"
+                      height="30"
+                    />
+                  </div>
+                  <div class="d-flex flex-column ml-3">
+                    <div>
+                      <span class="font-weight-bold">David</span> started
+                      following you
+                    </div>
+                    <div class="small text-muted">1m</div>
+                  </div>
+                </div>
+                <hr class="h-divider" />
+                <a
+                  href="https://bridgeafrica.info/nav/notifications-view-all.html"
+                  class="text-ored"
+                  ><u>See all Notifications</u></a
+                >
+              </div>
+            </b-popover>
+          </div>
+          <div class="vl"></div>
+          <div class="nav-item">
+            <a class="nav-link text-dark" href="">
+              <span
+                ><img
+                  src="@/assets/img/profile-pic.jpg"
+                  class="rounded-circle"
+                  alt=""
+                  width="30"
+                  height="30"
+              /></span>
+              Maxine
+            </a>
+          </div>
+          <div class="vl"></div>
+          <div class="nav-item">
+            <a
+              id="other-menu"
+              class="nav-link text-dark arrow-down"
+              data-toggle="popover"
+              role="button"
+              data-original-title=""
+              title=""
+            >
+              <!--            <fas-icon class="primary search" :icon="['fas', 'chevron-down']" />-->
+            </a>
+            <b-popover target="other-menu" triggers="hover" placement="top">
+              <div class="popover-body">
+                <p class="font-weight-bold">Your Businesses</p>
+                <div>
+                  <div class="d-inline-flex flex-row align-items-center mb-1">
+                    <div>
+                      <img
+                        src="@/assets/img/logo3.png"
+                        class="rounded-circle"
+                        alt=""
+                        width="25"
+                        height="25"
+                      />
+                    </div>
+                    <div class="ml-3">
+                      Business 1
+                    </div>
+                  </div>
+                </div>
+                <div>
+                  <div class="d-inline-flex flex-row align-items-center mb-1">
+                    <div>
+                      <img
+                        src="@/assets/img/logo3.png"
+                        class="rounded-circle"
+                        alt=""
+                        width="25"
+                        height="25"
+                      />
+                    </div>
+                    <div class="ml-3">
+                      Business 2
+                    </div>
+                  </div>
+                </div>
+                <div>
+                  <div class="d-inline-flex flex-row align-items-center mb-1">
+                    <div>
+                      <img
+                        src="@/assets/img/logo3.png"
+                        class="rounded-circle"
+                        alt=""
+                        width="25"
+                        height="25"
+                      />
+                    </div>
+                    <div class="ml-3">
+                      Business 3
+                    </div>
+                  </div>
+                </div>
+                <a href="" class="text-ored"><u>View all</u></a>
+                <hr class="h-divider" />
+                <a
+                  href="https://bridgeafrica.info/nav/account-settings.html"
+                  class="other-menu suggest-item cursor-pointer text-decoration-none text-dark"
+                >
+                  <span class="mr-2"
+                    ><fas-icon class="violet search" :icon="['fas', 'cogs']"
+                  /></span>
+                  Account Settings
+                </a>
+                <hr class="h-divider" />
+                <div class="other-menu suggest-item cursor-pointer">
+                  <span class="mr-1"
+                    ><fas-icon class="violet search" :icon="['fas', 'question']"
+                  /></span>
+                  Help and Support
+                </div>
+                <hr class="h-divider" />
+                <div class="other-menu suggest-item cursor-pointer">
+                  <span class="mr-2"
+                    ><fas-icon
+                      class="violet search"
+                      :icon="['fas', 'globe-americas']"
+                  /></span>
+                  Language
+                </div>
+                <hr class="h-divider" />
+                <a
+                  href="https://bridgeafrica.info/nav/owner-other-menu.html"
+                  class="other-menu suggest-item cursor-pointer text-decoration-none text-dark"
+                >
+                  <span class="mr-2"
+                    ><fas-icon
+                      class="violet search"
+                      :icon="['fas', 'sign-out-alt']"
+                  /></span>
+                  Logout
+                </a>
+              </div>
+            </b-popover>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </header>
 </template>
 
 <script>
 export default {
-  name: "navbar",
+  name: "navbar"
 };
 </script>
 
@@ -233,68 +462,16 @@ export default {
 .input-size {
   width: 401px;
 }
-
 .input-size-phone {
   width: 401px;
 }
-
 .color-site {
   color: #e75c18;
 }
-
-.msg-bell-icon {
-  border-left: 1px solid rgb(230, 230, 230);
-  border-right: 1px solid rgb(230, 230, 230);
-  height: 20px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-.home {
-  border-left: 1px solid rgb(230, 230, 230);
-  border-right: 1px solid rgb(230, 230, 230);
-  height: 20px;
-  padding-left: 5px;
-  padding-right: 5px;
-  margin-top: 10px;
-}
-
-.home-icon {
-  margin-top: -10px;
-}
-
 .col-bg {
   color: #e75c18;
 }
-
-.color {
-  background-color: #fff;
-  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-}
-
-.nav-move {
-  position: relative;
-  left: 380px;
-}
-
-.move-search {
-  position: relative;
-  left: 300px;
-}
-
-.search {
-  margin-top: 10px;
-  margin-left: -25px;
-  z-index: 3;
-  cursor: pointer;
-}
-.nav-logo {
-  position: relative;
-  left: 140px;
-}
-
 /*Responsive Side*/
-
 @media (max-width: 576px) {
   .lb-grid {
     height: 200px;
@@ -302,7 +479,6 @@ export default {
   .corps {
     margin-top: 2rem !important;
   }
-
   .montre {
     display: none;
   }
@@ -338,7 +514,6 @@ export default {
   .corps {
     margin-top: 6rem !important;
   }
-
   .show {
     display: none;
   }
@@ -347,13 +522,33 @@ export default {
   .lb-grid {
     height: 500px;
   }
-
   .corps {
     margin-top: 6rem !important;
   }
-
   .show {
     display: none;
   }
+}
+.shadow-nav {
+  box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1) !important;
+}
+.website-logo-name {
+  font-size: 24px;
+  color: #2e2e2e;
+  margin-top: 2px;
+}
+.vl {
+  border-left: 1px solid #dee2e6;
+  height: 20px;
+}
+.text-ored {
+  color: #e75c18;
+}
+.text-dark {
+  color: #343a40 !important;
+  font-size: smaller;
+}
+.line-size {
+  width: 150px;
 }
 </style>

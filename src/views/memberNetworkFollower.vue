@@ -1,7 +1,7 @@
 <template>
   <div>
     <Navbar />
-    <b-container class="mt-3">
+    <b-container class="network">
       <b-row>
         <b-col class="col mb-3">
           <div>
@@ -111,6 +111,10 @@ h3 {
 
 .icon-color {
   color: #e75c18;
+}
+
+.network{
+  margin-top: 90px;
 }
 @media only screen and (max-width: 768px) {
   .avatar {

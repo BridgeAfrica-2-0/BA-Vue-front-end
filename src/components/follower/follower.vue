@@ -2,7 +2,7 @@
   <div>
     <div class="images">
       <div>
-        <img src="@/assets/img/banner.jpg" class="img-fluid header-pic" />
+        <img src="@/assets/img/banner.jpg" class="img-fluid header-pic ml-3" />
       </div>
     </div>
     <div class="photo-btns">
@@ -13,7 +13,7 @@
         <div>
           <b-avatar
             src="https://placekitten.com/400/300"
-            class="owner-profile-image-profile float-left"
+            class="owner-profile-image-profile float-left ml-5"
             badge-variant="primary"
             badge-offset="10px"
             size="80"
@@ -29,7 +29,7 @@
         </div>
       </b-col>
       <b-col cols="6">
-        <p class="float-right">
+        <p class="float-right mr-5">
           <b-button size="sm">
             <b-icon icon="check" variant="grey"></b-icon> Following</b-button
           >
@@ -103,7 +103,7 @@
       </b-row>
     </div>
 
-    <b-container fluid="md" class="text-justify mx-auto mt-4 corps">
+    <div fluid="md" class="profile">
       <b-row>
         <b-col cols="12">
           <b-tabs content-class="mt-3" fill pills card>
@@ -117,7 +117,7 @@
           </b-tabs>
         </b-col>
       </b-row>
-    </b-container>
+    </div>
   </div>
 </template>
 
@@ -185,6 +185,10 @@ img {
 .name {
   position: relative;
   top: 11px;
+}
+.profile {
+  width: 90%;
+  margin-left: 100px;
 }
 @media only screen and (max-width: 768px) {
   .mobile {

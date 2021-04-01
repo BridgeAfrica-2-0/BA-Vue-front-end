@@ -2,7 +2,7 @@
   <div>
     <div class="images">
       <div>
-        <img src="@/assets/img/banner.jpg" class="img-fluid header-pic" />
+        <img src="@/assets/img/banner.jpg" class="img-fluid header-pic ml-4" />
       </div>
     </div>
     <div class="photo-btns">
@@ -91,20 +91,18 @@
       </b-row>
     </div>
     <div class="row">
-      <b-container fluid="md" class="text-justify mt-2">
-        <b-row>
-          <b-col cols="12">
-            <b-tabs content-class="mt-3" fill pills card>
-              <b-tab title="Home"><HomePage /></b-tab>
-              <b-tab title="About"><About /></b-tab>
-              <b-tab title="Media"><Media /></b-tab>
-              <b-tab title="Market"><MarketPlace /></b-tab>
-              <b-tab title="Networks"><Networks /></b-tab>
-              <b-tab title="Community"><Community /></b-tab>
-            </b-tabs>
-          </b-col>
-        </b-row>
-      </b-container>
+      <b-row>
+        <b-col cols="12">
+          <b-tabs content-class="mt-3" fill pills card>
+            <b-tab title="Home"><HomePage /></b-tab>
+            <b-tab title="About"><About /></b-tab>
+            <b-tab title="Media"><Media /></b-tab>
+            <b-tab title="Market"><MarketPlace /></b-tab>
+            <b-tab title="Networks"><Networks /></b-tab>
+            <b-tab title="Community"><Community /></b-tab>
+          </b-tabs>
+        </b-col>
+      </b-row>
     </div>
   </div>
 </template>
@@ -167,6 +165,10 @@ img {
 }
 .txt {
   color: #fff;
+}
+.row {
+  width: 90%;
+  margin-left: 100px;
 }
 .name {
   position: relative;

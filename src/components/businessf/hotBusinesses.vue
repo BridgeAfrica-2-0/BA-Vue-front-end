@@ -9,33 +9,53 @@
         <fas-icon :icon="['fas', 'angle-right']" />
       </b-col>
     </b-row>
-    <b-card
-      img-src="https://business.bridgeafrica.info/assets/img/portfolio/13.png"
-      img-alt="Image"
-      img-top
-      tag="article"
-      class="text-center mt-2 p-1 item"
-    >
-      <b-card-text>
-        <p>
-          <b>Sumi Foo</b> <br />
-          <small>
-            Business Category <br />
-            1.1M Followers <br />
-            City Name Here <br />
-            Keyword 1 Keyword 2 Keyword 3
-          </small>
-        </p>
-      </b-card-text>
-      <b-row class="mr-5">
-        <b-col>
-          <b-button class="yellow">Contact</b-button>
+
+    <div class="people-style border shadow">
+      <b-row>
+        <b-col cols="6">
+          <div style="height: 100%;">
+            <img
+              src="https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg"
+              width="100%"
+              height="90%"
+              class="r-image"
+            />
+          </div>
         </b-col>
         <b-col>
-          <b-button class="follow mr-4">Follow</b-button>
+          <p class="text">
+            <strong> Super Car ltd </strong> <br />
+            <strong> Category : </strong> Car marketing <br />
+            <strong> Community : </strong> 20k <br />
+            <strong> Location :</strong> cameroon <br />
+            <strong> Keyword :</strong> car,swag <br />
+
+            <strong>About:</strong> super best car seller in the world
+            adipisicing elit. <b-link>Read More</b-link>
+          </p>
         </b-col>
       </b-row>
-    </b-card>
+
+      <b-row>
+        <b-col cols="4">
+          <b-button block size="sm" class="b-background" variant="primary">
+            <b-icon class="ico" icon="plus-circle"> </b-icon> Community
+          </b-button>
+        </b-col>
+
+        <b-col cols="4">
+          <b-button block size="sm" class="b-background" variant="primary">
+            <b-icon class="ico" icon="chat"> </b-icon> Message
+          </b-button>
+        </b-col>
+
+        <b-col cols="4">
+          <b-button block size="sm" class="b-background" variant="primary">
+            <b-icon icon="direction" class="ico"> </b-icon> Direction
+          </b-button>
+        </b-col>
+      </b-row>
+    </div>
   </div>
 </template>
 
@@ -62,5 +82,52 @@ p {
   background-color: #fff;
   border: solid 1px #ccc;
   color: black;
+}
+
+.card {
+  color: orange;
+}
+.text {
+  color: #000;
+  font-size: 12px;
+  text-align: left;
+  margin-left: -15px;
+  margin-right: -15px;
+}
+.stock {
+  color: green;
+}
+.b1 {
+  width: 100px;
+  margin-left: -20px;
+}
+.b2 {
+  width: 120px;
+  margin-left: -15px;
+}
+.btn {
+  font-size: 10px;
+  display: flex;
+  padding-right: 70px;
+}
+.ico {
+  margin-right: 5px;
+}
+.img {
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+.r-image {
+  border-radius: 8px;
+}
+.people-style {
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  padding: 10px;
+  padding-right: 12px;
 }
 </style>

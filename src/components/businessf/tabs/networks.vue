@@ -3,22 +3,29 @@
     <b-card class="card" v-if="!networkShow">
       <span v-for="(network, index) in data" :key="index">
         <b-row class="business mt-3">
-          <b-col>
-            <b-avatar variant="primary" text="BV"></b-avatar>
+          <b-col class="col">
+            <img src="../../../assets/img/follow.jpg" height="200" alt="" />
           </b-col>
-          <b-col class="min ">
+          <b-col class="min  ml-5">
             <p>
-              <strong>Business </strong> <br />
-              <small>
-                <span>Business category - 36k Followers</span>
-              </small>
+              <strong>Network Name </strong> <br />
+              <br />
+              <small>Public</small>
+
+              <br />
+              <small>36k Members</small>
+              <br />
+
+              <small>36k Members</small>
+              <br />
+              <small>Business Name</small>
             </p>
           </b-col>
           <b-col class="buttons">
             <span v-if="network.type == 'minus'" class="box ml-5">
-              <b-button class="community ml-5" size="sm" variant="primary">
-                <b-icon icon="dash-circle" class="pr-1"></b-icon>
-                community
+              <b-button size="sm" variant="primary" class="community">
+                <b-icon icon="dash-circle"></b-icon>
+                <span class="ml-1">Community</span>
               </b-button>
 
               <b-button size="sm" class="ml-5 mb-1 mt-2" variant="primary">
@@ -31,8 +38,8 @@
                 size="sm"
                 variant="primary"
               >
-                <b-icon icon="plus-circle" class="pr-1"></b-icon>
-                Community
+                <b-icon icon="plus-circle"></b-icon>
+                <span class="ml-1">Community</span>
               </b-button>
             </span>
           </b-col>
@@ -165,6 +172,7 @@ export default {
 
 .business {
   border-bottom: 1px solid #ccc;
+  padding: 10px;
 }
 .button {
   margin-left: 120px;
@@ -176,7 +184,19 @@ export default {
 p {
   margin-left: -210px;
 }
-
+.min {
+  position: relative;
+  left: 100px;
+}
+img {
+  border-radius: 10px;
+}
+.community {
+  border: none;
+  display: flex;
+  width: 110px;
+  margin-left: 49px;
+}
 .drop {
   left: 1px;
 }

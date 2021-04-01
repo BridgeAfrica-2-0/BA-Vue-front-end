@@ -1,113 +1,125 @@
 <template>
   <div>
-    <b-row class="mb-1 body">
-      <b-col class="my-auto">
-        <div class="d-inline-block">
-          <b-row class="d-inline-block">
-            <b-col cols="12">
-              <b-row>
-                <b-col>
-                  <b-avatar variant="primary" text="BV" size="80"></b-avatar>
-                  <span><b-link class="mt-2 name">J.Circlehead</b-link></span>
-                </b-col>
-              </b-row>
-              <b-row class="icons">
-                <b-col cols="12">
-                  <p class="detail">
-                    Cameroon,
-                    <span class="desktop"
-                      ><b-icon icon="house" class="primary"></b-icon> 2,
-                      <b-icon icon="globe" class="primary"></b-icon> 3,
-                      <b-icon icon="people" class="primary"></b-icon> 3,
-                    </span>
-                  </p>
-                </b-col>
-              </b-row>
-            </b-col>
-          </b-row>
-        </div>
-      </b-col>
-      <b-col cols="4">
-        <b-row>
-          <b-col>
-            <b-dropdown
-              id="dropdown-1"
-              text="Contact"
-              class="m-md-2 drop"
-              variant="primary"
-              size="sm"
-            >
-              <b-dropdown-item>
-                <b-icon icon="chat-fill" variant="primary"></b-icon>
-                Message</b-dropdown-item
-              >
-              <b-dropdown-item>
-                <b-icon icon="geo-alt" variant="primary"></b-icon> Get
-                Direction</b-dropdown-item
-              >
-            </b-dropdown>
-          </b-col>
-          <b-col>
-            <b-button class=" community  mt-2" size="sm">
-              <b-icon icon="plus"></b-icon>
-              Community</b-button
-            >
-          </b-col>
-        </b-row>
-      </b-col>
-    </b-row>
+    <div class="people">
+      <b-row>
+        <b-col>
+          <b-avatar
+            variant="primary"
+            src="https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg"
+            size="5em"
+            class="avata"
+          ></b-avatar>
+        </b-col>
+        <b-col>
+          <div class="details">
+            <h4>Maxine Moffet</h4>
+            <p>74 Community</p>
+          </div>
+        </b-col>
+        <b-col class="btns">
+          <b-button variant="primary" size="sm" class="mb-2">
+            <b-icon icon="chat" class="ico"> </b-icon>
+            <span> Message</span>
+          </b-button>
+          <br />
+          <b-button variant="primary" size="sm">
+            <b-icon icon="plus-circle" class="ico"> </b-icon>
+            <span> Community</span>
+          </b-button>
+        </b-col>
+      </b-row>
+    </div>
   </div>
 </template>
 
 <script>
+/* eslint-disable */
 export default {};
 </script>
 
 <style scoped>
-.detail {
-  position: relative;
-  left: 92px;
-  top: -30px;
+.business {
+  border-bottom: 1px solid #ccc;
 }
-.name {
-  position: relative;
-  top: -10px;
-  left: 10px;
+.buttons {
+  margin-left: 120px;
 }
-.main-btn {
-  display: flex;
+.lnk {
+  margin-left: 260px;
+}
+p {
+  margin-left: -210px;
 }
 
+.drop {
+  left: 1px;
+}
 .community {
-  background-color: rgb(240, 240, 240);
-  color: #000;
   border: none;
   display: flex;
 }
-.drop {
-  left: 50px;
+
+.card {
+  box-shadow: -1px 4px 20px -6px rgba(0, 0, 0, 0.7);
+}
+
+.people {
+  border-top-left-radius: 40px;
+  border-bottom-left-radius: 40px;
+  border-top-right-radius: 45px;
+  border-bottom-right-radius: 45px;
+  background: white;
+  background-color: #fff;
+  background-clip: border-box;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  margin-bottom: 10px;
+}
+
+.btns {
+  position: relative;
+  left: 100px;
+  top: 5px;
+}
+.details {
+  position: relative;
+  left: -180px;
+  top: 20px;
+}
+.details p {
+  position: relative;
+  left: 150px;
+  font-size: 15px;
+  top: -10px;
+}
+h4 {
+  position: relative;
+  left: -60px;
 }
 @media only screen and (max-width: 768px) {
-  .name {
-    position: relative;
-    left: 90px;
-    top: -70px;
+  .button {
+    margin-left: 0px;
   }
+  .lnk {
+    margin-left: 50px;
+  }
+  p {
+    margin-left: -50px;
+    font-size: 15px;
+  }
+  .drop {
+    left: 10px;
+  }
+  .community {
+    position: relative;
+    top: 8px;
+  }
+
   .btns {
-    position: relative;
-    top: 100px;
-    left: -140px;
+    margin-bottom: 20px;
+    left: 45px;
   }
-  .main-btn {
-    position: relative;
-    left: 110px;
-    top: -30px;
-  }
-  .icons {
-    margin-top: -40px;
-  }
-  .body {
-    margin-left: -40px;
+  .min {
+    margin-left: -50px;
   }
 }
 </style>

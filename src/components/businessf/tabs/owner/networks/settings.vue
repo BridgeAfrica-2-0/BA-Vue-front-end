@@ -1,5 +1,5 @@
 <template>
-  <b-container>
+  <b-container style="text-align:left">
     
 
 
@@ -22,6 +22,8 @@
           </b-col>
         </b-row>
       </b-container>
+
+
       <br />
 
 

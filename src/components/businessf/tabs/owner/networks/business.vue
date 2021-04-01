@@ -10,7 +10,7 @@
 
 
 
-    <div class="people-style">
+    <div class="people-style border shadow">
       <b-row>
         <b-col cols="6">
           <div style="height: 100%;">
@@ -66,7 +66,7 @@
 
 
 
-    <div class="people-style">
+    <div class="people-style border shadow">
       <b-row>
         <b-col cols="6">
           <div style="height: 100%;">
@@ -115,7 +115,7 @@
 
 
 
-    <div class="people-style">
+    <div class="people-style border shadow">
       <b-row>
         <b-col cols="6">
           <div style="height: 100%;">

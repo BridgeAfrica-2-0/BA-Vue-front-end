@@ -1,9 +1,12 @@
 <template>
-  <div class="container-fluid">
+  <div class=" ">
+  
     <navbar />
-    <b-container fluid="xl" class="text-justify">
+   
+
+    <div  class="text-justify " style="padding-left:60px; padding-right:60px;  margin-top: 100px;">
       <b-row>
-        <b-tabs content-class="mt-3">
+        <b-tabs pills  content-class="mt-3" class="business-owner-tab" >
           <b-tab active>
             <template slot="title">
               <p class="t-color">
@@ -19,7 +22,9 @@
                 Inbox
               </p>
             </template>
-            <p>I'm the second tab</p></b-tab
+            
+            <Inbox />
+            </b-tab
           >
 
           <b-tab>
@@ -58,7 +63,7 @@
           </b-tab>
         </b-tabs>
       </b-row>
-    </b-container>
+    </div>
     <Footer />
   </div>
 </template>
@@ -71,6 +76,8 @@ import Insight from "../components/businessf/insight";
 import Notification from "../components/businessf/notification";
 import Settings from "../components/businessf/settings";
 
+import Inbox from "../components/businessf/inbox";
+
 import Footer from "../components/footer";
 export default {
   name: "Home",
@@ -80,6 +87,7 @@ export default {
     Pending,
     Settings,
     Insight,
+    Inbox,
     Notification,
     Footer
   },
@@ -130,3 +138,33 @@ export default {
   }
 }
 </style>
+
+<style>  
+  
+.business-owner-tab .nav-link {
+
+    display: block;
+    padding: 0.5rem 1rem;
+    padding-top: 1px;
+   
+    padding-bottom: 1px;
+    padding: 1px;
+        padding-right: 1px;
+        padding-left: 1px;
+    text-align: center;
+    padding-left: 10px;
+    padding-right: 25px;
+    border: 1px solid gray;
+  
+
+}
+
+
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+    
+    background-color: #e6e6e6;
+}
+
+
+
+    </style>

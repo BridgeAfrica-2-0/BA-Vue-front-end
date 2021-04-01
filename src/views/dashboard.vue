@@ -9,7 +9,7 @@
       <CarousselDashboard class="mm-top" /> <br />
 
       <b-row>
-        <b-col cols="6">
+        <b-col  md="6" sm="12"  class="mt-sm-2">
           <b-input-group class="my-auto input-size ">
             <template #append>
               <b-input-group-text class=" b-groupe  shadow "
@@ -35,7 +35,7 @@
           </b-input-group>
         </b-col>
 
-        <b-col cols="3">
+        <b-col md="3" sm="12"   class="mt-sm-2" >
           <b-input-group class="my-auto input-size">
             <template #append>
               <b-input-group-text class=" b-groupe shadow "
@@ -54,7 +54,7 @@
           </b-input-group>
         </b-col>
 
-        <b-col cols="3">
+        <b-col md="3" sm="12"   class="mt-sm-2" >
           <div v-if="selected != 'posts'">
             <b-input-group class="my-auto input-size">
               <template #append>
@@ -96,7 +96,7 @@
       <br />
 
       <b-row>
-        <b-col cols="3"> </b-col>
+        <b-col md="3" sm="12"    class="mt-sm-2" > </b-col>
 
         <b-col cols="3">
           <div v-if="selected == 'people'">
@@ -119,7 +119,7 @@
           </div>
         </b-col>
 
-        <b-col cols="3">
+        <b-col md="3" sm="12"   class="mt-sm-2" >
           <div v-if="selected == 'people'">
             <b-input-group class="my-auto input-size">
               <template #append>
@@ -159,7 +159,7 @@
           </div>
         </b-col>
 
-        <b-col cols="3">
+        <b-col md="3" sm="12"   class="mt-sm-2" >
           <div v-if="selected == 'business' || selected == 'network'">
             <div class="a-center">
               <b-form-checkbox id="checkbox-1" name="checkbox-1">
@@ -211,7 +211,7 @@
       <div v-if="selected == 'all'">
         <b-card class="shadow">
           <b-row>
-            <b-col>
+            <b-col md="6" sm="12"  class="mt-sm-2">
               <div style="p-div">
                 <span>
                   <h4>  
@@ -229,7 +229,9 @@
               </div>
               <div class="div-h"><Business /></div>
             </b-col>
-            <b-col>
+
+
+            <b-col md="6" sm="12"  class="mt-sm-20"  >
               <div class="p-div">
                 <span>
                   <h4>    <img class="img-fluid picture" src="@/assets/icons/people.png" style="width: 60px;" /> 
@@ -306,9 +308,9 @@
 
 
    
-   <b-row>    <b-col>   <h4 class="font-weight-bolder text-design">
+   <b-row>    <b-col  md="6" sm="12">   <h4 class="font-weight-bolder text-design">
                 Use Bridge Africa as Yourself or as one of your businesses
-              </h4>   </b-col>    <b-col>   <b-form-select
+              </h4>   </b-col>    <b-col sm="12" md="6">    <b-form-select
                 v-model="selectedb"
                 :options="boptions"
               ></b-form-select>
@@ -323,7 +325,7 @@
 
       <div v-if="selectedb == 'owner'">
         <b-row>
-          <b-col> <Profile /> </b-col> <b-col> <EmptyBusiness /> </b-col>
+          <b-col md="6" sm="12"  class="mt-sm-2"> <Profile /> </b-col> <b-col md="6" sm="12"   class="mt-sm-2"> <EmptyBusiness /> </b-col>
         </b-row>
         <br />
       </div>
@@ -384,15 +386,15 @@
 
       <div>
         <b-row>
-          <b-col cols="8"> <CommunityActivity /> </b-col>
-          <b-col cols="4"> <Tutorial /> </b-col>
+          <b-col sm="12" md="8"  > <CommunityActivity /> </b-col>
+          <b-col sm="12" md="4"  cols="4"> <Tutorial /> </b-col>
         </b-row>
       </div>
       <br />
 
       <div>
         <b-row>
-          <b-col> <Hotbusiness /> </b-col> <b-col> <Popularnetwork /> </b-col>
+          <b-col sm="12" md="6"> <Hotbusiness /> </b-col> <b-col sm="12" md="6" > <Popularnetwork /> </b-col>
         </b-row>
       </div>
     </div>

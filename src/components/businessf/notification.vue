@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="p-notifaction">
     <b-container>
       <b-row>
         <b-col>
@@ -9,6 +9,7 @@
               v-model="status"
               name="checkbox-1"
               value="accepted"
+              class="m-left-top"
               unchecked-value="not_accepted"
             >
               Select All
@@ -23,9 +24,10 @@
           </div>
         </b-col>
       </b-row>
+    </b-container>
       <br />
 
-      <b-container>
+      <div>
         <b-container class="bb-bottom">
           <b-list class="d-flex align-items-center m-list">
             <b-form-checkbox
@@ -121,8 +123,8 @@
             1500s,
           </p>
         </b-container>
-      </b-container>
-    </b-container>
+      </div>
+   
   </div>
 </template>
 
@@ -157,5 +159,16 @@ export default {
 
 .m-left {
   margin-left: -20px;
+}
+
+
+
+
+.m-left-top{
+  margin-left: -15px;
+}
+.p-notifaction{
+
+  padding: 30px;
 }
 </style>

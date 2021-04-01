@@ -15,7 +15,7 @@
 
             <div style="padding:10px;">
               <b-row>
-                <b-col cols="" class="text-center px-3">
+                <b-col cols="" class="text-center px-3 a-box">
                   <Parent />
                 </b-col>
 
@@ -49,7 +49,7 @@
               </p>
             </template>
 
-            <b-container>
+            <div>
               <b-row>
                 <b-col cols="" class="text-center px-3">
                   <Parent />
@@ -59,7 +59,7 @@
                   <Notification />
                 </b-col>
               </b-row>
-            </b-container>
+            </div>
           </b-tab>
 
           <b-tab title=" ">
@@ -70,9 +70,9 @@
               </p>
             </template>
 
-            <b-container>
+            <div>
               <b-row>
-                <b-col cols="" class="text-center px-3">
+                <b-col cols="" class="text-center px-3 a-box" >
                   <Parent />
                 </b-col>
 
@@ -80,7 +80,7 @@
                   <MemberShip />
                 </b-col>
               </b-row>
-            </b-container>
+            </div>
           </b-tab>
 
           <b-tab>
@@ -95,9 +95,9 @@
               </p>
             </template>
 
-            <b-container>
+            <div>
               <b-row>
-                <b-col cols="" class="text-center px-3">
+                <b-col cols="" class="text-center px-3 a-box">
                   <Parent />
                 </b-col>
 
@@ -105,7 +105,7 @@
                   <PendingPost />
                 </b-col>
               </b-row>
-            </b-container>
+            </div>
           </b-tab>
 
           <b-tab>
@@ -120,9 +120,9 @@
               </p>
             </template>
 
-            <b-container>
+            <div>
               <b-row>
-                <b-col cols="" class="text-center px-3">
+                <b-col cols="" class="text-center px-3 a-box">
                   <Parent />
                 </b-col>
 
@@ -130,7 +130,7 @@
                   <KeywordAlert />
                 </b-col>
               </b-row>
-            </b-container>
+            </div>
           </b-tab>
 
           <b-tab>
@@ -141,9 +141,9 @@
               </p>
             </template>
 
-            <b-container>
+            <div>
               <b-row>
-                <b-col cols="" class="text-center px-3">
+                <b-col cols="" class="text-center px-3 a-box">
                   <Parent />
                 </b-col>
 
@@ -151,7 +151,7 @@
                   <Roles />
                 </b-col>
               </b-row>
-            </b-container>
+            </div>
           </b-tab>
 
           <b-tab>
@@ -162,9 +162,9 @@
               </p>
             </template>
 
-            <b-container>
+            <div>
               <b-row>
-                <b-col cols="" class="text-center px-3">
+                <b-col cols="" class="text-center px-3 a-box">
                   <Parent />
                 </b-col>
 
@@ -172,7 +172,7 @@
                   <Settings />
                 </b-col>
               </b-row>
-            </b-container>
+            </div>
           </b-tab>
         </b-tabs>
       </b-row>
@@ -288,6 +288,13 @@ export default {
 
 
 
+
+
+.a-box{
+
+margin-left:-15px;
+
+}
 
 
 </style>

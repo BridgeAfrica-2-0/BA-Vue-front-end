@@ -11,7 +11,7 @@
 
 
 
-            <div class="people-style">
+            <div class="people-style border shadow">
               <b-row class="mb-1">
                 <b-col cols="3" class="my-auto">
                   <b-avatar class="p-avater" variant="primary" src="https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg" size="5em"></b-avatar>
@@ -65,7 +65,7 @@
 
 
 
-        <div class="people-style">
+        <div class="people-style border shadow">
               <b-row class="mb-1">
                 <b-col cols="3" class="my-auto">
                   <b-avatar class="p-avater" variant="primary" src="https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg" size="5em"></b-avatar>
@@ -110,7 +110,7 @@
 
 
 
-        <div class="people-style">
+        <div class="people-style border shadow">
               <b-row class="mb-1">
                 <b-col cols="3" class="my-auto">
                   <b-avatar class="p-avater" variant="primary" src="https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg" size="5em"></b-avatar>
@@ -155,7 +155,7 @@
 
 
 
-        <div class="people-style">
+        <div class="people-style border shadow">
               <b-row class="mb-1">
                 <b-col cols="3" class="my-auto">
                   <b-avatar class="p-avater" variant="primary" src="https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg" size="5em"></b-avatar>

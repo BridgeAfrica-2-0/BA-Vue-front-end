@@ -1,13 +1,14 @@
 <template>
-  <b-container class="container-fluid">
-    <b-container class="">
-      <b-container class="">
+  <div class=" ">
+    <div class="">
+      <div class="">
         <h5 class="a-text"><b-icon-gear></b-icon-gear> Business Settings</h5>
-      </b-container>
+      </div>
+      <hr class="solid">
 
-      <b-container class="bv-example-row">
+      <div class="bv-example-row">
         <div>
-          <b-tabs pills card vertical>
+          <b-tabs pills  vertical>
             <b-tab active>
               <template slot="title" class="t-color">
                 <h6 class="t-color">General</h6>
@@ -54,13 +55,13 @@
             ></b-tab>
           </b-tabs>
         </div>
-      </b-container>
+      </div>
 
       <br />
 
       <br />
-    </b-container>
-  </b-container>
+    </div>
+  </div>
 </template>
 
 <script>

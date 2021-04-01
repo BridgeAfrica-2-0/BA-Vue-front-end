@@ -36,7 +36,7 @@
             </template>
 
          
-         <div class="s-comcard">    <b-row>  <b-col>   <b-container >  <People />    </b-container >  </b-col> <b-col>   <b-container > <People />    </b-container >  </b-col>    </b-row>   </div>
+         <div class="s-comcard">    <b-row>  <b-col md="6" sm="12">   <div >  <People />    </div >  </b-col> <b-col md="6" sm="12">   <div > <People />    </div >  </b-col>    </b-row>   </div>
  
          
          
@@ -48,7 +48,7 @@
              Following  <span class="spa-color">  7K   </span>
             </template>
 
-      <div class="s-comcard">    <b-row>  <b-col>   <b-container > <People />   </b-container >  </b-col> <b-col>   <b-container >  <People />    </b-container >  </b-col>    </b-row>   </div>
+      <div class="s-comcard">    <b-row>  <b-col md="6" sm="12">   <div >  <People />    </div >  </b-col> <b-col md="6" sm="12">   <div > <People />    </div >  </b-col>    </b-row>   </div>
 
         
         
@@ -76,7 +76,11 @@
              Followers  <span class="spa-color">  7K   </span>
             </template>
         
-         <div class="s-comcard">    <b-row>  <b-col>   <b-container >  <Business />    </b-container >  </b-col> <b-col>   <b-container > <Business />    </b-container >  </b-col>    </b-row>   </div>
+         
+
+
+         <div class="s-comcard">    <b-row>  <b-col md="6" sm="12">   <div >  <Business />    </div >  </b-col> <b-col md="6" sm="12">   <div > <Business />    </div >  </b-col>    </b-row>   </div>
+
  
          
         </b-tab>
@@ -88,7 +92,7 @@
              Following  <span class="spa-color">  7K   </span>
             </template>
         
-         <div class="s-comcard">    <b-row>  <b-col>  <b-container>  <Business />   </b-container>   </b-col> <b-col>  <b-container>  <Business />    </b-container >   </b-col>    </b-row>   </div>
+        <div class="s-comcard">    <b-row>  <b-col md="6" sm="12">   <div >  <Business />    </div >  </b-col> <b-col md="6" sm="12">   <div > <Business />    </div >  </b-col>    </b-row>   </div>
  
         </b-tab>
       </b-tabs>

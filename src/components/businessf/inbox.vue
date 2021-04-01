@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Navbar />
+  
     <div>
       <div class="chat-box">
         <b-row class="row">
@@ -399,11 +399,11 @@
 </template>
 
 <script>
-import Navbar from "@/components/navbar";
+
 
 export default {
   components: {
-    Navbar,
+ 
 
   },
   data() {

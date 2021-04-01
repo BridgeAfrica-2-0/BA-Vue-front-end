@@ -1,7 +1,7 @@
 <template>
   <b-container>
     <div class="b-bottomn">
-      <b-button variant="success" class="a-button-l">Save Changes</b-button>
+      <b-button variant="primary" class="a-button-l">Save Changes</b-button>
       <br />
     </div>
 
@@ -125,7 +125,7 @@ export default {
 }
 
 .b-bottomn {
-  margin-top: -20px;
+ 
   margin-bottom: 30px;
   padding-bottom: 10px;
 }

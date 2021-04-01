@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="people-style">
+    <div class="people-style border shadow">
       <b-row>
         <b-col cols="3">
           <div style="height: 100%;">
@@ -49,7 +49,7 @@
 
 
 
- <div class="people-style">
+ <div class="people-style border shadow">
       <b-row>
         <b-col cols="3">
           <div style="height: 100%;">
@@ -99,7 +99,7 @@
 
 
 
-     <div class="people-style">
+     <div class="people-style border shadow">
       <b-row>
         <b-col cols="3">
           <div style="height: 100%;">
@@ -149,7 +149,7 @@
 
 
 
-     <div class="people-style">
+     <div class="people-style border shadow">
       <b-row>
         <b-col cols="3">
           <div style="height: 100%;">
@@ -267,8 +267,7 @@ export default {
   background-clip: border-box;
   border: 1px solid rgba(0, 0, 0, 0.125);
   margin-bottom: 10px;
-  margin-right: -30px;
-  margin-left: -30px;
+ 
 
   padding: 7px;
 }

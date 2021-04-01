@@ -5,7 +5,7 @@
 
 
     
-    <div class="people-style">
+    <div class="people-style border shadow">
       <b-row class="">
         <b-col cols="4" class="my-auto">
           <b-avatar
@@ -65,7 +65,7 @@
 
 
     
-    <div class="people-style">
+    <div class="people-style border shadow">
       <b-row class="">
         <b-col cols="4" class="my-auto">
           <b-avatar
@@ -128,7 +128,7 @@
 
 
     
-    <div class="people-style">
+    <div class="people-style border shadow">
       <b-row class="">
         <b-col cols="4" class="my-auto">
           <b-avatar
@@ -188,7 +188,7 @@
 
 
     
-    <div class="people-style">
+    <div class="people-style border shadow">
       <b-row class="">
         <b-col cols="4" class="my-auto">
           <b-avatar

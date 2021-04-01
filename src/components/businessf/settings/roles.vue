@@ -35,7 +35,7 @@
         </b-col>
 
         <b-col>
-          <b-button variant="success" class="">Assign</b-button>
+          <b-button variant="primary" class="">Assign</b-button>
         </b-col>
       </b-row>
 

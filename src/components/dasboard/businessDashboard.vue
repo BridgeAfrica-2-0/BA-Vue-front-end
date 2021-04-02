@@ -4,8 +4,8 @@
      
       <span>    
       
-          <h3 class="mb-3">
-                  <img class="img-fluid picture" src="@/assets/icons/bus.png" style="width: 60px;" /> 
+          <h4 class="mb-3">
+                  <img class="img-fluid picture2 logo-img" src="@/assets/icons/bus.png"  /> 
 
                 Business
                 <h6 class="float-right text-success font-weight-bolder">
@@ -14,7 +14,7 @@
                     Plan</b-button
                   >
                 </h6>
-              </h3>
+              </h4>
              
 
 
@@ -32,6 +32,7 @@
                       <span class="text-success">Basic</span></span
                     >
                   </p>
+
                   <p class="mb-1 mb-3">Categorie Name Here</p>
                   <p class="mb-1">
                     <b-icon-person-fill
@@ -88,9 +89,50 @@ export default {
 </script>
 
 <style scoped>
+
+
+
+
+
+.logo-img{
+
+  width: 60px;
+}
+
+@media only screen and (max-width: 768px) {
+  
+.btn{
+  font-size: 10px;
+}
+
+
+
+.text-lost{
+    flex-basis: 70%;
+    padding-left: 30px;
+    font-size: 13px;
+}
+
+
+h4{
+  font-size: 15px;
+}
+
+.logo-img{
+  width: 30px;
+}
+.see-all-link{
+  font-size: 10px;
+}
+
+}
+
+
+
+
 .picture {
   border-radius: 10px;
-  width: 190px;
+  width: 48%;
   flex-basis: 40%;
 }
 

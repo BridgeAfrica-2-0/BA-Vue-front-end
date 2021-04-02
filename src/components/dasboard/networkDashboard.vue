@@ -4,28 +4,30 @@
     <b-card class="border shadow " >    
     
 
-<span> <h4>   <img class="img-fluid picture" src="@/assets/icons/network.png" style="width: 60px;" />  NETWORKS  <h6 style="float:right">  666 result found    </h6>  </h4>   </span>
+<span> <h4>   <img class="img-fluid picture logo-img" src="@/assets/icons/network.png"  />  NETWORKS  <h6 style="float:right" class="see-all-link">  666 result found    </h6>  </h4>   </span>
 
 
 
 
 <div class="s-card">
-  <b-row>    <b-col>    
+  <b-row>    <b-col md="6" cols="12"  sm="12" class="mt-sm-2">    
 
- <div class="people-style  border shadow">
+ 
+                  
+    <div class="people-style shadow">
       <b-row>
-        <b-col cols="3">
-          
+        <b-col md="3" cols="5" sm="5">
+          <div style="height: 100%;">
             <img
-              src="http://www.seafreightagenciesbarbados.com/files/2014/12/shiping.jpg"
+              src="https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg"
               width="100%"
               height="90%"
               class="r-image"
             />
-        
+          </div>
         </b-col>
-        <b-col cols="6">
-          <p class="text">
+        <b-col md="6" cols="7" sm="7">
+         <p class="text">
             <strong> Shipping Network </strong> <br />  <br />
             Public <br />
              20k Members <br />
@@ -34,15 +36,30 @@
           </p>
         </b-col>
 
-        <b-col cols="3">
+        <b-col md="3" cols="12" sm="12">
           <div class="s-button">
+     <b-row>  <b-col md="12" cols="4" sm="4" class="mt-md-2">    
+
             <b-button block size="sm" class="b-background" variant="primary">
               <b-icon class="ico" icon="plus-circle"> </b-icon> Community
             </b-button>
 
+            </b-col>  
+
+        <b-col md="12" sm="4" cols="4" class="mt-md-2">  
+
             <b-button block size="sm" class="b-background" variant="primary">
               <b-icon class="ico" icon="chat"> </b-icon> Message
             </b-button>
+
+            </b-col>  
+
+            <b-col md="12" sm="4" cols="4" class="mt-md-2">  
+
+            
+
+            </b-col>  
+   </b-row>
 
           </div>
         </b-col>
@@ -71,42 +88,6 @@
 
 
 
- <div class="people-style  border shadow">
-      <b-row>
-        <b-col cols="3">
-          
-            <img
-              src="http://www.seafreightagenciesbarbados.com/files/2014/12/shiping.jpg"
-              width="100%"
-              height="90%"
-              class="r-image"
-            />
-        
-        </b-col>
-        <b-col cols="6">
-          <p class="text">
-            <strong> Shipping Network </strong> <br />  <br />
-            Public <br />
-             20k Members <br />
-             Business Name <br />
-            
-          </p>
-        </b-col>
-
-        <b-col cols="3">
-          <div class="s-button">
-            <b-button block size="sm" class="b-background" variant="primary">
-              <b-icon class="ico" icon="plus-circle"> </b-icon> Community
-            </b-button>
-
-            <b-button block size="sm" class="b-background" variant="primary">
-              <b-icon class="ico" icon="chat"> </b-icon> Message
-            </b-button>
-
-          </div>
-        </b-col>
-      </b-row>
-    </div>
 
 
 
@@ -120,197 +101,12 @@
 
 
 
+ </b-col>     <b-col   md="6"  sm="12" class="mt-sm-2">  
 
 
 
+       
 
-
-
- <div class="people-style  border shadow">
-      <b-row>
-        <b-col cols="3">
-          
-            <img
-              src="http://www.seafreightagenciesbarbados.com/files/2014/12/shiping.jpg"
-              width="100%"
-              height="90%"
-              class="r-image"
-            />
-        
-        </b-col>
-        <b-col cols="6">
-          <p class="text">
-            <strong> Shipping Network </strong> <br />  <br />
-            Public <br />
-             20k Members <br />
-             Business Name <br />
-            
-          </p>
-        </b-col>
-
-        <b-col cols="3">
-          <div class="s-button">
-            <b-button block size="sm" class="b-background" variant="primary">
-              <b-icon class="ico" icon="plus-circle"> </b-icon> Community
-            </b-button>
-
-            <b-button block size="sm" class="b-background" variant="primary">
-              <b-icon class="ico" icon="chat"> </b-icon> Message
-            </b-button>
-
-          </div>
-        </b-col>
-      </b-row>
-    </div>
-
-
-
-
-
-
-
- </b-col>     <b-col>  
-
-
-
-
- <div class="people-style  border shadow">
-      <b-row>
-        <b-col cols="3">
-          
-            <img
-              src="http://www.seafreightagenciesbarbados.com/files/2014/12/shiping.jpg"
-              width="100%"
-              height="90%"
-              class="r-image"
-            />
-        
-        </b-col>
-        <b-col cols="6">
-          <p class="text">
-            <strong> Shipping Network </strong> <br />  <br />
-            Public <br />
-             20k Members <br />
-             Business Name <br />
-            
-          </p>
-        </b-col>
-
-        <b-col cols="3">
-          <div class="s-button">
-            <b-button block size="sm" class="b-background" variant="primary">
-              <b-icon class="ico" icon="plus-circle"> </b-icon> Community
-            </b-button>
-
-            <b-button block size="sm" class="b-background" variant="primary">
-              <b-icon class="ico" icon="chat"> </b-icon> Message
-            </b-button>
-
-          </div>
-        </b-col>
-      </b-row>
-    </div> 
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-
-
- <div class="people-style  border shadow">
-      <b-row>
-        <b-col cols="3">
-          
-            <img
-              src="http://www.seafreightagenciesbarbados.com/files/2014/12/shiping.jpg"
-              width="100%"
-              height="90%"
-              class="r-image"
-            />
-        
-        </b-col>
-        <b-col cols="6">
-          <p class="text">
-            <strong> Shipping Network </strong> <br />  <br />
-            Public <br />
-             20k Members <br />
-             Business Name <br />
-            
-          </p>
-        </b-col>
-
-        <b-col cols="3">
-          <div class="s-button">
-            <b-button block size="sm" class="b-background" variant="primary">
-              <b-icon class="ico" icon="plus-circle"> </b-icon> Community
-            </b-button>
-
-            <b-button block size="sm" class="b-background" variant="primary">
-              <b-icon class="ico" icon="chat"> </b-icon> Message
-            </b-button>
-
-          </div>
-        </b-col>
-      </b-row>
-    </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- <div class="people-style  border shadow">
-      <b-row>
-        <b-col cols="3">
-          
-            <img
-              src="http://www.seafreightagenciesbarbados.com/files/2014/12/shiping.jpg"
-              width="100%"
-              height="90%"
-              class="r-image"
-            />
-        
-        </b-col>
-        <b-col cols="6">
-          <p class="text">
-            <strong> Shipping Network </strong> <br />  <br />
-            Public <br />
-             20k Members <br />
-             Business Name <br />
-            
-          </p>
-        </b-col>
-
-        <b-col cols="3">
-          <div class="s-button">
-            <b-button block size="sm" class="b-background" variant="primary">
-              <b-icon class="ico" icon="plus-circle"> </b-icon> Community
-            </b-button>
-
-            <b-button block size="sm" class="b-background" variant="primary">
-              <b-icon class="ico" icon="chat"> </b-icon> Message
-            </b-button>
-
-          </div>
-        </b-col>
-      </b-row>
-    </div>
 
 
 
@@ -336,6 +132,75 @@ export default {
 </script>
 
 <style scoped>
+
+
+
+
+
+
+
+@media only screen and (max-width: 768px) {
+  
+
+
+
+
+.btn {
+  font-size: 10px;
+
+  display: flex;
+
+    padding-right: 90px;
+}
+
+h4{
+  font-size: 15px;
+}
+
+}
+
+
+
+.logo-img{
+
+  width: 60px;
+}
+
+
+
+@media only screen and (min-width: 768px) {
+  
+
+
+.logo-img{
+
+  width: 30px;
+}
+
+.see-all-link{
+  font-size: 10px;
+}
+
+.btn {
+  font-size: 10px;
+
+  display: flex;
+
+    padding-right: 90px;
+}
+
+
+}
+
+
+
+
+
+
+
+
+
+
 .card {
   color: orange;
 }
@@ -371,11 +236,7 @@ export default {
   margin-left: -15px;
 }
 
-.btn {
-  font-size: 13px;
 
-  display: flex;
-}
 
 .ico {
   margin-right: 5px;

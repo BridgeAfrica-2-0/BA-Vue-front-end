@@ -9,7 +9,7 @@
       <CarousselDashboard class="mm-top" /> <br />
 
       <b-row>
-        <b-col  md="6" sm="12"  class="mt-sm-2">
+        <b-col  md="6" sm="12"  class="mt-2">
           <b-input-group class="my-auto input-size ">
             <template #append>
               <b-input-group-text class=" b-groupe  shadow "
@@ -35,7 +35,7 @@
           </b-input-group>
         </b-col>
 
-        <b-col md="3" sm="12"   class="mt-sm-2" >
+        <b-col md="3" sm="12"   class="mt-2" >
           <b-input-group class="my-auto input-size">
             <template #append>
               <b-input-group-text class=" b-groupe shadow "
@@ -54,7 +54,7 @@
           </b-input-group>
         </b-col>
 
-        <b-col md="3" sm="12"   class="mt-sm-2" >
+        <b-col md="3" sm="12"   class="mt-2" >
           <div v-if="selected != 'posts'">
             <b-input-group class="my-auto input-size">
               <template #append>
@@ -96,7 +96,7 @@
       <br />
 
       <b-row>
-        <b-col md="3" sm="12"    class="mt-sm-2" > </b-col>
+        <b-col md="3" sm="12"    class="mt-2" > </b-col>
 
         <b-col cols="3">
           <div v-if="selected == 'people'">
@@ -119,7 +119,7 @@
           </div>
         </b-col>
 
-        <b-col md="3" sm="12"   class="mt-sm-2" >
+        <b-col md="3" sm="12"   class="mt-2" >
           <div v-if="selected == 'people'">
             <b-input-group class="my-auto input-size">
               <template #append>
@@ -159,7 +159,7 @@
           </div>
         </b-col>
 
-        <b-col md="3" sm="12"   class="mt-sm-2" >
+        <b-col md="3" sm="12"   class="mt-2" >
           <div v-if="selected == 'business' || selected == 'network'">
             <div class="a-center">
               <b-form-checkbox id="checkbox-1" name="checkbox-1">
@@ -211,14 +211,14 @@
       <div v-if="selected == 'all'">
         <b-card class="shadow">
           <b-row>
-            <b-col md="6" sm="12"  class="mt-sm-2">
+            <b-col md="6" sm="12"  class="mt-2">
               <div style="p-div">
                 <span>
                   <h4>  
-                      <img class="img-fluid picture" src="@/assets/icons/bus.png" style="width: 60px;" /> 
+                      <img class="img-fluid picture logo-img" src="@/assets/icons/bus.png"  /> 
                     BUSINESSES
                     <h6 style="float:right">
-                      <b-link> <u> see all </u> </b-link>
+                      <b-link class="see-all-link"> <u> see all </u> </b-link>
                     </h6>
                   </h4>
                 </span>
@@ -231,13 +231,13 @@
             </b-col>
 
 
-            <b-col md="6" sm="12"  class="mt-sm-20"  >
+            <b-col md="6" sm="12"  class="mt-20"  >
               <div class="p-div">
                 <span>
-                  <h4>    <img class="img-fluid picture" src="@/assets/icons/people.png" style="width: 60px;" /> 
+                  <h4>    <img class="img-fluid picture logo-img" src="@/assets/icons/people.png"  /> 
                     People
                     <h6 style="float:right">
-                      <b-link> <u> see all </u> </b-link>
+                      <b-link class="see-all-link"> <u> see all </u> </b-link>
                     </h6>
                   </h4>
                 </span>
@@ -253,10 +253,10 @@
       <div v-if="selected == 'people'">
         <b-card class="shadow ">
           <span>
-            <h4>    <img class="img-fluid picture" src="@/assets/icons/people.png" style="width: 60px;" /> 
+            <h4>    <img class="img-fluid picture logo-img " src="@/assets/icons/people.png"  /> 
               People
               <h6 style="float:right">
-                <b-link> <u> see all </u> </b-link>
+                <b-link class="see-all-link" > <u> see all </u> </b-link>
               </h6>
             </h4>
           </span>
@@ -275,10 +275,10 @@
       <div v-if="selected == 'business'">
         <b-card class="shadow ">
           <span>
-            <h4>     <img class="img-fluid picture" src="@/assets/icons/bus.png" style="width: 60px;" /> 
+            <h4>     <img class="img-fluid picture logo-img" src="@/assets/icons/bus.png"  /> 
               Business
               <h6 style="float:right">
-                <b-link> <u> see all </u> </b-link>
+                <b-link class="see-all-link"> <u> see all </u> </b-link>
               </h6>
             </h4>
           </span>
@@ -325,7 +325,7 @@
 
       <div v-if="selectedb == 'owner'">
         <b-row>
-          <b-col md="6" sm="12"  class="mt-sm-2"> <Profile /> </b-col> <b-col md="6" sm="12"   class="mt-sm-2"> <EmptyBusiness /> </b-col>
+          <b-col md="6" sm="12"  class="mt-2"> <Profile /> </b-col> <b-col md="6" sm="12"   class="mt-2"> <EmptyBusiness /> </b-col>
         </b-row>
         <br />
       </div>
@@ -334,7 +334,7 @@
 
       <div v-if="selectedb != 'owner'">
         <b-row>
-          <b-col>    
+          <b-col md="3" sm="12"    class="mt-2">    
 
 
              <div   >
@@ -367,7 +367,7 @@
 
         </b-card>
     
-  </div>    </b-col> <b-col> <Map /> </b-col>
+  </div>    </b-col> <b-col md="3" sm="12"    class="mt-2"> <Map /> </b-col>
         </b-row>
 
       <br />
@@ -376,7 +376,7 @@
       <div  v-if="selectedb != 'owner'">
         <b-row>   
         
-          <b-col> <BusinessDashboard /> </b-col> <b-col> <Insights /> </b-col>
+          <b-col md="3" sm="12"    class="mt-2"> <BusinessDashboard /> </b-col> <b-col md="3" sm="12"    class="mt-2"> <Insights /> </b-col>
       
         </b-row>
       </div>
@@ -386,15 +386,15 @@
 
       <div>
         <b-row>
-          <b-col sm="12" md="8"  > <CommunityActivity /> </b-col>
-          <b-col sm="12" md="4"  cols="4"> <Tutorial /> </b-col>
+          <b-col sm="12" md="8"  class="mt-3" > <CommunityActivity /> </b-col>
+          <b-col sm="12" md="4"    class="mt-3"> <Tutorial /> </b-col>
         </b-row>
       </div>
       <br />
 
       <div>
         <b-row>
-          <b-col sm="12" md="6"> <Hotbusiness /> </b-col> <b-col sm="12" md="6" > <Popularnetwork /> </b-col>
+          <b-col sm="12" md="6"   class="mt-3" > <Hotbusiness /> </b-col> <b-col sm="12" md="6"  class="mt-3" > <Popularnetwork /> </b-col>
         </b-row>
       </div>
     </div>
@@ -553,8 +553,37 @@ export default {
 </script>
 
 <style scoped>
+
+
+
+.logo-img{
+
+  width: 60px;
+}
+
+@media only screen and (max-width: 768px) {
+  
+
+
+
+h4{
+  font-size: 15px;
+}
+
+.logo-img{
+  width: 30px;
+}
+.see-all-link{
+  font-size: 10px;
+}
+
+}
+
+
+
+
 .p-card {
-  margin: 50px;
+  margin: 10px;
 
   border: 0px;
 }

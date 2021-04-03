@@ -1,6 +1,7 @@
 <template>
   <div>
     <Navbar />
+<br/><br/><br/>
     <b-container>
       <b-row class="mt-3">
         <b-col class="col-2">
@@ -227,15 +228,39 @@
                     <b-icon icon="arrow-left-circle"></b-icon>
                   </div>
                   <b-col class="ml-5">
-                    <b-row>
+                 <b-row>   <b-col cols="6">   
+
                       <SponsoredBusinesses
                         class="ml-2"
-                        v-for="(sbusiness, index) in sponsoredBusinesses"
-                        :key="index"
-                        :title="sbusiness.title"
-                    /></b-row>
+                     
+                       
+                    /> </b-col>  
+                    
+                    
+
+
+
+
+
+                     <b-col cols="6">   
+
+                      <SponsoredBusinesses
+                        class="ml-2"
+                     
+                       
+                    /> </b-col>
+                    
+                    
+
+                    
+                    
+                    
+                    </b-row>
                   </b-col>
                   <div class="left ml-5">
+
+
+
                     <b-icon icon="arrow-right-circle"></b-icon>
                   </div>
                 </b-row>
@@ -349,6 +374,10 @@
         <b-row>
           <b-col>
             <b-card>
+
+
+
+
               <h3>Sponsored Businesses</h3>
               <div class="s-business">
                 <b-row class="ml-3">
@@ -363,6 +392,7 @@
                         :key="index"
                         :title="sbusiness.title"
                     /></b-row>
+                    
                   </b-col>
                   <div class="left ml-5">
                     <b-icon icon="arrow-right-circle"></b-icon>
@@ -412,7 +442,7 @@ import SponsoredBusinesses from "@/components/search/sponsoredBusiness";
 import SponsoredNetwork from "@/components/search/sponsoredNetwork";
 import Business from "@/components/search/businessmain";
 import Navbar from "@/components/navbar";
-import Footer from "@/components/footer";
+//import Footer from "@/components/footer";
 
 export default {
   components: {
@@ -426,7 +456,7 @@ export default {
     SponsoredNetwork,
     Business,
     Navbar,
-    Footer,
+   // Footer,
   },
   data() {
     return {

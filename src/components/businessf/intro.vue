@@ -41,7 +41,7 @@
         width="290"
         height="200"
         frameborder="0"
-        style="border:0;"
+        class="border-0"
         allowfullscreen=""
         aria-hidden="false"
         tabindex="0"

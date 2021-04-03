@@ -7,6 +7,10 @@ import RecoverPass1 from "../views/recoverPassword1.vue";
 import RecoverPass2 from "../views/recoverPassword2.vue";
 import RecoverPass3 from "../views/recoverPassword3.vue";
 import createService from "@/views/createService";
+
+import businessOwnerSettingGeneral from "@/views/businessOwnerSettingGeneral";
+
+
 import service from "@/views/service";
 import Modifier from "@/views/modifier";
 import store from "@/store/index.js";
@@ -21,6 +25,13 @@ import forgotPassword from "@/views/forgotPassword";
 import navMessage from "@/views/navMessaging";
 import memberNetworkFollower from "@/views/memberNetworkFollower";
 // import Test from "@/views/test";
+import templateView from "@/views/templateView";
+import webSiteCreate from "@/views/webSiteCreate";
+import webSiteCreateTwo from "@/views/webSiteCreateTwo";
+import paidPlan from "@/views/paidPlan";
+import confirmPayment from "@/views/confirmPayment";
+import networks from "@/views/networks";
+import dashboard from "@/views/dashboard";
 
 Vue.use(VueRouter);
 
@@ -35,15 +46,62 @@ const routes = [
     name: "Home",
     component: Home,
   },
+
+  {
+    path: "/dashboard",
+    name: "dashboard",
+    component: dashboard
+  },
+
   {
     path: "/profile_owner",
     name: "profile_owner",
     component: profile_owner,
   },
   {
+    path: "/template_viewer",
+    name: "templateViewer",
+    component: templateView
+  },
+  {
     path: "/business_owner",
     name: "BusinessOwner",
     component: businessOwner,
+  },
+
+  {
+    path: "/business_owner_setting_general",
+    name: "businessOwnerSettingGeneral",
+    component: businessOwnerSettingGeneral
+  },
+
+
+ 
+
+  {
+    path: "/business_owner/create_website_step_one",
+    name: "createWebSite",
+    component: webSiteCreate
+  },
+  {
+    path: "/business_owner/create_website_step_two",
+    name: "createWebSiteTwo",
+    component: webSiteCreateTwo
+  },
+  {
+    path: "/business_owner/create_website_plan",
+    name: "payPlan",
+    component: paidPlan
+  },
+  {
+    path: "/business_owner/create_website_confirm_payment",
+    name: "confirmPayment",
+    component: confirmPayment
+  },
+  {
+    path: "/business_owner/network",
+    name: "networks",
+    component: networks
   },
   {
     path: "/login",

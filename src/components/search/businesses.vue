@@ -4,7 +4,7 @@
       <b-row>
         <b-col>
           <h4>
-            <b-icon icon="shop" variant="primary"></b-icon>
+             <img class="img-fluid picture logo-img" src="@/assets/icons/bus.png"  /> 
             <span class="ml-2">BUSINESSES</span>
           </h4>
         </b-col>
@@ -60,4 +60,34 @@ p {
     margin-bottom: 160px;
   }
 }
+
+
+
+
+
+.logo-img{
+
+  width: 60px;
+}
+
+@media only screen and (max-width: 768px) {
+  
+
+
+h4{
+  font-size: 15px;
+}
+
+
+.logo-img{
+  width: 30px;
+}
+.see-all-link{
+  font-size: 10px;
+}
+
+}
+
+
+
 </style>

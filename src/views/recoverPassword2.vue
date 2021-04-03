@@ -65,6 +65,7 @@ export default {
   width: 80%;
 }
 
+<<<<<<< HEAD
 .button {
   margin-left: 265px;
   background-color: #e75c18;
@@ -82,6 +83,8 @@ export default {
   border: none;
 }
 
+=======
+>>>>>>> 5fa58d2361ad6890173d8e3b361c69f390e719da
 @media only screen and (max-width: 768px) {
   .btn {
     margin-left: -20px;

@@ -1,57 +1,148 @@
 <template>
   <div>
-    <b-card class="card" v-if="!networkShow">
-      <span v-for="(network, index) in data" :key="index">
-        <b-row class="business mt-3">
-          <b-col class="col">
-            <img src="../../../assets/img/follow.jpg" height="200" alt="" />
-          </b-col>
-          <b-col class="min  ml-5">
-            <p>
-              <strong>Network Name </strong> <br />
-              <br />
-              <small>Public</small>
+    <b-card v-if="networkShow">
+        
 
-              <br />
-              <small>36k Members</small>
-              <br />
+<div class="s-card">
+  <b-row>    <b-col md="12" lg="6" cols="12"  sm="12" class="mt-sm-2">    
 
-              <small>36k Members</small>
-              <br />
-              <small>Business Name</small>
-            </p>
-          </b-col>
-          <b-col class="buttons">
-            <span v-if="network.type == 'minus'" class="box ml-5">
-              <b-button size="sm" variant="primary" class="community">
-                <b-icon icon="dash-circle"></b-icon>
-                <span class="ml-1">Community</span>
-              </b-button>
+ 
+                  
+    <div class="people-style shadow">
+      <b-row>
+        <b-col md="3" cols="5" sm="5">
+          <div style="height: 100%;">
+            <img
+              src="https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg"
+              width="100%"
+              height="90%"
+              class="r-image"
+            />
+          </div>
+        </b-col>
+        <b-col md="6" cols="7" sm="7">
+         <p class="text">
+            <strong> Shipping Network </strong> <br />  <br />
+            Public <br />
+             20k Members <br />
+             Business Name <br />
+            
+          </p>
+        </b-col>
 
-              <b-button size="sm" class="ml-5 mb-1 mt-2" variant="primary">
-                <b-icon icon="chat"></b-icon> Message
-              </b-button>
-            </span>
-            <span v-if="network.type == 'plus'">
-              <b-button
-                class="ml-5 mb-1 mt-2 community"
-                size="sm"
-                variant="primary"
-              >
-                <b-icon icon="plus-circle"></b-icon>
-                <span class="ml-1">Community</span>
-              </b-button>
-            </span>
-          </b-col>
-        </b-row>
-      </span>
+        <b-col md="3" cols="12" sm="12">
+          <div class="s-button">
+     <b-row>  <b-col md="12" cols="4" sm="4" class="mt-md-2">    
+
+            <b-button block size="sm" class="b-background" variant="primary">
+              <b-icon class="ico" icon="plus-circle"> </b-icon> Community
+            </b-button>
+
+            </b-col>  
+
+        <b-col md="12" sm="4" cols="4" class="mt-md-2">  
+
+            <b-button block size="sm" class="b-background" variant="primary">
+              <b-icon class="ico" icon="chat"> </b-icon> Message
+            </b-button>
+
+            </b-col>  
+
+            <b-col md="12" sm="4" cols="4" class="mt-md-2">  
+
+            
+
+            </b-col>  
+   </b-row>
+
+          </div>
+        </b-col>
+      </b-row>
+    </div>
+
+ </b-col>     <b-col lg="6"  md="12"  sm="12" class="mt-sm-2">  
+
+
+
+
+
+
+
+    <div class="people-style shadow">
+      <b-row>
+        <b-col md="3" cols="5" sm="5">
+          <div style="height: 100%;">
+            <img
+              src="https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg"
+              width="100%"
+              height="90%"
+              class="r-image"
+            />
+          </div>
+        </b-col>
+        <b-col md="6" cols="7" sm="7">
+         <p class="text">
+            <strong> Shipping Network </strong> <br />  <br />
+            Public <br />
+             20k Members <br />
+             Business Name <br />
+            
+          </p>
+        </b-col>
+
+        <b-col md="3" cols="12" sm="12">
+          <div class="s-button">
+     <b-row>  <b-col md="12" cols="4" sm="4" class="mt-md-2">    
+
+            <b-button block size="sm" class="b-background" variant="primary">
+              <b-icon class="ico" icon="plus-circle"> </b-icon> Community
+            </b-button>
+
+            </b-col>  
+
+        <b-col md="12" sm="4" cols="4" class="mt-md-2">  
+
+            <b-button block size="sm" class="b-background" variant="primary">
+              <b-icon class="ico" icon="chat"> </b-icon> Message
+            </b-button>
+
+            </b-col>  
+
+            <b-col md="12" sm="4" cols="4" class="mt-md-2">  
+
+            
+
+            </b-col>  
+   </b-row>
+
+          </div>
+        </b-col>
+      </b-row>
+    </div>
+
+
+
+
+
+
+ </b-col>  </b-row>
+
+
+
+
+
+
+</div>
     </b-card>
-    <div class="no-network" v-if="networkShow">
-      <div class="white-box">
-        <h2>Builds networks around your Business</h2>
-        <p>Create network to stay in touch with just the people</p>
-        <p>you want Engage, share, Make Plans and much more</p>
-        <b-button class="btn-add" variant="primary">Add Network</b-button>
+
+
+    
+    <div class="h-100 w-100" v-if="!networkShow">
+      <div class="mx-auto text-center my-5">
+        <h2 class="my-3">Builds networks around your Business</h2>
+        <p class="my-2">Create network to stay in touch with just the people</p>
+        <p class="my-2">you want Engage, share, Make Plans and much more</p>
+        <p class="my-3"><b-button variant="primary">Add network</b-button></p>
       </div>
     </div>
 
@@ -69,7 +160,7 @@
 export default {
   data() {
     return {
-      networkshow: true,
+      networkShow: true,
       showModal: false,
       text: "",
       data: [{ type: "minus" }, { type: "plus" }],
@@ -136,107 +227,165 @@ export default {
   margin-top: 10px;
 }
 
-.sub {
-  width: 280px;
-}
-.btnz:hover {
-  background-color: #e75c18;
-  border: none;
-  color: black;
+
+
+
+
+
+
+
+@media only screen and (max-width: 768px) {
+  
+
+
+
+
+.btn {
+  font-size: 10px;
+
+  display: flex;
+
+    padding-right: 90px;
 }
 
-.prod {
-  max-width: 14rem;
-  cursor: pointer;
+h4{
+  font-size: 15px;
+}
+
+}
+
+
+
+.logo-img{
+
+  width: 60px;
+}
+
+
+
+@media only screen and (min-width: 768px) {
+  
+
+
+.logo-img{
+
+  width: 30px;
+}
+
+.see-all-link{
+  font-size: 10px;
 }
 
 .btn {
+  font-size: 10px;
+
+  display: flex;
+
+    padding-right: 90px;
+
+        margin-left: -40px;
+}
+
+
+}
+
+
+
+
+
+
+
+
+
+
+.card {
+  color: orange;
+}
+
+.s-button {
+  align-content: center;
+  text-align: center;
+
+  padding: 15px;
+}
+.text {
+  color: #000;
+  font-size: 15px;
+
+  text-align: left;
+
+  margin-left: -15px;
+
+  margin-right: -15px;
+}
+.stock {
+  color: green;
+}
+
+.b1 {
   width: 100px;
-  margin-top: -20px;
-  margin-left: -100px;
+  margin-left: -20px;
 }
 
-.networks {
-  display: flex;
-  flex-wrap: wrap;
-}
-.network {
-  height: 190px;
-  cursor: pointer;
+.b2 {
+  width: 120px;
+
+  margin-left: -15px;
 }
 
-.btn-add {
-  margin-left: 0px;
-  margin-top: 10px;
+
+
+.ico {
+  margin-right: 5px;
 }
 
-.business {
-  border-bottom: 1px solid #ccc;
-  padding: 10px;
-}
-.button {
-  margin-left: 120px;
-  display: flex;
-}
-.lnk {
-  margin-left: 260px;
-}
-p {
-  margin-left: -210px;
-}
-.min {
-  position: relative;
-  left: 100px;
-}
-img {
-  border-radius: 10px;
-}
-.community {
-  border: none;
-  display: flex;
-  width: 110px;
-  margin-left: 49px;
-}
-.drop {
-  left: 1px;
-}
-.buttons {
-  margin-left: 120px;
-}
-.community {
-  border: none;
-  display: flex;
+.r-image {
+  
+ border-top-left-radius: 10px;
+
+  border-bottom-left-radius: 10px;
+
+  border-top-right-radius: 10px;
+
+  border-bottom-right-radius: 10px;
+
+
+  width: 100%;
+
+height: 100%;
 }
 
-@media only screen and (max-width: 768px) {
-  .box {
-    position: relative;
-    left: -62px;
-  }
-  .button {
-    margin-left: 0px;
-  }
-  .lnk {
-    margin-left: 50px;
-  }
-  p {
-    margin-left: -50px;
-    font-size: 15px;
-  }
-  .drop {
-    left: 10px;
-  }
-  .community {
-    position: relative;
-    top: 8px;
-  }
+.people-style {
+  border-top-left-radius: 10px;
 
-  .btns {
-    margin-bottom: 20px;
-    left: 45px;
-  }
-  .min {
-    margin-left: -50px;
-  }
+  border-bottom-left-radius: 10px;
+
+  border-top-right-radius: 5px;
+
+  border-bottom-right-radius: 5px;
+  margin-right:10px;
+
+  background: white;
+
+  background-color: #fff;
+  background-clip: border-box;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  margin-bottom: 10px;
+ 
+
 }
+
+
+.s-card{
+  height:450px; 
+  overflow: auto; 
+  overflow-x: hidden;
+  border-radius:10px;
+}
+
+h4{
+  color:black;
+}
+
+
 </style>

@@ -55,15 +55,4 @@ h2,
 p {
   text-align: center;
 }
-
-.business{
-  min-height: 450px;
-}
-
-@media only screen and (max-width: 768px) {
-  .no-business {
-    width: 100%;
-    margin-left: 0px;
-  }
-}
 </style>

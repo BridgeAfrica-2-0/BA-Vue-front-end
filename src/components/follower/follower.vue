@@ -106,7 +106,7 @@
     <div fluid="md" class="profile">
       <b-row>
         <b-col cols="12">
-          <b-tabs content-class="mt-3" fill pills card>
+          <b-tabs content-class="mt-3" fill pills >
             <b-tab title="Posts" active>
               <Post />
             </b-tab>

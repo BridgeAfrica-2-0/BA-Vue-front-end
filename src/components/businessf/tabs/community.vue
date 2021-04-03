@@ -1,7 +1,7 @@
 <template>
   <div>
     <b-card>
-     <b-tabs content-class="mt-3">
+     <b-tabs content-class="mt-3" pills>
     <b-tab title="People" active><People/></b-tab>
     <b-tab title="Businesses"><Businesses/></b-tab>
   </b-tabs>

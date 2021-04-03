@@ -4,7 +4,9 @@
       <b-row>
         <b-col>
           <h4>
-            <b-icon icon="people" variant="primary"></b-icon>
+           
+           <img class="img-fluid picture logo-img" src="@/assets/icons/network.png"  /> 
+
             <span class="ml-2">Networks</span>
           </h4>
         </b-col>
@@ -12,45 +14,89 @@
           <b-link class="lnk">See All</b-link>
         </b-col>
       </b-row>
+
+
       <span v-for="(network, index) in data" :key="index">
-        <b-row class="business mt-3">
-          <b-col class="col">
-            <img src="../../assets/img/follow.jpg" height="200" alt="" />
-          </b-col>
-          <b-col class="min  ml-5">
-            <p>
-              <strong>Network Name </strong> <br />
-              <br />
-              <small>Public</small>
 
-              <br />
-              <small>36k Members</small>
-              <br />
+     
 
-              <small>36k Members</small>
-              <br />
-              <small>Business Name</small>
-            </p>
-          </b-col>
-          <b-col class="buttons">
-            <span v-if="network.type == 'minus'" class="box ml-5">
-              <b-button size="sm" variant="primary">
-                <b-icon icon="dash-circle"></b-icon>
-                <span class="ml-1">Community</span>
-              </b-button>
 
-              <b-button size="sm" class="ml-5 mb-1 mt-2" variant="primary">
-                <b-icon icon="chat"></b-icon> Message
-              </b-button>
-            </span>
-            <span v-if="network.type == 'plus'">
-              <b-button class="ml-5 mb-1 mt-2" size="sm" variant="primary">
-                <b-icon icon="plus-circle"></b-icon>
-                <span class="ml-1">Community</span>
-              </b-button>
-            </span>
-          </b-col>
-        </b-row>
+
+
+
+
+
+
+
+
+
+
+                 
+    <div class="people-style shadow">
+      <b-row>
+        <b-col md="3" cols="5" sm="5">
+          <div style="height: 100%;">
+            <img
+              src="https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg"
+              width="100%"
+              height="90%"
+              class="r-image"
+            />
+          </div>
+        </b-col>
+        <b-col md="6" cols="7" sm="7">
+         <p class="text">
+            <strong> Shipping Network </strong> <br />  <br />
+            Public <br />
+             20k Members <br />
+             Business Name <br />
+            
+          </p>
+        </b-col>
+
+        <b-col md="3" cols="12" sm="12">
+          <div class="s-button">
+     <b-row>  <b-col md="12" cols="4" sm="4" class="mt-md-2">    
+
+            <b-button block size="sm" class="b-background" variant="primary">
+              <b-icon class="ico" icon="plus-circle"> </b-icon> Community
+            </b-button>
+
+            </b-col>  
+
+        <b-col md="12" sm="4" cols="4" class="mt-md-2">  
+
+            <b-button block size="sm" class="b-background" variant="primary">
+              <b-icon class="ico" icon="chat"> </b-icon> Message
+            </b-button>
+
+            </b-col>  
+
+            <b-col md="12" sm="4" cols="4" class="mt-md-2">  
+
+            
+
+            </b-col>  
+   </b-row>
+
+          </div>
+        </b-col>
+      </b-row>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
       </span>
     </b-card>
   </div>
@@ -64,6 +110,8 @@ export default {
 </script>
 
 <style scoped>
+
+
 .business {
   border-bottom: 1px solid #ccc;
   padding: 10px;
@@ -75,56 +123,195 @@ export default {
 .lnk {
   margin-left: 260px;
 }
-p {
-  margin-left: -210px;
-}
 
-.drop {
-  left: 1px;
-}
-.buttons {
-  margin-left: 120px;
-}
-.community {
-  border: none;
-  display: flex;
-}
+
 
 .card {
   box-shadow: -1px 4px 20px -6px rgba(0, 0, 0, 0.7);
 }
-img {
-  border-radius: 10px;
-}
-.min {
-  position: relative;
-  left: 150px;
-}
-@media only screen and (max-width: 768px) {
-  .button {
-    margin-left: 0px;
-  }
-  .lnk {
-    margin-left: 50px;
-  }
-  p {
-    margin-left: -50px;
-    font-size: 15px;
-  }
-  .drop {
-    left: 10px;
-  }
-  .community {
-    position: relative;
-    top: 8px;
-  }
 
-  .btns {
-    margin-bottom: 20px;
-    left: 45px;
-  }
-  .min {
-    margin-left: -50px;
-  }
+
+
+
+
+
+
+.logo-img{
+
+  width: 60px;
+}
+
+@media only screen and (max-width: 768px) {
+  
+
+
+h4{
+  font-size: 15px;
+}
+
+
+.logo-img{
+  width: 30px;
+}
+.see-all-link{
+  font-size: 10px;
+}
+
+}
+
+
+
+
+
+
+@media only screen and (max-width: 768px) {
+  
+
+
+
+
+.btn {
+  font-size: 10px;
+
+  display: flex;
+
+   
+}
+
+h4{
+  font-size: 15px;
+}
+
+}
+
+
+
+.logo-img{
+
+  width: 60px;
+}
+
+
+
+@media only screen and (min-width: 768px) {
+  
+
+
+.logo-img{
+
+  width: 30px;
+}
+
+.see-all-link{
+  font-size: 10px;
+}
+
+.btn {
+  font-size: 15px;
+
+  display: flex;
+
+    padding-right: 90px;
+}
+
+
+}
+
+
+
+
+
+
+
+
+
+
+.card {
+  color: orange;
+}
+
+.s-button {
+  align-content: center;
+  text-align: center;
+
+  padding: 15px;
+}
+.text {
+  color: #000;
+  font-size: 15px;
+
+  text-align: left;
+
+  margin-left: -15px;
+
+  margin-right: -15px;
+}
+.stock {
+  color: green;
+}
+
+.b1 {
+  width: 100px;
+  margin-left: -20px;
+}
+
+.b2 {
+  width: 120px;
+
+  margin-left: -15px;
+}
+
+
+
+.ico {
+  margin-right: 5px;
+}
+
+.r-image {
+  
+ border-top-left-radius: 10px;
+
+  border-bottom-left-radius: 10px;
+
+  border-top-right-radius: 10px;
+
+  border-bottom-right-radius: 10px;
+
+
+  width: 100%;
+
+height: 100%;
+}
+
+.people-style {
+  border-top-left-radius: 10px;
+
+  border-bottom-left-radius: 10px;
+
+  border-top-right-radius: 5px;
+
+  border-bottom-right-radius: 5px;
+  margin-right:10px;
+
+  background: white;
+
+  background-color: #fff;
+  background-clip: border-box;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  margin-bottom: 10px;
+ 
+
+}
+
+
+.s-card{
+  height:450px; 
+  overflow: auto; 
+  overflow-x: hidden;
+  border-radius:10px;
+}
+
+h4{
+  color:black;
 }
 </style>

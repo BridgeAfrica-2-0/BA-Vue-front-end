@@ -38,7 +38,10 @@
                 ></b-form-select>
               </div>
             </div>
-            <b-button class="ml-2 mt-2 add-btn" type="submit" variant="primary"
+            <b-button
+              class="ml-2 mt-2 button-design"
+              type="submit"
+              variant="primary"
               >Add</b-button
             >
           </b-form>
@@ -83,8 +86,7 @@
             </div>
           </div>
           <b-button
-            class="ml-2 mt-2"
-            style="position:relative; left: 400px"
+            class="ml-2 mt-2 button-design"
             type="submit"
             variant="primary"
             >Add</b-button
@@ -123,10 +125,12 @@ export default {
 .details {
   display: flex;
 }
-.add-btn {
+
+.button-design {
   position: relative;
   left: 400px;
 }
-@media only screen and (max-width: 768px) {
+
+@media only screen and (max-width: 600px) {
 }
 </style>

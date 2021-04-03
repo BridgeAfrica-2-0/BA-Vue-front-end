@@ -1,8 +1,37 @@
 <template>
   <div>
     <b-row>
-      <b-col md="4">
-        <Intro />
+      <b-col md="4" class="p-0 m-0">
+        <b-card title="" header-tag="header" footer-tag="footer">
+          <template #header>
+            <h6 class="mb-0 d-inline-block">Intro</h6>
+            <span class="float-right btn m-0 p-0 action-intro"
+              ><b-icon icon="pencil-fill" variant="primary"></b-icon> Edit</span
+            >
+          </template>
+          <b-card-text class="text-left">
+            <p>
+              <b-icon icon="briefcase-fill" variant="primary"></b-icon> Work at:
+              Current or Last Organization
+            </p>
+            <p>
+              <b-icon icon="book-fill" variant="primary"></b-icon> Studied at:
+              Last Education
+            </p>
+            <p>
+              <b-icon icon="house-fill" variant="primary"></b-icon> Home Town
+              Name:Dummy
+            </p>
+            <p>
+              <b-icon icon="geo-alt-fill" variant="primary"></b-icon> Current
+              City Name:Dummy
+            </p>
+            <p>
+              <b-icon icon="people-fill" variant="primary"></b-icon> Followed
+              by: 525
+            </p>
+          </b-card-text>
+        </b-card>
 
         <Followers />
         <Media />
@@ -423,13 +452,13 @@
 
 <script>
 import "@morioh/v-lightbox/dist/lightbox.css";
-import Intro from "../../intro";
+
 import Followers from "../../followers";
 import Media from "../../media";
 export default {
   name: "posts",
   components: {
-    Intro,
+    
     Followers,
     Media,
   },

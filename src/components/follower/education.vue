@@ -3,10 +3,7 @@
     <b class="education">Education</b>
     <hr />
 
-    <b-list-group-item
-      class="d-flex align-items-center mb-4 "
-      style="border: none"
-    >
+    <b-list-group-item class="d-flex align-items-center mb-4 border-0">
       <b-avatar class="mr-3 avatar"></b-avatar>
       <div class="datails">
         <div class="row">

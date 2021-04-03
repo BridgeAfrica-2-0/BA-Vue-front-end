@@ -1,121 +1,214 @@
 <template>
   <div>
-    <div class="row mb-2">
-      <div class="col-3">
-        <img src="../../assets/img/follow.jpg" height="200" alt="" />
-      </div>
-      <div class=" col details ml-3">
-        <h4>
-          <b-link class="link">Business Name</b-link>
-        </h4>
-        <p>
-          <a href="">mywebsite.com</a> <br />
-          <strong>Category:</strong> Business Category <br />
-          <strong>Community:</strong> 1.1M Community <br />
-          <strong>Location:</strong> Neighbourhood, city country <br />
-          <strong>Keyword:</strong> Keyword 1 Keyword 2 Keyword 3 <br />
-          <strong>About:</strong> Lorem ipsum, dolor sit amet consectetur
-          adipisicing elit. <b-link>Read More</b-link>
-        </p>
-      </div>
-      <div>
-        <span class="btns mt-2 mr-4">
-          <b-col>
-            <b-row>
-              <b-button class=" community  mt-2" variant="primary" size="sm">
-                <b-icon icon="plus-circle"></b-icon>
-                <span class="company"> Company</span></b-button
-              >
-            </b-row>
-            <b-row>
-              <b-button class=" community  mt-3" variant="primary" size="sm">
-                <b-icon icon="chat"></b-icon>
-                <span class="ml-1"> Message</span></b-button
-              >
-            </b-row>
-            <b-row>
-              <b-button class=" community  mt-3" variant="primary" size="sm">
-                <b-icon icon="geo-alt"></b-icon>
-                <span class="ml-1"> Direction</span></b-button
-              >
-            </b-row>
-          </b-col>
-        </span>
-      </div>
+
+  
+    <div class="people-style shadow">
+      <b-row>
+        <b-col md="3" cols="5"  sm="5">
+          <div style="height: 100%;">
+            <img
+              src="https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg"
+              width="100%"
+              height="90%"
+              class="r-image"
+            />
+          </div>
+        </b-col>
+        <b-col md="6" cols="7" sm="7">
+          <p class="text">
+            <strong> Super Car ltd </strong> <br />
+            <strong> Category : </strong> Car marketing <br />
+            <strong> Community : </strong> 20k <br />
+            <strong> Location :</strong> cameroon <br />
+            <strong> Keyword :</strong> car,swag <br />
+
+            <strong>About:</strong> super best car seller in the world
+            adipisicing elit. <b-link>Read More</b-link>
+          </p>
+        </b-col>
+
+        <b-col md="3" cols="12" sm="12">
+          <div class="s-button">
+     <b-row>  <b-col md="12" sm="4" cols="4" class="mt-md-2">    
+
+            <b-button block size="sm" class="b-background" variant="primary">
+              <b-icon class="ico" icon="plus-circle"> </b-icon> Community
+            </b-button>
+
+            </b-col>  
+
+        <b-col md="12" sm="4" cols="4" class="mt-md-2">  
+
+            <b-button block size="sm" class="b-background" variant="primary">
+              <b-icon class="ico" icon="chat"> </b-icon> Message
+            </b-button>
+
+            </b-col>  
+
+            <b-col md="12" sm="4" cols="4" class="mt-md-2">  
+
+            <b-button block size="sm" class="b-background" variant="primary">
+              <b-icon icon="direction" class="ico"> </b-icon> Direction
+            </b-button>
+
+            </b-col>  
+   </b-row>
+
+          </div>
+        </b-col>
+      </b-row>
     </div>
+
+
+
+
+
+
+
+
+
+
+
   </div>
 </template>
 
 <script>
-export default {};
+export default {
+  props: ["title", "image"]
+};
 </script>
 
 <style scoped>
-.link {
-  text-decoration: none;
+.card {
+  color: orange;
+}
+
+.s-button {
+  align-content: center;
+  text-align: center;
+
+  padding: 15px;
+}
+.text {
   color: #000;
+  font-size: 15px;
+
+  text-align: left;
+
+  margin-left: -15px;
+
+  margin-right: -15px;
 }
-a {
-  text-decoration: black;
-  color: #e75c18;
+.stock {
+  color: green;
 }
 
-.btns {
+.b1 {
+  width: 100px;
+  margin-left: -20px;
+}
+
+.b2 {
+  width: 120px;
+
+  margin-left: -15px;
+}
+
+.btn {
+  font-size: 13px;
+
   display: flex;
-  margin-left: 50px;
 }
 
-.primary-bg {
-  background-color: #e75c18;
-  border: none;
-  display: flex;
+.ico {
+  margin-right: 5px;
 }
 
-.primary-bg:hover {
-  color: #fff;
-}
-.community {
-  border: none;
-  display: flex;
-  border-radius: 5px;
+.r-image {
+  border-radius: 8px;
 }
 
-.toggle {
-  color: #fff;
-  background-color: #000;
-  border-color: #005cbf;
+
+
+@media only screen and (min-width: 768px) {
+  .people-style {
+  border-top-left-radius: 5px;
+
+  border-bottom-left-radius: 5px;
+
+  border-top-right-radius: 5px;
+
+  border-bottom-right-radius: 5px;
+
+  background: white;
+
+  background-color: #fff;
+  background-clip: border-box;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  margin-bottom: 10px;
+
+  margin-right: 8px;
+ 
+
+  padding: 7px;
 }
-.company {
-  margin-left: 4px;
+
 }
-img {
-  border-radius: 10px;
-}
+
+
+
+
 @media only screen and (max-width: 768px) {
-  .details {
-    position: relative;
-    top: 200px;
-    left: -80px;
-  }
-  .btns {
-    position: relative;
-    top: 180px;
-    left: -110px;
-  }
-  img {
-    width: 270px;
-  }
-  h3 {
-    font-size: 20px;
-    margin-top: 10px;
-  }
-  .btn {
-    display: flex;
-  }
-  .community {
-    position: relative;
-    left: 100px;
-    top: -38px;
-  }
+  .people-style {
+  border-top-left-radius: 5px;
+
+  border-bottom-left-radius: 5px;
+
+  border-top-right-radius: 5px;
+
+  border-bottom-right-radius: 5px;
+
+  background: white;
+
+  background-color: #fff;
+  background-clip: border-box;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  margin-bottom: 10px;
+
+  margin-right: 8px;
+ 
+
+  padding: 7px;
 }
+
+
+
+.text {
+  color: #000;
+  font-size: 10px;
+
+  text-align: left;
+
+  margin-left: -15px;
+
+  margin-right: -15px;
+}
+
+
+
+.btn {
+  font-size: 8px;
+
+  display: flex;
+
+    padding-right: 60px;
+}
+
+h4{
+  font-size: 15px;
+}
+
+}
+
+
 </style>

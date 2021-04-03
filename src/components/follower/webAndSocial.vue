@@ -3,15 +3,15 @@
     <b class="social">Web & Soial Links</b>
     <hr />
     <div>
-      <b-link class="link" v-b-modal.modal-7
-        ><b-icon icon="globe" class="primary"></b-icon>
+      <b-link class="text-decoration-none" v-b-modal.modal-7
+        ><b-icon icon="globe" variant="primary"></b-icon>
         https://www.yourwebsite.com</b-link
       >
     </div>
 
     <div>
       <b-link
-        class="link"
+        class="text-decoration-none position-relative top-10"
         v-b-modal.modal-7
         ><b-icon icon="facebook" class="primary"></b-icon>
         https://www.facebook.com/yourid</b-link

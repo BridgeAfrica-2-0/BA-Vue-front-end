@@ -58,7 +58,10 @@
                 </div>
               </div>
             </div>
-            <b-button class="ml-2 mt-2 add-btn" type="submit" variant="primary"
+            <b-button
+              class="ml-2 mt-2 position-relative"
+              type="submit"
+              variant="primary"
               >Add</b-button
             >
           </b-form>

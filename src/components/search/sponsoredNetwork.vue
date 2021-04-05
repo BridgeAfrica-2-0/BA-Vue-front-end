@@ -1,17 +1,61 @@
 <template>
   <div>
-    <b-card
-      :title="title"
-      img-src="https://picsum.photos/600/300/?image=25"
-      img-alt="Image"
-      img-top
-      tag="article"
-      class="mb-2 card"
-    >
-      <b-card-text class="text">
-        <p>2M Followers</p>
-      </b-card-text>
-    </b-card>
+    
+
+
+
+
+    
+     <div class="people-style border shadow">
+      <b-row>
+        <b-col cols="6">
+          <div style="height: 100%;">
+            <img
+              src="https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg"
+              width="100%"
+              height="90%"
+              class="r-image"
+            />
+          </div>
+        </b-col>
+        <b-col>
+         
+
+          <p class="text">
+            <strong> Shipping Network </strong> <br />  <br />
+            Public <br />
+             20k Members <br />
+             Business Name <br />
+            
+          </p>
+
+
+
+
+        </b-col>
+      </b-row>
+
+      <b-row>
+        <b-col cols="4">
+          <b-button block size="sm" class="b-background" variant="primary">
+            <b-icon class="ico" icon="plus-circle"> </b-icon> Community
+          </b-button>
+        </b-col>
+
+        <b-col cols="4">
+          <b-button block size="sm" class="b-background" variant="primary">
+            <b-icon class="ico" icon="chat"> </b-icon> Message
+          </b-button>
+        </b-col>
+
+        <b-col cols="4">
+          
+        </b-col>
+      </b-row>
+    </div>
+
+
+
   </div>
 </template>
 
@@ -33,4 +77,37 @@ export default {
 .stock {
   color: green;
 }
+
+
+
+
+.people-style {
+  border-top-left-radius: 5px;
+
+  border-bottom-left-radius: 5px;
+
+  border-top-right-radius: 5px;
+
+  border-bottom-right-radius: 5px;
+
+  background: white;
+
+  background-color: #fff;
+  background-clip: border-box;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  margin-bottom: 10px;
+ 
+
+  padding: 7px;
+}
+
+
+
+.btn {
+  font-size: 10px;
+  display: flex;
+
+  padding-right: 70px;
+}
+
 </style>

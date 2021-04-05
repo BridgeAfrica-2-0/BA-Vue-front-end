@@ -135,8 +135,14 @@ export default {
 
 
 
+.logo-img{
 
+  width: 40px;
+}
 
+h4{
+  font-size: 20px;
+}
 
 
 @media only screen and (max-width: 768px) {
@@ -161,21 +167,12 @@ h4{
 
 
 
-.logo-img{
-
-  width: 60px;
-}
 
 
 
 @media only screen and (min-width: 768px) {
   
 
-
-.logo-img{
-
-  width: 30px;
-}
 
 .see-all-link{
   font-size: 10px;

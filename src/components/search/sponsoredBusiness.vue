@@ -79,4 +79,84 @@ export default {
 .drop {
   top: -8px;
 }
+
+
+
+
+.card {
+  color: orange;
+}
+.text {
+  color: #000;
+  font-size: 12px;
+
+  text-align: left;
+
+  margin-left: -15px;
+
+  margin-right: -15px;
+}
+.stock {
+  color: green;
+}
+
+.b1 {
+  width: 100px;
+  margin-left: -20px;
+}
+
+.b2 {
+  width: 120px;
+
+  margin-left: -15px;
+}
+
+.btn {
+  font-size: 10px;
+  display: flex;
+
+  padding-right: 70px;
+}
+
+.ico {
+  margin-right: 5px;
+}
+
+.img {
+  border-top-left-radius: 5px;
+
+  border-bottom-left-radius: 5px;
+
+  border-top-right-radius: 5px;
+
+  border-bottom-right-radius: 5px;
+}
+.r-image{
+
+  border-radius: 8px;
+}
+
+.people-style {
+  border-top-left-radius: 5px;
+
+  border-bottom-left-radius: 5px;
+
+  border-top-right-radius: 5px;
+
+  border-bottom-right-radius: 5px;
+
+  background: white;
+
+  background-color: #fff;
+  background-clip: border-box;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  margin-bottom: 10px;
+ 
+
+  padding: 7px;
+}
+
+
+
+
 </style>

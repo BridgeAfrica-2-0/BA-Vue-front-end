@@ -1,14 +1,15 @@
 <template>
   <div>
-    <b-card class="card">
+    <b-card class="card" style="    margin-top: -22px;">
       <b-row>
         <b-col>
           <h4>
            
-           <img class="img-fluid picture logo-img" src="@/assets/icons/network.png"  /> 
+           <img class="img-fluid picture logo-img" src="@/assets/icons/network.png"   style="width:40px" /> 
 
             <span class="ml-2">Networks</span>
           </h4>
+
         </b-col>
         <b-col class="col">
           <b-link class="lnk">See All</b-link>

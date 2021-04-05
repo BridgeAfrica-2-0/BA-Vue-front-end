@@ -187,8 +187,14 @@ export default {};
 
 .logo-img{
 
-  width: 60px;
+  width: 40px;
 }
+
+
+h4{
+  font-size: 20px;
+}
+
 
 @media only screen and (max-width: 768px) {
   

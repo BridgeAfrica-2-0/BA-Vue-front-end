@@ -67,9 +67,13 @@ p {
 
 .logo-img{
 
-  width: 60px;
+  width: 40px;
 }
 
+
+h4{
+  font-size: 15px;
+}
 @media only screen and (max-width: 768px) {
   
 

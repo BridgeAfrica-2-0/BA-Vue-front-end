@@ -2,6 +2,16 @@
   <div>
     <b-card class="text-center">
       <b-card-text> Advertisement Area </b-card-text>
+
+
+   <img class="img-fluid picture logo-img" src=" https://i.pinimg.com/originals/e4/ec/e9/e4ece995bc2472153850a55810a0aaa8.png"  /> 
+
+
+
+
+
+     
+
     </b-card>
   </div>
 </template>

@@ -11,152 +11,118 @@
       <b-tabs content-class="mt-3">
         <b-tab active>
           <template #title>
-            <p>People</p>
-            <p>3.5k</p>
+            <span>People</span>
           </template>
           <b-tabs content-class="mt-3" fill pills>
             <b-tab active>
               <template #title>
-                <p>Followers</p>
-                <p>1.5k</p>
+                <span>Followers (1.5k)</span>
               </template>
-              <div class="media border-botmediatom mb-4">
-                <img
-                  src="@/assets/img/alima.jpg"
-                  alt="John Doe"
-                  class="mr-2 rounded-circle"
-                  style="width:60px;"
-                />
-                <div class="media-body">
-                  <b><b-link>J. Circlehead</b-link></b>
-                  <p class="">
-                    Cameroon,
-                    <span class="desktop"
-                      ><b-icon icon="house" variant="primary"></b-icon> 2,
-                      <b-icon icon="globe" variant="primary"></b-icon> 3,
-                      <b-icon icon="people" variant="primary"></b-icon> 3,
-                    </span>
-                  </p>
+              <div class=" row border shadow pt-3 pb-3 pl-0 mb-4">
+                <div class="col-md-6 mb-3">
+                  <div class="row">
+                    <div class="d-flex col-md-12 colum">
+                      <img
+                          src="@/assets/img/alima.jpg"
+                          alt="John Doe"
+                          class="mr-2 rounded-circle picture-avatar"
+                      />
+                      <div class="my-auto">
+                        <h4 class="font-weight-bolder mb-0 pb-0">Maxine Mosfett</h4>
+                        <p class="mb-1">7k Community</p>
+                      </div>
+                      <div class="d-flex my-auto colums">
+                  <b-button variant="primary" size="sm" class="mb-2"
+                  ><b-icon-person></b-icon-person>
+                    &nbsp;&nbsp;Contact</b-button
+                  >
+                  <b-button variant="primary" size="sm"
+                  ><b-icon-dash-circle></b-icon-dash-circle>
+                    &nbsp;&nbsp;Community</b-button
+                  >
+                      </div>
+                    </div>
+                  </div>
                 </div>
-
-                <span class="pull-right my-auto">
-                  <b-dropdown
-                    id="dropdown-1"
-                    text="Contact"
-                    class="m-md-2 drop"
-                    variant="primary"
-                    size="sm"
+                <div class="col-md-6 mb-3">
+                  <div class="row">
+                    <div class="d-flex col-md-12 colum">
+                      <img
+                          src="@/assets/img/alima.jpg"
+                          alt="John Doe"
+                          class="mr-2 rounded-circle picture-avatar"
+                      />
+                      <div class="my-auto">
+                        <h4 class="font-weight-bolder mb-0 pb-0">Maxine Mosfett</h4>
+                        <p class="mb-1">7k Community</p>
+                      </div>
+                      <div class="d-flex my-auto colums">
+                  <b-button variant="primary" size="sm" class="mb-2"
+                  ><b-icon-person></b-icon-person>
+                    &nbsp;&nbsp;Contact</b-button
                   >
-                    <b-dropdown-item>
-                      <b-icon icon="chat-fill" variant="primary"></b-icon>
-                      Message</b-dropdown-item
-                    >
-                    <b-dropdown-item>
-                      <b-icon icon="telephone-fill" variant="primary"></b-icon>
-                      Call Now</b-dropdown-item
-                    >
-                    <b-dropdown-item>
-                      <b-icon icon="geo-alt" variant="primary"></b-icon> Get
-                      Direction</b-dropdown-item
-                    >
-                  </b-dropdown>
-                  <b-button variant="outline-primary" size="sm"
-                    ><b-icon-plus></b-icon-plus> Community</b-button
+                  <b-button variant="primary" size="sm"
+                  ><b-icon-dash-circle></b-icon-dash-circle>
+                    &nbsp;&nbsp;Community</b-button
                   >
-                </span>
-              </div>
-              <div class="media border-botmediatom mb-4">
-                <img
-                  src="@/assets/img/alima.jpg"
-                  alt="John Doe"
-                  class="mr-2 rounded-circle"
-                  style="width:60px;"
-                />
-                <div class="media-body">
-                  <b><b-link>J. Circlehead</b-link></b>
-                  <p class="">
-                    Cameroon,
-                    <span class="desktop"
-                      ><b-icon icon="house" variant="primary"></b-icon> 2,
-                      <b-icon icon="globe" variant="primary"></b-icon> 3,
-                      <b-icon icon="people" variant="primary"></b-icon> 3,
-                    </span>
-                  </p>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-
-                <span class="pull-right my-auto">
-                  <b-dropdown
-                    id="dropdown-1"
-                    text="Contact"
-                    class="m-md-2 drop"
-                    variant="primary"
-                    size="sm"
+                <div class="col-md-6 mb-3">
+                  <div class="row">
+                    <div class="d-flex col-md-12 colum">
+                      <img
+                          src="@/assets/img/alima.jpg"
+                          alt="John Doe"
+                          class="mr-2 rounded-circle picture-avatar"
+                      />
+                      <div class="my-auto">
+                        <h4 class="font-weight-bolder mb-0 pb-0">Maxine Mosfett</h4>
+                        <p class="mb-1">7k Community</p>
+                      </div>
+                      <div class="d-flex my-auto colums">
+                  <b-button variant="primary" size="sm" class="mb-2"
+                  ><b-icon-person></b-icon-person>
+                    &nbsp;&nbsp;Contact</b-button
                   >
-                    <b-dropdown-item>
-                      <b-icon icon="chat-fill" variant="primary"></b-icon>
-                      Message</b-dropdown-item
-                    >
-                    <b-dropdown-item>
-                      <b-icon icon="telephone-fill" variant="primary"></b-icon>
-                      Call Now</b-dropdown-item
-                    >
-                    <b-dropdown-item>
-                      <b-icon icon="geo-alt" variant="primary"></b-icon> Get
-                      Direction</b-dropdown-item
-                    >
-                  </b-dropdown>
-                  <b-button variant="outline-primary" size="sm"
-                    ><b-icon-plus></b-icon-plus> Community</b-button
+                  <b-button variant="primary" size="sm"
+                  ><b-icon-dash-circle></b-icon-dash-circle>
+                    &nbsp;&nbsp;Community</b-button
                   >
-                </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                  <div class="row">
+                    <div class="d-flex col-md-12 colum">
+                      <img
+                          src="@/assets/img/alima.jpg"
+                          alt="John Doe"
+                          class="mr-2 rounded-circle picture-avatar"
+                      />
+                      <div class="my-auto">
+                        <h4 class="font-weight-bolder mb-0 pb-0">Maxine Mosfett</h4>
+                        <p class="mb-1">7k Community</p>
+                      </div>
+                      <div class="d-flex my-auto colums">
+                  <b-button variant="primary" size="sm" class="mb-2"
+                  ><b-icon-person></b-icon-person>
+                    &nbsp;&nbsp;Contact</b-button
+                  >
+                  <b-button variant="primary" size="sm"
+                  ><b-icon-dash-circle></b-icon-dash-circle>
+                    &nbsp;&nbsp;Community</b-button
+                  >
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </b-tab>
-            <b-tab title="Following (1)">
-              <div class="media border-botmediatom mb-4">
-                <img
-                  src="@/assets/img/alima.jpg"
-                  alt="John Doe"
-                  class="mr-2 rounded-circle"
-                  style="width:60px;"
-                />
-                <div class="media-body">
-                  <b><b-link>J. Circlehead</b-link></b>
-                  <p class="">
-                    Cameroon,
-                    <span class="desktop"
-                      ><b-icon icon="house" variant="primary"></b-icon> 2,
-                      <b-icon icon="globe" variant="primary"></b-icon> 3,
-                      <b-icon icon="people" variant="primary"></b-icon> 3,
-                    </span>
-                  </p>
-                </div>
+            <b-tab title="Following (2k)">
 
-                <span class="pull-right my-auto">
-                  <b-dropdown
-                    id="dropdown-1"
-                    text="Contact"
-                    class="m-md-2 drop"
-                    variant="primary"
-                    size="sm"
-                  >
-                    <b-dropdown-item>
-                      <b-icon icon="chat-fill" variant="primary"></b-icon>
-                      Message</b-dropdown-item
-                    >
-                    <b-dropdown-item>
-                      <b-icon icon="telephone-fill" variant="primary"></b-icon>
-                      Call Now</b-dropdown-item
-                    >
-                    <b-dropdown-item>
-                      <b-icon icon="geo-alt" variant="primary"></b-icon> Get
-                      Direction</b-dropdown-item
-                    >
-                  </b-dropdown>
-                  <b-button variant="outline-primary" size="sm"
-                    ><b-icon-plus></b-icon-plus> Community</b-button
-                  >
-                </span>
-              </div>
             </b-tab>
           </b-tabs>
         </b-tab>
@@ -311,5 +277,20 @@ export default {
 <style scoped>
 .avatar-size {
   width: 90px;
+}
+.picture-avatar {
+  border-radius: 10px;
+  width: 78px;
+}
+
+.colum {
+  justify-content: space-evenly;
+}
+.colums {
+  flex-direction: column;
+}
+
+.text-design {
+  line-height: 40px;
 }
 </style>

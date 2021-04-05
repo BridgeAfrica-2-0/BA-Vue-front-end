@@ -5,7 +5,7 @@
         <b-tab title="People" active>
           <b-tabs content-class="mt-3" fill pills>
             <b-tab title="Followers (2)" active>
-              <div class="media border-botmediatom mb-4">
+              <div class="media border-bottom mb-4">
                 <img
                   src="@/assets/img/alima.jpg"
                   alt="John Doe"

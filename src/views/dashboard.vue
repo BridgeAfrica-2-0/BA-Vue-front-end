@@ -7,6 +7,7 @@
         <network-dashboard></network-dashboard>
         <business-dashboard></business-dashboard>
         <comuniti-dashboard></comuniti-dashboard>
+        <activiti-dashboard></activiti-dashboard>
       </b-card>
     </b-container>
   </div>
@@ -18,6 +19,7 @@ import CarousselDashboard from "@/components/dasboard/carousselDashboard";
 import NetworkDashboard from "@/components/dasboard/networkDashboard";
 import BusinessDashboard from "@/components/dasboard/businessDashboard";
 import ComunitiDashboard from "@/components/dasboard/comunitiDashboard";
+import ActivitiDashboard from "@/components/dasboard/activitiDashboard";
 export default {
   name: "dashboard",
   data() {
@@ -27,6 +29,7 @@ export default {
     };
   },
   components: {
+    ActivitiDashboard,
     ComunitiDashboard,
     BusinessDashboard,
     NetworkDashboard,

@@ -5,7 +5,7 @@
       <div>
         <div class="row">
           <div class="col">
-            <p>{{ defaultbio }}</p>
+            <p>{{ defaultBio }}</p>
           </div>
         </div>
       </div>
@@ -17,7 +17,7 @@
 export default {
   data() {
     return {
-      defaultbio: "no additional infomation to show !!"
+      defaultBio: "no additional infomation to show !!"
     };
   },
   methods: {}

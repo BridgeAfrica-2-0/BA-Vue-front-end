@@ -118,15 +118,14 @@ export default {
     float: left;
   }
 
-  .header-text2 {
-    font-size: 10px;
-    float: left;
-  }
+.text-box {
+  margin-top: 1.5rem;
+  text-align: left;
+}
 
-  .header-group {
-    margin-top: -59px;
-    margin-left: 102px;
-  }
+.position-loup {
+  display: none;
+}
 
   .owner-profile-image-profile {
     margin: -30px 10px 0px 5px;
@@ -157,59 +156,38 @@ export default {
   }
 }
 
-@media (min-width: 370px) and (max-width: 575px) {
-  .header-pic {
-    height: 100px;
-    width: 100%;
+@media (max-width: 575.98px) {
+  .img-avatar {
+    width: 5em;
+    height: 5em;
+    margin-top: 5px;
   }
 
-  .header-text1 {
-    font-size: 14px;
-    float: left;
-  }
-
-  .header-text2 {
-    font-size: 10px;
-    float: left;
-  }
-
-  .header-group {
-    margin-top: -30px;
-    margin-left: 30px;
-  }
-
-  .owner-profile-image-profile {
-    margin: -30px 10px 0px 5px;
-    z-index: 9;
-    width: 5rem;
-    height: 5rem;
-    border: 1px solid #e75c18;
-  }
-  .show {
+  .options {
     display: none;
   }
+
   .avatar-header-icon {
-    width: 2em;
-    height: 2em;
-  }
-  .b-avatar .b-avatar-badge {
+    width: 1.5em;
+    height: 1.5em;
     position: absolute;
-    min-height: 1.5em;
-    min-width: 1.5em;
-    padding: 0.25em;
-    line-height: 1;
-    border-radius: 10em;
-    font-size: 70%;
-    font-weight: 700;
-    z-index: 1;
-    bottom: -2px;
-    right: 2px;
+    left: 63px;
+    top: 51px;
+    background-color: #e75c18;
+    color: white;
+    border-radius: 24px;
+    padding: 4px;
   }
-}
-@media (min-width: 576px) {
-  .avatar-header-icon {
-    width: 3em;
-    height: 3em;
+
+  .text-box {
+    margin: 0px;
+    margin-top: 7px;
+    text-align: left;
+  }
+
+  .position-loup {
+    margin-top: -27px;
+    display: inherit;
   }
 }
 @media (min-width: 768px) {

@@ -5,15 +5,18 @@
         <img src="@/assets/img/banner.jpg" class="img-fluid header-pic ml-3" />
       </div>
     </div>
-    <div class="photo-btns">
-      <b-button class="see" size="sm">See All</b-button>
-    </div>
-    <b-row class="mt-4 options">
+
+
+
+
+
+
+    <b-row class="mt-6 options">
       <b-col cols="6">
         <div>
           <b-avatar
             src="https://placekitten.com/400/300"
-            class="owner-profile-image-profile float-left ml-5"
+            class="owner-profile-image-profile bbavater float-left ml-5"
             badge-variant="primary"
             badge-offset="10px"
             size="80"
@@ -23,40 +26,40 @@
         <div class="d-inline-block ml-4 float-left">
           <h5 class="font-weight-bolder name">User Name</h5>
           <p>
-            www.bridgeafrica.com <br />
+            <br />
             1.5k Community
           </p>
         </div>
       </b-col>
       <b-col cols="6">
         <p class="float-right mr-5">
-          <b-button size="sm">
-            <b-icon icon="check" variant="grey"></b-icon> Following</b-button
+
+          <b-button size="" class="orange m-2">
+            <b-icon icon="plus"></b-icon> Community </b-button
           >
-          <b-dropdown
-            id="dropdown-1"
-            text="Contact"
-            class="m-md-2 drop"
-            size="sm"
+
+
+           <b-button size="" class="yellow m-2">
+           <b-icon icon="chat-fill" ></b-icon> Message </b-button
           >
-            <b-dropdown-item>
-              <b-icon icon="chat-fill" variant="primary"></b-icon>
-              Message</b-dropdown-item
-            >
-            <b-dropdown-item>
-              <b-icon icon="geo-alt" variant="primary"></b-icon> Get
-              Direction</b-dropdown-item
-            >
-          </b-dropdown>
-          <b-dropdown size="sm">
+
+
+
+         
+
+
+
+          <b-dropdown size="" class="orange">
             <template #button-content>
               <b-icon icon="three-dots" aria-hidden="true"></b-icon>
             </template>
-            <b-dropdown-item> Report</b-dropdown-item>
+            <b-dropdown-item><b-icon icon="flag" ></b-icon> Report</b-dropdown-item>
           </b-dropdown>
         </p>
       </b-col>
     </b-row>
+
+
 
     <div class="mobile">
       <b-row>
@@ -64,7 +67,7 @@
           <div>
             <b-avatar
               src="https://placekitten.com/400/300"
-              class="owner-profile-image-profile float-left avat"
+              class=" float-left avat"
               badge-variant="primary"
               badge-offset="10px"
               size="70"
@@ -141,6 +144,10 @@ export default {
 </script>
 
 <style scoped>
+
+.bbavater{
+  margin-top: 5px;
+}
 .nav-link {
   background-color: #e75c18;
 }
@@ -161,6 +168,18 @@ img {
 .btns {
   position: relative;
   left: 75%;
+}
+
+.yellow{
+
+  background-color: #ffd200;
+  border-style: none;
+}
+
+.orange{
+   background-color: #e75c18;
+  
+   border-style: none;
 }
 
 .photo-btns {

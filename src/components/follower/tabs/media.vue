@@ -1,7 +1,7 @@
 <template>
   <div>
     <b-alert show class="primary-bg">
-      <b-icon icon="image" class="purple"></b-icon>
+      <b-icon icon="image" class="purple" variant="primary"></b-icon>
       <b>
         Media
       </b></b-alert

@@ -70,13 +70,13 @@
 
 <script>
 import navbar from "@/components/navbar";
-import Business from "../components/businessf/business";
-import Pending from "../components/businessf/pending";
-import Insight from "../components/businessf/insight";
-import Notification from "../components/businessf/notification";
-import Settings from "../components/businessf/settings";
+import Business from "../components/businessOwner/business";
+import Pending from "../components/businessOwner/pending";
+import Insight from "../components/businessOwner/insight";
+import Notification from "../components/businessOwner/notification";
+import Settings from "../components/businessOwner/settings";
 
-import Inbox from "../components/businessf/inbox";
+import Inbox from "../components/businessOwner/inbox";
 
 import Footer from "../components/footer";
 export default {

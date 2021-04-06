@@ -32,7 +32,6 @@
                       <span class="text-success">Basic</span></span
                     >
                   </p>
-
                   <p class="mb-1 mb-3">Categorie Name Here</p>
                   <p class="mb-1">
                     <b-icon-person-fill

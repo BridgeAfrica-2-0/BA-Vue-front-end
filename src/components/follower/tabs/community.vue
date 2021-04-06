@@ -1,6 +1,6 @@
 <template>
   <div class="mt-3 lala">
-    <b-container>
+    <div class="container-fluid">
 
 
 
@@ -10,6 +10,8 @@
 
 
       <b-tabs  pills content-class="mt-3  f-left">
+
+         
         <b-tab title="People" active>
            
 
@@ -37,7 +39,7 @@
       </b-tabs>
 
       
-    </b-container>
+    </div>
   </div>
 </template>
 

@@ -1,6 +1,10 @@
 <template>
   <div class="mt-3 lala">
+    <b-card>
+
     <b-container>
+
+
 
 
       <b-tabs  pills content-class="mt-3  f-left">
@@ -56,6 +60,8 @@
 
       
     </b-container>
+
+    </b-card>
   </div>
 </template>
 

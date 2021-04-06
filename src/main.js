@@ -25,11 +25,14 @@ Vue.use(Lightbox);
 library.add(fas);
 Vue.component('fas-icon', FontAwesomeIcon);
 
+
+
 // Import Bootstrap an BootstrapVue CSS files (order is important)
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap-vue/dist/bootstrap-vue.css";
 import 'vue-select/dist/vue-select.css';
 
+import "@/assets/css/bootstrap.css";
 
 // Make BootstrapVue available throughout your project
 Vue.use(BootstrapVue);

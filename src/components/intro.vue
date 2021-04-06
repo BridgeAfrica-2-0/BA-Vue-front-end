@@ -1,7 +1,10 @@
 <template>
   <div>
     <b-card title="" header-tag="header" footer-tag="footer">
-      <h6 class="mb-2"><b>Intro</b></h6>
+      <h6 class="mb-2"><b >      <b-icon icon="exclamation-circle" variant="primary"></b-icon>  Intro</b></h6>
+
+
+
 
       <b-card-text>
         <p>

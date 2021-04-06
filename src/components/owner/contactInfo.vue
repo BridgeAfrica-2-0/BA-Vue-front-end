@@ -61,11 +61,7 @@
             ></b-form-input>
           </div>
         </div>
-        <b-button
-          class="ml-2 mt-2"
-          style="position:relative; left: 400px"
-          type="submit"
-          variant="primary"
+        <b-button class="ml-2 mt-2 position-but" type="submit" variant="primary"
           >Add</b-button
         >
       </b-form>
@@ -117,6 +113,8 @@ export default {
 .details {
   display: flex;
 }
-@media only screen and (max-width: 768px) {
+.position-but {
+  position: relative;
+  left: 400px;
 }
 </style>

@@ -1,7 +1,7 @@
 <template>
   <div>
     <b-alert show class="primary-bg">
-      <b-icon icon="building" class="purple"></b-icon>
+      <b-icon icon="building" class="purple" variant="primary"></b-icon>
       <b>
         Businesses
       </b></b-alert

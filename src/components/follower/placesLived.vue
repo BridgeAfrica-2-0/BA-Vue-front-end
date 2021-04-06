@@ -2,15 +2,20 @@
   <div>
     <b class="place">Places you lived</b>
     <hr />
-    <p class="place"><b>Cameroon, South Africa</b></p>
+
     <p class="place">
       Current City
     </p>
+    <p class="place"><b>Cameroon, South Africa</b></p>
+    
     <hr />
-    <p class="place"><b>New York, United States</b></p>
+
     <p class="place">
       Home City
     </p>
+    
+    <p class="place"><b>New York, United States</b></p>
+    
   </div>
 </template>
 

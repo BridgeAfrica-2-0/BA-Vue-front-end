@@ -1,7 +1,7 @@
 <template>
   <div>
     <b-row>
-      <b-col md="4" class="p-0 m-0">
+      <b-col md="3" class="p-0 m-0">
         <b-card title="" header-tag="header" footer-tag="footer">
           <template #header>
             <h6 class="mb-0 d-inline-block">Intro</h6>
@@ -27,8 +27,7 @@
               City Name:Dummy
             </p>
             <p>
-              <b-icon icon="people-fill" variant="primary"></b-icon> Followed
-              by: 525
+              <b-icon icon="people-fill" variant="primary"></b-icon> Community 525
             </p>
           </b-card-text>
         </b-card>
@@ -36,7 +35,7 @@
         <Followers />
         <Media />
       </b-col>
-      <b-col class="ml-1 p-0">
+      <b-col md="9" class="m-0 p-0 px-lg-4">
         <b-card class="px-md-3">
           <b-row>
             <b-col cols="2" md="1" class="m-0 p-0">
@@ -93,59 +92,49 @@
           <b-row class="mt-4">
             <b-col cols="12" class="mt-4">
               <b-row>
-                <b-col cols="2" md="1" class="m-0 p-0">
-                  <b-avatar
-                    class="d-inline-block"
-                    variant="info"
-                    src="https://placekitten.com/300/300"
-                    size="3.5rem"
-                  ></b-avatar>
-                </b-col>
-                <b-col cols="10" md="11" class="pt-2">
-                  <h5 class="m-0 font-weight-bolder">
-                    John Doe
-                    <span class="float-right">
-                      <b-dropdown variant="outline-primary" size="sm">
+                <div class="media">
+                  <img
+                    src="@/assets/img/wankue-filler.jpg"
+                    alt="John Doe"
+                    class="mr-2 rounded-circle avatar-size"
+                  />
+                  <div class="media-body">
+                    <h4 class="mb-0">John Doe</h4>
+                    <p>Lorem ipsum...</p>
+                  </div>
+                  <ul class="navbar-nav pull-right purple float-right my-auto">
+                    <li class="nav-item dropdown">
+                      <b-dropdown
+                        size="sm"
+                        class=""
+                        variant="link"
+                        toggle-class="text-decoration-none"
+                        no-caret
+                      >
                         <template #button-content>
-                          <b-icon icon="three-dots" aria-hidden="true"></b-icon>
-                          More
+                          <fas-icon
+                            class="drop-color font-weight-bolder"
+                            :icon="['fas', 'ellipsis-v']"
+                          />
                         </template>
-                        <b-dropdown-item-button>
-                          <b-icon icon="lock-fill" aria-hidden="true"></b-icon>
-                          Locked <span class="sr-only">(Click to unlock)</span>
-                        </b-dropdown-item-button>
-                        <b-dropdown-divider></b-dropdown-divider>
-                        <b-dropdown-group header="Choose options" class="small">
-                          <b-dropdown-item-button>
-                            <b-icon icon="blank" aria-hidden="true"></b-icon>
-                            Option A <span class="sr-only">(Not selected)</span>
-                          </b-dropdown-item-button>
-                          <b-dropdown-item-button>
-                            <b-icon icon="check" aria-hidden="true"></b-icon>
-                            Option B <span class="sr-only">(Selected)</span>
-                          </b-dropdown-item-button>
-                          <b-dropdown-item-button>
-                            <b-icon icon="blank" aria-hidden="true"></b-icon>
-                            Option C <span class="sr-only">(Not selected)</span>
-                          </b-dropdown-item-button>
-                        </b-dropdown-group>
-                        <b-dropdown-divider></b-dropdown-divider>
-                        <b-dropdown-item-button
-                          >Some action</b-dropdown-item-button
+                        <b-dropdown-item href="#">
+                          <fas-icon
+                            class="drop-color font-weight-bolder"
+                            :icon="['fas', 'edit']"
+                          />
+                          Edit</b-dropdown-item
                         >
-                        <b-dropdown-item-button
-                          >Some other action</b-dropdown-item-button
+                        <b-dropdown-item href="#">
+                          <fas-icon
+                            class="drop-color font-weight-bolder"
+                            :icon="['fas', 'trash-alt']"
+                          />
+                          Delete</b-dropdown-item
                         >
-                        <b-dropdown-divider></b-dropdown-divider>
-                        <b-dropdown-item-button variant="danger">
-                          <b-icon icon="trash-fill" aria-hidden="true"></b-icon>
-                          Delete
-                        </b-dropdown-item-button>
                       </b-dropdown>
-                    </span>
-                  </h5>
-                  <p>1h Ago</p>
-                </b-col>
+                    </li>
+                  </ul>
+                </div>
               </b-row>
               <b-row>
                 <b-col cols="12" class="mt-2">
@@ -214,59 +203,49 @@
           <b-row class="mt-4">
             <b-col cols="12" class="mt-4">
               <b-row>
-                <b-col cols="2" md="1" class="m-0 p-0">
-                  <b-avatar
-                    class="d-inline-block"
-                    variant="info"
-                    src="https://placekitten.com/300/300"
-                    size="3.5rem"
-                  ></b-avatar>
-                </b-col>
-                <b-col cols="10" md="11" class="pt-2">
-                  <h5 class="m-0 font-weight-bolder">
-                    John Doe
-                    <span class="float-right">
-                      <b-dropdown variant="outline-primary" size="sm">
+                <div class="media">
+                  <img
+                    src="@/assets/img/wankue-filler.jpg"
+                    alt="John Doe"
+                    class="mr-2 rounded-circle avatar-size"
+                  />
+                  <div class="media-body">
+                    <h4 class="mb-0">John Doe</h4>
+                    <p>Lorem ipsum...</p>
+                  </div>
+                  <ul class="navbar-nav pull-right purple float-right my-auto">
+                    <li class="nav-item dropdown">
+                      <b-dropdown
+                        size="sm"
+                        class=""
+                        variant="link"
+                        toggle-class="text-decoration-none"
+                        no-caret
+                      >
                         <template #button-content>
-                          <b-icon icon="three-dots" aria-hidden="true"></b-icon>
-                          More
+                          <fas-icon
+                            class="drop-color font-weight-bolder"
+                            :icon="['fas', 'ellipsis-v']"
+                          />
                         </template>
-                        <b-dropdown-item-button>
-                          <b-icon icon="lock-fill" aria-hidden="true"></b-icon>
-                          Locked <span class="sr-only">(Click to unlock)</span>
-                        </b-dropdown-item-button>
-                        <b-dropdown-divider></b-dropdown-divider>
-                        <b-dropdown-group header="Choose options" class="small">
-                          <b-dropdown-item-button>
-                            <b-icon icon="blank" aria-hidden="true"></b-icon>
-                            Option A <span class="sr-only">(Not selected)</span>
-                          </b-dropdown-item-button>
-                          <b-dropdown-item-button>
-                            <b-icon icon="check" aria-hidden="true"></b-icon>
-                            Option B <span class="sr-only">(Selected)</span>
-                          </b-dropdown-item-button>
-                          <b-dropdown-item-button>
-                            <b-icon icon="blank" aria-hidden="true"></b-icon>
-                            Option C <span class="sr-only">(Not selected)</span>
-                          </b-dropdown-item-button>
-                        </b-dropdown-group>
-                        <b-dropdown-divider></b-dropdown-divider>
-                        <b-dropdown-item-button
-                          >Some action</b-dropdown-item-button
+                        <b-dropdown-item href="#">
+                          <fas-icon
+                            class="drop-color font-weight-bolder"
+                            :icon="['fas', 'edit']"
+                          />
+                          Edit</b-dropdown-item
                         >
-                        <b-dropdown-item-button
-                          >Some other action</b-dropdown-item-button
+                        <b-dropdown-item href="#">
+                          <fas-icon
+                            class="drop-color font-weight-bolder"
+                            :icon="['fas', 'trash-alt']"
+                          />
+                          Delete</b-dropdown-item
                         >
-                        <b-dropdown-divider></b-dropdown-divider>
-                        <b-dropdown-item-button variant="danger">
-                          <b-icon icon="trash-fill" aria-hidden="true"></b-icon>
-                          Delete
-                        </b-dropdown-item-button>
                       </b-dropdown>
-                    </span>
-                  </h5>
-                  <p>1h Ago</p>
-                </b-col>
+                    </li>
+                  </ul>
+                </div>
               </b-row>
               <b-row>
                 <b-col cols="12" class="mt-2">
@@ -331,59 +310,49 @@
           <b-row class="mt-4">
             <b-col cols="12" class="mt-4">
               <b-row>
-                <b-col cols="2" md="1" class="m-0 p-0">
-                  <b-avatar
-                    class="d-inline-block"
-                    variant="info"
-                    src="https://placekitten.com/300/300"
-                    size="3.5rem"
-                  ></b-avatar>
-                </b-col>
-                <b-col cols="10" md="11" class="pt-2">
-                  <h5 class="m-0 font-weight-bolder">
-                    John Doe
-                    <span class="float-right">
-                      <b-dropdown variant="outline-primary" size="sm">
+                <div class="media">
+                  <img
+                    src="@/assets/img/wankue-filler.jpg"
+                    alt="John Doe"
+                    class="mr-2 rounded-circle avatar-size"
+                  />
+                  <div class="media-body">
+                    <h4 class="mb-0">John Doe</h4>
+                    <p>Lorem ipsum...</p>
+                  </div>
+                  <ul class="navbar-nav pull-right purple float-right my-auto">
+                    <li class="nav-item dropdown">
+                      <b-dropdown
+                        size="sm"
+                        class=""
+                        variant="link"
+                        toggle-class="text-decoration-none"
+                        no-caret
+                      >
                         <template #button-content>
-                          <b-icon icon="three-dots" aria-hidden="true"></b-icon>
-                          More
+                          <fas-icon
+                            class="drop-color font-weight-bolder"
+                            :icon="['fas', 'ellipsis-v']"
+                          />
                         </template>
-                        <b-dropdown-item-button>
-                          <b-icon icon="lock-fill" aria-hidden="true"></b-icon>
-                          Locked <span class="sr-only">(Click to unlock)</span>
-                        </b-dropdown-item-button>
-                        <b-dropdown-divider></b-dropdown-divider>
-                        <b-dropdown-group header="Choose options" class="small">
-                          <b-dropdown-item-button>
-                            <b-icon icon="blank" aria-hidden="true"></b-icon>
-                            Option A <span class="sr-only">(Not selected)</span>
-                          </b-dropdown-item-button>
-                          <b-dropdown-item-button>
-                            <b-icon icon="check" aria-hidden="true"></b-icon>
-                            Option B <span class="sr-only">(Selected)</span>
-                          </b-dropdown-item-button>
-                          <b-dropdown-item-button>
-                            <b-icon icon="blank" aria-hidden="true"></b-icon>
-                            Option C <span class="sr-only">(Not selected)</span>
-                          </b-dropdown-item-button>
-                        </b-dropdown-group>
-                        <b-dropdown-divider></b-dropdown-divider>
-                        <b-dropdown-item-button
-                          >Some action</b-dropdown-item-button
+                        <b-dropdown-item href="#">
+                          <fas-icon
+                            class="drop-color font-weight-bolder"
+                            :icon="['fas', 'edit']"
+                          />
+                          Edit</b-dropdown-item
                         >
-                        <b-dropdown-item-button
-                          >Some other action</b-dropdown-item-button
+                        <b-dropdown-item href="#">
+                          <fas-icon
+                            class="drop-color font-weight-bolder"
+                            :icon="['fas', 'trash-alt']"
+                          />
+                          Delete</b-dropdown-item
                         >
-                        <b-dropdown-divider></b-dropdown-divider>
-                        <b-dropdown-item-button variant="danger">
-                          <b-icon icon="trash-fill" aria-hidden="true"></b-icon>
-                          Delete
-                        </b-dropdown-item-button>
                       </b-dropdown>
-                    </span>
-                  </h5>
-                  <p>1h Ago</p>
-                </b-col>
+                    </li>
+                  </ul>
+                </div>
               </b-row>
               <b-row>
                 <b-col cols="12" class="mt-2">
@@ -509,6 +478,11 @@ export default {
   .lb-grid {
     height: 300px;
   }
+}
+
+.avatar-size{
+  width:60px;
+  
 }
 @media (min-width: 768px) {
   .lb-grid {

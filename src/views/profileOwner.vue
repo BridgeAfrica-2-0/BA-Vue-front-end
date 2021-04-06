@@ -2,10 +2,10 @@
   <div class="mx-auto">
     <navbar></navbar>
     <head-page></head-page>
-    <b-container fluid="md" class="text-justify mx-auto mt-4 corps">
+    <div  class=" container-fluid text-justify   corps prof">
       <b-row>
         <b-col cols="12">
-          <b-tabs content-class="mt-3" pills card small fill>
+          <b-tabs content-class="mt-3" pills  small fill>
             <b-tab title="Posts" active>
               <Post />
             </b-tab>
@@ -14,23 +14,23 @@
               ><bussiness></bussiness
             ></b-tab>
             <b-tab title="Media"><Media /></b-tab>
-            <b-tab title="Following" class="m-0 p-0"
+            <b-tab title="Community" class="m-0 p-0"
               ><following></following>
             </b-tab>
           </b-tabs>
         </b-col>
       </b-row>
-    </b-container>
-  </div>
+    </div>
+  </div>     
 </template>
 
 <script>
 import navbar from "@/components/navbar";
-import headPage from "@/components/headPage";
+import headPage from "@/components/ownerHeadpage";
 import Post from "@/components/owner/tabs/posts";
 import About from "@/components/owner/tabs/about";
 import Media from "@/components/owner/tabs/media";
-import Following from "@/components/owner/tabs/following";
+import Following from "@/components/owner/tabs/memberNetwork";
 import Bussiness from "@/components/owner/tabs/bussiness";
 
 export default {
@@ -53,6 +53,13 @@ export default {
 </script>
 
 <style scoped>
+
+.prof {
+    width: 90%;
+    margin-left: 100px;
+}
+
+
 @media (max-width: 576px) {
   .lb-grid {
     height: 200px;
@@ -81,7 +88,7 @@ export default {
     height: 500px;
   }
   .corps {
-    margin-top: 6rem !important;
+    margin-top: 2rem !important;
   }
 }
 @media (min-width: 1400px) {
@@ -90,7 +97,7 @@ export default {
   }
 
   .corps {
-    margin-top: 6rem !important;
+    margin-top: 2rem !important;
   }
 
   .toto {

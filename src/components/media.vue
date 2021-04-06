@@ -3,12 +3,12 @@
     <b-card class="mt-4" header-tag="header" footer-tag="footer">
       <h6 class="mb-3 d-inline-block">Media</h6>
       <span class="float-right"
-        ><b-icon icon="eye-fill" variant="primary"></b-icon> See All</span
+        ><b-icon icon="eye-fill" variant="primary"></b-icon> View All</span
       >
 
       <b-card-text>
         <b-row>
-          <b-col cols="6" v-for="i in 4" :key="i" class="p-1">
+          <b-col cols="4" v-for="i in 6" :key="i" class="p-1">
             <img
               class="mb-2 img-fluid"
               src="@/assets/img/m2.jpg"

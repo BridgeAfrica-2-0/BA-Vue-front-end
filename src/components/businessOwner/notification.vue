@@ -1,5 +1,5 @@
 <template>
-  <div class="px-3">
+  <div class="container-fluid" style="padding-right:30px; padding-left:30px">
     <b-row class="mt-4">
       <b-col cols="12">
         <h4 class="font-weight-bolder d-inline-block">
@@ -8,7 +8,8 @@
         <span class="float-right">35 Pending</span>
 
         <hr width="100%" />
-        <div v-for="i in 6" :key="i">
+       <b-row>
+        <b-col md="6" class="mr-3" v-for="i in 6" :key="i">
           <p class="">
             <span class="">
               <b-avatar
@@ -42,7 +43,9 @@
             </span>
           </p>
           <hr width="100%" />
-        </div>
+        </b-col>
+
+        </b-row>
       </b-col>
     </b-row>
   </div>

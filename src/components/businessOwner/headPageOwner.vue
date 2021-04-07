@@ -3,8 +3,9 @@
     <div class="container-fluid">
       <img
         src="@/assets/img/banner.jpg"
-        class="img-fluid header-pic"
+        class=""
         alt="Kitten"
+        style="width:100%"
       />
       <div class="photo-btns">
         <b-button class="sm" size="sm">
@@ -66,6 +67,7 @@
                     1.5k Community
                   </p>
                 </span>
+                
                 <ul
                   class="navbar-nav pull-right purple float-right position-loup mr-4"
                 >
@@ -144,6 +146,13 @@
           <b-col md="6" class="">
             <div class="my-auto options">
               <span class="float-right">
+
+
+
+
+                
+
+                <!--
                 <b-dropdown
                   id="dropdown-1"
                   text="Contact"
@@ -167,6 +176,8 @@
                 <b-button variant="outline-primary" size="sm"
                   ><b-icon-plus></b-icon-plus> Community</b-button
                 >
+
+                -->
               </span>
             </div>
           </b-col>
@@ -208,8 +219,8 @@ export default {
   width: 2em;
   height: 2em;
   position: absolute;
-  left: 97px;
-  top: 81px;
+  left: 80px;
+  top: 71px;
   background-color: #e75c18;
   color: white;
   border-radius: 24px;
@@ -226,8 +237,8 @@ export default {
 }
 
 .img-avatar {
-  width: 6em;
-  height: 6em;
+  width: 4em;
+  height: 4em;
   margin-top: 10px;
 }
 
@@ -273,8 +284,8 @@ export default {
 }
 @media (min-width: 1400px) {
   .img-avatar {
-    width: 8em;
-    height: 8em;
+    width: 6em;
+    height: 6em;
   }
 
   .header-group {

@@ -13,7 +13,7 @@
         <div>
           <b-avatar
             src="https://placekitten.com/400/300"
-            class="owner-profile-image-profile float-left"
+            class=" float-left"
             badge-variant="primary"
             badge-offset="10px"
             size="80"
@@ -23,7 +23,7 @@
         <div class="d-inline-block ml-4 float-left">
           <h5 class="font-weight-bolder name">User Name</h5>
           <p>
-            www.bridgeafrica.com <br />
+          <br />
             1.5k Community
           </p>
         </div>
@@ -41,7 +41,7 @@
             <template #button-content>
               <b-icon icon="three-dots" aria-hidden="true"></b-icon>
             </template>
-            <b-dropdown-item> Report</b-dropdown-item>
+            <b-dropdown-item> <b-icon icon="flag" variant="primary"></b-icon> Report</b-dropdown-item>
           </b-dropdown>
         </p>
       </b-col>
@@ -52,7 +52,7 @@
           <div>
             <b-avatar
               src="https://placekitten.com/400/300"
-              class="owner-profile-image-profile float-left avat"
+              class=" float-left avat"
               badge-variant="primary"
               badge-offset="10px"
               size="70"

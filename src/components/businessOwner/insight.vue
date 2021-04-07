@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="container-fluid mt-3"  style="padding-left:60px; padding-right:60px">
     <b-row>
       <b-col>
         <b-card class="b-shadow">

@@ -15,15 +15,33 @@
     </b-row>
 
     <br/>
-  <CommunityMembers/>
+ 
+
+ 
+
+  <b-row> 
+<b-col md="6">  
+    <CommunityBusiness/>
+
+ </b-col>
+
+
+  <b-col md="6">  
+   <CommunityBusiness/>
+
+ </b-col>
+
+     </b-row>
+
+  
   </div>
 </template>
 
 <script>
-import CommunityMembers from "../../communityMember"
+import CommunityBusiness from "../../communitybusiness"
 export default {
   components:{
-      CommunityMembers
+      CommunityBusiness
   }
 }
 </script>

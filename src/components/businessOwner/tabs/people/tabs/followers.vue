@@ -15,7 +15,49 @@
       </b-col>
     </b-row>
     <br/>
-  <CommunityMembers/>
+
+
+
+
+
+
+
+
+
+
+
+
+<b-row> 
+<b-col md="6">  
+    <CommunityMembers/>
+
+ </b-col>
+
+
+  <b-col md="6">  
+    <CommunityMembers/>
+
+ </b-col>
+
+     </b-row>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
   </div>
 </template>
 

@@ -16,7 +16,28 @@
     <br/>
 
     <br/>
-  <CommunityBusiness/>
+
+
+
+  
+
+
+
+  <b-row> 
+<b-col md="6">  
+    <CommunityBusiness/>
+
+ </b-col>
+
+
+  <b-col md="6">  
+   <CommunityBusiness/>
+
+ </b-col>
+
+     </b-row>
+
+
   </div>
 </template>
 

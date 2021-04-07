@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b-container>
+    <b-container fluid  style="padding-left:30px; padding-right:30px">
       <b-row class="b-bottom">
         <b-col>
           <h5>Pending Posts</h5>

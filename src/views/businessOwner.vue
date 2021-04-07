@@ -4,9 +4,9 @@
     <navbar />
    
 
-    <div  class="text-justify container-fluid mar-left">
+    <div  class="container-fluid ">
       <b-row>
-        <b-tabs pills  content-class="mt-3" class=" " >
+        <b-tabs pills   >
           <b-tab active>
             <template slot="title">
               <p class="t-color">
@@ -43,7 +43,8 @@
         </template>  <Pending /></b-tab>
 
           <b-tab>
-            <template slot="title">
+            <template slot="title">   
+
               <p class="t-color">
                 <b-icon icon="eye" scale="1" variant="primary"></b-icon>
                 Insight
@@ -59,7 +60,7 @@
                 Settings
               </p>
             </template>
-            <Settings />
+            <Settings />    
           </b-tab>
         </b-tabs>
       </b-row>
@@ -112,7 +113,7 @@ export default {
 
 <style scoped>
 .mar-left{
-  margin-left: 15px;
+  margin-left: 25px;
 }
 .tabs {
   width: 100%;

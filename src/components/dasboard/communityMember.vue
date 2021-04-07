@@ -84,6 +84,69 @@
 
 
 
+            <div class="people-style   border shadow " >
+              <b-row class="mb-1">
+
+                <b-col md="3" cols="4" sm="3"   class="my-auto">
+                  <b-avatar class="p-avater" variant="primary" src="https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg" size="5em"></b-avatar>
+                </b-col>
+
+                <b-col md="8" cols="8" sm="8" class="shift-left">
+                  <div>
+                    <b-row>  <b-col md="8" sm="12">   
+
+
+                  <div class="e-name">
+                    <h6>
+                      <br />
+                      howty Circlehead  
+                    </h6>
+                  </div>
+                 </b-col>
+
+                <b-col  >
+
+                  <div>   
+                    
+                <b-row>    <b-col md="12"  cols="6" sm="6"  class="mt-md-2">  <b-button
+                      block
+                      variant="primary"
+                      size="sm"
+                      class="b-background"
+                    >
+                      <b-icon icon="chat"> </b-icon> Message
+                    </b-button>
+
+                      </b-col >
+
+                       <b-col md="12"  cols="6" sm="6" class="mt-md-2" > <b-button
+                      block
+                      size="sm"
+                      class="b-background"
+                      variant="primary"
+                    >
+                      <b-icon icon="plus-circle"> </b-icon> community
+                    </b-button>  </b-col >  </b-row>      </div>
+
+
+
+
+                  </b-col>    </b-row> </div>
+                </b-col>
+
+         
+         
+
+
+
+              </b-row>
+
+
+
+
+
+            </div>
+
 
 
 
@@ -149,6 +212,14 @@
 
 
             </div>
+
+
+
+
+
+
+
+
 
 
             <div class="people-style   border shadow " >

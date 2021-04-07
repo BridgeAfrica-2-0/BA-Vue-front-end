@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="container-fluid"   style="padding-left:30px; padding-right:30px">
   
     <div>
       <div class="chat-box">

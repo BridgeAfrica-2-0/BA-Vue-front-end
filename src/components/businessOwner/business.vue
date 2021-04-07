@@ -2,10 +2,10 @@
   <div>
     <head-page-owner></head-page-owner>
     <div class="row">
-      <div  class="text-justify mt-2 container-fluid">
+      <div  class="text-justify mt-2 container-fluid" style="padding-left:70px; padding-right:70px">
         <b-row>
           <b-col cols="12">
-            <b-tabs content-class="mt-3" fill pills card>
+            <b-tabs content-class="mt-3" fill pills >
               <b-tab title="Home"><HomePage /></b-tab>
               <b-tab title="About"><About /></b-tab>
               <b-tab title="Media"><Media /></b-tab>

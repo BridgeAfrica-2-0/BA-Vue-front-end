@@ -1,6 +1,6 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import Home from "../views/home.vue";
+//import Home from "../views/home.vue";
 import Login from "../views/login.vue";
 import SignIn from "../views/signIn.vue";
 import RecoverPass1 from "../views/recoverPassword1.vue";
@@ -43,8 +43,8 @@ const routes = [
   // },
   {
     path: "/",
-    name: "Home",
-    component: Home,
+    name: "home",
+    component: dashboard,
   },
 
   {

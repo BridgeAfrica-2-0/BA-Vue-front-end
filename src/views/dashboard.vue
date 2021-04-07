@@ -334,7 +334,7 @@
 
       <div v-if="selectedb != 'owner'">
         <b-row>
-          <b-col md="3" sm="12"    class="mt-2">    
+          <b-col md="6" sm="12"    class="mt-2">    
 
 
              <div   >
@@ -367,7 +367,7 @@
 
         </b-card>
     
-  </div>    </b-col> <b-col md="3" sm="12"    class="mt-2"> <Map /> </b-col>
+  </div>    </b-col> <b-col md="6" sm="12"    class="mt-2"> <Map /> </b-col>
         </b-row>
 
       <br />
@@ -376,7 +376,7 @@
       <div  v-if="selectedb != 'owner'">
         <b-row>   
         
-          <b-col md="3" sm="12"    class="mt-2"> <BusinessDashboard /> </b-col> <b-col md="3" sm="12"    class="mt-2"> <Insights /> </b-col>
+          <b-col md="6" sm="12"    class="mt-2"> <BusinessDashboard /> </b-col> <b-col md="6" sm="12"    class="mt-2"> <Insights /> </b-col>
       
         </b-row>
       </div>
@@ -656,9 +656,6 @@ select {
 }
 
 
-.mm-top{
-  margin-top: 90px;
-}
 
 .div-h {
   height: 350px;

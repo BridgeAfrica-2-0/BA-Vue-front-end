@@ -1,8 +1,8 @@
 <template>
   <div>
     <Navbar />
-<br/><br/><br/>
-    <b-container>
+
+    <b-container fluid>
       <b-row class="mt-3">
         <b-col class="col-2">
           <b-form-select
@@ -228,7 +228,7 @@
                     <b-icon icon="arrow-left-circle"></b-icon>
                   </div>
                   <b-col class="ml-5">
-                 <b-row>   <b-col cols="6">   
+                 <b-row>   <b-col cols="4">   
 
                       <SponsoredBusinesses
                         class="ml-2"
@@ -242,7 +242,18 @@
 
 
 
-                     <b-col cols="6">   
+                     <b-col cols="4">   
+
+                      <SponsoredBusinesses
+                        class="ml-2"
+                     
+                       
+                    /> </b-col>
+
+
+
+                    
+                     <b-col cols="4">   
 
                       <SponsoredBusinesses
                         class="ml-2"
@@ -326,7 +337,7 @@
                   </div>
                   <b-col class="ml-5">
                     <b-row>
-                    <b-col cols="12" md="6" sm="12"> 
+                    <b-col cols="12" md="4" sm="12"> 
                      
                      <SponsoredNetwork  />   
 
@@ -335,7 +346,7 @@
                     </b-col>
 
 
-                     <b-col cols="12" md="6" sm="12"> 
+                     <b-col cols="12" md="4" sm="12"> 
                      
                      <SponsoredNetwork  />   
 
@@ -343,6 +354,17 @@
                     
                     </b-col>
                     
+
+
+                     <b-col cols="12" md="4" sm="12"> 
+                     
+                     <SponsoredNetwork  />   
+
+                        
+                    
+                    </b-col>
+
+
                     
                      </b-row>
 

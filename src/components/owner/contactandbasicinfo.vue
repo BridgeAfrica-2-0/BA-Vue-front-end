@@ -415,18 +415,18 @@
 </template>
 
 <script>
-import BasicInfo from "./basicInfo";
-import ContactInfo from "./contactInfo";
-import BusinessVisited from "./businessVisited";
-import PlacesLived from "./placesLived";
-import WebAndSocials from "./webAndSocial";
+//import BasicInfo from "./basicInfo";
+//import ContactInfo from "./contactInfo";
+//import BusinessVisited from "./businessVisited";
+//import PlacesLived from "./placesLived";
+//import WebAndSocials from "./webAndSocial";
 export default {
   components: {
-    BasicInfo,
-    ContactInfo,
-    BusinessVisited,
-    PlacesLived,
-    WebAndSocials
+  //  BasicInfo,
+  //  ContactInfo,
+   // BusinessVisited,
+  //  PlacesLived,
+  //  WebAndSocials
   }
 };
 </script>

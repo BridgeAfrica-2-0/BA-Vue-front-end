@@ -3,7 +3,7 @@
     <navbar />
    
 
-    <div  class="full-width  m-top bongo" style="padding:50px;" >
+    <div  class="  bongo container-fluid"  style="margin-left:20px;   marin-right:20px "  >
       <b-row>
         <b-tabs  pills  fill  class="yaya" content-class="mt-3 f-width" active-nav-item-class=" box-item" >
           <b-tab active>

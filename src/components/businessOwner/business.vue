@@ -2,7 +2,7 @@
   <div>
     <head-page-owner></head-page-owner>
     <div class="row">
-      <b-container fluid="md" class="text-justify mt-2">
+      <div  class="text-justify mt-2 container-fluid">
         <b-row>
           <b-col cols="12">
             <b-tabs content-class="mt-3" fill pills card>
@@ -15,19 +15,19 @@
             </b-tabs>
           </b-col>
         </b-row>
-      </b-container>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-import HomePage from "../businessf/tabs/businessHome";
+import HomePage from "../businessOwner/tabs/businessHome";
 import About from "./tabs/about";
 import Media from "./tabs/media";
 import MarketPlace from "./tabs/marketPlace";
-import Followers from "./tabs/followers";
+import Followers from "./tabs/memberNetwork";
 import Networks from "./tabs/networks";
-import HeadPageOwner from "@/components/businessf/headPageOwner";
+import HeadPageOwner from "@/components/businessOwner/headPageOwner";
 
 export default {
   name: "Home",

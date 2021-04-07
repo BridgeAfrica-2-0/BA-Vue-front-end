@@ -4,9 +4,9 @@
     <navbar />
    
 
-    <div  class="text-justify " style="padding-left:60px; padding-right:60px;  margin-top: 100px;">
+    <div  class="text-justify container-fluid mar-left">
       <b-row>
-        <b-tabs pills  content-class="mt-3" class="business-owner-tab" >
+        <b-tabs pills  content-class="mt-3" class=" " >
           <b-tab active>
             <template slot="title">
               <p class="t-color">
@@ -64,6 +64,17 @@
         </b-tabs>
       </b-row>
     </div>
+
+
+
+
+
+
+
+
+
+
+
     <Footer />
   </div>
 </template>
@@ -100,6 +111,9 @@ export default {
 </script>
 
 <style scoped>
+.mar-left{
+  margin-left: 15px;
+}
 .tabs {
   width: 100%;
 }

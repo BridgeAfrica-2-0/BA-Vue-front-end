@@ -1,12 +1,13 @@
 <template>
   <div>
     <b-row>
-      <b-col md="4">
+      <b-col md="4" lg="3" >
         <Intro />
         <Invite />
         <Personalise />
       </b-col>
-      <b-col md="8">
+
+      <b-col md="8"  lg="9" >
         <Post />
       </b-col>
     </b-row>
@@ -31,3 +32,5 @@ export default {
 </script>
 
 <style scoped></style>
+
+

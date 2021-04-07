@@ -8,7 +8,11 @@
             variant="info"
             src="https://profile.bridgeafrica.info/assets/img/wankue-filler.jpg"
           ></b-avatar>
+
+
         </b-col>
+
+        
         <b-col cols="10" md="11" class="m-0 p-0">
           <b-form-textarea
             id="textarea-small"
@@ -615,6 +619,13 @@ export default {
 .color-site {
   color: #e75c18;
 }
+
+
+ .avatar-size{
+   width: 50px;
+ }
+
+
 
 p {
   text-align: left;

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b-container fluid>
+    <div class="container-fluid">
       <img
         src="@/assets/img/banner.jpg"
         class="img-fluid header-pic"
@@ -12,7 +12,8 @@
         >
         <b-button class="ml-2" size="sm">See All</b-button>
       </div>
-      <b-container fluid="md">
+
+      <div class="container-fluid mpbar ">
         <b-row class="mt-md-4">
           <b-col md="6" class="m-0 p-0">
             <b-avatar
@@ -60,10 +61,7 @@
                     User Name
                   </h5>
                   <br />
-                  <p class="m-0 ml-2 d-inline-block header-text2">
-                    Website
-                  </p>
-                  <br />
+                  
                   <p class="m-0 ml-2 d-inline-block header-text2">
                     1.5k Community
                   </p>
@@ -173,8 +171,8 @@
             </div>
           </b-col>
         </b-row>
-      </b-container>
-    </b-container>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -185,6 +183,14 @@ export default {
 </script>
 
 <style scoped>
+
+.mpbar{
+
+    margin-left: 50px;
+    margin-right: 50px;
+}
+
+
 .btns {
   position: relative;
   left: 75%;
@@ -220,8 +226,8 @@ export default {
 }
 
 .img-avatar {
-  width: 8em;
-  height: 8em;
+  width: 6em;
+  height: 6em;
   margin-top: 10px;
 }
 

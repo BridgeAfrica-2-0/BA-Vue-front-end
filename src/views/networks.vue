@@ -3,23 +3,25 @@
     <navbar />
    
 
-    <div  class="  bongo container-fluid"  style="margin-left:20px;   marin-right:20px "  >
+    <div  class="  bongo container-fluid"  style="padding-left:30px;   pasdding-right:30px "  >
       <b-row>
         <b-tabs  pills  fill  class="yaya" content-class="mt-3 f-width" active-nav-item-class=" box-item" >
           <b-tab active>
             <template slot="title">
-              <p class="t-color">
-                <b-icon icon="house" scale="1" variant="primary"></b-icon> Home
+              <p class="tt-color">
+                <b-icon icon="house" scale="1" variant="primary" class="icon"></b-icon> Home
               </p>
             </template>
 
             <div style="padding:10px;">
               <b-row>
-                <b-col cols="" class="text-center px-3 a-box">
+                <b-col c class="text-center px-3 a-box">
                   <Parent />
                 </b-col>
 
-                <b-col md="8" class="order-sm-0">
+
+
+                <b-col md="9" class="order-sm-0">
                   <Default />
                 </b-col>
               </b-row>
@@ -28,7 +30,7 @@
 
           <b-tab>
             <template slot="title">
-              <p class="t-color">
+              <p class="tt-color">
                 <b-icon icon="envelope" scale="1" variant="primary"></b-icon>
 
                 Inbox
@@ -43,49 +45,39 @@
 
           <b-tab>
             <template slot="title">
-              <p class="t-color">
+              <p class="tt-color">
                 <b-icon icon="bell" scale="1" variant="primary"></b-icon>
                 Notification <b-badge pill variant="primary">9</b-badge>
               </p>
             </template>
 
             <div>
-              <b-row>
-                <b-col cols="" class="text-center px-3">
-                  <Parent />
-                </b-col>
-
-                <b-col md="8" class="order-sm-0">
+              
                   <Notification />
-                </b-col>
-              </b-row>
+              
             </div>
           </b-tab>
 
           <b-tab title=" ">
             <template slot="title">
-              <p class="t-color">
+              <p class="tt-color">
                 <b-icon icon="person-plus" scale="1" variant="primary"></b-icon>
                 Community Management
               </p>
             </template>
 
             <div>
-              <b-row>
-                <b-col cols="" class="text-center px-3 a-box" >
-                  <Parent />
-                </b-col>
+            
+               
 
-                <b-col md="8" class="order-sm-0">
                   <MemberShip />
-                </b-col>
-              </b-row>
+                
             </div>
           </b-tab>
 
           <b-tab>
             <template slot="title">
-              <p class="t-color">
+              <p class="tt-color">
                 <b-icon
                   icon="arrow-clockwise"
                   scale="1"
@@ -96,21 +88,19 @@
             </template>
 
             <div>
-              <b-row>
-                <b-col cols="" class="text-center px-3 a-box">
-                  <Parent />
-                </b-col>
+              
 
-                <b-col md="8" class="order-sm-0">  
+               
                   <PendingPost />
-                </b-col>
-              </b-row>
+                
+
+
             </div>
           </b-tab>
 
           <b-tab>
             <template slot="title">
-              <p class="t-color">
+              <p class="tt-color">
                 <b-icon
                   icon="exclamation-triangle"
                   scale="1"
@@ -121,57 +111,42 @@
             </template>
 
             <div>
-              <b-row>
-                <b-col cols="" class="text-center px-3 a-box">
-                  <Parent />
-                </b-col>
-
-                <b-col md="8" class="order-sm-0">
+              
                   <KeywordAlert />
-                </b-col>
-              </b-row>
+               
             </div>
           </b-tab>
 
           <b-tab>
             <template slot="title">
-              <p class="t-color">
+              <p class="tt-color">
                 <b-icon icon="person" scale="1" variant="primary"></b-icon>
                 Roles
               </p>
             </template>
 
             <div>
-              <b-row>
-                <b-col cols="" class="text-center px-3 a-box">
-                  <Parent />
-                </b-col>
+             
 
-                <b-col md="8" class="order-sm-0">
+                
                   <Roles />
-                </b-col>
-              </b-row>
+               
             </div>
           </b-tab>
 
           <b-tab>
             <template slot="title">
-              <p class="t-color">
+              <p class="tt-color">
                 <b-icon icon="gear" scale="1" variant="primary"></b-icon>
                 Settings
               </p>
             </template>
 
             <div>
-              <b-row>
-                <b-col cols="" class="text-center px-3 a-box">
-                  <Parent />
-                </b-col>
-
-                <b-col md="8" class="order-sm-0">
+              
                   <Settings />
-                </b-col>
-              </b-row>
+               
+               
             </div>
           </b-tab>
         </b-tabs>
@@ -257,8 +232,8 @@ export default {
   cursor: pointer;
 }
 
-.t-color {
-  color: black;
+.tt-color {
+ 
   padding-top: 8px;
 }
 

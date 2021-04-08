@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="container">
     <b-row>
       <b-col class="f-left">
         <h5 class=" d-inline-block">

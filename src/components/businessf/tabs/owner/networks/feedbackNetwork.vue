@@ -1,5 +1,5 @@
 <template>
-<div class="mt-3">
+<div class="mt-3 container">
   <b-row>
     <b-col cols="12">
       <b-card

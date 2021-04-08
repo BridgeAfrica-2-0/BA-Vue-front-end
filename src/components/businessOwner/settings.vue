@@ -1,5 +1,5 @@
 <template>
-  <div class=" ">
+  <div class=" container-fluid "   style="padding-left:60px; padding-right:60px">
     <div class="">
       <div class="">
         <h5 class="a-text"><b-icon-gear></b-icon-gear> Business Settings</h5>
@@ -8,7 +8,7 @@
 
       <div class="bv-example-row">
         <div>
-          <b-tabs pills  vertical>
+          <b-tabs pills  vertical card>
             <b-tab active>
               <template slot="title" class="t-color">
                 <h6 class="t-color">General</h6>

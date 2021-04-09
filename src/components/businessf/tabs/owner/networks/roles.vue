@@ -2,7 +2,7 @@
   <b-container>
     <h5 class="a-text">Assign Roles</h5>
 
-    <hr width="100%" />
+    <hr class="black" width="100%" />
 
     <b-container class="b-bottom">
       <b-row>
@@ -195,6 +195,10 @@ export default {
 </script>
 
 <style scoped>
+.black{
+  color: black;
+  background-color: black;
+}
 .m-list {
   margin-bottom: 15px;
   margin-top: 10px;

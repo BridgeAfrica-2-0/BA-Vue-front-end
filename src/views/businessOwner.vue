@@ -1,5 +1,5 @@
 <template>
-  <div class=" ">
+  <div class="">
   
     <navbar />
    
@@ -9,7 +9,7 @@
         <b-tabs pills   >
           <b-tab active>
             <template slot="title">
-              <p class="t-color">
+              <p class="tt-color">
                 <b-icon icon="house" scale="1" variant="primary"></b-icon> Home
               </p> </template
             ><Business
@@ -17,7 +17,7 @@
 
           <b-tab>
             <template slot="title">
-              <p class="t-color">
+              <p class="tt-color">
                 <b-icon icon="envelope" scale="1" variant="primary"></b-icon>
                 Inbox
               </p>
@@ -29,7 +29,7 @@
 
           <b-tab>
             <template slot="title">
-              <p class="t-color">
+              <p class="tt-color">
                 <b-icon icon="bell" scale="1" variant="primary"></b-icon>
                 Notifications
               </p>
@@ -38,14 +38,14 @@
           </b-tab>
 
           <b-tab >   <template slot="title"  > 
-              <p class="t-color" > <b-icon icon="arrow-clockwise" scale="1" variant="primary"></b-icon> Pending Posts </p>
+              <p class="tt-color" > <b-icon icon="arrow-clockwise" scale="1" variant="primary"></b-icon> Pending Posts </p>
           
         </template>  <Pending /></b-tab>
 
           <b-tab>
             <template slot="title">   
 
-              <p class="t-color">
+              <p class="tt-color">
                 <b-icon icon="eye" scale="1" variant="primary"></b-icon>
                 Insight
               </p>
@@ -55,7 +55,7 @@
 
           <b-tab>
             <template slot="title">
-              <p class="t-color">
+              <p class="tt-color">
                 <b-icon icon="gear" scale="1" variant="primary"></b-icon>
                 Settings
               </p>
@@ -135,10 +135,7 @@ export default {
   cursor: pointer;
 }
 
-.t-color{
 
-  color: black;
-}
 
 .tab-title-class {
     color: #ffffff !important;  

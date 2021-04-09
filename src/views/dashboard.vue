@@ -109,7 +109,7 @@
               </template>
 
               <b-form-select
-                v-model="profession"
+                v-model="professio"
                 :options="profession"
                 class=" w-25 wi-25 border shadow "
                 value-field="item"
@@ -130,7 +130,7 @@
               </template>
 
               <b-form-select
-                v-model="education"
+                v-model="educatio"
                 :options="education"
                 class=" w-25 wi-25 border shadow "
                 value-field="item"
@@ -139,7 +139,7 @@
             </b-input-group>
           </div>
 
-          <div v-if="selected == 'business' || selected == 'network'">
+          <div v-if="selected == 'business' || selected == 'network' || selected=='marketplace'">
             <b-input-group class="my-auto input-size">
               <template #append>
                 <b-input-group-text class=" b-groupe shadow "
@@ -160,7 +160,7 @@
         </b-col>
 
         <b-col md="3" sm="12"   class="mt-2" >
-          <div v-if="selected == 'business' || selected == 'network'">
+          <div v-if="selected == 'business' || selected == 'network' || selected=='marketplace'">
             <div class="a-center">
               <b-form-checkbox id="checkbox-1" name="checkbox-1">
                 Show Map
@@ -178,7 +178,7 @@
               </template>
 
               <b-form-select
-                v-model="workplace"
+                v-model="workplac"
                 :options="workplace"
                 class=" w-25 wi-25 border shadow "
                 value-field="item"
@@ -302,6 +302,27 @@
 
       <br />
 
+
+
+
+      
+
+
+     <div  v-if="selected == 'marketplace'" >
+   
+
+
+     <Market />
+      
+
+       
+     <br />
+  </div>
+
+
+
+
+
         <div  v-if="selectedb == 'owner'" >
   
 <b-card class=" border shadow" style="height:100px">   
@@ -321,6 +342,18 @@
      <br />
   </div>
 
+
+
+
+
+
+
+
+
+
+
+
+
      
 
       <div v-if="selectedb == 'owner'">
@@ -338,7 +371,7 @@
 
 
              <div   >
-  
+     
 
 
 
@@ -428,6 +461,9 @@ import EmptyBusiness from "@/components/dasboard/emptybusiness";
 import Popularnetwork from "@/components/dasboard/popularnetwork";
 import Hotbusiness from "@/components/dasboard/hotbusiness";
 
+import Market from "@/components/dasboard/market";
+
+
 export default {
   name: "dashboard",
   data() {
@@ -441,11 +477,11 @@ export default {
       post: "any",
        selectedb: "owner",
       
-      //education: "any",
+      educatio: "any",
 
-      //profession: "any",
+      professio: "any",
 
-      //workplace: "any",
+      workplac: "any",
 
       map: false,
 
@@ -538,6 +574,7 @@ export default {
     Popularnetwork,
     Hotbusiness,
     //SelectBusiness,
+    Market,
     Map,
     Post,
     EmptyBusiness,

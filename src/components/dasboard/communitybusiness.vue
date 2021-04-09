@@ -53,7 +53,7 @@
             <b-col md="12" sm="4" cols="4" class="mt-md-2">  
 
             <b-button block size="sm" class="b-background" variant="primary">
-              <b-icon icon="direction" class="ico"> </b-icon> Direction
+              <b-icon-geo-alt ></b-icon-geo-alt>  Direction
             </b-button>
 
             </b-col>  
@@ -117,7 +117,7 @@
             <b-col md="12" sm="4" cols="4" class="mt-md-2">  
 
             <b-button block size="sm" class="b-background" variant="primary">
-              <b-icon icon="direction" class="ico"> </b-icon> Direction
+             <b-icon-geo-alt ></b-icon-geo-alt> Direction
             </b-button>
 
             </b-col>  
@@ -174,7 +174,7 @@
             <b-col md="12" sm="4" cols="4" class="mt-md-2">  
 
             <b-button block size="sm" class="b-background" variant="primary">
-              <b-icon icon="direction" class="ico"> </b-icon> Direction
+               <b-icon-geo-alt ></b-icon-geo-alt> Direction
             </b-button>
 
             </b-col>  

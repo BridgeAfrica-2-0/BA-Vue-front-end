@@ -1,7 +1,7 @@
 <template>
-  <header class=" bg-white">
+  <header class=" ">
     <nav
-      class="navbar bg-light navbar-expand-lg shadow-nav p-3 mb-3 rounded "
+      class="navbar bg-light navbar-expand-lg shadow-nav p-3 mb-3 rounded container-fluid "   
     >
       <div class="container-fluid ">
 
@@ -210,6 +210,9 @@
               </div>
             </b-popover>
           </div>
+
+           <div class="vl"></div>
+
           <div class="nav-item">
             <a
               id="notif"
@@ -223,6 +226,7 @@
             ></a>
             <b-popover target="notif" triggers="hover" placement="top">
               <div class="popover-body">
+                
                 <p class="font-weight-bold">Notifications</p>
                 <hr class="h-divider" />
                 <div
@@ -353,7 +357,7 @@
             </a>
           </div>
           <div class="vl"></div>
-          <div class="nav-item">
+          <div class="nav-item container-fluid">
             <a
               id="other-menu"
               class="nav-link text-dark arrow-down"
@@ -575,8 +579,5 @@ export default {
 }
 
 
-.blec-container{
 
-  width: 95%;
-}
 </style>

@@ -30,7 +30,7 @@
                 <template #button-content>
                   <b-icon
                     icon="three-dots-vertical"
-                    animation="cylon-vertical"
+                   
                     font-scale="1"
                   ></b-icon>
                 </template>
@@ -71,7 +71,7 @@
                 <template #button-content>
                   <b-icon
                     icon="three-dots-vertical"
-                    animation="cylon-vertical"
+                   
                     font-scale="1"
                   ></b-icon>
                 </template>

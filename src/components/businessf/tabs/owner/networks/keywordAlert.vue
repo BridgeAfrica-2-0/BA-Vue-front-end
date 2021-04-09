@@ -1,5 +1,5 @@
 <template>
-  <div class="a-left">
+  <div class="a-left container" >
     <h5 class=" d-inline-block">
       Keywords Alerts
     </h5>

@@ -13,10 +13,11 @@
 
 
 
-                  
+
+                    
     <div class="people-style shadow">
       <b-row>
-        <b-col md="3" sm="5">
+        <b-col md="3" cols="5" sm="5">
           <div style="height: 100%;">
             <img
               src="https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg"
@@ -26,7 +27,7 @@
             />
           </div>
         </b-col>
-        <b-col md="6" sm="7">
+        <b-col md="6" cols="7" sm="7">
          <p class="text">
             <strong> Shipping Network </strong> <br />  <br />
             Public <br />
@@ -36,9 +37,9 @@
           </p>
         </b-col>
 
-        <b-col md="3" sm="12">
+        <b-col md="3" cols="12" sm="12">
           <div class="s-button">
-     <b-row>  <b-col md="12" sm="4" class="mt-md-2">    
+     <b-row>  <b-col md="12" cols="4" sm="4" class="mt-md-2">    
 
             <b-button block size="sm" class="b-background" variant="primary">
               <b-icon class="ico" icon="plus-circle"> </b-icon> Community
@@ -46,7 +47,7 @@
 
             </b-col>  
 
-        <b-col md="12" sm="4" class="mt-md-2">  
+        <b-col md="12" sm="4" cols="4" class="mt-md-2">  
 
             <b-button block size="sm" class="b-background" variant="primary">
               <b-icon class="ico" icon="chat"> </b-icon> Message
@@ -54,7 +55,7 @@
 
             </b-col>  
 
-            <b-col md="12" sm="4" class="mt-md-2">  
+            <b-col md="12" sm="4" cols="4" class="mt-md-2">  
 
             
 
@@ -76,10 +77,26 @@
 
 
 
-                  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    
     <div class="people-style shadow">
       <b-row>
-        <b-col md="3" sm="5">
+        <b-col md="3" cols="5" sm="5">
           <div style="height: 100%;">
             <img
               src="https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg"
@@ -89,7 +106,7 @@
             />
           </div>
         </b-col>
-        <b-col md="6" sm="7">
+        <b-col md="6" cols="7" sm="7">
          <p class="text">
             <strong> Shipping Network </strong> <br />  <br />
             Public <br />
@@ -99,9 +116,9 @@
           </p>
         </b-col>
 
-        <b-col md="3" sm="12">
+        <b-col md="3" cols="12" sm="12">
           <div class="s-button">
-     <b-row>  <b-col md="12" sm="4" class="mt-md-2">    
+     <b-row>  <b-col md="12" cols="4" sm="4" class="mt-md-2">    
 
             <b-button block size="sm" class="b-background" variant="primary">
               <b-icon class="ico" icon="plus-circle"> </b-icon> Community
@@ -109,7 +126,7 @@
 
             </b-col>  
 
-        <b-col md="12" sm="4" class="mt-md-2">  
+        <b-col md="12" sm="4" cols="4" class="mt-md-2">  
 
             <b-button block size="sm" class="b-background" variant="primary">
               <b-icon class="ico" icon="chat"> </b-icon> Message
@@ -117,7 +134,7 @@
 
             </b-col>  
 
-            <b-col md="12" sm="4" class="mt-md-2">  
+            <b-col md="12" sm="4" cols="4" class="mt-md-2">  
 
             
 
@@ -139,10 +156,20 @@
 
 
 
-                  
+
+
+
+
+
+
+
+
+
+
+                    
     <div class="people-style shadow">
       <b-row>
-        <b-col md="3" sm="5">
+        <b-col md="3" cols="5" sm="5">
           <div style="height: 100%;">
             <img
               src="https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg"
@@ -152,7 +179,7 @@
             />
           </div>
         </b-col>
-        <b-col md="6" sm="7">
+        <b-col md="6" cols="7" sm="7">
          <p class="text">
             <strong> Shipping Network </strong> <br />  <br />
             Public <br />
@@ -162,9 +189,9 @@
           </p>
         </b-col>
 
-        <b-col md="3" sm="12">
+        <b-col md="3" cols="12" sm="12">
           <div class="s-button">
-     <b-row>  <b-col md="12" sm="4" class="mt-md-2">    
+     <b-row>  <b-col md="12" cols="4" sm="4" class="mt-md-2">    
 
             <b-button block size="sm" class="b-background" variant="primary">
               <b-icon class="ico" icon="plus-circle"> </b-icon> Community
@@ -172,7 +199,7 @@
 
             </b-col>  
 
-        <b-col md="12" sm="4" class="mt-md-2">  
+        <b-col md="12" sm="4" cols="4" class="mt-md-2">  
 
             <b-button block size="sm" class="b-background" variant="primary">
               <b-icon class="ico" icon="chat"> </b-icon> Message
@@ -180,65 +207,7 @@
 
             </b-col>  
 
-            <b-col md="12" sm="4" class="mt-md-2">  
-
-            
-
-            </b-col>  
-   </b-row>
-
-          </div>
-        </b-col>
-      </b-row>
-    </div>
-
-
-
-
-
-
-                  
-    <div class="people-style shadow">
-      <b-row>
-        <b-col md="3" sm="5">
-          <div style="height: 100%;">
-            <img
-              src="https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg"
-              width="100%"
-              height="90%"
-              class="r-image"
-            />
-          </div>
-        </b-col>
-        <b-col md="6" sm="7">
-         <p class="text">
-            <strong> Shipping Network </strong> <br />  <br />
-            Public <br />
-             20k Members <br />
-             Business Name <br />
-            
-          </p>
-        </b-col>
-
-        <b-col md="3" sm="12">
-          <div class="s-button">
-     <b-row>  <b-col md="12" sm="4" class="mt-md-2">    
-
-            <b-button block size="sm" class="b-background" variant="primary">
-              <b-icon class="ico" icon="plus-circle"> </b-icon> Community
-            </b-button>
-
-            </b-col>  
-
-        <b-col md="12" sm="4" class="mt-md-2">  
-
-            <b-button block size="sm" class="b-background" variant="primary">
-              <b-icon class="ico" icon="chat"> </b-icon> Message
-            </b-button>
-
-            </b-col>  
-
-            <b-col md="12" sm="4" class="mt-md-2">  
+            <b-col md="12" sm="4" cols="4" class="mt-md-2">  
 
             
 

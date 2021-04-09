@@ -6,7 +6,7 @@
           <b-avatar
             class="d-inline-block"
             variant="info"
-            src="https://profile.bridgeafrica.info/assets/img/wankue-filler.jpg"
+            src="@/assets/img/wankue-filler.jpg"
           ></b-avatar>
 
 

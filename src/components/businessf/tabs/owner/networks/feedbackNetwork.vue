@@ -36,7 +36,8 @@
   <b-row>
     <b-col cols="12">
       <span class="float-right">
-        <b-dropdown size="lg"  variant="link" toggle-class="text-decoration-none" no-caret>
+
+        <b-dropdown size="lg"  variant="link" toggle-class="text-decoration-none pull-left" right  class="pull-left" no-caret>
           <template #button-content>
             <b-icon-filter></b-icon-filter><span class="sr-only">Search</span>
           </template>
@@ -46,7 +47,12 @@
           <b-dropdown-item href="#">Progress to your program</b-dropdown-item>
           <b-dropdown-item href="#">New Idea for PEA-JEUNES</b-dropdown-item>
         </b-dropdown>
+
+
       </span>
+
+
+
     </b-col>
   </b-row>
   <b-row>

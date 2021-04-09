@@ -1,5 +1,4 @@
-import Businesses from '@/components/follower/tabs/businesses'; import Bussiness
-from '@/components/owner/tabs/bussiness';
+
 
 <template>
   <b-container fluid="" class="text-justify ">

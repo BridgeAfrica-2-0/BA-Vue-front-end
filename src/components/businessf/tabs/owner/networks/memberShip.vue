@@ -54,30 +54,40 @@
 
     <div v-for="i in 6" class="f-left" :key="i">  
 
+        
+        
+        <b-row>
 
+
+
+
+        <b-col cols="12" md="6" >    
         
             <div class="people-style border shadow">
               <b-row class="mb-1">
-                <b-col cols="3" class="my-auto">
-                  <b-avatar class="p-avater" variant="primary" src="https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg" size="5em"></b-avatar>
-                </b-col>
+                <b-col cols="6" class="" style="display:inline-flex">
 
-                <b-col cols="4">
+                  <b-avatar class="p-avater" variant="primary" src="https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg" size="5em"></b-avatar>
+               
+
+               
                   <div class="e-name">
                     <h6>
                       <br />
-                      howty Circlehead
+                      howty Circlehead  
                     </h6>
                   </div>
                 </b-col>
 
-                <b-col cols="3">
-                  <div class="p-buttons">
+                <b-col cols="5">
+
+                  <div class="p-buttons" >
                     <b-button
                       block
                       variant="primary"
                       size="sm"
                       class="b-background"
+                      style="display:inline-flex"
                     >
                       <b-icon icon="chat"> </b-icon> Message
                     </b-button>
@@ -87,13 +97,14 @@
                       size="sm"
                       class="b-background"
                       variant="primary"
+                      style="display:inline-flex"
                     >
                       <b-icon icon="plus-circle"> </b-icon> community
                     </b-button>
                   </div>
                 </b-col>
 
-                <b-col cols="2">   
+                <b-col cols="1">   
                   
                   
                       <span class="float-right a-dots">
@@ -122,6 +133,108 @@
 
 
 
+
+   </b-col>
+
+  
+
+
+
+
+        
+        
+        
+
+        <b-col cols="12" md="6">    
+        
+            <div class="people-style border shadow">
+              <b-row class="mb-1">
+                <b-col cols="6" class="" style="display:inline-flex">
+
+                  <b-avatar class="p-avater" variant="primary" src="https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg" size="5em"></b-avatar>
+               
+
+               
+                  <div class="e-name">
+                    <h6>
+                      <br />
+                      howty Circlehead
+                    </h6>
+                  </div>
+                </b-col>
+
+                <b-col cols="5">
+
+                  <div class="p-buttons" >
+                    <b-button
+                      block
+                      variant="primary"
+                      size="sm"
+                      class="b-background"
+                      style="display:inline-flex"
+                    >
+                      <b-icon icon="chat"> </b-icon> Message
+                    </b-button>
+
+                    <b-button
+                      block
+                      size="sm"
+                      class="b-background"
+                      variant="primary"
+                      style="display:inline-flex"
+                    >
+                      <b-icon icon="plus-circle"> </b-icon> community
+                    </b-button>
+                  </div>
+                </b-col>
+
+                <b-col cols="1">   
+                  
+                  
+                      <span class="float-right a-dots">
+          <b-dropdown
+            size="lg"
+            variant="link"
+            toggle-class="text-decoration-none"
+            no-caret  
+            class="a-dbutton"
+          >
+            <template #button-content>
+              <b-icon-three-dots-vertical></b-icon-three-dots-vertical
+              ><span class="sr-only">Settings</span>
+            </template>
+            <b-dropdown-item href="#">
+              Approve
+            </b-dropdown-item>
+            <b-dropdown-item href="#">
+              Reject
+            </b-dropdown-item>
+          </b-dropdown>
+        </span>      </b-col>
+
+              </b-row>
+            </div>
+
+
+
+
+   </b-col>
+
+  
+
+
+
+
+        
+        
+        
+        
+        
+        
+        
+
+
+   </b-row>  
 
     </div>
 
@@ -288,8 +401,7 @@ f-right {
   border: 1px solid rgba(0, 0, 0, 0.125);
 
   margin-bottom: 10px;
-  margin-right: -30px;
-  margin-left: -30px;
+ 
 }
 
 .p-buttons {
@@ -301,10 +413,10 @@ padding-right: 5px;
 }
 
 .e-name {
-  margin-right: -12px;
-  margin-left: -25px;
+      margin-left: 20px;
+
 }
-.p-avater {
+.pp-avater {
   margin-right: -15px;
 }
 .a-text {

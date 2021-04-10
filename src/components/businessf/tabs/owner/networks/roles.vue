@@ -6,7 +6,7 @@
 
     <b-container class="b-bottom">
       <b-row>
-        <b-col cols="5">
+        <b-col cols="6" md="4">
           <b-form-group
             label-cols-lg="3"
             label="User"
@@ -21,7 +21,7 @@
           </b-form-group>
         </b-col>
 
-        <b-col>
+        <b-col cols="6" md="4">
           <b-form-group
             label-cols-lg="3"
             label="Role"
@@ -36,8 +36,8 @@
           </b-form-group>
         </b-col>
 
-        <b-col>
-          <b-button variant="primary" class="">Assign</b-button>
+        <b-col cols="6" md="4">
+          <b-button variant="primary"  block class="">Assign</b-button>
         </b-col>
       </b-row>
 
@@ -76,7 +76,7 @@
                   <template #button-content>
                     <b-icon
                       icon="three-dots-vertical"
-                      animation="cylon-vertical"
+                     
                       font-scale="1"
                     ></b-icon>
                   </template>
@@ -106,7 +106,7 @@
                   <template #button-content>
                     <b-icon
                       icon="three-dots-vertical"
-                      animation="cylon-vertical"
+                     
                       font-scale="1"
                     ></b-icon>
                   </template>
@@ -142,7 +142,7 @@
                   <template #button-content>
                     <b-icon
                       icon="three-dots-vertical"
-                      animation="cylon-vertical"
+                     
                       font-scale="1"
                     ></b-icon>
                   </template>
@@ -172,7 +172,7 @@
                   <template #button-content>
                     <b-icon
                       icon="three-dots-vertical"
-                      animation="cylon-vertical"
+                     
                       font-scale="1"
                     ></b-icon>
                   </template>

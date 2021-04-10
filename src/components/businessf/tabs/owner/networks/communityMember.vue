@@ -1,7 +1,7 @@
 <template>
   
 
-<b-container> 
+<div> 
   
   
    <div class="s-card">
@@ -12,258 +12,84 @@
 
 
 
-
-
-
             <div class="people-style   border shadow " >
+
               <b-row class="mb-1">
 
-                <b-col md="3" cols="4" sm="3"   class="my-auto">
+                <b-col md="3" cols="4" sm="3"    class="my-auto">
                   <b-avatar class="p-avater" variant="primary" src="https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg" size="5em"></b-avatar>
                 </b-col>
 
                 <b-col md="8" cols="8" sm="8" class="shift-left">
                   <div>
-                    <b-row>  <b-col md="8" sm="12">   
+
+                    <b-row>  <b-col md="12" xl="6" sm="12">   
 
 
                   <div class="e-name">
-                    <h6>
-                      <br />
-                      howty Circlehead  
+
+      
+              <b-row>   
+                
+             <b-col md="8"  lg="8" cols="6" sm="6" xl="12" class="mt-lg-2 "> 
+
+
+   
+
+                    <h6 class="mt-3">
+                     
+                    <b>  howty blec  </b>
+
                     </h6>
+
+
+               </b-col>  
+               
+               
+                <b-col md="4"  lg="4" cols="6" sm="6" xl="12"  class="mt-3 mt-xl-0 "> 
+
+
+   
+
+                    <h6 class="follower">
+                     
+                      5K Follower 
+                      
+                    </h6>
+
+
+               </b-col> 
+               
+               
+                  </b-row>
+
+
                   </div>
                  </b-col>
 
-                <b-col  >
+
+                <b-col lg="" >
 
                   <div>   
                     
-                <b-row>    <b-col md="12"  cols="6" sm="6"  class="mt-md-2">  <b-button
+                <b-row>    <b-col md="6"  lg="6" cols="6" sm="6" xl="12"  class="mt-xl-2  center">  <b-button
                       block
                       variant="primary"
                       size="sm"
-                      class="b-background"
+                      class="b-background  flexx"
                     >
-                      <b-icon icon="chat"> </b-icon> Message
+                      <b-icon icon="chat" class="mr-1"> </b-icon> Message
                     </b-button>
 
                       </b-col >
 
-                       <b-col md="12"  cols="6" sm="6" class="mt-md-2" > <b-button
+                       <b-col md="6" lg="6"  cols="6" sm="6" xl="12" class="mt-xl-2 btn-2  center" > <b-button
                       block
                       size="sm"
-                      class="b-background"
+                      class="b-background flexx "
                       variant="primary"
                     >
-                      <b-icon icon="plus-circle"> </b-icon> community
-                    </b-button>  </b-col >  </b-row>      </div>
-
-
-
-
-                  </b-col>    </b-row> </div>
-                </b-col>
-
-         
-         
-
-
-
-              </b-row>
-
-
-
-
-
-            </div>
-
-
-
-
-
-
-
-            <div class="people-style   border shadow " >
-              <b-row class="mb-1">
-
-                <b-col md="3" cols="4" sm="3"   class="my-auto">
-                  <b-avatar class="p-avater" variant="primary" src="https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg" size="5em"></b-avatar>
-                </b-col>
-
-                <b-col md="8" cols="8" sm="8" class="shift-left">
-                  <div>
-                    <b-row>  <b-col md="8" sm="12">   
-
-
-                  <div class="e-name">
-                    <h6>
-                      <br />
-                      howty Circlehead  
-                    </h6>
-                  </div>
-                 </b-col>
-
-                <b-col  >
-
-                  <div>   
-                    
-                <b-row>    <b-col md="12"  cols="6" sm="6"  class="mt-md-2">  <b-button
-                      block
-                      variant="primary"
-                      size="sm"
-                      class="b-background"
-                    >
-                      <b-icon icon="chat"> </b-icon> Message
-                    </b-button>
-
-                      </b-col >
-
-                       <b-col md="12"  cols="6" sm="6" class="mt-md-2" > <b-button
-                      block
-                      size="sm"
-                      class="b-background"
-                      variant="primary"
-                    >
-                      <b-icon icon="plus-circle"> </b-icon> community
-                    </b-button>  </b-col >  </b-row>      </div>
-
-
-
-
-                  </b-col>    </b-row> </div>
-                </b-col>
-
-         
-         
-
-
-
-              </b-row>
-
-
-
-
-
-            </div>
-
-
-
-
-            <div class="people-style   border shadow " >
-              <b-row class="mb-1">
-
-                <b-col md="3" cols="4" sm="3"   class="my-auto">
-                  <b-avatar class="p-avater" variant="primary" src="https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg" size="5em"></b-avatar>
-                </b-col>
-
-                <b-col md="8" cols="8" sm="8" class="shift-left">
-                  <div>
-                    <b-row>  <b-col md="8" sm="12">   
-
-
-                  <div class="e-name">
-                    <h6>
-                      <br />
-                      howty Circlehead  
-                    </h6>
-                  </div>
-                 </b-col>
-
-                <b-col  >
-
-                  <div>   
-                    
-                <b-row>    <b-col md="12"  cols="6" sm="6"  class="mt-md-2">  <b-button
-                      block
-                      variant="primary"
-                      size="sm"
-                      class="b-background"
-                    >
-                      <b-icon icon="chat"> </b-icon> Message
-                    </b-button>
-
-                      </b-col >
-
-                       <b-col md="12"  cols="6" sm="6" class="mt-md-2" > <b-button
-                      block
-                      size="sm"
-                      class="b-background"
-                      variant="primary"
-                    >
-                      <b-icon icon="plus-circle"> </b-icon> community
-                    </b-button>  </b-col >  </b-row>      </div>
-
-
-
-
-                  </b-col>    </b-row> </div>
-                </b-col>
-
-         
-         
-
-
-
-              </b-row>
-
-
-
-
-
-            </div>
-
-
-
-
-
-
-
-
-
-
-            <div class="people-style   border shadow " >
-              <b-row class="mb-1">
-
-                <b-col md="3" cols="4" sm="3"   class="my-auto">
-                  <b-avatar class="p-avater" variant="primary" src="https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg" size="5em"></b-avatar>
-                </b-col>
-
-                <b-col md="8" cols="8" sm="8" class="shift-left">
-                  <div>
-                    <b-row>  <b-col md="8" sm="12">   
-
-
-                  <div class="e-name">
-                    <h6>
-                      <br />
-                      howty Circlehead  
-                    </h6>
-                  </div>
-                 </b-col>
-
-                <b-col  >
-
-                  <div>   
-                    
-                <b-row>    <b-col md="12"  cols="6" sm="6"  class="mt-md-2">  <b-button
-                      block
-                      variant="primary"
-                      size="sm"
-                      class="b-background"
-                    >
-                      <b-icon icon="chat"> </b-icon> Message
-                    </b-button>
-
-                      </b-col >
-
-                       <b-col md="12"  cols="6" sm="6" class="mt-md-2" > <b-button
-                      block
-                      size="sm"
-                      class="b-background"
-                      variant="primary"
-                    >
-                      <b-icon icon="plus-circle"> </b-icon> community
+                      <b-icon icon="plus-circle" class="mr-1"> </b-icon> community
                     </b-button>  </b-col >  </b-row>      </div>
 
 
@@ -298,6 +124,356 @@
 
 
 
+
+            
+
+
+            <div class="people-style   border shadow " >
+
+              <b-row class="mb-1">
+
+                <b-col md="3" cols="4" sm="3"    class="my-auto">
+                  <b-avatar class="p-avater" variant="primary" src="https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg" size="5em"></b-avatar>
+                </b-col>
+
+                <b-col md="8" cols="8" sm="8" class="shift-left">
+                  <div>
+
+                    <b-row>  <b-col md="12" xl="6" sm="12">   
+
+
+                  <div class="e-name">
+
+      
+              <b-row>   
+                
+             <b-col md="8"  lg="8" cols="6" sm="6" xl="12" class="mt-lg-2 "> 
+
+
+   
+
+                    <h6 class="mt-3">
+                     
+                    <b>  howty blec  </b>
+
+                    </h6>
+
+
+               </b-col>  
+               
+               
+                <b-col md="4"  lg="4" cols="6" sm="6" xl="12"  class="mt-3 mt-xl-0 "> 
+
+
+   
+
+                    <h6 class="follower">
+                     
+                      5K Follower 
+                      
+                    </h6>
+
+
+               </b-col> 
+               
+               
+                  </b-row>
+
+
+                  </div>
+                 </b-col>
+
+
+                <b-col lg="" >
+
+                  <div>   
+                    
+                <b-row>    <b-col md="6"  lg="6" cols="6" sm="6" xl="12"  class="mt-xl-2  center">  <b-button
+                      block
+                      variant="primary"
+                      size="sm"
+                      class="b-background  flexx"
+                    >
+                      <b-icon icon="chat" class="mr-1"> </b-icon> Message
+                    </b-button>
+
+                      </b-col >
+
+                       <b-col md="6" lg="6"  cols="6" sm="6" xl="12" class="mt-xl-2 btn-2  center" > <b-button
+                      block
+                      size="sm"
+                      class="b-background flexx "
+                      variant="primary"
+                    >
+                      <b-icon icon="plus-circle" class="mr-1"> </b-icon> community
+                    </b-button>  </b-col >  </b-row>      </div>
+
+
+
+
+                  </b-col>    </b-row> </div>
+                </b-col>
+
+         
+         
+
+
+
+              </b-row>
+
+
+
+
+
+            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <div class="people-style   border shadow " >
+
+              <b-row class="mb-1">
+
+                <b-col md="3" cols="4" sm="3"    class="my-auto">
+                  <b-avatar class="p-avater" variant="primary" src="https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg" size="5em"></b-avatar>
+                </b-col>
+
+                <b-col md="8" cols="8" sm="8" class="shift-left">
+                  <div>
+
+                    <b-row>  <b-col md="12" xl="6" sm="12">   
+
+
+                  <div class="e-name">
+
+      
+              <b-row>   
+                
+             <b-col md="8"  lg="8" cols="6" sm="6" xl="12" class="mt-lg-2 "> 
+
+
+   
+
+                    <h6 class="mt-3">
+                     
+                    <b>  howty blec  </b>
+
+                    </h6>
+
+
+               </b-col>  
+               
+               
+                <b-col md="4"  lg="4" cols="6" sm="6" xl="12"  class="mt-3 mt-xl-0 "> 
+
+
+   
+
+                    <h6 class="follower">
+                     
+                      5K Follower 
+                      
+                    </h6>
+
+
+               </b-col> 
+               
+               
+                  </b-row>
+
+
+                  </div>
+                 </b-col>
+
+
+                <b-col lg="" >
+
+                  <div>   
+                    
+                <b-row>    <b-col md="6"  lg="6" cols="6" sm="6" xl="12"  class="mt-xl-2  center">  <b-button
+                      block
+                      variant="primary"
+                      size="sm"
+                      class="b-background  flexx"
+                    >
+                      <b-icon icon="chat" class="mr-1"> </b-icon> Message
+                    </b-button>
+
+                      </b-col >
+
+                       <b-col md="6" lg="6"  cols="6" sm="6" xl="12" class="mt-xl-2 btn-2  center" > <b-button
+                      block
+                      size="sm"
+                      class="b-background flexx "
+                      variant="primary"
+                    >
+                      <b-icon icon="plus-circle" class="mr-1"> </b-icon> community
+                    </b-button>  </b-col >  </b-row>      </div>
+
+
+
+
+                  </b-col>    </b-row> </div>
+                </b-col>
+
+         
+         
+
+
+
+              </b-row>
+
+
+
+
+
+            </div>
+
+
+
+
+
+
+
+
+
+            <div class="people-style   border shadow " >
+
+              <b-row class="mb-1">
+
+                <b-col md="3" cols="4" sm="3"    class="my-auto">
+                  <b-avatar class="p-avater" variant="primary" src="https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg" size="5em"></b-avatar>
+                </b-col>
+
+                <b-col md="8" cols="8" sm="8" class="shift-left">
+                  <div>
+
+                    <b-row>  <b-col md="12" xl="6" sm="12">   
+
+
+                  <div class="e-name">
+
+      
+              <b-row>   
+                
+             <b-col md="8"  lg="8" cols="6" sm="6" xl="12" class="mt-lg-2 "> 
+
+
+   
+
+                    <h6 class="mt-3">
+                     
+                    <b>  howty blec  </b>
+
+                    </h6>
+
+
+               </b-col>  
+               
+               
+                <b-col md="4"  lg="4" cols="6" sm="6" xl="12"  class="mt-3 mt-xl-0 "> 
+
+
+   
+
+                    <h6 class="follower">
+                     
+                      5K Follower 
+                      
+                    </h6>
+
+
+               </b-col> 
+               
+               
+                  </b-row>
+
+
+                  </div>
+                 </b-col>
+
+
+                <b-col lg="" >
+
+                  <div>   
+                    
+                <b-row>    <b-col md="6"  lg="6" cols="6" sm="6" xl="12"  class="mt-xl-2  center">  <b-button
+                      block
+                      variant="primary"
+                      size="sm"
+                      class="b-background  flexx"
+                    >
+                      <b-icon icon="chat" class="mr-1"> </b-icon> Message
+                    </b-button>
+
+                      </b-col >
+
+                       <b-col md="6" lg="6"  cols="6" sm="6" xl="12" class="mt-xl-2 btn-2  center" > <b-button
+                      block
+                      size="sm"
+                      class="b-background flexx "
+                      variant="primary"
+                    >
+                      <b-icon icon="plus-circle" class="mr-1"> </b-icon> community
+                    </b-button>  </b-col >  </b-row>      </div>
+
+
+
+
+                  </b-col>    </b-row> </div>
+                </b-col>
+
+         
+         
+
+
+
+              </b-row>
+
+
+
+
+
+            </div>
 
 
 
@@ -317,7 +493,7 @@
           </div>
 
           
-            </b-container>
+</div>
 
 
       
@@ -335,6 +511,10 @@ export default {};
 </script>
 
 <style scoped>
+
+.flexx{
+  display: inline-flex;
+}
 
 .memfollower{
   
@@ -387,7 +567,18 @@ f-right {
   text-align: left;
   align-content: left;
 }
+
+
+
+
+
+
 @media only screen and (max-width: 768px) {
+
+  
+
+
+
   .options {
     position: relative;
     left: -75px;
@@ -422,6 +613,11 @@ f-right {
 
 
 
+.follower{
+  font-size: 10px;
+ 
+}
+
 
 .people-style {
   border-top-left-radius: 40px;
@@ -447,8 +643,44 @@ f-right {
 }
 
 
+
+
+
+
+@media only screen and (min-width: 1200px) {
+     
+
+     .btn{
+
+  width: 105px;
+  text-align: right;
+    
+    
+    
+}
+
+.center{
+  text-align: center;
+
+}
+
+
+}
 @media only screen and (max-width: 768px) {
 
+
+ .btn{
+    width: 90px;
+  }
+
+
+  .btn-2{
+
+    margin-left: -20px;
+    width: 90px;
+  }
+
+ 
 .people-style {
   border-top-left-radius: 40px;
 
@@ -477,6 +709,8 @@ h6{
       font-size: 15px;
 }
 
+
+h7{font-size: 10px;}
 
 .shift-left{
 
@@ -507,6 +741,9 @@ padding-right: 5px;
 .a-text {
   margin-top: 2px;
 }
+
+
+
 
 
 

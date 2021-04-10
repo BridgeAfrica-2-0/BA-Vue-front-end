@@ -325,7 +325,7 @@
 
         <div  v-if="selectedb == 'owner'" >
   
-<b-card class=" border shadow" style="height:100px">   
+<b-card class=" border shadow hselect" >   
 
 
    

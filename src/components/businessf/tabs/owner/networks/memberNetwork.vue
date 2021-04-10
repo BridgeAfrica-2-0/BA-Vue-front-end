@@ -1,6 +1,6 @@
 <template>
   <div class="mt-3">
-    <b-container>
+    <div>
       <b-card class="f-left">
 
 
@@ -12,7 +12,7 @@
 
 
       </b-card>
-    </b-container>
+    </div>
   </div>
 </template>
 

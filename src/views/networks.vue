@@ -3,155 +3,143 @@
     <navbar />
    
 
-    <div  class="  bongo container-fluid"  style="padding-left:30px;   pasdding-right:30px "  >
-      <b-row>
-        <b-tabs  pills  fill  class="yaya" content-class="mt-3 f-width" active-nav-item-class=" box-item" >
-          <b-tab active>
-            <template slot="title">
-              <p class="tt-color">
-                <b-icon icon="house" scale="1" variant="primary" class="icon"></b-icon> Home
-              </p>
-            </template>
 
-            <div style="padding:10px;">
-              <b-row>
-                <b-col c class="text-center px-3 a-box">
+<div style="margin-left:-20px">
+   
+  <ly-tab
+    v-model="selectedId"
+    :items="items"
+    :options="options"
+    @change="handleChange">
+  </ly-tab>
+  </div>
+
+   <div class="demo container-fluid">
+  
+
+
+
+ 
+  <div  class="mt-3" v-if="selectedId == '0'" >   <b-row>
+                <b-col   class=" ">
                   <Parent />
                 </b-col>
 
 
 
-                <b-col md="9" class="order-sm-0">
+                <b-col xl="9" class="order-sm-0 mt-sm-10 mt-md-10 mt-xl-0  marg-tap">
                   <Default />
                 </b-col>
-              </b-row>
-            </div>
-          </b-tab>
-
-          <b-tab>
-            <template slot="title">
-              <p class="tt-color">
-                <b-icon icon="envelope" scale="1" variant="primary"></b-icon>
-
-                Inbox
-               
-              </p>
-            </template>
-
-            <div>
-              <Inbox />
-            </div>
-          </b-tab>
-
-          <b-tab>
-            <template slot="title">
-              <p class="tt-color">
-                <b-icon icon="bell" scale="1" variant="primary"></b-icon>
-                Notification <b-badge pill variant="primary">9</b-badge>
-              </p>
-            </template>
-
-            <div>
+              </b-row>    
               
-                  <Notification />
               
-            </div>
-          </b-tab>
+   </div> 
 
-          <b-tab title=" ">
-            <template slot="title">
-              <p class="tt-color">
-                <b-icon icon="person-plus" scale="1" variant="primary"></b-icon>
-                Community Management
-              </p>
-            </template>
 
-            <div>
-            
-               
 
-                  <MemberShip />
-                
-            </div>
-          </b-tab>
 
-          <b-tab>
-            <template slot="title">
-              <p class="tt-color">
-                <b-icon
-                  icon="arrow-clockwise"
-                  scale="1"
-                  variant="primary"
-                ></b-icon>
-                Pending Posts
-              </p>
-            </template>
 
-            <div>
+
+    <div class="mt-3" v-if="selectedId == '1'" >  
               
-
-               
-                  <PendingPost />
-                
+               <Inbox />  
+   </div> 
 
 
-            </div>
-          </b-tab>
 
-          <b-tab>
-            <template slot="title">
-              <p class="tt-color">
-                <b-icon
-                  icon="exclamation-triangle"
-                  scale="1"
-                  variant="primary"
-                ></b-icon>
-                Keywords Alerts
-              </p>
-            </template>
 
-            <div>
+
+
+
+ <div class="mt-3" v-if="selectedId == '2'" >  
+                   
+           <Notification />      
               
-                  <KeywordAlert />
-               
-            </div>
-          </b-tab>
+   </div> 
 
-          <b-tab>
-            <template slot="title">
-              <p class="tt-color">
-                <b-icon icon="person" scale="1" variant="primary"></b-icon>
-                Roles
-              </p>
-            </template>
 
-            <div>
-             
 
-                
-                  <Roles />
-               
-            </div>
-          </b-tab>
 
-          <b-tab>
-            <template slot="title">
-              <p class="tt-color">
-                <b-icon icon="gear" scale="1" variant="primary"></b-icon>
-                Settings
-              </p>
-            </template>
+   
 
-            <div>
+ <div class="mt-3" v-if="selectedId == '3'" >  
+                   
+           <MemberShip />    
               
-                  <Settings />
-               
-               
-            </div>
-          </b-tab>
-        </b-tabs>
-      </b-row>
-    </div>
+   </div> 
+
+
+
+
+
+
+
+
+ <div class="mt-3" v-if="selectedId == '4'" >  
+                   
+          <PendingPost />
+              
+   </div> 
+
+
+
+
+
+
+
+
+
+ <div class="mt-3" v-if="selectedId == '5'" > 
+
+          <KeywordAlert />
+              
+   </div> 
+
+
+
+
+
+
+
+
+ <div class="mt-3" v-if="selectedId == '6'" >  
+                   
+          <Roles />    
+              
+   </div> 
+
+
+
+
+
+
+
+ <div class="mt-3" v-if="selectedId == '7'" >  
+                   
+           <Settings />   
+              
+   </div> 
+
+
+
+
+
+
+
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
 
     <Footer />
   </div>
@@ -188,12 +176,86 @@ export default {
     navbar,
     Footer,
     Parent
+  },
+
+   data () {
+    return {
+      selectedId: 0,
+      bottomSelectedId: 0,
+      items: [
+        {label: 'Home '},
+        {label: 'Inbox'},
+        {label: 'Notification'},
+        {label: 'Community Management'},
+        {label: 'Pending Post'},
+        {label: 'Keyword Alert'},
+        {label: 'Roles'},
+        {label: 'Settings'},
+        
+      ],
+      options: {
+        activeColor: '#1d98bd'
+      },
+     
+    }
+  },
+
+  methods: {
+    handleChange (item, index) {
+      console.log(item, index)
+    }
   }
+
+
+
 };
 </script>
 
 <style  >
 
+
+
+
+@media only screen and (max-width: 1500px) {
+
+  
+.marg-tap{
+  margin-top:20px;
+}
+
+
+
+  
+.ly-tab-active-bar {
+    position: absolute;
+    bottom: 3px;
+    left: 0;
+    width: 30px;
+    height: 3px;
+    border-radius: 4px;
+    display: none;
+}
+
+
+
+.ly-tab-item {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    text-align: center;
+    border-style: solid;
+    border-radius: 10px;
+    width: 100px;
+}
+
+
+
+
+}
+
+  
 
  .m-top{
 

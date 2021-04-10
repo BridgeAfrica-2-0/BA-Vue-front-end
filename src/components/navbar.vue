@@ -24,7 +24,7 @@
 
         </div>
 
-        <div class="col-md-5">
+        <div class="col-md-4">
           <form class="form-inline input-group">
             <input
               id="search-ba"
@@ -50,7 +50,7 @@
 
         
 
-        <div class="col-md-4">
+        <div class="col-md-5 end-bar" >
         <button
           class="navbar-toggler"
           type="button"
@@ -579,5 +579,39 @@ export default {
 }
 
 
+.end-bar{
+
+      float: right;
+    text-align: center;
+    align-content: end;
+    
+}
+
+
 
 </style>
+
+
+<style> 
+
+
+.navbar-toggler {
+
+   
+
+
+   padding: 0.25rem 0.75rem;
+    font-size: 1.25rem;
+    line-height: 1;
+    background-color: transparent;
+    border: 1px solid transparent;
+    border-radius: 0.25rem;
+
+    position: absolute !important;
+    
+    top: -78px !important;
+    right: 13px !important;
+}
+
+  </style>
+

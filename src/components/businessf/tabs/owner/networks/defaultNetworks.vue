@@ -1,6 +1,6 @@
 <template>
   <div class="t-left yolo">
-    <b-tabs content-class="mt-1" fill pills>
+    <b-tabs content-class="" fill pills>
       <b-tab active>
         <template slot="title" class="tt-color">
           <h6 class="">Posts</h6>
@@ -65,5 +65,9 @@ export default {
  
   border-style: hidden;
   
+}
+
+h6{
+  font-size: 12px;
 }
 </style>

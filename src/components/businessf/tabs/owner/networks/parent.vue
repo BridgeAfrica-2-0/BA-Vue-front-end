@@ -1,8 +1,8 @@
 
 
 <template>
-  <b-container fluid="" class="text-justify ">
-    <b-card title="">
+  <div class=" ">
+    <b-card title="" class="">
       <b-container class="a-center">
         <b-avatar
           size="6em"
@@ -18,10 +18,10 @@
       <b-container>
         <b-row>
           <b-col cols="6">
-            <h6 class="font-weight-bolder m-0 p-0 t-align">  Maketers Union Network</h6>
+            <h6 class="font-weight-bolder m-0 p-0 a-center">  Maketers Union Network</h6>
           </b-col>
           <b-col cols="6">
-            <b-button variant="primary" block  size="sm"   style="width: 120px;"  >
+            <b-button variant="primary"   size="sm"   style="width: 120px;"  class="a-center" >
               <b-icon icon="plus-circle"></b-icon> Community
             </b-button>
           </b-col>
@@ -36,10 +36,10 @@
         <b-container>
           <b-row>
             <b-col>
-              <p><b-icon icon="globe" variant="primary"></b-icon> Private</p>
+              <p class="a-center"><b-icon icon="globe" variant="primary"></b-icon> Private</p>
             </b-col>
             <b-col>
-              <p>
+              <p class="a-center">
                 <b-icon icon="people-fill" variant="primary"></b-icon> 3.5K
                 Members
               </p>
@@ -73,7 +73,7 @@
      
     </b-card>
 
-  </b-container>
+  </div>
 </template>
 
 <script>

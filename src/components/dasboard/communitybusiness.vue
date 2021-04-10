@@ -9,7 +9,7 @@
 
     <div class="people-style shadow">
       <b-row>
-        <b-col md="3" cols="5"  sm="5">
+        <b-col md="5" xl="3" lg="5" cols="5"  sm="5">
           <div style="height: 100%;">
             <img
               src="https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg"
@@ -32,9 +32,14 @@
           </p>
         </b-col>
 
-        <b-col md="3" cols="12" sm="12">
+
+
+
+
+
+        <b-col lg="12" md="12" xl="3" cols="12" sm="12">
           <div class="s-button">
-     <b-row>  <b-col md="12" sm="4" cols="4" class="mt-md-2">    
+     <b-row>  <b-col md="4"  lg="4"  xl="12" sm="4" cols="4" class="mt-md-2">    
 
             <b-button block size="sm" class="b-background" variant="primary">
               <b-icon class="ico" icon="plus-circle"> </b-icon> Community
@@ -42,7 +47,7 @@
 
             </b-col>  
 
-        <b-col md="12" sm="4" cols="4" class="mt-md-2">  
+        <b-col md="4"  lg="4"  xl="12" sm="4" cols="4" class="mt-md-2">  
 
             <b-button block size="sm" class="b-background" variant="primary">
               <b-icon class="ico" icon="chat"> </b-icon> Message
@@ -50,7 +55,7 @@
 
             </b-col>  
 
-            <b-col md="12" sm="4" cols="4" class="mt-md-2">  
+            <b-col  md="4"  lg="4"  xl="12" sm="4" cols="4"  class="mt-md-2">  
 
             <b-button block size="sm" class="b-background" variant="primary">
               <b-icon-geo-alt ></b-icon-geo-alt>  Direction
@@ -70,10 +75,23 @@
 
 
 
-    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     <div class="people-style shadow">
       <b-row>
-        <b-col md="3" cols="5"  sm="5">
+        <b-col md="5" xl="3" lg="5" cols="5"  sm="5">
           <div style="height: 100%;">
             <img
               src="https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg"
@@ -96,9 +114,14 @@
           </p>
         </b-col>
 
-        <b-col md="3" cols="12" sm="12">
+
+
+
+
+
+        <b-col lg="12" md="12" xl="3" cols="12" sm="12">
           <div class="s-button">
-     <b-row>  <b-col md="12" sm="4" cols="4" class="mt-md-2">    
+     <b-row>  <b-col md="4"  lg="4"  xl="12" sm="4" cols="4" class="mt-md-2">    
 
             <b-button block size="sm" class="b-background" variant="primary">
               <b-icon class="ico" icon="plus-circle"> </b-icon> Community
@@ -106,7 +129,7 @@
 
             </b-col>  
 
-        <b-col md="12" sm="4" cols="4" class="mt-md-2">  
+        <b-col md="4"  lg="4"  xl="12" sm="4" cols="4" class="mt-md-2">  
 
             <b-button block size="sm" class="b-background" variant="primary">
               <b-icon class="ico" icon="chat"> </b-icon> Message
@@ -114,10 +137,10 @@
 
             </b-col>  
 
-            <b-col md="12" sm="4" cols="4" class="mt-md-2">  
+            <b-col  md="4"  lg="4"  xl="12" sm="4" cols="4"  class="mt-md-2">  
 
             <b-button block size="sm" class="b-background" variant="primary">
-             <b-icon-geo-alt ></b-icon-geo-alt> Direction
+              <b-icon-geo-alt ></b-icon-geo-alt>  Direction
             </b-button>
 
             </b-col>  
@@ -127,10 +150,40 @@
         </b-col>
       </b-row>
     </div>
-  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     <div class="people-style shadow">
       <b-row>
-        <b-col md="3" cols="5"  sm="5">
+        <b-col md="5" xl="3" lg="5" cols="5"  sm="5">
           <div style="height: 100%;">
             <img
               src="https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg"
@@ -153,9 +206,14 @@
           </p>
         </b-col>
 
-        <b-col md="3" cols="12" sm="12">
+
+
+
+
+
+        <b-col lg="12" md="12" xl="3" cols="12" sm="12">
           <div class="s-button">
-     <b-row>  <b-col md="12" sm="4" cols="4" class="mt-md-2">    
+     <b-row>  <b-col md="4"  lg="4"  xl="12" sm="4" cols="4" class="mt-md-2">    
 
             <b-button block size="sm" class="b-background" variant="primary">
               <b-icon class="ico" icon="plus-circle"> </b-icon> Community
@@ -163,7 +221,7 @@
 
             </b-col>  
 
-        <b-col md="12" sm="4" cols="4" class="mt-md-2">  
+        <b-col md="4"  lg="4"  xl="12" sm="4" cols="4" class="mt-md-2">  
 
             <b-button block size="sm" class="b-background" variant="primary">
               <b-icon class="ico" icon="chat"> </b-icon> Message
@@ -171,10 +229,10 @@
 
             </b-col>  
 
-            <b-col md="12" sm="4" cols="4" class="mt-md-2">  
+            <b-col  md="4"  lg="4"  xl="12" sm="4" cols="4"  class="mt-md-2">  
 
             <b-button block size="sm" class="b-background" variant="primary">
-               <b-icon-geo-alt ></b-icon-geo-alt> Direction
+              <b-icon-geo-alt ></b-icon-geo-alt>  Direction
             </b-button>
 
             </b-col>  
@@ -184,6 +242,19 @@
         </b-col>
       </b-row>
     </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -18,7 +18,7 @@
           </b-col>
           <b-col>
             <div class="b-bottomn f-right">
-              <b-button variant="primary" class="a-button-l">
+              <b-button variant="primary" class="a-button-l b-font">
                 Mark as Read</b-button
               >
             </div>
@@ -59,7 +59,7 @@
                   <template #button-content>
                     <b-icon
                       icon="three-dots-vertical"
-                      animation="cylon-vertical"
+                     
                       font-scale="1"
                     ></b-icon>
                   </template>
@@ -111,7 +111,7 @@
                   <template #button-content>
                     <b-icon
                       icon="three-dots-vertical"
-                      animation="cylon-vertical"
+                     
                       font-scale="1"
                     ></b-icon>
                   </template>
@@ -173,6 +173,10 @@ export default {
   border-bottom: 1px solid;
 }
 
+
+.b-font{
+  font-size: 12px;
+}
 .bb-bottom {
   border-bottom: 0.5px solid;
   border-color: aqua;

@@ -1,4 +1,4 @@
-import Businesses from '@/components/follower/tabs/businesses';
+
 <template>
   <div>
 
@@ -13,70 +13,16 @@ import Businesses from '@/components/follower/tabs/businesses';
 
                   
 
-
-
-
-    
-    <div class="people-style shadow">
-      <b-row>
-        <b-col md="3" cols="5"  sm="5">
-          <div style="height: 100%;">
-            <img
-              src="https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg"
-              width="100%"
-              height="90%"
-              class="r-image"
-            />
-          </div>
-        </b-col>
-        <b-col md="6" cols="7" sm="7">
-          <p class="text">
-            <strong> Super Car ltd </strong> <br />
-            <strong> Category : </strong> Car marketing <br />
-            <strong> Community : </strong> 20k <br />
-            <strong> Location :</strong> cameroon <br />
-            <strong> Keyword :</strong> car,swag <br />
-
-            <strong>About:</strong> super best car seller in the world
-            adipisicing elit. <b-link>Read More</b-link>
-          </p>
-        </b-col>
-
-        <b-col md="3" cols="12" sm="12">
-          <div class="s-button">
-     <b-row>  <b-col md="12" sm="4" cols="4" class="mt-md-2">    
-
-            <b-button block size="sm" class="b-background" variant="primary">
-              <b-icon class="ico" icon="plus-circle"> </b-icon> Community
-            </b-button>
-
-            </b-col>  
-
-        <b-col md="12" sm="4" cols="4" class="mt-md-2">  
-
-            <b-button block size="sm" class="b-background" variant="primary">
-              <b-icon class="ico" icon="chat"> </b-icon> Message
-            </b-button>
-
-            </b-col>  
-
-            <b-col md="12" sm="4" cols="4" class="mt-md-2">  
-
-            <b-button block size="sm" class="b-background" variant="primary">
-             <b-icon-geo-alt ></b-icon-geo-alt> Direction
-            </b-button>
-
-            </b-col>  
-   </b-row>
-
-          </div>
-        </b-col>
-      </b-row>
-    </div>
   
+
+
+
+
+  
+
     <div class="people-style shadow">
       <b-row>
-        <b-col md="3" cols="5"  sm="5">
+        <b-col md="5" xl="3" lg="5" cols="5"  sm="5">
           <div style="height: 100%;">
             <img
               src="https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg"
@@ -99,9 +45,14 @@ import Businesses from '@/components/follower/tabs/businesses';
           </p>
         </b-col>
 
-        <b-col md="3" cols="12" sm="12">
+
+
+
+
+
+        <b-col lg="12" md="12" xl="3" cols="12" sm="12">
           <div class="s-button">
-     <b-row>  <b-col md="12" sm="4" cols="4" class="mt-md-2">    
+     <b-row>  <b-col md="4"  lg="4"  xl="12" sm="4" cols="4" class="mt-md-2">    
 
             <b-button block size="sm" class="b-background" variant="primary">
               <b-icon class="ico" icon="plus-circle"> </b-icon> Community
@@ -109,7 +60,7 @@ import Businesses from '@/components/follower/tabs/businesses';
 
             </b-col>  
 
-        <b-col md="12" sm="4" cols="4" class="mt-md-2">  
+        <b-col md="4"  lg="4"  xl="12" sm="4" cols="4" class="mt-md-2">  
 
             <b-button block size="sm" class="b-background" variant="primary">
               <b-icon class="ico" icon="chat"> </b-icon> Message
@@ -117,10 +68,10 @@ import Businesses from '@/components/follower/tabs/businesses';
 
             </b-col>  
 
-            <b-col md="12" sm="4" cols="4" class="mt-md-2">  
+            <b-col  md="4"  lg="4"  xl="12" sm="4" cols="4"  class="mt-md-2">  
 
             <b-button block size="sm" class="b-background" variant="primary">
-               <b-icon-geo-alt ></b-icon-geo-alt> Direction
+              <b-icon-geo-alt ></b-icon-geo-alt>  Direction
             </b-button>
 
             </b-col>  
@@ -130,6 +81,96 @@ import Businesses from '@/components/follower/tabs/businesses';
         </b-col>
       </b-row>
     </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class="people-style shadow">
+      <b-row>
+        <b-col md="5" xl="3" lg="5" cols="5"  sm="5">
+          <div style="height: 100%;">
+            <img
+              src="https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg"
+              width="100%"
+              height="90%"
+              class="r-image"
+            />
+          </div>
+        </b-col>
+        <b-col md="6" cols="7" sm="7">
+          <p class="text">
+            <strong> Super Car ltd </strong> <br />
+            <strong> Category : </strong> Car marketing <br />
+            <strong> Community : </strong> 20k <br />
+            <strong> Location :</strong> cameroon <br />
+            <strong> Keyword :</strong> car,swag <br />
+
+            <strong>About:</strong> super best car seller in the world
+            adipisicing elit. <b-link>Read More</b-link>
+          </p>
+        </b-col>
+
+
+
+
+
+
+        <b-col lg="12" md="12" xl="3" cols="12" sm="12">
+          <div class="s-button">
+     <b-row>  <b-col md="4"  lg="4"  xl="12" sm="4" cols="4" class="mt-md-2">    
+
+            <b-button block size="sm" class="b-background" variant="primary">
+              <b-icon class="ico" icon="plus-circle"> </b-icon> Community
+            </b-button>
+
+            </b-col>  
+
+        <b-col md="4"  lg="4"  xl="12" sm="4" cols="4" class="mt-md-2">  
+
+            <b-button block size="sm" class="b-background" variant="primary">
+              <b-icon class="ico" icon="chat"> </b-icon> Message
+            </b-button>
+
+            </b-col>  
+
+            <b-col  md="4"  lg="4"  xl="12" sm="4" cols="4"  class="mt-md-2">  
+
+            <b-button block size="sm" class="b-background" variant="primary">
+              <b-icon-geo-alt ></b-icon-geo-alt>  Direction
+            </b-button>
+
+            </b-col>  
+   </b-row>
+
+          </div>
+        </b-col>
+      </b-row>
+    </div>
+
+
+
+
+
+
+
+
 
 
 
@@ -166,11 +207,6 @@ export default {
   color: orange;
 }
 
-
-h4{
-
-  color: black;
-}
 .s-button {
   align-content: center;
   text-align: center;
@@ -216,7 +252,10 @@ h4{
   border-radius: 8px;
 }
 
-.people-style {
+
+
+@media only screen and (min-width: 768px) {
+  .people-style {
   border-top-left-radius: 5px;
 
   border-bottom-left-radius: 5px;
@@ -231,6 +270,36 @@ h4{
   background-clip: border-box;
   border: 1px solid rgba(0, 0, 0, 0.125);
   margin-bottom: 10px;
+
+  margin-right: 8px;
+ 
+
+  padding: 7px;
+}
+
+}
+
+
+
+
+@media only screen and (max-width: 768px) {
+  .people-style {
+  border-top-left-radius: 5px;
+
+  border-bottom-left-radius: 5px;
+
+  border-top-right-radius: 5px;
+
+  border-bottom-right-radius: 5px;
+
+  background: white;
+
+  background-color: #fff;
+  background-clip: border-box;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  margin-bottom: 10px;
+
+  margin-right: 8px;
  
 
   padding: 7px;
@@ -238,11 +307,30 @@ h4{
 
 
 
+.text {
+  color: #000;
+  font-size: 10px;
 
-.s-card{
-  height:450px; 
-  overflow: auto; 
-  overflow-x: hidden;
+  text-align: left;
+
+  margin-left: -15px;
+
+  margin-right: -15px;
+}
+
+
+
+.btn {
+  font-size: 8px;
+
+  display: flex;
+
+    padding-right: 60px;
+}
+
+h4{
+  font-size: 15px;
+}
 
 }
 

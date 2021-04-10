@@ -15,7 +15,10 @@ import vSelect from 'vue-select';
 
 
 import Lightbox from "@morioh/v-lightbox";
-import * as VueGoogleMaps from 'vue2-google-maps'
+import * as VueGoogleMaps from 'vue2-google-maps';
+import LyTab from 'ly-tab';
+
+Vue.use(LyTab);
 
 // global register
 Vue.use(VueGallerySlideshow);

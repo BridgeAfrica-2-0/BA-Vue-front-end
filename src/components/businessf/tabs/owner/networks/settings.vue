@@ -15,7 +15,7 @@
           </b-col>
           <b-col>
             <div class="b-bottomn f-right">
-              <b-button variant="primary" class="a-button-l">
+              <b-button variant="primary" class="a-button-l b-font">
                 Save Changes </b-button
               >
             </div>
@@ -301,5 +301,10 @@ export default {
  
   margin-bottom: 7px;
   margin-top: 5px;
+}
+
+.b-font{
+
+  font-size:12px
 }
 </style>

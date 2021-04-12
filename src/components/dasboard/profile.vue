@@ -20,14 +20,14 @@
 
 
               <div class="d-flex col-md-12 mt-2">
-    <b-avatar class="p-avater" variant="primary" src="https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg" size="7em"></b-avatar>
+    <b-avatar class="p-avater" variant="primary" src="https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg" size="5em"></b-avatar>
                              
                
 
 
 
                 <div class="text-lost">
-                 <h4> <b>  Profile's Name </b> </h4>
+                 <h6> <b>  Profile's Name </b> </h6>
                   <p class="mb-1">
                     1.1M Community
                     <span class="float-right"
@@ -84,6 +84,10 @@ export default {
 </script>
 
 <style scoped>
+
+h6{
+  font-size: 12px;
+}
 .picture {
   border-radius: 10px;
   width: 190px;

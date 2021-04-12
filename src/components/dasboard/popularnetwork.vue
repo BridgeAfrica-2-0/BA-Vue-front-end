@@ -6,7 +6,7 @@
 
 
 
-  <span> <h4>   <img class="img-fluid picture" src="@/assets/icons/network.png" style="width: 60px;" />  POPULAR NETWORKS   </h4>   </span>
+  <span> <h4>   <img class="img-fluid picture" src="@/assets/icons/network.png" style="width: 50px;" /> <span class="pop"> POPULAR NETWORKS  </span> </h4>   </span>
 
  <div class="s-card">
 
@@ -243,6 +243,26 @@ export default {
 </script>
 
 <style scoped>
+
+@media only screen and (max-width: 760px) {
+
+.btn{
+
+font-size: 12px;
+    width: 100px;
+
+}
+
+h4{
+  font-size: 15px;
+}
+
+
+.pop{
+  font-size: 15px;
+}
+}
+
 .card {
   color: orange;
 }

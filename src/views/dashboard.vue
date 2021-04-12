@@ -329,9 +329,9 @@
 
 
    
-   <b-row>    <b-col  md="6" sm="12">   <h4 class="font-weight-bolder text-design">
+   <b-row>    <b-col  md="6" sm="12">   <h6 class="font-weight-bolder text-design">
                 Use Bridge Africa as Yourself or as one of your businesses
-              </h4>   </b-col>    <b-col sm="12" md="6">    <b-form-select
+              </h6>   </b-col>    <b-col sm="12" md="6">    <b-form-select
                 v-model="selectedb"
                 :options="boptions"
               ></b-form-select>

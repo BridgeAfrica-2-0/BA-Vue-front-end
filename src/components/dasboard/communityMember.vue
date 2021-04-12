@@ -76,7 +76,7 @@
                       block
                       variant="primary"
                       size="sm"
-                      class="b-background  flexx"
+                      class="b-background  flexx pobtn"
                     >
                       <b-icon icon="chat" class="mr-1"> </b-icon> Message
                     </b-button>
@@ -86,7 +86,7 @@
                        <b-col md="6" lg="6"  cols="6" sm="6" xl="12" class="mt-xl-2 btn-2  center" > <b-button
                       block
                       size="sm"
-                      class="b-background flexx "
+                      class="b-background flexx  pobtn"
                       variant="primary"
                     >
                       <b-icon icon="plus-circle" class="mr-1"> </b-icon> community
@@ -192,7 +192,7 @@
                       block
                       variant="primary"
                       size="sm"
-                      class="b-background  flexx"
+                      class="b-background  flexx  pobtn"
                     >
                       <b-icon icon="chat" class="mr-1"> </b-icon> Message
                     </b-button>
@@ -202,7 +202,7 @@
                        <b-col md="6" lg="6"  cols="6" sm="6" xl="12" class="mt-xl-2 btn-2  center" > <b-button
                       block
                       size="sm"
-                      class="b-background flexx "
+                      class="b-background flexx pobtn"
                       variant="primary"
                     >
                       <b-icon icon="plus-circle" class="mr-1"> </b-icon> community
@@ -333,7 +333,7 @@
                       block
                       variant="primary"
                       size="sm"
-                      class="b-background  flexx"
+                      class="b-background  flexx  pobtn"
                     >
                       <b-icon icon="chat" class="mr-1"> </b-icon> Message
                     </b-button>
@@ -343,7 +343,7 @@
                        <b-col md="6" lg="6"  cols="6" sm="6" xl="12" class="mt-xl-2 btn-2  center" > <b-button
                       block
                       size="sm"
-                      class="b-background flexx "
+                      class="b-background flexx pobtn "
                       variant="primary"
                     >
                       <b-icon icon="plus-circle" class="mr-1"> </b-icon> community
@@ -402,7 +402,7 @@
 
                     <h6 class="mt-3">
                      
-                    <b>  howty blec  </b>
+                    <b>  Itz  blec  </b>
 
                     </h6>
 
@@ -440,7 +440,7 @@
                       block
                       variant="primary"
                       size="sm"
-                      class="b-background  flexx"
+                      class="b-background  flexx pobtn"
                     >
                       <b-icon icon="chat" class="mr-1"> </b-icon> Message
                     </b-button>
@@ -450,7 +450,7 @@
                        <b-col md="6" lg="6"  cols="6" sm="6" xl="12" class="mt-xl-2 btn-2  center" > <b-button
                       block
                       size="sm"
-                      class="b-background flexx "
+                      class="b-background flexx pobtn "
                       variant="primary"
                     >
                       <b-icon icon="plus-circle" class="mr-1"> </b-icon> community
@@ -669,6 +669,12 @@ f-right {
 @media only screen and (max-width: 768px) {
 
 
+
+.p-avater {
+  margin-right: -15px;
+      margin-top: 3px;
+}
+
  .btn{
     width: 90px;
   }
@@ -734,14 +740,30 @@ margin-top: 7px;
 padding-right: 5px;
 }
 
-
 .p-avater {
   margin-right: -15px;
+      
 }
 .a-text {
   margin-top: 2px;
 }
 
+
+
+
+
+
+@media only screen and (max-width: 400px) {
+
+
+.pobtn{
+
+  font-size: 9px;
+    width: 80px;
+}
+
+
+}
 
 
 

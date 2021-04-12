@@ -26,10 +26,7 @@
         img-src="https://picsum.photos/1024/480/?image=52"
       ></b-carousel-slide>
 
-      <!-- Slides with custom text -->
-      <b-carousel-slide img-src="https://picsum.photos/1024/480/?image=54">
-        <h1>Welcome On Bridge Africa!</h1>
-      </b-carousel-slide>
+     
 
       <!-- Slides with image only -->
       <b-carousel-slide img-src="https://picsum.photos/1024/480/?image=58"></b-carousel-slide>
@@ -86,6 +83,26 @@
 
 }
 
+
+
+@media only screen and (max-width: 768px) {
+  
+
+.d-block.img-fluid {
+
+    max-width: 100%;
+    height: 150px;
+
+    border-radius: 10px;
+
+}
+
+h1{
+  font-size: 12px;
+}
+
+
+}
 
 
 

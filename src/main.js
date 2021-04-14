@@ -48,7 +48,6 @@ import "@/assets/css/bootstrap.css";
 
 import "@/assets/css/bootstrap.css";
 
-import "@/assets/fontawesome/css/all.css" ;
 
 // Make BootstrapVue available throughout your project
 Vue.use(BootstrapVue);

@@ -13,7 +13,7 @@
           <b-form-textarea
             id="textarea-small"
             size="sm"
-            placeholder="Whats On Your, <Name Here> ?"
+            placeholder="Whats On Your, <Nam e Here> ?"
           ></b-form-textarea>
         </b-col>
       </b-row>

@@ -2,12 +2,7 @@
   <div class="container" style=" ">
 
 
-    <b-row class="mt-3">  <b-col cols="12">  <h4 class=" d-inline-block">
-          <b-icon-person-plus></b-icon-person-plus> Membership Requests
-        </h4>
-        <span class="float-right">35 Pending</span>
-
-        <hr width="100%" />     </b-col>                  </b-row>
+ 
 
         <div class="container">
 
@@ -59,26 +54,12 @@
               ></b-avatar>
               <h5 class="m-0  d-inline-block ml-2">
                 Mapoure Agrobusiness
+                 <p>1hr</p>
               </h5>
             </span>
             <span class="float-right mt-1">
-              <b-dropdown
-                size="lg"
-                variant="link"
-                toggle-class="text-decoration-none"
-                no-caret
-              >
-                <template #button-content>
-                  <b-icon-three-dots-vertical></b-icon-three-dots-vertical
-                  ><span class="sr-only">Settings</span>
-                </template>
-                <b-dropdown-item href="#">
-                  Approve
-                </b-dropdown-item>
-                <b-dropdown-item href="#">
-                  Reject
-                </b-dropdown-item>
-              </b-dropdown>
+             
+
             </span>
           </p>
           <hr width="100%" />
@@ -130,7 +111,10 @@ export default {
   padding: 30px;
 }
 
+h5{
 
+  font-size: 15px;
+}
 
 
 

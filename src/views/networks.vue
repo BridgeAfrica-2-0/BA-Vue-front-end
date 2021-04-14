@@ -4,7 +4,7 @@
    
 
 
-<div style="margin-left:-20px">
+<div   class="container-fluid">
    
   <ly-tab
     v-model="selectedId"
@@ -183,18 +183,20 @@ export default {
       selectedId: 0,
       bottomSelectedId: 0,
       items: [
-        {label: 'Home '},
-        {label: 'Inbox'},
-        {label: 'Notification'},
-        {label: 'Community Management'},
-        {label: 'Pending Post'},
-        {label: 'Keyword Alert'},
-        {label: 'Roles'},
-        {label: 'Settings'},
+        {label: 'Home ', icon: 'fas fa-home'},
+       
+        {label: 'Inbox' , icon: 'fas fa-comments'},
+        {label: 'Notification' , icon: 'fas fa-bell'},
+        {label: 'Member Request',  icon: 'fas  fa-user-plus'},
+        {label: 'Pending Post' , icon: 'fas fa-sync'},   
+        
+        {label: 'Keyword Alert' , icon: 'fas fa-exclamation-triangle'},   
+        {label: 'Roles' , icon: 'fas fa-user-cog'},
+         {label: 'Settings' , icon: 'fas fa-cog'},
         
       ],
       options: {
-        activeColor: '#1d98bd'
+        activeColor: '#32a400'
       },
      
     }
@@ -233,8 +235,12 @@ export default {
     width: 30px;
     height: 3px;
     border-radius: 4px;
+    background-color: yellow;
+    
     display: none;
 }
+
+
 
 
 
@@ -246,8 +252,14 @@ export default {
     text-decoration: none;
     text-align: center;
     border-style: solid;
+    border-width: 1px;
+   
     border-radius: 10px;
-    width: 100px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+
+    width: 170px;
+   
 }
 
 

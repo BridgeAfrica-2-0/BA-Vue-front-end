@@ -1,5 +1,6 @@
 <template>
-  <div class=" container-fluid "   style="padding-left:60px; padding-right:60px">
+
+  <div >
     <div class="">
       <div class="">
         <h5 class="a-text"><b-icon-gear></b-icon-gear> Business Settings</h5>
@@ -8,7 +9,7 @@
 
       <div class="bv-example-row">
         <div>
-          <b-tabs pills  vertical card>
+          <b-tabs pills  :vertical="vertical" :card="card"  class="itzlala" >
             <b-tab active>
               <template slot="title" class="t-color">
                 <h6 class="t-color">General</h6>
@@ -69,11 +70,11 @@ import General from "@/components/businessf/settings/general";
 
 import Roles from "@/components/businessf/settings/roles";
 
-import Info from "@/components/businessf/settings/info";
+import Info from "@/components/businessOwner/settings/info";
 
-import Website from "@/components/businessf/settings/website";
+import Website from "@/components/businessOwner/settings/website";
 
-import Payment from "@/components/businessf/settings/payment";
+import Payment from "@/components/businessOwner/settings/payment";
 
 import Blocking from "@/components/businessf/settings/blocking";
 
@@ -88,11 +89,34 @@ export default {
     Payment,
     Blocking
   },
-  data() {
-    return {};
+ 
+
+ data() {
+    return {
+      size: 0
+    }
   },
-  computed: {},
-  methods: {}
+
+  computed: {
+    vertical() {
+      if (this.size > 992)
+        return true
+      return false
+    }, 
+
+    card(){
+      if (this.size > 992)
+        return true
+      return false
+    }
+  },
+  methods: {},
+   mounted() {
+    var that = this
+    window.onresize = function() {
+      that.size = window.innerWidth
+    }
+  }
 };
 </script>
 
@@ -124,9 +148,19 @@ export default {
   float: right;
 }
 
+
+@media only screen and (max-width: 768px) {
+
 .t-color {
   color: black;
+  font-size: 12px;
 }
+
+
+
+}
+
+
 
 .f-left {
   float: left;
@@ -159,3 +193,14 @@ export default {
   }
 }
 </style>
+
+<style> 
+
+@media only screen and (max-width: 768px) {
+ .itzlala .nav-link {
+    display: block;
+    padding: 4px;
+}}
+
+
+   </style>

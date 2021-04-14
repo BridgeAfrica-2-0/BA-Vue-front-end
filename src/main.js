@@ -12,11 +12,20 @@ import {FontAwesomeIcon} from '@fortawesome/vue-fontawesome'
 
 import vSelect from 'vue-select';
 
+import VueMaterial from 'vue-material'
+import 'vue-material/dist/vue-material.min.css'
+import 'vue-material/dist/theme/default.css'
+
+Vue.use(VueMaterial)
+
 
 
 import Lightbox from "@morioh/v-lightbox";
 import * as VueGoogleMaps from 'vue2-google-maps';
-import LyTab from 'ly-tab';
+
+//import LyTab from 'ly-tab';
+
+import LyTab from "@/tab/index.js";
 
 Vue.use(LyTab);
 
@@ -36,6 +45,10 @@ import "bootstrap-vue/dist/bootstrap-vue.css";
 import 'vue-select/dist/vue-select.css';
 
 import "@/assets/css/bootstrap.css";
+
+import "@/assets/css/bootstrap.css";
+
+import "@/assets/fontawesome/css/all.css" ;
 
 // Make BootstrapVue available throughout your project
 Vue.use(BootstrapVue);

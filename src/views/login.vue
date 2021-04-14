@@ -1,103 +1,288 @@
 <template>
-  <b-container class="container p-5 h-100 w-100 mx-auto my-auto" fluid>
-    <div class="w-100 h-100 my-auto mx-auto">
-      <b-card
-        title="BridGe Login"
-        tag="article"
-        style="max-width: 30rem;"
-        class="my-auto mx-auto"
-      >
-        <div class="step-2">
-          <b-card-text class="w-75 mx-auto mt-5">
-            Please Enter our Credentials
-          </b-card-text>
-          <b-form class="w-75 mx-auto">
-            <b-form-group id="input-group-4">
-              <b-form-input
-                id="input-4"
-                v-model="name"
-                type="text"
-                placeholder="BrideTest"
-                required
-              />
-            </b-form-group>
-            <b-form-group id="input-group-4">
-              <b-form-input
-                id="input-4"
-                v-model="password"
-                type="password"
-                placeholder="confirm Password"
-                required
-              />
-            </b-form-group>
-          </b-form>
-          <br />
-          <b-button type="submit" variant="outline-primary" @click="logIn">
-            Login
-          </b-button>
-          <div>
-            <b-link href="recoverPass1">Forgot Password</b-link>
-          </div>
-        </div>
-      </b-card>
+  <div>
+    <form novalidate class="md-layout" @submit.prevent="validateUser">
+     
+      <md-card class="md-layout-item md-size-50 md-small-size-100 p-card">
+        <md-card-header>
+          <div class="md-title center">Login To Bridge Africa</div>
+        </md-card-header>
+
+        <md-card-content>
+
+ 
+
+         <div class="center">
+
+         <b-row>  <b-col cols="12" md="6" lg="12" xl="6">  <md-button class="  md-raised md-primary b-w">  <b-icon icon="facebook" aria-hidden="true"></b-icon> Login With Facebook</md-button>   </b-col> 
+          
+        
+          <b-col cols="12" md="6" lg="12" xl="6">  <md-button class="  b-color b-w" style="color:white;" > <b-icon icon="google" aria-hidden="true"></b-icon> Login  with Google</md-button> </b-col>
+          
+          
+            </b-row>       
+     
+     
+      
+    
+    
     </div>
-  </b-container>
+
+    <br/>
+
+<p class="t-center"> -OR- </p>
+
+            <md-field :class="getValidationClass('email')">
+            <label for="email">Email</label>
+            <md-input type="email" name="email" id="email" autocomplete="email" v-model="form.email" :disabled="sending" />
+            <span class="md-error" v-if="!$v.form.email.required">The email is required</span>
+            <span class="md-error" v-else-if="!$v.form.email.email">Invalid email</span>
+          </md-field>
+
+
+
+           <md-field >
+            <label for="password">Password</label>
+            <md-input type="password" name="password" id="password"  v-model="form.password" :disabled="sending" />
+           
+          </md-field>
+
+
+         
+
+
+
+
+
+          <div class="md-layout md-gutter">
+            <div class="md-layout-item md-small-size-100 m-left">
+             
+
+                 <md-checkbox v-model="boolean" class="md-primary">Remeber Me</md-checkbox>
+
+
+            </div>
+
+            <div class="md-layout-item md-small-size-100">
+              <br/>
+              <label >Forget Password</label>
+            </div>
+          </div>
+
+
+
+
+        </md-card-content>
+
+        <md-progress-bar md-mode="indeterminate" v-if="sending" />
+
+  
+
+   <div>
+
+        <b-row>  <b-col cols="6">     <md-button type="submit" :disabled="sending" class="b-color  f-left "  style="color:white;" >Login</md-button>
+            </b-col>   <b-col cols="6">   <b-link href="/signup"> <md-button class=" md-raised f-right ">Sign Up</md-button>  </b-link>    </b-col>  </b-row>
+     
+     
+       
+
+
+    </div>
+
+
+    <div>
+     
+      
+     
+    </div>
+
+
+    <div>  
+
+      <br/>
+      <br/>
+      
+
+      <label> By Loging in you agree to Bridge Africa's  </label> <br/>  
+      
+       <label>  <b-link href="#">Terms and conditions </b-link> &    <b-link href="#">Privacy policies</b-link>    </label>  </div>
+
+
+        <md-card-actions>
+          <md-button type="submit" class="md-primary" :disabled="sending">Create user</md-button>
+        </md-card-actions>
+      </md-card>
+
+
+
+
+
+
+       <div class="md-layout-item md-size-50 md-small-size-100 b-div" > 
+        
+      
+       </div>
+
+
+
+
+
+
+      <md-snackbar :md-active.sync="userSaved">The user {{ lastUser }} was saved with success!</md-snackbar>
+    </form>
+  </div>
 </template>
 
 <script>
-export default {
-  watch: {},
-  name: "login",
-  data() {
-    return {
-      name: "",
-      password: ""
-    };
-  },
-  methods: {
-    logIn() {
-      this.$store
-        .dispatch("log", {
-          username: this.name,
-          password: this.password
-        })
-        .then(() => {
-          this.$router.push("/");
-        });
+  import { validationMixin } from 'vuelidate'
+  import {
+    required,
+    email,
+    minLength,
+    maxLength
+  } from 'vuelidate/lib/validators'
+  export default {
+    name: 'FormValidation',
+    mixins: [validationMixin],
+    data: () => ({
+      form: {
+        firstName: null,
+        lastName: null,
+        gender: null,
+        age: null,
+        email: null,
+      },
+      userSaved: false,
+      sending: false,
+      lastUser: null
+    }),
+    validations: {
+      form: {
+        firstName: {
+          required,
+          minLength: minLength(3)
+        },
+        lastName: {
+          required,
+          minLength: minLength(3)
+        },
+        age: {
+          required,
+          maxLength: maxLength(3)
+        },
+        gender: {
+          required
+        },
+        email: {
+          required,
+          email
+        }
+      }
+    },
+    methods: {
+      getValidationClass (fieldName) {
+        const field = this.$v.form[fieldName]
+        if (field) {
+          return {
+            'md-invalid': field.$invalid && field.$dirty
+          }
+        }
+      },
+      clearForm () {
+        this.$v.$reset()
+        this.form.firstName = null
+        this.form.lastName = null
+        this.form.age = null
+        this.form.gender = null
+        this.form.email = null
+      },
+      saveUser () {
+        this.sending = true
+        // Instead of this timeout, here you can call your API
+        window.setTimeout(() => {
+          this.lastUser = `${this.form.firstName} ${this.form.lastName}`
+          this.userSaved = true
+          this.sending = false
+          this.clearForm()
+        }, 1500)
+      },
+      validateUser () {
+        this.$v.$touch()
+        if (!this.$v.$invalid) {
+          this.saveUser()
+        }
+      }
     }
   }
-};
 </script>
 
-<style scoped>
-.reset-back {
-  background-color: #ffffff;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Cg fill='%231ca737' fill-opacity='0.4'%3E%3Cpath fill-rule='evenodd' d='M41 37.59V25h-2v12.59l-8.9-8.9-1.41 1.41 8.9 8.9H25v2h12.59l-8.9 8.9 1.41 1.41 8.9-8.9V55h2V42.41l8.9 8.9 1.41-1.41-8.9-8.9H55v-2H42.41l8.9-8.9-1.41-1.41-8.9 8.9zM1 1h2v2H1V1zm0 4h2v2H1V5zm0 4h2v2H1V9zm0 4h2v2H1v-2zm0 4h2v2H1v-2zm0 4h2v2H1v-2zm0 4h2v2H1v-2zm0 4h2v2H1v-2zm0 4h2v2H1v-2zm0 4h2v2H1v-2zm0 4h2v2H1v-2zm0 4h2v2H1v-2zm0 4h2v2H1v-2zm0 4h2v2H1v-2zm0 4h2v2H1v-2zm0 4h2v2H1v-2zm0 4h2v2H1v-2zm0 4h2v2H1v-2zm0 4h2v2H1v-2zm0 4h2v2H1v-2zm4 0h2v2H5v-2zm4 0h2v2H9v-2zm4 0h2v2h-2v-2zm4 0h2v2h-2v-2zm4 0h2v2h-2v-2zm4 0h2v2h-2v-2zm4 0h2v2h-2v-2zm4 0h2v2h-2v-2zm4 0h2v2h-2v-2zm4 0h2v2h-2v-2zm4 0h2v2h-2v-2zm4 0h2v2h-2v-2zm4 0h2v2h-2v-2zm4 0h2v2h-2v-2zm4 0h2v2h-2v-2zm4 0h2v2h-2v-2zm4 0h2v2h-2v-2zm4 0h2v2h-2v-2zm4 0h2v2h-2v-2zM5 1h2v2H5V1zm4 0h2v2H9V1zm4 0h2v2h-2V1zm4 0h2v2h-2V1zm4 0h2v2h-2V1zm4 0h2v2h-2V1zm4 0h2v2h-2V1zm4 0h2v2h-2V1zm4 0h2v2h-2V1zm4 0h2v2h-2V1zm4 0h2v2h-2V1zm4 0h2v2h-2V1zm4 0h2v2h-2V1zm4 0h2v2h-2V1zm4 0h2v2h-2V1zm4 0h2v2h-2V1zm4 0h2v2h-2V1zm4 0h2v2h-2V1zm4 0h2v2h-2V1zm0 4h2v2h-2V5zm0 4h2v2h-2V9zm0 4h2v2h-2v-2zm0 4h2v2h-2v-2zm0 4h2v2h-2v-2zm0 4h2v2h-2v-2zm0 4h2v2h-2v-2zm0 4h2v2h-2v-2zm0 4h2v2h-2v-2zm0 4h2v2h-2v-2zm0 4h2v2h-2v-2zm0 4h2v2h-2v-2zm0 4h2v2h-2v-2zm0 4h2v2h-2v-2zm0 4h2v2h-2v-2zm0 4h2v2h-2v-2zm0 4h2v2h-2v-2zm0 4h2v2h-2v-2zM5 5h70v70H5V5zm2 68h66V7H7v66zM9 9h62v62H9V9zm2 60h58V11H11v58zm2-39.6V13h16.4A29.1 29.1 0 0 0 13 29.4zM15 15v6.67A31.17 31.17 0 0 1 21.67 15H15zm-2 52V50.6A29.1 29.1 0 0 0 29.4 67H13zm2-8.67V65h6.67A31.17 31.17 0 0 1 15 58.33zM67 67H50.6A29.1 29.1 0 0 0 67 50.6V67zm-8.67-2H65v-6.67A31.17 31.17 0 0 1 58.33 65zM67 13v16.4A29.1 29.1 0 0 0 50.6 13H67zm-2 8.67V15h-6.67A31.17 31.17 0 0 1 65 21.67zM39 13h2v2h-2v-2zm7.02.66l1.93.52-.51 1.93-1.94-.52.52-1.93zm6.61 2.46l1.74 1-1 1.73-1.74-1 1-1.73zm5.75 4.08l1.42 1.42-1.42 1.4-1.4-1.4 1.4-1.42zm4.5 5.43l1 1.74-1.73 1-1-1.74 1.73-1zm2.94 6.42l.52 1.93-1.93.52-.52-1.94 1.93-.51zM67 39v2h-2v-2h2zm-.66 7.02l-.52 1.93-1.93-.51.52-1.94 1.93.52zm-2.46 6.61l-1 1.74-1.73-1 1-1.74 1.73 1zm-4.08 5.75l-1.42 1.42-1.4-1.42 1.4-1.4 1.42 1.4zm-5.43 4.5l-1.74 1-1-1.73 1.74-1 1 1.73zM41 67h-2v-2h2v2zm6.95-1.18l-1.93.52-.52-1.93 1.94-.52.51 1.93zm-13.97.52l-1.93-.52.51-1.93 1.94.52-.52 1.93zm-6.61-2.46l-1.74-1 1-1.73 1.74 1-1 1.73zm-5.75-4.08l-1.42-1.42 1.42-1.4 1.4 1.4-1.4 1.42zm-4.5-5.43l-1-1.74 1.73-1 1 1.74-1.73 1zm-2.94-6.42l-.52-1.93 1.93-.52.52 1.94-1.93.51zM13 41v-2h2v2h-2zm.66-7.02l.52-1.93 1.93.51-.52 1.94-1.93-.52zm2.46-6.61l1-1.74 1.73 1-1 1.74-1.73-1zm4.08-5.75l1.42-1.42 1.4 1.42-1.4 1.4-1.42-1.4zm5.43-4.5l1.74-1 1 1.73-1.74 1-1-1.73zm6.42-2.94l1.93-.52.52 1.93-1.94.52-.51-1.93zM40 63a23 23 0 1 1 0-46 23 23 0 0 1 0 46zm0-2a21 21 0 1 0 0-42 21 21 0 0 0 0 42zm0-2a19 19 0 1 1 0-38 19 19 0 0 1 0 38zm0-2a17 17 0 1 0 0-34 17 17 0 0 0 0 34z'/%3E%3C/g%3E%3C/svg%3E");
-  min-height: 100%;
-  height: 100%;
-  min-width: 100%;
+<style  scoped>
+
+.f-right{
+    float: left;
 }
-.container {
-  margin: 0 auto;
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
+
+.f-left{
+    float: right;
 }
-hr {
-  border: none;
-  border-top: 3px solid lightgray;
-  color: #333;
-  overflow: visible;
-  text-align: center;
-  height: 3px;
+
+
+.m-left{
+  align-content: left;
+  text-align: left;
 }
-hr:after {
-  background: #fff;
-  content: "Or";
-  padding: 0 4px;
-  position: relative;
-  top: -13px;
+  .md-progress-bar {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+  }
+  .md-checkbox {
+    display: flex;
+  }
+  .b-color{
+    background-color: orange;
+    color: white;
+  }
+  .p-card{
+    padding-left: 90px;
+    padding-right:90px;
+    padding-top: 80px;
+    padding-bottom: 80px;
+  }
+  .b-div{
+    background-image: url("ash.jpg");
+     background-position: center;
+     background-size: cover;
+  }
+  .t-center{
+    text-align: center;
+  }
+
+  .center{
+    align-content: center;
+    text-align: center;
 }
-</style>
+
+
+.b-w{
+    width: 230px;
+}
+
+
+
+
+@media only screen and (max-width: 768px) {
+
+
+  .p-card{
+    padding-left: 10px;
+    padding-right:10px;
+    padding-top: 10px;
+    padding-bottom: 100px;
+  }
+
+
+}
+
+
+</style> 

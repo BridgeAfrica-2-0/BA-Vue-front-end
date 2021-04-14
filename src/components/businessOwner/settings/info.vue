@@ -1,6 +1,6 @@
 <template>
-  <b-container class="container-fluid">
-    <b-container class="">
+  
+    <b-container fluid>
       <b-container class="bv-example-row">
         <b-form>
           <div class="b-bottomm">
@@ -283,18 +283,20 @@
                   <br />
                   <b-container>
                     <b-row>
-                      <b-col
+                      <b-col cols="6"
                         ><b-form-checkbox id="" class="a-text" name="" value="">
                           Monday</b-form-checkbox
                         ></b-col
                       >
+
+
                       <b-col><b-form-input name=""></b-form-input></b-col>-
                       -<b-col><b-form-input name=""></b-form-input></b-col>
                     </b-row>
                     <br />
 
                     <b-row>
-                      <b-col
+                      <b-col cols="6"
                         ><b-form-checkbox id="" class="a-text" name="" value="">
                           Tuesday</b-form-checkbox
                         ></b-col
@@ -305,7 +307,7 @@
                     <br />
 
                     <b-row>
-                      <b-col
+                      <b-col  cols="6"
                         ><b-form-checkbox id="" class="a-text" name="" value="">
                           Wednesday</b-form-checkbox
                         ></b-col
@@ -316,7 +318,7 @@
                     <br />
 
                     <b-row>
-                      <b-col
+                      <b-col cols="6"
                         ><b-form-checkbox id="" class="a-text" name="" value="">
                           Thursday</b-form-checkbox
                         ></b-col
@@ -327,7 +329,7 @@
                     <br />
 
                     <b-row>
-                      <b-col
+                      <b-col cols="6"
                         ><b-form-checkbox id="" class="a-text" name="" value="">
                           Friday
                         </b-form-checkbox></b-col
@@ -338,7 +340,7 @@
                     <br />
 
                     <b-row>
-                      <b-col
+                      <b-col cols="6"
                         ><b-form-checkbox id="" class="a-text" name="" value="">
                           Saterday
                         </b-form-checkbox></b-col
@@ -349,7 +351,7 @@
                     <br />
 
                     <b-row>
-                      <b-col
+                      <b-col cols="6"
                         ><b-form-checkbox id="" name="" class="a-text" value="">
                           Sunday</b-form-checkbox
                         ></b-col
@@ -429,7 +431,7 @@
 
       <Footer />
     </b-container>
-  </b-container>
+
 </template>
 
 <script>
@@ -439,6 +441,10 @@ export default {
 </script>
 
 <style scoped>
+
+.bv-example-row{
+  font-size: 12px;
+}
 .b-bottom {
   margin-top: 20px;
   margin-bottom: 20px;

@@ -16,6 +16,8 @@ export default {};
 @import "./assets/css/style.css";
 @import "./assets/css/bootstrap.css";
 
+@import "./assets/icon/iconfont.css";
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;

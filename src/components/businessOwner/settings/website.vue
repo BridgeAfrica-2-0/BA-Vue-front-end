@@ -3,14 +3,14 @@
     <b-container class="">
       <b-container class="bv-example-row">
         <b-row>
-          <b-col cols="8">
+          <b-col cols="12" md="8">
             <div>
               <b-table-simple hover small caption-top responsive>
                 <b-thead>
                   <b-tr>
                     <b-th class="a-text">Website Title</b-th>
                     <b-th class="a-text">Website Title Goes here</b-th>
-                    <b-th> </b-th>
+                    <b-th> <b-button  variant="outline" class=" btn-outline-primary"> change  </b-button> </b-th>
                   </b-tr>
                 </b-thead>
 
@@ -48,9 +48,11 @@
                 </b-tbody>
               </b-table-simple>
             </div>
+
+            <b-button  variant="outline" class=" btn-outline-primary"> Delete Website  </b-button>
           </b-col>
 
-          <b-col cols="4">
+          <b-col cols="12" md="4">
             <p class="web-template-label">Website Template</p>
 
             <b-link href="#" class="f-left">Visit Website</b-link>

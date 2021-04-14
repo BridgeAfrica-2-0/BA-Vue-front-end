@@ -1,19 +1,18 @@
 <template>
-  <div class="container-fluid" style="padding-left:40px; padding-right:40px;">
-   
-    <div>
+  <div>
+  
+    <b-container>
       <div class="chat-box">
         <b-row class="row">
           <div v-if="show">
             <b-col class="pr-0">
               <div class="right-mobile">
-                
                 <b-row>
                   <b-col>
                     <b-avatar
                       variant="primary"
-                      text="LV"
-                      size="50"
+                      text="BV"
+                      size="6rem"
                     ></b-avatar>
                   </b-col>
                   <b-col>
@@ -46,8 +45,8 @@
                     <b-col class="col-3">
                       <b-avatar
                         variant="primary"
-                        text="BL"
-                        size="40"
+                        text="BV"
+                        size="60"
                       ></b-avatar>
                     </b-col>
                     <b-col>
@@ -67,10 +66,10 @@
             <div class="right">
               <b-row>
                 <b-col>
-                  <b-avatar variant="primary" text="BV" size="40"></b-avatar>
+                  <b-avatar variant="primary" text="BV" size="6rem"></b-avatar>
                 </b-col>
                 <b-col>
-                  <h3 class="">Messages</h3>
+                  <h3 class="mt-4">Messages</h3>
                 </b-col>
                 <b-col>
                   <b-icon
@@ -94,8 +93,8 @@
                   class="p-2 message"
                   @click="showInfo(false)"
                 >
-                  <b-col class="col-2">
-                    <b-avatar variant="primary" text="BV" size="40"></b-avatar>
+                  <b-col class="col-3">
+                    <b-avatar variant="primary" text="BV" size="60"></b-avatar>
                   </b-col>
                   <b-col>
                     <h6>{{ message.name }}</h6>
@@ -108,8 +107,7 @@
               </div>
             </div>
           </b-col>
-
-          <b-col cols="8" v-if="show == false && info == false && newMsg == false">
+          <b-col v-if="show == false && info == false && newMsg == false">
             <div class="chat-nav">
               <b-row class="mobile">
                 <b-col class="col-1">
@@ -147,7 +145,7 @@
               </b-row>
               <b-row class="desk">
                 <b-col class="col-2">
-                  <b-avatar variant="primary" text="BV" size="40"></b-avatar>
+                  <b-avatar variant="primary" text="BV" size="60"></b-avatar>
                 </b-col>
                 <b-col class="detail">
                   <h5>Louis Litt</h5>
@@ -215,7 +213,7 @@
             <div class="bottom">
               <b-row v-if="!checked">
                 <b-col class="col-2 user">
-                  <b-avatar variant="primary" text="BV" size="40"></b-avatar>
+                  <b-avatar variant="primary" text="BV" size="60"></b-avatar>
                 </b-col>
                 <b-col>
                   <b-form-textarea
@@ -359,7 +357,7 @@
               <div class="bottom newMsg-bottom">
                 <b-row>
                   <b-col class="col-2 user">
-                    <b-avatar variant="primary" text="BV" size="40"></b-avatar>
+                    <b-avatar variant="primary" text="BV" size="60"></b-avatar>
                   </b-col>
                   <b-col>
                     <b-form-textarea
@@ -393,18 +391,16 @@
           </b-col>
         </b-row>
       </div>
-    </div>
-   
+    </b-container>
+    <Footer />
   </div>
 </template>
 
 <script>
 
-
 export default {
   components: {
-    
-
+   
   },
   data() {
     return {
@@ -570,13 +566,12 @@ export default {
   border: solid 1px rgb(223, 223, 223);
   margin-bottom: 100px;
   border-radius: 2px;
-  text-align: left;
 }
 .chat-nav {
   position: relative;
   min-height: 70px;
   background-color: rgb(232, 232, 232);
-
+  width: 700px;
   padding: 10px;
 }
 .chats {
@@ -584,7 +579,6 @@ export default {
   overflow-y: scroll;
   overflow-x: hidden;
   background-color: #ccc;
-  text-align: left;
 }
 input {
   margin-top: 10px;

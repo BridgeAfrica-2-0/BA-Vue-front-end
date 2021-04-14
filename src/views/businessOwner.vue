@@ -4,67 +4,94 @@
     <navbar />
    
 
-    <div  class="container-fluid ">
-      <b-row>
-        <b-tabs pills   >
-          <b-tab active>
-            <template slot="title">
-              <p class="tt-color">
-                <b-icon icon="house" scale="1" variant="primary"></b-icon> Home
-              </p> </template
-            ><Business
-          /></b-tab>
+     
 
-          <b-tab>
-            <template slot="title">
-              <p class="tt-color">
-                <b-icon icon="envelope" scale="1" variant="primary"></b-icon>
-                Inbox
-              </p>
-            </template>
-            
-            <Inbox />
-            </b-tab
-          >
 
-          <b-tab>
-            <template slot="title">
-              <p class="tt-color">
-                <b-icon icon="bell" scale="1" variant="primary"></b-icon>
-                Notifications
-              </p>
-            </template>
+<div   class="container-fluid">
+   
+  <ly-tab
+    v-model="selectedId"
+    :items="items"
+    :options="options"
+    @change="handleChange">
+  </ly-tab>
+
+
+
+
+
+
+
+
+  </div>
+
+
+
+
+   
+    <div class="mt-3" v-if="selectedId == '0'" >  
+              
+             <Business/>   
+   </div> 
+
+
+
+
+
+
+
+    <div class="mt-3" v-if="selectedId == '1'" >  
+              
+              <Inbox />  
+   </div> 
+
+
+
+
+
+
+    <div class="mt-3" v-if="selectedId == '2'" >  
+              
             <Notification />
-          </b-tab>
+           
+   </div> 
 
-          <b-tab >   <template slot="title"  > 
-              <p class="tt-color" > <b-icon icon="arrow-clockwise" scale="1" variant="primary"></b-icon> Pending Posts </p>
-          
-        </template>  <Pending /></b-tab>
 
-          <b-tab>
-            <template slot="title">   
 
-              <p class="tt-color">
-                <b-icon icon="eye" scale="1" variant="primary"></b-icon>
-                Insight
-              </p>
-            </template>
-            <Insight />
-          </b-tab>
 
-          <b-tab>
-            <template slot="title">
-              <p class="tt-color">
-                <b-icon icon="gear" scale="1" variant="primary"></b-icon>
-                Settings
-              </p>
-            </template>
-            <Settings />    
-          </b-tab>
-        </b-tabs>
-      </b-row>
-    </div>
+
+
+
+    <div class="mt-3" v-if="selectedId == '3'" >  
+              
+            <Pending />
+   </div> 
+
+
+
+
+
+
+
+
+    <div class="mt-3" v-if="selectedId == '4'" >  
+              
+              <Insight />
+   </div> 
+
+
+
+
+   
+    <div class="mt-3" v-if="selectedId == '5'" >  
+              
+             <Settings /> 
+   </div> 
+
+
+
+
+
 
 
 
@@ -104,10 +131,34 @@ export default {
     Footer
   },
   data() {
-    return {};
+   return {
+      selectedId: 0,
+      bottomSelectedId: 0,
+      items: [
+        {label: 'Home ', icon: 'fas fa-home'},
+       
+        {label: 'Inbox' , icon: 'fas fa-comments'},
+        {label: 'Notification' , icon: 'fas fa-bell'},
+        {label: 'Pending' , icon: 'fas fa-sync'}, 
+        {label: 'Insight' , icon: 'fas fa-chart-line'},  
+        {label: 'Settings' , icon: 'fas fa-cog'},
+        
+      ],
+      options: {
+        activeColor: '#1d98bd'
+      },
+     
+    
+     
+    }
   },
   computed: {},
-  methods: {}
+ 
+  methods: {
+    handleChange (item, index) {
+      console.log(item, index)
+    }
+  }
 };
 </script>
 

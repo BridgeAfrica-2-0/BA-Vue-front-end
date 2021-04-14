@@ -37,7 +37,7 @@
         >
       </b-form-group>
 
-      <div class="payment-image col-md-6">
+      <div  col="12" md="6" class="payment-image ">
         <img
           class="mb-2 img-fluid"
           src="@/assets/img/credit-cards-logos.png"
@@ -104,10 +104,17 @@ export default {
   background-color: #e4e3e3;
 }
 .payment-image {
-  margin-top: -60px;
+  margin-top: -50px;
   float: right;
 }
 
+@media only screen and (max-width: 1065px) {
+.payment-image {
+  margin-top: 0px;
+  float: right;
+}
+
+}
 .a-text {
   text-align: left;
   padding-left: 10px;

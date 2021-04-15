@@ -117,6 +117,8 @@ import Settings from "../components/businessOwner/settings";
 
 import Inbox from "../components/businessOwner/inbox";
 
+import LyTab from "@/tab/src/index.vue";
+
 import Footer from "../components/footer";
 export default {
   name: "Home",
@@ -124,6 +126,7 @@ export default {
     navbar,
     Business,
     Pending,
+    LyTab,
     Settings,
     Insight,
     Inbox,

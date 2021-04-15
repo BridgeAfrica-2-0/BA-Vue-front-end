@@ -25,9 +25,7 @@ import * as VueGoogleMaps from 'vue2-google-maps';
 
 //import LyTab from 'ly-tab';
 
-import LyTab from "@/tab/index.js";
 
-Vue.use(LyTab);
 
 // global register
 Vue.use(VueGallerySlideshow);

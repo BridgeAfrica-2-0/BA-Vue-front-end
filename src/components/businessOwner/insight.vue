@@ -1,25 +1,17 @@
 <template>
   <div class="container-fluid mt-3"  style="padding-left:60px; padding-right:60px">
     <b-row>
-      <b-col>
+      <b-col md="6" sm="12">
         <b-card class="b-shadow">
           <b-row>
-            <b-col cols="8">
+
+            <b-col >
               <h6 class="card-title mb-0">
                 New Notifications
                 <p class="s-text">From (Jan 1 - Jan 8)</p>
               </h6>
             </b-col>
-            <b-col>
-              <b-card-text class="f-right">
-                <b-icon
-                  v-b-tooltip.hover
-                  title="Tooltip content goes in here"
-                  icon="exclamation-circle-fill"
-                  variant="dark"
-                ></b-icon>
-              </b-card-text>
-            </b-col>
+            
           </b-row>
           <br />
           <b-row>
@@ -30,12 +22,15 @@
               </h3>
             </b-col>
             <b-col cols="8">
-              <img
-                fluid-grow
-                class="i-size"
-                src="../../assets/img/curv.png"
-                alt=""
-              /> </b-col
+              
+              
+              
+               <div>
+    <canvas id="planet-chart"></canvas>
+  </div>
+
+
+ </b-col
           ></b-row>
         </b-card>
       </b-col>
@@ -124,12 +119,31 @@
 </template>
 
 <script>
+
+import Chart from 'chart.js'
+
+import planetChartData from '@/planet.js'
+
+
 export default {
   name: "insight",
+
   components: {},
-  data() {
-    return {};
+  
+
+   data() {
+    return {    
+       planetChartData: planetChartData,
+      
+     
+    };
   },
+ 
+  mounted() {
+    const ctx = document.getElementById('planet-chart');
+    new Chart(ctx, this.planetChartData);
+  },
+
   computed: {},
   methods: {}
 };

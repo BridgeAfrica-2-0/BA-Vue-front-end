@@ -293,14 +293,17 @@
               <!-- progressbar -->
               <ul id="progressbar">
                 <li class="active" id="general"><strong>General</strong></li>
+
                 <li id="contact" class="" v-bind:class="{ active: fieldset5 }">
                   <strong>Contact</strong>
                 </li>
+
                 <li
                   id="location"
                   class=""
                   v-bind:class="{ active: fieldset2, active: fieldset3 }"
                 >
+
                   <strong>Location</strong>
                 </li>
               </ul>
@@ -689,24 +692,40 @@
 
 
 
-      <b-modal id="modal-person" title="Add Bussiness" hide-footer>
+      <b-modal id="modal-person" title=" A Quick Guide to get you started"  hide-footer>
 
         <div class="row">
           <div class="col-md-12 mx-0">
             <form id="msform">
               <!-- progressbar -->
               <ul id="progressbar">
-                <li class="active" id="general"><strong>General</strong></li>
+                <li class="active" id="general"><strong> Complete Profile</strong></li>
                 <li id="contact" class="" v-bind:class="{ active: fieldset5 }">
-                  <strong>Contact</strong>
+                  <strong>  Follow Business </strong>
                 </li>
+
+
                 <li
                   id="location"
                   class=""
                   v-bind:class="{ active: fieldset2, active: fieldset3 }"
                 >
-                  <strong>Location</strong>
+                  <strong> Follow People </strong>
                 </li>
+
+
+                 <li
+                  id="location"
+                  class=""
+                  v-bind:class="{ active: fieldset2, active: fieldset3 }"
+                >
+                  <strong> Tutorials </strong>
+                </li>
+
+
+
+
+
               </ul>
               <!-- fieldsets -->
               <fieldset class="position-relative opacity-100" v-if="fieldset1">
@@ -852,83 +871,37 @@
                 />
               </fieldset>
 
+
+
+
+
+
               <fieldset class="position-relative opacity-100" v-if="fieldset2">
                 <div class="form-card">
-                  <div class="row">
-                    <div class="input-group col-md-12 mb-4 selec">
-                      <label
-                        class="col-md-3 pl-0 control-label float-left"
-                        for="name"
-                        >Phone</label
-                      >
-                      <div class="col-md-9 pl-0 pr-0">
-                        <select
-                          id="country"
-                          class="form-control col-md-2 mr-3 float-left"
-                        >
-                          <option>USA(+1)</option>
-                          <option>USA(+1)</option>
-                          <option>USA(+1)</option>
-                          <option>India(+91)</option>
-                        </select>
-                        <input
-                          id="tel"
-                          name="tel"
-                          type="tel"
-                          placeholder=""
-                          class="form-control col-md-7"
-                        />
-                      </div>
-                      <div class="checkbox">
-                        <label
-                          ><input type="checkbox" value="" />This business does
-                          not have a Phone</label
-                        >
-                      </div>
-                    </div>
+                  <div class="div-h">
+
+
+
+
+                     
+      <Business />
+
+                     
+    
+
+
+
+
+
+
+
+
+
+
                   </div>
 
-                  <div class="row mb-3">
-                    <div class="col-md-12">
-                      <div class="form-group">
-                        <label for="alias">Website</label><br />
-                        <input
-                          type="text"
-                          name="Website"
-                          id="Website"
-                          placeholder="www.Website.comm"
-                          class="form-control"
-                        />
-                        <div class="checkbox">
-                          <label
-                            ><input type="checkbox" value="" />This business
-                            does not have a Website</label
-                          >
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+                 
 
-                  <div class="row mb-5">
-                    <div class="col-md-12">
-                      <div class="form-group">
-                        <label for="alias">Email</label><br />
-                        <input
-                          type="Email"
-                          name="Email"
-                          id="Emaisl"
-                          placeholder="Email.com"
-                          class="form-control"
-                        />
-                        <div class="checkbox">
-                          <label
-                            ><input type="checkbox" value="" />This business
-                            does not have a Email</label
-                          >
-                        </div>
-                      </div>
-                    </div>
-                  </div>
                 </div>
                 <input
                   type="button"
@@ -951,62 +924,32 @@
                 />
               </fieldset>
 
+
+
+
+
+
+
+
+
+
               <fieldset class="position-relative opacity-100" v-if="fieldset3">
                 <div class="form-card">
-                  <div class="row">
-                    <div class="col-md-12">
-                      <div class="col-md-6 pl-0">
-                        <div class="form-group">
-                          <label for="username">City </label><br />
-                          <input
-                            type="text"
-                            name="username"
-                            id="username"
-                            placeholder="City, Country"
-                            class="form-control"
-                          />
-                        </div>
-                      </div>
-                      <div class="col-md-6 pl-0">
-                        <div class="form-group">
-                          <label for="alias">Neighbourhood </label><br />
-                          <input
-                            type="text"
-                            name="alias"
-                            id="alias"
-                            placeholder="Neighbourhood name, City, Country"
-                            class="form-control"
-                          />
-                        </div>
-                      </div>
-                    </div>
+
+                  
+
+                  <div class="div-h"><People />
+                   
+                
+
+
+
+                    <People />
+
                   </div>
 
-                  <div class="row">
-                    <div class="col-md-12">
-                      <div class="form-group">
-                        <label for="username">Three Location Descriptions</label
-                        ><br />
-                        <div class="col-md-12 pl-0 pr-0">
-                          Choix
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+                  
 
-                  <div class="row">
-                    <div class="col-md-12">
-                      <iframe
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d26373534.241211604!2d-113.7593 23355 12333!3d36.204849821363666!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x54eab584e43 2360b%3A0x1c3bb99243deb742!2sUnited%20States!5e0!3m2!1sen!2sin!4v1597127134108!5m2!1sen!2sin"
-                        allowfullscreen=""
-                        aria-hidden="false"
-                        tabindex="0"
-                        height="350"
-                        class="w-100"
-                        frameborder="0"
-                      ></iframe>
-                    </div>
-                  </div>
                 </div>
 
                 <input
@@ -1143,6 +1086,11 @@
 </template>
 
 <script>
+
+
+import People from "@/components/dasboard/suggestedpeople";
+import Business from "@/components/dasboard/communitybusiness";
+
 export default {
   name: "welcome",
   data() {
@@ -1167,7 +1115,25 @@ export default {
 
     };
   },
+
+  components: {
+    
+    People,
+    Business,
+    
+  },
+
   methods: {
+
+
+    closeOne() {
+      this.fieldset1 = false;
+      this.fieldset2 = true;
+      this.fieldset3 = false;
+      this.fieldset4 = false;
+      this.fieldset5 = true;
+    },
+
 
 
     welcome1close() {
@@ -1265,74 +1231,20 @@ export default {
 };
 </script>
 
-<style scoped>
+
+
+
+<style >
 
 
 
 
-
-
-
-
-.logo-img{
-
-  width: 60px;
-}
-
-@media only screen and (max-width: 768px) {
-  
-.btn{
-  font-size: 10px;
-}
-
-
-
-.text-lost{
-    flex-basis: 70%;
-    padding-left: 30px;
-    font-size: 13px;
-}
-
-
-h4{
-  font-size: 15px;
-}
-
-.logo-img{
-  width: 30px;
-}
-.see-all-link{
-  font-size: 10px;
-}
-
-}
-
-
-
-
-.picture {
-  border-radius: 10px;
-  width: 48%;
-  flex-basis: 40%;
-}
-
-.text-lost {
-  flex-basis: 90%;
-  padding-left: 30px;
-}
-
-.colum {
-  justify-content: space-around;
-}
-
-.chart {
-  display: block;
-  height: 315px;
-  width: 400px;
-}
-
-.text-design {
-  line-height: 40px;
+#progressbar li {
+    list-style-type: none;
+    font-size: 12px;
+    width: 25%;
+    float: left;
+    position: relative;
 }
 
 
@@ -1340,48 +1252,14 @@ h4{
 
 
 
-.bg-dark {
-  background-color: #3d8d79 !important;
+.div-h {
+  height: 400px;
+  overflow: auto;
+  overflow-x: hidden;
+  margin-left: -10px;
+   padding-left: -10px;
 }
 
-@media (max-width: 576px) {
-  .lb-grid {
-    height: 200px;
-  }
-  .corps {
-    margin-top: 2rem !important;
-  }
-}
-@media (min-width: 576px) {
-  .lb-grid {
-    height: 300px;
-  }
-}
-@media (min-width: 768px) {
-  .lb-grid {
-    height: 350px;
-  }
-}
-@media (min-width: 992px) {
-  .lb-grid {
-    height: 400px;
-  }
-}
-@media (min-width: 1200px) {
-  .lb-grid {
-    height: 500px;
-  }
-  .corps {
-    margin-top: 6rem !important;
-  }
-}
-@media (min-width: 1400px) {
-  .lb-grid {
-    height: 500px;
-  }
 
-  .corps {
-    margin-top: 6rem !important;
-  }
-}
+
 </style>

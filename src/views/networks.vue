@@ -159,6 +159,8 @@ import Notification from "@/components/businessf/tabs/owner/networks/notificatio
 
 import Roles from "@/components/businessf/tabs/owner/networks/roles";
 
+import LyTab from "@/tab/src/index.vue";
+
 import Parent from "@/components/businessf/tabs/owner/networks/parent";
 
 export default {
@@ -171,6 +173,7 @@ export default {
     MemberShip,
     Notification,
     Roles,
+    LyTab,
     Default,
     Inbox,
     navbar,

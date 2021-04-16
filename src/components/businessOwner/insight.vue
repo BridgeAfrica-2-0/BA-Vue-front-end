@@ -1,10 +1,13 @@
 <template>
   <div class="container-fluid mt-3"  style="padding-left:60px; padding-right:60px">
     <b-row>
-      <b-col md="6" sm="12">
+      <b-col md="6" lg="4" sm="12">
         <b-card class="b-shadow">
           <b-row>
 
+           <b-col cols="4" >
+
+            <b-row>   
             <b-col >
               <h6 class="card-title mb-0">
                 New Notifications
@@ -13,6 +16,7 @@
             </b-col>
             
           </b-row>
+
           <br />
           <b-row>
             <b-col>
@@ -24,18 +28,36 @@
             <b-col cols="8">
               
               
-              
-               <div>
-    <canvas id="planet-chart"></canvas>
-  </div>
+           
 
 
  </b-col
           ></b-row>
+
+           </b-col>
+
+           <b-col cols="8">  
+             
+               <div>
+    <canvas id="planet-chart"></canvas>
+  </div>
+
+           </b-col>
+          </b-row>
         </b-card>
       </b-col>
 
-      <b-col>
+
+
+
+
+
+
+
+
+
+
+      <b-col  md="6" lg="4" sm="12">
         <b-card class="b-shadow">
           <b-row>
             <b-col cols="8">
@@ -74,7 +96,15 @@
         </b-card>
       </b-col>
 
-      <b-col>
+
+
+
+
+
+
+
+
+      <b-col   md="6" lg="4" sm="12">
         <b-card class="b-shadow">
           <b-row>
             <b-col cols="8">

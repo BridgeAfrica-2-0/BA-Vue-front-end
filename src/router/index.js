@@ -36,6 +36,8 @@ import confirmPayment from "@/views/confirmPayment";
 import networks from "@/views/networks";
 import dashboard from "@/views/dashboard";
 
+import welcome from "@/views/welcome";
+
 Vue.use(VueRouter);
 
 const routes = [
@@ -49,6 +51,15 @@ const routes = [
     name: "home",
     component: dashboard,
   },
+
+
+  {
+    path: "/welcome",
+    name: "welcome",
+    component: welcome
+  },
+
+
 
   {
     path: "/dashboard",

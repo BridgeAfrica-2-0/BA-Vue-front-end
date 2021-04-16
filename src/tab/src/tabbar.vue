@@ -111,8 +111,10 @@ export default {
       if (this.touching || (!this.reBounding && !this.touching)) {
         return 0
       }
-      if (this.reBounding && !this.touching) {
+      else if (this.reBounding && !this.touching) {
         return this.reBoundingDuration
+      }else{
+        return 0;
       }
     },
     transitionTimingFunction () {

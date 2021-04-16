@@ -6,7 +6,7 @@ export function windowInit () {
     window.cancelAnimationFrame = window[vendors[x] + 'CancelAnimationFrame'] || // name has changed in Webkit
                                   window[vendors[x] + 'CancelRequestAnimationFrame']
   }
-//final stull
+
   if (!window.requestAnimationFrame) {
     window.requestAnimationFrame = function (callback) {
       var currTime = new Date().getTime()

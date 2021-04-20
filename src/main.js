@@ -12,6 +12,9 @@ import {FontAwesomeIcon} from '@fortawesome/vue-fontawesome'
 
 import vSelect from 'vue-select';
 
+
+
+
 import VueMaterial from 'vue-material'
 import 'vue-material/dist/vue-material.min.css'
 import 'vue-material/dist/theme/default.css'
@@ -34,6 +37,14 @@ Vue.use(Lightbox);
 // Configuring font awesome
 library.add(fas);
 Vue.component('fas-icon', FontAwesomeIcon);
+
+
+
+
+
+import VueFormWizard from 'vue-form-wizard'
+
+Vue.use(VueFormWizard)
 
 
 

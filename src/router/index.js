@@ -13,6 +13,7 @@ import createService from "@/views/createService";
 
 import businessOwnerSettingGeneral from "@/views/businessOwnerSettingGeneral";
 
+import market from "@/views/market";
 
 import service from "@/views/service";
 import Modifier from "@/views/modifier";
@@ -51,6 +52,14 @@ const routes = [
     name: "home",
     component: dashboard,
   },
+
+
+  {
+    path: "/market",
+    name: "market",
+    component: market,
+  },
+
 
 
   {

@@ -8976,6 +8976,11 @@ vue-eslint-parser@^7.0.0:
     esquery "^1.4.0"
     lodash "^4.17.15"
 
+vue-form-wizard@^0.8.4:
+  version "0.8.4"
+  resolved "https://registry.yarnpkg.com/vue-form-wizard/-/vue-form-wizard-0.8.4.tgz#ddf864c9709b7ba2a6323f59e5d6d17536b7800e"
+  integrity sha512-/Zk1+B7bz7qHFJ16mwu021lpPXWf/9Tlr2mTNG3J7M0Hdy3rgA802lWsbKYySns0B0qtsD8BYGjQ2Wyxgg+4uw==
+
 vue-functional-data-merge@^3.1.0:
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/vue-functional-data-merge/-/vue-functional-data-merge-3.1.0.tgz#08a7797583b7f35680587f8a1d51d729aa1dc657"
@@ -9003,6 +9008,11 @@ vue-github-buttons@^3.1.0:
     format-thousands "^1.1.1"
     node-fetch "^2.3.0"
     tslib "^1.9.3"
+
+vue-good-wizard@^1.4.1:
+  version "1.4.1"
+  resolved "https://registry.yarnpkg.com/vue-good-wizard/-/vue-good-wizard-1.4.1.tgz#4f63b27ea04a4ca36203d19fec7fa65f5683dcef"
+  integrity sha512-kG5e/bpxJQhEhv1VeHIoA/TzdqVskJTz9scSkefb6voVYCk27eELBmvqxr66gxj91arzpvae8hwRuNthz0rVrA==
 
 vue-hot-reload-api@^2.3.0:
   version "2.3.4"

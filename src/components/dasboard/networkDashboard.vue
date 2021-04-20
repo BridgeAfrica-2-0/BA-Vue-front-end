@@ -7,7 +7,7 @@
           :icon="['fas', 'users']"
         />Networks
         <h6 class="float-right text-success font-weight-bolder">
-          46 results Found
+          46 results Founds
         </h6>
       </h2>
       <div class=" row border shadow pt-3 pb-3 pl-0 mb-4">

@@ -347,7 +347,7 @@
                     <div class="col-9 text-center">
                       <h5>Business Name Here</h5>
                       <a href="#">http://business.com</a>
-                      <p><b>Business Category Name Here</b></p>
+                      <p><b>Business Category </b></p>
                       <input
                         type="button"
                         name="Save"
@@ -416,7 +416,7 @@
               <div class="d-flex col-md-12 mt-2">
                 <img class="img-fluid picture" src="@/assets/img/photo2.jpg" />
                 <div class="text-lost">
-                  <b>Business Name 1</b>
+                  <b class="f-12">Business Name</b>
                   <p class="mb-1">
                     1.1M Community
                     <span class="float-right"
@@ -424,7 +424,7 @@
                       <span class="text-success">Basic</span></span
                     >
                   </p>
-                  <p class="mb-1 mb-3">Categorie Name Here</p>
+                  <p class="mb-1 mb-3">Categorie </p>
                   <p class="mb-1">
                     <b-icon-person-fill
                       class="text-primary"
@@ -445,10 +445,7 @@
                       >9</span
                     >
                   </p>
-                  <p class="mb-1 ">
-                    <b-icon-globe class="text-primary"></b-icon-globe>
-                    Visit Website
-                  </p>
+                 
                   <p class="mb-1 ">
                     <b-icon-shop class="text-primary"></b-icon-shop>
                     Market Place
@@ -467,7 +464,7 @@
                       <span class="text-success">Basic</span></span
                     >
                   </p>
-                  <p class="mb-1 mb-3">Categorie Name Here</p>
+                  <p class="mb-1 mb-3">Categorie</p>
                   <p class="mb-1">
                     <b-icon-person-fill
                       class="text-primary"
@@ -488,10 +485,9 @@
                       >9</span
                     >
                   </p>
-                  <p class="mb-1 ">
-                    <b-icon-globe class="text-primary"></b-icon-globe>
-                    Visit Website
-                  </p>
+                  
+
+
                   <p class="mb-1 ">
                     <b-icon-shop class="text-primary"></b-icon-shop>
                     Market Place
@@ -573,8 +569,8 @@ export default {
 
 .text-lost{
     flex-basis: 70%;
-    padding-left: 30px;
-    font-size: 13px;
+    padding-left: 10px;
+    font-size: 12px;
 }
 
 

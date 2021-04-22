@@ -2,31 +2,61 @@
   <div>
     <b-card v-if="networkShow">
       <div class="networks ml-4">
-        <div class="create" @click="addNetwork">
+        
+
+        <div class="ml-2 mt-2" >
+
+
+
+
+
+       <b-row >  
+         
+         <b-col >  <div class="create" @click="addNetwork">
           <div class="text">
-            <b-icon icon="plus"></b-icon>
+           
             <p>Add Network</p>
           </div>
-        </div>
-        <div class="ml-2 mt-2" v-for="post in posts" :key="post.id">
-          <b-card
-            title="Group name"
-            img-src="https://picsum.photos/600/300/?image=25"
-            img-alt="Image"
-            img-top
-            tag="article"
-            class="mb-5 prod"
-          >
-            <b-card-text>
-              <b-row>
-                <b-col>
-                  <p class="small">public - 397 Members</p>
-                </b-col>
+        </div>  </b-col> 
+         
+         
+         
+         <b-col cols="12" md="4" v-for="post in posts" :key="post.id">   
+                    
+    <div class="people-style shadow">
+      <b-row>
+        <b-col md="6" xl="6" lg="6" cols="5"  sm="5">
+          <div style="height: 100%;">
+            <img
+              src="https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg"
+              width="100%"
+              height="90%"
+              class="r-image"
+            />
+          </div>
+        </b-col>
+        <b-col md="6" cols="7" sm="7">
+         <p class="text">
+            <strong> Shipping Network </strong> <br />  <br />
+            Public <br />
+             20k Members <br />
+             Business Name <br />
+            <b> Approved </b>
+            
+          </p>
+        </b-col>
 
-                <p class="approved small">Approved</p>
-              </b-row>
-            </b-card-text>
-          </b-card>
+        
+      </b-row>
+    </div>
+</b-col>    </b-row>
+
+
+
+
+
+
+
         </div>
       </div>
     </b-card>
@@ -199,7 +229,8 @@ p {
   background-color: #bbb;
   padding: 20px;
   width: 300px;
-  top: 5px;
+  height: 200px;
+  margin: 30px;
   border-radius: 5px;
   text-align: center;
   cursor: pointer;
@@ -244,5 +275,125 @@ p {
   .btn {
     margin-left: 60px;
   }
+}
+
+
+
+
+
+
+
+
+
+@media only screen and (max-width: 760px) {
+
+.btn{
+
+font-size: 12px;
+    width: 100px;
+
+}
+
+h4{
+  font-size: 15px;
+}
+
+
+.pop{
+  font-size: 15px;
+}
+}
+
+.card {
+  color: orange;
+}
+
+.s-button {
+  align-content: center;
+  text-align: center;
+
+  padding: 15px;
+}
+.text {
+  color: #000;
+  font-size: 15px;
+
+  text-align: left;
+
+  margin-left: -15px;
+
+  margin-right: -15px;
+}
+.stock {
+  color: green;
+}
+
+.b1 {
+  width: 100px;
+  margin-left: -20px;
+}
+
+.b2 {
+  width: 120px;
+
+  margin-left: -15px;
+}
+
+.btn {
+  font-size: 13px;
+
+  display: flex;
+}
+
+.ico {
+  margin-right: 5px;
+}
+
+.r-image {
+  
+ border-top-left-radius: 10px;
+
+  border-bottom-left-radius: 10px;
+
+  border-top-right-radius: 10px;
+
+  border-bottom-right-radius: 10px;
+
+
+  width: 100%;
+
+height: 100%;
+}
+
+.people-style {
+  border-top-left-radius: 10px;
+
+  border-bottom-left-radius: 10px;
+
+  border-top-right-radius: 5px;
+
+  border-bottom-right-radius: 5px;
+
+  background: white;
+
+  background-color: #fff;
+  background-clip: border-box;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  margin-bottom: 10px;
+  margin-right: 8px;
+ 
+
+}
+
+h4{
+  color: black;
+}
+
+
+.s-card{
+  height:450px; 
+  overflow: auto; 
+  overflow-x: hidden;
+
 }
 </style>

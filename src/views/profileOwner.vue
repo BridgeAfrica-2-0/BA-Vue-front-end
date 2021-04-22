@@ -1,5 +1,5 @@
-<template>
-  <div class="mx-auto">
+<template  >
+  <div class="mx-auto"   style="overflow-y: hidden;">
     <navbar></navbar>
     <head-page></head-page>
     <div  class=" container-fluid text-justify   corps prof">
@@ -54,10 +54,6 @@ export default {
 
 <style scoped>
 
-.prof {
-    width: 90%;
-    margin-left: 100px;
-}
 
 
 @media (max-width: 576px) {

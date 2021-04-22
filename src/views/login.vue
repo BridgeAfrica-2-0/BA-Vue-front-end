@@ -57,14 +57,25 @@
             <div class="md-layout-item md-small-size-100 m-left">
              
 
-                 <md-checkbox v-model="boolean" class="md-primary">Remeber Me</md-checkbox>
+
+                 <b-form-checkbox
+      id="checkbox-1"
+     
+      name="checkbox-1"
+      value="accepted"
+      unchecked-value="not_accepted"
+    >
+     Remeber Me
+    </b-form-checkbox>
+
+
 
 
             </div>
 
             <div class="md-layout-item md-small-size-100">
               <br/>
-              <label >Forget Password</label>
+           <b-link>     <label >Forget Password</label>   </b-link>
             </div>
           </div>
 
@@ -107,9 +118,7 @@
        <label>  <b-link href="#">Terms and conditions </b-link> &    <b-link href="#">Privacy policies</b-link>    </label>  </div>
 
 
-        <md-card-actions>
-          <md-button type="submit" class="md-primary" :disabled="sending">Create user</md-button>
-        </md-card-actions>
+
       </md-card>
 
 
@@ -142,6 +151,7 @@
   } from 'vuelidate/lib/validators'
   export default {
     name: 'FormValidation',
+    boolean: true,
     mixins: [validationMixin],
     data: () => ({
       form: {

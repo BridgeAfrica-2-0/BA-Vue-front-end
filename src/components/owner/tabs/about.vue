@@ -6,8 +6,8 @@
         About
       </b></b-alert
     >
-    <b-card no-body>
-      <b-tabs pills card vertical>
+    <b-card no-body class="p-2">
+      <b-tabs pills    :vertical="vertical" :card="card">
         <b-tab title="BIOGRAPHY" active><Biography /></b-tab>
         <b-tab title="CONTACT & BASIC INFO"> <ContactandInfo /> </b-tab>
         <b-tab title="WORK & EDUCATION"><WorkAndEducation /></b-tab>
@@ -25,7 +25,42 @@ export default {
     Biography,
     ContactandInfo,
     WorkAndEducation
+  },
+
+
+  
+ data() {
+    return {
+      size: 0
+    }
+  },
+
+  computed: {
+    vertical() {
+      if (this.size > 992)
+        return true
+      return false
+    }, 
+
+    card(){
+      if (this.size > 992)
+        return true
+      return false
+    }
+  },
+
+   mounted() {
+    var that = this
+    window.onresize = function() {
+      that.size = window.innerWidth
+    }
   }
+
+
+
+
+
+
 };
 </script>
 

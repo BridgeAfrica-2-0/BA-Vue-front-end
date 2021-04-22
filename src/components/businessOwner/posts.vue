@@ -1,7 +1,7 @@
 <template>
   <div class="posts">
     <b-row>
-      <b-col cols="4" class="" v-for="post in posts" :key="post.id">
+      <b-col cols="12" md="4" class="" v-for="post in posts" :key="post.id">
         <div class="container-fluid" v-if="post.video">
           <b-embed
             type="iframe"

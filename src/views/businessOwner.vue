@@ -1,5 +1,5 @@
 <template>
-  <div class="">
+  <div class="" style="overflow-y: hidden;">
   
     <navbar />
    
@@ -9,7 +9,7 @@
 
 <div   class="container-fluid">
    
-  <ly-tab
+  <ly-tab    
     v-model="selectedId"
     :items="items"
     :options="options"

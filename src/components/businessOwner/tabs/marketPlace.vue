@@ -208,7 +208,7 @@ export default {
 @media only screen and (max-width: 768px) {
   .products {
     position: relative;
-    left: -25px;
+   
   }
 
   .product {

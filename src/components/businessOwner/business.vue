@@ -2,7 +2,7 @@
   <div>
     <head-page-owner></head-page-owner>
     <div class="row">
-      <div  class="text-justify mt-2 container-fluid" style="padding-left:70px; padding-right:70px">
+      <div  class="text-justify mt-2 container-fluid" >
         <b-row>
           <b-col cols="12">
             <b-tabs content-class="mt-3" fill pills >
@@ -49,6 +49,12 @@ export default {
 </script>
 
 <style scoped>
+
+alig{
+
+  padding-left:70px;
+   padding-right:70px
+}
 .images {
   display: flex;
   width: 100%;

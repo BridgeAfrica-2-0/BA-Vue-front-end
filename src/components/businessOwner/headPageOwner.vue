@@ -7,6 +7,8 @@
         alt="Kitten"
         style="width:100%"
       />
+
+      <!--
       <div class="photo-btns">
         <b-button class="sm" size="sm">
           <b-icon icon="plus"></b-icon>Add Photos</b-button
@@ -14,9 +16,11 @@
         <b-button class="ml-2" size="sm">See All</b-button>
       </div>
 
-      <div class="container-fluid mpbar ">
+      -->
+
+      <div class="container-fluid  ">
         <b-row class="mt-md-4">
-          <b-col md="6" class="m-0 p-0">
+          <b-col md="6" class="m-0 p-0 mt-1">
             <b-avatar
               src="https://placekitten.com/300/300"
               class="float-left img-avatar"
@@ -71,6 +75,8 @@
                 <ul
                   class="navbar-nav pull-right purple float-right position-loup mr-4"
                 >
+
+                <!--
                   <li class="nav-item dropdown">
                     <b-dropdown
                       size="sm"
@@ -139,6 +145,8 @@
                       </b-dropdown-item>
                     </b-dropdown>
                   </li>
+
+                  -->
                 </ul>
               </div>
             </div>

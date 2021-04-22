@@ -4,7 +4,7 @@
       <b-col md="4" lg="3" >
         <Intro />
         <Invite />
-        <Personalise />
+    
       </b-col>
 
       <b-col md="8"  lg="9" >
@@ -17,7 +17,7 @@
 <script>
 import Intro from "../intro";
 import Invite from "../invite";
-import Personalise from "../personalise";
+//import Personalise from "../personalise";
 import Post from "../ownerPost";
 export default {
   name: "posts",
@@ -25,7 +25,7 @@ export default {
     Intro,
     Invite,
 
-    Personalise,
+   // Personalise,
     Post
   }
 };

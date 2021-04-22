@@ -266,56 +266,13 @@
     </div>
     <div class="row mb-4">
       <div class="col">
+        <!--
         <h6 class="mb-0"><b>Business Visited</b></h6>
         <hr />
-        <div class="media border-botmediatom mb-4">
-          <img
-            src="@/assets/img/wankue-filler.jpg"
-            alt="John Doe"
-            class="mr-2 avatar-size"
-          />
-          <div class="media-body">
-            <b>Business Name Here</b>
-            <p class="mb-1">Category Name here - 1.1 M Followers</p>
-            <p><a href="#">Get Directions</a></p>
-          </div>
-          <ul class="navbar-nav pull-right">
-            <li class="nav-item dropdown">
-              <b-dropdown
-                id="dropdown-dropup"
-                dropdown
-                variant="primary-outline"
-              >
-                <b-dropdown-item href="#">Edit</b-dropdown-item>
-                <b-dropdown-item href="#">Delete</b-dropdown-item>
-              </b-dropdown>
-            </li>
-          </ul>
-        </div>
-        <div class="media">
-          <img
-            src="@/assets/img/wankue-filler.jpg"
-            alt="John Doe"
-            class="mr-2 avatar-size"
-          />
-          <div class="media-body">
-            <b>Business Name Here</b>
-            <p class="mb-1">Category Name here - 1.1 M Followers</p>
-            <p><a href="#">Get Directions</a></p>
-          </div>
-          <ul class="navbar-nav pull-right">
-            <li class="nav-item dropdown">
-              <b-dropdown
-                id="dropdown-dropup"
-                dropdown
-                variant="primary-outline"
-              >
-                <b-dropdown-item href="#">Edit</b-dropdown-item>
-                <b-dropdown-item href="#">Delete</b-dropdown-item>
-              </b-dropdown>
-            </li>
-          </ul>
-        </div>
+      
+
+
+       
         <a href="#" data-toggle="modal" data-target="#addbusinessModal"
           ><fas-icon
             class="primary float-left mr-1 mt-1"
@@ -323,6 +280,9 @@
           />
           Add a Business</a
         >
+
+
+         -->
       </div>
     </div>
     <div class="row mb-4">

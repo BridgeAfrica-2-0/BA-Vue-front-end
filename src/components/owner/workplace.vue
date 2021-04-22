@@ -10,8 +10,7 @@
       class="d-flex align-items-center mb-4 "
       style="border: none"
     >
-      <b-avatar class="mr-3 avatar"></b-avatar>
-      <div class="datails">
+      <div class="datails t-left">
         <div class="row">
           <div class="media border-botmediatom mt-3 mb-4">
             <img
@@ -157,5 +156,9 @@ export default {
     position: relative;
     top: -100px;
   }
+}
+
+.t-left{
+  text-align: left;
 }
 </style>

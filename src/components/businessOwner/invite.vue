@@ -5,7 +5,7 @@
         <b>Invite your followers to follow this business</b>
       </p>
       <input class="form-control mb-2" placeholder="Search ..." type="text" />
-      <fas-icon class="primary search" :icon="['fas', 'search']" />
+      
       <b-card-text>
 
 
@@ -21,7 +21,7 @@
          
     <div class="people-style border shadow">
       <b-row class="">
-        <b-col cols="4" class="my-auto">
+        <b-col cols="3" class="my-auto">
           <b-avatar
             variant="primary"
             src="https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg"
@@ -34,7 +34,7 @@
             <div class="e-name" style="margin-top: -9px;">
               <h6 >
                 <br />
-              <strong>  howty Circlehead  </strong>
+              <strong>  howty Circlehead  </strong> <span style="margin-left:40px" >   7k followers </span>
               </h6>
             </div>
 
@@ -50,9 +50,10 @@
                     block
                     variant="primary"
                     size="sm"
-                    class="b-background"
+                    class="b-background f-15"
+                    style="font-size:15px"
                   >
-                    <b-icon icon="plus" class="ico"> </b-icon> Invite
+                    <b-icon icon="plus" class="ico   f-15 "> </b-icon> Invite
                   </b-button>
                 </b-col>
                 <b-col cols="3">
@@ -64,8 +65,6 @@
         </b-col>
       </b-row>
     </div>
-
-
 
 
 
@@ -76,7 +75,7 @@
          
     <div class="people-style border shadow">
       <b-row class="">
-        <b-col cols="4" class="my-auto">
+        <b-col cols="3" class="my-auto">
           <b-avatar
             variant="primary"
             src="https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg"
@@ -89,7 +88,7 @@
             <div class="e-name" style="margin-top: -9px;">
               <h6 >
                 <br />
-              <strong>  howty Circlehead  </strong>
+              <strong>  howty Circlehead  </strong> <span style="margin-left:40px" >   7k followers </span>
               </h6>
             </div>
 
@@ -105,9 +104,10 @@
                     block
                     variant="primary"
                     size="sm"
-                    class="b-background"
+                    class="b-background f-15"
+                    style="font-size:15px"
                   >
-                    <b-icon icon="plus" class="ico"> </b-icon> Invite
+                    <b-icon icon="plus" class="ico   f-15 "> </b-icon> Invite
                   </b-button>
                 </b-col>
                 <b-col cols="3">
@@ -133,11 +133,20 @@
 
 
 
-       
+
+
+
+
+
+
+
+
+
+    
          
     <div class="people-style border shadow">
       <b-row class="">
-        <b-col cols="4" class="my-auto">
+        <b-col cols="3" class="my-auto">
           <b-avatar
             variant="primary"
             src="https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg"
@@ -150,7 +159,7 @@
             <div class="e-name" style="margin-top: -9px;">
               <h6 >
                 <br />
-              <strong>  howty Circlehead  </strong>
+              <strong>  howty Circlehead  </strong> <span style="margin-left:40px" >   7k followers </span>
               </h6>
             </div>
 
@@ -166,9 +175,10 @@
                     block
                     variant="primary"
                     size="sm"
-                    class="b-background"
+                    class="b-background f-15"
+                    style="font-size:15px"
                   >
-                    <b-icon icon="plus" class="ico"> </b-icon> Invite
+                    <b-icon icon="plus" class="ico   f-15 "> </b-icon> Invite
                   </b-button>
                 </b-col>
                 <b-col cols="3">
@@ -180,11 +190,6 @@
         </b-col>
       </b-row>
     </div>
-
-
-
-
-
 
 
 
@@ -224,6 +229,10 @@ p {
   color: #fff;
   border: none;
 }
+.f-15{
+  font-size: 15px;
+}
+
 
 .t-center {
   text-align: center;

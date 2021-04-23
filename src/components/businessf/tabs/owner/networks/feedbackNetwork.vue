@@ -1,37 +1,7 @@
 <template>
 <div class="mt-3 container">
   <b-row>
-    <b-col cols="12">
-      <b-card
-          class="mb-2"
-      >
-        <b-card-text>
-          <b-form-group
-              id="fieldset-1"
-              label="Your Feedback is about"
-              class="font-weight-bolder"
-              label-for="input-1"
-          >
-            <b-form-select id="input-1" v-model="selected" :options="options"></b-form-select>
-          </b-form-group>
-          <b-form-group
-              id="fieldset-1"
-              label="Brief description of your feedback"
-              label-for="textarea"
-              class="font-weight-bolder"
-          >
-            <b-form-textarea
-                id="textarea"
-                v-model="text"
-                rows="4"
-                max-rows="6"
-            ></b-form-textarea>
-          </b-form-group>
-        </b-card-text>
-
-        <b-button href="#" class="float-right" variant="primary"> Post </b-button>
-      </b-card>
-    </b-col>
+    
   </b-row>
   <b-row>
     <b-col cols="12">

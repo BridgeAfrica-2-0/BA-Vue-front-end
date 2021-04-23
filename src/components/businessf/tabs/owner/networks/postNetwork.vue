@@ -5,7 +5,7 @@
       <b-col cols="2" md="1" class="m-0 p-0">
         <b-avatar
             class="d-inline-block"
-            variant="info"
+            variant="primary"
             src="https://business.bridgeafrica.info/assets/img/team/3.png"
         ></b-avatar>
       </b-col>
@@ -75,7 +75,7 @@
           <b-col cols="2" md="1" class="m-0 p-0">
             <b-avatar
                 class="d-inline-block"
-                variant="info"
+                variant="primary"
                 src="https://business.bridgeafrica.info/assets/img/team/3.png"
                 size="3.5rem"
             ></b-avatar>
@@ -89,37 +89,32 @@
                           <b-icon icon="three-dots" aria-hidden="true"></b-icon>
                           More
                         </template>
+
+
+                        <!--
                         <b-dropdown-item-button>
                           <b-icon icon="lock-fill" aria-hidden="true"></b-icon>
                           Locked <span class="sr-only">(Click to unlock)</span>
                         </b-dropdown-item-button>
                         <b-dropdown-divider></b-dropdown-divider>
-                        <b-dropdown-group header="Choose options" class="small">
-                          <b-dropdown-item-button>
-                            <b-icon icon="blank" aria-hidden="true"></b-icon>
-                            Option A <span class="sr-only">(Not selected)</span>
-                          </b-dropdown-item-button>
-                          <b-dropdown-item-button>
-                            <b-icon icon="check" aria-hidden="true"></b-icon>
-                            Option B <span class="sr-only">(Selected)</span>
-                          </b-dropdown-item-button>
-                          <b-dropdown-item-button>
-                            <b-icon icon="blank" aria-hidden="true"></b-icon>
-                            Option C <span class="sr-only">(Not selected)</span>
-                          </b-dropdown-item-button>
-                        </b-dropdown-group>
-                        <b-dropdown-divider></b-dropdown-divider>
-                        <b-dropdown-item-button
-                        >Some action</b-dropdown-item-button
-                        >
-                        <b-dropdown-item-button
-                        >Some other action</b-dropdown-item-button
-                        >
-                        <b-dropdown-divider></b-dropdown-divider>
+                        
+                        -->
+
+
+                        <b-dropdown-item-button variant="info">
+                          <b-icon icon="pencil" aria-hidden="true"></b-icon>
+                          Edit
+                        </b-dropdown-item-button>
+
+
+
                         <b-dropdown-item-button variant="danger">
                           <b-icon icon="trash-fill" aria-hidden="true"></b-icon>
                           Delete
                         </b-dropdown-item-button>
+
+
+
                       </b-dropdown>
                     </span>
             </h5>
@@ -165,14 +160,15 @@
           </b-col>
         </b-row>
         <b-row class="mt-2">
-          <b-col cols="3" md="1" class="m-md-0 p-md-0">
+          <b-col cols="3" md="2" class="m-md-0 p-md-0">
             <b-avatar
-                variant="info"
+                variant="primary"
                 class="img-fluid"
                 src="https://business.bridgeafrica.info/assets/img/team/3.png"
+                size="2em"
             ></b-avatar>
           </b-col>
-          <b-col cols="9" md="11" class="p-0 m-0 pr-3">
+          <b-col cols="9" md="10" class="p-0 m-0 pr-3">
             <b-input-group class="my-auto w-100 rounded">
               <template #append>
                 <b-input-group-text class=""
@@ -196,7 +192,7 @@
           <b-col cols="2" md="1" class="m-0 p-0">
             <b-avatar
                 class="d-inline-block"
-                variant="info"
+                variant="primary"
                 src="https://business.bridgeafrica.info/assets/img/team/3.png"
                 size="3.5rem"
             ></b-avatar>
@@ -284,9 +280,10 @@
         <b-row class="mt-2">
           <b-col cols="3" md="1" class="m-md-0 p-md-0">
             <b-avatar
-                variant="info"
+                variant="primary"
                 class="img-fluid"
                 src="https://business.bridgeafrica.info/assets/img/team/3.png"
+                size="2em"
             ></b-avatar>
           </b-col>
           <b-col cols="9" md="11" class="p-0 m-0 pr-3">
@@ -313,7 +310,7 @@
           <b-col cols="2" md="1" class="m-0 p-0">
             <b-avatar
                 class="d-inline-block"
-                variant="info"
+                variant="primary"
                 src="https://business.bridgeafrica.info/assets/img/team/3.png"
                 size="3.5rem"
             ></b-avatar>
@@ -401,8 +398,9 @@
             <b-row class="mt-2">
               <b-col cols="3" md="1" class="m-md-0 p-md-0">
                 <b-avatar
-                    variant="info"
+                    variant="primary"
                     class="img-fluid"
+                    size="2em"
                     src="https://business.bridgeafrica.info/assets/img/team/3.png"
                 ></b-avatar>
               </b-col>
@@ -517,9 +515,10 @@
             <b-row class="mt-2">
               <b-col cols="3" md="1" class="m-md-0 p-md-0">
                 <b-avatar
-                    variant="info"
+                    variant="primary"
                     class="img-fluid"
                     src="https://business.bridgeafrica.info/assets/img/team/3.png"
+                    size="2em"
                 ></b-avatar>
               </b-col>
               <b-col cols="9" md="11" class="p-0 m-0 pr-3">

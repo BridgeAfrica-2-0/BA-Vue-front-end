@@ -5,32 +5,115 @@
         <b-card title="" header-tag="header" footer-tag="footer">
           <template #header>
             <h6 class="mb-0 d-inline-block">Intro</h6>
-            <span class="float-right btn m-0 p-0 action-intro"
+            <span class="float-right btn m-0 p-0 action-intro"  
+            v-b-modal.modal-5
+
               ><b-icon icon="pencil-fill" variant="primary"></b-icon> Edit</span
             >
           </template>
           <b-card-text class="text-left">
             <p>
-              <b-icon icon="briefcase-fill" variant="primary"></b-icon> Work at:
+             <b> <b-icon icon="briefcase-fill" variant="primary"></b-icon> Work at:</b>
               Current or Last Organization
             </p>
             <p>
-              <b-icon icon="book-fill" variant="primary"></b-icon> Studied at:
+             <b> <b-icon icon="book-fill" variant="primary"></b-icon> Studied at:</b>
               Last Education
             </p>
             <p>
-              <b-icon icon="house-fill" variant="primary"></b-icon> Home Town
-              Name:Dummy
+           <b>   <b-icon icon="house-fill" variant="primary"></b-icon> Home Town
+              Name: </b>Dummy
             </p>
             <p>
-              <b-icon icon="geo-alt-fill" variant="primary"></b-icon> Current
-              City Name:Dummy
+            <b>  <b-icon icon="geo-alt-fill" variant="primary"></b-icon> Current
+              City Name: </b> Dummy
             </p>
             <p>
-              <b-icon icon="people-fill" variant="primary"></b-icon> Community 525
+            <b>  <b-icon icon="people-fill" variant="primary"></b-icon> Community: </b> 525
             </p>
           </b-card-text>
         </b-card>
+
+
+
+      
+    <b-modal id="modal-5" title=" Edit Profile"> 
+      
+      
+      
+          <div class="form-card">
+              <div class="row">
+                <div class="col-md-6">
+                  
+                  
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="username"> DOB :</label><br />
+                    <input
+                      type="date"
+                      name="dob"
+                      id="dob"
+                      placeholder="Busness Name"
+                      class="form-control"
+                    />
+                  </div>
+
+                  <div class="form-group">
+                    <label for="alias">Gender:</label><br />
+                    <select id="category" class="form-control">
+                      <option value="" selected="" disabled="">
+                        Select Gender
+                      </option>
+                      <option>Male</option>
+                      <option>Female</option>
+                      <option>other</option>
+                    </select>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="country"> Country :</label><br />
+
+                      <country-select v-model="country" :country="country" topCountry="US"  class="form-control" />
+  
+                    
+
+
+
+                  </div>
+
+                  <div class="form-group">
+                    <label for="city"> City :</label><br />
+                    <input
+                      type="text"
+                      name="alias"
+                      id="city"
+                      placeholder="country"
+                      class="form-control"
+                    />
+                  </div>
+
+                  <div class="form-group">
+                    <label for="Neighbor"> Neighbor :</label><br />
+                    <input
+                      type="text"
+                      name="alias"
+                      id="Neighbor"
+                      placeholder="Neighbor"
+                      class="form-control"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+      
+      
+      
+      
+      
+       </b-modal>
+
+        
 
         <Followers />
         <Media />

@@ -1,5 +1,6 @@
 <template>
-  <div>
+  <div class="">
+
     <b-card v-if="networkShow">
       <div class="networks ml-4">
         
@@ -25,7 +26,7 @@
                     
     <div class="people-style shadow">
       <b-row>
-        <b-col md="6" xl="6" lg="6" cols="5"  sm="5">
+        <b-col md="6" xl="6" lg="6" cols="6"  sm="6">
           <div style="height: 100%;">
             <img
               src="https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg"
@@ -35,7 +36,7 @@
             />
           </div>
         </b-col>
-        <b-col md="6" cols="7" sm="7">
+        <b-col md="6" cols="6" sm="6">
          <p class="text">
             <strong> Shipping Network </strong> <br />  <br />
             Public <br />
@@ -69,13 +70,176 @@
       </div>
     </div>
 
-    <b-modal hide-footer title="Add network" v-model="showModal">
+
+
+    <b-modal hide-footer title="Add network"   size="lg"  v-model="showModal">
+
+      <b-container>  
       <b-form>
-        <b-form-input v-model="text" placeholder="network name"></b-form-input>
-        <b-form-file class="mt-1" id="file-small" size="sm"></b-form-file>
-        <b-button class="mt-2 " variant="primary"> Add</b-button>
+
+
+
+      <span class="inline">     <div style="width: 20%;">
+            <img
+              src="https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg"
+              width="100%"
+              height="90%"
+              class="r-image"
+            />
+          </div >   <span class="ml-3 fs-8"> Business Name <br />  Business Category </span> </span>  <br /> 
+
+
+  
+
+
+
+
+<div class="row sub-sidebar-2 pending-post-view mt-4 pb-0 ">
+
+    <div class="col-md-12 col-lg-12 d-flex align-items-stretch mb-lg-0" style="padding-left: 0; padding-top: 3px;">
+      <a class="nav-link text-dark" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <b-icon-info-circle-fill
+            scale="1.5"
+        ></b-icon-info-circle-fill>
+      </a>
+      <div class="post-pending pt-2">
+        <p>Approval Required <br /> Bridge Africa admin will review your request to create a network and notify you upon approval you can the change the network settings and invite people to join your network   </p>
+      </div>
+
+    </div>
+
+    </div>
+
+
+
+    
+
+              <b-form-group
+                label-cols-lg="12"
+                label="Network Name"
+                label-size="md"
+                label-class="font-weight-bold pt-0"
+                class="mb-0"
+              >
+                <b-form-input id="network_name" placeholder="" required>  </b-form-input>
+              </b-form-group>
+
+             
+          
+               
+
+               <b-form-group
+                label-cols-lg="12"
+                label=" Brief Description"
+                label-size="md"
+                label-class="font-weight-bold pt-0"
+                class="mb-0"
+              >
+                <b-form-textarea
+                  id="textarea"
+                  v-model="text"
+                  placeholder="Enter something..."
+                  rows="3"
+                  max-rows="6"
+                ></b-form-textarea>
+              </b-form-group>
+
+
+
+
+
+
+          <b-form-group
+                label-cols-lg="12"
+                label="Purpose Of Network"
+                label-size="md"
+                label-class="font-weight-bold pt-0"
+                class="mb-0"
+              >
+                <b-form-textarea
+                  id="textarea"
+                  v-model="text"
+                  placeholder=""
+                  rows="3"
+                  max-rows="6"
+                ></b-form-textarea>
+              </b-form-group>
+
+
+           
+
+
+
+
+
+
+
+
+
+
+
+
+              <b-form-group
+                label-cols-lg="12"
+                label="Special Needs"
+                label-size="md"
+                label-class="font-weight-bold pt-0"
+                class="mb-0"
+              >
+                <b-form-textarea
+                  id="textarea"
+                  v-model="text"
+                  placeholder=" "
+                  rows="3"
+                  max-rows="6"
+                ></b-form-textarea>
+              </b-form-group>
+
+
+          
+
+
+
+
+
+
+            <b-form-group
+                label-cols-md="6"
+                label="Allow Business to join network"
+                label-size="md"
+                label-class="font-weight-bold pt-0"
+                class="mb-0"
+              >
+                <b-form-checkbox v-model="checked" name="check-button" switch>
+                </b-form-checkbox>
+              </b-form-group>
+
+
+
+
+        <b-button class="mt-2 " style="float:right" variant="primary" > Add Network</b-button>
       </b-form>
+
+
+
+
+       </b-container>
+
+
+
     </b-modal>
+
+
+
+
+
+
+
+
+
+
+
+
   </div>
 </template>
 
@@ -138,6 +302,13 @@ export default {
 </script>
 
 <style scoped>
+
+.post-pending{
+
+  font-size: 12;
+  text-align: left;
+  
+}
 .no-network {
   width: 100%;
   height: 500px;
@@ -228,7 +399,7 @@ p {
   color: #fff;
   background-color: #bbb;
   padding: 20px;
-  width: 300px;
+ 
   height: 200px;
   margin: 30px;
   border-radius: 5px;
@@ -280,7 +451,11 @@ p {
 
 
 
-
+.row.sub-sidebar-2.pending-post-view {
+  background-color: #8BD06C;
+  border-color: #000;
+  border: solid 3px;
+}
 
 
 
@@ -396,4 +571,16 @@ h4{
   overflow-x: hidden;
 
 }
+
+.inline{
+
+      display: inline-flex;
+}
+
+
+.fs-8{
+  font-size: 15px;
+}
+
+
 </style>

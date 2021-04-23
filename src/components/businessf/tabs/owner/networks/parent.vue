@@ -8,9 +8,18 @@
           size="6em"
           src="https://business.bridgeafrica.info/assets/img/pea.jpg"
           class="network-profile-image-profile"
+          variant="primary"
         >
         </b-avatar>
-        <b-icon-plus class="network-avatar-icon"></b-icon-plus>
+       
+
+        <b-icon
+              icon="camera"
+            
+              class=" cursor-pointer network-avatar-icon"
+              v-b-modal.modal-4
+            ></b-icon>
+
       </b-container>
 
       <br />      
@@ -21,8 +30,8 @@
             <h6 class="font-weight-bolder m-0 p-0 a-center">  Maketers Union Network</h6>
           </b-col>
           <b-col cols="6">
-            <b-button variant="primary"   size="sm"   style="width: 120px;"  class="a-center" >
-              <b-icon icon="plus-circle"></b-icon> Community
+            <b-button variant="primary"   size="sm"   @click="addNetwork"   style="width: 120px;"  class="a-center" >
+              <b-icon icon="pencil"></b-icon> Edit
             </b-button>
           </b-col>
         </b-row>
@@ -73,6 +82,175 @@
      
     </b-card>
 
+
+    <b-card class="mt-4"
+      title=""
+      header-tag="header"
+      footer-tag="footer">  
+      
+      
+     <Invite />  </b-card>
+
+
+
+
+
+    
+
+    <b-modal hide-footer title="Edit network"   size="lg"  v-model="showModal">
+
+      <b-container>  
+      <b-form>
+
+
+
+    
+
+              <b-form-group
+                label-cols-lg="12"
+                label="Network Name"
+                label-size="md"
+                label-class="font-weight-bold pt-0"
+                class="mb-0"
+              >
+                <b-form-input id="network_name" placeholder="" required>  </b-form-input>
+              </b-form-group>
+
+             
+          
+               
+
+               <b-form-group
+                label-cols-lg="12"
+                label=" Brief Description"
+                label-size="md"
+                label-class="font-weight-bold pt-0"
+                class="mb-0"
+              >
+                <b-form-textarea
+                  id="textarea"
+                  v-model="text"
+                  placeholder="Enter something..."
+                  rows="3"
+                  max-rows="6"
+                ></b-form-textarea>
+              </b-form-group>
+
+
+
+
+
+
+          <b-form-group
+                label-cols-lg="12"
+                label="Purpose Of Network"
+                label-size="md"
+                label-class="font-weight-bold pt-0"
+                class="mb-0"
+              >
+                <b-form-textarea
+                  id="textarea"
+                  v-model="text"
+                  placeholder=""
+                  rows="3"
+                  max-rows="6"
+                ></b-form-textarea>
+              </b-form-group>
+
+
+           
+
+
+
+
+
+
+
+
+
+
+
+
+              <b-form-group
+                label-cols-lg="12"
+                label="Special Needs"
+                label-size="md"
+                label-class="font-weight-bold pt-0"
+                class="mb-0"
+              >
+                <b-form-textarea
+                  id="textarea"
+                  v-model="text"
+                  placeholder=" "
+                  rows="3"
+                  max-rows="6"
+                ></b-form-textarea>
+              </b-form-group>
+
+
+          
+
+
+
+
+
+
+            <b-form-group
+                label-cols-md="6"
+                label="Allow Business to join network"
+                label-size="md"
+                label-class="font-weight-bold pt-0"
+                class="mb-0"
+              >
+                <b-form-checkbox v-model="checked" name="check-button" switch>
+                </b-form-checkbox>
+              </b-form-group>
+
+
+
+
+        <b-button class="mt-2 " style="float:right" variant="primary" > Update Network</b-button>
+      </b-form>
+
+
+
+
+       </b-container>
+
+
+
+    </b-modal>
+
+
+
+
+    <b-modal id="modal-4" title="Upload Profile Picture">
+              <div class="w3-container">
+                <div class="row pb-3">
+                  <div
+                    class="col-sm-6 text-center"
+                    style="border-right:1px solid #dee2e6;"
+                  >
+                    <h1>
+                      <fas-icon class="primary" :icon="['fas', 'upload']" />
+                    </h1>
+                    <div>
+                      <input type="file" id="img" name="img" accept="image/*" />
+                    </div>
+                    <h4>Upload a New picture</h4>
+                  </div>
+
+                  <div class="col-sm-6 text-center">
+                    <h1>
+                      <fas-icon class="primary" :icon="['fas', 'edit']" />
+                    </h1>
+                    <h4>Edit Your New picture</h4>
+                  </div>
+                </div>
+              </div>
+            </b-modal>
+            
+
   </div>
 </template>
 
@@ -81,13 +259,39 @@
 import SidebarCommunity from "@/components/businessf/tabs/owner/networks/sidebarcommunity";
 
 
+import Invite from "@/components/businessf/tabs/owner/networks/invite";
+
+
 export default {
   name: "parent",
 
+
+
+  data() {
+    return {
+      networkShow: true,
+      showModal: false,
+      text: "",}},
+
    components: {
     SidebarCommunity,
+    Invite,
    
+  },
+
+
+  methods: {
+    openNetwork() {
+      this.networkShow = false;
+    },
+
+    addNetwork() {
+
+      console.log("hello");
+      this.showModal = !this.showModal;
+    }
   }
+
 
 };
 </script>
@@ -116,18 +320,21 @@ export default {
 .t-align{
   text-align: left;
 }
-.network-avatar-icon {
-  position: absolute;
-  width: 2rem;
-  height: 2rem;
-  top: 77px;
-  right: 158px;
-  padding: 0px 0px;
-  color: #ffff;
-  background: #e75c18;
-  border-radius: 25px;
-  border: 4px solid #ffff;
+
+ .network-avatar-icon {
+    position: absolute;
+    width: 2rem;
+    height: 2rem;
+    top: 77px;
+    
+    margin-left: 80px;
+    padding: 0px 0px;
+    color: #ffff;
+    background: #e75c18;
+    border-radius: 25px;
+    border: 4px solid #ffff;
 }
+
 
 
 .i-color{

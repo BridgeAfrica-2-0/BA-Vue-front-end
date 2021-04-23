@@ -50,6 +50,7 @@
 
     <b-modal id="modal-1" ref="modal-1"  size="lg" title=" Get Started" hide-footer>
       <div>
+
         <form-wizard @on-complete="onComplete">
           <tab-content title=" Complete Profile ">
             <div class="form-card">
@@ -95,13 +96,13 @@
 
                   <div class="form-group">
                     <label for="country"> Country :</label><br />
-                    <input
-                      type="text"
-                      name="alias"
-                      id="country"
-                      placeholder="country"
-                      class="form-control"
-                    />
+
+                      <country-select v-model="country" :country="country" topCountry="US"  class="form-control" />
+  
+                    
+
+
+
                   </div>
 
                   <div class="form-group">
@@ -264,6 +265,18 @@
           </tab-content>
 
 
+
+
+
+
+
+
+
+
+
+
+
+
        <tab-content title="Business Indentity">      
          
          
@@ -300,16 +313,9 @@
                           class="form-control"
                         />
                       </div>
-                      <div class="form-group">
-                        <label for="alias">Busness Name Alias:</label><br />
-                        <input
-                          type="text"
-                          name="alias"
-                          id="alias"
-                          placeholder="Busness Name Alias"
-                          class="form-control"
-                        />
-                      </div>
+
+
+                      
                       <div class="form-group">
                         <label for="alias">Category:</label><br />
                         <select id="category" class="form-control ">
@@ -329,7 +335,25 @@
                         <label for="username">Keywords</label><br />
                         <div class="col-md-12 pl-0 pr-0">
                           No Choices
-                        </div>
+
+                          <input
+                          type="text"
+                          name="alias"
+                          id="alias"
+                          placeholder="Enter your Keywords"
+                          class="form-control"
+                        />
+
+                        </div> 
+
+                    
+                      
+                        
+                   
+
+
+
+
                       </div>
                     </div>
                   </div>
@@ -447,6 +471,8 @@ export default {
    data() {
       return {
         useas: '', 
+         country: '',
+    
         options: [
           { text: ' Business ', value: 'business' },
           
@@ -516,6 +542,13 @@ import 'vue-form-wizard/dist/vue-form-wizard.min.css';
 
 
 <style>
+
+
+.wizard-icon-container{
+
+  background-color: black;
+
+}
 
 @media only screen and (max-width: 768px) {
 

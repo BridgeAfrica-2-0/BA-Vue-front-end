@@ -40,6 +40,9 @@ Vue.component('fas-icon', FontAwesomeIcon);
 
 
 
+import vueCountryRegionSelect from 'vue-country-region-select';
+Vue.use(vueCountryRegionSelect);
+
 
 
 import VueFormWizard from 'vue-form-wizard'

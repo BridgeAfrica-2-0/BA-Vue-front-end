@@ -20,13 +20,13 @@
  
 
   <b-row> 
-<b-col md="6">  
+<b-col lg="12" xl="6">  
     <CommunityBusiness/>
 
  </b-col>
 
 
-  <b-col md="6">  
+  <b-col lg="12" xl="6">  
    <CommunityBusiness/>
 
  </b-col>

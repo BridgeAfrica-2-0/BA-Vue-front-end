@@ -363,8 +363,7 @@
                 <div class="image-upload-wrap">
                   <a
                     href="#"
-                    data-toggle="modal"
-                    data-target="#createalbumModal"
+                       v-b-modal.createalbumModal
                   >
                     <div class="drag-text">
                       <fas-icon :icon="['fas', 'plus']" />
@@ -373,6 +372,21 @@
                   </a>
                 </div>
               </div>
+
+
+
+              <b-modal hide-footer title="Create album" id="createalbumModal" v-model="showModal">
+      <b-form>
+        <b-form-input v-model="text" placeholder="Album name"></b-form-input>
+        <b-button class="mt-2" variant="primary"> Create</b-button>
+      </b-form>
+    </b-modal>
+
+
+
+
+
+
               <div class="createp img-gal predit2">
                 <a href="#!">
                   <img

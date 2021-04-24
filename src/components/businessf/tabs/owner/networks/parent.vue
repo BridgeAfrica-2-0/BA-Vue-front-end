@@ -83,13 +83,9 @@
     </b-card>
 
 
-    <b-card class="mt-4"
-      title=""
-      header-tag="header"
-      footer-tag="footer">  
       
       
-     <Invite />  </b-card>
+     <Invite /> 
 
 
 

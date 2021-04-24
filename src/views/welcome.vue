@@ -474,9 +474,10 @@ export default {
          country: '',
     
         options: [
-          { text: ' Business ', value: 'business' },
+          { text: ' Person', value: 'person' },
+          { text: ' Business ', value: 'business' }
           
-          { text: ' Person', value: 'person' }
+          
           
         ]
       }

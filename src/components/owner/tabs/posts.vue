@@ -45,7 +45,7 @@
               <div class="row">
                 <div class="col-md-6">
                   
-                  
+
                 </div>
                 <div class="col-md-6">
                   <div class="form-group">
@@ -124,7 +124,7 @@
             <b-col cols="2" md="1" class="m-0 p-0">
               <b-avatar
                 class="d-inline-block"
-                variant="info"
+                variant="primary"
                 src="https://placekitten.com/300/300"
               ></b-avatar>
             </b-col>
@@ -154,7 +154,7 @@
                       aria-hidden="true"
                     ></b-icon>
                   </b-button>
-                  <b-button
+                  <b-button   @click="chooseFiles()"
                     title="Add Hyperlink"
                     size="sm"
                     variant="outline-primary"
@@ -164,7 +164,10 @@
                 </b-button-group>
               </span>
               <span class="float-right">
-                <b-button variant="outline-primary" size="sm"
+
+                <input id="fileUpload" type="file" hidden>
+
+                <b-button variant="outline-primary"  size="sm"
                   ><b-icon icon="cursor-fill" variant="primary"></b-icon>
                   Publish</b-button
                 >
@@ -514,6 +517,9 @@ export default {
     Followers,
     Media,
   },
+
+
+  
   data() {
     return {
       images: [
@@ -544,6 +550,18 @@ export default {
       ],
     };
   },
+
+
+
+  methods: {
+    chooseFiles: function() {
+      console.log("helloo fucker");
+        document.getElementById("fileUpload").click()
+    }
+    },
+
+
+
 };
 </script>
 

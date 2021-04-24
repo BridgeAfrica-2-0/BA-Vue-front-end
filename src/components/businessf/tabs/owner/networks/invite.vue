@@ -34,7 +34,7 @@
             <div class="e-name" style="margin-top: -9px;">
               <h6 >
                 <br />
-              <strong>  howty Circlehead  </strong> <span style="margin-left:40px" >   7k followers </span>
+              <strong>  howty Circlehead  </strong>  <span style="margin-left:30px" >   7k followers </span>
               </h6>
             </div>
 

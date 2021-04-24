@@ -75,7 +75,7 @@
 
             <div class="md-layout-item md-small-size-100">
               <br/>
-           <b-link>     <label >Forget Password</label>   </b-link>
+           <b-link href=""> Forget Password </b-link>
             </div>
           </div>
 

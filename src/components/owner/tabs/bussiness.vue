@@ -417,14 +417,15 @@
                 <img class="img-fluid picture" src="@/assets/img/photo2.jpg" />
                 <div class="text-lost">
                   <b class="f-12">Business Name</b>
-                  <p class="mb-1">
+                  
+                  <p class="mb-1 ">Categorie </p>
+                  <p class="mb-1  mb-3 ">
                     1.1M Community
                     <span class="float-right"
                       >Current Plan:
                       <span class="text-success">Basic</span></span
                     >
                   </p>
-                  <p class="mb-1 mb-3">Categorie </p>
                   <p class="mb-1">
                     <b-icon-person-fill
                       class="text-primary"
@@ -457,14 +458,17 @@
                 <img class="img-fluid picture" src="@/assets/img/photo2.jpg" />
                 <div class="text-lost">
                   <b>Business Name 1</b>
-                  <p class="mb-1">
+
+                  <p class="mb-1">Categorie</p>
+
+                  <p class="mb-1 mb-3">
                     1.1M Community
                     <span class="float-right"
                       >Current Plan:
                       <span class="text-success">Basic</span></span
                     >
                   </p>
-                  <p class="mb-1 mb-3">Categorie</p>
+                  
                   <p class="mb-1">
                     <b-icon-person-fill
                       class="text-primary"

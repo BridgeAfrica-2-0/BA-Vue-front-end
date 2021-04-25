@@ -10,11 +10,7 @@ import Businesses from '@/components/follower/tabs/businesses';
          
          <b-row> 
              
-              <b-col>     
-             
-              <img class="img-fluid picture" src="@/assets/icons/business.png" width="170px" />
-             
-               </b-col> 
+            
                
 
 
@@ -24,7 +20,7 @@ import Businesses from '@/components/follower/tabs/businesses';
                        <br/>
                    <h6> No Business  </h6>   
              
-             <b-button variant="primary"> Get a website  </b-button>
+             <b-button variant="primary"> Add Business  </b-button>
 
                    </div>
              
@@ -61,8 +57,8 @@ export default {
 
 .p-top{
     padding-top: 20px;
-    text-align: left;
-    align-content: left;
+    text-align: center;
+    align-content: center;
 }
 
 </style>

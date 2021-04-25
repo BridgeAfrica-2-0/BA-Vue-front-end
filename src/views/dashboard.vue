@@ -10,6 +10,8 @@
 
       <b-row>
         <b-col  md="6" sm="12"  class="mt-2">
+
+
           <b-input-group class="my-auto input-size ">
             <template #append>
               <b-input-group-text class=" b-groupe  shadow "
@@ -17,15 +19,6 @@
                   <b-icon-search></b-icon-search> </strong
               ></b-input-group-text>
             </template>
-
-
-            
-
-
-           
-
-
-
 
             <b-form-input
               id="inline-form-input-name"
@@ -57,20 +50,27 @@
         <b-col md="3" sm="12"   class="mt-2" >
           <div v-if="selected != 'posts'">
             <b-input-group class="my-auto input-size">
-              <template #append>
-                <b-input-group-text class=" b-groupe  shadow "
-                  ><strong class="color-sit">
-                    <b-icon icon="chevron-down"> </b-icon> </strong
-                ></b-input-group-text>
-              </template>
+             <template #append>
+              <b-input-group-text class=" b-groupe  shadow "
+                ><strong class="color-sit">
+                  <b-icon-search></b-icon-search> </strong
+              ></b-input-group-text>
+            </template>
 
-              <b-form-select
+
+
+
+              
+
+
+
+              <b-form-input
                 v-model="location"
                 :options="filters"
                 class=" w-25 wi-25 border shadow "
                 value-field="item"
                 text-field="name"
-              ></b-form-select>
+              ></b-form-input>
             </b-input-group>
           </div>
 
@@ -211,14 +211,14 @@
       <div v-if="selected == 'all'">
         <b-card class="shadow">
           <b-row>
-            <b-col md="6" sm="12"  class="mt-2">
+            <b-col lg="6" sm="12"  class="mt-2">
               <div style="p-div">
                 <span>
                   <h4>  
                       <img class="img-fluid picture logo-img" src="@/assets/icons/bus.png"  /> 
                     BUSINESSES
                     <h6 style="float:right">
-                      <b-link class="see-all-link"> <u> see all </u> </b-link>
+                <!--      <b-link class="see-all-link"> <u> see all </u> </b-link>   -->
                     </h6>
                   </h4>
                 </span>
@@ -231,13 +231,13 @@
             </b-col>
 
 
-            <b-col md="6" sm="12"  class="mt-20"  >
+            <b-col lg="6" sm="12"  class="mt-20"  >
               <div class="p-div">
                 <span>
                   <h4>    <img class="img-fluid picture logo-img" src="@/assets/icons/people.png"  /> 
                     People
                     <h6 style="float:right">
-                      <b-link class="see-all-link"> <u> see all </u> </b-link>
+                   <!--   <b-link class="see-all-link"> <u> see all </u> </b-link> -->
                     </h6>
                   </h4>
                 </span>
@@ -256,14 +256,14 @@
             <h4>    <img class="img-fluid picture logo-img " src="@/assets/icons/people.png"  /> 
               People
               <h6 style="float:right">
-                <b-link class="see-all-link" > <u> see all </u> </b-link>
+           <!--     <b-link class="see-all-link" > <u> see all </u> </b-link>   -->
               </h6>
             </h4>
           </span>
 
           <div class="div-h">
             <b-row>
-              <b-col> <People /> </b-col> <b-col> <People /> </b-col>
+              <b-col lg="6" md="12"> <People /> </b-col> <b-col md="12" lg="6"> <People /> </b-col>
             </b-row>
           </div>
         </b-card>
@@ -278,14 +278,14 @@
             <h4>     <img class="img-fluid picture logo-img" src="@/assets/icons/bus.png"  /> 
               Business
               <h6 style="float:right">
-                <b-link class="see-all-link"> <u> see all </u> </b-link>
+            <!--    <b-link class="see-all-link"> <u> see all </u> </b-link>  -->
               </h6>
             </h4>
           </span>
 
           <div class="div-h">
             <b-row>
-              <b-col> <Business /> </b-col> <b-col> <Business /> </b-col>
+              <b-col lg="6" md="12"> <Business /> </b-col> <b-col  lg="6" md="12"> <Business /> </b-col>
             </b-row>
           </div>
         </b-card>
@@ -419,15 +419,15 @@
 
       <div>
         <b-row>
-          <b-col sm="12" md="8"  class="mt-3" > <CommunityActivity /> </b-col>
-          <b-col sm="12" md="4"    class="mt-3"> <Tutorial /> </b-col>
+          <b-col sm="12" lg="8"  class="mt-3" > <CommunityActivity /> </b-col>
+          <b-col sm="12" lg="4"    class="mt-3"> <Tutorial /> </b-col>
         </b-row>
       </div>
       <br />
 
       <div>
         <b-row>
-          <b-col sm="12" md="6"   class="mt-3" > <Hotbusiness /> </b-col> <b-col sm="12" md="6"  class="mt-3" > <Popularnetwork /> </b-col>
+          <b-col sm="12" lg="6"   class="mt-3" > <Hotbusiness /> </b-col> <b-col sm="12" lg="6"  class="mt-3" > <Popularnetwork /> </b-col>
         </b-row>
       </div>
     </div>

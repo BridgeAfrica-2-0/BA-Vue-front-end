@@ -83,7 +83,7 @@
           
           
           
-             </b-col>     <b-col >      <Market />   </b-col>   </b-row>
+             </b-col>     <b-col  >    <div style="height: 700px;overflow-y: scroll;">    <Market />   </div>  </b-col>   </b-row>
 
     </div>
   

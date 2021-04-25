@@ -7,7 +7,7 @@
 
                     <img class="img-fluid picture" src="@/assets/icons/insight.png" style="width: 70px;" /> 
                   INSIGHTS
-                </h3>  </span>  <p>  Discover How Customers Finds And Interact With You  </p>
+                </h3>  </span>  <p>  Discover how customers feel about and interact with you  </p>
 
         <div class="a-content"> 
             

@@ -1,7 +1,7 @@
 <template>
-  <header class=" ">
+  <header class=" bg-white">
     <nav
-      class="navbar bg-light navbar-expand-lg shadow-nav p-3 mb-3 rounded container-fluid "   
+      class="navbar bg-light navbar-expand-lg shadow-nav p-3 mb-3 rounded "
     >
       <div class="container-fluid ">
 
@@ -24,7 +24,7 @@
 
         </div>
 
-        <div class="col-md-4">
+        <div class="col-lg-5">
           <form class="form-inline input-group">
             <input
               id="search-ba"
@@ -50,8 +50,8 @@
 
         
 
-        <div class="col-md-5 end-bar" >
-        <button
+        <div class="col-md-4">
+       <button
           class="navbar-toggler"
           type="button"
           data-toggle="collapse"
@@ -62,7 +62,41 @@
         >
           <fas-icon class="primary search" :icon="['fas', 'bars']" />
         </button>
-        <div class="collapse navbar-collapse ml-4" id="navbarMenu">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
+
+
+<b-collapse id="nav-collapse" is-nav>
+
           <div class="vl"></div>
           <div class="nav-item">
             <a class="nav-link text-dark" href="">
@@ -210,9 +244,6 @@
               </div>
             </b-popover>
           </div>
-
-           <div class="vl"></div>
-
           <div class="nav-item">
             <a
               id="notif"
@@ -226,7 +257,6 @@
             ></a>
             <b-popover target="notif" triggers="hover" placement="top">
               <div class="popover-body">
-                
                 <p class="font-weight-bold">Notifications</p>
                 <hr class="h-divider" />
                 <div
@@ -357,7 +387,7 @@
             </a>
           </div>
           <div class="vl"></div>
-          <div class="nav-item container-fluid">
+          <div class="nav-item">
             <a
               id="other-menu"
               class="nav-link text-dark arrow-down"
@@ -461,11 +491,27 @@
               </div>
             </b-popover>
           </div>
-        </div>
+        
+
+</b-collapse>
 
         </div>
       </div>
+
+    
+
+
+
     </nav>
+
+
+
+
+    <div>
+  
+    
+
+</div>
   </header>
 </template>
 
@@ -511,7 +557,7 @@ export default {
     height: 300px;
   }
   .show {
-    display: none;
+    display: block;
   }
 }
 @media (min-width: 768px) {
@@ -519,7 +565,7 @@ export default {
     height: 350px;
   }
   .show {
-    display: none;
+    display: block;
   }
 }
 @media (min-width: 992px) {
@@ -527,7 +573,7 @@ export default {
     height: 400px;
   }
   .show {
-    display: none;
+    display: block;
   }
 }
 @media (min-width: 1200px) {
@@ -539,7 +585,7 @@ export default {
   }
 
   .show {
-    display: none;
+    display: block;
   }
 }
 @media (min-width: 1400px) {
@@ -552,7 +598,7 @@ export default {
   }
 
   .show {
-    display: none;
+    display: block;
   }
 }
 .shadow-nav {
@@ -579,39 +625,8 @@ export default {
 }
 
 
-.end-bar{
+.blec-container{
 
-      float: right;
-    text-align: center;
-    align-content: end;
-    
+  width: 95%;
 }
-
-
-
 </style>
-
-
-<style> 
-
-
-.navbar-toggler {
-
-   
-
-
-   padding: 0.25rem 0.75rem;
-    font-size: 1.25rem;
-    line-height: 1;
-    background-color: transparent;
-    border: 1px solid transparent;
-    border-radius: 0.25rem;
-
-    position: absolute !important;
-    
-    top: -78px !important;
-    right: 13px !important;
-}
-
-  </style>
-

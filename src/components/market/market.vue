@@ -56,6 +56,156 @@
      </b-col>    
 
 
+
+
+
+
+     
+   <b-col md="3" lg="3" sm="6" cols="6">          
+   <b-card
+      @click="productDetails"
+      img-src="https://i.pinimg.com/564x/73/88/48/738848cc0040744161ed3bc72e851679.jpg"
+      img-alt="Image"
+      img-top
+      tag="article"
+      class="mb-5 prod img-fluid"
+    >
+      <b-card-text>
+        <h6>Product Name</h6>
+       
+  
+  <p class="category"> category  </p>
+        <p class="price">1400XAF</p>
+      </b-card-text>
+      <div>
+        <b-button variant="primary" class="buy">Buy Now</b-button>
+      </div>
+    </b-card>
+     </b-col>    
+
+
+
+
+
+
+
+
+   <b-col md="3" lg="3" sm="6" cols="6">          
+   <b-card
+      @click="productDetails"
+      img-src="https://i.pinimg.com/564x/73/88/48/738848cc0040744161ed3bc72e851679.jpg"
+      img-alt="Image"
+      img-top
+      tag="article"
+      class="mb-5 prod img-fluid"
+    >
+      <b-card-text>
+        <h6>Product Name</h6>
+       
+  
+  <p class="category"> category  </p>
+        <p class="price">1400XAF</p>
+      </b-card-text>
+      <div>
+        <b-button variant="primary" class="buy">Buy Now</b-button>
+      </div>
+    </b-card>
+     </b-col>    
+
+
+
+
+
+
+
+
+
+
+   <b-col md="3" lg="3" sm="6" cols="6">          
+   <b-card
+      @click="productDetails"
+      img-src="https://i.pinimg.com/564x/73/88/48/738848cc0040744161ed3bc72e851679.jpg"
+      img-alt="Image"
+      img-top
+      tag="article"
+      class="mb-5 prod img-fluid"
+    >
+      <b-card-text>
+        <h6>Product Name</h6>
+       
+  
+  <p class="category"> category  </p>
+        <p class="price">1400XAF</p>
+      </b-card-text>
+      <div>
+        <b-button variant="primary" class="buy">Buy Now</b-button>
+      </div>
+    </b-card>
+     </b-col>    
+
+
+
+
+
+
+
+
+
+
+
+   <b-col md="3" lg="3" sm="6" cols="6">          
+   <b-card
+      @click="productDetails"
+      img-src="https://i.pinimg.com/564x/73/88/48/738848cc0040744161ed3bc72e851679.jpg"
+      img-alt="Image"
+      img-top
+      tag="article"
+      class="mb-5 prod img-fluid"
+    >
+      <b-card-text>
+        <h6>Product Name</h6>
+       
+  
+  <p class="category"> category  </p>
+        <p class="price">1400XAF</p>
+      </b-card-text>
+      <div>
+        <b-button variant="primary" class="buy">Buy Now</b-button>
+      </div>
+    </b-card>
+     </b-col>    
+
+
+
+
+
+
+
+
+   <b-col md="3" lg="3" sm="6" cols="6">          
+   <b-card
+      @click="productDetails"
+      img-src="https://i.pinimg.com/564x/73/88/48/738848cc0040744161ed3bc72e851679.jpg"
+      img-alt="Image"
+      img-top
+      tag="article"
+      class="mb-5 prod img-fluid"
+    >
+      <b-card-text>
+        <h6>Product Name</h6>
+       
+  
+  <p class="category"> category  </p>
+        <p class="price">1400XAF</p>
+      </b-card-text>
+      <div>
+        <b-button variant="primary" class="buy">Buy Now</b-button>
+      </div>
+    </b-card>
+     </b-col>    
+
+
+
      
    
   <b-col md="3" lg="3" sm="6" cols="6">  

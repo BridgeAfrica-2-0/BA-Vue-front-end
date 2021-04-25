@@ -51,12 +51,14 @@
     <b-modal id="modal-1" ref="modal-1"  size="lg" title=" Get Started" hide-footer>
       <div>
 
-        <form-wizard @on-complete="onComplete">
+        <form-wizard @on-complete="onComplete"  >
           <tab-content title=" Complete Profile ">
             <div class="form-card">
               <div class="row">
                 <div class="col-md-6">
-                  <div class="image-upload-wrap">
+                  <div class="image-upload-wrap"  @click="chooseProfile2()">
+
+                      <input id="profile2" type="file" hidden>
                     <a
                       href="#"
                       data-toggle="modal"
@@ -64,7 +66,7 @@
                     >
                       <div class="drag-text">
                         <i class="fa fa-plus" ></i>
-                        <h3>Add Logo</h3>
+                        <h3>Add Profile  Photo</h3>
                       </div>
                     </a>
                     <div></div>
@@ -111,7 +113,7 @@
                       type="text"
                       name="alias"
                       id="city"
-                      placeholder="country"
+                      placeholder="city"
                       class="form-control"
                     />
                   </div>
@@ -189,15 +191,18 @@
             <div class="form-card">
               <div class="row">
                 <div class="col-md-6">
-                  <div class="image-upload-wrap">
+                  <div class="image-upload-wrap"  @click="chooseprofile1()">
+
+                      <input id="profile1" type="file" hidden>
+
                     <a
                       href="#"
                       data-toggle="modal"
                       data-target="#createalbumModal"
                     >
-                      <div class="drag-text">
+                      <div class="drag-text" >
                         <i class="fa fa-plus" aria-hidden="true"></i>
-                        <h3>Add Logo</h3>
+                        <h3>Add Profile Photo</h3>
                       </div>
                     </a>
                     <div></div>
@@ -229,13 +234,13 @@
 
                   <div class="form-group">
                     <label for="country"> Country :</label><br />
-                    <input
-                      type="text"
-                      name="alias"
-                      id="country"
-                      placeholder="country"
-                      class="form-control"
-                    />
+
+                      <country-select v-model="country" :country="country" topCountry="US"  class="form-control" />
+  
+                    
+
+
+
                   </div>
 
                   <div class="form-group">
@@ -244,7 +249,7 @@
                       type="text"
                       name="alias"
                       id="city"
-                      placeholder="country"
+                      placeholder="city"
                       class="form-control"
                     />
                   </div>
@@ -288,7 +293,12 @@
                 <div class="form-card">
                   <div class="row">
                     <div class="col-md-6">
-                      <div class="image-upload-wrap">
+                   
+
+                        <div class="image-upload-wrap"  @click="chooselogo()">
+
+                      <input id="logo" type="file" hidden>
+
                         <a
                           href="#"
                           data-toggle="modal"
@@ -488,8 +498,32 @@ export default {
 
   methods: {
     onComplete: function () {
-      alert("Yay. Done!");
+     
+
+     this.$router.push("/dashboard");
     },
+
+
+    chooseProfile1: function() {
+     
+        document.getElementById("profile1").click()
+    },
+
+
+chooseProfile2: function() {
+     
+        document.getElementById("profile2").click()
+    },
+
+
+
+chooselogo: function() {
+   
+        document.getElementById("logo").click()
+    },
+
+
+
 
     showModal() {
         this.$refs['modal-3'].show()

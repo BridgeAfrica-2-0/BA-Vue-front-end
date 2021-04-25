@@ -7,19 +7,30 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
     <div class="people-style shadow">
       <b-row>
-        <b-col md="5" xl="3" lg="5" cols="5"  sm="5">
+        <b-col md="3" xl="3" lg="5" cols="5"  sm="3">
           <div style="height: 100%;">
             <img
               src="https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg"
               width="100%"
-              height="90%"
+              style="height:100%"
               class="r-image"
             />
           </div>
         </b-col>
-        <b-col md="6" cols="7" sm="7">
+        <b-col md="5" cols="7" xl="5" sm="5">
           <p class="text">
             <strong> Super Car ltd </strong> <br />
             <strong> Category : </strong> Car marketing <br />
@@ -37,9 +48,9 @@
 
 
 
-        <b-col lg="12" md="12" xl="3" cols="12" sm="12">
+        <b-col lg="12" md="4" xl="4" cols="12" sm="4">
           <div class="s-button">
-     <b-row>  <b-col md="4"  lg="4"  xl="12" sm="4" cols="4" class="mt-md-2">    
+     <b-row>  <b-col md="12"  lg="4"  xl="12" sm="12" cols="4" class="mt-2">    
 
             <b-button block size="sm" class="b-background" variant="primary">
               <b-icon class="ico" icon="plus-circle"> </b-icon> Community
@@ -47,7 +58,7 @@
 
             </b-col>  
 
-        <b-col md="4"  lg="4"  xl="12" sm="4" cols="4" class="mt-md-2">  
+        <b-col md="12"  lg="4"  xl="12" sm="12" cols="4" class="mt-2">  
 
             <b-button block size="sm" class="b-background" variant="primary">
               <b-icon class="ico" icon="chat"> </b-icon> Message
@@ -55,7 +66,223 @@
 
             </b-col>  
 
-            <b-col  md="4"  lg="4"  xl="12" sm="4" cols="4"  class="mt-md-2">  
+            <b-col  md="12"  lg="4"  xl="12" sm="12" cols="4"  class="mt-2">  
+
+            <b-button block size="sm" class="b-background" variant="primary">
+              <b-icon-geo-alt ></b-icon-geo-alt>  Direction
+            </b-button>
+
+            </b-col>  
+   </b-row>
+
+          </div>
+        </b-col>
+      </b-row>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class="people-style shadow">
+      <b-row>
+        <b-col md="3" xl="3" lg="5" cols="5"  sm="3">
+          <div style="height: 100%;">
+            <img
+              src="https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg"
+              width="100%"
+              style="height:100%"
+              class="r-image"
+            />
+          </div>
+        </b-col>
+        <b-col md="5" cols="7" xl="5" sm="5">
+          <p class="text">
+            <strong> Super Car ltd </strong> <br />
+            <strong> Category : </strong> Car marketing <br />
+            <strong> Community : </strong> 20k <br />
+            <strong> Location :</strong> cameroon <br />
+            <strong> Keyword :</strong> car,swag <br />
+
+            <strong>About:</strong> super best car seller in the world
+            adipisicing elit. <b-link>Read More</b-link>
+          </p>
+        </b-col>
+
+
+
+
+
+
+        <b-col lg="12" md="4" xl="4" cols="12" sm="4">
+          <div class="s-button">
+     <b-row>  <b-col md="12"  lg="4"  xl="12" sm="12" cols="4" class="mt-2">    
+
+            <b-button block size="sm" class="b-background" variant="primary">
+              <b-icon class="ico" icon="plus-circle"> </b-icon> Community
+            </b-button>
+
+            </b-col>  
+
+        <b-col md="12"  lg="4"  xl="12" sm="12" cols="4" class="mt-2">  
+
+            <b-button block size="sm" class="b-background" variant="primary">
+              <b-icon class="ico" icon="chat"> </b-icon> Message
+            </b-button>
+
+            </b-col>  
+
+            <b-col  md="12"  lg="4"  xl="12" sm="12" cols="4"  class="mt-2">  
+
+            <b-button block size="sm" class="b-background" variant="primary">
+              <b-icon-geo-alt ></b-icon-geo-alt>  Direction
+            </b-button>
+
+            </b-col>  
+   </b-row>
+
+          </div>
+        </b-col>
+      </b-row>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class="people-style shadow">
+      <b-row>
+        <b-col md="3" xl="3" lg="5" cols="5"  sm="3">
+          <div style="height: 100%;">
+            <img
+              src="https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg"
+              width="100%"
+              style="height:100%"
+              class="r-image"
+            />
+          </div>
+        </b-col>
+        <b-col md="5" cols="7" xl="5" sm="5">
+          <p class="text">
+            <strong> Super Car ltd </strong> <br />
+            <strong> Category : </strong> Car marketing <br />
+            <strong> Community : </strong> 20k <br />
+            <strong> Location :</strong> cameroon <br />
+            <strong> Keyword :</strong> car,swag <br />
+
+            <strong>About:</strong> super best car seller in the world
+            adipisicing elit. <b-link>Read More</b-link>
+          </p>
+        </b-col>
+
+
+
+
+
+
+        <b-col lg="12" md="4" xl="4" cols="12" sm="4">
+          <div class="s-button">
+     <b-row>  <b-col md="12"  lg="4"  xl="12" sm="12" cols="4" class="mt-2">    
+
+            <b-button block size="sm" class="b-background" variant="primary">
+              <b-icon class="ico" icon="plus-circle"> </b-icon> Community
+            </b-button>
+
+            </b-col>  
+
+        <b-col md="12"  lg="4"  xl="12" sm="12" cols="4" class="mt-2">  
+
+            <b-button block size="sm" class="b-background" variant="primary">
+              <b-icon class="ico" icon="chat"> </b-icon> Message
+            </b-button>
+
+            </b-col>  
+
+            <b-col  md="12"  lg="4"  xl="12" sm="12" cols="4"  class="mt-2">  
+
+            <b-button block size="sm" class="b-background" variant="primary">
+              <b-icon-geo-alt ></b-icon-geo-alt>  Direction
+            </b-button>
+
+            </b-col>  
+   </b-row>
+
+          </div>
+        </b-col>
+      </b-row>
+    </div>
+
+
+
+
+
+
+
+    <div class="people-style shadow">
+      <b-row>
+        <b-col md="3" xl="3" lg="5" cols="5"  sm="3">
+          <div style="height: 100%;">
+            <img
+              src="https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg"
+              width="100%"
+              style="height:100%"
+              class="r-image"
+            />
+          </div>
+        </b-col>
+        <b-col md="5" cols="7" xl="5" sm="5">
+          <p class="text">
+            <strong> Super Car ltd </strong> <br />
+            <strong> Category : </strong> Car marketing <br />
+            <strong> Community : </strong> 20k <br />
+            <strong> Location :</strong> cameroon <br />
+            <strong> Keyword :</strong> car,swag <br />
+
+            <strong>About:</strong> super best car seller in the world
+            adipisicing elit. <b-link>Read More</b-link>
+          </p>
+        </b-col>
+
+
+
+
+
+
+        <b-col lg="12" md="4" xl="4" cols="12" sm="4">
+          <div class="s-button">
+     <b-row>  <b-col md="12"  lg="4"  xl="12" sm="12" cols="4" class="mt-2">    
+
+            <b-button block size="sm" class="b-background" variant="primary">
+              <b-icon class="ico" icon="plus-circle"> </b-icon> Community
+            </b-button>
+
+            </b-col>  
+
+        <b-col md="12"  lg="4"  xl="12" sm="12" cols="4" class="mt-2">  
+
+            <b-button block size="sm" class="b-background" variant="primary">
+              <b-icon class="ico" icon="chat"> </b-icon> Message
+            </b-button>
+
+            </b-col>  
+
+            <b-col  md="12"  lg="4"  xl="12" sm="12" cols="4"  class="mt-2">  
 
             <b-button block size="sm" class="b-background" variant="primary">
               <b-icon-geo-alt ></b-icon-geo-alt>  Direction
@@ -89,159 +316,11 @@
 
 
 
-    <div class="people-style shadow">
-      <b-row>
-        <b-col md="5" xl="3" lg="5" cols="5"  sm="5">
-          <div style="height: 100%;">
-            <img
-              src="https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg"
-              width="100%"
-              height="90%"
-              class="r-image"
-            />
-          </div>
-        </b-col>
-        <b-col md="6" cols="7" sm="7">
-          <p class="text">
-            <strong> Super Car ltd </strong> <br />
-            <strong> Category : </strong> Car marketing <br />
-            <strong> Community : </strong> 20k <br />
-            <strong> Location :</strong> cameroon <br />
-            <strong> Keyword :</strong> car,swag <br />
-
-            <strong>About:</strong> super best car seller in the world
-            adipisicing elit. <b-link>Read More</b-link>
-          </p>
-        </b-col>
 
 
 
 
 
-
-        <b-col lg="12" md="12" xl="3" cols="12" sm="12">
-          <div class="s-button">
-     <b-row>  <b-col md="4"  lg="4"  xl="12" sm="4" cols="4" class="mt-md-2">    
-
-            <b-button block size="sm" class="b-background" variant="primary">
-              <b-icon class="ico" icon="plus-circle"> </b-icon> Community
-            </b-button>
-
-            </b-col>  
-
-        <b-col md="4"  lg="4"  xl="12" sm="4" cols="4" class="mt-md-2">  
-
-            <b-button block size="sm" class="b-background" variant="primary">
-              <b-icon class="ico" icon="chat"> </b-icon> Message
-            </b-button>
-
-            </b-col>  
-
-            <b-col  md="4"  lg="4"  xl="12" sm="4" cols="4"  class="mt-md-2">  
-
-            <b-button block size="sm" class="b-background" variant="primary">
-              <b-icon-geo-alt ></b-icon-geo-alt>  Direction
-            </b-button>
-
-            </b-col>  
-   </b-row>
-
-          </div>
-        </b-col>
-      </b-row>
-    </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <div class="people-style shadow">
-      <b-row>
-        <b-col md="5" xl="3" lg="5" cols="5"  sm="5">
-          <div style="height: 100%;">
-            <img
-              src="https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg"
-              width="100%"
-              height="90%"
-              class="r-image"
-            />
-          </div>
-        </b-col>
-        <b-col md="6" cols="7" sm="7">
-          <p class="text">
-            <strong> Super Car ltd </strong> <br />
-            <strong> Category : </strong> Car marketing <br />
-            <strong> Community : </strong> 20k <br />
-            <strong> Location :</strong> cameroon <br />
-            <strong> Keyword :</strong> car,swag <br />
-
-            <strong>About:</strong> super best car seller in the world
-            adipisicing elit. <b-link>Read More</b-link>
-          </p>
-        </b-col>
-
-
-
-
-
-
-        <b-col lg="12" md="12" xl="3" cols="12" sm="12">
-          <div class="s-button">
-     <b-row>  <b-col md="4"  lg="4"  xl="12" sm="4" cols="4" class="mt-md-2">    
-
-            <b-button block size="sm" class="b-background" variant="primary">
-              <b-icon class="ico" icon="plus-circle"> </b-icon> Community
-            </b-button>
-
-            </b-col>  
-
-        <b-col md="4"  lg="4"  xl="12" sm="4" cols="4" class="mt-md-2">  
-
-            <b-button block size="sm" class="b-background" variant="primary">
-              <b-icon class="ico" icon="chat"> </b-icon> Message
-            </b-button>
-
-            </b-col>  
-
-            <b-col  md="4"  lg="4"  xl="12" sm="4" cols="4"  class="mt-md-2">  
-
-            <b-button block size="sm" class="b-background" variant="primary">
-              <b-icon-geo-alt ></b-icon-geo-alt>  Direction
-            </b-button>
-
-            </b-col>  
-   </b-row>
-
-          </div>
-        </b-col>
-      </b-row>
-    </div>
 
 
 
@@ -276,6 +355,16 @@ export default {
 </script>
 
 <style scoped>
+
+
+
+.btn{
+  width: 100px;
+    font-size: 12px;
+}
+
+
+
 .card {
   color: orange;
 }
@@ -289,7 +378,7 @@ export default {
 .text {
   color: #000;
   font-size: 15px;
-
+padding: 1px;
   text-align: left;
 
   margin-left: -15px;
@@ -323,6 +412,8 @@ export default {
 
 .r-image {
   border-radius: 8px;
+
+  height:"100%"
 }
 
 
@@ -407,5 +498,18 @@ h4{
 
 }
 
+
+
+
+
+
+@media only screen and (max-width: 520px){
+
+.btn {
+    display: flex;
+    font-size: 10px;
+    width: 80px;
+}
+}
 
 </style>

@@ -36,7 +36,7 @@
             </template>
 
          
-         <div class="s-comcard">    <b-row>  <b-col md="6" sm="12">   <div >  <People />    </div >  </b-col> <b-col md="6" sm="12">   <div > <People />    </div >  </b-col>    </b-row>   </div>
+         <div class="s-comcard">    <b-row>  <b-col lg="6" sm="12">   <div >  <People />    </div >  </b-col> <b-col md="6" sm="12">   <div > <People />    </div >  </b-col>    </b-row>   </div>
  
          
          
@@ -48,7 +48,7 @@
              Following  <span class="spa-color">  7K   </span>
             </template>
 
-      <div class="s-comcard">    <b-row>  <b-col md="6" sm="12">   <div >  <People />    </div >  </b-col> <b-col md="6" sm="12">   <div > <People />    </div >  </b-col>    </b-row>   </div>
+      <div class="s-comcard">    <b-row>  <b-col md="12" sm="12">   <div >  <People />    </div >  </b-col> <b-col md="6" sm="12">   <div > <People />    </div >  </b-col>    </b-row>   </div>
 
         
         
@@ -79,7 +79,7 @@
          
 
 
-         <div class="s-comcard">    <b-row>  <b-col md="6" sm="12">   <div >  <Business />    </div >  </b-col> <b-col md="6" sm="12">   <div > <Business />    </div >  </b-col>    </b-row>   </div>
+         <div class="s-comcard">    <b-row>  <b-col lg="6" sm="12">   <div >  <Business />    </div >  </b-col> <b-col md="6" sm="12">   <div > <Business />    </div >  </b-col>    </b-row>   </div>
 
  
          
@@ -92,7 +92,7 @@
              Following  <span class="spa-color">  7K   </span>
             </template>
         
-        <div class="s-comcard">    <b-row>  <b-col md="6" sm="12">   <div >  <Business />    </div >  </b-col> <b-col md="6" sm="12">   <div > <Business />    </div >  </b-col>    </b-row>   </div>
+        <div class="s-comcard">    <b-row>  <b-col lg="6" sm="12">   <div >  <Business />    </div >  </b-col> <b-col md="6" sm="12">   <div > <Business />    </div >  </b-col>    </b-row>   </div>
  
         </b-tab>
       </b-tabs>

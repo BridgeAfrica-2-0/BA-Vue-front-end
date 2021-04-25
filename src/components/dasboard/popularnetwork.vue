@@ -27,7 +27,7 @@
             />
           </div>
         </b-col>
-        <b-col md="6" cols="7" sm="7">
+        <b-col md="6" cols="7" xl="5" sm="7">
          <p class="text">
             <strong> Shipping Network </strong> <br />  <br />
             Public <br />
@@ -37,7 +37,7 @@
           </p>
         </b-col>
 
-        <b-col lg="12" md="12" xl="3" cols="12" sm="12">
+        <b-col lg="12" md="12" xl="4" cols="12" sm="12">
           <div class="s-button">
      <b-row>  <b-col md="5"  lg="5"  xl="12" sm="5" cols="5" class="mt-md-2">     
 
@@ -101,7 +101,7 @@
             />
           </div>
         </b-col>
-        <b-col md="6" cols="7" sm="7">
+        <b-col md="6" cols="7" xl="5" sm="7">
          <p class="text">
             <strong> Shipping Network </strong> <br />  <br />
             Public <br />
@@ -111,7 +111,7 @@
           </p>
         </b-col>
 
-        <b-col lg="12" md="12" xl="3" cols="12" sm="12">
+        <b-col lg="12" md="12" xl="4" cols="12" sm="12">
           <div class="s-button">
      <b-row>  <b-col md="5"  lg="5"  xl="12" sm="5" cols="5" class="mt-md-2">     
 
@@ -185,7 +185,7 @@
             />
           </div>
         </b-col>
-        <b-col md="6" cols="7" sm="7">
+        <b-col md="6" cols="7" xl="5" sm="7">
          <p class="text">
             <strong> Shipping Network </strong> <br />  <br />
             Public <br />
@@ -195,7 +195,7 @@
           </p>
         </b-col>
 
-        <b-col lg="12" md="12" xl="3" cols="12" sm="12">
+        <b-col lg="12" md="12" xl="4" cols="12" sm="12">
           <div class="s-button">
      <b-row>  <b-col md="5"  lg="5"  xl="12" sm="5" cols="5" class="mt-md-2">     
 
@@ -322,6 +322,7 @@ h4{
   width: 100%;
 
 height: 100%;
+padding: 4px;
 }
 
 .people-style {

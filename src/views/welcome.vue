@@ -51,7 +51,9 @@
     <b-modal id="modal-1" ref="modal-1"  size="lg" title=" Get Started" hide-footer>
       <div>
 
-        <form-wizard @on-complete="onComplete"  >
+        <form-wizard @on-complete="onComplete" 
+        color="#e75c18"
+         >
           <tab-content title=" Complete Profile ">
             <div class="form-card">
               <div class="row">

@@ -14,14 +14,11 @@
 
 
 
-
-
-
-
+    
          
     <div class="people-style border shadow">
       <b-row class="">
-        <b-col cols="3" class="my-auto">
+        <b-col cols="4" class="my-auto">
           <b-avatar
             variant="primary"
             src="https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg"
@@ -31,11 +28,18 @@
 
         <b-col cols="">
           <div>
-            <div class="e-name" style="margin-top: -9px;">
+           
+            <div class="e-name" >
+               <b-row>   <b-col>    
               <h6 >
-                <br />
-              <strong>  howty Circlehead  </strong>  <span style="margin-left:30px" >   7k followers </span>
+               
+              <strong>  howty Circlehead  </strong> 
               </h6>
+
+              </b-col>
+             
+
+              <b-col>    <span class="follow" > <h7>   7k Community  </h7> </span>  </b-col>  </b-row>
             </div>
 
             <div class="p-buttons">
@@ -66,59 +70,6 @@
       </b-row>
     </div>
 
-
-
-
-
-
-
-         
-    <div class="people-style border shadow">
-      <b-row class="">
-        <b-col cols="3" class="my-auto">
-          <b-avatar
-            variant="primary"
-            src="https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg"
-            size="5em"
-          ></b-avatar>
-        </b-col>
-
-        <b-col cols="">
-          <div>
-            <div class="e-name" style="margin-top: -9px;">
-              <h6 >
-                <br />
-              <strong>  howty Circlehead  </strong> <span style="margin-left:40px" >   7k followers </span>
-              </h6>
-            </div>
-
-            <div class="p-buttons">
-              <b-row>
-
-                <b-col cols="2">
-                 
-                </b-col>
-
-                <b-col cols="5">
-                  <b-button
-                    block
-                    variant="primary"
-                    size="sm"
-                    class="b-background f-15"
-                    style="font-size:15px"
-                  >
-                    <b-icon icon="plus" class="ico   f-15 "> </b-icon> Invite
-                  </b-button>
-                </b-col>
-                <b-col cols="3">
-                 
-                </b-col>
-              </b-row>
-            </div>
-          </div>
-        </b-col>
-      </b-row>
-    </div>
 
 
 
@@ -146,7 +97,7 @@
          
     <div class="people-style border shadow">
       <b-row class="">
-        <b-col cols="3" class="my-auto">
+        <b-col cols="4" class="my-auto">
           <b-avatar
             variant="primary"
             src="https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg"
@@ -156,11 +107,97 @@
 
         <b-col cols="">
           <div>
-            <div class="e-name" style="margin-top: -9px;">
+           
+            <div class="e-name" >
+               <b-row>   <b-col>    
               <h6 >
-                <br />
-              <strong>  howty Circlehead  </strong> <span style="margin-left:40px" >   7k followers </span>
+               
+              <strong>  howty Circlehead  </strong> 
               </h6>
+
+              </b-col>
+             
+
+              <b-col>    <span class="follow" > <h7>   7k Community  </h7> </span>  </b-col>  </b-row>
+            </div>
+
+            <div class="p-buttons">
+              <b-row>
+
+                <b-col cols="2">
+                 
+                </b-col>
+
+                <b-col cols="5">
+                  <b-button
+                    block
+                    variant="primary"
+                    size="sm"
+                    class="b-background f-15"
+                    style="font-size:15px"
+                  >
+                    <b-icon icon="plus" class="ico   f-15 "> </b-icon> Invite
+                  </b-button>
+                </b-col>
+                <b-col cols="3">
+                 
+                </b-col>
+              </b-row>
+            </div>
+          </div>
+        </b-col>
+      </b-row>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+         
+    <div class="people-style border shadow">
+      <b-row class="">
+        <b-col cols="4" class="my-auto">
+          <b-avatar
+            variant="primary"
+            src="https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg"
+            size="5em"
+          ></b-avatar>
+        </b-col>
+
+        <b-col cols="">
+          <div>
+           
+            <div class="e-name" >
+               <b-row>   <b-col>    
+              <h6 >
+               
+              <strong>  howty Circlehead  </strong> 
+              </h6>
+
+              </b-col>
+             
+
+              <b-col>    <span class="follow" > <h7>   7k Community  </h7> </span>  </b-col>  </b-row>
             </div>
 
             <div class="p-buttons">
@@ -242,10 +279,24 @@ h6{
   font-size: 14px;
 }
 
+strong{
+
+  display: inline-flex;
+    margin-left: -20px;
+    margin-right: -20px;
+    margin-top: 5px;
+}
+
+.follow{
+  font-size: 10px;
+  margin-left: -20px;
+
+}
 
 .btn {
   font-size: 10px;
   display: flex;
+  width: 90px;
 
   padding-right: 60px;
 

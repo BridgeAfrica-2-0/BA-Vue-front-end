@@ -192,6 +192,8 @@
         </b-row>
       </div>
     </div>
+  
+    <br />
   </div>
 </template>
 
@@ -225,14 +227,15 @@ export default {
 
 .avatar-header-icon {
   width: 2em;
-  height: 2em;
-  position: absolute;
-  left: 80px;
-  top: 71px;
-  background-color: #e75c18;
-  color: white;
-  border-radius: 24px;
-  padding: 6px;
+    height: 2em;
+    position: absolute;
+   
+    top: 61px;
+    margin-left: -25px;
+    background-color: #e75c18;
+    color: white;
+    border-radius: 24px;
+    padding: 6px;
 }
 
 .text-box {
@@ -261,18 +264,7 @@ export default {
     display: none;
   }
 
-  .avatar-header-icon {
-    width: 1.5em;
-    height: 1.5em;
-    position: absolute;
-    left: 63px;
-    top: 51px;
-    background-color: #e75c18;
-    color: white;
-    border-radius: 24px;
-    padding: 4px;
-  }
-
+  
   .text-box {
     margin: 0px;
     margin-top: 7px;

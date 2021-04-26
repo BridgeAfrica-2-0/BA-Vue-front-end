@@ -3,7 +3,7 @@
     <div class="container-fluid">
       <img
         src="@/assets/img/banner.jpg"
-        class=""
+        class="banner"
         alt="Kitten"
         style="width:100%"
       />
@@ -293,5 +293,28 @@ export default {
     margin-top: -20px;
     margin-right: 20px;
   }
+
+
+
+  
 }
+
+
+
+
+
+
+@media (max-width: 760px) {
+  .banner{
+        height: 120px;
+       
+  }
+
+
+  img{
+
+    height: 120px;
+  }
+}
+
 </style>

@@ -2,7 +2,7 @@
   <div>
     <b-card class="px-md-3 border shadow "  >
 
-      <span> <h4>    <img class="img-fluid picture logo-img" src="@/assets/icons/post.png"  />  COMMUNITY ACTIVITY  <h6 style="float:right">   <b-link class="see-all-link"> <u> see all </u>  </b-link>    </h6>  </h4>   </span>
+      <span> <h4>    <img class="img-fluid picture logo-img" src="@/assets/icons/post.png"  />  Post  <h6 style="float:right">  <!-- <b-link class="see-all-link"> <u> see all </u>  </b-link>  -->   </h6>  </h4>   </span>
 
    <div class="s-card " >
      
@@ -13,8 +13,9 @@
             <b-col  md="2" sm="2" cols="2" class="a-center">
               <b-avatar
                 class="d-inline-block maleft"
-                variant="info"
+                variant="primary"
                 src="https://dashboard.bridgeafrica.info/resources/images/profile-pic.jpg"
+               
                 
               ></b-avatar>
             </b-col>
@@ -245,10 +246,27 @@ h4{
    text-align: center;
  }
 
+ 
+
 .maleft{
 
   margin-right: -22px;
+  width: 5em;
+    height: 5em;
 }
+
+@media only screen and (max-width: 768px) {
+   
+.maleft{
+
+  margin-right: -22px;
+  width: 2em;
+    height: 2em;
+}
+}
+
+
+
 .card-body {
   flex: 1 1 auto;
   min-height: 1px;

@@ -3,7 +3,7 @@
     <b-container fluid>
       <img
         src="@/assets/img/banner.jpg"
-        class="img-fluid header-pic"
+        class="img-fluid header-pic banner"
         alt="Kitten"
       />
 
@@ -134,7 +134,7 @@
               <span class="float-right">
                 
                 
-                <b-dropdown id="dropdown-1" class="float-right options" variant="primary">
+                <b-dropdown id="dropdown-1" class="float-right options" no-caret variant="outline-primary">
                   <template #button-content>
                     <b-icon-three-dots></b-icon-three-dots>
                   </template>
@@ -251,4 +251,19 @@ margin-right: -8px;
     margin-right: 20px;
   }
 }
+
+
+
+
+@media (max-width: 760px) {
+  .banner{
+        height: 120px;
+       
+  }
+
+
+  
+}
+
+
 </style>

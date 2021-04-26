@@ -357,4 +357,15 @@ h4{
 
 }
 
+
+
+@media only screen and (max-width: 520px){
+
+.btn {
+    display: flex;
+    font-size: 10px;
+    width: 80px;
+}
+}
+
 </style>

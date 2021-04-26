@@ -9,7 +9,9 @@
 
  
 
-<span> <h4> GET DIRECTIONS    </h4>   </span>
+<span> <h4> 
+  
+  <b-icon variant="primary" font-scale="2" icon="geo-alt" > </b-icon> GET DIRECTIONS    </h4>   </span>
 
     
           <div> 

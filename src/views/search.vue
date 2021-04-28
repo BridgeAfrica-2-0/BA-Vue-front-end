@@ -1,645 +1,432 @@
 <template>
   <div>
-    <Navbar />
-
-    <b-container fluid>
-      <b-row class="mt-3">
-        <b-col class="col-2">
-          <b-form-select
-            v-model="selected"
-            :options="options"
-            class="mb-3"
-            value-field="item"
-            text-field="name"
-          ></b-form-select>
+    <div class="searchnav">
+      <b-row>
+        <b-col cols="3">
+          <img
+            src="@/assets/balogo.png"
+            width="30%"
+            height="50%"
+            class="logo-image"
+          />
         </b-col>
-        <b-col v-if="selected != 'marketplace'" class="col-5 filter">
-          <b-row>
-            <b-col class="col-4 mt-2">
-              <small> Filter:</small>
-            </b-col>
-            <b-col>
-              <div class="control-size">
-                <b-form-select
-                  v-model="location"
-                  :options="filters"
-                  class="mb-3 filter-select with"
-                  value-field="item"
-                  text-field="name"
-                ></b-form-select>
-              </div>
-            </b-col>
-          </b-row>
-        </b-col>
-        <b-col v-if="selected == 'business'" class="col-5 filter mb-2">
-          <b-row>
-            <b-col class="col-3 mt-2">
-              <small> Category:</small>
-            </b-col>
-            <b-col>
-              <div class="control-size">
-                <b-form-select
-                  v-model="category"
-                  :options="categories"
-                  class="mb-3 filter-select"
-                  value-field="item"
-                  text-field="name"
-                ></b-form-select>
-              </div>
-            </b-col>
-            <b-col>
-              <b-button variant="primary" v-if="!map" @click="showMap(true)">
-                Show map
-              </b-button>
-              <b-button variant="primary" v-if="map" @click="showMap(false)">
-                Hide map
-              </b-button>
-            </b-col>
-          </b-row>
-        </b-col>
-        <b-col v-if="selected == 'people'" class="col-5 mb-2">
-          <b-row>
-            <b-col class="col-3 mt-2">
-              <small> Workplace:</small>
-            </b-col>
-            <b-col>
-              <div class="control-size">
-                <b-form-select
-                  v-model="category"
-                  :options="categories"
-                  class="mb-3 filter-select"
-                  value-field="item"
-                  text-field="name"
-                ></b-form-select>
-              </div>
-            </b-col>
-            <b-col>
-              <div class="control-size">
-                <b-form-select
-                  v-model="category"
-                  :options="categories"
-                  class="mb-3 filter-select"
-                  value-field="item"
-                  text-field="name"
-                ></b-form-select>
-              </div>
-            </b-col>
-          </b-row>
-        </b-col>
-        <b-col v-if="selected == 'network'" class="col-5 filter mb-2">
-          <b-row>
-            <b-col class="col-3 mt-2">
-              <small> Category:</small>
-            </b-col>
-            <b-col>
-              <div class="control-size">
-                <b-form-select
-                  v-model="category"
-                  :options="categories"
-                  class="mb-3 filter-select"
-                  value-field="item"
-                  text-field="name"
-                ></b-form-select>
-              </div>
-            </b-col>
-            <b-col>
-              <b-button variant="primary" v-if="!map" @click="showMap(true)">
-                Show map
-              </b-button>
-              <b-button variant="primary" v-if="map" @click="showMap(false)">
-                Hide map
-              </b-button>
-            </b-col>
-          </b-row>
-        </b-col>
-        <b-col v-if="selected == 'posts'" class="col-5 filter mb-2">
-          <b-row>
-            <b-col class="col-3 mt-2">
-              <small> Posted By:</small>
-            </b-col>
-            <b-col>
-              <div class="control-size">
-                <b-form-select
-                  v-model="post"
-                  :options="posts"
-                  class="mb-3 filter-select"
-                  value-field="item"
-                  text-field="name"
-                ></b-form-select>
-              </div>
-            </b-col>
-          </b-row>
-        </b-col>
-        <b-col v-if="selected == 'marketplace'" class="col filter mb-2">
-          <div class="uptions">
-            <div class="control-size">
-              <b-form-select
-                v-model="category"
-                :options="categories"
-                class="mb-3 filter-select"
-                value-field="item"
-                text-field="name"
-              ></b-form-select>
-            </div>
 
-            <div class="control-size">
-              <b-form-select
-                v-model="category"
-                :options="categories"
-                class="mb-3 filter-select"
-                value-field="item"
-                text-field="name"
-              ></b-form-select>
-            </div>
+        <b-col class="a-center">
+          <b-input-group class="my-auto input-size">
+            <b-form-input
+              id="inline-form-input-name"
+              class="input-size"
+              placeholder="Search Bridge Africa"
+            ></b-form-input>
 
-            <div class="control-size">
-              <b-form-select
-                v-model="category"
-                :options="categories"
-                class="mb-3 filter-select"
-                value-field="item"
-                text-field="name"
-              ></b-form-select>
-            </div>
+            <template #append>
+              <b-input-group-text class="b-groupe"
+                ><strong class="color-sit">
+                  <b-icon-search></b-icon-search> </strong
+              ></b-input-group-text>
+            </template>
 
-            <div class="control-size">
-              <b-form-select
-                v-model="category"
-                :options="categories"
-                class="mb-3 filter-select"
-                value-field="item"
-                text-field="name"
-              ></b-form-select>
-            </div>
+            <b-form-input
+              id="inline-form-input-name"
+              class="input-size"
+              placeholder="My location"
+            ></b-form-input>
+          </b-input-group>
+        </b-col>
 
-            <div class="control-size">
-              <b-form-select
-                v-model="category"
-                :options="categories"
-                class="mb-3 filter-select"
-                value-field="item"
-                text-field="name"
-              ></b-form-select>
-            </div>
+        <b-col cols="1"> </b-col>
+      </b-row>
+    </div>
 
-            <b-button
-              size="sm"
-              variant="primary"
-              v-if="!map"
-              @click="showMap(true)"
-              class="ml-2"
+    <div class="container searchly">
+      <ly-tab
+        v-model="selectedId"
+        :items="items"
+        :options="optionsnav"
+        activeColor="#1d98bd"
+        @change="handleChange"
+      >
+      </ly-tab>
+    </div>
+
+    <div class="container-flex mt-3 p-3">
+      <b-row class="p-3">
+        <b-col cols="2">
+          <div id="all" class="ml-3">
+            <h6>Filters</h6>
+
+            <b-form-group
+              label-cols-lg="3"
+              label="Location"
+              label-size="md"
+              label-class="font-weight-bold pt-0"
+              class="mb-0"
             >
-              Show map
-            </b-button>
-            <b-button
-              size="sm"
-              variant="primary"
-              v-if="map"
-              class="ml-2"
-              @click="showMap(false)"
+            </b-form-group>
+            <b-form-select v-model="selected">
+              <b-form-select-option value="a">
+                My Location
+              </b-form-select-option>
+            </b-form-select>
+
+            <br />
+
+            <hr />
+
+            <b-form-group
+              label-cols-lg="12"
+              label="Neighbourhood"
+              label-size="md"
+              label-class="font-weight-bold pt-0"
+              class="mb-0"
             >
-              Hide map
-            </b-button>
+              <b-form-checkbox id="" class="a-text" name="" value="">
+                Buea</b-form-checkbox
+              >
+
+              <b-form-checkbox id="" class="a-text" name="" value="">
+                Tiko</b-form-checkbox
+              >
+
+              <b-form-checkbox id="" class="a-text" name="" value="">
+                Limbe</b-form-checkbox
+              >
+
+              <b-form-checkbox id="" class="a-text" name="" value="">
+                MUtengene</b-form-checkbox
+              >
+            </b-form-group>
+
+            <br />
+
+            <hr />
+
+            <b-form-group
+              label-cols-lg="12"
+              label="Distance"
+              label-size="md"
+              label-class="font-weight-bold pt-0"
+              class="mb-0"
+            >
+              <b-form-checkbox id="" class="a-text" name="" value="">
+                3km</b-form-checkbox
+              >
+
+              <b-form-checkbox id="" class="a-text" name="" value="">
+                9km</b-form-checkbox
+              >
+
+              <b-form-checkbox id="" class="a-text" name="" value="">
+                15km</b-form-checkbox
+              >
+
+              <b-form-checkbox id="" class="a-text" name="" value="">
+                25km</b-form-checkbox
+              >
+            </b-form-group>
           </div>
         </b-col>
-      </b-row>
 
-      <b-row v-if="selected == 'all'">
-        <b-col>
-          <Businesses />
-          <People class="mt-4" />
-          <Networks :data="networks" class="mt-4" />
-          <Posts class="mt-4" />
-          <Marketplace class="mt-4 mb-2" />
+        <b-col cols="6">
+
+
+          <div class="container-flex"   >
+             <b-card>
+
+               <!--filter for all takes just two fields at a time  -->
+
+               <div id="all" v-if="selectedId == '0'"  >
+              <h6>Sponsored Businesses</h6>
+
+
+              <Sponsor />
+
+              <h6>Businesses</h6>
+
+              <Business />
+
+              <span class="float-right mb-3"> see more </span> <br />
+
+              <hr />
+
+              <h6>People</h6>
+
+              <People />
+              <span class="float-right mb-3"> see more </span> <br />
+
+              <hr />
+
+              <h6>Network</h6>
+
+              <Network />
+              <span class="float-right mb-3"> see more </span> <br />
+
+              <hr />
+
+              Market
+
+              <Market />
+
+              <span class="float-right mb-3"> see more </span> <br />
+
+              <hr />
+
+              <h6>Post</h6>
+
+              <Post />
+
+              <span class="float-right mb-3"> see more </span> <br />
+
+              <hr />
+
+               </div>
+
+              <!--  select just businesses      -->
+
+              <div id="businesses" v-if="selectedId == '1'" >
+
+             
+              <h6>Businesses</h6>
+
+              <Business />
+
+              <Business />
+
+              <Business />
+
+              <Business />
+
+
+              </div>
+
+              <!-- filter out only people -->
+
+
+
+              <div id="people" v-if="selectedId == '2'" >
+
+             
+              <h6>People</h6>
+
+              <People />
+
+              <People />
+
+              <People />
+
+              <People />
+
+
+              </div>
+
+
+              <!-- filter out just the network  -->
+
+
+
+              <div id="people" v-if="selectedId == '3'" >
+
+             
+              <h6>Networks</h6>
+
+              <Network />
+
+              <Network />
+
+              <Network />
+
+              <Network />
+
+
+              </div>
+
+              <!-- Filter out just the market place -->
+
+
+              <div id="people" v-if="selectedId == '4'" >
+
+             
+              <h6>Market</h6>
+
+              <Market />
+
+              <Market />
+
+              <Market />
+
+              <Market />
+
+
+              </div>
+
+
+
+              <!-- Filter out just the post  -->
+
+
+              <div id="people" v-if="selectedId == '5'" >
+
+             
+              <h6>Post</h6>
+
+              <Post />
+
+              <Post />
+
+              <Post />
+
+              <Post />
+
+
+              </div>
+
+
+
+
+
+
+
+
+
+
+
+
+              
+               
+
+
+
+
+
+
+            </b-card>
+          </div>
+
+     
+
+
+
+
+
+
         </b-col>
-        <b-col class="col-3 adds">
-          <Advertisement />
-        </b-col>
+
+        <b-col cols="4"> <Map /> </b-col>
       </b-row>
-
-      <b-col v-if="selected == 'business'">
-        <b-row>
-          <b-col>
-            <b-card>
-              <h3>Sponsored Businesses</h3>
-              <div class="s-business">
-                <b-row class="ml-3">
-                  <div class="left">
-                    <b-icon icon="arrow-left-circle"></b-icon>
-                  </div>
-                  <b-col class="ml-5">
-                 <b-row>   <b-col cols="4">   
-
-                      <SponsoredBusinesses
-                        class="ml-2"
-                     
-                       
-                    /> </b-col>  
-                    
-                    
-
-
-
-
-
-                     <b-col cols="4">   
-
-                      <SponsoredBusinesses
-                        class="ml-2"
-                     
-                       
-                    /> </b-col>
-
-
-
-                    
-                     <b-col cols="4">   
-
-                      <SponsoredBusinesses
-                        class="ml-2"
-                     
-                       
-                    /> </b-col>
-                    
-                    
-
-                    
-                    
-                    
-                    </b-row>
-                  </b-col>
-                  <div class="left ml-5">
-
-
-
-                    <b-icon icon="arrow-right-circle"></b-icon>
-                  </div>
-                </b-row>
-              </div>
-            </b-card>
-          </b-col>
-          <b-col class="col-2" v-if="map">
-            <iframe
-              src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d48389.732999183005!2d-74.006227!3d40.710128!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xb89d1fe6bc499443!2sDowntown%20Conference%20Center!5e0!3m2!1sen!2sbg!4v1611866634082!5m2!1sen!2sbg"
-              width="400"
-              height="500"
-              frameborder="0"
-              class="frame"
-              allowfullscreen=""
-              aria-hidden="false"
-              tabindex="0"
-            ></iframe>
-          </b-col>
-        </b-row>
-        <b-row class="mt-3 mb-2">
-          <b-col>
-            <b-card class="crd card">
-              <span class="title"> </span>
-              <span class="ml-5 result "><small>398 Results found</small></span>
-              <Business class="mb-3" />
-              <Business class="mb-3 btn-busi" />
-            </b-card>
-          </b-col>
-          <b-col class="col-3 adds">
-            <Advertisement class="adds" />
-          </b-col>
-        </b-row>
-      </b-col>
-      <b-col v-if="selected == 'people'">
-        <b-row class="mt-3 mb-2">
-          <b-col>
-            <span class="title"> </span>
-            <span class="ml-5 result"><small>398 Results found</small></span>
-
-            <People class="mt-4" />
-          </b-col>
-          <b-col class="col-3 adds">
-            <Advertisement class="adds" />
-          </b-col>
-        </b-row>
-      </b-col>
-      <b-col v-if="selected == 'network'">
-        <b-row>
-          <b-col>
-            <b-card>
-
-
-
-
-
-
-
-              <h3>Sponsored Networks</h3>
-              <div class="s-business">
-                <b-row class="ml-3">
-                  <div class="left">
-                    <b-icon icon="arrow-left-circle"></b-icon>
-                  </div>
-                  <b-col class="ml-5">
-                    <b-row>
-                    <b-col cols="12" md="4" sm="12"> 
-                     
-                     <SponsoredNetwork  />   
-
-                        
-                    
-                    </b-col>
-
-
-                     <b-col cols="12" md="4" sm="12"> 
-                     
-                     <SponsoredNetwork  />   
-
-                        
-                    
-                    </b-col>
-                    
-
-
-                     <b-col cols="12" md="4" sm="12"> 
-                     
-                     <SponsoredNetwork  />   
-
-                        
-                    
-                    </b-col>
-
-
-                    
-                     </b-row>
-
-
-                  </b-col>
-                  <div class="left ml-5">
-                    <b-icon icon="arrow-right-circle"></b-icon>
-                  </div>
-                </b-row>
-              </div>
-            </b-card>
-          </b-col>
-
-
-
-
-
-
-          <b-col class="col-2" v-if="map">
-            <iframe
-              src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d48389.732999183005!2d-74.006227!3d40.710128!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xb89d1fe6bc499443!2sDowntown%20Conference%20Center!5e0!3m2!1sen!2sbg!4v1611866634082!5m2!1sen!2sbg"
-              width="400"
-              height="500"
-              frameborder="0"
-              class="frame"
-              allowfullscreen=""
-              aria-hidden="false"
-              tabindex="0"
-            ></iframe>
-          </b-col>
-        </b-row>
-
-
-
-
-        <b-row class="mt-3 mb-2">
-          <b-col>
-
-            <!--
-            <span class="title"> </span>
-            <span class="ml-5 result"><small>398 Results found</small></span>
-
-            -->
-            
-            <Networks :data="networks" class="mt-4" />
-          </b-col>
-          <b-col class="col-3 adds">
-            <Advertisement class="adds" />
-          </b-col>
-        </b-row>
-      </b-col>
-      <b-col v-if="selected == 'posts'">
-        <b-row class="mt-3 mb-2">
-          <b-col>
-            <span class="title"> </span>
-            <span class="ml-5 result"><small>398 Results found</small></span>
-
-            <Posts class="mt-4" />
-          </b-col>
-          <b-col class="col-3 adds">
-            <Advertisement class="adds" />
-          </b-col>
-        </b-row>
-      </b-col>
-      <b-col v-if="selected == 'marketplace'">
-        <b-row>
-          <b-col>
-            <b-card>
-
-
-
-
-              <h3>Sponsored Businesses</h3>
-              <div class="s-business">
-                <b-row class="ml-3">
-                  <div class="left">
-                    <b-icon icon="arrow-left-circle"></b-icon>
-                  </div>
-                  <b-col class="ml-5">
-                    <b-row>
-                      <SponsoredBusinesses
-                        class="ml-2"
-                        v-for="(sbusiness, index) in sponsoredBusinesses"
-                        :key="index"
-                        :title="sbusiness.title"
-                    /></b-row>
-                    
-                  </b-col>
-                  <div class="left ml-5">
-                    <b-icon icon="arrow-right-circle"></b-icon>
-                  </div>
-                </b-row>
-              </div>
-            </b-card>
-          </b-col>
-          <b-col class="col-2" v-if="map">
-            <iframe
-              src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d48389.732999183005!2d-74.006227!3d40.710128!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xb89d1fe6bc499443!2sDowntown%20Conference%20Center!5e0!3m2!1sen!2sbg!4v1611866634082!5m2!1sen!2sbg"
-              width="400"
-              height="500"
-              frameborder="0"
-              class="frame"
-              allowfullscreen=""
-              aria-hidden="false"
-              tabindex="0"
-            ></iframe>
-          </b-col>
-        </b-row>
-        <b-row class="mt-3 mb-2">
-          <b-col>
-            <span class="title"> </span>
-            <span class="ml-5 result"><small>398 Results found</small></span>
-            <Marketplace class="mt-4 mb-2" />
-          </b-col>
-          <b-col class="col-3 aads">
-            <Advertisement class="adds" />
-          </b-col>
-        </b-row>
-      </b-col>
-    </b-container>
-    <Footer />
+    </div>
   </div>
 </template>
 
 <script>
-/* eslint-disable */
-import Businesses from "@/components/search/businesses";
-import Advertisement from "@/components/search/advertisement";
-import Networks from "@/components/search/networks";
-import Posts from "@/components/search/posts";
+import LyTab from "@/tab/src/index.vue";
+
+import Map from "@/components/search/map";
+
+import Business from "@/components/search/business";
 import People from "@/components/search/people";
-import Marketplace from "@/components/search/marketplace";
-import SponsoredBusinesses from "@/components/search/sponsoredBusiness";
-import SponsoredNetwork from "@/components/search/sponsoredNetwork";
-import Business from "@/components/search/businessmain";
-import Navbar from "@/components/navbar";
-//import Footer from "@/components/footer";
+import Network from "@/components/search/network";
+import Post from "@/components/search/posts";
+import Market from "@/components/search/market";
+
+import Sponsor from "@/components/search/sponsoredBusiness";
 
 export default {
   components: {
-    Businesses,
-    Advertisement,
-    Networks,
-    Marketplace,
-    Posts,
-    People,
-    SponsoredBusinesses,
-    SponsoredNetwork,
+    LyTab,
+    Map,
     Business,
-    Navbar,
-   // Footer,
+    Sponsor,
+    People,
+    Network,
+    Post,
+    Market,
+
+    // Footer,
   },
   data() {
     return {
       selected: "all",
+      selectedId: 0,
+      bottomSelectedId: 0,
       location: "any",
       category: "any",
       post: "any",
       map: false,
-      networks: [{ type: "minus" }, { type: "plus" }],
-      options: [
-        { item: "all", name: "All" },
-        { item: "business", name: "Business" },
-        { item: "people", name: "People" },
-        { item: "network", name: "Network" },
-        { item: "marketplace", name: "Markeplace", notEnabled: true },
-        { item: "posts", name: "Posts" },
+
+      items: [
+        { label: "All " },
+
+        { label: "Business" },
+        { label: "People" },
+        { label: "Network" },
+        { label: "Market" },
+        { label: "Post" },
       ],
-      filters: [
-        { item: "any", name: "Location: Any" },
-        { item: "yaounde", name: "Yaounde, Cameroon" },
-        { item: "dhaka ", name: "Dhaka, Bangladesh" },
-        { item: "new york", name: "New York, United States" },
-        { item: "douala", name: "Douala, Cameroon" },
-        { item: "karachi", name: "Karachi, Pakistan" },
-      ],
-      categories: [
-        { item: "any", name: "Any" },
-        { item: "restaurant", name: "Restaurant" },
-        { item: "home service", name: "Home Services" },
-        { item: "auto service", name: "Auto Services" },
-        { item: "argiculture", name: "Agriculture" },
-        { item: "technology", name: "Technology" },
-      ],
-      posts: [
-        { item: "any", name: "Any" },
-        { item: "people", name: "People I am following" },
-        { item: "business", name: "Businesses i am following" },
-        { item: "networks", name: "Networks I am following" },
-      ],
-      sponsoredBusinesses: [
-        { title: "Business 1" },
-        { title: "Business 2" },
-        { title: "Business 3" },
-      ],
+      optionsnav: {
+        activeColor: "#1d98bd",
+      },
     };
   },
+
   methods: {
-    showMap(arg) {
-      this.map = arg;
-      console.log("worker");
+    handleChange(item, index) {
+      console.log(item, index);
     },
   },
 };
 </script>
 
 <style scoped>
-.filter {
-  border-left: 1px solid #ccc;
-  height: 40px;
-}
-.filter-select {
-  margin-left: -70px;
-  width: 100px;
-}
-.s-business {
-  display: flex;
-  flex-wrap: wrap;
-}
-.title {
-  font-size: 30px;
-}
-.result {
-  position: relative;
-  font-size: 20px;
-  top: -5px;
-  left: 596px;
-  color: green;
-  font-weight: bold;
-}
-.control-size {
-  position: relative;
-  margin-left: 90px;
+.input-size {
+  height: 55px;
 }
 
-.with {
-  position: relative;
-  width: 200px;
-  left: -140px;
+.logo-image {
+  margin-left: 50px;
 }
 
-.frame {
-  border: 0;
+.input-group-text {
+  background-color: white;
 }
-.crd {
-  box-shadow: -1px 4px 20px -6px rgba(0, 0, 0, 0.7);
+
+.a-center {
+  margin-right: 200px;
+  margin-left: -100px;
 }
-.uptions {
-  display: flex;
-  margin-left: 30px;
+
+.searchnav {
+  margin: 3px;
 }
-.left {
-  background-color: #e75d29;
-  box-shadow: -1px 4px 20px -6px rgba(0, 0, 0, 0.7);
-  height: 40px;
-  padding: 10px;
-  color: #fff;
-  border-radius: 20px;
-  margin-top: 70px;
-  cursor: pointer;
-  margin-left: 10px;
+
+.t-center {
+  text-align: center;
+  align-content: center;
 }
-@media only screen and (max-width: 768px) {
-  .adds {
+
+.d-blockk {
+  display: none;
+}
+
+@media only screen and (min-width: 768px) {
+  .d-mobile {
     display: none;
   }
-  .busi {
-    position: relative;
-    bottom: 1000px;
+
+  .d-blockk {
+    display: block;
   }
-  .crd {
-    height: 1250px;
-  }
-  .btn-busi {
-    margin-top: 150px;
-  }
+}
+
+.m-30 {
+  margin-left: -30px;
+}
+
+.br-0 {
+  border-radius: 0px;
+  height: 50px;
+}
+
+.br {
+  border: 1px solid #ced4da;
 }
 </style>

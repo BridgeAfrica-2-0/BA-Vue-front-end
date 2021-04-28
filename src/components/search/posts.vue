@@ -1,16 +1,10 @@
 <template>
   <div>
-    <b-card class="card">
       <b-row>
         <b-col>
-          <h4>
-            <b-icon icon="book" variant="primary"></b-icon>
-            <span class="ml-2">Posts</span>
-          </h4>
+        
         </b-col>
-        <b-col class="col">
-          <b-link class="lnk">See All</b-link>
-        </b-col>
+        
       </b-row>
       <b-row>
         <b-col cols="2">
@@ -64,12 +58,10 @@
             src="https://images-us.nivea.com/~/images/media-center-items/8/b/2-340911-1.png"
             height="200"
           ></b-img>
-          <b-link class="ml-5">
-            View More
-          </b-link>
+          
         </b-col>
       </b-row>
-    </b-card>
+    
   </div>
 </template>
 

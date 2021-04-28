@@ -28,7 +28,7 @@ export default {
     },
     activeColor: {
       type: String,
-      default: 'red'
+      
     },
     fixBottom: {
       type: Boolean,
@@ -104,7 +104,8 @@ export default {
         width: `${this.activeBarWidth}px`,
         height: `${this.lineWidth}px`,
         transform: `translate3d(${this.activeBarX}px, 0, 0)`,
-        backgroundColor: this.activeColor
+        backgroundColor: "red",
+        marginTop: "-34px"
       }
     },
     transitionDuration () {
@@ -314,8 +315,7 @@ export default {
   width: 100%;
   overflow: hidden;
   display: flex;
-  border-bottom: 1px solid #eee;
-  box-shadow: 0 0px 6px 1px #eee
+ 
 }
 
 .ly-tabbar.ly-tabbar-fix-bottom {

@@ -1,6 +1,6 @@
 <template>
   <a
-    class="ly-tab-item"
+    class="ly-tab-item bg"
     :style="$parent.value === id ? activeStyle : {}"
     @click="onItemClicked">
     <div class="ly-tab-item-icon" v-if="$parent.fixBottom"><slot name="icon"></slot></div>
@@ -32,6 +32,12 @@ export default {
 </script>
 
 <style>
+
+.bg{
+  color:black;
+}
+
+
 .ly-tab-item {
   display: flex;
   flex-direction: column;

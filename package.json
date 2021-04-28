@@ -12,6 +12,7 @@
     "@fortawesome/free-solid-svg-icons": "^5.15.2",
     "@fortawesome/vue-fontawesome": "^2.0.2",
     "@morioh/v-lightbox": "^1.0.3",
+    "@splidejs/vue-splide": "splidejs/vue-splide",
     "axios": "^0.21.1",
     "bootstrap": "^4.5.3",
     "bootstrap-vue": "^2.21.2",

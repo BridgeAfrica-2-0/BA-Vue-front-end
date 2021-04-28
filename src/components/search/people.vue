@@ -1,29 +1,6 @@
 <template>
-  <div>
-    <b-card class="card">
-      <b-row>
-        <b-col>
-          <h4>
-            <img class="img-fluid picture logo-img " src="@/assets/icons/people.png"  /> 
-
-
-            <span class="ml-2">People</span>
-          </h4>
-        </b-col>
-        <b-col class="col">
-          <b-link class="lnk">See All</b-link>
-        </b-col>
-      </b-row>
-
-
-
-
-
-
-
-
-
-
+  <b-container>
+    <div class="s-card">
 
 
       <div class="people-style border shadow">
@@ -40,37 +17,73 @@
           <b-col md="8" cols="8" sm="8" class="shift-left">
             <div>
               <b-row>
-                <b-col md="8" sm="12">
+                <b-col md="6" lg="12" xl="6" sm="6">
                   <div class="e-name">
-                    <h6>
-                      <br />
-                      howty Circlehead
-                    </h6>
+                    <b-row>
+                      <b-col
+                        md="12"
+                        lg="7"
+                        cols="6"
+                        sm="12"
+                        xl="12"
+                        class="mt-lg-2"
+                      >
+                        <h6 class="mt-3 mt-lg-0 mt-xl-0">
+                          <b> howty blec </b>
+                        </h6>
+                      </b-col>
+
+                      <b-col
+                        md="12"
+                        lg="5"
+                        cols="6"
+                        sm="12"
+                        xl="12"
+                        class="mt-3 mt-lg-1 mt-xl-0"
+                      >
+                        <h6 class="follower">5K Community</h6>
+                      </b-col>
+                    </b-row>
                   </div>
                 </b-col>
 
-                <b-col>
+                <b-col lg="12" xl="6" cols="12" sm="6" md="6">
                   <div>
-                    <b-row>
-                      <b-col md="12" cols="6" sm="6" class="mt-md-2">
+                    <b-row class="mt-lg-0">
+                      <b-col
+                        md="12"
+                        lg="6"
+                        cols="6"
+                        sm="12"
+                        xl="12"
+                        class="mt-2 mt-lg-0 mt-xl-2 btn-2 center"
+                      >
                         <b-button
                           block
                           variant="primary"
                           size="sm"
-                          class="b-background"
+                          class="b-background flexx pobtn"
                         >
-                          <b-icon icon="chat"> </b-icon> Message
+                          <b-icon icon="chat" class="mr-1"> </b-icon> Message
                         </b-button>
                       </b-col>
 
-                      <b-col md="12" cols="6" sm="6" class="mt-md-2">
+                      <b-col
+                        md="12"
+                        lg="6"
+                        cols="6"
+                        sm="12"
+                        xl="12"
+                        class="mt-2 mt-lg-0 mt-xl-2 btn-2 center"
+                      >
                         <b-button
                           block
                           size="sm"
-                          class="b-background"
+                          class="b-background flexx pobtn"
                           variant="primary"
                         >
-                          <b-icon icon="plus-circle"> </b-icon> community
+                          <b-icon icon="plus-circle" class="mr-1"> </b-icon>
+                          community
                         </b-button>
                       </b-col>
                     </b-row>
@@ -91,14 +104,7 @@
 
 
 
-
-
-
-
-
-
-
-            <div class="people-style border shadow">
+ <div class="people-style border shadow">
         <b-row class="mb-1">
           <b-col md="3" cols="4" sm="3" class="my-auto">
             <b-avatar
@@ -112,37 +118,73 @@
           <b-col md="8" cols="8" sm="8" class="shift-left">
             <div>
               <b-row>
-                <b-col md="8" sm="12">
+                <b-col md="6" lg="12" xl="6" sm="6">
                   <div class="e-name">
-                    <h6>
-                      <br />
-                      howty Circlehead
-                    </h6>
+                    <b-row>
+                      <b-col
+                        md="12"
+                        lg="7"
+                        cols="6"
+                        sm="12"
+                        xl="12"
+                        class="mt-lg-2"
+                      >
+                        <h6 class="mt-3 mt-lg-0 mt-xl-0">
+                          <b> howty blec </b>
+                        </h6>
+                      </b-col>
+
+                      <b-col
+                        md="12"
+                        lg="5"
+                        cols="6"
+                        sm="12"
+                        xl="12"
+                        class="mt-3 mt-lg-1 mt-xl-0"
+                      >
+                        <h6 class="follower">5K Community</h6>
+                      </b-col>
+                    </b-row>
                   </div>
                 </b-col>
 
-                <b-col>
+                <b-col lg="12" xl="6" cols="12" sm="6" md="6">
                   <div>
-                    <b-row>
-                      <b-col md="12" cols="6" sm="6" class="mt-md-2">
+                    <b-row class="mt-lg-0">
+                      <b-col
+                        md="12"
+                        lg="6"
+                        cols="6"
+                        sm="12"
+                        xl="12"
+                        class="mt-2 mt-lg-0 mt-xl-2 btn-2 center"
+                      >
                         <b-button
                           block
                           variant="primary"
                           size="sm"
-                          class="b-background"
+                          class="b-background flexx pobtn"
                         >
-                          <b-icon icon="chat"> </b-icon> Message
+                          <b-icon icon="chat" class="mr-1"> </b-icon> Message
                         </b-button>
                       </b-col>
 
-                      <b-col md="12" cols="6" sm="6" class="mt-md-2">
+                      <b-col
+                        md="12"
+                        lg="6"
+                        cols="6"
+                        sm="12"
+                        xl="12"
+                        class="mt-2 mt-lg-0 mt-xl-2 btn-2 center"
+                      >
                         <b-button
                           block
                           size="sm"
-                          class="b-background"
+                          class="b-background flexx pobtn"
                           variant="primary"
                         >
-                          <b-icon icon="plus-circle"> </b-icon> community
+                          <b-icon icon="plus-circle" class="mr-1"> </b-icon>
+                          community
                         </b-button>
                       </b-col>
                     </b-row>
@@ -172,82 +214,184 @@
 
 
 
-    </b-card>
-  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+ <div class="people-style border shadow">
+        <b-row class="mb-1">
+          <b-col md="3" cols="4" sm="3" class="my-auto">
+            <b-avatar
+              class="p-avater"
+              variant="primary"
+              src="https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg"
+              size="5em"
+            ></b-avatar>
+          </b-col>
+
+          <b-col md="8" cols="8" sm="8" class="shift-left">
+            <div>
+              <b-row>
+                <b-col md="6" lg="12" xl="6" sm="6">
+                  <div class="e-name">
+                    <b-row>
+                      <b-col
+                        md="12"
+                        lg="7"
+                        cols="6"
+                        sm="12"
+                        xl="12"
+                        class="mt-lg-2"
+                      >
+                        <h6 class="mt-3 mt-lg-0 mt-xl-0">
+                          <b> howty blec </b>
+                        </h6>
+                      </b-col>
+
+                      <b-col
+                        md="12"
+                        lg="5"
+                        cols="6"
+                        sm="12"
+                        xl="12"
+                        class="mt-3 mt-lg-1 mt-xl-0"
+                      >
+                        <h6 class="follower">5K Community</h6>
+                      </b-col>
+                    </b-row>
+                  </div>
+                </b-col>
+
+                <b-col lg="12" xl="6" cols="12" sm="6" md="6">
+                  <div>
+                    <b-row class="mt-lg-0">
+                      <b-col
+                        md="12"
+                        lg="6"
+                        cols="6"
+                        sm="12"
+                        xl="12"
+                        class="mt-2 mt-lg-0 mt-xl-2 btn-2 center"
+                      >
+                        <b-button
+                          block
+                          variant="primary"
+                          size="sm"
+                          class="b-background flexx pobtn"
+                        >
+                          <b-icon icon="chat" class="mr-1"> </b-icon> Message
+                        </b-button>
+                      </b-col>
+
+                      <b-col
+                        md="12"
+                        lg="6"
+                        cols="6"
+                        sm="12"
+                        xl="12"
+                        class="mt-2 mt-lg-0 mt-xl-2 btn-2 center"
+                      >
+                        <b-button
+                          block
+                          size="sm"
+                          class="b-background flexx pobtn"
+                          variant="primary"
+                        >
+                          <b-icon icon="plus-circle" class="mr-1"> </b-icon>
+                          community
+                        </b-button>
+                      </b-col>
+                    </b-row>
+                  </div>
+                </b-col>
+              </b-row>
+            </div>
+          </b-col>
+        </b-row>
+      </div>
+
+
+
+
+
+    </div>
+  </b-container>
 </template>
 
 <script>
-/* eslint-disable */
 export default {};
 </script>
 
 <style scoped>
-
-
-
-.logo-img{
-
-  width: 40px;
+.btn {
+  width: 100px;
+  font-size: 12px;
 }
 
-
-h4{
-  font-size: 20px;
+.flexx {
+  display: inline-flex;
 }
 
+.memfollower {
+  margin-left: 20px;
+  font-size: 12px;
+}
+.detail {
+  position: relative;
+  left: 65px;
+  top: -30px;
+}
+.name {
+  position: relative;
+  top: -10px;
+  left: 10px;
+}
+
+.a-left {
+  text-align: left;
+  align-content: left;
+}
+
+hr {
+  border: solid 1px dimgray;
+}
+
+.btn {
+  background-color: #fff;
+  color: #e75c18;
+  border: solid 1px #e75c18;
+}
+
+.btn:hover {
+  color: #fff;
+  border: none;
+  background-color: #e75c18;
+}
+
+f-right {
+  text-align: right;
+  align-content: right;
+}
+
+.f-left {
+  text-align: left;
+  align-content: left;
+}
 
 @media only screen and (max-width: 768px) {
-  
-
-
-
-h4{
-  font-size: 15px;
+  .options {
+    position: relative;
+    left: -75px;
+  }
 }
-
-.logo-img{
-  width: 30px;
-}
-.see-all-link{
-  font-size: 10px;
-}
-
-}
-
-
-
-
-
-
-.business {
-  border-bottom: 1px solid #ccc;
-}
-.buttons {
-  margin-left: 120px;
-}
-.lnk {
-  margin-left: 260px;
-}
-p {
-  margin-left: -210px;
-}
-
-.drop {
-  left: 1px;
-}
-.community {
-  border: none;
-  display: flex;
-}
-
-.card {
-  box-shadow: -1px 4px 20px -6px rgba(0, 0, 0, 0.7);
-}
-
-
-
-
-
 
 .detail {
   position: relative;
@@ -273,6 +417,10 @@ p {
   border-bottom-right-radius: 4px;
 }
 
+.follower {
+  font-size: 10px;
+}
+
 .people-style {
   border-top-left-radius: 40px;
 
@@ -290,7 +438,38 @@ p {
   margin-bottom: 10px;
 }
 
+@media only screen and (min-width: 1200px) {
+  .btn {
+    width: 105px;
+    text-align: right;
+  }
+
+  .center {
+    text-align: center;
+  }
+}
+
 @media only screen and (max-width: 768px) {
+  .p-avater {
+    margin-right: -15px;
+    margin-top: 3px;
+  }
+
+  .btn {
+    width: 90px;
+    margin-left: 20px;
+  }
+
+  .btn-2 {
+    margin-left: 0px;
+    width: 90px;
+  }
+
+  .btn-1 {
+    margin-left: 0px;
+    width: 90px;
+  }
+
   .people-style {
     border-top-left-radius: 40px;
 
@@ -313,6 +492,68 @@ p {
 
   h6 {
     font-size: 15px;
+  }
+
+  h7 {
+    font-size: 10px;
+  }
+
+  .shift-left {
+    margin-left: -20px;
+  }
+
+  .btn {
+    display: flex;
+    font-size: 10px;
+  }
+}
+
+@media only screen and (max-width: 520px) {
+  .p-avater {
+    margin-right: -15px;
+    margin-top: 3px;
+  }
+
+  .btn {
+    width: 90px;
+  }
+
+  .btn-2 {
+    margin-left: -20px;
+    width: 90px;
+  }
+
+  .btn-1 {
+    margin-left: -20px;
+    width: 90px;
+  }
+
+  .people-style {
+    border-top-left-radius: 40px;
+
+    border-bottom-left-radius: 40px;
+
+    border-top-right-radius: 45px;
+
+    border-bottom-right-radius: 45px;
+
+    background: white;
+
+    background-color: #fff;
+    background-clip: border-box;
+    border: 1px solid rgba(0, 0, 0, 0.125);
+    margin-bottom: 10px;
+
+    margin-right: -15px;
+    margin-left: -15px;
+  }
+
+  h6 {
+    font-size: 15px;
+  }
+
+  h7 {
+    font-size: 10px;
   }
 
   .shift-left {
@@ -340,4 +581,10 @@ p {
   margin-top: 2px;
 }
 
+@media only screen and (max-width: 400px) {
+  .pobtn {
+    font-size: 9px;
+    width: 80px;
+  }
+}
 </style>

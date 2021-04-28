@@ -629,4 +629,27 @@ export default {
 
   width: 95%;
 }
+
+@media (max-width: 756px) {
+
+.navbar-toggler {
+    padding: .25rem .75rem;
+    font-size: 1.25rem;
+    line-height: 1;
+    background-color: transparent;
+    border: 1px solid transparent;
+    border-radius: .25rem;
+    position: absolute !important;
+    top: -78px !important;
+    right: 13px !important;
+}
+
+
+}
+
+
+
+
+
+
 </style>

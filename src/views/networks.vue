@@ -4,7 +4,7 @@
    
 
 
-<div   class="container-fluid">
+<div   class="container-fluid lynetowrk">
    
   <ly-tab
     v-model="selectedId"
@@ -229,9 +229,9 @@ export default {
 }
 
 
-
+/** 
   
-.ly-tab-active-bar {
+.lynetowrk .ly-tab-active-bar {
     position: absolute;
     bottom: 3px;
     left: 0;
@@ -264,7 +264,7 @@ export default {
     width: 170px;
    
 }
-
+*/
 
 
 

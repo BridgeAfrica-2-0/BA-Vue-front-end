@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="overflow-y: hidden; ">
 
 
    <Nav />
@@ -28,9 +28,23 @@
      <b-row>          
       <b-col cols="5">
 
-        <b-button class="shadow border  mob-btn" > Filter </b-button>
+        <b-button class="shadow border  mob-btn" id="show-btn" @click="showFilters" > Filter </b-button>
 
       </b-col>
+
+
+
+      <b-modal ref="myfilters" hide-footer title=" ">
+      <div class="d-block text-center">
+               
+
+               <Filters />
+      </div>
+    </b-modal>
+
+
+
+
 
       <b-col cols="3">
   
@@ -405,6 +419,12 @@ export default {
     handleChange(item, index) {
       console.log(item, index);
     },
+
+
+  showFilters(){
+     
+      this.$refs['myfilters'].show();
+  },
 
     togglemap(){
  

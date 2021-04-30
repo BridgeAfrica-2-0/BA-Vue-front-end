@@ -11,11 +11,10 @@
     <div class="people-style shadow">
       <b-row>
         <b-col cols="6" lg="4">
-          <div style="height: 100%;">
+          <div >
             <img
               src="https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg"
-              width="100%"
-              height="90%"
+              
               class="r-image"
             />
           </div>
@@ -24,7 +23,7 @@
         </b-col>
         <b-col cols="6" >
          <p class="text">
-            <strong> Sneakers Blec cc </strong> <br /> <strong> Description </strong>  <br />
+            <strong class="title"> Sneakers Blec cc </strong> <br /> <strong> Description </strong>  <br />
             This is just a dummy text dumy dummy things are always dummy and dummy add  things are always dummy  hjykt   
             <b-link> see more   </b-link>   <br />
              
@@ -74,7 +73,7 @@
         </b-col>
         <b-col cols="6" >
          <p class="text">
-            <strong> Sneakers Blec cc </strong> <br /> <strong> Description </strong>  <br />
+            <strong class="title"> Sneakers Blec cc </strong> <br /> <strong> Description </strong>  <br />
             This is just a dummy text dumy dummy things are always dummy and dummy    things are always dummy add hjykt   
             <b-link> see more   </b-link>   <br />
              
@@ -299,6 +298,37 @@ export default {
 }
 
 
+@media only screen and (max-width: 768px) {
+
+
+
+  
+.text {
+  color: #000;
+  
+    font-family: 'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 30px;
+    color: rgba(117,114,128,1);
+    text-align: left;
+
+Font-weight: normal ;
+Line-height:20px ;
+font-style:normal;
+
+
+padding: 1px;
+  text-align: left;
+
+  margin-left: -30px;
+
+  margin-right: -5px;
+
+  line-height: 25px;
+}
+
+
 
 .r-image {
   
@@ -311,14 +341,88 @@ export default {
   border-bottom-right-radius: 10px;
 
 
-  width: 100%;
+  width: 125px;
 
-height: 100%;
+height: 125px;
 padding: 4px;
 }
 
 
+.title{
+  font-size: 16px;
+   color:black;
+ 
+ line-height: 35px;
+  font-family: 'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif;
+}
 
+
+
+}
+
+
+
+
+@media only screen and (min-width: 768px) {
+
+
+
+
+title{
+  font-size: 20px;
+   color:black;
+ 
+ line-height: 35px;
+  font-family: 'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif;
+}
+
+.text {
+  color: #000;
+  
+    font-family: 'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 30px;
+    color: rgba(117,114,128,1);
+    text-align: left;
+
+Font-weight: normal ;
+Line-height:20px ;
+font-style:normal;
+
+
+padding: 1px;
+  text-align: left;
+
+  margin-left: -10px;
+
+  margin-right: -5px;
+
+  line-height: 25px;
+}
+
+
+
+
+.r-image {
+  
+ border-top-left-radius: 10px;
+
+  border-bottom-left-radius: 10px;
+
+  border-top-right-radius: 10px;
+
+  border-bottom-right-radius: 10px;
+
+
+  width: 200px;
+
+height: 200px;
+padding: 4px;
+}
+
+
+}
 
 
 

@@ -5,17 +5,14 @@
     v-bind="options"
   >
     <ly-tab-item
-    
       v-for="(item, index) in items"
       :key="index"
+      style="color:black"
       >
       <div style="display:inline-flex">
-      <span class="mr-1 primary"
       
-       >
-        <i :class="item.icon"></i>
-      </span>
-      <span >{{ item[labelKey] }}</span>  </div>  
+       
+      <span >{{ item[labelKey] }}</span>  </div>
 
     </ly-tab-item>
   </ly-tabbar>

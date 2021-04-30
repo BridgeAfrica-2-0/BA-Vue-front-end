@@ -1,7 +1,7 @@
 <template>
-  <header class=" bg-white">
+  <header class=" ">
     <nav
-      class="navbar bg-light navbar-expand-lg shadow-nav p-3 mb-3 rounded "
+      class="navbar  navbar-expand-lg  p-3 mb-3 rounded "
     >
       <div class="container-fluid ">
 
@@ -25,27 +25,45 @@
         </div>
 
         <div class="col-lg-5">
-          <form class="form-inline input-group">
+
+          
+          <form class="form-inline input-group shadow"  >
             <input
               id="search-ba"
               type="search"
               data-toggle="popover"
-              class="form-control border-right-0"
-              placeholder="search bridge africa"
+              class="form-control border-right-0 search-h"
+              placeholder="Find Pharmacy"
+              aria-label=""
+              data-original-title=""
+              title=""
+            />
+
+            <input
+              id="search-location"
+              type="search"
+              data-toggle="popover"
+              class="form-control border-right-0 search-h"
+              placeholder="Where    My Location"
               aria-label="search bridge africa"
               data-original-title=""
               title=""
             />
-            <div class="input-group-append">
-              <span class="input-group-text border-left-0 bg-white"
+
+
+            <div class="input-group-append"  style="color:white; background-color:orange">
+              <span class="input-group-text border-left-0 color-sit "   
                 ><a class="search text-ored" href=""
                   ><fas-icon
-                    class="primary search"
+                    class=" search"
+                    style="color:white"
                     :icon="['fas', 'search']"/></a
               ></span>
             </div>
           </form>
           <div id="search-popover" class="d-none"></div>
+
+
         </div>
 
         
@@ -116,6 +134,7 @@
             </a>
           </div>
           <div class="vl"></div>
+
           <div class="nav-item">
             <a
               id="messages"
@@ -244,6 +263,28 @@
               </div>
             </b-popover>
           </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
           <div class="nav-item">
             <a
               id="notif"
@@ -372,7 +413,20 @@
               </div>
             </b-popover>
           </div>
+
+
+
+
+
+
+
+
+
+
           <div class="vl"></div>
+
+
+
           <div class="nav-item">
             <a class="nav-link text-dark" href="">
               <span
@@ -387,6 +441,9 @@
             </a>
           </div>
           <div class="vl"></div>
+
+
+
           <div class="nav-item">
             <a
               id="other-menu"
@@ -522,6 +579,16 @@ export default {
 </script>
 
 <style scoped>
+
+
+.color-sit{
+  background-color: #e75c18;
+}
+
+.search-h{
+  height: 50px;
+ 
+}
 .input-size {
   width: 401px;
 }
@@ -601,9 +668,8 @@ export default {
     display: block;
   }
 }
-.shadow-nav {
-  box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1) !important;
-}
+
+
 .website-logo-name {
   font-size: 24px;
   color: #2e2e2e;
@@ -640,7 +706,7 @@ export default {
     border: 1px solid transparent;
     border-radius: .25rem;
     position: absolute !important;
-    top: -78px !important;
+    top: -90px !important;
     right: 13px !important;
 }
 

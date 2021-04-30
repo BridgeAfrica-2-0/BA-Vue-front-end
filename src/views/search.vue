@@ -1,59 +1,74 @@
 <template>
   <div>
-    <div class="searchnav">
-      <b-row>
-        <b-col cols="3">
-          <img
-            src="@/assets/balogo.png"
-            width="30%"
-            height="50%"
-            class="logo-image"
-          />
-        </b-col>
 
-        <b-col class="a-center">
-          <b-input-group class="my-auto input-size">
-            <b-form-input
-              id="inline-form-input-name"
-              class="input-size"
-              placeholder="Search Bridge Africa"
-            ></b-form-input>
 
-            <template #append>
-              <b-input-group-text class="b-groupe"
-                ><strong class="color-sit">
-                  <b-icon-search></b-icon-search> </strong
-              ></b-input-group-text>
-            </template>
+   <Nav />
 
-            <b-form-input
-              id="inline-form-input-name"
-              class="input-size"
-              placeholder="My location"
-            ></b-form-input>
-          </b-input-group>
-        </b-col>
+   <SubNav  />
 
-        <b-col cols="1"> </b-col>
-      </b-row>
-    </div>
+   
 
+    
+<hr />
     <div class="container searchly">
       <ly-tab
         v-model="selectedId"
         :items="items"
         :options="optionsnav"
-        activeColor="#1d98bd"
+        activeColor="#e75c18"
         @change="handleChange"
       >
       </ly-tab>
     </div>
 
-    <div class="container-flex mt-3 p-3">
+
+
+    <div class="container-fluid mobile-filters">      
+
+     <b-row>          
+      <b-col cols="5">
+
+        <b-button class="shadow border  mob-btn" > Filter </b-button>
+
+      </b-col>
+
+      <b-col cols="3">
+  
+     <b-button class="shadow border   mob-btn "  @click="togglelist"  > List </b-button>
+
+      </b-col>
+
+
+      <b-col cols="4">
+
+     <b-button class="shadow border   mob-btn "   @click="togglemap()"> Map </b-button>
+
+      </b-col>
+
+
+     </b-row>
+
+
+    </div>
+
+
+
+
+
+
+
+
+
+
+    <div class="container-flex mt-md-3 p-md-3">
       <b-row class="p-3">
-        <b-col cols="2">
+        <b-col cols="0" md="3" class="leftblock">
           <div id="all" class="ml-3">
-            <h6>Filters</h6>
+          
+  
+
+            <Filters />
+          
 
             <b-form-group
               label-cols-lg="3"
@@ -127,19 +142,29 @@
           </div>
         </b-col>
 
-        <b-col cols="6">
 
 
-          <div class="container-flex"   >
-             <b-card>
+
+
+
+        
+
+        <b-col cols="12"  md="6" ref="middleblock">
+
+
+          <div class="container-flex a-flex"   >
+           
 
                <!--filter for all takes just two fields at a time  -->
 
                <div id="all" v-if="selectedId == '0'"  >
               <h6>Sponsored Businesses</h6>
-
+            
+             <div>
 
               <Sponsor />
+
+              </div>
 
               <h6>Businesses</h6>
 
@@ -270,10 +295,13 @@
               <h6>Post</h6>
 
               <Post />
+               <hr />
 
               <Post />
+              <hr />
 
               <Post />
+              <hr />
 
               <Post />
 
@@ -297,9 +325,6 @@
 
 
 
-
-
-            </b-card>
           </div>
 
      
@@ -311,7 +336,7 @@
 
         </b-col>
 
-        <b-col cols="4"> <Map /> </b-col>
+        <b-col cols="12" md="3" class="showmap" ref="mapblock">   <div id="map" class="" > <Map />   </div> </b-col>
       </b-row>
     </div>
   </div>
@@ -327,12 +352,20 @@ import People from "@/components/search/people";
 import Network from "@/components/search/network";
 import Post from "@/components/search/posts";
 import Market from "@/components/search/market";
+import Nav from "@/components/navbar";
+
+import Filters from "@/components/search/filters";
+
+import SubNav from "@/components/subnav";
 
 import Sponsor from "@/components/search/sponsoredBusiness";
 
 export default {
   components: {
     LyTab,
+    Nav,
+    SubNav,
+    Filters,
     Map,
     Business,
     Sponsor,
@@ -372,11 +405,97 @@ export default {
     handleChange(item, index) {
       console.log(item, index);
     },
+
+    togglemap(){
+ 
+   this.$refs.mapblock.style.display = "block";   
+   this.$refs.middleblock.style.display = "none"; 
+
+ },
+
+
+  togglelist(){
+ 
+   this.$refs.mapblock.style.display = "none";   
+   this.$refs.middleblock.style.display = "block"; 
+
+ },
+
+
+    
   },
 };
 </script>
 
 <style scoped>
+
+
+
+
+
+@media only screen and (max-width: 768px) {
+  .showmap {
+    display: none;
+  }
+
+ .mob-btn{
+  background-color: white;
+  color: black;
+  border-color: white;
+  width: 80px;
+  border-radius: 5px;
+ }
+
+ 
+.mobile-filters{
+  display: block;
+}
+
+
+  .leftblock{
+       display: none;
+  }
+
+  .d-logo{
+    display: none;
+  }
+
+  .a-center {
+  margin-right: 0px;
+  margin-left: 0px;
+}
+
+  
+  }
+
+
+  
+@media only screen and (min-width: 768px) {
+  .showmap {
+    display: block;
+  }
+ 
+ .a-center {
+  margin-right: 200px;
+  margin-left: -100px;
+}
+.mobile-filters{
+  display: none;
+}
+
+  .leftblock{
+    display: block;
+  }
+
+  .d-logo{
+     display: block;
+  }
+  
+  }
+
+
+
+
 .input-size {
   height: 55px;
 }
@@ -389,10 +508,7 @@ export default {
   background-color: white;
 }
 
-.a-center {
-  margin-right: 200px;
-  margin-left: -100px;
-}
+
 
 .searchnav {
   margin: 3px;
@@ -412,8 +528,13 @@ export default {
     display: none;
   }
 
+
+
+
+
+
   .d-blockk {
-    display: block;
+    display: none;
   }
 }
 
@@ -429,4 +550,24 @@ export default {
 .br {
   border: 1px solid #ced4da;
 }
+
+@media only screen and (max-width: 768px) {
+   .a-flex{
+     margin-right: -15px;
+     margin-left: -15px;
+   }
+   
+   }
+
+
 </style>
+
+
+<style >
+li .nav-link:hover {
+    background-color: white;
+    color: #fff;
+}
+
+</style>
+

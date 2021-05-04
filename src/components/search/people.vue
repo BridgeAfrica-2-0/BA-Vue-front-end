@@ -3,97 +3,7 @@
     <div class="s-card">
 
 
-      <div class="people-style border shadow">
-        <b-row class="mb-1">
-          <b-col md="3" cols="4" sm="3" class="my-auto">
-            <b-avatar
-              class="p-avater"
-              variant="primary"
-              src="https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg"
-              size="5em"
-            ></b-avatar>
-          </b-col>
-
-          <b-col md="8" cols="8" sm="8" class="shift-left">
-            <div>
-              <b-row>
-                <b-col md="6" lg="12" xl="6" sm="6">
-                  <div class="e-name">
-                    <b-row>
-                      <b-col
-                        md="12"
-                        lg="7"
-                        cols="6"
-                        sm="12"
-                        xl="12"
-                        class="mt-lg-2"
-                      >
-                        <h6 class="mt-3 mt-lg-0 mt-xl-0">
-                          <b> howty blec </b>
-                        </h6>
-                      </b-col>
-
-                      <b-col
-                        md="12"
-                        lg="5"
-                        cols="6"
-                        sm="12"
-                        xl="12"
-                        class="mt-3 mt-lg-1 mt-xl-0"
-                      >
-                        <h6 class="follower">5K Community</h6>
-                      </b-col>
-                    </b-row>
-                  </div>
-                </b-col>
-
-                <b-col lg="12" xl="6" cols="12" sm="6" md="6">
-                  <div>
-                    <b-row class="mt-lg-0">
-                      <b-col
-                        md="12"
-                        lg="6"
-                        cols="6"
-                        sm="12"
-                        xl="12"
-                        class="mt-2 mt-lg-0 mt-xl-2 btn-2 center"
-                      >
-                        <b-button
-                          block
-                          variant="primary"
-                          size="sm"
-                          class="b-background flexx pobtn"
-                        >
-                          <b-icon icon="chat" class="mr-1"> </b-icon> Message
-                        </b-button>
-                      </b-col>
-
-                      <b-col
-                        md="12"
-                        lg="6"
-                        cols="6"
-                        sm="12"
-                        xl="12"
-                        class="mt-2 mt-lg-0 mt-xl-2 btn-2 center"
-                      >
-                        <b-button
-                          block
-                          size="sm"
-                          class="b-background flexx pobtn"
-                          variant="primary"
-                        >
-                          <b-icon icon="plus-circle" class="mr-1"> </b-icon>
-                          community
-                        </b-button>
-                      </b-col>
-                    </b-row>
-                  </div>
-                </b-col>
-              </b-row>
-            </div>
-          </b-col>
-        </b-row>
-      </div>
+    
 
 
 
@@ -111,32 +21,32 @@
               class="p-avater"
               variant="primary"
               src="https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg"
-              size="5em"
+              
             ></b-avatar>
           </b-col>
 
-          <b-col md="8" cols="8" sm="8" class="shift-left">
+          <b-col md="8" cols="8" sm="8" >
             <div>
-              <b-row>
-                <b-col md="6" lg="12" xl="6" sm="6">
+              <b-row class="shift">
+                <b-col md="12" lg="6" xl="6" sm="6">
                   <div class="e-name">
                     <b-row>
                       <b-col
-                        md="12"
-                        lg="7"
+                        md="6"
+                        lg="12"
                         cols="6"
                         sm="12"
                         xl="12"
                         class="mt-lg-2"
                       >
-                        <h6 class="mt-3 mt-lg-0 mt-xl-0">
-                          <b> howty blec </b>
-                        </h6>
+                        <div class="mt-2 mt-lg-0 mt-xl-0 username">
+                          <b> howty Itz blec </b>
+                        </div>
                       </b-col>
 
                       <b-col
-                        md="12"
-                        lg="5"
+                        md="6"
+                        lg="12"
                         cols="6"
                         sm="12"
                         xl="12"
@@ -148,16 +58,16 @@
                   </div>
                 </b-col>
 
-                <b-col lg="12" xl="6" cols="12" sm="6" md="6">
+                <b-col lg="6" xl="6" cols="12" sm="6" md="12">
                   <div>
                     <b-row class="mt-lg-0">
                       <b-col
-                        md="12"
-                        lg="6"
+                        md="6"
+                        lg="12"
                         cols="6"
                         sm="12"
                         xl="12"
-                        class="mt-2 mt-lg-0 mt-xl-2 btn-2 center"
+                        class="mt-2 mt-lg-2 mt-xl-2 btn-2 center"
                       >
                         <b-button
                           block
@@ -170,12 +80,12 @@
                       </b-col>
 
                       <b-col
-                        md="12"
-                        lg="6"
+                        md="6"
+                        lg="12"
                         cols="6"
                         sm="12"
                         xl="12"
-                        class="mt-2 mt-lg-0 mt-xl-2 btn-2 center"
+                        class="mt-2 mt-lg-2 mt-xl-2 btn-2 center"
                       >
                         <b-button
                           block
@@ -195,6 +105,11 @@
           </b-col>
         </b-row>
       </div>
+
+
+
+
+
 
 
 
@@ -233,32 +148,32 @@
               class="p-avater"
               variant="primary"
               src="https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg"
-              size="5em"
+             
             ></b-avatar>
           </b-col>
 
-          <b-col md="8" cols="8" sm="8" class="shift-left">
+          <b-col md="8" cols="8" sm="8" >
             <div>
-              <b-row>
-                <b-col md="6" lg="12" xl="6" sm="6">
+              <b-row class="shift">
+                <b-col md="12" lg="6" xl="6" sm="6">
                   <div class="e-name">
                     <b-row>
                       <b-col
-                        md="12"
-                        lg="7"
+                        md="6"
+                        lg="12"
                         cols="6"
                         sm="12"
                         xl="12"
                         class="mt-lg-2"
                       >
-                        <h6 class="mt-3 mt-lg-0 mt-xl-0">
-                          <b> howty blec </b>
-                        </h6>
+                       <div class="mt-2 mt-lg-0 mt-xl-0 username">
+                          <b> howty Itz blec </b>
+                       </div>
                       </b-col>
 
                       <b-col
-                        md="12"
-                        lg="5"
+                        md="6"
+                        lg="12"
                         cols="6"
                         sm="12"
                         xl="12"
@@ -270,16 +185,16 @@
                   </div>
                 </b-col>
 
-                <b-col lg="12" xl="6" cols="12" sm="6" md="6">
+                <b-col lg="6" xl="6" cols="12" sm="6" md="12">
                   <div>
                     <b-row class="mt-lg-0">
                       <b-col
-                        md="12"
-                        lg="6"
+                        md="6"
+                        lg="12"
                         cols="6"
                         sm="12"
                         xl="12"
-                        class="mt-2 mt-lg-0 mt-xl-2 btn-2 center"
+                        class="mt-2 mt-lg-2 mt-xl-2 btn-2 center"
                       >
                         <b-button
                           block
@@ -292,12 +207,12 @@
                       </b-col>
 
                       <b-col
-                        md="12"
-                        lg="6"
+                        md="6"
+                        lg="12"
                         cols="6"
                         sm="12"
                         xl="12"
-                        class="mt-2 mt-lg-0 mt-xl-2 btn-2 center"
+                        class="mt-2 mt-lg-2 mt-xl-2 btn-2 center"
                       >
                         <b-button
                           block
@@ -319,6 +234,113 @@
       </div>
 
 
+
+
+
+
+
+
+
+
+
+
+
+      
+
+
+
+
+ <div class="people-style border shadow">
+        <b-row class="mb-1">
+          <b-col md="3" cols="4" sm="3" class="my-auto">
+            <b-avatar
+              class="p-avater"
+              variant="primary"
+              src="https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg"
+             
+            ></b-avatar>
+          </b-col>
+
+          <b-col md="8" cols="8" sm="8" >
+            <div>
+              <b-row class="shift">
+                <b-col md="12" lg="6" xl="6" sm="6">
+                  <div class="e-name">
+                    <b-row>
+                      <b-col
+                        md="6"
+                        lg="12"
+                        cols="6"
+                        sm="12"
+                        xl="12"
+                        class="mt-lg-2"
+                      >
+                        <div class="mt-2 mt-lg-0 mt-xl-0 username">
+                          <b> howty Itz blec </b>
+                        </div>
+                      </b-col>
+
+                      <b-col
+                        md="6"
+                        lg="12"
+                        cols="6"
+                        sm="12"
+                        xl="12"
+                        class="mt-3 mt-lg-1 mt-xl-0"
+                      >
+                        <h6 class="follower">5K Community</h6>
+                      </b-col>
+                    </b-row>
+                  </div>
+                </b-col>
+
+                <b-col lg="6" xl="6" cols="12" sm="6" md="12">
+                  <div>
+                    <b-row class="mt-lg-0">
+                      <b-col
+                        md="6"
+                        lg="12"
+                        cols="6"
+                        sm="12"
+                        xl="12"
+                        class="mt-2 mt-lg-2 mt-xl-2 btn-2 center"
+                      >
+                        <b-button
+                          block
+                          variant="primary"
+                          size="sm"
+                          class="b-background flexx pobtn"
+                        >
+                          <b-icon icon="chat" class="mr-1"> </b-icon> Message
+                        </b-button>
+                      </b-col>
+
+                      <b-col
+                        md="6"
+                        lg="12"
+                        cols="6"
+                        sm="12"
+                        xl="12"
+                        class="mt-2 mt-lg-2 mt-xl-2 btn-2 center"
+                      >
+                        <b-button
+                          block
+                          size="sm"
+                          class="b-background flexx pobtn"
+                          variant="primary"
+                        >
+                          <b-icon icon="plus-circle" class="mr-1"> </b-icon>
+                          community
+                        </b-button>
+                      </b-col>
+                    </b-row>
+                  </div>
+                </b-col>
+              </b-row>
+            </div>
+          </b-col>
+        </b-row>
+      </div>
 
 
 
@@ -331,10 +353,7 @@ export default {};
 </script>
 
 <style scoped>
-.btn {
-  width: 100px;
-  font-size: 12px;
-}
+
 
 .flexx {
   display: inline-flex;
@@ -439,13 +458,16 @@ f-right {
 }
 
 @media only screen and (min-width: 1200px) {
-  .btn {
-    width: 105px;
-    text-align: right;
-  }
+  
+
+  .btn{
+    width: 123px;
+    height: 38px;
+    font-size:14px;
+}
 
   .center {
-    text-align: center;
+    text-align: right;
   }
 }
 
@@ -455,10 +477,7 @@ f-right {
     margin-top: 3px;
   }
 
-  .btn {
-    width: 90px;
-    margin-left: 20px;
-  }
+  
 
   .btn-2 {
     margin-left: 0px;
@@ -498,9 +517,6 @@ f-right {
     font-size: 10px;
   }
 
-  .shift-left {
-    margin-left: -20px;
-  }
 
   .btn {
     display: flex;
@@ -556,16 +572,15 @@ f-right {
     font-size: 10px;
   }
 
-  .shift-left {
-    margin-left: -20px;
-  }
-
+  
   .btn {
     display: flex;
     font-size: 10px;
   }
 }
 
+
+ @media only screen and  (min-width: 764px) {
 .p-buttons {
   margin-right: 50px;
   margin-left: 50px;
@@ -575,16 +590,110 @@ f-right {
 }
 
 .p-avater {
-  margin-right: -15px;
+    
+    width: 95px;
+    height: 95px;
+    margin-bottom: -4px;
+    margin-left: -5px;
 }
+
+.btn{
+    width: 123px;
+    height: 38px;
+    font-size:14px;
+}
+
+.center{
+  text-align: right;
+}
+
+
+.username{
+  font-size: 20px;
+  text-overflow: ellipsis;
+    overflow: hidden;
+    width: 100%;
+    height: 1.2em;
+    white-space: nowrap;
+}
+
+.follower{
+    font-size: 10px;
+    margin-top: 5px;
+}
+
+ }
+
+
+
+
+@media only screen and (min-width: 764px) and (max-width: 991.18px) {
+  
+  .center{
+    text-align: left;
+  }
+
+}
+
+@media only screen and (max-width: 762px) {
+
+.username{
+  font-size: 16px;
+  text-overflow: ellipsis;
+    overflow: hidden;
+    width: 100%;
+    height: 1.2em;
+    white-space: nowrap;
+}
+
+.btn{width: 85px;
+    height: 28px;
+    font-size: 10px;
+    }
+
+
+
+    .p-avater[data-v-dec82c14] {
+    width: 75px;
+    height: 75px;
+    margin-bottom: -8px;
+    margin-left: -5px;
+    margin-top: -4px;
+}
+
+.shift{
+  margin-left: -40px;
+}
+
+.follower {
+    font-size: 10px;
+    text-align: left;
+    
+}
+
+.center{
+  text-align: left;
+}
+
 .a-text {
   margin-top: 2px;
 }
 
-@media only screen and (max-width: 400px) {
+
   .pobtn {
-    font-size: 9px;
-    width: 80px;
+    font-size: 10px;
+   
   }
+  .e-name{
+    text-align: left;
+  }
+}
+
+@media only screen and (max-width: 521px) {
+    .e-name{
+    text-align: left;
+    margin-left:-20px
+  }
+    
 }
 </style>

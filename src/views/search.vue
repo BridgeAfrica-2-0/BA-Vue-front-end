@@ -38,7 +38,7 @@
       <div class="d-block text-center">
                
 
-               <Filters />
+                <Filters  v-bind:filterType="selectedId"     />           
       </div>
     </b-modal>
 
@@ -46,7 +46,7 @@
 
 
 
-      <b-col cols="3">
+      <b-col cols="3" md >
   
      <b-button class="shadow border   mob-btn "  @click="togglelist"  > List </b-button>
 
@@ -76,83 +76,14 @@
 
     <div class="container-flex mt-md-3 p-md-3">
       <b-row class="p-3">
-        <b-col cols="0" md="3" class="leftblock">
+        <b-col cols="0" md="0" xl="3" class="leftblock">
           <div id="all" class="ml-3">
           
   
 
-            <Filters />
+             <Filters  v-bind:filterType="selectedId"     />     
           
 
-            <b-form-group
-              label-cols-lg="3"
-              label="Location"
-              label-size="md"
-              label-class="font-weight-bold pt-0"
-              class="mb-0"
-            >
-            </b-form-group>
-            <b-form-select v-model="selected">
-              <b-form-select-option value="a">
-                My Location
-              </b-form-select-option>
-            </b-form-select>
-
-            <br />
-
-            <hr />
-
-            <b-form-group
-              label-cols-lg="12"
-              label="Neighbourhood"
-              label-size="md"
-              label-class="font-weight-bold pt-0"
-              class="mb-0"
-            >
-              <b-form-checkbox id="" class="a-text" name="" value="">
-                Buea</b-form-checkbox
-              >
-
-              <b-form-checkbox id="" class="a-text" name="" value="">
-                Tiko</b-form-checkbox
-              >
-
-              <b-form-checkbox id="" class="a-text" name="" value="">
-                Limbe</b-form-checkbox
-              >
-
-              <b-form-checkbox id="" class="a-text" name="" value="">
-                MUtengene</b-form-checkbox
-              >
-            </b-form-group>
-
-            <br />
-
-            <hr />
-
-            <b-form-group
-              label-cols-lg="12"
-              label="Distance"
-              label-size="md"
-              label-class="font-weight-bold pt-0"
-              class="mb-0"
-            >
-              <b-form-checkbox id="" class="a-text" name="" value="">
-                3km</b-form-checkbox
-              >
-
-              <b-form-checkbox id="" class="a-text" name="" value="">
-                9km</b-form-checkbox
-              >
-
-              <b-form-checkbox id="" class="a-text" name="" value="">
-                15km</b-form-checkbox
-              >
-
-              <b-form-checkbox id="" class="a-text" name="" value="">
-                25km</b-form-checkbox
-              >
-            </b-form-group>
           </div>
         </b-col>
 
@@ -163,7 +94,7 @@
 
         
 
-        <b-col cols="12"  md="6" ref="middleblock">
+        <b-col cols="12"  md="9" xl="6" ref="middleblock">
 
 
           <div class="container-flex a-flex"   >
@@ -451,9 +382,10 @@ export default {
 
 
 
-
-
 @media only screen and (max-width: 768px) {
+
+
+      
   .showmap {
     display: none;
   }
@@ -472,9 +404,6 @@ export default {
 }
 
 
-  .leftblock{
-       display: none;
-  }
 
   .d-logo{
     display: none;
@@ -490,7 +419,7 @@ export default {
 
 
   
-@media only screen and (min-width: 768px) {
+@media only screen and (min-width: 968px) {
   .showmap {
     display: block;
   }
@@ -503,10 +432,7 @@ export default {
   display: none;
 }
 
-  .leftblock{
-    display: block;
-  }
-
+  
   .d-logo{
      display: block;
   }
@@ -587,6 +513,34 @@ export default {
 li .nav-link:hover {
     background-color: white;
     color: #fff;
+}
+
+
+
+
+@media only screen and (max-width: 1201px) {
+       
+      
+
+      
+  .leftblock{
+       display: none;
+  }
+    
+
+}
+
+
+
+
+
+
+@media only screen and (min-width: 1204px) {
+
+      
+  .leftblock{
+    display: block;
+  }
 }
 
 </style>

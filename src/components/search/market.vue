@@ -264,7 +264,7 @@ export default {
 }
 
 .marketbtn{
-  margin-left: 30px;
+ 
   margin-bottom: 3px;
 }
 
@@ -356,6 +356,15 @@ padding: 4px;
   font-family: 'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif;
 }
 
+.btn{
+
+  padding-top: 6px;
+  font-size:10px;
+
+  Height : 28px;
+Width:85px;
+
+}
 
 
 }
@@ -367,14 +376,6 @@ padding: 4px;
 
 
 
-
-title{
-  font-size: 20px;
-   color:black;
- 
- line-height: 35px;
-  font-family: 'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif;
-}
 
 .text {
   color: #000;
@@ -421,6 +422,28 @@ height: 200px;
 padding: 4px;
 }
 
+
+
+
+.btn{
+  padding-top: 6px;
+
+  Height : 38px;
+Width:123px
+
+}
+
+
+
+
+
+.title{
+  font-size: 20px;
+   color:black;
+ 
+ line-height: 35px;
+  font-family: 'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif;
+}
 
 }
 

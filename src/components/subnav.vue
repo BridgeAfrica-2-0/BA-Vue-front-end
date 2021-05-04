@@ -76,11 +76,36 @@
       <template #button-content>
       <span class="drop-text"> Clothing   </span>
     </template>
-            
-          <b-dropdown-item href="#">EN</b-dropdown-item>
-          <b-dropdown-item href="#">ES</b-dropdown-item>
-          <b-dropdown-item href="#">RU</b-dropdown-item>
-          <b-dropdown-item href="#">FA</b-dropdown-item>
+         
+
+     <b-dropdown-item href="/search?category=Shoes">  	Shoes </b-dropdown-item>
+    <b-dropdown-item href="/search?category=	Bag">  	Bag </b-dropdown-item>
+
+
+     <b-dropdown-item href="/search?category=	Shoes">  	Shoes </b-dropdown-item>
+    <b-dropdown-item href="/search?category=	Perfume">  	Perfume </b-dropdown-item>
+
+
+     <b-dropdown-item href="/search?category=	Watch">  	Watch </b-dropdown-item>
+    <b-dropdown-item href="/search?category=Sweater">  Sweater </b-dropdown-item>
+
+     <b-dropdown-item href="/search?category=Jeans"> 	Jeans </b-dropdown-item>
+    <b-dropdown-item href="/search?category=Tops">  	Tops </b-dropdown-item>
+
+
+     <b-dropdown-item href="/search?category=Eggs">  	Suit </b-dropdown-item>
+    <b-dropdown-item href="/search?category=Skirt">  	Skirt </b-dropdown-item>
+
+
+     <b-dropdown-item href="/search?category=sweater">  	sweater </b-dropdown-item>
+    <b-dropdown-item href="/search?category=Jeans">  Jeans </b-dropdown-item>
+    <b-dropdown-item href="/search?category=Bags">  	Bags </b-dropdown-item>
+   
+   
+
+      
+
+         
         </b-nav-item-dropdown>
         
         
@@ -110,17 +135,28 @@
     <b-dropdown-item href="/search?category=Eggs"> Private </b-dropdown-item>
 
         </b-nav-item-dropdown> 
+
+
+
+          
+        <b-nav-item-dropdown text="Health Units" right>
+             <template #button-content>
+      <span class="drop-text"> Mores   </span>
+    </template>
+          
+          <b-dropdown-item href="/search?category=Eggs"> 	Legal service  </b-dropdown-item>
+    <b-dropdown-item href="/search?category=Eggs"> 	Professional services  </b-dropdown-item>
+    <b-dropdown-item href="/search?category=Eggs"> 		Home service   </b-dropdown-item>
+
+    <b-dropdown-item href="/search?category=Eggs"> Financial service  </b-dropdown-item>
+
+     <b-dropdown-item href="/search?category=Eggs"> more  </b-dropdown-item>
+
+
+        </b-nav-item-dropdown> 
         
     
         
-         
-        <b-nav-item-dropdown   text="More" type="dark"  right>
-            
-          <b-dropdown-item href="#">EN</b-dropdown-item>
-          <b-dropdown-item href="#">ES</b-dropdown-item>
-          <b-dropdown-item href="#">RU</b-dropdown-item>
-          <b-dropdown-item href="#">FA</b-dropdown-item>
-        </b-nav-item-dropdown> 
         
         
          </span>  

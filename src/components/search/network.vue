@@ -28,7 +28,7 @@
 
     <div class="people-style shadow">
       <b-row>
-        <b-col md="3" xl="3" lg="5" cols="5"  sm="3">
+         <b-col md="3" xl="3" lg="3" cols="5"  sm="3">
           <div >
             <img
               src="https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg"
@@ -38,7 +38,7 @@
             />
           </div>
         </b-col>
-        <b-col md="5" cols="7" xl="5" sm="5">
+        <b-col md="7" cols="7"  lg="5" sm="5">
           <p class="textt">
             <strong class="net-title"> Global Car Supple Network </strong> <br /><br />
             <strong> Category : </strong> Car marketing <br />
@@ -54,9 +54,9 @@
 
 
 
-        <b-col lg="12" md="4" xl="4" cols="12" sm="4">
+       <b-col lg="4" md="12" xl="4" cols="12" sm="4">
           <div class="s-button">
-     <b-row>  <b-col md="12"  lg="4"  xl="12" sm="12" cols="4" class="mt-2">    
+     <b-row>  <b-col md="4"  lg="12"  xl="12" sm="12" cols="4" class="mt-2">    
 
             <b-button block size="sm" class="b-background" variant="primary">
               <b-icon class="ico" icon="plus-circle"> </b-icon> Community
@@ -64,7 +64,7 @@
 
             </b-col>  
 
-        <b-col md="12"  lg="4"  xl="12" sm="12" cols="4" class="mt-2">  
+       <b-col md="4"  lg="12"  xl="12" sm="12" cols="4" class="mt-2">  
 
             <b-button block size="sm" class="b-background" variant="primary">
               <b-icon class="ico" icon="chat"> </b-icon> Message
@@ -72,7 +72,7 @@
 
             </b-col>  
 
-            <b-col  md="12"  lg="4"  xl="12" sm="12" cols="4"  class="mt-2">  
+            <b-col md="4"  lg="12"  xl="12" sm="12" cols="4" class="mt-2"> 
 
             
 
@@ -92,20 +92,21 @@
 
    
 
-
+   
 
     <div class="people-style shadow">
       <b-row>
-        <b-col md="3" xl="3" lg="5" cols="5"  sm="3">
+         <b-col md="3" xl="3" lg="3" cols="5"  sm="3">
           <div >
             <img
               src="https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg"
+            
               
               class="r-image"
             />
           </div>
         </b-col>
-        <b-col md="5" cols="7" xl="5" sm="5">
+        <b-col md="7" cols="7"  lg="5" sm="5">
           <p class="textt">
             <strong class="net-title"> Global Car Supple Network </strong> <br /><br />
             <strong> Category : </strong> Car marketing <br />
@@ -121,9 +122,9 @@
 
 
 
-        <b-col lg="12" md="4" xl="4" cols="12" sm="4">
+       <b-col lg="4" md="12" xl="4" cols="12" sm="4">
           <div class="s-button">
-     <b-row>  <b-col md="12"  lg="4"  xl="12" sm="12" cols="4" class="mt-2">    
+     <b-row>  <b-col md="4"  lg="12"  xl="12" sm="12" cols="4" class="mt-2">    
 
             <b-button block size="sm" class="b-background" variant="primary">
               <b-icon class="ico" icon="plus-circle"> </b-icon> Community
@@ -131,7 +132,7 @@
 
             </b-col>  
 
-        <b-col md="12"  lg="4"  xl="12" sm="12" cols="4" class="mt-2">  
+       <b-col md="4"  lg="12"  xl="12" sm="12" cols="4" class="mt-2">  
 
             <b-button block size="sm" class="b-background" variant="primary">
               <b-icon class="ico" icon="chat"> </b-icon> Message
@@ -139,7 +140,7 @@
 
             </b-col>  
 
-            <b-col  md="12"  lg="4"  xl="12" sm="12" cols="4"  class="mt-2">  
+            <b-col md="4"  lg="12"  xl="12" sm="12" cols="4" class="mt-2"> 
 
             
 
@@ -150,40 +151,6 @@
         </b-col>
       </b-row>
     </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -344,7 +311,7 @@ font-style:normal;
 padding: 1px;
   text-align: left;
 
-  margin-left: -10px;
+  margin-left: 30px;
 
   margin-right: -5px;
 

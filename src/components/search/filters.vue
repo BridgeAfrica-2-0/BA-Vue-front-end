@@ -1,12 +1,14 @@
 <template>
   <div>
 
-      <h6> Category </h6>
+     
     
        
-  
+    
 
-  
+
+  <div  v-if="filterType == '1' || filterType == '4' " >       
+     <h6> Category  </h6> 
    <b-form-checkbox
         v-for="category in categories"
         v-model="default_category"
@@ -29,10 +31,25 @@
 
   
 
-
    <b-form-checkbox
         v-for="agriculture in categories_filters"
-        v-model="selected"
+        v-model="selectedfilter"
+        :key="agriculture.value"
+        :value="agriculture.value"
+        @change="switchcategoriesfilters"
+        name="flavour-4a" button
+        class="m-1 shadow border br-3"
+        inline
+      >
+
+    {{ agriculture.text }}
+      </b-form-checkbox>
+
+
+      
+   <b-form-checkbox
+        v-for="agriculture in categories_sub_filters"
+        v-model="yayaya"
         :key="agriculture.value"
         :value="agriculture.value"
         
@@ -46,6 +63,338 @@
 
 
 
+       <b-form-group
+              label-cols-lg="3"
+              label="Region"
+              label-size="md"
+              label-class="font-weight-bold pt-0"
+              class="mb-0"
+            >
+            </b-form-group>              
+
+            <b-form-select v-model="selected">
+              <b-form-select-option value="a">
+                Yaounde
+              </b-form-select-option>
+            </b-form-select>
+
+            <br />
+
+           
+
+
+
+
+            
+            <b-form-group
+              label-cols-lg="3"
+              label="Division"
+              label-size="md"
+              label-class="font-weight-bold pt-0"
+              class="mb-0"
+            >
+            </b-form-group>              
+
+            <b-form-select v-model="selected">
+              <b-form-select-option value="a">
+                My Location
+              </b-form-select-option>
+            </b-form-select>
+
+            <br />
+
+            <hr />
+
+
+
+
+
+
+
+
+            <b-form-group
+              label-cols-lg="12"
+              label="Neighbourhood"
+              label-size="md"
+              label-class="font-weight-bold pt-0"
+              class="mb-0"
+            >
+              <b-form-checkbox id="" class="a-text" name="" value="">
+                Buea</b-form-checkbox
+              >
+
+              <b-form-checkbox id="" class="a-text" name="" value="">
+                Tiko</b-form-checkbox
+              >
+
+              <b-form-checkbox id="" class="a-text" name="" value="">
+                Limbe</b-form-checkbox
+              >
+
+              <b-form-checkbox id="" class="a-text" name="" value="">
+                MUtengene</b-form-checkbox
+              >
+            </b-form-group>
+
+            <br />
+
+            <hr />
+
+            <b-form-group
+              label-cols-lg="12"
+              label="Distance"
+              label-size="md"
+              label-class="font-weight-bold pt-0"
+              class="mb-0"
+            >
+              <b-form-checkbox id="" class="a-text" name="" value="">
+                3km</b-form-checkbox
+              >
+
+              <b-form-checkbox id="" class="a-text" name="" value="">
+                9km</b-form-checkbox
+              >
+
+              <b-form-checkbox id="" class="a-text" name="" value="">
+                15km</b-form-checkbox
+              >
+
+              <b-form-checkbox id="" class="a-text" name="" value="">
+                25km</b-form-checkbox
+              >
+            </b-form-group>
+
+
+      <div>
+        <span  v-if="filterType == '4' " >   
+    <label for="range-2">Price Range</label>
+    <b-form-input id="range-2" v-model="priceRange" type="range" min="1000" max="200000000" step="0.5"></b-form-input>
+    <div class="mt-2"> min: 1000  Max: {{ priceRange }}</div>
+
+        </span>
+  </div>
+  
+
+
+
+ </div>
+
+
+       
+  
+   
+  <div  v-if="filterType == '0'" >    
+       
+            <b-form-group
+              label-cols-lg="3"
+              label="Region"
+              label-size="md"
+              label-class="font-weight-bold pt-0"
+              class="mb-0"
+            >
+            </b-form-group>              
+
+            <b-form-select v-model="selected">
+              <b-form-select-option value="a">
+                Yaounde
+              </b-form-select-option>
+            </b-form-select>
+
+            <br />
+
+           
+
+
+
+
+            
+            <b-form-group
+              label-cols-lg="3"
+              label="Division"
+              label-size="md"
+              label-class="font-weight-bold pt-0"
+              class="mb-0"
+            >
+            </b-form-group>              
+
+            <b-form-select v-model="selected">
+              <b-form-select-option value="a">
+                My Location
+              </b-form-select-option>
+            </b-form-select>
+
+            <br />
+
+            <hr />
+
+
+
+
+
+
+
+
+            <b-form-group
+              label-cols-lg="12"
+              label="Neighbourhood"
+              label-size="md"
+              label-class="font-weight-bold pt-0"
+              class="mb-0"
+            >
+              <b-form-checkbox id="" class="a-text" name="" value="">
+                Buea</b-form-checkbox
+              >
+
+              <b-form-checkbox id="" class="a-text" name="" value="">
+                Tiko</b-form-checkbox
+              >
+
+              <b-form-checkbox id="" class="a-text" name="" value="">
+                Limbe</b-form-checkbox
+              >
+
+              <b-form-checkbox id="" class="a-text" name="" value="">
+                MUtengene</b-form-checkbox
+              >
+            </b-form-group>
+
+            <br />
+
+            <hr />
+
+            <b-form-group
+              label-cols-lg="12"
+              label="Distance"
+              label-size="md"
+              label-class="font-weight-bold pt-0"
+              class="mb-0"
+            >
+              <b-form-checkbox id="" class="a-text" name="" value="">
+                3km</b-form-checkbox
+              >
+
+              <b-form-checkbox id="" class="a-text" name="" value="">
+                9km</b-form-checkbox
+              >
+
+              <b-form-checkbox id="" class="a-text" name="" value="">
+                15km</b-form-checkbox
+              >
+
+              <b-form-checkbox id="" class="a-text" name="" value="">
+                25km</b-form-checkbox
+              >
+            </b-form-group>
+  </div>
+
+
+
+
+
+
+  
+  <div  v-if="filterType == '3'" >   
+    
+     <b-form-group
+              label-cols-lg="3"
+              label="Location"
+              label-size="md"
+              label-class="font-weight-bold pt-0"
+              class="mb-0"
+            >
+            </b-form-group>              
+
+            <b-form-select v-model="selected">
+              <b-form-select-option value="a">
+                Yaounde
+              </b-form-select-option>
+            </b-form-select>
+
+            <br />
+
+    
+     </div>
+
+
+
+
+     
+  <div  v-if="filterType == '2'" >   
+    
+     <b-form-group
+              label-cols-lg="3"
+              label="Profession"
+              label-size="md"
+              label-class="font-weight-bold pt-0"
+              class="mb-0"
+            >
+            </b-form-group>              
+
+             <b-form-input  placeholder="Search Profession"></b-form-input>
+
+            <br />
+
+
+
+            <b-form-checkbox
+      id="checkbox-1"
+     
+      name="checkbox-1"
+      
+      
+    >
+      Community
+    </b-form-checkbox>
+
+    
+     </div>
+
+
+
+
+
+
+
+      
+  <div  v-if="filterType == '5'" >   
+    
+     <b-form-group
+              label-cols-lg="12"
+              label="Posted Date"
+              label-size="md"
+              label-class="font-weight-bold pt-0"
+              class="mb-0"
+            >
+            </b-form-group>              
+
+             <b-form-datepicker id="example-datepicker" v-model="value" class="mb-2"> </b-form-datepicker>
+
+            <br />
+
+
+
+            <b-form-checkbox
+      id="checkbox-1"
+     
+      name="checkbox-1"
+      
+      
+    >
+      Community
+    </b-form-checkbox>
+
+    
+     </div>
+
+
+
+
+
+
+
+
+
+ 
 
 
 
@@ -61,10 +410,18 @@
 
 export default {
   name: "filters",
+
+  props: ['filterType'],
+
+
+
+
   data() {
     return {
       slide: 0,
       sliding: null,
+
+       priceRange: '1000',
 
       selected: "all",
       location: "any",
@@ -80,15 +437,18 @@ export default {
       agriculture:"",
       default_category:"Agriculture" ,
 
+      selectedfilter:"",
+
       map: false,
 
 
       categories: [
-        { item: "any", name: "Category : Any" },
+        { item: "Professional_and_home_service", name: "Professionals" },
         { item: "Agriculture ", name: "Agriculture " },
         { item: "Restaurant ", name: " Restaurant " },
         { item: "Electronics ", name: "Electronics " },
         { item: "Handicrafts", name: "Handicrafts" },
+        { item: "clothing", name: "clothing" },
         { item: "Mechanics", name: "Mechanics" },
         { item: "Health_unit ", name: "Health unit " },
         { item: "Bars", name: "Bars" },
@@ -102,6 +462,8 @@ export default {
       ],
 
       categories_filters:[],
+
+      categories_sub_filters:[],
 
 
 
@@ -131,6 +493,33 @@ export default {
       ],
 
 
+
+
+
+       station: [
+        { value: "Phone", text: "Phone" },
+        { value: "Laptop", text: "Laptop" },
+        { value: "Microwaves", text: "Microwaves" },
+        { value: "Ac", text: "Ac" },
+        { value: "Phone_accessory", text: "Phone accessory" }
+      ],
+
+
+        clothing: [
+        { value: "male", text: "male" },
+        { value: "female", text: "female" },
+        
+      ],
+
+
+
+
+
+
+
+
+
+   
 
 
 
@@ -172,24 +561,31 @@ export default {
 
 
 
+            
+ Handicrafts: [
+        { value: "Textiles_crafts ", text: "Textiles crafts" },
+        { value: "Functional crafts", text: "Functional crafts " },
+        { value: "Paper_crafts", text: "Paper crafts" },
+        { value: "Decorative_crafts", text: "Decorative crafts" },
+         { value: "Fashion_crafts", text: "Fashion crafts" },
+
+         
+             
+                
+
+      ],
+
+
+
  
 
 
 
   
  Health_unit : [
-        { value: "Fast_food ", text: "Fast food " },
-        { value: "French_restaurant", text: "French Restaurant " },
-        { value: "Chinese", text: "Chinese" },
-        { value: "Vegetarian", text: "Vegetarian" },
-         { value: "Thai", text: "Thai" },
-          { value: "Pizza", text: "Pizza" },
-           { value: "Burger", text: "Burger" },
-            { value: "Salad", text: "Salad" },
-             { value: "Indian", text: "Indian" },
-              { value: "Chicken_shop", text: "Chicken shop" },
-               { value: "Fish_chips ", text: "Fish chips " },
-                { value: "Hot_pot", text: "Hot pot" },
+        { value: "Hopistal ", text: "Hopistal " },
+        { value: "clinic", text: "Clinic " },
+        
                 
 
       ],
@@ -314,21 +710,145 @@ export default {
 
 
  Professional_and_home_service  : [
-        { value: "Fast_food ", text: "Fast food " },
-        { value: "French_restaurant", text: "French Restaurant " },
-        { value: "Chinese", text: "Chinese" },
-        { value: "Vegetarian", text: "Vegetarian" },
-         { value: "Thai", text: "Thai" },
-          { value: "Pizza", text: "Pizza" },
-           { value: "Burger", text: "Burger" },
-            { value: "Salad", text: "Salad" },
-             { value: "Indian", text: "Indian" },
-              { value: "Chicken_shop", text: "Chicken shop" },
-               { value: "Fish_chips ", text: "Fish chips " },
-                { value: "Hot_pot", text: "Hot pot" },
+        { value: "Legal_service", text: "Legal service " },
+        { value: "Professional_services", text: "Professional services  " },
+        { value: "Home_service ", text: "Home service " },
+        { value: "Financial_service", text: "Financial service " },
+         
                 
 
       ],
+
+
+  
+
+  
+
+ Legal_service  : [
+        { value: "Lawyers", text: "Lawyers " },
+        { value: "Business_consulting", text: "Business consulting  " },
+        { value: "Patent_law ", text: "Patent law " },
+        { value: "Patent_law", text: "Patent law" },
+
+        { value: "Public_relations", text: "Public relations" },
+         
+                
+
+      ],
+
+
+   
+  male : [
+        { value: "Shoes", text: "Shoes " },
+        { value: "Watch", text: "Watch " },
+        { value: "Perfume", text: "Perfume " },
+        { value: "Shirt", text: "Shirt " },
+        { value: "Bags", text: "Bags " },
+        { value: "Jeans", text: "Jeans " },
+        { value: "Cap", text: "Cap " },
+        { value: "Gloves", text: "Gloves " },
+        { value: "Suit", text: "Suit " },
+        { value: "Singlet", text: "Singlet  " },
+        { value: "sweater ", text: "sweater" },
+        
+         
+                
+
+      ],
+
+
+
+
+female : [
+        { value: "Shoes", text: "Shoes " },
+        { value: "Watch", text: "Watch " },
+        { value: "Perfume", text: "Perfume " },
+        { value: "Shirt", text: "Shirt " },
+        { value: "Bags", text: "Bags " },
+        { value: "Jeans", text: "Jeans " },
+        { value: "Cap", text: "Cap " },
+        { value: "Gloves", text: "Gloves " },
+        { value: "Suit", text: "Suit " },
+        { value: "Singlet", text: "Singlet  " },
+        { value: "sweater ", text: "sweater" },
+
+        { value: "Gown ", text: "Gown" },
+        { value: "Tops ", text: "Tops" },
+        { value: "sweater ", text: "sweater" },
+        
+         
+                
+
+      ],
+
+
+
+
+
+
+
+
+
+Professional_services  : [
+        { value: "Web_designers", text: "Web designers " },
+        { value: "Graphic_designers", text: "Graphic designers  " },
+        { value: "Architect ", text: "Architect " },
+        { value: "Patent_law", text: "Patent law" },
+
+        { value: "Life_coach", text: "Life coach" },
+            { value: "Marketers ", text: "Marketers " },
+                { value: "Advertising ", text: "Advertising " },
+                    { value: "Office_cleaning  ", text: "Office cleaning  " },
+
+                        { value: "Billing_service", text: " Billing service" },
+
+                            { value: "Wholesale ", text: "Wholesale " },
+                            
+                                { value: "Translation_service  ", text: "Translation service  " },
+                                 { value: "Employment_agency  ", text: "Employment agency  " },
+                                  { value: "Private_investigators ", text: "Private investigators " },
+                                   { value: "Personal_assistants ", text: "Personal assistants " },
+                                    { value: "Protocol ", text: "Protocol " },
+         
+                
+
+      ],
+
+
+
+
+ Home_service : [
+        { value: "Electrician", text: "Electrician " },
+        
+         { value: "Plumbing", text: "Plumbing" },
+          { value: "Carpeting", text: "Carpeting" },
+           { value: "Gardeners", text: "Gardeners" },
+           
+             { value: "Painters", text: "Painters" },
+             
+
+           
+                
+
+      ],
+
+
+       Financial_service : [
+        { value: "Insurance", text: "Insurance " },
+        
+         { value: "Investing", text: "Investing" },
+          { value: "Banks", text: "Banks" },
+           
+
+           
+                
+
+      ],
+
+
+
+
+
 
 
 
@@ -445,7 +965,44 @@ export default {
   components: {
    
   },
+
+  
+
   methods: {
+
+     switchcategoriesfilters(){
+
+           
+    console.log('hello blec');
+    console.log(this.selectedfilter);
+
+           switch(this.selectedfilter) {
+               case 'male': this.categories_sub_filters = this.male;
+               break;
+
+               case 'female': this.categories_sub_filters = this.female;
+               break;
+ 
+
+               case 'Legal_service': this.categories_sub_filters = this.Legal_service;
+               break;
+
+ 
+               case 'Professional_services': this.categories_sub_filters = this.Professional_services;
+               break;
+
+	 
+               case 'Home_service': this.categories_sub_filters = this.Home_service;
+               break;
+
+ 
+               case 'Financial_service': this.categories_sub_filters = this.Financial_service;
+               break;
+
+
+
+           }
+     },
 
     switchcategories(){
     
@@ -453,13 +1010,20 @@ export default {
     console.log(this.default_category);
 
       switch(this.default_category) {
-  case 'Agriculture ': this.categories_filters = this.agriculture_filters;
+  case 'Professional_and_home_service': this.categories_filters = this.Professional_and_home_service;
       
    break;
+
+   case 'Agriculture ': this.categories_filters = this.agriculture_filters;
+      
+   break;
+
+
+
   case 'Restaurant ': this.categories_filters = this.restaurants;
   break;
 
-  case 'Electronics ': this.categories_filters = this.Electronics;
+  case 'Electronics ': this.categories_filters = this.electronics;
   break;
 
 
@@ -469,7 +1033,7 @@ export default {
   case 'Mechanics': this.categories_filters = this.Mechanics;
   break;
 
-  case 'Handicrafts ': this.categories_filters = this.Handicrafts;
+  case 'Handicrafts': this.categories_filters = this.Handicrafts;
   break;
 
 
@@ -493,11 +1057,11 @@ export default {
   break;
   
 
-  case 'Hotels ': this.categories_filters = this.Hotels;
+  case 'Hotels': this.categories_filters = this.Hotels;
   break;
 
   
-  case 'station ': this.categories_filters = this.station;
+  case 'station': this.categories_filters = this.station;
   break;
 
   
@@ -506,6 +1070,10 @@ export default {
 
   
   case 'Taxis_service ': this.categories_filters = this.Taxis_service;
+  break;
+
+
+   case 'clothing': this.categories_filters = this.clothing;
   break;
   
   

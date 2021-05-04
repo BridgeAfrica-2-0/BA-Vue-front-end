@@ -40,6 +40,14 @@ export default {
   text-decoration: none;
   text-align: center;
   cursor: default;
+
+  font-family: 'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif;
+    font-weight: normal;
+    font-size: 16px;
+   
+    
+    
+
 }
 
 .ly-tab-item-icon {

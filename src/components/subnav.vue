@@ -1,8 +1,8 @@
 <template>
 
-<div class="container  mobi" >
+<div class="container-flex  mobi" >
 
-    <b-row >       <b-col cols="1">  </b-col >        <b-col cols="10">   
+    <b-row >       <b-col cols="1">  </b-col >        <b-col cols="10" style="text-align:center">   
 
   <span style="display:inline-flex">     
       

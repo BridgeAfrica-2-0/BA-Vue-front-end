@@ -10,7 +10,7 @@
                     
     <div class="people-style shadow">
       <b-row>
-        <b-col cols="6" lg="4">
+        <b-col cols="4" lg="4" sm="4" md="5">
           <div >
             <img
               src="https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg"
@@ -21,7 +21,7 @@
 
           
         </b-col>
-        <b-col cols="6" >
+        <b-col cols="8" sm="8" md="7" >
          <p class="text">
             <strong class="title"> Sneakers Blec cc </strong> <br /> <strong> Description </strong>  <br />
             This is just a dummy text dumy dummy things are always dummy and dummy add  things are always dummy  hjykt   
@@ -266,6 +266,7 @@ export default {
 .marketbtn{
  
   margin-bottom: 3px;
+  float: right;
 }
 
 .price{
@@ -292,13 +293,16 @@ export default {
   margin-bottom: 10px;
   margin-right: 8px;
   padding: 3px;
-  padding-bottom:6px;
+ padding-bottom: 26px;
  
 
 }
 
 
-@media only screen and (max-width: 768px) {
+
+
+
+@media only screen and (max-width: 540px) {
 
 
 
@@ -321,7 +325,7 @@ font-style:normal;
 padding: 1px;
   text-align: left;
 
-  margin-left: -30px;
+  
 
   margin-right: -5px;
 
@@ -372,7 +376,7 @@ Width:85px;
 
 
 
-@media only screen and (min-width: 768px) {
+@media only screen and (min-width: 540px) {
 
 
 
@@ -395,7 +399,7 @@ font-style:normal;
 padding: 1px;
   text-align: left;
 
-  margin-left: -10px;
+  
 
   margin-right: -5px;
 
@@ -520,4 +524,11 @@ h6 {
 .reply {
   cursor: pointer;
 }
+
+
+.text{
+  margin-left:3px;
+}
+
+
 </style>

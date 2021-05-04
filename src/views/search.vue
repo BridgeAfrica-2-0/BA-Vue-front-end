@@ -4,7 +4,7 @@
 
    <Nav />
 
-   <SubNav  />
+   <SubNav  style="margin-top:-25px"  />
 
    
 
@@ -20,6 +20,45 @@
       >
       </ly-tab>
     </div>
+
+
+
+
+
+
+
+
+
+    <div class="container-fluid medium-filters ">      
+
+     <b-row>          
+      <b-col cols="3">
+
+        <b-button class="shadow border  mob-btn" id="show-btn" @click="showFilters" > Filter </b-button>
+
+      </b-col>
+
+
+
+      <b-modal ref="myfilters" hide-footer title=" ">
+      <div class="d-block text-center">
+               
+
+                <Filters  v-bind:filterType="selectedId"     />           
+      </div>
+    </b-modal>
+
+
+
+
+
+     </b-row>
+
+
+    </div>
+
+
+
 
 
 
@@ -74,7 +113,7 @@
 
 
 
-    <div class="container-flex mt-md-3 p-md-3">
+    <div class="container-flex p-md-3 p-t-0 upp">
       <b-row class="p-3">
         <b-col cols="0" md="0" xl="3" class="leftblock">
           <div id="all" class="ml-3">
@@ -94,7 +133,7 @@
 
         
 
-        <b-col cols="12"  md="9" xl="6" ref="middleblock">
+        <b-col cols="12"  md="8" lg="8" xl="6" ref="middleblock">
 
 
           <div class="container-flex a-flex"   >
@@ -103,7 +142,7 @@
                <!--filter for all takes just two fields at a time  -->
 
                <div id="all" v-if="selectedId == '0'"  >
-              <h6>Sponsored Businesses</h6>
+              <h6>Sponsored Result</h6>
             
              <div>
 
@@ -281,7 +320,7 @@
 
         </b-col>
 
-        <b-col cols="12" md="3" class="showmap" ref="mapblock">   <div id="map" class="" > <Map />   </div> </b-col>
+        <b-col cols="12" md="4" lg="4" xl="3" class="showmap" ref="mapblock">   <div id="map" style="margin-top: 20px;" class="" > <Map />   </div> </b-col>
       </b-row>
     </div>
   </div>
@@ -380,11 +419,18 @@ export default {
 
 <style scoped>
 
+.upp{
+
+  margin-top:-20px;
+}
+
 
 
 @media only screen and (max-width: 768px) {
 
-
+.medium-filters{
+    display:none;
+  }
       
   .showmap {
     display: none;
@@ -420,6 +466,10 @@ export default {
 
   
 @media only screen and (min-width: 968px) {
+
+  
+
+
   .showmap {
     display: block;
   }
@@ -543,5 +593,29 @@ li .nav-link:hover {
   }
 }
 
+
+
+
+@media only screen and (min-width: 768px) and (max-width:1140px)  {
+
+  .medium-filters{
+    display:block;
+  }
+
+  .mobile-filters{
+  display: none;
+}
+
+
+}
+
+
+@media only screen and (min-width: 1140px) {
+ 
+ .medium-filters{
+    display:none;
+  }
+
+}
 </style>
 

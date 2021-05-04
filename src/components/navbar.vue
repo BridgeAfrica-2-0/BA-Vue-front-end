@@ -6,7 +6,7 @@
       <div class="container-fluid ">
 
 
-        <div class="col-md-3">
+        <div class="col-md-3 col-xl-3">
         <a class="navbar-brand" href="#">
           <img
             src="@/assets/img/logo3.png"
@@ -24,10 +24,20 @@
 
         </div>
 
-        <div class="col-lg-5">
+
+
+
+
+
+
+
+        <div class="col-lg-5 col-xl-6">
+
+    
+
 
           
-          <form class="form-inline input-group shadow"  >
+          <form class="form-inline input-group b-shadow b-radius"  >
             <input
               id="search-ba"
               type="search"
@@ -41,24 +51,36 @@
 
             <input
               id="search-location"
+              ref="foo"
               type="search"
+              list="browsers"
               data-toggle="popover"
               class="form-control border-right-0 search-h"
-              placeholder="Where    My Location"
+              placeholder="Where "
               aria-label="search bridge africa"
               data-original-title=""
               title=""
             />
 
+            <datalist id="browsers">    
+             <option value=" Current Location " >      </option>
+              <option value="Yaounde " />
+    
+           </datalist>
 
-            <div class="input-group-append"  style="color:white; background-color:orange">
-              <span class="input-group-text border-left-0 color-sit "   
-                ><a class="search text-ored" href=""
-                  ><fas-icon
-                    class=" search"
-                    style="color:white"
-                    :icon="['fas', 'search']"/></a
-              ></span>
+
+
+
+            <div class="input-group-append color-sit"  style="color:white;   border-top-right-radius: 10px;
+            border-bottom-right-radius: 10px; ">
+              <span class="input-group-text border-left-0 color-sit " style="width:56px"  
+                >   
+
+                 
+                  <b-icon icon="search" style="color:white" font-scale="1.5"></b-icon>
+              
+              </span>
+
             </div>
           </form>
           <div id="search-popover" class="d-none"></div>
@@ -115,25 +137,21 @@
 
 <b-collapse id="nav-collapse" is-nav>
 
-          <div class="vl"></div>
+          
           <div class="nav-item">
             <a class="nav-link text-dark" href="">
-              <span class="text-ored"
-                ><fas-icon class="primary" :icon="['fas', 'home']"
-              /></span>
+             
               Home
             </a>
           </div>
-          <div class="vl"></div>
+          
           <div class="nav-item">
             <a class="nav-link text-dark" href="">
-              <span class="text-ored"
-                ><fas-icon class="primary" :icon="['fas', 'store']"
-              /></span>
+              
               Market
             </a>
           </div>
-          <div class="vl"></div>
+         
 
           <div class="nav-item">
             <a
@@ -422,27 +440,23 @@
 
 
 
-
-          <div class="vl"></div>
-
-
-
-          <div class="nav-item">
+          <div class="nav-item" id="profilepic">
             <a class="nav-link text-dark" href="">
               <span
                 ><img
                   src="@/assets/img/profile-pic.jpg"
                   class="rounded-circle"
                   alt=""
-                  width="30"
-                  height="30"
+                  width="50"
+                  height="50"
               /></span>
-              Maxine
+             
             </a>
           </div>
-          <div class="vl"></div>
-
-
+         
+ <b-tooltip target="profilepic" variant="light" triggers="hover">
+       Maxine Moff
+  </b-tooltip>
 
           <div class="nav-item">
             <a
@@ -576,9 +590,20 @@
 export default {
   name: "navbar"
 };
+
+
 </script>
 
 <style scoped>
+
+.b-shadow{
+
+   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.b-radius{
+  border-radius: 10px;
+}
 
 
 .color-sit{
@@ -586,7 +611,8 @@ export default {
 }
 
 .search-h{
-  height: 50px;
+  height: 48px;
+ 
  
 }
 .input-size {
@@ -682,10 +708,21 @@ export default {
 .text-ored {
   color: #e75c18;
 }
+
+
 .text-dark {
-  color: #343a40 !important;
-  font-size: smaller;
+    
+    font-family: 'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 20px;
+    font-weight: 600;
+    color: rgba(43,39,60,1);
+    text-align: left;
 }
+
+
+
 .line-size {
   width: 150px;
 }

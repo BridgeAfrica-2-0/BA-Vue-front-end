@@ -143,6 +143,8 @@
 
 <script>
   import { validationMixin } from 'vuelidate'
+  import 'vue-material/dist/vue-material.min.css'
+import '@/assets/default.css'
   import {
     required,
     email,

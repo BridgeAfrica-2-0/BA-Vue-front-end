@@ -31,7 +31,7 @@
 
 
 
-        <div class="col-lg-5 col-xl-6">
+        <div class="col-lg-5 col-xl-5">
 
     
 

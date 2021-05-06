@@ -6,7 +6,7 @@
       <div class="container-fluid ">
 
 
-        <div class="col-md-3 col-xl-3">
+        <div class="col-md-3 col-xl-2.5">
         <a class="navbar-brand" href="#">
           <img
             src="@/assets/img/logo3.png"
@@ -31,7 +31,7 @@
 
 
 
-        <div class="col-lg-5 col-xl-5">
+        <div class="col-lg-5 col-xl-5.5">
 
     
 

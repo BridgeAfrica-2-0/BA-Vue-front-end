@@ -4,12 +4,12 @@
 
    <Nav />
 
-   <SubNav  style="margin-top:-25px"  />
+   <SubNav   @category="getCategory"   style="margin-top:-25px"  />
 
    
 
     
-<hr />
+<hr style="margin-top:-0px" />
     <div class="container searchly">
       <ly-tab
         v-model="selectedId"
@@ -44,7 +44,7 @@
       <div class="d-block text-center">
                
 
-                <Filters  v-bind:filterType="selectedId"     />           
+                <Filters  v-bind:filterType="selectedId"   v-bind:Selectedcategory="Selectedcategory"    />           
       </div>
     </b-modal>
 
@@ -120,7 +120,7 @@
           
   
 
-             <Filters  v-bind:filterType="selectedId"     />     
+             <Filters  v-bind:filterType="selectedId"    v-bind:Selectedcategory="Selectedcategory"     />     
           
 
           </div>
@@ -364,6 +364,7 @@ export default {
     return {
       selected: "all",
       selectedId: 0,
+      Selectedcategory:"all",
       bottomSelectedId: 0,
       location: "any",
       category: "any",
@@ -386,6 +387,13 @@ export default {
   },
 
   methods: {
+
+    getCategory(value){
+       this.Selectedcategory=value;
+    }
+    ,
+
+
     handleChange(item, index) {
       console.log(item, index);
     },

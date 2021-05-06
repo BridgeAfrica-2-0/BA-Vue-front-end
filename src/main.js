@@ -13,6 +13,10 @@ import {FontAwesomeIcon} from '@fortawesome/vue-fontawesome'
 import vSelect from 'vue-select';
 
 
+import Vuex from 'vuex';
+
+Vue.use(Vuex);
+
 
 
 import VueMaterial from 'vue-material'

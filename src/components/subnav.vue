@@ -106,7 +106,7 @@
     </div>
     </b-nav-item-dropdown>
 
-   </span>
+   </span>    
 
 
 
@@ -410,6 +410,14 @@
            </b-row>
 
 
+
+
+
+
+
+           
+
+
 </div>
   
 </template>
@@ -442,7 +450,13 @@ export default {
 
       onOverAgriculture() {
         this.$refs.Agriculture.visible = true;
+          
+           this.$emit('parentcategory', 'Agriculture');
+
       },
+
+
+
       onLeaveAgriculture() {
         this.$refs.Agriculture.visible = false;
       },
@@ -459,6 +473,7 @@ export default {
 
         onOverElectronics() {
         this.$refs.Electronics.visible = true;
+        this.$emit('parentcategory', 'Electronics');
       },
       onLeaveElectronics() {
         this.$refs.Electronics.visible = false;

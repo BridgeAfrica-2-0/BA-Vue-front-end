@@ -10,33 +10,76 @@
   <div  v-if="filterType == '1' || filterType == '4' " >       
      
 
-  
-  <!--
+ 
+<div class="" >  
+
+
    <b-form-checkbox
-        v-for="category in categories"
+        v-for="category in selectcategories.slice(0,4)"
         v-model="default_category"
-        :key="category.item"
-        :value="category.item"
+        :key="category.value"
+        :value="category.value"
        
-        name="flavour-4a" button
+        name="flavour-4a" 
         @change="switchcategories"
-        class="m-1 shadow border br-3"
-        inline
+        class="m-1   br-3"
+        
       >
 
-    {{ category.name }}
+    {{ category.text }}
 
       </b-form-checkbox>
 
+
+      <b-link  v-b-modal="'myModalllo'" >  See all  </b-link>
+
       <hr />
--->
+
+
+
+
+      <b-modal ref="myfilters"  id="myModalllo" hide-footer title=" ">
+         
+         <div  style="column-count: 2;"> 
+            <b-form-checkbox
+        v-for="agriculture in selectcategories"
+        v-model="selectedfilter"    
+        :key="agriculture.value"
+        :value="agriculture.value"
+        @change="switchcategoriesfilters"
+        name="flavour-4a" 
+        class=""
+       
+        
+        
+      >
+
+    {{ agriculture.text }}
+      </b-form-checkbox>
+
+   
+
+         </div>
+
+
+
+         <br />  
+   <b-button variant="primary" class="m-3  float-right"> Search    </b-button>
+
+    </b-modal>
+
+
+
+
+  </div>      
+
 
 
   <h6>  Filters  </h6>
 
    <b-form-checkbox
-        v-for="agriculture in categories_filters"
-        v-model="selectedfilter"
+        v-for="agriculture in categories_filters.slice(0,4)"
+        v-model="selectedfilter"    
         :key="agriculture.value"
         :value="agriculture.value"
         @change="switchcategoriesfilters"
@@ -47,7 +90,39 @@
 
     {{ agriculture.text }}
       </b-form-checkbox>
+  
+    <b-link  v-b-modal="'myModalll'" >  See all  </b-link>
 
+
+    <b-modal ref="myfilters"  id="myModalll" hide-footer title=" ">
+         
+         <div  style="column-count: 2;"> 
+            <b-form-checkbox
+        v-for="agriculture in categories_filters"
+        v-model="selectedfilter"    
+        :key="agriculture.value"
+        :value="agriculture.value"
+        @change="switchcategoriesfilters"
+        name="flavour-4a" 
+        class=""
+       
+        
+        
+      >
+
+    {{ agriculture.text }}
+      </b-form-checkbox>
+
+   
+
+         </div>
+
+
+
+         <br />  
+   <b-button variant="primary" class="m-3  float-right"> Search    </b-button>
+
+    </b-modal>
 
       
    <b-form-checkbox
@@ -71,7 +146,7 @@
               label="Region"
               label-size="md"
               label-class="font-weight-bold pt-0"
-              class="mb-0"
+              class="mb-0 text-left"
             >
             </b-form-group>              
 
@@ -93,7 +168,7 @@
               label-cols-lg="3"
               label="Division"
               label-size="md"
-              label-class="font-weight-bold pt-0"
+              label-class="font-weight-bold pt-0 text-left"
               class="mb-0"
             >
             </b-form-group>              
@@ -120,7 +195,7 @@
               label="Neighbourhood"
               label-size="md"
               label-class="font-weight-bold pt-0"
-              class="mb-0"
+              class="mb-0 text-left"
             >
               <b-form-checkbox id="" class="a-text" name="" value="">
                 Buea</b-form-checkbox
@@ -147,8 +222,8 @@
               label-cols-lg="12"
               label="Distance"
               label-size="md"
-              label-class="font-weight-bold pt-0"
-              class="mb-0"
+              label-class="font-weight-bold pt-0 text-left"
+              class="mb-0 text-left"
             >
               <b-form-checkbox id="" class="a-text" name="" value="">
                 3km</b-form-checkbox
@@ -172,7 +247,7 @@
         <span  v-if="filterType == '4' " >   
     <label for="range-2">Price Range</label>
     <b-form-input id="range-2" v-model="priceRange" type="range" min="1000" max="200000000" step="0.5"></b-form-input>
-    <div class="mt-2"> min: 1000  Max: {{ priceRange }}</div>
+    <div class="mt-2 text-left"> min: 1000  Max: {{ priceRange }}</div>
 
         </span>
   </div>
@@ -193,7 +268,7 @@
               label="Region"
               label-size="md"
               label-class="font-weight-bold pt-0"
-              class="mb-0"
+              class="mb-0 text-left"
             >
             </b-form-group>              
 
@@ -216,7 +291,7 @@
               label="Division"
               label-size="md"
               label-class="font-weight-bold pt-0"
-              class="mb-0"
+              class="mb-0 text-left"
             >
             </b-form-group>              
 
@@ -242,7 +317,7 @@
               label="Neighbourhood"
               label-size="md"
               label-class="font-weight-bold pt-0"
-              class="mb-0"
+              class="mb-0 text-left"
             >
               <b-form-checkbox id="" class="a-text" name="" value="">
                 Buea</b-form-checkbox
@@ -269,7 +344,7 @@
               label-cols-lg="12"
               label="Distance"
               label-size="md"
-              label-class="font-weight-bold pt-0"
+              label-class="font-weight-bold pt-0 text-left"
               class="mb-0"
             >
               <b-form-checkbox id="" class="a-text" name="" value="">
@@ -303,7 +378,7 @@
               label="Location"
               label-size="md"
               label-class="font-weight-bold pt-0"
-              class="mb-0"
+              class="mb-0 text-left"
             >
             </b-form-group>              
 
@@ -329,7 +404,7 @@
               label="Profession"
               label-size="md"
               label-class="font-weight-bold pt-0"
-              class="mb-0"
+              class="mb-0 text-left"
             >
             </b-form-group>              
 
@@ -365,7 +440,7 @@
               label-cols-lg="12"
               label="Posted Date"
               label-size="md"
-              label-class="font-weight-bold pt-0"
+              label-class="font-weight-bold pt-0 text-left"
               class="mb-0"
             >
             </b-form-group>              
@@ -414,9 +489,52 @@
 export default {
   name: "filters",
 
-  props: ['filterType', 'Selectedcategory'],
+  props: ['filterType', 'Selectedcategory', 'Selectedparentcategory'],
+
+  
 
   watch: { 
+
+
+
+         Selectedparentcategory:function(newVal){ 
+
+           console.log(newVal);   
+
+
+            switch(newVal) {
+
+       
+
+
+   case 'Agriculture': this.selectcategories = this.agriculture_filters;  
+   break;
+
+
+   
+   case 'Electronics': this.selectcategories = this.Fruits_filters;  
+   break;
+
+
+
+            }
+
+
+          },
+
+
+       
+
+
+
+
+
+
+
+
+
+
+   
       	Selectedcategory: function(newVal) { 
 
 
@@ -735,7 +853,34 @@ export default {
 
 
 
-      categories: [
+    
+
+
+      selectcategories: [
+        { value: "Vegetables", text: "Vegetables" },
+        { value: "Starch", text: "Starch" },
+      
+        { value: "Fruits", text: "Fruits" },
+       
+        { value: "Cereals", text: "Cereals" },
+        { value: "Oils", text: "Oils" },
+        { value: "Coffee", text: "Coffee" },
+        { value: "Spices", text: "Spices" },
+
+         { value: "Finished_Branded_Products", text: "Branded Products" },
+
+          { value: "Livestock", text: "Livestock" },
+
+           { value: "Dairy", text: "Dairy" },
+
+           
+        { value: "Raw_material", text: "Raw material " },
+       
+
+      ],
+
+      categories: [ 
+
         { item: "Professional_and_home_service", name: "Professionals" },
         { item: "Agriculture ", name: "Agriculture " },
         { item: "Restaurant ", name: " Restaurant " },
@@ -752,6 +897,7 @@ export default {
           { item: "station", name: " station  " },
            { item: "Mayor_concils", name: "Mayor_concils" },
            { item: "Taxis service", name: "Taxis service" },
+
       ],
 
       categories_filters:[],
@@ -763,19 +909,26 @@ export default {
 
        agriculture_filters: [
         { value: "Vegetables", text: "Vegetables" },
-        { value: "Food", text: "Food" },
+        { value: "Starch", text: "Starch" },
       
         { value: "Fruits", text: "Fruits" },
-        { value: "Meat", text: "Meat" },
+       
         { value: "Cereals", text: "Cereals" },
         { value: "Oils", text: "Oils" },
-        { value: "Fungi", text: "Fungi" },
-        { value: "Eggs", text: "Eggs" },
+        { value: "Coffee", text: "Coffee" },
+        { value: "Spices", text: "Spices" },
+
+         { value: "Finished_Branded_Products", text: "Branded Products" },
+
+          { value: "Livestock", text: "Livestock" },
+
+           { value: "Dairy", text: "Dairy" },
+
+           
         { value: "Raw_material", text: "Raw material " },
        
 
       ],
-
 
        electronics: [
         { value: "Phone", text: "Phone" },
@@ -1295,6 +1448,8 @@ Professional_services  : [
 
            }
      },
+
+
 
     switchcategories(){
     

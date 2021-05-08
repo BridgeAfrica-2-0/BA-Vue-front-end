@@ -553,6 +553,105 @@ export default {
 
 
 
+
+
+         Electronics_filters: [
+        { value: "Phone and accessories", text: "Phone and accessories" },
+        { value: "Home Appliances", text: "Home Appliances" },
+      
+        { value: "Computers, Tablets and accessories", text: "Computers, Tablets and accessories" },
+       
+        { value: "Office Electronics", text: "Office Electronics " },
+
+       
+       
+
+      ],
+
+
+
+      
+
+ restaurants_filters: [
+
+     { value: "African food", text: "African food" },
+     
+        { value: "Fast_food ", text: "Fast food " },
+        { value: "European food", text: "European food" },
+        { value: "French_restaurant", text: "French Restaurant " },
+        
+         { value: "Asian food", text: "Asian food" },
+
+        { value: "Bars", text: "Bars" },
+
+        { value: "Vegetarian", text: "Vegetarian" },
+        
+          { value: "Delivery", text: "Delivery" },
+           { value: "Catering", text: "Catering" },
+            { value: "Pizza", text: "Pizza" },
+             { value: "Bakery", text: "Bakery" },
+              
+                
+                
+
+      ],
+
+
+
+
+
+              
+ Handicrafts_filters: [
+        { value: "Home Decor ", text: "Home Decor" },
+        { value: "Textile", text: "Textile" },
+               
+
+      ],
+
+
+  
+
+
+  
+      
+ Mechanics_filters: [
+        { value: "Car care", text: "Car care " },
+        { value: "Parking", text: "Spare parts " },
+        { value: "Spare parts", text: "Car dealers" },
+
+        { value: "Auto Dealers", text: "Auto Dealers" },
+
+        
+             
+                
+
+      ],
+
+
+
+      
+
+ Health_unit_filters : [
+        { value: "Hospitals", text: "Hospitals" },
+        { value: "Clinics", text: "Clinics" },
+
+        { value: "COVID-19", text: "COVID-19" },
+
+        { value: "Pharmacies", text: "Pharmacies " },
+        
+      ],
+
+
+
+
+
+
+
+
+       
+
+
+
       
 
 
@@ -697,8 +796,28 @@ export default {
       ],
 
 
+      Cereals_filters: [
+        { value: "Wheat", text: "Wheat" },
+        { value: "Rice", text: "Rice" },
+      
+        { value: "Maize", text: "Maize" },
+        { value: "Oat", text: "Oat" },
+
+        { value: "Barley", text: "Barley" },
+
+        { value: "Millet", text: "Millet" },
+        
+         
+       
+
+      ],
+
+
  
   
+
+
+
 
 
   

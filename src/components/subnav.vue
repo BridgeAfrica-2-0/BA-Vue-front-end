@@ -21,11 +21,11 @@
              
               <b-dropdown-item  @click="category('Starch')" href="#"> Starch</b-dropdown-item>
 
-           <b-dropdown-item  @click="category('Vegetables')"  href="#">Vegetables</b-dropdown-item>
+           <b-dropdown-item  @click="category('Vegetables')"  href="#"><img class="img-fluid picture logo-img" src="@/assets/icons/vegetable1.png"  />Vegetables</b-dropdown-item>
 
-            <b-dropdown-item  @click="category('Fruits')" href="#">Fruits</b-dropdown-item>
+            <b-dropdown-item  @click="category('Fruits')" href="#"><img class="img-fluid picture logo-img" src="@/assets/icons/fruits.png"  />Fruits</b-dropdown-item>
 
-             <b-dropdown-item  @click="category('Cereals')"  href="#">Cereals</b-dropdown-item>
+             <b-dropdown-item  @click="category('Cereals')"  href="#"> <img class="img-fluid picture logo-img" src="@/assets/icons/Cereals.png"  />Cereals</b-dropdown-item>
       
               <b-dropdown-item  @click="category('Coffee')"  href="#">Coffee/Tea</b-dropdown-item> 
 
@@ -39,16 +39,16 @@
              <b-col cols="6">   
             
 
-           <b-dropdown-item  @click="category('Oils')" href="#"> Oil</b-dropdown-item>
+           <b-dropdown-item  @click="category('Oils')" href="#"><img class="img-fluid picture logo-img" src="@/assets/icons/oils.png"  /> Oil</b-dropdown-item>
 
            <b-dropdown-item  @click="category('Raw_material')"  href="#">Raw material </b-dropdown-item>
 
-            <b-dropdown-item  @click="category('Livestock')" href="#">Livestock</b-dropdown-item>
+            <b-dropdown-item  @click="category('Livestock')" href="#"> <img class="img-fluid picture logo-img" src="@/assets/icons/livestock.png"  /> Livestock</b-dropdown-item>
 
              <b-dropdown-item  @click="category('Spices')"  href="#">Spices</b-dropdown-item> 
 
             
-              <b-dropdown-item  @click="category('Dairy')"  href="#">Dairy</b-dropdown-item> 
+              <b-dropdown-item  @click="category('Dairy')"  href="#"> <img class="img-fluid picture logo-img" src="@/assets/icons/dairy.png"  /> Dairy</b-dropdown-item> 
               <b-dropdown-item  @click="category('Beans')"  href="#">Beans</b-dropdown-item>
 
    
@@ -86,9 +86,9 @@
       <b-row>  
         <b-col cols="6">   
 
-            <b-dropdown-item  @click="category('Phone accessory')"  href="#">Phone accessory</b-dropdown-item>
+            <b-dropdown-item  @click="category('Phone accessory')"  href="#"> <img class="img-fluid picture logo-img" src="@/assets/icons/phone.png"  /> Phone accessory</b-dropdown-item>
 
-            <b-dropdown-item  @click="category('Phone')"  href="#">Computers,  Tablets, <br /> $ Assoceries</b-dropdown-item> 
+            <b-dropdown-item  @click="category('Computers')"  href="#"> <div>    <b-row>  <b-col cols="6"> <img class="img-fluid picture logo-img" src="@/assets/icons/computer.jpg"  />  </b-col> <b-col cols="6">  Computers, <br /> Tablets & <br /> Assoceries  </b-col>  </b-row>   </div>  </b-dropdown-item> 
               
 
               
@@ -96,8 +96,8 @@
 
 
              <b-col cols="6">   
-             <b-dropdown-item  @click="category('Microwaves')"  href="#">Home Appliances</b-dropdown-item> 
-              <b-dropdown-item  @click="category('Ac')"  href="#">Office Electronics </b-dropdown-item>
+             <b-dropdown-item  @click="category('Home Appliances')"  href="#"> <img class="img-fluid picture logo-img" src="@/assets/icons/home appliances.png"  /> Home Appliances</b-dropdown-item> 
+              <b-dropdown-item  @click="category('Office Electronics')"  href="#"> <img class="img-fluid picture logo-img" src="@/assets/icons/office electronics.png"  /> Office Electronics </b-dropdown-item>
              </b-col> 
       
 
@@ -128,11 +128,11 @@
       <b-row>  
         <b-col cols="6">   
 
-            <b-dropdown-item  @click="category('Phone accessory')"  href="#"> African Food </b-dropdown-item>
+            <b-dropdown-item  @click="category('African Food')"  href="#"> <img class="img-fluid picture logo-img" src="@/assets/icons/Cereals.png"  />  African Food </b-dropdown-item>
 
-            <b-dropdown-item  @click="category('Phone')"  href="#"> Bars </b-dropdown-item> 
-             <b-dropdown-item  @click="category('Ac')"  href="#"> Catering  </b-dropdown-item>
-              <b-dropdown-item  @click="category('Ac')"  href="#">Asians </b-dropdown-item>
+            <b-dropdown-item  @click="category('Bars')"  href="#">  <img class="img-fluid picture logo-img" src="@/assets/icons/Cereals.png"  /> Bars </b-dropdown-item> 
+             <b-dropdown-item  @click="category('Catering')"  href="#"> <img class="img-fluid picture logo-img" src="@/assets/icons/Cereals.png"  /> Catering  </b-dropdown-item>
+              <b-dropdown-item  @click="category('Asian food')"  href="#"> <img class="img-fluid picture logo-img" src="@/assets/icons/Cereals.png"  />	Asian food </b-dropdown-item>
               
 
               
@@ -140,10 +140,10 @@
 
 
              <b-col cols="6">   
-             <b-dropdown-item  @click="category('Microwaves')"  href="#"> Fast Food </b-dropdown-item> 
-              <b-dropdown-item  @click="category('Ac')"  href="#">European Food </b-dropdown-item>
-               <b-dropdown-item  @click="category('Ac')"  href="#">Pizza </b-dropdown-item>
-                <b-dropdown-item  @click="category('Ac')"  href="#">More </b-dropdown-item>
+             <b-dropdown-item  @click="category('Fast Food')"  href="#"> <img class="img-fluid picture logo-img" src="@/assets/icons/Cereals.png"  /> Fast Food </b-dropdown-item> 
+              <b-dropdown-item  @click="category('European Food')"  href="#"> <img class="img-fluid picture logo-img" src="@/assets/icons/Cereals.png"  /> European Food </b-dropdown-item>
+               <b-dropdown-item  @click="category('Pizza')"  href="#"> <img class="img-fluid picture logo-img" src="@/assets/icons/Cereals.png"  />Pizza </b-dropdown-item>
+                <b-dropdown-item  @click="category('Bakery')"  href="#"> <img class="img-fluid picture logo-img" src="@/assets/icons/Cereals.png"  />Bakery </b-dropdown-item>
              </b-col> 
       
 
@@ -177,16 +177,16 @@
         <b-col cols="6">   
            
 
-           <b-dropdown-item  @click="category('Microwaves')"  href="#"> Mayorcouncils </b-dropdown-item> 
-              <b-dropdown-item  @click="category('Ac')"  href="#"> Women accessories </b-dropdown-item>
+           <b-dropdown-item  @click="category('Women clothing')"  href="#">  <img class="img-fluid picture logo-img" src="@/assets/icons/women clothing.png"  />   Women clothing </b-dropdown-item> 
+              <b-dropdown-item  @click="category('Women accessories')"  href="#">   <img class="img-fluid picture logo-img" src="@/assets/icons/phone.png"  />   Women accessories </b-dropdown-item>
                
              </b-col>   
 
 
              <b-col cols="6">   
              
-             <b-dropdown-item  @click="category('Ac')"  href="#">Men Clothing </b-dropdown-item>
-                <b-dropdown-item  @click="category('Ac')"  href="#">Men Clothing </b-dropdown-item>
+             <b-dropdown-item  @click="category('Men Clothing')"  href="#">  <img class="img-fluid picture logo-img" src="@/assets/icons/men clothing.png"  />   Men Clothing </b-dropdown-item>
+                <b-dropdown-item  @click="category('Men Accessories')"  href="#">  <img class="img-fluid picture logo-img" src="@/assets/icons/men accessories.png"  />   Men Accessories </b-dropdown-item>
 
              </b-col> 
       
@@ -220,14 +220,14 @@
         <b-col cols="6">   
            
 
-           <b-dropdown-item  @click="category('Ac')"  href="#">Regions </b-dropdown-item>
-                <b-dropdown-item  @click="category('Ac')"  href="#">Division </b-dropdown-item>
+           <b-dropdown-item  @click="category('Mayor Councils')"  href="#"> <img class="img-fluid picture logo-img" src="@/assets/icons/Cereals.png"  /> Mayor Councils </b-dropdown-item>
+                <b-dropdown-item  @click="category('Schools')"  href="#"> <img class="img-fluid picture logo-img" src="@/assets/icons/Cereals.png"  /> Schools </b-dropdown-item>
              </b-col>   
 
 
              <b-col cols="6">   
-           <b-dropdown-item  @click="category('Ac')"  href="#">City </b-dropdown-item>
-                <b-dropdown-item  @click="category('Ac')"  href="#">Sub-divisions </b-dropdown-item>
+           <b-dropdown-item  @click="category('Hospitals')"  href="#"> <img class="img-fluid picture logo-img" src="@/assets/icons/Cereals.png"  /> Hospitals </b-dropdown-item>
+                <b-dropdown-item  @click="category('Ministries ')"  href="#"> <img class="img-fluid picture logo-img" src="@/assets/icons/Cereals.png"  />Ministries  </b-dropdown-item>
              </b-col> 
       
 
@@ -273,8 +273,8 @@
         <b-col cols="6">   
             
 
-               <b-dropdown-item  @click="category('Ac')"  href="#">Hospital </b-dropdown-item>
-                   <b-dropdown-item  @click="category('Ac')"  href="#">Pharmacies </b-dropdown-item>
+               <b-dropdown-item  @click="category('Hospital')"  href="#"> <img class="img-fluid picture logo-img" src="@/assets/icons/Cereals.png"  /> Hospital </b-dropdown-item>
+                   <b-dropdown-item  @click="category('Pharmacies')"  href="#"> <img class="img-fluid picture logo-img" src="@/assets/icons/Cereals.png"  /> Pharmacies </b-dropdown-item>
                    
 
 
@@ -282,8 +282,8 @@
 
 
              <b-col cols="6">   
-               <b-dropdown-item  @click="category('Ac')"  href="#">Clinic </b-dropdown-item>
-                   <b-dropdown-item  @click="category('Ac')"  href="#">Carding </b-dropdown-item>
+               <b-dropdown-item  @click="category('Clinic')"  href="#"> <img class="img-fluid picture logo-img" src="@/assets/icons/Cereals.png"  /> Clinic </b-dropdown-item>
+                   <b-dropdown-item  @click="category('COVID-19')"  href="#"> <img class="img-fluid picture logo-img" src="@/assets/icons/Cereals.png"  /> COVID-19 </b-dropdown-item>
              </b-col> 
       
 
@@ -316,10 +316,10 @@
         <b-col cols="6" class="p-2">   
             
 
-               <b-dropdown-item  @click="category('Ac')"  href="#">Handicraft </b-dropdown-item>
-                   <b-dropdown-item  @click="category('Ac')"  href="#">Hotels </b-dropdown-item>
-                   <b-dropdown-item  @click="category('Ac')"  href="#">Transport </b-dropdown-item>
-                   <b-dropdown-item  @click="category('Ac')"  href="#">  Mens & Women  <br />   Grooming    </b-dropdown-item>
+               <b-dropdown-item  @click="category('Ac')"  href="#"> <img class="img-fluid picture logo-img" src="@/assets/icons/Cereals.png"  /> Handicraft </b-dropdown-item>
+                   <b-dropdown-item  @click="category('Ac')"  href="#"> <img class="img-fluid picture logo-img" src="@/assets/icons/Cereals.png"  />Hotels </b-dropdown-item>
+                   <b-dropdown-item  @click="category('Ac')"  href="#"> <img class="img-fluid picture logo-img" src="@/assets/icons/Cereals.png"  />Transport </b-dropdown-item>
+                   <b-dropdown-item  @click="category('Ac')"  href="#"> <img class="img-fluid picture logo-img" src="@/assets/icons/Cereals.png"  /> Mens & Women  <br />   Grooming    </b-dropdown-item>
                    
 
 
@@ -327,11 +327,11 @@
 
 
              <b-col cols="6" class="p-2">   
-               <b-dropdown-item  @click="category('Ac')"  href="#">Auto Mechanics </b-dropdown-item>
-                   <b-dropdown-item  @click="category('Ac')"  href="#">Carding </b-dropdown-item>
+               <b-dropdown-item  @click="category('Ac')"  href="#"> <img class="img-fluid picture logo-img" src="@/assets/icons/Cereals.png"  />Auto Mechanics </b-dropdown-item>
+                   <b-dropdown-item  @click="category('Ac')"  href="#"> <img class="img-fluid picture logo-img" src="@/assets/icons/Cereals.png"  />Carding </b-dropdown-item>
 
-                   <b-dropdown-item  @click="category('Ac')"  href="#"> Education </b-dropdown-item>
-                   <b-dropdown-item  @click="category('Ac')"  href="#">Professiona <br />  Service </b-dropdown-item>
+                   <b-dropdown-item  @click="category('Ac')"  href="#"> <img class="img-fluid picture logo-img" src="@/assets/icons/Cereals.png"  /> Education </b-dropdown-item>
+                   <b-dropdown-item  @click="category('Ac')"  href="#"> <img class="img-fluid picture logo-img" src="@/assets/icons/Cereals.png"  /> Professiona <br />  Service </b-dropdown-item>
              </b-col> 
       
 
@@ -520,6 +520,12 @@ export default {
 </script>
 
 <style scoped>
+
+
+.logo-img{
+  width: 50px;
+}
+
 
 
 

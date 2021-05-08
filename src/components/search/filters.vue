@@ -512,7 +512,7 @@ export default {
 
 
    
-   case 'Electronics': this.selectcategories = this.Fruits_filters;  
+   case 'Electronics': this.selectcategories = this.Electronics_filters;  
    break;
 
 
@@ -523,6 +523,7 @@ export default {
           },
 
 
+       
        
 
 
@@ -557,8 +558,8 @@ export default {
    break;
    
 
-  case 'starch': this.categories_filters = this.starch_filters;
-      
+  case 'Starch': this.categories_filters = this.starch_filters;
+  
    break;
 
    case 'Oils': this.categories_filters = this.Oils_filters;   
@@ -581,10 +582,141 @@ export default {
    case 'Dairy': this.categories_filters = this.Dairy_filters;   
    break;
    case 'Beans': this.categories_filters = this.Beans_filters;   
-   
+
   
-      
+
    break;
+
+   //electronics
+
+
+
+
+
+
+
+   case 'Phone accessory': this.categories_filters = this.phone_filters; 
+
+
+
+
+   break;
+   case 'Computers': this.categories_filters = this.Computers_filters; 
+
+
+
+   break;
+   case 'Office Electronics': this.categories_filters = this.Office_Electronics_filters; 
+
+
+
+   break;
+   case 'Home Appliances': this.categories_filters = this.Home_Appliances_filters; 
+ 
+   break;
+
+
+   //restaurants  
+
+
+
+
+   case 'Bars': this.categories_filters = this.Bars_filters; 
+ break;
+ case 'African Food': this.categories_filters = this.African_Food_filters; 
+ break;
+  case 'Asian food': this.categories_filters = this.Asian_food_filters; 
+ break;
+   case 'Fast Food': this.categories_filters = this.Fast_Food_filters; 
+ break;
+    case 'European Food': this.categories_filters = this.European_Food_filters; 
+ break;
+
+ case 'Pizza': this.categories_filters = this.Pizza_filters; 
+
+  break;
+   case 'Bakery': this.categories_filters = this.Bakery_filters; 
+   
+   break;
+   case 'Catering': this.categories_filters = this.Catering_filters; 
+ 
+   break;
+
+
+   //clothing cases
+
+case 'Women clothing': this.categories_filters = this.Women_clothing; 
+
+  break;
+   case 'Women accessories': this.categories_filters = this.Women_accessories; 
+   
+   break;
+
+   case 'Men Clothing': this.categories_filters = this.Men_Clothing; 
+
+  break;
+   case 'Men Accessories': this.categories_filters = this.Men_Accessories; 
+   
+   break;
+                
+
+
+//health ubits
+
+    case 'Hospital': this.categories_filters = this.Hospitals; 
+   
+   break;
+   case 'Pharmacies': this.categories_filters = this.Pharmacies; 
+ 
+   break;
+
+
+   case 'Clinic': this.categories_filters = this.Clinics_filters; 
+ 
+   break;
+
+
+
+case 'COVID-19': this.categories_filters = []; 
+ 
+   break;
+
+
+   //   Mayor Council       
+
+  
+
+
+
+
+
+    case 'Ministries': this.categories_filters = this.Ministries; 
+ 
+   break;
+
+
+
+
+    case 'Mayor Councils': this.categories_filters = this.Mayor_councils_filters_and_public_institution; 
+ 
+   break;
+
+
+
+
+    case 'Schools': this.categories_filters = this.Schools; 
+ 
+   break;
+
+
+
+
+
+
+
+
+
+   
 
 
       }
@@ -770,7 +902,39 @@ export default {
 
 
  
-  
+      Cereals_filters: [
+        { value: "Wheat", text: "Wheat" },
+        { value: "Rice", text: "Rice" },
+      
+        { value: "Maize", text: "Maize" },
+        { value: "Oat", text: "Oat" },
+
+        { value: "Barley", text: "Barley" },
+
+        { value: "Millet", text: "Millet" },
+        
+         
+       
+
+      ],
+
+
+
+      
+      	Raw_material_filters: [
+        { value: "Cocoa", text: "Cocoa" },
+        { value: "Coffee", text: "Coffee" },
+      
+        { value: "Rubber", text: "Rubber" },
+        { value: "Charcoal", text: "Charcoal" },
+
+      
+        
+         
+       
+
+      ],
+
 
 
   
@@ -930,13 +1094,26 @@ export default {
 
       ],
 
-       electronics: [
-        { value: "Phone", text: "Phone" },
-        { value: "Laptop", text: "Laptop" },
-        { value: "Microwaves", text: "Microwaves" },
-        { value: "Ac", text: "Ac" },
-        { value: "Phone_accessory", text: "Phone accessory" }
+
+
+        Electronics_filters: [
+        { value: "Phone and accessories", text: "Phone and accessories" },
+        { value: "Home Appliances", text: "Home Appliances" },
+      
+        { value: "Computers, Tablets and accessories", text: "Computers, Tablets and accessories" },
+       
+        { value: "Office Electronics", text: "Office Electronics " },
+
+       
+       
+
       ],
+
+
+
+
+
+     
 
 
 
@@ -951,9 +1128,11 @@ export default {
       ],
 
 
-        clothing: [
-        { value: "male", text: "male" },
-        { value: "female", text: "female" },
+        clothing_filters: [
+        { value: "men", text: "Men" },
+        { value: "female", text: "Female" },
+        { value: "Men Accessories", text: "Men Accessories" },
+        { value: "Women accessories", text: "Women accessories" },
         
       ],
 
@@ -962,6 +1141,16 @@ export default {
 
 
 
+ Health_unit_filters : [
+        { value: "Hospitals", text: "Hospitals" },
+        { value: "Clinics", text: "Clinics" },
+
+        { value: "COVID-19", text: "COVID-19" },
+
+        { value: "Pharmacies", text: "Pharmacies " },
+        
+      ],
+
 
 
 
@@ -969,19 +1158,26 @@ export default {
 
 
 
- restaurants: [
+ restaurants_filters: [
+
+     { value: "African food", text: "African food" },
+     
         { value: "Fast_food ", text: "Fast food " },
+        { value: "European food", text: "European food" },
         { value: "French_restaurant", text: "French Restaurant " },
-        { value: "Chinese", text: "Chinese" },
+        
+         { value: "Asian food", text: "Asian food" },
+
+        { value: "Bars", text: "Bars" },
+
         { value: "Vegetarian", text: "Vegetarian" },
-         { value: "Thai", text: "Thai" },
-          { value: "Pizza", text: "Pizza" },
-           { value: "Burger", text: "Burger" },
-            { value: "Salad", text: "Salad" },
-             { value: "Indian", text: "Indian" },
-              { value: "Chicken_shop", text: "Chicken shop" },
-               { value: "Fish_chips ", text: "Fish chips " },
-                { value: "Hot_pot", text: "Hot pot" },
+        
+          { value: "Delivery", text: "Delivery" },
+           { value: "Catering", text: "Catering" },
+            { value: "Pizza", text: "Pizza" },
+             { value: "Bakery", text: "Bakery" },
+              
+                
                 
 
       ],
@@ -990,16 +1186,14 @@ export default {
 
 
       
- Mechanics: [
-        { value: "Auto_repair ", text: "Auto repair " },
-        { value: "Parking", text: "Parking " },
-        { value: "Car_dealers", text: "Car dealers" },
-        { value: "Motorcycle_dealers", text: "Motorcycle_dealers" },
-         { value: "Car_wash", text: "Car_wash" },
-          { value: "Tires", text: "Tires" },
-           { value: "Auto_glass_services", text: "Auto_glass_services" },
-           
-             { value: "Car_renting", text: "Car_renting" },
+ Mechanics_filters: [
+        { value: "Car care", text: "Car care " },
+        { value: "Parking", text: "Spare parts " },
+        { value: "Spare parts", text: "Car dealers" },
+
+        { value: "Auto Dealers", text: "Auto Dealers" },
+
+        
              
                 
 
@@ -1007,17 +1201,11 @@ export default {
 
 
 
-            
- Handicrafts: [
-        { value: "Textiles_crafts ", text: "Textiles crafts" },
-        { value: "Functional crafts", text: "Functional crafts " },
-        { value: "Paper_crafts", text: "Paper crafts" },
-        { value: "Decorative_crafts", text: "Decorative crafts" },
-         { value: "Fashion_crafts", text: "Fashion crafts" },
-
-         
-             
-                
+              
+ Handicrafts_filters: [
+        { value: "Home Decor ", text: "Home Decor" },
+        { value: "Textile", text: "Textile" },
+               
 
       ],
 
@@ -1044,22 +1232,7 @@ export default {
 
 
   
- Pharmacies : [
-        { value: "Fast_food ", text: "Fast food " },
-        { value: "French_restaurant", text: "French Restaurant " },
-        { value: "Chinese", text: "Chinese" },
-        { value: "Vegetarian", text: "Vegetarian" },
-         { value: "Thai", text: "Thai" },
-          { value: "Pizza", text: "Pizza" },
-           { value: "Burger", text: "Burger" },
-            { value: "Salad", text: "Salad" },
-             { value: "Indian", text: "Indian" },
-              { value: "Chicken_shop", text: "Chicken shop" },
-               { value: "Fish_chips ", text: "Fish chips " },
-                { value: "Hot_pot", text: "Hot pot" },
-                
-
-      ],
+ Pharmacies : [],
 
 
 
@@ -1071,22 +1244,66 @@ export default {
 
 
   
- Educations : [
-        { value: "Fast_food ", text: "Fast food " },
-        { value: "French_restaurant", text: "French Restaurant " },
-        { value: "Chinese", text: "Chinese" },
-        { value: "Vegetarian", text: "Vegetarian" },
-         { value: "Thai", text: "Thai" },
-          { value: "Pizza", text: "Pizza" },
-           { value: "Burger", text: "Burger" },
-            { value: "Salad", text: "Salad" },
-             { value: "Indian", text: "Indian" },
-              { value: "Chicken_shop", text: "Chicken shop" },
-               { value: "Fish_chips ", text: "Fish chips " },
-                { value: "Hot_pot", text: "Hot pot" },
+ Educations_filters : [
+        { value: "Primary Education", text: "Primary Education" },
+
+        { value: "Secondary Education", text: "Secondary Education" },
+
+
+
+        { value: "Tertiary Education", text: "Tertiary Education" },
+
+
+        { value: "Vocational", text: "Vocational training centers" },
+         
                 
 
       ],
+
+
+ 
+
+ Grooming_filters : [
+
+        { value: "Women Grooming", text: "Women Grooming" },
+
+        { value: "Men Grooming", text: "Men Grooming" },
+
+
+      ],
+
+
+
+
+
+
+   
+   Transport_filters: [
+
+        { value: "bus parks", text: "bus parks" },
+
+        { value: "car parks ", text: "car parks " },
+          { value: "train stations", text: "train stations " },
+
+            { value: "seaports", text: "seaports" },
+              { value: "Taxis", text: "Taxis " },
+                { value: "import", text: "Import/Export " },
+
+
+      ],   
+
+
+
+  
+   
+ Hotels_filters: [
+        { value: "Hotels ", text: "Hotels " },
+        { value: "Resorts", text: "Resorts" },
+        { value: "Motels", text: "Motels" },
+       
+
+      ],
+      
 
 
 
@@ -1157,11 +1374,29 @@ export default {
 
  Professional_and_home_service  : [
         { value: "Legal_service", text: "Legal service " },
-        { value: "Professional_services", text: "Professional services  " },
-        { value: "Home_service ", text: "Home service " },
-        { value: "Financial_service", text: "Financial service " },
-         
-                
+        { value: "Marketing", text: "Marketing" },
+
+        { value: "Web, Graphic Design and Printing", text: "Web, Graphic Design and Printing" },
+
+
+        { value: "Event Planning and Rentals", text: "Event Planning and Rentals" },
+
+
+        { value: "Cleaning Services", text: "Cleaning Services" },
+
+
+        { value: "Translation services", text: "Translation services" },
+
+
+         { value: "Employment agency ", text: "Employment agency " },
+
+          { value: "Real Estate Agency and Land", text: "Real Estate Agency and Land" },
+
+
+           { value: "Housing and Construction", text: "Housing and Construction" },
+
+            { value: "Internet and Media", text: "Internet and Media" },
+                   
 
       ],
 
@@ -1170,17 +1405,7 @@ export default {
 
   
 
- Legal_service  : [
-        { value: "Lawyers", text: "Lawyers " },
-        { value: "Business_consulting", text: "Business consulting  " },
-        { value: "Patent_law ", text: "Patent law " },
-        { value: "Patent_law", text: "Patent law" },
 
-        { value: "Public_relations", text: "Public relations" },
-         
-                
-
-      ],
 
 
    
@@ -1316,10 +1541,20 @@ Professional_services  : [
       ],
  
 
+
+
+
+
+
       
- Mayor_councils : [
-        { value: "Town ", text: "Town " },
-        { value: "City", text: "City " },
+ Mayor_councils_filters_and_public_institution: [
+        { value: "Mayor Councils ", text: "Mayor Councils" },
+        { value: "Schools", text: "Schools " },
+
+        { value: "Hospitals", text: "Hospitals " },
+
+        { value: "Ministries ", text: "Ministries " },
+
    
                 
 
@@ -1343,7 +1578,606 @@ Professional_services  : [
 
 
 
+
+
+ African_food_filters : [
+        { value: "Kati-kati", text: "Kati-kati " },
+        { value: "Eru", text: "Eru " },
+        { value: "Ndole", text: "Ndole" },
+        { value: "Pepper soup", text: "Pepper soup" },
+         { value: "Grilled fish", text: "Grilled fish" },
+          { value: "Ndjama Ndjama", text: "Ndjama Ndjama" },
+          { value: "Koki", text: "Koki" },
+          { value: "Achu", text: "Achu" },
+          { value: "Mbongo Tchobi", text: "Mbongo Tchobi" },
+          { value: "Okok", text: "Okok" },
        
+           
+                
+
+      ],
+
+
+
+
+
+
+
+ 	Fast_food_filters : [
+        { value: "Beef", text: " Beef" },
+        { value: "Pizza", text: "Pizza " },
+        { value: "Pork", text: "Pork" },
+        { value: "Beef", text: " Beef" },
+        { value: "Hamburger", text: "Hamburger " },
+        { value: "Chicken", text: "Chicken" },
+
+
+
+        { value: "Omelets", text: " Omelets" },
+        { value: "Grilled fish", text: "Grilled fish " },
+        { value: "Natural Juice", text: "Natural Juice" },
+
+
+        { value: "Puff-puff", text: "Puff-puff" },
+         { value: "Grilled fish", text: "Grilled fish" },
+          { value: "Soya", text: "Soya" },
+          { value: "Shawarma", text: "Shawarma" },
+         
+       
+           
+                
+
+      ],
+
+
+      
+ 	Asian_food_filters : [
+       
+        { value: "Chinese Food", text: "Chinese Food " },
+        { value: "Indian Food", text: "Indian Food" },
+        
+         
+       
+           
+                
+
+      ],
+
+
+
+    
+ 	Bars_filters : [
+       
+         { value: "Non-alcoholic drinks", text: "Non-alcoholic drinks" },
+          { value: "Alcoholic drinks", text: "Alcoholic drinks" },
+            { value: "Snacks", text: "Snacks" },
+          { value: "Nightclubs", text: "Nightclubs" },
+           
+                 
+
+      ],
+
+
+
+
+
+ 	phone_filters: [
+        { value: "Tecno", text: " Tecno" },
+        { value: "Infinix", text: "Infinix " },
+        { value: "Samsung", text: "Samsung" },
+        { value: "Iphone", text: " Iphone" },
+        { value: "Itel", text: "Itel " },
+        { value: "Huawei", text: "Huawei" },
+
+
+
+        { value: "LG", text: " LG" },
+        { value: "Nokia", text: "Nokia " },
+        { value: "Batteries", text: "Batteries" },
+
+
+        { value: "Chargers", text: "Chargers" },
+         { value: "headsets", text: "headsets" },
+          { value: "Phone casing", text: "Phone casing" },
+         
+         
+       
+           
+                
+
+      ],
+
+
+      
+ 	Home_Appliances_filters : [
+        { value: "Refrigerator", text: " Refrigerator" },
+        { value: "Blender", text: "Blender " },
+        { value: "Microwave", text: "Microwave" },
+        { value: "Pressing Iron", text: " Pressing Iron" },
+        { value: "Waterheater", text: "Waterheater " },
+        { value: "AC", text: "AC" },
+
+
+
+        { value: "LG", text: " LG" },
+        { value: "Fan", text: "Fan " },
+        { value: "TV/Radio", text: "TV/Radio" },
+
+
+        { value: "Generator", text: "Generator" },
+         { value: "regulator", text: "regulator" },
+          { value: "Solar system", text: "Solar system" },
+
+          { value: "Gas cooker", text: " Gas cooker" },
+         
+         
+       
+           
+                
+
+      ],
+
+
+
+
+
+ 	Computers_filters : [
+        { value: "Laptops", text: " Laptops" },
+        { value: "Desktops", text: "Desktops " },
+        { value: "Video Games", text: "Video Games" },
+        { value: "Gaming Consoles", text: " Gaming Consoles" },
+        { value: "Monitors", text: "Monitors " },
+        { value: "Computer accessories ", text: "Computer accessories " },
+
+
+
+        { value: "Tablets", text: " Tablets" },
+        { value: "Storage", text: "Storage" },
+
+        
+         
+       
+           
+                
+
+      ],
+
+
+   
+   
+
+
+
+
+      	Office_Electronics_filters : [
+        { value: "Laptops", text: " Laptops" },
+        { value: "Desktops", text: "Desktops " },
+        { value: "Scanners/Printers", text: "Scanners/Printers" },
+        { value: "AC", text: " AC" },
+        
+      ],
+
+
+
+
+
+
+
+
+
+
+	Home_Decor_filters : [
+        { value: "Juju hats", text: " Juju hats" },
+        { value: "Beaded Baskets", text: "Beaded Baskets " },
+        { value: "Carpentry", text: "Carpentry" },
+        { value: "Paintings", text: " Paintings" },
+        { value: "Hamburger", text: "Hamburger " },
+        { value: "Chicken", text: "Chicken" },
+
+
+
+        { value: "Omelets", text: " Omelets" },
+       
+                
+
+      ],
+
+
+
+
+ 	Textile_filters : [
+        { value: "Embroidery", text: " Embroidery" },
+        { value: "Knitting", text: "Knitting " },
+        { value: "Weaving", text: "Weaving" },
+        { value: "Tailoring", text: " Tailoring" },
+                
+
+      ],
+
+
+
+
+
+ 	Car_care_filters : [
+        { value: "Car wash", text: " Car wash" },
+        { value: "mechanic", text: "mechanic " },
+        { value: "Parking", text: "Parking" },
+        { value: "maintenance products", text: " maintenance products" },
+                
+
+      ],
+
+
+      
+ 	Spare_parts_filters : [
+        { value: "Tires", text: "Tires" },
+        { value: "lamps", text: "lamps" },
+        { value: "Steering", text: "Steering" },
+        { value: "wheel", text: "wheel" },
+                
+
+      ],
+ 
+ Auto_Dealers_filters : [
+        { value: "Car sales and rentals", text: "Car sales and rentals" },
+        { value: "Bike sales and rentals", text: "Bike sales and rentals" },
+     
+
+      ],
+
+ 
+
+      
+ 	Hospitals_filters : [
+        { value: "public", text: "public" },
+        { value: "private", text: "private" },
+        { value: "Regional", text: "Regional" },
+      
+                
+
+      ],
+ 
+
+   
+ 	Clinics_filters : [
+        { value: "Dental clinics", text: "Dental clinics" },
+        { value: "Optics", text: "Optics" },
+        { value: "physical therapy", text: "physical therapy" },
+        { value: "physical therapy", text: "physical therapy" },
+        { value: "Maternal Health", text: "Maternal Health" },
+      
+                
+
+      ],
+
+
+      
+      
+ 	primary_eduction_filters : [
+        
+      
+        { value: "Public schools", text: "Public schools" },
+         { value: "Private schools", text: "Private schools" },
+       
+      
+                
+
+      ],
+
+
+
+secondary_eduction_filters : [
+        { value: "Public schools", text: "Public schools" },
+        { value: "Private schools", text: "Private schools" },
+       
+      
+                
+
+      ],
+
+
+      
+tertiary_eduction_filters : [
+        { value: "Public University", text: "Public University" },
+        { value: "Private University", text: "Private University" },
+       
+      
+                
+
+      ],
+
+
+
+
+	Vocational_filters : [
+        { value: "Biomedical", text: "Biomedical" },
+        { value: "Cooking and Catering", text: "Cooking and Catering" },
+        { value: "Tailoring", text: "Tailoring" },
+        { value: "Construction", text: "Construction" },
+        { value: "Electrician", text: "Electrician" },
+        { value: "Mechanics", text: "Mechanics" },
+        { value: "Plumber", text: "Plumber" },
+         { value: "IT and Multimedia", text: "IT and Multimedia" },
+        { value: "Beautician", text: "Beautician" },
+
+      
+                
+
+      ],
+
+
+      
+	Women_Grooming_filters : [
+        { value: "massage", text: "massage" },
+        { value: "skin care", text: "skin care" },
+        { value: "hair salon ", text: "hair salon " },
+        { value: "tattoos", text: "tattoos" },
+        { value: "makeup salon", text: "makeup salon" },
+        { value: "teeth whitening", text: "teeth whitening" },
+        { value: "manicure and pedicure ", text: "manicure and pedicure " },
+         { value: "Eyelashes", text: "Eyelashes" },
+        { value: "Beautician", text: "Beautician" },
+
+        { value: "Perfume", text: "Perfume" },
+
+      
+                
+
+      ],
+
+
+  
+
+  	Men_Grooming_filters : [
+        { value: "massage", text: "massage" },
+        { value: "skin care", text: "skin care" },
+        { value: "Barbing salon ", text: "Barbing salon " },
+        { value: "tattoos", text: "tattoos" },
+        { value: "Teeth whitening", text: "Teeth whitening" },
+        
+        { value: "manicure and pedicure ", text: "manicure and pedicure " },
+         
+
+        { value: "Perfume", text: "Perfume" },
+
+      
+                
+
+      ],
+
+
+
+
+  
+ Women_clothing : [
+        { value: "Sweaters ", text: "Sweaters" },
+        { value: "Jeans", text: "Jeans" },
+        { value: "Tops", text: "Tops" },
+        { value: "Suits", text: "Suits" },
+         { value: "Skirt", text: "Skirt" },
+          { value: "Gowns", text: "Gowns" },
+           { value: "	Weddings dresses", text: "	Weddings dresses" },
+            { value: "Coats", text: "Coats" },
+             
+                
+
+      ],
+
+
+      
+ Women_accessories : [
+        { value: "Perfumes ", text: "Perfumes" },
+        { value: "Jewelry", text: "Jewelry" },
+        { value: "Bags", text: "Bags" },
+        { value: "Shoes", text: "Shoes" },
+         { value: "Caps", text: "Caps" },
+          { value: "Head bands", text: "Head bands" },
+          
+             
+                
+
+      ],
+
+
+
+
+      
+ Men_Clothing : [
+        { value: "Shirts ", text: "Shirts" },
+        { value: "Jeans", text: "Jeans" },
+        { value: "Suits", text: "Suits" },
+        { value: "Singlets", text: "Singlets" },
+         { value: "CapSweaterss", text: "Sweaters" },
+         
+          
+             
+                
+
+      ],
+
+
+
+           
+ Men_Accessories : [
+        { value: "Watches ", text: "Watches" },
+        { value: "Perfumes", text: "Perfumes" },
+        { value: "Bags", text: "Bags" },
+        { value: "Jewelry", text: "Jewelry" },
+        { value: "Caps", text: "Caps" },
+        { value: "Gloves", text: "Gloves" },
+         { value: "Shoes", text: "Shoes" },
+      
+      ],
+
+
+
+Legal_service : [
+        { value: "Lawyers ", text: "Lawyers" },
+        { value: "Business consulting", text: "Business consulting" },
+        { value: "Patent law", text: "Patent law" },
+        
+      
+      ],
+
+
+
+Marketing : [
+        { value: "Hostesses ", text: "Hostesses" },
+        { value: "Advertising", text: "Advertising" },
+       
+      
+      ],
+
+
+
+      Web_Graphic : [
+        { value: "graphics design ", text: "graphics design" },
+        { value: "computer programmers", text: "computer programmers" },
+        { value: "computer hardware", text: "computer hardware" },
+        { value: "computer hosting services", text: "computer hosting services" },
+        
+      
+      ],
+
+
+      
+           
+ Event_Planning_and_Rentals : [
+        { value: "Event planning ", text: "Event planning" },
+        { value: "Rentals", text: "Rentals" },
+        { value: "Interior Design ", text: "Interior Design " },
+       
+      
+      ],
+
+
+
+          
+ Cleaning_Services : [
+        { value: "Office cleaning ", text: "Office cleaning" },
+        { value: "Home cleaning", text: "Home cleaning" },
+       
+      
+      ],
+
+
+	
+
+          
+ Real_Estate : [
+        { value: "Real Estate _Agency", text: "Real Estate _Agency" },
+        { value: "property management", text: "property management" },
+        { value: "commercial real estate", text: "commercial real estate" },
+        { value: "shared office space", text: "shared office space" },
+       
+      
+      ],
+
+
+               
+ Housing_and_Construction : [
+       
+        { value: "Plumbing", text: "Plumbing" },
+        { value: "Contractors", text: "Contractors" },
+         { value: "Carpenters", text: "Carpenters" },
+
+                 { value: "Painters", text: "Painters" },
+        { value: "Interior design", text: "Interior design" },
+         { value: "Electrician", text: "Electrician" },
+
+
+
+
+                 { value: "Architect", text: "Architect" },
+        
+      
+      ],
+
+
+       Internet_and_Media : [
+       
+        { value: "TV Cable", text: "TV Cable" },
+        { value: "Internet services", text: "Internet services" },
+         { value: "Telephone services", text: "Telephone services" },
+
+               
+
+
+      ],
+
+
+
+
+
+
+
+
+
+
+
+      
+Mayor_Councils : [
+        { value: "Regions ", text: "Regions" },
+        { value: "Division", text: "Division" },
+         { value: "Sub-divisions ", text: "Sub-divisions" },
+        { value: "City", text: "City" },
+       
+      
+      ],
+
+
+        
+Schools : [
+        { value: "Public ", text: "Public" },
+        { value: "Private", text: "Private" },
+
+         { value: "Regions ", text: "Regions" },
+        { value: "Division", text: "Division" },
+
+         { value: "Sub-divisions ", text: "Sub-divisions" },
+        { value: "City", text: "City" },
+       
+      
+      ],
+
+
+
+
+        
+Hospitals : [
+            
+
+             { value: "Public ", text: "Public" },
+        { value: "Private", text: "Private" },
+
+         { value: "Regions ", text: "Regions" },
+        { value: "Division", text: "Division" },
+
+         { value: "Sub-divisions ", text: "Sub-divisions" },
+        { value: "City", text: "City" },
+       
+      
+      ],
+
+
+              
+Ministries : [
+        { value: "Regions", text: "Regions" },
+        { value: "Division", text: "Division" },
+
+         { value: "Sub-divisions", text: "Sub-divisions" },
+          { value: "City", text: "City" },
+       
+      
+      ],
+
+
+	
+
+
+
+
+
 
 
       optionss: [

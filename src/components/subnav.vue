@@ -18,8 +18,24 @@
     <div>
       <b-row>  
         <b-col cols="6">
+
+          <!--
              
               <b-dropdown-item  @click="category('Starch')" href="#"> Starch</b-dropdown-item>
+               <b-dropdown-item  @click="category('Coffee')"  href="#">Coffee/Tea</b-dropdown-item>
+               
+               
+               <b-dropdown-item  @click="category('Finished_Branded_Products')"  href="#">   Finished Products  </b-dropdown-item> 
+              
+               <b-dropdown-item  @click="category('Raw_material')"  href="#">Raw material </b-dropdown-item>
+               
+             <b-dropdown-item  @click="category('Spices')"  href="#">Spices</b-dropdown-item> 
+
+             <b-dropdown-item  @click="category('Beans')"  href="#">Beans</b-dropdown-item>
+
+  -->
+
+
 
            <b-dropdown-item  @click="category('Vegetables')"  href="#"><img class="img-fluid picture logo-img" src="@/assets/icons/vegetable1.png"  />Vegetables</b-dropdown-item>
 
@@ -27,11 +43,9 @@
 
              <b-dropdown-item  @click="category('Cereals')"  href="#"> <img class="img-fluid picture logo-img" src="@/assets/icons/Cereals.png"  />Cereals</b-dropdown-item>
       
-              <b-dropdown-item  @click="category('Coffee')"  href="#">Coffee/Tea</b-dropdown-item> 
+             
 
               
-               <b-dropdown-item  @click="category('Finished_Branded_Products')"  href="#">   Finished Products  </b-dropdown-item> 
-
 
              </b-col>   
 
@@ -41,15 +55,14 @@
 
            <b-dropdown-item  @click="category('Oils')" href="#"><img class="img-fluid picture logo-img" src="@/assets/icons/oils.png"  /> Oil</b-dropdown-item>
 
-           <b-dropdown-item  @click="category('Raw_material')"  href="#">Raw material </b-dropdown-item>
+          
 
             <b-dropdown-item  @click="category('Livestock')" href="#"> <img class="img-fluid picture logo-img" src="@/assets/icons/livestock.png"  /> Livestock</b-dropdown-item>
 
-             <b-dropdown-item  @click="category('Spices')"  href="#">Spices</b-dropdown-item> 
 
             
               <b-dropdown-item  @click="category('Dairy')"  href="#"> <img class="img-fluid picture logo-img" src="@/assets/icons/dairy.png"  /> Dairy</b-dropdown-item> 
-              <b-dropdown-item  @click="category('Beans')"  href="#">Beans</b-dropdown-item>
+              
 
    
              

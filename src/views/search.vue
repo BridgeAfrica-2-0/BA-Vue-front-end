@@ -2205,16 +2205,16 @@ case 'Handicraft': this.selectcategories = this.Handicraft_filters;
  break;
    case 'Fast_food': this.categories_filters = this.Fast_food_filters; 
  break;
-    case 'European_Food': this.categories_filters = this.European_Food_filters; 
+    case 'European_Food': this.categories_filters = []; 
  break;
 
- case 'Pizza': this.categories_filters = this.Pizza_filters; 
+ case 'Pizza': this.categories_filters = []; 
 
   break;
-   case 'Bakery': this.categories_filters = this.Bakery_filters; 
+   case 'Bakery': this.categories_filters = []; 
    
    break;
-   case 'Catering': this.categories_filters = this.Catering_filters; 
+   case 'Catering': this.categories_filters = []; 
  
    break;
 

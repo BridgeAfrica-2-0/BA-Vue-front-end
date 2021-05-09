@@ -266,7 +266,7 @@
 
 
 
-   <span  @mouseover="onOverHealthunits"  @mouseleave="onLeaverHealthunits" >
+   <span  @mouseover="onOverHealthunits"  @mouseleave="onLeaveHealthunits" >
 
          <b-nav-item-dropdown @click="onOverHealthunits"   id=""  ref="Healthunits"  >
 

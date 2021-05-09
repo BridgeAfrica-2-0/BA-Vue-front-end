@@ -1,12 +1,6 @@
 <template>
   <div>
 
-     
-    
-       
-    
-
-
   <div  v-if="filterType == '1' || filterType == '4' " >       
      
 
@@ -21,7 +15,7 @@
         :value="category.value"
        
         name="flavour-4a" 
-        @change="switchcategories"
+        @change="selectedsidebar"
         class="m-1   br-3"
         
       >
@@ -43,10 +37,10 @@
          <div  style="column-count: 2;"> 
             <b-form-checkbox
         v-for="agriculture in selectcategories"
-        v-model="selectedfilter"    
+        v-model="default_category"    
         :key="agriculture.value"
         :value="agriculture.value"
-        @change="switchcategoriesfilters"
+         @change="selectedsidebar"
         name="flavour-4a" 
         class=""
        
@@ -541,7 +535,6 @@ export default {
    break;
 
 
-
    case 'More': this.selectcategories = [];  
    break;
 
@@ -653,13 +646,13 @@ export default {
 
    case 'Bars': this.categories_filters = this.Bars_filters; 
  break;
- case 'African Food': this.categories_filters = this.African_Food_filters; 
+ case 'African Food': this.categories_filters = this.African_Food; 
  break;
   case 'Asian food': this.categories_filters = this.Asian_food_filters; 
  break;
-   case 'Fast Food': this.categories_filters = this.Fast_Food_filters; 
+   case 'Fast Food': this.categories_filters = this.Fast_Food; 
  break;
-    case 'European Food': this.categories_filters = this.European_Food_filters; 
+    case 'European Food': this.categories_filters = []; 
  break;
 
  case 'Pizza': this.categories_filters = this.Pizza_filters; 
@@ -740,39 +733,40 @@ case 'COVID-19': this.categories_filters = [];
 
   //More filters
 
-case 'Handicrafts': this.categories_filters = this.Handicrafts_filters; 
+case 'Handicrafts': this.selectcategories = this.Handicrafts_filters; 
  
    break;
 
-   case 'Hotels': this.categories_filters = this.Hotels_filters; 
+   case 'Hotels': this.selectcategories = this.Hotels_filters; 
  
    break;
 
-   case 'Transport': this.categories_filters = this.Transport_filters; 
+   case 'Transport': this.selectcategories = this.Transport_filters; 
+   
  
    break;
 
-   case 'Grooming': this.categories_filters = this.Grooming_filters; 
+   case 'Grooming': this.selectcategories = this.Grooming_filters; 
  
    break;
 
-   case 'Auto Mechanics': this.categories_filters = this.Auto_Mechanics; 
+   case 'Auto Mechanics': this.selectcategories = this.Auto_Mechanics; 
  
    break;
 
-    case 'Carding': this.categories_filters = []; 
- 
-   break;
-
-
-
- case 'Education': this.categories_filters = this.Educations_filters; 
+    case 'Carding': this.selectcategories = []; 
  
    break;
 
 
 
- case 'Professional': this.categories_filters = this.Professional_and_home_service; 
+ case 'Education': this.selectcategories = this.Educations_filters; 
+ 
+   break;
+
+
+
+ case 'Professional': this.selectcategories = this.Professional_and_home_service; 
  
    break;
 
@@ -1643,7 +1637,8 @@ Professional_services  : [
 
 
 
- African_food_filters : [
+ African_food : [
+
         { value: "Kati-kati", text: "Kati-kati " },
         { value: "Eru", text: "Eru " },
         { value: "Ndole", text: "Ndole" },
@@ -1666,30 +1661,23 @@ Professional_services  : [
 
 
 
- 	Fast_food_filters : [
+ 	Fast_food: [
+
         { value: "Beef", text: " Beef" },
         { value: "Pizza", text: "Pizza " },
         { value: "Pork", text: "Pork" },
-        { value: "Beef", text: " Beef" },
+       
         { value: "Hamburger", text: "Hamburger " },
         { value: "Chicken", text: "Chicken" },
-
-
 
         { value: "Omelets", text: " Omelets" },
         { value: "Grilled fish", text: "Grilled fish " },
         { value: "Natural Juice", text: "Natural Juice" },
-
-
         { value: "Puff-puff", text: "Puff-puff" },
          { value: "Grilled fish", text: "Grilled fish" },
           { value: "Soya", text: "Soya" },
           { value: "Shawarma", text: "Shawarma" },
-         
-       
-           
-                
-
+        
       ],
 
 
@@ -2347,11 +2335,234 @@ Ministries : [
      },
 
 
+      selectedsidebar(){
+
+        console.log(this.default_category);
+         
+         switch(this.default_category) {
+
+            case 'Professional_and_home_service': this.categories_filters = this.Professional_and_home_service;
+      
+           break;
+
+  
+
+  case 'Hotels': this.categories_filters = this.Hotels;  
+   break;
+
+
+
+
+   case 'Taxis': this.categories_filters = this.Taxis_service;  
+   break;
+
+
+
+
+
+
+
+   case 'Women Grooming': this.categories_filters = this.Women_Grooming_filters;  
+   break;
+           
+    case 'Men Grooming': this.categories_filters = this.Men_Grooming_filters;  
+ break;
+    case 'Legal_service': this.categories_filters = this.Legal_service;  
+
+ break;
+ case 'Marketing': this.categories_filters = this.Marketing;  
+ break;
+  case 'Web, Graphic Design and Printing': this.categories_filters = this.Web_Graphic;  
+ break;
+   case 'Event Planning and Rentals': this.categories_filters = this.Event_Planning_and_Rentals;  
+ break;
+    case 'Cleaning Services': this.categories_filters = this.Cleaning_Services;  
+
+ break;
+     case 'Real Estate Agency and Land': this.categories_filters = this.Real_Estate;  
+ break;
+      case 'Housing and Construction': this.categories_filters = this.Housing_and_Construction;  
+ break;
+       case 'Internet and Media': this.categories_filters = this.Internet_and_Media;  
+ break;
+   case 'Fruits': this.categories_filters = this.Fruits_filters;  
+   break;
+   case 'Coffee': this.categories_filters = this.Coffee_filters;  
+   break;
+   case 'Finished_Branded_Products': this.categories_filters = this.Finished_Branded_Products_filters;  
+   break;
+   case 'Vegetables': this.categories_filters = this.Vegetables_filters;  
+   break;
+   
+
+  case 'Starch': this.categories_filters = this.starch_filters;
+  
+   break;
+
+   case 'Oils': this.categories_filters = this.Oils_filters;   
+
+   break;
+
+   case 'Cereals': this.categories_filters = this.Cereals_filters; 
+   
+   break;
+   case 'Raw_material': this.categories_filters = this.Raw_material_filters;  
+   
+   break;
+
+   case 'Livestock': this.categories_filters = this.Livestock_filters;  
+   
+   break;
+   case 'Spices': this.categories_filters = this.Spices_filters;  
+   break;
+
+   case 'Dairy': this.categories_filters = this.Dairy_filters;   
+   break;
+   case 'Beans': this.categories_filters = this.Beans_filters;   
+
+  
+
+   break;
+
+   //electronics
+
+
+
+
+
+
+
+   case 'Phone accessory': this.categories_filters = this.phone_filters; 
+
+
+
+
+   break;
+   case 'Computers, Tablets and accessories': this.categories_filters = this.Computers_filters; 
+
+
+
+   break;
+   case 'Office Electronics': this.categories_filters = this.Office_Electronics_filters; 
+
+
+
+   break;
+   case 'Home Appliances': this.categories_filters = this.Home_Appliances_filters; 
+ 
+   break;
+
+
+   //restaurants  
+
+
+
+
+   case 'Bars': this.categories_filters = this.Bars_filters; 
+ break;
+ case 'African food': this.categories_filters = this.African_Food; 
+ break;
+  case 'Asian food': this.categories_filters = this.Asian_food_filters; 
+ break;
+   case 'Fast_food ': this.categories_filters = this.Fast_food; 
+ break;
+    case 'European food': this.categories_filters = []; 
+ break;
+
+ case 'Pizza': this.categories_filters = []; 
+
+  break;
+   case 'Bakery': this.categories_filters = []; 
+   
+   break;
+   case 'Catering': this.categories_filters = []; 
+ 
+   break;
+
+
+   //clothing cases
+
+case 'Women clothing': this.categories_filters = this.Women_clothing; 
+
+  break;
+   case 'Women accessories': this.categories_filters = this.Women_accessories; 
+   
+   break;
+
+   case 'Men Clothing': this.categories_filters = this.Men_Clothing; 
+
+  break;
+   case 'Men Accessories': this.categories_filters = this.Men_Accessories; 
+   
+   break;
+                
+
+
+//health ubits
+
+    case 'Hospital': this.categories_filters = this.Hospitals; 
+   
+   break;
+   case 'Pharmacies': this.categories_filters = this.Pharmacies; 
+ 
+   break;
+
+
+   case 'Clinics': this.categories_filters = this.Clinics_filters; 
+ 
+   break;
+
+
+
+case 'COVID-19': this.categories_filters = []; 
+ 
+   break;
+
+
+   //   Mayor Council       
+
+  
+
+
+
+
+
+    case 'Ministries ': this.categories_filters = this.Ministries; 
+ 
+   break;
+
+
+
+
+    case 'Mayor Councils ': this.categories_filters = this.Mayor_councils_filters_and_public_institution; 
+ 
+   break;
+
+
+
+
+    case 'Schools': this.categories_filters = this.Schools; 
+ 
+   break;
+
+  //More filters
+
+case 'Handicrafts': this.selectcategories = this.Handicrafts_filters;
+break;
+
+         }
+
+      },
+
+
+
+
 
     switchcategories(){
     
-   
 
+    
+  
       switch(this.default_category) {
   case 'Professional_and_home_service': this.categories_filters = this.Professional_and_home_service;
       

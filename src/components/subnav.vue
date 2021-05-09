@@ -11,10 +11,10 @@
 
 
 
-          <span @mouseover="onOverAgriculture" >
+          <span @mouseover="onOverAgriculture" @mouseleave="onLeaveAgriculture" >
 
     <b-nav-item-dropdown id="dropdown-1" text=" Agriculture " ref="Agriculture"  >
-      <hr style="margin-top:-10px;  background-color:red; height:3px; width:70px; float:left "  />  <br />
+      <hr style="margin-top:-10px;  background-color:red; height:3px; width:40%; float:left "  />  <br />
     <div>
       <b-row>  
         <b-col cols="6">
@@ -37,11 +37,11 @@
 
 
 
-           <b-dropdown-item  @click="category('Vegetables')"  href="#"><img class="img-fluid picture logo-img" src="@/assets/icons/vegetable1.png"  />Vegetables</b-dropdown-item>
+           <b-dropdown-item  @click="category('Vegetables')"  href="#"><img class="img-fluid picture logo-img" src="@/assets/icons/vegetable1.png"  /> Vegetables</b-dropdown-item>
 
-            <b-dropdown-item  @click="category('Fruits')" href="#"><img class="img-fluid picture logo-img" src="@/assets/icons/fruits.png"  />Fruits</b-dropdown-item>
+            <b-dropdown-item  @click="category('Fruits')" href="#"><img class="img-fluid picture logo-img" src="@/assets/icons/fruits.png"  /> Fruits</b-dropdown-item>
 
-             <b-dropdown-item  @click="category('Cereals')"  href="#"> <img class="img-fluid picture logo-img" src="@/assets/icons/Cereals.png"  />Cereals</b-dropdown-item>
+             <b-dropdown-item  @click="category('Cereals')"  href="#"> <img class="img-fluid picture logo-img" src="@/assets/icons/Cereals.png"  /> Cereals</b-dropdown-item>
       
              
 
@@ -84,7 +84,7 @@
 
 
 
-   <span  @mouseover="onOverElectronics" >
+   <span  @mouseover="onOverElectronics"   @mouseleave="onLeaveElectronics"  >
 
          <b-nav-item-dropdown @click="onOverElectronics"   id=""  ref="Electronics"  >
 
@@ -94,23 +94,23 @@
 
 
 
-      <hr style="margin-top:-10px;  background-color:red; height:3px; width:70px; float:left "  />  <br />
+      <hr style="margin-top:-10px;  background-color:red; height:3px; width:40%; float:left "  />  <br />
     <div>
       <b-row>  
         <b-col cols="6">   
 
-            <b-dropdown-item  @click="category('Phone accessory')"  href="#"> <img class="img-fluid picture logo-img" src="@/assets/icons/phone.png"  /> Phone accessory</b-dropdown-item>
+            <b-dropdown-item  @click="category('Phone accessory')"  href="#"> <img class="img-fluid picture logo-img" src="@/assets/icons/phone.png"  /> Phone <br /> accessory</b-dropdown-item>
 
-            <b-dropdown-item  @click="category('Computers')"  href="#"> <div>    <b-row>  <b-col cols="6"> <img class="img-fluid picture logo-img" src="@/assets/icons/computer.jpg"  />  </b-col> <b-col cols="6">  Computers, <br /> Tablets & <br /> Assoceries  </b-col>  </b-row>   </div>  </b-dropdown-item> 
+            <b-dropdown-item  @click="category('Computers')"  href="#"> <div> 
+            <img class="img-fluid picture logo-img" src="@/assets/icons/computer.jpg"  />    Computers,   <br /> Assoceries    </div>  </b-dropdown-item> 
               
-
-              
+  
              </b-col>   
 
 
              <b-col cols="6">   
-             <b-dropdown-item  @click="category('Home Appliances')"  href="#"> <img class="img-fluid picture logo-img" src="@/assets/icons/home appliances.png"  /> Home Appliances</b-dropdown-item> 
-              <b-dropdown-item  @click="category('Office Electronics')"  href="#"> <img class="img-fluid picture logo-img" src="@/assets/icons/office electronics.png"  /> Office Electronics </b-dropdown-item>
+             <b-dropdown-item  @click="category('Home Appliances')"  href="#"> <img class="img-fluid picture logo-img" src="@/assets/icons/home appliances.png"  /> Home <br/> Appliances</b-dropdown-item> 
+              <b-dropdown-item  @click="category('Office Electronics')"  href="#"> <img class="img-fluid picture logo-img" src="@/assets/icons/office electronics.png"  /> Office <br /> Electronics </b-dropdown-item>
              </b-col> 
       
 
@@ -126,7 +126,7 @@
 
 
 
-   <span  @mouseover="onOverRestaurants">
+   <span  @mouseover="onOverRestaurants"    @mouseleave="onLeaveRestaurants" >
 
          <b-nav-item-dropdown @click="onOverRestaurants"   id=""  ref="Restaurants"  >
 
@@ -136,7 +136,7 @@
 
 
 
-      <hr style="margin-top:-10px;  background-color:red; height:3px; width:70px; float:left "  />  <br />
+      <hr style="margin-top:-10px;  background-color:red; height:3px; width:40%; float:left "  />  <br />
     <div>
       <b-row>  
         <b-col cols="6">   
@@ -145,16 +145,16 @@
 
             <b-dropdown-item  @click="category('Bars')"  href="#">  <img class="img-fluid picture logo-img" src="@/assets/icons/Cereals.png"  /> Bars </b-dropdown-item> 
              <b-dropdown-item  @click="category('Catering')"  href="#"> <img class="img-fluid picture logo-img" src="@/assets/icons/Cereals.png"  /> Catering  </b-dropdown-item>
-              <b-dropdown-item  @click="category('Asian food')"  href="#"> <img class="img-fluid picture logo-img" src="@/assets/icons/Cereals.png"  />	Asian food </b-dropdown-item>
+             
               
-
+               <b-dropdown-item  @click="category('European Food')"  href="#"> <img class="img-fluid picture logo-img" src="@/assets/icons/Cereals.png"  /> European <br /> Food </b-dropdown-item>
               
              </b-col>   
 
 
              <b-col cols="6">   
              <b-dropdown-item  @click="category('Fast Food')"  href="#"> <img class="img-fluid picture logo-img" src="@/assets/icons/Cereals.png"  /> Fast Food </b-dropdown-item> 
-              <b-dropdown-item  @click="category('European Food')"  href="#"> <img class="img-fluid picture logo-img" src="@/assets/icons/Cereals.png"  /> European Food </b-dropdown-item>
+               <b-dropdown-item  @click="category('Asian food')"  href="#"> <img class="img-fluid picture logo-img" src="@/assets/icons/Cereals.png"  />	Asian food </b-dropdown-item>
                <b-dropdown-item  @click="category('Pizza')"  href="#"> <img class="img-fluid picture logo-img" src="@/assets/icons/Cereals.png"  />Pizza </b-dropdown-item>
                 <b-dropdown-item  @click="category('Bakery')"  href="#"> <img class="img-fluid picture logo-img" src="@/assets/icons/Cereals.png"  />Bakery </b-dropdown-item>
              </b-col> 
@@ -172,34 +172,31 @@
 
 
 
+   <span  @mouseover="onOverClothing"  @mouseleave="onLeaveClothing" >
 
-
-   <span  @mouseover="onOverClothing" >
-
-         <b-nav-item-dropdown @click="onOverRestaurants"   id=""  ref="Clothing"  >
+         <b-nav-item-dropdown @click="onOverClothing"   id=""  ref="Clothing"  >
 
        <template #button-content>
       <span class="drop-text"> Clothing   </span>
     </template>
 
 
-
-      <hr style="margin-top:-10px;  background-color:red; height:3px; width:70px; float:left "  />  <br />
+  <hr style="margin-top:-10px;  background-color:red; height:3px; width:35%; float:left "  />  <br />
     <div>
       <b-row>  
         <b-col cols="6">   
            
 
            <b-dropdown-item  @click="category('Women clothing')"  href="#">  <img class="img-fluid picture logo-img" src="@/assets/icons/women clothing.png"  />   Women clothing </b-dropdown-item> 
-              <b-dropdown-item  @click="category('Women accessories')"  href="#">   <img class="img-fluid picture logo-img" src="@/assets/icons/phone.png"  />   Women accessories </b-dropdown-item>
-               
+              <b-dropdown-item  @click="category('Women accessories')"  href="#">   <img class="img-fluid picture logo-img" src="@/assets/icons/phone.png"  />   Women <br /> accessories </b-dropdown-item>
+                
              </b-col>   
 
 
              <b-col cols="6">   
              
              <b-dropdown-item  @click="category('Men Clothing')"  href="#">  <img class="img-fluid picture logo-img" src="@/assets/icons/men clothing.png"  />   Men Clothing </b-dropdown-item>
-                <b-dropdown-item  @click="category('Men Accessories')"  href="#">  <img class="img-fluid picture logo-img" src="@/assets/icons/men accessories.png"  />   Men Accessories </b-dropdown-item>
+                <b-dropdown-item  @click="category('Men Accessories')"  href="#">  <img class="img-fluid picture logo-img" src="@/assets/icons/men accessories.png"  />   Men <br /> Accessories </b-dropdown-item>
 
              </b-col> 
       
@@ -216,8 +213,9 @@
 
 
 
+
   
-   <span  @mouseover="onOverMayorcouncils" >
+   <span  @mouseover="onOverMayorcouncils"  @mouseleave="onLeaveMayorcouncils"  >
 
          <b-nav-item-dropdown   id=""  ref="Mayorcouncils"  >
 
@@ -227,7 +225,7 @@
 
 
 
-      <hr style="margin-top:-10px;  background-color:red; height:3px; width:70px; float:left "  />  <br />
+      <hr style="margin-top:-10px;  background-color:red; height:3px; width:45%; float:left "  />  <br />
     <div>
       <b-row>  
         <b-col cols="6">   
@@ -262,15 +260,13 @@
 
 
 
-
-
    
 
 
 
 
 
-   <span  @mouseover="onOverHealthunits" >
+   <span  @mouseover="onOverHealthunits"  @mouseleave="onLeaverHealthunits" >
 
          <b-nav-item-dropdown @click="onOverHealthunits"   id=""  ref="Healthunits"  >
 
@@ -280,7 +276,7 @@
 
 
 
-      <hr style="margin-top:-10px;  background-color:red; height:3px; width:70px; float:left "  />  <br />
+      <hr style="margin-top:-10px;  background-color:red; height:3px; width:43%; float:left "  />  <br />
     <div>
       <b-row>  
         <b-col cols="6">   
@@ -311,9 +307,11 @@
 
 
 
+ 
+
 
    
-   <span  @mouseover="onOverMore">
+   <span  @mouseover="onOverMore" @mouseleave="onLeaveMore" >
 
          <b-nav-item-dropdown @click="onOverMore"   id=""  ref="More"  >
 
@@ -329,10 +327,10 @@
         <b-col cols="6" class="p-2">   
             
 
-               <b-dropdown-item  @click="category('Ac')"  href="#"> <img class="img-fluid picture logo-img" src="@/assets/icons/Cereals.png"  /> Handicraft </b-dropdown-item>
-                   <b-dropdown-item  @click="category('Ac')"  href="#"> <img class="img-fluid picture logo-img" src="@/assets/icons/Cereals.png"  />Hotels </b-dropdown-item>
-                   <b-dropdown-item  @click="category('Ac')"  href="#"> <img class="img-fluid picture logo-img" src="@/assets/icons/Cereals.png"  />Transport </b-dropdown-item>
-                   <b-dropdown-item  @click="category('Ac')"  href="#"> <img class="img-fluid picture logo-img" src="@/assets/icons/Cereals.png"  /> Mens & Women  <br />   Grooming    </b-dropdown-item>
+               <b-dropdown-item  @click="category('Handicrafts')"  href="#"> <img class="img-fluid picture logo-img" src="@/assets/icons/Cereals.png"  /> Handicraft </b-dropdown-item>
+                   <b-dropdown-item  @click="category('Hotels')"  href="#"> <img class="img-fluid picture logo-img" src="@/assets/icons/Cereals.png"  />Hotels </b-dropdown-item>
+                   <b-dropdown-item  @click="category('Transport')"  href="#"> <img class="img-fluid picture logo-img" src="@/assets/icons/Cereals.png"  />Transport </b-dropdown-item>
+                   <b-dropdown-item  @click="category('Grooming')"  href="#"> <img class="img-fluid picture logo-img" src="@/assets/icons/Cereals.png"  /> Mens & Women  <br />   Grooming    </b-dropdown-item>
                    
 
 
@@ -340,11 +338,11 @@
 
 
              <b-col cols="6" class="p-2">   
-               <b-dropdown-item  @click="category('Ac')"  href="#"> <img class="img-fluid picture logo-img" src="@/assets/icons/Cereals.png"  />Auto Mechanics </b-dropdown-item>
-                   <b-dropdown-item  @click="category('Ac')"  href="#"> <img class="img-fluid picture logo-img" src="@/assets/icons/Cereals.png"  />Carding </b-dropdown-item>
+               <b-dropdown-item  @click="category('Auto Mechanics')"  href="#"> <img class="img-fluid picture logo-img" src="@/assets/icons/Cereals.png"  />Auto Mechanics </b-dropdown-item>
+                   <b-dropdown-item  @click="category('Carding')"  href="#"> <img class="img-fluid picture logo-img" src="@/assets/icons/Cereals.png"  />Carding </b-dropdown-item>
 
-                   <b-dropdown-item  @click="category('Ac')"  href="#"> <img class="img-fluid picture logo-img" src="@/assets/icons/Cereals.png"  /> Education </b-dropdown-item>
-                   <b-dropdown-item  @click="category('Ac')"  href="#"> <img class="img-fluid picture logo-img" src="@/assets/icons/Cereals.png"  /> Professiona <br />  Service </b-dropdown-item>
+                   <b-dropdown-item  @click="category('Education')"  href="#"> <img class="img-fluid picture logo-img" src="@/assets/icons/Cereals.png"  /> Education </b-dropdown-item>
+                   <b-dropdown-item  @click="category('Professional')"  href="#"> <img class="img-fluid picture logo-img" src="@/assets/icons/Cereals.png"  /> Professional <br />  Service </b-dropdown-item>
              </b-col> 
       
 
@@ -413,6 +411,7 @@ export default {
 
      onOverMore() {
         this.$refs.More.visible = true;
+        this.$emit('parentcategory', 'More');
       },
       onLeaveMore() {
         this.$refs.More.visible = false;
@@ -436,6 +435,8 @@ export default {
 
        onOverRestaurants() {
         this.$refs.Restaurants.visible = true;
+        this.$emit('parentcategory', 'Restaurants');
+
       },
       onLeaveRestaurants() {
         this.$refs.Restaurants.visible = false;
@@ -455,6 +456,7 @@ export default {
 
       onOverClothing() {
         this.$refs.Clothing.visible = true;
+         this.$emit('parentcategory', 'Clothing');
       },
       onLeaveClothing() {
         this.$refs.Clothing.visible = false;
@@ -464,6 +466,7 @@ export default {
   
       onOverMayorcouncils() {
         this.$refs.Mayorcouncils.visible = true;
+         this.$emit('parentcategory', 'Mayorcouncils');
       },
       onLeaveMayorcouncils() {
         this.$refs.Mayorcouncils.visible = false;
@@ -474,6 +477,7 @@ export default {
 
  onOverHealthunits() {
         this.$refs.Healthunits.visible = true;
+         this.$emit('parentcategory', 'Healthunits');
       },
       onLeaveHealthunits() {
         this.$refs.Healthunits.visible = false;

@@ -512,7 +512,37 @@ export default {
 
 
    
+   case 'Restaurants': this.selectcategories = this.restaurants_filters;  
+   break;
+
+  
    case 'Electronics': this.selectcategories = this.Electronics_filters;  
+   break;
+
+
+
+
+
+     
+   case 'Clothing': this.selectcategories = this.clothing_filters;  
+   break;
+
+
+
+
+     
+   case 'Mayorcouncils': this.selectcategories = this.Mayor_councils_filters_and_public_institution;  
+   break;
+
+
+
+     
+   case 'Healthunits': this.selectcategories = this.Health_unit_filters;  
+   break;
+
+
+
+   case 'More': this.selectcategories = [];  
    break;
 
 
@@ -708,15 +738,48 @@ case 'COVID-19': this.categories_filters = [];
  
    break;
 
+  //More filters
+
+case 'Handicrafts': this.categories_filters = this.Handicrafts_filters; 
+ 
+   break;
+
+   case 'Hotels': this.categories_filters = this.Hotels_filters; 
+ 
+   break;
+
+   case 'Transport': this.categories_filters = this.Transport_filters; 
+ 
+   break;
+
+   case 'Grooming': this.categories_filters = this.Grooming_filters; 
+ 
+   break;
+
+   case 'Auto Mechanics': this.categories_filters = this.Auto_Mechanics; 
+ 
+   break;
+
+    case 'Carding': this.categories_filters = []; 
+ 
+   break;
 
 
 
+ case 'Education': this.categories_filters = this.Educations_filters; 
+ 
+   break;
 
 
 
+ case 'Professional': this.categories_filters = this.Professional_and_home_service; 
+ 
+   break;
 
 
-   
+ 
+
+
 
 
       }
@@ -2310,7 +2373,7 @@ Ministries : [
 
 
 
-  case 'Mechanics': this.categories_filters = this.Mechanics;
+  case 'Mechanics': this.categories_filters = this.Mechanics_filters;
   break;
 
   case 'Handicrafts': this.categories_filters = this.Handicrafts;

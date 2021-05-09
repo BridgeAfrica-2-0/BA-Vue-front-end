@@ -32,6 +32,8 @@ export default {
 </script>
 
 <style>
+
+@media only screen and (min-width: 768px) {
 .ly-tab-item {
   display: flex;
   flex-direction: column;
@@ -43,10 +45,38 @@ export default {
 
   font-family: 'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif;
     font-weight: normal;
-    font-size: 16px;
+    font-size: 14px;
+    Line-height:20px 
    
     
     
+
+}
+
+}
+
+
+@media only screen and (max-width: 768px) {
+   
+
+   .ly-tab-item {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  text-align: center;
+  cursor: default;
+
+  font-family: 'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif;
+    font-weight: normal;
+    font-size: 12px;
+    Line-height:20px 
+   
+    
+    
+
+}
 
 }
 

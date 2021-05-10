@@ -6,19 +6,20 @@
       <div class="container-fluid ">
 
 
-        <div class="col-md-3 col-xl-2.5">
-        <a class="navbar-brand" href="#">
+        <div class="col-md-6  col-lg-3 col-xl-2  ">
+        <a class=" d-inline-block align-top mt-1 " href="#">
+         
+
+
           <img
-            src="@/assets/img/logo3.png"
+            src="@/assets/logo.png"
             alt=""
-            class="d-inline-block align-top mt-1"
+            class="balogo"
             loading="lazy"
-            width="30"
-            height="30"
+           
           />
-          <span class="font-weight-bold website-logo-name ml-2"
-            >BRIDGE AFRICA</span
-          >
+
+          
         </a>
 
 
@@ -31,7 +32,7 @@
 
 
 
-        <div class="col-lg-5 col-xl-5.5">
+        <div class="col-lg-4 col-xl-6 ">
 
     
 
@@ -91,6 +92,7 @@
         
 
         <div class="col-md-4">
+
        <button
           class="navbar-toggler"
           type="button"
@@ -135,9 +137,10 @@
     <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
 
-<b-collapse id="nav-collapse" is-nav>
+<div style="float: right;" >
 
-          
+<b-collapse id="nav-collapse" is-nav  >
+
           <div class="nav-item">
             <a class="nav-link text-dark" href="">
              
@@ -489,20 +492,9 @@
                   </div>
                 </div>
                 <div>
-                  <div class="d-inline-flex flex-row align-items-center mb-1">
-                    <div>
-                      <img
-                        src="@/assets/img/logo3.png"
-                        class="rounded-circle"
-                        alt=""
-                        width="25"
-                        height="25"
-                      />
-                    </div>
-                    <div class="ml-3">
-                      Business 2
-                    </div>
-                  </div>
+                
+
+
                 </div>
                 <div>
                   <div class="d-inline-flex flex-row align-items-center mb-1">
@@ -566,6 +558,9 @@
 
 </b-collapse>
 
+
+</div>
+
         </div>
       </div>
 
@@ -595,6 +590,33 @@ export default {
 </script>
 
 <style scoped>
+
+@media (min-width: 768px) {  
+  
+  .balogo{
+ 
+ width: 170px
+
+  }
+ 
+
+}
+
+
+@media (max-width: 768px) {  
+  
+  .balogo{
+ 
+ width: 50px
+
+  }
+ 
+
+}
+
+
+
+
 
 .b-shadow{
 

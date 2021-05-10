@@ -3184,6 +3184,15 @@ input[type="button"].btn-block {
 
 .dropdown-toggle {
   white-space: nowrap;
+
+  font-family: 'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 20px;
+    color: rgba(43,39,60,1);
+    text-align: left;
+
+  
 }
 
 .dropdown-toggle::after {
@@ -3405,12 +3414,17 @@ input[type="button"].btn-block {
   width: 100%;
   padding: 0.25rem 1.5rem;
   clear: both;
-  font-weight: 400;
-  color: #212529;
-  text-align: inherit;
+  
   white-space: nowrap;
   background-color: transparent;
   border: 0;
+
+  font-family: 'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 20px;
+    color: rgba(43,39,60,1);
+    text-align: left;
 }
 
 .dropdown-item:hover, .dropdown-item:focus {

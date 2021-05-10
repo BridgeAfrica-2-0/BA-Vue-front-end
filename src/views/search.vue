@@ -113,21 +113,21 @@
 
 
 
-      <b-modal ref=""  id="myModalla" hide-footer title=" ">
+      <b-modal ref="setcat"  id="myModalla" hide-footer title=" ">
 
                       <b-row>  
         <b-col cols="6" class="p-2">   
             
-              
+              <p>     <b-link @click="SetCat('Handicrafts')"  href="#">  Handicraft </b-link>   </p>
 
-               <b-link @click="SetCat('Handicrafts')"  href="#">  Handicraft </b-link>
+           
 
 
-                   <b-link @click="SetCat('Hotels')"  href="#"> Hotels </b-link>
+               <p>       <b-link @click="SetCat('Hotels')"  href="#"> Hotels </b-link> </p>
 
-                   <b-link @click="SetCat('Transport')"  href="#"> Transport </b-link>
+               <p>       <b-link @click="SetCat('Transport')"  href="#"> Transport </b-link> </p>
 
-                   <b-link @click="SetCat('Grooming')"  href="#">  Mens & Women  <br />   Grooming   </b-link>
+                 <p>     <b-link @click="SetCat('Grooming')"  href="#">  Mens & Women  <br />   Grooming   </b-link> </p>
                    
 
 
@@ -135,11 +135,13 @@
 
 
              <b-col cols="6" class="p-2">   
-               <b-link @click="SetCat('Auto Mechanics')"  href="#">   Auto Mechanics </b-link>
-                   <b-link @click="SetCat('Carding')"  href="#">    Carding </b-link>
 
-                   <b-link @click="SetCat('Education')"  href="#">     Education </b-link>
-                   <b-link @click="SetCat('Professional')"  href="#">   Professional <br />  Service</b-link>
+
+           <p>    <b-link @click="SetCat('Auto Mechanics')"  href="#">   Auto Mechanics </b-link> </p>
+             <p>      <b-link @click="SetCat('Carding')"  href="#">    Carding </b-link> </p>
+
+              <p>     <b-link @click="SetCat('Education')"  href="#">     Education </b-link> </p>
+            <p>       <b-link @click="SetCat('Professional')"  href="#">   Professional <br />  Service</b-link> </p>
              </b-col> 
       
 
@@ -221,6 +223,65 @@
  </div>
 
 
+
+ 
+
+
+            <b-form-group
+              label-cols-lg="12"
+              label="Neighbourhood"
+              label-size="md"
+              label-class="font-weight-bold pt-0"
+              class="mb-0 text-left"
+            >
+              <b-form-checkbox id="" class="a-text" name="" value="">
+                Buea</b-form-checkbox
+              >
+
+              <b-form-checkbox id="" class="a-text" name="" value="">
+                Tiko</b-form-checkbox
+              >
+
+              <b-form-checkbox id="" class="a-text" name="" value="">
+                Limbe</b-form-checkbox
+              >
+
+              <b-form-checkbox id="" class="a-text" name="" value="">
+                MUtengene</b-form-checkbox
+              >
+            </b-form-group>
+
+            <br />
+
+            <hr />
+
+            <b-form-group
+              label-cols-lg="12"
+              label="Distance"
+              label-size="md"
+              label-class="font-weight-bold pt-0 text-left"
+              class="mb-0"
+            >
+              <b-form-checkbox id="" class="a-text" name="" value="">
+                3km</b-form-checkbox
+              >
+
+              <b-form-checkbox id="" class="a-text" name="" value="">
+                9km</b-form-checkbox
+              >
+
+              <b-form-checkbox id="" class="a-text" name="" value="">
+                15km</b-form-checkbox
+              >
+
+              <b-form-checkbox id="" class="a-text" name="" value="">
+                25km</b-form-checkbox
+              >
+            </b-form-group>
+
+
+
+        <b-button variant="primary" class="m-3  float-right"> Search    </b-button>
 
   </div>
 
@@ -1392,7 +1453,7 @@ Professional_services  : [
 
 
 
- African_food_filters : [
+ African_food : [
         { value: "Kati-kati", text: "Kati-kati " },
         { value: "Eru", text: "Eru " },
         { value: "Ndole", text: "Ndole" },
@@ -1415,7 +1476,7 @@ Professional_services  : [
 
 
 
- 	Fast_food_filters : [
+ 	Fast_food: [
         { value: "Beef", text: " Beef" },
         { value: "Pizza", text: "Pizza " },
         { value: "Pork", text: "Pork" },
@@ -2004,6 +2065,8 @@ default_category:'',
       
      console.log(cat);
 
+
+     this.$refs['setcat'].hide(); 
          
 
         
@@ -2119,9 +2182,50 @@ case 'Handicraft': this.selectcategories = this.Handicraft_filters;
       switch(this.default_category) {
   
   
-       
+           case 'Professional_and_home_service': this.categories_filters = this.Professional_and_home_service;
+      
+           break;
 
-       
+  
+
+  case 'Hotels': this.categories_filters = this.Hotels;  
+   break;
+
+
+
+
+   case 'Taxis': this.categories_filters = this.Taxis_service;  
+   break;
+
+
+
+
+
+
+
+   case 'Women Grooming': this.categories_filters = this.Women_Grooming_filters;  
+   break;
+           
+    case 'Men Grooming': this.categories_filters = this.Men_Grooming_filters;  
+ break;
+    case 'Legal_service': this.categories_filters = this.Legal_service;  
+
+ break;
+ case 'Marketing': this.categories_filters = this.Marketing;  
+ break;
+  case 'Web, Graphic Design and Printing': this.categories_filters = this.Web_Graphic;  
+ break;
+   case 'Event Planning and Rentals': this.categories_filters = this.Event_Planning_and_Rentals;  
+ break;
+    case 'Cleaning Services': this.categories_filters = this.Cleaning_Services;  
+
+ break;
+     case 'Real Estate Agency and Land': this.categories_filters = this.Real_Estate;  
+ break;
+      case 'Housing and Construction': this.categories_filters = this.Housing_and_Construction;  
+ break;
+       case 'Internet and Media': this.categories_filters = this.Internet_and_Media;  
+ break;
    case 'Fruits': this.categories_filters = this.Fruits_filters;  
    break;
    case 'Coffee': this.categories_filters = this.Coffee_filters;  
@@ -2169,13 +2273,13 @@ case 'Handicraft': this.selectcategories = this.Handicraft_filters;
 
 
 
-   case 'Phone': this.categories_filters = this.phone_filters; 
+   case 'Phone accessory': this.categories_filters = this.phone_filters; 
 
 
 
 
    break;
-   case 'Computers': this.categories_filters = this.Computers_filters; 
+   case 'Computers, Tablets and accessories': this.categories_filters = this.Computers_filters; 
 
 
 
@@ -2197,15 +2301,15 @@ case 'Handicraft': this.selectcategories = this.Handicraft_filters;
 
    case 'Bars': this.categories_filters = this.Bars_filters; 
  break;
- case 'African_food': this.categories_filters = this.African_food_filters; 
- 
-
+ case 'African_food': this.categories_filters = this.African_food; 
+ console.log("dup ass");
  break;
   case 'Asian food': this.categories_filters = this.Asian_food_filters; 
  break;
-   case 'Fast_food': this.categories_filters = this.Fast_food_filters; 
+   case 'Fast_food': this.categories_filters = this.Fast_food; 
+ 
  break;
-    case 'European_Food': this.categories_filters = []; 
+    case 'European food': this.categories_filters = []; 
  break;
 
  case 'Pizza': this.categories_filters = []; 
@@ -2221,14 +2325,14 @@ case 'Handicraft': this.selectcategories = this.Handicraft_filters;
 
    //clothing cases
 
-case 'female': this.categories_filters = this.Women_clothing; 
+case 'Women clothing': this.categories_filters = this.Women_clothing; 
 
   break;
    case 'Women accessories': this.categories_filters = this.Women_accessories; 
    
    break;
 
-   case 'men': this.categories_filters = this.Men_Clothing; 
+   case 'Men Clothing': this.categories_filters = this.Men_Clothing; 
 
   break;
    case 'Men Accessories': this.categories_filters = this.Men_Accessories; 
@@ -2239,8 +2343,7 @@ case 'female': this.categories_filters = this.Women_clothing;
 
 //health ubits
 
-    case 'Hospitals': this.categories_filters = this.Hospitals_filters; 
-    console.log('lala');
+    case 'Hospital': this.categories_filters = this.Hospitals; 
    
    break;
    case 'Pharmacies': this.categories_filters = this.Pharmacies; 
@@ -2267,14 +2370,14 @@ case 'COVID-19': this.categories_filters = [];
 
 
 
-    case 'Ministries': this.categories_filters = this.Ministries; 
+    case 'Ministries ': this.categories_filters = this.Ministries; 
  
    break;
 
 
 
 
-    case 'Mayor Councils': this.categories_filters = this.Mayor_councils_filters_and_public_institution; 
+    case 'Mayor Councils ': this.categories_filters = this.Mayor_councils_filters_and_public_institution; 
  
    break;
 
@@ -2287,48 +2390,8 @@ case 'COVID-19': this.categories_filters = [];
 
   //More filters
 
-case 'Handicrafts': this.categories_filters = this.Handicrafts_filters; 
- 
-   break;
-
-   case 'Hotels': this.categories_filters = this.Hotels_filters; 
- 
-   break;
-
-   case 'Transport': this.categories_filters = this.Transport_filters; 
- 
-   break;
-
-   case 'Grooming': this.categories_filters = this.Grooming_filters; 
-   break;
-   case 'Women Grooming': this.categories_filters = this.Women_Grooming_filters; 
- break;
-    case 'Men Grooming': this.categories_filters = this.Men_Grooming_filters; 
- 
-   break;
-
-   case 'Auto Mechanics': this.categories_filters = this.Auto_Mechanics; 
- 
-   break;
-
-    case 'Carding': this.categories_filters = []; 
- 
-   break;
-
-
-
- case 'Education': this.categories_filters = this.Educations_filters; 
- 
-   break;
-
-
-
- case 'Professional': this.categories_filters = this.Professional_and_home_service; 
- 
-   break;
-
-
-
+case 'Handicrafts': this.selectcategories = this.Handicrafts_filters;
+break;
 
    
     

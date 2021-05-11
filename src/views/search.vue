@@ -25,7 +25,7 @@
     <hr style="margin-top:-0px" />
 
 
-    <div class="d-block d- d-sm-block  d-md-none d-lg-none">        
+    <div class="d-block d- d-sm-block  d-md-none d-lg-none" v-if="selectedId == '1' || selectedId=='4' ">           
       
        <b-row >     
            
@@ -2201,9 +2201,6 @@ case 'Handicraft': this.selectcategories = this.Handicraft_filters;
 
 
 
-
-   case 'More': console.log("yaya");
-   break;
 
 
 

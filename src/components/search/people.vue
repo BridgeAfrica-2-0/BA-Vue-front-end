@@ -354,9 +354,35 @@ export default {};
 
 <style scoped>
 
-.btnpngs{
+
+
+@media only screen and (max-width: 768px) {
+     
+
+     .btnpngs{
+      width: 16px;
+    margin-right: 5px;
+}
+
+.s-card{
+
+  padding-left: 5px;
+  padding-right:5px;
+
+}
+
+}
+
+
+
+@media only screen and (min-width: 768px) {
+
+      .btnpngs{
       width: 20px;
     margin-right: 5px;
+}
+
+
 }
 
 .btn{

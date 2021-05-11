@@ -33,35 +33,7 @@
 
 
 
-      <b-modal ref="myfilters1"  id="myModalllo" hide-footer title=" ">
-         
-         <div  style="column-count: 2;"> 
-            <b-form-checkbox
-        v-for="agriculture in selectcategories"
-        v-model="default_category"    
-        :key="agriculture.value"
-        :value="agriculture.value"
-         @change="selectedsidebar"
-        name="flavour-4a" 
-        class=""
-       
-        
-        
-      >
-
-    {{ agriculture.text }}
-      </b-form-checkbox>
-
-   
-
-         </div>
-
-
-
-         <br />  
-   <b-button variant="primary" class="m-3  float-right"> Search    </b-button>
-
-    </b-modal>
+     
 
 
 
@@ -213,34 +185,6 @@
 
              <b-link  v-b-modal="'Neighbourhood'" >  See all  </b-link>
 
-   <b-modal ref="myfilters"  id="Neighbourhood" hide-footer title=" ">
-    
-    <b-form-group
-              label-cols-lg="12"
-              label="Neighbourhood"
-              label-size="md"
-              label-class="font-weight-bold pt-0"
-              class="mb-0 text-left"
-            >
-              <b-form-checkbox id="" class="a-text" name="" value="">
-                Buea</b-form-checkbox
-              >
-
-              <b-form-checkbox id="" class="a-text" name="" value="">
-                Tiko</b-form-checkbox
-              >
-
-              <b-form-checkbox id="" class="a-text" name="" value="">
-                Limbe</b-form-checkbox
-              >
-
-              <b-form-checkbox id="" class="a-text" name="" value="">
-                MUtengene</b-form-checkbox
-              >
-            </b-form-group>
-
-
-   </b-modal>
 
 
             <br />
@@ -274,34 +218,6 @@
             
  <b-link  v-b-modal="'distance'" >  See all  </b-link>
 
-   <b-modal ref="myfilters"  id="distance" hide-footer title=" ">
-               
-
-               <b-form-group
-              label-cols-lg="12"
-              label="Distance"
-              label-size="md"
-              label-class="font-weight-bold pt-0 text-left"
-              class="mb-0 text-left"
-            >
-              <b-form-checkbox id="" class="a-text" name="" value="">
-                3km</b-form-checkbox
-              >
-
-              <b-form-checkbox id="" class="a-text" name="" value="">
-                9km</b-form-checkbox
-              >
-
-              <b-form-checkbox id="" class="a-text" name="" value="">
-                15km</b-form-checkbox
-              >
-
-              <b-form-checkbox id="" class="a-text" name="" value="">
-                25km</b-form-checkbox
-              >
-            </b-form-group>
-
-   </b-modal>
 
 
       <div>
@@ -397,6 +313,8 @@
               >
             </b-form-group>
 
+              <b-link  v-b-modal="'Neighbourhood'" >  See all  </b-link>
+
             <br />
 
             <hr />
@@ -424,6 +342,9 @@
                 25km</b-form-checkbox
               >
             </b-form-group>
+
+                        
+ <b-link  v-b-modal="'distance'" >  See all  </b-link>
   </div>
 
 
@@ -531,9 +452,102 @@
 
 
 
+   <b-modal ref="myfilters"  id="Neighbourhood" hide-footer title=" ">
+    
+    <b-form-group
+              label-cols-lg="12"
+              label="Neighbourhood"
+              label-size="md"
+              label-class="font-weight-bold pt-0"
+              class="mb-0 text-left"
+            >
+              <b-form-checkbox id="" class="a-text" name="" value="">
+                Buea</b-form-checkbox
+              >
+
+              <b-form-checkbox id="" class="a-text" name="" value="">
+                Tiko</b-form-checkbox
+              >
+
+              <b-form-checkbox id="" class="a-text" name="" value="">
+                Limbe</b-form-checkbox
+              >
+
+              <b-form-checkbox id="" class="a-text" name="" value="">
+                MUtengene</b-form-checkbox
+              >
+            </b-form-group>
 
 
+   </b-modal>
+
+
+
+
+
+   <b-modal ref="myfilters"  id="distance" hide-footer title=" ">
+               
+
+               <b-form-group
+              label-cols-lg="12"
+              label="Distance"
+              label-size="md"
+              label-class="font-weight-bold pt-0 text-left"
+              class="mb-0 text-left"
+            >
+              <b-form-checkbox id="" class="a-text" name="" value="">
+                3km</b-form-checkbox
+              >
+
+              <b-form-checkbox id="" class="a-text" name="" value="">
+                9km</b-form-checkbox
+              >
+
+              <b-form-checkbox id="" class="a-text" name="" value="">
+                15km</b-form-checkbox
+              >
+
+              <b-form-checkbox id="" class="a-text" name="" value="">
+                25km</b-form-checkbox
+              >
+            </b-form-group>
+
+   </b-modal>
  
+
+
+
+ <b-modal ref="myfilters1"  id="myModalllo" hide-footer title=" ">
+         
+         <div  style="column-count: 2;"> 
+            <b-form-checkbox
+        v-for="agriculture in selectcategories"
+        v-model="default_category"    
+        :key="agriculture.value"
+        :value="agriculture.value"
+         @change="selectedsidebar"
+        name="flavour-4a" 
+        class=""
+       
+        
+        
+      >
+
+    {{ agriculture.text }}
+      </b-form-checkbox>
+
+   
+
+         </div>
+
+
+
+         <br />  
+   <b-button variant="primary" class="m-3  float-right"> Search    </b-button>
+
+    </b-modal>
+
+
 
 
 
@@ -636,8 +650,8 @@ export default {
       switch(newVal) {
 
       
-   //case 'More': this.$refs['myfilters'].show();  
-   //break;
+   case 'More': this.$refs['myfilters1'].show();  
+   break;
  
 
 

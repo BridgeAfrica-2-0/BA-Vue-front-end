@@ -59,7 +59,7 @@
      <b-row>  <b-col md="4"  lg="12"  xl="12" sm="12" cols="4" class="mt-2">    
 
             <b-button block size="sm" class="b-background" variant="primary">
-              <b-icon class="ico" icon="plus-circle"> </b-icon> Community
+              <img src="@/assets/community.png" alt="" class="btnpngs" /> Community
             </b-button>
 
             </b-col>  
@@ -67,7 +67,7 @@
        <b-col md="4"  lg="12"  xl="12" sm="12" cols="4" class="mt-2">  
 
             <b-button block size="sm" class="b-background" variant="primary">
-              <b-icon class="ico" icon="chat"> </b-icon> Message
+               <img src="@/assets/community.png" alt="" class="btnpngs" /> Message
             </b-button>
 
             </b-col>  
@@ -127,7 +127,7 @@
      <b-row>  <b-col md="4"  lg="12"  xl="12" sm="12" cols="4" class="mt-2">    
 
             <b-button block size="sm" class="b-background" variant="primary">
-              <b-icon class="ico" icon="plus-circle"> </b-icon> Community
+               <img src="@/assets/community.png" alt="" class="btnpngs" /> Community
             </b-button>
 
             </b-col>  
@@ -135,7 +135,7 @@
        <b-col md="4"  lg="12"  xl="12" sm="12" cols="4" class="mt-2">  
 
             <b-button block size="sm" class="b-background" variant="primary">
-              <b-icon class="ico" icon="chat"> </b-icon> Message
+              <img src="@/assets/message.png" alt="" class="btnpngs" /> Message
             </b-button>
 
             </b-col>  
@@ -183,6 +183,14 @@ export default {
 
 
 
+.btnpngs{
+      width: 20px;
+    margin-right: 5px;
+}
+
+.btn{
+  border-radius: 5px;
+}
 
 
 

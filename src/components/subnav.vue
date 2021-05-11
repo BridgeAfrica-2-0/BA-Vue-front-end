@@ -2,7 +2,7 @@
 
 <div class="container-flex  mobi" >
 
-    <b-row >       <b-col cols="1">  </b-col >        <b-col cols="10" style="text-align:center">   
+    <b-row >       <b-col cols="2">  </b-col >        <b-col cols="8" style="text-align:left">   
 
   <span style="display:inline-flex">     
       
@@ -22,6 +22,7 @@
           <!--
              
               <b-dropdown-item  @click="category('Starch')" href="#"> Starch</b-dropdown-item>
+
                <b-dropdown-item  @click="category('Coffee')"  href="#">Coffee/Tea</b-dropdown-item>
                
                
@@ -42,6 +43,9 @@
             <b-dropdown-item  @click="category('Fruits')" href="#"><img class="img-fluid picture logo-img" src="@/assets/icons/fruits.png"  /> Fruits</b-dropdown-item>
 
              <b-dropdown-item  @click="category('Cereals')"  href="#"> <img class="img-fluid picture logo-img" src="@/assets/icons/Cereals.png"  /> Cereals</b-dropdown-item>
+
+             
+              <b-dropdown-item  @click="category('Starch')" href="#"><img class="img-fluid picture logo-img" src="@/assets/icons/Cereals.png"  /> Starch</b-dropdown-item>
       
              
 
@@ -63,7 +67,7 @@
             
               <b-dropdown-item  @click="category('Dairy')"  href="#"> <img class="img-fluid picture logo-img" src="@/assets/icons/dairy.png"  /> Dairy</b-dropdown-item> 
               
-
+            <b-dropdown-item  @click="category('More')" href="#"><img class="img-fluid picture logo-img" src="@/assets/icons/Cereals.png"  /> More</b-dropdown-item>
    
              
 
@@ -375,7 +379,7 @@
 
 
 
-         <b-col cols="1" > </b-col>
+         <b-col cols="2" > </b-col>
 
            </b-row>
 

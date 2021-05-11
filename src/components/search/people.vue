@@ -75,7 +75,7 @@
                           size="sm"
                           class="b-background flexx pobtn"
                         >
-                          <b-icon icon="chat" class="mr-1"> </b-icon> Message
+                         <img src="@/assets/message.png" alt="" class="btnpngs" /> Message
                         </b-button>
                       </b-col>
 
@@ -93,7 +93,7 @@
                           class="b-background flexx pobtn"
                           variant="primary"
                         >
-                          <b-icon icon="plus-circle" class="mr-1"> </b-icon>
+                          <img src="@/assets/community.png" alt="" class="btnpngs" />
                           community
                         </b-button>
                       </b-col>
@@ -202,7 +202,7 @@
                           size="sm"
                           class="b-background flexx pobtn"
                         >
-                          <b-icon icon="chat" class="mr-1"> </b-icon> Message
+                          <img src="@/assets/message.png" alt="" class="btnpngs" /> Message
                         </b-button>
                       </b-col>
 
@@ -220,7 +220,7 @@
                           class="b-background flexx pobtn"
                           variant="primary"
                         >
-                          <b-icon icon="plus-circle" class="mr-1"> </b-icon>
+                           <img src="@/assets/community.png" alt="" class="btnpngs" />
                           community
                         </b-button>
                       </b-col>
@@ -311,7 +311,7 @@
                           size="sm"
                           class="b-background flexx pobtn"
                         >
-                          <b-icon icon="chat" class="mr-1"> </b-icon> Message
+                          <img src="@/assets/message.png" alt="" class="btnpngs" /> Message
                         </b-button>
                       </b-col>
 
@@ -329,7 +329,7 @@
                           class="b-background flexx pobtn"
                           variant="primary"
                         >
-                          <b-icon icon="plus-circle" class="mr-1"> </b-icon>
+                          <img src="@/assets/community.png" alt="" class="btnpngs" />
                           community
                         </b-button>
                       </b-col>
@@ -353,6 +353,16 @@ export default {};
 </script>
 
 <style scoped>
+
+.btnpngs{
+      width: 20px;
+    margin-right: 5px;
+}
+
+.btn{
+  border-radius: 5px;
+}
+
 
 
 .flexx {

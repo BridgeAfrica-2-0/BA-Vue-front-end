@@ -6,7 +6,8 @@
 
  
 <div class="" >  
-
+ 
+ <span v-if="selectcategories.length" >
 
    <b-form-checkbox
         v-for="category in selectcategories.slice(0,4)"
@@ -28,11 +29,11 @@
       <b-link  v-b-modal="'myModalllo'" >  See all  </b-link>
 
       <hr />
+ </span>
 
 
 
-
-      <b-modal ref="myfilters"  id="myModalllo" hide-footer title=" ">
+      <b-modal ref="myfilters1"  id="myModalllo" hide-footer title=" ">
          
          <div  style="column-count: 2;"> 
             <b-form-checkbox
@@ -69,6 +70,7 @@
 
 
 
+<span  v-if="categories_filters.length"  >      
   <h6>  Filters  </h6>
 
    <b-form-checkbox
@@ -86,8 +88,9 @@
       </b-form-checkbox>
   
     <b-link  v-b-modal="'myModalll'" >  See all  </b-link>
+    <hr />
 
-
+  </span>
     <b-modal ref="myfilters"  id="myModalll" hide-footer title=" ">
          
          <div  style="column-count: 2;"> 
@@ -208,6 +211,38 @@
               >
             </b-form-group>
 
+             <b-link  v-b-modal="'Neighbourhood'" >  See all  </b-link>
+
+   <b-modal ref="myfilters"  id="Neighbourhood" hide-footer title=" ">
+    
+    <b-form-group
+              label-cols-lg="12"
+              label="Neighbourhood"
+              label-size="md"
+              label-class="font-weight-bold pt-0"
+              class="mb-0 text-left"
+            >
+              <b-form-checkbox id="" class="a-text" name="" value="">
+                Buea</b-form-checkbox
+              >
+
+              <b-form-checkbox id="" class="a-text" name="" value="">
+                Tiko</b-form-checkbox
+              >
+
+              <b-form-checkbox id="" class="a-text" name="" value="">
+                Limbe</b-form-checkbox
+              >
+
+              <b-form-checkbox id="" class="a-text" name="" value="">
+                MUtengene</b-form-checkbox
+              >
+            </b-form-group>
+
+
+   </b-modal>
+
+
             <br />
 
             <hr />
@@ -235,6 +270,38 @@
                 25km</b-form-checkbox
               >
             </b-form-group>
+
+            
+ <b-link  v-b-modal="'distance'" >  See all  </b-link>
+
+   <b-modal ref="myfilters"  id="distance" hide-footer title=" ">
+               
+
+               <b-form-group
+              label-cols-lg="12"
+              label="Distance"
+              label-size="md"
+              label-class="font-weight-bold pt-0 text-left"
+              class="mb-0 text-left"
+            >
+              <b-form-checkbox id="" class="a-text" name="" value="">
+                3km</b-form-checkbox
+              >
+
+              <b-form-checkbox id="" class="a-text" name="" value="">
+                9km</b-form-checkbox
+              >
+
+              <b-form-checkbox id="" class="a-text" name="" value="">
+                15km</b-form-checkbox
+              >
+
+              <b-form-checkbox id="" class="a-text" name="" value="">
+                25km</b-form-checkbox
+              >
+            </b-form-group>
+
+   </b-modal>
 
 
       <div>
@@ -568,7 +635,10 @@ export default {
           
       switch(newVal) {
 
-       
+      
+   //case 'More': this.$refs['myfilters'].show();  
+   //break;
+ 
 
 
    case 'Fruits': this.categories_filters = this.Fruits_filters;  

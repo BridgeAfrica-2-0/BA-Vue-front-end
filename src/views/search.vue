@@ -201,9 +201,11 @@
   <hr />
 
  
-
+ <span v-if="categories_filters.length" >    
 
       <h6>  Filters  </h6>
+
+</span>
 <div  style="column-count: 2;"> 
    <b-form-checkbox
         v-for="agriculture in categories_filters"
@@ -2199,6 +2201,9 @@ case 'Handicraft': this.selectcategories = this.Handicraft_filters;
 
 
 
+
+   case 'More': console.log("yaya");
+   break;
 
 
 

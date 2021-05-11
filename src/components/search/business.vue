@@ -53,7 +53,7 @@
      <b-row>  <b-col md="4"  lg="12"  xl="12" sm="12" cols="4" class="mt-2">    
 
             <b-button block size="sm" class="b-background" variant="primary">
-              <b-icon class="ico" icon="plus-circle"> </b-icon> Community
+               <img src="@/assets/community.png" alt="" class="btnpngs" /> Community
             </b-button>
 
             </b-col>  
@@ -61,7 +61,7 @@
         <b-col md="4"  lg="12"  xl="12" sm="12" cols="4" class="mt-2">  
 
             <b-button block size="sm" class="b-background" variant="primary">
-              <b-icon class="ico" icon="chat"> </b-icon> Message
+               <img src="@/assets/message.png" alt="" class="btnpngs" /> Message
             </b-button>
 
             </b-col>  
@@ -69,7 +69,7 @@
             <b-col  md="4"  lg="12"  xl="12" sm="12" cols="4"  class="mt-2">  
 
             <b-button block size="sm" class="b-background" variant="primary">
-              <b-icon-geo-alt class="ico" ></b-icon-geo-alt>  Direction
+              <img src="@/assets/direction.png" alt="" class="btnpngs" />  Direction
             </b-button>
 
             </b-col>  
@@ -128,10 +128,10 @@
 
         <b-col lg="4" md="12" xl="4" cols="12" sm="4">
           <div class="s-button">
-     <b-row>  <b-col md="4"  lg="12"  xl="12" sm="12" cols="4" class="mt-2">    
+    <b-row>  <b-col md="4"  lg="12"  xl="12" sm="12" cols="4" class="mt-2">    
 
             <b-button block size="sm" class="b-background" variant="primary">
-              <b-icon class="ico" icon="plus-circle"> </b-icon> Community
+               <img src="@/assets/community.png" alt="" class="btnpngs" /> Community
             </b-button>
 
             </b-col>  
@@ -139,7 +139,7 @@
         <b-col md="4"  lg="12"  xl="12" sm="12" cols="4" class="mt-2">  
 
             <b-button block size="sm" class="b-background" variant="primary">
-              <b-icon class="ico" icon="chat"> </b-icon> Message
+               <img src="@/assets/message.png" alt="" class="btnpngs" /> Message
             </b-button>
 
             </b-col>  
@@ -147,7 +147,7 @@
             <b-col  md="4"  lg="12"  xl="12" sm="12" cols="4"  class="mt-2">  
 
             <b-button block size="sm" class="b-background" variant="primary">
-              <b-icon-geo-alt class="ico" ></b-icon-geo-alt>  Direction
+              <img src="@/assets/direction.png" alt="" class="btnpngs" />  Direction
             </b-button>
 
             </b-col>  
@@ -174,11 +174,30 @@
       <b-row>
         <b-col md="3" xl="3" lg="3" cols="5"  sm="3">
           <div >
-            <img
+
+            <splide :options="options" class="r-image">
+    <splide-slide>
+       <img
               src="https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg"
               
-              class="r-image"
+              class=""
             />
+    </splide-slide>
+
+
+
+    <splide-slide>
+       <img
+              src="https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg"
+              
+              class=""
+            />
+    </splide-slide>
+
+            </splide>
+
+
+           
           </div>
         </b-col>
         <b-col md="7" cols="7"  lg="5" sm="5">
@@ -205,7 +224,7 @@
      <b-row>  <b-col md="4"  lg="12"  xl="12" sm="12" cols="4" class="mt-2">    
 
             <b-button block size="sm" class="b-background" variant="primary">
-              <b-icon class="ico" icon="plus-circle"> </b-icon> Community
+               <img src="@/assets/community.png" alt="" class="btnpngs" /> Community
             </b-button>
 
             </b-col>  
@@ -213,7 +232,7 @@
         <b-col md="4"  lg="12"  xl="12" sm="12" cols="4" class="mt-2">  
 
             <b-button block size="sm" class="b-background" variant="primary">
-              <b-icon class="ico" icon="chat"> </b-icon> Message
+               <img src="@/assets/message.png" alt="" class="btnpngs" /> Message
             </b-button>
 
             </b-col>  
@@ -221,7 +240,7 @@
             <b-col  md="4"  lg="12"  xl="12" sm="12" cols="4"  class="mt-2">  
 
             <b-button block size="sm" class="b-background" variant="primary">
-              <b-icon-geo-alt class="ico" ></b-icon-geo-alt>  Direction
+              <img src="@/assets/direction.png" alt="" class="btnpngs" />  Direction
             </b-button>
 
             </b-col>  
@@ -300,8 +319,14 @@ export default {
 
 
 
+.btnpngs{
+      width: 20px;
+    margin-right: 5px;
+}
 
-
+.btn{
+  border-radius: 5px;
+}
 
 
 .card {

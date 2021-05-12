@@ -730,7 +730,7 @@ export default {
 
    case 'Bars': this.categories_filters = this.Bars_filters; 
  break;
- case 'African Food': this.categories_filters = this.African_Food; 
+ case 'African Food': this.categories_filters = this.African_food; 
  break;
   case 'Asian food': this.categories_filters = this.Asian_food_filters; 
  break;
@@ -834,7 +834,7 @@ case 'Handicrafts': this.selectcategories = this.Handicrafts_filters;
  
    break;
 
-   case 'Auto Mechanics': this.selectcategories = this.Auto_Mechanics; 
+   case 'Auto Mechanics': this.selectcategories = this.Mechanics_filters; 
  
    break;
 
@@ -1029,7 +1029,8 @@ case 'Handicrafts': this.selectcategories = this.Handicrafts_filters;
         { value: "Plantains", text: "Plantains" },
         { value: "Potatoes", text: "Potatoes" },
 
-        { value: "Yams", text: "Yams" },
+        { value: "Bananas", text: "Bananas" },
+         { value: "Yams", text: "Yams" },
 
         { value: "Garri", text: "Garri" },
         { value: "Okra", text: "Okra" },
@@ -1117,12 +1118,12 @@ case 'Handicrafts': this.selectcategories = this.Handicrafts_filters;
 
 
 
-
+  
 
        Vegetables_filters: [
         { value: "Cucumbers", text: "Cucumbers" },
         { value: "Tomato", text: "Tomato" },
-      
+        { value: "broccoli", text: "broccoli" },
         { value: "Pepper", text: "Pepper" },
         { value: "Carrots", text: "Carrots" },
         { value: "Egusi", text: "Egusi" },
@@ -1171,6 +1172,11 @@ case 'Handicrafts': this.selectcategories = this.Handicrafts_filters;
         { value: "Oils", text: "Oils" },
         { value: "Coffee", text: "Coffee" },
         { value: "Spices", text: "Spices" },
+        
+
+
+        { value: "Beans", text: "Beans" },
+
 
          { value: "Finished_Branded_Products", text: "Branded Products" },
 
@@ -1301,7 +1307,7 @@ case 'Handicrafts': this.selectcategories = this.Handicrafts_filters;
 
  restaurants_filters: [
 
-     { value: "African food", text: "African food" },
+     { value: "African_food", text: "African food" },
      
         { value: "Fast_food ", text: "Fast food " },
         { value: "European food", text: "European food" },
@@ -1329,8 +1335,8 @@ case 'Handicrafts': this.selectcategories = this.Handicrafts_filters;
       
  Mechanics_filters: [
         { value: "Car care", text: "Car care " },
-        { value: "Parking", text: "Spare parts " },
-        { value: "Spare parts", text: "Car dealers" },
+        { value: "Spare part", text: "Spare parts " },
+       
 
         { value: "Auto Dealers", text: "Auto Dealers" },
 
@@ -1344,7 +1350,7 @@ case 'Handicrafts': this.selectcategories = this.Handicrafts_filters;
 
               
  Handicrafts_filters: [
-        { value: "Home Decor ", text: "Home Decor" },
+        { value: "Home Decor", text: "Home Decor" },
         { value: "Textile", text: "Textile" },
                
 
@@ -1636,7 +1642,12 @@ Professional_services  : [
           { value: "Carpeting", text: "Carpeting" },
            { value: "Gardeners", text: "Gardeners" },
            
+             { value: "locksmiths", text: "Key’s locksmiths" },
+            
              { value: "Painters", text: "Painters" },
+
+              { value: "Gardeners", text: "Gardeners" },
+               { value: "Security system", text: "Security system" },
              
 
            
@@ -1721,7 +1732,7 @@ Professional_services  : [
 
 
 
- African_food : [
+ African_food: [
 
         { value: "Kati-kati", text: "Kati-kati " },
         { value: "Eru", text: "Eru " },
@@ -1940,7 +1951,7 @@ Professional_services  : [
         { value: "maintenance products", text: " maintenance products" },
                 
 
-      ],
+      ],    
 
 
       
@@ -2425,6 +2436,55 @@ Ministries : [
          
          switch(this.default_category) {
 
+           
+
+
+
+            case 'Primary Education': this.categories_filters = this.primary_eduction_filters;  
+      break;
+  
+
+
+   case 'Secondary Education': this.categories_filters = this.secondary_eduction_filters;  
+      break;
+  
+
+   case 'Tertiary Education': this.categories_filters = this.tertiary_eduction_filters;  
+      break;
+  
+
+   case 'Vocational': this.categories_filters = this.Vocational_filters;  
+      break;
+  
+
+           case 'Car care': this.categories_filters = this.Car_care_filters;  
+      break;
+  
+
+
+   case 'Auto Dealers': this.categories_filters = this.Auto_Dealers_filters;  
+      break;
+ 
+
+     
+
+
+
+  case 'Spare part': this.categories_filters = this.Spare_parts_filters;  
+      break;
+ 
+
+
+
+           case 'Home Decor': this.categories_filters = this.Home_Decor_filters;  
+      break;
+
+
+
+ case 'Textile': this.categories_filters = this.Textile_filters;  
+      break;
+
+
             case 'Professional_and_home_service': this.categories_filters = this.Professional_and_home_service;
       
            break;
@@ -2516,7 +2576,7 @@ Ministries : [
 
 
 
-   case 'Phone accessory': this.categories_filters = this.phone_filters; 
+   case 'Phone and accessories': this.categories_filters = this.phone_filters; 
 
 
 
@@ -2544,7 +2604,7 @@ Ministries : [
 
    case 'Bars': this.categories_filters = this.Bars_filters; 
  break;
- case 'African food': this.categories_filters = this.African_Food; 
+ case 'African_food': this.categories_filters = this.African_food; 
  break;
   case 'Asian food': this.categories_filters = this.Asian_food_filters; 
  break;
@@ -2566,14 +2626,14 @@ Ministries : [
 
    //clothing cases
 
-case 'Women clothing': this.categories_filters = this.Women_clothing; 
+case 'female': this.categories_filters = this.Women_clothing; 
 
   break;
    case 'Women accessories': this.categories_filters = this.Women_accessories; 
    
    break;
 
-   case 'Men Clothing': this.categories_filters = this.Men_Clothing; 
+   case 'men': this.categories_filters = this.Men_Clothing; 
 
   break;
    case 'Men Accessories': this.categories_filters = this.Men_Accessories; 

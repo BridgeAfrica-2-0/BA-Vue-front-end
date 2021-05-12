@@ -6,7 +6,14 @@
       <div class="container-fluid ">
 
 
-        <div class="col-md-6  col-lg-3 col-xl-2  ">
+        <div class="col-md-6  col-lg-3 col-xl-2  text-center ">
+
+          <span class="d-block d-lg-none">
+
+           <b-icon icon="house-fill" style=" float:left" font-scale="1.5; margin-top:5px" variant="primary"></b-icon> 
+
+          </span>
+
         <a class=" d-inline-block align-top mt-1 " href="#">
          
 
@@ -17,7 +24,7 @@
             class="balogo"
             loading="lazy"
            
-          />
+          />     
 
           
         </a>
@@ -35,15 +42,103 @@
         <div class="col-lg-4 col-xl-6 ">
 
     
+          <form class="d-block d-lg-none">  
+            
+            <b-input-group class="b-shadow mt-3  ">
 
 
-          
-          <form class="form-inline input-group b-shadow b-radius"  >
+
+       
+            <div class="input-group-append color-mobile "  style=" 
+             border:none ">
+              <span class="input-group-text border-left-0 color-mobile " style="width:40px;  border-right: none; "  
+                >   
+
+                 
+                  <b-icon icon="search" style="color:#e75c18" font-scale="1.5"></b-icon>
+              
+              </span>
+
+            </div>   
+             
+                 <input
+              id="search-ba"
+              type="search"
+              data-toggle="popover"
+              class="form-control  search-mobile "
+              style=" border-left: none; "
+              placeholder="Find Pharmacy"
+              aria-label=""
+              data-original-title=""
+              title=""
+              v-on:click="toggleinput()"
+            />
+
+      
+      </b-input-group>
+
+
+
+        
+  <span style="display:none"  ref="mobileinput" >
+
+          <b-input-group class=" b-shadow  mt-2 "   >
+
+
+
+       
+            <div class="input-group-append color-mobile "  style=" 
+             border:none ">
+              <span class="input-group-text border-left-0 color-mobile " style="width:40px;  border-right: none; "  
+                >   
+
+                 
+                  <b-icon icon="geo-alt" style="color:#e75c18" font-scale="1.5"></b-icon>   
+              
+              </span>
+
+            </div>
+             
+                 <input
+              id="search-ba"
+              type="search"
+              list="browsers"
+              data-toggle="popover"
+              class="form-control  search-mobile "
+              style=" border-left: none; "
+              placeholder="Find Pharmacy"
+              aria-label=""
+              data-original-title=""
+              title=""
+            />
+
+             <datalist id="browsers">    
+             <option value=" Current Location " >      </option>
+              <option value="Yaounde " />
+    
+           </datalist>
+
+
+      
+      </b-input-group>
+
+
+  </span>
+                
+            
+          </form>
+
+         
+
+          <span class="d-none d-lg-block">
+          <form class="form-inline input-group b-shadow b-radius  "  >
+
             <input
               id="search-ba"
               type="search"
               data-toggle="popover"
-              class="form-control border-right-0 search-h"
+              class="form-control  search-h"
+              style=" "
               placeholder="Find Pharmacy"
               aria-label=""
               data-original-title=""
@@ -56,7 +151,7 @@
               type="search"
               list="browsers"
               data-toggle="popover"
-              class="form-control border-right-0 search-h"
+              class="form-control   search-h"
               placeholder="Where "
               aria-label="search bridge africa"
               data-original-title=""
@@ -84,6 +179,8 @@
 
             </div>
           </form>
+
+          </span>
           <div id="search-popover" class="d-none"></div>
 
 
@@ -93,6 +190,9 @@
 
         <div class="col-md-4">
 
+          
+    <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
+
        <button
           class="navbar-toggler"
           type="button"
@@ -101,6 +201,7 @@
           aria-controls="navbarMenu"
           aria-expanded="false"
           aria-label="Toggle navigation"
+          :class="{ 'togglebtn': isActive }"
         >
           <fas-icon class="primary search" :icon="['fas', 'bars']" />
         </button>
@@ -134,7 +235,6 @@
 
 
 
-    <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
 
 <div style="float: right;" >
@@ -581,9 +681,32 @@
   </header>
 </template>
 
-<script>
+<script>  
 export default {
-  name: "navbar"
+  name: "navbar",
+  
+
+  
+
+  data() {
+    return {
+     
+
+      isActive: false,
+
+    }},
+
+  
+  methods: {
+
+    toggleinput(){
+     
+      this.$refs.mobileinput.style.display = "block"; 
+      this.isActive = true;
+
+    }
+    }
+
 };
 
 
@@ -591,7 +714,7 @@ export default {
 
 <style scoped>
 
-@media (min-width: 768px) {  
+@media (min-width: 992px) {  
   
   .balogo{
  
@@ -603,11 +726,12 @@ export default {
 }
 
 
-@media (max-width: 768px) {  
+@media (max-width: 992px) {  
   
   .balogo{
  
- width: 50px
+ width: 100px;
+ margin-left: -30px;
 
   }
  
@@ -632,11 +756,38 @@ export default {
   background-color: #e75c18;
 }
 
-.search-h{
+
+@media only screen and (max-width: 992px) {
+
+ .search-mobile{
+
+ border-left: none;
+
+ 
+}
+
+.color-mobile{
+    background-color: white;
+}
+
+
+}
+
+
+@media only screen and (min-width: 768px) {
+    
+    .search-h{
   height: 48px;
  
  
 }
+
+}
+
+
+
+
+
 .input-size {
   width: 401px;
 }
@@ -755,7 +906,7 @@ export default {
   width: 95%;
 }
 
-@media (max-width: 756px) {
+@media (max-width: 992px) {
 
 .navbar-toggler {
     padding: .25rem .75rem;
@@ -765,12 +916,21 @@ export default {
     border: 1px solid transparent;
     border-radius: .25rem;
     position: absolute !important;
-    top: -90px !important;
+   
+   margin-top: -100px !important;
+
     right: 13px !important;
 }
 
 
+.togglebtn{
+
+ margin-top: -145px !important;
 }
+
+
+}
+
 
 
 

@@ -1,5 +1,5 @@
 <template>
-  <div style="overflow-y: hidden; ">
+  <div style="overflow-x: hidden; ">
 
 
    <Nav />
@@ -762,8 +762,10 @@ export default {
       
         { value: "Plantains", text: "Plantains" },
         { value: "Potatoes", text: "Potatoes" },
-
+          { value: "Plantains", text: "Plantains" },
         { value: "Yams", text: "Yams" },
+
+        { value: "Beans", text: "Beans" },
 
         { value: "Garri", text: "Garri" },
         { value: "Okra", text: "Okra" },
@@ -1063,8 +1065,8 @@ export default {
       
  Mechanics_filters: [
         { value: "Car care", text: "Car care " },
-        { value: "Parking", text: "Spare parts " },
-        { value: "Spare parts", text: "Car dealers" },
+        { value: "Spare parts", text: "Spare parts " },
+        
 
         { value: "Auto Dealers", text: "Auto Dealers" },
 
@@ -1078,7 +1080,7 @@ export default {
 
               
  Handicrafts_filters: [
-        { value: "Home Decor ", text: "Home Decor" },
+        { value: "Home Decor", text: "Home Decor" },
         { value: "Textile", text: "Textile" },
                
 
@@ -1258,7 +1260,9 @@ export default {
 
 
         { value: "Cleaning Services", text: "Cleaning Services" },
+ 
 
+ { value: "Accounting", text: "Accounting" },
 
         { value: "Translation services", text: "Translation services" },
 
@@ -2183,6 +2187,33 @@ case 'Handicraft': this.selectcategories = this.Handicraft_filters;
 
       switch(this.default_category) {
   
+
+
+    case 'Primary Education': this.categories_filters = this.primary_eduction_filters;  
+      break;
+  
+
+
+   case 'Secondary Education': this.categories_filters = this.secondary_eduction_filters;  
+      break;
+  
+
+   case 'Tertiary Education': this.categories_filters = this.tertiary_eduction_filters;  
+      break;
+  
+
+   case 'Vocational': this.categories_filters = this.Vocational_filters;  
+      break;
+
+       
+           case 'Home Decor': this.categories_filters = this.Home_Decor_filters;  
+      break;
+
+      
+           case 'Textile': this.categories_filters = this.Textile_filters;  
+      break;
+
+
   
            case 'Professional_and_home_service': this.categories_filters = this.Professional_and_home_service;
       
@@ -2201,7 +2232,22 @@ case 'Handicraft': this.selectcategories = this.Handicraft_filters;
 
 
 
+     case 'Car care': this.categories_filters = this.Car_care_filters;  
+      break;
+  
 
+
+   case 'Auto Dealers': this.categories_filters = this.Auto_Dealers_filters;  
+      break;
+ 
+
+     
+
+
+
+  case 'Spare part': this.categories_filters = this.Spare_parts_filters;  
+      break;
+ 
 
 
 
@@ -2327,14 +2373,14 @@ case 'Handicraft': this.selectcategories = this.Handicraft_filters;
 
    //clothing cases
 
-case 'Women clothing': this.categories_filters = this.Women_clothing; 
+case 'female': this.categories_filters = this.Women_clothing; 
 
   break;
    case 'Women accessories': this.categories_filters = this.Women_accessories; 
    
    break;
 
-   case 'Men Clothing': this.categories_filters = this.Men_Clothing; 
+   case 'men': this.categories_filters = this.Men_Clothing; 
 
   break;
    case 'Men Accessories': this.categories_filters = this.Men_Accessories; 

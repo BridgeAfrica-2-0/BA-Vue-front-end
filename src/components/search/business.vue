@@ -175,7 +175,7 @@
         <b-col md="3" xl="3" lg="3" cols="5"  sm="3">
           <div >
 
-            <splide :options="options" class="r-image">
+            <splide  class="r-image">
     <splide-slide>
        <img
               src="https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg"

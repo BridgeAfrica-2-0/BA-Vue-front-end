@@ -19,6 +19,18 @@ Vue.use(Vuex);
 
 
 
+import IconifyIcon from '@iconify/vue';
+
+import homeIconData from '@iconify-icons/mdi-light/home';   
+
+IconifyIcon.addIcon('home', homeIconData);
+
+
+
+
+
+
+
 import VueMaterial from 'vue-material'
 //import 'vue-material/dist/vue-material.min.css'
 //import 'vue-material/dist/theme/default.css'

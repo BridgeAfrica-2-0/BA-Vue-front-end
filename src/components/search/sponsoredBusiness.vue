@@ -7,86 +7,8 @@
        
 
 
-       
+           
 
-
-
-    <div class="people-style shadow">
-      <b-row>
-        <b-col md="3" xl="3" lg="3" cols="5"  sm="3">
-          <div >
-            <img
-              src="https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg"
-              
-              class="r-image"
-            />
-          </div>
-        </b-col>
-        <b-col md="7" cols="7"  lg="5" sm="5">
-          <p class="textt">
-            <strong class="title"> Super Car ltd </strong> <br />
-             Car marketing  
-              <br />  20k Community <br />
-            
-            <span class="location"> <b-icon-geo-alt class="ico" ></b-icon-geo-alt> Douala cameroon  </span> <br /> 
-            
-
-             super best car seller in the world
-            adipisicing elit. lorem epsep this is  <b-link>Read More</b-link>
-          </p>
-        </b-col>
-
-
-
-
-
-
-        <b-col lg="4" md="12" xl="4" cols="12" sm="4">
-          <div class="s-button">
-
-    <b-row>  <b-col md="4"  lg="12"  xl="12" sm="12" cols="4" class="mt-2">    
-
-            <b-button block size="sm" class="b-background" variant="primary">
-               <img src="@/assets/community.png" alt="" class="btnpngs" /> Community
-            </b-button>
-
-            </b-col>  
-
-        <b-col md="4"  lg="12"  xl="12" sm="12" cols="4" class="mt-2">  
-
-            <b-button block size="sm" class="b-background" variant="primary">
-               <img src="@/assets/message.png" alt="" class="btnpngs" /> Message
-            </b-button>
-
-            </b-col>  
-
-            <b-col  md="4"  lg="12"  xl="12" sm="12" cols="4"  class="mt-2">  
-
-            <b-button block size="sm" class="b-background" variant="primary">
-              <img src="@/assets/direction.png" alt="" class="btnpngs" />  Direction
-            </b-button>
-
-            </b-col>  
-   </b-row>
-
-          </div>
-        </b-col>
-      </b-row>
-    </div>
-
-
-
-
-    </splide-slide>
-
-
-    <splide-slide>
-
-   
-
-
-
-   
 
 
 
@@ -124,27 +46,26 @@
 
         <b-col lg="4" md="12" xl="4" cols="12" sm="4">
           <div class="s-button">
-     
-      <b-row>  <b-col md="4"  lg="12"  xl="12" sm="12" cols="4" class="mt-2">    
+     <b-row>  <b-col md="4"  lg="12"  xl="12" sm="12" cols="4" class="mt-2">    
 
-            <b-button block size="sm" class="b-background" variant="primary">
-               <img src="@/assets/community.png" alt="" class="btnpngs" /> Community
-            </b-button>
+            <b-button block size="sm" class="b-background shadow" variant="primary">
+               <img src="@/assets/community.png" alt="" class="btnpngs" /><span class="btn-com">Community   </span>
+            </b-button>   
 
             </b-col>  
 
         <b-col md="4"  lg="12"  xl="12" sm="12" cols="4" class="mt-2">  
 
-            <b-button block size="sm" class="b-background" variant="primary">
-               <img src="@/assets/message.png" alt="" class="btnpngs" /> Message
+            <b-button block size="sm" class="b-background shadow" variant="primary">
+               <img src="@/assets/message.png" alt="" class="btnpngs" /><span class="btn-text"> Message </span>
             </b-button>
 
             </b-col>  
 
             <b-col  md="4"  lg="12"  xl="12" sm="12" cols="4"  class="mt-2">  
 
-            <b-button block size="sm" class="b-background" variant="primary">
-              <img src="@/assets/direction.png" alt="" class="btnpngs" />  Direction
+            <b-button block size="sm" class="b-background shadow" variant="primary">
+              <img src="@/assets/direction.png" alt="" class="btnpngs" /><span class="btn-text">Direction</span>
             </b-button>
 
             </b-col>  
@@ -156,8 +77,16 @@
     </div>
 
 
-      
+
+
+
+
+
+
     </splide-slide>
+
+
+  
 
    
   </splide>
@@ -206,6 +135,19 @@ export default {
 </script>
 
 <style scoped>
+
+
+
+
+.btn-text{
+
+   margin-left: 5px;
+}
+
+.btn-com{
+  margin-left: 2px;
+}
+
 
 
 

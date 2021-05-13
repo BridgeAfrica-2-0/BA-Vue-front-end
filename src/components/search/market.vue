@@ -41,7 +41,7 @@
       <div>
 
 
-          <span class="marketbtn"> <b-button variant="primary" class="buybtn" @click="productDetails" > Buy </b-button>  <b-button variant="primary" class="buybtn"> Visit Shop </b-button>  </span>
+          <span class="marketbtn"> <b-button variant="primary" class="buybtn shadow" @click="productDetails" > Buy </b-button>  <b-button variant="primary" class="buybtn shadow"> Visit Shop </b-button>  </span>
             
           <br />    
 
@@ -91,7 +91,7 @@
       <div>
 
 
-          <span class="marketbtn"> <b-button variant="primary" class="buybtn" @click="productDetails" > Buy </b-button>  <b-button variant="primary" class="buybtn"> Visit Shop </b-button>  </span>
+          <span class="marketbtn"> <b-button variant="primary" class="buybtn shadow" @click="productDetails" > Buy </b-button>  <b-button variant="primary" class="buybtn shadow"> Visit Shop </b-button>  </span>
             
           <br />    
 

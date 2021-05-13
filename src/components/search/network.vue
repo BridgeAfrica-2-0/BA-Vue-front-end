@@ -58,16 +58,16 @@
           <div class="s-button">
      <b-row>  <b-col md="4"  lg="12"  xl="12" sm="12" cols="4" class="mt-2">    
 
-            <b-button block size="sm" class="b-background" variant="primary">
-              <img src="@/assets/community.png" alt="" class="btnpngs" /> Community
+            <b-button block size="sm" class="b-background shadow" variant="primary">
+              <img src="@/assets/community.png" alt="" class="btnpngs" />  <span class="btn-com"> Community </span>
             </b-button>
 
             </b-col>  
 
        <b-col md="4"  lg="12"  xl="12" sm="12" cols="4" class="mt-2">  
 
-            <b-button block size="sm" class="b-background" variant="primary">
-               <img src="@/assets/community.png" alt="" class="btnpngs" /> Message
+            <b-button block size="sm" class="b-background shadow" variant="primary">
+               <img src="@/assets/community.png" alt="" class="btnpngs" /><span class="btn-text"> Message </span>
             </b-button>
 
             </b-col>  
@@ -126,16 +126,16 @@
           <div class="s-button">
      <b-row>  <b-col md="4"  lg="12"  xl="12" sm="12" cols="4" class="mt-2">    
 
-            <b-button block size="sm" class="b-background" variant="primary">
-               <img src="@/assets/community.png" alt="" class="btnpngs" /> Community
+            <b-button block size="sm" class="b-background shadow" variant="primary">
+               <img src="@/assets/community.png" alt="" class="btnpngs" /><span class="btn-com"> Community </span>  
             </b-button>
 
             </b-col>  
 
        <b-col md="4"  lg="12"  xl="12" sm="12" cols="4" class="mt-2">  
 
-            <b-button block size="sm" class="b-background" variant="primary">
-              <img src="@/assets/message.png" alt="" class="btnpngs" /> Message
+            <b-button block size="sm" class="b-background shadow" variant="primary">
+              <img src="@/assets/message.png" alt="" class="btnpngs" /><span class="btn-text"> Message </span>
             </b-button>
 
             </b-col>  
@@ -180,6 +180,16 @@ export default {
 </script>
 
 <style scoped>
+
+
+.btn-text{
+
+   margin-left: 5px;
+}
+
+.btn-com{
+  margin-left: 2px;
+}
 
 
 

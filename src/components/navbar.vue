@@ -201,12 +201,94 @@
           aria-controls="navbarMenu"
           aria-expanded="false"
           aria-label="Toggle navigation"
+          @click="togglenav()"
           :class="{ 'togglebtn': isActive }"
         >
           <fas-icon class="primary search" :icon="['fas', 'bars']" />
         </button>
 
 
+
+
+
+
+<div class=" d-block d-lg-none "  v-if="shownav == true" >
+               
+              
+               
+                <div class="mt-3">
+
+                   <div class="d-inline-flex flex-row align-items-center">
+                    <div>
+                      <img
+                        src="@/assets/img/profile-pic.jpg"
+                        class="rounded-circle"
+                        alt=""
+                        width="30"
+                        height="30"
+                      />
+                    </div>
+                    <div class="d-flex flex-column ml-1 line-size">
+                      <div class="font-weight-bold">Maxine Moffet GG</div>
+                      <div class="small text-muted"> Active </div>
+                    </div>
+                  </div>
+
+                  <div class="d-inline-flex flex-row align-items-center mb-1">
+                    <div>
+                      <img
+                        src="@/assets/img/logo3.png"
+                        class="rounded-circle"
+                        alt=""
+                        width="25"
+                        height="25"
+                      />
+                    </div>
+                    <div class="ml-3 mt-2">
+                     <p class="font-weight-bold">Your Businesses</p>
+                    </div>
+                  </div>
+                </div>
+                <hr class="mup" />
+             
+                <a
+                  href="https://bridgeafrica.info/nav/account-settings.html"
+                  class="other-menu suggest-item cursor-pointer text-decoration-none text-dark"
+                >
+                  <span class="mr-2"
+                    ><fas-icon class="violet search" :icon="['fas', 'cogs']"
+                  /></span>
+                  Account Settings
+                </a>
+                <hr class="h-divider" />
+                <div class="other-menu suggest-item cursor-pointer">
+                  <span class="mr-1"
+                    ><fas-icon class="violet search" :icon="['fas', 'question']"
+                  /></span>
+                  Help and Support
+                </div>
+                <hr class="h-divider" />
+                <div class="other-menu suggest-item cursor-pointer">
+                  <span class="mr-2"
+                    ><fas-icon
+                      class="violet search"
+                      :icon="['fas', 'globe-americas']"
+                  /></span>
+                  Language
+                </div>
+                <hr class="h-divider" />
+                <a
+                  href="https://bridgeafrica.info/nav/owner-other-menu.html"
+                  class="other-menu suggest-item cursor-pointer text-decoration-none text-dark"
+                >
+                  <span class="mr-2"
+                    ><fas-icon
+                      class="violet search"
+                      :icon="['fas', 'sign-out-alt']"
+                  /></span>
+                  Logout
+                </a>
+              </div>
 
 
 
@@ -574,7 +656,9 @@
             </a>
             <b-popover target="other-menu" triggers="hover" placement="top">
               <div class="popover-body">
-                <p class="font-weight-bold">Your Businesses</p>
+               
+              
+               
                 <div>
                   <div class="d-inline-flex flex-row align-items-center mb-1">
                     <div>
@@ -586,34 +670,13 @@
                         height="25"
                       />
                     </div>
-                    <div class="ml-3">
-                      Business 1
+                    <div class="ml-3 mt-2">
+                     <p class="font-weight-bold">Your Businesses</p>
                     </div>
                   </div>
                 </div>
-                <div>
-                
-
-
-                </div>
-                <div>
-                  <div class="d-inline-flex flex-row align-items-center mb-1">
-                    <div>
-                      <img
-                        src="@/assets/img/logo3.png"
-                        class="rounded-circle"
-                        alt=""
-                        width="25"
-                        height="25"
-                      />
-                    </div>
-                    <div class="ml-3">
-                      Business 3
-                    </div>
-                  </div>
-                </div>
-                <a href="" class="text-ored"><u>View all</u></a>
-                <hr class="h-divider" />
+                <hr />
+             
                 <a
                   href="https://bridgeafrica.info/nav/account-settings.html"
                   class="other-menu suggest-item cursor-pointer text-decoration-none text-dark"
@@ -693,6 +756,7 @@ export default {
      
 
       isActive: false,
+      shownav: false,
 
     }},
 
@@ -704,7 +768,24 @@ export default {
       this.$refs.mobileinput.style.display = "block"; 
       this.isActive = true;
 
+    },
+
+    togglenav(){
+
+     
+      
+      if(this.shownav == false ){
+        this.shownav = true;
+        console.log(this.shownav);
+      }else{
+        this.shownav = false;
+        console.log(this.shownav);
+      }
+
     }
+
+
+
     }
 
 };
@@ -934,7 +1015,10 @@ export default {
 
 
 
+.mup{
 
+  margin-top: -5px;
+}
 
 
 </style>

@@ -73,9 +73,9 @@
                           block
                           variant="primary"
                           size="sm"
-                          class="b-background flexx pobtn"
+                          class="b-background flexx pobtn shadow"
                         >
-                         <img src="@/assets/message.png" alt="" class="btnpngs" /> Message
+                         <img src="@/assets/message.png" alt="" class="btnpngs " /><span class="btn-text">Message</span>
                         </b-button>
                       </b-col>
 
@@ -90,11 +90,10 @@
                         <b-button
                           block
                           size="sm"
-                          class="b-background flexx pobtn"
+                          class="b-background flexx pobtn shadow"
                           variant="primary"
                         >
-                          <img src="@/assets/community.png" alt="" class="btnpngs" />
-                          community
+                          <img src="@/assets/community.png" alt="" class="btnpngs " /><span class="btn-com">community</span>
                         </b-button>
                       </b-col>
                     </b-row>
@@ -200,9 +199,9 @@
                           block
                           variant="primary"
                           size="sm"
-                          class="b-background flexx pobtn"
+                          class="b-background flexx pobtn shadow"
                         >
-                          <img src="@/assets/message.png" alt="" class="btnpngs" /> Message
+                           <img src="@/assets/message.png" alt="" class="btnpngs " /><span class="btn-text">Message</span>
                         </b-button>
                       </b-col>
 
@@ -217,11 +216,10 @@
                         <b-button
                           block
                           size="sm"
-                          class="b-background flexx pobtn"
+                          class="b-background flexx pobtn shadow"
                           variant="primary"
                         >
-                           <img src="@/assets/community.png" alt="" class="btnpngs" />
-                          community
+                                    <img src="@/assets/community.png" alt="" class="btnpngs " /><span class="btn-com">community</span>
                         </b-button>
                       </b-col>
                     </b-row>
@@ -309,9 +307,9 @@
                           block
                           variant="primary"
                           size="sm"
-                          class="b-background flexx pobtn"
+                          class="b-background flexx pobtn shadow"
                         >
-                          <img src="@/assets/message.png" alt="" class="btnpngs" /> Message
+                        <img src="@/assets/message.png" alt="" class="btnpngs " /><span class="btn-text">Message</span>
                         </b-button>
                       </b-col>
 
@@ -326,11 +324,10 @@
                         <b-button
                           block
                           size="sm"
-                          class="b-background flexx pobtn"
+                          class="b-background flexx pobtn shadow"
                           variant="primary"
                         >
-                          <img src="@/assets/community.png" alt="" class="btnpngs" />
-                          community
+                                  <img src="@/assets/community.png" alt="" class="btnpngs " /><span class="btn-com">community</span>
                         </b-button>
                       </b-col>
                     </b-row>
@@ -353,6 +350,16 @@ export default {};
 </script>
 
 <style scoped>
+
+
+.btn-text{
+
+   margin-left: 5px;
+}
+
+.btn-com{
+  margin-left: 2px;
+}
 
 
 

@@ -1234,6 +1234,7 @@ case 'Handicrafts': this.selectcategories = this.Handicrafts_filters;
           { value: "Livestock", text: "Livestock" },
 
            { value: "Dairy", text: "Dairy" },
+            { value: "Beans", text: "Beans" },
 
            
         { value: "Raw_material", text: "Raw material " },

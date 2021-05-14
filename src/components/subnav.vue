@@ -1,8 +1,8 @@
 <template>
 
-<div class="container-flex  mobi" >
+<div class="container-flex  mobi  d-none d-lg-none d-xl-block" >
 
-    <b-row >       <b-col cols="2">  </b-col >        <b-col cols="8" style="text-align:left">   
+    <b-row >       <b-col cols="1"  lg="2" >  </b-col >        <b-col cols="8" lg="10" style="text-align:left">   
 
   <span style="display:inline-flex">     
       
@@ -11,7 +11,7 @@
 
 
 
-          <span @mouseover="onOverAgriculture" @mouseleave="onLeaveAgriculture" >
+          <span @mouseover="onOverAgriculture"  @click="onOverAgriculture" @mouseleave="onLeaveAgriculture" >
 
     <b-nav-item-dropdown id="dropdown-1" text=" Agriculture " ref="Agriculture"  >
       <hr style="margin-top:-10px;  background-color:red; height:3px; width:40%; float:left "  />  <br />
@@ -88,7 +88,7 @@
 
 
 
-   <span  @mouseover="onOverElectronics"   @mouseleave="onLeaveElectronics"  >
+   <span  @mouseover="onOverElectronics" @click="onOverElectronics"  @mouseleave="onLeaveElectronics"  >
 
          <b-nav-item-dropdown @click="onOverElectronics"   id=""  ref="Electronics"  >
 
@@ -219,7 +219,7 @@
 
 
   
-   <span  @mouseover="onOverMayorcouncils"  @mouseleave="onLeaveMayorcouncils"  >
+   <span  @mouseover="onOverMayorcouncils" @click="onOverMayorcouncils"  @mouseleave="onLeaveMayorcouncils"  >
 
          <b-nav-item-dropdown   id=""  ref="Mayorcouncils"  >
 
@@ -270,7 +270,7 @@
 
 
 
-   <span  @mouseover="onOverHealthunits"  @mouseleave="onLeaveHealthunits" >
+   <span  @mouseover="onOverHealthunits"  @click="onOverHealthunits"  @mouseleave="onLeaveHealthunits" >
 
          <b-nav-item-dropdown @click="onOverHealthunits"   id=""  ref="Healthunits"  >
 
@@ -343,7 +343,7 @@
 
              <b-col cols="6" class="p-2">   
                <b-dropdown-item  @click="category('Auto Mechanics')"  href="#"> <img class="img-fluid picture logo-img" src="@/assets/icons/mechanics.png"  />Auto Mechanics </b-dropdown-item>
-                   <b-dropdown-item  @click="category('Carding')"  href="#"> <img class="img-fluid picture logo-img" src="@/assets/icons/carding.png"  />Carding </b-dropdown-item>
+                   <b-dropdown-item  @click="category('station')"  href="#"> <img class="img-fluid picture logo-img" src="@/assets/icons/gas_station.png"  />Station </b-dropdown-item>
 
                    <b-dropdown-item  @click="category('Education')"  href="#"> <img class="img-fluid picture logo-img" src="@/assets/icons/education.png"  /> Education </b-dropdown-item>
                    <b-dropdown-item  @click="category('Professional')"  href="#"> <img class="img-fluid picture logo-img" src="@/assets/icons/profesional.png"  /> Professional <br />  Service </b-dropdown-item>
@@ -379,7 +379,7 @@
 
 
 
-         <b-col cols="2" > </b-col>
+         <b-col cols="1" lg="2" > </b-col>
 
            </b-row>
 

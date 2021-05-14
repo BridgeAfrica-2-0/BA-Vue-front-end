@@ -37,7 +37,7 @@
         <b-col cols="12" class="center">
           <b-img
             src="https://images-us.nivea.com/~/images/media-center-items/8/b/2-340911-1.png"
-            height="200"
+            width="200px"
           ></b-img>
           
         </b-col>

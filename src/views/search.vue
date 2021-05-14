@@ -9,7 +9,7 @@
    
 
     
-<hr style="margin-top:-0px" class="d-none d-sm-none d-md-block" />
+<hr style="margin-top:-0px" class="d-none d-sm-none d-lg-block" />
 
     <div class="container searchly moveup">
       <ly-tab
@@ -25,7 +25,7 @@
     <hr style="margin-top:-0px" />
 
 
-    <div class="d-block d- d-sm-block  d-md-none d-lg-none" v-if="selectedId == '1' || selectedId=='4' ">           
+    <div class="d-block d- d-sm-block  d-md-block d-lg-block d-xl-none" v-if="selectedId == '1' || selectedId=='4' ">           
       
        <b-row >     
            
@@ -173,11 +173,14 @@
 
 
 
+
+
+
       <b-modal ref="myfilters"  id="myModall" hide-footer title=" ">
 
         
  
-<div class="d-block d- d-sm-block  d-md-none d-lg-none" >  
+<div class="d-block d- d-sm-block  d-md-block d-lg-block d-xl-none" >  
    <div  style="column-count: 2;"> 
    <b-form-checkbox
         v-for="category in selectcategories"
@@ -2522,6 +2525,7 @@ text-align: center;
   color: black;
   border-color: white;
   width: 80px;
+  padding: 3px;
   border-radius: 5px;
  }
 

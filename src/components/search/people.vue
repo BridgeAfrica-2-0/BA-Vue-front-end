@@ -352,6 +352,10 @@ export default {};
 <style scoped>
 
 
+
+
+
+@media only screen and (min-width: 768px) {
 .btn-text{
 
    margin-left: 5px;
@@ -360,6 +364,26 @@ export default {};
 .btn-com{
   margin-left: 2px;
 }
+
+}
+
+
+@media only screen and (max-width: 768px) {
+
+    
+.btn-text{
+
+   margin-left: 2px;
+}
+
+.btn-com{
+  margin-left: 0px;
+}
+
+}
+
+
+
 
 
 

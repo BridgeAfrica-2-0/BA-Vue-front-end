@@ -108,7 +108,8 @@
     {{ agriculture.text }}
       </b-form-checkbox>
 
-
+        
+        <span  v-if="showform == true " >
 
        <b-form-group
               label-cols-lg="3"
@@ -151,7 +152,7 @@
             <br />
 
             <hr />
-
+        </span>
 
 
 
@@ -239,7 +240,7 @@
   
    
   <div  v-if="filterType == '0'" >    
-       
+         <span  v-if="showform == true " >
             <b-form-group
               label-cols-lg="3"
               label="Region"
@@ -282,7 +283,7 @@
 
             <hr />
 
-
+         </span>
 
 
 
@@ -643,7 +644,8 @@ export default {
       	Selectedcategory: function(newVal) { 
 
 
-          
+        
+         this.showform=false;
  console.log(newVal);
  
           
@@ -793,18 +795,23 @@ case 'COVID-19': this.categories_filters = [];
 
   
 
+  case 'station': this.categories_filters = this.station;
+  break;
 
 
 
 
-    case 'Ministries': this.categories_filters = this.Ministries; 
+    case 'Ministries': this.categories_filters =  [];
+      this.showform=true;
+ 
  
    break;
 
 
 
 
-    case 'Mayor Councils': this.categories_filters = this.Mayor_councils_filters_and_public_institution; 
+    case 'Mayor Councils': this.categories_filters = [];
+      this.showform=true;
  
    break;
 
@@ -812,6 +819,8 @@ case 'COVID-19': this.categories_filters = [];
 
 
     case 'Schools': this.categories_filters = this.Schools; 
+      this.showform=true;
+    
  
    break;
 
@@ -873,6 +882,7 @@ case 'Handicrafts': this.selectcategories = this.Handicrafts_filters;
       sliding: null,
 
        priceRange: '1000',
+       showform:false,
 
       selected: "all",
       location: "any",
@@ -1261,18 +1271,16 @@ case 'Handicrafts': this.selectcategories = this.Handicrafts_filters;
 
 
 
-     
 
 
 
 
 
        station: [
-        { value: "Phone", text: "Phone" },
-        { value: "Laptop", text: "Laptop" },
-        { value: "Microwaves", text: "Microwaves" },
-        { value: "Ac", text: "Ac" },
-        { value: "Phone_accessory", text: "Phone accessory" }
+        { value: "Gas station ", text: "Gas station " },
+        { value: "Petrol station ", text: "Petrol station " },
+        { value: "Fuel station ", text: "Fuel station " },
+       
       ],
 
 
@@ -2278,12 +2286,7 @@ Schools : [
         { value: "Public ", text: "Public" },
         { value: "Private", text: "Private" },
 
-         { value: "Regions ", text: "Regions" },
-        { value: "Division", text: "Division" },
-
-         { value: "Sub-divisions ", text: "Sub-divisions" },
-        { value: "City", text: "City" },
-       
+      
       
       ],
 
@@ -2399,7 +2402,7 @@ Ministries : [
 
      switchcategoriesfilters(){
 
-           
+          this.showform=false;  
     console.log(this.selectedfilter);
 
            switch(this.selectedfilter) {
@@ -2672,21 +2675,26 @@ case 'COVID-19': this.categories_filters = [];
 
 
 
-    case 'Ministries ': this.categories_filters = this.Ministries; 
+
+
+
+    case 'Ministries ': this.categories_filters =  this.categories_filters =  [];
+      this.showform=true;
  
    break;
 
 
 
 
-    case 'Mayor Councils ': this.categories_filters = this.Mayor_councils_filters_and_public_institution; 
- 
+    case 'Mayor Councils ': this.categories_filters = this.categories_filters = [];
+      this.showform=true;
    break;
 
 
 
 
     case 'Schools': this.categories_filters = this.Schools; 
+    this.showform=true;
  
    break;
 

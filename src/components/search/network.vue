@@ -135,7 +135,7 @@
        <b-col md="4"  lg="12"  xl="12" sm="12" cols="4" class="mt-2">  
 
             <b-button block size="sm" class="b-background shadow" variant="primary">
-              <img src="@/assets/message.png" alt="" class="btnpngs" /><span class="btn-text"> Message </span>
+              <img src="@/assets/message.png" alt="" class="btnpngs " /><span class="btn-text"> Message </span>
             </b-button>
 
             </b-col>  
@@ -182,6 +182,7 @@ export default {
 <style scoped>
 
 
+@media only screen and (min-width: 768px) {
 .btn-text{
 
    margin-left: 5px;
@@ -191,6 +192,22 @@ export default {
   margin-left: 2px;
 }
 
+}
+
+
+@media only screen and (max-width: 768px) {
+
+    
+.btn-text{
+
+   margin-left: 2px;
+}
+
+.btn-com{
+  margin-left: 0px;
+}
+
+}
 
 
 .btnpngs{

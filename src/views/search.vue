@@ -384,7 +384,7 @@
                <!--filter for all takes just two fields at a time  -->
 
                <div id="all" v-if="selectedId == '0'"  >
-              <h6>   Sponsored Result <i class="fad fa-exclamation-circle"></i> </h6>
+              <h6>   Sponsored Result  <i class="fas fa-exclamation-circle  icon-color"></i>   </h6>
             
              <div>
 

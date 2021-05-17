@@ -22,11 +22,26 @@
       <b-row>
         <b-col md="3" xl="3" lg="3" cols="5"  sm="3">
           <div class="center-img" >
+
+
+
+
+              <splide :options="options" class="r-image">
+    <splide-slide cl>
+       
+
             <img
               src="https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg"
               
               class="r-image"
             />
+
+
+
+    </splide-slide>
+              </splide>
+
+
           </div>
         </b-col>
         <b-col md="7" cols="7"  lg="5" sm="5">
@@ -84,7 +99,6 @@
         </b-col>
       </b-row>
     </div>
-
 
 
 
@@ -100,11 +114,26 @@
       <b-row>
         <b-col md="3" xl="3" lg="3" cols="5"  sm="3">
           <div class="center-img" >
+
+
+
+
+              <splide :options="options" class="r-image">
+    <splide-slide cl>
+       
+
             <img
               src="https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg"
               
               class="r-image"
             />
+
+
+
+    </splide-slide>
+              </splide>
+
+
           </div>
         </b-col>
         <b-col md="7" cols="7"  lg="5" sm="5">
@@ -162,6 +191,10 @@
         </b-col>
       </b-row>
     </div>
+
+
+
+
 
 
 
@@ -181,6 +214,24 @@
 
 export default {
   props: ["title", "image"],
+
+   data() {
+      return {
+        options: {
+          rewind : true,
+          autoplay: true,
+          perPage: 1,
+          pagination:false,
+        
+          
+          type   : 'loop',
+          perMove: 1,
+
+
+        
+        },
+      };
+    },
 };
 </script>
 

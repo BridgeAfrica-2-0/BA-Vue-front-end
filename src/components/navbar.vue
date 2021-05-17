@@ -103,7 +103,7 @@
               id="search-ba"
               type="search"
               list="browsers"
-              data-toggle="popover"
+              data-toggle="popover" 
               class="form-control  search-mobile "
               style=" border-left: none; "
               placeholder="Find Pharmacy"
@@ -201,6 +201,7 @@
           aria-controls="navbarMenu"
           aria-expanded="false"
           aria-label="Toggle navigation"
+           v-b-modal="'myModallnav'"
           @click="togglenav()"
           :class="{ 'togglebtn': isActive }"
         >
@@ -648,9 +649,9 @@
         </div>
 
 
-        
+       <b-modal ref="setcat"  id="myModallnav" hide-footer title=" ">   
 
-<div class=" d-block d-lg-block d-xl-none "  v-if="shownav == true" >
+<div class=" d-block d-lg-block d-xl-none "   >
                
               
                
@@ -729,6 +730,8 @@
                   Logout
                 </a>
               </div>
+
+       </b-modal>
 
 
 

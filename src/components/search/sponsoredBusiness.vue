@@ -121,7 +121,7 @@ export default {
           gap    : '1rem',
           type   : 'loop',
           perMove: 1,
-
+   pagination:false,
 
           margin: {
 		right: '5rem',

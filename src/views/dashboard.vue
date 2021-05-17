@@ -8,316 +8,16 @@
 
       <CarousselDashboard class="mm-top" /> <br />
 
-      <b-row>
-        <b-col  md="6" sm="12"  class="mt-2">
+    
 
-
-          <b-input-group class="my-auto input-size ">
-            <template #append>
-              <b-input-group-text class=" b-groupe  shadow "
-                ><strong class="color-sit">
-                  <b-icon-search></b-icon-search> </strong
-              ></b-input-group-text>
-            </template>
-
-            <b-form-input
-              id="inline-form-input-name"
-              class=" border shadow  w-50 "
-              placeholder="Search Bridge Africa"
-            ></b-form-input>
-          </b-input-group>
-        </b-col>
-
-        <b-col md="3" sm="12"   class="mt-2" >
-          <b-input-group class="my-auto input-size">
-            <template #append>
-              <b-input-group-text class=" b-groupe shadow "
-                ><strong class="color-sit">
-                  <b-icon icon="chevron-down"> </b-icon> </strong
-              ></b-input-group-text>
-            </template>
-
-            <b-form-select
-              v-model="selected"
-              :options="options"
-              class=" w-25 wi-25 border shadow "
-              value-field="item"
-              text-field="name"
-            ></b-form-select>
-          </b-input-group>
-        </b-col>
-
-        <b-col md="3" sm="12"   class="mt-2" >
-          <div v-if="selected != 'posts'">
-            <b-input-group class="my-auto input-size">
-             <template #append>
-              <b-input-group-text class=" b-groupe  shadow "
-                ><strong class="color-sit">
-                  <b-icon-search></b-icon-search> </strong
-              ></b-input-group-text>
-            </template>
-
-
-
-
-              
-
-
-
-              <b-form-input
-                v-model="location"
-                :options="filters"
-                class=" w-25 wi-25 border shadow "
-                value-field="item"
-                text-field="name"
-              ></b-form-input>
-            </b-input-group>
-          </div>
-
-          <div v-if="selected == 'posts'">
-            <b-input-group class="my-auto input-size">
-              <template #append>
-                <b-input-group-text class=" b-groupe shadow "
-                  ><strong class="color-sit">
-                    <b-icon icon="search"> </b-icon> </strong
-                ></b-input-group-text>
-              </template>
-
-              <b-form-input
-                id=" posted_by"
-                class=" w-25 wi-25 border shadow "
-                placeholder="Posted Date"
-              ></b-form-input>
-            </b-input-group>
-          </div>
-        </b-col>
-      </b-row>
 
       <br />
 
-      <b-row>
-        <b-col md="3" sm="12"    class="mt-2" > </b-col>
-
-        <b-col cols="3">
-          <div v-if="selected == 'people'">
-            <b-input-group class="my-auto input-size">
-              <template #append>
-                <b-input-group-text class=" b-groupe shadow "
-                  ><strong class="color-sit">
-                    <b-icon icon="chevron-down"> </b-icon> </strong
-                ></b-input-group-text>
-              </template>
-
-              <b-form-select
-                v-model="professio"
-                :options="profession"
-                class=" w-25 wi-25 border shadow "
-                value-field="item"
-                text-field="name"
-              ></b-form-select>
-            </b-input-group>
-          </div>
-        </b-col>
-
-        <b-col md="3" sm="12"   class="mt-2" >
-          <div v-if="selected == 'people'">
-            <b-input-group class="my-auto input-size">
-              <template #append>
-                <b-input-group-text class=" b-groupe shadow "
-                  ><strong class="color-sit">
-                    <b-icon icon="chevron-down"> </b-icon> </strong
-                ></b-input-group-text>
-              </template>
-
-              <b-form-select
-                v-model="educatio"
-                :options="education"
-                class=" w-25 wi-25 border shadow "
-                value-field="item"
-                text-field="name"
-              ></b-form-select>
-            </b-input-group>
-          </div>
-
-          <div v-if="selected == 'business' || selected == 'network' || selected=='marketplace'">
-            <b-input-group class="my-auto input-size">
-              <template #append>
-                <b-input-group-text class=" b-groupe shadow "
-                  ><strong class="color-sit">
-                    <b-icon icon="chevron-down"> </b-icon> </strong
-                ></b-input-group-text>
-              </template>
-
-              <b-form-select
-                v-model="category"
-                :options="categories"
-                class=" w-25 wi-25 border shadow "
-                value-field="item"
-                text-field="name"
-              ></b-form-select>
-            </b-input-group>
-          </div>
-        </b-col>
-
-        <b-col md="3" sm="12"   class="mt-2" >
-          <div v-if="selected == 'business' || selected == 'network' || selected=='marketplace'">
-            <div class="a-center">
-              <b-form-checkbox id="checkbox-1" name="checkbox-1">
-                Show Map
-              </b-form-checkbox>
-            </div>
-          </div>
-
-          <div v-if="selected == 'people'">
-            <b-input-group class="my-auto input-size">
-              <template #append>
-                <b-input-group-text class=" b-groupe shadow "
-                  ><strong class="color-sit">
-                    <b-icon icon="chevron-down"> </b-icon> </strong
-                ></b-input-group-text>
-              </template>
-
-              <b-form-select
-                v-model="workplac"
-                :options="workplace"
-                class=" w-25 wi-25 border shadow "
-                value-field="item"
-                text-field="name"
-              ></b-form-select>
-            </b-input-group>
-          </div>
-
-          <div v-if="selected == 'posts'">
-            <b-input-group class="my-auto input-size">
-              <template #append>
-                <b-input-group-text class=" b-groupe shadow "
-                  ><strong class="color-sit">
-                    <b-icon icon="search"> </b-icon> </strong
-                ></b-input-group-text>
-              </template>
-
-              <b-form-input
-                id=" posted_by"
-                class=" w-25 wi-25 border shadow "
-                placeholder="Posted By"
-              ></b-form-input>
-            </b-input-group>
-          </div>
-        </b-col>
-      </b-row>
-
-      <br />
-
-      <div v-if="selected == 'all'">
-        <b-card class="shadow">
-          <b-row>
-            <b-col lg="6" sm="12"  class="mt-2">
-              <div style="p-div">
-                <span>
-                  <h4>  
-                      <img class="img-fluid picture logo-img" src="@/assets/icons/bus.png"  /> 
-                    BUSINESSES
-                    <h6 style="float:right">
-                <!--      <b-link class="see-all-link"> <u> see all </u> </b-link>   -->
-                    </h6>
-                  </h4>
-                </span>
-
-
-
-                
-              </div>
-              <div class="div-h"><Business /></div>
-            </b-col>
-
-
-            <b-col lg="6" sm="12"  class="mt-20"  >
-              <div class="p-div">
-                <span>
-                  <h4>    <img class="img-fluid picture logo-img" src="@/assets/icons/people.png"  /> 
-                    People
-                    <h6 style="float:right">
-                   <!--   <b-link class="see-all-link"> <u> see all </u> </b-link> -->
-                    </h6>
-                  </h4>
-                </span>
-              </div>
-              <div class="div-h"><People /></div>
-            </b-col>
-          </b-row>
-        </b-card>
-         <br />
-      </div>
+    
      
 
-      <div v-if="selected == 'people'">
-        <b-card class="shadow ">
-          <span>
-            <h4>    <img class="img-fluid picture logo-img " src="@/assets/icons/people.png"  /> 
-              People
-              <h6 style="float:right">
-           <!--     <b-link class="see-all-link" > <u> see all </u> </b-link>   -->
-              </h6>
-            </h4>
-          </span>
-
-          <div class="div-h">
-            <b-row>
-              <b-col lg="6" md="12"> <People /> </b-col> <b-col md="12" lg="6"> <People /> </b-col>
-            </b-row>
-          </div>
-        </b-card>
-        <br />
-      </div>
-
       
-
-      <div v-if="selected == 'business'">
-        <b-card class="shadow ">
-          <span>
-            <h4>     <img class="img-fluid picture logo-img" src="@/assets/icons/bus.png"  /> 
-              Business
-              <h6 style="float:right">
-            <!--    <b-link class="see-all-link"> <u> see all </u> </b-link>  -->
-              </h6>
-            </h4>
-          </span>
-
-          <div class="div-h">
-            <b-row>
-              <b-col lg="6" md="12"> <Business /> </b-col> <b-col  lg="6" md="12"> <Business /> </b-col>
-            </b-row>
-          </div>
-        </b-card>
-         <br />
-      </div>
-
      
-
-      <div v-if="selected == 'network'">
-        <network-dashboard></network-dashboard> <br />
-      </div>
-
-      <Post v-if="selected == 'posts'" />
-
-      <br />
-
-
-
-
-      
-
-
-     <div  v-if="selected == 'marketplace'" >
-   
-
-
-     <Market />
-      
-
-       
-     <br />
-  </div>
 
 
 
@@ -437,7 +137,7 @@
 <script>
 import Navbar from "@/components/navbar";
 import CarousselDashboard from "@/components/dasboard/carousselDashboard";
-import NetworkDashboard from "@/components/dasboard/networkDashboard";
+
 import BusinessDashboard from "@/components/dasboard/businessDashboard";
 import ComunitiDashboard from "@/components/dasboard/comunitiDashboard";
 import Insights from "@/components/dasboard/insights";
@@ -446,14 +146,8 @@ import CommunityActivity from "@/components/dasboard/communityActivity";
 import Tutorial from "@/components/dasboard/tutorial";
 
 import Profile from "@/components/dasboard/profile";
-import Post from "@/components/dasboard/post";
 
-//import SelectBH from "@/components/dasboard/selectbusinessh";
 
-import People from "@/components/dasboard/communityMember";
-import Business from "@/components/dasboard/communitybusiness";
-
-//import SelectBusiness from "@/components/dasboard/selectbusiness";
 import Map from "@/components/dasboard/map";
 
 import EmptyBusiness from "@/components/dasboard/emptybusiness";
@@ -461,7 +155,7 @@ import EmptyBusiness from "@/components/dasboard/emptybusiness";
 import Popularnetwork from "@/components/dasboard/popularnetwork";
 import Hotbusiness from "@/components/dasboard/hotbusiness";
 
-import Market from "@/components/dasboard/market";
+
 
 
 export default {
@@ -567,21 +261,21 @@ export default {
   components: {
     ComunitiDashboard,
     BusinessDashboard,
-    NetworkDashboard,
+  
     CommunityActivity,
     Tutorial,
     Insights,
     Popularnetwork,
     Hotbusiness,
     //SelectBusiness,
-    Market,
+    
     Map,
-    Post,
+    
     EmptyBusiness,
     //SelectBH,
     Profile,
-    People,
-    Business,
+    
+    
     CarousselDashboard,
     Navbar
   },

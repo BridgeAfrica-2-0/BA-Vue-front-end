@@ -11,7 +11,7 @@
     <div class="people-style shadow">
       <b-row>
         <b-col cols="4" lg="4" sm="4" md="5">
-          <div >
+         <div class="center-img" >
             <img
               src="https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg"
               
@@ -56,25 +56,31 @@
 
 
 
+       
+
+
+       
+
+           
+
                     
     <div class="people-style shadow">
       <b-row>
-        <b-col cols="6" lg="4">
-          <div style="height: 100%;">
+        <b-col cols="4" lg="4" sm="4" md="5">
+         <div class="center-img" >
             <img
               src="https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg"
-              width="100%"
-              height="90%"
+              
               class="r-image"
             />
           </div>
 
           
         </b-col>
-        <b-col cols="6" >
+        <b-col cols="8" sm="8" md="7" >
          <p class="text">
             <strong class="title"> Sneakers Blec cc </strong> <br /> <strong> Description </strong>  <br />
-            This is just a dummy text dumy dummy things are always dummy and dummy    things are always dummy add hjykt   
+            This is just a dummy text dumy dummy things are always dummy and dummy add  things are always dummy  hjykt   
             <b-link> see more   </b-link>   <br />
              
             <span class="price"> <strong> 12,000 Fcfa  </strong> </span> <br />
@@ -97,8 +103,9 @@
 
         </div>
 
-        
+
     </div>
+
 
 
 
@@ -258,6 +265,22 @@ export default {
 </script>
 
 <style scoped>
+
+
+
+@media only screen and (min-width: 768px) {
+
+
+.center-img{
+  margin-right: -60px;
+}
+
+
+}
+
+
+
+
 
 .buybtn{
   width: 100px;
@@ -420,9 +443,8 @@ padding: 1px;
   border-bottom-right-radius: 10px;
 
 
-  width: 200px;
-
-height: 200px;
+   Height : 160px;
+Width:160px;
 padding: 4px;
 }
 

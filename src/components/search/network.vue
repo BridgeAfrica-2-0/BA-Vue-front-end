@@ -29,7 +29,7 @@
     <div class="people-style shadow">
       <b-row>
          <b-col md="3" xl="3" lg="3" cols="5"  sm="3">
-          <div >
+          <div class="center-img" >
             <img
               src="https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg"
             
@@ -59,7 +59,7 @@
      <b-row>  <b-col md="4"  lg="12"  xl="12" sm="12" cols="4" class="mt-2">    
 
             <b-button block size="sm" class="b-background shadow" variant="primary">
-              <img src="@/assets/community.png" alt="" class="btnpngs" />  <span class="btn-com"> Community </span>
+             <i class="fas fa-user-plus  fa-lg btn-icon "></i>  <span class="btn-com">Community</span>
             </b-button>
 
             </b-col>  
@@ -67,7 +67,7 @@
        <b-col md="4"  lg="12"  xl="12" sm="12" cols="4" class="mt-2">  
 
             <b-button block size="sm" class="b-background shadow" variant="primary">
-               <img src="@/assets/community.png" alt="" class="btnpngs" /><span class="btn-text"> Message </span>
+             <i class="fas fa-envelope   fa-lg btn-icon "></i>  <span class="btn-text">Message</span>
             </b-button>
 
             </b-col>  
@@ -93,11 +93,12 @@
    
 
    
+
 
     <div class="people-style shadow">
       <b-row>
          <b-col md="3" xl="3" lg="3" cols="5"  sm="3">
-          <div >
+          <div class="center-img" >
             <img
               src="https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg"
             
@@ -127,7 +128,7 @@
      <b-row>  <b-col md="4"  lg="12"  xl="12" sm="12" cols="4" class="mt-2">    
 
             <b-button block size="sm" class="b-background shadow" variant="primary">
-               <img src="@/assets/community.png" alt="" class="btnpngs" /><span class="btn-com"> Community </span>  
+             <i class="fas fa-user-plus  fa-lg btn-icon "></i>  <span class="btn-com">Community</span>
             </b-button>
 
             </b-col>  
@@ -135,7 +136,7 @@
        <b-col md="4"  lg="12"  xl="12" sm="12" cols="4" class="mt-2">  
 
             <b-button block size="sm" class="b-background shadow" variant="primary">
-              <img src="@/assets/message.png" alt="" class="btnpngs " /><span class="btn-text"> Message </span>
+             <i class="fas fa-envelope   fa-lg btn-icon "></i>  <span class="btn-text">Message</span>
             </b-button>
 
             </b-col>  
@@ -151,9 +152,6 @@
         </b-col>
       </b-row>
     </div>
-
-
-
 
 
 
@@ -185,12 +183,20 @@ export default {
 @media only screen and (min-width: 768px) {
 .btn-text{
 
-   margin-left: 5px;
+   margin-left: 8px;
 }
 
 .btn-com{
-  margin-left: 2px;
+  margin-left:4px;
 }
+.btn-icon{
+  margin-top:3px;
+}
+
+.center-img{
+  margin-right: -60px;
+}
+
 
 }
 
@@ -198,17 +204,24 @@ export default {
 @media only screen and (max-width: 768px) {
 
     
+
+    .btn-icon{
+  margin-top:3px;
+}
+
+
 .btn-text{
 
-   margin-left: 2px;
+   margin-left: 5px;
 }
+
 
 .btn-com{
-  margin-left: 0px;
+  margin-left:3px;
 }
 
-}
 
+}
 
 .btnpngs{
       width: 20px;

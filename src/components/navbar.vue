@@ -805,8 +805,8 @@ export default {
 
 .hov:hover{
     
-  background-color: rgb(247, 234, 234);
-  border-color: rgb(247, 234, 234);
+  background-color: #eeeeef;
+  border-color: #eeeeef;
     }
 
 @media (min-width: 992px) {  

@@ -14,6 +14,14 @@
 
 
 
+
+
+
+
+
+
+
+
  <div class="people-style border shadow">
         <b-row class="mb-1">
           <b-col md="3" cols="4" sm="3" class="my-auto">
@@ -21,7 +29,7 @@
               class="p-avater"
               variant="primary"
               src="https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg"
-              
+             
             ></b-avatar>
           </b-col>
 
@@ -39,9 +47,9 @@
                         xl="12"
                         class="mt-lg-2"
                       >
-                        <div class="mt-2 mt-lg-0 mt-xl-0 username">
+                       <div class="mt-2 mt-lg-0 mt-xl-0 username">
                           <b> howty Itz blec </b>
-                        </div>
+                       </div>
                       </b-col>
 
                       <b-col
@@ -75,7 +83,7 @@
                           size="sm"
                           class="b-background flexx pobtn shadow"
                         >
-                         <img src="@/assets/message.png" alt="" class="btnpngs " /><span class="btn-text">Message</span>
+                           <i class="fas fa-envelope   fa-lg btn-icon "></i>  <span class="btn-text">Message</span> 
                         </b-button>
                       </b-col>
 
@@ -93,7 +101,7 @@
                           class="b-background flexx pobtn shadow"
                           variant="primary"
                         >
-                          <img src="@/assets/community.png" alt="" class="btnpngs " /><span class="btn-com">community</span>
+                                      <i class="fas fa-user-plus  fa-lg btn-icon "></i>  <span class="btn-com">Community</span>
                         </b-button>
                       </b-col>
                     </b-row>
@@ -104,6 +112,11 @@
           </b-col>
         </b-row>
       </div>
+
+
+
+
+
 
 
 
@@ -201,7 +214,7 @@
                           size="sm"
                           class="b-background flexx pobtn shadow"
                         >
-                           <img src="@/assets/message.png" alt="" class="btnpngs " /><span class="btn-text">Message</span>
+                           <i class="fas fa-envelope   fa-lg btn-icon "></i>  <span class="btn-text">Message</span> 
                         </b-button>
                       </b-col>
 
@@ -219,7 +232,7 @@
                           class="b-background flexx pobtn shadow"
                           variant="primary"
                         >
-                                    <img src="@/assets/community.png" alt="" class="btnpngs " /><span class="btn-com">community</span>
+                                      <i class="fas fa-user-plus  fa-lg btn-icon "></i>  <span class="btn-com">Community</span>
                         </b-button>
                       </b-col>
                     </b-row>
@@ -273,9 +286,9 @@
                         xl="12"
                         class="mt-lg-2"
                       >
-                        <div class="mt-2 mt-lg-0 mt-xl-0 username">
+                       <div class="mt-2 mt-lg-0 mt-xl-0 username">
                           <b> howty Itz blec </b>
-                        </div>
+                       </div>
                       </b-col>
 
                       <b-col
@@ -309,7 +322,7 @@
                           size="sm"
                           class="b-background flexx pobtn shadow"
                         >
-                        <img src="@/assets/message.png" alt="" class="btnpngs " /><span class="btn-text">Message</span>
+                           <i class="fas fa-envelope   fa-lg btn-icon "></i>  <span class="btn-text">Message</span> 
                         </b-button>
                       </b-col>
 
@@ -327,7 +340,7 @@
                           class="b-background flexx pobtn shadow"
                           variant="primary"
                         >
-                                  <img src="@/assets/community.png" alt="" class="btnpngs " /><span class="btn-com">community</span>
+                                      <i class="fas fa-user-plus  fa-lg btn-icon "></i>  <span class="btn-com">Community</span>
                         </b-button>
                       </b-col>
                     </b-row>
@@ -338,6 +351,10 @@
           </b-col>
         </b-row>
       </div>
+
+
+
+
 
 
 
@@ -352,18 +369,19 @@ export default {};
 <style scoped>
 
 
-
-
-
 @media only screen and (min-width: 768px) {
 .btn-text{
 
-   margin-left: 5px;
+   margin-left: 8px;
 }
 
 .btn-com{
-  margin-left: 2px;
+  margin-left:4px;
 }
+.btn-icon{
+  margin-top:3px;
+}
+
 
 }
 
@@ -371,14 +389,22 @@ export default {};
 @media only screen and (max-width: 768px) {
 
     
+
+    .btn-icon{
+  margin-top:3px;
+}
+
+
 .btn-text{
 
-   margin-left: 2px;
+   margin-left: 5px;
 }
 
+
 .btn-com{
-  margin-left: 0px;
+  margin-left:3px;
 }
+
 
 }
 

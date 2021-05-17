@@ -384,7 +384,7 @@
                <!--filter for all takes just two fields at a time  -->
 
                <div id="all" v-if="selectedId == '0'"  >
-              <h6>Sponsored Result</h6>
+              <h6>   Sponsored Result <i class="fad fa-exclamation-circle"></i> </h6>
             
              <div>
 
@@ -392,7 +392,7 @@
 
               </div>
 
-              <h6>Businesses</h6>
+              <h6> <i class="fas fa-hands-helping  fa-lg icon-color"></i> Businesses</h6>
 
               <Business />
 
@@ -400,29 +400,29 @@
 
               <hr />
 
-              <h6>People</h6>
+              <h6> <i class="fas fa-users  fa-lg icon-color"></i> People</h6>
 
               <People />
               <span class="float-right mb-3"> see more </span> <br />
 
               <hr />
 
-              <h6>Network</h6>
+              <h6>  <i class="fas fa-chart-network  fa-lg  icon-color "></i>  Network</h6>
 
               <Network />
               <span class="float-right mb-3"> see more </span> <br />
 
               <hr />
 
-              Market
+             <h6> <i class="fas fa-store  fa-lg icon-color "></i> Market </h6>
 
-              <Market />
+              <Market />  
 
               <span class="float-right mb-3"> see more </span> <br />
 
               <hr />
 
-              <h6>Post</h6>
+              <h6> <i class="fab fa-readme fa-lg icon-color"></i> Post</h6>
 
               <Post />
 
@@ -437,7 +437,7 @@
               <div id="businesses" v-if="selectedId == '1'" >
 
              
-              <h6>Businesses</h6>
+              <h6> <i class="fas fa-hands-helping fa-lg icon-color "></i>  Businesses</h6>
 
               <Business />
 
@@ -457,7 +457,7 @@
               <div id="people" v-if="selectedId == '2'" >
 
              
-              <h6>People</h6>
+              <h6> <i class="fas fa-users  fa-lg icon-color"></i> People</h6>
 
               <People />
 
@@ -478,7 +478,7 @@
               <div id="people" v-if="selectedId == '3'" >
 
              
-              <h6>Networks</h6>
+              <h6>  <i class="fas fa-chart-network  fa-lg  icon-color "></i>  Networks</h6>
 
               <Network />
 
@@ -497,7 +497,7 @@
               <div id="people" v-if="selectedId == '4'" >
 
              
-              <h6>Market</h6>
+              <h6> <i class="fas fa-store  fa-lg icon-color "></i>  Market</h6>
 
               <Market />
 
@@ -518,7 +518,7 @@
               <div id="people" v-if="selectedId == '5'" >
 
              
-              <h6>Post</h6>
+              <h6> <i class="fab fa-readme fa-lg icon-color"></i>  Post</h6>
 
               <Post />
                <hr />
@@ -2484,6 +2484,13 @@ break;
 </script>
 
 <style scoped>
+
+.icon-color{
+ color:#e75c18;
+
+}
+
+
 .logo-img{
 
   max-height: 36px;

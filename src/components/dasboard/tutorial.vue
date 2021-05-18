@@ -3,16 +3,15 @@
 
       <b-card class=" border shadow ">
 
-         <h6>   <fas-icon
-          class="text-primary mr-2 pt-1"
-          :icon="['fas', 'user-friends']"
-        />  TUTORIALS   </h6>   
+         <h6 class="title">   
+       <fas-icon class="" :icon="['fas', 'user-friends']" />   <b>  Tutorial   </b>
+           </h6>       
 
 
 
 
 
- <fas-icon class="" :icon="['fas', 'user-friends']" />
+ 
 
 
 
@@ -30,7 +29,7 @@
             allowfullscreen
             class="s-embed"
           ></b-embed>
-          <p> video name  <br/>
+          <p class="text"> video name  <br/>
           video Description  </p>
         </div>
 
@@ -131,6 +130,47 @@ export default {
 </script>
 
 <style scoped>
+
+
+ 
+@media only screen and (min-width: 768px) {
+
+  
+  .title{
+    font-size: 20px;
+  }
+
+  .text{
+
+    font-size: 14px;
+  }
+
+   
+ }
+
+
+
+
+ 
+ 
+@media only screen and (max-width: 768px) {
+
+  
+  .title{
+    font-size: 16px;
+  }
+
+
+  
+  .text{
+
+    font-size: 12px;
+  }
+
+   
+ }
+
+
 
 
 .embed-responsive-16by9{

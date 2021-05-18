@@ -5,15 +5,18 @@
       <span>    
       
           <h4 class="mb-3">
-                  <img class="img-fluid picture2 logo-img" src="@/assets/icons/bus.png"  /> 
+                  
 
-                Business
+             <h6 class="title">     Business  </h6>
+
                 <h6 class="float-right text-success font-weight-bolder">
-                  <b-button variant="outline-primary" size="sm"
+
+                  <b-button variant="outline-primary" class="upgrade-btn" size="sm"
                     ><b-icon-star></b-icon-star> &nbsp;&nbsp;Upgrade
                     Plan</b-button
                   >
                 </h6>
+
               </h4>
              
 
@@ -24,15 +27,15 @@
               <div class="d-flex col-md-12 mt-2">
                 <img class="img-fluid picture" src="@/assets/img/photo2.jpg" />
                 <div class="text-lost">
-                  <b>Business Name 1</b>
+                  <b>Business Name</b>
                   <p class="mb-1">
-                    1.1M Community
-                    <span class="float-right"
+                    1.1M Community  <br/>
+                    <span class=""
                       >Current Plan:
                       <span class="text-success">Basic</span></span
                     >
                   </p>
-                  <p class="mb-1 mb-3">Categorie Name Here</p>
+                  <p class="mb-1 mb-3">Categorie</p>
                   <p class="mb-1">
                     <b-icon-person-fill
                       class="text-primary"
@@ -88,6 +91,66 @@ export default {
 </script>
 
 <style scoped>
+
+
+
+
+
+@media only screen and (min-width: 768px) {
+
+  .upgrade-btn{
+
+    width:146px;
+    height: 38px;
+  }
+
+  .name{
+    font-size: 20px;
+  }
+
+   .text-lost { 
+    font-size: 14px;
+
+     flex-basis: 90%;
+  padding-left: 30px;
+ 
+  font-family: Helvetica Neue, 
+ }
+ }
+
+
+
+ @media only screen and (max-width: 768px) {
+
+  .upgrade-btn{
+
+    width:126px;
+    height: 33px;
+    
+  }
+
+  .card{
+    padding:5px;
+    padding-top: 10px;
+
+  }
+
+  
+
+   .name{
+    font-size: 16px;
+  }
+
+  .text-lost { 
+    font-size: 12px;
+
+     flex-basis: 100%;
+  padding-left: 10px;
+ 
+  font-family: Helvetica Neue, 
+ }
+
+ }
 
 
 

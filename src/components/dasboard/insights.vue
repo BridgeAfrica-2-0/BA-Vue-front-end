@@ -3,11 +3,11 @@
     <b-card class="  border shadow c-h" >
 
       <span>   
-                <h3 class="mb-3 pl-1">
+                <h6 class="mb-3 pl-1 title">
 
-                    <img class="img-fluid picture" src="@/assets/icons/insight.png" style="width: 70px;" /> 
+                 
                   INSIGHTS
-                </h3>  </span>  <p>  Discover how customers feel about and interact with you  </p>
+                </h6>  </span>  <p class="text">  Discover how customers feel about and interact with you  </p>
 
         <div class="a-content"> 
             

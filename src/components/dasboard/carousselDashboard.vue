@@ -77,7 +77,7 @@
 .d-block.img-fluid {
 
     max-width: 100%;
-    height: 300px;
+    height: 426px;
 
     border-radius: 10px;
 
@@ -91,7 +91,7 @@
 .d-block.img-fluid {
 
     max-width: 100%;
-    height: 150px;
+    height: 180px;
 
     border-radius: 10px;
 

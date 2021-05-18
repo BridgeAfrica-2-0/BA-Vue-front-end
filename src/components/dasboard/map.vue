@@ -9,9 +9,7 @@
 
  
 
-<span> <h4> 
-  
-  <b-icon variant="primary" font-scale="2" icon="geo-alt" > </b-icon> GET DIRECTIONS    </h4>   </span>
+ <h6 class="title">  GET DIRECTIONS    </h6>   
 
     
           <div> 
@@ -108,4 +106,44 @@ export default {
 .map{
   width: 100%;
 }
+</style>
+
+
+<style >
+  
+
+
+  
+@media only screen and (min-width: 768px) {
+
+  
+  .title{
+    font-size: 20px;
+  }
+
+  
+
+   
+ }
+
+
+
+
+ 
+ 
+@media only screen and (max-width: 768px) {
+
+  
+  .title{
+    font-size: 16px;
+  }
+
+
+  
+
+
+   
+ }
+
+
 </style>

@@ -495,8 +495,7 @@ Width:160px
   margin-bottom: 10px;
   
 
-  margin-left: -15px;
-    margin-right: -15px;
+  
 
 
   margin-right: 8px;

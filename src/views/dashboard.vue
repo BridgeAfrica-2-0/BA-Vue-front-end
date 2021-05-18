@@ -130,9 +130,10 @@
           <b-col sm="12" lg="6"   class="mt-3" >   
             
             
-              <b-card class="border shadow "> 
+              <b-card class="border shadow card  card-hight"> 
 
-         <h6>   <span class="pop">  HOT BUSINESSES  </span>  </h6>  
+
+         <h6 class=" titlle">   <b>    HOT BUSINESSES  </b>  </h6>  
 
 
 
@@ -145,13 +146,13 @@
              
              
            </div>
-              </b-card>
-                 </b-col> <b-col sm="12" lg="6"  class="mt-3" >          <b-card class="border shadow ">    
+              </b-card >
+                 </b-col> <b-col sm="12" lg="6"  class="mt-3" >          <b-card class="border shadow  card card-hight">    
     
 
 
 
-    <h6>    <span class="pop"> POPULAR NETWORKS  </span> </h6>  
+    <h6 class=" titlle">  <b>   POPULAR NETWORKS </b>    </h6>  
 
  <div class="s-card">      <Popularnetwork />      </div>  </b-card>                   </b-col>
         </b-row>
@@ -315,6 +316,54 @@ export default {
 </script>
 
 <style scoped>
+
+.card{
+  padding:0px;
+  padding-top: 15px;
+
+}
+
+
+.card-body{
+  padding:3px;
+}
+
+
+@media only screen and (min-width: 768px) {
+
+  
+  .titlle{
+    font-size: 20px;
+  }
+
+  
+
+   
+ }
+
+
+
+
+ 
+ 
+@media only screen and (max-width: 768px) {
+
+  
+  .titlle{
+    font-size: 16px;
+  }
+
+
+  
+
+
+   
+ }
+
+
+ .card-hight{
+   height:350px;
+ }
 
 
 

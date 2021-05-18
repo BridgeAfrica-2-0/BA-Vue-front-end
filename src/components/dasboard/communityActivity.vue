@@ -2,7 +2,7 @@
   <div>
     <b-card class="px-md-3 border shadow "  >
 
-      <span> <h6>   Post   </h6>   </span>
+      <span> <h6 class="title">    <b> Post </b>  </h6>   </span>
 
    <div class="s-card " >
      
@@ -10,28 +10,28 @@
       <b-row class="mt-2 m-0 p-0">
         <b-col cols="12" class="mt-4 m-0 p-0" style="margin-right:20px">
           <b-row class="">
-            <b-col  md="2" sm="2" cols="2" class="a-center">
+            <b-col  md="2" sm="3" cols="3" class="a-center">
               <b-avatar
-                class="d-inline-block maleft"
+                class="d-inline-block maleft avat"
                 variant="primary"
-                src="https://dashboard.bridgeafrica.info/resources/images/profile-pic.jpg"
+                src="https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg"
                
                 
               ></b-avatar>
             </b-col>
-            <b-col sm="10" md="10" cols="10" class="pt-2" >
+            <b-col sm="9" md="10" cols="9" class="pt-2" >
                 <div class="m-left">
-              <h6 class="m-0 font-weight-bolder">
+              <h6 class="m-0 font-weight-bolder name">
                 User name here
                 
               </h6>
-              <p>1h Ago</p>
+              <p class="name">1h Ago</p>
 
 
 
               <b-row>
             <b-col md="6" sm="12" class="mt-2">
-              <p>
+              <p class="text">
                 Lorem Ipsum has been the industry's standard dummy text ever
                 since the 1500s, when an unknown printer took a galley of type
                 and scrambled it to make a type specimen book. It has survived
@@ -89,7 +89,7 @@
 
 
               <span style="float:right">
-                  <b-link> <u> view more  </u> </b-link>
+               <!--   <b-link> <u> view more  </u> </b-link>   -->
                 
                 </span>
               
@@ -206,6 +206,95 @@ export default {
 
 <style scoped>
 
+
+
+ 
+@media only screen and (min-width: 768px) {
+
+  
+
+  .title{
+    font-size: 20px;
+  }
+
+
+  .name{
+     font-size: 16px;
+  }
+
+  .text{
+     
+     font-family:Helvetica Neue ;
+     font-size:14px;
+  }
+
+  .avat{
+    width:64px;
+    height: 64px;
+  }
+
+
+
+.maleft{
+      width:64px;
+    height: 64px;
+      margin-right: -22px;
+}
+
+.r-image{
+    border-radius: 10px;
+    width: 200px;
+    height: 200px;
+}
+
+
+
+ }
+
+
+
+
+
+
+ 
+@media only screen and (max-width: 768px) {
+
+  
+  .title{
+    font-size: 16px;
+  }
+
+  .name{
+     font-size: 14px;
+  }
+
+  .text{
+      font-family:Helvetica Neue ;
+     font-size:12px;
+  }
+
+  .avat{
+    width:64px;
+    height: 64px;
+  }
+
+  .r-image{
+    border-radius: 10px;
+    width: 200px;
+    
+}
+
+
+
+
+   
+ }
+
+
+
+
+
+
 .logo-img{
   width: 60px;
 }
@@ -248,20 +337,14 @@ h4{
 
  
 
-.maleft{
-
-  margin-right: -22px;
-  width: 5em;
-    height: 5em;
-}
 
 @media only screen and (max-width: 768px) {
    
 .maleft{
 
   margin-right: -22px;
-  width: 2em;
-    height: 2em;
+  width: 64px;
+    height: 64px;
 }
 }
 
@@ -308,9 +391,6 @@ h4{
     margin-left:-10px;
 }
 
-.r-image{
-    border-radius: 10px;
-}
 
 
 

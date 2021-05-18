@@ -12,7 +12,7 @@
 
      <div class=" border shadow   p-tab">
 
-        <span> <h4>    <img class="img-fluid picture" src="@/assets/icons/people.png" style="width: 60px;" />  COMMUNITY   <span class="h4-color"> 7K </span> </h4>   </span>
+        <span> <h6 class="title">   <b>   COMMUNITY   </b>  <span class="h4-color"> 7K </span> </h6>   </span>   
 
 
       <b-tabs  pills content-class="mt-3  f-left ">
@@ -196,6 +196,37 @@ export default {
 
   margin-top:-5px;
 }
+
+
+
+
+ 
+@media only screen and (min-width: 768px) {
+
+  
+
+  .title{
+    font-size: 20px;
+  }
+
+
+ }
+
+
+
+
+
+
+ 
+@media only screen and (min-width: 768px) {
+
+  
+  .title{
+    font-size: 16px;
+  }
+
+   
+ }
 
 
 

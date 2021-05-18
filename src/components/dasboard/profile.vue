@@ -1,13 +1,13 @@
 <template>
   <div>
-    <b-card class="border shadow " style="height:250px">
+    <b-card class="border shadow card " style="height:250px">
      
       <span>    
       
-          <h3 class="">    <img class="img-fluid picture" src="@/assets/icons/person.png" style="width: 60px;" /> 
-                 Profile
+          <h3 class="name">    
+               <b>   Profile  </b>
                 <h6 class="float-right text-success font-weight-bolder">
-                  <b-button variant="outline-primary" size="sm"
+                  <b-button variant="outline-primary upgrade-btn" size="sm"
                     ><b-icon-star></b-icon-star> &nbsp;&nbsp;Upgrade
                     Plan</b-button
                   >
@@ -27,7 +27,7 @@
 
 
                 <div class="text-lost">
-                 <h6> <b>  Profile's Name </b> </h6>
+                 <h6> <b class="name">  Profile's Name </b> </h6>
                   <p class="mb-1">
                     1.1M Community
                     <span class="float-right"
@@ -85,6 +85,63 @@ export default {
 
 <style scoped>
 
+ 
+@media only screen and (min-width: 768px) {
+
+  .upgrade-btn{
+
+    width:146px;
+    height: 38px;
+  }
+
+  .name{
+    font-size: 20px;
+  }
+
+   .text-lost { 
+    font-size: 14px;
+
+     flex-basis: 90%;
+  padding-left: 30px;
+ 
+  font-family: Helvetica Neue, 
+ }
+ }
+
+
+
+ @media only screen and (max-width: 768px) {
+
+  .upgrade-btn{
+
+    width:126px;
+    height: 33px;
+    
+  }
+
+  .card{
+    padding:5px;
+    padding-top: 10px;
+
+  }
+
+  
+
+   .name{
+    font-size: 16px;
+  }
+
+  .text-lost { 
+    font-size: 12px;
+
+     flex-basis: 100%;
+  padding-left: 10px;
+ 
+  font-family: Helvetica Neue, 
+ }
+
+ }
+
 h6{
   font-size: 12px;
 }
@@ -94,10 +151,7 @@ h6{
   flex-basis: 40%;
 }
 
-.text-lost {
-  flex-basis: 90%;
-  padding-left: 30px;
-}
+
 
 .colum {
   justify-content: space-around;

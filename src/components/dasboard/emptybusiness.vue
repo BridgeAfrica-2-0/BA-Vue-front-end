@@ -3,7 +3,7 @@ import Businesses from '@/components/follower/tabs/businesses';
 <template>
   <div>
     <b-card class="border shadow " style="height:250px">
-     <span> <h4>    <img class="img-fluid picture" src="@/assets/icons/bus.png" style="width: 60px;" />  My Businesses  </h4>  </span>
+     <span> <h6 class="mybusi">  <b>  My Businesses  </b> </h6>  </span>
 
 
      <div> 
@@ -20,7 +20,7 @@ import Businesses from '@/components/follower/tabs/businesses';
                        <br/>
                    <h6> No Business  </h6>   
              
-             <b-button variant="primary"> Add Business  </b-button>
+             <b-button variant="primary" class="busi-btn"> Add Business  </b-button>
 
                    </div>
              
@@ -60,5 +60,34 @@ export default {
     text-align: center;
     align-content: center;
 }
+
+ @media only screen and (min-width: 768px) {
+     .busi-btn{
+         width:133px;
+         height: 38px;
+         font-family: Helvetica Neue;
+     }  
+
+
+     .mybusi{
+       font-size: 20px;
+
+     }
+ }
+
+
+  @media only screen and (max-width: 768px) {
+     .busi-btn{
+         width:112px;
+         height: 38px;
+         font-family: Helvetica Neue;
+     }  
+
+
+     .mybusi{
+       font-size: 16px;
+
+     }
+ }
 
 </style>

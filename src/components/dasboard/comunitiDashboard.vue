@@ -2,14 +2,15 @@
   <div  class="lala">
 
     
-    <b-card class="border-0">
+    <b-card class="border-0 p-0 m-0"   style="
+    padding: 3px;">
 
 
 
  
      
 
-     <div class=" border shadow   p-tab" style="padding:20px">
+     <div class=" border shadow   p-tab">
 
         <span> <h4>    <img class="img-fluid picture" src="@/assets/icons/people.png" style="width: 60px;" />  COMMUNITY   <span class="h4-color"> 7K </span> </h4>   </span>
 

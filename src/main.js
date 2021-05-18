@@ -10,6 +10,11 @@ import {library} from '@fortawesome/fontawesome-svg-core';
 import {fas} from '@fortawesome/free-solid-svg-icons';
 import {FontAwesomeIcon} from '@fortawesome/vue-fontawesome'
 
+import { fab } from '@fortawesome/free-brands-svg-icons'
+
+
+
+
 import vSelect from 'vue-select';
 
 
@@ -53,8 +58,12 @@ Vue.use(VueGallerySlideshow);
 Vue.use(Lightbox);
 
 // Configuring font awesome
+
+library.add(fab)
 library.add(fas);
+
 Vue.component('fas-icon', FontAwesomeIcon);
+Vue.component('fab-icon', FontAwesomeIcon);
 
 
 

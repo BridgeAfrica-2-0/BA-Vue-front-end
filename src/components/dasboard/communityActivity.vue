@@ -2,7 +2,7 @@
   <div>
     <b-card class="px-md-3 border shadow "  >
 
-      <span> <h4>    <img class="img-fluid picture logo-img" src="@/assets/icons/post.png"  />  Post  <h6 style="float:right">  <!-- <b-link class="see-all-link"> <u> see all </u>  </b-link>  -->   </h6>  </h4>   </span>
+      <span> <h6>   Post   </h6>   </span>
 
    <div class="s-card " >
      

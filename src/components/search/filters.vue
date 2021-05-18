@@ -151,6 +151,52 @@
 
             <br />
 
+
+
+
+            
+            <b-form-group
+              label-cols-lg="12"
+              label=" Sub Division"
+              label-size="md"
+              label-class="font-weight-bold pt-0 text-left"
+              class="mb-0"
+            >
+            </b-form-group>              
+
+            <b-form-select v-model="selected">
+              <b-form-select-option value="a">
+                My Location
+              </b-form-select-option>
+            </b-form-select>
+
+            <br />
+
+
+
+
+
+
+
+
+            
+            <b-form-group
+              label-cols-lg="3"
+              label="City"
+              label-size="md"
+              label-class="font-weight-bold pt-0 text-left"
+              class="mb-0"
+            >
+            </b-form-group>              
+
+            <b-form-select v-model="selected">
+              <b-form-select-option value="a">
+                My Location
+              </b-form-select-option>
+            </b-form-select>
+
+            <br />
+
             <hr />
         </span>
 
@@ -1298,7 +1344,7 @@ case 'Handicrafts': this.selectcategories = this.Handicrafts_filters;
 
 
  Health_unit_filters : [
-        { value: "Hospitals", text: "Hospitals" },
+        { value: "Hospital", text: "Hospitals" },
         { value: "Clinics", text: "Clinics" },
 
         { value: "COVID-19", text: "COVID-19" },
@@ -1712,7 +1758,7 @@ Professional_services  : [
         { value: "Mayor Councils ", text: "Mayor Councils" },
         { value: "Schools", text: "Schools " },
 
-        { value: "Hospitals", text: "Hospitals " },
+        { value: "Hospital", text: "Hospitals " },
 
         { value: "Ministries ", text: "Ministries " },
 
@@ -1751,6 +1797,7 @@ Professional_services  : [
           { value: "Ndjama Ndjama", text: "Ndjama Ndjama" },
           { value: "Koki", text: "Koki" },
           { value: "Achu", text: "Achu" },
+          { value: "Okro", text: "Okro" },
           { value: "Mbongo Tchobi", text: "Mbongo Tchobi" },
           { value: "Okok", text: "Okok" },
        
@@ -1825,8 +1872,12 @@ Professional_services  : [
         { value: "Huawei", text: "Huawei" },
 
 
+    { value: "htc", text: " HTC" },
 
-        { value: "LG", text: " LG" },
+    { value: "LG", text: " LG" },
+
+
+        { value: "Feature phone", text: "Feature phone" },
         { value: "Nokia", text: "Nokia " },
         { value: "Batteries", text: "Batteries" },
 
@@ -1927,12 +1978,7 @@ Professional_services  : [
         { value: "Carpentry", text: "Carpentry" },
         { value: "Paintings", text: " Paintings" },
         { value: "Hamburger", text: "Hamburger " },
-        { value: "Chicken", text: "Chicken" },
-
-
-
-        { value: "Omelets", text: " Omelets" },
-       
+      
                 
 
       ],
@@ -1998,7 +2044,7 @@ Professional_services  : [
         { value: "Dental clinics", text: "Dental clinics" },
         { value: "Optics", text: "Optics" },
         { value: "physical therapy", text: "physical therapy" },
-        { value: "physical therapy", text: "physical therapy" },
+       
         { value: "Maternal Health", text: "Maternal Health" },
       
                 
@@ -2124,6 +2170,7 @@ tertiary_eduction_filters : [
         { value: "Perfumes ", text: "Perfumes" },
         { value: "Jewelry", text: "Jewelry" },
         { value: "Bags", text: "Bags" },
+        { value: "watch", text: "watch" },
         { value: "Shoes", text: "Shoes" },
          { value: "Caps", text: "Caps" },
           { value: "Head bands", text: "Head bands" },
@@ -2187,6 +2234,7 @@ Marketing : [
 
       Web_Graphic : [
         { value: "graphics design ", text: "graphics design" },
+          { value: "printing", text: "printing" },
         { value: "computer programmers", text: "computer programmers" },
         { value: "computer hardware", text: "computer hardware" },
         { value: "computer hosting services", text: "computer hosting services" },
@@ -2241,9 +2289,12 @@ Marketing : [
          { value: "Electrician", text: "Electrician" },
 
 
+      { value: "locksmiths", text: "Key’s locksmiths " },
 
+      { value: "Gardeners", text: "Gardeners" },
+       { value: "Gardeners", text: "Gardeners" },
 
-                 { value: "Architect", text: "Architect" },
+                 { value: "Security system", text: "Security system" },
         
       
       ],
@@ -2300,12 +2351,7 @@ Hospitals : [
              { value: "Public ", text: "Public" },
         { value: "Private", text: "Private" },
 
-         { value: "Regions ", text: "Regions" },
-        { value: "Division", text: "Division" },
-
-         { value: "Sub-divisions ", text: "Sub-divisions" },
-        { value: "City", text: "City" },
-       
+        
       
       ],
 
@@ -2649,6 +2695,7 @@ case 'female': this.categories_filters = this.Women_clothing;
 //health ubits
 
     case 'Hospital': this.categories_filters = this.Hospitals; 
+    this.showform=true;
    
    break;
    case 'Pharmacies': this.categories_filters = this.Pharmacies; 

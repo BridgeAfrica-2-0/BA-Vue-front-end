@@ -151,7 +151,7 @@
              <b-dropdown-item  @click="category('Catering')"  href="#"> <img class="img-fluid picture logo-img" src="@/assets/icons/catering.png"  />   Catering  </b-dropdown-item>
              
               
-               <b-dropdown-item  @click="category('European Food')"  href="#"> <img class="img-fluid picture logo-img" src="@/assets/icons/european food.png"  />   European <br /> Food </b-dropdown-item>
+               <b-dropdown-item  @click="category('European Food')"  href="#"> <img class="img-fluid picture logo-img" src="@/assets/icons/european food.png"  />   European <br />  <span class="mgmg"> Food   </span>   </b-dropdown-item>
               
              </b-col>   
 
@@ -192,7 +192,7 @@
            
 
            <b-dropdown-item  @click="category('Women clothing')"  href="#">  <img class="img-fluid picture logo-img" src="@/assets/icons/women clothing.png"  />   Women clothing </b-dropdown-item> 
-              <b-dropdown-item  @click="category('Women accessories')"  href="#">   <img class="img-fluid picture logo-img" src="@/assets/icons/women accesories.png"  />   Women <br /> accessories </b-dropdown-item>
+              <b-dropdown-item  @click="category('Women accessories')"  href="#">   <img class="img-fluid picture logo-img" src="@/assets/icons/women accesories.png"  />   Women <br />  <span class="mgmg"> Accessories   </span>   </b-dropdown-item>
                 
              </b-col>   
 
@@ -200,7 +200,7 @@
              <b-col cols="6">   
              
              <b-dropdown-item  @click="category('Men Clothing')"  href="#">  <img class="img-fluid picture logo-img" src="@/assets/icons/men clothing.png"  />   Men Clothing </b-dropdown-item>
-                <b-dropdown-item  @click="category('Men Accessories')"  href="#">  <img class="img-fluid picture logo-img" src="@/assets/icons/men accessories.png"  />   Men <br /> Accessories </b-dropdown-item>
+                <b-dropdown-item  @click="category('Men Accessories')"  href="#">  <img class="img-fluid picture logo-img" src="@/assets/icons/men accessories.png"  />   Men <br />  <span class="mgmg"> Accessories   </span>  </b-dropdown-item>
 
              </b-col> 
       
@@ -241,7 +241,7 @@
 
 
              <b-col cols="6">   
-           <b-dropdown-item  @click="category('Hospitals')"  href="#"> <img class="img-fluid picture logo-img" src="@/assets/icons/hospital.png"  />   Hospitals </b-dropdown-item>
+           <b-dropdown-item  @click="category('Hospital')"  href="#"> <img class="img-fluid picture logo-img" src="@/assets/icons/hospital.png"  />   Hospitals </b-dropdown-item>
                 <b-dropdown-item  @click="category('Ministries ')"  href="#"> <img class="img-fluid picture logo-img" src="@/assets/icons/ministries.png"  />   Ministries  </b-dropdown-item>
              </b-col> 
       
@@ -315,7 +315,7 @@
 
 
    
-   <span  @mouseover="onOverMore" @mouseleave="onLeaveMore" >
+   <span  @mouseover="onOverMore" >
 
          <b-nav-item-dropdown @click="onOverMore"   id=""  ref="More"  >
 
@@ -334,7 +334,7 @@
                <b-dropdown-item  @click="category('Handicrafts')"  href="#"> <img class="img-fluid picture logo-img" src="@/assets/icons/handicraft.png"  />   Handicraft </b-dropdown-item>
                    <b-dropdown-item  @click="category('Hotels')"  href="#"> <img class="img-fluid picture logo-img" src="@/assets/icons/ministries.png"  />   Hotels </b-dropdown-item>
                    <b-dropdown-item  @click="category('Transport')"  href="#"> <img class="img-fluid picture logo-img" src="@/assets/icons/transport.png"  />   Transport </b-dropdown-item>
-                   <b-dropdown-item  @click="category('Grooming')"  href="#"> <img class="img-fluid picture logo-img" src="@/assets/icons/gromming.png"  />  Mens & Women  <br />   Grooming    </b-dropdown-item>
+                   <b-dropdown-item  @click="category('Grooming')"  href="#"> <img class="img-fluid picture logo-img" src="@/assets/icons/gromming.png"  />  Mens & Women  <br />  <span class="mgmg"> Grooming   </span>  </b-dropdown-item>
                    
 
 
@@ -346,7 +346,7 @@
                    <b-dropdown-item  @click="category('station')"  href="#"> <img class="img-fluid picture logo-img" src="@/assets/icons/gas_station.png"  />   Station </b-dropdown-item>
 
                    <b-dropdown-item  @click="category('Education')"  href="#"> <img class="img-fluid picture logo-img" src="@/assets/icons/education.png"  />   Education </b-dropdown-item>
-                   <b-dropdown-item  @click="category('Professional')"  href="#"> <img class="img-fluid picture logo-img" src="@/assets/icons/profesional.png"  />   Professional <br />  Service </b-dropdown-item>
+                   <b-dropdown-item  @click="category('Professional')"  href="#"> <img class="img-fluid picture logo-img" src="@/assets/icons/profesional.png"  />   Professional <br />   <span class="mgmg"> Service   </span>   </b-dropdown-item>
              </b-col> 
       
 
@@ -507,7 +507,9 @@ export default {
 }
 
 
-
+.mgmg{
+  margin-left:30px;
+}
 
 @media only screen and (max-width: 768px) {
 .mobi{

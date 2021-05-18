@@ -127,7 +127,33 @@
 
       <div>
         <b-row>
-          <b-col sm="12" lg="6"   class="mt-3" > <Hotbusiness /> </b-col> <b-col sm="12" lg="6"  class="mt-3" > <Popularnetwork /> </b-col>
+          <b-col sm="12" lg="6"   class="mt-3" >   
+            
+            
+              <b-card class="border shadow "> 
+
+         <h6>   <span class="pop">  HOT BUSINESSES  </span>  </h6>  
+
+
+
+
+           <div class=" s-card  p-tab">
+             
+                <Business /> 
+           
+                
+             
+             
+           </div>
+              </b-card>
+                 </b-col> <b-col sm="12" lg="6"  class="mt-3" >          <b-card class="border shadow ">    
+    
+
+
+
+    <h6>    <span class="pop"> POPULAR NETWORKS  </span> </h6>  
+
+ <div class="s-card">      <Popularnetwork />      </div>  </b-card>                   </b-col>
         </b-row>
       </div>
     </div>
@@ -147,13 +173,16 @@ import Tutorial from "@/components/dasboard/tutorial";
 
 import Profile from "@/components/dasboard/profile";
 
+//import People from "@/components/dasboard/communityMember";
+import Business from "@/components/dasboard/communitybusiness";
 
 import Map from "@/components/dasboard/map";
 
 import EmptyBusiness from "@/components/dasboard/emptybusiness";
 
 import Popularnetwork from "@/components/dasboard/popularnetwork";
-import Hotbusiness from "@/components/dasboard/hotbusiness";
+//import Hotbusiness from "@/components/dasboard/hotbusiness";
+//import People from '../components/businessOwner/tabs/owner/networks/people.vue';
 
 
 
@@ -261,12 +290,13 @@ export default {
   components: {
     ComunitiDashboard,
     BusinessDashboard,
-  
+    //People,
+    Business,
     CommunityActivity,
     Tutorial,
     Insights,
     Popularnetwork,
-    Hotbusiness,
+    //Hotbusiness,
     //SelectBusiness,
     
     Map,
@@ -278,6 +308,7 @@ export default {
     
     CarousselDashboard,
     Navbar
+  
   },
   methods: {}
 };

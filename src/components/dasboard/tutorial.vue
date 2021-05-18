@@ -3,7 +3,19 @@
 
       <b-card class=" border shadow ">
 
-        <span> <h4>   <img class="img-fluid picture" src="@/assets/icons/tutorials.png" style="width: 60px;" />  TUTORIALS  <h6 style="float:right">    <b-link> <u> see all </u>  </b-link>    </h6>  </h4>   </span>
+         <h6>   <fas-icon
+          class="text-primary mr-2 pt-1"
+          :icon="['fas', 'user-friends']"
+        />  TUTORIALS   </h6>   
+
+
+
+
+
+ <fas-icon class="" :icon="['fas', 'user-friends']" />
+
+
+
 
 
  <div class="s-card">

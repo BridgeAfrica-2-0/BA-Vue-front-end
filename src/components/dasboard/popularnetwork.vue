@@ -1,61 +1,150 @@
 <template>
   <div>
 
-    <b-card class="border shadow ">    
-    
-
-
-
-  <span> <h4>   <img class="img-fluid picture" src="@/assets/icons/network.png" style="width: 50px;" /> <span class="pop"> POPULAR NETWORKS  </span> </h4>   </span>
-
- <div class="s-card">
 
 
 
 
 
-                    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     <div class="people-style shadow">
       <b-row>
-        <b-col md="5" xl="3" lg="5" cols="5"  sm="5">
-          <div style="height: 100%;">
+         <b-col md="3" xl="3" lg="3" cols="5"  sm="3">
+          <div class="center-img" >
             <img
               src="https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg"
-              width="100%"
-              height="90%"
+            
+              
               class="r-image"
             />
           </div>
         </b-col>
-        <b-col md="6" cols="7" xl="5" sm="7">
-         <p class="text">
-            <strong> Shipping Network </strong> <br />  <br />
-            Public <br />
-             20k Members <br />
-             Business Name <br />
+        <b-col md="5" cols="7"  lg="7" xl="5" sm="5">
+          <p class="textt">
+            <strong class="net-title"> Global Car Supple Network </strong> <br /><br />
+            <strong> Category : </strong> Car marketing <br />
+            <strong> Community : </strong> 20k <br />
+            <strong> public :</strong> <br />
             
+
           </p>
         </b-col>
 
-        <b-col lg="12" md="12" xl="4" cols="12" sm="12">
+
+
+
+
+
+       <b-col lg="12" md="4" xl="4" cols="12" sm="4">
           <div class="s-button">
-     <b-row>  <b-col md="5"  lg="5"  xl="12" sm="5" cols="5" class="mt-md-2">     
+     <b-row>  <b-col md="12"  lg="4"  xl="12" sm="12" cols="4" class="mt-2">    
 
-            <b-button block size="sm" class="b-background" variant="primary">
-              <b-icon class="ico" icon="plus-circle"> </b-icon> Community
+            <b-button block size="sm" class="b-background shadow" variant="primary">
+             <i class="fas fa-user-plus  fa-lg btn-icon "></i>  <span class="btn-com">Community</span>
             </b-button>
 
             </b-col>  
 
-       <b-col md="5"  lg="5"  xl="12" sm="5" cols="5" class="mt-md-2">    
+       <b-col md="12"   lg="4"  xl="12" sm="12" cols="4" class="mt-2">  
 
-            <b-button block size="sm" class="b-background" variant="primary">
-              <b-icon class="ico" icon="chat"> </b-icon> Message
+            <b-button block size="sm" class="b-background shadow" variant="primary">
+             <i class="fas fa-envelope   fa-lg btn-icon "></i>  <span class="btn-text">Message</span>
             </b-button>
 
             </b-col>  
 
-            <b-col md="4"  lg="4"  xl="12" sm="4" cols="4" class="mt-md-2">    
+            <b-col md="12"  lg="4"  xl="12" sm="12" cols="4" class="mt-2"> 
+
+            
+
+            </b-col>  
+   </b-row>
+
+          </div>
+        </b-col>
+      </b-row>
+    </div>
+
+
+
+
+
+
+
+   
+
+   
+
+
+
+   
+
+    <div class="people-style shadow">
+      <b-row>
+         <b-col md="3" xl="3" lg="3" cols="5"  sm="3">
+          <div class="center-img" >
+            <img
+              src="https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg"
+            
+              
+              class="r-image"
+            />
+          </div>
+        </b-col>
+        <b-col md="5" cols="7"  lg="7" xl="5" sm="5">
+          <p class="textt">
+            <strong class="net-title"> Global Car Supple Network </strong> <br /><br />
+            <strong> Category : </strong> Car marketing <br />
+            <strong> Community : </strong> 20k <br />
+            <strong> public :</strong> <br />
+            
+
+          </p>
+        </b-col>
+
+
+
+
+
+
+       <b-col lg="12" md="4" xl="4" cols="12" sm="4">
+          <div class="s-button">
+     <b-row>  <b-col md="12"  lg="4"  xl="12" sm="12" cols="4" class="mt-2">    
+
+            <b-button block size="sm" class="b-background shadow" variant="primary">
+             <i class="fas fa-user-plus  fa-lg btn-icon "></i>  <span class="btn-com">Community</span>
+            </b-button>
+
+            </b-col>  
+
+       <b-col md="12"   lg="4"  xl="12" sm="12" cols="4" class="mt-2">  
+
+            <b-button block size="sm" class="b-background shadow" variant="primary">
+             <i class="fas fa-envelope   fa-lg btn-icon "></i>  <span class="btn-text">Message</span>
+            </b-button>
+
+            </b-col>  
+
+            <b-col md="12"  lg="4"  xl="12" sm="12" cols="4" class="mt-2"> 
 
             
 
@@ -76,162 +165,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-                    
-    <div class="people-style shadow">
-      <b-row>
-        <b-col md="5" xl="3" lg="5" cols="5"  sm="5">
-          <div style="height: 100%;">
-            <img
-              src="https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg"
-              width="100%"
-              height="90%"
-              class="r-image"
-            />
-          </div>
-        </b-col>
-        <b-col md="6" cols="7" xl="5" sm="7">
-         <p class="text">
-            <strong> Shipping Network </strong> <br />  <br />
-            Public <br />
-             20k Members <br />
-             Business Name <br />
-            
-          </p>
-        </b-col>
-
-        <b-col lg="12" md="12" xl="4" cols="12" sm="12">
-          <div class="s-button">
-     <b-row>  <b-col md="5"  lg="5"  xl="12" sm="5" cols="5" class="mt-md-2">     
-
-            <b-button block size="sm" class="b-background" variant="primary">
-              <b-icon class="ico" icon="plus-circle"> </b-icon> Community
-            </b-button>
-
-            </b-col>  
-
-       <b-col md="5"  lg="5"  xl="12" sm="5" cols="5" class="mt-md-2">    
-
-            <b-button block size="sm" class="b-background" variant="primary">
-              <b-icon class="ico" icon="chat"> </b-icon> Message
-            </b-button>
-
-            </b-col>  
-
-            <b-col md="4"  lg="4"  xl="12" sm="4" cols="4" class="mt-md-2">    
-
-            
-
-            </b-col>  
-   </b-row>
-
-          </div>
-        </b-col>
-      </b-row>
-    </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                    
-    <div class="people-style shadow">
-      <b-row>
-        <b-col md="5" xl="3" lg="5" cols="5"  sm="5">
-          <div style="height: 100%;">
-            <img
-              src="https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg"
-              width="100%"
-              height="90%"
-              class="r-image"
-            />
-          </div>
-        </b-col>
-        <b-col md="6" cols="7" xl="5" sm="7">
-         <p class="text">
-            <strong> Shipping Network </strong> <br />  <br />
-            Public <br />
-             20k Members <br />
-             Business Name <br />
-            
-          </p>
-        </b-col>
-
-        <b-col lg="12" md="12" xl="4" cols="12" sm="12">
-          <div class="s-button">
-     <b-row>  <b-col md="5"  lg="5"  xl="12" sm="5" cols="5" class="mt-md-2">     
-
-            <b-button block size="sm" class="b-background" variant="primary">
-              <b-icon class="ico" icon="plus-circle"> </b-icon> Community
-            </b-button>
-
-            </b-col>  
-
-       <b-col md="5"  lg="5"  xl="12" sm="5" cols="5" class="mt-md-2">    
-
-            <b-button block size="sm" class="b-background" variant="primary">
-              <b-icon class="ico" icon="chat"> </b-icon> Message
-            </b-button>
-
-            </b-col>  
-
-            <b-col md="4"  lg="4"  xl="12" sm="4" cols="4" class="mt-md-2">    
-
-            
-
-            </b-col>  
-   </b-row>
-
-          </div>
-        </b-col>
-      </b-row>
-    </div>
-
-
-
-
- </div>
-
-
- </b-card>
 
   </div>
 </template>
@@ -244,24 +177,61 @@ export default {
 
 <style scoped>
 
-@media only screen and (max-width: 760px) {
+
+@media only screen and (min-width: 768px) {
+.btn-text{
+
+   margin-left: 8px;
+}
+
+.btn-com{
+  margin-left:4px;
+}
+.btn-icon{
+  margin-top:3px;
+}
+
+.center-img{
+  margin-right: -60px;
+}
+
+
+}
+
+
+@media only screen and (max-width: 768px) {
+
+    
+
+    .btn-icon{
+  margin-top:3px;
+}
+
+
+.btn-text{
+
+   margin-left: 5px;
+}
+
+
+.btn-com{
+  margin-left:3px;
+}
+
+
+}
+
+.btnpngs{
+      width: 20px;
+    margin-right: 5px;
+}
 
 .btn{
-
-font-size: 12px;
-    width: 100px;
-
-}
-
-h4{
-  font-size: 15px;
+  border-radius: 5px;
 }
 
 
-.pop{
-  font-size: 15px;
-}
-}
+
 
 .card {
   color: orange;
@@ -273,16 +243,155 @@ h4{
 
   padding: 15px;
 }
-.text {
-  color: #000;
-  font-size: 15px;
 
+
+
+
+
+
+
+@media only screen and (max-width: 768px) {
+   .a-flex{
+     margin-right: -15px;
+   }
+
+
+  .s-button {
+  
+
+  padding: 15px;
+  margin-top: -15px;
+}
+
+.net-title{
+  font-size: 16px;
+   color:black;
+ 
+ line-height: 35px;
+  font-family: 'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif;
+}
+
+.textt {
+  color: #000;
+  
+    font-family: 'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 30px;
+    color: rgba(117,114,128,1);
+    text-align: left;
+
+Font-weight: normal ;
+Line-height:20px ;
+font-style:normal;
+
+
+padding: 1px;
   text-align: left;
 
-  margin-left: -15px;
+  margin-left: -30px;
 
-  margin-right: -15px;
+  margin-right: -5px;
+
+  line-height: 25px;
 }
+
+.location{
+
+  margin-bottom: 30px;
+}
+
+.btn{
+  padding-top: 6px;
+  font-size:10px;
+
+  Height : 28px;
+Width:85px
+
+}
+
+
+
+.r-image {
+  border-radius: 8px;
+
+ Height : 100px;
+Width:100px
+
+}
+
+
+
+}
+
+
+
+
+
+
+@media only screen and (min-width: 768px) {
+
+.net-title{
+  font-size: 20px;
+   color:black;
+ 
+ line-height: 35px;
+  font-family: 'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif;
+}
+
+.textt {
+  color: #000;
+  
+    font-family: 'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 30px;
+    color: rgba(117,114,128,1);
+    text-align: left;
+
+Font-weight: normal ;
+Line-height:20px ;
+font-style:normal;
+
+
+padding: 1px;
+  text-align: left;
+
+  margin-left: 30px;
+
+  margin-right: -5px;
+
+  line-height: 25px;
+}
+
+.location{
+
+  margin-bottom: 30px;
+}
+
+.btn{
+  padding-top: 6px;
+
+  Height : 38px;
+Width:123px
+
+}
+
+
+
+.r-image {
+  border-radius: 8px;
+
+ Height : 160px;
+Width:160px
+
+}
+
+
+
+}
+
+
 .stock {
   color: green;
 }
@@ -299,7 +408,7 @@ h4{
 }
 
 .btn {
-  font-size: 13px;
+  
 
   display: flex;
 }
@@ -308,27 +417,14 @@ h4{
   margin-right: 5px;
 }
 
-.r-image {
-  
- border-top-left-radius: 10px;
-
-  border-bottom-left-radius: 10px;
-
-  border-top-right-radius: 10px;
-
-  border-bottom-right-radius: 10px;
 
 
-  width: 100%;
 
-height: 100%;
-padding: 4px;
-}
+@media only screen and (min-width: 768px) {
+  .people-style {
+  border-top-left-radius: 5px;
 
-.people-style {
-  border-top-left-radius: 10px;
-
-  border-bottom-left-radius: 10px;
+  border-bottom-left-radius: 5px;
 
   border-top-right-radius: 5px;
 
@@ -340,22 +436,69 @@ padding: 4px;
   background-clip: border-box;
   border: 1px solid rgba(0, 0, 0, 0.125);
   margin-bottom: 10px;
+  
+
+  margin-left: -15px;
+    margin-right: -15px;
+
+
   margin-right: 8px;
  
 
+  padding: 7px;
+}
+
+}
+
+
+
+
+@media only screen and (max-width: 768px) {
+  .people-style {
+  border-top-left-radius: 5px;
+
+  border-bottom-left-radius: 5px;
+
+  border-top-right-radius: 5px;
+
+  border-bottom-right-radius: 5px;
+
+
+
+
+  background: white;
+
+  background-color: #fff;
+  background-clip: border-box;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  margin-bottom: 10px;
+
+  margin-right: 8px;
+ 
+
+  padding: 7px;
+}
+
+
+
+
+
+.btn {
+ 
+
+  display: flex;
+
+    padding-right: 60px;
 }
 
 h4{
-  color: black;
+  font-size: 15px;
+}
+
 }
 
 
-.s-card{
-  height:450px; 
-  overflow: auto; 
-  overflow-x: hidden;
 
-}
 
 
 
@@ -363,8 +506,7 @@ h4{
 
 .btn {
     display: flex;
-    font-size: 10px;
-    width: 80px;
+    
 }
 }
 

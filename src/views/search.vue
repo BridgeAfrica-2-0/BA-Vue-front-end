@@ -392,29 +392,31 @@
 
               </div>
 
-              <h6> <i class="fas fa-hands-helping  fa-lg icon-color"></i> Businesses</h6>
+              <h6> 
+
+ <fas-icon class="icons" :icon="['fas', 'hands-helping']" size="lg" />    Businesses</h6>
 
               <Business />
 
-              <span class="float-right mb-3"> see more </span> <br />
+              <span class="float-right mb-3"> <b-link> see more </b-link>  </span> <br />
 
               <hr />
-
-              <h6> <i class="fas fa-users  fa-lg icon-color"></i> People</h6>
+     <fas-icon class="icons" :icon="['fas', 'users']" size="lg" />    
+              <h6> People</h6>
 
               <People />
               <span class="float-right mb-3"> see more </span> <br />
 
               <hr />
 
-              <h6>  <i class="fas fa-chart-network  fa-lg  icon-color "></i>  Network</h6>
+              <h6>  <i class="fas fa-chart-network  fa-lg  icon-color "></i>    Network</h6>
 
               <Network />
               <span class="float-right mb-3"> see more </span> <br />
 
               <hr />
 
-             <h6> <i class="fas fa-store  fa-lg icon-color "></i> Market </h6>
+             <h6>  <fas-icon class="icons " :icon="['fas', 'store']" size="lg" />   Market </h6>
 
               <Market />  
 
@@ -422,7 +424,7 @@
 
               <hr />
 
-              <h6> <i class="fab fa-readme fa-lg icon-color"></i> Post</h6>
+              <h6>   <fas-icon class=" icons" :icon="['fab', 'readme']"  size="lg" /> Post</h6>
 
               <Post />
 
@@ -2488,6 +2490,11 @@ break;
 .icon-color{
  color:#e75c18;
 
+}
+
+.icons{
+   color:#e75c18;
+   width:24px;
 }
 
 

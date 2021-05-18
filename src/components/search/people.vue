@@ -746,7 +746,7 @@ f-right {
 
 
 
-    .p-avater[data-v-dec82c14] {
+    .p-avater{
     width: 75px;
     height: 75px;
     margin-bottom: -8px;

@@ -12,12 +12,6 @@
 
 
 
-
-
-
-
-
-
     <div class="people-style shadow">
       <b-row>
         <b-col md="3" xl="3" lg="3" cols="5"  sm="3">
@@ -110,6 +104,11 @@
 
 
 
+
+
+
+
+
     <div class="people-style shadow">
       <b-row>
         <b-col md="3" xl="3" lg="3" cols="5"  sm="3">
@@ -136,7 +135,7 @@
 
           </div>
         </b-col>
-        <b-col md="7" cols="7"  lg="5" sm="5">
+        <b-col md="5" cols="7"  lg="7" xl="5"  sm="5">
           <p class="textt">
             <strong class="title"> Super Car ltd </strong> <br />
              Car marketing  
@@ -155,9 +154,9 @@
 
 
 
-        <b-col lg="4" md="12" xl="4" cols="12" sm="4">
+        <b-col lg="12" xl="4" md="4" cols="12" sm="4">
           <div class="s-button">
-     <b-row>  <b-col md="4"  lg="12"  xl="12" sm="12" cols="4" class="mt-2 text-center">    
+     <b-row>  <b-col md="12"  lg="4"  xl="12" sm="12" cols="4" class="mt-2 text-center">    
 
             <b-button block size="sm" class="b-background shadow " variant="primary">
                 <i class="fas fa-user-plus  fa-lg btn-icon "></i>  <span class="btn-com">Community</span>
@@ -165,7 +164,7 @@
 
             </b-col>  
 
-        <b-col md="4"  lg="12"  xl="12" sm="12" cols="4" class="mt-2 text-center">  
+        <b-col md="12"  lg="4"  xl="12" sm="12" cols="4" class="mt-2 text-center">  
 
            
 
@@ -176,7 +175,7 @@
 
             </b-col>  
 
-            <b-col  md="4"  lg="12"  xl="12" sm="12" cols="4"  class="mt-2 text-center">  
+            <b-col  md="12"  lg="4"  xl="12" sm="12" cols="4"  class="mt-2 text-center">  
 
               <b-button block size="sm" class="b-background shadow " variant="primary">
                 <i class="fas fa-map-marked-alt  fa-lg btn-icon "></i>  <span class="btn-text">Direction</span>
@@ -191,7 +190,6 @@
         </b-col>
       </b-row>
     </div>
-
 
 
 

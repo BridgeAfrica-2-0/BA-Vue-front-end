@@ -9,9 +9,9 @@
 
  
 
- <h6 class="title">  GET DIRECTIONS    </h6>   
+ <h6 class="title">  <fas-icon class="icons" :icon="['fas', 'map-marker-alt']" size="lg" />   <b> GET DIRECTIONS </b>   </h6>   
 
-    
+   
           <div> 
 
 

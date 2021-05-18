@@ -7,7 +7,8 @@
           <h4 class="mb-3">
                   
 
-             <h6 class="title">     Business  </h6>
+             <h6 class="title"> <fas-icon class="icons" :icon="['fas', 'hands-helping']" size="lg" />  <b>   Business  </b>  </h6>      
+
 
                 <h6 class="float-right text-success font-weight-bolder">
 
@@ -21,7 +22,7 @@
              
 
 
-      </span>
+      </span>  
 
 
               <div class="d-flex col-md-12 mt-2">

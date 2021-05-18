@@ -29,9 +29,9 @@
 
 
    
-   <b-row>    <b-col  md="6" sm="12">   <h6 class="font-weight-bolder text-design">
+   <b-row>    <b-col  md="6" sm="12" class="">   <h6 class="font-weight-bolder text-design">
                 Use Bridge Africa as Yourself or as one of your businesses
-              </h6>   </b-col>    <b-col sm="12" md="6">    <b-form-select
+              </h6>   </b-col>    <b-col sm="12" md="6" class="mb-3">    <b-form-select
                 v-model="selectedb"
                 :options="boptions"
               ></b-form-select>
@@ -82,9 +82,9 @@
       
        
           
-              <h4 class="font-weight-bolder text-design">
+              <h6 class="font-weight-bolder text-design">
                 Use Bridge Africa as Yourself or as one of your businesses
-              </h4>
+              </h6>
               <b-form-select
                 v-model="selectedb"
                 :options="boptions"
@@ -133,7 +133,7 @@
               <b-card class="border shadow card  card-hight"> 
 
 
-         <h6 class=" titlle">   <b>    HOT BUSINESSES  </b>  </h6>  
+         <h6 class=" titlle">   <fas-icon class="icons" :icon="['fas', 'hands-helping']" size="lg" />    <b>    HOT BUSINESSES  </b>  </h6>  
 
 
 
@@ -152,7 +152,7 @@
 
 
 
-    <h6 class=" titlle">  <b>   POPULAR NETWORKS </b>    </h6>  
+    <h6 class=" titlle"> <i class="fas fa-chart-network  fa-lg  icon-color "></i>  <b>   POPULAR NETWORKS </b>    </h6>  
 
  <div class="s-card">      <Popularnetwork />      </div>  </b-card>                   </b-col>
         </b-row>
@@ -313,7 +313,17 @@ export default {
   },
   methods: {}
 };
-</script>
+</script>    
+
+<style  >
+   .icon-color{ color:#e75c18;}
+
+   .icons{
+   color:#e75c18;
+   width:24px;
+}
+
+</style>
 
 <style scoped>
 
@@ -362,7 +372,9 @@ export default {
 
 
  .card-hight{
-   height:350px;
+   height:550px;
+   overflow-y: auto;
+   overflow-x: hidden;
  }
 
 

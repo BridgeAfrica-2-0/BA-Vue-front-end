@@ -3,7 +3,7 @@ import Businesses from '@/components/follower/tabs/businesses';
 <template>
   <div>
     <b-card class="border shadow " style="height:250px">
-     <span> <h6 class="mybusi">  <b>  My Businesses  </b> </h6>  </span>
+     <span> <h6 class="mybusi"> <fas-icon class="icons" :icon="['fas', 'hands-helping']" size="lg" /> <b>  My Businesses  </b> </h6>  </span>
 
 
      <div> 

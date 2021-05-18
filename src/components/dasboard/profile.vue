@@ -4,8 +4,10 @@
      
       <span>    
       
-          <h3 class="name">    
-               <b>   Profile  </b>
+          <h3  class="name">    
+        <h6 class="name" >  <fas-icon class="icons" :icon="['fas', 'user']" size="lg" />        <b>   Profile  </b>   </h6> 
+               
+
                 <h6 class="float-right text-success font-weight-bolder">
                   <b-button variant="outline-primary upgrade-btn" size="sm"
                     ><b-icon-star></b-icon-star> &nbsp;&nbsp;Upgrade

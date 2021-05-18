@@ -4,7 +4,7 @@
       <b-card class=" border shadow ">
 
          <h6 class="title">   
-       <fas-icon class="" :icon="['fas', 'user-friends']" />   <b>  Tutorial   </b>
+       <fas-icon class="icons" :icon="['fas', 'video']" />   <b>  Tutorial   </b>
            </h6>       
 
 

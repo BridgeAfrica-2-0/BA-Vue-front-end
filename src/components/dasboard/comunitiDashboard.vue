@@ -12,7 +12,7 @@
 
      <div class=" border shadow   p-tab">
 
-        <span> <h6 class="title">   <b>   COMMUNITY   </b>  <span class="h4-color"> 7K </span> </h6>   </span>   
+        <span> <h6 class="title">  <fas-icon class="icons" :icon="['fas', 'users']" size="lg" />            <b>   COMMUNITY   </b>  <span class="h4-color"> 7K </span> </h6>   </span>   
 
 
       <b-tabs  pills content-class="mt-3  f-left ">

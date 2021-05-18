@@ -2,7 +2,7 @@
   <div>
     <b-card class="px-md-3 border shadow "  >
 
-      <span> <h6 class="title">    <b> Post </b>  </h6>   </span>
+      <span> <h6 class="title">  <fas-icon class=" icons icon-color" :icon="['fab', 'readme']"  size="lg" />   <b> Post </b>  </h6>   </span>
 
    <div class="s-card " >
      
@@ -35,6 +35,21 @@
                 Lorem Ipsum has been the industry's standard dummy text ever
                 since the 1500s, when an unknown printer took a galley of type
                 and scrambled it to make a type specimen book. It has survived
+                not only five centuries, but also the leap into electronic
+
+                Lorem Ipsum has been the industry's standard dummy text ever
+                since the 1500s, when an unknown printer took a galley of type
+                and scrambled it to make a type specimen book. It has survived
+                not only five centuries, but also the leap into electronic
+
+
+
+                 and scrambled it to make a type specimen book. It has survived
+                not only five centuries, but also the leap into electronic
+
+                 and scrambled it to make a type specimen book. It has survived
+                not only five centuries, but also the leap into electronic
+                 and scrambled it to make a type specimen book. It has survived
                 not only five centuries, but also the leap into electronic
                 typesetting, remaining essentially unchanged.😛
               </p>

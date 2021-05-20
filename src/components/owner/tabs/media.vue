@@ -1,8 +1,19 @@
 <template>
   <div>
-    <h2 class="p-3 bg-light shadow-sm mb-4">
+   
+
+
+      <b-alert show variant="primary">
       <fas-icon class="violet mr-2 pt-1" :icon="['fas', 'file-image']" />Media
-    </h2>
+       
+        
+        </b-alert
+    >
+
+
+
+
+
     <b-tabs content-class="mt-3">
       <b-tab title="Posts" active>
         <div class="row">
@@ -103,6 +114,9 @@
                 </ul>
               </div>
             </div>
+
+
+            
             <div class="img-gal">
               <a href="#!"
                 ><img
@@ -868,9 +882,12 @@ export default {
   color: black;
 }
 
-.img-size {
-  width: 100px;
-  height: 100px;
+
+@media (min-width: 762px) {
+
+.img-gal {
+  width: 200px;
+  height: 150x;
   background-size: contain;
   cursor: pointer;
   margin: 10px;
@@ -883,4 +900,26 @@ export default {
     margin-bottom: 8px;
   }
 }
+
+
+}
+
+
+@media (max-width: 762px) {
+
+
+.img-gal {
+  width: 150;
+  height: 104x;
+  background-size: contain;
+  cursor: pointer;
+  margin: 10px;
+  border-radius: 3px;
+}
+
+
+}
+
+
+
 </style>

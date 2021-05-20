@@ -3,8 +3,8 @@
     <navbar></navbar>
     <head-page></head-page>
     <div  class=" container-fluid text-justify   corps prof">
-      <b-row>
-        <b-col cols="12">
+      <b-row class="center-content">
+        <b-col cols="12" >
           <b-tabs content-class="mt-3" pills  small fill>
             <b-tab title="Posts" active>
               <Post />
@@ -100,5 +100,15 @@ export default {
     font-size: x-large;
     font-weight: 600;
   }
+}
+
+
+
+@media (min-width: 768px) {
+.center-content{
+  margin-left: 64px;
+  margin-right: 64px;
+}
+
 }
 </style>

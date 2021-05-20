@@ -14,7 +14,7 @@
 
     <div class="people-style shadow">
       <b-row>
-        <b-col md="3" xl="3" lg="3" cols="5"  sm="3">
+        <b-col md="3"  xl="5"  lg="5" cols="5"  sm="3">
           <div class="center-img" >
 
 
@@ -38,7 +38,7 @@
 
           </div>
         </b-col>
-        <b-col md="5" cols="7"  lg="7" xl="5"  sm="5">
+        <b-col md="5" cols="7"  lg="7" xl="7"  sm="5">
           <p class="textt">
             <strong class="title"> Super Car ltd </strong> <br />
              Car marketing  
@@ -57,9 +57,9 @@
 
 
 
-        <b-col lg="12" xl="4" md="4" cols="12" sm="4">
+        <b-col lg="12" xl="12" md="4" cols="12" sm="4">
           <div class="s-button">
-     <b-row>  <b-col md="12"  lg="4"  xl="12" sm="12" cols="4" class="mt-2 text-center">    
+     <b-row>  <b-col md="12"  lg="4"  xl="4" sm="12" cols="4" class="mt-2 text-center">    
 
             <b-button block size="sm" class="b-background shadow " variant="primary">
                 <i class="fas fa-user-plus  fa-lg btn-icon "></i>  <span class="btn-com">Community</span>
@@ -67,7 +67,7 @@
 
             </b-col>  
 
-        <b-col md="12"  lg="4"  xl="12" sm="12" cols="4" class="mt-2 text-center">  
+        <b-col md="12"  lg="4"  xl="4" sm="12" cols="4" class="mt-2 text-center">  
 
            
 
@@ -78,7 +78,7 @@
 
             </b-col>  
 
-            <b-col  md="12"  lg="4"  xl="12" sm="12" cols="4"  class="mt-2 text-center">  
+            <b-col  md="12"  lg="4"  xl="4" sm="12" cols="4"  class="mt-2 text-center">  
 
               <b-button block size="sm" class="b-background shadow " variant="primary">
                 <i class="fas fa-map-marked-alt  fa-lg btn-icon "></i>  <span class="btn-text">Direction</span>
@@ -93,6 +93,28 @@
         </b-col>
       </b-row>
     </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -111,7 +133,7 @@
 
     <div class="people-style shadow">
       <b-row>
-        <b-col md="3" xl="3" lg="3" cols="5"  sm="3">
+        <b-col md="3"  xl="5"  lg="5" cols="5"  sm="3">
           <div class="center-img" >
 
 
@@ -135,7 +157,7 @@
 
           </div>
         </b-col>
-        <b-col md="5" cols="7"  lg="7" xl="5"  sm="5">
+        <b-col md="5" cols="7"  lg="7" xl="7"  sm="5">
           <p class="textt">
             <strong class="title"> Super Car ltd </strong> <br />
              Car marketing  
@@ -154,9 +176,9 @@
 
 
 
-        <b-col lg="12" xl="4" md="4" cols="12" sm="4">
+        <b-col lg="12" xl="12" md="4" cols="12" sm="4">
           <div class="s-button">
-     <b-row>  <b-col md="12"  lg="4"  xl="12" sm="12" cols="4" class="mt-2 text-center">    
+     <b-row>  <b-col md="12"  lg="4"  xl="4" sm="12" cols="4" class="mt-2 text-center">    
 
             <b-button block size="sm" class="b-background shadow " variant="primary">
                 <i class="fas fa-user-plus  fa-lg btn-icon "></i>  <span class="btn-com">Community</span>
@@ -164,7 +186,7 @@
 
             </b-col>  
 
-        <b-col md="12"  lg="4"  xl="12" sm="12" cols="4" class="mt-2 text-center">  
+        <b-col md="12"  lg="4"  xl="4" sm="12" cols="4" class="mt-2 text-center">  
 
            
 
@@ -175,7 +197,7 @@
 
             </b-col>  
 
-            <b-col  md="12"  lg="4"  xl="12" sm="12" cols="4"  class="mt-2 text-center">  
+            <b-col  md="12"  lg="4"  xl="4" sm="12" cols="4"  class="mt-2 text-center">  
 
               <b-button block size="sm" class="b-background shadow " variant="primary">
                 <i class="fas fa-map-marked-alt  fa-lg btn-icon "></i>  <span class="btn-text">Direction</span>
@@ -190,6 +212,7 @@
         </b-col>
       </b-row>
     </div>
+
 
 
 
@@ -426,8 +449,6 @@ padding: 1px;
   margin-bottom: 30px;
 }
 
-
-
 .btn{
   padding-top: 6px;
 
@@ -436,6 +457,8 @@ padding: 1px;
     font-size:12px;
 
 }
+
+
 
 
 .r-image {
@@ -567,34 +590,5 @@ h4{
     
 }
 }
-
-
-
-
-
-@media only screen and (min-width: 992px  ) and (max-width: 1265px) {
-  
-  
-
-  .textt {
-    color: #000;
-    font-family: 'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif;
-    font-weight: normal;
-    font-size: 14px;
-    line-height: 30px;
-    color: rgba(117,114,128,1);
-    text-align: left;
-    Font-weight: normal;
-    Line-height: 20px;
-    font-style: normal;
-    padding: 1px;
-    text-align: left;
-    margin-left: 55px;
-    margin-right: -5px;
-    line-height: 25px;
-}
-
-}
-
 
 </style>

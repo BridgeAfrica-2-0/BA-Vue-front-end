@@ -1,8 +1,13 @@
 <template>
   <div class="p-0 m-0">
     <div class="col-md-12 ">
-      <h2 class="p-3 bg-light shadow-sm mb-1">
-        <fas-icon
+     
+
+
+
+
+      <b-alert show variant="primary">
+      <fas-icon
           class="violet float-left mr-1 mt-1"
           :icon="['fas', 'building']"
         />Businesss
@@ -10,13 +15,16 @@
           type="button"
           data-toggle="modal"
           data-target="#addbusinessbtnModal"
-          class="btn btn-outline-primary pull-right float-right"
+          class="btn btn-outline-primary pull-right float-right mb-2" style="margin-top: -6px;"
           v-b-modal.modal-1
         >
           Add Business
         </button>
-      </h2>
+        
+        </b-alert
+    >
 
+     
       <b-modal id="modal-1" title="Add Bussiness" hide-footer>
         <div class="row">
           <div class="col-md-12 mx-0">
@@ -412,92 +420,116 @@
 
 -->
 
-    <b-row>  <b-col md="6"> 
-              <div class="d-flex col-md-12 mt-2">
-                <img class="img-fluid picture" src="@/assets/img/photo2.jpg" />
-                <div class="text-lost">
-                  <b class="f-12">Business Name</b>
-                  
-                  <p class="mb-1 ">Categorie </p>
-                  <p class="mb-1  mb-3 ">
-                    1.1M Community
-                    <span class="float-right"
-                      >Current Plan:
-                      <span class="text-success">Basic</span></span
-                    >
-                  </p>
-                  <p class="mb-1">
-                    <b-icon-person-fill
-                      class="text-primary"
-                    ></b-icon-person-fill>
-                    Visit Profile
-                  </p>
-                  <p class="mb-1 ">
-                    <b-icon-chat-fill class="text-primary"></b-icon-chat-fill>
-                    Message
-                    <span class="badge rounded-pill bg-primary float-right mt-1"
-                      >3</span
-                    >
-                  </p>
-                  <p class="mb-1 ">
-                    <b-icon-bell-fill class="text-primary"></b-icon-bell-fill>
-                    Notifications
-                    <span class="badge rounded-pill bg-primary float-right mt-1"
-                      >9</span
-                    >
-                  </p>
-                 
-                  <p class="mb-1 ">
-                    <b-icon-shop class="text-primary"></b-icon-shop>
-                    Market Place
-                  </p>
-                </div>
-              </div>
-           </b-col>  <b-col md="6">  
-              <div class="d-flex col-md-12 mt-2">
-                <img class="img-fluid picture" src="@/assets/img/photo2.jpg" />
-                <div class="text-lost">
-                  <b>Business Name 1</b>
-
-                  <p class="mb-1">Categorie</p>
-
-                  <p class="mb-1 mb-3">
-                    1.1M Community
-                    <span class="float-right"
-                      >Current Plan:
-                      <span class="text-success">Basic</span></span
-                    >
-                  </p>
-                  
-                  <p class="mb-1">
-                    <b-icon-person-fill
-                      class="text-primary"
-                    ></b-icon-person-fill>
-                    Visit Profile
-                  </p>
-                  <p class="mb-1 ">
-                    <b-icon-chat-fill class="text-primary"></b-icon-chat-fill>
-                    Message
-                    <span class="badge rounded-pill bg-primary float-right mt-1"
-                      >3</span
-                    >
-                  </p>
-                  <p class="mb-1 ">
-                    <b-icon-bell-fill class="text-primary"></b-icon-bell-fill>
-                    Notifications
-                    <span class="badge rounded-pill bg-primary float-right mt-1"
-                      >9</span
-                    >
-                  </p>
-                  
+    <b-row>  <b-col md="12" lg="6"> 
 
 
-                  <p class="mb-1 ">
-                    <b-icon-shop class="text-primary"></b-icon-shop>
-                    Market Place
-                  </p>
-                </div>
-              </div>
+    
+    <div class="people-style shadow">
+      <b-row>
+        <b-col md="3"  xl="5"  lg="5" cols="5"  sm="3">
+          <div class="center-img" >
+
+
+
+
+              <splide :options="options" class="r-image">
+    <splide-slide cl>
+       
+
+            <img
+              src="https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg"
+              
+              class="r-image"
+            />
+
+
+
+    </splide-slide>
+              </splide>
+
+
+          </div>
+        </b-col>
+        <b-col md="5" cols="7"  lg="7" xl="7"  sm="5">
+          <p class="textt">
+            <strong class="title"> Super Car ltd </strong> <br />
+             Car marketing  
+              <br />  20k Community <br />
+            
+            <span class="location"> <b-icon-geo-alt class="ico" ></b-icon-geo-alt> Douala cameroon  </span> <br /> 
+            
+
+             super best car seller in the world
+            adipisicing elit. lorem epsep this is  <b-link>Read More</b-link>
+          </p>
+        </b-col>
+
+
+
+
+
+      </b-row>
+    </div>
+
+
+
+
+
+
+           </b-col>  <b-col md="12" lg="6"> 
+
+
+
+
+    
+    <div class="people-style shadow">
+      <b-row>
+        <b-col md="3"  xl="5"  lg="5" cols="5"  sm="3">
+          <div class="center-img" >
+
+
+
+
+              <splide :options="options" class="r-image">
+    <splide-slide cl>
+       
+
+            <img
+              src="https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg"
+              
+              class="r-image"
+            />
+
+
+
+    </splide-slide>
+              </splide>
+
+
+          </div>
+        </b-col>
+        <b-col md="5" cols="7"  lg="7" xl="7"  sm="5">
+          <p class="textt">
+            <strong class="title"> Super Car ltd </strong> <br />
+             Car marketing  
+              <br />  20k Community <br />
+            
+            <span class="location"> <b-icon-geo-alt class="ico" ></b-icon-geo-alt> Douala cameroon  </span> <br /> 
+            
+
+             super best car seller in the world
+            adipisicing elit. lorem epsep this is  <b-link>Read More</b-link>
+          </p>
+        </b-col>
+
+
+
+
+
+      </b-row>
+    </div>
+
+
           </b-col>    </b-row>
 
 
@@ -668,4 +700,242 @@ h4{
     margin-top: 6rem !important;
   }
 }
+
+
+
+
+@media only screen and (min-width: 768px) {
+
+
+.center-img{
+  margin-right: -60px;
+}
+
+
+}
+
+
+
+.card {
+  color: orange;
+}
+
+.s-button {
+  align-content: center;
+  text-align: center;
+
+  padding: 15px;
+}
+
+
+
+
+
+
+
+@media only screen and (max-width: 768px) {
+   .a-flex{
+     margin-right: -15px;
+   }
+
+
+ 
+.title{
+  font-size: 16px;
+   color:black;
+ 
+ line-height: 35px;
+  font-family: 'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif;
+}
+
+.textt {
+  color: #000;
+  
+    font-family: 'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 30px;
+    color: rgba(117,114,128,1);
+    text-align: left;
+
+Font-weight: normal ;
+Line-height:20px ;
+font-style:normal;
+
+
+padding: 1px;
+  text-align: left;
+
+  margin-left: -30px;
+
+  margin-right: -5px;
+
+  line-height: 25px;
+}
+
+.location{
+
+  margin-bottom: 30px;
+}
+
+
+
+
+.r-image {
+  border-radius: 8px;
+
+ Height : 100px;
+Width:100px
+
+}
+
+
+
+}
+
+
+
+
+
+
+@media only screen and (min-width: 768px) {
+
+.title{
+  font-size: 20px;
+   color:black;
+ 
+ line-height: 35px;
+  font-family: 'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif;
+}
+
+.textt {
+  color: #000;
+  
+    font-family: 'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 30px;
+    color: rgba(117,114,128,1);
+    text-align: left;
+
+Font-weight: normal ;
+Line-height:20px ;
+font-style:normal;
+
+
+padding: 1px;
+  text-align: left;
+
+ margin-left: 30px;
+
+  margin-right: -5px;
+
+  line-height: 25px;
+}
+
+.location{
+
+  margin-bottom: 30px;
+}
+
+
+
+
+
+.r-image {
+  border-radius: 8px;
+
+ Height : 160px;
+Width:160px
+
+}
+
+
+
+}
+
+
+.stock {
+  color: green;
+}
+
+
+
+
+.ico {
+  margin-right: 5px;
+}
+
+
+
+
+@media only screen and (min-width: 768px) {
+  .people-style {
+  border-top-left-radius: 5px;
+
+  border-bottom-left-radius: 5px;
+
+  border-top-right-radius: 5px;
+
+  border-bottom-right-radius: 5px;
+
+  background: white;
+
+  background-color: #fff;
+  background-clip: border-box;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  margin-bottom: 10px;
+  
+
+  
+
+
+  margin-right: 8px;
+ 
+
+  padding: 7px;
+}
+
+}
+
+
+
+
+@media only screen and (max-width: 768px) {
+  .people-style {
+  border-top-left-radius: 5px;
+
+  border-bottom-left-radius: 5px;
+
+  border-top-right-radius: 5px;
+
+  border-bottom-right-radius: 5px;
+
+
+
+
+  background: white;
+
+  background-color: #fff;
+  background-clip: border-box;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  margin-bottom: 10px;
+
+  margin-right: 8px;
+ 
+
+  padding: 7px;
+}
+
+
+
+
+
+
+}
+
+
+
+
+
 </style>

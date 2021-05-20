@@ -18,13 +18,12 @@
  
 
  <b-row> 
-<b-col md="6">  
+<b-col md="12" lg="6">  
     <CommunityMembers/>
 
  </b-col>
 
-
-  <b-col md="6">  
+<b-col md="12" lg="6">  
     <CommunityMembers/>
 
  </b-col>

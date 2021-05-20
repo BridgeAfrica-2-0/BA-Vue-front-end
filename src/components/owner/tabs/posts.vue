@@ -1,16 +1,22 @@
 <template>
   <div>
     <b-row>
-      <b-col md="3" class="p-0 m-0">
+      <b-col md="12" lg="5" xl="4" class="p-0 m-0">
         <b-card title="" header-tag="header" footer-tag="footer">
-          <template #header>
-            <h6 class="mb-0 d-inline-block">Intro</h6>
+         
+           <span class="m-3 ">
+
+           <h6 class="mb-0 d-inline-block title "> <b> Intro  </b> </h6>
             <span class="float-right btn m-0 p-0 action-intro"  
             v-b-modal.modal-5
 
               ><b-icon icon="pencil-fill" variant="primary"></b-icon> Edit</span
             >
-          </template>
+   
+
+           </span>
+
+
           <b-card-text class="text-left">
             <p>
              <b> <b-icon icon="briefcase-fill" variant="primary"></b-icon> Work at:</b>
@@ -116,14 +122,18 @@
         
 
         <Followers />
+
+        <Community />
+
+
         <Media />
       </b-col>
-      <b-col md="9" class="m-0 p-0 px-lg-4">
+      <b-col md="12" lg="7" xl="8" class="m-0 p-0 px-lg-4">
         <b-card class="px-md-3">
           <b-row>
             <b-col cols="2" md="1" class="m-0 p-0">
               <b-avatar
-                class="d-inline-block"
+                class="d-inline-block comment-pic"
                 variant="primary"
                 src="https://placekitten.com/300/300"
               ></b-avatar>
@@ -182,7 +192,7 @@
                   <img
                     src="@/assets/img/wankue-filler.jpg"
                     alt="John Doe"
-                    class="mr-2 rounded-circle avatar-size"
+                    class="mr-2 rounded-circle avatar-size  profile-pic"
                   />
                   <div class="media-body">
                     <h4 class="mb-0">John Doe</h4>
@@ -236,7 +246,7 @@
               <b-row>
                 <b-col cols="12" class="mt-2">
                   <img
-                    class="img-fluid"
+                    class="img-fluid post-pic"
                     src="@/assets/img/photo1.jpg"
                     alt="Photo1"
                   />
@@ -264,7 +274,7 @@
                 <b-col cols="3" md="1" class="m-md-0 p-md-0">
                   <b-avatar
                     variant="info"
-                    class="img-fluid"
+                    class="img-fluid commnet-pic"
                     src="https://placekitten.com/300/300"
                   ></b-avatar>
                 </b-col>
@@ -293,7 +303,7 @@
                   <img
                     src="@/assets/img/wankue-filler.jpg"
                     alt="John Doe"
-                    class="mr-2 rounded-circle avatar-size"
+                    class="mr-2 rounded-circle avatar-size  profile-pic"
                   />
                   <div class="media-body">
                     <h4 class="mb-0">John Doe</h4>
@@ -371,7 +381,7 @@
                 <b-col cols="3" md="1" class="m-md-0 p-md-0">
                   <b-avatar
                     variant="info"
-                    class="img-fluid"
+                    class="img-fluid comment-pic"
                     src="https://placekitten.com/300/300"
                   ></b-avatar>
                 </b-col>
@@ -379,7 +389,7 @@
                   <b-input-group class="my-auto w-100 rounded">
                     <template #append>
                       <b-input-group-text>
-                        ><strong class="clr">
+                        <strong class="clr">
                           <b-icon-cursor-fill></b-icon-cursor-fill> </strong
                       ></b-input-group-text>
                     </template>
@@ -400,7 +410,7 @@
                   <img
                     src="@/assets/img/wankue-filler.jpg"
                     alt="John Doe"
-                    class="mr-2 rounded-circle avatar-size"
+                    class="mr-2 rounded-circle avatar-size  profile-pic"
                   />
                   <div class="media-body">
                     <h4 class="mb-0">John Doe</h4>
@@ -478,7 +488,7 @@
                 <b-col cols="3" md="1" class="m-md-0 p-md-0">
                   <b-avatar
                     variant="info"
-                    class="img-fluid"
+                    class="img-fluid commnet-pic"
                     src="https://placekitten.com/300/300"
                   ></b-avatar>
                 </b-col>
@@ -487,7 +497,7 @@
                     <template #append>
                       <b-input-group-text class=""
                         ><strong class="clr">
-                          <b-icon-cursor-fill></b-icon-cursor-fill> </strong
+                          <b-icon-cursor-fill> </b-icon-cursor-fill> </strong
                       ></b-input-group-text>
                     </template>
                     <b-form-input
@@ -509,6 +519,7 @@
 import "@morioh/v-lightbox/dist/lightbox.css";
 
 import Followers from "../../followers";
+import Community from "./comunitiDashboard";
 import Media from "../../media";
 export default {
   name: "posts",
@@ -516,6 +527,7 @@ export default {
     
     Followers,
     Media,
+    Community,
   },
 
 
@@ -567,6 +579,11 @@ export default {
 
 <style scoped>
 
+.post-pic{
+  max-width: 500px;
+  max-height: 426px;
+}
+
 .clr{
   color: #E75C18;
 }
@@ -605,4 +622,34 @@ export default {
     height: 500px;
   }
 }
+
+
+@media (min-width: 768px) {
+  .profile-pic {
+    width: 64px;
+    height: 64px;
+  }
+
+  .comment-pic{
+    width: 40px;
+    height: 40px;
+  }
+
+}
+
+@media (max-width: 768px) {
+  .profile-pic {
+    width: 40px;
+    height: 40px;
+  }
+
+  .comment-pic{
+    width: 36px;
+    height: 36px;
+  }
+
+}
+
+
+
 </style>

@@ -24,13 +24,12 @@
 
 
   <b-row> 
-<b-col md="6">  
+<b-col md="12" lg="6">  
     <CommunityBusiness/>
 
  </b-col>
 
-
-  <b-col md="6">  
+<b-col md="12" lg="6">   
    <CommunityBusiness/>
 
  </b-col>

@@ -1,7 +1,7 @@
 <template>
   <div class="mt-3">
     <div class="">
-      <b-card class="f-left">
+      <b-card class="f-left" style="padding:0px">
 
 
         <b-tabs  pills content-class="mt-3 f-left">
@@ -77,5 +77,9 @@ hr {
     position: relative;
     left: -75px;
   }
+}
+
+.card-body{
+  padding: 2px;
 }
 </style>

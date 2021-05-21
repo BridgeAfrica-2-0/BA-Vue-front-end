@@ -1,13 +1,13 @@
 <template>
   <div>
     <b-row>
-      <b-col md="4" lg="3" >
+      <b-col md="12" lg="5" xl="4" >
         <Intro />
-        <Invite />
-    
+     
+      <comunitiDashboard />
       </b-col>
 
-      <b-col md="8"  lg="9" >
+      <b-col md="8"  lg="7"  xl="8">
         <Post />
       </b-col>
     </b-row>
@@ -16,15 +16,15 @@
 
 <script>
 import Intro from "../intro";
-import Invite from "../invite";
-//import Personalise from "../personalise";
+import comunitiDashboard from "./comunitiDashboard";
+//import Personalise from "./personalise";
 import Post from "../ownerPost";
 export default {
   name: "posts",
   components: {
     Intro,
-    Invite,
 
+    comunitiDashboard,
    // Personalise,
     Post
   }

@@ -1,5 +1,5 @@
 <template>
-  <div class="" style="overflow-y: hidden;">
+  <div class="" style="overflow-y: hidden; padding:0px">
   
     <navbar />
    
@@ -62,7 +62,7 @@
 
 
 
-    <div class="mt-3" v-if="selectedId == '3'" >  
+    <div class="mt-3" v-if="selectedId == '39'" >  
               
             <Pending />
    </div> 
@@ -74,7 +74,7 @@
 
 
 
-    <div class="mt-3" v-if="selectedId == '4'" >  
+    <div class="mt-3" v-if="selectedId == '3'" >  
               
               <Insight />
    </div> 
@@ -83,7 +83,7 @@
 
 
    
-    <div class="mt-3" v-if="selectedId == '5'" >  
+    <div class="mt-3" v-if="selectedId == '4'" >  
               
              <Settings /> 
    </div> 
@@ -142,7 +142,7 @@ export default {
        
         {label: 'Inbox' , icon: 'fas fa-comments'},
         {label: 'Notification' , icon: 'fas fa-bell'},
-        {label: 'Pending' , icon: 'fas fa-sync'}, 
+       
         {label: 'Insight' , icon: 'fas fa-chart-line'},  
         {label: 'Settings' , icon: 'fas fa-cog'},
         

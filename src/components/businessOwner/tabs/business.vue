@@ -21,7 +21,7 @@
 
 
               <splide :options="options" class="r-image">
-    <splide-slide cl>
+    <splide-slide >
        
 
             <img

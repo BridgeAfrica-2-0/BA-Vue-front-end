@@ -40,16 +40,30 @@
           </b-dropdown>
         </p>
       </b-card-text>
-      <iframe
-        src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d48389.732999183005!2d-74.006227!3d40.710128!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xb89d1fe6bc499443!2sDowntown%20Conference%20Center!5e0!3m2!1sen!2sbg!4v1611866634082!5m2!1sen!2sbg"
-        width="290"
-        height="200"
-        frameborder="0"
-        class="border-0"
-        allowfullscreen=""
-        aria-hidden="false"
-        tabindex="0"
-      ></iframe>
+
+
+
+
+
+            <GmapMap
+      :center='center'
+      :zoom='12'
+      style='width:100%;  height: 250px;'
+    >
+      <GmapMarker
+        :key="index"
+        v-for="(m, index) in markers"
+        :position="m.position"
+        @click="center=m.position"
+      />
+    </GmapMap>
+
+
+
+
+
+
+
     </b-card>
 
 
@@ -212,6 +226,12 @@ export default {
 
   data() {
     return {
+
+       center: { lat: 45.508, lng: -73.587 },
+      currentPlace: null,
+      markers: [],
+      places: [],
+
       edit1: false,
       edit2: false,
       leftTitle: "About Mapoure Agrobusiness",
@@ -264,4 +284,16 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped>
+
+
+ .primary{
+            
+           margin-right: 8px;
+    }
+
+
+
+</style>> 
+    
+   

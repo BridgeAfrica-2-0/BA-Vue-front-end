@@ -1,7 +1,18 @@
 <template>
   <div>
+
+
+     <b-alert show variant="primary">
+      <b-icon icon="person-fill" variant="primary"></b-icon>
+      <b>
+        About
+      </b></b-alert
+    >
+
+
+    
     <b-card>
-      <div>
+      <div class="mb-3">
         <iframe
           src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d48389.732999183005!2d-74.006227!3d40.710128!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xb89d1fe6bc499443!2sDowntown%20Conference%20Center!5e0!3m2!1sen!2sbg!4v1612237569797!5m2!1sen!2sbg"
           height="450"
@@ -26,60 +37,59 @@
           </b-card>
         </b-col>
         <b-col>
-          <b-card>
-            <div class="edit" @click="editContact">
+
+          
+
+ <b-card>
+
+            <b-card-text>
+
+              <div class="edit" @click="editContact">
               <b-icon icon="pencil-fill" variant="primary"></b-icon>
             </div>
-            <b-card-text>
-              <p>
-                <b-icon icon="briefcase-fill" variant="primary"></b-icon> Work
-                at: {{ workedAt }}
-              </p>
-              <p>
-                <b-icon icon="book-fill" variant="primary"></b-icon> Studied at:
-                {{ lastEducation }}
-              </p>
-              <p>
-                <b-icon icon="house-fill" variant="primary"></b-icon> Home Town
-                Name: {{ homeTown }}
-              </p>
-              <p>
-                <b-icon icon="geo-alt-fill" variant="primary"></b-icon> Current
-                City Name: {{ cityName }}
-              </p>
-              <p>
-                <b-icon icon="people-fill" variant="primary"></b-icon> Followed
-                by: {{ followed }}
-              </p>
-              <p>
-                <b-icon icon="phone-fill" variant="primary"></b-icon>
-                {{ telephone }}
-              </p>
-              <p>
-                <b-icon icon="envelope-fill" variant="primary"></b-icon>
-                {{ email }}
-              </p>
-              <p>
-                <b-icon icon="clock" variant="primary"></b-icon>
-                <span class="ml-2 btn-item">Open Now</span>
-              </p>
-              <p>
-                <b-dropdown
-                  size="sm"
-                  variant="outline"
-                  text="6:00AM - 7:00PM"
-                  class="ml-2"
-                >
-                  <b-dropdown-item-button
-                    >6:00AM - 7:00PM</b-dropdown-item-button
-                  >
-                  <b-dropdown-item-button
-                    >6:00AM - 7:00PM</b-dropdown-item-button
-                  >
-                </b-dropdown>
-              </p>
-            </b-card-text>
-          </b-card>
+
+
+
+        <p>
+          <b-icon icon="briefcase-fill" class="primary"></b-icon> Agriculture
+        </p>
+        <p><b-icon icon="search" class="primary"></b-icon> Chicken Seller</p>
+        <p>
+          <b-icon icon="geo-alt-fill" class="primary"></b-icon> Mokolo, Yaounde,
+          Cameroon
+        </p>
+        <p><b-icon icon="link" class="primary"></b-icon> www.business.com</p>
+        <p>
+          <b-icon icon="people-fill" class="primary"></b-icon> 1.1M Community
+        </p>
+        <p>
+          <b-icon icon="telephone-fill" class="primary"></b-icon>
+          +1(542) 565- 536
+        </p>
+        <p>
+          <b-icon icon="envelope-fill" class="primary"></b-icon>
+          info@business.com
+        </p>
+        <p>
+          <b-icon icon="clock" class="primary"></b-icon>
+          <b-link> Open now</b-link>
+          <br />
+          <b-dropdown size="sm" variant="transperent">
+            <template #button-content>
+              10:00AM - 7:00PM
+            </template>
+            <b-dropdown-item> 10:00AM - 7:00PM</b-dropdown-item>
+          </b-dropdown>
+        </p>
+      </b-card-text>
+
+
+ </b-card>
+
+
+
+
+
         </b-col>
       </b-row>
     </b-card>
@@ -87,7 +97,7 @@
     <b-modal
       id="bv-modal-example1"
       hide-footer
-      title="Edit About"
+      title="Business Name"
       v-model="edit1"
       size="md"
     >
@@ -138,7 +148,7 @@
       <b-form>
         <b-form-group
           id="input-group-1"
-          label="Worked At"
+          label="Business Name"
           label-for="input-1"
           label-size="sm"
         >
@@ -152,7 +162,7 @@
         </b-form-group>
         <b-form-group
           id="input-group-2"
-          label="Studied At"
+          label="Category"
           label-for="input-2"
           label-size="sm"
         >
@@ -206,6 +216,26 @@
             required
           ></b-form-input>
         </b-form-group>
+
+
+        <b-form-group
+          id="input-group-2"
+          label=" Contact 2"
+          label-for="input-2"
+          label-size="sm"
+        >
+          <b-form-input
+            id="input-1"
+            class="mt-1"
+            v-model="telephone"
+            type="tel"
+            required
+          ></b-form-input>
+        </b-form-group>
+
+
+
+
         <b-form-group
           id="input-group-2"
           label="Business Email"
@@ -248,6 +278,10 @@ export default {
         "              iste id obcaecati quae odit accusamus reprehenderit, ipsa nam\n" +
         "              laudantium pariatur. Harum, soluta. Nam accusantium hic numquam\n" +
         "              architecto debitis. Asperiores temporibus, rerum iste id obcaecati\n" +
+         "              architecto debitis. Asperiores temporibus, rerum iste id obcaecati\n" +
+          "              architecto debitis. Asperiores temporibus, rerum iste id obcaecati\n" +
+           "              architecto debitis. Asperiores temporibus, rerum iste id obcaecati\n" +
+            "              architecto debitis. Asperiores temporibus, rerum iste id obcaecati\n" +
         "              quae odit accusamus reprehenderit, ipsa nam laudantium pariatur.\n" +
         "              Harum, soluta. Nam accusantium hic numquam architecto debitis.",
       workedAt: "Current or Last Organization",
@@ -306,4 +340,10 @@ h4,
 p {
   text-align: left;
 }
+
+ .primary{
+            
+           margin-right: 8px;
+    }
+    
 </style>

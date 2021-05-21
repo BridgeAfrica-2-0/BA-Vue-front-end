@@ -887,7 +887,7 @@ export default {
 
 .img-gal {
   width: 200px;
-  height: 150x;
+  height: 200x;
   background-size: contain;
   cursor: pointer;
   margin: 10px;
@@ -909,8 +909,8 @@ export default {
 
 
 .img-gal {
-  width: 150;
-  height: 104x;
+  width: 117;
+  height: 1174x;
   background-size: contain;
   cursor: pointer;
   margin: 10px;

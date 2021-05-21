@@ -1,18 +1,39 @@
 <template>
   <div>
-    <b-card>
-      <div class="products ml-4">
-        <div class="create" @click="createProduct">
-          <div class="text">
-            <b-icon icon="plus"></b-icon>
-            <p>Add product/ Services</p>
-          </div>
-        </div>
-        <div class="ml-4" v-for="post in posts" :key="post.id">
+
+
+  
+      <b-alert show variant="primary">
+      <fas-icon
+          class="violet float-left mr-1 mt-1"
+          :icon="['fas', 'building']"
+        />Market
+        <button
+          type="button"
+          data-toggle="modal"
+          data-target="#addbusinessbtnModal"
+          class="btn btn-outline-primary pull-right float-right mb-2" style="margin-top: -6px;"
+         @click="createProduct"
+        >
+          Add product
+        </button>
+        
+        </b-alert
+    >
+
+
+      <div class="products ">
+       
+
+        <div class="col-md-6" v-for="post in posts" :key="post.id">
           <Product />
         </div>
       </div>
-    </b-card>
+   
+
+
+
+
 
     <b-modal hide-footer title="Add product" v-model="showModal">
       <b-form>

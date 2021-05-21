@@ -1,33 +1,50 @@
 <template>
   <div> 
 
-   <div> <!-- <p class="float-right">  Edit <b-icon    @click="createProduct" icon="pencil" >    </b-icon>  </p>   -->
-      
-     
-    <b-card
-      @click="productDetails"
-      img-src="https://picsum.photos/600/300/?image=25"
-      img-alt="Image"
-      img-top
-      tag="article"
-      class="mb-5 prod"
-    > 
-      <b-card-text>
+   
+                    
+    <div class="people-style shadow">
+      <b-row>
+        <b-col cols="4" lg="4" sm="4" md="5">
+         <div class="center-img" >
+            <img
+              src="https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg"
+              
+              class="r-image"
+            />
+          </div>
+
+          
+        </b-col>
+        <b-col cols="8" sm="8" md="7" >
+         <p class="text">
+            <strong class="title"> Sneakers Blec cc </strong> <br /> <strong> Description </strong>  <br />
+            This is just a dummy text dumy dummy things are always dummy and dummy add  things are always dummy  hjykt   
+            <b-link> see more   </b-link>   <br />
+             
+            <span class="price"> <strong> 12,000 Fcfa  </strong> </span> <br />
+            
+          </p>
+        </b-col>
+
         
-        <h6>Product Name</h6>
-        <p class="short">
-          <small>Lorem ipsum dolor sit amet consectetur.</small>
-        </p>
 
-        <span class="discount price"><strike>1500XAF</strike></span>
-        <p class="price">1400XAF</p>
-      </b-card-text>
-      <b-card-action>
-        <b-button variant="primary" class="buy">Buy Now</b-button>
-      </b-card-action>
-    </b-card>
+        
+      </b-row>
+
+
+      <div>
+
+
+          <span class="marketbtn"> <b-button variant="primary" class="buybtn shadow" @click="productDetails" > Buy </b-button>  <b-button variant="primary" class="buybtn shadow"> Visit Shop </b-button>  </span>
+            
+          <br />    
+
+        </div>
+
+
     </div>
-
+   
 
 
 
@@ -547,4 +564,292 @@ h6 {
 .reply {
   cursor: pointer;
 }
+
+
+
+
+@media only screen and (min-width: 768px) {
+
+
+.center-img{
+  margin-right: -60px;
+}
+
+
+}
+
+
+
+
+
+.buybtn{
+  width: 100px;
+}
+
+.marketbtn{
+ 
+  margin-bottom: 3px;
+  float: right;
+}
+
+.price{
+
+  font-size: 18px;
+}
+
+
+
+.people-style {
+  border-top-left-radius: 10px;
+
+  border-bottom-left-radius: 10px;
+
+  border-top-right-radius: 5px;
+
+  border-bottom-right-radius: 5px;
+
+  background: white;
+
+  background-color: #fff;
+  background-clip: border-box;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  margin-bottom: 10px;
+
+  padding: 3px;
+ padding-bottom: 26px;
+ 
+
+}
+
+
+
+
+
+@media only screen and (max-width: 540px) {
+
+
+
+  
+.text {
+  color: #000;
+  
+    font-family: 'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 30px;
+    color: rgba(117,114,128,1);
+    text-align: left;
+
+Font-weight: normal ;
+Line-height:20px ;
+font-style:normal;
+
+
+padding: 1px;
+  text-align: left;
+
+  
+
+  margin-right: -5px;
+
+  line-height: 25px;
+}
+
+
+
+.r-image {
+  
+ border-top-left-radius: 10px;
+
+  border-bottom-left-radius: 10px;
+
+  border-top-right-radius: 10px;
+
+  border-bottom-right-radius: 10px;
+
+
+  width: 125px;
+
+height: 125px;
+padding: 4px;
+}
+
+
+.title{
+  font-size: 16px;
+   color:black;
+ 
+ line-height: 35px;
+  font-family: 'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif;
+}
+
+.btn{
+
+  padding-top: 6px;
+  font-size:10px;
+
+  Height : 28px;
+Width:85px;
+
+}
+
+
+}
+
+
+
+
+@media only screen and (min-width: 540px) {
+
+
+
+
+.text {
+  color: #000;
+  
+    font-family: 'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 30px;
+    color: rgba(117,114,128,1);
+    text-align: left;
+
+Font-weight: normal ;
+Line-height:20px ;
+font-style:normal;
+
+
+padding: 1px;
+  text-align: left;
+
+  
+
+  margin-right: -5px;
+
+  line-height: 25px;
+}
+
+
+
+
+.r-image {
+  
+ border-top-left-radius: 10px;
+
+  border-bottom-left-radius: 10px;
+
+  border-top-right-radius: 10px;
+
+  border-bottom-right-radius: 10px;
+
+
+   Height : 160px;
+Width:160px;
+padding: 4px;
+}
+
+
+
+
+.btn{
+  padding-top: 6px;
+
+  Height : 38px;
+Width:123px
+
+}
+
+
+
+
+
+.title{
+  font-size: 20px;
+   color:black;
+ 
+ line-height: 35px;
+  font-family: 'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif;
+}
+
+}
+
+
+
+
+.discount {
+  color: orange;
+  margin-left: 60px;
+}
+
+p {
+  text-align: left;
+}
+
+input {
+  border-radius: 15px;
+  padding: 5px;
+  border: solid 1px #ccc;
+  width: 250px;
+}
+input:focus {
+  outline-color: none;
+  border: none;
+}
+.post {
+  position: relative;
+  left: -24px;
+}
+
+.prod {
+  max-width: 14rem;
+  cursor: pointer;
+}
+.stock {
+  color: green;
+}
+.btn:focus {
+  outline: none;
+}
+.comment {
+  width: 90%;
+  border: solid 1px #ccc;
+  border-radius: 25px;
+  background-color: #ddd;
+  height: 35px;
+  padding-left: 10px;
+  margin-left: 20px;
+}
+.comment:focus {
+  outline: none;
+}
+.send-cmt {
+  position: relative;
+  margin-left: 93%;
+  top: -28px;
+  cursor: pointer;
+}
+
+h6 {
+  text-align: center;
+  font-weight: bold;
+}
+.short {
+  text-align: center;
+}
+.price {
+  text-align: center;
+}
+.buy {
+  border-radius: 0px;
+  width: 100%;
+}
+.reply {
+  cursor: pointer;
+}
+
+
+.text{
+  margin-left:3px;
+}
+
 </style>

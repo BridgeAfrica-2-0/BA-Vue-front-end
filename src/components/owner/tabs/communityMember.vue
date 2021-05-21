@@ -8,7 +8,7 @@
 
 
 
-
+     
 
 
 
@@ -692,13 +692,14 @@ f-right {
 
 
 
-.btn{
-  padding-top: 6px;
 
-   width: 95px;
-    height: 32px;
-    font-size:12px;
 
+
+
+  .btn{
+    width: 123px;
+    height: 38px;
+    font-size:14px;
 }
 
 

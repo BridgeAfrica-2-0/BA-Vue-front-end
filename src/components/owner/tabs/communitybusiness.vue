@@ -430,12 +430,15 @@ padding: 1px;
 
 .btn{
   padding-top: 6px;
-
-   width: 95px;
-    height: 32px;
-    font-size:12px;
+Height : 38px;
+Width:123px;
+    font-size:14px;
 
 }
+
+
+
+
 
 
 .r-image {
@@ -595,6 +598,9 @@ h4{
 }
 
 }
+
+
+
 
 
 </style>

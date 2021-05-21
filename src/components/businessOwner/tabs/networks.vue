@@ -5,51 +5,94 @@
       <div class="networks ml-4">
         
 
-        <div class="ml-2 mt-2" >
+        <div class=" mt-2" >
 
 
+ 
+      <b-alert show variant="primary">
+      <fas-icon
+          class="violet float-left mr-1 mt-1"
+          :icon="['fas', 'building']"
+        />Network
+        <button
+          type="button"
+          data-toggle="modal"
+          data-target="#addbusinessbtnModal"
+          class="btn btn-outline-primary pull-right float-right mb-2" style="margin-top: -6px;"
+        @click="addNetwork"
+        >
+          Add Network
+        </button>
+        
+        </b-alert
+    >
 
 
 
        <b-row >  
          
-         <b-col >  <div class="create" @click="addNetwork">
-          <div class="text">
-           
-            <p>Add Network</p>
-          </div>
-        </div>  </b-col> 
+        
          
          
-         
-         <b-col cols="12" md="4" v-for="post in posts" :key="post.id">   
-                    
+         <b-col cols="12" md="12" lg="6"  v-for="post in posts" :key="post.id">    
+
+   
+
+
+
+
+
+
+   
+
     <div class="people-style shadow">
       <b-row>
-        <b-col md="6" xl="6" lg="6" cols="6"  sm="6">
-          <div style="height: 100%;">
+         <b-col md="3" xl="3" lg="3" cols="5"  sm="3">
+          <div class="center-img" >
             <img
               src="https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg"
-              width="100%"
-              height="90%"
+            
+              
               class="r-image"
             />
           </div>
         </b-col>
-        <b-col md="6" cols="6" sm="6">
-         <p class="text">
-            <strong> Shipping Network </strong> <br />  <br />
-            Public <br />
-             20k Members <br />
-             Business Name <br />
-            <b> Approved </b>
+        <b-col md="9" cols="7"  lg="9" xl="9" sm="9">
+          <p class="textt">
+            <strong class="net-title"> Global Car Supple Network </strong> <br /><br />
+            <strong> Category : </strong> Car marketing <br />
+            <strong> Community : </strong> 20k <br />
+            <strong> public :</strong> <br />
             
+
           </p>
         </b-col>
 
-        
+
+
+
+
+
       </b-row>
     </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </b-col>    </b-row>
 
 
@@ -77,7 +120,7 @@
       <b-container>  
       <b-form>
 
-
+<!--
 
       <span class="inline">     <div style="width: 20%;">
             <img
@@ -89,7 +132,7 @@
           </div >   <span class="ml-3 fs-8"> Business Name <br />  Business Category </span> </span>  <br /> 
 
 
-  
+  -->
 
 
 
@@ -395,17 +438,17 @@ p {
 
 .create {
   position: relative;
-  height: 210px;
+  height: 175px;
   color: #fff;
   background-color: #bbb;
   padding: 20px;
  
-  height: 200px;
   margin: 30px;
   border-radius: 5px;
   text-align: center;
   cursor: pointer;
   margin-bottom: 10;
+  margin-top: -0px;
 }
 
 .text {
@@ -524,26 +567,256 @@ h4{
   margin-right: 5px;
 }
 
-.r-image {
-  
- border-top-left-radius: 10px;
-
-  border-bottom-left-radius: 10px;
-
-  border-top-right-radius: 10px;
-
-  border-bottom-right-radius: 10px;
 
 
-  width: 100%;
 
-height: 100%;
+@media only screen and (min-width: 768px) {
+.btn-text{
+
+   margin-left: 8px;
 }
 
-.people-style {
-  border-top-left-radius: 10px;
+.btn-com{
+  margin-left:4px;
+}
+.btn-icon{
+  margin-top:3px;
+}
 
-  border-bottom-left-radius: 10px;
+.center-img{
+  margin-right: -60px;
+}
+
+
+}
+
+
+@media only screen and (max-width: 768px) {
+
+    
+
+    .btn-icon{
+  margin-top:3px;
+}
+
+
+.btn-text{
+
+   margin-left: 5px;
+}
+
+
+.btn-com{
+  margin-left:3px;
+}
+
+
+}
+
+.btnpngs{
+      width: 20px;
+    margin-right: 5px;
+}
+
+.btn{
+  border-radius: 5px;
+}
+
+
+
+
+.card {
+  color: orange;
+}
+
+.s-button {
+  align-content: center;
+  text-align: center;
+
+  padding: 15px;
+}
+
+
+
+
+
+
+
+@media only screen and (max-width: 768px) {
+   .a-flex{
+     margin-right: -15px;
+   }
+
+
+  .s-button {
+  
+
+  padding: 15px;
+  margin-top: -15px;
+}
+
+.net-title{
+  font-size: 16px;
+   color:black;
+ 
+ line-height: 35px;
+  font-family: 'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif;
+}
+
+.textt {
+  color: #000;
+  
+    font-family: 'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 30px;
+    color: rgba(117,114,128,1);
+    text-align: left;
+
+Font-weight: normal ;
+Line-height:20px ;
+font-style:normal;
+
+
+padding: 1px;
+  text-align: left;
+
+  margin-left: -30px;
+
+  margin-right: -5px;
+
+  line-height: 25px;
+}
+
+.location{
+
+  margin-bottom: 30px;
+}
+
+.btn{
+  padding-top: 6px;
+  font-size:10px;
+
+  Height : 28px;
+Width:85px
+
+}
+
+
+
+.r-image {
+  border-radius: 8px;
+
+ Height : 100px;
+Width:100px
+
+}
+
+
+
+}
+
+
+
+
+
+
+@media only screen and (min-width: 768px) {
+
+.net-title{
+  font-size: 20px;
+   color:black;
+ 
+ line-height: 35px;
+  font-family: 'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif;
+}
+
+.textt {
+  color: #000;
+  
+    font-family: 'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 30px;
+    color: rgba(117,114,128,1);
+    text-align: left;
+
+Font-weight: normal ;
+Line-height:20px ;
+font-style:normal;
+
+
+padding: 1px;
+  text-align: left;
+
+  margin-left: 30px;
+
+  margin-right: -5px;
+
+  line-height: 25px;
+}
+
+.location{
+
+  margin-bottom: 30px;
+}
+
+.btn{
+  padding-top: 6px;
+
+  Height : 38px;
+Width:123px
+
+}
+
+
+
+.r-image {
+  border-radius: 8px;
+
+ Height : 160px;
+Width:160px
+
+}
+
+
+
+}
+
+
+.stock {
+  color: green;
+}
+
+.b1 {
+  width: 100px;
+  margin-left: -20px;
+}
+
+.b2 {
+  width: 120px;
+
+  margin-left: -15px;
+}
+
+.btn {
+  
+
+  display: flex;
+}
+
+.ico {
+  margin-right: 5px;
+}
+
+
+
+
+@media only screen and (min-width: 768px) {
+  .people-style {
+  border-top-left-radius: 5px;
+
+  border-bottom-left-radius: 5px;
 
   border-top-right-radius: 5px;
 
@@ -555,31 +828,90 @@ height: 100%;
   background-clip: border-box;
   border: 1px solid rgba(0, 0, 0, 0.125);
   margin-bottom: 10px;
+  
+
+  
+
+
   margin-right: 8px;
  
 
+  padding: 7px;
+}
+
+}
+
+
+
+
+@media only screen and (max-width: 768px) {
+  .people-style {
+  border-top-left-radius: 5px;
+
+  border-bottom-left-radius: 5px;
+
+  border-top-right-radius: 5px;
+
+  border-bottom-right-radius: 5px;
+
+
+
+
+  background: white;
+
+  background-color: #fff;
+  background-clip: border-box;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  margin-bottom: 10px;
+
+
+ 
+
+  padding: 7px;
+}
+
+
+
+
+
+.btn {
+ 
+
+  display: flex;
+
+    padding-right: 60px;
 }
 
 h4{
-  color: black;
-}
-
-
-.s-card{
-  height:450px; 
-  overflow: auto; 
-  overflow-x: hidden;
-
-}
-
-.inline{
-
-      display: inline-flex;
-}
-
-
-.fs-8{
   font-size: 15px;
+}
+
+}
+
+
+
+
+
+
+@media only screen and (max-width: 520px){
+
+.btn {
+    display: flex;
+    
+}
+}
+
+
+
+
+
+
+@media only screen and (max-width: 720px){
+
+.card-body {
+   padding: 0px;
+    
+}
 }
 
 

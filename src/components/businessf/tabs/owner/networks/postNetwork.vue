@@ -15,6 +15,7 @@
             id="textarea-small"
             size="sm"
             class="mb-2"
+            v-b-modal.modal-xl
             placeholder="Whats On Your, Mind ?"
         ></b-form-textarea>
         <span class="float-left">

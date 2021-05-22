@@ -12,6 +12,7 @@
     :options="options"
     @change="handleChange">
   </ly-tab>
+  <hr />
   </div>
 
    <div class="demo container-fluid">
@@ -20,14 +21,14 @@
 
 
  
-  <div  class="mt-3" v-if="selectedId == '0'" >   <b-row>
-                <b-col   class=" ">
+  <div  class="mt-3" v-if="selectedId == '0'" >   <b-row class="center-content">
+                <b-col  lg="5"  xl="4"  class=" ">
                   <Parent />
                 </b-col>
 
 
 
-                <b-col xl="9" class="order-sm-0 mt-sm-10 mt-md-10 mt-xl-0  marg-tap">
+                <b-col lg="7"  xl="8" class="order-sm-0 mt-sm-10 mt-md-10 mt-xl-0  marg-tap">
                   <Default />
                 </b-col>
               </b-row>    
@@ -345,6 +346,18 @@ export default {
 .a-box{
 
 margin-left:-15px;
+
+}
+
+
+
+@media only screen and (min-width: 768px) {
+
+.center-content{
+
+     padding-right:63px;
+     padding-left: 63px;
+}
 
 }
 

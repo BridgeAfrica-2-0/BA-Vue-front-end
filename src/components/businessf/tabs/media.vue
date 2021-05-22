@@ -11,7 +11,7 @@
       </b-tabs>
     </b-card>
   </div>
-</template>
+</template>     
 
 <script>
 import Posts from "../posts";

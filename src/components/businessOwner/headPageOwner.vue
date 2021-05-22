@@ -86,6 +86,7 @@
               badge-variant="primary"
               badge-offset="10px"
              square
+              rounded
             >
             </b-avatar>
 

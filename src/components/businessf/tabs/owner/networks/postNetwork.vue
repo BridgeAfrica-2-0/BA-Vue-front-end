@@ -4,9 +4,10 @@
     <b-row>
       <b-col cols="2" md="1" class="m-0 p-0">
         <b-avatar
-            class="d-inline-block"
+            class="d-inline-block avat"
             variant="primary"
             src="https://business.bridgeafrica.info/assets/img/team/3.png"
+            square
         ></b-avatar>
       </b-col>
       <b-col cols="10" md="11" class="m-0 p-0">
@@ -47,7 +48,7 @@
         <span class="float-right">
                 <b-button variant="outline-primary" size="sm"
                 ><b-icon icon="cursor-fill" variant="primary"></b-icon>
-                  Post</b-button
+                  Publish</b-button
                 >
               </span>
       </b-col>
@@ -61,6 +62,119 @@
             scale="1.5"
         ></b-icon-info-circle-fill>
       </a>
+
+   <!-- <b-button v-b-modal.modal-xl variant="primary">xl modal</b-button> -->
+      
+  <b-modal id="modal-xl" centered hide-footer  title="Create Post">     
+    
+    
+    
+          
+
+
+          <b-row>
+             <b-col cols="1" class="m-0 p-0">  </b-col>
+          <b-col cols="2"  class="m-0 p-0">
+            <b-avatar
+                class="d-inline-block avat"
+                variant="primary"
+                src="https://business.bridgeafrica.info/assets/img/team/3.png"
+               square
+               rounded
+            ></b-avatar>
+          </b-col>
+          <b-col cols="9"  class="pt-2" style="margin-left:-5px">
+            <h5 class="m-0 font-weight-bolder">
+               Agrobusiness
+             
+            </h5>
+            
+          </b-col>
+
+         
+
+        </b-row>
+
+
+
+    
+    
+       <b-row>
+      <b-col cols="1" md="1" class="m-0 p-0">
+        
+      </b-col>
+      <b-col cols="10" md="10" class="m-0 p-0">
+
+
+
+       
+
+
+        
+         
+           
+            
+
+
+
+        <br />
+        <b-form-textarea
+            id="textarea-small"
+            size="sm"
+            class="mb-2"
+            placeholder="Whats On Your, Mind ?"
+        ></b-form-textarea>
+        <span class="float-left">
+                <b-button-group size="sm" class="">
+                  <b-button
+                      title="Add Image"
+                      size="sm"
+                      variant="outline-primary"
+                  >
+                    <b-icon icon="card-image" aria-hidden="true"></b-icon>
+                  </b-button>
+                  <b-button
+                      title="Add Movie"
+                      size="sm"
+                      variant="outline-primary"
+                  >
+                    <b-icon
+                        icon="camera-video-fill"
+                        aria-hidden="true"
+                    ></b-icon>
+                  </b-button>
+                  <b-button
+                      title="Add Hyperlink"
+                      size="sm"
+                      variant="outline-primary"
+                  >
+                    <b-icon icon="link-45deg" aria-hidden="true"></b-icon>
+                  </b-button>
+                </b-button-group>
+              </span>
+        <span class="float-right">
+                <b-button variant="outline-primary" size="sm"
+                ><b-icon icon="cursor-fill" variant="primary"></b-icon>
+                  Publish</b-button
+                >
+              </span>
+      </b-col>
+
+      <b-col cols="1" md="1" class="m-0 p-0">
+        
+      </b-col>
+
+
+
+      
+    </b-row>
+    
+    
+    </b-modal>
+
+
+
+
       <div class="post-pending pt-2">
         <p>Your 3 Post(s) are pending for approval.&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" style="color: #e75c18; text-decoration:underline;">View All</a></p>
       </div>
@@ -74,20 +188,22 @@
         <b-row>
           <b-col cols="2" md="1" class="m-0 p-0">
             <b-avatar
-                class="d-inline-block"
+                class="d-inline-block avat"
                 variant="primary"
                 src="https://business.bridgeafrica.info/assets/img/team/3.png"
-                size="3.5rem"
+                
+                square
+                rounded
             ></b-avatar>
           </b-col>
           <b-col cols="10" md="11" class="pt-2">
             <h5 class="m-0 font-weight-bolder">
               Mapoure Agrobusiness
               <span class="float-right">
-                      <b-dropdown variant="outline-primary" size="sm">
+                      <b-dropdown variant="outline-primary" size="sm" no-caret>
                         <template #button-content>
-                          <b-icon icon="three-dots" aria-hidden="true"></b-icon>
-                          More
+                          <b-icon icon="three-dots" aria-hidden="true"  ></b-icon>
+                        
                         </template>
 
 
@@ -123,7 +239,7 @@
         </b-row>
         <b-row>
           <b-col cols="12" class="mt-2">
-            <p>
+            <p class="post-text">
               Lorem Ipsum has been the industry's standard dummy text ever
               since the 1500s, when an unknown printer took a galley of
               type and scrambled it to make a type specimen book. It has
@@ -135,7 +251,7 @@
         <b-row>
           <b-col cols="12" class="mt-2">
             <img
-                class="img-fluid"
+                class="img-fluid post-img"
                 src="@/assets/img/photo1.jpg"
                 alt="Photo1"
             />
@@ -162,11 +278,12 @@
         <b-row class="mt-2">
           <b-col cols="3" md="2" class="m-md-0 p-md-0">
             <b-avatar
-                variant="primary"
-                class="img-fluid"
-                src="https://business.bridgeafrica.info/assets/img/team/3.png"
-                size="2em"
-            ></b-avatar>
+                    variant="primary"
+                    class="img-fluid avat-comment"
+                    src="https://business.bridgeafrica.info/assets/img/team/3.png"
+                 
+                    square
+                ></b-avatar>
           </b-col>
           <b-col cols="9" md="10" class="p-0 m-0 pr-3">
             <b-input-group class="my-auto w-100 rounded">
@@ -191,20 +308,21 @@
         <b-row>
           <b-col cols="2" md="1" class="m-0 p-0">
             <b-avatar
-                class="d-inline-block"
+                class="d-inline-block avat"
                 variant="primary"
                 src="https://business.bridgeafrica.info/assets/img/team/3.png"
-                size="3.5rem"
+                square
+                rounded
             ></b-avatar>
           </b-col>
           <b-col cols="10" md="11" class="pt-2">
             <h5 class="m-0 font-weight-bolder">
               Mapoure Agrobusiness
               <span class="float-right">
-                      <b-dropdown variant="outline-primary" size="sm">
+                      <b-dropdown variant="outline-primary" size="sm"  no-caret >
                         <template #button-content>
                           <b-icon icon="three-dots" aria-hidden="true"></b-icon>
-                          More
+                        
                         </template>
                         <b-dropdown-item-button>
                           <b-icon icon="lock-fill" aria-hidden="true"></b-icon>
@@ -245,7 +363,7 @@
         </b-row>
         <b-row>
           <b-col cols="12" class="mt-2">
-            <p>
+            <p class="post-text">
               Lorem Ipsum has been the industry's standard dummy text ever
               since the 1500s, when an unknown printer took a galley of
               type and scrambled it to make a type specimen book. It has
@@ -281,9 +399,12 @@
           <b-col cols="3" md="1" class="m-md-0 p-md-0">
             <b-avatar
                 variant="primary"
-                class="img-fluid"
+                class="img-fluid avat-comment"
                 src="https://business.bridgeafrica.info/assets/img/team/3.png"
-                size="2em"
+               
+                square
+
+                rounded="xl"
             ></b-avatar>
           </b-col>
           <b-col cols="9" md="11" class="p-0 m-0 pr-3">
@@ -309,20 +430,21 @@
         <b-row>
           <b-col cols="2" md="1" class="m-0 p-0">
             <b-avatar
-                class="d-inline-block"
+                class="d-inline-block avat"
                 variant="primary"
                 src="https://business.bridgeafrica.info/assets/img/team/3.png"
-                size="3.5rem"
+               square
+               rounded
             ></b-avatar>
           </b-col>
           <b-col cols="10" md="11" class="pt-2">
             <h5 class="m-0 font-weight-bolder">
               Mapoure Agrobusiness
               <span class="float-right">
-                      <b-dropdown variant="outline-primary" size="sm">
+                      <b-dropdown variant="outline-primary" size="sm"  no-caret>
                         <template #button-content>
                           <b-icon icon="three-dots" aria-hidden="true"></b-icon>
-                          More
+                          
                         </template>
                         <b-dropdown-item-button>
                           <b-icon icon="lock-fill" aria-hidden="true"></b-icon>
@@ -363,7 +485,7 @@
         </b-row>
         <b-row>
           <b-col cols="12" class="mt-2">
-            <p>
+            <p class="post-text">
               Lorem Ipsum has been the industry's standard dummy text ever
               since the 1500s, when an unknown printer took a galley of
               type and scrambled it to make a type specimen book. It has
@@ -399,9 +521,10 @@
               <b-col cols="3" md="1" class="m-md-0 p-md-0">
                 <b-avatar
                     variant="primary"
-                    class="img-fluid"
-                    size="2em"
+                    class="img-fluid avat-comment "
+                
                     src="https://business.bridgeafrica.info/assets/img/team/3.png"
+                    square
                 ></b-avatar>
               </b-col>
               <b-col cols="9" md="11" class="p-0 m-0 pr-3">
@@ -429,20 +552,21 @@
         <b-row>
           <b-col cols="2" md="1" class="m-0 p-0">
             <b-avatar
-                class="d-inline-block"
+                class="d-inline-block avat"
                 variant="info"
                 src="https://business.bridgeafrica.info/assets/img/team/3.png"
-                size="3.5rem"
+               square
+               rounded="xl"
             ></b-avatar>
           </b-col>
           <b-col cols="10" md="11" class="pt-2">
             <h5 class="m-0 font-weight-bolder">
               Mapoure Agrobusiness
               <span class="float-right">
-                      <b-dropdown variant="outline-primary" size="sm">
+                      <b-dropdown variant="outline-primary" size="sm" no-caret>
                         <template #button-content>
                           <b-icon icon="three-dots" aria-hidden="true"></b-icon>
-                          More
+                          
                         </template>
                         <b-dropdown-item-button>
                           <b-icon icon="lock-fill" aria-hidden="true"></b-icon>
@@ -483,7 +607,7 @@
         </b-row>
         <b-row>
           <b-col cols="12" class="mt-2">
-            <p>
+            <p class="post-text">  
               Lorem Ipsum has been the industry's standard dummy text ever
               since the 1500s, when an unknown printer took a galley of
               type and scrambled it to make a type specimen book. It has
@@ -516,9 +640,10 @@
               <b-col cols="3" md="1" class="m-md-0 p-md-0">
                 <b-avatar
                     variant="primary"
-                    class="img-fluid"
+                    class="img-fluid avat-comment"
                     src="https://business.bridgeafrica.info/assets/img/team/3.png"
-                    size="2em"
+                    
+                    square
                 ></b-avatar>
               </b-col>
               <b-col cols="9" md="11" class="p-0 m-0 pr-3">
@@ -626,4 +751,66 @@ name: "postNetwork",
     height: 500px;
   }
 }
+
+@media (min-width: 762px) {
+
+.avat{
+     
+      width: 64px;
+      height: 64px;  
+}   
+
+
+.post-img{
+  width: 500px;
+  height: 462px;
+}
+
+.post-text{
+     
+
+     font-size: 14px;
+      font-family: Arial, Helvetica, sans-serif;
+}
+
+.avat-comment{
+   width: 40px;
+      height: 40px;  
+}
+
+
+
+}
+
+
+
+@media (max-width: 762px) {
+
+.avat{
+     
+      width: 40px;
+      height: 40px;  
+}   
+
+
+.avat-comment{
+   width: 36px;
+      height: 36px;  
+}
+
+
+.post-text{
+     
+
+     font-size: 12px;
+      font-family: Arial, Helvetica, sans-serif;
+}
+
+
+
+
+}
+
+
+
 </style>

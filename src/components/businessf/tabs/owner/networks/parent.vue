@@ -5,10 +5,13 @@
     <b-card title="" class="">
       <b-container class="a-center">
         <b-avatar
-          size="6em"
+          
           src="https://business.bridgeafrica.info/assets/img/pea.jpg"
-          class="network-profile-image-profile"
-          variant="primary"
+        size="6em"
+          variant="primary"   
+          square
+         
+          rounded
         >
         </b-avatar>
        
@@ -27,7 +30,11 @@
       <b-container>
         <b-row>
           <b-col cols="6">
-            <h6 class="font-weight-bolder m-0 p-0 a-center">  Maketers Union Network</h6>
+
+
+
+
+            <h6 class="  m-0 p-0 a-center network-name "> <b>  Maketers Union Network </b> </h6>     
           </b-col>
           <b-col cols="6">
             <b-button variant="primary"   size="sm"   @click="addNetwork"   style="width: 120px;"  class="a-center" >
@@ -45,18 +52,18 @@
         <b-container>
           <b-row>
             <b-col>
-              <p class="a-center"><b-icon icon="globe" variant="primary"></b-icon> Private</p>
+              <p class="a-center "><b-icon icon="globe" variant="primary"></b-icon> <span class="pivate"> Private </span> </p>
             </b-col>
             <b-col>
               <p class="a-center">
-                <b-icon icon="people-fill" variant="primary"></b-icon> 3.5K
-                Members
+                <b-icon icon="people-fill" variant="primary"></b-icon> <span class="pivate" > 3.5K
+                Members   </span>
               </p>
             </b-col>
           </b-row>
         </b-container>
 
-        <h6 class="mt-2 font-weight-bolder">About</h6>
+        <h6 class="mt-2 font-weight-bolder title ">About</h6>
         <p class="text-justify">
           Lorem Ipsum is simply dummy text of the printing and typesetting
           industry. Lorem Ipsum has been the industry's standard dummy text ever
@@ -69,23 +76,16 @@
       </b-card-text>
     </b-card>
 
-    <b-card
-      class="mt-4"
-      title=""
-      header-tag="header"
-      footer-tag="footer"
-    >
+    
 
-    <h4> <b-icon icon="people" class="i-color">   </b-icon>  Community          <span class="i-color"> 7k </span> </H4> 
 
      <SidebarCommunity/> 
      
-    </b-card>
+    
 
 
       
       
-     <Invite /> 
 
 
 
@@ -252,10 +252,9 @@
 
 <script>
 
-import SidebarCommunity from "@/components/businessf/tabs/owner/networks/sidebarcommunity";
+import SidebarCommunity from "@/components/businessf/tabs/owner/networks/sidebarcommunity";     
 
 
-import Invite from "@/components/businessf/tabs/owner/networks/invite";
 
 
 export default {
@@ -271,7 +270,7 @@ export default {
 
    components: {
     SidebarCommunity,
-    Invite,
+   
    
   },
 
@@ -336,4 +335,62 @@ export default {
 .i-color{
   color:#e75c18;
 }
+
+
+
+
+@media only screen and (min-width: 768px) {
+
+
+.network-name{
+  font-size: 20px;
+  font-family:  Helvetica, sans-serif;
+
+}
+
+.pivate{
+
+    font-size: 16px;
+  font-family:  Helvetica, sans-serif;
+  padding-left:8px;
+  text-align:left;
+}
+
+
+
+}
+
+
+
+
+@media only screen and (max-width: 768px) {
+     
+
+
+
+.network-name{
+
+    font-size: 16px;
+  font-family:  Helvetica, sans-serif;
+}
+
+.pivate{
+
+   font-size: 14px;
+  font-family:  Helvetica, sans-serif;
+  padding-left:8px;
+
+  text-align:left;
+}
+
+}
+
+
+
+
+
+
+
+
+
 </style>

@@ -7,6 +7,7 @@
             class="d-inline-block"
             variant="info"
             src="@/assets/img/wankue-filler.jpg"
+            square
           ></b-avatar>
 
 
@@ -56,12 +57,18 @@
       <b-row class="mt-2">
         <b-col cols="12" class="mt-4">
           <b-row>
+
+
             <div class="media">
-              <img
-                src="@/assets/img/wankue-filler.jpg"
-                alt="John Doe"
-                class="mr-2 rounded-circle avatar-size"
-              />
+               <b-avatar
+            class="d-inline-block bus-logo"
+            variant="info"
+          src="@/assets/img/wankue-filler.jpg"
+            square
+          ></b-avatar>
+
+
+
               <div class="media-body">
                 <h4 class="mb-0">John Doe</h4>
                 <p>Lorem ipsum...</p>
@@ -114,7 +121,7 @@
           <b-row>
             <b-col cols="12" class="mt-2">
               <img
-                class="img-fluid"
+                class="img-fluid post_img"
                 src="@/assets/img/photo1.jpg"
                 alt="Photo1"
               />
@@ -332,11 +339,12 @@
         <b-col cols="12" class="mt-4">
           <b-row>
             <div class="media">
-              <img
-                src="@/assets/img/wankue-filler.jpg"
-                alt="John Doe"
-                class="mr-2 rounded-circle avatar-size"
-              />
+              <b-avatar
+            class="d-inline-block bus-logo"
+            variant="primary"
+          src="@/assets/img/wankue-filler.jpg"
+            square
+          ></b-avatar>
               <div class="media-body">
                 <h4 class="mb-0">John Doe</h4>
                 <p>Lorem ipsum...</p>
@@ -630,4 +638,41 @@ export default {
 p {
   text-align: left;
 }
+
+
+
+@media only screen and (min-width: 768px) {
+  
+  
+.bus-logo{
+  width: 60px;
+  height: 60px;
+}
+
+.post_img{
+
+  width: 500px;
+  height: 426px;
+}
+}
+
+@media only screen and (max-width: 768px) {
+  
+  
+.bus-logo{
+  width: 40px;
+  height: 40px;
+}
+
+
+.post_img{
+
+  width: 500px;
+  height: 426px;
+}
+
+}
+
+
+
 </style>

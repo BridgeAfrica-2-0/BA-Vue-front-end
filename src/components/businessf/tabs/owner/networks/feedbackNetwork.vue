@@ -38,11 +38,13 @@
                     class="d-inline-block"
                     variant="info"
                     src="https://business.bridgeafrica.info/assets/img/team/3.png"
+                    square
                     size="3.5rem"
+                    rounded="xl"
                 ></b-avatar>
               </b-col>
               <b-col cols="10" md="11" class="pt-2">
-                <h5 class="m-0 font-weight-bolder">
+                <h5 class="m-0 font-weight-bolder  feedback-name ">
                   Mapoure Agrobusiness
                 </h5>
                 <p>1h Ago - <span class="text-primary">Feedback Type</span></p>
@@ -50,7 +52,7 @@
             </b-row>
             <b-row>
               <b-col cols="12" class="mt-2">
-                <p class="text-justify">
+                <p class="text-justify feedback-sent">
                   Lorem Ipsum is simply dummy text of the printing and typesetting industry.
                   Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
                   Lorem Ipsum is simply dummy text of the printing and typesetting industry.
@@ -89,4 +91,48 @@ name: "feedbackNetwork",
 
 <style scoped>
 
+     
+     
+@media (min-width: 762px) {
+
+        
+        .feedback-name {
+   
+       font-family: Arial, Helvetica, sans-serif;
+       font-size:20px ;    
+        
+
+        }
+
+        .feedback-sent{
+           font-size: 14px;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+}
+
+
+
+    
+@media (max-width: 762px) {
+
+        
+        .feedback-name {
+   
+       font-family: Arial, Helvetica, sans-serif;
+       font-size:16px ;    
+        
+
+        }
+
+        .feedback-sent{
+           font-size: 12px;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+}
+
+
 </style>
+
+

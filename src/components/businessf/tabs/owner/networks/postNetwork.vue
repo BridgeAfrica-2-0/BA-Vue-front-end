@@ -6,7 +6,7 @@
         <b-avatar
             class="d-inline-block avat"
             variant="primary"
-            src="https://business.bridgeafrica.info/assets/img/team/3.png"
+            src="https://www.fivesquid.com/pics/t2/1594480468-145752-1-1.jpg"
             square
         ></b-avatar>
       </b-col>
@@ -14,23 +14,49 @@
         <b-form-textarea
             id="textarea-small"
             size="sm"
-            class="mb-2"
+            class="mb-2 d-none d-md-block"
             v-b-modal.modal-xl
             placeholder="Whats On Your, Mind ?"
         ></b-form-textarea>
+
+         <b-form-textarea
+            id="textarea-small"
+            size="sm"
+            class="mb-2 d-block d-md-none"
+         
+            placeholder="Whats On Your, Mind ?"
+        ></b-form-textarea>
+
+
         <span class="float-left">
                 <b-button-group size="sm" class="">
                   <b-button
                       title="Add Image"
                       size="sm"
                       variant="outline-primary"
+                        @click="chooseImage()"
                   >
+
+
+                  
+                      <input id="video" type="file" hidden>
+                       <input id="image" type="file" hidden>
+                        <input id="document" type="file" hidden>
+
+                    
+                      
+                         
+
                     <b-icon icon="card-image" aria-hidden="true"></b-icon>
                   </b-button>
+
+                  
                   <b-button
                       title="Add Movie"
                       size="sm"
+                      
                       variant="outline-primary"
+                       @click="chooseVideo()"  
                   >
                     <b-icon
                         icon="camera-video-fill"
@@ -41,6 +67,7 @@
                       title="Add Hyperlink"
                       size="sm"
                       variant="outline-primary"
+                       @click="chooseDocument()"
                   >
                     <b-icon icon="link-45deg" aria-hidden="true"></b-icon>
                   </b-button>
@@ -79,7 +106,7 @@
             <b-avatar
                 class="d-inline-block avat"
                 variant="primary"
-                src="https://business.bridgeafrica.info/assets/img/team/3.png"
+                src="https://www.fivesquid.com/pics/t2/1594480468-145752-1-1.jpg"
                square
                rounded
             ></b-avatar>
@@ -131,13 +158,29 @@
                       title="Add Image"
                       size="sm"
                       variant="outline-primary"
+                        @click="chooseImage()"
                   >
+
+
+                  
+                      <input id="video" type="file" hidden>
+                       <input id="image" type="file" hidden>
+                        <input id="document" type="file" hidden>
+
+                    
+                      
+                         
+
                     <b-icon icon="card-image" aria-hidden="true"></b-icon>
                   </b-button>
+
+                  
                   <b-button
                       title="Add Movie"
                       size="sm"
+                      
                       variant="outline-primary"
+                       @click="chooseVideo()"  
                   >
                     <b-icon
                         icon="camera-video-fill"
@@ -148,6 +191,7 @@
                       title="Add Hyperlink"
                       size="sm"
                       variant="outline-primary"
+                       @click="chooseDocument()"
                   >
                     <b-icon icon="link-45deg" aria-hidden="true"></b-icon>
                   </b-button>
@@ -191,7 +235,7 @@
             <b-avatar
                 class="d-inline-block avat"
                 variant="primary"
-                src="https://business.bridgeafrica.info/assets/img/team/3.png"
+                src="https://www.fivesquid.com/pics/t2/1594480468-145752-1-1.jpg"
                 
                 square
                 rounded
@@ -199,7 +243,7 @@
           </b-col>
           <b-col cols="10" md="11" class="pt-2">
             <h5 class="m-0 font-weight-bolder">
-              Mapoure Agrobusiness
+              Heavy Gym
               <span class="float-right">
                       <b-dropdown variant="outline-primary" size="sm" no-caret>
                         <template #button-content>
@@ -281,7 +325,7 @@
             <b-avatar
                     variant="primary"
                     class="img-fluid avat-comment"
-                    src="https://business.bridgeafrica.info/assets/img/team/3.png"
+                    src="https://www.fivesquid.com/pics/t2/1594480468-145752-1-1.jpg"
                  
                     square
                 ></b-avatar>
@@ -311,14 +355,14 @@
             <b-avatar
                 class="d-inline-block avat"
                 variant="primary"
-                src="https://business.bridgeafrica.info/assets/img/team/3.png"
+                src="https://www.fivesquid.com/pics/t2/1594480468-145752-1-1.jpg"
                 square
                 rounded
             ></b-avatar>
           </b-col>
           <b-col cols="10" md="11" class="pt-2">
             <h5 class="m-0 font-weight-bolder">
-              Mapoure Agrobusiness
+              Heavy Gym
               <span class="float-right">
                       <b-dropdown variant="outline-primary" size="sm"  no-caret >
                         <template #button-content>
@@ -401,7 +445,7 @@
             <b-avatar
                 variant="primary"
                 class="img-fluid avat-comment"
-                src="https://business.bridgeafrica.info/assets/img/team/3.png"
+                src="https://www.fivesquid.com/pics/t2/1594480468-145752-1-1.jpg"
                
                 square
 
@@ -433,14 +477,14 @@
             <b-avatar
                 class="d-inline-block avat"
                 variant="primary"
-                src="https://business.bridgeafrica.info/assets/img/team/3.png"
+                src="https://www.fivesquid.com/pics/t2/1594480468-145752-1-1.jpg"
                square
                rounded
             ></b-avatar>
           </b-col>
           <b-col cols="10" md="11" class="pt-2">
             <h5 class="m-0 font-weight-bolder">
-              Mapoure Agrobusiness
+              Heavy Gym
               <span class="float-right">
                       <b-dropdown variant="outline-primary" size="sm"  no-caret>
                         <template #button-content>
@@ -524,7 +568,7 @@
                     variant="primary"
                     class="img-fluid avat-comment "
                 
-                    src="https://business.bridgeafrica.info/assets/img/team/3.png"
+                    src="https://www.fivesquid.com/pics/t2/1594480468-145752-1-1.jpg"
                     square
                 ></b-avatar>
               </b-col>
@@ -555,14 +599,14 @@
             <b-avatar
                 class="d-inline-block avat"
                 variant="info"
-                src="https://business.bridgeafrica.info/assets/img/team/3.png"
+                src="https://www.fivesquid.com/pics/t2/1594480468-145752-1-1.jpg"
                square
                rounded="xl"
             ></b-avatar>
           </b-col>
           <b-col cols="10" md="11" class="pt-2">
             <h5 class="m-0 font-weight-bolder">
-              Mapoure Agrobusiness
+              Heavy Gym
               <span class="float-right">
                       <b-dropdown variant="outline-primary" size="sm" no-caret>
                         <template #button-content>
@@ -642,7 +686,7 @@
                 <b-avatar
                     variant="primary"
                     class="img-fluid avat-comment"
-                    src="https://business.bridgeafrica.info/assets/img/team/3.png"
+                    src="https://www.fivesquid.com/pics/t2/1594480468-145752-1-1.jpg"
                     
                     square
                 ></b-avatar>
@@ -702,6 +746,46 @@ name: "postNetwork",
         "https://i.wifegeek.com/200426/5ce1e1c7.jpg"
       ]
     };
+  },
+
+
+
+
+  
+  methods: {
+   
+
+
+    chooseImage: function() {
+     
+        document.getElementById("image").click()
+    },
+
+
+chooseVideo: function() {
+     
+        document.getElementById("video").click()
+    },
+
+
+
+chooseDocument: function() {
+   
+        document.getElementById("document").click()
+    },
+
+
+
+
+    showModal() {
+        this.$refs['modal-3'].show()
+      },
+      hideModal() {
+        this.$refs['modal-3'].hide()
+      },
+
+     
+
   }
 }
 </script>

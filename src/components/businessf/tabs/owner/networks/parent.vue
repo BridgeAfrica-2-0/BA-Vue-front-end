@@ -6,7 +6,7 @@
       <b-container class="a-center">
         <b-avatar
           
-          src="https://business.bridgeafrica.info/assets/img/pea.jpg"
+          src="https://www.fivesquid.com/pics/t2/1594480468-145752-1-1.jpg"
         size="6em"
           variant="primary"   
           square
@@ -34,7 +34,7 @@
 
 
 
-            <h6 class="  m-0 p-0 a-center network-name "> <b>  Maketers Union Network </b> </h6>     
+            <h6 class="  m-0 p-0 a-center network-name "> <b>  Heavy Gym </b> </h6>     
           </b-col>
           <b-col cols="6">
             <b-button variant="primary"   size="sm"   @click="addNetwork"   style="width: 120px;"  class="a-center" >
@@ -57,7 +57,7 @@
             <b-col>
               <p class="a-center">
                 <b-icon icon="people-fill" variant="primary"></b-icon> <span class="pivate" > 3.5K
-                Members   </span>
+                community   </span>
               </p>
             </b-col>
           </b-row>

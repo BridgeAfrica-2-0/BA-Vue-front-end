@@ -45,7 +45,7 @@ export default {
 
   font-family: 'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif;
     font-weight: normal;
-    font-size: 14px;
+    font-size: 16px;
     Line-height:20px 
    
     

@@ -187,16 +187,16 @@ export default {
       selectedId: 0,
       bottomSelectedId: 0,
       items: [
-        {label: 'Home ', icon: 'fas fa-home'},
+        {label: 'Home ', icon: 'fas fa-home fa-lg '},
        
-        {label: 'Inbox' , icon: 'fas fa-comments'},
-        {label: 'Notification' , icon: 'fas fa-bell'},
-        {label: 'Member Request',  icon: 'fas  fa-user-plus'},
-        {label: 'Pending Post' , icon: 'fas fa-sync'},   
+        {label: 'Inbox' , icon: 'fas fa-comments fa-lg '},
+        {label: 'Notification' , icon: 'fas fa-bell fa-lg'},
+        {label: 'Member Request',  icon: 'fas  fa-user-plus fa-lg'},
+        {label: 'Pending Post' , icon: 'fas fa-sync fa-lg'},   
         
-        {label: 'Keyword Alert' , icon: 'fas fa-exclamation-triangle'},   
-        {label: 'Roles' , icon: 'fas fa-user-cog'},
-         {label: 'Settings' , icon: 'fas fa-cog'},
+        {label: 'Keyword Alert' , icon: 'fas fa-exclamation-triangle fa-lg'},   
+        {label: 'Roles' , icon: 'fas fa-user-cog fa-lg'},
+         {label: 'Settings' , icon: 'fas fa-cog fa-lg'},
         
       ],
       options: {

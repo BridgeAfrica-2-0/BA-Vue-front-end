@@ -5,7 +5,7 @@
 
 
 
-
+   <div class="splide">
 
     <splide :options="options" class="banner r-image"   >
    
@@ -14,7 +14,7 @@
        
 
             <img
-              src="https://static.urbandaddy.com/uploads/assets/image/articles/standard/aed53a6039374131366519494838fda2.png"
+              src="https://centremultisports.org/app/uploads/2019/10/gym-fit-poids-deadlift-bar.jpg"
               
               class="r-image"
             />
@@ -28,7 +28,7 @@
        
        
             <img
-              src="https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/sweet-potato-dishes-2-1567007230.png?crop=0.502xw:1.00xh;0.274xw,0&resize=640:*"
+              src="https://cdn.radiofrance.fr/s3/cruiser-production/2018/11/6583a0b6-5d2a-4f3b-a167-1391597c28be/801x410_gettyimages-961177712.jpg"
               
               class="r-image"
             />
@@ -42,7 +42,7 @@
        
 
             <img
-              src="https://static.urbandaddy.com/uploads/assets/image/articles/standard/425f67e10d41d132d59d475bb3c1ae78.jpg"  
+              src="https://www.theislandhotel.eu/wp-content/uploads/sites/4/2015/12/The-Gym-2-1.jpg"  
               
               class="r-image"
             />
@@ -60,28 +60,20 @@
 
               </splide>
 
+   </div>
 
+<b-button class=" float-right see-all">
+      See All
+    </b-button>
 
-
-
-
-
-      <!--
-      <div class="photo-btns">
-        <b-button class="sm" size="sm">
-          <b-icon icon="plus"></b-icon>Add Photos</b-button
-        >
-        <b-button class="ml-2" size="sm">See All</b-button>
-      </div>
-
-      -->
+   
 
      
-      <div  class="container-fluid">
+      <div  class="container-fluid logo-container">
         <b-row class="mt-md-2">
           <b-col cols="8" md="6" class="m-0 p-0">
             <b-avatar
-              src="https://placekitten.com/400/300"
+              src="https://www.fivesquid.com/pics/t2/1594480468-145752-1-1.jpg"
               class=" float-left avat  mt-2 mr-2 mr-xl-5 mr-lg-5 round-coner"
               badge-variant="primary"
               badge-offset="10px"
@@ -110,7 +102,7 @@
                   <h6
                     class=" m-0 p-0 ml-3   profile-name"
                   > 
-                  <b>  Business Name  </b>   <br /> <span> 1.5k Community </span>
+                  <b>  Heavy Gym  </b>   <br /> <span> 1.5k Community </span>
                   </h6>
                   
                   
@@ -493,6 +485,13 @@ width: 100%;
 }
 
 
+.logo-container{
+
+     padding-left: 40px;
+     padding-right: 40px;
+}
+
+
 }
 
 
@@ -513,6 +512,24 @@ width: 100%;
 }
 
 
+}
+
+
+.see-all {
+  height: 48px;
+  width: 174px;
+ position: relative;
+  margin-top: -100px;
+  left: -20px;
+  background-color: transparent;
+  color: #fff;
+  border: solid 2px white;
+  font-weight: bold;
+}
+.see-all:hover {
+  background-color: rgba(220, 220, 220, 0.398);
+  color: #fff;
+  border: solid 2px white;
 }
 
 

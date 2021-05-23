@@ -13,13 +13,14 @@
     v-model="selectedId"
     :items="items"
     :options="options"
+    class="center-ly"
     @change="handleChange">
   </ly-tab>
 
 
 
 
-
+<hr class="hrr" />
 
 
 
@@ -138,13 +139,13 @@ export default {
       selectedId: 0,
       bottomSelectedId: 0,
       items: [
-        {label: 'Home ', icon: 'fas fa-home'},
+        {label: 'Home ', icon: 'fas fa-home fa-lg'},
        
-        {label: 'Inbox' , icon: 'fas fa-comments'},
-        {label: 'Notification' , icon: 'fas fa-bell'},
+        {label: 'Inbox' , icon: 'fas fa-comments  fa-lg'},
+        {label: 'Notification' , icon: 'fas fa-bell fa-lg'},
        
-        {label: 'Insight' , icon: 'fas fa-chart-line'},  
-        {label: 'Settings' , icon: 'fas fa-cog'},
+        {label: 'Insight' , icon: 'fas fa-chart-line fa-lg'},  
+        {label: 'Settings' , icon: 'fas fa-cog fa-lg'},
         
       ],
       options: {
@@ -231,6 +232,14 @@ export default {
     background-color: #e6e6e6;
 }
 
+
+.center-ly{
+  margin-top: -25px;
+}
+
+.hrr{
+  margin-top: 0px;
+}
 
 
     </style>

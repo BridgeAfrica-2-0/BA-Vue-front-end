@@ -74,7 +74,7 @@
           <b-col cols="8" md="6" class="m-0 p-0">
             <b-avatar
               src="https://www.fivesquid.com/pics/t2/1594480468-145752-1-1.jpg"
-              class=" float-left avat  mt-2 mr-2 mr-xl-5 mr-lg-5 round-coner"
+              class=" float-left   mt-2 mr-2 mr-xl-5 mr-lg-5 round-coner  logo_avat"
               badge-variant="primary"
               badge-offset="10px"
              square
@@ -102,7 +102,7 @@
                   <h6
                     class=" m-0 p-0 ml-3   profile-name"
                   > 
-                  <b>  Heavy Gym  </b>   <br /> <span> 1.5k Community </span>
+                  <b>  Heavy Gym  </b>   <br /> <span class="community"> 1.5k Community </span>
                   </h6>
                   
                   
@@ -257,6 +257,18 @@ export default {
           perMove: 1,
 
 
+          breakpoints: {
+          "760": {
+            perPage: 1,
+            gap: "0rem",
+          },
+          "1500": {
+            perPage: 2,
+            gap: "1rem",
+          },
+        },
+
+
         
         },
       };
@@ -289,11 +301,6 @@ export default {
   display: none;
 }
 
-.img-avatar {
-  width: 6em;
-  height: 6em;
-  margin-top: 10px;
-}
 
 @media (max-width: 575.98px) {
  
@@ -347,14 +354,14 @@ margin-right: -8px;
 
 
 
-@media (max-width: 760px) {
+@media (max-width: 762px) {
 
   .avatar-header-icon {
    width: 25px;
     height: 25px;
   position: absolute;
-  left: 47px;
-    top: 27px;
+  left: 65px;
+    top: 65px;
   background-color: #e75c18;
   color: white;
   border-radius: 24px;
@@ -368,18 +375,24 @@ margin-right: -8px;
 
 
   
-  .avat{
-    width: 64px;
-    height: 64px;
+  .logo_avat{
+    width: 78px;
+    height: 78px;
   }
 
 
 .profile-name{
      
-     font-size: 14px;
-     font-family: Arial, Helvetica, sans-serif;
+     font-size: 16px;
+     font-family:  Helvetica;
   }
 
+.community{
+
+    
+     font-size: 12px;
+     font-family:  Helvetica;
+}
 
 
 .dot-btn{
@@ -406,25 +419,35 @@ margin-right: -8px;
 
   .profile-name{
      
-     font-size: 16px;
-     font-family: Arial, Helvetica, sans-serif;
+     font-size: 20px;
+     font-family: Helvetica;
+     margin-left: 20px;
   }
+
+  
+.community{
+
+    
+     font-size: 16px;
+     font-family:  Helvetica;
+}
+
 
   .avatar-header-icon {
   width: 2em;
   height: 2em;
   position: absolute;
-  left: 87px;
-  top: 51px;
+  left: 100px;
+  top: 100px;
   background-color: #e75c18;
   color: white;
   border-radius: 24px;
   padding: 6px;
 }
 
-  .avat{
-    width: 102px;
-    height: 102px;
+  .logo_avat{
+    width: 120px;
+    height: 120px;
   }
   .banner{
         height: 426px;
@@ -487,8 +510,8 @@ width: 100%;
 
 .logo-container{
 
-     padding-left: 40px;
-     padding-right: 40px;
+     padding-left: 63px;
+     padding-right: 63px;
 }
 
 
@@ -534,3 +557,15 @@ width: 100%;
 
 
 </style>
+
+
+<style>  
+
+@media only screen and (max-width: 768px) {
+.container-fluid{
+   padding-right: 10px;
+    padding-left: 10px;
+}
+}
+
+ </style>

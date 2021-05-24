@@ -78,4 +78,9 @@ hr {
     left: -75px;
   }
 }
+
+.card-body{
+  padding-left: 0px;
+  padding-right: 0px;
+}
 </style>

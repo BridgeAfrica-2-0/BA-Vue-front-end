@@ -286,12 +286,15 @@
           </b-col>
         </b-row>
         <b-row>
-          <b-col cols="12" class="mt-2">
+          <b-col cols="12" class="mt-2"> 
+            <div class="">
             <img
-                class="img-fluid post-img"
+                class="img-fluid post-container "
                 src="@/assets/img/photo1.jpg"
                 alt="Photo1"
             />
+
+            </div>
           </b-col>
           <b-col class="mt-1">
                   <span class="mr-3"
@@ -312,33 +315,38 @@
             >
           </b-col>
         </b-row>
-        <b-row class="mt-2">
-          <b-col cols="3" md="2" class="m-md-0 p-md-0">
+
+
+      
+       <b-row class="mt-2">
+          <b-col cols="3" md="1" class="m-md-0 p-md-0">
             <b-avatar
-                    variant="primary"
-                    class="img-fluid avat-comment"
-                    src="https://www.fivesquid.com/pics/t2/1594480468-145752-1-1.jpg"
-                 
-                    square
-                ></b-avatar>
+                variant="primary"
+                class="img-fluid avat-comment"
+                src="https://www.fivesquid.com/pics/t2/1594480468-145752-1-1.jpg"
+               
+                square
+
+                rounded="xl"
+            ></b-avatar>
           </b-col>
-          <b-col cols="9" md="10" class="p-0 m-0 pr-3">
-            <b-input-group class="my-auto w-100 rounded">
-              <template #append>
-                <b-input-group-text class=""
-                ><strong class="color-site">
-                  <b-icon-cursor-fill></b-icon-cursor-fill> </strong
-                ></b-input-group-text>
-              </template>
-              <b-form-input
-                  placeholder="Post  A Comment"
-                  class="border-right-0"
-              ></b-form-input>
-            </b-input-group>
+          <b-col cols="9" md="11" class="p-0 m-0 pr-3">
+            
+            
+            <input placeholder="Post a Comment" class="comment" type="text" />
+
+              <fas-icon
+                class="primary send-cmt"
+                :icon="['fas', 'paper-plane']"
+              />
+
           </b-col>
         </b-row>
+
+        
       </b-col>
     </b-row>
+   
 
     <b-row class="mt-4">
       <b-col cols="12" class="mt-4">
@@ -445,18 +453,15 @@
             ></b-avatar>
           </b-col>
           <b-col cols="9" md="11" class="p-0 m-0 pr-3">
-            <b-input-group class="my-auto w-100 rounded">
-              <template #append>
-                <b-input-group-text class=""
-                ><strong class="color-site">
-                  <b-icon-cursor-fill></b-icon-cursor-fill> </strong
-                ></b-input-group-text>
-              </template>
-              <b-form-input
-                  placeholder="Post  A Comment"
-                  class="border-right-0"
-              ></b-form-input>
-            </b-input-group>
+            
+            
+            <input placeholder="Post a Comment" class="comment" type="text" />
+
+              <fas-icon
+                class="primary send-cmt"
+                :icon="['fas', 'paper-plane']"
+              />
+
           </b-col>
         </b-row>
       </b-col>
@@ -565,18 +570,15 @@
                 ></b-avatar>
               </b-col>
               <b-col cols="9" md="11" class="p-0 m-0 pr-3">
-                <b-input-group class="my-auto w-100 rounded">
-                  <template #append>
-                    <b-input-group-text class=""
-                    ><strong class="color-site">
-                      <b-icon-cursor-fill></b-icon-cursor-fill> </strong
-                    ></b-input-group-text>
-                  </template>
-                  <b-form-input
-                      placeholder="Post  A Comment"
-                      class="border-right-0"
-                  ></b-form-input>
-                </b-input-group>
+              
+              
+            <input placeholder="Post a Comment" class="comment" type="text" />
+
+              <fas-icon
+                class="primary send-cmt"
+                :icon="['fas', 'paper-plane']"
+              />
+
               </b-col>
             </b-row>
           </b-col>
@@ -685,16 +687,16 @@
               </b-col>
               <b-col cols="9" md="11" class="p-0 m-0 pr-3">
                 <b-input-group class="my-auto w-100 rounded">
-                  <template #append>
-                    <b-input-group-text class=""
-                    ><strong class="color-site">
-                      <b-icon-cursor-fill></b-icon-cursor-fill> </strong
-                    ></b-input-group-text>
-                  </template>
-                  <b-form-input
-                      placeholder="Post  A Comment"
-                      class="border-right-0"
-                  ></b-form-input>
+                 
+                 
+                 
+            <input placeholder="Post a Comment" class="comment" type="text" />
+
+              <fas-icon
+                class="primary send-cmt"
+                :icon="['fas', 'paper-plane']"
+              />
+
                 </b-input-group>
               </b-col>
             </b-row>
@@ -707,6 +709,8 @@
 </template>
 
 <script>
+
+
 export default {
 name: "postNetwork",
   data() {
@@ -838,10 +842,16 @@ chooseDocument: function() {
 }   
 
 
-.post-img{
+
+
+
+
+.post-container{
   width: 500px;
   height: 462px;
 }
+
+
 
 .post-text{
      
@@ -886,6 +896,52 @@ chooseDocument: function() {
 
 
 
+}
+
+
+.comment-box{
+
+
+    margin-left: -40px;
+    position: relative;
+    background-color: white;
+   
+   
+
+}
+
+
+.comment-input{
+   border-radius: 24px;
+   height: 34px;
+   width:315px;
+}
+
+
+
+
+.comment {
+  width: 100%;
+  border: solid 1px #ccc;
+  border-radius: 25px;
+  background-color: #ddd;
+  height: 34px;
+  padding-left: 10px;
+}
+.comment:focus {
+  outline: none;
+}
+.send-cmt {
+  position: relative;
+  margin-left: 95%;
+  top: -28px;
+  cursor: pointer;
+}
+
+.time {
+  position: relative;
+  margin-left: 80px;
+  top: -28px;
 }
 
 

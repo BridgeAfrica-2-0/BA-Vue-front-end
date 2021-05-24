@@ -51,27 +51,27 @@
 
 
         <p>
-          <b-icon icon="briefcase-fill" class="primary"></b-icon> Agriculture
+          <b-icon icon="briefcase-fill" class="primary icon-size"></b-icon> Agriculture
         </p>
-        <p><b-icon icon="search" class="primary"></b-icon> Chicken Seller</p>
+        <p><b-icon icon="search" class="primary icon-size"></b-icon> Chicken Seller</p>
         <p>
-          <b-icon icon="geo-alt-fill" class="primary"></b-icon> Mokolo, Yaounde,
+          <b-icon icon="geo-alt-fill" class="primary icon-size"></b-icon> Mokolo, Yaounde,
           Cameroon
         </p>
-        <p><b-icon icon="link" class="primary"></b-icon> www.business.com</p>
+        <p><b-icon icon="link" class="primary icon-size"></b-icon> www.business.com</p>
         <p>
-          <b-icon icon="people-fill" class="primary"></b-icon> 1.1M Community
+          <b-icon icon="people-fill" class="primary icon-size"></b-icon> 1.1M Community
         </p>
         <p>
-          <b-icon icon="telephone-fill" class="primary"></b-icon>
+          <b-icon icon="telephone-fill" class="primary icon-size"></b-icon>
           +1(542) 565- 536
         </p>
         <p>
-          <b-icon icon="envelope-fill" class="primary"></b-icon>
+          <b-icon icon="envelope-fill" class="primary icon-size"></b-icon>
           info@business.com
         </p>
         <p>
-          <b-icon icon="clock" class="primary"></b-icon>
+          <b-icon icon="clock" class="primary icon-size"></b-icon>
           <b-link> Open now</b-link>
           <br />
           <b-dropdown size="sm" variant="transperent">
@@ -283,6 +283,7 @@ export default {
            "              architecto debitis. Asperiores temporibus, rerum iste id obcaecati\n" +
             "              architecto debitis. Asperiores temporibus, rerum iste id obcaecati\n" +
         "              quae odit accusamus reprehenderit, ipsa nam laudantium pariatur.\n" +
+        "              quae odit accusamus reprehenderit, ipsa nam laudantium pariatur.\n" +
         "              Harum, soluta. Nam accusantium hic numquam architecto debitis.",
       workedAt: "Current or Last Organization",
       lastEducation: "Last Education",
@@ -341,9 +342,32 @@ p {
   text-align: left;
 }
 
+ 
+
+ 
+@media (min-width: 762px) {
+
+ .primary{
+            
+           margin-right: 6px;
+    }
+
+  
+}
+
+
+
+@media (min-width: 762px) {
+
  .primary{
             
            margin-right: 8px;
     }
+
+   
+
+}
+
+
     
 </style>

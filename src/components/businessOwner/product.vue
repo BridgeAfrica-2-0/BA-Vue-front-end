@@ -5,7 +5,7 @@
                     
     <div class="people-style shadow">
       <b-row>
-        <b-col cols="4" lg="4" sm="4" md="5">
+        <b-col cols="5" lg="4" sm="4" md="5">
          <div class="center-img" >
             <img
               src="https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg"
@@ -16,7 +16,7 @@
 
           
         </b-col>
-        <b-col cols="8" sm="8" md="7" >
+        <b-col cols="7" sm="8" md="7" >
          <p class="text">
             <strong class="title"> Sneakers Blec cc </strong> <br /> <strong> Description </strong>  <br />
             This is just a dummy text dumy dummy things are always dummy and dummy add  things are always dummy  hjykt   
@@ -650,7 +650,7 @@ padding: 1px;
 
   
 
-  margin-right: -5px;
+ margin-left: -30px;
 
   line-height: 25px;
 }
@@ -668,9 +668,9 @@ padding: 1px;
   border-bottom-right-radius: 10px;
 
 
-  width: 125px;
+  width: 100px;
 
-height: 125px;
+height: 100px;
 padding: 4px;
 }
 
@@ -699,7 +699,7 @@ Width:85px;
 
 
 
-@media only screen and (min-width: 540px) {
+@media only screen and (min-width: 540px) and  (max-width: 762px) {
 
 
 
@@ -743,8 +743,9 @@ padding: 1px;
   border-bottom-right-radius: 10px;
 
 
-   Height : 160px;
-Width:160px;
+   Height : 100px;
+Width:100px;
+
 padding: 4px;
 }
 
@@ -848,8 +849,84 @@ h6 {
 }
 
 
-.text{
-  margin-left:3px;
+
+
+
+@media only screen and (min-width: 762px) {
+
+
+
+
+.text {
+  color: #000;
+  
+    font-family: 'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 30px;
+    color: rgba(117,114,128,1);
+    text-align: left;
+
+Font-weight: normal ;
+Line-height:20px ;
+font-style:normal;
+
+
+padding: 1px;
+  text-align: left;
+
+  
+
+  margin-right: -5px;
+
+  line-height: 25px;
 }
+
+
+
+
+.r-image {
+  
+ border-top-left-radius: 10px;
+
+  border-bottom-left-radius: 10px;
+
+  border-top-right-radius: 10px;
+
+  border-bottom-right-radius: 10px;
+
+
+   Height : 160px;
+Width:160px;
+
+padding: 4px;
+}
+
+
+
+
+.btn{
+  padding-top: 6px;
+
+  Height : 38px;
+Width:123px
+
+}
+
+
+
+
+
+.title{
+  font-size: 20px;
+   color:black;
+ 
+ line-height: 35px;
+  font-family: 'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif;
+}
+
+}
+
+
 
 </style>

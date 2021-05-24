@@ -63,7 +63,7 @@
 
 
 
-    <div class="mt-3" v-if="selectedId == '39'" >  
+    <div class="mt-3" v-if="selectedId == '3'" >  
               
             <Pending />
    </div> 
@@ -75,7 +75,7 @@
 
 
 
-    <div class="mt-3" v-if="selectedId == '3'" >  
+    <div class="mt-3" v-if="selectedId == '4'" >  
               
               <Insight />
    </div> 
@@ -84,7 +84,7 @@
 
 
    
-    <div class="mt-3" v-if="selectedId == '4'" >  
+    <div class="mt-3" v-if="selectedId == '5'" >  
               
              <Settings /> 
    </div> 
@@ -143,8 +143,9 @@ export default {
        
         {label: 'Inbox' , icon: 'fas fa-comments  fa-lg'},
         {label: 'Notification' , icon: 'fas fa-bell fa-lg'},
-       
-        {label: 'Insight' , icon: 'fas fa-chart-line fa-lg'},  
+         {label: 'Pending Post' , icon: 'fas fa-sync fa-lg'},   
+        {label: 'Insight' , icon: 'fas fa-chart-line fa-lg'}, 
+
         {label: 'Settings' , icon: 'fas fa-cog fa-lg'},
         
       ],

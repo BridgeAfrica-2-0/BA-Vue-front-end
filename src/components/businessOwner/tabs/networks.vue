@@ -59,10 +59,18 @@
         </b-col>
         <b-col md="9" cols="7"  lg="9" xl="9" sm="9">
           <p class="textt">
-            <strong class="net-title"> Global Car Supple Network </strong> <br /><br />
-            <strong> Category : </strong> Car marketing <br />
-            <strong> Community : </strong> 20k <br />
-            <strong> public :</strong> <br />
+            
+
+
+            <strong class="net-title"> Global Car Supple Network </strong> <br />
+             Car Rental  
+              <br />  20k Community <br />
+            
+            <span class="location"> <b-icon-geo-alt class="ico" ></b-icon-geo-alt> Douala cameroon  </span> <br /> 
+            
+
+             super best car seller in the world
+            adipisicing elit. lorem epsep this is  <b-link>Read More</b-link>
             
 
           </p>
@@ -215,14 +223,14 @@
 
 
 
+       
 
 
 
 
 
 
-
-              <b-form-group
+              <b-form-group    
                 label-cols-lg="12"
                 label="Special Needs"
                 label-size="md"

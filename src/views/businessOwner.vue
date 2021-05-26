@@ -14,7 +14,7 @@
     :items="items"
     :options="options"
     class="center-ly"
-    @change="handleChange"
+   
    >
   </ly-tab>
     
@@ -159,20 +159,7 @@ export default {
   },
   computed: {},
  
-  methods: {
-
-      handleChange (item, index) {
-     
-
-      console.log(item);
-      console.log(index);
-
-      this.selectedId=index;
-
-    },
-
-    
-  }
+ 
 };
 </script>
 

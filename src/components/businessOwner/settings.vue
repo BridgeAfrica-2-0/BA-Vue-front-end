@@ -226,12 +226,8 @@ import Insight from "@/components/businessOwner/insight";
 export default {
   name: "settings",
 
-  props:{
-             currenttab: {
-    default: 2016,
-    type: Number
-  }
-  },
+   props: ["currenttab"],
+
   
   
 
@@ -239,9 +235,13 @@ export default {
 
 
 
-         currenttab:function(newVal){ 
 
+currenttab: {
+    immediate: true,
+    handler(newVal, oldVal) {
+      console.log(newVal, oldVal)
 
+      
            if(newVal==3){
             
             this.selectedIdd ="8";
@@ -259,8 +259,7 @@ export default {
            }
 
 
-
-
+           
 
   if(newVal==4){
             
@@ -285,11 +284,13 @@ export default {
 
 
 
-           
 
 
 
-         }
+
+    },
+  },
+
 
    },
 

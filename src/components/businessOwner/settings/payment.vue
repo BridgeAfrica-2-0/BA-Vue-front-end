@@ -14,7 +14,7 @@
           id="Paypal"
           name="paypal"
           value="paypal"
-          >Paypal</b-form-radio
+          >MTN Mobile Payment</b-form-radio
         >
         <br />
         <b-form-radio
@@ -24,7 +24,7 @@
           name="mobile-payment"
           value="mobile-money"
         >
-          Mobile Payment
+         Orange  Mobile Payment
         </b-form-radio>
         <br />
         <b-form-radio
@@ -33,34 +33,29 @@
           id="Credit-card"
           name="credit-card"
           value="credit-card"
-          >Credit/Debit card</b-form-radio
+          > EU Money</b-form-radio
         >
+
+         <b-form-radio
+          
+          :aria-describedby="ariaDescribedby"
+          id="Credit-card"
+          name="credit-card"
+          value="credit-card"
+          > GEMAC</b-form-radio
+        >
+
+
       </b-form-group>
 
-      <div  col="12" md="6" class="payment-image ">
-        <img
-          class="mb-2 img-fluid"
-          src="@/assets/img/credit-cards-logos.png"
-          alt="Fluid image"
-        />
-      </div>
+      
 
-      <b-container class="h-background">
-        <div class="account-headnig">
-          <h3  class="heading-user h3-color">4755-xxxx-xxxx</h3>
-          <p class="card-name">123456789</p>
-        </div>
-      </b-container>
+     
 
-      <div class=" mb-0">
-        <b-icon icon="plus" class='b-color' ></b-icon>  
-        <b-link href="#">Add new Credit/Debit card</b-link>
-      </div>
-      <br />
 
       <div class=" mb-0">
         <p>
-          <b-icon icon="lock" class="b-color"></b-icon> Your payment
+           Your payment
           information is secure, <b-link href="#">Read more</b-link>
         </p>
       </div>

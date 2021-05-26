@@ -885,7 +885,7 @@ export default {
     position: relative;
     margin: 5px;
     float: left;
-    width: 19.2%;
+    width: 19.1%;
     transition-duration: 0.4s;
     border-radius: 5px;
     -webkit-animation: winanim 0.5s;

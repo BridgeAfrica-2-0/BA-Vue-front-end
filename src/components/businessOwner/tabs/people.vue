@@ -682,9 +682,9 @@ f-right {
 
 
 .btn{
-    width: 123px;
+    width: 105px;
     height: 38px;
-    font-size:14px;
+    font-size: 12px;
 }
 
 .center{
@@ -796,9 +796,9 @@ f-right {
 
 
   .btn{
-    width: 110px;
-    height: 38px;
-    font-size:14px;
+  width: 100px;
+    height: 30px;
+    font-size: 12px;
 }
 
 

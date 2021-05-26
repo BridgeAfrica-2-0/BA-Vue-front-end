@@ -12,16 +12,14 @@
           class=" float-left mr-1 icon-size primary"
           :icon="['fas', 'building']"
         />  <span class="t-color">  Network  </span>
-        <button
-          type="button"
-          data-toggle="modal"
-          data-target="#addbusinessbtnModal"
-          class="btn btn-outline-primary pull-right float-right mb-2" style=" padding: 3px;
-    text-align: center; padding-left: 17px;"
-            @click="addNetwork"
-        >
-          <span class="t-color">  Add Network </span>
-        </button>
+       
+
+       <b-button variant="outline-primary"   @click="addNetwork"  data-toggle="modal"  data-target="#addbusinessbtnModal" class="float-right btn-network "   > Add Network </b-button>
+
+        
+          
+        
+           
         
         <hr />
     
@@ -845,6 +843,15 @@ Width:160px
   padding: 7px;
 }
 
+
+.btn-network{
+
+  width: 118px !important;
+    height: 38px  !important ;
+    margin-top: -4px  !important;
+    font-size: 16px;
+}
+
 }
 
 
@@ -918,6 +925,17 @@ h4{
    padding: 0px;
     
 }
+
+.btn-network{
+
+  width: 90px !important;
+    height: 30px  !important ;
+    margin-top: 0px  !important;
+    font-size: 12px;
+    text-align: center;
+    padding: 2px;
+}
+
 }
 
 
@@ -925,5 +943,7 @@ h4{
   color: #000;
   
 }
+
+
 
 </style>

@@ -455,8 +455,12 @@ padding: 1px;
 .btn{
   padding-top: 6px;
 Height : 38px;
-Width:123px;
-    font-size:14px;
+Width:110px;
+    font-size:12px;
+      margin-left: -10px;
+
+
+    
 
 }
 
@@ -599,12 +603,16 @@ h4{
 
        
 
+       
+
 
 
   .btn{
-    width: 100px;
-    height: 38px;
-    font-size:14px;
+
+    width: 98px;
+    height: 33px;
+    font-size: 12px;
+    margin-left: -10px;
 }
 
 

@@ -35,18 +35,18 @@
         </b-col>
 
         <b-col>
-          <b-button variant="primary" class="">Assign</b-button>
+          <b-button variant="primary" class="assign-btn">Assign</b-button>
         </b-col>
       </b-row>
 
-      <p class="a-text">
+      <p class="text">
         Admin can manage all aspects of the Business Identity. They can create
         posts and send messages through inbox. They can respond to the delete
         comments, Approve posts, view insights, manage the business settings,
         update Business profile, assign roles and payments.
       </p>
       <br />
-      <p class="a-text">
+      <p class="text">
         Editor can create posts and send messages through inbox, They can
         respond to and delete comments, Approve posts, view insights
       </p>
@@ -57,8 +57,8 @@
         <h5 class="a-text">Existing Admins</h5>
         <b-list-group>
           <b-list class="d-flex align-items-center m-list">
-            <b-avatar class="mr-3" size="4em"></b-avatar>
-            <span class="mr-auto">J. Circlehead</span>
+            <b-avatar class="mr-3 profile-pic"   ></b-avatar>
+            <span class="mr-auto username">J. Circlehead</span>
             <span>
               <div>
                 <b-dropdown
@@ -70,7 +70,7 @@
                   <template #button-content>
                     <b-icon
                       icon="three-dots-vertical"
-                      animation="cylon-vertical"
+                    
                       font-scale="1"
                     ></b-icon>
                   </template>
@@ -85,8 +85,8 @@
             <b-avatar
               variant="primary"
               text="BV"
-              class="mr-3"
-              size="4em"
+              class="mr-3 profile-pic"
+            
             ></b-avatar>
             <span class="mr-auto">itz blec blec</span>
             <span>
@@ -100,7 +100,7 @@
                   <template #button-content>
                     <b-icon
                       icon="three-dots-vertical"
-                      animation="cylon-vertical"
+                     
                       font-scale="1"
                     ></b-icon>
                   </template>
@@ -119,8 +119,8 @@
         <h5 class="a-text">Existing Editors</h5>
         <b-list-group>
           <b-list class="d-flex align-items-center m-list">
-            <b-avatar class="mr-3" size="4em"></b-avatar>
-            <span class="mr-auto">J. Circlehead</span>
+            <b-avatar class="mr-3 profile-pic"   ></b-avatar>
+            <span class="mr-auto username">J. Circlehead</span>
             <span>
               <div>
                 <b-dropdown
@@ -132,7 +132,7 @@
                   <template #button-content>
                     <b-icon
                       icon="three-dots-vertical"
-                      animation="cylon-vertical"
+                    
                       font-scale="1"
                     ></b-icon>
                   </template>
@@ -147,10 +147,10 @@
             <b-avatar
               variant="primary"
               text="BV"
-              class="mr-3"
-              size="4em"
+              class="mr-3 profile-pic"
+           
             ></b-avatar>
-            <span class="mr-auto">itz blec blec</span>
+            <span class="mr-auto username">itz blec blec</span>
             <span>
               <div>
                 <b-dropdown
@@ -162,7 +162,7 @@
                   <template #button-content>
                     <b-icon
                       icon="three-dots-vertical"
-                      animation="cylon-vertical"
+                    
                       font-scale="1"
                     ></b-icon>
                   </template>
@@ -226,6 +226,11 @@ export default {
   .settings {
     top: -5px;
     left: -20px;
+  }
+
+
+  .assign-btn{
+    margin-top:30px
   }
 }
 </style>

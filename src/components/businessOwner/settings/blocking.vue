@@ -9,14 +9,15 @@
     </b-container>
 
     <b-container class="bv-example-row">
-      <b-list-group>
-        <b-list class="d-flex align-items-center m-list">
+      <b-li-group>
+        <b-li class="d-flex align-items-center m-list">
           <b-avatar class="mr-3" size="4em"></b-avatar>
           <span class="mr-auto">J. Circlehead</span>
-          <span class="mr-auto"><b-link href="#">Unblock</b-link></span>
-        </b-list>
+          <span class=""><b-link href="#">Unblock</b-link></span>
+        </b-li>
+       <hr width="100%" />
 
-        <b-list class="d-flex align-items-center">
+        <b-li class="d-flex align-items-center">
           <b-avatar
             variant="primary"
             text="BV"
@@ -24,16 +25,20 @@
             size="4em"
           ></b-avatar>
           <span class="mr-auto">itz blec blec</span>
-          <span class="mr-auto"><b-link href="#">Unblock</b-link></span>
-        </b-list>
+          <span class=""><b-link href="#">Unblock</b-link></span>
+        </b-li>
 
-        <b-list class="d-flex align-items-center m-list">
+         <hr width="100%" />
+
+        <b-li class="d-flex align-items-center m-list">
           <b-avatar class="mr-3" size="4em"></b-avatar>
           <span class="mr-auto">J. Circlehead</span>
-          <span class="mr-auto"><b-link href="#">Unblock</b-link></span>
-        </b-list>
+          <span class=""><b-link href="#">Unblock</b-link></span>
+        </b-li>
+        <hr width="100%" />
 
-        <b-list class="d-flex align-items-center">
+
+        <b-li class="d-flex align-items-center">
           <b-avatar
             variant="primary"
             text="BV"
@@ -41,9 +46,13 @@
             size="4em"
           ></b-avatar>
           <span class="mr-auto">itz blec blec</span>
-          <span class="mr-auto"><b-link href="#">Unblock</b-link></span>
-        </b-list>
-      </b-list-group>
+          <span class=""><b-link href="#">Unblock</b-link></span> 
+         
+        </b-li>
+        <hr width="100%" />
+
+
+      </b-li-group>
     </b-container>
   </b-container>
 </template>

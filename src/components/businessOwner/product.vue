@@ -50,7 +50,7 @@
 
 
     
-    <b-modal hide-footer title="Edit product" v-model="showModal">
+    <b-modal hide-footer title="Edit product"  >
       <b-form>
 
         <b-row>   <b-col cols="12" md="6">    
@@ -86,7 +86,7 @@
           <b-textarea
             id="input-1"
             class="mt-2"
-            v-model="text"
+           
             type="text"
             required
           ></b-textarea>

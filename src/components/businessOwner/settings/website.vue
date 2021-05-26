@@ -3,7 +3,7 @@
     <b-container class="">
       <b-container class="bv-example-row">
         <b-row>
-          <b-col cols="12" md="8">
+          <b-col cols="12" md="12">
             <div>
               <b-table-simple hover small caption-top responsive>
                 <b-thead>
@@ -52,6 +52,8 @@
             <b-button  variant="outline" class=" btn-outline-primary"> Delete Website  </b-button>
           </b-col>
 
+          <!--
+
           <b-col cols="12" md="4">
             <p class="web-template-label">Website Template</p>
 
@@ -64,6 +66,8 @@
               alt="Fluid image"
             />
           </b-col>
+-->
+
         </b-row>
       </b-container>
 

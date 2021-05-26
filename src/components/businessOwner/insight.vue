@@ -1,6 +1,9 @@
 <template>
   <div class="container-fluid mt-3"  style="padding-left:60px; padding-right:60px">
     <b-row>
+
+
+      <!--
       <b-col md="6" lg="4" sm="12">
         <b-card class="b-shadow">
           <b-row>
@@ -47,6 +50,7 @@
         </b-card>
       </b-col>
 
+-->
 
 
 
@@ -56,8 +60,7 @@
 
 
 
-
-      <b-col  md="6" lg="4" sm="12">
+      <b-col  md="12" lg="6" sm="12">
         <b-card class="b-shadow">
           <b-row>
             <b-col cols="8">
@@ -102,9 +105,7 @@
 
 
 
-
-
-      <b-col   md="6" lg="4" sm="12">
+ <b-col  md="12" lg="6" sm="12">
         <b-card class="b-shadow">
           <b-row>
             <b-col cols="8">

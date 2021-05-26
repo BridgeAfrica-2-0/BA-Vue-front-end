@@ -1,62 +1,62 @@
 <template>
   <b-container>
-    <div class="b-bottomn">
-      <b-button variant="primary" class="a-button-l">Save Changes</b-button>
-      <br />
-    </div>
+    
 
-    <div class="b-bottom">
+    <div class="">
       <b-container>
         <b-form-group
           label-cols-lg="3"
           label="Business Visibility"
           label-size="md"
-          label-class="font-weight-bold pt-0"
-          class="mb-0"
+          label-class="font-weight-bold pt-0 username"
+          class="mb-0 text"
         >
           <b-form-group class="mb-0" v-slot="{ ariaDescribedby }">
             <b-form-radio-group
-              class="pt-2"
+              class="pt-2 text"
               :options="['Published', 'Unplublish']"
               :aria-describedby="ariaDescribedby"
             ></b-form-radio-group>
           </b-form-group>
         </b-form-group>
       </b-container>
+      <hr />
     </div>
 
-    <div class="b-bottom">
+    <div class="">
       <b-container>
         <b-form-group
           label-cols-lg="3"
           label="Posting Permissions"
           label-size="md"
-          label-class="font-weight-bold pt-0"
-          class="mb-0"
+          label-class="font-weight-bold pt-0 username"
+          class="mb-0 text"
         >
           <b-form-group class="mb-0" v-slot="{ ariaDescribedby }">
             <b-form-radio-group
-              class="pt-2"
+              class="pt-2 text "
               :options="['Admin only', 'Allow visitors/followers to post']"
               :aria-describedby="ariaDescribedby"
             ></b-form-radio-group>
           </b-form-group>
         </b-form-group>
       </b-container>
+
+      <hr />
     </div>
 
-    <div class="b-bottom">
+    <div>
       <b-container>
         <b-form-group
           label-cols-lg="3"
           label="Post Approval"
           label-size="md"
-          label-class="font-weight-bold pt-0"
+          label-class="font-weight-bold pt-0 username"
           class="mb-0"
         >
           <b-form-checkbox
             id="checkbox-1"
-            v-model="status"
+            class="text"
             name="checkbox-1"
             value="accepted"
             unchecked-value="not_accepted"
@@ -65,46 +65,56 @@
           </b-form-checkbox>
         </b-form-group>
       </b-container>
+      <hr />
     </div>
 
-    <div class="b-bottom">
+    <div class="">
       <b-container>
         <b-form-group
           label-cols-lg="3"
           label="Keyword Alerts"
           label-size="md"
-          label-class="font-weight-bold pt-0"
-          class="mb-0"
+          label-class="font-weight-bold pt-0 username"
+          class="mb-0 text"
         >
           <b-form-textarea
             id="textarea"
-            v-model="text"
+          
             placeholder="Enter something..."
             rows="3"
             max-rows="6"
           ></b-form-textarea>
         </b-form-group>
       </b-container>
+      <hr />
     </div>
 
-    <div class="b-bottom">
+    <div class="">
       <b-container>
         <b-form-group
           label-cols-lg="3"
           label="Marketplace"
           label-size="md"
-          label-class="font-weight-bold pt-0"
+          label-class="font-weight-bold pt-0 username"
           class="mb-0"
         >
           <b-form-checkbox v-model="checked" name="check-button" switch>
           </b-form-checkbox>
         </b-form-group>
       </b-container>
+      <hr />
     </div>
 
     <b-container>
-      <b-link href="#foo" class="f-left">Delete Business Identity</b-link>
+      <b-link href="#foo" class="f-left text">Delete Business Identity</b-link>
     </b-container>
+
+
+    <div class="b-bottomn">
+      <b-button variant="primary" class="a-button-l text">Save Changes</b-button>
+      <br />
+    </div>
+    
   </b-container>
 </template>
 
@@ -158,6 +168,9 @@ export default {
   .settings {
     top: -5px;
     left: -20px;
+  }
+  .btn{
+    font-size: 12px;
   }
 }
 </style>

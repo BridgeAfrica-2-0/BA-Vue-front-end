@@ -14,13 +14,14 @@
     :items="items"
     :options="options"
     class="center-ly"
-    @change="handleChange">
+    @change="handleChange"
+   >
   </ly-tab>
+    
 
 
 
-
-<hr class="hrr" />
+<hr width="100%" />
 
 
 
@@ -48,14 +49,13 @@
 
 
 
-
-
-
     <div class="mt-3" v-if="selectedId == '2'" >  
               
-            <Notification />
-           
-   </div> 
+          <Settings  v-bind:currenttab="selectedId" />       
+   </div>    
+
+
+
 
 
 
@@ -65,7 +65,7 @@
 
     <div class="mt-3" v-if="selectedId == '3'" >  
               
-            <Pending />
+         <Settings  v-bind:currenttab="selectedId" />   
    </div> 
 
 
@@ -77,7 +77,7 @@
 
     <div class="mt-3" v-if="selectedId == '4'" >  
               
-              <Insight />
+          <Settings  v-bind:currenttab="selectedId" />      
    </div> 
 
 
@@ -86,7 +86,7 @@
    
     <div class="mt-3" v-if="selectedId == '5'" >  
               
-             <Settings /> 
+             <Settings  v-bind:currenttab="selectedId"  /> 
    </div> 
 
 
@@ -111,9 +111,9 @@
 <script>
 import navbar from "@/components/navbar";
 import Business from "../components/businessOwner/business";
-import Pending from "../components/businessOwner/pending";
-import Insight from "../components/businessOwner/insight";
-import Notification from "../components/businessOwner/notification";
+//import Pending from "../components/businessOwner/pending";
+//import Insight from "../components/businessOwner/insight";
+//import Notification from "../components/businessOwner/notification";
 import Settings from "../components/businessOwner/settings";
 
 import Inbox from "../components/businessOwner/inbox";
@@ -126,18 +126,18 @@ export default {
   components: {
     navbar,
     Business,
-    Pending,
+    //Pending,
     LyTab,
     Settings,
-    Insight,
+  //  Insight,
     Inbox,
-    Notification,
+   // Notification,
     Footer
   },
   data() {
    return {
       selectedId: 0,
-      bottomSelectedId: 0,
+      bottomSelectedId: 0,        
       items: [
         {label: 'Home ', icon: 'fas fa-home fa-lg'},
        
@@ -160,9 +160,18 @@ export default {
   computed: {},
  
   methods: {
-    handleChange (item, index) {
-      console.log(item, index)
-    }
+
+      handleChange (item, index) {
+     
+
+      console.log(item);
+      console.log(index);
+
+      this.selectedId=index;
+
+    },
+
+    
   }
 };
 </script>

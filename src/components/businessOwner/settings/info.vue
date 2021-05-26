@@ -3,13 +3,7 @@
     <b-container fluid>
       <b-container class="bv-example-row">
         <b-form>
-          <div class="b-bottomm">
-            <b-button variant="primary" class="a-button-l"
-              >Save Changes</b-button
-            >
-            <br />
-            <br />
-          </div>
+        
 
           <div class="b-bottom">
             <b-container>
@@ -17,7 +11,7 @@
                 label-cols-lg="3"
                 label="Business Name"
                 label-size="md"
-                label-class="font-weight-bold pt-0"
+                label-class="font-weight-bold pt-0 username"
                 class="mb-0"
               >
                 <b-form-input id="bname" placeholder="" required></b-form-input>
@@ -31,7 +25,7 @@
                 label-cols-lg="3"
                 label="Category"
                 label-size="md"
-                label-class="font-weight-bold pt-0"
+                label-class="font-weight-bold pt-0 username"
                 class="mb-0"
               >
                 <b-form-select v-model="selected">
@@ -49,7 +43,7 @@
                 label-cols-lg="3"
                 label="Search Keywords"
                 label-size="md"
-                label-class="font-weight-bold pt-0"
+                label-class="font-weight-bold pt-0 username"
                 class="mb-0"
               >
                 <b-form-textarea
@@ -69,7 +63,7 @@
                 label-cols-lg="3"
                 label="Language"
                 label-size="md"
-                label-class="font-weight-bold pt-0"
+                label-class="font-weight-bold pt-0 username"
                 class="mb-0"
               >
                 <b-form-select v-model="selected">
@@ -87,7 +81,7 @@
                 label-cols-lg="3"
                 label="Time zone"
                 label-size="md"
-                label-class="font-weight-bold pt-0"
+                label-class="font-weight-bold pt-0 username"
                 class="mb-0"
               >
                 <b-form-select v-model="selected">
@@ -105,7 +99,7 @@
                 label-cols-lg="3"
                 label="About"
                 label-size="md"
-                label-class="font-weight-bold pt-0"
+                label-class="font-weight-bold pt-0 username"
                 class="mb-0"
               >
                 <b-form-textarea
@@ -119,13 +113,13 @@
             </b-container>
           </div>
 
-          <div class="b-bottom">
+          <div class="b-bottom ">
             <b-container>
               <b-form-group
                 label-cols-lg="3"
                 label="Phone"
                 label-size="md"
-                label-class="font-weight-bold pt-0"
+                label-class="font-weight-bold pt-0 username"
                 class="mb-0"
               >
                 <b-row>
@@ -151,11 +145,11 @@
                 label-cols-lg="3"
                 label="Website"
                 label-size="md"
-                label-class="font-weight-bold pt-0"
+                label-class="font-weight-bold pt-0 username"
                 class="mb-0"
               >
                 <b-form-input id="bname" placeholder="" required></b-form-input>
-                <b-form-checkbox class="a-text" id="" name="" value="">
+                <b-form-checkbox class="a-text text" id="" name="" value="">
                   This Business does not have a Website
                 </b-form-checkbox>
               </b-form-group>
@@ -168,11 +162,11 @@
                 label-cols-lg="3"
                 label="Email"
                 label-size="md"
-                label-class="font-weight-bold pt-0"
+                label-class="font-weight-bold pt-0 username"
                 class="mb-0"
               >
                 <b-form-input id="bname" placeholder="" required></b-form-input>
-                <b-form-checkbox class="a-text" id="" name="" value="">
+                <b-form-checkbox class="a-text text" id="" name="" value="">
                   This Business does not have a Email
                 </b-form-checkbox>
               </b-form-group>
@@ -185,7 +179,7 @@
                 label-cols-lg="3"
                 label="City"
                 label-size="md"
-                label-class="font-weight-bold pt-0"
+                label-class="font-weight-bold pt-0 username"
                 class="mb-0"
               >
                 <b-form-input id="bname" placeholder="" required></b-form-input>
@@ -199,7 +193,7 @@
                 label-cols-lg="3"
                 label="Neighbourhood"
                 label-size="md"
-                label-class="font-weight-bold pt-0"
+                label-class="font-weight-bold pt-0 username"
                 class="mb-0"
               >
                 <b-form-input id="bname" placeholder="" required></b-form-input>
@@ -213,7 +207,7 @@
                 label-cols-lg="3"
                 label="Three Location Description"
                 label-size="md"
-                label-class="font-weight-bold pt-0"
+                label-class="font-weight-bold pt-0 username"
                 class="mb-0"
               >
                 <b-form-input id="bname" placeholder="" required></b-form-input>
@@ -227,15 +221,15 @@
                 label-cols-lg="3"
                 label="Address"
                 label-size="md"
-                label-class="font-weight-bold pt-0"
+                label-class="font-weight-bold pt-0 username"
                 class="mb-0"
               >
-                <b-form-checkbox id="" class="a-text" name="" value="">
+                <b-form-checkbox id="" class="a-text text" name="" value="">
                   This Business has an address</b-form-checkbox
                 >
 
                 <b-container>
-                  <b-row>
+                  <b-row class="text">
                     <b-col>
                       <p>Street Address</p>
                       <b-form-input name=""></b-form-input>
@@ -271,12 +265,12 @@
                 label-cols-lg="3"
                 label="Business Hours"
                 label-size="md"
-                label-class="font-weight-bold pt-0"
+                label-class="font-weight-bold pt-0 username"
                 class="mb-0"
               >
                 <b-form-group class="mb-0" v-slot="{ ariaDescribedby }">
                   <b-form-radio-group
-                    class="a-text"
+                    class="a-text text"
                     :options="['Always Open', 'Open for selected hours']"
                     :aria-describedby="ariaDescribedby"
                   ></b-form-radio-group>
@@ -284,7 +278,7 @@
                   <b-container>
                     <b-row>
                       <b-col cols="6"
-                        ><b-form-checkbox id="" class="a-text" name="" value="">
+                        ><b-form-checkbox id="" class="a-text text" name="" value="">
                           Monday</b-form-checkbox
                         ></b-col
                       >
@@ -297,7 +291,7 @@
 
                     <b-row>
                       <b-col cols="6"
-                        ><b-form-checkbox id="" class="a-text" name="" value="">
+                        ><b-form-checkbox id="" class="a-text text" name="" value="">
                           Tuesday</b-form-checkbox
                         ></b-col
                       >
@@ -308,7 +302,7 @@
 
                     <b-row>
                       <b-col  cols="6"
-                        ><b-form-checkbox id="" class="a-text" name="" value="">
+                        ><b-form-checkbox id="" class="a-text text" name="" value="">
                           Wednesday</b-form-checkbox
                         ></b-col
                       >
@@ -319,7 +313,7 @@
 
                     <b-row>
                       <b-col cols="6"
-                        ><b-form-checkbox id="" class="a-text" name="" value="">
+                        ><b-form-checkbox id="" class="a-text a-text text" name="" value="">
                           Thursday</b-form-checkbox
                         ></b-col
                       >
@@ -330,7 +324,7 @@
 
                     <b-row>
                       <b-col cols="6"
-                        ><b-form-checkbox id="" class="a-text" name="" value="">
+                        ><b-form-checkbox id="" class="a-text text" name="" value="">
                           Friday
                         </b-form-checkbox></b-col
                       >
@@ -341,7 +335,7 @@
 
                     <b-row>
                       <b-col cols="6"
-                        ><b-form-checkbox id="" class="a-text" name="" value="">
+                        ><b-form-checkbox id="" class="a-text text" name="" value="">
                           Saterday
                         </b-form-checkbox></b-col
                       >
@@ -352,7 +346,7 @@
 
                     <b-row>
                       <b-col cols="6"
-                        ><b-form-checkbox id="" name="" class="a-text" value="">
+                        ><b-form-checkbox id="" name="" class="a-text text" value="">
                           Sunday</b-form-checkbox
                         ></b-col
                       >
@@ -372,8 +366,8 @@
                 label-cols-lg="3"
                 label="Post Approval"
                 label-size="md"
-                label-class="font-weight-bold pt-0"
-                class="mb-0"
+                label-class="font-weight-bold pt-0 username"
+                class="mb-0 text"
               >
                 <b-form-checkbox
                   id="checkbox-1"
@@ -381,6 +375,7 @@
                   name="checkbox-1"
                   value="accepted"
                   unchecked-value="not_accepted"
+                  class="text"
                 >
                   All business posts must be approved by an admin
                 </b-form-checkbox>
@@ -394,12 +389,12 @@
                 label-cols-lg="3"
                 label="Keyword Alerts"
                 label-size="md"
-                label-class="font-weight-bold pt-0"
+                label-class="font-weight-bold pt-0 username"
                 class="mb-0"
               >
                 <b-form-textarea
                   id="textarea"
-                  v-model="text"
+               
                   placeholder="Enter something..."
                   rows="3"
                   max-rows="6"
@@ -414,7 +409,7 @@
                 label-cols-lg="3"
                 label="Marketplace"
                 label-size="md"
-                label-class="font-weight-bold pt-0"
+                label-class="font-weight-bold pt-0 username"
                 class="mb-0"
               >
                 <b-form-checkbox v-model="checked" name="check-button" switch>
@@ -424,8 +419,20 @@
           </div>
 
           <b-container>
-            <b-link href="#foo" class="f-left">Delete Business Identity</b-link>
+            <b-link href="#foo" class="f-left text">Delete Business Identity</b-link>
           </b-container>
+
+
+
+            <div class="b-bottomm">
+            <b-button variant="primary" class="a-button-l"
+              >Save Changes</b-button
+            >
+            <br />
+            <br />
+          </div>
+
+          
         </b-form>
       </b-container>
 

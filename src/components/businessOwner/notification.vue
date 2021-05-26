@@ -14,7 +14,7 @@
               v-model="status"
               name="checkbox-1"
               value="accepted"
-              class="m-left-top"
+              class="m-left-top username"
               unchecked-value="not_accepted"
             >
               Select All
@@ -23,7 +23,7 @@
         </b-col>
         <b-col>
           <div class="b-bottomn f-right">
-            <b-button variant="primary" class="a-button-l">
+            <b-button variant="primary" class="a-button-l duration">
               Mark as Read</b-button
             >
           </div>
@@ -47,15 +47,15 @@
              
             </b-form-checkbox>
               <b-avatar
-                class="d-inline-block"
-                variant="info"
+                class="d-inline-block profile-pic"
+                variant="primary"
                 src="https://business.bridgeafrica.info/assets/img/team/3.png"
-                size="3.5rem"
+               
               ></b-avatar>
-              <h5 class="m-0  d-inline-block ml-2">
+              <h6 class="m-0  d-inline-block ml-2 username">
                 Mapoure Agrobusiness
-                 <p>1hr</p>
-              </h5>
+                 <p class="duration">1hr</p>
+              </h6>
             </span>
             <span class="float-right mt-1">
              
@@ -116,6 +116,83 @@ h5{
   font-size: 15px;
 }
 
+@media screen and (min-width: 768px) {
+  
+  .btn{
+     font-size: 16px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  
+  .btn{
+     font-size: 12px;
+  }
+}
+
 
 
 </style>
+
+
+<style> 
+
+@media only screen and (min-width: 768px) {
+
+
+.username{
+   
+   font-size: 16px  !important;
+  
+  
+}
+
+.duration{
+  font-size: 14px;
+  font-weight: 100;
+
+}
+
+.text{
+  font-size: 14px;
+}
+
+.profile-pic{
+  width: 64px !important;
+  height: 64px  !important;
+  margin-top: -5px;
+}
+}
+
+
+
+@media only screen and (max-width: 768px) {
+
+
+.username{
+   
+   font-size: 14px  !important;
+     
+}
+
+.duration{
+  font-size: 12px;
+   font-weight: 100;
+
+}
+
+.text{
+  font-size: 12px;
+}
+
+
+
+.profile-pic{
+  width: 30px  !important;
+   margin-top: -5px;
+  height: 30px  !important;
+}
+
+}
+
+   </style>

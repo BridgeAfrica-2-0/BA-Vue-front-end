@@ -354,9 +354,9 @@
 
 
 
-              <b-modal hide-footer title="Create album" id="createalbumModal" v-model="showModal">
+              <b-modal hide-footer title="Create album" id="createalbumModal" >
       <b-form>
-        <b-form-input v-model="text" placeholder="Album name"></b-form-input>
+        <b-form-input placeholder="Album name"></b-form-input>
         <b-button class="mt-2" variant="primary"> Create</b-button>
       </b-form>
     </b-modal>

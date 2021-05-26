@@ -1,23 +1,15 @@
 <template>
   <div>
     <b-container fluid  style="padding-left:30px; padding-right:30px">
-      <b-row class="b-bottom">
-        <b-col>
-          <h5>Pending Posts</h5>
-        </b-col>
-        <div class="f-right">
-          <b-col> <p>35 Pending</p> </b-col>
-        </div>
-      </b-row>
+    
 
-      <br />
 
       <b-container class="bb-bottom">
         <b-list class="d-flex align-items-center m-list">
-          <b-avatar class="mr-3" size="4em"></b-avatar>
-          <span class="mr-auto"
+          <b-avatar class="mr-3 profile-pic" ></b-avatar>
+          <span class="mr-auto username"
             >J. Circlehead
-            <p>1hr</p>
+            <p class="duration">1hr</p>
           </span>
           <span class=" ">
             <div>
@@ -43,7 +35,7 @@
             </div>
           </span>
         </b-list>
-        <p>
+        <p class="text">
           Lorem Ipsum is this is just a dummy text to post simply dummy text of
           the printing and typesetting industry. Lorem Ipsum has been the
           industry's standard dummy text ever since the 1500s, Lorem Ipsum is
@@ -58,8 +50,12 @@
 
       <b-container class="bb-bottom">
         <b-list class="d-flex align-items-center m-list">
-          <b-avatar class="mr-3" size="4em"></b-avatar>
-          <span class="mr-auto">J. Circlehead</span>
+          <b-avatar class="mr-3 profile-pic"></b-avatar>
+          <span class="mr-auto">J. Circlehead  
+             <p class="duration">1hr</p>
+             
+          </span>
+          
           <span class=" ">
             <div>
               <b-dropdown
@@ -84,7 +80,7 @@
             </div>
           </span>
         </b-list>
-        <p>
+        <p class="text">
           Lorem Ipsum is this is just a dummy text to post simply dummy text of
           the printing and typesetting industry. Lorem Ipsum has been the
           industry's standard dummy text ever since the 1500s, Lorem Ipsum is
@@ -127,4 +123,6 @@ export default {
   margin-bottom: 7px;
   margin-top: 5px;
 }
+
+
 </style>

@@ -9,7 +9,7 @@
     <b-container class="payment-type">
       <b-form-group v-slot="{ ariaDescribedby }">
         <b-form-radio
-          v-model="selected"
+       
           :aria-describedby="ariaDescribedby"
           id="Paypal"
           name="paypal"
@@ -18,7 +18,7 @@
         >
         <br />
         <b-form-radio
-          v-model="selected"
+       
           :aria-describedby="ariaDescribedby"
           id="Mobile Payment"
           name="mobile-payment"
@@ -28,7 +28,7 @@
         </b-form-radio>
         <br />
         <b-form-radio
-          v-model="selected"
+          
           :aria-describedby="ariaDescribedby"
           id="Credit-card"
           name="credit-card"

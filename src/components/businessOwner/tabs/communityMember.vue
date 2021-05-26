@@ -503,6 +503,11 @@ f-right {
     position: relative;
     left: -75px;
   }
+
+  
+.follower {
+  font-size: 14px;
+}
 }
 
 .detail {
@@ -529,9 +534,6 @@ f-right {
   border-bottom-right-radius: 4px;
 }
 
-.follower {
-  font-size: 10px;
-}
 
 .people-style {
   border-top-left-radius: 40px;
@@ -718,7 +720,7 @@ f-right {
 }
 
 .follower{
-    font-size: 10px;
+    font-size: 14px;
     margin-top: 5px;
 }
 
@@ -735,7 +737,7 @@ f-right {
 
 }
 
-@media only screen and (max-width: 762px) {
+@media only screen and (max-width: 768px) {
 
 .username{
   font-size: 16px;
@@ -766,7 +768,7 @@ f-right {
 }
 
 .follower {
-    font-size: 10px;
+    font-size: 12px;
     text-align: left;
     
 }

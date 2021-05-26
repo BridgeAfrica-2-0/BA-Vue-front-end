@@ -287,23 +287,35 @@ export default {
 <style scoped>
 
 
-@media (min-width: 762px) {
+@media (max-width: 768px) {
 
  .primary{
             
            margin-right: 6px;
+             font-size: 12px  !important;
+
     }
+
+     .card-text{
+      font-size: 14px  !important;
+    }
+
 
   
 }
 
 
 
-@media (min-width: 762px) {
+@media (min-width: 768px) {
 
  .primary{
             
            margin-right: 8px;
+           font-size: 14px  !important;
+    }
+
+    .card-text{
+      font-size: 14px  !important;
     }
 
    

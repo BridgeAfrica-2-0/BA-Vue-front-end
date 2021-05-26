@@ -789,7 +789,7 @@ f-right {
 
 
 
-@media only screen and (min-width: 992px) and (max-width: 1421px) {
+@media only screen and (min-width: 992px) and (max-width: 1331px) {
 
        
 

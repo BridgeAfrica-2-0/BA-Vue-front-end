@@ -16,7 +16,7 @@
             size="sm"
             class="mb-2 d-none d-md-block"
             v-b-modal.modal-xl
-            placeholder="Whats On Your, Mind ?"
+            placeholder="Post a business update"
         ></b-form-textarea>
 
          <b-form-textarea
@@ -24,7 +24,7 @@
             size="sm"
             class="mb-2 d-block d-md-none"
          
-            placeholder="Whats On Your, Mind ?"
+            placeholder="Post a business update"
         ></b-form-textarea>
 
 
@@ -141,13 +141,19 @@
 
 
         <br />
+        <div class="cursor">
         <b-form-textarea
             id="textarea-small"
-            size="sm"
-            class="mb-2"
-            placeholder="Whats On Your, Mind ?"
+           
+            class="mb-2 border-none"
+            placeholder="Post a business update"
         ></b-form-textarea>
-        <span class="float-left">
+
+        <i></i>
+        </div>
+   <div class="bordder">  
+        <span class="float-left"> Add to Your Post  </span>
+        <span class="float-right">
                 <b-button-group size="sm" class="">
                   <b-button
                       title="Add Image"
@@ -192,8 +198,12 @@
                   </b-button>
                 </b-button-group>
               </span>
-        <span class="float-right">
-                <b-button variant="outline-primary" size="sm"
+
+   </div>
+              <br />
+
+        <span >
+                <b-button variant="primary" block
                 ><b-icon icon="cursor-fill" variant="primary"></b-icon>
                   Publish</b-button
                 >
@@ -271,7 +281,7 @@
                       </b-dropdown>
                     </span>
             </h5>
-            <p>1h Ago</p>
+            <p class="duration">1h Ago</p>
           </b-col>
         </b-row>
         <b-row>
@@ -403,7 +413,7 @@
                       </b-dropdown>
                     </span>
             </h5>
-            <p>1h Ago</p>
+            <p class="duration">1h Ago</p>
           </b-col>
         </b-row>
         <b-row>
@@ -522,7 +532,7 @@
                       </b-dropdown>
                     </span>
             </h5>
-            <p>1h Ago</p>
+            <p class="duration">1h Ago</p>
           </b-col>
         </b-row>
         <b-row>
@@ -641,7 +651,7 @@
                       </b-dropdown>
                     </span>
             </h5>
-            <p>1h Ago</p>
+            <p class="duration">1h Ago</p>
           </b-col>
         </b-row>
         <b-row>
@@ -942,6 +952,48 @@ chooseDocument: function() {
   position: relative;
   margin-left: 80px;
   top: -28px;
+}
+
+.border-none{
+  border: none;
+  height: 100px;
+
+}
+
+
+.cursor {
+	position: relative;
+}
+.cursor	i {
+	position: absolute;
+	width: 1px;
+	height: 20%;
+	background-color: gray;
+	left: 5px;
+	top: 10%;
+	animation-name: blink;
+	animation-duration: 800ms;
+	animation-iteration-count: infinite;
+	opacity: 1;
+}
+
+
+.cursor input:focus + i {
+	display: none;
+}
+
+
+
+@keyframes blink {
+	from { opacity: 1; }
+	to { opacity: 0; }
+}
+
+.bordder{
+
+  border: 1px solid #e75c18 ;
+  height: 50px;
+  padding: 6px;
 }
 
 

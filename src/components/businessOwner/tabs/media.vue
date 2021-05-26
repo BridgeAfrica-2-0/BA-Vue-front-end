@@ -3,13 +3,10 @@
    
 
 
-      <b-alert show variant="primary">
-      <fas-icon class="violet mr-2 pt-1" :icon="['fas', 'file-image']" />Media
+      <fas-icon class="violet mr-2 pt-1 icon-size primary" :icon="['fas', 'file-image']" />Media
        
-        
-        </b-alert
-    >
-
+        <hr />
+      
 
 
 
@@ -336,10 +333,10 @@
       </b-tab>
       <b-tab title="Albums">
         <div class="row">
-          <div class="container">
+          <div class="container-fluid">
             <div class="one2">
               <div class="createp img-gall">
-                <div class="image-upload-wrap">
+                <div class="image-upload-wrap " >
                   <a
                     href="#"
                        v-b-modal.createalbumModal
@@ -848,7 +845,8 @@ export default {
 }
 
 
-@media (min-width: 762px) {
+
+@media (min-width: 960px) {
 
 .img-gall {
  
@@ -898,6 +896,41 @@ export default {
 
 }
 
+
+
+@media only screen and (min-width:768px) and (max-width: 1331px) {
+
+   
+   
+
+.img-gall {
+
+  background-size: contain;
+  cursor: pointer;
+  margin: 10px;
+  border-radius: 3px;
+}
+
+
+.img-gall{
+    position: relative;
+    margin: 5px;
+    float: left;
+    width: 31%;
+    transition-duration: 0.4s;
+    border-radius: 5px;
+    -webkit-animation: winanim 0.5s;
+    animation: winanim 0.5s;
+    -webkit-backface-visibility: visible;
+    backface-visibility: visible;
+}
+
+
+
+
+
+
+}
 
 @media (max-width: 762px) {
 

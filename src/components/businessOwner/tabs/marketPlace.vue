@@ -3,9 +3,8 @@
 
 
   
-      <b-alert show variant="primary">
       <fas-icon
-          class="violet float-left mr-1 mt-1"
+          class="violet float-left mr-1 icon-size primary"
           :icon="['fas', 'building']"
         />Market
         <button
@@ -18,8 +17,8 @@
           Add product
         </button>
         
-        </b-alert
-    >
+        <hr />
+    
 
 
       <div class="products ">
@@ -388,6 +387,9 @@ export default {
   }
   .text {
     margin-top: 30px;
+  }
+  .btn{
+    font-size: 12px;
   }
 }
 </style>

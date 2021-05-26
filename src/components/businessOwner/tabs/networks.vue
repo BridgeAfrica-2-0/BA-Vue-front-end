@@ -1,31 +1,33 @@
 <template>
-  <div class="">
+  <div class=" t-color">
 
     <b-card v-if="networkShow">
-      <div class="networks ml-4">
+    
         
 
-        <div class=" mt-2" >
 
 
- 
-      <b-alert show variant="primary">
-      <fas-icon
-          class="violet float-left mr-1 mt-1"
+
+     <fas-icon
+          class=" float-left mr-1 icon-size primary"
           :icon="['fas', 'building']"
-        />Network
+        />  <span class="t-color">  Network  </span>
         <button
           type="button"
           data-toggle="modal"
           data-target="#addbusinessbtnModal"
-          class="btn btn-outline-primary pull-right float-right mb-2" style="margin-top: -6px;"
-        @click="addNetwork"
+          class="btn btn-outline-primary pull-right float-right mb-2" style=" padding: 3px;
+    text-align: center; padding-left: 17px;"
+            @click="addNetwork"
         >
-          Add Network
+          <span class="t-color">  Add Network </span>
         </button>
         
-        </b-alert
-    >
+        <hr />
+    
+
+
+
 
 
 
@@ -107,10 +109,6 @@
 
 
 
-
-
-        </div>
-      </div>
     </b-card>
     <div class="h-100 w-100" v-if="!networkShow">
       <div class="mx-auto text-center my-5">
@@ -922,5 +920,10 @@ h4{
 }
 }
 
+
+.t-color{
+  color: #000;
+  
+}
 
 </style>

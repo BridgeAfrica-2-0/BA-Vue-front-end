@@ -262,7 +262,7 @@ export default {
             perPage: 1,
             gap: "0rem",
           },
-          "1500": {
+          "992": {
             perPage: 2,
             gap: "1rem",
           },
@@ -384,14 +384,14 @@ margin-right: -8px;
 .profile-name{
      
      font-size: 16px;
-     font-family:  Helvetica;
+    
   }
 
 .community{
 
     
      font-size: 12px;
-     font-family:  Helvetica;
+     
 }
 
 
@@ -420,7 +420,7 @@ margin-right: -8px;
   .profile-name{
      
      font-size: 20px;
-     font-family: Helvetica;
+   
      margin-left: 20px;
   }
 
@@ -428,8 +428,8 @@ margin-right: -8px;
 .community{
 
     
-     font-size: 16px;
-     font-family:  Helvetica;
+     font-size: 14px;
+    
 }
 
 
@@ -495,7 +495,7 @@ margin-right: -8px;
 
 
 
-@media (min-width: 760px) {
+@media (min-width: 768px) {
 
        
        
@@ -510,9 +510,31 @@ width: 100%;
 
 .logo-container{
 
-     padding-left: 63px;
+     padding-left: 73px;
      padding-right: 63px;
 }
+
+
+
+
+
+.see-all {
+  height: 48px;
+  width: 174px;
+ position: relative;
+  margin-top: -100px;
+  left: -20px;
+  background-color: transparent;
+  color: #fff;
+  border: solid 2px white;
+  font-weight: bold;
+}
+.see-all:hover {
+  background-color: rgba(220, 220, 220, 0.398);
+  color: #fff;
+  border: solid 2px white;
+}
+
 
 
 }
@@ -535,12 +557,11 @@ width: 100%;
 }
 
 
-}
 
 
 .see-all {
-  height: 48px;
-  width: 174px;
+  height: 38px;
+  width: 91px;
  position: relative;
   margin-top: -100px;
   left: -20px;
@@ -553,6 +574,12 @@ width: 100%;
   background-color: rgba(220, 220, 220, 0.398);
   color: #fff;
   border: solid 2px white;
+}
+
+
+
+
+
 }
 
 

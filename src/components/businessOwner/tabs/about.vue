@@ -2,13 +2,12 @@
   <div>
 
 
-     <b-alert show variant="primary">
-      <b-icon icon="person-fill" variant="primary"></b-icon>
+      <b-icon icon="person-fill"  class="icon-size" variant="primary"></b-icon>
       <b>
         About
-      </b></b-alert
-    >
+      </b>
 
+      <hr />
 
     
     <b-card>
@@ -368,6 +367,42 @@ p {
 
 }
 
+
+
+@media (max-width: 768px) {
+
+ .primary{
+            
+           margin-right: 6px;
+             font-size: 12px  !important;
+
+    }
+
+     .card-text{
+      font-size: 14px  !important;
+    }
+
+
+  
+}
+
+
+
+@media (min-width: 768px) {
+
+ .primary{
+            
+           margin-right: 8px;
+           font-size: 14px  !important;
+    }
+
+    .card-text{
+      font-size: 14px  !important;
+    }
+
+   
+
+}
 
     
 </style>

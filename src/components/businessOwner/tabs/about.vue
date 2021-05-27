@@ -29,8 +29,8 @@
             <div class="edit" @click="editBio">
               <b-icon icon="pencil-fill" variant="primary"></b-icon>
             </div>
-            <h4 class="mb-4 text-center">{{ leftTitle }}</h4>
-            <p class="text-justify">
+            <h4 class="mb-4 text-center username">{{ leftTitle }}</h4>
+            <p class="text-justify text">
               {{ textToo }}
             </p>
           </b-card>

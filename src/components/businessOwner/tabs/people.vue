@@ -546,7 +546,12 @@ f-right {
     width: 123px;
     height: 38px;
     font-size:14px;
+    padding-top: 8px;
 }
+
+
+   
+
 
   .center {
     text-align: left;
@@ -685,6 +690,7 @@ f-right {
     width: 105px;
     height: 38px;
     font-size: 12px;
+    padding-top: 8px;
 }
 
 .center{
@@ -799,6 +805,7 @@ f-right {
   width: 100px;
     height: 30px;
     font-size: 12px;
+    padding-top: 8px;
 }
 
 

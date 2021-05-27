@@ -519,7 +519,7 @@ f-right {
 }
 
 .follower {
-  font-size: 10px;
+  font-size: 12px;
 }
 
 .people-style {
@@ -546,7 +546,12 @@ f-right {
     width: 123px;
     height: 38px;
     font-size:14px;
+    padding-top: 8px;
 }
+
+
+   
+
 
   .center {
     text-align: left;
@@ -682,9 +687,10 @@ f-right {
 
 
 .btn{
-    width: 123px;
+    width: 105px;
     height: 38px;
-    font-size:14px;
+    font-size: 12px;
+    padding-top: 8px;
 }
 
 .center{
@@ -770,7 +776,7 @@ f-right {
 
   .pobtn {
     font-size: 10px;
-   
+            
   }
   .e-name{
     text-align: left;
@@ -789,16 +795,17 @@ f-right {
 
 
 
-@media only screen and (min-width: 992px) and (max-width: 1421px) {
+@media only screen and (min-width: 992px) and (max-width: 1331px) {
 
        
 
 
 
   .btn{
-    width: 110px;
-    height: 38px;
-    font-size:14px;
+  width: 100px;
+    height: 30px;
+    font-size: 12px;
+    padding-top: 8px;
 }
 
 

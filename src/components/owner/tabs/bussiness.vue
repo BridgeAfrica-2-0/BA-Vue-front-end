@@ -5,10 +5,8 @@
 
 
 
-
-      <b-alert show variant="primary">
       <fas-icon
-          class="violet float-left mr-1 mt-1"
+          class="violet float-left mr-1  icon-size primary"
           :icon="['fas', 'building']"
         />Businesss
         <button
@@ -21,8 +19,7 @@
           Add Business
         </button>
         
-        </b-alert
-    >
+     <hr />
 
      
       <b-modal id="modal-1" title="Add Bussiness" hide-footer>
@@ -426,7 +423,7 @@
     
     <div class="people-style shadow">
       <b-row>
-        <b-col md="3"  xl="5"  lg="5" cols="5"  sm="3">
+        <b-col md="3"  xl="3"  lg="5" cols="5"  sm="3">
           <div class="center-img" >
 
 
@@ -450,7 +447,9 @@
 
           </div>
         </b-col>
-        <b-col md="5" cols="7"  lg="7" xl="7"  sm="5">
+
+        
+        <b-col md="5" cols="7"  lg="7" xl="9"  sm="5">
           <p class="textt">
             <strong class="title"> Super Car ltd </strong> <br />
              Car marketing  
@@ -481,10 +480,11 @@
 
 
 
+   
     
     <div class="people-style shadow">
       <b-row>
-        <b-col md="3"  xl="5"  lg="5" cols="5"  sm="3">
+        <b-col md="3"  xl="3"  lg="5" cols="5"  sm="3">
           <div class="center-img" >
 
 
@@ -508,7 +508,9 @@
 
           </div>
         </b-col>
-        <b-col md="5" cols="7"  lg="7" xl="7"  sm="5">
+
+        
+        <b-col md="5" cols="7"  lg="7" xl="9"  sm="5">
           <p class="textt">
             <strong class="title"> Super Car ltd </strong> <br />
              Car marketing  
@@ -528,6 +530,7 @@
 
       </b-row>
     </div>
+
 
 
           </b-col>    </b-row>

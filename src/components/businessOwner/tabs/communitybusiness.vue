@@ -38,7 +38,7 @@
 
           </div>
         </b-col>
-        <b-col md="5" cols="7"  lg="7" xl="5"  sm="5">
+        <b-col md="5" cols="7"  lg="9" xl="5"  sm="5">
           <p class="textt">
             <strong class="title"> Super Car ltd </strong> <br />
              Car marketing  
@@ -414,7 +414,7 @@ font-style:normal;
 padding: 1px;
   text-align: left;
 
- margin-left: 30px;
+ margin-left: 30px;   
 
   margin-right: -5px;
 

@@ -459,7 +459,7 @@ Width:110px;
     font-size:12px;
       margin-left: -10px;
 
-
+ padding-top: 8px;
     
 
 }
@@ -613,6 +613,7 @@ h4{
     height: 33px;
     font-size: 12px;
     margin-left: -10px;
+    padding-top: 8px;
 }
 
 

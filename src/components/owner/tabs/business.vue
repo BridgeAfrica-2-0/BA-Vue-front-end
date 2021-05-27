@@ -21,7 +21,7 @@
 
 
               <splide :options="options" class="r-image">
-    <splide-slide cl>
+    <splide-slide >
        
 
             <img
@@ -251,7 +251,7 @@ export default {
 
         
         },
-      };
+      };            
     },
 };
 </script>
@@ -455,8 +455,12 @@ padding: 1px;
 .btn{
   padding-top: 6px;
 Height : 38px;
-Width:123px;
-    font-size:14px;
+Width:110px;
+    font-size:12px;
+      margin-left: -10px;
+
+ padding-top: 8px;
+    
 
 }
 
@@ -595,16 +599,21 @@ h4{
 }
 }
 
-@media only screen and (min-width: 992px) and (max-width: 1421px) {
+@media only screen and (min-width: 992px) and (max-width: 1331px) {
+
+       
 
        
 
 
 
   .btn{
-    width: 100px;
-    height: 38px;
-    font-size:14px;
+
+    width: 98px;
+    height: 33px;
+    font-size: 12px;
+    margin-left: -10px;
+    padding-top: 8px;
 }
 
 

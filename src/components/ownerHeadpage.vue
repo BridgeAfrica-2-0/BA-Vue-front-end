@@ -1,15 +1,17 @@
 <template>
-  <div>
-    <b-container fluid>
+  <div class="p-0">
+    <b-container fluid class="p-0" style="background-color: #ccc;" >
+
+      <div class="container">
       <img
         src="@/assets/img/banner.jpg"
         class="img-fluid  banner"
         alt="Kitten"
       />
+   </div>
 
 
-
-      <div  class="container-fluid">
+      <div  class="container p-63">
         <b-row class="mt-md-2">
           <b-col cols="8" md="6" class="m-0 p-0">
             <b-avatar
@@ -41,7 +43,7 @@
                   <h6
                     class=" m-0 p-0 ml-3   profile-name"
                   > 
-                  <b>  User Name  </b>   <br /> <span> 1.5k Community </span>
+                  <b>  User Name  </b>   <br /> <span class="duration"> 1.5k Community </span>
                   </h6>
                   
                   
@@ -136,7 +138,7 @@
 
           <b-col cols="4" md="6" class="">
             <div class="my-auto options">
-              <span class="float-right">
+              <span class="float-right profileedit-btn"  >
 
                 <b-button variant="primary" class="edit-btn  d-none d-md-inline"   v-b-modal.coverphoto > <fas-icon class="mr-2" :icon="['fas', 'pencil-alt']" size="lg" />   Edit </b-button>
                 
@@ -270,6 +272,11 @@ margin-right: -8px;
 
 @media (max-width: 760px) {
 
+  .profileedit-btn{
+    margin-top: 5px;
+  }
+
+
   .avatar-header-icon {
    width: 25px;
     height: 25px;
@@ -298,7 +305,7 @@ margin-right: -8px;
 .profile-name{
      
      font-size: 14px;
-     font-family: Arial, Helvetica, sans-serif;
+   
   }
 
 
@@ -325,10 +332,14 @@ margin-right: -8px;
 
 @media (min-width: 760px) {
 
+  .profileedit-btn{
+    margin-top: 10px;
+  }
+
   .profile-name{
      
      font-size: 16px;
-     font-family: Arial, Helvetica, sans-serif;
+    
   }
 
   .avatar-header-icon {
@@ -381,6 +392,11 @@ margin-right: -8px;
 .dot-btn{
    height:40px ;
    margin-left: 3px;
+}
+
+.p-63{
+  padding-right: 63px;
+  padding-left: 63px;
 }
   
 }

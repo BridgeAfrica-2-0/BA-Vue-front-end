@@ -1,13 +1,15 @@
 <template>
   <div>
-    <b-alert show variant="primary">
+   
       <b-icon icon="person-fill" variant="primary"></b-icon>
+
       <b>
         About
-      </b></b-alert
-    >
+      </b>
+    <hr />
+
     <b-card no-body class="p-2">
-      <b-tabs pills    :vertical="vertical" :card="card">
+      <b-tabs pills    :vertical="vertical" >     
         <b-tab title="BIOGRAPHY" active><Biography /></b-tab>
         <b-tab title="CONTACT & BASIC INFO"> <ContactandInfo /> </b-tab>
         <b-tab title="WORK & EDUCATION"><WorkAndEducation /></b-tab>
@@ -37,7 +39,7 @@ export default {
 
   computed: {
     vertical() {
-      if (this.size > 992)
+      if (this.size > 768)
         return true
       return false
     }, 

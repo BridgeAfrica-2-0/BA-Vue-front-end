@@ -7,7 +7,7 @@
             class="d-inline-block avat-comment"
             variant="primary"
             src="https://www.fivesquid.com/pics/t2/1594480468-145752-1-1.jpg"
-            square
+            
         ></b-avatar>
       </b-col>
       <b-col cols="10" md="11" class="m-0 p-0">
@@ -96,8 +96,8 @@
                 class="d-inline-block avat"
                 variant="primary"
                 src="https://www.fivesquid.com/pics/t2/1594480468-145752-1-1.jpg"
-               square
-               rounded
+               
+               
             ></b-avatar>
           </b-col>
           <b-col cols="9"  class="pt-2" style="margin-left:-5px">
@@ -220,8 +220,8 @@
                 variant="primary"
                 src="https://www.fivesquid.com/pics/t2/1594480468-145752-1-1.jpg"
                 
-                square
-                rounded
+                
+                
             ></b-avatar>
           </b-col>
           <b-col cols="10" md="11" class="pt-2">
@@ -316,9 +316,8 @@
                 class="img-fluid avat-comment"
                 src="https://www.fivesquid.com/pics/t2/1594480468-145752-1-1.jpg"
                
-                square
+                
 
-                rounded="xl"
             ></b-avatar>
           </b-col>
           <b-col cols="9" md="11" class="p-0 m-0 pr-3">
@@ -347,8 +346,8 @@
                 class="d-inline-block avat"
                 variant="primary"
                 src="https://www.fivesquid.com/pics/t2/1594480468-145752-1-1.jpg"
-                square
-                rounded
+                
+                
             ></b-avatar>
           </b-col>
           <b-col cols="10" md="11" class="pt-2">
@@ -438,9 +437,8 @@
                 class="img-fluid avat-comment"
                 src="https://www.fivesquid.com/pics/t2/1594480468-145752-1-1.jpg"
                
-                square
+                
 
-                rounded="xl"
             ></b-avatar>
           </b-col>
           <b-col cols="9" md="11" class="p-0 m-0 pr-3">
@@ -466,8 +464,8 @@
                 class="d-inline-block avat"
                 variant="primary"
                 src="https://www.fivesquid.com/pics/t2/1594480468-145752-1-1.jpg"
-               square
-               rounded
+               
+               
             ></b-avatar>
           </b-col>
           <b-col cols="10" md="11" class="pt-2">
@@ -557,7 +555,7 @@
                     class="img-fluid avat-comment "
                 
                     src="https://www.fivesquid.com/pics/t2/1594480468-145752-1-1.jpg"
-                    square
+                    
                 ></b-avatar>
               </b-col>
               <b-col cols="9" md="11" class="p-0 m-0 pr-3">
@@ -585,8 +583,8 @@
                 class="d-inline-block avat"
                 variant="info"
                 src="https://www.fivesquid.com/pics/t2/1594480468-145752-1-1.jpg"
-               square
-               rounded="xl"
+               
+            
             ></b-avatar>
           </b-col>
           <b-col cols="10" md="11" class="pt-2">
@@ -673,11 +671,11 @@
                     class="img-fluid avat-comment"
                     src="https://www.fivesquid.com/pics/t2/1594480468-145752-1-1.jpg"
                     
-                    square
+                    
                 ></b-avatar>
               </b-col>
               <b-col cols="9" md="11" class="p-0 m-0 pr-3">
-                <b-input-group class="my-auto w-100 rounded">
+                <b-input-group class="my-auto w-100 ">
                  
                  
                  
@@ -988,5 +986,3 @@ chooseDocument: function() {
   margin-top:-5px;
  
 }
-
-</style>

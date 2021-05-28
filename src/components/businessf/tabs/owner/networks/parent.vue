@@ -7,11 +7,12 @@
         <b-avatar
           
           src="https://www.fivesquid.com/pics/t2/1594480468-145752-1-1.jpg"
-        size="6em"
+       
           variant="primary"   
           square
          
           rounded
+          class="network-logo"
         >
         </b-avatar>
        
@@ -198,7 +199,7 @@
                 label-class="font-weight-bold pt-0"
                 class="mb-0"
               >
-                <b-form-checkbox v-model="checked" name="check-button" switch>
+                <b-form-checkbox  name="check-button" switch>
                 </b-form-checkbox>
               </b-form-group>
 
@@ -316,20 +317,6 @@ export default {
   text-align: left;
 }
 
- .network-avatar-icon {
-    position: absolute;
-    width: 2rem;
-    height: 2rem;
-    top: 77px;
-    
-    margin-left: 80px;
-    padding: 0px 0px;
-    color: #ffff;
-    background: #e75c18;
-    border-radius: 25px;
-    border: 4px solid #ffff;
-}
-
 
 
 .i-color{
@@ -341,21 +328,45 @@ export default {
 
 @media only screen and (min-width: 768px) {
 
+  
+ .network-avatar-icon {
+    position: absolute;
+    width: 2rem;
+    height: 2rem;
+     
+
+     top: 200px;
+    margin-left: 200px;
+    
+    padding: 0px 0px;
+    color: #ffff;
+    background: #e75c18;
+    border-radius: 25px;
+    border: 4px solid #ffff;
+}
+
+
 
 .network-name{
   font-size: 20px;
-  font-family:  Helvetica, sans-serif;
+ 
 
 }
 
 .pivate{
 
     font-size: 16px;
-  font-family:  Helvetica, sans-serif;
+  
   padding-left:8px;
   text-align:left;
 }
 
+
+.network-logo{
+
+    width:200px  !important;
+    height:200px !important;
+}
 
 
 }
@@ -367,21 +378,46 @@ export default {
      
 
 
+.network-logo{
+
+    width:78px  !important;
+    height:78px !important;
+}
+
+
 
 .network-name{
 
     font-size: 16px;
-  font-family:  Helvetica, sans-serif;
+ 
 }
 
 .pivate{
 
    font-size: 14px;
-  font-family:  Helvetica, sans-serif;
+ 
   padding-left:8px;
 
   text-align:left;
 }
+
+
+ .network-avatar-icon {
+    position: absolute;
+    width: 2rem;
+    height: 2rem;
+     
+
+     top: 78px;
+    margin-left: 78px;
+    
+    padding: 0px 0px;
+    color: #ffff;
+    background: #e75c18;
+    border-radius: 25px;
+    border: 4px solid #ffff;
+}
+
 
 }
 

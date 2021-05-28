@@ -1,76 +1,70 @@
 <template>
-  <div>
-    <b-container>
-      <b-container class="b-bottom">
-        <b-row>
-          <b-col>
-            <div class="b-bottomn f-left">
-              <b-form-checkbox
-                id="checkbox-1"
-                v-model="status"
-                name="checkbox-1"
-                value="accepted"
-                unchecked-value="not_accepted"
-              >
-                Select All
-              </b-form-checkbox>
-            </div>
-          </b-col>
-          <b-col>
-            <div class="b-bottomn f-right">
-              <b-button variant="primary" class="a-button-l b-font">
-                Mark as Read</b-button
-              >
-            </div>
-          </b-col>
-        </b-row>
-      </b-container>
+  <div class="container" style=" ">
+
+
+ 
+
+        <div class="container">
+
+          <b-row>
+        <b-col>
+          <div class="b-bottomn f-left">
+            <b-form-checkbox
+              id="checkbox-1"
+              v-model="status"
+              name="checkbox-1"
+              value="accepted"
+              class="m-left-top username"
+              unchecked-value="not_accepted"
+            >
+              Select All
+            </b-form-checkbox>
+          </div>
+        </b-col>
+        <b-col>
+          <div class="b-bottomn f-right">
+            <b-button variant="primary" class="a-button-l duration">
+              Mark as Read</b-button
+            >
+          </div>
+        </b-col>
+      </b-row>
       <br />
 
-      <b-container>
-        <b-container class="bb-bottom">
-          <b-list class="d-flex align-items-center m-list">
-            <b-form-checkbox
-              class="m-left"
+ 
+       <b-row>
+        <b-col cols="12" class="mr-3" v-for="i in 6" :key="i">
+          <p class="">
+            <span style="display:inline-flex">
+               <b-form-checkbox
               id="checkbox-1"
               v-model="status"
               name="checkbox-1"
               value="accepted"
+              class="m-left-top"
               unchecked-value="not_accepted"
             >
+             
             </b-form-checkbox>
-            <b-avatar
-              class="mr-3"
-              src="https://business.bridgeafrica.info/assets/img/team/3.png"
-              size="3.5em"
-            ></b-avatar>
-            <span class="mr-auto"
-              >J. Circlehead
-              <p>1hr ago</p>
+              <b-avatar
+                class="d-inline-block profile-pic"
+                variant="primary"
+                src="https://business.bridgeafrica.info/assets/img/team/3.png"
+               
+              ></b-avatar>
+              <h6 class="m-0  d-inline-block ml-2 username">
+                Mapoure Agrobusiness
+                 <p class="duration">1hr</p>
+              </h6>
             </span>
-            <span class=" ">
-              <div>
-                <b-dropdown
-                  size="lg"
-                  variant="link"
-                  toggle-class="text-decoration-none"
-                  no-caret
-                >
-                  <template #button-content>
-                    <b-icon
-                      icon="three-dots-vertical"
-                     
-                      font-scale="1"
-                    ></b-icon>
-                  </template>
+            <span class="float-right mt-1">
+             
 
-                  <b-dropdown-item href="#"> Delete </b-dropdown-item>
-                  <b-dropdown-item href="#"> Read </b-dropdown-item>
-                </b-dropdown>
-              </div>
             </span>
-          </b-list>
-          <p>
+          </p>
+
+
+           <p class="text">
             Lorem Ipsum is this is just a dummy text to post simply dummy text
             of the printing and typesetting industry. Lorem Ipsum has been the
             industry's standard dummy text ever since the 1500s, Lorem Ipsum is
@@ -78,77 +72,26 @@
             Ipsum has been the industry's standard dummy text ever since the
             1500s,
           </p>
-        </b-container>
 
-        <b-container class="bb-bottom">
-          <b-list class="d-flex align-items-center m-list">
-            <b-form-checkbox
-              class="m-left"
-              id="checkbox-1"
-              v-model="status"
-              name="checkbox-1"
-              value="accepted"
-              unchecked-value="not_accepted"
-            >
-            </b-form-checkbox>
-            <b-avatar
-              class="mr-3"
-              src="https://business.bridgeafrica.info/assets/img/team/3.png"
-              size="3.5em"
-            ></b-avatar>
-            <span class="mr-auto"
-              >J. itz blezour blecc
-              <p>2 weeks ago</p>
-            </span>
-            <span class=" ">
-              <div>
-                <b-dropdown
-                  size="lg"
-                  variant="link"
-                  toggle-class="text-decoration-none"
-                  no-caret
-                >
-                  <template #button-content>
-                    <b-icon
-                      icon="three-dots-vertical"
-                     
-                      font-scale="1"
-                    ></b-icon>
-                  </template>
 
-                  <b-dropdown-item href="#"> Delete </b-dropdown-item>
-                  <b-dropdown-item href="#"> Read </b-dropdown-item>
-                </b-dropdown>
-              </div>
-            </span>
-          </b-list>
-          <p>
-            Lorem Ipsum is this is just a dummy text to post simply dummy text
-            of the printing and typesetting industry. Lorem Ipsum has been the
-            industry's standard dummy text ever since the 1500s, Lorem Ipsum is
-            simply dummy text of the printing and typesetting industry. Lorem
-            Ipsum has been the industry's standard dummy text ever since the
-            1500s,
-          </p>
-        </b-container>
-      </b-container>
-    </b-container>
+          <hr width="100%" />
+        </b-col>
+
+        </b-row>
+        </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: "notification",
-  components: {},
-  data() {
-    return {};
-  },
-  computed: {},
-  methods: {}
+  name: "notification"
 };
 </script>
 
 <style scoped>
+
+
+
 .f-left {
   float: left;
 }
@@ -169,18 +112,99 @@ export default {
   margin-left: -20px;
 }
 
-.b-bottom {
-  border-bottom: 1px solid;
+
+
+
+.m-left-top{
+  margin-left: -15px;
+}
+.p-notifaction{
+
+  padding: 30px;
+}
+
+h5{
+
+  font-size: 15px;
+}
+
+@media screen and (min-width: 768px) {
+  
+  .btn{
+     font-size: 16px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  
+  .btn{
+     font-size: 12px;
+  }
 }
 
 
-.b-font{
+
+</style>
+
+
+<style> 
+
+@media only screen and (min-width: 768px) {
+
+
+.username{
+   
+   font-size: 16px  !important;
+  
+  
+}
+
+.duration{
+  font-size: 14px;
+  font-weight: 100;
+
+}
+
+.text{
+  font-size: 14px;
+}
+
+.profile-pic{
+  width: 64px !important;
+  height: 64px  !important;
+  margin-top: -5px;
+}
+}
+
+
+
+@media only screen and (max-width: 768px) {
+
+
+.username{
+   
+   font-size: 14px  !important;
+     
+}
+
+.duration{
+  font-size: 12px;
+   font-weight: 100;
+
+}
+
+.text{
   font-size: 12px;
 }
-.bb-bottom {
-  border-bottom: 0.5px solid;
-  border-color: aqua;
-  margin-bottom: 7px;
-  margin-top: 5px;
+
+
+
+.profile-pic{
+  width: 30px  !important;
+   margin-top: -5px;
+  height: 30px  !important;
 }
-</style>
+
+}
+
+   </style>

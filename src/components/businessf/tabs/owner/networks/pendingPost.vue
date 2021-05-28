@@ -1,5 +1,7 @@
 <template>
   <div class="container">
+
+    <!--
     <b-row>
       <b-col class="f-left">
         <h5 class=" d-inline-block">
@@ -9,12 +11,15 @@
       <b-col class="f-right"> <span class="">35 Pending</span> </b-col>
     </b-row>
 
-    <hr width="100%" />
+
+-->
+
+
     <b-row>
       <b-col cols="12" class="f-left">
         <div v-for="i in 4" :key="i" class="mb-4">
-          <b-card class="mb-2">
-            <b-card-text class="f-left">
+          <div class="mb-2">
+            <div class="f-left">
               <b-row class="px-md-3">
                 <b-col cols="2" md="1" class="m-0 p-0">
                   <b-avatar
@@ -61,7 +66,7 @@
               </b-row>
               <b-row>
                 <b-col cols="12" class="mt-2">
-                  <p class="text-justify">
+                  <p class="text-justify text">
                     Lorem Ipsum is simply dummy text of the printing and
                     typesetting industry. Lorem Ipsum has been the industry's
                     standard dummy text ever since the 1500s, Lorem Ipsum is
@@ -76,10 +81,13 @@
                   </p>
                 </b-col>
               </b-row>
-            </b-card-text>
-          </b-card>
+            </div>
+          </div>
+          
+    <hr width="100%" />
         </div>
       </b-col>
+      
     </b-row>
   </div>
 </template>

@@ -3,7 +3,10 @@
    
 
 
-    
+      <fas-icon class="violet mr-2 pt-1 icon-size primary" :icon="['fas', 'file-image']" />Media
+       
+        <hr />
+      
 
 
 
@@ -11,8 +14,8 @@
     <b-tabs content-class="mt-3">
       <b-tab title="Posts" active>
         <div class="row">
-          <div class="container">
-            <div class="img-gal">
+          <div class="container-fluid">
+            <div class="img-gall">
               <a href="#!"
                 ><img
                   class="card-img btn p-0"
@@ -60,7 +63,7 @@
                 </ul>
               </div>
             </div>
-            <div class="img-gal">
+            <div class="img-gall">
               <a href="#!"
                 ><img
                   class="card-img btn p-0"
@@ -111,7 +114,7 @@
 
 
             
-            <div class="img-gal">
+            <div class="img-gall">
               <a href="#!"
                 ><img
                   class="card-img btn p-0"
@@ -159,7 +162,7 @@
                 </ul>
               </div>
             </div>
-            <div class="img-gal">
+            <div class="img-gall">
               <a href="#!"
                 ><img class="card-img" src="@/assets/img/m4.jpg" alt=""
               /></a>
@@ -192,7 +195,7 @@
                 </ul>
               </div>
             </div>
-            <div class="img-gal">
+            <div class="img-gall">
               <a href="#!"
                 ><img class="card-img" src="@/assets/img/m5.jpg" alt=""
               /></a>
@@ -225,7 +228,7 @@
                 </ul>
               </div>
             </div>
-            <div class="img-gal">
+            <div class="img-gall">
               <a href="#!"
                 ><img class="card-img" src="@/assets/img/m6.jpg" alt=""
               /></a>
@@ -258,7 +261,7 @@
                 </ul>
               </div>
             </div>
-            <div class="img-gal">
+            <div class="img-gall">
               <a href="#!"
                 ><img class="card-img" src="@/assets/img/m7.jpg" alt=""
               /></a>
@@ -292,7 +295,7 @@
               </div>
             </div>
            
-            <div class="img-gal">
+            <div class="img-gall">
               <a href="#!"
                 ><img class="card-img" src="@/assets/img/m8.jpg" alt=""
               /></a>
@@ -330,10 +333,10 @@
       </b-tab>
       <b-tab title="Albums">
         <div class="row">
-          <div class="container">
+          <div class="container-fluid">
             <div class="one2">
-              <div class="createp img-gal">
-                <div class="image-upload-wrap">
+              <div class="createp img-gall">
+                <div class="image-upload-wrap " >
                   <a
                     href="#"
                        v-b-modal.createalbumModal
@@ -348,9 +351,9 @@
 
 
 
-              <b-modal hide-footer title="Create album" id="createalbumModal" v-model="showModal">
+              <b-modal hide-footer title="Create album" id="createalbumModal" >
       <b-form>
-        <b-form-input v-model="text" placeholder="Album name"></b-form-input>
+        <b-form-input placeholder="Album name"></b-form-input>
         <b-button class="mt-2" variant="primary"> Create</b-button>
       </b-form>
     </b-modal>
@@ -360,7 +363,7 @@
 
 
 
-              <div class="createp img-gal predit2">
+              <div class="createp img-gall predit2">
                 <a href="#!">
                   <img
                     class="card-img"
@@ -375,7 +378,7 @@
                   </div>
                 </a>
               </div>
-              <div class="createp img-gal predit2">
+              <div class="createp img-gall predit2">
                 <a href="#!">
                   <img
                     class="card-img"
@@ -390,7 +393,7 @@
                   </div>
                 </a>
               </div>
-              <div class="createp img-gal predit2">
+              <div class="createp img-gall predit2">
                 <a href="#!">
                   <img
                     class="card-img"
@@ -405,7 +408,7 @@
                   </div>
                 </a>
               </div>
-              <div class="createp img-gal predit2">
+              <div class="createp img-gall predit2">
                 <a href="#!">
                   <img
                     class="card-img"
@@ -420,7 +423,7 @@
                   </div>
                 </a>
               </div>
-              <div class="createp img-gal predit2">
+              <div class="createp img-gall predit2">
                 <a href="#!">
                   <img
                     class="card-img"
@@ -489,7 +492,7 @@
               </div>
               <div class="row">
                 <div class="container">
-                  <div class="createp img-gal">
+                  <div class="createp img-gall">
                     <div class="image-upload-wrap">
                       <input
                         class="file-upload-input"
@@ -503,7 +506,7 @@
                       </div>
                     </div>
                   </div>
-                  <div class="img-gal">
+                  <div class="img-gall">
                     <a href="#!"
                       ><img
                         class="card-img"
@@ -536,7 +539,7 @@
                       </ul>
                     </div>
                   </div>
-                  <div class="img-gal">
+                  <div class="img-gall">
                     <a href="#!"
                       ><img
                         class="card-img"
@@ -569,7 +572,7 @@
                       </ul>
                     </div>
                   </div>
-                  <div class="img-gal">
+                  <div class="img-gall">
                     <a href="#!"
                       ><img
                         class="card-img"
@@ -602,7 +605,7 @@
                       </ul>
                     </div>
                   </div>
-                  <div class="img-gal">
+                  <div class="img-gall">
                     <a href="#!"
                       ><img
                         class="card-img"
@@ -635,7 +638,7 @@
                       </ul>
                     </div>
                   </div>
-                  <div class="img-gal">
+                  <div class="img-gall">
                     <a href="#!"
                       ><img
                         class="card-img"
@@ -668,7 +671,7 @@
                       </ul>
                     </div>
                   </div>
-                  <div class="img-gal">
+                  <div class="img-gall">
                     <a href="#!"
                       ><img
                         class="card-img"
@@ -701,7 +704,7 @@
                       </ul>
                     </div>
                   </div>
-                  <div class="img-gal">
+                  <div class="img-gall">
                     <a href="#!"
                       ><iframe
                         src="https://www.youtube.com/embed/9xwazD5SyVg"
@@ -736,7 +739,7 @@
                       </ul>
                     </div>
                   </div>
-                  <div class="img-gal">
+                  <div class="img-gall">
                     <a href="#!"
                       ><img
                         class="card-img"
@@ -842,15 +845,30 @@ export default {
 }
 
 
-@media (min-width: 762px) {
 
-.img-gal {
-  width: 200px;
-  height: 200x;
+@media (min-width: 960px) {
+
+.img-gall {
+ 
   background-size: contain;
   cursor: pointer;
   margin: 10px;
   border-radius: 3px;
+}
+
+
+
+.img-gall{
+    position: relative;
+    margin: 5px;
+    float: left;
+    width: 20%;
+    transition-duration: 0.4s;
+    border-radius: 5px;
+    -webkit-animation: winanim 0.5s;
+    animation: winanim 0.5s;
+    -webkit-backface-visibility: visible;
+    backface-visibility: visible;
 }
 
 @media (min-width: 1400px) {
@@ -861,15 +879,32 @@ export default {
 }
 
 
+
+
+.img-gall{
+    position: relative;
+    margin: 5px;
+    float: left;
+    width: 19.1%;
+    transition-duration: 0.4s;
+    border-radius: 5px;
+    -webkit-animation: winanim 0.5s;
+    animation: winanim 0.5s;
+    -webkit-backface-visibility: visible;
+    backface-visibility: visible;
+}
+
 }
 
 
-@media (max-width: 762px) {
 
+@media only screen and (min-width:768px) and (max-width: 1331px) {
 
-.img-gal {
-  width: 117;
-  height: 117;
+   
+   
+
+.img-gall {
+
   background-size: contain;
   cursor: pointer;
   margin: 10px;
@@ -877,8 +912,58 @@ export default {
 }
 
 
+.img-gall{
+    position: relative;
+    margin: 5px;
+    float: left;
+    width: 31%;
+    transition-duration: 0.4s;
+    border-radius: 5px;
+    -webkit-animation: winanim 0.5s;
+    animation: winanim 0.5s;
+    -webkit-backface-visibility: visible;
+    backface-visibility: visible;
 }
 
 
 
+
+
+
+}
+
+@media (max-width: 762px) {
+
+
+.img-gall {
+
+  background-size: contain;
+  cursor: pointer;
+  margin: 10px;
+  border-radius: 3px;
+}
+
+
+.img-gall{
+    position: relative;
+    margin: 5px;
+    float: left;
+    width: 47%;
+    transition-duration: 0.4s;
+    border-radius: 5px;
+    -webkit-animation: winanim 0.5s;
+    animation: winanim 0.5s;
+    -webkit-backface-visibility: visible;
+    backface-visibility: visible;
+}
+
+
+}
+
+
+
+
+
 </style>
+
+

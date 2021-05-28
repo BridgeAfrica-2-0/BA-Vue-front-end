@@ -6,27 +6,6 @@
 
 
 
-    <b-container class="b-bottom">
-        <b-row>
-          <b-col>
-            <div class="b-bottomn f-left">  <H5> 
-              Settings    </H5>
-            </div>
-          </b-col>
-          <b-col>
-            <div class="b-bottomn f-right">
-              <b-button variant="primary" class="a-button-l b-font">
-                Save Changes </b-button
-              >
-            </div>
-          </b-col>
-        </b-row>
-      </b-container>
-
-
-      <br />
-
-
 
 
 
@@ -77,7 +56,7 @@
         >
           <b-form-textarea
             id="textarea"
-            v-model="text"
+           
             placeholder="Enter something..."
             rows="3"
             max-rows="6"
@@ -253,7 +232,7 @@
           label-class="font-weight-bold pt-0"
           class="mb-0"
         >
-          <b-form-checkbox v-model="checked" name="check-button" switch>
+          <b-form-checkbox  name="check-button" switch>
           </b-form-checkbox>
         </b-form-group>
       </b-container>
@@ -262,6 +241,28 @@
     <b-container>
       <b-link href="#foo" class="f-left">Delete Business Identity</b-link>
     </b-container>
+
+
+    
+
+    <b-container class="">
+        <b-row>
+          
+          <b-col>
+            <div class="b-bottomn f-right">
+              <b-button variant="primary" class="a-button-l b-font">
+                Save Changes </b-button
+              >
+            </div>
+          </b-col>
+        </b-row>
+      </b-container>
+
+
+      <br />
+
+
+
   </b-container>
 </template>
 

@@ -1,12 +1,10 @@
 <template>
   <b-container>
-    <h5 class="a-text">Assign Roles</h5>
-
-    <hr class="black" width="100%" />
+    <h5 class="a-text">Assign Role</h5>
 
     <b-container class="b-bottom">
       <b-row>
-        <b-col cols="6" md="4">
+        <b-col cols="5">
           <b-form-group
             label-cols-lg="3"
             label="User"
@@ -21,7 +19,7 @@
           </b-form-group>
         </b-col>
 
-        <b-col cols="6" md="4">
+        <b-col>
           <b-form-group
             label-cols-lg="3"
             label="Role"
@@ -36,19 +34,19 @@
           </b-form-group>
         </b-col>
 
-        <b-col cols="6" md="4">
-          <b-button variant="primary"  block class="">Assign</b-button>
+        <b-col>
+          <b-button variant="primary" class="assign-btn">Assign</b-button>
         </b-col>
       </b-row>
 
-      <p class="a-text">
+      <p class="text">
         Admin can manage all aspects of the Business Identity. They can create
         posts and send messages through inbox. They can respond to the delete
         comments, Approve posts, view insights, manage the business settings,
         update Business profile, assign roles and payments.
       </p>
       <br />
-      <p class="a-text">
+      <p class="text">
         Editor can create posts and send messages through inbox, They can
         respond to and delete comments, Approve posts, view insights
       </p>
@@ -59,12 +57,8 @@
         <h5 class="a-text">Existing Admins</h5>
         <b-list-group>
           <b-list class="d-flex align-items-center m-list">
-            <b-avatar
-              class="mr-3"
-              src="https://business.bridgeafrica.info/assets/img/team/3.png"
-              size="3.5em"
-            ></b-avatar>
-            <span class="mr-auto">J. Circlehead</span>
+            <b-avatar class="mr-3 profile-pic"   ></b-avatar>
+            <span class="mr-auto username">J. Circlehead</span>
             <span>
               <div>
                 <b-dropdown
@@ -76,7 +70,7 @@
                   <template #button-content>
                     <b-icon
                       icon="three-dots-vertical"
-                     
+                    
                       font-scale="1"
                     ></b-icon>
                   </template>
@@ -91,8 +85,8 @@
             <b-avatar
               variant="primary"
               text="BV"
-              class="mr-3"
-              size="4em"
+              class="mr-3 profile-pic"
+            
             ></b-avatar>
             <span class="mr-auto">itz blec blec</span>
             <span>
@@ -125,12 +119,8 @@
         <h5 class="a-text">Existing Editors</h5>
         <b-list-group>
           <b-list class="d-flex align-items-center m-list">
-            <b-avatar
-              class="mr-3"
-              src="https://business.bridgeafrica.info/assets/img/team/3.png"
-              size="3.5em"
-            ></b-avatar>
-            <span class="mr-auto">J. Circlehead</span>
+            <b-avatar class="mr-3 profile-pic"   ></b-avatar>
+            <span class="mr-auto username">J. Circlehead</span>
             <span>
               <div>
                 <b-dropdown
@@ -142,7 +132,7 @@
                   <template #button-content>
                     <b-icon
                       icon="three-dots-vertical"
-                     
+                    
                       font-scale="1"
                     ></b-icon>
                   </template>
@@ -157,10 +147,10 @@
             <b-avatar
               variant="primary"
               text="BV"
-              class="mr-3"
-              size="4em"
+              class="mr-3 profile-pic"
+           
             ></b-avatar>
-            <span class="mr-auto">itz blec blec</span>
+            <span class="mr-auto username">itz blec blec</span>
             <span>
               <div>
                 <b-dropdown
@@ -172,7 +162,7 @@
                   <template #button-content>
                     <b-icon
                       icon="three-dots-vertical"
-                     
+                    
                       font-scale="1"
                     ></b-icon>
                   </template>
@@ -195,10 +185,6 @@ export default {
 </script>
 
 <style scoped>
-.black{
-  color: black;
-  background-color: black;
-}
 .m-list {
   margin-bottom: 15px;
   margin-top: 10px;
@@ -240,6 +226,11 @@ export default {
   .settings {
     top: -5px;
     left: -20px;
+  }
+
+
+  .assign-btn{
+    margin-top:30px
   }
 }
 </style>

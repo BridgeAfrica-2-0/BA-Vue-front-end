@@ -15,7 +15,7 @@
   <hr />
   </div>
 
-   <div class="demo container-fluid">
+   <div class="demo container-fluid p-0">
   
 
 
@@ -54,7 +54,7 @@
 
  <div class="mt-3" v-if="selectedId == '2'" >  
                    
-           <Notification />      
+           <General  v-bind:currenttab="selectedId" />      
               
    </div> 
 
@@ -65,7 +65,7 @@
 
  <div class="mt-3" v-if="selectedId == '3'" >  
                    
-           <MemberShip />    
+           <General   v-bind:currenttab="selectedId" />    
               
    </div> 
 
@@ -78,7 +78,7 @@
 
  <div class="mt-3" v-if="selectedId == '4'" >  
                    
-          <PendingPost />
+          <General   v-bind:currenttab="selectedId"/>
               
    </div> 
 
@@ -92,7 +92,7 @@
 
  <div class="mt-3" v-if="selectedId == '5'" > 
 
-          <KeywordAlert />
+          <General  v-bind:currenttab="selectedId"  />
               
    </div> 
 
@@ -105,7 +105,7 @@
 
  <div class="mt-3" v-if="selectedId == '6'" >  
                    
-          <Roles />    
+          <General  v-bind:currenttab="selectedId" />    
               
    </div> 
 
@@ -117,7 +117,7 @@
 
  <div class="mt-3" v-if="selectedId == '7'" >  
                    
-           <Settings />   
+           <General   v-bind:currenttab="selectedId" />   
               
    </div> 
 
@@ -150,15 +150,10 @@
 import navbar from "@/components/navbar";
 import Footer from "@/components/footer";
 import Default from "@/components/businessf/tabs/owner/networks/defaultNetworks";
-import MemberShip from "@/components/businessf/tabs/owner/networks/memberShip";
-import KeywordAlert from "@/components/businessf/tabs/owner/networks/keywordAlert";
-//import PendingFeedback from "@/components/businessf/tabs/owner/networks/pendingFeedback";
-import PendingPost from "@/components/businessf/tabs/owner/networks/pendingPost";
-import Settings from "@/components/businessf/tabs/owner/networks/settings";
-import Inbox from "@/components/businessf/tabs/owner/networks/inbox";
-import Notification from "@/components/businessf/tabs/owner/networks/notification";
 
-import Roles from "@/components/businessf/tabs/owner/networks/roles";
+
+import Inbox from "@/components/businessf/tabs/owner/networks/inbox";
+import General from "@/components/businessf/tabs/owner/networks/general";
 
 import LyTab from "@/tab/src/index.vue";
 
@@ -167,13 +162,10 @@ import Parent from "@/components/businessf/tabs/owner/networks/parent";
 export default {
   name: "networks",
   components: {
-    PendingPost,
-    // PendingFeedback,
-    Settings,
-    KeywordAlert,
-    MemberShip,
-    Notification,
-    Roles,
+   
+  
+    General,
+    
     LyTab,
     Default,
     Inbox,

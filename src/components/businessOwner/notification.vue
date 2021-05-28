@@ -62,6 +62,18 @@
 
             </span>
           </p>
+
+
+           <p class="text">
+            Lorem Ipsum is this is just a dummy text to post simply dummy text
+            of the printing and typesetting industry. Lorem Ipsum has been the
+            industry's standard dummy text ever since the 1500s, Lorem Ipsum is
+            simply dummy text of the printing and typesetting industry. Lorem
+            Ipsum has been the industry's standard dummy text ever since the
+            1500s,
+          </p>
+
+          
           <hr width="100%" />
         </b-col>
 

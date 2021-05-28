@@ -696,7 +696,7 @@
       </b-col>
     </b-row>
   </b-card>
-</div>
+</div>            
 </template>
 
 <script>
@@ -780,6 +780,15 @@ chooseDocument: function() {
 
 <style scoped>
 
+    .pending-post-view {
+  background-color: #8BD06C;
+  border-color: #000;
+  border: solid 3px;
+}
+
+
+
+
 .action-intro {
   font-size: 1rem;
   font-family: Avenir, Helvetica, Arial, sans-serif;
@@ -808,12 +817,25 @@ chooseDocument: function() {
 
 
 
+.send-cmt {
+  position: relative;
+  margin-left: 95%;
+  top: -28px;
+  cursor: pointer;
+}
 
+
+
+.post-btn{
+
+  border: none !important;
+    margin-right: 50px;
+}
 
 
 .post-container{
-  width: 500px;
-  height: 462px;
+  max-width: 500px;
+  max-height: 462px;
 }
 
 
@@ -837,6 +859,22 @@ chooseDocument: function() {
 
 
 @media (max-width: 762px) {
+
+
+  .post-btn{
+
+  border: none !important;
+    margin-right: 0px;
+}
+
+
+.send-cmt {
+  position: relative;
+  margin-left: 90%;
+  top: -28px;
+  cursor: pointer;
+}
+
 
 .avat{
      
@@ -895,12 +933,6 @@ chooseDocument: function() {
 }
 .comment:focus {
   outline: none;
-}
-.send-cmt {
-  position: relative;
-  margin-left: 95%;
-  top: -28px;
-  cursor: pointer;
 }
 
 .time {
@@ -966,27 +998,5 @@ chooseDocument: function() {
   background-color: #ccc;
 }
 
-</style>
-
-<style> 
-
-
-.lb-grid {
-    height: 274px;
-    margin-bottom: 8px;
-}
-
-.post-btn{
-
-  border: none !important;
-    margin-right: 50px;
-}
-
-
-.m-up{
-
-  margin-top:-5px;
- 
-}
 
 </style>

@@ -61,7 +61,7 @@
      
              <img class="img-fluid picture logo-img" src="@/assets/icons/mobile/mayor.png"  /> 
 
-             <b-link class="cat"  @click="SetCat('MC')" > MC  </b-link>
+             <b-link class="cat"  @click="SetCat('MC')" > PI  </b-link>
 
            </b-col>
 
@@ -90,7 +90,7 @@
              
           
                <img class="img-fluid picture logo-img" src="@/assets/icons/mobile/health unit.png"  /> 
-               <b-link class="cat"  @click="SetCat('HU')" > HU  </b-link>
+               <b-link class="cat"  @click="SetCat('HU')" > Health  </b-link>
            </b-col>
 
 
@@ -384,7 +384,7 @@
                <!--filter for all takes just two fields at a time  -->
 
                <div id="all" v-if="selectedId == '0'"  >
-              <h6>   Sponsored Result  <i class="fas fa-exclamation-circle  icon-color"></i>   </h6>
+              <h6>   Sponsored Result  <fas-icon class=" icons" :icon="['fas', 'exclamation-circle']"  size="lg" />   </h6>
             
              <div>
 
@@ -409,7 +409,7 @@
 
               <hr />
 
-              <h6>  <i class="fas fa-chart-network  fa-lg  icon-color "></i>    Network</h6>
+              <h6>   <fas-icon class=" icons" :icon="['fas', 'project-diagram']"  size="lg" />   Network</h6>
 
               <Network />
               <span class="float-right mb-3"> see more </span> <br />
@@ -439,7 +439,7 @@
               <div id="businesses" v-if="selectedId == '1'" >
 
              
-              <h6> <i class="fas fa-hands-helping fa-lg icon-color "></i>  Businesses</h6>
+              <h6> <fas-icon class="icons" :icon="['fas', 'hands-helping']" size="lg" />   Businesses</h6>
 
               <Business />
 
@@ -459,7 +459,7 @@
               <div id="people" v-if="selectedId == '2'" >
 
              
-              <h6> <i class="fas fa-users  fa-lg icon-color"></i> People</h6>
+              <h6>   <fas-icon class="icons" :icon="['fas', 'users']" size="lg" />    People</h6>
 
               <People />
 
@@ -480,7 +480,7 @@
               <div id="people" v-if="selectedId == '3'" >
 
              
-              <h6>  <i class="fas fa-chart-network  fa-lg  icon-color "></i>  Networks</h6>
+              <h6>   <fas-icon class=" icons" :icon="['fas', 'project-diagram']"  size="lg" /> Networks</h6>
 
               <Network />
 
@@ -499,7 +499,7 @@
               <div id="people" v-if="selectedId == '4'" >
 
              
-              <h6> <i class="fas fa-store  fa-lg icon-color "></i>  Market</h6>
+              <h6> <fas-icon class="icons " :icon="['fas', 'store']" size="lg" />  Market</h6>
 
               <Market />
 
@@ -520,18 +520,11 @@
               <div id="people" v-if="selectedId == '5'" >
 
              
-              <h6> <i class="fab fa-readme fa-lg icon-color"></i>  Post</h6>
+              <h6>   <fas-icon class=" icons" :icon="['fab', 'readme']"  size="lg" />  Post</h6>    
 
               <Post />
-               <hr />
+              
 
-              <Post />
-              <hr />
-
-              <Post />
-              <hr />
-
-              <Post />
 
 
               </div>
@@ -1801,10 +1794,10 @@ tertiary_eduction_filters : [
         { value: "manicure and pedicure ", text: "manicure and pedicure " },
          { value: "Eyelashes", text: "Eyelashes" },
         { value: "Beautician", text: "Beautician" },
-
+        { value: "touring", text: "touring" },
         { value: "Perfume", text: "Perfume" },
 
-      
+       
                 
 
       ],
@@ -1818,7 +1811,7 @@ tertiary_eduction_filters : [
         { value: "Barbing salon ", text: "Barbing salon " },
         { value: "tattoos", text: "tattoos" },
         { value: "Teeth whitening", text: "Teeth whitening" },
-        
+        { value: "touring", text: "touring" },
         { value: "manicure and pedicure ", text: "manicure and pedicure " },
          
 

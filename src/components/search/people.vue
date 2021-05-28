@@ -60,7 +60,7 @@
                         xl="12"
                         class="mt-3 mt-lg-1 mt-xl-0"
                       >
-                        <h6 class="follower">5K Community</h6>
+                        <h6 class="follower text">5K Community</h6>
                       </b-col>
                     </b-row>
                   </div>
@@ -191,7 +191,7 @@
                         xl="12"
                         class="mt-3 mt-lg-1 mt-xl-0"
                       >
-                        <h6 class="follower">5K Community</h6>
+                        <h6 class="follower text">5K Community</h6>
                       </b-col>
                     </b-row>
                   </div>
@@ -299,7 +299,7 @@
                         xl="12"
                         class="mt-3 mt-lg-1 mt-xl-0"
                       >
-                        <h6 class="follower">5K Community</h6>
+                        <h6 class="follower text">5K Community</h6>
                       </b-col>
                     </b-row>
                   </div>
@@ -530,7 +530,7 @@ f-right {
 }
 
 .follower {
-  font-size: 10px;
+  font-size: 14px;
 }
 
 .people-style {
@@ -628,7 +628,7 @@ f-right {
   }
 
   .btn-2 {
-    margin-left: -20px;
+  
     width: 90px;
   }
 
@@ -759,7 +759,7 @@ f-right {
 }
 
 .follower {
-    font-size: 10px;
+    font-size: 12px;
     text-align: left;
     
 }

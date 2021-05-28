@@ -224,7 +224,7 @@
          <b-nav-item-dropdown   id=""  ref="Mayorcouncils"  >
 
        <template #button-content>
-      <span class="drop-text"> Mayor Councils   </span>
+      <span class="drop-text"> Public institution  </span>
     </template>
 
 
@@ -275,7 +275,7 @@
          <b-nav-item-dropdown @click="onOverHealthunits"   id=""  ref="Healthunits"  >
 
        <template #button-content>
-      <span class="drop-text"> Health Units   </span>
+      <span class="drop-text"> Health </span>
     </template>
 
 

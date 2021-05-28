@@ -2109,6 +2109,7 @@ tertiary_eduction_filters : [
 
       
 	Women_Grooming_filters : [
+    { value: "touring", text: "touring" },
         { value: "massage", text: "massage" },
         { value: "skin care", text: "skin care" },
         { value: "hair salon ", text: "hair salon " },
@@ -2118,7 +2119,7 @@ tertiary_eduction_filters : [
         { value: "manicure and pedicure ", text: "manicure and pedicure " },
          { value: "Eyelashes", text: "Eyelashes" },
         { value: "Beautician", text: "Beautician" },
-
+        
         { value: "Perfume", text: "Perfume" },
 
       
@@ -2130,6 +2131,7 @@ tertiary_eduction_filters : [
   
 
   	Men_Grooming_filters : [
+      { value: "touring", text: "touring" },
         { value: "massage", text: "massage" },
         { value: "skin care", text: "skin care" },
         { value: "Barbing salon ", text: "Barbing salon " },

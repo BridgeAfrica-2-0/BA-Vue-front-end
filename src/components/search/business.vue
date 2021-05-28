@@ -44,7 +44,7 @@
 
           </div>
         </b-col>
-        <b-col md="7" cols="7"  lg="5" sm="5">
+        <b-col md="9" cols="7"  lg="5" sm="5">
           <p class="textt">
             <strong class="title"> Super Car ltd </strong> <br />
              Car marketing  

@@ -780,7 +780,7 @@ chooseDocument: function() {
 
 .action-intro {
   font-size: 1rem;
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  
 }
 
 .row.sub-sidebar-2.pending-post-view {
@@ -820,7 +820,7 @@ chooseDocument: function() {
      
 
      font-size: 14px;
-      font-family: Arial, Helvetica, sans-serif;
+     
 }
 
 .avat-comment{

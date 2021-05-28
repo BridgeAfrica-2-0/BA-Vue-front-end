@@ -152,7 +152,7 @@
 
 
 
-    <h6 class=" titlle"> <i class="fas fa-chart-network  fa-lg  icon-color "></i>  <b>   POPULAR NETWORKS </b>    </h6>  
+    <h6 class=" titlle">  <fas-icon class=" icons" :icon="['fas', 'project-diagram']"  size="lg" />  <b>   POPULAR NETWORKS </b>    </h6>  
 
  <div class="s-card">      <Popularnetwork />      </div>  </b-card>                   </b-col>
         </b-row>

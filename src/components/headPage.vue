@@ -111,6 +111,7 @@ export default {
   .header-pic {
     height: 100px;
     width: 100%;
+    object-fit: cover;
   }
 
   .header-text1 {
@@ -251,4 +252,13 @@ export default {
     right: 10px;
   }
 }
+
+
 </style>
+
+<style>  
+
+.banner{
+
+object-fit: cover  !important;
+}   </style>

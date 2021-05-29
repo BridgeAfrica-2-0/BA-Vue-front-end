@@ -12,7 +12,7 @@
             label-class="font-weight-bold pt-0"
             class="mb-0"
           >
-            <b-form-select v-model="selected">
+            <b-form-select >
               <b-form-select-option :value="null">Admin</b-form-select-option>
               <b-form-select-option value="a">User</b-form-select-option>
             </b-form-select>
@@ -27,7 +27,7 @@
             label-class="font-weight-bold pt-0"
             class="mb-0"
           >
-            <b-form-select v-model="selected" class="mb-3">
+            <b-form-select class="mb-3">
               <b-form-select-option :value="null">Admin</b-form-select-option>
               <b-form-select-option value="a">User</b-form-select-option>
             </b-form-select>
@@ -55,8 +55,8 @@
     <div class="b-bottom">
       <b-container>
         <h5 class="a-text">Existing Admins</h5>
-        <b-list-group>
-          <b-list class="d-flex align-items-center m-list">
+        <span>
+          <span class="d-flex align-items-center m-list">
             <b-avatar class="mr-3 profile-pic"   ></b-avatar>
             <span class="mr-auto username">J. Circlehead</span>
             <span>
@@ -79,9 +79,9 @@
                 </b-dropdown>
               </div>
             </span>
-          </b-list>
+          </span>
 
-          <b-list class="d-flex align-items-center">
+          <span class="d-flex align-items-center">
             <b-avatar
               variant="primary"
               text="BV"
@@ -109,16 +109,16 @@
                 </b-dropdown>
               </div>
             </span>
-          </b-list>
-        </b-list-group>
+          </span>
+        </span>
       </b-container>
     </div>
 
     <div class="b-bottom">
       <b-container>
         <h5 class="a-text">Existing Editors</h5>
-        <b-list-group>
-          <b-list class="d-flex align-items-center m-list">
+        <span>
+          <span class="d-flex align-items-center m-list">
             <b-avatar class="mr-3 profile-pic"   ></b-avatar>
             <span class="mr-auto username">J. Circlehead</span>
             <span>
@@ -141,9 +141,9 @@
                 </b-dropdown>
               </div>
             </span>
-          </b-list>
+          </span>
 
-          <b-list class="d-flex align-items-center">
+          <span class="d-flex align-items-center">
             <b-avatar
               variant="primary"
               text="BV"
@@ -171,8 +171,8 @@
                 </b-dropdown>
               </div>
             </span>
-          </b-list>
-        </b-list-group>
+          </span>
+        </span>
       </b-container>
     </div>
   </b-container>

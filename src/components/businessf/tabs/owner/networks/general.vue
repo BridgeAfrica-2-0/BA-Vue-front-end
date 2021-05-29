@@ -87,7 +87,7 @@
         
         <div>
           <b-tabs pills  v-model="tabIndex"    vertical  class="itzlala"   nav-wrapper-class="w-15" >
-            <b-tab active title="Notifications">
+            <b-tab  title="Notifications">
              
 
               <b-card-text> <Notification /> </b-card-text
@@ -196,24 +196,27 @@ export default {
 
 currenttab: {
     immediate: true,
-    handler(newVal, oldVal) {
+    handler(newVal) {
         
-      console.log(newVal, oldVal)
+      console.log(newVal)
 
       
            if(newVal==3){
             
             this.selectedIdd ="3";
+
             this.tabIndex="1"
+
+            
             
            }
 
 
              if(newVal==2){
             
-            this.selectedIdd ="2";
-             this.tabIndex="0";
-
+           this.selectedIdd ="2";
+            this.tabIndex="0";
+       
             
            }
 
@@ -330,7 +333,10 @@ currenttab: {
   },
 
  
-  methods: {},
+  methods: {
+
+   
+  },
   
 };
 </script>

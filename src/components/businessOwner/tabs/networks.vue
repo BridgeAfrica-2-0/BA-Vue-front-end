@@ -1,7 +1,7 @@
 <template>
   <div class=" t-color">
 
-    <b-card v-if="networkShow">
+    <div v-if="networkShow">
     
         
 
@@ -107,7 +107,7 @@
 
 
 
-    </b-card>
+    </div>
     <div class="h-100 w-100" v-if="!networkShow">
       <div class="mx-auto text-center my-5">
         <h2 class="my-3">Builds networks around your Business</h2>

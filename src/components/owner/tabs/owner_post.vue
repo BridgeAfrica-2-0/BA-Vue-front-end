@@ -477,7 +477,7 @@
                           <b-icon icon="three-dots" aria-hidden="true"></b-icon>
                           
                         </template>
-                        <b-dropdown-item-button>
+                        <b-dropdown-item-button>    
                           <b-icon icon="lock-fill" aria-hidden="true"></b-icon>
                           Locked <span class="sr-only">(Click to unlock)</span>
                         </b-dropdown-item-button>
@@ -778,9 +778,19 @@ chooseDocument: function() {
 
 <style scoped>
 
+
+    .pending-post-view {
+  background-color: #8BD06C;
+  border-color: #000;
+  border: solid 3px;
+}
+
+
+
+
 .action-intro {
   font-size: 1rem;
-  
+  font-family: Avenir, Helvetica, Arial, sans-serif;
 }
 
 .row.sub-sidebar-2.pending-post-view {
@@ -806,12 +816,25 @@ chooseDocument: function() {
 
 
 
+.send-cmt {
+  position: relative;
+  margin-left: 95%;
+  top: -28px;
+  cursor: pointer;
+}
 
+
+
+.post-btn{
+
+  border: none !important;
+    margin-right: 50px;
+}
 
 
 .post-container{
-  width: 500px;
-  height: 462px;
+  max-width: 500px;
+  max-height: 462px;
 }
 
 
@@ -820,7 +843,7 @@ chooseDocument: function() {
      
 
      font-size: 14px;
-     
+      font-family: Arial, Helvetica, sans-serif;
 }
 
 .avat-comment{
@@ -835,6 +858,22 @@ chooseDocument: function() {
 
 
 @media (max-width: 762px) {
+
+
+  .post-btn{
+
+  border: none !important;
+    margin-right: 0px;
+}
+
+
+.send-cmt {
+  position: relative;
+  margin-left: 90%;
+  top: -28px;
+  cursor: pointer;
+}
+
 
 .avat{
      
@@ -893,12 +932,6 @@ chooseDocument: function() {
 }
 .comment:focus {
   outline: none;
-}
-.send-cmt {
-  position: relative;
-  margin-left: 95%;
-  top: -28px;
-  cursor: pointer;
 }
 
 .time {
@@ -963,6 +996,7 @@ chooseDocument: function() {
 .btn:hover{
   background-color: #ccc;
 }
+
 
 </style>
 

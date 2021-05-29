@@ -21,7 +21,7 @@
 
 
 
-<hr width="100%" class="d-none" d-md-block />
+<hr width="100%" />
 
 
 
@@ -139,14 +139,14 @@ export default {
       selectedId: 0,
       bottomSelectedId: 0,        
       items: [
-        {label: 'Home ', icon: ''},
+        {label: 'Home ', icon: 'fas fa-home fa-lg'},
        
-        {label: 'Inbox' , icon: ''},
-        {label: 'Notification' , icon: ''},
-         {label: 'Pending Post' , icon: ''},   
-        {label: 'Insight' , icon: ''}, 
+        {label: 'Inbox' , icon: 'fas fa-comments  fa-lg'},
+        {label: 'Notification' , icon: 'fas fa-bell fa-lg'},
+         {label: 'Pending Post' , icon: 'fas fa-sync fa-lg'},   
+        {label: 'Insight' , icon: 'fas fa-chart-line fa-lg'}, 
 
-        {label: 'Settings' , icon: ''},
+        {label: 'Settings' , icon: 'fas fa-cog fa-lg'},
         
       ],
       options: {

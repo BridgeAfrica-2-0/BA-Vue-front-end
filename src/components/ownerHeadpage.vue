@@ -291,6 +291,8 @@ margin-right: -8px;
 
   .banner{
         height: 180px;
+        
+object-fit: cover  !important;
        
   }
 
@@ -360,6 +362,8 @@ margin-right: -8px;
   }
   .banner{
         height: 426px;
+        
+object-fit: cover  !important;
        
   }
 

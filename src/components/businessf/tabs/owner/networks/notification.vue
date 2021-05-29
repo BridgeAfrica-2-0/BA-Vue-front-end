@@ -11,7 +11,7 @@
           <div class="b-bottomn f-left">
             <b-form-checkbox
               id="checkbox-1"
-              v-model="status"
+            
               name="checkbox-1"
               value="accepted"
               class="m-left-top username"
@@ -38,7 +38,7 @@
             <span style="display:inline-flex">
                <b-form-checkbox
               id="checkbox-1"
-              v-model="status"
+            
               name="checkbox-1"
               value="accepted"
               class="m-left-top"

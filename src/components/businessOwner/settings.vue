@@ -116,7 +116,7 @@
         
         <div>
           <b-tabs pills  v-model="tabIndex"    vertical  class="itzlala"   nav-wrapper-class="w-15" >
-            <b-tab active title="General">
+            <b-tab  title="General">
              
 
               <b-card-text> <General /> </b-card-text

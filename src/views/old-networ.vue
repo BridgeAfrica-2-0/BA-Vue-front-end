@@ -4,7 +4,7 @@
    
 
 
-<div   class="container-fluid lynetowrk" style="margin-top:-30px">
+<div   class="container-fluid lynetowrk">
    
   <ly-tab
     v-model="selectedId"
@@ -12,7 +12,7 @@
     :options="options"
     @change="handleChange">
   </ly-tab>
-  <hr class="d-none d-md-block" />
+  <hr />
   </div>
 
    <div class="demo container-fluid p-0">
@@ -180,16 +180,16 @@ export default {
       bottomSelectedId: 0,
 
       items: [
-        {label: 'Home ', icon: ' '},
+        {label: 'Home ', icon: 'fas fa-home fa-lg '},
        
-        {label: 'Inbox' , icon: ' '},
-        {label: 'Notification' , icon: ''},
-        {label: 'Member Request',  icon: ''},
-        {label: 'Pending Post' , icon: ''},   
+        {label: 'Inbox' , icon: 'fas fa-comments fa-lg '},
+        {label: 'Notification' , icon: 'fas fa-bell fa-lg'},
+        {label: 'Member Request',  icon: 'fas  fa-user-plus fa-lg'},
+        {label: 'Pending Post' , icon: 'fas fa-sync fa-lg'},   
         
-        {label: 'Keyword Alert' , icon: ''},   
-        {label: 'Roles' , icon: ''},
-         {label: 'Settings' , icon: ''},
+        {label: 'Keyword Alert' , icon: 'fas fa-exclamation-triangle fa-lg'},   
+        {label: 'Roles' , icon: 'fas fa-user-cog fa-lg'},
+         {label: 'Settings' , icon: 'fas fa-cog fa-lg'},
         
       ],
       

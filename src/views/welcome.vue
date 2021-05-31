@@ -1,29 +1,22 @@
 <template>
-  <div>
+  <div class="welcome">
    
-
-
-
-
-
-
-
-    <b-modal id="modal-3" ref="modal-3"  size="lg" title=" Get Started" hide-footer>
+ <b-modal id="modal-3" ref="modal-3"  size="lg" title=" Get Started" hide-footer>
       <div>
 
      
 
-       <h4 class="t-center">    Welcome On Bridge Africa   </h4>   <br />  <br />
+       <h4 class="text-center username">    Welcome On Bridge Africa   </h4>   <br />  <br />
 
-       <p>is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing  </p>
+       <p class="text">is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing  </p>
      
 
-      <b-form-group label="Use BridgeAfirca.com as a">
+      <b-form-group label="Use BridgeAfirca.com as a"    label-class="text"  >
       <b-form-radio-group
         id="radio-group-1"
         v-model="useas"
         :options="options"
-      
+       label-class="username"
         name="radio-options"
       ></b-form-radio-group>
     </b-form-group>
@@ -68,27 +61,28 @@
                     >
                       <div class="drag-text">
                         <i class="fa fa-plus" ></i>
-                        <h3>Add Profile  Photo</h3>
+                        <h3 class="username">Add Profile  Photo</h3>
                       </div>
                     </a>
                     <div></div>
                   </div>
                 </div>
                 <div class="col-md-6">
-                  <div class="form-group">
-                    <label for="username"> DOB :</label><br />
+                  <div class="form-group"  label-class="username">
+                    <label for="username" class="username"> DOB :</label><br />
                     <input
                       type="date"
                       name="dob"
                       id="dob"
                       placeholder="Busness Name"
-                      class="form-control"
+                     
+                      class="form-control text"
                     />
                   </div>
 
                   <div class="form-group">
-                    <label for="alias">Gender:</label><br />
-                    <select id="category" class="form-control">
+                    <label for="alias" class="username">Gender:</label><br />
+                    <select id="category" class="form-control text" label-class="text" >
                       <option value="" selected="" disabled="">
                         Select Gender
                       </option>
@@ -99,9 +93,9 @@
                   </div>
 
                   <div class="form-group">
-                    <label for="country"> Country :</label><br />
+                    <label for="country" class="username">  Country :</label><br />
 
-                      <country-select v-model="country" :country="country" topCountry="US"  class="form-control" />
+                      <country-select v-model="country" :country="country" topCountry="US"  class="form-control text" />
   
                     
 
@@ -110,24 +104,24 @@
                   </div>
 
                   <div class="form-group">
-                    <label for="city"> City :</label><br />
+                    <label for="city" class="username"> City :</label><br />
                     <input
                       type="text"
                       name="alias"
-                      id="city"
+                      id="City"
                       placeholder="city"
-                      class="form-control"
+                      class="form-control text"
                     />
                   </div>
 
                   <div class="form-group">
-                    <label for="Neighbor"> Neighbor :</label><br />
+                    <label for="Neighbor" class="username"> Neighbor :</label><br />
                     <input
                       type="text"
                       name="alias"
                       id="Neighbor"
                       placeholder="Neighbor"
-                      class="form-control"
+                      class="form-control text"
                     />
                   </div>
                 </div>
@@ -135,7 +129,7 @@
             </div>
           </tab-content>
 
-          <tab-content title="Follow Businesses">
+          <tab-content title="Follow Businesses"  >
            
               <div class="div-h">
                 <Business />
@@ -204,7 +198,7 @@
                     >
                       <div class="drag-text" >
                         <i class="fa fa-plus" aria-hidden="true"></i>
-                        <h3>Add Profile Photo</h3>
+                        <h3 class="username">Add Profile Photo</h3>
                       </div>
                     </a>
                     <div></div>
@@ -212,19 +206,19 @@
                 </div>
                 <div class="col-md-6">
                   <div class="form-group">
-                    <label for="username"> DOB :</label><br />
+                    <label for="username" class="username"> DOB :</label><br />
                     <input
                       type="date"
                       name="dob"
                       id="dob"
                       placeholder="Busness Name"
-                      class="form-control"
+                      class="form-control text"
                     />
                   </div>
 
                   <div class="form-group">
-                    <label for="alias">Gender:</label><br />
-                    <select id="category" class="form-control">
+                    <label for="alias" class="username">Gender:</label><br />
+                    <select id="category" class="form-control text">
                       <option value="" selected="" disabled="">
                         Select Gender
                       </option>
@@ -235,9 +229,9 @@
                   </div>
 
                   <div class="form-group">
-                    <label for="country"> Country :</label><br />
+                    <label for="country" class="username"> Country :</label><br />
 
-                      <country-select v-model="country" :country="country" topCountry="US"  class="form-control" />
+                      <country-select v-model="country" :country="country" topCountry="US"  class="form-control text" />
   
                     
 
@@ -246,24 +240,24 @@
                   </div>
 
                   <div class="form-group">
-                    <label for="city"> City :</label><br />
+                    <label for="city" class="username"> City :</label><br />
                     <input
                       type="text"
                       name="alias"
                       id="city"
                       placeholder="city"
-                      class="form-control"
+                      class="form-control text"
                     />
                   </div>
 
-                  <div class="form-group">
-                    <label for="Neighbor"> Neighbor :</label><br />
+                  <div class="form-group ">
+                    <label for="Neighbor" class="username"> Neighbor :</label><br />
                     <input
                       type="text"
                       name="alias"
                       id="Neighbor"
                       placeholder="Neighbor"
-                      class="form-control"
+                      class="form-control text"
                     />
                   </div>
                 </div>
@@ -308,7 +302,7 @@
                         >
                           <div class="drag-text">
                             <i class="fa fa-plus" aria-hidden="true"></i>
-                            <h3>Add Logo</h3>
+                            <h3 class="usernanme">Add Logo</h3>
                           </div>
                         </a>
                         <div></div>
@@ -316,21 +310,21 @@
                     </div>
                     <div class="col-md-6">
                       <div class="form-group">
-                        <label for="username">Busness Name:</label><br />
+                        <label for="username" class="username">Busness Name:</label><br />
                         <input
                           type="text"
                           name="username"
                           id="username"
                           placeholder="Busness Name"
-                          class="form-control"
+                          class="form-control text"
                         />
                       </div>
 
 
                       
                       <div class="form-group">
-                        <label for="alias">Category:</label><br />
-                        <select id="category" class="form-control ">
+                        <label for="alias" class="username">Category:</label><br />
+                        <select id="category" class="form-control text ">
                           <option value="" selected="" disabled=""
                             >Select Category</option
                           >
@@ -344,16 +338,16 @@
                   <div class="row">
                     <div class="col-md-12">
                       <div class="form-group">
-                        <label for="username">Keywords</label><br />
+                        <label for="username" class="username">Keywords</label><br />
                         <div class="col-md-12 pl-0 pr-0">
-                          No Choices
+                        <span class="text">  No Choices  </span>
 
                           <input
                           type="text"
                           name="alias"
                           id="alias"
                           placeholder="Enter your Keywords"
-                          class="form-control"
+                          class="form-control text"
                         />
 
                         </div> 
@@ -373,8 +367,8 @@
                   <div class="row">
                     <div class="col-md-6">
                       <div class="form-group">
-                        <label for="alias">Language:</label><br />
-                        <select id="category" class="form-control ">
+                        <label for="alias" class="username">Language:</label><br />
+                        <select id="category" class="form-control text ">
                           <option value="" selected="" disabled=""
                             >Select Language</option
                           >
@@ -385,8 +379,8 @@
                     </div>
                     <div class="col-md-6">
                       <div class="form-group">
-                        <label for="username">TomeZone:</label><br />
-                        <select id="category" class="form-control ">
+                        <label for="username" class="username">TomeZone:</label><br />
+                        <select id="category" class="form-control text">
                           <option value="" selected="" disabled=""
                             >Select Timezone</option
                           >
@@ -402,13 +396,13 @@
                   <div class="row">
                     <div class="col-md-12">
                       <div class="form-group">
-                        <label for="username">About</label><br />
+                        <label for="username" class="username">About</label><br />
                         <textarea
                           type="textarea"
                           name="description"
                           id="description"
                           placeholder="Brief description about your Busness"
-                          class="form-control"
+                          class="form-control text"
                         ></textarea>
                       </div>
                     </div>
@@ -473,7 +467,7 @@
 
 
 import People from "@/components/dasboard/suggestedpeople";
-import Business from "@/components/dasboard/communitybusiness";
+import Business from "@/components/dasboard/welcomebusinesses";
 
 import Tutorial from "@/components/dasboard/tutorial";
 
@@ -647,4 +641,59 @@ import 'vue-form-wizard/dist/vue-form-wizard.min.css';
   display: none;
 }
 
+
+
+
+@media only screen and (min-width: 768px){
+
+.text {
+    font-size: 14px !important;
+     font-family: Open Sans, Helvetica Neue, Helvetica, Arial, sans-serif;  
+}
+
+
+.username{
+   font-family: Open Sans, Helvetica Neue, Helvetica, Arial, sans-serif;  
+}
+
+
+}
+
+
+
+
+@media only screen and (min-width: 768px){
+
+.text {
+    font-size: 14px !important;
+     font-family: Open Sans, Helvetica Neue, Helvetica, Arial, sans-serif;  
+}
+
+.username{
+   font-family: Open Sans, Helvetica Neue, Helvetica, Arial, sans-serif;  
+}
+
+}
+
+
+
+
+.modal-body {
+    position: relative;
+    flex: 1 1 auto;
+    padding: 1px;
+}
+
+ 
+
 </style>
+
+<style> 
+
+ .modal-body {
+    
+    padding: 1px;
+}
+
+
+  </style>

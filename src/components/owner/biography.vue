@@ -3,7 +3,7 @@
     <b-alert v-if="edited" show> {{ successmsg }} </b-alert>
     <b-button
       v-if="editing == false"
-      class="edit-btn"
+      class="edit-btn float-right"
       @click="edit(true)"
       variant="outline-primary"
       >Edit Profile</b-button

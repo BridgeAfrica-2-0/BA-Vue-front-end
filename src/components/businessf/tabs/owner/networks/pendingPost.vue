@@ -24,7 +24,7 @@
                 <b-col cols="2" md="1" class="m-0 p-0">
                   <b-avatar
                     class="d-inline-block mt-1"
-                    variant="info"
+                    variant="primary"
                     src="https://business.bridgeafrica.info/assets/img/team/3.png"
                     size="3.5rem"
                   ></b-avatar>

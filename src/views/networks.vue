@@ -21,7 +21,7 @@
 
 
  
-  <div  class="mt-3" v-if="selectedId == '0'" >   <b-row class="center-content">
+  <div  class="mt-3" v-if="selectedId == '0'" >   <b-row class="center-content">         
                 <b-col  lg="5"  xl="4"  class=" ">      
                   <Parent />
                 </b-col>
@@ -103,19 +103,12 @@
 
 
 
+
+
+
+
+
  <div class="mt-3" v-if="selectedId == '6'" >  
-                   
-          <General  v-bind:currenttab="selectedId" />    
-              
-   </div> 
-
-
-
-
-
-
-
- <div class="mt-3" v-if="selectedId == '7'" >  
                    
            <General   v-bind:currenttab="selectedId" />   
               
@@ -188,7 +181,7 @@ export default {
         {label: 'Pending Post' , icon: ''},   
         
         {label: 'Keyword Alert' , icon: ''},   
-        {label: 'Roles' , icon: ''},
+       
          {label: 'Settings' , icon: ''},
         
       ],

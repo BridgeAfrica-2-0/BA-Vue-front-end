@@ -6,35 +6,50 @@
       </p>
     </b-container>
 
+
+       
+<div class="b-bottom">
+            <b-container>
+              <b-form-group
+                label-cols-lg="3"
+                label="Country"
+                label-size="md"
+                label-class="font-weight-bold pt-0"
+                class="mb-0"
+              >
+
+              
+                <country-select v-model="country" :country="country" topCountry="US"  class="form-control" />
+
+              </b-form-group>
+
+
+            </b-container>
+          </div>
+
+
+  <br />
+
     <b-container class="payment-type">
       <b-form-group v-slot="{ ariaDescribedby }">
         <b-form-radio
-       
-          :aria-describedby="ariaDescribedby"
-          id="Paypal"
-          name="paypal"
-          value="paypal"
+          id="mtn"
+          name="mtn"
+          value="mtn"
           >MTN Mobile Payment</b-form-radio
         >
         <br />
         <b-form-radio
        
-          :aria-describedby="ariaDescribedby"
           id="Mobile Payment"
           name="mobile-payment"
           value="mobile-money"
         >
          Orange  Mobile Payment
         </b-form-radio>
+
         <br />
-        <b-form-radio
-          
-          :aria-describedby="ariaDescribedby"
-          id="Credit-card"
-          name="credit-card"
-          value="credit-card"
-          > EU Money</b-form-radio
-        >
+      
 
          <b-form-radio
           
@@ -42,7 +57,7 @@
           id="Credit-card"
           name="credit-card"
           value="credit-card"
-          > GEMAC</b-form-radio
+          > Express Union</b-form-radio
         >
 
 
@@ -56,7 +71,7 @@
       <div class=" mb-0">
         <p>
            Your payment
-          information is secure, <b-link href="#">Read more</b-link>
+          information is secure
         </p>
       </div>
     </b-container>

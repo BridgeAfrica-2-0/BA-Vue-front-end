@@ -28,6 +28,163 @@
           </div>
 
 
+
+<div class="b-bottom">
+            <b-container>
+              <b-form-group
+                label-cols-lg="3"
+                label="Category"
+                label-size="md"
+                label-class="font-weight-bold pt-0"
+                class="mb-0"
+              >
+                <b-form-input id="bname" placeholder="" required></b-form-input>
+              </b-form-group>
+            </b-container>
+          </div>
+
+
+
+
+<div class="b-bottom">
+            <b-container>
+              <b-form-group
+                label-cols-lg="3"
+                label="Phone 1"
+                label-size="md"
+                label-class="font-weight-bold pt-0"
+                class="mb-0"
+              >
+                <b-form-input id="bname" placeholder="" required></b-form-input>
+              </b-form-group>
+            </b-container>
+          </div>
+
+
+
+
+
+
+
+<div class="b-bottom">
+            <b-container>
+              <b-form-group
+                label-cols-lg="3"
+                label="Phone 2"
+                label-size="md"
+                label-class="font-weight-bold pt-0"
+                class="mb-0"
+              >
+                <b-form-input id="bname" placeholder="" required></b-form-input>
+              </b-form-group>
+            </b-container>
+          </div>
+
+
+
+
+
+<div class="b-bottom">
+            <b-container>
+              <b-form-group
+                label-cols-lg="3"
+                label="Email"
+                label-size="md"
+                label-class="font-weight-bold pt-0"
+                class="mb-0"
+              >
+                <b-form-input id="bname" placeholder="" required></b-form-input>
+              </b-form-group>
+            </b-container>
+          </div>
+
+
+
+
+
+
+   
+<div class="b-bottom">
+            <b-container>
+              <b-form-group
+                label-cols-lg="3"
+                label="Country"
+                label-size="md"
+                label-class="font-weight-bold pt-0"
+                class="mb-0"
+              >
+
+              
+                <country-select v-model="country" :country="country" topCountry="US"  class="form-control" />
+
+              </b-form-group>
+
+
+            </b-container>
+          </div>
+
+
+
+   
+
+
+
+
+
+
+    
+
+<div class="b-bottom">
+            <b-container>
+              <b-form-group
+                label-cols-lg="3"
+                label="City"
+                label-size="md"
+                label-class="font-weight-bold pt-0"
+                class="mb-0"
+              >
+                <b-form-input id="bname" placeholder="" required></b-form-input>
+              </b-form-group>
+            </b-container>
+          </div>
+
+
+
+
+
+
+                 
+
+
+
+
+
+<div class="b-bottom">
+            <b-container>
+              <b-form-group
+                label-cols-lg="3"
+                label="Neighborhood"
+                label-size="md"
+                label-class="font-weight-bold pt-0"
+                class="mb-0"
+              >
+                <b-form-input id="bname" placeholder="" required></b-form-input>
+              </b-form-group>
+            </b-container>
+          </div>
+
+
+
+
+
+          
+
+
+
+
+
+
+
 <div class="b-bottom">
             <b-container>
               <b-form-group
@@ -66,181 +223,6 @@
     </div>
 
 
-
-
-
-
-    <div class="b-bottom">
-      <b-container>
-        <b-form-group
-          label-cols-lg="3"
-          label="Privacy"
-          label-size="md"
-          label-class="font-weight-bold pt-0"
-          class="mb-0"
-        >
-          <b-form-group class="mb-0" v-slot="{ ariaDescribedby }">
-            <b-form-radio-group
-              class="pt-2"
-              :options="['Private', 'Public']"
-              :aria-describedby="ariaDescribedby"
-            ></b-form-radio-group>
-          </b-form-group>
-        </b-form-group>
-      </b-container>
-    </div>
-
-
-
-
-
-    <div class="b-bottom">
-      <b-container>
-        <b-form-group
-          label-cols-lg="3"
-          label="Visibility"
-          label-size="md"
-          label-class="font-weight-bold pt-0"
-          class="mb-0"
-        >
-          <b-form-group class="mb-0" v-slot="{ ariaDescribedby }">
-            <b-form-radio-group
-              class="pt-2"
-              :options="['Visible', 'Hidden']"
-              :aria-describedby="ariaDescribedby"
-            ></b-form-radio-group>
-          </b-form-group>
-        </b-form-group>
-      </b-container>
-    </div>
-
-
-
-
-
-
-
-
-
-    <div class="b-bottom">
-      <b-container>
-        <b-form-group
-          label-cols-lg="3"
-          label="Posting Permission"
-          label-size="md"
-          label-class="font-weight-bold pt-0"
-          class="mb-0"
-        >
-          <b-form-group class="mb-0" v-slot="{ ariaDescribedby }">
-            <b-form-radio-group
-              class="pt-2"
-              :options="['Admin Only', 'Anyone']"
-              :aria-describedby="ariaDescribedby"
-            ></b-form-radio-group>
-          </b-form-group>
-        </b-form-group>
-      </b-container>
-    </div>
-
-
-
-
-
-
-
-
-
-    <div class="b-bottom">
-      <b-container>
-        <b-form-group
-          label-cols-lg="3"
-          label="Post Approval"
-          label-size="md"
-          label-class="font-weight-bold pt-0"
-          class="mb-0"
-        >
-          <b-form-group class="mb-0" v-slot="{ ariaDescribedby }">
-            <b-form-radio-group
-              class="pt-2"
-              :options="['All Network Post', 'Unplublish']"
-              :aria-describedby="ariaDescribedby"
-            ></b-form-radio-group>
-          </b-form-group>
-        </b-form-group>
-      </b-container>
-    </div>
-
-
-
-
-
-
-    <div class="b-bottom">
-      <b-container>
-        <b-form-group
-          label-cols-lg="3"
-          label="Posting Permissions"
-          label-size="md"
-          label-class="font-weight-bold pt-0"
-          class="mb-0"
-        >
-          <b-form-group class="mb-0" v-slot="{ ariaDescribedby }">
-            <b-form-radio-group
-              class="pt-2"
-              :options="['Admin only', 'Allow visitors/followers to post']"
-              :aria-describedby="ariaDescribedby"
-            ></b-form-radio-group>
-          </b-form-group>
-        </b-form-group>
-      </b-container>
-    </div>
-
-
-
-
-    <div class="b-bottom">
-      <b-container>
-        <b-form-group
-          label-cols-lg="3"
-          label=" Allow Membership Request From Business"
-          label-size="md"
-          label-class="font-weight-bold pt-0"
-          class="mb-0"
-        >
-          <b-form-group class="mb-0" v-slot="{ ariaDescribedby }">
-            <b-form-radio-group
-              class="pt-2"
-              :options="['Allow', 'Do Not Allow']"
-              :aria-describedby="ariaDescribedby"
-            ></b-form-radio-group>
-          </b-form-group>
-        </b-form-group>
-      </b-container>
-    </div>
-
-
-    
-
-    
-
-    <div class="b-bottom">
-      <b-container>
-        <b-form-group
-          label-cols-lg="3"
-          label="Marketplace"
-          label-size="md"
-          label-class="font-weight-bold pt-0"
-          class="mb-0"
-        >
-          <b-form-checkbox  name="check-button" switch>
-          </b-form-checkbox>
-        </b-form-group>
-      </b-container>
-    </div>
-
-    <b-container>
-      <b-link href="#foo" class="f-left">Delete Business Identity</b-link>
-    </b-container>
 
 
     
@@ -306,6 +288,8 @@ export default {
 
 .b-font{
 
-  font-size:12px
+  font-size:14px
 }
+
+
 </style>

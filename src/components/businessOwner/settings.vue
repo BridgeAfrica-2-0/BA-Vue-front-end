@@ -3,13 +3,28 @@
   <div >
 
 
-    
+
+
+
+
+
+
+
+
+   
+    <div class="mt-3  d-block d-md-none" v-if="selectedIdd == '0'" >  
+          
+
+
+
+
+      
  <div class="d-block d-md-none" style="margin-top: 30px;" >
    
 
 
   <ly-tab    
-    v-model="selectedIdd"
+    v-model="seetings_id"
     :items="items"
     :options="options"
     class="center-ly"
@@ -18,60 +33,91 @@
   </ly-tab>
 
 
- </div>
+ </div>   
+
+ 
+
+ <div class="mt-3 d-block d-md-none" v-if="seetings_id == '0'" >  
+           <General />
+
+
+
+
+</div>  
 
 
 
 
 
-   
-    <div class="mt-3  d-block d-md-none" v-if="selectedIdd == '0'" >  
-          <General />  
-           
-   </div> 
-
-
-
-   
-    <div class="mt-3  d-block d-md-none" v-if="selectedIdd == '1'" >  
-            <Info />  
-           
-   </div> 
+ <div class="mt-3 d-block d-md-none" v-if="seetings_id == '4'" >  
+           <Website />
 
 
 
 
-
-    <div class="mt-3  d-block d-md-none" v-if="selectedIdd == '2'" >  
-            <Roles />
-           
-   </div> 
+</div>  
 
 
 
 
 
 
-    <div class="mt-3  d-block d-md-none" v-if="selectedIdd == '3'" >  
+ <div class="mt-3 d-block d-md-none" v-if="seetings_id == '3'" >  
            <Payment />
+
+
+
+
+</div>  
+
+
+
+
+
+
+
+ <div class="mt-3 d-block d-md-none" v-if="seetings_id == '2'" >  
+          <Roles />
+
+
+
+
+</div>  
+
+
+
+
+
+
+ <div class="mt-3 d-block d-md-none" v-if="seetings_id == '1'" >  
+          <Info />  
+
+
+
+
+</div>  
+
+
+
+
+ <div class="mt-3 d-block d-md-none" v-if="seetings_id == '5'" >  
+          <Blocking />
+
+
+
+
+</div>  
+
+
+
+
+
+
+
            
    </div> 
 
 
-
-
-
-    <div class="mt-3 d-block d-md-none" v-if="selectedIdd == '4'" >  
-            <Website />
-           
-   </div> 
-
-
-
-<div class="mt-3 d-block d-md-none" v-if="selectedIdd == '5'" >  
-             <Blocking />
-           
-   </div> 
 
 
 
@@ -275,7 +321,7 @@ currenttab: {
            
   if(newVal==5){
 
-    console.log("yeahh");
+   
             
             this.selectedIdd ="0";
            this.tabIndex="0";
@@ -313,6 +359,7 @@ currenttab: {
       size: 0,
       tabIndex: 1,
        selectedIdd: 0,
+       seetings_id:0,
       bottomSelectedId: 0,
        items: [
         {label: 'General' },

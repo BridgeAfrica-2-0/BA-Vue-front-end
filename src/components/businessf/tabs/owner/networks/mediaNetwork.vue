@@ -862,7 +862,7 @@ export default {
     position: relative;
     margin: 5px;
     float: left;
-    width: 20%;
+     width: 18.7%;
     transition-duration: 0.4s;
     border-radius: 5px;
     -webkit-animation: winanim 0.5s;
@@ -885,7 +885,7 @@ export default {
     position: relative;
     margin: 5px;
     float: left;
-    width: 19.1%;
+    width: 18.7%;
     transition-duration: 0.4s;
     border-radius: 5px;
     -webkit-animation: winanim 0.5s;

@@ -18,9 +18,9 @@
         </b-col>
         <b-col cols="7" sm="8" md="7" >
          <p class="text">
-            <strong class="title"> Sneakers Blec cc </strong> <br /> <strong> Description </strong>  <br />
-            This is just a dummy text dumy dummy things are always dummy and dummy add  things are always dummy  hjykt   
-            <b-link> see more   </b-link>   <br />
+            <strong class="title"> Sneakers Blec cc </strong> <br /> <strong> Description </strong>  <br />    <span class="text">
+            This is just a dummy text dumy dummy things are always dummy and dummy add  things are always dummy  hjykt    </span>
+            <b-link class="text"> see more   </b-link>   <br />
              
             <span class="price"> <strong> 12,000 Fcfa  </strong> </span> <br />
             

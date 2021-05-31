@@ -8,7 +8,7 @@
 
 
 
-    <b-row class="">
+    <b-row class="m-1 mt-4">
       <b-col cols="12" class="">
         <b-row>
           <b-col cols="2" md="1" class="m-0 p-0">
@@ -79,7 +79,7 @@
     </b-row>
    
 
-    <b-row class="mt-4">
+    <b-row class="m-1 mt-4">
       <b-col cols="12" class="mt-4">
         <b-row>
           <b-col cols="2" md="1" class="m-0 p-0">
@@ -139,7 +139,7 @@
       </b-col>
     </b-row>
 
-    <b-row class="mt-4">
+    <b-row class="m-1 mt-4 ">
       <b-col cols="12" class="mt-4">
         <b-row>
           <b-col cols="2" md="1" class="m-0 p-0">
@@ -199,7 +199,7 @@
       </b-col>
     </b-row>
 
-    <b-row class="mt-4">
+    <b-row class="mt-4 m-1">
       <b-col cols="12" class="mt-4">
         <b-row>
           <b-col cols="2" md="1" class="m-0 p-0">

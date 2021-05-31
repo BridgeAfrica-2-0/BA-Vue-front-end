@@ -53,11 +53,11 @@
         <b-container>
           <b-row>
             <b-col>
-              <p class="a-center "><b-icon icon="globe" variant="primary"></b-icon> <span class="pivate"> Private </span> </p>
+              <p class="a-center "><b-icon icon="globe" variant="primary"></b-icon> <span class="pivate text"> Private </span> </p>
             </b-col>
             <b-col>
               <p class="a-center">
-                <b-icon icon="people-fill" variant="primary"></b-icon> <span class="pivate" > 3.5K
+                <b-icon icon="people-fill" variant="primary"></b-icon> <span class="pivate text" > 3.5K
                 community   </span>
               </p>
             </b-col>
@@ -65,7 +65,7 @@
         </b-container>
 
         <h6 class="mt-2 font-weight-bolder title ">About</h6>
-        <p class="text-justify">
+        <p class="text-justify text">
           Lorem Ipsum is simply dummy text of the printing and typesetting
           industry. Lorem Ipsum has been the industry's standard dummy text ever
           since the 1500s, when an unknown printer took a galley of type and

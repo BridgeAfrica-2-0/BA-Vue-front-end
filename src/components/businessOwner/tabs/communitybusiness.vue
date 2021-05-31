@@ -333,7 +333,7 @@ export default {
   
     font-family: 'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif;
     font-weight: normal;
-    font-size: 14px;
+    font-size: 12px;
     line-height: 30px;
     color: rgba(117,114,128,1);
     text-align: left;

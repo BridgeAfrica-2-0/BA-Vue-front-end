@@ -1,16 +1,11 @@
-
 <template>
-  <div>
+  <div> 
 
-
-
-
-           
-
+   
                     
     <div class="people-style shadow">
       <b-row>
-        <b-col cols="4" lg="4" sm="4" md="5">
+        <b-col cols="5" lg="4" sm="4" md="5">
          <div class="center-img" >
             <img
               src="https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg"
@@ -21,7 +16,7 @@
 
           
         </b-col>
-        <b-col cols="8" sm="8" md="7" >
+        <b-col cols="7" sm="8" md="7" >
          <p class="text">
             <strong class="title"> Sneakers Blec cc </strong> <br /> <strong> Description </strong>  <br />
             This is just a dummy text dumy dummy things are always dummy and dummy add  things are always dummy  hjykt   
@@ -41,7 +36,6 @@
       <div>
 
 
-          <span class="marketbtn"> <b-button variant="primary" class="buybtn shadow" @click="productDetails" > Buy </b-button>  <b-button variant="primary" class="buybtn shadow"> Visit Shop </b-button>  </span>
             
           <br />    
 
@@ -49,69 +43,78 @@
 
 
     </div>
+   
 
 
 
 
+    
+    <b-modal hide-footer title="Edit product"  >
+      <b-form>
+
+        <b-row>   <b-col cols="12" md="6">    
 
 
+          <b-form-group
+          id="input-group-1"
+          label="Product Name"
+          label-for="input-1"
+          label-size="sm"
+        >
+         
 
-       
-
-
-       
-
+         <b-form-input
+            id="input-1"
+            class="mt-1"
            
-
-                    
-    <div class="people-style shadow">
-      <b-row>
-        <b-col cols="4" lg="4" sm="4" md="5">
-         <div class="center-img" >
-            <img
-              src="https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg"
-              
-              class="r-image"
-            />
-          </div>
-
-          
-        </b-col>
-        <b-col cols="8" sm="8" md="7" >
-         <p class="text">
-            <strong class="title"> Sneakers Blec cc </strong> <br /> <strong> Description </strong>  <br />
-            This is just a dummy text dumy dummy things are always dummy and dummy add  things are always dummy  hjykt   
-            <b-link> see more   </b-link>   <br />
-             
-            <span class="price"> <strong> 12,000 Fcfa  </strong> </span> <br />
-            
-          </p>
-        </b-col>
-
-        
-
-        
-      </b-row>
+            type="text"
+            required
+          ></b-form-input>
 
 
-      <div>
+
+        </b-form-group>
 
 
-          <span class="marketbtn"> <b-button variant="primary" class="buybtn shadow" @click="productDetails" > Buy </b-button>  <b-button variant="primary" class="buybtn shadow"> Visit Shop </b-button>  </span>
-            
-          <br />    
+        <b-form-group
+          id="input-group-1"
+          label="Product Description"
+          label-for="input-1"
+          label-size="sm"
+        >
+          <b-textarea
+            id="input-1"
+            class="mt-2"
+           
+            type="text"
+            required
+          ></b-textarea>
 
-        </div>
 
+        </b-form-group>
 
-    </div>
+  
+         </b-col>    <b-col cols="12" md="6">   
 
 
 
 
 
+ 
 
-
+         <div class="image-upload-wrap">
+                    <a
+                      href="#"
+                      data-toggle="modal"
+                      data-target="#createalbumModal"
+                    >
+                      <div class="drag-text">
+                        <i class="fa fa-plus" ></i>
+                        <h6>Product Image</h6>
+                      </div>
+                    </a>
+                    <div></div>
+                  </div>
 
 
 
@@ -120,13 +123,109 @@
 
 
 
-
-      
-
-
-           <div class=" ">
+           </b-col>
+         
+           </b-row>
 
 
+
+
+
+
+
+        <b-form-group
+          id="input-group-1"
+          label="product Price"
+          label-for="input-1"
+          label-size="sm"
+        >
+          <b-form-input
+            class="mt-1"
+            id="price"
+         
+          ></b-form-input>
+        </b-form-group>
+
+
+  <b-form-checkbox
+      id="checkbox-1"
+     
+      name="checkbox-1"
+      value="accepted"
+      unchecked-value="not_accepted"
+    >
+     This Product Is On Discount
+    </b-form-checkbox>
+
+
+
+
+
+
+        <b-form-group
+          id="conditions"
+          label="Conditions"
+          label-for="input-1"
+          label-size="sm"
+        >
+          <b-form-input
+            class="mt-1"
+            id="conditions"
+         
+          ></b-form-input>
+        </b-form-group>
+
+
+
+
+
+
+
+  <b-form-checkbox
+      id="checkbox-1"
+     
+      name="checkbox-1"
+      value="accepted"
+      unchecked-value="not_accepted"
+    >
+     This Item Is  A Service ?
+    </b-form-checkbox>
+
+
+
+
+  <b-form-checkbox
+      id="checkbox-1"
+     
+      name="checkbox-1"
+      value="accepted"
+      unchecked-value="not_accepted"
+    >
+     In stock
+    </b-form-checkbox>
+
+
+
+    
+  <b-form-checkbox
+      id="checkbox-1"
+     
+      name="checkbox-1"
+      value="accepted"
+      unchecked-value="not_accepted"
+    >
+    Published
+    </b-form-checkbox>
+
+
+
+
+
+
+
+        <b-button class="mt-2 btn-block" variant="primary"> Add</b-button>
+      </b-form>
+    </b-modal>
 
 
 
@@ -198,59 +297,207 @@
             </b-col>
           </b-row>
           <br />
-          <b-row class="mt-2">
-            <b-col>
-              <b-avatar
-                variant="info"
-                src="https://placekitten.com/300/300"
-                size="2rem"
-              ></b-avatar>
-              <input placeholder="Post a Comment" class="comment" type="text" />
+          <div class="col-md-12 pt-2 pb-2 m-0">
+            <div class="post-footer">
+              <div class="input-group post-div">
+                <a class="pull-left pr-2" href="#">
+                  <img
+                    class="post-userim"
+                    src="@/assets/img/photo1.jpg"
+                    alt="avatar"
+                  />
+                </a>
+                <input
+                  placeholder="Post a Comment"
+                  class="form-control adco comment"
+                  type="text"
+                />
 
-              <fas-icon
-                class="primary send-cmt"
-                :icon="['fas', 'paper-plane']"
-              />
-            </b-col>
-          </b-row>
-          <Comment />
-          <b-row>
-            <b-col class="col-1"></b-col>
-            <b-col>
-              <Comment />
-            </b-col>
-          </b-row>
+                <fas-icon
+                  class="primary send-cmt"
+                  :icon="['fas', 'paper-plane']"
+                />
+              </div>
+              <ul class="comments-list allcomment pl-0 mt-4">
+                <li class="comment">
+                  <a class="pull-left pr-4" href="#">
+                    <img
+                      class="post-userim"
+                      src="@/assets/img/photo2.jpg"
+                      alt="avatar"
+                    />
+                  </a>
+                  <div class="comment-body">
+                    <div class="comment-body-in">
+                      <div class="comment-heading">
+                        <div class="pull-left">
+                          <h5 class="user">Gavino Free</h5>
+                          <h5 class="time">5 minutes ago</h5>
+                        </div>
+                      </div>
+                      <p>
+                        Lorem Ipsum has been the industry's standard dummy text
+                        ever since the 1500s, when an unknown printer took a
+                        galley of type and scrambled it to make a type specimen
+                        book. It has survived not only five centuries<span
+                          class="text-size"
+                          >😛</span
+                        >
+                      </p>
+                    </div>
+                    <div class="col-md-12 pt-2 pl-0 mb-3">
+                      <b-icon
+                        icon="suit-heart"
+                        variant="primary"
+                        aria-hidden="true"
+                      ></b-icon>
+                      23 &nbsp; &nbsp; &nbsp; <a href="#">Reply</a>
+                    </div>
+                  </div>
+                  <ul class="comments-list">
+                    <li class="comment">
+                      <a class="pull-left pr-4" href="#">
+                        <img
+                          class="post-userim"
+                          src="@/assets/img/photo2.jpg"
+                          alt="avatar"
+                        />
+                      </a>
+                      <div class="comment-body">
+                        <div class="comment-body-in">
+                          <div class="comment-heading">
+                            <div class="pull-left">
+                              <h5 class="user">Gavino Free</h5>
+                              <h5 class="time">5 minutes ago</h5>
+                            </div>
+                          </div>
+                          <p>
+                            Lorem Ipsum has been the industry's standard dummy
+                            text ever since the 1500s, when an unknown printer
+                            took a galley of type and scrambled it to make a
+                            type specimen book. It has survived not only five
+                            centuries<span class="text-size">😛</span>
+                          </p>
+                        </div>
+                        <div class="col-md-12 pt-2 pl-0 mb-3">
+                          <b-icon
+                            icon="suit-heart"
+                            variant="primary"
+                            aria-hidden="true"
+                          ></b-icon>
+                          23 &nbsp; &nbsp; &nbsp; <a href="#">Reply</a>
+                        </div>
+                      </div>
+                    </li>
+                    <li class="comment">
+                      <a class="pull-left pr-4" href="#">
+                        <img
+                          class="post-userim"
+                          src="@/assets/img/photo2.jpg"
+                          alt="avatar"
+                        />
+                      </a>
+                      <div class="comment-body">
+                        <div class="comment-body-in">
+                          <div class="comment-heading">
+                            <div class="pull-left">
+                              <h5 class="user">Gavino Free</h5>
+                              <h5 class="time">5 minutes ago</h5>
+                            </div>
+                          </div>
+                          <p>
+                            Lorem Ipsum has been the industry's standard dummy
+                            text ever since the 1500s, when an unknown printer
+                            took a galley of type and scrambled it to make a
+                            type specimen book. It has survived not only five
+                            centuries<span class="text-size">😛</span>
+                          </p>
+                        </div>
+                        <div class="col-md-12 pt-2 pl-0 mb-3">
+                          <i
+                            class="fa heart  fa-heart-o"
+                            aria-hidden="true"
+                          ></i>
+                          23 &nbsp; &nbsp; &nbsp; <a href="#">Reply</a>
+                        </div>
+                      </div>
+                    </li>
+                    <div class="input-group post-div">
+                      <a class="pull-left pr-4" href="#">
+                        <img
+                          class="post-userim"
+                          src="@/assets/img/photo1.jpg"
+                          alt="avatar"
+                        />
+                      </a>
+                      <input
+                        placeholder="Post a Comment"
+                        class="form-control adco comment"
+                        type="text"
+                      />
+
+                      <fas-icon
+                        class="primary send-cmt"
+                        :icon="['fas', 'paper-plane']"
+                      />
+                    </div>
+                  </ul>
+                </li>
+              </ul>
+              <ul class="comments-list allcomment pl-0 mt-4">
+                <li class="comment">
+                  <a class="pull-left pr-4" href="#">
+                    <img
+                      class="post-userim"
+                      src="@/assets/img/photo2.jpg"
+                      alt="avatar"
+                    />
+                  </a>
+                  <div class="comment-body">
+                    <div class="comment-body-in">
+                      <div class="comment-heading">
+                        <div class="pull-left">
+                          <h5 class="user">Gavino Free</h5>
+                          <h5 class="time">5 minutes ago</h5>
+                        </div>
+                      </div>
+                      <p>
+                        Lorem Ipsum has been the industry's standard dummy text
+                        ever since the 1500s, when an unknown printer took a
+                        galley of type and scrambled it to make a type specimen
+                        book. It has survived not only five centuries<span
+                          class="text-size"
+                          >😛</span
+                        >
+                      </p>
+                    </div>
+                    <div class="col-md-12 pt-2 pl-0 mb-3">
+                      <b-icon
+                        icon="suit-heart"
+                        variant="primary"
+                        aria-hidden="true"
+                      ></b-icon>
+                      23 &nbsp; &nbsp; &nbsp; <a href="#">Reply</a>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
         </b-col>
       </b-row>
     </b-modal>
-
-
-
-
-
-
-
-
-
-
-
-           </div>
-
-
   </div>
 </template>
 
 <script>
-import Comment from "@/components/comment";
 export default {
   data() {
     return {
-      viewProduct: false,
+      viewProduct: false
     };
   },
-  components: {
-    Comment,
-  },
+  components: {},
   methods: {
     /**
      * Used to view produduct details
@@ -259,12 +506,64 @@ export default {
      */
     productDetails() {
       this.viewProduct = true;
-    },
-  },
+    }
+  }
 };
 </script>
 
 <style scoped>
+.discount {
+  color: orange;
+  margin-left: 60px;
+}
+
+p {
+  text-align: left;
+}
+
+input {
+  border-radius: 15px;
+  padding: 5px;
+  border: solid 1px #ccc;
+  width: 250px;
+}
+input:focus {
+  outline-color: none;
+  border: none;
+}
+.post {
+  position: relative;
+  left: -24px;
+}
+
+.prod {
+  max-width: 14rem;
+  cursor: pointer;
+}
+.stock {
+  color: green;
+}
+.btn:focus {
+  outline: none;
+}
+h6 {
+  text-align: center;
+  font-weight: bold;
+}
+.short {
+  text-align: center;
+}
+.price {
+  text-align: center;
+}
+.buy {
+  border-radius: 0px;
+  width: 100%;
+}
+.reply {
+  cursor: pointer;
+}
+
 
 
 
@@ -314,7 +613,7 @@ export default {
   background-clip: border-box;
   border: 1px solid rgba(0, 0, 0, 0.125);
   margin-bottom: 10px;
-  margin-right: 8px;
+
   padding: 3px;
  padding-bottom: 26px;
  
@@ -350,7 +649,7 @@ padding: 1px;
 
   
 
-  margin-right: -5px;
+ margin-left: -30px;
 
   line-height: 25px;
 }
@@ -368,9 +667,9 @@ padding: 1px;
   border-bottom-right-radius: 10px;
 
 
-  width: 125px;
+  width: 100px;
 
-height: 125px;
+height: 100px;
 padding: 4px;
 }
 
@@ -399,7 +698,7 @@ Width:85px;
 
 
 
-@media only screen and (min-width: 540px) {
+@media only screen and (min-width: 540px) and  (max-width: 762px) {
 
 
 
@@ -443,8 +742,9 @@ padding: 1px;
   border-bottom-right-radius: 10px;
 
 
-   Height : 160px;
-Width:160px;
+   Height : 100px;
+Width:100px;
+
 padding: 4px;
 }
 
@@ -548,9 +848,84 @@ h6 {
 }
 
 
-.text{
-  margin-left:3px;
+
+
+
+@media only screen and (min-width: 762px) {
+
+
+
+
+.text {
+  color: #000;
+  
+    font-family: 'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 30px;
+    color: rgba(117,114,128,1);
+    text-align: left;
+
+Font-weight: normal ;
+Line-height:20px ;
+font-style:normal;
+
+
+padding: 1px;
+  text-align: left;
+
+  
+
+  margin-right: -5px;
+
+  line-height: 25px;
 }
+
+
+
+
+.r-image {
+  
+ border-top-left-radius: 10px;
+
+  border-bottom-left-radius: 10px;
+
+  border-top-right-radius: 10px;
+
+  border-bottom-right-radius: 10px;
+
+
+   Height : 160px;
+Width:160px;
+
+padding: 4px;
+}
+
+
+
+
+.btn{
+  padding-top: 6px;
+
+  Height : 38px;
+Width:123px
+
+}
+
+
+
+
+
+.title{
+  font-size: 20px;
+   color:black;
+ 
+ line-height: 35px;
+  font-family: 'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif;
+}
+
+}
+
 
 
 </style>

@@ -4318,9 +4318,41 @@ input[type="button"].btn-block {
   border-top-right-radius: 0;
 }
 
-.nav-pills .nav-link {
-  border-radius: 0.25rem;
+
+
+
+
+@media (min-width: 768px) {
+   
+  .nav-pills .nav-link {
+    border-radius: 0.25rem;
+    font-size:14px;
+  }
+  
+
 }
+
+
+
+
+
+@media (max-width: 768px) {
+   
+  .nav-pills .nav-link {
+    border-radius: 0.25rem;
+    font-size:10px;
+    padding-left: 2px;
+    padding-right: 2px;
+    
+  }
+  
+
+}
+
+
+
+
+
 
 .nav-pills .nav-link.active,
 .nav-pills .show > .nav-link {

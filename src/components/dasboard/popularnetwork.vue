@@ -39,14 +39,26 @@
           </div>
         </b-col>
         <b-col md="5" cols="7"  lg="7" xl="5" sm="5">
+         
+
           <p class="textt">
-            <strong class="net-title"> Global Car Supple Network </strong> <br /><br />
-            <strong> Category : </strong> Car marketing <br />
-            <strong> Community : </strong> 20k <br />
-            <strong> public :</strong> <br />
+            
+
+
+            <strong class="net-title"> Global Car Supple Network </strong> <br />
+             Car Rental  
+              <br />  20k Community <br />
+            
+            <span class="location"> <b-icon-geo-alt class="ico" ></b-icon-geo-alt> Douala cameroon  </span> <br /> 
+            
+
+             super best car seller in the world
+            adipisicing elit. lorem epsep this is  <b-link>Read More</b-link>
             
 
           </p>
+
+
         </b-col>
 
 
@@ -111,14 +123,26 @@
           </div>
         </b-col>
         <b-col md="5" cols="7"  lg="7" xl="5" sm="5">
+         
+
           <p class="textt">
-            <strong class="net-title"> Global Car Supple Network </strong> <br /><br />
-            <strong> Category : </strong> Car marketing <br />
-            <strong> Community : </strong> 20k <br />
-            <strong> public :</strong> <br />
+            
+
+
+            <strong class="net-title"> Global Car Supple Network </strong> <br />
+             Car Rental  
+              <br />  20k Community <br />
+            
+            <span class="location"> <b-icon-geo-alt class="ico" ></b-icon-geo-alt> Douala cameroon  </span> <br /> 
+            
+
+             super best car seller in the world
+            adipisicing elit. lorem epsep this is  <b-link>Read More</b-link>
             
 
           </p>
+
+          
         </b-col>
 
 

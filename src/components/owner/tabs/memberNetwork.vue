@@ -1,7 +1,8 @@
 <template>
   <div class="mt-3">
     <div class="">
-      <b-card class="f-left" style="padding:0px">
+      <b-card class="f-left" style="padding:0px; margin-left: -12px;
+    margin-right: -12px;">
 
 
         <b-tabs  pills content-class="mt-3 f-left">

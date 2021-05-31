@@ -39,7 +39,7 @@
           </div>
         </b-col>
         <b-col md="5" cols="7"  lg="9" xl="5"  sm="5">
-          <p class="textt">
+          <p class="textt text">
             <strong class="title"> Super Car ltd </strong> <br />
              Car marketing  
               <br />  20k Community <br />
@@ -136,7 +136,7 @@
           </div>
         </b-col>
         <b-col md="5" cols="7"  lg="7" xl="5"  sm="5">
-          <p class="textt">
+          <p class="textt text">
             <strong class="title"> Super Car ltd </strong> <br />
              Car marketing  
               <br />  20k Community <br />
@@ -534,7 +534,7 @@ Width:160px
   border: 1px solid rgba(0, 0, 0, 0.125);
   margin-bottom: 10px;
 
-  margin-right: 8px;
+  
  
 
   padding: 7px;

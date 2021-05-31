@@ -4,38 +4,38 @@
       <b-col md="12" lg="5" xl="4" class="p-0 m-0">
         <b-card title="" header-tag="header" footer-tag="footer">
          
-           <span class="m-3 ">
+           <span class="m-1">
 
-           <h6 class="mb-0 d-inline-block title "> <b> Intro  </b> </h6>
+           <h6 class="title intro-head "> <b>   <fas-icon class=" icons" :icon="['fas', 'exclamation-circle']"  size="lg" />   Intro  </b> </h6>
             <span class="float-right btn m-0 p-0 action-intro"  
             v-b-modal.modal-5
 
-              ><b-icon icon="pencil-fill" variant="primary"></b-icon> Edit</span
+              ><b-icon icon="pencil-fill"  class="icon-size"   variant="primary"></b-icon> </span
             >
    
 
-           </span>
+           </span>       
 
 
-          <b-card-text class="text-left">
+          <b-card-text class="text-left username  intro-head">
             <p>
-             <b> <b-icon icon="briefcase-fill" variant="primary"></b-icon> Work at:</b>
-              Current or Last Organization
+           <b-icon icon="briefcase-fill"  class="icon-size" variant="primary"></b-icon> <b> Work at:  </b>
+              <span class="text"> Current or Last Organization   </span>
             </p>
             <p>
-             <b> <b-icon icon="book-fill" variant="primary"></b-icon> Studied at:</b>
-              Last Education
+            <b-icon icon="book-fill"  class="icon-size"  variant="primary"></b-icon> <b> Studied at:  </b>
+             <span class="text">  Last Education  </span>
             </p>
             <p>
-           <b>   <b-icon icon="house-fill" variant="primary"></b-icon> Home Town
-              Name: </b>Dummy
+            <b-icon icon="house-fill"  class="icon-size" variant="primary"></b-icon> <b> Home Town
+              Name:  </b>  <span class="text"> Dummy </span>
             </p>
             <p>
-            <b>  <b-icon icon="geo-alt-fill" variant="primary"></b-icon> Current
-              City Name: </b> Dummy
+             <b-icon icon="geo-alt-fill"  class="icon-size" variant="primary"></b-icon><b> Current
+              City Name: </b> <span class="text"> Dummy  </span>
             </p>
             <p>
-            <b>  <b-icon icon="people-fill" variant="primary"></b-icon> Community: </b> 525
+              <b-icon icon="people-fill"  class="icon-size"  variant="primary"></b-icon>  <b> Community:  </b> <span class="text"> 525   </span>
             </p>
           </b-card-text>
         </b-card>
@@ -224,6 +224,11 @@ export default {
 </script>
 
 <style scoped>
+
+.intro-head{
+  margin-top:-20px;
+
+}
 
 .post-pic{
   max-width: 500px;

@@ -335,13 +335,13 @@
         <div class="row">
           <div class="container-fluid">
             <div class="one2">
-              <div class="createp img-gall">
-                <div class="image-upload-wrap " >
+              <div class="createp img-gall image-wrap">
+                <div class=" " >
                   <a
                     href="#"
                        v-b-modal.createalbumModal
                   >
-                    <div class="drag-text">
+                    <div class="drag-textt">
                       <fas-icon :icon="['fas', 'plus']" />
                       <h3>Create Album</h3>
                     </div>
@@ -858,6 +858,24 @@ export default {
 
 
 
+
+.image-wrap{
+  border: 4px dashed #e75c18;
+    position: relative;
+
+     position: relative;
+    margin: 5px;
+    float: left;
+    width: 46.5%;
+    transition-duration: 0.4s;
+    border-radius: 5px;
+    -webkit-animation: winanim 0.5s;
+    animation: winanim 0.5s;
+    -webkit-backface-visibility: visible;
+    backface-visibility: visible;
+}
+
+
 .img-gall{
     position: relative;
     margin: 5px;
@@ -894,6 +912,26 @@ export default {
     backface-visibility: visible;
 }
 
+
+
+.image-wrap{
+  border: 4px dashed #e75c18;
+    position: relative;
+
+     position: relative;
+    margin: 5px;
+    float: left;
+    width: 46.5%;
+    transition-duration: 0.4s;
+    border-radius: 5px;
+    -webkit-animation: winanim 0.5s;
+    animation: winanim 0.5s;
+    -webkit-backface-visibility: visible;
+    backface-visibility: visible;
+}
+
+
+
 }
 
 
@@ -928,6 +966,22 @@ export default {
 
 
 
+.image-wrap{
+  border: 4px dashed #e75c18;
+    position: relative;
+
+     position: relative;
+    margin: 5px;
+    float: left;
+    width: 46.5%;
+    transition-duration: 0.4s;
+    border-radius: 5px;
+    -webkit-animation: winanim 0.5s;
+    animation: winanim 0.5s;
+    -webkit-backface-visibility: visible;
+    backface-visibility: visible;
+}
+
 
 
 }
@@ -948,7 +1002,26 @@ export default {
     position: relative;
     margin: 5px;
     float: left;
-    width: 47%;
+    width: 46.5%;
+    transition-duration: 0.4s;
+    border-radius: 5px;
+    -webkit-animation: winanim 0.5s;
+    animation: winanim 0.5s;
+    -webkit-backface-visibility: visible;
+    backface-visibility: visible;
+}
+
+
+
+
+.image-wrap{
+  border: 4px dashed #e75c18;
+    position: relative;
+
+     position: relative;
+    margin: 5px;
+    float: left;
+    width: 46.5%;
     transition-duration: 0.4s;
     border-radius: 5px;
     -webkit-animation: winanim 0.5s;
@@ -963,6 +1036,14 @@ export default {
 
 
 
+
+.drag-textt{
+
+    text-align: center;
+    font-weight: 100;
+    text-transform: uppercase;
+    color: #000;
+}
 
 </style>
 

@@ -1,6 +1,6 @@
 <template>
   <div class="p-0 m-0">
-    <div class="col-md-12 ">
+    <div class="col-md-12 p-0 ">
      
 
 
@@ -417,7 +417,7 @@
 
 -->
 
-    <b-row>  <b-col md="12" lg="6"> 
+    <b-row>  <b-col md="12" lg="6" class="p-0"> 
 
 
     
@@ -449,8 +449,8 @@
         </b-col>
 
         
-        <b-col md="5" cols="7"  lg="7" xl="9"  sm="5">
-          <p class="textt">
+        <b-col md="5" cols="7"  lg="7" xl="9"  sm="5" >
+          <p class="textt text">
             <strong class="title"> Super Car ltd </strong> <br />
              Car marketing  
               <br />  20k Community <br />
@@ -475,7 +475,7 @@
 
 
 
-           </b-col>  <b-col md="12" lg="6"> 
+           </b-col>  <b-col md="12" lg="6" class="p-0"> 
 
 
 
@@ -511,7 +511,7 @@
 
         
         <b-col md="5" cols="7"  lg="7" xl="9"  sm="5">
-          <p class="textt">
+          <p class="textt text">
             <strong class="title"> Super Car ltd </strong> <br />
              Car marketing  
               <br />  20k Community <br />

@@ -217,12 +217,29 @@ export default {
         padding-left: 1px;
     text-align: center;
     padding-left: 10px;
-    padding-right: 25px;
+    padding-right: 20px;
     border: 1px solid gray;
-  
+ 
+
 
 }
 
+
+
+@media only screen and (max-width: 768px) {
+
+
+.business-owner-tab .nav-pills .nav-link {
+    border-radius: 0.25rem;
+    font-size: 10px;
+    margin-left: -8px;
+    padding-left: 0px;
+    padding-right: 0px;
+
+
+}
+
+}
 
 .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
     

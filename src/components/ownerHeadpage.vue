@@ -250,7 +250,7 @@ methods: {
 @media (max-width: 768px) {
 
   .options{
-margin-right: -8px;
+margin-right: -5px;
   }
 }
 @media (min-width: 992px) {

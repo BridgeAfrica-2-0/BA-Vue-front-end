@@ -27,6 +27,7 @@ import businessVisitor from "@/views/businessVisitor";
 import search from "@/views/search";
 import forgotPassword from "@/views/forgotPassword";
 import navMessage from "@/views/navMessaging";
+import Blec from "@/views/blec";
 import memberNetworkFollower from "@/views/memberNetworkFollower";
 // import Test from "@/views/test";
 import templateView from "@/views/templateView";
@@ -226,6 +227,16 @@ const routes = [
     name: "Nav Meassage",
     component: navMessage,
   },
+
+
+  {
+    path: "/blec",
+    name: "Blec",
+    component: Blec,
+  },
+
+
+
   {
     path: "/memberNetworkFollower",
     name: "Membar Network Follower",

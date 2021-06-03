@@ -383,6 +383,8 @@
               <div class="bottom ">
 
    
+
+
               <b-row v-if="!checked">
               
                     <b-col cols="2" class="p-0">   

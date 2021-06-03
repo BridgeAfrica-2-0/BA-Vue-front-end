@@ -16,7 +16,7 @@
                     <b-avatar
                 class="d-inline-block profile-pic"
                 variant="primary"
-                src="https://business.bridgeafrica.info/assets/img/team/3.png"
+               src="https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg"
                
                  ></b-avatar>
 
@@ -27,13 +27,13 @@
 
                   </b-col>
                   <b-col>
-                    <h4 class="title">Messages</h4>
+                    <h4 class="title m-10">Messages</h4>
                   </b-col>
                   <b-col>
                     <b-icon
                       @click="newMessage(true)"
-                      class="new-message primary"
-                      icon="pencil-fill"
+                      class="new-message primary icon-size m-10"
+                      icon="pencil-square"
                     ></b-icon>
                   </b-col>
                 </b-row>
@@ -68,7 +68,7 @@
               <b-avatar
                 class="d-inline-block profile-pic"
                 variant="primary"
-                src="https://business.bridgeafrica.info/assets/img/team/3.png"
+              src="https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg"
                
               ></b-avatar>
 
@@ -84,8 +84,8 @@
 
 
 
-                  <b-col class="col-2">
-                    <small class="text-center"> {{ message.timeStamp }} </small> <p class="text-center">   <b-badge variant="primary"> {{ message.messageCount }} </b-badge>   </p>
+                  <b-col class="col-2 text-center">
+                    <small> {{ message.timeStamp }} </small> <p class="">   <b-badge variant="primary"> {{ message.messageCount }} </b-badge>   </p>
                   </b-col>
 
 
@@ -121,7 +121,7 @@
                  <b-avatar
                 class="d-inline-block profile-pic"
                 variant="primary"
-                src="https://business.bridgeafrica.info/assets/img/team/3.png"
+                src="https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg"
                
               ></b-avatar>
 
@@ -133,8 +133,8 @@
                 <b-col>
                   <b-icon
                     @click="newMessage(true)"
-                    class="new-message primary"
-                    icon="pencil-fill"
+                    class="new-message primary icon-size"
+                    icon="pencil-square"
                   ></b-icon>
                 </b-col>
               </b-row>
@@ -156,7 +156,7 @@
                   class="p-2 message"
                   @click="showInfo(false)"
                 >
-                  <b-col class="col-10">
+                  <b-col class="col-9">
                   
 
                      <span style="display:inline-flex">
@@ -164,7 +164,7 @@
               <b-avatar
                 class="d-inline-block profile-pic"
                 variant="primary"
-                src="https://business.bridgeafrica.info/assets/img/team/3.png"
+                src="https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg"
                
               ></b-avatar>
 
@@ -180,7 +180,7 @@
 
 
 
-                  <b-col class="col-2">
+                  <b-col class="col-3 text-center">
                     <small class="text-center"> {{ message.timeStamp }} </small> <p class="text-center">   <b-badge variant="primary"> {{ message.messageCount }} </b-badge>   </p>
                   </b-col>
 
@@ -196,75 +196,50 @@
               </div>
             </div>
            </b-col>
-           <b-col v-if="show == false && info == false && newMsg == false" class="p-0  " cols="12" xl="8" >
-         <div class="back-image">  
+           <b-col v-if="show == false && info == false && newMsg == false" class="p-0 back-image " cols="12" xl="8" style="margin-right: 14px;"  >
+         <div class="">  
             <div class="chat-nav shadow ">
               <b-row class="mobile">
                 <b-col class="col-1">
                   <b-icon
                     @click="showMessages(true)"
-                    icon="three-dots"
+                    icon="arrow-left"
                     aria-hidden="true"
-                    class="primary"
+                    class="primary "
                   ></b-icon>
                 </b-col>
-                <b-col class="col-2">
-                  <b-avatar variant="primary" text="BV" size="30"></b-avatar>
+                <b-col class="col-3">
+                  <b-avatar variant="primary" 
+                  
+                   src="https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg"
+                     size="40"
+                  
+                   ></b-avatar>
                 </b-col>
+
                 <b-col class="detale">
                   <h6>Louis Litt</h6>
                   <small>Online</small>
                 </b-col>
-                <b-col>
+                <b-col cols="3">
                   <b-row class="mt-3">
                     <b-col class="col-3">
-                      <b-icon icon="search" class="primary icon-size" ></b-icon>
+                      <b-icon icon="search" class="primary" ></b-icon>
                     </b-col>
                     <b-col class="col-3">
-                      <b-icon icon="telephone-fill" class="primary"></b-icon>
-                    </b-col>
-                    <b-col class="col-2">
-                      <b-icon
-                        @click="showInfo(true)"
-                        icon="info-circle"
-                        class="primary"
-                      ></b-icon>
+                      
 
-                      <b-dropdown variant="outline-primary" size="sm" no-caret>
-                        <template #button-content>
-                          <b-icon icon="three-dots" aria-hidden="true"  ></b-icon>
-                        
-                        </template>
-
-
-                        <!--
-                        <b-dropdown-item-button>
-                          <b-icon icon="lock-fill" aria-hidden="true"></b-icon>
-                          Locked <span class="sr-only">(Click to unlock)</span>
-                        </b-dropdown-item-button>
-                        <b-dropdown-divider></b-dropdown-divider>
-                        
-                        -->
-
-
-                        <b-dropdown-item-button variant="info">
-                          <b-icon icon="pencil" aria-hidden="true"></b-icon>
-                          Edit
-                        </b-dropdown-item-button>
-
-
-
-                        <b-dropdown-item-button variant="danger">
-                          <b-icon icon="trash-fill" aria-hidden="true"></b-icon>
-                          Delete
-                        </b-dropdown-item-button>
-
-
-
-                      </b-dropdown>
-
+                       <b-icon
+                 
+                    icon="three-dots"
+                     @click="showInfo(true)"
+                    aria-hidden="true"
+                    class="primary"
+                  ></b-icon>
 
                     </b-col>
+                   
+
 
 
                   </b-row>
@@ -272,7 +247,9 @@
               </b-row>
               <b-row class="desk">
                 <b-col class="col-2">
-                  <b-avatar variant="primary" text="BV" size="60"></b-avatar>
+                  <b-avatar variant="primary" 
+                  src="https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg"
+                   size="60"></b-avatar>
                 </b-col>
                 <b-col class="detail">
                   <h5>Louis Litt</h5>
@@ -287,20 +264,26 @@
                         
                       ></b-icon>
                     </b-col>
-                    <b-col class="col-3">
-                      <b-icon
-                        class="msg-icon primary icon-size"
-                        icon="telephone-fill"
-                      ></b-icon>
-                    </b-col>
+                   
                     <b-col>
                      
 
+
+   
+
+
+
+
+    
+
+
+
+
                       
                       
-                <b-dropdown id="dropdown-1" class=" mt-md-0" no-caret variant="light">
+                <b-dropdown id="dropdown-1" class=" mt-md-0 drop-hover" no-caret dropleft  variant="outline-light" >
                   <template #button-content>
-                    <b-icon-three-dots></b-icon-three-dots>
+                    <b-icon-three-dots class="primary"></b-icon-three-dots>
                   </template>
 
 
@@ -350,7 +333,10 @@
               <div v-for="chat in chats" :key="chat.id">
                 <div v-if="chat.type == 'received'" id="received">
                   <b-row class="p-4">
-                    <b-avatar variant="primary" text="BV"></b-avatar>
+                    <b-avatar variant="primary"
+                    
+                    src="https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg"
+                    ></b-avatar>
                     <b-col>
                       <p>
                         <span class="name"> {{ chat.name }} </span>
@@ -375,7 +361,9 @@
                          <span class="float-right mt-2 white">   {{ chat.timeStamp }}  </span> 
                       </p>
                     </b-col>
-                    <b-avatar variant="primary" text="BV"></b-avatar>
+                    <b-avatar variant="primary" src="https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg"
+                    
+                    ></b-avatar>
                   </b-row>
                 </div>
               </div>
@@ -459,7 +447,7 @@
               <b-avatar
                 class="info-avatar"
                 variant="primary"
-                text="BV"
+               src="https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg"
                 size="200"
               ></b-avatar>
               <div class="info-detail">
@@ -530,56 +518,51 @@
 
 
 
-                   <b-col cols="1">    </b-col>     <b-col cols="10">      
 
 
-                    <span style="display:inline-flex; " class="text-center">  
 
-       <span class="a-icon ">     <b-icon
-                        class="msg-icon icon-size"
-                        icon="smiley"
-                        variant="primary"
-                      ></b-icon> 
+
+
+                    <b-col cols="2" class="p-0">   
 
                       <b-icon
-                        class="msg-icon primary"
+                        class="msg-icon primary icon-size  icon-top float-right text-right"
                         icon="paperclip"
                       ></b-icon>    
                       
                       
-                      </span>
+                      </b-col>       <b-col cols="8"  class="p-0">   
 
 
-                   <b-form-input
+
+
+
+      
+       
+        <b-form-input
                     id="textarea"
                     v-model="text"
                     class="input-background"
-                    style="width: 500px;"
+                  
                     placeholder="Enter something..."
                   ></b-form-input>     
 
-
-
-
-
-
                   
-
+   </b-col>
                     
-   <span class="a-icon">
+   
+
+      <b-col cols="2"  class="p-0">   
 
                       <b-icon
                         @click="send"
-                        class="msg-icon primary icon-size "
+                        class="msg-icon primary icon-size icon-top "
                         icon="cursor-fill"
                       ></b-icon>
                   
-   </span>
-           </span>
+   
+           </b-col>    
 
-           </b-col>
-
-<b-col cols="1">  </b-col>
     
 
 
@@ -782,10 +765,10 @@ export default {
 
 .chat-box {
   position: relative;
-  top: 30px;
+ 
   border: solid 2px rgb(223, 223, 223);
   margin-bottom: 100px;
-  border-radius: 20px;
+ 
  
   
 }
@@ -829,7 +812,7 @@ h1 {
 .messages {
   overflow-y: scroll;
   overflow-x: hidden;
-  height: 690px;
+  height: 710px;
 
 }
 .txt {
@@ -885,11 +868,11 @@ h1 {
   
     padding-left: 10px;
     
-  
     height: 60px;
  
     border-bottom-right-radius: 15px;
     background-color: white;
+
 }
 .detail {
   margin-left: -40px;
@@ -938,6 +921,9 @@ li {
   background-color: #ccc;
 }
 @media only screen and (max-width: 768px) {
+  .m-10{
+    margin-top: 10px;
+  }
   .mobile {
     display: flex;
   }
@@ -951,7 +937,7 @@ li {
     position: relative;
     min-height: 70px;
    
-    width: 97%;
+    width: 100%;
     padding: 10px;
     border-right: none;
     padding: 10px;
@@ -1083,6 +1069,23 @@ li {
   width: 64px  !important;
   height: 64px  !important;
 }
+
+
+.drop-hover:hover{
+   background-color: white;
+}
+
+
+.drop-hover:active{
+   background-color: white;
+}
+
+
+.drop-hover:hover{
+  background-color: white;
+}
+
+
 
 
 </style>

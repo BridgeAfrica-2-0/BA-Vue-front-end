@@ -33,7 +33,7 @@
                   <b-col>
                     <b-icon
                       @click="newMessage(true)"
-                      class="new-message primary icon-size m-10"
+                      class="new-message primary icon-size m-10 float-right"
                       icon="pencil-square"
                     ></b-icon>
                   </b-col>
@@ -141,7 +141,7 @@
                 <b-col>
                   <b-icon
                     @click="newMessage(true)"
-                    class="new-message primary icon-size"
+                    class="new-message primary icon-size float-right"
                     icon="pencil-square"
                   ></b-icon>
                 </b-col>
@@ -905,7 +905,7 @@ showsearchh(){
 .chat-nav {
   position: relative;
   min-height: 70px;
-    border-right: 2px solid #ccc;
+    border-right: 2px solid #ccc;     
     
   width: 100%;
   
@@ -922,6 +922,8 @@ showsearchh(){
 
 .back-image{
    background-image: url("../../../../../assets/message_back.jpg");
+   background-repeat: no-repeat;
+    background-size: cover;
 }
 input {
   margin-top: 10px;

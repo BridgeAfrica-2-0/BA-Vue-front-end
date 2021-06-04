@@ -43,6 +43,12 @@
                     class="form-control input-background"
                     placeholder="Search inbox"
                   />
+
+
+                 
+
+
+
                 </b-container>
               </div>
               <div>
@@ -85,7 +91,7 @@
 
 
                   <b-col class="col-2 text-center">
-                    <small> {{ message.timeStamp }} </small> <p class="">   <b-badge variant="primary"> {{ message.messageCount }} </b-badge>   </p>
+                    <small> {{ message.timeStamp }} </small> <p class="">   <b-badge variant="info"> {{ message.messageCount }} </b-badge>   </p>
                   </b-col>
 
 
@@ -181,7 +187,7 @@
 
 
                   <b-col class="col-3 text-center">
-                    <small class="text-center"> {{ message.timeStamp }} </small> <p class="text-center">   <b-badge variant="primary"> {{ message.messageCount }} </b-badge>   </p>
+                    <small class="text-center"> {{ message.timeStamp }} </small> <p class="text-center">   <b-badge variant="info"> {{ message.messageCount }} </b-badge>   </p>
                   </b-col>
 
 
@@ -493,11 +499,53 @@
 
                     <b-form-input
                     id="textarea"
-                    v-model="text"
+                    v-model="searchQuery"
                     class="input-background"
                     style="width: 100%"
                     placeholder="Type the name of person or Business..."
-                  ></b-form-input>     
+                     @click="showsearchh()"
+                  ></b-form-input>  
+
+         <br/>
+                   
+                   
+
+
+
+        
+           
+        <div class="table-responsive"  v-if="showsearch == true"  >
+
+            <table v-if="resources.length" class="table">
+                <thead>
+                    <tr>
+                        
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="item in resultQuery" :key="item.key"   class="p-2 message"
+                  @click="showInfo(false)">
+                        <td>       <b-avatar
+                class="d-inline-block "
+                variant="primary"
+                size="30"
+               
+
+                v-bind:src="item.profile"
+               
+              ></b-avatar>
+   <span class="bold">   {{item.name}}   </span>    </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+   
+
+
+
+
+
+       
 
 
 
@@ -516,7 +564,7 @@
                   
                   
 
-
+   
 
 
 
@@ -526,12 +574,12 @@
                     <b-col cols="2" class="p-0">   
 
                       <b-icon
-                        class="msg-icon primary icon-size  icon-top float-right text-right"
+                        class="msg-icon primary icon-size     icon-top float-right text-right"
                         icon="paperclip"
                       ></b-icon>    
                       
                       
-                      </b-col>       <b-col cols="8"  class="p-0">   
+                      </b-col>       <b-col cols="8"  class="p-0">        
 
 
 
@@ -586,13 +634,51 @@
 <script>
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
+  
+
 export default {
   components: {
     Navbar,
     Footer,
+   
   },
   data() {
     return {
+
+        showsearch:true,
+     selecteduser:false,
+
+      
+       searchQuery: null,
+        resources1:[
+            {title:"ABE Attendance",uri:"aaaa.com",category:"a",icon:null},
+            {title:"Accounting Services",uri:"aaaa.com",category:"a",icon:null},
+            {title:"Administration",uri:"aaaa.com",category:"a",icon:null},
+            {title:"Advanced Student Lookup",uri:"bbbb.com",category:"b",icon:null},
+            {title:"Art & Sciences",uri:"bbbb.com",category:"b",icon:null},
+            {title:"Auxiliares Services",uri:"bbbb.com",category:"b",icon:null},
+            {title:"Basic Skills",uri:"cccc.com",category:"c",icon:null},
+            {title:"Board of Trustees",uri:"dddd.com",category:"d",icon:null}
+        ]
+,
+
+
+      resources:[
+            {name:"blezour blec",profile:"https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg",type:"person",id:"1"},
+             {name:"itz blec blec",profile:"https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg",type:"person",id:"2"},
+
+              {name:"Maxine Moffet",profile:"https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg",type:"person",id:"3"},
+
+               {name:"Alicia kays",profile:"https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg",type:"person",id:"4"},
+
+                {name:"Lorem Ipsum",profile:"https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg",type:"person",id:"5"},
+                 {name:"blezour blec",profile:"https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg",type:"person",id:"6"},
+           
+        ]
+,
+
+
+
       message: {
         type: "",
         name: "Louis Litt",
@@ -604,12 +690,18 @@ export default {
       info: false,
       checked: false,
       text: "",
+      selected:[],
       chats: [
         {
           id: 0,
           type: "received",
           name: "Louis Litt",
           timeStamp: "3:00 PM",
+        
+
+
+
+
           message:
             "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Explicabo, quos? Fuga, nam dolores? Tempora, qui.",
         },
@@ -725,6 +817,24 @@ export default {
     };
   },
   methods: {
+
+   selectuser(){
+
+     this.showsearch = false ;
+
+     this.selecteduser=true ;
+
+   },
+
+showsearchh(){
+
+
+       this.showsearch = true ;
+}
+   
+   ,
+
+
     showMessages(arg) {
       this.show = arg;
     },
@@ -749,6 +859,21 @@ export default {
       this.text = "";
     },
   },
+
+
+  computed: {
+    resultQuery(){
+      if(this.searchQuery){
+      return this.resources.filter((item)=>{
+        return this.searchQuery.toLowerCase().split(' ').every(v => item.name.toLowerCase().includes(v))
+      })
+      }else{
+        return this.resources;
+      }
+    }
+  }
+
+
 };
 </script>
 
@@ -1086,6 +1211,8 @@ li {
 }
 
 
-
+.duration{
+  margin-top: 5px;
+}
 
 </style>

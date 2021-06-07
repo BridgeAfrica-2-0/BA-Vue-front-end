@@ -11,7 +11,7 @@
 
 
 
-    <b-tabs content-class="mt-3">
+    <b-tabs content-class="mt-3" pills>
       <b-tab title="Posts" active>
         <div class="row">
           <div class="container-fluid">

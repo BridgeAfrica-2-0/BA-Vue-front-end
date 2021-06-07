@@ -1,44 +1,44 @@
 <template>
 <div>
-  <b-card class="px-md-3">
-    <b-row>
-      <b-col cols="2" md="1" class="m-0 p-0">
-        <b-avatar
-            class="d-inline-block avat-comment"
-            variant="primary"
-            src="https://www.fivesquid.com/pics/t2/1594480468-145752-1-1.jpg"
+  <b-card class="px-md-3 mb-3">
+    
+
+
+     <b-row class="mt-2">
+          <b-col cols="3" md="1" class="m-md-0 p-md-0">
+            <b-avatar
+                variant="primary"
+                class="img-fluid avat-comment"
+                src="https://www.fivesquid.com/pics/t2/1594480468-145752-1-1.jpg"
+               
+                
+
+            ></b-avatar>
+          </b-col>
+          <b-col cols="9" md="11" class="p-0 m-0 pr-3">
             
-        ></b-avatar>
-      </b-col>
-      <b-col cols="10" md="11" class="m-0 p-0">
+            
+            <input placeholder="Post a business update"   v-b-modal.modal-xl  class="comment" type="text" />
 
-     
-        
+              <fas-icon
+                class="primary send-cmt"
+                :icon="['fas', 'paper-plane']"
+              />
 
-         <input   v-b-modal.modal-xl  placeholder=" Post a business update" class="comment mb-3" type="text" />
-         <hr />
-
-              
-
-
-       
-      </b-col>
+          </b-col>
+        </b-row>
 
 
-    </b-row>
+
+
 
  <hr width="100%" class="m-up" />
 
  <b-row>  <b-col cols="2" md="1">    </b-col>  
        <b-col cols="10" md="11"> 
-         
-         
-         <span class="float-left m-up">
-              
-                
 
-                  
-                  <b-button
+
+         <b-row>   <b-col cols="4">     <b-button
                       title="Add Movie"
                       size="sm"
                      
@@ -50,7 +50,8 @@
 
                 
                   </b-button>
-                  <b-button
+                  
+   </b-col>       <b-col cols="4">    <b-button
                       title="Add Hyperlink"
                       size="sm"
                       variant="outline-primary"
@@ -59,7 +60,42 @@
                        class="post-btn"
                   >
                      <fas-icon class="icons" :icon="['fas', 'file']" size="lg" /> <span class="username"> Attach File  </span>
-                  </b-button>
+                  </b-button>  </b-col>       
+                  
+                  
+                  
+                   <b-col cols="4"> <b-button
+                      title="Add Hyperlink"
+                      size="sm"
+                      variant="outline-primary"
+                      
+                       @click="chooseDocument()"
+                       class="post-btn"
+                  >
+                                                   
+                     
+                     
+                     
+                     
+                     <fas-icon class="icons" :icon="['fas', 'paper-plane']" size="lg"  />
+              
+              
+              
+              <span class="username"> Post  </span>
+                  </b-button>  </b-col> </b-row>
+         
+         
+         <span class="float-left m-up">
+              
+                
+
+                  
+                    
+
+
+
+
+
               
               </span>
         <span class="float-right">
@@ -71,8 +107,8 @@
 
 
        
-
-
+  </b-card>
+ <b-card class="px-md-3">
 
 
 
@@ -211,7 +247,11 @@
 
     </div>
 
-    <b-row class="mt-4">
+
+
+
+
+     <b-row class="mt-4">
       <b-col cols="12" class="mt-4">
         <b-row>
           <b-col cols="2" md="1" class="m-0 p-0">
@@ -343,6 +383,146 @@
       <Comment />
 
     </b-row>
+
+
+
+
+
+
+
+
+
+
+    <b-row class="mt-4">
+      <b-col cols="12" class="mt-4">
+        <b-row>
+          <b-col cols="2" md="1" class="m-0 p-0">
+            <b-avatar
+                class="d-inline-block avat"
+                variant="primary"
+                src="https://www.fivesquid.com/pics/t2/1594480468-145752-1-1.jpg"
+                
+                
+                
+            ></b-avatar>
+          </b-col>
+          <b-col cols="10" md="11" class="pt-2">
+            <h5 class="m-0 font-weight-bolder">
+              Heavy Gym
+              <span class="float-right">
+                      <b-dropdown variant="outline-primary" size="sm" no-caret>
+                        <template #button-content>
+                          <b-icon icon="three-dots" aria-hidden="true"  ></b-icon>
+                        
+                        </template>
+
+
+                        <!--
+                        <b-dropdown-item-button>
+                          <b-icon icon="lock-fill" aria-hidden="true"></b-icon>
+                          Locked <span class="sr-only">(Click to unlock)</span>
+                        </b-dropdown-item-button>
+                        <b-dropdown-divider></b-dropdown-divider>
+                        
+                        -->
+
+
+                        <b-dropdown-item-button variant="info">
+                          <b-icon icon="pencil" aria-hidden="true"></b-icon>
+                          Edit
+                        </b-dropdown-item-button>
+
+
+
+                        <b-dropdown-item-button variant="danger">
+                          <b-icon icon="trash-fill" aria-hidden="true"></b-icon>
+                          Delete
+                        </b-dropdown-item-button>
+
+
+
+                      </b-dropdown>
+                    </span>
+            </h5>
+            <p class="duration">1h Ago</p>
+          </b-col>
+        </b-row>
+        <b-row>
+          <b-col cols="12" class="mt-2">
+
+           
+
+            <p class="post-text">
+   
+    <read-more more-str="read more" :text="msg" link="#" less-str="read less" :max-chars="200"> </read-more>
+
+             
+            </p>
+          </b-col>
+        </b-row>
+        <b-row>
+          <b-col cols="12" class="mt-2"> 
+            <div class="">
+          
+
+             <lightbox :cells="3" :items="ima"></lightbox> 
+
+            </div>
+          </b-col>
+          <b-col class="mt-1">
+                  <span class="mr-3"
+                  ><b-icon
+                      icon="suit-heart"
+                      variant="primary"
+                      aria-hidden="true"
+                  ></b-icon>
+                    23</span
+                  >
+            <span
+            ><b-icon
+                icon="chat-fill"
+                variant="primary"
+                aria-hidden="true"
+            ></b-icon>
+                    123</span
+            >
+          </b-col>
+        </b-row>
+
+
+      
+       <b-row class="mt-2">
+          <b-col cols="3" md="1" class="m-md-0 p-md-0">
+            <b-avatar
+                variant="primary"
+                class="img-fluid avat-comment"
+                src="https://www.fivesquid.com/pics/t2/1594480468-145752-1-1.jpg"
+               
+                
+
+            ></b-avatar>
+          </b-col>
+          <b-col cols="9" md="11" class="p-0 m-0 pr-3">
+            
+            
+            <input placeholder="Post a Comment" class="comment" type="text" />
+
+              <fas-icon
+                class="primary send-cmt"
+                :icon="['fas', 'paper-plane']"
+              />
+
+          </b-col>
+        </b-row>
+
+        
+      </b-col>
+
+
+
+      <Comment />
+
+    </b-row>
    
 
     <b-row class="mt-4">
@@ -366,35 +546,14 @@
                           <b-icon icon="three-dots" aria-hidden="true"></b-icon>
                         
                         </template>
-                        <b-dropdown-item-button>
-                          <b-icon icon="lock-fill" aria-hidden="true"></b-icon>
-                          Locked <span class="sr-only">(Click to unlock)</span>
-                        </b-dropdown-item-button>
-                        <b-dropdown-divider></b-dropdown-divider>
-                        <b-dropdown-group header="Choose options" class="small">
-                          <b-dropdown-item-button>
-                            <b-icon icon="blank" aria-hidden="true"></b-icon>
-                            Option A <span class="sr-only">(Not selected)</span>
-                          </b-dropdown-item-button>
-                          <b-dropdown-item-button>
-                            <b-icon icon="check" aria-hidden="true"></b-icon>
-                            Option B <span class="sr-only">(Selected)</span>
-                          </b-dropdown-item-button>
-                          <b-dropdown-item-button>
-                            <b-icon icon="blank" aria-hidden="true"></b-icon>
-                            Option C <span class="sr-only">(Not selected)</span>
-                          </b-dropdown-item-button>
-                        </b-dropdown-group>
-                        <b-dropdown-divider></b-dropdown-divider>
+                       
                         <b-dropdown-item-button
-                        >Some action</b-dropdown-item-button
+                        >Edit</b-dropdown-item-button
                         >
-                        <b-dropdown-item-button
-                        >Some other action</b-dropdown-item-button
-                        >
-                        <b-dropdown-divider></b-dropdown-divider>
+                      
+                       
                         <b-dropdown-item-button variant="danger">
-                          <b-icon icon="trash-fill" aria-hidden="true"></b-icon>
+                          
                           Delete
                         </b-dropdown-item-button>
                       </b-dropdown>
@@ -589,34 +748,14 @@
                           
                         </template>
                         <b-dropdown-item-button>
-                          <b-icon icon="lock-fill" aria-hidden="true"></b-icon>
-                          Locked <span class="sr-only">(Click to unlock)</span>
+                         
+
+                         Edit
                         </b-dropdown-item-button>
-                        <b-dropdown-divider></b-dropdown-divider>
-                        <b-dropdown-group header="Choose options" class="small">
-                          <b-dropdown-item-button>
-                            <b-icon icon="blank" aria-hidden="true"></b-icon>
-                            Option A <span class="sr-only">(Not selected)</span>
-                          </b-dropdown-item-button>
-                          <b-dropdown-item-button>
-                            <b-icon icon="check" aria-hidden="true"></b-icon>
-                            Option B <span class="sr-only">(Selected)</span>
-                          </b-dropdown-item-button>
-                          <b-dropdown-item-button>
-                            <b-icon icon="blank" aria-hidden="true"></b-icon>
-                            Option C <span class="sr-only">(Not selected)</span>
-                          </b-dropdown-item-button>
-                        </b-dropdown-group>
-                        <b-dropdown-divider></b-dropdown-divider>
-                        <b-dropdown-item-button
-                        >Some action</b-dropdown-item-button
-                        >
-                        <b-dropdown-item-button
-                        >Some other action</b-dropdown-item-button
-                        >
-                        <b-dropdown-divider></b-dropdown-divider>
+                        
+                         
                         <b-dropdown-item-button variant="danger">
-                          <b-icon icon="trash-fill" aria-hidden="true"></b-icon>
+                         
                           Delete
                         </b-dropdown-item-button>
                       </b-dropdown>
@@ -732,7 +871,14 @@ name: "postNetwork",
       ],
       imagees: [
         "https://i.wifegeek.com/200426/f9459c52.jpg",
-        "https://i.wifegeek.com/200426/5ce1e1c7.jpg"
+        "https://i.wifegeek.com/200426/5ce1e1c7.jpg"    
+      ],
+
+
+      ima: [
+        "https://pbs.twimg.com/media/DoNa_wKUUAASSCF.jpg",
+        "https://pbs.twimg.com/media/DKO62sVXUAA0_AL.jpg",
+        "https://i.wifegeek.com/200426/5ce1e1c7.jpg" 
       ]
     };
   },

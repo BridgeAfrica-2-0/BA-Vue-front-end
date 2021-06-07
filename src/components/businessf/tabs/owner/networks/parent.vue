@@ -94,7 +94,7 @@
 
     
 
-    <b-modal hide-footer title="Edit network"   size="lg"  v-model="showModal">
+    <b-modal hide-footer title="Edit network"   size="md"  v-model="showModal">
 
       <b-container>  
       <b-form>
@@ -135,54 +135,70 @@
 
 
 
-
-
-
-          <b-form-group
+            
+              <b-form-group
                 label-cols-lg="12"
-                label="Purpose Of Network"
+                label="Email"
                 label-size="md"
                 label-class="font-weight-bold pt-0"
                 class="mb-0"
               >
-                <b-form-textarea
-                  id="textarea"
-                  v-model="text"
-                  placeholder=""
-                  rows="3"
-                  max-rows="6"
-                ></b-form-textarea>
+                <b-form-input id="network_name" placeholder="" required>  </b-form-input>
+              </b-form-group>
+
+
+
+
+
+
+              
+              <b-form-group
+                label-cols-lg="12"
+                label="Tel 1"
+                label-size="md"
+                label-class="font-weight-bold pt-0"
+                class="mb-0"
+              >
+                <b-form-input id="tel-1" placeholder="" required>  </b-form-input>
               </b-form-group>
 
 
            
-
-
-
-
-
-
-
-
+  
+              <b-form-group
+                label-cols-lg="12"
+                label="Tel 2"
+                label-size="md"
+                label-class="font-weight-bold pt-0"
+                class="mb-0"
+              >
+                <b-form-input id="network_name" placeholder="" required>  </b-form-input>
+              </b-form-group>
 
 
 
 
               <b-form-group
                 label-cols-lg="12"
-                label="Special Needs"
+                label="Location"
                 label-size="md"
                 label-class="font-weight-bold pt-0"
                 class="mb-0"
               >
-                <b-form-textarea
-                  id="textarea"
-                  v-model="text"
-                  placeholder=" "
-                  rows="3"
-                  max-rows="6"
-                ></b-form-textarea>
+                <b-form-input id="network_name" placeholder="" required>  </b-form-input>
               </b-form-group>
+
+
+
+
+
+
+
+
+
+
+
+
 
 
           
@@ -295,11 +311,7 @@ export default {
 <style >
 
 
-.lala .nav-fill{
-   
-    margin-top: -19px;
-     border: 1px solid rgba(0, 0, 0, 0.125);
-  }
+
 
 
 

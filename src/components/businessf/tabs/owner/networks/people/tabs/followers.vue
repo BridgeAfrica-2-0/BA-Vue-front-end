@@ -28,7 +28,7 @@
 
 
 <b-row> 
-<b-col md="12">  
+<b-col md="12" class="ml-0 mr-0">  
     <CommunityMembers/>
 
  </b-col>

@@ -30,11 +30,11 @@
        <b-row >     
            
            <b-col cols="3" class="text-center" >   
-           
+            <b-link class="cat"  @click="SetCat('Agriculture')" >
           
              <img class="img-fluid picture logo-img" src="@/assets/icons/mobile/agriculture.png"  /> 
               
-           <b-link class="cat"  @click="SetCat('Agriculture')" > Agriculture  </b-link>
+           Agriculture  </b-link>
 
                 
            </b-col>
@@ -42,35 +42,35 @@
            <b-col cols="3" class="text-center">   
       
 
-            
+             <b-link class="cat"  @click="SetCat('Restaurants')" >
              <img class="img-fluid picture logo-img" src="@/assets/icons/mobile/restaurants.png"  /> 
-             <b-link class="cat"  @click="SetCat('Restaurants')" > Restaurants  </b-link>
+             Restaurants  </b-link>
 
            </b-col>
 
 
            <b-col cols="3" class="text-center" >   
-             
+              <b-link class="cat"  @click="SetCat('Clothing')" > 
           
                 <img class="img-fluid picture logo-img" src="@/assets/icons/mobile/clothing.png"  /> 
-              <b-link class="cat"  @click="SetCat('Clothing')" > Clothing  </b-link>
+             Clothing  </b-link>
            </b-col>
 
 
            <b-col cols="3" class="text-center ">   
-     
+       <b-link class="cat"  @click="SetCat('MC')" >
              <img class="img-fluid picture logo-img" src="@/assets/icons/mobile/mayor.png"  /> 
 
-             <b-link class="cat"  @click="SetCat('MC')" > PI  </b-link>
+            PI  </b-link>
 
            </b-col>
 
 
 
            <b-col cols="3" class="text-center mt-2">   
-           
+            <b-link class="cat"  @click="SetCat('Electronics')" >
             <img class="img-fluid picture logo-img" src="@/assets/icons/mobile/electronics.png"  /> 
-           <b-link class="cat"  @click="SetCat('Electronics')" > Electronics  </b-link>
+           Electronics  </b-link>
               
            
 
@@ -78,27 +78,27 @@
            </b-col>
 
            <b-col cols="3" class="text-center mt-2">   
-      
+        <b-link class="cat"  @click="SetCat('Handicraft')" >
               <img class="img-fluid picture logo-img" src="@/assets/icons/mobile/handicrft 2.png"  /> 
             
-             <b-link class="cat"  @click="SetCat('Handicraft')" > Handicraft  </b-link>
+            Handicraft  </b-link>
 
            </b-col>
 
 
            <b-col cols="3" class="text-center mt-2">   
-             
+             <b-link class="cat"  @click="SetCat('HU')" >
           
                <img class="img-fluid picture logo-img" src="@/assets/icons/mobile/health unit.png"  /> 
-               <b-link class="cat"  @click="SetCat('HU')" > Health  </b-link>
+                Health  </b-link>
            </b-col>
 
 
            <b-col cols="3" class="text-center mt-2">   
-     
+      <b-link class="cat"  v-b-modal="'myModalla'"  >
             
                <img class="img-fluid picture logo-img" src="@/assets/icons/more.png"  /> 
-              <b-link class="cat"  v-b-modal="'myModalla'"  > More  </b-link>
+              More  </b-link>
 
            </b-col>
 
@@ -370,7 +370,7 @@
 
 
 
-
+          
 
 
         
@@ -2155,6 +2155,8 @@ case 'Handicraft': this.selectcategories = this.Handicraft_filters;
 
 
       }
+
+      this.$refs['myfilters'].show(); 
 
        
 

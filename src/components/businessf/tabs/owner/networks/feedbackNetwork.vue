@@ -45,9 +45,9 @@
               </b-col>
               <b-col cols="10" md="11" class="pt-2">
                 <h5 class="m-0 font-weight-bolder  feedback-name ">
-                  Mapoure Agrobusiness
+                <b-link>  Mapoure Agrobusiness  </b-link>   
                 </h5>
-                <p>1h Ago - <span class="text-primary">Feedback Type</span></p>
+                <p>1h Ago </p>
               </b-col>
             </b-row>
             <b-row>

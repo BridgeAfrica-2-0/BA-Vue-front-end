@@ -69,7 +69,7 @@
                 <b-button variant="primary" class="edit-btn  d-none d-md-inline"   v-b-modal.coverphoto > <fas-icon class="mr-2" :icon="['fas', 'pencil-alt']" size="lg" />   Edit </b-button>
                 
                 
-                <b-dropdown id="dropdown-1" class="float-right options dot-btn mt-2 mt-sm-2 mt-md-0 mr-3" no-caret variant="outline-primary">
+                <b-dropdown id="dropdown-1" class="float-right options dot-btn mt-2 mt-sm-2 mt-md-0 mr-3" no-caret variant="outline" style="border-color: #ffD20; color:  #ffD20">
                   <template #button-content>
                     <b-icon-three-dots></b-icon-three-dots>
                   </template>
@@ -335,7 +335,7 @@ object-fit: cover  !important;
 .profile-name{
      
      font-size: 32px;
-     color: white;
+     
    
   }
 
@@ -351,8 +351,8 @@ object-fit: cover  !important;
 
   width:112px;
    height:33px ;
-   background-color: #e4c229;
-   border-color:#e4c229 ;
+   background-color: #ffD200;
+   border-color:#ffD200 ;
 
 }
 
@@ -383,7 +383,7 @@ object-fit: cover  !important;
   .profile-name{
      
      font-size: 32px;
-     color: white;
+    
     
   }
 
@@ -412,23 +412,23 @@ object-fit: cover  !important;
   }
 
 
-.edit-btn{
+.edit-btn{   
 
   width:146px;
    height:40px ;
-   background-color: #e4c229;
+   background-color: #FFD200;
    border-color:#e4c229 ;
 
 }
 
 .edit-btn:hover{
  
-  border-color:#e4c229 ;
+  border-color:#b39500 ;
 }
 
 .edit-btn:focus{
  
-  border-color:#e4c229 ;
+  border-color:#b39500 ;
 }
 
 .edit-btn:active{
@@ -452,7 +452,8 @@ object-fit: cover  !important;
 
 .gradient{
 
-  background-image: linear-gradient(1deg, black, transparent); 
+ /* background-image: linear-gradient(1deg, black, transparent);  */
+  background-image: url("../assets/img/profile_back.png");
 }
 
  

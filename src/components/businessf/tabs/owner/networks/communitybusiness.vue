@@ -534,10 +534,7 @@ Width:160px
   border: 1px solid rgba(0, 0, 0, 0.125);
   margin-bottom: 10px;
 
-  margin-right: 8px;
  
-
-  padding: 7px;
 }
 
 

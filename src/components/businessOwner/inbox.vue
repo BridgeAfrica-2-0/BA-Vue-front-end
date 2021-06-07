@@ -1017,6 +1017,7 @@ h1 {
   position: relative;
   min-height: 70px;
   width: 100%;
+  height: 70px;
   padding: 10px;
 }
 .cnt-info {
@@ -1129,7 +1130,7 @@ li {
   .info-nav {
     position: relative;
     min-height: 70px;
-    
+    height: 70px;
     width: 100%;
     padding: 10px;
   }

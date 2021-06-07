@@ -28,11 +28,11 @@
             </p>
             <p>
             <b-icon icon="house-fill"  class="icon-size" variant="primary"></b-icon> <b> Home Town
-              Name:  </b>  <span class="text"> Dummy </span>
+              :  </b>  <span class="text"> Dummy </span>
             </p>
             <p>
              <b-icon icon="geo-alt-fill"  class="icon-size" variant="primary"></b-icon><b> Current
-              City Name: </b> <span class="text"> Dummy  </span>
+              City : </b> <span class="text"> Dummy  </span>
             </p>
             <p>
               <b-icon icon="people-fill"  class="icon-size"  variant="primary"></b-icon>  <b> Community:  </b> <span class="text"> 525   </span>
@@ -43,72 +43,88 @@
 
 
       
-    <b-modal id="modal-5" title=" Edit Profile"> 
+    <b-modal id="modal-5" title=" Edit Intro"> 
       
       
       
           <div class="form-card">
               <div class="row">
-                <div class="col-md-6">
-                  
+               
+                <div class="col-md-12">
 
-                </div>
-                <div class="col-md-6">
+
                   <div class="form-group">
-                    <label for="username"> DOB :</label><br />
+                    <label for="work_at"> Worked At :</label><br />
                     <input
-                      type="date"
-                      name="dob"
-                      id="dob"
-                      placeholder="Busness Name"
+                      type="text"
+                      name="alias"
+                      id="work_at"
+                      placeholder="work at"
                       class="form-control"
                     />
                   </div>
 
-                  <div class="form-group">
-                    <label for="alias">Gender:</label><br />
-                    <select id="category" class="form-control">
-                      <option value="" selected="" disabled="">
-                        Select Gender
-                      </option>
-                      <option>Male</option>
-                      <option>Female</option>
-                      <option>other</option>
-                    </select>
+                   <div class="form-group">
+                    <label for="studied_at"> Studied At :</label><br />
+                    <input
+                      type="text"
+                      name="alias"
+                      id="studied_at"
+                      placeholder="studied at"
+                      class="form-control"
+                    />
                   </div>
 
-                  <div class="form-group">
-                    <label for="country"> Country :</label><br />
 
-                      <country-select v-model="country" :country="country" topCountry="US"  class="form-control" />
+
+
+
+ 
+
   
-                    
-
-
-
+  
+ <div class="form-group">
+                    <label for="home_town"> Home Town :</label><br />
+                    <input
+                      type="text"
+                      name="alias"
+                      id="home_town"
+                      placeholder="home town"
+                      class="form-control"
+                    />
                   </div>
 
-                  <div class="form-group">
-                    <label for="city"> City :</label><br />
+
+
+
+
+
+
+
+
+
+
+ <div class="form-group">
+                    <label for="city"> Current City :</label><br />
                     <input
                       type="text"
                       name="alias"
                       id="city"
-                      placeholder="country"
+                      placeholder="work at"
                       class="form-control"
                     />
                   </div>
 
-                  <div class="form-group">
-                    <label for="Neighbor"> Neighbor :</label><br />
-                    <input
-                      type="text"
-                      name="alias"
-                      id="Neighbor"
-                      placeholder="Neighbor"
-                      class="form-control"
-                    />
-                  </div>
+
+
+
+
+                  
+
+
+
+
+                 
                 </div>
               </div>
             </div>

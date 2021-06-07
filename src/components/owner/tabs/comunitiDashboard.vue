@@ -1,5 +1,5 @@
 <template>
-  <div  class="lala">
+  <div  class="lalaa">
 
   
 
@@ -138,12 +138,6 @@ export default {
 
   
 
-
-   .lala .nav-fill{
-   
-    margin-top: -19px;
-     border: 1px solid rgba(0, 0, 0, 0.125);
-  }
 
 
 

@@ -490,6 +490,8 @@
           <b-col v-if="newMsg == true && info == false" class="p-0 col-xl-8 col-12">
             <div class="new-msg back-image" style="margin-right: 17px;">
               <div class="info-nav">
+
+
                 <b-row>
                   <b-col class="col-1 mt-3">
                     To
@@ -511,7 +513,7 @@
                    
 
 
-
+     
         
            
         <div class="table-responsive"  v-if="showsearch == true"  >
@@ -1016,6 +1018,7 @@ h1 {
 .info-nav {
   position: relative;
   min-height: 70px;
+  height: 70px;
   width: 100%;
   padding: 10px;
 }
@@ -1129,7 +1132,7 @@ li {
   .info-nav {
     position: relative;
     min-height: 70px;
-    
+    height: 70px;
     width: 100%;
     padding: 10px;
   }

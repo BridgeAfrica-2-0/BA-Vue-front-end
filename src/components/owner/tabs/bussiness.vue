@@ -22,9 +22,9 @@
      <hr />
 
      
-      <b-modal id="modal-1" title="Add Bussiness" hide-footer>
+      <b-modal id="modal-1" title="Add Bussiness"  size="lg"  hide-footer>
         <div class="row">
-          <div class="col-md-12 mx-0">
+          <div class="col-md-12 mx-0"> 
             <form id="msform">
               <!-- progressbar -->
               <ul id="progressbar">
@@ -70,57 +70,75 @@
                           class="form-control"
                         />
                       </div>
+
+
+
+
                       <div class="form-group">
-                        <label for="alias">Busness Name Alias:</label><br />
-                        <input
-                          type="text"
-                          name="alias"
-                          id="alias"
-                          placeholder="Busness Name Alias"
-                          class="form-control"
-                        />
+                        <label for="category">Business Category:</label><br />
+                       
+
+
+                        
+  
+   
+      <b-form-select
+            v-model="category"
+            :options="categories"
+            class="mb-3"
+            value-field="item"
+            text-field="name"
+          ></b-form-select>
+
+
+
+
+
+
+
+
                       </div>
-                      <div class="form-group">
-                        <label for="alias">Category:</label><br />
-                        <select id="category" class="form-control ">
-                          <option value="" selected="" disabled=""
-                            >Select Category</option
-                          >
-                          <option>Category1</option>
-                          <option>Category2</option>
-                        </select>
-                      </div>
+
+
+
+
+
+
+
                     </div>
                   </div>
 
+                           
+
                   <div class="row">
-                    <div class="col-md-12">
+
+
+
+                    <div class="col-md-6">
                       <div class="form-group">
                         <label for="username">Keywords</label><br />
                         <div class="col-md-12 pl-0 pr-0">
-                          No Choices
+                        
+
+                           <input
+                          type="text"
+                          name="username"
+                          id="username"
+                          placeholder="Enter Keyword"
+                          class="form-control"
+                        />
+
                         </div>
                       </div>
                     </div>
-                  </div>
 
-                  <div class="row">
+
+                    
                     <div class="col-md-6">
                       <div class="form-group">
-                        <label for="alias">Language:</label><br />
+                        <label for="username"> TomeZone: </label><br />
                         <select id="category" class="form-control ">
-                          <option value="" selected="" disabled=""
-                            >Select Language</option
-                          >
-                          <option>English</option>
-                          <option>Hindi</option>
-                        </select>
-                      </div>
-                    </div>
-                    <div class="col-md-6">
-                      <div class="form-group">
-                        <label for="username">TomeZone:</label><br />
-                        <select id="category" class="form-control ">
+
                           <option value="" selected="" disabled=""
                             >Select Timezone</option
                           >
@@ -166,30 +184,45 @@
               <fieldset class="position-relative opacity-100" v-if="fieldset2">
                 <div class="form-card">
                   <div class="row">
-                    <div class="input-group col-md-12 mb-4 selec">
-                      <label
-                        class="col-md-3 pl-0 control-label float-left"
+
+
+   <label
+                        class=" pl-0 ml-3 control-label float-left"
                         for="name"
-                        >Phone</label
-                      >
-                      <div class="col-md-9 pl-0 pr-0">
+                        >Phone</label >
+
+                    <div class="input-group col-md-12 mb-4 selec">
+                        
+
+
+
+                      
+                      <div class="col-md-12  pl-0 pr-0">
+
                         <select
                           id="country"
-                          class="form-control col-md-2 mr-3 float-left"
+                          class="form-control col-md-3 float-left"
                         >
                           <option>USA(+1)</option>
                           <option>USA(+1)</option>
                           <option>USA(+1)</option>
                           <option>India(+91)</option>
                         </select>
+
                         <input
                           id="tel"
                           name="tel"
                           type="tel"
                           placeholder=""
-                          class="form-control col-md-7"
+                          class="form-control col-md-9"
                         />
+
                       </div>
+
+
+
+
+
                       <div class="checkbox">
                         <label
                           ><input type="checkbox" value="" />This business does
@@ -198,6 +231,16 @@
                       </div>
                     </div>
                   </div>
+
+
+
+
+
+
+
+
+
+
 
                   <div class="row mb-3">
                     <div class="col-md-12">
@@ -502,7 +545,7 @@
 
 
 
-    </splide-slide>
+    </splide-slide>    
               </splide>
 
 
@@ -552,6 +595,35 @@ export default {
   name: "bussiness",
   data() {
     return {
+
+
+       category:'',
+       categories: [ 
+
+        { item: "Professional_and_home_service", name: "Professionals" },
+        { item: "Agriculture ", name: "Agriculture " },
+        { item: "Restaurant ", name: " Restaurant " },
+        { item: "Electronics ", name: "Electronics " },
+        { item: "Handicrafts", name: "Handicrafts" },
+        { item: "clothing", name: "clothing" },
+        { item: "Mechanics", name: "Mechanics" },
+        { item: "Health_unit ", name: "Health unit " },
+        { item: "Bars", name: "Bars" },
+        { item: "Hair_and_beauty ", name: "Hair and beauty " },
+        { item: "Real_estate ", name: "Real_estate " },
+        { item: "Travelling ", name: "Travelling " },
+         { item: "Hotels", name: "Hotels" },
+          { item: "station", name: " station  " },
+           { item: "Mayor_concils", name: "Mayor_concils" },
+           { item: "Taxis service", name: "Taxis service" },
+
+      ],
+
+
+
+
+
+
       fieldset1: true,
       fieldset2: false,
       fieldset3: false,
@@ -756,7 +828,7 @@ h4{
   
     font-family: 'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif;
     font-weight: normal;
-    font-size: 14px;
+    font-size: 12px;
     line-height: 30px;
     color: rgba(117,114,128,1);
     text-align: left;
@@ -816,7 +888,7 @@ Width:100px
   
     font-family: 'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif;
     font-weight: normal;
-    font-size: 14px;
+    font-size: 12px;
     line-height: 30px;
     color: rgba(117,114,128,1);
     text-align: left;

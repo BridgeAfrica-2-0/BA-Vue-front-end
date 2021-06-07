@@ -11,7 +11,7 @@
 
 
 
-    <b-tabs content-class="mt-3">
+    <b-tabs pills content-class="mt-3">
       <b-tab title="Posts" active>
         <div class="row">
           <div class="container-fluid">
@@ -63,6 +63,10 @@
                 </ul>
               </div>
             </div>
+
+
+
+
             <div class="img-gall">
               <a href="#!"
                 ><img
@@ -82,6 +86,9 @@
                   blanditiis.
                 </p>
               </b-modal>
+
+
+
               <div class="mediadesc">
                 <ul class="navbar-nav pull-right">
                   <li class="nav-item dropdown">
@@ -162,39 +169,9 @@
                 </ul>
               </div>
             </div>
-            <div class="img-gall">
-              <a href="#!"
-                ><img class="card-img" src="@/assets/img/m4.jpg" alt=""
-              /></a>
-              <div class="mediadesc">
-                <ul class="navbar-nav pull-right">
-                  <li class="nav-item dropdown">
-                    <b-dropdown
-                      size="sm"
-                      class="float-right"
-                      variant="link"
-                      toggle-class="text-decoration-none"
-                      no-caret
-                    >
-                      <template #button-content>
-                        <fas-icon
-                          class="drop-color font-weight-bolder"
-                          :icon="['fas', 'ellipsis-v']"
-                        />
-                      </template>
-                      <b-dropdown-item href="#">Download</b-dropdown-item>
-                      <b-dropdown-item href="#"
-                        >Make Profile Picture</b-dropdown-item
-                      >
-                      <b-dropdown-item href="#"
-                        >Make Cover Photo</b-dropdown-item
-                      >
-                      <b-dropdown-item href="#">Delete</b-dropdown-item>
-                    </b-dropdown>
-                  </li>
-                </ul>
-              </div>
-            </div>
+
+            
+            
             <div class="img-gall">
               <a href="#!"
                 ><img class="card-img" src="@/assets/img/m5.jpg" alt=""
@@ -330,7 +307,7 @@
             </div>
           </div>
         </div>
-      </b-tab>
+      </b-tab >
       <b-tab title="Albums">
         <div class="row">
           <div class="container-fluid">
@@ -361,10 +338,62 @@
 
 
 
+      
+
+            <div class="img-gall">
+              <a href="#!"
+                ><img class="card-img" src="@/assets/img/m4.jpg" alt=""
+              /></a>
+              <div class="mediadesc">
+                <ul class="navbar-nav pull-right">
+                  <li class="nav-item dropdown">
+                    <b-dropdown
+                      size="sm"
+                      class="float-right"
+                      variant="link"
+                      toggle-class="text-decoration-none"
+                      no-caret
+                    >
+                      <template #button-content>
+                        <fas-icon
+                          class="drop-color font-weight-bolder"
+                          :icon="['fas', 'ellipsis-v']"
+                        />
+                      </template>
+                      <b-dropdown-item href="#">Download</b-dropdown-item>
+                      <b-dropdown-item href="#"
+                        >Make Profile Picture</b-dropdown-item
+                      >
+                      <b-dropdown-item href="#"
+                        >Make Cover Photo</b-dropdown-item
+                      >
+                      <b-dropdown-item href="#">Delete</b-dropdown-item>
+                    </b-dropdown>
+                  </li>
+                </ul>
+
+
+
+
+
+                 <div class="createdesc botmedia">
+                    <div class="botmediades">
+                      <h6>Profile Picture</h6>
+                      <p>36 Items</p>
+                    </div>
+                  </div>
+              </div>
+            </div>
+
+
+
+
+
 
 
               <div class="createp img-gall predit2">
-                <a href="#!">
+ 
+                
                   <img
                     class="card-img"
                     src="@/assets/img/wankue-filler.jpg"
@@ -376,8 +405,10 @@
                       <p>36 Items</p>
                     </div>
                   </div>
-                </a>
+               
               </div>
+
+
               <div class="createp img-gall predit2">
                 <a href="#!">
                   <img
@@ -385,6 +416,39 @@
                     src="@/assets/img/wankue-filler.jpg"
                     alt=""
                   />
+
+                 
+
+                  <div class="mediadesc">
+                <ul class="navbar-nav pull-right">
+                  <li class="nav-item dropdown">
+                    <b-dropdown
+                      size="sm"
+                      class="float-right"
+                      variant="link"
+                      toggle-class="text-decoration-none"
+                      no-caret
+                    >
+                      <template #button-content>
+                        <fas-icon
+                          class="drop-color font-weight-bolder"
+                          :icon="['fas', 'ellipsis-v']"
+                        />
+                      </template>
+                      <b-dropdown-item href="#">Download</b-dropdown-item>
+                      <b-dropdown-item href="#"
+                        >Make Profile Picture</b-dropdown-item
+                      >
+                      <b-dropdown-item href="#"
+                        >Make Cover Photo</b-dropdown-item
+                      >
+                      <b-dropdown-item href="#">Delete</b-dropdown-item>
+                    </b-dropdown>
+                  </li>
+                </ul>
+              </div>
+
+
                   <div class="createdesc botmedia">
                     <div class="botmediades">
                       <h6>Cover Photos</h6>
@@ -393,6 +457,10 @@
                   </div>
                 </a>
               </div>
+
+
+
+
               <div class="createp img-gall predit2">
                 <a href="#!">
                   <img
@@ -506,6 +574,9 @@
                       </div>
                     </div>
                   </div>
+
+
+
                   <div class="img-gall">
                     <a href="#!"
                       ><img
@@ -538,6 +609,10 @@
                         </li>
                       </ul>
                     </div>
+
+
+
+
                   </div>
                   <div class="img-gall">
                     <a href="#!"

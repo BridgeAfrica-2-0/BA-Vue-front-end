@@ -31,6 +31,12 @@ import homeIconData from '@iconify-icons/mdi-light/home';
 IconifyIcon.addIcon('home', homeIconData);
 
 
+import ReadMore from 'vue-read-more';
+ 
+Vue.use(ReadMore);
+
+
+
 
 
 

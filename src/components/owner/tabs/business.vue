@@ -39,7 +39,7 @@
           </div>
         </b-col>
         <b-col md="5" cols="7"  lg="7" xl="7"  sm="5">
-          <p class="textt">
+          <p class="textt text">
             <strong class="title"> Super Car ltd </strong> <br />
              Car marketing  
               <br />  20k Community <br />
@@ -158,7 +158,7 @@
           </div>
         </b-col>
         <b-col md="5" cols="7"  lg="7" xl="7"  sm="5">
-          <p class="textt">
+          <p class="textt text">
             <strong class="title"> Super Car ltd </strong> <br />
              Car marketing  
               <br />  20k Community <br />

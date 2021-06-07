@@ -1,6 +1,6 @@
 <template>
   <div class="p-0">
-    <b-container fluid class="p-0" style="background-color: #ccc;" >
+    <b-container fluid class="p-0 gradient"  >
 
       <div class="container">
       <img
@@ -11,12 +11,18 @@
    </div>
 
 
+
+   
+
+
       <div  class="container p-63">
-        <b-row class="mt-md-2">
-          <b-col cols="8" md="6" class="m-0 p-0">
+        <b-row class="mt-md-2 text-center">
+          <b-col cols="12" md="12" class="m-0 p-0 text-center put-top ">
+
+       
             <b-avatar
               src="https://placekitten.com/400/300"
-              class=" float-left avat mr-2 mr-xl-5 mr-lg-5"
+              class="  avat  text-center"
               badge-variant="primary"
               badge-offset="10px"
              
@@ -32,6 +38,14 @@
 
 
 
+            
+
+
+
+
+
+
+
 
 
 
@@ -41,13 +55,47 @@
               <div class="text-box">
                 <span>
                   <h6
-                    class=" m-0 p-0 ml-3   profile-name"
+                    class=" profile-name text-center "
                   > 
-                  <b>  User Name  </b>   <br /> <span class="duration"> 1.5k Community </span>
+                  <b>  Blezour Blec   </b>   <br /> <span class="duration"> 1.5k Community </span>
                   </h6>
                   
                   
                 </span>
+
+                <div class=" ">
+              <span class="float-right profileedit-btn  put-topbtn "  >
+
+                <b-button variant="primary" class="edit-btn  d-none d-md-inline"   v-b-modal.coverphoto > <fas-icon class="mr-2" :icon="['fas', 'pencil-alt']" size="lg" />   Edit </b-button>
+                
+                
+                <b-dropdown id="dropdown-1" class="float-right options dot-btn mt-2 mt-sm-2 mt-md-0 mr-3" no-caret variant="outline-primary">
+                  <template #button-content>
+                    <b-icon-three-dots></b-icon-three-dots>
+                  </template>
+
+
+
+    
+
+                  <b-dropdown-item    v-b-modal.coverphoto
+                    > Change Cover</b-dropdown-item
+                  >
+
+
+
+                  <b-dropdown-item
+                    >Invite Friends On Bridge Africa</b-dropdown-item
+                  >
+
+
+
+                  <b-dropdown-item>View As</b-dropdown-item>
+                </b-dropdown>
+              </span>
+            </div>
+          
+
 
 
 
@@ -136,39 +184,10 @@
 
           </b-col>
 
-          <b-col cols="4" md="6" class="">
-            <div class="my-auto options">
-              <span class="float-right profileedit-btn"  >
-
-                <b-button variant="primary" class="edit-btn  d-none d-md-inline"   v-b-modal.coverphoto > <fas-icon class="mr-2" :icon="['fas', 'pencil-alt']" size="lg" />   Edit </b-button>
-                
-                
-                <b-dropdown id="dropdown-1" class="float-right options dot-btn mt-2 mt-sm-2 mt-md-0" no-caret variant="outline-primary">
-                  <template #button-content>
-                    <b-icon-three-dots></b-icon-three-dots>
-                  </template>
+         
 
 
 
-    
-
-                  <b-dropdown-item    v-b-modal.coverphoto
-                    > Change Cover</b-dropdown-item
-                  >
-
-
-
-                  <b-dropdown-item
-                    >Invite Friends On Bridge Africa</b-dropdown-item
-                  >
-
-
-
-                  <b-dropdown-item>View As</b-dropdown-item>
-                </b-dropdown>
-              </span>
-            </div>
-          </b-col>
         </b-row>
       </div>
     </b-container>
@@ -220,21 +239,8 @@ methods: {
 
 @media (max-width: 575.98px) {
  
-  .camera{
-    width: 10px;
-  }
-
-  .avatar-header-icon {
-    width: 25px;
-    height: 25px;
-    position: absolute;
-    left: 63px;
-    top: 51px;    
-    background-color: #e75c18;
-    color: white;
-    border-radius: 24px;
-    padding: 4px;
-  }
+ 
+  
 
   .text-box {
     margin: 0px;
@@ -248,6 +254,8 @@ methods: {
   }
 }
 @media (max-width: 768px) {
+
+
 
   .options{
 margin-right: -5px;
@@ -272,6 +280,22 @@ margin-right: -5px;
 
 @media (max-width: 760px) {
 
+  .put-top{
+
+    margin-top: -125px !important;
+
+ }
+
+
+ .put-topbtn{
+
+    margin-top: -150px !important;
+
+ }
+
+
+
+
   .profileedit-btn{
     margin-top: 5px;
   }
@@ -281,8 +305,12 @@ margin-right: -5px;
    width: 25px;
     height: 25px;
   position: absolute;
-  left: 47px;
-    top: 27px;
+  
+
+  margin-left: -20px;
+    top: 87px;
+
+
   background-color: #e75c18;
   color: white;
   border-radius: 24px;
@@ -299,14 +327,15 @@ object-fit: cover  !important;
 
   
   .avat{
-    width: 64px;
-    height: 64px;
+    width: 142px;
+    height: 142px;
   }
 
 
 .profile-name{
      
-     font-size: 14px;
+     font-size: 32px;
+     color: white;
    
   }
 
@@ -333,6 +362,19 @@ object-fit: cover  !important;
 
 
 @media (min-width: 760px) {
+  .put-top{
+
+    margin-top: -155px  !important;
+
+ }
+
+ .put-topbtn{
+
+    margin-top: -190px !important;
+
+ }
+
+
 
   .profileedit-btn{
     margin-top: 10px;
@@ -340,7 +382,8 @@ object-fit: cover  !important;
 
   .profile-name{
      
-     font-size: 16px;
+     font-size: 32px;
+     color: white;
     
   }
 
@@ -348,8 +391,9 @@ object-fit: cover  !important;
   width: 2em;
   height: 2em;
   position: absolute;
-  left: 87px;
-  top: 51px;
+ 
+  top: 100px;
+ margin-left: -20px;
   background-color: #e75c18;
   color: white;
   border-radius: 24px;
@@ -357,8 +401,8 @@ object-fit: cover  !important;
 }
 
   .avat{
-    width: 102px;
-    height: 102px;
+    width: 168px;
+    height: 168px;
   }
   .banner{
         height: 426px;
@@ -406,5 +450,11 @@ object-fit: cover  !important;
 }
 
 
+.gradient{
+
+  background-image: linear-gradient(1deg, black, transparent); 
+}
+
+ 
 
 </style>

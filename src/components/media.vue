@@ -7,7 +7,7 @@
 
 
       <span class="float-right"
-        ><b-icon icon="eye-fill" variant="primary"></b-icon> View All</span
+        > <b-link><b-icon icon="eye-fill" variant="primary">   </b-icon> View All  </b-link></span
       >
 
       <b-card-text>

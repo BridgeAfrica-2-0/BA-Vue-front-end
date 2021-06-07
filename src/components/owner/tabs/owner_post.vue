@@ -267,12 +267,14 @@
         </b-row>
         <b-row>
           <b-col cols="12" class="mt-2">
+
+           
+
             <p class="post-text">
-              Lorem Ipsum has been the industry's standard dummy text ever
-              since the 1500s, when an unknown printer took a galley of
-              type and scrambled it to make a type specimen book. It has
-              survived not only five centuries, but also the leap into
-              electronic typesetting, remaining essentially unchanged.😛
+   
+    <read-more more-str="read more" :text="msg" link="#" less-str="read less" :max-chars="200"> </read-more>
+
+             
             </p>
           </b-col>
         </b-row>
@@ -335,6 +337,11 @@
 
         
       </b-col>
+
+
+
+      <Comment />
+
     </b-row>
    
 
@@ -454,7 +461,11 @@
           </b-col>
         </b-row>
       </b-col>
+
+        <Comment />
     </b-row>
+
+    
 
     <b-row class="mt-4">
       <b-col cols="12" class="mt-4">
@@ -477,35 +488,14 @@
                           <b-icon icon="three-dots" aria-hidden="true"></b-icon>
                           
                         </template>
-                        <b-dropdown-item-button>    
-                          <b-icon icon="lock-fill" aria-hidden="true"></b-icon>
-                          Locked <span class="sr-only">(Click to unlock)</span>
-                        </b-dropdown-item-button>
-                        <b-dropdown-divider></b-dropdown-divider>
-                        <b-dropdown-group header="Choose options" class="small">
-                          <b-dropdown-item-button>
-                            <b-icon icon="blank" aria-hidden="true"></b-icon>
-                            Option A <span class="sr-only">(Not selected)</span>
-                          </b-dropdown-item-button>
-                          <b-dropdown-item-button>
-                            <b-icon icon="check" aria-hidden="true"></b-icon>
-                            Option B <span class="sr-only">(Selected)</span>
-                          </b-dropdown-item-button>
-                          <b-dropdown-item-button>
-                            <b-icon icon="blank" aria-hidden="true"></b-icon>
-                            Option C <span class="sr-only">(Not selected)</span>
-                          </b-dropdown-item-button>
-                        </b-dropdown-group>
-                        <b-dropdown-divider></b-dropdown-divider>
+                      
+                       
                         <b-dropdown-item-button
-                        >Some action</b-dropdown-item-button
+                        >Edit</b-dropdown-item-button
                         >
-                        <b-dropdown-item-button
-                        >Some other action</b-dropdown-item-button
-                        >
-                        <b-dropdown-divider></b-dropdown-divider>
+                      
                         <b-dropdown-item-button variant="danger">
-                          <b-icon icon="trash-fill" aria-hidden="true"></b-icon>
+                         
                           Delete
                         </b-dropdown-item-button>
                       </b-dropdown>
@@ -573,6 +563,8 @@
           </b-col>
         </b-row>
       </b-col>
+
+        <Comment />
     </b-row>
 
     <b-row class="mt-4">
@@ -699,11 +691,23 @@
 
 <script>
 
-
+import Comment from "../comment";
 export default {
 name: "postNetwork",
+
+ components: {
+    Comment
+    
+    
+    
+  },
+  
   data() {
     return {
+
+      msg:" Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.😛",
+
+
       images: [
         "https://i.wifegeek.com/200426/f9459c52.jpg",
         "https://i.wifegeek.com/200426/5ce1e1c7.jpg",

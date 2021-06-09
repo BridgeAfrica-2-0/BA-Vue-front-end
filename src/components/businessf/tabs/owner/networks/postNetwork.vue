@@ -35,11 +35,12 @@
 
  <hr width="100%" class="m-up" />
 
- <b-row>  <b-col cols="2" md="1">    </b-col>  
-       <b-col cols="10" md="11"> 
+ 
+  <b-row>    
+       <b-col cols="12" md="12" class="m-0 p-0"> 
 
 
-         <b-row>   <b-col cols="4">     <b-button
+         <b-row  class="m-0 p-0">   <b-col cols="5" class="text-right m-0 p-0">     <b-button
                       title="Add Movie"
                       size="sm"
                      
@@ -52,7 +53,7 @@
                 
                   </b-button>
                   
-   </b-col>       <b-col cols="4">    <b-button
+   </b-col>       <b-col cols="4" class="text-right m-0 p-0">    <b-button
                       title="Add Hyperlink"
                       size="sm"
                       variant="outline-primary"
@@ -65,9 +66,9 @@
                   
                   
                   
-                   <b-col cols="4"> <b-button
+                   <b-col cols="3" class="text-right p-0 m-0"> <b-button
                       title="Add Hyperlink"
-                      size="sm"
+                      size="sm"       
                       variant="outline-primary"
                       
                        @click="chooseDocument()"
@@ -86,26 +87,8 @@
                   </b-button>  </b-col> </b-row>
          
          
-         <span class="float-left m-up">
-              
-                
-
-                  
-                    
-
-
-
-
-
-              
-              </span>
-        <span class="float-right">
-               
-              </span> 
-              
               
                </b-col>          </b-row>
-
 
                
 

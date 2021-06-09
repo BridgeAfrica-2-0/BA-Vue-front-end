@@ -45,13 +45,10 @@
         v-model="hometown"
         placeholder="School"
       ></b-form-input>
-      <b-form-textarea
-        id="textarea"
-        v-model="description"
-        placeholder="Description"
-        rows="3"
-        max-rows="6"
-      ></b-form-textarea>
+     
+
+
+     
 
       <b-form-checkbox
         id="checkbox-1"

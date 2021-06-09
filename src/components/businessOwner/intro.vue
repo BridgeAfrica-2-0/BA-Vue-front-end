@@ -124,60 +124,51 @@
                     </div>
         <b-form-group
           id="input-group-1"
-          label="Worked At"
+          label="Country"
           label-for="input-1"
           label-size="sm"
         >
           <b-form-input
             id="input-1"
             class="mt-1"
-            v-model="workedAt"
+          
             type="text"
             required
           ></b-form-input>
         </b-form-group>
         <b-form-group
           id="input-group-2"
-          label="Studied At"
+          label="City"
           label-for="input-2"
           label-size="sm"
         >
           <b-form-input
             id="input-1"
             class="mt-1"
-            v-model="lastEducation"
+           
             type="text"
             required
           ></b-form-input>
         </b-form-group>
         <b-form-group
           id="input-group-2"
-          label="Home Town"
+          label="Neigbourhood"
           label-for="input-2"
           label-size="sm"
         >
-          <b-form-input
+
+
+
+         <b-form-input
             id="input-1"
             class="mt-1"
-            v-model="homeTown"
+           
             type="text"
             required
           ></b-form-input>
+         
         </b-form-group>
-        <b-form-group
-          id="input-group-2"
-          label="Current City"
-          label-for="input-2"
-          label-size="sm"
-        >
-          <b-form-input
-            id="input-1"
-            class="mt-1"
-            v-model="cityName"
-            type="text"
-            required
-          ></b-form-input>
-        </b-form-group>
+        
         <b-form-group
           id="input-group-2"
           label="Phone Contact"

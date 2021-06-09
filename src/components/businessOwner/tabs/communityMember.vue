@@ -45,7 +45,7 @@
                         xl="12"
                         class="mt-lg-2"
                       >
-                       <div class="mt-2 mt-lg-0 mt-xl-0 username">
+                       <div class="mt-3 mt-lg-0 mt-xl-0 username">
                           <b> howty Itz blec </b>
                        </div>
                       </b-col>
@@ -56,9 +56,9 @@
                         cols="6"
                        
                         xl="12"
-                        class="mt-3 mt-lg-1 mt-xl-0"
+                        class="mt-3 mt-lg-1 mt-xl-3"
                       >
-                        <h6 class="follower">5K Community</h6>
+                        <h6 class="follower m-15">5K Community</h6>
                       </b-col>
                     </b-row>
                   </div>
@@ -117,6 +117,18 @@
 
 
 
+
+
+
+
+
+
+
+      
+
+
+
+      
 
 
 
@@ -146,7 +158,7 @@
                         xl="12"
                         class="mt-lg-2"
                       >
-                       <div class="mt-2 mt-lg-0 mt-xl-0 username">
+                       <div class="mt-3 mt-lg-0 mt-xl-0 username">
                           <b> howty Itz blec </b>
                        </div>
                       </b-col>
@@ -157,9 +169,9 @@
                         cols="6"
                        
                         xl="12"
-                        class="mt-3 mt-lg-1 mt-xl-0"
+                        class="mt-3 mt-lg-1 mt-xl-3"
                       >
-                        <h6 class="follower">5K Community</h6>
+                        <h6 class="follower m-15">5K Community</h6>
                       </b-col>
                     </b-row>
                   </div>
@@ -211,117 +223,6 @@
           </b-col>
         </b-row>
       </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
- <div class="people-style border shadow">
-        <b-row class="mb-1">
-          <b-col md="3" cols="4" sm="4" class="my-auto">
-            <b-avatar
-              class="p-avater"
-              variant="primary"
-              src="https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg"
-             
-            ></b-avatar>
-          </b-col>
-
-          <b-col md="8" cols="8" sm="8" >
-            <div>
-              <b-row class="shift">
-                <b-col md="12" lg="6" xl="6" >
-                  <div class="e-name">
-                    <b-row>
-                      <b-col
-                        md="6"
-                        lg="12"
-                        cols="6"
-                        
-                        xl="12"
-                        class="mt-lg-2"
-                      >
-                       <div class="mt-2 mt-lg-0 mt-xl-0 username">
-                          <b> howty Itz blec </b>
-                       </div>
-                      </b-col>
-
-                      <b-col
-                        md="6"
-                        lg="12"
-                        cols="6"
-                       
-                        xl="12"
-                        class="mt-3 mt-lg-1 mt-xl-0"
-                      >
-                        <h6 class="follower">5K Community</h6>
-                      </b-col>
-                    </b-row>
-                  </div>
-                </b-col>
-
-                <b-col lg="6" xl="6" cols="12"  md="12">
-                  <div>
-                    <b-row class="mt-lg-0">
-                      <b-col
-                        md="6"
-                        lg="12"
-                        cols="6"
-                       
-                        xl="12"
-                        class="mt-2 mt-lg-2 mt-xl-2 btn-2 center"
-                      >
-                        <b-button
-                          block
-                          variant="primary"
-                          size="sm"
-                          class="b-background flexx pobtn shadow"
-                        >
-                           <i class="fas fa-envelope   fa-lg btn-icon "></i>  <span class="btn-text">Message</span> 
-                        </b-button>
-                      </b-col>
-
-                      <b-col
-                        md="6"
-                        lg="12"
-                        cols="6"
-                       
-                        xl="12"
-                        class="mt-2 mt-lg-2 mt-xl-2 btn-2 center"
-                      >
-                        <b-button
-                          block
-                          size="sm"
-                          class="b-background flexx pobtn shadow"
-                          variant="primary"
-                        >
-                                      <i class="fas fa-user-plus  fa-lg btn-icon "></i>  <span class="btn-com">Community</span>
-                        </b-button>
-                      </b-col>
-                    </b-row>
-                  </div>
-                </b-col>
-              </b-row>
-            </div>
-          </b-col>
-        </b-row>
-      </div>
-
-
-
-
-
-
-
-
 
 
 
@@ -641,6 +542,10 @@ f-right {
     display: flex;
     font-size: 10px;
   }
+
+  .m-15{
+    margin-left: -15px;
+  }
 }
 
 
@@ -773,6 +678,14 @@ f-right {
 
 
  
+</style>
+
+<style> 
+ 
+ .follower{
+   font-size:12px  !important;
+ }
+
 </style>
 
 

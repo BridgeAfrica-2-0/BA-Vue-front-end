@@ -101,41 +101,9 @@
       size="md"
     >
       <b-form>
-        <b-form-group
-          id="input-group-1"
-          label="About Title"
-          label-for="input-1"
-          label-size="sm"
-        >
-          <b-form-input
-            id="input-1"
-            class="mt-2"
-            v-model="leftTitle"
-            type="text"
-            required
-          ></b-form-input>
-        </b-form-group>
-        <b-form-group
-          id="input-group-2"
-          label="About Description"
-          label-for="textarea"
-          label-size="sm"
-        >
-          <b-form-textarea
-            id="textarea"
-            class="mt-2"
-            v-model="textToo"
-            rows="6"
-            max-rows="6"
-          ></b-form-textarea>
-        </b-form-group>
-        <b-button
-          class="mt-2 btn-block btn-primary"
-          variant="primary"
-          @click="validate('bv-modal-example1')"
-        >
-          Edit</b-button
-        >
+        
+
+        
       </b-form>
     </b-modal>
     <b-modal
@@ -145,62 +113,100 @@
       v-model="edit2"
     >
       <b-form>
+       
+         
+
+
+          <div class="form-group">
+                        <label for="username">Busness Name:</label><br />
+                        <input
+                          type="text"
+                          name="username"
+                          id="username"
+                          placeholder="Busness Name"
+                          class="form-control"
+                        />
+                      </div>
+
+
+
+
+                      
+                      <div class="form-group">
+                        <label for="alias">Category:</label><br />
+                        <select id="category" class="form-control ">
+                          <option value="" selected="" disabled=""
+                            >Select Category</option
+                          >
+                          <option>Category1</option>
+                          <option>Category2</option>
+                        </select>
+                      </div>
+
+
+
+                      <div class="form-group">
+                        <label for="username">Keywords</label><br />
+                        <div class="col-md-12 pl-0 pr-0">
+                          No Choices
+
+                          <input
+                          type="text"
+                          name="alias"
+                          id="alias"
+                          placeholder="Enter your Keywords"
+                          class="form-control"
+                        />
+
+                      </div>
+                    </div>
         <b-form-group
           id="input-group-1"
-          label="Business Name"
+          label="Country"
           label-for="input-1"
           label-size="sm"
         >
           <b-form-input
             id="input-1"
             class="mt-1"
-            v-model="workedAt"
+          
             type="text"
             required
           ></b-form-input>
         </b-form-group>
         <b-form-group
           id="input-group-2"
-          label="Category"
+          label="City"
           label-for="input-2"
           label-size="sm"
         >
           <b-form-input
             id="input-1"
             class="mt-1"
-            v-model="lastEducation"
+           
             type="text"
             required
           ></b-form-input>
         </b-form-group>
         <b-form-group
           id="input-group-2"
-          label="Home Town"
+          label="Neigbourhood"
           label-for="input-2"
           label-size="sm"
         >
-          <b-form-input
+
+
+
+         <b-form-input
             id="input-1"
             class="mt-1"
-            v-model="homeTown"
+           
             type="text"
             required
           ></b-form-input>
+         
         </b-form-group>
-        <b-form-group
-          id="input-group-2"
-          label="Current City"
-          label-for="input-2"
-          label-size="sm"
-        >
-          <b-form-input
-            id="input-1"
-            class="mt-1"
-            v-model="cityName"
-            type="text"
-            required
-          ></b-form-input>
-        </b-form-group>
+        
         <b-form-group
           id="input-group-2"
           label="Phone Contact"
@@ -215,26 +221,6 @@
             required
           ></b-form-input>
         </b-form-group>
-
-
-        <b-form-group
-          id="input-group-2"
-          label=" Contact 2"
-          label-for="input-2"
-          label-size="sm"
-        >
-          <b-form-input
-            id="input-1"
-            class="mt-1"
-            v-model="telephone"
-            type="tel"
-            required
-          ></b-form-input>
-        </b-form-group>
-
-
-
-
         <b-form-group
           id="input-group-2"
           label="Business Email"
@@ -249,6 +235,10 @@
             required
           ></b-form-input>
         </b-form-group>
+
+
+
+
         <b-button
           class="mt-3 btn-block"
           variant="primary"

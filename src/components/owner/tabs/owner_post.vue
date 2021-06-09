@@ -10,7 +10,7 @@
                 variant="primary"
                 class="img-fluid avat-comment"
                 src="https://www.fivesquid.com/pics/t2/1594480468-145752-1-1.jpg"
-               
+                
                 
 
             ></b-avatar>
@@ -34,11 +34,11 @@
 
  <hr width="100%" class="m-up" />
 
- <b-row>  <b-col cols="2" md="1">    </b-col>  
-       <b-col cols="10" md="11"> 
+ <b-row>    
+       <b-col cols="12" md="12" class="m-0 p-0"> 
 
 
-         <b-row>   <b-col cols="4">     <b-button
+         <b-row  class="m-0 p-0">   <b-col cols="5" class="text-right m-0 p-0">     <b-button
                       title="Add Movie"
                       size="sm"
                      
@@ -46,12 +46,12 @@
                        @click="chooseVideo()"  
                         class="post-btn"
                   >
-                     <fas-icon class="icons" :icon="['fas', 'photo-video']" size="lg" /> <span class="username"> Photo/Video </span>
+                     <fas-icon class="icons" :icon="['fas', 'photo-video']" size="lg" /> <span class="username"> Photo/ Video </span>
 
                 
                   </b-button>
                   
-   </b-col>       <b-col cols="4">    <b-button
+   </b-col>       <b-col cols="4" class="text-right m-0 p-0">    <b-button
                       title="Add Hyperlink"
                       size="sm"
                       variant="outline-primary"
@@ -64,7 +64,7 @@
                   
                   
                   
-                   <b-col cols="4"> <b-button
+                   <b-col cols="3" class="text-right p-0 m-0"> <b-button
                       title="Add Hyperlink"
                       size="sm"
                       variant="outline-primary"
@@ -85,25 +85,11 @@
                   </b-button>  </b-col> </b-row>
          
          
-         <span class="float-left m-up">
-              
-                
-
-                  
-                    
-
-
-
-
-
-              
-              </span>
-        <span class="float-right">
-               
-              </span> 
-              
               
                </b-col>          </b-row>
+
+
+      
 
 
        

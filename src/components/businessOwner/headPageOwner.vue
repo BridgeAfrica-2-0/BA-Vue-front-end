@@ -14,11 +14,10 @@
        
 
             <img
-              src="https://centremultisports.org/app/uploads/2019/10/gym-fit-poids-deadlift-bar.jpg"
+              src="@/assets/img/business1.png"
               
               class="r-image"
             />
-
 
 
     </splide-slide>
@@ -28,7 +27,8 @@
        
        
             <img
-              src="https://cdn.radiofrance.fr/s3/cruiser-production/2018/11/6583a0b6-5d2a-4f3b-a167-1391597c28be/801x410_gettyimages-961177712.jpg"
+             
+               src="@/assets/img/business 2.png"
               
               class="r-image"
             />
@@ -42,7 +42,7 @@
        
 
             <img
-              src="https://www.theislandhotel.eu/wp-content/uploads/sites/4/2015/12/The-Gym-2-1.jpg"  
+               src="@/assets/img/business 3.png"
               
               class="r-image"
             />
@@ -102,7 +102,7 @@
                   <h6
                     class=" m-0 p-0 ml-3   profile-name"
                   > 
-                  <b>  Heavy Gym  </b>   <br /> <span class="community"> 1.5k Community </span>
+               <b-link>     <b>  Heavy Gym  </b>    </b-link>   <br /> <span class="community"> 1.5k Community </span>
                   </h6>
                   
                   
@@ -216,14 +216,14 @@
                   >
 
 
-
+<!--
                   <b-dropdown-item
                     >Invite Friends On Bridge Africa</b-dropdown-item
                   >
 
 
 
-                  <b-dropdown-item>View As</b-dropdown-item>
+                  <b-dropdown-item>View As</b-dropdown-item>  -->
                 </b-dropdown>
 
                 
@@ -500,7 +500,7 @@ margin-right: -5px;
        
        
 .r-image{
-height:426px ;
+height:486px ;
 object-fit: cover;
 width: 100%;
 
@@ -563,7 +563,7 @@ width: 100%;
   height: 38px;
   width: 91px;
  position: relative;
-  margin-top: -100px;
+  margin-top: -50px;
   left: -20px;
   background-color: transparent;
   color: #fff;

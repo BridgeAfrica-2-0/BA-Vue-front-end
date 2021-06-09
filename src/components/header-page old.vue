@@ -15,9 +15,9 @@
    
 
 
-      <div  class="container-fluid p-63">
-        <b-row class="mt-md-2 text-left">
-          <b-col cols="12" md="12" class="m-0 p-0 text-left put-top ">
+      <div  class="container p-63">
+        <b-row class="mt-md-2 text-center">
+          <b-col cols="12" md="12" class="m-0 p-0 text-center put-top ">
 
        
             <b-avatar
@@ -37,15 +37,7 @@
 
 
 
-             <span style="display: inline-block;">
-                  <h6
-                    class=" profile-name text-center "
-                  > 
-                  <b>  Blezour Blec   </b>   <br /> <span class="duration"> 1.5k Community </span>
-                  </h6>
-                  
-                  
-                </span>
+
             
 
 
@@ -61,7 +53,15 @@
 
             <div class="">
               <div class="text-box">
-               
+                <span>
+                  <h6
+                    class=" profile-name text-center "
+                  > 
+                  <b>  Blezour Blec   </b>   <br /> <span class="duration"> 1.5k Community </span>
+                  </h6>
+                  
+                  
+                </span>
 
                 <div class=" ">
               <span class="float-right profileedit-btn  put-topbtn "  >
@@ -282,14 +282,14 @@ margin-right: -5px;
 
   .put-top{
 
-    margin-top: -45px !important;
+    margin-top: -125px !important;
 
  }
 
 
  .put-topbtn{
 
-  margin-top: -50px !important;
+    margin-top: -150px !important;
 
  }
 
@@ -308,7 +308,7 @@ margin-right: -5px;
   
 
   margin-left: -20px;
-   top: 47px;
+    top: 87px;
 
 
   background-color: #e75c18;
@@ -327,20 +327,14 @@ object-fit: cover  !important;
 
   
   .avat{
-    width: 84px;
-    height: 84px;
+    width: 142px;
+    height: 142px;
   }
 
 
 .profile-name{
      
-    
-
-     font-size: 18px !important;
-    font-size: 32px;
-    margin-top: -0px;
-    margin-left: 30px;
-    position: absolute;
+     font-size: 32px;
      
    
   }
@@ -370,13 +364,13 @@ object-fit: cover  !important;
 @media (min-width: 760px) {
   .put-top{
 
-    margin-top: -75px  !important;
+    margin-top: -155px  !important;
 
  }
 
  .put-topbtn{
 
-    margin-top: -100px !important;
+    margin-top: -190px !important;
 
  }
 
@@ -389,11 +383,6 @@ object-fit: cover  !important;
   .profile-name{
      
      font-size: 32px;
-
-     font-size: 32px;
-    margin-top: -10px;
-    margin-left: 30px;
-    position: absolute;
     
     
   }
@@ -460,14 +449,13 @@ object-fit: cover  !important;
   
 }
 
-/*
+
 .gradient{
 
-  background-image: linear-gradient(1deg, black, transparent);  */
- /*  background-image: url("../assets/img/profile_back.png");  
+ /* background-image: linear-gradient(1deg, black, transparent);  */
+  background-image: url("../assets/img/profile_back.png");
+}
 
-} 
- */
  
 
 </style>

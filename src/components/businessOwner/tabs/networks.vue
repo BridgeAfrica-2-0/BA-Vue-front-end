@@ -490,9 +490,7 @@ p {
     top: 100px;
     padding: 20px;
   }
-  .btn {
-    margin-left: 60px;
-  }
+ 
 }
 
 
@@ -509,12 +507,6 @@ p {
 
 @media only screen and (max-width: 760px) {
 
-.btn{
-
-font-size: 12px;
-    width: 100px;
-
-}
 
 h4{
   font-size: 15px;
@@ -561,11 +553,7 @@ h4{
   margin-left: -15px;
 }
 
-.btn {
-  font-size: 13px;
 
-  display: flex;
-}
 
 .ico {
   margin-right: 5px;
@@ -599,31 +587,7 @@ h4{
 
     
 
-    .btn-icon{
-  margin-top:3px;
-}
 
-
-.btn-text{
-
-   margin-left: 5px;
-}
-
-
-.btn-com{
-  margin-left:3px;
-}
-
-
-}
-
-.btnpngs{
-      width: 20px;
-    margin-right: 5px;
-}
-
-.btn{
-  border-radius: 5px;
 }
 
 
@@ -697,14 +661,7 @@ padding: 1px;
   margin-bottom: 30px;
 }
 
-.btn{
-  padding-top: 6px;
-  font-size:10px;
 
-  Height : 28px;
-Width:85px
-
-}
 
 
 
@@ -765,14 +722,6 @@ padding: 1px;
   margin-bottom: 30px;
 }
 
-.btn{
-  padding-top: 6px;
-
-  Height : 38px;
-Width:123px
-
-}
-
 
 
 .r-image {
@@ -803,11 +752,6 @@ Width:160px
   margin-left: -15px;
 }
 
-.btn {
-  
-
-  display: flex;
-}
 
 .ico {
   margin-right: 5px;
@@ -887,13 +831,6 @@ Width:160px
 
 
 
-.btn {
- 
-
-  display: flex;
-
-    padding-right: 60px;
-}
 
 h4{
   font-size: 15px;
@@ -905,14 +842,6 @@ h4{
 
 
 
-
-@media only screen and (max-width: 520px){
-
-.btn {
-    display: flex;
-    
-}
-}
 
 
 

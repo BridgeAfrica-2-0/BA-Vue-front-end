@@ -17,7 +17,7 @@
             </b-avatar>
           </div>
           <div class="d-inline-block ml-4 float-left mt-4">
-            <h5 class="font-weight-bolder name">User Name</h5>
+      <b-link>       <h5 class="font-weight-bolder name">User Name</h5>     </b-link> 
             <p>
               <br />
               <span class="k15"> 1.5k </span> Community
@@ -110,9 +110,9 @@
       </b-dropdown>
     </div>
 
-    <div class="body p-0">
+    <div class="body p-2">
       <b-row>
-        <b-col cols="12" class="p-0" >
+        <b-col cols="12" class="p-3" >
           <b-tabs content-class="mt-3" fill pills>
             <b-tab title="Posts" active>
               <Post />
@@ -310,7 +310,7 @@ p,
     top: 40px;
   }
   .body {
-    margin: 1px;
+    margin: 5px;
   }
   .size {
     width: 100px;

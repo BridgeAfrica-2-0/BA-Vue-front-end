@@ -102,7 +102,7 @@
                   <h6
                     class=" m-0 p-0 ml-3   profile-name"
                   > 
-               <b-link>     <b>  Heavy Gym  </b>    </b-link>   <br /> <span class="community"> 1.5k Community </span>
+                 <b>   <b-link>     Heavy Gym    </b-link>  </b>     <br /> <span class="community"> 1.5k Community </span>
                   </h6>
                   
                   

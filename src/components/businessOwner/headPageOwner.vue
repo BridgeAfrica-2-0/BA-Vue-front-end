@@ -525,8 +525,9 @@ width: 100%;
   margin-top: -100px;
   left: -20px;
   background-color: transparent;
-  color: #fff;
-  border: solid 2px white;
+  color:black;
+
+  border: solid 2px black;
   font-weight: bold;
 }
 .see-all:hover {

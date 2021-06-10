@@ -169,6 +169,113 @@
       </b-row>
     </b-card>
 
+
+
+
+
+
+
+
+
+    <b-card class="mt-2">
+      <b-row class="mt-4">
+        <b-col cols="12" class="mt-4">
+          <b-row>
+            <b-col cols="2" md="1" class="m-0 p-0">
+              <b-avatar
+                class="d-inline-block avat"
+                variant="primary"
+                src="https://www.fivesquid.com/pics/t2/1594480468-145752-1-1.jpg"
+                square
+                rounded
+              ></b-avatar>
+            </b-col>
+            <b-col cols="10" md="11" class="pt-2">
+              <h5 class="m-0 font-weight-bolder"> Post with 3 pics </h5>
+              <p class="duration">1h Ago</p>
+            </b-col>
+          </b-row>
+          <b-row>
+            <b-col cols="12" class="mt-2">
+              <p class="post-text">
+                Lorem Ipsum has been the industry's standard dummy text ever
+                since the 1500s, when an unknown printer took a galley of type
+                and scrambled it to make a type specimen book. It has survived
+                not only five centuries, but also the leap into electronic
+                typesetting, remaining essentially unchanged.😛
+              </p>
+            </b-col>
+          </b-row>
+          <b-row>
+            <b-col cols="12" class="mt-2">
+              <lightbox :cells="3" :items="imagees3"></lightbox>
+            </b-col>
+            <b-col class="mt-1">
+              <span class="mr-3"
+                ><b-icon
+                  icon="suit-heart"
+                  variant="primary"
+                  aria-hidden="true"
+                ></b-icon>
+                23</span
+              >
+              <span
+                ><b-icon
+                  icon="chat-fill"
+                  variant="primary"
+                  aria-hidden="true"
+                ></b-icon>
+                123</span
+              >
+
+              <span>
+                <fas-icon class="primary ml-3" :icon="['fas', 'share']" />
+              </span>
+
+              
+            </b-col>
+          </b-row>
+
+          <b-row class="mt-2">
+            <b-col cols="3" md="1" class="m-md-0 p-md-0">
+              <b-avatar
+                variant="primary"
+                class="img-fluid avat-comment"
+                src="https://www.fivesquid.com/pics/t2/1594480468-145752-1-1.jpg"
+              ></b-avatar>
+            </b-col>
+            <b-col cols="9" md="11" class="p-0 m-0 pr-3">
+              <input placeholder="Post a Comment" class="comment" type="text" />
+
+              <fas-icon
+                class="primary send-cmt"
+                :icon="['fas', 'paper-plane']"
+              />
+            </b-col>
+          </b-row>
+
+          <Comment />
+        </b-col>
+      </b-row>
+    </b-card>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     <b-card class="mt-2">
       <b-row class="mt-4">
         <b-col cols="12" class="mt-4">
@@ -375,6 +482,17 @@ export default {
         "https://pbs.twimg.com/media/DoNa_wKUUAASSCF.jpg",
         "https://pbs.twimg.com/media/DKO62sVXUAA0_AL.jpg",
       ],
+ 
+
+       imagees3: [
+        "https://pbs.twimg.com/media/DoNa_wKUUAASSCF.jpg",
+        "https://pbs.twimg.com/media/DoNa_wKUUAASSCF.jpg",
+        "https://pbs.twimg.com/media/DKO62sVXUAA0_AL.jpg",
+      ],
+
+
+
+      
     };
   },
 

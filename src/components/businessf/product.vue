@@ -32,7 +32,7 @@
           </p>
 
 
-          <span class="float-right">  <b-button variant="primary" class=""> Visit shop </b-button>   <b-button variant="primary" class=""> Buy now </b-button>     </span>
+          <span class="float-right">    <b-button variant="primary" class=""> Buy now </b-button>     </span>
 
 
         </b-col>

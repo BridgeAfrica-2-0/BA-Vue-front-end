@@ -77,7 +77,7 @@
             <img class="logo" src="@/assets/img/m5.jpg" />
           </div>
           <div class="d-inline-block ml-4 float-left name-block">
-            <h5 class="font-weight-bolder name">User Name</h5>
+  <b-link>     <h5 class="font-weight-bolder name"> User Name</h5>     </b-link>        
             <p>
               <br />
               1.5k Community
@@ -319,16 +319,9 @@ p {
 .mobile {
   display: none;
 }
-.see-all {
-  height: 48px;
-  width: 174px;
-  margin-top: -100px;
-  left: -20px;
-  background-color: transparent;
-  color: #fff;
-  border: solid 2px white;
-  font-weight: bold;
-}
+
+
+
 
 .see-all:hover {
   background-color: rgba(220, 220, 220, 0.398);
@@ -609,8 +602,8 @@ width: 100%;
   margin-top: -100px;
   left: -20px;
   background-color: transparent;
-  color: #fff;
-  border: solid 2px white;
+  color: black;
+  border: solid 2px black;
   font-weight: bold;
 }
 .see-all:hover {
@@ -654,8 +647,8 @@ width: 100%;
   margin-top: -50px;
   left: -20px;
   background-color: transparent;
-  color: #fff;
-  border: solid 2px white;
+  color: black;
+  border: solid 2px black;
   font-weight: bold;
 }
 .see-all:hover {

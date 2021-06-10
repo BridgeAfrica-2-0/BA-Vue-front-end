@@ -1,45 +1,11 @@
 <template>
   <div>
-    <b-card>
-      <div class="products ml-4">
-        <div class="ml-4" v-for="post in posts" :key="post.id">
-          <Product />
-        </div>
+
+    <div class="products ">
+      <div class="col-md-6" v-for="post in posts" :key="post.id">
+        <Product />
       </div>
-    </b-card>
-
-    <b-modal hide-footer title="Add product" v-model="showModal">
-      <b-form>
-        <b-form-group
-          id="input-group-1"
-          label="Product Name"
-          label-for="input-1"
-          label-size="sm"
-        >
-          <b-form-input
-            id="input-1"
-            class="mt-2"
-            v-model="text"
-            type="text"
-            required
-          ></b-form-input>
-        </b-form-group>
-        <b-form-group
-          id="input-group-1"
-          label="image File"
-          label-for="input-1"
-          label-size="sm"
-        >
-          <b-form-file
-            class="mt-1"
-            id="file-small"
-            v-model="image"
-          ></b-form-file>
-        </b-form-group>
-
-        <b-button class="mt-2 btn-block" variant="primary"> Add</b-button>
-      </b-form>
-    </b-modal>
+    </div>
   </div>
 </template>
 
@@ -58,57 +24,57 @@ export default {
           image: "https://picsum.photos/300/150/?image=41",
           title: "Title 2",
           text:
-            " Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum quam, doloribus id sit consequuntur tempora molestiae blanditiis."
+            " Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum quam, doloribus id sit consequuntur tempora molestiae blanditiis.",
         },
         {
           id: 1,
           image: "https://picsum.photos/300/150/?image=41",
           title: "Title 2",
           text:
-            " Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum quam, doloribus id sit consequuntur tempora molestiae blanditiis."
+            " Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum quam, doloribus id sit consequuntur tempora molestiae blanditiis.",
         },
         {
           id: 1,
           image: "https://picsum.photos/300/150/?image=41",
           title: "Title 2",
           text:
-            " Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum quam, doloribus id sit consequuntur tempora molestiae blanditiis."
+            " Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum quam, doloribus id sit consequuntur tempora molestiae blanditiis.",
         },
         {
           id: 1,
           image: "https://picsum.photos/300/150/?image=41",
           title: "Title 2",
           text:
-            " Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum quam, doloribus id sit consequuntur tempora molestiae blanditiis."
+            " Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum quam, doloribus id sit consequuntur tempora molestiae blanditiis.",
         },
         {
           id: 1,
           image: "https://picsum.photos/300/150/?image=41",
           title: "Title 2",
           text:
-            " Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum quam, doloribus id sit consequuntur tempora molestiae blanditiis."
-        }
+            " Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum quam, doloribus id sit consequuntur tempora molestiae blanditiis.",
+        },
       ],
       images: [
         {
           id: 1,
-          image: "https://picsum.photos/300/150/?image=41"
+          image: "https://picsum.photos/300/150/?image=41",
         },
         {
           id: 2,
-          image: "https://picsum.photos/300/150/?image=41"
-        }
-      ]
+          image: "https://picsum.photos/300/150/?image=41",
+        },
+      ],
     };
   },
   components: {
-    Product
+    Product,
   },
   methods: {
     createProduct() {
       this.showModal = !this.showModal;
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -133,6 +99,10 @@ export default {
   left: 100px;
   color: white;
   font-weight: 200;
+}
+.icon {
+  height: 24px;
+  width: 24px;
 }
 
 .product:hover .text-static {
@@ -166,6 +136,10 @@ export default {
 .sp:hover .pic-name {
   opacity: 1;
 }
+/* 
+.primary-bg{
+  background-color: grey;
+} */
 
 .pic {
   cursor: pointer;
@@ -202,7 +176,6 @@ export default {
 @media only screen and (max-width: 768px) {
   .products {
     position: relative;
-    left: -25px;
   }
 
   .product {

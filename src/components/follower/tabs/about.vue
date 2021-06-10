@@ -1,11 +1,15 @@
 <template>
   <div>
-    <b-alert show class="primary-bg">
-      <b-icon class="purple" variant="primary" icon="person-fill"></b-icon>
-      <b>
-        About
-      </b></b-alert
-    >
+   
+      <b-icon class="icon" variant="primary" icon="person-fill"></b-icon> About
+
+      <hr />
+    
+
+
+        
+     
+    
     <b-card no-body class="desktop">
       <b-tabs pills card vertical>
         <b-tab title="BIOGRAPHY" active><Biography /></b-tab>
@@ -41,12 +45,17 @@ export default {
   display: none;
 }
 
-.purple {
-  color: purple;
+.icon {
+  height: 24px;
+  width: 24px;
 }
 .primary-bg {
   background-color: rgb(242, 242, 242);
   border: none;
+}
+
+span {
+  margin-left: 8px;
 }
 
 @media only screen and (max-width: 768px) {
@@ -56,6 +65,9 @@ export default {
 
   .mobile {
     display: block;
+  }
+  span {
+    margin-left: 6px;
   }
 }
 </style>

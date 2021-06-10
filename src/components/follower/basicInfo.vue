@@ -26,10 +26,10 @@ export default {
   data() {
     return {
       dateOfBirth: "20/20/2020",
-      gender: "Male"
+      gender: "Male",
     };
   },
-  methods: {}
+  methods: {},
 };
 </script>
 
@@ -38,12 +38,15 @@ export default {
   display: flex;
 }
 
-.basic{
+.basic {
   text-align: left;
+  font-family: Helvetica;
+  font-size: 14px;
 }
 @media only screen and (max-width: 768px) {
-  .basic{
+  .basic {
     margin-left: 20px;
+    font-size: 12px;
   }
 }
 </style>

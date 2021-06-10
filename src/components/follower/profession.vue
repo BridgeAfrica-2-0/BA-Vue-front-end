@@ -22,11 +22,29 @@ export default {
       options: [
         { value: null, text: "Select" },
         { value: "private", text: "Private" },
-        { value: "public", text: "Public" }
-      ]
+        { value: "public", text: "Public" },
+      ],
     };
-  }
+  },
 };
 </script>
+<style scoped>
+.profession {
+  font-size: 14px;
+  font-family: Helvetica;
+}
 
-<style scoped></style>
+p {
+  font-size: 14px;
+  font-family: Helvetica;
+}
+@media only screen and (max-width: 768px) {
+  .profession {
+    font-size: 12px;
+  }
+  p {
+    font-size: 12px;
+    font-family: Helvetica;
+  }
+}
+</style>

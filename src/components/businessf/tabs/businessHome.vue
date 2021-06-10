@@ -1,35 +1,37 @@
 <template>
   <div>
     <b-row>
-      <b-col md="4">
+       <b-col md="12" lg="5" xl="4" >
         <Intro />
-        <Media />
-        <Personalize />
-        <Invite />
+        <Media />      
+        <Followers />
         <HotBusiness />
       </b-col>
-      <b-col md="8">
+      
+
+      <b-col md="8"  lg="7"  xl="8">
+
         <Post />
+
       </b-col>
+
     </b-row>
   </div>
 </template>
 
 <script>
 import Intro from "../intro";
-import Invite from "../invite";
+import Followers from "./comunitiDashboard";
 import HotBusiness from "../hotBusinesses";
-import Post from "../../post";
-import Personalize from "../personalizeWeb";
+import Post from "../ownerPost";
 import Media from "../../media";
 export default {
   name: "posts",
   components: {
     Intro,
-    Invite,
+    Followers,
     HotBusiness,
     Post,
-    Personalize,
     Media,
   },
 };

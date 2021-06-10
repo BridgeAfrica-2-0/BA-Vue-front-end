@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="txt">
     <b class="contact">Contact Infomation</b>
     <hr />
     <div class="row">
@@ -18,7 +18,7 @@ export default {
   data() {
     return {};
   },
-  methods: {}
+  methods: {},
 };
 </script>
 
@@ -26,9 +26,19 @@ export default {
 .details {
   display: flex;
 }
+
+.txt {
+  font-family: Helvetica;
+  font-size: 14px;
+}
 @media only screen and (max-width: 768px) {
-  .contact{
+  .contact {
     margin-left: 20px;
+  }
+
+  .txt {
+    font-family: Helveticaf;
+    font-size: 12px;
   }
 }
 </style>

@@ -25,7 +25,7 @@
 export default {
   data() {
     return {};
-  }
+  },
 };
 </script>
 
@@ -37,13 +37,27 @@ export default {
   position: relative;
   top: -28px;
 }
+.work {
+  font-size: 14px;
+  font-family: Helvetica;
+}
+p {
+  font-size: 14px;
+  font-family: Helvetica;
+}
 @media only screen and (max-width: 768px) {
   .avatar {
     position: relative;
-    top: -80px;
+    top: -40px;
   }
   .work {
     margin-left: 20px;
+    font-size: 12px;
+    font-family: Helvetica;
+  }
+  p {
+    font-size: 12px;
+    font-family: Helvetica;
   }
 }
 </style>

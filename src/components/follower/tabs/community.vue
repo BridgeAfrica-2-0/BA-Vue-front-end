@@ -1,50 +1,20 @@
 <template>
-  <div class="mt-3 lala">
+  <div class="mt-3">
     <div class="container-fluid">
-
-
-
-
-
-
-
-
-      <b-tabs  pills content-class="mt-3  f-left">
-
-         
+      <b-tabs pills content-class="mt-3  f-left">
         <b-tab title="People" active>
-           
-
-   <People />
-
-
-           
-
-
-
-
-
-       
-
-         
+          <People />
         </b-tab>
 
         <b-tab title="Businesses">
-          
-        
-                <Business /> 
-          
-          
-          </b-tab>
+          <Business />
+        </b-tab>
       </b-tabs>
-
-      
     </div>
   </div>
 </template>
 
 <script>
-
 import Business from "./businesses/businesses";
 import People from "./people/people";
 
@@ -52,7 +22,7 @@ export default {
   name: "SidebarCommunity",
   components: {
     Business,
-    People
+    People,
   },
 
   data() {
@@ -68,15 +38,15 @@ export default {
         { id: 6, first_name: "Bamm Bamm", last_name: "Rubble" },
         { id: 7, first_name: "The Great", last_name: "Gazzoo" },
         { id: 8, first_name: "Rockhead", last_name: "Slate" },
-        { id: 9, first_name: "Pearl", last_name: "Slaghoople" }
-      ]
+        { id: 9, first_name: "Pearl", last_name: "Slaghoople" },
+      ],
     };
   },
   computed: {
     rows() {
       return this.items.length;
-    }
-  }
+    },
+  },
 };
 </script>
 

@@ -13,7 +13,7 @@
       <iframe
         class="image"
         v-if="post.video"
-        width="240"
+        width="300"
         height="150"
         rounded
         :src="post.video"
@@ -44,23 +44,23 @@ export default {
           video: "https://www.youtube.com/embed/nMBQrM1FHZw",
           title: "Title 1",
           text:
-            " Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum quam, doloribus id sit consequuntur tempora molestiae blanditiis."
+            " Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum quam, doloribus id sit consequuntur tempora molestiae blanditiis.",
         },
         {
           id: 2,
           image: "https://picsum.photos/300/150/?image=41",
           title: "Title 2",
           text:
-            " Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum quam, doloribus id sit consequuntur tempora molestiae blanditiis."
-        }
-      ]
+            " Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum quam, doloribus id sit consequuntur tempora molestiae blanditiis.",
+        },
+      ],
     };
   },
   methods: {
     showModal() {
       this.$refs["modal-1"].show();
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -71,6 +71,8 @@ export default {
 }
 .image {
   cursor: pointer;
+  height: 200px;
+  width: 200px;
 }
 .image:hover {
   box-shadow: 5px 10px 8px 2px #888888;
@@ -78,5 +80,12 @@ export default {
 
 .text {
   margin-top: 10px;
+}
+@media only screen and (max-width: 768px) {
+  .image {
+    margin-left: 26px;
+    height: 104px;
+    width: 150px;
+  }
 }
 </style>

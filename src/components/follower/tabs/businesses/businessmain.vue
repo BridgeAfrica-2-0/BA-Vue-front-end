@@ -88,6 +88,11 @@ a {
   display: flex;
 }
 
+p {
+  font-size: 14px;
+  font-family: Helvetica;
+}
+
 @media only screen and (max-width: 768px) {
   .details {
     position: relative;
@@ -108,6 +113,10 @@ a {
   }
   .btn {
     display: flex;
+  }
+  p {
+    font-size: 12px;
+    font-family: Helvetica;
   }
 }
 </style>

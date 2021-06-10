@@ -1,9 +1,7 @@
 <template>
   <div>
     <navbar />
-
     <Business />
-
     <Footer />
   </div>
 </template>

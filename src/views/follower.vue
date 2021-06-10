@@ -1,9 +1,7 @@
 <template>
-  <div>
+  <div class="body">
     <navbar />
-
     <Profile />
-
     <Footer />
   </div>
 </template>
@@ -32,6 +30,11 @@ export default {
   margin-left: 90%;
   position: relative;
   top: 40px;
+}
+
+.body{
+  overflow-x: hidden;
+  width: 100%;
 }
 
 @media only screen and (max-width: 768px) {

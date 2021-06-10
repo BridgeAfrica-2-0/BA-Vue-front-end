@@ -2,7 +2,13 @@
   <div>
     <div v-if="albumShow" class="main-album">
       <div class="p-4 album" v-for="post in posts" :key="post.id">
-        <b-img v-if="post.image" :src="post.image" width="250" rounded fluid></b-img>
+        <b-img
+          v-if="post.image"
+          :src="post.image"
+          width="250"
+          rounded
+          fluid
+        ></b-img>
         <div @click="openAlbum" class="overlay">
           <div>
             <span class="text-hover">
@@ -23,6 +29,7 @@
       <div class="albums">
         <div v-for="item in images" :key="item.id" class="p-4 image">
           <span class="sp">
+            <b-icon icon="download" class="download" variant="primary"></b-icon>
             <b-img
               @click="modalShow = !modalShow"
               src="https://picsum.photos/300/150/?image=41"
@@ -37,7 +44,14 @@
             fluid-grow
             src="https://picsum.photos/300/150/?image=41"
           ></b-img>
-          <h3>Picture Title</h3>
+          <b-row>
+            <h3 class="ml-3">Picture Title</h3>
+            <b-icon
+              icon="download"
+              class="download-view mt-1"
+              variant="primary"
+            ></b-icon>
+          </b-row>
         </b-modal>
       </div>
     </div>
@@ -113,7 +127,7 @@ export default {
   position: relative;
   top: 60px;
 }
-.album-detail{
+.album-detail {
   text-align: center;
 }
 .album-name {
@@ -125,7 +139,30 @@ export default {
   flex-wrap: wrap;
 }
 
-.image{
+.image {
   cursor: pointer;
+}
+.download {
+  position: relative;
+  left: 320px;
+  top: -70px;
+}
+
+.download:hover {
+  height: 20px;
+}
+
+.download-view {
+  cursor: pointer;
+  margin-left: 300px;
+}
+
+@media only screen and (max-width: 768px) {
+  .album {
+    margin-left: 35px;
+  }
+  .pic {
+    margin-left: 28px;
+  }
 }
 </style>

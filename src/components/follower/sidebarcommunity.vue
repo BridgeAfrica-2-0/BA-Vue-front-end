@@ -1,67 +1,71 @@
 <template>
-  <div class="mt-3 lala">
-    <b-card>
+  <div class="lalala">
+    <div class=" border mt-2 ">
+      <span>
+        <h6 class="title m-3">
+          <fas-icon class="icons" :icon="['fas', 'users']" size="lg" />
+          <b> COMMUNITY </b> <span class="h4-color"> 7K </span>
+        </h6>
+      </span>
 
-    <b-container>
+      <b-tabs pills content-class="mt-3  f-left ">
+        <b-tab active>
+          <template slot="title">
+            People <span class="spa-color"> 7K </span>
+          </template>
 
+          <div>
+            <b-row>
+              <b-col>
+                <b-tabs fill pills content-class="mt-3  f-left m-up">
+                  <b-tab active>
+                    <template slot="title">
+                      Followers <span class="spa-color"> 7K </span>
+                    </template>
 
+                    <div class="s-comcard"><People /></div>
+                  </b-tab>
 
+                  <b-tab>
+                    <template slot="title">
+                      Following <span class="spa-color"> 7K </span>
+                    </template>
 
-      <b-tabs  pills content-class="mt-3  f-left">
-        <b-tab title="People" active>
-           
-
-
-
-
-            <b-tabs fill pills content-class="mt-3  f-left">
-        <b-tab title="Followers" active>
-        
-
-        <People />
-
-         
+                    <div class="s-comcard"><People /></div>
+                  </b-tab>
+                </b-tabs>
+              </b-col>
+            </b-row>
+          </div>
         </b-tab>
 
-        <b-tab title="Following">  <People /> </b-tab>
-      </b-tabs>
+        <b-tab>
+          <template slot="title">
+            Businesses <span class="spa-color"> 7K </span>
+          </template>
 
+          <div>
+            <b-tabs fill pills content-class="mt-3  f-left m-up checkcheck">
+              <b-tab active>
+                <template slot="title">
+                  Followers <span class="spa-color"> 7K </span>
+                </template>
 
+                <div class="s-comcard"><Business /></div>
+              </b-tab>
 
+              <b-tab>
+                <template slot="title">
+                  Following <span class="spa-color"> 7K </span>
+                </template>
 
-
-       
-
-         
+                <div class="s-comcard"><Business /></div>
+              </b-tab>
+            </b-tabs>
+          </div>
         </b-tab>
-
-        <b-tab title="Businesses">
-          
-          
-      <b-tabs fill pills content-class="mt-3  f-left">
-       
-           
-
-        <b-tab title="Followers" active>
-        
-
-         <Business /> 
-
-         
-        </b-tab>
-
-        <b-tab title="Following">   <Business />  </b-tab>
       </b-tabs>
-            
-          
-          
-          </b-tab>
-      </b-tabs>
-
-      
-    </b-container>
-
-    </b-card>
+    </div>
   </div>
 </template>
 
@@ -69,126 +73,46 @@
 import Business from "@/components/businessf/tabs/owner/networks/business";
 import People from "@/components/businessf/tabs/owner/networks/people";
 export default {
-  name: "SidebarCommunity",
-  components: {
-    Business,
-    People
-  },
+  name: "comunitiDashboard",
 
-  data() {
-    return {
-      perPage: 3,
-      currentPage: 1,
-      items: [
-        { id: 1, first_name: "Fred", last_name: "Flintstone" },
-        { id: 2, first_name: "Wilma", last_name: "Flintstone" },
-        { id: 3, first_name: "Barney", last_name: "Rubble" },
-        { id: 4, first_name: "Betty", last_name: "Rubble" },
-        { id: 5, first_name: "Pebbles", last_name: "Flintstone" },
-        { id: 6, first_name: "Bamm Bamm", last_name: "Rubble" },
-        { id: 7, first_name: "The Great", last_name: "Gazzoo" },
-        { id: 8, first_name: "Rockhead", last_name: "Slate" },
-        { id: 9, first_name: "Pearl", last_name: "Slaghoople" }
-      ]
-    };
+  components: {
+    People,
+    Business,
   },
-  computed: {
-    rows() {
-      return this.items.length;
-    }
-  }
 };
 </script>
 
-<style scoped>
-hr {
-  border: solid 1px dimgray;
+<style>
+.lala .nav-fill {
+  margin-top: -19px;
+  border: 1px solid rgba(0, 0, 0, 0.125);
 }
 
-.btn {
-  background-color: #fff;
-  color: #e75c18;
-  border: solid 1px #e75c18;
+.spa-color {
+  color: white;
+  margin-left: 10px;
+  font-size: 14px;
 }
 
-.btn:hover {
-  color: #fff;
-  border: none;
-  background-color: #e75c18;
+.h4-color {
+  color: orangered;
+  margin-left: 10px;
+  font-size: 14px;
 }
 
-f-right {
-  text-align: right;
-  align-content: right;
+.m-up {
+  margin-top: -5px;
 }
 
-.f-left {
-  text-align: left;
-  align-content: left;
-}
-@media only screen and (max-width: 768px) {
-  .options {
-    position: relative;
-    left: -75px;
+@media only screen and (min-width: 768px) {
+  .title {
+    font-size: 20px;
   }
 }
 
-.detail {
-  position: relative;
-  left: 92px;
-  top: -30px;
-}
-.name {
-  position: relative;
-  top: -10px;
-  left: 10px;
-}
-
-.b-background {
-  background-color: red;
-  color: white;
-}
-
-.people-style {
-  border-top-left-radius: 40px;
-
-  border-bottom-left-radius: 40px;
-
-  border-top-right-radius: 15px;
-
-  border-bottom-right-radius: 15px;
-
-  height: 78px;
-
-  background: white;
-
-  background-color: #fff;
-  background-clip: border-box;
-  border: 1px solid rgba(0, 0, 0, 0.125);
-
-  margin-bottom: 10px;
-  margin-right: -30px;
-  margin-left: -30px;
-}
-
-.p-buttons {
-  margin-right: 1px;
-
-  margin-left: -5px;
-  margin-bottom: 2.5px;
-  margin-top: 2.5px;
-
-  padding-right: 5px;
-}
-
-.e-name {
-  margin-right: -12px;
-  margin-left: -25px;
-}
-.p-avater {
-  margin-right: -10px;
-}
-.a-text {
-  margin-top: 2px;
+@media only screen and (min-width: 768px) {
+  .title {
+    font-size: 16px;
+  }
 }
 </style>

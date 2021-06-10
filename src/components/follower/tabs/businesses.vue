@@ -1,14 +1,29 @@
 <template>
   <div>
-    <b-alert show class="primary-bg">
-      <b-icon icon="building" class="purple" variant="primary"></b-icon>
-      <b>
-        Businesses
-      </b></b-alert
-    >
+  
+      <fas-icon class="primary mr-2 pt-1 icon-size primary" :icon="['fas', 'handshake']" /> Businesses
+       
+        <hr /> 
+
+
+
+
+
 
     <div class="business" v-if="noBusiness == false">
-      <Business />
+
+      
+
+     <b-row>   <b-col lg="6">   
+      <Business />    </b-col>      
+      
+        <b-col lg="6">  
+      <Business />     </b-col>   
+      
+          </b-row>
+
+
+ 
     </div>
     <div v-show="noBusiness" class="no-business">
       <b-container>
@@ -25,12 +40,12 @@ import Business from "../business";
 export default {
   data() {
     return {
-      noBusiness: false
+      noBusiness: false,
     };
   },
   components: {
-    Business
-  }
+    Business,
+  },
 };
 </script>
 
@@ -43,8 +58,13 @@ export default {
   margin-left: 270px;
 }
 
-.purple{
-  color: purple;
+.icon {
+  height: 24px;
+  width: 24px;
+}
+
+span {
+  margin-left: 8px;
 }
 .primary-bg {
   background-color: rgb(242, 242, 242);
@@ -54,5 +74,17 @@ export default {
 h2,
 p {
   text-align: center;
+  font-size: 12px;
+  font-family: Helvetica;
+}
+
+@media only screen and (max-width: 768px) {
+  p {
+    font-size: 12px;
+    font-family: Helvetica;
+  }
+  span {
+    margin-left: 6px;
+  }
 }
 </style>

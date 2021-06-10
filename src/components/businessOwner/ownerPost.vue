@@ -44,7 +44,7 @@
                       size="sm"
                      
                       variant="outline-primary"
-                       @click="chooseVideo()"  
+                       @click="chooseVideo()"       
                         class="post-btn"
                   >
                      <fas-icon class="icons" :icon="['fas', 'photo-video']" size="lg" /> <span class="username"> Photo/Video </span>
@@ -342,6 +342,11 @@
             ></b-icon>
                     123</span
             >
+
+            <span>
+                <fas-icon class="primary ml-3" :icon="['fas', 'share']" />
+              </span>
+
           </b-col>
 
           
@@ -474,6 +479,13 @@
             ></b-icon>
                     123</span
             >
+
+
+            <span>
+                <fas-icon class="primary ml-3" :icon="['fas', 'share']" />
+              </span>
+
+
           </b-col>
 
           
@@ -607,6 +619,11 @@
             ></b-icon>
                     123</span
             >
+
+            <span>
+                <fas-icon class="primary ml-3" :icon="['fas', 'share']" />
+              </span>
+
           </b-col>
           <b-col cols="12">
             <b-row class="mt-2">
@@ -725,6 +742,11 @@
             ></b-icon>
                     123</span
             >
+
+            <span>
+                <fas-icon class="primary ml-3" :icon="['fas', 'share']" />
+              </span>
+              
           </b-col>
           <b-col cols="12">
             <b-row class="mt-2">

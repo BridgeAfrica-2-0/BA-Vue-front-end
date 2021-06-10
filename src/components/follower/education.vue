@@ -25,25 +25,36 @@
 export default {
   data() {
     return {};
-  }
+  },
 };
 </script>
 
 <style scoped>
 .education {
   border: none;
+  font-size: 14px;
+  font-family: Helvetica;
 }
 .avatar {
   position: relative;
   top: -28px;
 }
+p {
+  font-size: 14px;
+  font-family: Helvetica;
+}
 @media only screen and (max-width: 768px) {
   .avatar {
     position: relative;
-    top: -80px;
+    top: -45px;
   }
   .education {
     margin-left: 20px;
+    font-size: 12px;
+  }
+  p {
+    font-size: 12px;
+    font-family: Helvetica;
   }
 }
 </style>

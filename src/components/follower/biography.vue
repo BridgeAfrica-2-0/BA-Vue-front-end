@@ -5,7 +5,7 @@
       <div>
         <div class="row">
           <div class="col">
-            <p>{{ defaultBio }}</p>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero </p>
           </div>
         </div>
       </div>
@@ -17,10 +17,10 @@
 export default {
   data() {
     return {
-      defaultBio: "no additional infomation to show !!"
+      defaultBio: "",
     };
   },
-  methods: {}
+  methods: {},
 };
 </script>
 
@@ -44,8 +44,10 @@ export default {
   position: relative;
   top: -10px;
 }
-p{
+p {
   text-align: left;
+  font-family: Helvetica;
+  font-size: 14px;
 }
 @media only screen and (max-width: 768px) {
   .edit-btn {
@@ -55,6 +57,10 @@ p{
     display: flex;
     flex-direction: row;
     margin-left: 38%;
+  }
+  p {
+    font-family: Helvetica;
+    font-size: 12px;
   }
 }
 </style>

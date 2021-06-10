@@ -4,18 +4,17 @@
     <hr />
 
     <p class="place">
-      Current City
+      <b> Current City</b>
     </p>
-    <p class="place"><b>Cameroon, South Africa</b></p>
-    
+    <p class="place">Cameroon, South Africa</p>
+
     <hr />
 
     <p class="place">
-      Home City
+      <b> Home City</b>
     </p>
-    
-    <p class="place"><b>New York, United States</b></p>
-    
+
+    <p class="place">New York, United States</p>
   </div>
 </template>
 
@@ -23,15 +22,22 @@
 export default {
   data() {
     return {};
-  }
+  },
 };
 </script>
 
 <style scoped>
-
+p {
+  font-size: 14px;
+  font-family: Helvetica;
+}
 @media only screen and (max-width: 768px) {
-  .place{
+  .place {
     margin-left: 20px;
+  }
+  p {
+    font-size: 12px;
+    font-family: Helvetica;
   }
 }
 </style>

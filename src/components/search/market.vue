@@ -14,7 +14,7 @@
             />
           </div>
 
-          
+               
         </b-col>
         <b-col cols="7" sm="8" md="7" >
          <p class="text">
@@ -25,6 +25,8 @@
             <span class="price"> <strong> 12,000 Fcfa  </strong> </span> <br />
             
           </p>
+
+           <span class="float-right">  <b-button variant="primary" class=""> Visit shop </b-button>   <b-button variant="primary" class=""> Buy now </b-button>     </span>
         </b-col>
 
         

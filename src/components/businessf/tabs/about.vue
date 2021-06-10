@@ -27,45 +27,45 @@
         <b-col>
           <div class="p-4">
             <p>
-              <b-icon icon="briefcase-fill" class="primary"></b-icon>
-              Agriculture
+              <b-icon icon="briefcase-fill" class="primary icon"></b-icon>
+              <span>Agriculture</span>
             </p>
             <p>
-              <b-icon icon="search" class="primary"></b-icon> Chicken Seller
+              <b-icon icon="search" class="primary icon"></b-icon>
+              <span>Chicken Seller</span>
             </p>
             <p>
-              <b-icon icon="geo-alt-fill" class="primary"></b-icon> Mokolo,
-              Yaounde, Cameroon
+              <b-icon icon="geo-alt-fill" class="primary icon"></b-icon>
+              <span>Mokolo, Yaounde, Cameroon</span>
             </p>
             <p>
-              <b-icon icon="link" class="primary"></b-icon> www.business.com
+              <b-icon icon="link" class="primary icon"></b-icon>
+              <span>www.business.com</span>
             </p>
             <p>
-              <b-icon icon="people-fill" class="primary"></b-icon> 1.1M
-              Community
+              <b-icon icon="people-fill" class="primary icon"></b-icon>
+              <span>1.1M Community</span>
             </p>
             <p>
-              <b-icon icon="telephone-fill" class="primary"></b-icon>
-              +1(542) 565- 536
+              <b-icon icon="telephone-fill" class="primary icon"></b-icon>
+              <span>+1(542) 565- 536</span>
             </p>
             <p>
-              <b-icon icon="envelope-fill" class="primary"></b-icon>
-              info@business.com
+              <b-icon icon="envelope-fill" class="primary icon"></b-icon>
+              <span> info@business.com</span>
             </p>
             <p>
-              <b-icon icon="clock" class="primary"></b-icon>
-              <span class="ml-2 btn-item">Open Now</span>
-            </p>
-            <p>
-              <b-dropdown
-                size="sm"
-                variant="outline"
-                text="6:00AM - 7:00PM"
-                class="ml-2"
+              <b-icon icon="clock" class="primary icon"></b-icon>
+              <span
+                ><b-link> Open now</b-link>
+
+                <b-dropdown size="sm" variant="transperent">
+                  <template #button-content>
+                    10:00AM - 7:00PM
+                  </template>
+                  <b-dropdown-item> 10:00AM - 7:00PM</b-dropdown-item>
+                </b-dropdown></span
               >
-                <b-dropdown-item-button>6:00AM - 7:00PM</b-dropdown-item-button>
-                <b-dropdown-item-button>6:00AM - 7:00PM</b-dropdown-item-button>
-              </b-dropdown>
             </p>
           </div>
         </b-col>
@@ -102,16 +102,14 @@ export default {
     };
   },
   methods: {
-   
     editBio() {
       this.edit1 = !this.edit1;
     },
-    
+
     editContact() {
       this.edit2 = !this.edit2;
     },
 
-    
     validate(idForm) {
       this.$bvModal.hide(idForm);
     },
@@ -128,24 +126,38 @@ export default {
 .btn-item {
   color: green;
 }
-
+.icon {
+  height: 24px;
+  width: 24px;
+}
 .edit {
   position: relative;
   left: 98%;
   cursor: pointer;
 }
 
-h4,
 p {
   text-align: left;
+  font-family: Helvetica;
+  font-size: 14px;
 }
-
+span {
+  margin-left: 8px;
+}
 .mobile {
   display: none;
 }
 @media only screen and (max-width: 768px) {
   .txt {
     text-align: left;
+    font-family: Helvetica;
+    font-size: 14px;
+  }
+  p {
+    font-size: 12px;
+  }
+  span {
+    margin-left: 6px;
   }
 }
 </style>

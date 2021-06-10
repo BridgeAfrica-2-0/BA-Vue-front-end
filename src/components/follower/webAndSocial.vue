@@ -29,17 +29,17 @@ export default {
       options: [
         { value: null, text: "Select" },
         { value: "private", text: "Private" },
-        { value: "public", text: "Public" }
+        { value: "public", text: "Public" },
       ],
       socials: [
         { value: null, text: "Select" },
         { value: "instagram", text: "Instagram" },
         { value: "facebook", text: "FaceBook" },
         { value: "twitter", text: "Twitter" },
-        { value: "google-plus", text: "Google+" }
-      ]
+        { value: "google-plus", text: "Google+" },
+      ],
     };
-  }
+  },
 };
 </script>
 
@@ -47,15 +47,23 @@ export default {
 .link {
   text-decoration: none;
   color: #e75c18;
+  font-size: 14px;
 }
 .link-1 {
   text-decoration: none;
   position: relative;
+  font-size: 14px;
   top: 10px;
+}
+.social {
+  font-size: 14px;
+  font-family: Helvetica;
 }
 @media only screen and (max-width: 768px) {
   .social {
     margin-left: 20px;
+    font-size: 12px;
+    font-family: Helvetica;
   }
 }
 </style>

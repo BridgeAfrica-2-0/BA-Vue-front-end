@@ -202,7 +202,7 @@
                 <b-button variant="primary" class="edit-btn  d-none d-md-inline"   v-b-modal.coverphoto > <fas-icon class="mr-2" :icon="['fas', 'pencil-alt']" size="lg" />   Edit </b-button>
                 
                 
-                <b-dropdown id="dropdown-1" class="float-right options dot-btn mt-2 mt-sm-2 mt-md-0" no-caret variant="outline-primary">
+                <b-dropdown id="dropdown-1" class="float-right options mt-2 mt-sm-2 mt-md-0  dot-btn" no-caret variant="outline-primary">
                   <template #button-content>
                     <b-icon-three-dots></b-icon-three-dots>
                   </template>
@@ -273,6 +273,24 @@ export default {
         },
       };
     },
+
+    
+methods: {
+  
+  chooseProfile2: function() {
+     
+        document.getElementById("cover-imag").click()
+    },
+
+
+     chooseProfile1: function() {
+     
+        document.getElementById("profile-imag").click()
+    },
+
+
+}
+
 };
 </script>
 
@@ -466,17 +484,17 @@ margin-right: -5px;
 
 .edit-btn:hover{
  
-  border-color:#e4c229 ;
+  border-color:#ffdb58 ; 
 }
 
 .edit-btn:focus{
  
-  border-color:#e4c229 ;
+  border-color:#ffdb58 ;
 }
 
 .edit-btn:active{
  
-  border-color:#e4c229 ;
+  border-color:#ffdb58 ;
 }
 
 
@@ -490,6 +508,24 @@ margin-right: -5px;
 .round-coner{
   border-radius: 4px;
 }
+
+
+
+.dot-btn:hover{
+ 
+  border-color:#ffdb58 ; 
+}
+
+.dot-btn:focus{
+ 
+  border-color:#ffdb58 ;
+}
+
+.dot-btn:active{
+ 
+  border-color:#ffdb58 ;
+}
+
 
 
 
@@ -580,6 +616,11 @@ width: 100%;
 
 
 
+
+.btn:hover{
+
+  background-color: #ffdb58 important;
+}
 
 }
 

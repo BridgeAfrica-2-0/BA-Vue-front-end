@@ -1,18 +1,19 @@
 <template>
   <div>
     <b-card>
-      <p><b>Your Feedback is about</b></p>
+      <p class="title"><b>Your Feedback is about</b></p>
       <b-form-select
         required
         v-model="selected"
         :options="options"
       ></b-form-select>
-      <p class="mt-2"><b>Brief description of your feedback</b></p>
+      <p class="mt-2 username " ><b>Brief description of your feedback</b></p>
       <b-form-textarea
         id="textarea"
         v-model="description"
         placeholder="Enter something..."
         rows="3"
+        class="text"
         max-rows="6"
         required
       ></b-form-textarea>
@@ -25,7 +26,7 @@
       @click="filterFeedback"
     />
     <b-card class="mt-3" v-if="filterData">
-      <p class="primary"><strong>Feedback Type</strong></p>
+      <p class="primary text"><strong>Feedback Type</strong></p>
       <b-form-select
         required
         v-model="filter"
@@ -42,26 +43,33 @@
     </b-card>
 
     <b-card class="mt-5">
-      <b-row>
-        <b-col class="col">
+    
+        <div style="display:inline-flex">  
+
           <b-avatar
-            class="mt-2"
+          variant="primary"
+            class="mt-2 avat"
             src="https://placekitten.com/300/300"
           ></b-avatar>
-        </b-col>
-        <b-col>
-          <div class="detail">
+        
+     
+          <span class=" username  ml-3 mt-3">
             <strong>
               Mapoure Agrobusiness
             </strong>
-            <br />
-            <small>
+              <br />
+            <small class="duration">
               1 hr ago - <span class="primary">Feedback Type</span>
             </small>
-          </div>
-        </b-col>
-      </b-row>
-      <p class="mt-2">
+          </span>
+       
+      </div>
+
+
+
+
+
+      <p class="mt-2 text ">
         Lorem ipsum dolor sit, amet consectetur adipisicing elit. Earum quis ad
         assumenda soluta, fuga vel minus pariatur neque, aut doloribus culpa
         ipsum quos facilis sunt. Iusto aliquid dolor repudiandae eum doloremque,
@@ -83,14 +91,14 @@ export default {
       filterData: false,
       options: [
         { value: "Improvement", text: "Suggestion for Improvement" },
-        { value: "Program", text: "Progress to your Program" },
-        { value: "Idea", text: "New Idea for PEA-JEUNES" },
+        { value: "complaints", text: "Complaints" },
+       
       ],
       filters: [
         { value: "any", text: "Any" },
         { value: "Improvement", text: "Suggestion for Improvement" },
-        { value: "Program", text: "Progress to your Program" },
-        { value: "Idea", text: "New Idea for PEA-JEUNES" },
+         { value: "complaints", text: "Complaints" },
+       
       ],
     };
   },
@@ -119,9 +127,31 @@ export default {
   left: -197px;
 }
 @media only screen and (max-width: 768px) {
+
+  .avat{
+
+      width: 64px;
+      height: 64px;
+  }
+
+
   .detail {
     position: relative;
     left: -70px;
   }
+}
+
+
+
+
+@media only screen and (min-width: 768px) {
+
+  .avat{
+
+      width: 64px;
+      height: 64px;
+  }
+
+
 }
 </style>

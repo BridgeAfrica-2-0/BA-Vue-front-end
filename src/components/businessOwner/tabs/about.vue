@@ -111,6 +111,7 @@
       hide-footer
       title="Edit Address"
       v-model="edit2"
+      size="lg"
     >
       <b-form>
        
@@ -134,13 +135,15 @@
                       
                       <div class="form-group">
                         <label for="alias">Category:</label><br />
-                        <select id="category" class="form-control ">
-                          <option value="" selected="" disabled=""
-                            >Select Category</option
-                          >
-                          <option>Category1</option>
-                          <option>Category2</option>
-                        </select>
+                       
+
+                          <b-form-select
+            v-model="category"
+            :options="categories"
+            class="mb-3"
+            value-field="item"
+            text-field="name"
+          ></b-form-select>
                       </div>
 
 
@@ -221,6 +224,26 @@
             required
           ></b-form-input>
         </b-form-group>
+
+
+         <b-form-group
+          id="input-group-2"
+          label="Phone 2"
+          label-for="input-2"
+          label-size="sm"
+        >
+          <b-form-input
+            id="input-1"
+            class="mt-1"
+            v-model="telephone"
+            type="tel"
+            required
+          ></b-form-input>
+        </b-form-group>
+
+
+
+
         <b-form-group
           id="input-group-2"
           label="Business Email"
@@ -236,6 +259,114 @@
           ></b-form-input>
         </b-form-group>
 
+
+
+
+
+
+
+          
+
+          <div class="b-bottom">
+            <b-container>
+              <b-form-group
+                label-cols-lg="12"
+                label="Business Hours"
+                label-size="md"
+                label-class=" pt-0 "
+                class="mb-0"
+              >
+                <b-form-group class="mb-0" v-slot="{ ariaDescribedby }">
+                  <b-form-radio-group
+                    class="a-text text"
+                    :options="['Always Open', 'Open for selected hours']"
+                    :aria-describedby="ariaDescribedby"
+                  ></b-form-radio-group>
+                  <br />
+                  <b-container>
+                    <b-row>
+                      <b-col cols="6"
+                        ><b-form-checkbox id="" class="a-text text" name="" value="">
+                          Monday</b-form-checkbox
+                        ></b-col
+                      >
+
+
+                      <b-col><b-form-input name=""></b-form-input></b-col>-
+                      -<b-col><b-form-input name=""></b-form-input></b-col>
+                    </b-row>
+                    <br />
+
+                    <b-row>
+                      <b-col cols="6"
+                        ><b-form-checkbox id="" class="a-text text" name="" value="">
+                          Tuesday</b-form-checkbox
+                        ></b-col
+                      >
+                      <b-col><b-form-input name=""></b-form-input></b-col>- -
+                      <b-col><b-form-input name=""></b-form-input></b-col>
+                    </b-row>
+                    <br />
+
+                    <b-row>
+                      <b-col  cols="6"
+                        ><b-form-checkbox id="" class="a-text text" name="" value="">
+                          Wednesday</b-form-checkbox
+                        ></b-col
+                      >
+                      <b-col><b-form-input name=""></b-form-input></b-col>- -
+                      <b-col><b-form-input name=""></b-form-input></b-col>
+                    </b-row>
+                    <br />
+
+                    <b-row>
+                      <b-col cols="6"
+                        ><b-form-checkbox id="" class="a-text a-text text" name="" value="">
+                          Thursday</b-form-checkbox
+                        ></b-col
+                      >
+                      <b-col><b-form-input name=""></b-form-input></b-col>- -
+                      <b-col><b-form-input name=""></b-form-input></b-col>
+                    </b-row>
+                    <br />
+
+                    <b-row>
+                      <b-col cols="6"
+                        ><b-form-checkbox id="" class="a-text text" name="" value="">
+                          Friday
+                        </b-form-checkbox></b-col
+                      >
+                      <b-col><b-form-input name=""></b-form-input></b-col>- -
+                      <b-col><b-form-input name=""></b-form-input></b-col>
+                    </b-row>
+                    <br />
+
+                    <b-row>
+                      <b-col cols="6"
+                        ><b-form-checkbox id="" class="a-text text" name="" value="">
+                          Saterday
+                        </b-form-checkbox></b-col
+                      >
+                      <b-col><b-form-input name=""></b-form-input></b-col>- -
+                      <b-col><b-form-input name=""></b-form-input></b-col>
+                    </b-row>
+                    <br />
+
+                    <b-row>
+                      <b-col cols="6"
+                        ><b-form-checkbox id="" name="" class="a-text text" value="">
+                          Sunday</b-form-checkbox
+                        ></b-col
+                      >
+                      <b-col><b-form-input name=""></b-form-input></b-col>- -
+                      <b-col><b-form-input name=""></b-form-input></b-col>
+                    </b-row>
+                    <br />
+                  </b-container>
+                </b-form-group>
+              </b-form-group>
+            </b-container>
+          </div>
 
 
 
@@ -257,6 +388,29 @@ export default {
     return {
       edit1: false,
       edit2: false,
+
+       category:'',
+       categories: [ 
+
+        { item: "Professional_and_home_service", name: "Professionals" },
+        { item: "Agriculture ", name: "Agriculture " },
+        { item: "Restaurant ", name: " Restaurant " },
+        { item: "Electronics ", name: "Electronics " },
+        { item: "Handicrafts", name: "Handicrafts" },
+        { item: "clothing", name: "clothing" },
+        { item: "Mechanics", name: "Mechanics" },
+        { item: "Health_unit ", name: "Health unit " },
+        { item: "Bars", name: "Bars" },
+        { item: "Hair_and_beauty ", name: "Hair and beauty " },
+        { item: "Real_estate ", name: "Real_estate " },
+        { item: "Travelling ", name: "Travelling " },
+         { item: "Hotels", name: "Hotels" },
+          { item: "station", name: " station  " },
+           { item: "Mayor_concils", name: "Mayor_concils" },
+           { item: "Taxis service", name: "Taxis service" },
+
+      ],
+
       leftTitle: "About Mapoure Agrobusiness",
       textToo:
         "Lorem ipsum dolor sit amet consectetur adipisicing elit.\n" +

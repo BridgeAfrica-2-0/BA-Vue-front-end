@@ -96,13 +96,16 @@
                       
                       <div class="form-group">
                         <label for="alias">Category:</label><br />
-                        <select id="category" class="form-control ">
-                          <option value="" selected="" disabled=""
-                            >Select Category</option
-                          >
-                          <option>Category1</option>
-                          <option>Category2</option>
-                        </select>
+                        
+
+                         <b-form-select
+            v-model="category"
+            :options="categories"
+            class="mb-3"
+            value-field="item"
+            text-field="name"
+          ></b-form-select>
+
                       </div>
 
 
@@ -124,7 +127,7 @@
                     </div>
         <b-form-group
           id="input-group-1"
-          label="Country"
+          label="Country"     
           label-for="input-1"
           label-size="sm"
         >
@@ -222,6 +225,29 @@ export default {
       currentPlace: null,
       markers: [],
       places: [],
+
+       category:'',
+       categories: [ 
+
+        { item: "Professional_and_home_service", name: "Professionals" },
+        { item: "Agriculture ", name: "Agriculture " },
+        { item: "Restaurant ", name: " Restaurant " },
+        { item: "Electronics ", name: "Electronics " },
+        { item: "Handicrafts", name: "Handicrafts" },
+        { item: "clothing", name: "clothing" },
+        { item: "Mechanics", name: "Mechanics" },
+        { item: "Health_unit ", name: "Health unit " },
+        { item: "Bars", name: "Bars" },
+        { item: "Hair_and_beauty ", name: "Hair and beauty " },
+        { item: "Real_estate ", name: "Real_estate " },
+        { item: "Travelling ", name: "Travelling " },
+         { item: "Hotels", name: "Hotels" },
+          { item: "station", name: " station  " },
+           { item: "Mayor_concils", name: "Mayor_concils" },
+           { item: "Taxis service", name: "Taxis service" },
+
+      ],
+
 
       edit1: false,
       edit2: false,

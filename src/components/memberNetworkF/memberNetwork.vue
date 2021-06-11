@@ -1,7 +1,7 @@
 <template>
   <div class="mt-3">
     <div>
-  
+      
 
 
         <b-tabs  pills content-class="mt-3 f-left">
@@ -11,6 +11,7 @@
         </b-tabs>
 
 
+    
     </div>
   </div>
 </template>

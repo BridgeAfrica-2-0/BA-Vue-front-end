@@ -13,12 +13,6 @@ import {FontAwesomeIcon} from '@fortawesome/vue-fontawesome'
 import { fab } from '@fortawesome/free-brands-svg-icons'
 
 
-import DiscordPicker from 'vue3-discordpicker'
-
-
-
-
-
 
 
 import vSelect from 'vue-select';
@@ -41,7 +35,7 @@ import ReadMore from 'vue-read-more';
  
 Vue.use(ReadMore);
 
-Vue.use(DiscordPicker)
+
 
 
 

@@ -1,5 +1,5 @@
 <template>
-  <div  class="lala">
+  <div  class="lalla">
 
     
     <b-card class="border-0 p-0 m-0"   style="
@@ -10,7 +10,7 @@
  
      
 
-     <div class=" border shadow   p-tab">
+     <div class=" border shadow   p-tab p-3">
 
         <span> <h6 class="title">  <fas-icon class="icons" :icon="['fas', 'users']" size="lg" />            <b>   COMMUNITY   </b>  <span class="h4-color"> 7K </span> </h6>   </span>   
 

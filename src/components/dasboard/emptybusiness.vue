@@ -81,11 +81,13 @@ export default {
          width:112px;
          height: 38px;
          font-family: Helvetica Neue;
+
+          font-size: 12px;
      }  
 
 
      .mybusi{
-       font-size: 16px;
+       font-size: 12px;
 
      }
  }

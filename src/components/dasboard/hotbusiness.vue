@@ -9,7 +9,7 @@
 
 
 
-           <div class=" s-card  p-tab">
+           <div class="   p-tab">
 
                   
 

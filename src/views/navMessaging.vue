@@ -393,7 +393,14 @@
 
 
 
-      
+       <discord-picker
+    input
+    :value="value"
+    gif-format="md"
+    @update:value="value = $event"
+    @emoji="setEmoji"
+    @gif="setGif"
+  />
        
         <b-form-input
                     id="textarea"
@@ -650,6 +657,8 @@ export default {
         showsearch:true,
      selecteduser:false,
 
+      value: '',
+
       
        searchQuery: null,
         resources1:[
@@ -827,6 +836,22 @@ export default {
      this.selecteduser=true ;
 
    },
+
+
+
+   
+    setEmoji (emoji) {
+      console.log(emoji)
+    },
+
+
+    setGif (gif) {
+      console.log(gif)
+    },
+  
+
+
+
 
 showsearchh(){
 

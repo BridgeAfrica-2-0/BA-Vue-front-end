@@ -45,7 +45,7 @@
             
 
 
-            <strong class="net-title"> Global Car Supple Network </strong> <br />
+            <strong class="net-title"> Global  Network </strong> <br />
              Car Rental  
               <br />  20k Community <br />
             
@@ -129,7 +129,7 @@
             
 
 
-            <strong class="net-title"> Global Car Supple Network </strong> <br />
+            <strong class="net-title"> Global Network </strong> <br />
              Car Rental  
               <br />  20k Community <br />
             

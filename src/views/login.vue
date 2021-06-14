@@ -4,7 +4,7 @@
      
       <md-card class="md-layout-item md-size-50 md-small-size-100 p-card">
         <md-card-header>
-          <div class="md-title center">Login To Bridge Africa</div>
+          <div class="md-title center f-22">Login To Bridge Africa</div>
         </md-card-header>
 
         <md-card-content>
@@ -113,9 +113,9 @@
       <br/>
       
 
-      <label> By Loging in you agree to Bridge Africa's  </label> <br/>  
+      <label class="f-12"> By Loging in you agree to Bridge Africa's  </label> <br/>  
       
-       <label>  <b-link href="#">Terms and conditions </b-link> &    <b-link href="#">Privacy policies</b-link>    </label>  </div>
+       <label class="f-12">  <b-link href="#">Terms and conditions </b-link> &    <b-link href="#">Privacy policies</b-link>    </label>  </div>
 
 
 
@@ -281,8 +281,11 @@ import '@/assets/default.css'
 }
 
 
+.f-22{
 
-
+  font-size: 22px;
+}
+.f-12{font-size: 12px;}
 @media only screen and (max-width: 768px) {
 
 

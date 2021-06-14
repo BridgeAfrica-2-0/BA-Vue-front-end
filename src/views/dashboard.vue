@@ -138,7 +138,7 @@
 
 
 
-           <div class=" s-card  p-tab">
+           <div class="  p-tab">
              
                 <Business /> 
            
@@ -154,7 +154,7 @@
 
     <h6 class=" titlle">  <fas-icon class=" icons" :icon="['fas', 'project-diagram']"  size="lg" />  <b>   POPULAR NETWORKS </b>    </h6>  
 
- <div class="s-card">      <Popularnetwork />      </div>  </b-card>                   </b-col>
+ <div class="">      <Popularnetwork />      </div>  </b-card>                   </b-col>
         </b-row>
       </div>
     </div>
@@ -406,7 +406,7 @@ h4{
 
 
 .p-card {
-  margin: 10px;
+  margin: 2px;
 
   border: 0px;
 }

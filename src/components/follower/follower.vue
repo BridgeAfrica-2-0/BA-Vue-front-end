@@ -17,11 +17,11 @@
             </b-avatar>
           </div>
           <div class="d-inline-block ml-4 float-left mt-4">
-      <b-link>       <h5 class="font-weight-bolder name">User Name</h5>     </b-link> 
-            <p>
-              <br />
-              <span class="k15"> 1.5k </span> Community
-            </p>
+      <b-link>       <h5 class="font-weight-bolder name"> Blezour Blec</h5>     </b-link> 
+           <br />
+             
+              <span class="k15 duration"> 1.5k  Community </span>
+           
           </div>
         </b-col>
         <b-col cols="12">
@@ -67,15 +67,15 @@
             </b-avatar>
           </div>
           <div class="d-inline-block mt-4 ml-4 float-left texts">
-            <h6 class="font-weight-bolder name ">User Name</h6>
+            <h6 class="font-weight-bolder name ">Blezour Blec</h6>
             <p class="details">
-              www.bridgeafrica.com <br />
+            
               1.5k Community
             </p>
           </div>
         </b-col>
         <b-col cols="2">
-          <b-button class="m-community size" size="sm">
+          <b-button class="m-community size" size="sm" style="margin-top: -50px;">
             <i class="fas fa-map-marked-alt fa-lg btn-icon "></i>
 
             <span class="txt-btn">Direction</span></b-button
@@ -180,11 +180,13 @@ export default {
   width: 100%;
   padding-left: 30px;
   padding-right: 30px;
-  background-color: #eee;
+
 }
 .banner {
-  width: 100%;
-  height: 348px;
+ height: 426px;
+
+        width:100%;
+  object-fit: cover  !important;
 }
 .m-fa {
   margin-top: 5px;
@@ -245,17 +247,19 @@ img {
   color: #fff;
 }
 .avatar {
-  height: 102px;
-  width: 102px;
+ width: 168px;
+    height: 168px;
+        margin-top: -50px;
 }
 .name {
-  position: relative;
-  top: 14px;
-  font-family: "Open Sans Helvetica";
-  font-size: 20px;
+  position: absolute;
+ 
+ 
+  font-size: 32px;
+  margin-top: -20px !important;
 }
 p {
-  font-family: "Open sans Helvetica";
+ 
   font-size: 14px;
 }
 .community {
@@ -289,12 +293,12 @@ p {
 }
 p,
 .name {
-  font-family: "Open sans Helvetica";
-  font-size: 16px;
+
+  font-size: 32px;
 }
 .txt-btn {
   margin-left: 10px;
-  font-family: "Open Sans Helvetica";
+ 
   font-size: 16px;
   color: #fff;
 }
@@ -317,13 +321,20 @@ p,
     height: 28px;
   }
   .banner {
-    width: 100%;
-    height: 180px;
+    
+
+     height: 168px;
+
+        width:100%;
+
   }
   p,
   .name {
-    font-family: "Open Sans" "Helvetica";
-    font-size: 20px;
+
+
+
+    font-size: 18px;
+   
     position: relative;
     top: -1px;
   }
@@ -349,7 +360,7 @@ p,
   .avatar {
     height: 64px;
     width: 64px;
-    margin-top: 15px;
+   margin-top: -15px;
   }
   .profile {
     width: 100%;
@@ -376,9 +387,7 @@ p,
     position: relative;
     left: -15px;
   }
-  .mob-head {
-    background-color: #eee;
-  }
+  
   .more {
     position: relative;
     top: 20px;

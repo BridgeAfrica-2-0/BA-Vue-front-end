@@ -5,7 +5,7 @@
         <div class="row">
           <div class="container-fluid"  v-if="showalbum == false " >
             <div class="one2">
-              <div class="createp img-gall image-wrap">
+              <div class="createp img-gall image-wrapp">
                 <div class=" " >
                   <a
                     href="#"

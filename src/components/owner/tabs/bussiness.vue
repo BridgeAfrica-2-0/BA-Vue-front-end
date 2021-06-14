@@ -242,6 +242,61 @@
 
 
 
+
+
+                    <div class="row">
+
+
+   <label
+                        class=" pl-0 ml-3 control-label float-left"
+                        for="name"
+                        >Phone 2</label >
+
+                    <div class="input-group col-md-12 mb-4 selec">
+                        
+
+
+
+                      
+                      <div class="col-md-12  pl-0 pr-0">
+
+                        <select
+                          id="country"
+                          class="form-control col-md-3 float-left"
+                        >
+                          <option>USA(+1)</option>
+                          <option>USA(+1)</option>
+                          <option>USA(+1)</option>
+                          <option>India(+91)</option>
+                        </select>
+
+                        <input
+                          id="tel"
+                          name="tel"
+                          type="tel"
+                          placeholder=""
+                          class="form-control col-md-9"
+                        />
+
+                      </div>
+
+
+
+
+                    </div>
+                  </div>
+
+
+
+
+
+
+
+
+
+
+
+
                   <div class="row mb-3">
                     <div class="col-md-12">
                       <div class="form-group">

@@ -8,7 +8,7 @@
         class="img-fluid  banner"
         alt="Kitten"
       />
-   </div>
+   </div>        
 
 
 
@@ -29,6 +29,11 @@
             >
             </b-avatar>
 
+
+
+
+
+
             <b-icon
               icon="camera-fill"
               class="avatar-header-icon btn cursor-pointer size"
@@ -41,7 +46,7 @@
                   <h6
                     class=" profile-name text-center "
                   > 
-                  <b>  Blezour Blec   </b>   <br /> <span class="duration"> 1.5k Community </span>
+                 <b>  <b-link>  Blezour Blec   </b-link>    </b>   <br /> <span class="duration"> 1.5k Community </span>
                   </h6>
                   
                   
@@ -66,7 +71,7 @@
                 <div class=" ">
               <span class="float-right profileedit-btn  put-topbtn "  >
 
-                <b-button variant="primary" class="edit-btn  d-none d-md-inline"   v-b-modal.coverphoto > <fas-icon class="mr-2" :icon="['fas', 'pencil-alt']" size="lg" />   Edit </b-button>
+                <b-button variant="primary"  class="  d-none d-md-inline edit-btn"   v-b-modal.coverphoto > <fas-icon class="mr-2" :icon="['fas', 'pencil-alt']" size="lg" />   Edit </b-button>
                 
                 
                 <b-dropdown id="dropdown-1" class="float-right options dot-btn mt-2 mt-sm-2 mt-md-0 mr-3" no-caret variant="outline" style="border-color: #ffD20; color:  #ffD20">
@@ -435,20 +440,6 @@ object-fit: cover  !important;
 
 }
 
-.edit-btn:hover{
- 
-  border-color:#b39500 ;
-}
-
-.edit-btn:focus{
- 
-  border-color:#b39500 ;
-}
-
-.edit-btn:active{
- 
-  border-color:#e4c229 ;
-}
 
 
 .dot-btn{
@@ -472,5 +463,29 @@ object-fit: cover  !important;
 } 
  */
  
+
+
+
+ .edit-btn:hover{
+ 
+  border-color:#b39500 !important ;
+  background-color:#b39500 !important ;
+}
+
+.btn:focus{
+ 
+  border-color:#b39500  !important;
+   background-color:#b39500 !important ;
+}
+
+.btn:active{
+ 
+  border-color:#e4c229  !important;
+   background-color:#b39500 !important ;
+}
+
+
+
+
 
 </style>

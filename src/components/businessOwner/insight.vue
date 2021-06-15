@@ -1,6 +1,7 @@
 <template>
-  <div class="container-fluid mt-3"  style="padding-left:60px; padding-right:60px">
-    <b-row>
+  <div class="container-fluid mt-3"  >
+
+    <b-row class="mr-35">
 
 
       <!--
@@ -60,7 +61,7 @@
 
 
 
-      <b-col  md="12" lg="6" sm="12">
+      <b-col xl="4"  md="6" lg="6" sm="12">
         <b-card class="b-shadow">
           <b-row>
             <b-col cols="8">
@@ -85,16 +86,16 @@
             <b-col>
               <h3 class="mb-2 m-up">
                 3,897
-                <p class="s-text">Total Posts: 79</p>
+                <p class="s-text">Total Post: 79</p>
               </h3>
             </b-col>
-            <b-col cols="8">
-              <img
+            <b-col cols="5">
+           <!--   <img
                 fluid-grow
                 class="i-size"
                 src="../../assets/img/pchart.png"
                 alt=""
-              /> </b-col
+              />   --> </b-col
           ></b-row>
         </b-card>
       </b-col>
@@ -103,9 +104,7 @@
 
 
 
-
-
- <b-col  md="12" lg="6" sm="12">
+ <b-col xl="4"  md="6" lg="6" sm="12">
         <b-card class="b-shadow">
           <b-row>
             <b-col cols="8">
@@ -130,10 +129,10 @@
             <b-col>
               <h3 class="mb-2 m-up">
                 3,897
-                <p class="s-text">Total Posts: 79</p>
+                <p class="s-text">Total Like: 79</p>
               </h3>
             </b-col>
-            <b-col cols="8">
+            <b-col cols="5">
               <img
                 fluid-grow
                 class="i-size"
@@ -143,6 +142,47 @@
           ></b-row>
         </b-card>
       </b-col>
+
+ <b-col xl="4"  md="6" lg="6" sm="12">
+        <b-card class="b-shadow">
+          <b-row>
+            <b-col cols="8">
+              <h6 class="card-title mb-0">
+                New Notifications
+                <p class="s-text">From (Jan 1 - Jan 8)</p>
+              </h6>
+            </b-col>
+            <b-col>
+              <b-card-text class="f-right">
+                <b-icon
+                  v-b-tooltip.hover
+                  title="Tooltip content goes in here"
+                  icon="exclamation-circle-fill"
+                  variant="dark"
+                ></b-icon>
+              </b-card-text>
+            </b-col>
+          </b-row>
+          <br />
+          <b-row>
+            <b-col>
+              <h3 class="mb-2 m-up">
+                3,897
+                <p class="s-text">Total Share: 79</p>
+              </h3>
+            </b-col>
+            <b-col cols="5">
+              <img
+                fluid-grow
+                class="i-size"
+                src="../../assets/img/ggraph.png"
+                alt=""
+              /> </b-col
+          ></b-row>
+        </b-card>
+      </b-col>
+
+
     </b-row>
 
     <br />
@@ -223,5 +263,13 @@ export default {
   color: #000;
   margin-bottom: 1.2rem;
   font-family: "Overpass";
+}
+
+@media (min-width: 762px) {
+
+.mr-35{
+  margin-right: -35%;
+}
+
 }
 </style>

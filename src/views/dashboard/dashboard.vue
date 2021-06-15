@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="overflow-x:hidden">
     <navbar></navbar>
     <b-container fluid="xl" class="text-justify mt-3 order-sm-1">
       <b-row>

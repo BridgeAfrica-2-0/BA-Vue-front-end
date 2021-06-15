@@ -346,7 +346,7 @@
                           type="text"
                           name="alias"
                           id="alias"
-                          placeholder="Enter your Keywords"
+                          placeholder="Enter  Keywords Alerts"
                           class="form-control text"
                         />
 

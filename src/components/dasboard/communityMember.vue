@@ -1,5 +1,5 @@
 <template>
-  <b-container>
+  <div>
     <div class="s-card">
 
 
@@ -229,7 +229,7 @@
 
 
     </div>
-  </b-container>
+  </div>
 </template>
 
 <script>
@@ -525,8 +525,8 @@ f-right {
     border: 1px solid rgba(0, 0, 0, 0.125);
     margin-bottom: 10px;
 
-    margin-right: -5px;
-    margin-left: -1px;
+    margin-right: 2px;
+    margin-left: 6px;
   }
 
   h6 {

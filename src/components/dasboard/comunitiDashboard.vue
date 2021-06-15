@@ -27,7 +27,7 @@
      <div>
 
        <b-row>  
-         <b-col> 
+         <b-col class="p-2"> 
       <b-tabs fill pills content-class="mt-3  f-left m-up">
 
         <b-tab  active>
@@ -37,7 +37,11 @@
             </template>
 
          
-         <div class="s-comcard">    <b-row>  <b-col lg="6" sm="12">   <div >  <People />    </div >  </b-col> <b-col md="6" sm="12">   <div > <People />    </div >  </b-col>    </b-row>   </div>
+         <div class="s-comcard">    <b-row>  <b-col lg="6" sm="12" class="p-2">  
+           
+            <div >  <People />    </div >  </b-col> <b-col md="6" sm="12" class="p-2">   <div > <People />    </div >
+            
+              </b-col>    </b-row>   </div>
  
          
          

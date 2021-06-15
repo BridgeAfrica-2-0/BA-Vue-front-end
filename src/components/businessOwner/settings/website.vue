@@ -1,6 +1,6 @@
 <template>
   <b-container class="container-fluid">
-    <b-container class="">
+    <b-container class="text">
       <b-container class="bv-example-row">
         <b-row>
           <b-col cols="12" md="12">
@@ -8,8 +8,8 @@
               <b-table-simple hover small caption-top responsive>
                 <b-thead>
                   <b-tr>
-                    <b-th class="a-text">Website Title</b-th>
-                    <b-th class="a-text">Website Title Goes here</b-th>
+                    <b-th class="a-text username">Website Title</b-th>
+                    <b-th class="a-text username">Website Title Goes here</b-th>
                     <b-th> <b-button  variant="outline" class=" btn-outline-primary"> change  </b-button> </b-th>
                   </b-tr>
                 </b-thead>

@@ -1,7 +1,7 @@
 <template>
   <b-container>
     <b-container>
-      <p class="a-text">
+      <p class="text">
         Select a payment method for your bridget africa account
       </p>
     </b-container>
@@ -14,12 +14,12 @@
                 label-cols-lg="3"
                 label="Country"
                 label-size="md"
-                label-class="font-weight-bold pt-0"
+                label-class="font-weight-bold pt-0 username"
                 class="mb-0"
               >
 
               
-                <country-select v-model="country" :country="country" topCountry="US"  class="form-control" />
+                <country-select v-model="country" :country="country" topCountry="US"  class="form-control text" />
 
               </b-form-group>
 
@@ -35,6 +35,7 @@
         <b-form-radio
           id="mtn"
           name="mtn"
+          class="text"
           value="mtn"
           >MTN Mobile Payment</b-form-radio
         >
@@ -44,6 +45,7 @@
           id="Mobile Payment"
           name="mobile-payment"
           value="mobile-money"
+           class="text"
         >
          Orange  Mobile Payment
         </b-form-radio>
@@ -56,8 +58,28 @@
           :aria-describedby="ariaDescribedby"
           id="Credit-card"
           name="credit-card"
+           class="text"
+           
           value="credit-card"
           > Express Union</b-form-radio
+        >
+
+
+
+
+
+      
+        <br />
+      
+
+         <b-form-radio
+          
+          :aria-describedby="ariaDescribedby"
+          id="Credit-card"
+          name="credit-card"
+           class="text"
+          value="credit-card"
+          > GIMAC </b-form-radio
         >
 
 
@@ -69,7 +91,7 @@
 
 
       <div class=" mb-0">
-        <p>
+        <p class="text">
            Your payment
           information is secure
         </p>

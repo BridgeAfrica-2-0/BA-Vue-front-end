@@ -5,6 +5,20 @@
         <Intro />
      
       <comunitiDashboard />
+      
+       <br /> 
+
+
+
+      <b-card>    
+
+      <img
+        src="@/assets/img/upgrade.png"
+        class="img-fluid  banner"
+        alt="Kitten"
+      />
+
+      </b-card>
       </b-col>
 
       <b-col md="8"  lg="7"  xl="8">

@@ -1,5 +1,5 @@
 <template>
-  <b-container>
+  <div>
     <div class="s-card">
 
 
@@ -348,7 +348,7 @@
 
 
     </div>
-  </b-container>
+  </div>
 </template>
 
 <script>

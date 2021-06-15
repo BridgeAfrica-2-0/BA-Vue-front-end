@@ -28,11 +28,14 @@
                 label-class="font-weight-bold pt-0 username"
                 class="mb-0"
               >
-                <b-form-select v-model="selected">
-                  <b-form-select-option value="a">
-                    --select option</b-form-select-option
-                  >
-                </b-form-select>
+                       <b-form-select
+            v-model="category"
+            :options="categories"
+            class="mb-3"
+            value-field="item"
+            text-field="name"
+          ></b-form-select>
+
               </b-form-group>
             </b-container>
           </div>
@@ -117,7 +120,34 @@
             <b-container>
               <b-form-group
                 label-cols-lg="3"
-                label="Phone"
+                label="Phone 1"
+                label-size="md"
+                label-class="font-weight-bold pt-0 username"
+                class="mb-0"
+              >
+                <b-row>
+                  <b-col>
+                    <b-form-select v-model="selected">
+                      <b-form-select-option value="a">
+                        --select option</b-form-select-option
+                      >
+                    </b-form-select>
+                  </b-col>
+
+                  <b-col cols="8">
+                    <b-form-input id="bname" placeholder=""></b-form-input>
+                  </b-col>
+                </b-row>
+              </b-form-group>
+            </b-container>
+          </div>
+
+
+            <div class="b-bottom ">
+            <b-container>
+              <b-form-group
+                label-cols-lg="3"
+                label="Phone 2"
                 label-size="md"
                 label-class="font-weight-bold pt-0 username"
                 class="mb-0"
@@ -172,6 +202,29 @@
               </b-form-group>
             </b-container>
           </div>
+
+       
+
+
+
+
+ <div class="b-bottom">
+            <b-container>
+              <b-form-group
+                label-cols-lg="3"
+                label="Country"
+                label-size="md"
+                label-class="font-weight-bold pt-0 username"
+                class="mb-0"
+              >
+                <country-select v-model="country" :country="country" topCountry="US"  class="form-control text" />
+              </b-form-group>
+            </b-container>
+          </div>
+
+
+
+
 
           <div class="b-bottom">
             <b-container>
@@ -443,7 +496,35 @@
 
 <script>
 export default {
-  name: "info"
+  name: "info",
+
+
+   data() {
+    return {
+      
+
+       category:'',
+       categories: [ 
+
+        { item: "Professional_and_home_service", name: "Professionals" },
+        { item: "Agriculture ", name: "Agriculture " },
+        { item: "Restaurant ", name: " Restaurant " },
+        { item: "Electronics ", name: "Electronics " },
+        { item: "Handicrafts", name: "Handicrafts" },
+        { item: "clothing", name: "clothing" },
+        { item: "Mechanics", name: "Mechanics" },
+        { item: "Health_unit ", name: "Health unit " },
+        { item: "Bars", name: "Bars" },
+        { item: "Hair_and_beauty ", name: "Hair and beauty " },
+        { item: "Real_estate ", name: "Real_estate " },
+        { item: "Travelling ", name: "Travelling " },
+         { item: "Hotels", name: "Hotels" },
+          { item: "station", name: " station  " },
+           { item: "Mayor_concils", name: "Mayor_concils" },
+           { item: "Taxis service", name: "Taxis service" },
+
+      ],
+    }}
 };
 </script>
 

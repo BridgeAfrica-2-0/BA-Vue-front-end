@@ -1,6 +1,6 @@
 <template>
-  <b-container>
-    <div class="s-card">
+  <div>
+    <div class="s-ccard">
 
 
     
@@ -348,7 +348,7 @@
 
 
     </div>
-  </b-container>
+  </div>
 </template>
 
 <script>
@@ -410,9 +410,9 @@ export default {};
     margin-right: 5px;
 }
 
-.s-card{
+.s-ccard{
 
-  padding-left: 5px;
+  padding-left: 7px;
   padding-right:5px;
 
 }
@@ -536,7 +536,9 @@ f-right {
   background-color: #fff;
   background-clip: border-box;
   border: 1px solid rgba(0, 0, 0, 0.125);
+  margin: 5px;
   margin-bottom: 10px;
+
 }
 
 @media only screen and (min-width: 1200px) {
@@ -592,8 +594,8 @@ f-right {
     border: 1px solid rgba(0, 0, 0, 0.125);
     margin-bottom: 10px;
 
-    margin-right: -15px;
-    margin-left: -15px;
+    margin-right: 2px;
+    margin-left: 2px;
   }
 
   h6 {
@@ -647,8 +649,8 @@ f-right {
     border: 1px solid rgba(0, 0, 0, 0.125);
     margin-bottom: 10px;
 
-    margin-right: -15px;
-    margin-left: -15px;
+    margin-right: 2px;
+    margin-left: 2px;
   }
 
   h6 {

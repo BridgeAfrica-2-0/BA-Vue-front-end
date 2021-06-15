@@ -3,10 +3,7 @@
 
 
   
-      <fas-icon
-          class="violet float-left mr-1 icon-size primary"
-          :icon="['fas', 'building']"
-        />Market
+       <fas-icon class="icons " :icon="['fas', 'store']" size="lg" /> Market
         <button
           type="button"
           data-toggle="modal"

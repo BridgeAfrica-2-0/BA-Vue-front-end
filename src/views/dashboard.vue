@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="overflow-x:hidden">
     <navbar></navbar>
 
    
@@ -115,7 +115,9 @@
       </div>
       <br />
 
-      <comuniti-dashboard class="m-component"></comuniti-dashboard> <br />
+      <b-row>  <comuniti-dashboard class="m-component m-3"></comuniti-dashboard> <br />   </b-row>
+
+      
 
       <div>
         <b-row>
@@ -327,16 +329,18 @@ export default {
 
 <style scoped>
 
+
+.card-body{
+  padding:8px;
+}
+
+
 .card{
   padding:0px;
   padding-top: 15px;
 
 }
 
-
-.card-body{
-  padding:3px;
-}
 
 
 @media only screen and (min-width: 768px) {

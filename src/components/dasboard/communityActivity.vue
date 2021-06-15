@@ -539,6 +539,13 @@ export default {
 </script>
 
 <style scoped>
+
+.card-body{
+
+  padding: 2px !important;
+}
+
+
 .action-intro {
   font-size: 1rem;
   font-family: Avenir, Helvetica, Arial, sans-serif;
@@ -716,9 +723,6 @@ export default {
 
 
 }
-.card-body{
 
-  padding: 2px !important;
-}
 
 </style>

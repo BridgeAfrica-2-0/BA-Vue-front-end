@@ -1,18 +1,18 @@
 <template>
   <b-container>
     <b-container class="bv-example-row">
-      <p class="t-left">
+      <p class="t-left text">
         Blocked users can no longer see things you post on your business, invite
         your business to networks, strat a conversation, or follow your
         business.
       </p>
     </b-container>
 
-    <b-container class="bv-example-row">
+    <b-container class="bv-example-row text">
       <b-li-group>
         <b-li class="d-flex align-items-center m-list">
           <b-avatar class="mr-3" size="4em"></b-avatar>
-          <span class="mr-auto">J. Circlehead</span>
+          <span class="mr-auto username">J. Circlehead</span>
           <span class=""><b-link href="#">Unblock</b-link></span>
         </b-li>
        <hr width="100%" />
@@ -24,7 +24,7 @@
             class="mr-3"
             size="4em"
           ></b-avatar>
-          <span class="mr-auto">itz blec blec</span>
+          <span class="mr-auto username">itz blec blec</span>
           <span class=""><b-link href="#">Unblock</b-link></span>
         </b-li>
 
@@ -32,7 +32,7 @@
 
         <b-li class="d-flex align-items-center m-list">
           <b-avatar class="mr-3" size="4em"></b-avatar>
-          <span class="mr-auto">J. Circlehead</span>
+          <span class="mr-auto username">J. Circlehead</span>
           <span class=""><b-link href="#">Unblock</b-link></span>
         </b-li>
         <hr width="100%" />
@@ -45,7 +45,7 @@
             class="mr-3"
             size="4em"
           ></b-avatar>
-          <span class="mr-auto">itz blec blec</span>
+          <span class="mr-auto username">itz blec blec</span>
           <span class=""><b-link href="#">Unblock</b-link></span> 
          
         </b-li>

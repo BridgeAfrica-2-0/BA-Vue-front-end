@@ -522,12 +522,23 @@
                 <thead>
                     <tr>
                         
+                        <td>      <b-row>    <b-col cols="6">      <span class="bold " >  Send to all   </span>   </b-col>    <b-col>  <span > <b-form-checkbox class="a-text text" id="" name="" value="">
+                  
+                </b-form-checkbox>   </span>  </b-col>  </b-row> </td>
+
+
                     </tr>
                 </thead>
                 <tbody>
+
+                  <tr>     </tr>
+
+
                     <tr v-for="item in resultQuery" :key="item.key"   class="p-2 message"
-                  @click="showInfo(false)">
-                        <td>       <b-avatar
+                 >
+                        <td>     
+                          
+                          <b-row>    <b-col cols="6">        <b-avatar
                 class="d-inline-block "
                 variant="primary"
                 size="30"
@@ -536,10 +547,19 @@
                 v-bind:src="item.profile"
                
               ></b-avatar>
-   <span class="bold">   {{item.name}}   </span>    </td>
+
+
+   <span class="bold " >   {{item.name}}   </span>   </b-col>      <b-cols>     <span > <b-form-checkbox class="a-text text" id="" name="" value="">
+
+
+                  
+                </b-form-checkbox>   </span>   </b-cols>     </b-row>  </td>    
                     </tr>
                 </tbody>
+
+                
             </table>
+            <b-button variant="primary" size="sm" class="pl-3 pr-3" >  Send   </b-button>
         </div>
    
 
@@ -884,7 +904,7 @@ showsearchh(){
 }
 .primary-bg,
 .primary-bg:hover {
-  background-color: #e75c18;
+  
   border: none;
 }
 

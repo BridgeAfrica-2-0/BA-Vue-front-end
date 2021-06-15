@@ -1,7 +1,7 @@
 <template>
   <div>
    
-      <b-icon icon="person-fill" variant="primary"></b-icon>
+      <b-icon icon="person-fill" variant="primary" class="icon-size"  >      </b-icon>
 
       <b>
         About

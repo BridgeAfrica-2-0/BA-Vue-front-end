@@ -1,6 +1,6 @@
 <template>
   <b-container>
-    <div class="s-card">
+    <div class="s-cardd">
 
 
 
@@ -239,6 +239,13 @@ export default {};
 <style scoped>
 
 
+.s-cardd{
+
+  padding-left: 8px;
+    padding-right: 8px;
+
+}
+
 @media only screen and (min-width: 768px) {
 .btn-text{
 
@@ -291,10 +298,10 @@ export default {};
     margin-right: 5px;
 }
 
-.s-card{
+.s-cardd{
 
-  padding-left: 5px;
-  padding-right:5px;
+  padding-left: 10px;
+  padding-right:10px;
 
 }
 

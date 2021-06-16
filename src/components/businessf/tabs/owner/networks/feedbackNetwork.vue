@@ -12,10 +12,9 @@
             <b-icon-filter></b-icon-filter><span class="sr-only">Search</span>
           </template>
           <p class="font-weight-bolder px-3 m-0">Feedbacks Type</p>
-          <b-dropdown-item href="#">Any</b-dropdown-item>
+         
           <b-dropdown-item href="#">suggestion for improvement</b-dropdown-item>
-          <b-dropdown-item href="#">Progress to your program</b-dropdown-item>
-          <b-dropdown-item href="#">New Idea for PEA-JEUNES</b-dropdown-item>
+          
         </b-dropdown>
 
 

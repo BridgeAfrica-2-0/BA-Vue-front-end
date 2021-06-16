@@ -190,7 +190,7 @@ export default {
 
 .pivate{
 
-    font-size: 16px;
+    font-size: 14px;
   
   padding-left:8px;
   text-align:left;
@@ -215,8 +215,8 @@ export default {
 
 .network-logo{
 
-    width:78px  !important;
-    height:78px !important;
+    width:200px  !important;
+    height:200px !important;
 }
 
 
@@ -229,7 +229,7 @@ export default {
 
 .pivate{
 
-   font-size: 14px;
+   font-size: 12px;
  
   padding-left:8px;
 

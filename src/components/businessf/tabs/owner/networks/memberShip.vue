@@ -83,7 +83,7 @@
                           size="sm"
                           class="b-background flexx pobtn shadow"
                         >
-                           <span class="btn-text">Approve</span> 
+                           <span class="btn-text text-center">Approve</span> 
                         </b-button>
                       </b-col>
 
@@ -98,10 +98,10 @@
                         <b-button
                           block
                           size="sm"
-                          class="b-background flexx pobtn shadow"
+                          class="b-background flexx pobtn shadow   text-center "
                           variant="primary"
                         >
-                                      <span class="btn-com">Decline</span>
+                                      <span class="btn-com  text-center">Decline</span>
                         </b-button>
                       </b-col>
                     </b-row>
@@ -314,9 +314,9 @@
                           block
                           variant="primary"
                           size="sm"
-                          class="b-background flexx pobtn shadow"
+                          class="b-background flexx pobtn shadow text-center t-center"
                         >
-                           <span class="btn-text">Approve</span> 
+                           <span class="">Approve</span> 
                         </b-button>
                       </b-col>
 
@@ -331,10 +331,10 @@
                         <b-button
                           block
                           size="sm"
-                          class="b-background flexx pobtn shadow"
+                          class="b-background flexx pobtn shadow t-center  text-center"
                           variant="primary"
                         >
-                                      <span class="btn-com">Decline</span>
+                                      <span class="btn-com text-center t-center">Decline</span>
                         </b-button>
                       </b-col>
                     </b-row>
@@ -1108,7 +1108,14 @@ f-right {
   display: none;
 }
 
- 
+ .btn{
+
+   text-align: center;
+ }
+
+ .pobtn{
+   text-align: center;
+ }
 </style>
 
 

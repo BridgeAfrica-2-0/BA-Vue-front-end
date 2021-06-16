@@ -5,19 +5,26 @@
         <b-row>
           <b-col cols="12" md="12">
             <div>
+
+
+
+
+
+
+
               <b-table-simple hover small caption-top responsive>
                 <b-thead>
                   <b-tr>
-                    <b-th class="a-text username">Website Title</b-th>
-                    <b-th class="a-text username">Website Title Goes here</b-th>
+                    <b-th class="a-text username"> Account Type </b-th>
+                  
                     <b-th> <b-button  variant="outline" class=" btn-outline-primary"> change  </b-button> </b-th>
                   </b-tr>
                 </b-thead>
 
                 <b-tbody>
                   <b-tr>
-                    <b-td class="a-text"> Fav Icon</b-td>
-                    <b-td class="a-text">--Not set--</b-td>
+                    <b-td class="a-text"> Basics </b-td>
+                   
                     <b-td class="a-text">
                       <b-link href="#">Upgrade</b-link>
                     </b-td>
@@ -25,31 +32,29 @@
                   <br />
 
                   <b-tr>
-                    <b-td class="a-text"> Subdomain Name</b-td>
-                    <b-td class="a-text">www.website.com/subdomain</b-td>
-                    <b-td><b-link href="#">Upgrade</b-link> </b-td>
+                    <b-td class="a-text"> Premium</b-td>
+                   
+                    <b-td><b-link href="#"> Not Available </b-link> </b-td>
                   </b-tr>
 
                   <br />
 
-                  <b-tr>
-                    <b-td class="a-text"> Connect Your Domain</b-td>
-                    <b-td class="a-text">Not Connected</b-td>
-                    <b-td> <b-link href="#">Upgrade</b-link> </b-td>
-                  </b-tr>
+                  
 
                   <br />
 
-                  <b-tr>
-                    <b-td class="a-text"> HTTPS</b-td>
-                    <b-td class="a-text">Your Site is not scured </b-td>
-                    <b-td> <b-link href="#">Upgrade</b-link> </b-td>
-                  </b-tr>
+                
                 </b-tbody>
               </b-table-simple>
+
+
+
+
+
+
             </div>
 
-            <b-button  variant="outline" class=" btn-outline-primary"> Delete Website  </b-button>
+            <b-button  variant="outline" class=" btn-outline-primary"> Delete Account  </b-button>
           </b-col>
 
           <!--

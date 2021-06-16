@@ -44,17 +44,12 @@
                           ><span class="sr-only">Settings</span>
                         </template>
                         <b-dropdown-item href="#">
-                          Ignore
+                          Approved
                         </b-dropdown-item>
                         <b-dropdown-item href="#">
-                          Delete a Comment
+                          Unapproved
                         </b-dropdown-item>
-                        <b-dropdown-item href="#">
-                          Send Messge To User
-                        </b-dropdown-item>
-                        <b-dropdown-item href="#">
-                          Remove User
-                        </b-dropdown-item>
+                       
                       </b-dropdown>
                     </span>
                   </h6>

@@ -26,11 +26,10 @@
                     font-scale="1"
                   ></b-icon>
                 </template>
-                <b-dropdown-item href="#">Approve</b-dropdown-item>
-                <b-dropdown-item href="#"> Delete Post </b-dropdown-item>
+                <b-dropdown-item href="#"> Approve</b-dropdown-item>
+                <b-dropdown-item href="#"> Un Approved </b-dropdown-item>
 
-                <b-dropdown-item href="#"> Send Message </b-dropdown-item>
-                <b-dropdown-item href="#"> Remove User </b-dropdown-item>
+               >
               </b-dropdown>
             </div>
           </span>
@@ -72,10 +71,9 @@
                   ></b-icon>
                 </template>
                 <b-dropdown-item href="#">Approve</b-dropdown-item>
-                <b-dropdown-item href="#"> Delete Post </b-dropdown-item>
+                <b-dropdown-item href="#"> Un Approve </b-dropdown-item>
 
-                <b-dropdown-item href="#"> Send Message </b-dropdown-item>
-                <b-dropdown-item href="#"> Remove User </b-dropdown-item>
+               
               </b-dropdown>
             </div>
           </span>

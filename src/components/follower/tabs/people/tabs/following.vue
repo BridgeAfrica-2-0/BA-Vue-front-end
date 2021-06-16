@@ -1,10 +1,10 @@
 <template>
   <div>
 
-           <b-row>
+           <b-row class="p-0">
 
            
-      <b-col cols="12" md="6" >
+      <b-col cols="12" md="6" class="p-0" >
 
 
         <b-input-group class="mb-2 px-md-3 float-right">
@@ -27,14 +27,14 @@
     <br/>
  
 
- <b-row> 
-<b-col md="12" lg="6">  
+ <b-row class="p-0"> 
+<b-col md="12" lg="6" class="p-0">  
     <CommunityMembers/>
 
  </b-col>
 
 
- <b-col md="12" lg="6">  
+ <b-col md="12" lg="6" class="p-0">  
     <CommunityMembers/>
 
  </b-col>

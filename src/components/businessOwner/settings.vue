@@ -224,7 +224,7 @@
               <b-card-text> <Payment /> </b-card-text
             ></b-tab>
 
-            <b-tab title="Website">
+            <b-tab title="Account Type">
              
 
               <b-card-text> <Website /> </b-card-text
@@ -367,7 +367,7 @@ currenttab: {
         {label: 'Business Info' },
         {label: 'Business Roles'},
          {label: 'payment '},   
-        {label: 'website' }, 
+        {label: 'Account Type' }, 
 
         {label: 'Blocking'},
         

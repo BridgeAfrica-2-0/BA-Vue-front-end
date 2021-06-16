@@ -1,6 +1,6 @@
 <template>
-  <b-container>
-    <div class="s-card">
+  <div>
+    <div class="s-cardd">
 
 
     
@@ -348,7 +348,7 @@
 
 
     </div>
-  </b-container>
+  </div>
 </template>
 
 <script>
@@ -356,6 +356,13 @@ export default {};
 </script>
 
 <style scoped>
+
+.s-cardd{
+
+  padding-left: 8px;
+    padding-right: 8px;
+
+}
 
 
 @media only screen and (min-width: 768px) {
@@ -410,10 +417,10 @@ export default {};
     margin-right: 5px;
 }
 
-.s-card{
+.s-cardd{
 
-  padding-left: 5px;
-  padding-right:5px;
+  padding-left: 20px;
+    padding-right: 20px;
 
 }
 
@@ -803,4 +810,6 @@ f-right {
 
 
 }
+
+
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <div class="mt-3">
+  <div class=" p-0 mt-3">
     <div class="container-fluid">
       <b-tabs pills content-class="mt-3  f-left">
         <b-tab title="People" active>

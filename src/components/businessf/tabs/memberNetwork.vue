@@ -1,6 +1,6 @@
 <template>
   <div class="mt-3 p-0">
-    <b-container fluid class="p-0">
+   
       <b-card class="f-left p-0">
 
 
@@ -12,7 +12,7 @@
 
 
       </b-card>
-    </b-container>
+   
   </div>
 </template>
 

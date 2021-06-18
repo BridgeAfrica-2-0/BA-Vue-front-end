@@ -482,19 +482,24 @@ margin-right: -5px;
 
 }
 
-.edit-btn:hover{
+
+
+ .edit-btn:hover{
  
-  border-color:#ffdb58 ; 
+  border-color:#b39500 !important ;
+  background-color:#b39500 !important ;
 }
 
-.edit-btn:focus{
+.btn:focus{
  
-  border-color:#ffdb58 ;
+  border-color:#b39500  !important;
+   background-color:#b39500 !important ;
 }
 
-.edit-btn:active{
+.btn:active{
  
-  border-color:#ffdb58 ;
+  border-color:#e4c229  !important;
+   background-color:#b39500 !important ;
 }
 
 
@@ -617,10 +622,7 @@ width: 100%;
 
 
 
-.btn:hover{
 
-  background-color: #ffdb58 important;
-}
 
 }
 

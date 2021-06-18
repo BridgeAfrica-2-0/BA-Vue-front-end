@@ -34,7 +34,7 @@
             </template>
 
          
-         <div class="s-comcard">    <People />      </div>
+         <div class="s-comcardd">    <People />      </div>
  
          
          
@@ -46,7 +46,7 @@
              Following  <span class="spa-color">  7K   </span>
             </template>
 
-      <div class="s-comcard">     <People />       </div>
+      <div class="s-comcardd">     <People />       </div>
 
         
         
@@ -77,7 +77,7 @@
          
 
 
-         <div class="s-comcard">      <Business />     </div>
+         <div class="s-comcardd">      <Business />     </div>
 
  
          
@@ -90,7 +90,7 @@
              Following  <span class="spa-color">  7K   </span>
             </template>
         
-        <div class="s-comcard">    <Business />     </div>
+        <div class="s-comcardd">    <Business />     </div>
  
         </b-tab>
       </b-tabs>

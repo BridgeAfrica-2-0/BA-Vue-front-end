@@ -1,20 +1,6 @@
 <template>
-  <b-container>
-    <div class="s-card">
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  <div>
+    <div class="s-cardd">
 
 
 
@@ -229,7 +215,7 @@
 
 
     </div>
-  </b-container>
+  </div>
 </template>
 
 <script>
@@ -238,6 +224,13 @@ export default {};
 
 <style scoped>
 
+
+.s-cardd{
+
+  padding-left: 20px;
+    padding-right: 20px;
+
+}
 
 @media only screen and (min-width: 768px) {
 .btn-text{
@@ -291,10 +284,10 @@ export default {};
     margin-right: 5px;
 }
 
-.s-card{
+.s-cardd{
 
-  padding-left: 5px;
-  padding-right:5px;
+  padding-left: 25px;
+  padding-right:25px;
 
 }
 
@@ -470,8 +463,8 @@ f-right {
     border: 1px solid rgba(0, 0, 0, 0.125);
     margin-bottom: 10px;
 
-    margin-right: -15px;
-    margin-left: -15px;
+    margin-right: 1px;
+    margin-left: 1px;
   }
 
   h6 {
@@ -525,8 +518,8 @@ f-right {
     border: 1px solid rgba(0, 0, 0, 0.125);
     margin-bottom: 10px;
 
-    margin-right: -15px;
-    margin-left: -15px;
+    margin-right: 1px;
+    margin-left: 1px;
   }
 
   h6 {

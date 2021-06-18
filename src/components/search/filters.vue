@@ -17,7 +17,7 @@
        
         name="flavour-4a" 
         @change="selectedsidebar"
-        class="m-1   br-3"
+        class="m-1   br-3"             
         
       >
 
@@ -1007,18 +1007,15 @@ case 'Handicrafts': this.selectcategories = this.Handicrafts_filters;
   
 
       
+      
        Oils_filters: [
 
         { value: "Coconut_oils", text: "Coconut oils" },
         { value: "Palm_oil", text: "Palm oil" },
+      { value: "Palm_oil", text: "Palm oil" },
 
-         { value: "Groundnut_oil", text: " Groundnut oil " },
-
-
-        
-      
-        
-       
+               { value: "vetegetable_oil", text: " Vegetable " },
+ 
 
       ],
 
@@ -1176,14 +1173,26 @@ case 'Handicrafts': this.selectcategories = this.Handicrafts_filters;
 
   
 
-       Vegetables_filters: [
+        Vegetables_filters: [
         { value: "Cucumbers", text: "Cucumbers" },
         { value: "Tomato", text: "Tomato" },
-        { value: "broccoli", text: "broccoli" },
+      
         { value: "Pepper", text: "Pepper" },
         { value: "Carrots", text: "Carrots" },
         { value: "Egusi", text: "Egusi" },
         { value: "Salad", text: "Salad" },
+
+         { value: "Cauliflower", text: "Cauliflower" },
+
+         { value: "Broccoli", text: "broccoli" },
+
+     	
+
+      { value: "Zucchini", text: "Zucchini" },
+
+       { value: "Eggplants", text: "Eggplants" },
+
+         
         { value: "Okra", text: "Okra" },
         { value: "Green_leaf", text: "Green leaf" },
         { value: "huckleberry", text: "huckleberry " },
@@ -1787,8 +1796,7 @@ Professional_services  : [
 
 
 
- African_food: [
-
+ African_food : [
         { value: "Kati-kati", text: "Kati-kati " },
         { value: "Eru", text: "Eru " },
         { value: "Ndole", text: "Ndole" },
@@ -1797,9 +1805,11 @@ Professional_services  : [
           { value: "Ndjama Ndjama", text: "Ndjama Ndjama" },
           { value: "Koki", text: "Koki" },
           { value: "Achu", text: "Achu" },
-          { value: "Okro", text: "Okro" },
           { value: "Mbongo Tchobi", text: "Mbongo Tchobi" },
           { value: "Okok", text: "Okok" },
+           { value: "Okra", text: "Okra" },
+
+          
        
            
                 

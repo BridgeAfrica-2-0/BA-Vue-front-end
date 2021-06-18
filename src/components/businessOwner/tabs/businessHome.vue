@@ -10,13 +10,37 @@
 
 
 
-      <b-card>    
+      <b-card>   
 
+   <div class="text-center ">    <span class="username text-center mb-3">    <b>   Upgrade Your Business Account </b>  </span>    </div>
+
+   <div class="container">  
+    
+    <span class="text"> <br />    Make more money by unlocking your marketplace features 
+where you can sell products and services directly to customer and recieve instant payments </span>
+
+ </div>
+ <img
+        src="@/assets/img/buynow.png"
+        class="buynow"
+        alt="buy now"
+      />
+     <div class="container text-center">      
       <img
-        src="@/assets/img/upgrade.png"
+        src="@/assets/img/fruits.jpg"
         class="img-fluid  banner"
         alt="Kitten"
       />
+
+      <b-button variant="primary" class="text-center mt-3">    Upgrade Now   </b-button>
+
+    </div>
+
+    
+
+
+
+
 
       </b-card>
       </b-col>
@@ -45,6 +69,17 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>   
+   
+
+     .buynow{
+       width: 120px;
+    margin-bottom: -80px;
+    margin-left: -10px;
+    position: relative;
+     }
+
+
+</style>
 
 

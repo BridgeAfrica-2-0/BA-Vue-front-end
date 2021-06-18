@@ -118,7 +118,7 @@
                       <b-row>  
         <b-col cols="6" class="p-2">   
             
-              <p>     <b-link @click="SetCat('Handicrafts')"  href="#">  Handicraft </b-link>   </p>
+              <p>     <b-link @click="SetCat('Handicraft')"  href="#">  Handicraft </b-link>   </p>
 
            
 
@@ -128,6 +128,8 @@
                <p>       <b-link @click="SetCat('Transport')"  href="#"> Transport </b-link> </p>
 
                  <p>     <b-link @click="SetCat('Grooming')"  href="#">  Mens & Women  <br />   Grooming   </b-link> </p>
+
+                  <p>       <b-link @click="SetCat('Station')"  href="#"> Station </b-link> </p>
                    
 
 
@@ -226,6 +228,98 @@
 
 
  </div>
+
+
+ <span  v-if="showform == true " >
+
+       <b-form-group
+              label-cols-lg="3"
+              label="Region"
+              label-size="md"
+              label-class="font-weight-bold pt-0"
+              class="mb-0 text-left"
+            >
+            </b-form-group>              
+
+            <b-form-select v-model="selected">
+              <b-form-select-option value="a">
+                Yaounde
+              </b-form-select-option>
+            </b-form-select>
+
+            <br />
+
+           
+
+
+
+
+            
+            <b-form-group
+              label-cols-lg="3"
+              label="Division"
+              label-size="md"
+              label-class="font-weight-bold pt-0 text-left"
+              class="mb-0"
+            >
+            </b-form-group>              
+
+            <b-form-select v-model="selected">
+              <b-form-select-option value="a">
+                My Location
+              </b-form-select-option>
+            </b-form-select>
+
+            <br />
+
+
+
+
+            
+            <b-form-group
+              label-cols-lg="12"
+              label=" Sub Division"
+              label-size="md"
+              label-class="font-weight-bold pt-0 text-left"
+              class="mb-0"
+            >
+            </b-form-group>              
+
+            <b-form-select v-model="selected">
+              <b-form-select-option value="a">
+                My Location
+              </b-form-select-option>
+            </b-form-select>
+
+            <br />
+
+
+
+
+
+
+
+
+            
+            <b-form-group
+              label-cols-lg="3"
+              label="City"
+              label-size="md"
+              label-class="font-weight-bold pt-0 text-left"
+              class="mb-0"
+            >
+            </b-form-group>              
+
+            <b-form-select v-model="selected">
+              <b-form-select-option value="a">
+                My Location
+              </b-form-select-option>
+            </b-form-select>
+
+            <br />
+
+            <hr />
+        </span>
 
 
 
@@ -403,7 +497,7 @@
               <hr />
      <fas-icon class="icons" :icon="['fas', 'users']" size="lg" />    
               <h6> People</h6>
-
+       
               <People />
               <span class="float-right mb-3"> see more </span> <br />
 
@@ -610,6 +704,7 @@ export default {
       post: "any",
       map: false,
       selectedfilter:"",
+       showform:false,
 
   
 
@@ -687,14 +782,10 @@ export default {
 
         { value: "Coconut_oils", text: "Coconut oils" },
         { value: "Palm_oil", text: "Palm oil" },
+      { value: "Palm_oil", text: "Palm oil" },
 
-         { value: "Groundnut_oil", text: " Groundnut oil " },
-
-
-        
-      
-        
-       
+               { value: "vetegetable_oil", text: " Vegetable " },
+ 
 
       ],
 
@@ -861,6 +952,18 @@ export default {
         { value: "Carrots", text: "Carrots" },
         { value: "Egusi", text: "Egusi" },
         { value: "Salad", text: "Salad" },
+
+         { value: "Cauliflower", text: "Cauliflower" },
+
+         { value: "Broccoli", text: "broccoli" },
+
+     	
+
+      { value: "Zucchini", text: "Zucchini" },
+
+       { value: "Eggplants", text: "Eggplants" },
+
+         
         { value: "Okra", text: "Okra" },
         { value: "Green_leaf", text: "Green leaf" },
         { value: "huckleberry", text: "huckleberry " },
@@ -924,7 +1027,7 @@ export default {
         { item: "Agriculture ", name: "Agriculture " },
         { item: "Restaurant ", name: " Restaurant " },
         { item: "Electronics ", name: "Electronics " },
-        { item: "Handicrafts", name: "Handicrafts" },
+        { item: "Handicraft", name: "Handicraft" },
         { item: "clothing", name: "clothing" },
         { item: "Mechanics", name: "Mechanics" },
         { item: "Health_unit ", name: "Health unit " },
@@ -933,7 +1036,7 @@ export default {
         { item: "Real_estate ", name: "Real_estate " },
         { item: "Travelling ", name: "Travelling " },
          { item: "Hotels", name: "Hotels" },
-          { item: "station", name: " station  " },
+          { item: "Station", name: " station  " },
            { item: "Mayor_concils", name: "Mayor_concils" },
            { item: "Taxis service", name: "Taxis service" },
 
@@ -956,7 +1059,7 @@ export default {
         { value: "Oils", text: "Oils" },
         { value: "Coffee", text: "Coffee" },
         { value: "Spices", text: "Spices" },
-
+       { value: "Beans", text: "Beans" },
          { value: "Finished_Branded_Products", text: "Branded Products" },
 
           { value: "Livestock", text: "Livestock" },
@@ -972,7 +1075,7 @@ export default {
 
 
         Electronics_filters: [
-        { value: "Phone", text: "Phone and accessories" },
+        { value: "phone", text: "Phone and accessories" },
         { value: "Home Appliances", text: "Home Appliances" },
       
         { value: "Computers", text: "Computers, Tablets and accessories" },
@@ -993,18 +1096,18 @@ export default {
 
 
 
-
-       station: [
-        { value: "Phone", text: "Phone" },
-        { value: "Laptop", text: "Laptop" },
-        { value: "Microwaves", text: "Microwaves" },
-        { value: "Ac", text: "Ac" },
-        { value: "Phone_accessory", text: "Phone accessory" }
+       Station: [
+        { value: "Gas station ", text: "Gas station " },
+        { value: "Petrol station ", text: "Petrol station " },
+        { value: "Fuel station ", text: "Fuel station " },
+       
       ],
 
 
         clothing_filters: [
         { value: "men", text: "Men" },
+
+        { value: "Tailoring", text: "Tailoring" },
         { value: "female", text: "Female" },
         { value: "Men Accessories", text: "Men Accessories" },
         { value: "Women accessories", text: "Women accessories" },
@@ -1044,6 +1147,9 @@ export default {
          { value: "Asian food", text: "Asian food" },
 
         { value: "Bars", text: "Bars" },
+
+        
+         
 
         { value: "Vegetarian", text: "Vegetarian" },
         
@@ -1280,7 +1386,25 @@ export default {
 
   
 
-  
+    Tailoring : [
+        { value: "Shoes", text: "Shoes " },
+        { value: "Watch", text: "Watch " },
+        { value: "Perfume", text: "Perfume " },
+        { value: "Shirt", text: "Shirt " },
+        { value: "Bags", text: "Bags " },
+        { value: "Jeans", text: "Jeans " },
+        { value: "Cap", text: "Cap " },
+        { value: "Gloves", text: "Gloves " },
+        { value: "Suit", text: "Suit " },
+        { value: "Singlet", text: "Singlet  " },
+        { value: "sweater ", text: "sweater" },
+        
+         
+                
+
+      ],
+
+   
 
 
 
@@ -1468,6 +1592,9 @@ Professional_services  : [
           { value: "Achu", text: "Achu" },
           { value: "Mbongo Tchobi", text: "Mbongo Tchobi" },
           { value: "Okok", text: "Okok" },
+           { value: "Okra", text: "Okra" },
+
+          
        
            
                 
@@ -1499,6 +1626,10 @@ Professional_services  : [
          { value: "Grilled fish", text: "Grilled fish" },
           { value: "Soya", text: "Soya" },
           { value: "Shawarma", text: "Shawarma" },
+
+           { value: "Chai Tea", text: "Chai Tea" },
+
+          
          
        
            
@@ -1649,11 +1780,7 @@ Professional_services  : [
         { value: "Carpentry", text: "Carpentry" },
         { value: "Paintings", text: " Paintings" },
         { value: "Hamburger", text: "Hamburger " },
-        { value: "Chicken", text: "Chicken" },
-
-
-
-        { value: "Omelets", text: " Omelets" },
+       
        
                 
 
@@ -1708,7 +1835,7 @@ Professional_services  : [
  	Hospitals_filters : [
         { value: "public", text: "public" },
         { value: "private", text: "private" },
-        { value: "Regional", text: "Regional" },
+       
       
                 
 
@@ -1720,7 +1847,7 @@ Professional_services  : [
         { value: "Dental clinics", text: "Dental clinics" },
         { value: "Optics", text: "Optics" },
         { value: "physical therapy", text: "physical therapy" },
-        { value: "physical therapy", text: "physical therapy" },
+       
         { value: "Maternal Health", text: "Maternal Health" },
       
                 
@@ -1775,7 +1902,7 @@ tertiary_eduction_filters : [
         { value: "Mechanics", text: "Mechanics" },
         { value: "Plumber", text: "Plumber" },
          { value: "IT and Multimedia", text: "IT and Multimedia" },
-        { value: "Beautician", text: "Beautician" },
+       
 
       
                 
@@ -1793,8 +1920,8 @@ tertiary_eduction_filters : [
         { value: "teeth whitening", text: "teeth whitening" },
         { value: "manicure and pedicure ", text: "manicure and pedicure " },
          { value: "Eyelashes", text: "Eyelashes" },
-        { value: "Beautician", text: "Beautician" },
-        { value: "touring", text: "touring" },
+       
+       
         { value: "Perfume", text: "Perfume" },
 
        
@@ -1847,6 +1974,7 @@ tertiary_eduction_filters : [
         { value: "Jewelry", text: "Jewelry" },
         { value: "Bags", text: "Bags" },
         { value: "Shoes", text: "Shoes" },
+        { value: "Watches", text: "Watches" },
          { value: "Caps", text: "Caps" },
           { value: "Head bands", text: "Head bands" },
           
@@ -1909,6 +2037,7 @@ Marketing : [
 
       Web_Graphic : [
         { value: "graphics design ", text: "graphics design" },
+        { value: "printing", text: "printing" },
         { value: "computer programmers", text: "computer programmers" },
         { value: "computer hardware", text: "computer hardware" },
         { value: "computer hosting services", text: "computer hosting services" },
@@ -1951,7 +2080,7 @@ Marketing : [
       ],
 
 
-               
+                
  Housing_and_Construction : [
        
         { value: "Plumbing", text: "Plumbing" },
@@ -1963,9 +2092,12 @@ Marketing : [
          { value: "Electrician", text: "Electrician" },
 
 
+      { value: "locksmiths", text: "Key’s locksmiths " },
 
+      { value: "Gardeners", text: "Gardeners" },
+       { value: "Gardeners", text: "Gardeners" },
 
-                 { value: "Architect", text: "Architect" },
+                 { value: "Security system", text: "Security system" },
         
       
       ],
@@ -2008,11 +2140,7 @@ Schools : [
         { value: "Public ", text: "Public" },
         { value: "Private", text: "Private" },
 
-         { value: "Regions ", text: "Regions" },
-        { value: "Division", text: "Division" },
-
-         { value: "Sub-divisions ", text: "Sub-divisions" },
-        { value: "City", text: "City" },
+        
        
       
       ],
@@ -2086,7 +2214,8 @@ default_category:'',
        
                break;
 
-case 'Handicraft': this.selectcategories = this.Handicraft_filters;  
+case 'Handicraft': this.selectcategories = this.Handicrafts_filters;  
+ 
        
                break;
 
@@ -2124,6 +2253,14 @@ case 'Handicraft': this.selectcategories = this.Handicraft_filters;
       case 'Transport': this.selectcategories = this.Transport_filters;  
        
                break;
+
+
+
+ case 'Station': this.selectcategories = this.Station;  
+       
+               break;
+
+
 
                 case 'Auto Mechanics': this.selectcategories = this.Mechanics_filters;  
        
@@ -2183,6 +2320,9 @@ case 'Handicraft': this.selectcategories = this.Handicraft_filters;
     
     switchcategories(){
     
+
+     this.showform=false; 
+
      console.log(this.default_category);
 
       switch(this.default_category) {
@@ -2245,7 +2385,7 @@ case 'Handicraft': this.selectcategories = this.Handicraft_filters;
 
 
 
-  case 'Spare part': this.categories_filters = this.Spare_parts_filters;  
+  case 'Spare parts': this.categories_filters = this.Spare_parts_filters;  
       break;
  
 
@@ -2282,6 +2422,8 @@ case 'Handicraft': this.selectcategories = this.Handicraft_filters;
    break;
    case 'Vegetables': this.categories_filters = this.Vegetables_filters;  
    break;
+
+    
    
 
   case 'Starch': this.categories_filters = this.starch_filters;
@@ -2321,13 +2463,13 @@ case 'Handicraft': this.selectcategories = this.Handicraft_filters;
 
 
 
-   case 'Phone accessory': this.categories_filters = this.phone_filters; 
+   case 'phone': this.categories_filters = this.phone_filters; 
 
 
 
 
    break;
-   case 'Computers, Tablets and accessories': this.categories_filters = this.Computers_filters; 
+   case 'Computers': this.categories_filters = this.Computers_filters; 
 
 
 
@@ -2391,7 +2533,9 @@ case 'female': this.categories_filters = this.Women_clothing;
 
 //health ubits
 
-    case 'Hospital': this.categories_filters = this.Hospitals; 
+    case 'Hospitals': this.categories_filters = this.Hospitals_filters; 
+
+     this.showform=true;
    
    break;
    case 'Pharmacies': this.categories_filters = this.Pharmacies; 
@@ -2415,17 +2559,17 @@ case 'COVID-19': this.categories_filters = [];
   
 
 
-
-
-
-    case 'Ministries ': this.categories_filters = this.Ministries; 
+    case 'Ministries': this.categories_filters =  [];
+      this.showform=true;
+ 
  
    break;
 
 
 
 
-    case 'Mayor Councils ': this.categories_filters = this.Mayor_councils_filters_and_public_institution; 
+    case 'Mayor Councils': this.categories_filters = [];
+      this.showform=true;
  
    break;
 
@@ -2433,12 +2577,20 @@ case 'COVID-19': this.categories_filters = [];
 
 
     case 'Schools': this.categories_filters = this.Schools; 
+      this.showform=true;
+    
  
    break;
 
+
+
+
+
+
   //More filters
 
-case 'Handicrafts': this.selectcategories = this.Handicrafts_filters;
+case 'Handicraft': this.categories_filters = this.Handicrafts_filters;
+
 break;
 
    

@@ -1,6 +1,6 @@
 <template>
-  <b-container>
-    <div class="s-card">
+  <div>
+    <div class="s-cardd">
 
 
     
@@ -348,7 +348,7 @@
 
 
     </div>
-  </b-container>
+  </div>
 </template>
 
 <script>
@@ -358,7 +358,16 @@ export default {};
 <style scoped>
 
 
+
 @media only screen and (min-width: 768px) {
+  .s-cardd{
+
+  padding-left: 6px;
+    padding-right: 6px;
+
+}
+
+
 .btn-text{
 
    margin-left: 8px;
@@ -410,10 +419,10 @@ export default {};
     margin-right: 5px;
 }
 
-.s-card{
+.s-cardd{
 
-  padding-left: 5px;
-  padding-right:5px;
+  padding-left: 4px;
+    padding-right: 4px;
 
 }
 
@@ -519,7 +528,7 @@ f-right {
 }
 
 .follower {
-  font-size: 12px;
+  font-size: 10px;
 }
 
 .people-style {
@@ -546,12 +555,7 @@ f-right {
     width: 123px;
     height: 38px;
     font-size:14px;
-    padding-top: 8px;
 }
-
-
-   
-
 
   .center {
     text-align: left;
@@ -592,8 +596,7 @@ f-right {
     border: 1px solid rgba(0, 0, 0, 0.125);
     margin-bottom: 10px;
 
-    margin-right: -15px;
-    margin-left: -15px;
+    
   }
 
   h6 {
@@ -647,8 +650,7 @@ f-right {
     border: 1px solid rgba(0, 0, 0, 0.125);
     margin-bottom: 10px;
 
-    margin-right: -15px;
-    margin-left: -15px;
+   
   }
 
   h6 {
@@ -687,10 +689,9 @@ f-right {
 
 
 .btn{
-    width: 105px;
+    width: 123px;
     height: 38px;
-    font-size: 12px;
-    padding-top: 8px;
+    font-size:14px;
 }
 
 .center{
@@ -795,19 +796,20 @@ f-right {
 
 
 
-@media only screen and (min-width: 992px) and (max-width: 1331px) {
+@media only screen and (min-width: 992px) and (max-width: 1421px) {
 
        
 
 
 
   .btn{
-  width: 100px;
-    height: 30px;
-    font-size: 12px;
-    padding-top: 8px;
+    width: 110px;
+    height: 38px;
+    font-size:14px;
 }
 
 
 }
+
+
 </style>

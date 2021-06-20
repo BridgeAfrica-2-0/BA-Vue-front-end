@@ -4,7 +4,7 @@
 
      <b-card class="px-md-3 border shadow "  >
 
-      <span> <h6 class="title">  <fas-icon class=" icons icon-color" :icon="['fab', 'readme']"  size="lg" />   <b> Post </b>  </h6>   </span>
+      <span> <h6 class="title mt-3 ">  <fas-icon class=" icons icon-color" :icon="['fab', 'readme']"  size="lg" />   <b> Post </b>  </h6>   </span>
 
    <div class="s-card " >
 
@@ -16,7 +16,7 @@
 
 
 
-      <b-row class="mt-4">
+      <b-row class="mt-0">
         <b-col cols="12" class="mt-4">
           <b-row>
             <b-col cols="2" md="1" class="m-0 p-0">

@@ -189,11 +189,13 @@
     <div>
       <b-row>  
         <b-col cols="6">   
-           
+             <b-dropdown-item  @click="category('Tailoring')"  href="#">   <img class="img-fluid picture logo-img" src="@/assets/icons/gromming.png"  /> Tailoring </b-dropdown-item>
+                
 
            <b-dropdown-item  @click="category('Women clothing')"  href="#">  <img class="img-fluid picture logo-img" src="@/assets/icons/women clothing.png"  />   Women clothing </b-dropdown-item> 
               <b-dropdown-item  @click="category('Women accessories')"  href="#">   <img class="img-fluid picture logo-img" src="@/assets/icons/women accesories.png"  />   Women <br />  <span class="mgmg"> Accessories   </span>   </b-dropdown-item>
-                
+
+              
              </b-col>   
 
 

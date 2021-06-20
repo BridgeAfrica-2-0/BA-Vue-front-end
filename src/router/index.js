@@ -14,7 +14,7 @@ import createService from "@/views/createService";
 import businessOwnerSettingGeneral from "@/views/businessOwnerSettingGeneral";
 
 import market from "@/views/market";
-
+import settings from "@/views/settings";
 import service from "@/views/service";
 import Modifier from "@/views/modifier";
 import store from "@/store/index.js";
@@ -69,6 +69,11 @@ const routes = [
     component: welcome
   },
 
+  {
+    path: "/settings",
+    name: "settings",
+    component: settings
+  },
 
 
   {

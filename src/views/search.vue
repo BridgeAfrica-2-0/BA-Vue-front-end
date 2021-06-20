@@ -1386,7 +1386,7 @@ export default {
 
   
 
-    Tailoring : [
+    Tailoringg : [
         { value: "Shoes", text: "Shoes " },
         { value: "Watch", text: "Watch " },
         { value: "Perfume", text: "Perfume " },
@@ -1404,6 +1404,19 @@ export default {
 
       ],
 
+
+
+
+
+Tailoring :[
+
+   { value: "Men_taloring", text: " Men" },
+    { value: "women_taloring", text: " Women" },
+     { value: "male_kid_taloring", text: " male kid" },
+      { value: "female_kid_taloring", text: "female kid" },
+
+
+],
    
 
 
@@ -1952,6 +1965,104 @@ tertiary_eduction_filters : [
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      
+ 	Men_taloring : [
+        { value: "Suits", text: " Suits" },
+        { value: "Dashiki", text: "Dashiki " },
+        { value: "Suits jacket", text: "Suits jacket" },
+        { value: "African attires", text: "African attires" },
+        { value: "Ankara", text: "Ankara" },
+        { value: "Traditional dresses", text: "Traditional dresses" },
+        { value: "Shirts", text: "Shirts" },
+   ],
+
+
+
+	women_taloring : [
+        { value: "Female suits", text: " Female suits" },
+        { value: "African print grown", text: "African print grown" },
+        { value: "Traditional wedding dress", text: "Traditional wedding dress" },
+        { value: "Ankara", text: "Ankara " },
+       { value: "Shirt", text: "Shirt " },
+        { value: "Wax dress", text: "Wax dress" },
+        { value: "Traditional dress", text: "Traditional dress" },
+   ],
+
+
+male_kid_taloring : [
+        { value: "School uniform", text: "School uniform" },
+       
+        { value: "Shirts", text: "Shirts" },
+        
+        
+        { value: "Kid Suit", text: "Kid Suit " },
+        
+        { value: "Kid Dashiki", text: "Kid Dashiki" },
+        
+        { value: "Kid Suits jacket", text: "Kid Suits jacket" },
+        
+        { value: "Kid African attires", text: "Kid African attires" },
+        
+        { value: "Kid Ankara", text: "Kid Ankara" },
+         { value: "Kid Traditional dresses", text: "Kid Traditional dresses" },
+   ],
+
+
+	female_kid_taloring : [
+        { value: "Kid  suits", text: "Kid  suits" },
+       
+        { value: "African print grown", text: "African print grown" },
+        
+        { value: "School uniform", text: "School uniform" },
+        
+        { value: "Kid Ankara ", text: "Kid Ankara " },
+        
+        { value: "Kid Wax dress", text: "Kid Wax dress" },
+        
+        { value: "Kid Traditional dress", text: "Kid Traditional dress" },
+        
+        { value: "shirt", text: "shirt" },
+        
+   ],
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   
  Women_clothing : [
         { value: "Sweaters ", text: "Sweaters" },
@@ -2288,6 +2399,11 @@ case 'Handicraft': this.selectcategories = this.Handicrafts_filters;
        
                break;
   
+  
+ case 'Tailoring': this.selectcategories = this.Tailoring;  
+ console.log("fuck you"); 
+ 
+   break;
 
 
 
@@ -2399,6 +2515,39 @@ case 'Handicraft': this.selectcategories = this.Handicrafts_filters;
     case 'Legal_service': this.categories_filters = this.Legal_service;  
 
  break;
+
+
+
+
+
+
+
+   case 'male_kid_taloring': this.categories_filters = this.male_kid_taloring;   
+ 
+   break;
+
+
+ case 'women_taloring': this.categories_filters = this.women_taloring;   
+ 
+   break;
+
+
+
+    case 'Men_taloring': this.categories_filters = this.Men_taloring;   
+ 
+   break;
+
+
+
+    case 'female_kid_taloring': this.categories_filters = this.female_kid_taloring;   
+ 
+   break;
+
+
+
+
+
+
  case 'Marketing': this.categories_filters = this.Marketing;  
  break;
   case 'Web, Graphic Design and Printing': this.categories_filters = this.Web_Graphic;  
@@ -2528,6 +2677,11 @@ case 'female': this.categories_filters = this.Women_clothing;
    case 'Men Accessories': this.categories_filters = this.Men_Accessories; 
    
    break;
+
+   
+ case 'Tailoring': this.selectcategories = this.Tailoring;  
+ console.log("fuck you");
+ break;
                 
 
 

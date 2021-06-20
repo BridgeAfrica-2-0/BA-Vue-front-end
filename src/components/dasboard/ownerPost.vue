@@ -1,7 +1,7 @@
 <template>
   <div>
     <b-card>
-      <b-row class="mt-3">
+      <b-row class="mt-0">
         <b-col cols="12">
           <b-row>
             <b-col cols="1" class="m-0 p-0">

@@ -62,7 +62,7 @@
                 <div class="s-comcard"><Business /></div>
               </b-tab>
             </b-tabs>
-          </div>
+          </div >
         </b-tab>
       </b-tabs>
     </div>
@@ -70,8 +70,8 @@
 </template>
 
 <script>
-import Business from "@/components/businessf/tabs/owner/networks/business";
-import People from "@/components/businessf/tabs/owner/networks/people";
+import Business from "@/components/follower/tabs/business";
+import People from "@/components/follower/tabs/people";
 export default {
   name: "comunitiDashboard",
 

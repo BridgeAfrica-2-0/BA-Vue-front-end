@@ -600,7 +600,7 @@
                 <hr />
              
                 <a
-                  href="https://bridgeafrica.info/nav/account-settings.html"
+                  href="/settings"
                   class="other-menu suggest-item cursor-pointer text-decoration-none text-dark"
                 >
                   <span class="mr-2"
@@ -693,7 +693,7 @@
                 <hr class="mup" />
              
                 <a
-                  href="https://bridgeafrica.info/nav/account-settings.html"
+                  href="/settings"
                   class="other-menu suggest-item cursor-pointer text-decoration-none text-dark"
                 >
                   <span class="mr-2"

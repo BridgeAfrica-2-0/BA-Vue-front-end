@@ -21,18 +21,17 @@
     >
       <!-- Text slides with image -->
       <b-carousel-slide
-        caption="First slide"
-        text="Welcome On Bridge Africa"
-        img-src="https://www.coverwise.co.uk/App_Themes/Travel/resources/css/images/Landing/hammock.jpg"
+      
+        img-src="../../assets/img/dash1.png"
       ></b-carousel-slide>
 
      
 
+     
       <!-- Slides with image only -->
-      <b-carousel-slide img-src="https://www.coverwise.co.uk/App_Themes/Travel/resources/css/images/Landing/hammock.jpg"></b-carousel-slide>
+      <b-carousel-slide img-src="../../assets/img/dash2.png"></b-carousel-slide>
 
-      <!-- Slides with img slot -->
-      <!-- Note the classes .d-block and .img-fluid to prevent browser default image alignment -->
+      
      
 
     

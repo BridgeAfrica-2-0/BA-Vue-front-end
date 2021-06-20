@@ -516,13 +516,13 @@
 
         
            
-        <div class="table-responsive"  v-if="showsearch == true"  >
+        <div class="table-responsive"  v-if="showsearch == true"  style="overflow-x:hidden" >   
 
             <table v-if="resources.length" class="table">
                 <thead>
                     <tr>
                         
-                        <td>      <b-row>    <b-col cols="6">      <span class="bold " >  Send to all   </span>   </b-col>    <b-col>  <span > <b-form-checkbox class="a-text text" id="" name="" value="">
+                        <td>      <b-row>    <b-col cols="6">      <span class="bold " >  Send to all   </span>   </b-col>    <b-col >  <span >  <input type="checkbox" @click="selectAll" v-model="allSelected"> <b-form-checkbox @change="selectAll"  @click="selectAll" v-model="allSelected"  class="" id="" name="" value="">
                   
                 </b-form-checkbox>   </span>  </b-col>  </b-row> </td>
 
@@ -549,11 +549,11 @@
               ></b-avatar>
 
 
-   <span class="bold " >   {{item.name}}   </span>   </b-col>      <b-cols>     <span > <b-form-checkbox class="a-text text" id="" name="" value="">
+   <span class="bold " >   {{item.name}}   </span>   </b-col>      <b-col>     <span > <b-form-checkbox class="" id="" name="" v-model="userIds"  :value="item.id" >
 
 
                   
-                </b-form-checkbox>   </span>   </b-cols>     </b-row>  </td>    
+                </b-form-checkbox>   </span>   </b-col>     </b-row>  </td>    
                     </tr>
                 </tbody>
 
@@ -561,7 +561,8 @@
             </table>
             <b-button variant="primary" size="sm" class="pl-3 pr-3" >  Send   </b-button>
         </div>
-   
+      
+      
 
 
 
@@ -667,6 +668,10 @@ export default {
 
         showsearch:true,
      selecteduser:false,
+
+
+     allSelected: false,
+        userIds: [],
 
       
        searchQuery: null,
@@ -837,6 +842,24 @@ export default {
     };
   },
   methods: {
+
+
+    selectAll() {
+
+                 console.log("hekkko");
+            this.userIds = [];
+          
+            var userr;
+
+            if (!this.allSelected) {
+                for (userr in this.resources) {
+                    this.userIds.push(this.resources[userr].id);
+                }
+            }
+        },
+
+
+        
 
    selectuser(){
 

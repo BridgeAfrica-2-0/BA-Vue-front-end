@@ -1,5 +1,5 @@
 <template>
-  <div class="welcome">
+  <div class="welcome" style=" overflow-x: hidden;">
    
  <b-modal id="modal-3" ref="modal-3"  size="lg" title=" Get Started" hide-footer>
       <div>
@@ -324,13 +324,17 @@
                       
                       <div class="form-group">
                         <label for="alias" class="username">Category:</label><br />
-                        <select id="category" class="form-control text ">
-                          <option value="" selected="" disabled=""
-                            >Select Category</option
-                          >
-                          <option>Category1</option>
-                          <option>Category2</option>
-                        </select>
+                        
+
+                        
+      <b-form-select
+            v-model="category"
+            :options="categories"
+            class="mb-3"
+            value-field="item"
+            text-field="name"
+          ></b-form-select>
+
                       </div>
                     </div>
                   </div>
@@ -485,7 +489,32 @@ export default {
           
           
           
-        ]
+        ],
+
+
+        
+
+       category:'',
+       categories: [ 
+
+        { item: "Professional_and_home_service", name: "Professionals" },
+        { item: "Agriculture ", name: "Agriculture " },
+        { item: "Restaurant ", name: " Restaurant " },
+        { item: "Electronics ", name: "Electronics " },
+        { item: "Handicrafts", name: "Handicrafts" },
+        { item: "clothing", name: "clothing" },
+        { item: "Mechanics", name: "Mechanics" },
+        { item: "Health_unit ", name: "Health unit " },
+        { item: "Bars", name: "Bars" },
+        { item: "Hair_and_beauty ", name: "Hair and beauty " },
+        { item: "Real_estate ", name: "Real_estate " },
+        { item: "Travelling ", name: "Travelling " },
+         { item: "Hotels", name: "Hotels" },
+          { item: "station", name: " station  " },
+           { item: "Mayor_concils", name: "Mayor_concils" },
+           { item: "Taxis service", name: "Taxis service" },
+
+      ],
       }
     },
 
@@ -693,7 +722,18 @@ import 'vue-form-wizard/dist/vue-form-wizard.min.css';
  .modal-body {
     
     padding: 1px;
+
+   
 }
 
 
+.vue-form-wizard .wizard-icon-circle .wizard-icon-container { 
+
+  background-color: #e75c18 !important;
+}
+
+
+.vue-form-wizard.md .wizard-icon-circle {
+  border-color:  #e75c18 !important;
+}
   </style>

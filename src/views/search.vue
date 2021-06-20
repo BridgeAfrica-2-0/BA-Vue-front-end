@@ -1,5 +1,5 @@
 <template>
-  <div style="overflow-x: hidden; ">
+  <div style="overflow-x: hidden; " class="search">
 
 
    <Nav />

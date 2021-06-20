@@ -57,8 +57,8 @@
      
 
       <div v-if="selectedb == 'owner'">
-        <b-row>
-          <b-col md="6" sm="12"  class="mt-2"> <Profile /> </b-col> <b-col md="6" sm="12"   class="mt-2"> <EmptyBusiness /> </b-col>
+        <b-row class=" p-0">
+          <b-col md="6" sm="12"  class="mt-2 "> <Profile /> </b-col> <b-col md="6" sm="12"   class="mt-2  "> <EmptyBusiness /> </b-col>
         </b-row>
         <br />
       </div>

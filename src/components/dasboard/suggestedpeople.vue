@@ -1,6 +1,6 @@
 <template>
-  <b-container>
-    <div class="s-card">
+  <div>
+    <div class="s-cardd">
 
 
 
@@ -338,7 +338,7 @@
 
 
     </div>
-  </b-container>
+  </div>
 </template>
 
 <script>
@@ -402,8 +402,8 @@ export default {};
 
 .s-card{
 
-  padding-left: 5px;
-  padding-right:5px;
+ margin-right: -15px;
+    margin-left: -15px;
 
 }
 
@@ -579,8 +579,7 @@ f-right {
     border: 1px solid rgba(0, 0, 0, 0.125);
     margin-bottom: 10px;
 
-    margin-right: -15px;
-    margin-left: -15px;
+  
   }
 
   h6 {
@@ -634,8 +633,8 @@ f-right {
     border: 1px solid rgba(0, 0, 0, 0.125);
     margin-bottom: 10px;
 
-    margin-right: -25px;
-    margin-left: -25px;
+    margin-right: -6px;
+    margin-left: -6px;
   }
 
   h6 {

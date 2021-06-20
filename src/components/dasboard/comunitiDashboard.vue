@@ -157,6 +157,14 @@ export default {
 };
 </script>
 
+
+<style scoped>
+.card-body{
+
+  padding: 0px;
+}
+</style>
+
 <style >
 
   

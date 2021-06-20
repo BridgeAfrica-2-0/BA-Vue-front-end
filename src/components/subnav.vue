@@ -11,7 +11,7 @@
 
 
 
-          <span @mouseover="onOverAgriculture"  @click="onOverAgriculture" @mouseleave="onLeaveAgriculture" >
+          <span @mouseover="onOverAgriculture"  @click="onOverAgriculture" @mouseleave="onLeaveAgriculturee" >
 
     <b-nav-item-dropdown id="dropdown-1" text=" Agriculture " ref="Agriculture"  >
       <hr style="margin-top:-10px;  background-color:red; height:3px; width:40%; float:left "  />  <br />

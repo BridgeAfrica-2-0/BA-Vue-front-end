@@ -1,7 +1,8 @@
 <template>
   <div>
     <Navbar />
-    <b-container fluid >
+
+    <b-container fluid class="content" >
 
 
 
@@ -76,6 +77,19 @@ h3 {
   }
 }
 
+
+
+
+@media only screen and (min-width: 768px) {
+
+.content{
+
+  padding-left: 35px;
+  padding-right: 35px;
+}
+
+
+}
 
 
 
@@ -157,6 +171,8 @@ h6{
   margin-right: -10px;
   margin-left: -10px;
 }
+
+
 
 
 

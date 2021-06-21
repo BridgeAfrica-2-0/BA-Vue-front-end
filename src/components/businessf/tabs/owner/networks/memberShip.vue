@@ -755,7 +755,7 @@ export default {};
 
 
 .flexx {
-  display: inline-flex;
+  display: inline-block;
 }
 
 .memfollower {
@@ -904,8 +904,7 @@ f-right {
     border: 1px solid rgba(0, 0, 0, 0.125);
     margin-bottom: 10px;
 
-    margin-right: -15px;
-    margin-left: -15px;
+   
   }
 
   h6 {
@@ -959,8 +958,6 @@ f-right {
     border: 1px solid rgba(0, 0, 0, 0.125);
     margin-bottom: 10px;
 
-    margin-right: -15px;
-    margin-left: -15px;
   }
 
   h6 {
@@ -1102,6 +1099,8 @@ f-right {
   }
     
 }
+
+
 
 
 .follower{

@@ -22,14 +22,14 @@
       <!-- Text slides with image -->
       <b-carousel-slide
       
-        img-src="../../assets/img/dash1.png"
+        img-src="../busa.PNG"
       ></b-carousel-slide>
 
      
 
      
       <!-- Slides with image only -->
-      <b-carousel-slide img-src="../../assets/img/dash2.png"></b-carousel-slide>
+      <b-carousel-slide img-src="../dash2.jpg" img-alt="yoo"></b-carousel-slide>
 
       
      

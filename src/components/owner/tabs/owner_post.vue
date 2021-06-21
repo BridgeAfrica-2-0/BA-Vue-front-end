@@ -27,9 +27,7 @@
 
 
 
-              <span>
-                <fas-icon class="primary ml-3" :icon="['fas', 'share']" />
-              </span>
+             
               
 
           </b-col>

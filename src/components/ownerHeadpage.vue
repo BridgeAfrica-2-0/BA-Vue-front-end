@@ -4,7 +4,7 @@
 
       <div class="container-flex">
       <img
-        src="@/assets/img/banner.png"
+        src="@/assets/img/banner.jpg"
         class="img-fluid  banner"
         alt="Kitten"
       />

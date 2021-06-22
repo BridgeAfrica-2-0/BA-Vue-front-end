@@ -2,7 +2,7 @@
   <div class="main">
     <div class="images">
       <div>
-        <img src="@/assets/img/banner.png" class="banner" />
+        <img src="@/assets/img/banner.jpg" class="banner" />
       </div>
       <b-row class="mt-2 mb-2 options">
         <b-col cols="6" class="avata">

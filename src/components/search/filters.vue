@@ -803,6 +803,12 @@ export default {
 
    //clothing cases
 
+
+   case 'Tailoring_filters': this.categories_filters = this.Tailoring_filters; 
+
+  break;
+
+
 case 'Women clothing': this.categories_filters = this.Women_clothing; 
 
   break;
@@ -1925,6 +1931,51 @@ Tailoring :[
 
 
 ],
+
+
+
+
+
+
+Tailoring_filters:[
+
+       { value: "Suits", text: " Suits" },
+        { value: "Dashiki", text: "Dashiki " },
+        { value: "Suits jacket", text: "Suits jacket" },
+        { value: "African attires", text: "African attires" },
+        { value: "Ankara", text: "Ankara" },
+        { value: "Traditional dresses", text: "Traditional dresses" },
+        { value: "Shirts", text: "Shirts" },
+
+        { value: "Female suits", text: " Female suits" },
+        { value: "African print grown", text: "African print grown" },
+        { value: "Traditional wedding dress", text: "Traditional wedding dress" },
+       
+        { value: "Wax dress", text: "Wax dress" },
+        { value: "School uniform", text: "School uniform" },
+        { value: "Kid Suit", text: "Kid Suit " },
+        
+        { value: "Kid Dashiki", text: "Kid Dashiki" },
+        
+        { value: "Kid Suits jacket", text: "Kid Suits jacket" },
+        
+        { value: "Kid African attires", text: "Kid African attires" },
+        
+        { value: "Kid Ankara", text: "Kid Ankara" },
+         { value: "Kid Traditional dresses", text: "Kid Traditional dresses" },
+       
+        { value: "African print grown", text: "African print grown" },
+        
+      
+        { value: "Kid Wax dress", text: "Kid Wax dress" },
+        
+        { value: "Kid Traditional dress", text: "Kid Traditional dress" },
+        
+      
+
+],
+
+
 
 
 

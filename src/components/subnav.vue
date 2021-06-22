@@ -1,6 +1,6 @@
 <template>
 
-<div class="container-flex  mobi  d-none d-lg-none d-xl-block" >
+<div class="container-flex  mobi  d-none d-lg-none d-xl-block search" >
 
     <b-row >       <b-col cols="1"  lg="2" >  </b-col >        <b-col cols="8" lg="10" style="text-align:left">   
 
@@ -11,7 +11,7 @@
 
 
 
-          <span @mouseover="onOverAgriculture"  @click="onOverAgriculture" @mouseleave="onLeaveAgriculturee" >
+          <span @mouseover="onOverAgriculture"  @click="onOverAgriculture" @mouseleave="onLeaveAgriculture" >
 
     <b-nav-item-dropdown id="dropdown-1" text=" Agriculture " ref="Agriculture"  >
       <hr style="margin-top:-10px;  background-color:red; height:3px; width:40%; float:left "  />  <br />
@@ -189,7 +189,7 @@
     <div>
       <b-row>  
         <b-col cols="6">   
-             <b-dropdown-item  @click="category('Tailoring')"  href="#">   <img class="img-fluid picture logo-img" src="@/assets/icons/gromming.png"  /> Tailoring </b-dropdown-item>
+             <b-dropdown-item  @click="category('Tailoring_filters')"  href="#">   <img class="img-fluid picture logo-img" src="@/assets/icons/gromming.png"  /> Tailoring </b-dropdown-item>
                 
 
            <b-dropdown-item  @click="category('Women clothing')"  href="#">  <img class="img-fluid picture logo-img" src="@/assets/icons/women clothing.png"  />   Women clothing </b-dropdown-item> 
@@ -282,7 +282,7 @@
 
 
 
-      <hr style="margin-top:-10px;  background-color:red; height:3px; width:43%; float:left "  />  <br />
+      <hr style="margin-top:-10px;  background-color:red; height:3px; width:75px; float:left "  />  <br />
     <div>
       <b-row>  
         <b-col cols="6">   
@@ -332,6 +332,8 @@
       <b-row>  
         <b-col cols="6" >   
             
+                 <b-dropdown-item  @click="category('Tailoring')"  href="#">   <img class="img-fluid picture logo-img" src="@/assets/icons/gromming.png"  /> Tailoring </b-dropdown-item>
+                
 
                <b-dropdown-item  @click="category('Handicrafts')"  href="#"> <img class="img-fluid picture logo-img" src="@/assets/icons/handicraft.png"  />   Handicraft </b-dropdown-item>
                    <b-dropdown-item  @click="category('Hotels')"  href="#"> <img class="img-fluid picture logo-img" src="@/assets/icons/ministries.png"  />   Hotels </b-dropdown-item>

@@ -804,7 +804,7 @@ f-right {
 
 
   .btn{
-  width: 100px;
+  width: 115px;
     height: 30px;
     font-size: 12px;
     padding-top: 8px;

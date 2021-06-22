@@ -1356,7 +1356,10 @@ case 'Handicrafts': this.selectcategories = this.Handicrafts_filters;
       ],
 
 
-        clothing_filters: [
+        clothing_filters: [    
+
+         { value: "Tailoring", text: "Tailoring" },
+
         { value: "men", text: "Men" },
         { value: "female", text: "Female" },
         { value: "Men Accessories", text: "Men Accessories" },
@@ -2904,6 +2907,11 @@ case 'female': this.categories_filters = this.Women_clothing;
 
   break;
    case 'Men Accessories': this.categories_filters = this.Men_Accessories; 
+   
+   break;
+
+
+    case 'Tailoring': this.categories_filters = this.Tailoring_filters; 
    
    break;
                 

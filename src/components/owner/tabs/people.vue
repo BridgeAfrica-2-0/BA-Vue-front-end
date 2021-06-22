@@ -803,7 +803,7 @@ f-right {
 
 
   .btn{
-    width: 110px;
+    width: 115px;
     height: 38px;
     font-size:14px;
 }

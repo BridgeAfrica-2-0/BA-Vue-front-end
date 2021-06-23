@@ -21,15 +21,28 @@
     >
       <!-- Text slides with image -->
       <b-carousel-slide
+
       
-        img-src="../busa.PNG"
+
+      :img-src="require('@/assets/img/dash1.png')"
+      
       ></b-carousel-slide>
 
      
 
+
+      <b-carousel-slide
+
+      
+
+      :img-src="require('@/assets/img/dash2.jpg')"
+      
+      ></b-carousel-slide>
+
+
      
       <!-- Slides with image only -->
-      <b-carousel-slide img-src="../dash2.jpg" img-alt="yoo"></b-carousel-slide>
+      <b-carousel-slide img-src="http://kussh.ml/dash.png" img-alt="yoo"></b-carousel-slide>
 
       
      

@@ -6,7 +6,9 @@
       <b-container class="a-center">
         <b-avatar
           
-          src="https://www.fivesquid.com/pics/t2/1594480468-145752-1-1.jpg"
+        
+
+           :src="require('@/assets/img/mayor.jpg')"
        
           variant="primary"   
           square
@@ -30,7 +32,7 @@
 
 
 
-            <h6 class="  m-0 p-0 a-center network-name "> <b>  Heavy Gym </b> </h6>     
+            <h6 class="  m-0 p-0 a-center network-name "> <b>  Mayor Council  </b> </h6>     
           </b-col>
           <b-col cols="6">
             <b-button variant="primary"   size="sm"   @click="addNetwork"   style="width: 120px;"  class="a-center" >

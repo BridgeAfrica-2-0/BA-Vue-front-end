@@ -22,6 +22,16 @@
 
         <member-network></member-network>
       </b-tab>
+
+      <b-tab>
+        <template slot="title" class="tt-color">
+          <h6 class="">Members</h6>
+        </template>
+
+        <Members>  </Members>
+      </b-tab>
+
+
       <b-tab>
         <template slot="title">
           <h6 >Feedback</h6>
@@ -36,6 +46,9 @@
 import FeedbackNetwork from "@/components/businessf/tabs/owner/networks/feedbackNetwork";
 import MediaNetwork from "@/components/businessf/tabs/owner/networks/mediaNetwork";
 import MemberNetwork from "@/components/businessf/tabs/owner/networks/memberNetwork";
+
+import Members from "@/components/businessf/tabs/owner/networks/member";
+
 import PostNetwork from "@/components/businessf/tabs/owner/networks/postNetwork";
 
 export default {
@@ -44,6 +57,7 @@ export default {
     PostNetwork,
     MemberNetwork,
     MediaNetwork,
+    Members,
     FeedbackNetwork
   }
 };

@@ -6,7 +6,7 @@
       <b-container class="a-center">
         <b-avatar
           
-          src="https://www.fivesquid.com/pics/t2/1594480468-145752-1-1.jpg"
+          :src="require('@/assets/img/mayor.jpg')"
        
           variant="primary"   
           square

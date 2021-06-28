@@ -15,7 +15,7 @@
        
 
             <img
-              src="@/assets/img/business1.png"
+              src="@/assets/img/Business 1.jpg" 
               
               class="r-image"
             />
@@ -29,7 +29,7 @@
        
             <img
              
-               src="@/assets/img/business 2.png"
+               src="@/assets/img/business 2.jpg"
               
               class="r-image"
             />

@@ -38,7 +38,7 @@
   <b-row>    
        <b-col cols="12" md="12" class="m-0 p-0"> 
 
-
+    <input type="file" id="chosefile" hidden>
          <b-row  class="m-0 p-0">   <b-col cols="5" class="text-right m-0 p-0">     <b-button
                       title="Add Movie"
                       size="sm"
@@ -1176,20 +1176,20 @@ name: "postNetwork",
 
     chooseImage: function() {
      
-        document.getElementById("image").click()
+        document.getElementById("chosefile").click()
     },
 
 
 chooseVideo: function() {
      
-        document.getElementById("video").click()
+        document.getElementById("chosefile").click()
     },
 
 
 
 chooseDocument: function() {
    
-        document.getElementById("document").click()
+        document.getElementById("chosefile").click()
     },
 
 

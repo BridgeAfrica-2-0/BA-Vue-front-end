@@ -24,6 +24,7 @@
 
 
 
+ <b-modal id="modal-sm" size="sm" hide-header > Do you  want to join this network? </b-modal>
 
 
     <div class="people-style shadow">
@@ -71,7 +72,7 @@
      <b-row>  <b-col md="12"  lg="4"  xl="12" sm="12" cols="4" class="mt-2">    
 
             <b-button block size="sm" class="b-background shadow" variant="primary">
-             <i class="fas fa-user-plus  fa-lg btn-icon "></i>  <span class="btn-com">Community</span>
+             <i class="fas fa-user-plus  fa-lg btn-icon "></i>  <span class="btn-com" v-b-modal.modal-sm>Community</span>
             </b-button>
 
             </b-col>  
@@ -155,7 +156,7 @@
      <b-row>  <b-col md="12"  lg="4"  xl="12" sm="12" cols="4" class="mt-2">    
 
             <b-button block size="sm" class="b-background shadow" variant="primary">
-             <i class="fas fa-user-plus  fa-lg btn-icon "></i>  <span class="btn-com">Community</span>
+             <i class="fas fa-user-plus  fa-lg btn-icon "></i>  <span class="btn-com" v-b-modal.modal-sm >Community</span>
             </b-button>
 
             </b-col>  

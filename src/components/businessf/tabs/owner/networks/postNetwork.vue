@@ -16,18 +16,23 @@
 
             ></b-avatar>
           </b-col>
-          <b-col cols="9" md="11" class="p-0 m-0 pr-3">
+          <b-col cols="9" md="11" class="p-0 m-0 pr-3">    
             
             
             <input placeholder="Post a business update"   v-b-modal.modal-xl  class="comment" type="text" />
 
               <fas-icon
                 class="primary send-cmt"
-                :icon="['fas', 'paper-plane']"
+                :icon="['fas', 'paper-plane']"         
               />
 
           </b-col>
         </b-row>
+
+
+
+
+
 
 
 
@@ -345,6 +350,14 @@
             ></b-icon>
                     123</span
             >
+
+
+
+             <span>
+                <fas-icon class="primary ml-3" :icon="['fas', 'share']" />
+              </span>
+
+
           </b-col>
 
           
@@ -477,6 +490,12 @@
             ></b-icon>
                     123</span
             >
+
+
+             <span>
+                <fas-icon class="primary ml-3" :icon="['fas', 'share']" />
+              </span>
+
           </b-col>
 
           
@@ -610,6 +629,13 @@
             ></b-icon>
                     123</span
             >
+
+
+             <span>
+                <fas-icon class="primary ml-3" :icon="['fas', 'share']" />
+              </span>
+
+
           </b-col>
           <b-col cols="12">
             <b-row class="mt-2">
@@ -728,6 +754,14 @@
             ></b-icon>
                     123</span
             >
+
+
+
+             <span>
+                <fas-icon class="primary ml-3" :icon="['fas', 'share']" />
+              </span>
+
+              
           </b-col>
           <b-col cols="12">
             <b-row class="mt-2">

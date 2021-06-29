@@ -3,21 +3,21 @@
     <b-tabs content-class="" fill pills>
       <b-tab active>
         <template slot="title" class="tt-color">
-          <h6 class="">Posts</h6>
+          <h6 class="h6">Posts</h6>
         </template>
 
         <post-network></post-network>
       </b-tab>
       <b-tab>
         <template slot="title" class="tt-color">
-          <h6 class="">Media</h6>
+          <h6 class="h6">Media</h6>
         </template>
 
         <media-network></media-network>
       </b-tab>
       <b-tab>
         <template slot="title" class="tt-color">
-          <h6 class="">Community</h6>
+          <h6 class="h6">Community</h6>
         </template>
 
         <member-network></member-network>
@@ -25,7 +25,7 @@
 
       <b-tab>
         <template slot="title" class="tt-color">
-          <h6 class="">Members</h6>
+          <h6 class="h6">Members</h6>
         </template>
 
         <Members>  </Members>
@@ -34,7 +34,7 @@
 
       <b-tab>
         <template slot="title">
-          <h6 >Feedback</h6>
+          <h6 class="h6" >Feedback</h6>
         </template>
         <feedback-network></feedback-network>
       </b-tab>
@@ -81,7 +81,14 @@ export default {
   
 }
 
-h6{
-  font-size: 12px;
+
+@media (max-width: 768px) {
+
+.h6{
+  font-size: 12px !important;
 }
+}
+
+
 </style>
+

@@ -41,8 +41,6 @@
 
 
      
-      <!-- Slides with image only -->
-      <b-carousel-slide img-src="http://kussh.ml/dash.png" img-alt="yoo"></b-carousel-slide>
 
       
      

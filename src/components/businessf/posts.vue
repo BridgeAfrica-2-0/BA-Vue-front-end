@@ -674,6 +674,11 @@ export default {
 .btn:hover {
   background-color: #ccc;
 }
+.options {
+  position: relative;
+  top: -34px;
+  left: 25px;
+}
 </style>
 
 <style>

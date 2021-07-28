@@ -98,6 +98,10 @@ li .nav-link:hover{
   border-color: #005cbf;
 }
 
+.violet {
+  color: #630460;
+}
+
 @media only screen and (max-width: 768px) {
   .nav-link {
     font-size: 9px;

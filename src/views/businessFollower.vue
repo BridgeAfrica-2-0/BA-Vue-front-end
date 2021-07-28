@@ -10,6 +10,7 @@
 import navbar from "@/components/navbar";
 import Business from "../components/businessf/business";
 import Footer from "../components/footer";
+
 export default {
   name: "Home",
   components: {

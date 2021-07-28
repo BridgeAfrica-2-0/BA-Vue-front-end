@@ -190,7 +190,7 @@ export default {
 
 
 .tab-title-class {
-    color: #ffffff !important;  
+    color: #ffffff !important;
 }
 
 

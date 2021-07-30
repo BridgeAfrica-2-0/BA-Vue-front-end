@@ -1,7 +1,7 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import createPersistedState from "vuex-persistedstate";
-
+import networkOwner from "./networkOwner";
 Vue.use(Vuex);
 // axios.defaults.baseURL = "";
 
@@ -18,8 +18,8 @@ export default new Vuex.Store({
         fullname: "",
         username: "",
         email: "",
-        password: ""
-      }
+        password: "",
+      },
     ],
     users: [
       {
@@ -27,36 +27,36 @@ export default new Vuex.Store({
         fullname: "Prime",
         username: "Clet",
         email: "primeclet89@gmail.com",
-        password: "1234568"
+        password: "1234568",
       },
       {
         id: "S002",
         fullname: "John",
         username: "Doe",
         email: "jondoe@gmail.com",
-        password: "azertuiop"
+        password: "azertuiop",
       },
       {
         id: "S003",
         fullname: "test",
         username: "1",
         email: "test1@gmail.com",
-        password: "qsdfrtgrd"
+        password: "qsdfrtgrd",
       },
       {
         id: "S004",
         fullname: "holu",
         username: "lol",
         email: "lol@gmail.com",
-        password: "holulol"
+        password: "holulol",
       },
       {
         id: "S005",
         fullname: "gregre",
         username: "io",
         email: "gregre@gmail.com",
-        password: "987654321"
-      }
+        password: "987654321",
+      },
     ],
     services: [
       {
@@ -66,7 +66,7 @@ export default new Vuex.Store({
         Localisation: "Douala, PK14",
         Resume:
           "La coiffure est métier où l'on est le plus souvent debout. ... Le coiffeur / la coiffeuse travaille comme salarié dans un salon de coiffure indépendant ou franchisé ou à domicile. C'est également un commerçant qui vend des produits capillaires et des accessoires.",
-        user_id: "S001"
+        user_id: "S001",
       },
       {
         id: "S2021-2",
@@ -75,7 +75,7 @@ export default new Vuex.Store({
         Localisation: "Bonanjo, Bastos",
         Resume:
           "C'est également un commerçant qui vend des produits capillaires et des accessoires.",
-        user_id: "S001"
+        user_id: "S001",
       },
       {
         id: "S2021-3",
@@ -84,7 +84,7 @@ export default new Vuex.Store({
         Localisation: "Biyem Assi, TKC",
         Resume:
           "comprend toutes sortes de formes de surveillance et de protection des biens et des personnes.",
-        user_id: "S003"
+        user_id: "S003",
       },
       {
         id: "S2021-4",
@@ -92,8 +92,8 @@ export default new Vuex.Store({
         Image: "Clet",
         Localisation: "AKWA, DJoungolo",
         Resume: "Batiment et travaux Publics......",
-        user_id: "S004"
-      }
+        user_id: "S004",
+      },
     ],
     service: [
       {
@@ -101,9 +101,9 @@ export default new Vuex.Store({
         Name: "",
         Image: "Clet",
         Localisation: "",
-        Resume: ""
-      }
-    ]
+        Resume: "",
+      },
+    ],
   },
   plugins: [createPersistedState()],
   mutations: {
@@ -158,7 +158,7 @@ export default new Vuex.Store({
         fullname: payload.fullname,
         username: payload.username,
         email: payload.email,
-        password: payload.password
+        password: payload.password,
       });
       console.log("reussi");
     },
@@ -169,10 +169,10 @@ export default new Vuex.Store({
         Image: "Clet",
         Localisation: payload.location,
         Resume: payload.resume,
-        user_id: payload.user_id
+        user_id: payload.user_id,
       });
       console.log("reussi");
-    }
+    },
   },
   actions: {
     increment(context) {
@@ -196,14 +196,14 @@ export default new Vuex.Store({
     recoverPassword2(context, mydata) {
       console.log("heyyyy");
       context.commit("recoverData", mydata);
-    }
+    },
   },
   getters: {
-    recoverPassData: state => {
+    recoverPassData: (state) => {
       return state.recoverData;
     },
-    doneTodos: state => {
-      return state.todos.filter(todo => todo.done);
+    doneTodos: (state) => {
+      return state.todos.filter((todo) => todo.done);
     },
     loggedIn(state) {
       return state.login;
@@ -213,7 +213,9 @@ export default new Vuex.Store({
     },
     getService(state) {
       return state.service;
-    }
+    },
   },
-  modules: {}
+  modules: {
+    networkOwner,
+  },
 });

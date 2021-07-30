@@ -6,7 +6,7 @@
 
       <b-button
         variant="outline-primary"
-        @click="addNetwork"
+        @click="addnetwork"
         data-toggle="modal"
         data-target="#addbusinessbtnModal"
         class="float-right btn-network "
@@ -215,9 +215,8 @@
             >
             </b-form-checkbox>
           </b-form-group>
-
           <b-button
-            @click="add"
+            @click="addNet"
             class="mt-2 "
             style="float:right"
             variant="primary"
@@ -257,6 +256,7 @@
 </template>
 
 <script>
+import { mapActions } from "vuex";
 export default {
   data() {
     return {
@@ -270,10 +270,6 @@ export default {
         needs: "",
         isInNetwork: "",
       },
-
-      image: [
-        "https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg",
-      ],
       networks: [
         {
           id: 1,
@@ -347,6 +343,9 @@ export default {
     };
   },
   methods: {
+    ...mapActions({
+      addNetwork: "networkOwner/addNetwork",
+    }),
     openNetwork() {
       this.networkShow = false;
     },
@@ -359,10 +358,11 @@ export default {
       this.chosenNetwork.address = network.address;
       this.chosenNetwork.description = network.description;
     },
-
-    add() {},
-
-    addNetwork() {
+    addNet() {
+      console.log("man");
+      this.addNetwork();
+    },
+    addnetwork() {
       this.showModal = !this.showModal;
     },
   },

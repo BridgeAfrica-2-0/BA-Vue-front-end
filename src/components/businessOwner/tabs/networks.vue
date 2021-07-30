@@ -1,6 +1,6 @@
 <template>
   <div class=" t-color">
-    <div v-if="networkShow">
+    <div>
       <fas-icon class=" icons" :icon="['fas', 'project-diagram']" size="lg" />
       <span class="t-color"> Network </span>
 
@@ -17,42 +17,42 @@
       <hr />
 
       <b-row>
-        <b-col cols="12" md="12" lg="6" v-for="post in posts" :key="post.id">
+        <b-col
+          cols="12"
+          md="12"
+          lg="6"
+          v-for="(network, index) in networks"
+          :key="index"
+          v-b-modal.modal-1
+          @click="viewNetwork(network)"
+        >
           <div class="people-style shadow">
             <b-row>
               <b-col md="3" xl="3" lg="3" cols="5" sm="3">
                 <div class="center-img">
-                  <!-- <img
-                    src="https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg"
-                    class="r-image"
-                  /> -->
-                  <lightbox
-                    visible="true"
-                    css=" h-10"
-                    :items="images"
-                  ></lightbox>
+                  <img :src="network.image[0]" class="r-image" />
                 </div>
               </b-col>
               <b-col md="9" cols="7" lg="9" xl="9" sm="9">
-                <p v-b-modal.modal-1 class="textt ml-5">
+                <p class="textt ml-5">
                   <strong class="net-title">
-                    <router-link to="/businessfollower"
-                      >Global Car Supple Network</router-link
-                    >
+                    <router-link to="/businessfollower">
+                      {{ network.name }}
+                    </router-link>
                   </strong>
                   <br />
-                  Car Rental
+                  {{ network.specification }}
                   <br />
-                  20k Community <br />
+                  {{ network.community }}k Community <br />
 
                   <span class="location">
-                    <b-icon-geo-alt class="ico"></b-icon-geo-alt> Douala
-                    cameroon
+                    <b-icon-geo-alt class="ico"></b-icon-geo-alt>
+                    {{ network.address }}
                   </span>
                   <br />
 
-                  super best car seller in the world adipisicing elit. lorem
-                  epsep this <b-link>Read More</b-link>
+                  {{ network.description.substring(0, 90) }}
+                  <b-link>Read More</b-link>
                 </p>
               </b-col>
             </b-row>
@@ -60,12 +60,14 @@
         </b-col>
       </b-row>
     </div>
-    <div class="h-100 w-100" v-if="!networkShow">
+    <div class="h-100 w-100" v-if="networks.length < 1">
       <div class="mx-auto text-center my-5">
         <h2 class="my-3">Builds networks around your Business</h2>
         <p class="my-2">Create network to stay in touch with just the people</p>
         <p class="my-2">you want Engage, share, Make Plans and much more</p>
-        <p class="my-3"><b-button variant="primary">Add network</b-button></p>
+        <p class="my-3">
+          <b-button @click="addNetwork" variant="primary">Add network</b-button>
+        </p>
       </div>
     </div>
 
@@ -106,14 +108,43 @@
             class="mb-0"
           >
             <b-form-input
-              v-model="name"
+              v-model="createdNetwork.name"
               id="network_name"
               placeholder=""
               required
             >
             </b-form-input>
           </b-form-group>
-
+          <b-form-group
+            label-cols-lg="12"
+            label="Business Specification"
+            label-size="md"
+            label-class="font-weight-bold pt-0"
+            class="mb-0"
+          >
+            <b-form-input
+              v-model="createdNetwork.specification"
+              id="network_name"
+              placeholder=""
+              required
+            >
+            </b-form-input>
+          </b-form-group>
+          <b-form-group
+            label-cols-lg="12"
+            label="Business Address"
+            label-size="md"
+            label-class="font-weight-bold pt-0"
+            class="mb-0"
+          >
+            <b-form-input
+              v-model="createdNetwork.address"
+              id="network_name"
+              placeholder=""
+              required
+            >
+            </b-form-input>
+          </b-form-group>
           <b-form-group
             label-cols-lg="12"
             label=" Brief Description"
@@ -123,7 +154,7 @@
           >
             <b-form-textarea
               id="textarea"
-              v-model="description"
+              v-model="createdNetwork.description"
               placeholder="Enter something..."
               rows="3"
               max-rows="6"
@@ -139,7 +170,7 @@
           >
             <b-form-textarea
               id="textarea"
-              v-model="purpose"
+              v-model="createdNetwork.purpose"
               placeholder=""
               rows="3"
               max-rows="6"
@@ -155,13 +186,21 @@
           >
             <b-form-textarea
               id="textarea"
-              v-model="needs"
+              v-model="createdNetwork.needs"
               placeholder=" "
               rows="3"
               max-rows="6"
             ></b-form-textarea>
           </b-form-group>
-
+          <b-form-group
+            label-cols-lg="12"
+            label="Bussiness Image"
+            label-size="md"
+            label-class="font-weight-bold pt-0"
+            class="mb-0"
+          >
+            <input type="file" />
+          </b-form-group>
           <b-form-group
             label-cols-md="6"
             label="Allow Business to join network"
@@ -169,7 +208,11 @@
             label-class="font-weight-bold pt-0"
             class="mb-0"
           >
-            <b-form-checkbox v-model="isInNetwork" name="check-button" switch>
+            <b-form-checkbox
+              v-model="createdNetwork.isInNetwork"
+              name="check-button"
+              switch
+            >
             </b-form-checkbox>
           </b-form-group>
 
@@ -184,29 +227,30 @@
         </b-form>
       </b-container>
     </b-modal>
-    <b-modal id="modal-1" title="BootstrapVue" hide-footer>
-      <img
-        src="https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg"
-        alt=""
-      />
+    <b-modal id="modal-1" :title="chosenNetwork.name" hide-footer>
+      <lightbox
+        visible="true"
+        css=" h-10"
+        :items="chosenNetwork.image"
+      ></lightbox>
       <p class="text-pop">
         <strong class="net-title">
-          <router-link to="/businessfollower"
-            >Global Car Supple Network</router-link
-          >
+          <router-link to="/businessfollower">
+            {{ chosenNetwork.name }}
+          </router-link>
         </strong>
         <br />
-        Car Rental
+        {{ chosenNetwork.specification }}
         <br />
-        20k Community <br />0
+        {{ chosenNetwork.community }}k Community <br />
 
         <span class="location">
-          <b-icon-geo-alt class="ico"></b-icon-geo-alt> Douala cameroon
+          <b-icon-geo-alt class="ico"></b-icon-geo-alt>
+          {{ chosenNetwork.address }}
         </span>
         <br />
 
-        super best car seller in the world adipisicing elit. lorem epsep this
-        <b-link>Read More</b-link>
+        {{ chosenNetwork.description }}
       </p>
     </b-modal>
   </div>
@@ -216,14 +260,18 @@
 export default {
   data() {
     return {
-      networkShow: true,
       showModal: false,
-      name: "",
-      description: "",
-      purpose: "",
-      needs: "",
-      isInNetwork: "",
-      images: [
+      createdNetwork: {
+        name: "",
+        address: "",
+        specification: "",
+        description: "",
+        purpose: "",
+        needs: "",
+        isInNetwork: "",
+      },
+
+      image: [
         "https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg",
       ],
       networks: [
@@ -232,8 +280,11 @@ export default {
           image: [
             "https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg",
           ],
-          title: "Title 2",
-          text:
+          name: "Global Car Supple Network",
+          specification: "Car Rental",
+          community: 20,
+          address: "Douala cameroon",
+          description:
             " Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum quam, doloribus id sit consequuntur tempora molestiae blanditiis.",
         },
         {
@@ -241,8 +292,11 @@ export default {
           image: [
             "https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg",
           ],
-          title: "Title 2",
-          text:
+          name: "Global Car Supple Network",
+          specification: "Car Rental",
+          community: 20,
+          address: "Douala cameroon",
+          description:
             " Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum quam, doloribus id sit consequuntur tempora molestiae blanditiis.",
         },
         {
@@ -250,8 +304,11 @@ export default {
           image: [
             "https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg",
           ],
-          title: "Title 2",
-          text:
+          name: "Global Car Supple Network",
+          specification: "Car Rental",
+          community: 20,
+          address: "Douala cameroon",
+          description:
             " Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum quam, doloribus id sit consequuntur tempora molestiae blanditiis.",
         },
         {
@@ -259,8 +316,11 @@ export default {
           image: [
             "https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg",
           ],
-          title: "Title 2",
-          text:
+          name: "Global Car Supple Network",
+          specification: "Car Rental",
+          community: 20,
+          address: "Douala cameroon",
+          description:
             " Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum quam, doloribus id sit consequuntur tempora molestiae blanditiis.",
         },
         {
@@ -268,16 +328,36 @@ export default {
           image: [
             "https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg",
           ],
-          title: "Title 2",
-          text:
+          name: "Global Car Supple Network",
+          specification: "Car Rental",
+          community: 20,
+          address: "Douala cameroon",
+          description:
             " Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum quam, doloribus id sit consequuntur tempora molestiae blanditiis.",
         },
       ],
+      chosenNetwork: {
+        image: [],
+        name: "",
+        specification: "",
+        community: 0,
+        address: "",
+        description: " ",
+      },
     };
   },
   methods: {
     openNetwork() {
       this.networkShow = false;
+    },
+
+    viewNetwork(network) {
+      this.chosenNetwork.image = network.image;
+      this.chosenNetwork.name = network.name;
+      this.chosenNetwork.specification = network.specification;
+      this.chosenNetwork.community = network.community;
+      this.chosenNetwork.address = network.address;
+      this.chosenNetwork.description = network.description;
     },
 
     add() {},

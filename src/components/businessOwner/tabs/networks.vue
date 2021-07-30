@@ -72,20 +72,6 @@
     <b-modal hide-footer title="Add network" size="lg" v-model="showModal">
       <b-container>
         <b-form>
-          <!--
-
-      <span class="inline">     <div style="width: 20%;">
-            <img
-              src="https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg"
-              width="100%"
-              height="90%"
-              class="r-image"
-            />
-          </div >   <span class="ml-3 fs-8"> Business Name <br />  Business Category </span> </span>  <br /> 
-
-
-  -->
-
           <div class="row sub-sidebar-2 pending-post-view mt-4 pb-0 ">
             <div
               class="col-md-12 col-lg-12 d-flex align-items-stretch mb-lg-0"
@@ -119,7 +105,12 @@
             label-class="font-weight-bold pt-0"
             class="mb-0"
           >
-            <b-form-input id="network_name" placeholder="" required>
+            <b-form-input
+              v-model="name"
+              id="network_name"
+              placeholder=""
+              required
+            >
             </b-form-input>
           </b-form-group>
 
@@ -132,7 +123,7 @@
           >
             <b-form-textarea
               id="textarea"
-              v-model="text"
+              v-model="description"
               placeholder="Enter something..."
               rows="3"
               max-rows="6"
@@ -148,7 +139,7 @@
           >
             <b-form-textarea
               id="textarea"
-              v-model="text"
+              v-model="purpose"
               placeholder=""
               rows="3"
               max-rows="6"
@@ -164,7 +155,7 @@
           >
             <b-form-textarea
               id="textarea"
-              v-model="text"
+              v-model="needs"
               placeholder=" "
               rows="3"
               max-rows="6"
@@ -178,10 +169,16 @@
             label-class="font-weight-bold pt-0"
             class="mb-0"
           >
-            <b-form-checkbox name="check-button" switch> </b-form-checkbox>
+            <b-form-checkbox v-model="isInNetwork" name="check-button" switch>
+            </b-form-checkbox>
           </b-form-group>
 
-          <b-button class="mt-2 " style="float:right" variant="primary">
+          <b-button
+            @click="add"
+            class="mt-2 "
+            style="float:right"
+            variant="primary"
+          >
             Add Network</b-button
           >
         </b-form>
@@ -201,7 +198,7 @@
         <br />
         Car Rental
         <br />
-        20k Community <br />
+        20k Community <br />0
 
         <span class="location">
           <b-icon-geo-alt class="ico"></b-icon-geo-alt> Douala cameroon
@@ -221,42 +218,56 @@ export default {
     return {
       networkShow: true,
       showModal: false,
-      text: "",
+      name: "",
+      description: "",
+      purpose: "",
+      needs: "",
+      isInNetwork: "",
       images: [
         "https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg",
       ],
-      posts: [
+      networks: [
         {
           id: 1,
-          image: "https://picsum.photos/300/150/?image=41",
+          image: [
+            "https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg",
+          ],
           title: "Title 2",
           text:
             " Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum quam, doloribus id sit consequuntur tempora molestiae blanditiis.",
         },
         {
           id: 2,
-          image: "https://picsum.photos/300/150/?image=41",
+          image: [
+            "https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg",
+          ],
           title: "Title 2",
           text:
             " Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum quam, doloribus id sit consequuntur tempora molestiae blanditiis.",
         },
         {
           id: 3,
-          image: "https://picsum.photos/300/150/?image=41",
+          image: [
+            "https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg",
+          ],
           title: "Title 2",
           text:
             " Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum quam, doloribus id sit consequuntur tempora molestiae blanditiis.",
         },
         {
           id: 4,
-          image: "https://picsum.photos/300/150/?image=41",
+          image: [
+            "https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg",
+          ],
           title: "Title 2",
           text:
             " Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum quam, doloribus id sit consequuntur tempora molestiae blanditiis.",
         },
         {
           id: 5,
-          image: "https://picsum.photos/300/150/?image=41",
+          image: [
+            "https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg",
+          ],
           title: "Title 2",
           text:
             " Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum quam, doloribus id sit consequuntur tempora molestiae blanditiis.",
@@ -268,6 +279,8 @@ export default {
     openNetwork() {
       this.networkShow = false;
     },
+
+    add() {},
 
     addNetwork() {
       this.showModal = !this.showModal;

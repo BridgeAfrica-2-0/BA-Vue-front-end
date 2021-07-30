@@ -41,7 +41,7 @@
                     </router-link>
                   </strong>
                   <br />
-                  {{ network.specification }}
+                  {{ network.category }}
                   <br />
                   {{ network.community }}k Community <br />
 
@@ -117,13 +117,13 @@
           </b-form-group>
           <b-form-group
             label-cols-lg="12"
-            label="Business Specification"
+            label="Business Category"
             label-size="md"
             label-class="font-weight-bold pt-0"
             class="mb-0"
           >
             <b-form-input
-              v-model="createdNetwork.specification"
+              v-model="createdNetwork.category"
               id="network_name"
               placeholder=""
               required
@@ -240,7 +240,7 @@
           </router-link>
         </strong>
         <br />
-        {{ chosenNetwork.specification }}
+        {{ chosenNetwork.category }}
         <br />
         {{ chosenNetwork.community }}k Community <br />
 
@@ -264,7 +264,7 @@ export default {
       createdNetwork: {
         name: "",
         address: "",
-        specification: "",
+        category: "",
         description: "",
         purpose: "",
         needs: "",
@@ -281,7 +281,7 @@ export default {
             "https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg",
           ],
           name: "Global Car Supple Network",
-          specification: "Car Rental",
+          category: "Car Rental",
           community: 20,
           address: "Douala cameroon",
           description:
@@ -293,7 +293,7 @@ export default {
             "https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg",
           ],
           name: "Global Car Supple Network",
-          specification: "Car Rental",
+          category: "Car Rental",
           community: 20,
           address: "Douala cameroon",
           description:
@@ -305,7 +305,7 @@ export default {
             "https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg",
           ],
           name: "Global Car Supple Network",
-          specification: "Car Rental",
+          category: "Car Rental",
           community: 20,
           address: "Douala cameroon",
           description:
@@ -317,7 +317,7 @@ export default {
             "https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg",
           ],
           name: "Global Car Supple Network",
-          specification: "Car Rental",
+          category: "Car Rental",
           community: 20,
           address: "Douala cameroon",
           description:
@@ -329,7 +329,7 @@ export default {
             "https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg",
           ],
           name: "Global Car Supple Network",
-          specification: "Car Rental",
+          category: "Car Rental",
           community: 20,
           address: "Douala cameroon",
           description:
@@ -339,7 +339,7 @@ export default {
       chosenNetwork: {
         image: [],
         name: "",
-        specification: "",
+        category: "",
         community: 0,
         address: "",
         description: " ",
@@ -354,7 +354,7 @@ export default {
     viewNetwork(network) {
       this.chosenNetwork.image = network.image;
       this.chosenNetwork.name = network.name;
-      this.chosenNetwork.specification = network.specification;
+      this.chosenNetwork.category = network.category;
       this.chosenNetwork.community = network.community;
       this.chosenNetwork.address = network.address;
       this.chosenNetwork.description = network.description;

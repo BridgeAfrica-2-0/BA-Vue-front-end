@@ -66,7 +66,10 @@ const routes = [
   {
     path: "/welcome",
     name: "welcome",
-    component: welcome
+    component: welcome,
+    meta: {
+      auth: true
+    },
   },
 
   {
@@ -249,9 +252,27 @@ const routes = [
   },
 ];
 
+
+
 const router = new VueRouter({
-  routes,
-  mode: "history",
+  mode: 'history',
+  base: process.env.BASE_URL,
+  routes
 });
+
+
+
+router.beforeEach((to, from, next) => {
+  const loggedIn = localStorage.getItem('auth/user')
+
+  if (to.matched.some(record => record.meta.auth) && !loggedIn) {
+    next('/login')
+    return
+  }
+  next()
+
+});
+
+
 
 export default router;

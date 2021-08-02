@@ -12,7 +12,8 @@ export default {
       let response = await axios.get(
         "https://jsonplaceholder.typicode.com/todos"
       );
-      console.log(response.data);
+      console.log("Request sent");
+      localStorage.setItem("token", JSON.stringify(response.data));
     },
   },
 };

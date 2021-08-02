@@ -6,6 +6,7 @@ Vue.use(Vuex);
 // axios.defaults.baseURL = "";
 
 export default new Vuex.Store({
+
   state: {
     recoverData: "",
     login: false,

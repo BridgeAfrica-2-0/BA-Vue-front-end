@@ -5,10 +5,13 @@ import router from "./router";
 import store from "./store";
 import { BootstrapVue, IconsPlugin } from "bootstrap-vue";
 
+import axios from 'axios'
+import VueAxios from 'vue-axios'
+
 import VueGallerySlideshow from "vue-gallery-slideshow";
-import {library} from '@fortawesome/fontawesome-svg-core';
-import {fas} from '@fortawesome/free-solid-svg-icons';
-import {FontAwesomeIcon} from '@fortawesome/vue-fontawesome'
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { fas } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 import { fab } from '@fortawesome/free-brands-svg-icons'
 
@@ -21,21 +24,30 @@ import vSelect from 'vue-select';
 import Vuex from 'vuex';
 
 Vue.use(Vuex);
-
+Vue.use(VueAxios, axios);
 
 
 import IconifyIcon from '@iconify/vue';
 
-import homeIconData from '@iconify-icons/mdi-light/home';   
+import homeIconData from '@iconify-icons/mdi-light/home';
 
 IconifyIcon.addIcon('home', homeIconData);
 
 
 import ReadMore from 'vue-read-more';
- 
+
 Vue.use(ReadMore);
 
-
+import VueSocialauth from 'vue-social-auth'
+Vue.use(VueSocialauth, {
+  providers: {
+    facebook: {
+      clientId: '513850343026598',
+      client_secret: 'f126ad31262665d481b6080f7f5c645f',
+      redirectUri: 'http//:localhost:8080/login'
+    }
+  }
+});
 
 
 
@@ -54,7 +66,7 @@ import Lightbox from "@morioh/v-lightbox";
 import * as VueGoogleMaps from 'vue2-google-maps';
 
 import VueSplide from '@splidejs/vue-splide';
-Vue.use( VueSplide );
+Vue.use(VueSplide);
 import '@splidejs/splide/dist/css/themes/splide-default.min.css';
 
 
@@ -84,7 +96,6 @@ Vue.use(VueFormWizard)
 
 
 
-// Import Bootstrap an BootstrapVue CSS files (order is important)
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap-vue/dist/bootstrap-vue.css";
 import 'vue-select/dist/vue-select.css';
@@ -94,9 +105,7 @@ import "@/assets/css/bootstrap.css";
 import "@/assets/css/bootstrap.css";
 
 
-// Make BootstrapVue available throughout your project
 Vue.use(BootstrapVue);
-// Optionally install the BootstrapVue icon components plugin
 Vue.use(IconsPlugin);
 
 
@@ -119,21 +128,25 @@ Vue.config.productionTip = false;
 new Vue({
   router,
   store,
+
+
+  created() {
+    const userInfo = localStorage.getItem('user')
+    if (userInfo) {
+      const userData = JSON.parse(userInfo)
+      this.$store.commit('auth/setUserData', userData)
+    }
+    axios.interceptors.response.use(
+      response => response,
+      error => {
+        if (error.response.status === 401) {
+          this.$store.dispatch('logout')
+        }
+        return Promise.reject(error)
+      }
+    )
+  },
+
   render: h => h(App)
 }).$mount("#app");
 
-// router.befo reEach((to, from, next) => {
-//   if (to.matched.some(record => record.meta.needsAuth)) {
-//     if (!store.state.login) {
-//       next({
-//         name: "Login"
-//       });
-//     } else {
-//       next({
-//         name: "Create"
-//       });
-//     }
-//   } else {
-//     next();
-//   }
-// });

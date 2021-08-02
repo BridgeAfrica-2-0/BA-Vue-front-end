@@ -13,7 +13,7 @@
 
            <div class="center">
 
-         <b-row>  <b-col cols="12" md="6" lg="12" xl="6">  <md-button class="  md-raised md-primary b-w">  <b-icon icon="facebook" aria-hidden="true"></b-icon> Sign Up With Facebook</md-button>   </b-col> 
+         <b-row>  <b-col cols="12" md="6" lg="12" xl="6">  <md-button  @click.prevent="authProvider('facebook')"   class="  md-raised md-primary b-w">  <b-icon icon="facebook" aria-hidden="true"></b-icon> Sign Up With Facebook</md-button>   </b-col> 
           
         
           <b-col cols="12" md="6" lg="12" xl="6">  <md-button class="  b-color b-w" style="color:white;" > <b-icon icon="google" aria-hidden="true"></b-icon> Sign Up with Google</md-button> </b-col>
@@ -84,6 +84,7 @@
           <md-field >
             <label for="tel">Tel</label>
             <md-input type="number" name="tel" id="tel" v-model="form.tel"  />
+             <span class="md-error" v-if="!$v.form.tel.required">Tel is required</span>
            
           </md-field>
 
@@ -168,22 +169,34 @@
 
 <script>
   import { validationMixin } from 'vuelidate'
+  import axios from 'axios'
+
+  
+  
+
+   
   import {
     required,
     email,
     minLength,
-    maxLength
+  
   } from 'vuelidate/lib/validators'
+
+  
+  
+
   export default {
     name: 'FormValidation',
     mixins: [validationMixin],
     data: () => ({
+       baseurl: process.env.baseURL,
       form: {
         firstName: null,
         lastName: null,
         gender: null,
         age: null,
         email: null,
+        password:null,
       },
       userSaved: false,
       sending: false,
@@ -199,13 +212,11 @@
           required,
           minLength: minLength(3)
         },
-        age: {
+        tel: {
           required,
-          maxLength: maxLength(3)
+          minLength: minLength(6)
         },
-        gender: {
-          required
-        },
+       
         email: {
           required,
           email
@@ -213,6 +224,24 @@
       }
     },
     methods: {
+
+
+      authProvider(provider) {
+        let self = this;
+        this.$auth.authenticate(provider).then(response => {
+            self.socialLogin(provider,response)
+        }).catch(err => {
+            console.log({err:err})
+        })
+    },
+    socialLogin(provider,response) {
+        this.$http.post('/social/'+provider, response).then(response => {
+            return response.data.token;
+        }).catch(err => {
+            console.log({err:err})
+        })
+    },
+
       getValidationClass (fieldName) {
         const field = this.$v.form[fieldName]
         if (field) {
@@ -230,9 +259,34 @@
         this.form.email = null
       },
       saveUser () {
+
+   
+                    axios.post('user/register', {
+                        first_name: this.form.firstName,
+                         last_name: this.form.LastName,
+                        email: this.form.email,
+                        password: this.form.password,
+                        tel:this.form.tel,
+                        password_confirmation:this.form.password
+                    })
+                        .then(response => {
+                            if (response.data.success) {
+                                window.location.href = "/login"
+                            } else {
+                                this.error = response.data.message
+                            }
+                        })
+                        .catch(function (error) {
+                            console.error(error);
+                        });
+              
+
+
         this.sending = true
         // Instead of this timeout, here you can call your API
+
         window.setTimeout(() => {
+
           this.lastUser = `${this.form.firstName} ${this.form.lastName}`
           this.userSaved = true
           this.sending = false
@@ -246,6 +300,9 @@
         }
       }
     }
+
+   
+    
   }
 </script>
 

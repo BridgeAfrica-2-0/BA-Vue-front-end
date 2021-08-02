@@ -98,7 +98,7 @@ export default {
       cityName: "Dummy",
       followed: "525",
       telephone: "+1 (234) 567-8974",
-      email: "info@businessname.com",
+      email: "info@businessname.com"
     };
   },
   methods: {
@@ -112,8 +112,8 @@ export default {
 
     validate(idForm) {
       this.$bvModal.hide(idForm);
-    },
-  },
+    }
+  }
 };
 </script>
 

@@ -81,7 +81,7 @@ export default {
   border: solid 1px #e75c18;
   color: #e75c18;
   background-color: #fff;
-   margin-left: 265px;
+  margin-left: 265px;
 }
 
 .btnz:hover {

@@ -1,75 +1,25 @@
 <template>
   <div class="main">
-    
+    <div class="splide">
+      <splide :options="options" class="banner r-image">
+        <splide-slide>
+          <img src="@/assets/img/Business 1.jpg" class="r-image" />
+        </splide-slide>
 
+        <splide-slide>
+          <img src="@/assets/img/business 2.jpg" class="r-image" />
+        </splide-slide>
 
+        <splide-slide>
+          <img src="@/assets/img/business 3.png" class="r-image" />
+        </splide-slide>
+      </splide>
+    </div>
 
-
-    
-   <div class="splide">
-
-    <splide :options="options" class="banner r-image"   >
-   
-
-   <splide-slide >
-       
-
-            <img
-              src="@/assets/img/Business 1.jpg" 
-              
-              class="r-image"
-            />
-
-
-    </splide-slide>
-
-
-     <splide-slide >
-       
-       
-            <img
-             
-               src="@/assets/img/business 2.jpg"
-              
-              class="r-image"
-            />
-
-
-
-    </splide-slide>
-
-
-      <splide-slide >
-       
-
-            <img
-               src="@/assets/img/business 3.png"
-              
-              class="r-image"
-            />
-
-
-
-    </splide-slide>
-
-
-
-
-
-   
-
-
-              </splide>
-
-   </div>
-
-<b-button class=" float-right see-all">
+    <b-button class=" float-right see-all">
       See All
     </b-button>
 
-
-
-    
     <b-row class="mt-4 desktop container-fluid">
       <b-col>
         <b-row class="profile">
@@ -77,7 +27,9 @@
             <img class="logo" src="@/assets/img/m5.jpg" />
           </div>
           <div class="d-inline-block ml-4 float-left name-block">
-  <b-link>     <h5 class="font-weight-bolder name"> User Name</h5>     </b-link>        
+            <b-link>
+              <h5 class="font-weight-bolder name">User Name</h5>
+            </b-link>
             <p>
               <br />
               1.5k Community
@@ -196,43 +148,36 @@ export default {
     Media,
     MarketPlace,
     Community,
-    Networks,
+    Networks
   },
 
-  
+  data() {
+    return {
+      options: {
+        rewind: true,
+        autoplay: true,
+        perPage: 3,
+        pagination: false,
 
-   data() {
-      return {
-        options: {
-          rewind : true,
-          autoplay: true,
-          perPage: 3,
-          pagination:false,
-        
-          
-          type   : 'loop',
-          perMove: 1,
+        type: "loop",
+        perMove: 1,
 
-
-          breakpoints: {
+        breakpoints: {
           "760": {
             perPage: 1,
-            gap: "0rem",
+            gap: "0rem"
           },
           "992": {
             perPage: 2,
-            gap: "1rem",
-          },
-        },
-
-
-        
-        },
-      };
-    },
+            gap: "1rem"
+          }
+        }
+      }
+    };
+  },
 
   computed: {},
-  methods: {},
+  methods: {}
 };
 </script>
 
@@ -319,9 +264,6 @@ p {
 .mobile {
   display: none;
 }
-
-
-
 
 .see-all:hover {
   background-color: rgba(220, 220, 220, 0.398);
@@ -488,181 +430,122 @@ p {
   }
 }
 
-
-
-
-
 @media (min-width: 760px) {
+  .profile-name {
+    font-size: 20px;
 
-  .profile-name{
-     
-     font-size: 20px;
-   
-     margin-left: 20px;
+    margin-left: 20px;
   }
 
-  
-.community{
-
-    
-     font-size: 14px;
-    
-}
-
+  .community {
+    font-size: 14px;
+  }
 
   .avatar-header-icon {
-  width: 2em;
-  height: 2em;
-  position: absolute;
-  left: 100px;
-  top: 100px;
-  background-color: #e75c18;
-  color: white;
-  border-radius: 24px;
-  padding: 6px;
-}
+    width: 2em;
+    height: 2em;
+    position: absolute;
+    left: 100px;
+    top: 100px;
+    background-color: #e75c18;
+    color: white;
+    border-radius: 24px;
+    padding: 6px;
+  }
 
-  .logo_avat{
+  .logo_avat {
     width: 120px;
     height: 120px;
   }
-  .banner{
-        height: 426px;
-       
+  .banner {
+    height: 426px;
   }
 
+  .edit-btn {
+    width: 146px;
+    height: 40px;
+    background-color: #e4c229;
+    border-color: #e4c229;
+  }
 
-.edit-btn{
+  .edit-btn:hover {
+    border-color: #e4c229;
+  }
 
-  width:146px;
-   height:40px ;
-   background-color: #e4c229;
-   border-color:#e4c229 ;
+  .edit-btn:focus {
+    border-color: #e4c229;
+  }
 
+  .edit-btn:active {
+    border-color: #e4c229;
+  }
+
+  .dot-btn {
+    height: 40px;
+    margin-left: 3px;
+  }
 }
 
-.edit-btn:hover{
- 
-  border-color:#e4c229 ;
-}
-
-.edit-btn:focus{
- 
-  border-color:#e4c229 ;
-}
-
-.edit-btn:active{
- 
-  border-color:#e4c229 ;
-}
-
-
-.dot-btn{
-   height:40px ;
-   margin-left: 3px;
-}
-  
-}
-
-.round-coner{
+.round-coner {
   border-radius: 4px;
 }
 
-
-
-
-
 @media (min-width: 768px) {
+  .r-image {
+    height: 486px;
+    object-fit: cover;
+    width: 100%;
 
-       
-       
-.r-image{
-height:486px ;
-object-fit: cover;
-width: 100%;
+    background-size: contain;
+  }
 
-  background-size: contain;
+  .logo-container {
+    padding-left: 73px;
+    padding-right: 63px;
+  }
+
+  .see-all {
+    height: 48px;
+    width: 174px;
+    position: relative;
+    margin-top: -100px;
+    left: -20px;
+    background-color: transparent;
+    color: black;
+    border: solid 2px black;
+    font-weight: bold;
+  }
+  .see-all:hover {
+    background-color: rgba(220, 220, 220, 0.398);
+    color: #fff;
+    border: solid 2px white;
+  }
 }
-
-
-.logo-container{
-
-     padding-left: 73px;
-     padding-right: 63px;
-}
-
-
-
-
-
-.see-all {
-  height: 48px;
-  width: 174px;
- position: relative;
-  margin-top: -100px;
-  left: -20px;
-  background-color: transparent;
-  color: black;
-  border: solid 2px black;
-  font-weight: bold;
-}
-.see-all:hover {
-  background-color: rgba(220, 220, 220, 0.398);
-  color: #fff;
-  border: solid 2px white;
-}
-
-
-
-}
-
-
-
-
-
-
-
-
-
 
 @media (max-width: 760px) {
+  .r-image {
+    height: 180px;
+    object-fit: cover;
+    width: 100%;
 
-       
-       
-.r-image{
- height: 180px;
-object-fit: cover;
-width: 100%;
+    background-size: contain;
+  }
 
-  background-size: contain;
+  .see-all {
+    height: 38px;
+    width: 91px;
+    position: relative;
+    margin-top: -50px;
+    left: -20px;
+    background-color: transparent;
+    color: black;
+    border: solid 2px black;
+    font-weight: bold;
+  }
+  .see-all:hover {
+    background-color: rgba(220, 220, 220, 0.398);
+    color: #fff;
+    border: solid 2px white;
+  }
 }
-
-
-
-
-.see-all {
-  height: 38px;
-  width: 91px;
- position: relative;
-  margin-top: -50px;
-  left: -20px;
-  background-color: transparent;
-  color: black;
-  border: solid 2px black;
-  font-weight: bold;
-}
-.see-all:hover {
-  background-color: rgba(220, 220, 220, 0.398);
-  color: #fff;
-  border: solid 2px white;
-}
-
-
-
-
-
-}
-
-
-
 </style>

@@ -135,8 +135,8 @@ export default {
     About,
     Media,
     Community,
-    Businesses,
-  },
+    Businesses
+  }
 };
 </script>
 

@@ -18,7 +18,7 @@
             />
 
             <br />
-            <b-button class="button" type="submit" >
+            <b-button class="button" type="submit">
               Next
             </b-button>
           </b-form>
@@ -52,10 +52,9 @@ export default {
   width: 80%;
 }
 
-.button{
+.button {
   margin-left: 265px;
   background-color: #e75c18;
   border: none;
-
 }
 </style>

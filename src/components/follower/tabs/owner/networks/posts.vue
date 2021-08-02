@@ -49,7 +49,7 @@
 
 <script>
 export default {
-  name: 'networkPosts',
+  name: "networkPosts",
   data() {
     return {
       posts: [
@@ -71,14 +71,13 @@ export default {
     };
   },
   methods: {
-  
     showModal() {
       this.$refs["modal-1"].show();
     },
 
-    postDescription(id){
-        var post=this.posts(id);
-        return post.text;
+    postDescription(id) {
+      var post = this.posts(id);
+      return post.text;
     },
     deletePost(id) {
       const index = id - 1;

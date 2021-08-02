@@ -17,11 +17,12 @@
             </b-avatar>
           </div>
           <div class="d-inline-block ml-4 float-left mt-4">
-      <b-link>       <h5 class="font-weight-bolder name"> Blezour Blec</h5>     </b-link> 
-           <br />
-             
-              <span class="k15 duration"> 1.5k  Community </span>
-           
+            <b-link>
+              <h5 class="font-weight-bolder name">Blezour Blec</h5>
+            </b-link>
+            <br />
+
+            <span class="k15 duration"> 1.5k Community </span>
           </div>
         </b-col>
         <b-col cols="12">
@@ -69,13 +70,16 @@
           <div class="d-inline-block mt-4 ml-4 float-left texts">
             <h6 class="font-weight-bolder name ">Blezour Blec</h6>
             <p class="details">
-            
               1.5k Community
             </p>
           </div>
         </b-col>
         <b-col cols="2">
-          <b-button class="m-community size" size="sm" style="margin-top: -50px;">
+          <b-button
+            class="m-community size"
+            size="sm"
+            style="margin-top: -50px;"
+          >
             <i class="fas fa-map-marked-alt fa-lg btn-icon "></i>
 
             <span class="txt-btn">Direction</span></b-button
@@ -112,7 +116,7 @@
 
     <div class="body p-2">
       <b-row>
-        <b-col cols="12" class="p-3" >
+        <b-col cols="12" class="p-3">
           <b-tabs content-class="mt-3" fill pills>
             <b-tab title="Posts" active>
               <Post />
@@ -142,8 +146,8 @@ export default {
     About,
     Media,
     Community,
-    Businesses,
-  },
+    Businesses
+  }
 };
 </script>
 
@@ -180,13 +184,12 @@ export default {
   width: 100%;
   padding-left: 30px;
   padding-right: 30px;
-
 }
 .banner {
- height: 426px;
+  height: 426px;
 
-        width:100%;
-  object-fit: cover  !important;
+  width: 100%;
+  object-fit: cover !important;
 }
 .m-fa {
   margin-top: 5px;
@@ -247,19 +250,17 @@ img {
   color: #fff;
 }
 .avatar {
- width: 168px;
-    height: 168px;
-        margin-top: -50px;
+  width: 168px;
+  height: 168px;
+  margin-top: -50px;
 }
 .name {
   position: absolute;
- 
- 
+
   font-size: 32px;
   margin-top: -20px !important;
 }
 p {
- 
   font-size: 14px;
 }
 .community {
@@ -293,12 +294,11 @@ p {
 }
 p,
 .name {
-
   font-size: 32px;
 }
 .txt-btn {
   margin-left: 10px;
- 
+
   font-size: 16px;
   color: #fff;
 }
@@ -321,20 +321,14 @@ p,
     height: 28px;
   }
   .banner {
-    
+    height: 168px;
 
-     height: 168px;
-
-        width:100%;
-
+    width: 100%;
   }
   p,
   .name {
-
-
-
     font-size: 18px;
-   
+
     position: relative;
     top: -1px;
   }
@@ -360,7 +354,7 @@ p,
   .avatar {
     height: 64px;
     width: 64px;
-   margin-top: -15px;
+    margin-top: -15px;
   }
   .profile {
     width: 100%;
@@ -387,7 +381,7 @@ p,
     position: relative;
     left: -15px;
   }
-  
+
   .more {
     position: relative;
     top: 20px;

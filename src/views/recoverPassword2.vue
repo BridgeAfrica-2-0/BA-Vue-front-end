@@ -43,7 +43,7 @@ import { mapGetters } from "vuex";
 export default {
   data() {
     return {
-      code: "",
+      code: ""
     };
   },
   computed: mapGetters(["recoverPassData"]),
@@ -55,8 +55,8 @@ export default {
     next(e) {
       e.preventDefault();
       window.location.href = "recoverPass3";
-    },
-  },
+    }
+  }
 };
 </script>
 
@@ -65,8 +65,7 @@ export default {
   width: 80%;
 }
 
-<<<<<<< HEAD
-.button {
+<<<<<<< head .button {
   margin-left: 265px;
   background-color: #e75c18;
   border: none;
@@ -83,9 +82,12 @@ export default {
   border: none;
 }
 
-=======
->>>>>>> 5fa58d2361ad6890173d8e3b361c69f390e719da
-@media only screen and (max-width: 768px) {
+=======>>>>>>>5fa58d2361ad6890173d8e3b361c69f390e719da
+  @media
+  only
+  screen
+  and
+  (max-width: 768px) {
   .btn {
     margin-left: -20px;
     border: solid 1px #e75c18;

@@ -6,7 +6,6 @@ Vue.use(Vuex);
 // axios.defaults.baseURL = "";
 
 export default new Vuex.Store({
-
   state: {
     recoverData: "",
     login: false,
@@ -17,7 +16,7 @@ export default new Vuex.Store({
       {
         id: "",
         fullname: "",
-        username: "",
+        username: "TONTON LA FORCE",
         email: "",
         password: ""
       }
@@ -214,6 +213,9 @@ export default new Vuex.Store({
     },
     getService(state) {
       return state.service;
+    },
+    getUsers(state) {
+      return state.userData;
     }
   },
   modules: {}

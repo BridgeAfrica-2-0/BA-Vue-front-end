@@ -17,13 +17,13 @@ export default {
   components: {
     navbar,
     Profile,
-    Footer,
+    Footer
   },
   data() {
     return {};
   },
   computed: {},
-  methods: {},
+  methods: {}
 };
 </script>
 

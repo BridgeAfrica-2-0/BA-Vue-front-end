@@ -16,7 +16,7 @@
          <b-row>  <b-col cols="12" md="6" lg="12" xl="6">  <md-button  @click.prevent="authProvider('facebook')"   class="  md-raised md-primary b-w">  <b-icon icon="facebook" aria-hidden="true"></b-icon> Sign Up With Facebook</md-button>   </b-col> 
           
         
-          <b-col cols="12" md="6" lg="12" xl="6">  <md-button class="  b-color b-w" style="color:white;" > <b-icon icon="google" aria-hidden="true"></b-icon> Sign Up with Google</md-button> </b-col>
+          <b-col cols="12" md="6" lg="12" xl="6">  <md-button  @click.prevent="authProvider('google')"   class=" b-color b-w" style="color:white;" > <b-icon icon="google" aria-hidden="true"></b-icon> Sign Up with Google</md-button> </b-col>
           
           
             </b-row>       
@@ -38,7 +38,7 @@
             <div class="md-layout-item md-small-size-100 m-left">
              
 
-                <md-field >
+                <md-field   :class="getValidationClass('firstName')" >
             <label for="first_name">First Name</label>
             <md-input type="text" name="firstName" id="firstName"  v-model="form.firstName" :disabled="sending" />
             <span class="md-error" v-if="!$v.form.firstName.required">First Name  is required</span>
@@ -53,7 +53,7 @@
 
 
 
-                <md-field >
+                <md-field   :class="getValidationClass('lastName')" >
             <label for="lastName"> Last Name</label>
             <md-input type="text" name="lastName" id="lastName"  v-model="form.lastName" :disabled="sending" />
             <span class="md-error" v-if="!$v.form.lastName.required">First Name  is required</span>
@@ -81,7 +81,7 @@
 
 
 
-          <md-field >
+          <md-field :class="getValidationClass('tel')" >
             <label for="tel">Tel</label>
             <md-input type="number" name="tel" id="tel" v-model="form.tel"  />
              <span class="md-error" v-if="!$v.form.tel.required">Tel is required</span>
@@ -92,9 +92,11 @@
 
 
 
-           <md-field >
+           <md-field :class="getValidationClass('password')" >
             <label for="password">Password</label>
             <md-input type="password" name="password" id="password"  v-model="form.password" :disabled="sending" />
+
+             <span class="md-error" v-if="!$v.form.password.required">Password is required</span>
            
           </md-field>
 
@@ -102,9 +104,10 @@
          
 
    
-           <md-field >
-            <label for="re-password">Confirm Password</label>
-            <md-input type="password" name="password" id="password"  v-model="form.password" :disabled="sending" />
+           <md-field  :class="getValidationClass('password')" >
+            <label for="confirmPassword">Confirm Password</label>
+            <md-input type="password" name="confirmPassword" id="confirmPassword"  v-model="form.confirmPassword" :disabled="sending" />
+            <span class="md-error" v-if="!$v.form.confirmPassword.required">Password is required</span>
            
           </md-field>
 
@@ -112,7 +115,7 @@
 
        
 
-
+   
 
         </md-card-content>
 
@@ -197,24 +200,42 @@
         age: null,
         email: null,
         password:null,
+
+       confirmPassword:null,
       },
       userSaved: false,
       sending: false,
       lastUser: null
     }),
     validations: {
+
       form: {
         firstName: {
           required,
-          minLength: minLength(3)
+        
         },
+
         lastName: {
           required,
-          minLength: minLength(3)
+      
         },
+
+
+        password: {
+          required,
+         
+        },
+
+
+       confirmPassword: {
+          required,
+          minLength: minLength(4)
+        },
+
+        
         tel: {
           required,
-          minLength: minLength(6)
+        
         },
        
         email: {
@@ -234,8 +255,10 @@
             console.log({err:err})
         })
     },
+    
+
     socialLogin(provider,response) {
-        this.$http.post('/social/'+provider, response).then(response => {
+        this.$http.post('user/social/'+provider, response).then(response => {
             return response.data.token;
         }).catch(err => {
             console.log({err:err})
@@ -254,12 +277,14 @@
         this.$v.$reset()
         this.form.firstName = null
         this.form.lastName = null
-        this.form.age = null
-        this.form.gender = null
+       
         this.form.email = null
+        this.password=null
+        this.confirmPassword=null
       },
       saveUser () {
-
+                   
+                       this.sending = true
    
                     axios.post('user/register', {
                         first_name: this.form.firstName,
@@ -271,9 +296,15 @@
                     })
                         .then(response => {
                             if (response.data.success) {
+                              console.log(response.data);
                                 window.location.href = "/login"
                             } else {
+
+                               console.log(response.data);
+                             
                                 this.error = response.data.message
+
+                                this.sending = false
                             }
                         })
                         .catch(function (error) {
@@ -282,18 +313,11 @@
               
 
 
-        this.sending = true
-        // Instead of this timeout, here you can call your API
-
-        window.setTimeout(() => {
-
-          this.lastUser = `${this.form.firstName} ${this.form.lastName}`
-          this.userSaved = true
-          this.sending = false
-          this.clearForm()
-        }, 1500)
+        
       },
       validateUser () {
+
+        
         this.$v.$touch()
         if (!this.$v.$invalid) {
           this.saveUser()

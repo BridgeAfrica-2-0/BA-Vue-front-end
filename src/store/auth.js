@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-axios.defaults.baseURL = 'http://localhost:8000/api/v1/'
+axios.defaults.baseURL = 'https://5ef462c6c214.ngrok.io/api/v1/'
 
 export default {
   namespaced: true,
@@ -29,7 +29,7 @@ export default {
     actions: {
       login ({ commit }, credentials) {
         return axios
-          .post('/login', credentials)
+          .post('user/login', credentials)
           .then(({ data }) => {
             commit('setUserData', data)
           })

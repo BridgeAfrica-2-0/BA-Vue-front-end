@@ -34,6 +34,7 @@ import homeIconData from '@iconify-icons/mdi-light/home';
 IconifyIcon.addIcon('home', homeIconData);
 
 
+
 import ReadMore from 'vue-read-more';
 
 Vue.use(ReadMore);
@@ -42,9 +43,9 @@ import VueSocialauth from 'vue-social-auth'
 Vue.use(VueSocialauth, {
   providers: {
     facebook: {
-      clientId: '513850343026598',
-      client_secret: 'f126ad31262665d481b6080f7f5c645f',
-      redirectUri: 'http//:localhost:8080/login'
+      clientId: '1261401967629020',    
+      client_secret: 'b4ff04f81ccead5172494eba993d431e',
+      redirectUri: 'https://92052d6b5d9e.ngrok.io/auth/facebook/callback'
     }
   }
 });
@@ -139,9 +140,9 @@ new Vue({
     axios.interceptors.response.use(
       response => response,
       error => {
-        if (error.response.status === 401) {
-          this.$store.dispatch('logout')
-        }
+      //  if (error.response.status === 401) {
+     //     this.$store.dispatch('logout')
+      //  }
         return Promise.reject(error)
       }
     )

@@ -13,10 +13,10 @@
 
          <div class="center">
 
-         <b-row>  <b-col cols="12" md="6" lg="12" xl="6">  <md-button class="  md-raised md-primary b-w">  <b-icon icon="facebook" aria-hidden="true"></b-icon> Login With Facebook</md-button>   </b-col> 
+         <b-row>  <b-col cols="12" md="6" lg="12" xl="6">  <md-button      @click.prevent="authProvider('facebook')"    class="  md-raised md-primary b-w">  <b-icon icon="facebook" aria-hidden="true"></b-icon> Login With Facebook</md-button>   </b-col> 
           
         
-          <b-col cols="12" md="6" lg="12" xl="6">  <md-button class="  b-color b-w" style="color:white;" > <b-icon icon="google" aria-hidden="true"></b-icon> Login  with Google</md-button> </b-col>
+          <b-col cols="12" md="6" lg="12" xl="6">  <md-button  @click.prevent="authProvider('google')"  class="  b-color b-w" style="color:white;" > <b-icon icon="google" aria-hidden="true"></b-icon> Login  with Google</md-button> </b-col>
           
           
             </b-row>       
@@ -51,7 +51,7 @@
 
 
 
-
+      
 
           <div class="md-layout md-gutter">
             <div class="md-layout-item md-small-size-100 m-left">
@@ -183,9 +183,35 @@ import '@/assets/default.css'
         if (field) {
           return {
             'md-invalid': field.$invalid && field.$dirty
-          }
+
+
+  }
         }
       },
+
+
+      
+
+      authProvider(provider) {
+        let self = this;
+        this.$auth.authenticate(provider).then(response => {
+            self.socialLogin(provider,response)
+        }).catch(err => {
+            console.log({err:err})
+        })
+    },
+    
+    socialLogin(provider,response) {
+        this.$http.post('/social/'+provider, response).then(response => {
+            return response.data.token;
+        }).catch(err => {
+            console.log({err:err})
+        })
+    },
+
+
+
+
       clearForm () {
         this.$v.$reset()
         
@@ -198,7 +224,11 @@ import '@/assets/default.css'
         this.login();
        
 
-      },
+
+
+
+
+   },
 
 
       

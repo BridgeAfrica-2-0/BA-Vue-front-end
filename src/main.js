@@ -51,7 +51,7 @@ Vue.use(VueSocialauth, {
     google: {
       clientId: '657559601863-i98tce7bcnf70qudlodt8l3014ci6v7a.apps.googleusercontent.com',
       client_secret: 'KuWg2anrE6bec-3rksXZqIEy',
-      redirectUri: 'https://agitated-engelbart-01f459.netlify.app/auth/google/callback'
+      redirectUri: 'https://ece7cd35144a.ngrok.io/auth/google/callback'
   }
   }
 });

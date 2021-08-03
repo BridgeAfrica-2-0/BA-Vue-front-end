@@ -3,11 +3,7 @@
     <b-container fluid class="p-0 gradient">
       <!-- Owner Header Page Up-->
       <div class="container-flex">
-        <img
-          :src="user.profile_picture"
-          class="img-fluid  banner"
-          alt="Kitten"
-        />
+        <img :src="user.cover_image" class="img-fluid  banner" alt="Kitten" />
       </div>
 
       <!-- Owner Header Page Down -->
@@ -16,7 +12,7 @@
           <b-col cols="12" md="12" class="m-0 p-0 text-left put-top ">
             <!-- Avatar profile picture-->
             <b-avatar
-              src="https://placekitten.com/400/300"
+              :src="user.profile_picture"
               class="  avat  text-center"
               badge-variant="primary"
               badge-offset="10px"
@@ -76,7 +72,7 @@
             </div>
 
             <!-- first modal box  to change/edit the profile picture -->
-            <b-modal id="modal-4" title="Upload Profile Picture">
+            <b-modal id="modal-4" title="Upload Profile Picture" ref="my-modal">
               <div class="w3-container">
                 <div class="row pb-3">
                   <div
@@ -111,13 +107,13 @@
             </b-modal>
 
             <!-- second modal box  to change/edit the big cover photo -->
-            <b-modal id="coverphoto" title="Upload Cover Image">
-              <div class="w3-container">
+            <b-modal id="coverphoto" title="Upload Cover Image" ref="my-modal"
+              ><div class="w3-container">
                 <div class="row pb-3">
                   <div
                     class="col-sm-6 text-center"
                     style="border-right:1px solid #dee2e6;"
-                    @click="chooseProfile2()"
+                    @click="$refs.fileInput_2.click()"
                   >
                     <h1>
                       <fas-icon class="primary" :icon="['fas', 'upload']" />
@@ -129,6 +125,8 @@
                         id="cover-imag"
                         name="img"
                         accept="image/*"
+                        @change="onFileSelected_2"
+                        ref="fileInput_2"
                       />
                     </div>
                     <h4>Upload A New Cover Image</h4>
@@ -157,7 +155,7 @@ export default {
       user: {
         profile_name: "TONTON LA FORCE",
         number_of_follower: 1.4,
-        profile_picture: "@/assets/img/banner.jpg",
+        profile_picture: "https://placekitten.com/400/300",
         cover_image: ""
       }
     };
@@ -168,20 +166,48 @@ export default {
      * @param event
      */
     onFileSelected(event) {
-      console.log(event);
+      console.log(this.$refs);
       console.log("File Input Passed");
+      let file = event.target;
+      let fileImage = null;
+      if (file.files) {
+        var reader = new FileReader();
+        reader.onload = e => {
+          localStorage.setItem("profile_image", e.target.result);
+          this.user.profile_picture = e.target.result;
+        };
+        fileImage = file.files[0];
+        console.log(fileImage);
+        reader.readAsDataURL(file.files[0]);
+      }
+      this.$refs["my-modal"].hide();
     },
-    chooseProfile2: function() {
-      document.getElementById("cover-imag").click();
-    },
-
-    chooseProfile1: function() {
-      document.getElementById("profile-imag").click();
+    onFileSelected_2(event) {
+      console.log(this.$refs);
+      console.log("File Input Passed");
+      let file = event.target;
+      let fileImage = null;
+      if (file.files) {
+        var reader = new FileReader();
+        reader.onload = e => {
+          localStorage.setItem("cover_image", e.target.result);
+          this.user.cover_image = e.target.result;
+        };
+        fileImage = file.files[0];
+        console.log(fileImage);
+        reader.readAsDataURL(file.files[0]);
+      }
+      this.$refs["my-modal"].hide();
     }
   },
   created() {
-    this.user = this.$store.getters.getUser();
-    console.log("user profile : " + this.user);
+    /**
+     *
+     *I get the path of image store in localStorage
+     * @type {string}
+     */
+    this.user.profile_picture = localStorage.getItem("profile_image");
+    this.user.cover_image = localStorage.getItem("cover_image");
   }
 };
 </script>
@@ -376,5 +402,9 @@ export default {
 .btn:active {
   border-color: #e4c229 !important;
   background-color: #b39500 !important ;
+}
+
+.displayNone {
+  display: none !important;
 }
 </style>

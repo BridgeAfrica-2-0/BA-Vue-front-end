@@ -43,9 +43,9 @@ import VueSocialauth from 'vue-social-auth'
 Vue.use(VueSocialauth, {
   providers: {
     facebook: {
-      clientId: '265983688247205',    
-      client_secret: 'c3490e31d3634c88f1aaa44cd856a384',
-      redirectUri: 'https://92052d6b5d9e.ngrok.io/auth/facebook/callback'
+      clientId: '217630683484563',    
+      client_secret: 'b7154604b25b85ae8ac679ab2750a00c',
+      redirectUri: 'https://agitated-engelbart-01f459.netlify.app/auth/facebook/callback'
     },
 
     google: {

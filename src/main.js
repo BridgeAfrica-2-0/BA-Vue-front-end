@@ -60,6 +60,11 @@ Vue.use(VueSocialauth, {
 
 
 
+import FlashMessage from '@smartweb/vue-flash-message';
+Vue.use(FlashMessage);
+
+
+
 
 import VueMaterial from 'vue-material'
 //import 'vue-material/dist/vue-material.min.css'
@@ -139,6 +144,8 @@ new Vue({
 
   created() {
     const userInfo = localStorage.getItem('user')
+  
+    
     if (userInfo) {
       const userData = JSON.parse(userInfo)
       this.$store.commit('auth/setUserData', userData)
@@ -146,9 +153,9 @@ new Vue({
     axios.interceptors.response.use(
       response => response,
       error => {
-      //  if (error.response.status === 401) {
-     //     this.$store.dispatch('logout')
-      //  }
+        if (error.response.status === 401) {
+         this.$store.dispatch('logout')
+        }
         return Promise.reject(error)
       }
     )

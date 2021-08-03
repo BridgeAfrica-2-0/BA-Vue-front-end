@@ -8,7 +8,7 @@ import axios from 'axios';
 Vue.use(Vuex);
 
 
-axios.defaults.baseURL ='https://5ef462c6c214.ngrok.io/api/v1/'
+axios.defaults.baseURL ='http://team1dev.maxinemoffett.com/api/v1'
 
 export default new Vuex.Store({
   modules: {

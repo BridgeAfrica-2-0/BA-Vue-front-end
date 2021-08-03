@@ -167,7 +167,12 @@
 
       <md-snackbar :md-active.sync="userSaved">The user {{ lastUser }} was saved with success!</md-snackbar>
     </form>
+
+    <FlashMessage />
   </div>
+
+
+  
 </template>
 
 <script>
@@ -283,7 +288,7 @@
         this.confirmPassword=null
       },
       saveUser () {
-                   
+                     
                        this.sending = true
    
                     axios.post('user/register', {
@@ -294,10 +299,19 @@
                         tel:this.form.tel,
                         password_confirmation:this.form.password
                     })
-                        .then(response => {
+                        .then(response => {             
+ 
+
                             if (response.data.success) {
                               console.log(response.data);
-                                window.location.href = "/login"
+
+                              this.flashMessage.show({
+	status: 'success',
+	title: 'Successfully Register',
+	message: 'Thanks for registering. You will be redirected in a second '
+});
+
+                               
                             } else {
 
                                console.log(response.data);
@@ -307,9 +321,11 @@
                                 this.sending = false
                             }
                         })
-                        .catch(function (error) {
-                            console.error(error);
-                        });
+                        .then(err => {
+                    console.log(err)
+                })  
+
+
               
 
 

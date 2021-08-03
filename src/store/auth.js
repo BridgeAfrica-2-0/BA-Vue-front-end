@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-axios.defaults.baseURL = 'https://5ef462c6c214.ngrok.io/api/v1/'
+axios.defaults.baseURL ='http://team1dev.maxinemoffett.com/api/v1'
 
 export default {
   namespaced: true,
@@ -14,8 +14,12 @@ export default {
   mutations: {
     setUserData (state, userData) {
       state.user = userData
+     
       localStorage.setItem('user', JSON.stringify(userData))
-      axios.defaults.headers.common.Authorization = `Bearer ${userData.token}`
+      axios.defaults.headers.common.Authorization = `Bearer ${userData.accessToken}`
+
+      const userInfo = localStorage.getItem('user')
+   
     },
 
 
@@ -31,7 +35,8 @@ export default {
         return axios
           .post('user/login', credentials)
           .then(({ data }) => {
-            commit('setUserData', data)
+            commit('setUserData', data.data)
+            
           })
       },
   

@@ -43,10 +43,16 @@ import VueSocialauth from 'vue-social-auth'
 Vue.use(VueSocialauth, {
   providers: {
     facebook: {
-      clientId: '1261401967629020',    
-      client_secret: 'b4ff04f81ccead5172494eba993d431e',
+      clientId: '265983688247205',    
+      client_secret: 'c3490e31d3634c88f1aaa44cd856a384',
       redirectUri: 'https://92052d6b5d9e.ngrok.io/auth/facebook/callback'
-    }
+    },
+
+    google: {
+      clientId: '657559601863-i98tce7bcnf70qudlodt8l3014ci6v7a.apps.googleusercontent.com',
+      client_secret: 'KuWg2anrE6bec-3rksXZqIEy',
+      redirectUri: 'https://agitated-engelbart-01f459.netlify.app/auth/google/callback'
+  }
   }
 });
 

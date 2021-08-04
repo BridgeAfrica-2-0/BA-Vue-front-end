@@ -328,13 +328,13 @@ export default {
   },
   methods: {
     ...mapGetters({
-      getNetworksFromstore: "networkOwner/getnetWorks",
+      getNetworksFromstore: " businessOwner/getnetWorks",
     }),
 
     // getting actions from the store
     ...mapActions({
-      addNetwork: "networkOwner/addNetwork",
-      getNetworks: "networkOwner/getNetworks",
+      addNetwork: " businessOwner/addNetwork",
+      getNetworks: " businessOwner/getNetworks",
     }),
 
     //View network on pop up modal

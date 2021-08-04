@@ -4,7 +4,6 @@ export default {
   namespaced: true,
   state: {
     networks: [],
-    man: "it is me the man",
   },
   getters: {
     getnetWorks(state) {
@@ -44,9 +43,7 @@ export default {
           console.log("Unauthorized request !!");
         });
     },
-    async addNetwork() {
-      axios.post("");
-    },
+    async addNetwork() {},
     async deleteNetwork() {},
     async editNetwork() {},
   },

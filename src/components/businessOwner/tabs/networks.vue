@@ -6,7 +6,7 @@
 
       <b-button
         variant="outline-primary"
-        @click="addnetwork"
+        @click="addnetwork(false)"
         data-toggle="modal"
         data-target="#addbusinessbtnModal"
         class="float-right btn-network "
@@ -15,32 +15,57 @@
       </b-button>
 
       <hr />
-
       <b-row>
         <b-col
           cols="12"
           md="12"
           lg="6"
-          v-for="(network, index) in networks"
+          v-for="(network, index) in getNetworksFromStore"
           :key="index"
-          v-b-modal.modal-1
-          @click="viewNetwork(network)"
         >
           <div class="people-style shadow">
-            <b-row>
+            <b-row @click="viewNetwork(network)">
               <b-col md="3" xl="3" lg="3" cols="5" sm="3">
-                <div class="center-img">
-                  <img :src="network.image[0]" class="r-image" />
+                <div class="center-img" v-b-modal.modal-1>
+                  <!-- <img :src="network.image[0]" class="r-image" /> -->
                 </div>
               </b-col>
               <b-col md="9" cols="7" lg="9" xl="9" sm="9">
                 <p class="textt ml-5">
-                  <strong class="net-title">
-                    <router-link to="/businessfollower">
-                      {{ network.name }}
-                    </router-link>
-                  </strong>
-                  <br />
+                  <b-row>
+                    <b-col>
+                      <strong class="net-title">
+                        <router-link to="/businessfollower">
+                          {{ network.name }}
+                        </router-link>
+                      </strong></b-col
+                    >
+                    <b-col cols="4">
+                      <b-dropdown
+                        class="options ml-4"
+                        variant="primary"
+                        size="sm"
+                        id="dropdown-left"
+                      >
+                        <template #button-content>
+                          <b-icon icon="three-dots" aria-hidden="true"></b-icon>
+                        </template>
+                        <b-dropdown-item-button
+                          @click="showEditNetwork(network)"
+                        >
+                          <b-icon icon="pencil" aria-hidden="true"></b-icon>
+                          Edit
+                        </b-dropdown-item-button>
+                        <b-dropdown-item-button
+                          @click="deleteNetwork(network.id)"
+                        >
+                          <b-icon icon="trash-fill" aria-hidden="true"></b-icon>
+                          Delete
+                        </b-dropdown-item-button>
+                      </b-dropdown>
+                    </b-col>
+                  </b-row>
+
                   {{ network.category }}
                   <br />
                   {{ network.community }}k Community <br />
@@ -60,21 +85,31 @@
         </b-col>
       </b-row>
     </div>
-    <div class="h-100 w-100" v-if="networks.length < 1">
+    <div class="h-100 w-100" v-if="getNetworksFromStore.length < 1">
       <div class="mx-auto text-center my-5">
         <h2 class="my-3">Builds networks around your Business</h2>
         <p class="my-2">Create network to stay in touch with just the people</p>
         <p class="my-2">you want Engage, share, Make Plans and much more</p>
         <p class="my-3">
-          <b-button @click="addNetwork" variant="primary">Add network</b-button>
+          <b-button @click="addnetwork(false)" variant="primary"
+            >Add network</b-button
+          >
         </p>
       </div>
     </div>
 
-    <b-modal hide-footer title="Add network" size="lg" v-model="showModal">
+    <b-modal
+      hide-footer
+      :title="edit ? 'Edit network' : 'Add network'"
+      size="lg"
+      v-model="showModal"
+    >
       <b-container>
         <b-form>
-          <div class="row sub-sidebar-2 pending-post-view mt-4 pb-0 ">
+          <div
+            v-if="!edit"
+            class="row sub-sidebar-2 pending-post-view mt-4 pb-0 "
+          >
             <div
               class="col-md-12 col-lg-12 d-flex align-items-stretch mb-lg-0"
               style="padding-left: 0; padding-top: 3px;"
@@ -221,7 +256,7 @@
             style="float:right"
             variant="primary"
           >
-            Add Network</b-button
+            {{ edit ? "Edit Network" : "Add Network" }}</b-button
           >
         </b-form>
       </b-container>
@@ -256,12 +291,13 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
+import { mapActions, mapGetters } from "vuex";
 export default {
   data() {
     return {
       showModal: false,
       createdNetwork: {
+        id: "",
         name: "",
         address: "",
         category: "",
@@ -270,68 +306,7 @@ export default {
         needs: "",
         isInNetwork: "",
       },
-      networks: [
-        {
-          id: 1,
-          image: [
-            "https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg",
-          ],
-          name: "Global Car Supple Network",
-          category: "Car Rental",
-          community: 20,
-          address: "Douala cameroon",
-          description:
-            " Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum quam, doloribus id sit consequuntur tempora molestiae blanditiis.",
-        },
-        {
-          id: 2,
-          image: [
-            "https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg",
-          ],
-          name: "Global Car Supple Network",
-          category: "Car Rental",
-          community: 20,
-          address: "Douala cameroon",
-          description:
-            " Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum quam, doloribus id sit consequuntur tempora molestiae blanditiis.",
-        },
-        {
-          id: 3,
-          image: [
-            "https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg",
-          ],
-          name: "Global Car Supple Network",
-          category: "Car Rental",
-          community: 20,
-          address: "Douala cameroon",
-          description:
-            " Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum quam, doloribus id sit consequuntur tempora molestiae blanditiis.",
-        },
-        {
-          id: 4,
-          image: [
-            "https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg",
-          ],
-          name: "Global Car Supple Network",
-          category: "Car Rental",
-          community: 20,
-          address: "Douala cameroon",
-          description:
-            " Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum quam, doloribus id sit consequuntur tempora molestiae blanditiis.",
-        },
-        {
-          id: 5,
-          image: [
-            "https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg",
-          ],
-          name: "Global Car Supple Network",
-          category: "Car Rental",
-          community: 20,
-          address: "Douala cameroon",
-          description:
-            " Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum quam, doloribus id sit consequuntur tempora molestiae blanditiis.",
-        },
-      ],
+      network: [],
       chosenNetwork: {
         image: [],
         name: "",
@@ -340,30 +315,71 @@ export default {
         address: "",
         description: " ",
       },
+      edit: false,
     };
   },
+  beforeMount() {
+    this.getNetworks();
+  },
+  computed: {
+    getNetworksFromStore() {
+      return this.getNetworksFromstore();
+    },
+  },
   methods: {
+    ...mapGetters({
+      getNetworksFromstore: "networkOwner/getnetWorks",
+    }),
+
+    // getting actions from the store
     ...mapActions({
       addNetwork: "networkOwner/addNetwork",
+      getNetworks: "networkOwner/getNetworks",
     }),
-    openNetwork() {
-      this.networkShow = false;
-    },
 
+    //View network on pop up modal
     viewNetwork(network) {
+      console.log(this.getNetworksFromStore);
       this.chosenNetwork.image = network.image;
       this.chosenNetwork.name = network.name;
       this.chosenNetwork.category = network.category;
-      this.chosenNetwork.community = network.community;
       this.chosenNetwork.address = network.address;
       this.chosenNetwork.description = network.description;
     },
     addNet() {
-      console.log("man");
       this.addNetwork();
     },
-    addnetwork() {
-      this.showModal = !this.showModal;
+
+    // add a network and initializing
+    addnetwork(state) {
+      this.showModal = true;
+      this.edit = state;
+      if (!state) {
+        this.createdNetwork.image = "";
+        this.createdNetwork.name = "";
+        this.createdNetwork.category = "";
+        this.createdNetwork.community = "";
+        this.createdNetwork.address = "";
+        this.createdNetwork.description = "";
+        this.createdNetwork.purpose = "";
+        this.createdNetwork.needs = "";
+      }
+    },
+
+    //delete network
+    deleteNetwork(id) {},
+
+    //Show Edit network modal
+    showEditNetwork(network) {
+      this.createdNetwork.image = network.image;
+      this.createdNetwork.name = network.name;
+      this.createdNetwork.category = network.category;
+      this.createdNetwork.community = network.community;
+      this.createdNetwork.address = network.address;
+      this.createdNetwork.description = network.description;
+      this.createdNetwork.purpose = network.purpose;
+      this.createdNetwork.needs = network.needs;
+      this.addnetwork(true);
     },
   },
 };

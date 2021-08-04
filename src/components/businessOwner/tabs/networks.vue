@@ -251,7 +251,7 @@
             </b-form-checkbox>
           </b-form-group>
           <b-button
-            @click="addNet"
+            @click="addNetwork(createdNetwork)"
             class="mt-2 "
             style="float:right"
             variant="primary"
@@ -297,7 +297,6 @@ export default {
     return {
       showModal: false,
       createdNetwork: {
-        id: "",
         name: "",
         address: "",
         category: "",
@@ -306,7 +305,6 @@ export default {
         needs: "",
         isInNetwork: "",
       },
-      network: [],
       chosenNetwork: {
         image: [],
         name: "",
@@ -328,13 +326,13 @@ export default {
   },
   methods: {
     ...mapGetters({
-      getNetworksFromstore: " businessOwner/getnetWorks",
+      getNetworksFromstore: "businessOwner/getnetWorks",
     }),
 
     // getting actions from the store
     ...mapActions({
-      addNetwork: " businessOwner/addNetwork",
-      getNetworks: " businessOwner/getNetworks",
+      addNetwork: "businessOwner/addNetwork",
+      getNetworks: "businessOwner/getNetworks",
     }),
 
     //View network on pop up modal
@@ -346,9 +344,7 @@ export default {
       this.chosenNetwork.address = network.address;
       this.chosenNetwork.description = network.description;
     },
-    addNet() {
-      this.addNetwork();
-    },
+
 
     // add a network and initializing
     addnetwork(state) {

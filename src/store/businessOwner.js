@@ -8,13 +8,16 @@ export default {
   getters: {
     getnetWorks(state) {
       if (state.networks.length > 0) {
-        return state.networks;
+        return state.networks.reverse();
       }
     },
   },
   mutations: {
     setNetworks(state, payload) {
       state.networks = payload;
+    },
+    updateNetworks(state, payload) {
+      state.networks.push(payload);
     },
   },
   actions: {
@@ -43,7 +46,21 @@ export default {
           console.log("Unauthorized request !!");
         });
     },
-    async addNetwork() {},
+    async addNetwork({ commit }, newNetwork) {
+      console.log(newNetwork);
+      axios
+        .post("/network", newNetwork, {
+          headers: {
+            Authorization: "Bearer " + localStorage.getItem("access_token"),
+          },
+        })
+        .then((res) => {
+          console.log(res.data);
+        })
+        .catch((err) => {
+          console.log("Something went wrong");
+        });
+    },
     async deleteNetwork() {},
     async editNetwork() {},
   },

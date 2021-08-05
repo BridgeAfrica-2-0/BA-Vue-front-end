@@ -4,20 +4,37 @@ export default {
   namespaced: true,
   state: {
     networks: [],
+    loader: false,
+    success: false,
   },
   getters: {
+    // sending networks
     getnetWorks(state) {
       if (state.networks.length > 0) {
         return state.networks.reverse();
       }
+    },
+    // sending loader value
+    getLoader(state) {
+      return state.loader;
+    },
+    // sending success value
+    getSuccess(state) {
+      return state.success;
     },
   },
   mutations: {
     setNetworks(state, payload) {
       state.networks = payload;
     },
-    updateNetworks(state, payload) {
-      state.networks.push(payload);
+    updateNetwork(state, payload) {
+      state.networks = [];
+    },
+    setLoader(state, payload) {
+      state.loader = payload;
+    },
+    setSuccess(state, payload) {
+      state.success = payload;
     },
   },
   actions: {
@@ -25,7 +42,7 @@ export default {
     async signIn() {
       axios
         .post("/user/login", {
-          email: "info4@moazateeq.com",
+          email: "info@moazateeq.com",
           password: "12345678",
         })
         .then((res) => {
@@ -36,13 +53,18 @@ export default {
     async getNetworks({ dispatch, commit }) {
       await dispatch("signIn");
       await axios
-        .get("/network", {
+        .get("network", {
           headers: {
             Authorization: "Bearer " + localStorage.getItem("access_token"),
           },
         })
         .then((res) => {
+          commit("setLoader", false);
+          commit("setSuccess", true);
           commit("setNetworks", res.data.data);
+          setTimeout(() => {
+            commit("setSuccess", false);
+          }, 2000);
         })
         .catch((err) => {
           console.log("Unauthorized request !!");
@@ -68,6 +90,20 @@ export default {
     //delete network
     async deleteNetwork() {},
     // Edit a network
-    async editNetwork() {},
+    async editNetwork({ dispatch, commit }, editedNetwork) {
+      commit("setLoader", true);
+      axios
+        .put(`network/${editedNetwork.id}`, editedNetwork, {
+          headers: {
+            Authorization: "Bearer " + localStorage.getItem("access_token"),
+          },
+        })
+        .then(async (res) => {
+          await dispatch("getNetworks");
+        })
+        .catch((err) => {
+          console.log("Something went wrong");
+        });
+    },
   },
 };

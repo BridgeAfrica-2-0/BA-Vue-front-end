@@ -4,16 +4,6 @@
       <fas-icon class=" icons" :icon="['fas', 'project-diagram']" size="lg" />
       <span class="t-color"> Network </span>
 
-      <b-button
-        variant="outline-primary"
-        @click="addnetwork(false)"
-        data-toggle="modal"
-        data-target="#addbusinessbtnModal"
-        class="float-right btn-network "
-      >
-        Add Network
-      </b-button>
-
       <hr />
       <b-row>
         <b-col
@@ -56,23 +46,17 @@
                           <b-icon icon="pencil" aria-hidden="true"></b-icon>
                           Edit
                         </b-dropdown-item-button>
-                        <b-dropdown-item-button
-                          @click="deleteNetwork(network.id)"
-                        >
-                          <b-icon icon="trash-fill" aria-hidden="true"></b-icon>
-                          Delete
-                        </b-dropdown-item-button>
                       </b-dropdown>
                     </b-col>
                   </b-row>
 
-                  {{ network.category }}
+                  {{ network.business_id }}
                   <br />
-                  {{ network.community }}k Community <br />
+                  20k Community <br />
 
                   <span class="location">
                     <b-icon-geo-alt class="ico"></b-icon-geo-alt>
-                    {{ network.address }}
+                    {{ network.business_address }}
                   </span>
                   <br />
 
@@ -90,24 +74,15 @@
         <h2 class="my-3">Builds networks around your Business</h2>
         <p class="my-2">Create network to stay in touch with just the people</p>
         <p class="my-2">you want Engage, share, Make Plans and much more</p>
-        <p class="my-3">
-          <b-button @click="addnetwork(false)" variant="primary"
-            >Add network</b-button
-          >
-        </p>
+        <p class="my-3"></p>
       </div>
     </div>
 
-    <b-modal
-      hide-footer
-      :title="edit ? 'Edit network' : 'Add network'"
-      size="lg"
-      v-model="showModal"
-    >
+    <b-modal hide-footer title="Edit network" size="lg" v-model="showModal">
       <b-container>
         <b-form>
           <div
-            v-if="!edit"
+            v-show="false"
             class="row sub-sidebar-2 pending-post-view mt-4 pb-0 "
           >
             <div
@@ -158,7 +133,7 @@
             class="mb-0"
           >
             <b-form-input
-              v-model="createdNetwork.category"
+              v-model="createdNetwork.business_id"
               id="network_name"
               placeholder=""
               required
@@ -173,7 +148,7 @@
             class="mb-0"
           >
             <b-form-input
-              v-model="createdNetwork.address"
+              v-model="createdNetwork.business_address"
               id="network_name"
               placeholder=""
               required
@@ -221,7 +196,7 @@
           >
             <b-form-textarea
               id="textarea"
-              v-model="createdNetwork.needs"
+              v-model="createdNetwork.special_needs"
               placeholder=" "
               rows="3"
               max-rows="6"
@@ -244,19 +219,23 @@
             class="mb-0"
           >
             <b-form-checkbox
-              v-model="createdNetwork.isInNetwork"
+              :v-model="createdNetwork.allow_business == '0' ? false : true"
               name="check-button"
               switch
             >
             </b-form-checkbox>
           </b-form-group>
+          <b-alert :show="success" variant="success"
+            >Operation was Successfull !!</b-alert
+          >
+          <b-spinner v-if="loader" variant="primary"></b-spinner>
           <b-button
-            @click="addNetwork(createdNetwork)"
+            @click="edit"
             class="mt-2 "
             style="float:right"
             variant="primary"
           >
-            {{ edit ? "Edit Network" : "Add Network" }}</b-button
+            Edit Network</b-button
           >
         </b-form>
       </b-container>
@@ -274,13 +253,13 @@
           </router-link>
         </strong>
         <br />
-        {{ chosenNetwork.category }}
+        {{ chosenNetwork.business_id }}
         <br />
-        {{ chosenNetwork.community }}k Community <br />
+        20k Community <br />
 
         <span class="location">
           <b-icon-geo-alt class="ico"></b-icon-geo-alt>
-          {{ chosenNetwork.address }}
+          {{ chosenNetwork.business_address }}
         </span>
         <br />
 
@@ -297,23 +276,27 @@ export default {
     return {
       showModal: false,
       createdNetwork: {
+        id: null,
+        business_id: "",
         name: "",
-        address: "",
-        category: "",
         description: "",
         purpose: "",
-        needs: "",
-        isInNetwork: "",
+        special_needs: "",
+        business_address: "",
+        business_image: "",
+        allow_business: "0",
       },
       chosenNetwork: {
-        image: [],
+        id: null,
+        business_id: "",
         name: "",
-        category: "",
-        community: 0,
-        address: "",
-        description: " ",
+        description: "",
+        purpose: "",
+        special_needs: "",
+        business_address: "",
+        business_image: "",
+        allow_business: "0",
       },
-      edit: false,
     };
   },
   beforeMount() {
@@ -323,59 +306,53 @@ export default {
     getNetworksFromStore() {
       return this.getNetworksFromstore();
     },
+    loader() {
+      return this.getLoader();
+    },
+    success() {
+      return this.getSuccess();
+    },
   },
   methods: {
     ...mapGetters({
       getNetworksFromstore: "businessOwner/getnetWorks",
+      getLoader: "businessOwner/getLoader",
+      getSuccess: "businessOwner/getSuccess",
     }),
 
     // getting actions from the store
     ...mapActions({
       addNetwork: "businessOwner/addNetwork",
       getNetworks: "businessOwner/getNetworks",
+      editNetwork: "businessOwner/editNetwork",
     }),
 
     //View network on pop up modal
     viewNetwork(network) {
-      console.log(this.getNetworksFromStore);
-      this.chosenNetwork.image = network.image;
+      this.chosenNetwork.business_image = network.business_image;
       this.chosenNetwork.name = network.name;
-      this.chosenNetwork.category = network.category;
-      this.chosenNetwork.address = network.address;
+      this.chosenNetwork.business_id = network.business_id;
+      this.chosenNetwork.business_address = network.business_address;
       this.chosenNetwork.description = network.description;
+      this.createdNetwork.allow_business = network.allow_business;
     },
-
-
-    // add a network and initializing
-    addnetwork(state) {
-      this.showModal = true;
-      this.edit = state;
-      if (!state) {
-        this.createdNetwork.image = "";
-        this.createdNetwork.name = "";
-        this.createdNetwork.category = "";
-        this.createdNetwork.community = "";
-        this.createdNetwork.address = "";
-        this.createdNetwork.description = "";
-        this.createdNetwork.purpose = "";
-        this.createdNetwork.needs = "";
-      }
-    },
-
-    //delete network
-    deleteNetwork(id) {},
 
     //Show Edit network modal
     showEditNetwork(network) {
-      this.createdNetwork.image = network.image;
+      this.createdNetwork.id = network.id;
+      this.createdNetwork.business_image = network.business_image;
       this.createdNetwork.name = network.name;
-      this.createdNetwork.category = network.category;
-      this.createdNetwork.community = network.community;
-      this.createdNetwork.address = network.address;
+      this.createdNetwork.business_id = network.business_id;
+      // this.createdNetwork.community = network.community;
+      this.createdNetwork.business_address = network.business_address;
       this.createdNetwork.description = network.description;
       this.createdNetwork.purpose = network.purpose;
-      this.createdNetwork.needs = network.needs;
-      this.addnetwork(true);
+      this.createdNetwork.special_needs = network.special_needs;
+      this.createdNetwork.allow_business = network.allow_business;
+      this.showModal = true;
+    },
+    edit() {
+      this.editNetwork(this.createdNetwork);
     },
   },
 };

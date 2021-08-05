@@ -38,7 +38,7 @@ export default {
     },
   },
   actions: {
-    // temporal signin to get token for developement purposes
+    // temporal signin to get token for developement purpose
     async signIn() {
       axios
         .post("/user/login", {

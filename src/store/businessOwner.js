@@ -21,6 +21,7 @@ export default {
     },
   },
   actions: {
+    // temporal signin to get token for developement purposes
     async signIn() {
       axios
         .post("/user/login", {
@@ -31,6 +32,7 @@ export default {
           localStorage.setItem("access_token", res.data.data.accessToken);
         });
     },
+    // Get networks from the backend
     async getNetworks({ dispatch, commit }) {
       await dispatch("signIn");
       await axios
@@ -46,6 +48,8 @@ export default {
           console.log("Unauthorized request !!");
         });
     },
+
+    // Add network to the database but doesn't work correctly for now
     async addNetwork({ commit }, newNetwork) {
       console.log(newNetwork);
       axios
@@ -61,7 +65,9 @@ export default {
           console.log("Something went wrong");
         });
     },
+    //delete network
     async deleteNetwork() {},
+    // Edit a network
     async editNetwork() {},
   },
 };

@@ -14,6 +14,7 @@
               <bussiness></bussiness>
             </b-tab>
             <b-tab title="Media"><Media /></b-tab>
+            <b-tab title="Networks"><Networks /></b-tab>
             <b-tab title="Community" class="m-0 p-0"
               ><following></following>
             </b-tab>
@@ -30,6 +31,7 @@ import headPage from "@/components/ownerHeadpage";
 import Post from "@/components/owner/tabs/posts";
 import About from "@/components/owner/tabs/about";
 import Media from "@/components/owner/tabs/media";
+import Networks from "@/components/owner/tabs/networks";
 import Following from "@/components/owner/tabs/memberNetwork";
 import Bussiness from "@/components/owner/tabs/bussiness";
 
@@ -42,7 +44,11 @@ export default {
     headPage,
     Post,
     About,
+    Networks,
     Media
+  },
+  created() {
+    //this.profilePicture = localStorage.getItem('profile_image')
   },
   data() {
     return {};

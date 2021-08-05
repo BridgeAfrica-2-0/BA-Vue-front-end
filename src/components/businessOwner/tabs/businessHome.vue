@@ -1,5 +1,6 @@
 <template>
   <div>
+    Petit pour grandir
     <b-row>
       <b-col md="12" lg="5" xl="4">
         <Intro />

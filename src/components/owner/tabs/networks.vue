@@ -4,15 +4,15 @@
       <fas-icon class=" icons" :icon="['fas', 'project-diagram']" size="lg" />
       <span class="t-color"> Network </span>
 
-      <b-button
-        variant="outline-primary"
-        @click="addNetwork"
-        data-toggle="modal"
-        data-target="#addbusinessbtnModal"
-        class="float-right btn-network "
-      >
-        Add Network
-      </b-button>
+<!--      <b-button-->
+<!--        variant="outline-primary"-->
+<!--        @click="addNetwork"-->
+<!--        data-toggle="modal"-->
+<!--        data-target="#addbusinessbtnModal"-->
+<!--        class="float-right btn-network "-->
+<!--      >-->
+<!--        Add Network-->
+<!--      </b-button>-->
 
       <hr />
 
@@ -111,37 +111,6 @@
             class="mb-0"
           >
             <b-form-input id="network_name" placeholder="" required>
-            </b-form-input>
-          </b-form-group>
-
-          <b-form-group
-                  label-cols-lg="12"
-                  label="Category Name"
-                  label-size="md"
-                  label-class="font-weight-bold pt-0"
-                  class="mb-0"
-          >
-            <b-form-input id="category_name" placeholder="" required>
-            </b-form-input>
-          </b-form-group>
-          <b-form-group
-                  label-cols-lg="12"
-                  label="Communauty Name"
-                  label-size="md"
-                  label-class="font-weight-bold pt-0"
-                  class="mb-0"
-          >
-            <b-form-input id="communauty_name" placeholder="" required>
-            </b-form-input>
-          </b-form-group>
-          <b-form-group
-                  label-cols-lg="12"
-                  label="Location Name"
-                  label-size="md"
-                  label-class="font-weight-bold pt-0"
-                  class="mb-0"
-          >
-            <b-form-input id="location_name" placeholder="" required>
             </b-form-input>
           </b-form-group>
 

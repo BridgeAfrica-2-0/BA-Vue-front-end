@@ -384,6 +384,7 @@ const actions = {
           currentCity: "Dummy",
           numbersOfFollowers: 256
         }
+
       })
     })
       .then(response => {

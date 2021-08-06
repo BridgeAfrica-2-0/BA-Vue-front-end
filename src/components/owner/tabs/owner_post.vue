@@ -858,7 +858,7 @@ export default {
         movies: this.createPost.movies,
         hyperlinks: this.createPost.hyperlinks
       });
-      //this.$refs["modal-xl"].hide();
+      this.$refs["modal-xl"].hide();
     },
     showModal() {
       this.$refs["modal-3"].show();

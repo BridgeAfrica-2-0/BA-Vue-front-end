@@ -39,27 +39,28 @@
           </div>
         </b-tab>
 
+        <!-- Business User Post Section -->
         <b-tab>
           <template slot="title">
-            Businesses <span class="spa-color"> 7K </span>
+            Businesses <span class="spa-color"> {{ $store.getters.getBusinessUserPost.businessNumberFollowers}}K </span>
           </template>
 
           <div>
             <b-tabs fill pills content-class="mt-3  f-left m-up checkcheck">
               <b-tab active>
                 <template slot="title">
-                  Followers <span class="spa-color"> 7K </span>
+                  Followers <span class="spa-color"> {{ $store.getters.getBusinessUserPost.businessNumberFollowers}}K </span>
                 </template>
 
-                <div class="s-comcard"><Business /></div>
+                <div class="s-comcard"><Business :isFollowers="true"/></div>
               </b-tab>
 
               <b-tab>
                 <template slot="title">
-                  Following <span class="spa-color"> 7K </span>
+                  Following <span class="spa-color"> {{ $store.getters.getBusinessUserPost.businessNumberFollowing}}K </span>
                 </template>
 
-                <div class="s-comcard"><Business /></div>
+                <div class="s-comcard"><Business :isFollowers="false"/></div>
               </b-tab>
             </b-tabs>
           </div>

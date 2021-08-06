@@ -10,6 +10,7 @@ const getDefaultState = () => {
     recoverData: "",
     login: false,
     isToi: false,
+    token: "6|InTVkgzF2JMHXrmcMPccH9glZCnhzuxgFq1CrPxj",
     count: "",
     todos: [],
     userData: [
@@ -24,6 +25,112 @@ const getDefaultState = () => {
         coverImage: localStorage.getItem("cover_image"),
         numbersOfFollowers: 30,
         posts: [],
+        business: {
+          businessNumberFollowers: 10,
+          businessNumberFollowing: 30,
+          followers: [
+            {
+              id: 1,
+              businessProfilePicture: [
+                "https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg",
+                "https://i.wifegeek.com/200426/f9459c52.jpg",
+                "https://i.wifegeek.com/200426/5fa51df3.jpg"
+              ],
+              businessName: "Super Car ltd",
+              businessCategory: "Car Marketing",
+              businessDetails:
+                "super best car seller in the world adipisicing elit. lorem epsep",
+              businessLocation: "Douala cameroon",
+              businessNumberFollowers: 20
+            },
+            {
+              id: 2,
+              businessProfilePicture: [
+                "https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg",
+                "https://i.wifegeek.com/200426/f9459c52.jpg",
+                "https://i.wifegeek.com/200426/5fa51df3.jpg"
+              ],
+              businessName: "Super Car ltd",
+              businessCategory: "Car Marketing",
+              businessDetails:
+                "super best car seller in the world adipisicing elit. lorem epsep",
+              businessLocation: "Douala cameroon",
+              businessNumberFollowers: 20
+            },
+            {
+              id: 3,
+              businessProfilePicture: [
+                "https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg",
+                "https://i.wifegeek.com/200426/f9459c52.jpg",
+                "https://i.wifegeek.com/200426/5fa51df3.jpg"
+              ],
+              businessName: "Super Car ltd",
+              businessCategory: "Car Marketing",
+              businessDetails:
+                "super best car seller in the world adipisicing elit. lorem epsep",
+              businessLocation: "Douala cameroon",
+              businessNumberFollowers: 20
+            },
+            {
+              id: 4,
+              businessProfilePicture: [
+                "https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg",
+                "https://i.wifegeek.com/200426/f9459c52.jpg",
+                "https://i.wifegeek.com/200426/5fa51df3.jpg"
+              ],
+              businessName: "Super Car ltd",
+              businessCategory: "Car Marketing",
+              businessDetails:
+                "super best car seller in the world adipisicing elit. lorem epsep",
+              businessLocation: "Douala cameroon",
+              businessNumberFollowers: 20
+            },
+            {
+              id: 4,
+              businessProfilePicture: [
+                "https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg",
+                "https://i.wifegeek.com/200426/f9459c52.jpg",
+                "https://i.wifegeek.com/200426/5fa51df3.jpg"
+              ],
+              businessName: "Super Car ltd",
+              businessCategory: "Car Marketing",
+              businessDetails:
+                "super best car seller in the world adipisicing elit. lorem epsep",
+              businessLocation: "Douala cameroon",
+              businessNumberFollowers: 20
+            },
+            {
+              id: 5,
+              businessProfilePicture: [
+                "https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg",
+                "https://i.wifegeek.com/200426/f9459c52.jpg",
+                "https://i.wifegeek.com/200426/5fa51df3.jpg"
+              ],
+              businessName: "Super Car ltd",
+              businessCategory: "Car Marketing",
+              businessDetails:
+                "super best car seller in the world adipisicing elit. lorem epsep",
+              businessLocation: "Douala cameroon",
+              businessNumberFollowers: 20
+            }
+          ],
+          followings: [
+            {
+              id: 1,
+              businessProfilePicture: [
+                "https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg",
+                "https://i.wifegeek.com/200426/f9459c52.jpg",
+                "https://i.wifegeek.com/200426/5fa51df3.jpg"
+              ],
+              businessName: "Super Car ltd",
+              businessCategory: "Car Marketing",
+              businessDetails:
+                "super best car seller in the world adipisicing elit. lorem epsep",
+              businessLocation: "Douala cameroon",
+              businessNumberFollowers: 20
+            }
+          ]
+        },
         createPost: {
           profile_picture: null,
           coverImage: null,
@@ -384,7 +491,6 @@ const actions = {
           currentCity: "Dummy",
           numbersOfFollowers: 256
         }
-
       })
     })
       .then(response => {
@@ -394,6 +500,50 @@ const actions = {
         console.log("Create Post Online");
         console.log(response);
         console.log(state.userData[0].posts);
+      });
+  },
+  /**
+   *
+   * @param context
+   * @param payload
+   */
+  retrieveBusinessUserPost(context, payload) {
+    const url =
+      "https://vuejs-backend-c42b8-default-rtdb.firebaseio.com/business.json";
+    console.log(payload);
+    //context.commit("retrieveBusinessUserPost", null);
+    fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        accept: "application/json"
+      },
+      body: JSON.stringify({
+        business: state.userData[0].business
+      })
+    })
+      .then(response => {
+        return response.json();
+      })
+      .then(response => {
+        if (!response.ok) {
+          console.log(
+            "Erreur survenue au niveau du serveur et non au niveau du navigateur"
+          );
+          console.log(response);
+          throw response.error;
+        }
+        console.log("Test de recuperation des business reussis");
+        console.log(response);
+        context.commit("retrieveBusinessUserPost", null);
+      })
+      .catch(error => {
+        if (error instanceof TypeError) {
+          console.log("Erreur liée au navigateur et non au serveur backend");
+          console.log(error.message);
+        } else {
+          console.log(error);
+        }
       });
   }
 };
@@ -503,6 +653,17 @@ const mutations = {
     state.userData[0].createPost.movies = payload.movies;
     state.userData[0].createPost.hyperlinks = payload.hyperlinks;
     state.userData[0].posts.push(payload);
+  },
+  /**
+   *
+   * @param state
+   * @param payload
+   */
+  retrieveBusinessUserPost(state, payload) {
+    console.log("Retrieve business en cours");
+    console.log(state);
+    console.log(payload);
+    //state.userData[0].business = payload.business;
   }
 };
 
@@ -529,6 +690,9 @@ export default new Vuex.Store({
     },
     getProfilePicture(state) {
       return state.userData[0].createPost.profile_picture_localstorage;
+    },
+    getBusinessUserPost(state) {
+      return state.userData[0].business;
     }
   },
   actions,

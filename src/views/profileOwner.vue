@@ -49,6 +49,8 @@ export default {
   },
   created() {
     //this.profilePicture = localStorage.getItem('profile_image')
+    //console.log( "Test to load  Business User Post");
+    //this.$store.dispatch('retrieveBusinessUserPost', null);
   },
   data() {
     return {};

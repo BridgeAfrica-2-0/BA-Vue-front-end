@@ -2,19 +2,23 @@
   <div>
     <b-alert v-if="edited" show> {{ successmsg }} </b-alert>
     <b-button
-      v-if="!editing"
+      v-if="editing == false"
       class="edit-btn float-right"
-      @click="edit"
+      @click="edit(true)"
       variant="outline-primary"
       size="sm"
       >Edit Profile</b-button
     >
+
     <br />
+
     <br />
+
     <br />
-<!--    <p v-if="true">-->
-<!--      {{ biography }}-->
-<!--    </p>-->
+
+    <p v-if="editing == false">
+      {{ biography }}
+    </p>
     <div v-if="editing">
       <b-form @submit="save">
         <div style="width: 150px">
@@ -64,8 +68,8 @@ export default {
     };
   },
   methods: {
-    edit() {
-      this.editing = !this.editing;
+    edit(state) {
+      this.editing = state;
     },
     save() {
       this.edited = true;

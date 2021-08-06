@@ -1,10 +1,12 @@
 <template>
   <div>
     <b-icon icon="person-fill" variant="primary" class="icon-size"> </b-icon>
+
     <b>
       About
     </b>
     <hr />
+
     <div no-body class="p-2">
       <b-tabs pills vertical>
         <b-tab title="BIOGRAPHY" active><Biography /></b-tab>

@@ -220,7 +220,7 @@
         </b-modal>
 
         <!-- User Profile Post Followers-->
-        <!--<Followers />-->
+        <Followers />
 
         <!-- User Profile Post Community-->
         <Community />
@@ -238,14 +238,14 @@
 <script>
 import "@morioh/v-lightbox/dist/lightbox.css";
 
-//import Followers from "../../followers";
+import Followers from "../../followers";
 import Community from "./comunitiDashboard";
 import Owner_post from "./owner_post";
 import Media from "../../media";
 export default {
   name: "posts",
   components: {
-    //Followers,
+    Followers,
     Media,
     Owner_post,
     Community
@@ -304,14 +304,10 @@ export default {
       this.studiedAtState = this.$refs.studied_at.checkValidity();
       this.homeTownState = this.$refs.home_town.checkValidity();
       this.currentCityState = this.$refs.city.checkValidity();
-      return (
-        this.studiedAtState &&
-        this.workedAtState &&
-        this.homeTownState &&
-        this.currentCityState
-      );
+      return this.studiedAtState && this.workedAtState && this.homeTownState && this.currentCityState;
     },
     resetModal() {
+
       this.workedAtState = null;
       this.studiedAtState = null;
       this.homeTownState = null;
@@ -328,13 +324,13 @@ export default {
       if (!this.checkFormValidity()) {
         return;
       }
-      this.userProfileOwner.studiedAt = this.$refs.studied_at.localValue;
-      console.log(this.$refs.studied_at);
-      this.userProfileOwner.workedAt = this.$refs.work_at.localValue;
+      this.userProfileOwner.studiedAt =  this.$refs.studied_at.localValue;
+      console.log( this.$refs.studied_at);
+      this.userProfileOwner.workedAt =  this.$refs.work_at.localValue;
       this.userProfileOwner.homeTown = this.$refs.home_town.localValue;
       this.userProfileOwner.currentCity = this.$refs.city.localValue;
 
-      console.log(this.userProfileOwner);
+      console.log( this.userProfileOwner )
 
       // Hide the modal manually
       this.$nextTick(() => {

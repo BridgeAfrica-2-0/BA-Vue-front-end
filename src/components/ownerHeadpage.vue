@@ -26,8 +26,8 @@
             <!-- profile user identity-->
             <span style="display: inline-block;">
               <h6 class=" profile-name text-center ">
-                <b> <b-link></b-link> </b><br />
-                <span class="duration"> 1.5k Community </span>
+                <b> <b-link>{{ user.profile_name }}</b-link> </b><br />
+                <span class="duration"> {{ user.number_of_follower }} Community </span>
               </h6>
             </span>
 
@@ -160,13 +160,24 @@ export default {
       }
     };
   },
+  created() {
+    /**
+     *
+     *I get the path of image store in localStorage
+     * @type {string}
+     */
+    this.user.profile_picture = this.$store.getters.getUser[0].profilePicture;
+    this.user.cover_image = this.$store.getters.getUser[0].coverImage;
+    this.user.profile_name = this.$store.getters.getUser[0].profileName;
+    this.user.number_of_follower = this.$store.getters.getUser[0].numbersOfFollowers;
+  },
   methods: {
     /**
      *this function selects picture file
      * @param event
      */
     onFileSelected(event) {
-      console.log(this.$refs);
+      //console.log(this.$refs);
       console.log("File Input Passed");
       let file = event.target;
       let fileImage = null;
@@ -177,14 +188,17 @@ export default {
           this.user.profile_picture = e.target.result;
         };
         fileImage = file.files[0];
-        console.log(fileImage);
+        const fd = new FormData();
+        fd.append("file", fileImage, fileImage.name);
+        //console.log(fileImage);
         reader.readAsDataURL(file.files[0]);
+        this.$store.dispatch("changeProfilePicture", { profilePicture: file });
       }
       this.$refs["my-modal"].hide();
     },
     onFileSelected_2(event) {
-      console.log(this.$refs);
-      console.log("File Input Passed");
+      //console.log(this.$refs);
+      //console.log("File Input Passed");
       let file = event.target;
       let fileImage = null;
       if (file.files) {
@@ -194,20 +208,12 @@ export default {
           this.user.cover_image = e.target.result;
         };
         fileImage = file.files[0];
+        this.$store.dispatch("changeCoverImage", { cover_image: file });
         console.log(fileImage);
         reader.readAsDataURL(file.files[0]);
       }
       this.$refs["my-modal"].hide();
     }
-  },
-  created() {
-    /**
-     *
-     *I get the path of image store in localStorage
-     * @type {string}
-     */
-    this.user.profile_picture = localStorage.getItem("profile_image");
-    this.user.cover_image = localStorage.getItem("cover_image");
   }
 };
 </script>

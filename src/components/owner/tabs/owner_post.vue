@@ -1,12 +1,13 @@
 <template>
   <div>
+    <!-- DOM to Create Post By A UserOwner-->
     <b-card class="px-md-3 mb-3">
       <b-row class="mt-2">
         <b-col cols="3" md="1" class="m-md-0 p-md-0">
           <b-avatar
             variant="primary"
             class="img-fluid avat-comment"
-            src="https://www.fivesquid.com/pics/t2/1594480468-145752-1-1.jpg"
+            :src="imageProfile"
           ></b-avatar>
         </b-col>
         <b-col cols="9" md="11" class="p-0 m-0 pr-3">
@@ -16,24 +17,28 @@
             class="comment"
             type="text"
           />
-
           <fas-icon class="primary send-cmt" :icon="['fas', 'paper-plane']" />
         </b-col>
       </b-row>
-
       <hr width="100%" class="m-up" />
-
       <b-row>
         <b-col cols="12" md="12" class="m-0 p-0">
-          <input type="file" id="chosefile" hidden />
-
+          <input
+            type="file"
+            id="chosefile"
+            @change="selectMoviesOutsidePost"
+            accept="video/mpeg, video/mp4, image/*"
+            hidden
+            ref="movie"
+          />
           <b-row class="m-0 p-0">
+            <!-- Add Movie -->
             <b-col cols="5" class="text-right m-0 p-0">
               <b-button
                 title="Add Movie"
                 size="sm"
                 variant="outline-primary"
-                @click="chooseVideo()"
+                @click="$refs.movie.click()"
                 class="post-btn"
               >
                 <fas-icon
@@ -44,25 +49,34 @@
                 <span class="username"> Photo/ Video </span>
               </b-button>
             </b-col>
+            <!-- Attach File-->
             <b-col cols="4" class="text-right m-0 p-0">
+              <input
+                type="file"
+                id="document2"
+                @change="selectDocumentOutsidePost"
+                accept="application/pdf"
+                hidden
+                ref="document2"
+              />
               <b-button
                 title="Add Hyperlink"
                 size="sm"
                 variant="outline-primary"
-                @click="chooseDocument()"
+                @click="$refs.document2.click()"
                 class="post-btn"
               >
                 <fas-icon class="icons" :icon="['fas', 'file']" size="lg" />
                 <span class="username"> Attach File </span>
               </b-button>
             </b-col>
-
+            <!-- Post-->
             <b-col cols="3" class="text-right p-0 m-0">
               <b-button
                 title="Add Hyperlink"
                 size="sm"
                 variant="outline-primary"
-                @click="chooseDocument()"
+                @click="createPost_"
                 class="post-btn"
               >
                 <fas-icon
@@ -70,7 +84,6 @@
                   :icon="['fas', 'paper-plane']"
                   size="lg"
                 />
-
                 <span class="username"> Post </span>
               </b-button>
             </b-col>
@@ -78,6 +91,8 @@
         </b-col>
       </b-row>
     </b-card>
+
+    <!-- xxxxxxx-->
     <b-card class="px-md-3">
       <div class="">
         <div
@@ -85,26 +100,30 @@
           style="padding-left: 0; padding-top: 3px;"
         >
           <!-- <b-button v-b-modal.modal-xl variant="primary">xl modal</b-button> -->
-
-          <b-modal id="modal-xl" centered hide-footer title="Create Post">
+          <!-- Modal For Create Post User-->
+          <b-modal
+            id="modal-xl"
+            ref="modal-xl"
+            centered
+            hide-footer
+            title="Create Post"
+            @hidden="resetPostData"
+          >
             <b-row>
               <b-col cols="1" class="m-0 p-0"></b-col>
               <b-col cols="2" class="m-0 p-0">
                 <b-avatar
                   class="d-inline-block avat"
                   variant="primary"
-                  src="https://www.fivesquid.com/pics/t2/1594480468-145752-1-1.jpg"
+                  :src="imageProfile"
                 ></b-avatar>
               </b-col>
               <b-col cols="9" class="pt-2" style="margin-left:-5px">
-                <h5 class="m-0 font-weight-bolder">
-                  Agrobusiness
-                </h5>
+                <h5 class="m-0 font-weight-bolder">{{ profileNamePost }}</h5>
               </b-col>
             </b-row>
-
             <b-row>
-              <b-col cols="1" md="1" class="m-0 p-0"> </b-col>
+              <b-col cols="1" md="1" cl ass="m-0 p-0"></b-col>
               <b-col cols="10" md="10" class="m-0 p-0">
                 <br />
                 <div class="cursor">
@@ -112,6 +131,11 @@
                     id="textarea-small"
                     class="mb-2 border-none"
                     placeholder="Post a business update"
+                    v-model="createPost.postBusinessUpdate"
+                    :class="{
+                      'is-valid': createPost.postBusinessUpdate !== '',
+                      'is-invalid': createPost.postBusinessUpdate === ''
+                    }"
                   ></b-form-textarea>
 
                   <i></i>
@@ -121,14 +145,28 @@
                   <span class="float-right">
                     <b-button-group size="sm" class="">
                       <input id="video" type="file" hidden />
-                      <input id="image" type="file" hidden />
-                      <input id="document" type="file" hidden />
+                      <input
+                        id="image"
+                        type="file"
+                        hidden
+                        @change="selectMovies"
+                        accept="video/mpeg,video/mp4,image/*"
+                        ref="movies"
+                      />
+                      <input
+                        id="document"
+                        type="file"
+                        @change="selectDocument"
+                        hidden
+                        accept="application/pdf"
+                        ref="document"
+                      />
 
                       <b-button
                         title="Add Movie"
                         size="sm"
                         variant="outline-primary"
-                        @click="chooseVideo()"
+                        @click="$refs.movies.click()"
                       >
                         <fas-icon
                           class="icons"
@@ -140,7 +178,7 @@
                         title="Add Hyperlink"
                         size="sm"
                         variant="outline-primary"
-                        @click="chooseDocument()"
+                        @click="$refs.document.click()"
                       >
                         <fas-icon
                           class="icons"
@@ -152,16 +190,39 @@
                   </span>
                 </div>
                 <br />
+                <div
+                  v-for="hyperlink in createPost.hyperlinks"
+                  :key="hyperlink.fileName"
+                  class="bordder"
+                >
+                  <span class="float-left"> {{ hyperlink.fileName }} </span>
+                  <span
+                    class="float-right"
+                    @click="deleteItem(hyperlink.fileName)"
+                  >
+                    delete
+                  </span>
+                </div>
+                <div
+                  v-for="movie in createPost.movies"
+                  :key="movie.fileName"
+                  class="bordder"
+                >
+                  <span class="float-left"> {{ movie.fileName }} </span>
+                  <span class="float-right" @click="deleteItem(movie.fileName)">
+                    delete
+                  </span>
+                </div>
+                <br />
 
                 <span>
-                  <b-button variant="primary" block
+                  <b-button @click="submitPost" variant="primary" block
                     ><b-icon icon="cursor-fill" variant="primary"></b-icon>
                     Publish</b-button
                   >
                 </span>
               </b-col>
-
-              <b-col cols="1" md="1" class="m-0 p-0"> </b-col>
+              <b-col cols="1" md="1" class="m-0 p-0"></b-col>
             </b-row>
           </b-modal>
         </div>
@@ -187,13 +248,13 @@
                     </template>
 
                     <!--
-                          <b-dropdown-item-button>
-                            <b-icon icon="lock-fill" aria-hidden="true"></b-icon>
-                            Locked <span class="sr-only">(Click to unlock)</span>
-                          </b-dropdown-item-button>
-                          <b-dropdown-divider></b-dropdown-divider>
+                            <b-dropdown-item-button>
+                              <b-icon icon="lock-fill" aria-hidden="true"></b-icon>
+                              Locked <span class="sr-only">(Click to unlock)</span>
+                            </b-dropdown-item-button>
+                            <b-dropdown-divider></b-dropdown-divider>
 
-                          -->
+                            -->
 
                     <b-dropdown-item-button variant="info">
                       <b-icon icon="pencil" aria-hidden="true"></b-icon>
@@ -299,13 +360,13 @@
                     </template>
 
                     <!--
-                          <b-dropdown-item-button>
-                            <b-icon icon="lock-fill" aria-hidden="true"></b-icon>
-                            Locked <span class="sr-only">(Click to unlock)</span>
-                          </b-dropdown-item-button>
-                          <b-dropdown-divider></b-dropdown-divider>
+                            <b-dropdown-item-button>
+                              <b-icon icon="lock-fill" aria-hidden="true"></b-icon>
+                              Locked <span class="sr-only">(Click to unlock)</span>
+                            </b-dropdown-item-button>
+                            <b-dropdown-divider></b-dropdown-divider>
 
-                          -->
+                            -->
 
                     <b-dropdown-item-button variant="info">
                       <b-icon icon="pencil" aria-hidden="true"></b-icon>
@@ -679,7 +740,6 @@ export default {
   components: {
     Comment
   },
-
   data() {
     return {
       msg:
@@ -716,28 +776,115 @@ export default {
         "https://pbs.twimg.com/media/DoNa_wKUUAASSCF.jpg",
         "https://pbs.twimg.com/media/DKO62sVXUAA0_AL.jpg",
         "https://i.wifegeek.com/200426/5ce1e1c7.jpg"
-      ]
+      ],
+      createPost: {
+        profile_picture: this.$store.getters.getProfilePicture,
+        postBusinessUpdate: "",
+        movies: [],
+        hyperlinks: []
+      },
+      isSubmitted: false
     };
   },
-
+  created() {
+    //console.log(this.$store.getters.getUser);
+    //this.createPost.profile_picture = localStorage.getItem("profile_image");
+  },
   methods: {
     chooseImage: function() {
-      document.getElementById("image").click();
+      //console.log(this.$store.getters.getUser[0]);
     },
 
     chooseVideo: function() {
       document.getElementById("chosefile").click();
     },
 
-    chooseDocument: function() {
+    chooseDocument() {
       document.getElementById("chosefile").click();
     },
-
+    selectMovies(event) {
+      console.log(event);
+      this.createPost.movies.push({
+        target: event.target,
+        fileName: event.target.files[0].name
+      });
+    },
+    selectMoviesOutsidePost(event) {
+      console.log(event);
+      this.createPost.movies.push({
+        target: event.target,
+        fileName: event.target.files[0].name
+      });
+      this.$refs["modal-xl"].show();
+    },
+    selectDocument(event) {
+      console.log(event);
+      this.createPost.hyperlinks.push({
+        target: event.target,
+        fileName: event.target.files[0].name
+      });
+    },
+    selectDocumentOutsidePost(event) {
+      console.log(event);
+      this.createPost.hyperlinks.push({
+        target: event.target,
+        fileName: event.target.files[0].name
+      });
+      this.$refs["modal-xl"].show();
+    },
+    createPost_() {
+      this.$refs["modal-xl"].show();
+    },
+    deleteItem(name) {
+      const newHyperlinks = this.createPost.hyperlinks.filter(
+        item => item.fileName.trim() !== name.trim()
+      );
+      const movies = this.createPost.movies.filter(
+        item => item.fileName.trim() !== name.trim()
+      );
+      this.createPost.hyperlinks = [...newHyperlinks];
+      this.createPost.movies = [...movies];
+    },
+    submitPost() {
+      if (this.createPost.postBusinessUpdate.trim() === "") {
+        this.$refs["modal-xl"].show();
+        return;
+      }
+      this.isSubmitted = true;
+      console.log("Send New Post");
+      console.log(this.createPost);
+      this.$store.dispatch("createPost", {
+        postBusinessUpdate: this.createPost.postBusinessUpdate,
+        movies: this.createPost.movies,
+        hyperlinks: this.createPost.hyperlinks
+      });
+      //this.$refs["modal-xl"].hide();
+    },
     showModal() {
       this.$refs["modal-3"].show();
     },
     hideModal() {
       this.$refs["modal-3"].hide();
+    },
+    resetPostData() {
+      console.log("Test");
+      console.log("Reinitialisation des donnees du POST");
+      if (!this.isSubmitted) {
+        this.createPost.hyperlinks = [];
+        this.createPost.movies = [];
+        this.createPost.postBusinessUpdate = "";
+      }
+    }
+  },
+  computed: {
+    imageProfile() {
+      console.log("Image Profile Post");
+      return this.$store.getters.getProfilePicture;
+    },
+    profileNamePost() {
+      console.log("Profile Name");
+      console.log(this.$store.getters.getUser[0]);
+      return this.$store.getters.getUser[0].createPost.profileNamePost;
     }
   }
 };
@@ -925,5 +1072,12 @@ export default {
 
 .m-up {
   margin-top: -5px;
+}
+
+.is-valid {
+  border-color: green;
+}
+.is.invalid {
+  border-color: red;
 }
 </style>

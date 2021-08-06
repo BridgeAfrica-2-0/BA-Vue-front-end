@@ -131,6 +131,63 @@ const getDefaultState = () => {
             }
           ]
         },
+        communauty: {
+          communautyNumberFollowers: 10,
+          communautyNumberFollowings: 30,
+          followers: [
+            {
+              id: 1,
+              communautyProfilePicture:
+                "https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg",
+              communautyName: "Super Car ltd",
+              communautyNumberFollowers: 20
+            },
+            {
+              id: 2,
+              communautyProfilePicture:
+                "https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg",
+              communautyName: "Super Car ltd",
+              communautyNumberFollowers: 20
+            },
+            {
+              id: 3,
+              communautyProfilePicture:
+                "https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg",
+              communautyName: "Super Car ltd",
+              communautyNumberFollowers: 20
+            },
+            {
+              id: 4,
+              communautyProfilePicture:
+                "https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg",
+              communautyName: "Super Car ltd",
+              communautyNumberFollowers: 20
+            },
+            {
+              id: 5,
+              communautyProfilePicture:
+                "https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg",
+              communautyName: "Super Car ltd",
+              communautyNumberFollowers: 20
+            },
+            {
+              id: 6,
+              communautyProfilePicture:
+                "https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg",
+              communautyName: "Super Car ltd",
+              communautyNumberFollowers: 20
+            }
+          ],
+          followings: [
+            {
+              id: 1,
+              communautyProfilePicture:
+                "https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg",
+              communautyName: "Super Car ltd",
+              communautyNumberFollowings: 20
+            }
+          ]
+        },
         createPost: {
           profile_picture: null,
           coverImage: null,
@@ -545,6 +602,88 @@ const actions = {
           console.log(error);
         }
       });
+  },
+  /**
+   *
+   * @param context
+   * @param payload
+   */
+  retrieveCommunityUserPost(context, payload) {
+    const url =
+      "https://vuejs-backend-c42b8-default-rtdb.firebaseio.com/community.json";
+    console.log(payload);
+    //context.commit("retrieveBusinessUserPost", null);
+    fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        accept: "application/json"
+      },
+      body: JSON.stringify({
+        community: state.userData[0].community
+      })
+    })
+      .then(response => {
+        return response.json();
+      })
+      .then(response => {
+        if (!response.ok) {
+          console.log(
+            "Erreur survenue au niveau du serveur et non au niveau du navigateur"
+          );
+          console.log(response);
+          throw response.error;
+        }
+        console.log("Test de recuperation des community reussis");
+        console.log(response);
+        context.commit("retrieveBusinessUserPost", null);
+      })
+      .catch(error => {
+        if (error instanceof TypeError) {
+          console.log("Erreur liée au navigateur et non au serveur backend");
+          console.log(error.message);
+        } else {
+          console.log(error);
+        }
+      });
+  },
+  /**
+   *
+   * @param context
+   * @param payload
+   */
+  retrievePostsUser(context, payload) {
+    const url = "https://a8cbdecbc0d4.ngrok.io/api/v1/post/30";
+    fetch(url, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        accept: "application/json",
+        Authorization: `Bearer ${state.token}`
+      }
+    })
+      .then(response => {
+        return response.json();
+      })
+      .then(response => {
+        console.log("recuperation de la liste des posts de l User");
+        console.log(context);
+        console.log(payload);
+        console.log(response);
+        if (!response.ok) {
+          throw response.error;
+        }
+        // context.commit("retrievePostsUser", {
+        //   posts: response.data.posts
+        // });
+      })
+      .catch(error => {
+        if (error instanceof TypeError) {
+          console.log(error.message);
+        } else {
+          console.log(error);
+        }
+      });
   }
 };
 
@@ -664,6 +803,14 @@ const mutations = {
     console.log(state);
     console.log(payload);
     //state.userData[0].business = payload.business;
+  },
+  /**
+   *
+   * @param state
+   * @param payload
+   */
+  retrievePostsUser(state, payload) {
+    state.userData[0].posts = payload.posts;
   }
 };
 
@@ -693,6 +840,9 @@ export default new Vuex.Store({
     },
     getBusinessUserPost(state) {
       return state.userData[0].business;
+    },
+    getCommunautyUserPost(state) {
+      return state.userData[0].communauty;
     }
   },
   actions,

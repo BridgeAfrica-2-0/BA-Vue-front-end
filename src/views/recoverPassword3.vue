@@ -1,17 +1,15 @@
 <template>
   <b-container class="container p-5 h-100 w-100 mx-auto my-auto" fluid>
     <div class="w-100 h-100 my-auto mx-auto">
-      <b-card tag="article" style="max-width: 30rem;" class="my-auto mx-auto">
-        <img src="../assets/img/logo_bridge_africa.png" class="image" alt="" />
+      <b-card tag="article" class="my-auto mx-auto text-center mw-30">
+        <img src="../assets/logo.png" class="image" alt="" />
         <div class="step-2">
           <b-card-text class="w-75 mx-auto mt-5">
             <b-alert show v-if="!match" variant="danger"
               >Passwords do not match</b-alert
             >
             <div class="row">
-              <div class="col">
-                Create New Password
-              </div>
+              <div class="col text-left">Create New Password</div>
             </div>
           </b-card-text>
           <b-form @submit="recover" class="w-75 mx-auto">
@@ -50,7 +48,7 @@ export default {
       code: "",
       password1: "",
       password2: "",
-      match: true
+      match: true,
     };
   },
   methods: {
@@ -67,21 +65,21 @@ export default {
         this.password1 = "";
         this.password2 = "";
       }
-    }
-  }
+    },
+  },
 };
 </script>
 
 <style scoped>
 .image {
-  width: 80%;
+  width: 50%;
 }
 
 .btnz {
   border: solid 1px #e75c18;
   color: #e75c18;
   background-color: #fff;
-   margin-left: 265px;
+  margin-left: 265px;
 }
 
 .btnz:hover {
@@ -93,5 +91,9 @@ export default {
   .btn {
     margin-left: -20px;
   }
+}
+
+.mw-30 {
+  max-width: 30rem;
 }
 </style>

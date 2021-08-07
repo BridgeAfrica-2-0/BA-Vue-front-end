@@ -1,333 +1,305 @@
 <template>
   <div>
     <form novalidate class="md-layout" @submit.prevent="validateUser">
-     
       <md-card class="md-layout-item md-size-50 md-small-size-100 p-card">
         <md-card-header>
           <div class="md-title center f-22">Login To Bridge Africa</div>
         </md-card-header>
 
         <md-card-content>
+          <!-- lol -->
 
-           <!-- lol -->
+          <div class="center">
+            <b-row>
+              <b-col cols="12" md="6" lg="12" xl="6">
+                <md-button
+                  @click.prevent="authProvider('facebook')"
+                  class="md-raised md-primary b-w"
+                >
+                  <b-icon icon="facebook" aria-hidden="true"></b-icon> Login
+                  With Facebook</md-button
+                >
+              </b-col>
 
-         <div class="center">
+              <b-col cols="12" md="6" lg="12" xl="6">
+                <md-button
+                  @click.prevent="authProvider('google')"
+                  class="b-color b-w"
+                  style="color: white"
+                >
+                  <b-icon icon="google" aria-hidden="true"></b-icon> Login with
+                  Google</md-button
+                >
+              </b-col>
+            </b-row>
+          </div>
 
-         <b-row>  <b-col cols="12" md="6" lg="12" xl="6">  <md-button      @click.prevent="authProvider('facebook')"    class="  md-raised md-primary b-w">  <b-icon icon="facebook" aria-hidden="true"></b-icon> Login With Facebook</md-button>   </b-col> 
-          
-        
-          <b-col cols="12" md="6" lg="12" xl="6">  <md-button  @click.prevent="authProvider('google')"  class="  b-color b-w" style="color:white;" > <b-icon icon="google" aria-hidden="true"></b-icon> Login  with Google</md-button> </b-col>
-          
-          
-            </b-row>       
-     
-     
-      
-    
-    
-    </div>
+          <br />
 
-    <br/>
+          <p class="t-center">-OR-</p>
 
-<p class="t-center"> -OR- </p>
-
-            <md-field :class="getValidationClass('email')">
+          <md-field :class="getValidationClass('email')">
             <label for="email">Email</label>
-            <md-input type="email" name="email" id="email" autocomplete="email" v-model="form.email" :disabled="sending" />
-            <span class="md-error" v-if="!$v.form.email.required">The email is required</span>
-            <span class="md-error" v-else-if="!$v.form.email.email">Invalid email</span>
+            <md-input
+              type="email"
+              name="email"
+              id="email"
+              autocomplete="email"
+              v-model="form.email"
+              :disabled="sending"
+            />
+            <span class="md-error" v-if="!$v.form.email.required"
+              >The email is required</span
+            >
+            <span class="md-error" v-else-if="!$v.form.email.email"
+              >Invalid email</span
+            >
           </md-field>
 
-
-
-           <md-field >
+          <md-field>
             <label for="password">Password</label>
-            <md-input type="password" name="password" id="password"  v-model="form.password" :disabled="sending" />
-           
+            <md-input
+              type="password"
+              name="password"
+              id="password"
+              v-model="form.password"
+              :disabled="sending"
+            />
           </md-field>
-
-
-         
-
-
-
-      
 
           <div class="md-layout md-gutter">
             <div class="md-layout-item md-small-size-100 m-left">
-             
-
-
-                 <b-form-checkbox
-      id="checkbox-1"
-     
-      name="checkbox-1"
-      value="accepted"
-      unchecked-value="not_accepted"
-    >
-     Remeber Me
-    </b-form-checkbox>
-
-
-
-
+              <b-form-checkbox
+                id="checkbox-1"
+                name="checkbox-1"
+                value="accepted"
+                unchecked-value="not_accepted"
+              >
+                Remeber Me
+              </b-form-checkbox>
             </div>
 
             <div class="md-layout-item md-small-size-100">
-              <br/>
-           <b-link href=""> Forget Password </b-link>
+              <br />
+              <b-link href=""> Forget Password </b-link>
             </div>
           </div>
-
-
-
-
         </md-card-content>
 
         <md-progress-bar md-mode="indeterminate" v-if="sending" />
 
-  
+        <div>
+          <b-row>
+            <b-col cols="6">
+              <md-button
+                type="submit"
+                :disabled="sending"
+                class="b-color f-left"
+                style="color: white"
+                >Login</md-button
+              >
+            </b-col>
+            <b-col cols="6">
+              <b-link href="/signup">
+                <md-button class="md-raised f-right">Sign Up</md-button>
+              </b-link>
+            </b-col>
+          </b-row>
+        </div>
 
-   <div>
+        <div></div>
 
-        <b-row>  <b-col cols="6">     <md-button type="submit" :disabled="sending" class="b-color  f-left "  style="color:white;" >Login</md-button>
-            </b-col>   <b-col cols="6">   <b-link href="/signup"> <md-button class=" md-raised f-right ">Sign Up</md-button>  </b-link>    </b-col>  </b-row>
-     
-     
-       
+        <div>
+          <br />
+          <br />
 
+          <label class="f-12">
+            By Loging in you agree to Bridge Africa's
+          </label>
+          <br />
 
-    </div>
-
-
-    <div>
-     
-      
-     
-    </div>
-
-
-    <div>  
-
-      <br/>
-      <br/>
-      
-
-      <label class="f-12"> By Loging in you agree to Bridge Africa's  </label> <br/>  
-      
-       <label class="f-12">  <b-link href="#">Terms and conditions </b-link> &    <b-link href="#">Privacy policies</b-link>    </label>  </div>
-
-
-
+          <label class="f-12">
+            <b-link href="#">Terms and conditions </b-link> &
+            <b-link href="#">Privacy policies</b-link>
+          </label>
+        </div>
       </md-card>
 
+      <div class="md-layout-item md-size-50 md-small-size-100 b-div"></div>
 
-
-
-
-
-       <div class="md-layout-item md-size-50 md-small-size-100 b-div" > 
-        
-      
-       </div>
-
-
-
-
-
-
-      <md-snackbar :md-active.sync="userSaved">The user {{ lastUser }} was saved with success!</md-snackbar>
+      <md-snackbar :md-active.sync="userSaved"
+        >The user {{ lastUser }} was saved with success!</md-snackbar
+      >
     </form>
   </div>
 </template>
 
 <script>
-  import { validationMixin } from 'vuelidate'
-  import 'vue-material/dist/vue-material.min.css'
- 
-import '@/assets/default.css'
-  import {
-    required,
-    email,
-    
-  } from 'vuelidate/lib/validators'
-  export default {
-    name: 'FormValidation',
-    boolean: true,
-    mixins: [validationMixin],
-    data: () => ({
-      form: {
-        
-        password: null,
-        email: null,
+import { validationMixin } from "vuelidate";
+import "vue-material/dist/vue-material.min.css";
+
+import "@/assets/default.css";
+import { required, email } from "vuelidate/lib/validators";
+export default {
+  name: "FormValidation",
+  boolean: true,
+  mixins: [validationMixin],
+  data: () => ({
+    form: {
+      password: null,
+      email: null,
+    },
+    userSaved: false,
+    sending: false,
+    lastUser: null,
+  }),
+  validations: {
+    form: {
+      password: {
+        required,
       },
-      userSaved: false,
-      sending: false,
-      lastUser: null
-    }),
-    validations: {
-      form: {
-       
-        password: {
-          required
-        },
-        email: {
-          required,
-          email
-        }
+      email: {
+        required,
+        email,
+      },
+    },
+  },
+  methods: {
+    getValidationClass(fieldName) {
+      const field = this.$v.form[fieldName];
+      if (field) {
+        return {
+          "md-invalid": field.$invalid && field.$dirty,
+        };
       }
     },
-    methods: {
-      getValidationClass (fieldName) {
-        const field = this.$v.form[fieldName]
-        if (field) {
-          return {
-            'md-invalid': field.$invalid && field.$dirty
 
-
-  }
-        }
-      },
-
-
-      
-
-      authProvider(provider) {
-        let self = this;
-        this.$auth.authenticate(provider).then(response => {
-            self.socialLogin(provider,response)
-        }).catch(err => {
-            console.log({err:err})
+    authProvider(provider) {
+      let self = this;
+      this.$auth
+        .authenticate(provider)
+        .then((response) => {
+          self.socialLogin(provider, response);
+          console.log(response);
         })
-    },
-    
-    socialLogin(provider,response) {
-        this.$http.post('/social/'+provider, response).then(response => {
-            return response.data.token;
-        }).catch(err => {
-            console.log({err:err})
-        })
+        .catch((err) => {
+          console.log({ err: err });
+        });
     },
 
+    socialLogin(provider, response) {
+      this.$http
+        .post("user/social/" + provider, response)
+        .then((response) => {
+          console.log(response.data);
 
+          const userData = JSON.parse(response.data);
+          this.$store.commit("auth/setUserData", userData);
+          this.$router.push({ name: "welcome" });
+        })
+        .catch((err) => {
+          console.log({ err: err });
+        });
+    },
 
+    clearForm() {
+      this.$v.$reset();
 
-      clearForm () {
-        this.$v.$reset()
-        
-        this.form.password = null
-        this.form.email = null
-      },
-      saveUser () {
-        this.sending = true
-        
-        this.login();
-       
+      this.form.password = null;
+      this.form.email = null;
+    },
+    saveUser() {
+      this.sending = true;
 
+      this.login();
+    },
 
-
-
-
-   },
-
-
-      
-       login () {
+    login() {
       this.$store
-        .dispatch('auth/login', {
+        .dispatch("auth/login", {
           email: this.form.email,
-          password: this.form.password
+          password: this.form.password,
         })
         .then(() => {
-          this.$router.push({ name: 'welcome' })
+          this.$router.push({ name: "welcome" });
         })
-        .catch(err => {
-          console.log(err)
-        })
+        .catch((err) => {
+          console.log(err);
+        });
     },
 
-
-      validateUser () {
-        this.$v.$touch()
-        if (!this.$v.$invalid) {
-          this.saveUser()
-        }
+    validateUser() {
+      this.$v.$touch();
+      if (!this.$v.$invalid) {
+        this.saveUser();
       }
-    }
-  }
+    },
+  },
+};
 </script>
 
 <style  scoped>
-
-.f-right{
-    float: left;
+.f-right {
+  float: left;
 }
 
-.f-left{
-    float: right;
+.f-left {
+  float: right;
 }
 
-
-.m-left{
+.m-left {
   align-content: left;
   text-align: left;
 }
-  .md-progress-bar {
-    position: absolute;
-    top: 0;
-    right: 0;
-    left: 0;
-  }
-  .md-checkbox {
-    display: flex;
-  }
-  .b-color{
-    background-color: orange;
-    color: white;
-  }
-  .p-card{
-    padding-left: 90px;
-    padding-right:90px;
-    padding-top: 80px;
-    padding-bottom: 80px;
-  }
-  .b-div{
-    background-image: url("ash.jpg");
-     background-position: center;
-     background-size: cover;
-  }
-  .t-center{
-    text-align: center;
-  }
-
-  .center{
-    align-content: center;
-    text-align: center;
+.md-progress-bar {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+}
+.md-checkbox {
+  display: flex;
+}
+.b-color {
+  background-color: orange;
+  color: white;
+}
+.p-card {
+  padding-left: 90px;
+  padding-right: 90px;
+  padding-top: 80px;
+  padding-bottom: 80px;
+}
+.b-div {
+  background-image: url("ash.jpg");
+  background-position: center;
+  background-size: cover;
+}
+.t-center {
+  text-align: center;
 }
 
-
-.b-w{
-    width: 230px;
+.center {
+  align-content: center;
+  text-align: center;
 }
 
+.b-w {
+  width: 230px;
+}
 
-.f-22{
-
+.f-22 {
   font-size: 22px;
 }
-.f-12{font-size: 12px;}
+.f-12 {
+  font-size: 12px;
+}
 @media only screen and (max-width: 768px) {
-
-
-  .p-card{
+  .p-card {
     padding-left: 10px;
-    padding-right:10px;
+    padding-right: 10px;
     padding-top: 10px;
     padding-bottom: 100px;
   }
-
-
 }
-
-
 </style> 

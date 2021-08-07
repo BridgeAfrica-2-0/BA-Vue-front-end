@@ -1,19 +1,14 @@
 <template>
   <b-container class="container p-5 h-100 w-100 mx-auto my-auto" fluid>
     <div class="w-100 h-100 my-auto mx-auto">
-      <b-card tag="article" style="max-width: 30rem;" class="my-auto mx-auto">
-        <img src="../assets/img/logo_bridge_africa.png" class="image" alt="" />
+      <b-card tag="article" class="my-auto mx-auto text-center mw-30">
+        <img src="../assets/logo.png" class="image" alt="" />
+
         <div class="step-2">
           <b-card-text class="w-75 mx-auto mt-5">
             <div class="row">
-              <div class="col">
-                {{ recoverPassData }}
-              </div>
-
-              <div class="col-4">
-                <b-button class="btnz" @click="change">
-                  Change
-                </b-button>
+              <div class="col-4 p-0">
+                <b-button class="btnz p-2" @click="change"> Change </b-button>
               </div>
               Enter the that you received.
             </div>
@@ -28,9 +23,7 @@
                 required
               />
             </b-form-group>
-            <b-button class="button" type="submit">
-              Next
-            </b-button>
+            <b-button class="button" type="submit"> Next </b-button>
           </b-form>
         </div>
       </b-card>
@@ -61,20 +54,14 @@ export default {
 </script>
 
 <style scoped>
-.image {
-  width: 80%;
-}
-
-<<<<<<< HEAD
-.button {
-  margin-left: 265px;
-  background-color: #e75c18;
-  border: none;
-}
 .btnz {
   border: solid 1px #e75c18;
   color: #e75c18;
   background-color: #fff;
+
+  padding: 2px !important;
+  /* float: left; */
+  margin-right: 20px;
 }
 
 .btnz:hover {
@@ -83,12 +70,28 @@ export default {
   border: none;
 }
 
-=======
->>>>>>> 5fa58d2361ad6890173d8e3b361c69f390e719da
 @media only screen and (max-width: 768px) {
   .btn {
     margin-left: -20px;
     border: solid 1px #e75c18;
   }
+}
+
+.image {
+  width: 50%;
+}
+
+.button {
+  margin-left: 265px;
+  background-color: #e75c18;
+  border: none;
+  color: white;
+}
+
+.button:hover {
+  background-color: #ed5a11;
+}
+.mw-30 {
+  max-width: 30rem;
 }
 </style>

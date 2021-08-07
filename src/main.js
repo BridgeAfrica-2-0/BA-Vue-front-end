@@ -42,17 +42,21 @@ Vue.use(ReadMore);
 import VueSocialauth from 'vue-social-auth'
 Vue.use(VueSocialauth, {
   providers: {
+
+
+
+
     facebook: {
-      clientId: '217630683484563',    
-      client_secret: 'b7154604b25b85ae8ac679ab2750a00c',
-      redirectUri: 'https://agitated-engelbart-01f459.netlify.app/auth/facebook/callback'
+      clientId: '359642339055708',
+      client_secret: 'e6dbf22b3ff94367310ced71023ea5f0',
+      redirectUri: 'http://localhost:8080/auth/facebook/callback'
     },
 
     google: {
-      clientId: '657559601863-i98tce7bcnf70qudlodt8l3014ci6v7a.apps.googleusercontent.com',
-      client_secret: 'KuWg2anrE6bec-3rksXZqIEy',
-      redirectUri: 'https://agitated-engelbart-01f459.netlify.app/auth/google/callback'
-  }
+      clientId: '664326163917-muildmo436uqt2n44r53afqd2ph4eq37.apps.googleusercontent.com',
+      client_secret: 'AIzaSyBu5lE77b0r2ZKrUCYSXbGXrq357X_gr_M',
+      redirectUri: 'http://localhost:8080/auth/google/callback'
+    }
   }
 });
 
@@ -144,8 +148,8 @@ new Vue({
 
   created() {
     const userInfo = localStorage.getItem('user')
-  
-    
+
+
     if (userInfo) {
       const userData = JSON.parse(userInfo)
       this.$store.commit('auth/setUserData', userData)
@@ -154,7 +158,7 @@ new Vue({
       response => response,
       error => {
         if (error.response.status === 401) {
-         this.$store.dispatch('logout')
+          this.$store.dispatch('logout')
         }
         return Promise.reject(error)
       }

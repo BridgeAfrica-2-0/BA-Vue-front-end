@@ -9,6 +9,9 @@ import SignIn from "../views/signIn.vue";
 import RecoverPass1 from "../views/recoverPassword1.vue";
 import RecoverPass2 from "../views/recoverPassword2.vue";
 import RecoverPass3 from "../views/recoverPassword3.vue";
+
+import verifyAccount from "../views/verifyAccount.vue";
+
 import createService from "@/views/createService";
 
 import businessOwnerSettingGeneral from "@/views/businessOwnerSettingGeneral";
@@ -159,6 +162,13 @@ const routes = [
     name: "RecoverPass1",
     component: RecoverPass1,
   },
+
+  {
+    path: "/verify",
+    name: "verifyAccount",
+    component: verifyAccount,
+  },
+
   {
     path: "/recoverPass2",
     name: "RecoverPass2",

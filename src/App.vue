@@ -5,6 +5,7 @@
 </template>
 <script>
 /* eslint-disable */
+
 export default {};
 </script>
 
@@ -96,6 +97,10 @@ li .nav-link:hover{
   color: #fff;
   background-color: #000;
   border-color: #005cbf;
+}
+
+.violet {
+  color: #630460;
 }
 
 @media only screen and (max-width: 768px) {

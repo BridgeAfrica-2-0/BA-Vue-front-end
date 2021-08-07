@@ -141,8 +141,6 @@
               <span>
                 <fas-icon class="primary ml-3" :icon="['fas', 'share']" />
               </span>
-
-              
             </b-col>
           </b-row>
 
@@ -169,14 +167,6 @@
       </b-row>
     </b-card>
 
-
-
-
-
-
-
-
-
     <b-card class="mt-2">
       <b-row class="mt-4">
         <b-col cols="12" class="mt-4">
@@ -191,7 +181,7 @@
               ></b-avatar>
             </b-col>
             <b-col cols="10" md="11" class="pt-2">
-              <h5 class="m-0 font-weight-bolder"> Post with 3 pics </h5>
+              <h5 class="m-0 font-weight-bolder">Post with 3 pics</h5>
               <p class="duration">1h Ago</p>
             </b-col>
           </b-row>
@@ -202,7 +192,7 @@
                 since the 1500s, when an unknown printer took a galley of type
                 and scrambled it to make a type specimen book. It has survived
                 not only five centuries, but also the leap into electronic
-                typesetting, remaining essentially unchanged.😛
+                typesetting, remaining essentially unchanged.
               </p>
             </b-col>
           </b-row>
@@ -231,8 +221,6 @@
               <span>
                 <fas-icon class="primary ml-3" :icon="['fas', 'share']" />
               </span>
-
-              
             </b-col>
           </b-row>
 
@@ -258,23 +246,6 @@
         </b-col>
       </b-row>
     </b-card>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     <b-card class="mt-2">
       <b-row class="mt-4">
@@ -329,8 +300,6 @@
               <span>
                 <fas-icon class="primary ml-3" :icon="['fas', 'share']" />
               </span>
-
-
             </b-col>
             <b-col cols="12">
               <b-row class="mt-2">
@@ -411,7 +380,6 @@
               <span>
                 <fas-icon class="primary ml-3" :icon="['fas', 'share']" />
               </span>
-
             </b-col>
             <b-col cols="12">
               <b-row class="mt-2">
@@ -482,30 +450,25 @@ export default {
         "https://pbs.twimg.com/media/DoNa_wKUUAASSCF.jpg",
         "https://pbs.twimg.com/media/DKO62sVXUAA0_AL.jpg",
       ],
- 
 
-       imagees3: [
+      imagees3: [
         "https://pbs.twimg.com/media/DoNa_wKUUAASSCF.jpg",
         "https://pbs.twimg.com/media/DoNa_wKUUAASSCF.jpg",
         "https://pbs.twimg.com/media/DKO62sVXUAA0_AL.jpg",
       ],
-
-
-
-      
     };
   },
 
   methods: {
-    chooseImage: function () {
+    chooseImage: function() {
       document.getElementById("image").click();
     },
 
-    chooseVideo: function () {
+    chooseVideo: function() {
       document.getElementById("video").click();
     },
 
-    chooseDocument: function () {
+    chooseDocument: function() {
       document.getElementById("document").click();
     },
 

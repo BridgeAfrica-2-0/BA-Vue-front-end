@@ -92,7 +92,7 @@
       </b-row>
     </b-card>
 
-    <!-- xxxxxxx-->
+    <!-- User Posts Listing Section-->
     <b-card class="px-md-3">
       <div class="">
         <div
@@ -228,19 +228,24 @@
         </div>
       </div>
 
-      <b-row class="mt-4">
+      <!-- User Posts Listing Section-->
+      <b-row
+        class="mt-4"
+        v-for="item in $store.getters.getPostLists"
+        :key="item.post_id"
+      >
         <b-col cols="12" class="mt-4">
           <b-row>
             <b-col cols="2" md="1" class="m-0 p-0">
               <b-avatar
                 class="d-inline-block avat"
                 variant="primary"
-                src="https://www.fivesquid.com/pics/t2/1594480468-145752-1-1.jpg"
+                :src="$store.getters.getProfilePicture"
               ></b-avatar>
             </b-col>
             <b-col cols="10" md="11" class="pt-2">
               <h5 class="m-0 font-weight-bolder">
-                Heavy Gym
+                {{ item.profileName }}
                 <span class="float-right">
                   <b-dropdown variant="outline-primary" size="sm" no-caret>
                     <template #button-content>
@@ -268,7 +273,7 @@
                   </b-dropdown>
                 </span>
               </h5>
-              <p class="duration">1h Ago</p>
+              <p class="duration">{{ item.timeCountDown }} Ago</p>
             </b-col>
           </b-row>
           <b-row>
@@ -289,7 +294,7 @@
               <div class="">
                 <img
                   class="img-fluid post-container "
-                  src="@/assets/img/photo1.jpg"
+                  :src="$store.getters.getProfilePicture"
                   alt="Photo1"
                 />
               </div>
@@ -301,7 +306,7 @@
                   variant="primary"
                   aria-hidden="true"
                 ></b-icon>
-                23</span
+                {{ item.likes.length }}</span
               >
               <span
                 ><b-icon
@@ -309,7 +314,7 @@
                   variant="primary"
                   aria-hidden="true"
                 ></b-icon>
-                123</span
+                {{ item.comments.length }}</span
               >
 
               <span>
@@ -323,7 +328,7 @@
               <b-avatar
                 variant="primary"
                 class="img-fluid avat-comment"
-                src="https://www.fivesquid.com/pics/t2/1594480468-145752-1-1.jpg"
+                :src="$store.getters.getProfilePicture"
               ></b-avatar>
             </b-col>
             <b-col cols="9" md="11" class="p-0 m-0 pr-3">
@@ -337,395 +342,11 @@
           </b-row>
         </b-col>
 
-        <Comment />
-      </b-row>
-
-      <b-row class="mt-4">
-        <b-col cols="12" class="mt-4">
-          <b-row>
-            <b-col cols="2" md="1" class="m-0 p-0">
-              <b-avatar
-                class="d-inline-block avat"
-                variant="primary"
-                src="https://www.fivesquid.com/pics/t2/1594480468-145752-1-1.jpg"
-              ></b-avatar>
-            </b-col>
-            <b-col cols="10" md="11" class="pt-2">
-              <h5 class="m-0 font-weight-bolder">
-                Heavy Gym
-                <span class="float-right">
-                  <b-dropdown variant="outline-primary" size="sm" no-caret>
-                    <template #button-content>
-                      <b-icon icon="three-dots" aria-hidden="true"></b-icon>
-                    </template>
-
-                    <!--
-                            <b-dropdown-item-button>
-                              <b-icon icon="lock-fill" aria-hidden="true"></b-icon>
-                              Locked <span class="sr-only">(Click to unlock)</span>
-                            </b-dropdown-item-button>
-                            <b-dropdown-divider></b-dropdown-divider>
-
-                            -->
-
-                    <b-dropdown-item-button variant="info">
-                      <b-icon icon="pencil" aria-hidden="true"></b-icon>
-                      Edit
-                    </b-dropdown-item-button>
-
-                    <b-dropdown-item-button variant="danger">
-                      <b-icon icon="trash-fill" aria-hidden="true"></b-icon>
-                      Delete
-                    </b-dropdown-item-button>
-                  </b-dropdown>
-                </span>
-              </h5>
-              <p class="duration">1h Ago</p>
-            </b-col>
-          </b-row>
-          <b-row>
-            <b-col cols="12" class="mt-2">
-              <p class="post-text">
-                <read-more
-                  more-str="read more"
-                  :text="msg"
-                  link="#"
-                  less-str="read less"
-                  :max-chars="200"
-                ></read-more>
-              </p>
-            </b-col>
-          </b-row>
-          <b-row>
-            <b-col cols="12" class="mt-2">
-              <div class="">
-                <lightbox :cells="3" :items="ima"></lightbox>
-              </div>
-            </b-col>
-            <b-col class="mt-1">
-              <span class="mr-3"
-                ><b-icon
-                  icon="suit-heart"
-                  variant="primary"
-                  aria-hidden="true"
-                ></b-icon>
-                23</span
-              >
-              <span
-                ><b-icon
-                  icon="chat-fill"
-                  variant="primary"
-                  aria-hidden="true"
-                ></b-icon>
-                123</span
-              >
-
-              <span>
-                <fas-icon class="primary ml-3" :icon="['fas', 'share']" />
-              </span>
-            </b-col>
-          </b-row>
-
-          <b-row class="mt-2">
-            <b-col cols="3" md="1" class="m-md-0 p-md-0">
-              <b-avatar
-                variant="primary"
-                class="img-fluid avat-comment"
-                src="https://www.fivesquid.com/pics/t2/1594480468-145752-1-1.jpg"
-              ></b-avatar>
-            </b-col>
-            <b-col cols="9" md="11" class="p-0 m-0 pr-3">
-              <input placeholder="Post a Comment" class="comment" type="text" />
-
-              <fas-icon
-                class="primary send-cmt"
-                :icon="['fas', 'paper-plane']"
-              />
-            </b-col>
-          </b-row>
-        </b-col>
-
-        <Comment />
-      </b-row>
-
-      <b-row class="mt-4">
-        <b-col cols="12" class="mt-4">
-          <b-row>
-            <b-col cols="2" md="1" class="m-0 p-0">
-              <b-avatar
-                class="d-inline-block avat"
-                variant="primary"
-                src="https://www.fivesquid.com/pics/t2/1594480468-145752-1-1.jpg"
-              ></b-avatar>
-            </b-col>
-            <b-col cols="10" md="11" class="pt-2">
-              <h5 class="m-0 font-weight-bolder">
-                Heavy Gym
-                <span class="float-right">
-                  <b-dropdown variant="outline-primary" size="sm" no-caret>
-                    <template #button-content>
-                      <b-icon icon="three-dots" aria-hidden="true"></b-icon>
-                    </template>
-
-                    <b-dropdown-item-button>Edit</b-dropdown-item-button>
-
-                    <b-dropdown-item-button variant="danger">
-                      Delete
-                    </b-dropdown-item-button>
-                  </b-dropdown>
-                </span>
-              </h5>
-              <p class="duration">1h Ago</p>
-            </b-col>
-          </b-row>
-          <b-row>
-            <b-col cols="12" class="mt-2">
-              <p class="post-text">
-                Lorem Ipsum has been the industry's standard dummy text ever
-                since the 1500s, when an unknown printer took a galley of type
-                and scrambled it to make a type specimen book. It has survived
-                not only five centuries, but also the leap into electronic
-                typesetting, remaining essentially unchanged.😛
-              </p>
-            </b-col>
-          </b-row>
-          <b-row>
-            <b-col cols="12" class="mt-2">
-              <lightbox :cells="2" :items="imagees"></lightbox>
-            </b-col>
-            <b-col class="mt-1">
-              <span class="mr-3"
-                ><b-icon
-                  icon="suit-heart"
-                  variant="primary"
-                  aria-hidden="true"
-                ></b-icon>
-                23</span
-              >
-              <span
-                ><b-icon
-                  icon="chat-fill"
-                  variant="primary"
-                  aria-hidden="true"
-                ></b-icon>
-                123</span
-              >
-
-              <span>
-                <fas-icon class="primary ml-3" :icon="['fas', 'share']" />
-              </span>
-            </b-col>
-          </b-row>
-          <b-row class="mt-2">
-            <b-col cols="3" md="1" class="m-md-0 p-md-0">
-              <b-avatar
-                variant="primary"
-                class="img-fluid avat-comment"
-                src="https://www.fivesquid.com/pics/t2/1594480468-145752-1-1.jpg"
-              ></b-avatar>
-            </b-col>
-            <b-col cols="9" md="11" class="p-0 m-0 pr-3">
-              <input placeholder="Post a Comment" class="comment" type="text" />
-
-              <fas-icon
-                class="primary send-cmt"
-                :icon="['fas', 'paper-plane']"
-              />
-            </b-col>
-          </b-row>
-        </b-col>
-
-        <Comment />
-      </b-row>
-
-      <b-row class="mt-4">
-        <b-col cols="12" class="mt-4">
-          <b-row>
-            <b-col cols="2" md="1" class="m-0 p-0">
-              <b-avatar
-                class="d-inline-block avat"
-                variant="primary"
-                src="https://www.fivesquid.com/pics/t2/1594480468-145752-1-1.jpg"
-              ></b-avatar>
-            </b-col>
-            <b-col cols="10" md="11" class="pt-2">
-              <h5 class="m-0 font-weight-bolder">
-                Heavy Gym
-                <span class="float-right">
-                  <b-dropdown variant="outline-primary" size="sm" no-caret>
-                    <template #button-content>
-                      <b-icon icon="three-dots" aria-hidden="true"></b-icon>
-                    </template>
-
-                    <b-dropdown-item-button>Edit</b-dropdown-item-button>
-
-                    <b-dropdown-item-button variant="danger">
-                      Delete
-                    </b-dropdown-item-button>
-                  </b-dropdown>
-                </span>
-              </h5>
-              <p class="duration">1h Ago</p>
-            </b-col>
-          </b-row>
-          <b-row>
-            <b-col cols="12" class="mt-2">
-              <p class="post-text">
-                Lorem Ipsum has been the industry's standard dummy text ever
-                since the 1500s, when an unknown printer took a galley of type
-                and scrambled it to make a type specimen book. It has survived
-                not only five centuries, but also the leap into electronic
-                typesetting, remaining essentially unchanged.😛
-              </p>
-            </b-col>
-          </b-row>
-          <b-row>
-            <b-col cols="12" class="mt-2">
-              <lightbox :cells="4" :items="images"></lightbox>
-            </b-col>
-            <b-col class="mt-1">
-              <span class="mr-3"
-                ><b-icon
-                  icon="suit-heart"
-                  variant="primary"
-                  aria-hidden="true"
-                ></b-icon>
-                23</span
-              >
-              <span
-                ><b-icon
-                  icon="chat-fill"
-                  variant="primary"
-                  aria-hidden="true"
-                ></b-icon>
-                123</span
-              >
-
-              <span>
-                <fas-icon class="primary ml-3" :icon="['fas', 'share']" />
-              </span>
-            </b-col>
-            <b-col cols="12">
-              <b-row class="mt-2">
-                <b-col cols="3" md="1" class="m-md-0 p-md-0">
-                  <b-avatar
-                    variant="primary"
-                    class="img-fluid avat-comment "
-                    src="https://www.fivesquid.com/pics/t2/1594480468-145752-1-1.jpg"
-                  ></b-avatar>
-                </b-col>
-                <b-col cols="9" md="11" class="p-0 m-0 pr-3">
-                  <input
-                    placeholder="Post a Comment"
-                    class="comment"
-                    type="text"
-                  />
-
-                  <fas-icon
-                    class="primary send-cmt"
-                    :icon="['fas', 'paper-plane']"
-                  />
-                </b-col>
-              </b-row>
-            </b-col>
-          </b-row>
-        </b-col>
-
-        <Comment />
-      </b-row>
-
-      <b-row class="mt-4">
-        <b-col cols="12" class="mt-4">
-          <b-row>
-            <b-col cols="2" md="1" class="m-0 p-0">
-              <b-avatar
-                class="d-inline-block avat"
-                variant="info"
-                src="https://www.fivesquid.com/pics/t2/1594480468-145752-1-1.jpg"
-              ></b-avatar>
-            </b-col>
-            <b-col cols="10" md="11" class="pt-2">
-              <h5 class="m-0 font-weight-bolder">
-                Heavy Gym
-                <span class="float-right">
-                  <b-dropdown variant="outline-primary" size="sm" no-caret>
-                    <template #button-content>
-                      <b-icon icon="three-dots" aria-hidden="true"></b-icon>
-                    </template>
-                    <b-dropdown-item-button>
-                      Edit
-                    </b-dropdown-item-button>
-
-                    <b-dropdown-item-button variant="danger">
-                      Delete
-                    </b-dropdown-item-button>
-                  </b-dropdown>
-                </span>
-              </h5>
-              <p class="duration">1h Ago</p>
-            </b-col>
-          </b-row>
-          <b-row>
-            <b-col cols="12" class="mt-2">
-              <p class="post-text">
-                Lorem Ipsum has been the industry's standard dummy text ever
-                since the 1500s, when an unknown printer took a galley of type
-                and scrambled it to make a type specimen book. It has survived
-                not only five centuries, but also the leap into electronic
-                typesetting, remaining essentially unchanged.😛
-              </p>
-            </b-col>
-          </b-row>
-          <b-row>
-            <b-col class="mt-1">
-              <span class="mr-3"
-                ><b-icon
-                  icon="suit-heart"
-                  variant="primary"
-                  aria-hidden="true"
-                ></b-icon>
-                23</span
-              >
-              <span
-                ><b-icon
-                  icon="chat-fill"
-                  variant="primary"
-                  aria-hidden="true"
-                ></b-icon>
-                123</span
-              >
-
-              <span>
-                <fas-icon class="primary ml-3" :icon="['fas', 'share']" />
-              </span>
-            </b-col>
-            <b-col cols="12">
-              <b-row class="mt-2">
-                <b-col cols="3" md="1" class="m-md-0 p-md-0">
-                  <b-avatar
-                    variant="primary"
-                    class="img-fluid avat-comment"
-                    src="https://www.fivesquid.com/pics/t2/1594480468-145752-1-1.jpg"
-                  ></b-avatar>
-                </b-col>
-                <b-col cols="9" md="11" class="p-0 m-0 pr-3">
-                  <b-input-group class="my-auto w-100 ">
-                    <input
-                      placeholder="Post a Comment"
-                      class="comment"
-                      type="text"
-                    />
-
-                    <fas-icon
-                      class="primary send-cmt"
-                      :icon="['fas', 'paper-plane']"
-                    />
-                  </b-input-group>
-                </b-col>
-              </b-row>
-            </b-col>
-          </b-row>
-        </b-col>
+        <Comment
+          v-for="comment in item.comments"
+          :key="comment.comment_id"
+          :comment="comment"
+        />
       </b-row>
     </b-card>
   </div>
@@ -789,6 +410,8 @@ export default {
   created() {
     //console.log(this.$store.getters.getUser);
     //this.createPost.profile_picture = localStorage.getItem("profile_image");
+    //console.log("Tester les listing des Posts");
+    //console.log(this.$store.getters.getUser[0].posts);
   },
   methods: {
     chooseImage: function() {

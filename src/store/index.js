@@ -24,7 +24,447 @@ const getDefaultState = () => {
         profilePicture: localStorage.getItem("profile_image"),
         coverImage: localStorage.getItem("cover_image"),
         numbersOfFollowers: 30,
-        posts: [],
+        posts: [
+          {
+            post_id: 30,
+            profileName: "TONTON LA FORCE LE BEAU GOSSE",
+            profile_picture: localStorage.getItem("profile_image"),
+            details:
+              "Lorem Ipsum has been the industry's standard dummy text ever\n" +
+              "                since the 1500s, when an unknown printer took a galley of type\n" +
+              "                and scrambled it to make a type specimen book. It has survived\n" +
+              "                not only five centuries, but also the leap into electronic\n" +
+              "                typesetting, remaining essentially unchanged.😛",
+            movies: [],
+            hyperlinks: [],
+            timeCountDown: "1h",
+            likes: [
+              {
+                like_id: 1,
+                post_id: 30,
+                user_id: 4,
+                created_at: null,
+                updated_at: null
+              },
+              {
+                like_id: 2,
+                post_id: 30,
+                user_id: 3,
+                created_at: null,
+                updated_at: null
+              }
+            ],
+            comments: [
+              {
+                comment_id: 1,
+                post_id: 30,
+                user_id: 4,
+                comment:
+                  "Lorem Ipsum has been the industry's   " +
+                  "this is do goodfive centuries, but  the leap " +
+                  "into electronic      this is do goodfive centuries, but  " +
+                  "the leap into electronic        this is do goodfive centuries, but  the leap into electronic  this sis sit tit typesetting",
+                profile_picture:
+                  "https://www.fivesquid.com/pics/t2/1594480468-145752-1-1.jpg",
+                created_at: null,
+                updated_at: null,
+                likes: [
+                  {
+                    like_id: 1,
+                    post_id: 30,
+                    user_id: 4,
+                    created_at: null,
+                    updated_at: null
+                  },
+                  {
+                    like_id: 2,
+                    post_id: 30,
+                    user_id: 3,
+                    created_at: null,
+                    updated_at: null
+                  }
+                ]
+              },
+              {
+                comment_id: 2,
+                post_id: 30,
+                user_id: 4,
+                comment:
+                  "Lorem Ipsum has been the industry's   " +
+                  "this is do goodfive centuries, but  the leap " +
+                  "into electronic      this is do goodfive centuries, but  " +
+                  "the leap into electronic        this is do goodfive centuries, but  the leap into electronic  this sis sit tit typesetting",
+                profile_picture:
+                  "https://www.fivesquid.com/pics/t2/1594480468-145752-1-1.jpg",
+                created_at: null,
+                updated_at: null,
+                likes: [
+                  {
+                    like_id: 1,
+                    post_id: 30,
+                    user_id: 4,
+                    created_at: null,
+                    updated_at: null
+                  },
+                  {
+                    like_id: 2,
+                    post_id: 30,
+                    user_id: 3,
+                    created_at: null,
+                    updated_at: null
+                  }
+                ]
+              },
+              {
+                comment_id: 3,
+                post_id: 30,
+                user_id: 4,
+                comment:
+                  "Lorem Ipsum has been the industry's   " +
+                  "this is do goodfive centuries, but  the leap " +
+                  "into electronic      this is do goodfive centuries, but  " +
+                  "the leap into electronic        this is do goodfive centuries, but  the leap into electronic  this sis sit tit typesetting",
+                profile_picture:
+                  "https://www.fivesquid.com/pics/t2/1594480468-145752-1-1.jpg",
+                created_at: null,
+                updated_at: null,
+                likes: [
+                  {
+                    like_id: 1,
+                    post_id: 30,
+                    user_id: 4,
+                    created_at: null,
+                    updated_at: null
+                  },
+                  {
+                    like_id: 2,
+                    post_id: 30,
+                    user_id: 3,
+                    created_at: null,
+                    updated_at: null
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            post_id: 31,
+            profileName: "TONTON LA FORCE LE BEAU GOSSE",
+            profile_picture: localStorage.getItem("profile_image"),
+            details:
+              "Lorem Ipsum has been the industry's standard dummy text ever\n" +
+              "                since the 1500s, when an unknown printer took a galley of type\n" +
+              "                and scrambled it to make a type specimen book. It has survived\n" +
+              "                not only five centuries, but also the leap into electronic\n" +
+              "                typesetting, remaining essentially unchanged.😛",
+            movies: [],
+            hyperlinks: [],
+            timeCountDown: "1h",
+            likes: [
+              {
+                like_id: 1,
+                post_id: 30,
+                user_id: 4,
+                created_at: null,
+                updated_at: null
+              },
+              {
+                like_id: 2,
+                post_id: 30,
+                user_id: 3,
+                created_at: null,
+                updated_at: null
+              },
+              {
+                like_id: 3,
+                post_id: 30,
+                user_id: 5,
+                created_at: null,
+                updated_at: null
+              }
+            ],
+            comments: [
+              {
+                comment_id: 1,
+                post_id: 30,
+                user_id: 4,
+                comment:
+                  "Lorem Ipsum has been the industry's   " +
+                  "this is do goodfive centuries, but  the leap " +
+                  "into electronic      this is do goodfive centuries, but  " +
+                  "the leap into electronic        this is do goodfive centuries, but  the leap into electronic  this sis sit tit typesetting",
+                profile_picture:
+                  "https://www.fivesquid.com/pics/t2/1594480468-145752-1-1.jpg",
+                created_at: null,
+                updated_at: null,
+                likes: [
+                  {
+                    like_id: 1,
+                    post_id: 30,
+                    user_id: 4,
+                    created_at: null,
+                    updated_at: null
+                  },
+                  {
+                    like_id: 2,
+                    post_id: 30,
+                    user_id: 3,
+                    created_at: null,
+                    updated_at: null
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            post_id: 32,
+            profileName: "TONTON LA FORCE LE BEAU GOSSE",
+            profile_picture: localStorage.getItem("profile_image"),
+            details:
+              "Lorem Ipsum has been the industry's standard dummy text ever\n" +
+              "                since the 1500s, when an unknown printer took a galley of type\n" +
+              "                and scrambled it to make a type specimen book. It has survived\n" +
+              "                not only five centuries, but also the leap into electronic\n" +
+              "                typesetting, remaining essentially unchanged.😛",
+            movies: [],
+            hyperlinks: [],
+            timeCountDown: "1h",
+            likes: [
+              {
+                like_id: 1,
+                post_id: 30,
+                user_id: 4,
+                created_at: null,
+                updated_at: null
+              },
+              {
+                like_id: 2,
+                post_id: 30,
+                user_id: 3,
+                created_at: null,
+                updated_at: null
+              }
+            ],
+            comments: [
+              {
+                comment_id: 1,
+                post_id: 30,
+                user_id: 4,
+                comment:
+                  "Lorem Ipsum has been the industry's   " +
+                  "this is do goodfive centuries, but  the leap " +
+                  "into electronic      this is do goodfive centuries, but  " +
+                  "the leap into electronic        this is do goodfive centuries, but  the leap into electronic  this sis sit tit typesetting",
+                profile_picture:
+                  "https://www.fivesquid.com/pics/t2/1594480468-145752-1-1.jpg",
+                created_at: null,
+                updated_at: null,
+                likes: [
+                  {
+                    like_id: 1,
+                    post_id: 30,
+                    user_id: 4,
+                    created_at: null,
+                    updated_at: null
+                  },
+                  {
+                    like_id: 2,
+                    post_id: 30,
+                    user_id: 3,
+                    created_at: null,
+                    updated_at: null
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            post_id: 33,
+            profileName: "TONTON LA FORCE LE BEAU GOSSE",
+            profile_picture: localStorage.getItem("profile_image"),
+            details:
+              "Lorem Ipsum has been the industry's standard dummy text ever\n" +
+              "                since the 1500s, when an unknown printer took a galley of type\n" +
+              "                and scrambled it to make a type specimen book. It has survived\n" +
+              "                not only five centuries, but also the leap into electronic\n" +
+              "                typesetting, remaining essentially unchanged.😛",
+            movies: [],
+            hyperlinks: [],
+            timeCountDown: "1h",
+            likes: [
+              {
+                like_id: 1,
+                post_id: 30,
+                user_id: 4,
+                created_at: null,
+                updated_at: null
+              },
+              {
+                like_id: 2,
+                post_id: 30,
+                user_id: 3,
+                created_at: null,
+                updated_at: null
+              }
+            ],
+            comments: [
+              {
+                comment_id: 1,
+                post_id: 30,
+                user_id: 4,
+                comment:
+                  "Lorem Ipsum has been the industry's   " +
+                  "this is do goodfive centuries, but  the leap " +
+                  "into electronic      this is do goodfive centuries, but  " +
+                  "the leap into electronic        this is do goodfive centuries, but  the leap into electronic  this sis sit tit typesetting",
+                profile_picture:
+                  "https://www.fivesquid.com/pics/t2/1594480468-145752-1-1.jpg",
+                created_at: null,
+                updated_at: null,
+                likes: [
+                  {
+                    like_id: 1,
+                    post_id: 30,
+                    user_id: 4,
+                    created_at: null,
+                    updated_at: null
+                  },
+                  {
+                    like_id: 2,
+                    post_id: 30,
+                    user_id: 3,
+                    created_at: null,
+                    updated_at: null
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            post_id: 34,
+            profileName: "TONTON LA FORCE LE BEAU GOSSE",
+            profile_picture: localStorage.getItem("profile_image"),
+            details:
+              "Lorem Ipsum has been the industry's standard dummy text ever\n" +
+              "                since the 1500s, when an unknown printer took a galley of type\n" +
+              "                and scrambled it to make a type specimen book. It has survived\n" +
+              "                not only five centuries, but also the leap into electronic\n" +
+              "                typesetting, remaining essentially unchanged.😛",
+            movies: [],
+            hyperlinks: [],
+            timeCountDown: "1h",
+            likes: [
+              {
+                like_id: 1,
+                post_id: 30,
+                user_id: 4,
+                created_at: null,
+                updated_at: null
+              },
+              {
+                like_id: 2,
+                post_id: 30,
+                user_id: 3,
+                created_at: null,
+                updated_at: null
+              }
+            ],
+            comments: [
+              {
+                comment_id: 1,
+                post_id: 30,
+                user_id: 4,
+                comment:
+                  "Lorem Ipsum has been the industry's   " +
+                  "this is do goodfive centuries, but  the leap " +
+                  "into electronic      this is do goodfive centuries, but  " +
+                  "the leap into electronic        this is do goodfive centuries, but  the leap into electronic  this sis sit tit typesetting",
+                profile_picture:
+                  "https://www.fivesquid.com/pics/t2/1594480468-145752-1-1.jpg",
+                created_at: null,
+                updated_at: null,
+                likes: [
+                  {
+                    like_id: 1,
+                    post_id: 30,
+                    user_id: 4,
+                    created_at: null,
+                    updated_at: null
+                  },
+                  {
+                    like_id: 2,
+                    post_id: 30,
+                    user_id: 3,
+                    created_at: null,
+                    updated_at: null
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            post_id: 35,
+            profileName: "TONTON LA FORCE LE BEAU GOSSE",
+            profile_picture: localStorage.getItem("profile_image"),
+            details:
+              "Lorem Ipsum has been the industry's standard dummy text ever\n" +
+              "                since the 1500s, when an unknown printer took a galley of type\n" +
+              "                and scrambled it to make a type specimen book. It has survived\n" +
+              "                not only five centuries, but also the leap into electronic\n" +
+              "                typesetting, remaining essentially unchanged.😛",
+            movies: [],
+            hyperlinks: [],
+            timeCountDown: "1h",
+            likes: [
+              {
+                like_id: 1,
+                post_id: 30,
+                user_id: 4,
+                created_at: null,
+                updated_at: null
+              },
+              {
+                like_id: 2,
+                post_id: 30,
+                user_id: 3,
+                created_at: null,
+                updated_at: null
+              }
+            ],
+            comments: [
+              {
+                comment_id: 1,
+                post_id: 30,
+                user_id: 4,
+                comment:
+                  "Lorem Ipsum has been the industry's   " +
+                  "this is do goodfive centuries, but  the leap " +
+                  "into electronic      this is do goodfive centuries, but  " +
+                  "the leap into electronic        this is do goodfive centuries, but  the leap into electronic  this sis sit tit typesetting",
+                profile_picture:
+                  "https://www.fivesquid.com/pics/t2/1594480468-145752-1-1.jpg",
+                created_at: null,
+                updated_at: null,
+                likes: [
+                  {
+                    like_id: 1,
+                    post_id: 30,
+                    user_id: 4,
+                    created_at: null,
+                    updated_at: null
+                  },
+                  {
+                    like_id: 2,
+                    post_id: 30,
+                    user_id: 3,
+                    created_at: null,
+                    updated_at: null
+                  }
+                ]
+              }
+            ]
+          }
+        ],
         business: {
           businessNumberFollowers: 10,
           businessNumberFollowing: 30,
@@ -86,7 +526,7 @@ const getDefaultState = () => {
               businessNumberFollowers: 20
             },
             {
-              id: 4,
+              id: 5,
               businessProfilePicture: [
                 "https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg",
                 "https://i.wifegeek.com/200426/f9459c52.jpg",
@@ -100,7 +540,7 @@ const getDefaultState = () => {
               businessNumberFollowers: 20
             },
             {
-              id: 5,
+              id: 6,
               businessProfilePicture: [
                 "https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg",
                 "https://i.wifegeek.com/200426/f9459c52.jpg",
@@ -809,7 +1249,7 @@ const mutations = {
    * @param state
    * @param payload
    */
-  retrievePostsUser(state, payload) {
+  retrievePostsListUser(state, payload) {
     state.userData[0].posts = payload.posts;
   }
 };
@@ -843,6 +1283,9 @@ export default new Vuex.Store({
     },
     getCommunautyUserPost(state) {
       return state.userData[0].communauty;
+    },
+    getPostLists(state) {
+      return state.userData[0].posts;
     }
   },
   actions,

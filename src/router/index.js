@@ -275,10 +275,21 @@ const router = new VueRouter({
 router.beforeEach((to, from, next) => {
   const loggedIn = localStorage.getItem('user')
 
+  const isAuthenticated = store.getters['auth/isVerified'];
+
   if (to.matched.some(record => record.meta.auth) && !loggedIn) {
     next('/login')
     return
   }
+  
+
+ // if (to.matched.some(record => record.meta.auth) && !isAuthenticated) {
+  //  next('/verify')
+ //   return
+//  }
+
+  
+
   next()
 
 });

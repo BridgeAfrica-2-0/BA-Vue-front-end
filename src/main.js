@@ -47,19 +47,18 @@ Vue.use(VueSocialauth, {
 
 
     facebook: {
-      clientId: '359642339055708',
-      client_secret: 'e6dbf22b3ff94367310ced71023ea5f0',
-      redirectUri: 'http://localhost:8080/auth/facebook/callback'
+      clientId: process.env.VUE_APP_FACEBOOK_CLIENT_ID,
+      client_secret: process.env.VUE_APP_FACEBOOK_CLIENT_SECRETE,
+      redirectUri: process.env.VUE_APP_FACEBOOK_RETURN_URL
     },
 
     google: {
-      clientId: '664326163917-muildmo436uqt2n44r53afqd2ph4eq37.apps.googleusercontent.com',
-      client_secret: 'AIzaSyBu5lE77b0r2ZKrUCYSXbGXrq357X_gr_M',
-      redirectUri: 'http://localhost:8080/auth/google/callback'
+      clientId: process.env.VUE_APP_GOOGLE_CLIENT_ID,
+      client_secret: process.env.VUE_APP_GOOGLE_CLIENT_SECRETE,
+      redirectUri:process.env.VUE_APP_GOOGLE_RETURN_URL
     }
   }
 });
-
 
 
 

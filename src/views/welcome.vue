@@ -6,7 +6,7 @@
 
      
 
-       <h4 class="text-center username">    Welcome On Bridge Africa   </h4>   <br />  <br />
+       <h4 class="text-center username"> Hello <b>  {{username}}  </b> let's get started   </h4>   <br />  <br />
 
        <p class="text">is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing  </p>
      
@@ -482,6 +482,7 @@ export default {
       return {
         useas: '', 
          country: '',
+         username:this.$store.state.auth.user.user.name,
     
         options: [
           { text: ' Person', value: 'person' },
@@ -577,6 +578,8 @@ chooselogo: function() {
 
   mounted() {
       this.showModal();
+     
+     
     },
 
   

@@ -1,12 +1,12 @@
 import axios from 'axios'
 
-axios.defaults.baseURL = 'https://9aeb4781f48a.ngrok.io/api/v1/'
+axios.defaults.baseURL =  process.env.VUE_APP_API_URL    
 export default {
   namespaced: true,
 
   state: {
     user: null,
-    verifyToken: null,
+    isVerified: null,
     passwordToken: null,
     registerData: null
   },
@@ -79,12 +79,12 @@ export default {
 
 
 
-    recoverPassword2({ commit }, mydata) {
+    recoverPassword2({ commit }, data) {
 
 
 
       return axios
-        .post('user/verify/password', mydata)
+        .post('user/reset', data)  
         .then(({ data }) => {
 
           commit('setPasswordToken', data.data)
@@ -99,17 +99,19 @@ export default {
     verify({ commit }, mydata) {
 
 
-      const url = 'user/verifyotp/' + this.state.auth.user.data.user.id
+      const url = 'user/verifyOtp/' + this.state.auth.user.data.user.id
 
-      console.log(url);
+     
 
       return axios
         .post(url, mydata)
         .then(({ data }) => {
+          console.log(data.data);
 
-          commit('setVerifyToken', data.data)
+          commit('setUserData', data.data)
 
         })
+       
 
     }
 
@@ -118,8 +120,11 @@ export default {
 
   getters: {
     isLogged: state => !!state.user,
-    isVerified: state => !!state.verifyToken,
+    isVerified: state => !!state.user,
     user: state => state.user
   },
 
 }
+
+
+

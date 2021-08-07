@@ -1,24 +1,27 @@
 <template>
-  <b-container class="container p-5 h-100 w-100 mx-auto my-auto" fluid>
+  <b-container class="container p-2 p-md-5 h-100 w-100 mx-auto my-auto" fluid>
     <div class="w-100 h-100 my-auto mx-auto">
       <b-card tag="article" class="my-auto mx-auto text-center mw-30">
         <img src="../assets/logo.png" class="image" alt="" />
         <div class="step-2">
           <b-card-text class="w-75 mx-auto mt-5 text-left">
-            <p class="username bold text-left">Recover Password</p>
-            <div class="text-left">Enter Your Phone or Email</div>
+           
+
+             <span class="verif-text mb-5"> Recover Password </span>  <br/> <br/> 
+
+            <div class="text-left">Enter Your Phone Number</div>
           </b-card-text>
-          <b-form @click.prevent="next" class="w-75 mx-auto">
+          <b-form class="w-75 mx-auto">
             <b-form-input
               id="input-4"
-              v-model="data"
+              v-model="phone"
               type="text"
-              placeholder="Phone or Email"
+              placeholder="Phone"
               required
             />
 
             <br />
-            <b-button class="btn btn-primary button float-right" type="submit">
+            <b-button class="btn btn-primary button float-right"   @click.prevent="verify" >
               Next
             </b-button>
           </b-form>
@@ -33,16 +36,16 @@ import { mapActions } from "vuex";
 export default {
   data() {
     return {
-      data: "",
+      phone: "",
     };
   },
   methods: {
     ...mapActions(["auth/recoverPassword2"]),
 
-    next() {
+    verify() {
       this.$store
         .dispatch("auth/recoverPassword2", {
-          email: this.data,
+          phone: this.phone,
         })
         .then(() => {
           this.$router.push({ name: "RecoverPass2" });
@@ -56,6 +59,13 @@ export default {
 </script>
 
 <style scoped>
+
+.verif-text {
+  font-size: 25px;
+  margin-top: 10px;
+   margin-bottom: 10px;
+}
+
 .image {
   width: 50%;
 }
@@ -73,4 +83,24 @@ export default {
 .mw-30 {
   max-width: 30rem;
 }
+
+
+   
+
+
+@media only screen and (max-width: 768px) {
+  .image {
+    width: 75%;
+  }
+
+  .mt-10 {
+    margin-top: 10px !important;
+  }
+
+  .card-body {
+    margin-top: 30px !important;
+    padding-bottom: 100px !important;
+  }
+}
+
 </style>

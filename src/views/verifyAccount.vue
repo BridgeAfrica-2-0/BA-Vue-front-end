@@ -26,8 +26,9 @@
             <br />
 
             <b-button
-              class="btn btn-primary buttonn"
+              class="buttonn"
               @click.prevent="Verify"
+              variant="primary"
               type="submit"
             >
               Verify
@@ -60,7 +61,8 @@ export default {
     resendOtp() {
       axios
         .post("user/resendOtp", {
-          phone: this.$store.state.auth.user.user.phone,
+         
+           phone: this.$store.state.auth.user.data.user.phone,
         })
         .then((response) => {
           if (response.data.success) {
@@ -82,21 +84,28 @@ export default {
             message: "Message not send",
           });
         });
-    },
+    }, 
 
     Verify() {
-      console.log(this.$store.state.auth.user);
+     
+
       this.$store
         .dispatch("auth/verify", {
-          token: this.token,
+          OTP: this.token,
 
-          phone: this.$store.state.auth.user.data.phone,
+          phone: this.$store.state.auth.user.data.user.phone,
         })
-        .then(() => {
+        .then((response) => {
+
+        console.log( this.$store.state.auth.user.data.user.phone);
+
           this.$router.push({ name: "welcome" });
+          
+
+
         })
         .catch((err) => {
-          console.log(err);
+          console.log({ err: err });
 
           this.flashMessage.show({
             status: "error",
@@ -119,18 +128,9 @@ export default {
 }
 
 .buttonn {
-  background-color: #e75c18;
-  border: none;
-  color: white;
-  width: 150px;
-}
 
-.buttonn:hover {
-  background-color: #ed5a11;
-}
-
-.buttonn:active {
-  background-color: #ed5a11;
+  
+  width: 150px !important;
 }
 
 .mw-30 {

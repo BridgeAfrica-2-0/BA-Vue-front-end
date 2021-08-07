@@ -81,7 +81,7 @@
 
             <div class="md-layout-item md-small-size-100">
               <br />
-              <b-link href=""> Forget Password </b-link>
+            
             </div>
           </div>
         </md-card-content>
@@ -105,6 +105,8 @@
               </b-link>
             </b-col>
           </b-row>
+
+           <router-link to="recoverPass1" class="nav-link text"> Forget Password</router-link>
         </div>
 
         <div></div>

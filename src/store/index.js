@@ -1161,14 +1161,14 @@ const actions = {
         return response.json();
       })
       .then(response => {
-        //console.log("test1");
-        //console.log(response);
+        console.log("test1");
+        console.log(response);
         if (!response) {
           throw "Cannot Found Media";
         }
         console.log(context);
         console.log(payload);
-        console.log("test1");
+        console.log("test3");
         response_ = response;
       })
       .catch(error => {
@@ -1179,7 +1179,7 @@ const actions = {
           console.log(error);
         }
       });
-    await context.dispatch("changecoverImageService", {
+    await context.dispatch("changeCoverImageService", {
       target: response_.target,
       media: response_.media
     });
@@ -1270,7 +1270,7 @@ const mutations = {
     state.userData[0].createPost.profile_picture_localstorage =
       payload.profilePictureLocalStorage;
     state.userData[0].profilePicture = payload.profilePicture;
-    state.userData[0].coverImage = payload.profilePictureLocalStorage;
+    //state.userData[0].coverImage = payload.profilePictureLocalStorage;
     //console.log(state.userData);
   },
   changeCoverImage(state, payload) {
@@ -1337,6 +1337,9 @@ export default new Vuex.Store({
     },
     getProfilePicture(state) {
       return state.userData[0].createPost.profile_picture_localstorage;
+    },
+    getCoverImage(state) {
+      return state.userData[0].coverImage;
     },
     getBusinessUserPost(state) {
       return state.userData[0].business;

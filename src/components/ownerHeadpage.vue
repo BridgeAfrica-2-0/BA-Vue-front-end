@@ -3,7 +3,7 @@
     <b-container fluid class="p-0 gradient">
       <!-- Owner Header Page Up-->
       <div class="container-flex">
-        <img :src="user.cover_image" class="img-fluid  banner" alt="Kitten" />
+        <img :src="$store.getters.getCoverImage" class="img-fluid  banner" alt="Kitten" />
       </div>
 
       <!-- Owner Header Page Down -->
@@ -12,7 +12,14 @@
           <b-col cols="12" md="12" class="m-0 p-0 text-left put-top ">
             <!-- Avatar profile picture-->
             <b-avatar
-              :src="user.profile_picture"
+              v-if="!isLoading"
+              :src="$store.getters.getProfilePicture"
+              class="  avat  text-center"
+              badge-variant="primary"
+              badge-offset="10px"
+            ></b-avatar>
+            <b-avatar
+              v-else-if="isLoading"
               class="  avat  text-center"
               badge-variant="primary"
               badge-offset="10px"
@@ -26,8 +33,12 @@
             <!-- profile user identity-->
             <span style="display: inline-block;">
               <h6 class=" profile-name text-center ">
-                <b> <b-link>{{ user.profile_name }}</b-link> </b><br />
-                <span class="duration"> {{ user.number_of_follower }} Community </span>
+                <b>
+                  <b-link>{{ user.profile_name }}</b-link> </b
+                ><br />
+                <span class="duration">
+                  {{ user.number_of_follower }} Community
+                </span>
               </h6>
             </span>
 
@@ -157,7 +168,8 @@ export default {
         number_of_follower: 1.4,
         profile_picture: "https://placekitten.com/400/300",
         cover_image: ""
-      }
+      },
+      isLoading: true
     };
   },
   created() {
@@ -166,10 +178,46 @@ export default {
      *I get the path of image store in localStorage
      * @type {string}
      */
-    this.user.profile_picture = this.$store.getters.getUser[0].profilePicture;
+    this.isLoading = true;
+    this.$store
+      .dispatch("loadProfilePicture", null)
+      .then(response => {
+        console.log( "test2")
+        //console.log( response )
+        if (!response) {
+          //console.log("erreur liée au serveur");
+          this.isLoading = true;
+        }
+        console.log("Load is Finish");
+        this.isLoading = false;
+      })
+      .catch(error => {
+        this.isLoading = true;
+        console.log("erreur lié au navigateur ");
+        console.log( error) ;
+      });
+    this.$store
+            .dispatch("loadCoverImage", null)
+            .then(response => {
+              console.log( "test2")
+              console.log( response )
+              if (!response) {
+                console.log("erreur liée au serveur");
+                this.isLoading = true;
+              }
+              console.log("Load is Finish");
+              this.isLoading = false;
+            })
+            .catch(error => {
+              this.isLoading = true;
+              //console.log("erreur lié au navigateur ");
+              console.log( error) ;
+            });
+    this.user.profile_picture = this.$store.getters.getProfilePicture
     this.user.cover_image = this.$store.getters.getUser[0].coverImage;
     this.user.profile_name = this.$store.getters.getUser[0].profileName;
     this.user.number_of_follower = this.$store.getters.getUser[0].numbersOfFollowers;
+    this.isLoading = true;
   },
   methods: {
     /**
@@ -178,14 +226,14 @@ export default {
      */
     onFileSelected(event) {
       //console.log(this.$refs);
-      console.log("File Input Passed");
+      //console.log("File Input Passed");
       let file = event.target;
       let fileImage = null;
       if (file.files) {
         var reader = new FileReader();
         reader.onload = e => {
           localStorage.setItem("profile_image", e.target.result);
-          this.user.profile_picture = e.target.result;
+          //this.user.profile_picture = e.target.result;
         };
         fileImage = file.files[0];
         const fd = new FormData();
@@ -205,7 +253,7 @@ export default {
         var reader = new FileReader();
         reader.onload = e => {
           localStorage.setItem("cover_image", e.target.result);
-          this.user.cover_image = e.target.result;
+          //this.user.cover_image = e.target.result;
         };
         fileImage = file.files[0];
         this.$store.dispatch("changeCoverImage", { cover_image: file });

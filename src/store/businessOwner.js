@@ -92,13 +92,28 @@ export default {
     // Edit a network
     async editNetwork({ dispatch, commit }, editedNetwork) {
       commit("setLoader", true);
+      // const data = {
+      //   _method: "PUT",
+      //   id: editedNetwork.id,
+      //   business_id: editedNetwork.business_id,
+      //   name: editedNetwork.name,
+      //   description: editedNetwork.description,
+      //   purpose: editedNetwork.purpose,
+      //   special_needs: editedNetwork.special_needs,
+      //   business_address: editedNetwork.business_address,
+      //   business_image: editedNetwork.business_image,
+      //   allow_business: editedNetwork.allow_business,
+      // };
+      // console.log(data);
       axios
-        .put(`network/${editedNetwork.id}`, editedNetwork, {
+        .post(`network/${editedNetwork.id}`, editedNetwork, {
           headers: {
             Authorization: "Bearer " + localStorage.getItem("access_token"),
+            "Content-Type": "application/json",
           },
         })
         .then(async (res) => {
+          console.log(res.data);
           await dispatch("getNetworks");
         })
         .catch((err) => {

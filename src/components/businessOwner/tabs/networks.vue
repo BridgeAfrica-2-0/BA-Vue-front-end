@@ -17,6 +17,13 @@
             <b-row @click="viewNetwork(network)">
               <b-col md="3" xl="3" lg="3" cols="5" sm="3">
                 <div class="center-img" v-b-modal.modal-1>
+                  {{ network.business_image }}
+                  <img
+                    :src="
+                      `http://team2dev.maxinemoffett.com/${network.business_image}`
+                    "
+                    alt=""
+                  />
                   <!-- <img :src="network.image[0]" class="r-image" /> -->
                 </div>
               </b-col>
@@ -209,7 +216,7 @@
             label-class="font-weight-bold pt-0"
             class="mb-0"
           >
-            <input type="file" />
+            <input @change="selectImage" type="file" accept="image/*" />
           </b-form-group>
           <b-form-group
             label-cols-md="6"
@@ -275,6 +282,7 @@ export default {
   data() {
     return {
       showModal: false,
+      selectedFile: "",
       createdNetwork: {
         id: null,
         business_id: "",
@@ -343,7 +351,6 @@ export default {
       this.createdNetwork.business_image = network.business_image;
       this.createdNetwork.name = network.name;
       this.createdNetwork.business_id = network.business_id;
-      // this.createdNetwork.community = network.community;
       this.createdNetwork.business_address = network.business_address;
       this.createdNetwork.description = network.description;
       this.createdNetwork.purpose = network.purpose;
@@ -352,7 +359,24 @@ export default {
       this.showModal = true;
     },
     edit() {
-      this.editNetwork(this.createdNetwork);
+      const fd = new FormData();
+      fd.append("_method", "PUT");
+      fd.append("name", this.createdNetwork.name);
+      fd.append("business_id", this.createdNetwork.business_id);
+      fd.append("business_address", this.createdNetwork.business_address);
+      fd.append("description", this.createdNetwork.description);
+      fd.append("purpose", this.createdNetwork.purpose);
+      fd.append("special_needs", this.createdNetwork.special_needs);
+      fd.append("business_image", this.createdNetwork.business_image);
+      fd.append("allow_busines", this.createdNetwork.allow_busines);
+      let data = {
+        id: this.createdNetwork.id,
+        data: fd,
+      };
+      this.editNetwork(data);
+    },
+    selectImage(e) {
+      this.createdNetwork.business_image = e.target.files[0];
     },
   },
 };

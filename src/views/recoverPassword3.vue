@@ -76,9 +76,9 @@ export default {
 
         if (this.password1 == this.password2) {
           
-            const otpPasswordResetUrl = 'user/resetpassword/' + this.state.auth.passwordToken.data.user.id
+            const resetpasswordUrl = 'user/resetpassword/' + this.state.auth.passwordToken.data.user.id
       axios
-        .post("user/verifyResetOtp"+otpPasswordResetUrl, {
+        .post(resetpasswordUrl, {
          password:this.password1,
          password_confirmation:this.password2,
          phone: this.$store.state.auth.passwordToken.data.user.phone,

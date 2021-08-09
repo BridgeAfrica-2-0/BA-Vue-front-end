@@ -55,7 +55,7 @@ export default {
      next() {
         const otpVerifcationUrl = 'user/verifyResetOtp/' + this.state.auth.passwordToken.data.user.id
       axios
-        .post("user/resendOtp"+otpVerifcationUrl, {
+        .post(otpVerifcationUrl, {
          token:this.code,
          phone: this.$store.state.auth.passwordToken.data.user.phone,
         })

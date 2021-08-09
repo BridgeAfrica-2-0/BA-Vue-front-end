@@ -281,7 +281,7 @@
               <p class="post-text">
                 <read-more
                   more-str="read more"
-                  :text="msg"
+                  :text="item.details"
                   link="#"
                   less-str="read less"
                   :max-chars="200"
@@ -363,9 +363,6 @@ export default {
   },
   data() {
     return {
-      msg:
-        " Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.😛",
-
       images: [
         "https://i.wifegeek.com/200426/f9459c52.jpg",
         "https://i.wifegeek.com/200426/5ce1e1c7.jpg",
@@ -412,6 +409,9 @@ export default {
     //this.createPost.profile_picture = localStorage.getItem("profile_image");
     //console.log("Tester les listing des Posts");
     //console.log(this.$store.getters.getUser[0].posts);
+    this.$store.dispatch('loadPostsList', null)
+            .then( response => { console.log( response ) })
+            .catch( error => { console.log( error )});
   },
   methods: {
     chooseImage: function() {

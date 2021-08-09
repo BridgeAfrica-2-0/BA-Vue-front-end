@@ -25,7 +25,7 @@
           </read-more>
         </p>
         <b-icon icon="suit-heart" variant="primary" aria-hidden="true"></b-icon>
-        {{ '12' }}
+        {{ comment.likes.length }}
         <span @click="showReply" class="primary ml-2 reply"><b>Reply</b></span>
         <div v-if="reply">
           <b-row class="mt-2">

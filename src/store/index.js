@@ -29,7 +29,7 @@ const getDefaultState = () => {
           {
             post_id: 30,
             profileName: "TONTON LA FORCE LE BEAU GOSSE",
-            profile_picture: localStorage.getItem("profile_image"),
+            profile_picture: null,
             details:
               "Lorem Ipsum has been the industry's standard dummy text ever\n" +
               "                since the 1500s, when an unknown printer took a galley of type\n" +
@@ -41,14 +41,137 @@ const getDefaultState = () => {
             timeCountDown: "1h",
             likes: [
               {
-                like_id: 1,
+                id: 1,
                 post_id: 30,
                 user_id: 4,
                 created_at: null,
                 updated_at: null
               },
               {
-                like_id: 2,
+                id: 2,
+                post_id: 30,
+                user_id: 3,
+                created_at: null,
+                updated_at: null
+              }
+            ],
+            comments: [
+              {
+                comment_id: 1,
+                post_id: 30,
+                user_id: 4,
+                comment:
+                  "Lorem Ipsum has been the industry's   " +
+                  "this is do goodfive centuries, but  the leap " +
+                  "into electronic      this is do goodfive centuries, but  " +
+                  "the leap into electronic        this is do goodfive centuries, but  the leap into electronic  this sis sit tit typesetting",
+                profile_picture:
+                  "https://www.fivesquid.com/pics/t2/1594480468-145752-1-1.jpg",
+                timeCountDown: null,
+                created_at: null,
+                updated_at: null,
+                likes: [
+                  {
+                    like_id: 1,
+                    post_id: 30,
+                    user_id: 4,
+                    created_at: null,
+                    updated_at: null
+                  },
+                  {
+                    like_id: 2,
+                    post_id: 30,
+                    user_id: 3,
+                    created_at: null,
+                    updated_at: null
+                  }
+                ]
+              },
+              {
+                comment_id: 2,
+                post_id: 30,
+                user_id: 4,
+                comment:
+                  "Lorem Ipsum has been the industry's   " +
+                  "this is do goodfive centuries, but  the leap " +
+                  "into electronic      this is do goodfive centuries, but  " +
+                  "the leap into electronic        this is do goodfive centuries, but  the leap into electronic  this sis sit tit typesetting",
+                profile_picture:
+                  "https://www.fivesquid.com/pics/t2/1594480468-145752-1-1.jpg",
+                created_at: null,
+                updated_at: null,
+                likes: [
+                  {
+                    like_id: 1,
+                    post_id: 30,
+                    user_id: 4,
+                    created_at: null,
+                    updated_at: null
+                  },
+                  {
+                    like_id: 2,
+                    post_id: 30,
+                    user_id: 3,
+                    created_at: null,
+                    updated_at: null
+                  }
+                ]
+              },
+              {
+                comment_id: 3,
+                post_id: 30,
+                user_id: 4,
+                comment:
+                  "Lorem Ipsum has been the industry's   " +
+                  "this is do goodfive centuries, but  the leap " +
+                  "into electronic      this is do goodfive centuries, but  " +
+                  "the leap into electronic        this is do goodfive centuries, but  the leap into electronic  this sis sit tit typesetting",
+                profile_picture:
+                  "https://www.fivesquid.com/pics/t2/1594480468-145752-1-1.jpg",
+                created_at: null,
+                updated_at: null,
+                likes: [
+                  {
+                    like_id: 1,
+                    post_id: 30,
+                    user_id: 4,
+                    created_at: null,
+                    updated_at: null
+                  },
+                  {
+                    like_id: 2,
+                    post_id: 30,
+                    user_id: 3,
+                    created_at: null,
+                    updated_at: null
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            post_id: 31,
+            profileName: "TONTON LA FORCE LE BEAU GOSSE",
+            profile_picture: null,
+            details:
+              "Lorem Ipsum has been the industry's standard dummy text ever\n" +
+              "                since the 1500s, when an unknown printer took a galley of type\n" +
+              "                and scrambled it to make a type specimen book. It has survived\n" +
+              "                not only five centuries, but also the leap into electronic\n" +
+              "                typesetting, remaining essentially unchanged.😛",
+            movies: [],
+            hyperlinks: [],
+            timeCountDown: "1h",
+            likes: [
+              {
+                id: 1,
+                post_id: 30,
+                user_id: 4,
+                created_at: null,
+                updated_at: null
+              },
+              {
+                id: 2,
                 post_id: 30,
                 user_id: 3,
                 created_at: null,
@@ -149,9 +272,9 @@ const getDefaultState = () => {
             ]
           },
           {
-            post_id: 31,
+            post_id: 32,
             profileName: "TONTON LA FORCE LE BEAU GOSSE",
-            profile_picture: localStorage.getItem("profile_image"),
+            profile_picture: null,
             details:
               "Lorem Ipsum has been the industry's standard dummy text ever\n" +
               "                since the 1500s, when an unknown printer took a galley of type\n" +
@@ -163,23 +286,16 @@ const getDefaultState = () => {
             timeCountDown: "1h",
             likes: [
               {
-                like_id: 1,
+                id: 1,
                 post_id: 30,
                 user_id: 4,
                 created_at: null,
                 updated_at: null
               },
               {
-                like_id: 2,
+                id: 2,
                 post_id: 30,
                 user_id: 3,
-                created_at: null,
-                updated_at: null
-              },
-              {
-                like_id: 3,
-                post_id: 30,
-                user_id: 5,
                 created_at: null,
                 updated_at: null
               }
@@ -214,41 +330,39 @@ const getDefaultState = () => {
                     updated_at: null
                   }
                 ]
-              }
-            ]
-          },
-          {
-            post_id: 32,
-            profileName: "TONTON LA FORCE LE BEAU GOSSE",
-            profile_picture: localStorage.getItem("profile_image"),
-            details:
-              "Lorem Ipsum has been the industry's standard dummy text ever\n" +
-              "                since the 1500s, when an unknown printer took a galley of type\n" +
-              "                and scrambled it to make a type specimen book. It has survived\n" +
-              "                not only five centuries, but also the leap into electronic\n" +
-              "                typesetting, remaining essentially unchanged.😛",
-            movies: [],
-            hyperlinks: [],
-            timeCountDown: "1h",
-            likes: [
-              {
-                like_id: 1,
-                post_id: 30,
-                user_id: 4,
-                created_at: null,
-                updated_at: null
               },
               {
-                like_id: 2,
+                comment_id: 2,
                 post_id: 30,
-                user_id: 3,
+                user_id: 4,
+                comment:
+                  "Lorem Ipsum has been the industry's   " +
+                  "this is do goodfive centuries, but  the leap " +
+                  "into electronic      this is do goodfive centuries, but  " +
+                  "the leap into electronic        this is do goodfive centuries, but  the leap into electronic  this sis sit tit typesetting",
+                profile_picture:
+                  "https://www.fivesquid.com/pics/t2/1594480468-145752-1-1.jpg",
                 created_at: null,
-                updated_at: null
-              }
-            ],
-            comments: [
+                updated_at: null,
+                likes: [
+                  {
+                    like_id: 1,
+                    post_id: 30,
+                    user_id: 4,
+                    created_at: null,
+                    updated_at: null
+                  },
+                  {
+                    like_id: 2,
+                    post_id: 30,
+                    user_id: 3,
+                    created_at: null,
+                    updated_at: null
+                  }
+                ]
+              },
               {
-                comment_id: 1,
+                comment_id: 3,
                 post_id: 30,
                 user_id: 4,
                 comment:
@@ -282,7 +396,7 @@ const getDefaultState = () => {
           {
             post_id: 33,
             profileName: "TONTON LA FORCE LE BEAU GOSSE",
-            profile_picture: localStorage.getItem("profile_image"),
+            profile_picture: null,
             details:
               "Lorem Ipsum has been the industry's standard dummy text ever\n" +
               "                since the 1500s, when an unknown printer took a galley of type\n" +
@@ -294,14 +408,14 @@ const getDefaultState = () => {
             timeCountDown: "1h",
             likes: [
               {
-                like_id: 1,
+                id: 1,
                 post_id: 30,
                 user_id: 4,
                 created_at: null,
                 updated_at: null
               },
               {
-                like_id: 2,
+                id: 2,
                 post_id: 30,
                 user_id: 3,
                 created_at: null,
@@ -311,6 +425,66 @@ const getDefaultState = () => {
             comments: [
               {
                 comment_id: 1,
+                post_id: 30,
+                user_id: 4,
+                comment:
+                  "Lorem Ipsum has been the industry's   " +
+                  "this is do goodfive centuries, but  the leap " +
+                  "into electronic      this is do goodfive centuries, but  " +
+                  "the leap into electronic        this is do goodfive centuries, but  the leap into electronic  this sis sit tit typesetting",
+                profile_picture:
+                  "https://www.fivesquid.com/pics/t2/1594480468-145752-1-1.jpg",
+                created_at: null,
+                updated_at: null,
+                likes: [
+                  {
+                    like_id: 1,
+                    post_id: 30,
+                    user_id: 4,
+                    created_at: null,
+                    updated_at: null
+                  },
+                  {
+                    like_id: 2,
+                    post_id: 30,
+                    user_id: 3,
+                    created_at: null,
+                    updated_at: null
+                  }
+                ]
+              },
+              {
+                comment_id: 2,
+                post_id: 30,
+                user_id: 4,
+                comment:
+                  "Lorem Ipsum has been the industry's   " +
+                  "this is do goodfive centuries, but  the leap " +
+                  "into electronic      this is do goodfive centuries, but  " +
+                  "the leap into electronic        this is do goodfive centuries, but  the leap into electronic  this sis sit tit typesetting",
+                profile_picture:
+                  "https://www.fivesquid.com/pics/t2/1594480468-145752-1-1.jpg",
+                created_at: null,
+                updated_at: null,
+                likes: [
+                  {
+                    like_id: 1,
+                    post_id: 30,
+                    user_id: 4,
+                    created_at: null,
+                    updated_at: null
+                  },
+                  {
+                    like_id: 2,
+                    post_id: 30,
+                    user_id: 3,
+                    created_at: null,
+                    updated_at: null
+                  }
+                ]
+              },
+              {
+                comment_id: 3,
                 post_id: 30,
                 user_id: 4,
                 comment:
@@ -344,7 +518,7 @@ const getDefaultState = () => {
           {
             post_id: 34,
             profileName: "TONTON LA FORCE LE BEAU GOSSE",
-            profile_picture: localStorage.getItem("profile_image"),
+            profile_picture: null,
             details:
               "Lorem Ipsum has been the industry's standard dummy text ever\n" +
               "                since the 1500s, when an unknown printer took a galley of type\n" +
@@ -356,14 +530,14 @@ const getDefaultState = () => {
             timeCountDown: "1h",
             likes: [
               {
-                like_id: 1,
+                id: 1,
                 post_id: 30,
                 user_id: 4,
                 created_at: null,
                 updated_at: null
               },
               {
-                like_id: 2,
+                id: 2,
                 post_id: 30,
                 user_id: 3,
                 created_at: null,
@@ -400,13 +574,73 @@ const getDefaultState = () => {
                     updated_at: null
                   }
                 ]
+              },
+              {
+                comment_id: 2,
+                post_id: 30,
+                user_id: 4,
+                comment:
+                  "Lorem Ipsum has been the industry's   " +
+                  "this is do goodfive centuries, but  the leap " +
+                  "into electronic      this is do goodfive centuries, but  " +
+                  "the leap into electronic        this is do goodfive centuries, but  the leap into electronic  this sis sit tit typesetting",
+                profile_picture:
+                  "https://www.fivesquid.com/pics/t2/1594480468-145752-1-1.jpg",
+                created_at: null,
+                updated_at: null,
+                likes: [
+                  {
+                    like_id: 1,
+                    post_id: 30,
+                    user_id: 4,
+                    created_at: null,
+                    updated_at: null
+                  },
+                  {
+                    like_id: 2,
+                    post_id: 30,
+                    user_id: 3,
+                    created_at: null,
+                    updated_at: null
+                  }
+                ]
+              },
+              {
+                comment_id: 3,
+                post_id: 30,
+                user_id: 4,
+                comment:
+                  "Lorem Ipsum has been the industry's   " +
+                  "this is do goodfive centuries, but  the leap " +
+                  "into electronic      this is do goodfive centuries, but  " +
+                  "the leap into electronic        this is do goodfive centuries, but  the leap into electronic  this sis sit tit typesetting",
+                profile_picture:
+                  "https://www.fivesquid.com/pics/t2/1594480468-145752-1-1.jpg",
+                created_at: null,
+                updated_at: null,
+                likes: [
+                  {
+                    like_id: 1,
+                    post_id: 30,
+                    user_id: 4,
+                    created_at: null,
+                    updated_at: null
+                  },
+                  {
+                    like_id: 2,
+                    post_id: 30,
+                    user_id: 3,
+                    created_at: null,
+                    updated_at: null
+                  }
+                ]
               }
             ]
           },
           {
             post_id: 35,
             profileName: "TONTON LA FORCE LE BEAU GOSSE",
-            profile_picture: localStorage.getItem("profile_image"),
+            profile_picture: null,
             details:
               "Lorem Ipsum has been the industry's standard dummy text ever\n" +
               "                since the 1500s, when an unknown printer took a galley of type\n" +
@@ -418,14 +652,14 @@ const getDefaultState = () => {
             timeCountDown: "1h",
             likes: [
               {
-                like_id: 1,
+                id: 1,
                 post_id: 30,
                 user_id: 4,
                 created_at: null,
                 updated_at: null
               },
               {
-                like_id: 2,
+                id: 2,
                 post_id: 30,
                 user_id: 3,
                 created_at: null,
@@ -435,6 +669,66 @@ const getDefaultState = () => {
             comments: [
               {
                 comment_id: 1,
+                post_id: 30,
+                user_id: 4,
+                comment:
+                  "Lorem Ipsum has been the industry's   " +
+                  "this is do goodfive centuries, but  the leap " +
+                  "into electronic      this is do goodfive centuries, but  " +
+                  "the leap into electronic        this is do goodfive centuries, but  the leap into electronic  this sis sit tit typesetting",
+                profile_picture:
+                  "https://www.fivesquid.com/pics/t2/1594480468-145752-1-1.jpg",
+                created_at: null,
+                updated_at: null,
+                likes: [
+                  {
+                    like_id: 1,
+                    post_id: 30,
+                    user_id: 4,
+                    created_at: null,
+                    updated_at: null
+                  },
+                  {
+                    like_id: 2,
+                    post_id: 30,
+                    user_id: 3,
+                    created_at: null,
+                    updated_at: null
+                  }
+                ]
+              },
+              {
+                comment_id: 2,
+                post_id: 30,
+                user_id: 4,
+                comment:
+                  "Lorem Ipsum has been the industry's   " +
+                  "this is do goodfive centuries, but  the leap " +
+                  "into electronic      this is do goodfive centuries, but  " +
+                  "the leap into electronic        this is do goodfive centuries, but  the leap into electronic  this sis sit tit typesetting",
+                profile_picture:
+                  "https://www.fivesquid.com/pics/t2/1594480468-145752-1-1.jpg",
+                created_at: null,
+                updated_at: null,
+                likes: [
+                  {
+                    like_id: 1,
+                    post_id: 30,
+                    user_id: 4,
+                    created_at: null,
+                    updated_at: null
+                  },
+                  {
+                    like_id: 2,
+                    post_id: 30,
+                    user_id: 3,
+                    created_at: null,
+                    updated_at: null
+                  }
+                ]
+              },
+              {
+                comment_id: 3,
                 post_id: 30,
                 user_id: 4,
                 comment:
@@ -1135,7 +1429,7 @@ const actions = {
         }
         console.log(context);
         console.log(payload);
-        console.log("test1");
+        //console.log("test1");
         response_ = response;
       })
       .catch(error => {
@@ -1161,14 +1455,14 @@ const actions = {
         return response.json();
       })
       .then(response => {
-        console.log("test1");
-        console.log(response);
+        //console.log("test1");
+        //console.log(response);
         if (!response) {
           throw "Cannot Found Media";
         }
         console.log(context);
         console.log(payload);
-        console.log("test3");
+        //console.log("test3");
         response_ = response;
       })
       .catch(error => {
@@ -1183,6 +1477,38 @@ const actions = {
       target: response_.target,
       media: response_.media
     });
+    return response_;
+  },
+  async loadPostsList(context, payload) {
+    let response_ = null;
+    await fetch("http://localhost:3001/data", {
+      method: "GET"
+    })
+      .then(response => {
+        return response.json();
+      })
+      .then(response => {
+        console.log("test1");
+        console.log(response);
+        if (!response) {
+          throw "Cannot Found Media";
+        }
+        console.log(context);
+        console.log(payload);
+        console.log("test3");
+        response_ = response;
+        context.commit("retrievePostsListUser", {
+          posts: response.posts
+        });
+      })
+      .catch(error => {
+        //console.log("echec");
+        if (error instanceof TypeError) {
+          console.log(error.message);
+        } else {
+          console.log(error);
+        }
+      });
     return response_;
   }
 };

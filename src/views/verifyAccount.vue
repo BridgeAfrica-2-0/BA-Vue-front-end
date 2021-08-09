@@ -15,13 +15,23 @@
             <div class="text-center">You will get an OTP by SMS</div>
           </b-card-text>
           <b-form class="w-75 mx-auto text-center">
-            <b-form-input
-              id="token"
-              v-model="token"
-              type="text"
-              placeholder="****"
-              required
-            />
+            
+
+
+             <md-field>
+                <label for="otp"> OTP</label>
+                <md-input
+                  type="text"
+                  name="otp"
+                  id="otp"
+                   v-model="token"
+                   required
+                 
+                />
+               
+              </md-field>
+
+
 
             <br />
 

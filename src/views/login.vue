@@ -8,7 +8,7 @@
 
         <md-card-content>
           <!-- lol -->
-
+  <FlashMessage />
           <div class="center">
             <b-row>
               <b-col cols="12" md="6" lg="12" xl="6">
@@ -96,13 +96,13 @@
                 :disabled="sending"
                 class="b-color f-left"
                 style="color: white"
-                >Login</md-button
+                >Login</md-button       
               >
             </b-col>
             <b-col cols="6">
-              <b-link href="/signup">
+              <router-link to="signup">
                 <md-button class="md-raised f-right">Sign Up</md-button>
-              </b-link>
+              </router-link>
             </b-col>
           </b-row>
 
@@ -133,6 +133,8 @@
         >The user {{ lastUser }} was saved with success!</md-snackbar
       >
     </form>
+
+   
   </div>
 </template>
 
@@ -223,10 +225,44 @@ export default {
           password: this.form.password,
         })
         .then(() => {
+
+           this.sending = false;
+
           this.$router.push({ name: "welcome" });
         })
         .catch((err) => {
-          console.log(err);
+         
+           this.sending = false;
+
+          
+
+
+              if (err.response.status == 422) {
+
+               console.log({ err: err });
+
+            this.flashMessage.show({
+            status: "error",
+           
+            message: err.response.data.message,
+          });
+
+
+           }else{
+
+                  
+
+                  
+                 this.flashMessage.show({
+            status: "error",
+           
+            message:'An error has occure',
+          });
+
+
+           }
+
+
         });
     },
 

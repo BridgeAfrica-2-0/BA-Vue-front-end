@@ -55,6 +55,9 @@ const routes = [
     path: "/",
     name: "home",
     component: dashboard,
+    meta: {
+      auth: true
+    },
   },
 
 

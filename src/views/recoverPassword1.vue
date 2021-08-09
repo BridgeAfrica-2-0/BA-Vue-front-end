@@ -12,13 +12,22 @@
             <div class="text-left">Enter Your Phone Number</div>
           </b-card-text>
           <b-form class="w-75 mx-auto">
-            <b-form-input
-              id="input-4"
-              v-model="phone"
-              type="text"
-              placeholder="Phone"
-              required
-            />
+
+             <md-field>
+                <label for="phone"> Phone</label>
+                <md-input
+                  type="text"
+                  name="phone"
+                  id="phone"
+                   v-model="phone"
+                   required
+                 
+                />
+               
+              </md-field>
+
+
+          
 
             <br />
             <b-button class="btn btn-primary button float-right"   @click.prevent="verify" >
@@ -28,6 +37,8 @@
         </div>
       </b-card>
     </div>
+
+      <FlashMessage />
   </b-container>
 </template>
 
@@ -48,10 +59,27 @@ export default {
           phone: this.phone,
         })
         .then(() => {
+          
+        
           this.$router.push({ name: "RecoverPass2" });
         })
-        .catch((err) => {
-          console.log(err);
+         .catch((err) => {
+           if (err.response.status === 422) {
+
+             
+                console.log({ err: err });
+                console.log(err.response.data.message);
+
+                 this.flashMessage.show({
+            status: "error",
+           
+            message: err.response.data.message,
+          });
+
+
+           }
+
+           
         });
     },
   },

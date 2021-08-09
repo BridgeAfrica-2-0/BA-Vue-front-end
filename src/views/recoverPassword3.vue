@@ -12,26 +12,41 @@
               <div class="col text-left">Create New Password</div>
             </div>
           </b-card-text>
-          <b-form @submit="recover" class="w-75 mx-auto">
+          <b-form class="w-75 mx-auto">
             <b-form-group id="input-group-4">
-              <b-form-input
-                id="input-4"
-                v-model="password1"
-                type="password"
-                placeholder="Enter New password"
-                required
-              />
+
+               <md-field>
+                <label for="password1"> Password</label>
+                <md-input
+                  type="password"
+                  name="password1"
+                  id="password1"
+                   v-model="password1"
+                   required
+                 
+                />
+               
+              </md-field>
+
+
+
+               <md-field>
+                <label for="password2"> Confirm Password</label>
+                <md-input
+                  type="password"
+                  name="password2"
+                  id="password2"
+                   v-model="password2"
+                   required
+                 
+                />
+               
+              </md-field>
+
+
+
             </b-form-group>
-            <b-form-group id="input-group-4">
-              <b-form-input
-                id="input-4"
-                v-model="password2"
-                type="password"
-                placeholder="Confirm password"
-                required
-              />
-            </b-form-group>
-            <b-button class="btnz" type="submit" variant="outline-primary">
+            <b-button class="btnz"  @click.prevent="next" variant="outline-primary">
               Finish
             </b-button>
           </b-form>
@@ -75,13 +90,15 @@ export default {
      next() {
 
         if (this.password1 == this.password2) {
+
+          console.log(this.$store.state.auth.passwordToken.user.phone);
           
-            const resetpasswordUrl = 'user/resetpassword/' + this.state.auth.passwordToken.data.user.id
+            const resetpasswordUrl = 'user/resetpassword/' + this.$store.state.auth.passwordToken.user.id
       axios
         .post(resetpasswordUrl, {
          password:this.password1,
          password_confirmation:this.password2,
-         phone: this.$store.state.auth.passwordToken.data.user.phone,
+         phone:this.$store.state.auth.passwordToken.user.phone,
         })
         .then((response) => {
           if (response.status === 200) {
@@ -105,13 +122,24 @@ export default {
           }
         })
         .catch((err) => {
-          console.log({ err: err });
+         
+            
 
-          this.flashMessage.show({
+             if (err.response.status === 422) {
+
+             
+                console.log({ err: err });
+                console.log(err.response.data.message);
+
+                 this.flashMessage.show({
             status: "error",
-            title: "Password Reset Failed",
-            message: "Unable to Reset your password",
+           
+            message: err.response.data.message,
           });
+
+
+           }
+
         });
 
       } else {

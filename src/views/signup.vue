@@ -5,7 +5,7 @@
         <md-card-header>
           <div class="md-title center">Sign Up On Bridge Africa</div>
         </md-card-header>
-
+       <FlashMessage />
         <md-card-content>
           <div class="center">
             <b-row>
@@ -168,7 +168,7 @@
       >
     </form>
 
-    <FlashMessage />
+  
   </div>
 </template>
 
@@ -301,12 +301,29 @@ export default {
         .catch((err) => {
           this.sending = false;
 
+          if (err.response.status == 422) {
+
+             
+                console.log({ err: err });
+                console.log(err.response.data.message);
+
+                 this.flashMessage.show({
+            status: "error",
+           
+            message: err.response.data.message,
+          });
+
+
+           }else{  
+
           this.flashMessage.show({
             status: "error",
             title: "Registration Failed",
             message: "Unable to store this data",
           });
           console.log({ err: err });
+
+           }
         });
     },
     validateUser() {

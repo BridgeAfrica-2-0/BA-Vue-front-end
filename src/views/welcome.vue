@@ -47,25 +47,48 @@
         <form-wizard @on-complete="onComplete" 
         color="#e75c18"
          >
-          <tab-content title=" Complete Profile ">
-            <div class="form-card">
+    
+          <input id="profile2" type="file" @change="onFileChange" hidden >
+        
+
+
+          <tab-content title=" Complete Profile "   :before-change="updateUserProfile"  >
+            <div class="form-card">              
               <div class="row">
                 <div class="col-md-6">
-                  <div class="image-upload-wrap"  @click="chooseProfile2()">
 
-                      <input id="profile2" type="file" hidden>
+                              <div id="preview">
+    <img v-if="img_url" :src="img_url" />
+
+    
+
+  </div>
+  <br>
+  <div class="text-center">   
+    <b-button  v-if="img_url" @click="chooseProfile2()" variant="primary" class="mt-3 text-center">  change Image  </b-button>
+   </div>
+
+                  <div class="image-upload-wrap"  v-if="!img_url"  @click="chooseProfile2()">
+
+                     
                     <a
                       href="#"
                       data-toggle="modal"
                       data-target="#createalbumModal"
                     >
                       <div class="drag-text">
-                        <i class="fa fa-plus" ></i>
+                        <i class="fa fa-plus" > </i>
                         <h3 class="username">Add Profile  Photo</h3>
                       </div>
                     </a>
                     <div></div>
                   </div>
+
+
+                  
+        
+
+
                 </div>
                 <div class="col-md-6">
                   <div class="form-group"  label-class="username">
@@ -475,6 +498,8 @@ import Business from "@/components/dasboard/welcomebusinesses";
 
 import Tutorial from "@/components/dasboard/tutorial";
 
+import axios from "axios";
+
 export default {
 
 
@@ -483,6 +508,8 @@ export default {
         useas: '', 
          country: '',
          username:this.$store.state.auth.user.user.name,
+         img_url: null,
+         profile_pic:null,
     
         options: [
           { text: ' Person', value: 'person' },
@@ -523,6 +550,39 @@ export default {
 
 
   methods: {
+
+
+    updateUserProfile: function(){
+
+
+
+      let formData = new FormData();
+      formData.append('file', this.file);
+      
+
+         this.axios.post('http://localhost:8000/api.php',
+                formData,
+                {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+              }
+            ).then(function(data){
+              console.log(data.data);
+            })
+            .catch(function(){
+              console.log('FAILURE!!');
+            });
+
+
+
+
+        console.log('fuck you niffadge ');
+
+         return true;
+
+    }
+    , 
     onComplete: function () {
      
 
@@ -539,6 +599,18 @@ export default {
 chooseProfile2: function() {
      
         document.getElementById("profile2").click()
+    },
+
+
+
+
+     onFileChange(e) {
+
+       this.profile_pic= e.target.files[0]
+      const file = e.target.files[0];
+      this.img_url = URL.createObjectURL(file);
+
+      console.log( this.img_url);
     },
 
 
@@ -605,6 +677,18 @@ import 'vue-form-wizard/dist/vue-form-wizard.min.css';
 
 
 <style>
+
+
+#preview {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#preview img {
+  max-width: 100%;
+  max-height: 500px;
+}
 
 
 .wizard-icon-container{

@@ -10,13 +10,22 @@
           </b-card-text>
           <b-form  class="w-75 mx-auto">
             <b-form-group id="input-group-4">
-              <b-form-input
-                id="input-4"
-                v-model="code"
-                type="text"
-                placeholder="Enter the code that your received"
-                required
-              />
+
+               <md-field>
+                <label for="otp"> OTP</label>
+                <md-input
+                  type="text"
+                  name="otp"
+                  id="otp"
+                   v-model="code"
+                   required
+                 
+                />
+               
+              </md-field>
+
+
+             
             </b-form-group>
       
 
@@ -30,6 +39,7 @@
         </div>
       </b-card>
     </div>
+     <FlashMessage />
   </b-container>
 </template>
 
@@ -53,15 +63,19 @@ export default {
   
 
      next() {
-        const otpVerifcationUrl = 'user/verifyResetOtp/' + this.state.auth.passwordToken.data.user.id
+
+       console.log(this.$store.state.auth.passwordToken);
+        const otpVerifcationUrl = 'user/verifyResetOtp'
       axios
         .post(otpVerifcationUrl, {
-         token:this.code,
-         phone: this.$store.state.auth.passwordToken.data.user.phone,
+           OTP:this.code,
+         phone: this.$store.state.auth.passwordToken.user.phone,
         })
         .then((response) => {  
           if (response.status === 200) {
             
+
+              console.log(response);
                 this.$router.push({ name: "RecoverPass3" });
 
           } else {
@@ -69,13 +83,25 @@ export default {
           }
         })
         .catch((err) => {
-          console.log({ err: err });
 
-          this.flashMessage.show({
+          if (err.response.status === 422) {
+
+             
+                console.log({ err: err });
+                console.log(err.response.data.message);
+
+                 this.flashMessage.show({
             status: "error",
-            title: "Verification Failed",
-            message: "Unable to verify the OTP code",
+           
+            message: err.response.data.message,
           });
+
+
+           }
+
+
+           
+         
         });
     },
 

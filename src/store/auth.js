@@ -87,6 +87,8 @@ export default {
         .post('user/reset', data)  
         .then(({ data }) => {
 
+              console.log(data); 
+         
           commit('setPasswordToken', data.data)
 
         })

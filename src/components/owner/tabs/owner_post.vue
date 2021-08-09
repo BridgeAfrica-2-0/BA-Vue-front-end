@@ -466,6 +466,7 @@ export default {
       if (file.files) {
         let reader = new FileReader();
         reader.onload = e => {
+
           result = e.target.result;
           //localStorage.setItem("cover_image", e.target.result);
           //this.user.cover_image = e.target.result;

@@ -141,15 +141,13 @@ import Followers from "../../followers";
 import Community from "./comunitiDashboard";
 import Owner_post from "./owner_post";
 import Media from "../../media";
-// import CreatePost from "../../createPost";
-// import Post from "../../post";
 export default {
   name: "posts",
   components: {
     Followers,
     Media,
     Owner_post,
-    Community,
+    Community
   },
 
   data() {
@@ -174,12 +172,12 @@ export default {
         "https://i.wifegeek.com/200426/177ef44c.jpg",
         "https://i.wifegeek.com/200426/d74d9040.jpg",
         "https://i.wifegeek.com/200426/81e24a47.jpg",
-        "https://i.wifegeek.com/200426/43e2e8bb.jpg",
+        "https://i.wifegeek.com/200426/43e2e8bb.jpg"
       ],
       imagees: [
         "https://i.wifegeek.com/200426/f9459c52.jpg",
-        "https://i.wifegeek.com/200426/5ce1e1c7.jpg",
-      ],
+        "https://i.wifegeek.com/200426/5ce1e1c7.jpg"
+      ]
     };
   },
 
@@ -187,8 +185,8 @@ export default {
     chooseFiles: function() {
       console.log("helloo fucker");
       document.getElementById("fileUpload").click();
-    },
-  },
+    }
+  }
 };
 </script>
 

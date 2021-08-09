@@ -22,7 +22,7 @@
     "core-js": "^3.6.5",
     "dotenv": "^10.0.0",
     "emoji-vue": "^0.2.4",
-    "firebase": "^8.8.1",
+    "firebase": "^8.9.0",
     "ly-tab": "^2.1.2",
     "node-sass": "^5.0.0",
     "register-service-worker": "^1.7.1",

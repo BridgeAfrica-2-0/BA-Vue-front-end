@@ -30,14 +30,16 @@ const getDefaultState = () => {
             post_id: 30,
             profileName: "TONTON LA FORCE LE BEAU GOSSE",
             profile_picture: null,
-            details:
-              "Lorem Ipsum has been the industry's standard dummy text ever\n" +
-              "                since the 1500s, when an unknown printer took a galley of type\n" +
-              "                and scrambled it to make a type specimen book. It has survived\n" +
-              "                not only five centuries, but also the leap into electronic\n" +
-              "                typesetting, remaining essentially unchanged.😛",
-            movies: [],
-            hyperlinks: [],
+            content: {
+              details:
+                "Lorem Ipsum has been the industry's standard dummy text ever\n" +
+                "                since the 1500s, when an unknown printer took a galley of type\n" +
+                "                and scrambled it to make a type specimen book. It has survived\n" +
+                "                not only five centuries, but also the leap into electronic\n" +
+                "                typesetting, remaining essentially unchanged.😛",
+              movies: [],
+              hyperlinks: []
+            },
             timeCountDown: "1h",
             likes: [
               {
@@ -1234,13 +1236,8 @@ const actions = {
   createPost(context, payload) {
     //console.log("Create Post");
     //console.log(payload);
-    const url =
-      "https://vuejs-backend-c42b8-default-rtdb.firebaseio.com/users.json";
-    context.commit("createPost", {
-      postBusinessUpdate: payload.postBusinessUpdate,
-      movies: payload.movies,
-      hyperlinks: payload.hyperlinks
-    });
+    // const url = "https://vuejs-backend-c42b8-default-rtdb.firebaseio.com/users.json";
+    const url = " http://localhost:3001/data";
     //console.log("test");
     fetch(url, {
       method: "POST",
@@ -1249,33 +1246,22 @@ const actions = {
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        id: "20_TONTONLAFORCE",
-        fullname: "",
-        username: "TONTON LA FORCE LE BEAU GOSSE",
-        email: "",
-        password: "",
-        profileName: "TONTON LA FORCE LE BEAU GOSSE",
-        profilePicture: state.userData[0].profilePicture,
-        coverImage: state.userData[0].coverImage,
-        numbersOfFollowers: 30,
-        posts: state.userData[0].posts,
-        createPost: {
-          profile_picture: state.userData[0].createPost.profile_picture,
-          profile_picture_localstorage:
-            state.userData[0].createPost.profile_picture_localstorage,
-          coverImage: state.userData[0].createPost.coverImage,
-          profileNamePost: "TONTON LA FORCE",
-          postBusinessUpdate: payload.postBusinessUpdate,
-          movies: payload.movies,
-          hyperlinks: payload.hyperlinks
-        },
-        userProfileOwner: {
-          workedAt: "Current or Last Organization",
-          studiedAt: "Last Education",
-          homeTown: "Dummy",
-          currentCity: "Dummy",
-          numbersOfFollowers: 256
-        }
+        posts: [
+          ...state.userData[0].posts,
+          {
+            post_id: 51,
+            profileName: state.userData[0].profileName,
+            profile_picture: state.userData[0].profilePicture,
+            content: {
+              details: payload.postBusinessUpdate,
+              movies: payload.movies,
+              hyperlinks: payload.hyperlinks
+            },
+            timeCountDown: "1h",
+            likes: [],
+            comments: []
+          }
+        ]
       })
     })
       .then(response => {
@@ -1284,7 +1270,10 @@ const actions = {
       .then(response => {
         console.log("Create Post Online");
         console.log(response);
-        console.log(state.userData[0].posts);
+        context.commit("createPost", {
+          posts: response.posts
+        });
+        //console.log(state.userData[0].posts);
       });
   },
   /**
@@ -1613,11 +1602,7 @@ const mutations = {
    * @param payload
    */
   createPost(state, payload) {
-    state.userData[0].createPost.postBusinessUpdate =
-      payload.postBusinessUpdate;
-    state.userData[0].createPost.movies = payload.movies;
-    state.userData[0].createPost.hyperlinks = payload.hyperlinks;
-    state.userData[0].posts.push(payload);
+    state.userData[0].posts = payload.posts;
   },
   /**
    *

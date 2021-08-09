@@ -281,7 +281,7 @@
               <p class="post-text">
                 <read-more
                   more-str="read more"
-                  :text="item.details"
+                  :text="item.content.details"
                   link="#"
                   less-str="read less"
                   :max-chars="200"
@@ -290,7 +290,20 @@
             </b-col>
           </b-row>
           <b-row>
-            <b-col cols="12" class="mt-2">
+            <b-col v-if="item.content.movies.length > 0" cols="12" class="mt-2">
+              <div v-for="movie in item.content.movies" :key="movie.target" class="">
+                <img
+                  class="img-fluid post-container "
+                  :src="movie.movie"
+                  alt="Photo1"
+                />
+              </div>
+            </b-col>
+            <b-col
+              v-if="item.content.movies.length <= 0"
+              cols="12"
+              class="mt-2"
+            >
               <div class="">
                 <img
                   class="img-fluid post-container "
@@ -409,9 +422,14 @@ export default {
     //this.createPost.profile_picture = localStorage.getItem("profile_image");
     //console.log("Tester les listing des Posts");
     //console.log(this.$store.getters.getUser[0].posts);
-    this.$store.dispatch('loadPostsList', null)
-            .then( response => { console.log( response ) })
-            .catch( error => { console.log( error )});
+    this.$store
+      .dispatch("loadPostsList", null)
+      .then(response => {
+        console.log(response);
+      })
+      .catch(error => {
+        console.log(error);
+      });
   },
   methods: {
     chooseImage: function() {
@@ -426,16 +444,43 @@ export default {
       document.getElementById("chosefile").click();
     },
     selectMovies(event) {
-      console.log(event);
-      this.createPost.movies.push({
-        target: event.target,
-        fileName: event.target.files[0].name
-      });
+      const file = event.target;
+      if (file.files) {
+        let reader = new FileReader();
+        reader.onload = e => {
+          //localStorage.setItem("cover_image", e.target.result);
+          //this.user.cover_image = e.target.result;
+          //console.log( "It pass")
+          //console.log( result );
+          this.createPost.movies.push({
+            target: event.target,
+            movie: e.target.result,
+            fileName: event.target.files[0].name
+          });
+        };
+        reader.readAsDataURL(file.files[0]);
+      }
+    },
+    service(file) {
+      let result = null;
+      if (file.files) {
+        let reader = new FileReader();
+        reader.onload = e => {
+          result = e.target.result;
+          //localStorage.setItem("cover_image", e.target.result);
+          //this.user.cover_image = e.target.result;
+          //console.log( "It pass")
+          //console.log( result );
+          return result;
+        };
+        reader.readAsDataURL(file.files[0]);
+      }
     },
     selectMoviesOutsidePost(event) {
       console.log(event);
       this.createPost.movies.push({
         target: event.target,
+        movie: this.service(event.target),
         fileName: event.target.files[0].name
       });
       this.$refs["modal-xl"].show();
@@ -444,6 +489,7 @@ export default {
       console.log(event);
       this.createPost.hyperlinks.push({
         target: event.target,
+        document: this.service(event.target),
         fileName: event.target.files[0].name
       });
     },
@@ -451,6 +497,7 @@ export default {
       console.log(event);
       this.createPost.hyperlinks.push({
         target: event.target,
+        document: this.service(event.target),
         fileName: event.target.files[0].name
       });
       this.$refs["modal-xl"].show();

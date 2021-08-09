@@ -65,7 +65,7 @@ export default {
            phone: this.$store.state.auth.user.data.user.phone,
         })
         .then((response) => {
-          if (response.data.success) {
+          if (response.status === 200) {
             this.flashMessage.show({
               status: "success",
               title: "Successfully Send",
@@ -97,7 +97,6 @@ export default {
         })
         .then((response) => {
 
-        console.log( this.$store.state.auth.user.data.user.phone);
 
           this.$router.push({ name: "welcome" });
           

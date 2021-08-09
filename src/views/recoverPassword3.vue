@@ -1,5 +1,5 @@
 <template>
-  <b-container class="container p-5 h-100 w-100 mx-auto my-auto" fluid>
+  <b-container class="container p-2 p-md-5 h-100 w-100 mx-auto my-auto" fluid>
     <div class="w-100 h-100 my-auto mx-auto">
       <b-card tag="article" class="my-auto mx-auto text-center mw-30">
         <img src="../assets/logo.png" class="image" alt="" />
@@ -42,6 +42,7 @@
 </template>
 
 <script>
+import axios from "axios"; 
 export default {
   data() {
     return {
@@ -66,6 +67,63 @@ export default {
         this.password2 = "";
       }
     },
+
+
+
+
+    
+     next() {
+
+        if (this.password1 == this.password2) {
+          
+            const otpPasswordResetUrl = 'user/resetpassword/' + this.state.auth.passwordToken.data.user.id
+      axios
+        .post("user/verifyResetOtp"+otpPasswordResetUrl, {
+         password:this.password1,
+         password_confirmation:this.password2,
+         phone: this.$store.state.auth.passwordToken.data.user.phone,
+        })
+        .then((response) => {
+          if (response.status === 200) {
+
+              var delayInMilliseconds = 2000; 
+
+               setTimeout(function() {
+  
+               }, delayInMilliseconds);
+
+             this.flashMessage.show({
+            status: "success",
+            title: "Password Reset Success",
+            message: "You have successfully Reset your password you will be redirected in a second",
+          });
+            
+                this.$router.push({ name: "Login" });
+
+          } else {
+            console.log(response.data);
+          }
+        })
+        .catch((err) => {
+          console.log({ err: err });
+
+          this.flashMessage.show({
+            status: "error",
+            title: "Password Reset Failed",
+            message: "Unable to Reset your password",
+          });
+        });
+
+      } else {
+        this.match = false;
+        this.password1 = "";
+        this.password2 = "";
+      }
+
+      
+    },
+
+
   },
 };
 </script>
@@ -96,4 +154,50 @@ export default {
 .mw-30 {
   max-width: 30rem;
 }
+
+
+
+.verif-text {
+  font-size: 25px;
+  margin-top: 10px;
+   margin-bottom: 10px;
+}
+
+.image {
+  width: 50%;
+}
+
+.button {
+  margin-left: 265px;
+  background-color: #e75c18;
+  border: none;
+  color: white;
+}
+
+.button:hover {
+  background-color: #ed5a11;
+}
+.mw-30 {
+  max-width: 30rem;
+}
+
+
+   
+
+
+@media only screen and (max-width: 768px) {
+  .image {
+    width: 75%;
+  }
+
+  .mt-10 {
+    margin-top: 10px !important;
+  }
+
+  .card-body {
+    margin-top: 30px !important;
+    padding-bottom: 100px !important;
+  }
+}
+ 
 </style>

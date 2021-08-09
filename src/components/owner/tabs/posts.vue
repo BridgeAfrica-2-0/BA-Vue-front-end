@@ -33,7 +33,9 @@
                 variant="primary"
               ></b-icon>
               <b> Work at: </b>
-              <span class="text"> {{ userProfileOwner.workedAt }} </span>
+              <span class="text">
+                {{ $store.getters.getUserPostIntro.workedAt }}
+              </span>
             </p>
             <p>
               <b-icon
@@ -42,7 +44,9 @@
                 variant="primary"
               ></b-icon>
               <b> Studied at: </b>
-              <span class="text"> {{ userProfileOwner.studiedAt }}</span>
+              <span class="text">
+                {{ $store.getters.getUserPostIntro.studiedAt }}</span
+              >
             </p>
             <p>
               <b-icon
@@ -51,7 +55,9 @@
                 variant="primary"
               ></b-icon>
               <b> Home Town : </b>
-              <span class="text"> {{ userProfileOwner.homeTown }} </span>
+              <span class="text">
+                {{ $store.getters.getUserPostIntro.homeTown }}
+              </span>
             </p>
             <p>
               <b-icon
@@ -60,7 +66,9 @@
                 variant="primary"
               ></b-icon
               ><b> Current City : </b>
-              <span class="text"> {{ userProfileOwner.currentCity }} </span>
+              <span class="text">
+                {{ $store.getters.getUserPostIntro.currentCity }}
+              </span>
             </p>
             <p>
               <b-icon
@@ -70,7 +78,7 @@
               ></b-icon>
               <b> Community: </b>
               <span class="text">
-                {{ userProfileOwner.numbersOfFollowers }}
+                {{ $store.getters.getUserPostIntro.numbersOfFollowers }}
               </span>
             </p>
           </b-card-text>
@@ -161,11 +169,14 @@
                   >
                     <b-form-input
                       id="work_at"
-                      ref="work_at"
                       placeholder="work_at"
                       :state="workedAtState"
                       required
-                      :value="userProfileOwner.workedAt"
+                      v-model="userProfileOwnerInput.workedAt"
+                      :class="{
+                        'is-valid': userProfileOwnerInput.workedAt !== '',
+                        'is-invalid': userProfileOwnerInput.workedAt === ''
+                      }"
                     ></b-form-input>
                   </b-form-group>
                   <b-form-group
@@ -176,11 +187,14 @@
                   >
                     <b-form-input
                       id="studied_at"
-                      ref="studied_at"
                       placeholder="studied at"
                       :state="studiedAtState"
                       required
-                      :value="userProfileOwner.studiedAt"
+                      v-model="userProfileOwnerInput.studiedAt"
+                      :class="{
+                        'is-valid': userProfileOwnerInput.studiedAt !== '',
+                        'is-invalid': userProfileOwnerInput.studiedAt === ''
+                      }"
                     ></b-form-input>
                   </b-form-group>
                   <b-form-group
@@ -191,11 +205,14 @@
                   >
                     <b-form-input
                       id="home_town"
-                      ref="home_town"
                       placeholder="home town"
                       :state="homeTownState"
                       required
-                      :value="userProfileOwner.homeTown"
+                      v-model="userProfileOwnerInput.homeTown"
+                      :class="{
+                        'is-valid': userProfileOwnerInput.homeTown !== '',
+                        'is-invalid': userProfileOwnerInput.homeTown === ''
+                      }"
                     ></b-form-input>
                   </b-form-group>
                   <b-form-group
@@ -206,11 +223,14 @@
                   >
                     <b-form-input
                       id="city"
-                      ref="city"
                       placeholder="Current City"
                       :state="currentCityState"
                       required
-                      :value="userProfileOwner.currentCity"
+                      v-model="userProfileOwnerInput.currentCity"
+                      :class="{
+                        'is-valid': userProfileOwnerInput.currentCity !== '',
+                        'is-invalid': userProfileOwnerInput.currentCity === ''
+                      }"
                     ></b-form-input>
                   </b-form-group>
                 </form>
@@ -250,6 +270,25 @@ export default {
     Owner_post,
     Community
   },
+  created() {
+    console.log("Load User Info");
+    this.$store.dispatch('loadUserPostIntro', null)
+            .then( response => {
+              console.log( 'test+++++ res')
+              return response
+            })
+            .catch( error => { console.log( error ) });
+    console.log( "Finish Loading" );
+    this.userProfileOwner = this.$store.getters.getUserPostIntro;
+    this.userProfileOwnerInput.workedAt = this.userProfileOwner.workedAt;
+    this.userProfileOwnerInput.studiedAt = this.userProfileOwner.studiedAt;
+    this.userProfileOwnerInput.homeTown = this.userProfileOwner.homeTown;
+    this.userProfileOwnerInput.currentCity = this.userProfileOwner.currentCity;
+    this.userProfileOwnerInput.numbersOfFollowers = this.userProfileOwner.numbersOfFollowers;
+  },
+  mounted() {
+    //this.userProfileOwner = this.$store.getters.getUserPostIntro;
+  },
   data() {
     return {
       images: [
@@ -285,25 +324,27 @@ export default {
         currentCity: "Dummy",
         numbersOfFollowers: 256
       },
+      userProfileOwnerInput: {
+        workedAt: "",
+        studiedAt: "",
+        homeTown: "",
+        currentCity: "",
+        numbersOfFollowers: 0
+      },
       workedAtState: null,
       studiedAtState: null,
       homeTownState: null,
-      currentCityState: null,
-      submittedNames: []
+      currentCityState: null
     };
   },
 
   methods: {
-    chooseFiles: function() {
-      console.log("helloo fucker");
-      document.getElementById("fileUpload").click();
-    },
     checkFormValidity() {
       //const valid = this.$refs.form.checkValidity();
-      this.workedAtState = this.$refs.work_at.checkValidity();
-      this.studiedAtState = this.$refs.studied_at.checkValidity();
-      this.homeTownState = this.$refs.home_town.checkValidity();
-      this.currentCityState = this.$refs.city.checkValidity();
+      this.workedAtState = this.userProfileOwnerInput.workedAt !== "";
+      this.studiedAtState = this.userProfileOwnerInput.studiedAt !== "";
+      this.homeTownState = this.userProfileOwnerInput.homeTown !== "";
+      this.currentCityState = this.userProfileOwnerInput.currentCity !== "";
       return (
         this.studiedAtState &&
         this.workedAtState &&
@@ -328,13 +369,16 @@ export default {
       if (!this.checkFormValidity()) {
         return;
       }
-      this.userProfileOwner.studiedAt = this.$refs.studied_at.localValue;
-      console.log(this.$refs.studied_at);
-      this.userProfileOwner.workedAt = this.$refs.work_at.localValue;
-      this.userProfileOwner.homeTown = this.$refs.home_town.localValue;
-      this.userProfileOwner.currentCity = this.$refs.city.localValue;
 
-      console.log(this.userProfileOwner);
+      console.log("Send User Info Post");
+      //console.log(this.userProfileOwnerInput);
+      this.$store.dispatch("editPostUserIntro", {
+        workedAt: this.userProfileOwnerInput.workedAt,
+        studiedAt: this.userProfileOwnerInput.studiedAt,
+        homeTown: this.userProfileOwnerInput.homeTown,
+        currentCity: this.userProfileOwnerInput.currentCity,
+        numbersOfFollowers: this.userProfileOwnerInput.numbersOfFollowers
+      });
 
       // Hide the modal manually
       this.$nextTick(() => {

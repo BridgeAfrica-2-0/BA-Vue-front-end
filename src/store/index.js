@@ -935,10 +935,10 @@ const getDefaultState = () => {
           hyperlinks: []
         },
         userProfileOwner: {
-          workedAt: "Current or Last Organization",
+          workedAt: "Last Organization",
           studiedAt: "Last Education",
           homeTown: "Dummy",
-          currentCity: "Dummy",
+          currentCity: "Dummy To You",
           numbersOfFollowers: 256
         }
       }
@@ -1065,16 +1065,8 @@ const actions = {
    */
   editPostUserIntro(context, payload) {
     //console.log(payload);
-    context.commit("editPostUserIntro", {
-      data: {
-        workedAt: payload.workedAt,
-        studiedAt: payload.studiedAt,
-        homeTown: payload.homeTown,
-        city: payload.city
-      }
-    });
-    const url =
-      "https://vuejs-backend-c42b8-default-rtdb.firebaseio.com/users.json";
+    //const url = "https://vuejs-backend-c42b8-default-rtdb.firebaseio.com/users.json";
+    const url = " http://localhost:3002/userPostIntro";
     fetch(url, {
       method: "POST",
       headers: {
@@ -1084,14 +1076,25 @@ const actions = {
         workedAt: payload.workedAt,
         studiedAt: payload.studiedAt,
         homeTown: payload.homeTown,
-        city: payload.city
+        currentCity: payload.currentCity,
+        numbersOfFollowers: payload.numbersOfFollowers
       })
     })
       .then(response => {
         return response.json();
       })
       .then(response => {
+        console.log("test1 response");
         console.log(response);
+        context.commit("editPostUserIntro", {
+          data: {
+            workedAt: response.workedAt,
+            studiedAt: response.studiedAt,
+            homeTown: response.homeTown,
+            currentCity: response.currentCity,
+            numbersOfFollowers: response.numbersOfFollowers
+          }
+        });
       });
   },
   /**
@@ -1499,6 +1502,44 @@ const actions = {
         }
       });
     return response_;
+  },
+  async loadUserPostIntro(context, payload) {
+    let response_ = null;
+    await fetch(" http://localhost:3002/userPostIntro", {
+      method: "GET"
+    })
+      .then(response => {
+        return response;
+      })
+      .then(response => {
+        console.log("test1 +++");
+        console.log(response);
+        if (!response) {
+          throw "Cannot Found User Post Intro";
+        }
+        console.log(context);
+        console.log(payload);
+        console.log("test3 +++");
+        response_ = response;
+        context.commit("editPostUserIntro", {
+          data: {
+            workedAt: response_.workedAt,
+            studiedAt: response_.studiedAt,
+            homeTown: response_.homeTown,
+            currentCity: response_.current,
+            numbersOfFollowers: response_.numbersOfFollowers
+          }
+        });
+      })
+      .catch(error => {
+        //console.log("echec");
+        if (error instanceof TypeError) {
+          console.log(error.message);
+        } else {
+          console.log(error);
+        }
+      });
+    return response_;
   }
 };
 
@@ -1660,6 +1701,9 @@ export default new Vuex.Store({
     },
     getPostLists(state) {
       return state.userData[0].posts;
+    },
+    getUserPostIntro(state) {
+      return state.userData[0].userProfileOwner;
     }
   },
   actions,

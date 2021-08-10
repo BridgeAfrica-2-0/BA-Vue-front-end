@@ -5,26 +5,17 @@
       <div class="chat-box">
           <b-row>
 
-      
+
             <b-col class="pr-0" cols="12" xl="4" v-if="show"  >
-             
               <div class="right-mobile">
                 <b-row>
                   <b-col>
-                    
-
                     <b-avatar
                 class="d-inline-block profile-pic"
                 variant="primary"
                 src="https://business.bridgeafrica.info/assets/img/team/3.png"
                
                  ></b-avatar>
-
-
-
-
-
-
                   </b-col>
                   <b-col>
                     <h4 class="title">Messages</h4>

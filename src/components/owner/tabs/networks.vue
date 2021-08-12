@@ -4,6 +4,12 @@
       <fas-icon class=" icons" :icon="['fas', 'project-diagram']" size="lg" />
       <span class="t-color"> Network </span>
 
+      <b-button
+        class="float-right"
+        @click="showmodal(true, 'add')"
+        variant="primary"
+        >Add Network</b-button
+      >
       <hr />
       <b-row>
         <b-col
@@ -53,6 +59,12 @@
                           <b-icon icon="pencil" aria-hidden="true"></b-icon>
                           Edit
                         </b-dropdown-item-button>
+                        <b-dropdown-item-button
+                          @click="showEditNetwork(network)"
+                        >
+                          <b-icon icon="trash" aria-hidden="true"></b-icon>
+                          Delete
+                        </b-dropdown-item-button>
                       </b-dropdown>
                     </b-col>
                   </b-row>
@@ -81,11 +93,20 @@
         <h2 class="my-3">Builds networks around your Business</h2>
         <p class="my-2">Create network to stay in touch with just the people</p>
         <p class="my-2">you want Engage, share, Make Plans and much more</p>
-        <p class="my-3"></p>
+        <p class="my-3">
+          <b-button @click="showmodal(true, 'add')" variant="primary"
+            >Add Network</b-button
+          >
+        </p>
       </div>
     </div>
 
-    <b-modal hide-footer title="Edit network" size="lg" v-model="showModal">
+    <b-modal
+      hide-footer
+      :title="editNet ? 'Edit network' : 'Add Network'"
+      size="lg"
+      v-model="showModal"
+    >
       <b-container>
         <b-form>
           <div
@@ -237,13 +258,13 @@
           >
           <b-spinner v-if="loader" variant="primary"></b-spinner>
           <b-button
-            @click="edit"
+            @click="action"
             class="mt-2 "
             style="float:right"
             variant="primary"
           >
-            Edit Network</b-button
-          >
+            {{ editNet ? "Edit Network" : "Add Network" }}
+          </b-button>
         </b-form>
       </b-container>
     </b-modal>
@@ -283,6 +304,7 @@ export default {
     return {
       showModal: false,
       selectedFile: "",
+      editNet: false,
       createdNetwork: {
         id: null,
         business_id: "",
@@ -323,17 +345,26 @@ export default {
   },
   methods: {
     ...mapGetters({
-      getNetworksFromstore: "businessOwner/getnetWorks",
-      getLoader: "businessOwner/getLoader",
-      getSuccess: "businessOwner/getSuccess",
+      getNetworksFromstore: "profileOwner/getnetWorks",
+      getLoader: "profileOwner/getLoader",
+      getSuccess: "profileOwner/getSuccess",
     }),
 
     // getting actions from the store
     ...mapActions({
-      addNetwork: "businessOwner/addNetwork",
-      getNetworks: "businessOwner/getNetworks",
-      editNetwork: "businessOwner/editNetwork",
+      addNetwork: "profileOwner/addNetwork",
+      getNetworks: "profileOwner/getNetworks",
+      editNetwork: "profileOwner/editNetwork",
     }),
+
+    // Action handler
+    action() {
+      if (this.editNet) {
+        this.editNetwork(this.createdNetwork);
+      } else {
+        this.addNetwork(this.createdNetwork);
+      }
+    },
 
     //View network on pop up modal
     viewNetwork(network) {
@@ -343,6 +374,23 @@ export default {
       this.chosenNetwork.business_address = network.business_address;
       this.chosenNetwork.description = network.description;
       this.createdNetwork.allow_business = network.allow_business;
+    },
+    showmodal(state, arg) {
+      this.showModal = state;
+      if (arg == "edit") {
+        this.editNet = true;
+      } else {
+        this.editNet = false;
+        this.createdNetwork.id = "";
+        this.createdNetwork.business_image = "";
+        this.createdNetwork.name = "";
+        this.createdNetwork.business_id = "";
+        this.createdNetwork.business_address = "";
+        this.createdNetwork.description = "";
+        this.createdNetwork.purpose = "";
+        this.createdNetwork.special_needs = "";
+        this.createdNetwork.allow_business = "";
+      }
     },
 
     //Show Edit network modal
@@ -356,7 +404,7 @@ export default {
       this.createdNetwork.purpose = network.purpose;
       this.createdNetwork.special_needs = network.special_needs;
       this.createdNetwork.allow_business = network.allow_business;
-      this.showModal = true;
+      this.showmodal(true, "edit");
     },
     edit() {
       const fd = new FormData();

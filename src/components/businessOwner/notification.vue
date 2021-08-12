@@ -60,6 +60,7 @@
 </template>
 
 <script>
+import { mapActions, mapGetters } from "vuex";
 export default {
   name: "notification",
   data: () => ({
@@ -114,6 +115,19 @@ export default {
     selectAll: false,
   }),
   methods: {
+    ...mapGetters({
+      sendNotifications: "businessOwner/sendNotifications",
+      getLoader: "businessOwner/getLoader",
+      getSuccess: "businessOwner/getSuccess",
+    }),
+
+    // getting actions from the store
+    ...mapActions({
+      getNotifications: "businessOwner/getNotifications",
+      readNotifiactions: "businessOwner/getNetworks",
+      deleteNotification: "businessOwner/editNetwork",
+    }),
+
     // select all the notifications
     selectall() {
       if (!this.selectAll) {

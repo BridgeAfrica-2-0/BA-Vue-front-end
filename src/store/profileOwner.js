@@ -6,7 +6,6 @@ export default {
     networks: [],
     loader: false,
     success: false,
-    notifications: [],
   },
   getters: {
     // sending networks
@@ -24,10 +23,6 @@ export default {
       return state.success;
     },
 
-    // Sending notifications
-    sendNotifications(state) {
-      return state.notifications;
-    },
   },
   mutations: {
     setNetworks(state, payload) {
@@ -43,16 +38,7 @@ export default {
       state.success = payload;
     },
 
-    // Setting the notifications in the state
-    setNotifications(state, payload) {
-      state.notifications = payload;
-    },
-    // Setting Read property
-    setReadNotification(state, payload) {
-      // Setting Read all gorithm
-    },
-    // delete notifications
-    deleteNotifications(state, payload){}
+
   },
   actions: {
     // temporal signin to get token for developement purpose
@@ -124,18 +110,6 @@ export default {
           console.log("Something went wrong");
         });
     },
-
-    // Getting the notifications
-    async getNotifications({ commit }, payload) {
-      commit("setNotifications", payload);
-    },
-
-    // Sending a read request
-    async readNotifiactions({ commit }, payload) {},
-
-    // Delete Notifications
-    async deleteNotifications({ commit }, payload) {},
-
     
   },
 };

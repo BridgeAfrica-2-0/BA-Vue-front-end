@@ -1,5 +1,6 @@
 import Vue from "vue";
 import Vuex from "vuex";
+import axios from "axios";
 //import axios from "axios";
 //import createPersistedState from "vuex-persistedstate";
 
@@ -8,10 +9,20 @@ Vue.use(Vuex);
 
 const getDefaultState = () => {
   return {
+    url_load_profile_picture_changed:
+      "https://0c84d60f736b.ngrok.io/api/v1/download?file_name=",
+    url_load_profile_picture:
+      "https://0c84d60f736b.ngrok.io/api/v1/download?file_name=public/media/photos/z7aooJV1XnDVTpRSfPGOUj7sjm0trGVJCiNFS7Ef.jpg",
+    url_change_profile_picture: "https://0c84d60f736b.ngrok.io/api/v1/upload",
+    change_image_url:
+      "https://0c84d60f736b.ngrok.io/api/v1/download?file_name=",
+    url_list_post: "https://0c84d60f736b.ngrok.io/api/v1/post",
+    url_user_infos: "https://0c84d60f736b.ngrok.io/api/v1/userIntro",
+    url_create_post: "https://0c84d60f736b.ngrok.io/api/v1/post",
     recoverData: "",
     login: false,
     isToi: false,
-    token: "6|InTVkgzF2JMHXrmcMPccH9glZCnhzuxgFq1CrPxj",
+    token: "7|1O1spGPcT95JbVNTUuqbmaEj3yDlQPooS7bVJwGB",
     count: "",
     todos: [],
     userData: [
@@ -23,8 +34,195 @@ const getDefaultState = () => {
         password: "",
         profileName: "TONTON LA FORCE LE BEAU GOSSE",
         profilePicture: null,
+        target: null,
         coverImage: null,
         numbersOfFollowers: 30,
+        comments: [
+          {
+            comment_id: 1,
+            post_id: 30,
+            user_id: 4,
+            comment:
+              "Lorem Ipsum has been the industry's   " +
+              "this is do goodfive centuries, but  the leap " +
+              "into electronic      this is do goodfive centuries, but  " +
+              "the leap into electronic        this is do goodfive centuries, but  the leap into electronic  this sis sit tit typesetting",
+            profile_picture:
+              "https://www.fivesquid.com/pics/t2/1594480468-145752-1-1.jpg",
+            timeCountDown: null,
+            created_at: null,
+            updated_at: null,
+            likes: [
+              {
+                like_id: 1,
+                post_id: 30,
+                user_id: 4,
+                created_at: null,
+                updated_at: null
+              },
+              {
+                like_id: 2,
+                post_id: 30,
+                user_id: 3,
+                created_at: null,
+                updated_at: null
+              }
+            ]
+          },
+          {
+            comment_id: 2,
+            post_id: 30,
+            user_id: 4,
+            comment:
+              "Lorem Ipsum has been the industry's   " +
+              "this is do goodfive centuries, but  the leap " +
+              "into electronic      this is do goodfive centuries, but  " +
+              "the leap into electronic        this is do goodfive centuries, but  the leap into electronic  this sis sit tit typesetting",
+            profile_picture:
+              "https://www.fivesquid.com/pics/t2/1594480468-145752-1-1.jpg",
+            created_at: null,
+            updated_at: null,
+            likes: [
+              {
+                like_id: 1,
+                post_id: 30,
+                user_id: 4,
+                created_at: null,
+                updated_at: null
+              },
+              {
+                like_id: 2,
+                post_id: 30,
+                user_id: 3,
+                created_at: null,
+                updated_at: null
+              }
+            ]
+          },
+          {
+            comment_id: 3,
+            post_id: 30,
+            user_id: 4,
+            comment:
+              "Lorem Ipsum has been the industry's   " +
+              "this is do goodfive centuries, but  the leap " +
+              "into electronic      this is do goodfive centuries, but  " +
+              "the leap into electronic        this is do goodfive centuries, but  the leap into electronic  this sis sit tit typesetting",
+            profile_picture:
+              "https://www.fivesquid.com/pics/t2/1594480468-145752-1-1.jpg",
+            created_at: null,
+            updated_at: null,
+            likes: [
+              {
+                like_id: 1,
+                post_id: 30,
+                user_id: 4,
+                created_at: null,
+                updated_at: null
+              },
+              {
+                like_id: 2,
+                post_id: 30,
+                user_id: 3,
+                created_at: null,
+                updated_at: null
+              }
+            ]
+          }
+        ],
+        likes: [
+          {
+            comment_id: 1,
+            post_id: 30,
+            user_id: 4,
+            comment:
+              "Lorem Ipsum has been the industry's   " +
+              "this is do goodfive centuries, but  the leap " +
+              "into electronic      this is do goodfive centuries, but  " +
+              "the leap into electronic        this is do goodfive centuries, but  the leap into electronic  this sis sit tit typesetting",
+            profile_picture:
+              "https://www.fivesquid.com/pics/t2/1594480468-145752-1-1.jpg",
+            timeCountDown: null,
+            created_at: null,
+            updated_at: null,
+            likes: [
+              {
+                like_id: 1,
+                post_id: 30,
+                user_id: 4,
+                created_at: null,
+                updated_at: null
+              },
+              {
+                like_id: 2,
+                post_id: 30,
+                user_id: 3,
+                created_at: null,
+                updated_at: null
+              }
+            ]
+          },
+          {
+            comment_id: 2,
+            post_id: 30,
+            user_id: 4,
+            comment:
+              "Lorem Ipsum has been the industry's   " +
+              "this is do goodfive centuries, but  the leap " +
+              "into electronic      this is do goodfive centuries, but  " +
+              "the leap into electronic        this is do goodfive centuries, but  the leap into electronic  this sis sit tit typesetting",
+            profile_picture:
+              "https://www.fivesquid.com/pics/t2/1594480468-145752-1-1.jpg",
+            created_at: null,
+            updated_at: null,
+            likes: [
+              {
+                like_id: 1,
+                post_id: 30,
+                user_id: 4,
+                created_at: null,
+                updated_at: null
+              },
+              {
+                like_id: 2,
+                post_id: 30,
+                user_id: 3,
+                created_at: null,
+                updated_at: null
+              }
+            ]
+          },
+          {
+            comment_id: 3,
+            post_id: 30,
+            user_id: 4,
+            comment:
+              "Lorem Ipsum has been the industry's   " +
+              "this is do goodfive centuries, but  the leap " +
+              "into electronic      this is do goodfive centuries, but  " +
+              "the leap into electronic        this is do goodfive centuries, but  the leap into electronic  this sis sit tit typesetting",
+            profile_picture:
+              "https://www.fivesquid.com/pics/t2/1594480468-145752-1-1.jpg",
+            created_at: null,
+            updated_at: null,
+            likes: [
+              {
+                like_id: 1,
+                post_id: 30,
+                user_id: 4,
+                created_at: null,
+                updated_at: null
+              },
+              {
+                like_id: 2,
+                post_id: 30,
+                user_id: 3,
+                created_at: null,
+                updated_at: null
+              }
+            ]
+          }
+        ],
         posts: [
           {
             post_id: 30,
@@ -155,14 +353,16 @@ const getDefaultState = () => {
             post_id: 31,
             profileName: "TONTON LA FORCE LE BEAU GOSSE",
             profile_picture: null,
-            details:
-              "Lorem Ipsum has been the industry's standard dummy text ever\n" +
-              "                since the 1500s, when an unknown printer took a galley of type\n" +
-              "                and scrambled it to make a type specimen book. It has survived\n" +
-              "                not only five centuries, but also the leap into electronic\n" +
-              "                typesetting, remaining essentially unchanged.😛",
-            movies: [],
-            hyperlinks: [],
+            content: {
+              details:
+                "Lorem Ipsum has been the industry's standard dummy text ever\n" +
+                "                since the 1500s, when an unknown printer took a galley of type\n" +
+                "                and scrambled it to make a type specimen book. It has survived\n" +
+                "                not only five centuries, but also the leap into electronic\n" +
+                "                typesetting, remaining essentially unchanged.😛",
+              movies: [],
+              hyperlinks: []
+            },
             timeCountDown: "1h",
             likes: [
               {
@@ -940,6 +1140,15 @@ const getDefaultState = () => {
           homeTown: "Dummy",
           currentCity: "Dummy To You",
           numbersOfFollowers: 256
+        },
+        profile_about: {
+          biography: {
+            info_access: null,
+            description:
+              "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis, aliquid cupiditate fugit similique laboriosam, expedita, voluptatibus dolorem atlibero ipsam illo molestiae. Voluptates quisquam vitae, aperiam voluptatem ad enim ducimus praesentium fuga quas unde ea quasi obcaecati eumlaboriosam eos nesciunt exercitationem voluptatibus cupiditate sunt totam?Dolor voluptatem repudiandae quos." +
+              "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis, aliquid cupiditate fugit similique laboriosam, expedita, voluptatibus dolorem atlibero ipsam illo molestiae. Voluptates quisquam vitae, aperiam voluptatem ad enim ducimus praesentium fuga quas unde ea quasi obcaecati eumlaboriosam eos nesciunt exercitationem voluptatibus cupiditate sunt totam?Dolor voluptatem repudiandae quos." +
+              "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis, aliquid cupiditate fugit similique laboriosam, expedita, voluptatibus dolorem atlibero ipsam illo molestiae. Voluptates quisquam vitae, aperiam voluptatem ad enim ducimus praesentium fuga quas unde ea quasi obcaecati eumlaboriosam eos nesciunt exercitationem voluptatibus cupiditate sunt totam?Dolor voluptatem repudiandae quos."
+          }
         }
       }
     ],
@@ -1066,33 +1275,41 @@ const actions = {
   editPostUserIntro(context, payload) {
     //console.log(payload);
     //const url = "https://vuejs-backend-c42b8-default-rtdb.firebaseio.com/users.json";
-    const url = " http://localhost:3002/userPostIntro";
-    fetch(url, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
+    const url = "https://fbdcbca26b4b.ngrok.io/api/v1/userIntro";
+    context.commit("editPostUserIntro", {
+      data: {
         workedAt: payload.workedAt,
         studiedAt: payload.studiedAt,
         homeTown: payload.homeTown,
         currentCity: payload.currentCity,
-        numbersOfFollowers: payload.numbersOfFollowers
+        numbersOfFollowers: 20
+      }
+    });
+    fetch(url, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        company_name: payload.workedAt,
+        school_name: payload.studiedAt,
+        position: payload.homeTown,
+        city_town: payload.currentCity
       })
     })
       .then(response => {
         return response.json();
       })
       .then(response => {
-        console.log("test1 response");
+        console.log("edit user intro test1 response");
         console.log(response);
         context.commit("editPostUserIntro", {
           data: {
-            workedAt: response.workedAt,
-            studiedAt: response.studiedAt,
-            homeTown: response.homeTown,
-            currentCity: response.currentCity,
-            numbersOfFollowers: response.numbersOfFollowers
+            workedAt: response.company_name,
+            studiedAt: response.school_name,
+            homeTown: response.position,
+            currentCity: response.city_town,
+            numbersOfFollowers: 20
           }
         });
       });
@@ -1102,83 +1319,65 @@ const actions = {
    * @param context
    * @param payload
    */
-  changeProfilePicture(context, payload) {
-    //console.log("Profile Picture");
-    //console.log(payload);
+  async changeProfilePicture(context, payload) {
+    console.log("change profile picture start");
+    console.log("======================");
+    console.log(payload.profilePicture);
 
-    const url = "http://localhost:3000/profile_picture";
-    const file = payload.profilePicture;
-    let profile = null;
-    if (file.files) {
-      const reader = new FileReader();
-      reader.onload = e => {
-        profile = e.target.result;
-        context.commit("changeProfilePicture", {
-          profilePicture: payload.profilePicture,
-          profilePictureLocalStorage: profile
-        });
+    console.log("axiossssssssssss start (2)");
+    console.log(payload.profilePicture);
+    await axios
+      .post(state.url_change_profile_picture, payload.profilePicture, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Authorization: `Bearer ${state.token}`
+        }
+      })
+      .then(response => {
+        console.log("axiossssssssssss response (1)");
+        console.log(response);
+        return response;
+      })
+      .then(response => {
+        console.log("axiossssssssssss response (2)");
+        console.log(response.data.data.link);
+        const url =
+          state.url_load_profile_picture_changed + response.data.data.link;
+
+        console.log("change profile picture url " + url);
         fetch(url, {
-          method: "POST",
+          method: "GET",
           headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json"
-          },
-          body: JSON.stringify({
-            target: payload.profilePicture,
-            media: profile
-          })
-        })
-          .then(response => {
-            return response.json();
-          })
-          .then(response => {
-            console.log(response);
+            Authorization: `Bearer ${state.token}`
+          }
+        }).then(image => {
+          console.log("Load profile Image response +++++++++");
+          console.log(image);
+          image.blob().then(imageBlob => {
+            const imageURL = URL.createObjectURL(imageBlob);
+            console.log("Load profile Image response image URL +++++++++");
+            console.log(imageURL);
+            context.dispatch("changeProfileImageService", {
+              target: imageURL,
+              media: imageURL
+            });
           });
-      };
-      reader.readAsDataURL(file.files[0]);
-    }
-    // const url = "https://0b586e0a5a1f.ngrok.io/api/v1/upload";
-    // const file = payload.profilePicture;
-    // const fileImage = file.files[0];
-    // const fd = new FormData();
-    // fd.append("file", fileImage, fileImage.name);
-    // //console.log(file.files[0]);
-    // let profile = null;
-    // if (file.files) {
-    //   const reader = new FileReader();
-    //   reader.onload = e => {
-    //     //localStorage.setItem("profile_image", e.target.result);
-    //     profile = e.target.result;
-    //     //console.log("test");
-    //     //console.log(profile);
-    //     context.commit("changeProfilePicture", {
-    //       profilePicture: payload.profilePicture,
-    //       profilePictureLocalStorage: profile
-    //     });
-    //     const config = {
-    //       headers: {
-    //         "content-type": "multipart/form-data"
-    //       }
-    //     };
-    //     axios
-    //       .post(url, fd, config)
-    //       .then(response => console.log(response))
-    //       .catch(error => console.log(error));
-    //   };
-    //   reader.readAsDataURL(file.files[0]);
-    //}
+        });
+      })
+      .catch(error => {
+        console.log("erreur lie au navigateur ou au serveur");
+        console.log(error);
+      });
+
+    console.log("change profile picture end");
   },
   changeProfileImageService(context, payload) {
-    //const file = payload.media;
-    //console.log(payload.media);
     context.commit("changeProfilePicture", {
       profilePicture: payload.target,
       profilePictureLocalStorage: payload.media
     });
   },
   changeCoverImageService(context, payload) {
-    //const file = payload.media;
-    //console.log(payload.media);
     context.commit("changeCoverImage", {
       coverImage: payload.target,
       coverImageLocalStorage: payload.media
@@ -1189,94 +1388,231 @@ const actions = {
    * @param context
    * @param payload
    */
-  changeCoverImage(context, payload) {
-    //console.log("Profile Picture");
-    //console.log(payload);
-    //const url = "https://vuejs-backend-c42b8-default-rtdb.firebaseio.com/users.json";
-    const url = "http://localhost:3000/cover_image";
-    const file = payload.cover_image;
-    let cover = null;
-    if (file.files) {
-      const reader = new FileReader();
-      reader.onload = e => {
-        //localStorage.setItem("profile_image", e.target.result);
-        cover = e.target.result;
-        //console.log("test");
-        //console.log(profile);
-        context.commit("changeCoverImage", {
-          coverImage: payload.cover_image,
-          coverImageLocalStorage: cover
-        });
-        //console.log("test");
-        //console.log(state.userData[0].profilePicture);
+  async changeCoverImage(context, payload) {
+    console.log("change cover image start");
+    console.log("========================");
+    console.log(payload.cover_image);
+
+    console.log("axiossssssssssss start (2)");
+    console.log(payload.cover_image);
+    await axios
+      .post(state.url_change_profile_picture, payload.cover_image, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Authorization: `Bearer ${state.token}`
+        }
+      })
+      .then(response => {
+        console.log("axiossssssssssss response (1)");
+        console.log(response);
+        return response;
+      })
+      .then(response => {
+        console.log("axiossssssssssss response (2)");
+        console.log(response.data.data.link);
+        const url =
+          state.url_load_profile_picture_changed + response.data.data.link;
+
+        console.log("change cover image url " + url);
         fetch(url, {
-          method: "POST",
+          method: "GET",
           headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify({
-            target: file,
-            media: cover
-          })
-        })
-          .then(response => {
-            return response.json();
-          })
-          .then(response => {
-            console.log("change Cover Image Online ");
-            console.log(response);
+            Authorization: `Bearer ${state.token}`
+          }
+        }).then(image => {
+          console.log("Load cover image response +++++++++");
+          console.log(image);
+          image.blob().then(imageBlob => {
+            const imageURL = URL.createObjectURL(imageBlob);
+            console.log("Load cover image response image URL +++++++++");
+            console.log(imageURL);
+            context.dispatch("changeCoverImageService", {
+              target: imageURL,
+              media: imageURL
+            });
           });
-      };
-      reader.readAsDataURL(file.files[0]);
-    }
+        });
+      })
+      .catch(error => {
+        console.log("erreur lie au navigateur ou au serveur");
+        console.log(error);
+      });
+
+    console.log("change profile picture end");
   },
   /**
    *
    * @param context
    * @param payload
    */
-  createPost(context, payload) {
-    //console.log("Create Post");
-    //console.log(payload);
+  async createPost(context, payload) {
+    console.log("Create Post ++++++");
+    //console.log(payoad);
     // const url = "https://vuejs-backend-c42b8-default-rtdb.firebaseio.com/users.json";
-    const url = " http://localhost:3001/data";
+    //const url = " http://localhost:3000/post";
     //console.log("test");
-    fetch(url, {
+    await fetch(state.url_create_post, {
       method: "POST",
       headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${state.token}`
       },
       body: JSON.stringify({
-        posts: [
-          ...state.userData[0].posts,
-          {
-            post_id: 51,
-            profileName: state.userData[0].profileName,
-            profile_picture: state.userData[0].profilePicture,
-            content: {
-              details: payload.postBusinessUpdate,
-              movies: payload.movies,
-              hyperlinks: payload.hyperlinks
-            },
-            timeCountDown: "1h",
-            likes: [],
-            comments: []
-          }
-        ]
+        content: payload.postBusinessUpdate
       })
     })
       .then(response => {
         return response.json();
       })
       .then(response => {
-        console.log("Create Post Online");
+        if (!response) {
+          throw "Error To Create Post";
+        }
+        console.log("Create Post Online +++++");
         console.log(response);
+        context.dispatch("loadPostsList").then(posts => {
+          console.log("get post list after creating ++++++++");
+          console.log(posts);
+          context.commit("retrievePostsListUser", {
+            posts: [...posts]
+          });
+        });
+
         context.commit("createPost", {
-          posts: response.posts
+          posts: [
+            ...context.getters.getPostLists,
+            {
+              id: 30,
+              profileName: "TONTON LA FORCE LE BEAU GOSSE",
+              profile_picture: null,
+              content: payload.postBusinessUpdate,
+              //{
+              //details: payload.postBusinessUpdate,
+              //movies: [],
+              //hyperlinks: []
+              //},
+              timeCountDown: "1h",
+              likes: [
+                {
+                  id: 1,
+                  post_id: 30,
+                  user_id: 4,
+                  created_at: null,
+                  updated_at: null
+                },
+                {
+                  id: 2,
+                  post_id: 30,
+                  user_id: 3,
+                  created_at: null,
+                  updated_at: null
+                }
+              ],
+              comments: [
+                {
+                  comment_id: 1,
+                  post_id: 30,
+                  user_id: 4,
+                  comment:
+                    "Lorem Ipsum has been the industry's   " +
+                    "this is do goodfive centuries, but  the leap " +
+                    "into electronic      this is do goodfive centuries, but  " +
+                    "the leap into electronic        this is do goodfive centuries, but  the leap into electronic  this sis sit tit typesetting",
+                  profile_picture:
+                    "https://www.fivesquid.com/pics/t2/1594480468-145752-1-1.jpg",
+                  timeCountDown: null,
+                  created_at: null,
+                  updated_at: null,
+                  likes: [
+                    {
+                      like_id: 1,
+                      post_id: 30,
+                      user_id: 4,
+                      created_at: null,
+                      updated_at: null
+                    },
+                    {
+                      like_id: 2,
+                      post_id: 30,
+                      user_id: 3,
+                      created_at: null,
+                      updated_at: null
+                    }
+                  ]
+                },
+                {
+                  comment_id: 2,
+                  post_id: 30,
+                  user_id: 4,
+                  comment:
+                    "Lorem Ipsum has been the industry's   " +
+                    "this is do goodfive centuries, but  the leap " +
+                    "into electronic      this is do goodfive centuries, but  " +
+                    "the leap into electronic        this is do goodfive centuries, but  the leap into electronic  this sis sit tit typesetting",
+                  profile_picture:
+                    "https://www.fivesquid.com/pics/t2/1594480468-145752-1-1.jpg",
+                  created_at: null,
+                  updated_at: null,
+                  likes: [
+                    {
+                      like_id: 1,
+                      post_id: 30,
+                      user_id: 4,
+                      created_at: null,
+                      updated_at: null
+                    },
+                    {
+                      like_id: 2,
+                      post_id: 30,
+                      user_id: 3,
+                      created_at: null,
+                      updated_at: null
+                    }
+                  ]
+                },
+                {
+                  comment_id: 3,
+                  post_id: 30,
+                  user_id: 4,
+                  comment:
+                    "Lorem Ipsum has been the industry's   " +
+                    "this is do goodfive centuries, but  the leap " +
+                    "into electronic      this is do goodfive centuries, but  " +
+                    "the leap into electronic        this is do goodfive centuries, but  the leap into electronic  this sis sit tit typesetting",
+                  profile_picture:
+                    "https://www.fivesquid.com/pics/t2/1594480468-145752-1-1.jpg",
+                  created_at: null,
+                  updated_at: null,
+                  likes: [
+                    {
+                      like_id: 1,
+                      post_id: 30,
+                      user_id: 4,
+                      created_at: null,
+                      updated_at: null
+                    },
+                    {
+                      like_id: 2,
+                      post_id: 30,
+                      user_id: 3,
+                      created_at: null,
+                      updated_at: null
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
         });
         //console.log(state.userData[0].posts);
+      })
+      .catch(error => {
+        if (error instanceof TypeError) {
+          console.log("create Post erreur Lié au navigateur");
+          console.log(error.message);
+        } else {
+          console.log("create post erreur lié au serveur");
+        }
       });
   },
   /**
@@ -1401,138 +1737,141 @@ const actions = {
         if (error instanceof TypeError) {
           console.log(error.message);
         } else {
-          console.log(error);
+          // console.log(error);
         }
       });
   },
   async loadProfilePicture(context, payload) {
-    let response_ = null;
-    await fetch("http://localhost:3000/profile_picture", {
-      method: "GET"
-    })
-      .then(response => {
-        return response.json();
-      })
-      .then(response => {
-        //console.log("test1");
-        //console.log(response);
-        if (!response) {
-          throw "Cannot Found Media";
-        }
-        console.log(context);
-        console.log(payload);
-        //console.log("test1");
-        response_ = response;
-      })
-      .catch(error => {
-        //console.log("echec");
-        if (error instanceof TypeError) {
-          console.log(error.message);
-        } else {
-          console.log(error);
-        }
-      });
-    await context.dispatch("changeProfileImageService", {
-      target: response_.target,
-      media: response_.media
+    console.log("load profile start");
+    console.log(context);
+    console.log(payload);
+    const url =
+      state.userData[0].target === null
+        ? state.url_load_profile_picture
+        : state.userData[0].target;
+
+    const image = await fetch(url, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${state.token}`
+      }
     });
-    return response_;
+    console.log("Load profile Image response +++++++++");
+    console.log(image);
+    const imageBlob = await image.blob();
+    const imageURL = await URL.createObjectURL(imageBlob);
+    console.log("Load profile Image response image URL +++++++++");
+    console.log(imageURL);
+
+    await context.dispatch("changeProfileImageService", {
+      target: imageURL,
+      media: imageURL
+    });
+    console.log("load profile end");
+    return imageURL;
   },
   async loadCoverImage(context, payload) {
-    let response_ = null;
-    await fetch("http://localhost:3000/cover_image", {
-      method: "GET"
-    })
-      .then(response => {
-        return response.json();
-      })
-      .then(response => {
-        //console.log("test1");
-        //console.log(response);
-        if (!response) {
-          throw "Cannot Found Media";
-        }
-        console.log(context);
-        console.log(payload);
-        //console.log("test3");
-        response_ = response;
-      })
-      .catch(error => {
-        //console.log("echec");
-        if (error instanceof TypeError) {
-          console.log(error.message);
-        } else {
-          console.log(error);
-        }
-      });
-    await context.dispatch("changeCoverImageService", {
-      target: response_.target,
-      media: response_.media
+    console.log("load cover Image start++++++++++++++");
+    console.log(context);
+    console.log(payload);
+
+    console.log("load profile start");
+    console.log(context);
+    console.log(payload);
+    const url = state.url_load_profile_picture;
+
+    const image = await fetch(url, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${state.token}`
+      }
     });
-    return response_;
+    console.log("Load cover Image response +++++++++");
+    console.log(image);
+    const imageBlob = await image.blob();
+    const imageURL = await URL.createObjectURL(imageBlob);
+    console.log("Load  Cover Image response image URL +++++++++");
+    console.log(imageURL);
+
+    await context.dispatch("changeCoverImageService", {
+      target: imageURL,
+      media: imageURL
+    });
+    console.log("load cover image end");
+    return "test";
   },
   async loadPostsList(context, payload) {
     let response_ = null;
-    await fetch("http://localhost:3001/data", {
-      method: "GET"
+    await fetch(state.url_list_post, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        Authorization: `Bearer ${state.token}`
+      }
     })
       .then(response => {
         return response.json();
       })
       .then(response => {
-        console.log("test1");
-        console.log(response);
+        console.log("load list posts test1++++++++++++");
+        console.log(response.data.posts);
         if (!response) {
           throw "Cannot Found Media";
         }
         console.log(context);
         console.log(payload);
-        console.log("test3");
+        console.log("load list post test2 ++++++++++++");
         response_ = response;
         context.commit("retrievePostsListUser", {
-          posts: response.posts
+          posts: [...response.data.posts]
         });
       })
       .catch(error => {
-        //console.log("echec");
+        console.log("load post echec ++++++++");
         if (error instanceof TypeError) {
           console.log(error.message);
         } else {
           console.log(error);
         }
       });
-    return response_;
+    return response_.data.posts;
   },
   async loadUserPostIntro(context, payload) {
     let response_ = null;
-    await fetch(" http://localhost:3002/userPostIntro", {
-      method: "GET"
+    await fetch("https://fbdcbca26b4b.ngrok.io/api/v1/userIntro", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        Authorization: `Bearer ${state.token}`
+      }
     })
       .then(response => {
-        return response;
+        return response.json();
       })
       .then(response => {
-        console.log("test1 +++");
+        console.log("load user Intro Post test1 +++");
         console.log(response);
         if (!response) {
           throw "Cannot Found User Post Intro";
         }
         console.log(context);
         console.log(payload);
-        console.log("test3 +++");
-        response_ = response;
+        console.log("Load User Intro Post test3 +++");
+        response_ = response.data[0];
         context.commit("editPostUserIntro", {
           data: {
-            workedAt: response_.workedAt,
-            studiedAt: response_.studiedAt,
-            homeTown: response_.homeTown,
-            currentCity: response_.current,
-            numbersOfFollowers: response_.numbersOfFollowers
+            workedAt: response_.company_name,
+            studiedAt: response_.school_name,
+            homeTown: response_.position,
+            currentCity: response_.city_town,
+            numbersOfFollowers: 20
           }
         });
       })
       .catch(error => {
-        //console.log("echec");
+        console.log("Load User Intro Echec");
         if (error instanceof TypeError) {
           console.log(error.message);
         } else {
@@ -1619,23 +1958,16 @@ const mutations = {
     state.userData[0].userProfileOwner = payload.data;
   },
   changeProfilePicture(state, payload) {
-    //console.log("Profile Picture Updated");
-    //console.log(payload);
-    //console.log(state.userData);
     state.userData[0].createPost.profile_picture = payload.profilePicture;
     state.userData[0].createPost.profile_picture_localstorage =
       payload.profilePictureLocalStorage;
     state.userData[0].profilePicture = payload.profilePicture;
-    //state.userData[0].coverImage = payload.profilePictureLocalStorage;
-    //console.log(state.userData);
+    state.userData[0].target =
+      state.change_image_url + payload.profilePictureLocalStorage;
   },
   changeCoverImage(state, payload) {
-    //console.log("Profile Picture Updated");
-    //console.log(payload);
-    //console.log(state.userData);
     state.userData[0].createPost.coverImage = payload.coverImage;
     state.userData[0].coverImage = payload.coverImageLocalStorage;
-    //console.log(state.userData);
   },
   /**
    *
@@ -1704,6 +2036,9 @@ export default new Vuex.Store({
     },
     getUserPostIntro(state) {
       return state.userData[0].userProfileOwner;
+    },
+    getProfileAboutBiography(state) {
+      return state.userData[0].profile_about.biography;
     }
   },
   actions,

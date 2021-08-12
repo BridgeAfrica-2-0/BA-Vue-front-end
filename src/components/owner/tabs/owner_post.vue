@@ -232,7 +232,7 @@
       <b-row
         class="mt-4"
         v-for="item in $store.getters.getPostLists"
-        :key="item.post_id"
+        :key="item.id"
       >
         <b-col cols="12" class="mt-4">
           <b-row>
@@ -245,7 +245,7 @@
             </b-col>
             <b-col cols="10" md="11" class="pt-2">
               <h5 class="m-0 font-weight-bolder">
-                {{ item.profileName }}
+                {{ item.name }}
                 <span class="float-right">
                   <b-dropdown variant="outline-primary" size="sm" no-caret>
                     <template #button-content>
@@ -273,7 +273,7 @@
                   </b-dropdown>
                 </span>
               </h5>
-              <p class="duration">{{ item.timeCountDown }} Ago</p>
+              <p class="duration">{{ delay(item.created_at) }}</p>
             </b-col>
           </b-row>
           <b-row>
@@ -281,7 +281,7 @@
               <p class="post-text">
                 <read-more
                   more-str="read more"
-                  :text="item.content.details"
+                  :text="item.content"
                   link="#"
                   less-str="read less"
                   :max-chars="200"
@@ -290,28 +290,28 @@
             </b-col>
           </b-row>
           <b-row>
-            <b-col v-if="item.content.movies.length > 0" cols="12" class="mt-2">
-              <div v-for="movie in item.content.movies" :key="movie.target" class="">
-                <img
-                  class="img-fluid post-container "
-                  :src="movie.movie"
-                  alt="Photo1"
-                />
-              </div>
-            </b-col>
-            <b-col
-              v-if="item.content.movies.length <= 0"
-              cols="12"
-              class="mt-2"
-            >
-              <div class="">
-                <img
-                  class="img-fluid post-container "
-                  :src="$store.getters.getProfilePicture"
-                  alt="Photo1"
-                />
-              </div>
-            </b-col>
+            <!--            <b-col v-if="item.content.movies.length > 0" cols="12" class="mt-2">-->
+            <!--              <div v-for="movie in item.content.movies" :key="movie.target" class="">-->
+            <!--                <img-->
+            <!--                  class="img-fluid post-container "-->
+            <!--                  :src="movie.movie"-->
+            <!--                  alt="Photo1"-->
+            <!--                />-->
+            <!--              </div>-->
+            <!--            </b-col>-->
+            <!--            <b-col-->
+            <!--              v-if="item.content.movies.length <= 0"-->
+            <!--              cols="12"-->
+            <!--              class="mt-2"-->
+            <!--            >-->
+            <!--              <div class="">-->
+            <!--                <img-->
+            <!--                  class="img-fluid post-container "-->
+            <!--                  :src="$store.getters.getProfilePicture"-->
+            <!--                  alt="Photo1"-->
+            <!--                />-->
+            <!--              </div>-->
+            <!--            </b-col>-->
             <b-col class="mt-1">
               <span class="mr-3"
                 ><b-icon
@@ -319,7 +319,7 @@
                   variant="primary"
                   aria-hidden="true"
                 ></b-icon>
-                {{ item.likes.length }}</span
+                {{ $store.state.userData[0].likes.length }}</span
               >
               <span
                 ><b-icon
@@ -327,7 +327,7 @@
                   variant="primary"
                   aria-hidden="true"
                 ></b-icon>
-                {{ item.comments.length }}</span
+                {{ $store.state.userData[0].comments.length }}</span
               >
 
               <span>
@@ -356,7 +356,7 @@
         </b-col>
 
         <Comment
-          v-for="comment in item.comments"
+          v-for="comment in $store.state.userData[0].comments"
           :key="comment.comment_id"
           :comment="comment"
         />
@@ -367,6 +367,7 @@
 
 <script>
 import Comment from "../comment";
+import moment from "moment";
 
 export default {
   name: "postNetwork",
@@ -422,13 +423,16 @@ export default {
     //this.createPost.profile_picture = localStorage.getItem("profile_image");
     //console.log("Tester les listing des Posts");
     //console.log(this.$store.getters.getUser[0].posts);
+    console.log("load post list start +++++++++++");
     this.$store
       .dispatch("loadPostsList", null)
       .then(response => {
         console.log(response);
+        console.log("load post list finish +++++++++++");
       })
       .catch(error => {
         console.log(error);
+        console.log("load post list finish +++++++++++");
       });
   },
   methods: {
@@ -466,7 +470,6 @@ export default {
       if (file.files) {
         let reader = new FileReader();
         reader.onload = e => {
-
           result = e.target.result;
           //localStorage.setItem("cover_image", e.target.result);
           //this.user.cover_image = e.target.result;
@@ -545,6 +548,16 @@ export default {
         this.createPost.movies = [];
         this.createPost.postBusinessUpdate = "";
       }
+    },
+    delay(date) {
+      console.log(
+        "load post duration +++++++++++ " + moment(date).format('DD-MM-YYYY HH:MM:SS') + "+++++" + moment(new Date().toISOString().slice(0, 10)).format('DD-MM-YYYY HH:MM:SS')
+      );
+      moment.locale('en');
+      const datePass = moment(date).format('DD-MM-YYYY HH:MM:SS');
+      const dateActual = moment(new Date().toISOString().slice(0, 10)).format('DD-MM-YYYY HH:MM:SS');
+      //moment( moment(date).format('DD-MM-YYYY'),'DD-MM-YYYY').fromNow()
+      return  moment(datePass, 'DD-MM-YYYY').from( moment( dateActual, 'DD-MM-YYYY') ) ;
     }
   },
   computed: {

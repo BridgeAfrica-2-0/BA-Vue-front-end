@@ -274,17 +274,19 @@ export default {
     console.log("Load User Info");
     this.$store.dispatch('loadUserPostIntro', null)
             .then( response => {
-              console.log( 'test+++++ res')
+              console.log( 'Load User Intro test+++++ res')
+              console.log(response)
+              console.log( "Load User Intro Finish Loading" );
+              this.userProfileOwner = this.$store.getters.getUserPostIntro;
+              this.userProfileOwnerInput.workedAt = this.userProfileOwner.workedAt;
+              this.userProfileOwnerInput.studiedAt = this.userProfileOwner.studiedAt;
+              this.userProfileOwnerInput.homeTown = this.userProfileOwner.homeTown;
+              this.userProfileOwnerInput.currentCity = this.userProfileOwner.currentCity;
+              this.userProfileOwnerInput.numbersOfFollowers = this.userProfileOwner.numbersOfFollowers;
               return response
             })
             .catch( error => { console.log( error ) });
-    console.log( "Finish Loading" );
-    this.userProfileOwner = this.$store.getters.getUserPostIntro;
-    this.userProfileOwnerInput.workedAt = this.userProfileOwner.workedAt;
-    this.userProfileOwnerInput.studiedAt = this.userProfileOwner.studiedAt;
-    this.userProfileOwnerInput.homeTown = this.userProfileOwner.homeTown;
-    this.userProfileOwnerInput.currentCity = this.userProfileOwner.currentCity;
-    this.userProfileOwnerInput.numbersOfFollowers = this.userProfileOwner.numbersOfFollowers;
+
   },
   mounted() {
     //this.userProfileOwner = this.$store.getters.getUserPostIntro;

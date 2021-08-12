@@ -3,7 +3,11 @@
     <b-container fluid class="p-0 gradient">
       <!-- Owner Header Page Up-->
       <div class="container-flex">
-        <img :src="$store.getters.getCoverImage" class="img-fluid  banner" alt="Kitten" />
+        <img
+          :src="$store.getters.getCoverImage"
+          class="img-fluid  banner"
+          alt="Kitten"
+        />
       </div>
 
       <!-- Owner Header Page Down -->
@@ -182,41 +186,38 @@ export default {
     this.$store
       .dispatch("loadProfilePicture", null)
       .then(response => {
-        console.log( "test2")
-        //console.log( response )
+        console.log("load profile test2 +++ +++");
+        console.log(response);
         if (!response) {
-          //console.log("erreur liée au serveur");
+          console.log("load profile erreur liée au serveur");
           this.isLoading = true;
         }
-        console.log("Load is Finish");
+        console.log("load profile Load is Finish++++++++++++");
         this.isLoading = false;
       })
       .catch(error => {
         this.isLoading = true;
-        console.log("erreur lié au navigateur ");
-        console.log( error) ;
+        console.log("load profile erreur lié au navigateur ");
+        console.log(error);
       });
     this.$store
-            .dispatch("loadCoverImage", null)
-            .then(response => {
-              console.log( "test2")
-              console.log( response )
-              if (!response) {
-                console.log("erreur liée au serveur");
-                this.isLoading = true;
-              }
-              console.log("Load is Finish");
-              this.isLoading = false;
-            })
-            .catch(error => {
-              this.isLoading = true;
-              //console.log("erreur lié au navigateur ");
-              console.log( error) ;
-            });
-    this.user.profile_picture = this.$store.getters.getProfilePicture
-    this.user.cover_image = this.$store.getters.getUser[0].coverImage;
-    this.user.profile_name = this.$store.getters.getUser[0].profileName;
-    this.user.number_of_follower = this.$store.getters.getUser[0].numbersOfFollowers;
+      .dispatch("loadCoverImage", null)
+      .then(response => {
+        console.log("load cover image response");
+        console.log(response);
+        if (!response) {
+          console.log("load cover image erreur liée au serveur");
+          this.isLoading = true;
+        }
+        console.log("++++++++++load cover image Load is Finish");
+        this.isLoading = false;
+      })
+      .catch(error => {
+        this.isLoading = true;
+        console.log("load cover image erreur lié au navigateur ");
+        console.log(error);
+      });
+
     this.isLoading = true;
   },
   methods: {
@@ -225,22 +226,27 @@ export default {
      * @param event
      */
     onFileSelected(event) {
-      //console.log(this.$refs);
-      //console.log("File Input Passed");
+      console.log("File Input Passed");
       let file = event.target;
-      let fileImage = null;
       if (file.files) {
-        var reader = new FileReader();
-        reader.onload = e => {
-          localStorage.setItem("profile_image", e.target.result);
-          //this.user.profile_picture = e.target.result;
-        };
-        fileImage = file.files[0];
         const fd = new FormData();
-        fd.append("file", fileImage, fileImage.name);
-        //console.log(fileImage);
-        reader.readAsDataURL(file.files[0]);
-        this.$store.dispatch("changeProfilePicture", { profilePicture: file });
+        fd.append('media', file.files[0]);
+        this.$store
+          .dispatch("changeProfilePicture", { profilePicture: fd })
+          .then(response => {
+            console.log("change cover image call");
+            console.log(response);
+          })
+          .catch(error => {
+            if (error instanceof TypeError) {
+              console.log("change profile picture erreur lie au navigateur ");
+              console.log(error.message);
+            } else {
+              console.log("change profile picture erreur lie au serveur");
+              console.log(error);
+            }
+            console.log( { err: error })
+          });
       }
       this.$refs["my-modal"].hide();
     },
@@ -250,15 +256,25 @@ export default {
       let file = event.target;
       let fileImage = null;
       if (file.files) {
-        var reader = new FileReader();
-        reader.onload = e => {
-          localStorage.setItem("cover_image", e.target.result);
-          //this.user.cover_image = e.target.result;
-        };
+        const fd = new FormData();
         fileImage = file.files[0];
-        this.$store.dispatch("changeCoverImage", { cover_image: file });
+        fd.append('media', fileImage)
+        this.$store.dispatch("changeCoverImage", { cover_image: fd })
+                .then(response => {
+          console.log("change cover image call");
+          console.log(response);
+        })
+                .catch(error => {
+                  if (error instanceof TypeError) {
+                    console.log("change cover image erreur lie au navigateur ");
+                    console.log(error.message);
+                  } else {
+                    console.log("change cover image erreur lie au serveur");
+                    console.log(error);
+                  }
+                  console.log( { err: error })
+                });
         console.log(fileImage);
-        reader.readAsDataURL(file.files[0]);
       }
       this.$refs["my-modal"].hide();
     }

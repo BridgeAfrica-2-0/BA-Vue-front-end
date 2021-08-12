@@ -1,24 +1,11 @@
 <template>
   <div class="container" style=" ">
-
-
- 
-
-        <div class="container">
-
-          <b-row>
+    <div class="container">
+      <b-row>
         <b-col>
           <div class="b-bottomn f-left">
-            <b-form-checkbox
-              id="checkbox-1"
-              v-model="status"
-              name="checkbox-1"
-              value="accepted"
-              class="m-left-top username"
-              unchecked-value="not_accepted"
-            >
-              Select All
-            </b-form-checkbox>
+            <input v-model="selectAll" @click="selectall" type="checkbox" />
+            Select All
           </div>
         </b-col>
         <b-col>
@@ -26,72 +13,139 @@
             <b-button variant="primary" class="a-button-l duration">
               Mark as Read</b-button
             >
+            <b-button variant="primary" class="a-button-l duration ml-1">
+              Delete</b-button
+            >
           </div>
         </b-col>
       </b-row>
       <br />
 
- 
-       <b-row>
-        <b-col cols="12" class="mr-3" v-for="i in 6" :key="i">
+      <b-row>
+        <b-col
+          cols="12"
+          class="mr-3"
+          v-for="(notification, index) in notifications"
+          :key="index"
+        >
           <p class="">
             <span style="display:inline-flex">
-               <b-form-checkbox
-              id="checkbox-1"
-              v-model="status"
-              name="checkbox-1"
-              value="accepted"
-              class="m-left-top"
-              unchecked-value="not_accepted"
-            >
-             
-            </b-form-checkbox>
+              <input
+                @click="select(notification)"
+                v-model="notification.selected"
+                type="checkbox"
+              />
               <b-avatar
                 class="d-inline-block profile-pic"
                 variant="primary"
-                src="https://business.bridgeafrica.info/assets/img/team/3.png"
-               
+                :src="notification.profile"
               ></b-avatar>
               <h6 class="m-0  d-inline-block ml-2 username">
-                Mapoure Agrobusiness
-                 <p class="duration">1hr</p>
+                {{ notification.name }}
+                <p class="duration">1hr</p>
               </h6>
             </span>
-            <span class="float-right mt-1">
-             
-
-            </span>
+            <span class="float-right mt-1"> </span>
           </p>
 
-
-           <p class="text">
-            Lorem Ipsum is this is just a dummy text to post simply dummy text
-            of the printing and typesetting industry. Lorem Ipsum has been the
-            industry's standard dummy text ever since the 1500s, Lorem Ipsum is
-            simply dummy text of the printing and typesetting industry. Lorem
-            Ipsum has been the industry's standard dummy text ever since the
-            1500s,
+          <p class="text">
+            {{ notification.message }}
           </p>
 
-          
           <hr width="100%" />
         </b-col>
-
-        </b-row>
-        </div>
+      </b-row>
+    </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: "notification"
+  name: "notification",
+  data: () => ({
+    notifications: [
+      {
+        id: 1,
+        name: "Mapoure Agrobusiness",
+        profile: "https://business.bridgeafrica.info/assets/img/team/3.png",
+        message:
+          "  Lorem Ipsum is this is just a dummy text to post simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, Lorem Ipsum is simply dummy text of the printing and typesetting industry. LoremIpsum has been the industry's standard dummy text ever since the1500s,",
+        time: "1hr",
+        selected: false,
+      },
+      {
+        id: 2,
+        name: "Mapoure Agrobusiness",
+        profile: "https://business.bridgeafrica.info/assets/img/team/3.png",
+        message:
+          "  Lorem Ipsum is this is just a dummy text to post simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, Lorem Ipsum is simply dummy text of the printing and typesetting industry. LoremIpsum has been the industry's standard dummy text ever since the1500s,",
+        time: "1hr",
+        selected: false,
+      },
+      {
+        id: 3,
+        name: "Mapoure Agrobusiness",
+        profile: "https://business.bridgeafrica.info/assets/img/team/3.png",
+        message:
+          "  Lorem Ipsum is this is just a dummy text to post simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, Lorem Ipsum is simply dummy text of the printing and typesetting industry. LoremIpsum has been the industry's standard dummy text ever since the1500s,",
+        time: "1hr",
+        selected: false,
+      },
+      {
+        id: 4,
+        name: "Mapoure Agrobusiness",
+        profile: "https://business.bridgeafrica.info/assets/img/team/3.png",
+        message:
+          "  Lorem Ipsum is this is just a dummy text to post simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, Lorem Ipsum is simply dummy text of the printing and typesetting industry. LoremIpsum has been the industry's standard dummy text ever since the1500s,",
+        time: "1hr",
+        selected: false,
+      },
+      {
+        id: 5,
+        name: "Mapoure Agrobusiness",
+        profile: "https://business.bridgeafrica.info/assets/img/team/3.png",
+        message:
+          "  Lorem Ipsum is this is just a dummy text to post simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, Lorem Ipsum is simply dummy text of the printing and typesetting industry. LoremIpsum has been the industry's standard dummy text ever since the1500s,",
+        time: "1hr",
+        selected: false,
+      },
+    ],
+    selected: [],
+    selectAll: false,
+  }),
+  methods: {
+    // select all the notifications
+    selectall() {
+      if (!this.selectAll) {
+        this.notifications.forEach((notification) => {
+          notification.selected = true;
+          this.selected.push(notification);
+        });
+      } else {
+        this.notifications.forEach((notification) => {
+          notification.selected = false;
+          this.selected = [];
+        });
+      }
+    },
+    select(notification) {
+      if (this.selected.length > 0) {
+        this.selected = [];
+        this.selected.forEach((note) => {
+          if (note.selected) {
+            this.selected.push(note);
+          }
+        });
+      } else {
+        this.selected.push(notification);
+      }
+      console.log(this.selected);
+    },
+  },
 };
 </script>
 
 <style scoped>
-
-
-
 .f-left {
   float: left;
 }
@@ -112,99 +166,70 @@ export default {
   margin-left: -20px;
 }
 
-
-
-
-.m-left-top{
+.m-left-top {
   margin-left: -15px;
 }
-.p-notifaction{
-
+.p-notifaction {
   padding: 30px;
 }
 
-h5{
-
+h5 {
   font-size: 15px;
 }
 
 @media screen and (min-width: 768px) {
-  
-  .btn{
-     font-size: 16px;
+  .btn {
+    font-size: 16px;
   }
 }
 
 @media screen and (max-width: 768px) {
-  
-  .btn{
-     font-size: 12px;
+  .btn {
+    font-size: 12px;
+  }
+}
+</style>
+
+<style>
+@media only screen and (min-width: 768px) {
+  .username {
+    font-size: 16px !important;
+  }
+
+  .duration {
+    font-size: 14px;
+    font-weight: 100;
+  }
+
+  .text {
+    font-size: 14px;
+  }
+
+  .profile-pic {
+    width: 64px !important;
+    height: 64px !important;
+    margin-top: -5px;
   }
 }
 
-
-
-</style>
-
-
-<style> 
-
-@media only screen and (min-width: 768px) {
-
-
-.username{
-   
-   font-size: 16px  !important;
-  
-  
-}
-
-.duration{
-  font-size: 14px;
-  font-weight: 100;
-
-}
-
-.text{
-  font-size: 14px;
-}
-
-.profile-pic{
-  width: 64px !important;
-  height: 64px  !important;
-  margin-top: -5px;
-}
-}
-
-
-
 @media only screen and (max-width: 768px) {
+  .username {
+    font-size: 14px !important;
+  }
 
+  .duration {
+    font-size: 12px;
+    font-weight: 100;
+  }
 
-.username{
-   
-   font-size: 14px  !important;
-     
+  .text {
+    font-size: 12px;
+  }
+
+  .profile-pic {
+    width: 30px !important;
+    margin-top: -5px;
+    height: 30px !important;
+  }
 }
-
-.duration{
-  font-size: 12px;
-   font-weight: 100;
-
-}
-
-.text{
-  font-size: 12px;
-}
-
-
-
-.profile-pic{
-  width: 30px  !important;
-   margin-top: -5px;
-  height: 30px  !important;
-}
-
-}
-
-   </style>
+</style>

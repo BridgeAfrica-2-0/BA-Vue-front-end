@@ -6,7 +6,7 @@ import businessOwner from "./businessOwner";
 import axios from "axios";
 
 Vue.use(Vuex);
-axios.defaults.baseURL = "http://team2dev.maxinemoffett.com/api/v1/";
+axios.defaults.baseURL = "https://8c04b4bab7aa.ngrok.io/api/v1/";
 
 const getDefaultState = () => {
   return {
@@ -731,7 +731,21 @@ const getDefaultState = () => {
         Localisation: "",
         Resume: ""
       }
-    ]
+    ],
+    businessdata: [
+      {
+        id: "",
+        businessname: "kharlsefni business",
+        email: "",
+        password: "",
+        profileName: "Kharlsefni bussiness",
+        profilePicture: "https://i.wifegeek.com/200426/d17ce9a0.jpg",
+        coverImage: "https://i.wifegeek.com/200426/81e24a47.jpg",
+        numbersOfFollowers: 30,
+        businesswebpage: ""
+      }
+    ],
+    pdetails: ""
   };
 };
 
@@ -739,6 +753,13 @@ const getDefaultState = () => {
 const state = getDefaultState();
 
 const actions = {
+  getpdetails({ commit }) {
+    return axios.get("profileCount/1").then(function({ data }) {
+      commit("SET_PDETAILS", data.data);
+      console.log(data);
+    });
+  },
+
   resetCartState({ commit }) {
     commit("resetState");
   },
@@ -797,7 +818,7 @@ const actions = {
         return response.json();
       })
       .then(response => {
-        console.log(response);
+        // console.log(response);
       });
   },
   /**
@@ -1131,6 +1152,10 @@ const actions = {
 };
 
 const mutations = {
+  SET_PDETAILS(state, pdetails) {
+    state.pdetails = pdetails;
+  },
+
   resetState(state) {
     // Merge rather than replace so we don't lose observers
     // https://github.com/vuejs/vuex/issues/1118
@@ -1257,40 +1282,58 @@ const mutations = {
   }
 };
 
+const getters = {
+  recoverPassData: state => {
+    return state.recoverData;
+  },
+
+  ppdetails: state => {
+    return state.pdetails;
+  },
+
+  doneTodos: state => {
+    return state.todos.filter(todo => todo.done);
+  },
+  loggedIn(state) {
+    return state.login;
+  },
+  getUser(state) {
+    return state.userData;
+  },
+  getBusiness(state) {
+    return state.businessdata;
+  },
+  getBusinessname(state) {
+    console.log(state);
+    return state.businessdata.businessname;
+  },
+  getService(state) {
+    return state.service;
+  },
+  getUsers(state) {
+    return state.users;
+  },
+  getProfilePicture(state) {
+    return state.userData[0].createPost.profile_picture_localstorage;
+  },
+  getProfilePictureu(state) {
+    console.log(state);
+    return "https://www.fivesquid.com/pics/t2/1594480468-145752-1-1.jpg";
+  },
+  getBusinessUserPost(state) {
+    return state.userData[0].business;
+  },
+  getCommunautyUserPost(state) {
+    return state.userData[0].communauty;
+  },
+  getPostLists(state) {
+    return state.userData[0].posts;
+  }
+};
+
 export default new Vuex.Store({
   state,
-  getters: {
-    recoverPassData: state => {
-      return state.recoverData;
-    },
-    doneTodos: state => {
-      return state.todos.filter(todo => todo.done);
-    },
-    loggedIn(state) {
-      return state.login;
-    },
-    getUser(state) {
-      return state.userData;
-    },
-    getService(state) {
-      return state.service;
-    },
-    getUsers(state) {
-      return state.users;
-    },
-    getProfilePicture(state) {
-      return state.userData[0].createPost.profile_picture_localstorage;
-    },
-    getBusinessUserPost(state) {
-      return state.userData[0].business;
-    },
-    getCommunautyUserPost(state) {
-      return state.userData[0].communauty;
-    },
-    getPostLists(state) {
-      return state.userData[0].posts;
-    }
-  },
+  getters,
   actions,
   mutations
 });

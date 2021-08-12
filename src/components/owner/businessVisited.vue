@@ -59,7 +59,7 @@
               </div>
             </div>
             <b-button
-              class="ml-2 mt-2 position-relative"
+              class="ml-2 mt-2 position-relative add-btn"
               type="submit"
               variant="primary"
               >Add</b-button
@@ -92,6 +92,8 @@ export default {
   display: flex;
 }
 
+@media only screen and (max-width: 768px) {
+}
 .dropdown-style {
   position: relative;
   left: 320px;

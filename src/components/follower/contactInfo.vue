@@ -2,7 +2,7 @@
   <div class="txt">
     <b class="contact">Contact Infomation</b>
     <hr />
-    <div class="row">
+    <div class="contact row" >
       <div class="col">
         Mobile Phone:
       </div>

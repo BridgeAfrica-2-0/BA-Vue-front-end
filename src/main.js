@@ -20,6 +20,11 @@ import VueSocialauth from "vue-social-auth";
 import firebase from "firebase";
 Vue.use(Vuex);
 Vue.use(VueAxios, axios);
+import IconifyIcon from '@iconify/vue';
+import homeIconData from '@iconify-icons/mdi-light/home';
+IconifyIcon.addIcon('home', homeIconData);
+import ReadMore from 'vue-read-more';
+
 Vue.use(ReadMore);
 IconifyIcon.addIcon("home", homeIconData);
 Vue.prototype.$axios = axios;
@@ -53,14 +58,30 @@ messaging
 Vue.use(VueSocialauth, {
   providers: {
     facebook: {
-      clientId: "513850343026598",
-      client_secret: "f126ad31262665d481b6080f7f5c645f",
-      redirectUri: "http//:localhost:8080/login",
+      clientId: process.env.VUE_APP_FACEBOOK_CLIENT_ID,
+      client_secret: process.env.VUE_APP_FACEBOOK_CLIENT_SECRETE,
+      redirectUri: process.env.VUE_APP_FACEBOOK_RETURN_URL
     },
-  },
+    google: {
+      clientId: process.env.VUE_APP_GOOGLE_CLIENT_ID,
+      client_secret: process.env.VUE_APP_GOOGLE_CLIENT_SECRETE,
+      redirectUri:process.env.VUE_APP_GOOGLE_RETURN_URL
+    }
+  }
 });
 
-import VueMaterial from "vue-material";
+
+
+
+import FlashMessage from '@smartweb/vue-flash-message';
+Vue.use(FlashMessage);
+
+
+
+
+import VueMaterial from 'vue-material'
+
+
 //import 'vue-material/dist/vue-material.min.css'
 //import 'vue-material/dist/theme/default.css'
 
@@ -119,7 +140,7 @@ new Vue({
   store,
 
   created() {
-    const userInfo = localStorage.getItem("user");
+    const userInfo = localStorage.getItem('user')
     if (userInfo) {
       const userData = JSON.parse(userInfo);
       this.$store.commit("auth/setUserData", userData);

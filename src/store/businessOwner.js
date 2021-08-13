@@ -7,6 +7,9 @@ export default {
     loader: false,
     success: false,
     notifications: [],
+    checked: false,
+    btnDelLoader: false,
+    btnReadLoader: false,
   },
   getters: {
     // sending networks
@@ -19,6 +22,14 @@ export default {
     getLoader(state) {
       return state.loader;
     },
+    // sending button loader value
+    getBtnDelLoader(state) {
+      return state.btnDelLoader;
+    },
+    // sending button loader value
+    getBtnReadLoader(state) {
+      return state.btnReadLoader;
+    },
     // sending success value
     getSuccess(state) {
       return state.success;
@@ -26,18 +37,29 @@ export default {
 
     // Sending notifications
     sendNotifications(state) {
-      return state.notifications;
+      if (state.notifications.length > 0) {
+        return state.notifications;
+      }
+    },
+
+    // sending checked value
+    sendChecked(state) {
+      return state.checked;
     },
   },
   mutations: {
     setNetworks(state, payload) {
       state.networks = payload;
     },
-    updateNetwork(state, payload) {
-      state.networks = [];
-    },
     setLoader(state, payload) {
       state.loader = payload;
+    },
+    setBtnDelLoader(state, payload) {
+      state.btnDelLoader = payload;
+    },
+
+    setBtnReadLoader(state, payload) {
+      state.btnReadLoader = payload;
     },
     setSuccess(state, payload) {
       state.success = payload;
@@ -47,12 +69,6 @@ export default {
     setNotifications(state, payload) {
       state.notifications = payload;
     },
-    // Setting Read property
-    setReadNotification(state, payload) {
-      // Setting Read all gorithm
-    },
-    // delete notifications
-    deleteNotifications(state, payload){}
   },
   actions: {
     // temporal signin to get token for developement purpose
@@ -68,6 +84,7 @@ export default {
     },
     // Get networks from the backend
     async getNetworks({ dispatch, commit }) {
+      commit("setLoader", true);
       await dispatch("signIn");
       await axios
         .get("network", {
@@ -126,16 +143,92 @@ export default {
     },
 
     // Getting the notifications
-    async getNotifications({ commit }, payload) {
-      commit("setNotifications", payload);
+    async getNotifications({ dispatch, commit }) {
+      commit("setLoader", true);
+      await dispatch("signIn");
+      await axios
+        .get("notification", {
+          headers: {
+            Authorization: "Bearer " + localStorage.getItem("access_token"),
+          },
+        })
+        .then((res) => {
+          commit("setLoader", false);
+          commit("setSuccess", true);
+          commit("setNotifications", res.data.data);
+          setTimeout(() => {
+            commit("setSuccess", false);
+          }, 2000);
+        })
+        .catch((err) => {
+          console.log("Unauthorized request !!");
+        });
     },
 
     // Sending a read request
-    async readNotifiactions({ commit }, payload) {},
+    async readNotifiactions({ dispatch, commit }, payload) {
+      commit("setBtnReadLoader", true);
+      let items = {
+        ids: [],
+      };
+      let objId = {
+        id: null,
+      };
 
-    // Delete Notifications
-    async deleteNotifications({ commit }, payload) {},
+      payload.forEach((element) => {
+        objId.id = element.id;
+        items.ids.push(objId);
+      });
+      await axios
+        .post("notification/mark-read", items, {
+          headers: {
+            Authorization: "Bearer " + localStorage.getItem("access_token"),
+          },
+        })
+        .then(() => {
+          commit("setBtnReadLoader", false);
+          dispatch("getNotifications");
+        });
+    },
 
-    
+    // Delete All Notifications
+    async deleteNotifications({ dispatch, commit }, payload) {
+      commit("setBtnDelLoader", true);
+      let items = {
+        ids: [],
+      };
+      let objId = {
+        id: null,
+      };
+
+      payload.forEach((element) => {
+        objId.id = element.id;
+        items.ids.push(objId);
+      });
+
+      console.log(items);
+      await axios
+        .post("notification/deleteAll", items, {
+          headers: {
+            Authorization: "Bearer " + localStorage.getItem("access_token"),
+          },
+        })
+        .then(() => {
+          commit("setBtnDelLoader", false);
+          dispatch("getNotifications");
+        });
+    },
+    // delete a single notification
+    delete({ dispatch }, id) {
+      axios
+        .delete(`notification/${id}`, {
+          headers: {
+            Authorization: "Bearer " + localStorage.getItem("access_token"),
+          },
+        })
+        .then(() => {
+          dispatch("getNotifications");
+        });
+    },
   },
 };

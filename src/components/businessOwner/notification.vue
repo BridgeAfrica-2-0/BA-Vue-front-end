@@ -4,16 +4,26 @@
       <b-row>
         <b-col>
           <div class="b-bottomn f-left">
-            <input v-model="selectAll" @click="selectall" type="checkbox" />
+            <input @click="selectall" type="checkbox" />
             Select All
           </div>
         </b-col>
         <b-col>
           <div class="b-bottomn f-right">
-            <b-button variant="primary" class="a-button-l duration">
+            <b-button
+              @click="readAll(selected)"
+              variant="primary"
+              class="a-button-l duration"
+            >
+              <b-spinner v-if="readLoader" small type="grow"></b-spinner>
               Mark as Read</b-button
             >
-            <b-button variant="primary" class="a-button-l duration ml-1">
+            <b-button
+              @click="deleteAll(selected)"
+              variant="primary"
+              class="a-button-l duration ml-1"
+            >
+              <b-spinner v-if="deleteLoader" small type="grow"></b-spinner>
               Delete</b-button
             >
           </div>
@@ -25,34 +35,47 @@
         <b-col
           cols="12"
           class="mr-3"
-          v-for="(notification, index) in notifications"
+          v-for="(notification, index) in getNotificationsStore"
           :key="index"
         >
           <p class="">
             <span style="display:inline-flex">
-              <input
-                @click="select(notification)"
-                v-model="notification.selected"
-                type="checkbox"
-              />
+              <input @click="select(notification, index)" type="checkbox" />
               <b-avatar
                 class="d-inline-block profile-pic"
                 variant="primary"
-                :src="notification.profile"
+                src="https://business.bridgeafrica.info/assets/img/team/3.png"
               ></b-avatar>
               <h6 class="m-0  d-inline-block ml-2 username">
-                {{ notification.name }}
-                <p class="duration">1hr</p>
+                Mapoure Agrobusiness
+                <p class="duration">{{ notification.created_at }}</p>
               </h6>
             </span>
-            <span class="float-right mt-1"> </span>
+            <span class="float-right mt-1">
+              <fas-icon
+                @click="deleteOne(notification.id)"
+                class="primary delete ml-5"
+                :icon="['fas', 'trash']"
+            /></span>
           </p>
 
           <p class="text">
-            {{ notification.message }}
+            <b v-if="notification.mark_as_read == 0">
+              {{ notification.notification_text }}</b
+            >
+            <span v-if="notification.mark_as_read == 1">
+              {{ notification.notification_text }}</span
+            >
           </p>
 
           <hr width="100%" />
+        </b-col>
+
+        <b-col v-if="loader" class="loader">
+          <b-spinner
+            style="width: 7rem; height: 7rem;"
+            variant="primary"
+          ></b-spinner>
         </b-col>
       </b-row>
     </div>
@@ -74,92 +97,79 @@ export default {
         time: "1hr",
         selected: false,
       },
-      {
-        id: 2,
-        name: "Mapoure Agrobusiness",
-        profile: "https://business.bridgeafrica.info/assets/img/team/3.png",
-        message:
-          "  Lorem Ipsum is this is just a dummy text to post simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, Lorem Ipsum is simply dummy text of the printing and typesetting industry. LoremIpsum has been the industry's standard dummy text ever since the1500s,",
-        time: "1hr",
-        selected: false,
-      },
-      {
-        id: 3,
-        name: "Mapoure Agrobusiness",
-        profile: "https://business.bridgeafrica.info/assets/img/team/3.png",
-        message:
-          "  Lorem Ipsum is this is just a dummy text to post simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, Lorem Ipsum is simply dummy text of the printing and typesetting industry. LoremIpsum has been the industry's standard dummy text ever since the1500s,",
-        time: "1hr",
-        selected: false,
-      },
-      {
-        id: 4,
-        name: "Mapoure Agrobusiness",
-        profile: "https://business.bridgeafrica.info/assets/img/team/3.png",
-        message:
-          "  Lorem Ipsum is this is just a dummy text to post simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, Lorem Ipsum is simply dummy text of the printing and typesetting industry. LoremIpsum has been the industry's standard dummy text ever since the1500s,",
-        time: "1hr",
-        selected: false,
-      },
-      {
-        id: 5,
-        name: "Mapoure Agrobusiness",
-        profile: "https://business.bridgeafrica.info/assets/img/team/3.png",
-        message:
-          "  Lorem Ipsum is this is just a dummy text to post simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, Lorem Ipsum is simply dummy text of the printing and typesetting industry. LoremIpsum has been the industry's standard dummy text ever since the1500s,",
-        time: "1hr",
-        selected: false,
-      },
     ],
     selected: [],
-    selectAll: false,
   }),
+  beforeMount() {
+    this.getNotifications();
+  },
+  computed: {
+    getNotificationsStore() {
+      return this.sendNotifications();
+    },
+    loader() {
+      return this.getLoader();
+    },
+    deleteloader() {
+      return this.getDelLoader;
+    },
+    readloader() {
+      return this.getReadLoader;
+    },
+  },
   methods: {
     ...mapGetters({
       sendNotifications: "businessOwner/sendNotifications",
       getLoader: "businessOwner/getLoader",
+      getDelLoader: "businessOwner/getDelLoader",
+      getReadLoader: "businessOwner/getReadLoader",
       getSuccess: "businessOwner/getSuccess",
     }),
 
     // getting actions from the store
     ...mapActions({
       getNotifications: "businessOwner/getNotifications",
-      readNotifiactions: "businessOwner/getNetworks",
-      deleteNotification: "businessOwner/editNetwork",
+      readNotifiactions: "businessOwner/readNotifiactions",
+      deleteNotifications: "businessOwner/deleteNotifications",
+      delete: "businessOwner/delete",
     }),
+
+    readAll(data) {
+   
+      this.readNotifiactions(data);
+    },
+    deleteAll(data) {
+      this.checked = false;
+      this.deleteNotifications(data);
+    },
+
+    deleteOne(id) {
+      this.delete(id);
+    },
 
     // select all the notifications
     selectall() {
-      if (!this.selectAll) {
-        this.notifications.forEach((notification) => {
-          notification.selected = true;
-          this.selected.push(notification);
-        });
-      } else {
-        this.notifications.forEach((notification) => {
-          notification.selected = false;
-          this.selected = [];
-        });
-      }
-    },
-    select(notification) {
-      if (this.selected.length > 0) {
-        this.selected = [];
-        this.selected.forEach((note) => {
-          if (note.selected) {
-            this.selected.push(note);
-          }
-        });
-      } else {
-        this.selected.push(notification);
-      }
+      this.getNotificationsStore.forEach((element) => {
+        this.selected.push(element);
+      });
       console.log(this.selected);
+    },
+    select(notification, index) {
+      if (this.selected[index]) {
+        this.selected.splice(index, 1);
+        return;
+      }
+      this.selected.push(notification);
     },
   },
 };
 </script>
 
 <style scoped>
+.loader {
+  display: flex;
+  justify-content: center;
+}
 .f-left {
   float: left;
 }
@@ -189,6 +199,10 @@ export default {
 
 h5 {
   font-size: 15px;
+}
+
+.delete {
+  cursor: pointer;
 }
 
 @media screen and (min-width: 768px) {

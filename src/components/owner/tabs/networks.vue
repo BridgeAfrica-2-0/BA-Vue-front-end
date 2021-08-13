@@ -247,7 +247,7 @@
             class="mb-0"
           >
             <b-form-checkbox
-              :v-model="createdNetwork.allow_business == '0' ? false : true"
+              v-model="dat"
               name="check-button"
               switch
             >
@@ -305,6 +305,7 @@ export default {
       showModal: false,
       selectedFile: "",
       editNet: false,
+      dat: true,
       createdNetwork: {
         id: null,
         business_id: "",
@@ -362,7 +363,17 @@ export default {
       if (this.editNet) {
         this.editNetwork(this.createdNetwork);
       } else {
-        this.addNetwork(this.createdNetwork);
+        const fd = new FormData();
+        fd.append("_method", "PUT");
+        fd.append("name", this.createdNetwork.name);
+        fd.append("business_id", this.createdNetwork.business_id);
+        fd.append("business_address", this.createdNetwork.business_address);
+        fd.append("description", this.createdNetwork.description);
+        fd.append("purpose", this.createdNetwork.purpose);
+        fd.append("special_needs", this.createdNetwork.special_needs);
+        fd.append("business_image", this.createdNetwork.business_image);
+        fd.append("allow_busines", this.createdNetwork.allow_busines);
+        this.addNetwork(fd);
       }
     },
 

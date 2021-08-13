@@ -23,6 +23,7 @@
     "core-js": "^3.6.5",
     "emoji-vue": "^0.2.4",
     "ly-tab": "^2.1.2",
+    "moment": "^2.29.1",
     "node-sass": "^5.0.0",
     "register-service-worker": "^1.7.1",
     "sass-loader": "^11.0.1",
@@ -67,7 +68,6 @@
     "prettier": "^1.19.1",
     "vue-template-compiler": "^2.6.11"
   },
-
   "eslintConfig": {
     "root": true,
     "env": {

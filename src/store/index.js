@@ -9,21 +9,18 @@ Vue.use(Vuex);
 
 const getDefaultState = () => {
   return {
-    url_load_profile_picture_changed:
-      "https://88032cb0fda9.ngrok.io/api/v1/download?file_name=",
+    url_base: "https://8822d8bd2582.ngrok.io",
+    url_load_profile_picture_changed: "/api/v1/download?file_name=",
     url_load_profile_picture:
-      "https://88032cb0fda9.ngrok.io/api/v1/download?file_name=public/media/photos/z7aooJV1XnDVTpRSfPGOUj7sjm0trGVJCiNFS7Ef.jpg",
-    url_change_profile_picture: "https://88032cb0fda9.ngrok.io/api/v1/upload",
-    change_image_url:
-      "https://88032cb0fda9.ngrok.io/api/v1/download?file_name=",
-    url_create_post: "https://88032cb0fda9.ngrok.io/api/v1/post",
-    url_list_post: "https://88032cb0fda9.ngrok.io/api/v1/post",
-    url_user_infos: "https://88032cb0fda9.ngrok.io/api/v1/userIntro",
-    url_update_user_infos: "https://88032cb0fda9.ngrok.io/api/v1/userIntro?",
-    url_load_user_biography:
-      "https://88032cb0fda9.ngrok.io/api/v1/userIntro/biography",
-    url_update_biography:
-      "https://88032cb0fda9.ngrok.io/api/v1/userIntro/biography?",
+      "/api/v1/download?file_name=public/media/photos/z7aooJV1XnDVTpRSfPGOUj7sjm0trGVJCiNFS7Ef.jpg",
+    url_change_profile_picture: "/api/v1/upload",
+    change_image_url: "/api/v1/download?file_name=",
+    url_create_post: "/api/v1/post",
+    url_list_post: "/api/v1/post",
+    url_user_infos: "/api/v1/userIntro",
+    url_update_user_infos: "/api/v1/userIntro?",
+    url_load_user_biography: "/api/v1/userIntro/biography",
+    url_update_biography: "/api/v1/userIntro/biography?",
     recoverData: "",
     login: false,
     isToi: false,
@@ -1148,7 +1145,7 @@ const getDefaultState = () => {
         },
         profile_about: {
           biography: {
-            info_access: "private",
+            info_access: null,
             description:
               "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis, aliquid cupiditate fugit similique laboriosam, expedita, voluptatibus dolorem atlibero ipsam illo molestiae. Voluptates quisquam vitae, aperiam voluptatem ad enim ducimus praesentium fuga quas unde ea quasi obcaecati eumlaboriosam eos nesciunt exercitationem voluptatibus cupiditate sunt totam?Dolor voluptatem repudiandae quos." +
               "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis, aliquid cupiditate fugit similique laboriosam, expedita, voluptatibus dolorem atlibero ipsam illo molestiae. Voluptates quisquam vitae, aperiam voluptatem ad enim ducimus praesentium fuga quas unde ea quasi obcaecati eumlaboriosam eos nesciunt exercitationem voluptatibus cupiditate sunt totam?Dolor voluptatem repudiandae quos." +
@@ -1292,7 +1289,8 @@ const actions = {
     });
 
     console.log(
-      state.url_update_user_infos +
+      state.url_base +
+        state.url_update_user_infos +
         "companyName=" +
         payload.workedAt +
         "address=" +
@@ -1303,6 +1301,7 @@ const actions = {
         payload.studiedAt
     );
     const url =
+      state.url_base +
       state.url_update_user_infos +
       "companyName=" +
       payload.workedAt +
@@ -1359,12 +1358,16 @@ const actions = {
     console.log("axiossssssssssss start (2)");
     console.log(payload.profilePicture);
     await axios
-      .post(state.url_change_profile_picture, payload.profilePicture, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-          Authorization: `Bearer ${state.token}`
+      .post(
+        state.url_base + state.url_change_profile_picture,
+        payload.profilePicture,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+            Authorization: `Bearer ${state.token}`
+          }
         }
-      })
+      )
       .then(response => {
         console.log("axiossssssssssss response (1)");
         console.log(response);
@@ -1374,7 +1377,9 @@ const actions = {
         console.log("axiossssssssssss response (2)");
         console.log(response.data.data.link);
         const url =
-          state.url_load_profile_picture_changed + response.data.data.link;
+          state.url_base +
+          state.url_load_profile_picture_changed +
+          response.data.data.link;
 
         console.log("change profile picture url " + url);
         fetch(url, {
@@ -1428,12 +1433,16 @@ const actions = {
     console.log("axiossssssssssss start (2)");
     console.log(payload.cover_image);
     await axios
-      .post(state.url_change_profile_picture, payload.cover_image, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-          Authorization: `Bearer ${state.token}`
+      .post(
+        state.url_base + state.url_change_profile_picture,
+        payload.cover_image,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+            Authorization: `Bearer ${state.token}`
+          }
         }
-      })
+      )
       .then(response => {
         console.log("axiossssssssssss response (1)");
         console.log(response);
@@ -1443,7 +1452,9 @@ const actions = {
         console.log("axiossssssssssss response (2)");
         console.log(response.data.data.link);
         const url =
-          state.url_load_profile_picture_changed + response.data.data.link;
+          state.url_base +
+          state.url_load_profile_picture_changed +
+          response.data.data.link;
 
         console.log("change cover image url " + url);
         fetch(url, {
@@ -1483,7 +1494,7 @@ const actions = {
     // const url = "https://vuejs-backend-c42b8-default-rtdb.firebaseio.com/users.json";
     //const url = " http://localhost:3000/post";
     //console.log("test");
-    await fetch(state.url_create_post, {
+    await fetch(state.url_base + state.url_create_post, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -1779,7 +1790,7 @@ const actions = {
     console.log(payload);
     const url =
       state.userData[0].target === null
-        ? state.url_load_profile_picture
+        ? state.url_base + state.url_load_profile_picture
         : state.userData[0].target;
 
     const image = await fetch(url, {
@@ -1810,7 +1821,7 @@ const actions = {
     console.log("load profile start");
     console.log(context);
     console.log(payload);
-    const url = state.url_load_profile_picture;
+    const url = state.url_base + state.url_load_profile_picture;
 
     const image = await fetch(url, {
       method: "GET",
@@ -1834,7 +1845,7 @@ const actions = {
   },
   async loadPostsList(context, payload) {
     let response_ = null;
-    await fetch(state.url_list_post, {
+    await fetch(state.url_base + state.url_list_post, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -1917,18 +1928,25 @@ const actions = {
     console.log(payload);
     console.log("edit user biography start +++++");
 
-    context.commit("updateUserBiography", {
-      info_access: "public",
-      description: "Mama Ma Reine de la gloire"
-    });
+    // context.commit("updateUserBiography", {
+    //   info_access: payload.info_access,
+    //   description: payload.description
+    // });
 
-    await fetch(state.url_update_biography, {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        Authorization: `Bearer ${state.token}`
+    let response_ = null;
+    await fetch(
+      state.url_base +
+        state.url_update_biography +
+        "biography=" +
+        payload.description,
+      {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          Authorization: `Bearer ${state.token}`
+        }
       }
-    })
+    )
       .then(response => {
         console.log("edit user biography response (1) +++++++");
         console.log(response);
@@ -1942,15 +1960,58 @@ const actions = {
           throw new Error("Erreur d edition de la biographie+++++");
         }
         context.commit("updateUserBiography", {
-          info_access: "public",
-          description: "Mama Ma Reine de la gloire"
+          info_access: payload.info_access,
+          description: response.data.biography
         });
-        return response;
+        response_ = response;
       })
       .catch(error => {
         console.log("erreur liée au serveur ou au navigateur");
         console.log(error);
       });
+    return response_;
+  },
+  async loadUserBiography(context, payload) {
+    console.log(payload);
+    console.log("load user biography start +++++");
+
+    // context.commit("updateUserBiography", {
+    //   info_access: payload.info_access,
+    //   description: payload.description
+    // });
+
+    let response_ = null;
+    await fetch(state.url_base + state.url_load_user_biography, {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+        Authorization: `Bearer ${state.token}`
+      }
+    })
+      .then(response => {
+        console.log("load user biography response (1) +++++++");
+        console.log(response);
+        return response.json();
+      })
+      .then(response => {
+        console.log("load user biography response successsss +++");
+        console.log(response);
+        if (!response) {
+          console.log("Erreur liée au serveur+++++++");
+          throw new Error("Erreur du chargement de la biographie+++++");
+        }
+        context.commit("updateUserBiography", {
+          info_access: "private",
+          description:
+            context.getters.getProfileAboutBiography.biography.description
+        });
+        response_ = response;
+      })
+      .catch(error => {
+        console.log("erreur liée au serveur ou au navigateur");
+        console.log(error);
+      });
+    return response_;
   }
 };
 

@@ -10,18 +10,15 @@
           />
           <b> Post </b>
           <div class="s-card ">
-            <div
-              v-for="item in $store.getters.getPostLists"
-              :key="item.post_id"
-            >
-              <b-row class="mt-0">
+            <div v-for="item in getuser" :key="item.id" >
+              <b-row  class="mt-0">
                 <b-col cols="12" class="mt-4">
                   <b-row>
                     <b-col cols="2" md="1" class="m-0 p-0">
                       <b-avatar
                         class="d-inline-block avat"
                         variant="primary"
-                        :src="$store.getters.getProfilePicture"
+                        :src="item.profilePicture"
                       ></b-avatar>
                     </b-col>
                     <b-col cols="10" md="11" class="pt-2">
@@ -29,13 +26,14 @@
                         {{ item.profileName }}
                         <span class="float-right"> </span>
                       </h5>
-                      <p class="duration">{{ item.timeCountDown }}</p>
+                      //cant display time count
+                      <p class="duration">{{item.posts.timeCountDOwn}}</p>
                     </b-col>
                   </b-row>
                   <b-row>
                     <b-col cols="12" class="mt-2">
                       <p class="post-text">
-                        {{ item.details }}
+                        {{ item.posts.details }}
                       </p>
                     </b-col>
                   </b-row>
@@ -44,7 +42,7 @@
                       <div class="">
                         <img
                           class="img-fluid post-container"
-                          :src="$store.getters.getProfilePicture"
+                          :src="item.profilePicture"
                           alt="Photo1"
                         />
                       </div>
@@ -56,7 +54,8 @@
                           variant="primary"
                           aria-hidden="true"
                         ></b-icon>
-                        {{ item.likes.length }}</span
+                        //c'ant dispay likeslenght
+                   <!--     {{ item.posts.likes.length }}  -->  </span
                       >
                       <span
                         ><b-icon
@@ -64,7 +63,7 @@
                           variant="primary"
                           aria-hidden="true"
                         ></b-icon>
-                        {{ item.comments.length }}</span
+                      <!--  {{ item.posts.comments.length }}  --> </span
                       >
 
                       <span>
@@ -81,7 +80,7 @@
                       <b-avatar
                         variant="primary"
                         class="img-fluid avat-comment"
-                        :src="$store.getters.getProfilePicture"
+                        :src="item.profile"
                       ></b-avatar>
                     </b-col>
                     <b-col cols="9" md="11" class="p-0 m-0 pr-3">
@@ -157,7 +156,7 @@ export default {
       ],
 
       commentsss: [],
-      com: ""
+      com: "",
     };
   },
 
@@ -169,29 +168,12 @@ export default {
       this.commentsss.push(this.com);
       this.com = "";
     },
-
-    addNewpost: function() {
-      this.postsss.push({
-        id: this.postsss[0].id,
-        PROFILE_PICTURE: this.postsss[0].PROFILE_PICTURE,
-        USER_NAME: this.postsss[0].USER_NAME,
-        TIME_POST: this.postsss[0].TIME_POST,
-        POST_DESCRIPTION: this.postsss[0].POST_DESCRIPTION,
-        LIKES_NUMBER: this.postsss[0].LIKES_NUMBER,
-        COMMENT: this.postsss[0].COMMENT,
-        VIDEO: this.postsss[0].VIDEO
-      });
-      this.postsss = "";
-    },
-
     chooseVideo: function() {
       document.getElementById("video").click();
     },
-
     chooseDocument: function() {
       document.getElementById("document").click();
     },
-
     showModal() {
       this.$refs["modal-3"].show();
     },
@@ -200,12 +182,18 @@ export default {
     },
     counts() {
       this.postsss.LIKES_NUMBER += 1;
-    },
-    profileNamePost() {
-      console.log("Profile Name");
-      console.log(this.$store.getters.getUser[0]);
-      return this.$store.getters.getUser[0].createPost.profileNamePost;
     }
+  },
+
+  computed:{
+
+    getuser(){
+      return this.$store.state.userData;
+    },
+    getpost(){
+      return this.$store.state.userData.post;
+    }
+
   }
 };
 </script>

@@ -10,15 +10,20 @@ Vue.use(Vuex);
 const getDefaultState = () => {
   return {
     url_load_profile_picture_changed:
-      "https://0c84d60f736b.ngrok.io/api/v1/download?file_name=",
+      "https://88032cb0fda9.ngrok.io/api/v1/download?file_name=",
     url_load_profile_picture:
-      "https://0c84d60f736b.ngrok.io/api/v1/download?file_name=public/media/photos/z7aooJV1XnDVTpRSfPGOUj7sjm0trGVJCiNFS7Ef.jpg",
-    url_change_profile_picture: "https://0c84d60f736b.ngrok.io/api/v1/upload",
+      "https://88032cb0fda9.ngrok.io/api/v1/download?file_name=public/media/photos/z7aooJV1XnDVTpRSfPGOUj7sjm0trGVJCiNFS7Ef.jpg",
+    url_change_profile_picture: "https://88032cb0fda9.ngrok.io/api/v1/upload",
     change_image_url:
-      "https://0c84d60f736b.ngrok.io/api/v1/download?file_name=",
-    url_list_post: "https://0c84d60f736b.ngrok.io/api/v1/post",
-    url_user_infos: "https://0c84d60f736b.ngrok.io/api/v1/userIntro",
-    url_create_post: "https://0c84d60f736b.ngrok.io/api/v1/post",
+      "https://88032cb0fda9.ngrok.io/api/v1/download?file_name=",
+    url_create_post: "https://88032cb0fda9.ngrok.io/api/v1/post",
+    url_list_post: "https://88032cb0fda9.ngrok.io/api/v1/post",
+    url_user_infos: "https://88032cb0fda9.ngrok.io/api/v1/userIntro",
+    url_update_user_infos: "https://88032cb0fda9.ngrok.io/api/v1/userIntro?",
+    url_load_user_biography:
+      "https://88032cb0fda9.ngrok.io/api/v1/userIntro/biography",
+    url_update_biography:
+      "https://88032cb0fda9.ngrok.io/api/v1/userIntro/biography?",
     recoverData: "",
     login: false,
     isToi: false,
@@ -1143,7 +1148,7 @@ const getDefaultState = () => {
         },
         profile_about: {
           biography: {
-            info_access: null,
+            info_access: "private",
             description:
               "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis, aliquid cupiditate fugit similique laboriosam, expedita, voluptatibus dolorem atlibero ipsam illo molestiae. Voluptates quisquam vitae, aperiam voluptatem ad enim ducimus praesentium fuga quas unde ea quasi obcaecati eumlaboriosam eos nesciunt exercitationem voluptatibus cupiditate sunt totam?Dolor voluptatem repudiandae quos." +
               "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis, aliquid cupiditate fugit similique laboriosam, expedita, voluptatibus dolorem atlibero ipsam illo molestiae. Voluptates quisquam vitae, aperiam voluptatem ad enim ducimus praesentium fuga quas unde ea quasi obcaecati eumlaboriosam eos nesciunt exercitationem voluptatibus cupiditate sunt totam?Dolor voluptatem repudiandae quos." +
@@ -1272,10 +1277,10 @@ const actions = {
    * @param context
    * @param payload
    */
-  editPostUserIntro(context, payload) {
+  async editPostUserIntro(context, payload) {
     //console.log(payload);
     //const url = "https://vuejs-backend-c42b8-default-rtdb.firebaseio.com/users.json";
-    const url = "https://fbdcbca26b4b.ngrok.io/api/v1/userIntro";
+    //const url = state.url_update_user_infos;
     context.commit("editPostUserIntro", {
       data: {
         workedAt: payload.workedAt,
@@ -1285,33 +1290,60 @@ const actions = {
         numbersOfFollowers: 20
       }
     });
-    fetch(url, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        company_name: payload.workedAt,
-        school_name: payload.studiedAt,
-        position: payload.homeTown,
-        city_town: payload.currentCity
-      })
-    })
+
+    console.log(
+      state.url_update_user_infos +
+        "companyName=" +
+        payload.workedAt +
+        "address=" +
+        1 +
+        "cityTown=" +
+        payload.currentCity +
+        "schoolName=" +
+        payload.studiedAt
+    );
+    const url =
+      state.url_update_user_infos +
+      "companyName=" +
+      payload.workedAt +
+      "&address=" +
+      1 +
+      "&cityTown=" +
+      payload.currentCity +
+      "&schoolName=" +
+      payload.studiedAt;
+    await axios
+      .post(
+        url,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${state.token}`
+          }
+        }
+      )
       .then(response => {
-        return response.json();
+        console.log("edit user intro response(1) ++++++++");
+        console.log(response);
+        return response;
       })
       .then(response => {
+        console.log("user intro edited successssssssssss ++++++++++");
         console.log("edit user intro test1 response");
         console.log(response);
         context.commit("editPostUserIntro", {
           data: {
-            workedAt: response.company_name,
-            studiedAt: response.school_name,
-            homeTown: response.position,
-            currentCity: response.city_town,
+            workedAt: response.data.data.company_name,
+            studiedAt: response.data.data.school_name,
+            homeTown: response.data.data.address,
+            currentCity: response.data.data.city_town,
             numbersOfFollowers: 20
           }
         });
+      })
+      .catch(error => {
+        console.log("erreur liée au navigateur ou au serveur +++");
+        console.log(error);
       });
   },
   /**
@@ -1839,7 +1871,7 @@ const actions = {
   },
   async loadUserPostIntro(context, payload) {
     let response_ = null;
-    await fetch("https://fbdcbca26b4b.ngrok.io/api/v1/userIntro", {
+    await fetch(state.url_user_infos, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -1851,7 +1883,7 @@ const actions = {
         return response.json();
       })
       .then(response => {
-        console.log("load user Intro Post test1 +++");
+        console.log("load user Intro Post test1 successsss +++");
         console.log(response);
         if (!response) {
           throw "Cannot Found User Post Intro";
@@ -1879,6 +1911,46 @@ const actions = {
         }
       });
     return response_;
+  },
+
+  async updateUserBiography(context, payload) {
+    console.log(payload);
+    console.log("edit user biography start +++++");
+
+    context.commit("updateUserBiography", {
+      info_access: "public",
+      description: "Mama Ma Reine de la gloire"
+    });
+
+    await fetch(state.url_update_biography, {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        Authorization: `Bearer ${state.token}`
+      }
+    })
+      .then(response => {
+        console.log("edit user biography response (1) +++++++");
+        console.log(response);
+        return response.json();
+      })
+      .then(response => {
+        console.log("edit user biography response successsss +++");
+        console.log(response);
+        if (!response) {
+          console.log("Erreur liée au serveur+++++++");
+          throw new Error("Erreur d edition de la biographie+++++");
+        }
+        context.commit("updateUserBiography", {
+          info_access: "public",
+          description: "Mama Ma Reine de la gloire"
+        });
+        return response;
+      })
+      .catch(error => {
+        console.log("erreur liée au serveur ou au navigateur");
+        console.log(error);
+      });
   }
 };
 
@@ -1995,6 +2067,10 @@ const mutations = {
    */
   retrievePostsListUser(state, payload) {
     state.userData[0].posts = payload.posts;
+  },
+  updateUserBiography(state, payload) {
+    state.userData[0].profile_about.biography.info_access = payload.info_access;
+    state.userData[0].profile_about.biography.description = payload.description;
   }
 };
 

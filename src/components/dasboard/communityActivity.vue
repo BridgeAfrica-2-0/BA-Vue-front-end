@@ -10,7 +10,7 @@
           />
           <b> Post </b>
           <div class="s-card ">
-            <div v-for="item in getuser" :key="item.id" >
+            <div v-for="item in $store.state.userData[0].posts" :key="item.post_id" >
               <b-row  class="mt-0">
                 <b-col cols="12" class="mt-4">
                   <b-row>
@@ -26,14 +26,14 @@
                         {{ item.profileName }}
                         <span class="float-right"> </span>
                       </h5>
-                      //cant display time count
-                      <p class="duration">{{item.posts.timeCountDOwn}}</p>
+
+                      <p class="duration">{{item.timeCountDown}}</p>
                     </b-col>
                   </b-row>
                   <b-row>
                     <b-col cols="12" class="mt-2">
                       <p class="post-text">
-                        {{ item.posts.details }}
+                        {{ item.details }}
                       </p>
                     </b-col>
                   </b-row>
@@ -54,8 +54,8 @@
                           variant="primary"
                           aria-hidden="true"
                         ></b-icon>
-                        //c'ant dispay likeslenght
-                   <!--     {{ item.posts.likes.length }}  -->  </span
+
+                        {{ item.likes.length }}    </span
                       >
                       <span
                         ><b-icon
@@ -63,7 +63,7 @@
                           variant="primary"
                           aria-hidden="true"
                         ></b-icon>
-                      <!--  {{ item.posts.comments.length }}  --> </span
+                        {{ item.comments.length }}   </span
                       >
 
                       <span>
@@ -80,7 +80,7 @@
                       <b-avatar
                         variant="primary"
                         class="img-fluid avat-comment"
-                        :src="item.profile"
+                        :src="item.comments[0].profile_picture"
                       ></b-avatar>
                     </b-col>
                     <b-col cols="9" md="11" class="p-0 m-0 pr-3">
@@ -100,10 +100,10 @@
                   </b-row>
 
                   <Comment
-                    :comments="commentsss"
-                    v-if="commentsss.length > 0"
+                    :comments="item.comments[0].comment"
+                    v-if="item.comments.length > 0"
                   />
-                  <div v-if="commentsss.length <= 0">no comment</div>
+                  <div v-if="item.comments.length <= 0">no comment</div>
                 </b-col>
               </b-row>
             </div>
@@ -154,19 +154,18 @@ export default {
         "https://pbs.twimg.com/media/DoNa_wKUUAASSCF.jpg",
         "https://pbs.twimg.com/media/DKO62sVXUAA0_AL.jpg"
       ],
-
       commentsss: [],
       com: "",
     };
   },
 
   methods: {
-    chooseImage: function() {
-      document.getElementById("image").click();
-    },
     commeth() {
       this.commentsss.push(this.com);
       this.com = "";
+    },
+    chooseImage: function() {
+      document.getElementById("image").click();
     },
     chooseVideo: function() {
       document.getElementById("video").click();

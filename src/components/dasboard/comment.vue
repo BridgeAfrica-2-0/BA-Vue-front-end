@@ -17,12 +17,11 @@
         <p class="msg text">
           <read-more
             more-str="read more"
-            :text="comment"
+            :text="comments"
             link="#"
             less-str="read less"
             :max-chars="15000"
-            v-for="(comment, i) in comments"
-            :key="i"
+
           >
           </read-more>
         </p>
@@ -32,14 +31,14 @@
           variant="primary"
           aria-hidden="true"
         ></b-icon>
-        {{ counted }}
+        {{ $store.state.userData[0].posts[0].comments[0].likes.length }}
         <span @click="showReply" class="primary ml-2 reply"><b>Reply</b></span>
         <div v-if="reply">
           <b-row class="mt-2">
             <b-col cols="1">
               <b-avatar
                 variant="info"
-                src="https://placekitten.com/300/300"
+                :src="$store.state.userData[0].profilePicture"
                 class="avat-comment"
               ></b-avatar>
             </b-col>

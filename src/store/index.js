@@ -24,8 +24,8 @@ const getDefaultState = () => {
         posts: [
           {
             post_id: 30,
-            profileName: "TONTON LA FORCE LE BEAU GOSSE",
-            profile_picture: localStorage.getItem("profile_image"),
+            profileName: "THorfinn",
+            profile_picture: "https://i.wifegeek.com/200426/2d110780.jpg",
             details:
               "Lorem Ipsum has been the industry's standard dummy text ever\n" +
               "                since the 1500s, when an unknown printer took a galley of type\n" +
@@ -77,6 +77,20 @@ const getDefaultState = () => {
                     like_id: 2,
                     post_id: 30,
                     user_id: 3,
+                    created_at: null,
+                    updated_at: null
+                  },
+                  {
+                    like_id: 3,
+                    post_id: 30,
+                    user_id: 2,
+                    created_at: null,
+                    updated_at: null
+                  },
+                  {
+                    like_id: 4,
+                    post_id: 30,
+                    user_id: 2,
                     created_at: null,
                     updated_at: null
                   }
@@ -146,7 +160,7 @@ const getDefaultState = () => {
           },
           {
             post_id: 31,
-            profileName: "TONTON LA FORCE LE BEAU GOSSE",
+            profileName: "Thorfinn 2",
             profile_picture: localStorage.getItem("profile_image"),
             details:
               "Lorem Ipsum has been the industry's standard dummy text ever\n" +
@@ -215,7 +229,7 @@ const getDefaultState = () => {
           },
           {
             post_id: 32,
-            profileName: "TONTON LA FORCE LE BEAU GOSSE",
+            profileName: "Thorfinn 3",
             profile_picture: localStorage.getItem("profile_image"),
             details:
               "Lorem Ipsum has been the industry's standard dummy text ever\n" +
@@ -277,7 +291,7 @@ const getDefaultState = () => {
           },
           {
             post_id: 33,
-            profileName: "TONTON LA FORCE LE BEAU GOSSE",
+            profileName: "Thorfinn 4",
             profile_picture: localStorage.getItem("profile_image"),
             details:
               "Lorem Ipsum has been the industry's standard dummy text ever\n" +
@@ -339,7 +353,7 @@ const getDefaultState = () => {
           },
           {
             post_id: 34,
-            profileName: "TONTON LA FORCE LE BEAU GOSSE",
+            profileName: "Thorfinn 5",
             profile_picture: localStorage.getItem("profile_image"),
             details:
               "Lorem Ipsum has been the industry's standard dummy text ever\n" +
@@ -401,7 +415,7 @@ const getDefaultState = () => {
           },
           {
             post_id: 35,
-            profileName: "TONTON LA FORCE LE BEAU GOSSE",
+            profileName: "Thorfinn 6",
             profile_picture: localStorage.getItem("profile_image"),
             details:
               "Lorem Ipsum has been the industry's standard dummy text ever\n" +

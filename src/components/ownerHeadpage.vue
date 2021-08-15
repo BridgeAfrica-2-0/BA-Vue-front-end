@@ -265,6 +265,7 @@ export default {
 
       this.$refs["changenameModal"].hide();
     },
+
     /**
      *this function selects picture file
      * @param event

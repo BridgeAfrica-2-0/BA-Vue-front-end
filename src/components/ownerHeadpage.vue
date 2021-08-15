@@ -111,7 +111,7 @@
                     </div>
                     <h4>Upload a New picture</h4>
                   </div>
-                  <div class="col-sm-6 text-center">
+                  <div class="col-sm-6 text-center" v-b-modal.changenameModal @click="close_">
                     <h1>
                       <fas-icon class="primary" :icon="['fas', 'edit']" />
                     </h1>
@@ -146,7 +146,7 @@
                     </div>
                     <h4>Upload A New Cover Image</h4>
                   </div>
-                  <div class="col-sm-6 text-center">
+                  <div class="col-sm-6 text-center" v-b-modal.changenameModal @click="close_">
                     <h1>
                       <fas-icon class="primary" :icon="['fas', 'edit']" />
                     </h1>
@@ -154,6 +154,29 @@
                   </div>
                 </div>
               </div>
+            </b-modal>
+
+            <!-- third modal box to change image file name-->
+            <b-modal
+              ref="changenameModal"
+              id="changenameModal"
+              title="Edit File Name"
+              @close="cancel"
+              @ok="save"
+            >
+              <div class="width">
+                <b-form-select
+                  class="mb-2"
+                  size="sm"
+                  v-model="user.access"
+                  :options="options"
+                ></b-form-select>
+              </div>
+              <b-form-input
+                class="mt-2 mb-2"
+                v-model="user.picture_name"
+                placeholder="Enter File Name"
+              ></b-form-input>
             </b-modal>
           </b-col>
         </b-row>
@@ -171,9 +194,16 @@ export default {
         profile_name: "TONTON LA FORCE",
         number_of_follower: 1.4,
         profile_picture: "https://placekitten.com/400/300",
-        cover_image: ""
+        picture_name: null,
+        cover_image: "",
+        access: null
       },
-      isLoading: true
+      isLoading: true,
+      options: [
+        { value: null, text: "Select" },
+        { value: "private", text: "Private" },
+        { value: "public", text: "Public" }
+      ]
     };
   },
   created() {
@@ -221,6 +251,20 @@ export default {
     this.isLoading = true;
   },
   methods: {
+    cancel() {
+      console.log(
+        "Cancel Action in edit name profile picture or cover image  ++++++"
+      );
+      this.user.access = "private";
+      this.user.picture_name = null;
+      console.log(this.user);
+      this.$refs["my-modal"].show();
+    },
+    save() {
+      console.log("Save New Name Profile Picture and Cover Image");
+
+      this.$refs["changenameModal"].hide();
+    },
     /**
      *this function selects picture file
      * @param event
@@ -230,7 +274,9 @@ export default {
       let file = event.target;
       if (file.files) {
         const fd = new FormData();
-        fd.append('media', file.files[0]);
+        fd.append("media", file.files[0]);
+        fd.append("media", file.files[0]);
+        fd.append("media", file.files[0]);
         this.$store
           .dispatch("changeProfilePicture", { profilePicture: fd })
           .then(response => {
@@ -245,7 +291,7 @@ export default {
               console.log("change profile picture erreur lie au serveur");
               console.log(error);
             }
-            console.log( { err: error })
+            console.log({ err: error });
           });
       }
       this.$refs["my-modal"].hide();
@@ -258,25 +304,29 @@ export default {
       if (file.files) {
         const fd = new FormData();
         fileImage = file.files[0];
-        fd.append('media', fileImage)
-        this.$store.dispatch("changeCoverImage", { cover_image: fd })
-                .then(response => {
-          console.log("change cover image call");
-          console.log(response);
-        })
-                .catch(error => {
-                  if (error instanceof TypeError) {
-                    console.log("change cover image erreur lie au navigateur ");
-                    console.log(error.message);
-                  } else {
-                    console.log("change cover image erreur lie au serveur");
-                    console.log(error);
-                  }
-                  console.log( { err: error })
-                });
+        fd.append("media", fileImage);
+        this.$store
+          .dispatch("changeCoverImage", { cover_image: fd })
+          .then(response => {
+            console.log("change cover image call");
+            console.log(response);
+          })
+          .catch(error => {
+            if (error instanceof TypeError) {
+              console.log("change cover image erreur lie au navigateur ");
+              console.log(error.message);
+            } else {
+              console.log("change cover image erreur lie au serveur");
+              console.log(error);
+            }
+            console.log({ err: error });
+          });
         console.log(fileImage);
       }
       this.$refs["my-modal"].hide();
+    },
+    close_(){
+      this.$refs['my-modal'].hide();
     }
   }
 };

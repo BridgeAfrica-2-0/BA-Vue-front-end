@@ -9,11 +9,11 @@ Vue.use(Vuex);
 
 const getDefaultState = () => {
   return {
-    url_base: "https://8822d8bd2582.ngrok.io",
+    url_base: "https://ce2d17022ed8.ngrok.io",
     url_load_profile_picture_changed: "/api/v1/download?file_name=",
     url_load_profile_picture:
       "/api/v1/download?file_name=public/media/photos/z7aooJV1XnDVTpRSfPGOUj7sjm0trGVJCiNFS7Ef.jpg",
-    url_change_profile_picture: "/api/v1/upload",
+    url_change_profile_picture: "/api/v1/post",
     change_image_url: "/api/v1/download?file_name=",
     url_create_post: "/api/v1/post",
     url_list_post: "/api/v1/post",
@@ -21,10 +21,19 @@ const getDefaultState = () => {
     url_update_user_infos: "/api/v1/userIntro?",
     url_load_user_biography: "/api/v1/userIntro/biography",
     url_update_biography: "/api/v1/userIntro/biography?",
+    url_update_birthDate: "/api/v1/userIntro/dob?",
+    url_update_gender: "api/v1/userIntro/gender?",
+    url_post_mobilesPhones: "/api/v1/userIntro/addPhone",
+    url_update_current_city: "/api/v1/userIntro/addCurrentCity?",
+    url_add_working: "/api/v1/userIntro/addWorking",
+    url_update_working: "/api/v1/userIntro/updateWorking",
+    url_add_school: "api/v1/userIntro/addSchool",
+    url_add_profession: "/api/v1/userIntro/updateWorki",
+    url_load_basicInfos: "",
     recoverData: "",
     login: false,
     isToi: false,
-    token: "7|1O1spGPcT95JbVNTUuqbmaEj3yDlQPooS7bVJwGB",
+    token: "1|le8p995vGFTX1oo8PxHyam4pIOpkdxLQKHUw2QkP",
     count: "",
     todos: [],
     userData: [
@@ -1150,6 +1159,85 @@ const getDefaultState = () => {
               "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis, aliquid cupiditate fugit similique laboriosam, expedita, voluptatibus dolorem atlibero ipsam illo molestiae. Voluptates quisquam vitae, aperiam voluptatem ad enim ducimus praesentium fuga quas unde ea quasi obcaecati eumlaboriosam eos nesciunt exercitationem voluptatibus cupiditate sunt totam?Dolor voluptatem repudiandae quos." +
               "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis, aliquid cupiditate fugit similique laboriosam, expedita, voluptatibus dolorem atlibero ipsam illo molestiae. Voluptates quisquam vitae, aperiam voluptatem ad enim ducimus praesentium fuga quas unde ea quasi obcaecati eumlaboriosam eos nesciunt exercitationem voluptatibus cupiditate sunt totam?Dolor voluptatem repudiandae quos." +
               "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis, aliquid cupiditate fugit similique laboriosam, expedita, voluptatibus dolorem atlibero ipsam illo molestiae. Voluptates quisquam vitae, aperiam voluptatem ad enim ducimus praesentium fuga quas unde ea quasi obcaecati eumlaboriosam eos nesciunt exercitationem voluptatibus cupiditate sunt totam?Dolor voluptatem repudiandae quos."
+          },
+          basicInfo: {
+            dateOfBirth: {
+              date_1: {
+                day: "12",
+                month: "January",
+                access: "private"
+              },
+              date_2: {
+                year: "2000",
+                access: "private"
+              }
+            },
+            gender: "M",
+            mobilePhones: ["237656602212", "237677873626"],
+            currentCity: "YAOUNDE",
+            homeTown: "MELEN",
+            websites: ["www.google.com", "ww.facebook.com", "www.udemy.com"],
+            socialLinks: [
+              "www.instagram.com/bridgeafrica",
+              "www.google.com",
+              "ww.facebook.com",
+              "www.udemy.com"
+            ]
+          },
+          educationAndWorks: {
+            workPlaces: [
+              {
+                id: 1,
+                companyName: "Coca Cla Pvt Ltd. Team Lead",
+                cityTown: "YAOUNDE",
+                position: "YAOUNDE",
+                jobResponsibilities:
+                  "Job descrioption dummny textJob descrioption dummny text Jobdescrioption dummny text",
+                currentlyWorking: false,
+                startDate: "2021-08-19",
+                endDate: null,
+                access: "private"
+              },
+              {
+                id: 2,
+                companyName: "a Cla Pvt Ltd. Team Lead",
+                cityTown: "YAOUNDE",
+                position: "YAOUNDE",
+                jobResponsibilities:
+                  "Job descrioption dummny textJob descrioption dummny text Jobdescrioption dummny text",
+                currentlyWorking: false,
+                starDate: "2014-09-12",
+                endDate: null,
+                access: "private"
+              },
+              {
+                id: 3,
+                companyName: "Coc Cla Pvt Ltd. Team Lead",
+                cityTown: "YAOUNDE",
+                position: "YAOUNDE",
+                jobResponsibilities:
+                  "Job descrioption dummny textJob descrioption dummny text Jobdescrioption dummny text",
+                currentlyWorking: false,
+                starDate: "2012-09-12",
+                endDate: "2012-09-12",
+                access: ""
+              }
+            ],
+            educations: [
+              {
+                access: "private",
+                schoolName: null,
+                graduated: false,
+                durationFrom: null,
+                durationTo: null,
+                major: null
+              }
+            ],
+            professions: [
+              { profession: "Cultivateur", access: "public" },
+              { profession: "Macon", access: "private" },
+              { profession: "Cuisinier", access: "public" }
+            ]
           }
         }
       }
@@ -2002,14 +2090,463 @@ const actions = {
         }
         context.commit("updateUserBiography", {
           info_access: "private",
-          description:
-            context.getters.getProfileAboutBiography.biography.description
+          description: response.data.biography[0].biography
         });
         response_ = response;
       })
       .catch(error => {
         console.log("erreur liée au serveur ou au navigateur");
         console.log(error);
+      });
+    return response_;
+  },
+  async updateUserBasicInfosBirthDate(context, payload) {
+    console.log(payload);
+    console.log("edit user birtDate start +++++");
+
+    // context.commit("updateUserBiography", {
+    //   info_access: payload.info_access,
+    //   description: payload.description
+    // });
+
+    let response_ = null;
+    await fetch(
+      state.url_base +
+        state.url_update_birthDate +
+        "dob=" +
+        payload.dateOfBirth.date_2.year +
+        "-01" +
+        //payload.dateOfBirth.date_1.month +
+        "-" +
+        payload.dateOfBirth.date_1.day,
+      {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          Authorization: `Bearer ${state.token}`
+        }
+      }
+    )
+      .then(response => {
+        console.log("edit user birthDate response (1) +++++++");
+        console.log(response);
+        return response.json();
+      })
+      .then(response => {
+        console.log("edit user birthDate response successsss +++");
+        console.log(response);
+        if (!response) {
+          console.log("Erreur liée au serveur+++++++");
+          throw new Error("Erreur d edition du BirthDate+++++");
+        }
+        context.commit("updateUserBirthDate", {
+          dateOfBirth: payload.dateOfBirth
+        });
+        response_ = response;
+      })
+      .catch(error => {
+        console.log("erreur liée au serveur ou au navigateur");
+        console.log(error);
+        throw error;
+      });
+    return response_;
+  },
+  async updateUserBasicInfosGender(context, payload) {
+    console.log(payload);
+    console.log("edit user gender start +++++");
+
+    // context.commit("updateUserBiography", {
+    //   info_access: payload.info_access,
+    //   description: payload.description
+    // });
+
+    let response_ = null;
+    await fetch(
+      state.url_base + state.url_update_gender + "gender=" + payload.gender,
+      {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          Authorization: `Bearer ${state.token}`
+        }
+      }
+    )
+      .then(response => {
+        console.log("edit user gender response (1) +++++++");
+        console.log(response);
+        return response.json();
+      })
+      .then(response => {
+        console.log("edit user gender response successsss +++");
+        console.log(response);
+        if (!response) {
+          console.log("Erreur liée au serveur+++++++");
+          throw new Error("Erreur d edition du BirthDate+++++");
+        }
+        context.commit("updateUserGender", {
+          gender: payload.gender
+        });
+        response_ = response;
+      })
+      .catch(error => {
+        console.log("erreur liée au serveur ou au navigateur");
+        console.log(error);
+        throw error;
+      });
+    return response_;
+  },
+  async updateUserBasicInfosMobilePhones(context, payload) {
+    console.log(payload);
+    console.log("edit user mobile Phones start +++++");
+
+    // context.commit("updateUserBiography", {
+    //   info_access: payload.info_access,
+    //   description: payload.description
+    // });
+
+    let response_ = null;
+    await fetch(state.url_base + state.url_post_mobilesPhones, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        Authorization: `Bearer ${state.token}`
+      },
+      body: JSON.stringify({
+        mobilePhones: [...payload.mobilePhones]
+      })
+    })
+      .then(response => {
+        console.log("edit user mobile phones response (1) +++++++");
+        console.log(response);
+        return response.json();
+      })
+      .then(response => {
+        console.log("edit user mobile phones response successsss +++");
+        console.log(response);
+        if (!response) {
+          console.log("Erreur liée au serveur+++++++");
+          throw new Error("Erreur d ajout des mobilesPhones+++++");
+        }
+        context.commit("storeMobilePhones", {
+          mobilePhones: [...payload.mobilePhones]
+        });
+        response_ = response;
+      })
+      .catch(error => {
+        console.log("erreur liée au serveur ou au navigateur");
+        console.log(error);
+        throw error;
+      });
+    return response_;
+  },
+  async updateUserBasicInfosCurrentCity(context, payload) {
+    console.log(payload);
+    console.log("edit user currentcity start +++++");
+
+    // context.commit("updateUserBiography", {
+    //   info_access: payload.info_access,
+    //   description: payload.description
+    // });
+
+    let response_ = null;
+    await fetch(state.url_base + state.url_update_current_city, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        Authorization: `Bearer ${state.token}`
+      },
+      body: JSON.stringify({
+        currentCity: payload.currentCity
+      })
+    })
+      .then(response => {
+        console.log("edit user current city response (1) +++++++");
+        console.log(response);
+        return response.json();
+      })
+      .then(response => {
+        console.log("edit user current city response successsss +++");
+        console.log(response);
+        if (!response) {
+          console.log("Erreur liée au serveur+++++++");
+          throw new Error("Erreur d ajout des current city+++++");
+        }
+        context.commit("storeCurrentCity", {
+          currentCity: payload.currentCity
+        });
+        response_ = response;
+      })
+      .catch(error => {
+        console.log("erreur liée au serveur ou au navigateur");
+        console.log(error);
+        throw error;
+      });
+    return response_;
+  },
+  async updateUserBasicInfosHomeTown(context, payload) {
+    console.log(payload);
+    console.log("edit user homeTown start +++++");
+
+    // context.commit("updateUserBiography", {
+    //   info_access: payload.info_access,
+    //   description: payload.description
+    // });
+
+    let response_ = null;
+    await fetch(state.url_base + state.url_update_current_city, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        Authorization: `Bearer ${state.token}`
+      },
+      body: JSON.stringify({
+        homeTown: payload.homeTown
+      })
+    })
+      .then(response => {
+        console.log("edit user homeTown response (1) +++++++");
+        console.log(response);
+        return response.json();
+      })
+      .then(response => {
+        console.log("edit user chomeTown response successsss +++");
+        console.log(response);
+        if (!response) {
+          console.log("Erreur liée au serveur+++++++");
+          throw new Error("Erreur d 'ajout de homeTown+++++");
+        }
+        context.commit("storeHomeTown", {
+          homeTown: payload.homeTown
+        });
+        response_ = response;
+      })
+      .catch(error => {
+        console.log("erreur liée au serveur ou au navigateur");
+        console.log(error);
+        throw error;
+      });
+    return response_;
+  },
+  async updateUserBasicInfosWebsites(context, payload) {
+    console.log(payload);
+    console.log("edit user website start +++++");
+
+    let response_ = null;
+    await fetch(state.url_base + state.url_update_current_city, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        Authorization: `Bearer ${state.token}`
+      },
+      body: JSON.stringify({
+        websites: payload.websites
+      })
+    })
+      .then(response => {
+        console.log("edit user websites response (1) +++++++");
+        console.log(response);
+        return response.json();
+      })
+      .then(response => {
+        console.log("edit user websites response successsss +++");
+        console.log(response);
+        if (!response) {
+          console.log("Erreur liée au serveur+++++++");
+          throw new Error("Erreur d 'ajout de websites+++++");
+        }
+        context.commit("storeWebsites", {
+          websites: payload.websites
+        });
+        response_ = response;
+      })
+      .catch(error => {
+        console.log("erreur liée au serveur ou au navigateur");
+        console.log(error);
+        throw error;
+      });
+    return response_;
+  },
+  async updateUserBasicInfosSocialLinks(context, payload) {
+    console.log(payload);
+    console.log("edit user socialLinks start +++++");
+
+    let response_ = null;
+    await fetch(state.url_base + state.url_update_current_city, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        Authorization: `Bearer ${state.token}`
+      },
+      body: JSON.stringify({
+        socialLinks: payload.socialLinks
+      })
+    })
+      .then(response => {
+        console.log("edit user socialLinks response (1) +++++++");
+        console.log(response);
+        return response.json();
+      })
+      .then(response => {
+        console.log("edit user socialLinks response successsss +++");
+        console.log(response);
+        if (!response) {
+          console.log("Erreur liée au serveur+++++++");
+          throw new Error("Erreur d 'ajout de socialLinks+++++");
+        }
+        context.commit("storeSocialLinks", {
+          socialLinks: payload.socialLinks
+        });
+        response_ = response;
+      })
+      .catch(error => {
+        console.log("erreur liée au serveur ou au navigateur");
+        console.log(error);
+        throw error;
+      });
+    return response_;
+  },
+  async updateUserWorkPlaces(context, payload) {
+    console.log(payload);
+    console.log("edit user workplace start +++++");
+
+    let response_ = null;
+    await fetch(state.url_base + state.url_add_working, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        Authorization: `Bearer ${state.token}`
+      },
+      body: JSON.stringify({
+        companyName: payload.workPlace.companyName,
+        cityTown: payload.workPlace.cityTown,
+        position: "YAOUNDE",
+        jobResponsibilities:
+          "Job descrioption dummny textJob descrioption dummny text Jobdescrioption dummny text",
+        currentlyWorking: payload.workPlace === true ? 1 : 0,
+        startDate: "2012-09-12",
+        endDate: "2012-09-12"
+      })
+    })
+      .then(response => {
+        console.log("edit user workPlace response (1) +++++++");
+        console.log(response);
+        return response.json();
+      })
+      .then(response => {
+        console.log("edit user workPlace response successsss +++");
+        console.log(response);
+        if (response.errors) {
+          console.log("Erreur liée au serveur+++++++");
+          throw new Error("Erreur d 'ajout de workPlace+++++");
+        }
+        context.commit("storeWorkPlace", {
+          workPlace: payload.workPlace
+        });
+        response_ = response;
+      })
+      .catch(error => {
+        console.log("erreur liée au serveur ou au navigateur");
+        console.log(error);
+        throw error;
+      });
+    return response_;
+  },
+  async updateUserEducation(context, payload) {
+    console.log(payload);
+    console.log("edit user education start +++++");
+
+    let response_ = null;
+    await fetch(state.url_base + state.url_add_school, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        Authorization: `Bearer ${state.token}`
+      },
+      body: JSON.stringify({
+        schoolName: payload.education.schoolName,
+        graduated: payload.education.graduated ? 1 : 0,
+        durationFrom: payload.education.durationFrom,
+        major: payload.education.major,
+        durationTo: payload.education.durationFrom
+      })
+    })
+      .then(response => {
+        console.log("edit user education response (1) +++++++");
+        console.log(response);
+        if (response.status !== 200 || response.status !== 201) {
+          console.log("Erreur liée au serveur+++++++");
+          throw new Error("Erreur d 'ajout d'education+++++");
+        }
+        return response.json();
+      })
+      .then(response => {
+        console.log("edit user education response successsss +++");
+        console.log(response);
+        if (response.errors) {
+          console.log("Erreur liée au serveur+++++++");
+          throw new Error("Erreur d 'ajout d'education+++++");
+        }
+        context.commit("storeEducation", {
+          education: payload.education
+        });
+        response_ = response;
+      })
+      .catch(error => {
+        console.log("erreur liée au serveur ou au navigateur");
+        console.log(error);
+        throw error;
+      });
+    return response_;
+  },
+  async updateUserProfession(context, payload) {
+    console.log(payload);
+    console.log("edit user profession start +++++");
+
+    let response_ = null;
+    await fetch(state.url_base + state.url_add_profession, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        Authorization: `Bearer ${state.token}`
+      },
+      body: JSON.stringify({
+        profession: payload.profession,
+        access: payload.access
+      })
+    })
+      .then(response => {
+        console.log("edit user workPlace response (1) +++++++");
+        console.log(response);
+        if (response.status !== 201 || response.status !== 200) {
+          console.log("Erreur liée au serveur+++++++");
+          throw new Error("Erreur d 'ajout de workPlace+++++");
+        }
+        return response.json();
+      })
+      .then(response => {
+        console.log("edit user workPlace response successsss +++");
+        console.log(response);
+        if (response.errors) {
+          console.log("Erreur liée au serveur+++++++");
+          throw new Error("Erreur d 'ajout de workPlace+++++");
+        }
+        context.commit("storeProfession", {
+          professions: payload.professions
+        });
+        response_ = response;
+      })
+      .catch(error => {
+        console.log("erreur liée au serveur ou au navigateur");
+        console.log(error);
+        throw error;
       });
     return response_;
   }
@@ -2132,6 +2669,49 @@ const mutations = {
   updateUserBiography(state, payload) {
     state.userData[0].profile_about.biography.info_access = payload.info_access;
     state.userData[0].profile_about.biography.description = payload.description;
+  },
+  updateUserBirthDate(state, payload) {
+    state.userData[0].profile_about.basicInfo.dateOfBirth = payload.dateOfBirth;
+  },
+  updateUserGender(state, payload) {
+    state.userData[0].profile_about.basicInfo.gender = payload.gender;
+  },
+  storeMobilePhones(state, payload) {
+    state.userData[0].profile_about.basicInfo.mobilePhones = [
+      ...payload.mobilePhones
+    ];
+  },
+  storeCurrentCity(state, payload) {
+    state.userData[0].profile_about.basicInfo.currentCity = payload.currentCity;
+  },
+  storeHomeTown(state, payload) {
+    state.userData[0].profile_about.basicInfo.homeTown = payload.homeTown;
+  },
+  storeWebsites(state, payload) {
+    state.userData[0].profile_about.basicInfo.websites = [...payload.websites];
+  },
+  storeSocialLinks(state, payload) {
+    state.userData[0].profile_about.basicInfo.socialLinks = [
+      ...payload.socialLinks
+    ];
+  },
+  storeWorkPlace(state, payload) {
+    state.userData[0].profile_about.educationAndWorks.workPlaces = [
+      ...state.userData[0].profile_about.educationAndWorks.workPlaces,
+      payload.workPlace
+    ];
+  },
+  storeProfession(state, payload) {
+    state.userData[0].profile_about.educationAndWorks.professions = [
+      ...state.userData[0].profile_about.educationAndWorks.professions,
+      payload.professions
+    ];
+  },
+  storeEducation(state, payload) {
+    state.userData[0].profile_about.educationAndWorks.educations = [
+      ...state.userData[0].profile_about.educationAndWorks.educations,
+      payload.educations
+    ];
   }
 };
 
@@ -2176,6 +2756,12 @@ export default new Vuex.Store({
     },
     getProfileAboutBiography(state) {
       return state.userData[0].profile_about.biography;
+    },
+    getProfileAboutBasicInfos(state) {
+      return state.userData[0].profile_about.basicInfo;
+    },
+    getProfileAboutEducationAndWorks(state) {
+      return state.userData[0].profile_about.educationAndWorks;
     }
   },
   actions,

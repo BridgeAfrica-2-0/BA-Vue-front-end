@@ -2,7 +2,7 @@
   <div>
     <b>Education</b>
     <hr />
-    <b-link style="text-decoration: none" class="mt-4" v-b-modal.modal-10>
+    <b-link style="text-decoration: none" class="mt-4" v-b-modal.educationModal>
       <b-icon icon="plus" variant="primary"></b-icon>
       Add University Or High School</b-link
     >
@@ -11,10 +11,10 @@
       style="border: none"
     >
       <div class="datails">
-        <div class="row">
+        <div class="row" v-for="education in educations" :key="education.schoolName">
           <div class="col">
-            <span class="mr-auto"> <b>School</b> </span>
-            <p>Duration</p>
+            <span class="mr-auto"> <b>School Name : {{ education.schoolName }}</b> </span>
+            <p>Duration From {{ education.durationFrom}} To {{ education.durationTo }}</p>
             <p>
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas
               quibusdam harum maxime!
@@ -22,54 +22,53 @@
           </div>
           <div class="col-1">
             <b-dropdown id="dropdown-dropup" dropdown variant="primary-outline">
-              <b-dropdown-item href="#">Edit</b-dropdown-item>
-              <b-dropdown-item href="#">Delete</b-dropdown-item>
+              <b-dropdown-item @click="edit('educations', education.schoolName)">Edit</b-dropdown-item>
+              <b-dropdown-item @click="delet('educations', education.schoolName)">Delete</b-dropdown-item>
             </b-dropdown>
           </div>
         </div>
       </div>
     </b-list-group-item>
 
-    <b-modal ref="add-contact" id="modal-10" title="Add Education ">
+    <b-modal ref="educationModal" id="educationModal" title="Add Education " @close="cancel" @ok="save">
       <div style="width: 100px">
         <b-form-select
           class="mb-2"
           size="sm"
-          v-model="selected"
+          v-model="educationInput.access"
           :options="options"
         ></b-form-select>
       </div>
       <b-form-input
         class="mt-2 mb-2"
-        v-model="hometown"
+        v-model="educationInput.schoolName"
         placeholder="School"
       ></b-form-input>
 
       <b-form-checkbox
         id="checkbox-1"
-        v-model="status"
+        v-model="educationInput.graduated"
         name="checkbox-1"
-        value="duration"
-        unchecked-value="not_accepted"
+        :value=" educationInput.graduated ? 1 : 0"
       >
         Graduated
       </b-form-checkbox>
       <label>Duration - From</label>
       <b-form-datepicker
-        id="example-datepicker"
-        v-model="from"
+        id="example-datepicker-1"
+        v-model="educationInput.durationFrom"
         class="mb-2"
       ></b-form-datepicker>
 
       <label>To</label>
       <b-form-datepicker
         id="example-datepicker"
-        v-model="to"
+        v-model="educationInput.durationTo"
         class="mb-2"
       ></b-form-datepicker>
       <b-form-input
         class="mt-2"
-        v-model="major"
+        v-model="educationInput.major"
         placeholder="Major"
       ></b-form-input>
     </b-modal>
@@ -80,14 +79,107 @@
 export default {
   data() {
     return {
-      status: "not_accepted",
-      selected: null,
       options: [
         { value: null, text: "Select" },
         { value: "private", text: "Private" },
         { value: "public", text: "Public" }
-      ]
+      ],
+      educations : [],
+      educationInput: {
+        access : 'private',
+        schoolName: null,
+        graduated: false,
+        durationFrom: null,
+        durationTo : null,
+        major: null,
+      },
+      index: null,
     };
+  },
+  methods: {
+    cancel() {
+      console.log("Cancel Another Action in User  ++++++");
+      this.educations = JSON.parse(
+              JSON.stringify(this.$store.getters.getProfileAboutEducationAndWorks.educations)
+      );
+      console.log(this.educations);
+      this.education = {
+        access : 'private',
+        schoolName: null,
+        graduated: false,
+        durationFrom: null,
+        durationTo : null,
+        major: null,
+      };
+      //this.$refs["model-6"].hide();
+    },
+    save(){
+      console.log('Save New Education User Profile About');
+      if( this.index !== null ){
+        this.educations[ this.index ] = this.educationInput;
+      }else{
+        this.educations.push( this.educationInput );
+      }
+
+      this.$store.dispatch('updateUserEducation', {
+        education: this.educationInput,
+      }).then( response => {
+        console.log( response );
+        console.log("save new education user end +++++");
+        //this.$store.state.userData[0].profile_about.educationAndWorks = this.educationAndWorks;
+        this.educationInput = {
+          access : 'private',
+          schoolName: null,
+          graduated: false,
+          durationFrom: null,
+          durationTo : null,
+          major: null,
+        }
+      }).catch( error => {
+        console.log( error )
+        this.$store.state.userData[0].profile_about.educationAndWorks.educations = this.educations;
+        //this.cancel()
+        console.log("not save new Education user end +++++");
+      });
+      this.$refs['educationModal'].hide();
+    },
+    delet(type, value) {
+      switch (type) {
+        case "educations":
+          console.log('delete one education')
+          this.educations = this.educations.filter(
+                  education => {
+                    return education.schoolName !== value;
+                  }
+          );
+          console.log( value )
+          this.$store.state.userData[0].profile_about.educationAndWorks.educations = this.educations;
+          console.log( this.educations)
+          break;
+        default:
+          console.log("Aucune Correspondance");
+          break;
+      }
+    },
+    edit(type, value) {
+      switch (type) {
+        case "educations":
+          console.log("edit education");
+          this.index = this.educations.findIndex(
+                  education => {
+                    return education.schoolName === value;
+                  }
+          );
+          console.log(this.index);
+          this.educationInput = this.educations[this.index];
+          this.$refs["educationModal"].show();
+          break;
+        default:
+          console.log( 'Aucune Correspondance');
+          break;
+      }
+    }
+
   }
 };
 </script>

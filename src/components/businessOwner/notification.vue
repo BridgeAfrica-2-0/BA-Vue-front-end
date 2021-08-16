@@ -111,19 +111,11 @@ export default {
     loader() {
       return this.getLoader();
     },
-    deleteloader() {
-      return this.getDelLoader;
-    },
-    readloader() {
-      return this.getReadLoader;
-    },
   },
   methods: {
     ...mapGetters({
       sendNotifications: "businessOwner/sendNotifications",
       getLoader: "businessOwner/getLoader",
-      getDelLoader: "businessOwner/getDelLoader",
-      getReadLoader: "businessOwner/getReadLoader",
       getSuccess: "businessOwner/getSuccess",
     }),
 

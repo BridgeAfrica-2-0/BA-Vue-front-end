@@ -8,8 +8,6 @@ export default {
     success: false,
     notifications: [],
     checked: false,
-    btnDelLoader: false,
-    btnReadLoader: false,
   },
   getters: {
     // sending networks
@@ -53,13 +51,6 @@ export default {
     },
     setLoader(state, payload) {
       state.loader = payload;
-    },
-    setBtnDelLoader(state, payload) {
-      state.btnDelLoader = payload;
-    },
-
-    setBtnReadLoader(state, payload) {
-      state.btnReadLoader = payload;
     },
     setSuccess(state, payload) {
       state.success = payload;
@@ -167,7 +158,6 @@ export default {
 
     // Sending a read request
     async readNotifiactions({ dispatch, commit }, payload) {
-      commit("setBtnReadLoader", true);
       let items = {
         ids: [],
       };
@@ -186,14 +176,12 @@ export default {
           },
         })
         .then(() => {
-          commit("setBtnReadLoader", false);
           dispatch("getNotifications");
         });
     },
 
     // Delete All Notifications
     async deleteNotifications({ dispatch, commit }, payload) {
-      commit("setBtnDelLoader", true);
       let items = {
         ids: [],
       };
@@ -212,7 +200,6 @@ export default {
           },
         })
         .then(() => {
-          commit("setBtnDelLoader", false);
           dispatch("getNotifications");
         });
     },

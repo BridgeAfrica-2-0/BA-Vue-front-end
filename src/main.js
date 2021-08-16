@@ -16,7 +16,9 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { fab } from '@fortawesome/free-brands-svg-icons'
 
 
+import LoadScript from 'vue-plugin-load-script';
 
+Vue.use(LoadScript);
 
 import vSelect from 'vue-select';
 
@@ -55,7 +57,7 @@ Vue.use(VueSocialauth, {
     google: {
       clientId: process.env.VUE_APP_GOOGLE_CLIENT_ID,
       client_secret: process.env.VUE_APP_GOOGLE_CLIENT_SECRETE,
-      redirectUri:process.env.VUE_APP_GOOGLE_RETURN_URL
+      redirectUri: process.env.VUE_APP_GOOGLE_RETURN_URL
     }
   }
 });
@@ -77,8 +79,11 @@ Vue.use(VueMaterial)
 
 
 
+
+
+
 import Lightbox from "@morioh/v-lightbox";
-import * as VueGoogleMaps from 'vue2-google-maps';
+import * as VueGoogleMaps from 'gmap-vue'
 
 import VueSplide from '@splidejs/vue-splide';
 Vue.use(VueSplide);
@@ -127,13 +132,18 @@ Vue.use(IconsPlugin);
 
 
 
-
 Vue.use(VueGoogleMaps, {
   load: {
     key: 'AIzaSyAGZU6cqra18t1fhN1AbzRsEc_pgt7n2C8',
     libraries: 'places',
-  }
+  },
+  autobindAllEvents: false,
+  installComponents: true
 });
+
+
+
+
 
 Vue.component('v-select', vSelect);
 
@@ -157,7 +167,7 @@ new Vue({
       response => response,
       error => {
         if (error.response.status === 401) {
-          this.$store.dispatch('logout')
+          this.$store.dispatch('auth/logout')
         }
         return Promise.reject(error)
       }

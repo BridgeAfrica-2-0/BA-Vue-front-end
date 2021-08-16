@@ -72,7 +72,7 @@ export default {
       axios
         .post("user/resendOtp", {
          
-           phone: this.$store.state.auth.user.data.user.phone,
+           phone: this.$store.state.auth.user.user.phone,
         })
         .then((response) => {
           if (response.status === 200) {
@@ -98,12 +98,12 @@ export default {
 
     Verify() {
      
-
+       console.log(this.$store.state.auth.user.user.phone);     
       this.$store
         .dispatch("auth/verify", {
           OTP: this.token,
 
-          phone: this.$store.state.auth.user.data.user.phone,
+          phone: this.$store.state.auth.user.user.phone,
         })
         .then((response) => {
 

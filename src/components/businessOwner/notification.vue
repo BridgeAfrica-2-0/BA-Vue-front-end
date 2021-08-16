@@ -98,6 +98,7 @@ export default {
         selected: false,
       },
     ],
+    all: 24,
     selected: [],
   }),
   beforeMount() {
@@ -135,12 +136,15 @@ export default {
     }),
 
     readAll(data) {
-   
       this.readNotifiactions(data);
     },
     deleteAll(data) {
       this.checked = false;
-      this.deleteNotifications(data);
+      let ids = [];
+      data.forEach((element) => {
+        ids.push(element.id);
+      });
+      this.deleteNotifications(ids);
     },
 
     deleteOne(id) {
@@ -152,7 +156,6 @@ export default {
       this.getNotificationsStore.forEach((element) => {
         this.selected.push(element);
       });
-      console.log(this.selected);
     },
     select(notification, index) {
       if (this.selected[index]) {

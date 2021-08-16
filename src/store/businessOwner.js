@@ -171,11 +171,11 @@ export default {
       let items = {
         ids: [],
       };
-      let objId = {
-        id: null,
-      };
 
       payload.forEach((element) => {
+        let objId = {
+          id: null,
+        };
         objId.id = element.id;
         items.ids.push(objId);
       });
@@ -197,16 +197,14 @@ export default {
       let items = {
         ids: [],
       };
-      let objId = {
-        id: null,
-      };
 
       payload.forEach((element) => {
-        objId.id = element.id;
+        let objId = {
+          id: null,
+        };
+        objId.id = element;
         items.ids.push(objId);
       });
-
-      console.log(items);
       await axios
         .post("notification/deleteAll", items, {
           headers: {

@@ -10,6 +10,14 @@ export default {
     checked: false,
     btnDelLoader: false,
     btnReadLoader: false,
+    pendingPosts: [
+      {
+        name: "J. Circlehead",
+        time: "1hr",
+        text:
+          " Lorem Ipsum is this is just a dummy text to post simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,",
+      },
+    ],
   },
   getters: {
     // sending networks
@@ -46,6 +54,11 @@ export default {
     sendChecked(state) {
       return state.checked;
     },
+
+    // Send Pending posts
+    sendPendingPosts(state) {
+      return state.pendingPosts;
+    },
   },
   mutations: {
     setNetworks(state, payload) {
@@ -68,6 +81,11 @@ export default {
     // Setting the notifications in the state
     setNotifications(state, payload) {
       state.notifications = payload;
+    },
+
+    // Set Pendinding posts
+    setPendingPosts(state, payload) {
+      state.pendingPosts = payload;
     },
   },
   actions: {
@@ -227,6 +245,20 @@ export default {
         .then(() => {
           dispatch("getNotifications");
         });
+    },
+
+    // Get Pending posts
+    async getPendingPosts({ dispatch, commit }) {
+      await dispatch("signIn");
+      console.log("called");
+    },
+    // Approve Pending posts
+    approvePendingPosts({ commit }, payload) {
+      console.log(payload);
+    },
+    // Un Approve Pending Posts
+    unApprovePendingPosts({ commit }, payload) {
+      console.log(payload);
     },
   },
 };

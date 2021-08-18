@@ -1853,12 +1853,12 @@ const actions = {
     await fetch(state.url_base + state.url_create_post, {
       method: "POST",
       headers: {
-        "Content-Type": "application/json",
+        "Content-Type": "multipart/form-data",
         Authorization: `Bearer ${state.token}`
       },
-      body: JSON.stringify({
-        content: payload.postBusinessUpdate
-      })
+      body: {
+        media: payload.movies
+      }
     })
       .then(response => {
         return response.json();

@@ -30,6 +30,7 @@
         <b-row class=" p-0">
           <b-col md="6" sm="12" class="mt-2 "> <Profile /> </b-col>
           <b-col md="6" sm="12" class="mt-2  "> <EmptyBusiness /> </b-col>
+          <comuniti-dashboard class="m-component m-3"></comuniti-dashboard> <br />
         </b-row>
         <br />
       </div>
@@ -64,7 +65,7 @@
       <br />
 
       <b-row>
-        <comuniti-dashboard class="m-component m-3"></comuniti-dashboard> <br />
+<!--        <comuniti-dashboard class="m-component m-3"></comuniti-dashboard> <br />-->
       </b-row>
 
       <div>
@@ -149,22 +150,11 @@ export default {
       category: "any",
       post: "any",
       selectedb: "owner",
-
       educatio: "any",
-
       professio: "any",
-
       workplac: "any",
-
       map: false,
-
-      boptions: [
-        { value: "owner", text: "Owner's Name" },
-        { value: "a", text: "Business Name 1" },
-        { value: "b", text: "Business Name 2" },
-        { value: "c", text: "Business Name 3" },
-      ],
-
+      boptions: [ ],
       optionss: [
         { id: "all", label: "All" },
         { id: "business", label: "Business" },
@@ -173,7 +163,6 @@ export default {
         { id: "marketplace", label: "Markeplace", notEnabled: true },
         { id: "posts", label: "Posts" },
       ],
-
       options: [
         { item: "all", name: "All" },
         { item: "business", name: "Business" },
@@ -204,28 +193,24 @@ export default {
         { item: "business", name: "Businesses i am following" },
         { item: "networks", name: "Networks I am following" },
       ],
-
       education: [
         { item: "any", name: "Education: Any" },
         { item: "ub", name: "University Of Buea" },
         { item: "uba", name: "University Of Yaounde" },
         { item: "uy", name: "University Of Yaounde 1" },
       ],
-
       profession: [
         { item: "any", name: "Profession: Any" },
         { item: "engineer", name: "Engineen" },
         { item: "teacher", name: "Teacher" },
         { item: "farmer", name: "Farmer" },
       ],
-
       workplace: [
         { item: "any", name: "Post: Any" },
         { item: "yaounde", name: "Yaounde" },
         { item: "douala", name: "Douala" },
         { item: "Buea", name: "Buea" },
       ],
-
       sponsoredBusinesses: [
         { title: "Business 1" },
         { title: "Business 2" },
@@ -251,7 +236,6 @@ export default {
     EmptyBusiness,
     //SelectBH,
     Profile,
-
     CarousselDashboard,
     Navbar,
   },

@@ -6,10 +6,11 @@ import businessOwner from "./businessOwner";
 import axios from "axios";
 
 Vue.use(Vuex);
-axios.defaults.baseURL = "https://8c04b4bab7aa.ngrok.io/api/v1/";
+axios.defaults.baseURL = "https://e4f5730e80f9.ngrok.io/api/v1";
 
 const getDefaultState = () => {
   return {
+    token: "5|ZrS4NiZ9yXrSZ5b80aqtNsnijikEfUUXBMF51R7N",
     userData: [
       {
         id: "",
@@ -641,7 +642,207 @@ const getDefaultState = () => {
         }
       }
     ],
-    pdetails: ""
+    businessData: [
+      {
+        id: "",
+        fullname: "",
+        username: "Thorfinn Kharlsefni business",
+        email: "",
+        password: "",
+        businessName: "Thorfinn business",
+        businessPicture: "https://pbs.twimg.com/media/DoNa_wKUUAASSCF.jpg",
+        coverImage: "https://pbs.twimg.com/media/DKO62sVXUAA0_AL.jpg",
+        numbersOfFollowers: 30,
+        business: {
+          businessNumberFollowers: 10,
+          businessNumberFollowing: 30,
+          followers: [
+            {
+              id: 1,
+              businessProfilePicture: [
+                "https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg",
+                "https://i.wifegeek.com/200426/f9459c52.jpg",
+                "https://i.wifegeek.com/200426/5fa51df3.jpg"
+              ],
+              businessName: "Super Car ltd",
+              businessCategory: "Car Marketing",
+              businessDetails:
+                "super best car seller in the world adipisicing elit. lorem epsep",
+              businessLocation: "Douala cameroon",
+              businessNumberFollowers: 20
+            },
+            {
+              id: 2,
+              businessProfilePicture: [
+                "https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg",
+                "https://i.wifegeek.com/200426/f9459c52.jpg",
+                "https://i.wifegeek.com/200426/5fa51df3.jpg"
+              ],
+              businessName: "Super Car ltd",
+              businessCategory: "Car Marketing",
+              businessDetails:
+                "super best car seller in the world adipisicing elit. lorem epsep",
+              businessLocation: "Douala cameroon",
+              businessNumberFollowers: 20
+            },
+            {
+              id: 3,
+              businessProfilePicture: [
+                "https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg",
+                "https://i.wifegeek.com/200426/f9459c52.jpg",
+                "https://i.wifegeek.com/200426/5fa51df3.jpg"
+              ],
+              businessName: "Super Car ltd",
+              businessCategory: "Car Marketing",
+              businessDetails:
+                "super best car seller in the world adipisicing elit. lorem epsep",
+              businessLocation: "Douala cameroon",
+              businessNumberFollowers: 20
+            },
+            {
+              id: 4,
+              businessProfilePicture: [
+                "https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg",
+                "https://i.wifegeek.com/200426/f9459c52.jpg",
+                "https://i.wifegeek.com/200426/5fa51df3.jpg"
+              ],
+              businessName: "Super Car ltd",
+              businessCategory: "Car Marketing",
+              businessDetails:
+                "super best car seller in the world adipisicing elit. lorem epsep",
+              businessLocation: "Douala cameroon",
+              businessNumberFollowers: 20
+            },
+            {
+              id: 5,
+              businessProfilePicture: [
+                "https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg",
+                "https://i.wifegeek.com/200426/f9459c52.jpg",
+                "https://i.wifegeek.com/200426/5fa51df3.jpg"
+              ],
+              businessName: "Super Car ltd",
+              businessCategory: "Car Marketing",
+              businessDetails:
+                "super best car seller in the world adipisicing elit. lorem epsep",
+              businessLocation: "Douala cameroon",
+              businessNumberFollowers: 20
+            },
+            {
+              id: 6,
+              businessProfilePicture: [
+                "https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg",
+                "https://i.wifegeek.com/200426/f9459c52.jpg",
+                "https://i.wifegeek.com/200426/5fa51df3.jpg"
+              ],
+              businessName: "Super Car ltd",
+              businessCategory: "Car Marketing",
+              businessDetails:
+                "super best car seller in the world adipisicing elit. lorem epsep",
+              businessLocation: "Douala cameroon",
+              businessNumberFollowers: 20
+            }
+          ],
+          followings: [
+            {
+              id: 1,
+              businessProfilePicture: [
+                "https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg",
+                "https://i.wifegeek.com/200426/f9459c52.jpg",
+                "https://i.wifegeek.com/200426/5fa51df3.jpg"
+              ],
+              businessName: "Super Car ltd",
+              businessCategory: "Car Marketing",
+              businessDetails:
+                "super best car seller in the world adipisicing elit. lorem epsep",
+              businessLocation: "Douala cameroon",
+              businessNumberFollowers: 20
+            }
+          ]
+        },
+        people: {
+          communautyNumberFollowers: 10,
+          communautyNumberFollowings: 30,
+          followers: [
+            {
+              id: 1,
+              communautyProfilePicture:
+                "https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg",
+              communautyName: "Super Car ltd",
+              communautyNumberFollowers: 20
+            },
+            {
+              id: 2,
+              communautyProfilePicture:
+                "https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg",
+              communautyName: "Super Car ltd",
+              communautyNumberFollowers: 20
+            },
+            {
+              id: 3,
+              communautyProfilePicture:
+                "https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg",
+              communautyName: "Super Car ltd",
+              communautyNumberFollowers: 20
+            },
+            {
+              id: 4,
+              communautyProfilePicture:
+                "https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg",
+              communautyName: "Super Car ltd",
+              communautyNumberFollowers: 20
+            },
+            {
+              id: 5,
+              communautyProfilePicture:
+                "https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg",
+              communautyName: "Super Car ltd",
+              communautyNumberFollowers: 20
+            },
+            {
+              id: 6,
+              communautyProfilePicture:
+                "https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg",
+              communautyName: "Super Car ltd",
+              communautyNumberFollowers: 20
+            }
+          ],
+          followings: [
+            {
+              id: 1,
+              communautyProfilePicture:
+                "https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg",
+              communautyName: "Super Car ltd",
+              communautyNumberFollowings: 20
+            }
+          ]
+        }
+      }
+    ],
+    boptions: [
+      { value: "owner", text: "Owner's Name" },
+      { value: "a", text: "Business Name 1" },
+      { value: "b", text: "Business Name 2" },
+      { value: "c", text: "Business Name 3" }
+    ],
+    bdetailss: [
+      {
+        business: [
+          {
+            name: "peter pan",
+            category: "poup poup",
+            about_business: "BHBfiuwefufewi",
+            location_description: "Yaounde",
+            website: "https://BHB",
+            logo_path: ""
+          }
+        ],
+        followers: 200
+      }
+    ],
+    pdetails: "",
+
+    bdetails: [],
+    ndetails: ""
   };
 };
 
@@ -650,16 +851,46 @@ const state = getDefaultState();
 
 const actions = {
   getpdetails({ commit }) {
-    return axios.get("profileCount/1").then(function({ data }) {
-      commit("SET_PDETAILS", data.data);
-      console.log(data);
-    });
+    return axios
+      .get("", {
+        headers: { Authorization: `Bearer ${state.token}` }
+      })
+      .then(function({ data }) {
+        commit("SET_PDETAILS", data.data);
+        console.log(data);
+      });
+  },
+  getbdetails({ commit }) {
+    return axios
+      .get("/businessDetails", {
+        headers: { Authorization: `Bearer ${state.token}` }
+      })
+      .then(function({ data }) {
+        commit("SET_BDETAILS", data.data);
+        console.log(data);
+      });
+  },
+  getndetails({ commit }) {
+    return axios
+      .get("", {
+        headers: { Authorization: `Bearer ${state.token}` }
+      })
+      .then(function({ data }) {
+        commit("SET_NDETAILS", data.data);
+        console.log(data);
+      });
   }
 };
 
 const mutations = {
   SET_PDETAILS(state, pdetails) {
     state.pdetails = pdetails;
+  },
+  SET_BDETAILS(state, bdetails) {
+    state.bdetails = bdetails;
+  },
+  SET_NDETAILS(state, ndetails) {
+    state.ndetails = ndetails;
   }
 };
 
@@ -668,9 +899,21 @@ const getters = {
     return state.pdetails;
   },
 
+  bbdetails(state) {
+    return state.bdetails;
+  },
+
+  nndetails(state) {
+    return state.details;
+  },
+
   getUser(state) {
     return state.userData;
   },
+
+  /* getBusines(state) {
+    return <state className="bdetails"></state>;
+  },*/
 
   getpost(state) {
     return state.userData.posts;

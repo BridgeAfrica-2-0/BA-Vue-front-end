@@ -36,6 +36,274 @@ const getDefaultState = () => {
     token: "1|le8p995vGFTX1oo8PxHyam4pIOpkdxLQKHUw2QkP",
     count: "",
     todos: [],
+    dashboard: [
+      {
+        id: 1,
+        type: "Business Name 1",
+        directions: null,
+        business: {
+          name: "Business Name 1",
+          plan_type: false,
+          category: "Profesional",
+          messages: 30,
+          notifications: 30,
+          website: null
+        },
+        insights: {
+          posts: 33000,
+          visit: 1400,
+          share: 870
+        },
+        community: {
+          people: {
+            followers: [],
+            followings: []
+          },
+          business: {
+            followers: [],
+            followings: []
+          }
+        },
+        posts: []
+      },
+      {
+        id: 2,
+        type: "Business Name 1",
+        directions: null,
+        business: {
+          name: "Business Name 1",
+          plan_type: false,
+          category: "Profesional",
+          messages: 30,
+          notifications: 30,
+          website: null
+        },
+        insights: {
+          posts: 33000,
+          visit: 1400,
+          share: 870
+        },
+        community: {
+          people: {
+            followers: [],
+            followings: []
+          },
+          business: {
+            followers: [],
+            followings: []
+          }
+        },
+        posts: []
+      },
+      {
+        id: 3,
+        type: "Business Name 1",
+        directions: null,
+        business: {
+          name: "Business Name 1",
+          plan_type: false,
+          category: "Profesional",
+          messages: 30,
+          notifications: 30,
+          website: null
+        },
+        insights: {
+          posts: 33000,
+          visit: 1400,
+          share: 870
+        },
+        community: {
+          people: {
+            followers: [],
+            followings: []
+          },
+          business: {
+            followers: [],
+            followings: []
+          }
+        },
+        posts: []
+      },
+      {
+        id: 4,
+        type: "Business Name 1",
+        directions: null,
+        business: {
+          name: "Business Name 1",
+          plan_type: false,
+          category: "Profesional",
+          messages: 30,
+          notifications: 30,
+          website: null
+        },
+        insights: {
+          posts: 33000,
+          visit: 1400,
+          share: 870
+        },
+        community: {
+          people: {
+            followers: [],
+            followings: []
+          },
+          business: {
+            followers: [],
+            followings: []
+          }
+        },
+        posts: []
+      },
+      {
+        id: 5,
+        type: "Business Name 1",
+        directions: null,
+        business: {
+          name: "Business Name 1",
+          plan_type: false,
+          category: "Profesional",
+          messages: 30,
+          notifications: 30,
+          website: null
+        },
+        insights: {
+          posts: 33000,
+          visit: 1400,
+          share: 870
+        },
+        community: {
+          people: {
+            followers: [],
+            followings: []
+          },
+          business: {
+            followers: [],
+            followings: []
+          }
+        },
+        posts: []
+      }
+    ],
+    data: {
+      owner: {},
+      business: [
+        {
+          id: 1,
+          type: "Business Name 1",
+          directions: null,
+          business: {
+            name: "Business Name 1",
+            plan_type: false,
+            category: "Profesional",
+            messages: 30,
+            notifications: 30,
+            website: null
+          },
+          insights: {
+            posts: 33000,
+            visit: 1400,
+            share: 870
+          },
+          community: {
+            people: {
+              followers: [],
+              followings: []
+            },
+            business: {
+              followers: [],
+              followings: []
+            }
+          },
+          posts: []
+        },
+        {
+          id: 2,
+          type: "Business Name 1",
+          directions: null,
+          business: {
+            name: "Business Name 1",
+            plan_type: false,
+            category: "Profesional",
+            messages: 30,
+            notifications: 30,
+            website: null
+          },
+          insights: {
+            posts: 33000,
+            visit: 1400,
+            share: 870
+          },
+          community: {
+            people: {
+              followers: [],
+              followings: []
+            },
+            business: {
+              followers: [],
+              followings: []
+            }
+          },
+          posts: []
+        },
+        {
+          id: 3,
+          type: "Business Name 1",
+          directions: null,
+          business: {
+            name: "Business Name 1",
+            plan_type: false,
+            category: "Profesional",
+            messages: 30,
+            notifications: 30,
+            website: null
+          },
+          insights: {
+            posts: 33000,
+            visit: 1400,
+            share: 870
+          },
+          community: {
+            people: {
+              followers: [],
+              followings: []
+            },
+            business: {
+              followers: [],
+              followings: []
+            }
+          },
+          posts: []
+        },
+        {
+          id: 4,
+          type: "Business Name 1",
+          directions: null,
+          business: {
+            name: "Business Name 1",
+            plan_type: false,
+            category: "Profesional",
+            messages: 30,
+            notifications: 30,
+            website: null
+          },
+          insights: {
+            posts: 33000,
+            visit: 1400,
+            share: 870
+          },
+          community: {
+            people: {
+              followers: [],
+              followings: []
+            },
+            business: {
+              followers: [],
+              followings: []
+            }
+          },
+          posts: []
+        }
+      ]
+    },
     userData: [
       {
         id: "",

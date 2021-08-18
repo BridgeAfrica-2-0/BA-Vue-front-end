@@ -2,7 +2,7 @@
   <div>
     <b>Profession</b>
     <hr />
-    <b-link class="mt-4 doc" v-b-modal.modal-11>
+    <b-link class="mt-4 doc" v-b-modal.professionModal>
       <b-icon icon="plus" variant="primary"></b-icon>
       Add Profession</b-link
     >
@@ -22,7 +22,7 @@
       </div>
     </b-list-group-item>
 
-    <b-modal ref="professionModal" id="modal-11" title="Add Profession" @close="cancel" @ok="save">
+    <b-modal ref="professionModal" id="professionModal" title="Add Profession" @close="cancel" @ok="save" @keypress="save">
       <div class="width">
         <b-form-select
           class="mb-2"
@@ -60,14 +60,15 @@ export default {
   },
   created() {
     console.log( 'Load User Post About Profession')
-    this.professions = JSON.parse( JSON.stringify( this.$store.getters.getProfileAboutEducationAndWorks.professions ) ) ;
+    this.professions = this.$store.getters.getProfileAboutEducationAndWorks.professions;
+    console.log('End User Post About Profession')
   },
   methods: {
     cancel() {
       console.log("Cancel Add Profession in User  ++++++");
-      this.professions = JSON.parse(
-              JSON.stringify(this.$store.getters.getProfileAboutEducationAndWorks.professions)
-      );
+      // this.professions = JSON.parse(
+      //         JSON.stringify(this.$store.getters.getProfileAboutEducationAndWorks.professions)
+      // );
       console.log(this.professions);
       this.professionInput = {
         profession: null,

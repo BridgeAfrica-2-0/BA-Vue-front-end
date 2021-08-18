@@ -31,6 +31,21 @@ export default {
       size: 0
     };
   },
+  created() {
+    console.log("load profile about start +++++");
+    this.$store
+      .dispatch("loadUserProfile_About", null)
+      .then(response => {
+        console.log("load profile about sucessss ++++++ ");
+        console.log( response );
+        console.log(" end load profile about");
+      })
+      .catch(error => {
+        console.log("error load profile about ");
+        console.log( error )
+        console.log(" end load profile about ");
+      });
+  },
 
   computed: {
     vertical() {

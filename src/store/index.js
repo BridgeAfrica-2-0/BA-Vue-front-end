@@ -9,7 +9,7 @@ Vue.use(Vuex);
 
 const getDefaultState = () => {
   return {
-    url_base: "https://ce2d17022ed8.ngrok.io",
+    url_base: "https://3f9fa44396a9.ngrok.io",
     url_load_profile_picture_changed: "/api/v1/download?file_name=",
     url_load_profile_picture:
       "/api/v1/download?file_name=public/media/photos/z7aooJV1XnDVTpRSfPGOUj7sjm0trGVJCiNFS7Ef.jpg",
@@ -28,8 +28,12 @@ const getDefaultState = () => {
     url_add_working: "/api/v1/userIntro/addWorking",
     url_update_working: "/api/v1/userIntro/updateWorking",
     url_add_school: "api/v1/userIntro/addSchool",
-    url_add_profession: "/api/v1/userIntro/updateWorki",
+    url_add_profession: "/api/v1/userIntro/updateWorking",
     url_load_basicInfos: "",
+    url_load_business_about: "/api/v1/business/info/",
+    url_update_business_about_name: "/api/v1/business/update/",
+    url_update_business_biography: "/api/v1/business/businessBiography",
+    url_load_user_profile_about: "",
     recoverData: "",
     login: false,
     isToi: false,
@@ -1239,6 +1243,80 @@ const getDefaultState = () => {
               { profession: "Cuisinier", access: "public" }
             ]
           }
+        },
+        business_about: {
+          biography: {
+            title: "About Mapoure Agrobusiness",
+            description:
+              "Lorem ipsum dolor sit amet consectetur adipisicing elit.\n" +
+              "              Asperiores temporibus, rerum iste id obcaecati quae odit accusamus\n" +
+              "              reprehenderit, ipsa nam laudantium pariatur. Harum, soluta. Nam\n" +
+              "              accusantium hic numquam architecto debitis. Lorem ipsum dolor sit\n" +
+              "              amet consectetur adipisicing elit. Asperiores temporibus, rerum\n" +
+              "              iste id obcaecati quae odit accusamus reprehenderit, ipsa nam\n" +
+              "              laudantium pariatur. Harum, soluta. Nam accusantium hic numquam\n" +
+              "              architecto debitis. Asperiores temporibus, rerum iste id obcaecati\n" +
+              "              architecto debitis. Asperiores temporibus, rerum iste id obcaecati\n" +
+              "              architecto debitis. Asperiores temporibus, rerum iste id obcaecati\n" +
+              "              architecto debitis. Asperiores temporibus, rerum iste id obcaecati\n" +
+              "              architecto debitis. Asperiores temporibus, rerum iste id obcaecati\n" +
+              "              quae odit accusamus reprehenderit, ipsa nam laudantium pariatur.\n" +
+              "              quae odit accusamus reprehenderit, ipsa nam laudantium pariatur.\n" +
+              "              Harum, soluta. Nam accusantium hic numquam architecto debitis."
+          },
+          address: {
+            businessName: "Current or Last Organization",
+            category: "Agriculture",
+            keywords: "Agriculture",
+            country: "Cameroun",
+            city: "Yaounde",
+            NeigbourHood: "Melen",
+            phones: { phone_1: "+237656602212", phone_2: "+237677754814" },
+            businessEmail: "info@businessname.com",
+            businessHours: {
+              open: "Always Open",
+              dayOfWorks: [
+                { day: "Monday", start: 1, end: 10, check: false },
+                { day: "Tuesday", start: null, end: null, check: false },
+                { day: "Wednesday", start: null, end: null, check: false },
+                { day: "Thursday", start: null, end: null, check: false },
+                { day: "Friday", start: null, end: null, check: false },
+                { day: "Saturday", start: null, end: null, check: false },
+                { day: "Sunday", start: null, end: null, check: false }
+              ]
+            }
+          }
+        },
+        business_about1: {
+          name: "Tierra Hermiston",
+          logo_path: "http://localhost:8000/storage",
+          category: "Hourse Marketing",
+          keywords: null,
+          language: null,
+          location_description:
+            "Tempore quo soluta voluptates quis. Doloremque autem minus ut nisi molestias maiores cum. Et assumenda velit expedita et et sint sed in.",
+          website: null,
+          community: 6,
+          phone: null,
+          email: null,
+          business_open_hours: [
+            {
+              day: "monday",
+              opening_time: "09:05:12",
+              closing_time: "15:06:18"
+            },
+            {
+              day: "tuesday",
+              opening_time: "07:05:38",
+              closing_time: "14:05:43"
+            }
+          ],
+          region: null,
+          address: null,
+          city: null,
+          country: null,
+          lat: -56.200329,
+          lng: -6.249487
         }
       }
     ],
@@ -2410,6 +2488,223 @@ const actions = {
       });
     return response_;
   },
+  async loadUserProfile_About(context, payload) {
+    console.log(payload);
+    console.log("load user Profile About start +++++");
+
+    // context.commit("updateUserBiography", {
+    //   info_access: payload.info_access,
+    //   description: payload.description
+    // });
+
+    let response_ = null;
+    await fetch(state.url_base + state.url_load_user_profile_about, {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+        Authorization: `Bearer ${state.token}`
+      }
+    })
+      .then(response => {
+        console.log("load user Profile About response (1) +++++++");
+        console.log(response);
+        return response.json();
+      })
+      .then(response => {
+        console.log("load user Profile About response successsss +++");
+        console.log(response);
+        if (!response) {
+          console.log("Erreur liée au serveur+++++++");
+          throw new Error("Erreur du chargement du profile about+++++");
+        }
+        context.commit("updateUserProfileAbout", {
+          profile_about: {
+            biography: {
+              info_access: null,
+              description:
+                "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis, aliquid cupiditate fugit similique laboriosam, expedita, voluptatibus dolorem atlibero ipsam illo molestiae. Voluptates quisquam vitae, aperiam voluptatem ad enim ducimus praesentium fuga quas unde ea quasi obcaecati eumlaboriosam eos nesciunt exercitationem voluptatibus cupiditate sunt totam?Dolor voluptatem repudiandae quos." +
+                "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis, aliquid cupiditate fugit similique laboriosam, expedita, voluptatibus dolorem atlibero ipsam illo molestiae. Voluptates quisquam vitae, aperiam voluptatem ad enim ducimus praesentium fuga quas unde ea quasi obcaecati eumlaboriosam eos nesciunt exercitationem voluptatibus cupiditate sunt totam?Dolor voluptatem repudiandae quos." +
+                "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis, aliquid cupiditate fugit similique laboriosam, expedita, voluptatibus dolorem atlibero ipsam illo molestiae. Voluptates quisquam vitae, aperiam voluptatem ad enim ducimus praesentium fuga quas unde ea quasi obcaecati eumlaboriosam eos nesciunt exercitationem voluptatibus cupiditate sunt totam?Dolor voluptatem repudiandae quos."
+            },
+            basicInfo: {
+              dateOfBirth: {
+                date_1: {
+                  day: "12",
+                  month: "January",
+                  access: "private"
+                },
+                date_2: {
+                  year: "2000",
+                  access: "private"
+                }
+              },
+              gender: "M",
+              mobilePhones: ["237656602212", "237677873626"],
+              currentCity: "YAOUNDE",
+              homeTown: "MELEN",
+              websites: ["www.google.com", "ww.facebook.com", "www.udemy.com"],
+              socialLinks: [
+                "www.instagram.com/bridgeafrica",
+                "www.google.com",
+                "ww.facebook.com",
+                "www.udemy.com"
+              ]
+            },
+            educationAndWorks: {
+              workPlaces: [
+                {
+                  id: 1,
+                  companyName: "Coca Cla Pvt Ltd. Team Lead",
+                  cityTown: "YAOUNDE",
+                  position: "YAOUNDE",
+                  jobResponsibilities:
+                    "Job descrioption dummny textJob descrioption dummny text Jobdescrioption dummny text",
+                  currentlyWorking: false,
+                  startDate: "2021-08-19",
+                  endDate: null,
+                  access: "private"
+                },
+                {
+                  id: 2,
+                  companyName: "a Cla Pvt Ltd. Team Lead",
+                  cityTown: "YAOUNDE",
+                  position: "YAOUNDE",
+                  jobResponsibilities:
+                    "Job descrioption dummny textJob descrioption dummny text Jobdescrioption dummny text",
+                  currentlyWorking: false,
+                  starDate: "2014-09-12",
+                  endDate: null,
+                  access: "private"
+                },
+                {
+                  id: 3,
+                  companyName: "Coc Cla Pvt Ltd. Team Lead",
+                  cityTown: "YAOUNDE",
+                  position: "YAOUNDE",
+                  jobResponsibilities:
+                    "Job descrioption dummny textJob descrioption dummny text Jobdescrioption dummny text",
+                  currentlyWorking: false,
+                  starDate: "2012-09-12",
+                  endDate: "2012-09-12",
+                  access: ""
+                }
+              ],
+              educations: [
+                {
+                  access: "private",
+                  schoolName: null,
+                  graduated: false,
+                  durationFrom: null,
+                  durationTo: null,
+                  major: null
+                }
+              ],
+              professions: [
+                { profession: "Cultivateur", access: "public" },
+                { profession: "Macon", access: "private" },
+                { profession: "Cuisinier", access: "public" }
+              ]
+            }
+          }
+        });
+        response_ = response;
+      })
+      .catch(error => {
+        console.log("erreur liée au serveur ou au navigateur");
+        context.commit("updateUserProfileAbout", {
+          profile_about: {
+            biography: {
+              info_access: null,
+              description:
+                "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis, aliquid cupiditate fugit similique laboriosam, expedita, voluptatibus dolorem atlibero ipsam illo molestiae. Voluptates quisquam vitae, aperiam voluptatem ad enim ducimus praesentium fuga quas unde ea quasi obcaecati eumlaboriosam eos nesciunt exercitationem voluptatibus cupiditate sunt totam?Dolor voluptatem repudiandae quos." +
+                "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis, aliquid cupiditate fugit similique laboriosam, expedita, voluptatibus dolorem atlibero ipsam illo molestiae. Voluptates quisquam vitae, aperiam voluptatem ad enim ducimus praesentium fuga quas unde ea quasi obcaecati eumlaboriosam eos nesciunt exercitationem voluptatibus cupiditate sunt totam?Dolor voluptatem repudiandae quos." +
+                "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis, aliquid cupiditate fugit similique laboriosam, expedita, voluptatibus dolorem atlibero ipsam illo molestiae. Voluptates quisquam vitae, aperiam voluptatem ad enim ducimus praesentium fuga quas unde ea quasi obcaecati eumlaboriosam eos nesciunt exercitationem voluptatibus cupiditate sunt totam?Dolor voluptatem repudiandae quos."
+            },
+            basicInfo: {
+              dateOfBirth: {
+                date_1: {
+                  day: "12",
+                  month: "January",
+                  access: "private"
+                },
+                date_2: {
+                  year: "2000",
+                  access: "private"
+                }
+              },
+              gender: "M",
+              mobilePhones: ["237656602212", "237677873626"],
+              currentCity: "YAOUNDE",
+              homeTown: "MELEN",
+              websites: ["www.google.com", "ww.facebook.com", "www.udemy.com"],
+              socialLinks: [
+                "www.instagram.com/bridgeafrica",
+                "www.google.com",
+                "ww.facebook.com",
+                "www.udemy.com"
+              ]
+            },
+            educationAndWorks: {
+              workPlaces: [
+                {
+                  id: 1,
+                  companyName: "Coca Cla Pvt Ltd. Team Lead",
+                  cityTown: "YAOUNDE",
+                  position: "YAOUNDE",
+                  jobResponsibilities:
+                    "Job descrioption dummny textJob descrioption dummny text Jobdescrioption dummny text",
+                  currentlyWorking: false,
+                  startDate: "2021-08-19",
+                  endDate: null,
+                  access: "private"
+                },
+                {
+                  id: 2,
+                  companyName: "a Cla Pvt Ltd. Team Lead",
+                  cityTown: "YAOUNDE",
+                  position: "YAOUNDE",
+                  jobResponsibilities:
+                    "Job descrioption dummny textJob descrioption dummny text Jobdescrioption dummny text",
+                  currentlyWorking: false,
+                  starDate: "2014-09-12",
+                  endDate: null,
+                  access: "private"
+                },
+                {
+                  id: 3,
+                  companyName: "Coc Cla Pvt Ltd. Team Lead",
+                  cityTown: "YAOUNDE",
+                  position: "YAOUNDE",
+                  jobResponsibilities:
+                    "Job descrioption dummny textJob descrioption dummny text Jobdescrioption dummny text",
+                  currentlyWorking: false,
+                  starDate: "2012-09-12",
+                  endDate: "2012-09-12",
+                  access: ""
+                }
+              ],
+              educations: [
+                {
+                  access: "private",
+                  schoolName: null,
+                  graduated: false,
+                  durationFrom: null,
+                  durationTo: null,
+                  major: null
+                }
+              ],
+              professions: [
+                { profession: "Cultivateur", access: "public" },
+                { profession: "Macon", access: "private" },
+                { profession: "Cuisinier", access: "public" }
+              ]
+            }
+          }
+        });
+        console.log(error);
+      });
+    return response_;
+  },
   async updateUserWorkPlaces(context, payload) {
     console.log(payload);
     console.log("edit user workplace start +++++");
@@ -2547,6 +2842,158 @@ const actions = {
         console.log("erreur liée au serveur ou au navigateur");
         console.log(error);
         throw error;
+      });
+    return response_;
+  },
+  async modifyBusinessBiography(context, payload) {
+    console.log(payload);
+    console.log("modify Business Biography start +++++");
+
+    let response_ = null;
+    await fetch(state.url_base + state.url_update_business_biography, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        Authorization: `Bearer ${state.token}`
+      },
+      body: JSON.stringify({
+        title: payload.biography.title,
+        description: payload.biography.description
+      })
+    })
+      .then(response => {
+        console.log("modify Business Biography response (1) +++++++");
+        console.log(response);
+        if (response.status !== 201 || response.status !== 200) {
+          console.log("Erreur liée au serveur+++++++");
+          throw new Error("Erreur de modification du Business Biography+++++");
+        }
+        return response.json();
+      })
+      .then(response => {
+        console.log("modify Business Biography response successsss +++");
+        console.log(response);
+        if (response.errors) {
+          console.log("Erreur liée au serveur+++++++");
+          throw new Error("Erreur de modification du Business Biography+++++");
+        }
+        context.commit("modifyBusinessBiography", {
+          biography: payload.biography
+        });
+        response_ = response;
+      })
+      .catch(error => {
+        console.log("erreur liée au serveur ou au navigateur");
+        console.log(error);
+        context.commit("modifyBusinessBiography", {
+          biography: payload.biography
+        });
+        throw error;
+      });
+    return response_;
+  },
+  async loadUserBusinessAbout(context, payload) {
+    console.log(payload);
+    console.log("load user Business About start +++++");
+
+    // context.commit("updateUserBiography", {
+    //   info_access: payload.info_access,
+    //   description: payload.description
+    // });
+
+    let response_ = null;
+    await fetch(state.url_base + state.url_load_business_about + "4", {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+        Authorization: `Bearer ${state.token}`
+      }
+    })
+      .then(response => {
+        console.log("load user Business About response (1) +++++++");
+        console.log(response);
+        if (response.status !== 200 && response.status !== 201) {
+          throw "Erreurs lors du traitement par le serveur";
+        }
+        return response.json();
+      })
+      .then(response => {
+        console.log("load user Business About response successsss +++");
+        console.log(response);
+        if (!response) {
+          console.log("Erreur liée au serveur+++++++");
+          throw new Error("Erreur du chargement du Business About +++++");
+        }
+        context.commit("updateUserBusinessAbout", {
+          businessAbout: response.data
+        });
+        response_ = response;
+      })
+      .catch(error => {
+        console.log("erreur liée au serveur ou au navigateur");
+        console.log(error);
+      });
+    return response_;
+  },
+  async updateUserBusinessAbout(context, payload) {
+    console.log(payload);
+    console.log("update user Business About start +++++");
+
+    // context.commit("updateUserBiography", {
+    //   info_access: payload.info_access,
+    //   description: payload.description
+    // });
+
+    let response_ = null;
+    await fetch(state.url_base + state.url_update_business_about_name + "4", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        Authorization: `Bearer ${state.token}`
+      },
+      body: JSON.stringify({
+        name: payload.business_about.name,
+        category: payload.business_about.category,
+        keywords: payload.business_about.keywords,
+        phone: payload.business_about.phone,
+        email: payload.business_about.email,
+        region: payload.business_about.region,
+        city: payload.business_about.city,
+        country: payload.business_about.country,
+        openHours: [
+          ["monday", "09:05:12", "15:06:18"],
+          ["tuesday", "09:05:12", "15:06:18"]
+        ]
+      })
+    })
+      .then(response => {
+        console.log("update user Business About response (1) +++++++");
+        console.log(response);
+        // if (response.status !== 200 && response.status !== 201) {
+        //   throw "Erreurs lors du traitement par le serveur";
+        // }
+        return response.json();
+      })
+      .then(response => {
+        console.log("update user Business About response successsss +++");
+        console.log(response);
+        if (!response) {
+          console.log("Erreur liée au serveur+++++++");
+          throw new Error("Erreur de la mise à jour du Business About +++++");
+        }
+        context.commit("updateUserBusinessAbout", {
+          businessAbout: payload.business_about
+        });
+        response_ = response;
+      })
+      .catch(error => {
+        console.log("erreur liée au serveur ou au navigateur");
+        context.commit("updateUserBusinessAbout", {
+          businessAbout: payload.business_about
+        });
+        console.log(error);
       });
     return response_;
   }
@@ -2712,6 +3159,15 @@ const mutations = {
       ...state.userData[0].profile_about.educationAndWorks.educations,
       payload.educations
     ];
+  },
+  modifyBusinessBiography(state, payload) {
+    state.userData[0].business_about.biography = payload.biography;
+  },
+  updateUserProfileAbout(state, payload) {
+    state.userData[0].profile_about = payload.profile_about;
+  },
+  updateUserBusinessAbout(state, payload) {
+    state.userData[0].business_about1 = payload.businessAbout;
   }
 };
 
@@ -2762,6 +3218,9 @@ export default new Vuex.Store({
     },
     getProfileAboutEducationAndWorks(state) {
       return state.userData[0].profile_about.educationAndWorks;
+    },
+    getBusinessAbout(state) {
+      return state.userData[0].business_about1;
     }
   },
   actions,

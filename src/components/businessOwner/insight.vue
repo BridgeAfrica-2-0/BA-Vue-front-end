@@ -50,13 +50,13 @@
 
 -->
 
-      <b-col xl="4" md="6" lg="6" sm="12">
+      <b-col xl="4" md="6" lg="6" sm="12" v-for="insight in business_insights" :key="insight.id">
         <b-card class="b-shadow">
           <b-row>
             <b-col cols="8">
               <h6 class="card-title mb-0">
                 New Notifications
-                <p class="s-text">From (Jan 1 - Jan 8)</p>
+                <p class="s-text">From ( {{ insight.date_start }} - {{ insight.date_end }} )</p>
               </h6>
             </b-col>
             <b-col>
@@ -74,8 +74,8 @@
           <b-row>
             <b-col>
               <h3 class="mb-2 m-up">
-                3,897
-                <p class="s-text">Total Post: 79</p>
+                {{ insight.amount }}
+                <p class="s-text">Total {{ insight.type }}: {{ insight.total }}</p>
               </h3>
             </b-col>
             <b-col cols="5">
@@ -185,10 +185,25 @@ export default {
 
   data() {
     return {
-      planetChartData: planetChartData
+      planetChartData: planetChartData,
+      business_insights: [],
     };
   },
-
+  created() {
+    console.log('Load Business Insights start  ++++')
+    this.$store.dispatch('loadUserBusinessInsight', null)
+            .then( response => {
+              console.log('load Business Insights response in component +++++')
+              console.log( response )
+              this.business_insights = this.$store.getters.getBusinessInsights
+              console.log( 'load Business Insights end +++++++')
+            }).catch( error => {
+              console.log('erreur liée au serveur et/ou navigateur ++++++');
+              this.business_insights = this.$store.getters.getBusinessInsights
+              console.log( error );
+              console.log( 'Load Business Insights end +++++')
+    })
+  },
   mounted() {
     const ctx = document.getElementById("planet-chart");
     new Chart(ctx, this.planetChartData);
@@ -200,6 +215,10 @@ export default {
 </script>
 
 <style scoped>
+
+  div.col-sm-12.col-md-6.col-lg-6.col-xl-4{
+    padding: 15px;
+  }
 .s-text {
   margin-top: -1px;
   font-size: 13px;

@@ -33,6 +33,7 @@ const getDefaultState = () => {
     url_load_business_about: "/api/v1/business/info/",
     url_update_business_about_name: "/api/v1/business/update/",
     url_update_business_biography: "/api/v1/business/businessBiography",
+    url_load_business_insight: "",
     url_load_user_profile_about: "",
     recoverData: "",
     login: false,
@@ -1317,7 +1318,49 @@ const getDefaultState = () => {
           country: null,
           lat: -56.200329,
           lng: -6.249487
-        }
+        },
+        business_insights: [
+          {
+            id: 1,
+            date_start: "Jan 1",
+            date_end: "Jan 8",
+            amount: 3.897,
+            total: 79,
+            type: "post"
+          },
+          {
+            id: 2,
+            date_start: "Jan 1",
+            date_end: "Jan 8",
+            amount: 3.897,
+            total: 79,
+            type: "share"
+          },
+          {
+            id: 3,
+            date_start: "Jan 1",
+            date_end: "Jan 8",
+            amount: 3.897,
+            total: 79,
+            type: "like"
+          },
+          {
+            id: 4,
+            date_start: "Jan 1",
+            date_end: "Jan 8",
+            amount: 3.897,
+            total: 79,
+            type: "posts"
+          },
+          {
+            id: 5,
+            date_start: "Jan 1",
+            date_end: "Jan 8",
+            amount: 3.897,
+            total: 79,
+            type: "share"
+          }
+        ]
       }
     ],
     users: [
@@ -2996,6 +3039,49 @@ const actions = {
         console.log(error);
       });
     return response_;
+  },
+  async loadUserBusinessInsight(context, payload) {
+    console.log(payload);
+    console.log("load user Business Insight start +++++");
+
+    // context.commit("updateUserBiography", {
+    //   info_access: payload.info_access,
+    //   description: payload.description
+    // });
+
+    let response_ = null;
+    await fetch(state.url_base + state.url_load_business_insight + "4", {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+        Authorization: `Bearer ${state.token}`
+      }
+    })
+      .then(response => {
+        console.log("load user Business Insight response (1) +++++++");
+        console.log(response);
+        if (response.status !== 200 && response.status !== 201) {
+          throw "Errors during processing by the server";
+        }
+        return response.json();
+      })
+      .then(response => {
+        console.log("load User Business Insight response successsss +++");
+        console.log(response);
+        if (!response) {
+          console.log("Erreur liée au serveur+++++++");
+          throw new Error("Erreur du chargement du Business Insight +++++");
+        }
+        context.commit("updateUserBusinessInsights", {
+          businessInsights: response.data
+        });
+        response_ = response;
+      })
+      .catch(error => {
+        console.log("erreur liée au serveur ou au navigateur");
+        console.log(error);
+      });
+    return response_;
   }
 };
 
@@ -3168,6 +3254,9 @@ const mutations = {
   },
   updateUserBusinessAbout(state, payload) {
     state.userData[0].business_about1 = payload.businessAbout;
+  },
+  updateUserBusinessInsights(state, payload) {
+    state.userData[0].business_insights = payload.businessInsights;
   }
 };
 
@@ -3221,6 +3310,9 @@ export default new Vuex.Store({
     },
     getBusinessAbout(state) {
       return state.userData[0].business_about1;
+    },
+    getBusinessInsights(state) {
+      return state.userData[0].business_insights;
     }
   },
   actions,

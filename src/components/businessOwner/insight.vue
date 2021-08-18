@@ -8,14 +8,14 @@
 
            <b-col cols="4" >
 
-            <b-row>   
+            <b-row>
             <b-col >
               <h6 class="card-title mb-0">
                 New Notifications
                 <p class="s-text">From (Jan 1 - Jan 8)</p>
               </h6>
             </b-col>
-            
+
           </b-row>
 
           <br />
@@ -27,9 +27,9 @@
               </h3>
             </b-col>
             <b-col cols="8">
-              
-              
-           
+
+
+
 
 
  </b-col
@@ -37,8 +37,8 @@
 
            </b-col>
 
-           <b-col cols="8">  
-             
+           <b-col cols="8">
+
                <div>
     <canvas id="planet-chart"></canvas>
   </div>

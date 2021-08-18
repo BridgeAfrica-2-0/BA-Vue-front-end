@@ -525,11 +525,18 @@ export default {
         return;
       }
       this.isSubmitted = true;
+      const fileImage = this.createPost.movies[0].target.files[0];
+      const fd = new FormData();
       console.log("Send New Post");
       console.log(this.createPost);
+      // this.$store.dispatch("createPost", {
+      //   postBusinessUpdate: this.createPost.postBusinessUpdate,
+      //   movies: this.createPost.movies,
+      //   hyperlinks: this.createPost.hyperlinks
+      // });
       this.$store.dispatch("createPost", {
         postBusinessUpdate: this.createPost.postBusinessUpdate,
-        movies: this.createPost.movies,
+        movies: fd.append('file', fileImage ),
         hyperlinks: this.createPost.hyperlinks
       });
       this.$refs["modal-xl"].hide();

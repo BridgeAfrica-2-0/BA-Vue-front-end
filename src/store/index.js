@@ -9,15 +9,15 @@ axios.defaults.baseURL = "https://e4f5730e80f9.ngrok.io/api/v1";
 const getDefaultState = () => {
   return {
     token: "5|ZrS4NiZ9yXrSZ5b80aqtNsnijikEfUUXBMF51R7N",
-    //bdetails: []
-    bdetails: [
+    //ndetails: []
+    ndetails: [
       {
         id: 1,
-        name: "peter",
-        category: "Agriculture",
-        location_description: "Yaounde",
-        about_business: "peter poo",
-        followers: 6
+        name: "peter network",
+        category: "Agriculture network",
+        location_description: "Yaounde N",
+        about_network: "peter poo pii",
+        followers: 30
       }
     ]
   };
@@ -27,7 +27,7 @@ const getDefaultState = () => {
 const state = getDefaultState();
 
 const actions = {
-  getbdetails({ commit }) {
+  getndetails({ commit }) {
     return axios
       .get("", {
         headers: { Authorization: `Bearer ${state.token}` }
@@ -41,13 +41,13 @@ const actions = {
 
 const mutations = {
   set_details(state, bdetails) {
-    state.bdetails = bdetails;
+    state.ndetails = bdetails;
   }
 };
 
 const getters = {
   getdetails(state) {
-    return state.bdetails;
+    return state.ndetails;
   }
 };
 

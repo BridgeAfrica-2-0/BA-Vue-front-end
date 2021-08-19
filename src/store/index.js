@@ -9,7 +9,7 @@ Vue.use(Vuex);
 
 const getDefaultState = () => {
   return {
-    url_base: "https://ce2d17022ed8.ngrok.io",
+    url_base: "http://team3dev.maxinemoffett.com",
     url_load_profile_picture_changed: "/api/v1/download?file_name=",
     url_load_profile_picture:
       "/api/v1/download?file_name=public/media/photos/z7aooJV1XnDVTpRSfPGOUj7sjm0trGVJCiNFS7Ef.jpg",
@@ -33,7 +33,7 @@ const getDefaultState = () => {
     recoverData: "",
     login: false,
     isToi: false,
-    token: "1|le8p995vGFTX1oo8PxHyam4pIOpkdxLQKHUw2QkP",
+    token: "1|D8mzEzrdzrvlxeXUinBY8XDMgH8bVDtVOjv5xnZz",
     count: "",
     todos: [],
     dashboard: [
@@ -2283,18 +2283,14 @@ const actions = {
   async updateUserBiography(context, payload) {
     console.log(payload);
     console.log("edit user biography start +++++");
-
-    // context.commit("updateUserBiography", {
-    //   info_access: payload.info_access,
-    //   description: payload.description
-    // });
-
     let response_ = null;
     await fetch(
       state.url_base +
         state.url_update_biography +
         "biography=" +
-        payload.description,
+        payload.description +
+        "&value=" +
+        payload.info_access,
       {
         method: "POST",
         headers: {
@@ -2306,6 +2302,10 @@ const actions = {
       .then(response => {
         console.log("edit user biography response (1) +++++++");
         console.log(response);
+        if (response.status !== 200 && response.status !== 201) {
+          console.log("Error From the Server ++++ ");
+          throw "Error from the Server";
+        }
         return response.json();
       })
       .then(response => {
@@ -2317,24 +2317,20 @@ const actions = {
         }
         context.commit("updateUserBiography", {
           info_access: payload.info_access,
-          description: response.data.biography
+          description: payload.description
         });
         response_ = response;
       })
       .catch(error => {
-        console.log("erreur liée au serveur ou au navigateur");
+        console.log("error from the browser or the server error(1)");
         console.log(error);
+        throw error;
       });
     return response_;
   },
   async loadUserBiography(context, payload) {
     console.log(payload);
     console.log("load user biography start +++++");
-
-    // context.commit("updateUserBiography", {
-    //   info_access: payload.info_access,
-    //   description: payload.description
-    // });
 
     let response_ = null;
     await fetch(state.url_base + state.url_load_user_biography, {
@@ -2347,24 +2343,35 @@ const actions = {
       .then(response => {
         console.log("load user biography response (1) +++++++");
         console.log(response);
+        if (response.status !== 200 && response.status !== 201) {
+          console.log("erreur lors du traitement du serveur ");
+          throw "Error from the Server";
+        }
         return response.json();
       })
       .then(response => {
-        console.log("load user biography response successsss +++");
+        console.log("load user biography response (2) successsss +++");
         console.log(response);
         if (!response) {
-          console.log("Erreur liée au serveur+++++++");
-          throw new Error("Erreur du chargement de la biographie+++++");
+          console.log("Error from the server+++++++");
+          throw new Error("Error of load Biography+++++");
         }
         context.commit("updateUserBiography", {
-          info_access: "private",
-          description: response.data.biography[0].biography
+          info_access:
+            response.data[0] !== null
+              ? response.data.biography[0].biography
+              : "private",
+          description:
+            response.data[0] !== null
+              ? response.data.biography[0].biography
+              : "No Description"
         });
         response_ = response;
       })
       .catch(error => {
-        console.log("erreur liée au serveur ou au navigateur");
+        console.log("error from browser or server error(1)");
         console.log(error);
+        throw error;
       });
     return response_;
   },

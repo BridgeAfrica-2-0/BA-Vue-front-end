@@ -7,7 +7,7 @@
             <splide :options="options" class="r-image">
               <splide-slide cl>
                 <img
-                  src="https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg"
+                  :src="item.picture"
                   class="r-image"
                 />
               </splide-slide>

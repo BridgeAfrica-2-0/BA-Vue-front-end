@@ -161,21 +161,14 @@ export default {
   components: {
     ComunitiDashboard,
     BusinessDashboard,
-    //People,
     Business,
     CommunityActivity,
     Tutorial,
     Insights,
     Popularnetwork,
-    //Hotbusiness,
-    //SelectBusiness,
-
     Map,
-
     EmptyBusiness,
-    //SelectBH,
     Profile,
-
     CarousselDashboard,
     Navbar
   },

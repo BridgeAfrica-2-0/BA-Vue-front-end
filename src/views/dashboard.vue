@@ -19,6 +19,7 @@
               <b-form-select
                 v-model="selectedb"
                 :options="boptions"
+                @click="selectBusiness(selectedb)"
               ></b-form-select>
             </b-col>
           </b-row>
@@ -45,6 +46,7 @@
                 <b-form-select
                   v-model="selectedb"
                   :options="boptions"
+                  @click="selectBusiness(selectedb)"
                 ></b-form-select>
               </b-card>
             </div>
@@ -149,6 +151,8 @@ export default {
 
       map: false,
 
+      category: "",
+
       boptions: [
         { value: "owner", text: "Owner's Name" },
         { value: "a", text: "Business Name 1" },
@@ -156,9 +160,10 @@ export default {
         { value: "c", text: "Business Name 3" }
       ],
 
-      boptions:[]
+      detail: null
     };
   },
+
   components: {
     ComunitiDashboard,
     BusinessDashboard,
@@ -174,7 +179,31 @@ export default {
     Navbar
   },
 
-  methods: {}
+  methods: {
+    selectBusiness(value) {
+      let boptions = [];
+      boptions.push({
+        value: this.details[0].username,
+        text: this.details[0].username
+      });
+      const items = this.details[0].business.map(item => {
+        return { value: item.username, text: item.username };
+      });
+      boptions.push(...items);
+      console.log(boptions);
+      console.log("popopo-----------++++++++++++");
+    }
+  },
+
+  mounted() {
+    this.$store.dispatch("getdetails");
+  },
+
+  computed: {
+    details() {
+      return this.$store.getters.getdetails;
+    }
+  }
 };
 </script>
 

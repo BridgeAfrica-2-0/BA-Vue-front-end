@@ -863,9 +863,20 @@ const getDefaultState = () => {
         numbersOfFollowers: 30,
         business: [
           {
-            id: "",
+            id: 1,
             fullname: "",
             username: "Thorfinn Kharlsefni",
+            email: "",
+            password: "",
+            profileName: "Thorfinn",
+            profilePicture: "https://pbs.twimg.com/media/DoNa_wKUUAASSCF.jpg",
+            coverImage: "https://pbs.twimg.com/media/DKO62sVXUAA0_AL.jpg",
+            numbersOfFollowers: 30
+          },
+          {
+            id: 2,
+            fullname: "",
+            username: "Thorfinn",
             email: "",
             password: "",
             profileName: "Thorfinn",
@@ -875,7 +886,9 @@ const getDefaultState = () => {
           }
         ]
       }
-    ]
+    ],
+
+    business: []
   };
 };
 

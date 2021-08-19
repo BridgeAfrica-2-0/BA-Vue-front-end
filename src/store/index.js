@@ -855,7 +855,7 @@ const getDefaultState = () => {
 const state = getDefaultState();
 
 const actions = {
-  getpdetails({ commit }) {
+  getdetails({ commit }) {
     return axios
       .get("", {
         headers: { Authorization: `Bearer ${state.token}` }

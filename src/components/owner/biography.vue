@@ -12,12 +12,8 @@
     <br />
     <br />
     <br />
-    <!--    <p v-if="true">-->
-    <!--      {{ biography }}-->
-    <!--    </p>-->
-
     <div v-if="editing">
-      <b-form @submit="save">
+      <b-form @submit.prevent="save">
         <div style="width: 150px">
           <b-form-select
             required
@@ -49,12 +45,20 @@
 <script>
 export default {
   created() {
-    console.log("Load User Biography +++++++");
-    this.$store.dispatch('loadUserBiography', null).then( response => {
-      console.log( response )
-      this.biography = JSON.parse( JSON.stringify( this.$store.getters.getProfileAboutBiography ));
-      console.log(this.biography);
-      console.log( 'Load User Biography +++++++')
+    console.log("Load User Biography start+++++++");
+    this.$store.dispatch('loadUserBiography', null)
+            .then( response => {
+              console.log( response )
+              this.biography = JSON.parse( JSON.stringify( this.$store.getters.getProfileAboutBiography ));
+              console.log(this.biography);
+              console.log( 'Load User Biography end+++++++')
+            }).catch(error => {
+              console.log('Error from server or from browser ++++')
+              console.log(error);
+              this.biography = {
+                info_access: 'private',
+                description: 'No Description',
+              }
     })
 
   },
@@ -77,14 +81,10 @@ export default {
   },
   methods: {
     edit(value) {
-      if( value === 0){
-        //console.log(JSON.parse(JSON.stringify( this.$store.getters.getProfileAboutBiography )) )
+      if( value === 0 ){
         console.log('Update Biography User Cancel');
         this.biography = JSON.parse(JSON.stringify( this.$store.getters.getProfileAboutBiography ))
-        //const { info_access, description } = this.$store.getters.getProfileAboutBiography;
         console.log( this.biography )
-        //this.biography.info_access = info_access;
-        //this.biography.description = description;
         this.edited = true;
         this.successmsg = "Profile was succesfully Cancelled";
         setInterval(() => {
@@ -101,7 +101,7 @@ export default {
       setInterval(() => {
         this.edited = false;
       }, 2000);
-      console.log("profile about save message+++++++++");
+      console.log("profile about save message start+++++++++");
       console.log(this.biography);
       this.$store
         .dispatch("updateUserBiography", {
@@ -109,13 +109,14 @@ export default {
           description: this.biography.description
         })
         .then(response => {
-          console.log("edit user biography after response +++++");
+          console.log("edit user biography after response (3) +++++");
           console.log(response);
           console.log("edit user biography endddd ++++");
         })
         .catch(error => {
-          console.log("erreur lie au navigateur ou au serveur");
+          console.log("erreur lie au navigateur ou au serveur error(2)");
           console.log(error);
+          this.biography = JSON.parse(JSON.stringify( this.$store.getters.getProfileAboutBiography ))
         });
     }
   }

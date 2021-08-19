@@ -9,7 +9,17 @@ axios.defaults.baseURL = "https://e4f5730e80f9.ngrok.io/api/v1";
 const getDefaultState = () => {
   return {
     token: "5|ZrS4NiZ9yXrSZ5b80aqtNsnijikEfUUXBMF51R7N",
-    bdetails: []
+    //bdetails: []
+    bdetails: [
+      {
+        id: 1,
+        name: "peter",
+        category: "Agriculture",
+        location_description: "Yaounde",
+        about_business: "peter poo",
+        followers: 6
+      }
+    ]
   };
 };
 

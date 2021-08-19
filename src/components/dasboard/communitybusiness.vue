@@ -14,21 +14,21 @@
             </splide>
           </div>
         </b-col>
-        <b-col md="5" cols="7" lg="7" xl="5" sm="5">
+        <b-col md="5" cols="7" lg="7" xl="5" sm="5" v-for="item in $store.getters.getdetails" :key="item.id">
           <p class="textt">
-            <strong class="title"> {{ business.business.name }} </strong> <br />
+            <strong class="title"> {{ item.name }} </strong> <br />
 
-            {{ business.business.category }}
+            {{ item.category }}
             <br />
-            {{ business.followers }} Community <br />
+            {{ item.followers }} Community <br />
 
             <span class="location">
               <b-icon-geo-alt class="ico"></b-icon-geo-alt>
-              {{ business.business.location_description }}
+              {{ item.location_description }}
             </span>
             <br />
 
-            {{ business.business.about_business }} <b-link>Read More</b-link>
+            {{ item.about_business }} <b-link>Read More</b-link>
           </p>
         </b-col>
       </b-row>

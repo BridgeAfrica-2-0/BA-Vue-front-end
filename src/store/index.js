@@ -3,6 +3,7 @@ import Vuex from "vuex";
 import axios from "axios";
 //import axios from "axios";
 //import createPersistedState from "vuex-persistedstate";
+import moment from "moment";
 
 Vue.use(Vuex);
 // axios.defaults.baseURL = "";
@@ -22,6 +23,7 @@ const getDefaultState = () => {
     url_load_user_biography: "/api/v1/userIntro/biography",
     url_update_biography: "/api/v1/userIntro/biography?",
     url_update_birthDate: "/api/v1/userIntro/dob?",
+    url_load_birthDate: "/api/v1/userIntro/dob?",
     url_update_gender: "api/v1/userIntro/gender?",
     url_post_mobilesPhones: "/api/v1/userIntro/addPhone",
     url_update_current_city: "/api/v1/userIntro/addCurrentCity?",
@@ -36,274 +38,6 @@ const getDefaultState = () => {
     token: "1|D8mzEzrdzrvlxeXUinBY8XDMgH8bVDtVOjv5xnZz",
     count: "",
     todos: [],
-    dashboard: [
-      {
-        id: 1,
-        type: "Business Name 1",
-        directions: null,
-        business: {
-          name: "Business Name 1",
-          plan_type: false,
-          category: "Profesional",
-          messages: 30,
-          notifications: 30,
-          website: null
-        },
-        insights: {
-          posts: 33000,
-          visit: 1400,
-          share: 870
-        },
-        community: {
-          people: {
-            followers: [],
-            followings: []
-          },
-          business: {
-            followers: [],
-            followings: []
-          }
-        },
-        posts: []
-      },
-      {
-        id: 2,
-        type: "Business Name 1",
-        directions: null,
-        business: {
-          name: "Business Name 1",
-          plan_type: false,
-          category: "Profesional",
-          messages: 30,
-          notifications: 30,
-          website: null
-        },
-        insights: {
-          posts: 33000,
-          visit: 1400,
-          share: 870
-        },
-        community: {
-          people: {
-            followers: [],
-            followings: []
-          },
-          business: {
-            followers: [],
-            followings: []
-          }
-        },
-        posts: []
-      },
-      {
-        id: 3,
-        type: "Business Name 1",
-        directions: null,
-        business: {
-          name: "Business Name 1",
-          plan_type: false,
-          category: "Profesional",
-          messages: 30,
-          notifications: 30,
-          website: null
-        },
-        insights: {
-          posts: 33000,
-          visit: 1400,
-          share: 870
-        },
-        community: {
-          people: {
-            followers: [],
-            followings: []
-          },
-          business: {
-            followers: [],
-            followings: []
-          }
-        },
-        posts: []
-      },
-      {
-        id: 4,
-        type: "Business Name 1",
-        directions: null,
-        business: {
-          name: "Business Name 1",
-          plan_type: false,
-          category: "Profesional",
-          messages: 30,
-          notifications: 30,
-          website: null
-        },
-        insights: {
-          posts: 33000,
-          visit: 1400,
-          share: 870
-        },
-        community: {
-          people: {
-            followers: [],
-            followings: []
-          },
-          business: {
-            followers: [],
-            followings: []
-          }
-        },
-        posts: []
-      },
-      {
-        id: 5,
-        type: "Business Name 1",
-        directions: null,
-        business: {
-          name: "Business Name 1",
-          plan_type: false,
-          category: "Profesional",
-          messages: 30,
-          notifications: 30,
-          website: null
-        },
-        insights: {
-          posts: 33000,
-          visit: 1400,
-          share: 870
-        },
-        community: {
-          people: {
-            followers: [],
-            followings: []
-          },
-          business: {
-            followers: [],
-            followings: []
-          }
-        },
-        posts: []
-      }
-    ],
-    data: {
-      owner: {},
-      business: [
-        {
-          id: 1,
-          type: "Business Name 1",
-          directions: null,
-          business: {
-            name: "Business Name 1",
-            plan_type: false,
-            category: "Profesional",
-            messages: 30,
-            notifications: 30,
-            website: null
-          },
-          insights: {
-            posts: 33000,
-            visit: 1400,
-            share: 870
-          },
-          community: {
-            people: {
-              followers: [],
-              followings: []
-            },
-            business: {
-              followers: [],
-              followings: []
-            }
-          },
-          posts: []
-        },
-        {
-          id: 2,
-          type: "Business Name 1",
-          directions: null,
-          business: {
-            name: "Business Name 1",
-            plan_type: false,
-            category: "Profesional",
-            messages: 30,
-            notifications: 30,
-            website: null
-          },
-          insights: {
-            posts: 33000,
-            visit: 1400,
-            share: 870
-          },
-          community: {
-            people: {
-              followers: [],
-              followings: []
-            },
-            business: {
-              followers: [],
-              followings: []
-            }
-          },
-          posts: []
-        },
-        {
-          id: 3,
-          type: "Business Name 1",
-          directions: null,
-          business: {
-            name: "Business Name 1",
-            plan_type: false,
-            category: "Profesional",
-            messages: 30,
-            notifications: 30,
-            website: null
-          },
-          insights: {
-            posts: 33000,
-            visit: 1400,
-            share: 870
-          },
-          community: {
-            people: {
-              followers: [],
-              followings: []
-            },
-            business: {
-              followers: [],
-              followings: []
-            }
-          },
-          posts: []
-        },
-        {
-          id: 4,
-          type: "Business Name 1",
-          directions: null,
-          business: {
-            name: "Business Name 1",
-            plan_type: false,
-            category: "Profesional",
-            messages: 30,
-            notifications: 30,
-            website: null
-          },
-          insights: {
-            posts: 33000,
-            visit: 1400,
-            share: 870
-          },
-          community: {
-            people: {
-              followers: [],
-              followings: []
-            },
-            business: {
-              followers: [],
-              followings: []
-            }
-          },
-          posts: []
-        }
-      ]
-    },
     userData: [
       {
         id: "",
@@ -1422,11 +1156,8 @@ const getDefaultState = () => {
         },
         profile_about: {
           biography: {
-            info_access: null,
-            description:
-              "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis, aliquid cupiditate fugit similique laboriosam, expedita, voluptatibus dolorem atlibero ipsam illo molestiae. Voluptates quisquam vitae, aperiam voluptatem ad enim ducimus praesentium fuga quas unde ea quasi obcaecati eumlaboriosam eos nesciunt exercitationem voluptatibus cupiditate sunt totam?Dolor voluptatem repudiandae quos." +
-              "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis, aliquid cupiditate fugit similique laboriosam, expedita, voluptatibus dolorem atlibero ipsam illo molestiae. Voluptates quisquam vitae, aperiam voluptatem ad enim ducimus praesentium fuga quas unde ea quasi obcaecati eumlaboriosam eos nesciunt exercitationem voluptatibus cupiditate sunt totam?Dolor voluptatem repudiandae quos." +
-              "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis, aliquid cupiditate fugit similique laboriosam, expedita, voluptatibus dolorem atlibero ipsam illo molestiae. Voluptates quisquam vitae, aperiam voluptatem ad enim ducimus praesentium fuga quas unde ea quasi obcaecati eumlaboriosam eos nesciunt exercitationem voluptatibus cupiditate sunt totam?Dolor voluptatem repudiandae quos."
+            info_access: "private",
+            description: "No Description"
           },
           basicInfo: {
             dateOfBirth: {
@@ -2375,25 +2106,74 @@ const actions = {
       });
     return response_;
   },
+  async loadUserBasicInfosBirthDate(context, payload) {
+    console.log(payload);
+    console.log("load user birth date start +++++");
+
+    let response_ = null;
+    await fetch(state.url_base + state.url_load_birthDate, {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+        Authorization: `Bearer ${state.token}`
+      }
+    })
+      .then(response => {
+        console.log("load user birthDate response (1) +++++++");
+        console.log(response);
+        if (response.status !== 200 && response.status !== 201) {
+          console.log("Error Form The Server ");
+          throw "Error from the Server";
+        }
+        return response.json();
+      })
+      .then(response => {
+        console.log("load user birthDate response (2) successsss +++");
+        console.log(response);
+        if (!response) {
+          console.log("Error from the server+++++++");
+          throw new Error("Error of load Biography+++++");
+        }
+        context.commit("updateUserBirthDate", {
+          dateOfBirth:
+            response.data === null
+              ? {
+                  date_1: {
+                    day: "12",
+                    month: "January",
+                    access: "private"
+                  },
+                  date_2: {
+                    year: "2000",
+                    access: "private"
+                  }
+                }
+              : response.data
+        });
+        response_ = response;
+      })
+      .catch(error => {
+        console.log("error from browser or server error(1)");
+        console.log(error);
+        throw error;
+      });
+    return response_;
+  },
   async updateUserBasicInfosBirthDate(context, payload) {
     console.log(payload);
     console.log("edit user birtDate start +++++");
-
-    // context.commit("updateUserBiography", {
-    //   info_access: payload.info_access,
-    //   description: payload.description
-    // });
 
     let response_ = null;
     await fetch(
       state.url_base +
         state.url_update_birthDate +
         "dob=" +
-        payload.dateOfBirth.date_2.year +
-        "-01" +
-        //payload.dateOfBirth.date_1.month +
-        "-" +
-        payload.dateOfBirth.date_1.day,
+        moment(
+          payload.dateOfBirth.date_2.year +
+            moment(payload.dateOfBirth.date_1.month).format("MM") +
+            "-" +
+            payload.dateOfBirth.date_1.day
+        ).format("YYYY-MM-DD"),
       {
         method: "POST",
         headers: {
@@ -2404,15 +2184,19 @@ const actions = {
     )
       .then(response => {
         console.log("edit user birthDate response (1) +++++++");
+        if (response.status !== 200 && response.status !== 201) {
+          console.log("Error from the server");
+          throw "Error Form The Server";
+        }
         console.log(response);
         return response.json();
       })
       .then(response => {
-        console.log("edit user birthDate response successsss +++");
+        console.log("edit user birthDate response successsss (2)+++");
         console.log(response);
         if (!response) {
-          console.log("Erreur liée au serveur+++++++");
-          throw new Error("Erreur d edition du BirthDate+++++");
+          console.log("Error From The Server error(1) ++++++");
+          throw new Error("Error For Edit BirthDate+++++");
         }
         context.commit("updateUserBirthDate", {
           dateOfBirth: payload.dateOfBirth
@@ -2420,7 +2204,7 @@ const actions = {
         response_ = response;
       })
       .catch(error => {
-        console.log("erreur liée au serveur ou au navigateur");
+        console.log("error from Server or browser");
         console.log(error);
         throw error;
       });
@@ -2779,6 +2563,18 @@ const actions = {
         throw error;
       });
     return response_;
+  },
+  selectBusiness(value) {
+    let boptions = [];
+    boptions.push({
+      value: this.details[0].username,
+      text: this.details[0].username
+    });
+    const items = this.details[0].business.map(item => {
+      return { value: item.username, text: item.username };
+    });
+    boptions.push(...items);
+    console.log(boptions);
   },
   async updateUserProfession(context, payload) {
     console.log(payload);

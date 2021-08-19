@@ -4,13 +4,13 @@ import Vuex from "vuex";
 import axios from "axios";
 
 Vue.use(Vuex);
-axios.defaults.baseURL = "https://e4f5730e80f9.ngrok.io/api/v1";
+axios.defaults.baseURL = "https://adbb1e30c453.ngrok.io/api/v1";
 
 const getDefaultState = () => {
   return {
-    token: "5|ZrS4NiZ9yXrSZ5b80aqtNsnijikEfUUXBMF51R7N",
-    //bdetails: []
-    bdetails: [
+    token: "8|Yx3DU4s08aFTYOCa3T2XJKZkjJV4leSi9b20oo5D",
+    bdetails: []
+    /*bdetails: [
       {
         id: 1,
         name: "peter",
@@ -19,7 +19,7 @@ const getDefaultState = () => {
         about_business: "peter poo",
         followers: 6
       }
-    ]
+    ]*/
   };
 };
 
@@ -29,7 +29,7 @@ const state = getDefaultState();
 const actions = {
   getbdetails({ commit }) {
     return axios
-      .get("", {
+      .get("/business/details", {
         headers: { Authorization: `Bearer ${state.token}` }
       })
       .then(function({ data }) {

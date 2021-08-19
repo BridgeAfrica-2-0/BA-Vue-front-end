@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="people-style shadow">
+    <div class="people-style shadow" v-for="item in $store.getters.getdetails" :key="item.id">
       <b-row>
         <b-col md="3" xl="3" lg="3" cols="5" sm="3">
           <div class="center-img">
@@ -14,22 +14,83 @@
             </splide>
           </div>
         </b-col>
-        <b-col md="5" cols="7" lg="7" xl="5" sm="5" v-for="item in $store.getters.getdetails" :key="item.id">
+        <b-col md="5" cols="7" lg="7" xl="5" sm="5">
           <p class="textt">
             <strong class="title"> {{ item.name }} </strong> <br />
-
-            {{ item.category }}
+            {{item.category}}
             <br />
             {{ item.followers }} Community <br />
 
             <span class="location">
-              <b-icon-geo-alt class="ico"></b-icon-geo-alt>
-              {{ item.location_description }}
+              <b-icon-geo-alt class="ico"></b-icon-geo-alt> {{ item.location_description }}
             </span>
             <br />
 
             {{ item.about_business }} <b-link>Read More</b-link>
           </p>
+        </b-col>
+
+        <b-col lg="12" xl="4" md="4" cols="12" sm="4">
+          <div class="s-button">
+            <b-row>
+              <b-col
+                md="12"
+                lg="4"
+                xl="12"
+                sm="12"
+                cols="4"
+                class="mt-2 text-center"
+              >
+                <b-button
+                  block
+                  size="sm"
+                  class="b-background shadow "
+                  variant="primary"
+                >
+                  <i class="fas fa-user-plus  fa-lg btn-icon "></i>
+                  <span class="btn-com">Community</span>
+                </b-button>
+              </b-col>
+
+              <b-col
+                md="12"
+                lg="4"
+                xl="12"
+                sm="12"
+                cols="4"
+                class="mt-2 text-center"
+              >
+                <b-button
+                  block
+                  size="sm"
+                  class="b-background shadow "
+                  variant="primary"
+                >
+                  <i class="fas fa-envelope   fa-lg btn-icon "></i>
+                  <span class="btn-text">Message</span>
+                </b-button>
+              </b-col>
+
+              <b-col
+                md="12"
+                lg="4"
+                xl="12"
+                sm="12"
+                cols="4"
+                class="mt-2 text-center"
+              >
+                <b-button
+                  block
+                  size="sm"
+                  class="b-background shadow "
+                  variant="primary"
+                >
+                  <i class="fas fa-map-marked-alt  fa-lg btn-icon "></i>
+                  <span class="btn-text">Direction</span>
+                </b-button>
+              </b-col>
+            </b-row>
+          </div>
         </b-col>
       </b-row>
     </div>
@@ -47,6 +108,7 @@ export default {
         autoplay: true,
         perPage: 1,
         pagination: false,
+
         type: "loop",
         perMove: 1
       }

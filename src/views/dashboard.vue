@@ -115,18 +115,21 @@
 
 <script>
 import Navbar from "@/components/navbar";
+
 import CarousselDashboard from "@/components/dasboard/carousselDashboard";
 
 import BusinessDashboard from "@/components/dasboard/businessDashboard";
+
 import ComunitiDashboard from "@/components/dasboard/comunitiDashboard";
+
 import Insights from "@/components/dasboard/insights";
+
 import CommunityActivity from "@/components/dasboard/communityActivity";
 
 import Tutorial from "@/components/dasboard/tutorial";
 
 import Profile from "@/components/dasboard/profile";
 
-//import People from "@/components/dasboard/communityMember";
 import Business from "@/components/dasboard/communitybusiness";
 
 import Map from "@/components/dasboard/map";
@@ -134,9 +137,6 @@ import Map from "@/components/dasboard/map";
 import EmptyBusiness from "@/components/dasboard/emptybusiness";
 
 import Popularnetwork from "@/components/dasboard/popularnetwork";
-//import Hotbusiness from "@/components/dasboard/hotbusiness";
-//import People from '../components/businessOwner/tabs/owner/networks/people.vue';
-
 export default {
   name: "dashboard",
   data() {
@@ -154,7 +154,9 @@ export default {
         { value: "a", text: "Business Name 1" },
         { value: "b", text: "Business Name 2" },
         { value: "c", text: "Business Name 3" }
-      ]
+      ],
+
+      boptions:[]
     };
   },
   components: {
@@ -171,6 +173,7 @@ export default {
     CarousselDashboard,
     Navbar
   },
+
   methods: {}
 };
 </script>

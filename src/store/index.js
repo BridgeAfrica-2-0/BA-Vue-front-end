@@ -849,7 +849,33 @@ const getDefaultState = () => {
 
     //details: []
 
-    details: [{}]
+    details: [
+      {
+        value: "owner",
+        id: "",
+        fullname: "",
+        username: "Thorfinn Kharlsefni",
+        email: "",
+        password: "",
+        profileName: "Thorfinn",
+        profilePicture: "https://pbs.twimg.com/media/DoNa_wKUUAASSCF.jpg",
+        coverImage: "https://pbs.twimg.com/media/DKO62sVXUAA0_AL.jpg",
+        numbersOfFollowers: 30,
+        business: [
+          {
+            id: "",
+            fullname: "",
+            username: "Thorfinn Kharlsefni",
+            email: "",
+            password: "",
+            profileName: "Thorfinn",
+            profilePicture: "https://pbs.twimg.com/media/DoNa_wKUUAASSCF.jpg",
+            coverImage: "https://pbs.twimg.com/media/DKO62sVXUAA0_AL.jpg",
+            numbersOfFollowers: 30
+          }
+        ]
+      }
+    ]
   };
 };
 

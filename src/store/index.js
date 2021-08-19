@@ -9,7 +9,7 @@ axios.defaults.baseURL = "https://e4f5730e80f9.ngrok.io/api/v1";
 
 const getDefaultState = () => {
   return {
-    token: "5|ZrS4NiZ9yXrSZ5b80aqtNsnijikEfUUXBMF51R7N",
+    token: "8|Yx3DU4s08aFTYOCa3T2XJKZkjJV4leSi9b20oo5D",
 
     userData: [
       {
@@ -847,7 +847,9 @@ const getDefaultState = () => {
 
     bdetails: [],
 
-    ndetails: ""
+    //details: []
+
+    details: [{}]
   };
 };
 
@@ -861,21 +863,21 @@ const actions = {
         headers: { Authorization: `Bearer ${state.token}` }
       })
       .then(function({ data }) {
-        commit("SET_PDETAILS", data.data);
+        commit("setdetails", data.data);
         console.log(data);
       });
   }
 };
 
 const mutations = {
-  SET_PDETAILS(state, pdetails) {
-    state.pdetails = pdetails;
+  setdetails(state, details) {
+    state.details = details;
   }
 };
 
 const getters = {
-  ppdetails(state) {
-    return state.pdetails;
+  getdetails(state) {
+    return state.details;
   }
 };
 

@@ -46,21 +46,22 @@
 export default {
   created() {
     console.log("Load User Biography start+++++++");
-    this.$store.dispatch('loadUserBiography', null)
-            .then( response => {
-              console.log( response )
-              this.biography = JSON.parse( JSON.stringify( this.$store.getters.getProfileAboutBiography ));
-              console.log(this.biography);
-              console.log( 'Load User Biography end+++++++')
-            }).catch(error => {
-              console.log('Error from server or from browser ++++')
-              console.log(error);
-              this.biography = {
-                info_access: 'private',
-                description: 'No Description',
-              }
-    })
-
+    this.$store
+      .dispatch("loadUserBiography", null)
+      .then(response => {
+        console.log(response);
+        console.log("Load User Biography end+++++++");
+      })
+      .catch(error => {
+        console.log("Error from server or from browser ++++");
+        console.log(error);
+      })
+      .finally(() => {
+        this.biography = JSON.parse(
+          JSON.stringify(this.$store.getters.getProfileAboutBiography)
+        );
+        console.log(this.biography);
+      });
   },
   data() {
     return {
@@ -81,10 +82,12 @@ export default {
   },
   methods: {
     edit(value) {
-      if( value === 0 ){
-        console.log('Update Biography User Cancel');
-        this.biography = JSON.parse(JSON.stringify( this.$store.getters.getProfileAboutBiography ))
-        console.log( this.biography )
+      if (value === 0) {
+        console.log("Update Biography User Cancel");
+        this.biography = JSON.parse(
+          JSON.stringify(this.$store.getters.getProfileAboutBiography)
+        );
+        console.log(this.biography);
         this.edited = true;
         this.successmsg = "Profile was succesfully Cancelled";
         setInterval(() => {
@@ -92,7 +95,6 @@ export default {
         }, 2000);
       }
       this.editing = !this.editing;
-
     },
     save() {
       this.edited = true;
@@ -116,7 +118,9 @@ export default {
         .catch(error => {
           console.log("erreur lie au navigateur ou au serveur error(2)");
           console.log(error);
-          this.biography = JSON.parse(JSON.stringify( this.$store.getters.getProfileAboutBiography ))
+          this.biography = JSON.parse(
+            JSON.stringify(this.$store.getters.getProfileAboutBiography)
+          );
         });
     }
   }

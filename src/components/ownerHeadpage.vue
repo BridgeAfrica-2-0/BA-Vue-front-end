@@ -275,8 +275,6 @@ export default {
       if (file.files) {
         const fd = new FormData();
         fd.append("media", file.files[0]);
-        fd.append("media", file.files[0]);
-        fd.append("media", file.files[0]);
         this.$store
           .dispatch("changeProfilePicture", { profilePicture: fd })
           .then(response => {

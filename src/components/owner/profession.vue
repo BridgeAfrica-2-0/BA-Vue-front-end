@@ -68,6 +68,8 @@ export default {
       this.professions = JSON.parse(
               JSON.stringify(this.$store.getters.getProfileAboutEducationAndWorks.professions)
       );
+      console.log( 'esseai d affichage de Observer pour la profession')
+      console.log( this.$store.getters.getProfileAboutEducationAndWorks )
       console.log(this.professions);
       this.professionInput = {
         profession: null,

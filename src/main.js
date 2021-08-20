@@ -18,25 +18,22 @@ import homeIconData from "@iconify-icons/mdi-light/home";
 import ReadMore from "vue-read-more";
 import VueSocialauth from "vue-social-auth";
 import firebase from "firebase";
+
+IconifyIcon.addIcon("home", homeIconData);
+
 Vue.use(Vuex);
 Vue.use(VueAxios, axios);
-import IconifyIcon from '@iconify/vue';
-import homeIconData from '@iconify-icons/mdi-light/home';
-IconifyIcon.addIcon('home', homeIconData);
-import ReadMore from 'vue-read-more';
-
 Vue.use(ReadMore);
-IconifyIcon.addIcon("home", homeIconData);
 Vue.prototype.$axios = axios;
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDu9rL6_YDSeTyU89tF8JcI9kWNR6617Fg",
-  authDomain: "bridge-africa-api.firebaseapp.com",
-  projectId: "bridge-africa-api",
-  storageBucket: "bridge-africa-api.appspot.com",
-  messagingSenderId: "50055115922",
-  appId: "1:50055115922:web:81e9b59a354a0c6e9ee24b",
-  measurementId: "G-9K2WHP9Y13",
+  apiKey: process.env.API_KEY,
+  authDomain: process.env.AUTH_DOMAIN,
+  projectId: process.env.PROJECT_ID,
+  storageBucket: process.env.STORAGE_BUCKET,
+  messagingSenderId: process.env.MESSAGING_SENDER_ID,
+  appId: process.env.APP_ID,
+  measurementId: process.env.MEARSUREMENT_ID,
 };
 
 firebase.initializeApp(firebaseConfig);
@@ -60,27 +57,20 @@ Vue.use(VueSocialauth, {
     facebook: {
       clientId: process.env.VUE_APP_FACEBOOK_CLIENT_ID,
       client_secret: process.env.VUE_APP_FACEBOOK_CLIENT_SECRETE,
-      redirectUri: process.env.VUE_APP_FACEBOOK_RETURN_URL
+      redirectUri: process.env.VUE_APP_FACEBOOK_RETURN_URL,
     },
     google: {
       clientId: process.env.VUE_APP_GOOGLE_CLIENT_ID,
       client_secret: process.env.VUE_APP_GOOGLE_CLIENT_SECRETE,
-      redirectUri:process.env.VUE_APP_GOOGLE_RETURN_URL
-    }
-  }
+      redirectUri: process.env.VUE_APP_GOOGLE_RETURN_URL,
+    },
+  },
 });
 
-
-
-
-import FlashMessage from '@smartweb/vue-flash-message';
+import FlashMessage from "@smartweb/vue-flash-message";
 Vue.use(FlashMessage);
 
-
-
-
-import VueMaterial from 'vue-material'
-
+import VueMaterial from "vue-material";
 
 //import 'vue-material/dist/vue-material.min.css'
 //import 'vue-material/dist/theme/default.css'
@@ -140,7 +130,7 @@ new Vue({
   store,
 
   created() {
-    const userInfo = localStorage.getItem('user')
+    const userInfo = localStorage.getItem("user");
     if (userInfo) {
       const userData = JSON.parse(userInfo);
       this.$store.commit("auth/setUserData", userData);

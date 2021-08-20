@@ -77,6 +77,9 @@
             variant="primary"
           ></b-spinner>
         </b-col>
+        <b-col v-if="!getNotificationsStore && !loader" class="loader">
+          <p>No notifications to show !!</p>
+        </b-col>
       </b-row>
     </div>
   </div>
@@ -87,17 +90,6 @@ import { mapActions, mapGetters } from "vuex";
 export default {
   name: "notification",
   data: () => ({
-    notifications: [
-      {
-        id: 1,
-        name: "Mapoure Agrobusiness",
-        profile: "https://business.bridgeafrica.info/assets/img/team/3.png",
-        message:
-          "  Lorem Ipsum is this is just a dummy text to post simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, Lorem Ipsum is simply dummy text of the printing and typesetting industry. LoremIpsum has been the industry's standard dummy text ever since the1500s,",
-        time: "1hr",
-        selected: false,
-      },
-    ],
     all: 24,
     selected: [],
   }),

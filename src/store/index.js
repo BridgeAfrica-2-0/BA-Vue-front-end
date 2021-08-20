@@ -24,9 +24,12 @@ const getDefaultState = () => {
     url_update_biography: "/api/v1/userIntro/biography?",
     url_update_birthDate: "/api/v1/userIntro/dob?",
     url_load_birthDate: "/api/v1/userIntro/dob?",
-    url_update_gender: "api/v1/userIntro/gender?",
+    url_update_gender: "/api/v1/userIntro/gender",
     url_post_mobilesPhones: "/api/v1/userIntro/addPhone",
-    url_update_current_city: "/api/v1/userIntro/addCurrentCity?",
+    url_update_current_city: "/api/v1/userIntro/addCurrentCity/11",
+    url_update_current_home: "/api/v1/userIntro/addCurrentHome/11",
+    url_post_website: "/api/v1/userIntro/storeWebLink",
+    url_post_socialLink: "/api/v1/userIntro/storeSocialLink",
     url_add_working: "/api/v1/userIntro/addWorking",
     url_update_working: "/api/v1/userIntro/updateWorking",
     url_add_school: "api/v1/userIntro/addSchool",
@@ -1173,14 +1176,18 @@ const getDefaultState = () => {
             },
             gender: "M",
             mobilePhones: ["237656602212", "237677873626"],
-            currentCity: "YAOUNDE",
-            homeTown: "MELEN",
-            websites: ["www.google.com", "ww.facebook.com", "www.udemy.com"],
+            currentCity: null,
+            homeTown: null,
+            websites: [
+              "https://www.google.com",
+              "https://www.facebook.com",
+              "https://www.udemy.com"
+            ],
             socialLinks: [
               "www.instagram.com/bridgeafrica",
-              "www.google.com",
-              "ww.facebook.com",
-              "www.udemy.com"
+              "https://www.google.com",
+              "https://www.facebook.com",
+              "https://www.udemy.com"
             ]
           },
           educationAndWorks: {
@@ -2162,6 +2169,15 @@ const actions = {
   async updateUserBasicInfosBirthDate(context, payload) {
     console.log(payload);
     console.log("edit user birtDate start +++++");
+    console.log(
+      moment(
+        payload.dateOfBirth.date_2.year +
+          " " +
+          payload.dateOfBirth.date_1.month +
+          " " +
+          payload.dateOfBirth.date_1.day
+      ).format("YYYY-MM-DD")
+    );
 
     let response_ = null;
     await fetch(
@@ -2170,10 +2186,13 @@ const actions = {
         "dob=" +
         moment(
           payload.dateOfBirth.date_2.year +
-            moment(payload.dateOfBirth.date_1.month).format("MM") +
-            "-" +
+            " " +
+            payload.dateOfBirth.date_1.month +
+            " " +
             payload.dateOfBirth.date_1.day
-        ).format("YYYY-MM-DD"),
+        ).format("YYYY-MM-DD") +
+        "&value=" +
+        payload.dateOfBirth.date_1.access,
       {
         method: "POST",
         headers: {
@@ -2213,15 +2232,11 @@ const actions = {
   async updateUserBasicInfosGender(context, payload) {
     console.log(payload);
     console.log("edit user gender start +++++");
-
-    // context.commit("updateUserBiography", {
-    //   info_access: payload.info_access,
-    //   description: payload.description
-    // });
-
+    const gender = payload.gender === "F" ? "female" : "male";
+    console.log(state.url_base + state.url_update_gender + "?gender=" + gender);
     let response_ = null;
     await fetch(
-      state.url_base + state.url_update_gender + "gender=" + payload.gender,
+      state.url_base + state.url_update_gender + "?gender=" + gender,
       {
         method: "POST",
         headers: {
@@ -2233,6 +2248,10 @@ const actions = {
       .then(response => {
         console.log("edit user gender response (1) +++++++");
         console.log(response);
+        if (response.status !== 200 && response.status !== 201) {
+          console.log("Error From The Server");
+          throw "Error From The Server";
+        }
         return response.json();
       })
       .then(response => {
@@ -2257,35 +2276,41 @@ const actions = {
   async updateUserBasicInfosMobilePhones(context, payload) {
     console.log(payload);
     console.log("edit user mobile Phones start +++++");
-
-    // context.commit("updateUserBiography", {
-    //   info_access: payload.info_access,
-    //   description: payload.description
-    // });
-
+    const lastPhoneNumber =
+      payload.mobilePhones[payload.mobilePhones.length - 1];
     let response_ = null;
-    await fetch(state.url_base + state.url_post_mobilesPhones, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-        Authorization: `Bearer ${state.token}`
-      },
-      body: JSON.stringify({
-        mobilePhones: [...payload.mobilePhones]
-      })
-    })
+    await fetch(
+      state.url_base +
+        state.url_post_mobilesPhones +
+        "?phoneNumber=" +
+        lastPhoneNumber,
+      {
+        method: "POST",
+        headers: {
+          //"Content-Type": "application/json",
+          Accept: "application/json",
+          Authorization: `Bearer ${state.token}`
+        }
+        // body: JSON.stringify({
+        //   mobilePhones: [...payload.mobilePhones]
+        // })
+      }
+    )
       .then(response => {
         console.log("edit user mobile phones response (1) +++++++");
         console.log(response);
+        if (response.status !== 200 && response.status !== 201) {
+          console.log("Error From The Server");
+          throw "Error From The Server";
+        }
         return response.json();
       })
       .then(response => {
-        console.log("edit user mobile phones response successsss +++");
+        console.log("edit user mobile phones response successsss (2) +++");
         console.log(response);
         if (!response) {
-          console.log("Erreur liée au serveur+++++++");
-          throw new Error("Erreur d ajout des mobilesPhones+++++");
+          console.log("Error From The Server +++++++");
+          throw new Error("Error To Add MobilesPhones+++++");
         }
         context.commit("storeMobilePhones", {
           mobilePhones: [...payload.mobilePhones]
@@ -2293,7 +2318,7 @@ const actions = {
         response_ = response;
       })
       .catch(error => {
-        console.log("erreur liée au serveur ou au navigateur");
+        console.log("Error From The Server or the Browser");
         console.log(error);
         throw error;
       });
@@ -2302,35 +2327,39 @@ const actions = {
   async updateUserBasicInfosCurrentCity(context, payload) {
     console.log(payload);
     console.log("edit user currentcity start +++++");
-
-    // context.commit("updateUserBiography", {
-    //   info_access: payload.info_access,
-    //   description: payload.description
-    // });
-
     let response_ = null;
-    await fetch(state.url_base + state.url_update_current_city, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-        Authorization: `Bearer ${state.token}`
-      },
-      body: JSON.stringify({
-        currentCity: payload.currentCity
-      })
-    })
+    await fetch(
+      state.url_base +
+        state.url_update_current_city +
+        "?city=" +
+        payload.currentCity,
+      {
+        method: "POST",
+        headers: {
+          //"Content-Type": "application/json",
+          Accept: "application/json",
+          Authorization: `Bearer ${state.token}`
+        }
+        // body: JSON.stringify({
+        //   currentCity: payload.currentCity
+        // })
+      }
+    )
       .then(response => {
         console.log("edit user current city response (1) +++++++");
         console.log(response);
+        if (response.status !== 200 && response.status !== 201) {
+          console.log("Error From The Server");
+          throw "Error From The Server";
+        }
         return response.json();
       })
       .then(response => {
-        console.log("edit user current city response successsss +++");
+        console.log("edit user current city response successsss (2) +++");
         console.log(response);
         if (!response) {
-          console.log("Erreur liée au serveur+++++++");
-          throw new Error("Erreur d ajout des current city+++++");
+          console.log("Error From The Server +++++++");
+          throw new Error("Error From Add New Current City+++++");
         }
         context.commit("storeCurrentCity", {
           currentCity: payload.currentCity
@@ -2338,7 +2367,7 @@ const actions = {
         response_ = response;
       })
       .catch(error => {
-        console.log("erreur liée au serveur ou au navigateur");
+        console.log("Error From The Server or The Browser");
         console.log(error);
         throw error;
       });
@@ -2347,35 +2376,39 @@ const actions = {
   async updateUserBasicInfosHomeTown(context, payload) {
     console.log(payload);
     console.log("edit user homeTown start +++++");
-
-    // context.commit("updateUserBiography", {
-    //   info_access: payload.info_access,
-    //   description: payload.description
-    // });
-
     let response_ = null;
-    await fetch(state.url_base + state.url_update_current_city, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-        Authorization: `Bearer ${state.token}`
-      },
-      body: JSON.stringify({
-        homeTown: payload.homeTown
-      })
-    })
+    await fetch(
+      state.url_base +
+        state.url_update_current_city +
+        "?homeTown=" +
+        payload.homeTown,
+      {
+        method: "POST",
+        headers: {
+          //"Content-Type": "application/json",
+          Accept: "application/json",
+          Authorization: `Bearer ${state.token}`
+        }
+        // body: JSON.stringify({
+        //   homeTown: payload.homeTown
+        // })
+      }
+    )
       .then(response => {
         console.log("edit user homeTown response (1) +++++++");
         console.log(response);
+        if (response.status !== 200 && response.status !== 201) {
+          console.log("Error From The Server");
+          throw "Error From The Server";
+        }
         return response.json();
       })
       .then(response => {
-        console.log("edit user chomeTown response successsss +++");
+        console.log("edit user chomeTown response successsss response (1) +++");
         console.log(response);
         if (!response) {
-          console.log("Erreur liée au serveur+++++++");
-          throw new Error("Erreur d 'ajout de homeTown+++++");
+          console.log("Error From the server +++++++");
+          throw new Error("Error From update or add new homeTown+++++");
         }
         context.commit("storeHomeTown", {
           homeTown: payload.homeTown
@@ -2383,7 +2416,7 @@ const actions = {
         response_ = response;
       })
       .catch(error => {
-        console.log("erreur liée au serveur ou au navigateur");
+        console.log("error From browser or server");
         console.log(error);
         throw error;
       });
@@ -2394,24 +2427,34 @@ const actions = {
     console.log("edit user website start +++++");
 
     let response_ = null;
-    await fetch(state.url_base + state.url_update_current_city, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-        Authorization: `Bearer ${state.token}`
-      },
-      body: JSON.stringify({
-        websites: payload.websites
-      })
-    })
+    await fetch(
+      state.url_base +
+        state.url_post_website +
+        "?webUrl=" +
+        payload.websites[payload.websites.length - 1],
+      {
+        method: "POST",
+        headers: {
+          //"Content-Type": "application/json",
+          Accept: "application/json",
+          Authorization: `Bearer ${state.token}`
+        }
+        // body: JSON.stringify({
+        //   websites: payload.websites
+        // })
+      }
+    )
       .then(response => {
         console.log("edit user websites response (1) +++++++");
         console.log(response);
+        if (response.status !== 200 && response.status !== 201) {
+          console.log("Error From The Server");
+          throw "Error From The Server";
+        }
         return response.json();
       })
       .then(response => {
-        console.log("edit user websites response successsss +++");
+        console.log("edit user websites response successsss response (1) +++");
         console.log(response);
         if (!response) {
           console.log("Erreur liée au serveur+++++++");
@@ -2423,7 +2466,7 @@ const actions = {
         response_ = response;
       })
       .catch(error => {
-        console.log("erreur liée au serveur ou au navigateur");
+        console.log("error from browser or server error (1)");
         console.log(error);
         throw error;
       });
@@ -2434,28 +2477,38 @@ const actions = {
     console.log("edit user socialLinks start +++++");
 
     let response_ = null;
-    await fetch(state.url_base + state.url_update_current_city, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-        Authorization: `Bearer ${state.token}`
-      },
-      body: JSON.stringify({
-        socialLinks: payload.socialLinks
-      })
-    })
+    await fetch(
+      state.url_base +
+        state.url_post_socialLink +
+        "?socialLink=" +
+        payload.socialLinks[payload.socialLinks.length - 1],
+      {
+        method: "POST",
+        headers: {
+          //"Content-Type": "application/json",
+          Accept: "application/json",
+          Authorization: `Bearer ${state.token}`
+        }
+        // body: JSON.stringify({
+        //   socialLinks: payload.socialLinks
+        // })
+      }
+    )
       .then(response => {
         console.log("edit user socialLinks response (1) +++++++");
         console.log(response);
+        if (response.status !== 200 && response.status !== 201) {
+          console.log("Error From The Server");
+          throw "Error From The Server";
+        }
         return response.json();
       })
       .then(response => {
         console.log("edit user socialLinks response successsss +++");
         console.log(response);
         if (!response) {
-          console.log("Erreur liée au serveur+++++++");
-          throw new Error("Erreur d 'ajout de socialLinks+++++");
+          console.log("Error From The Server+++++++");
+          throw new Error("Error to add socialLinks+++++");
         }
         context.commit("storeSocialLinks", {
           socialLinks: payload.socialLinks
@@ -2463,7 +2516,7 @@ const actions = {
         response_ = response;
       })
       .catch(error => {
-        console.log("erreur liée au serveur ou au navigateur");
+        console.log("error from the server or the browser");
         console.log(error);
         throw error;
       });
@@ -2563,18 +2616,6 @@ const actions = {
         throw error;
       });
     return response_;
-  },
-  selectBusiness(value) {
-    let boptions = [];
-    boptions.push({
-      value: this.details[0].username,
-      text: this.details[0].username
-    });
-    const items = this.details[0].business.map(item => {
-      return { value: item.username, text: item.username };
-    });
-    boptions.push(...items);
-    console.log(boptions);
   },
   async updateUserProfession(context, payload) {
     console.log(payload);

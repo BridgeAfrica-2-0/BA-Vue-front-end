@@ -33,6 +33,7 @@ const getDefaultState = () => {
     url_add_working: "/api/v1/userIntro/addWorking",
     url_update_working: "/api/v1/userIntro/updateWorking",
     url_add_school: "api/v1/userIntro/addSchool",
+    url_update_school: "api/v1/userIntro/updateSchool/",
     url_add_profession: "/api/v1/userIntro/updateWorki",
     url_load_basicInfos: "",
     recoverData: "",
@@ -1231,6 +1232,7 @@ const getDefaultState = () => {
             ],
             educations: [
               {
+                id: 1,
                 access: "private",
                 schoolName: null,
                 graduated: false,
@@ -2526,45 +2528,91 @@ const actions = {
   async updateUserWorkPlaces(context, payload) {
     console.log(payload);
     console.log("edit user workplace start +++++");
-
+    const currentlyWorking = payload.workPlace.currentlyWorking ? 1 : 0;
+    let url_post = null;
     let response_ = null;
-    await fetch(state.url_base + state.url_add_working, {
+    if (payload.method === "post") {
+      url_post =
+        state.url_base +
+        state.url_add_working +
+        "?companyName=" +
+        payload.workPlace.companyName +
+        "&cityTown=" +
+        payload.workPlace.cityTown +
+        "&position=" +
+        payload.workPlace.homeTown +
+        "&jobResponsibilities=" +
+        payload.workPlace.jobResponsibilities +
+        "&currentlyWorking=" +
+        +currentlyWorking +
+        "&startDate=" +
+        payload.workPlace.startDate +
+        "&endDate=" +
+        payload.workPlace.endDate;
+    } else if (payload.method === "update") {
+      url_post =
+        state.url_base +
+        state.url_update_working +
+        "/11?companyName=" +
+        payload.workPlace.companyName +
+        "&cityTown=" +
+        payload.workPlace.cityTown +
+        "&position=" +
+        payload.workPlace.homeTown +
+        "&jobResponsibilities=" +
+        payload.workPlace.jobResponsibilities +
+        "&currentlyWorking=" +
+        +currentlyWorking +
+        "&startDate=" +
+        payload.workPlace.startDate +
+        "&endDate=" +
+        payload.workPlace.endDate;
+    } else if (payload.method === "delete") {
+      console.log("delete");
+    }
+
+    await fetch(url_post, {
       method: "POST",
       headers: {
-        "Content-Type": "application/json",
+        //"Content-Type": "application/json",
         Accept: "application/json",
         Authorization: `Bearer ${state.token}`
-      },
-      body: JSON.stringify({
-        companyName: payload.workPlace.companyName,
-        cityTown: payload.workPlace.cityTown,
-        position: "YAOUNDE",
-        jobResponsibilities:
-          "Job descrioption dummny textJob descrioption dummny text Jobdescrioption dummny text",
-        currentlyWorking: payload.workPlace === true ? 1 : 0,
-        startDate: "2012-09-12",
-        endDate: "2012-09-12"
-      })
+      }
+      // body: JSON.stringify({
+      //   companyName: payload.workPlace.companyName,
+      //   cityTown: payload.workPlace.cityTown,
+      //   position: "YAOUNDE",
+      //   jobResponsibilities:
+      //     "Job descrioption dummny textJob descrioption dummny text Jobdescrioption dummny text",
+      //   currentlyWorking: payload.workPlace === true ? 1 : 0,
+      //   startDate: "2012-09-12",
+      //   endDate: "2012-09-12"
+      // })
     })
       .then(response => {
         console.log("edit user workPlace response (1) +++++++");
         console.log(response);
+        if (response.status !== 200 && response.status !== 201) {
+          console.log("Error From The Server");
+          //throw "Error From The Server";
+        }
         return response.json();
       })
       .then(response => {
-        console.log("edit user workPlace response successsss +++");
+        console.log("edit user workPlace response successsss response (2) +++");
         console.log(response);
         if (response.errors) {
-          console.log("Erreur liée au serveur+++++++");
-          throw new Error("Erreur d 'ajout de workPlace+++++");
+          console.log("Error From the Server+++++++");
+          throw new Error("Error From Add  workPlace+++++");
         }
         context.commit("storeWorkPlace", {
-          workPlace: payload.workPlace
+          workPlace: payload.workPlace,
+          method: payload.method
         });
         response_ = response;
       })
       .catch(error => {
-        console.log("erreur liée au serveur ou au navigateur");
+        console.log("error From Server and Browser");
         console.log(error);
         throw error;
       });
@@ -2575,44 +2623,92 @@ const actions = {
     console.log("edit user education start +++++");
 
     let response_ = null;
-    await fetch(state.url_base + state.url_add_school, {
+    let graduated = payload.education.graduated ? 1 : 0;
+    let url = null;
+    let fetchMethod = null;
+    console.log(fetchMethod);
+    if (payload.method === "post") {
+      fetchMethod = "POST";
+      url =
+        state.url_base +
+        state.url_add_school +
+        "?schoolName=" +
+        payload.education.schoolName +
+        "&graduated=" +
+        graduated +
+        "&durationForm" +
+        payload.education.durationFrom +
+        "&major=" +
+        payload.education.major +
+        "&durationTo=" +
+        payload.education.durationTo +
+        "&durationFrom=" +
+        payload.education.durationFrom;
+    } else if (payload.method === "update") {
+      fetchMethod = "POST";
+      url =
+        state.url_base +
+        state.url_update_school +
+        payload.education.id +
+        "?schoolName=" +
+        payload.education.schoolName +
+        "&graduated=" +
+        graduated +
+        "&durationForm" +
+        payload.education.durationFrom +
+        "&major=" +
+        payload.education.major +
+        "&durationTo=" +
+        payload.education.durationTo +
+        "&durationFrom=" +
+        payload.education.durationFrom;
+    } else if (payload.method === "delete") {
+      console.log("delete education");
+      fetchMethod = "DELETE";
+    }
+
+    console.log(fetchMethod);
+    await fetch(url, {
       method: "POST",
       headers: {
-        "Content-Type": "application/json",
+        //"Content-Type": "application/json",
         Accept: "application/json",
         Authorization: `Bearer ${state.token}`
-      },
-      body: JSON.stringify({
-        schoolName: payload.education.schoolName,
-        graduated: payload.education.graduated ? 1 : 0,
-        durationFrom: payload.education.durationFrom,
-        major: payload.education.major,
-        durationTo: payload.education.durationFrom
-      })
+      }
+      // body: JSON.stringify({
+      //   schoolName: payload.education.schoolName,
+      //   graduated: graduated,
+      //   durationFrom: payload.education.durationFrom,
+      //   major: payload.education.major,
+      //   durationTo: payload.education.durationFrom
+      // })
     })
       .then(response => {
         console.log("edit user education response (1) +++++++");
         console.log(response);
         if (response.status !== 200 || response.status !== 201) {
-          console.log("Erreur liée au serveur+++++++");
-          throw new Error("Erreur d 'ajout d'education+++++");
+          console.log("Error From The Server+++++++");
+          throw new Error("Error of Add / Delete / Edit education+++++");
         }
         return response.json();
       })
       .then(response => {
-        console.log("edit user education response successsss +++");
+        console.log(
+          "save/edit/delete user education response (2) successsss +++"
+        );
         console.log(response);
         if (response.errors) {
-          console.log("Erreur liée au serveur+++++++");
-          throw new Error("Erreur d 'ajout d'education+++++");
+          console.log("Error From The Server+++++++");
+          throw new Error("Error For Add/Edit/Delete Education+++++");
         }
         context.commit("storeEducation", {
-          education: payload.education
+          education: payload.education,
+          method: payload.method
         });
         response_ = response;
       })
       .catch(error => {
-        console.log("erreur liée au serveur ou au navigateur");
+        console.log("error From the server or a browser");
         console.log(error);
         throw error;
       });
@@ -2809,10 +2905,20 @@ const mutations = {
     ];
   },
   storeWorkPlace(state, payload) {
-    state.userData[0].profile_about.educationAndWorks.workPlaces = [
-      ...state.userData[0].profile_about.educationAndWorks.workPlaces,
-      payload.workPlace
-    ];
+    if (payload.method === "post") {
+      const newId =
+        state.userData[0].profile_about.educationAndWorks.workPlaces.length;
+      state.userData[0].profile_about.educationAndWorks.workPlaces = [
+        ...state.userData[0].profile_about.educationAndWorks.workPlaces,
+        { id: newId, ...payload.workPlace }
+      ];
+    } else if (payload.method === "update") {
+      state.userData[0].profile_about.educationAndWorks.workPlaces[
+        payload.workPlace.id - 1
+      ] = payload.workPlace;
+    } else if (payload.method === "delete") {
+      console.log("Delete");
+    }
   },
   storeProfession(state, payload) {
     state.userData[0].profile_about.educationAndWorks.professions = [
@@ -2821,10 +2927,20 @@ const mutations = {
     ];
   },
   storeEducation(state, payload) {
-    state.userData[0].profile_about.educationAndWorks.educations = [
-      ...state.userData[0].profile_about.educationAndWorks.educations,
-      payload.educations
-    ];
+    if (payload.method === "post") {
+      const newId =
+        state.userData[0].profile_about.educationAndWorks.educations.length;
+      state.userData[0].profile_about.educationAndWorks.educations = [
+        ...state.userData[0].profile_about.educationAndWorks.educations,
+        { id: newId, ...payload.education }
+      ];
+    } else if (payload.method === "update") {
+      state.userData[0].profile_about.educationAndWorks.educations[
+        payload.education.id - 1
+      ] = payload.education;
+    } else if (payload.method === "delete") {
+      console.log("Delete");
+    }
   }
 };
 

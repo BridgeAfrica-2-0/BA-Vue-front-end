@@ -948,6 +948,7 @@ export default {
           this.index = this.basicInfo.socialLinks.findIndex(socialLink => {
             return socialLink === value;
           });
+
           console.log(this.index);
           this.sociallinkInput = value;
           this.$refs["sociallinkModal"].show();

@@ -14,6 +14,8 @@ const getDefaultState = () => {
     url_load_profile_picture_changed: "/api/v1/download?file_name=",
     url_load_profile_picture:
       "/api/v1/download?file_name=public/media/photos/z7aooJV1XnDVTpRSfPGOUj7sjm0trGVJCiNFS7Ef.jpg",
+    url_load_profile_business: "/api/v1/business",
+    url_post_profile_business: "/api/v1/business/create/userBusiness",
     url_change_profile_picture: "/api/v1/post",
     change_image_url: "/api/v1/download?file_name=",
     url_create_post: "/api/v1/post",
@@ -53,6 +55,56 @@ const getDefaultState = () => {
         target: null,
         coverImage: null,
         numbersOfFollowers: 30,
+        profile_business: [
+          {
+            id: 1,
+            logo_path:
+              "https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg",
+            name: "Super Car ltd",
+            category: "Car marketing",
+            keywords: null,
+            timezone: null,
+            about_business:
+              "super best car seller in the world adipisicing elit. lorem epsep this is, ar seller in the world adipisicing elit. lorem epsep this is",
+            phone: null,
+            phoneId: null,
+            phone2: null,
+            phone2Id: null,
+            hasNoPhone: true,
+            website: null,
+            hasNoWebsite: true,
+            email: null,
+            hasNoEmail: true,
+            city: "Douala",
+            country: "Cameroon",
+            neighbourhood: null,
+            community: 2000000000
+          },
+          {
+            id: 2,
+            logo_path:
+              "https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg",
+            name: "Super Car ltd",
+            category: "Car marketing",
+            keywords: null,
+            timezone: null,
+            about_business:
+              "super best car seller in the world adipisicing elit. lorem epsep this is, ar seller in the world adipisicing elit. lorem epsep this is",
+            phone: null,
+            phoneId: null,
+            phone2: null,
+            phone2Id: null,
+            hasNoPhone: true,
+            website: null,
+            hasNoWebsite: true,
+            email: null,
+            hasNoEmail: true,
+            city: "Douala",
+            country: "Cameroon",
+            neighbourhood: null,
+            community: 2000000000
+          }
+        ],
         comments: [
           {
             comment_id: 1,
@@ -2113,6 +2165,106 @@ const actions = {
       });
     return response_;
   },
+  async loadUserProfileBusiness(context, payload) {
+    console.log(payload);
+    console.log("load user Profile Business start +++++");
+    let response_ = null;
+    await fetch(state.url_base + state.url_load_profile_business, {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+        Authorization: `Bearer ${state.token}`
+      }
+    })
+      .then(response => {
+        console.log("load user profile business response (1) +++++++");
+        console.log(response);
+        if (response.status !== 200 && response.status !== 201) {
+          console.log("error from the server ");
+          throw "Error from the Server";
+        }
+        return response.json();
+      })
+      .then(response => {
+        console.log("load user profile business response (2) successsss +++");
+        console.log(response);
+        if (!response) {
+          console.log("Error from the server+++++++");
+          throw new Error("Error of load Profile Business+++++");
+        }
+        context.commit("updateUserProfileBusiness", {
+          profile_business: response.data.profile_business
+        });
+        response_ = response;
+      })
+      .catch(error => {
+        console.log("error from browser or server error(1)");
+        console.log(error);
+        throw error;
+      });
+    return response_;
+  },
+  async updateUserProfileBusiness(context, payload) {
+    console.log(payload);
+    console.log("edit user Profile Business start +++++");
+    let response_ = null;
+    await fetch(state.url_base + state.url_post_profile_business, {
+      method: "POST",
+      headers: {
+        "Content-Type": "multipart/form-data",
+        Accept: "application/json",
+        Authorization: `Bearer ${state.token}`
+      },
+      body: {
+        name: payload.business.name,
+        category: payload.business.category,
+        keywords: payload.business.keywords,
+        timezone: payload.business.timezone,
+        logo_path: payload.business.logo_path,
+        about_business: payload.business.about_business,
+        email: payload.business.hasNoEmail ? null : payload.business.email,
+        city: payload.business.city.split(",")[0].trim(),
+        country: payload.business.city.split(",")[1].trim(),
+        website: payload.business.hasNoWebsite
+          ? null
+          : payload.business.website,
+        neighbourhood: payload.business.neighbourhood,
+        phone: payload.business.hasNoPhone
+          ? null
+          : payload.business.phoneId + " " + payload.business.phone,
+        phone2: payload.business.hasNoPhone
+          ? null
+          : payload.business.phoneId + " " + payload.business.phone2
+      }
+    })
+      .then(response => {
+        console.log("save new Business response (1) +++++++");
+        console.log(response);
+        if (response.status !== 200 && response.status !== 201) {
+          console.log("Error From the Server ++++ ");
+          throw "Error from the Server";
+        }
+        return response.json();
+      })
+      .then(response => {
+        console.log("save new Business response successsss +++");
+        console.log(response);
+        if (!response) {
+          console.log("Error From The server+++++++");
+          throw new Error("Error from save new Business+++++");
+        }
+        context.commit("storeBusiness", {
+          business: payload.business
+        });
+        response_ = response;
+      })
+      .catch(error => {
+        console.log("error from the browser or the server error(1)");
+        console.log(error);
+        throw error;
+      });
+    return response_;
+  },
   async loadUserBasicInfosBirthDate(context, payload) {
     console.log(payload);
     console.log("load user birth date start +++++");
@@ -2783,6 +2935,9 @@ const mutations = {
     state.userData[0].profile_about.biography.info_access = payload.info_access;
     state.userData[0].profile_about.biography.description = payload.description;
   },
+  updateUserProfileBusiness(state, payload) {
+    state.userData[0].profile_business = payload.profile_business;
+  },
   updateUserBirthDate(state, payload) {
     state.userData[0].profile_about.basicInfo.dateOfBirth = payload.dateOfBirth;
   },
@@ -2825,6 +2980,14 @@ const mutations = {
       ...state.userData[0].profile_about.educationAndWorks.educations,
       payload.educations
     ];
+  },
+  storeBusiness(state, payload) {
+    const newId = state.userData[0].profile_business.length;
+
+    state.userData[0].profile_business.push({
+      id: newId,
+      ...payload.business
+    });
   }
 };
 
@@ -2875,6 +3038,9 @@ export default new Vuex.Store({
     },
     getProfileAboutEducationAndWorks(state) {
       return state.userData[0].profile_about.educationAndWorks;
+    },
+    getProfileBusiness(state) {
+      return state.userData[0].profile_business;
     }
   },
   actions,

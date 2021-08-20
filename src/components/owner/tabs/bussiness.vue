@@ -1,6 +1,5 @@
 <template>
   <div class="p-0 m-0">
-
     <div class="col-md-12 p-0 ">
       <fas-icon
         class="violet float-left mr-1  icon-size primary"
@@ -19,38 +18,67 @@
 
       <hr />
 
-      <b-modal id="modal-1" title="Add Bussiness" size="lg" hide-footer>
+      <b-modal
+        id="modal-1"
+        ref="modal-1"
+        title="Add Bussiness"
+        size="lg"
+        hide-footer
+        @close="cancel"
+      >
         <div class="row">
           <div class="col-md-12 mx-0">
-            <form id="msform">
+            <form id="msform" @submit.prevent="saveBusiness">
               <!-- progressbar -->
               <ul id="progressbar">
-                <li class="active" id="general"><strong>General</strong></li>
-                <li id="contact" class="" v-bind:class="{ active: fieldset5 }">
+                <li class="" id="general" :class="{ active: fieldset1 === 1 }">
+                  <strong>General</strong>
+                </li>
+                <li id="contact" class="" :class="{ active: fieldset1 === 2 }">
                   <strong>Contact</strong>
                 </li>
-                <li
-                  id="location"
-                  class=""
-                  v-bind:class="{ active: fieldset2, active: fieldset3 }"
-                >
+                <li id="location" :class="{ active: fieldset1 === 3 }">
                   <strong>Location</strong>
                 </li>
               </ul>
               <!-- fieldsets -->
-              <fieldset class="position-relative opacity-100" v-if="fieldset1">
+              <fieldset
+                class="position-relative opacity-100"
+                v-if="fieldset1 === 1"
+              >
                 <div class="form-card">
                   <div class="row">
+                    <input
+                      type="file"
+                      accept="image/*"
+                      ref="image"
+                      style="display:none"
+                      @change="saveLogo"
+                    />
                     <div class="col-md-6">
                       <div class="image-upload-wrap">
                         <a
-                          href="#"
                           data-toggle="modal"
                           data-target="#createalbumModal"
+                          @click="$refs.image.click()"
                         >
-                          <div class="drag-text">
+                          <div
+                            class="drag-text"
+                            v-if="profile_business_input.logo_path === null"
+                            style="height: 100%"
+                          >
                             <i class="fa fa-plus" aria-hidden="true"></i>
                             <h3>Add Logo</h3>
+                          </div>
+                          <div
+                            class="drag-text"
+                            v-if="profile_business_input.logo_path !== null"
+                            style="height: 100%; width: 100%; padding: 0"
+                          >
+                            <img
+                              :src="logo_path"
+                              style="height: 100%; width: 100%"
+                            />
                           </div>
                         </a>
                         <div></div>
@@ -58,13 +86,15 @@
                     </div>
                     <div class="col-md-6">
                       <div class="form-group">
-                        <label for="username">Busness Name:</label><br />
+                        <label for="username">Business Name:</label><br />
                         <input
                           type="text"
-                          name="username"
-                          id="username"
+                          name="name"
+                          id="name"
                           placeholder="Busness Name"
                           class="form-control"
+                          v-model="profile_business_input.name"
+                          required
                         />
                       </div>
 
@@ -72,11 +102,12 @@
                         <label for="category">Business Category:</label><br />
 
                         <b-form-select
-                          v-model="category"
+                          v-model="profile_business_input.category"
                           :options="categories"
                           class="mb-3"
                           value-field="item"
                           text-field="name"
+                          required
                         ></b-form-select>
                       </div>
                     </div>
@@ -89,10 +120,12 @@
                         <div class="col-md-12 pl-0 pr-0">
                           <input
                             type="text"
-                            name="username"
-                            id="username"
+                            name="keywords"
+                            id="keywords"
                             placeholder="Enter Keyword"
                             class="form-control"
+                            required
+                            v-model="profile_business_input.keywords"
                           />
                         </div>
                       </div>
@@ -100,15 +133,25 @@
 
                     <div class="col-md-6">
                       <div class="form-group">
-                        <label for="username"> TomeZone: </label><br />
-                        <select id="category" class="form-control ">
-                          <option value="" selected="" disabled=""
-                            >Select Timezone</option
+                        <label for="username"> TimeZone: </label><br />
+                        <select
+                          id="category"
+                          class="form-control"
+                          v-model="profile_business_input.timezone"
+                        >
+                          <option value="" disabled="">Select Timezone</option>
+                          <option selected value="(UTC - 09:00) Alaska"
+                            >(UTC - 09:00) Alaska</option
                           >
-                          <option>(UTC - 09:00) Alaska</option>
-                          <option>(UTC - 09:00) Alaska1</option>
-                          <option>(UTC - 09:00) Alaska2</option>
-                          <option>(UTC - 09:00) Alaska3</option>
+                          <option value="(UTC - 09:00) Alaska2"
+                            >(UTC - 09:00) Alaska1</option
+                          >
+                          <option value="(UTC - 09:00) Alaska3"
+                            >(UTC - 09:00) Alaska2</option
+                          >
+                          <option value="(UTC - 09:00) Alaska4"
+                            >(UTC - 09:00) Alaska3</option
+                          >
                         </select>
                       </div>
                     </div>
@@ -124,6 +167,8 @@
                           id="description"
                           placeholder="Brief description about your Busness"
                           class="form-control"
+                          required
+                          v-model="profile_business_input.about_business"
                         ></textarea>
                       </div>
                     </div>
@@ -134,17 +179,21 @@
                   name="cancel"
                   class="cancel btn btn-dark-gray"
                   value="Cancel"
+                  @click="cancel"
                 />
                 <input
                   type="button"
                   name="next"
                   class="next btn ml-3 btn-outline-primary orange"
                   value="Next Step"
-                  v-on:click="closeOne"
+                  @click="advance(2)"
                 />
               </fieldset>
 
-              <fieldset class="position-relative opacity-100" v-if="fieldset2">
+              <fieldset
+                class="position-relative opacity-100"
+                v-if="fieldset1 === 2"
+              >
                 <div class="form-card">
                   <div class="row">
                     <label
@@ -154,36 +203,44 @@
                     >
 
                     <div class="input-group col-md-12 mb-4 selec">
-                      <div class="col-md-12  pl-0 pr-0">
+                      <div
+                        class="col-md-12  pl-0 pr-0"
+                        v-if="!profile_business_input.hasNoPhone"
+                      >
                         <select
-                          id="country"
+                          id="phone1"
                           class="form-control col-md-3 float-left"
+                          v-model="profile_business_input.phoneId"
                         >
-                          <option>USA(+1)</option>
-                          <option>USA(+1)</option>
-                          <option>USA(+1)</option>
-                          <option>India(+91)</option>
+                          <option selected="+1" value="+1">USA(+1)</option>
+                          <option value="+33">FRENC(+33)</option>
+                          <option value="+237">CAMEROON(+237)</option>
+                          <option value="+91">India(+91)</option>
                         </select>
 
                         <input
-                          id="tel"
-                          name="tel"
+                          id="number"
+                          name="number"
                           type="tel"
                           placeholder=""
                           class="form-control col-md-9"
+                          v-model="profile_business_input.phone"
                         />
                       </div>
 
                       <div class="checkbox">
                         <label
-                          ><input type="checkbox" value="" />This business does
-                          not have a Phone</label
+                          ><input
+                            type="checkbox"
+                            value=""
+                            v-model="profile_business_input.hasNoPhone"
+                          />This business does not have a Phone</label
                         >
                       </div>
                     </div>
                   </div>
 
-                  <div class="row">
+                  <div class="row" v-if="!profile_business_input.hasNoPhone">
                     <label
                       class=" pl-0 ml-3 control-label float-left"
                       for="name"
@@ -195,19 +252,21 @@
                         <select
                           id="country"
                           class="form-control col-md-3 float-left"
+                          v-model="profile_business_input.phone2Id"
                         >
-                          <option>USA(+1)</option>
-                          <option>USA(+1)</option>
-                          <option>USA(+1)</option>
-                          <option>India(+91)</option>
+                          <option selected value="+1">USA(+1)</option>
+                          <option value="+33">FRENCH(+33)</option>
+                          <option value="+237">CAMEROON(+237)</option>
+                          <option value="+91">India(+91)</option>
                         </select>
 
                         <input
                           id="tel"
                           name="tel"
                           type="tel"
-                          placeholder=""
+                          placeholder="Phone 2"
                           class="form-control col-md-9"
+                          v-model="profile_business_input.phone2"
                         />
                       </div>
                     </div>
@@ -215,7 +274,10 @@
 
                   <div class="row mb-3">
                     <div class="col-md-12">
-                      <div class="form-group">
+                      <div
+                        class="form-group"
+                        v-if="!profile_business_input.hasNoWebsite"
+                      >
                         <label for="alias">Website</label><br />
                         <input
                           type="text"
@@ -223,20 +285,27 @@
                           id="Website"
                           placeholder="www.Website.comm"
                           class="form-control"
+                          v-model="profile_business_input.website"
                         />
-                        <div class="checkbox">
-                          <label
-                            ><input type="checkbox" value="" />This business
-                            does not have a Website</label
-                          >
-                        </div>
+                      </div>
+                      <div class="checkbox">
+                        <label
+                          ><input
+                            type="checkbox"
+                            value=""
+                            v-model="profile_business_input.hasNoWebsite"
+                          />This business does not have a Website</label
+                        >
                       </div>
                     </div>
                   </div>
 
                   <div class="row mb-5">
                     <div class="col-md-12">
-                      <div class="form-group">
+                      <div
+                        class="form-group"
+                        v-if="!profile_business_input.hasNoEmail"
+                      >
                         <label for="alias">Email</label><br />
                         <input
                           type="Email"
@@ -244,13 +313,17 @@
                           id="Emaisl"
                           placeholder="Email.com"
                           class="form-control"
+                          v-model="profile_business_input.email"
                         />
-                        <div class="checkbox">
-                          <label
-                            ><input type="checkbox" value="" />This business
-                            does not have a Email</label
-                          >
-                        </div>
+                      </div>
+                      <div class="checkbox">
+                        <label
+                          ><input
+                            type="checkbox"
+                            value=""
+                            v-model="profile_business_input.hasNoEmail"
+                          />This business does not have a Email</label
+                        >
                       </div>
                     </div>
                   </div>
@@ -260,23 +333,28 @@
                   name="cancel"
                   class="cancel btn btn-dark-gray"
                   value="Cancel"
+                  @click="cancel"
                 />
                 <input
                   type="button"
                   name="previous"
                   class="previous ml-3 btn btn-dark"
                   value="Previous"
+                  @click="previous(1)"
                 />
                 <input
                   type="button"
                   name="next"
                   class="next ml-3 btn btn-outline-primary orange"
                   value="Next Step"
-                  v-on:click="closeTwo"
+                  @click="advance(3)"
                 />
               </fieldset>
 
-              <fieldset class="position-relative opacity-100" v-if="fieldset3">
+              <fieldset
+                class="position-relative opacity-100"
+                v-if="fieldset1 === 3"
+              >
                 <div class="form-card">
                   <div class="row">
                     <div class="col-md-12">
@@ -289,6 +367,7 @@
                             id="username"
                             placeholder="City, Country"
                             class="form-control"
+                            v-model="profile_business_input.city"
                           />
                         </div>
                       </div>
@@ -299,8 +378,9 @@
                             type="text"
                             name="alias"
                             id="alias"
-                            placeholder="Neighbourhood name, City, Country"
+                            placeholder="Neighbourhood name"
                             class="form-control"
+                            v-model="profile_business_input.neighbourhood"
                           />
                         </div>
                       </div>
@@ -339,19 +419,21 @@
                   name="cancel"
                   class="cancel btn btn-dark-gray"
                   value="Cancel"
+                  @click="cancel"
                 />
                 <input
                   type="button"
                   name="previous"
                   class="previous ml-3 btn btn-dark"
                   value="Previous"
+                  @click="previous(2)"
                 />
                 <input
-                  type="button"
+                  type="submit"
                   name="Save"
                   class="next ml-3 btn btn-outline-primary save orange"
                   value="Save"
-                  v-on:click="closeThree"
+                  @click="advance(4)"
                 />
               </fieldset>
 
@@ -364,14 +446,24 @@
 
                   <div class="row justify-content-center">
                     <div class="col-9 text-center">
-                      <h5>Business Name Here</h5>
-                      <a href="#">http://business.com</a>
-                      <p><b>Business Category </b></p>
+                      <h5>{{ profile_business_input.name }}</h5>
+                      <a
+                        @click="
+                          window.location.replace(
+                            profile_business_input.website
+                          )
+                        "
+                        >{{ profile_business_input.website }}</a
+                      >
+                      <p>
+                        <b> {{ profile_business_input.category }} </b>
+                      </p>
                       <input
                         type="button"
                         name="Save"
                         class="btn savebtnn orange"
                         value="View Profile"
+                        @click="viewProfile"
                       />
                     </div>
                   </div>
@@ -431,7 +523,7 @@
 
 -->
 
-          <b-row>
+          <b-row v-for="business in profile_business" :key="business.id">
             <b-col md="12" lg="6" class="p-0">
               <div class="people-style shadow">
                 <b-row>
@@ -439,10 +531,7 @@
                     <div class="center-img">
                       <splide :options="options" class="r-image">
                         <splide-slide cl>
-                          <img
-                            src="https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg"
-                            class="r-image"
-                          />
+                          <img :src="business.logo_path" class="r-image" />
                         </splide-slide>
                       </splide>
                     </div>
@@ -450,55 +539,29 @@
 
                   <b-col md="5" cols="7" lg="7" xl="9" sm="5">
                     <p class="textt text">
-                      <strong class="title"> Super Car ltd </strong> <br />
-                      Car marketing
+                      <strong class="title"> {{ business.name }} </strong>
                       <br />
-                      20k Community <br />
+                      {{ business.category }}
+                      <br />
+                      {{
+                        business.community >= 1000000
+                          ? business.community / 1000000 + "M"
+                          : business.community >= 1000
+                          ? business.community / 1000 + "K"
+                          : business.community
+                      }}
+                      Community <br />
 
                       <span class="location">
-                        <b-icon-geo-alt class="ico"></b-icon-geo-alt> Douala
-                        cameroon
+                        <b-icon-geo-alt class="ico"></b-icon-geo-alt>
+                        {{ business.city }}
+                        {{ business.country }}
                       </span>
                       <br />
-
-                      super best car seller in the world adipisicing elit. lorem
-                      epsep this is <b-link>Read More</b-link>
                     </p>
-                  </b-col>
-                </b-row>
-              </div>
-            </b-col>
-            <b-col md="12" lg="6" class="p-0">
-              <div class="people-style shadow">
-                <b-row>
-                  <b-col md="3" xl="3" lg="5" cols="5" sm="3">
-                    <div class="center-img">
-                      <splide :options="options" class="r-image">
-                        <splide-slide cl>
-                          <img
-                            src="https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg"
-                            class="r-image"
-                          />
-                        </splide-slide>
-                      </splide>
-                    </div>
-                  </b-col>
 
-                  <b-col md="5" cols="7" lg="7" xl="9" sm="5">
-                    <p class="textt text">
-                      <strong class="title"> Super Car ltd </strong> <br />
-                      Car marketing
-                      <br />
-                      20k Community <br />
-
-                      <span class="location">
-                        <b-icon-geo-alt class="ico"></b-icon-geo-alt> Douala
-                        cameroon
-                      </span>
-                      <br />
-
-                      super best car seller in the world adipisicing elit. lorem
-                      epsep this is <b-link>Read More</b-link>
+                    <p>
+                      {{ business.about_business }} <b-link>Read More</b-link>
                     </p>
                   </b-col>
                 </b-row>
@@ -516,7 +579,6 @@ export default {
   name: "bussiness",
   data() {
     return {
-      category: "",
       categories: [
         { item: "Professional_and_home_service", name: "Professionals" },
         { item: "Agriculture ", name: "Agriculture " },
@@ -535,34 +597,134 @@ export default {
         { item: "Mayor_concils", name: "Mayor_concils" },
         { item: "Taxis service", name: "Taxis service" }
       ],
-
-      fieldset1: true,
-      fieldset2: false,
-      fieldset3: false,
-      fieldset4: false,
-      fieldset5: false
+      fieldset1: 1,
+      profile_business_input: {
+        logo_path: null,
+        name: "Super Car ltd",
+        category: "Car marketing",
+        keywords: null,
+        timezone: null,
+        about_business:
+                "super best car seller in the world adipisicing elit. lorem epsep this is, ar seller in the world adipisicing elit. lorem epsep this is",
+        phone: null,
+        phoneId: null,
+        phone2: null,
+        phone2Id: null,
+        hasNoPhone: true,
+        website: null,
+        hasNoWebsite: true,
+        email: null,
+        hasNoEmail: true,
+        city: "Douala",
+        country: "Cameroon",
+        neighbourhood: null,
+        community: 2000000000
+      },
+      profile_business: []
     };
   },
+  created() {
+    console.log("Load User Profile Business start+++++++");
+    this.$store
+      .dispatch("loadUserProfileBusiness", null)
+      .then(response => {
+        console.log(response);
+        console.log("Load User Profile Business end response (3) +++++++");
+      })
+      .catch(error => {
+        console.log("Error from server or from browser error (2)++++");
+        console.log(error);
+      })
+      .finally(() => {
+        console.log("Finally Load User Profile Business response (1) +++++++");
+        this.profile_business = JSON.parse(
+          JSON.stringify(this.$store.getters.getProfileBusiness)
+        );
+        console.log(this.profile_business);
+        console.log("Load User Profile Business end+++++++");
+      });
+  },
+  computed: {
+    logo_path() {
+      console.log(this.profile_business_input.logo_path);
+      return URL.createObjectURL(
+              this.profile_business_input.logo_path.get("media")
+      );
+    }
+  },
   methods: {
-    closeOne() {
-      this.fieldset1 = false;
-      this.fieldset2 = true;
-      this.fieldset3 = false;
-      this.fieldset4 = false;
-      this.fieldset5 = true;
+    advance(value) {
+      this.fieldset1 = value;
+      if (value === 4) {
+        // setTimeout(() => {
+        //   this.$refs["modal-1"].hide();
+        //   this.fieldset1 = 1;
+        // }, 2000);
+        this.saveBusiness();
+      }
     },
-    closeTwo() {
-      this.fieldset1 = false;
-      this.fieldset2 = false;
-      this.fieldset3 = true;
-      this.fieldset4 = false;
-      this.fieldset5 = this.fieldset4 || this.fieldset3;
+    previous(value) {
+      this.fieldset1 = value;
     },
-    closeThree() {
-      this.fieldset1 = false;
-      this.fieldset2 = false;
-      this.fieldset3 = false;
-      this.fieldset4 = true;
+    cancel() {
+      console.log("Cancelled Add Business +++++");
+      this.$refs["modal-1"].hide();
+      this.profile_business_input = {
+        logo_path: null,
+        name: null,
+        category: null,
+        keywords: null,
+        timezone: null,
+        about_business: null,
+        phone: null,
+        phoneId: null,
+        phone2: null,
+        phone2Id: null,
+        hasNoPhone: true,
+        website: null,
+        hasNoWebsite: true,
+        email: null,
+        hasNoEmail: true,
+        city: null,
+        country: null,
+        neighbourhood: null
+      };
+      this.fieldset1 = 1;
+    },
+    saveBusiness() {
+      console.log("Save New Business ++++++");
+      console.log(this.profile_business_input);
+      this.$store
+        .dispatch("updateUserProfileBusiness", {
+          business: this.profile_business_input
+        })
+        .then(response => {
+          console.log("save new profile business after response (3) +++++");
+          console.log(response);
+          console.log("save new profile business endddd ++++");
+        })
+        .catch(error => {
+          console.log("error from browser or server error(2)");
+          console.log(error);
+        })
+        .finally(() => {
+          console.log("finally save new business user ");
+          this.profile_business = JSON.parse(
+            JSON.stringify(
+              this.$store.getters.getProfileBusiness
+            )
+          );
+          this.cancel();
+        });
+    },
+    saveLogo(event) {
+      console.log("Save Logo Business ");
+      const fd = new FormData();
+      fd.append("media", event.target.files[0]);
+      this.profile_business_input.logo_path = fd;
+    },
+    viewProfile() {
+      console.log("View Profile Clicked");
     }
   }
 };

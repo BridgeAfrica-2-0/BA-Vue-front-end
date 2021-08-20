@@ -2711,6 +2711,7 @@ const actions = {
         console.log("error From the server or a browser");
         console.log(error);
         throw error;
+
       });
     return response_;
   },

@@ -164,6 +164,7 @@ export default {
         jobResponsibilities: null,
         currentlyWorking: false,
         startDate: null,
+
         endDate: null,
         access: "public"
       },

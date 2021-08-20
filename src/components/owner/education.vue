@@ -107,6 +107,7 @@ export default {
       educations: [],
       educationInput: {
         access: "private",
+
         schoolName: null,
         graduated: false,
         durationFrom: null,

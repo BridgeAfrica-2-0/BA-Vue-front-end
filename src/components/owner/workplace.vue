@@ -161,6 +161,7 @@ export default {
       JSON.stringify(this.$store.getters.getProfileAboutEducationAndWorks)
     );
   },
+
   methods: {
     cancel() {
       console.log("Cancel Another Action in User  ++++++");

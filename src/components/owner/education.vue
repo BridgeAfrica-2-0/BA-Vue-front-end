@@ -109,6 +109,7 @@ export default {
         access: "private",
 
         schoolName: null,
+
         graduated: false,
         durationFrom: null,
         durationTo: null,

@@ -2615,7 +2615,6 @@ const actions = {
         console.log("erreur liée au serveur ou au navigateur");
         console.log(error);
         throw error;
-
       });
     return response_;
   },

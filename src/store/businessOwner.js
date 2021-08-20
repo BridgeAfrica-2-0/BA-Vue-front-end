@@ -138,11 +138,7 @@ export default {
       commit("setLoader", true);
       await dispatch("signIn");
       await axios
-        .get("notification", {
-          headers: {
-            Authorization: "Bearer " + localStorage.getItem("access_token"),
-          },
-        })
+        .get("notification")
         .then((res) => {
           commit("setLoader", false);
           commit("setSuccess", true);
@@ -169,15 +165,9 @@ export default {
         objId.id = element.id;
         items.ids.push(objId);
       });
-      await axios
-        .post("notification/mark-read", items, {
-          headers: {
-            Authorization: "Bearer " + localStorage.getItem("access_token"),
-          },
-        })
-        .then(() => {
-          dispatch("getNotifications");
-        });
+      await axios.post("notification/mark-read", items).then(() => {
+        dispatch("getNotifications");
+      });
     },
 
     // Delete All Notifications
@@ -193,15 +183,9 @@ export default {
         objId.id = element;
         items.ids.push(objId);
       });
-      await axios
-        .post("notification/deleteAll", items, {
-          headers: {
-            Authorization: "Bearer " + localStorage.getItem("access_token"),
-          },
-        })
-        .then(() => {
-          dispatch("getNotifications");
-        });
+      await axios.post("notification/deleteAll", items).then(() => {
+        dispatch("getNotifications");
+      });
     },
     // delete a single notification
     delete({ dispatch }, id) {

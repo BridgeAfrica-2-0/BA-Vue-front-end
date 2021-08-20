@@ -787,6 +787,7 @@ export default {
         .dispatch("updateUserBasicInfosCurrentCity", {
           currentCity: this.basicInfo.currentCity
         })
+
         .then(response => {
           console.log("save new current city user response (3) ++++++");
           console.log(response);

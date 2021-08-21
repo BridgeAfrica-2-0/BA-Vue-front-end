@@ -22,7 +22,6 @@ export default {
     getSuccess(state) {
       return state.success;
     },
-
   },
   mutations: {
     setNetworks(state, payload) {
@@ -37,21 +36,8 @@ export default {
     setSuccess(state, payload) {
       state.success = payload;
     },
-
-
   },
   actions: {
-    // temporal signin to get token for developement purpose
-    async signIn() {
-      axios
-        .post("/user/login", {
-          email: "info@moazateeq.com",
-          password: "12345678",
-        })
-        .then((res) => {
-          localStorage.setItem("access_token", res.data.data.accessToken);
-        });
-    },
     // Get networks from the backend
     async getNetworks({ dispatch, commit }) {
       await dispatch("signIn");
@@ -76,16 +62,9 @@ export default {
 
     // Add network to the database but doesn't work correctly for now
     async addNetwork({ commit }, newNetwork) {
-      console.log(newNetwork);
       axios
-        .post("/network", newNetwork, {
-          headers: {
-            Authorization: "Bearer " + localStorage.getItem("access_token"),
-          },
-        })
-        .then((res) => {
-          console.log(res.data);
-        })
+        .post("/network", newNetwork)
+        .then((res) => {})
         .catch((err) => {
           console.log("Something went wrong");
         });
@@ -96,20 +75,13 @@ export default {
     async editNetwork({ dispatch, commit }, editedNetwork) {
       commit("setLoader", true);
       axios
-        .post(`network/${editedNetwork.id}`, editedNetwork, {
-          headers: {
-            Authorization: "Bearer " + localStorage.getItem("access_token"),
-            "Content-Type": "application/json",
-          },
-        })
+        .put(`network/${editedNetwork.id}`, editedNetwork)
         .then(async (res) => {
-          console.log(res.data);
           await dispatch("getNetworks");
         })
         .catch((err) => {
           console.log("Something went wrong");
         });
     },
-    
   },
 };

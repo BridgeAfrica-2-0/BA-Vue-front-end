@@ -74,15 +74,10 @@ export default {
         });
     },
     // Get networks from the backend
-    async getNetworks({ dispatch, commit }) {
+    async getNetworks({ commit }) {
       commit("setLoader", true);
-      await dispatch("signIn");
       await axios
-        .get("network", {
-          headers: {
-            Authorization: "Bearer " + localStorage.getItem("access_token"),
-          },
-        })
+        .get("network")
         .then((res) => {
           commit("setLoader", false);
           commit("setSuccess", true);
@@ -97,16 +92,11 @@ export default {
     },
 
     // Add network to the database but doesn't work correctly for now
-    async addNetwork({ commit }, newNetwork) {
-      console.log(newNetwork);
+    async addNetwork({ dispatch, commit }, newNetwork) {
       axios
-        .post("/network", newNetwork, {
-          headers: {
-            Authorization: "Bearer " + localStorage.getItem("access_token"),
-          },
-        })
+        .post("/network", newNetwork)
         .then((res) => {
-          console.log(res.data);
+          dispatch("getNetworks");
         })
         .catch((err) => {
           console.log("Something went wrong");
@@ -118,15 +108,9 @@ export default {
     async editNetwork({ dispatch, commit }, editedNetwork) {
       commit("setLoader", true);
       axios
-        .post(`network/${editedNetwork.id}`, editedNetwork, {
-          headers: {
-            Authorization: "Bearer " + localStorage.getItem("access_token"),
-            "Content-Type": "application/json",
-          },
-        })
+        .put(`network/${editedNetwork.id}`, editedNetwork)
         .then(async (res) => {
-          console.log(res.data);
-          await dispatch("getNetworks");
+          dispatch("getNetworks");
         })
         .catch((err) => {
           console.log("Something went wrong");
@@ -165,9 +149,12 @@ export default {
         objId.id = element.id;
         items.ids.push(objId);
       });
-      await axios.post("notification/mark-read", items).then(() => {
-        dispatch("getNotifications");
-      });
+      await axios
+        .post("notification/mark-read", items)
+        .then(() => {
+          dispatch("getNotifications");
+        })
+        .catch((err) => [console.log(err)]);
     },
 
     // Delete All Notifications
@@ -189,15 +176,9 @@ export default {
     },
     // delete a single notification
     delete({ dispatch }, id) {
-      axios
-        .delete(`notification/${id}`, {
-          headers: {
-            Authorization: "Bearer " + localStorage.getItem("access_token"),
-          },
-        })
-        .then(() => {
-          dispatch("getNotifications");
-        });
+      axios.delete(`notification/${id}`).then(() => {
+        dispatch("getNotifications");
+      });
     },
   },
 };

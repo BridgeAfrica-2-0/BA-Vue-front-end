@@ -287,7 +287,7 @@ export default {
         })
         .then((response) => {
           console.log(response.data);
-          this.$store.commit("auth/setUserData", response.data);
+          this.$store.commit("auth/setUserData", response.data.data);
 
           this.flashMessage.show({
             status: "success",
@@ -295,6 +295,8 @@ export default {
             message:
               "Thanks for registering. You will get your otp code in a second",
           });
+
+        
 
           this.$router.push({ name: "verifyAccount" });
         })

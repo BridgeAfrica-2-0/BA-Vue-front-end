@@ -78,7 +78,7 @@ import VueMaterial from "vue-material";
 Vue.use(VueMaterial);
 
 import Lightbox from "@morioh/v-lightbox";
-import * as VueGoogleMaps from "vue2-google-maps";
+import * as VueGoogleMaps from "gmap-vue";
 
 import VueSplide from "@splidejs/vue-splide";
 Vue.use(VueSplide);
@@ -119,6 +119,8 @@ Vue.use(VueGoogleMaps, {
     key: "AIzaSyAGZU6cqra18t1fhN1AbzRsEc_pgt7n2C8",
     libraries: "places",
   },
+  autobindAllEvents: false,
+  installComponents: true,
 });
 
 Vue.component("v-select", vSelect);
@@ -139,7 +141,7 @@ new Vue({
       (response) => response,
       (error) => {
         if (error.response.status === 401) {
-          this.$store.dispatch("logout");
+          this.$store.dispatch("auth/logout");
         }
         return Promise.reject(error);
       }

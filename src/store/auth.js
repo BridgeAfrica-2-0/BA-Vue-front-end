@@ -1,6 +1,7 @@
 import axios from "axios";
 
 axios.defaults.baseURL = process.env.VUE_APP_API_URL;
+
 export default {
   namespaced: true,
 
@@ -9,6 +10,9 @@ export default {
     isVerified: null,
     passwordToken: null,
     registerData: null,
+
+    businessAround: null,
+    peopleAround: null,
   },
 
   mutations: {
@@ -19,6 +23,14 @@ export default {
       axios.defaults.headers.common.Authorization = `Bearer ${userData.accessToken}`;
 
       const userInfo = localStorage.getItem("user");
+    },
+
+    setPeopleAround(state, data) {
+      state.peopleAround = data;
+    },
+
+    setBusinessAround(state, data) {
+      state.businessAround = data;
     },
 
     setVerifyToken(state, data) {
@@ -46,6 +58,27 @@ export default {
       });
     },
 
+    completeWelcome({ commit }) {
+      return axios.get("user/completewelcome").then(({ data }) => {
+        console.log(data);
+        commit("setUserData", data.data);
+      });
+    },
+
+    businessAround({ commit }) {
+      return axios.get("business/around").then(({ data }) => {
+        commit("setBusinessAround", data.data);
+        console.log(data);
+      });
+    },
+
+    peopleAround({ commit }) {
+      return axios.get("people/around").then(({ data }) => {
+        commit("setPeopleAround", data.data);
+        console.log(data);
+      });
+    },
+
     storeRegisterData({ commit }, userdata) {
       commit("setUserData", userdata);
     },
@@ -68,7 +101,13 @@ export default {
       return axios.post(url, mydata).then(({ data }) => {
         console.log(data.data);
 
-        commit("setUserData", data.data);
+        const url = "user/verifyOtp/" + this.state.auth.user.user.id;
+
+        return axios.post(url, mydata).then(({ data }) => {
+          console.log(data.data);
+
+          commit("setUserData", data.data);
+        });
       });
     },
   },

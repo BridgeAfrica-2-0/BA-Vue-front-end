@@ -88,7 +88,7 @@
         </b-col>
       </b-row>
     </div>
-    <div class="h-100 w-100" v-if="getNetworksFromStore.length < 1">
+    <div class="h-100 w-100" v-if="!getNetworksFromStore">
       <div class="mx-auto text-center my-5">
         <h2 class="my-3">Builds networks around your Business</h2>
         <p class="my-2">Create network to stay in touch with just the people</p>
@@ -246,11 +246,7 @@
             label-class="font-weight-bold pt-0"
             class="mb-0"
           >
-            <b-form-checkbox
-              v-model="dat"
-              name="check-button"
-              switch
-            >
+            <b-form-checkbox v-model="dat" name="check-button" switch>
             </b-form-checkbox>
           </b-form-group>
           <b-alert :show="success" variant="success"

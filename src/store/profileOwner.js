@@ -40,7 +40,6 @@ export default {
   actions: {
     // Get networks from the backend
     async getNetworks({ dispatch, commit }) {
-      await dispatch("signIn");
       await axios
         .get("network", {
           headers: {

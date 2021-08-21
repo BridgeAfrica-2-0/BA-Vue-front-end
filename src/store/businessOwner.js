@@ -44,6 +44,8 @@ export default {
     sendChecked(state) {
       return state.checked;
     },
+
+    // Send products to the UI
   },
   mutations: {
     setNetworks(state, payload) {
@@ -102,8 +104,7 @@ export default {
           console.log("Something went wrong");
         });
     },
-    //delete network
-    async deleteNetwork() {},
+
     // Edit a network
     async editNetwork({ dispatch, commit }, editedNetwork) {
       commit("setLoader", true);

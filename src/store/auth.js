@@ -1,6 +1,9 @@
 import axios from 'axios'
 
-axios.defaults.baseURL =  process.env.VUE_APP_API_URL    
+axios.defaults.baseURL =  process.env.VUE_APP_API_URL     
+
+
+
 export default {
   namespaced: true,
 
@@ -8,11 +11,15 @@ export default {
     user: null,
     isVerified: null,
     passwordToken: null,
-    registerData: null
+    registerData: null,
+
+    businessAround: null,
+    peopleAround: null,
+
   },
 
 
-
+    
   mutations: {
     setUserData(state, userData) {
       state.user = userData
@@ -24,6 +31,28 @@ export default {
 
 
     },
+
+
+
+
+
+    
+
+
+
+
+
+    setPeopleAround(state, data){
+
+       state.peopleAround=data;
+    },
+
+    setBusinessAround(state, data){
+
+      state.businessAround=data;
+   },
+
+
 
     setVerifyToken(state, data) {
       state.verifyToken = data;
@@ -57,6 +86,48 @@ export default {
 
         })
     },
+
+
+
+      
+
+    completeWelcome({commit}){
+
+      return axios
+      .get('user/completewelcome')
+      .then(({ data }) => {
+        console.log(data);
+        commit('setUserData', data.data)
+
+      })
+    },
+      
+    businessAround( {commit} ){
+       
+      return axios
+      .get('business/around')
+      .then(({ data }) => {
+        commit('setBusinessAround', data.data);
+        console.log(data);
+
+      })
+
+    },
+
+   
+
+    peopleAround( {commit} ){
+       
+      return axios
+      .get('people/around')
+      .then(({ data }) => {
+        commit('setPeopleAround', data.data);
+        console.log(data);
+
+      })
+
+    },
+
 
 
 
@@ -101,7 +172,7 @@ export default {
     verify({ commit }, mydata) {
 
 
-      const url = 'user/verifyOtp/' + this.state.auth.user.data.user.id
+      const url = 'user/verifyOtp/' + this.state.auth.user.user.id  
 
      
 

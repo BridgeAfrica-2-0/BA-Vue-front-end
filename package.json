@@ -24,6 +24,7 @@
     "dotenv": "^10.0.0",
     "emoji-vue": "^0.2.4",
     "firebase": "^8.8.1",
+    "gmap-vue": "^1.5.0",
     "ly-tab": "^2.1.2",
     "node-sass": "^5.0.0",
     "register-service-worker": "^1.7.1",
@@ -40,8 +41,10 @@
     "vue-form-wizard": "^0.8.4",
     "vue-gallery-slideshow": "^1.5.2",
     "vue-good-wizard": "^1.4.1",
+    "vue-loading-spinner": "^1.0.11",
     "vue-lottie": "^0.2.1",
     "vue-material": "^1.0.0-beta-15",
+    "vue-plugin-load-script": "^1.3.2",
     "vue-read-more": "^1.1.1",
     "vue-router": "^3.2.0",
     "vue-search-select": "^2.9.3",
@@ -53,6 +56,7 @@
     "vuelidate": "^0.7.6",
     "vuex": "^3.6.2",
     "vuex-persistedstate": "^4.0.0-beta.1",
+    "x5-gmaps": "^0.5.7",
     "yarn": "^1.22.11"
   },
   "devDependencies": {

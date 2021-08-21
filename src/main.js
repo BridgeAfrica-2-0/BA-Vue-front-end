@@ -17,43 +17,40 @@ import IconifyIcon from "@iconify/vue";
 import homeIconData from "@iconify-icons/mdi-light/home";
 import ReadMore from "vue-read-more";
 import VueSocialauth from "vue-social-auth";
-import firebase from "firebase";
+// import firebase from "firebase";
 Vue.use(Vuex);
 Vue.use(VueAxios, axios);
-import IconifyIcon from '@iconify/vue';
-import homeIconData from '@iconify-icons/mdi-light/home';
 IconifyIcon.addIcon('home', homeIconData);
-import ReadMore from 'vue-read-more';
 
 Vue.use(ReadMore);
-IconifyIcon.addIcon("home", homeIconData);
 Vue.prototype.$axios = axios;
 
-const firebaseConfig = {
-  apiKey: "AIzaSyDu9rL6_YDSeTyU89tF8JcI9kWNR6617Fg",
-  authDomain: "bridge-africa-api.firebaseapp.com",
-  projectId: "bridge-africa-api",
-  storageBucket: "bridge-africa-api.appspot.com",
-  messagingSenderId: "50055115922",
-  appId: "1:50055115922:web:81e9b59a354a0c6e9ee24b",
-  measurementId: "G-9K2WHP9Y13",
-};
-
-firebase.initializeApp(firebaseConfig);
-
-const messaging = firebase.messaging();
-
-messaging
-  .requestPermission()
-  .then(() => {
-    return messaging.getToken();
-  })
-  .then((token) => {
-    console.log(token);
-  })
-  .catch((err) => {
-    console.log(err);
-  });
+//temporary comented for build
+// const firebaseConfig = {
+//   apiKey: "AIzaSyDu9rL6_YDSeTyU89tF8JcI9kWNR6617Fg",
+//   authDomain: "bridge-africa-api.firebaseapp.com",
+//   projectId: "bridge-africa-api",
+//   storageBucket: "bridge-africa-api.appspot.com",
+//   messagingSenderId: "50055115922",
+//   appId: "1:50055115922:web:81e9b59a354a0c6e9ee24b",
+//   measurementId: "G-9K2WHP9Y13",
+// };
+//
+// firebase.initializeApp(firebaseConfig);
+//
+// const messaging = firebase.messaging();
+//
+// messaging
+//   .requestPermission()
+//   .then(() => {
+//     return messaging.getToken();
+//   })
+//   .then((token) => {
+//     console.log(token);
+//   })
+//   .catch((err) => {
+//     console.log(err);
+//   });
 
 Vue.use(VueSocialauth, {
   providers: {

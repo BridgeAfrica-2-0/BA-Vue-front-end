@@ -51,17 +51,14 @@ const routes = [
   {
     path: "/",
     name: "home",
-    component: dashboard,
+    component: dashboard
   },
-
 
   {
     path: "/market",
     name: "market",
-    component: market,
+    component: market
   },
-
-
 
   {
     path: "/welcome",
@@ -69,7 +66,7 @@ const routes = [
     component: welcome,
     meta: {
       auth: true
-    },
+    }
   },
 
   {
@@ -77,7 +74,6 @@ const routes = [
     name: "settings",
     component: settings
   },
-
 
   {
     path: "/dashboard",
@@ -88,7 +84,7 @@ const routes = [
   {
     path: "/profile_owner",
     name: "profile_owner",
-    component: profile_owner,
+    component: profile_owner
   },
   {
     path: "/template_viewer",
@@ -98,7 +94,7 @@ const routes = [
   {
     path: "/business_owner",
     name: "BusinessOwner",
-    component: businessOwner,
+    component: businessOwner
   },
 
   {
@@ -106,9 +102,6 @@ const routes = [
     name: "businessOwnerSettingGeneral",
     component: businessOwnerSettingGeneral
   },
-
-
- 
 
   {
     path: "/business_owner/create_website_step_one",
@@ -138,46 +131,44 @@ const routes = [
   {
     path: "/login",
     name: "Login",
-    component: Login,
+    component: Login
   },
-  
 
   {
     path: "/signup",
     name: "signup",
-    component: signup,
+    component: signup
   },
-
 
   {
     path: "/signin",
     name: "SignIn",
-    component: SignIn,
+    component: SignIn
   },
   {
     path: "/recoverPass1",
     name: "RecoverPass1",
-    component: RecoverPass1,
+    component: RecoverPass1
   },
   {
     path: "/recoverPass2",
     name: "RecoverPass2",
-    component: RecoverPass2,
+    component: RecoverPass2
   },
   {
     path: "/recoverPass3",
     name: "RecoverPass3",
-    component: RecoverPass3,
+    component: RecoverPass3
   },
   {
     path: "/businessfollower",
     name: "BusinessFollower",
-    component: businessFollower,
+    component: businessFollower
   },
   {
     path: "/businessvisitor",
     name: "BusinessVisitor",
-    component: businessVisitor,
+    component: businessVisitor
   },
   {
     path: "/services/create",
@@ -189,12 +180,12 @@ const routes = [
       } else {
         next({ name: "Login" });
       }
-    },
+    }
   },
   {
     path: "/services/:id",
     name: "Service",
-    component: service,
+    component: service
   },
   {
     path: "/services/modify/:id",
@@ -207,72 +198,62 @@ const routes = [
       } else {
         next({ name: "Login" });
       }
-    },
+    }
   },
 
   {
     path: "/profilefollower",
     name: "Follower",
-    component: Follower,
+    component: Follower
   },
   {
     path: "/profilevisitor",
     name: "visitor",
-    component: Visitor,
+    component: Visitor
   },
   {
     path: "/search",
     name: "Search",
-    component: search,
+    component: search
   },
   {
     path: "/forgotpass",
     name: "ForgotPassword",
-    component: forgotPassword,
+    component: forgotPassword
   },
   {
     path: "/messaging",
     name: "Nav Meassage",
-    component: navMessage,
+    component: navMessage
   },
-
 
   {
     path: "/blec",
     name: "Blec",
-    component: Blec,
+    component: Blec
   },
-
-
 
   {
     path: "/memberNetworkFollower",
     name: "Membar Network Follower",
-    component: memberNetworkFollower,
-  },
+    component: memberNetworkFollower
+  }
 ];
 
-
-
 const router = new VueRouter({
-  mode: 'history',
+  mode: "history",
   base: process.env.BASE_URL,
   routes
 });
 
-
-
 router.beforeEach((to, from, next) => {
-  const loggedIn = localStorage.getItem('auth/user')
+  const loggedIn = localStorage.getItem("auth/user");
 
   if (to.matched.some(record => record.meta.auth) && !loggedIn) {
-    next('/login')
-    return
+    next("/login");
+    return;
   }
-  next()
-
+  next();
 });
-
-
 
 export default router;

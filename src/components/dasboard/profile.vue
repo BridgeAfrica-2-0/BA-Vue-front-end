@@ -16,7 +16,7 @@
         </h3>
       </span>
 
-      <div class="d-flex col-md-12 mt-2 ml-35" v-for="item in $store.state.details.slice(0,1)" :key="item.type">
+      <div class="d-flex col-md-12 mt-2 ml-35" v-for="item in $store.state.details[0].owner" :key="item.type">
         <b-avatar
           class="p-avater"
           variant="primary"

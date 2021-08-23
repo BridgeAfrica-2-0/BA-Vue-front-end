@@ -853,7 +853,7 @@ const getDefaultState = () => {
           {
             type: "owner",
             fullname: "",
-            username: "Thorfinn",
+            username: "(profile)Thorfinn",
             email: "",
             password: "",
             category: "Information",
@@ -868,9 +868,10 @@ const getDefaultState = () => {
         ],
         business: [
           {
+            id: 1,
             type: "business",
             fullname: "",
-            username: "Thorfinn Kharlsefni",
+            username: "Bridge africa",
             email: "",
             password: "",
             category: "Agriculture",
@@ -883,6 +884,7 @@ const getDefaultState = () => {
             website: "www.typw.com"
           },
           {
+            id: 2,
             type: "business",
             fullname: "",
             username: "Kharlsefni Thorfinn",
@@ -898,6 +900,7 @@ const getDefaultState = () => {
             website: "www.typw.com"
           },
           {
+            id: 3,
             type: "business",
             fullname: "",
             username: "Peter Pierre",
@@ -944,6 +947,9 @@ const mutations = {
 const getters = {
   getdetails(state) {
     return state.details;
+  },
+  getbdetails(state) {
+    return state.details[0].business;
   }
 };
 

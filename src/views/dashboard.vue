@@ -55,7 +55,7 @@
         <br />
       </div>
 
-      <div v-if="selectedb != 'owner'">
+      <div v-if="selectedb != 'owner'" >
         <b-row>
           <b-col md="6" sm="12" class="mt-2"> <BusinessDashboard /> </b-col>
           <b-col md="6" sm="12" class="mt-2"> <Insights /> </b-col>
@@ -181,10 +181,12 @@ export default {
 
   methods: {
     getbusiness() {
-      const businesses = this.$store.state.details;
+
+      this.boptions.push({ text:this.$store.state.details[0].owner[0].username, value: "owner" });
+      const businesses = this.$store.state.details[0].business;
 
       businesses.forEach((value, index) => {
-        this.boptions.push({ text: value.username, value: value.type });
+        this.boptions.push({ text: value.username, value: value.id });
       });
       return this.boptions;
     }

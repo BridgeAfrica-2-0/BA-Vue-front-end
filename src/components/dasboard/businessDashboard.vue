@@ -20,7 +20,7 @@
         </h4>
       </span>
 
-      <div class="d-flex col-md-12 mt-2" >
+      <div class="d-flex col-md-12 mt-2" v-for="item in business " :key="item.id">
         <img class="img-fluid picture" src="@/assets/img/photo2.jpg" />
         <div class="text-lost">
           <b>{{ item.username }}</b>
@@ -69,7 +69,7 @@ export default {
 
   computed: {
     business() {
-      return this.$store.state.details;
+      return this.$store.state.details[0].business;
     }
   },
   created() {

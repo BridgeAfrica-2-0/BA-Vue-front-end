@@ -22,12 +22,11 @@
             {{ member.community >= 1000000 ? (member.community / 1000000) + 'M' : ( member.community >= 1000 ? (member.community/1000)+'K' : member.community )}} Community <br />
 
             <span class="location">
-              <b-icon-geo-alt class="ico"></b-icon-geo-alt> Douala cameroon
+              <b-icon-geo-alt class="ico"></b-icon-geo-alt> {{ member.city }} {{ member.country }}
             </span>
             <br />
 
-            super best car seller in the world adipisicing elit. lorem epsep
-            this is <b-link>Read More</b-link>
+            {{ member.about_description}} <b-link>Read More</b-link>
           </p>
         </b-col>
 

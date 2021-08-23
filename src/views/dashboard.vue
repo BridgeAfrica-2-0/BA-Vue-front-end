@@ -19,7 +19,6 @@
               <b-form-select
                 v-model="selectedb"
                 :options="boptions"
-                @click="selectBusiness(selectedb)"
               ></b-form-select>
             </b-col>
           </b-row>
@@ -46,7 +45,6 @@
                 <b-form-select
                   v-model="selectedb"
                   :options="boptions"
-                  @click="selectBusiness(selectedb)"
                 ></b-form-select>
               </b-card>
             </div>
@@ -153,12 +151,14 @@ export default {
 
       category: "",
 
-      boptions: [
-        { value: "owner", text: "Owner's Name" },
-        { value: "a", text: "Business Name 1" },
-        { value: "b", text: "Business Name 2" },
-        { value: "c", text: "Business Name 3" }
-      ],
+      // boptions: [
+      //   { value: "owner", text: "Owner's Name" },
+      //   { value: "a", text: "Business Name 1" },
+      //   { value: "b", text: "Business Name 2" },
+      //   { value: "c", text: "Business Name 3" }
+      // ],
+      //{ value: "owner", text: "Owner's Name" }
+      boptions: [],
 
       detail: null
     };
@@ -180,23 +180,34 @@ export default {
   },
 
   methods: {
-    selectBusiness(value) {
-      let boptions = [];
-      boptions.push({
-        value: this.details[0].username,
-        text: this.details[0].username
+    getbusiness() {
+      const businesses = this.$store.state.details;
+
+      businesses.forEach((value, index) => {
+        this.boptions.push({ text: value.username, value: value.type });
       });
-      const items = this.details[0].business.map(item => {
-        return { value: item.username, text: item.username };
-      });
-      boptions.push(...items);
-      console.log(boptions);
-      console.log("popopo-----------++++++++++++");
+      return this.boptions;
     }
+
+    // selectBusiness(value) {
+    //   let boptions = [];
+    //   this.boptions.push({
+    //     value: this.details.username,
+    //     text: this.details.username
+    //   });
+    //   const items = this.$store.state.details.map(item => {
+    //     return { value: item.username, text: item.username };
+    //   });
+    //   this.boptions.push(...items);
+    //   console.log(this.boptions);
+    //   console.log("popopo-----------++++++++++++");
+    // }
   },
 
   mounted() {
     this.$store.dispatch("getdetails");
+
+    this.getbusiness();
   },
 
   computed: {

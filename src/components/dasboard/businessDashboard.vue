@@ -20,17 +20,17 @@
         </h4>
       </span>
 
-      <div class="d-flex col-md-12 mt-2">
+      <div class="d-flex col-md-12 mt-2" >
         <img class="img-fluid picture" src="@/assets/img/photo2.jpg" />
         <div class="text-lost">
-          <b>Business Name</b>
+          <b>{{ item.username }}</b>
           <p class="mb-1">
-            1.1M Community <br />
+            {{ item.numbersOfFollowers }} Community <br />
             <span class=""
               >Current Plan: <span class="text-success">Basic</span></span
             >
           </p>
-          <p class="mb-1 mb-3">Categorie</p>
+          <p class="mb-1 mb-3">{{ item.category }}</p>
           <p class="mb-1">
             <b-icon-person-fill class="text-primary"></b-icon-person-fill>
             Visit Profile
@@ -38,20 +38,20 @@
           <p class="mb-1 ">
             <b-icon-chat-fill class="text-primary"></b-icon-chat-fill>
             Message
-            <span class="badge rounded-pill bg-primary float-right mt-1"
-              >3</span
-            >
+            <span class="badge rounded-pill bg-primary float-right mt-1">{{
+              item.messages
+            }}</span>
           </p>
           <p class="mb-1 ">
             <b-icon-bell-fill class="text-primary"></b-icon-bell-fill>
             Notifications
-            <span class="badge rounded-pill bg-primary float-right mt-1"
-              >9</span
-            >
+            <span class="badge rounded-pill bg-primary float-right mt-1">{{
+              item.notifications
+            }}</span>
           </p>
           <p class="mb-1 ">
             <b-icon-globe class="text-primary"></b-icon-globe>
-            Visit Website
+            <a :href="item.website"> Visit Website</a>
           </p>
           <p class="mb-1 ">
             <b-icon-shop class="text-primary"></b-icon-shop>
@@ -65,7 +65,23 @@
 
 <script>
 export default {
-  name: "businessDashboard"
+  name: "businessDashboard",
+
+  computed: {
+    business() {
+      return this.$store.state.details;
+    }
+  },
+  created() {
+    this.$store
+      .dispatch("getdetails")
+      .then(() => {
+        console.log("the response");
+      })
+      .catch(err => {
+        console.log({ err: err });
+      });
+  }
 };
 </script>
 

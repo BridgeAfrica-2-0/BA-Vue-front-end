@@ -849,64 +849,70 @@ const getDefaultState = () => {
 
     details: [
       {
-        type: "owner",
-        fullname: "",
-        username: "Thorfinn",
-        email: "",
-        password: "",
-        category: "Information",
-        profileName: "Thorfinn",
-        profilePicture: "https://pbs.twimg.com/media/DoNa_wKUUAASSCF.jpg",
-        coverImage: "https://pbs.twimg.com/media/DKO62sVXUAA0_AL.jpg",
-        numbersOfFollowers: 30,
-        messages: 20,
-        notifications: 30,
-        website: "www.typw.com"
-      },
-      {
-        type: "business",
-        fullname: "",
-        username: "Thorfinn Kharlsefni",
-        email: "",
-        password: "",
-        category: "Agriculture",
-        profileName: "Thorfinn",
-        profilePicture: "https://pbs.twimg.com/media/DoNa_wKUUAASSCF.jpg",
-        coverImage: "https://pbs.twimg.com/media/DKO62sVXUAA0_AL.jpg",
-        numbersOfFollowers: 150,
-        messages: 12,
-        notifications: 13,
-        website: "www.typw.com"
-      },
-      {
-        type: "business",
-        fullname: "",
-        username: "Kharlsefni Thorfinn",
-        email: "",
-        password: "",
-        category: "Technology",
-        profileName: "Thorfinn",
-        profilePicture: "https://pbs.twimg.com/media/DoNa_wKUUAASSCF.jpg",
-        coverImage: "https://pbs.twimg.com/media/DKO62sVXUAA0_AL.jpg",
-        numbersOfFollowers: 900,
-        messages: 18,
-        notifications: 45,
-        website: "www.typw.com"
-      },
-      {
-        type: "business",
-        fullname: "",
-        username: "Peter Pierre",
-        email: "",
-        password: "",
-        category: "Marketing",
-        profileName: "Thorfinn",
-        profilePicture: "https://pbs.twimg.com/media/DoNa_wKUUAASSCF.jpg",
-        coverImage: "https://pbs.twimg.com/media/DKO62sVXUAA0_AL.jpg",
-        numbersOfFollowers: 900,
-        messages: 18,
-        notifications: 45,
-        website: "www.typw.com"
+        owner: [
+          {
+            type: "owner",
+            fullname: "",
+            username: "Thorfinn",
+            email: "",
+            password: "",
+            category: "Information",
+            profileName: "Thorfinn",
+            profilePicture: "https://pbs.twimg.com/media/DoNa_wKUUAASSCF.jpg",
+            coverImage: "https://pbs.twimg.com/media/DKO62sVXUAA0_AL.jpg",
+            numbersOfFollowers: 30,
+            messages: 20,
+            notifications: 30,
+            website: "www.typw.com"
+          }
+        ],
+        business: [
+          {
+            type: "business",
+            fullname: "",
+            username: "Thorfinn Kharlsefni",
+            email: "",
+            password: "",
+            category: "Agriculture",
+            profileName: "Thorfinn",
+            profilePicture: "https://pbs.twimg.com/media/DoNa_wKUUAASSCF.jpg",
+            coverImage: "https://pbs.twimg.com/media/DKO62sVXUAA0_AL.jpg",
+            numbersOfFollowers: 150,
+            messages: 12,
+            notifications: 13,
+            website: "www.typw.com"
+          },
+          {
+            type: "business",
+            fullname: "",
+            username: "Kharlsefni Thorfinn",
+            email: "",
+            password: "",
+            category: "Technology",
+            profileName: "Thorfinn",
+            profilePicture: "https://pbs.twimg.com/media/DoNa_wKUUAASSCF.jpg",
+            coverImage: "https://pbs.twimg.com/media/DKO62sVXUAA0_AL.jpg",
+            numbersOfFollowers: 900,
+            messages: 18,
+            notifications: 45,
+            website: "www.typw.com"
+          },
+          {
+            type: "business",
+            fullname: "",
+            username: "Peter Pierre",
+            email: "",
+            password: "",
+            category: "Marketing",
+            profileName: "Thorfinn",
+            profilePicture: "https://pbs.twimg.com/media/DoNa_wKUUAASSCF.jpg",
+            coverImage: "https://pbs.twimg.com/media/DKO62sVXUAA0_AL.jpg",
+            numbersOfFollowers: 900,
+            messages: 18,
+            notifications: 45,
+            website: "www.typw.com"
+          }
+        ]
       }
     ]
     // details[]

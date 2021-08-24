@@ -49,7 +49,7 @@
 </template>
 
 <script>
-import axios from 'axios'
+import axios from "axios";
 
 export default {
   name: "pending",
@@ -69,28 +69,32 @@ export default {
   computed: {},
   beforeMount() {
     // get the ending post
-    axios.defaults.headers.common['Authorization'] = 'Bearer '  + localStorage.getItem('access_token');
-    this.getPosts()
+    axios.defaults.headers.common["Authorization"] =
+      "Bearer " + localStorage.getItem("access_token");
+    this.getPosts();
   },
   methods: {
-    getPosts(){
+    getPosts() {
       // get pending posts
     },
-    approvePost(post){
-      let ids = []
+    approvePost(post) {
+      let data = {
+        ids: [],
+      };
+
       let item = {
-        id:null
-      }
-      item.id = post.id
-      ids.push(item)
-       axios.post('/business/post-approve',ids).then(() => {
-         // code goes here 
-         this.getPosts()
-       })
+        id: null,
+      };
+      item.id = post.id;
+      data.ids.push(item);
+      axios.post("/business/post-approve", data).then(() => {
+        // code goes here
+        this.getPosts();
+      });
     },
-    unApprovePost(post){
+    unApprovePost(post) {
       // Un approve the post
-    }
+    },
   },
 };
 </script>

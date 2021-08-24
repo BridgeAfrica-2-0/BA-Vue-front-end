@@ -55,9 +55,11 @@
         <br />
       </div>
 
-      <div v-if="selectedb != 'owner'" >
+      <div v-if="selectedb != 'owner'">
         <b-row>
-          <b-col md="6" sm="12" class="mt-2"> <BusinessDashboard /> </b-col>
+          <b-col md="6" sm="12" class="mt-2">
+            <BusinessDashboard :selectedb="selectedb" />
+          </b-col>
           <b-col md="6" sm="12" class="mt-2"> <Insights /> </b-col>
         </b-row>
       </div>
@@ -139,6 +141,7 @@ import EmptyBusiness from "@/components/dasboard/emptybusiness";
 import Popularnetwork from "@/components/dasboard/popularnetwork";
 export default {
   name: "dashboard",
+
   data() {
     return {
       slide: 0,
@@ -181,16 +184,25 @@ export default {
 
   methods: {
     getbusiness() {
-
-      this.boptions.push({ text:this.$store.state.details[0].owner[0].username, value: "owner" });
-      const businesses = this.$store.state.details[0].business;
-
-      businesses.forEach((value, index) => {
-        this.boptions.push({ text: value.username, value: value.id });
+      this.boptions.push({
+        text: this.$store.getters.getdetails.owner[0].name,
+        value: "owner"
       });
+      console.log("load data from dashboard++++++++++++");
+      console.log(
+        JSON.parse(JSON.stringify(this.$store.getters.getdetails)).business
+      );
+      let businesses = JSON.parse(
+        JSON.stringify(this.$store.getters.getdetails)
+      ).business;
+      console.log(businesses);
+      businesses = businesses.map(value => {
+        this.boptions.push({ text: value.name, value: value.id });
+        return value;
+      });
+      console.log(businesses);
       return this.boptions;
     }
-
     // selectBusiness(value) {
     //   let boptions = [];
     //   this.boptions.push({
@@ -206,15 +218,23 @@ export default {
     // }
   },
 
-  mounted() {
-    this.$store.dispatch("getdetails");
+  mounted() {},
 
-    this.getbusiness();
+  created() {
+    this.$store.dispatch("getdetails").then(response => {
+      console.log(response, "+++++++++pop");
+      this.getbusiness();
+    });
   },
 
   computed: {
     details() {
       return this.$store.getters.getdetails;
+    }
+  },
+  watch: {
+    selectedb(newvalue) {
+      console.log(newvalue);
     }
   }
 };

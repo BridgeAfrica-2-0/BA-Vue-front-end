@@ -16,18 +16,24 @@
         </h3>
       </span>
 
-      <div class="d-flex col-md-12 mt-2 ml-35" v-for="item in $store.state.details[0].owner" :key="item.type">
+      <div
+        class="d-flex col-md-12 mt-2 ml-35"
+        v-for="item in $store.getters.getdetails.owner"
+        :key="item.name"
+      >
         <b-avatar
           class="p-avater"
           variant="primary"
-          :src="item.profilePicture"
+          :src="item.picture"
           size="5em"
         ></b-avatar>
 
         <div class="text-lost">
-          <h6><b class="name"> {{item.username}} </b></h6>
+          <h6>
+            <b class="name"> {{ item.name }} </b>
+          </h6>
           <p class="mb-1">
-            {{ item.numbersOfFollowers }} Community
+            {{ item.followers }} Community
             <span class="float-right m-60"
               >Current Plan: <span class="text-success">Basic</span></span
             >
@@ -40,16 +46,16 @@
           <p class="mb-1 ">
             <b-icon-chat-fill class="text-primary"></b-icon-chat-fill>
             Message
-            <span class="badge rounded-pill bg-primary float-right mt-1"
-              >{{ item.messages }}</span
-            >
+            <span class="badge rounded-pill bg-primary float-right mt-1">{{
+              item.message
+            }}</span>
           </p>
           <p class="mb-1 ">
             <b-icon-bell-fill class="text-primary"></b-icon-bell-fill>
             Notifications
-            <span class="badge rounded-pill bg-primary float-right mt-1"
-              >{{ item.notifications }}</span
-            >
+            <span class="badge rounded-pill bg-primary float-right mt-1">{{
+              item.notification
+            }}</span>
           </p>
         </div>
       </div>

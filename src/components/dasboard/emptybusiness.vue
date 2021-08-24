@@ -8,7 +8,7 @@
         </h6>
       </span>
       <div class="s-card " style="overflow: -moz-scrollbars-vertical">
-        <div v-if="$store.state.details[0].business.length < 1">
+        <div v-if="$store.getters.getdetails.business.length < 1">
           <b-row>
             <b-col>
               <div class="p-top">
@@ -25,7 +25,7 @@
         <div
           v-else
           class="people-style shadow"
-          v-for="item in $store.getters.getbdetails"
+          v-for="item in $store.getters.getdetails.business"
           :key="item.id"
         >
           <b-row>
@@ -38,7 +38,7 @@
             </b-col>
             <b-col md="5" cols="7" lg="7" xl="5" sm="5">
               <p class="textt">
-                <strong class="title"> {{ item.username }} </strong> <br />
+                <strong class="title"> {{ item.name }} </strong> <br />
                 {{ item.category }}
                 <br />
                 {{ item.followers }} Community <br />

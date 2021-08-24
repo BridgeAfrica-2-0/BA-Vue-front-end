@@ -2886,9 +2886,9 @@ const actions = {
       .catch(error => {
         console.log("erreur liée au serveur ou au navigateur");
         console.log(error);
-        context.commit("modifyBusinessBiography", {
-          biography: payload.biography
-        });
+        // context.commit("modifyBusinessBiography", {
+        //   biography: payload.biography
+        // });
         throw error;
       });
     return response_;
@@ -2977,11 +2977,11 @@ const actions = {
         return response.json();
       })
       .then(response => {
-        console.log("update user Business About response successsss +++");
+        console.log("update user Business About response successsss (2) +++");
         console.log(response);
         if (!response) {
-          console.log("Erreur liée au serveur+++++++");
-          throw new Error("Erreur de la mise à jour du Business About +++++");
+          console.log("Error THe Server++++++");
+          throw new Error("Error For Updating Business About +++++");
         }
         context.commit("updateUserBusinessAbout", {
           businessAbout: payload.business_about
@@ -2989,11 +2989,12 @@ const actions = {
         response_ = response;
       })
       .catch(error => {
-        console.log("erreur liée au serveur ou au navigateur");
-        context.commit("updateUserBusinessAbout", {
-          businessAbout: payload.business_about
-        });
+        console.log("Error From the Server or Browser");
+        // context.commit("updateUserBusinessAbout", {
+        //   businessAbout: payload.business_about
+        // });
         console.log(error);
+        throw error;
       });
     return response_;
   }

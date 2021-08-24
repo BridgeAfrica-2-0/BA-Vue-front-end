@@ -502,18 +502,24 @@ export default {
       .dispatch("loadUserBusinessAbout", null)
       .then(response => {
         console.log(response);
-        this.business_about = this.$store.getters.getBusinessAbout;
+        //this.business_about = this.$store.getters.getBusinessAbout;
         this.dayOfWorks = this.initialize(this.dayOfWorks);
         //this.open = 'Always Open'
         console.log(this.business_about);
-        console.log("load business about response end");
+        console.log("load business about response end response (3) ++++");
       })
       .catch(error => {
-        console.log("erreur lié au serveur et ou au navigateur");
+        console.log("error from the server or browser error(2) ++++");
         console.log(error);
-        this.business_about = this.$store.getters.getBusinessAbout;
-        console.log(this.business_about);
+        //this.business_about = this.$store.getters.getBusinessAbout;
         console.log("load business about error end ");
+      })
+      .finally(() => {
+        console.log("Finally load business about response +++++");
+        this.business_about = JSON.parse(
+          JSON.stringify(this.$store.getters.getBusinessAbout)
+        );
+        console.log(this.business_about);
       });
   },
   computed: {
@@ -575,15 +581,21 @@ export default {
               biography: this.business_about_input.biography
             })
             .then(response => {
-              console.log("fetch finished on the database");
+              console.log("fetch finished on the database response (3) ");
               console.log(response);
               console.log("Modify Business Biography end++++");
             })
             .catch(error => {
               console.log(error);
-              console.log("Modify Business Biography end++++");
-            });
-          this.$refs["biographyModal"].hide();
+              console.log("Modify Business Biography end error (2) ++++");
+            }).finally(() => {
+            console.log("Finally Modify Business About Biography  +++++");
+            this.business_about = JSON.parse(
+                    JSON.stringify(this.$store.getters.getBusinessAbout)
+            );
+            console.log(this.business_about);
+            this.$refs["biographyModal"].hide();
+          });
           break;
         case "editAddress":
           console.log("edit address business");
@@ -599,14 +611,21 @@ export default {
               console.log("update user business about response ++++++");
               console.log(response);
               this.business_about = this.$store.getters.getBusinessAbout;
-              console.log("update user buisness about end");
+              console.log("update user business about end");
             })
             .catch(error => {
               console.log(error);
-              console.log("update user buisness about end++++");
-            });
-          this.$refs["addressBusinessModal"].hide();
-          this.$refs["biographyModal"].hide();
+              console.log("update user business about end++++");
+            }).finally(() => {
+            console.log("Finally Update Business About Biography  +++++");
+            this.business_about = JSON.parse(
+                    JSON.stringify(this.$store.getters.getBusinessAbout)
+            );
+            console.log(this.business_about);
+            this.$refs["addressBusinessModal"].hide();
+            this.$refs["biographyModal"].hide();
+          });
+
           break;
         default:
           console.log("Aucune Correspondance");

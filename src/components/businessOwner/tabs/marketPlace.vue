@@ -15,8 +15,8 @@
     <hr />
 
     <div class="products ">
-      <div class="col-md-6" v-for="post in posts" :key="post.id">
-        <Product />
+      <div class="col-md-6" v-for="(product, index) in products" :key="index">
+        <Product :product="product" />
       </div>
     </div>
 
@@ -34,6 +34,7 @@
                 id="input-1"
                 class="mt-1"
                 type="text"
+                v-model="newProduct.name"
                 required
               ></b-form-input>
             </b-form-group>
@@ -47,14 +48,22 @@
               <b-textarea
                 id="input-1"
                 class="mt-2"
-                v-model="text"
+                v-model="newProduct.description"
                 type="text"
                 required
               ></b-textarea>
             </b-form-group>
           </b-col>
           <b-col cols="12" md="6">
-            <div class="image-upload-wrap">
+            <div class="image-upload-wrap" @click="picImage">
+              <input
+                type="file"
+                name=""
+                @change="getImage"
+                accept="image/*"
+                id="image"
+                v-show="false"
+              />
               <a href="#" data-toggle="modal" data-target="#createalbumModal">
                 <div class="drag-text">
                   <i class="fa fa-plus"></i>
@@ -72,14 +81,17 @@
           label-for="input-1"
           label-size="sm"
         >
-          <b-form-input class="mt-1" id="price"></b-form-input>
+          <b-form-input
+            v-model="newProduct.price"
+            class="mt-1"
+            id="price"
+          ></b-form-input>
         </b-form-group>
 
         <b-form-checkbox
-          id="checkbox-1"
-          name="checkbox-1"
-          value="accepted"
-          unchecked-value="not_accepted"
+          value="1"
+          v-model="newProduct.on_discount"
+          unchecked-value="0"
         >
           This Product Is On Discount
         </b-form-checkbox>
@@ -90,37 +102,38 @@
           label-for="input-1"
           label-size="sm"
         >
-          <b-form-input class="mt-1" id="conditions"></b-form-input>
+          <b-form-input
+            v-model="newProduct.condition"
+            class="mt-1"
+            id="conditions"
+          ></b-form-input>
         </b-form-group>
 
         <b-form-checkbox
-          id="checkbox-1"
-          name="checkbox-1"
-          value="accepted"
-          unchecked-value="not_accepted"
+          value="1"
+          v-model="newProduct.is_service"
+          unchecked-value="0"
         >
           This Item Is A Service ?
         </b-form-checkbox>
 
         <b-form-checkbox
-          id="checkbox-1"
-          name="checkbox-1"
-          value="accepted"
-          unchecked-value="not_accepted"
+          value="1"
+          v-model="newProduct.in_stock"
+          unchecked-value="0"
         >
           In stock
         </b-form-checkbox>
 
-        <b-form-checkbox
-          id="checkbox-1"
-          name="checkbox-1"
-          value="accepted"
-          unchecked-value="not_accepted"
-        >
+        <b-form-checkbox value="1" unchecked-value="0">
           Published
         </b-form-checkbox>
+        <b-alert v-if="success" :variant="val" show> {{ msg }} </b-alert>
+        <b-button @click="addProduct" class="mt-2 btn-block" variant="primary">
+          <b-spinner v-if="load" variant="white"></b-spinner>
 
-        <b-button class="mt-2 btn-block" variant="primary"> Add</b-button>
+          Add</b-button
+        >
       </b-form>
     </b-modal>
   </div>
@@ -128,66 +141,81 @@
 
 <script>
 import Product from "../product";
+import axios from "axios";
 export default {
   data() {
     return {
       showModal: false,
-
-      text: "",
-      image: "",
-      posts: [
-        {
-          id: 1,
-          image: "https://picsum.photos/300/150/?image=41",
-          title: "Title 2",
-          text:
-            " Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum quam, doloribus id sit consequuntur tempora molestiae blanditiis.",
-        },
-        {
-          id: 2,
-          image: "https://picsum.photos/300/150/?image=41",
-          title: "Title 2",
-          text:
-            " Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum quam, doloribus id sit consequuntur tempora molestiae blanditiis.",
-        },
-        {
-          id: 3,
-          image: "https://picsum.photos/300/150/?image=41",
-          title: "Title 2",
-          text:
-            " Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum quam, doloribus id sit consequuntur tempora molestiae blanditiis.",
-        },
-        {
-          id: 4,
-          image: "https://picsum.photos/300/150/?image=41",
-          title: "Title 2",
-          text:
-            " Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum quam, doloribus id sit consequuntur tempora molestiae blanditiis.",
-        },
-        {
-          id: 5,
-          image: "https://picsum.photos/300/150/?image=41",
-          title: "Title 2",
-          text:
-            " Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum quam, doloribus id sit consequuntur tempora molestiae blanditiis.",
-        },
-      ],
-      images: [
-        {
-          id: 1,
-          image: "https://picsum.photos/300/150/?image=41",
-        },
-        {
-          id: 2,
-          image: "https://picsum.photos/300/150/?image=41",
-        },
-      ],
+      load: false,
+      newProduct: {
+        name: "",
+        description: "",
+        picture: "",
+        price: "",
+        in_stock: "",
+        on_discount: null,
+        discount_price: "",
+        condition: "",
+        is_service: null,
+      },
+      products: [],
+      val: "",
+      msg: "",
+      success: false,
     };
   },
   components: {
     Product,
   },
+  beforeMount() {
+    axios.defaults.headers.common["Authorization"] =
+      "Bearer " + localStorage.getItem("access_token");
+    this.getProducts();
+  },
   methods: {
+    getProducts() {
+      axios.get("market/products/1").then((res) => {
+        this.products = res.data.data.data;
+      });
+    },
+    addProduct() {
+      this.load = true;
+      let fd = new FormData();
+      fd.append("name", this.newProduct.name);
+      fd.append("description", this.newProduct.description);
+      fd.append("picture", this.newProduct.picture);
+      fd.append("price", this.newProduct.price);
+      fd.append("in_stock", this.newProduct.in_stock);
+      fd.append("on_discount", this.newProduct.on_discount);
+      fd.append("discount_price", this.newProduct.discount_price);
+      fd.append("condition", this.newProduct.condition);
+      fd.append("is_service", this.newProduct.is_service);
+
+      axios
+        .post("market", fd)
+        .then((res) => {
+          this.load = false;
+          (this.success = true), (this.val = "success");
+          this.msg = "Operation was successful !!";
+          this.getProducts();
+        })
+        .catch((err) => {
+          this.load = false;
+          (this.success = true), (this.val = "danger");
+          this.msg = "Something wen't wrong !!";
+
+          setTimeout(() => {
+            this.success = false
+          },5000)
+
+        });
+    },
+    picImage() {
+      document.querySelector("#image").click();
+    },
+    getImage(e) {
+      this.newProduct.picture = e.target.files[0];
+    },
     createProduct() {
       this.showModal = !this.showModal;
     },

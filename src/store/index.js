@@ -4,22 +4,11 @@ import Vuex from "vuex";
 import axios from "axios";
 
 Vue.use(Vuex);
-axios.defaults.baseURL = "https://adbb1e30c453.ngrok.io/api/v1";
+axios.defaults.baseURL = process.env.VUE_APP_baseURL;
 
 const getDefaultState = () => {
   return {
-    token: "8|Yx3DU4s08aFTYOCa3T2XJKZkjJV4leSi9b20oo5D",
     bdetails: []
-    /*bdetails: [
-      {
-        id: 1,
-        name: "peter",
-        category: "Agriculture",
-        location_description: "Yaounde",
-        about_business: "peter poo",
-        followers: 6
-      }
-    ]*/
   };
 };
 
@@ -30,7 +19,7 @@ const actions = {
   getbdetails({ commit }) {
     return axios
       .get("/business/details", {
-        headers: { Authorization: `Bearer ${state.token}` }
+        headers: { Authorization: `Bearer 8|Yx3DU4s08aFTYOCa3T2XJKZkjJV4leSi9b20oo5D` }
       })
       .then(function({ data }) {
         commit("set_details", data.data);

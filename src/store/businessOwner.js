@@ -8,6 +8,9 @@ export default {
     success: false,
     notifications: [],
     checked: false,
+    btnDelLoader: false,
+    btnReadLoader: false,
+
   },
   getters: {
     // sending networks
@@ -45,7 +48,7 @@ export default {
       return state.checked;
     },
 
-    // Send products to the UI
+
   },
   mutations: {
     setNetworks(state, payload) {
@@ -61,6 +64,11 @@ export default {
     // Setting the notifications in the state
     setNotifications(state, payload) {
       state.notifications = payload;
+    },
+
+    // Set Pendinding posts
+    setPendingPosts(state, payload) {
+      state.pendingPosts = payload;
     },
   },
   actions: {
@@ -172,5 +180,12 @@ export default {
         dispatch("getNotifications");
       });
     },
+
+    // Get Pending posts
+    async getPendingPosts({ dispatch, commit }) {
+      await dispatch("signIn");
+      console.log("called");
+    },
+   
   },
 };

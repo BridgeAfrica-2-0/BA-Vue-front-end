@@ -1,245 +1,173 @@
 <template>
-  <div  class="lalla">
+  <div class="lalla">
+    <b-card
+      class="border-0 p-0 m-0"
+      style="
+    padding: 3px;"
+    >
+      <div class=" border shadow   p-tab p-3">
+        <span>
+          <h6 class="title">
+            <fas-icon class="icons" :icon="['fas', 'users']" size="lg" />
+            <b> COMMUNITY </b> <span class="h4-color"> 7K </span>
+          </h6>
+        </span>
 
-    
-    <b-card class="border-0 p-0 m-0"   style="
-    padding: 3px;">
-
-
-
- 
-     
-
-     <div class=" border shadow   p-tab p-3">
-
-        <span> <h6 class="title">  <fas-icon class="icons" :icon="['fas', 'users']" size="lg" />            <b>   COMMUNITY   </b>  <span class="h4-color"> 7K </span> </h6>   </span>   
-
-
-      <b-tabs  pills content-class="mt-3  f-left ">
-        <b-tab  active>
-
-         <template slot="title"  >
-             People  <span class="spa-color">  7K   </span>
+        <b-tabs pills content-class="mt-3  f-left ">
+          <b-tab active>
+            <template slot="title">
+              People <span class="spa-color"> 7K </span>
             </template>
 
+            <div>
+              <b-row>
+                <b-col class="p-2">
+                  <b-tabs fill pills content-class="mt-3  f-left m-up">
+                    <b-tab active>
+                      <template slot="title">
+                        Followers <span class="spa-color"> 7K </span>
+                      </template>
 
- 
-     <div>
+                      <div class="s-comcard">
+                        <b-row>
+                          <b-col lg="6" sm="12" class="p-2">
+                            <div><People /></div>
+                          </b-col>
+                          <b-col md="6" sm="12" class="p-2">
+                            <div><People /></div>
+                          </b-col>
+                        </b-row>
+                      </div>
+                    </b-tab>
 
-       <b-row>  
-         <b-col class="p-2"> 
-      <b-tabs fill pills content-class="mt-3  f-left m-up">
+                    <b-tab>
+                      <template slot="title">
+                        Following <span class="spa-color"> 7K </span>
+                      </template>
 
-        <b-tab  active>
-          
-            <template slot="title"  >
-             Followers  <span class="spa-color">  7K   </span>
+                      <div class="s-comcard">
+                        <b-row>
+                          <b-col lg="6" sm="12" class="p-2">
+                            <div><People /></div>
+                          </b-col>
+                          <b-col md="6" sm="12" class="p-2">
+                            <div><People /></div>
+                          </b-col>
+                        </b-row>
+                      </div>
+                    </b-tab>
+                  </b-tabs>
+                </b-col>
+              </b-row>
+            </div>
+          </b-tab>
+
+          <b-tab>
+            <template slot="title">
+              Businesses <span class="spa-color"> 7K </span>
             </template>
 
-         
-         <div class="s-comcard">    <b-row>  <b-col lg="6" sm="12" class="p-2">  
-           
-            <div >  <People />    </div >  </b-col> <b-col md="6" sm="12" class="p-2">   <div > <People />    </div >
-            
-              </b-col>    </b-row>   </div>
- 
-         
-         
-        </b-tab>
+            <div>
+              <b-tabs fill pills content-class="mt-3  f-left m-up checkcheck">
+                <b-tab active>
+                  <template slot="title">
+                    Followers <span class="spa-color"> 7K </span>
+                  </template>
 
-        <b-tab > 
+                  <div class="s-comcard">
+                    <b-row>
+                      <b-col lg="6" sm="12">
+                        <div><Business /></div>
+                      </b-col>
+                      <b-col md="6" sm="12">
+                        <div><Business /></div>
+                      </b-col>
+                    </b-row>
+                  </div>
+                </b-tab>
 
-            <template slot="title"  >
-             Following  <span class="spa-color">  7K   </span>
-            </template>
+                <b-tab>
+                  <template slot="title">
+                    Following <span class="spa-color"> 7K </span>
+                  </template>
 
-      <div class="s-comcard">    <b-row>  <b-col md="12" sm="12">   <div >  <People />    </div >  </b-col> <b-col md="6" sm="12">   <div > <People />    </div >  </b-col>    </b-row>   </div>
-
-        
-        
-        </b-tab>
-      </b-tabs>
-      </b-col>
-        </b-row>
-    </div>
-
-         
-        </b-tab>
-
-        <b-tab >
-
-            <template slot="title"  >
-             Businesses  <span class="spa-color">  7K   </span>
-            </template>
-        
-        
-     <div>
-      <b-tabs fill pills content-class="mt-3  f-left m-up checkcheck">
-        <b-tab  active>
-
-         <template slot="title"  >
-             Followers  <span class="spa-color">  7K   </span>
-            </template>
-        
-         
-
-
-         <div class="s-comcard">    <b-row>  <b-col lg="6" sm="12">   <div >  <Business />    </div >  </b-col> <b-col md="6" sm="12">   <div > <Business />    </div >  </b-col>    </b-row>   </div>
-
- 
-         
-        </b-tab>
-
-        <b-tab >
-        
-
-            <template slot="title"  >
-             Following  <span class="spa-color">  7K   </span>
-            </template>
-        
-        <div class="s-comcard">    <b-row>  <b-col lg="6" sm="12">   <div >  <Business />    </div >  </b-col> <b-col md="6" sm="12">   <div > <Business />    </div >  </b-col>    </b-row>   </div>
- 
-        </b-tab>
-      </b-tabs>
-    </div>
-
-
-
-        </b-tab>
-      </b-tabs>
-    </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+                  <div class="s-comcard">
+                    <b-row>
+                      <b-col lg="6" sm="12">
+                        <div><Business /></div>
+                      </b-col>
+                      <b-col md="6" sm="12">
+                        <div><Business /></div>
+                      </b-col>
+                    </b-row>
+                  </div>
+                </b-tab>
+              </b-tabs>
+            </div>
+          </b-tab>
+        </b-tabs>
+      </div>
     </b-card>
   </div>
 </template>
 
 <script>
-
-
 import People from "@/components/dasboard/communityMember";
 import Business from "@/components/dasboard/communitybusiness";
-
 
 export default {
   name: "comunitiDashboard",
 
-   components: {
+  components: {
     People,
-    Business,
-    
-    
-    
-  },
-
-
+    Business
+  }
 };
 </script>
 
-
 <style scoped>
-.card-body{
-
+.card-body {
   padding: 0px;
 }
 </style>
 
-<style >
-
-  
-
-
-   .lala .nav-fill{
-   
-    margin-top: -19px;
-     border: 1px solid rgba(0, 0, 0, 0.125);
-  }
-
-
-
-
-
-
-
-
-  .s-comcard{
-  height:350px; 
-  overflow: auto; 
-  overflow-x: hidden;
-
+<style>
+.lala .nav-fill {
+  margin-top: -19px;
+  border: 1px solid rgba(0, 0, 0, 0.125);
 }
 
+.s-comcard {
+  height: 350px;
+  overflow: auto;
+  overflow-x: hidden;
+}
 
-.spa-color{
+.spa-color {
   color: white;
   margin-left: 10px;
   font-size: 14px;
 }
 
-
-.h4-color{
+.h4-color {
   color: orangered;
   margin-left: 10px;
   font-size: 14px;
 }
 
-.m-up{
-
-  margin-top:-5px;
+.m-up {
+  margin-top: -5px;
 }
 
-
-
-
- 
 @media only screen and (min-width: 768px) {
-
-  
-
-  .title{
+  .title {
     font-size: 20px;
   }
+}
 
-
- }
-
-
-
-
-
-
- 
 @media only screen and (min-width: 768px) {
-
-  
-  .title{
+  .title {
     font-size: 16px;
   }
-
-   
- }
-
-
-
+}
 </style>

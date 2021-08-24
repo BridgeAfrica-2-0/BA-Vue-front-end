@@ -13,7 +13,7 @@
               class="p-avater"
               variant="primary"
               src="https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg"
-             
+
             ></b-avatar>
           </b-col>
 
@@ -27,7 +27,7 @@
                         md="6"
                         lg="12"
                         cols="6"
-                        
+
                         xl="12"
                         class="mt-lg-2"
                       >
@@ -40,7 +40,7 @@
                         md="6"
                         lg="12"
                         cols="6"
-                       
+
                         xl="12"
                         class="mt-3 mt-lg-1 mt-xl-3"
                       >
@@ -57,7 +57,7 @@
                         md="6"
                         lg="12"
                         cols="6"
-                       
+
                         xl="12"
                         class="mt-2 mt-lg-2 mt-xl-2 btn-2 center"
                       >
@@ -67,7 +67,7 @@
                           size="sm"
                           class="b-background flexx pobtn shadow"
                         >
-                           <i class="fas fa-envelope   fa-lg btn-icon "></i>  <span class="btn-text">Message</span> 
+                           <i class="fas fa-envelope   fa-lg btn-icon "></i>  <span class="btn-text">Message</span>
                         </b-button>
                       </b-col>
 
@@ -75,7 +75,7 @@
                         md="6"
                         lg="12"
                         cols="6"
-                       
+
                         xl="12"
                         class="mt-2 mt-lg-2 mt-xl-2 btn-2 center"
                       >
@@ -110,11 +110,11 @@
 
 
 
-      
 
 
 
-      
+
+
 
 
 
@@ -126,7 +126,7 @@
               class="p-avater"
               variant="primary"
               src="https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg"
-             
+
             ></b-avatar>
           </b-col>
 
@@ -140,7 +140,7 @@
                         md="6"
                         lg="12"
                         cols="6"
-                        
+
                         xl="12"
                         class="mt-lg-2"
                       >
@@ -153,7 +153,7 @@
                         md="6"
                         lg="12"
                         cols="6"
-                       
+
                         xl="12"
                         class="mt-3 mt-lg-1 mt-xl-3"
                       >
@@ -170,7 +170,7 @@
                         md="6"
                         lg="12"
                         cols="6"
-                       
+
                         xl="12"
                         class="mt-2 mt-lg-2 mt-xl-2 btn-2 center"
                       >
@@ -180,7 +180,7 @@
                           size="sm"
                           class="b-background flexx pobtn shadow"
                         >
-                           <i class="fas fa-envelope   fa-lg btn-icon "></i>  <span class="btn-text">Message</span> 
+                           <i class="fas fa-envelope   fa-lg btn-icon "></i>  <span class="btn-text">Message</span>
                         </b-button>
                       </b-col>
 
@@ -188,7 +188,7 @@
                         md="6"
                         lg="12"
                         cols="6"
-                       
+
                         xl="12"
                         class="mt-2 mt-lg-2 mt-xl-2 btn-2 center"
                       >
@@ -254,7 +254,7 @@ export default {};
 
 @media only screen and (max-width: 768px) {
 
-    
+
 
     .btn-icon{
   margin-top:3px;
@@ -280,7 +280,7 @@ export default {};
 
 
 @media only screen and (max-width: 768px) {
-     
+
 
      .btnpngs{
       width: 16px;
@@ -419,7 +419,7 @@ f-right {
 }
 
 @media only screen and (min-width: 1200px) {
-  
+
 
   .btn{
     width: 123px;
@@ -438,7 +438,7 @@ f-right {
     margin-top: 3px;
   }
 
-  
+
 
   .btn-2 {
     margin-left: 0px;
@@ -533,7 +533,7 @@ f-right {
     font-size: 10px;
   }
 
-  
+
   .btn {
     display: flex;
     font-size: 10px;
@@ -555,7 +555,7 @@ f-right {
 }
 
 .p-avater {
-    
+
     width: 95px;
     height: 95px;
     margin-bottom: -4px;
@@ -600,7 +600,7 @@ f-right {
 
 
 @media only screen and (min-width: 764px) and (max-width: 991.18px) {
-  
+
   .center{
     text-align: left;
   }
@@ -640,7 +640,7 @@ f-right {
 .follower {
     font-size: 10px;
     text-align: left;
-    
+
 }
 
 .center{
@@ -654,7 +654,7 @@ f-right {
 
   .pobtn {
     font-size: 10px;
-   
+
   }
   .e-name{
     text-align: left;
@@ -666,18 +666,18 @@ f-right {
     text-align: left;
     margin-left:-20px
   }
-    
+
 }
 
 
 
 
 
- 
+
 </style>
 
-<style> 
- 
+<style>
+
  .follower{
    font-size:12px  !important;
  }

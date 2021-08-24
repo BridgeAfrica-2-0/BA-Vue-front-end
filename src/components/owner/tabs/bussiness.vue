@@ -11,7 +11,7 @@
         data-target="#addbusinessbtnModal"
         class="btn btn-outline-primary pull-right float-right mb-2"
         style="margin-top: -6px;"
-        v-b-modal.modal-1
+        v-b-modal.createBusinessModal
       >
         Add Business
       </button>
@@ -19,8 +19,8 @@
       <hr />
 
       <b-modal
-        id="modal-1"
-        ref="modal-1"
+        id="createBusinessModal"
+        ref="createBusinessModal"
         title="Add Bussiness"
         size="lg"
         hide-footer
@@ -54,6 +54,7 @@
                       ref="image"
                       style="display:none"
                       @change="saveLogo"
+                      required
                     />
                     <div class="col-md-6">
                       <div class="image-upload-wrap">
@@ -138,6 +139,7 @@
                           id="category"
                           class="form-control"
                           v-model="profile_business_input.timezone"
+                          required
                         >
                           <option value="" disabled="">Select Timezone</option>
                           <option selected value="(UTC - 09:00) Alaska"
@@ -211,9 +213,10 @@
                           id="phone1"
                           class="form-control col-md-3 float-left"
                           v-model="profile_business_input.phoneId"
+                          aria-required="true"
                         >
                           <option selected="+1" value="+1">USA(+1)</option>
-                          <option value="+33">FRENC(+33)</option>
+                          <option value="+33">FRENCH(+33)</option>
                           <option value="+237">CAMEROON(+237)</option>
                           <option value="+91">India(+91)</option>
                         </select>
@@ -225,6 +228,7 @@
                           placeholder=""
                           class="form-control col-md-9"
                           v-model="profile_business_input.phone"
+                          required
                         />
                       </div>
 
@@ -253,6 +257,7 @@
                           id="country"
                           class="form-control col-md-3 float-left"
                           v-model="profile_business_input.phone2Id"
+                          aria-required="true"
                         >
                           <option selected value="+1">USA(+1)</option>
                           <option value="+33">FRENCH(+33)</option>
@@ -267,6 +272,7 @@
                           placeholder="Phone 2"
                           class="form-control col-md-9"
                           v-model="profile_business_input.phone2"
+                          required
                         />
                       </div>
                     </div>
@@ -286,6 +292,7 @@
                           placeholder="www.Website.comm"
                           class="form-control"
                           v-model="profile_business_input.website"
+                          required
                         />
                       </div>
                       <div class="checkbox">
@@ -314,6 +321,7 @@
                           placeholder="Email.com"
                           class="form-control"
                           v-model="profile_business_input.email"
+                          required
                         />
                       </div>
                       <div class="checkbox">
@@ -368,6 +376,7 @@
                             placeholder="City, Country"
                             class="form-control"
                             v-model="profile_business_input.city"
+                            required
                           />
                         </div>
                       </div>
@@ -381,6 +390,7 @@
                             placeholder="Neighbourhood name"
                             class="form-control"
                             v-model="profile_business_input.neighbourhood"
+                            required
                           />
                         </div>
                       </div>
@@ -500,31 +510,14 @@
       <div class="row mb-4">
         <div class="col">
           <h6 class="mb-0"><b></b></h6>
-
-          <!--
-          <hr />
-
-
-          <div id="btnContainer">
-            <button class="btn primary" onclick="listView()">
-              <fas-icon
-                class="primary float-left mr-1 mt-1"
-                :icon="['fas', 'list']"
-              />
-              List
-            </button>
-            <button class="btn activegrid" onclick="gridView()">
-              <fas-icon
-                class="primary float-left mr-1 mt-1"
-                :icon="['fas', 'th-large']"
-              />Grid
-            </button>
-          </div>
-
--->
-
-          <b-row v-for="business in profile_business" :key="business.id">
-            <b-col md="12" lg="6" class="p-0">
+          <b-row>
+            <b-col
+              md="12"
+              lg="6"
+              class="p-0"
+              v-for="business in profile_business"
+              :key="business.id"
+            >
               <div class="people-style shadow">
                 <b-row>
                   <b-col md="3" xl="3" lg="5" cols="5" sm="3">
@@ -601,11 +594,11 @@ export default {
       profile_business_input: {
         logo_path: null,
         name: "Super Car ltd",
-        category: "Car marketing",
+        category: "Restaurant",
         keywords: null,
         timezone: null,
         about_business:
-                "super best car seller in the world adipisicing elit. lorem epsep this is, ar seller in the world adipisicing elit. lorem epsep this is",
+          "No Description",
         phone: null,
         phoneId: null,
         phone2: null,
@@ -617,8 +610,7 @@ export default {
         hasNoEmail: true,
         city: "Douala",
         country: "Cameroon",
-        neighbourhood: null,
-        community: 2000000000
+        neighbourhood: null
       },
       profile_business: []
     };
@@ -648,7 +640,7 @@ export default {
     logo_path() {
       console.log(this.profile_business_input.logo_path);
       return URL.createObjectURL(
-              this.profile_business_input.logo_path.get("media")
+        this.profile_business_input.logo_path.get("media")
       );
     }
   },
@@ -668,14 +660,15 @@ export default {
     },
     cancel() {
       console.log("Cancelled Add Business +++++");
-      this.$refs["modal-1"].hide();
+      this.$refs["createBusinessModal"].hide();
       this.profile_business_input = {
         logo_path: null,
-        name: null,
-        category: null,
+        name: "Super Car ltd",
+        category: "Restaurant",
         keywords: null,
         timezone: null,
-        about_business: null,
+        about_business:
+                "No Description !!!",
         phone: null,
         phoneId: null,
         phone2: null,
@@ -685,9 +678,10 @@ export default {
         hasNoWebsite: true,
         email: null,
         hasNoEmail: true,
-        city: null,
-        country: null,
-        neighbourhood: null
+        city: "Douala",
+        country: "Cameroon",
+        neighbourhood: null,
+        community: 2000000000
       };
       this.fieldset1 = 1;
     },
@@ -710,9 +704,7 @@ export default {
         .finally(() => {
           console.log("finally save new business user ");
           this.profile_business = JSON.parse(
-            JSON.stringify(
-              this.$store.getters.getProfileBusiness
-            )
+            JSON.stringify(this.$store.getters.getProfileBusiness)
           );
           this.cancel();
         });

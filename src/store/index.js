@@ -9,10 +9,7 @@ import businessOwner from "./businessOwner";
 import moment from "moment";
 
 Vue.use(Vuex);
-axios.defaults.baseURL =  process.env.VUE_APP_API_URL
-
-
-
+axios.defaults.baseURL = process.env.VUE_APP_API_URL;
 
 const getDefaultState = () => {
   return {
@@ -73,14 +70,9 @@ const getDefaultState = () => {
             about_business:
               "super best car seller in the world adipisicing elit. lorem epsep this is, ar seller in the world adipisicing elit. lorem epsep this is",
             phone: null,
-            phoneId: null,
             phone2: null,
-            phone2Id: null,
-            hasNoPhone: true,
             website: null,
-            hasNoWebsite: true,
             email: null,
-            hasNoEmail: true,
             city: "Douala",
             country: "Cameroon",
             neighbourhood: null,
@@ -97,14 +89,66 @@ const getDefaultState = () => {
             about_business:
               "super best car seller in the world adipisicing elit. lorem epsep this is, ar seller in the world adipisicing elit. lorem epsep this is",
             phone: null,
-            phoneId: null,
             phone2: null,
-            phone2Id: null,
-            hasNoPhone: true,
             website: null,
-            hasNoWebsite: true,
             email: null,
-            hasNoEmail: true,
+            city: "Douala",
+            country: "Cameroon",
+            neighbourhood: null,
+            community: 2000000000
+          },
+          {
+            id: 3,
+            logo_path:
+              "https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg",
+            name: "Super Car ltd",
+            category: "Car marketing",
+            keywords: null,
+            timezone: null,
+            about_business:
+              "super best car seller in the world adipisicing elit. lorem epsep this is, ar seller in the world adipisicing elit. lorem epsep this is",
+            phone: null,
+            phone2: null,
+            website: null,
+            email: null,
+            city: "Douala",
+            country: "Cameroon",
+            neighbourhood: null,
+            community: 2000000000
+          },
+          {
+            id: 4,
+            logo_path:
+              "https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg",
+            name: "Super Car ltd",
+            category: "Car marketing",
+            keywords: null,
+            timezone: null,
+            about_business:
+              "super best car seller in the world adipisicing elit. lorem epsep this is, ar seller in the world adipisicing elit. lorem epsep this is",
+            phone: null,
+            phone2: null,
+            website: null,
+            email: null,
+            city: "Douala",
+            country: "Cameroon",
+            neighbourhood: null,
+            community: 2000000000
+          },
+          {
+            id: 5,
+            logo_path:
+              "https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg",
+            name: "Super Car ltd",
+            category: "Car marketing",
+            keywords: null,
+            timezone: null,
+            about_business:
+              "super best car seller in the world adipisicing elit. lorem epsep this is, ar seller in the world adipisicing elit. lorem epsep this is",
+            phone: null,
+            phone2: null,
+            website: null,
+            email: null,
             city: "Douala",
             country: "Cameroon",
             neighbourhood: null,
@@ -2253,14 +2297,35 @@ const actions = {
         return response.json();
       })
       .then(response => {
-        console.log("save new Business response successsss +++");
+        console.log("save new Business response successsss (2) +++");
         console.log(response);
         if (!response) {
           console.log("Error From The server+++++++");
           throw new Error("Error from save new Business+++++");
         }
         context.commit("storeBusiness", {
-          business: payload.business
+          business: {
+            name: payload.business.name,
+            category: payload.business.category,
+            keywords: payload.business.keywords,
+            timezone: payload.business.timezone,
+            logo_path: payload.business.logo_path,
+            about_business: payload.business.about_business,
+            email: payload.business.hasNoEmail ? null : payload.business.email,
+            city: payload.business.city.split(",")[0].trim(),
+            country: payload.business.city.split(",")[1].trim(),
+            website: payload.business.hasNoWebsite
+              ? null
+              : payload.business.website,
+            neighbourhood: payload.business.neighbourhood,
+            phone: payload.business.hasNoPhone
+              ? null
+              : payload.business.phoneId + " " + payload.business.phone,
+            phone2: payload.business.hasNoPhone
+              ? null
+              : payload.business.phoneId + " " + payload.business.phone2,
+            community: 0
+          }
         });
         response_ = response;
       })
@@ -2989,7 +3054,6 @@ const mutations = {
   },
   storeBusiness(state, payload) {
     const newId = state.userData[0].profile_business.length;
-
     state.userData[0].profile_business.push({
       id: newId,
       ...payload.business
@@ -3053,6 +3117,6 @@ export default new Vuex.Store({
   mutations,
   modules: {
     auth,
-    businessOwner,
-  },
+    businessOwner
+  }
 });

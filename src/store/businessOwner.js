@@ -180,12 +180,6 @@ export default {
         dispatch("getNotifications");
       });
     },
-
-    // Get Pending posts
-    async getPendingPosts({ dispatch, commit }) {
-      await dispatch("signIn");
-      console.log("called");
-    },
    
   },
 };

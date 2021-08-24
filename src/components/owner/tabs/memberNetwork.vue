@@ -7,9 +7,13 @@
     margin-right: -12px;"
       >
         <b-tabs pills content-class="mt-3 f-left">
-          <b-tab title="People" active> <People :people="profile_community.people"/> </b-tab>
+          <b-tab title="People" active>
+            <People :people="profile_community.people" />
+          </b-tab>
 
-          <b-tab title="Businesses"> <Businesses :business="profile_community.business"/> </b-tab>
+          <b-tab title="Businesses">
+            <Businesses :business="profile_community.business" />
+          </b-tab>
         </b-tabs>
       </b-card>
     </div>
@@ -297,15 +301,13 @@ export default {
       }
     };
   },
-  provide(){
-    return {
-
-    }
+  provide() {
+    return {};
   },
   created() {
     console.log("Load User Profile Community start+++++++");
     this.$store
-      .dispatch("loadUserBiography", null)
+      .dispatch("loadUserProfileCommuntity", null)
       .then(response => {
         console.log(response);
         console.log("Load User Profile Community end response (3) +++++++");
@@ -315,11 +317,11 @@ export default {
         console.log(error);
       })
       .finally(() => {
-        console.log( 'Finally Load User Profile Community +++++')
+        console.log("Finally Load User Profile Community +++++");
         this.profile_community = JSON.parse(
           JSON.stringify(this.$store.getters.getProfileCommunity)
         );
-        console.log( this.profile_community );
+        console.log(this.profile_community);
       });
   },
   computed: {
@@ -349,7 +351,7 @@ hr {
 
 .f-left {
   text-align: left;
-  align-content: left;
+  align-content: flex-start;
 }
 @media only screen and (max-width: 768px) {
   .options {

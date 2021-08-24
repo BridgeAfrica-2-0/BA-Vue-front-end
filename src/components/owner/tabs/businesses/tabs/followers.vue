@@ -20,12 +20,12 @@
 
     <b-row>
       <b-col md="12" lg="6" v-for="member in followers" :key="member.id">
-        <CommunityBusiness :member="member"/>
+        <CommunityBusiness :member="member" />
       </b-col>
 
-<!--      <b-col md="12" lg="6">-->
-<!--        <CommunityBusiness />-->
-<!--      </b-col>-->
+      <!--      <b-col md="12" lg="6">-->
+      <!--        <CommunityBusiness />-->
+      <!--      </b-col>-->
     </b-row>
   </div>
 </template>

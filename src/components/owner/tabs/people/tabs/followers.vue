@@ -21,13 +21,8 @@
       <!--        <CommunityMembers />-->
       <!--      </b-col>-->
 
-      <b-col
-        md="12"
-        lg="6"
-        v-for="member in followers"
-        :key="member.id"
-      >
-        <CommunityMembers :member="member"/>
+      <b-col md="12" lg="6" v-for="member in followers" :key="member.id">
+        <CommunityMembers :member="member" />
       </b-col>
     </b-row>
   </div>

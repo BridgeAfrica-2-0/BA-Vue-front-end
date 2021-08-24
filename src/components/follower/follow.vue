@@ -2,9 +2,7 @@
   <div>
     <div class="row follow">
       <div class="col">
-        <b-list-group-item
-          class="d-flex align-items-center mb-4 item"
-        >
+        <b-list-group-item class="d-flex align-items-center mb-4 item">
           <b-avatar class="mr-3"></b-avatar>
           <div class="datails">
             <div class="row">
@@ -16,9 +14,10 @@
         </b-list-group-item>
       </div>
       <div class="col-2">
-           <b-button class="btn" variant="outline-primary">
-               <b-icon icon="plus" class="mr-1"></b-icon>
-               Follow</b-button>
+        <b-button class="btn" variant="outline-primary">
+          <b-icon icon="plus" class="mr-1"></b-icon>
+          Follow</b-button
+        >
       </div>
     </div>
   </div>
@@ -29,7 +28,7 @@ export default {};
 </script>
 
 <style scoped>
-.item{
+.item {
   border: none;
 }
 @media only screen and (max-width: 768px) {

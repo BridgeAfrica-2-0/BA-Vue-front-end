@@ -147,7 +147,7 @@ export default {
     About,
     Media,
     MarketPlace,
-    Networks,
+    Networks
   },
 
   data() {
@@ -164,19 +164,19 @@ export default {
         breakpoints: {
           "760": {
             perPage: 1,
-            gap: "0rem",
+            gap: "0rem"
           },
           "992": {
             perPage: 2,
-            gap: "1rem",
-          },
-        },
-      },
+            gap: "1rem"
+          }
+        }
+      }
     };
   },
 
   computed: {},
-  methods: {},
+  methods: {}
 };
 </script>
 

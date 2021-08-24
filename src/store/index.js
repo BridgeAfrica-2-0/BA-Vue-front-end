@@ -3,7 +3,7 @@ import Vuex from "vuex";
 //import axios from "axios";
 import auth from "./auth";
 import businessOwner from "./businessOwner";
-import moment from "moment";
+//import moment from "moment";
 
 import axios from "axios";
 
@@ -47,7 +47,7 @@ const getDefaultState = () => {
                 id: 1,
                 picture:
                   "https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg",
-                name: "howty Itz blec",
+                name: "TONTON LA FORCE",
                 community: 5000,
                 messages: [],
                 communities: []
@@ -94,7 +94,7 @@ const getDefaultState = () => {
                 id: 1,
                 picture:
                   "https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg",
-                name: "howty Itz blec",
+                name: "He TONTON LA FORCE",
                 community: 5000,
                 messages: [],
                 communities: []
@@ -143,7 +143,7 @@ const getDefaultState = () => {
                 id: 1,
                 picture:
                   "https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg",
-                name: "Super Car ltd",
+                name: "Super Car ltd Yesss",
                 category: "Car marketing",
                 community: 20000000,
                 city: "Douala",
@@ -382,11 +382,12 @@ const getDefaultState = () => {
   };
 };
 
+const state = getDefaultState();
 
 const actions = {
-  async loadUserProfileBusiness(context, payload) {
+  async loadUserProfileCommuntity(context, payload) {
     console.log(payload);
-    console.log("load user profile Business start +++++");
+    console.log("load user profile Community start +++++");
 
     let response_ = null;
     await fetch(state.url_base + state.url_load_user_profile_community, {

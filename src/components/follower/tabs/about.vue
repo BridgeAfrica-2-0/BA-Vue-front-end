@@ -22,14 +22,14 @@
 
 <script>
 import Biography from "../biography";
-import ContactandInfo from "../contactAndBasicInfo";
+import ContactAndInfo from "../contactAndBasicInfo";
 import WorkAndEducation from "../workAndEducation";
 export default {
   components: {
     Biography,
     ContactAndInfo,
-    WorkAndEducation,
-  },
+    WorkAndEducation
+  }
 };
 </script>
 

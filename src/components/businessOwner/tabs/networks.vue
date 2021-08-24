@@ -284,7 +284,7 @@ export default {
         special_needs: "",
         business_address: "",
         business_image: "",
-        allow_business: "0",
+        allow_business: "0"
       },
       chosenNetwork: {
         id: null,
@@ -295,8 +295,8 @@ export default {
         special_needs: "",
         business_address: "",
         business_image: "",
-        allow_business: "0",
-      },
+        allow_business: "0"
+      }
     };
   },
   beforeMount() {
@@ -311,20 +311,20 @@ export default {
     },
     success() {
       return this.getSuccess();
-    },
+    }
   },
   methods: {
     ...mapGetters({
       getNetworksFromstore: "businessOwner/getnetWorks",
       getLoader: "businessOwner/getLoader",
-      getSuccess: "businessOwner/getSuccess",
+      getSuccess: "businessOwner/getSuccess"
     }),
 
     // getting actions from the store
     ...mapActions({
       addNetwork: "businessOwner/addNetwork",
       getNetworks: "businessOwner/getNetworks",
-      editNetwork: "businessOwner/editNetwork",
+      editNetwork: "businessOwner/editNetwork"
     }),
 
     //View network on pop up modal
@@ -353,8 +353,8 @@ export default {
     },
     edit() {
       this.editNetwork(this.createdNetwork);
-    },
-  },
+    }
+  }
 };
 </script>
 

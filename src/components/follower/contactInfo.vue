@@ -2,7 +2,7 @@
   <div class="txt">
     <b class="contact">Contact Infomation</b>
     <hr />
-    <div class="contact row" >
+    <div class="contact row">
       <div class="col">
         Mobile Phone:
       </div>
@@ -18,7 +18,7 @@ export default {
   data() {
     return {};
   },
-  methods: {},
+  methods: {}
 };
 </script>
 

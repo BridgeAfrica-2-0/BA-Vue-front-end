@@ -6,10 +6,7 @@
           <div class="center-img">
             <splide :options="options" class="r-image">
               <splide-slide cl>
-                <img
-                  :src="member.picture"
-                  class="r-image"
-                />
+                <img :src="member.picture" class="r-image" />
               </splide-slide>
             </splide>
           </div>
@@ -19,14 +16,22 @@
             <strong class="title"> {{ member.name }} </strong> <br />
             {{ member.category }}
             <br />
-            {{ member.community >= 1000000 ? (member.community / 1000000) + 'M' : ( member.community >= 1000 ? (member.community/1000)+'K' : member.community )}} Community <br />
+            {{
+              member.community >= 1000000
+                ? member.community / 1000000 + "M"
+                : member.community >= 1000
+                ? member.community / 1000 + "K"
+                : member.community
+            }}
+            Community <br />
 
             <span class="location">
-              <b-icon-geo-alt class="ico"></b-icon-geo-alt> {{ member.city }} {{ member.country }}
+              <b-icon-geo-alt class="ico"></b-icon-geo-alt> {{ member.city }}
+              {{ member.country }}
             </span>
             <br />
 
-            {{ member.about_description}} <b-link>Read More</b-link>
+            {{ member.about_description }} <b-link>Read More</b-link>
           </p>
         </b-col>
 
@@ -95,107 +100,107 @@
       </b-row>
     </div>
 
-<!--    <div class="people-style shadow">-->
-<!--      <b-row>-->
-<!--        <b-col md="3" xl="3" lg="3" cols="5" sm="3">-->
-<!--          <div class="center-img">-->
-<!--            <splide :options="options" class="r-image">-->
-<!--              <splide-slide cl>-->
-<!--                <img-->
-<!--                  src="https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg"-->
-<!--                  class="r-image"-->
-<!--                />-->
-<!--              </splide-slide>-->
-<!--            </splide>-->
-<!--          </div>-->
-<!--        </b-col>-->
-<!--        <b-col md="5" cols="7" lg="7" xl="5" sm="5">-->
-<!--          <p class="textt text">-->
-<!--            <strong class="title"> Super Car ltd </strong> <br />-->
-<!--            Car marketing-->
-<!--            <br />-->
-<!--            20k Community <br />-->
+    <!--    <div class="people-style shadow">-->
+    <!--      <b-row>-->
+    <!--        <b-col md="3" xl="3" lg="3" cols="5" sm="3">-->
+    <!--          <div class="center-img">-->
+    <!--            <splide :options="options" class="r-image">-->
+    <!--              <splide-slide cl>-->
+    <!--                <img-->
+    <!--                  src="https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg"-->
+    <!--                  class="r-image"-->
+    <!--                />-->
+    <!--              </splide-slide>-->
+    <!--            </splide>-->
+    <!--          </div>-->
+    <!--        </b-col>-->
+    <!--        <b-col md="5" cols="7" lg="7" xl="5" sm="5">-->
+    <!--          <p class="textt text">-->
+    <!--            <strong class="title"> Super Car ltd </strong> <br />-->
+    <!--            Car marketing-->
+    <!--            <br />-->
+    <!--            20k Community <br />-->
 
-<!--            <span class="location">-->
-<!--              <b-icon-geo-alt class="ico"></b-icon-geo-alt> Douala cameroon-->
-<!--            </span>-->
-<!--            <br />-->
+    <!--            <span class="location">-->
+    <!--              <b-icon-geo-alt class="ico"></b-icon-geo-alt> Douala cameroon-->
+    <!--            </span>-->
+    <!--            <br />-->
 
-<!--            super best car seller in the world adipisicing elit. lorem epsep-->
-<!--            this is <b-link>Read More</b-link>-->
-<!--          </p>-->
-<!--        </b-col>-->
+    <!--            super best car seller in the world adipisicing elit. lorem epsep-->
+    <!--            this is <b-link>Read More</b-link>-->
+    <!--          </p>-->
+    <!--        </b-col>-->
 
-<!--        <b-col lg="12" xl="4" md="4" cols="12" sm="4">-->
-<!--          <div class="s-button">-->
-<!--            <b-row>-->
-<!--              <b-col-->
-<!--                md="12"-->
-<!--                lg="4"-->
-<!--                xl="12"-->
-<!--                sm="12"-->
-<!--                cols="4"-->
-<!--                class="mt-2 text-center"-->
-<!--              >-->
-<!--                <b-button-->
-<!--                  block-->
-<!--                  size="sm"-->
-<!--                  class="b-background shadow "-->
-<!--                  variant="primary"-->
-<!--                >-->
-<!--                  <i class="fas fa-user-plus  fa-lg btn-icon "></i>-->
-<!--                  <span class="btn-com">Community</span>-->
-<!--                </b-button>-->
-<!--              </b-col>-->
+    <!--        <b-col lg="12" xl="4" md="4" cols="12" sm="4">-->
+    <!--          <div class="s-button">-->
+    <!--            <b-row>-->
+    <!--              <b-col-->
+    <!--                md="12"-->
+    <!--                lg="4"-->
+    <!--                xl="12"-->
+    <!--                sm="12"-->
+    <!--                cols="4"-->
+    <!--                class="mt-2 text-center"-->
+    <!--              >-->
+    <!--                <b-button-->
+    <!--                  block-->
+    <!--                  size="sm"-->
+    <!--                  class="b-background shadow "-->
+    <!--                  variant="primary"-->
+    <!--                >-->
+    <!--                  <i class="fas fa-user-plus  fa-lg btn-icon "></i>-->
+    <!--                  <span class="btn-com">Community</span>-->
+    <!--                </b-button>-->
+    <!--              </b-col>-->
 
-<!--              <b-col-->
-<!--                md="12"-->
-<!--                lg="4"-->
-<!--                xl="12"-->
-<!--                sm="12"-->
-<!--                cols="4"-->
-<!--                class="mt-2 text-center"-->
-<!--              >-->
-<!--                <b-button-->
-<!--                  block-->
-<!--                  size="sm"-->
-<!--                  class="b-background shadow "-->
-<!--                  variant="primary"-->
-<!--                >-->
-<!--                  <i class="fas fa-envelope   fa-lg btn-icon "></i>-->
-<!--                  <span class="btn-text">Message</span>-->
-<!--                </b-button>-->
-<!--              </b-col>-->
+    <!--              <b-col-->
+    <!--                md="12"-->
+    <!--                lg="4"-->
+    <!--                xl="12"-->
+    <!--                sm="12"-->
+    <!--                cols="4"-->
+    <!--                class="mt-2 text-center"-->
+    <!--              >-->
+    <!--                <b-button-->
+    <!--                  block-->
+    <!--                  size="sm"-->
+    <!--                  class="b-background shadow "-->
+    <!--                  variant="primary"-->
+    <!--                >-->
+    <!--                  <i class="fas fa-envelope   fa-lg btn-icon "></i>-->
+    <!--                  <span class="btn-text">Message</span>-->
+    <!--                </b-button>-->
+    <!--              </b-col>-->
 
-<!--              <b-col-->
-<!--                md="12"-->
-<!--                lg="4"-->
-<!--                xl="12"-->
-<!--                sm="12"-->
-<!--                cols="4"-->
-<!--                class="mt-2 text-center"-->
-<!--              >-->
-<!--                <b-button-->
-<!--                  block-->
-<!--                  size="sm"-->
-<!--                  class="b-background shadow "-->
-<!--                  variant="primary"-->
-<!--                >-->
-<!--                  <i class="fas fa-map-marked-alt  fa-lg btn-icon "></i>-->
-<!--                  <span class="btn-text">Direction</span>-->
-<!--                </b-button>-->
-<!--              </b-col>-->
-<!--            </b-row>-->
-<!--          </div>-->
-<!--        </b-col>-->
-<!--      </b-row>-->
-<!--    </div>-->
+    <!--              <b-col-->
+    <!--                md="12"-->
+    <!--                lg="4"-->
+    <!--                xl="12"-->
+    <!--                sm="12"-->
+    <!--                cols="4"-->
+    <!--                class="mt-2 text-center"-->
+    <!--              >-->
+    <!--                <b-button-->
+    <!--                  block-->
+    <!--                  size="sm"-->
+    <!--                  class="b-background shadow "-->
+    <!--                  variant="primary"-->
+    <!--                >-->
+    <!--                  <i class="fas fa-map-marked-alt  fa-lg btn-icon "></i>-->
+    <!--                  <span class="btn-text">Direction</span>-->
+    <!--                </b-button>-->
+    <!--              </b-col>-->
+    <!--            </b-row>-->
+    <!--          </div>-->
+    <!--        </b-col>-->
+    <!--      </b-row>-->
+    <!--    </div>-->
   </div>
 </template>
 
 <script>
 export default {
-  props: ['member'],
+  props: ["member"],
 
   data() {
     return {

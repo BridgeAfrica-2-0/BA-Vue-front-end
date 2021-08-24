@@ -49,16 +49,16 @@
 import Product from "@/components/search/slider";
 export default {
   components: {
-    Product,
+    Product
   },
   data() {
     return {
       products: [
         { title: "Product", cost: "1000", state: "In-stock" },
-        { title: "Product", cost: "1000", state: "In-stock" },
-      ],
+        { title: "Product", cost: "1000", state: "In-stock" }
+      ]
     };
-  },
+  }
 };
 </script>
 

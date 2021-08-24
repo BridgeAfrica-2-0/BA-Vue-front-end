@@ -2,11 +2,17 @@ import Vue from "vue";
 import Vuex from "vuex";
 import axios from "axios";
 //import axios from "axios";
-//import createPersistedState from "vuex-persistedstate";
+import auth from "./auth";
+import businessOwner from "./businessOwner";
+
+import axios from "axios";
 import moment from "moment";
 
 Vue.use(Vuex);
-// axios.defaults.baseURL = "";
+axios.defaults.baseURL =  process.env.VUE_APP_API_URL
+
+
+
 
 const getDefaultState = () => {
   return {
@@ -2878,5 +2884,9 @@ export default new Vuex.Store({
     }
   },
   actions,
-  mutations
+  mutations,
+  modules: {
+    auth,
+    businessOwner,
+  },
 });

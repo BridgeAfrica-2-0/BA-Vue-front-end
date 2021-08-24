@@ -67,7 +67,7 @@ export default {
     //  Insight,
     Inbox,
     // Notification,
-    Footer
+    Footer,
   },
   data() {
     return {
@@ -82,8 +82,8 @@ export default {
         { label: "Settings", icon: "" }
       ],
       options: {
-        activeColor: "#1d98bd"
-      }
+        activeColor: "#1d98bd",
+      },
     };
   },
   computed: {}

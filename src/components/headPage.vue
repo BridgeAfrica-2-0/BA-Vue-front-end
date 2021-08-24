@@ -1,6 +1,6 @@
 <template>
   <div>
-    <img src="@/assets/img/banner.jpg" class="img-fluid header-pic" />
+  <b-container fluid>  <img src="@/assets/img/banner.jpg" class="img-fluid header-pic" />
     <b-container fluid>
       <div>
         <b-avatar
@@ -68,17 +68,13 @@
                   <b-dropdown-item-button
                     >Some other action</b-dropdown-item-button
                   >
-                  <b-dropdown-divider></b-dropdown-divider>
-                  <b-dropdown-item-button variant="danger">
-                    <b-icon icon="trash-fill" aria-hidden="true"></b-icon>
-                    Delete
-                  </b-dropdown-item-button>
+                  <b-dropdown-item>View As</b-dropdown-item>
                 </b-dropdown>
-              </b-button-group>
-            </span>
-          </div>
-        </div>
-      </div>
+              </span>
+            </div>
+          </b-col>
+        </b-row>
+      </b-container>
     </b-container>
   </div>
 </template>

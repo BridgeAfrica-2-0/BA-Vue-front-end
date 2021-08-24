@@ -9,7 +9,7 @@ Vue.use(Vuex);
 
 const getDefaultState = () => {
   return {
-    url_base: "https://3f9fa44396a9.ngrok.io",
+    url_base: "http://team3dev.maxinemoffett.com",
     url_load_profile_picture_changed: "/api/v1/download?file_name=",
     url_load_profile_picture:
       "/api/v1/download?file_name=public/media/photos/z7aooJV1XnDVTpRSfPGOUj7sjm0trGVJCiNFS7Ef.jpg",
@@ -31,13 +31,13 @@ const getDefaultState = () => {
     url_add_profession: "/api/v1/userIntro/updateWorking",
     url_load_basicInfos: "",
     url_load_business_about: "/api/v1/business/info/",
-    url_update_business_about_name: "/api/v1/business/update/",
+    url_update_business_about_name: "/api/v1/business/update",
     url_update_business_biography: "/api/v1/business/businessBiography",
     url_load_user_profile_about: "",
     recoverData: "",
     login: false,
     isToi: false,
-    token: "1|le8p995vGFTX1oo8PxHyam4pIOpkdxLQKHUw2QkP",
+    token: "1|5EyNcoXFcd6d4j8kaizPr8E3gU9lRu9CHqAWPa03",
     count: "",
     todos: [],
     userData: [
@@ -2946,7 +2946,7 @@ const actions = {
     // });
 
     let response_ = null;
-    await fetch(state.url_base + state.url_update_business_about_name + "4", {
+    await fetch(state.url_base + state.url_update_business_about_name + "/1", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -2989,7 +2989,7 @@ const actions = {
         response_ = response;
       })
       .catch(error => {
-        console.log("Error From the Server or Browser");
+        console.log("Error From the Server or Browser error(1)");
         // context.commit("updateUserBusinessAbout", {
         //   businessAbout: payload.business_about
         // });

@@ -187,7 +187,6 @@ export default {
         JSON.stringify(this.$store.getters.getProfileAboutEducationAndWorks)
       );
       console.log(this.educationAndWorks);
-      this.professionInput = null;
       this.workPlaceInput = {
         companyName: null,
         cityTown: null,
@@ -198,11 +197,9 @@ export default {
         endDate: null,
         access: "private"
       };
-      this.education = null;
-      //this.$refs["model-6"].hide();
     },
     save() {
-      console.log("Save New WorkPlace User Profile About");
+      console.log("Save/edit/delete WorkPlace User Profile About");
       let method = "";
       if (this.index !== null) {
         this.educationAndWorks.workPlaces[this.index] = this.workPlaceInput;
@@ -221,16 +218,6 @@ export default {
           console.log(response);
           console.log("save/update/delete new workPlace user end +++++");
           //this.$store.state.userData[0].profile_about.educationAndWorks = this.educationAndWorks;
-          this.workPlaceInput = {
-            companyName: null,
-            cityTown: null,
-            position: null,
-            jobResponsibilities: null,
-            currentlyWorking: false,
-            startDate: null,
-            endDate: null,
-            access: "private"
-          };
         })
         .catch(error => {
           console.log(error);
@@ -244,6 +231,7 @@ export default {
             JSON.stringify(this.$store.getters.getProfileAboutEducationAndWorks)
           );
           console.log( this.educationAndWorks, '+++++++++++' );
+
           this.$refs["add-contact"].hide();
         });
 

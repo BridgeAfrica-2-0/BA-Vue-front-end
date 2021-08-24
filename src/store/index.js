@@ -2128,7 +2128,7 @@ const actions = {
         console.log("load user biography response (1) +++++++");
         console.log(response);
         if (response.status !== 200 && response.status !== 201) {
-          console.log("erreur lors du traitement du serveur ");
+          console.log("error from the server ");
           throw "Error from the Server";
         }
         return response.json();
@@ -2586,12 +2586,11 @@ const actions = {
         body: JSON.stringify({
           companyName: payload.workPlace.companyName,
           cityTown: payload.workPlace.cityTown,
-          position: "YAOUNDE",
-          jobResponsibilities:
-            "Job descrioption dummny textJob descrioption dummny text Jobdescrioption dummny text",
+          position: payload.workPlace.position,
+          jobResponsibilities: payload.workPlace.jobResponsibilities,
           currentlyWorking: payload.workPlace === true ? 1 : 0,
-          startDate: "2012-09-12",
-          endDate: "2012-09-12"
+          startDate: payload.workPlace.startDate,
+          endDate: payload.workPlace.endDate
         })
       };
     } else if (payload.method === "PUT") {

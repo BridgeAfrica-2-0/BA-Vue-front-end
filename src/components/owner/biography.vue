@@ -50,13 +50,15 @@ export default {
       .dispatch("loadUserBiography", null)
       .then(response => {
         console.log(response);
-        console.log("Load User Biography end+++++++");
+        console.log("Load User Biography response (3) +++++++");
       })
       .catch(error => {
-        console.log("Error from server or from browser ++++");
+        console.log("Error from server or from browser error(2)++++");
         console.log(error);
+        throw error;
       })
       .finally(() => {
+        console.log( 'Finally load User Biography ++++++++++++')
         this.biography = JSON.parse(
           JSON.stringify(this.$store.getters.getProfileAboutBiography)
         );

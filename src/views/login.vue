@@ -7,17 +7,26 @@
         </md-card-header>
 
         <md-card-content>
+          <!-- lol -->
+  <FlashMessage />
           <div class="center">
             <b-row>
               <b-col cols="12" md="6" lg="12" xl="6">
-                <md-button class="  md-raised md-primary b-w">
+                <md-button
+                  @click.prevent="authProvider('facebook')"
+                  class="md-raised md-primary b-w"
+                >
                   <b-icon icon="facebook" aria-hidden="true"></b-icon> Login
                   With Facebook</md-button
                 >
               </b-col>
 
               <b-col cols="12" md="6" lg="12" xl="6">
-                <md-button class="  b-color b-w" style="color:white;">
+                <md-button
+                  @click.prevent="authProvider('google')"
+                  class="b-color b-w"
+                  style="color: white"
+                >
                   <b-icon icon="google" aria-hidden="true"></b-icon> Login with
                   Google</md-button
                 >
@@ -72,7 +81,7 @@
 
             <div class="md-layout-item md-small-size-100">
               <br />
-              <b-link href=""> Forget Password </b-link>
+            
             </div>
           </div>
         </md-card-content>
@@ -85,17 +94,19 @@
               <md-button
                 type="submit"
                 :disabled="sending"
-                class="b-color  f-left "
-                style="color:white;"
-                >Login</md-button
+                class="b-color f-left"
+                style="color: white"
+                >Login</md-button       
               >
             </b-col>
             <b-col cols="6">
-              <b-link href="/signup">
-                <md-button class=" md-raised f-right ">Sign Up</md-button>
-              </b-link>
+              <router-link to="signup">
+                <md-button class="md-raised f-right">Sign Up</md-button>
+              </router-link>
             </b-col>
           </b-row>
+
+           <router-link to="recoverPass1" class="nav-link text"> Forget Password</router-link>
         </div>
 
         <div></div>
@@ -122,96 +133,150 @@
         >The user {{ lastUser }} was saved with success!</md-snackbar
       >
     </form>
+
+   
   </div>
 </template>
 
 <script>
 import { validationMixin } from "vuelidate";
 import "vue-material/dist/vue-material.min.css";
+
 import "@/assets/default.css";
-import {
-  required,
-  email,
-  minLength,
-  maxLength
-} from "vuelidate/lib/validators";
+import { required, email } from "vuelidate/lib/validators";
 export default {
   name: "FormValidation",
   boolean: true,
   mixins: [validationMixin],
   data: () => ({
     form: {
-      firstName: null,
-      lastName: null,
-      gender: null,
-      age: null,
-      email: null
+      password: null,
+      email: null,
     },
     userSaved: false,
     sending: false,
-    lastUser: null
+    lastUser: null,
   }),
   validations: {
     form: {
-      firstName: {
+      password: {
         required,
-        minLength: minLength(3)
-      },
-      lastName: {
-        required,
-        minLength: minLength(3)
-      },
-      age: {
-        required,
-        maxLength: maxLength(3)
-      },
-      gender: {
-        required
       },
       email: {
         required,
-        email
-      }
-    }
+        email,
+      },
+    },
   },
   methods: {
     getValidationClass(fieldName) {
       const field = this.$v.form[fieldName];
       if (field) {
         return {
-          "md-invalid": field.$invalid && field.$dirty
+          "md-invalid": field.$invalid && field.$dirty,
         };
       }
     },
+
+    authProvider(provider) {
+      let self = this;
+      this.$auth
+        .authenticate(provider)
+        .then((response) => {
+          self.socialLogin(provider, response);
+          console.log(response);
+        })
+        .catch((err) => {
+          console.log({ err: err });
+        });
+    },
+
+    socialLogin(provider, response) {
+      this.$http
+        .post("user/social/" + provider, response)
+        .then((response) => {
+          console.log(response.data);
+
+          const userData = JSON.parse(response.data);
+          this.$store.commit("auth/setUserData", userData);
+          this.$router.push({ name: "welcome" });
+        })
+        .catch((err) => {
+          console.log({ err: err });
+        });
+    },
+
     clearForm() {
       this.$v.$reset();
-      this.form.firstName = null;
-      this.form.lastName = null;
-      this.form.age = null;
-      this.form.gender = null;
+
+      this.form.password = null;
       this.form.email = null;
     },
     saveUser() {
       this.sending = true;
-      // Instead of this timeout, here you can call your API
-      window.setTimeout(() => {
-        this.lastUser = `${this.form.firstName} ${this.form.lastName}`;
-        this.userSaved = true;
-        this.sending = false;
-        this.clearForm();
-      }, 1500);
+
+      this.login();
     },
+
+    login() {
+      this.$store
+        .dispatch("auth/login", {
+          email: this.form.email,
+          password: this.form.password,
+        })
+        .then(() => {
+
+           this.sending = false;
+
+          this.$router.push({ name: "welcome" });
+        })
+        .catch((err) => {
+         
+           this.sending = false;
+
+          
+
+
+              if (err.response.status == 422) {
+
+               console.log({ err: err });
+
+            this.flashMessage.show({
+            status: "error",
+           
+            message: err.response.data.message,
+          });
+
+
+           }else{
+
+                  
+
+                  
+                 this.flashMessage.show({
+            status: "error",
+           
+            message:'An error has occure',
+          });
+
+
+           }
+
+
+        });
+    },
+
     validateUser() {
       this.$v.$touch();
       if (!this.$v.$invalid) {
         this.saveUser();
       }
-    }
-  }
+    },
+  },
 };
 </script>
 
-<style scoped>
+<style  scoped>
 .f-right {
   float: left;
 }
@@ -275,4 +340,4 @@ export default {
     padding-bottom: 100px;
   }
 }
-</style>
+</style> 

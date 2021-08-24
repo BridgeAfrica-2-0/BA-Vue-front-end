@@ -64,17 +64,7 @@ export default {
     },
   },
   actions: {
-    // temporal signin to get token for developement purpose
-    async signIn() {
-      axios
-        .post("/user/login", {
-          email: "info@moazateeq.com",
-          password: "12345678",
-        })
-        .then((res) => {
-          localStorage.setItem("access_token", res.data.data.accessToken);
-        });
-    },
+ 
     // Get networks from the backend
     async getNetworks({ commit }) {
       commit("setLoader", true);
@@ -121,7 +111,7 @@ export default {
     // Getting the notifications
     async getNotifications({ dispatch, commit }) {
       commit("setLoader", true);
-      await dispatch("signIn");
+
       await axios
         .get("notification")
         .then((res) => {
@@ -133,6 +123,7 @@ export default {
           }, 2000);
         })
         .catch((err) => {
+          commit("setLoader", false);
           console.log("Unauthorized request !!");
         });
     },

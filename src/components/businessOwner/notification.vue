@@ -15,7 +15,6 @@
               variant="primary"
               class="a-button-l duration"
             >
-              <b-spinner v-if="readLoader" small type="grow"></b-spinner>
               Mark as Read</b-button
             >
             <b-button
@@ -23,7 +22,6 @@
               variant="primary"
               class="a-button-l duration ml-1"
             >
-              <b-spinner v-if="deleteLoader" small type="grow"></b-spinner>
               Delete</b-button
             >
           </div>
@@ -67,8 +65,6 @@
               {{ notification.notification_text }}</span
             >
           </p>
-
-          <hr width="100%" />
         </b-col>
 
         <b-col v-if="loader" class="loader">

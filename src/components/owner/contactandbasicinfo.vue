@@ -622,7 +622,7 @@
 //import BasicInfo from "./basicInfo";
 //import ContactInfo from "./contactInfo";
 //import BusinessVisited from "./businessVisited";
-//import PlacesLived from "./placesLived";
+//imprt PlacesLived from "./placesLived";
 //import WebAndSocials from "./webAndSocial";
 export default {
   components: {

@@ -1,6 +1,6 @@
 import Vue from "vue";
 import Vuex from "vuex";
-import axios from "axios";
+//import axios from "axios";
 //import axios from "axios";
 import auth from "./auth";
 import businessOwner from "./businessOwner";
@@ -9,10 +9,7 @@ import axios from "axios";
 import moment from "moment";
 
 Vue.use(Vuex);
-axios.defaults.baseURL =  process.env.VUE_APP_API_URL
-
-
-
+axios.defaults.baseURL = process.env.VUE_APP_API_URL;
 
 const getDefaultState = () => {
   return {
@@ -39,6 +36,7 @@ const getDefaultState = () => {
     url_add_working: "/api/v1/userIntro/addWorking",
     url_update_working: "/api/v1/userIntro/updateWorking",
     url_add_school: "api/v1/userIntro/addSchool",
+    url_update_school: "api/v1/userIntro/updateSchool",
     url_add_profession: "/api/v1/userIntro/updateWorki",
     url_load_basicInfos: "",
     recoverData: "",
@@ -1237,6 +1235,7 @@ const getDefaultState = () => {
             ],
             educations: [
               {
+                id: 1,
                 access: "private",
                 schoolName: null,
                 graduated: false,
@@ -1251,7 +1250,8 @@ const getDefaultState = () => {
               { profession: "Cuisinier", access: "public" }
             ]
           }
-        }
+        },
+        profile_about1: null
       }
     ],
     users: [
@@ -2023,6 +2023,46 @@ const actions = {
       });
     return response_;
   },
+  async loadUserProfileAbout(context, payload) {
+    console.log(payload);
+    console.log("load user Profile About start +++++");
+
+    let response_ = null;
+    await fetch(state.url_base + state.url_user_infos, {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+        Authorization: `Bearer ${state.token}`
+      }
+    })
+      .then(response => {
+        console.log("load user profile about response (1) +++++++");
+        console.log(response);
+        if (response.status !== 200 && response.status !== 201) {
+          console.log("error from the server ++++");
+          throw "Error from the Server";
+        }
+        return response.json();
+      })
+      .then(response => {
+        console.log("load user profile about response (2) successsss +++");
+        console.log(response);
+        if (!response) {
+          console.log("Error from the server+++++++");
+          throw new Error("Error of load profile about ++++++++");
+        }
+        context.commit("updateUserProfileAbout", {
+          profile_about1: response.data
+        });
+        response_ = response;
+      })
+      .catch(error => {
+        console.log("error from browser or server error(1)");
+        console.log(error);
+        throw error;
+      });
+    return response_;
+  },
 
   async updateUserBiography(context, payload) {
     console.log(payload);
@@ -2411,7 +2451,7 @@ const actions = {
         return response.json();
       })
       .then(response => {
-        console.log("edit user chomeTown response successsss response (1) +++");
+        console.log("edit user homeTown response successsss response (1) +++");
         console.log(response);
         if (!response) {
           console.log("Error From the server +++++++");
@@ -2464,8 +2504,8 @@ const actions = {
         console.log("edit user websites response successsss response (1) +++");
         console.log(response);
         if (!response) {
-          console.log("Erreur liée au serveur+++++++");
-          throw new Error("Erreur d 'ajout de websites+++++");
+          console.log("Error From The Server +++++++");
+          throw new Error("Error From Add Website+++++");
         }
         context.commit("storeWebsites", {
           websites: payload.websites
@@ -2531,46 +2571,75 @@ const actions = {
   },
   async updateUserWorkPlaces(context, payload) {
     console.log(payload);
-    console.log("edit user workplace start +++++");
+    console.log("save/edit/delete user workplace start +++++");
+    let url = null;
+    let config = {};
+    if (payload.method === "POST") {
+      url = state.url_base + state.url_add_working;
+      config = {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          Authorization: `Bearer ${state.token}`
+        },
+        body: JSON.stringify({
+          companyName: payload.workPlace.companyName,
+          cityTown: payload.workPlace.cityTown,
+          position: "YAOUNDE",
+          jobResponsibilities:
+            "Job descrioption dummny textJob descrioption dummny text Jobdescrioption dummny text",
+          currentlyWorking: payload.workPlace === true ? 1 : 0,
+          startDate: "2012-09-12",
+          endDate: "2012-09-12"
+        })
+      };
+    } else if (payload.method === "PUT") {
+      const workplace = payload.workPlace === true ? 1 : 0;
+      (url =
+        state.url_base +
+        state.url_update_working +
+        "/11" +
+        "?companyName=" +
+        payload.workPlace.companyName),
+        "&cityTown=" + payload.workPlace.cityTown,
+        "&position=" + "YAOUNDE",
+        "&jobResponsibilities=" +
+          "Job descrioption dummny textJob descrioption dummny text Jobdescrioption dummny text",
+        "&currentlyWorking=" + workplace,
+        "&startDate=" + "2012-09-12",
+        "&endDate=" + "2012-09-12";
+      config = {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          Authorization: `Bearer ${state.token}`
+        }
+      };
+    }
 
     let response_ = null;
-    await fetch(state.url_base + state.url_add_working, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-        Authorization: `Bearer ${state.token}`
-      },
-      body: JSON.stringify({
-        companyName: payload.workPlace.companyName,
-        cityTown: payload.workPlace.cityTown,
-        position: "YAOUNDE",
-        jobResponsibilities:
-          "Job descrioption dummny textJob descrioption dummny text Jobdescrioption dummny text",
-        currentlyWorking: payload.workPlace === true ? 1 : 0,
-        startDate: "2012-09-12",
-        endDate: "2012-09-12"
-      })
-    })
+    await fetch(url, config)
       .then(response => {
-        console.log("edit user workPlace response (1) +++++++");
+        console.log("save/edit/delete user workPlace response (1) +++++++");
         console.log(response);
         return response.json();
       })
       .then(response => {
-        console.log("edit user workPlace response successsss +++");
+        console.log("save/edit/delete user workPlace response successsss +++");
         console.log(response);
         if (response.errors) {
-          console.log("Erreur liée au serveur+++++++");
-          throw new Error("Erreur d 'ajout de workPlace+++++");
+          console.log("Error from the server +++++++");
+          throw new Error("Error from save/edit/delete workplace+++++");
         }
         context.commit("storeWorkPlace", {
-          workPlace: payload.workPlace
+          workPlace: payload.workPlace,
+          method: payload.method
         });
         response_ = response;
       })
       .catch(error => {
-        console.log("erreur liée au serveur ou au navigateur");
+        console.log("error from the server or the browser");
         console.log(error);
         throw error;
       });
@@ -2578,47 +2647,75 @@ const actions = {
   },
   async updateUserEducation(context, payload) {
     console.log(payload);
-    console.log("edit user education start +++++");
+    console.log("save/edit/delete user education start +++++");
+    let url = "",
+      config = {};
+    if (payload.method.toLowerCase() === "post") {
+      url = state.url_base + state.url_add_school;
+      config = {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          Authorization: `Bearer ${state.token}`
+        },
+        body: JSON.stringify({
+          schoolName: payload.education.schoolName,
+          graduated: payload.education.graduated ? 1 : 0,
+          durationFrom: payload.education.durationFrom,
+          major: payload.education.major,
+          durationTo: payload.education.durationFrom
+        })
+      };
+    } else if (payload.method.toLowerCase() === "update") {
+      const graduated = payload.education.graduated ? 1 : 0;
+      (url =
+        state.url_base +
+        state.url_update_school +
+        "/11" +
+        "?schoolName=" +
+        payload.education.schoolName),
+        "&graduated=" + graduated,
+        "&durationFrom=" + payload.education.durationFrom,
+        "&major=" + payload.education.major,
+        "&durationTo=" + payload.education.durationFrom;
+      config = {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          Authorization: `Bearer ${state.token}`
+        }
+      };
+    }
 
     let response_ = null;
-    await fetch(state.url_base + state.url_add_school, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-        Authorization: `Bearer ${state.token}`
-      },
-      body: JSON.stringify({
-        schoolName: payload.education.schoolName,
-        graduated: payload.education.graduated ? 1 : 0,
-        durationFrom: payload.education.durationFrom,
-        major: payload.education.major,
-        durationTo: payload.education.durationFrom
-      })
-    })
+    await fetch(url, config)
       .then(response => {
-        console.log("edit user education response (1) +++++++");
+        console.log("save/edit/delete user education response (1) +++++++");
         console.log(response);
         if (response.status !== 200 || response.status !== 201) {
-          console.log("Erreur liée au serveur+++++++");
-          throw new Error("Erreur d 'ajout d'education+++++");
+          console.log("Error From The server +++++++");
+          throw new Error("Error From save/edit/delete Education+++++");
         }
         return response.json();
       })
       .then(response => {
-        console.log("edit user education response successsss +++");
+        console.log(
+          "save/edit/delete user education response successsss response (2) +++"
+        );
         console.log(response);
         if (response.errors) {
-          console.log("Erreur liée au serveur+++++++");
-          throw new Error("Erreur d 'ajout d'education+++++");
+          console.log("Error From Server +++++++");
+          throw new Error("Error From save/edit/delete Education+++++");
         }
         context.commit("storeEducation", {
-          education: payload.education
+          education: payload.education,
+          method: payload.method
         });
         response_ = response;
       })
       .catch(error => {
-        console.log("erreur liée au serveur ou au navigateur");
+        console.log("error From The Server or a Browser");
         console.log(error);
         throw error;
       });
@@ -2785,6 +2882,9 @@ const mutations = {
   retrievePostsListUser(state, payload) {
     state.userData[0].posts = payload.posts;
   },
+  updateUserProfileAbout(state, payload) {
+    state.userData[0].profile_about = payload.profile_about;
+  },
   updateUserBiography(state, payload) {
     state.userData[0].profile_about.biography.info_access = payload.info_access;
     state.userData[0].profile_about.biography.description = payload.description;
@@ -2815,10 +2915,20 @@ const mutations = {
     ];
   },
   storeWorkPlace(state, payload) {
-    state.userData[0].profile_about.educationAndWorks.workPlaces = [
-      ...state.userData[0].profile_about.educationAndWorks.workPlaces,
-      payload.workPlace
-    ];
+    if (payload.method === "POST") {
+      const newId =
+        state.userData[0].profile_about.educationAndWorks.workPlaces.length;
+      state.userData[0].profile_about.educationAndWorks.workPlaces = [
+        ...state.userData[0].profile_about.educationAndWorks.workPlaces,
+        { id: newId, ...payload.workPlace }
+      ];
+    } else if (payload.method === "PUT") {
+      const index = state.userData[0].profile_about.educationAndWorks.workPlaces.findIndex(
+        workplace => workplace.id === payload.workPlace.id
+      );
+      state.userData[0].profile_about.educationAndWorks.workPlaces[index] =
+        payload.workPlace;
+    }
   },
   storeProfession(state, payload) {
     state.userData[0].profile_about.educationAndWorks.professions = [
@@ -2881,12 +2991,15 @@ export default new Vuex.Store({
     },
     getProfileAboutEducationAndWorks(state) {
       return state.userData[0].profile_about.educationAndWorks;
+    },
+    getProfileAbout(state) {
+      return state.userData[0].profile_about1;
     }
   },
   actions,
   mutations,
   modules: {
     auth,
-    businessOwner,
-  },
+    businessOwner
+  }
 });

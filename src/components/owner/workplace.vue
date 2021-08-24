@@ -12,14 +12,20 @@
     >
       <div class="datails t-left">
         <div class="row">
-          <div class="media border-botmediatom mt-3 mb-4" v-for="workPlace in educationAndWorks.workPlaces" :key="workPlace.id">
+          <div
+            class="media border-botmediatom mt-3 mb-4"
+            v-for="workPlace in educationAndWorks.workPlaces"
+            :key="workPlace.id"
+          >
             <img
               src="@/assets/img/about3.jpg"
               alt="John Doe"
               class="mr-2 picture-size"
             />
             <div class="media-body">
-              <h6 class="mb-0"><b>{{ workPlace.companyName }}</b></h6>
+              <h6 class="mb-0">
+                <b>{{ workPlace.companyName }}</b>
+              </h6>
               <b>{{ workPlace.companyName }} - {{ workPlace.startDate }}</b>
               <p class="mb-1">
                 {{ workPlace.jobResponsibilities }}
@@ -32,45 +38,57 @@
                   dropdown
                   variant="primary-outline"
                 >
-                  <b-dropdown-item @click="edit('workPlaces', workPlace.companyName)">Edit</b-dropdown-item>
-                  <b-dropdown-item @click="delet('workPlaces', workPlace.companyName)">Delete</b-dropdown-item>
+                  <b-dropdown-item
+                    @click="edit('workPlaces', workPlace.companyName)"
+                    >Edit</b-dropdown-item
+                  >
+                  <b-dropdown-item
+                    @click="delet('workPlaces', workPlace.companyName)"
+                    >Delete</b-dropdown-item
+                  >
                 </b-dropdown>
               </li>
             </ul>
           </div>
 
-<!--          <div class="media mb-4">-->
-<!--            <img-->
-<!--              src="@/assets/img/about1.jpg"-->
-<!--              alt="John Doe"-->
-<!--              class="mr-2 picture-size"-->
-<!--            />-->
-<!--            <div class="media-body">-->
-<!--              <h6 class="mb-0"><b>Ericson Pvt Ltd. Team Lead</b></h6>-->
-<!--              <b>Team Lead - 7 Feb 2011</b>-->
-<!--              <p class="mb-1">-->
-<!--                Job descrioption dummny textJob descrioption dummny textJob-->
-<!--                descrioption dummny text-->
-<!--              </p>-->
-<!--            </div>-->
-<!--            <ul class="navbar-nav pull-right">-->
-<!--              <li class="nav-item dropdown">-->
-<!--                <b-dropdown-->
-<!--                  id="dropdown-dropup"-->
-<!--                  dropdown-->
-<!--                  variant="primary-outline"-->
-<!--                >-->
-<!--                  <b-dropdown-item href="#">Edit</b-dropdown-item>-->
-<!--                  <b-dropdown-item href="#">Delete</b-dropdown-item>-->
-<!--                </b-dropdown>-->
-<!--              </li>-->
-<!--            </ul>-->
-<!--          </div>-->
+          <!--          <div class="media mb-4">-->
+          <!--            <img-->
+          <!--              src="@/assets/img/about1.jpg"-->
+          <!--              alt="John Doe"-->
+          <!--              class="mr-2 picture-size"-->
+          <!--            />-->
+          <!--            <div class="media-body">-->
+          <!--              <h6 class="mb-0"><b>Ericson Pvt Ltd. Team Lead</b></h6>-->
+          <!--              <b>Team Lead - 7 Feb 2011</b>-->
+          <!--              <p class="mb-1">-->
+          <!--                Job descrioption dummny textJob descrioption dummny textJob-->
+          <!--                descrioption dummny text-->
+          <!--              </p>-->
+          <!--            </div>-->
+          <!--            <ul class="navbar-nav pull-right">-->
+          <!--              <li class="nav-item dropdown">-->
+          <!--                <b-dropdown-->
+          <!--                  id="dropdown-dropup"-->
+          <!--                  dropdown-->
+          <!--                  variant="primary-outline"-->
+          <!--                >-->
+          <!--                  <b-dropdown-item href="#">Edit</b-dropdown-item>-->
+          <!--                  <b-dropdown-item href="#">Delete</b-dropdown-item>-->
+          <!--                </b-dropdown>-->
+          <!--              </li>-->
+          <!--            </ul>-->
+          <!--          </div>-->
         </div>
       </div>
     </b-list-group-item>
 
-    <b-modal ref="add-contact" id="modal-9" title="Add Workplace "  @close="cancel" @ok="save">
+    <b-modal
+      ref="add-contact"
+      id="modal-9"
+      title="Add Workplace "
+      @close="cancel"
+      @ok="save"
+    >
       <div class="div-design">
         <b-form-select
           class="mb-2"
@@ -116,10 +134,10 @@
       ></b-form-datepicker>
       <label>End Date</label>
       <b-form-datepicker
-              id="example-datepicker"
-              v-model="workPlaceInput.endDate"
-              class="mb-2"
-              placeholder="End Date"
+        id="example-datepicker"
+        v-model="workPlaceInput.endDate"
+        class="mb-2"
+        placeholder="End Date"
       ></b-form-datepicker>
     </b-modal>
   </div>
@@ -148,11 +166,11 @@ export default {
         startDate: null,
 
         endDate: null,
-        access: 'public',
+        access: "public"
       },
       educationInput: null,
       professionInput: null,
-      index: null,
+      index: null
     };
   },
   created() {
@@ -166,96 +184,113 @@ export default {
     cancel() {
       console.log("Cancel Another Action in User  ++++++");
       this.educationAndWorks = JSON.parse(
-              JSON.stringify(this.$store.getters.getProfileAboutEducationAndWorks)
+        JSON.stringify(this.$store.getters.getProfileAboutEducationAndWorks)
       );
       console.log(this.educationAndWorks);
       this.professionInput = null;
       this.workPlaceInput = {
-          companyName: null,
-          cityTown: null,
-          position: null,
-          jobResponsibilities: null,
-          currentlyWorking: false,
-          startDate: null,
-          endDate: null,
-          access: 'private',
-        }
+        companyName: null,
+        cityTown: null,
+        position: null,
+        jobResponsibilities: null,
+        currentlyWorking: false,
+        startDate: null,
+        endDate: null,
+        access: "private"
+      };
       this.education = null;
       //this.$refs["model-6"].hide();
     },
-    save(){
-      console.log('Save New WorkPlace User Profile About');
-      if( this.index !== null ){
-        this.educationAndWorks.workPlaces[ this.index ] = this.workPlaceInput;
-      }else{
-        this.educationAndWorks.workPlaces.push( this.workPlaceInput );
+    save() {
+      console.log("Save New WorkPlace User Profile About");
+      let method = "";
+      if (this.index !== null) {
+        this.educationAndWorks.workPlaces[this.index] = this.workPlaceInput;
+        method = "PUT";
+      } else {
+        this.educationAndWorks.workPlaces.push(this.workPlaceInput);
+        method = "POST";
       }
 
-      this.$store.dispatch('updateUserWorkPlaces', {
-        workPlace: this.workPlaceInput,
-      }).then( response => {
-        console.log( response );
-        console.log("save new workPlace user end +++++");
-        //this.$store.state.userData[0].profile_about.educationAndWorks = this.educationAndWorks;
-        this.workPlaceInput = {
-          companyName: null,
-          cityTown: null,
-          position: null,
-          jobResponsibilities: null,
-          currentlyWorking: false,
-          startDate: null,
-          endDate: null,
-          access: 'private',
-        }
-      }).catch( error => {
-        console.log( error )
-        //this.$store.state.userData[0].profile_about.educationAndWorks = this.educationAndWorks;
-        this.cancel()
-        console.log("not save new workPlace user end +++++");
-      });
-      this.$refs['add-contact'].hide();
+      this.$store
+        .dispatch("updateUserWorkPlaces", {
+          workPlace: this.workPlaceInput,
+          method: method
+        })
+        .then(response => {
+          console.log(response);
+          console.log("save/update/delete new workPlace user end +++++");
+          //this.$store.state.userData[0].profile_about.educationAndWorks = this.educationAndWorks;
+          this.workPlaceInput = {
+            companyName: null,
+            cityTown: null,
+            position: null,
+            jobResponsibilities: null,
+            currentlyWorking: false,
+            startDate: null,
+            endDate: null,
+            access: "private"
+          };
+        })
+        .catch(error => {
+          console.log(error);
+          //this.$store.state.userData[0].profile_about.educationAndWorks = this.educationAndWorks;
+          this.cancel();
+          console.log("not save/update/delete new workPlace user end error (2) +++++");
+        })
+        .finally(() => {
+          console.log('Finally save/update/delete new workplace user +++++')
+          this.educationAndWorks = JSON.parse(
+            JSON.stringify(this.$store.getters.getProfileAboutEducationAndWorks)
+          );
+          console.log( this.educationAndWorks, '+++++++++++' );
+          this.$refs["add-contact"].hide();
+        });
+
     },
-    save_7(){
+    save_7() {
       console.log("save new sociallinks  user start +++++");
-      if ( this.basicInfo.socialLinks.includes( this.sociallinkInput ) ){
-        console.log('Duplication de sociallink  +++++++')
-      }else if(  this.index!==null  ){
+      if (this.basicInfo.socialLinks.includes(this.sociallinkInput)) {
+        console.log("Duplication de sociallink  +++++++");
+      } else if (this.index !== null) {
         this.basicInfo.socialLinks[this.index] = this.sociallinkInput;
         this.$store.state.userData[0].profile_about.basicInfo = this.basicInfo;
-      }
-      else {
-        console.log( 'Non Duplication de sociallink +++++++')
-        this.basicInfo.socialLinks.push( this.sociallinkInput )
+      } else {
+        console.log("Non Duplication de sociallink +++++++");
+        this.basicInfo.socialLinks.push(this.sociallinkInput);
       }
       this.sociallinkInput = null;
 
-      console.log( this.basicInfo.socialLinks )
-      this.$store.dispatch('updateUserBasicInfosSocialLinks', {
-        socialLinks: this.basicInfo.socialLinks,
-      }).then( response => {
-        console.log( response );
-        console.log("save new socialLinks user end +++++");
-        this.$store.state.userData[0].profile_about.basicInfo = this.basicInfo;
-      }).catch( error => {
-        console.log( error )
-        this.$store.state.userData[0].profile_about.basicInfo = this.basicInfo;
-        //this.cancel()
-        console.log("not save new socialLinks user end +++++");
-      });
+      console.log(this.basicInfo.socialLinks);
+      this.$store
+        .dispatch("updateUserBasicInfosSocialLinks", {
+          socialLinks: this.basicInfo.socialLinks
+        })
+        .then(response => {
+          console.log(response);
+          console.log("save new socialLinks user end +++++");
+          this.$store.state.userData[0].profile_about.basicInfo = this.basicInfo;
+        })
+        .catch(error => {
+          console.log(error);
+          this.$store.state.userData[0].profile_about.basicInfo = this.basicInfo;
+          //this.cancel()
+          console.log("not save new socialLinks user end +++++");
+        });
       this.$refs["sociallinkModal"].hide();
     },
     delet(type, value) {
       switch (type) {
         case "workPlaces":
-          console.log('delete one workplace')
+          console.log("delete one workplace");
           this.educationAndWorks.workPlaces = this.educationAndWorks.workPlaces.filter(
             workPlace => {
               return workPlace.companyName !== value;
             }
           );
-          console.log( value )
+          console.log(value);
           this.$store.state.userData[0].profile_about.educationAndWorks = this.educationAndWorks;
-          console.log( this.educationAndWorks.workPlaces)
+          console.log(this.educationAndWorks.workPlaces);
           break;
         case "educations":
           this.educationAndWorks.educations = this.educationAndWorks.educations.filter(
@@ -288,7 +323,7 @@ export default {
             }
           );
           console.log(this.index);
-          this.workPlaceInput = this.educationAndWorks.workPlaces[this.index]
+          this.workPlaceInput = this.educationAndWorks.workPlaces[this.index];
           this.$refs["add-contact"].show();
           break;
         case "educations":
@@ -314,7 +349,7 @@ export default {
           this.$refs["professionModal"].show();
           break;
         default:
-          console.log( 'Aucune Correspondance');
+          console.log("Aucune Correspondance");
           break;
       }
     }

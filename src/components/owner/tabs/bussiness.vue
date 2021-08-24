@@ -701,7 +701,7 @@ export default {
         .then(response => {
           console.log("save new profile business after response (3) +++++");
           console.log(response);
-          console.log("save new profile business endddd ++++");
+          console.log("save new profile business endd ++++");
         })
         .catch(error => {
           console.log("error from browser or server error(2)");

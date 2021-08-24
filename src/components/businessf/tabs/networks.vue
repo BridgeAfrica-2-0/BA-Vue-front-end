@@ -91,7 +91,7 @@
                 <br />
 
                 super best car seller in the world adipisicing elit. lorem epsep
-                this is <b-link>Read More</b-link>
+                this i <b-link>Read More</b-link>
               </p>
             </b-col>
 
@@ -136,7 +136,7 @@
 
 <script>
 export default {
-  props: ["title", "image"]
+  props: ["title", "image"],
 };
 </script>
 

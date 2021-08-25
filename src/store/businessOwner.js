@@ -1,16 +1,20 @@
 import axios from "axios";
-
+axios.defaults.headers.common["Authorization"] =
+  "Bearer " + localStorage.getItem("access_token");
 export default {
   namespaced: true,
   state: {
     networks: [],
     loader: false,
-    success: false,
+    success: {
+      state: false,
+      succes: false,
+      msg: "",
+    },
     notifications: [],
     checked: false,
     btnDelLoader: false,
     btnReadLoader: false,
-
   },
   getters: {
     // sending networks
@@ -47,8 +51,6 @@ export default {
     sendChecked(state) {
       return state.checked;
     },
-
-
   },
   mutations: {
     setNetworks(state, payload) {
@@ -72,34 +74,39 @@ export default {
     },
   },
   actions: {
- 
     // Get networks from the backend
     async getNetworks({ commit }) {
-      commit("setLoader", true);
       await axios
-        .get("network")
-        .then((res) => {
+        .get("/network")
+        .then(res => {
+          let sucData = {
+            state: true,
+            succes: "success",
+            msg: "Operation was successfull !!",
+          };
           commit("setLoader", false);
-          commit("setSuccess", true);
+          commit("setSuccess", sucData);
           commit("setNetworks", res.data.data);
           setTimeout(() => {
-            commit("setSuccess", false);
+            sucData.state = false;
+            sucData.msg = "";
+            commit("setSuccess", sucData);
           }, 2000);
         })
-        .catch((err) => {
+        .catch(err => {
           console.log("Unauthorized request !!");
-        });
-    },
-
-    // Add network to the database but doesn't work correctly for now
-    async addNetwork({ dispatch, commit }, newNetwork) {
-      axios
-        .post("/network", newNetwork)
-        .then((res) => {
-          dispatch("getNetworks");
-        })
-        .catch((err) => {
-          console.log("Something went wrong");
+          let sucData = {
+            state: true,
+            succes: "danger",
+            msg: "Unauthorized request !!",
+          };
+          commit("setLoader", false);
+          commit("setSuccess", sucData);
+          setTimeout(() => {
+            sucData.state = false;
+            sucData.msg = "";
+            commit("setSuccess", sucData);
+          }, 2000);
         });
     },
 
@@ -107,12 +114,24 @@ export default {
     async editNetwork({ dispatch, commit }, editedNetwork) {
       commit("setLoader", true);
       axios
-        .put(`network/${editedNetwork.id}`, editedNetwork)
-        .then(async (res) => {
-          dispatch("getNetworks");
+        .post(`network/${editedNetwork.id}`, editedNetwork.data)
+        .then(async res => {
+          await dispatch("getNetworks");
         })
-        .catch((err) => {
-          console.log("Something went wrong");
+        .catch(err => {
+          console.log("Something went wrong !!");
+          let sucData = {
+            state: true,
+            succes: "danger",
+            msg: "Something went wrong !!",
+          };
+          commit("setLoader", false);
+          commit("setSuccess", sucData);
+          setTimeout(() => {
+            sucData.state = false;
+            sucData.msg = "";
+            commit("setSuccess", sucData);
+          }, 2000);
         });
     },
 
@@ -122,7 +141,7 @@ export default {
 
       await axios
         .get("notification")
-        .then((res) => {
+        .then(res => {
           commit("setLoader", false);
           commit("setSuccess", true);
           commit("setNotifications", res.data.data);
@@ -130,7 +149,7 @@ export default {
             commit("setSuccess", false);
           }, 2000);
         })
-        .catch((err) => {
+        .catch(err => {
           commit("setLoader", false);
           console.log("Unauthorized request !!");
         });
@@ -142,7 +161,7 @@ export default {
         ids: [],
       };
 
-      payload.forEach((element) => {
+      payload.forEach(element => {
         let objId = {
           id: null,
         };
@@ -154,7 +173,7 @@ export default {
         .then(() => {
           dispatch("getNotifications");
         })
-        .catch((err) => [console.log(err)]);
+        .catch(err => [console.log(err)]);
     },
 
     // Delete All Notifications
@@ -163,7 +182,7 @@ export default {
         ids: [],
       };
 
-      payload.forEach((element) => {
+      payload.forEach(element => {
         let objId = {
           id: null,
         };
@@ -180,6 +199,5 @@ export default {
         dispatch("getNotifications");
       });
     },
-   
   },
 };

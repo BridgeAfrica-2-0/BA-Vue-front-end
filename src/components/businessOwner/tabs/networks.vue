@@ -225,14 +225,16 @@
             class="mb-0"
           >
             <b-form-checkbox
-              :v-model="createdNetwork.allow_business == '0' ? false : true"
+              value="1"
+              unchecked-value="0"
+              v-model="createdNetwork.allow_business"
               name="check-button"
               switch
             >
             </b-form-checkbox>
           </b-form-group>
-          <b-alert :show="success" variant="success"
-            >Operation was Successfull !!</b-alert
+          <b-alert :show="success.state" :variant="success.success">
+            {{ success.msg }}</b-alert
           >
           <b-spinner v-if="loader" variant="primary"></b-spinner>
           <b-button
@@ -283,26 +285,22 @@ export default {
       showModal: false,
       selectedFile: "",
       createdNetwork: {
-        id: null,
-        business_id: "",
         name: "",
         description: "",
         purpose: "",
         special_needs: "",
         business_address: "",
         business_image: "",
-        allow_business: "0",
+        allow_business: 0,
       },
       chosenNetwork: {
-        id: null,
-        business_id: "",
         name: "",
         description: "",
         purpose: "",
         special_needs: "",
         business_address: "",
         business_image: "",
-        allow_business: "0",
+        allow_business: 0,
       },
     };
   },
@@ -336,12 +334,7 @@ export default {
 
     //View network on pop up modal
     viewNetwork(network) {
-      this.chosenNetwork.business_image = network.business_image;
-      this.chosenNetwork.name = network.name;
-      this.chosenNetwork.business_id = network.business_id;
-      this.chosenNetwork.business_address = network.business_address;
-      this.chosenNetwork.description = network.description;
-      this.createdNetwork.allow_business = network.allow_business;
+      this.chosenNetwork = network;
     },
 
     //Show Edit network modal
@@ -361,7 +354,7 @@ export default {
       const fd = new FormData();
       fd.append("_method", "PUT");
       fd.append("name", this.createdNetwork.name);
-      fd.append("business_id", this.createdNetwork.business_id);
+      fd.append("business_id", 1);
       fd.append("business_address", this.createdNetwork.business_address);
       fd.append("description", this.createdNetwork.description);
       fd.append("purpose", this.createdNetwork.purpose);

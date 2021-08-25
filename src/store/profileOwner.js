@@ -1,11 +1,16 @@
 import axios from "axios";
-
+axios.defaults.headers.common["Authorization"] =
+  "Bearer " + localStorage.getItem("access_token");
 export default {
   namespaced: true,
   state: {
     networks: [],
     loader: false,
-    success: false,
+    success: {
+      state: false,
+      succes: false,
+      msg: "",
+    },
   },
   getters: {
     // sending networks
@@ -39,47 +44,98 @@ export default {
   },
   actions: {
     // Get networks from the backend
-    async getNetworks({ dispatch, commit }) {
+    async getNetworks({ commit }) {
       await axios
-        .get("network", {
-          headers: {
-            Authorization: "Bearer " + localStorage.getItem("access_token"),
-          },
-        })
-        .then((res) => {
+        .get("/network")
+        .then(res => {
+          let sucData = {
+            state: true,
+            succes: "success",
+            msg: "Operation was successfull !!",
+          };
           commit("setLoader", false);
-          commit("setSuccess", true);
+          commit("setSuccess", sucData);
           commit("setNetworks", res.data.data);
           setTimeout(() => {
-            commit("setSuccess", false);
+            sucData.state = false;
+            sucData.msg = "";
+            commit("setSuccess", sucData);
           }, 2000);
         })
-        .catch((err) => {
+        .catch(err => {
           console.log("Unauthorized request !!");
+          let sucData = {
+            state: true,
+            succes: "danger",
+            msg: "Unauthorized request !!",
+          };
+          commit("setLoader", false);
+          commit("setSuccess", sucData);
+          setTimeout(() => {
+            sucData.state = false;
+            sucData.msg = "";
+            commit("setSuccess", sucData);
+          }, 2000);
         });
     },
 
     // Add network to the database but doesn't work correctly for now
-    async addNetwork({ commit }, newNetwork) {
+    async addNetwork({ dispatch, commit }, newNetwork) {
+      commit("setLoader", true);
       axios
         .post("/network", newNetwork)
-        .then((res) => {})
-        .catch((err) => {
-          console.log("Something went wrong");
+        .then(res => {
+          dispatch("getNetworks");
+        })
+        .catch(err => {
+          console.log("Something went wrong !!");
+          let sucData = {
+            state: true,
+            succes: "danger",
+            msg: "Something went wrong !!",
+          };
+          commit("setLoader", false);
+          commit("setSuccess", sucData);
+          setTimeout(() => {
+            sucData.state = false;
+            sucData.msg = "";
+            commit("setSuccess", sucData);
+          }, 2000);
         });
     },
     //delete network
-    async deleteNetwork() {},
+    async deleteNetwork({ dispatch }, network) {
+      axios
+        .post(`/network/${network.id}`)
+        .then(res => {
+          dispatch("getNetworks");
+        })
+        .catch(err => {
+          console.log("Something went wrong");
+        });
+    },
     // Edit a network
     async editNetwork({ dispatch, commit }, editedNetwork) {
       commit("setLoader", true);
       axios
-        .put(`network/${editedNetwork.id}`, editedNetwork)
-        .then(async (res) => {
+        .post(`network/${editedNetwork.id}`, editedNetwork)
+        .then(async res => {
           await dispatch("getNetworks");
         })
-        .catch((err) => {
-          console.log("Something went wrong");
+        .catch(err => {
+          console.log("Something went wrong !!");
+          let sucData = {
+            state: true,
+            succes: "danger",
+            msg: "Something went wrong !!",
+          };
+          commit("setLoader", false);
+          commit("setSuccess", sucData);
+          setTimeout(() => {
+            sucData.state = false;
+            sucData.msg = "";
+            commit("setSuccess", sucData);
+          }, 2000);
         });
     },
   },

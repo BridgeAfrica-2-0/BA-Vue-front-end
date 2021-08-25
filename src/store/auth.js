@@ -45,10 +45,10 @@ export default {
       state.passwordToken = data;
     },
 
-    // clearUserData() {
-    //   localStorage.removeItem("user");
-    //   location.reload();
-    // },
+    clearUserData() {
+      localStorage.removeItem("user");
+      location.reload();
+    },
   },
 
   actions: {
@@ -113,8 +113,8 @@ export default {
   },
 
   getters: {
-    isLogged: (state) => !!state.user,
-    isVerified: (state) => !!state.user,
-    user: (state) => state.user,
+    isLogged: state => !!state.user,
+    isVerified: state => !!state.user,
+    user: state => state.user,
   },
 };

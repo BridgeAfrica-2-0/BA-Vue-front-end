@@ -59,9 +59,7 @@
                           <b-icon icon="pencil" aria-hidden="true"></b-icon>
                           Edit
                         </b-dropdown-item-button>
-                        <b-dropdown-item-button
-                          @click="showEditNetwork(network)"
-                        >
+                        <b-dropdown-item-button @click="deleteNetwork(network)">
                           <b-icon icon="trash" aria-hidden="true"></b-icon>
                           Delete
                         </b-dropdown-item-button>
@@ -110,7 +108,7 @@
       <b-container>
         <b-form>
           <div
-            v-show="false"
+            v-if="!editNet"
             class="row sub-sidebar-2 pending-post-view mt-4 pb-0 "
           >
             <div
@@ -246,11 +244,17 @@
             label-class="font-weight-bold pt-0"
             class="mb-0"
           >
-            <b-form-checkbox v-model="dat" name="check-button" switch>
+            <b-form-checkbox
+              value="1"
+              unchecked-value="0"
+              v-model="createdNetwork.allow_business"
+              name="check-button"
+              switch
+            >
             </b-form-checkbox>
           </b-form-group>
-          <b-alert :show="success" variant="success"
-            >Operation was Successfull !!</b-alert
+          <b-alert :show="success.state" :variant="success.success">
+            {{ success.msg }}</b-alert
           >
           <b-spinner v-if="loader" variant="primary"></b-spinner>
           <b-button
@@ -303,26 +307,22 @@ export default {
       editNet: false,
       dat: true,
       createdNetwork: {
-        id: null,
-        business_id: "",
         name: "",
         description: "",
         purpose: "",
         special_needs: "",
         business_address: "",
         business_image: "",
-        allow_business: "0",
+        allow_business: 0,
       },
       chosenNetwork: {
-        id: null,
-        business_id: "",
         name: "",
         description: "",
         purpose: "",
         special_needs: "",
         business_address: "",
         business_image: "",
-        allow_business: "0",
+        allow_business: 0,
       },
     };
   },
@@ -352,35 +352,31 @@ export default {
       addNetwork: "profileOwner/addNetwork",
       getNetworks: "profileOwner/getNetworks",
       editNetwork: "profileOwner/editNetwork",
+      deleteNetwork: "profileOwner/deleteNetwork",
     }),
 
     // Action handler
     action() {
+      const fd = new FormData();
+      fd.append("business_id", 1);
+      fd.append("name", this.createdNetwork.name);
+      fd.append("business_address", this.createdNetwork.business_address);
+      fd.append("description", this.createdNetwork.description);
+      fd.append("purpose", this.createdNetwork.purpose);
+      fd.append("special_needs", this.createdNetwork.special_needs);
+      fd.append("business_image", this.createdNetwork.business_image);
+      fd.append("allow_busines", this.createdNetwork.allow_busines);
       if (this.editNet) {
-        this.editNetwork(this.createdNetwork);
-      } else {
-        const fd = new FormData();
         fd.append("_method", "PUT");
-        fd.append("name", this.createdNetwork.name);
-        fd.append("business_id", this.createdNetwork.business_id);
-        fd.append("business_address", this.createdNetwork.business_address);
-        fd.append("description", this.createdNetwork.description);
-        fd.append("purpose", this.createdNetwork.purpose);
-        fd.append("special_needs", this.createdNetwork.special_needs);
-        fd.append("business_image", this.createdNetwork.business_image);
-        fd.append("allow_busines", this.createdNetwork.allow_busines);
+        this.editNetwork(fd);
+      } else {
         this.addNetwork(fd);
       }
     },
 
     //View network on pop up modal
     viewNetwork(network) {
-      this.chosenNetwork.business_image = network.business_image;
-      this.chosenNetwork.name = network.name;
-      this.chosenNetwork.business_id = network.business_id;
-      this.chosenNetwork.business_address = network.business_address;
-      this.chosenNetwork.description = network.description;
-      this.createdNetwork.allow_business = network.allow_business;
+      this.chosenNetwork = network;
     },
     showmodal(state, arg) {
       this.showModal = state;
@@ -388,15 +384,13 @@ export default {
         this.editNet = true;
       } else {
         this.editNet = false;
-        this.createdNetwork.id = "";
         this.createdNetwork.business_image = "";
         this.createdNetwork.name = "";
-        this.createdNetwork.business_id = "";
         this.createdNetwork.business_address = "";
         this.createdNetwork.description = "";
         this.createdNetwork.purpose = "";
         this.createdNetwork.special_needs = "";
-        this.createdNetwork.allow_business = "";
+        this.createdNetwork.allow_business = 0;
       }
     },
 
@@ -412,23 +406,6 @@ export default {
       this.createdNetwork.special_needs = network.special_needs;
       this.createdNetwork.allow_business = network.allow_business;
       this.showmodal(true, "edit");
-    },
-    edit() {
-      const fd = new FormData();
-      fd.append("_method", "PUT");
-      fd.append("name", this.createdNetwork.name);
-      fd.append("business_id", this.createdNetwork.business_id);
-      fd.append("business_address", this.createdNetwork.business_address);
-      fd.append("description", this.createdNetwork.description);
-      fd.append("purpose", this.createdNetwork.purpose);
-      fd.append("special_needs", this.createdNetwork.special_needs);
-      fd.append("business_image", this.createdNetwork.business_image);
-      fd.append("allow_busines", this.createdNetwork.allow_busines);
-      let data = {
-        id: this.createdNetwork.id,
-        data: fd,
-      };
-      this.editNetwork(data);
     },
     selectImage(e) {
       this.createdNetwork.business_image = e.target.files[0];

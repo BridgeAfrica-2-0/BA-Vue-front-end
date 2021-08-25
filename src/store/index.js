@@ -5,13 +5,10 @@ import axios from "axios";
 import auth from "./auth";
 import businessOwner from "./businessOwner";
 
-import axios from "axios";
+//import axios from "axios";
 
 Vue.use(Vuex);
-axios.defaults.baseURL =  process.env.VUE_APP_API_URL
-
-
-
+//axios.defaults.baseURL = process.env.VUE_APP_API_URL;
 
 const getDefaultState = () => {
   return {
@@ -36,14 +33,14 @@ const getDefaultState = () => {
     url_add_school: "api/v1/userIntro/addSchool",
     url_add_profession: "/api/v1/userIntro/updateWorking",
     url_load_basicInfos: "",
-    url_load_business_about: "/api/v1/business/info/",
+    url_load_business_about: "/api/v1/business/info",
     url_update_business_about_name: "/api/v1/business/update",
     url_update_business_biography: "/api/v1/business/businessBiography",
     url_load_user_profile_about: "",
     recoverData: "",
     login: false,
     isToi: false,
-    token: "1|5EyNcoXFcd6d4j8kaizPr8E3gU9lRu9CHqAWPa03",
+    token: "1|5EyNcoXFcd6d4j8kaizPr8E3gU9lRu9CHqAWPa03\n" + "\n" + "\n" + "\n",
     count: "",
     todos: [],
     userData: [
@@ -2902,25 +2899,23 @@ const actions = {
   async loadUserBusinessAbout(context, payload) {
     console.log(payload);
     console.log("load user Business About start +++++");
-
-    // context.commit("updateUserBiography", {
-    //   info_access: payload.info_access,
-    //   description: payload.description
-    // });
-
     let response_ = null;
-    await fetch(state.url_base + state.url_load_business_about + "4", {
-      method: "GET",
-      headers: {
-        Accept: "application/json",
-        Authorization: `Bearer ${state.token}`
+    const id_Business = 1;
+    await fetch(
+      state.url_base + state.url_load_business_about + "/" + id_Business,
+      {
+        method: "GET",
+        headers: {
+          Accept: "application/json",
+          Authorization: `Bearer ${state.token}`
+        }
       }
-    })
+    )
       .then(response => {
         console.log("load user Business About response (1) +++++++");
         console.log(response);
         if (response.status !== 200 && response.status !== 201) {
-          throw "Erreurs lors du traitement par le serveur";
+          throw "Error from the server";
         }
         return response.json();
       })
@@ -2928,8 +2923,8 @@ const actions = {
         console.log("load user Business About response successsss +++");
         console.log(response);
         if (!response) {
-          console.log("Erreur liée au serveur+++++++");
-          throw new Error("Erreur du chargement du Business About +++++");
+          console.log("Error from the server+++++++");
+          throw new Error("Error for loading Business About +++++");
         }
         context.commit("updateUserBusinessAbout", {
           businessAbout: response.data
@@ -2937,7 +2932,7 @@ const actions = {
         response_ = response;
       })
       .catch(error => {
-        console.log("erreur liée au serveur ou au navigateur");
+        console.log("error from the server or the browser");
         console.log(error);
       });
     return response_;
@@ -2945,35 +2940,30 @@ const actions = {
   async updateUserBusinessAbout(context, payload) {
     console.log(payload);
     console.log("update user Business About start +++++");
-
-    // context.commit("updateUserBiography", {
-    //   info_access: payload.info_access,
-    //   description: payload.description
-    // });
-
     let response_ = null;
-    await fetch(state.url_base + state.url_update_business_about_name + "/1", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-        Authorization: `Bearer ${state.token}`
-      },
-      body: JSON.stringify({
-        name: payload.business_about.name,
-        category: payload.business_about.category,
-        keywords: payload.business_about.keywords,
-        phone: payload.business_about.phone,
-        email: payload.business_about.email,
-        region: payload.business_about.region,
-        city: payload.business_about.city,
-        country: payload.business_about.country,
-        openHours: [
-          ["monday", "09:05:12", "15:06:18"],
-          ["tuesday", "09:05:12", "15:06:18"]
-        ]
-      })
-    })
+    const id_Business = 1;
+    await fetch(
+      state.url_base + state.url_update_business_about_name + "/" + id_Business,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          Authorization: `Bearer ${state.token}`
+        },
+        body: JSON.stringify({
+          name: payload.business_about.name,
+          category: payload.business_about.category,
+          keywords: payload.business_about.keywords,
+          phone: payload.business_about.phone,
+          email: payload.business_about.email,
+          region: payload.business_about.region,
+          city: payload.business_about.city,
+          country: payload.business_about.country,
+          openHours: payload.business_about.business_open_hours
+        })
+      }
+    )
       .then(response => {
         console.log("update user Business About response (1) +++++++");
         console.log(response);
@@ -3234,6 +3224,6 @@ export default new Vuex.Store({
   mutations,
   modules: {
     auth,
-    businessOwner,
-  },
+    businessOwner
+  }
 });

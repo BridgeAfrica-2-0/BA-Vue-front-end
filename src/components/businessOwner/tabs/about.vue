@@ -133,6 +133,7 @@
             placeholder="Title"
             class="form-control"
             v-model="business_about_input.name"
+            required
           />
         </div>
 
@@ -145,6 +146,7 @@
             v-model="business_about_input.location_description"
             class="mb-3 form-control"
             placeholder="description"
+            required
           ></textarea>
         </div>
 
@@ -164,7 +166,7 @@
     >
       <b-form @submit.prevent="validate('editAddress')">
         <div class="form-group">
-          <label for="username">Busness Name:</label><br />
+          <label for="username">Business Name:</label><br />
           <input
             type="text"
             name="username"
@@ -172,6 +174,7 @@
             placeholder="Business Name"
             v-model="business_about_input.name"
             class="form-control"
+            required
           />
         </div>
 
@@ -183,6 +186,7 @@
             class="mb-3"
             value-field="item"
             text-field="name"
+            required
           ></b-form-select>
         </div>
 
@@ -198,6 +202,7 @@
               placeholder="Enter your Keywords"
               v-model="business_about_input.keywords"
               class="form-control"
+              required
             />
           </div>
         </div>
@@ -328,6 +333,7 @@
                         name="start"
                         type="text"
                         v-model="day.opening_time"
+                        :required="day.check ? 'required' : null"
                       ></b-form-input
                     ></b-col>
                     --
@@ -336,6 +342,7 @@
                         name="end"
                         type="text"
                         v-model="day.closing_time"
+                        :required="day.check ? 'required' : null"
                       ></b-form-input
                     ></b-col>
                   </b-row>
@@ -502,16 +509,13 @@ export default {
       .dispatch("loadUserBusinessAbout", null)
       .then(response => {
         console.log(response);
-        //this.business_about = this.$store.getters.getBusinessAbout;
         this.dayOfWorks = this.initialize(this.dayOfWorks);
-        //this.open = 'Always Open'
         console.log(this.business_about);
         console.log("load business about response end response (3) ++++");
       })
       .catch(error => {
         console.log("error from the server or browser error(2) ++++");
         console.log(error);
-        //this.business_about = this.$store.getters.getBusinessAbout;
         console.log("load business about error end ");
       })
       .finally(() => {
@@ -552,7 +556,7 @@ export default {
         });
         return day;
       });
-      console.log("Modification du dayOfWorks++++++++++");
+      console.log("Modification of dayOfWorks++++++++++");
       console.log(zdaysOfWorks);
       return zdaysOfWorks;
     },
@@ -575,10 +579,11 @@ export default {
           );
           console.log(this.$store.getters.getBusinessAbout);
           console.log("Modify Business Biography start++++");
+          this.test();
           //this.business_about.biography = this.business_about_input.biography
           this.$store
-            .dispatch("modifyBusinessBiography", {
-              biography: this.business_about_input.biography
+            .dispatch("updateUserBusinessAbout", {
+              business_about: this.business_about_input
             })
             .then(response => {
               console.log("fetch finished on the database response (3) ");
@@ -588,14 +593,15 @@ export default {
             .catch(error => {
               console.log(error);
               console.log("Modify Business Biography end error (2) ++++");
-            }).finally(() => {
-            console.log("Finally Modify Business About Biography  +++++");
-            this.business_about = JSON.parse(
-                    JSON.stringify(this.$store.getters.getBusinessAbout)
-            );
-            console.log(this.business_about);
-            this.$refs["biographyModal"].hide();
-          });
+            })
+            .finally(() => {
+              console.log("Finally Modify Business About Biography  +++++");
+              this.business_about = JSON.parse(
+                JSON.stringify(this.$store.getters.getBusinessAbout)
+              );
+              console.log(this.business_about);
+              this.$refs["biographyModal"].hide();
+            });
           break;
         case "editAddress":
           console.log("edit address business");
@@ -616,15 +622,16 @@ export default {
             .catch(error => {
               console.log(error);
               console.log("update user business about end++++");
-            }).finally(() => {
-            console.log("Finally Update Business About Biography  +++++");
-            this.business_about = JSON.parse(
-                    JSON.stringify(this.$store.getters.getBusinessAbout)
-            );
-            console.log(this.business_about);
-            this.$refs["addressBusinessModal"].hide();
-            this.$refs["biographyModal"].hide();
-          });
+            })
+            .finally(() => {
+              console.log("Finally Update Business About Biography  +++++");
+              this.business_about = JSON.parse(
+                JSON.stringify(this.$store.getters.getBusinessAbout)
+              );
+              console.log(this.business_about);
+              this.$refs["addressBusinessModal"].hide();
+              this.$refs["biographyModal"].hide();
+            });
 
           break;
         default:
@@ -636,13 +643,19 @@ export default {
       let businessAddress = this.dayOfWorks.filter(day => {
         return day.check === true;
       });
-      businessAddress = businessAddress.map(day => {
-        return {
-          day: day.day,
-          opening_time: day.opening_time,
-          closing_time: day.closing_time
-        };
-      });
+      if ( businessAddress.length > 0 ){
+        businessAddress = businessAddress.map(day => {
+          // return {
+          //   day: day.day,
+          //   opening_time: day.opening_time,
+          //   closing_time: day.closing_time
+          // };
+          return [ day.day, day.opening_time, day.closing_time ]
+        });
+      }else {
+        businessAddress = [];
+      }
+      console.log( this.business_about_input.business_open_hours )
       this.business_about_input.business_open_hours = businessAddress;
     },
     load() {

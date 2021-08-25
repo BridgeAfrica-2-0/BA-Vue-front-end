@@ -9,7 +9,7 @@ Vue.use(Vuex);
 
 const getDefaultState = () => {
   return {
-    url_base: "https://3f9fa44396a9.ngrok.io",
+    url_base: "http://team3dev.maxinemoffett.com",
     url_load_profile_picture_changed: "/api/v1/download?file_name=",
     url_load_profile_picture:
       "/api/v1/download?file_name=public/media/photos/z7aooJV1XnDVTpRSfPGOUj7sjm0trGVJCiNFS7Ef.jpg",
@@ -38,7 +38,7 @@ const getDefaultState = () => {
     recoverData: "",
     login: false,
     isToi: false,
-    token: "1|le8p995vGFTX1oo8PxHyam4pIOpkdxLQKHUw2QkP",
+    token: "1|5EyNcoXFcd6d4j8kaizPr8E3gU9lRu9CHqAWPa03",
     count: "",
     todos: [],
     userData: [

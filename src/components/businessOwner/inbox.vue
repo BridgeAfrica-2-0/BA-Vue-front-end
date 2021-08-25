@@ -36,8 +36,8 @@
             <div>
               <div class="messages-mobile">
                 <b-row
-                  v-for="message in messages"
-                  :key="message.id"
+                  v-for="(message, index) in messages"
+                  :key="index"
                   class="p-2 message"
                   @click="showMessages(false)"
                 >
@@ -100,10 +100,10 @@
             <div>
               <div class="messages">
                 <b-row
-                  v-for="message in messages"
-                  :key="message.id"
+                  v-for="(message, index) in messages"
+                  :key="index"
                   class="p-2 message"
-                  @click="showInfo(false)"
+                  @click="chatSelector(message)"
                 >
                   <b-col class="col-9">
                     <span style="display:inline-flex">
@@ -187,7 +187,7 @@
                     ></b-avatar>
                   </b-col>
                   <b-col class="detail">
-                    <h5>Louis Litt</h5>
+                    <h5>{{ recipient.name }}</h5>
                     <p>Online</p>
                   </b-col>
                   <b-col class="col-4">
@@ -240,8 +240,8 @@
                 style="
              margin-left: 1px;"
               >
-                <div v-for="chat in chats" :key="chat.id">
-                  <div v-if="chat.type == 'received'" id="received">
+                <div v-for="(chat, index) in chats" :key="index">
+                  <div v-if="chat.sender_id != '56'" id="received">
                     <b-row class="p-4">
                       <b-avatar
                         variant="primary"
@@ -249,10 +249,10 @@
                       ></b-avatar>
                       <b-col>
                         <p>
-                          <span class="name"> {{ chat.name }} </span>
+                          <span class="name"> {{ recipient.name }} </span>
                         </p>
                         <p class="msg-text mt-0 text">
-                          {{ chat.message }}
+                          {{ chat.chat }}
                           <span class="float-right mt-2 white ">
                             {{ chat.timeStamp }}
                           </span>
@@ -260,11 +260,11 @@
                       </b-col>
                     </b-row>
                   </div>
-                  <div v-if="chat.type == 'sent'">
+                  <div v-if="chat.sender_id == '56'">
                     <b-row class="p-4">
                       <b-col>
                         <p class="sent-name">
-                          <span class="name">{{ chat.name }}</span>
+                          <span class="name">Sender Name</span>
                         </p>
                         <p id="sent" class="msg-text-sent text">
                           {{ chat.message }}
@@ -300,7 +300,7 @@
                   <b-col cols="8" class="p-0">
                     <b-form-input
                       id="textarea"
-                      v-model="input"
+                      v-model="message.message"
                       class="input-background"
                       placeholder="Enter something..."
                     ></b-form-input>
@@ -354,6 +354,7 @@
                                     :title="emojiName"
                                     >{{ emoji }}</span
                                   >
+                                
                                 </div>
                               </div>
                             </div>
@@ -471,9 +472,9 @@
                           <tr></tr>
 
                           <tr
-                            v-show="searching"
-                            v-for="item in resultQuery"
-                            :key="item.key"
+                          v-show="searching"
+                            v-for="(item, index) in resultQuery"
+                            :key="index"
                             class="p-2 message"
                           >
                             <td>
@@ -548,12 +549,14 @@
           </b-col>
         </b-row>
       </div>
+      <span v-show="false">{{ eventListeners }}</span>
     </b-container>
   </div>
 </template>
 
 <script>
 import EmojiPicker from "vue-emoji-picker";
+import io from "socket.io-client";
 
 export default {
   components: {
@@ -561,21 +564,21 @@ export default {
   },
   data() {
     return {
-      input: "",
+      socket: io("http://localhost:2471"),
       search: "",
-      searching: false,
       showsearch: true,
+      searching: false,
       selecteduser: false,
-
       allSelected: false,
       userIds: [],
+      searchQuery: null,
       selectedTo: null,
       options: [
-        { value: null, text: "Community" },
-        { value: "following", text: "Following" },
-        { value: "followers", text: "Followers" },
-      ],
-      searchQuery: null,
+          { value: null, text: 'Community' },
+          { value: 'following', text: 'Following' },
+          { value: 'follower', text: 'Follower' },
+  
+        ],
       resources: [
         {
           name: "blezour blec",
@@ -591,7 +594,6 @@ export default {
           type: "person",
           id: "2",
         },
-
         {
           name: "Maxine Moffet",
           profile:
@@ -599,7 +601,6 @@ export default {
           type: "person",
           id: "3",
         },
-
         {
           name: "Alicia kays",
           profile:
@@ -607,7 +608,6 @@ export default {
           type: "person",
           id: "4",
         },
-
         {
           name: "Lorem Ipsum",
           profile:
@@ -624,9 +624,8 @@ export default {
         },
       ],
       message: {
-        type: "",
-        name: "Louis Litt",
-        timeStamp: "",
+        room_id: null,
+        sender_id: null,
         message: "",
       },
       newMsg: true,
@@ -635,74 +634,33 @@ export default {
       checked: false,
       text: "",
       selected: [],
-      attarchment: null,
-      chats: [
-        {
-          id: 0,
-          type: "received",
-          name: "Louis Litt",
-          timeStamp: "3:00 PM",
-
-          message:
-            "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Explicabo, quos? Fuga, nam dolores? Tempora, qui.",
-        },
-        {
-          id: 1,
-          type: "sent",
-          name: "Louis Litt",
-          timeStamp: "3:00 PM",
-          message:
-            "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Explicabo, quos? Fuga, nam dolores? Tempora, qui.",
-        },
-        {
-          id: 2,
-          type: "received",
-          name: "Louis Litt",
-          timeStamp: "3:00 PM",
-          message:
-            "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Explicabo, quos? Fuga, nam dolores? Tempora, qui.",
-        },
-        {
-          id: 3,
-          type: "sent",
-          name: "Louis Litt",
-          timeStamp: "3:00 PM",
-          message:
-            "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Explicabo, quos? Fuga, nam dolores? Tempora, qui.",
-        },
-        {
-          id: 4,
-          type: "received",
-          name: "Louis Litt",
-          timeStamp: "3:00 PM",
-          message:
-            "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Explicabo, quos? Fuga, nam dolores? Tempora, qui.",
-        },
-        {
-          id: 5,
-          type: "sent",
-          name: "Louis Litt",
-          timeStamp: "3:00 PM",
-          message:
-            "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Explicabo, quos? Fuga, nam dolores? Tempora, qui.",
-        },
-      ],
+      chats: [],
       messages: [
         {
           id: 0,
-          name: "Blezour blec",
+          name: "Tabe",
+          profile:
+            "https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg",
           startMessage: "Hello Blec lola blec ",
           timeStamp: "3:00pm",
           messageCount: "10",
         },
         {
           id: 1,
-          name: "Blec blezour blec",
+          name: "Moaz",
+          profile:
+            "https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg",
           startMessage: "yoo nigga sup lola blec",
           timeStamp: "7:00am",
           messageCount: "60",
         },
       ],
+
+      recipient: {
+        id: "",
+        profile: "",
+        name: "",
+      },
     };
   },
 
@@ -715,12 +673,22 @@ export default {
   },
 
   methods: {
+    chatSelector(chat) {
+      this.recipient.name = chat.name;
+      this.recipient.profile = chat.profile;
+      this.recipient.id = chat.id;
+      this.info = false;
+      this.newMsg = false;
+      this.socket.emit("join_room", JSON.stringify(this.recipient.id) + "56");
+    },
+
     insert(emoji) {
-      this.input += emoji;
+
+      this.message.message += emoji;
     },
 
     append(emoji) {
-      this.input += emoji;
+     this.message.message += emoji;
     },
 
     selectAll() {
@@ -757,14 +725,10 @@ export default {
       this.show = false;
     },
     send() {
-      this.message.type = "sent";
-      let today = new Date();
-      let h = today.getHours();
-      let m = today.getMinutes();
-      this.message.timeStamp = h + ":" + m;
-      this.message.message = this.text;
-      this.chats.push(this.message);
-      this.text = "";
+      this.message.room_id = JSON.stringify(this.recipient.id) + "56";
+      this.message.sender_id = "56";
+      this.socket.emit("send_msg", this.message);
+      this.message.message = "";
     },
     selectAttarch() {
       document.querySelector("#attarchment").click();
@@ -778,6 +742,13 @@ export default {
   },
 
   computed: {
+    eventListeners() {
+      this.socket.on("sending_msg", (message) => {
+        console.log(message);
+        this.messages.push(message);
+      });
+      return false;
+    },
     resultQuery() {
       if (this.searchQuery) {
         return this.resources.filter((item) => {

@@ -5,19 +5,26 @@
         <md-card-header>
           <div class="md-title center">Sign Up On Bridge Africa</div>
         </md-card-header>
-
+       <FlashMessage />
         <md-card-content>
           <div class="center">
             <b-row>
               <b-col cols="12" md="6" lg="12" xl="6">
-                <md-button class="  md-raised md-primary b-w">
+                <md-button
+                  @click.prevent="authProvider('facebook')"
+                  class="md-raised md-primary b-w"
+                >
                   <b-icon icon="facebook" aria-hidden="true"></b-icon> Sign Up
                   With Facebook</md-button
                 >
               </b-col>
 
               <b-col cols="12" md="6" lg="12" xl="6">
-                <md-button class="  b-color b-w" style="color:white;">
+                <md-button
+                  @click.prevent="authProvider('google')"
+                  class="b-color b-w"
+                  style="color: white"
+                >
                   <b-icon icon="google" aria-hidden="true"></b-icon> Sign Up
                   with Google</md-button
                 >
@@ -31,7 +38,7 @@
 
           <div class="md-layout md-gutter">
             <div class="md-layout-item md-small-size-100 m-left">
-              <md-field>
+              <md-field :class="getValidationClass('firstName')">
                 <label for="first_name">First Name</label>
                 <md-input
                   type="text"
@@ -47,7 +54,7 @@
             </div>
 
             <div class="md-layout-item md-small-size-100">
-              <md-field>
+              <md-field :class="getValidationClass('lastName')">
                 <label for="lastName"> Last Name</label>
                 <md-input
                   type="text"
@@ -81,12 +88,15 @@
             >
           </md-field>
 
-          <md-field>
+          <md-field :class="getValidationClass('tel')">
             <label for="tel">Tel</label>
             <md-input type="number" name="tel" id="tel" v-model="form.tel" />
+            <span class="md-error" v-if="!$v.form.tel.required"
+              >Tel is required</span
+            >
           </md-field>
 
-          <md-field>
+          <md-field :class="getValidationClass('password')">
             <label for="password">Password</label>
             <md-input
               type="password"
@@ -95,17 +105,24 @@
               v-model="form.password"
               :disabled="sending"
             />
+
+            <span class="md-error" v-if="!$v.form.password.required"
+              >Password is required</span
+            >
           </md-field>
 
-          <md-field>
-            <label for="re-password">Confirm Password</label>
+          <md-field :class="getValidationClass('password')">
+            <label for="confirmPassword">Confirm Password</label>
             <md-input
               type="password"
-              name="password"
-              id="password"
-              v-model="form.password"
+              name="confirmPassword"
+              id="confirmPassword"
+              v-model="form.confirmPassword"
               :disabled="sending"
             />
+            <span class="md-error" v-if="!$v.form.confirmPassword.required"
+              >Password is required</span
+            >
           </md-field>
         </md-card-content>
 
@@ -116,8 +133,8 @@
             <b-col cols="6">
               <md-button
                 type="submit"
-                class="b-color f-left "
-                style="color:white;"
+                class="b-color f-left"
+                style="color: white"
                 :disabled="sending"
               >
                 Sign Up
@@ -125,7 +142,7 @@
             </b-col>
             <b-col cols="6">
               <b-link href="/login" class="f-right">
-                <md-button class=" md-raised ">Login</md-button>
+                <md-button class="md-raised">Login</md-button>
               </b-link>
             </b-col>
           </b-row>
@@ -150,61 +167,100 @@
         >The user {{ lastUser }} was saved with success!</md-snackbar
       >
     </form>
+
+  
   </div>
 </template>
 
 <script>
 import { validationMixin } from "vuelidate";
-import {
-  required,
-  email,
-  minLength,
-  maxLength
-} from "vuelidate/lib/validators";
+import axios from "axios";
+
+import { required, email, minLength } from "vuelidate/lib/validators";
+
 export default {
   name: "FormValidation",
   mixins: [validationMixin],
   data: () => ({
+    baseurl: process.env.baseURL,
     form: {
       firstName: null,
       lastName: null,
       gender: null,
       age: null,
-      email: null
+      email: null,
+      password: null,
+
+      confirmPassword: null,
     },
     userSaved: false,
     sending: false,
-    lastUser: null
+    lastUser: null,
   }),
   validations: {
     form: {
       firstName: {
         required,
-        minLength: minLength(3)
       },
+
       lastName: {
         required,
-        minLength: minLength(3)
       },
-      age: {
+
+      password: {
         required,
-        maxLength: maxLength(3)
       },
-      gender: {
-        required
+
+      confirmPassword: {
+        required,
+        minLength: minLength(4),
       },
+
+      tel: {
+        required,
+      },
+
       email: {
         required,
-        email
-      }
-    }
+        email,
+      },
+    },
   },
+
   methods: {
+    authProvider(provider) {
+      let self = this;
+      this.$auth
+        .authenticate(provider)
+        .then((response) => {
+          self.socialLogin(provider, response);
+          console.log(response);
+        })
+        .catch((err) => {
+          console.log({ err: err });
+        });
+    },
+
+    socialLogin(provider, response) {
+      this.$http
+        .post("user/social/" + provider, response)
+        .then((response) => {
+          console.log(response.data);
+
+          this.$store.commit("auth/setUserData", response.data);
+
+          return response.data.token;
+        })
+        .catch((err) => {
+          console.log({ err: err });
+        });
+    },
+
     getValidationClass(fieldName) {
       const field = this.$v.form[fieldName];
       if (field) {
         return {
-          "md-invalid": field.$invalid && field.$dirty
+          "md-invalid": field.$invalid && field.$dirty,
         };
       }
     },
@@ -212,31 +268,77 @@ export default {
       this.$v.$reset();
       this.form.firstName = null;
       this.form.lastName = null;
-      this.form.age = null;
-      this.form.gender = null;
+
       this.form.email = null;
+      this.password = null;
+      this.confirmPassword = null;
     },
     saveUser() {
       this.sending = true;
-      // Instead of this timeout, here you can call your API
-      window.setTimeout(() => {
-        this.lastUser = `${this.form.firstName} ${this.form.lastName}`;
-        this.userSaved = true;
-        this.sending = false;
-        this.clearForm();
-      }, 1500);
+
+      axios
+        .post("user/register", {
+          first_name: this.form.firstName,
+          last_name: this.form.lastName,
+          email: this.form.email,
+          password: this.form.password,
+          phone: this.form.tel,
+          password_confirmation: this.form.password,
+        })
+        .then((response) => {
+          console.log(response.data);
+          this.$store.commit("auth/setUserData", response.data.data);
+
+          this.flashMessage.show({
+            status: "success",
+            title: "Successfully Register",
+            message:
+              "Thanks for registering. You will get your otp code in a second",
+          });
+
+        
+
+          this.$router.push({ name: "verifyAccount" });
+        })
+        .catch((err) => {
+          this.sending = false;
+
+          if (err.response.status == 422) {
+
+             
+                console.log({ err: err });
+                console.log(err.response.data.message);
+
+                 this.flashMessage.show({
+            status: "error",
+           
+            message: err.response.data.message,
+          });
+
+
+           }else{  
+
+          this.flashMessage.show({
+            status: "error",
+            title: "Registration Failed",
+            message: "Unable to store this data",
+          });
+          console.log({ err: err });
+
+           }
+        });
     },
     validateUser() {
       this.$v.$touch();
       if (!this.$v.$invalid) {
         this.saveUser();
       }
-    }
-  }
+    },
+  },
 };
 </script>
 
-<style scoped>
+<style  scoped>
 .f-right {
   float: left;
 }

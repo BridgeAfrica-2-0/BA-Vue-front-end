@@ -162,33 +162,33 @@
               <div class="col-md-12">
                 <form ref="form" @submit.stop.prevent="handleSubmit">
                   <b-form-group
-                    label="Worked At :"
+                  label="Worked At :"
                     label-for="work_at"
-                    invalid-feedback="worked at is required"
+                  invalid-feedback="worked at is required"
                     :state="workedAtState"
                   >
                     <b-form-input
-                      id="work_at"
-                      placeholder="work_at"
+                    id="work_at"
+                    placeholder="work_at"
                       :state="workedAtState"
                       required
                       v-model="userProfileOwnerInput.workedAt"
-                      :class="{
+                    :class="{
                         'is-valid': userProfileOwnerInput.workedAt !== '',
                         'is-invalid': userProfileOwnerInput.workedAt === ''
                       }"
                     ></b-form-input>
                   </b-form-group>
                   <b-form-group
-                    label="Studied At :"
+                  label="Studied At :"
                     label-for="studied_at"
-                    invalid-feedback="studied at is required"
+                  invalid-feedback="studied at is required"
                     :state="studiedAtState"
                   >
                     <b-form-input
-                      id="studied_at"
-                      placeholder="studied at"
-                      :state="studiedAtState"
+                    id="studied_at"
+                    placeholder="studied at"
+                    :state="studiedAtState"
                       required
                       v-model="userProfileOwnerInput.studiedAt"
                       :class="{
@@ -198,15 +198,15 @@
                     ></b-form-input>
                   </b-form-group>
                   <b-form-group
-                    label="Home Town :"
+                  label="Home Town :"
                     label-for="home_town"
-                    invalid-feedback="home town at is required"
+                  invalid-feedback="home town at is required"
                     :state="homeTownState"
                   >
                     <b-form-input
-                      id="home_town"
-                      placeholder="home town"
-                      :state="homeTownState"
+                    id="home_town"
+                    placeholder="home town"
+                    :state="homeTownState"
                       required
                       v-model="userProfileOwnerInput.homeTown"
                       :class="{
@@ -216,14 +216,14 @@
                     ></b-form-input>
                   </b-form-group>
                   <b-form-group
-                    label="Current City :"
+                  label="Current City :"
                     label-for="city"
                     invalid-feedback="current city is required"
-                    :state="currentCityState"
+                  :state="currentCityState"
                   >
                     <b-form-input
-                      id="city"
-                      placeholder="Current City"
+                    id="city"
+                    placeholder="Current City"
                       :state="currentCityState"
                       required
                       v-model="userProfileOwnerInput.currentCity"
@@ -245,7 +245,7 @@
         <!-- User Profile Post Community-->
         <Community />
 
-        <!-- User Profile Post Media-->
+
         <Media />
       </b-col>
       <b-col md="12" lg="7" xl="8" class="m-0 p-0 px-lg-4">
@@ -262,6 +262,8 @@ import "@morioh/v-lightbox/dist/lightbox.css";
 import Community from "./comunitiDashboard";
 import Owner_post from "./owner_post";
 import Media from "../../media";
+// import CreatePost from "../../createPost";
+// import Post from "../../post";
 export default {
   name: "posts",
   components: {
@@ -287,10 +289,8 @@ export default {
             })
             .catch( error => { console.log( error ) });
 
-  },
-  mounted() {
-    //this.userProfileOwner = this.$store.getters.getUserPostIntro;
-  },
+
+
   data() {
     return {
       images: [
@@ -341,53 +341,14 @@ export default {
   },
 
   methods: {
-    checkFormValidity() {
-      //const valid = this.$refs.form.checkValidity();
-      this.workedAtState = this.userProfileOwnerInput.workedAt !== "";
-      this.studiedAtState = this.userProfileOwnerInput.studiedAt !== "";
-      this.homeTownState = this.userProfileOwnerInput.homeTown !== "";
-      this.currentCityState = this.userProfileOwnerInput.currentCity !== "";
-      return (
-        this.studiedAtState &&
-        this.workedAtState &&
-        this.homeTownState &&
-        this.currentCityState
-      );
-    },
-    resetModal() {
-      this.workedAtState = null;
-      this.studiedAtState = null;
-      this.homeTownState = null;
-      this.currentCityState = null;
-    },
-    handleOk(bvModalEvt) {
-      // Prevent modal from closing
-      bvModalEvt.preventDefault();
-      // Trigger submit handler
-      this.handleSubmit();
-    },
-    handleSubmit() {
-      // Exit when the form isn't valid
-      if (!this.checkFormValidity()) {
-        return;
-      }
-
-      console.log("Send User Info Post");
-      //console.log(this.userProfileOwnerInput);
-      this.$store.dispatch("editPostUserIntro", {
-        workedAt: this.userProfileOwnerInput.workedAt,
-        studiedAt: this.userProfileOwnerInput.studiedAt,
-        homeTown: this.userProfileOwnerInput.homeTown,
-        currentCity: this.userProfileOwnerInput.currentCity,
-        numbersOfFollowers: this.userProfileOwnerInput.numbersOfFollowers
-      });
-
-      // Hide the modal manually
-      this.$nextTick(() => {
-        this.$bvModal.hide("modal-5");
-      });
+    chooseFiles: function() {
+      console.log("helloo fucker");
+        document.getElementById("fileUpload").click()
     }
-  }
+    },
+
+
+
 };
 </script>
 

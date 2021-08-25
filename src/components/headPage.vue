@@ -1,7 +1,11 @@
 <template>
   <div>
-    <img src="@/assets/img/banner.jpg" class="img-fluid header-pic" />
     <b-container fluid>
+      <img
+        src="@/assets/img/banner.jpg"
+        class="img-fluid header-pic"
+      />
+        <b-container fluid>
       <div>
         <b-avatar
           src="https://placekitten.com/300/300"
@@ -22,7 +26,7 @@
               </h5>
               <br />
               <p class="m-0  d-inline-block header-text2">
-                @User Name Alias <br />
+                @User Name Alias <br>
                 <small>2.5k Community</small>
               </p>
             </span>
@@ -38,13 +42,9 @@
                 </b-button>
                 <b-dropdown class="drop-down dots btns">
                   <template class="btns" #button-content>
-                    <b-icon
-                      class="primary btns"
-                      icon="three-dots"
-                      aria-hidden="true"
-                    ></b-icon>
+                    <b-icon class="primary btns" icon="three-dots" aria-hidden="true"></b-icon>
                   </template>
-                  <b-dropdown-item-button>
+                  <b-dropdown-item-button >
                     <b-icon icon="lock-fill" aria-hidden="true"></b-icon>
                     Locked <span class="sr-only">(Click to unlock)</span>
                   </b-dropdown-item-button>
@@ -68,17 +68,13 @@
                   <b-dropdown-item-button
                     >Some other action</b-dropdown-item-button
                   >
-                  <b-dropdown-divider></b-dropdown-divider>
-                  <b-dropdown-item-button variant="danger">
-                    <b-icon icon="trash-fill" aria-hidden="true"></b-icon>
-                    Delete
-                  </b-dropdown-item-button>
+                  <b-dropdown-item>View As</b-dropdown-item>
                 </b-dropdown>
-              </b-button-group>
-            </span>
-          </div>
-        </div>
-      </div>
+              </span>
+            </div>
+          </b-col>
+        </b-row>
+      </b-container>
     </b-container>
   </div>
 </template>
@@ -93,16 +89,16 @@ export default {
 .btn {
   background-color: #fff;
   opacity: 0.8;
-  border: solid 1px #e75c18;
+  border: solid 1px  #e75c18;
 }
-.dots {
-  border: solid 1px #e75c18;
+.dots{
+  border: solid 1px  #e75c18;
 }
-.btns {
+.btns{
   background-color: #fff;
   opacity: 0.8;
 }
-.header-group {
+.header-group{
   position: relative;
   top: -100px;
   left: -50px;
@@ -119,14 +115,14 @@ export default {
     float: left;
   }
 
-  .text-box {
-    margin-top: 1.5rem;
-    text-align: left;
-  }
+.text-box {
+  margin-top: 1.5rem;
+  text-align: left;
+}
 
-  .position-loup {
-    display: none;
-  }
+.position-loup {
+  display: none;
+}
 
   .owner-profile-image-profile {
     margin: -30px 10px 0px 5px;
@@ -217,6 +213,7 @@ export default {
     width: 12rem;
     height: 12rem;
     border: 3px solid #fff;
+    
   }
 
   .header-text1 {
@@ -251,10 +248,13 @@ export default {
     right: 10px;
   }
 }
+
+
 </style>
 
-<style>
-.banner {
-  object-fit: cover !important;
-}
-</style>
+<style>  
+
+.banner{
+
+object-fit: cover  !important;
+}   </style>

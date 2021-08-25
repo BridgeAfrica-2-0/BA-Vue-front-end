@@ -421,7 +421,7 @@ import Comment from "./comment";
 export default {
   name: "postNetwork",
   components: {
-    Comment
+    Comment,
   },
   data() {
     return {
@@ -444,18 +444,18 @@ export default {
         "https://i.wifegeek.com/200426/177ef44c.jpg",
         "https://i.wifegeek.com/200426/d74d9040.jpg",
         "https://i.wifegeek.com/200426/81e24a47.jpg",
-        "https://i.wifegeek.com/200426/43e2e8bb.jpg"
+        "https://i.wifegeek.com/200426/43e2e8bb.jpg",
       ],
       imagees: [
         "https://pbs.twimg.com/media/DoNa_wKUUAASSCF.jpg",
-        "https://pbs.twimg.com/media/DKO62sVXUAA0_AL.jpg"
+        "https://pbs.twimg.com/media/DKO62sVXUAA0_AL.jpg",
       ],
 
       imagees3: [
         "https://pbs.twimg.com/media/DoNa_wKUUAASSCF.jpg",
         "https://pbs.twimg.com/media/DoNa_wKUUAASSCF.jpg",
-        "https://pbs.twimg.com/media/DKO62sVXUAA0_AL.jpg"
-      ]
+        "https://pbs.twimg.com/media/DKO62sVXUAA0_AL.jpg",
+      ],
     };
   },
 
@@ -477,8 +477,8 @@ export default {
     },
     hideModal() {
       this.$refs["modal-3"].hide();
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -636,6 +636,11 @@ export default {
 
 .btn:hover {
   background-color: #ccc;
+}
+.options {
+  position: relative;
+  top: -34px;
+  left: 25px;
 }
 </style>
 

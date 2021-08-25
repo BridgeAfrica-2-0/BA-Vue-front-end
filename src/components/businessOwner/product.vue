@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="people-style shadow">
-      <b-row >
+      <b-row>
         <b-col cols="5" lg="4" sm="4" md="5">
           <div class="center-img">
             <img
@@ -10,15 +10,39 @@
             />
           </div>
         </b-col>
-        <b-col cols="7" sm="8" md="7">
+        <b-col cols="7" sm="8" md="6">
           <p class="text">
-            <strong class="title"> {{product.name}} </strong> <br />
+            <strong class="title"> {{ product.name }} </strong> <br />
             <strong> Description </strong> <br />
-             {{product.description.substring(0, 30)}}
-            <b-link v-if="product.description.length >= 30"> see more </b-link> <br />
+            {{ product.description.substring(0, 30) }}
+            <b-link v-if="product.description.length >= 30"> see more </b-link>
+            <br />
 
-            <span class="price"> <strong> {{product.price}} Fcfa </strong> </span> <br />
+            <span class="price">
+              <strong> {{ product.price }} Fcfa </strong>
+            </span>
+            <br />
           </p>
+        </b-col>
+        <b-col cols="1">
+          <b-dropdown
+            class="options ml-1 mt-2"
+            variant="primary"
+            size="sm"
+            id="dropdown-left"
+          >
+            <template #button-content>
+              <b-icon icon="three-dots" aria-hidden="true"></b-icon>
+            </template>
+            <b-dropdown-item-button @click="editProduct">
+              <b-icon icon="pencil" aria-hidden="true"></b-icon>
+              Edit
+            </b-dropdown-item-button>
+            <b-dropdown-item-button @click="deleteProduct">
+              <b-icon icon="trash" aria-hidden="true"></b-icon>
+              Delete
+            </b-dropdown-item-button>
+          </b-dropdown>
         </b-col>
       </b-row>
 
@@ -144,9 +168,11 @@
           ></b-img>
         </b-col>
         <b-col>
-          <h2 class="mb-4 text-center">{{product.name}}</h2>
-          <p><span class="stock" v-if="product.in_stock == 1">In Stock</span></p>
-          <p>{{product.price}} XAF</p>
+          <h2 class="mb-4 text-center">{{ product.name }}</h2>
+          <p>
+            <span class="stock" v-if="product.in_stock == 1">In Stock</span>
+          </p>
+          <p>{{ product.price }} XAF</p>
           <hr />
           <b-row>
             <b-col>
@@ -161,7 +187,7 @@
           <hr />
           <h5>Product Detail</h5>
           <p>
-           {{product.description}}
+            {{ product.description }}
           </p>
           <hr />
           <b-row>
@@ -388,7 +414,7 @@
 
 <script>
 export default {
-  props:['product'],
+  props: ["product"],
   data() {
     return {
       viewProduct: false,
@@ -403,6 +429,12 @@ export default {
      */
     productDetails() {
       this.viewProduct = true;
+    },
+    deleteProduct() {
+      this.$emit("delete-product", this.product);
+    },
+    editProduct() {
+      this.$emit("edit-product", this.product);
     },
   },
 };

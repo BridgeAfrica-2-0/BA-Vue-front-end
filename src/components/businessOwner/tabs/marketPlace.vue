@@ -9,18 +9,29 @@
       style="margin-top: -6px;"
       @click="createProduct"
     >
-      Add product
+      Add Product
     </button>
 
     <hr />
 
     <div class="products ">
       <div class="col-md-6" v-for="(product, index) in products" :key="index">
-        <Product :product="product" />
+        <Product
+          @delete-product="deleteProduct($event, product)"
+          @edit-product="editProduct($event, product)"
+          :product="product"
+        />
       </div>
+      <span v-if="!products" class="no-product">
+        <h3>No product to show !!</h3>
+      </span>
     </div>
 
-    <b-modal hide-footer title="Add product" v-model="showModal">
+    <b-modal
+      hide-footer
+      :title="action == 'edit' ? 'Edit product' : 'Add Product'"
+      v-model="showModal"
+    >
       <b-form>
         <b-row>
           <b-col cols="12" md="6">
@@ -95,7 +106,19 @@
         >
           This Product Is On Discount
         </b-form-checkbox>
-
+        <b-form-group
+          v-if="newProduct.on_discount == 1"
+          id="conditions"
+          label="Discount price"
+          label-for="input-1"
+          label-size="sm"
+        >
+          <b-form-input
+            v-model="newProduct.discount_price"
+            class="mt-1"
+            id="conditions"
+          ></b-form-input>
+        </b-form-group>
         <b-form-group
           id="conditions"
           label="Conditions"
@@ -125,15 +148,18 @@
           In stock
         </b-form-checkbox>
 
-        <b-form-checkbox value="1" unchecked-value="0">
+        <b-form-checkbox
+          value="1"
+          v-model="newProduct.status"
+          unchecked-value="0"
+        >
           Published
         </b-form-checkbox>
         <b-alert v-if="success" :variant="val" show> {{ msg }} </b-alert>
         <b-button @click="addProduct" class="mt-2 btn-block" variant="primary">
           <b-spinner v-if="load" variant="white"></b-spinner>
-
-          Add</b-button
-        >
+          {{ action == "edit" ? "Edit" : "Add" }}
+        </b-button>
       </b-form>
     </b-modal>
   </div>
@@ -151,17 +177,19 @@ export default {
         name: "",
         description: "",
         picture: "",
-        price: "",
-        in_stock: "",
-        on_discount: null,
-        discount_price: "",
+        price: null,
+        in_stock: 0,
+        on_discount: 0,
+        discount_price: null,
         condition: "",
-        is_service: null,
+        is_service: 0,
+        status: 0,
       },
       products: [],
       val: "",
       msg: "",
       success: false,
+      action: null,
     };
   },
   components: {
@@ -174,41 +202,73 @@ export default {
   },
   methods: {
     getProducts() {
-      axios.get("market/products/1").then((res) => {
+      axios.get("market/products/1").then(res => {
         this.products = res.data.data.data;
       });
     },
-    addProduct() {
+    addProduct(mode) {
       this.load = true;
       let fd = new FormData();
+      fd.append("business_id", 1);
       fd.append("name", this.newProduct.name);
       fd.append("description", this.newProduct.description);
       fd.append("picture", this.newProduct.picture);
       fd.append("price", this.newProduct.price);
       fd.append("in_stock", this.newProduct.in_stock);
       fd.append("on_discount", this.newProduct.on_discount);
-      fd.append("discount_price", this.newProduct.discount_price);
+      if (this.newProduct.on_discount == 0) {
+        fd.append("discount_price", 0.0);
+      } else {
+        fd.append("discount_price", this.newProduct.discount_price);
+      }
       fd.append("condition", this.newProduct.condition);
       fd.append("is_service", this.newProduct.is_service);
+      fd.append("status", this.newProduct.status);
+      if (this.action == "edit") {
+        fd.append("_method", "PUT");
+        axios
+          .post(`market/${this.newProduct.id}`, fd)
+          .then(res => {
+            this.load = false;
+            (this.success = true), (this.val = "success");
+            this.msg = "Operation was successful !!";
+            this.getProducts();
+            setTimeout(() => {
+              this.success = false;
+            }, 5000);
+          })
+          .catch(err => {
+            console.log(err);
+            this.load = false;
+            (this.success = true), (this.val = "danger");
+            this.msg =
+              "Check you entries all field are required and prices are numbers !!";
 
-      axios
-        .post("market", fd)
-        .then((res) => {
-          this.load = false;
-          (this.success = true), (this.val = "success");
-          this.msg = "Operation was successful !!";
-          this.getProducts();
-        })
-        .catch((err) => {
-          this.load = false;
-          (this.success = true), (this.val = "danger");
-          this.msg = "Something wen't wrong !!";
+            setTimeout(() => {
+              this.success = false;
+            }, 5000);
+          });
+      } else {
+        axios
+          .post("market", fd)
+          .then(res => {
+            this.load = false;
+            (this.success = true), (this.val = "success");
+            this.msg = "Operation was successful !!";
+            this.getProducts();
+          })
+          .catch(err => {
+            console.log(err);
+            this.load = false;
+            (this.success = true), (this.val = "danger");
+            this.msg =
+              "Check you entries all field are required and prices are numbers !!";
 
-          setTimeout(() => {
-            this.success = false
-          },5000)
-
-        });
+            setTimeout(() => {
+              this.success = false;
+            }, 5000);
+          });
+      }
     },
     picImage() {
       document.querySelector("#image").click();
@@ -216,7 +276,29 @@ export default {
     getImage(e) {
       this.newProduct.picture = e.target.files[0];
     },
+    deleteProduct(event, product) {
+      axios.delete(`market/${product.id}`).then(() => {
+        this.getProducts();
+      });
+    },
+    editProduct(event, product) {
+      this.newProduct = product;
+      this.action = "edit";
+      this.showModal = !this.showModal;
+    },
     createProduct() {
+      this.action = "";
+      this.newProduct.name = "";
+      this.newProduct.description = "";
+      this.newProduct.picture = "";
+      this.newProduct.price = null;
+      this.newProduct.in_stock = 0;
+      this.newProduct.on_discount = 0;
+      this.newProduct.discount_price = null;
+      this.newProduct.condition = "";
+      this.newProduct.is_service = 0;
+      this.newProduct.status = 0;
+
       this.showModal = !this.showModal;
     },
   },
@@ -224,6 +306,11 @@ export default {
 </script>
 
 <style scoped>
+.no-product {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
 .products {
   display: flex;
   flex-wrap: wrap;

@@ -17,7 +17,6 @@
             <b-row @click="viewNetwork(network)">
               <b-col md="3" xl="3" lg="3" cols="5" sm="3">
                 <div class="center-img" v-b-modal.modal-1>
-                  {{ network.business_image }}
                   <img
                     :src="
                       `http://team2dev.maxinemoffett.com/${network.business_image}`

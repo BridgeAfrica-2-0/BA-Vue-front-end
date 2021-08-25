@@ -121,7 +121,7 @@ export default {
     deleteAll(data) {
       this.checked = false;
       let ids = [];
-      data.forEach((element) => {
+      data.forEach(element => {
         ids.push(element.id);
       });
       this.deleteNotifications(ids);
@@ -133,7 +133,7 @@ export default {
 
     // select all the notifications
     selectall() {
-      this.getNotificationsStore.forEach((element) => {
+      this.getNotificationsStore.forEach(element => {
         this.selected.push(element);
       });
     },

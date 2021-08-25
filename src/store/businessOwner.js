@@ -1,5 +1,6 @@
 import axios from "axios";
-
+axios.defaults.headers.common["Authorization"] =
+  "Bearer " + localStorage.getItem("access_token");
 export default {
   namespaced: true,
   state: {
@@ -64,13 +65,12 @@ export default {
     },
   },
   actions: {
- 
     // Get networks from the backend
     async getNetworks({ commit }) {
       commit("setLoader", true);
       await axios
         .get("network")
-        .then((res) => {
+        .then(res => {
           commit("setLoader", false);
           commit("setSuccess", true);
           commit("setNetworks", res.data.data);
@@ -78,7 +78,7 @@ export default {
             commit("setSuccess", false);
           }, 2000);
         })
-        .catch((err) => {
+        .catch(err => {
           console.log("Unauthorized request !!");
         });
     },
@@ -87,10 +87,10 @@ export default {
     async addNetwork({ dispatch, commit }, newNetwork) {
       axios
         .post("/network", newNetwork)
-        .then((res) => {
+        .then(res => {
           dispatch("getNetworks");
         })
-        .catch((err) => {
+        .catch(err => {
           console.log("Something went wrong");
         });
     },
@@ -100,10 +100,10 @@ export default {
       commit("setLoader", true);
       axios
         .put(`network/${editedNetwork.id}`, editedNetwork)
-        .then(async (res) => {
+        .then(async res => {
           dispatch("getNetworks");
         })
-        .catch((err) => {
+        .catch(err => {
           console.log("Something went wrong");
         });
     },
@@ -114,7 +114,7 @@ export default {
 
       await axios
         .get("notification")
-        .then((res) => {
+        .then(res => {
           commit("setLoader", false);
           commit("setSuccess", true);
           commit("setNotifications", res.data.data);
@@ -122,7 +122,7 @@ export default {
             commit("setSuccess", false);
           }, 2000);
         })
-        .catch((err) => {
+        .catch(err => {
           commit("setLoader", false);
           console.log("Unauthorized request !!");
         });
@@ -134,7 +134,7 @@ export default {
         ids: [],
       };
 
-      payload.forEach((element) => {
+      payload.forEach(element => {
         let objId = {
           id: null,
         };
@@ -146,7 +146,7 @@ export default {
         .then(() => {
           dispatch("getNotifications");
         })
-        .catch((err) => [console.log(err)]);
+        .catch(err => [console.log(err)]);
     },
 
     // Delete All Notifications
@@ -155,7 +155,7 @@ export default {
         ids: [],
       };
 
-      payload.forEach((element) => {
+      payload.forEach(element => {
         let objId = {
           id: null,
         };

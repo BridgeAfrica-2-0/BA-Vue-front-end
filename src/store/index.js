@@ -4,11 +4,10 @@ import Vuex from "vuex";
 import axios from "axios";
 
 Vue.use(Vuex);
-axios.defaults.baseURL = "https://e4f5730e80f9.ngrok.io/api/v1";
+axios.defaults.baseURL = process.env.VUE_APP_baseURL;
 
 const getDefaultState = () => {
   return {
-    token: "5|ZrS4NiZ9yXrSZ5b80aqtNsnijikEfUUXBMF51R7N",
     //ndetails: []
     ndetails: [
       {
@@ -30,7 +29,7 @@ const actions = {
   getndetails({ commit }) {
     return axios
       .get("", {
-        headers: { Authorization: `Bearer ${state.token}` }
+        headers: { Authorization: `Bearer 5|ZrS4NiZ9yXrSZ5b80aqtNsnijikEfUUXBMF51R7N` }
       })
       .then(function({ data }) {
         commit("set_details", data.data);

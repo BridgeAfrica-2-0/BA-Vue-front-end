@@ -9,7 +9,7 @@
         </h6>
       </span>
       <p class="text">
-        Discover how customers feel about and interact with you
+        Discover how customers feel about and interact with you  {{myValue.business[selectedb-2].total_shares}}
       </p>
 
       <div class="a-content">
@@ -42,18 +42,17 @@ export default {
     return {
       options,
       chartData: {
-        labels: ["Posts 33k", "Visit 1.4k", "Share 870"],
+        labels: ["Posts 33k"+this.$store.state.details.business[this.selectedb-2].total_shares, "Visit 1.4k"+this.$store.state.details.business[this.selectedb-2].total_visit, "Share 870"],
         datasets: [
           {
             backgroundColor: ["#f2f200", "#8c008a", "#40c600"],
             data: [
-              this.myValue.total_post,
-              this.myValue.total_visit,
-              21
+              this.$store.state.details.business[this.selectedb-2].total_shares,3,2
             ]
           }
         ]
       }
+
     };
   },
   computed: {
@@ -65,11 +64,21 @@ export default {
     }
   },
   props: ["selectedb"],
-  // computed: {
-  //   business() {
-  //     return this.$store.getters.getdetails.business;
-  //   }
-  // },
+
+  watch: {
+
+    selectedb:function(newVal) {
+
+     // this.update();
+      console.log(newVal);
+      console.log("hello you")
+
+    }
+
+  },
+
+
+
 
   created() {
     this.$store

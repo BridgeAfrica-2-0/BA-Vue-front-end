@@ -5,6 +5,19 @@ export default {
   name: "lineChart",
   extends: Doughnut,
   props: ["chartData", "options"],
+
+  watch: {
+
+    chartData:function(newVal) {
+
+      this.update();
+      console.log(newVal);
+      console.log("hello you")
+
+    }
+
+  },
+
   methods: {
     update() {
       this.$data._chart.update();

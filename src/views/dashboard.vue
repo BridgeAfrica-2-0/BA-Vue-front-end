@@ -60,7 +60,7 @@
           <b-col md="6" sm="12" class="mt-2">
             <BusinessDashboard :selectedb="selectedb" />
           </b-col>
-          <b-col md="6" sm="12" class="mt-2"> <Insights /> </b-col>
+          <b-col md="6" sm="12" class="mt-2"> <Insights :selectedb="selectedb"/> </b-col>
         </b-row>
       </div>
       <br />

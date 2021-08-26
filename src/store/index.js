@@ -5,7 +5,7 @@ import auth from "./auth";
 import axios from "axios";
 
 Vue.use(Vuex);
-axios.defaults.baseURL = "https://8599-154-72-150-69.ngrok.io/api/v1";
+axios.defaults.baseURL = "https://1287-154-72-150-20.ngrok.io/api/v1";
 
 const getDefaultState = () => {
   return {
@@ -847,7 +847,7 @@ const getDefaultState = () => {
 
     bdetails: [],
 
-    /*details: {
+   /* details: {
       owner: [
         {
           fullname: "",
@@ -951,13 +951,11 @@ const actions = {
 const mutations = {
   setdetails(state, details) {
     state.details = details;
-    console.log(state.details, "+++++++++++++++++++++++++++++++++++++mut");
   }
 };
 
 const getters = {
   getdetails(state) {
-    console.log(state.details, "-----------------------------------------");
     return state.details;
   },
   getbdetails(state) {

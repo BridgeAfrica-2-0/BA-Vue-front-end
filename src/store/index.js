@@ -861,6 +861,9 @@ const getDefaultState = () => {
           numbersOfFollowers: 30,
           messages: 20,
           notifications: 30,
+          post: 5,
+          visits: 12,
+          shares: 60,
           website: "www.typw.com"
         }
       ],
@@ -879,6 +882,9 @@ const getDefaultState = () => {
           numbersOfFollowers: 150,
           messages: 12,
           notifications: 13,
+          post: 55,
+          visits: 12,
+          shares: 105,
           website: "www.typw.com"
         },
         {
@@ -895,6 +901,9 @@ const getDefaultState = () => {
           numbersOfFollowers: 900,
           messages: 18,
           notifications: 45,
+          post: 50,
+          visits: 6,
+          shares: 60,
           website: "www.typw.com"
         },
         {
@@ -911,6 +920,9 @@ const getDefaultState = () => {
           numbersOfFollowers: 950,
           messages: 6,
           notifications: 981,
+          post: 5,
+          visits: 12,
+          shares: 12,
           website: "www.typw.com"
         }
       ]

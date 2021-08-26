@@ -154,13 +154,6 @@ export default {
 
       category: "",
 
-      // boptions: [
-      //   { value: "owner", text: "Owner's Name" },
-      //   { value: "a", text: "Business Name 1" },
-      //   { value: "b", text: "Business Name 2" },
-      //   { value: "c", text: "Business Name 3" }
-      // ],
-      //{ value: "owner", text: "Owner's Name" }
       boptions: [],
 
       detail: null
@@ -203,19 +196,6 @@ export default {
       console.log(businesses);
       return this.boptions;
     }
-    // selectBusiness(value) {
-    //   let boptions = [];
-    //   this.boptions.push({
-    //     value: this.details.username,
-    //     text: this.details.username
-    //   });
-    //   const items = this.$store.state.details.map(item => {
-    //     return { value: item.username, text: item.username };
-    //   });
-    //   this.boptions.push(...items);
-    //   console.log(this.boptions);
-    //   console.log("popopo-----------++++++++++++");
-    // }
   },
 
   mounted() {},

@@ -46,16 +46,16 @@
           <p class="mb-1 ">
             <b-icon-chat-fill class="text-primary"></b-icon-chat-fill>
             Message
-            <span class="badge rounded-pill bg-primary float-right mt-1">{{
-              item.message
-            }}</span>
+            <span class="badge rounded-pill bg-primary float-right mt-1">
+              {{ item.message }}
+            </span>
           </p>
           <p class="mb-1 ">
             <b-icon-bell-fill class="text-primary"></b-icon-bell-fill>
             Notifications
-            <span class="badge rounded-pill bg-primary float-right mt-1">{{
-              item.notification
-            }}</span>
+            <span class="badge rounded-pill bg-primary float-right mt-1">
+              {{ item.notification }}
+            </span>
           </p>
         </div>
       </div>

@@ -847,77 +847,75 @@ const getDefaultState = () => {
 
     bdetails: [],
 
-    // details: [
-    //   {
-    //     owner: [
-    //       {
-    //         fullname: "",
-    //         username: "(profile)Thorfinn",
-    //         email: "",
-    //         password: "",
-    //         category: "Information",
-    //         profileName: "Thorfinn",
-    //         profilePicture: "https://pbs.twimg.com/media/DoNa_wKUUAASSCF.jpg",
-    //         coverImage: "https://pbs.twimg.com/media/DKO62sVXUAA0_AL.jpg",
-    //         numbersOfFollowers: 30,
-    //         messages: 20,
-    //         notifications: 30,
-    //         website: "www.typw.com"
-    //       }
-    //     ],
-    //     business: [
-    //       {
-    //         id: 1,
-    //         type: "business",
-    //         fullname: "",
-    //         username: "Bridge africa",
-    //         email: "",
-    //         password: "",
-    //         category: "Agriculture",
-    //         profileName: "Thorfinn",
-    //         profilePicture: "https://pbs.twimg.com/media/DoNa_wKUUAASSCF.jpg",
-    //         coverImage: "https://pbs.twimg.com/media/DKO62sVXUAA0_AL.jpg",
-    //         numbersOfFollowers: 150,
-    //         messages: 12,
-    //         notifications: 13,
-    //         website: "www.typw.com"
-    //       },
-    //       {
-    //         id: 2,
-    //         type: "business",
-    //         fullname: "",
-    //         username: "Kharlsefni Thorfinn",
-    //         email: "",
-    //         password: "",
-    //         category: "Technology",
-    //         profileName: "Thorfinn",
-    //         profilePicture: "https://pbs.twimg.com/media/DoNa_wKUUAASSCF.jpg",
-    //         coverImage: "https://pbs.twimg.com/media/DKO62sVXUAA0_AL.jpg",
-    //         numbersOfFollowers: 900,
-    //         messages: 18,
-    //         notifications: 45,
-    //         website: "www.typw.com"
-    //       },
-    //       {
-    //         id: 3,
-    //         type: "business",
-    //         fullname: "",
-    //         username: "Peter Pierre",
-    //         email: "",
-    //         password: "",
-    //         category: "Marketing",
-    //         profileName: "Thorfinn",
-    //         profilePicture: "https://pbs.twimg.com/media/DoNa_wKUUAASSCF.jpg",
-    //         coverImage: "https://pbs.twimg.com/media/DKO62sVXUAA0_AL.jpg",
-    //         numbersOfFollowers: 950,
-    //         messages: 6,
-    //         notifications: 981,
-    //         website: "www.typw.com"
-    //       }
-    //     ]
-    //   }
-    // ]
-    details: []
+    details: {
+      owner: [
+        {
+          fullname: "",
+          username: "(profile)Thorfinn",
+          email: "",
+          password: "",
+          category: "Information",
+          profileName: "Thorfinn",
+          profilePicture: "https://pbs.twimg.com/media/DoNa_wKUUAASSCF.jpg",
+          coverImage: "https://pbs.twimg.com/media/DKO62sVXUAA0_AL.jpg",
+          numbersOfFollowers: 30,
+          messages: 20,
+          notifications: 30,
+          website: "www.typw.com"
+        }
+      ],
+      business: [
+        {
+          id: 1,
+          type: "business",
+          fullname: "",
+          username: "Bridge africa",
+          email: "",
+          password: "",
+          category: "Agriculture",
+          profileName: "Thorfinn",
+          profilePicture: "https://pbs.twimg.com/media/DoNa_wKUUAASSCF.jpg",
+          coverImage: "https://pbs.twimg.com/media/DKO62sVXUAA0_AL.jpg",
+          numbersOfFollowers: 150,
+          messages: 12,
+          notifications: 13,
+          website: "www.typw.com"
+        },
+        {
+          id: 2,
+          type: "business",
+          fullname: "",
+          username: "Kharlsefni Thorfinn",
+          email: "",
+          password: "",
+          category: "Technology",
+          profileName: "Thorfinn",
+          profilePicture: "https://pbs.twimg.com/media/DoNa_wKUUAASSCF.jpg",
+          coverImage: "https://pbs.twimg.com/media/DKO62sVXUAA0_AL.jpg",
+          numbersOfFollowers: 900,
+          messages: 18,
+          notifications: 45,
+          website: "www.typw.com"
+        },
+        {
+          id: 3,
+          type: "business",
+          fullname: "",
+          username: "Peter Pierre",
+          email: "",
+          password: "",
+          category: "Marketing",
+          profileName: "Thorfinn",
+          profilePicture: "https://pbs.twimg.com/media/DoNa_wKUUAASSCF.jpg",
+          coverImage: "https://pbs.twimg.com/media/DKO62sVXUAA0_AL.jpg",
+          numbersOfFollowers: 950,
+          messages: 6,
+          notifications: 981,
+          website: "www.typw.com"
+        }
+      ]
+    }
+    // details: []
   };
 };
 
@@ -933,7 +931,7 @@ const actions = {
       .then(function({ data }) {
         commit("setdetails", data.data);
         console.log(data);
-        return data.data
+        return data.data;
       });
   }
 };
@@ -941,15 +939,14 @@ const actions = {
 const mutations = {
   setdetails(state, details) {
     state.details = details;
-    console.log(state.details,"+++++++++++++++++++++++++++++++++++++mut");
+    console.log(state.details, "+++++++++++++++++++++++++++++++++++++mut");
   }
 };
 
 const getters = {
   getdetails(state) {
-    console.log(state.details,"-----------------------------------------");
+    console.log(state.details, "-----------------------------------------");
     return state.details;
-
   },
   getbdetails(state) {
     return state.details.business;

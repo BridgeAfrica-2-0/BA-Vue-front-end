@@ -328,7 +328,261 @@ const getDefaultState = () => {
         email: "gregre@gmail.com",
         password: "987654321"
       }
-    ]
+    ],
+    profile_community: {
+      people: {
+        followers: [
+          {
+            id: 1,
+            picture:
+              "https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg",
+            name: "howty Itz blec 1",
+            community: 5000,
+            messages: [],
+            communities: []
+          },
+          {
+            id: 2,
+            picture:
+              "https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg",
+            name: "howty Itz blec 2",
+            community: 500,
+            messages: [],
+            communities: []
+          },
+          {
+            id: 3,
+            picture:
+              "https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg",
+            name: "howty Itz blec 3",
+            community: 123,
+            messages: [],
+            communities: []
+          },
+          {
+            id: 4,
+            picture:
+              "https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg",
+            name: "howty Itz blec 4",
+            community: 1245,
+            messages: [],
+            communities: []
+          },
+          {
+            id: 5,
+            picture:
+              "https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg",
+            name: "howty Itz blec 5",
+            community: 25,
+            messages: [],
+            communities: []
+          }
+        ],
+        followings: [
+          {
+            id: 1,
+            picture:
+              "https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg",
+            name: "howty Itz blec 6",
+            community: 100,
+            messages: [],
+            communities: []
+          },
+          {
+            id: 2,
+            picture:
+              "https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg",
+            name: "howty Itz blec 7",
+            community: 265,
+            messages: [],
+            communities: []
+          },
+          {
+            id: 3,
+            picture:
+              "https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg",
+            name: "howty Itz blec 8",
+            community: 28572,
+            messages: [],
+            communities: []
+          },
+          {
+            id: 4,
+            picture:
+              "https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg",
+            name: "howty Itz blec 9",
+            community: 25,
+            messages: [],
+            communities: []
+          },
+          {
+            id: 5,
+            picture:
+              "https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg",
+            name: "howty Itz blec 10",
+            community: 32,
+            messages: [],
+            communities: []
+          }
+        ]
+      },
+      business: {
+        followers: [
+          {
+            id: 1,
+            picture:
+              "https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg",
+            name: "Super Car peter",
+            category: "Car marketing",
+            community: 20220,
+            city: "Douala",
+            country: "Cameroon",
+            about_description:
+              "super best car seller in the world adipisicing elit. lorem epsep his is",
+            communities: [],
+            messages: [],
+            directions: []
+          },
+          {
+            id: 2,
+            picture:
+              "https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg",
+            name: "Super Car ltd2",
+            category: "Car marketing",
+            community: 2100,
+            city: "Douala",
+            country: "Cameroon",
+            about_description:
+              "super best car seller in the world adipisicing elit. lorem epsep his is",
+            communities: [],
+            messages: [],
+            directions: []
+          },
+          {
+            id: 3,
+            picture:
+              "https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg",
+            name: "Super Car ltd3",
+            category: "Car marketing",
+            community: 2850,
+            city: "Douala",
+            country: "Cameroon",
+            about_description:
+              "super best car seller in the world adipisicing elit. lorem epsep his is",
+            communities: [],
+            messages: [],
+            directions: []
+          },
+          {
+            id: 4,
+            picture:
+              "https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg",
+            name: "Super Car ltd4",
+            category: "Car marketing",
+            community: 27850,
+            city: "Douala",
+            country: "Cameroon",
+            about_description:
+              "super best car seller in the world adipisicing elit. lorem epsep his is",
+            communities: [],
+            messages: [],
+            directions: []
+          },
+          {
+            id: 5,
+            picture:
+              "https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg",
+            name: "Super Car ltd5",
+            category: "Car marketing",
+            community: 21412,
+            city: "Douala",
+            country: "Cameroon",
+            about_description:
+              "super best car seller in the world adipisicing elit. lorem epsep his is",
+            communities: [],
+            messages: [],
+            directions: []
+          }
+        ],
+        followings: [
+          {
+            id: 1,
+            picture:
+              "https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg",
+            name: "Super Car ltd6",
+            category: "Car marketing",
+            community: 204,
+            city: "Douala",
+            country: "Cameroon",
+            about_description:
+              "super best car seller in the world adipisicing elit. lorem epsep his is",
+            communities: [],
+            messages: [],
+            directions: []
+          },
+          {
+            id: 2,
+            picture:
+              "https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg",
+            name: "Super Car ltd",
+            category: "Car marketing",
+            community: 247,
+            city: "Douala",
+            country: "Cameroon",
+            about_description:
+              "super best car seller in the world adipisicing elit. lorem epsep his is",
+            communities: [],
+            messages: [],
+            directions: []
+          },
+          {
+            id: 3,
+            picture:
+              "https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg",
+            name: "Super Car ltd7",
+            category: "Car marketing",
+            community: 965,
+            city: "Douala",
+            country: "Cameroon",
+            about_description:
+              "super best car seller in the world adipisicing elit. lorem epsep his is",
+            communities: [],
+            messages: [],
+            directions: []
+          },
+          {
+            id: 4,
+            picture:
+              "https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg",
+            name: "Super Car ltd8",
+            category: "Car marketing",
+            community: 2354,
+            city: "Douala",
+            country: "Cameroon",
+            about_description:
+              "super best car seller in the world adipisicing elit. lorem epsep his is",
+            communities: [],
+            messages: [],
+            directions: []
+          },
+          {
+            id: 5,
+            picture:
+              "https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg",
+            name: "Super Car ltd9",
+            category: "Car marketing",
+            community: 20000,
+            city: "Douala",
+            country: "Cameroon",
+            about_description:
+              "super best car seller in the world adipisicing elit. lorem epsep his is",
+            communities: [],
+            messages: [],
+            directions: []
+          }
+        ]
+      }
+    }
   };
 };
 
@@ -336,9 +590,9 @@ const getDefaultState = () => {
 const state = getDefaultState();
 
 const actions = {
-  async loadUserProfileBusiness(context, payload) {
+  async loadUserProfileCommuntity(context, payload) {
     console.log(payload);
-    console.log("load user profile Business start +++++");
+    console.log("load user profile Community start +++++");
 
     let response_ = null;
     await fetch(state.url_base + state.url_load_user_profile_community, {
@@ -380,7 +634,7 @@ const actions = {
 
 const mutations = {
   updateUserProfileCommunity(state, payload) {
-    state.userData[0].profile_community = [...payload.profile.community];
+    state.profile_community = [...payload.profile.community];
   }
 };
 
@@ -388,7 +642,7 @@ export default new Vuex.Store({
   state,
   getters: {
     getProfileCommunity(state) {
-      return state.userData[0].profile_community;
+      return state.profile_community;
     }
   },
   actions,

@@ -134,9 +134,6 @@ import Map from "@/components/dasboard/map";
 import EmptyBusiness from "@/components/dasboard/emptybusiness";
 
 import Popularnetwork from "@/components/dasboard/popularnetwork";
-//import Hotbusiness from "@/components/dasboard/hotbusiness";
-//import People from '../components/businessOwner/tabs/owner/networks/people.vue';
-
 export default {
   name: "dashboard",
   data() {

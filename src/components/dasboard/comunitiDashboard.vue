@@ -30,12 +30,11 @@
 
                       <div class="s-comcard">
                         <b-row>
-                          <b-col lg="6" sm="12" class="p-2">
-                            <div><People /></div>
-                          </b-col>
-                          <b-col md="6" sm="12" class="p-2">
-                            <div><People /></div>
-                          </b-col>
+                          <div>
+                            <People
+                              :people="profile_community.people.followers"
+                            />
+                          </div>
                         </b-row>
                       </div>
                     </b-tab>
@@ -47,12 +46,11 @@
 
                       <div class="s-comcard">
                         <b-row>
-                          <b-col lg="6" sm="12" class="p-2">
-                            <div><People /></div>
-                          </b-col>
-                          <b-col md="6" sm="12" class="p-2">
-                            <div><People /></div>
-                          </b-col>
+                          <div>
+                            <People
+                              :people="profile_community.people.followings"
+                            />
+                          </div>
                         </b-row>
                       </div>
                     </b-tab>
@@ -76,12 +74,11 @@
 
                   <div class="s-comcard">
                     <b-row>
-                      <b-col lg="6" sm="12">
-                        <div><Business /></div>
-                      </b-col>
-                      <b-col md="6" sm="12">
-                        <div><Business /></div>
-                      </b-col>
+                      <div>
+                        <Business
+                          :business="profile_community.business.followers"
+                        />
+                      </div>
                     </b-row>
                   </div>
                 </b-tab>
@@ -93,12 +90,11 @@
 
                   <div class="s-comcard">
                     <b-row>
-                      <b-col lg="6" sm="12">
-                        <div><Business /></div>
-                      </b-col>
-                      <b-col md="6" sm="12">
-                        <div><Business /></div>
-                      </b-col>
+                      <div>
+                        <Business
+                          :business="profile_community.business.followings"
+                        />
+                      </div>
                     </b-row>
                   </div>
                 </b-tab>
@@ -121,6 +117,36 @@ export default {
   components: {
     People,
     Business
+  },
+
+  data() {
+    return {
+      profile_community: {}
+    };
+  },
+
+  provide() {
+    return {};
+  },
+  created() {
+    console.log("Load User Profile Community start+++++++");
+    this.$store
+      .dispatch("loadUserProfileCommuntity", null)
+      .then(response => {
+        console.log(response);
+        console.log("Load User Profile Community end response (3) +++++++");
+      })
+      .catch(error => {
+        console.log("Error from server or from browser error (2) ++++");
+        console.log(error);
+      })
+      .finally(() => {
+        console.log("Finally Load User Profile Community +++++");
+        this.profile_community = JSON.parse(
+          JSON.stringify(this.$store.getters.getProfileCommunity)
+        );
+        console.log(this.profile_community);
+      });
   }
 };
 </script>

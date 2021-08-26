@@ -46,7 +46,11 @@ export default {
         datasets: [
           {
             backgroundColor: ["#f2f200", "#8c008a", "#40c600"],
-            data: [this.$store.getters.getdetails.post, this.$store.getters.getdetails.visits, this.$store.getters.getdetails.shares]
+            data: [
+              this.myValue.total_post,
+              this.myValue.total_visit,
+              21
+            ]
           }
         ]
       }
@@ -55,6 +59,9 @@ export default {
   computed: {
     currentDataSet() {
       return this.chartData.datasets[0].data;
+    },
+    myValue() {
+      return this.$store.getters.getdetails;
     }
   },
   props: ["selectedb"],
@@ -63,6 +70,7 @@ export default {
   //     return this.$store.getters.getdetails.business;
   //   }
   // },
+
   created() {
     this.$store
       .dispatch("getdetails")

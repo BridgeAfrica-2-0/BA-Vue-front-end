@@ -5,7 +5,7 @@ import auth from "./auth";
 import axios from "axios";
 
 Vue.use(Vuex);
-axios.defaults.baseURL = "https://0908-154-72-167-59.ngrok.io/api/v1";
+axios.defaults.baseURL = "https://8599-154-72-150-69.ngrok.io/api/v1";
 
 const getDefaultState = () => {
   return {
@@ -847,7 +847,7 @@ const getDefaultState = () => {
 
     bdetails: [],
 
-    details: {
+    /*details: {
       owner: [
         {
           fullname: "",
@@ -882,9 +882,9 @@ const getDefaultState = () => {
           numbersOfFollowers: 150,
           messages: 12,
           notifications: 13,
-          post: 55,
-          visits: 12,
-          shares: 105,
+          total_post: 55,
+          total_visit: 12,
+          total_share: 105,
           website: "www.typw.com"
         },
         {
@@ -926,8 +926,8 @@ const getDefaultState = () => {
           website: "www.typw.com"
         }
       ]
-    }
-    // details: []
+    },*/
+      details: []
   };
 };
 

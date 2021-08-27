@@ -197,8 +197,15 @@ export default {
         .then((response) => {
           console.log(response.data);
 
-          const userData = JSON.parse(response.data);
-          this.$store.commit("auth/setUserData", userData);
+         
+          this.$store.commit("auth/setUserData", response.data);
+            this.flashMessage.show({
+            status: "success",
+           
+            message:
+              "Successfully Register",
+          });
+
           this.$router.push({ name: "welcome" });
         })
         .catch((err) => {

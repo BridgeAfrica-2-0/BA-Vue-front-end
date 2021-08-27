@@ -4,25 +4,27 @@
       Do you want to join this network?
     </b-modal>
 
-    <div class="people-style shadow" v-for="item in $store.getters.getdetails" :key="item.id">
+    <div
+      class="people-style shadow"
+      v-for="item in $store.getters.getdetails"
+      :key="item.id"
+    >
       <b-row>
         <b-col md="3" xl="3" lg="3" cols="5" sm="3">
           <div class="center-img">
-            <img
-              src="https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg"
-              class="r-image"
-            />
+            <img :src="item.picture" class="r-image" />
           </div>
         </b-col>
         <b-col md="5" cols="7" lg="7" xl="5" sm="5">
           <p class="textt">
             <strong class="net-title"> {{ item.name }} </strong> <br />
-            {{ item.category[0].title }}
+            {{ item.category.title}}
             <br />
             {{ item.followers }} Community <br />
 
             <span class="location">
-              <b-icon-geo-alt class="ico"></b-icon-geo-alt> {{item.location_description}}
+              <b-icon-geo-alt class="ico"></b-icon-geo-alt>
+              {{ item.location_description }}
             </span>
             <br />
 
@@ -72,7 +74,7 @@ export default {
   props: ["title", "image"],
   computed: {
     business() {
-      return this.$store.state.ndetails;
+      return this.$store.getters.getdetails.category;
     }
   },
   created() {

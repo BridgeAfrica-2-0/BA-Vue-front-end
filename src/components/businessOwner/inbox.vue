@@ -676,7 +676,7 @@ export default {
       this.newMsg = false;
       this.socket.emit(
         "join_room",
-        JSON.stringify(this.recipient.id) + localStorage.getItem("userId")
+        JSON.stringify(this.recipient.id) + localStorage.getItem("senderId")
       );
     },
 

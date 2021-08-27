@@ -8,7 +8,7 @@ axios.defaults.baseURL = process.env.VUE_APP_baseURL;
 
 const getDefaultState = () => {
   return {
-    api_link:"https://9cdd-129-0-205-153.ngrok.io/api/v1",
+    api_link:"https://94e9-154-72-150-118.ngrok.io/api/v1",
     api_link_end:"/business/details",
     token: "8|Yx3DU4s08aFTYOCa3T2XJKZkjJV4leSi9b20oo5D",
     bdetails: []

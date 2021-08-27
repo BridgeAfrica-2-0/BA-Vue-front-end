@@ -354,7 +354,6 @@
                                     :title="emojiName"
                                     >{{ emoji }}</span
                                   >
-                                
                                 </div>
                               </div>
                             </div>
@@ -472,7 +471,7 @@
                           <tr></tr>
 
                           <tr
-                          v-show="searching"
+                            v-show="searching"
                             v-for="(item, index) in resultQuery"
                             :key="index"
                             class="p-2 message"
@@ -557,7 +556,7 @@
 <script>
 import EmojiPicker from "vue-emoji-picker";
 import io from "socket.io-client";
-
+import axios from "axios";
 export default {
   components: {
     EmojiPicker,
@@ -574,11 +573,10 @@ export default {
       searchQuery: null,
       selectedTo: null,
       options: [
-          { value: null, text: 'Community' },
-          { value: 'following', text: 'Following' },
-          { value: 'follower', text: 'Follower' },
-  
-        ],
+        { value: null, text: "Community" },
+        { value: "following", text: "Following" },
+        { value: "follower", text: "Follower" },
+      ],
       resources: [
         {
           name: "blezour blec",
@@ -635,26 +633,7 @@ export default {
       text: "",
       selected: [],
       chats: [],
-      messages: [
-        {
-          id: 0,
-          name: "Tabe",
-          profile:
-            "https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg",
-          startMessage: "Hello Blec lola blec ",
-          timeStamp: "3:00pm",
-          messageCount: "10",
-        },
-        {
-          id: 1,
-          name: "Moaz",
-          profile:
-            "https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg",
-          startMessage: "yoo nigga sup lola blec",
-          timeStamp: "7:00am",
-          messageCount: "60",
-        },
-      ],
+      messages: [],
 
       recipient: {
         id: "",
@@ -672,7 +651,18 @@ export default {
     },
   },
 
+  beforeMount() {
+    axios.defaults.headers.common["Authorization"] =
+      "Bearer " + localStorage.getItem("access_token");
+    this.getUsers();
+  },
+
   methods: {
+    getUsers() {
+      axios.get("user/all-user").then(res => {
+        this.messages = res.data.data;
+      });
+    },
     chatSelector(chat) {
       this.recipient.name = chat.name;
       this.recipient.profile = chat.profile;
@@ -683,12 +673,11 @@ export default {
     },
 
     insert(emoji) {
-
       this.message.message += emoji;
     },
 
     append(emoji) {
-     this.message.message += emoji;
+      this.message.message += emoji;
     },
 
     selectAll() {
@@ -743,20 +732,19 @@ export default {
 
   computed: {
     eventListeners() {
-      this.socket.on("sending_msg", (message) => {
-        console.log(message);
-        this.messages.push(message);
+      this.socket.on("sending_msg", message => {
+        this.chats.push(message);
       });
       return false;
     },
     resultQuery() {
       if (this.searchQuery) {
-        return this.resources.filter((item) => {
+        return this.resources.filter(item => {
           this.searcher(true);
           return this.searchQuery
             .toLowerCase()
             .split(" ")
-            .every((v) => item.name.toLowerCase().includes(v));
+            .every(v => item.name.toLowerCase().includes(v));
         });
       } else {
         this.searcher(false);

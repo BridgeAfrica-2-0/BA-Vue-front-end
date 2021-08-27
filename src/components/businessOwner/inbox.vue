@@ -264,7 +264,7 @@
                     <b-row class="p-4">
                       <b-col>
                         <p class="sent-name">
-                          <span class="name">Sender Name</span>
+                          <span class="name">{{ senderName }}</span>
                         </p>
                         <p id="sent" class="msg-text-sent text">
                           {{ chat.message }}
@@ -565,6 +565,7 @@ export default {
     return {
       socket: io("http://localhost:2471"),
       search: "",
+      senderName: "",
       showsearch: true,
       searching: false,
       selecteduser: false,
@@ -664,12 +665,16 @@ export default {
       });
     },
     chatSelector(chat) {
+      this.senderName = localStorage.getItem("senderName");
       this.recipient.name = chat.name;
       this.recipient.profile = chat.profile;
       this.recipient.id = chat.id;
       this.info = false;
       this.newMsg = false;
-      this.socket.emit("join_room", JSON.stringify(this.recipient.id) + "56");
+      this.socket.emit(
+        "join_room",
+        JSON.stringify(this.recipient.id) + localStorage.getItem("userId")
+      );
     },
 
     insert(emoji) {
@@ -714,8 +719,9 @@ export default {
       this.show = false;
     },
     send() {
-      this.message.room_id = JSON.stringify(this.recipient.id) + "56";
-      this.message.sender_id = "56";
+      this.message.room_id =
+        JSON.stringify(this.recipient.id) + localStorage.getItem("userId");
+      this.message.sender_id = localStorage.getItem("userId");
       this.socket.emit("send_msg", this.message);
       this.message.message = "";
     },

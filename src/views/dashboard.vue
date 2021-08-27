@@ -159,7 +159,7 @@ export default {
         { value: "owner", text: "Owner's Name" },
         { value: "a", text: "Business Name 1" },
         { value: "b", text: "Business Name 2" },
-        { value: "c", text: "Business Name 3" }
+        { value: "c", text: "Business Name 3" },
       ],
 
       optionss: [
@@ -168,7 +168,7 @@ export default {
         { id: "people", label: "People" },
         { id: "network", label: "Network" },
         { id: "marketplace", label: "Markeplace", notEnabled: true },
-        { id: "posts", label: "Posts" }
+        { id: "posts", label: "Posts" },
       ],
 
       options: [
@@ -177,7 +177,7 @@ export default {
         { item: "people", name: "People" },
         { item: "network", name: "Network" },
         { item: "marketplace", name: "Markeplace", notEnabled: false },
-        { item: "posts", name: "Posts" }
+        { item: "posts", name: "Posts" },
       ],
       filters: [
         { item: "any", name: "Location : Any" },
@@ -185,7 +185,7 @@ export default {
         { item: "dhaka ", name: "Dhaka, Bangladesh" },
         { item: "new york", name: "New York, United States" },
         { item: "douala", name: "Douala, Cameroon" },
-        { item: "karachi", name: "Karachi, Pakistan" }
+        { item: "karachi", name: "Karachi, Pakistan" },
       ],
       categories: [
         { item: "any", name: "Category : Any" },
@@ -193,42 +193,42 @@ export default {
         { item: "home service", name: "Home Services" },
         { item: "auto service", name: "Auto Services" },
         { item: "argiculture", name: "Agriculture" },
-        { item: "technology", name: "Technology" }
+        { item: "technology", name: "Technology" },
       ],
       posts: [
         { item: "any", name: "Post: Any" },
         { item: "people", name: "People I am following" },
         { item: "business", name: "Businesses i am following" },
-        { item: "networks", name: "Networks I am following" }
+        { item: "networks", name: "Networks I am following" },
       ],
 
       education: [
         { item: "any", name: "Education: Any" },
         { item: "ub", name: "University Of Buea" },
         { item: "uba", name: "University Of Yaounde" },
-        { item: "uy", name: "University Of Yaounde 1" }
+        { item: "uy", name: "University Of Yaounde 1" },
       ],
 
       profession: [
         { item: "any", name: "Profession: Any" },
         { item: "engineer", name: "Engineen" },
         { item: "teacher", name: "Teacher" },
-        { item: "farmer", name: "Farmer" }
+        { item: "farmer", name: "Farmer" },
       ],
 
       workplace: [
         { item: "any", name: "Post: Any" },
         { item: "yaounde", name: "Yaounde" },
         { item: "douala", name: "Douala" },
-        { item: "Buea", name: "Buea" }
+        { item: "Buea", name: "Buea" },
       ],
 
       sponsoredBusinesses: [
         { title: "Business 1" },
         { title: "Business 2" },
         { title: "Business 3" },
-        { title: "Business 4" }
-      ]
+        { title: "Business 4" },
+      ],
     };
   },
   components: {
@@ -250,9 +250,9 @@ export default {
     Profile,
 
     CarousselDashboard,
-    Navbar
+    Navbar,
   },
-  methods: {}
+  methods: {},
 };
 </script>
 

@@ -1,7 +1,5 @@
 import Vue from "vue";
 import Vuex from "vuex";
-import axios from "axios";
-//import axios from "axios";
 import auth from "./auth";
 import businessOwner from "./businessOwner";
 
@@ -1558,7 +1556,21 @@ const actions = {
           state.url_base +
           state.url_load_profile_picture_changed +
           response.data.data.link;
+// initial state
+const state = getDefaultState();
 
+const actions = {
+  getbdetails({ commit }) {
+    return axios
+      .get(state.api_link+state.api_link_end, {
+        headers: { Authorization: `Bearer ${state.token}` }
+      })
+      .then(function({ data }) {
+        commit("set_details", data.data);
+        console.log(data);
+      });
+  }
+};
         console.log("change profile picture url " + url);
         fetch(url, {
           method: "GET",
@@ -1584,6 +1596,17 @@ const actions = {
         console.log(error);
       });
 
+const mutations = {
+  set_details(state, bdetails) {
+    state.bdetails = bdetails;
+  }
+};
+
+const getters = {
+  getdetails(state) {
+    return state.bdetails;
+  }
+};
     console.log("change profile picture end");
   },
   changeProfileImageService(context, payload) {

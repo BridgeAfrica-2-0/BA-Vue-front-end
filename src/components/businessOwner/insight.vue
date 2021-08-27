@@ -1,62 +1,40 @@
 <template>
   <div class="container-fluid mt-3">
     <b-row class="mr-35">
-      <!--
-      <b-col md="6" lg="4" sm="12">
-        <b-card class="b-shadow">
-          <b-row>
-
-           <b-col cols="4" >
-
-            <b-row>
-            <b-col >
-              <h6 class="card-title mb-0">
-                New Notifications
-                <p class="s-text">From (Jan 1 - Jan 8)</p>
-              </h6>
-            </b-col>
-
-          </b-row>
-
-          <br />
-          <b-row>
-            <b-col>
-              <h3 class="mb-2 m-up">
-                3,897
-                <p class="s-text">Total Posts: 79</p>
-              </h3>
-            </b-col>
-            <b-col cols="8">
-
-
-
-
-
- </b-col
-          ></b-row>
-
-           </b-col>
-
-           <b-col cols="8">
-
-               <div>
-    <canvas id="planet-chart"></canvas>
-  </div>
-
-           </b-col>
-          </b-row>
-        </b-card>
+      <b-col xl="4" md="6" lg="6" sm="12">
+        <label>Start Date</label>
+        <b-form-datepicker
+          id="example-datepicker"
+          v-model="startDate"
+          class="mb-2"
+          placeholder="Start Date"
+        ></b-form-datepicker>
       </b-col>
-
--->
-
-      <b-col xl="4" md="6" lg="6" sm="12" v-for="insight in business_insights" :key="insight.id">
+      <b-col xl="4" md="6" lg="6" sm="12">
+        <label>End Date</label>
+        <b-form-datepicker
+          id="example-datepicker-1"
+          v-model="endDate"
+          class="mb-2"
+          placeholder="End Date"
+        ></b-form-datepicker>
+      </b-col>
+    </b-row>
+    <b-row
+      class="mr-35"
+      v-if="!!business_insights && business_insights !== null"
+    >
+      <b-col xl="4" md="6" lg="6" sm="12">
         <b-card class="b-shadow">
           <b-row>
             <b-col cols="8">
               <h6 class="card-title mb-0">
                 New Notifications
-                <p class="s-text">From ( {{ insight.date_start }} - {{ insight.date_end }} )</p>
+                <p class="s-text">
+                  From (
+                  {{ startDate }} -
+                  {{ endDate }} )
+                </p>
               </h6>
             </b-col>
             <b-col>
@@ -74,8 +52,10 @@
           <b-row>
             <b-col>
               <h3 class="mb-2 m-up">
-                {{ insight.amount }}
-                <p class="s-text">Total {{ insight.type }}: {{ insight.total }}</p>
+                {{ business_insights.number_likes }}
+                <p class="s-text">
+                  Total {{ "likes" }}: {{ business_insights.total_likes }}
+                </p>
               </h3>
             </b-col>
             <b-col cols="5">
@@ -85,8 +65,8 @@
                 src="../../assets/img/pchart.png"
                 alt=""
               />   -->
-            </b-col></b-row
-          >
+            </b-col>
+          </b-row>
         </b-card>
       </b-col>
 
@@ -96,16 +76,20 @@
             <b-col cols="8">
               <h6 class="card-title mb-0">
                 New Notifications
-                <p class="s-text">From (Jan 1 - Jan 8)</p>
+                <p class="s-text">
+                  From (
+                  {{ startDate }} -
+                  {{ endDate }} )
+                </p>
               </h6>
             </b-col>
             <b-col>
               <b-card-text class="f-right">
                 <b-icon
-                  v-b-tooltip.hover
-                  title="Tooltip content goes in here"
-                  icon="exclamation-circle-fill"
-                  variant="dark"
+                        v-b-tooltip.hover
+                        title="Tooltip content goes in here"
+                        icon="exclamation-circle-fill"
+                        variant="dark"
                 ></b-icon>
               </b-card-text>
             </b-col>
@@ -114,18 +98,21 @@
           <b-row>
             <b-col>
               <h3 class="mb-2 m-up">
-                3,897
-                <p class="s-text">Total Like: 79</p>
+                {{ business_insights.number_shares }}
+                <p class="s-text">
+                  Total {{ "shares" }}: {{ business_insights.total_shares }}
+                </p>
               </h3>
             </b-col>
             <b-col cols="5">
-              <img
+              <!--   <img
                 fluid-grow
                 class="i-size"
-                src="../../assets/img/ggraph.png"
+                src="../../assets/img/pchart.png"
                 alt=""
-              /> </b-col
-          ></b-row>
+              />   -->
+            </b-col>
+          </b-row>
         </b-card>
       </b-col>
 
@@ -135,16 +122,20 @@
             <b-col cols="8">
               <h6 class="card-title mb-0">
                 New Notifications
-                <p class="s-text">From (Jan 1 - Jan 8)</p>
+                <p class="s-text">
+                  From (
+                  {{ startDate }} -
+                  {{ endDate }} )
+                </p>
               </h6>
             </b-col>
             <b-col>
               <b-card-text class="f-right">
                 <b-icon
-                  v-b-tooltip.hover
-                  title="Tooltip content goes in here"
-                  icon="exclamation-circle-fill"
-                  variant="dark"
+                        v-b-tooltip.hover
+                        title="Tooltip content goes in here"
+                        icon="exclamation-circle-fill"
+                        variant="dark"
                 ></b-icon>
               </b-card-text>
             </b-col>
@@ -153,20 +144,105 @@
           <b-row>
             <b-col>
               <h3 class="mb-2 m-up">
-                3,897
-                <p class="s-text">Total Share: 79</p>
+                {{ business_insights.number_posts }}
+                <p class="s-text">
+                  Total {{ "posts" }}: {{ business_insights.total_posts }}
+                </p>
               </h3>
             </b-col>
             <b-col cols="5">
-              <img
+              <!--   <img
                 fluid-grow
                 class="i-size"
-                src="../../assets/img/ggraph.png"
+                src="../../assets/img/pchart.png"
                 alt=""
-              /> </b-col
-          ></b-row>
+              />   -->
+            </b-col>
+          </b-row>
         </b-card>
       </b-col>
+
+<!--      <b-col xl="4" md="6" lg="6" sm="12">-->
+<!--        <b-card class="b-shadow">-->
+<!--          <b-row>-->
+<!--            <b-col cols="8">-->
+<!--              <h6 class="card-title mb-0">-->
+<!--                New Notifications-->
+<!--                <p class="s-text">From (Jan 1 - Jan 8)</p>-->
+<!--              </h6>-->
+<!--            </b-col>-->
+<!--            <b-col>-->
+<!--              <b-card-text class="f-right">-->
+<!--                <b-icon-->
+<!--                  v-b-tooltip.hover-->
+<!--                  title="Tooltip content goes in here"-->
+<!--                  icon="exclamation-circle-fill"-->
+<!--                  variant="dark"-->
+<!--                ></b-icon>-->
+<!--              </b-card-text>-->
+<!--            </b-col>-->
+<!--          </b-row>-->
+<!--          <br />-->
+<!--          <b-row>-->
+<!--            <b-col>-->
+<!--              <h3 class="mb-2 m-up">-->
+<!--                3,897-->
+<!--                <p class="s-text">Total Like: 79</p>-->
+<!--              </h3>-->
+<!--            </b-col>-->
+<!--            <b-col cols="5">-->
+<!--              <img-->
+<!--                fluid-grow-->
+<!--                class="i-size"-->
+<!--                src="../../assets/img/ggraph.png"-->
+<!--                alt=""-->
+<!--              /> </b-col-->
+<!--          ></b-row>-->
+<!--        </b-card>-->
+<!--      </b-col>-->
+
+<!--      <b-col xl="4" md="6" lg="6" sm="12">-->
+<!--        <b-card class="b-shadow">-->
+<!--          <b-row>-->
+<!--            <b-col cols="8">-->
+<!--              <h6 class="card-title mb-0">-->
+<!--                New Notifications-->
+<!--                <p class="s-text">From (Jan 1 - Jan 8)</p>-->
+<!--              </h6>-->
+<!--            </b-col>-->
+<!--            <b-col>-->
+<!--              <b-card-text class="f-right">-->
+<!--                <b-icon-->
+<!--                  v-b-tooltip.hover-->
+<!--                  title="Tooltip content goes in here"-->
+<!--                  icon="exclamation-circle-fill"-->
+<!--                  variant="dark"-->
+<!--                ></b-icon>-->
+<!--              </b-card-text>-->
+<!--            </b-col>-->
+<!--          </b-row>-->
+<!--          <br />-->
+<!--          <b-row>-->
+<!--            <b-col>-->
+<!--              <h3 class="mb-2 m-up">-->
+<!--                3,897-->
+<!--                <p class="s-text">Total Share: 79</p>-->
+<!--              </h3>-->
+<!--            </b-col>-->
+<!--            <b-col cols="5">-->
+<!--              <img-->
+<!--                fluid-grow-->
+<!--                class="i-size"-->
+<!--                src="../../assets/img/ggraph.png"-->
+<!--                alt=""-->
+<!--              /> </b-col-->
+<!--          ></b-row>-->
+<!--        </b-card>-->
+<!--      </b-col>-->
+    </b-row>
+    <b-row class="mr-35" v-else>
+      No Business Insights !!! Enter Start Date and End Date to find Business
+      Insights
     </b-row>
 
     <br />
@@ -175,7 +251,7 @@
 
 <script>
 import Chart from "chart.js";
-
+import moment from "moment";
 import planetChartData from "@/planet.js";
 
 export default {
@@ -186,23 +262,30 @@ export default {
   data() {
     return {
       planetChartData: planetChartData,
-      business_insights: [],
+      business_insights: null,
+      startDate: "",
+      endDate: ""
     };
   },
+  watch: {
+    endDate(newValue) {
+      console.log("endDate+++++++++++", newValue);
+      console.log(
+        "endDate+++++++++++",
+        moment(newValue, "YYYY-MM-DD").format("YYYY-MM-DD")
+      );
+      this.load({ startDate: this.startDate, endDate: this.endDate });
+    },
+    startDate(newValue) {
+      console.log("startDate+++++++++++", newValue);
+      console.log(
+        "startDate+++++++++++",
+        moment(newValue, "YYYY-MM-DD").format("YYYY-MM-DD")
+      );
+    }
+  },
   created() {
-    console.log('Load Business Insights start  ++++')
-    this.$store.dispatch('loadUserBusinessInsight', null)
-            .then( response => {
-              console.log('load Business Insights response in component +++++')
-              console.log( response )
-              this.business_insights = this.$store.getters.getBusinessInsights
-              console.log( 'load Business Insights end +++++++')
-            }).catch( error => {
-              console.log('erreur liée au serveur et/ou navigateur ++++++');
-              this.business_insights = this.$store.getters.getBusinessInsights
-              console.log( error );
-              console.log( 'Load Business Insights end +++++')
-    })
+    this.load(null);
   },
   mounted() {
     const ctx = document.getElementById("planet-chart");
@@ -210,15 +293,35 @@ export default {
   },
 
   computed: {},
-  methods: {}
+  methods: {
+    load(payload) {
+      console.log("Load Business Insights start  ++++");
+      this.$store
+        .dispatch("loadUserBusinessInsight", payload)
+        .then(response => {
+          console.log("load Business Insights response in component (3)+++++");
+          console.log(response);
+          console.log("load Business Insights end +++++++");
+        })
+        .catch(error => {
+          console.log("error from the server or the browser error(2) ++++++");
+          console.log(error);
+          console.log("Load Business Insights end +++++");
+        })
+        .finally(() => {
+          console.log("Finally load Business Insights +++++");
+          this.business_insights = this.$store.getters.getBusinessInsights;
+          console.log(this.business_insights);
+        });
+    }
+  }
 };
 </script>
 
 <style scoped>
-
-  div.col-sm-12.col-md-6.col-lg-6.col-xl-4{
-    padding: 15px;
-  }
+div.col-sm-12.col-md-6.col-lg-6.col-xl-4 {
+  padding: 15px;
+}
 .s-text {
   margin-top: -1px;
   font-size: 13px;

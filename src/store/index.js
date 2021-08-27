@@ -8,10 +8,7 @@ import businessOwner from "./businessOwner";
 //import axios from "axios";
 
 Vue.use(Vuex);
-axios.defaults.baseURL =  process.env.VUE_APP_API_URL
-
-
-
+axios.defaults.baseURL = process.env.VUE_APP_API_URL;
 
 const getDefaultState = () => {
   return {
@@ -39,8 +36,8 @@ const getDefaultState = () => {
     url_load_business_about: "/api/v1/business/info/",
     url_update_business_about_name: "/api/v1/business/update/",
     url_update_business_biography: "/api/v1/business/businessBiography",
-    url_load_business_insight: "",
-    url_load_user_profile_about: "",
+    url_load_business_insight: "/api/v1/business/insights",
+    url_load_user_profile_about: "/api/v1/business/insights",
     recoverData: "",
     login: false,
     isToi: false,
@@ -1325,48 +1322,14 @@ const getDefaultState = () => {
           lat: -56.200329,
           lng: -6.249487
         },
-        business_insights: [
-          {
-            id: 1,
-            date_start: "Jan 1",
-            date_end: "Jan 8",
-            amount: 3.897,
-            total: 79,
-            type: "post"
-          },
-          {
-            id: 2,
-            date_start: "Jan 1",
-            date_end: "Jan 8",
-            amount: 3.897,
-            total: 79,
-            type: "share"
-          },
-          {
-            id: 3,
-            date_start: "Jan 1",
-            date_end: "Jan 8",
-            amount: 3.897,
-            total: 79,
-            type: "like"
-          },
-          {
-            id: 4,
-            date_start: "Jan 1",
-            date_end: "Jan 8",
-            amount: 3.897,
-            total: 79,
-            type: "posts"
-          },
-          {
-            id: 5,
-            date_start: "Jan 1",
-            date_end: "Jan 8",
-            amount: 3.897,
-            total: 79,
-            type: "share"
-          }
-        ]
+        business_insights: {
+          number_likes: 0,
+          number_shares: 0,
+          number_posts: 0,
+          total_likes: 0,
+          total_shares: 0,
+          total_posts: 0
+        }
       }
     ],
     users: [
@@ -3049,20 +3012,37 @@ const actions = {
   async loadUserBusinessInsight(context, payload) {
     console.log(payload);
     console.log("load user Business Insight start +++++");
-
-    // context.commit("updateUserBiography", {
-    //   info_access: payload.info_access,
-    //   description: payload.description
-    // });
-
     let response_ = null;
-    await fetch(state.url_base + state.url_load_business_insight + "4", {
-      method: "GET",
-      headers: {
-        Accept: "application/json",
-        Authorization: `Bearer ${state.token}`
-      }
-    })
+    let url = null;
+    let config = {};
+    if (payload !== null) {
+      console.log("Payload does not null ++++++++++");
+      url =
+        state.url_base +
+        state.url_load_business_insight +
+        "?dateStarting=" +
+        payload.startDate +
+        "&dateClosing=" +
+        payload.endDate;
+      config = {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          Authorization: `Bearer ${state.token}`
+        }
+      };
+    } else {
+      console.log("Payload is null");
+      url = state.url_base + state.url_load_business_insight;
+      config = {
+        method: "GET",
+        headers: {
+          Accept: "application/json",
+          Authorization: `Bearer ${state.token}`
+        }
+      };
+    }
+    await fetch(url, config)
       .then(response => {
         console.log("load user Business Insight response (1) +++++++");
         console.log(response);
@@ -3075,8 +3055,8 @@ const actions = {
         console.log("load User Business Insight response successsss +++");
         console.log(response);
         if (!response) {
-          console.log("Erreur liée au serveur+++++++");
-          throw new Error("Erreur du chargement du Business Insight +++++");
+          console.log("Error From the server +++++++");
+          throw new Error("Error for loading Business Insight +++++");
         }
         context.commit("updateUserBusinessInsights", {
           businessInsights: response.data
@@ -3084,8 +3064,11 @@ const actions = {
         response_ = response;
       })
       .catch(error => {
-        console.log("erreur liée au serveur ou au navigateur");
+        console.log("error from the server or the browser");
         console.log(error);
+        context.commit("updateUserBusinessInsights", {
+          businessInsights: []
+        });
       });
     return response_;
   }
@@ -3323,8 +3306,8 @@ export default new Vuex.Store({
   },
   actions,
   mutations,
-    modules: {
-        auth,
-        businessOwner,
-    },
+  modules: {
+    auth,
+    businessOwner
+  }
 });

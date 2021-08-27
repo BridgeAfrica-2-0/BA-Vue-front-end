@@ -162,33 +162,33 @@
               <div class="col-md-12">
                 <form ref="form" @submit.stop.prevent="handleSubmit">
                   <b-form-group
-                  label="Worked At :"
+                    label="Worked At :"
                     label-for="work_at"
-                  invalid-feedback="worked at is required"
+                    invalid-feedback="worked at is required"
                     :state="workedAtState"
                   >
                     <b-form-input
-                    id="work_at"
-                    placeholder="work_at"
+                      id="work_at"
+                      placeholder="work_at"
                       :state="workedAtState"
                       required
                       v-model="userProfileOwnerInput.workedAt"
-                    :class="{
+                      :class="{
                         'is-valid': userProfileOwnerInput.workedAt !== '',
                         'is-invalid': userProfileOwnerInput.workedAt === ''
                       }"
                     ></b-form-input>
                   </b-form-group>
                   <b-form-group
-                  label="Studied At :"
+                    label="Studied At :"
                     label-for="studied_at"
-                  invalid-feedback="studied at is required"
+                    invalid-feedback="studied at is required"
                     :state="studiedAtState"
                   >
                     <b-form-input
-                    id="studied_at"
-                    placeholder="studied at"
-                    :state="studiedAtState"
+                      id="studied_at"
+                      placeholder="studied at"
+                      :state="studiedAtState"
                       required
                       v-model="userProfileOwnerInput.studiedAt"
                       :class="{
@@ -198,15 +198,15 @@
                     ></b-form-input>
                   </b-form-group>
                   <b-form-group
-                  label="Home Town :"
+                    label="Home Town :"
                     label-for="home_town"
-                  invalid-feedback="home town at is required"
+                    invalid-feedback="home town at is required"
                     :state="homeTownState"
                   >
                     <b-form-input
-                    id="home_town"
-                    placeholder="home town"
-                    :state="homeTownState"
+                      id="home_town"
+                      placeholder="home town"
+                      :state="homeTownState"
                       required
                       v-model="userProfileOwnerInput.homeTown"
                       :class="{
@@ -216,14 +216,14 @@
                     ></b-form-input>
                   </b-form-group>
                   <b-form-group
-                  label="Current City :"
+                    label="Current City :"
                     label-for="city"
                     invalid-feedback="current city is required"
-                  :state="currentCityState"
+                    :state="currentCityState"
                   >
                     <b-form-input
-                    id="city"
-                    placeholder="Current City"
+                      id="city"
+                      placeholder="Current City"
                       :state="currentCityState"
                       required
                       v-model="userProfileOwnerInput.currentCity"
@@ -244,7 +244,6 @@
 
         <!-- User Profile Post Community-->
         <Community />
-
 
         <Media />
       </b-col>
@@ -274,23 +273,24 @@ export default {
   },
   created() {
     console.log("Load User Info");
-    this.$store.dispatch('loadUserPostIntro', null)
-            .then( response => {
-              console.log( 'Load User Intro test+++++ res')
-              console.log(response)
-              console.log( "Load User Intro Finish Loading" );
-              this.userProfileOwner = this.$store.getters.getUserPostIntro;
-              this.userProfileOwnerInput.workedAt = this.userProfileOwner.workedAt;
-              this.userProfileOwnerInput.studiedAt = this.userProfileOwner.studiedAt;
-              this.userProfileOwnerInput.homeTown = this.userProfileOwner.homeTown;
-              this.userProfileOwnerInput.currentCity = this.userProfileOwner.currentCity;
-              this.userProfileOwnerInput.numbersOfFollowers = this.userProfileOwner.numbersOfFollowers;
-              return response
-            })
-            .catch( error => { console.log( error ) });
-
-
-
+    this.$store
+      .dispatch("loadUserPostIntro", null)
+      .then(response => {
+        console.log("Load User Intro test+++++ res");
+        console.log(response);
+        console.log("Load User Intro Finish Loading");
+        this.userProfileOwner = this.$store.getters.getUserPostIntro;
+        this.userProfileOwnerInput.workedAt = this.userProfileOwner.workedAt;
+        this.userProfileOwnerInput.studiedAt = this.userProfileOwner.studiedAt;
+        this.userProfileOwnerInput.homeTown = this.userProfileOwner.homeTown;
+        this.userProfileOwnerInput.currentCity = this.userProfileOwner.currentCity;
+        this.userProfileOwnerInput.numbersOfFollowers = this.userProfileOwner.numbersOfFollowers;
+        return response;
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  },
   data() {
     return {
       images: [
@@ -343,12 +343,9 @@ export default {
   methods: {
     chooseFiles: function() {
       console.log("helloo fucker");
-        document.getElementById("fileUpload").click()
+      document.getElementById("fileUpload").click();
     }
-    },
-
-
-
+  }
 };
 </script>
 

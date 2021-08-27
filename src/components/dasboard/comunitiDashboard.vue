@@ -9,7 +9,7 @@
         <span>
           <h6 class="title">
             <fas-icon class="icons" :icon="['fas', 'users']" size="lg" />
-            <b> COMMUNITY </b> <span class="h4-color"> {{ business.total_community[0] }} </span>
+            <b> COMMUNITY </b> <span class="h4-color"> {{ com.total }} </span>
           </h6>
         </span>
 

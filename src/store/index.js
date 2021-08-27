@@ -41,6 +41,7 @@ const actions = {
       .then(function({ data }) {
         commit("setcom", data.data);
         console.log(data);
+        console.log("peter perre");
         return data.data;
       });
   }

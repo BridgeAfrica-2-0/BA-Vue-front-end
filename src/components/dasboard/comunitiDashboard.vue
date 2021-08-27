@@ -9,14 +9,23 @@
         <span>
           <h6 class="title">
             <fas-icon class="icons" :icon="['fas', 'users']" size="lg" />
-            <b> COMMUNITY </b> <span class="h4-color"> 7K </span>
+            <b> COMMUNITY </b> <span class="h4-color"> {{ com.total }} </span>
           </h6>
         </span>
 
         <b-tabs pills content-class="mt-3  f-left ">
           <b-tab active>
             <template slot="title">
-              People <span class="spa-color"> 7K </span>
+              People
+              <span class="spa-color">
+                {{
+                  business.people[0].total_people >= 1000000
+                    ? business.people[0].total_people / 1000000 + "M"
+                    : business.people[0].total_people >= 1000
+                    ? business.people[0].total_people / 1000 + "K"
+                    : business.people[0].total_people
+                }}
+              </span>
             </template>
 
             <div>
@@ -25,14 +34,26 @@
                   <b-tabs fill pills content-class="mt-3  f-left m-up">
                     <b-tab active>
                       <template slot="title">
-                        Followers <span class="spa-color"> 7K </span>
+                        Followers
+                        <span class="spa-color">
+                          {{
+                            business.people[0].total_user_follower >= 1000000
+                              ? business.people[0].total_user_follower /
+                                  1000000 +
+                                "M"
+                              : business.people[0].total_user_follower >= 1000
+                              ? business.people[0].total_user_follower / 1000 +
+                                "K"
+                              : business.people[0].total_user_follower
+                          }}
+                        </span>
                       </template>
 
                       <div class="s-comcard">
                         <b-row>
                           <div>
                             <People
-                              :people="profile_community.people.followers"
+                              :people="business.people[0].user_followers"
                             />
                           </div>
                         </b-row>
@@ -41,14 +62,26 @@
 
                     <b-tab>
                       <template slot="title">
-                        Following <span class="spa-color"> 7K </span>
+                        Following
+                        <span class="spa-color">
+                          {{
+                            business.people[0].total_user_following >= 1000000
+                              ? business.people[0].total_user_following /
+                                  1000000 +
+                                "M"
+                              : business.people[0].total_user_following >= 1000
+                              ? business.people[0].total_user_following / 1000 +
+                                "K"
+                              : business.people[0].total_user_following
+                          }}
+                        </span>
                       </template>
 
                       <div class="s-comcard">
                         <b-row>
                           <div>
                             <People
-                              :people="profile_community.people.followings"
+                              :people="business.people[0].user_following"
                             />
                           </div>
                         </b-row>
@@ -62,21 +95,42 @@
 
           <b-tab>
             <template slot="title">
-              Businesses <span class="spa-color"> 7K </span>
+              Businesses
+              <span class="spa-color">
+                {{
+                  business.people[0].total_business >= 1000000
+                    ? business.people[0].total_business / 1000000 + "M"
+                    : business.people[0].total_business >= 1000
+                    ? business.people[0].total_business / 1000 + "K"
+                    : business.people[0].total_business
+                }}
+              </span>
             </template>
 
             <div>
               <b-tabs fill pills content-class="mt-3  f-left m-up checkcheck">
                 <b-tab active>
                   <template slot="title">
-                    Followers <span class="spa-color"> 7K </span>
+                    Followers
+                    <span class="spa-color">
+                      {{
+                        business.people[0].total_business_follower >= 1000000
+                          ? business.people[0].total_business_follower /
+                              1000000 +
+                            "M"
+                          : business.people[0].total_business_follower >= 1000
+                          ? business.people[0].total_business_follower / 1000 +
+                            "K"
+                          : business.people[0].total_business_follower
+                      }}
+                    </span>
                   </template>
 
                   <div class="s-comcard">
                     <b-row>
                       <div>
                         <Business
-                          :business="profile_community.business.followers"
+                          :business="business.business[0].business_followers"
                         />
                       </div>
                     </b-row>
@@ -85,14 +139,26 @@
 
                 <b-tab>
                   <template slot="title">
-                    Following <span class="spa-color"> 7K </span>
+                    Following
+                    <span class="spa-color">
+                      {{
+                        business.people[0].total_business_following >= 1000000
+                          ? business.people[0].total_business_following /
+                              1000000 +
+                            "M"
+                          : business.people[0].total_business_following >= 1000
+                          ? business.people[0].total_business_following / 1000 +
+                            "K"
+                          : business.people[0].total_business_following
+                      }}
+                    </span>
                   </template>
 
                   <div class="s-comcard">
                     <b-row>
                       <div>
                         <Business
-                          :business="profile_community.business.followings"
+                          :business="business.business[0].business_following"
                         />
                       </div>
                     </b-row>
@@ -118,34 +184,32 @@ export default {
     People,
     Business
   },
-
-  data() {
-    return {
-      profile_community: {}
-    };
-  },
-
-  provide() {
-    return {};
+  computed: {
+    business() {
+      return this.$store.getters.getProfileCommunity;
+    },
+    com() {
+      return this.$store.getters.getcom;
+    }
   },
   created() {
-    console.log("Load User Profile Community start+++++++");
     this.$store
-      .dispatch("loadUserProfileCommuntity", null)
-      .then(response => {
-        console.log(response);
-        console.log("Load User Profile Community end response (3) +++++++");
+      .dispatch("getdetails")
+
+      .then(() => {
+        console.log("the response");
       })
-      .catch(error => {
-        console.log("Error from server or from browser error (2) ++++");
-        console.log(error);
+      .catch(err => {
+        console.log({ err: err });
+      });
+    this.$store
+      .dispatch("gettotalcommunity")
+
+      .then(() => {
+        console.log("the response");
       })
-      .finally(() => {
-        console.log("Finally Load User Profile Community +++++");
-        this.profile_community = JSON.parse(
-          JSON.stringify(this.$store.getters.getProfileCommunity)
-        );
-        console.log(this.profile_community);
+      .catch(err => {
+        console.log({ err: err });
       });
   }
 };

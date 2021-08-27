@@ -241,7 +241,7 @@
              margin-left: 1px;"
               >
                 <div v-for="(chat, index) in chats" :key="index">
-                  <div v-if="chat.sender_id != '56'" id="received">
+                  <div v-if="chat.sender_id != senderId" id="received">
                     <b-row class="p-4">
                       <b-avatar
                         variant="primary"
@@ -566,6 +566,7 @@ export default {
       socket: io("http://localhost:2471"),
       search: "",
       senderName: "",
+      senderId: "",
       showsearch: true,
       searching: false,
       selecteduser: false,
@@ -665,6 +666,7 @@ export default {
       });
     },
     chatSelector(chat) {
+      this.senderId = localStorage.getItem("senderId");
       this.senderName = localStorage.getItem("senderName");
       this.recipient.name = chat.name;
       this.recipient.profile = chat.profile;

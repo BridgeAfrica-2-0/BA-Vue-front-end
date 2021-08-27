@@ -668,6 +668,7 @@ export default {
     chatSelector(chat) {
       this.senderId = localStorage.getItem("senderId");
       this.senderName = localStorage.getItem("senderName");
+      console.log(this.senderId);
       this.recipient.name = chat.name;
       this.recipient.profile = chat.profile;
       this.recipient.id = chat.id;
@@ -722,8 +723,8 @@ export default {
     },
     send() {
       this.message.room_id =
-        JSON.stringify(this.recipient.id) + localStorage.getItem("userId");
-      this.message.sender_id = localStorage.getItem("userId");
+        JSON.stringify(this.recipient.id) + localStorage.getItem("senderd");
+      this.message.sender_id = localStorage.getItem("senderId");
       this.socket.emit("send_msg", this.message);
       this.message.message = "";
     },

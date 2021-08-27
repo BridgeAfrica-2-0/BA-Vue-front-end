@@ -668,6 +668,7 @@ export default {
     chatSelector(chat) {
       this.senderId = localStorage.getItem("senderId");
       this.senderName = localStorage.getItem("senderName");
+      console.log(this.senderId);
       this.recipient.name = chat.name;
       this.recipient.profile = chat.profile;
       this.recipient.id = chat.id;

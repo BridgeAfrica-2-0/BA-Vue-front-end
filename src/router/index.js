@@ -5,10 +5,12 @@ import Login from "../views/login.vue";
 
 import signup from "../views/signup.vue";
 
-import SignIn from "../views/signIn.vue";
 import RecoverPass1 from "../views/recoverPassword1.vue";
 import RecoverPass2 from "../views/recoverPassword2.vue";
 import RecoverPass3 from "../views/recoverPassword3.vue";
+
+import verifyAccount from "../views/verifyAccount.vue";
+
 import createService from "@/views/createService";
 
 import businessOwnerSettingGeneral from "@/views/businessOwnerSettingGeneral";
@@ -52,6 +54,9 @@ const routes = [
     path: "/",
     name: "home",
     component: dashboard,
+    meta: {
+      auth: false
+    },
   },
 
 
@@ -108,7 +113,7 @@ const routes = [
   },
 
 
- 
+
 
   {
     path: "/business_owner/create_website_step_one",
@@ -149,16 +154,19 @@ const routes = [
   },
 
 
-  {
-    path: "/signin",
-    name: "SignIn",
-    component: SignIn,
-  },
+ 
   {
     path: "/recoverPass1",
     name: "RecoverPass1",
     component: RecoverPass1,
   },
+
+  {
+    path: "/verify",
+    name: "verifyAccount",
+    component: verifyAccount,
+  },
+
   {
     path: "/recoverPass2",
     name: "RecoverPass2",
@@ -211,7 +219,7 @@ const routes = [
   },
 
   {
-    path: "/profilefollower",
+    path: "/follower",
     name: "Follower",
     component: Follower,
   },
@@ -263,12 +271,23 @@ const router = new VueRouter({
 
 
 router.beforeEach((to, from, next) => {
-  const loggedIn = localStorage.getItem('auth/user')
+  const loggedIn = localStorage.getItem('user')
+
+  const isAuthenticated = store.getters['auth/isVerified'];
 
   if (to.matched.some(record => record.meta.auth) && !loggedIn) {
     next('/login')
     return
   }
+  
+
+ // if (to.matched.some(record => record.meta.auth) && !isAuthenticated) {
+  //  next('/verify')
+ //   return
+//  }
+
+  
+
   next()
 
 });

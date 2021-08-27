@@ -5,7 +5,7 @@ import auth from "./auth";
 import axios from "axios";
 
 Vue.use(Vuex);
-axios.defaults.baseURL = "https://1287-154-72-150-20.ngrok.io/api/v1";
+axios.defaults.baseURL = "https://94e9-154-72-150-118.ngrok.io";
 
 const getDefaultState = () => {
   return {
@@ -937,7 +937,7 @@ const state = getDefaultState();
 const actions = {
   async getdetails({ commit }) {
     return await axios
-      .get("/profileInfo", {
+      .get("/api/v1/profileInfo", {
         headers: { Authorization: `Bearer ${state.token}` }
       })
       .then(function({ data }) {

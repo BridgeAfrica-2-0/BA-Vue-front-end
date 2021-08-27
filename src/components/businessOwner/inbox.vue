@@ -260,7 +260,7 @@
                       </b-col>
                     </b-row>
                   </div>
-                  <div v-if="chat.sender_id == '56'">
+                  <div v-if="chat.sender_id == senderId">
                     <b-row class="p-4">
                       <b-col>
                         <p class="sent-name">

@@ -6,12 +6,12 @@ import businessOwner from "./businessOwner";
 import axios from "axios";
 
 Vue.use(Vuex);
-axios.defaults.baseURL =  process.env.VUE_APP_API_URL
+axios.defaults.baseURL = process.env.VUE_APP_API_URL;
 
 const getDefaultState = () => {
   return {
-    api_link:"https://94e9-154-72-150-118.ngrok.io/api/v1",
-    api_link_end:"/network/details",
+    api_link: "https://94e9-154-72-150-118.ngrok.io/api/v1",
+    api_link_end: "/network/details",
     token: "8|Yx3DU4s08aFTYOCa3T2XJKZkjJV4leSi9b20oo5D",
     ndetails: []
   };
@@ -23,7 +23,7 @@ const state = getDefaultState();
 const actions = {
   getndetails({ commit }) {
     return axios
-      .get(state.api_link+state.api_link_end, {
+      .get(state.api_link + state.api_link_end, {
         headers: { Authorization: `Bearer ${state.token}` }
       })
       .then(function({ data }) {
@@ -52,6 +52,6 @@ export default new Vuex.Store({
   mutations,
   modules: {
     auth,
-    businessOwner,
-  },
+    businessOwner
+  }
 });

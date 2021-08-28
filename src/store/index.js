@@ -4,14 +4,12 @@ import Vuex from "vuex";
 import axios from "axios";
 
 Vue.use(Vuex);
-axios.defaults.baseURL = process.env.VUE_APP_API_URL;
+//axios.defaults.baseURL = process.env.VUE_APP_API_URL;
+axios.defaults.baseURL = "https://580f-154-72-150-86.ngrok.io/api/v1";
+//axios.defaults.baseURL="https://6dc7-154-72-150-66.ngrok.io/api/v1/profile/total/community";
 
 const getDefaultState = () => {
   return {
-    url_base: "https://6dc7-154-72-150-66.ngrok.io/api/v1",
-    url_profile_community: "/profile/community",
-    url_total_community: "/profile/total/community",
-    token: "8|Yx3DU4s08aFTYOCa3T2XJKZkjJV4leSi9b20oo5D",
     profile_community: [],
     community: []
   };
@@ -21,29 +19,18 @@ const getDefaultState = () => {
 const state = getDefaultState();
 
 const actions = {
-  async getdetails({ commit }) {
-    return await axios
-      .get(state.url_base + state.url_profile_community, {
-        headers: { Authorization: `Bearer ${state.token}` }
-      })
-      .then(function({ data }) {
-        commit("setdetails", data.data);
-        console.log(data);
-        return data.data;
-      });
+  getdetails({ commit }) {
+    return axios.get("/profile/community", {}).then(function({ data }) {
+      commit("setdetails", data.data);
+      console.log(data);
+    });
   },
 
-  async gettotalcommunity({ commit }) {
-    return await axios
-      .get(state.url_base + state.url_total_community, {
-        headers: { Authorization: `Bearer ${state.token}` }
-      })
-      .then(function({ data }) {
-        commit("setcom", data.data);
-        console.log(data);
-        console.log("peter perre");
-        return data.data;
-      });
+  gettotalcommunity({ commit }) {
+    return axios.get("profile/total/community", {}).then(function({ data }) {
+      commit("setcom", data.data);
+      console.log(data);
+    });
   }
 };
 
@@ -60,7 +47,6 @@ export default new Vuex.Store({
   state,
   getters: {
     getProfileCommunity(state) {
-      console.log(state.profile_community + "pewpewpewepwepwepwewpepwepw");
       return state.profile_community;
     },
     getcom(state) {

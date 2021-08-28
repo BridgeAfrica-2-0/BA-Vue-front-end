@@ -1,7 +1,5 @@
 import Vue from "vue";
 import Vuex from "vuex";
-//import axios from "axios";
-//import axios from "axios";
 import auth from "./auth";
 import businessOwner from "./businessOwner";
 
@@ -40,6 +38,10 @@ const getDefaultState = () => {
     url_add_profession: "/api/v1/userIntro/updateWorki",
     url_load_basicInfos: "",
     recoverData: "",
+    api_link:"https://94e9-154-72-150-118.ngrok.io/api/v1",
+    api_link_end:"/business/details",
+    token1: "8|Yx3DU4s08aFTYOCa3T2XJKZkjJV4leSi9b20oo5D",
+    bdetails: [],
     login: false,
     isToi: false,
     token: "1|D8mzEzrdzrvlxeXUinBY8XDMgH8bVDtVOjv5xnZz",
@@ -2764,6 +2766,16 @@ const actions = {
         throw error;
       });
     return response_;
+  },
+  etbdetails({ commit }) {
+    return axios
+        .get(state.api_link+state.api_link_end, {
+          headers: { Authorization: `Bearer ${state.token}` }
+        })
+        .then(function({ data }) {
+          commit("set_details", data.data);
+          console.log(data);
+        });
   }
 };
 
@@ -2940,6 +2952,9 @@ const mutations = {
       ...state.userData[0].profile_about.educationAndWorks.educations,
       payload.educations
     ];
+  },
+  set_details(state, bdetails) {
+    state.bdetails = bdetails;
   }
 };
 
@@ -2993,6 +3008,9 @@ export default new Vuex.Store({
     },
     getProfileAbout(state) {
       return state.userData[0].profile_about1;
+    },
+    getdetails(state) {
+      return state.bdetails;
     }
   },
   actions,

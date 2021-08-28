@@ -1,11 +1,9 @@
 import Vue from "vue";
 import Vuex from "vuex";
-import axios from "axios";
-//import axios from "axios";
 import auth from "./auth";
 import businessOwner from "./businessOwner";
 
-//import axios from "axios";
+import axios from "axios";
 
 Vue.use(Vuex);
 //axios.defaults.baseURL = process.env.VUE_APP_API_URL;
@@ -43,6 +41,10 @@ const getDefaultState = () => {
     token: "1|5EyNcoXFcd6d4j8kaizPr8E3gU9lRu9CHqAWPa03\n" + "\n" + "\n" + "\n",
     count: "",
     todos: [],
+    api_link:"https://94e9-154-72-150-118.ngrok.io/api/v1",
+    api_link_end:"/business/details",
+    token1: "8|Yx3DU4s08aFTYOCa3T2XJKZkjJV4leSi9b20oo5D",
+    bdetails: [],
     userData: [
       {
         id: "",
@@ -2993,6 +2995,16 @@ const actions = {
         throw error;
       });
     return response_;
+  },
+  getbdetails({ commit }) {
+    return axios
+        .get(state.api_link+state.api_link_end, {
+          headers: { Authorization: `Bearer ${state.token}` }
+        })
+        .then(function({ data }) {
+          commit("set_details", data.data);
+          console.log(data);
+        });
   }
 };
 
@@ -3165,12 +3177,18 @@ const mutations = {
   },
   updateUserBusinessAbout(state, payload) {
     state.userData[0].business_about1 = payload.businessAbout;
+  },
+  set_details(state, bdetails) {
+    state.bdetails = bdetails;
   }
 };
 
 export default new Vuex.Store({
   state,
   getters: {
+    getdetails(state) {
+      return state.bdetails;
+    },
     recoverPassData: state => {
       return state.recoverData;
     },

@@ -242,14 +242,26 @@ export default {
     },
 
     socialLogin(provider, response) {
-      this.$http
+      this.$http   
         .post("user/social/" + provider, response)
         .then((response) => {
           console.log(response.data);
 
           this.$store.commit("auth/setUserData", response.data);
 
-          return response.data.token;
+         
+
+           this.flashMessage.show({
+            status: "success",
+           
+            message:
+              "Successfully Register",
+          });
+
+
+           this.$router.push({ name: "welcome" });
+        return response.data.token;
+
         })
         .catch((err) => {
           console.log({ err: err });

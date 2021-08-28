@@ -25,8 +25,7 @@
               {{ education.durationTo }}
             </p>
             <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas
-              quibusdam harum maxime!
+              {{ education.jobResponsibilities }}
             </p>
           </div>
           <div class="col-1">
@@ -35,7 +34,7 @@
                 >Edit</b-dropdown-item
               >
               <b-dropdown-item
-                @click="delet('educations', education.schoolName)"
+                @click="deleteEducation('educations', education.schoolName)"
                 >Delete</b-dropdown-item
               >
             </b-dropdown>
@@ -143,7 +142,6 @@ export default {
         durationTo: null,
         major: null
       };
-      //this.$refs["model-6"].hide();
     },
     save() {
       console.log("Save/Update/Delete Education User Profile About");
@@ -152,7 +150,6 @@ export default {
         this.educations[this.index] = this.educationInput;
         method = "update";
       } else {
-        //this.educations.push( this.educationInput );
         method = "post";
       }
 
@@ -164,12 +161,9 @@ export default {
         .then(response => {
           console.log(response);
           console.log("save/edit/delete education user end response (3)+++++");
-          //this.$store.state.userData[0].profile_about.educationAndWorks = this.educationAndWorks;
         })
         .catch(error => {
           console.log(error);
-          //this.$store.state.userData[0].profile_about.educationAndWorks.educations = this.educations;
-          //this.cancel()
           console.log("not save/edit/delete Education user end error(2) +++++");
         })
         .finally(() => {
@@ -191,7 +185,7 @@ export default {
         });
 
     },
-    delet(type, value) {
+    deleteEducation(type, value) {
       switch (type) {
         case "educations":
           console.log("delete one education");

@@ -15,7 +15,7 @@
           <div class="col-1">
             <b-dropdown id="dropdown-dropup" dropdown variant="primary-outline">
               <b-dropdown-item @click="edit('professions', profession.profession)">Edit</b-dropdown-item>
-              <b-dropdown-item @click="delet('professions', profession.profession)">Delete</b-dropdown-item>
+              <b-dropdown-item @click="deleteProfession('professions', profession.profession)">Delete</b-dropdown-item>
             </b-dropdown>
           </div>
         </div>
@@ -68,14 +68,10 @@ export default {
       this.professions = JSON.parse(
               JSON.stringify(this.$store.getters.getProfileAboutEducationAndWorks.professions)
       );
-      console.log( 'esseai d affichage de Observer pour la profession')
-      console.log( this.$store.getters.getProfileAboutEducationAndWorks )
-      console.log(this.professions);
       this.professionInput = {
         profession: null,
         access: 'private'
       };
-      //this.$refs["model-6"].hide();
     },
     save(){
       console.log('Save New Profession User Profile About');
@@ -88,22 +84,19 @@ export default {
       this.$store.dispatch('updateUserProfession', {
         profession: this.professionInput,
       }).then( response => {
-        console.log( response );
-        console.log("save new profession user end +++++");
+        console.log( "save new profession user end +++++", response );
         this.$store.state.userData[0].profile_about.educationAndWorks = this.educationAndWorks;
         this.professionInput = {
           profession: null,
           access: 'private'
         }
       }).catch( error => {
-        console.log( error )
-        //this.$store.state.userData[0].profile_about.educationAndWorks.professions = this.educationAndWorks.professions;
+        console.log( error, "not save new profession user end +++++" )
         this.cancel()
-        console.log("not save new profession user end +++++");
       });
       this.$refs['professionModal'].hide();
     },
-    delet(type, value) {
+    deleteProfession(type, value) {
       switch (type) {
         case "professions":
           this.professions = this.professions.filter(

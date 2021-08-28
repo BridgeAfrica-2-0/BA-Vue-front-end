@@ -38,8 +38,8 @@ const getDefaultState = () => {
     url_add_profession: "/api/v1/userIntro/updateWorki",
     url_load_basicInfos: "",
     recoverData: "",
-    api_link:"https://94e9-154-72-150-118.ngrok.io/api/v1",
-    api_link_end:"/business/details",
+    api_link: "https://94e9-154-72-150-118.ngrok.io/api/v1",
+    api_link_end: "/business/details",
     token1: "8|Yx3DU4s08aFTYOCa3T2XJKZkjJV4leSi9b20oo5D",
     bdetails: [],
     login: false,
@@ -2067,8 +2067,7 @@ const actions = {
   },
 
   async updateUserBiography(context, payload) {
-    console.log(payload);
-    console.log("edit user biography start +++++");
+    console.log(payload, "edit user biography start +++++");
     let response_ = null;
     await fetch(
       state.url_base +
@@ -2086,8 +2085,7 @@ const actions = {
       }
     )
       .then(response => {
-        console.log("edit user biography response (1) +++++++");
-        console.log(response);
+        console.log("edit user biography response (1) +++++++", response);
         if (response.status !== 200 && response.status !== 201) {
           console.log("Error From the Server ++++ ");
           throw "Error from the Server";
@@ -2095,8 +2093,7 @@ const actions = {
         return response.json();
       })
       .then(response => {
-        console.log("edit user biography response successsss +++");
-        console.log(response);
+        console.log("edit user biography response successsss +++", response);
         if (!response) {
           console.log("Erreur liée au serveur+++++++");
           throw new Error("Erreur d edition de la biographie+++++");
@@ -2108,15 +2105,16 @@ const actions = {
         response_ = response;
       })
       .catch(error => {
-        console.log("error from the browser or the server error(1)");
-        console.log(error);
+        console.log(
+          "error from the browser or the server error(1) ++++++",
+          error
+        );
         throw error;
       });
     return response_;
   },
   async loadUserBiography(context, payload) {
-    console.log(payload);
-    console.log("load user biography start +++++");
+    console.log(payload, "load user biography start +++++");
 
     let response_ = null;
     await fetch(state.url_base + state.url_load_user_biography, {
@@ -2127,8 +2125,7 @@ const actions = {
       }
     })
       .then(response => {
-        console.log("load user biography response (1) +++++++");
-        console.log(response);
+        console.log(response, "load user biography response (1) +++++++");
         if (response.status !== 200 && response.status !== 201) {
           console.log("error from the server ");
           throw "Error from the Server";
@@ -2136,8 +2133,10 @@ const actions = {
         return response.json();
       })
       .then(response => {
-        console.log("load user biography response (2) successsss +++");
-        console.log(response);
+        console.log(
+          response,
+          "load user biography response (2) successsss +++"
+        );
         if (!response) {
           console.log("Error from the server+++++++");
           throw new Error("Error of load Biography+++++");
@@ -2155,8 +2154,7 @@ const actions = {
         response_ = response;
       })
       .catch(error => {
-        console.log("error from browser or server error(1)");
-        console.log(error);
+        console.log(error, "error from browser or server error(1) +++++++");
         throw error;
       });
     return response_;
@@ -2769,13 +2767,13 @@ const actions = {
   },
   etbdetails({ commit }) {
     return axios
-        .get(state.api_link+state.api_link_end, {
-          headers: { Authorization: `Bearer ${state.token}` }
-        })
-        .then(function({ data }) {
-          commit("set_details", data.data);
-          console.log(data);
-        });
+      .get(state.api_link + state.api_link_end, {
+        headers: { Authorization: `Bearer ${state.token}` }
+      })
+      .then(function({ data }) {
+        commit("set_details", data.data);
+        console.log(data);
+      });
   }
 };
 

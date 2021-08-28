@@ -45,24 +45,20 @@
 <script>
 export default {
   created() {
-    console.log("Load User Biography start+++++++");
     this.$store
       .dispatch("loadUserBiography", null)
       .then(response => {
-        console.log(response);
-        console.log("Load User Biography response (3) +++++++");
+        console.log(response, "Load User Biography response (3) +++++++");
       })
       .catch(error => {
-        console.log("Error from server or from browser error(2)++++");
-        console.log(error);
+        console.log(error, "Error from server or from browser error(2)++++");
         throw error;
       })
       .finally(() => {
-        console.log( 'Finally load User Biography ++++++++++++')
         this.biography = JSON.parse(
           JSON.stringify(this.$store.getters.getProfileAboutBiography)
         );
-        console.log(this.biography);
+        console.log(this.biography, 'Finally load User Biography ++++++++++++');
       });
   },
   data() {
@@ -85,11 +81,10 @@ export default {
   methods: {
     edit(value) {
       if (value === 0) {
-        console.log("Update Biography User Cancel");
         this.biography = JSON.parse(
           JSON.stringify(this.$store.getters.getProfileAboutBiography)
         );
-        console.log(this.biography);
+        console.log(this.biography, "Update Biography User Cancel ++++++");
         this.edited = true;
         this.successmsg = "Profile was succesfully Cancelled";
         setInterval(() => {
@@ -105,21 +100,17 @@ export default {
       setInterval(() => {
         this.edited = false;
       }, 2000);
-      console.log("profile about save message start+++++++++");
-      console.log(this.biography);
+      console.log(this.biography, "profile about save message start+++++++++");
       this.$store
         .dispatch("updateUserBiography", {
           info_access: this.biography.info_access,
           description: this.biography.description
         })
         .then(response => {
-          console.log("edit user biography after response (3) +++++");
-          console.log(response);
-          console.log("edit user biography endddd ++++");
+          console.log(response, ...[ "edit user biography after response (3) +++++", "edit user biography endddd ++++"]);
         })
         .catch(error => {
-          console.log("erreur lie au navigateur ou au serveur error(2)");
-          console.log(error);
+          console.log(error, "erreur lie au navigateur ou au serveur error(2) +++++++");
           this.biography = JSON.parse(
             JSON.stringify(this.$store.getters.getProfileAboutBiography)
           );

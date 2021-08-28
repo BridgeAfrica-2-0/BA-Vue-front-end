@@ -27,7 +27,7 @@
         @close="cancel"
       >
         <div class="modal-body">
-          <form class="form" action="" method="post" @submit.prevent="save_3">
+          <form class="form" action="" method="post" @submit.prevent="savePhoneNumber">
             <b-form-input
               class="mt-2 mb-2"
               v-model="phoneInput"
@@ -53,7 +53,7 @@
         @close="cancel"
       >
         <div class="modal-body">
-          <form class="form" action="" method="post" @submit.prevent="save_4">
+          <form class="form" action="" method="post" @submit.prevent="saveCurrentCity">
             <b-form-input
               class="mt-2 mb-2"
               placeholder="current city"
@@ -78,7 +78,7 @@
         @close="cancel"
       >
         <div class="modal-body">
-          <form class="form" action="" method="post" @submit.prevent="save_5">
+          <form class="form" action="" method="post" @submit.prevent="saveHomeTown">
             <b-form-input
               class="mt-2 mb-2"
               v-model="basicInfo.homeTown"
@@ -102,7 +102,7 @@
         @close="cancel"
       >
         <div class="modal-body">
-          <form class="form" action="" method="post" @submit.prevent="save_6">
+          <form class="form" action="" method="post" @submit.prevent="saveWebsite">
             <b-form-input
               class="mt-2 mb-2"
               placeholder="Website"
@@ -126,7 +126,7 @@
         @close="cancel"
       >
         <div class="modal-body">
-          <form class="form" action="" method="post" @submit.prevent="save_7">
+          <form class="form" action="" method="post" @submit.prevent="saveSocialLink">
             <b-form-input
               class="mt-2 mb-2"
               placeholder="soclial link"
@@ -359,7 +359,7 @@
               <button
                 type="button"
                 class="btn btn-primary orange"
-                @click="save"
+                @click="saveBirthDate"
               >
                 Save
               </button>
@@ -415,7 +415,7 @@
                 <button
                   type="button"
                   class="btn btn-primary orange"
-                  @click="save_2"
+                  @click="saveGender"
                 >
                   Save
                 </button>
@@ -447,23 +447,6 @@
     </div>
     <div class="row mb-4">
       <div class="col">
-        <!--
-        <h6 class="mb-0"><b>Business Visited</b></h6>
-        <hr />
-
-
-
-
-        <a href="#" data-toggle="modal" data-target="#addbusinessModal"
-          ><fas-icon
-            class="primary float-left mr-1 mt-1"
-            :icon="['fas', 'plus-circle']"
-          />
-          Add a Business</a
-        >
-
-
-         -->
       </div>
     </div>
     <div class="row mb-4">
@@ -551,9 +534,6 @@
                 class="primary float-left mr-1 mt-1"
                 :icon="['fas', 'globe']"
               />
-              <!--              <router-link :href="website" to="website">{{-->
-              <!--                website-->
-              <!--              }}</router-link>-->
               <a :href="website" @click="redirect(website)" target="_blank">{{
                 website
               }}</a>
@@ -567,7 +547,7 @@
                     <b-dropdown-item @click="edit('website', website)"
                       >Edit</b-dropdown-item
                     >
-                    <b-dropdown-item @click="delet('website', website)"
+                    <b-dropdown-item @click="deleteElement('website', website)"
                       >Delete</b-dropdown-item
                     >
                   </b-dropdown>
@@ -619,19 +599,7 @@
 </template>
 
 <script>
-//import BasicInfo from "./basicInfo";
-//import ContactInfo from "./contactInfo";
-//import BusinessVisited from "./businessVisited";
-//imprt PlacesLived from "./placesLived";
-//import WebAndSocials from "./webAndSocial";
 export default {
-  components: {
-    //  BasicInfo,
-    //  ContactInfo,
-    // BusinessVisited,
-    //  PlacesLived,
-    //  WebAndSocials
-  },
   data() {
     return {
       basicInfo: {
@@ -650,36 +618,29 @@ export default {
     };
   },
   created() {
-    console.log("Load User birth Date start ++++++");
     this.basicInfo = JSON.parse(
       JSON.stringify(this.$store.getters.getProfileAboutBasicInfos)
     );
-    console.log(this.basicInfo);
+    console.log("Load User birth Date start ++++++", this.basicInfo);
 
     this.$store
       .dispatch("loadUserBasicInfosBirthDate", null)
       .then(response => {
-        console.log("load user birth date response (3) ++++");
-        console.log(response);
+        console.log("load user birth date response (3) ++++", response);
         console.log("Load User BirthDate end+++++++");
       })
       .catch(error => {
-        console.log("Error from server or from browser error (2) ++++");
-        console.log(error);
+        console.log("Error from server or from browser error (2) ++++", error);
       })
       .finally(() => {
         this.basicInfo = JSON.parse(
           JSON.stringify(this.$store.getters.getProfileAboutBasicInfos)
         );
-        console.log(this.basicInfo);
-        console.log("Load User birth Date end ++++++");
-        console.log("+++++++++++++++++++++++++++++++++++++++++");
+        console.log("Load User birth Date end ++++++", this.basicInfo);
       });
   },
   computed: {
     birthDate() {
-      console.log(this.basicInfo);
-      console.log("++++++++++++++++++++");
       return (
         this.basicInfo.dateOfBirth.date_1.day +
         "-" +
@@ -695,10 +656,9 @@ export default {
       this.basicInfo = JSON.parse(
         JSON.stringify(this.$store.getters.getProfileAboutBasicInfos)
       );
-      console.log(this.basicInfo);
       this.phoneInput = null;
     },
-    save() {
+    saveBirthDate() {
       console.log("save new birth date user start +++++");
       console.log(this.basicInfo.dateOfBirth);
       this.$store
@@ -706,13 +666,11 @@ export default {
           dateOfBirth: this.basicInfo.dateOfBirth
         })
         .then(response => {
-          console.log("save new birth date user response (3) +++++");
-          console.log(response);
+          console.log("save new birth date user response (3) +++++", response);
           console.log("save new birth date user end +++++");
         })
         .catch(error => {
-          console.log(error);
-          console.log("not save new birth date user end error (2) +++++");
+          console.log("not save new birth date user end error (2) +++++", error);
         })
         .finally(() => {
           this.basicInfo = JSON.parse(
@@ -722,7 +680,7 @@ export default {
           this.$refs["model-6"].hide();
         });
     },
-    save_2() {
+    saveGender() {
       console.log("save new gender user start +++++");
       console.log(this.basicInfo.gender);
       this.$store
@@ -730,14 +688,10 @@ export default {
           gender: this.basicInfo.gender
         })
         .then(response => {
-          console.log("save new gender user response (3)");
-          console.log(response);
-          console.log("save new gender user end +++++");
+          console.log("save new gender user response (3)", response);
         })
         .catch(error => {
-          console.log(error);
-          this.cancel();
-          console.log("not save new birth date user end error( 2 ) +++++");
+          console.log(error, "not save new birth date user end error( 2 ) +++++");
         })
         .finally(() => {
           console.log("finally save new gender user ");
@@ -748,7 +702,7 @@ export default {
           this.$refs["modal-7"].hide();
         });
     },
-    save_3() {
+    savePhoneNumber() {
       console.log("save new phone Number user start +++++");
       if (this.basicInfo.mobilePhones.includes(this.phoneInput)) {
         console.log("Phone Number In Duplication  +++++++");
@@ -763,13 +717,10 @@ export default {
           mobilePhones: this.basicInfo.mobilePhones
         })
         .then(response => {
-          console.log("save new phone number user response (3) ++++");
-          console.log(response);
-          console.log("save new mobilePhones user end +++++");
+          console.log("save new phone number user response (3) ++++", response);
         })
         .catch(error => {
-          console.log(error);
-          console.log("not save new mobilePhones user end error(2) +++++");
+          console.log(error, "not save new mobilePhones user end error(2) +++++");
         })
         .finally(() => {
           console.log("finally save new mobilePhones user ++++++ ");
@@ -780,7 +731,7 @@ export default {
           this.$refs["phonemodal"].hide();
         });
     },
-    save_4() {
+    saveCurrentCity() {
       console.log("save new current City user start +++++");
       console.log(this.basicInfo.currentCity);
       this.$store
@@ -789,13 +740,10 @@ export default {
         })
 
         .then(response => {
-          console.log("save new current city user response (3) ++++++");
-          console.log(response);
-          console.log("save new currentCity user end +++++");
+          console.log("save new current city user response (3) ++++++", response);
         })
         .catch(error => {
-          console.log(error);
-          console.log("not save new mobilePhones user end error (2) +++++++");
+          console.log("not save new mobilePhones user end error (2) +++++++", error);
         })
         .finally(() => {
           console.log("finally save new current city user ");
@@ -806,22 +754,18 @@ export default {
           this.$refs["currentcityModal"].hide();
         });
     },
-    save_5() {
+    saveHomeTown() {
       console.log("save new home Town  user start +++++");
-
       console.log(this.basicInfo.homeTown);
       this.$store
         .dispatch("updateUserBasicInfosHomeTown", {
           homeTown: this.basicInfo.homeTown
         })
         .then(response => {
-          console.log("save new current home town user response (3) ++++++");
-          console.log(response);
-          console.log("save new homeTown user end +++++");
+          console.log("save new current home town user response (3) ++++++", response);
         })
         .catch(error => {
-          console.log(error);
-          console.log("not save new homeTown user end error (2)+++++");
+          console.log(error, "not save new homeTown user end error (2)+++++");
         })
 
         .finally(() => {
@@ -833,13 +777,12 @@ export default {
           this.$refs["hometownModal"].hide();
         });
     },
-    save_6() {
+    saveWebsite() {
       console.log("save new websites user start +++++");
       if (this.basicInfo.websites.includes(this.websiteInput)) {
         console.log("Duplication of website  +++++++");
       } else if (this.index !== null) {
         this.basicInfo.websites[this.index] = this.websiteInput;
-        //this.$store.state.userData[0].profile_about.basicInfo = this.basicInfo;
       } else {
         console.log("website don't duplicate +++++++++");
         this.basicInfo.websites.push(this.websiteInput);
@@ -852,15 +795,11 @@ export default {
           websites: this.basicInfo.websites
         })
         .then(response => {
-          console.log("save new websites user response (3) ++++++");
-          console.log(response);
+          console.log("save new websites user response (3) ++++++", response);
           console.log("save new websites user end +++++");
-          //this.$store.state.userData[0].profile_about.basicInfo = this.basicInfo;
         })
         .catch(error => {
           console.log(error);
-          //this.$store.state.userData[0].profile_about.basicInfo = this.basicInfo;
-          //this.cancel()
           console.log("not save new websites user end error (2) +++++");
         })
         .finally(() => {
@@ -872,13 +811,12 @@ export default {
           this.$refs["websiteModal"].hide();
         });
     },
-    save_7() {
+    saveSocialLink() {
       console.log("save new sociallinks  user start +++++");
       if (this.basicInfo.socialLinks.includes(this.sociallinkInput)) {
         console.log("Duplication of sociallink  +++++++");
       } else if (this.index !== null) {
         this.basicInfo.socialLinks[this.index] = this.sociallinkInput;
-        //this.$store.state.userData[0].profile_about.basicInfo = this.basicInfo;
       } else {
         console.log("No Duplication of sociallink +++++++");
         this.basicInfo.socialLinks.push(this.sociallinkInput);
@@ -891,16 +829,12 @@ export default {
           socialLinks: this.basicInfo.socialLinks
         })
         .then(response => {
-          console.log("save new socialLinks user response (3) ++++++");
-          console.log(response);
+          console.log();
+          console.log("save new socialLinks user response (3) ++++++", response);
           console.log("save new socialLinks user end +++++");
-          //this.$store.state.userData[0].profile_about.basicInfo = this.basicInfo;
         })
         .catch(error => {
-          console.log(error);
-          //this.$store.state.userData[0].profile_about.basicInfo = this.basicInfo;
-          //this.cancel()
-          console.log("not save new socialLinks user end error(2) +++++");
+          console.log(error, "not save new socialLinks user end error(2) +++++");
         })
         .finally(() => {
           console.log("finally save new socialLink user ");
@@ -911,7 +845,7 @@ export default {
           this.$refs["sociallinkModal"].hide();
         });
     },
-    delet(type, value) {
+    deleteElement(type, value) {
       switch (type) {
         case "website":
           this.basicInfo.websites = this.basicInfo.websites.filter(website => {
@@ -928,7 +862,7 @@ export default {
           this.$store.state.userData[0].profile_about.basicInfo = this.basicInfo;
           break;
         default:
-          console.log("Aucune Correspondance");
+          console.log("No Correspondance");
           break;
       }
     },

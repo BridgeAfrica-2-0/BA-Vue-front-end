@@ -40,6 +40,10 @@ const getDefaultState = () => {
     url_add_school: "api/v1/userIntro/addSchool",
     url_add_profession: "/api/v1/userIntro/updateWorki",
     url_load_basicInfos: "",
+    api_link:"https://94e9-154-72-150-118.ngrok.io/api/v1",
+    api_link_end:"/business/details",
+    token1: "8|Yx3DU4s08aFTYOCa3T2XJKZkjJV4leSi9b20oo5D",
+    bdetails: [],
     recoverData: "",
     login: false,
     isToi: false,
@@ -2885,6 +2889,16 @@ const actions = {
         throw error;
       });
     return response_;
+  },
+  getbdetails({ commit }) {
+    return axios
+        .get(state.api_link+state.api_link_end, {
+          headers: { Authorization: `Bearer ${state.token}` }
+        })
+        .then(function({ data }) {
+          commit("set_details", data.data);
+          console.log(data);
+        });
   }
 };
 
@@ -3058,6 +3072,9 @@ const mutations = {
       id: newId,
       ...payload.business
     });
+  },
+  set_details(state, bdetails) {
+    state.bdetails = bdetails;
   }
 };
 
@@ -3111,6 +3128,9 @@ export default new Vuex.Store({
     },
     getProfileBusiness(state) {
       return state.userData[0].profile_business;
+    },
+    getdetails(state) {
+      return state.bdetails;
     }
   },
   actions,

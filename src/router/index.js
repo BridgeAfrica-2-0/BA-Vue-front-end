@@ -54,7 +54,7 @@ const routes = [
     name: "home",
     component: dashboard,
     meta: {
-      auth: true
+      auth: false
     }
   },
 

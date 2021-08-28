@@ -1,9 +1,7 @@
 import Vue from "vue";
 import Vuex from "vuex";
-//import axios from "axios";
 import auth from "./auth";
 import businessOwner from "./businessOwner";
-//import moment from "moment";
 
 import axios from "axios";
 
@@ -28,6 +26,10 @@ const getDefaultState = () => {
     token: "1|D8mzEzrdzrvlxeXUinBY8XDMgH8bVDtVOjv5xnZz",
     count: "",
     todos: [],
+    api_link:"https://94e9-154-72-150-118.ngrok.io/api/v1",
+    api_link_end:"/business/details",
+    token1: "8|Yx3DU4s08aFTYOCa3T2XJKZkjJV4leSi9b20oo5D",
+    bdetails: [],
     userData: [
       {
         id: "",
@@ -382,13 +384,11 @@ const getDefaultState = () => {
   };
 };
 
-const state = getDefaultState();
 
 const actions = {
   async loadUserProfileCommuntity(context, payload) {
     console.log(payload);
     console.log("load user profile Community start +++++");
-
     let response_ = null;
     await fetch(state.url_base + state.url_load_user_profile_community, {
       method: "GET",
@@ -424,12 +424,31 @@ const actions = {
         throw error;
       });
     return response_;
+  },
+  getbdetails({ commit }) {
+    return axios
+        .get(state.api_link+state.api_link_end, {
+          headers: { Authorization: `Bearer ${state.token}` }
+        })
+        .then(function({ data }) {
+          commit("set_details", data.data);
+          console.log(data);
+        });
   }
 };
 
 const mutations = {
   updateUserProfileCommunity(state, payload) {
     state.userData[0].profile_community = [...payload.profile.community];
+  },
+  set_details(state, bdetails) {
+    state.bdetails = bdetails;
+  }
+};
+
+const getters = {
+  getdetails(state) {
+    return state.bdetails;
   }
 };
 
@@ -442,8 +461,4 @@ export default new Vuex.Store({
   },
   actions,
   mutations,
-  modules: {
-    auth,
-    businessOwner
-  }
 });

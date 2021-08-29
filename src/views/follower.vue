@@ -38,6 +38,7 @@ export default {
 }
 
 @media only screen and (max-width: 768px) {
+
   .settings {
     top: -5px;
     left: -20px;

@@ -5,8 +5,8 @@
         lg="6"
         sm="12"
         class="p-2"
-        v-for="member in business"
-        :key="member.id"
+        v-for="item in business"
+        :key="item.id"
       >
         <div class="people-style shadow">
           <b-row>
@@ -14,32 +14,32 @@
               <div class="center-img">
                 <splide :options="options" class="r-image">
                   <splide-slide cl>
-                    <img :src="member.picture" class="r-image" />
+                    <img :src="item.picture" class="r-image" />
                   </splide-slide>
                 </splide>
               </div>
             </b-col>
             <b-col md="5" cols="7" lg="7" xl="5" sm="5">
               <p class="textt">
-                <strong class="title"> {{ member.name }} </strong> <br />
-                {{ member.category }}
+                <strong class="title"> {{ item.name }} </strong> <br />
+                {{ item.category }}
                 <br />
                 {{
-                  member.followers >= 1000000
-                    ? member.followers / 1000000 + "M"
-                    : member.followers >= 1000
-                    ? member.followers / 1000 + "K"
-                    : member.followers
+                  item.followers >= 1000000
+                    ? item.followers / 1000000 + "M"
+                    : item.followers >= 1000
+                    ? item.followers / 1000 + "K"
+                    : item.followers
                 }}
                 Community <br />
 
                 <span class="location">
                   <b-icon-geo-alt class="ico"></b-icon-geo-alt
-                  >{{ member.country }}
+                  >{{ item.country }}
                 </span>
                 <br />
 
-                {{ member.about_description }} <b-link>Read More</b-link>
+                {{ item.about_description }} <b-link>Read More</b-link>
               </p>
             </b-col>
 

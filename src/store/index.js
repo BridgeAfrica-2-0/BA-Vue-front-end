@@ -1,11 +1,12 @@
 import Vue from "vue";
 import Vuex from "vuex";
+import auth from "./auth";
+import businessOwner from "./businessOwner";
 
 import axios from "axios";
 
 Vue.use(Vuex);
-//axios.defaults.baseURL = process.env.VUE_APP_baseURL;
-axios.defaults.baseURL = " https://580f-154-72-150-86.ngrok.io/api/v1";
+axios.defaults.baseURL = process.env.VUE_APP_API_URL;
 
 const getDefaultState = () => {
   return {
@@ -41,5 +42,9 @@ export default new Vuex.Store({
   state,
   getters,
   actions,
-  mutations
+  mutations,
+  modules: {
+    auth,
+    businessOwner
+  }
 });

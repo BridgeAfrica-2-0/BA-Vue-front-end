@@ -24,13 +24,7 @@
                 <strong class="title"> {{ item.name }} </strong> <br />
                 {{ item.category }}
                 <br />
-                {{
-                  item.followers >= 1000000
-                    ? item.followers / 1000000 + "M"
-                    : item.followers >= 1000
-                    ? item.followers / 1000 + "K"
-                    : item.followers
-                }}
+                {{count(item.followers)}}
                 Community <br />
 
                 <span class="location">
@@ -127,7 +121,21 @@ export default {
         perMove: 1
       }
     };
-  }
+  },
+  methods:
+    {
+      count(number){
+        if (number >= 1000000)
+        {
+          return number +"M";
+        }
+        if (number >= 1000)
+        {
+          return number + "K";
+        }
+        else return number;
+      }
+    }
 };
 </script>
 

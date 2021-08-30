@@ -6,8 +6,8 @@
           lg="6"
           sm="12"
           class="p-2"
-          v-for="member in people"
-          :key="member.id"
+          v-for="item in people"
+          :key="item.id"
         >
           <div class="people-style border shadow">
             <b-row class="mb-1">
@@ -15,7 +15,7 @@
                 <b-avatar
                   class="p-avater"
                   variant="primary"
-                  :src="member.profile_picture"
+                  :src="item.profile_picture"
                 ></b-avatar>
               </b-col>
 
@@ -33,7 +33,7 @@
                             class="mt-lg-2"
                           >
                             <div class="mt-3 mt-lg-0 mt-xl-0 username">
-                              <b> {{ member.name }} </b>
+                              <b> {{ item.name }} </b>
                             </div>
                           </b-col>
 
@@ -45,13 +45,7 @@
                             class="mt-3 mt-lg-1 mt-xl-3"
                           >
                             <h6 class="follower m-15">
-                              {{
-                                member.followers >= 1000000
-                                  ? member.followers / 1000000 + "M"
-                                  : member.followers >= 1000
-                                  ? member.followers / 1000 + "K"
-                                  : member.followers
-                              }}
+                              {{count(item.followers)}}
                               Community
                             </h6>
                           </b-col>
@@ -114,7 +108,21 @@
 
 <script>
 export default {
-  props: ["people"]
+  props: ["people"],
+  methods:
+  {
+    count(number){
+   if (number >= 1000000)
+   {
+     return number +"M";
+   }
+   if (number >= 1000)
+   {
+     return number + "K";
+   }
+   else return number;
+  }
+  }
 };
 </script>
 

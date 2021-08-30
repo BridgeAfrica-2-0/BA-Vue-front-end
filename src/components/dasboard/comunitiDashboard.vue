@@ -18,13 +18,7 @@
             <template slot="title">
               People
               <span class="spa-color">
-                {{
-                  business.people[0].total_people >= 1000000
-                    ? business.people[0].total_people / 1000000 + "M"
-                    : business.people[0].total_people >= 1000
-                    ? business.people[0].total_people / 1000 + "K"
-                    : business.people[0].total_people
-                }}
+                {{count(business.people[0].total_people)}}
               </span>
             </template>
 
@@ -36,16 +30,7 @@
                       <template slot="title">
                         Followers
                         <span class="spa-color">
-                          {{
-                            business.people[0].total_user_follower >= 1000000
-                              ? business.people[0].total_user_follower /
-                                  1000000 +
-                                "M"
-                              : business.people[0].total_user_follower >= 1000
-                              ? business.people[0].total_user_follower / 1000 +
-                                "K"
-                              : business.people[0].total_user_follower
-                          }}
+                          {{count(business.people[0].total_user_follower)}}
                         </span>
                       </template>
 
@@ -64,16 +49,7 @@
                       <template slot="title">
                         Following
                         <span class="spa-color">
-                          {{
-                            business.people[0].total_user_following >= 1000000
-                              ? business.people[0].total_user_following /
-                                  1000000 +
-                                "M"
-                              : business.people[0].total_user_following >= 1000
-                              ? business.people[0].total_user_following / 1000 +
-                                "K"
-                              : business.people[0].total_user_following
-                          }}
+                          {{count(business.people[0].total_user_following)}}
                         </span>
                       </template>
 
@@ -97,13 +73,7 @@
             <template slot="title">
               Businesses
               <span class="spa-color">
-                {{
-                  business.people[0].total_business >= 1000000
-                    ? business.people[0].total_business / 1000000 + "M"
-                    : business.people[0].total_business >= 1000
-                    ? business.people[0].total_business / 1000 + "K"
-                    : business.people[0].total_business
-                }}
+                {{count(business.people[0].total_business)}}
               </span>
             </template>
 
@@ -113,16 +83,7 @@
                   <template slot="title">
                     Followers
                     <span class="spa-color">
-                      {{
-                        business.people[0].total_business_follower >= 1000000
-                          ? business.people[0].total_business_follower /
-                              1000000 +
-                            "M"
-                          : business.people[0].total_business_follower >= 1000
-                          ? business.people[0].total_business_follower / 1000 +
-                            "K"
-                          : business.people[0].total_business_follower
-                      }}
+                      {{count(business.people[0].total_business_follower)}}
                     </span>
                   </template>
 
@@ -141,23 +102,14 @@
                   <template slot="title">
                     Following
                     <span class="spa-color">
-                      {{
-                        business.people[0].total_business_following >= 1000000
-                          ? business.people[0].total_business_following /
-                              1000000 +
-                            "M"
-                          : business.people[0].total_business_following >= 1000
-                          ? business.people[0].total_business_following / 1000 +
-                            "K"
-                          : business.people[0].total_business_following
-                      }}
+                      {{count( business.people[0].total_business_following)}}
                     </span>
                   </template>
 
                   <div class="s-comcard">
                     <b-row>
                       <div>
-                        <Business
+                        <Business 
                           :business="business.business[0].business_following"
                         />
                       </div>
@@ -211,7 +163,21 @@ export default {
       .catch(err => {
         console.log({ err: err });
       });
-  }
+  },
+  methods:
+    {
+      count(number){
+        if (number >= 100000)
+        {
+          return number +"M";
+        }
+        if (number >= 1000)
+        {
+          return number + "K";
+        }
+        else return number;
+      }
+    }
 };
 </script>
 

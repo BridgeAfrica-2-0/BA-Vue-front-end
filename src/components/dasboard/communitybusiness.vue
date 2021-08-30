@@ -1,13 +1,7 @@
 <template>
   <div>
     <b-row>
-      <b-col
-        lg="6"
-        sm="12"
-        class="p-2"
-        v-for="item in business"
-        :key="item.id"
-      >
+      <b-col lg="6" sm="12" class="p-2" v-for="item in business" :key="item.id">
         <div class="people-style shadow">
           <b-row>
             <b-col md="3" xl="3" lg="3" cols="5" sm="3">
@@ -24,7 +18,7 @@
                 <strong class="title"> {{ item.name }} </strong> <br />
                 {{ item.category }}
                 <br />
-                {{count(item.followers)}}
+                {{ count(item.followers) }}
                 Community <br />
 
                 <span class="location">
@@ -122,20 +116,16 @@ export default {
       }
     };
   },
-  methods:
-    {
-      count(number){
-        if (number >= 1000000)
-        {
-          return number +"M";
-        }
-        if (number >= 1000)
-        {
-          return number + "K";
-        }
-        else return number;
+  methods: {
+    count(number) {
+      if (number >= 1000000) {
+        return number / 1000000 + "M";
       }
+      if (number >= 1000) {
+        return number / 1000 + "K";
+      } else return number;
     }
+  }
 };
 </script>
 

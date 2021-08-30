@@ -18,7 +18,7 @@
             <template slot="title">
               People
               <span class="spa-color">
-                {{count(business.people[0].total_people)}}
+                {{ count(business.people[0].total_people) }}
               </span>
             </template>
 
@@ -30,7 +30,7 @@
                       <template slot="title">
                         Followers
                         <span class="spa-color">
-                          {{count(business.people[0].total_user_follower)}}
+                          {{ count(business.people[0].total_user_follower) }}
                         </span>
                       </template>
 
@@ -49,7 +49,7 @@
                       <template slot="title">
                         Following
                         <span class="spa-color">
-                          {{count(business.people[0].total_user_following)}}
+                          {{ count(business.people[0].total_user_following) }}
                         </span>
                       </template>
 
@@ -73,7 +73,7 @@
             <template slot="title">
               Businesses
               <span class="spa-color">
-                {{count(business.people[0].total_business)}}
+                {{ count(business.people[0].total_business) }}
               </span>
             </template>
 
@@ -83,7 +83,7 @@
                   <template slot="title">
                     Followers
                     <span class="spa-color">
-                      {{count(business.people[0].total_business_follower)}}
+                      {{ count(business.people[0].total_business_follower) }}
                     </span>
                   </template>
 
@@ -102,7 +102,7 @@
                   <template slot="title">
                     Following
                     <span class="spa-color">
-                      {{count( business.people[0].total_business_following)}}
+                      {{ count(business.people[0].total_business_following) }}
                     </span>
                   </template>
 
@@ -146,7 +146,7 @@ export default {
   },
   created() {
     this.$store
-      .dispatch("getdetails")
+      .dispatch("dashboardcommunity/getdetails")
 
       .then(() => {
         console.log("the response");
@@ -155,7 +155,7 @@ export default {
         console.log({ err: err });
       });
     this.$store
-      .dispatch("gettotalcommunity")
+      .dispatch("dashboardcommunity/gettotalcommunity")
 
       .then(() => {
         console.log("the response");
@@ -164,20 +164,16 @@ export default {
         console.log({ err: err });
       });
   },
-  methods:
-    {
-      count(number){
-        if (number >= 100000)
-        {
-          return number +"M";
-        }
-        if (number >= 1000)
-        {
-          return number + "K";
-        }
-        else return number;
+  methods: {
+    count(number) {
+      if (number >= 1000000) {
+        return number/1000000 + "M";
       }
+      if (number >= 1000) {
+        return number/1000 + "K";
+      } else return number;
     }
+  }
 };
 </script>
 

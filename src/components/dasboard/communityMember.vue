@@ -108,7 +108,7 @@ export default {
         return number/1000000 + "M";
       }
       if (number >= 1000) {
-        return number + "K";
+        return number/1000 + "K";
       } else return number;
     }
   }

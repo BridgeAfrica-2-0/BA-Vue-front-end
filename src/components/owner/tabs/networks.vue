@@ -153,7 +153,7 @@
           </b-form-group>
           <b-form-group
             label-cols-lg="12"
-            label="Business Category"
+            label="Network Category"
             label-size="md"
             label-class="font-weight-bold pt-0"
             class="mb-0"
@@ -168,7 +168,7 @@
           </b-form-group>
           <b-form-group
             label-cols-lg="12"
-            label="Business Address"
+            label="Network Address"
             label-size="md"
             label-class="font-weight-bold pt-0"
             class="mb-0"
@@ -230,7 +230,7 @@
           </b-form-group>
           <b-form-group
             label-cols-lg="12"
-            label="Bussiness Image"
+            label="Network Image"
             label-size="md"
             label-class="font-weight-bold pt-0"
             class="mb-0"

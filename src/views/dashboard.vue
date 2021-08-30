@@ -115,11 +115,15 @@
 
 <script>
 import Navbar from "@/components/navbar";
+
 import CarousselDashboard from "@/components/dasboard/carousselDashboard";
 
 import BusinessDashboard from "@/components/dasboard/businessDashboard";
+
 import ComunitiDashboard from "@/components/dasboard/comunitiDashboard";
+
 import Insights from "@/components/dasboard/insights";
+
 import CommunityActivity from "@/components/dasboard/communityActivity";
 
 import Tutorial from "@/components/dasboard/tutorial";
@@ -133,6 +137,7 @@ import Map from "@/components/dasboard/map";
 import EmptyBusiness from "@/components/dasboard/emptybusiness";
 
 import Popularnetwork from "@/components/dasboard/popularnetwork";
+
 export default {
   name: "dashboard",
   data() {

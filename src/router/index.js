@@ -4,8 +4,6 @@ import VueRouter from "vue-router";
 import Login from "../views/login.vue";
 
 import signup from "../views/signup.vue";
-
-import SignIn from "../views/signIn.vue";
 import RecoverPass1 from "../views/recoverPassword1.vue";
 import RecoverPass2 from "../views/recoverPassword2.vue";
 import RecoverPass3 from "../views/recoverPassword3.vue";
@@ -43,11 +41,6 @@ import welcome from "@/views/welcome";
 Vue.use(VueRouter);
 
 const routes = [
-  // {
-  //   path: "/test",
-  //   name: "Home",
-  //   component: Test,
-  // },
   {
     path: "/",
     name: "home",
@@ -138,12 +131,6 @@ const routes = [
     path: "/signup",
     name: "signup",
     component: signup
-  },
-
-  {
-    path: "/signin",
-    name: "SignIn",
-    component: SignIn
   },
   {
     path: "/recoverPass1",

@@ -181,19 +181,16 @@ export default {
         text: this.$store.getters.getdetails.owner[0].name,
         value: "owner"
       });
-      console.log("load data from dashboard++++++++++++");
       console.log(
         JSON.parse(JSON.stringify(this.$store.getters.getdetails)).business
       );
       let businesses = JSON.parse(
         JSON.stringify(this.$store.getters.getdetails)
       ).business;
-      console.log(businesses);
       businesses = businesses.map(value => {
         this.boptions.push({ text: value.name, value: value.id });
         return value;
       });
-      console.log(businesses);
       return this.boptions;
     }
   },
@@ -201,8 +198,8 @@ export default {
   mounted() {},
 
   created() {
-    this.$store.dispatch("getdetails").then(response => {
-      console.log(response, "+++++++++pop");
+    this.$store.dispatch("ProfileAndBusinessDetails/getdetails").then(response => {
+
       this.getbusiness();
     });
   },
@@ -214,7 +211,6 @@ export default {
   },
   watch: {
     selectedb(newvalue) {
-      console.log(newvalue);
     }
   }
 };

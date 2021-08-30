@@ -11,8 +11,6 @@ export default {
     chartData:function(newVal) {
 
       this.update();
-      console.log(newVal);
-      console.log("hello you")
 
     }
 

@@ -723,7 +723,7 @@ export default {
     },
     send() {
       this.message.room_id =
-        JSON.stringify(this.recipient.id) + localStorage.getItem("senderd");
+        JSON.stringify(this.recipient.id) + localStorage.getItem("senderId");
       this.message.sender_id = localStorage.getItem("senderId");
       this.socket.emit("send_msg", this.message);
       this.message.message = "";

@@ -126,7 +126,6 @@ import Tutorial from "@/components/dasboard/tutorial";
 
 import Profile from "@/components/dasboard/profile";
 
-//import People from "@/components/dasboard/communityMember";
 import Business from "@/components/dasboard/communitybusiness";
 
 import Map from "@/components/dasboard/map";
@@ -141,8 +140,6 @@ export default {
       slide: 0,
 
       sliding: null,
-
-      selected: "all",
 
       selectedb: "owner",
 

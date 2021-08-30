@@ -109,7 +109,7 @@
                   <div class="s-comcard">
                     <b-row>
                       <div>
-                        <Business 
+                        <Business
                           :business="business.business[0].business_following"
                         />
                       </div>

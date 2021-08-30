@@ -2,13 +2,7 @@
   <div>
     <div class="s-card">
       <b-row>
-        <b-col
-          lg="6"
-          sm="12"
-          class="p-2"
-          v-for="item in people"
-          :key="item.id"
-        >
+        <b-col lg="6" sm="12" class="p-2" v-for="item in people" :key="item.id">
           <div class="people-style border shadow">
             <b-row class="mb-1">
               <b-col md="3" cols="4" sm="4" class="my-auto">
@@ -45,7 +39,7 @@
                             class="mt-3 mt-lg-1 mt-xl-3"
                           >
                             <h6 class="follower m-15">
-                              {{count(item.followers)}}
+                              {{ count(item.followers) }}
                               Community
                             </h6>
                           </b-col>
@@ -101,7 +95,6 @@
           </div>
         </b-col>
       </b-row>
-
     </div>
   </div>
 </template>
@@ -109,19 +102,15 @@
 <script>
 export default {
   props: ["people"],
-  methods:
-  {
-    count(number){
-   if (number >= 1000000)
-   {
-     return number +"M";
-   }
-   if (number >= 1000)
-   {
-     return number + "K";
-   }
-   else return number;
-  }
+  methods: {
+    count(number) {
+      if (number >= 1000000) {
+        return number/1000000 + "M";
+      }
+      if (number >= 1000) {
+        return number + "K";
+      } else return number;
+    }
   }
 };
 </script>

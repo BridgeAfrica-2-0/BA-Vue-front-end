@@ -6,8 +6,8 @@ import businessOwner from "./businessOwner";
 import axios from "axios";
 
 Vue.use(Vuex);
-axios.defaults.baseURL = process.env.VUE_APP_BASE_URL;
-
+//axios.defaults.baseURL = process.env.VUE_APP_BASE_URL;
+axios.defaults.baseURL ="http://team3dev.maxinemoffett.com/api/v1";
 const getDefaultState = () => {
   return {
     profile_community: [],
@@ -29,7 +29,9 @@ const actions = {
   gettotalcommunity({ commit }) {
     return axios.get("profile/total/community", {}).then(function({ data }) {
       commit("setcom", data.data);
+      console. log("dsppdpwdwwwwwwwwwwwwwwwwwwwwwwwwwwf");
       console.log(data);
+
     });
   }
 };

@@ -43,16 +43,18 @@ const mutations = {
   }
 };
 
+const getters= {
+  getProfileCommunity(state) {
+    return state.profile_community;
+  },
+  getcom(state) {
+    return state.community;
+  }
+};
+
 export default new Vuex.Store({
   state,
-  getters: {
-    getProfileCommunity(state) {
-      return state.profile_community;
-    },
-    getcom(state) {
-      return state.community;
-    }
-  },
+ getters,
   actions,
   mutations,
   modules: {

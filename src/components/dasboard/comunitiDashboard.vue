@@ -138,10 +138,12 @@ export default {
   },
   computed: {
     business() {
-      return this.$store.getters.getProfileCommunity;
+      //return this.$store.getters.getProfileCommunity;
+      return this.$store.getters["dashboardcommunity/getProfileCommunity"];
     },
     com() {
-      return this.$store.getters.getcom;
+      // return this.$store.getters.getcom;
+      return this.$store.getters["dashboardcommunity/getcom"];
     }
   },
   created() {
@@ -167,10 +169,10 @@ export default {
   methods: {
     count(number) {
       if (number >= 1000000) {
-        return number/1000000 + "M";
+        return number / 1000000 + "M";
       }
       if (number >= 1000) {
-        return number/1000 + "K";
+        return number / 1000 + "K";
       } else return number;
     }
   }

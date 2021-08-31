@@ -6,7 +6,7 @@
 
     <div
       class="people-style shadow"
-      v-for="item in $store.getters.getdetails"
+      v-for="item in $store.getters['networkDetails/getdetails']"
       :key="item.id"
     >
       <b-row>
@@ -74,12 +74,12 @@ export default {
   props: ["title", "image"],
   computed: {
     business() {
-      return this.$store.getters.getdetails.category;
+      return this.$store.getters["networkDetails/getdetails.category"];
     }
   },
   created() {
     this.$store
-      .dispatch("getndetails")
+      .dispatch("networkDetails/getndetails")
       .then(() => {
         console.log("the response");
       })

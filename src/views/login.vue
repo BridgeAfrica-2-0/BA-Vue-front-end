@@ -3,7 +3,7 @@
     <form novalidate class="md-layout" @submit.prevent="validateUser">
       <md-card class="md-layout-item md-size-50 md-small-size-100 p-card">
         <md-card-header>
-          <div class="md-title center f-22">   {{ $t(" Login_To_Bridge_Africa") }}</div>
+          <div class="md-title center f-22">   {{ $t("Login_To_Bridge_Africa") }}</div>
         </md-card-header>
 
         <md-card-content>

@@ -20,6 +20,10 @@
               </md-field>
             </b-form-group>
 
+             <b-row class="mt-2">  <b-col cols="6">  </b-col>    <b-col cols="6"> 
+            <b-button class="btn btn-primary button float-right"  @click.prevent="next" > Next </b-button>  </b-col>  </b-row>
+            
+
             <b-row class="mt-2">
               <b-col cols="6"> </b-col>
               <b-col cols="6">
@@ -88,6 +92,14 @@ export default {
 </script>
 
 <style scoped>
+.image {
+  width: 80%;
+}
+.button {
+  margin-left: 265px;
+  background-color: #e75c18;
+  border: none;
+}
 .btnz {
   border: solid 1px #e75c18;
   color: #e75c18;

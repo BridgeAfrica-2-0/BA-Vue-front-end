@@ -4,7 +4,7 @@
       <md-card class="md-layout-item md-size-50 md-small-size-100 p-card">
         <md-card-header>
           <div class="md-title center"> {{ $t("Sign_Up_On_Bridge_Africa") }} </div>
-        </md-card-header>
+        </md-card-header>  
         <FlashMessage />
         <md-card-content>
           <div class="center">
@@ -14,7 +14,7 @@
                   @click.prevent="authProvider('facebook')"
                   class="md-raised md-primary b-w"
                 >
-                  <b-icon icon="facebook" aria-hidden="true"></b-icon> Sign_Up_with_facebook {{ $t("the_user") }} </md-button
+                  <b-icon icon="facebook" aria-hidden="true"></b-icon>  {{ $t("Sign_Up_with_facebook") }} </md-button
                 >
               </b-col>
 
@@ -24,7 +24,7 @@
                   class="b-color b-w"
                   style="color: white"
                 >
-                  <b-icon icon="google" aria-hidden="true"></b-icon>  {{ $t(" Sign_Up_with_Google") }} </md-button
+                  <b-icon icon="google" aria-hidden="true"></b-icon>  {{ $t("Sign_Up_with_Google") }} </md-button
                 >
               </b-col>
             </b-row>
@@ -32,7 +32,7 @@
 
           <br />
 
-          <p class="t-center">-OR-  {{ $t("the_user") }} </p>
+          <p class="t-center">-  {{ $t("OR") }} - </p>
 
           <div class="md-layout md-gutter">
             <div class="md-layout-item md-small-size-100 m-left">
@@ -140,7 +140,7 @@
             </b-col>
             <b-col cols="6">
               <b-link href="/login" class="f-right">
-                <md-button class="md-raised">Login  {{ $t("login") }} </md-button>
+                <md-button class="md-raised">  {{ $t("login") }} </md-button>
               </b-link>
             </b-col>
           </b-row>

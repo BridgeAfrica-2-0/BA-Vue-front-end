@@ -66,7 +66,7 @@ export default {
     //  Insight,
     Inbox,
     // Notification,
-    Footer
+    Footer,
   },
   data() {
     return {

@@ -13,7 +13,7 @@
           <div>
             <span class="text-hover">
               <div>Album Name</div>
-              <span> {{ images.length }} item(s)</span>
+              <span> {{images.length}} item(s)</span>
             </span>
           </div>
         </div>

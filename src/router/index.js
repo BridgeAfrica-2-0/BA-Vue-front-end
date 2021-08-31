@@ -108,6 +108,9 @@ const routes = [
     component: businessOwnerSettingGeneral
   },
 
+
+
+
   {
     path: "/business_owner/create_website_step_one",
     name: "createWebSite",
@@ -209,7 +212,7 @@ const routes = [
   },
 
   {
-    path: "/profilefollower",
+    path: "/follower",
     name: "Follower",
     component: Follower
   },

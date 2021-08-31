@@ -10,14 +10,15 @@
           <div class="center-img">
             <splide :options="options" class="r-image">
               <splide-slide cl>
-                <img :src="value.logo_path" class="r-image" />
+                <img :src="value.logo_path" class="r-image" />      
               </splide-slide>
             </splide>
           </div>
         </b-col>
         <b-col md="8" cols="7" lg="7" xl="5" sm="5">
-          <p class="textt">
-            <strong class="title"> {{ value.name }} </strong> <br />
+           <div class="title textt bold username"> <strong> {{ value.name }}  </strong></div>
+          <p class="textt"  >
+            <br />
             {{ value.category }}
             <br />
             {{ value.followers }} Community <br />
@@ -29,10 +30,11 @@
 
             <read-more
               more-str="read more"
+              class="readmore"
               :text="value.about_business"
               link="#"
               less-str="read less"
-              :max-chars="15000"
+              :max-chars="50"
             >
             </read-more>
           </p>
@@ -132,6 +134,20 @@ export default {
 </script>
 
 <style scoped>
+
+
+ .username {
+    
+    text-overflow: ellipsis;
+    overflow: hidden;
+    width: 100%;
+    height: 1.6em;
+    white-space: nowrap;
+  }
+
+
+
+
 @media only screen and (min-width: 768px) {
   .btn-text {
     margin-left: 8px;
@@ -380,5 +396,11 @@ export default {
   .btn {
     display: flex;
   }
+}
+</style>
+
+<style >
+.readmore p {
+    margin: 0px !important;
 }
 </style>

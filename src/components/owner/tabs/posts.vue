@@ -141,6 +141,8 @@ import Followers from "../../followers";
 import Community from "./comunitiDashboard";
 import Owner_post from "./owner_post";
 import Media from "../../media";
+// import CreatePost from "../../createPost";
+// import Post from "../../post";
 export default {
   name: "posts",
   components: {
@@ -185,8 +187,8 @@ export default {
     chooseFiles: function() {
       console.log("helloo fucker");
       document.getElementById("fileUpload").click();
-    }
-  }
+    },
+  },
 };
 </script>
 

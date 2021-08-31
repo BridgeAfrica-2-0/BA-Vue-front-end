@@ -18,6 +18,7 @@
         </h4>
         <br />
         <br />
+   
 
         <p class="text f-16">
           is simply dummy text of the printing and typesetting industry. Lorem
@@ -64,7 +65,7 @@
             @on-loading="setLoading"
             color="#e75c18"
           >
-            <input id="profile2" type="file" @change="onFileChange" hidden />
+            <input id="profile2"  accept="video/mpeg,video/mp4,image/*"  type="file" @change="onFileChange" hidden />
 
             <tab-content
               title=" Complete Profile "
@@ -245,7 +246,7 @@
       id="modal-2"
     >
       <form novalidate>
-        <input id="profile2" type="file" @change="onFileChange" hidden />
+        <input id="profile2"  accept="video/mpeg,video/mp4,image/*" type="file" @change="onFileChange" hidden />
 
         <div>
           <form-wizard @on-complete="onComplete">
@@ -567,13 +568,9 @@
                     <div class="form-group">
                       <label for="username" class="username">TimeZone:</label
                       ><br />
-                      <select
-                        id="timezone"
-                        v-model="time_zone"
-                        :options="timezone"
-                        class="form-control text"
-                      >
-                      </select>
+
+                      <b-form-select id="timezone" v-model="time_zone" :options="timezone"></b-form-select>
+                      
                     </div>
                   </div>
 
@@ -662,7 +659,8 @@
 
 <script>
 import People from "@/components/dasboard/suggestedpeople";
-import Business from "@/components/dasboard/welcomebusinesses";
+
+import Business from "@/components/dasboard/welcomebusinesses";    
 
 import Tutorial from "@/components/dasboard/tutorial";
 
@@ -687,14 +685,14 @@ export default {
       img_url: null,
       sendingP: false,
       sendingB: false,
-      profile_pic: null,
+      profile_pic:'',
       dob: null,
       gender: null,
       city: null,
       Neighbor: null,
       step1: false,
       step2: false,
-      logo_pic: null,
+      logo_pic: "",
       logoimg_url: null,
       form: {
         business_name: null
@@ -865,6 +863,9 @@ export default {
     },
 
     validateBusiness() {
+
+       return new Promise((resolve, reject) => {
+
       this.$v.form.$touch();
       if (this.$v.form.$anyError) {
         console.log("error error");
@@ -872,9 +873,81 @@ export default {
       } else {
         console.log("no error error");
 
-        this.createBusiness();
-        return true;
+        
+
+        this.sendingB = true;
+
+        let formData2 = new FormData();
+        formData2.append("logo_path", this.logo_pic);
+
+        formData2.append("region", this.region);
+        formData2.append("city", this.city);
+        formData2.append("country", this.country);
+
+        formData2.append("address", this.adress);
+
+        formData2.append("neighbor", this.Neighbor);
+        formData2.append("lat", this.center.lat);
+        formData2.append("lng", this.center.lng);
+
+        formData2.append("name", this.business_name);
+        formData2.append("category", this.business_category);
+        formData2.append("keywords", this.business_keyword);
+        formData2.append("timezone", this.time_zone);
+        formData2.append("language", this.language);
+        formData2.append("about_business", this.about);
+
+        this.axios
+          .post("business/create", formData2, {
+            headers: {
+              "Content-Type": "multipart/form-data"
+            }
+          })
+          .then(response => {
+            console.log(response);
+
+            this.sendingB = false;
+
+            this.flashMessage.show({
+              status: "success",
+
+              message: "Business Profile Created"
+            });
+
+            resolve(true);
+          })
+          .catch(err => {
+            console.log({ err: err });
+
+            this.sendingB = false;
+
+            if (err.response.status == 422) {
+              console.log({ err: err });
+              console.log(err.response.data.message);
+
+              this.flashMessage.show({
+                status: "error",
+
+                message: err.response.data.message,
+                blockClass: "custom-block-class"
+              });
+            } else {
+              this.flashMessage.show({
+                status: "error",
+
+                message: "Unable to Create Your Business",
+                blockClass: "custom-block-class"
+              });
+              console.log({ err: err });
+            }
+
+            resolve(false);
+          });
+
+        
       }
+
+       });
     },
 
     businessAround() {
@@ -963,7 +1036,7 @@ export default {
 
             this.flashMessage.show({
               status: "success",
-
+              blockClass: "custom-block-class",
               message: "Business Profile Created"
             });
 

@@ -454,8 +454,8 @@ export default {
       imagees3: [
         "https://pbs.twimg.com/media/DoNa_wKUUAASSCF.jpg",
         "https://pbs.twimg.com/media/DoNa_wKUUAASSCF.jpg",
-        "https://pbs.twimg.com/media/DKO62sVXUAA0_AL.jpg"
-      ]
+        "https://pbs.twimg.com/media/DKO62sVXUAA0_AL.jpg",
+      ],
     };
   },
 

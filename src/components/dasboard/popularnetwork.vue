@@ -18,7 +18,7 @@
         <b-col md="5" cols="7" lg="7" xl="5" sm="5">
           <p class="textt">
             <strong class="net-title"> {{ item.name }} </strong> <br />
-            {{ JSON.stringify(item) }}
+            {{ item.category }}
             <br />
             {{ item.followers }} Community <br />
 

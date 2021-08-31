@@ -481,8 +481,7 @@ export default {
   },
   watch: {
     open(value) {
-      console.log("change open value ");
-      console.log(value);
+      console.log("change open value ", value);
     },
     dayOfWorks: {
       handler(newValue, oldValue) {
@@ -508,18 +507,14 @@ export default {
     this.$store
       .dispatch("loadUserBusinessAbout", null)
       .then(response => {
-        console.log(response);
+        console.log(response, "load business about response end response (3) ++++");
         this.dayOfWorks = this.initialize(this.dayOfWorks);
         console.log(this.business_about);
-        console.log("load business about response end response (3) ++++");
       })
       .catch(error => {
-        console.log("error from the server or browser error(2) ++++");
-        console.log(error);
-        console.log("load business about error end ");
+        console.log("error from the server or browser error(2) ++++", error);
       })
       .finally(() => {
-        console.log("Finally load business about response +++++");
         this.business_about = JSON.parse(
           JSON.stringify(this.$store.getters.getBusinessAbout)
         );
@@ -556,12 +551,10 @@ export default {
         });
         return day;
       });
-      console.log("Modification of dayOfWorks++++++++++");
       console.log(zdaysOfWorks);
       return zdaysOfWorks;
     },
     cancel() {
-      console.log(this.business_about);
       console.log("cancel method ");
       this.business_about_input = JSON.parse(
         JSON.stringify(this.business_about)
@@ -580,19 +573,16 @@ export default {
           console.log(this.$store.getters.getBusinessAbout);
           console.log("Modify Business Biography start++++");
           this.test();
-          //this.business_about.biography = this.business_about_input.biography
           this.$store
             .dispatch("updateUserBusinessAbout", {
               business_about: this.business_about_input
             })
             .then(response => {
-              console.log("fetch finished on the database response (3) ");
-              console.log(response);
+              console.log("fetch finished on the database response (3) ", response);
               console.log("Modify Business Biography end++++");
             })
             .catch(error => {
-              console.log(error);
-              console.log("Modify Business Biography end error (2) ++++");
+              console.log(error, "Modify Business Biography end error (2) ++++");
             })
             .finally(() => {
               console.log("Finally Modify Business About Biography  +++++");
@@ -607,21 +597,17 @@ export default {
           console.log("edit address business");
           this.test();
           console.log(this.business_about_input);
-
-          // console.log(newTabs);
           this.$store
             .dispatch("updateUserBusinessAbout", {
               business_about: this.business_about_input
             })
             .then(response => {
-              console.log("update user business about response ++++++");
-              console.log(response);
+              console.log("update user business about response ++++++", response);
               this.business_about = this.$store.getters.getBusinessAbout;
               console.log("update user business about end");
             })
             .catch(error => {
-              console.log(error);
-              console.log("update user business about end++++");
+              console.log(error, "update user business about end++++");
             })
             .finally(() => {
               console.log("Finally Update Business About Biography  +++++");
@@ -635,7 +621,7 @@ export default {
 
           break;
         default:
-          console.log("Aucune Correspondance");
+          console.log("No Correspondance");
           break;
       }
     },
@@ -645,11 +631,6 @@ export default {
       });
       if ( businessAddress.length > 0 ){
         businessAddress = businessAddress.map(day => {
-          // return {
-          //   day: day.day,
-          //   opening_time: day.opening_time,
-          //   closing_time: day.closing_time
-          // };
           return [ day.day, day.opening_time, day.closing_time ]
         });
       }else {

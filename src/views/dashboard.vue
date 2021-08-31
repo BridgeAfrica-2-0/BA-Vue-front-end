@@ -60,7 +60,9 @@
           <b-col md="6" sm="12" class="mt-2">
             <BusinessDashboard :selectedb="selectedb" />
           </b-col>
-          <b-col md="6" sm="12" class="mt-2"> <Insights :selectedb="selectedb"/> </b-col>
+          <b-col md="6" sm="12" class="mt-2">
+            <Insights :selectedb="selectedb" />
+          </b-col>
         </b-row>
       </div>
       <br />
@@ -178,14 +180,22 @@ export default {
   methods: {
     getbusiness() {
       this.boptions.push({
-        text: this.$store.getters.getdetails.owner[0].name,
+        text: this.$store.getters[
+          "ProfileAndBusinessDetails/getdetails.owner[0].name"
+        ],
         value: "owner"
       });
       console.log(
-        JSON.parse(JSON.stringify(this.$store.getters.getdetails)).business
+        JSON.parse(
+          JSON.stringify(
+            this.$store.getters["ProfileAndBusinessDetails/getdetails"]
+          )
+        ).business
       );
       let businesses = JSON.parse(
-        JSON.stringify(this.$store.getters.getdetails)
+        JSON.stringify(
+          this.$store.getters["ProfileAndBusinessDetails/getdetails"]
+        )
       ).business;
       businesses = businesses.map(value => {
         this.boptions.push({ text: value.name, value: value.id });
@@ -198,20 +208,20 @@ export default {
   mounted() {},
 
   created() {
-    this.$store.dispatch("ProfileAndBusinessDetails/getdetails").then(response => {
-
-      this.getbusiness();
-    });
+    this.$store
+      .dispatch("ProfileAndBusinessDetails/getdetails")
+      .then(response => {
+        this.getbusiness();
+      });
   },
 
   computed: {
     details() {
-      return this.$store.getters.getdetails;
+      return this.$store.getters["ProfileAndBusinessDetails/getdetails"];
     }
   },
   watch: {
-    selectedb(newvalue) {
-    }
+    selectedb(newvalue) {}
   }
 };
 </script>

@@ -3,7 +3,9 @@
     <form novalidate class="md-layout" @submit.prevent="validateUser">
       <md-card class="md-layout-item md-size-50 md-small-size-100 p-card">
         <md-card-header>
-          <div class="md-title center f-22">   {{ $t("Login_To_Bridge_Africa") }}</div>
+          <div class="md-title center f-22">
+            {{ $t("Login_To_Bridge_Africa") }}
+          </div>
         </md-card-header>
 
         <md-card-content>
@@ -11,18 +13,14 @@
           <FlashMessage />
           <div class="center">
             <b-row>
-               
-
-              
-
               <b-col cols="12" md="6" lg="12" xl="6">
                 <md-button
                   @click.prevent="authProvider('facebook')"
                   class="md-raised md-primary b-w"
                 >
-                  <b-icon icon="facebook" aria-hidden="true"></b-icon>   {{ $t("Login_With_Facebook") }}
-                 </md-button
-                >
+                  <b-icon icon="facebook" aria-hidden="true"></b-icon>
+                  {{ $t("Login_With_Facebook") }}
+                </md-button>
               </b-col>
 
               <b-col cols="12" md="6" lg="12" xl="6">
@@ -31,15 +29,16 @@
                   class="b-color b-w"
                   style="color: white"
                 >
-                  <b-icon icon="google" aria-hidden="true"></b-icon>  {{ $t("login_with_google") }} </md-button
-                >
+                  <b-icon icon="google" aria-hidden="true"></b-icon>
+                  {{ $t("login_with_google") }}
+                </md-button>
               </b-col>
             </b-row>
           </div>
 
           <br />
 
-          <p class="t-center"> -{{ $t("or") }} - </p>
+          <p class="t-center">-{{ $t("or") }} -</p>
 
           <md-field :class="getValidationClass('email')">
             <label for="email"> {{ $t("email") }} </label>
@@ -51,12 +50,12 @@
               v-model="form.email"
               :disabled="sending"
             />
-            <span class="md-error" v-if="!$v.form.email.required"
-              >  {{ $t("the_email_is_required") }}  </span
-            >
-            <span class="md-error" v-else-if="!$v.form.email.email"
-              >  {{ $t("invalid_email") }} </span
-            >
+            <span class="md-error" v-if="!$v.form.email.required">
+              {{ $t("the_email_is_required") }}
+            </span>
+            <span class="md-error" v-else-if="!$v.form.email.email">
+              {{ $t("invalid_email") }}
+            </span>
           </md-field>
 
           <md-field>
@@ -78,7 +77,7 @@
                 value="accepted"
                 unchecked-value="not_accepted"
               >
-                 {{ $t("remeber_me") }}
+                {{ $t("remeber_me") }}
               </b-form-checkbox>
             </div>
 
@@ -98,19 +97,22 @@
                 :disabled="sending"
                 class="b-color f-left"
                 style="color: white"
-                > {{ $t("Login") }} </md-button
               >
+                {{ $t("Login") }}
+              </md-button>
             </b-col>
             <b-col cols="6">
               <router-link to="signup">
-                <md-button class="md-raised f-right">{{ $t("signup ") }} </md-button>
+                <md-button class="md-raised f-right"
+                  >{{ $t("signup ") }}
+                </md-button>
               </router-link>
             </b-col>
           </b-row>
 
           <router-link to="recoverPass1" class="nav-link text">
-             {{ $t("forget_password") }} </router-link
-          >
+            {{ $t("forget_password") }}
+          </router-link>
         </div>
 
         <div></div>
@@ -120,35 +122,34 @@
           <br />
 
           <label class="f-12">
-               {{ $t("by_loging_in_you_agree_to_bridge_africa") }}
+            {{ $t("by_loging_in_you_agree_to_bridge_africa") }}
           </label>
           <br />
 
           <label class="f-12">
-            <b-link href="#"> {{ $t("terms_and_conditions") }}
-              
-               </b-link> &
-            <b-link href="#">  {{ $t("Privacy_policies") }}  </b-link>
+            <b-link href="#"> {{ $t("terms_and_conditions") }} </b-link> &
+            <b-link href="#"> {{ $t("Privacy_policies") }} </b-link>
           </label>
         </div>
       </md-card>
 
       <div class="md-layout-item md-size-50 md-small-size-100 b-div"></div>
 
-      <md-snackbar :md-active.sync="userSaved"
-        > {{ $t("the_user") }}  {{ lastUser }}  {{ $t("was_saved_with_success") }} ! </md-snackbar
-      >
+      <md-snackbar :md-active.sync="userSaved">
+        {{ $t("the_user") }} {{ lastUser }} {{ $t("was_saved_with_success") }} !
+      </md-snackbar>
     </form>
 
-   
+    <hr class="localfoter" />
 
-   
-  
-    <hr class="localfoter">
-
-  <p class="text-center"> 
-    <span class="display-inline">  <b-link  @click="$i18n.locale = 'en'" > English</b-link> <span class="vl"></span>   <b-link class="ml-2"  @click="$i18n.locale = 'fr'" > French </b-link>   </span>
-   Bridge Africa © 2021  </p>  
+    <p class="text-center">
+      <span class="display-inline">
+        <b-link @click="$i18n.locale = 'en'"> English</b-link>
+        <span class="vl"></span>
+        <b-link class="ml-2" @click="$i18n.locale = 'fr'"> French </b-link>
+      </span>
+      Bridge Africa © 2021
+    </p>
   </div>
 </template>
 
@@ -165,36 +166,32 @@ export default {
   data: () => ({
     form: {
       password: null,
-      email: null
+      email: null,
     },
 
     langs: ["en", "fr"],
 
     userSaved: false,
     sending: false,
-    lastUser: null
+    lastUser: null,
   }),
   validations: {
     form: {
       password: {
-        required
+        required,
       },
       email: {
         required,
-        email
-      }
-    }
+        email,
+      },
+    },
   },
   methods: {
-
-   
-
-
     getValidationClass(fieldName) {
       const field = this.$v.form[fieldName];
       if (field) {
         return {
-          "md-invalid": field.$invalid && field.$dirty
+          "md-invalid": field.$invalid && field.$dirty,
         };
       }
     },
@@ -203,11 +200,11 @@ export default {
       let self = this;
       this.$auth
         .authenticate(provider)
-        .then(response => {
+        .then((response) => {
           self.socialLogin(provider, response);
           console.log(response);
         })
-        .catch(err => {
+        .catch((err) => {
           console.log({ err: err });
         });
     },
@@ -215,19 +212,19 @@ export default {
     socialLogin(provider, response) {
       this.$http
         .post("user/social/" + provider, response)
-        .then(response => {
+        .then((response) => {
           console.log(response.data);
 
           this.$store.commit("auth/setUserData", response.data);
           this.flashMessage.show({
             status: "success",
 
-            message: "Successfully Register"
+            message: "Successfully Register",
           });
 
           this.$router.push({ name: "welcome" });
         })
-        .catch(err => {
+        .catch((err) => {
           console.log({ err: err });
         });
     },
@@ -248,14 +245,14 @@ export default {
       this.$store
         .dispatch("auth/login", {
           email: this.form.email,
-          password: this.form.password
+          password: this.form.password,
         })
         .then(() => {
           this.sending = false;
 
           this.$router.push({ name: "welcome" });
         })
-        .catch(err => {
+        .catch((err) => {
           this.sending = false;
 
           if (err.response.status == 422) {
@@ -264,13 +261,13 @@ export default {
             this.flashMessage.show({
               status: "error",
 
-              message: err.response.data.message
+              message: err.response.data.message,
             });
           } else {
             this.flashMessage.show({
               status: "error",
 
-              message: "An error has occure"
+              message: "An error has occure",
             });
           }
         });
@@ -281,13 +278,12 @@ export default {
       if (!this.$v.$invalid) {
         this.saveUser();
       }
-    }
-  }
+    },
+  },
 };
 </script>
 
 <style scoped>
-
 .vl {
   border-left: 1px solid green;
   height: 50px;
@@ -357,7 +353,7 @@ export default {
   }
 }
 
-.localfoter{
+.localfoter {
   margin-top: -10px;
 }
 </style>

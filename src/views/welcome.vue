@@ -18,7 +18,6 @@
         </h4>
         <br />
         <br />
-   
 
         <p class="text f-16">
           is simply dummy text of the printing and typesetting industry. Lorem
@@ -65,7 +64,13 @@
             @on-loading="setLoading"
             color="#e75c18"
           >
-            <input id="profile2"  accept="video/mpeg,video/mp4,image/*"  type="file" @change="onFileChange" hidden />
+            <input
+              id="profile2"
+              accept="video/mpeg,video/mp4,image/*"
+              type="file"
+              @change="onFileChange"
+              hidden
+            />
 
             <tab-content
               title=" Complete Profile "
@@ -246,7 +251,13 @@
       id="modal-2"
     >
       <form novalidate>
-        <input id="profile2"  accept="video/mpeg,video/mp4,image/*" type="file" @change="onFileChange" hidden />
+        <input
+          id="profile2"
+          accept="video/mpeg,video/mp4,image/*"
+          type="file"
+          @change="onFileChange"
+          hidden
+        />
 
         <div>
           <form-wizard @on-complete="onComplete">
@@ -569,8 +580,11 @@
                       <label for="username" class="username">TimeZone:</label
                       ><br />
 
-                      <b-form-select id="timezone" v-model="time_zone" :options="timezone"></b-form-select>
-                      
+                      <b-form-select
+                        id="timezone"
+                        v-model="time_zone"
+                        :options="timezone"
+                      ></b-form-select>
                     </div>
                   </div>
 
@@ -660,7 +674,7 @@
 <script>
 import People from "@/components/dasboard/suggestedpeople";
 
-import Business from "@/components/dasboard/welcomebusinesses";    
+import Business from "@/components/dasboard/welcomebusinesses";
 
 import Tutorial from "@/components/dasboard/tutorial";
 
@@ -685,7 +699,7 @@ export default {
       img_url: null,
       sendingP: false,
       sendingB: false,
-      profile_pic:'',
+      profile_pic: "",
       dob: null,
       gender: null,
       city: null,
@@ -695,7 +709,7 @@ export default {
       logo_pic: "",
       logoimg_url: null,
       form: {
-        business_name: null
+        business_name: null,
       },
       business_category: null,
       business_keyword: null,
@@ -706,7 +720,7 @@ export default {
 
       center: {
         lat: 39.7837304,
-        lng: -100.4458825
+        lng: -100.4458825,
       },
       locationMarkers: [],
       locPlaces: [],
@@ -743,20 +757,20 @@ export default {
         {
           label:
             "(GMT+00:00) Greenwich Mean Time : Dublin, Edinburgh, Lisbon, London",
-          value: "0"
+          value: "0",
         },
         {
           label: "(GMT+01:00) Amsterdam, Berlin, Bern, Rome, Stockholm, Vienna",
-          value: "1"
+          value: "1",
         },
         {
           label:
             "(GMT+01:00) Belgrade, Bratislava, Budapest, Ljubljana, Prague",
-          value: "1"
+          value: "1",
         },
         {
           label: "(GMT+01:00) Brussels, Copenhagen, Madrid, Paris",
-          value: "1"
+          value: "1",
         },
         { label: "(GMT+01:00) Sarajevo, Skopje, Warsaw, Zagreb", value: "1" },
         { label: "(GMT+01:00) West Central Africa", value: "1" },
@@ -767,7 +781,7 @@ export default {
         { label: "(GMT+02:00) Harare, Pretoria", value: "2" },
         {
           label: "(GMT+02:00) Helsinki, Kyiv, Riga, Sofia, Tallinn, Vilnius",
-          value: "2"
+          value: "2",
         },
         { label: "(GMT+02:00) Jerusalem", value: "2" },
         { label: "(GMT+02:00) Minsk", value: "2" },
@@ -786,7 +800,7 @@ export default {
         { label: "(GMT+05:30) Sri Jayawardenapura", value: "5.5" },
         {
           label: "(GMT+05:30) Chennai, Kolkata, Mumbai, New Delhi",
-          value: "5.5"
+          value: "5.5",
         },
         { label: "(GMT+05:45) Kathmandu", value: "5.75" },
         { label: "(GMT+06:00) Almaty, Novosibirsk", value: "6" },
@@ -796,17 +810,17 @@ export default {
         { label: "(GMT+07:00) Krasnoyarsk", value: "7" },
         {
           label: "(GMT+08:00) Beijing, Chongqing, Hong Kong, Urumqi",
-          value: "8"
+          value: "8",
         },
         { label: "(GMT+08:00) Kuala Lumpur, Singapore", value: "8" },
         { label: "(GMT+08:00) Irkutsk, Ulaan Bataar", value: "8" },
         { label: "(GMT+08:00) Perth", value: "8" },
-        { label: "(GMT+08:00) Taipei", value: "8" }
+        { label: "(GMT+08:00) Taipei", value: "8" },
       ],
 
       options: [
         { text: " Person", value: "person" },
-        { text: " Business ", value: "business" }
+        { text: " Business ", value: "business" },
       ],
 
       category: "",
@@ -826,25 +840,25 @@ export default {
         { item: "Hotels", name: "Hotels" },
         { item: "station", name: " station  " },
         { item: "Mayor_concils", name: "Mayor_concils" },
-        { item: "Taxis service", name: "Taxis service" }
-      ]
+        { item: "Taxis service", name: "Taxis service" },
+      ],
     };
   },
 
   validations: {
     form: {
       business_name: {
-        required
+        required,
       },
 
       business_category: {
-        required
-      }
-    }
+        required,
+      },
+    },
   },
 
   methods: {
-    setLoading: function(value) {
+    setLoading: function (value) {
       this.loadingWizard = value;
     },
 
@@ -857,97 +871,90 @@ export default {
       const field = this.$v.form[fieldName];
       if (field) {
         return {
-          red: field.$invalid && field.$dirty
+          red: field.$invalid && field.$dirty,
         };
       }
     },
 
     validateBusiness() {
+      return new Promise((resolve, reject) => {
+        this.$v.form.$touch();
+        if (this.$v.form.$anyError) {
+          console.log("error error");
+          return false;
+        } else {
+          console.log("no error error");
 
-       return new Promise((resolve, reject) => {
+          this.sendingB = true;
 
-      this.$v.form.$touch();
-      if (this.$v.form.$anyError) {
-        console.log("error error");
-        return false;
-      } else {
-        console.log("no error error");
+          let formData2 = new FormData();
+          formData2.append("logo_path", this.logo_pic);
 
-        
+          formData2.append("region", this.region);
+          formData2.append("city", this.city);
+          formData2.append("country", this.country);
 
-        this.sendingB = true;
+          formData2.append("address", this.adress);
 
-        let formData2 = new FormData();
-        formData2.append("logo_path", this.logo_pic);
+          formData2.append("neighbor", this.Neighbor);
+          formData2.append("lat", this.center.lat);
+          formData2.append("lng", this.center.lng);
 
-        formData2.append("region", this.region);
-        formData2.append("city", this.city);
-        formData2.append("country", this.country);
+          formData2.append("name", this.business_name);
+          formData2.append("category", this.business_category);
+          formData2.append("keywords", this.business_keyword);
+          formData2.append("timezone", this.time_zone);
+          formData2.append("language", this.language);
+          formData2.append("about_business", this.about);
 
-        formData2.append("address", this.adress);
+          this.axios
+            .post("business/create", formData2, {
+              headers: {
+                "Content-Type": "multipart/form-data",
+              },
+            })
+            .then((response) => {
+              console.log(response);
 
-        formData2.append("neighbor", this.Neighbor);
-        formData2.append("lat", this.center.lat);
-        formData2.append("lng", this.center.lng);
+              this.sendingB = false;
 
-        formData2.append("name", this.business_name);
-        formData2.append("category", this.business_category);
-        formData2.append("keywords", this.business_keyword);
-        formData2.append("timezone", this.time_zone);
-        formData2.append("language", this.language);
-        formData2.append("about_business", this.about);
+              this.flashMessage.show({
+                status: "success",
 
-        this.axios
-          .post("business/create", formData2, {
-            headers: {
-              "Content-Type": "multipart/form-data"
-            }
-          })
-          .then(response => {
-            console.log(response);
+                message: "Business Profile Created",
+              });
 
-            this.sendingB = false;
+              resolve(true);
+            })
+            .catch((err) => {
+              console.log({ err: err });
 
-            this.flashMessage.show({
-              status: "success",
+              this.sendingB = false;
 
-              message: "Business Profile Created"
+              if (err.response.status == 422) {
+                console.log({ err: err });
+                console.log(err.response.data.message);
+
+                this.flashMessage.show({
+                  status: "error",
+
+                  message: err.response.data.message,
+                  blockClass: "custom-block-class",
+                });
+              } else {
+                this.flashMessage.show({
+                  status: "error",
+
+                  message: "Unable to Create Your Business",
+                  blockClass: "custom-block-class",
+                });
+                console.log({ err: err });
+              }
+
+              resolve(false);
             });
-
-            resolve(true);
-          })
-          .catch(err => {
-            console.log({ err: err });
-
-            this.sendingB = false;
-
-            if (err.response.status == 422) {
-              console.log({ err: err });
-              console.log(err.response.data.message);
-
-              this.flashMessage.show({
-                status: "error",
-
-                message: err.response.data.message,
-                blockClass: "custom-block-class"
-              });
-            } else {
-              this.flashMessage.show({
-                status: "error",
-
-                message: "Unable to Create Your Business",
-                blockClass: "custom-block-class"
-              });
-              console.log({ err: err });
-            }
-
-            resolve(false);
-          });
-
-        
-      }
-
-       });
+        }
+      });
     },
 
     businessAround() {
@@ -956,7 +963,7 @@ export default {
         .then(() => {
           console.log("hey yeah");
         })
-        .catch(err => {
+        .catch((err) => {
           console.log({ err: err });
         });
     },
@@ -967,7 +974,7 @@ export default {
         .then(() => {
           console.log("hey yeah");
         })
-        .catch(err => {
+        .catch((err) => {
           console.log({ err: err });
         });
     },
@@ -981,7 +988,7 @@ export default {
       if (this.existingPlace) {
         const marker = {
           lat: this.existingPlace.geometry.location.lat(),
-          lng: this.existingPlace.geometry.location.lng()
+          lng: this.existingPlace.geometry.location.lng(),
         };
 
         this.locationMarkers.push({ position: marker });
@@ -991,15 +998,15 @@ export default {
       }
     },
 
-    locateGeoLocation: function() {
-      navigator.geolocation.getCurrentPosition(res => {
+    locateGeoLocation: function () {
+      navigator.geolocation.getCurrentPosition((res) => {
         this.center = {
           lat: res.coords.latitude,
-          lng: res.coords.longitude
+          lng: res.coords.longitude,
         };
       });
     },
-    createBusiness: function() {
+    createBusiness: function () {
       return new Promise((resolve, reject) => {
         this.sendingB = true;
 
@@ -1026,10 +1033,10 @@ export default {
         this.axios
           .post("business/create", formData2, {
             headers: {
-              "Content-Type": "multipart/form-data"
-            }
+              "Content-Type": "multipart/form-data",
+            },
           })
-          .then(response => {
+          .then((response) => {
             console.log(response);
 
             this.sendingB = false;
@@ -1037,12 +1044,12 @@ export default {
             this.flashMessage.show({
               status: "success",
               blockClass: "custom-block-class",
-              message: "Business Profile Created"
+              message: "Business Profile Created",
             });
 
             resolve(true);
           })
-          .catch(err => {
+          .catch((err) => {
             console.log({ err: err });
 
             this.sendingB = false;
@@ -1055,14 +1062,14 @@ export default {
                 status: "error",
 
                 message: err.response.data.message,
-                blockClass: "custom-block-class"
+                blockClass: "custom-block-class",
               });
             } else {
               this.flashMessage.show({
                 status: "error",
 
                 message: "Unable to Create Your Business",
-                blockClass: "custom-block-class"
+                blockClass: "custom-block-class",
               });
               console.log({ err: err });
             }
@@ -1072,7 +1079,7 @@ export default {
       });
     },
 
-    updateUserProfile: function() {
+    updateUserProfile: function () {
       return new Promise((resolve, reject) => {
         console.log("sending user data");
 
@@ -1095,10 +1102,10 @@ export default {
         this.axios
           .post("/complete/profile", formData, {
             headers: {
-              "Content-Type": "multipart/form-data"
-            }
+              "Content-Type": "multipart/form-data",
+            },
           })
-          .then(response => {
+          .then((response) => {
             console.log(response);
 
             this.step1 = true;
@@ -1109,12 +1116,12 @@ export default {
 
               message: "Profile Updated",
 
-              blockClass: "custom-block-class"
+              blockClass: "custom-block-class",
             });
 
             resolve(true);
           })
-          .catch(err => {
+          .catch((err) => {
             console.log({ err: err });
 
             this.sending = false;
@@ -1128,14 +1135,14 @@ export default {
                 status: "error",
 
                 message: err.response.data.message,
-                blockClass: "custom-block-class"
+                blockClass: "custom-block-class",
               });
             } else {
               this.flashMessage.show({
                 status: "error",
                 title: "Registration Failed",
                 message: "Unable to update your Information",
-                blockClass: "custom-block-class"
+                blockClass: "custom-block-class",
               });
               console.log({ err: err });
             }
@@ -1145,24 +1152,24 @@ export default {
       });
     },
 
-    onComplete: function() {
+    onComplete: function () {
       this.$store
         .dispatch("auth/completeWelcome")
         .then(() => {
           console.log("hey yeah");
         })
-        .catch(err => {
+        .catch((err) => {
           console.log({ err: err });
         });
 
       this.$router.push("/dashboard");
     },
 
-    chooseProfile1: function() {
+    chooseProfile1: function () {
       document.getElementById("profile1").click();
     },
 
-    chooseProfile2: function() {
+    chooseProfile2: function () {
       document.getElementById("profile2").click();
     },
 
@@ -1178,7 +1185,7 @@ export default {
       this.logoimg_url = URL.createObjectURL(logofile);
     },
 
-    chooselogo: function() {
+    chooselogo: function () {
       document.getElementById("logo").click();
     },
 
@@ -1198,7 +1205,7 @@ export default {
       }
 
       this.first_page = false;
-    }
+    },
   },
 
   mounted() {
@@ -1212,7 +1219,7 @@ export default {
   components: {
     People,
     Business,
-    Tutorial
+    Tutorial,
   },
 
   computed: {
@@ -1221,8 +1228,8 @@ export default {
     },
     business_around() {
       return this.$store.state.auth.businessAround;
-    }
-  }
+    },
+  },
 };
 import "vue-form-wizard/dist/vue-form-wizard.min.css";
 </script>

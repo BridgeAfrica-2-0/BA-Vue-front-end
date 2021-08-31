@@ -3,8 +3,10 @@
     <form novalidate class="md-layout" @submit.prevent="validateUser">
       <md-card class="md-layout-item md-size-50 md-small-size-100 p-card">
         <md-card-header>
-          <div class="md-title center"> {{ $t("Sign_Up_On_Bridge_Africa") }} </div>
-        </md-card-header>  
+          <div class="md-title center">
+            {{ $t("Sign_Up_On_Bridge_Africa") }}
+          </div>
+        </md-card-header>
         <FlashMessage />
         <md-card-content>
           <div class="center">
@@ -14,8 +16,9 @@
                   @click.prevent="authProvider('facebook')"
                   class="md-raised md-primary b-w"
                 >
-                  <b-icon icon="facebook" aria-hidden="true"></b-icon>  {{ $t("Sign_Up_with_facebook") }} </md-button
-                >
+                  <b-icon icon="facebook" aria-hidden="true"></b-icon>
+                  {{ $t("Sign_Up_with_facebook") }}
+                </md-button>
               </b-col>
 
               <b-col cols="12" md="6" lg="12" xl="6">
@@ -24,20 +27,21 @@
                   class="b-color b-w"
                   style="color: white"
                 >
-                  <b-icon icon="google" aria-hidden="true"></b-icon>  {{ $t("Sign_Up_with_Google") }} </md-button
-                >
+                  <b-icon icon="google" aria-hidden="true"></b-icon>
+                  {{ $t("Sign_Up_with_Google") }}
+                </md-button>
               </b-col>
             </b-row>
           </div>
 
           <br />
 
-          <p class="t-center">-  {{ $t("OR") }} - </p>
+          <p class="t-center">- {{ $t("OR") }} -</p>
 
           <div class="md-layout md-gutter">
             <div class="md-layout-item md-small-size-100 m-left">
               <md-field :class="getValidationClass('firstName')">
-                <label for="first_name">  {{ $t("First_Name") }} </label>
+                <label for="first_name"> {{ $t("First_Name") }} </label>
                 <md-input
                   type="text"
                   name="firstName"
@@ -45,15 +49,15 @@
                   v-model="form.firstName"
                   :disabled="sending"
                 />
-                <span class="md-error" v-if="!$v.form.firstName.required"
-                  > {{ $t("First_Name_is_required") }} </span
-                >
+                <span class="md-error" v-if="!$v.form.firstName.required">
+                  {{ $t("First_Name_is_required") }}
+                </span>
               </md-field>
             </div>
 
             <div class="md-layout-item md-small-size-100">
               <md-field :class="getValidationClass('lastName')">
-                <label for="lastName">   {{ $t("Last_Name") }}  </label>
+                <label for="lastName"> {{ $t("Last_Name") }} </label>
                 <md-input
                   type="text"
                   name="lastName"
@@ -61,9 +65,9 @@
                   v-model="form.lastName"
                   :disabled="sending"
                 />
-                <span class="md-error" v-if="!$v.form.lastName.required"
-                  > {{ $t("last_Name_is_required") }} </span
-                >
+                <span class="md-error" v-if="!$v.form.lastName.required">
+                  {{ $t("last_Name_is_required") }}
+                </span>
               </md-field>
             </div>
           </div>
@@ -78,24 +82,24 @@
               v-model="form.email"
               :disabled="sending"
             />
-            <span class="md-error" v-if="!$v.form.email.required"
-              > {{ $t("the_email_is_required") }} </span
-            >
+            <span class="md-error" v-if="!$v.form.email.required">
+              {{ $t("the_email_is_required") }}
+            </span>
             <span class="md-error" v-else-if="!$v.form.email.email"
-              >{{ $t("invalid_email") }} </span
-            >
+              >{{ $t("invalid_email") }}
+            </span>
           </md-field>
 
           <md-field :class="getValidationClass('tel')">
             <label for="tel"> {{ $t("Tel") }} </label>
             <md-input type="number" name="tel" id="tel" v-model="form.tel" />
-            <span class="md-error" v-if="!$v.form.tel.required"
-              > {{ $t("tel_is_required") }} </span
-            >
+            <span class="md-error" v-if="!$v.form.tel.required">
+              {{ $t("tel_is_required") }}
+            </span>
           </md-field>
 
           <md-field :class="getValidationClass('password')">
-            <label for="password">  {{ $t("Password") }}  </label>
+            <label for="password"> {{ $t("Password") }} </label>
             <md-input
               type="password"
               name="password"
@@ -104,13 +108,13 @@
               :disabled="sending"
             />
 
-            <span class="md-error" v-if="!$v.form.password.required"
-              > {{ $t("password_is_required") }}  </span
-            >
+            <span class="md-error" v-if="!$v.form.password.required">
+              {{ $t("password_is_required") }}
+            </span>
           </md-field>
 
           <md-field :class="getValidationClass('password')">
-            <label for="confirmPassword">  {{ $t("confirm_password") }} </label>
+            <label for="confirmPassword"> {{ $t("confirm_password") }} </label>
             <md-input
               type="password"
               name="confirmPassword"
@@ -119,8 +123,8 @@
               :disabled="sending"
             />
             <span class="md-error" v-if="!$v.form.confirmPassword.required"
-              >Password is required  {{ $t("password_is_required") }} </span
-            >
+              >Password is required {{ $t("password_is_required") }}
+            </span>
           </md-field>
         </md-card-content>
 
@@ -140,7 +144,7 @@
             </b-col>
             <b-col cols="6">
               <b-link href="/login" class="f-right">
-                <md-button class="md-raised">  {{ $t("login") }} </md-button>
+                <md-button class="md-raised"> {{ $t("login") }} </md-button>
               </b-link>
             </b-col>
           </b-row>
@@ -150,7 +154,8 @@
           <br />
           <br />
 
-          <label>  {{ $t("by_loging_in_you_agree_to_bridge_africa") }} </label> <br />
+          <label> {{ $t("by_loging_in_you_agree_to_bridge_africa") }} </label>
+          <br />
 
           <label>
             <b-link href="#">{{ $t("terms_and_conditions") }} </b-link> &
@@ -161,19 +166,21 @@
 
       <div class="md-layout-item md-size-50 md-small-size-100 b-div"></div>
 
-      <md-snackbar :md-active.sync="userSaved"
-        > {{ $t("the_user") }}  {{ lastUser }}  {{ $t("was_saved_with_success") }} </md-snackbar
-      >
+      <md-snackbar :md-active.sync="userSaved">
+        {{ $t("the_user") }} {{ lastUser }} {{ $t("was_saved_with_success") }}
+      </md-snackbar>
     </form>
 
-    
-    <hr class="localfoter">
+    <hr class="localfoter" />
 
-  <p class="text-center"> 
-    <span class="display-inline">  <b-link  @click="$i18n.locale = 'en'" > English</b-link> <span class="vl"></span>   <b-link class="ml-2"  @click="$i18n.locale = 'fr'" > French </b-link>   </span>
-   Bridge Africa © 2021  </p> 
-
-
+    <p class="text-center">
+      <span class="display-inline">
+        <b-link @click="$i18n.locale = 'en'"> English</b-link>
+        <span class="vl"></span>
+        <b-link class="ml-2" @click="$i18n.locale = 'fr'"> French </b-link>
+      </span>
+      Bridge Africa © 2021
+    </p>
   </div>
 </template>
 
@@ -196,40 +203,40 @@ export default {
       email: null,
       password: null,
 
-      confirmPassword: null
+      confirmPassword: null,
     },
     userSaved: false,
     sending: false,
-    lastUser: null
+    lastUser: null,
   }),
   validations: {
     form: {
       firstName: {
-        required
+        required,
       },
 
       lastName: {
-        required
+        required,
       },
 
       password: {
-        required
+        required,
       },
 
       confirmPassword: {
         required,
-        minLength: minLength(4)
+        minLength: minLength(4),
       },
 
       tel: {
-        required
+        required,
       },
 
       email: {
         required,
-        email
-      }
-    }
+        email,
+      },
+    },
   },
 
   methods: {
@@ -237,11 +244,11 @@ export default {
       let self = this;
       this.$auth
         .authenticate(provider)
-        .then(response => {
+        .then((response) => {
           self.socialLogin(provider, response);
           console.log(response);
         })
-        .catch(err => {
+        .catch((err) => {
           console.log({ err: err });
         });
     },
@@ -249,7 +256,7 @@ export default {
     socialLogin(provider, response) {
       this.$http
         .post("user/social/" + provider, response)
-        .then(response => {
+        .then((response) => {
           console.log(response.data);
 
           this.$store.commit("auth/setUserData", response.data);
@@ -257,13 +264,13 @@ export default {
           this.flashMessage.show({
             status: "success",
 
-            message: "Successfully Register"
+            message: "Successfully Register",
           });
 
           this.$router.push({ name: "welcome" });
           return response.data.token;
         })
-        .catch(err => {
+        .catch((err) => {
           console.log({ err: err });
         });
     },
@@ -272,7 +279,7 @@ export default {
       const field = this.$v.form[fieldName];
       if (field) {
         return {
-          "md-invalid": field.$invalid && field.$dirty
+          "md-invalid": field.$invalid && field.$dirty,
         };
       }
     },
@@ -295,9 +302,9 @@ export default {
           email: this.form.email,
           password: this.form.password,
           phone: this.form.tel,
-          password_confirmation: this.form.password
+          password_confirmation: this.form.password,
         })
-        .then(response => {
+        .then((response) => {
           console.log(response.data);
           this.$store.commit("auth/setUserData", response.data);
 
@@ -305,12 +312,12 @@ export default {
             status: "success",
             title: "Successfully Register",
             message:
-              "Thanks for registering. You will get your otp code in a second"
+              "Thanks for registering. You will get your otp code in a second",
           });
 
           this.$router.push({ name: "verifyAccount" });
         })
-        .catch(err => {
+        .catch((err) => {
           this.sending = false;
 
           if (err.response.status == 422) {
@@ -320,13 +327,13 @@ export default {
             this.flashMessage.show({
               status: "error",
 
-              message: err.response.data.message
+              message: err.response.data.message,
             });
           } else {
             this.flashMessage.show({
               status: "error",
               title: "Registration Failed",
-              message: "Unable to store this data"
+              message: "Unable to store this data",
             });
             console.log({ err: err });
           }
@@ -337,20 +344,18 @@ export default {
       if (!this.$v.$invalid) {
         this.saveUser();
       }
-    }
-  }
+    },
+  },
 };
 </script>
 
 <style scoped>
-
 .vl {
   border-left: 1px solid green;
   height: 50px;
 }
 
-
-.localfoter{
+.localfoter {
   margin-top: -10px;
 }
 

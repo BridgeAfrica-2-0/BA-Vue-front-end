@@ -3,173 +3,132 @@
     <b-row>
       <b-col md="12" lg="5" xl="4" class="p-0 m-0">
         <b-card title="" header-tag="header" footer-tag="footer">
-         
-           <span class="m-1">
-
-           <h6 class="title intro-head "> <b>   <fas-icon class=" icons" :icon="['fas', 'exclamation-circle']"  size="lg" />   Intro  </b> </h6>
-            <span class="float-right btn m-0 p-0 action-intro"  
-            v-b-modal.modal-5
-
-              ><b-icon icon="pencil-fill"  class="icon-size"   variant="primary"></b-icon> </span
-            >
-   
-
-           </span>       
-
+          <span class="m-1">
+            <h6 class="title intro-head ">
+              <b>
+                <fas-icon
+                  class=" icons"
+                  :icon="['fas', 'exclamation-circle']"
+                  size="lg"
+                />
+                Intro
+              </b>
+            </h6>
+            <span class="float-right btn m-0 p-0 action-intro" v-b-modal.modal-5
+              ><b-icon
+                icon="pencil-fill"
+                class="icon-size"
+                variant="primary"
+              ></b-icon>
+            </span>
+          </span>
 
           <b-card-text class="text-left username  intro-head">
             <p>
-           <b-icon icon="briefcase-fill"  class="icon-size" variant="primary"></b-icon> <b> Work at:  </b>
-              <span class="text"> Current or Last Organization   </span>
+              <b-icon
+                icon="briefcase-fill"
+                class="icon-size"
+                variant="primary"
+              ></b-icon>
+              <b> Work at: </b>
+              <span class="text"> Current or Last Organization </span>
             </p>
             <p>
-            <b-icon icon="book-fill"  class="icon-size"  variant="primary"></b-icon> <b> Studied at:  </b>
-             <span class="text">  Last Education  </span>
+              <b-icon
+                icon="book-fill"
+                class="icon-size"
+                variant="primary"
+              ></b-icon>
+              <b> Studied at: </b>
+              <span class="text"> Last Education </span>
             </p>
             <p>
-            <b-icon icon="house-fill"  class="icon-size" variant="primary"></b-icon> <b> Home Town
-              :  </b>  <span class="text"> Dummy </span>
+              <b-icon
+                icon="house-fill"
+                class="icon-size"
+                variant="primary"
+              ></b-icon>
+              <b> Home Town : </b> <span class="text"> Dummy </span>
             </p>
             <p>
-             <b-icon icon="geo-alt-fill"  class="icon-size" variant="primary"></b-icon><b> Current
-              City : </b> <span class="text"> Dummy  </span>
+              <b-icon
+                icon="geo-alt-fill"
+                class="icon-size"
+                variant="primary"
+              ></b-icon
+              ><b> Current City : </b> <span class="text"> Dummy </span>
             </p>
             <p>
-              <b-icon icon="people-fill"  class="icon-size"  variant="primary"></b-icon>  <b> Community:  </b> <span class="text"> 525   </span>
+              <b-icon
+                icon="people-fill"
+                class="icon-size"
+                variant="primary"
+              ></b-icon>
+              <b> Community: </b> <span class="text"> 525 </span>
             </p>
           </b-card-text>
         </b-card>
 
-
-
-      
-    <b-modal id="modal-5" title=" Edit Intro"> 
-      
-      
-      
+        <b-modal id="modal-5" title=" Edit Intro">
           <div class="form-card">
-              <div class="row">
-               
-                <div class="col-md-12">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label for="work_at"> Worked At :</label><br />
+                  <input
+                    type="text"
+                    name="alias"
+                    id="work_at"
+                    placeholder="work at"
+                    class="form-control"
+                  />
+                </div>
 
+                <div class="form-group">
+                  <label for="studied_at"> Studied At :</label><br />
+                  <input
+                    type="text"
+                    name="alias"
+                    id="studied_at"
+                    placeholder="studied at"
+                    class="form-control"
+                  />
+                </div>
 
-                  <div class="form-group">
-                    <label for="work_at"> Worked At :</label><br />
-                    <input
-                      type="text"
-                      name="alias"
-                      id="work_at"
-                      placeholder="work at"
-                      class="form-control"
-                    />
-                  </div>
+                <div class="form-group">
+                  <label for="home_town"> Home Town :</label><br />
+                  <input
+                    type="text"
+                    name="alias"
+                    id="home_town"
+                    placeholder="home town"
+                    class="form-control"
+                  />
+                </div>
 
-                   <div class="form-group">
-                    <label for="studied_at"> Studied At :</label><br />
-                    <input
-                      type="text"
-                      name="alias"
-                      id="studied_at"
-                      placeholder="studied at"
-                      class="form-control"
-                    />
-                  </div>
-
-
-
-
-
- 
-
-  
-  
- <div class="form-group">
-                    <label for="home_town"> Home Town :</label><br />
-                    <input
-                      type="text"
-                      name="alias"
-                      id="home_town"
-                      placeholder="home town"
-                      class="form-control"
-                    />
-                  </div>
-
-
-
-
-
-
-
-
-
-
-
- <div class="form-group">
-                    <label for="city"> Current City :</label><br />
-                    <input
-                      type="text"
-                      name="alias"
-                      id="city"
-                      placeholder="work at"
-                      class="form-control"
-                    />
-                  </div>
-
-
-
-
-
-                  
-
-
-
-
-                 
+                <div class="form-group">
+                  <label for="city"> Current City :</label><br />
+                  <input
+                    type="text"
+                    name="alias"
+                    id="city"
+                    placeholder="work at"
+                    class="form-control"
+                  />
                 </div>
               </div>
             </div>
-      
-      
-      
-      
-      
-       </b-modal>
-
-        
+          </div>
+        </b-modal>
 
         <Followers />
 
         <Community />
 
-
         <Media />
-
       </b-col>
       <b-col md="12" lg="7" xl="8" class="m-0 p-0 px-lg-4">
-
-
-
-
-
-   <Owner_post />
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        <Owner_post />
       </b-col>
     </b-row>
   </div>
@@ -185,15 +144,12 @@ import Media from "../../media";
 export default {
   name: "posts",
   components: {
-    
     Followers,
     Media,
     Owner_post,
-    Community,
+    Community
   },
 
-
-  
   data() {
     return {
       images: [
@@ -216,43 +172,36 @@ export default {
         "https://i.wifegeek.com/200426/177ef44c.jpg",
         "https://i.wifegeek.com/200426/d74d9040.jpg",
         "https://i.wifegeek.com/200426/81e24a47.jpg",
-        "https://i.wifegeek.com/200426/43e2e8bb.jpg",
+        "https://i.wifegeek.com/200426/43e2e8bb.jpg"
       ],
       imagees: [
         "https://i.wifegeek.com/200426/f9459c52.jpg",
-        "https://i.wifegeek.com/200426/5ce1e1c7.jpg",
-      ],
+        "https://i.wifegeek.com/200426/5ce1e1c7.jpg"
+      ]
     };
   },
-
-
 
   methods: {
     chooseFiles: function() {
       console.log("helloo fucker");
-        document.getElementById("fileUpload").click()
+      document.getElementById("fileUpload").click();
     }
-    },
-
-
-
+  }
 };
 </script>
 
 <style scoped>
-
-.intro-head{
-  margin-top:-20px;
-
+.intro-head {
+  margin-top: -20px;
 }
 
-.post-pic{
+.post-pic {
   max-width: 500px;
   max-height: 426px;
 }
 
-.clr{
-  color: #E75C18;
+.clr {
+  color: #e75c18;
 }
 @media (max-width: 576px) {
   .lb-grid {
@@ -265,9 +214,8 @@ export default {
   }
 }
 
-.avatar-size{
-  width:60px;
-  
+.avatar-size {
+  width: 60px;
 }
 @media (min-width: 768px) {
   .lb-grid {
@@ -290,18 +238,16 @@ export default {
   }
 }
 
-
 @media (min-width: 768px) {
   .profile-pic {
     width: 64px;
     height: 64px;
   }
 
-  .comment-pic{
+  .comment-pic {
     width: 40px;
     height: 40px;
   }
-
 }
 
 @media (max-width: 768px) {
@@ -310,13 +256,9 @@ export default {
     height: 40px;
   }
 
-  .comment-pic{
+  .comment-pic {
     width: 36px;
     height: 36px;
   }
-
 }
-
-
-
 </style>

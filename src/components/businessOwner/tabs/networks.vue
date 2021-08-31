@@ -1,109 +1,55 @@
 <template>
   <div class=" t-color">
-
     <div v-if="networkShow">
-    
-        
+      <fas-icon class=" icons" :icon="['fas', 'project-diagram']" size="lg" />
+      <span class="t-color"> Network </span>
 
+      <b-button
+        variant="outline-primary"
+        @click="addNetwork"
+        data-toggle="modal"
+        data-target="#addbusinessbtnModal"
+        class="float-right btn-network "
+      >
+        Add Network
+      </b-button>
 
+      <hr />
 
-
-      <fas-icon class=" icons" :icon="['fas', 'project-diagram']"  size="lg" /> <span class="t-color">  Network  </span>
-       
-
-       <b-button variant="outline-primary"   @click="addNetwork"  data-toggle="modal"  data-target="#addbusinessbtnModal" class="float-right btn-network "   > Add Network </b-button>
-
-        
-          
-        
-           
-        
-        <hr />
-    
-
-
-
-
-
-
-       <b-row >  
-         
-        
-         
-         
-         <b-col cols="12" md="12" lg="6"  v-for="post in posts" :key="post.id">    
-
-   
-
-
-
-
-
-
-   
-
-    <div class="people-style shadow">
       <b-row>
-         <b-col md="3" xl="3" lg="3" cols="5"  sm="3">
-          <div class="center-img" >
-            <img
-              src="https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg"
-            
-              
-              class="r-image"
-            />
+        <b-col cols="12" md="12" lg="6" v-for="post in posts" :key="post.id">
+          <div class="people-style shadow">
+            <b-row>
+              <b-col md="3" xl="3" lg="3" cols="5" sm="3">
+                <div class="center-img">
+                  <img
+                    src="https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg"
+                    class="r-image"
+                  />
+                </div>
+              </b-col>
+              <b-col md="9" cols="7" lg="9" xl="9" sm="9">
+                <p class="textt">
+                  <strong class="net-title"> Global Car Supple Network </strong>
+                  <br />
+                  Car Rental
+                  <br />
+                  20k Community <br />
+
+                  <span class="location">
+                    <b-icon-geo-alt class="ico"></b-icon-geo-alt> Douala
+                    cameroon
+                  </span>
+                  <br />
+
+                  super best car seller in the world adipisicing elit. lorem
+                  epsep this is <b-link>Read More</b-link>
+                </p>
+              </b-col>
+            </b-row>
           </div>
         </b-col>
-        <b-col md="9" cols="7"  lg="9" xl="9" sm="9">
-          <p class="textt">
-            
-
-
-            <strong class="net-title"> Global Car Supple Network </strong> <br />
-             Car Rental  
-              <br />  20k Community <br />
-            
-            <span class="location"> <b-icon-geo-alt class="ico" ></b-icon-geo-alt> Douala cameroon  </span> <br /> 
-            
-
-             super best car seller in the world
-            adipisicing elit. lorem epsep this is  <b-link>Read More</b-link>
-            
-
-          </p>
-        </b-col>
-
-
-
-
-
-
       </b-row>
-    </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-</b-col>    </b-row>
-
-
-
-
-
     </div>
     <div class="h-100 w-100" v-if="!networkShow">
       <div class="mx-auto text-center my-5">
@@ -114,14 +60,10 @@
       </div>
     </div>
 
-
-
-    <b-modal hide-footer title="Add network"   size="lg"  v-model="showModal">
-
-      <b-container>  
-      <b-form>
-
-<!--
+    <b-modal hide-footer title="Add network" size="lg" v-model="showModal">
+      <b-container>
+        <b-form>
+          <!--
 
       <span class="inline">     <div style="width: 20%;">
             <img
@@ -135,155 +77,107 @@
 
   -->
 
-
-
-
-<div class="row sub-sidebar-2 pending-post-view mt-4 pb-0 ">
-
-    <div class="col-md-12 col-lg-12 d-flex align-items-stretch mb-lg-0" style="padding-left: 0; padding-top: 3px;">
-      <a class="nav-link text-dark" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        <b-icon-info-circle-fill
-            scale="1.5"
-        ></b-icon-info-circle-fill>
-      </a>
-      <div class="post-pending pt-2">
-        <p>Approval Required <br /> Bridge Africa admin will review your request to create a network and notify you upon approval you can the change the network settings and invite people to join your network   </p>
-      </div>
-
-    </div>
-
-    </div>
-
-
-
-    
-
-              <b-form-group
-                label-cols-lg="12"
-                label="Network Name"
-                label-size="md"
-                label-class="font-weight-bold pt-0"
-                class="mb-0"
+          <div class="row sub-sidebar-2 pending-post-view mt-4 pb-0 ">
+            <div
+              class="col-md-12 col-lg-12 d-flex align-items-stretch mb-lg-0"
+              style="padding-left: 0; padding-top: 3px;"
+            >
+              <a
+                class="nav-link text-dark"
+                href="#"
+                role="button"
+                data-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false"
               >
-                <b-form-input id="network_name" placeholder="" required>  </b-form-input>
-              </b-form-group>
-
-             
-          
-               
-
-               <b-form-group
-                label-cols-lg="12"
-                label=" Brief Description"
-                label-size="md"
-                label-class="font-weight-bold pt-0"
-                class="mb-0"
-              >
-                <b-form-textarea
-                  id="textarea"
-                  v-model="text"
-                  placeholder="Enter something..."
-                  rows="3"
-                  max-rows="6"
-                ></b-form-textarea>
-              </b-form-group>
-
-
-
-
-
+                <b-icon-info-circle-fill scale="1.5"></b-icon-info-circle-fill>
+              </a>
+              <div class="post-pending pt-2">
+                <p>
+                  Approval Required <br />
+                  Bridge Africa admin will review your request to create a
+                  network and notify you upon approval you can the change the
+                  network settings and invite people to join your network
+                </p>
+              </div>
+            </div>
+          </div>
 
           <b-form-group
-                label-cols-lg="12"
-                label="Purpose Of Network"
-                label-size="md"
-                label-class="font-weight-bold pt-0"
-                class="mb-0"
-              >
-                <b-form-textarea
-                  id="textarea"
-                  v-model="text"
-                  placeholder=""
-                  rows="3"
-                  max-rows="6"
-                ></b-form-textarea>
-              </b-form-group>
+            label-cols-lg="12"
+            label="Network Name"
+            label-size="md"
+            label-class="font-weight-bold pt-0"
+            class="mb-0"
+          >
+            <b-form-input id="network_name" placeholder="" required>
+            </b-form-input>
+          </b-form-group>
 
+          <b-form-group
+            label-cols-lg="12"
+            label=" Brief Description"
+            label-size="md"
+            label-class="font-weight-bold pt-0"
+            class="mb-0"
+          >
+            <b-form-textarea
+              id="textarea"
+              v-model="text"
+              placeholder="Enter something..."
+              rows="3"
+              max-rows="6"
+            ></b-form-textarea>
+          </b-form-group>
 
-           
+          <b-form-group
+            label-cols-lg="12"
+            label="Purpose Of Network"
+            label-size="md"
+            label-class="font-weight-bold pt-0"
+            class="mb-0"
+          >
+            <b-form-textarea
+              id="textarea"
+              v-model="text"
+              placeholder=""
+              rows="3"
+              max-rows="6"
+            ></b-form-textarea>
+          </b-form-group>
 
+          <b-form-group
+            label-cols-lg="12"
+            label="Special Needs"
+            label-size="md"
+            label-class="font-weight-bold pt-0"
+            class="mb-0"
+          >
+            <b-form-textarea
+              id="textarea"
+              v-model="text"
+              placeholder=" "
+              rows="3"
+              max-rows="6"
+            ></b-form-textarea>
+          </b-form-group>
 
+          <b-form-group
+            label-cols-md="6"
+            label="Allow Business to join network"
+            label-size="md"
+            label-class="font-weight-bold pt-0"
+            class="mb-0"
+          >
+            <b-form-checkbox name="check-button" switch> </b-form-checkbox>
+          </b-form-group>
 
-
-
-       
-
-
-
-
-
-
-              <b-form-group    
-                label-cols-lg="12"
-                label="Special Needs"
-                label-size="md"
-                label-class="font-weight-bold pt-0"
-                class="mb-0"
-              >
-                <b-form-textarea
-                  id="textarea"
-                  v-model="text"
-                  placeholder=" "
-                  rows="3"
-                  max-rows="6"
-                ></b-form-textarea>
-              </b-form-group>
-
-
-          
-
-
-
-
-
-
-            <b-form-group
-                label-cols-md="6"
-                label="Allow Business to join network"
-                label-size="md"
-                label-class="font-weight-bold pt-0"
-                class="mb-0"
-              >
-                <b-form-checkbox  name="check-button" switch>
-                </b-form-checkbox>
-              </b-form-group>
-
-
-
-
-        <b-button class="mt-2 " style="float:right" variant="primary" > Add Network</b-button>
-      </b-form>
-
-
-
-
-       </b-container>
-
-
-
+          <b-button class="mt-2 " style="float:right" variant="primary">
+            Add Network</b-button
+          >
+        </b-form>
+      </b-container>
     </b-modal>
-
-
-
-
-
-
-
-
-
-
-
-
   </div>
 </template>
 
@@ -346,12 +240,9 @@ export default {
 </script>
 
 <style scoped>
-
-.post-pending{
-
+.post-pending {
   font-size: 12;
   text-align: left;
-  
 }
 .no-network {
   width: 100%;
@@ -443,7 +334,7 @@ p {
   color: #fff;
   background-color: #bbb;
   padding: 20px;
- 
+
   margin: 30px;
   border-radius: 5px;
   text-align: center;
@@ -487,32 +378,22 @@ p {
     top: 100px;
     padding: 20px;
   }
- 
 }
 
-
-
-
 .row.sub-sidebar-2.pending-post-view {
-  background-color: #8BD06C;
+  background-color: #8bd06c;
   border-color: #000;
   border: solid 3px;
 }
 
-
-
-
 @media only screen and (max-width: 760px) {
+  h4 {
+    font-size: 15px;
+  }
 
-
-h4{
-  font-size: 15px;
-}
-
-
-.pop{
-  font-size: 15px;
-}
+  .pop {
+    font-size: 15px;
+  }
 }
 
 .card {
@@ -550,45 +431,29 @@ h4{
   margin-left: -15px;
 }
 
-
-
 .ico {
   margin-right: 5px;
 }
 
-
-
-
 @media only screen and (min-width: 768px) {
-.btn-text{
+  .btn-text {
+    margin-left: 8px;
+  }
 
-   margin-left: 8px;
+  .btn-com {
+    margin-left: 4px;
+  }
+  .btn-icon {
+    margin-top: 3px;
+  }
+
+  .center-img {
+    margin-right: -60px;
+  }
 }
-
-.btn-com{
-  margin-left:4px;
-}
-.btn-icon{
-  margin-top:3px;
-}
-
-.center-img{
-  margin-right: -60px;
-}
-
-
-}
-
 
 @media only screen and (max-width: 768px) {
-
-    
-
-
 }
-
-
-
 
 .card {
   color: orange;
@@ -601,138 +466,104 @@ h4{
   padding: 15px;
 }
 
-
-
-
-
-
-
 @media only screen and (max-width: 768px) {
-   .a-flex{
-     margin-right: -15px;
-   }
-
+  .a-flex {
+    margin-right: -15px;
+  }
 
   .s-button {
-  
+    padding: 15px;
+    margin-top: -15px;
+  }
 
-  padding: 15px;
-  margin-top: -15px;
-}
+  .net-title {
+    font-size: 16px;
+    color: black;
 
-.net-title{
-  font-size: 16px;
-   color:black;
- 
- line-height: 35px;
-  font-family: 'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif;
-}
+    line-height: 35px;
+    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  }
 
-.textt {
-  color: #000;
-  
-    font-family: 'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif;
+  .textt {
+    color: #000;
+
+    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-weight: normal;
     font-size: 14px;
     line-height: 30px;
-    color: rgba(117,114,128,1);
+    color: rgba(117, 114, 128, 1);
     text-align: left;
 
-Font-weight: normal ;
-Line-height:20px ;
-font-style:normal;
+    font-weight: normal;
+    line-height: 20px;
+    font-style: normal;
 
+    padding: 1px;
+    text-align: left;
 
-padding: 1px;
-  text-align: left;
+    margin-left: -30px;
 
-  margin-left: -30px;
+    margin-right: -5px;
 
-  margin-right: -5px;
+    line-height: 25px;
+  }
 
-  line-height: 25px;
+  .location {
+    margin-bottom: 30px;
+  }
+
+  .r-image {
+    border-radius: 8px;
+
+    height: 100px;
+    width: 100px;
+  }
 }
-
-.location{
-
-  margin-bottom: 30px;
-}
-
-
-
-
-
-.r-image {
-  border-radius: 8px;
-
- Height : 100px;
-Width:100px
-
-}
-
-
-
-}
-
-
-
-
-
 
 @media only screen and (min-width: 768px) {
+  .net-title {
+    font-size: 20px;
+    color: black;
 
-.net-title{
-  font-size: 20px;
-   color:black;
- 
- line-height: 35px;
-  font-family: 'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif;
-}
+    line-height: 35px;
+    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  }
 
-.textt {
-  color: #000;
-  
-    font-family: 'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif;
+  .textt {
+    color: #000;
+
+    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-weight: normal;
     font-size: 14px;
     line-height: 30px;
-    color: rgba(117,114,128,1);
+    color: rgba(117, 114, 128, 1);
     text-align: left;
 
-Font-weight: normal ;
-Line-height:20px ;
-font-style:normal;
+    font-weight: normal;
+    line-height: 20px;
+    font-style: normal;
 
+    padding: 1px;
+    text-align: left;
 
-padding: 1px;
-  text-align: left;
+    margin-left: 30px;
 
-  margin-left: 30px;
+    margin-right: -5px;
 
-  margin-right: -5px;
+    line-height: 25px;
+  }
 
-  line-height: 25px;
+  .location {
+    margin-bottom: 30px;
+  }
+
+  .r-image {
+    border-radius: 8px;
+
+    height: 160px;
+    width: 160px;
+  }
 }
-
-.location{
-
-  margin-bottom: 30px;
-}
-
-
-
-.r-image {
-  border-radius: 8px;
-
- Height : 160px;
-Width:160px
-
-}
-
-
-
-}
-
 
 .stock {
   color: green;
@@ -749,127 +580,81 @@ Width:160px
   margin-left: -15px;
 }
 
-
 .ico {
   margin-right: 5px;
 }
 
-
-
-
 @media only screen and (min-width: 768px) {
   .people-style {
-  border-top-left-radius: 5px;
+    border-top-left-radius: 5px;
 
-  border-bottom-left-radius: 5px;
+    border-bottom-left-radius: 5px;
 
-  border-top-right-radius: 5px;
+    border-top-right-radius: 5px;
 
-  border-bottom-right-radius: 5px;
+    border-bottom-right-radius: 5px;
 
-  background: white;
+    background: white;
 
-  background-color: #fff;
-  background-clip: border-box;
-  border: 1px solid rgba(0, 0, 0, 0.125);
-  margin-bottom: 10px;
-  
+    background-color: #fff;
+    background-clip: border-box;
+    border: 1px solid rgba(0, 0, 0, 0.125);
+    margin-bottom: 10px;
 
-  
+    margin-right: 8px;
 
+    padding: 7px;
+  }
 
-  margin-right: 8px;
- 
-
-  padding: 7px;
-}
-
-
-.btn-network{
-
-  width: 118px !important;
-    height: 38px  !important ;
-    margin-top: -4px  !important;
+  .btn-network {
+    width: 118px !important;
+    height: 38px !important ;
+    margin-top: -4px !important;
     font-size: 16px;
+  }
 }
-
-}
-
-
-
 
 @media only screen and (max-width: 768px) {
   .people-style {
-  border-top-left-radius: 5px;
+    border-top-left-radius: 5px;
 
-  border-bottom-left-radius: 5px;
+    border-bottom-left-radius: 5px;
 
-  border-top-right-radius: 5px;
+    border-top-right-radius: 5px;
 
-  border-bottom-right-radius: 5px;
+    border-bottom-right-radius: 5px;
 
+    background: white;
 
+    background-color: #fff;
+    background-clip: border-box;
+    border: 1px solid rgba(0, 0, 0, 0.125);
+    margin-bottom: 10px;
 
+    padding: 7px;
+  }
 
-  background: white;
-
-  background-color: #fff;
-  background-clip: border-box;
-  border: 1px solid rgba(0, 0, 0, 0.125);
-  margin-bottom: 10px;
-
-
- 
-
-  padding: 7px;
+  h4 {
+    font-size: 15px;
+  }
 }
 
+@media only screen and (max-width: 720px) {
+  .card-body {
+    padding: 0px;
+  }
 
-
-
-
-
-h4{
-  font-size: 15px;
-}
-
-}
-
-
-
-
-
-
-
-
-
-
-
-@media only screen and (max-width: 720px){
-
-.card-body {
-   padding: 0px;
-    
-}
-
-.btn-network{
-
-  width: 90px !important;
-    height: 30px  !important ;
-    margin-top: 0px  !important;
+  .btn-network {
+    width: 90px !important;
+    height: 30px !important ;
+    margin-top: 0px !important;
     font-size: 12px;
     text-align: center;
     padding: 2px;
+  }
 }
 
-}
-
-
-.t-color{
+.t-color {
   color: #000;
-  
 }
-
-
-
 </style>

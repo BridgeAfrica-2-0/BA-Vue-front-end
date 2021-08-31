@@ -1,10 +1,5 @@
 <template>
   <div>
-    
-
-
-
-    
     <div class="people-style border shadow">
       <b-row class="">
         <b-col cols="4" class="my-auto">
@@ -53,18 +48,6 @@
       </b-row>
     </div>
 
-
-
-
-
-
-
-
-
-
-
-
-    
     <div class="people-style border shadow">
       <b-row class="">
         <b-col cols="4" class="my-auto">
@@ -113,21 +96,6 @@
       </b-row>
     </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
     <div class="people-style border shadow">
       <b-row class="">
         <b-col cols="4" class="my-auto">
@@ -176,18 +144,6 @@
       </b-row>
     </div>
 
-
-
-
-
-
-
-
-
-
-
-
-    
     <div class="people-style border shadow">
       <b-row class="">
         <b-col cols="4" class="my-auto">
@@ -236,7 +192,6 @@
       </b-row>
     </div>
   </div>
-
 </template>
 
 <script>

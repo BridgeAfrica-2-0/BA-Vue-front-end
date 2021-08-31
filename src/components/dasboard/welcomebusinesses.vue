@@ -118,16 +118,16 @@ export default {
         pagination: false,
 
         type: "loop",
-        perMove: 1,
-      },
+        perMove: 1
+      }
     };
   },
 
   computed: {
     business_around() {
       return this.$store.state.auth.businessAround;
-    },
-  },
+    }
+  }
 };
 </script>
 

@@ -573,7 +573,6 @@
                         :options="timezone"
                         class="form-control text"
                       >
-                      
                       </select>
                     </div>
                   </div>
@@ -698,7 +697,7 @@ export default {
       logo_pic: null,
       logoimg_url: null,
       form: {
-        business_name: null,
+        business_name: null
       },
       business_category: null,
       business_keyword: null,
@@ -709,89 +708,108 @@ export default {
 
       center: {
         lat: 39.7837304,
-        lng: -100.4458825,
+        lng: -100.4458825
       },
       locationMarkers: [],
       locPlaces: [],
       existingPlace: null,
 
-
-
- 
-      timezone:[
-    {"label":"(GMT-12:00) International Date Line West","value":"-12"},
-    {"label":"(GMT-11:00) Midway Island, Samoa","value":"-11"},
-    {"label":"(GMT-10:00) Hawaii","value":"-10"},
-    {"label":"(GMT-09:00) Alaska","value":"-9"},
-    {"label":"(GMT-08:00) Pacific Time (US & Canada)","value":"-8"},
-    {"label":"(GMT-08:00) Tijuana, Baja California","value":"-8"},
-    {"label":"(GMT-07:00) Arizona","value":"-7"},
-    {"label":"(GMT-07:00) Chihuahua, La Paz, Mazatlan","value":"-7"},
-    {"label":"(GMT-07:00) Mountain Time (US & Canada)","value":"-7"},
-    {"label":"(GMT-06:00) Central America","value":"-6"},
-    {"label":"(GMT-06:00) Central Time (US & Canada)","value":"-6"},
-    {"label":"(GMT-05:00) Bogota, Lima, Quito, Rio Branco","value":"-5"},
-    {"label":"(GMT-05:00) Eastern Time (US & Canada)","value":"-5"},
-    {"label":"(GMT-05:00) Indiana (East)","value":"-5"},
-    {"label":"(GMT-04:00) Atlantic Time (Canada)","value":"-4"},
-    {"label":"(GMT-04:00) Caracas, La Paz","value":"-4"},
-    {"label":"(GMT-04:00) Manaus","value":"-4"},
-    {"label":"(GMT-04:00) Santiago","value":"-4"},
-    {"label":"(GMT-03:30) Newfoundland","value":"-3.5"},
-    {"label":"(GMT-03:00) Brasilia","value":"-3"},
-    {"label":"(GMT-03:00) Buenos Aires, Georgetown","value":"-3"},
-    {"label":"(GMT-03:00) Greenland","value":"-3"},
-    {"label":"(GMT-03:00) Montevideo","value":"-3"},
-    {"label":"(GMT-02:00) Mid-Atlantic","value":"-2"},
-    {"label":"(GMT-01:00) Cape Verde Is.","value":"-1"},
-    {"label":"(GMT-01:00) Azores","value":"-1"},
-    {"label":"(GMT+00:00) Casablanca, Monrovia, Reykjavik","value":"0"},
-    {"label":"(GMT+00:00) Greenwich Mean Time : Dublin, Edinburgh, Lisbon, London","value":"0"},
-    {"label":"(GMT+01:00) Amsterdam, Berlin, Bern, Rome, Stockholm, Vienna","value":"1"},
-    {"label":"(GMT+01:00) Belgrade, Bratislava, Budapest, Ljubljana, Prague","value":"1"},
-    {"label":"(GMT+01:00) Brussels, Copenhagen, Madrid, Paris","value":"1"},
-    {"label":"(GMT+01:00) Sarajevo, Skopje, Warsaw, Zagreb","value":"1"},
-    {"label":"(GMT+01:00) West Central Africa","value":"1"},
-    {"label":"(GMT+02:00) Amman","value":"2"},
-    {"label":"(GMT+02:00) Athens, Bucharest, Istanbul","value":"2"},
-    {"label":"(GMT+02:00) Beirut","value":"2"},
-    {"label":"(GMT+02:00) Cairo","value":"2"},
-    {"label":"(GMT+02:00) Harare, Pretoria","value":"2"},
-    {"label":"(GMT+02:00) Helsinki, Kyiv, Riga, Sofia, Tallinn, Vilnius","value":"2"},
-    {"label":"(GMT+02:00) Jerusalem","value":"2"},
-    {"label":"(GMT+02:00) Minsk","value":"2"},
-    {"label":"(GMT+02:00) Windhoek","value":"2"},
-    {"label":"(GMT+03:00) Kuwait, Riyadh, Baghdad","value":"3"},
-    {"label":"(GMT+03:00) Moscow, St. Petersburg, Volgograd","value":"3"},
-    {"label":"(GMT+03:00) Nairobi","value":"3"},
-    {"label":"(GMT+03:00) Tbilisi","value":"3"},
-    {"label":"(GMT+03:30) Tehran","value":"3.5"},
-    {"label":"(GMT+04:00) Abu Dhabi, Muscat","value":"4"},
-    {"label":"(GMT+04:00) Baku","value":"4"},
-    {"label":"(GMT+04:00) Yerevan","value":"4"},
-    {"label":"(GMT+04:30) Kabul","value":"4.5"},
-    {"label":"(GMT+05:00) Yekaterinburg","value":"5"},
-    {"label":"(GMT+05:00) Islamabad, Karachi, Tashkent","value":"5"},
-    {"label":"(GMT+05:30) Sri Jayawardenapura","value":"5.5"},
-    {"label":"(GMT+05:30) Chennai, Kolkata, Mumbai, New Delhi","value":"5.5"},
-    {"label":"(GMT+05:45) Kathmandu","value":"5.75"},
-    {"label":"(GMT+06:00) Almaty, Novosibirsk","value":"6"},{"label":"(GMT+06:00) Astana, Dhaka","value":"6"},
-    {"label":"(GMT+06:30) Yangon (Rangoon)","value":"6.5"},
-    {"label":"(GMT+07:00) Bangkok, Hanoi, Jakarta","value":"7"},
-    {"label":"(GMT+07:00) Krasnoyarsk","value":"7"},
-    {"label":"(GMT+08:00) Beijing, Chongqing, Hong Kong, Urumqi","value":"8"},
-    {"label":"(GMT+08:00) Kuala Lumpur, Singapore","value":"8"},
-    {"label":"(GMT+08:00) Irkutsk, Ulaan Bataar","value":"8"},
-    {"label":"(GMT+08:00) Perth","value":"8"},
-    {"label":"(GMT+08:00) Taipei","value":"8"}  ],
-   
-
-
-       options: [
-        { text: " Person", value: "person" },
-        { text: " Business ", value: "business" },
+      timezone: [
+        { label: "(GMT-12:00) International Date Line West", value: "-12" },
+        { label: "(GMT-11:00) Midway Island, Samoa", value: "-11" },
+        { label: "(GMT-10:00) Hawaii", value: "-10" },
+        { label: "(GMT-09:00) Alaska", value: "-9" },
+        { label: "(GMT-08:00) Pacific Time (US & Canada)", value: "-8" },
+        { label: "(GMT-08:00) Tijuana, Baja California", value: "-8" },
+        { label: "(GMT-07:00) Arizona", value: "-7" },
+        { label: "(GMT-07:00) Chihuahua, La Paz, Mazatlan", value: "-7" },
+        { label: "(GMT-07:00) Mountain Time (US & Canada)", value: "-7" },
+        { label: "(GMT-06:00) Central America", value: "-6" },
+        { label: "(GMT-06:00) Central Time (US & Canada)", value: "-6" },
+        { label: "(GMT-05:00) Bogota, Lima, Quito, Rio Branco", value: "-5" },
+        { label: "(GMT-05:00) Eastern Time (US & Canada)", value: "-5" },
+        { label: "(GMT-05:00) Indiana (East)", value: "-5" },
+        { label: "(GMT-04:00) Atlantic Time (Canada)", value: "-4" },
+        { label: "(GMT-04:00) Caracas, La Paz", value: "-4" },
+        { label: "(GMT-04:00) Manaus", value: "-4" },
+        { label: "(GMT-04:00) Santiago", value: "-4" },
+        { label: "(GMT-03:30) Newfoundland", value: "-3.5" },
+        { label: "(GMT-03:00) Brasilia", value: "-3" },
+        { label: "(GMT-03:00) Buenos Aires, Georgetown", value: "-3" },
+        { label: "(GMT-03:00) Greenland", value: "-3" },
+        { label: "(GMT-03:00) Montevideo", value: "-3" },
+        { label: "(GMT-02:00) Mid-Atlantic", value: "-2" },
+        { label: "(GMT-01:00) Cape Verde Is.", value: "-1" },
+        { label: "(GMT-01:00) Azores", value: "-1" },
+        { label: "(GMT+00:00) Casablanca, Monrovia, Reykjavik", value: "0" },
+        {
+          label:
+            "(GMT+00:00) Greenwich Mean Time : Dublin, Edinburgh, Lisbon, London",
+          value: "0"
+        },
+        {
+          label: "(GMT+01:00) Amsterdam, Berlin, Bern, Rome, Stockholm, Vienna",
+          value: "1"
+        },
+        {
+          label:
+            "(GMT+01:00) Belgrade, Bratislava, Budapest, Ljubljana, Prague",
+          value: "1"
+        },
+        {
+          label: "(GMT+01:00) Brussels, Copenhagen, Madrid, Paris",
+          value: "1"
+        },
+        { label: "(GMT+01:00) Sarajevo, Skopje, Warsaw, Zagreb", value: "1" },
+        { label: "(GMT+01:00) West Central Africa", value: "1" },
+        { label: "(GMT+02:00) Amman", value: "2" },
+        { label: "(GMT+02:00) Athens, Bucharest, Istanbul", value: "2" },
+        { label: "(GMT+02:00) Beirut", value: "2" },
+        { label: "(GMT+02:00) Cairo", value: "2" },
+        { label: "(GMT+02:00) Harare, Pretoria", value: "2" },
+        {
+          label: "(GMT+02:00) Helsinki, Kyiv, Riga, Sofia, Tallinn, Vilnius",
+          value: "2"
+        },
+        { label: "(GMT+02:00) Jerusalem", value: "2" },
+        { label: "(GMT+02:00) Minsk", value: "2" },
+        { label: "(GMT+02:00) Windhoek", value: "2" },
+        { label: "(GMT+03:00) Kuwait, Riyadh, Baghdad", value: "3" },
+        { label: "(GMT+03:00) Moscow, St. Petersburg, Volgograd", value: "3" },
+        { label: "(GMT+03:00) Nairobi", value: "3" },
+        { label: "(GMT+03:00) Tbilisi", value: "3" },
+        { label: "(GMT+03:30) Tehran", value: "3.5" },
+        { label: "(GMT+04:00) Abu Dhabi, Muscat", value: "4" },
+        { label: "(GMT+04:00) Baku", value: "4" },
+        { label: "(GMT+04:00) Yerevan", value: "4" },
+        { label: "(GMT+04:30) Kabul", value: "4.5" },
+        { label: "(GMT+05:00) Yekaterinburg", value: "5" },
+        { label: "(GMT+05:00) Islamabad, Karachi, Tashkent", value: "5" },
+        { label: "(GMT+05:30) Sri Jayawardenapura", value: "5.5" },
+        {
+          label: "(GMT+05:30) Chennai, Kolkata, Mumbai, New Delhi",
+          value: "5.5"
+        },
+        { label: "(GMT+05:45) Kathmandu", value: "5.75" },
+        { label: "(GMT+06:00) Almaty, Novosibirsk", value: "6" },
+        { label: "(GMT+06:00) Astana, Dhaka", value: "6" },
+        { label: "(GMT+06:30) Yangon (Rangoon)", value: "6.5" },
+        { label: "(GMT+07:00) Bangkok, Hanoi, Jakarta", value: "7" },
+        { label: "(GMT+07:00) Krasnoyarsk", value: "7" },
+        {
+          label: "(GMT+08:00) Beijing, Chongqing, Hong Kong, Urumqi",
+          value: "8"
+        },
+        { label: "(GMT+08:00) Kuala Lumpur, Singapore", value: "8" },
+        { label: "(GMT+08:00) Irkutsk, Ulaan Bataar", value: "8" },
+        { label: "(GMT+08:00) Perth", value: "8" },
+        { label: "(GMT+08:00) Taipei", value: "8" }
       ],
 
+      options: [
+        { text: " Person", value: "person" },
+        { text: " Business ", value: "business" }
+      ],
 
       category: "",
       categories: [
@@ -810,25 +828,25 @@ export default {
         { item: "Hotels", name: "Hotels" },
         { item: "station", name: " station  " },
         { item: "Mayor_concils", name: "Mayor_concils" },
-        { item: "Taxis service", name: "Taxis service" },
-      ],
+        { item: "Taxis service", name: "Taxis service" }
+      ]
     };
   },
 
   validations: {
     form: {
       business_name: {
-        required,
+        required
       },
 
       business_category: {
-        required,
-      },
-    },
+        required
+      }
+    }
   },
 
   methods: {
-    setLoading: function (value) {
+    setLoading: function(value) {
       this.loadingWizard = value;
     },
 
@@ -841,7 +859,7 @@ export default {
       const field = this.$v.form[fieldName];
       if (field) {
         return {
-          red: field.$invalid && field.$dirty,
+          red: field.$invalid && field.$dirty
         };
       }
     },
@@ -865,7 +883,7 @@ export default {
         .then(() => {
           console.log("hey yeah");
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
     },
@@ -876,7 +894,7 @@ export default {
         .then(() => {
           console.log("hey yeah");
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
     },
@@ -890,7 +908,7 @@ export default {
       if (this.existingPlace) {
         const marker = {
           lat: this.existingPlace.geometry.location.lat(),
-          lng: this.existingPlace.geometry.location.lng(),
+          lng: this.existingPlace.geometry.location.lng()
         };
 
         this.locationMarkers.push({ position: marker });
@@ -900,15 +918,15 @@ export default {
       }
     },
 
-    locateGeoLocation: function () {
-      navigator.geolocation.getCurrentPosition((res) => {
+    locateGeoLocation: function() {
+      navigator.geolocation.getCurrentPosition(res => {
         this.center = {
           lat: res.coords.latitude,
-          lng: res.coords.longitude,
+          lng: res.coords.longitude
         };
       });
     },
-    createBusiness: function () {
+    createBusiness: function() {
       return new Promise((resolve, reject) => {
         this.sendingB = true;
 
@@ -935,10 +953,10 @@ export default {
         this.axios
           .post("business/create", formData2, {
             headers: {
-              "Content-Type": "multipart/form-data",
-            },
+              "Content-Type": "multipart/form-data"
+            }
           })
-          .then((response) => {
+          .then(response => {
             console.log(response);
 
             this.sendingB = false;
@@ -946,12 +964,12 @@ export default {
             this.flashMessage.show({
               status: "success",
 
-              message: "Business Profile Created",
+              message: "Business Profile Created"
             });
 
             resolve(true);
           })
-          .catch((err) => {
+          .catch(err => {
             console.log({ err: err });
 
             this.sendingB = false;
@@ -964,14 +982,14 @@ export default {
                 status: "error",
 
                 message: err.response.data.message,
-                blockClass: "custom-block-class",
+                blockClass: "custom-block-class"
               });
             } else {
               this.flashMessage.show({
                 status: "error",
 
                 message: "Unable to Create Your Business",
-                blockClass: "custom-block-class",
+                blockClass: "custom-block-class"
               });
               console.log({ err: err });
             }
@@ -981,7 +999,7 @@ export default {
       });
     },
 
-    updateUserProfile: function () {
+    updateUserProfile: function() {
       return new Promise((resolve, reject) => {
         console.log("sending user data");
 
@@ -1004,10 +1022,10 @@ export default {
         this.axios
           .post("/complete/profile", formData, {
             headers: {
-              "Content-Type": "multipart/form-data",
-            },
+              "Content-Type": "multipart/form-data"
+            }
           })
-          .then((response) => {
+          .then(response => {
             console.log(response);
 
             this.step1 = true;
@@ -1018,12 +1036,12 @@ export default {
 
               message: "Profile Updated",
 
-              blockClass: "custom-block-class",
+              blockClass: "custom-block-class"
             });
 
             resolve(true);
           })
-          .catch((err) => {
+          .catch(err => {
             console.log({ err: err });
 
             this.sending = false;
@@ -1037,14 +1055,14 @@ export default {
                 status: "error",
 
                 message: err.response.data.message,
-                blockClass: "custom-block-class",
+                blockClass: "custom-block-class"
               });
             } else {
               this.flashMessage.show({
                 status: "error",
                 title: "Registration Failed",
                 message: "Unable to update your Information",
-                blockClass: "custom-block-class",
+                blockClass: "custom-block-class"
               });
               console.log({ err: err });
             }
@@ -1054,24 +1072,24 @@ export default {
       });
     },
 
-    onComplete: function () {
+    onComplete: function() {
       this.$store
         .dispatch("auth/completeWelcome")
         .then(() => {
           console.log("hey yeah");
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
 
       this.$router.push("/dashboard");
     },
 
-    chooseProfile1: function () {
+    chooseProfile1: function() {
       document.getElementById("profile1").click();
     },
 
-    chooseProfile2: function () {
+    chooseProfile2: function() {
       document.getElementById("profile2").click();
     },
 
@@ -1087,7 +1105,7 @@ export default {
       this.logoimg_url = URL.createObjectURL(logofile);
     },
 
-    chooselogo: function () {
+    chooselogo: function() {
       document.getElementById("logo").click();
     },
 
@@ -1107,7 +1125,7 @@ export default {
       }
 
       this.first_page = false;
-    },
+    }
   },
 
   mounted() {
@@ -1121,7 +1139,7 @@ export default {
   components: {
     People,
     Business,
-    Tutorial,
+    Tutorial
   },
 
   computed: {
@@ -1130,14 +1148,11 @@ export default {
     },
     business_around() {
       return this.$store.state.auth.businessAround;
-    },
-  },
+    }
+  }
 };
 import "vue-form-wizard/dist/vue-form-wizard.min.css";
 </script>
-
-
-
 
 <style>
 #preview {

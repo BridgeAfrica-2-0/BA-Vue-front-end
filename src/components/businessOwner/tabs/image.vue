@@ -1,10 +1,66 @@
-  <template>
+<template>
   <div>
 
       <FlashMessage />
     <div class="row">
       <div class="container-fluid">
-       
+        <b-modal
+          id="modalxl"
+          ref="modalxl"
+          centered
+          hide-footer
+          title="Upoad Image"
+        >
+
+        <br>   
+
+
+
+
+    <div id="preview" ref="preview">
+    <img v-if="img_url" :src="img_url" />
+
+    
+
+  </div>
+
+
+  <br>
+          <b-form-textarea id="textarea-small"
+                    class="mb-2 border-none"
+                    v-model="text"
+                    placeholder="Enter a description"> </b-form-textarea>
+
+                    <br>
+
+          <b-button @click="submitPost" variant="primary" block
+            ><b-icon icon="cursor-fill" variant="primary"></b-icon>
+            Publish</b-button
+          >
+        </b-modal>
+
+
+
+         <div class="createp img-gall image-wrapp">
+            <div class="">
+
+               <input
+            type="file"
+            id="chosefile"
+            @change="selectMoviesOutsidePost"
+            accept="video/mpeg, video/mp4, image/*"
+            hidden
+            ref="movie"
+          />
+
+              <a  @click="$refs.movie.click()"  >
+                <div class="drag-textt">
+                  <fas-icon :icon="['fas', 'plus']" />
+                  <h3>Add Item</h3>
+                </div>
+              </a>
+            </div>
+          </div>
 
 
 

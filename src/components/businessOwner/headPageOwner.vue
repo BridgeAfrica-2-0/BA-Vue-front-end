@@ -5,12 +5,86 @@
 
 
 
-   <div class="splide">
+    
+
+
+
+    
+   <div class="splide"   v-if="business_info.cover.length"  >
 
     <splide :options="options" class="banner r-image"   >
    
 
-   <splide-slide >
+
+
+
+
+         
+  
+
+   <splide-slide   v-for="cover in business_info.cover" :key="cover.id" >
+       
+
+            <img
+              
+              :src="cover.media_url"
+              
+              class="r-image"
+            />
+
+
+    </splide-slide>
+
+
+    
+
+
+
+     
+
+
+
+
+
+
+
+
+
+ 
+
+   
+
+
+              </splide>
+
+   </div>
+
+
+
+
+
+
+
+
+
+
+   <div  v-if="!business_info.cover.length"  class="splide"  >
+
+    <splide :options="options" class="banner r-image"   >
+   
+
+
+ 
+
+
+
+
+
+
+
+     
+
+     <splide-slide >
        
 
             <img
@@ -21,6 +95,7 @@
 
 
     </splide-slide>
+
 
 
      <splide-slide >
@@ -53,7 +128,7 @@
 
 
 
-
+ 
 
    
 
@@ -73,7 +148,8 @@
         <b-row class="mt-md-2">
           <b-col cols="8" md="6" class="m-0 p-0">
             <b-avatar
-              src="https://www.fivesquid.com/pics/t2/1594480468-145752-1-1.jpg"
+              
+              :src="business_info.logo_path"
               class=" float-left   mt-2 mr-2 mr-xl-5 mr-lg-5 round-coner  logo_avat"
               badge-variant="primary"
               badge-offset="10px"
@@ -81,6 +157,7 @@
               rounded
             >
             </b-avatar>
+            
 
             <b-icon
               icon="camera-fill"
@@ -92,8 +169,8 @@
 
 
 
-
-
+                                     
+                                                                                                      
 
 
             <div class="">
@@ -102,7 +179,7 @@
                   <h6
                     class=" m-0 p-0 ml-3   profile-name"
                   > 
-                 <b>   <b-link>     Heavy Gym    </b-link>  </b>     <br /> <span class="community"> 1.5k Community </span>
+                 <b>   <b-link>   {{business_info.name}}     </b-link>  </b>     <br /> <span class="community">   {{business_info.community}}  Community </span>
                   </h6>
                   
                   
@@ -199,7 +276,7 @@
             <div class="my-auto options">
               <span class="float-right">
 
-                <b-button variant="primary" class="edit-btn  d-none d-md-inline"   v-b-modal.coverphoto > <fas-icon class="mr-2" :icon="['fas', 'pencil-alt']" size="lg" />   Edit </b-button>
+                <b-button variant="primary" class="edit-btn  d-none d-md-inline"   v-b-modal.coverphoto > <fas-icon class="mr-2" :icon="['fas', 'pencil-alt']" size="lg" />   Add Cover </b-button>
                 
                 
                 <b-dropdown id="dropdown-1" class="float-right options mt-2 mt-sm-2 mt-md-0  dot-btn" no-caret variant="outline-primary">
@@ -221,9 +298,9 @@
                     >Invite Friends On Bridge Africa</b-dropdown-item
                   >
 
+ -->
 
-
-                  <b-dropdown-item>View As</b-dropdown-item>  -->
+                  <b-dropdown-item>View As</b-dropdown-item> 
                 </b-dropdown>
 
                 
@@ -289,7 +366,21 @@ methods: {
     },
 
 
-}
+},
+
+computed: {
+
+  
+
+      business_info() {
+      return  this.$store.state.businessOwner.businessInfo;  
+
+    
+    }
+
+  },
+
+
 
 };
 </script>

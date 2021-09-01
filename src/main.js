@@ -20,10 +20,8 @@ import VueSocialauth from "vue-social-auth";
 import firebase from "firebase";
 Vue.use(Vuex);
 Vue.use(VueAxios, axios);
-import IconifyIcon from '@iconify/vue';
-import homeIconData from '@iconify-icons/mdi-light/home';
-IconifyIcon.addIcon('home', homeIconData);
-import ReadMore from 'vue-read-more';
+
+
 
 Vue.use(ReadMore);
 IconifyIcon.addIcon("home", homeIconData);
@@ -73,9 +71,17 @@ Vue.use(VueSocialauth, {
 
 
 
+
+import VueLoading from 'vue-loading-overlay';
+import 'vue-loading-overlay/dist/vue-loading.css';
+
+Vue.use(VueLoading);
+
+
+
+
 import FlashMessage from '@smartweb/vue-flash-message';
 Vue.use(FlashMessage);
-
 
 
 
@@ -130,6 +136,12 @@ Vue.use(VueGoogleMaps, {
     libraries: "places",
   },
 });
+
+
+import InfiniteLoading from 'vue-infinite-loading';
+
+Vue.use(InfiniteLoading, { /* options */ });
+
 
 Vue.component("v-select", vSelect);
 

@@ -102,7 +102,7 @@ const routes = [
     component: templateView
   },
   {
-    path: "/business_owner",
+    path: "/business_owner/:id?",
     name: "BusinessOwner",
     component: businessOwner,
   },

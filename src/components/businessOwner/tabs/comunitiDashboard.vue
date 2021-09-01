@@ -4,19 +4,19 @@
   
 
 
- 
+    
      
 
      <div class=" border mt-2 ">
 
-        <span> <h6 class="title m-3">  <fas-icon class="icons" :icon="['fas', 'users']" size="lg" />            <b>   COMMUNITY   </b>  <span class="h4-color"> 7K </span> </h6>   </span>   
+        <span> <h6 class="title m-3">  <fas-icon class="icons" :icon="['fas', 'users']" size="lg" />            <b>   COMMUNITY   </b>  <span class="h4-color"> {{totalcommunity.total}} </span> </h6>   </span>   
 
 
       <b-tabs  pills content-class="mt-3  f-left ">
         <b-tab  active>
 
          <template slot="title"  >
-             People  <span class="spa-color">  7K   </span>
+             People  <span class="spa-color"> {{peoplecommunity.total_people}} </span>
             </template>
 
 
@@ -30,11 +30,10 @@
         <b-tab  active>
           
             <template slot="title"  >
-             Followers  <span class="spa-color">  7K   </span>
+             Followers  <span class="spa-color">   {{peoplecommunity.total_followers}}  </span>
             </template>
 
-         
-         <div class="s-comcard">    <People />      </div>
+         <div class="s-comcard">    <People  v-for="people in peoplecommunity.user_followers"  v-bind:key="people.id"   v-bind:people="people" />      </div>
  
          
          
@@ -43,10 +42,10 @@
         <b-tab > 
 
             <template slot="title"  >
-             Following  <span class="spa-color">  7K   </span>
+             Following  <span class="spa-color">  {{peoplecommunity.totat_following}}  </span>
             </template>
 
-      <div class="s-comcard">     <People />       </div>
+      <div class="s-comcard">     <People  v-for="people in peoplecommunity.user_following"  v-bind:key="people.id"   v-bind:people="people" />       </div>
 
         
         
@@ -62,7 +61,7 @@
         <b-tab >
 
             <template slot="title"  >
-             Businesses  <span class="spa-color">  7K   </span>
+             Businesses  <span class="spa-color">  {{businesscommunity.total_Business}}  </span>
             </template>
         
         
@@ -71,26 +70,25 @@
         <b-tab  active>
 
          <template slot="title"  >
-             Followers  <span class="spa-color">  7K   </span>
+             Followers  <span class="spa-color">   {{businesscommunity.total_followers}}   </span>
             </template>
         
          
 
 
-         <div class="s-comcard">      <Business />     </div>
+         <div class="s-comcard">      <Business v-for="business in businesscommunity.Business_followers"  v-bind:key="business.id"   v-bind:business="business" />     </div>
 
  
-         
         </b-tab>
 
         <b-tab >
         
 
             <template slot="title"  >
-             Following  <span class="spa-color">  7K   </span>
+             Following  <span class="spa-color">  {{businesscommunity.totat_following}}   </span>
             </template>
         
-        <div class="s-comcard">    <Business />     </div>
+        <div class="s-comcard">    <Business v-for="business in businesscommunity.Business_following"  v-bind:key="business.id"   v-bind:business="business" />    </div>
  
         </b-tab>
       </b-tabs>
@@ -129,6 +127,36 @@ export default {
     
     
   },
+
+
+  computed:{
+
+      peoplecommunity() {
+
+      return  this.$store.state.businessOwner.communityPeople;  
+
+    
+    },
+
+
+
+      totalcommunity() {
+
+      return  this.$store.state.businessOwner.communityTotal;  
+
+    
+    },
+
+
+
+      businesscommunity() {
+
+      return  this.$store.state.businessOwner.CommunityBusiness;  
+
+    
+    }
+
+  }
 
 
 };

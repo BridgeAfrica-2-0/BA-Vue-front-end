@@ -17,6 +17,7 @@
 <script>
 import Album from "./album";
 import Images from "./images";
+import axios from "axios";
 export default {
   components: {
     Album,
@@ -26,9 +27,47 @@ export default {
     onClick(i) {
       this.index = i;
     },
+
+    //function to get albums
+
+    getAlbums(){
+      this.$store
+        .dispatch("businessOwner/getAlbums", this.url_data)
+        .then(() => {
+          console.log("hey yeah");
+        })
+        .catch((err) => {
+          console.log({ err: err });
+        });
+   
+    },
+
+
+
+    getImages(){
+        
+        this.$store
+        .dispatch("businessOwner/getImages", this.url_data)
+        .then(() => {
+          console.log("hey yeah");
+        })
+        .catch((err) => {
+          console.log({ err: err });
+        });
+   
+
+    }
+  },
+
+  mounted(){
+     
+       this.url_data=this.$route.params.id;
+       this.getAlbums();
+       this.getImages();
   },
   data: function() {
     return {
+      url_data:null,
       images: [
         "https://placekitten.com/801/800",
         "https://placekitten.com/802/800",

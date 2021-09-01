@@ -7,7 +7,7 @@
             <b-avatar
               class="p-avater"
               variant="primary"
-              src="https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg"
+              :src="follower.profile_picture"
             ></b-avatar>
           </b-col>
 

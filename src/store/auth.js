@@ -1,6 +1,8 @@
 import axios from "axios";
 
-axios.defaults.baseURL = process.env.VUE_APP_API_URL;
+// axios.defaults.baseURL = process.env.VUE_APP_API_URL;
+
+axios.defaults.baseURL = "http://team2dev.maxinemoffett.com/api/v1";
 
 export default {
   namespaced: true,
@@ -113,8 +115,8 @@ export default {
   },
 
   getters: {
-    isLogged: (state) => !!state.user,
-    isVerified: (state) => !!state.user,
-    user: (state) => state.user,
+    isLogged: state => !!state.user,
+    isVerified: state => !!state.user,
+    user: state => state.user,
   },
 };

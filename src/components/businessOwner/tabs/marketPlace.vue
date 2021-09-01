@@ -22,7 +22,13 @@
           :product="product"
         />
       </div>
-      <span v-if="!products" class="no-product">
+      <b-col v-if="loader" class="load">
+        <b-spinner
+          style="width: 7rem; height: 7rem;"
+          variant="primary"
+        ></b-spinner>
+      </b-col>
+      <span v-if="!products && !loader" class="no-product">
         <h3>No product to show !!</h3>
       </span>
     </div>
@@ -173,6 +179,7 @@ export default {
     return {
       showModal: false,
       load: false,
+      loader: false,
       newProduct: {
         name: "",
         description: "",
@@ -198,11 +205,13 @@ export default {
   beforeMount() {
     axios.defaults.headers.common["Authorization"] =
       "Bearer " + localStorage.getItem("access_token");
+    this.loader = true;
     this.getProducts();
   },
   methods: {
     getProducts() {
       axios.get("market/products/1").then(res => {
+        this.loader = false;
         this.products = res.data.data.data;
       });
     },
@@ -306,6 +315,10 @@ export default {
 </script>
 
 <style scoped>
+.load {
+  display: flex;
+  justify-content: center;
+}
 .no-product {
   width: 100%;
   display: flex;

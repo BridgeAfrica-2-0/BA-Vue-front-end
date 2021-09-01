@@ -1,84 +1,77 @@
 <template>
   <div>
+    <fas-icon class="icons " :icon="['fas', 'store']" size="lg" /> Market
+    <hr />
 
     <div class="products ">
-      <div class="col-md-6" v-for="post in posts" :key="post.id">
-        <Product />
+      <div class="col-md-6" v-for="(product, index) in products" :key="index">
+        <Product :product="product" />
       </div>
+      <b-col v-if="loader" class="load">
+        <b-spinner
+          style="width: 7rem; height: 7rem;"
+          variant="primary"
+        ></b-spinner>
+      </b-col>
+      <span v-if="products.length < 1 && !loader" class="no-product">
+        <h3>No product to show !!</h3>
+      </span>
     </div>
   </div>
 </template>
 
 <script>
 import Product from "../product";
+import axios from "axios";
 export default {
   data() {
     return {
       showModal: false,
-
-      text: "",
-      image: "",
-      posts: [
-        {
-          id: 1,
-          image: "https://picsum.photos/300/150/?image=41",
-          title: "Title 2",
-          text:
-            " Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum quam, doloribus id sit consequuntur tempora molestiae blanditiis.",
-        },
-        {
-          id: 1,
-          image: "https://picsum.photos/300/150/?image=41",
-          title: "Title 2",
-          text:
-            " Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum quam, doloribus id sit consequuntur tempora molestiae blanditiis.",
-        },
-        {
-          id: 1,
-          image: "https://picsum.photos/300/150/?image=41",
-          title: "Title 2",
-          text:
-            " Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum quam, doloribus id sit consequuntur tempora molestiae blanditiis.",
-        },
-        {
-          id: 1,
-          image: "https://picsum.photos/300/150/?image=41",
-          title: "Title 2",
-          text:
-            " Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum quam, doloribus id sit consequuntur tempora molestiae blanditiis.",
-        },
-        {
-          id: 1,
-          image: "https://picsum.photos/300/150/?image=41",
-          title: "Title 2",
-          text:
-            " Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum quam, doloribus id sit consequuntur tempora molestiae blanditiis.",
-        },
-      ],
-      images: [
-        {
-          id: 1,
-          image: "https://picsum.photos/300/150/?image=41",
-        },
-        {
-          id: 2,
-          image: "https://picsum.photos/300/150/?image=41",
-        },
-      ],
+      load: false,
+      loader: false,
+      products: [],
+      val: "",
+      msg: "",
+      success: false,
+      action: null,
     };
   },
   components: {
     Product,
   },
+  beforeMount() {
+    axios.defaults.headers.common["Authorization"] =
+      "Bearer " + localStorage.getItem("access_token");
+    this.loader = true;
+    this.getProducts();
+  },
   methods: {
-    createProduct() {
-      this.showModal = !this.showModal;
+    getProducts() {
+      axios
+        .get("market/products/1")
+        .then(res => {
+          this.loader = false;
+          this.products = res.data.data.data;
+        })
+        .catch(err => {
+          console.log(err);
+          this.loader = false;
+        });
     },
   },
 };
 </script>
 
 <style scoped>
+.load {
+  display: flex;
+  justify-content: center;
+}
+.no-product {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
 .products {
   display: flex;
   flex-wrap: wrap;
@@ -99,10 +92,6 @@ export default {
   left: 100px;
   color: white;
   font-weight: 200;
-}
-.icon {
-  height: 24px;
-  width: 24px;
 }
 
 .product:hover .text-static {
@@ -136,10 +125,6 @@ export default {
 .sp:hover .pic-name {
   opacity: 1;
 }
-/* 
-.primary-bg{
-  background-color: grey;
-} */
 
 .pic {
   cursor: pointer;
@@ -189,6 +174,9 @@ export default {
   }
   .text {
     margin-top: 30px;
+  }
+  .btn {
+    font-size: 12px;
   }
 }
 </style>

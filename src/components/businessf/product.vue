@@ -1,72 +1,40 @@
 <template>
   <div>
-   
-
-
-
-
-
-
-           
     <div class="people-style shadow">
       <b-row>
         <b-col cols="5" lg="4" sm="4" md="5">
-         <div class="center-img" >
-            <img   @click="productDetails"
-              src="https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg"
-              
+          <div class="center-img">
+            <img
+              @click="productDetails"
+              :src="product.picture"
               class="r-image"
             />
           </div>
-
-               
         </b-col>
-        <b-col cols="7" sm="8" md="7" >
-         <p class="text">
-            <strong class="title"> <b-link  @click="productDetails">  Sneakers Blec cc  </b-link>  </strong> <br /> <strong> Description </strong>  <br />    <span class="text">
-            This is just a dummy text dumy dummy things are always dummy and dummy add  things are always dummy  hjykt    </span>
-            <b-link class="text"> see more   </b-link>   <br />
-             
-            <span class="price"> <strong> 12,000 Fcfa  </strong> </span> <br />
-            
+        <b-col cols="7" sm="8" md="7">
+          <p class="text">
+            <strong class="title"> {{ product.name }} </strong> <br />
+            <strong> Description </strong> <br />
+            {{ product.description.substring(0, 30) }}
+            <b-link v-if="product.description.length >= 30"> see more </b-link>
+            <br />
+
+            <span class="price">
+              <strong> {{ product.price }} Fcfa </strong>
+            </span>
+            <br />
           </p>
 
-
-          <span class="float-right">    <b-button variant="primary" class=""> Buy now </b-button>     </span>
-
-
+          <span class="float-right">
+            <b-button variant="primary" class=""> Buy now </b-button>
+          </span>
         </b-col>
-
-        
-
-        
       </b-row>
 
-
       <div>
-
-
-            
-          <br />    
-
-        </div>
-
-
+        <br />
+      </div>
     </div>
-   
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     <b-modal
       v-model="viewProduct"
@@ -76,15 +44,12 @@
     >
       <b-row>
         <b-col cols="5" class="mx-auto">
-          <b-img
-            class="img-fluid"
-            src="https://picsum.photos/600/300/?image=25"
-          ></b-img>
+          <b-img class="img-fluid" :src="product.picture"></b-img>
         </b-col>
         <b-col>
-          <h2 class="mb-4 text-center">Product Name</h2>
-          <p><span class="stock">In Stock</span></p>
-          <p>0.00 XAF</p>
+          <h2 class="mb-4 text-center">{{ product.name }}</h2>
+          <p><span class="stock" v-if="product.in_stock">In Stock</span></p>
+          <p>{{ product.price }} XAF</p>
           <hr />
           <b-row>
             <b-col>
@@ -99,22 +64,9 @@
           <hr />
           <h5>Product Description</h5>
           <p>
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Corporis
-            quod, reprehenderit neque atque recusandae laborum quia vel,
-            assumenda repellendus rem ab ex, odio aperiam quidem id deleniti
-            commodi consequatur optio.
+            {{ product.description }}
           </p>
           <hr />
-
-
-
-
-
-
-
-
-
-
 
           <b-row>
             <b-col class="">
@@ -176,6 +128,7 @@
 <script>
 import Comment from "./comment";
 export default {
+  props: ["product"],
   data() {
     return {
       viewProduct: false,
@@ -269,9 +222,6 @@ h6 {
   cursor: pointer;
 }
 
-
-
-
 .discount {
   color: orange;
   margin-left: 60px;
@@ -324,39 +274,24 @@ h6 {
   cursor: pointer;
 }
 
-
-
-
 @media only screen and (min-width: 768px) {
-
-
-.center-img{
-  margin-right: -60px;
+  .center-img {
+    margin-right: -60px;
+  }
 }
 
-
-}
-
-
-
-
-
-.buybtn{
+.buybtn {
   width: 100px;
 }
 
-.marketbtn{
- 
+.marketbtn {
   margin-bottom: 3px;
   float: right;
 }
 
-.price{
-
+.price {
   font-size: 18px;
 }
-
-
 
 .people-style {
   border-top-left-radius: 10px;
@@ -375,166 +310,117 @@ h6 {
   margin-bottom: 10px;
 
   padding: 3px;
- padding-bottom: 26px;
- 
-
+  padding-bottom: 26px;
 }
-
-
-
-
 
 @media only screen and (max-width: 540px) {
+  .text {
+    color: #000;
 
-
-
-  
-.text {
-  color: #000;
-  
-    font-family: 'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif;
+    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-weight: normal;
     font-size: 14px;
     line-height: 30px;
-    color: rgba(117,114,128,1);
+    color: rgba(117, 114, 128, 1);
     text-align: left;
 
-Font-weight: normal ;
-Line-height:20px ;
-font-style:normal;
+    font-weight: normal;
+    line-height: 20px;
+    font-style: normal;
 
+    padding: 1px;
+    text-align: left;
 
-padding: 1px;
-  text-align: left;
+    margin-left: -30px;
 
-  
+    line-height: 25px;
+  }
 
- margin-left: -30px;
+  .r-image {
+    border-top-left-radius: 10px;
 
-  line-height: 25px;
+    border-bottom-left-radius: 10px;
+
+    border-top-right-radius: 10px;
+
+    border-bottom-right-radius: 10px;
+
+    width: 100px;
+
+    height: 100px;
+    padding: 4px;
+  }
+
+  .title {
+    font-size: 16px;
+    color: black;
+
+    line-height: 35px;
+    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  }
+
+  .btn {
+    padding-top: 6px;
+    font-size: 10px;
+
+    height: 28px;
+    width: 85px;
+  }
 }
 
+@media only screen and (min-width: 540px) and (max-width: 762px) {
+  .text {
+    color: #000;
 
-
-.r-image {
-  
- border-top-left-radius: 10px;
-
-  border-bottom-left-radius: 10px;
-
-  border-top-right-radius: 10px;
-
-  border-bottom-right-radius: 10px;
-
-
-  width: 100px;
-
-height: 100px;
-padding: 4px;
-}
-
-
-.title{
-  font-size: 16px;
-   color:black;
- 
- line-height: 35px;
-  font-family: 'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif;
-}
-
-.btn{
-
-  padding-top: 6px;
-  font-size:10px;
-
-  Height : 28px;
-Width:85px;
-
-}
-
-
-}
-
-
-
-
-@media only screen and (min-width: 540px) and  (max-width: 762px) {
-
-
-
-
-.text {
-  color: #000;
-  
-    font-family: 'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif;
+    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-weight: normal;
     font-size: 14px;
     line-height: 30px;
-    color: rgba(117,114,128,1);
+    color: rgba(117, 114, 128, 1);
     text-align: left;
 
-Font-weight: normal ;
-Line-height:20px ;
-font-style:normal;
+    font-weight: normal;
+    line-height: 20px;
+    font-style: normal;
 
+    padding: 1px;
+    text-align: left;
 
-padding: 1px;
-  text-align: left;
+    margin-right: -5px;
 
-  
+    line-height: 25px;
+  }
 
-  margin-right: -5px;
+  .r-image {
+    border-top-left-radius: 10px;
 
-  line-height: 25px;
+    border-bottom-left-radius: 10px;
+
+    border-top-right-radius: 10px;
+
+    border-bottom-right-radius: 10px;
+
+    height: 100px;
+    width: 100px;
+
+    padding: 4px;
+  }
+
+  .btn {
+    padding-top: 6px;
+
+    height: 38px;
+    width: 123px;
+  }
+
+  .title {
+    font-size: 20px;
+    color: black;
+
+    line-height: 35px;
+    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  }
 }
-
-
-
-
-.r-image {
-  
- border-top-left-radius: 10px;
-
-  border-bottom-left-radius: 10px;
-
-  border-top-right-radius: 10px;
-
-  border-bottom-right-radius: 10px;
-
-
-   Height : 100px;
-Width:100px;
-
-padding: 4px;
-}
-
-
-
-
-.btn{
-  padding-top: 6px;
-
-  Height : 38px;
-Width:123px
-
-}
-
-
-
-
-
-.title{
-  font-size: 20px;
-   color:black;
- 
- line-height: 35px;
-  font-family: 'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif;
-}
-
-}
-
-
-
 
 .discount {
   color: orange;
@@ -607,83 +493,57 @@ h6 {
   cursor: pointer;
 }
 
-
-
-
-
 @media only screen and (min-width: 762px) {
+  .text {
+    color: #000;
 
-
-
-
-.text {
-  color: #000;
-  
-    font-family: 'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif;
+    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-weight: normal;
     font-size: 14px;
     line-height: 30px;
-    color: rgba(117,114,128,1);
+    color: rgba(117, 114, 128, 1);
     text-align: left;
 
-Font-weight: normal ;
-Line-height:20px ;
-font-style:normal;
+    font-weight: normal;
+    line-height: 20px;
+    font-style: normal;
 
+    padding: 1px;
+    text-align: left;
 
-padding: 1px;
-  text-align: left;
+    margin-right: -5px;
 
-  
+    line-height: 25px;
+  }
 
-  margin-right: -5px;
+  .r-image {
+    border-top-left-radius: 10px;
 
-  line-height: 25px;
+    border-bottom-left-radius: 10px;
+
+    border-top-right-radius: 10px;
+
+    border-bottom-right-radius: 10px;
+
+    height: 160px;
+    width: 160px;
+
+    padding: 4px;
+  }
+
+  .btn {
+    padding-top: 6px;
+
+    height: 38px;
+    width: 123px;
+  }
+
+  .title {
+    font-size: 20px;
+    color: black;
+
+    line-height: 35px;
+    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  }
 }
-
-
-
-
-.r-image {
-  
- border-top-left-radius: 10px;
-
-  border-bottom-left-radius: 10px;
-
-  border-top-right-radius: 10px;
-
-  border-bottom-right-radius: 10px;
-
-
-   Height : 160px;
-Width:160px;
-
-padding: 4px;
-}
-
-
-
-
-.btn{
-  padding-top: 6px;
-
-  Height : 38px;
-Width:123px
-
-}
-
-
-
-
-
-.title{
-  font-size: 20px;
-   color:black;
- 
- line-height: 35px;
-  font-family: 'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif;
-}
-
-}
-
 </style>

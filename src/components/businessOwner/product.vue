@@ -4,10 +4,7 @@
       <b-row>
         <b-col cols="5" lg="4" sm="4" md="5">
           <div class="center-img">
-            <img
-              src="https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg"
-              class="r-image"
-            />
+            <img :src="product.picture" class="r-image" />
           </div>
         </b-col>
         <b-col cols="7" sm="8" md="6">

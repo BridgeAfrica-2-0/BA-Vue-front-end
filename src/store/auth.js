@@ -1,8 +1,6 @@
 import axios from "axios";
 
-// axios.defaults.baseURL = process.env.VUE_APP_API_URL;
-
-axios.defaults.baseURL = "http://team2dev.maxinemoffett.com/api/v1";
+axios.defaults.baseURL = process.env.VUE_APP_API_URL;
 
 export default {
   namespaced: true,
@@ -12,7 +10,6 @@ export default {
     isVerified: null,
     passwordToken: null,
     registerData: null,
-
     businessAround: null,
     peopleAround: null,
   },
@@ -47,10 +44,10 @@ export default {
       state.passwordToken = data;
     },
 
-    // clearUserData() {
-    //   localStorage.removeItem("user");
-    //   location.reload();
-    // },
+    clearUserData() {
+      localStorage.removeItem("user");
+      location.reload();
+    },
   },
 
   actions: {

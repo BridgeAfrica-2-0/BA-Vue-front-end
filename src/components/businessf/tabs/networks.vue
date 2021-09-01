@@ -4,7 +4,15 @@
       <b-col lg="6">
         <div class="people-style shadow">
           <b-row>
-            <b-col md="3" xl="3" lg="3" cols="5" sm="3">
+            <b-col
+              v-for="(network, index) in getNetworksFromStore"
+              :key="index"
+              md="3"
+              xl="3"
+              lg="3"
+              cols="5"
+              sm="3"
+            >
               <div class="center-img">
                 <img
                   src="https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg"
@@ -14,19 +22,22 @@
             </b-col>
             <b-col md="5" cols="7" lg="9" xl="5" sm="5">
               <p class="textt">
-                <strong class="net-title"> Global Car Supple Network </strong>
+                <strong class="net-title"> {{ network.name }} </strong>
                 <br />
                 Car Rental
                 <br />
                 20k Community <br />
 
                 <span class="location">
-                  <b-icon-geo-alt class="ico"></b-icon-geo-alt> Douala cameroon
+                  <b-icon-geo-alt class="ico"></b-icon-geo-alt>
+                  {{ network.business_address }}
                 </span>
                 <br />
 
-                super best car seller in the world adipisicing elit. lorem epsep
-                this is <b-link>Read More</b-link>
+                {{ network.description.substring(0, 90) }}
+                <b-link v-if="network.description.length > 90"
+                  >Read More</b-link
+                >
               </p>
             </b-col>
 
@@ -56,48 +67,6 @@
                       <span class="btn-text">Message</span>
                     </b-button>
                   </b-col>
-
-                  <b-col md="12" lg="4" xl="12" sm="12" cols="4" class="mt-2">
-                  </b-col>
-                </b-row>
-              </div>
-            </b-col>
-          </b-row>
-        </div>
-      </b-col>
-
-      <b-col lg="6">
-        <div class="people-style shadow">
-          <b-row>
-            <b-col md="3" xl="3" lg="3" cols="5" sm="3">
-              <div class="center-img">
-                <img
-                  src="https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg"
-                  class="r-image"
-                />
-              </div>
-            </b-col>
-            <b-col md="5" cols="7" lg="9" xl="5" sm="5">
-              <p class="textt">
-                <strong class="net-title"> Global Car Supple Network </strong>
-                <br />
-                Car Rental
-                <br />
-                20k Community <br />
-
-                <span class="location">
-                  <b-icon-geo-alt class="ico"></b-icon-geo-alt> Douala cameroon
-                </span>
-                <br />
-
-                super best car seller in the world adipisicing elit. lorem epsep
-                this i <b-link>Read More</b-link>
-              </p>
-            </b-col>
-
-            <b-col lg="12" md="4" xl="4" cols="12" sm="4">
-              <div class="s-button">
-                <b-row>
                   <b-col md="12" lg="4" xl="12" sm="12" cols="4" class="mt-2">
                     <b-button
                       block
@@ -105,20 +74,8 @@
                       class="b-background shadow"
                       variant="primary"
                     >
-                      <i class="fas fa-user-plus  fa-lg btn-icon "></i>
-                      <span class="btn-com">Community</span>
-                    </b-button>
-                  </b-col>
-
-                  <b-col md="12" lg="4" xl="12" sm="12" cols="4" class="mt-2">
-                    <b-button
-                      block
-                      size="sm"
-                      class="b-background shadow"
-                      variant="primary"
-                    >
-                      <i class="fas fa-envelope   fa-lg btn-icon "></i>
-                      <span class="btn-text">Message</span>
+                      <i class="fas fa-plus   fa-lg btn-icon "></i>
+                      <span class="btn-text">Join</span>
                     </b-button>
                   </b-col>
 
@@ -135,8 +92,36 @@
 </template>
 
 <script>
+import { mapActions, mapGetters } from "vuex";
 export default {
-  props: ["title", "image"],
+  props: ["network"],
+  beforeMount() {
+    this.getNetworks();
+  },
+  computed: {
+    getNetworksFromStore() {
+      return this.getNetworksFromstore();
+    },
+    loader() {
+      return this.getLoader();
+    },
+    success() {
+      return this.getSuccess();
+    },
+  },
+  methods: {
+    ...mapGetters({
+      getNetworksFromstore: "businessOwner/getnetWorks",
+      getLoader: "businessOwner/getLoader",
+      getSuccess: "businessOwner/getSuccess",
+    }),
+    // getting actions from the store
+    ...mapActions({
+      addNetwork: "businessOwner/addNetwork",
+      getNetworks: "businessOwner/getNetworks",
+      editNetwork: "businessOwner/editNetwork",
+    }),
+  },
 };
 </script>
 

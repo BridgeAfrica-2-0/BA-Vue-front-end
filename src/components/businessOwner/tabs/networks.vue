@@ -24,7 +24,6 @@
                     "
                     alt=""
                   />
-                  <!-- <img :src="network.image[0]" class="r-image" /> -->
                 </div>
               </b-col>
               <b-col md="9" cols="7" lg="9" xl="9" sm="9">
@@ -76,10 +75,17 @@
         </b-col>
       </b-row>
     </div>
-    <div class="h-100 w-100" v-if="!getNetworksFromStore">
+    <b-col v-if="loader" class="load">
+      <b-spinner
+        style="width: 7rem; height: 7rem;"
+        variant="primary"
+      ></b-spinner>
+    </b-col>
+    <div class="h-100 w-100" v-if="!getNetworksFromStore && !loader">
       <div class="mx-auto text-center my-5">
         <h2 class="my-3">Builds networks around your Business</h2>
         <p class="my-2">you want Engage, share, Make Plans and much more</p>
+        <p class="my-2">No network to show !!</p>
         <p class="my-3"></p>
       </div>
     </div>
@@ -375,6 +381,10 @@ export default {
 </script>
 
 <style scoped>
+.load {
+  display: flex;
+  justify-content: center;
+}
 .post-pending {
   font-size: 12;
   text-align: left;

@@ -67,13 +67,13 @@
           </p>
         </b-col>
 
-        <b-col v-if="loader" class="loader">
+        <b-col v-if="loader" class="load">
           <b-spinner
             style="width: 7rem; height: 7rem;"
             variant="primary"
           ></b-spinner>
         </b-col>
-        <b-col v-if="!getNotificationsStore && !loader" class="loader">
+        <b-col v-if="!getNotificationsStore && !loader" class="load">
           <p>No notifications to show !!</p>
         </b-col>
       </b-row>
@@ -121,7 +121,7 @@ export default {
     deleteAll(data) {
       this.checked = false;
       let ids = [];
-      data.forEach((element) => {
+      data.forEach(element => {
         ids.push(element.id);
       });
       this.deleteNotifications(ids);
@@ -133,7 +133,7 @@ export default {
 
     // select all the notifications
     selectall() {
-      this.getNotificationsStore.forEach((element) => {
+      this.getNotificationsStore.forEach(element => {
         this.selected.push(element);
       });
     },
@@ -149,7 +149,7 @@ export default {
 </script>
 
 <style scoped>
-.loader {
+.load {
   display: flex;
   justify-content: center;
 }

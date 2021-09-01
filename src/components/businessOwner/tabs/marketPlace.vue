@@ -18,6 +18,15 @@
       <div class="col-md-6" v-for="(product, index) in products" :key="index">
         <Product :product="product" />
       </div>
+      <b-col v-if="loader" class="load">
+        <b-spinner
+          style="width: 7rem; height: 7rem;"
+          variant="primary"
+        ></b-spinner>
+      </b-col>
+      <b-col v-if="products.lentgh < 1 && !loader" class="load">
+        <p>No notifications to show !!</p>
+      </b-col>
     </div>
 
     <b-modal hide-footer title="Add product" v-model="showModal">
@@ -147,6 +156,7 @@ export default {
     return {
       showModal: false,
       load: false,
+      loader: false,
       newProduct: {
         name: "",
         description: "",
@@ -168,15 +178,22 @@ export default {
     Product,
   },
   beforeMount() {
+    this.loader = true;
     axios.defaults.headers.common["Authorization"] =
       "Bearer " + localStorage.getItem("access_token");
     this.getProducts();
   },
   methods: {
     getProducts() {
-      axios.get("market/products/1").then((res) => {
-        this.products = res.data.data.data;
-      });
+      axios
+        .get("market/products/1")
+        .then(res => {
+          this.loader = false;
+          this.products = res.data.data.data;
+        })
+        .catch(() => {
+          this.loader = false;
+        });
     },
     addProduct() {
       this.load = true;
@@ -193,21 +210,20 @@ export default {
 
       axios
         .post("market", fd)
-        .then((res) => {
+        .then(res => {
           this.load = false;
           (this.success = true), (this.val = "success");
           this.msg = "Operation was successful !!";
           this.getProducts();
         })
-        .catch((err) => {
+        .catch(err => {
           this.load = false;
           (this.success = true), (this.val = "danger");
           this.msg = "Something wen't wrong !!";
 
           setTimeout(() => {
-            this.success = false
-          },5000)
-
+            this.success = false;
+          }, 5000);
         });
     },
     picImage() {
@@ -224,6 +240,10 @@ export default {
 </script>
 
 <style scoped>
+.load {
+  display: flex;
+  justify-content: center;
+}
 .products {
   display: flex;
   flex-wrap: wrap;

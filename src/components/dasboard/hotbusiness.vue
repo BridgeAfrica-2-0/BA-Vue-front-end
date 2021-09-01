@@ -1,361 +1,385 @@
-
 <template>
   <div>
-
-      <b-card class="border shadow "> 
-
-        <span> <h4>   <img class="img-fluid picture" src="@/assets/icons/bus.png" style="width: 60px;" /> <span class="pop">  HOT BUSINESSES  </span>  </h4>   </span>
-
-
-
-
-           <div class="   p-tab">
-
-                  
-
-  
-
-
-
-
-
-
-
-
-
-
-    <div class="people-style shadow">
+    <div class="people-style shadow" v-for="item in $store.getters.getdetails" :key="item.id">
       <b-row>
-        <b-col md="5" xl="3" lg="5" cols="5"  sm="5">
-          <div style="height: 100%;">
-            <img
-              src="https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg"
-              width="100%"
-              style="height:100%"
-              class="r-image"
-            />
+        <b-col md="3" xl="3" lg="3" cols="5" sm="3">
+          <div class="center-img">
+            <splide :options="options" class="r-image">
+              <splide-slide cl>
+                <img
+                  :src="item.picture"
+                  class="r-image"
+                />
+              </splide-slide>
+            </splide>
           </div>
         </b-col>
-        <b-col md="6" cols="7" xl="5" sm="7">
-          <p class="text">
-            <strong> Super Car ltd </strong> <br />
-            <strong> Category : </strong> Car marketing <br />
-            <strong> Community : </strong> 20k <br />
-            <strong> Location :</strong> cameroon <br />
-            <strong> Keyword :</strong> car,swag <br />
+        <b-col md="5" cols="7" lg="7" xl="5" sm="5">
+          <p class="textt">
+            <strong class="title"> {{ item.name }} </strong> <br />
+            {{item.category}}
+            <br />
+            {{ item.followers }} Community <br />
 
-            <strong>About:</strong> super best car seller in the world
-            adipisicing elit. <b-link>Read More</b-link>
+            <span class="location">
+              <b-icon-geo-alt class="ico"></b-icon-geo-alt> {{ item.location_description }}
+            </span>
+            <br />
+
+            {{ item.about_business }} <b-link>Read More</b-link>
           </p>
         </b-col>
 
-
-
-
-
-
-        <b-col lg="12" md="12" xl="4" cols="12" sm="12">
+        <b-col lg="12" xl="4" md="4" cols="12" sm="4">
           <div class="s-button">
-     <b-row>  <b-col md="4"  lg="4"  xl="12" sm="4" cols="4" class="mt-md-2">    
+            <b-row>
+              <b-col
+                md="12"
+                lg="4"
+                xl="12"
+                sm="12"
+                cols="4"
+                class="mt-2 text-center"
+              >
+                <b-button
+                  block
+                  size="sm"
+                  class="b-background shadow "
+                  variant="primary"
+                >
+                  <i class="fas fa-user-plus  fa-lg btn-icon "></i>
+                  <span class="btn-com">Community</span>
+                </b-button>
+              </b-col>
 
-            <b-button block size="sm" class="b-background" variant="primary">
-              <b-icon class="ico" icon="plus-circle"> </b-icon> Community
-            </b-button>
+              <b-col
+                md="12"
+                lg="4"
+                xl="12"
+                sm="12"
+                cols="4"
+                class="mt-2 text-center"
+              >
+                <b-button
+                  block
+                  size="sm"
+                  class="b-background shadow "
+                  variant="primary"
+                >
+                  <i class="fas fa-envelope   fa-lg btn-icon "></i>
+                  <span class="btn-text">Message</span>
+                </b-button>
+              </b-col>
 
-            </b-col>  
-
-        <b-col md="4"  lg="4"  xl="12" sm="4" cols="4" class="mt-md-2">  
-
-            <b-button block size="sm" class="b-background" variant="primary">
-              <b-icon class="ico" icon="chat"> </b-icon> Message
-            </b-button>
-
-            </b-col>  
-
-            <b-col  md="4"  lg="4"  xl="12" sm="4" cols="4"  class="mt-md-2">  
-
-            <b-button block size="sm" class="b-background" variant="primary">
-              <b-icon-geo-alt ></b-icon-geo-alt>  Direction
-            </b-button>
-
-            </b-col>  
-   </b-row>
-
+              <b-col
+                md="12"
+                lg="4"
+                xl="12"
+                sm="12"
+                cols="4"
+                class="mt-2 text-center"
+              >
+                <b-button
+                  block
+                  size="sm"
+                  class="b-background shadow "
+                  variant="primary"
+                >
+                  <i class="fas fa-map-marked-alt  fa-lg btn-icon "></i>
+                  <span class="btn-text">Direction</span>
+                </b-button>
+              </b-col>
+            </b-row>
           </div>
         </b-col>
       </b-row>
     </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <div class="people-style shadow">
-      <b-row>
-        <b-col md="5" xl="3" lg="5" cols="5"  sm="5">
-          <div style="height: 100%;">
-            <img
-              src="https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg"
-              width="100%"
-                style="height:100%"
-              class="r-image"
-            />
-          </div>
-        </b-col>
-        <b-col md="6" cols="7" xl="5" sm="7">
-          <p class="text">
-            <strong> Super Car ltd </strong> <br />
-            <strong> Category : </strong> Car marketing <br />
-            <strong> Community : </strong> 20k <br />
-            <strong> Location :</strong> cameroon <br />
-            <strong> Keyword :</strong> car,swag <br />
-
-            <strong>About:</strong> super best car seller in the world
-            adipisicing elit. <b-link>Read More</b-link>
-          </p>
-        </b-col>
-
-
-
-
-
-
-        <b-col lg="12" md="12" xl="4" cols="12" sm="12">
-          <div class="s-button">
-     <b-row>  <b-col md="4"  lg="4"  xl="12" sm="4" cols="4" class="mt-md-2">    
-
-            <b-button block size="sm" class="b-background" variant="primary">
-              <b-icon class="ico" icon="plus-circle"> </b-icon> Community
-            </b-button>
-
-            </b-col>  
-
-        <b-col md="4"  lg="4"  xl="12" sm="4" cols="4" class="mt-md-2">  
-
-            <b-button block size="sm" class="b-background" variant="primary">
-              <b-icon class="ico" icon="chat"> </b-icon> Message
-            </b-button>
-
-            </b-col>  
-
-            <b-col  md="4"  lg="4"  xl="12" sm="4" cols="4"  class="mt-md-2">  
-
-            <b-button block size="sm" class="b-background" variant="primary">
-              <b-icon-geo-alt ></b-icon-geo-alt>  Direction
-            </b-button>
-
-            </b-col>  
-   </b-row>
-
-          </div>
-        </b-col>
-      </b-row>
-    </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-           </div>
-           
-
-</b-card>
-
   </div>
 </template>
 
 <script>
-export default {
-  props: ["title", "image"]
-};
+  export default {
+    props: ["title", "image"],
+
+    data() {
+      return {
+        options: {
+          rewind: true,
+          autoplay: true,
+          perPage: 1,
+          pagination: false,
+
+          type: "loop",
+          perMove: 1
+        }
+      };
+    },
+    computed: {
+      business() {
+        return this.$store.state.bdetails;
+      }
+    },
+    created() {
+      this.$store
+        .dispatch("getbdetails")
+        .then(() => {
+          console.log("the response");
+        })
+        .catch(err => {
+          console.log({ err: err });
+        });
+    }
+  };
 </script>
 
 <style scoped>
-.pop{
-  color: #000;
-}
+  @media only screen and (min-width: 768px) {
+    .btn-text {
+      margin-left: 8px;
+    }
 
-@media only screen and (max-width: 400px) {
-.pop{
-  font-size: 15px;
-  color: #000;
-}
-}
-.card {
-  color: orange;
-}
+    .btn-com {
+      margin-left: 4px;
+    }
+    .btn-icon {
+      margin-top: 3px;
+    }
 
-.s-button {
-  align-content: center;
-  text-align: center;
+    .center-img {
+      margin-right: -60px;
+    }
+  }
 
-  padding: 15px;
-}
-.text {
-  color: #000;
-  font-size: 15px;
+  @media only screen and (max-width: 768px) {
+    .btn-icon {
+      margin-top: 3px;
+    }
 
-  text-align: left;
+    .btn-text {
+      margin-left: 5px;
+    }
 
-  margin-left: -15px;
+    .btn-com {
+      margin-left: 3px;
+    }
+  }
 
-  margin-right: -15px;
-}
-.stock {
-  color: green;
-}
+  .btnpngs {
+    width: 20px;
+    margin-right: 5px;
+  }
 
-.b1 {
-  width: 100px;
-  margin-left: -20px;
-}
+  .btn {
+    border-radius: 5px;
+  }
 
-.b2 {
-  width: 120px;
+  .card {
+    color: orange;
+  }
 
-  margin-left: -15px;
-}
+  .s-button {
+    align-content: center;
+    text-align: center;
 
-.btn {
-  font-size: 13px;
+    padding: 15px;
+  }
 
-  display: flex;
-}
+  @media only screen and (max-width: 768px) {
+    .a-flex {
+      margin-right: -15px;
+    }
 
-.ico {
-  margin-right: 5px;
-}
+    .s-button {
+      padding: 15px;
+      margin-top: -15px;
+    }
 
-.r-image {
-  border-radius: 8px;
-}
+    .title {
+      font-size: 16px;
+      color: black;
 
+      line-height: 35px;
+      font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    }
 
+    .textt {
+      color: #000;
 
-@media only screen and (min-width: 768px) {
-  .people-style {
-  border-top-left-radius: 5px;
+      font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-weight: normal;
+      font-size: 12px;
+      line-height: 30px;
+      color: rgba(117, 114, 128, 1);
+      text-align: left;
 
-  border-bottom-left-radius: 5px;
+      font-weight: normal;
+      line-height: 20px;
+      font-style: normal;
 
-  border-top-right-radius: 5px;
+      padding: 1px;
+      text-align: left;
 
-  border-bottom-right-radius: 5px;
+      margin-left: -30px;
 
-  background: white;
+      margin-right: -5px;
 
-  background-color: #fff;
-  background-clip: border-box;
-  border: 1px solid rgba(0, 0, 0, 0.125);
-  margin-bottom: 10px;
+      line-height: 25px;
+    }
 
-  margin-right: 8px;
- 
+    .location {
+      margin-bottom: 30px;
+    }
 
-  padding: 7px;
-}
+    .btn {
+      padding-top: 6px;
+      font-size: 10px;
 
-}
+      height: 28px;
+      width: 85px;
+    }
 
+    .r-image {
+      border-radius: 8px;
 
+      height: 100px;
+      width: 100px;
+    }
+  }
 
+  @media only screen and (min-width: 768px) {
+    .title {
+      font-size: 20px;
+      color: black;
 
-@media only screen and (max-width: 768px) {
-  .people-style {
-  border-top-left-radius: 5px;
+      line-height: 35px;
+      font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    }
 
-  border-bottom-left-radius: 5px;
+    .textt {
+      color: #000;
 
-  border-top-right-radius: 5px;
+      font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-weight: normal;
+      font-size: 14px;
+      line-height: 30px;
+      color: rgba(117, 114, 128, 1);
+      text-align: left;
 
-  border-bottom-right-radius: 5px;
+      font-weight: normal;
+      line-height: 20px;
+      font-style: normal;
 
-  background: white;
+      padding: 1px;
+      text-align: left;
 
-  background-color: #fff;
-  background-clip: border-box;
-  border: 1px solid rgba(0, 0, 0, 0.125);
-  margin-bottom: 10px;
+      margin-left: 30px;
 
-  margin-right: 8px;
- 
+      margin-right: -5px;
 
-  padding: 7px;
-}
+      line-height: 25px;
+    }
 
+    .location {
+      margin-bottom: 30px;
+    }
 
+    .btn {
+      padding-top: 6px;
 
-.text {
-  color: #000;
-  font-size: 10px;
+      height: 38px;
+      width: 123px;
+    }
 
-  text-align: left;
+    .r-image {
+      border-radius: 8px;
 
-  margin-left: -15px;
+      height: 160px;
+      width: 160px;
+    }
+  }
 
-  margin-right: -15px;
-}
+  .stock {
+    color: green;
+  }
 
+  .b1 {
+    width: 100px;
+    margin-left: -20px;
+  }
 
+  .b2 {
+    width: 120px;
 
-.btn {
-  font-size: 8px;
+    margin-left: -15px;
+  }
 
-  display: flex;
+  .btn {
+    display: flex;
+  }
 
-    padding-right: 60px;
-}
+  .ico {
+    margin-right: 5px;
+  }
 
-h4{
-  font-size: 15px;
-}
+  @media only screen and (min-width: 768px) {
+    .people-style {
+      border-top-left-radius: 5px;
 
-}
+      border-bottom-left-radius: 5px;
 
+      border-top-right-radius: 5px;
+
+      border-bottom-right-radius: 5px;
+
+      background: white;
+
+      background-color: #fff;
+      background-clip: border-box;
+      border: 1px solid rgba(0, 0, 0, 0.125);
+      margin-bottom: 10px;
+
+      margin-right: 8px;
+
+      padding: 7px;
+    }
+  }
+
+  @media only screen and (max-width: 768px) {
+    .people-style {
+      border-top-left-radius: 5px;
+
+      border-bottom-left-radius: 5px;
+
+      border-top-right-radius: 5px;
+
+      border-bottom-right-radius: 5px;
+
+      background: white;
+
+      background-color: #fff;
+      background-clip: border-box;
+      border: 1px solid rgba(0, 0, 0, 0.125);
+      margin-bottom: 10px;
+      margin-right: -8px;
+      margin-left: -8px;
+
+      padding: 7px;
+    }
+
+    .btn {
+      display: flex;
+
+      padding-right: 60px;
+    }
+
+    h4 {
+      font-size: 15px;
+    }
+  }
+
+  @media only screen and (max-width: 520px) {
+    .btn {
+      display: flex;
+    }
+  }
 </style>

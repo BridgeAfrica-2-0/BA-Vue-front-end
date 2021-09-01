@@ -130,7 +130,7 @@ import Tutorial from "@/components/dasboard/tutorial";
 
 import Profile from "@/components/dasboard/profile";
 
-import Business from "@/components/dasboard/communitybusiness";
+import Business from "@/components/dasboard/hotbusiness";
 
 import Map from "@/components/dasboard/map";
 

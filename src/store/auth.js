@@ -44,10 +44,10 @@ export default {
       state.passwordToken = data;
     },
 
-    // clearUserData() {
-    //   localStorage.removeItem("user");
-    //   location.reload();
-    // },
+    clearUserData() {
+      localStorage.removeItem("user");
+      location.reload();
+    },
   },
 
   actions: {

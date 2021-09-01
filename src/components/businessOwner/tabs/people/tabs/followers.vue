@@ -27,6 +27,15 @@
       >
         <CommunityMembers :follower="follower" />
       </b-col>
+      <b-col v-if="loader" class="load">
+        <b-spinner
+          style="width: 7rem; height: 7rem;"
+          variant="primary"
+        ></b-spinner>
+      </b-col>
+      <b-col v-if="!followers && !loader" class="load">
+        <p>No follower to show !!</p>
+      </b-col>
     </b-row>
   </div>
 </template>
@@ -39,6 +48,7 @@ export default {
     CommunityMembers,
   },
   data: () => ({
+    loader: false,
     followers: [],
     searchQuery: "",
   }),
@@ -59,11 +69,13 @@ export default {
   beforeMount() {
     axios.defaults.headers.common["Authorization"] =
       "Bearer " + localStorage.getItem("access_token");
+    this.loader = true;
     this.getFollowers();
   },
   methods: {
     getFollowers() {
       axios.get("/community/people-follower/5").then(res => {
+        this.loader = false;
         this.followers = res.data.data.data;
       });
     },
@@ -71,4 +83,9 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+.load {
+  display: flex;
+  justify-content: center;
+}
+</style>

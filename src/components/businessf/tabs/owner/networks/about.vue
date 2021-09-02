@@ -1,15 +1,12 @@
 <template>
   <div>
+    <b-icon icon="person-fill" class="icon-size" variant="primary"></b-icon>
+    <b>
+      About
+    </b>
 
+    <hr />
 
-      <b-icon icon="person-fill"  class="icon-size" variant="primary"></b-icon>
-      <b>
-        About
-      </b>
-
-      <hr />
-
-    
     <b-card>
       <div class="mb-3">
         <iframe
@@ -36,59 +33,59 @@
           </b-card>
         </b-col>
         <b-col>
-
-          
-
- <b-card>
-
+          <b-card>
             <b-card-text>
-
               <div class="edit" @click="editContact">
-              <b-icon icon="pencil-fill" variant="primary"></b-icon>
-            </div>
+                <b-icon icon="pencil-fill" variant="primary"></b-icon>
+              </div>
 
-
-
-        <p>
-          <b-icon icon="briefcase-fill" class="primary icon-size"></b-icon> Agriculture
-        </p>
-        <p><b-icon icon="search" class="primary icon-size"></b-icon> Chicken Seller</p>
-        <p>
-          <b-icon icon="geo-alt-fill" class="primary icon-size"></b-icon> Mokolo, Yaounde,
-          Cameroon
-        </p>
-        <p><b-icon icon="link" class="primary icon-size"></b-icon> www.business.com</p>
-        <p>
-          <b-icon icon="people-fill" class="primary icon-size"></b-icon> 1.1M Community
-        </p>
-        <p>
-          <b-icon icon="telephone-fill" class="primary icon-size"></b-icon>
-          +1(542) 565- 536
-        </p>
-        <p>
-          <b-icon icon="envelope-fill" class="primary icon-size"></b-icon>
-          info@business.com
-        </p>
-        <p>
-          <b-icon icon="clock" class="primary icon-size"></b-icon>
-          <b-link> Open now</b-link>
-          <br />
-          <b-dropdown size="sm" variant="transperent">
-            <template #button-content>
-              10:00AM - 7:00PM
-            </template>
-            <b-dropdown-item> 10:00AM - 7:00PM</b-dropdown-item>
-          </b-dropdown>
-        </p>
-      </b-card-text>
-
-
- </b-card>
-
-
-
-
-
+              <p>
+                <b-icon
+                  icon="briefcase-fill"
+                  class="primary icon-size"
+                ></b-icon>
+                Agriculture
+              </p>
+              <p>
+                <b-icon icon="search" class="primary icon-size"></b-icon>
+                Chicken Seller
+              </p>
+              <p>
+                <b-icon icon="geo-alt-fill" class="primary icon-size"></b-icon>
+                Mokolo, Yaounde, Cameroon
+              </p>
+              <p>
+                <b-icon icon="link" class="primary icon-size"></b-icon>
+                www.business.com
+              </p>
+              <p>
+                <b-icon icon="people-fill" class="primary icon-size"></b-icon>
+                1.1M Community
+              </p>
+              <p>
+                <b-icon
+                  icon="telephone-fill"
+                  class="primary icon-size"
+                ></b-icon>
+                +1(542) 565- 536
+              </p>
+              <p>
+                <b-icon icon="envelope-fill" class="primary icon-size"></b-icon>
+                info@business.com
+              </p>
+              <p>
+                <b-icon icon="clock" class="primary icon-size"></b-icon>
+                <b-link> Open now</b-link>
+                <br />
+                <b-dropdown size="sm" variant="transperent">
+                  <template #button-content>
+                    10:00AM - 7:00PM
+                  </template>
+                  <b-dropdown-item> 10:00AM - 7:00PM</b-dropdown-item>
+                </b-dropdown>
+              </p>
+            </b-card-text>
+          </b-card>
         </b-col>
       </b-row>
     </b-card>
@@ -100,11 +97,7 @@
       v-model="edit1"
       size="md"
     >
-      <b-form>
-        
-
-        
-      </b-form>
+      <b-form> </b-form>
     </b-modal>
     <b-modal
       id="bv-modal-example2"
@@ -113,53 +106,40 @@
       v-model="edit2"
     >
       <b-form>
-       
-         
+        <div class="form-group">
+          <label for="username">Busness Name:</label><br />
+          <input
+            type="text"
+            name="username"
+            id="username"
+            placeholder="Busness Name"
+            class="form-control"
+          />
+        </div>
 
+        <div class="form-group">
+          <label for="alias">Category:</label><br />
+          <select id="category" class="form-control ">
+            <option value="" selected="" disabled="">Select Category</option>
+            <option>Category1</option>
+            <option>Category2</option>
+          </select>
+        </div>
 
-          <div class="form-group">
-                        <label for="username">Busness Name:</label><br />
-                        <input
-                          type="text"
-                          name="username"
-                          id="username"
-                          placeholder="Busness Name"
-                          class="form-control"
-                        />
-                      </div>
+        <div class="form-group">
+          <label for="username">Keywords</label><br />
+          <div class="col-md-12 pl-0 pr-0">
+            No Choices
 
-
-
-
-                      
-                      <div class="form-group">
-                        <label for="alias">Category:</label><br />
-                        <select id="category" class="form-control ">
-                          <option value="" selected="" disabled=""
-                            >Select Category</option
-                          >
-                          <option>Category1</option>
-                          <option>Category2</option>
-                        </select>
-                      </div>
-
-
-
-                      <div class="form-group">
-                        <label for="username">Keywords</label><br />
-                        <div class="col-md-12 pl-0 pr-0">
-                          No Choices
-
-                          <input
-                          type="text"
-                          name="alias"
-                          id="alias"
-                          placeholder="Enter your Keywords"
-                          class="form-control"
-                        />
-
-                      </div>
-                    </div>
+            <input
+              type="text"
+              name="alias"
+              id="alias"
+              placeholder="Enter your Keywords"
+              class="form-control"
+            />
+          </div>
+        </div>
         <b-form-group
           id="input-group-1"
           label="Country"
@@ -169,7 +149,6 @@
           <b-form-input
             id="input-1"
             class="mt-1"
-          
             type="text"
             required
           ></b-form-input>
@@ -183,7 +162,6 @@
           <b-form-input
             id="input-1"
             class="mt-1"
-           
             type="text"
             required
           ></b-form-input>
@@ -194,19 +172,14 @@
           label-for="input-2"
           label-size="sm"
         >
-
-
-
-         <b-form-input
+          <b-form-input
             id="input-1"
             class="mt-1"
-           
             type="text"
             required
           ></b-form-input>
-         
         </b-form-group>
-        
+
         <b-form-group
           id="input-group-2"
           label="Phone Contact"
@@ -236,9 +209,6 @@
           ></b-form-input>
         </b-form-group>
 
-
-
-
         <b-button
           class="mt-3 btn-block"
           variant="primary"
@@ -267,10 +237,10 @@ export default {
         "              iste id obcaecati quae odit accusamus reprehenderit, ipsa nam\n" +
         "              laudantium pariatur. Harum, soluta. Nam accusantium hic numquam\n" +
         "              architecto debitis. Asperiores temporibus, rerum iste id obcaecati\n" +
-         "              architecto debitis. Asperiores temporibus, rerum iste id obcaecati\n" +
-          "              architecto debitis. Asperiores temporibus, rerum iste id obcaecati\n" +
-           "              architecto debitis. Asperiores temporibus, rerum iste id obcaecati\n" +
-            "              architecto debitis. Asperiores temporibus, rerum iste id obcaecati\n" +
+        "              architecto debitis. Asperiores temporibus, rerum iste id obcaecati\n" +
+        "              architecto debitis. Asperiores temporibus, rerum iste id obcaecati\n" +
+        "              architecto debitis. Asperiores temporibus, rerum iste id obcaecati\n" +
+        "              architecto debitis. Asperiores temporibus, rerum iste id obcaecati\n" +
         "              quae odit accusamus reprehenderit, ipsa nam laudantium pariatur.\n" +
         "              quae odit accusamus reprehenderit, ipsa nam laudantium pariatur.\n" +
         "              Harum, soluta. Nam accusantium hic numquam architecto debitis.",
@@ -331,68 +301,37 @@ p {
   text-align: left;
 }
 
- 
-
- 
 @media (min-width: 762px) {
-
- .primary{
-            
-           margin-right: 6px;
-    }
-
-  
+  .primary {
+    margin-right: 6px;
+  }
 }
 
-
-
 @media (min-width: 762px) {
-
- .primary{
-            
-           margin-right: 8px;
-    }
-
-   
-
+  .primary {
+    margin-right: 8px;
+  }
 }
-
-
 
 @media (max-width: 768px) {
+  .primary {
+    margin-right: 6px;
+    font-size: 12px !important;
+  }
 
- .primary{
-            
-           margin-right: 6px;
-             font-size: 12px  !important;
-
-    }
-
-     .card-text{
-      font-size: 14px  !important;
-    }
-
-
-  
+  .card-text {
+    font-size: 14px !important;
+  }
 }
-
-
 
 @media (min-width: 768px) {
+  .primary {
+    margin-right: 8px;
+    font-size: 14px !important;
+  }
 
- .primary{
-            
-           margin-right: 8px;
-           font-size: 14px  !important;
-    }
-
-    .card-text{
-      font-size: 14px  !important;
-    }
-
-   
-
+  .card-text {
+    font-size: 14px !important;
+  }
 }
-
-    
 </style>

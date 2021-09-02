@@ -1,6 +1,5 @@
 <template>
   <div class="container">
-
     <!--
     <b-row>
       <b-col class="f-left">
@@ -13,7 +12,6 @@
 
 
 -->
-
 
     <b-row>
       <b-col cols="12" class="f-left">
@@ -83,11 +81,10 @@
               </b-row>
             </div>
           </div>
-          
-    <hr width="100%" />
+
+          <hr width="100%" />
         </div>
       </b-col>
-      
     </b-row>
   </div>
 </template>

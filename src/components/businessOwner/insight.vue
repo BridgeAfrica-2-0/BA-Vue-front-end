@@ -1,9 +1,6 @@
 <template>
-  <div class="container-fluid mt-3"  >
-
+  <div class="container-fluid mt-3">
     <b-row class="mr-35">
-
-
       <!--
       <b-col md="6" lg="4" sm="12">
         <b-card class="b-shadow">
@@ -53,15 +50,7 @@
 
 -->
 
-
-
-
-
-
-
-
-
-      <b-col xl="4"  md="6" lg="6" sm="12">
+      <b-col xl="4" md="6" lg="6" sm="12">
         <b-card class="b-shadow">
           <b-row>
             <b-col cols="8">
@@ -90,21 +79,18 @@
               </h3>
             </b-col>
             <b-col cols="5">
-           <!--   <img
+              <!--   <img
                 fluid-grow
                 class="i-size"
                 src="../../assets/img/pchart.png"
                 alt=""
-              />   --> </b-col
-          ></b-row>
+              />   -->
+            </b-col></b-row
+          >
         </b-card>
       </b-col>
 
-
-
-
-
- <b-col xl="4"  md="6" lg="6" sm="12">
+      <b-col xl="4" md="6" lg="6" sm="12">
         <b-card class="b-shadow">
           <b-row>
             <b-col cols="8">
@@ -143,7 +129,7 @@
         </b-card>
       </b-col>
 
- <b-col xl="4"  md="6" lg="6" sm="12">
+      <b-col xl="4" md="6" lg="6" sm="12">
         <b-card class="b-shadow">
           <b-row>
             <b-col cols="8">
@@ -181,8 +167,6 @@
           ></b-row>
         </b-card>
       </b-col>
-
-
     </b-row>
 
     <br />
@@ -190,28 +174,23 @@
 </template>
 
 <script>
+import Chart from "chart.js";
 
-import Chart from 'chart.js'
-
-import planetChartData from '@/planet.js'
-
+import planetChartData from "@/planet.js";
 
 export default {
   name: "insight",
 
   components: {},
-  
 
-   data() {
-    return {    
-       planetChartData: planetChartData,
-      
-     
+  data() {
+    return {
+      planetChartData: planetChartData
     };
   },
- 
+
   mounted() {
-    const ctx = document.getElementById('planet-chart');
+    const ctx = document.getElementById("planet-chart");
     new Chart(ctx, this.planetChartData);
   },
 
@@ -266,10 +245,8 @@ export default {
 }
 
 @media (min-width: 762px) {
-
-.mr-35{
-  margin-right: -35%;
-}
-
+  .mr-35 {
+    margin-right: -35%;
+  }
 }
 </style>

@@ -62,7 +62,7 @@
                 <div class="s-comcard"><Business /></div>
               </b-tab>
             </b-tabs>
-          </div >
+          </div>
         </b-tab>
       </b-tabs>
     </div>
@@ -77,8 +77,8 @@ export default {
 
   components: {
     People,
-    Business,
-  },
+    Business
+  }
 };
 </script>
 

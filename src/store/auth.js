@@ -54,6 +54,8 @@ export default {
   actions: {
     login({ commit }, credentials) {
       return axios.post("user/login", credentials).then(({ data }) => {
+
+        console.log( data.data);
         commit("setUserData", data.data);
       });
     },
@@ -89,7 +91,7 @@ export default {
 
     recoverPassword2({ commit }, data) {
       return axios.post("user/reset", data).then(({ data }) => {
-        console.log(data);
+        console.log(data.data);
 
         commit("setPasswordToken", data.data);
       });

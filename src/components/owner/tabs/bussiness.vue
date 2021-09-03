@@ -648,10 +648,6 @@ export default {
     advance(value) {
       this.fieldset1 = value;
       if (value === 4) {
-        // setTimeout(() => {
-        //   this.$refs["modal-1"].hide();
-        //   this.fieldset1 = 1;
-        // }, 2000);
         this.saveBusiness();
       }
     },

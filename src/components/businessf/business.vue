@@ -137,7 +137,7 @@ import HomePage from "../businessf/tabs/businessHome";
 import About from "./tabs/about";
 import Media from "./tabs/media";
 import MarketPlace from "./tabs/marketPlace";
-// import Community from "./tabs/memberNetwork";
+ import Community from "./tabs/memberNetwork";
 import Networks from "./tabs/networks";
 
 export default {
@@ -147,6 +147,7 @@ export default {
     About,
     Media,
     MarketPlace,
+    Community,
     Networks
   },
 
@@ -168,10 +169,10 @@ export default {
           },
           "992": {
             perPage: 2,
-            gap: "1rem"
-          }
-        }
-      }
+            gap: "1rem",
+          },
+        },
+      },
     };
   },
 

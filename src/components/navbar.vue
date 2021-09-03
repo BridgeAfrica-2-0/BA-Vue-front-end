@@ -22,7 +22,7 @@
             <b-input-group class="b-shadow mt-3  ">
               <div
                 class="input-group-append color-mobile "
-                style="
+                style=" 
              border:none "
               >
                 <span
@@ -55,7 +55,7 @@
               <b-input-group class=" b-shadow  mt-2 ">
                 <div
                   class="input-group-append color-mobile "
-                  style="
+                  style=" 
              border:none "
                 >
                   <span

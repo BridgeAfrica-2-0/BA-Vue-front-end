@@ -340,9 +340,9 @@ export default {
 .gradient{
 
   background-image: linear-gradient(1deg, black, transparent);  */
-/*  background-image: url("../assets/img/profile_back.png");
+/*  background-image: url("../assets/img/profile_back.png");  
 
-}
+} 
  */
 
 .edit-btn:hover {

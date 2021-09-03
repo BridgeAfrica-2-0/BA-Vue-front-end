@@ -8,6 +8,7 @@ import signup from "../views/signup.vue";
 import RecoverPass1 from "../views/recoverPassword1.vue";
 import RecoverPass2 from "../views/recoverPassword2.vue";
 import RecoverPass3 from "../views/recoverPassword3.vue";
+
 import verifyAccount from "../views/verifyAccount.vue";
 
 import createService from "@/views/createService";
@@ -54,7 +55,7 @@ const routes = [
     name: "home",
     component: dashboard,
     meta: {
-      auth: false
+      auth: true
     }
   },
 
@@ -106,6 +107,9 @@ const routes = [
     name: "businessOwnerSettingGeneral",
     component: businessOwnerSettingGeneral
   },
+
+
+
 
   {
     path: "/business_owner/create_website_step_one",

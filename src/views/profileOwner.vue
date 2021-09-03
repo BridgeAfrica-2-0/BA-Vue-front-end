@@ -1,16 +1,16 @@
-<template  >
-  <div class="mx-auto"   style="overflow-y: hidden;">
+<template>
+  <div class="mx-auto" style="overflow-y: hidden;">
     <navbar></navbar>
     <head-page></head-page>
-    <div  class=" container-fluid text-justify   corps prof center-content">
+    <div class=" container-fluid text-justify   corps prof center-content">
       <b-row class="">
-        <b-col cols="12" class="p-3" >
-          <b-tabs content-class="mt-3" pills  small fill>
+        <b-col cols="12" class="p-3">
+          <b-tabs content-class="mt-3" pills small fill>
             <b-tab title="Posts" active>
               <Post />
             </b-tab>
             <b-tab title="About"><About /></b-tab>
-            <b-tab title="Business" class="m-0 p-0"   
+            <b-tab title="Business" class="m-0 p-0"
               ><bussiness></bussiness
             ></b-tab>
             <b-tab title="Media"><Media /></b-tab>
@@ -20,8 +20,8 @@
           </b-tabs>
         </b-col>
       </b-row>
-    </div>  
-  </div>     
+    </div>
+  </div>
 </template>
 
 <script>
@@ -53,9 +53,6 @@ export default {
 </script>
 
 <style scoped>
-
-
-
 @media (max-width: 576px) {
   .lb-grid {
     height: 200px;
@@ -102,13 +99,10 @@ export default {
   }
 }
 
-
-
 @media (min-width: 768px) {
-.center-content{
-  padding-left: 64px;
-  padding-right: 64px;
-}
-
+  .center-content {
+    padding-left: 64px;
+    padding-right: 64px;
+  }
 }
 </style>

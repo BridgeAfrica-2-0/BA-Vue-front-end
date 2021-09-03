@@ -5,8 +5,8 @@
         class="f-left"
         style="padding:0px; margin-left: -12px;
     margin-right: -12px;"
-      >
-        <b-tabs pills content-class="mt-3 f-left">
+
+>        <b-tabs pills content-class="mt-3 f-left">
           <b-tab title="People" active>
             <People :people="profile_community.people" />
           </b-tab>

@@ -142,7 +142,8 @@
       <!--                          size="sm"-->
       <!--                          class="b-background flexx pobtn shadow"-->
       <!--                        >-->
-      <!--                          <i class="fas fa-envelope   fa-lg btn-icon "></i>-->
+      <!--                          <i class="fas fa-envelope   fa-lg btn-icon "></i>
+                        -->
       <!--                          <span class="btn-text">Message</span>-->
       <!--                        </b-button>-->
       <!--                      </b-col>-->
@@ -160,7 +161,8 @@
       <!--                          class="b-background flexx pobtn shadow"-->
       <!--                          variant="primary"-->
       <!--                        >-->
-      <!--                          <i class="fas fa-user-plus  fa-lg btn-icon "></i>-->
+      <!--                          <i class="fas fa-user-plus  fa-lg btn-icon "></i>
+                        -->
       <!--                          <span class="btn-com">Community</span>-->
       <!--                        </b-button>-->
       <!--                      </b-col>-->

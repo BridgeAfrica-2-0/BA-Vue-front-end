@@ -22,17 +22,17 @@
                 <b-row>
                   <b-col cols="6">
                     <!--
-
+             
               <b-dropdown-item  @click="category('Starch')" href="#"> Starch</b-dropdown-item>
 
                <b-dropdown-item  @click="category('Coffee')"  href="#">Coffee/Tea</b-dropdown-item>
-
-
-               <b-dropdown-item  @click="category('Finished_Branded_Products')"  href="#">   Finished Products  </b-dropdown-item>
-
+               
+               
+               <b-dropdown-item  @click="category('Finished_Branded_Products')"  href="#">   Finished Products  </b-dropdown-item> 
+              
                <b-dropdown-item  @click="category('Raw_material')"  href="#">Raw material </b-dropdown-item>
-
-             <b-dropdown-item  @click="category('Spices')"  href="#">Spices</b-dropdown-item>
+               
+             <b-dropdown-item  @click="category('Spices')"  href="#">Spices</b-dropdown-item> 
 
              <b-dropdown-item  @click="category('Beans')"  href="#">Beans</b-dropdown-item>
 

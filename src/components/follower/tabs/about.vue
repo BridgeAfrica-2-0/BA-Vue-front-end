@@ -3,6 +3,7 @@
     <b-icon class="icon" variant="primary" icon="person-fill"></b-icon> About
 
     <hr />
+
     <b-card no-body class="desktop">
       <b-tabs pills card vertical>
         <b-tab title="BIOGRAPHY" active><Biography /></b-tab>
@@ -22,14 +23,14 @@
 
 <script>
 import Biography from "../biography";
-import ContactAndInfo from "../contactAndBasicInfo";
+import ContactandInfo from "../contactAndBasicInfo";
 import WorkAndEducation from "../workAndEducation";
 export default {
   components: {
     Biography,
-    ContactAndInfo,
-    WorkAndEducation
-  }
+    ContactandInfo,
+    WorkAndEducation,
+  },
 };
 </script>
 

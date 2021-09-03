@@ -11,64 +11,41 @@ axios.defaults.baseURL = process.env.VUE_APP_API_URL;
 const getDefaultState = () => {
   return {
     url_base: "http://team3dev.maxinemoffett.com",
-    url_load_profile_picture_changed: "/api/v1/download?file_name=",
-    url_load_profile_picture:
-      "/api/v1/download?file_name=public/media/photos/z7aooJV1XnDVTpRSfPGOUj7sjm0trGVJCiNFS7Ef.jpg",
-    url_change_profile_picture: "/api/v1/post",
-    change_image_url: "/api/v1/download?file_name=",
-    url_create_post: "/api/v1/post",
-    url_list_post: "/api/v1/post",
-    url_user_infos: "/api/v1/userIntro",
     url_load_user_profile_community: "/api/v1/profile/community",
-    recoverData: "",
-    login: false,
-    isToi: false,
-    token: "1|D8mzEzrdzrvlxeXUinBY8XDMgH8bVDtVOjv5xnZz",
-    count: "",
-    todos: [],
+    token: "1|5EyNcoXFcd6d4j8kaizPr8E3gU9lRu9CHqAWPa03",
     api_link: "https://94e9-154-72-150-118.ngrok.io/api/v1",
     api_link_end: "/business/details",
     token1: "8|Yx3DU4s08aFTYOCa3T2XJKZkjJV4leSi9b20oo5D",
     bdetails: [],
     userData: [
       {
-        id: "",
-        fullname: "",
-        username: "TONTON LA FORCE LE BEAU GOSSE",
-        email: "",
-        password: "",
-        profileName: "TONTON LA FORCE LE BEAU GOSSE",
-        profilePicture: null,
-        target: null,
-        coverImage: null,
-        numbersOfFollowers: 30,
         profile_community: {
           people: {
-            followers: [
+            user_followers: [
               {
                 id: 1,
-                picture:
+                profile_picture:
                   "https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg",
-                name: "TONTON LA FORCE",
-                community: 5000,
+                name: "He TONTON LA FORCE",
+                followers: 5000,
                 messages: [],
                 communities: []
               },
               {
                 id: 2,
-                picture:
+                profile_picture:
                   "https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg",
                 name: "howty Itz blec",
-                community: 5000,
+                followers: 5000,
                 messages: [],
                 communities: []
               },
               {
                 id: 3,
-                picture:
+                profile_picture:
                   "https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg",
                 name: "howty Itz blec",
-                community: 5000,
+                followers: 5000,
                 messages: [],
                 communities: []
               },
@@ -91,31 +68,31 @@ const getDefaultState = () => {
                 communities: []
               }
             ],
-            followings: [
+            user_following: [
               {
                 id: 1,
-                picture:
+                profile_picture:
                   "https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg",
                 name: "He TONTON LA FORCE",
-                community: 5000,
+                followers: 5000,
                 messages: [],
                 communities: []
               },
               {
                 id: 2,
-                picture:
+                profile_picture:
                   "https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg",
                 name: "howty Itz blec",
-                community: 5000,
+                followers: 5000,
                 messages: [],
                 communities: []
               },
               {
                 id: 3,
-                picture:
+                profile_picture:
                   "https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg",
                 name: "howty Itz blec",
-                community: 5000,
+                followers: 5000,
                 messages: [],
                 communities: []
               },
@@ -137,17 +114,20 @@ const getDefaultState = () => {
                 messages: [],
                 communities: []
               }
-            ]
+            ],
+            total_user_following: 2,
+            total_user_follower: 2,
+            total_people: 4
           },
           business: {
-            followers: [
+            business_followers: [
               {
                 id: 1,
-                picture:
+                profile_picture:
                   "https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg",
                 name: "Super Car ltd Yesss",
                 category: "Car marketing",
-                community: 20000000,
+                followers: 20000000,
                 city: "Douala",
                 country: "Cameroon",
                 about_description:
@@ -158,11 +138,11 @@ const getDefaultState = () => {
               },
               {
                 id: 2,
-                picture:
+                profile_picture:
                   "https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg",
                 name: "Super Car ltd",
                 category: "Car marketing",
-                community: 20000,
+                followers: 20000,
                 city: "Douala",
                 country: "Cameroon",
                 about_description:
@@ -173,11 +153,11 @@ const getDefaultState = () => {
               },
               {
                 id: 3,
-                picture:
+                profile_picture:
                   "https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg",
                 name: "Super Car ltd",
                 category: "Car marketing",
-                community: 20000,
+                followers: 20000,
                 city: "Douala",
                 country: "Cameroon",
                 about_description:
@@ -188,11 +168,11 @@ const getDefaultState = () => {
               },
               {
                 id: 4,
-                picture:
+                profile_picture:
                   "https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg",
                 name: "Super Car ltd",
                 category: "Car marketing",
-                community: 20000,
+                followers: 20000,
                 city: "Douala",
                 country: "Cameroon",
                 about_description:
@@ -203,11 +183,11 @@ const getDefaultState = () => {
               },
               {
                 id: 5,
-                picture:
+                profile_picture:
                   "https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg",
                 name: "Super Car ltd",
                 category: "Car marketing",
-                community: 20000,
+                followers: 20000,
                 city: "Douala",
                 country: "Cameroon",
                 about_description:
@@ -217,14 +197,14 @@ const getDefaultState = () => {
                 directions: []
               }
             ],
-            followings: [
+            business_following: [
               {
                 id: 1,
-                picture:
+                profile_picture:
                   "https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg",
-                name: "Super Car ltd",
+                name: "Super Car ltd Yesss",
                 category: "Car marketing",
-                community: 20000,
+                followers: 20000000,
                 city: "Douala",
                 country: "Cameroon",
                 about_description:
@@ -235,11 +215,11 @@ const getDefaultState = () => {
               },
               {
                 id: 2,
-                picture:
+                profile_picture:
                   "https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg",
                 name: "Super Car ltd",
                 category: "Car marketing",
-                community: 20000,
+                followers: 20000,
                 city: "Douala",
                 country: "Cameroon",
                 about_description:
@@ -250,11 +230,11 @@ const getDefaultState = () => {
               },
               {
                 id: 3,
-                picture:
+                profile_picture:
                   "https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg",
                 name: "Super Car ltd",
                 category: "Car marketing",
-                community: 20000,
+                followers: 20000,
                 city: "Douala",
                 country: "Cameroon",
                 about_description:
@@ -265,11 +245,11 @@ const getDefaultState = () => {
               },
               {
                 id: 4,
-                picture:
+                profile_picture:
                   "https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg",
                 name: "Super Car ltd",
                 category: "Car marketing",
-                community: 20000,
+                followers: 20000,
                 city: "Douala",
                 country: "Cameroon",
                 about_description:
@@ -280,11 +260,11 @@ const getDefaultState = () => {
               },
               {
                 id: 5,
-                picture:
+                profile_picture:
                   "https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg",
                 name: "Super Car ltd",
                 category: "Car marketing",
-                community: 20000,
+                followers: 20000,
                 city: "Douala",
                 country: "Cameroon",
                 about_description:
@@ -293,92 +273,13 @@ const getDefaultState = () => {
                 messages: [],
                 directions: []
               }
-            ]
-          }
+            ],
+            total_business_follower: 0,
+            total_business_following: 0,
+            total_business: 0
+          },
+          total_community: [[4]]
         }
-      }
-    ],
-    users: [
-      {
-        id: "S001",
-        fullname: "Prime",
-        username: "Clet",
-        email: "primeclet89@gmail.com",
-        password: "1234568"
-      },
-      {
-        id: "S002",
-        fullname: "John",
-        username: "Doe",
-        email: "jondoe@gmail.com",
-        password: "azertuiop"
-      },
-      {
-        id: "S003",
-        fullname: "test",
-        username: "1",
-        email: "test1@gmail.com",
-        password: "qsdfrtgrd"
-      },
-      {
-        id: "S004",
-        fullname: "holu",
-        username: "lol",
-        email: "lol@gmail.com",
-        password: "holulol"
-      },
-      {
-        id: "S005",
-        fullname: "gregre",
-        username: "io",
-        email: "gregre@gmail.com",
-        password: "987654321"
-      }
-    ],
-    services: [
-      {
-        id: "S2021-1",
-        Name: "Soins Esthétiques",
-        Image: "Clet",
-        Localisation: "Douala, PK14",
-        Resume:
-          "La coiffure est métier où l'on est le plus souvent debout. ... Le coiffeur / la coiffeuse travaille comme salarié dans un salon de coiffure indépendant ou franchisé ou à domicile. C'est également un commerçant qui vend des produits capillaires et des accessoires.",
-        user_id: "S001"
-      },
-      {
-        id: "S2021-2",
-        Name: "Car Driving",
-        Image: "Clet",
-        Localisation: "Bonanjo, Bastos",
-        Resume:
-          "C'est également un commerçant qui vend des produits capillaires et des accessoires.",
-        user_id: "S001"
-      },
-      {
-        id: "S2021-3",
-        Name: "Gardiennage",
-        Image: "Clet",
-        Localisation: "Biyem Assi, TKC",
-        Resume:
-          "comprend toutes sortes de formes de surveillance et de protection des biens et des personnes.",
-        user_id: "S003"
-      },
-      {
-        id: "S2021-4",
-        Name: "BTP",
-        Image: "Clet",
-        Localisation: "AKWA, DJoungolo",
-        Resume: "Batiment et travaux Publics......",
-        user_id: "S004"
-      }
-    ],
-    service: [
-      {
-        id: "",
-        Name: "",
-        Image: "Clet",
-        Localisation: "",
-        Resume: ""
       }
     ]
   };
@@ -436,7 +337,7 @@ const actions = {
 
 const mutations = {
   updateUserProfileCommunity(state, payload) {
-    state.userData[0].profile_community = [...payload.profile.community];
+    state.userData[0].profile_community = payload.profile_community;
   },
   set_details(state, bdetails) {
     state.bdetails = bdetails;

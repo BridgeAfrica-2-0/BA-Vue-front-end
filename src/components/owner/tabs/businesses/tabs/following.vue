@@ -18,13 +18,12 @@
     <br />
 
     <b-row>
-      <b-col md="12" lg="6" v-for="member in followings" :key="member.id">
+      <b-col v-if="followings.length <= 0" >
+        No Community Business
+      </b-col>
+      <b-col md="12" lg="6" v-for="member in followings" :key="member.id" v-else>
         <CommunityBusiness :member="member" />
       </b-col>
-
-      <!--      <b-col md="12" lg="6">-->
-      <!--        <CommunityBusiness />-->
-      <!--      </b-col>-->
     </b-row>
   </div>
 </template>

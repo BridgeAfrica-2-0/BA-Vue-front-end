@@ -33,7 +33,7 @@
           variant="primary"
         ></b-spinner>
       </b-col>
-      <b-col v-if="!followers && !loader" class="load">
+      <b-col v-if="followers.length < 1 && !loader" class="load">
         <p>No Follower to show !!</p>
       </b-col>
     </b-row>
@@ -74,10 +74,16 @@ export default {
   },
   methods: {
     getFollowers() {
-      axios.get("/community/people-follower/5").then(res => {
-        this.loader = false;
-        this.followers = res.data.data.data;
-      });
+      axios
+        .get("/community/people-follower/5")
+        .then(res => {
+          this.loader = false;
+          this.followers = res.data.data.data;
+        })
+        .catch(err => {
+          console.log(err);
+          this.loader = false;
+        });
     },
   },
 };

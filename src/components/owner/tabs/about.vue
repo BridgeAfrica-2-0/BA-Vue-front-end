@@ -30,10 +30,32 @@ export default {
 
   data() {
     return {
-      size: 0
+      size: 0,
+      profile_about: null,
     };
   },
+  created() {
+    this.profile_about = JSON.parse(
+            JSON.stringify(this.$store.getters.getProfileAbout_)
+    );
+    console.log("Load User Profile About start ++++++", this.profile_about);
 
+    this.$store
+            .dispatch("loadUserProfileAbout", null)
+            .then(response => {
+              console.log("load user Profile About response (3) ++++", response);
+              console.log("Load User Profile About end+++++++");
+            })
+            .catch(error => {
+              console.log("Error from server or from browser error (2) ++++", error);
+            })
+            .finally(() => {
+              this.profile_about = JSON.parse(
+                      JSON.stringify(this.$store.getters.getProfileAbout_)
+              );
+              console.log("Load User Profile About end ++++++", this.profile_about);
+            });
+  },
   computed: {
     vertical() {
       if (this.size > 768) return true;

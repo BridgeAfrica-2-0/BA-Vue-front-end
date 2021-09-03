@@ -118,11 +118,11 @@ export default {
     };
   },
   created() {
-    console.log(
-            "Load User Profile About Education ++++++++++++"
-    );
+    console.log("Load User Profile About Education");
     this.educations = JSON.parse(
-            JSON.stringify(this.$store.getters.getProfileAboutEducationAndWorks.educations)
+      JSON.stringify(
+        this.$store.getters.getProfileAboutEducationAndWorks.educations
+      )
     );
   },
   methods: {
@@ -169,7 +169,9 @@ export default {
         .finally(() => {
           console.log("finally save new website user ");
           this.educations = JSON.parse(
-            JSON.stringify(this.$store.getters.getProfileAboutEducationAndWorks.educations)
+            JSON.stringify(
+              this.$store.getters.getProfileAboutEducationAndWorks.educations
+            )
           );
           this.index = null;
           this.educationInput = {
@@ -183,7 +185,6 @@ export default {
           console.log(this.educations);
           this.$refs["educationModal"].hide();
         });
-
     },
     deleteEducation(type, value) {
       switch (type) {

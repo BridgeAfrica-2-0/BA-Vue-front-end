@@ -64,7 +64,13 @@
             @on-loading="setLoading"
             color="#e75c18"
           >
-            <input id="profile2" type="file" @change="onFileChange" hidden />
+            <input
+              id="profile2"
+              accept="video/mpeg,video/mp4,image/*"
+              type="file"
+              @change="onFileChange"
+              hidden
+            />
 
             <tab-content
               title=" Complete Profile "
@@ -245,7 +251,13 @@
       id="modal-2"
     >
       <form novalidate>
-        <input id="profile2" type="file" @change="onFileChange" hidden />
+        <input
+          id="profile2"
+          accept="video/mpeg,video/mp4,image/*"
+          type="file"
+          @change="onFileChange"
+          hidden
+        />
 
         <div>
           <form-wizard @on-complete="onComplete">
@@ -567,14 +579,12 @@
                     <div class="form-group">
                       <label for="username" class="username">TimeZone:</label
                       ><br />
-                      <select
+
+                      <b-form-select
                         id="timezone"
                         v-model="time_zone"
                         :options="timezone"
-                        class="form-control text"
-                      >
-                      
-                      </select>
+                      ></b-form-select>
                     </div>
                   </div>
 
@@ -663,6 +673,7 @@
 
 <script>
 import People from "@/components/dasboard/suggestedpeople";
+
 import Business from "@/components/dasboard/welcomebusinesses";
 
 import Tutorial from "@/components/dasboard/tutorial";
@@ -688,14 +699,14 @@ export default {
       img_url: null,
       sendingP: false,
       sendingB: false,
-      profile_pic: null,
+      profile_pic: "",
       dob: null,
       gender: null,
       city: null,
       Neighbor: null,
       step1: false,
       step2: false,
-      logo_pic: null,
+      logo_pic: "",
       logoimg_url: null,
       form: {
         business_name: null,
@@ -715,83 +726,102 @@ export default {
       locPlaces: [],
       existingPlace: null,
 
+      timezone: [
+        { label: "(GMT-12:00) International Date Line West", value: "-12" },
+        { label: "(GMT-11:00) Midway Island, Samoa", value: "-11" },
+        { label: "(GMT-10:00) Hawaii", value: "-10" },
+        { label: "(GMT-09:00) Alaska", value: "-9" },
+        { label: "(GMT-08:00) Pacific Time (US & Canada)", value: "-8" },
+        { label: "(GMT-08:00) Tijuana, Baja California", value: "-8" },
+        { label: "(GMT-07:00) Arizona", value: "-7" },
+        { label: "(GMT-07:00) Chihuahua, La Paz, Mazatlan", value: "-7" },
+        { label: "(GMT-07:00) Mountain Time (US & Canada)", value: "-7" },
+        { label: "(GMT-06:00) Central America", value: "-6" },
+        { label: "(GMT-06:00) Central Time (US & Canada)", value: "-6" },
+        { label: "(GMT-05:00) Bogota, Lima, Quito, Rio Branco", value: "-5" },
+        { label: "(GMT-05:00) Eastern Time (US & Canada)", value: "-5" },
+        { label: "(GMT-05:00) Indiana (East)", value: "-5" },
+        { label: "(GMT-04:00) Atlantic Time (Canada)", value: "-4" },
+        { label: "(GMT-04:00) Caracas, La Paz", value: "-4" },
+        { label: "(GMT-04:00) Manaus", value: "-4" },
+        { label: "(GMT-04:00) Santiago", value: "-4" },
+        { label: "(GMT-03:30) Newfoundland", value: "-3.5" },
+        { label: "(GMT-03:00) Brasilia", value: "-3" },
+        { label: "(GMT-03:00) Buenos Aires, Georgetown", value: "-3" },
+        { label: "(GMT-03:00) Greenland", value: "-3" },
+        { label: "(GMT-03:00) Montevideo", value: "-3" },
+        { label: "(GMT-02:00) Mid-Atlantic", value: "-2" },
+        { label: "(GMT-01:00) Cape Verde Is.", value: "-1" },
+        { label: "(GMT-01:00) Azores", value: "-1" },
+        { label: "(GMT+00:00) Casablanca, Monrovia, Reykjavik", value: "0" },
+        {
+          label:
+            "(GMT+00:00) Greenwich Mean Time : Dublin, Edinburgh, Lisbon, London",
+          value: "0",
+        },
+        {
+          label: "(GMT+01:00) Amsterdam, Berlin, Bern, Rome, Stockholm, Vienna",
+          value: "1",
+        },
+        {
+          label:
+            "(GMT+01:00) Belgrade, Bratislava, Budapest, Ljubljana, Prague",
+          value: "1",
+        },
+        {
+          label: "(GMT+01:00) Brussels, Copenhagen, Madrid, Paris",
+          value: "1",
+        },
+        { label: "(GMT+01:00) Sarajevo, Skopje, Warsaw, Zagreb", value: "1" },
+        { label: "(GMT+01:00) West Central Africa", value: "1" },
+        { label: "(GMT+02:00) Amman", value: "2" },
+        { label: "(GMT+02:00) Athens, Bucharest, Istanbul", value: "2" },
+        { label: "(GMT+02:00) Beirut", value: "2" },
+        { label: "(GMT+02:00) Cairo", value: "2" },
+        { label: "(GMT+02:00) Harare, Pretoria", value: "2" },
+        {
+          label: "(GMT+02:00) Helsinki, Kyiv, Riga, Sofia, Tallinn, Vilnius",
+          value: "2",
+        },
+        { label: "(GMT+02:00) Jerusalem", value: "2" },
+        { label: "(GMT+02:00) Minsk", value: "2" },
+        { label: "(GMT+02:00) Windhoek", value: "2" },
+        { label: "(GMT+03:00) Kuwait, Riyadh, Baghdad", value: "3" },
+        { label: "(GMT+03:00) Moscow, St. Petersburg, Volgograd", value: "3" },
+        { label: "(GMT+03:00) Nairobi", value: "3" },
+        { label: "(GMT+03:00) Tbilisi", value: "3" },
+        { label: "(GMT+03:30) Tehran", value: "3.5" },
+        { label: "(GMT+04:00) Abu Dhabi, Muscat", value: "4" },
+        { label: "(GMT+04:00) Baku", value: "4" },
+        { label: "(GMT+04:00) Yerevan", value: "4" },
+        { label: "(GMT+04:30) Kabul", value: "4.5" },
+        { label: "(GMT+05:00) Yekaterinburg", value: "5" },
+        { label: "(GMT+05:00) Islamabad, Karachi, Tashkent", value: "5" },
+        { label: "(GMT+05:30) Sri Jayawardenapura", value: "5.5" },
+        {
+          label: "(GMT+05:30) Chennai, Kolkata, Mumbai, New Delhi",
+          value: "5.5",
+        },
+        { label: "(GMT+05:45) Kathmandu", value: "5.75" },
+        { label: "(GMT+06:00) Almaty, Novosibirsk", value: "6" },
+        { label: "(GMT+06:00) Astana, Dhaka", value: "6" },
+        { label: "(GMT+06:30) Yangon (Rangoon)", value: "6.5" },
+        { label: "(GMT+07:00) Bangkok, Hanoi, Jakarta", value: "7" },
+        { label: "(GMT+07:00) Krasnoyarsk", value: "7" },
+        {
+          label: "(GMT+08:00) Beijing, Chongqing, Hong Kong, Urumqi",
+          value: "8",
+        },
+        { label: "(GMT+08:00) Kuala Lumpur, Singapore", value: "8" },
+        { label: "(GMT+08:00) Irkutsk, Ulaan Bataar", value: "8" },
+        { label: "(GMT+08:00) Perth", value: "8" },
+        { label: "(GMT+08:00) Taipei", value: "8" },
+      ],
 
-
- 
-      timezone:[
-    {"label":"(GMT-12:00) International Date Line West","value":"-12"},
-    {"label":"(GMT-11:00) Midway Island, Samoa","value":"-11"},
-    {"label":"(GMT-10:00) Hawaii","value":"-10"},
-    {"label":"(GMT-09:00) Alaska","value":"-9"},
-    {"label":"(GMT-08:00) Pacific Time (US & Canada)","value":"-8"},
-    {"label":"(GMT-08:00) Tijuana, Baja California","value":"-8"},
-    {"label":"(GMT-07:00) Arizona","value":"-7"},
-    {"label":"(GMT-07:00) Chihuahua, La Paz, Mazatlan","value":"-7"},
-    {"label":"(GMT-07:00) Mountain Time (US & Canada)","value":"-7"},
-    {"label":"(GMT-06:00) Central America","value":"-6"},
-    {"label":"(GMT-06:00) Central Time (US & Canada)","value":"-6"},
-    {"label":"(GMT-05:00) Bogota, Lima, Quito, Rio Branco","value":"-5"},
-    {"label":"(GMT-05:00) Eastern Time (US & Canada)","value":"-5"},
-    {"label":"(GMT-05:00) Indiana (East)","value":"-5"},
-    {"label":"(GMT-04:00) Atlantic Time (Canada)","value":"-4"},
-    {"label":"(GMT-04:00) Caracas, La Paz","value":"-4"},
-    {"label":"(GMT-04:00) Manaus","value":"-4"},
-    {"label":"(GMT-04:00) Santiago","value":"-4"},
-    {"label":"(GMT-03:30) Newfoundland","value":"-3.5"},
-    {"label":"(GMT-03:00) Brasilia","value":"-3"},
-    {"label":"(GMT-03:00) Buenos Aires, Georgetown","value":"-3"},
-    {"label":"(GMT-03:00) Greenland","value":"-3"},
-    {"label":"(GMT-03:00) Montevideo","value":"-3"},
-    {"label":"(GMT-02:00) Mid-Atlantic","value":"-2"},
-    {"label":"(GMT-01:00) Cape Verde Is.","value":"-1"},
-    {"label":"(GMT-01:00) Azores","value":"-1"},
-    {"label":"(GMT+00:00) Casablanca, Monrovia, Reykjavik","value":"0"},
-    {"label":"(GMT+00:00) Greenwich Mean Time : Dublin, Edinburgh, Lisbon, London","value":"0"},
-    {"label":"(GMT+01:00) Amsterdam, Berlin, Bern, Rome, Stockholm, Vienna","value":"1"},
-    {"label":"(GMT+01:00) Belgrade, Bratislava, Budapest, Ljubljana, Prague","value":"1"},
-    {"label":"(GMT+01:00) Brussels, Copenhagen, Madrid, Paris","value":"1"},
-    {"label":"(GMT+01:00) Sarajevo, Skopje, Warsaw, Zagreb","value":"1"},
-    {"label":"(GMT+01:00) West Central Africa","value":"1"},
-    {"label":"(GMT+02:00) Amman","value":"2"},
-    {"label":"(GMT+02:00) Athens, Bucharest, Istanbul","value":"2"},
-    {"label":"(GMT+02:00) Beirut","value":"2"},
-    {"label":"(GMT+02:00) Cairo","value":"2"},
-    {"label":"(GMT+02:00) Harare, Pretoria","value":"2"},
-    {"label":"(GMT+02:00) Helsinki, Kyiv, Riga, Sofia, Tallinn, Vilnius","value":"2"},
-    {"label":"(GMT+02:00) Jerusalem","value":"2"},
-    {"label":"(GMT+02:00) Minsk","value":"2"},
-    {"label":"(GMT+02:00) Windhoek","value":"2"},
-    {"label":"(GMT+03:00) Kuwait, Riyadh, Baghdad","value":"3"},
-    {"label":"(GMT+03:00) Moscow, St. Petersburg, Volgograd","value":"3"},
-    {"label":"(GMT+03:00) Nairobi","value":"3"},
-    {"label":"(GMT+03:00) Tbilisi","value":"3"},
-    {"label":"(GMT+03:30) Tehran","value":"3.5"},
-    {"label":"(GMT+04:00) Abu Dhabi, Muscat","value":"4"},
-    {"label":"(GMT+04:00) Baku","value":"4"},
-    {"label":"(GMT+04:00) Yerevan","value":"4"},
-    {"label":"(GMT+04:30) Kabul","value":"4.5"},
-    {"label":"(GMT+05:00) Yekaterinburg","value":"5"},
-    {"label":"(GMT+05:00) Islamabad, Karachi, Tashkent","value":"5"},
-    {"label":"(GMT+05:30) Sri Jayawardenapura","value":"5.5"},
-    {"label":"(GMT+05:30) Chennai, Kolkata, Mumbai, New Delhi","value":"5.5"},
-    {"label":"(GMT+05:45) Kathmandu","value":"5.75"},
-    {"label":"(GMT+06:00) Almaty, Novosibirsk","value":"6"},{"label":"(GMT+06:00) Astana, Dhaka","value":"6"},
-    {"label":"(GMT+06:30) Yangon (Rangoon)","value":"6.5"},
-    {"label":"(GMT+07:00) Bangkok, Hanoi, Jakarta","value":"7"},
-    {"label":"(GMT+07:00) Krasnoyarsk","value":"7"},
-    {"label":"(GMT+08:00) Beijing, Chongqing, Hong Kong, Urumqi","value":"8"},
-    {"label":"(GMT+08:00) Kuala Lumpur, Singapore","value":"8"},
-    {"label":"(GMT+08:00) Irkutsk, Ulaan Bataar","value":"8"},
-    {"label":"(GMT+08:00) Perth","value":"8"},
-    {"label":"(GMT+08:00) Taipei","value":"8"}  ],
-   
-
-
-       options: [
+      options: [
         { text: " Person", value: "person" },
         { text: " Business ", value: "business" },
       ],
-
 
       category: "",
       categories: [
@@ -847,16 +877,84 @@ export default {
     },
 
     validateBusiness() {
-      this.$v.form.$touch();
-      if (this.$v.form.$anyError) {
-        console.log("error error");
-        return false;
-      } else {
-        console.log("no error error");
+      return new Promise((resolve, reject) => {
+        this.$v.form.$touch();
+        if (this.$v.form.$anyError) {
+          console.log("error error");
+          return false;
+        } else {
+          console.log("no error error");
 
-        this.createBusiness();
-        return true;
-      }
+          this.sendingB = true;
+
+          let formData2 = new FormData();
+          formData2.append("logo_path", this.logo_pic);
+
+          formData2.append("region", this.region);
+          formData2.append("city", this.city);
+          formData2.append("country", this.country);
+
+          formData2.append("address", this.adress);
+
+          formData2.append("neighbor", this.Neighbor);
+          formData2.append("lat", this.center.lat);
+          formData2.append("lng", this.center.lng);
+
+          formData2.append("name", this.business_name);
+          formData2.append("category", this.business_category);
+          formData2.append("keywords", this.business_keyword);
+          formData2.append("timezone", this.time_zone);
+          formData2.append("language", this.language);
+          formData2.append("about_business", this.about);
+
+          this.axios
+            .post("business/create", formData2, {
+              headers: {
+                "Content-Type": "multipart/form-data",
+              },
+            })
+            .then((response) => {
+              console.log(response);
+
+              this.sendingB = false;
+
+              this.flashMessage.show({
+                status: "success",
+
+                message: "Business Profile Created",
+              });
+
+              resolve(true);
+            })
+            .catch((err) => {
+              console.log({ err: err });
+
+              this.sendingB = false;
+
+              if (err.response.status == 422) {
+                console.log({ err: err });
+                console.log(err.response.data.message);
+
+                this.flashMessage.show({
+                  status: "error",
+
+                  message: err.response.data.message,
+                  blockClass: "custom-block-class",
+                });
+              } else {
+                this.flashMessage.show({
+                  status: "error",
+
+                  message: "Unable to Create Your Business",
+                  blockClass: "custom-block-class",
+                });
+                console.log({ err: err });
+              }
+
+              resolve(false);
+            });
+        }
+      });
     },
 
     businessAround() {
@@ -945,7 +1043,7 @@ export default {
 
             this.flashMessage.show({
               status: "success",
-
+              blockClass: "custom-block-class",
               message: "Business Profile Created",
             });
 
@@ -1135,9 +1233,6 @@ export default {
 };
 import "vue-form-wizard/dist/vue-form-wizard.min.css";
 </script>
-
-
-
 
 <style>
 #preview {

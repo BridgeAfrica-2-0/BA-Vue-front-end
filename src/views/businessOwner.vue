@@ -14,7 +14,6 @@
       <hr width="100%" class="d-none" d-md-block />
     </div>
 
-
     <div class="mt-3" v-if="selectedId == '0'">
       <Business />
     </div>
@@ -75,15 +74,17 @@ export default {
       bottomSelectedId: 0,
       items: [
         { label: "Home ", icon: "" },
+
         { label: "Inbox", icon: "" },
         { label: "Notification", icon: "" },
         { label: "Pending Post", icon: "" },
         { label: "Insight", icon: "" },
+
         { label: "Settings", icon: "" }
       ],
       options: {
-        activeColor: "#1d98bd",
-      },
+        activeColor: "#1d98bd"
+      }
     };
   },
   computed: {}

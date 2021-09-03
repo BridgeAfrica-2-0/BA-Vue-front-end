@@ -3,9 +3,11 @@
     <form novalidate class="md-layout" @submit.prevent="validateUser">
       <md-card class="md-layout-item md-size-50 md-small-size-100 p-card">
         <md-card-header>
-          <div class="md-title center">Sign Up On Bridge Africa</div>
+          <div class="md-title center">
+            {{ $t("Sign_Up_On_Bridge_Africa") }}
+          </div>
         </md-card-header>
-       <FlashMessage />
+        <FlashMessage />
         <md-card-content>
           <div class="center">
             <b-row>
@@ -14,9 +16,9 @@
                   @click.prevent="authProvider('facebook')"
                   class="md-raised md-primary b-w"
                 >
-                  <b-icon icon="facebook" aria-hidden="true"></b-icon> Sign Up
-                  With Facebook</md-button
-                >
+                  <b-icon icon="facebook" aria-hidden="true"></b-icon>
+                  {{ $t("Sign_Up_with_facebook") }}
+                </md-button>
               </b-col>
 
               <b-col cols="12" md="6" lg="12" xl="6">
@@ -25,21 +27,21 @@
                   class="b-color b-w"
                   style="color: white"
                 >
-                  <b-icon icon="google" aria-hidden="true"></b-icon> Sign Up
-                  with Google</md-button
-                >
+                  <b-icon icon="google" aria-hidden="true"></b-icon>
+                  {{ $t("Sign_Up_with_Google") }}
+                </md-button>
               </b-col>
             </b-row>
           </div>
 
           <br />
 
-          <p class="t-center">-OR-</p>
+          <p class="t-center">- {{ $t("OR") }} -</p>
 
           <div class="md-layout md-gutter">
             <div class="md-layout-item md-small-size-100 m-left">
               <md-field :class="getValidationClass('firstName')">
-                <label for="first_name">First Name</label>
+                <label for="first_name"> {{ $t("First_Name") }} </label>
                 <md-input
                   type="text"
                   name="firstName"
@@ -47,15 +49,15 @@
                   v-model="form.firstName"
                   :disabled="sending"
                 />
-                <span class="md-error" v-if="!$v.form.firstName.required"
-                  >First Name is required</span
-                >
+                <span class="md-error" v-if="!$v.form.firstName.required">
+                  {{ $t("First_Name_is_required") }}
+                </span>
               </md-field>
             </div>
 
             <div class="md-layout-item md-small-size-100">
               <md-field :class="getValidationClass('lastName')">
-                <label for="lastName"> Last Name</label>
+                <label for="lastName"> {{ $t("Last_Name") }} </label>
                 <md-input
                   type="text"
                   name="lastName"
@@ -63,15 +65,15 @@
                   v-model="form.lastName"
                   :disabled="sending"
                 />
-                <span class="md-error" v-if="!$v.form.lastName.required"
-                  >First Name is required</span
-                >
+                <span class="md-error" v-if="!$v.form.lastName.required">
+                  {{ $t("last_Name_is_required") }}
+                </span>
               </md-field>
             </div>
           </div>
 
           <md-field :class="getValidationClass('email')">
-            <label for="email">Email</label>
+            <label for="email"> {{ $t("email") }} </label>
             <md-input
               type="email"
               name="email"
@@ -80,24 +82,24 @@
               v-model="form.email"
               :disabled="sending"
             />
-            <span class="md-error" v-if="!$v.form.email.required"
-              >The email is required</span
-            >
+            <span class="md-error" v-if="!$v.form.email.required">
+              {{ $t("the_email_is_required") }}
+            </span>
             <span class="md-error" v-else-if="!$v.form.email.email"
-              >Invalid email</span
-            >
+              >{{ $t("invalid_email") }}
+            </span>
           </md-field>
 
           <md-field :class="getValidationClass('tel')">
-            <label for="tel">Tel</label>
+            <label for="tel"> {{ $t("Tel") }} </label>
             <md-input type="number" name="tel" id="tel" v-model="form.tel" />
-            <span class="md-error" v-if="!$v.form.tel.required"
-              >Tel is required</span
-            >
+            <span class="md-error" v-if="!$v.form.tel.required">
+              {{ $t("tel_is_required") }}
+            </span>
           </md-field>
 
           <md-field :class="getValidationClass('password')">
-            <label for="password">Password</label>
+            <label for="password"> {{ $t("Password") }} </label>
             <md-input
               type="password"
               name="password"
@@ -106,13 +108,13 @@
               :disabled="sending"
             />
 
-            <span class="md-error" v-if="!$v.form.password.required"
-              >Password is required</span
-            >
+            <span class="md-error" v-if="!$v.form.password.required">
+              {{ $t("password_is_required") }}
+            </span>
           </md-field>
 
           <md-field :class="getValidationClass('password')">
-            <label for="confirmPassword">Confirm Password</label>
+            <label for="confirmPassword"> {{ $t("confirm_password") }} </label>
             <md-input
               type="password"
               name="confirmPassword"
@@ -121,8 +123,8 @@
               :disabled="sending"
             />
             <span class="md-error" v-if="!$v.form.confirmPassword.required"
-              >Password is required</span
-            >
+              >Password is required {{ $t("password_is_required") }}
+            </span>
           </md-field>
         </md-card-content>
 
@@ -142,7 +144,7 @@
             </b-col>
             <b-col cols="6">
               <b-link href="/login" class="f-right">
-                <md-button class="md-raised">Login</md-button>
+                <md-button class="md-raised"> {{ $t("login") }} </md-button>
               </b-link>
             </b-col>
           </b-row>
@@ -152,23 +154,33 @@
           <br />
           <br />
 
-          <label> By Signing Up you agree to Bridge Africa's </label> <br />
+          <label> {{ $t("by_loging_in_you_agree_to_bridge_africa") }} </label>
+          <br />
 
           <label>
-            <b-link href="#">Terms and conditions </b-link> &
-            <b-link href="#">Privacy policies</b-link>
+            <b-link href="#">{{ $t("terms_and_conditions") }} </b-link> &
+            <b-link href="#"> {{ $t("Privacy_policies") }}</b-link>
           </label>
         </div>
       </md-card>
 
       <div class="md-layout-item md-size-50 md-small-size-100 b-div"></div>
 
-      <md-snackbar :md-active.sync="userSaved"
-        >The user {{ lastUser }} was saved with success!</md-snackbar
-      >
+      <md-snackbar :md-active.sync="userSaved">
+        {{ $t("the_user") }} {{ lastUser }} {{ $t("was_saved_with_success") }}
+      </md-snackbar>
     </form>
 
-  
+    <hr class="localfoter" />
+
+    <p class="text-center">
+      <span class="display-inline">
+        <b-link @click="$i18n.locale = 'en'"> English</b-link>
+        <span class="vl"></span>
+        <b-link class="ml-2" @click="$i18n.locale = 'fr'"> French </b-link>
+      </span>
+      Bridge Africa © 2021
+    </p>
   </div>
 </template>
 
@@ -242,26 +254,21 @@ export default {
     },
 
     socialLogin(provider, response) {
-      this.$http   
+      this.$http
         .post("user/social/" + provider, response)
         .then((response) => {
           console.log(response.data);
 
           this.$store.commit("auth/setUserData", response.data);
 
-         
-
-           this.flashMessage.show({
+          this.flashMessage.show({
             status: "success",
-           
-            message:
-              "Successfully Register",
+
+            message: "Successfully Register",
           });
 
-
-           this.$router.push({ name: "welcome" });
-        return response.data.token;
-
+          this.$router.push({ name: "welcome" });
+          return response.data.token;
         })
         .catch((err) => {
           console.log({ err: err });
@@ -299,7 +306,7 @@ export default {
         })
         .then((response) => {
           console.log(response.data);
-          this.$store.commit("auth/setUserData", response.data.data);
+          this.$store.commit("auth/setUserData", response.data);
 
           this.flashMessage.show({
             status: "success",
@@ -308,36 +315,28 @@ export default {
               "Thanks for registering. You will get your otp code in a second",
           });
 
-        
-
           this.$router.push({ name: "verifyAccount" });
         })
         .catch((err) => {
           this.sending = false;
 
           if (err.response.status == 422) {
+            console.log({ err: err });
+            console.log(err.response.data.message);
 
-             
-                console.log({ err: err });
-                console.log(err.response.data.message);
+            this.flashMessage.show({
+              status: "error",
 
-                 this.flashMessage.show({
-            status: "error",
-           
-            message: err.response.data.message,
-          });
-
-
-           }else{  
-
-          this.flashMessage.show({
-            status: "error",
-            title: "Registration Failed",
-            message: "Unable to store this data",
-          });
-          console.log({ err: err });
-
-           }
+              message: err.response.data.message,
+            });
+          } else {
+            this.flashMessage.show({
+              status: "error",
+              title: "Registration Failed",
+              message: "Unable to store this data",
+            });
+            console.log({ err: err });
+          }
         });
     },
     validateUser() {
@@ -350,7 +349,16 @@ export default {
 };
 </script>
 
-<style  scoped>
+<style scoped>
+.vl {
+  border-left: 1px solid green;
+  height: 50px;
+}
+
+.localfoter {
+  margin-top: -10px;
+}
+
 .f-right {
   float: left;
 }

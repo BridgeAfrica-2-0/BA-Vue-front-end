@@ -1,0 +1,32 @@
+{
+    "message": "Un message",
+    
+    "email": "E-mail",
+    "password": "Mot de passe",
+    "Privacy_policies": "Les politiques de confidentialité",
+    "login_with_google": "connexion google",
+    "Login_With_Facebook": "connexion Facebook ",
+    "or": " Ou ",
+    "the_email_is_required": "L'e-mail est requis",
+    "invalid_email": "Email invalide",
+    "remeber_me": " Souviens-toi de moi",
+    "login": "Connexion",
+    "signup": "S'inscrire ",
+    "terms_and_conditions": " Termes et conditions",
+    "forget_password": "Mot de passe oublié ",
+    "by_loging_in_you_agree_to_bridge_africa": "En vous connectant, vous acceptez de jeter un pont sur l'Afrique ",
+    "the_user": "The User",
+    "was_saved_with_success": "a été sauvé avec succès" ,
+    "Sign_Up_On_Bridge_Africa":"Sign Up On Bridge Africa",
+    "confirm_password": "Confirmez le mot de passe",
+    "Tel": "Téléphone",
+    "Last_Name":"Nom de famille",
+    "First_Name":"prénom",
+   
+    "First_Name_is_required": "Le prénom est requis",
+    "last_Name_is_required": "Le nom de famille est requis",
+    "Sign_Up_with_facebook": "Sign Up with facebook",
+    "Login_To_Bridge_Africa": "Connectez-vous pour Bridge Africa"
+    
+    
+  }

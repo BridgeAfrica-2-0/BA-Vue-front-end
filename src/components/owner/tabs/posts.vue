@@ -2,10 +2,9 @@
   <div>
     <b-row>
       <b-col md="12" lg="5" xl="4" class="p-0 m-0">
-        <!-- User Posts SideBar-->
         <b-card title="" header-tag="header" footer-tag="footer">
           <span class="m-1">
-            <h2 class="title intro-head ">
+            <h6 class="title intro-head ">
               <b>
                 <fas-icon
                   class=" icons"
@@ -14,7 +13,7 @@
                 />
                 Intro
               </b>
-            </h2>
+            </h6>
             <span class="float-right btn m-0 p-0 action-intro" v-b-modal.modal-5
               ><b-icon
                 icon="pencil-fill"
@@ -24,7 +23,6 @@
             </span>
           </span>
 
-          <!-- User Post Intro-->
           <b-card-text class="text-left username  intro-head">
             <p>
               <b-icon
@@ -33,9 +31,7 @@
                 variant="primary"
               ></b-icon>
               <b> Work at: </b>
-              <span class="text">
-                {{ $store.getters.getUserPostIntro.workedAt }}
-              </span>
+              <span class="text"> Current or Last Organization </span>
             </p>
             <p>
               <b-icon
@@ -44,9 +40,7 @@
                 variant="primary"
               ></b-icon>
               <b> Studied at: </b>
-              <span class="text">
-                {{ $store.getters.getUserPostIntro.studiedAt }}</span
-              >
+              <span class="text"> Last Education </span>
             </p>
             <p>
               <b-icon
@@ -54,10 +48,7 @@
                 class="icon-size"
                 variant="primary"
               ></b-icon>
-              <b> Home Town : </b>
-              <span class="text">
-                {{ $store.getters.getUserPostIntro.homeTown }}
-              </span>
+              <b> Home Town : </b> <span class="text"> Dummy </span>
             </p>
             <p>
               <b-icon
@@ -65,10 +56,7 @@
                 class="icon-size"
                 variant="primary"
               ></b-icon
-              ><b> Current City : </b>
-              <span class="text">
-                {{ $store.getters.getUserPostIntro.currentCity }}
-              </span>
+              ><b> Current City : </b> <span class="text"> Dummy </span>
             </p>
             <p>
               <b-icon
@@ -76,176 +64,67 @@
                 class="icon-size"
                 variant="primary"
               ></b-icon>
-              <b> Community: </b>
-              <span class="text">
-                {{ $store.getters.getUserPostIntro.numbersOfFollowers }}
-              </span>
+              <b> Community: </b> <span class="text"> 525 </span>
             </p>
           </b-card-text>
         </b-card>
 
-        <!-- Modal Box User Posts Form To Edit Intro-->
-        <!--        <b-modal id="modal-5" title=" Edit Intro">-->
-        <!--          <div class="form-card">-->
-        <!--            <div class="row">-->
-        <!--              <div class="col-md-12">-->
-        <!--                <form>-->
-        <!--                  <div>-->
-        <!--                    <div class="form-group">-->
-        <!--                      <label for="work_at"> Worked At :</label><br />-->
-        <!--                      <input-->
-        <!--                              type="text"-->
-        <!--                              name="alias"-->
-        <!--                              id="work_at"-->
-        <!--                              placeholder="work at"-->
-        <!--                              class="form-control"-->
-        <!--                              ref="work_at"-->
-        <!--                              :value="userProfileOwner.workedAt"-->
-        <!--                      />-->
-        <!--                    </div>-->
-
-        <!--                    <div class="form-group">-->
-        <!--                      <label for="studied_at"> Studied At :</label><br />-->
-        <!--                      <input-->
-        <!--                              type="text"-->
-        <!--                              name="alias"-->
-        <!--                              id="studied_at"-->
-        <!--                              placeholder="studied at"-->
-        <!--                              class="form-control"-->
-        <!--                              :value="userProfileOwner.studiedAt"-->
-        <!--                              ref="studied_at"-->
-        <!--                      />-->
-        <!--                    </div>-->
-
-        <!--                    <div class="form-group">-->
-        <!--                      <label for="home_town"> Home Town :</label><br />-->
-        <!--                      <input-->
-        <!--                              type="text"-->
-        <!--                              name="alias"-->
-        <!--                              id="home_town"-->
-        <!--                              placeholder="home town"-->
-        <!--                              class="form-control"-->
-        <!--                              :value="userProfileOwner.homeTown"-->
-        <!--                              ref="home_town"-->
-        <!--                      />-->
-        <!--                    </div>-->
-
-        <!--                    <div class="form-group">-->
-        <!--                      <label for="city"> Current City :</label><br />-->
-        <!--                      <input-->
-        <!--                              type="text"-->
-        <!--                              name="alias"-->
-        <!--                              id="city"-->
-        <!--                              placeholder="work at"-->
-        <!--                              class="form-control"-->
-        <!--                              :value="userProfileOwner.currentCity"-->
-        <!--                              ref="city"-->
-        <!--                      />-->
-        <!--                    </div>-->
-        <!--                  </div>-->
-        <!--                </form>-->
-        <!--              </div>-->
-        <!--            </div>-->
-        <!--          </div>-->
-        <!--        </b-modal>-->
-
-        <b-modal
-          id="modal-5"
-          title=" Edit Intro"
-          ref="modal"
-          @show="resetModal"
-          @hidden="resetModal"
-          @ok="handleOk"
-        >
+        <b-modal id="modal-5" title=" Edit Intro">
           <div class="form-card">
             <div class="row">
               <div class="col-md-12">
-                <form ref="form" @submit.stop.prevent="handleSubmit">
-                  <b-form-group
-                    label="Worked At :"
-                    label-for="work_at"
-                    invalid-feedback="worked at is required"
-                    :state="workedAtState"
-                  >
-                    <b-form-input
-                      id="work_at"
-                      placeholder="work_at"
-                      :state="workedAtState"
-                      required
-                      v-model="userProfileOwnerInput.workedAt"
-                      :class="{
-                        'is-valid': userProfileOwnerInput.workedAt !== '',
-                        'is-invalid': userProfileOwnerInput.workedAt === ''
-                      }"
-                    ></b-form-input>
-                  </b-form-group>
-                  <b-form-group
-                    label="Studied At :"
-                    label-for="studied_at"
-                    invalid-feedback="studied at is required"
-                    :state="studiedAtState"
-                  >
-                    <b-form-input
-                      id="studied_at"
-                      placeholder="studied at"
-                      :state="studiedAtState"
-                      required
-                      v-model="userProfileOwnerInput.studiedAt"
-                      :class="{
-                        'is-valid': userProfileOwnerInput.studiedAt !== '',
-                        'is-invalid': userProfileOwnerInput.studiedAt === ''
-                      }"
-                    ></b-form-input>
-                  </b-form-group>
-                  <b-form-group
-                    label="Home Town :"
-                    label-for="home_town"
-                    invalid-feedback="home town at is required"
-                    :state="homeTownState"
-                  >
-                    <b-form-input
-                      id="home_town"
-                      placeholder="home town"
-                      :state="homeTownState"
-                      required
-                      v-model="userProfileOwnerInput.homeTown"
-                      :class="{
-                        'is-valid': userProfileOwnerInput.homeTown !== '',
-                        'is-invalid': userProfileOwnerInput.homeTown === ''
-                      }"
-                    ></b-form-input>
-                  </b-form-group>
-                  <b-form-group
-                    label="Current City :"
-                    label-for="city"
-                    invalid-feedback="current city is required"
-                    :state="currentCityState"
-                  >
-                    <b-form-input
-                      id="city"
-                      placeholder="Current City"
-                      :state="currentCityState"
-                      required
-                      v-model="userProfileOwnerInput.currentCity"
-                      :class="{
-                        'is-valid': userProfileOwnerInput.currentCity !== '',
-                        'is-invalid': userProfileOwnerInput.currentCity === ''
-                      }"
-                    ></b-form-input>
-                  </b-form-group>
-                </form>
+                <div class="form-group">
+                  <label for="work_at"> Worked At :</label><br />
+                  <input
+                    type="text"
+                    name="alias"
+                    id="work_at"
+                    placeholder="work at"
+                    class="form-control"
+                  />
+                </div>
+
+                <div class="form-group">
+                  <label for="studied_at"> Studied At :</label><br />
+                  <input
+                    type="text"
+                    name="alias"
+                    id="studied_at"
+                    placeholder="studied at"
+                    class="form-control"
+                  />
+                </div>
+
+                <div class="form-group">
+                  <label for="home_town"> Home Town :</label><br />
+                  <input
+                    type="text"
+                    name="alias"
+                    id="home_town"
+                    placeholder="home town"
+                    class="form-control"
+                  />
+                </div>
+
+                <div class="form-group">
+                  <label for="city"> Current City :</label><br />
+                  <input
+                    type="text"
+                    name="alias"
+                    id="city"
+                    placeholder="work at"
+                    class="form-control"
+                  />
+                </div>
               </div>
             </div>
           </div>
         </b-modal>
 
-        <!-- User Profile Post Followers-->
-        <!--<Followers />-->
+        <Followers />
 
-        <!-- User Profile Post Community-->
         <Community />
 
-        <!-- User Profile Post Media-->
         <Media />
       </b-col>
       <b-col md="12" lg="7" xl="8" class="m-0 p-0 px-lg-4">
@@ -258,7 +137,7 @@
 <script>
 import "@morioh/v-lightbox/dist/lightbox.css";
 
-//import Followers from "../../followers";
+import Followers from "../../followers";
 import Community from "./comunitiDashboard";
 import Owner_post from "./owner_post";
 import Media from "../../media";
@@ -267,32 +146,11 @@ import Media from "../../media";
 export default {
   name: "posts",
   components: {
-    //Followers,
+    Followers,
     Media,
     Owner_post,
     Community
   },
-  created() {
-    console.log("Load User Info");
-    this.$store.dispatch('loadUserPostIntro', null)
-            .then(response => {
-              console.log('Load User Intro test+++++ res')
-              console.log(response)
-              console.log("Load User Intro Finish Loading");
-              this.userProfileOwner = this.$store.getters.getUserPostIntro;
-              this.userProfileOwnerInput.workedAt = this.userProfileOwner.workedAt;
-              this.userProfileOwnerInput.studiedAt = this.userProfileOwner.studiedAt;
-              this.userProfileOwnerInput.homeTown = this.userProfileOwner.homeTown;
-              this.userProfileOwnerInput.currentCity = this.userProfileOwner.currentCity;
-              this.userProfileOwnerInput.numbersOfFollowers = this.userProfileOwner.numbersOfFollowers;
-              return response
-            })
-            .catch(error => {
-              console.log(error)
-            });
-  },
-
-
 
   data() {
     return {
@@ -321,35 +179,17 @@ export default {
       imagees: [
         "https://i.wifegeek.com/200426/f9459c52.jpg",
         "https://i.wifegeek.com/200426/5ce1e1c7.jpg"
-      ],
-      userProfileOwner: {
-        workedAt: "Current or Last Organization",
-        studiedAt: "Last Education",
-        homeTown: "Dummy",
-        currentCity: "Dummy",
-        numbersOfFollowers: 256
-      },
-      userProfileOwnerInput: {
-        workedAt: "",
-        studiedAt: "",
-        homeTown: "",
-        currentCity: "",
-        numbersOfFollowers: 0
-      },
-      workedAtState: null,
-      studiedAtState: null,
-      homeTownState: null,
-      currentCityState: null
+      ]
     };
   },
 
   methods: {
     chooseFiles: function() {
       console.log("helloo fucker");
-        document.getElementById("fileUpload").click()
-    }
+      document.getElementById("fileUpload").click();
+    },
   },
-}
+};
 </script>
 
 <style scoped>

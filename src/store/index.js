@@ -2766,14 +2766,10 @@ const actions = {
     return response_;
   },
   etbdetails({ commit }) {
-    return axios
-      .get(state.api_link + state.api_link_end, {
-        headers: { Authorization: `Bearer ${state.token}` }
-      })
-      .then(function({ data }) {
-        commit("set_details", data.data);
-        console.log(data);
-      });
+    return axios.get("/business/details", {}).then(function({ data }) {
+      commit("set_details", data.data);
+      console.log(data);
+    });
   }
 };
 

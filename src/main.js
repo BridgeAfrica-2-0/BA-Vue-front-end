@@ -70,10 +70,7 @@ Vue.use(VueSocialauth, {
   }
 });
 
-
-
-
-import FlashMessage from '@smartweb/vue-flash-message';
+import FlashMessage from "@smartweb/vue-flash-message";
 Vue.use(FlashMessage);
 
 
@@ -91,7 +88,7 @@ Vue.use(VueMaterial);
 
 
 import Lightbox from "@morioh/v-lightbox";
-import * as VueGoogleMaps from 'gmap-vue'
+import * as VueGoogleMaps from "gmap-vue";
 
 import VueSplide from "@splidejs/vue-splide";
 Vue.use(VueSplide);
@@ -127,33 +124,29 @@ import "@/assets/css/bootstrap.css";
 Vue.use(BootstrapVue);
 Vue.use(IconsPlugin);
 
-
-
-
-
 Vue.use(VueGoogleMaps, {
   load: {
-    key: 'AIzaSyAGZU6cqra18t1fhN1AbzRsEc_pgt7n2C8',
-    libraries: 'places',
+    key: "AIzaSyAGZU6cqra18t1fhN1AbzRsEc_pgt7n2C8",
+    libraries: "places"
   },
   autobindAllEvents: false,
   installComponents: true
 });
 
-
-
-
-
 Vue.component("v-select", vSelect);
+
+import i18n from "./i18n";
 
 Vue.config.productionTip = false;
 
 new Vue({
   router,
   store,
+  i18n,  
 
   created() {
-    const userInfo = localStorage.getItem('user')
+    const userInfo = localStorage.getItem("user");
+
     if (userInfo) {
       const userData = JSON.parse(userInfo);
       this.$store.commit("auth/setUserData", userData);
@@ -162,7 +155,7 @@ new Vue({
       (response) => response,
       (error) => {
         if (error.response.status === 401) {
-          this.$store.dispatch('auth/logout')
+          this.$store.dispatch("auth/logout");
         }
         return Promise.reject(error);
       }

@@ -4,7 +4,7 @@
       <b-col>
         <b-avatar
           variant="info"
-          :src="comment.profile_picture"
+          src="https://placekitten.com/300/300"
           class="avat-comment"
         ></b-avatar>
         <span class="float-right">
@@ -17,7 +17,7 @@
         <p class="msg text">
           <read-more
             more-str="read more"
-            :text="comment.comment"
+            :text="msg"
             link="#"
             less-str="read less"
             :max-chars="15000"
@@ -25,14 +25,14 @@
           </read-more>
         </p>
         <b-icon icon="suit-heart" variant="primary" aria-hidden="true"></b-icon>
-        {{ comment.likes.length }}
+        23
         <span @click="showReply" class="primary ml-2 reply"><b>Reply</b></span>
         <div v-if="reply">
           <b-row class="mt-2">
             <b-col cols="1">
               <b-avatar
                 variant="info"
-                :src="comment.profile_picture"
+                src="https://placekitten.com/300/300"
                 class="avat-comment"
               ></b-avatar>
             </b-col>
@@ -53,14 +53,12 @@
 
 <script>
 export default {
-  props: ["comment"],
-  created() {
-    //console.log("comment");
-    //console.log(this.comment);
-  },
   data() {
     return {
       reply: false,
+
+      msg:
+        " Lorem Ipsum has been the industry's   this is do goodfive centuries, but  the leap into electronic      this is do goodfive centuries, but  the leap into electronic        this is do goodfive centuries, but  the leap into electronic  this sis sit tit typesetting"
     };
   },
   methods: {

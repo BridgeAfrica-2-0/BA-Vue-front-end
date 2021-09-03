@@ -2,38 +2,45 @@
   <div>
     <b-alert v-if="edited" show> {{ successmsg }} </b-alert>
     <b-button
-      v-if="!editing"
+      v-if="editing == false"
       class="edit-btn float-right"
-      @click="edit(1)"
+      @click="edit(true)"
       variant="outline-primary"
       size="sm"
       >Edit Profile</b-button
     >
+
     <br />
+
     <br />
+
     <br />
+
+    <p v-if="editing == false">
+      {{ biography }}
+    </p>
     <div v-if="editing">
-      <b-form @submit.prevent="save">
+      <b-form @submit="save">
         <div style="width: 150px">
           <b-form-select
             required
             class="mb-2"
             size="sm"
-            v-model="biography.info_access"
+            v-model="selected"
             :options="options"
           ></b-form-select>
         </div>
         <b-form-textarea
           required
           id="textarea"
-          v-model="biography.description"
+          v-model="biography"
           placeholder="Enter something..."
           rows="3"
           max-rows="6"
         ></b-form-textarea>
         <div class="pt-2 action-btn">
           <b-button variant="success" type="submit">Save</b-button>
-          <b-button class="ml-2" variant="primary" @click="edit(0)"
+          <b-button class="ml-2" variant="primary" @click="edit(false)"
             >Cancel</b-button
           >
         </div>
@@ -44,84 +51,33 @@
 
 <script>
 export default {
-  created() {
-    console.log("Load User Biography start+++++++");
-    this.$store
-      .dispatch("loadUserBiography", null)
-      .then(response => {
-        console.log(response);
-        console.log("Load User Biography end+++++++");
-      })
-      .catch(error => {
-        console.log("Error from server or from browser ++++");
-        console.log(error);
-      })
-      .finally(() => {
-        this.biography = JSON.parse(
-          JSON.stringify(this.$store.getters.getProfileAboutBiography)
-        );
-        console.log(this.biography);
-      });
-  },
   data() {
     return {
+      text: "",
       editing: false,
+      selected: null,
       successmsg: "",
       edited: false,
-      access: null,
+      biography:
+        " Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis, aliquid cupiditate fugit similique laboriosam, expedita, voluptatibus dolorem atlibero ipsam illo molestiae. Voluptates quisquam vitae, aperiam voluptatem ad enim ducimus praesentium fuga quas unde ea quasi obcaecati eumlaboriosam eos nesciunt exercitationem voluptatibus cupiditate sunt totam?Dolor voluptatem repudiandae quos.",
       options: [
         { value: null, text: "Select" },
         { value: "private", text: "Private" },
         { value: "public", text: "Public" }
-      ],
-      biography: {
-        info_access: null,
-        description: null
-      }
+      ]
     };
   },
   methods: {
-    edit(value) {
-      if (value === 0) {
-        console.log("Update Biography User Cancel");
-        this.biography = JSON.parse(
-          JSON.stringify(this.$store.getters.getProfileAboutBiography)
-        );
-        console.log(this.biography);
-        this.edited = true;
-        this.successmsg = "Profile was succesfully Cancelled";
-        setInterval(() => {
-          this.edited = false;
-        }, 2000);
-      }
-      this.editing = !this.editing;
+    edit(state) {
+      this.editing = state;
     },
     save() {
       this.edited = true;
-      this.successmsg = "Profile was succesfully Edited";
+      this.successmsg = "Profile was sccesfully Edited";
       this.editing = false;
       setInterval(() => {
         this.edited = false;
-      }, 2000);
-      console.log("profile about save message start+++++++++");
-      console.log(this.biography);
-      this.$store
-        .dispatch("updateUserBiography", {
-          info_access: this.biography.info_access,
-          description: this.biography.description
-        })
-        .then(response => {
-          console.log("edit user biography after response (3) +++++");
-          console.log(response);
-          console.log("edit user biography endddd ++++");
-        })
-        .catch(error => {
-          console.log("erreur lie au navigateur ou au serveur error(2)");
-          console.log(error);
-          this.biography = JSON.parse(
-            JSON.stringify(this.$store.getters.getProfileAboutBiography)
-          );
-        });
+      }, 1000);
     }
   }
 };

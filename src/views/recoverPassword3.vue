@@ -14,39 +14,33 @@
           </b-card-text>
           <b-form class="w-75 mx-auto">
             <b-form-group id="input-group-4">
-
-               <md-field>
+              <md-field>
                 <label for="password1"> Password</label>
                 <md-input
                   type="password"
                   name="password1"
                   id="password1"
-                   v-model="password1"
-                   required
-                 
+                  v-model="password1"
+                  required
                 />
-               
               </md-field>
 
-
-
-               <md-field>
+              <md-field>
                 <label for="password2"> Confirm Password</label>
                 <md-input
                   type="password"
                   name="password2"
                   id="password2"
-                   v-model="password2"
-                   required
-                 
+                  v-model="password2"
+                  required
                 />
-               
               </md-field>
-
-
-
             </b-form-group>
-            <b-button class="btnz"  @click.prevent="next" variant="outline-primary">
+            <b-button
+              class="btnz"
+              @click.prevent="next"
+              variant="outline-primary"
+            >
               Finish
             </b-button>
           </b-form>
@@ -57,14 +51,14 @@
 </template>
 
 <script>
-import axios from "axios"; 
+import axios from "axios";
 export default {
   data() {
     return {
       code: "",
       password1: "",
       password2: "",
-      match: true,
+      match: true
     };
   },
   methods: {
@@ -83,76 +77,55 @@ export default {
       }
     },
 
+    next() {
+      if (this.password1 == this.password2) {
+        console.log(this.$store.state.auth.passwordToken.user.phone);
 
+        const resetpasswordUrl =
+          "user/resetpassword/" + this.$store.state.auth.passwordToken.user.id;
+        axios
+          .post(resetpasswordUrl, {
+            password: this.password1,
+            password_confirmation: this.password2,
+            phone: this.$store.state.auth.passwordToken.user.phone
+          })
+          .then(response => {
+            if (response.status === 200) {
+              var delayInMilliseconds = 2000;
 
+              setTimeout(function() {}, delayInMilliseconds);
 
-    
-     next() {
+              this.flashMessage.show({
+                status: "success",
+                title: "Password Reset Success",
+                message:
+                  "You have successfully Reset your password you will be redirected in a second"
+              });
 
-        if (this.password1 == this.password2) {
+              this.$router.push({ name: "Login" });
+            } else {
+              console.log(response.data);
+            }
+          })
+          .catch(err => {
+            if (err.response.status === 422) {
+              console.log({ err: err });
+              console.log(err.response.data.message);
 
-          console.log(this.$store.state.auth.passwordToken.user.phone);
-          
-            const resetpasswordUrl = 'user/resetpassword/' + this.$store.state.auth.passwordToken.user.id
-      axios
-        .post(resetpasswordUrl, {
-         password:this.password1,
-         password_confirmation:this.password2,
-         phone:this.$store.state.auth.passwordToken.user.phone,
-        })
-        .then((response) => {
-          if (response.status === 200) {
+              this.flashMessage.show({
+                status: "error",
 
-              var delayInMilliseconds = 2000; 
-
-               setTimeout(function() {
-  
-               }, delayInMilliseconds);
-
-             this.flashMessage.show({
-            status: "success",
-            title: "Password Reset Success",
-            message: "You have successfully Reset your password you will be redirected in a second",
+                message: err.response.data.message
+              });
+            }
           });
-            
-                this.$router.push({ name: "Login" });
-
-          } else {
-            console.log(response.data);
-          }
-        })
-        .catch((err) => {
-         
-            
-
-             if (err.response.status === 422) {
-
-             
-                console.log({ err: err });
-                console.log(err.response.data.message);
-
-                 this.flashMessage.show({
-            status: "error",
-           
-            message: err.response.data.message,
-          });
-
-
-           }
-
-        });
-
       } else {
         this.match = false;
         this.password1 = "";
         this.password2 = "";
       }
-
-      
-    },
-
-
-  },
+    }
+  }
 };
 </script>
 
@@ -183,12 +156,10 @@ export default {
   max-width: 30rem;
 }
 
-
-
 .verif-text {
   font-size: 25px;
   margin-top: 10px;
-   margin-bottom: 10px;
+  margin-bottom: 10px;
 }
 
 .image {
@@ -209,10 +180,6 @@ export default {
   max-width: 30rem;
 }
 
-
-   
-
-
 @media only screen and (max-width: 768px) {
   .image {
     width: 75%;
@@ -227,5 +194,4 @@ export default {
     padding-bottom: 100px !important;
   }
 }
- 
 </style>

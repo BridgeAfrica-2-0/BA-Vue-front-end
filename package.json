@@ -6,7 +6,8 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "dev": "vue-cli-service dev"
+    "dev": "vue-cli-service dev",
+    "i18n:report": "vue-cli-service i18n:report --src \"./src/**/*.?(js|vue)\" --locales \"./src/locales/**/*.json\""
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.35",
@@ -27,7 +28,6 @@
     "firebase": "^8.8.1",
     "gmap-vue": "^1.5.0",
     "ly-tab": "^2.1.2",
-    "moment": "^2.29.1",
     "node-sass": "^5.0.0",
     "register-service-worker": "^1.7.1",
     "sass-loader": "^11.0.1",

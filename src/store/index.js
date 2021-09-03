@@ -1,5 +1,6 @@
 import Vue from "vue";
 import Vuex from "vuex";
+
 import axios from "axios";
 //import axios from "axios";
 import auth from "./auth";
@@ -2892,9 +2893,7 @@ const actions = {
   },
   getbdetails({ commit }) {
     return axios
-        .get(state.api_link+state.api_link_end, {
-          headers: { Authorization: `Bearer ${state.token}` }
-        })
+        .get("/business/details", {})
         .then(function({ data }) {
           commit("set_details", data.data);
           console.log(data);

@@ -553,7 +553,7 @@
                       <br />
                     </p>
 
-                    <p>
+                             <p>
                       {{ business.about_business }} <b-link>Read More</b-link>
                     </p>
                   </b-col>

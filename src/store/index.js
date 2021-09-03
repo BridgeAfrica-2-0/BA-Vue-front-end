@@ -42,6 +42,7 @@ const getDefaultState = () => {
     token: "1|5EyNcoXFcd6d4j8kaizPr8E3gU9lRu9CHqAWPa03",
     count: "",
     todos: [],
+    bdetails: []
     userData: [
       {
         id: "",
@@ -1561,14 +1562,10 @@ const state = getDefaultState();
 
 const actions = {
   getbdetails({ commit }) {
-    return axios
-      .get(state.api_link+state.api_link_end, {
-        headers: { Authorization: `Bearer ${state.token}` }
-      })
-      .then(function({ data }) {
-        commit("set_details", data.data);
-        console.log(data);
-      });
+    return axios.get("/business/details", {}).then(function({ data }) {
+      commit("set_details", data.data);
+      console.log(data);
+    });
   }
 };
         console.log("change profile picture url " + url);

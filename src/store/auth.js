@@ -37,7 +37,7 @@ export default {
       state.verifyToken = data;
     },
 
-    setRegisterdata(state, data) {
+    setRegisterdata(state, data) { 
       state.registerData = data;
     },
 

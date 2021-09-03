@@ -16,21 +16,19 @@
           cols="12"
           md="12"
           lg="6"
-          v-for="(network, index) in getNetworksFromStore"
+          v-for="(network, index) in networks"
           :key="index"
         >
           <div class="people-style shadow">
             <b-row @click="viewNetwork(network)">
               <b-col md="3" xl="3" lg="3" cols="5" sm="3">
                 <div class="center-img" v-b-modal.modal-1>
-                  {{ network.business_image }}
                   <img
                     :src="
-                      `http://team2dev.maxinemoffett.com/${network.business_image}`
+                      `http://team2dev.maxinemoffett.com/api/v1/${network.image}`
                     "
                     alt=""
                   />
-                  <!-- <img :src="network.image[0]" class="r-image" /> -->
                 </div>
               </b-col>
               <b-col md="9" cols="7" lg="9" xl="9" sm="9">
@@ -67,18 +65,22 @@
                     </b-col>
                   </b-row>
 
-                  {{ network.business_id }}
+                  {{ network.network_category }}
                   <br />
                   20k Community <br />
 
                   <span class="location">
                     <b-icon-geo-alt class="ico"></b-icon-geo-alt>
-                    {{ network.business_address }}
+                    {{ network.address }}
                   </span>
                   <br />
 
                   {{ network.description.substring(0, 90) }}
-                  <b-link>Read More</b-link>
+                  <b-link
+                    @click="viewnetwork = true"
+                    v-if="network.description.length > 90"
+                    >Read More</b-link
+                  >
                 </p>
               </b-col>
             </b-row>
@@ -86,7 +88,14 @@
         </b-col>
       </b-row>
     </div>
-    <div class="h-100 w-100" v-if="!getNetworksFromStore">
+
+    <b-col v-if="loader" class="load">
+      <b-spinner
+        style="width: 7rem; height: 7rem;"
+        variant="primary"
+      ></b-spinner>
+    </b-col>
+    <div class="h-100 w-100" v-if="networks.length < 1 && !loader">
       <div class="mx-auto text-center my-5">
         <h2 class="my-3">Builds networks around your Business</h2>
         <p class="my-2">Create network to stay in touch with just the people</p>
@@ -159,7 +168,7 @@
             class="mb-0"
           >
             <b-form-input
-              v-model="createdNetwork.business_id"
+              v-model="createdNetwork.network_category"
               id="network_name"
               placeholder=""
               required
@@ -253,7 +262,7 @@
             >
             </b-form-checkbox>
           </b-form-group>
-          <b-alert :show="success.state" :variant="success.success">
+          <b-alert :show="success.state" variant="info">
             {{ success.msg }}</b-alert
           >
           <b-spinner v-if="loader" variant="primary"></b-spinner>
@@ -268,7 +277,12 @@
         </b-form>
       </b-container>
     </b-modal>
-    <b-modal id="modal-1" :title="chosenNetwork.name" hide-footer>
+    <b-modal
+      v-model="viewnetwork"
+      id="modal-1"
+      :title="chosenNetwork.name"
+      hide-footer
+    >
       <lightbox
         visible="true"
         css=" h-10"
@@ -281,13 +295,13 @@
           </router-link>
         </strong>
         <br />
-        {{ chosenNetwork.business_id }}
+        {{ chosenNetwork.network_category }}
         <br />
         20k Community <br />
 
         <span class="location">
           <b-icon-geo-alt class="ico"></b-icon-geo-alt>
-          {{ chosenNetwork.business_address }}
+          {{ chosenNetwork.address }}
         </span>
         <br />
 
@@ -298,7 +312,7 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from "vuex";
+import axios from "axios";
 export default {
   data() {
     return {
@@ -306,69 +320,118 @@ export default {
       selectedFile: "",
       editNet: false,
       dat: true,
+      networks: [],
+      viewnetwork: false,
+      loader: false,
+      success: {
+        state: false,
+        variant: "",
+        msg: "",
+      },
       createdNetwork: {
         name: "",
         description: "",
+        network_category: "",
         purpose: "",
         special_needs: "",
         business_address: "",
-        business_image: "",
+        image: "",
         allow_business: 0,
       },
       chosenNetwork: {
         name: "",
         description: "",
+        network_category: "",
         purpose: "",
         special_needs: "",
-        business_address: "",
-        business_image: "",
+        address: "",
+        image: "",
         allow_business: 0,
       },
     };
   },
   beforeMount() {
+    axios.defaults.headers.common["Authorization"] =
+      "Bearer " + localStorage.getItem("access_token");
     this.getNetworks();
   },
-  computed: {
-    getNetworksFromStore() {
-      return this.getNetworksFromstore();
-    },
-    loader() {
-      return this.getLoader();
-    },
-    success() {
-      return this.getSuccess();
-    },
-  },
+
   methods: {
-    ...mapGetters({
-      getNetworksFromstore: "profileOwner/getnetWorks",
-      getLoader: "profileOwner/getLoader",
-      getSuccess: "profileOwner/getSuccess",
-    }),
+    getNetworks() {
+      this.loader = true;
+      axios
+        .get("/network")
+        .then(res => {
+          this.loader = false;
+          this.networks = res.data.data;
+        })
+        .catch(err => {
+          this.loader = false;
+        });
+    },
+    // Add network to the database but doesn't work correctly for now
+    async addNetwork(newNetwork) {
+      this.loader = true;
+      axios
+        .post("/network", newNetwork)
+        .then(res => {
+          this.success.state = true;
+          this.success.msg = "Operation was successful !!";
+          setTimeout(() => {
+            this.success.state = false;
+          }, 5000);
+          this.getNetworks();
+        })
+        .catch(err => {
+          this.success.state = true;
+          this.success.msg = "Something wen't wrong !!";
+          setTimeout(() => {
+            this.success.state = false;
+          }, 5000);
+          this.loader = false;
+        });
+    },
 
-    // getting actions from the store
-    ...mapActions({
-      addNetwork: "profileOwner/addNetwork",
-      getNetworks: "profileOwner/getNetworks",
-      editNetwork: "profileOwner/editNetwork",
-      deleteNetwork: "profileOwner/deleteNetwork",
-    }),
-
+    // Edit a network
+    editNetwork(editedNetwork) {
+      axios
+        .post(`network/${editedNetwork.id}`, editedNetwork.data)
+        .then(res => {
+          this.success.state = true;
+          this.success.msg = "Operation was successful !!";
+          setTimeout(() => {
+            this.success.state = false;
+          }, 5000);
+          this.getNetworks();
+        })
+        .catch(err => {
+          this.success.state = true;
+          this.success.msg = "Something wen't wrong !!";
+          setTimeout(() => {
+            this.success.state = false;
+          }, 5000);
+          this.loader = false;
+        });
+    },
     // Action handler
     action() {
       const fd = new FormData();
-      fd.append("business_id", 1);
+      fd.append("business_id", "1");
       fd.append("name", this.createdNetwork.name);
-      fd.append("business_address", this.createdNetwork.business_address);
+      fd.append("address", this.createdNetwork.address);
+      fd.append("network_category", this.createdNetwork.network_category);
       fd.append("description", this.createdNetwork.description);
       fd.append("purpose", this.createdNetwork.purpose);
       fd.append("special_needs", this.createdNetwork.special_needs);
-      fd.append("business_image", this.createdNetwork.business_image);
-      fd.append("allow_busines", this.createdNetwork.allow_busines);
+      fd.append("image", this.createdNetwork.image);
+      fd.append("allow_business", this.createdNetwork.allow_busines);
       if (this.editNet) {
         fd.append("_method", "PUT");
-        this.editNetwork(fd);
+        let data = {
+          data: fd,
+          id: this.createdNetwork.id,
+        };
+        this.editNetwork(data);
       } else {
         this.addNetwork(fd);
       }
@@ -377,6 +440,7 @@ export default {
     //View network on pop up modal
     viewNetwork(network) {
       this.chosenNetwork = network;
+      this.viewnetwork = true;
     },
     showmodal(state, arg) {
       this.showModal = state;
@@ -384,9 +448,9 @@ export default {
         this.editNet = true;
       } else {
         this.editNet = false;
-        this.createdNetwork.business_image = "";
+        this.createdNetwork.image = "";
         this.createdNetwork.name = "";
-        this.createdNetwork.business_address = "";
+        this.createdNetwork.address = "";
         this.createdNetwork.description = "";
         this.createdNetwork.purpose = "";
         this.createdNetwork.special_needs = "";
@@ -397,10 +461,10 @@ export default {
     //Show Edit network modal
     showEditNetwork(network) {
       this.createdNetwork.id = network.id;
-      this.createdNetwork.business_image = network.business_image;
+      this.createdNetwork.image = network.image;
       this.createdNetwork.name = network.name;
       this.createdNetwork.business_id = network.business_id;
-      this.createdNetwork.business_address = network.business_address;
+      this.createdNetwork.address = network.address;
       this.createdNetwork.description = network.description;
       this.createdNetwork.purpose = network.purpose;
       this.createdNetwork.special_needs = network.special_needs;
@@ -408,13 +472,17 @@ export default {
       this.showmodal(true, "edit");
     },
     selectImage(e) {
-      this.createdNetwork.business_image = e.target.files[0];
+      this.createdNetwork.image = e.target.files[0];
     },
   },
 };
 </script>
 
 <style scoped>
+.load {
+  display: flex;
+  justify-content: center;
+}
 .post-pending {
   font-size: 12;
   text-align: left;

@@ -10,7 +10,7 @@ axios.defaults.baseURL = process.env.VUE_APP_API_URL;
 
 const getDefaultState = () => {
   return {
-    url_base: "http://team3dev.maxinemoffett.com",
+    url_base: process.env["VUE_APP_API_URL1 "],
     url_load_business_about: "/api/v1/business/info",
     url_update_business_about_name: "/api/v1/business/update",
     url_update_business_biography: "/api/v1/business/businessBiography",
@@ -21,16 +21,6 @@ const getDefaultState = () => {
     bdetails: [],
     userData: [
       {
-        id: "",
-        fullname: "",
-        username: "TONTON LA FORCE LE BEAU GOSSE",
-        email: "",
-        password: "",
-        profileName: "TONTON LA FORCE LE BEAU GOSSE",
-        profilePicture: null,
-        target: null,
-        coverImage: null,
-        numbersOfFollowers: 30,
         business_about: {
           biography: {
             title: "About Mapoure Agrobusiness",

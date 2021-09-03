@@ -58,14 +58,7 @@
                 </p>
               </h3>
             </b-col>
-            <b-col cols="5">
-              <!--   <img
-                fluid-grow
-                class="i-size"
-                src="../../assets/img/pchart.png"
-                alt=""
-              />   -->
-            </b-col>
+
           </b-row>
         </b-card>
       </b-col>
@@ -103,14 +96,6 @@
                   Total {{ "shares" }}: {{ business_insights.total_shares }}
                 </p>
               </h3>
-            </b-col>
-            <b-col cols="5">
-              <!--   <img
-                fluid-grow
-                class="i-size"
-                src="../../assets/img/pchart.png"
-                alt=""
-              />   -->
             </b-col>
           </b-row>
         </b-card>
@@ -151,94 +136,10 @@
               </h3>
             </b-col>
             <b-col cols="5">
-              <!--   <img
-                fluid-grow
-                class="i-size"
-                src="../../assets/img/pchart.png"
-                alt=""
-              />   -->
             </b-col>
           </b-row>
         </b-card>
       </b-col>
-
-<!--      <b-col xl="4" md="6" lg="6" sm="12">-->
-<!--        <b-card class="b-shadow">-->
-<!--          <b-row>-->
-<!--            <b-col cols="8">-->
-<!--              <h6 class="card-title mb-0">-->
-<!--                New Notifications-->
-<!--                <p class="s-text">From (Jan 1 - Jan 8)</p>-->
-<!--              </h6>-->
-<!--            </b-col>-->
-<!--            <b-col>-->
-<!--              <b-card-text class="f-right">-->
-<!--                <b-icon-->
-<!--                  v-b-tooltip.hover-->
-<!--                  title="Tooltip content goes in here"-->
-<!--                  icon="exclamation-circle-fill"-->
-<!--                  variant="dark"-->
-<!--                ></b-icon>-->
-<!--              </b-card-text>-->
-<!--            </b-col>-->
-<!--          </b-row>-->
-<!--          <br />-->
-<!--          <b-row>-->
-<!--            <b-col>-->
-<!--              <h3 class="mb-2 m-up">-->
-<!--                3,897-->
-<!--                <p class="s-text">Total Like: 79</p>-->
-<!--              </h3>-->
-<!--            </b-col>-->
-<!--            <b-col cols="5">-->
-<!--              <img-->
-<!--                fluid-grow-->
-<!--                class="i-size"-->
-<!--                src="../../assets/img/ggraph.png"-->
-<!--                alt=""-->
-<!--              /> </b-col-->
-<!--          ></b-row>-->
-<!--        </b-card>-->
-<!--      </b-col>-->
-
-<!--      <b-col xl="4" md="6" lg="6" sm="12">-->
-<!--        <b-card class="b-shadow">-->
-<!--          <b-row>-->
-<!--            <b-col cols="8">-->
-<!--              <h6 class="card-title mb-0">-->
-<!--                New Notifications-->
-<!--                <p class="s-text">From (Jan 1 - Jan 8)</p>-->
-<!--              </h6>-->
-<!--            </b-col>-->
-<!--            <b-col>-->
-<!--              <b-card-text class="f-right">-->
-<!--                <b-icon-->
-<!--                  v-b-tooltip.hover-->
-<!--                  title="Tooltip content goes in here"-->
-<!--                  icon="exclamation-circle-fill"-->
-<!--                  variant="dark"-->
-<!--                ></b-icon>-->
-<!--              </b-card-text>-->
-<!--            </b-col>-->
-<!--          </b-row>-->
-<!--          <br />-->
-<!--          <b-row>-->
-<!--            <b-col>-->
-<!--              <h3 class="mb-2 m-up">-->
-<!--                3,897-->
-<!--                <p class="s-text">Total Share: 79</p>-->
-<!--              </h3>-->
-<!--            </b-col>-->
-<!--            <b-col cols="5">-->
-<!--              <img-->
-<!--                fluid-grow-->
-<!--                class="i-size"-->
-<!--                src="../../assets/img/ggraph.png"-->
-<!--                alt=""-->
-<!--              /> </b-col-->
-<!--          ></b-row>-->
-<!--        </b-card>-->
-<!--      </b-col>-->
     </b-row>
     <b-row class="mr-35" v-else>
       No Business Insights !!! Enter Start Date and End Date to find Business
@@ -269,7 +170,6 @@ export default {
   },
   watch: {
     endDate(newValue) {
-      console.log("endDate+++++++++++", newValue);
       console.log(
         "endDate+++++++++++",
         moment(newValue, "YYYY-MM-DD").format("YYYY-MM-DD")
@@ -277,7 +177,6 @@ export default {
       this.load({ startDate: this.startDate, endDate: this.endDate });
     },
     startDate(newValue) {
-      console.log("startDate+++++++++++", newValue);
       console.log(
         "startDate+++++++++++",
         moment(newValue, "YYYY-MM-DD").format("YYYY-MM-DD")
@@ -299,19 +198,16 @@ export default {
       this.$store
         .dispatch("loadUserBusinessInsight", payload)
         .then(response => {
-          console.log("load Business Insights response in component (3)+++++");
-          console.log(response);
+          console.log("load Business Insights response in component (3)+++++", response);
           console.log("load Business Insights end +++++++");
         })
         .catch(error => {
-          console.log("error from the server or the browser error(2) ++++++");
-          console.log(error);
+          console.log("error from the server or the browser error(2) ++++++", error);
           console.log("Load Business Insights end +++++");
         })
         .finally(() => {
-          console.log("Finally load Business Insights +++++");
           this.business_insights = this.$store.getters.getBusinessInsights;
-          console.log(this.business_insights);
+          console.log("Finally load Business Insights +++++", this.business_insights);
         });
     }
   }

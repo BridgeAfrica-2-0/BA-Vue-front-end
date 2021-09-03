@@ -26,8 +26,8 @@ const getDefaultState = () => {
     token: "1|D8mzEzrdzrvlxeXUinBY8XDMgH8bVDtVOjv5xnZz",
     count: "",
     todos: [],
-    api_link:"https://94e9-154-72-150-118.ngrok.io/api/v1",
-    api_link_end:"/business/details",
+    api_link: "https://94e9-154-72-150-118.ngrok.io/api/v1",
+    api_link_end: "/business/details",
     token1: "8|Yx3DU4s08aFTYOCa3T2XJKZkjJV4leSi9b20oo5D",
     bdetails: [],
     userData: [
@@ -384,6 +384,7 @@ const getDefaultState = () => {
   };
 };
 
+const state = getDefaultState();
 
 const actions = {
   async loadUserProfileCommuntity(context, payload) {
@@ -427,13 +428,13 @@ const actions = {
   },
   getbdetails({ commit }) {
     return axios
-        .get(state.api_link+state.api_link_end, {
-          headers: { Authorization: `Bearer ${state.token}` }
-        })
-        .then(function({ data }) {
-          commit("set_details", data.data);
-          console.log(data);
-        });
+      .get(state.api_link + state.api_link_end, {
+        headers: { Authorization: `Bearer ${state.token}` }
+      })
+      .then(function({ data }) {
+        commit("set_details", data.data);
+        console.log(data);
+      });
   }
 };
 
@@ -460,5 +461,5 @@ export default new Vuex.Store({
     }
   },
   actions,
-  mutations,
+  mutations
 });

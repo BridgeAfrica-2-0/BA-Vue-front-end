@@ -98,13 +98,13 @@
                 class="b-color f-left"
                 style="color: white"
               >
-                {{ $t("Login") }}
+                {{ $t("login") }}
               </md-button>
             </b-col>
             <b-col cols="6">
               <router-link to="signup">
                 <md-button class="md-raised f-right"
-                  >{{ $t("signup ") }}
+                  >{{ $t("signup") }}
                 </md-button>
               </router-link>
             </b-col>
@@ -144,9 +144,9 @@
 
     <p class="text-center">
       <span class="display-inline">
-        <b-link @click="$i18n.locale = 'en'"> English</b-link>
+        <b-link @click="$i18n.locale = 'en'"> {{ $t("english") }}  </b-link>
         <span class="vl"></span>
-        <b-link class="ml-2" @click="$i18n.locale = 'fr'"> French </b-link>
+        <b-link class="ml-2" @click="$i18n.locale = 'fr'"> {{ $t("french") }} </b-link>
       </span>
       Bridge Africa © 2021
     </p>
@@ -212,17 +212,26 @@ export default {
     socialLogin(provider, response) {
       this.$http
         .post("user/social/" + provider, response)
-        .then((response) => {
-          console.log(response.data);
-
-          this.$store.commit("auth/setUserData", response.data);
+        .then(({ data }) => {  
+          console.log(data.data);
+         
+          this.$store.commit("auth/setUserData", data.data);
           this.flashMessage.show({
             status: "success",
 
             message: "Successfully Register",
           });
 
+          if(this.$store.state.auth.user.user.profile_complete==null){  
+
           this.$router.push({ name: "welcome" });
+            
+
+             }else{
+
+               this.$router.push({ name: "dashboard" });
+             }                  
+
         })
         .catch((err) => {
           console.log({ err: err });
@@ -250,7 +259,18 @@ export default {
         .then(() => {
           this.sending = false;
 
+
+ if(this.$store.state.auth.user.user.profile_complete==null){  
+
           this.$router.push({ name: "welcome" });
+            
+
+             }else{
+
+               this.$router.push({ name: "dashboard" });
+             }  
+
+
         })
         .catch((err) => {
           this.sending = false;

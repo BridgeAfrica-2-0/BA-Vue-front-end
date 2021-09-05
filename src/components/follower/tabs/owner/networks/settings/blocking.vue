@@ -15,7 +15,7 @@
           <span class="mr-auto">J. Circlehead</span>
           <span class=""><b-link href="#">Unblock</b-link></span>
         </b-li>
-       <hr width="100%" />
+        <hr width="100%" />
 
         <b-li class="d-flex align-items-center">
           <b-avatar
@@ -28,7 +28,7 @@
           <span class=""><b-link href="#">Unblock</b-link></span>
         </b-li>
 
-         <hr width="100%" />
+        <hr width="100%" />
 
         <b-li class="d-flex align-items-center m-list">
           <b-avatar class="mr-3" size="4em"></b-avatar>
@@ -37,7 +37,6 @@
         </b-li>
         <hr width="100%" />
 
-
         <b-li class="d-flex align-items-center">
           <b-avatar
             variant="primary"
@@ -46,12 +45,9 @@
             size="4em"
           ></b-avatar>
           <span class="mr-auto">itz blec blec</span>
-          <span class=""><b-link href="#">Unblock</b-link></span> 
-         
+          <span class=""><b-link href="#">Unblock</b-link></span>
         </b-li>
         <hr width="100%" />
-
-
       </b-li-group>
     </b-container>
   </b-container>

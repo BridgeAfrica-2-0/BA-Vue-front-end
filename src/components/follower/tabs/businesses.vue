@@ -1,29 +1,19 @@
 <template>
   <div>
-  
-      <fas-icon class="primary mr-2 pt-1 icon-size primary" :icon="['fas', 'handshake']" /> Businesses
-       
-        <hr /> 
+    <fas-icon
+      class="primary mr-2 pt-1 icon-size primary"
+      :icon="['fas', 'handshake']"
+    />
+    Businesses
 
-
-
-
-
+    <hr />
 
     <div class="business" v-if="noBusiness == false">
+      <b-row>
+        <b-col lg="6"> <Business /> </b-col>
 
-      
-
-     <b-row>   <b-col lg="6">   
-      <Business />    </b-col>      
-      
-        <b-col lg="6">  
-      <Business />     </b-col>   
-      
-          </b-row>
-
-
- 
+        <b-col lg="6"> <Business /> </b-col>
+      </b-row>
     </div>
     <div v-show="noBusiness" class="no-business">
       <b-container>
@@ -40,12 +30,12 @@ import Business from "../business";
 export default {
   data() {
     return {
-      noBusiness: false,
+      noBusiness: false
     };
   },
   components: {
-    Business,
-  },
+    Business
+  }
 };
 </script>
 

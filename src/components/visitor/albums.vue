@@ -2,7 +2,13 @@
   <div>
     <div v-if="albumShow" class="main-album">
       <div class="p-4 album" v-for="post in posts" :key="post.id">
-        <b-img v-if="post.image" :src="post.image" width="250" rounded fluid></b-img>
+        <b-img
+          v-if="post.image"
+          :src="post.image"
+          width="250"
+          rounded
+          fluid
+        ></b-img>
         <div @click="openAlbum" class="overlay">
           <div>
             <span class="text-hover">
@@ -57,19 +63,19 @@ export default {
           image: "https://picsum.photos/300/150/?image=41",
           title: "Title 2",
           text:
-            " Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum quam, doloribus id sit consequuntur tempora molestiae blanditiis.",
-        },
+            " Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum quam, doloribus id sit consequuntur tempora molestiae blanditiis."
+        }
       ],
       images: [
         {
           id: 1,
-          image: "https://picsum.photos/300/150/?image=41",
+          image: "https://picsum.photos/300/150/?image=41"
         },
         {
           id: 2,
-          image: "https://picsum.photos/300/150/?image=41",
-        },
-      ],
+          image: "https://picsum.photos/300/150/?image=41"
+        }
+      ]
     };
   },
   methods: {
@@ -83,8 +89,8 @@ export default {
     },
     showModal() {
       this.$refs["modal-1"].show();
-    },
-  },
+    }
+  }
 };
 </script>
 
@@ -113,7 +119,7 @@ export default {
   position: relative;
   top: 60px;
 }
-.album-detail{
+.album-detail {
   text-align: center;
 }
 .album-name {
@@ -125,7 +131,7 @@ export default {
   flex-wrap: wrap;
 }
 
-.image{
+.image {
   cursor: pointer;
 }
 </style>

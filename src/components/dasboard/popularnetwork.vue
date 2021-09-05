@@ -15,7 +15,9 @@
             <img :src="item.picture" class="r-image" />
           </div>
         </b-col>
-        <b-col md="5" cols="7" lg="7" xl="5" sm="5">
+        <b-col md="5" cols="7"  lg="7" xl="5" sm="5">
+         
+
           <p class="textt">
             <strong class="net-title"> {{ item.name }} </strong> <br />
             {{ item.category }}
@@ -53,15 +55,19 @@
                   size="sm"
                   class="b-background shadow"
                   variant="primary"
-                >
-                  <i class="fas fa-envelope   fa-lg btn-icon "></i>
+
+                  ><i class="fas fa-envelope   fa-lg btn-icon "></i>
                   <span class="btn-text">Message</span>
                 </b-button>
               </b-col>
 
-              <b-col md="12" lg="4" xl="12" sm="12" cols="4" class="mt-2">
-              </b-col>
-            </b-row>
+            <b-col md="12"  lg="4"  xl="12" sm="12" cols="4" class="mt-2"> 
+
+            
+
+            </b-col>  
+   </b-row>
+
           </div>
         </b-col>
       </b-row>
@@ -91,45 +97,62 @@ export default {
 </script>
 
 <style scoped>
+
+
 @media only screen and (min-width: 768px) {
-  .btn-text {
-    margin-left: 8px;
-  }
+.btn-text{
 
-  .btn-com {
-    margin-left: 4px;
-  }
-  .btn-icon {
-    margin-top: 3px;
-  }
-
-  .center-img {
-    margin-right: -60px;
-  }
+   margin-left: 8px;
 }
+
+.btn-com{
+  margin-left:4px;
+}
+.btn-icon{
+  margin-top:3px;
+}
+
+.center-img{
+  margin-right: -60px;
+}
+
+
+}
+
 
 @media only screen and (max-width: 768px) {
-  .btn-icon {
-    margin-top: 3px;
-  }
 
-  .btn-text {
-    margin-left: 5px;
-  }
+    
 
-  .btn-com {
-    margin-left: 3px;
-  }
+    .btn-icon{
+  margin-top:3px;
 }
 
-.btnpngs {
-  width: 20px;
-  margin-right: 5px;
+
+.btn-text{
+
+   margin-left: 5px;
 }
 
-.btn {
+
+.btn-com{
+  margin-left:3px;
+}
+
+
+}
+
+.btnpngs{
+      width: 20px;
+    margin-right: 5px;
+}
+
+.btn{
   border-radius: 5px;
 }
+
+
+
 
 .card {
   color: orange;
@@ -142,119 +165,153 @@ export default {
   padding: 15px;
 }
 
+
+
+
+
+
+
 @media only screen and (max-width: 768px) {
-  .a-flex {
-    margin-right: -15px;
-  }
+   .a-flex{
+     margin-right: -15px;
+   }
+
 
   .s-button {
-    padding: 15px;
-    margin-top: -15px;
-  }
+  
 
-  .net-title {
-    font-size: 16px;
-    color: black;
+  padding: 15px;
+  margin-top: -15px;
+}
 
-    line-height: 35px;
-    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  }
+.net-title{
+  font-size: 16px;
+   color:black;
+ 
+ line-height: 35px;
+  font-family: 'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif;
+}
 
-  .textt {
-    color: #000;
-
-    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+.textt {
+  color: #000;
+  
+    font-family: 'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif;
     font-weight: normal;
     font-size: 14px;
     line-height: 30px;
-    color: rgba(117, 114, 128, 1);
+    color: rgba(117,114,128,1);
     text-align: left;
 
-    font-weight: normal;
-    line-height: 20px;
-    font-style: normal;
+Font-weight: normal ;
+Line-height:20px ;
+font-style:normal;
 
-    padding: 1px;
-    text-align: left;
 
-    margin-left: -30px;
+padding: 1px;
+  text-align: left;
 
-    margin-right: -5px;
+  margin-left: -30px;
 
-    line-height: 25px;
-  }
+  margin-right: -5px;
 
-  .location {
-    margin-bottom: 30px;
-  }
-
-  .btn {
-    padding-top: 6px;
-    font-size: 10px;
-
-    height: 28px;
-    width: 85px;
-  }
-
-  .r-image {
-    border-radius: 8px;
-
-    height: 100px;
-    width: 100px;
-  }
+  line-height: 25px;
 }
+
+.location{
+
+  margin-bottom: 30px;
+}
+
+.btn{
+  padding-top: 6px;
+  font-size:10px;
+
+  Height : 28px;
+Width:85px
+
+}
+
+
+
+.r-image {
+  border-radius: 8px;
+
+ Height : 100px;
+Width:100px
+
+}
+
+
+
+}
+
+
+
+
+
 
 @media only screen and (min-width: 768px) {
-  .net-title {
-    font-size: 20px;
-    color: black;
 
-    line-height: 35px;
-    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  }
+.net-title{
+  font-size: 20px;
+   color:black;
+ 
+ line-height: 35px;
+  font-family: 'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif;
+}
 
-  .textt {
-    color: #000;
-
-    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+.textt {
+  color: #000;
+  
+    font-family: 'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif;
     font-weight: normal;
     font-size: 14px;
     line-height: 30px;
-    color: rgba(117, 114, 128, 1);
+    color: rgba(117,114,128,1);
     text-align: left;
 
-    font-weight: normal;
-    line-height: 20px;
-    font-style: normal;
+Font-weight: normal ;
+Line-height:20px ;
+font-style:normal;
 
-    padding: 1px;
-    text-align: left;
 
-    margin-left: 30px;
+padding: 1px;
+  text-align: left;
 
-    margin-right: -5px;
+  margin-left: 30px;
 
-    line-height: 25px;
-  }
+  margin-right: -5px;
 
-  .location {
-    margin-bottom: 30px;
-  }
-
-  .btn {
-    padding-top: 6px;
-
-    height: 38px;
-    width: 123px;
-  }
-
-  .r-image {
-    border-radius: 8px;
-
-    height: 160px;
-    width: 160px;
-  }
+  line-height: 25px;
 }
+
+.location{
+
+  margin-bottom: 30px;
+}
+
+.btn{
+  padding-top: 6px;
+
+  Height : 38px;
+Width:123px
+
+}
+
+
+
+.r-image {
+  border-radius: 8px;
+
+ Height : 160px;
+Width:160px
+
+}
+
+
+
+}
+
 
 .stock {
   color: green;
@@ -272,6 +329,8 @@ export default {
 }
 
 .btn {
+  
+
   display: flex;
 }
 
@@ -279,65 +338,96 @@ export default {
   margin-right: 5px;
 }
 
+
+
+
 @media only screen and (min-width: 768px) {
   .people-style {
-    border-top-left-radius: 5px;
+  border-top-left-radius: 5px;
 
-    border-bottom-left-radius: 5px;
+  border-bottom-left-radius: 5px;
 
-    border-top-right-radius: 5px;
+  border-top-right-radius: 5px;
 
-    border-bottom-right-radius: 5px;
+  border-bottom-right-radius: 5px;
 
-    background: white;
+  background: white;
 
-    background-color: #fff;
-    background-clip: border-box;
-    border: 1px solid rgba(0, 0, 0, 0.125);
-    margin-bottom: 10px;
+  background-color: #fff;
+  background-clip: border-box;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  margin-bottom: 10px;
+  
 
-    margin-right: 8px;
+  
 
-    padding: 7px;
-  }
+
+  margin-right: 8px;
+ 
+
+  padding: 7px;
 }
+
+}
+
+
+
 
 @media only screen and (max-width: 768px) {
   .people-style {
-    border-top-left-radius: 5px;
+  border-top-left-radius: 5px;
 
-    border-bottom-left-radius: 5px;
+  border-bottom-left-radius: 5px;
 
-    border-top-right-radius: 5px;
+  border-top-right-radius: 5px;
 
-    border-bottom-right-radius: 5px;
+  border-bottom-right-radius: 5px;
 
-    background: white;
 
-    background-color: #fff;
-    background-clip: border-box;
-    border: 1px solid rgba(0, 0, 0, 0.125);
-    margin-bottom: 10px;
 
-    margin-right: 8px;
 
-    padding: 7px;
-  }
+  background: white;
 
-  .btn {
-    display: flex;
+  background-color: #fff;
+  background-clip: border-box;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  margin-bottom: 10px;
+
+  margin-right: 8px;
+ 
+
+  padding: 7px;
+}
+
+
+
+
+
+.btn {
+ 
+
+  display: flex;
 
     padding-right: 60px;
-  }
-
-  h4 {
-    font-size: 15px;
-  }
 }
 
-@media only screen and (max-width: 520px) {
-  .btn {
+h4{
+  font-size: 15px;
+}
+
+}
+
+
+
+
+
+
+@media only screen and (max-width: 520px){
+
+.btn {
     display: flex;
-  }
+    
 }
+}
+
 </style>

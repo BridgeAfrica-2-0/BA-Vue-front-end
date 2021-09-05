@@ -1,12 +1,6 @@
 <template>
   <div>
-    
-
-
-
-
-    
-     <div class="people-style border shadow">
+    <div class="people-style border shadow">
       <b-row>
         <b-col cols="6">
           <div style="height: 100%;">
@@ -19,19 +13,13 @@
           </div>
         </b-col>
         <b-col>
-         
-
           <p class="text">
-            <strong> Shipping Network </strong> <br />  <br />
+            <strong> Shipping Network </strong> <br />
+            <br />
             Public <br />
-             20k Members <br />
-             Business Name <br />
-            
+            20k Members <br />
+            Business Name <br />
           </p>
-
-
-
-
         </b-col>
       </b-row>
 
@@ -48,20 +36,15 @@
           </b-button>
         </b-col>
 
-        <b-col cols="4">
-          
-        </b-col>
+        <b-col cols="4"> </b-col>
       </b-row>
     </div>
-
-
-
   </div>
 </template>
 
 <script>
 export default {
-  props: ["title", "image"],
+  props: ["title", "image"]
 };
 </script>
 
@@ -78,9 +61,6 @@ export default {
   color: green;
 }
 
-
-
-
 .people-style {
   border-top-left-radius: 5px;
 
@@ -96,12 +76,9 @@ export default {
   background-clip: border-box;
   border: 1px solid rgba(0, 0, 0, 0.125);
   margin-bottom: 10px;
- 
 
   padding: 7px;
 }
-
-
 
 .btn {
   font-size: 10px;
@@ -109,5 +86,4 @@ export default {
 
   padding-right: 70px;
 }
-
 </style>

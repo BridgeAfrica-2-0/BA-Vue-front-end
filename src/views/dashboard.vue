@@ -137,12 +137,29 @@ import Map from "@/components/dasboard/map";
 import EmptyBusiness from "@/components/dasboard/emptybusiness";
 
 import Popularnetwork from "@/components/dasboard/popularnetwork";
+<<<<<<<<< Temporary merge branch 1
+=========
+//import Hotbusiness from "@/components/dasboard/hotbusiness";
+//import People from '../components/businessOwner/tabs/owner/networks/people.vue';
+>>>>>>>>> Temporary merge branch 2
 
 export default {
   name: "dashboard",
   data() {
     return {
       slide: 0,
+<<<<<<<<< Temporary merge branch 1
+=========
+      sliding: null,
+
+      selected: "all",
+      location: "any",
+      category: "any",
+      post: "any",
+      selectedb: "owner",
+
+      educatio: "any",
+>>>>>>>>> Temporary merge branch 2
 
       sliding: null,
 
@@ -154,8 +171,81 @@ export default {
         { value: "owner", text: "Owner's Name" },
         { value: "a", text: "Business Name 1" },
         { value: "b", text: "Business Name 2" },
+<<<<<<<<< Temporary merge branch 1
         { value: "c", text: "Business Name 3" }
       ]
+=========
+        { value: "c", text: "Business Name 3" },
+      ],
+
+      optionss: [
+        { id: "all", label: "All" },
+        { id: "business", label: "Business" },
+        { id: "people", label: "People" },
+        { id: "network", label: "Network" },
+        { id: "marketplace", label: "Markeplace", notEnabled: true },
+        { id: "posts", label: "Posts" },
+      ],
+
+      options: [
+        { item: "all", name: "All" },
+        { item: "business", name: "Business" },
+        { item: "people", name: "People" },
+        { item: "network", name: "Network" },
+        { item: "marketplace", name: "Markeplace", notEnabled: false },
+        { item: "posts", name: "Posts" },
+      ],
+      filters: [
+        { item: "any", name: "Location : Any" },
+        { item: "yaounde", name: "Yaounde, Cameroon" },
+        { item: "dhaka ", name: "Dhaka, Bangladesh" },
+        { item: "new york", name: "New York, United States" },
+        { item: "douala", name: "Douala, Cameroon" },
+        { item: "karachi", name: "Karachi, Pakistan" },
+      ],
+      categories: [
+        { item: "any", name: "Category : Any" },
+        { item: "restaurant", name: "Restaurant" },
+        { item: "home service", name: "Home Services" },
+        { item: "auto service", name: "Auto Services" },
+        { item: "argiculture", name: "Agriculture" },
+        { item: "technology", name: "Technology" },
+      ],
+      posts: [
+        { item: "any", name: "Post: Any" },
+        { item: "people", name: "People I am following" },
+        { item: "business", name: "Businesses i am following" },
+        { item: "networks", name: "Networks I am following" },
+      ],
+
+      education: [
+        { item: "any", name: "Education: Any" },
+        { item: "ub", name: "University Of Buea" },
+        { item: "uba", name: "University Of Yaounde" },
+        { item: "uy", name: "University Of Yaounde 1" },
+      ],
+
+      profession: [
+        { item: "any", name: "Profession: Any" },
+        { item: "engineer", name: "Engineen" },
+        { item: "teacher", name: "Teacher" },
+        { item: "farmer", name: "Farmer" },
+      ],
+
+      workplace: [
+        { item: "any", name: "Post: Any" },
+        { item: "yaounde", name: "Yaounde" },
+        { item: "douala", name: "Douala" },
+        { item: "Buea", name: "Buea" },
+      ],
+
+      sponsoredBusinesses: [
+        { title: "Business 1" },
+        { title: "Business 2" },
+        { title: "Business 3" },
+        { title: "Business 4" },
+      ],
+>>>>>>>>> Temporary merge branch 2
     };
   },
   components: {
@@ -177,9 +267,13 @@ export default {
     Profile,
 
     CarousselDashboard,
+<<<<<<<<< Temporary merge branch 1
     Navbar
+=========
+    Navbar,
+>>>>>>>>> Temporary merge branch 2
   },
-  methods: {}
+  methods: {},
 };
 </script>
 

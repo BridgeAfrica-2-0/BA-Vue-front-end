@@ -7,14 +7,9 @@
           <div v-if="show">
             <b-col class="pr-0">
               <div class="right-mobile">
-                
                 <b-row>
                   <b-col>
-                    <b-avatar
-                      variant="primary"
-                      text="LV"
-                      size="50"
-                    ></b-avatar>
+                    <b-avatar variant="primary" text="LV" size="50"></b-avatar>
                   </b-col>
                   <b-col>
                     <h4>Messages</h4>
@@ -109,7 +104,10 @@
             </div>
           </b-col>
 
-          <b-col cols="8" v-if="show == false && info == false && newMsg == false">
+          <b-col
+            cols="8"
+            v-if="show == false && info == false && newMsg == false"
+          >
             <div class="chat-nav">
               <b-row class="mobile">
                 <b-col class="col-1">
@@ -258,7 +256,7 @@
           <b-col v-if="info">
             <div class="info-nav">
               <b-button class="primary-bg" @click="showInfo(false)">
-               <fas-icon :icon="['fas', 'arrow-left']" />
+                <fas-icon :icon="['fas', 'arrow-left']" />
               </b-button>
               <span class="cnt-info"> Contact Info</span>
             </div>
@@ -297,14 +295,14 @@
               </ul>
             </div>
             <div class="info-media">
-             <b-row>
-               <b-col>
+              <b-row>
+                <b-col>
                   Media
-               </b-col>
-               <b-col cols="3">
-                 <b-link>See All</b-link>
-               </b-col>
-             </b-row>
+                </b-col>
+                <b-col cols="3">
+                  <b-link>See All</b-link>
+                </b-col>
+              </b-row>
               <div class="media">
                 <img
                   src="@/assets/img/about1.jpg"
@@ -394,7 +392,6 @@
         </b-row>
       </div>
     </div>
-   
   </div>
 </template>
 
@@ -403,8 +400,7 @@ import Navbar from "@/components/navbar";
 
 export default {
   components: {
-    Navbar,
-
+    Navbar
   },
   data() {
     return {
@@ -412,7 +408,7 @@ export default {
         type: "",
         name: "Louis Litt",
         timeStamp: "",
-        message: "",
+        message: ""
       },
       newMsg: false,
       show: false,
@@ -426,7 +422,7 @@ export default {
           name: "Louis Litt",
           timeStamp: "3:00 PM",
           message:
-            "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Explicabo, quos? Fuga, nam dolores? Tempora, qui.",
+            "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Explicabo, quos? Fuga, nam dolores? Tempora, qui."
         },
         {
           id: 1,
@@ -434,7 +430,7 @@ export default {
           name: "Louis Litt",
           timeStamp: "3:00 PM",
           message:
-            "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Explicabo, quos? Fuga, nam dolores? Tempora, qui.",
+            "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Explicabo, quos? Fuga, nam dolores? Tempora, qui."
         },
         {
           id: 2,
@@ -442,7 +438,7 @@ export default {
           name: "Louis Litt",
           timeStamp: "3:00 PM",
           message:
-            "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Explicabo, quos? Fuga, nam dolores? Tempora, qui.",
+            "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Explicabo, quos? Fuga, nam dolores? Tempora, qui."
         },
         {
           id: 3,
@@ -450,7 +446,7 @@ export default {
           name: "Louis Litt",
           timeStamp: "3:00 PM",
           message:
-            "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Explicabo, quos? Fuga, nam dolores? Tempora, qui.",
+            "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Explicabo, quos? Fuga, nam dolores? Tempora, qui."
         },
         {
           id: 4,
@@ -458,7 +454,7 @@ export default {
           name: "Louis Litt",
           timeStamp: "3:00 PM",
           message:
-            "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Explicabo, quos? Fuga, nam dolores? Tempora, qui.",
+            "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Explicabo, quos? Fuga, nam dolores? Tempora, qui."
         },
         {
           id: 5,
@@ -466,65 +462,65 @@ export default {
           name: "Louis Litt",
           timeStamp: "3:00 PM",
           message:
-            "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Explicabo, quos? Fuga, nam dolores? Tempora, qui.",
-        },
+            "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Explicabo, quos? Fuga, nam dolores? Tempora, qui."
+        }
       ],
       messages: [
         {
           id: 0,
           name: "Louis Litt",
           startMessage: "Lorem ipsum dolor sit amet.",
-          timeStamp: "7:00am",
+          timeStamp: "7:00am"
         },
         {
           id: 1,
           name: "Louis Litt",
           startMessage: "Lorem ipsum dolor sit amet.",
-          timeStamp: "7:00am",
+          timeStamp: "7:00am"
         },
         {
           id: 3,
           name: "Louis Litt",
           startMessage: "Lorem ipsum dolor sit amet.",
-          timeStamp: "7:00am",
+          timeStamp: "7:00am"
         },
         {
           id: 4,
           name: "Louis Litt",
           startMessage: "Lorem ipsum dolor sit amet.",
-          timeStamp: "7:00am",
+          timeStamp: "7:00am"
         },
         {
           id: 5,
           name: "Louis Litt",
           startMessage: "Lorem ipsum dolor sit amet.",
-          timeStamp: "7:00am",
+          timeStamp: "7:00am"
         },
         {
           id: 6,
           name: "Louis Litt",
           startMessage: "Lorem ipsum dolor sit amet.",
-          timeStamp: "7:00am",
+          timeStamp: "7:00am"
         },
         {
           id: 7,
           name: "Louis Litt",
           startMessage: "Lorem ipsum dolor sit amet.",
-          timeStamp: "7:00am",
+          timeStamp: "7:00am"
         },
         {
           id: 8,
           name: "Louis Litt",
           startMessage: "Lorem ipsum dolor sit amet.",
-          timeStamp: "7:00am",
+          timeStamp: "7:00am"
         },
         {
           id: 9,
           name: "Louis Litt",
           startMessage: "Lorem ipsum dolor sit amet.",
-          timeStamp: "7:00am",
-        },
-      ],
+          timeStamp: "7:00am"
+        }
+      ]
     };
   },
   methods: {
@@ -550,8 +546,8 @@ export default {
       this.message.message = this.text;
       this.chats.push(this.message);
       this.text = "";
-    },
-  },
+    }
+  }
 };
 </script>
 

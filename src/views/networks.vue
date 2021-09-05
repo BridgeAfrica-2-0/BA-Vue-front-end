@@ -75,6 +75,7 @@ export default {
   name: "networks",
   components: {
     General,
+
     LyTab,
     Default,
     Inbox,
@@ -121,7 +122,7 @@ export default {
     margin-top: 20px;
   }
 
-  /** 
+  /**
   
 .lynetowrk .ly-tab-active-bar {
     position: absolute;

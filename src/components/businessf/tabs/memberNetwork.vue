@@ -1,18 +1,12 @@
 <template>
   <div class="mt-3 p-0">
-   
-      <b-card class="f-left p-0">
+    <b-card class="f-left p-0">
+      <b-tabs pills content-class="mt-3 f-left">
+        <b-tab title="People" active> <People /> </b-tab>
 
-
-        <b-tabs  pills content-class="mt-3 f-left">
-          <b-tab title="People" active> <People />  </b-tab>
-
-          <b-tab title="Businesses"> <Businesses /> </b-tab>
-        </b-tabs>
-
-
-      </b-card>
-   
+        <b-tab title="Businesses"> <Businesses /> </b-tab>
+      </b-tabs>
+    </b-card>
   </div>
 </template>
 
@@ -79,7 +73,7 @@ hr {
   }
 }
 
-.card-body{
+.card-body {
   padding-left: 0px;
   padding-right: 0px;
 }

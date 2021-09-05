@@ -12,14 +12,28 @@
         Discover how customers feel about and interact with you  {{myValue.business[selectedb-2].total_shares}}
       </p>
 
-      <div class="a-content">
-        <line-chart
-          ref="skills_chart"
-          :chart-data="chartData"
-          :options="options"
-          class="chart"
-        ></line-chart>
-      </div>
+        <div class="a-content"> 
+            
+            <line-chart
+                    ref="skills_chart"
+                    :chart-data="chartData"
+                    :options="options"
+                    class="chart"
+                  ></line-chart>
+                  
+                  
+             </div>      
+     
+
+          
+
+                
+                  
+              
+             
+            
+        
+    
     </b-card>
   </div>
 </template>
@@ -39,56 +53,23 @@ export default {
   name: "businessDashboard",
   components: { LineChart },
   data() {
-    return {
+    return {    
       options,
       chartData: {
-        labels: ["Posts 33k"+this.$store.state.details.business[this.selectedb-2].total_shares, "Visit 1.4k"+this.$store.state.details.business[this.selectedb-2].total_visit, "Share 870"],
+        labels: ["Posts 33k", "Visit 1.4k", "Share 870"],
         datasets: [
           {
             backgroundColor: ["#f2f200", "#8c008a", "#40c600"],
-            data: [
-              this.$store.state.details.business[this.selectedb-2].total_shares,3,2
-            ]
+            data: [100, 50, 20]
           }
         ]
       }
-
     };
   },
   computed: {
     currentDataSet() {
       return this.chartData.datasets[0].data;
-    },
-    myValue() {
-      return this.$store.getters.getdetails;
     }
-  },
-  props: ["selectedb"],
-
-  watch: {
-
-    selectedb:function(newVal) {
-
-     // this.update();
-      console.log(newVal);
-      console.log("hello you")
-
-    }
-
-  },
-
-
-
-
-  created() {
-    this.$store
-      .dispatch("getdetails")
-      .then(() => {
-        console.log("the response");
-      })
-      .catch(err => {
-        console.log({ err: err });
-      });
   }
 };
 </script>
@@ -105,7 +86,8 @@ export default {
   padding-left: 10px;
 }
 
-.c-h {
+
+.c-h{
   height: 400px;
 }
 .chart {
@@ -117,8 +99,8 @@ export default {
   line-height: 40px;
 }
 
-.a-content {
+.a-content{
   align-content: center;
-  text-align: center;
+  text-align:center;
 }
 </style>

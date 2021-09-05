@@ -57,12 +57,8 @@
 
       <div v-if="selectedb != 'owner'">
         <b-row>
-          <b-col md="6" sm="12" class="mt-2">
-            <BusinessDashboard :selectedb="selectedb" />
-          </b-col>
-          <b-col md="6" sm="12" class="mt-2">
-            <Insights :selectedb="selectedb" />
-          </b-col>
+          <b-col md="6" sm="12" class="mt-2"> <BusinessDashboard /> </b-col>
+          <b-col md="6" sm="12" class="mt-2"> <Insights /> </b-col>
         </b-row>
       </div>
       <br />
@@ -141,9 +137,9 @@ import Map from "@/components/dasboard/map";
 import EmptyBusiness from "@/components/dasboard/emptybusiness";
 
 import Popularnetwork from "@/components/dasboard/popularnetwork";
+
 export default {
   name: "dashboard",
-
   data() {
     return {
       slide: 0,
@@ -154,14 +150,14 @@ export default {
 
       map: false,
 
-      category: "",
-
-      boptions: [],
-
-      detail: null
+      boptions: [
+        { value: "owner", text: "Owner's Name" },
+        { value: "a", text: "Business Name 1" },
+        { value: "b", text: "Business Name 2" },
+        { value: "c", text: "Business Name 3" }
+      ]
     };
   },
-
   components: {
     ComunitiDashboard,
     BusinessDashboard,
@@ -176,53 +172,7 @@ export default {
     CarousselDashboard,
     Navbar
   },
-
-  methods: {
-    getbusiness() {
-      this.boptions.push({
-        text: this.$store.getters[
-          "ProfileAndBusinessDetails/getdetails.owner[0].name"
-        ],
-        value: "owner"
-      });
-      console.log(
-        JSON.parse(
-          JSON.stringify(
-            this.$store.getters["ProfileAndBusinessDetails/getdetails"]
-          )
-        ).business
-      );
-      let businesses = JSON.parse(
-        JSON.stringify(
-          this.$store.getters["ProfileAndBusinessDetails/getdetails"]
-        )
-      ).business;
-      businesses = businesses.map(value => {
-        this.boptions.push({ text: value.name, value: value.id });
-        return value;
-      });
-      return this.boptions;
-    }
-  },
-
-  mounted() {},
-
-  created() {
-    this.$store
-      .dispatch("ProfileAndBusinessDetails/getdetails")
-      .then(response => {
-        this.getbusiness();
-      });
-  },
-
-  computed: {
-    details() {
-      return this.$store.getters["ProfileAndBusinessDetails/getdetails"];
-    }
-  },
-  watch: {
-    selectedb(newvalue) {}
-  }
+  methods: {}
 };
 </script>
 

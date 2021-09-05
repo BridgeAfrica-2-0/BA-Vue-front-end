@@ -56,7 +56,7 @@ const routes = [
     component: dashboard,
     meta: {
       auth: true
-    },
+    }
   },
 
 
@@ -145,7 +145,7 @@ const routes = [
     name: "Login",
     component: Login,
   },
-
+  
 
   {
     path: "/signup",
@@ -154,7 +154,7 @@ const routes = [
   },
 
 
-
+ 
   {
     path: "/recoverPass1",
     name: "RecoverPass1",
@@ -279,14 +279,14 @@ router.beforeEach((to, from, next) => {
     next('/login')
     return
   }
+  
+
+  if (to.matched.some(record => record.meta.auth)) {
+    const dat = localStorage.getItem("user");
+    const userdata= JSON.parse(dat);
 
 
- // if (to.matched.some(record => record.meta.auth) && !isAuthenticated) {
-  //  next('/verify')
- //   return
-//  }
-
-
+if(userdata.user.verified_at == null){
 
   next()
 

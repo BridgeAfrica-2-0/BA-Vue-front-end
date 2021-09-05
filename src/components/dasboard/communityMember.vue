@@ -116,55 +116,86 @@ export default {
 </script>
 
 <style scoped>
-@media only screen and (min-width: 768px) {
-  .btn-text {
-    margin-left: 8px;
-  }
 
-  .btn-com {
-    margin-left: 4px;
-  }
-  .btn-icon {
-    margin-top: 3px;
-  }
-}
-
-@media only screen and (max-width: 768px) {
-  .btn-icon {
-    margin-top: 3px;
-  }
-
-  .btn-text {
-    margin-left: 5px;
-  }
-
-  .btn-com {
-    margin-left: 3px;
-  }
-}
-
-@media only screen and (max-width: 768px) {
-  .btnpngs {
-    width: 16px;
-    margin-right: 5px;
-  }
-
-  .s-card {
-    padding-left: 5px;
-    padding-right: 5px;
-  }
-}
 
 @media only screen and (min-width: 768px) {
-  .btnpngs {
-    width: 20px;
-    margin-right: 5px;
-  }
+.btn-text{
+
+   margin-left: 8px;
 }
 
-.btn {
+.btn-com{
+  margin-left:4px;
+}
+.btn-icon{
+  margin-top:3px;
+}
+
+
+}
+
+
+@media only screen and (max-width: 768px) {
+
+    
+
+    .btn-icon{
+  margin-top:3px;
+}
+
+
+.btn-text{
+
+   margin-left: 5px;
+}
+
+
+.btn-com{
+  margin-left:3px;
+}
+
+
+}
+
+
+
+
+
+
+@media only screen and (max-width: 768px) {
+     
+
+     .btnpngs{
+      width: 16px;
+    margin-right: 5px;
+}
+
+.s-card{
+
+  padding-left: 5px;
+  padding-right:5px;
+
+}
+
+}
+
+
+
+@media only screen and (min-width: 768px) {
+
+      .btnpngs{
+      width: 20px;
+    margin-right: 5px;
+}
+
+
+}
+
+.btn{
   border-radius: 5px;
 }
+
+
 
 .flexx {
   display: inline-flex;
@@ -187,7 +218,7 @@ export default {
 
 .a-left {
   text-align: left;
-  /*align-content: left;*/
+  align-content: left;
 }
 
 hr {
@@ -208,12 +239,12 @@ hr {
 
 f-right {
   text-align: right;
-  /*align-content: right;*/
+  align-content: right;
 }
 
 .f-left {
   text-align: left;
-  /*align-content: left;*/
+  align-content: left;
 }
 
 @media only screen and (max-width: 768px) {
@@ -247,9 +278,10 @@ f-right {
   border-bottom-right-radius: 4px;
 }
 
-.follower {
-  font-size: 14px;
-  margin-top: 5px;
+
+.follower{
+    font-size: 14px;
+    margin-top: 5px;
 }
 
 .people-style {
@@ -270,11 +302,13 @@ f-right {
 }
 
 @media only screen and (min-width: 1200px) {
-  .btn {
+  
+
+  .btn{
     width: 123px;
     height: 38px;
-    font-size: 14px;
-  }
+    font-size:14px;
+}
 
   .center {
     text-align: right;
@@ -286,6 +320,8 @@ f-right {
     margin-right: -15px;
     margin-top: 3px;
   }
+
+  
 
   .btn-2 {
     margin-left: 0px;
@@ -324,6 +360,7 @@ f-right {
   h7 {
     font-size: 10px;
   }
+
 
   .btn {
     display: flex;
@@ -379,122 +416,156 @@ f-right {
     font-size: 10px;
   }
 
+  
   .btn {
     display: flex;
     font-size: 10px;
   }
 
-  .m-15 {
+  .m-15{
     margin-left: -15px;
   }
 }
 
-@media only screen and (min-width: 764px) {
-  .p-buttons {
-    margin-right: 50px;
-    margin-left: 50px;
-    margin-bottom: 5px;
-    margin-top: 7px;
-    padding-right: 5px;
-  }
 
-  .p-avater {
+ @media only screen and  (min-width: 764px) {
+.p-buttons {
+  margin-right: 50px;
+  margin-left: 50px;
+  margin-bottom: 5px;
+  margin-top: 7px;
+  padding-right: 5px;
+}
+
+.p-avater {
+    
     width: 95px;
     height: 95px;
     margin-bottom: -4px;
     margin-left: -5px;
-  }
+}
 
-  .btn {
+
+
+
+
+
+
+  .btn{
     width: 123px;
     height: 38px;
-    font-size: 14px;
-  }
+    font-size:14px;
+}
 
-  .center {
-    text-align: right;
-  }
 
-  .username {
-    font-size: 20px;
-    text-overflow: ellipsis;
+.center{
+  text-align: right;
+}
+
+
+.username{
+  font-size: 20px;
+  text-overflow: ellipsis;
     overflow: hidden;
     width: 100%;
     height: 1.2em;
     white-space: nowrap;
-  }
-
-  .follower {
-    font-size: 10px;
-    margin-top: 5px;
-  }
 }
 
+.follower{
+    font-size: 10px;
+    margin-top: 5px;
+}
+
+ }
+
+
+
+
 @media only screen and (min-width: 764px) and (max-width: 991.18px) {
-  .center {
+  
+  .center{
     text-align: left;
   }
+
 }
 
 @media only screen and (max-width: 762px) {
-  .username {
-    font-size: 16px;
-    text-overflow: ellipsis;
+
+.username{
+  font-size: 16px;
+  text-overflow: ellipsis;
     overflow: hidden;
     width: 100%;
     height: 1.2em;
     white-space: nowrap;
-  }
+}
 
-  .btn {
-    width: 85px;
+.btn{width: 85px;
     height: 28px;
     font-size: 10px;
-  }
+    }
 
-  .p-avater {
+
+
+    .p-avater {
     width: 75px;
     height: 75px;
     margin-bottom: -8px;
     margin-left: -5px;
     margin-top: -4px;
-  }
+}
 
-  .shift {
-    margin-left: -40px;
-  }
+.shift{
+  margin-left: -40px;
+}
 
-  .follower {
+.follower {
     font-size: 10px;
     text-align: left;
-  }
+    
+}
 
-  .center {
-    text-align: left;
-  }
+.center{
+  text-align: left;
+}
 
-  .a-text {
-    margin-top: 2px;
-  }
+.a-text {
+  margin-top: 2px;
+}
+
 
   .pobtn {
     font-size: 10px;
+   
   }
-  .e-name {
+  .e-name{
     text-align: left;
   }
 }
 
 @media only screen and (max-width: 521px) {
-  .e-name {
+    .e-name{
     text-align: left;
-    margin-left: -20px;
+    margin-left:-20px
   }
+    
 }
+
+
+
+
+
+ 
 </style>
 
-<style>
-.follower {
-  font-size: 12px !important;
-}
+<style> 
+ 
+ .follower{
+   font-size:12px  !important;
+ }
+
 </style>
+
+
+

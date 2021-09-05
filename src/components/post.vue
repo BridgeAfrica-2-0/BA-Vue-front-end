@@ -90,8 +90,8 @@
 import Comment from "../components/comment";
 export default {
   components: {
-    Comment,
-  },
+    Comment
+  }
 };
 </script>
 
@@ -131,7 +131,7 @@ p {
   top: -28px;
 }
 
-.name{
+.name {
   position: relative;
   top: -10px;
 }
@@ -139,7 +139,7 @@ p {
   .send-cmt {
     margin-left: 88%;
   }
-  .post{
+  .post {
     margin-top: 10px;
   }
 }

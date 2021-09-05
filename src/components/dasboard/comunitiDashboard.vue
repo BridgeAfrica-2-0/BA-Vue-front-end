@@ -126,13 +126,16 @@
 </template>
 
 <script>
+
+
 import People from "@/components/dasboard/communityMember";
 import Business from "@/components/dasboard/communitybusiness";
+
 
 export default {
   name: "comunitiDashboard",
 
-  components: {
+   components: {
     People,
     Business
   },
@@ -179,49 +182,89 @@ export default {
 };
 </script>
 
+
 <style scoped>
-.card-body {
+.card-body{
+
   padding: 0px;
 }
 </style>
 
-<style>
-.lala .nav-fill {
-  margin-top: -19px;
-  border: 1px solid rgba(0, 0, 0, 0.125);
-}
+<style >
 
-.s-comcard {
-  height: 350px;
-  overflow: auto;
+  
+
+
+   .lala .nav-fill{
+   
+    margin-top: -19px;
+     border: 1px solid rgba(0, 0, 0, 0.125);
+  }
+
+
+
+
+
+
+
+
+  .s-comcard{
+  height:350px; 
+  overflow: auto; 
   overflow-x: hidden;
+
 }
 
-.spa-color {
+
+.spa-color{
   color: white;
   margin-left: 10px;
   font-size: 14px;
 }
 
-.h4-color {
+
+.h4-color{
   color: orangered;
   margin-left: 10px;
   font-size: 14px;
 }
 
-.m-up {
-  margin-top: -5px;
+.m-up{
+
+  margin-top:-5px;
 }
 
+
+
+
+ 
 @media only screen and (min-width: 768px) {
-  .title {
+
+  
+
+  .title{
     font-size: 20px;
   }
-}
 
+
+ }
+
+
+
+
+
+
+ 
 @media only screen and (min-width: 768px) {
-  .title {
+
+  
+  .title{
     font-size: 16px;
   }
-}
+
+   
+ }
+
+
+
 </style>

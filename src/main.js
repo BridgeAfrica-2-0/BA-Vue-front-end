@@ -18,12 +18,12 @@ import homeIconData from "@iconify-icons/mdi-light/home";
 import ReadMore from "vue-read-more";
 import VueSocialauth from "vue-social-auth";
 // import firebase from "firebase";
-import LoadScript from "vue-plugin-load-script";
+import LoadScript from 'vue-plugin-load-script';
 
 Vue.use(LoadScript);
 Vue.use(Vuex);
 Vue.use(VueAxios, axios);
-IconifyIcon.addIcon("home", homeIconData);
+IconifyIcon.addIcon('home', homeIconData);
 
 Vue.use(ReadMore);
 Vue.prototype.$axios = axios;
@@ -70,15 +70,25 @@ Vue.use(VueSocialauth, {
   }
 });
 
-import FlashMessage from "@smartweb/vue-flash-message";
+
+
+
+import FlashMessage from '@smartweb/vue-flash-message';
 Vue.use(FlashMessage);
 
-import VueMaterial from "vue-material";
+
+
+
+import VueMaterial from 'vue-material'
+
 
 //import 'vue-material/dist/vue-material.min.css'
 //import 'vue-material/dist/theme/default.css'
 
 Vue.use(VueMaterial);
+
+
+
 
 import Lightbox from "@morioh/v-lightbox";
 import * as VueGoogleMaps from "gmap-vue";
@@ -117,6 +127,10 @@ import "@/assets/css/bootstrap.css";
 Vue.use(BootstrapVue);
 Vue.use(IconsPlugin);
 
+
+
+
+
 Vue.use(VueGoogleMaps, {
   load: {
     key: "AIzaSyAGZU6cqra18t1fhN1AbzRsEc_pgt7n2C8",
@@ -126,13 +140,20 @@ Vue.use(VueGoogleMaps, {
   installComponents: true
 });
 
+
+
+
+
 Vue.component("v-select", vSelect);
+
+import i18n from "./i18n";
 
 Vue.config.productionTip = false;
 
 new Vue({
   router,
   store,
+  i18n,
 
   created() {
     const userInfo = localStorage.getItem("user");
@@ -141,15 +162,16 @@ new Vue({
       this.$store.commit("auth/setUserData", userData);
     }
     axios.interceptors.response.use(
-      response => response,
-      error => {
+      (response) => response,
+      (error) => {
         if (error.response.status === 401) {
-          this.$store.dispatch("auth/logout");
+         // this.$store.dispatch("auth/logout");
+         console.log("error has occure");
         }
         return Promise.reject(error);
       }
     );
   },
 
-  render: h => h(App)
+  render: (h) => h(App),
 }).$mount("#app");

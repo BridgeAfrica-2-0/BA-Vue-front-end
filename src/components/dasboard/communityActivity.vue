@@ -1,353 +1,82 @@
 <template>
   <div>
+    <b-card class="px-md-3 border shadow ">
+      <span>
+        <h6 class="title mt-3 ">
+          <fas-icon
+            class=" icons icon-color"
+            :icon="['fab', 'readme']"
+            size="lg"
+          />
+          <b> Post </b>
+        </h6>
+      </span>
 
+      <div class="s-card ">
+        <div>
+          <b-row class="mt-0">
+            <b-col cols="12" class="mt-4">
+              <b-row>
+                <b-col cols="2" md="1" class="m-0 p-0">
+                  <b-avatar
+                    class="d-inline-block avat"
+                    variant="primary"
+                    src="https://www.fivesquid.com/pics/t2/1594480468-145752-1-1.jpg"
+                  ></b-avatar>
+                </b-col>
+                <b-col cols="10" md="11" class="pt-2">
+                  <h5 class="m-0 font-weight-bolder">
+                    Heavy Gym
+                    <span class="float-right"> </span>
+                  </h5>
+                  <p class="duration">1h Ago</p>
+                </b-col>
+              </b-row>
+              <b-row>
+                <b-col cols="12" class="mt-2">
+                  <p class="post-text">
+                    Lorem Ipsum has been the industry's standard dummy text ever
+                    since the 1500s, when an unknown printer took a galley of
+                    type and scrambled it to make a type specimen book. It has
+                    survived not only five centuries, but also the leap into
+                    electronic typesetting, remaining essentially unchanged.😛
+                  </p>
+                </b-col>
+              </b-row>
+              <b-row>
+                <b-col cols="12" class="mt-2">
+                  <div class="">
+                    <img
+                      class="img-fluid post-container"
+                      src="https://pbs.twimg.com/media/DoNa_wKUUAASSCF.jpg"
+                      alt="Photo1"
+                    />
+                  </div>
+                </b-col>
+                <b-col class="mt-1">
+                  <span class="mr-3"
+                    ><b-icon
+                      icon="suit-heart"
+                      variant="primary"
+                      aria-hidden="true"
+                    ></b-icon>
+                    23</span
+                  >
+                  <span
+                    ><b-icon
+                      icon="chat-fill"
+                      variant="primary"
+                      aria-hidden="true"
+                    ></b-icon>
+                    123</span
+                  >
 
-     <b-card class="px-md-3 border shadow "  >
+                  <span>
+                    <fas-icon class="primary ml-3" :icon="['fas', 'share']" />
+                  </span>
+                </b-col>
+              </b-row>
 
-      <span> <h6 class="title mt-3 ">  <fas-icon class=" icons icon-color" :icon="['fab', 'readme']"  size="lg" />   <b> Post </b>  </h6>   </span>
-
-   <div class="s-card " >
-
-   
-
-
-
-    <div>
-
-
-
-      <b-row class="mt-0">
-        <b-col cols="12" class="mt-4">
-          <b-row>
-            <b-col cols="2" md="1" class="m-0 p-0">
-              <b-avatar
-                class="d-inline-block avat"
-                variant="primary"
-                src="https://www.fivesquid.com/pics/t2/1594480468-145752-1-1.jpg"
-              ></b-avatar>
-            </b-col>
-            <b-col cols="10" md="11" class="pt-2">
-              <h5 class="m-0 font-weight-bolder">
-                Heavy Gym
-                <span class="float-right"> </span>
-              </h5>
-              <p class="duration">1h Ago</p>
-            </b-col>
-          </b-row>
-          <b-row>
-            <b-col cols="12" class="mt-2">
-              <p class="post-text">
-                Lorem Ipsum has been the industry's standard dummy text ever
-                since the 1500s, when an unknown printer took a galley of type
-                and scrambled it to make a type specimen book. It has survived
-                not only five centuries, but also the leap into electronic
-                typesetting, remaining essentially unchanged.😛
-              </p>
-            </b-col>
-          </b-row>
-          <b-row>
-            <b-col cols="12" class="mt-2">
-              <div class="">
-                <img
-                  class="img-fluid post-container"
-                  src="https://pbs.twimg.com/media/DoNa_wKUUAASSCF.jpg"
-                  alt="Photo1"
-                />
-              </div>
-            </b-col>
-            <b-col class="mt-1">
-              <span class="mr-3"
-                ><b-icon
-                  icon="suit-heart"
-                  variant="primary"
-                  aria-hidden="true"
-                ></b-icon>
-                23</span
-              >
-              <span
-                ><b-icon
-                  icon="chat-fill"
-                  variant="primary"
-                  aria-hidden="true"
-                ></b-icon>
-                123</span
-              >
-
-              <span>
-                <fas-icon class="primary ml-3" :icon="['fas', 'share']" />
-              </span>
-            </b-col>
-          </b-row>
-
-          <b-row class="mt-2">
-            <b-col cols="3" md="1" class="m-md-0 p-md-0">
-              <b-avatar
-                variant="primary"
-                class="img-fluid avat-comment"
-                src="https://www.fivesquid.com/pics/t2/1594480468-145752-1-1.jpg"
-              ></b-avatar>
-            </b-col>
-            <b-col cols="9" md="11" class="p-0 m-0 pr-3">
-              <input placeholder="Post a Comment" class="comment" type="text" />
-
-              <fas-icon
-                class="primary send-cmt"
-                :icon="['fas', 'paper-plane']"
-              />
-            </b-col>
-          </b-row>
-
-          <Comment />
-        </b-col>
-      </b-row>
-    </div>
-
-    <div class="mt-2">
-      <b-row class="mt-4">
-        <b-col cols="12" class="mt-4">
-          <b-row>
-            <b-col cols="2" md="1" class="m-0 p-0">
-              <b-avatar
-                class="d-inline-block avat"
-                variant="primary"
-                src="https://www.fivesquid.com/pics/t2/1594480468-145752-1-1.jpg"
-                square
-                rounded
-              ></b-avatar>
-            </b-col>
-            <b-col cols="10" md="11" class="pt-2">
-              <h5 class="m-0 font-weight-bolder">Heavy Gym</h5>
-              <p class="duration">1h Ago</p>
-            </b-col>
-          </b-row>
-          <b-row>
-            <b-col cols="12" class="mt-2">
-              <p class="post-text">
-                Lorem Ipsum has been the industry's standard dummy text ever
-                since the 1500s, when an unknown printer took a galley of type
-                and scrambled it to make a type specimen book. It has survived
-                not only five centuries, but also the leap into electronic
-                typesetting, remaining essentially unchanged.😛
-              </p>
-            </b-col>
-          </b-row>
-          <b-row>
-            <b-col cols="12" class="mt-2">
-              <lightbox :cells="2" :items="imagees"></lightbox>
-            </b-col>
-            <b-col class="mt-1">
-              <span class="mr-3"
-                ><b-icon
-                  icon="suit-heart"
-                  variant="primary"
-                  aria-hidden="true"
-                ></b-icon>
-                23</span
-              >
-              <span
-                ><b-icon
-                  icon="chat-fill"
-                  variant="primary"
-                  aria-hidden="true"
-                ></b-icon>
-                123</span
-              >
-
-              <span>
-                <fas-icon class="primary ml-3" :icon="['fas', 'share']" />
-              </span>
-
-              
-            </b-col>
-          </b-row>
-
-          <b-row class="mt-2">
-            <b-col cols="3" md="1" class="m-md-0 p-md-0">
-              <b-avatar
-                variant="primary"
-                class="img-fluid avat-comment"
-                src="https://www.fivesquid.com/pics/t2/1594480468-145752-1-1.jpg"
-              ></b-avatar>
-            </b-col>
-            <b-col cols="9" md="11" class="p-0 m-0 pr-3">
-              <input placeholder="Post a Comment" class="comment" type="text" />
-
-              <fas-icon
-                class="primary send-cmt"
-                :icon="['fas', 'paper-plane']"
-              />
-            </b-col>
-          </b-row>
-
-          <Comment />
-        </b-col>
-      </b-row>
-    </div>
-
-
-
-<hr />
-
-
-
-
-
-    <div class="mt-2">
-      <b-row class="mt-4">
-        <b-col cols="12" class="mt-4">
-          <b-row>
-            <b-col cols="2" md="1" class="m-0 p-0">
-              <b-avatar
-                class="d-inline-block avat"
-                variant="primary"
-                src="https://www.fivesquid.com/pics/t2/1594480468-145752-1-1.jpg"
-                square
-                rounded
-              ></b-avatar>
-            </b-col>
-            <b-col cols="10" md="11" class="pt-2">
-              <h5 class="m-0 font-weight-bolder"> Post with 3 pics </h5>
-              <p class="duration">1h Ago</p>
-            </b-col>
-          </b-row>
-          <b-row>
-            <b-col cols="12" class="mt-2">
-              <p class="post-text">
-                Lorem Ipsum has been the industry's standard dummy text ever
-                since the 1500s, when an unknown printer took a galley of type
-                and scrambled it to make a type specimen book. It has survived
-                not only five centuries, but also the leap into electronic
-                typesetting, remaining essentially unchanged.😛
-              </p>
-            </b-col>
-          </b-row>
-          <b-row>
-            <b-col cols="12" class="mt-2">
-              <lightbox :cells="3" :items="imagees3"></lightbox>
-            </b-col>
-            <b-col class="mt-1">
-              <span class="mr-3"
-                ><b-icon
-                  icon="suit-heart"
-                  variant="primary"
-                  aria-hidden="true"
-                ></b-icon>
-                23</span
-              >
-              <span
-                ><b-icon
-                  icon="chat-fill"
-                  variant="primary"
-                  aria-hidden="true"
-                ></b-icon>
-                123</span
-              >
-
-              <span>
-                <fas-icon class="primary ml-3" :icon="['fas', 'share']" />
-              </span>
-
-              
-            </b-col>
-          </b-row>
-
-          <b-row class="mt-2">
-            <b-col cols="3" md="1" class="m-md-0 p-md-0">
-              <b-avatar
-                variant="primary"
-                class="img-fluid avat-comment"
-                src="https://www.fivesquid.com/pics/t2/1594480468-145752-1-1.jpg"
-              ></b-avatar>
-            </b-col>
-            <b-col cols="9" md="11" class="p-0 m-0 pr-3">
-              <input placeholder="Post a Comment" class="comment" type="text" />
-
-              <fas-icon
-                class="primary send-cmt"
-                :icon="['fas', 'paper-plane']"
-              />
-            </b-col>
-          </b-row>
-
-          <Comment />
-        </b-col>
-      </b-row>
-    </div>
-
-
-      
-
-
-
-
-
-
-<hr/>
-
-
-
-
-
-
-
-
-    <div class="mt-2">
-      <b-row class="mt-4">
-        <b-col cols="12" class="mt-4">
-          <b-row>
-            <b-col cols="2" md="1" class="m-0 p-0">
-              <b-avatar
-                class="d-inline-block avat"
-                variant="primary"
-                src="https://www.fivesquid.com/pics/t2/1594480468-145752-1-1.jpg"
-                square
-              ></b-avatar>
-            </b-col>
-            <b-col cols="10" md="11" class="pt-2">
-              <h5 class="m-0 font-weight-bolder">Heavy Gym</h5>
-              <p class="duration">1h Ago</p>
-            </b-col>
-          </b-row>
-          <b-row>
-            <b-col cols="12" class="mt-2">
-              <p class="post-text">
-                Lorem Ipsum has been the industry's standard dummy text ever
-                since the 1500s, when an unknown printer took a galley of type
-                and scrambled it to make a type specimen book. It has survived
-                not only five centuries, but also the leap into electronic
-                typesetting, remaining essentially unchanged.😛
-              </p>
-            </b-col>
-          </b-row>
-          <b-row>
-            <b-col cols="12" class="mt-2">
-              <lightbox :cells="4" :items="images"></lightbox>
-            </b-col>
-            <b-col class="mt-1">
-              <span class="mr-3"
-                ><b-icon
-                  icon="suit-heart"
-                  variant="primary"
-                  aria-hidden="true"
-                ></b-icon>
-                23</span
-              >
-              <span
-                ><b-icon
-                  icon="chat-fill"
-                  variant="primary"
-                  aria-hidden="true"
-                ></b-icon>
-                123</span
-              >
-
-              <span>
-                <fas-icon class="primary ml-3" :icon="['fas', 'share']" />
-              </span>
-
-
-            </b-col>
-            <b-col cols="12">
               <b-row class="mt-2">
                 <b-col cols="3" md="1" class="m-md-0 p-md-0">
                   <b-avatar
@@ -369,66 +98,69 @@
                   />
                 </b-col>
               </b-row>
-            </b-col>
-          </b-row>
-        </b-col>
-      </b-row>
-    </div>
-<hr />
-    <div class="mt-2">
-      <b-row class="mt-4">
-        <b-col cols="12" class="mt-4">
-          <b-row>
-            <b-col cols="2" md="1" class="m-0 p-0">
-              <b-avatar
-                class="d-inline-block avat"
-                variant="info"
-                src="https://www.fivesquid.com/pics/t2/1594480468-145752-1-1.jpg"
-                square
-                rounded="xl"
-              ></b-avatar>
-            </b-col>
-            <b-col cols="10" md="11" class="pt-2">
-              <h5 class="m-0 font-weight-bolder">Heavy Gym</h5>
-              <p class="duration">1h Ago</p>
-            </b-col>
-          </b-row>
-          <b-row>
-            <b-col cols="12" class="mt-2">
-              <p class="post-text">
-                Lorem Ipsum has been the industry's standard dummy text ever
-                since the 1500s, when an unknown printer took a galley of type
-                and scrambled it to make a type specimen book. It has survived
-                not only five centuries, but also the leap into electronic
-                typesetting, remaining essentially unchanged.😛
-              </p>
-            </b-col>
-          </b-row>
-          <b-row>
-            <b-col class="mt-1">
-              <span class="mr-3"
-                ><b-icon
-                  icon="suit-heart"
-                  variant="primary"
-                  aria-hidden="true"
-                ></b-icon>
-                23</span
-              >
-              <span
-                ><b-icon
-                  icon="chat-fill"
-                  variant="primary"
-                  aria-hidden="true"
-                ></b-icon>
-                123</span
-              >
 
-              <span>
-                <fas-icon class="primary ml-3" :icon="['fas', 'share']" />
-              </span>
-
+              <Comment />
             </b-col>
-            <b-col cols="12">
+          </b-row>
+        </div>
+
+        <div class="mt-2">
+          <b-row class="mt-4">
+            <b-col cols="12" class="mt-4">
+              <b-row>
+                <b-col cols="2" md="1" class="m-0 p-0">
+                  <b-avatar
+                    class="d-inline-block avat"
+                    variant="primary"
+                    src="https://www.fivesquid.com/pics/t2/1594480468-145752-1-1.jpg"
+                    square
+                    rounded
+                  ></b-avatar>
+                </b-col>
+                <b-col cols="10" md="11" class="pt-2">
+                  <h5 class="m-0 font-weight-bolder">Heavy Gym</h5>
+                  <p class="duration">1h Ago</p>
+                </b-col>
+              </b-row>
+              <b-row>
+                <b-col cols="12" class="mt-2">
+                  <p class="post-text">
+                    Lorem Ipsum has been the industry's standard dummy text ever
+                    since the 1500s, when an unknown printer took a galley of
+                    type and scrambled it to make a type specimen book. It has
+                    survived not only five centuries, but also the leap into
+                    electronic typesetting, remaining essentially unchanged.😛
+                  </p>
+                </b-col>
+              </b-row>
+              <b-row>
+                <b-col cols="12" class="mt-2">
+                  <lightbox :cells="2" :items="imagees"></lightbox>
+                </b-col>
+                <b-col class="mt-1">
+                  <span class="mr-3"
+                    ><b-icon
+                      icon="suit-heart"
+                      variant="primary"
+                      aria-hidden="true"
+                    ></b-icon>
+                    23</span
+                  >
+                  <span
+                    ><b-icon
+                      icon="chat-fill"
+                      variant="primary"
+                      aria-hidden="true"
+                    ></b-icon>
+                    123</span
+                  >
+
+                  <span>
+                    <fas-icon class="primary ml-3" :icon="['fas', 'share']" />
+                  </span>
+                </b-col>
+              </b-row>
+
               <b-row class="mt-2">
                 <b-col cols="3" md="1" class="m-md-0 p-md-0">
                   <b-avatar
@@ -438,31 +170,279 @@
                   ></b-avatar>
                 </b-col>
                 <b-col cols="9" md="11" class="p-0 m-0 pr-3">
-                  <b-input-group class="my-auto w-100 rounded">
-                    <input
-                      placeholder="Post a Comment"
-                      class="comment"
-                      type="text"
-                    />
+                  <input
+                    placeholder="Post a Comment"
+                    class="comment"
+                    type="text"
+                  />
 
-                    <fas-icon
-                      class="primary send-cmt"
-                      :icon="['fas', 'paper-plane']"
-                    />
-                  </b-input-group>
+                  <fas-icon
+                    class="primary send-cmt"
+                    :icon="['fas', 'paper-plane']"
+                  />
+                </b-col>
+              </b-row>
+
+              <Comment />
+            </b-col>
+          </b-row>
+        </div>
+
+        <hr />
+
+        <div class="mt-2">
+          <b-row class="mt-4">
+            <b-col cols="12" class="mt-4">
+              <b-row>
+                <b-col cols="2" md="1" class="m-0 p-0">
+                  <b-avatar
+                    class="d-inline-block avat"
+                    variant="primary"
+                    src="https://www.fivesquid.com/pics/t2/1594480468-145752-1-1.jpg"
+                    square
+                    rounded
+                  ></b-avatar>
+                </b-col>
+                <b-col cols="10" md="11" class="pt-2">
+                  <h5 class="m-0 font-weight-bolder">Post with 3 pics</h5>
+                  <p class="duration">1h Ago</p>
+                </b-col>
+              </b-row>
+              <b-row>
+                <b-col cols="12" class="mt-2">
+                  <p class="post-text">
+                    Lorem Ipsum has been the industry's standard dummy text ever
+                    since the 1500s, when an unknown printer took a galley of
+                    type and scrambled it to make a type specimen book. It has
+                    survived not only five centuries, but also the leap into
+                    electronic typesetting, remaining essentially unchanged.😛
+                  </p>
+                </b-col>
+              </b-row>
+              <b-row>
+                <b-col cols="12" class="mt-2">
+                  <lightbox :cells="3" :items="imagees3"></lightbox>
+                </b-col>
+                <b-col class="mt-1">
+                  <span class="mr-3"
+                    ><b-icon
+                      icon="suit-heart"
+                      variant="primary"
+                      aria-hidden="true"
+                    ></b-icon>
+                    23</span
+                  >
+                  <span
+                    ><b-icon
+                      icon="chat-fill"
+                      variant="primary"
+                      aria-hidden="true"
+                    ></b-icon>
+                    123</span
+                  >
+
+                  <span>
+                    <fas-icon class="primary ml-3" :icon="['fas', 'share']" />
+                  </span>
+                </b-col>
+              </b-row>
+
+              <b-row class="mt-2">
+                <b-col cols="3" md="1" class="m-md-0 p-md-0">
+                  <b-avatar
+                    variant="primary"
+                    class="img-fluid avat-comment"
+                    src="https://www.fivesquid.com/pics/t2/1594480468-145752-1-1.jpg"
+                  ></b-avatar>
+                </b-col>
+                <b-col cols="9" md="11" class="p-0 m-0 pr-3">
+                  <input
+                    placeholder="Post a Comment"
+                    class="comment"
+                    type="text"
+                  />
+
+                  <fas-icon
+                    class="primary send-cmt"
+                    :icon="['fas', 'paper-plane']"
+                  />
+                </b-col>
+              </b-row>
+
+              <Comment />
+            </b-col>
+          </b-row>
+        </div>
+
+        <hr />
+
+        <div class="mt-2">
+          <b-row class="mt-4">
+            <b-col cols="12" class="mt-4">
+              <b-row>
+                <b-col cols="2" md="1" class="m-0 p-0">
+                  <b-avatar
+                    class="d-inline-block avat"
+                    variant="primary"
+                    src="https://www.fivesquid.com/pics/t2/1594480468-145752-1-1.jpg"
+                    square
+                  ></b-avatar>
+                </b-col>
+                <b-col cols="10" md="11" class="pt-2">
+                  <h5 class="m-0 font-weight-bolder">Heavy Gym</h5>
+                  <p class="duration">1h Ago</p>
+                </b-col>
+              </b-row>
+              <b-row>
+                <b-col cols="12" class="mt-2">
+                  <p class="post-text">
+                    Lorem Ipsum has been the industry's standard dummy text ever
+                    since the 1500s, when an unknown printer took a galley of
+                    type and scrambled it to make a type specimen book. It has
+                    survived not only five centuries, but also the leap into
+                    electronic typesetting, remaining essentially unchanged.😛
+                  </p>
+                </b-col>
+              </b-row>
+              <b-row>
+                <b-col cols="12" class="mt-2">
+                  <lightbox :cells="4" :items="images"></lightbox>
+                </b-col>
+                <b-col class="mt-1">
+                  <span class="mr-3"
+                    ><b-icon
+                      icon="suit-heart"
+                      variant="primary"
+                      aria-hidden="true"
+                    ></b-icon>
+                    23</span
+                  >
+                  <span
+                    ><b-icon
+                      icon="chat-fill"
+                      variant="primary"
+                      aria-hidden="true"
+                    ></b-icon>
+                    123</span
+                  >
+
+                  <span>
+                    <fas-icon class="primary ml-3" :icon="['fas', 'share']" />
+                  </span>
+                </b-col>
+                <b-col cols="12">
+                  <b-row class="mt-2">
+                    <b-col cols="3" md="1" class="m-md-0 p-md-0">
+                      <b-avatar
+                        variant="primary"
+                        class="img-fluid avat-comment"
+                        src="https://www.fivesquid.com/pics/t2/1594480468-145752-1-1.jpg"
+                      ></b-avatar>
+                    </b-col>
+                    <b-col cols="9" md="11" class="p-0 m-0 pr-3">
+                      <input
+                        placeholder="Post a Comment"
+                        class="comment"
+                        type="text"
+                      />
+
+                      <fas-icon
+                        class="primary send-cmt"
+                        :icon="['fas', 'paper-plane']"
+                      />
+                    </b-col>
+                  </b-row>
                 </b-col>
               </b-row>
             </b-col>
-
-            <Comment />
           </b-row>
-        </b-col>
-      </b-row>
-    </div>
-   </div>  
+        </div>
+        <hr />
+        <div class="mt-2">
+          <b-row class="mt-4">
+            <b-col cols="12" class="mt-4">
+              <b-row>
+                <b-col cols="2" md="1" class="m-0 p-0">
+                  <b-avatar
+                    class="d-inline-block avat"
+                    variant="info"
+                    src="https://www.fivesquid.com/pics/t2/1594480468-145752-1-1.jpg"
+                    square
+                    rounded="xl"
+                  ></b-avatar>
+                </b-col>
+                <b-col cols="10" md="11" class="pt-2">
+                  <h5 class="m-0 font-weight-bolder">Heavy Gym</h5>
+                  <p class="duration">1h Ago</p>
+                </b-col>
+              </b-row>
+              <b-row>
+                <b-col cols="12" class="mt-2">
+                  <p class="post-text">
+                    Lorem Ipsum has been the industry's standard dummy text ever
+                    since the 1500s, when an unknown printer took a galley of
+                    type and scrambled it to make a type specimen book. It has
+                    survived not only five centuries, but also the leap into
+                    electronic typesetting, remaining essentially unchanged.😛
+                  </p>
+                </b-col>
+              </b-row>
+              <b-row>
+                <b-col class="mt-1">
+                  <span class="mr-3"
+                    ><b-icon
+                      icon="suit-heart"
+                      variant="primary"
+                      aria-hidden="true"
+                    ></b-icon>
+                    23</span
+                  >
+                  <span
+                    ><b-icon
+                      icon="chat-fill"
+                      variant="primary"
+                      aria-hidden="true"
+                    ></b-icon>
+                    123</span
+                  >
 
-     </b-card>
-    
+                  <span>
+                    <fas-icon class="primary ml-3" :icon="['fas', 'share']" />
+                  </span>
+                </b-col>
+                <b-col cols="12">
+                  <b-row class="mt-2">
+                    <b-col cols="3" md="1" class="m-md-0 p-md-0">
+                      <b-avatar
+                        variant="primary"
+                        class="img-fluid avat-comment"
+                        src="https://www.fivesquid.com/pics/t2/1594480468-145752-1-1.jpg"
+                      ></b-avatar>
+                    </b-col>
+                    <b-col cols="9" md="11" class="p-0 m-0 pr-3">
+                      <b-input-group class="my-auto w-100 rounded">
+                        <input
+                          placeholder="Post a Comment"
+                          class="comment"
+                          type="text"
+                        />
+
+                        <fas-icon
+                          class="primary send-cmt"
+                          :icon="['fas', 'paper-plane']"
+                        />
+                      </b-input-group>
+                    </b-col>
+                  </b-row>
+                </b-col>
+
+                <Comment />
+              </b-row>
+            </b-col>
+          </b-row>
+        </div>
+      </div>
+    </b-card>
   </div>
 </template>
 
@@ -472,7 +452,7 @@ import Comment from "./comment";
 export default {
   name: "postNetwork",
   components: {
-    Comment,
+    Comment
   },
   data() {
     return {
@@ -495,36 +475,31 @@ export default {
         "https://i.wifegeek.com/200426/177ef44c.jpg",
         "https://i.wifegeek.com/200426/d74d9040.jpg",
         "https://i.wifegeek.com/200426/81e24a47.jpg",
-        "https://i.wifegeek.com/200426/43e2e8bb.jpg",
+        "https://i.wifegeek.com/200426/43e2e8bb.jpg"
       ],
       imagees: [
         "https://pbs.twimg.com/media/DoNa_wKUUAASSCF.jpg",
-        "https://pbs.twimg.com/media/DKO62sVXUAA0_AL.jpg",
-      ],
- 
-
-       imagees3: [
-        "https://pbs.twimg.com/media/DoNa_wKUUAASSCF.jpg",
-        "https://pbs.twimg.com/media/DoNa_wKUUAASSCF.jpg",
-        "https://pbs.twimg.com/media/DKO62sVXUAA0_AL.jpg",
+        "https://pbs.twimg.com/media/DKO62sVXUAA0_AL.jpg"
       ],
 
-
-
-      
+      imagees3: [
+        "https://pbs.twimg.com/media/DoNa_wKUUAASSCF.jpg",
+        "https://pbs.twimg.com/media/DoNa_wKUUAASSCF.jpg",
+        "https://pbs.twimg.com/media/DKO62sVXUAA0_AL.jpg"
+      ]
     };
   },
 
   methods: {
-    chooseImage: function () {
+    chooseImage: function() {
       document.getElementById("image").click();
     },
 
-    chooseVideo: function () {
+    chooseVideo: function() {
       document.getElementById("video").click();
     },
 
-    chooseDocument: function () {
+    chooseDocument: function() {
       document.getElementById("document").click();
     },
 
@@ -533,18 +508,15 @@ export default {
     },
     hideModal() {
       this.$refs["modal-3"].hide();
-    },
-  },
+    }
+  }
 };
 </script>
 
 <style scoped>
-
-.card-body{
-
+.card-body {
   padding: 2px !important;
 }
-
 
 .action-intro {
   font-size: 1rem;
@@ -712,17 +684,10 @@ export default {
   margin-top: -5px;
 }
 
-
-
-
-.s-card{
-  height:540px; 
-  overflow: auto; 
+.s-card {
+  height: 540px;
+  overflow: auto;
   overflow-x: hidden;
   padding: 15px;
-
-
 }
-
-
 </style>

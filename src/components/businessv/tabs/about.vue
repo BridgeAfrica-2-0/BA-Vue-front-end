@@ -16,7 +16,7 @@
         <b-col>
           <b-card class="mb-2">
             <h4 class="mb-4 text-center">
-               <b-icon icon="person-fill" class="primary mr-2"></b-icon>
+              <b-icon icon="person-fill" class="primary mr-2"></b-icon>
               <b>{{ leftTitle }}</b>
             </h4>
             <p class="txt">
@@ -26,11 +26,10 @@
         </b-col>
         <b-col>
           <b-card>
-       
             <b-card-text>
               <p>
-                <b-icon icon="briefcase-fill" class="primary"></b-icon> Work
-                at: {{ workedAt }}
+                <b-icon icon="briefcase-fill" class="primary"></b-icon> Work at:
+                {{ workedAt }}
               </p>
               <p>
                 <b-icon icon="book-fill" class="primary"></b-icon> Studied at:
@@ -80,8 +79,6 @@
         </b-col>
       </b-row>
     </b-card>
-
-  
   </div>
 </template>
 
@@ -109,7 +106,7 @@ export default {
       cityName: "Dummy",
       followed: "525",
       telephone: "+1 (234) 567-8974",
-      email: "info@businessname.com",
+      email: "info@businessname.com"
     };
   },
   methods: {
@@ -134,8 +131,8 @@ export default {
      */
     validate(idForm) {
       this.$bvModal.hide(idForm);
-    },
-  },
+    }
+  }
 };
 </script>
 
@@ -164,8 +161,8 @@ p {
   display: none;
 }
 @media only screen and (max-width: 768px) {
-.txt{
-  text-align: left;
-}
+  .txt {
+    text-align: left;
+  }
 }
 </style>

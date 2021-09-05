@@ -70,7 +70,7 @@ hr {
 
 .f-left {
   text-align: left;
-  /*align-content: left;*/
+  align-content: left;
 }
 @media only screen and (max-width: 768px) {
   .options {
@@ -79,7 +79,7 @@ hr {
   }
 }
 
-.card-body {
+.card-body{
   padding: 2px;
 }
 </style>

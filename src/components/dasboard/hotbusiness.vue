@@ -1,15 +1,16 @@
 <template>
   <div>
-    <div class="people-style shadow" v-for="item in $store.getters.getdetails" :key="item.id">
+    <div
+      class="people-style shadow"
+      v-for="item in $store.getters['hotbusiness/getdetails']"
+      :key="item.id"
+    >
       <b-row>
         <b-col md="3" xl="3" lg="3" cols="5" sm="3">
           <div class="center-img">
             <splide :options="options" class="r-image">
               <splide-slide cl>
-                <img
-                  :src="item.picture"
-                  class="r-image"
-                />
+                <img :src="item.picture" class="r-image" />
               </splide-slide>
             </splide>
           </div>
@@ -17,12 +18,13 @@
         <b-col md="5" cols="7" lg="7" xl="5" sm="5">
           <p class="textt">
             <strong class="title"> {{ item.name }} </strong> <br />
-            {{item.category}}
+            {{ item.category }}
             <br />
             {{ item.followers }} Community <br />
 
             <span class="location">
-              <b-icon-geo-alt class="ico"></b-icon-geo-alt> {{ item.location_description }}
+              <b-icon-geo-alt class="ico"></b-icon-geo-alt>
+              {{ item.location_description }}
             </span>
             <br />
 
@@ -98,288 +100,288 @@
 </template>
 
 <script>
-  export default {
-    props: ["title", "image"],
+export default {
+  props: ["title", "image"],
 
-    data() {
-      return {
-        options: {
-          rewind: true,
-          autoplay: true,
-          perPage: 1,
-          pagination: false,
+  data() {
+    return {
+      options: {
+        rewind: true,
+        autoplay: true,
+        perPage: 1,
+        pagination: false,
 
-          type: "loop",
-          perMove: 1
-        }
-      };
-    },
-    computed: {
-      business() {
-        return this.$store.state.bdetails;
+        type: "loop",
+        perMove: 1
       }
-    },
-    created() {
-      this.$store
-        .dispatch("getbdetails")
-        .then(() => {
-          console.log("the response");
-        })
-        .catch(err => {
-          console.log({ err: err });
-        });
+    };
+  },
+  computed: {
+    business() {
+      return this.$store.state["hotbusiness/bdetails"];
     }
-  };
+  },
+  created() {
+    this.$store
+      .dispatch("hotbusiness/getbdetails")
+      .then(() => {
+        console.log("the response");
+      })
+      .catch(err => {
+        console.log({ err: err });
+      });
+  }
+};
 </script>
 
 <style scoped>
-  @media only screen and (min-width: 768px) {
-    .btn-text {
-      margin-left: 8px;
-    }
-
-    .btn-com {
-      margin-left: 4px;
-    }
-    .btn-icon {
-      margin-top: 3px;
-    }
-
-    .center-img {
-      margin-right: -60px;
-    }
+@media only screen and (min-width: 768px) {
+  .btn-text {
+    margin-left: 8px;
   }
 
-  @media only screen and (max-width: 768px) {
-    .btn-icon {
-      margin-top: 3px;
-    }
-
-    .btn-text {
-      margin-left: 5px;
-    }
-
-    .btn-com {
-      margin-left: 3px;
-    }
+  .btn-com {
+    margin-left: 4px;
+  }
+  .btn-icon {
+    margin-top: 3px;
   }
 
-  .btnpngs {
-    width: 20px;
-    margin-right: 5px;
+  .center-img {
+    margin-right: -60px;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .btn-icon {
+    margin-top: 3px;
   }
 
-  .btn {
-    border-radius: 5px;
+  .btn-text {
+    margin-left: 5px;
   }
 
-  .card {
-    color: orange;
+  .btn-com {
+    margin-left: 3px;
+  }
+}
+
+.btnpngs {
+  width: 20px;
+  margin-right: 5px;
+}
+
+.btn {
+  border-radius: 5px;
+}
+
+.card {
+  color: orange;
+}
+
+.s-button {
+  align-content: center;
+  text-align: center;
+
+  padding: 15px;
+}
+
+@media only screen and (max-width: 768px) {
+  .a-flex {
+    margin-right: -15px;
   }
 
   .s-button {
-    align-content: center;
-    text-align: center;
-
     padding: 15px;
+    margin-top: -15px;
   }
 
-  @media only screen and (max-width: 768px) {
-    .a-flex {
-      margin-right: -15px;
-    }
+  .title {
+    font-size: 16px;
+    color: black;
 
-    .s-button {
-      padding: 15px;
-      margin-top: -15px;
-    }
-
-    .title {
-      font-size: 16px;
-      color: black;
-
-      line-height: 35px;
-      font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
-    }
-
-    .textt {
-      color: #000;
-
-      font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
-      font-weight: normal;
-      font-size: 12px;
-      line-height: 30px;
-      color: rgba(117, 114, 128, 1);
-      text-align: left;
-
-      font-weight: normal;
-      line-height: 20px;
-      font-style: normal;
-
-      padding: 1px;
-      text-align: left;
-
-      margin-left: -30px;
-
-      margin-right: -5px;
-
-      line-height: 25px;
-    }
-
-    .location {
-      margin-bottom: 30px;
-    }
-
-    .btn {
-      padding-top: 6px;
-      font-size: 10px;
-
-      height: 28px;
-      width: 85px;
-    }
-
-    .r-image {
-      border-radius: 8px;
-
-      height: 100px;
-      width: 100px;
-    }
+    line-height: 35px;
+    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
   }
 
-  @media only screen and (min-width: 768px) {
-    .title {
-      font-size: 20px;
-      color: black;
+  .textt {
+    color: #000;
 
-      line-height: 35px;
-      font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
-    }
+    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 30px;
+    color: rgba(117, 114, 128, 1);
+    text-align: left;
 
-    .textt {
-      color: #000;
+    font-weight: normal;
+    line-height: 20px;
+    font-style: normal;
 
-      font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
-      font-weight: normal;
-      font-size: 14px;
-      line-height: 30px;
-      color: rgba(117, 114, 128, 1);
-      text-align: left;
+    padding: 1px;
+    text-align: left;
 
-      font-weight: normal;
-      line-height: 20px;
-      font-style: normal;
+    margin-left: -30px;
 
-      padding: 1px;
-      text-align: left;
+    margin-right: -5px;
 
-      margin-left: 30px;
-
-      margin-right: -5px;
-
-      line-height: 25px;
-    }
-
-    .location {
-      margin-bottom: 30px;
-    }
-
-    .btn {
-      padding-top: 6px;
-
-      height: 38px;
-      width: 123px;
-    }
-
-    .r-image {
-      border-radius: 8px;
-
-      height: 160px;
-      width: 160px;
-    }
+    line-height: 25px;
   }
 
-  .stock {
-    color: green;
+  .location {
+    margin-bottom: 30px;
   }
 
-  .b1 {
+  .btn {
+    padding-top: 6px;
+    font-size: 10px;
+
+    height: 28px;
+    width: 85px;
+  }
+
+  .r-image {
+    border-radius: 8px;
+
+    height: 100px;
     width: 100px;
-    margin-left: -20px;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .title {
+    font-size: 20px;
+    color: black;
+
+    line-height: 35px;
+    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
   }
 
-  .b2 {
-    width: 120px;
+  .textt {
+    color: #000;
 
-    margin-left: -15px;
+    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 30px;
+    color: rgba(117, 114, 128, 1);
+    text-align: left;
+
+    font-weight: normal;
+    line-height: 20px;
+    font-style: normal;
+
+    padding: 1px;
+    text-align: left;
+
+    margin-left: 30px;
+
+    margin-right: -5px;
+
+    line-height: 25px;
+  }
+
+  .location {
+    margin-bottom: 30px;
+  }
+
+  .btn {
+    padding-top: 6px;
+
+    height: 38px;
+    width: 123px;
+  }
+
+  .r-image {
+    border-radius: 8px;
+
+    height: 160px;
+    width: 160px;
+  }
+}
+
+.stock {
+  color: green;
+}
+
+.b1 {
+  width: 100px;
+  margin-left: -20px;
+}
+
+.b2 {
+  width: 120px;
+
+  margin-left: -15px;
+}
+
+.btn {
+  display: flex;
+}
+
+.ico {
+  margin-right: 5px;
+}
+
+@media only screen and (min-width: 768px) {
+  .people-style {
+    border-top-left-radius: 5px;
+
+    border-bottom-left-radius: 5px;
+
+    border-top-right-radius: 5px;
+
+    border-bottom-right-radius: 5px;
+
+    background: white;
+
+    background-color: #fff;
+    background-clip: border-box;
+    border: 1px solid rgba(0, 0, 0, 0.125);
+    margin-bottom: 10px;
+
+    margin-right: 8px;
+
+    padding: 7px;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .people-style {
+    border-top-left-radius: 5px;
+
+    border-bottom-left-radius: 5px;
+
+    border-top-right-radius: 5px;
+
+    border-bottom-right-radius: 5px;
+
+    background: white;
+
+    background-color: #fff;
+    background-clip: border-box;
+    border: 1px solid rgba(0, 0, 0, 0.125);
+    margin-bottom: 10px;
+    margin-right: -8px;
+    margin-left: -8px;
+
+    padding: 7px;
   }
 
   .btn {
     display: flex;
+
+    padding-right: 60px;
   }
 
-  .ico {
-    margin-right: 5px;
+  h4 {
+    font-size: 15px;
   }
+}
 
-  @media only screen and (min-width: 768px) {
-    .people-style {
-      border-top-left-radius: 5px;
-
-      border-bottom-left-radius: 5px;
-
-      border-top-right-radius: 5px;
-
-      border-bottom-right-radius: 5px;
-
-      background: white;
-
-      background-color: #fff;
-      background-clip: border-box;
-      border: 1px solid rgba(0, 0, 0, 0.125);
-      margin-bottom: 10px;
-
-      margin-right: 8px;
-
-      padding: 7px;
-    }
+@media only screen and (max-width: 520px) {
+  .btn {
+    display: flex;
   }
-
-  @media only screen and (max-width: 768px) {
-    .people-style {
-      border-top-left-radius: 5px;
-
-      border-bottom-left-radius: 5px;
-
-      border-top-right-radius: 5px;
-
-      border-bottom-right-radius: 5px;
-
-      background: white;
-
-      background-color: #fff;
-      background-clip: border-box;
-      border: 1px solid rgba(0, 0, 0, 0.125);
-      margin-bottom: 10px;
-      margin-right: -8px;
-      margin-left: -8px;
-
-      padding: 7px;
-    }
-
-    .btn {
-      display: flex;
-
-      padding-right: 60px;
-    }
-
-    h4 {
-      font-size: 15px;
-    }
-  }
-
-  @media only screen and (max-width: 520px) {
-    .btn {
-      display: flex;
-    }
-  }
+}
 </style>

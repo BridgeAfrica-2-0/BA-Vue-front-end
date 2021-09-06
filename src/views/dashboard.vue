@@ -26,6 +26,7 @@
         <br />
       </div>
 
+
       <div v-if="selectedb == 'owner'">
         <b-row class=" p-0">
           <b-col md="6" sm="12" class="mt-2 "> <Profile /> </b-col>

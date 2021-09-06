@@ -22,7 +22,7 @@ export default {
   name: "SidebarCommunity",
   components: {
     Business,
-    People,
+    People
   },
 
   data() {
@@ -38,15 +38,15 @@ export default {
         { id: 6, first_name: "Bamm Bamm", last_name: "Rubble" },
         { id: 7, first_name: "The Great", last_name: "Gazzoo" },
         { id: 8, first_name: "Rockhead", last_name: "Slate" },
-        { id: 9, first_name: "Pearl", last_name: "Slaghoople" },
-      ],
+        { id: 9, first_name: "Pearl", last_name: "Slaghoople" }
+      ]
     };
   },
   computed: {
     rows() {
       return this.items.length;
-    },
-  },
+    }
+  }
 };
 </script>
 

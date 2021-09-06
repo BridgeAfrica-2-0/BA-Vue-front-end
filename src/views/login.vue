@@ -3,12 +3,14 @@
     <form novalidate class="md-layout" @submit.prevent="validateUser">
       <md-card class="md-layout-item md-size-50 md-small-size-100 p-card">
         <md-card-header>
-          <div class="md-title center f-22">Login To Bridge Africa</div>
+          <div class="md-title center f-22">
+            {{ $t("Login_To_Bridge_Africa") }}
+          </div>
         </md-card-header>
 
         <md-card-content>
           <!-- lol -->
-  <FlashMessage />
+          <FlashMessage />
           <div class="center">
             <b-row>
               <b-col cols="12" md="6" lg="12" xl="6">
@@ -16,9 +18,9 @@
                   @click.prevent="authProvider('facebook')"
                   class="md-raised md-primary b-w"
                 >
-                  <b-icon icon="facebook" aria-hidden="true"></b-icon> Login
-                  With Facebook</md-button
-                >
+                  <b-icon icon="facebook" aria-hidden="true"></b-icon>
+                  {{ $t("Login_With_Facebook") }}
+                </md-button>
               </b-col>
 
               <b-col cols="12" md="6" lg="12" xl="6">
@@ -27,19 +29,19 @@
                   class="b-color b-w"
                   style="color: white"
                 >
-                  <b-icon icon="google" aria-hidden="true"></b-icon> Login with
-                  Google</md-button
-                >
+                  <b-icon icon="google" aria-hidden="true"></b-icon>
+                  {{ $t("login_with_google") }}
+                </md-button>
               </b-col>
             </b-row>
           </div>
 
           <br />
 
-          <p class="t-center">-OR-</p>
+          <p class="t-center">-{{ $t("or") }} -</p>
 
           <md-field :class="getValidationClass('email')">
-            <label for="email">Email</label>
+            <label for="email"> {{ $t("email") }} </label>
             <md-input
               type="email"
               name="email"
@@ -48,16 +50,16 @@
               v-model="form.email"
               :disabled="sending"
             />
-            <span class="md-error" v-if="!$v.form.email.required"
-              >The email is required</span
-            >
-            <span class="md-error" v-else-if="!$v.form.email.email"
-              >Invalid email</span
-            >
+            <span class="md-error" v-if="!$v.form.email.required">
+              {{ $t("the_email_is_required") }}
+            </span>
+            <span class="md-error" v-else-if="!$v.form.email.email">
+              {{ $t("invalid_email") }}
+            </span>
           </md-field>
 
           <md-field>
-            <label for="password">Password</label>
+            <label for="password"> {{ $t("Password") }} </label>
             <md-input
               type="password"
               name="password"
@@ -75,13 +77,12 @@
                 value="accepted"
                 unchecked-value="not_accepted"
               >
-                Remeber Me
+                {{ $t("remeber_me") }}
               </b-form-checkbox>
             </div>
 
             <div class="md-layout-item md-small-size-100">
               <br />
-            
             </div>
           </div>
         </md-card-content>
@@ -96,17 +97,22 @@
                 :disabled="sending"
                 class="b-color f-left"
                 style="color: white"
-                >Login</md-button       
               >
+                {{ $t("login") }}
+              </md-button>
             </b-col>
             <b-col cols="6">
               <router-link to="signup">
-                <md-button class="md-raised f-right">Sign Up</md-button>
+                <md-button class="md-raised f-right"
+                  >{{ $t("signup") }}
+                </md-button>
               </router-link>
             </b-col>
           </b-row>
 
-           <router-link to="recoverPass1" class="nav-link text"> Forget Password</router-link>
+          <router-link to="recoverPass1" class="nav-link text">
+            {{ $t("forget_password") }}
+          </router-link>
         </div>
 
         <div></div>
@@ -116,25 +122,34 @@
           <br />
 
           <label class="f-12">
-            By Loging in you agree to Bridge Africa's
+            {{ $t("by_loging_in_you_agree_to_bridge_africa") }}
           </label>
           <br />
 
           <label class="f-12">
-            <b-link href="#">Terms and conditions </b-link> &
-            <b-link href="#">Privacy policies</b-link>
+            <b-link href="#"> {{ $t("terms_and_conditions") }} </b-link> &
+            <b-link href="#"> {{ $t("Privacy_policies") }} </b-link>
           </label>
         </div>
       </md-card>
 
       <div class="md-layout-item md-size-50 md-small-size-100 b-div"></div>
 
-      <md-snackbar :md-active.sync="userSaved"
-        >The user {{ lastUser }} was saved with success!</md-snackbar
-      >
+      <md-snackbar :md-active.sync="userSaved">
+        {{ $t("the_user") }} {{ lastUser }} {{ $t("was_saved_with_success") }} !
+      </md-snackbar>
     </form>
 
-   
+    <hr class="localfoter" />
+
+    <p class="text-center">
+      <span class="display-inline">
+        <b-link @click="$i18n.locale = 'en'"> {{ $t("english") }}  </b-link>
+        <span class="vl"></span>
+        <b-link class="ml-2" @click="$i18n.locale = 'fr'"> {{ $t("french") }} </b-link>
+      </span>
+      Bridge Africa © 2021
+    </p>
   </div>
 </template>
 
@@ -153,6 +168,9 @@ export default {
       password: null,
       email: null,
     },
+
+    langs: ["en", "fr"],
+
     userSaved: false,
     sending: false,
     lastUser: null,
@@ -194,19 +212,26 @@ export default {
     socialLogin(provider, response) {
       this.$http
         .post("user/social/" + provider, response)
-        .then((response) => {
-          console.log(response.data);
-
+        .then(({ data }) => {  
+          console.log(data.data);
          
-          this.$store.commit("auth/setUserData", response.data);
-            this.flashMessage.show({
+          this.$store.commit("auth/setUserData", data.data);
+          this.flashMessage.show({
             status: "success",
-           
-            message:
-              "Successfully Register",
+
+            message: "Successfully Register",
           });
 
+          if(this.$store.state.auth.user.user.profile_complete==null){  
+
           this.$router.push({ name: "welcome" });
+            
+
+             }else{
+
+               this.$router.push({ name: "dashboard" });
+             }                  
+
         })
         .catch((err) => {
           console.log({ err: err });
@@ -232,44 +257,39 @@ export default {
           password: this.form.password,
         })
         .then(() => {
+          this.sending = false;
 
-           this.sending = false;
+
+ if(this.$store.state.auth.user.user.profile_complete==null){  
 
           this.$router.push({ name: "welcome" });
+            
+
+             }else{
+
+               this.$router.push({ name: "dashboard" });
+             }  
+
+
         })
         .catch((err) => {
-         
-           this.sending = false;
+          this.sending = false;
 
-          
-
-
-              if (err.response.status == 422) {
-
-               console.log({ err: err });
+          if (err.response.status == 422) {
+            console.log({ err: err });
 
             this.flashMessage.show({
-            status: "error",
-           
-            message: err.response.data.message,
-          });
+              status: "error",
 
+              message: err.response.data.message,
+            });
+          } else {
+            this.flashMessage.show({
+              status: "error",
 
-           }else{
-
-                  
-
-                  
-                 this.flashMessage.show({
-            status: "error",
-           
-            message:'An error has occure',
-          });
-
-
-           }
-
-
+              message: "An error has occure",
+            });
+          }
         });
     },
 
@@ -283,7 +303,12 @@ export default {
 };
 </script>
 
-<style  scoped>
+<style scoped>
+.vl {
+  border-left: 1px solid green;
+  height: 50px;
+}
+
 .f-right {
   float: left;
 }
@@ -347,4 +372,10 @@ export default {
     padding-bottom: 100px;
   }
 }
-</style> 
+
+.localfoter {
+  margin-top: -10px;
+}
+</style>
+
+

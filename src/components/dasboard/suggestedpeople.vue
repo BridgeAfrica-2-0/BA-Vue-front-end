@@ -97,8 +97,8 @@ export default {
   computed: {
     people_around() {
       return this.$store.state.auth.peopleAround;
-    },
-  },
+    }
+  }
 };
 </script>
 
@@ -482,6 +482,3 @@ f-right {
   font-size: 12px !important;
 }
 </style>
-
-
-

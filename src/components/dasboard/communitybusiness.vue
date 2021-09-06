@@ -31,70 +31,72 @@
               </p>
             </b-col>
 
-        <b-col lg="12" xl="4" md="4" cols="12" sm="4">
-          <div class="s-button">
-            <b-row>
-              <b-col
-                md="12"
-                lg="4"
-                xl="12"
-                sm="12"
-                cols="4"
-                class="mt-2 text-center"
-              >
-                <b-button
-                  block
-                  size="sm"
-                  class="b-background shadow "
-                  variant="primary"
-                >
-                  <i class="fas fa-user-plus  fa-lg btn-icon "></i>
-                  <span class="btn-com">Community</span>
-                </b-button>
-              </b-col>
+            <b-col lg="12" xl="4" md="4" cols="12" sm="4">
+              <div class="s-button">
+                <b-row>
+                  <b-col
+                    md="12"
+                    lg="4"
+                    xl="12"
+                    sm="12"
+                    cols="4"
+                    class="mt-2 text-center"
+                  >
+                    <b-button
+                      block
+                      size="sm"
+                      class="b-background shadow "
+                      variant="primary"
+                    >
+                      <i class="fas fa-user-plus  fa-lg btn-icon "></i>
+                      <span class="btn-com">Community</span>
+                    </b-button>
+                  </b-col>
 
-              <b-col
-                md="12"
-                lg="4"
-                xl="12"
-                sm="12"
-                cols="4"
-                class="mt-2 text-center"
-              >
-                <b-button
-                  block
-                  size="sm"
-                  class="b-background shadow "
-                  variant="primary"
-                >
-                  <i class="fas fa-envelope   fa-lg btn-icon "></i>
-                  <span class="btn-text">Message</span>
-                </b-button>
-              </b-col>
+                  <b-col
+                    md="12"
+                    lg="4"
+                    xl="12"
+                    sm="12"
+                    cols="4"
+                    class="mt-2 text-center"
+                  >
+                    <b-button
+                      block
+                      size="sm"
+                      class="b-background shadow "
+                      variant="primary"
+                    >
+                      <i class="fas fa-envelope   fa-lg btn-icon "></i>
+                      <span class="btn-text">Message</span>
+                    </b-button>
+                  </b-col>
 
-              <b-col
-                md="12"
-                lg="4"
-                xl="12"
-                sm="12"
-                cols="4"
-                class="mt-2 text-center"
-              >
-                <b-button
-                  block
-                  size="sm"
-                  class="b-background shadow "
-                  variant="primary"
-                >
-                  <i class="fas fa-map-marked-alt  fa-lg btn-icon "></i>
-                  <span class="btn-text">Direction</span>
-                </b-button>
-              </b-col>
-            </b-row>
-          </div>
-        </b-col>
-      </b-row>
-    </div>
+                  <b-col
+                    md="12"
+                    lg="4"
+                    xl="12"
+                    sm="12"
+                    cols="4"
+                    class="mt-2 text-center"
+                  >
+                    <b-button
+                      block
+                      size="sm"
+                      class="b-background shadow "
+                      variant="primary"
+                    >
+                      <i class="fas fa-map-marked-alt  fa-lg btn-icon "></i>
+                      <span class="btn-text">Direction</span>
+                    </b-button>
+                  </b-col>
+                </b-row>
+              </div>
+            </b-col>
+          </b-row>
+        </div>
+      </b-col>
+    </b-row>
   </div>
 </template>
 

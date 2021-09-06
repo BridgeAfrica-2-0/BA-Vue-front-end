@@ -24,17 +24,7 @@
             <b-button class="btn btn-primary button float-right"  @click.prevent="next" > Next </b-button>  </b-col>  </b-row>
             
 
-            <b-row class="mt-2">
-              <b-col cols="6"> </b-col>
-              <b-col cols="6">
-                <b-button
-                  class="btn btn-primary button float-right"
-                  @click.prevent="next"
-                >
-                  Next
-                </b-button>
-              </b-col>
-            </b-row>
+           
           </b-form>
         </div>
       </b-card>

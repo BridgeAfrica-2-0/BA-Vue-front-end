@@ -139,13 +139,18 @@
                 style="color: white"
                 :disabled="sending"
               >
-                Sign Up
+               {{ $t("signup") }}
               </md-button>
             </b-col>
             <b-col cols="6">
-              <b-link href="/login" class="f-right">
-                <md-button class="md-raised"> {{ $t("login") }} </md-button>
-              </b-link>
+
+               <router-link to="login">
+                <md-button class="md-raised f-right"
+                  >{{ $t("login") }}
+                </md-button>
+              </router-link>
+
+             
             </b-col>
           </b-row>
         </div>
@@ -175,9 +180,9 @@
 
     <p class="text-center">
       <span class="display-inline">
-        <b-link @click="$i18n.locale = 'en'"> English</b-link>
+        <b-link @click="$i18n.locale = 'en'"> {{ $t("english") }}</b-link>
         <span class="vl"></span>
-        <b-link class="ml-2" @click="$i18n.locale = 'fr'"> French </b-link>
+        <b-link class="ml-2" @click="$i18n.locale = 'fr'"> {{ $t("french") }} </b-link>
       </span>
       Bridge Africa © 2021
     </p>
@@ -256,10 +261,10 @@ export default {
     socialLogin(provider, response) {
       this.$http
         .post("user/social/" + provider, response)
-        .then((response) => {
-          console.log(response.data);
+        .then(({ data }) => {
+          console.log(data.data);
 
-          this.$store.commit("auth/setUserData", response.data);
+          this.$store.commit("auth/setUserData", data.data);
 
           this.flashMessage.show({
             status: "success",
@@ -304,9 +309,9 @@ export default {
           phone: this.form.tel,
           password_confirmation: this.form.password,
         })
-        .then((response) => {
-          console.log(response.data);
-          this.$store.commit("auth/setUserData", response.data);
+        .then(({ data }) => {       
+          console.log(data.data);
+          this.$store.commit("auth/setUserData", data.data);
 
           this.flashMessage.show({
             status: "success",

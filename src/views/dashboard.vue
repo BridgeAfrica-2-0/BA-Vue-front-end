@@ -137,19 +137,14 @@ import Map from "@/components/dasboard/map";
 import EmptyBusiness from "@/components/dasboard/emptybusiness";
 
 import Popularnetwork from "@/components/dasboard/popularnetwork";
-<<<<<<<<< Temporary merge branch 1
-=========
-//import Hotbusiness from "@/components/dasboard/hotbusiness";
-//import People from '../components/businessOwner/tabs/owner/networks/people.vue';
->>>>>>>>> Temporary merge branch 2
+
 
 export default {
   name: "dashboard",
   data() {
     return {
       slide: 0,
-<<<<<<<<< Temporary merge branch 1
-=========
+
       sliding: null,
 
       selected: "all",
@@ -159,11 +154,6 @@ export default {
       selectedb: "owner",
 
       educatio: "any",
->>>>>>>>> Temporary merge branch 2
-
-      sliding: null,
-
-      selectedb: "owner",
 
       map: false,
 
@@ -171,22 +161,8 @@ export default {
         { value: "owner", text: "Owner's Name" },
         { value: "a", text: "Business Name 1" },
         { value: "b", text: "Business Name 2" },
-<<<<<<<<< Temporary merge branch 1
         { value: "c", text: "Business Name 3" }
-      ]
-=========
-        { value: "c", text: "Business Name 3" },
       ],
-
-      optionss: [
-        { id: "all", label: "All" },
-        { id: "business", label: "Business" },
-        { id: "people", label: "People" },
-        { id: "network", label: "Network" },
-        { id: "marketplace", label: "Markeplace", notEnabled: true },
-        { id: "posts", label: "Posts" },
-      ],
-
       options: [
         { item: "all", name: "All" },
         { item: "business", name: "Business" },
@@ -245,33 +221,21 @@ export default {
         { title: "Business 3" },
         { title: "Business 4" },
       ],
->>>>>>>>> Temporary merge branch 2
     };
   },
   components: {
     ComunitiDashboard,
     BusinessDashboard,
-    //People,
     Business,
     CommunityActivity,
     Tutorial,
     Insights,
     Popularnetwork,
-    //Hotbusiness,
-    //SelectBusiness,
-
     Map,
-
     EmptyBusiness,
-    //SelectBH,
     Profile,
-
     CarousselDashboard,
-<<<<<<<<< Temporary merge branch 1
-    Navbar
-=========
     Navbar,
->>>>>>>>> Temporary merge branch 2
   },
   methods: {},
 };

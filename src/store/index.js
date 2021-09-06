@@ -2,21 +2,14 @@ import Vue from "vue";
 import Vuex from "vuex";
 
 import axios from "axios";
-//import axios from "axios";
 import auth from "./auth";
 import businessOwner from "./businessOwner";
-
-//import axios from "axios";
-import moment from "moment";
 
 Vue.use(Vuex);
 axios.defaults.baseURL = process.env.VUE_APP_API_URL;
 
 const getDefaultState = () => {
   return {
-    url_base: "http://team3dev.maxinemoffett.com",
-    url_load_profile_business: "/api/v1/business",
-    url_post_profile_business: "/api/v1/business/create/userBusiness",
     api_link: "https://94e9-154-72-150-118.ngrok.io/api/v1",
     api_link_end: "/business/details",
     token1: "8|Yx3DU4s08aFTYOCa3T2XJKZkjJV4leSi9b20oo5D",
@@ -131,8 +124,7 @@ const state = getDefaultState();
 
 const actions = {
   async loadUserProfileBusiness(context, payload) {
-    console.log(payload);
-    console.log("load user Profile Business start +++++");
+    console.log(payload, "load user Profile Business start +++++");
     let response_ = null;
     await fetch(process.env.VUE_APP_API_URL1 + "/api/v1/business", {
       method: "GET",
@@ -142,8 +134,10 @@ const actions = {
       }
     })
       .then(response => {
-        console.log("load user profile business response (1) +++++++");
-        console.log(response);
+        console.log(
+          "load user profile business response (1) +++++++",
+          response
+        );
         if (response.status !== 200 && response.status !== 201) {
           console.log("error from the server ");
           throw "Error from the Server";
@@ -151,8 +145,10 @@ const actions = {
         return response.json();
       })
       .then(response => {
-        console.log("load user profile business response (2) successsss +++");
-        console.log(response);
+        console.log(
+          "load user profile business response (2) successsss +++",
+          response
+        );
         if (!response) {
           console.log("Error from the server+++++++");
           throw new Error("Error of load Profile Business+++++");
@@ -163,15 +159,13 @@ const actions = {
         response_ = response;
       })
       .catch(error => {
-        console.log("error from browser or server error(1)");
-        console.log(error);
+        console.log("error from browser or server error(1)", error);
         throw error;
       });
     return response_;
   },
   async updateUserProfileBusiness(context, payload) {
-    console.log(payload);
-    console.log("edit user Profile Business start +++++");
+    console.log(payload, "edit user Profile Business start +++++");
     let response_ = null;
     await fetch(
       process.env.VUE_APP_API_URL1 + "/api/v1/business/create/userBusiness",
@@ -206,8 +200,7 @@ const actions = {
       }
     )
       .then(response => {
-        console.log("save new Business response (1) +++++++");
-        console.log(response);
+        console.log("save new Business response (1) +++++++", response);
         if (response.status !== 200 && response.status !== 201) {
           console.log("Error From the Server ++++ ");
           throw "Error from the Server";
@@ -215,8 +208,7 @@ const actions = {
         return response.json();
       })
       .then(response => {
-        console.log("save new Business response successsss (2) +++");
-        console.log(response);
+        console.log("save new Business response successsss (2) +++", response);
         if (!response) {
           console.log("Error From The server+++++++");
           throw new Error("Error from save new Business+++++");
@@ -248,8 +240,7 @@ const actions = {
         response_ = response;
       })
       .catch(error => {
-        console.log("error from the browser or the server error(1)");
-        console.log(error);
+        console.log("error from the browser or the server error(1)", error);
         throw error;
       });
     return response_;

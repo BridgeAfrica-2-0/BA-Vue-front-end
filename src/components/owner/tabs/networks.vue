@@ -20,8 +20,15 @@
           :key="index"
         >
           <div class="people-style shadow">
-            <b-row @click="viewNetwork(network)">
-              <b-col md="3" xl="3" lg="3" cols="5" sm="3">
+            <b-row>
+              <b-col
+                @click="viewNetwork(network)"
+                md="3"
+                xl="3"
+                lg="3"
+                cols="5"
+                sm="3"
+              >
                 <div class="center-img" v-b-modal.modal-1>
                   <img
                     :src="
@@ -183,7 +190,52 @@
             class="mb-0"
           >
             <b-form-input
-              v-model="createdNetwork.business_address"
+              v-model="createdNetwork.address"
+              id="network_name"
+              placeholder=""
+              required
+            >
+            </b-form-input>
+          </b-form-group>
+          <b-form-group
+            label-cols-lg="12"
+            label="City"
+            label-size="md"
+            label-class="font-weight-bold pt-0"
+            class="mb-0"
+          >
+            <b-form-input
+              v-model="createdNetwork.city"
+              id="network_name"
+              placeholder=""
+              required
+            >
+            </b-form-input>
+          </b-form-group>
+          <b-form-group
+            label-cols-lg="12"
+            label="Phone 1"
+            label-size="md"
+            label-class="font-weight-bold pt-0"
+            class="mb-0"
+          >
+            <b-form-input
+              v-model="createdNetwork.phone1"
+              id="network_name"
+              placeholder=""
+              required
+            >
+            </b-form-input>
+          </b-form-group>
+          <b-form-group
+            label-cols-lg="12"
+            label="Phone 2"
+            label-size="md"
+            label-class="font-weight-bold pt-0"
+            class="mb-0"
+          >
+            <b-form-input
+              v-model="createdNetwork.phone2"
               id="network_name"
               placeholder=""
               required
@@ -254,8 +306,8 @@
             class="mb-0"
           >
             <b-form-checkbox
-              value="1"
-              unchecked-value="0"
+              :value="1"
+              :unchecked-value="0"
               v-model="createdNetwork.allow_business"
               name="check-button"
               switch
@@ -331,18 +383,30 @@ export default {
       createdNetwork: {
         name: "",
         description: "",
+        city: "",
         network_category: "",
         purpose: "",
+        phone1: "",
+        email: "",
+        country_id: 0,
+        network_category_id: 0,
+        phone2: "",
         special_needs: "",
-        business_address: "",
+        address: "",
         image: "",
         allow_business: 0,
       },
       chosenNetwork: {
         name: "",
         description: "",
+        city: "",
         network_category: "",
         purpose: "",
+        email: "",
+        country_id: 0,
+        network_category_id: 0,
+        phone1: "",
+        phone2: "",
         special_needs: "",
         address: "",
         image: "",
@@ -370,7 +434,7 @@ export default {
         });
     },
     // Add network to the database but doesn't work correctly for now
-    async addNetwork(newNetwork) {
+    addNetwork(newNetwork) {
       this.loader = true;
       axios
         .post("/network", newNetwork)
@@ -413,18 +477,46 @@ export default {
           this.loader = false;
         });
     },
+
+    // delete a network
+    deleteNetwork(network) {
+      axios
+        .delete(`network/${network.id}`)
+        .then(res => {
+          this.success.state = true;
+          this.success.msg = "Operation was successful !!";
+          setTimeout(() => {
+            this.success.state = false;
+          }, 5000);
+          this.getNetworks();
+        })
+        .catch(err => {
+          this.success.state = true;
+          this.success.msg = "Something wen't wrong !!";
+          setTimeout(() => {
+            this.success.state = false;
+          }, 5000);
+          this.loader = false;
+        });
+    },
     // Action handler
     action() {
       const fd = new FormData();
       fd.append("business_id", "1");
       fd.append("name", this.createdNetwork.name);
       fd.append("address", this.createdNetwork.address);
+      fd.append("city", this.createdNetwork.city);
+      fd.append("country_id", 2);
+      fd.append("phone1", this.createdNetwork.phone1);
+      fd.append("phone2", this.createdNetwork.phone2);
+      fd.append("email", "dev@bav.com");
       fd.append("network_category", this.createdNetwork.network_category);
+      fd.append("network_category_id", 1);
       fd.append("description", this.createdNetwork.description);
       fd.append("purpose", this.createdNetwork.purpose);
       fd.append("special_needs", this.createdNetwork.special_needs);
       fd.append("image", this.createdNetwork.image);
-      fd.append("allow_business", this.createdNetwork.allow_busines);
+      fd.append("allow_business", this.createdNetwork.allow_business);
       if (this.editNet) {
         fd.append("_method", "PUT");
         let data = {
@@ -463,6 +555,12 @@ export default {
       this.createdNetwork.id = network.id;
       this.createdNetwork.image = network.image;
       this.createdNetwork.name = network.name;
+      this.createdNetwork.email = network.email;
+      this.createdNetwork.country_id = network.country_id;
+      this.createdNetwork.phone1 = network.phone1;
+      this.createdNetwork.city = network.city;
+      this.createdNetwork.phone2 = network.phone2;
+      this.createdNetwork.network_category_id = network.network_category_id;
       this.createdNetwork.business_id = network.business_id;
       this.createdNetwork.address = network.address;
       this.createdNetwork.description = network.description;

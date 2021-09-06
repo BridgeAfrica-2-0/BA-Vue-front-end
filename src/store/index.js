@@ -9,8 +9,6 @@ axios.defaults.baseURL = process.env.VUE_APP_API_URL;
 
 const getDefaultState = () => {
   return {
-    url_base: "http://team3dev.maxinemoffett.com",
-    url_load_business_insight: "/api/v1/business/insights",
     token: "1|5EyNcoXFcd6d4j8kaizPr8E3gU9lRu9CHqAWPa03",
     bdetails: [],
     userData: [
@@ -41,8 +39,8 @@ const actions = {
     if (payload !== null) {
       console.log("Payload does not null ++++++++++");
       url =
-        state.url_base +
-        state.url_load_business_insight +
+        process.env.VUE_APP_API_URL1 +
+        "/api/v1/business/insights" +
         "?dateStarting=" +
         payload.startDate +
         "&dateClosing=" +

@@ -7,30 +7,30 @@
     >
       <b-row>
         <b-col md="3" xl="3" lg="3" cols="5" sm="3">
-          <div class="center-img">
+              <div class="center-img">
             <splide :options="options" class="r-image">
-              <splide-slide cl>
+                  <splide-slide cl>
                 <img :src="item.picture" class="r-image" />
               </splide-slide>
             </splide>
-          </div>
-        </b-col>
-        <b-col md="5" cols="7" lg="7" xl="5" sm="5">
-          <p class="textt">
+              </div>
+            </b-col>
+            <b-col md="5" cols="7" lg="7" xl="5" sm="5">
+              <p class="textt">
             <strong class="title"> {{ item.name }} </strong> <br />
-            {{ item.category }}
+                {{ item.category }}
             <br />
             {{ item.followers }} Community <br />
 
-            <span class="location">
+                <span class="location">
               <b-icon-geo-alt class="ico"></b-icon-geo-alt>
               {{ item.location_description }}
             </span>
             <br />
 
             {{ item.about_business }} <b-link>Read More</b-link>
-          </p>
-        </b-col>
+              </p>
+            </b-col>
 
         <b-col lg="12" xl="4" md="4" cols="12" sm="4">
           <div class="s-button">
@@ -166,7 +166,7 @@ export default {
   }
 }
 
-.btnpngs {
+  .btnpngs {
   width: 20px;
   margin-right: 5px;
 }
@@ -321,6 +321,10 @@ export default {
 
 .ico {
   margin-right: 5px;
+}
+
+.r-image {
+  border-radius: 8px;
 }
 
 @media only screen and (min-width: 768px) {

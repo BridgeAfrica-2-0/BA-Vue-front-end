@@ -1,136 +1,126 @@
 <template>
-  <div  class="lalla">
+  <div class="lalla">
+    <b-card
+      class="border-0 p-0 m-0"
+      style="
+    padding: 3px;"
+    >
+      <div class=" border shadow   p-tab p-3">
+        <span>
+          <h6 class="title">
+            <fas-icon class="icons" :icon="['fas', 'users']" size="lg" />
+            <b> COMMUNITY </b> <span class="h4-color"> {{ com.total }} </span>
+          </h6>
+        </span>
 
-    
-    <b-card class="border-0 p-0 m-0"   style="
-    padding: 3px;">
-
-
-
- 
-     
-
-     <div class=" border shadow   p-tab p-3">
-
-        <span> <h6 class="title">  <fas-icon class="icons" :icon="['fas', 'users']" size="lg" />            <b>   COMMUNITY   </b>  <span class="h4-color"> 7K </span> </h6>   </span>   
-
-
-      <b-tabs  pills content-class="mt-3  f-left ">
-        <b-tab  active>
-
-         <template slot="title"  >
-             People  <span class="spa-color">  7K   </span>
+        <b-tabs pills content-class="mt-3  f-left ">
+          <b-tab active>
+            <template slot="title">
+              People
+              <span class="spa-color">
+                {{ count(business.people[0].total_people) }}
+              </span>
             </template>
 
+            <div>
+              <b-row>
+                <b-col class="p-2">
+                  <b-tabs fill pills content-class="mt-3  f-left m-up">
+                    <b-tab active>
+                      <template slot="title">
+                        Followers
+                        <span class="spa-color">
+                          {{ count(business.people[0].total_user_follower) }}
+                        </span>
+                      </template>
 
- 
-     <div>
+                      <div class="s-comcard">
+                        <b-row>
+                          <div>
+                            <People
+                              :people="business.people[0].user_followers"
+                            />
+                          </div>
+                        </b-row>
+                      </div>
+                    </b-tab>
 
-       <b-row>  
-         <b-col class="p-2"> 
-      <b-tabs fill pills content-class="mt-3  f-left m-up">
+                    <b-tab>
+                      <template slot="title">
+                        Following
+                        <span class="spa-color">
+                          {{ count(business.people[0].total_user_following) }}
+                        </span>
+                      </template>
 
-        <b-tab  active>
-          
-            <template slot="title"  >
-             Followers  <span class="spa-color">  7K   </span>
+                      <div class="s-comcard">
+                        <b-row>
+                          <div>
+                            <People
+                              :people="business.people[0].user_following"
+                            />
+                          </div>
+                        </b-row>
+                      </div>
+                    </b-tab>
+                  </b-tabs>
+                </b-col>
+              </b-row>
+            </div>
+          </b-tab>
+
+          <b-tab>
+            <template slot="title">
+              Businesses
+              <span class="spa-color">
+                {{ count(business.people[0].total_business) }}
+              </span>
             </template>
 
-         
-         <div class="s-comcard">    <b-row>  <b-col lg="6" sm="12" class="p-2">  
-           
-            <div >  <People />    </div >  </b-col> <b-col md="6" sm="12" class="p-2">   <div > <People />    </div >
-            
-              </b-col>    </b-row>   </div>
- 
-         
-         
-        </b-tab>
+            <div>
+              <b-tabs fill pills content-class="mt-3  f-left m-up checkcheck">
+                <b-tab active>
+                  <template slot="title">
+                    Followers
+                    <span class="spa-color">
+                      {{ count(business.people[0].total_business_follower) }}
+                    </span>
+                  </template>
 
-        <b-tab > 
+                  <div class="s-comcard">
+                    <b-row>
+                      <div>
+                        <Business
+                          :business="business.business[0].business_followers"
+                        />
+                      </div>
+                    </b-row>
+                  </div>
+                </b-tab>
 
-            <template slot="title"  >
-             Following  <span class="spa-color">  7K   </span>
-            </template>
+                <b-tab>
+                  <template slot="title">
+                    Following
+                    <span class="spa-color">
+                      {{ count(business.people[0].total_business_following) }}
+                    </span>
+                  </template>
 
-      <div class="s-comcard">    <b-row>  <b-col md="12" sm="12">   <div >  <People />    </div >  </b-col> <b-col md="6" sm="12">   <div > <People />    </div >  </b-col>    </b-row>   </div>
-
-        
-        
-        </b-tab>
-      </b-tabs>
-      </b-col>
-        </b-row>
-    </div>
-
-         
-        </b-tab>
-
-        <b-tab >
-
-            <template slot="title"  >
-             Businesses  <span class="spa-color">  7K   </span>
-            </template>
-        
-        
-     <div>
-      <b-tabs fill pills content-class="mt-3  f-left m-up checkcheck">
-        <b-tab  active>
-
-         <template slot="title"  >
-             Followers  <span class="spa-color">  7K   </span>
-            </template>
-        
-         
-
-
-         <div class="s-comcard">    <b-row>  <b-col lg="6" sm="12">   <div >  <Business />    </div >  </b-col> <b-col md="6" sm="12">   <div > <Business />    </div >  </b-col>    </b-row>   </div>
-
- 
-         
-        </b-tab>
-
-        <b-tab >
-        
-
-            <template slot="title"  >
-             Following  <span class="spa-color">  7K   </span>
-            </template>
-        
-        <div class="s-comcard">    <b-row>  <b-col lg="6" sm="12">   <div >  <Business />    </div >  </b-col> <b-col md="6" sm="12">   <div > <Business />    </div >  </b-col>    </b-row>   </div>
- 
-        </b-tab>
-      </b-tabs>
-    </div>
-
-
-
-        </b-tab>
-      </b-tabs>
-    </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+                  <div class="s-comcard">
+                    <b-row>
+                      <div>
+                        <Business
+                          :business="business.business[0].business_following"
+                        />
+                      </div>
+                    </b-row>
+                  </div>
+                </b-tab>
+              </b-tabs>
+            </div>
+          </b-tab>
+        </b-tabs>
+      </div>
     </b-card>
   </div>
 </template>
@@ -147,13 +137,48 @@ export default {
 
    components: {
     People,
-    Business,
-    
-    
-    
+    Business
   },
+  computed: {
+    business() {
+      //return this.$store.getters.getProfileCommunity;
+      return this.$store.getters["dashboardcommunity/getProfileCommunity"];
+    },
+    com() {
+      // return this.$store.getters.getcom;
+      return this.$store.getters["dashboardcommunity/getcom"];
+    }
+  },
+  created() {
+    this.$store
+      .dispatch("dashboardcommunity/getdetails")
 
+      .then(() => {
+        console.log("the response");
+      })
+      .catch(err => {
+        console.log({ err: err });
+      });
+    this.$store
+      .dispatch("dashboardcommunity/gettotalcommunity")
 
+      .then(() => {
+        console.log("the response");
+      })
+      .catch(err => {
+        console.log({ err: err });
+      });
+  },
+  methods: {
+    count(number) {
+      if (number >= 1000000) {
+        return number / 1000000 + "M";
+      }
+      if (number >= 1000) {
+        return number / 1000 + "K";
+      } else return number;
+    }
+  }
 };
 </script>
 

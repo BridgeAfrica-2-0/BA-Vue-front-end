@@ -1,8 +1,7 @@
 <template>
   <div>
     <b-card title="" header-tag="header" footer-tag="footer">
-
-        <h6 class="mb-2">Intro</h6>
+      <h6 class="mb-2">Intro</h6>
 
       <b-card-text>
         <p>
@@ -22,8 +21,7 @@
           Name:Dummy
         </p>
         <p>
-          <b-icon icon="people-fill" class="primary"></b-icon> Followed by:
-          525
+          <b-icon icon="people-fill" class="primary"></b-icon> Followed by: 525
         </p>
         <p>
           <b-icon icon="geo-alt-fill" class="primary"></b-icon>

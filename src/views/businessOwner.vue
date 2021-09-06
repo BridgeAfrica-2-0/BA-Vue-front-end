@@ -80,14 +80,14 @@ export default {
         { label: "Pending Post", icon: "" },
         { label: "Insight", icon: "" },
 
-        { label: "Settings", icon: "" },
+        { label: "Settings", icon: "" }
       ],
       options: {
-        activeColor: "#1d98bd",
-      },
+        activeColor: "#1d98bd"
+      }
     };
   },
-  computed: {},
+  computed: {}
 };
 </script>
 

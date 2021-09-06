@@ -31,8 +31,8 @@ export default {
   components: {
     Biography,
     ContactAndInfo,
-    WorkAndEducation,
-  },
+    WorkAndEducation
+  }
 };
 </script>
 

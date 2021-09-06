@@ -24,7 +24,7 @@
       </b-tab>
       <b-tab>
         <template slot="title">
-          <h6 >Feedback</h6>
+          <h6>Feedback</h6>
         </template>
         <feedback-network></feedback-network>
       </b-tab>
@@ -49,29 +49,24 @@ export default {
 };
 </script>
 
-<style >
+<style>
 .t-color {
   color: black;
 }
 
-.t-left{
-
+.t-left {
   text-align: left;
 }
 
 .bongo .yolo .nav {
-   
-   
- 
   border-style: hidden;
-  
 }
 
-h6{
+h6 {
   font-size: 12px;
 }
 
-.card-body{
+.card-body {
   padding: 0px;
 }
 </style>

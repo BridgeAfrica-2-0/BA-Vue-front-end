@@ -38,11 +38,11 @@ export default {
   display: flex;
 }
 
-.basic{
+.basic {
   text-align: left;
 }
 @media only screen and (max-width: 768px) {
-  .basic{
+  .basic {
     margin-left: 20px;
   }
 }

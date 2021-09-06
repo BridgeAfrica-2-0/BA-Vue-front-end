@@ -799,8 +799,7 @@ export default {
           console.log("save new websites user end +++++");
         })
         .catch(error => {
-          console.log(error);
-          console.log("not save new websites user end error (2) +++++");
+          console.log(error, "not save new websites user end error (2) +++++");
         })
         .finally(() => {
           console.log("finally save new website user ");

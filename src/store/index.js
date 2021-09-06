@@ -11,24 +11,6 @@ axios.defaults.baseURL = process.env.VUE_APP_API_URL;
 
 const getDefaultState = () => {
   return {
-    url_base: "http://team3dev.maxinemoffett.com",
-    url_user_infos: "/api/v1/userIntro",
-    url_update_user_infos: "/api/v1/userIntro?",
-    url_load_user_biography: "/api/v1/userIntro/biography",
-    url_update_biography: "/api/v1/userIntro/biography?",
-    url_update_birthDate: "/api/v1/userIntro/dob?",
-    url_load_birthDate: "/api/v1/userIntro/dob?",
-    url_update_gender: "/api/v1/userIntro/gender",
-    url_post_mobilesPhones: "/api/v1/userIntro/addPhone",
-    url_update_current_city: "/api/v1/userIntro/addCurrentCity/11",
-    url_update_current_home: "/api/v1/userIntro/addCurrentHome/11",
-    url_post_website: "/api/v1/userIntro/storeWebLink",
-    url_post_socialLink: "/api/v1/userIntro/storeSocialLink",
-    url_add_working: "/api/v1/userIntro/addWorking",
-    url_update_working: "/api/v1/userIntro/updateWorking",
-    url_add_school: "api/v1/userIntro/addSchool",
-    url_update_school: "api/v1/userIntro/updateSchool",
-    url_add_profession: "/api/v1/userIntro/updateWorki",
     api_link: "https://94e9-154-72-150-118.ngrok.io/api/v1",
     api_link_end: "/business/details",
     token1: "8|Yx3DU4s08aFTYOCa3T2XJKZkjJV4leSi9b20oo5D",
@@ -158,11 +140,10 @@ const state = getDefaultState();
 
 const actions = {
   async loadUserProfileAbout(context, payload) {
-    console.log(payload);
-    console.log("load user Profile About start +++++");
+    console.log(payload, "load user Profile About start +++++");
 
     let response_ = null;
-    await fetch(state.url_base + state.url_user_infos, {
+    await fetch(process.env.VUE_APP_API_URL1 + "/api/v1/userIntro", {
       method: "GET",
       headers: {
         Accept: "application/json",
@@ -170,8 +151,7 @@ const actions = {
       }
     })
       .then(response => {
-        console.log("load user profile about response (1) +++++++");
-        console.log(response);
+        console.log("load user profile about response (1) +++++++", response);
         if (response.status !== 200 && response.status !== 201) {
           console.log("error from the server ++++");
           throw "Error from the Server";
@@ -179,8 +159,10 @@ const actions = {
         return response.json();
       })
       .then(response => {
-        console.log("load user profile about response (2) successsss +++");
-        console.log(response);
+        console.log(
+          "load user profile about response (2) successsss +++",
+          response
+        );
         if (!response) {
           console.log("Error from the server+++++++");
           throw new Error("Error of load profile about ++++++++");
@@ -191,8 +173,7 @@ const actions = {
         response_ = response;
       })
       .catch(error => {
-        console.log("error from browser or server error(1)");
-        console.log(error);
+        console.log("error from browser or server error(1)", error);
         throw error;
       });
     return response_;
@@ -202,8 +183,8 @@ const actions = {
     console.log(payload, "edit user biography start +++++");
     let response_ = null;
     await fetch(
-      state.url_base +
-        state.url_update_biography +
+      process.env.VUE_APP_API_URL1 +
+        "/api/v1/userIntro/biography?" +
         "biography=" +
         payload.description +
         "&value=" +
@@ -249,7 +230,7 @@ const actions = {
     console.log(payload, "load user biography start +++++");
 
     let response_ = null;
-    await fetch(state.url_base + state.url_load_user_biography, {
+    await fetch(process.env.VUE_APP_API_URL1 + "/api/v1/userIntro/biography", {
       method: "GET",
       headers: {
         Accept: "application/json",
@@ -296,7 +277,7 @@ const actions = {
     console.log("load user birth date start +++++");
 
     let response_ = null;
-    await fetch(state.url_base + state.url_load_birthDate, {
+    await fetch(process.env.VUE_APP_API_URL1 + "/api/v1/userIntro/dob?", {
       method: "GET",
       headers: {
         Accept: "application/json",
@@ -359,8 +340,8 @@ const actions = {
 
     let response_ = null;
     await fetch(
-      state.url_base +
-        state.url_update_birthDate +
+      process.env.VUE_APP_API_URL1 +
+        "/api/v1/userIntro/dob?" +
         "dob=" +
         moment(
           payload.dateOfBirth.date_2.year +
@@ -408,13 +389,20 @@ const actions = {
     return response_;
   },
   async updateUserBasicInfosGender(context, payload) {
-    console.log(payload);
-    console.log("edit user gender start +++++");
+    console.log(payload, "edit user gender start +++++");
     const gender = payload.gender === "F" ? "female" : "male";
-    console.log(state.url_base + state.url_update_gender + "?gender=" + gender);
+    console.log(
+      process.env.VUE_APP_API_URL1 +
+        "/api/v1/userIntro/gender" +
+        "?gender=" +
+        gender
+    );
     let response_ = null;
     await fetch(
-      state.url_base + state.url_update_gender + "?gender=" + gender,
+      process.env.VUE_APP_API_URL1 +
+        "/api/v1/userIntro/gender" +
+        "?gender=" +
+        gender,
       {
         method: "POST",
         headers: {
@@ -424,8 +412,7 @@ const actions = {
       }
     )
       .then(response => {
-        console.log("edit user gender response (1) +++++++");
-        console.log(response);
+        console.log("edit user gender response (1) +++++++", response);
         if (response.status !== 200 && response.status !== 201) {
           console.log("Error From The Server");
           throw "Error From The Server";
@@ -433,8 +420,7 @@ const actions = {
         return response.json();
       })
       .then(response => {
-        console.log("edit user gender response successsss +++");
-        console.log(response);
+        console.log("edit user gender response successsss +++", response);
         if (!response) {
           console.log("Erreur liée au serveur+++++++");
           throw new Error("Erreur d edition du BirthDate+++++");
@@ -445,21 +431,19 @@ const actions = {
         response_ = response;
       })
       .catch(error => {
-        console.log("erreur liée au serveur ou au navigateur");
-        console.log(error);
+        console.log("erreur liée au serveur ou au navigateur", error);
         throw error;
       });
     return response_;
   },
   async updateUserBasicInfosMobilePhones(context, payload) {
-    console.log(payload);
-    console.log("edit user mobile Phones start +++++");
+    console.log(payload, "edit user mobile Phones start +++++");
     const lastPhoneNumber =
       payload.mobilePhones[payload.mobilePhones.length - 1];
     let response_ = null;
     await fetch(
-      state.url_base +
-        state.url_post_mobilesPhones +
+      process.env.VUE_APP_API_URL1 +
+        "/api/v1/userIntro/addPhone" +
         "?phoneNumber=" +
         lastPhoneNumber,
       {
@@ -471,8 +455,7 @@ const actions = {
       }
     )
       .then(response => {
-        console.log("edit user mobile phones response (1) +++++++");
-        console.log(response);
+        console.log("edit user mobile phones response (1) +++++++", response);
         if (response.status !== 200 && response.status !== 201) {
           console.log("Error From The Server");
           throw "Error From The Server";
@@ -480,8 +463,10 @@ const actions = {
         return response.json();
       })
       .then(response => {
-        console.log("edit user mobile phones response successsss (2) +++");
-        console.log(response);
+        console.log(
+          "edit user mobile phones response successsss (2) +++",
+          response
+        );
 
         if (!response) {
           console.log("Error From The Server +++++++");
@@ -493,36 +478,29 @@ const actions = {
         response_ = response;
       })
       .catch(error => {
-        console.log("Error From The Server or the Browser");
-        console.log(error);
+        console.log("Error From The Server or the Browser", error);
         throw error;
       });
     return response_;
   },
   async updateUserBasicInfosCurrentCity(context, payload) {
-    console.log(payload);
-    console.log("edit user currentcity start +++++");
+    console.log(payload, "edit user currentcity start +++++");
     let response_ = null;
     await fetch(
-      state.url_base +
-        state.url_update_current_city +
+      process.env.VUE_APP_API_URL1 +
+        "/api/v1/userIntro/addCurrentCity/11" +
         "?city=" +
         payload.currentCity,
       {
         method: "POST",
         headers: {
-          //"Content-Type": "application/json",
           Accept: "application/json",
           Authorization: `Bearer ${state.token}`
         }
-        // body: JSON.stringify({
-        //   currentCity: payload.currentCity
-        // })
       }
     )
       .then(response => {
-        console.log("edit user current city response (1) +++++++");
-        console.log(response);
+        console.log("edit user current city response (1) +++++++", response);
         if (response.status !== 200 && response.status !== 201) {
           console.log("Error From The Server");
           throw "Error From The Server";
@@ -530,8 +508,10 @@ const actions = {
         return response.json();
       })
       .then(response => {
-        console.log("edit user current city response successsss (2) +++");
-        console.log(response);
+        console.log(
+          "edit user current city response successsss (2) +++",
+          response
+        );
         if (!response) {
           console.log("Error From The Server +++++++");
           throw new Error("Error From Add New Current City+++++");
@@ -542,36 +522,29 @@ const actions = {
         response_ = response;
       })
       .catch(error => {
-        console.log("Error From The Server or The Browser");
-        console.log(error);
+        console.log("Error From The Server or The Browser", error);
         throw error;
       });
     return response_;
   },
   async updateUserBasicInfosHomeTown(context, payload) {
-    console.log(payload);
-    console.log("edit user homeTown start +++++");
+    console.log(payload, "edit user homeTown start +++++");
     let response_ = null;
     await fetch(
-      state.url_base +
-        state.url_update_current_city +
+      process.env.VUE_APP_API_URL1 +
+        "/api/v1/userIntro/addCurrentHome/11" +
         "?homeTown=" +
         payload.homeTown,
       {
         method: "POST",
         headers: {
-          //"Content-Type": "application/json",
           Accept: "application/json",
           Authorization: `Bearer ${state.token}`
         }
-        // body: JSON.stringify({
-        //   homeTown: payload.homeTown
-        // })
       }
     )
       .then(response => {
-        console.log("edit user homeTown response (1) +++++++");
-        console.log(response);
+        console.log("edit user homeTown response (1) +++++++", response);
         if (response.status !== 200 && response.status !== 201) {
           console.log("Error From The Server");
           throw "Error From The Server";
@@ -579,8 +552,10 @@ const actions = {
         return response.json();
       })
       .then(response => {
-        console.log("edit user homeTown response successsss response (1) +++");
-        console.log(response);
+        console.log(
+          "edit user homeTown response successsss response (1) +++",
+          response
+        );
         if (!response) {
           console.log("Error From the server +++++++");
           throw new Error("Error From update or add new homeTown+++++");
@@ -591,37 +566,30 @@ const actions = {
         response_ = response;
       })
       .catch(error => {
-        console.log("error From browser or server");
-        console.log(error);
+        console.log("error From browser or server", error);
         throw error;
       });
     return response_;
   },
   async updateUserBasicInfosWebsites(context, payload) {
-    console.log(payload);
-    console.log("edit user website start +++++");
+    console.log(payload, "edit user website start +++++");
 
     let response_ = null;
     await fetch(
-      state.url_base +
-        state.url_post_website +
+      process.env.VUE_APP_API_URL1 +
+        "/api/v1/userIntro/storeWebLink" +
         "?webUrl=" +
         payload.websites[payload.websites.length - 1],
       {
         method: "POST",
         headers: {
-          //"Content-Type": "application/json",
           Accept: "application/json",
           Authorization: `Bearer ${state.token}`
         }
-        // body: JSON.stringify({
-        //   websites: payload.websites
-        // })
       }
     )
       .then(response => {
-        console.log("edit user websites response (1) +++++++");
-        console.log(response);
+        console.log("edit user websites response (1) +++++++", response);
         if (response.status !== 200 && response.status !== 201) {
           console.log("Error From The Server");
           throw "Error From The Server";
@@ -629,8 +597,10 @@ const actions = {
         return response.json();
       })
       .then(response => {
-        console.log("edit user websites response successsss response (1) +++");
-        console.log(response);
+        console.log(
+          "edit user websites response successsss response (1) +++",
+          response
+        );
         if (!response) {
           console.log("Error From The Server +++++++");
           throw new Error("Error From Add Website+++++");
@@ -641,37 +611,30 @@ const actions = {
         response_ = response;
       })
       .catch(error => {
-        console.log("error from browser or server error (1)");
-        console.log(error);
+        console.log("error from browser or server error (1)", error);
         throw error;
       });
     return response_;
   },
   async updateUserBasicInfosSocialLinks(context, payload) {
-    console.log(payload);
-    console.log("edit user socialLinks start +++++");
+    console.log(payload, "edit user socialLinks start +++++");
 
     let response_ = null;
     await fetch(
-      state.url_base +
-        state.url_post_socialLink +
+      process.env.VUE_APP_API_URL1 +
+        "/api/v1/userIntro/storeSocialLink" +
         "?socialLink=" +
         payload.socialLinks[payload.socialLinks.length - 1],
       {
         method: "POST",
         headers: {
-          //"Content-Type": "application/json",
           Accept: "application/json",
           Authorization: `Bearer ${state.token}`
         }
-        // body: JSON.stringify({
-        //   socialLinks: payload.socialLinks
-        // })
       }
     )
       .then(response => {
-        console.log("edit user socialLinks response (1) +++++++");
-        console.log(response);
+        console.log("edit user socialLinks response (1) +++++++", response);
         if (response.status !== 200 && response.status !== 201) {
           console.log("Error From The Server");
           throw "Error From The Server";
@@ -679,8 +642,7 @@ const actions = {
         return response.json();
       })
       .then(response => {
-        console.log("edit user socialLinks response successsss +++");
-        console.log(response);
+        console.log("edit user socialLinks response successsss +++", response);
         if (!response) {
           console.log("Error From The Server+++++++");
           throw new Error("Error to add socialLinks+++++");
@@ -691,19 +653,17 @@ const actions = {
         response_ = response;
       })
       .catch(error => {
-        console.log("error from the server or the browser");
-        console.log(error);
+        console.log("error from the server or the browser", error);
         throw error;
       });
     return response_;
   },
   async updateUserWorkPlaces(context, payload) {
-    console.log(payload);
-    console.log("save/edit/delete user workplace start +++++");
+    console.log(payload, "save/edit/delete user workplace start +++++");
     let url = null;
     let config = {};
     if (payload.method === "POST") {
-      url = state.url_base + state.url_add_working;
+      url = process.env.VUE_APP_API_URL1 + "/api/v1/userIntro/addWorking";
       config = {
         method: "POST",
         headers: {
@@ -724,8 +684,8 @@ const actions = {
     } else if (payload.method === "PUT") {
       const workplace = payload.workPlace === true ? 1 : 0;
       (url =
-        state.url_base +
-        state.url_update_working +
+        process.env.VUE_APP_API_URL1 +
+        "/api/v1/userIntro/updateWorking" +
         "/11" +
         "?companyName=" +
         payload.workPlace.companyName),
@@ -748,13 +708,17 @@ const actions = {
     let response_ = null;
     await fetch(url, config)
       .then(response => {
-        console.log("save/edit/delete user workPlace response (1) +++++++");
-        console.log(response);
+        console.log(
+          "save/edit/delete user workPlace response (1) +++++++",
+          response
+        );
         return response.json();
       })
       .then(response => {
-        console.log("save/edit/delete user workPlace response successsss +++");
-        console.log(response);
+        console.log(
+          "save/edit/delete user workPlace response successsss +++",
+          response
+        );
         if (response.errors) {
           console.log("Error from the server +++++++");
           throw new Error("Error from save/edit/delete workplace+++++");
@@ -766,19 +730,17 @@ const actions = {
         response_ = response;
       })
       .catch(error => {
-        console.log("error from the server or the browser");
-        console.log(error);
+        console.log("error from the server or the browser", error);
         throw error;
       });
     return response_;
   },
   async updateUserEducation(context, payload) {
-    console.log(payload);
-    console.log("save/edit/delete user education start +++++");
+    console.log(payload, "save/edit/delete user education start +++++");
     let url = "",
       config = {};
     if (payload.method.toLowerCase() === "post") {
-      url = state.url_base + state.url_add_school;
+      url = process.env.VUE_APP_API_URL1 + "api/v1/userIntro/addSchool";
       config = {
         method: "POST",
         headers: {
@@ -797,8 +759,8 @@ const actions = {
     } else if (payload.method.toLowerCase() === "update") {
       const graduated = payload.education.graduated ? 1 : 0;
       (url =
-        state.url_base +
-        state.url_update_school +
+        process.env.VUE_APP_API_URL1 +
+        "api/v1/userIntro/updateSchool" +
         "/11" +
         "?schoolName=" +
         payload.education.schoolName),
@@ -818,8 +780,10 @@ const actions = {
     let response_ = null;
     await fetch(url, config)
       .then(response => {
-        console.log("save/edit/delete user education response (1) +++++++");
-        console.log(response);
+        console.log(
+          "save/edit/delete user education response (1) +++++++",
+          response
+        );
         if (response.status !== 200 || response.status !== 201) {
           console.log("Error From The server +++++++");
           throw new Error("Error From save/edit/delete Education+++++");
@@ -828,9 +792,9 @@ const actions = {
       })
       .then(response => {
         console.log(
-          "save/edit/delete user education response successsss response (2) +++"
+          "save/edit/delete user education response successsss response (2) +++",
+          response
         );
-        console.log(response);
         if (response.errors) {
           console.log("Error From Server +++++++");
           throw new Error("Error From save/edit/delete Education+++++");
@@ -842,32 +806,33 @@ const actions = {
         response_ = response;
       })
       .catch(error => {
-        console.log("error From The Server or a Browser");
-        console.log(error);
+        console.log("error From The Server or a Browser", error);
         throw error;
       });
     return response_;
   },
   async updateUserProfession(context, payload) {
-    console.log(payload);
-    console.log("edit user profession start +++++");
+    console.log(payload, "edit user profession start +++++");
 
     let response_ = null;
-    await fetch(state.url_base + state.url_add_profession, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-        Authorization: `Bearer ${state.token}`
-      },
-      body: JSON.stringify({
-        profession: payload.profession,
-        access: payload.access
-      })
-    })
+    await fetch(
+      process.env.VUE_APP_API_URL1 + "/api/v1/userIntro/updateWorki",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          Authorization: `Bearer ${state.token}`
+        },
+        body: JSON.stringify({
+          profession: payload.profession,
+          access: payload.access
+        })
+      }
+    )
       .then(response => {
-        console.log("edit user workPlace response (1) +++++++");
-        console.log(response);
+        console.log("edit user workPlace response (1) +++++++", response);
+        console.log();
         if (response.status !== 201 || response.status !== 200) {
           console.log("Erreur liée au serveur+++++++");
           throw new Error("Erreur d 'ajout de workPlace+++++");
@@ -875,8 +840,7 @@ const actions = {
         return response.json();
       })
       .then(response => {
-        console.log("edit user workPlace response successsss +++");
-        console.log(response);
+        console.log("edit user workPlace response successsss +++", response);
         if (response.errors) {
           console.log("Erreur liée au serveur+++++++");
           throw new Error("Erreur d 'ajout de workPlace+++++");
@@ -887,8 +851,7 @@ const actions = {
         response_ = response;
       })
       .catch(error => {
-        console.log("erreur liée au serveur ou au navigateur");
-        console.log(error);
+        console.log("erreur liée au serveur ou au navigateur", error);
         throw error;
       });
     return response_;

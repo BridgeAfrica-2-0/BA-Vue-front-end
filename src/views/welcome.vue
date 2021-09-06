@@ -1119,6 +1119,10 @@ export default {
               blockClass: "custom-block-class",
             });
 
+             this.peopleAround();
+
+             this.businessAround();
+
             resolve(true);
           })
           .catch((err) => {
@@ -1211,9 +1215,7 @@ export default {
   mounted() {
     this.locateGeoLocation();
 
-    this.peopleAround();
-
-    this.businessAround();
+   
   },
 
   components: {

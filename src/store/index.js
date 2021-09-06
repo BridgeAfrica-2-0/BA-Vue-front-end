@@ -10,8 +10,6 @@ axios.defaults.baseURL = process.env.VUE_APP_API_URL;
 
 const getDefaultState = () => {
   return {
-    url_base: "http://team3dev.maxinemoffett.com",
-    url_load_user_profile_community: "/api/v1/profile/community",
     token: "1|5EyNcoXFcd6d4j8kaizPr8E3gU9lRu9CHqAWPa03",
     api_link: "https://94e9-154-72-150-118.ngrok.io/api/v1",
     api_link_end: "/business/details",
@@ -289,10 +287,9 @@ const state = getDefaultState();
 
 const actions = {
   async loadUserProfileCommuntity(context, payload) {
-    console.log(payload);
-    console.log("load user profile Community start +++++");
+    console.log(payload, "load user profile Community start +++++");
     let response_ = null;
-    await fetch(state.url_base + state.url_load_user_profile_community, {
+    await fetch(process.env.VUE_APP_API_URL1 + "/api/v1/profile/community", {
       method: "GET",
       headers: {
         Accept: "application/json",
@@ -300,8 +297,10 @@ const actions = {
       }
     })
       .then(response => {
-        console.log("load user profile community response (1) +++++++");
-        console.log(response);
+        console.log(
+          "load user profile community response (1) +++++++",
+          response
+        );
         if (response.status !== 200 && response.status !== 201) {
           console.log("error from the server +++++ ");
           throw "Error from the Server +++++";
@@ -309,8 +308,10 @@ const actions = {
         return response.json();
       })
       .then(response => {
-        console.log("load user biography response (2) successsss +++");
-        console.log(response);
+        console.log(
+          "load user biography response (2) successsss +++",
+          response
+        );
         if (!response) {
           console.log("Error from the server+++++++");
           throw new Error("Error of load Biography+++++");
@@ -321,8 +322,7 @@ const actions = {
         response_ = response;
       })
       .catch(error => {
-        console.log("error from browser or server error(1)");
-        console.log(error);
+        console.log("error from browser or server error(1)", error);
         throw error;
       });
     return response_;

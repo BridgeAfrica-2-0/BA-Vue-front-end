@@ -47,8 +47,29 @@ export default {
   data() {
     return {};
   },
+
+  methods: {
+
+    ownerPost() {
+      this.$store
+        .dispatch("UserProfileOwner/ownerPost", this.url_data)
+        .then(() => {
+          console.log("hey yeah");
+        })
+        .catch(err => {
+          console.log({ err: err });
+        });
+    }
+  },
   computed: {},
-  methods: {}
+
+  mounted() {
+    this.url_data = this.$route.params.id;
+
+    console.log(this.url_data);
+
+    this.ownerPost();
+  }
 };
 </script>
 

@@ -5,7 +5,7 @@ import businessOwner from "./businessOwner";
 import hotbusiness from "./hotbusiness";
 import networkDetails from "./networkDetails";
 import dashboardcommunity from "./dashboardcommunity";
-
+import UserProfileOwner from "./UserProfileOwner";
 import axios from "axios";
 
 Vue.use(Vuex);
@@ -17,6 +17,7 @@ export default new Vuex.Store({
     networkDetails,
     dashboardcommunity,
     businessOwner,
-    hotbusiness
+    hotbusiness,
+    UserProfileOwner
   }
 });

@@ -20,15 +20,11 @@
 
 
 
-              <splide :options="options" class="r-image">
+              <splide :options="options" class="r-image">   
     <splide-slide >
        
 
-            <img
-              src="https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg"
-              
-              class="r-image"
-            />
+           
 
 
  <img
@@ -46,14 +42,15 @@
           </div>
         </b-col>
         <b-col md="5" cols="7"  lg="7" xl="7"  sm="5">
-          <p class="textt">
-            <strong class="title"> {{business.name}} </strong> <br />
+           <div class="title textt bold username"> <strong> {{ business.name }}  </strong></div>
+          <p class="textt to">
+             <br />
              Car marketing  {{business.category}}
               <br /> {{business.followers}} Community <br />
             
             <span class="location"> <b-icon-geo-alt class="ico" ></b-icon-geo-alt> {{business.location_description}} </span> <br /> 
             
-  <read-more more-str="read more" :text="business.about_business" link="#" less-str="read less" :max-chars="100" > </read-more>
+  <read-more  class="readmore" more-str="read more" :text="business.about_business" link="#" less-str="read less" :max-chars="25" > </read-more>
           </p>
         </b-col>
 
@@ -173,6 +170,20 @@ export default {
 </script>
 
 <style scoped>
+
+
+.username {
+    
+    text-overflow: ellipsis;
+    overflow: hidden;
+   
+    height: 1.6em;
+    white-space: nowrap;
+  }
+
+  .to{
+    margin-top: -15px;
+  }
 
 
 @media only screen and (min-width: 768px) {
@@ -534,5 +545,34 @@ h4{
 
 
 }
+
+</style>
+<style >
+.readmore p {
+    margin: 0px !important;
+}
+
+
+
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888; 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555; 
+}
+
 
 </style>

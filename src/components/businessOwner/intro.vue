@@ -77,8 +77,10 @@
       v-model="edit2"
       size="lg"
     >
-      <b-form>
+      <b-form>   {{blec}}
                       <b-row>  
+
+                   
         
                       <div class="form-group col-md-6">
                         <label for="username">Busness Name:</label><br />
@@ -300,11 +302,13 @@ mixins: [validationMixin],
     return {
 
 
-        form:this.$store.state.businessOwner.businessInfo,
+        form:this.$store.state.businessOwner.businessInfo,  
+        blec:this.business_intro,
        center: null,
 
        country:null,
        region:null,
+       url:null,
 
       markers:[],
 
@@ -429,6 +433,9 @@ mixins: [validationMixin],
 
         formData2.append("address", this.form.adress);
 
+         formData2.append("lat", this.form.lat);
+          formData2.append("lng", this.form.lng);
+
         formData2.append("neighbor", this.form.neighbor);
       
 
@@ -441,7 +448,7 @@ mixins: [validationMixin],
 
 
         this.axios
-          .post("business/create", formData2, {
+          .post("business/update/"+this.url, formData2, {
             headers: {
               "Content-Type": "multipart/form-data",
             },
@@ -453,7 +460,7 @@ mixins: [validationMixin],
 
             this.flashMessage.show({
               status: "success",
-
+               blockClass: "custom-block-class",
               message: "Business Profile updated",
             });
 
@@ -512,6 +519,9 @@ mixins: [validationMixin],
      * @return void
      */
     editContact() {
+
+      this.form =this.business_intro,
+
       this.edit2 = !this.edit2;
     },
 
@@ -537,8 +547,9 @@ mixins: [validationMixin],
 
    mounted(){
      
-
+   
      this.setcoordintes();
+    this.url = this.$route.params.id;
 
    }
 

@@ -11,14 +11,20 @@
       >
 
       <b-card-text>
-        <b-row>
-          <b-col cols="4" v-for="i in 6" :key="i" class="p-1">
+        <b-row>   
+
+
+            
+
+          <b-col cols="4"     v-for="pictures in pictures" :key="pictures.id"     class="p-1">
+
             <img
               class="mb-2 img-fluid"
-              src="@/assets/img/m2.jpg"
+               :src="pic.media_ulr"
               alt="Fluid image"
             />
-          </b-col>
+          </b-col>     
+
         </b-row>
       </b-card-text>
     </b-card>
@@ -26,7 +32,15 @@
 </template>
 
 <script>
-export default {};
+export default {
+  computed: {
+    pictures() {
+      return this.$store.state.businessOwner.ownerPostImages;  
+    },
+  },
+
+
+};
 </script>
 
 <style></style>

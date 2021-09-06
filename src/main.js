@@ -21,7 +21,7 @@ import firebase from "firebase";
 Vue.use(Vuex);
 Vue.use(VueAxios, axios);
 
-
+Vue.use(require('vue-moment'));
 
 Vue.use(ReadMore);
 IconifyIcon.addIcon("home", homeIconData);
@@ -139,6 +139,11 @@ Vue.use(VueGoogleMaps, {
 
 
 import InfiniteLoading from 'vue-infinite-loading';
+
+
+import VueAgile from 'vue-agile'
+
+Vue.use(VueAgile);
 
 Vue.use(InfiniteLoading, { /* options */ });
 

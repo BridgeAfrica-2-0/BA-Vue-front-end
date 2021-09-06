@@ -1,36 +1,61 @@
   <template>
   <div>
 
-      <FlashMessage />
+      
     <div class="row">
       <div class="container-fluid">
        
 
 
+    
 
 
+    <b-modal hide-footer size="md"  id="Details" ref="Details">
 
-    <b-modal hide-footer size="xl"  id="Details" ref="Details">
+   
+<div >  
+ 
+       
 
-            <img class="card-img"  :src="show_url"  alt="" />
+       
+       
+  <agile :nav-buttons="false" :autoplay-speed="5000" :speed="2500" fade="fade" pause-on-hover="pause-on-hover" pause-on-dots-hover="pause-on-dots-hover" autoplay="autoplay" >   
+  
+    <div class="slide" v-for="img_url in show_url"  :key="img_url.id" >   <img :src="img_url.media_ulr" alt="">  </div>
+     <template slot="prevButton"><i class="fas fa-chevron-left"></i></template>
+    <template slot="nextButton"><i class="fas fa-chevron-right"></i></template>
+     <template slot="caption"> {{content}}</template>
+  
+
+  </agile>
+
+ 
+
+
+        
+   
+
+  </div>
+     
             
            
           </b-modal>
+
+         
+
+         
+      <div  v-for="pictures in pictures" :key="pictures.id"  >  
+
+        <div class="img-gall"  v-for="pic in pictures.media" :key="pic.id"   >
+
         
-
-
-
-
-
-
-        <div class="img-gall"   v-for="pictures in pictures" :key="pictures.id" >
-          <a
+          <a 
             ><img
               class="card-img btn p-0 album-img"
              
-              :src="pictures.media_url"
+              :src="pic.media_ulr"
               alt=""
-             @click="showPic(pictures.media_url)"
+             @click="showPic(pictures.media, pictures.content )"
           /></a>   
 
          
@@ -53,12 +78,12 @@
 
                     </template>
                  
-                  <b-dropdown-item  @click="downloadPic(pictures.id)" >Download</b-dropdown-item>
-                  <b-dropdown-item   @click="setProfilePic(pictures.id)"
+                  <b-dropdown-item  @click="downloadPic(pic.id)" >Download</b-dropdown-item>
+                  <b-dropdown-item   @click="setProfilePic(pic.id)"
                     >Make Profile Picture</b-dropdown-item
                   >
-                  <b-dropdown-item @click="setCoverPic(pictures.id)" >Make Cover Photo</b-dropdown-item>
-                  <b-dropdown-item   @click="deleteImage(pictures.id)" href="#">Delete</b-dropdown-item>
+                  <b-dropdown-item @click="setCoverPic(pic.id)" >Make Cover Photo</b-dropdown-item>
+                  <b-dropdown-item   @click="deleteImage(pic.id)" href="#">Delete</b-dropdown-item>
 
                 </b-dropdown>
               </li>
@@ -66,7 +91,7 @@
           </div>
         </div>
 
-      
+        </div>
         
 
 
@@ -101,7 +126,7 @@ export default {
 
    computed: {
     pictures() {
-      return this.$store.state.businessOwner.albumImages;
+      return this.$store.state.businessOwner.ownerPostImages;  
     },
   },
 
@@ -112,10 +137,11 @@ export default {
    
 
 
-    showPic(url){
+    showPic(img, content){
       
-      console.log(url);
-         this.show_url=url;
+       console.log(img);
+       this.content=content;
+         this.show_url=img;
          this.$refs["Details"].show();
 
     },
@@ -501,7 +527,7 @@ export default {
       ,
   data: function () {
     return {
-
+      content:null,  
       show_url:null,
       album_id:null,
       url:null,
@@ -782,4 +808,65 @@ export default {
   text-transform: uppercase;
   color: #000;
 }
+</style>
+
+<style>   
+
+
+.agile__dots {
+  bottom: 10px;
+  flex-direction: column;
+  right: 30px;
+  position: absolute;
+}
+.agile__dot {
+  margin: 5px 0;
+}
+.agile__dot button {
+  background-color: transparent;
+  border: 1px solid #fff;
+  cursor: pointer;
+  display: block;
+  height: 10px;
+  font-size: 0;
+  line-height: 0;
+  margin: 0;
+  padding: 0;
+  transition-duration: 0.3s;
+  width: 10px;
+}
+.agile__dot--current button, .agile__dot:hover button {
+  background-color: #fff;
+}
+
+.slide {
+  display: block;
+  height: auto;
+  -o-object-fit: cover;
+     object-fit: cover;
+  width: 100%;
+}
+
+
+
+.agile__nav-button {
+  background: transparent;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  font-size: 24px;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  transition-duration: 0.3s;
+  width: 80px;
+}
+
+.agile__nav-button--prev {
+  left: 0;
+}
+.agile__nav-button--next {
+  right: 0;
+}
+
 </style>

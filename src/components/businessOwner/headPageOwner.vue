@@ -1,58 +1,39 @@
 <template>
   <div>
+
     <div class="container-fluid " style="padding:0px">
      
 
 
 
-    
-
 
 
     
-   <div class="splide"   v-if="business_info.cover.length"  >
+   <div class="splide"   v-if="!business_info.cover.length==0"  >
 
-    <splide :options="options" class="banner r-image"   >
-   
-
-
-
-
-
+    <splide :options="options" class="banner r-image"   >  
+     
+ 
+  
+  
+  
+  
+           
+    
+  
+   <splide-slide   v-for="cover in business_info.cover" :key="  cover.id" >
          
   
+            <img  
+                
+              :src="cover.media_url"  
+                
+              class="r-image"  
+            />  
+  
+  
+    </splide-slide>  
 
-   <splide-slide   v-for="cover in business_info.cover" :key="cover.id" >
-       
-
-            <img
-              
-              :src="cover.media_url"
-              
-              class="r-image"
-            />
-
-
-    </splide-slide>
-
-
-    
-
-
-
-     
-
-
-
-
-
-
-
-
-
- 
-
-   
 
 
               </splide>
@@ -68,7 +49,7 @@
 
 
 
-   <div  v-if="!business_info.cover.length"  class="splide"  >
+   <div v-else class="splide"  >
 
     <splide :options="options" class="banner r-image"   >
    
@@ -147,6 +128,7 @@
       <div  class="container-fluid logo-container">
         <b-row class="mt-md-2">
           <b-col cols="8" md="6" class="m-0 p-0">
+         
             <b-avatar
               
               :src="business_info.logo_path"
@@ -159,12 +141,12 @@
             </b-avatar>
             
 
-            <b-icon
+        <a     @click="selectlogo" >   <b-icon
               icon="camera-fill"
               class="avatar-header-icon btn cursor-pointer size"
-              v-b-modal.modal-4
+              
             ></b-icon>
-
+   </a>
 
 
 
@@ -197,11 +179,42 @@
 
 
 
+                <input
+            type="file"
+            id="cover_pic"
+            @change="selectMoviesOutsidePost"
+            accept="video/mpeg, video/mp4, image/*"
+            hidden
+            ref="movie"
+          />
+
+
+          
+            <input
+            type="file"
+            id="logo_pic"
+            @change="setlogo"
+            accept="video/mpeg, video/mp4, image/*"
+            hidden
+            ref="logo_pic"
+          />
+
+
 
 
             
-            <b-modal id="modal-4" title="Upload Profile Picture">
+            <b-modal id="logomodal" ref="logomodal"  @ok="submitLogo"  title="Upload Your Logo">
               <div class="w3-container">
+
+                <div id="preview">
+
+     <img  :src="img_url" />   
+
+    
+
+  </div>
+
+<!--
                 <div class="row pb-3">
                   <div
                     class="col-sm-6 text-center"
@@ -223,6 +236,9 @@
                     <h4>Edit Your New picture</h4>
                   </div>
                 </div>
+
+--->
+
               </div>
             </b-modal>
 
@@ -243,8 +259,21 @@
 
 
             
-            <b-modal id="coverphoto" title="Upload Profile Picture">
+            <b-modal id="coverphoto" ref="coverphoto" @ok="submitCover" title="Upload  Cover photo">
               <div class="w3-container">
+
+
+
+    <div id="preview">
+
+     <img  :src="img_url" />   
+
+    
+
+  </div>
+
+
+                <!--
                 <div class="row pb-3">
                   <div
                     class="col-sm-6 text-center"
@@ -266,6 +295,8 @@
                     <h4>Edit Your New picture</h4>
                   </div>
                 </div>
+
+                -->
               </div>
             </b-modal>
 
@@ -276,7 +307,7 @@
             <div class="my-auto options">
               <span class="float-right">
 
-                <b-button variant="primary" class="edit-btn  d-none d-md-inline"   v-b-modal.coverphoto > <fas-icon class="mr-2" :icon="['fas', 'pencil-alt']" size="lg" />   Add Cover </b-button>
+                <b-button variant="primary" class="edit-btn  d-none d-md-inline"     @click="selectCover"  > <fas-icon class="mr-2" :icon="['fas', 'pencil-alt']" size="lg" />   Add Cover </b-button>
                 
                 
                 <b-dropdown id="dropdown-1" class="float-right options mt-2 mt-sm-2 mt-md-0  dot-btn" no-caret variant="outline-primary">
@@ -288,7 +319,7 @@
 
     
 
-                  <b-dropdown-item    v-b-modal.coverphoto
+                  <b-dropdown-item  @click="selectCover" 
                     > Change Cover</b-dropdown-item
                   >
 
@@ -323,7 +354,14 @@ export default {
   
    data() {
       return {
+
+          url:null,
+          img_url:null,
+          cover_photo:null,
+          profile_photo:null,
+
         options: {
+          
           rewind : true,
           autoplay: true,
           perPage: 3,
@@ -353,6 +391,45 @@ export default {
 
     
 methods: {
+
+
+setlogo(e){
+    
+       console.log(e);
+     
+
+       this.profile_photo= e.target.files[0]
+      const file = e.target.files[0];
+      this.img_url = URL.createObjectURL(file);
+
+      this.$refs["logomodal"].show();  
+
+
+},
+
+
+
+selectlogo(){
+    document.getElementById("logo_pic").click();
+ 
+},
+
+selectCover(){
+
+ document.getElementById("cover_pic").click();
+
+},
+  selectMoviesOutsidePost(e) {
+      console.log(e);
+     
+
+       this.cover_photo= e.target.files[0]
+      const file = e.target.files[0];
+      this.img_url = URL.createObjectURL(file);
+
+      this.$refs["coverphoto"].show();
+    },
+
   
   chooseProfile2: function() {
      
@@ -366,6 +443,183 @@ methods: {
     },
 
 
+    submitLogo(){
+     
+        
+
+        let loader = this.$loading.show({
+                   
+                    container: this.fullPage ? null : this.$refs.preview,
+                    canCancel: true,
+                    onCancel: this.onCancel,
+                    color:"#e75c18"
+                });
+
+
+       let formData = new FormData();
+        formData.append("image", this.profile_photo);
+
+        
+
+
+       this.axios 
+          .post("business/upload/logo/"+this.url, formData, {
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
+          })
+          .then((response) => {
+            console.log(response);
+
+           
+
+            this.flashMessage.show({
+              status: "success",
+
+              message: "Logo Updated",
+
+              blockClass: "custom-block-class",
+            });
+
+
+             loader.hide()
+      this.$refs["modalxl"].hide();
+
+          })
+
+            .catch((err) => {
+            console.log({ err: err });
+
+            
+
+            if (err.response.status == 422) {
+              console.log({ err: err });
+              
+
+              this.flashMessage.show({
+                status: "error",
+
+                message: err.response.data.message,
+                blockClass: "custom-block-class",
+              });
+
+
+               loader.hide()
+      
+
+            } else {
+              this.flashMessage.show({
+                status: "error",
+                
+                message: "Unable to set your Logo",
+                blockClass: "custom-block-class",
+              });
+              console.log({ err: err });
+
+               loader.hide()
+     
+            }
+
+          });
+
+
+
+
+
+    },
+
+    
+
+    submitCover(){
+     
+        
+
+        let loader = this.$loading.show({
+                   
+                    container: this.fullPage ? null : this.$refs.preview,
+                    canCancel: true,
+                    onCancel: this.onCancel,
+                    color:"#e75c18"
+                });
+
+
+       let formData = new FormData();
+        formData.append("image", this.cover_photo);
+
+        
+
+
+       this.axios 
+          .post("business/upload/cover/"+this.url, formData, {
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
+          })
+          .then((response) => {
+            console.log(response);
+
+           
+
+            this.flashMessage.show({
+              status: "success",
+
+              message: "Profile Updated",
+
+              blockClass: "custom-block-class",
+            });
+
+
+             loader.hide()
+      this.$refs["modalxl"].hide();
+
+          })
+
+            .catch((err) => {
+            console.log({ err: err });
+
+            
+
+            if (err.response.status == 422) {
+              console.log({ err: err });
+              
+
+              this.flashMessage.show({
+                status: "error",
+
+                message: err.response.data.message,
+                blockClass: "custom-block-class",
+              });
+
+
+               loader.hide()
+      
+
+            } else {
+              this.flashMessage.show({
+                status: "error",
+                
+                message: "Unable to upload your image",
+                blockClass: "custom-block-class",
+              });
+              console.log({ err: err });
+
+               loader.hide()
+     
+            }
+
+          });
+
+
+
+
+
+    },
+
+
+},
+
+mounted(){
+     this.url = this.$route.params.id;
 },
 
 computed: {
@@ -673,6 +927,16 @@ width: 100%;
 }
 
 
+#preview {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#preview img {
+  max-width: 100%;
+  max-height: 300px;
+}
 
 
 

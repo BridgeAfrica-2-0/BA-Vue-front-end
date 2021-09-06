@@ -11,7 +11,7 @@ axios.defaults.baseURL = "http://devone.maxinemoffett.com/api/v1/"
 
 
 
-export default new Vuex.Store({
+export default new Vuex.Store({  
 
   modules: {
     auth,
@@ -21,7 +21,7 @@ export default new Vuex.Store({
 
   state,
   getters: {
-    recoverPassData: state => {
+    recoverPassData: state => { 
       return state.recoverData;
     },
     doneTodos: state => {

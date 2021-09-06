@@ -10,7 +10,7 @@
           <b-avatar
             variant="primary"
             class="img-fluid avat-comment"
-            :src="imageProfile"
+            :src="business_logo"
           ></b-avatar>
         </b-col>
         <b-col cols="9" md="11" class="p-0 m-0 pr-3">
@@ -502,6 +502,7 @@
         <b-col cols="12" class="mt-4">
           <b-row>
             <b-col cols="2" md="1" class="m-0 p-0">
+             
               <b-avatar
                 class="d-inline-block avat"
                 variant="primary"
@@ -537,7 +538,7 @@
                   </b-dropdown>
                 </span>
               </h5>
-              <p class="duration">{{  }} 4 Ago </p>
+              <p class="duration">  {{  moment(item.created_at).fromNow() }} </p>   
             </b-col>
           </b-row>
           <b-row>
@@ -563,7 +564,9 @@
 
                 
                   
-              
+       
+
+
                 
 
                  <lightbox :cells="item.media.length" :items="item.media.map(function(a) {return a.media_url})"></lightbox> 
@@ -590,7 +593,7 @@
                   variant="primary"
                   aria-hidden="true"
                 ></b-icon>
-                {{ item.likes_count }}   </span
+                {{    nFormatter(item.likes_count)  }}   </span
               >
               <span
                 ><b-icon
@@ -598,7 +601,7 @@
                   variant="primary"
                   aria-hidden="true"
                 ></b-icon>
-                {{  item.comment_count }}    </span
+                {{  nFormatter(item.comment_count)   }}    </span
               >
 
               <span>
@@ -644,6 +647,7 @@
 
 <script>
 import Comment from "../comment";
+import moment from 'moment'
 import axios from "axios";
 export default {
   name: "postNetwork",
@@ -652,6 +656,7 @@ export default {
   },
   data() {
     return {
+      moment: moment,
       page:1,
       post:this.$store.state.businessOwner.ownerPost,
      url:null,
@@ -712,7 +717,18 @@ export default {
     
 
 
-
+     nFormatter(num) {
+      if (num >= 1000000000) {
+         return (num / 1000000000).toFixed(1).replace(/\.0$/, '') + 'G';
+      }
+      if (num >= 1000000) {
+         return (num / 1000000).toFixed(1).replace(/\.0$/, '') + 'M';
+      }
+      if (num >= 1000) {
+         return (num / 1000).toFixed(1).replace(/\.0$/, '') + 'K';
+      }
+      return num;
+ },
 
 
 
@@ -745,14 +761,69 @@ export default {
     },
 
 
+   deletePost(post){
+    
+   
+           console.log(post);
+          
+           let loader = this.$loading.show({
+        container: this.fullPage ? null : this.$refs.creatform,
+        canCancel: true,
+        onCancel: this.onCancel,
+        color: "#e75c18",
+      });
 
+
+
+       axios
+        .post("business/delete/post/"+post.post_id, {
+          name: this.name,
+        })
+        .then((response) => {
+          console.log(response.data);
+
+          this.flashMessage.show({
+            status: "success",
+            blockClass: "custom-block-class",
+            message: "Post Deleted",
+          });
+
+          loader.hide();
+        }) .catch((err) => {
+        this.sending = false;
+
+        if (err.response.status == 422) {
+          console.log({ err: err });
+
+          this.flashMessage.show({
+            status: "error",
+             blockClass: "custom-block-class",
+            message: err.response.data.message,
+          });
+
+          loader.hide();
+        } else {
+          this.flashMessage.show({
+            status: "error",
+             blockClass: "custom-block-class",
+            message: "Unable to Delete your Post",
+          });
+          console.log({ err: err });
+
+          loader.hide();
+        }
+      });
+
+
+
+    },
     
 
     editPost(postarray){
 
        this.edit_description=postarray.content;
        this.edit_image=postarray.media;
-       this.edit_id=postarray.post_id;
+       this.edit_id=postarray.post_id;   
 
        console.log(this.edit_image);
 
@@ -764,7 +835,7 @@ export default {
     
     updatePost(){
 
-             console.log('hello');
+            
         
                 let loader = this.$loading.show({
                    
@@ -775,7 +846,7 @@ export default {
                 });
 
         
-      const fileImage = this.createPost.movies[0].target.files[0];
+    //  const fileImage = this.createPost.movies[0].target.files[0];
       
 
        this.fileImageArr=this.createPost.movies;
@@ -827,12 +898,13 @@ export default {
               
             this.flashMessage.show({
               status: "success",
-
+                blockClass: "custom-block-class",
               message: "Content successfuly uploaded",
               
             });
             loader.hide()
-      this.$refs["modal-xl"].hide();
+          
+          this.$refs["modal-edit"].hide();
            
           }) .catch((err) => {
 
@@ -849,6 +921,7 @@ export default {
               });
 
               loader.hide()
+              this.$refs["modal-edit"].hide();
             } else {
               this.flashMessage.show({
                 status: "error",
@@ -858,6 +931,7 @@ export default {
               });
               console.log({ err: err });
               loader.hide()
+              this.$refs["modal-edit"].hide();
             }
 
            
@@ -886,6 +960,15 @@ export default {
     },
     selectMovies(event) {
       const file = event.target;
+
+
+
+
+
+
+
+
+      
       if (file.files) {
         let reader = new FileReader();
         reader.onload = e => {
@@ -1070,7 +1153,7 @@ console.log(this.delete);
               
             this.flashMessage.show({
               status: "success",
-
+               blockClass: "custom-block-class",
               message: "Content successfuly uploaded",
               
             });
@@ -1144,6 +1227,9 @@ console.log(this.delete);
     }
   },
   computed: {
+
+
+    
     imageProfile() {
    
 
@@ -1151,7 +1237,13 @@ console.log(this.delete);
        return "yoo"
 
     },
+   
 
+    business_logo() {
+      return  this.$store.state.businessOwner.businessInfo.logo_path;  
+
+    
+    },
 
 
      owner_post() {
@@ -1182,6 +1274,11 @@ console.log(this.delete);
 <style scoped>
 
 
+
+
+
+
+
 .custom-block-class {
   position: absolute;
   z-index: 1;
@@ -1198,12 +1295,16 @@ console.log(this.delete);
 }
 
 .upload-cancel{
-  margin-right: -90px;
+  
     z-index: 1;
-    position: absolute;
-    margin-top: -50px;
+  
+     margin-top: -40%;
     float: right;
 }
+
+
+
+
 .upload-cancel:hover{
 
    color:orange;
@@ -1387,4 +1488,8 @@ console.log(this.delete);
   position: absolute;
   z-index: 1;
 }
+
+
+
+
 </style>

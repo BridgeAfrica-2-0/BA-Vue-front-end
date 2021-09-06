@@ -7,7 +7,7 @@ export default {
     loader: false,
     success: false,
     communityPeople:[],
-    CommunityBusiness:[],
+    CommunityBusiness:[],   
     communityTotal:[],
     businessInfo:[],
     albums:[],
@@ -31,10 +31,10 @@ export default {
     },
   
 
-    getBusinessInfo(state) {
-     
-        return state.businessInfo;
-    
+   
+
+    getBusinessInfo: state => {
+      return state.businessInfo;
     },
 
 
@@ -62,7 +62,7 @@ export default {
 
     setImages(state, data){
    
-      state.images=data;
+      state.ownerPostImages=data;  
 
     },
 
@@ -115,12 +115,6 @@ ownerPostImages(state, data){
 },
 
 
-
-
-
-
-
-
     setNetworks(state, payload) {
       state.networks = payload;
     },
@@ -140,7 +134,18 @@ ownerPostImages(state, data){
   actions: {
 
 
-
+     nFormatter(num) {
+      if (num >= 1000000000) {
+         return (num / 1000000000).toFixed(1).replace(/\.0$/, '') + 'G';
+      }
+      if (num >= 1000000) {
+         return (num / 1000000).toFixed(1).replace(/\.0$/, '') + 'M';
+      }
+      if (num >= 1000) {
+         return (num / 1000).toFixed(1).replace(/\.0$/, '') + 'K';
+      }
+      return num;
+ },
      
 
     getAlbumImages( {commit}, busineeId){
@@ -158,9 +163,9 @@ ownerPostImages(state, data){
    
     getImages( {commit}, busineeId){
 
-
+      console.log("mother fucker this is sos cool");
       return axios
-      .get('business/post/'+busineeId)
+      .get('business/post/media/'+busineeId)
       .then(({ data }) => {
        commit('setImages', data.data);
         console.log(data);
@@ -204,6 +209,7 @@ ownerPostImages(state, data){
 
     ownerPostImages( {commit}, busineeId ){
        
+     
       return axios
       .get('business/show/images/'+busineeId)
       .then(({ data }) => {

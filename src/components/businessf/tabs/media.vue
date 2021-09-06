@@ -1,37 +1,74 @@
 <template>
   <div>
-   
+    <fas-icon
+      class="violet mr-2 pt-1 icon-size primary"
+      :icon="['fas', 'file-image']"
+    
+    />Media
 
-<!--
-      <fas-icon class="violet mr-2 pt-1 icon-size primary" :icon="['fas', 'file-image']" />Media
-       
-        <hr />  -->
-      
-    <b-tabs content-class="mt-3"  pills>  <b-tab title="Posts" active>   <Images />     </b-tab>      <b-tab title="Albums" >   <Album/>    </b-tab>       </b-tabs>
+    <hr />
 
-
+    <b-tabs content-class="mt-3" pills>
+      <b-tab title="Posts" active> <Images /> </b-tab>
+      <b-tab title="Albums"> <Album /> </b-tab>
+    </b-tabs>
   </div>
 </template>
 
 <script>
-
-
 import Album from "./album";
 import Images from "./images";
+import axios from "axios";
 export default {
   components: {
     Album,
     Images,
   },
   methods: {
-    
-    
     onClick(i) {
       this.index = i;
+    },
+
+    //function to get albums
+
+    getAlbums(){
+      this.$store
+        .dispatch("businessOwner/getAlbums", this.url_data)
+        .then(() => {
+          console.log("hey yeah");
+        })
+        .catch((err) => {
+          console.log({ err: err });
+        });
+   
+    },
+
+
+
+    getImages(){
+        
+        this.$store
+        .dispatch("businessOwner/getImages", this.url_data)
+        .then(() => {
+          console.log("hey yeah");
+        })
+        .catch((err) => {
+          console.log({ err: err });
+        });
+   
+
     }
+  },
+
+  mounted(){
+     
+       this.url_data=this.$route.params.id;
+       this.getAlbums();
+       this.getImages();
   },
   data: function() {
     return {
+      url_data:null,
       images: [
         "https://placekitten.com/801/800",
         "https://placekitten.com/802/800",
@@ -41,7 +78,7 @@ export default {
         "https://placekitten.com/806/800",
         "https://placekitten.com/807/800",
         "https://placekitten.com/808/800",
-        "https://placekitten.com/809/800"
+        "https://placekitten.com/809/800",
       ],
       imagees: [
         "https://i.wifegeek.com/200426/f9459c52.jpg",
@@ -63,11 +100,11 @@ export default {
         "https://i.wifegeek.com/200426/177ef44c.jpg",
         "https://i.wifegeek.com/200426/d74d9040.jpg",
         "https://i.wifegeek.com/200426/81e24a47.jpg",
-        "https://i.wifegeek.com/200426/43e2e8bb.jpg"
+        "https://i.wifegeek.com/200426/43e2e8bb.jpg",
       ],
-      index: 0
+      index: 0,
     };
-  }
+  },
 };
 </script>
 
@@ -80,26 +117,19 @@ export default {
   color: black;
 }
 
-
-
 @media (min-width: 960px) {
+  .img-gall {
+    background-size: contain;
+    cursor: pointer;
+    margin: 10px;
+    border-radius: 3px;
+  }
 
-.img-gall {
- 
-  background-size: contain;
-  cursor: pointer;
-  margin: 10px;
-  border-radius: 3px;
-}
-
-
-
-
-.image-wrap{
-  border: 4px dashed #e75c18;
+  .image-wrap {
+    border: 4px dashed #e75c18;
     position: relative;
 
-     position: relative;
+    position: relative;
     margin: 5px;
     float: left;
     width: 46.5%;
@@ -109,10 +139,9 @@ export default {
     animation: winanim 0.5s;
     -webkit-backface-visibility: visible;
     backface-visibility: visible;
-}
+  }
 
-
-.img-gall{
+  .img-gall {
     position: relative;
     margin: 5px;
     float: left;
@@ -123,21 +152,18 @@ export default {
     animation: winanim 0.5s;
     -webkit-backface-visibility: visible;
     backface-visibility: visible;
-}
-
-@media (min-width: 1400px) {
-  .lb-grid {
-    height: 274px;
-    margin-bottom: 8px;
   }
-}
 
+  @media (min-width: 1400px) {
+    .lb-grid {
+      height: 274px;
+      margin-bottom: 8px;
+    }
+  }
 
-
-
-.img-gall{
+  .img-gall {
     position: relative;
-    margin: 5px;     
+    margin: 5px;
     float: left;
     width: 19.1%;
     transition-duration: 0.4s;
@@ -146,15 +172,13 @@ export default {
     animation: winanim 0.5s;
     -webkit-backface-visibility: visible;
     backface-visibility: visible;
-}
+  }
 
-
-
-.image-wrap{
-  border: 4px dashed #e75c18;
+  .image-wrap {
+    border: 4px dashed #e75c18;
     position: relative;
 
-     position: relative;
+    position: relative;
     margin: 5px;
     float: left;
     width: 46.5%;
@@ -164,29 +188,18 @@ export default {
     animation: winanim 0.5s;
     -webkit-backface-visibility: visible;
     backface-visibility: visible;
+  }
 }
 
+@media only screen and (min-width: 768px) and (max-width: 1331px) {
+  .img-gall {
+    background-size: contain;
+    cursor: pointer;
+    margin: 10px;
+    border-radius: 3px;
+  }
 
-
-}
-
-
-
-@media only screen and (min-width:768px) and (max-width: 1331px) {
-
-   
-   
-
-.img-gall {
-
-  background-size: contain;
-  cursor: pointer;
-  margin: 10px;
-  border-radius: 3px;
-}
-
-
-.img-gall{
+  .img-gall {
     position: relative;
     margin: 5px;
     float: left;
@@ -197,16 +210,13 @@ export default {
     animation: winanim 0.5s;
     -webkit-backface-visibility: visible;
     backface-visibility: visible;
-}
+  }
 
-
-
-
-.image-wrap{
-  border: 4px dashed #e75c18;
+  .image-wrap {
+    border: 4px dashed #e75c18;
     position: relative;
 
-     position: relative;
+    position: relative;
     margin: 5px;
     float: left;
     width: 46.5%;
@@ -216,25 +226,18 @@ export default {
     animation: winanim 0.5s;
     -webkit-backface-visibility: visible;
     backface-visibility: visible;
-}
-
-
-
+  }
 }
 
 @media (max-width: 762px) {
+  .img-gall {
+    background-size: contain;
+    cursor: pointer;
+    margin: 10px;
+    border-radius: 3px;
+  }
 
-
-.img-gall {
-
-  background-size: contain;
-  cursor: pointer;
-  margin: 10px;
-  border-radius: 3px;
-}
-
-
-.img-gall{
+  .img-gall {
     position: relative;
     margin: 5px;
     float: left;
@@ -245,16 +248,13 @@ export default {
     animation: winanim 0.5s;
     -webkit-backface-visibility: visible;
     backface-visibility: visible;
-}
+  }
 
-
-
-
-.image-wrap{
-  border: 4px dashed #e75c18;
+  .image-wrap {
+    border: 4px dashed #e75c18;
     position: relative;
 
-     position: relative;
+    position: relative;
     margin: 5px;
     float: left;
     width: 46.5%;
@@ -264,23 +264,13 @@ export default {
     animation: winanim 0.5s;
     -webkit-backface-visibility: visible;
     backface-visibility: visible;
+  }
 }
 
-
+.drag-textt {
+  text-align: center;
+  font-weight: 100;
+  text-transform: uppercase;
+  color: #000;
 }
-
-
-
-
-
-.drag-textt{
-
-    text-align: center;
-    font-weight: 100;
-    text-transform: uppercase;
-    color: #000;
-}
-
 </style>
-
-

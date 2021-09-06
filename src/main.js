@@ -155,7 +155,8 @@ new Vue({
       (response) => response,
       (error) => {
         if (error.response.status === 401) {
-          this.$store.dispatch("auth/logout");
+         // this.$store.dispatch("auth/logout");
+         console.log("error has occure");
         }
         return Promise.reject(error);
       }

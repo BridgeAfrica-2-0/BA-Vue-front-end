@@ -64,17 +64,19 @@
 </template>
 
 <script>
+import ProfileAndBusinessDetails from "../../store/ProfileAndBusinessDetails";
+
 export default {
   name: "businessDashboard",
   props: ["selectedb"],
   computed: {
     business() {
-      return this.$store.getters.getdetails.business;
+      return this.$store[ProfileAndBusinessDetails.getters.getdetails.business];
     }
   },
   created() {
     this.$store
-      .dispatch("getdetails")
+      .dispatch("ProfileAndBusinessDetails/getdetails")
       .then(() => {
         console.log("the response");
       })

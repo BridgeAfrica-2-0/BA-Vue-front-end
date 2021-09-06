@@ -10,9 +10,6 @@ axios.defaults.baseURL = process.env.VUE_APP_API_URL;
 
 const getDefaultState = () => {
   return {
-    url_base: process.env["VUE_APP_API_URL1 "],
-    url_load_business_about: "/api/v1/business/info",
-    url_update_business_about_name: "/api/v1/business/update",
     url_update_business_biography: "/api/v1/business/businessBiography",
     token: "1|5EyNcoXFcd6d4j8kaizPr8E3gU9lRu9CHqAWPa03",
     api_link: "https://94e9-154-72-150-118.ngrok.io/api/v1",
@@ -105,12 +102,14 @@ const state = getDefaultState();
 
 const actions = {
   async loadUserBusinessAbout(context, payload) {
-    console.log(payload);
-    console.log("load user Business About start +++++");
+    console.log(payload, "load user Business About start +++++");
     let response_ = null;
     const id_Business = 1;
     await fetch(
-      state.url_base + state.url_load_business_about + "/" + id_Business,
+      process.env.VUE_APP_API_URL1 +
+        "/api/v1/business/info" +
+        "/" +
+        id_Business,
       {
         method: "GET",
         headers: {
@@ -120,16 +119,17 @@ const actions = {
       }
     )
       .then(response => {
-        console.log("load user Business About response (1) +++++++");
-        console.log(response);
+        console.log("load user Business About response (1) +++++++", response);
         if (response.status !== 200 && response.status !== 201) {
           throw "Error from the server";
         }
         return response.json();
       })
       .then(response => {
-        console.log("load user Business About response successsss +++");
-        console.log(response);
+        console.log(
+          "load user Business About response successsss +++",
+          response
+        );
         if (!response) {
           console.log("Error from the server+++++++");
           throw new Error("Error for loading Business About +++++");
@@ -140,18 +140,19 @@ const actions = {
         response_ = response;
       })
       .catch(error => {
-        console.log("error from the server or the browser");
-        console.log(error);
+        console.log("error from the server or the browser", error);
       });
     return response_;
   },
   async updateUserBusinessAbout(context, payload) {
-    console.log(payload);
-    console.log("update user Business About start +++++");
+    console.log(payload, "update user Business About start +++++");
     let response_ = null;
     const id_Business = 1;
     await fetch(
-      state.url_base + state.url_update_business_about_name + "/" + id_Business,
+      process.env.VUE_APP_API_URL1 +
+        "/api/v1/business/update" +
+        "/" +
+        id_Business,
       {
         method: "POST",
         headers: {
@@ -173,16 +174,20 @@ const actions = {
       }
     )
       .then(response => {
-        console.log("update user Business About response (1) +++++++");
-        console.log(response);
-        // if (response.status !== 200 && response.status !== 201) {
-        //   throw "Erreurs lors du traitement par le serveur";
-        // }
+        console.log(
+          "update user Business About response (1) +++++++",
+          response
+        );
+        if (response.status !== 200 && response.status !== 201) {
+          throw "Error From The Server";
+        }
         return response.json();
       })
       .then(response => {
-        console.log("update user Business About response successsss (2) +++");
-        console.log(response);
+        console.log(
+          "update user Business About response successsss (2) +++",
+          response
+        );
         if (!response) {
           console.log("Error THe Server++++++");
           throw new Error("Error For Updating Business About +++++");
@@ -193,8 +198,7 @@ const actions = {
         response_ = response;
       })
       .catch(error => {
-        console.log("Error From the Server or Browser error(1)");
-        console.log(error);
+        console.log("Error From the Server or Browser error(1)", error);
         throw error;
       });
     return response_;

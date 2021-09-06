@@ -68,13 +68,13 @@ export default {
     //  Insight,
     Inbox,
     // Notification,
-    Footer,
+    Footer
   },
   data() {
     return {
       selectedId: 0,
       bottomSelectedId: 0,
-      url_data:null,
+      url_data: null,
       items: [
         { label: "Home ", icon: "" },
 
@@ -83,112 +83,86 @@ export default {
         { label: "Pending Post", icon: "" },
         { label: "Insight", icon: "" },
 
-        { label: "Settings", icon: "" },
+        { label: "Settings", icon: "" }
       ],
       options: {
-        activeColor: "#1d98bd",
-      },
+        activeColor: "#1d98bd"
+      }
     };
   },
 
-   methods: {
-
-
-
-
-      businessInfo() {
+  methods: {
+    businessInfo() {
       this.$store
         .dispatch("businessOwner/businessInfo", this.url_data)
         .then(() => {
           console.log("hey yeah");
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
     },
 
-
-
-
-   CommunityBusiness() {
+    CommunityBusiness() {
       this.$store
         .dispatch("businessOwner/CommunityBusiness", this.url_data)
         .then(() => {
           console.log("hey yeah");
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
     },
 
-   
-
-   CommunityPeople() {
+    CommunityPeople() {
       this.$store
         .dispatch("businessOwner/CommunityPeople", this.url_data)
         .then(() => {
           console.log("hey yeah");
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
     },
 
-
-
-
-
-
-       businessCommunityTotal() {
+    businessCommunityTotal() {
       this.$store
-        .dispatch("businessOwner/businessCommunityTotal",  this.url_data)
+        .dispatch("businessOwner/businessCommunityTotal", this.url_data)
         .then(() => {
           console.log("hey yeah");
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
     },
 
-
-
-
-
-   ownerPost() {
+    ownerPost() {
       this.$store
         .dispatch("businessOwner/ownerPost", this.url_data)
         .then(() => {
           console.log("hey yeah");
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
-    },
-
-
-
-
-
-
-
-   },
+    }
+  },
   computed: {},
 
-   mounted(){
-     this.url_data=this.$route.params.id;
+  mounted() {
+    this.url_data = this.$route.params.id;
 
-     console.log(this.url_data);
+    console.log(this.url_data);
 
-     this.businessInfo();
+    this.businessInfo();
 
-     this.CommunityBusiness();
+    this.CommunityBusiness();
 
-     this.CommunityPeople();
+    this.CommunityPeople();
 
-     this.businessCommunityTotal();
-     this.ownerPost();
-    },
-
+    this.businessCommunityTotal();
+    this.ownerPost();
+  }
 };
 </script>
 

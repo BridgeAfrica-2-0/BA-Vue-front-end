@@ -1,93 +1,128 @@
 <template>
   <div>
-    <div class="row">
-      <div class="container-fluid">
-        <div class="img-gall">
-          <a href="#!"
-            ><img
-              class="card-img btn p-0"
-              src="@/assets/img/m1.jpg"
-              alt=""
-              v-b-modal.modal-8
-          /></a>
+ 
 
-          <b-modal id="modal-8" title="Details">
-            <img class="card-img" src="@/assets/img/m1.jpg" alt="" />
-            <h4>Post Title</h4>
-            <p class="my-4">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum
-              quisquam sequi, ullam aliquam ab illo suscipit, earum quam,
-              doloribus id sit consequuntur tempora molestiae blanditiis.
-            </p>
-          </b-modal>
-        </div>
-        <div class="img-gall">
-          <a href="#!"
-            ><img
-              class="card-img btn p-0"
-              src="@/assets/img/m2.jpg"
-              alt=""
-              v-b-modal.modal-a
-          /></a>
 
-          <b-modal id="modal-a" title="Details">
-            <img class="card-img" src="@/assets/img/m2.jpg" alt="" />
-            <h4>Post Title</h4>
-            <p class="my-4">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum
-              quisquam sequi, ullam aliquam ab illo suscipit, earum quam,
-              doloribus id sit consequuntur tempora molestiae blanditiis.
-            </p>
-          </b-modal>
+
+
+
+
+
+
+
+<div class="row">
+          <div class="container-fluid">
+            <div class="img-gall">
+              <a href="#!"
+                ><img
+                  class="card-img btn p-0"
+                  src="@/assets/img/m1.jpg"
+                  alt=""
+                  v-b-modal.modal-8
+              /></a>
+
+              <b-modal id="modal-8" title="Details">
+                <img class="card-img" src="@/assets/img/m1.jpg" alt="" />
+                <h4>Post Title</h4>
+                <p class="my-4">
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum
+                  quam, doloribus id sit consequuntur tempora molestiae
+                  blanditiis.
+                </p>
+              </b-modal>
+              
+
+
+            </div>
+            <div class="img-gall">
+              <a href="#!"
+                ><img
+                  class="card-img btn p-0"
+                  src="@/assets/img/m2.jpg"
+                  alt=""
+                  v-b-modal.modal-a
+              /></a>
+
+              <b-modal id="modal-a" title="Details">
+                <img class="card-img" src="@/assets/img/m2.jpg" alt="" />
+                <h4>Post Title</h4>
+                <p class="my-4">
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum
+                  quam, doloribus id sit consequuntur tempora molestiae
+                  blanditiis.
+                </p>
+              </b-modal>
+             
+            </div>
+
+
+            
+            <div class="img-gall">
+              <a href="#!"
+                ><img
+                  class="card-img btn p-0"
+                  src="@/assets/img/m3.jpg"
+                  alt=""
+                  v-b-modal.modal-b
+              /></a>
+
+              <b-modal id="modal-b" title="Details">
+                <img class="card-img" src="@/assets/img/m3.jpg" alt="" />
+                <h4>Post Title</h4>
+                <p class="my-4">
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum
+                  quam, doloribus id sit consequuntur tempora molestiae
+                  blanditiis.
+                </p>
+              </b-modal>
+           
+            </div>
+            <div class="img-gall">
+              <a href="#!"
+                ><img class="card-img" src="@/assets/img/m4.jpg" alt=""
+              /></a>
+            
+
+            </div>
+            <div class="img-gall">
+              <a href="#!"
+                ><img class="card-img" src="@/assets/img/m5.jpg" alt=""
+              /></a>
+             
+
+
+            </div>
+            <div class="img-gall">
+              <a href="#!"
+                ><img class="card-img" src="@/assets/img/m6.jpg" alt=""
+              /></a>
+             
+
+
+            </div>
+            <div class="img-gall">
+              <a href="#!"
+                ><img class="card-img" src="@/assets/img/m7.jpg" alt=""
+              /></a>
+             
+            </div>
+           
+            <div class="img-gall">
+              <a href="#!"
+                ><img class="card-img" src="@/assets/img/m8.jpg" alt=""
+              /></a>
+             
+            </div>
+          </div>
         </div>
 
-        <div class="img-gall">
-          <a href="#!"
-            ><img
-              class="card-img btn p-0"
-              src="@/assets/img/m3.jpg"
-              alt=""
-              v-b-modal.modal-b
-          /></a>
 
-          <b-modal id="modal-b" title="Details">
-            <img class="card-img" src="@/assets/img/m3.jpg" alt="" />
-            <h4>Post Title</h4>
-            <p class="my-4">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum
-              quisquam sequi, ullam aliquam ab illo suscipit, earum quam,
-              doloribus id sit consequuntur tempora molestiae blanditiis.
-            </p>
-          </b-modal>
-        </div>
-        <div class="img-gall">
-          <a href="#!"
-            ><img class="card-img" src="@/assets/img/m4.jpg" alt=""
-          /></a>
-        </div>
-        <div class="img-gall">
-          <a href="#!"
-            ><img class="card-img" src="@/assets/img/m5.jpg" alt=""
-          /></a>
-        </div>
-        <div class="img-gall">
-          <a href="#!"
-            ><img class="card-img" src="@/assets/img/m6.jpg" alt=""
-          /></a>
-        </div>
-        <div class="img-gall">
-          <a href="#!"
-            ><img class="card-img" src="@/assets/img/m7.jpg" alt=""
-          /></a>
-        </div>
+  
 
-        <div class="img-gall">
-          <a href="#!"
-            ><img class="card-img" src="@/assets/img/m8.jpg" alt=""
-          /></a>
-        </div>
-      </div>
-    </div>
+
   </div>
 </template>
 
@@ -144,6 +179,8 @@ export default {
 };
 </script>
 
+
+
 <style>
 .text-design {
   align-items: first baseline;
@@ -153,57 +190,75 @@ export default {
   color: black;
 }
 
+
+
 @media (min-width: 960px) {
-  .img-gall {
-    background-size: contain;
-    cursor: pointer;
-    margin: 10px;
-    border-radius: 3px;
-  }
 
-  .img-gall {
+.img-gall {
+ 
+  background-size: contain;
+  cursor: pointer;
+  margin: 10px;
+  border-radius: 3px;
+}
+
+
+
+.img-gall{
     position: relative;
     margin: 5px;
     float: left;
-    width: 18.5%;
+     width: 18.5%;
     transition-duration: 0.4s;
     border-radius: 5px;
     -webkit-animation: winanim 0.5s;
     animation: winanim 0.5s;
     -webkit-backface-visibility: visible;
     backface-visibility: visible;
-  }
+}
 
-  @media (min-width: 1400px) {
-    .lb-grid {
-      height: 274px;
-      margin-bottom: 8px;
-    }
-  }
-
-  .img-gall {
-    position: relative;
-    margin: 5px;
-    float: left;
-    width: 18.5%;
-    transition-duration: 0.4s;
-    border-radius: 5px;
-    -webkit-animation: winanim 0.5s;
-    animation: winanim 0.5s;
-    -webkit-backface-visibility: visible;
-    backface-visibility: visible;
+@media (min-width: 1400px) {
+  .lb-grid {
+    height: 274px;
+    margin-bottom: 8px;
   }
 }
 
-@media only screen and (min-width: 768px) and (max-width: 1331px) {
-  .img-gall {
-    background-size: contain;
-    cursor: pointer;
-    margin: 10px;
-    border-radius: 3px;
-  }
 
-  .img-gall {
+
+
+.img-gall{
+    position: relative;
+    margin: 5px;
+    float: left;
+    width: 18.5%;
+    transition-duration: 0.4s;
+    border-radius: 5px;
+    -webkit-animation: winanim 0.5s;
+    animation: winanim 0.5s;
+    -webkit-backface-visibility: visible;
+    backface-visibility: visible;
+}
+
+}
+
+
+
+@media only screen and (min-width:768px) and (max-width: 1331px) {
+
+   
+   
+
+.img-gall {
+
+  background-size: contain;
+  cursor: pointer;
+  margin: 10px;
+  border-radius: 3px;
+}
+
+
+.img-gall{
     position: relative;
     margin: 5px;
     float: left;
@@ -214,18 +269,28 @@ export default {
     animation: winanim 0.5s;
     -webkit-backface-visibility: visible;
     backface-visibility: visible;
-  }
+}
+
+
+
+
+
+
 }
 
 @media (max-width: 762px) {
-  .img-gall {
-    background-size: contain;
-    cursor: pointer;
-    margin: 10px;
-    border-radius: 3px;
-  }
 
-  .img-gall {
+
+.img-gall {
+
+  background-size: contain;
+  cursor: pointer;
+  margin: 10px;
+  border-radius: 3px;
+}
+
+
+.img-gall{
     position: relative;
     margin: 5px;
     float: left;
@@ -236,6 +301,15 @@ export default {
     animation: winanim 0.5s;
     -webkit-backface-visibility: visible;
     backface-visibility: visible;
-  }
 }
+
+
+}
+
+
+
+
+
 </style>
+
+

@@ -5,22 +5,26 @@
       v-if="editing == false"
       class="edit-btn float-right"
       @click="edit(true)"
-      variant="outline-primary"
-      size="sm"
+      variant="outline-primary"   size="sm"
       >Edit Profile</b-button
+
+      
+
     >
 
-    <br />
 
-    <br />
+<br />     
 
-    <br />
+<br />
+
+<br /> 
+
 
     <p v-if="editing == false">
       {{ biography }}
     </p>
     <div v-if="editing">
-      <b-form @submit="save">
+      <b-form @submit="save">  
         <div style="width: 150px">
           <b-form-select
             required

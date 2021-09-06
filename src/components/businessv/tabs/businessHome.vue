@@ -27,8 +27,8 @@ export default {
     Invite,
     HotBusiness,
     Post,
-    Personalize
-  }
+    Personalize,
+  },
 };
 </script>
 

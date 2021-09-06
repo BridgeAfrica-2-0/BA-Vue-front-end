@@ -2,14 +2,20 @@
   <div>
     <Navbar />
 
-    <b-container fluid class="content">
-      <b-row>
-        <b-col lg="5" xl="4" class=" ">
-          <Parent />
+    <b-container fluid class="content" >
+
+
+
+  <b-row>
+      <b-col  lg="5"  xl="4"  class=" "> 
+
+        <Parent />
+         
         </b-col>
 
+
         <b-col class="col mt-sm-3">
-          <b-tabs content-class="mt-3" fill pills>
+          <b-tabs content-class="mt-3" fill pills >
             <b-tab title="Posts"><Posts /></b-tab>
             <b-tab title="Media"><Media /></b-tab>
             <b-tab title="Members"><Members /></b-tab>
@@ -38,8 +44,8 @@ export default {
     Media,
     Members,
     Parent,
-    Feedback
-  }
+    Feedback,
+  },
 };
 </script>
 
@@ -59,7 +65,7 @@ h3 {
   color: #e75c18;
 }
 
-.network {
+.network{
   margin-top: 90px;
 }
 @media only screen and (max-width: 768px) {
@@ -71,12 +77,21 @@ h3 {
   }
 }
 
+
+
+
 @media only screen and (min-width: 768px) {
-  .content {
-    padding-left: 35px;
-    padding-right: 35px;
-  }
+
+.content{
+
+  padding-left: 35px;
+  padding-right: 35px;
 }
+
+
+}
+
+
 
 p {
   text-align: left;
@@ -103,9 +118,10 @@ p {
   text-align: center;
 }
 
-h6 {
+h6{
   font-size: 14px;
 }
+
 
 .btn {
   font-size: 10px;
@@ -155,4 +171,10 @@ h6 {
   margin-right: -10px;
   margin-left: -10px;
 }
+
+
+
+
+
+
 </style>

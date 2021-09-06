@@ -5,6 +5,7 @@ import Login from "../views/login.vue";
 
 import signup from "../views/signup.vue";
 
+import SignIn from "../views/signIn.vue";
 import RecoverPass1 from "../views/recoverPassword1.vue";
 import RecoverPass2 from "../views/recoverPassword2.vue";
 import RecoverPass3 from "../views/recoverPassword3.vue";
@@ -97,7 +98,7 @@ const routes = [
     component: templateView
   },
   {
-    path: "/business_owner",
+    path: "/business_owner/:id?",
     name: "BusinessOwner",
     component: businessOwner
   },
@@ -107,9 +108,6 @@ const routes = [
     name: "businessOwnerSettingGeneral",
     component: businessOwnerSettingGeneral
   },
-
-
-
 
   {
     path: "/business_owner/create_website_step_one",
@@ -149,6 +147,11 @@ const routes = [
   },
 
   {
+    path: "/signin",
+    name: "SignIn",
+    component: SignIn
+  },
+  {
     path: "/recoverPass1",
     name: "RecoverPass1",
     component: RecoverPass1
@@ -171,7 +174,7 @@ const routes = [
     component: RecoverPass3
   },
   {
-    path: "/businessfollower",
+    path: "/businessfollower/:id?",
     name: "BusinessFollower",
     component: businessFollower
   },
@@ -250,44 +253,38 @@ const routes = [
   }
 ];
 
+
+
 const router = new VueRouter({
-  mode: "history",
+  mode: 'history',
   base: process.env.BASE_URL,
   routes
 });
 
+
+
 router.beforeEach((to, from, next) => {
-  const loggedIn = localStorage.getItem("user");
-  
+  const loggedIn = localStorage.getItem('user')
 
-
+  const isAuthenticated = store.getters['auth/isVerified'];
 
   if (to.matched.some(record => record.meta.auth) && !loggedIn) {
-    
-    
-    next("/login");   
-     
-   
-    return;
+    next('/login')
+    return
   }
-
-
-  if (to.matched.some(record => record.meta.auth)) {
-    const dat = localStorage.getItem("user");
-    const userdata= JSON.parse(dat);
-   
-    
-    if(userdata.user.verified_at == null){ 
-
-      next("/verify");   
-     
-    }
   
-  }
 
+ // if (to.matched.some(record => record.meta.auth) && !isAuthenticated) {
+  //  next('/verify')
+ //   return
+//  }
 
-   
-  next();
+  
+
+  next()
+
 });
+
+
 
 export default router;

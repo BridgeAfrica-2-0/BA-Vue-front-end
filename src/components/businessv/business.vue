@@ -41,8 +41,7 @@
           >
             <b-dropdown-item>
               <b-icon icon="chat-fill" variant="primary"></b-icon>
-              Message</b-dropdown-item
-            >
+              Message</b-dropdown-item>
             <b-dropdown-item>
               <b-icon icon="geo-alt" variant="primary"></b-icon> Get
               Direction</b-dropdown-item
@@ -136,13 +135,13 @@ export default {
     Media,
     MarketPlace,
     Community,
-    Networks
+    Networks,
   },
   data() {
     return {};
   },
   computed: {},
-  methods: {}
+  methods: {},
 };
 </script>
 

@@ -19,92 +19,188 @@
         </button>
       </div>
 
+
+
+
+  
       <b-modal id="phonemodal" title="Add Phone Number" hide-footer>
         <div class="modal-body">
           <form class="form" action="" method="post">
-            <b-form-input
-              class="mt-2 mb-2"
-              v-model="Phone"
-              placeholder="phone"
-            ></b-form-input>
 
-            <div class="fosrm-group text-right w-100">
-              <button type="button" class="btn btn-primary orange">
-                Save
-              </button>
-            </div>
+
+
+            <b-form-input
+        class="mt-2 mb-2"
+        v-model="Phone"
+        placeholder="phone"
+      ></b-form-input>
+
+
+    <div class="fosrm-group text-right w-100">
+                <button type="button" class="btn btn-primary orange">
+                  Save
+                </button>
+              </div>
+
           </form>
+
         </div>
-      </b-modal>
+
+
+
+      </b-modal>   
+
+
+
+
+
 
       <b-modal id="currentcityModal" title="Add current city" hide-footer>
         <div class="modal-body">
           <form class="form" action="" method="post">
-            <b-form-input
-              class="mt-2 mb-2"
-              placeholder="current city"
-            ></b-form-input>
 
-            <div class="fosrm-group text-right w-100">
-              <button type="button" class="btn btn-primary orange">
-                Save
-              </button>
-            </div>
+
+
+            <b-form-input
+        class="mt-2 mb-2"
+       
+        placeholder="current city"
+      ></b-form-input>
+
+
+    <div class="fosrm-group text-right w-100">
+                <button type="button" class="btn btn-primary orange">
+                  Save
+                </button>
+              </div>
+
           </form>
+
         </div>
-      </b-modal>
+
+
+
+      </b-modal>   
+
+
+
+
+
+
+
+
+
+
 
       <b-modal id="hometownModal" title="Add home town" hide-footer>
         <div class="modal-body">
           <form class="form" action="" method="post">
-            <b-form-input
-              class="mt-2 mb-2"
-              v-model="Phone"
-              placeholder="home town"
-            ></b-form-input>
 
-            <div class="fosrm-group text-right w-100">
-              <button type="button" class="btn btn-primary orange">
-                Save
-              </button>
-            </div>
+
+
+            <b-form-input
+        class="mt-2 mb-2"
+        v-model="Phone"
+        placeholder="home town"
+      ></b-form-input>
+
+
+    <div class="fosrm-group text-right w-100">
+                <button type="button" class="btn btn-primary orange">
+                  Save
+                </button>
+              </div>
+
           </form>
+
         </div>
-      </b-modal>
+
+
+
+      </b-modal>   
+
+
+
+
+
+
+
+
+
+
+
+
 
       <b-modal id="websiteModal" title="Add a website" hide-footer>
         <div class="modal-body">
           <form class="form" action="" method="post">
+
+
+
             <b-form-input
-              class="mt-2 mb-2"
-              placeholder="Website"
-            ></b-form-input>
+        class="mt-2 mb-2"
+       
+        placeholder="Website"
+      ></b-form-input>
 
-            <div class="fosrm-group text-right w-100">
-              <button type="button" class="btn btn-primary orange">
-                Save
-              </button>
-            </div>
+
+    <div class="fosrm-group text-right w-100">
+                <button type="button" class="btn btn-primary orange">
+                  Save
+                </button>
+              </div>
+
           </form>
-        </div>
-      </b-modal>
 
+        </div>
+
+
+
+      </b-modal>   
+
+
+
+
+
+      
       <b-modal id="sociallinkModal" title="Add A social link" hide-footer>
         <div class="modal-body">
           <form class="form" action="" method="post">
-            <b-form-input
-              class="mt-2 mb-2"
-              placeholder="soclial link"
-            ></b-form-input>
 
-            <div class="fosrm-group text-right w-100">
-              <button type="button" class="btn btn-primary orange">
-                Save
-              </button>
-            </div>
+
+
+            <b-form-input
+        class="mt-2 mb-2"
+      
+        placeholder="soclial link"
+      ></b-form-input>
+
+
+    <div class="fosrm-group text-right w-100">
+                <button type="button" class="btn btn-primary orange">
+                  Save
+                </button>
+              </div>
+
           </form>
+
         </div>
-      </b-modal>
+
+
+
+      </b-modal> 
+
+
+      
+
+
+
+
+
+
+   
+
+
 
       <b-modal id="modal-6" title="Edit Date of Birth" hide-footer>
         <div class="modal-body">
@@ -347,7 +443,7 @@
           <div class="col-md-4">Mobile Phone</div>
           <div class="col-md-4">+1- 234-567-8912</div>
         </div>
-        <a v-b-modal.phonemodal data-target="#phonemodal">
+        <a     v-b-modal.phonemodal    data-target="#phonemodal">
           + Add Other Phones</a
         >
       </div>
@@ -379,14 +475,15 @@
         <hr />
         <hr />
 
-        <a v-b-modal.currentcityModal data-target="#currentcityModal">
+        <a  v-b-modal.currentcityModal   data-target="#currentcityModal">
+
           <fas-icon
             class="primary float-left mr-1 mt-1"
             :icon="['fas', 'plus-circle']"
           />
           Add your current city</a
         ><br />
-        <a v-b-modal.hometownModal data-target="#hometownModal">
+        <a   v-b-modal.hometownModal    data-target="#hometownModal">
           <fas-icon
             class="primary float-left mr-1 mt-1"
             :icon="['fas', 'plus-circle']"
@@ -401,7 +498,9 @@
         <hr />
         <div class="media">
           <div class="media-body">
-            <a v-b-modal.websiteModal data-target="#websiteModal">
+
+
+            <a   v-b-modal.websiteModal   data-target="#websiteModal">
               <fas-icon
                 class="primary float-left mr-1 mt-1"
                 :icon="['fas', 'plus-circle']"
@@ -429,7 +528,7 @@
         </div>
         <div class="media mt-4">
           <div class="media-body">
-            <a v-b-modal.sociallinkModal data-target="#sociallinkModal">
+            <a  v-b-modal.sociallinkModal    data-target="#sociallinkModal">
               <fas-icon
                 class="primary float-left mr-1 mt-1"
                 :icon="['fas', 'plus-circle']"
@@ -471,11 +570,11 @@
 //import WebAndSocials from "./webAndSocial";
 export default {
   components: {
-    //  BasicInfo,
-    //  ContactInfo,
-    // BusinessVisited,
-    //  PlacesLived,
-    //  WebAndSocials
+  //  BasicInfo,
+  //  ContactInfo,
+   // BusinessVisited,
+  //  PlacesLived,
+  //  WebAndSocials
   }
 };
 </script>

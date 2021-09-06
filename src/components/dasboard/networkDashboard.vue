@@ -1,79 +1,127 @@
 <template>
   <div>
-    <b-card class="border shadow ">
-      <span>
-        <h4>
-          <img
-            class="img-fluid picture logo-img"
-            src="@/assets/icons/network.png"
-          />
-          NETWORKS
-          <h6 style="float:right" class="see-all-link">666 result found</h6>
-        </h4>
-      </span>
 
-      <div class="s-card">
-        <b-row>
-          <b-col md="6" cols="12" sm="12" class="mt-sm-2">
-            <div class="people-style shadow">
-              <b-row>
-                <b-col md="3" cols="5" sm="5">
-                  <div style="height: 100%;">
-                    <img
-                      src="https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg"
-                      width="100%"
-                      height="90%"
-                      class="r-image"
-                    />
-                  </div>
-                </b-col>
-                <b-col md="6" cols="7" sm="7">
-                  <p class="text">
-                    <strong> Shipping Network </strong> <br />
-                    <br />
-                    Public <br />
-                    20k Members <br />
-                    Business Name <br />
-                  </p>
-                </b-col>
+    <b-card class="border shadow " >    
+    
 
-                <b-col md="3" cols="12" sm="12">
-                  <div class="s-button">
-                    <b-row>
-                      <b-col md="12" cols="4" sm="4" class="mt-md-2">
-                        <b-button
-                          block
-                          size="sm"
-                          class="b-background"
-                          variant="primary"
-                        >
-                          <b-icon class="ico" icon="plus-circle"> </b-icon>
-                          Community
-                        </b-button>
-                      </b-col>
+<span> <h4>   <img class="img-fluid picture logo-img" src="@/assets/icons/network.png"  />  NETWORKS  <h6 style="float:right" class="see-all-link">  666 result found    </h6>  </h4>   </span>
 
-                      <b-col md="12" sm="4" cols="4" class="mt-md-2">
-                        <b-button
-                          block
-                          size="sm"
-                          class="b-background"
-                          variant="primary"
-                        >
-                          <b-icon class="ico" icon="chat"> </b-icon> Message
-                        </b-button>
-                      </b-col>
 
-                      <b-col md="12" sm="4" cols="4" class="mt-md-2"> </b-col>
-                    </b-row>
-                  </div>
-                </b-col>
-              </b-row>
-            </div>
-          </b-col>
-          <b-col md="6" sm="12" class="mt-sm-2"> </b-col>
-        </b-row>
-      </div>
-    </b-card>
+
+
+<div class="s-card">
+  <b-row>    <b-col md="6" cols="12"  sm="12" class="mt-sm-2">    
+
+ 
+                  
+    <div class="people-style shadow">
+      <b-row>
+        <b-col md="3" cols="5" sm="5">
+          <div style="height: 100%;">
+            <img
+              src="https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg"
+              width="100%"
+              height="90%"
+              class="r-image"
+            />
+          </div>
+        </b-col>
+        <b-col md="6" cols="7" sm="7">
+         <p class="text">
+            <strong> Shipping Network </strong> <br />  <br />
+            Public <br />
+             20k Members <br />
+             Business Name <br />
+            
+          </p>
+        </b-col>
+
+        <b-col md="3" cols="12" sm="12">
+          <div class="s-button">
+     <b-row>  <b-col md="12" cols="4" sm="4" class="mt-md-2">    
+
+            <b-button block size="sm" class="b-background" variant="primary">
+              <b-icon class="ico" icon="plus-circle"> </b-icon> Community
+            </b-button>
+
+            </b-col>  
+
+        <b-col md="12" sm="4" cols="4" class="mt-md-2">  
+
+            <b-button block size="sm" class="b-background" variant="primary">
+              <b-icon class="ico" icon="chat"> </b-icon> Message
+            </b-button>
+
+            </b-col>  
+
+            <b-col md="12" sm="4" cols="4" class="mt-md-2">  
+
+            
+
+            </b-col>  
+   </b-row>
+
+          </div>
+        </b-col>
+      </b-row>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ </b-col>     <b-col   md="6"  sm="12" class="mt-sm-2">  
+
+
+
+       
+
+
+
+
+
+
+ </b-col>  </b-row>
+
+
+
+
+
+
+</div>
+ </b-card>
+
   </div>
 </template>
 
@@ -84,41 +132,71 @@ export default {
 </script>
 
 <style scoped>
-.logo-img {
+
+
+
+.logo-img{
+
   width: 40px;
 }
 
-h4 {
+h4{
   font-size: 20px;
 }
 
-@media only screen and (max-width: 768px) {
-  .btn {
-    font-size: 10px;
 
-    display: flex;
+@media only screen and (max-width: 768px) {
+  
+
+
+
+
+.btn {
+  font-size: 10px;
+
+  display: flex;
 
     padding-right: 90px;
-  }
-
-  h4 {
-    font-size: 15px;
-  }
 }
+
+h4{
+  font-size: 15px;
+}
+
+}
+
+
+
+
+
 
 @media only screen and (min-width: 768px) {
-  .see-all-link {
-    font-size: 10px;
-  }
+  
 
-  .btn {
-    font-size: 10px;
 
-    display: flex;
+.see-all-link{
+  font-size: 10px;
+}
+
+.btn {
+  font-size: 10px;
+
+  display: flex;
 
     padding-right: 90px;
-  }
 }
+
+
+}
+
+
+
+
+
+
+
+
+
 
 .card {
   color: orange;
@@ -155,12 +233,15 @@ h4 {
   margin-left: -15px;
 }
 
+
+
 .ico {
   margin-right: 5px;
 }
 
 .r-image {
-  border-top-left-radius: 10px;
+  
+ border-top-left-radius: 10px;
 
   border-bottom-left-radius: 10px;
 
@@ -168,9 +249,10 @@ h4 {
 
   border-bottom-right-radius: 10px;
 
+
   width: 100%;
 
-  height: 100%;
+height: 100%;
 }
 
 .people-style {
@@ -181,7 +263,7 @@ h4 {
   border-top-right-radius: 5px;
 
   border-bottom-right-radius: 5px;
-  margin-right: 10px;
+  margin-right:10px;
 
   background: white;
 
@@ -189,16 +271,19 @@ h4 {
   background-clip: border-box;
   border: 1px solid rgba(0, 0, 0, 0.125);
   margin-bottom: 10px;
+ 
+
 }
 
-.s-card {
-  height: 450px;
-  overflow: auto;
+
+.s-card{
+  height:450px; 
+  overflow: auto; 
   overflow-x: hidden;
-  border-radius: 10px;
+  border-radius:10px;
 }
 
-h4 {
-  color: black;
+h4{
+  color:black;
 }
 </style>

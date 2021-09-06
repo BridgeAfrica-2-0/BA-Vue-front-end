@@ -10,6 +10,7 @@
       class="d-flex align-items-center mb-4 "
       style="border: none"
     >
+     
       <div class="datails">
         <div class="row">
           <div class="col">
@@ -44,6 +45,10 @@
         v-model="hometown"
         placeholder="School"
       ></b-form-input>
+     
+
+
+     
 
       <b-form-checkbox
         id="checkbox-1"

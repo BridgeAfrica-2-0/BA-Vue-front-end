@@ -8,7 +8,7 @@
         />Businesss
 
         <button
-          type="button"
+          type="button"   
           data-toggle="modal"
           data-target="#addbusinessbtnModal"
           class="btn btn-outline-primary pull-right float-right"
@@ -17,10 +17,29 @@
           Add Business
         </button>
 
-        methods: { showModal() { this.$refs['modal-1'].show() }, hideModal() {
-        this.$refs['modal-1'].hide() } }, mounted() { this.showModal(); },
 
-        <button
+
+
+
+
+
+methods: {
+      showModal() {
+        this.$refs['modal-1'].show()
+      },
+      hideModal() {
+        this.$refs['modal-1'].hide()
+      }
+    },
+    mounted() {
+      this.showModal();
+    },
+
+
+
+
+
+         <button
           type="button"
           data-toggle="modal"
           data-target="#addbusinessbtnModal"
@@ -29,47 +48,72 @@
         >
           person modal
         </button>
+
+
+
       </h2>
 
-      <button
-        type="button"
-        data-toggle="modal"
-        data-target="#welcomeModal"
-        class="btn btn-outline-primary pull-right float-right"
-        v-b-modal.modal-0
-      >
-        Add Business
-      </button>
 
-      <b-modal id="modal-0" hide-footer>
+
+
+
+ <button
+          type="button"
+          data-toggle="modal"
+          data-target="#welcomeModal"
+          class="btn btn-outline-primary pull-right float-right"
+          v-b-modal.modal-0
+        >
+          Add Business
+        </button>
+
+
+
+
+
+
+
+
+
+       
+      <b-modal id="modal-0"  hide-footer>
         <div class="row">
           <div class="col-md-12 mx-0">
             <form id="msform">
+             
+
               <fieldset class="position-relative opacity-100" v-if="welcome1">
                 <div class="form-card">
-                  <h4>Welcome To BridgeAfrica.com</h4>
-                  <br />
 
-                  <p>
-                    Lorem Ipsum is simply dummy text of the printing and
-                    typesetting industry. Lorem Ipsum has been the industry's
-                    standard dummy text ever since the 1500s, when an unknown
-                    printer took a galley of type and scrambled it to make a
-                    type specimen book. It has
-                  </p>
+                 
 
-                  <h4>Use Bridge Africa As A</h4>
+                 <h4> Welcome To BridgeAfrica.com    </h4> <br/> 
 
-                  <b-form-group>
-                    <b-form-radio-group
-                      id="radio-group-1"
-                      :options="options"
-                      name="radio-options"
-                    ></b-form-radio-group>
-                  </b-form-group>
+                 <p>     Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has    </p>
+                 
+                 <h4>  Use Bridge Africa   As A   </h4>  
+                
+                   
 
-                  <br />
-                  <br />
+
+
+                     <b-form-group  >
+      <b-form-radio-group
+        id="radio-group-1"
+       
+        :options="options"
+        
+        name="radio-options"
+      ></b-form-radio-group>
+    </b-form-group>
+
+                      
+                 <br/>  <br/>        
+
+
+
+
+
                 </div>
                 <input
                   type="button"
@@ -86,16 +130,46 @@
                 />
               </fieldset>
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
               <fieldset class="position-relative opacity-100" v-if="welcome2">
                 <div class="form-card">
-                  <h4>How to use the Search</h4>
 
-                  <p>
-                    Lorem Ipsum is simply dummy text of the printing and
-                    typesetting industry. Lorem Ipsum has been the industry's
-                    standard dummy text and scrambled it to make a type specimen
-                    book. It has
-                  </p>
+               <h4>     How to use the  Search  </h4>
+
+
+
+
+               <p> Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+                      Lorem Ipsum has been the industry's standard dummy text
+                     
+                      and scrambled it to make a type specimen book. It has  </p>
+
+
+
+
+
+
                 </div>
                 <input
                   type="button"
@@ -118,8 +192,22 @@
                 />
               </fieldset>
 
+
+
+
+
+
+
+
+
+
               <fieldset class="position-relative opacity-100" v-if="welcome3">
-                <div class="form-card"></div>
+                <div class="form-card">
+                 
+
+
+                  
+                </div>
 
                 <input
                   type="button"
@@ -192,6 +280,27 @@
         </div>
       </b-modal>
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
       <b-modal id="modal-1" title="Add Bussiness" hide-footer>
         <div class="row">
           <div class="col-md-12 mx-0">
@@ -209,6 +318,7 @@
                   class=""
                   v-bind:class="{ active: fieldset2, active: fieldset3 }"
                 >
+
                   <strong>Location</strong>
                 </li>
               </ul>
@@ -563,22 +673,53 @@
         </div>
       </b-modal>
 
-      <b-modal
-        id="modal-person"
-        title=" A Quick Guide to get you started"
-        hide-footer
-      >
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      <b-modal id="modal-person" title=" A Quick Guide to get you started"  hide-footer>   
+
+
         <div class="row">
           <div class="col-md-12 mx-0">
             <form id="msform">
               <!-- progressbar -->
               <ul id="progressbar">
-                <li class="active" id="general">
-                  <strong> Complete Profile</strong>
-                </li>
+                <li class="active" id="general"><strong> Complete Profile</strong></li>
                 <li id="contact" class="" v-bind:class="{ active: fieldset5 }">
-                  <strong> Follow Business </strong>
+                  <strong>  Follow Business </strong>
                 </li>
+
 
                 <li
                   id="location"
@@ -588,17 +729,19 @@
                   <strong> Follow People </strong>
                 </li>
 
-                <li
+
+                 <li
                   id="tutorial"
                   class=""
-                  v-bind:class="{
-                    active: fieldset2,
-                    active: fieldset3,
-                    active: fieldset4
-                  }"
+                  v-bind:class="{ active: fieldset2, active: fieldset3,active:fieldset4 }"
                 >
                   <strong> Tutorials </strong>
                 </li>
+
+
+
+
+
               </ul>
               <!-- fieldsets -->
               <fieldset class="position-relative opacity-100" v-if="fieldset1">
@@ -621,7 +764,7 @@
                     </div>
                     <div class="col-md-6">
                       <div class="form-group">
-                        <label for="username"> DOB :</label><br />
+                        <label for="username">  DOB :</label><br />
                         <input
                           type="date"
                           name="dob"
@@ -629,9 +772,17 @@
                           placeholder="Busness Name"
                           class="form-control"
                         />
+
                       </div>
 
-                      <div class="form-group">
+
+
+
+
+
+  
+    
+            <div class="form-group">
                         <label for="alias">Gender:</label><br />
                         <select id="category" class="form-control ">
                           <option value="" selected="" disabled=""
@@ -643,6 +794,10 @@
                         </select>
                       </div>
 
+
+
+
+                      
                       <div class="form-group">
                         <label for="country"> Country :</label><br />
                         <input
@@ -654,7 +809,15 @@
                         />
                       </div>
 
-                      <div class="form-group">
+
+
+  
+
+
+
+
+                <div class="form-group">
+
                         <label for="city"> City :</label><br />
                         <input
                           type="text"
@@ -663,9 +826,17 @@
                           placeholder="country"
                           class="form-control"
                         />
+
+
                       </div>
 
-                      <div class="form-group">
+
+
+
+
+                      
+                <div class="form-group">
+
                         <label for="Neighbor"> Neighbor :</label><br />
                         <input
                           type="text"
@@ -674,12 +845,32 @@
                           placeholder="Neighbor"
                           class="form-control"
                         />
+
+
                       </div>
+
+
+
+                      
+
+
+
+
+
+
+                      
+
+
+
                     </div>
                   </div>
 
-                  <br />
-                  <br />
+                 
+                 <br />    <br />
+
+
+
+                 
                 </div>
                 <input
                   type="button"
@@ -696,11 +887,37 @@
                 />
               </fieldset>
 
+
+
+
+
+
               <fieldset class="position-relative opacity-100" v-if="fieldset2">
                 <div class="form-card">
                   <div class="div-h">
-                    <Business />
+
+
+
+
+                     
+      <Business />
+
+                     
+    
+
+
+
+
+
+
+
+
+
+
                   </div>
+
+                 
+
                 </div>
                 <input
                   type="button"
@@ -723,13 +940,32 @@
                 />
               </fieldset>
 
+
+
+
+
+
+
+
+
+
               <fieldset class="position-relative opacity-100" v-if="fieldset3">
                 <div class="form-card">
-                  <div class="div-h">
-                    <People />
+
+                  
+
+                  <div class="div-h"><People />
+                   
+                
+
+
 
                     <People />
+
                   </div>
+
+                  
+
                 </div>
 
                 <input
@@ -753,11 +989,30 @@
                 />
               </fieldset>
 
+
+
+
+
+
+
+              
               <fieldset class="position-relative opacity-100" v-if="fieldset4">
                 <div class="form-card">
+
+                  
+
                   <div class="div-h">
+                   
+                
+
+
+
                     <Tutorial />
+
                   </div>
+
+                  
+
                 </div>
 
                 <input
@@ -780,6 +1035,9 @@
                   v-on:click="closeThree"
                 />
               </fieldset>
+
+
+
 
               <fieldset>
                 <div class="form-card">
@@ -831,6 +1089,29 @@
         </div>
       </b-modal>
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
       <div class="row mb-4">
         <div class="col">
           <h6 class="mb-0"><b></b></h6>
@@ -856,13 +1137,24 @@
           </div>
 
 -->
+
+   
+
+
+
+
+
         </div>
+
       </div>
     </div>
   </div>
 </template>
 
 <script>
+
+
+
 import People from "@/components/dasboard/suggestedpeople";
 import Business from "@/components/dasboard/communitybusiness";
 
@@ -878,24 +1170,55 @@ export default {
       fieldset4: false,
       fieldset5: false,
       welcome1: true,
-      welcome2: false,
+      welcome2: false, 
       welcome3: false,
-      welcome4: false,
+      welcome4:false, 
+
 
       options: [
-        { text: "Business ", value: "business" },
-        { text: "Person", value: "person" }
-      ]
+          { text: 'Business ', value: 'business' },
+          { text: 'Person', value: 'person' }
+         
+        ]
+
+
     };
   },
 
   components: {
+    
     People,
     Business,
     Tutorial
+    
   },
 
-  methods: {
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+methods: {
+
+
     closeOne() {
       this.fieldset1 = false;
       this.fieldset2 = true;
@@ -904,6 +1227,8 @@ export default {
       this.fieldset5 = true;
     },
 
+
+
     welcome1close() {
       this.fieldset1 = false;
       this.fieldset2 = true;
@@ -911,16 +1236,20 @@ export default {
       this.fieldset4 = false;
       this.fieldset5 = true;
       this.welcome1 = true;
-      this.welcome2 = true;
-      this.welcome3 = true;
-      this.welcome4 = true;
+       this.welcome2 = true;
+        this.welcome3 = true;
+         this.welcome4 = true;
     },
 
-    welcome2close() {
-      this.welcome1 = true;
-      this.welcome2 = true;
-      this.welcome3 = true;
-      this.welcome4 = true;
+
+
+
+     welcome2close() {
+
+          this.welcome1 = true;
+       this.welcome2 = true;
+        this.welcome3 = true;
+         this.welcome4 = true;
 
       this.fieldset1 = false;
       this.fieldset2 = true;
@@ -929,11 +1258,18 @@ export default {
       this.fieldset5 = true;
     },
 
-    welcome3close() {
-      this.welcome1 = true;
-      this.welcome2 = true;
-      this.welcome3 = true;
-      this.welcome4 = true;
+
+
+
+
+    
+     welcome3close() {
+
+          this.welcome1 = true;
+       this.welcome2 = true;
+        this.welcome3 = true;
+         this.welcome4 = true;
+
 
       this.fieldset1 = false;
       this.fieldset2 = true;
@@ -942,18 +1278,34 @@ export default {
       this.fieldset5 = true;
     },
 
-    welcome4close() {
+
+
+
+
+
+
+
+
+     welcome4close() {
       this.fieldset1 = false;
       this.fieldset2 = true;
       this.fieldset3 = false;
       this.fieldset4 = false;
       this.fieldset5 = true;
 
-      this.welcome1 = true;
-      this.welcome2 = true;
-      this.welcome3 = true;
-      this.welcome4 = true;
+
+       this.welcome1 = true;
+       this.welcome2 = true;
+        this.welcome3 = true;
+         this.welcome4 = true;
+
+
     },
+
+
+
+
+
 
     closeTwo() {
       this.fieldset1 = false;
@@ -972,20 +1324,40 @@ export default {
 };
 </script>
 
-<style>
+
+
+
+<style >
+
+
+
+
 #progressbar li {
-  list-style-type: none;
-  font-size: 12px;
-  width: 25%;
-  float: left;
-  position: relative;
+    list-style-type: none;
+    font-size: 12px;
+    width: 25%;
+    float: left;
+    position: relative;
 }
+
+
+
+
+
+
+
+
+
+
 
 .div-h {
   height: 400px;
   overflow: auto;
   overflow-x: hidden;
   margin-left: -10px;
-  padding-left: -10px;
+   padding-left: -10px;
 }
+
+
+
 </style>

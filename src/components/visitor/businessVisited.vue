@@ -28,7 +28,7 @@
 export default {
   data() {
     return {};
-  }
+  },
 };
 </script>
 
@@ -53,7 +53,7 @@ export default {
     margin-left: 20px;
   }
 
-  .avat {
+  .avat{
     margin-top: -120px;
   }
 }

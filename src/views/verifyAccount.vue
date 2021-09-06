@@ -15,16 +15,23 @@
             <div class="text-center">You will get an OTP by SMS</div>
           </b-card-text>
           <b-form class="w-75 mx-auto text-center">
-            <md-field>
-              <label for="otp"> OTP</label>
-              <md-input
-                type="text"
-                name="otp"
-                id="otp"
-                v-model="token"
-                required
-              />
-            </md-field>
+            
+
+
+             <md-field>
+                <label for="otp"> OTP</label>
+                <md-input
+                  type="text"
+                  name="otp"
+                  id="otp"
+                   v-model="token"
+                   required
+                 
+                />
+               
+              </md-field>
+
+
 
             <br />
 
@@ -57,59 +64,66 @@ import axios from "axios";
 export default {
   data() {
     return {
-      token: ""
+      token: "",
     };
   },
   methods: {
     resendOtp() {
       axios
         .post("user/resendOtp", {
-          phone: this.$store.state.auth.user.user.phone
+         
+           phone: this.$store.state.auth.user.data.user.phone,
         })
-        .then(response => {
+        .then((response) => {
           if (response.status === 200) {
             this.flashMessage.show({
               status: "success",
               title: "Successfully Send",
-              message: "SMS successfully send check your inbox"
+              message: "SMS successfully send check your inbox",
             });
           } else {
             console.log(response.data);
           }
         })
-        .catch(err => {
+        .catch((err) => {
           console.log({ err: err });
 
           this.flashMessage.show({
             status: "error",
             title: "Send Failed",
-            message: "Message not send"
+            message: "Message not send",
           });
         });
-    },
+    }, 
 
     Verify() {
-      console.log(this.$store.state.auth.user.user.phone);
+     
+
       this.$store
         .dispatch("auth/verify", {
           OTP: this.token,
 
-          phone: this.$store.state.auth.user.user.phone
+          phone: this.$store.state.auth.user.data.user.phone,
         })
-        .then(response => {
+        .then((response) => {
+
+
           this.$router.push({ name: "welcome" });
+          
+
+
         })
-        .catch(err => {
+        .catch((err) => {
           console.log({ err: err });
 
           this.flashMessage.show({
             status: "error",
             title: "Verification Failed",
-            message: "Unable to verify your account"
+            message: "Unable to verify your account",
           });
         });
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -123,6 +137,8 @@ export default {
 }
 
 .buttonn {
+
+  
   width: 150px !important;
 }
 
@@ -145,3 +161,4 @@ export default {
   }
 }
 </style>
+

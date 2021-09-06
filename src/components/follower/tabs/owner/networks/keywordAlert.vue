@@ -1,5 +1,6 @@
 <template>
-  <div class="a-left container">
+  <div class="a-left container" >
+
     <!--
     <h5 class=" d-inline-block">
       Keywords Alerts
@@ -9,31 +10,40 @@
 
     -->
 
+
+
     <b-row>
       <b-col cols="12">
-        <div class="">
-          <b-container>
-            <b-form-group
-              label-cols-lg="3"
-              label="Keyword Alerts"
-              label-size="md"
-              label-class="font-weight-bold pt-0 username"
-              class="mb-0 text"
-            >
-              <b-form-input
-                id="textarea"
-                placeholder="Enter keyword alert..."
-                rows="3"
-                max-rows="6"
-              ></b-form-input>
-            </b-form-group>
-          </b-container>
-          <hr />
-        </div>
+
+         <div class="">
+      <b-container>
+        <b-form-group
+          label-cols-lg="3"
+          label="Keyword Alerts"
+          label-size="md"
+          label-class="font-weight-bold pt-0 username"
+          class="mb-0 text"
+        >
+          <b-form-input
+            id="textarea"
+          
+            placeholder="Enter keyword alert..."
+            rows="3"
+            max-rows="6"
+          ></b-form-input>
+        </b-form-group>
+      </b-container>
+      <hr />
+    </div>
+
+
+
+
+
 
         <div v-for="i in 4" :key="i" class="mb-4">
           <div class="mb-2">
-            <div>
+            <div>    
               <b-row class="px-md-3">
                 <b-col cols="2" md="1" class="m-0 p-0">
                   <b-avatar

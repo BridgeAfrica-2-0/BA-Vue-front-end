@@ -90,20 +90,20 @@ import Footer from "@/components/footer";
 export default {
   components: {
     Navbar,
-    Footer
+    Footer,
   },
 
   data() {
     return {
       checked: false,
-      checkAll: false
+      checkAll: false,
     };
   },
   methods: {
     checkedAll() {
       this.checked = true;
-    }
-  }
+    },
+  },
 };
 </script>
 

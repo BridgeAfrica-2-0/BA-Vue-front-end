@@ -26,10 +26,10 @@ export default {
   data() {
     return {
       dateOfBirth: "20/20/2020",
-      gender: "Male"
+      gender: "Male",
     };
   },
-  methods: {}
+  methods: {},
 };
 </script>
 

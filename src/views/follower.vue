@@ -15,13 +15,13 @@ export default {
   components: {
     navbar,
     Profile,
-    Footer
+    Footer,
   },
   data() {
     return {};
   },
   computed: {},
-  methods: {}
+  methods: {},
 };
 </script>
 
@@ -32,7 +32,7 @@ export default {
   top: 40px;
 }
 
-.body {
+.body{
   overflow-x: hidden;
   width: 100%;
 }

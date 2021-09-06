@@ -6,12 +6,7 @@
       <b-row>
         <b-col cols="12" md="12" lg="9" xl="9">
           <div>
-            <b-tabs
-              pills
-              :vertical="vertical"
-              class="itzlala"
-              nav-wrapper-class="w-15"
-            >
+            <b-tabs pills   :vertical="vertical"   class="itzlala" nav-wrapper-class="w-15">
               <b-tab title="General">
                 <b-card-text class="mt-3">
                   <b-row>
@@ -255,49 +250,67 @@ import Footer from "@/components/footer";
 export default {
   components: {
     Navbar,
-    Footer
+    Footer,
   },
 
-  computed: {
+
+  
+computed: {
     vertical() {
-      if (this.size > 992) return true;
-      return false;
+      if (this.size > 992)
+        return true
+      return false
     }
   },
 
+
   data() {
     return {
+     
       size: 0
     };
   },
 
-  mounted() {
-    var that = this;
+
+
+
+   mounted() {
+    var that = this
     window.onresize = function() {
       that.size = window.innerWidth;
       console.log(that);
 
       console.log("lolo");
-    };
+    }
 
-    if (that.size == "") {
-      that.size = window.innerWidth;
-      console.log("lolo");
+
+    if(that.size== ""){
+        that.size = window.innerWidth;
+         console.log("lolo");
     }
   }
+
 };
 </script>
 
-<style>
+
+
+
+
+<style>     
 @media only screen and (max-width: 768px) {
-  .wahala .nav-pills .nav-link {
+
+.wahala .nav-pills .nav-link {
     border-radius: 0.25rem;
     font-size: 12px;
     padding-left: 10px;
     padding-right: 10px;
-  }
 }
-</style>
+
+}
+  </style>
+
+
 
 <style scoped>
 .buynow {
@@ -307,13 +320,20 @@ export default {
   position: relative;
 }
 
-.mt-15 {
-  margin-top: 15px;
+.mt-15{
+
+    margin-top: 15px;
 }
 
+
+
 @media only screen and (min-width: 768px) {
-  .cent {
-    margin-left: 170px;
-  }
+
+.cent{
+
+    margin-left:170px;
 }
+
+}
+
 </style>

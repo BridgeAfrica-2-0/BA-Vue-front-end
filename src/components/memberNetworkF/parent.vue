@@ -1,34 +1,41 @@
+
+
 <template>
   <div class=" ">
     <b-card title="" class="">
       <b-container class="a-center">
         <b-avatar
-          :src="require('@/assets/img/mayor.jpg')"
-          variant="primary"
+          
+        
+
+           :src="require('@/assets/img/mayor.jpg')"
+       
+          variant="primary"   
           square
+         
           rounded
           class="network-logo"
         >
         </b-avatar>
+       
+
+       
+
       </b-container>
 
-      <br />
+      <br />      
 
       <b-container>
         <b-row>
           <b-col cols="6">
-            <h6 class="  m-0 p-0 a-center network-name ">
-              <b> Mayor Council </b>
-            </h6>
+
+
+
+
+            <h6 class="  m-0 p-0 a-center network-name "> <b>  Mayor Council  </b> </h6>     
           </b-col>
           <b-col cols="6">
-            <b-button
-              variant="primary"
-              size="sm"
-              @click="addNetwork"
-              style="width: 120px;"
-              class="a-center"
-            >
+            <b-button variant="primary"   size="sm"   @click="addNetwork"   style="width: 120px;"  class="a-center" >
               <b-icon icon="add"></b-icon> Community
             </b-button>
           </b-col>
@@ -38,18 +45,17 @@
       <br />
 
       <b-card-text class="text-left">
+        
+
         <b-container>
           <b-row>
             <b-col>
-              <p class="a-center ">
-                <b-icon icon="globe" variant="primary"></b-icon>
-                <span class="pivate text"> Private </span>
-              </p>
+              <p class="a-center "><b-icon icon="globe" variant="primary"></b-icon> <span class="pivate text"> Private </span> </p>
             </b-col>
             <b-col>
               <p class="a-center">
-                <b-icon icon="people-fill" variant="primary"></b-icon>
-                <span class="pivate text"> 3.5K community </span>
+                <b-icon icon="people-fill" variant="primary"></b-icon> <span class="pivate text" > 3.5K
+                community   </span>
               </p>
             </b-col>
           </b-row>
@@ -68,27 +74,48 @@
       </b-card-text>
     </b-card>
 
-    <SidebarCommunity />
+    
+
+
+     <SidebarCommunity/> 
+     
+    
+
+
+      
+      
+
+
+
+
+
   </div>
 </template>
 
 <script>
-import SidebarCommunity from "@/components/businessf/tabs/owner/networks/sidebarcommunity";
+
+import SidebarCommunity from "@/components/businessf/tabs/owner/networks/sidebarcommunity";     
+
+
+
 
 export default {
   name: "parent",
+
+
 
   data() {
     return {
       networkShow: true,
       showModal: false,
-      text: ""
-    };
+      text: "",}},
+
+   components: {
+    SidebarCommunity,
+   
+   
   },
 
-  components: {
-    SidebarCommunity
-  },
 
   methods: {
     openNetwork() {
@@ -96,14 +123,23 @@ export default {
     },
 
     addNetwork() {
+
       console.log("hello");
       this.showModal = !this.showModal;
     }
   }
+
+
 };
 </script>
 
-<style>
+<style >
+
+
+
+
+
+
 .a-center {
   text-align: center;
   align-content: center;
@@ -114,78 +150,120 @@ export default {
 .b-none {
   border-style: none;
 }
-.t-align {
+.t-align{
   text-align: left;
 }
 
-.i-color {
-  color: #e75c18;
+
+
+.i-color{
+  color:#e75c18;
 }
+
+
+
 
 @media only screen and (min-width: 768px) {
-  .network-avatar-icon {
+
+  
+ .network-avatar-icon {
     position: absolute;
     width: 2rem;
     height: 2rem;
+     
 
-    top: 200px;
+     top: 200px;
     margin-left: 200px;
-
+    
     padding: 0px 0px;
     color: #ffff;
     background: #e75c18;
     border-radius: 25px;
     border: 4px solid #ffff;
-  }
-
-  .network-name {
-    font-size: 20px;
-  }
-
-  .pivate {
-    font-size: 14px;
-
-    padding-left: 8px;
-    text-align: left;
-  }
-
-  .network-logo {
-    width: 200px !important;
-    height: 200px !important;
-  }
 }
+
+
+
+.network-name{
+  font-size: 20px;
+ 
+
+}
+
+.pivate{
+
+    font-size: 14px;
+  
+  padding-left:8px;
+  text-align:left;
+}
+
+
+.network-logo{
+
+    width:200px  !important;
+    height:200px !important;
+}
+
+
+}
+
+
+
 
 @media only screen and (max-width: 768px) {
-  .network-logo {
-    width: 200px !important;
-    height: 200px !important;
-  }
+     
 
-  .network-name {
+
+.network-logo{
+
+    width:200px  !important;
+    height:200px !important;
+}
+
+
+
+.network-name{
+
     font-size: 16px;
-  }
+ 
+}
 
-  .pivate {
-    font-size: 12px;
+.pivate{
 
-    padding-left: 8px;
+   font-size: 12px;
+ 
+  padding-left:8px;
 
-    text-align: left;
-  }
+  text-align:left;
+}
 
-  .network-avatar-icon {
+
+ .network-avatar-icon {
     position: absolute;
     width: 2rem;
     height: 2rem;
+     
 
-    top: 78px;
+     top: 78px;
     margin-left: 78px;
-
+    
     padding: 0px 0px;
     color: #ffff;
     background: #e75c18;
     border-radius: 25px;
     border: 4px solid #ffff;
-  }
 }
+
+
+}
+
+
+
+
+
+
+
+
+
 </style>

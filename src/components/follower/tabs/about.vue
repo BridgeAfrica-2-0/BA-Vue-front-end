@@ -1,9 +1,15 @@
 <template>
   <div>
-    <b-icon class="icon" variant="primary" icon="person-fill"></b-icon> About
+   
+      <b-icon class="icon" variant="primary" icon="person-fill"></b-icon> About
 
-    <hr />
+      <hr />
+    
 
+
+        
+     
+    
     <b-card no-body class="desktop">
       <b-tabs pills card vertical>
         <b-tab title="BIOGRAPHY" active><Biography /></b-tab>

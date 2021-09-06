@@ -1,16 +1,18 @@
 <template>
   <div>
-    <CommunityMembers />
+  <CommunityMembers/>
   </div>
 </template>
 
 <script>
-import CommunityMembers from "../../communityMember";
+import CommunityMembers from "../../communityMember"
 export default {
-  components: {
-    CommunityMembers
+  components:{
+      CommunityMembers
   }
-};
+}
 </script>
 
-<style></style>
+<style>
+
+</style>

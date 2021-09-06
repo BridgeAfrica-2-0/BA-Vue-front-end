@@ -43,7 +43,7 @@ export default {
   margin-left: 270px;
 }
 
-.purple {
+.purple{
   color: purple;
 }
 .primary-bg {
@@ -56,7 +56,7 @@ p {
   text-align: center;
 }
 
-.business {
+.business{
   min-height: 450px;
 }
 

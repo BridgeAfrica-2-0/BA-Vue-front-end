@@ -228,21 +228,50 @@
                     <b-icon icon="arrow-left-circle"></b-icon>
                   </div>
                   <b-col class="ml-5">
-                    <b-row>
-                      <b-col cols="4">
-                        <SponsoredBusinesses class="ml-2" />
-                      </b-col>
+                 <b-row>   <b-col cols="4">   
 
-                      <b-col cols="4">
-                        <SponsoredBusinesses class="ml-2" />
-                      </b-col>
+                      <SponsoredBusinesses
+                        class="ml-2"
+                     
+                       
+                    /> </b-col>  
+                    
+                    
 
-                      <b-col cols="4">
-                        <SponsoredBusinesses class="ml-2" />
-                      </b-col>
+
+
+
+
+                     <b-col cols="4">   
+
+                      <SponsoredBusinesses
+                        class="ml-2"
+                     
+                       
+                    /> </b-col>
+
+
+
+                    
+                     <b-col cols="4">   
+
+                      <SponsoredBusinesses
+                        class="ml-2"
+                     
+                       
+                    /> </b-col>
+                    
+                    
+
+                    
+                    
+                    
                     </b-row>
                   </b-col>
                   <div class="left ml-5">
+
+
+
                     <b-icon icon="arrow-right-circle"></b-icon>
                   </div>
                 </b-row>
@@ -293,6 +322,13 @@
         <b-row>
           <b-col>
             <b-card>
+
+
+
+
+
+
+
               <h3>Sponsored Networks</h3>
               <div class="s-business">
                 <b-row class="ml-3">
@@ -301,18 +337,38 @@
                   </div>
                   <b-col class="ml-5">
                     <b-row>
-                      <b-col cols="12" md="4" sm="12">
-                        <SponsoredNetwork />
-                      </b-col>
+                    <b-col cols="12" md="4" sm="12"> 
+                     
+                     <SponsoredNetwork  />   
 
-                      <b-col cols="12" md="4" sm="12">
-                        <SponsoredNetwork />
-                      </b-col>
+                        
+                    
+                    </b-col>
 
-                      <b-col cols="12" md="4" sm="12">
-                        <SponsoredNetwork />
-                      </b-col>
-                    </b-row>
+
+                     <b-col cols="12" md="4" sm="12"> 
+                     
+                     <SponsoredNetwork  />   
+
+                        
+                    
+                    </b-col>
+                    
+
+
+                     <b-col cols="12" md="4" sm="12"> 
+                     
+                     <SponsoredNetwork  />   
+
+                        
+                    
+                    </b-col>
+
+
+                    
+                     </b-row>
+
+
                   </b-col>
                   <div class="left ml-5">
                     <b-icon icon="arrow-right-circle"></b-icon>
@@ -321,6 +377,11 @@
               </div>
             </b-card>
           </b-col>
+
+
+
+
+
 
           <b-col class="col-2" v-if="map">
             <iframe
@@ -336,14 +397,18 @@
           </b-col>
         </b-row>
 
+
+
+
         <b-row class="mt-3 mb-2">
           <b-col>
+
             <!--
             <span class="title"> </span>
             <span class="ml-5 result"><small>398 Results found</small></span>
 
             -->
-
+            
             <Networks :data="networks" class="mt-4" />
           </b-col>
           <b-col class="col-3 adds">
@@ -368,6 +433,10 @@
         <b-row>
           <b-col>
             <b-card>
+
+
+
+
               <h3>Sponsored Businesses</h3>
               <div class="s-business">
                 <b-row class="ml-3">
@@ -382,6 +451,7 @@
                         :key="index"
                         :title="sbusiness.title"
                     /></b-row>
+                    
                   </b-col>
                   <div class="left ml-5">
                     <b-icon icon="arrow-right-circle"></b-icon>

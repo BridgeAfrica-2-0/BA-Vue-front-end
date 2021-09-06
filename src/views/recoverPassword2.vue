@@ -5,31 +5,38 @@
         <img src="../assets/logo.png" class="image" alt="" />
 
         <div class="step-2">
-          <b-card-text class="w-75 mx-auto mt-5"> </b-card-text>
-          <b-form class="w-75 mx-auto">
+          <b-card-text class="w-75 mx-auto mt-5">
+           
+          </b-card-text>
+          <b-form  class="w-75 mx-auto">
             <b-form-group id="input-group-4">
-              <md-field>
+
+               <md-field>
                 <label for="otp"> OTP</label>
                 <md-input
                   type="text"
                   name="otp"
                   id="otp"
-                  v-model="code"
-                  required
+                   v-model="code"
+                   required
+                 
                 />
+               
               </md-field>
+
+
+             
             </b-form-group>
 
              <b-row class="mt-2">  <b-col cols="6">  </b-col>    <b-col cols="6"> 
             <b-button class="btn btn-primary button float-right"  @click.prevent="next" > Next </b-button>  </b-col>  </b-row>
             
 
-           
           </b-form>
         </div>
       </b-card>
     </div>
-    <FlashMessage />
+     <FlashMessage />
   </b-container>
 </template>
 
@@ -39,45 +46,63 @@ import axios from "axios";
 export default {
   data() {
     return {
-      code: ""
+      code: "",
     };
   },
   computed: mapGetters(["recoverPassData"]),
   methods: {
     change() {
-      this.$router.push({ name: "RecoverPass1" });
+      
+       this.$router.push({ name: "RecoverPass1" });
     },
 
-    next() {
-      console.log(this.$store.state.auth.passwordToken);
-      const otpVerifcationUrl = "user/verifyResetOtp";
+
+  
+
+     next() {
+
+       console.log(this.$store.state.auth.passwordToken);
+        const otpVerifcationUrl = 'user/verifyResetOtp'
       axios
         .post(otpVerifcationUrl, {
-          OTP: this.code,
-          phone: this.$store.state.auth.passwordToken.user.phone
+           OTP:this.code,
+         phone: this.$store.state.auth.passwordToken.user.phone,
         })
-        .then(response => {
+        .then((response) => {  
           if (response.status === 200) {
-            console.log(response);
-            this.$router.push({ name: "RecoverPass3" });
+            
+
+              console.log(response);
+                this.$router.push({ name: "RecoverPass3" });
+
           } else {
             console.log(response.data);
           }
         })
-        .catch(err => {
+        .catch((err) => {
+
           if (err.response.status === 422) {
-            console.log({ err: err });
-            console.log(err.response.data.message);
 
-            this.flashMessage.show({
-              status: "error",
+             
+                console.log({ err: err });
+                console.log(err.response.data.message);
 
-              message: err.response.data.message
-            });
-          }
+                 this.flashMessage.show({
+            status: "error",
+           
+            message: err.response.data.message,
+          });
+
+
+           }
+
+
+           
+         
         });
-    }
-  }
+    },
+
+  },
 };
 </script>
 
@@ -113,6 +138,7 @@ export default {
   }
 }
 
+
 .button {
   margin-left: 265px;
   background-color: #e75c18;
@@ -127,10 +153,11 @@ export default {
   max-width: 30rem;
 }
 
+
 .verif-text {
   font-size: 25px;
   margin-top: 10px;
-  margin-bottom: 10px;
+   margin-bottom: 10px;
 }
 
 .image {
@@ -151,6 +178,10 @@ export default {
   max-width: 30rem;
 }
 
+
+   
+
+
 @media only screen and (max-width: 768px) {
   .image {
     width: 75%;
@@ -165,4 +196,5 @@ export default {
     padding-bottom: 100px !important;
   }
 }
+
 </style>

@@ -77,7 +77,7 @@ li {
   color: black;
   text-decoration: none;
 }
-.pages:hover {
+.pages:hover{
   color: #e75c18;
 }
 .link {
@@ -94,19 +94,23 @@ li {
   .card {
     width: 500px;
   }
-  .row {
+  .row{
     display: flex;
     flex-direction: column;
   }
   .bottom {
-    margin-left: -150px;
-  }
+  margin-left: -150px;
+}
 }
 </style>
 
-<style>
-.nav-pills .nav-link.active,
-.nav-pills .show > .nav-link {
-  background-color: #e6e6e6;
+
+<style> 
+
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+    
+    background-color: #e6e6e6;
 }
-</style>
+
+
+ </style>

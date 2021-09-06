@@ -1,16 +1,18 @@
 <template>
   <div>
-    <Business />
+  <Business/>
   </div>
 </template>
 
 <script>
-import Business from "../businessmain";
+import Business from "../businessmain"
 export default {
-  components: {
-    Business
+  components:{
+      Business
   }
-};
+}
 </script>
 
-<style></style>
+<style>
+
+</style>

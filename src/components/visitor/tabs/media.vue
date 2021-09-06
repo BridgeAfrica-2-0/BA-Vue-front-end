@@ -25,7 +25,7 @@ export default {
 </script>
 
 <style scoped>
-.purple {
+.purple{
   color: purple;
 }
 .primary-bg {

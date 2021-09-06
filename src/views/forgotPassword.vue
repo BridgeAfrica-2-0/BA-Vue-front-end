@@ -14,12 +14,7 @@
               placeholder="Enter e-mail"
             />
             <b-button class="btn mt-2">Recover Password</b-button>
-            <p class="mt-3">
-              <small
-                >Don't have an account?
-                <b-link class="link">SignUp</b-link></small
-              >
-            </p>
+            <p class="mt-3"><small>Don't have an account? <b-link class="link">SignUp</b-link></small></p>
           </div>
         </b-col>
         <b-col>
@@ -40,8 +35,8 @@ import Footer from "../components/footer";
 export default {
   components: {
     Navbar,
-    Footer
-  }
+    Footer,
+  },
 };
 </script>
 
@@ -58,8 +53,8 @@ export default {
   background-color: #e75c18;
   border: none;
 }
-.link {
-  color: #e75c18;
-  text-decoration: none;
+.link{
+    color: #e75c18;
+    text-decoration: none;
 }
 </style>

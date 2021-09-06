@@ -1,28 +1,56 @@
 <template>
   <div>
-    <div style="height:1000px">
-      <GmapMap :center="center" :zoom="12" style="height:600px;  ">
-        <GmapMarker
-          :key="index"
-          v-for="(m, index) in markers"
-          :position="m.position"
-          @click="center = m.position"
-        />
-      </GmapMap>
-    </div>
+  
+
+
+
+
+ 
+
+    
+          <div style="height:1000px"> 
+
+
+
+
+            <GmapMap
+      :center='center'
+      :zoom='12'
+      style='height:600px;  '
+    >
+      <GmapMarker
+        :key="index"
+        v-for="(m, index) in markers"
+        :position="m.position"
+        @click="center=m.position"
+      />
+    </GmapMap>
+
+
+       </div>
+
+
+             
+
+
+
+         
+       
   </div>
 </template>
 
 <script>
+
+   
 export default {
-  name: "GoogleMap",
+  name: 'GoogleMap',
   data() {
     return {
       center: { lat: 45.508, lng: -73.587 },
       currentPlace: null,
       markers: [],
-      places: []
-    };
+      places: [],
+    }
   },
   mounted() {
     this.geolocate();
@@ -35,7 +63,7 @@ export default {
       if (this.currentPlace) {
         const marker = {
           lat: this.currentPlace.geometry.location.lat(),
-          lng: this.currentPlace.geometry.location.lng()
+          lng: this.currentPlace.geometry.location.lng(),
         };
         this.markers.push({ position: marker });
         this.places.push(this.currentPlace);
@@ -47,16 +75,19 @@ export default {
       navigator.geolocation.getCurrentPosition(position => {
         this.center = {
           lat: position.coords.latitude,
-          lng: position.coords.longitude
+          lng: position.coords.longitude,
         };
       });
-    }
-  }
+    },
+  },
 };
+
 </script>
 
 <style scoped>
-.map {
+
+
+.map{
   width: 100%;
 }
 </style>

@@ -21,37 +21,36 @@
           <div class="d-inline-block float-right mt-3">
             <p>
               Current Plan: <span class="font-weight-bolder">Basic</span>
-              <b-button
-                variant="primary"
-                class="ml-3"
-                size="sm"
-                v-b-modal.modal-center
+              <b-button variant="primary" class="ml-3" size="sm" v-b-modal.modal-center
                 >Change</b-button
               >
             </p>
           </div>
           <b-modal id="modal-center" centered>
             <h2 class="text-center"><b>Paid Subscription Required</b></h2>
-            <p class="my-4 text-center px-3">
-              You must subscribe to a paid in order to gain access to premium
-              template
-            </p>
+            <p class="my-4 text-center px-3">You must subscribe to a paid in order to gain access to premium template</p>
 
             <template #modal-footer>
               <div class="w-100">
+
                 <b-button
-                  variant="outline-dark"
-                  class="float-left"
-                  @click="stat"
+                    variant="outline-dark"
+                    class="float-left"
+                    @click='stat'
                 >
                   No, Thanks
                 </b-button>
 
-                <b-button variant="primary" class="float-right" @click="stat">
+                <b-button
+                    variant="primary"
+                    class="float-right"
+                    @click="stat"
+                >
                   Subscribe
                 </b-button>
               </div>
             </template>
+
           </b-modal>
         </b-col>
       </b-row>
@@ -78,6 +77,7 @@ export default {
   },
   computed: {},
   methods: {
+
     stat() {
       return false;
     }

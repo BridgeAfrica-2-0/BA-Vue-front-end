@@ -2,11 +2,16 @@
   <div>
     <navbar></navbar>
 
+   
+
     <div class="text-justify  p-card ">
+
       <CarousselDashboard class="mm-top" /> <br />
 
       <b-row>
-        <b-col md="6" sm="12" class="mt-2">
+        <b-col  md="6" sm="12"  class="mt-2">
+
+
           <b-input-group class="my-auto input-size ">
             <template #append>
               <b-input-group-text class=" b-groupe  shadow "
@@ -23,7 +28,7 @@
           </b-input-group>
         </b-col>
 
-        <b-col md="3" sm="12" class="mt-2">
+        <b-col md="3" sm="12"   class="mt-2" >
           <b-input-group class="my-auto input-size">
             <template #append>
               <b-input-group-text class=" b-groupe shadow "
@@ -42,15 +47,22 @@
           </b-input-group>
         </b-col>
 
-        <b-col md="3" sm="12" class="mt-2">
+        <b-col md="3" sm="12"   class="mt-2" >
           <div v-if="selected != 'posts'">
             <b-input-group class="my-auto input-size">
-              <template #append>
-                <b-input-group-text class=" b-groupe  shadow "
-                  ><strong class="color-sit">
-                    <b-icon-search></b-icon-search> </strong
-                ></b-input-group-text>
-              </template>
+             <template #append>
+              <b-input-group-text class=" b-groupe  shadow "
+                ><strong class="color-sit">
+                  <b-icon-search></b-icon-search> </strong
+              ></b-input-group-text>
+            </template>
+
+
+
+
+              
+
+
 
               <b-form-input
                 v-model="location"
@@ -84,7 +96,7 @@
       <br />
 
       <b-row>
-        <b-col md="3" sm="12" class="mt-2"> </b-col>
+        <b-col md="3" sm="12"    class="mt-2" > </b-col>
 
         <b-col cols="3">
           <div v-if="selected == 'people'">
@@ -107,7 +119,7 @@
           </div>
         </b-col>
 
-        <b-col md="3" sm="12" class="mt-2">
+        <b-col md="3" sm="12"   class="mt-2" >
           <div v-if="selected == 'people'">
             <b-input-group class="my-auto input-size">
               <template #append>
@@ -127,13 +139,7 @@
             </b-input-group>
           </div>
 
-          <div
-            v-if="
-              selected == 'business' ||
-                selected == 'network' ||
-                selected == 'marketplace'
-            "
-          >
+          <div v-if="selected == 'business' || selected == 'network' || selected=='marketplace'">
             <b-input-group class="my-auto input-size">
               <template #append>
                 <b-input-group-text class=" b-groupe shadow "
@@ -153,14 +159,8 @@
           </div>
         </b-col>
 
-        <b-col md="3" sm="12" class="mt-2">
-          <div
-            v-if="
-              selected == 'business' ||
-                selected == 'network' ||
-                selected == 'marketplace'
-            "
-          >
+        <b-col md="3" sm="12"   class="mt-2" >
+          <div v-if="selected == 'business' || selected == 'network' || selected=='marketplace'">
             <div class="a-center">
               <b-form-checkbox id="checkbox-1" name="checkbox-1">
                 Show Map
@@ -211,35 +211,33 @@
       <div v-if="selected == 'all'">
         <b-card class="shadow">
           <b-row>
-            <b-col lg="6" sm="12" class="mt-2">
+            <b-col lg="6" sm="12"  class="mt-2">
               <div style="p-div">
                 <span>
-                  <h4>
-                    <img
-                      class="img-fluid picture logo-img"
-                      src="@/assets/icons/bus.png"
-                    />
+                  <h4>  
+                      <img class="img-fluid picture logo-img" src="@/assets/icons/bus.png"  /> 
                     BUSINESSES
                     <h6 style="float:right">
-                      <!--      <b-link class="see-all-link"> <u> see all </u> </b-link>   -->
+                <!--      <b-link class="see-all-link"> <u> see all </u> </b-link>   -->
                     </h6>
                   </h4>
                 </span>
+
+
+
+                
               </div>
               <div class="div-h"><Business /></div>
             </b-col>
 
-            <b-col lg="6" sm="12" class="mt-20">
+
+            <b-col lg="6" sm="12"  class="mt-20"  >
               <div class="p-div">
                 <span>
-                  <h4>
-                    <img
-                      class="img-fluid picture logo-img"
-                      src="@/assets/icons/people.png"
-                    />
+                  <h4>    <img class="img-fluid picture logo-img" src="@/assets/icons/people.png"  /> 
                     People
                     <h6 style="float:right">
-                      <!--   <b-link class="see-all-link"> <u> see all </u> </b-link> -->
+                   <!--   <b-link class="see-all-link"> <u> see all </u> </b-link> -->
                     </h6>
                   </h4>
                 </span>
@@ -248,58 +246,53 @@
             </b-col>
           </b-row>
         </b-card>
-        <br />
+         <br />
       </div>
+     
 
       <div v-if="selected == 'people'">
         <b-card class="shadow ">
           <span>
-            <h4>
-              <img
-                class="img-fluid picture logo-img "
-                src="@/assets/icons/people.png"
-              />
+            <h4>    <img class="img-fluid picture logo-img " src="@/assets/icons/people.png"  /> 
               People
               <h6 style="float:right">
-                <!--     <b-link class="see-all-link" > <u> see all </u> </b-link>   -->
+           <!--     <b-link class="see-all-link" > <u> see all </u> </b-link>   -->
               </h6>
             </h4>
           </span>
 
           <div class="div-h">
             <b-row>
-              <b-col lg="6" md="12"> <People /> </b-col>
-              <b-col md="12" lg="6"> <People /> </b-col>
+              <b-col lg="6" md="12"> <People /> </b-col> <b-col md="12" lg="6"> <People /> </b-col>
             </b-row>
           </div>
         </b-card>
         <br />
       </div>
+
+      
 
       <div v-if="selected == 'business'">
         <b-card class="shadow ">
           <span>
-            <h4>
-              <img
-                class="img-fluid picture logo-img"
-                src="@/assets/icons/bus.png"
-              />
+            <h4>     <img class="img-fluid picture logo-img" src="@/assets/icons/bus.png"  /> 
               Business
               <h6 style="float:right">
-                <!--    <b-link class="see-all-link"> <u> see all </u> </b-link>  -->
+            <!--    <b-link class="see-all-link"> <u> see all </u> </b-link>  -->
               </h6>
             </h4>
           </span>
 
           <div class="div-h">
             <b-row>
-              <b-col lg="6" md="12"> <Business /> </b-col>
-              <b-col lg="6" md="12"> <Business /> </b-col>
+              <b-col lg="6" md="12"> <Business /> </b-col> <b-col  lg="6" md="12"> <Business /> </b-col>
             </b-row>
           </div>
         </b-card>
-        <br />
+         <br />
       </div>
+
+     
 
       <div v-if="selected == 'network'">
         <network-dashboard></network-dashboard> <br />
@@ -309,64 +302,115 @@
 
       <br />
 
-      <div v-if="selected == 'marketplace'">
-        <Market />
 
+
+
+      
+
+
+     <div  v-if="selected == 'marketplace'" >
+   
+
+
+     <Market />
+      
+
+       
+     <br />
+  </div>
+
+
+
+
+
+        <div  v-if="selectedb == 'owner'" >
+  
+<b-card class=" border shadow hselect" >   
+
+
+   
+   <b-row>    <b-col  md="6" sm="12">   <h6 class="font-weight-bolder text-design">
+                Use Bridge Africa as Yourself or as one of your businesses
+              </h6>   </b-col>    <b-col sm="12" md="6">    <b-form-select
+                v-model="selectedb"
+                :options="boptions"
+              ></b-form-select>
+            </b-col>    </b-row>
+      
+
+        </b-card>
+     <br />
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+     
+
+      <div v-if="selectedb == 'owner'">
+        <b-row>
+          <b-col md="6" sm="12"  class="mt-2"> <Profile /> </b-col> <b-col md="6" sm="12"   class="mt-2"> <EmptyBusiness /> </b-col>
+        </b-row>
         <br />
       </div>
 
-      <div v-if="selectedb == 'owner'">
-        <b-card class=" border shadow hselect">
-          <b-row>
-            <b-col md="6" sm="12">
-              <h6 class="font-weight-bolder text-design">
+      
+
+      <div v-if="selectedb != 'owner'">
+        <b-row>
+          <b-col md="6" sm="12"    class="mt-2">    
+
+
+             <div   >
+     
+
+
+
+<b-card class=" border shadow" style="height:350px">   
+
+
+
+      
+       
+          
+              <h4 class="font-weight-bolder text-design">
                 Use Bridge Africa as Yourself or as one of your businesses
-              </h6>
-            </b-col>
-            <b-col sm="12" md="6">
+              </h4>
               <b-form-select
                 v-model="selectedb"
                 :options="boptions"
               ></b-form-select>
-            </b-col>
-          </b-row>
+          
+        
+       
+
+
+       
+
+       
+
         </b-card>
-        <br />
-      </div>
-
-      <div v-if="selectedb == 'owner'">
-        <b-row>
-          <b-col md="6" sm="12" class="mt-2"> <Profile /> </b-col>
-          <b-col md="6" sm="12" class="mt-2"> <EmptyBusiness /> </b-col>
-        </b-row>
-        <br />
-      </div>
-
-      <div v-if="selectedb != 'owner'">
-        <b-row>
-          <b-col md="6" sm="12" class="mt-2">
-            <div>
-              <b-card class=" border shadow" style="height:350px">
-                <h4 class="font-weight-bolder text-design">
-                  Use Bridge Africa as Yourself or as one of your businesses
-                </h4>
-                <b-form-select
-                  v-model="selectedb"
-                  :options="boptions"
-                ></b-form-select>
-              </b-card>
-            </div>
-          </b-col>
-          <b-col md="6" sm="12" class="mt-2"> <Map /> </b-col>
+    
+  </div>    </b-col> <b-col md="6" sm="12"    class="mt-2"> <Map /> </b-col>
         </b-row>
 
-        <br />
+      <br />
       </div>
 
-      <div v-if="selectedb != 'owner'">
-        <b-row>
-          <b-col md="6" sm="12" class="mt-2"> <BusinessDashboard /> </b-col>
-          <b-col md="6" sm="12" class="mt-2"> <Insights /> </b-col>
+      <div  v-if="selectedb != 'owner'">
+        <b-row>   
+        
+          <b-col md="6" sm="12"    class="mt-2"> <BusinessDashboard /> </b-col> <b-col md="6" sm="12"    class="mt-2"> <Insights /> </b-col>
+      
         </b-row>
       </div>
       <br />
@@ -375,16 +419,15 @@
 
       <div>
         <b-row>
-          <b-col sm="12" lg="8" class="mt-3"> <CommunityActivity /> </b-col>
-          <b-col sm="12" lg="4" class="mt-3"> <Tutorial /> </b-col>
+          <b-col sm="12" lg="8"  class="mt-3" > <CommunityActivity /> </b-col>
+          <b-col sm="12" lg="4"    class="mt-3"> <Tutorial /> </b-col>
         </b-row>
       </div>
       <br />
 
       <div>
         <b-row>
-          <b-col sm="12" lg="6" class="mt-3"> <Hotbusiness /> </b-col>
-          <b-col sm="12" lg="6" class="mt-3"> <Popularnetwork /> </b-col>
+          <b-col sm="12" lg="6"   class="mt-3" > <Hotbusiness /> </b-col> <b-col sm="12" lg="6"  class="mt-3" > <Popularnetwork /> </b-col>
         </b-row>
       </div>
     </div>
@@ -420,6 +463,7 @@ import Hotbusiness from "@/components/dasboard/hotbusiness";
 
 import Market from "@/components/dasboard/market";
 
+
 export default {
   name: "dashboard",
   data() {
@@ -431,8 +475,8 @@ export default {
       location: "any",
       category: "any",
       post: "any",
-      selectedb: "owner",
-
+       selectedb: "owner",
+      
       educatio: "any",
 
       professio: "any",
@@ -441,12 +485,15 @@ export default {
 
       map: false,
 
-      boptions: [
+
+       boptions: [
         { value: "owner", text: "Owner's Name" },
         { value: "a", text: "Business Name 1" },
         { value: "b", text: "Business Name 2" },
         { value: "c", text: "Business Name 3" }
       ],
+
+
 
       optionss: [
         { id: "all", label: "All" },
@@ -543,22 +590,34 @@ export default {
 </script>
 
 <style scoped>
-.logo-img {
+
+
+
+.logo-img{
+
   width: 60px;
 }
 
 @media only screen and (max-width: 768px) {
-  h4 {
-    font-size: 15px;
-  }
+  
 
-  .logo-img {
-    width: 30px;
-  }
-  .see-all-link {
-    font-size: 10px;
-  }
+
+
+h4{
+  font-size: 15px;
 }
+
+.logo-img{
+  width: 30px;
+}
+.see-all-link{
+  font-size: 10px;
+}
+
+}
+
+
+
 
 .p-card {
   margin: 10px;
@@ -581,12 +640,21 @@ export default {
   height: 50px;
 }
 
+
+
+
 select option {
   margin: 40px;
   background: white;
   color: black;
   text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);
 }
+
+
+
+
+
+
 
 .wi-25 {
   width: 25%;
@@ -603,7 +671,7 @@ select option {
 }
 
 .custom-select {
-  display: inherit;
+display:inherit;
 }
 
 .color-sit {
@@ -623,6 +691,8 @@ select {
 
   margin-top: 15px;
 }
+
+
 
 .div-h {
   height: 350px;

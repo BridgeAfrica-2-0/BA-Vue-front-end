@@ -41,7 +41,7 @@
                 <b-icon icon="chat-fill" variant="primary"></b-icon>
                 Message</b-dropdown-item
               >
-
+           
               <b-dropdown-item>
                 <b-icon icon="geo-alt" variant="primary"></b-icon> Get
                 Direction</b-dropdown-item
@@ -85,7 +85,7 @@ export default {};
   border: none;
   display: flex;
 }
-.drop {
+.drop{
   left: 50px;
 }
 @media only screen and (max-width: 768px) {

@@ -1,4 +1,8 @@
-<b-card class="mt-4" header-tag="header" footer-tag="footer">
+
+
+
+     
+    <b-card class="mt-4" header-tag="header" footer-tag="footer">
       <p class="t-center">
         <b>Invite your followers to follow this Network</b>
       </p>
@@ -194,3 +198,4 @@
         <a class="primary" href="#">See More</a>     
       </span>
     </b-card>
+

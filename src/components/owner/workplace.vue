@@ -158,7 +158,7 @@ export default {
   }
 }
 
-.t-left {
+.t-left{
   text-align: left;
 }
 </style>

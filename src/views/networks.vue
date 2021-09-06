@@ -181,7 +181,7 @@ export default {
 }
 
 .a-left {
-  align-content: left;
+  /*align-content: left;*/
 }
 
 .nav-text {

@@ -9,7 +9,7 @@ export default {
 
   actions: {
     getndetails({ commit }) {
-      return axios.get("network/details", {}).then(function({ data }) {
+      return axios.get("/network/details", {}).then(function({ data }) {
         commit("set_details", data.data);
         console.log(data);
       });

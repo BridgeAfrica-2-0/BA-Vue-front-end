@@ -9,7 +9,7 @@ import dashboardcommunity from "./dashboardcommunity";
 import axios from "axios";
 Vue.use(Vuex);
 //axios.defaults.baseURL = process.env.VUE_APP_API_URL;
-axios.defaults.baseURL = process.env.VUE_APP_API_URL;
+axios.defaults.baseURL = "https://6a0d-129-0-205-132.ngrok.io";
 
 export default new Vuex.Store({
   modules: {

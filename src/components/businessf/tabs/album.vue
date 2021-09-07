@@ -1,91 +1,125 @@
 <template>
   <div>
-
-
-      <FlashMessage />
     <div class="row">
       <div class="container-fluid" v-if="showalbum == false">
         <div class="one2">
-          <div class="createp img-gall image-wrapp">
-            <div class="">
-              <a  v-b-modal.createalbumModal>
-                <div class="drag-textt">
-                  <fas-icon :icon="['fas', 'plus']" />
-                  <h3>Create Album</h3>
-                </div>
-              </a>
-            </div>
-          </div>
-
           <b-modal hide-footer title="Create album" id="createalbumModal">
-            <div ref="creatform">
-              <b-form>
-                <b-form-input
-                  placeholder="Album name"
-                  v-model="name"
-                ></b-form-input>
-                <b-button class="mt-2" variant="primary" @click="createAlbum">
-                  Create</b-button
-                >
-              </b-form>
-            </div>
+            <b-form>
+              <b-form-input placeholder="Album name"></b-form-input>
+              <b-button class="mt-2" variant="primary"> Create</b-button>
+            </b-form>
           </b-modal>
 
-          <div
-            class="createp img-gall predit2"
-            v-for="albums in albums"
-            :key="albums.id"
-           
-          >
-            <a>
-              <span  @click="showlbum(albums.id, albums.album_name)">
-                <img class="card-img album-img" :src="albums.cover[0]" alt="" />
-              </span>
-
-
-              
-
-
-
-
-
-               <div class="botmediadess">
-                 <p>  {{ albums.album_name }}   <br/>
-                 {{ albums.item_number }} Items</p>
+          <div class="createp img-gall predit2" @click="showlbum">
+            <a href="#!">
+              <img
+                class="card-img"
+                src="@/assets/img/wankue-filler.jpg"
+                alt=""
+              />
+              <div class="createdesc botmedia">
+                <div class="botmediades">
+                  <h6>Profile Picture</h6>
+                  <p>36 Items</p>
                 </div>
+              </div>
             </a>
 
             <div class="mediadesc">
               <ul class="navbar-nav pull-right">
-                <li class="nav-item dropdown">
-                  
-                </li>
+                <li class="nav-item dropdown"></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="createp img-gall predit2" @click="showlbum">
+            <a href="#!">
+              <img
+                class="card-img"
+                src="@/assets/img/wankue-filler.jpg"
+                alt=""
+              />
+              <div class="createdesc botmedia">
+                <div class="botmediades">
+                  <h6>Cover Photos</h6>
+                  <p>36 Items</p>
+                </div>
+              </div>
+            </a>
+
+            <div class="mediadesc">
+              <ul class="navbar-nav pull-right">
+                <li class="nav-item dropdown"></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="createp img-gall predit2">
+            <a href="#!">
+              <img
+                class="card-img"
+                src="@/assets/img/wankue-filler.jpg"
+                alt=""
+              />
+              <div class="createdesc botmedia">
+                <div class="botmediades">
+                  <h6>Custom Album 1</h6>
+                  <p>13 Items</p>
+                </div>
+              </div>
+            </a>
+
+            <div class="mediadesc">
+              <ul class="navbar-nav pull-right">
+                <li class="nav-item dropdown"></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="createp img-gall predit2" @click="showlbum">
+            <a href="#!">
+              <img
+                class="card-img"
+                src="@/assets/img/wankue-filler.jpg"
+                alt=""
+              />
+              <div class="createdesc botmedia">
+                <div class="botmediades">
+                  <h6>Custom Album 2</h6>
+                  <p>23 Items</p>
+                </div>
+              </div>
+            </a>
+
+            <div class="mediadesc">
+              <ul class="navbar-nav pull-right">
+                <li class="nav-item dropdown"></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="createp img-gall predit2" @click="showlbum">
+            <a href="#!">
+              <img
+                class="card-img"
+                src="@/assets/img/wankue-filler.jpg"
+                alt=""
+              />
+              <div class="createdesc botmedia">
+                <div class="botmediades">
+                  <h6>Custom Album 3</h6>
+                  <p>33 Items</p>
+                </div>
+              </div>
+            </a>
+
+            <div class="mediadesc">
+              <ul class="navbar-nav pull-right">
+                <li class="nav-item dropdown"></li>
               </ul>
             </div>
           </div>
         </div>
-
-
- 
-
-       
-               <b-modal hide-footer title="Create album" ref="editalbum" id="editalbum">
-            <div ref="creatform">
-              <b-form>
-                <b-form-input
-                  placeholder="Album name"
-                  v-model="edit_name"
-                ></b-form-input>
-                <b-button class="mt-2" variant="primary" @click="updateAlbum(edit_id)">
-                  Update</b-button
-                >
-              </b-form>
-            </div>
-          </b-modal>
-
-
-
-
 
         <div class="two2 d-none">
           <div class="row">
@@ -148,262 +182,34 @@
       <b-button variant="outline-primary" size="sm" @click="hidealbum">
         Back
       </b-button>
-      <span class="text-center ml-2 f-20"> {{album_name}} </span>
+      <span class="text-center ml-2"> Album Name </span>
 
-      <Images    v-bind:album="album_id" />
+      <Images />
     </div>
-
-    
   </div>
 </template>
 
 <script>
-import Images from "./image";
-import axios from "axios";
+import Images from "./images";
 
 export default {
   components: { Images },
-
   methods: {
     hidealbum() {
       this.showalbum = false;
     },
 
-    showlbum(abum_id, album_name) {
-       this.album_name=album_name;
-       this.album_id=abum_id;
-       console.log(abum_id);
-       console.log("yoo yoo yooy ");
-       console.log(this.url);
-       
-           let loader = this.$loading.show({
-        container: this.fullPage ? null : this.$refs.creatform,
-        canCancel: true,
-        onCancel: this.onCancel,
-        color: "#e75c18",
-      });
-   
-    const albumUrl=this.url+'/'+abum_id;
-
-      this.$store
-        .dispatch("businessOwner/getAlbumImages", albumUrl)
-        .then(() => {
-          console.log("hey yeah photo loaded");
-
-            
+    showlbum() {
       this.showalbum = true;
-           loader.hide();
-        })
-        .catch((err) => {
-          console.log({ err: err });
-
-           loader.hide();
-        });
-
-
-
-
-
     },
 
     onClick(i) {
       this.index = i;
-    },
-
-
-
-
-   editAlbum(album_id, album_name){
-    
-this.edit_id=album_id;
-this.edit_name=album_name;
-
-this.$refs["editalbum"].show();
-
-
-
-   },
-
-
-
-    deleteAlbum(album_id) {
-
-          
-           let loader = this.$loading.show({
-        container: this.fullPage ? null : this.$refs.creatform,
-        canCancel: true,
-        onCancel: this.onCancel,
-        color: "#e75c18",
-      });
-
-
-
-       axios
-        .post("business/album/edit/" +this.url + "/" + album_id, {
-          name: this.name,
-        })
-        .then((response) => {
-          console.log(response.data);
-
-          this.flashMessage.show({
-            status: "success",
-
-            message: "Album Deleted",
-          });
-
-          loader.hide();
-        }) .catch((err) => {
-        this.sending = false;
-
-        if (err.response.status == 422) {
-          console.log({ err: err });
-
-          this.flashMessage.show({
-            status: "error",
-
-            message: err.response.data.message,
-          });
-
-          loader.hide();
-        } else {
-          this.flashMessage.show({
-            status: "error",
-
-            message: "Unable to Delete your abum",
-          });
-          console.log({ err: err });
-
-          loader.hide();
-        }
-      });
-
-
-
-    },
-    
-
-    updateAlbum(album_id) {
-      let loader = this.$loading.show({
-        container: this.fullPage ? null : this.$refs.creatform,
-        canCancel: true,
-        onCancel: this.onCancel,
-        color: "#e75c18",
-      });
-
-      axios
-        .post("business/album/update/" + this.url + "/" + album_id, {
-          name: this.edit_name,
-        })
-        .then((response) => {
-          console.log(response.data);
-
-          this.flashMessage.show({
-            status: "success",
-
-            message: "Album Updated",
-          });
-
-          loader.hide();
-        })
-         .catch((err) => {
-        this.sending = false;
-
-        if (err.response.status == 422) {
-          console.log({ err: err });
-
-          this.flashMessage.show({
-            status: "error",
-
-            message: err.response.data.message,
-          });
-
-          loader.hide();
-        } else {
-          this.flashMessage.show({
-            status: "error",
-
-            message: "Unable to create your Album",
-          });
-          console.log({ err: err });
-
-          loader.hide();
-        }
-      });
-    },
-  
-
-  createAlbum() {
-
-    let loader = this.$loading.show({
-      container: this.fullPage ? null : this.$refs.creatform,
-      canCancel: true,
-      onCancel: this.onCancel,
-      color: "#e75c18",
-    });
-
-    axios
-      .post("business/album/create/9", {
-        name: this.name,
-      })
-      .then((response) => {
-        console.log(response.data);
-
-        this.flashMessage.show({
-          status: "success",
-
-          message: "Album Created",
-        });
-
-        loader.hide();
-      })
-      .catch((err) => {
-        this.sending = false;
-
-        if (err.response.status == 422) {
-          console.log({ err: err });
-
-          this.flashMessage.show({
-            status: "error",
-
-            message: err.response.data.message,
-          });
-
-          loader.hide();
-        } else {
-          this.flashMessage.show({
-            status: "error",
-
-            message: "Unable to create your Album",
-          });
-          console.log({ err: err });
-
-          loader.hide();
-        }
-      });
-  },},
-
-  mounted() {
-    this.url = this.$route.params.id;
+    }
   },
-
-  computed: {
-    albums() {
-      return this.$store.state.businessOwner.albums;
-    },
-  },
-
-  data: function () {
+  data: function() {
     return {
       showalbum: false,
-      name: null,
-      url: null,
-      fullPage:null,
-     album_id:null,
-     album_name:null,
-     
-      edit_id:null,
-      edit_name:null,
-
 
       images: [
         "https://placekitten.com/801/800",
@@ -414,7 +220,7 @@ this.$refs["editalbum"].show();
         "https://placekitten.com/806/800",
         "https://placekitten.com/807/800",
         "https://placekitten.com/808/800",
-        "https://placekitten.com/809/800",
+        "https://placekitten.com/809/800"
       ],
       imagees: [
         "https://i.wifegeek.com/200426/f9459c52.jpg",
@@ -436,26 +242,15 @@ this.$refs["editalbum"].show();
         "https://i.wifegeek.com/200426/177ef44c.jpg",
         "https://i.wifegeek.com/200426/d74d9040.jpg",
         "https://i.wifegeek.com/200426/81e24a47.jpg",
-        "https://i.wifegeek.com/200426/43e2e8bb.jpg",
+        "https://i.wifegeek.com/200426/43e2e8bb.jpg"
       ],
-      index: 0,
-    }
-  },
-}
+      index: 0
+    };
+  }
+};
 </script>
 
 <style>
-
-.call-action{
-
-  border-radius: 50%;
-  background: gray;
-  height: 30px !important;
-  width: 30px !important;
-  font-weight: 50px !important;
-  text-align: center;
-  padding-right: 35px !important;
-}
 .text-design {
   align-items: first baseline;
 }
@@ -464,36 +259,7 @@ this.$refs["editalbum"].show();
   color: black;
 }
 
-.botmediadess {
-   
-    text-align: center;
-    bottom: -5%;
-    width: 100%;
-    font-size: 20px;
-}
-
-
-
 @media (min-width: 960px) {
-  .album-img{
-
-  height: 300px !important;
-    object-fit: cover !important;
-       
-}
-
-
-.drag-textt {
-    
-    height: 290px !important;
-        padding-top: 95px;
-}
-
-
-.f-20{
-  font-size: 20px;
-}
-
   .img-gall {
     background-size: contain;
     cursor: pointer;
@@ -501,7 +267,7 @@ this.$refs["editalbum"].show();
     border-radius: 3px;
   }
 
-  .image-wrapp {
+  .image-wrap {
     border: 4px dashed #e75c18;
     position: relative;
 
@@ -550,7 +316,7 @@ this.$refs["editalbum"].show();
     backface-visibility: visible;
   }
 
-  .image-wrapp {
+  .image-wrap {
     border: 4px dashed #e75c18;
     position: relative;
 
@@ -568,22 +334,6 @@ this.$refs["editalbum"].show();
 }
 
 @media only screen and (min-width: 768px) and (max-width: 1331px) {
-
-  .album-img{
-
-  height: 300px !important;
-    object-fit: cover !important;
-}
-
-
-.drag-textt {
-    
-    height: 290px !important;
-        padding-top: 95px;
-}
-
-
-
   .img-gall {
     background-size: contain;
     cursor: pointer;
@@ -604,7 +354,7 @@ this.$refs["editalbum"].show();
     backface-visibility: visible;
   }
 
-  .image-wrapp {
+  .image-wrap {
     border: 4px dashed #e75c18;
     position: relative;
 
@@ -622,22 +372,6 @@ this.$refs["editalbum"].show();
 }
 
 @media (max-width: 762px) {
-
-  .album-img{
-
-  height: 200px !important;
-    object-fit: cover !important;
-}
-
-
-.drag-textt {
-    
-    height: 190px !important;
-        padding-top: 55px;
-}
-
-
-
   .img-gall {
     background-size: contain;
     cursor: pointer;
@@ -658,7 +392,7 @@ this.$refs["editalbum"].show();
     backface-visibility: visible;
   }
 
-  .image-wrapp {
+  .image-wrap {
     border: 4px dashed #e75c18;
     position: relative;
 

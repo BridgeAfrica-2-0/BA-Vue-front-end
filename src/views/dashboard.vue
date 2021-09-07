@@ -25,7 +25,7 @@
         </b-card>
         <br />
       </div>
-
+      .
       <div v-if="selectedb == 'owner'">
         <b-row class=" p-0">
           <b-col md="6" sm="12" class="mt-2 "> <Profile /> </b-col>
@@ -115,18 +115,21 @@
 
 <script>
 import Navbar from "@/components/navbar";
+
 import CarousselDashboard from "@/components/dasboard/carousselDashboard";
 
 import BusinessDashboard from "@/components/dasboard/businessDashboard";
+
 import ComunitiDashboard from "@/components/dasboard/comunitiDashboard";
+
 import Insights from "@/components/dasboard/insights";
+
 import CommunityActivity from "@/components/dasboard/communityActivity";
 
 import Tutorial from "@/components/dasboard/tutorial";
 
 import Profile from "@/components/dasboard/profile";
 
-//import People from "@/components/dasboard/communityMember";
 import Business from "@/components/dasboard/communitybusiness";
 
 import Map from "@/components/dasboard/map";
@@ -134,14 +137,19 @@ import Map from "@/components/dasboard/map";
 import EmptyBusiness from "@/components/dasboard/emptybusiness";
 
 import Popularnetwork from "@/components/dasboard/popularnetwork";
+<<<<<<<<< Temporary merge branch 1
+=========
 //import Hotbusiness from "@/components/dasboard/hotbusiness";
 //import People from '../components/businessOwner/tabs/owner/networks/people.vue';
+>>>>>>>>> Temporary merge branch 2
 
 export default {
   name: "dashboard",
   data() {
     return {
       slide: 0,
+<<<<<<<<< Temporary merge branch 1
+=========
       sliding: null,
 
       selected: "all",
@@ -151,10 +159,11 @@ export default {
       selectedb: "owner",
 
       educatio: "any",
+>>>>>>>>> Temporary merge branch 2
 
-      professio: "any",
+      sliding: null,
 
-      workplac: "any",
+      selectedb: "owner",
 
       map: false,
 
@@ -162,6 +171,10 @@ export default {
         { value: "owner", text: "Owner's Name" },
         { value: "a", text: "Business Name 1" },
         { value: "b", text: "Business Name 2" },
+<<<<<<<<< Temporary merge branch 1
+        { value: "c", text: "Business Name 3" }
+      ]
+=========
         { value: "c", text: "Business Name 3" },
       ],
 
@@ -232,6 +245,7 @@ export default {
         { title: "Business 3" },
         { title: "Business 4" },
       ],
+>>>>>>>>> Temporary merge branch 2
     };
   },
   components: {
@@ -253,7 +267,11 @@ export default {
     Profile,
 
     CarousselDashboard,
+<<<<<<<<< Temporary merge branch 1
+    Navbar
+=========
     Navbar,
+>>>>>>>>> Temporary merge branch 2
   },
   methods: {},
 };

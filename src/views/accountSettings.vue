@@ -14,10 +14,10 @@
             <b-tab title="BUSINESS ROLES"
               ><b-card-text>Tab contents 3</b-card-text></b-tab
             >
-              <b-tab title="PAYMENTS"
+            <b-tab title="PAYMENTS"
               ><b-card-text>Tab contents 3</b-card-text></b-tab
             >
-              <b-tab title="WEBSITE"
+            <b-tab title="WEBSITE"
               ><b-card-text>Tab contents 3</b-card-text></b-tab
             >
           </b-tabs>
@@ -34,8 +34,8 @@ import Footer from "@/components/footer";
 export default {
   components: {
     Navbar,
-    Footer,
-  },
+    Footer
+  }
 };
 </script>
 

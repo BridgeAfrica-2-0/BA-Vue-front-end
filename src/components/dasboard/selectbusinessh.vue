@@ -1,37 +1,17 @@
 <template>
   <div>
-  
-
-
-
-<b-card class=" border shadow" style="height:100px">   
-
-
-   
-   <b-row>    <b-col>   <h4 class="font-weight-bolder text-design">
-                Use Bridge Africa as Yourself or as one of your businesses
-              </h4>   </b-col>    <b-col>   <b-form-select
-                v-model="selected"
-                :options="options"
-              ></b-form-select>
-            </b-col>    </b-row>
-      
-       
-          
-             
-
-
-             
-        
-       
-
-
-       
-
-       
-
-        </b-card>
-    
+    <b-card class=" border shadow" style="height:100px">
+      <b-row>
+        <b-col>
+          <h4 class="font-weight-bolder text-design">
+            Use Bridge Africa as Yourself or as one of your businesses
+          </h4>
+        </b-col>
+        <b-col>
+          <b-form-select v-model="selected" :options="options"></b-form-select>
+        </b-col>
+      </b-row>
+    </b-card>
   </div>
 </template>
 

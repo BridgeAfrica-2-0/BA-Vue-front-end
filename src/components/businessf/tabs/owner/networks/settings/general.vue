@@ -1,7 +1,5 @@
 <template>
   <b-container>
-    
-
     <div class="">
       <b-container>
         <b-form-group
@@ -61,26 +59,23 @@
             value="accepted"
             unchecked-value="not_accepted"
           >
-            All  posts must be approved by an admin
+            All posts must be approved by an admin
           </b-form-checkbox>
         </b-form-group>
       </b-container>
       <hr />
     </div>
 
-   
-
-
     <b-container>
       <b-link href="#foo" class="f-left text">Delete Network</b-link>
     </b-container>
 
-
     <div class="b-bottomn">
-      <b-button variant="primary" class="a-button-l text">Save Changes</b-button>
+      <b-button variant="primary" class="a-button-l text"
+        >Save Changes</b-button
+      >
       <br />
     </div>
-    
   </b-container>
 </template>
 
@@ -101,7 +96,6 @@ export default {
 }
 
 .b-bottomn {
- 
   margin-bottom: 30px;
   padding-bottom: 10px;
 }
@@ -135,7 +129,7 @@ export default {
     top: -5px;
     left: -20px;
   }
-  .btn{
+  .btn {
     font-size: 12px;
   }
 }

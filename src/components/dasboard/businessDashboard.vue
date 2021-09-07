@@ -71,7 +71,9 @@ export default {
   props: ["selectedb"],
   computed: {
     business() {
-      return this.$store[ProfileAndBusinessDetails.getters.getdetails.business];
+      return this.$store.getters[
+        "ProfileAndBusinessDetails/getdetails.business"
+      ];
     }
   },
   created() {

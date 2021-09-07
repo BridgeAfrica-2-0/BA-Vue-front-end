@@ -8,7 +8,13 @@
         </h6>
       </span>
       <div class="s-card " style="overflow: -moz-scrollbars-vertical">
-        <div v-if="$store.getters.getdetails.business.length < 1">
+        <div
+          v-if="
+            $store.getters[
+              'ProfileAndBusinessDetails/getdetails.business.length'
+            ] < 1
+          "
+        >
           <b-row>
             <b-col>
               <div class="p-top">
@@ -25,7 +31,9 @@
         <div
           v-else
           class="people-style shadow"
-          v-for="item in $store.getters.getdetails.business"
+          v-for="item in $store.getters[
+            'ProfileAndBusinessDetails/getdetails.business'
+          ]"
           :key="item.id"
         >
           <b-row>
@@ -61,7 +69,17 @@
 
 <script>
 export default {
-  name: "emptybusiness"
+  name: "emptybusiness",
+  created() {
+    this.$store
+      .dispatch("ProfileAndBusinessDetails/getdetails")
+      .then(() => {
+        console.log("the response");
+      })
+      .catch(err => {
+        console.log({ err: err });
+      });
+  }
 };
 </script>
 

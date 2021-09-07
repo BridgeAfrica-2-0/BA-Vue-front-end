@@ -18,7 +18,7 @@
 
       <div
         class="d-flex col-md-12 mt-2 ml-35"
-        v-for="item in $store.getters.getdetails.owner"
+        v-for="item in $store.getters['ProfileAndBusinessDetails/getdetails.owner']"
         :key="item.name"
       >
         <b-avatar
@@ -68,7 +68,7 @@ export default {
   name: "profile",
   mounted() {
     this.$store
-      .dispatch("getdetails")
+      .dispatch("ProfileAndBusinessDetails/getdetails")
       .then(() => {
         console.log("the response");
       })
@@ -79,7 +79,7 @@ export default {
 
   computed: {
     details() {
-      return this.$store.getters.getdetails;
+      return this.$store.getters["ProfileAndBusinessDetails/getdetails"];
     }
   }
 };

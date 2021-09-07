@@ -80,7 +80,7 @@ export default {
       .dispatch("ProfileAndBusinessDetails/getdetails")
       .then(() => {
         this.getowner();
-        console.log("the responseppppppppppppppppppppppps");
+        console.log("the response");
       })
       .catch(err => {
         console.log({ err: err });

@@ -62,36 +62,36 @@ export default {
   },
 
   actions: {
-    getAlbumImages({ commit }, busineeId) {
-      return axios.get("business/album/show/" + busineeId).then(({ data }) => {
+    getAlbumImages({ commit }) {
+      return axios.get("profile/post/media/").then(({ data }) => {
         commit("setAlbumImages", data.data.media);
         console.log(data);
       });
     },
 
-    getImages({ commit }, busineeId) {
-      return axios.get("business/post/" + busineeId).then(({ data }) => {
+    getImages({ commit }) {
+      return axios.get("profile/post/media/").then(({ data }) => {
         commit("setImages", data.data);
         console.log(data);
       });
     },
 
-    getAlbums({ commit }, busineeId) {
-      return axios.get("business/album/index/" + busineeId).then(({ data }) => {
+    getAlbums({ commit }) {
+      return axios.get("profile/post/media/").then(({ data }) => {
         commit("setAlbums", data.data);
         console.log(data);
       });
     },
 
-    ownerPost({ commit }, busineeId) {
-      return axios.get("business/show/post/" + busineeId).then(({ data }) => {
+    ownerPost({ commit }) {
+      return axios.get("profile/post/media/").then(({ data }) => {
         commit("ownerPost", data.data);
         console.log(data);
       });
     },
 
-    ownerPostImages({ commit }, busineeId) {
-      return axios.get("business/show/images/" + busineeId).then(({ data }) => {
+    ownerPostImages({ commit }) {
+      return axios.get("profile/post/media/").then(({ data }) => {
         commit("ownerPostImages", data.data);
         console.log(data);
       });

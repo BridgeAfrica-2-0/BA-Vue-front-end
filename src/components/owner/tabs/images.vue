@@ -7,13 +7,13 @@
           <img class="card-img" :src="show_url" alt="" />
         </b-modal>
 
-        <div class="img-gall" v-for="pictures in pictures" :key="pictures.id">
+        <div class="img-gall" v-for="pictures in picturesp" :key="pictures.id">
           <a
             ><img
               class="card-img btn p-0 album-img"
-              :src="pictures.media_url"
+              :src="pictures.path"
               alt=""
-              @click="showPic(pictures.media_url)"
+              @click="showPic(pictures.path)"
           /></a>
 
           <div class="mediadesc">
@@ -63,7 +63,7 @@ export default {
   components: {},
 
   computed: {
-    pictures() {
+    picturesp() {
       return this.$store.state["UserProfileOwner/albumImages"];
     }
   },
@@ -86,7 +86,7 @@ export default {
       });
 
       axios
-        .get("business/download/media/" + this.url + "/" + image_id, {})
+        .get("profile/post/media" + this.url + "/" + image_id, {})
         .then(response => {
           var fileURL = window.URL.createObjectURL(new Blob([response.data]));
           var fileLink = document.createElement("a");
@@ -142,7 +142,7 @@ export default {
       });
 
       axios
-        .post("business/delete/media/" + this.url + "/" + image_id, {
+        .post("profile/post/media" + this.url + "/" + image_id, {
           name: this.name
         })
         .then(response => {

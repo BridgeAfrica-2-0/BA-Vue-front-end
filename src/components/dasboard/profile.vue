@@ -18,7 +18,7 @@
 
       <div
         class="d-flex col-md-12 mt-2 ml-35"
-        v-for="item in $store.getters['ProfileAndBusinessDetails/getdetails.owner']"
+        v-for="item in getowner"
         :key="item.name"
       >
         <b-avatar
@@ -67,19 +67,36 @@
 export default {
   name: "profile",
   mounted() {
+
+  },
+
+  computed: {
+    details() {
+      return this.$store.getters["ProfileAndBusinessDetails/getdetails"];
+    }
+  },
+  created() {
     this.$store
       .dispatch("ProfileAndBusinessDetails/getdetails")
       .then(() => {
-        console.log("the response");
+        this.getowner();
+        console.log("the responseppppppppppppppppppppppps");
       })
       .catch(err => {
         console.log({ err: err });
       });
   },
 
-  computed: {
-    details() {
-      return this.$store.getters["ProfileAndBusinessDetails/getdetails"];
+  methods:{
+    getowner(){
+      console.log(
+        JSON.parse(
+          JSON.stringify(
+            this.$store.getters["ProfileAndBusinessDetails/getdetails"]
+          )
+        ).owner
+      );
+
     }
   }
 };

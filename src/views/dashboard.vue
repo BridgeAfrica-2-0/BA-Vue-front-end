@@ -179,12 +179,29 @@ export default {
 
   methods: {
     getbusiness() {
-      this.boptions.push({
-        text: this.$store.getters[
-          "ProfileAndBusinessDetails/getdetails.owner[0].name"
-        ],
-        value: "owner"
+
+      console.log(
+        JSON.parse(
+          JSON.stringify(
+            this.$store.getters["ProfileAndBusinessDetails/getdetails"]
+          )
+        ).owner
+      );
+
+
+      let owner = JSON.parse(
+        JSON.stringify(
+          this.$store.getters["ProfileAndBusinessDetails/getdetails"]
+        )
+      ).owner;
+
+
+      owner = owner.map(value => {
+        this.boptions.push({ text: value.name, value: "owner" });
+        return value;
       });
+
+
       console.log(
         JSON.parse(
           JSON.stringify(

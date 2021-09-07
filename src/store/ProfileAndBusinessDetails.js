@@ -8,7 +8,7 @@ export default {
 
   actions: {
     async getdetails({ commit }) {
-      return await axios.get("/profileInf", {}).then(function({ data }) {
+      return await axios.get("/profileInfo", {}).then(function({ data }) {
         commit("setdetails", data.data);
         console.log(data);
       });

@@ -9,31 +9,18 @@
         </h6>
       </span>
       <p class="text">
-        Discover how customers feel about and interact with you  {{myValue.business[selectedb-2].total_shares}}
+        Discover how customers feel about and interact with you
+        {{ myValue.business[selectedb - 2].total_shares }}
       </p>
 
-        <div class="a-content"> 
-            
-            <line-chart
-                    ref="skills_chart"
-                    :chart-data="chartData"
-                    :options="options"
-                    class="chart"
-                  ></line-chart>
-                  
-                  
-             </div>      
-     
-
-          
-
-                
-                  
-              
-             
-            
-        
-    
+      <div class="a-content">
+        <line-chart
+          ref="skills_chart"
+          :chart-data="chartData"
+          :options="options"
+          class="chart"
+        ></line-chart>
+      </div>
     </b-card>
   </div>
 </template>
@@ -53,7 +40,7 @@ export default {
   name: "businessDashboard",
   components: { LineChart },
   data() {
-    return {    
+    return {
       options,
       chartData: {
         labels: ["Posts 33k", "Visit 1.4k", "Share 870"],
@@ -86,8 +73,7 @@ export default {
   padding-left: 10px;
 }
 
-
-.c-h{
+.c-h {
   height: 400px;
 }
 .chart {
@@ -99,8 +85,8 @@ export default {
   line-height: 40px;
 }
 
-.a-content{
+.a-content {
   align-content: center;
-  text-align:center;
+  text-align: center;
 }
 </style>

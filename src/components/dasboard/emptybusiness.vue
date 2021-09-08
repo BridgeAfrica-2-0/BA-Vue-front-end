@@ -8,13 +8,7 @@
         </h6>
       </span>
       <div class="s-card " style="overflow: -moz-scrollbars-vertical">
-        <div
-          v-if="
-            $store.getters[
-              'ProfileAndBusinessDetails/getdetails.business.length'
-            ] < 1
-          "
-        >
+        <div v-if="business < 1">
           <b-row>
             <b-col>
               <div class="p-top">
@@ -31,9 +25,7 @@
         <div
           v-else
           class="people-style shadow"
-          v-for="item in $store.getters[
-            'ProfileAndBusinessDetails/getdetails.business'
-          ]"
+          v-for="item in business"
           :key="item.id"
         >
           <b-row>
@@ -70,15 +62,65 @@
 <script>
 export default {
   name: "emptybusiness",
+
+  data() {
+    return {
+      business: []
+    };
+  },
+
+  methods: {
+    getbusiness() {
+      console.log(
+        JSON.parse(
+          JSON.stringify(
+            this.$store.getters["ProfileAndBusinessDetails/getdetails"]
+          )
+        ).business
+      );
+
+      let business = JSON.parse(
+        JSON.stringify(
+          this.$store.getters["ProfileAndBusinessDetails/getdetails"]
+        )
+      ).business;
+
+      business = business.map(value => {
+        this.business.push({
+          id: value.id,
+          name: value.name,
+          profilePicture: value.profilePicture,
+          category: value.category,
+          followers: value.followers,
+          location_description: value.location_description,
+          about_business: value.about_business
+        });
+        return value;
+      });
+    }
+  },
+
+  mounted() {},
+
   created() {
     this.$store
       .dispatch("ProfileAndBusinessDetails/getdetails")
-      .then(() => {
+      .then(response => {
+        this.getbusiness();
         console.log("the response");
       })
       .catch(err => {
         console.log({ err: err });
       });
+  },
+
+  computed: {
+    details() {
+      return this.$store.getters["ProfileAndBusinessDetails/getdetails"];
+    }
+  },
+  watch: {
+    business(newvalue) {}
   }
 };
 </script>

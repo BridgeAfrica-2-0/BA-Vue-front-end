@@ -18,7 +18,7 @@
 
       <div
         class="d-flex col-md-12 mt-2 ml-35"
-        v-for="item in getowner"
+        v-for="item in owner"
         :key="item.name"
       >
         <b-avatar
@@ -66,29 +66,15 @@
 <script>
 export default {
   name: "profile",
-  mounted() {
 
+  data() {
+    return {
+      owner: []
+    };
   },
 
-  computed: {
-    details() {
-      return this.$store.getters["ProfileAndBusinessDetails/getdetails"];
-    }
-  },
-  created() {
-    this.$store
-      .dispatch("ProfileAndBusinessDetails/getdetails")
-      .then(() => {
-        this.getowner();
-        console.log("the response");
-      })
-      .catch(err => {
-        console.log({ err: err });
-      });
-  },
-
-  methods:{
-    getowner(){
+  methods: {
+    getowner() {
       console.log(
         JSON.parse(
           JSON.stringify(
@@ -97,7 +83,46 @@ export default {
         ).owner
       );
 
+      let owner = JSON.parse(
+        JSON.stringify(
+          this.$store.getters["ProfileAndBusinessDetails/getdetails"]
+        )
+      ).owner;
+
+      owner = owner.map(value => {
+        this.owner.push({
+          name: value.name,
+          picture: value.picture,
+          followers: value.followers,
+          message: value.message,
+          notification: value.notification
+        });
+        return value;
+      });
     }
+  },
+
+  mounted() {},
+
+  created() {
+    this.$store
+      .dispatch("ProfileAndBusinessDetails/getdetails")
+      .then(response => {
+        this.getowner();
+        console.log("the response");
+      })
+      .catch(err => {
+        console.log({ err: err });
+      });
+  },
+
+  computed: {
+    details() {
+      return this.$store.getters["ProfileAndBusinessDetails/getdetails"];
+    }
+  },
+  watch: {
+    owner(newvalue) {}
   }
 };
 </script>

@@ -7,7 +7,7 @@
 
       <br />
 
-      <div v-if="selectedb == 'owner'">
+      <div v-if="selectedb === 'owner'">
         <b-card class=" border shadow hselect">
           <b-row>
             <b-col md="6" sm="12" class="">
@@ -26,7 +26,7 @@
         <br />
       </div>
 
-      <div v-if="selectedb == 'owner'">
+      <div v-if="selectedb === 'owner'">
         <b-row class=" p-0">
           <b-col md="6" sm="12" class="mt-2 "> <Profile /> </b-col>
           <b-col md="6" sm="12" class="mt-2  "> <EmptyBusiness /> </b-col>
@@ -34,7 +34,7 @@
         <br />
       </div>
 
-      <div v-if="selectedb != 'owner'">
+      <div v-if="selectedb !== 'owner'">
         <b-row>
           <b-col md="6" sm="12" class="mt-2">
             <div>
@@ -55,7 +55,7 @@
         <br />
       </div>
 
-      <div v-if="selectedb != 'owner'">
+      <div v-if="selectedb !== 'owner'">
         <b-row>
           <b-col md="6" sm="12" class="mt-2">
             <BusinessDashboard :selectedb="selectedb" />
@@ -179,7 +179,6 @@ export default {
 
   methods: {
     getbusiness() {
-
       console.log(
         JSON.parse(
           JSON.stringify(
@@ -188,19 +187,16 @@ export default {
         ).owner
       );
 
-
       let owner = JSON.parse(
         JSON.stringify(
           this.$store.getters["ProfileAndBusinessDetails/getdetails"]
         )
       ).owner;
 
-
       owner = owner.map(value => {
         this.boptions.push({ text: value.name, value: "owner" });
         return value;
       });
-
 
       console.log(
         JSON.parse(

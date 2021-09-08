@@ -70,7 +70,7 @@ const routes = [
     name: "welcome",
     component: welcome,
     meta: {
-      auth: true
+      auth: false
     }
   },
 

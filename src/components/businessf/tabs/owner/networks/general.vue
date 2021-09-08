@@ -249,7 +249,7 @@ export default {
 
 .a-button-l {
   margin-bottom: 1000px;
-  align-content: right;
+  /*align-content: right;*/
   float: right;
 }
 .a-text {

@@ -14,6 +14,7 @@
               class="pt-2 text"
               :options="['Public', 'Private']"
               :aria-describedby="ariaDescribedby"
+              v-model="form.privacy"
             ></b-form-radio-group>
           </b-form-group>
         </b-form-group>
@@ -35,6 +36,7 @@
               class="pt-2 text "
               :options="['Admin only', 'Allow visitors/followers to post']"
               :aria-describedby="ariaDescribedby"
+              v-model="form.PostingPermissions"
             ></b-form-radio-group>
           </b-form-group>
         </b-form-group>
@@ -53,11 +55,11 @@
           class="mb-0"
         >
           <b-form-checkbox
-            id="checkbox-1"
             class="text"
             name="checkbox-1"
             value="accepted"
             unchecked-value="not_accepted"
+            v-model="form.PostApproval"
           >
             All posts must be approved by an admin
           </b-form-checkbox>
@@ -67,11 +69,11 @@
     </div>
 
     <b-container>
-      <b-link href="#foo" class="f-left text">Delete Network</b-link>
+      <b-link href="#foo" class="f-left text" v-on:click="deleteNetwork">Delete Network</b-link>
     </b-container>
 
     <div class="b-bottomn">
-      <b-button variant="primary" class="a-button-l text"
+      <b-button variant="primary" class="a-button-l text" v-on:click="submit()"
         >Save Changes</b-button
       >
       <br />
@@ -80,8 +82,50 @@
 </template>
 
 <script>
+import axios from "axios";
 export default {
-  name: "general"
+  name: "general",
+  data() {
+    return {
+      form: {
+        privacy: "",
+        PostingPermissions: "",
+        PostApproval: ""
+      }
+    };
+  },
+
+  methods: {
+    submit() {
+      axios.post("", this.form).then(
+        function(response) {
+          // Handle success
+        }.bind(this)
+      );
+      console.log(this.form);
+    },
+
+    deleteNetwork() {
+      this.$axios.delete("")
+        .then( res => {
+          let { status, data, error } = res.data;
+          if(status) {
+            this.flashMessage.success({
+              title: 'Don\'t Warry',
+              message: 'Be Happy!',
+              time: 5000,
+              flashMessageStyle: {
+                backgroundColor: 'linear-gradient(#e66465, #9198e5)'
+              }
+            });
+          }
+          else {
+            this.flashMessage.error({title: error.name || 'Error', message: error.message});
+          }
+        })
+        .catch();
+    }
+  }
 };
 </script>
 
@@ -110,7 +154,7 @@ export default {
 
 .a-button-l {
   margin-bottom: 1000px;
-  align-content: right;
+  /*align-content: right;*/
   float: right;
 }
 .a-text {

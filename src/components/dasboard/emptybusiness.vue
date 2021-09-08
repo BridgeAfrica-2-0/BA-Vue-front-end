@@ -1,5 +1,3 @@
-import Business from '@/components/dasboard/communitybusiness'; import
-Businesses from '@/components/follower/tabs/businesses';
 <template>
   <div>
     <b-card class="border shadow " style="height:250px">
@@ -9,20 +7,61 @@ Businesses from '@/components/follower/tabs/businesses';
           <b> My Businesses </b>
         </h6>
       </span>
+      <div class="s-card " style="overflow: -moz-scrollbars-vertical">
+        <div
+          v-if="
+            $store.getters[
+              'ProfileAndBusinessDetails/getdetails.business.length'
+            ] < 1
+          "
+        >
+          <b-row>
+            <b-col>
+              <div class="p-top">
+                <br />
+                <h6>No Business</h6>
 
-      <div>
-        <b-row>
-          <b-col>
-            <div class="p-top">
-              <br />
-              <h6>No Business</h6>
+                <b-button variant="primary" class="busi-btn">
+                  Add Business
+                </b-button>
+              </div>
+            </b-col>
+          </b-row>
+        </div>
+        <div
+          v-else
+          class="people-style shadow"
+          v-for="item in $store.getters[
+            'ProfileAndBusinessDetails/getdetails.business'
+          ]"
+          :key="item.id"
+        >
+          <b-row>
+            <b-col md="3" xl="3" lg="3" cols="5" sm="3">
+              <div class="center-img">
+                <splide-slide cl>
+                  <img :src="item.profilePicture" class="r-image" />
+                </splide-slide>
+              </div>
+            </b-col>
+            <b-col md="5" cols="7" lg="7" xl="5" sm="5">
+              <p class="textt">
+                <strong class="title"> {{ item.name }} </strong> <br />
+                {{ item.category }}
+                <br />
+                {{ item.followers }} Community <br />
 
-              <b-button variant="primary" class="busi-btn">
-                Add Business
-              </b-button>
-            </div>
-          </b-col>
-        </b-row>
+                <span class="location">
+                  <b-icon-geo-alt class="ico"></b-icon-geo-alt>
+                  {{ item.location_description }}
+                </span>
+                <br />
+
+                {{ item.about_business }} <b-link>Read More</b-link>
+              </p>
+            </b-col>
+          </b-row>
+        </div>
       </div>
     </b-card>
   </div>
@@ -30,7 +69,17 @@ Businesses from '@/components/follower/tabs/businesses';
 
 <script>
 export default {
-  name: "emptybusiness"
+  name: "emptybusiness",
+  created() {
+    this.$store
+      .dispatch("ProfileAndBusinessDetails/getdetails")
+      .then(() => {
+        console.log("the response");
+      })
+      .catch(err => {
+        console.log({ err: err });
+      });
+  }
 };
 </script>
 
@@ -65,5 +114,31 @@ export default {
   .mybusi {
     font-size: 12px;
   }
+}
+.people-style {
+  border-top-left-radius: 5px;
+
+  border-bottom-left-radius: 5px;
+
+  border-top-right-radius: 5px;
+
+  border-bottom-right-radius: 5px;
+
+  background: white;
+
+  background-color: #fff;
+  background-clip: border-box;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  margin-bottom: 10px;
+
+  margin-right: 8px;
+
+  padding: 7px;
+}
+.s-card {
+  height: 190px;
+  overflow: auto;
+  overflow-x: hidden;
+  padding: 15px;
 }
 </style>

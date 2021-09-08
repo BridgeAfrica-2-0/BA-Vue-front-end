@@ -5,7 +5,7 @@ export default {
   state: {
     networks: [],
     loader: false,
-    success: false,
+    success: false
   },
   getters: {
     // sending networks
@@ -21,7 +21,7 @@ export default {
     // sending success value
     getSuccess(state) {
       return state.success;
-    },
+    }
   },
   mutations: {
     setNetworks(state, payload) {
@@ -35,7 +35,7 @@ export default {
     },
     setSuccess(state, payload) {
       state.success = payload;
-    },
+    }
   },
   actions: {
     // temporal signin to get token for developement purpose
@@ -43,9 +43,9 @@ export default {
       axios
         .post("/user/login", {
           email: "info@moazateeq.com",
-          password: "12345678",
+          password: "12345678"
         })
-        .then((res) => {
+        .then(res => {
           localStorage.setItem("access_token", res.data.data.accessToken);
         });
     },
@@ -53,12 +53,12 @@ export default {
     async getNetworks({ dispatch, commit }) {
       await dispatch("signIn");
       await axios
-        .get("network", {
+        .get("/network", {
           headers: {
-            Authorization: "Bearer " + localStorage.getItem("access_token"),
-          },
+            Authorization: "Bearer " + localStorage.getItem("access_token")
+          }
         })
-        .then((res) => {
+        .then(res => {
           commit("setLoader", false);
           commit("setSuccess", true);
           commit("setNetworks", res.data.data);
@@ -66,7 +66,7 @@ export default {
             commit("setSuccess", false);
           }, 2000);
         })
-        .catch((err) => {
+        .catch(err => {
           console.log("Unauthorized request !!");
         });
     },
@@ -77,13 +77,13 @@ export default {
       axios
         .post("/network", newNetwork, {
           headers: {
-            Authorization: "Bearer " + localStorage.getItem("access_token"),
-          },
+            Authorization: "Bearer " + localStorage.getItem("access_token")
+          }
         })
-        .then((res) => {
+        .then(res => {
           console.log(res.data);
         })
-        .catch((err) => {
+        .catch(err => {
           console.log("Something went wrong");
         });
     },
@@ -93,17 +93,17 @@ export default {
     async editNetwork({ dispatch, commit }, editedNetwork) {
       commit("setLoader", true);
       axios
-        .put(`network/${editedNetwork.id}`, editedNetwork, {
+        .put(`/network/${editedNetwork.id}`, editedNetwork, {
           headers: {
-            Authorization: "Bearer " + localStorage.getItem("access_token"),
-          },
+            Authorization: "Bearer " + localStorage.getItem("access_token")
+          }
         })
-        .then(async (res) => {
+        .then(async res => {
           await dispatch("getNetworks");
         })
-        .catch((err) => {
+        .catch(err => {
           console.log("Something went wrong");
         });
-    },
-  },
+    }
+  }
 };

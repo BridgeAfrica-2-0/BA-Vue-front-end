@@ -53,12 +53,9 @@ export default {
 
   actions: {
     login({ commit }, credentials) {
-      return axios
-        .post('user/login', credentials)
-        .then(({ data }) => {
-          commit('setUserData', data.data)
-
-        })
+      return axios.post("user/login", credentials).then(({ data }) => {
+        commit("setUserData", data.data);
+      });
     },
 
     completeWelcome({ commit }) {
@@ -107,8 +104,6 @@ export default {
         commit("setUserData", data.data);
       });
     }
-
-
   },
 
   getters: {

@@ -9,7 +9,7 @@
         <b-tabs pills content-class="mt-3 f-left">
           <b-tab title="People" active> <People /> </b-tab>
 
-          <b-tab title="Businesses"> <Businesses /> </b-tab>
+          <b-tab title="Businesses" > <Businesses /> </b-tab>
         </b-tabs>
       </b-card>
     </div>
@@ -79,7 +79,7 @@ hr {
   }
 }
 
-.card-body {
+.card-body{
   padding: 2px;
 }
 </style>

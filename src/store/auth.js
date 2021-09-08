@@ -16,7 +16,7 @@ export default {
   },
 
 
-    
+
   mutations: {
     setUserData(state, userData) {
       state.user = userData
@@ -33,7 +33,7 @@ export default {
 
 
 
-    
+
 
 
 
@@ -76,16 +76,17 @@ export default {
   actions: {
 
     login({ commit }, credentials) {
-      return axios.post("user/login", credentials).then(({ data }) => {
+      return axios
+        .post('user/login', credentials)
+        .then(({ data }) => {
+          commit('setUserData', data.data)
 
-        console.log( data.data);
-        commit("setUserData", data.data);
-      });
+        })
     },
 
 
 
-      
+
 
     completeWelcome({commit}){
 
@@ -97,9 +98,9 @@ export default {
 
       })
     },
-      
+
     businessAround( {commit} ){
-       
+
       return axios
       .get('business/around')
       .then(({ data }) => {
@@ -110,10 +111,10 @@ export default {
 
     },
 
-   
+
 
     peopleAround( {commit} ){
-       
+
       return axios
       .get('people/around')
       .then(({ data }) => {
@@ -160,9 +161,9 @@ export default {
     verify({ commit }, mydata) {
 
 
-      const url = 'user/verifyOtp/' + this.state.auth.user.user.id  
+      const url = 'user/verifyOtp/' + this.state.auth.user.user.id
 
-     
+
 
       return axios
         .post(url, mydata)
@@ -172,7 +173,7 @@ export default {
           commit('setUserData', data.data)
 
         })
-       
+
 
     }
 

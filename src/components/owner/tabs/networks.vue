@@ -214,13 +214,13 @@
           </b-form-group>
           <b-form-group
             label-cols-lg="12"
-            label="Phone 1"
+            label="Primary Phone"
             label-size="md"
             label-class="font-weight-bold pt-0"
             class="mb-0"
           >
             <b-form-input
-              v-model="createdNetwork.phone1"
+              v-model="createdNetwork.primary_phone"
               id="network_name"
               placeholder=""
               required
@@ -229,13 +229,13 @@
           </b-form-group>
           <b-form-group
             label-cols-lg="12"
-            label="Phone 2"
+            label="Secondary Phone"
             label-size="md"
             label-class="font-weight-bold pt-0"
             class="mb-0"
           >
             <b-form-input
-              v-model="createdNetwork.phone2"
+              v-model="createdNetwork.secondary_phone"
               id="network_name"
               placeholder=""
               required
@@ -386,11 +386,11 @@ export default {
         city: "",
         network_category: "",
         purpose: "",
-        phone1: "",
+        primary_phone: "",
         email: "",
         country_id: 0,
         network_category_id: 0,
-        phone2: "",
+        secondary_phone: "",
         special_needs: "",
         address: "",
         image: "",
@@ -405,8 +405,8 @@ export default {
         email: "",
         country_id: 0,
         network_category_id: 0,
-        phone1: "",
-        phone2: "",
+        primary_phone: "",
+        secondary_phone: "",
         special_needs: "",
         address: "",
         image: "",
@@ -507,8 +507,8 @@ export default {
       fd.append("address", this.createdNetwork.address);
       fd.append("city", this.createdNetwork.city);
       fd.append("country_id", 2);
-      fd.append("phone1", this.createdNetwork.phone1);
-      fd.append("phone2", this.createdNetwork.phone2);
+      fd.append("primary_phone", this.createdNetwork.primary_phone);
+      fd.append("secondary_phone", this.createdNetwork.secondary_phone);
       fd.append("email", "dev@bav.com");
       fd.append("network_category", this.createdNetwork.network_category);
       fd.append("network_category_id", 1);
@@ -557,9 +557,9 @@ export default {
       this.createdNetwork.name = network.name;
       this.createdNetwork.email = network.email;
       this.createdNetwork.country_id = network.country_id;
-      this.createdNetwork.phone1 = network.phone1;
+      this.createdNetwork.primary_phone = network.primary_phone;
       this.createdNetwork.city = network.city;
-      this.createdNetwork.phone2 = network.phone2;
+      this.createdNetwork.secondary_phone = network.secondary_phone;
       this.createdNetwork.network_category_id = network.network_category_id;
       this.createdNetwork.business_id = network.business_id;
       this.createdNetwork.address = network.address;

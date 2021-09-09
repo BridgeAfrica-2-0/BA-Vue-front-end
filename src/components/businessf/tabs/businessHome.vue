@@ -1,20 +1,16 @@
 <template>
   <div>
     <b-row>
-       <b-col md="12" lg="5" xl="4" >
+      <b-col md="12" lg="5" xl="4">
         <Intro />
-        <Media />      
+        <Media />
         <Followers />
         <HotBusiness />
       </b-col>
-      
 
-      <b-col md="8"  lg="7"  xl="8">
-
+      <b-col md="8" lg="7" xl="8">
         <Post />
-
       </b-col>
-
     </b-row>
   </div>
 </template>
@@ -32,8 +28,8 @@ export default {
     Followers,
     HotBusiness,
     Post,
-    Media,
-  },
+    Media
+  }
 };
 </script>
 

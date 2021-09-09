@@ -2,7 +2,7 @@
   <div>
     <b-row class="mt-2">
       <b-col>
-          <b-avatar
+        <b-avatar
           variant="info"
           src="https://placekitten.com/300/300"
           size="2rem"
@@ -53,19 +53,19 @@
 export default {
   data() {
     return {
-      reply: false,
+      reply: false
     };
   },
   methods: {
     showReply() {
       this.reply = !this.reply;
-    },
-  },
+    }
+  }
 };
 </script>
 
 <style scoped>
-.msg{
+.msg {
   background-color: #ddd;
   padding: 20px;
   border-radius: 25px;

@@ -10,9 +10,7 @@
     </div>
 
     <div>
-      <b-link
-        class="link"
-        v-b-modal.modal-7
+      <b-link class="link" v-b-modal.modal-7
         ><b-icon icon="facebook" class="primary"></b-icon>
         https://www.facebook.com/yourid</b-link
       >

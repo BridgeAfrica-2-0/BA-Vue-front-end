@@ -185,15 +185,9 @@ export default {
   },
   methods: {
     getProducts() {
-      axios
-        .get("market/products/1")
-        .then(res => {
-          this.loader = false;
-          this.products = res.data.data.data;
-        })
-        .catch(() => {
-          this.loader = false;
-        });
+      axios.get("market/products/1").then(res => {
+        this.products = res.data.data.data;
+      });
     },
     addProduct() {
       this.load = true;

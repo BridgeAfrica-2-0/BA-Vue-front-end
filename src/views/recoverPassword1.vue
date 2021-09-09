@@ -57,7 +57,7 @@ export default {
         .then(() => {
           this.$router.push({ name: "RecoverPass2" });
         })
-        .catch((err) => {
+        .catch(err => {
           if (err.response.status === 422) {
             console.log({ err: err });
             console.log(err.response.data.message);

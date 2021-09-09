@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="people-style shadow">
-      <b-row >
+      <b-row>
         <b-col cols="5" lg="4" sm="4" md="5">
           <div class="center-img">
             <img
@@ -12,12 +12,16 @@
         </b-col>
         <b-col cols="7" sm="8" md="7">
           <p class="text">
-            <strong class="title"> {{product.name}} </strong> <br />
+            <strong class="title"> {{ product.name }} </strong> <br />
             <strong> Description </strong> <br />
-             {{product.description.substring(0, 30)}}
-            <b-link v-if="product.description.length >= 30"> see more </b-link> <br />
+            {{ product.description.substring(0, 30) }}
+            <b-link v-if="product.description.length >= 30"> see more </b-link>
+            <br />
 
-            <span class="price"> <strong> {{product.price}} Fcfa </strong> </span> <br />
+            <span class="price">
+              <strong> {{ product.price }} Fcfa </strong>
+            </span>
+            <br />
           </p>
         </b-col>
       </b-row>
@@ -144,9 +148,11 @@
           ></b-img>
         </b-col>
         <b-col>
-          <h2 class="mb-4 text-center">{{product.name}}</h2>
-          <p><span class="stock" v-if="product.in_stock == 1">In Stock</span></p>
-          <p>{{product.price}} XAF</p>
+          <h2 class="mb-4 text-center">{{ product.name }}</h2>
+          <p>
+            <span class="stock" v-if="product.in_stock == 1">In Stock</span>
+          </p>
+          <p>{{ product.price }} XAF</p>
           <hr />
           <b-row>
             <b-col>
@@ -161,7 +167,7 @@
           <hr />
           <h5>Product Detail</h5>
           <p>
-           {{product.description}}
+            {{ product.description }}
           </p>
           <hr />
           <b-row>
@@ -388,7 +394,7 @@
 
 <script>
 export default {
-  props:['product'],
+  props: ["product"],
   data() {
     return {
       viewProduct: false,

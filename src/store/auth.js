@@ -10,7 +10,6 @@ export default {
     isVerified: null,
     passwordToken: null,
     registerData: null,
-
     businessAround: null,
     peopleAround: null,
   },
@@ -45,10 +44,10 @@ export default {
       state.passwordToken = data;
     },
 
-    // clearUserData() {
-    //   localStorage.removeItem("user");
-    //   location.reload();
-    // },
+    clearUserData() {
+      localStorage.removeItem("user");
+      location.reload();
+    },
   },
 
   actions: {

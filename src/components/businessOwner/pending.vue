@@ -78,16 +78,25 @@ export default {
       // get pending posts
     },
     approvePost(post) {
+<<<<<<< HEAD
       let data = {
         ids: [],
       };
 
+=======
+      let ids = [];
+>>>>>>> c09c6c4e1244311d02410155d9e12061cbe0ebff
       let item = {
         id: null,
       };
       item.id = post.id;
+<<<<<<< HEAD
       data.ids.push(item);
       axios.post("/business/post-approve", data).then(() => {
+=======
+      ids.push(item);
+      axios.post("/business/post-approve", ids).then(() => {
+>>>>>>> c09c6c4e1244311d02410155d9e12061cbe0ebff
         // code goes here
         this.getPosts();
       });

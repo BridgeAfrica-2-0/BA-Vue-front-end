@@ -79,7 +79,6 @@
     <div class="h-100 w-100" v-if="!getNetworksFromStore">
       <div class="mx-auto text-center my-5">
         <h2 class="my-3">Builds networks around your Business</h2>
-        <p class="my-2">Create network to stay in touch with just the people</p>
         <p class="my-2">you want Engage, share, Make Plans and much more</p>
         <p class="my-3"></p>
       </div>

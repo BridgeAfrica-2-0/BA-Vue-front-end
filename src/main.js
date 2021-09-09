@@ -125,11 +125,14 @@ Vue.use(VueGoogleMaps, {
 
 Vue.component("v-select", vSelect);
 
+import i18n from "./i18n";
+
 Vue.config.productionTip = false;
 
 new Vue({
   router,
   store,
+  i18n,
 
   created() {
     const userInfo = localStorage.getItem("user");
@@ -138,15 +141,16 @@ new Vue({
       this.$store.commit("auth/setUserData", userData);
     }
     axios.interceptors.response.use(
-      (response) => response,
-      (error) => {
+      response => response,
+      error => {
         if (error.response.status === 401) {
-          this.$store.dispatch("auth/logout");
+          // this.$store.dispatch("auth/logout");
+          console.log("error has occure");
         }
         return Promise.reject(error);
       }
     );
   },
 
-  render: (h) => h(App),
+  render: h => h(App),
 }).$mount("#app");

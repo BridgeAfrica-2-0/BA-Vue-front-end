@@ -2,15 +2,11 @@
   <div class="mt-3">
     <div>
       <b-card class="f-left">
-
-
-        <b-tabs  pills content-class="mt-3 f-left">
-          <b-tab title="People" active> <People />  </b-tab>
+        <b-tabs pills content-class="mt-3 f-left">
+          <b-tab title="People" active> <People /> </b-tab>
 
           <b-tab title="Businesses"> <Businesses /> </b-tab>
         </b-tabs>
-
-
       </b-card>
     </div>
   </div>

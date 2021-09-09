@@ -2,7 +2,6 @@
   <div>
     <b-row>
       <div v-if="albumShow" class="albums ml-4">
-  
         <b-col cols="4" class="my-auto" v-for="post in albums" :key="post.id">
           <b-img
             @click="openAlbum(post.id)"

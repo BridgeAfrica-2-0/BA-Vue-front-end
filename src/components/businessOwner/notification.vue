@@ -64,7 +64,6 @@
             1500s,
           </p>
 
-<<<<<<< HEAD
         <b-col v-if="loader" class="load">
           <b-spinner
             style="width: 7rem; height: 7rem;"
@@ -73,9 +72,6 @@
         </b-col>
         <b-col v-if="!getNotificationsStore && !loader" class="load">
           <p>No notifications to show !!</p>
-=======
-          <hr width="100%" />
->>>>>>> 1002c8a328d569e5d4fbe271eee7a9bd4adc3e87
         </b-col>
       </b-row>
     </div>
@@ -150,13 +146,10 @@ export default {
 </script>
 
 <style scoped>
-<<<<<<< HEAD
 .load {
   display: flex;
   justify-content: center;
 }
-=======
->>>>>>> 1002c8a328d569e5d4fbe271eee7a9bd4adc3e87
 .f-left {
   float: left;
 }

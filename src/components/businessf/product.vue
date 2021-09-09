@@ -6,13 +6,18 @@
           <div class="center-img">
             <img
               @click="productDetails"
+<<<<<<< HEAD
               :src="product.picture"
+=======
+              src="https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg"
+>>>>>>> 7f397c25f587f4d66699556ebaf14c056ee5b227
               class="r-image"
             />
           </div>
         </b-col>
         <b-col cols="7" sm="8" md="7">
           <p class="text">
+<<<<<<< HEAD
             <strong class="title"> {{ product.name }} </strong> <br />
             <strong> Description </strong> <br />
             {{ product.description.substring(0, 30) }}
@@ -23,6 +28,20 @@
               <strong> {{ product.price }} Fcfa </strong>
             </span>
             <br />
+=======
+            <strong class="title">
+              <b-link @click="productDetails"> Sneakers Blec cc </b-link>
+            </strong>
+            <br />
+            <strong> Description </strong> <br />
+            <span class="text">
+              This is just a dummy text dumy dummy things are always dummy and
+              dummy add things are always dummy hjykt
+            </span>
+            <b-link class="text"> see more </b-link> <br />
+
+            <span class="price"> <strong> 12,000 Fcfa </strong> </span> <br />
+>>>>>>> 7f397c25f587f4d66699556ebaf14c056ee5b227
           </p>
 
           <span class="float-right">
@@ -131,11 +150,11 @@ export default {
   props: ["product"],
   data() {
     return {
-      viewProduct: false,
+      viewProduct: false
     };
   },
   components: {
-    Comment,
+    Comment
   },
   methods: {
     /**
@@ -145,8 +164,8 @@ export default {
      */
     productDetails() {
       this.viewProduct = true;
-    },
-  },
+    }
+  }
 };
 </script>
 

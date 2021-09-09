@@ -4,6 +4,7 @@
       <b-row>
         <b-col cols="5" lg="4" sm="4" md="5">
           <div class="center-img">
+<<<<<<< HEAD
             <img :src="product.picture" class="r-image" />
           </div>
         </b-col>
@@ -41,6 +42,25 @@
             </b-dropdown-item-button>
           </b-dropdown>
         </b-col>
+=======
+            <img
+              src="https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg"
+              class="r-image"
+            />
+          </div>
+        </b-col>
+        <b-col cols="7" sm="8" md="7">
+          <p class="text">
+            <strong class="title"> Sneakers Blec cc </strong> <br />
+            <strong> Description </strong> <br />
+            This is just a dummy text dumy dummy things are always dummy and
+            dummy add things are always dummy hjykt
+            <b-link> see more </b-link> <br />
+
+            <span class="price"> <strong> 12,000 Fcfa </strong> </span> <br />
+          </p>
+        </b-col>
+>>>>>>> 7f397c25f587f4d66699556ebaf14c056ee5b227
       </b-row>
 
       <div>

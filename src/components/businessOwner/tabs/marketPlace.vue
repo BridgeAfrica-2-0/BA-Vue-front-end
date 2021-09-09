@@ -9,12 +9,17 @@
       style="margin-top: -6px;"
       @click="createProduct"
     >
+<<<<<<< HEAD
       Add Product
+=======
+      Add product
+>>>>>>> 7f397c25f587f4d66699556ebaf14c056ee5b227
     </button>
 
     <hr />
 
     <div class="products ">
+<<<<<<< HEAD
       <div class="col-md-6" v-for="(product, index) in products" :key="index">
         <Product
           @delete-product="deleteProduct($event, product)"
@@ -38,6 +43,14 @@
       :title="action == 'edit' ? 'Edit product' : 'Add Product'"
       v-model="showModal"
     >
+=======
+      <div class="col-md-6" v-for="post in posts" :key="post.id">
+        <Product />
+      </div>
+    </div>
+
+    <b-modal hide-footer title="Add product" v-model="showModal">
+>>>>>>> 7f397c25f587f4d66699556ebaf14c056ee5b227
       <b-form>
         <b-row>
           <b-col cols="12" md="6">
@@ -51,7 +64,10 @@
                 id="input-1"
                 class="mt-1"
                 type="text"
+<<<<<<< HEAD
                 v-model="newProduct.name"
+=======
+>>>>>>> 7f397c25f587f4d66699556ebaf14c056ee5b227
                 required
               ></b-form-input>
             </b-form-group>
@@ -65,13 +81,18 @@
               <b-textarea
                 id="input-1"
                 class="mt-2"
+<<<<<<< HEAD
                 v-model="newProduct.description"
+=======
+                v-model="text"
+>>>>>>> 7f397c25f587f4d66699556ebaf14c056ee5b227
                 type="text"
                 required
               ></b-textarea>
             </b-form-group>
           </b-col>
           <b-col cols="12" md="6">
+<<<<<<< HEAD
             <div class="image-upload-wrap" @click="picImage">
               <input
                 type="file"
@@ -81,6 +102,9 @@
                 id="image"
                 v-show="false"
               />
+=======
+            <div class="image-upload-wrap">
+>>>>>>> 7f397c25f587f4d66699556ebaf14c056ee5b227
               <a href="#" data-toggle="modal" data-target="#createalbumModal">
                 <div class="drag-text">
                   <i class="fa fa-plus"></i>
@@ -92,6 +116,7 @@
           </b-col>
         </b-row>
 
+<<<<<<< HEAD
         <b-form-group
           id="input-group-1"
           label="product Price"
@@ -112,6 +137,8 @@
         >
           This Product Is On Discount
         </b-form-checkbox>
+=======
+>>>>>>> 7f397c25f587f4d66699556ebaf14c056ee5b227
         <b-form-group
           v-if="newProduct.on_discount == 1"
           id="conditions"
@@ -119,18 +146,34 @@
           label-for="input-1"
           label-size="sm"
         >
+<<<<<<< HEAD
           <b-form-input
             v-model="newProduct.discount_price"
             class="mt-1"
             id="conditions"
           ></b-form-input>
         </b-form-group>
+=======
+          <b-form-input class="mt-1" id="price"></b-form-input>
+        </b-form-group>
+
+        <b-form-checkbox
+          id="checkbox-1"
+          name="checkbox-1"
+          value="accepted"
+          unchecked-value="not_accepted"
+        >
+          This Product Is On Discount
+        </b-form-checkbox>
+
+>>>>>>> 7f397c25f587f4d66699556ebaf14c056ee5b227
         <b-form-group
           id="conditions"
           label="Conditions"
           label-for="input-1"
           label-size="sm"
         >
+<<<<<<< HEAD
           <b-form-input
             v-model="newProduct.condition"
             class="mt-1"
@@ -142,19 +185,37 @@
           value="1"
           v-model="newProduct.is_service"
           unchecked-value="0"
+=======
+          <b-form-input class="mt-1" id="conditions"></b-form-input>
+        </b-form-group>
+
+        <b-form-checkbox
+          id="checkbox-1"
+          name="checkbox-1"
+          value="accepted"
+          unchecked-value="not_accepted"
+>>>>>>> 7f397c25f587f4d66699556ebaf14c056ee5b227
         >
           This Item Is A Service ?
         </b-form-checkbox>
 
         <b-form-checkbox
+<<<<<<< HEAD
           value="1"
           v-model="newProduct.in_stock"
           unchecked-value="0"
+=======
+          id="checkbox-1"
+          name="checkbox-1"
+          value="accepted"
+          unchecked-value="not_accepted"
+>>>>>>> 7f397c25f587f4d66699556ebaf14c056ee5b227
         >
           In stock
         </b-form-checkbox>
 
         <b-form-checkbox
+<<<<<<< HEAD
           value="1"
           v-model="newProduct.status"
           unchecked-value="0"
@@ -166,6 +227,17 @@
           <b-spinner v-if="load" variant="white"></b-spinner>
           {{ action == "edit" ? "Edit" : "Add" }}
         </b-button>
+=======
+          id="checkbox-1"
+          name="checkbox-1"
+          value="accepted"
+          unchecked-value="not_accepted"
+        >
+          Published
+        </b-form-checkbox>
+
+        <b-button class="mt-2 btn-block" variant="primary"> Add</b-button>
+>>>>>>> 7f397c25f587f4d66699556ebaf14c056ee5b227
       </b-form>
     </b-modal>
   </div>

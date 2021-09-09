@@ -32,8 +32,13 @@
 import CommunityMembers from "../../communityMember";
 export default {
   components: {
+<<<<<<< HEAD
     CommunityMembers,
   },
+=======
+    CommunityMembers
+  }
+>>>>>>> 7f397c25f587f4d66699556ebaf14c056ee5b227
 };
 </script>
 

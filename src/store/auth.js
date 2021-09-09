@@ -12,7 +12,11 @@ export default {
     registerData: null,
 
     businessAround: null,
+<<<<<<< HEAD
     peopleAround: null,
+=======
+    peopleAround: null
+>>>>>>> 7f397c25f587f4d66699556ebaf14c056ee5b227
   },
 
   mutations: {
@@ -48,7 +52,11 @@ export default {
     clearUserData() {
       localStorage.removeItem("user");
       location.reload();
+<<<<<<< HEAD
     },
+=======
+    }
+>>>>>>> 7f397c25f587f4d66699556ebaf14c056ee5b227
   },
 
   actions: {
@@ -89,18 +97,27 @@ export default {
 
     recoverPassword2({ commit }, data) {
       return axios.post("user/reset", data).then(({ data }) => {
+<<<<<<< HEAD
         console.log(data);
+=======
+        console.log(data.data);
+>>>>>>> 7f397c25f587f4d66699556ebaf14c056ee5b227
 
         commit("setPasswordToken", data.data);
       });
     },
 
     verify({ commit }, mydata) {
+<<<<<<< HEAD
       const url = "user/verifyOtp/" + this.state.auth.user.data.user.id;
+=======
+      const url = "user/verifyOtp/" + this.state.auth.user.user.id;
+>>>>>>> 7f397c25f587f4d66699556ebaf14c056ee5b227
 
       return axios.post(url, mydata).then(({ data }) => {
         console.log(data.data);
 
+<<<<<<< HEAD
         const url = "user/verifyOtp/" + this.state.auth.user.user.id;
 
         return axios.post(url, mydata).then(({ data }) => {
@@ -110,11 +127,21 @@ export default {
         });
       });
     },
+=======
+        commit("setUserData", data.data);
+      });
+    }
+>>>>>>> 7f397c25f587f4d66699556ebaf14c056ee5b227
   },
 
   getters: {
     isLogged: state => !!state.user,
     isVerified: state => !!state.user,
+<<<<<<< HEAD
     user: state => state.user,
   },
+=======
+    user: state => state.user
+  }
+>>>>>>> 7f397c25f587f4d66699556ebaf14c056ee5b227
 };

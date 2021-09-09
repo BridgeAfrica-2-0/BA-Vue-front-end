@@ -43,7 +43,7 @@ import { mapActions } from "vuex";
 export default {
   data() {
     return {
-      phone: "",
+      phone: ""
     };
   },
   methods: {
@@ -52,11 +52,12 @@ export default {
     verify() {
       this.$store
         .dispatch("auth/recoverPassword2", {
-          phone: this.phone,
+          phone: this.phone
         })
         .then(() => {
           this.$router.push({ name: "RecoverPass2" });
         })
+<<<<<<< HEAD
         .catch((err) => {
           if (err.response.status === 422) {
             console.log({ err: err });
@@ -66,11 +67,22 @@ export default {
               status: "error",
 
               message: err.response.data.message,
+=======
+        .catch(err => {
+          if (err.response.status === 422) {
+            console.log({ err: err });
+            console.log(err.response.data.message);
+
+            this.flashMessage.show({
+              status: "error",
+
+              message: err.response.data.message
+>>>>>>> 7f397c25f587f4d66699556ebaf14c056ee5b227
             });
           }
         });
-    },
-  },
+    }
+  }
 };
 </script>
 

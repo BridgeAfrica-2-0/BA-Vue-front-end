@@ -1,8 +1,11 @@
 <template>
   <div>
+<<<<<<< HEAD
     <fas-icon class="icons " :icon="['fas', 'store']" size="lg" /> Market
     <hr />
 
+=======
+>>>>>>> 7f397c25f587f4d66699556ebaf14c056ee5b227
     <div class="products ">
       <div class="col-md-6" v-for="(product, index) in products" :key="index">
         <Product :product="product" />
@@ -27,6 +30,7 @@ export default {
   data() {
     return {
       showModal: false,
+<<<<<<< HEAD
       load: false,
       loader: false,
       products: [],
@@ -34,10 +38,62 @@ export default {
       msg: "",
       success: false,
       action: null,
+=======
+
+      text: "",
+      image: "",
+      posts: [
+        {
+          id: 1,
+          image: "https://picsum.photos/300/150/?image=41",
+          title: "Title 2",
+          text:
+            " Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum quam, doloribus id sit consequuntur tempora molestiae blanditiis."
+        },
+        {
+          id: 1,
+          image: "https://picsum.photos/300/150/?image=41",
+          title: "Title 2",
+          text:
+            " Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum quam, doloribus id sit consequuntur tempora molestiae blanditiis."
+        },
+        {
+          id: 1,
+          image: "https://picsum.photos/300/150/?image=41",
+          title: "Title 2",
+          text:
+            " Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum quam, doloribus id sit consequuntur tempora molestiae blanditiis."
+        },
+        {
+          id: 1,
+          image: "https://picsum.photos/300/150/?image=41",
+          title: "Title 2",
+          text:
+            " Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum quam, doloribus id sit consequuntur tempora molestiae blanditiis."
+        },
+        {
+          id: 1,
+          image: "https://picsum.photos/300/150/?image=41",
+          title: "Title 2",
+          text:
+            " Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum quam, doloribus id sit consequuntur tempora molestiae blanditiis."
+        }
+      ],
+      images: [
+        {
+          id: 1,
+          image: "https://picsum.photos/300/150/?image=41"
+        },
+        {
+          id: 2,
+          image: "https://picsum.photos/300/150/?image=41"
+        }
+      ]
+>>>>>>> 7f397c25f587f4d66699556ebaf14c056ee5b227
     };
   },
   components: {
-    Product,
+    Product
   },
   beforeMount() {
     axios.defaults.headers.common["Authorization"] =
@@ -46,6 +102,7 @@ export default {
     this.getProducts();
   },
   methods: {
+<<<<<<< HEAD
     getProducts() {
       axios
         .get("market/products/1")
@@ -59,6 +116,12 @@ export default {
         });
     },
   },
+=======
+    createProduct() {
+      this.showModal = !this.showModal;
+    }
+  }
+>>>>>>> 7f397c25f587f4d66699556ebaf14c056ee5b227
 };
 </script>
 

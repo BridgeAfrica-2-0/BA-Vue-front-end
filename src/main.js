@@ -17,41 +17,45 @@ import IconifyIcon from "@iconify/vue";
 import homeIconData from "@iconify-icons/mdi-light/home";
 import ReadMore from "vue-read-more";
 import VueSocialauth from "vue-social-auth";
-import firebase from "firebase";
+// import firebase from "firebase";
+import LoadScript from 'vue-plugin-load-script';
+
+Vue.use(LoadScript);
 Vue.use(Vuex);
 Vue.use(VueAxios, axios);
 
 Vue.use(require('vue-moment'));
+IconifyIcon.addIcon('home', homeIconData);
 
 Vue.use(ReadMore);
-IconifyIcon.addIcon("home", homeIconData);
 Vue.prototype.$axios = axios;
 
-const firebaseConfig = {
-  apiKey: "AIzaSyDu9rL6_YDSeTyU89tF8JcI9kWNR6617Fg",
-  authDomain: "bridge-africa-api.firebaseapp.com",
-  projectId: "bridge-africa-api",
-  storageBucket: "bridge-africa-api.appspot.com",
-  messagingSenderId: "50055115922",
-  appId: "1:50055115922:web:81e9b59a354a0c6e9ee24b",
-  measurementId: "G-9K2WHP9Y13",
-};
-
-firebase.initializeApp(firebaseConfig);
-
-const messaging = firebase.messaging();
-
-messaging
-  .requestPermission()
-  .then(() => {
-    return messaging.getToken();
-  })
-  .then((token) => {
-    console.log(token);
-  })
-  .catch((err) => {
-    console.log(err);
-  });
+//temporary comented for build
+// const firebaseConfig = {
+//   apiKey: "AIzaSyDu9rL6_YDSeTyU89tF8JcI9kWNR6617Fg",
+//   authDomain: "bridge-africa-api.firebaseapp.com",
+//   projectId: "bridge-africa-api",
+//   storageBucket: "bridge-africa-api.appspot.com",
+//   messagingSenderId: "50055115922",
+//   appId: "1:50055115922:web:81e9b59a354a0c6e9ee24b",
+//   measurementId: "G-9K2WHP9Y13",
+// };
+//
+// firebase.initializeApp(firebaseConfig);
+//
+// const messaging = firebase.messaging();
+//
+// messaging
+//   .requestPermission()
+//   .then(() => {
+//     return messaging.getToken();
+//   })
+//   .then((token) => {
+//     console.log(token);
+//   })
+//   .catch((err) => {
+//     console.log(err);
+//   });
 
 Vue.use(VueSocialauth, {
   providers: {
@@ -63,7 +67,7 @@ Vue.use(VueSocialauth, {
     google: {
       clientId: process.env.VUE_APP_GOOGLE_CLIENT_ID,
       client_secret: process.env.VUE_APP_GOOGLE_CLIENT_SECRETE,
-      redirectUri:process.env.VUE_APP_GOOGLE_RETURN_URL
+      redirectUri: process.env.VUE_APP_GOOGLE_RETURN_URL
     }
   }
 });
@@ -71,17 +75,9 @@ Vue.use(VueSocialauth, {
 
 
 
-
-import VueLoading from 'vue-loading-overlay';
-import 'vue-loading-overlay/dist/vue-loading.css';
-
-Vue.use(VueLoading);
-
-
-
-
 import FlashMessage from '@smartweb/vue-flash-message';
 Vue.use(FlashMessage);
+
 
 
 
@@ -93,8 +89,11 @@ import VueMaterial from 'vue-material'
 
 Vue.use(VueMaterial);
 
+
+
+
 import Lightbox from "@morioh/v-lightbox";
-import * as VueGoogleMaps from "vue2-google-maps";
+import * as VueGoogleMaps from "gmap-vue";
 
 import VueSplide from "@splidejs/vue-splide";
 Vue.use(VueSplide);
@@ -130,15 +129,20 @@ import "@/assets/css/bootstrap.css";
 Vue.use(BootstrapVue);
 Vue.use(IconsPlugin);
 
+
+
+
+
 Vue.use(VueGoogleMaps, {
   load: {
     key: "AIzaSyAGZU6cqra18t1fhN1AbzRsEc_pgt7n2C8",
-    libraries: "places",
+    libraries: "places"
   },
+  autobindAllEvents: false,
+  installComponents: true
 });
 
 
-import InfiniteLoading from 'vue-infinite-loading';
 
 
 import VueAgile from 'vue-agile'
@@ -150,14 +154,17 @@ Vue.use(InfiniteLoading, { /* options */ });
 
 Vue.component("v-select", vSelect);
 
+import i18n from "./i18n";
+
 Vue.config.productionTip = false;
 
 new Vue({
   router,
   store,
+  i18n,
 
   created() {
-    const userInfo = localStorage.getItem('user')
+    const userInfo = localStorage.getItem("user");
     if (userInfo) {
       const userData = JSON.parse(userInfo);
       this.$store.commit("auth/setUserData", userData);
@@ -166,7 +173,8 @@ new Vue({
       (response) => response,
       (error) => {
         if (error.response.status === 401) {
-          this.$store.dispatch("logout");
+         // this.$store.dispatch("auth/logout");
+         console.log("error has occure");
         }
         return Promise.reject(error);
       }

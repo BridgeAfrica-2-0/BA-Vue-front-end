@@ -8,8 +8,8 @@
 import Posts from "../post";
 export default {
   components: {
-    Posts,
-  },
+    Posts
+  }
 };
 </script>
 

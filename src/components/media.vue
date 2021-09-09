@@ -1,13 +1,19 @@
 <template>
   <div>
     <b-card class="mt-4" header-tag="header" footer-tag="footer">
+      <h6 class="mb-3 d-inline-block title">
+        <fas-icon
+          class=" mr-2 pt-1 icons "
+          :icon="['fas', 'file-image']"
+          size="lg"
+        />
+        <b> Media </b>
+      </h6>
 
-
-      <h6 class="mb-3 d-inline-block title">  <fas-icon class=" mr-2 pt-1 icons " :icon="['fas', 'file-image']" size="lg"  /> <b>  Media </b> </h6>
-
-
-      <span class="float-right"
-        > <b-link><b-icon icon="eye-fill" variant="primary">   </b-icon> View All  </b-link></span
+      <span class="float-right">
+        <b-link
+          ><b-icon icon="eye-fill" variant="primary"> </b-icon> View All
+        </b-link></span
       >
 
       <b-card-text>

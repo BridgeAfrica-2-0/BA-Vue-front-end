@@ -1,12 +1,7 @@
 <template>
   <div>
     <fas-icon class="primary search" :icon="['fas', 'search']" />
-    <input
-      type="text"
-      placeholder="Search Member"
-      class="search-member"
- 
-    />
+    <input type="text" placeholder="Search Member" class="search-member" />
     <p class="mt-2">
       <strong>Metwork Admins ({{ admins.length }})</strong>
     </p>
@@ -29,7 +24,7 @@
       </strong>
     </div>
 
-      <p class="mt-4">
+    <p class="mt-4">
       <strong>All Members ({{ admins.length }})</strong>
     </p>
     <hr />
@@ -49,15 +44,15 @@ export default {
       admins: [
         {
           name: "   Interacting as Mapoure Agrobusiness",
-          avatar: "https://placekitten.com/300/300",
+          avatar: "https://placekitten.com/300/300"
         },
         {
           name: "   Interacting as Mapoure Agrobusiness",
-          avatar: "https://placekitten.com/300/300",
-        },
-      ],
+          avatar: "https://placekitten.com/300/300"
+        }
+      ]
     };
-  },
+  }
 };
 </script>
 

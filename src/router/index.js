@@ -5,7 +5,6 @@ import Login from "../views/login.vue";
 
 import signup from "../views/signup.vue";
 
-import SignIn from "../views/signIn.vue";
 import RecoverPass1 from "../views/recoverPassword1.vue";
 import RecoverPass2 from "../views/recoverPassword2.vue";
 import RecoverPass3 from "../views/recoverPassword3.vue";
@@ -98,7 +97,7 @@ const routes = [
     component: templateView
   },
   {
-    path: "/business_owner/:id?",
+    path: "/business_owner",
     name: "BusinessOwner",
     component: businessOwner
   },
@@ -146,11 +145,6 @@ const routes = [
     component: signup
   },
 
-  {
-    path: "/signin",
-    name: "SignIn",
-    component: SignIn
-  },
   {
     path: "/recoverPass1",
     name: "RecoverPass1",
@@ -253,38 +247,31 @@ const routes = [
   }
 ];
 
-
-
 const router = new VueRouter({
-  mode: 'history',
+  mode: "history",
   base: process.env.BASE_URL,
   routes
 });
 
-
-
 router.beforeEach((to, from, next) => {
-  const loggedIn = localStorage.getItem('user')
-
-  const isAuthenticated = store.getters['auth/isVerified'];
+  const loggedIn = localStorage.getItem("user");
 
   if (to.matched.some(record => record.meta.auth) && !loggedIn) {
-    next('/login')
-    return
+    next("/login");
+
+    return;
   }
-  
 
- // if (to.matched.some(record => record.meta.auth) && !isAuthenticated) {
-  //  next('/verify')
- //   return
-//  }
+  if (to.matched.some(record => record.meta.auth)) {
+    const dat = localStorage.getItem("user");
+    const userdata = JSON.parse(dat);
 
-  
+    if (userdata.user.verified_at == null) {
+      next("/verify");
+    }
+  }
 
-  next()
-
+  next();
 });
-
-
 
 export default router;

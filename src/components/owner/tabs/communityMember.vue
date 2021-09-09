@@ -23,17 +23,10 @@
                 <b-col md="12" lg="6" xl="6" >
                   <div class="e-name">
                     <b-row>
-                      <b-col
-                        md="6"
-                        lg="12"
-                        cols="6"
-                        
-                        xl="12"
-                        class="mt-lg-2"
-                      >
-                       <div class="mt-3 mt-lg-0 mt-xl-0 username">
-                          <b> howty Itz blec </b>
-                       </div>
+                      <b-col md="6" lg="12" cols="6" xl="12" class="mt-lg-2">
+                        <div class="mt-3 mt-lg-0 mt-xl-0 username">
+                          <b> howtyyyyyyyyyyyy Itz blec </b>
+                        </div>
                       </b-col>
 
                       <b-col
@@ -335,7 +328,7 @@ export default {};
 
 .a-left {
   text-align: left;
-  align-content: left;
+  /*align-content: left;*/
 }
 
 hr {
@@ -356,12 +349,12 @@ hr {
 
 f-right {
   text-align: right;
-  align-content: right;
+  /*align-content: right;*/
 }
 
 .f-left {
   text-align: left;
-  align-content: left;
+  /*align-content: left;*/
 }
 
 @media only screen and (max-width: 768px) {

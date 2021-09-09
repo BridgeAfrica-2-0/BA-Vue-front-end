@@ -176,10 +176,5 @@ export default {
         dispatch("getNotifications");
       });
     },
-<<<<<<< HEAD
-
-   
-=======
->>>>>>> c09c6c4e1244311d02410155d9e12061cbe0ebff
   },
 };

@@ -5,16 +5,11 @@ export default {
   state: {
     networks: [],
     loader: false,
-<<<<<<< HEAD
     success: false,
     notifications: [],
     checked: false,
     btnDelLoader: false,
     btnReadLoader: false,
-
-=======
-    success: false
->>>>>>> 7f397c25f587f4d66699556ebaf14c056ee5b227
   },
   getters: {
     // sending networks
@@ -38,7 +33,6 @@ export default {
     // sending success value
     getSuccess(state) {
       return state.success;
-<<<<<<< HEAD
     },
 
     // Sending notifications
@@ -52,11 +46,6 @@ export default {
     sendChecked(state) {
       return state.checked;
     },
-
-
-=======
-    }
->>>>>>> 7f397c25f587f4d66699556ebaf14c056ee5b227
   },
   mutations: {
     setNetworks(state, payload) {
@@ -67,7 +56,6 @@ export default {
     },
     setSuccess(state, payload) {
       state.success = payload;
-<<<<<<< HEAD
     },
 
     // Setting the notifications in the state
@@ -81,38 +69,12 @@ export default {
     },
   },
   actions: {
- 
-=======
-    }
-  },
-  actions: {
-    // temporal signin to get token for developement purpose
-    async signIn() {
-      axios
-        .post("/user/login", {
-          email: "info@moazateeq.com",
-          password: "12345678"
-        })
-        .then(res => {
-          localStorage.setItem("access_token", res.data.data.accessToken);
-        });
-    },
->>>>>>> 7f397c25f587f4d66699556ebaf14c056ee5b227
     // Get networks from the backend
     async getNetworks({ commit }) {
       commit("setLoader", true);
       await axios
-<<<<<<< HEAD
         .get("network")
-        .then((res) => {
-=======
-        .get("/network", {
-          headers: {
-            Authorization: "Bearer " + localStorage.getItem("access_token")
-          }
-        })
         .then(res => {
->>>>>>> 7f397c25f587f4d66699556ebaf14c056ee5b227
           commit("setLoader", false);
           commit("setSuccess", true);
           commit("setNetworks", res.data.data);
@@ -128,19 +90,9 @@ export default {
     // Add network to the database but doesn't work correctly for now
     async addNetwork({ dispatch, commit }, newNetwork) {
       axios
-<<<<<<< HEAD
         .post("/network", newNetwork)
-        .then((res) => {
-          dispatch("getNetworks");
-=======
-        .post("/network", newNetwork, {
-          headers: {
-            Authorization: "Bearer " + localStorage.getItem("access_token")
-          }
-        })
         .then(res => {
-          console.log(res.data);
->>>>>>> 7f397c25f587f4d66699556ebaf14c056ee5b227
+          dispatch("getNetworks");
         })
         .catch(err => {
           console.log("Something went wrong");
@@ -151,24 +103,13 @@ export default {
     async editNetwork({ dispatch, commit }, editedNetwork) {
       commit("setLoader", true);
       axios
-<<<<<<< HEAD
         .put(`network/${editedNetwork.id}`, editedNetwork)
-        .then(async (res) => {
-          dispatch("getNetworks");
-=======
-        .put(`/network/${editedNetwork.id}`, editedNetwork, {
-          headers: {
-            Authorization: "Bearer " + localStorage.getItem("access_token")
-          }
-        })
         .then(async res => {
-          await dispatch("getNetworks");
->>>>>>> 7f397c25f587f4d66699556ebaf14c056ee5b227
+          dispatch("getNetworks");
         })
         .catch(err => {
           console.log("Something went wrong");
         });
-<<<<<<< HEAD
     },
 
     // Getting the notifications
@@ -177,7 +118,7 @@ export default {
 
       await axios
         .get("notification")
-        .then((res) => {
+        .then(res => {
           commit("setLoader", false);
           commit("setSuccess", true);
           commit("setNotifications", res.data.data);
@@ -185,7 +126,7 @@ export default {
             commit("setSuccess", false);
           }, 2000);
         })
-        .catch((err) => {
+        .catch(err => {
           commit("setLoader", false);
           console.log("Unauthorized request !!");
         });
@@ -197,7 +138,7 @@ export default {
         ids: [],
       };
 
-      payload.forEach((element) => {
+      payload.forEach(element => {
         let objId = {
           id: null,
         };
@@ -209,7 +150,7 @@ export default {
         .then(() => {
           dispatch("getNotifications");
         })
-        .catch((err) => [console.log(err)]);
+        .catch(err => [console.log(err)]);
     },
 
     // Delete All Notifications
@@ -218,7 +159,7 @@ export default {
         ids: [],
       };
 
-      payload.forEach((element) => {
+      payload.forEach(element => {
         let objId = {
           id: null,
         };
@@ -235,10 +176,5 @@ export default {
         dispatch("getNotifications");
       });
     },
-   
   },
-=======
-    }
-  }
->>>>>>> 7f397c25f587f4d66699556ebaf14c056ee5b227
 };

@@ -14,15 +14,17 @@ from '@/components/owner/tabs/bussiness';
         <b-icon-plus class="network-avatar-icon"></b-icon-plus>
       </b-container>
 
-      <br />      
+      <br />
 
       <b-container>
         <b-row>
           <b-col cols="6">
-            <h6 class="font-weight-bolder m-0 p-0 t-align">  Maketers Union Network</h6>
+            <h6 class="font-weight-bolder m-0 p-0 t-align">
+              Maketers Union Network
+            </h6>
           </b-col>
           <b-col cols="6">
-            <b-button variant="primary" block  size="sm"   style="width: 120px;"  >
+            <b-button variant="primary" block size="sm" style="width: 120px;">
               <b-icon icon="plus-circle"></b-icon> Community
             </b-button>
           </b-col>
@@ -32,8 +34,6 @@ from '@/components/owner/tabs/bussiness';
       <br />
 
       <b-card-text class="text-left">
-        
-
         <b-container>
           <b-row>
             <b-col>
@@ -61,48 +61,34 @@ from '@/components/owner/tabs/bussiness';
       </b-card-text>
     </b-card>
 
-    <b-card
-      class="mt-4"
-      title=""
-      header-tag="header"
-      footer-tag="footer"
-    >
+    <b-card class="mt-4" title="" header-tag="header" footer-tag="footer">
+      <h4>
+        <b-icon icon="people" class="i-color"> </b-icon> Community
+        <span class="i-color"> 7k </span>
+      </h4>
 
-    <h4> <b-icon icon="people" class="i-color">   </b-icon>  Community          <span class="i-color"> 7k </span> </H4> 
-
-     <SidebarCommunity/> 
-     
+      <SidebarCommunity />
     </b-card>
-
   </b-container>
 </template>
 
 <script>
-
 import SidebarCommunity from "@/components/businessf/tabs/owner/networks/sidebarcommunity";
-
 
 export default {
   name: "parent",
 
-   components: {
-    SidebarCommunity,
-   
+  components: {
+    SidebarCommunity
   }
-
 };
 </script>
 
-<style >
-
-
-.lala .nav-fill{
-   
-    margin-top: -19px;
-     border: 1px solid rgba(0, 0, 0, 0.125);
-  }
-
-
+<style>
+.lala .nav-fill {
+  margin-top: -19px;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+}
 
 .a-center {
   text-align: center;
@@ -114,7 +100,7 @@ export default {
 .b-none {
   border-style: none;
 }
-.t-align{
+.t-align {
   text-align: left;
 }
 .network-avatar-icon {
@@ -130,8 +116,7 @@ export default {
   border: 4px solid #ffff;
 }
 
-
-.i-color{
-  color:#e75c18;
+.i-color {
+  color: #e75c18;
 }
 </style>

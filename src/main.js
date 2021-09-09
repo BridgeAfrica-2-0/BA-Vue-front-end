@@ -117,7 +117,11 @@ Vue.use(IconsPlugin);
 Vue.use(VueGoogleMaps, {
   load: {
     key: "AIzaSyAGZU6cqra18t1fhN1AbzRsEc_pgt7n2C8",
+<<<<<<< HEAD
     libraries: "places",
+=======
+    libraries: "places"
+>>>>>>> 7f397c25f587f4d66699556ebaf14c056ee5b227
   },
   autobindAllEvents: false,
   installComponents: true,
@@ -125,11 +129,14 @@ Vue.use(VueGoogleMaps, {
 
 Vue.component("v-select", vSelect);
 
+import i18n from "./i18n";
+
 Vue.config.productionTip = false;
 
 new Vue({
   router,
   store,
+  i18n,
 
   created() {
     const userInfo = localStorage.getItem("user");
@@ -141,7 +148,12 @@ new Vue({
       (response) => response,
       (error) => {
         if (error.response.status === 401) {
+<<<<<<< HEAD
           this.$store.dispatch("auth/logout");
+=======
+         // this.$store.dispatch("auth/logout");
+         console.log("error has occure");
+>>>>>>> 7f397c25f587f4d66699556ebaf14c056ee5b227
         }
         return Promise.reject(error);
       }

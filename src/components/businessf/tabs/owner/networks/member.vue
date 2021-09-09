@@ -74,7 +74,7 @@
                 size="3.5rem"
               ></b-avatar>
               <h5 class="m-0  username d-inline-block ml-2">
-               Mayor Council
+                Mayor Council
               </h5>
             </span>
             <span class="float-right mt-1">

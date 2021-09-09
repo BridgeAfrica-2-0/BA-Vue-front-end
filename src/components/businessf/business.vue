@@ -137,7 +137,7 @@ import HomePage from "../businessf/tabs/businessHome";
 import About from "./tabs/about";
 import Media from "./tabs/media";
 import MarketPlace from "./tabs/marketPlace";
-// import Community from "./tabs/memberNetwork";
+ import Community from "./tabs/memberNetwork";
 import Networks from "./tabs/networks";
 
 export default {
@@ -147,7 +147,8 @@ export default {
     About,
     Media,
     MarketPlace,
-    Networks,
+    Community,
+    Networks
   },
 
   data() {
@@ -164,7 +165,7 @@ export default {
         breakpoints: {
           "760": {
             perPage: 1,
-            gap: "0rem",
+            gap: "0rem"
           },
           "992": {
             perPage: 2,
@@ -176,7 +177,7 @@ export default {
   },
 
   computed: {},
-  methods: {},
+  methods: {}
 };
 </script>
 

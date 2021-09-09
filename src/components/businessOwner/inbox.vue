@@ -36,8 +36,13 @@
             <div>
               <div class="messages-mobile">
                 <b-row
+<<<<<<< HEAD
                   v-for="(message, index) in messages"
                   :key="index"
+=======
+                  v-for="message in messages"
+                  :key="message.id"
+>>>>>>> 7f397c25f587f4d66699556ebaf14c056ee5b227
                   class="p-2 message"
                   @click="showMessages(false)"
                 >
@@ -187,7 +192,11 @@
                     ></b-avatar>
                   </b-col>
                   <b-col class="detail">
+<<<<<<< HEAD
                     <h5>{{ recipient.name }}</h5>
+=======
+                    <h5>Louis Litt</h5>
+>>>>>>> 7f397c25f587f4d66699556ebaf14c056ee5b227
                     <p>Online</p>
                   </b-col>
                   <b-col class="col-4">
@@ -240,8 +249,13 @@
                 style="
              margin-left: 1px;"
               >
+<<<<<<< HEAD
                 <div v-for="(chat, index) in chats" :key="index">
                   <div v-if="chat.sender_id != senderId" id="received">
+=======
+                <div v-for="chat in chats" :key="chat.id">
+                  <div v-if="chat.type == 'received'" id="received">
+>>>>>>> 7f397c25f587f4d66699556ebaf14c056ee5b227
                     <b-row class="p-4">
                       <b-avatar
                         variant="primary"
@@ -249,10 +263,17 @@
                       ></b-avatar>
                       <b-col>
                         <p>
+<<<<<<< HEAD
                           <span class="name"> {{ recipient.name }} </span>
                         </p>
                         <p class="msg-text mt-0 text">
                           {{ chat.chat }}
+=======
+                          <span class="name"> {{ chat.name }} </span>
+                        </p>
+                        <p class="msg-text mt-0 text">
+                          {{ chat.message }}
+>>>>>>> 7f397c25f587f4d66699556ebaf14c056ee5b227
                           <span class="float-right mt-2 white ">
                             {{ chat.timeStamp }}
                           </span>
@@ -260,11 +281,19 @@
                       </b-col>
                     </b-row>
                   </div>
+<<<<<<< HEAD
                   <div v-if="chat.sender_id == senderId">
                     <b-row class="p-4">
                       <b-col>
                         <p class="sent-name">
                           <span class="name">{{ senderName }}</span>
+=======
+                  <div v-if="chat.type == 'sent'">
+                    <b-row class="p-4">
+                      <b-col>
+                        <p class="sent-name">
+                          <span class="name">{{ chat.name }}</span>
+>>>>>>> 7f397c25f587f4d66699556ebaf14c056ee5b227
                         </p>
                         <p id="sent" class="msg-text-sent text">
                           {{ chat.message }}
@@ -284,6 +313,7 @@
               <div class="bottom ">
                 <b-row v-if="!checked">
                   <b-col cols="2" class="p-0">
+<<<<<<< HEAD
                     <input
                       v-show="false"
                       type="file"
@@ -294,13 +324,21 @@
                     <b-icon
                       @click="selectAttarch"
                       class="msg-icon primary icon-size     icon-top float-right text-right"
+=======
+                    <b-icon
+                      class="msg-icon primary icon-size  icon-top float-right text-right"
+>>>>>>> 7f397c25f587f4d66699556ebaf14c056ee5b227
                       icon="paperclip"
                     ></b-icon>
                   </b-col>
                   <b-col cols="8" class="p-0">
                     <b-form-input
                       id="textarea"
+<<<<<<< HEAD
                       v-model="message.message"
+=======
+                      v-model="input"
+>>>>>>> 7f397c25f587f4d66699556ebaf14c056ee5b227
                       class="input-background"
                       placeholder="Enter something..."
                     ></b-form-input>
@@ -334,7 +372,11 @@
                             class="emoji-picker"
                             :style="{
                               top: display.y + 'px',
+<<<<<<< HEAD
                               left: display.x + 'px',
+=======
+                              left: display.x + 'px'
+>>>>>>> 7f397c25f587f4d66699556ebaf14c056ee5b227
                             }"
                           >
                             <div class="emoji-picker__search">
@@ -438,7 +480,10 @@
                       class="input-background"
                       style="width: 100%"
                       placeholder="Type the name of person or Business..."
+<<<<<<< HEAD
                       @keydown="searcher"
+=======
+>>>>>>> 7f397c25f587f4d66699556ebaf14c056ee5b227
                       @click="showsearchh()"
                     ></b-form-input>
 
@@ -454,6 +499,7 @@
                           <tr>
                             <td>
                               <b-row>
+<<<<<<< HEAD
                                 <b-col cols="2">
                                   <span class="bold "> All </span>
                                 </b-col>
@@ -462,6 +508,19 @@
                                     v-model="selectedTo"
                                     :options="options"
                                   ></b-form-select>
+=======
+                                <b-col cols="6">
+                                  <span class="bold "> Send to all </span>
+                                </b-col>
+                                <b-col>
+                                  <span>
+                                    <input
+                                      type="checkbox"
+                                      @click="selectAll"
+                                      v-model="allSelected"
+                                    />
+                                  </span>
+>>>>>>> 7f397c25f587f4d66699556ebaf14c056ee5b227
                                 </b-col>
                               </b-row>
                             </td>
@@ -471,9 +530,14 @@
                           <tr></tr>
 
                           <tr
+<<<<<<< HEAD
                             v-show="searching"
                             v-for="(item, index) in resultQuery"
                             :key="index"
+=======
+                            v-for="item in resultQuery"
+                            :key="item.key"
+>>>>>>> 7f397c25f587f4d66699556ebaf14c056ee5b227
                             class="p-2 message"
                           >
                             <td>
@@ -505,6 +569,12 @@
                           </tr>
                         </tbody>
                       </table>
+<<<<<<< HEAD
+=======
+                      <b-button variant="primary" size="sm" class="pl-3 pr-3">
+                        Send
+                      </b-button>
+>>>>>>> 7f397c25f587f4d66699556ebaf14c056ee5b227
                     </div>
                   </b-col>
                 </b-row>
@@ -513,6 +583,7 @@
               <div class="bottom newMsg-bottom">
                 <b-row>
                   <b-col cols="2" class="p-0">
+<<<<<<< HEAD
                     <input
                       type="file"
                       name=""
@@ -522,6 +593,9 @@
                     />
                     <b-icon
                       @click="selectAttarch"
+=======
+                    <b-icon
+>>>>>>> 7f397c25f587f4d66699556ebaf14c056ee5b227
                       class="msg-icon primary icon-size     icon-top float-right text-right"
                       icon="paperclip"
                     ></b-icon>
@@ -555,6 +629,7 @@
 
 <script>
 import EmojiPicker from "vue-emoji-picker";
+<<<<<<< HEAD
 import io from "socket.io-client";
 import axios from "axios";
 export default {
@@ -578,9 +653,168 @@ export default {
         { value: null, text: "Community" },
         { value: "following", text: "Following" },
         { value: "follower", text: "Follower" },
+=======
+
+export default {
+  components: {
+    EmojiPicker
+  },
+  data() {
+    return {
+      input: "",
+      search: "",
+
+      showsearch: true,
+      selecteduser: false,
+
+      allSelected: false,
+      userIds: [],
+
+      searchQuery: null,
+      resources1: [
+        { title: "ABE Attendance", uri: "aaaa.com", category: "a", icon: null },
+        {
+          title: "Accounting Services",
+          uri: "aaaa.com",
+          category: "a",
+          icon: null
+        },
+        { title: "Administration", uri: "aaaa.com", category: "a", icon: null },
+        {
+          title: "Advanced Student Lookup",
+          uri: "bbbb.com",
+          category: "b",
+          icon: null
+        },
+        { title: "Art & Sciences", uri: "bbbb.com", category: "b", icon: null },
+        {
+          title: "Auxiliares Services",
+          uri: "bbbb.com",
+          category: "b",
+          icon: null
+        },
+        { title: "Basic Skills", uri: "cccc.com", category: "c", icon: null },
+        {
+          title: "Board of Trustees",
+          uri: "dddd.com",
+          category: "d",
+          icon: null
+        }
       ],
       resources: [
         {
+          name: "blezour blec",
+          profile:
+            "https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg",
+          type: "person",
+          id: "1"
+        },
+        {
+          name: "itz blec blec",
+          profile:
+            "https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg",
+          type: "person",
+          id: "2"
+        },
+
+        {
+          name: "Maxine Moffet",
+          profile:
+            "https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg",
+          type: "person",
+          id: "3"
+        },
+
+        {
+          name: "Alicia kays",
+          profile:
+            "https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg",
+          type: "person",
+          id: "4"
+        },
+
+        {
+          name: "Lorem Ipsum",
+          profile:
+            "https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg",
+          type: "person",
+          id: "5"
+        },
+        {
+          name: "blezour blec",
+          profile:
+            "https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg",
+          type: "person",
+          id: "6"
+        }
+      ],
+      message: {
+        type: "",
+        name: "Louis Litt",
+        timeStamp: "",
+        message: ""
+      },
+      newMsg: false,
+      show: false,
+      info: false,
+      checked: false,
+      text: "",
+      selected: [],
+      chats: [
+        {
+          id: 0,
+          type: "received",
+          name: "Louis Litt",
+          timeStamp: "3:00 PM",
+
+          message:
+            "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Explicabo, quos? Fuga, nam dolores? Tempora, qui."
+        },
+        {
+          id: 1,
+          type: "sent",
+          name: "Louis Litt",
+          timeStamp: "3:00 PM",
+          message:
+            "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Explicabo, quos? Fuga, nam dolores? Tempora, qui."
+        },
+        {
+          id: 2,
+          type: "received",
+          name: "Louis Litt",
+          timeStamp: "3:00 PM",
+          message:
+            "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Explicabo, quos? Fuga, nam dolores? Tempora, qui."
+        },
+        {
+          id: 3,
+          type: "sent",
+          name: "Louis Litt",
+          timeStamp: "3:00 PM",
+          message:
+            "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Explicabo, quos? Fuga, nam dolores? Tempora, qui."
+        },
+        {
+          id: 4,
+          type: "received",
+          name: "Louis Litt",
+          timeStamp: "3:00 PM",
+          message:
+            "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Explicabo, quos? Fuga, nam dolores? Tempora, qui."
+        },
+        {
+          id: 5,
+          type: "sent",
+          name: "Louis Litt",
+          timeStamp: "3:00 PM",
+          message:
+            "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Explicabo, quos? Fuga, nam dolores? Tempora, qui."
+        }
+>>>>>>> 7f397c25f587f4d66699556ebaf14c056ee5b227
+      ],
+      resources: [
+        {
+<<<<<<< HEAD
           name: "blezour blec",
           profile:
             "https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg",
@@ -642,6 +876,72 @@ export default {
         profile: "",
         name: "",
       },
+=======
+          id: 0,
+          name: "Blezour blec",
+          startMessage: "Hello Blec lola blec ",
+          timeStamp: "3:00pm",
+          messageCount: "10"
+        },
+        {
+          id: 1,
+          name: "Blec blezour blec",
+          startMessage: "yoo nigga sup lola blec",
+          timeStamp: "7:00am",
+          messageCount: "60"
+        },
+
+        {
+          id: 3,
+          name: "baba blecc ",
+          startMessage: "Lorem ipsum la lola blec vlr ",
+          timeStamp: "9:00am",
+          messageCount: "60"
+        },
+        {
+          id: 4,
+          name: "Louis Litt",
+          startMessage: "Lorem  sit amet this is goo.",
+          timeStamp: "6:00am",
+          messageCount: "6"
+        },
+        {
+          id: 5,
+          name: "Louis Litt",
+          startMessage: "Lorem this   sit amet.",
+          timeStamp: "7:00am",
+          messageCount: "100"
+        },
+        {
+          id: 6,
+          name: "Louis Litt",
+          startMessage: "Lorem ithe amet.",
+          timeStamp: "7:00am",
+          messageCount: "3"
+        },
+        {
+          id: 7,
+          name: "Louis Litt",
+          startMessage: "Lordol sit amet.",
+          timeStamp: "7:00am",
+          messageCount: "10"
+        },
+        {
+          id: 8,
+          name: "Louis Litt",
+          startMessage: "Lorem vheck ",
+          timeStamp: "7:00am",
+          messageCount: "40"
+        },
+        {
+          id: 9,
+          name: "Louis Litt",
+          startMessage: "Lorem papa .",
+          timeStamp: "7:00am",
+          messageCount: "15"
+        }
+      ]
+>>>>>>> 7f397c25f587f4d66699556ebaf14c056ee5b227
     };
   },
 
@@ -649,8 +949,13 @@ export default {
     focus: {
       inserted(el) {
         el.focus();
+<<<<<<< HEAD
       },
     },
+=======
+      }
+    }
+>>>>>>> 7f397c25f587f4d66699556ebaf14c056ee5b227
   },
 
   beforeMount() {
@@ -660,6 +965,7 @@ export default {
   },
 
   methods: {
+<<<<<<< HEAD
     getUsers() {
       axios.get("user/all-user").then(res => {
         this.messages = res.data.data;
@@ -702,6 +1008,32 @@ export default {
 
     selectuser() {
       this.showsearch = false;
+=======
+    insert(emoji) {
+      this.input += emoji;
+    },
+
+    append(emoji) {
+      this.input += emoji;
+    },
+
+    selectAll() {
+      console.log("hekkko");
+      this.userIds = [];
+
+      var userr;
+
+      if (!this.allSelected) {
+        for (userr in this.resources) {
+          this.userIds.push(this.resources[userr].id);
+        }
+      }
+    },
+
+    selectuser() {
+      this.showsearch = false;
+
+>>>>>>> 7f397c25f587f4d66699556ebaf14c056ee5b227
       this.selecteduser = true;
     },
 
@@ -722,6 +1054,7 @@ export default {
       this.show = false;
     },
     send() {
+<<<<<<< HEAD
       this.message.room_id =
         JSON.stringify(this.recipient.id) + localStorage.getItem("senderd");
       this.message.sender_id = localStorage.getItem("senderId");
@@ -750,17 +1083,41 @@ export default {
       if (this.searchQuery) {
         return this.resources.filter(item => {
           this.searcher(true);
+=======
+      this.message.type = "sent";
+      let today = new Date();
+      let h = today.getHours();
+      let m = today.getMinutes();
+      this.message.timeStamp = h + ":" + m;
+      this.message.message = this.text;
+      this.chats.push(this.message);
+      this.text = "";
+    }
+  },
+
+  computed: {
+    resultQuery() {
+      if (this.searchQuery) {
+        return this.resources.filter(item => {
+>>>>>>> 7f397c25f587f4d66699556ebaf14c056ee5b227
           return this.searchQuery
             .toLowerCase()
             .split(" ")
             .every(v => item.name.toLowerCase().includes(v));
         });
       } else {
+<<<<<<< HEAD
         this.searcher(false);
         return this.resources;
       }
     },
   },
+=======
+        return this.resources;
+      }
+    }
+  }
+>>>>>>> 7f397c25f587f4d66699556ebaf14c056ee5b227
 };
 </script>
 
@@ -865,9 +1222,15 @@ h1 {
 }
 .bottom {
   padding-left: 10px;
+<<<<<<< HEAD
 
   height: 60px;
 
+=======
+
+  height: 60px;
+
+>>>>>>> 7f397c25f587f4d66699556ebaf14c056ee5b227
   border-bottom-right-radius: 15px;
   background-color: white;
 }

@@ -20,7 +20,7 @@ import Images from "./images";
 export default {
   components: {
     Album,
-    Images,
+    Images
   },
   methods: {
     onClick(i) {

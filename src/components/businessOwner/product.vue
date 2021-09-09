@@ -12,12 +12,22 @@
         </b-col>
         <b-col cols="7" sm="8" md="7">
           <p class="text">
+<<<<<<< HEAD
             <strong class="title"> {{product.name}} </strong> <br />
             <strong> Description </strong> <br />
              {{product.description.substring(0, 30)}}
             <b-link v-if="product.description.length >= 30"> see more </b-link> <br />
 
             <span class="price"> <strong> {{product.price}} Fcfa </strong> </span> <br />
+=======
+            <strong class="title"> Sneakers Blec cc </strong> <br />
+            <strong> Description </strong> <br />
+            This is just a dummy text dumy dummy things are always dummy and
+            dummy add things are always dummy hjykt
+            <b-link> see more </b-link> <br />
+
+            <span class="price"> <strong> 12,000 Fcfa </strong> </span> <br />
+>>>>>>> 7f397c25f587f4d66699556ebaf14c056ee5b227
           </p>
         </b-col>
       </b-row>

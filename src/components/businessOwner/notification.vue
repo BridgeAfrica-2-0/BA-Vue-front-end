@@ -30,6 +30,7 @@
       <br />
 
       <b-row>
+<<<<<<< HEAD
         <b-col
           cols="12"
           class="mr-3"
@@ -39,6 +40,20 @@
           <p class="">
             <span style="display:inline-flex">
               <input @click="select(notification, index)" type="checkbox" />
+=======
+        <b-col cols="12" class="mr-3" v-for="i in 6" :key="i">
+          <p class="">
+            <span style="display:inline-flex">
+              <b-form-checkbox
+                id="checkbox-1"
+                v-model="status"
+                name="checkbox-1"
+                value="accepted"
+                class="m-left-top"
+                unchecked-value="not_accepted"
+              >
+              </b-form-checkbox>
+>>>>>>> 7f397c25f587f4d66699556ebaf14c056ee5b227
               <b-avatar
                 class="d-inline-block profile-pic"
                 variant="primary"
@@ -46,6 +61,7 @@
               ></b-avatar>
               <h6 class="m-0  d-inline-block ml-2 username">
                 Mapoure Agrobusiness
+<<<<<<< HEAD
                 <p class="duration">{{ notification.created_at }}</p>
               </h6>
             </span>
@@ -76,6 +92,25 @@
         <b-col v-if="!getNotificationsStore && !loader" class="loader">
           <p>No notifications to show !!</p>
         </b-col>
+=======
+                <p class="duration">1hr</p>
+              </h6>
+            </span>
+            <span class="float-right mt-1"> </span>
+          </p>
+
+          <p class="text">
+            Lorem Ipsum is this is just a dummy text to post simply dummy text
+            of the printing and typesetting industry. Lorem Ipsum has been the
+            industry's standard dummy text ever since the 1500s, Lorem Ipsum is
+            simply dummy text of the printing and typesetting industry. Lorem
+            Ipsum has been the industry's standard dummy text ever since the
+            1500s,
+          </p>
+
+          <hr width="100%" />
+        </b-col>
+>>>>>>> 7f397c25f587f4d66699556ebaf14c056ee5b227
       </b-row>
     </div>
   </div>
@@ -149,10 +184,13 @@ export default {
 </script>
 
 <style scoped>
+<<<<<<< HEAD
 .loader {
   display: flex;
   justify-content: center;
 }
+=======
+>>>>>>> 7f397c25f587f4d66699556ebaf14c056ee5b227
 .f-left {
   float: left;
 }

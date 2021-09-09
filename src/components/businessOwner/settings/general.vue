@@ -121,12 +121,16 @@
     </div>
 
     <b-container>
-      <!-- <b-link href="#" class="f-left" @click="deleteBusiness()">Delete Business Identity</b-link> -->
+      <b-link href="#" class="f-left" @click="$bvModal.show('delete-business'); selectObject({ id: '1' })">Delete Business Identity</b-link>
       <div>
-        <b-link class="f-left" v-b-modal.modalDeleteBusiness>Delete Business Identity</b-link>
-
-        <b-modal id="modalDeleteBusiness" title="WORNING!!!">
-          <p class="my-4">You Are About To Delete This Business!</p>
+        <b-modal id="delete-business" hide-footer>
+          <template #modal-title>
+            !!! <code>DELETE BUSINESS</code> !!! 
+          </template>
+          <div class="d-block text-center">
+            <h3>Delete Business: {{clickedObject.id}}!</h3>
+          </div>
+          <b-button class="mt-3" block @click="$bvModal.hide('delete-business'); deleteBusiness(clickedObject.id)">Delete Business</b-button>
         </b-modal>
       </div>
     </b-container>
@@ -139,6 +143,7 @@ export default {
   name: "general",
   data(){
       return{
+        clickedObject: {},
         businessVisibility: [
           { label: "Published", value: "publish" },
           { label: "Unpublish", value: "unpublish" },
@@ -174,20 +179,32 @@ export default {
           message: "Unable To Make Changes "
         });
       });
-
     },
+    deleteBusiness: function(busiess_id){
+      this.axios.post(`business/general/delete/${busiess_id}`)
+      .then(() => {
+        console.log('ohh yeah');
 
-    // deleteBusiness(memId) {
-    //   axios
-    //     .delete("#" + memId)
-    //     .then(() => {
-    //         this.flashMessage.show({
-    //         status: "error",
-    //         message: "Unable To Make Changes "
-    //       });
-    //       console.log(this.result);
-    //     });
-    // }
+        this.flashMessage.show({
+          status: "success",
+          message: "Business Deleted"
+        });
+          
+      })
+      .catch(err => {
+        console.log({ err: err });
+        this.flashMessage.show({
+          status: "error",
+          message: "Unable To Delete Business"
+        });
+      });
+		},
+
+    selectObject(object){
+			this.clickedObject = object
+		},
+
+
   }
 };
 </script>

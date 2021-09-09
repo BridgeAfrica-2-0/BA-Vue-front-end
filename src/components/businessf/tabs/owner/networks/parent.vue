@@ -68,6 +68,8 @@
           <span class="d-inline-block float-right">
             <a href="#">lire la Suite</a>
           </span>
+          {{networkInfo.name}}
+          {{networkInfo}}
         </p>
       </b-card-text>
     </b-card>
@@ -84,7 +86,13 @@
             label-class="font-weight-bold pt-0"
             class="mb-0"
           >
-            <b-form-input id="network_name" placeholder="" required>
+            <b-form-input 
+              id="network_name" 
+              :placeholder="networkInfo.name"
+              name="name" 
+              type="text"
+              required
+            >
             </b-form-input>
           </b-form-group>
 
@@ -96,9 +104,11 @@
             class="mb-0"
           >
             <b-form-textarea
-              id="textarea"
+              id="description"
               v-model="text"
-              placeholder="Enter something..."
+              :value="networkInfo.description"
+              name="description" 
+              type="text"
               rows="3"
               max-rows="6"
             ></b-form-textarea>
@@ -111,7 +121,13 @@
             label-class="font-weight-bold pt-0"
             class="mb-0"
           >
-            <b-form-input id="network_name" placeholder="" required>
+            <b-form-input 
+              id="email" 
+              :value="networkInfo.email"
+              name="email" 
+              type="email" 
+              required
+            >
             </b-form-input>
           </b-form-group>
 
@@ -122,7 +138,13 @@
             label-class="font-weight-bold pt-0"
             class="mb-0"
           >
-            <b-form-input id="tel-1" placeholder="" required> </b-form-input>
+            <b-form-input 
+              id="tel-1" 
+              :value="networkInfo.phone1"
+              name="phone1" 
+              type="tel" 
+              required
+            > </b-form-input>
           </b-form-group>
 
           <b-form-group
@@ -132,7 +154,14 @@
             label-class="font-weight-bold pt-0"
             class="mb-0"
           >
-            <b-form-input id="network_name" placeholder="" required>
+            <b-form-input 
+              id="network_name" 
+              :value="networkInfo.phone2"
+              name="phone2" 
+              :text-field="networkInfo.phone2"
+              type="tel"  
+              required
+            >
             </b-form-input>
           </b-form-group>
 
@@ -143,8 +172,13 @@
             label-class="font-weight-bold pt-0"
             class="mb-0"
           >
-            <b-form-input id="network_name" placeholder="" required>
-            </b-form-input>
+            <b-form-input 
+              id="network_name" 
+              :value="networkInfo.address"
+              name="address" 
+              type="text"  
+              required
+            > </b-form-input>
           </b-form-group>
 
           <b-form-group
@@ -154,12 +188,13 @@
             label-class="font-weight-bold pt-0"
             class="mb-0"
           >
-            <b-form-checkbox name="check-button" switch> </b-form-checkbox>
+          <b-form-checkbox 
+            name="check-button" 
+            switch
+          > </b-form-checkbox>
           </b-form-group>
 
-          <b-button class="mt-2 " style="float:right" variant="primary">
-            Update Network</b-button
-          >
+          <b-button class="mt-2 " style="float:right" variant="primary">Update Network</b-button>
         </b-form>
       </b-container>
     </b-modal>
@@ -210,6 +245,16 @@ export default {
     SidebarCommunity
   },
 
+  computed: {
+    networkInfo() {
+      return this.$store.state.networkProfile.networkInfo;
+    },
+  },
+
+  mounted(){
+    this.getNetworkInfo() 
+  },
+
   methods: {
     openNetwork() {
       this.networkShow = false;
@@ -218,7 +263,18 @@ export default {
     addNetwork() {
       console.log("hello");
       this.showModal = !this.showModal;
-    }
+    },
+
+    getNetworkInfo() {
+      this.$store
+      .dispatch("networkProfile/getnetworkInfo")
+      .then(() => {
+        console.log('ohh yeah');
+      })
+      .catch(err => {
+        console.log({ err: err });
+      });
+    },
   }
 };
 </script>

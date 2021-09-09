@@ -1,9 +1,11 @@
 <template>
   <b-container>
-    <h5 class="a-text">Assign Role</h5>
 
+    <FlashMessage />
+
+    <h5 class="a-text">Assign Role</h5>
     <b-container class="b-bottom">
-      <b-row>
+    <b-row>
         <b-col cols="5">
           <b-form-group
             label-cols-lg="3"
@@ -12,9 +14,15 @@
             label-class="font-weight-bold pt-0"
             class="mb-0"
           >
-            <b-form-select v-model="selected">
-              <b-form-select-option :value="null">Admin</b-form-select-option>
-              <b-form-select-option value="a">User</b-form-select-option>
+            <b-form-select
+              id="follower"
+              v-model="form.follower"
+              :options="followers.people[0].user_followers"
+              name="followers"
+              value-field="followers"
+              text-field="name"
+              class="mb-3"
+            >
             </b-form-select>
           </b-form-group>
         </b-col>
@@ -27,26 +35,32 @@
             label-class="font-weight-bold pt-0"
             class="mb-0"
           >
-            <b-form-select v-model="selected" class="mb-3">
-              <b-form-select-option :value="null">Admin</b-form-select-option>
-              <b-form-select-option value="a">User</b-form-select-option>
+            <b-form-select
+              id="role"
+              v-model="form.role"
+              :options="roles"
+              name="role"
+              value-field="id"
+              text-field="name"
+              class="mb-3"
+            >
             </b-form-select>
           </b-form-group>
         </b-col>
 
+
         <b-col>
-          <b-button variant="primary" class="assign-btn">Assign</b-button>
+          <b-button variant="primary" class="" @click="assignRole()">Assign</b-button>
         </b-col>
       </b-row>
-
-      <p class="text">
+      <p class="a-text">
         Admin can manage all aspects of the Business Identity. They can create
         posts and send messages through inbox. They can respond to the delete
         comments, Approve posts, view insights, manage the business settings,
         update Business profile, assign roles and payments.
       </p>
       <br />
-      <p class="text">
+      <p class="a-text">
         Editor can create posts and send messages through inbox, They can
         respond to and delete comments, Approve posts, view insights
       </p>
@@ -54,89 +68,16 @@
 
     <div class="b-bottom">
       <b-container>
-        <h5 class="a-text">Existing Admins</h5>
-        <b-list-group>
-          <b-list class="d-flex align-items-center m-list">
-            <b-avatar class="mr-3 profile-pic"></b-avatar>
-            <span class="mr-auto username">J. Circlehead</span>
-            <span>
-              <div>
-                <b-dropdown
-                  size="lg"
-                  variant="link"
-                  toggle-class="text-decoration-none"
-                  no-caret
-                >
-                  <template #button-content>
-                    <b-icon icon="three-dots-vertical" font-scale="1"></b-icon>
-                  </template>
-                  <b-dropdown-item href="#">Edit</b-dropdown-item>
-                  <b-dropdown-item href="#"> Delete </b-dropdown-item>
-                </b-dropdown>
-              </div>
-            </span>
-          </b-list>
-
-          <b-list class="d-flex align-items-center">
-            <b-avatar
-              variant="primary"
-              text="BV"
-              class="mr-3 profile-pic"
-            ></b-avatar>
-            <span class="mr-auto">itz blec blec</span>
-            <span>
-              <div>
-                <b-dropdown
-                  size="lg"
-                  variant="link"
-                  toggle-class="text-decoration-none"
-                  no-caret
-                >
-                  <template #button-content>
-                    <b-icon icon="three-dots-vertical" font-scale="1"></b-icon>
-                  </template>
-                  <b-dropdown-item href="#">Edit</b-dropdown-item>
-                  <b-dropdown-item href="#"> Delete </b-dropdown-item>
-                </b-dropdown>
-              </div>
-            </span>
-          </b-list>
-        </b-list-group>
-      </b-container>
-    </div>
-
-    <div class="b-bottom">
-      <b-container>
         <h5 class="a-text">Existing Editors</h5>
-        <b-list-group>
+        <b-list-group v-for="editor in editors" :key="editor.id">
           <b-list class="d-flex align-items-center m-list">
-            <b-avatar class="mr-3 profile-pic"></b-avatar>
-            <span class="mr-auto username">J. Circlehead</span>
-            <span>
-              <div>
-                <b-dropdown
-                  size="lg"
-                  variant="link"
-                  toggle-class="text-decoration-none"
-                  no-caret
-                >
-                  <template #button-content>
-                    <b-icon icon="three-dots-vertical" font-scale="1"></b-icon>
-                  </template>
-                  <b-dropdown-item href="#">Edit</b-dropdown-item>
-                  <b-dropdown-item href="#"> Delete </b-dropdown-item>
-                </b-dropdown>
-              </div>
-            </span>
-          </b-list>
-
-          <b-list class="d-flex align-items-center">
-            <b-avatar
-              variant="primary"
-              text="BV"
-              class="mr-3 profile-pic"
+            <b-avatar 
+              class="mr-3" 
+              :text="editor.name"
+              :src="editor.profile_picture"
+              size="4em"
             ></b-avatar>
-            <span class="mr-auto username">itz blec blec</span>
+            <span class="mr-auto">{{editor.name}}</span>
             <span>
               <div>
                 <b-dropdown
@@ -146,23 +87,182 @@
                   no-caret
                 >
                   <template #button-content>
-                    <b-icon icon="three-dots-vertical" font-scale="1"></b-icon>
+                    <b-icon
+                      icon="three-dots-vertical"
+                      animation="cylon-vertical"
+                      font-scale="1"
+                    ></b-icon>
                   </template>
-                  <b-dropdown-item href="#">Edit</b-dropdown-item>
-                  <b-dropdown-item href="#"> Delete </b-dropdown-item>
+                  <b-dropdown-item href="#" @click="$bvModal.show('edit-editor'); selectObject(editor)">Edit</b-dropdown-item>
+                  <b-dropdown-item href="#" @click="$bvModal.show('delete-editor'); selectObject(editor)"> Delete </b-dropdown-item>
                 </b-dropdown>
               </div>
             </span>
           </b-list>
         </b-list-group>
+        <div>
+          <b-modal id="edit-editor" hide-footer>
+            <template #modal-title>
+              EDIT EDITOR: {{clickedObject.name}}
+            </template>
+            <div class="d-block text-center">
+              <h3>You : {{clickedObject.name}}!</h3>
+            </div>
+            <b-button class="mt-3" block @click="$bvModal.hide('edit-editor'); editEditor(clickedObject)">EDIT</b-button>
+          </b-modal>
+
+          <b-modal id="delete-editor" hide-footer>
+            <template #modal-title>
+              !!! <code>WARRING</code> !!!
+            </template>
+            <div class="d-block text-center">
+              <h3>You Are About To Delete: {{clickedObject.name}}!</h3>
+            </div>
+            <b-button class="mt-3" block @click="$bvModal.hide('delete-editor'); deleteEditor(clickedObject)">Delete</b-button>
+          </b-modal>
+        </div>
       </b-container>
     </div>
   </b-container>
 </template>
 
 <script>
+
 export default {
-  name: "roles"
+  name: "roles",
+  data() {
+			return {
+        clickedObject: {},
+        form: {
+          name: "",
+          role: "",
+        },
+        
+			}
+	},
+
+  computed: {
+
+    followers() {
+      return this.$store.state.businessRole.followers;
+    },
+    roles() {
+    
+       return this.$store.state.businessRole.roles;
+    },
+    editors() {
+      return this.$store.state.businessRole.editors;
+    },
+  },
+
+  
+  mounted(){
+    this.getFollowers() 
+    this.getRoles() 
+    this.displayEditor() 
+  },
+
+
+  methods:{
+     
+    getFollowers() {
+    this.$store
+      .dispatch("businessRole/getfollowers")
+      .then(() => {
+        console.log('ohh yeah');
+      })
+      .catch(err => {
+        console.log({ err: err });
+      });
+    },
+    getRoles() {
+    this.$store
+      .dispatch("businessRole/getroles")
+      .then(() => {
+        console.log('ohh yeah');
+      })
+      .catch( err => {
+        console.log({ err: err });
+      });
+    },
+    displayEditor() {
+    this.$store
+      .dispatch("businessRole/geteditors")
+      .then(() => {
+        console.log('ohh yeah');
+      })
+      .catch( err => {
+        console.log({ err: err });
+      });
+    },
+    assignRole: function(){
+     
+        this.axios.post("business/role/update/2", this.form)
+        .then(() => {
+          console.log('ohh yeah');
+
+          this.flashMessage.show({
+            status: "success",
+            message: "New Role Assigned"
+          });
+            
+        })
+        .catch(err => {
+          console.log({ err: err });
+          this.flashMessage.show({
+            status: "error",
+            message: "Unable to Assigned New Role"
+          });
+        });
+		},
+    deleteEditor: function(editor){
+      var formData = this.toFormData(editor)
+      this.axios.post("#", formData)
+      .then(() => {
+        console.log('ohh yeah');
+
+        this.flashMessage.show({
+          status: "success",
+          message: "Editor Deleted"
+        });
+          
+      })
+      .catch(err => {
+        console.log({ err: err });
+        this.flashMessage.show({
+          status: "error",
+          message: "Unable To Delete Editor"
+        });
+      });
+		},
+    
+    toFormData: function(obj){
+			var form_data = new FormData();
+			for(var key in obj){
+				form_data.append(key, obj[key]);
+			}
+			return form_data
+		},
+
+    selectObject(object){
+			this.clickedObject = object
+		},
+
+    // deleteEditor(editor) {
+    //   if (confirm('Delete ' + editor.name)) {
+    //     axios.delete(`#/${editor.id}`)
+    //     .then(response => {
+    //         this.displayEditor();
+    //         return response;
+    //     });
+    //   }
+    // }
+
+
+  },
+
+  
+
 };
 </script>
 
@@ -208,10 +308,6 @@ export default {
   .settings {
     top: -5px;
     left: -20px;
-  }
-
-  .assign-btn {
-    margin-top: 30px;
   }
 }
 </style>

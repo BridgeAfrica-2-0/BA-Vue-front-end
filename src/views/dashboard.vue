@@ -115,78 +115,36 @@
 
 <script>
 import Navbar from "@/components/navbar";
-
 import CarousselDashboard from "@/components/dasboard/carousselDashboard";
-
 import BusinessDashboard from "@/components/dasboard/businessDashboard";
-
 import ComunitiDashboard from "@/components/dasboard/comunitiDashboard";
-
 import Insights from "@/components/dasboard/insights";
-
 import CommunityActivity from "@/components/dasboard/communityActivity";
-
 import Tutorial from "@/components/dasboard/tutorial";
-
 import Profile from "@/components/dasboard/profile";
-
-import Business from "@/components/dasboard/communitybusiness";
-
+import Business from "@/components/dasboard/hotbusiness";
 import Map from "@/components/dasboard/map";
-
 import EmptyBusiness from "@/components/dasboard/emptybusiness";
-
 import Popularnetwork from "@/components/dasboard/popularnetwork";
-<<<<<<<<< Temporary merge branch 1
-=========
-//import Hotbusiness from "@/components/dasboard/hotbusiness";
-//import People from '../components/businessOwner/tabs/owner/networks/people.vue';
->>>>>>>>> Temporary merge branch 2
-
 export default {
   name: "dashboard",
   data() {
     return {
       slide: 0,
-<<<<<<<<< Temporary merge branch 1
-=========
       sliding: null,
-
       selected: "all",
       location: "any",
       category: "any",
       post: "any",
       selectedb: "owner",
-
       educatio: "any",
->>>>>>>>> Temporary merge branch 2
-
-      sliding: null,
-
-      selectedb: "owner",
-
       map: false,
-
       boptions: [
         { value: "owner", text: "Owner's Name" },
         { value: "a", text: "Business Name 1" },
         { value: "b", text: "Business Name 2" },
-<<<<<<<<< Temporary merge branch 1
         { value: "c", text: "Business Name 3" }
-      ]
-=========
-        { value: "c", text: "Business Name 3" },
       ],
-
-      optionss: [
-        { id: "all", label: "All" },
-        { id: "business", label: "Business" },
-        { id: "people", label: "People" },
-        { id: "network", label: "Network" },
-        { id: "marketplace", label: "Markeplace", notEnabled: true },
-        { id: "posts", label: "Posts" },
-      ],
-
       options: [
         { item: "all", name: "All" },
         { item: "business", name: "Business" },
@@ -217,61 +175,45 @@ export default {
         { item: "business", name: "Businesses i am following" },
         { item: "networks", name: "Networks I am following" },
       ],
-
       education: [
         { item: "any", name: "Education: Any" },
         { item: "ub", name: "University Of Buea" },
         { item: "uba", name: "University Of Yaounde" },
         { item: "uy", name: "University Of Yaounde 1" },
       ],
-
       profession: [
         { item: "any", name: "Profession: Any" },
         { item: "engineer", name: "Engineen" },
         { item: "teacher", name: "Teacher" },
         { item: "farmer", name: "Farmer" },
       ],
-
       workplace: [
         { item: "any", name: "Post: Any" },
         { item: "yaounde", name: "Yaounde" },
         { item: "douala", name: "Douala" },
         { item: "Buea", name: "Buea" },
       ],
-
       sponsoredBusinesses: [
         { title: "Business 1" },
         { title: "Business 2" },
         { title: "Business 3" },
         { title: "Business 4" },
       ],
->>>>>>>>> Temporary merge branch 2
     };
   },
   components: {
     ComunitiDashboard,
     BusinessDashboard,
-    //People,
     Business,
     CommunityActivity,
     Tutorial,
     Insights,
     Popularnetwork,
-    //Hotbusiness,
-    //SelectBusiness,
-
     Map,
-
     EmptyBusiness,
-    //SelectBH,
     Profile,
-
     CarousselDashboard,
-<<<<<<<<< Temporary merge branch 1
-    Navbar
-=========
     Navbar,
->>>>>>>>> Temporary merge branch 2
   },
   methods: {},
 };
@@ -281,7 +223,6 @@ export default {
 .icon-color {
   color: #e75c18;
 }
-
 .icons {
   color: #e75c18;
   width: 24px;
@@ -292,39 +233,32 @@ export default {
 .card-body {
   padding: 8px;
 }
-
 .card {
   padding: 0px;
   padding-top: 15px;
 }
-
 @media only screen and (min-width: 768px) {
   .titlle {
     font-size: 20px;
   }
 }
-
 @media only screen and (max-width: 768px) {
   .titlle {
     font-size: 16px;
   }
 }
-
 .card-hight {
   height: 550px;
   overflow-y: auto;
   overflow-x: hidden;
 }
-
 .logo-img {
   width: 60px;
 }
-
 @media only screen and (max-width: 768px) {
   h4 {
     font-size: 15px;
   }
-
   .logo-img {
     width: 30px;
   }
@@ -332,71 +266,56 @@ export default {
     font-size: 10px;
   }
 }
-
 .p-card {
   margin: 2px;
-
   border: 0px;
 }
-
 .search-form {
   margin-top: 10px;
   margin-bottom: 20px;
   text-align: right;
 }
-
 .m-component {
   margin: -20px;
 }
-
 .w-50 {
   width: 50%;
   height: 50px;
 }
-
 select option {
   margin: 40px;
   background: white;
   color: black;
   text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);
 }
-
 .wi-25 {
   width: 25%;
   height: 50px;
 }
-
 .b-groupe {
   background-color: orangered;
-
   border-top-right-radius: 15px;
   border-bottom-right-radius: 15px;
   border-style: none;
   color: white;
 }
-
 .custom-select {
   display: inherit;
 }
-
 .color-sit {
   color: white;
 }
-
 select {
   -webkit-appearance: none;
   -moz-appearance: none;
   text-indent: 1px;
   text-overflow: "";
 }
-
 .a-center {
   align-content: center;
   text-align: center;
-
   margin-top: 15px;
 }
-
 .div-h {
   height: 350px;
   overflow: auto;

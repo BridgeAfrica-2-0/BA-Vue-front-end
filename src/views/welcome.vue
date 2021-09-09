@@ -754,24 +754,10 @@ export default {
         { label: "(GMT-01:00) Cape Verde Is.", value: "-1" },
         { label: "(GMT-01:00) Azores", value: "-1" },
         { label: "(GMT+00:00) Casablanca, Monrovia, Reykjavik", value: "0" },
-        {
-          label:
-            "(GMT+00:00) Greenwich Mean Time : Dublin, Edinburgh, Lisbon, London",
-          value: "0",
-        },
-        {
-          label: "(GMT+01:00) Amsterdam, Berlin, Bern, Rome, Stockholm, Vienna",
-          value: "1",
-        },
-        {
-          label:
-            "(GMT+01:00) Belgrade, Bratislava, Budapest, Ljubljana, Prague",
-          value: "1",
-        },
-        {
-          label: "(GMT+01:00) Brussels, Copenhagen, Madrid, Paris",
-          value: "1",
-        },
+        { label: "(GMT+00:00) Greenwich Mean Time : Dublin, Edinburgh, Lisbon, London", value: "0", },
+        { label: "(GMT+01:00) Amsterdam, Berlin, Bern, Rome, Stockholm, Vienna", value: "1", },
+        { label: "(GMT+01:00) Belgrade, Bratislava, Budapest, Ljubljana, Prague", value: "1", },
+        { label: "(GMT+01:00) Brussels, Copenhagen, Madrid, Paris", value: "1", },
         { label: "(GMT+01:00) Sarajevo, Skopje, Warsaw, Zagreb", value: "1" },
         { label: "(GMT+01:00) West Central Africa", value: "1" },
         { label: "(GMT+02:00) Amman", value: "2" },
@@ -779,10 +765,7 @@ export default {
         { label: "(GMT+02:00) Beirut", value: "2" },
         { label: "(GMT+02:00) Cairo", value: "2" },
         { label: "(GMT+02:00) Harare, Pretoria", value: "2" },
-        {
-          label: "(GMT+02:00) Helsinki, Kyiv, Riga, Sofia, Tallinn, Vilnius",
-          value: "2",
-        },
+        { label: "(GMT+02:00) Helsinki, Kyiv, Riga, Sofia, Tallinn, Vilnius", value: "2", },
         { label: "(GMT+02:00) Jerusalem", value: "2" },
         { label: "(GMT+02:00) Minsk", value: "2" },
         { label: "(GMT+02:00) Windhoek", value: "2" },
@@ -798,20 +781,14 @@ export default {
         { label: "(GMT+05:00) Yekaterinburg", value: "5" },
         { label: "(GMT+05:00) Islamabad, Karachi, Tashkent", value: "5" },
         { label: "(GMT+05:30) Sri Jayawardenapura", value: "5.5" },
-        {
-          label: "(GMT+05:30) Chennai, Kolkata, Mumbai, New Delhi",
-          value: "5.5",
-        },
+        { label: "(GMT+05:30) Chennai, Kolkata, Mumbai, New Delhi", value: "5.5", },
         { label: "(GMT+05:45) Kathmandu", value: "5.75" },
         { label: "(GMT+06:00) Almaty, Novosibirsk", value: "6" },
         { label: "(GMT+06:00) Astana, Dhaka", value: "6" },
         { label: "(GMT+06:30) Yangon (Rangoon)", value: "6.5" },
         { label: "(GMT+07:00) Bangkok, Hanoi, Jakarta", value: "7" },
         { label: "(GMT+07:00) Krasnoyarsk", value: "7" },
-        {
-          label: "(GMT+08:00) Beijing, Chongqing, Hong Kong, Urumqi",
-          value: "8",
-        },
+        { label: "(GMT+08:00) Beijing, Chongqing, Hong Kong, Urumqi", value: "8", },
         { label: "(GMT+08:00) Kuala Lumpur, Singapore", value: "8" },
         { label: "(GMT+08:00) Irkutsk, Ulaan Bataar", value: "8" },
         { label: "(GMT+08:00) Perth", value: "8" },

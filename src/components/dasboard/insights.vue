@@ -1,12 +1,16 @@
 <template>
   <div>
-    <b-card class="  border shadow c-h" >
+    <b-card class="  border shadow c-h">
+      <span>
+        <h6 class="mb-3 pl-1 title">
+          <fas-icon class="icons" :icon="['fas', 'chart-line']" size="lg" />
 
-      <span>   
-                <h6 class="mb-3 pl-1 title">  <fas-icon class="icons" :icon="['fas', 'chart-line']" size="lg" />    
-                 
-               <b>   INSIGHTS    </b>
-                </h6>  </span>  <p class="text">  Discover how customers feel about and interact with you  </p>
+          <b> INSIGHTS </b>
+        </h6>
+      </span>
+      <p class="text">
+        Discover how customers feel about and interact with you  {{myValue.business[selectedb-2].total_shares}}
+      </p>
 
         <div class="a-content"> 
             

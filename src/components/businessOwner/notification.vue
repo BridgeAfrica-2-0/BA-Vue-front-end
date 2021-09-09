@@ -30,15 +30,18 @@
       <br />
 
       <b-row>
-        <b-col
-          cols="12"
-          class="mr-3"
-          v-for="(notification, index) in getNotificationsStore"
-          :key="index"
-        >
+        <b-col cols="12" class="mr-3" v-for="i in 6" :key="i">
           <p class="">
             <span style="display:inline-flex">
-              <input @click="select(notification, index)" type="checkbox" />
+              <b-form-checkbox
+                id="checkbox-1"
+                v-model="status"
+                name="checkbox-1"
+                value="accepted"
+                class="m-left-top"
+                unchecked-value="not_accepted"
+              >
+              </b-form-checkbox>
               <b-avatar
                 class="d-inline-block profile-pic"
                 variant="primary"
@@ -46,27 +49,22 @@
               ></b-avatar>
               <h6 class="m-0  d-inline-block ml-2 username">
                 Mapoure Agrobusiness
-                <p class="duration">{{ notification.created_at }}</p>
+                <p class="duration">1hr</p>
               </h6>
             </span>
-            <span class="float-right mt-1">
-              <fas-icon
-                @click="deleteOne(notification.id)"
-                class="primary delete ml-5"
-                :icon="['fas', 'trash']"
-            /></span>
+            <span class="float-right mt-1"> </span>
           </p>
 
           <p class="text">
-            <b v-if="notification.mark_as_read == 0">
-              {{ notification.notification_text }}</b
-            >
-            <span v-if="notification.mark_as_read == 1">
-              {{ notification.notification_text }}</span
-            >
+            Lorem Ipsum is this is just a dummy text to post simply dummy text
+            of the printing and typesetting industry. Lorem Ipsum has been the
+            industry's standard dummy text ever since the 1500s, Lorem Ipsum is
+            simply dummy text of the printing and typesetting industry. Lorem
+            Ipsum has been the industry's standard dummy text ever since the
+            1500s,
           </p>
-        </b-col>
 
+<<<<<<< HEAD
         <b-col v-if="loader" class="load">
           <b-spinner
             style="width: 7rem; height: 7rem;"
@@ -75,6 +73,9 @@
         </b-col>
         <b-col v-if="!getNotificationsStore && !loader" class="load">
           <p>No notifications to show !!</p>
+=======
+          <hr width="100%" />
+>>>>>>> 1002c8a328d569e5d4fbe271eee7a9bd4adc3e87
         </b-col>
       </b-row>
     </div>
@@ -149,10 +150,13 @@ export default {
 </script>
 
 <style scoped>
+<<<<<<< HEAD
 .load {
   display: flex;
   justify-content: center;
 }
+=======
+>>>>>>> 1002c8a328d569e5d4fbe271eee7a9bd4adc3e87
 .f-left {
   float: left;
 }

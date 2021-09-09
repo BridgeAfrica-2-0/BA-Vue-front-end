@@ -10,7 +10,6 @@ export default {
     isVerified: null,
     passwordToken: null,
     registerData: null,
-
     businessAround: null,
     peopleAround: null,
   },

@@ -53,7 +53,7 @@
       <br />
 
       <br />
-style
+      style
       <Footer />
     </b-container>
   </b-container>

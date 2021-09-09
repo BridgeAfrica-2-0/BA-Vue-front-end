@@ -1,42 +1,39 @@
 <template>
-  <a
-    class="ly-tab-item bg"
-    style=" color:yellow"
-    @click="onItemClicked">
-    <div class="ly-tab-item-icon" v-if="$parent.fixBottom"><slot name="icon"></slot></div>
-    <div class="ly-tab-item-label"> <slot></slot></div>
+  <a class="ly-tab-item bg" style=" color:yellow" @click="onItemClicked">
+    <div class="ly-tab-item-icon" v-if="$parent.fixBottom">
+      <slot name="icon"></slot>
+    </div>
+    <div class="ly-tab-item-label"><slot></slot></div>
   </a>
 </template>
 
 <script>
 export default {
-  name: 'LyTabItem',
+  name: "LyTabItem",
   computed: {
-    activeStyle () {
+    activeStyle() {
       return {
         color: this.$parent.activeColor
-      }
+      };
     }
   },
-  data () {
+  data() {
     return {
       id: (this.$parent.$children.length || 1) - 1
-    }
+    };
   },
   methods: {
-    onItemClicked () {
-      this.$parent.$emit('input', this.id)
+    onItemClicked() {
+      this.$parent.$emit("input", this.id);
     }
   }
-}
+};
 </script>
 
 <style>
-
-.bg{
-  color:black;
+.bg {
+  color: black;
 }
-
 
 .ly-tab-item {
   display: flex;
@@ -46,11 +43,10 @@ export default {
   text-decoration: none;
   text-align: center;
   padding-top: 5px;
-    padding-bottom: 5px;
+  padding-bottom: 5px;
 }
 
 .ly-tab-item-icon {
   margin: 0 auto 5px;
 }
-
 </style>

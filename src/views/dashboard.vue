@@ -194,7 +194,7 @@ export default {
       ).owner;
 
       owner = owner.map(value => {
-        this.boptions.push({ text: value.name, value: "owner" });
+        this.boptions.push({ text: value.name+" (OWNER)", value: "owner" });
         return value;
       });
 

@@ -85,7 +85,7 @@ export default {
         )
       ).business;
 
-      business = business.map(value => {
+     business.forEach(value => {
         this.business.push({
           id: value.id,
           name: value.name,
@@ -95,7 +95,6 @@ export default {
           location_description: value.location_description,
           about_business: value.about_business
         });
-        return value;
       });
     }
   },

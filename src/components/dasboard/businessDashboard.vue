@@ -23,14 +23,14 @@
       <div class="d-flex col-md-12 mt-2">
         <img class="img-fluid picture" src="@/assets/img/photo2.jpg" />
         <div class="text-lost">
-          <b>{{ business[selectedb].name }}</b>
+          <b>{{ business[selectedb - 2].name }}</b>
           <p class="mb-1">
-            {{ business[selectedb].followers }} Community <br />
+            {{ business[selectedb - 2].followers }} Community <br />
             <span class=""
               >Current Plan: <span class="text-success">Basic</span></span
             >
           </p>
-          <p class="mb-1 mb-3">{{ business[selectedb ].category }}</p>
+          <p class="mb-1 mb-3">{{ business[selectedb - 2].category }}</p>
           <p class="mb-1">
             <b-icon-person-fill class="text-primary"></b-icon-person-fill>
             Visit Profile
@@ -39,19 +39,19 @@
             <b-icon-chat-fill class="text-primary"></b-icon-chat-fill>
             Message
             <span class="badge rounded-pill bg-primary float-right mt-1">{{
-              business[selectedb ].message
+              business[selectedb - 2].message
             }}</span>
           </p>
           <p class="mb-1 ">
             <b-icon-bell-fill class="text-primary"></b-icon-bell-fill>
             Notifications
             <span class="badge rounded-pill bg-primary float-right mt-1">{{
-              business[selectedb ].notification
+              business[selectedb - 2].notification
             }}</span>
           </p>
           <p class="mb-1 ">
             <b-icon-globe class="text-primary"></b-icon-globe>
-            <a :href="business[selectedb ].website"> Visit Website</a>
+            <a :href="business[selectedb].website"> Visit Website</a>
           </p>
           <p class="mb-1 ">
             <b-icon-shop class="text-primary"></b-icon-shop>
@@ -64,7 +64,6 @@
 </template>
 
 <script>
-
 export default {
   name: "businessDashboard",
 
@@ -92,7 +91,7 @@ export default {
         )
       ).business;
 
-      business = business.map(value => {
+      business.forEach(value => {
         this.business.push({
           id: value.id,
           name: value.name,
@@ -102,7 +101,6 @@ export default {
           location_description: value.location_description,
           about_business: value.about_business
         });
-        return value;
       });
     }
   },

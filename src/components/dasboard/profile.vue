@@ -30,7 +30,7 @@
 
         <div class="text-lost">
           <h6>
-            <b class="name"> {{ item.name }} </b>
+            <b class="name"> {{ item.name }} (OWNER) </b>
           </h6>
           <p class="mb-1">
             {{ item.followers }} Community
@@ -89,7 +89,7 @@ export default {
         )
       ).owner;
 
-      owner = owner.map(value => {
+      owner.forEach(value => {
         this.owner.push({
           name: value.name,
           picture: value.picture,
@@ -97,7 +97,7 @@ export default {
           message: value.message,
           notification: value.notification
         });
-        return value;
+        console.log("owner details");
       });
     }
   },

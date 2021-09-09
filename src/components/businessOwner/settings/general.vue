@@ -1,5 +1,8 @@
 <template>
   <b-container>
+
+    <FlashMessage />
+
     <div class="b-bottomn">
       <b-button variant="primary" class="a-button-l" @click="updateGeneralInfo()">Save Changes</b-button>
       <br />
@@ -18,9 +21,9 @@
             <b-form-radio-group
               class="pt-2"
               :options="businessVisibility"
-              :aria-describedby="ariaDescribedby"
-              v-model="visibility"
+              v-model="form.visibility"
               name="visibility"
+              type="text"
               value-field="value"
               text-field="label"
             ></b-form-radio-group>
@@ -42,9 +45,9 @@
             <b-form-radio-group
               class="pt-2"
               :options="postingPermissions"
-              :aria-describedby="ariaDescribedby"
-              v-model="permissions"
+              v-model="form.permissions"
               name="permissions"
+              type="text"
               value-field="value"
               text-field="label"
             ></b-form-radio-group>
@@ -63,8 +66,7 @@
           class="mb-0"
         >
           <b-form-checkbox
-            id="checkbox-1"
-            v-model="post_approval"
+            v-model="form.post_approval"
             name="post_approval"
             value="1"
             unchecked-value="0"
@@ -86,8 +88,9 @@
         >
           <b-form-textarea
             id="textarea"
-            v-model="keywords_alert"
+            v-model="form.keywords_alert"
             name="keywords_alert"
+            type="text"
             placeholder="Enter something..."
             rows="3"
             max-rows="6"
@@ -105,25 +108,35 @@
           label-class="font-weight-bold pt-0"
           class="mb-0"
         >
-          <b-form-checkbox v-model="marketplace" name="marketplace" switch>
+          <b-form-checkbox 
+            v-model="form.marketplace" 
+            name="marketplace" 
+            switch
+            value="1"
+            unchecked-value="0"
+          >
           </b-form-checkbox>
         </b-form-group>
       </b-container>
     </div>
 
     <b-container>
-      <b-link href="#foo" class="f-left">Delete Business Identity</b-link>
+      <!-- <b-link href="#" class="f-left" @click="deleteBusiness()">Delete Business Identity</b-link> -->
+      <div>
+        <b-link class="f-left" v-b-modal.modalDeleteBusiness>Delete Business Identity</b-link>
+
+        <b-modal id="modalDeleteBusiness" title="WORNING!!!">
+          <p class="my-4">You Are About To Delete This Business!</p>
+        </b-modal>
+      </div>
     </b-container>
   </b-container>
 </template>
 
 <script>
-import { validationMixin } from "vuelidate";
-import axios from "axios";
-import { required, email, minLength } from "vuelidate/lib/validators";
+
 export default {
   name: "general",
-  mixins: [validationMixin],
   data(){
       return{
         businessVisibility: [
@@ -131,68 +144,50 @@ export default {
           { label: "Unpublish", value: "unpublish" },
         ],
         postingPermissions: [ 
-          { label: 'Admin only', value: 'publish' }, 
-          { label: 'Allow visitors/followers to post', value: 'unpublish'}
+          { label: 'Admin only', value: 'Admin only' }, 
+          { label: 'Allow visitors/followers to post', value: 'Allow visitors/followers to post'}
         ],
         form: {
-            visibility: '',
-            permissions: '',
-            post_approval: '',
-            keywords_alert: '',
-            marketplace: '',
-            show: false,
+            visibility: "",
+            permissions: "",
+            post_approval: "",
+            keywords_alert: "",
+            marketplace: "",
         }
       }
   },
-  validations: {
-    form: {
-      visibility: {
-        required,
-      },
-      permissions: {
-        required,
-      },
-      post_approval: {
-        required,
-      },
-      keywords_alert: {
-        required,
-      },
-      marketplace: {
-        required,
-      },
-    },
-  },
   methods:{
     updateGeneralInfo: function(){
-      return new Promise((resolve, reject) => {
-        let formData = new FormData();
-        formData.append("visibility", this.form.visibility);
-        formData.append("permissions", this.form.permissions);
-        formData.append("post_approval", this.form.post_approval);
-        formData.append("keywords_alert", this.form.keywords_alert);
-        formData.append("marketplace", this.form.marketplace);
-        
-        this.axios.post("business/general/update/2", formData)
-        .then(response => {
-          console.log(response);
-          this.flashMessage.show({
-            status: "success",
-            message: "Changes Made Successfuly"
-          });
-            
-          resolve(true);
-        })
-        .catch(err => {
-          console.log({ err: err });
-          this.flashMessage.show({
-            status: "error",
-            message: "Unable To Make Changes "
-          });
-          resolve(false);
+      this.axios.post("business/general/update/2", this.form)
+      .then(() => {
+        console.log(this.form);
+        this.flashMessage.show({
+          status: "success",
+          message: "Changes Made Successfuly"
+        });
+          
+      })
+      .catch(err => {
+        console.log({ err: err });
+        this.flashMessage.show({
+          status: "error",
+          message: "Unable To Make Changes "
         });
       });
-    }
+
+    },
+
+    // deleteBusiness(memId) {
+    //   axios
+    //     .delete("#" + memId)
+    //     .then(() => {
+    //         this.flashMessage.show({
+    //         status: "error",
+    //         message: "Unable To Make Changes "
+    //       });
+    //       console.log(this.result);
+    //     });
+    // }
   }
 };
 </script>

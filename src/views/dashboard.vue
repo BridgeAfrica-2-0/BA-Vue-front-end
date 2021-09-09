@@ -68,7 +68,7 @@
       <br />
 
       <b-row>
-        <comuniti-dashboard class="m-component m-3"></comuniti-dashboard> <br />
+        <comuniti-dashboard class="m-component m-3 "></comuniti-dashboard> <br />
       </b-row>
 
       <div>
@@ -193,9 +193,9 @@ export default {
         )
       ).owner;
 
-      owner = owner.map(value => {
-        this.boptions.push({ text: value.name+" (OWNER)", value: "owner" });
-        return value;
+      owner.forEach(value => {
+        this.boptions.push({ text: value.name + " (OWNER)", value: "owner" });
+
       });
 
       console.log(
@@ -210,9 +210,9 @@ export default {
           this.$store.getters["ProfileAndBusinessDetails/getdetails"]
         )
       ).business;
-      businesses = businesses.map(value => {
-        this.boptions.push({ text: value.name, value: value.id });
-        return value;
+      businesses.forEach(value => {
+        this.boptions.push({ text: value.name, value: value.indexOf(name)});
+
       });
       return this.boptions;
     }

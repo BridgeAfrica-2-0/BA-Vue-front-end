@@ -3,7 +3,7 @@
     <b-card
       class="border-0 p-0 m-0"
       style="
-    padding: 3px;"
+    padding:10px; "
     >
       <div class=" border shadow   p-tab p-3">
         <span>

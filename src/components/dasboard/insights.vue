@@ -10,7 +10,6 @@
       </span>
       <p class="text">
         Discover how customers feel about and interact with you
-        {{ myValue.business[selectedb-2].total_shares }}
       </p>
 
       <div class="a-content">

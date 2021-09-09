@@ -23,14 +23,14 @@
       <div class="d-flex col-md-12 mt-2">
         <img class="img-fluid picture" src="@/assets/img/photo2.jpg" />
         <div class="text-lost">
-          <b>{{ business[selectedb - 2].name }}</b>
+          <b>{{ business[selectedb].id }}</b>
           <p class="mb-1">
-            {{ business[selectedb - 2].followers }} Community <br />
+            followers <br />
             <span class=""
               >Current Plan: <span class="text-success">Basic</span></span
             >
           </p>
-          <p class="mb-1 mb-3">{{ business[selectedb - 2].category }}</p>
+          <p class="mb-1 mb-3">categories</p>
           <p class="mb-1">
             <b-icon-person-fill class="text-primary"></b-icon-person-fill>
             Visit Profile
@@ -38,20 +38,20 @@
           <p class="mb-1 ">
             <b-icon-chat-fill class="text-primary"></b-icon-chat-fill>
             Message
-            <span class="badge rounded-pill bg-primary float-right mt-1">{{
-              business[selectedb - 2].message
-            }}</span>
+            <span class="badge rounded-pill bg-primary float-right mt-1"
+              >messages</span
+            >
           </p>
           <p class="mb-1 ">
             <b-icon-bell-fill class="text-primary"></b-icon-bell-fill>
             Notifications
-            <span class="badge rounded-pill bg-primary float-right mt-1">{{
-              business[selectedb - 2].notification
-            }}</span>
+            <span class="badge rounded-pill bg-primary float-right mt-1"
+              >notifications</span
+            >
           </p>
           <p class="mb-1 ">
             <b-icon-globe class="text-primary"></b-icon-globe>
-            <a :href="business[selectedb].website"> Visit Website</a>
+            Visit Website
           </p>
           <p class="mb-1 ">
             <b-icon-shop class="text-primary"></b-icon-shop>
@@ -95,12 +95,21 @@ export default {
         this.business.push({
           id: value.id,
           name: value.name,
-          profilePicture: value.profilePicture,
+          profilePicture: value.picture,
           category: value.category,
           followers: value.followers,
           location_description: value.location_description,
-          about_business: value.about_business
+          about_business: value.about_business,
+          latitute: value.latitude,
+          longitute: value.longitude,
+          message: value.message,
+          notification: value.notification,
+          total_post: value.total_post,
+          total_shares: value.total_shares,
+          total_visit: value.total_visit,
+          website: value.website
         });
+        console.log("Business details");
       });
     }
   },

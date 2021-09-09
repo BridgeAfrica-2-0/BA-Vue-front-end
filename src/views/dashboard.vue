@@ -68,7 +68,8 @@
       <br />
 
       <b-row>
-        <comuniti-dashboard class="m-component m-3 "></comuniti-dashboard> <br />
+        <comuniti-dashboard class="m-component m-3 "></comuniti-dashboard>
+        <br />
       </b-row>
 
       <div>
@@ -211,7 +212,7 @@ export default {
         )
       ).business;
       businesses.forEach(value => {
-        this.boptions.push({ text: value.name, value: value.indexOf(name)});
+        this.boptions.push({ text: value.name, value:value.id);
 
       });
       return this.boptions;

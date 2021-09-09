@@ -147,8 +147,8 @@ export default {
     About,
     Media,
     MarketPlace,
-    Networks,
     Community,
+    Networks,
   },
 
   data() {

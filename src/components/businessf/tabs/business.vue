@@ -88,6 +88,7 @@
                 >
                   <i class="fas fa-map-marked-alt  fa-lg btn-icon "></i>
                   <span class="btn-text"></span>
+                  <span class="btn-text">Direction</span>
                 </b-button>
               </b-col>
             </b-row>
@@ -183,7 +184,7 @@
                   variant="primary"
                 >
                   <i class="fas fa-map-marked-alt  fa-lg btn-icon "></i>
-                  <span class="btn-text"></span>
+                  <span class="btn-text">Direction</span>
                 </b-button>
               </b-col>
             </b-row>

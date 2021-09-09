@@ -62,7 +62,7 @@ export default {
           OTP: this.code,
           phone: this.$store.state.auth.passwordToken.user.phone,
         })
-        .then((response) => {
+        .then(response => {
           if (response.status === 200) {
             console.log(response);
             this.$router.push({ name: "RecoverPass3" });
@@ -70,7 +70,7 @@ export default {
             console.log(response.data);
           }
         })
-        .catch((err) => {
+        .catch(err => {
           if (err.response.status === 422) {
             console.log({ err: err });
             console.log(err.response.data.message);

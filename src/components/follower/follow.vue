@@ -2,9 +2,7 @@
   <div>
     <div class="row follow">
       <div class="col">
-        <b-list-group-item
-          class="d-flex align-items-center mb-4 item"
-        >
+        <b-list-group-item class="d-flex align-items-center mb-4 item">
           <b-avatar class="mr-3"></b-avatar>
           <div class="datails">
             <div class="row">
@@ -29,7 +27,7 @@ export default {};
 </script>
 
 <style scoped>
-.item{
+.item {
   border: none;
 }
 @media only screen and (max-width: 768px) {

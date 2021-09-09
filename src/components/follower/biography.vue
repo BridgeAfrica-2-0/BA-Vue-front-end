@@ -5,7 +5,9 @@
       <div>
         <div class="row">
           <div class="col">
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero </p>
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero
+            </p>
           </div>
         </div>
       </div>
@@ -17,10 +19,10 @@
 export default {
   data() {
     return {
-      defaultBio: "",
+      defaultBio: ""
     };
   },
-  methods: {},
+  methods: {}
 };
 </script>
 

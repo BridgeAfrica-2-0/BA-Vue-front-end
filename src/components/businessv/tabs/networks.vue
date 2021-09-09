@@ -4,9 +4,8 @@
       <div class="networks ml-4 box">
         <div class="ml-4 sub" v-for="(post, index) in posts" :key="index">
           <b-card class="mb-2">
-     
-              <b-img width="230" :src="post.image"></b-img>
-  
+            <b-img width="230" :src="post.image"></b-img>
+
             <div>
               <h1>{{ post.title }}</h1>
               <b-row>
@@ -73,7 +72,14 @@ export default {
           image: "https://picsum.photos/300/150/?image=41",
           title: "Title 2",
           text:
-            " Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum quam, doloribus id sit consequuntur tempora molestiae blanditiis.",
+            " Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum quam, doloribus id sit consequuntur tempora molestiae blanditiis."
+        },
+        {
+          id: 1,
+          image: "https://picsum.photos/300/150/?image=41",
+          title: "Title 2",
+          text:
+            " Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum quam, doloribus id sit consequuntur tempora molestiae blanditiis."
         },
         {
           id: 1,
@@ -81,6 +87,14 @@ export default {
           title: "Title 2",
           text:
             " Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum quam, doloribus id sit consequuntur tempora molestiae blanditiis.",
+          state: "1"
+        },
+        {
+          id: 1,
+          image: "https://picsum.photos/300/150/?image=41",
+          title: "Title 2",
+          text:
+            " Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum quam, doloribus id sit consequuntur tempora molestiae blanditiis."
         },
         {
           id: 1,
@@ -88,24 +102,9 @@ export default {
           title: "Title 2",
           text:
             " Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum quam, doloribus id sit consequuntur tempora molestiae blanditiis.",
-          state: "1",
-        },
-        {
-          id: 1,
-          image: "https://picsum.photos/300/150/?image=41",
-          title: "Title 2",
-          text:
-            " Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum quam, doloribus id sit consequuntur tempora molestiae blanditiis.",
-        },
-        {
-          id: 1,
-          image: "https://picsum.photos/300/150/?image=41",
-          title: "Title 2",
-          text:
-            " Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum quam, doloribus id sit consequuntur tempora molestiae blanditiis.",
-          state: "1",
-        },
-      ],
+          state: "1"
+        }
+      ]
     };
   },
   methods: {
@@ -115,8 +114,8 @@ export default {
 
     addNetwork() {
       this.showModal = !this.showModal;
-    },
-  },
+    }
+  }
 };
 </script>
 

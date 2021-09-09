@@ -6,72 +6,66 @@
 
       <span> <h6 class="title mt-3 ">  <fas-icon class=" icons icon-color" :icon="['fab', 'readme']"  size="lg" />   <b> Post </b>  </h6>   </span>
 
-   <div class="s-card " >
-
-   
+      <div class="s-card ">
 
 
-
-    <div>
-
-
-
-      <b-row class="mt-0">
-        <b-col cols="12" class="mt-4">
-          <b-row>
-            <b-col cols="2" md="1" class="m-0 p-0">
-              <b-avatar
-                class="d-inline-block avat"
-                variant="primary"
-                src="https://www.fivesquid.com/pics/t2/1594480468-145752-1-1.jpg"
-              ></b-avatar>
-            </b-col>
-            <b-col cols="10" md="11" class="pt-2">
-              <h5 class="m-0 font-weight-bolder">
-                Heavy Gym
-                <span class="float-right"> </span>
-              </h5>
-              <p class="duration">1h Ago</p>
-            </b-col>
-          </b-row>
-          <b-row>
-            <b-col cols="12" class="mt-2">
-              <p class="post-text">
-                Lorem Ipsum has been the industry's standard dummy text ever
-                since the 1500s, when an unknown printer took a galley of type
-                and scrambled it to make a type specimen book. It has survived
-                not only five centuries, but also the leap into electronic
-                typesetting, remaining essentially unchanged.😛
-              </p>
-            </b-col>
-          </b-row>
-          <b-row>
-            <b-col cols="12" class="mt-2">
-              <div class="">
-                <img
-                  class="img-fluid post-container"
-                  src="https://pbs.twimg.com/media/DoNa_wKUUAASSCF.jpg"
-                  alt="Photo1"
-                />
-              </div>
-            </b-col>
-            <b-col class="mt-1">
-              <span class="mr-3"
-                ><b-icon
-                  icon="suit-heart"
-                  variant="primary"
-                  aria-hidden="true"
-                ></b-icon>
-                23</span
-              >
-              <span
-                ><b-icon
-                  icon="chat-fill"
-                  variant="primary"
-                  aria-hidden="true"
-                ></b-icon>
-                123</span
-              >
+        <div>
+          <b-row class="mt-0">
+            <b-col cols="12" class="mt-4">
+              <b-row>
+                <b-col cols="2" md="1" class="m-0 p-0">
+                  <b-avatar
+                    class="d-inline-block avat"
+                    variant="primary"
+                    src="https://www.fivesquid.com/pics/t2/1594480468-145752-1-1.jpg"
+                  ></b-avatar>
+                </b-col>
+                <b-col cols="10" md="11" class="pt-2">
+                  <h5 class="m-0 font-weight-bolder">
+                    Heavy Gym
+                    <span class="float-right"> </span>
+                  </h5>
+                  <p class="duration">1h Ago</p>
+                </b-col>
+              </b-row>
+              <b-row>
+                <b-col cols="12" class="mt-2">
+                  <p class="post-text">
+                    Lorem Ipsum has been the industry's standard dummy text ever
+                    since the 1500s, when an unknown printer took a galley of
+                    type and scrambled it to make a type specimen book. It has
+                    survived not only five centuries, but also the leap into
+                    electronic typesetting, remaining essentially unchanged.😛
+                  </p>
+                </b-col>
+              </b-row>
+              <b-row>
+                <b-col cols="12" class="mt-2">
+                  <div class="">
+                    <img
+                      class="img-fluid post-container"
+                      src="https://pbs.twimg.com/media/DoNa_wKUUAASSCF.jpg"
+                      alt="Photo1"
+                    />
+                  </div>
+                </b-col>
+                <b-col class="mt-1">
+                  <span class="mr-3"
+                    ><b-icon
+                      icon="suit-heart"
+                      variant="primary"
+                      aria-hidden="true"
+                    ></b-icon>
+                    23</span
+                  >
+                  <span
+                    ><b-icon
+                      icon="chat-fill"
+                      variant="primary"
+                      aria-hidden="true"
+                    ></b-icon>
+                    123</span
+                  >
 
               <span>
                 <fas-icon class="primary ml-3" :icon="['fas', 'share']" />

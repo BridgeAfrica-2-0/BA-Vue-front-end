@@ -30,7 +30,6 @@
       <br />
 
       <b-row>
-<<<<<<< HEAD
         <b-col
           cols="12"
           class="mr-3"
@@ -40,20 +39,6 @@
           <p class="">
             <span style="display:inline-flex">
               <input @click="select(notification, index)" type="checkbox" />
-=======
-        <b-col cols="12" class="mr-3" v-for="i in 6" :key="i">
-          <p class="">
-            <span style="display:inline-flex">
-              <b-form-checkbox
-                id="checkbox-1"
-                v-model="status"
-                name="checkbox-1"
-                value="accepted"
-                class="m-left-top"
-                unchecked-value="not_accepted"
-              >
-              </b-form-checkbox>
->>>>>>> 7f397c25f587f4d66699556ebaf14c056ee5b227
               <b-avatar
                 class="d-inline-block profile-pic"
                 variant="primary"
@@ -61,38 +46,6 @@
               ></b-avatar>
               <h6 class="m-0  d-inline-block ml-2 username">
                 Mapoure Agrobusiness
-<<<<<<< HEAD
-                <p class="duration">{{ notification.created_at }}</p>
-              </h6>
-            </span>
-            <span class="float-right mt-1">
-              <fas-icon
-                @click="deleteOne(notification.id)"
-                class="primary delete ml-5"
-                :icon="['fas', 'trash']"
-            /></span>
-          </p>
-
-          <p class="text">
-            <b v-if="notification.mark_as_read == 0">
-              {{ notification.notification_text }}</b
-            >
-            <span v-if="notification.mark_as_read == 1">
-              {{ notification.notification_text }}</span
-            >
-          </p>
-        </b-col>
-
-        <b-col v-if="loader" class="loader">
-          <b-spinner
-            style="width: 7rem; height: 7rem;"
-            variant="primary"
-          ></b-spinner>
-        </b-col>
-        <b-col v-if="!getNotificationsStore && !loader" class="loader">
-          <p>No notifications to show !!</p>
-        </b-col>
-=======
                 <p class="duration">1hr</p>
               </h6>
             </span>
@@ -110,7 +63,6 @@
 
           <hr width="100%" />
         </b-col>
->>>>>>> 7f397c25f587f4d66699556ebaf14c056ee5b227
       </b-row>
     </div>
   </div>
@@ -156,7 +108,7 @@ export default {
     deleteAll(data) {
       this.checked = false;
       let ids = [];
-      data.forEach((element) => {
+      data.forEach(element => {
         ids.push(element.id);
       });
       this.deleteNotifications(ids);
@@ -168,7 +120,7 @@ export default {
 
     // select all the notifications
     selectall() {
-      this.getNotificationsStore.forEach((element) => {
+      this.getNotificationsStore.forEach(element => {
         this.selected.push(element);
       });
     },
@@ -184,13 +136,6 @@ export default {
 </script>
 
 <style scoped>
-<<<<<<< HEAD
-.loader {
-  display: flex;
-  justify-content: center;
-}
-=======
->>>>>>> 7f397c25f587f4d66699556ebaf14c056ee5b227
 .f-left {
   float: left;
 }

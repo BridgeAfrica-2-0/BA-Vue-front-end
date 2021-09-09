@@ -117,11 +117,7 @@ Vue.use(IconsPlugin);
 Vue.use(VueGoogleMaps, {
   load: {
     key: "AIzaSyAGZU6cqra18t1fhN1AbzRsEc_pgt7n2C8",
-<<<<<<< HEAD
-    libraries: "places",
-=======
     libraries: "places"
->>>>>>> 7f397c25f587f4d66699556ebaf14c056ee5b227
   },
   autobindAllEvents: false,
   installComponents: true,
@@ -148,12 +144,8 @@ new Vue({
       (response) => response,
       (error) => {
         if (error.response.status === 401) {
-<<<<<<< HEAD
-          this.$store.dispatch("auth/logout");
-=======
          // this.$store.dispatch("auth/logout");
          console.log("error has occure");
->>>>>>> 7f397c25f587f4d66699556ebaf14c056ee5b227
         }
         return Promise.reject(error);
       }

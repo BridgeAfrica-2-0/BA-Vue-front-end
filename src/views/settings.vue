@@ -262,20 +262,12 @@ export default {
     vertical() {
       if (this.size > 992) return true;
       return false;
-<<<<<<< HEAD
-    },
-=======
     }
->>>>>>> 7f397c25f587f4d66699556ebaf14c056ee5b227
   },
 
   data() {
     return {
-<<<<<<< HEAD
-      size: 0,
-=======
       size: 0
->>>>>>> 7f397c25f587f4d66699556ebaf14c056ee5b227
     };
   },
 
@@ -292,11 +284,7 @@ export default {
       that.size = window.innerWidth;
       console.log("lolo");
     }
-<<<<<<< HEAD
-  },
-=======
   }
->>>>>>> 7f397c25f587f4d66699556ebaf14c056ee5b227
 };
 </script>
 

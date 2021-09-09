@@ -1,19 +1,6 @@
 <template>
   <div>
     <b-container fluid style="padding-left:30px; padding-right:30px">
-<<<<<<< HEAD
-      <b-container
-        class="bb-bottom"
-        v-for="(post, index) in posts"
-        :key="index"
-      >
-        <b-list class="d-flex align-items-center m-list">
-          <b-avatar class="mr-3 profile-pic"></b-avatar>
-          <span class="mr-auto username">
-            {{ post.name }}
-            <p class="duration">{{ post.time }}</p>
-          </span>
-=======
       <b-container class="bb-bottom">
         <b-list class="d-flex align-items-center m-list">
           <b-avatar class="mr-3 profile-pic"></b-avatar>
@@ -61,7 +48,6 @@
             <p class="duration">1hr</p>
           </span>
 
->>>>>>> 7f397c25f587f4d66699556ebaf14c056ee5b227
           <span class=" ">
             <div>
               <b-dropdown
@@ -73,17 +59,8 @@
                 <template #button-content>
                   <b-icon icon="three-dots-vertical" font-scale="1"></b-icon>
                 </template>
-<<<<<<< HEAD
-                <b-dropdown-item href="#" @click="approvePost(post)">
-                  Approve</b-dropdown-item
-                >
-                <b-dropdown-item href="#" @click="unApprovePost(post)">
-                  Un Approved
-                </b-dropdown-item>
-=======
                 <b-dropdown-item href="#">Approve</b-dropdown-item>
                 <b-dropdown-item href="#"> Un Approve </b-dropdown-item>
->>>>>>> 7f397c25f587f4d66699556ebaf14c056ee5b227
               </b-dropdown>
             </div>
           </span>
@@ -104,7 +81,7 @@
 </template>
 
 <script>
-import axios from 'axios'
+import axios from "axios";
 
 export default {
   name: "pending",
@@ -124,28 +101,29 @@ export default {
   computed: {},
   beforeMount() {
     // get the ending post
-    axios.defaults.headers.common['Authorization'] = 'Bearer '  + localStorage.getItem('access_token');
-    this.getPosts()
+    axios.defaults.headers.common["Authorization"] =
+      "Bearer " + localStorage.getItem("access_token");
+    this.getPosts();
   },
   methods: {
-    getPosts(){
+    getPosts() {
       // get pending posts
     },
-    approvePost(post){
-      let ids = []
+    approvePost(post) {
+      let ids = [];
       let item = {
-        id:null
-      }
-      item.id = post.id
-      ids.push(item)
-       axios.post('/business/post-approve',ids).then(() => {
-         // code goes here 
-         this.getPosts()
-       })
+        id: null,
+      };
+      item.id = post.id;
+      ids.push(item);
+      axios.post("/business/post-approve", ids).then(() => {
+        // code goes here
+        this.getPosts();
+      });
     },
-    unApprovePost(post){
+    unApprovePost(post) {
       // Un approve the post
-    }
+    },
   },
 };
 </script>

@@ -113,17 +113,10 @@ export default {
         { text: "Handicfraft", value: "Handicfraft" },
         { text: "Electronics", value: "Electronics" },
         { text: "Restaurant", value: "Restaurant" },
-<<<<<<< HEAD
-        { text: "clothing", value: "clothing" },
-      ],
-    };
-  },
-=======
         { text: "clothing", value: "clothing" }
       ]
     };
   }
->>>>>>> 7f397c25f587f4d66699556ebaf14c056ee5b227
 };
 </script>
 

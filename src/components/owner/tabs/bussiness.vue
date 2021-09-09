@@ -472,11 +472,7 @@
                 <b-row>
                   <b-col md="3" xl="3" lg="5" cols="5" sm="3">
                     <div class="center-img">
-<<<<<<< HEAD
-                      <splide :options="categories" class="r-image">
-=======
                       <splide :options="options" class="r-image">
->>>>>>> 7f397c25f587f4d66699556ebaf14c056ee5b227
                         <splide-slide cl>
                           <img
                             src="https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg"
@@ -536,11 +532,7 @@ export default {
         { item: "Hotels", name: "Hotels" },
         { item: "station", name: " station  " },
         { item: "Mayor_concils", name: "Mayor_concils" },
-<<<<<<< HEAD
-        { item: "Taxis service", name: "Taxis service" },
-=======
         { item: "Taxis service", name: "Taxis service" }
->>>>>>> 7f397c25f587f4d66699556ebaf14c056ee5b227
       ],
 
       fieldset1: true,

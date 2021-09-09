@@ -20,25 +20,11 @@
               </md-field>
             </b-form-group>
 
-<<<<<<< HEAD
-            <b-row class="mt-2">
-              <b-col cols="6"> </b-col>
-              <b-col cols="6">
-                <b-button
-                  class="btn btn-primary button float-right"
-                  @click.prevent="next"
-                >
-                  Next
-                </b-button>
-              </b-col>
-            </b-row>
-=======
              <b-row class="mt-2">  <b-col cols="6">  </b-col>    <b-col cols="6"> 
             <b-button class="btn btn-primary button float-right"  @click.prevent="next" > Next </b-button>  </b-col>  </b-row>
             
 
            
->>>>>>> 7f397c25f587f4d66699556ebaf14c056ee5b227
           </b-form>
         </div>
       </b-card>
@@ -68,15 +54,9 @@ export default {
       axios
         .post(otpVerifcationUrl, {
           OTP: this.code,
-<<<<<<< HEAD
-          phone: this.$store.state.auth.passwordToken.user.phone,
-        })
-        .then((response) => {
-=======
           phone: this.$store.state.auth.passwordToken.user.phone
         })
         .then(response => {
->>>>>>> 7f397c25f587f4d66699556ebaf14c056ee5b227
           if (response.status === 200) {
             console.log(response);
             this.$router.push({ name: "RecoverPass3" });
@@ -84,11 +64,7 @@ export default {
             console.log(response.data);
           }
         })
-<<<<<<< HEAD
-        .catch((err) => {
-=======
         .catch(err => {
->>>>>>> 7f397c25f587f4d66699556ebaf14c056ee5b227
           if (err.response.status === 422) {
             console.log({ err: err });
             console.log(err.response.data.message);
@@ -96,21 +72,12 @@ export default {
             this.flashMessage.show({
               status: "error",
 
-<<<<<<< HEAD
-              message: err.response.data.message,
-            });
-          }
-        });
-    },
-  },
-=======
               message: err.response.data.message
             });
           }
         });
     }
   }
->>>>>>> 7f397c25f587f4d66699556ebaf14c056ee5b227
 };
 </script>
 

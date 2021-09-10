@@ -1,5 +1,6 @@
 <template>
   <b-container>
+    <flashMessage />
     <div class="">
       <b-container>
         <b-form-group
@@ -12,7 +13,7 @@
           <b-form-group class="mb-0" v-slot="{ ariaDescribedby }">
             <b-form-radio-group
               class="pt-2 text"
-              :options="['Public', 'Private']"
+              :options="['Publics', 'Private']"
               :aria-describedby="ariaDescribedby"
               v-model="form.privacy"
             ></b-form-radio-group>
@@ -36,7 +37,7 @@
               class="pt-2 text "
               :options="['Admin only', 'Allow visitors/followers to post']"
               :aria-describedby="ariaDescribedby"
-              v-model="form.PostingPermissions"
+              v-model="form.post_permission"
             ></b-form-radio-group>
           </b-form-group>
         </b-form-group>
@@ -59,7 +60,7 @@
             name="checkbox-1"
             value="accepted"
             unchecked-value="not_accepted"
-            v-model="form.PostApproval"
+            v-model="form.post_approval"
           >
             All posts must be approved by an admin
           </b-form-checkbox>
@@ -69,7 +70,9 @@
     </div>
 
     <b-container>
-      <b-link href="#foo" class="f-left text" v-on:click="deleteNetwork">Delete Network</b-link>
+      <b-link href="#foo" class="f-left text" v-on:click="deleteNetwork"
+        >Delete Network</b-link
+      >
     </b-container>
 
     <div class="b-bottomn">
@@ -89,41 +92,38 @@ export default {
     return {
       form: {
         privacy: "",
-        PostingPermissions: "",
-        PostApproval: ""
-      }
+        post_permission: "",
+        post_approval: ""
+      },
+      network_id: ""
     };
   },
 
   methods: {
     submit() {
-      axios.post("", this.form).then(
+      this.axios.post("/network/generalSettings/1", this.form).then(
         function(response) {
           // Handle success
         }.bind(this)
       );
       console.log(this.form);
+      this.flashMessage.show({
+        status: "success",
+        message: "Changes Made Successfuly"
+      });
     },
 
     deleteNetwork() {
-      this.$axios.delete("")
-        .then( res => {
-          let { status, data, error } = res.data;
-          if(status) {
-            this.flashMessage.success({
-              title: 'Don\'t Warry',
-              message: 'Be Happy!',
-              time: 5000,
-              flashMessageStyle: {
-                backgroundColor: 'linear-gradient(#e66465, #9198e5)'
-              }
-            });
-          }
-          else {
-            this.flashMessage.error({title: error.name || 'Error', message: error.message});
-          }
-        })
-        .catch();
+      this.$axios
+        .post("/network", this.network_id)
+        .then(function(response){
+
+        }.bind(this));
+      console.log(this.form);
+      this.flashMessage.show({
+        status: "success",
+        message: "Deleted Successfuly"
+      });
     }
   }
 };

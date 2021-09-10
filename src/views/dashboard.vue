@@ -212,7 +212,7 @@ export default {
         )
       ).business;
       businesses.forEach(value => {
-        this.boptions.push({ text: value.name, value:value.id);
+        this.boptions.push({ text: value.name, value:value.id});
 
       });
       return this.boptions;

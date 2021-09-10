@@ -7,25 +7,6 @@ export default {
     token: "8|VjFtS2m3B9YuCz5Fw0r94gkWiCs0p9MhfrMpMDZW",
     networkInfo: []
   },
-  // state: {
-  //   token: "1|l03kpc4VV9SgYtaebfNXbclriJR9fANkZHSSRVoT",
-  //   networkInfo: [],
-  //   roles: [],
-  //   editors: [
-  //     {
-  //       id: "S001",
-  //       name: "Prime",
-  //       username: "Clet",
-  //       email: "primeclet89@gmail.com"
-  //     },
-  //     {
-  //       id: "S002",
-  //       name: "John",
-  //       username: "Doe",
-  //       email: "jondoe@gmail.com"
-  //     }
-  //   ]
-  // },
 
   getters: {
     getnetworkInfo(state) {

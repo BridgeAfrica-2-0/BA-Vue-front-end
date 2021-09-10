@@ -11,8 +11,8 @@ import dashboardcommunity from "./dashboardcommunity";
 import axios from "axios";
 Vue.use(Vuex);
 // axios.defaults.baseURL = process.env.VUE_APP_API_URL;
-axios.defaults.baseURL = "http://team3dev.maxinemoffett.com/api/v1/";
-// axios.defaults.baseURL = "https://8c43-154-72-150-46.ngrok.io/api/v1/";
+// axios.defaults.baseURL = "http://team3dev.maxinemoffett.com/api/v1/";
+axios.defaults.baseURL = "https://caae-154-72-150-79.ngrok.io/api/v1/";
 
 export default new Vuex.Store({
   modules: {

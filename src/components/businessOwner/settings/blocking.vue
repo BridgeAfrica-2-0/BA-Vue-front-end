@@ -14,7 +14,7 @@
         <b-list class="d-flex align-items-center">
           <b-avatar
             variant="primary"
-            :text="blockuser.name"
+            :text="blockuser.name.charAt(0)"
             :src="blockuser.profile_picture"
             class="mr-3"
             size="4em"

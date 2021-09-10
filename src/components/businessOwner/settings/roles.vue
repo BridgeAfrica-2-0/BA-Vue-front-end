@@ -73,7 +73,7 @@
           <b-list class="d-flex align-items-center m-list">
             <b-avatar 
               class="mr-3" 
-              :text="editor.name"
+              :text="editor.name.charAt(0)"
               :src="editor.profile_picture"
               size="4em"
             ></b-avatar>

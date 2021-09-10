@@ -58,7 +58,6 @@
             </b-col>
           </b-row>
         </b-container>
-
         <h6 class="mt-2 font-weight-bolder title ">About</h6>
         <p class="text-justify text">
           Lorem Ipsum is simply dummy text of the printing and typesetting
@@ -68,8 +67,6 @@
           <span class="d-inline-block float-right">
             <a href="#">lire la Suite</a>
           </span>
-          {{networkInfo.name}}
-          {{networkInfo}}
         </p>
       </b-card-text>
     </b-card>
@@ -88,7 +85,8 @@
           >
             <b-form-input 
               id="network_name" 
-              :placeholder="networkInfo.name"
+              v-model="updateNetwork_form.name"
+              :placeholder="networkInfo[0].name"
               name="name" 
               type="text"
               required
@@ -105,12 +103,13 @@
           >
             <b-form-textarea
               id="description"
-              v-model="text"
-              :value="networkInfo.description"
+              v-model="updateNetwork_form.description"
+              :placeholder="networkInfo[0].description"
               name="description" 
               type="text"
               rows="3"
               max-rows="6"
+              required
             ></b-form-textarea>
           </b-form-group>
 
@@ -123,7 +122,8 @@
           >
             <b-form-input 
               id="email" 
-              :value="networkInfo.email"
+              v-model="updateNetwork_form.email"
+              :placeholder="networkInfo[0].email"
               name="email" 
               type="email" 
               required
@@ -140,7 +140,8 @@
           >
             <b-form-input 
               id="tel-1" 
-              :value="networkInfo.phone1"
+              v-model="updateNetwork_form.phone1"
+              :placeholder="networkInfo[0].phone1"
               name="phone1" 
               type="tel" 
               required
@@ -155,10 +156,10 @@
             class="mb-0"
           >
             <b-form-input 
-              id="network_name" 
-              :value="networkInfo.phone2"
+              id="tel-2" 
+              v-model="updateNetwork_form.phone2"
               name="phone2" 
-              :text-field="networkInfo.phone2"
+              :placeholder="networkInfo[0].phone2"
               type="tel"  
               required
             >
@@ -174,7 +175,8 @@
           >
             <b-form-input 
               id="network_name" 
-              :value="networkInfo.address"
+              v-model="updateNetwork_form.address"
+              :placeholder="networkInfo[0].address"
               name="address" 
               type="text"  
               required
@@ -190,12 +192,16 @@
           >
           <b-form-checkbox 
             name="check-button" 
+            v-model="updateNetwork_form.allow_business"
             switch
+            value="1"
+            unchecked-value="0"
           > </b-form-checkbox>
           </b-form-group>
 
-          <b-button class="mt-2 " style="float:right" variant="primary">Update Network</b-button>
+          <b-button class="mt-2 " style="float:right" variant="primary" @click="updateNetwork()">Update Network</b-button>
         </b-form>
+        <FlashMessage />
       </b-container>
     </b-modal>
 
@@ -237,7 +243,16 @@ export default {
     return {
       networkShow: true,
       showModal: false,
-      text: ""
+      text: "",
+      updateNetwork_form: {
+        name: "",
+        description: "",
+        email: "",
+        phone1: "",
+        phone2: "",
+        address: "",
+        allow_business:""
+      }
     };
   },
 
@@ -273,6 +288,25 @@ export default {
       })
       .catch(err => {
         console.log({ err: err });
+      });
+    },
+
+    updateNetwork: function(){
+      this.axios.post("network/edit-informaions/"+this.networkInfo[0].id, this.updateNetwork_form)
+      .then(() => {
+        console.log(this.updateNetwork_form);
+        this.flashMessage.show({
+          status: "success",
+          message: "Changes Made Successfuly"
+        });
+          
+      })
+      .catch(err => {
+        console.log({ err: err });
+        this.flashMessage.show({
+          status: "error",
+          message: "Unable To Make Changes "
+        });
       });
     },
   }

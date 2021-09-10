@@ -130,7 +130,10 @@
           <div class="d-block text-center">
             <h3>Delete Business: {{clickedObject.id}}!</h3>
           </div>
-          <b-button class="mt-3" block @click="$bvModal.hide('delete-business'); deleteBusiness(clickedObject.id)">Delete Business</b-button>
+          <!-- <b-button class="mt-3" block @click="$bvModal.hide('delete-business'); deleteBusiness(clickedObject.id)">Delete Business</b-button> -->
+          <b-button class="mt-2 " style="float:right" variant="primary" @click="$bvModal.hide('delete-business'); deleteBusiness(clickedObject.id)">Delete Business</b-button>
+            
+          <b-button class="mt-2 " style="float:right" variant="primary" @click="$bvModal.hide('delete-business')">Cancel</b-button>
         </b-modal>
       </div>
     </b-container>
@@ -144,6 +147,7 @@ export default {
   data(){
       return{
         clickedObject: {},
+        busiess_id: "",
         businessVisibility: [
           { label: "Published", value: "publish" },
           { label: "Unpublish", value: "unpublish" },

@@ -5,24 +5,24 @@
 
       <b-card-text>
         <p>
-          <b-icon icon="briefcase-fill" class="primary"></b-icon> Agriculture
+          <b-icon icon="briefcase-fill" class="primary"></b-icon>  {{business_intro.category}}     
         </p>
-        <p><b-icon icon="search" class="primary"></b-icon> Chicken Seller</p>
+        <p><b-icon icon="search" class="primary"></b-icon>  {{business_intro.keywords}} </p>
         <p>
           <b-icon icon="geo-alt-fill" class="primary"></b-icon> Mokolo, Yaounde,
           Cameroon
         </p>
         <p><b-icon icon="link" class="primary"></b-icon> www.business.com</p>
         <p>
-          <b-icon icon="people-fill" class="primary"></b-icon> 1.1M Community
+          <b-icon icon="people-fill" class="primary"></b-icon>  {{business_intro.community}} Community
         </p>
         <p>
           <b-icon icon="telephone-fill" class="primary"></b-icon>
-          +1(542) 565- 536
+            {{business_intro.phone}}
         </p>
         <p>
           <b-icon icon="envelope-fill" class="primary"></b-icon>
-          info@business.com
+         {{business_intro.email}}
         </p>
         <p>
           <b-icon icon="clock" class="primary"></b-icon>
@@ -36,22 +36,41 @@
           </b-dropdown>
         </p>
       </b-card-text>
-      <iframe
-        src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d48389.732999183005!2d-74.006227!3d40.710128!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xb89d1fe6bc499443!2sDowntown%20Conference%20Center!5e0!3m2!1sen!2sbg!4v1611866634082!5m2!1sen!2sbg"
-        width="290"
-        height="200"
-        frameborder="0"
-        class="border-0"
-        allowfullscreen=""
-        aria-hidden="false"
-        tabindex="0"
-      ></iframe>
+      
+
+          <GmapMap
+      :center='position'
+      :zoom='12'
+      style='width:100%;  height: 250px;'
+    >
+      <GmapMarker
+       
+       
+        :position="position"
+       
+      />
+    </GmapMap>
+
     </b-card>
   </div>
 </template>
 
 <script>
-export default {};
+export default {
+
+    computed: {
+
+  
+
+      business_intro() {
+      return  this.$store.state.businessOwner.businessInfo;  
+
+    
+    }
+
+  },
+
+};
 </script>
 
 <style></style>

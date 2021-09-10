@@ -205,7 +205,7 @@
       </b-container>
     </b-modal>
 
-    <b-modal id="modal-4" title="Upload Profile Picture">
+    <b-modal id="modal-4" title="Upload Profile Picture" @ok="submitFile">
       <div class="w3-container">
         <div class="row pb-3">
           <div
@@ -216,7 +216,7 @@
               <fas-icon class="primary" :icon="['fas', 'upload']" />
             </h1>
             <div>
-              <input type="file" id="img" name="img" accept="image/*" />
+              <input type="file" id="file" name="img" ref="file" accept="image/*" @change="handleFileUpload()"/>
             </div>
             <h4>Upload a New picture</h4>
           </div>
@@ -227,6 +227,7 @@
             </h1>
             <h4>Edit Your New picture</h4>
           </div>
+          <FlashMessage />
         </div>
       </div>
     </b-modal>
@@ -244,6 +245,7 @@ export default {
       networkShow: true,
       showModal: false,
       text: "",
+      file: '',
       updateNetwork_form: {
         name: "",
         description: "",
@@ -309,6 +311,35 @@ export default {
         });
       });
     },
+
+    submitFile(){
+      let formData = new FormData();
+      formData.append('image', this.file);
+      this.axios.post( 'network/edit-profile-image/'+this.networkInfo[0].id, formData,
+        {
+          headers: {
+              'Content-Type': 'multipart/form-data'
+          }
+        }
+      )
+      .then(() => {
+        console.log(formData);
+        this.flashMessage.show({
+          status: "success",
+          message: "Image Uploaded Successfuly"
+        });
+      })
+      .catch(err => {
+        console.log({ err: err });
+        this.flashMessage.show({
+          status: "error",
+          message: "Unable To Uploaded Image "
+        });
+      });
+    },
+    handleFileUpload(){
+      this.file = this.$refs.file.files[0];
+    }
   }
 };
 </script>

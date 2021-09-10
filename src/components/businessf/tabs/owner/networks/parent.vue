@@ -2,8 +2,9 @@
   <div class=" ">
     <b-card title="" class="">
       <b-container class="a-center">
+          <!-- :src="require('@/assets/img/mayor.jpg')" -->
         <b-avatar
-          :src="require('@/assets/img/mayor.jpg')"
+          :src="networkInfo[0].image"
           variant="primary"
           square
           rounded
@@ -23,7 +24,7 @@
       <b-container>
         <b-row>
           <b-col cols="6">
-            <h6 class="  m-0 p-0 a-center network-name "><b> Heavy Gym </b></h6>
+            <h6 class="  m-0 p-0 a-center network-name "><b> {{ networkInfo[0].name }}</b></h6>
           </b-col>
           <b-col cols="6">
             <b-button
@@ -60,10 +61,7 @@
         </b-container>
         <h6 class="mt-2 font-weight-bolder title ">About</h6>
         <p class="text-justify text">
-          Lorem Ipsum is simply dummy text of the printing and typesetting
-          industry. Lorem Ipsum has been the industry's standard dummy text ever
-          since the 1500s, when an unknown printer took a galley of type and
-          scrambled it to make a type specimen book.
+          {{ networkInfo[0].description }}
           <span class="d-inline-block float-right">
             <a href="#">lire la Suite</a>
           </span>

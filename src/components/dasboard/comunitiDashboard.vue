@@ -9,14 +9,17 @@
         <span>
           <h6 class="title">
             <fas-icon class="icons" :icon="['fas', 'users']" size="lg" />
-            <b> COMMUNITY </b> <span class="h4-color"> 7K </span>
+            <b> COMMUNITY </b> <span class="h4-color"> {{ com.total }} </span>
           </h6>
         </span>
 
         <b-tabs pills content-class="mt-3  f-left ">
           <b-tab active>
             <template slot="title">
-              People <span class="spa-color"> 7K </span>
+              People
+              <span class="spa-color">
+                {{ count(business.people[0].total_people) }}
+              </span>
             </template>
 
             <div>
@@ -25,34 +28,38 @@
                   <b-tabs fill pills content-class="mt-3  f-left m-up">
                     <b-tab active>
                       <template slot="title">
-                        Followers <span class="spa-color"> 7K </span>
+                        Followers
+                        <span class="spa-color">
+                          {{ count(business.people[0].total_user_follower) }}
+                        </span>
                       </template>
 
                       <div class="s-comcard">
                         <b-row>
-                          <b-col lg="6" sm="12" class="p-2">
-                            <div><People /></div>
-                          </b-col>
-                          <b-col md="6" sm="12" class="p-2">
-                            <div><People /></div>
-                          </b-col>
+                          <div>
+                            <People
+                              :people="business.people[0].user_followers"
+                            />
+                          </div>
                         </b-row>
                       </div>
                     </b-tab>
 
                     <b-tab>
                       <template slot="title">
-                        Following <span class="spa-color"> 7K </span>
+                        Following
+                        <span class="spa-color">
+                          {{ count(business.people[0].total_user_following) }}
+                        </span>
                       </template>
 
                       <div class="s-comcard">
                         <b-row>
-                          <b-col md="12" sm="12">
-                            <div><People /></div>
-                          </b-col>
-                          <b-col md="6" sm="12">
-                            <div><People /></div>
-                          </b-col>
+                          <div>
+                            <People
+                              :people="business.people[0].user_following"
+                            />
+                          </div>
                         </b-row>
                       </div>
                     </b-tab>
@@ -64,41 +71,48 @@
 
           <b-tab>
             <template slot="title">
-              Businesses <span class="spa-color"> 7K </span>
+              Businesses
+              <span class="spa-color">
+                {{ count(business.people[0].total_business) }}
+              </span>
             </template>
 
             <div>
               <b-tabs fill pills content-class="mt-3  f-left m-up checkcheck">
                 <b-tab active>
                   <template slot="title">
-                    Followers <span class="spa-color"> 7K </span>
+                    Followers
+                    <span class="spa-color">
+                      {{ count(business.people[0].total_business_follower) }}
+                    </span>
                   </template>
 
                   <div class="s-comcard">
                     <b-row>
-                      <b-col lg="6" sm="12">
-                        <div><Business /></div>
-                      </b-col>
-                      <b-col md="6" sm="12">
-                        <div><Business /></div>
-                      </b-col>
+                      <div>
+                        <Business
+                          :business="business.business[0].business_followers"
+                        />
+                      </div>
                     </b-row>
                   </div>
                 </b-tab>
 
                 <b-tab>
                   <template slot="title">
-                    Following <span class="spa-color"> 7K </span>
+                    Following
+                    <span class="spa-color">
+                      {{ count(business.people[0].total_business_following) }}
+                    </span>
                   </template>
 
                   <div class="s-comcard">
                     <b-row>
-                      <b-col lg="6" sm="12">
-                        <div><Business /></div>
-                      </b-col>
-                      <b-col md="6" sm="12">
-                        <div><Business /></div>
-                      </b-col>
+                      <div>
+                        <Business
+                          :business="business.business[0].business_following"
+                        />
+                      </div>
                     </b-row>
                   </div>
                 </b-tab>
@@ -121,6 +135,44 @@ export default {
   components: {
     People,
     Business
+  },
+  computed: {
+    business() {
+      return this.$store.getters["dashboardcommunity/getProfileCommunity"];
+    },
+    com() {
+      return this.$store.getters["dashboardcommunity/getcom"];
+    }
+  },
+  created() {
+    this.$store
+      .dispatch("dashboardcommunity/getdetails")
+
+      .then(() => {
+        console.log("the response");
+      })
+      .catch(err => {
+        console.log({ err: err });
+      });
+    this.$store
+      .dispatch("dashboardcommunity/gettotalcommunity")
+
+      .then(() => {
+        console.log("the response");
+      })
+      .catch(err => {
+        console.log({ err: err });
+      });
+  },
+  methods: {
+    count(number) {
+      if (number >= 1000000) {
+        return number / 1000000 + "M";
+      }
+      if (number >= 1000) {
+        return number / 1000 + "K";
+      } else return number;
+    }
   }
 };
 </script>

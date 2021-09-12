@@ -132,10 +132,12 @@
               </b-col>
             </b-row>
           </div>
-          <hr />
-        </div>
-      </div>
-    </b-card>
+      <hr />
+    </div>
+   </div>
+
+     </b-card>
+
   </div>
 </template>
 
@@ -145,7 +147,7 @@ import Comment from "./comment";
 export default {
   name: "postNetwork",
   components: {
-    Comment
+    Comment,
   },
   data() {
     return {
@@ -164,8 +166,9 @@ export default {
           video: "https://www.youtube.com/embed/xVISKL18jLs",
           title: "Title 1",
           text:
-            " Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum quam, doloribus id sit consequuntur tempora molestiae blanditiis."
+            " Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum quam, doloribus id sit consequuntur tempora molestiae blanditiis.",
         },
+
 
         {
           id: 4,
@@ -381,15 +384,15 @@ export default {
                 console.log("Finally crud Comment +++++", this.dashboard);
               });
     },
-    chooseImage: function() {
+    chooseImage: function () {
       document.getElementById("image").click();
     },
 
-    chooseVideo: function() {
+    chooseVideo: function () {
       document.getElementById("video").click();
     },
 
-    chooseDocument: function() {
+    chooseDocument: function () {
       document.getElementById("document").click();
     },
 
@@ -398,15 +401,18 @@ export default {
     },
     hideModal() {
       this.$refs["modal-3"].hide();
-    }
-  }
+    },
+  },
 };
 </script>
 
 <style scoped>
-.card-body {
+
+.card-body{
+
   padding: 2px !important;
 }
+
 
 .action-intro {
   font-size: 1rem;
@@ -574,10 +580,17 @@ export default {
   margin-top: -5px;
 }
 
-.s-card {
-  height: 540px;
+
+
+
+.s-card{
+  height:540px;
   overflow: auto;
   overflow-x: hidden;
   padding: 15px;
+
+
 }
+
+
 </style>

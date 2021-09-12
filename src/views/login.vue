@@ -144,9 +144,11 @@
 
     <p class="text-center">
       <span class="display-inline">
-        <b-link @click="$i18n.locale = 'en'"> {{ $t("english") }}  </b-link>
+        <b-link @click="$i18n.locale = 'en'"> {{ $t("english") }} </b-link>
         <span class="vl"></span>
-        <b-link class="ml-2" @click="$i18n.locale = 'fr'"> {{ $t("french") }} </b-link>
+        <b-link class="ml-2" @click="$i18n.locale = 'fr'">
+          {{ $t("french") }}
+        </b-link>
       </span>
       Bridge Africa © 2021
     </p>
@@ -166,32 +168,32 @@ export default {
   data: () => ({
     form: {
       password: null,
-      email: null,
+      email: null
     },
 
     langs: ["en", "fr"],
 
     userSaved: false,
     sending: false,
-    lastUser: null,
+    lastUser: null
   }),
   validations: {
     form: {
       password: {
-        required,
+        required
       },
       email: {
         required,
-        email,
-      },
-    },
+        email
+      }
+    }
   },
   methods: {
     getValidationClass(fieldName) {
       const field = this.$v.form[fieldName];
       if (field) {
         return {
-          "md-invalid": field.$invalid && field.$dirty,
+          "md-invalid": field.$invalid && field.$dirty
         };
       }
     },
@@ -200,11 +202,11 @@ export default {
       let self = this;
       this.$auth
         .authenticate(provider)
-        .then((response) => {
+        .then(response => {
           self.socialLogin(provider, response);
           console.log(response);
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
     },
@@ -212,28 +214,23 @@ export default {
     socialLogin(provider, response) {
       this.$http
         .post("user/social/" + provider, response)
-        .then(({ data }) => {  
+        .then(({ data }) => {
           console.log(data.data);
-         
+
           this.$store.commit("auth/setUserData", data.data);
           this.flashMessage.show({
             status: "success",
 
-            message: "Successfully Register",
+            message: "Successfully Register"
           });
 
-          if(this.$store.state.auth.user.user.profile_complete==null){  
-
-          this.$router.push({ name: "welcome" });
-            
-
-             }else{
-
-               this.$router.push({ name: "dashboard" });
-             }                  
-
+          if (this.$store.state.auth.user.user.profile_complete == null) {
+            this.$router.push({ name: "welcome" });
+          } else {
+            this.$router.push({ name: "dashboard" });
+          }
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
     },
@@ -254,25 +251,18 @@ export default {
       this.$store
         .dispatch("auth/login", {
           email: this.form.email,
-          password: this.form.password,
+          password: this.form.password
         })
         .then(() => {
           this.sending = false;
 
-
- if(this.$store.state.auth.user.user.profile_complete==null){  
-
-          this.$router.push({ name: "welcome" });
-            
-
-             }else{
-
-               this.$router.push({ name: "dashboard" });
-             }  
-
-
+          if (this.$store.state.auth.user.user.profile_complete == null) {
+            this.$router.push({ name: "welcome" });
+          } else {
+            this.$router.push({ name: "dashboard" });
+          }
         })
-        .catch((err) => {
+        .catch(err => {
           this.sending = false;
 
           if (err.response.status == 422) {
@@ -281,13 +271,13 @@ export default {
             this.flashMessage.show({
               status: "error",
 
-              message: err.response.data.message,
+              message: err.response.data.message
             });
           } else {
             this.flashMessage.show({
               status: "error",
 
-              message: "An error has occure",
+              message: "An error has occure"
             });
           }
         });
@@ -298,8 +288,8 @@ export default {
       if (!this.$v.$invalid) {
         this.saveUser();
       }
-    },
-  },
+    }
+  }
 };
 </script>
 
@@ -377,5 +367,3 @@ export default {
   margin-top: -10px;
 }
 </style>
-
-

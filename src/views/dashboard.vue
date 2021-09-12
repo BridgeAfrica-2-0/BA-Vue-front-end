@@ -25,6 +25,7 @@
         </b-card>
         <br />
       </div>
+
       <div v-if="selectedb == 'owner'">
         <b-row class=" p-0">
           <b-col md="6" sm="12" class="mt-2 "> <Profile /> </b-col>
@@ -56,8 +57,12 @@
 
       <div v-if="selectedb != 'owner'">
         <b-row>
-          <b-col md="6" sm="12" class="mt-2"> <BusinessDashboard /> </b-col>
-          <b-col md="6" sm="12" class="mt-2"> <Insights /> </b-col>
+          <b-col md="6" sm="12" class="mt-2">
+            <BusinessDashboard :selectedb="selectedb" />
+          </b-col>
+          <b-col md="6" sm="12" class="mt-2">
+            <Insights :selectedb="selectedb" />
+          </b-col>
         </b-row>
       </div>
       <br />
@@ -128,16 +133,16 @@ import Tutorial from "@/components/dasboard/tutorial";
 
 import Profile from "@/components/dasboard/profile";
 
-import Business from "@/components/dasboard/communitybusiness";
+import Business from "@/components/dasboard/hotbusiness";
 
 import Map from "@/components/dasboard/map";
 
 import EmptyBusiness from "@/components/dasboard/emptybusiness";
 
 import Popularnetwork from "@/components/dasboard/popularnetwork";
-
 export default {
   name: "dashboard",
+
   data() {
     return {
       slide: 0,
@@ -148,14 +153,14 @@ export default {
 
       map: false,
 
-      boptions: [
-        { value: "owner", text: "Owner's Name" },
-        { value: "a", text: "Business Name 1" },
-        { value: "b", text: "Business Name 2" },
-        { value: "c", text: "Business Name 3" }
-      ]
+      category: "",
+
+      boptions: [],
+
+      detail: null
     };
   },
+
   components: {
     ComunitiDashboard,
     BusinessDashboard,
@@ -170,7 +175,70 @@ export default {
     CarousselDashboard,
     Navbar
   },
-  methods: {}
+
+  methods: {
+    getbusiness() {
+
+      console.log(
+        JSON.parse(
+          JSON.stringify(
+            this.$store.getters["ProfileAndBusinessDetails/getdetails"]
+          )
+        ).owner
+      );
+
+
+      let owner = JSON.parse(
+        JSON.stringify(
+          this.$store.getters["ProfileAndBusinessDetails/getdetails"]
+        )
+      ).owner;
+
+
+      owner = owner.map(value => {
+        this.boptions.push({ text: value.name, value: "owner" });
+        return value;
+      });
+
+
+      console.log(
+        JSON.parse(
+          JSON.stringify(
+            this.$store.getters["ProfileAndBusinessDetails/getdetails"]
+          )
+        ).business
+      );
+      let businesses = JSON.parse(
+        JSON.stringify(
+          this.$store.getters["ProfileAndBusinessDetails/getdetails"]
+        )
+      ).business;
+      businesses = businesses.map(value => {
+        this.boptions.push({ text: value.name, value: value.id });
+        return value;
+      });
+      return this.boptions;
+    }
+  },
+
+  mounted() {},
+
+  created() {
+    this.$store
+      .dispatch("ProfileAndBusinessDetails/getdetails")
+      .then(response => {
+        this.getbusiness();
+      });
+  },
+
+  computed: {
+    details() {
+      return this.$store.getters["ProfileAndBusinessDetails/getdetails"];
+    }
+  },
+  watch: {
+    selectedb(newvalue) {}
+  }
 };
 </script>
 

@@ -54,8 +54,6 @@ export default {
   actions: {
     login({ commit }, credentials) {
       return axios.post("user/login", credentials).then(({ data }) => {
-
-        console.log( data.data);
         commit("setUserData", data.data);
       });
     },

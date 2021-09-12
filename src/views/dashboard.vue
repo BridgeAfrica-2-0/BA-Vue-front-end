@@ -65,7 +65,6 @@
       <b-row>
         <comuniti-dashboard class="m-component m-3"></comuniti-dashboard> <br />
       </b-row>
-
       <div>
         <b-row>
           <b-col sm="12" lg="8" class="mt-3"> <CommunityActivity /> </b-col>

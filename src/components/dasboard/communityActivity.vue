@@ -11,416 +11,99 @@
           <b> Post </b>
         </h6>
       </span>
-
-      <div class="s-card ">
-        <div>
-          <b-row class="mt-0">
-            <b-col cols="12" class="mt-4">
-              <b-row>
-                <b-col cols="2" md="1" class="m-0 p-0">
-                  <b-avatar
-                    class="d-inline-block avat"
-                    variant="primary"
-                    src="https://www.fivesquid.com/pics/t2/1594480468-145752-1-1.jpg"
-                  ></b-avatar>
-                </b-col>
-                <b-col cols="10" md="11" class="pt-2">
-                  <h5 class="m-0 font-weight-bolder">
-                    Heavy Gym
-                    <span class="float-right"> </span>
-                  </h5>
-                  <p class="duration">1h Ago</p>
-                </b-col>
-              </b-row>
-              <b-row>
-                <b-col cols="12" class="mt-2">
-                  <p class="post-text">
-                    Lorem Ipsum has been the industry's standard dummy text ever
-                    since the 1500s, when an unknown printer took a galley of
-                    type and scrambled it to make a type specimen book. It has
-                    survived not only five centuries, but also the leap into
-                    electronic typesetting, remaining essentially unchanged.😛
-                  </p>
-                </b-col>
-              </b-row>
-              <b-row>
-                <b-col cols="12" class="mt-2">
-                  <div class="">
-                    <img
-                      class="img-fluid post-container"
-                      src="https://pbs.twimg.com/media/DoNa_wKUUAASSCF.jpg"
-                      alt="Photo1"
-                    />
-                  </div>
-                </b-col>
-                <b-col class="mt-1">
-                  <span class="mr-3"
-                    ><b-icon
-                      icon="suit-heart"
-                      variant="primary"
-                      aria-hidden="true"
-                    ></b-icon>
-                    23</span
-                  >
-                  <span
-                    ><b-icon
-                      icon="chat-fill"
-                      variant="primary"
-                      aria-hidden="true"
-                    ></b-icon>
-                    123</span
-                  >
-
-                  <span>
-                    <fas-icon class="primary ml-3" :icon="['fas', 'share']" />
-                  </span>
-                </b-col>
-              </b-row>
-
-              <b-row class="mt-2">
-                <b-col cols="3" md="1" class="m-md-0 p-md-0">
-                  <b-avatar
-                    variant="primary"
-                    class="img-fluid avat-comment"
-                    src="https://www.fivesquid.com/pics/t2/1594480468-145752-1-1.jpg"
-                  ></b-avatar>
-                </b-col>
-                <b-col cols="9" md="11" class="p-0 m-0 pr-3">
-                  <input
-                    placeholder="Post a Comment"
-                    class="comment"
-                    type="text"
-                  />
-
-                  <fas-icon
-                    class="primary send-cmt"
-                    :icon="['fas', 'paper-plane']"
-                  />
-                </b-col>
-              </b-row>
-
-              <Comment />
-            </b-col>
-          </b-row>
-        </div>
-
-        <div class="mt-2">
-          <b-row class="mt-4">
-            <b-col cols="12" class="mt-4">
-              <b-row>
-                <b-col cols="2" md="1" class="m-0 p-0">
-                  <b-avatar
-                    class="d-inline-block avat"
-                    variant="primary"
-                    src="https://www.fivesquid.com/pics/t2/1594480468-145752-1-1.jpg"
-                    square
-                    rounded
-                  ></b-avatar>
-                </b-col>
-                <b-col cols="10" md="11" class="pt-2">
-                  <h5 class="m-0 font-weight-bolder">Heavy Gym</h5>
-                  <p class="duration">1h Ago</p>
-                </b-col>
-              </b-row>
-              <b-row>
-                <b-col cols="12" class="mt-2">
-                  <p class="post-text">
-                    Lorem Ipsum has been the industry's standard dummy text ever
-                    since the 1500s, when an unknown printer took a galley of
-                    type and scrambled it to make a type specimen book. It has
-                    survived not only five centuries, but also the leap into
-                    electronic typesetting, remaining essentially unchanged.😛
-                  </p>
-                </b-col>
-              </b-row>
-              <b-row>
-                <b-col cols="12" class="mt-2">
-                  <lightbox :cells="2" :items="imagees"></lightbox>
-                </b-col>
-                <b-col class="mt-1">
-                  <span class="mr-3"
-                    ><b-icon
-                      icon="suit-heart"
-                      variant="primary"
-                      aria-hidden="true"
-                    ></b-icon>
-                    23</span
-                  >
-                  <span
-                    ><b-icon
-                      icon="chat-fill"
-                      variant="primary"
-                      aria-hidden="true"
-                    ></b-icon>
-                    123</span
-                  >
-
-                  <span>
-                    <fas-icon class="primary ml-3" :icon="['fas', 'share']" />
-                  </span>
-                </b-col>
-              </b-row>
-
-              <b-row class="mt-2">
-                <b-col cols="3" md="1" class="m-md-0 p-md-0">
-                  <b-avatar
-                    variant="primary"
-                    class="img-fluid avat-comment"
-                    src="https://www.fivesquid.com/pics/t2/1594480468-145752-1-1.jpg"
-                  ></b-avatar>
-                </b-col>
-                <b-col cols="9" md="11" class="p-0 m-0 pr-3">
-                  <input
-                    placeholder="Post a Comment"
-                    class="comment"
-                    type="text"
-                  />
-
-                  <fas-icon
-                    class="primary send-cmt"
-                    :icon="['fas', 'paper-plane']"
-                  />
-                </b-col>
-              </b-row>
-
-              <Comment />
-            </b-col>
-          </b-row>
-        </div>
-
-        <hr />
-
-        <div class="mt-2">
-          <b-row class="mt-4">
-            <b-col cols="12" class="mt-4">
-              <b-row>
-                <b-col cols="2" md="1" class="m-0 p-0">
-                  <b-avatar
-                    class="d-inline-block avat"
-                    variant="primary"
-                    src="https://www.fivesquid.com/pics/t2/1594480468-145752-1-1.jpg"
-                    square
-                    rounded
-                  ></b-avatar>
-                </b-col>
-                <b-col cols="10" md="11" class="pt-2">
-                  <h5 class="m-0 font-weight-bolder">Post with 3 pics</h5>
-                  <p class="duration">1h Ago</p>
-                </b-col>
-              </b-row>
-              <b-row>
-                <b-col cols="12" class="mt-2">
-                  <p class="post-text">
-                    Lorem Ipsum has been the industry's standard dummy text ever
-                    since the 1500s, when an unknown printer took a galley of
-                    type and scrambled it to make a type specimen book. It has
-                    survived not only five centuries, but also the leap into
-                    electronic typesetting, remaining essentially unchanged.😛
-                  </p>
-                </b-col>
-              </b-row>
-              <b-row>
-                <b-col cols="12" class="mt-2">
-                  <lightbox :cells="3" :items="imagees3"></lightbox>
-                </b-col>
-                <b-col class="mt-1">
-                  <span class="mr-3"
-                    ><b-icon
-                      icon="suit-heart"
-                      variant="primary"
-                      aria-hidden="true"
-                    ></b-icon>
-                    23</span
-                  >
-                  <span
-                    ><b-icon
-                      icon="chat-fill"
-                      variant="primary"
-                      aria-hidden="true"
-                    ></b-icon>
-                    123</span
-                  >
-
-                  <span>
-                    <fas-icon class="primary ml-3" :icon="['fas', 'share']" />
-                  </span>
-                </b-col>
-              </b-row>
-
-              <b-row class="mt-2">
-                <b-col cols="3" md="1" class="m-md-0 p-md-0">
-                  <b-avatar
-                    variant="primary"
-                    class="img-fluid avat-comment"
-                    src="https://www.fivesquid.com/pics/t2/1594480468-145752-1-1.jpg"
-                  ></b-avatar>
-                </b-col>
-                <b-col cols="9" md="11" class="p-0 m-0 pr-3">
-                  <input
-                    placeholder="Post a Comment"
-                    class="comment"
-                    type="text"
-                  />
-
-                  <fas-icon
-                    class="primary send-cmt"
-                    :icon="['fas', 'paper-plane']"
-                  />
-                </b-col>
-              </b-row>
-
-              <Comment />
-            </b-col>
-          </b-row>
-        </div>
-
-        <hr />
-
-        <div class="mt-2">
-          <b-row class="mt-4">
-            <b-col cols="12" class="mt-4">
-              <b-row>
-                <b-col cols="2" md="1" class="m-0 p-0">
-                  <b-avatar
-                    class="d-inline-block avat"
-                    variant="primary"
-                    src="https://www.fivesquid.com/pics/t2/1594480468-145752-1-1.jpg"
-                    square
-                  ></b-avatar>
-                </b-col>
-                <b-col cols="10" md="11" class="pt-2">
-                  <h5 class="m-0 font-weight-bolder">Heavy Gym</h5>
-                  <p class="duration">1h Ago</p>
-                </b-col>
-              </b-row>
-              <b-row>
-                <b-col cols="12" class="mt-2">
-                  <p class="post-text">
-                    Lorem Ipsum has been the industry's standard dummy text ever
-                    since the 1500s, when an unknown printer took a galley of
-                    type and scrambled it to make a type specimen book. It has
-                    survived not only five centuries, but also the leap into
-                    electronic typesetting, remaining essentially unchanged.😛
-                  </p>
-                </b-col>
-              </b-row>
-              <b-row>
-                <b-col cols="12" class="mt-2">
-                  <lightbox :cells="4" :items="images"></lightbox>
-                </b-col>
-                <b-col class="mt-1">
-                  <span class="mr-3"
-                    ><b-icon
-                      icon="suit-heart"
-                      variant="primary"
-                      aria-hidden="true"
-                    ></b-icon>
-                    23</span
-                  >
-                  <span
-                    ><b-icon
-                      icon="chat-fill"
-                      variant="primary"
-                      aria-hidden="true"
-                    ></b-icon>
-                    123</span
-                  >
-
-                  <span>
-                    <fas-icon class="primary ml-3" :icon="['fas', 'share']" />
-                  </span>
-                </b-col>
-                <b-col cols="12">
-                  <b-row class="mt-2">
-                    <b-col cols="3" md="1" class="m-md-0 p-md-0">
-                      <b-avatar
+      <div>
+        <div class="s-card">
+          <div v-if="dashboard_ === null">No Posts</div>
+          <div v-else v-for="post in dashboard" :key="post.id">
+            <b-row class="mt-0">
+              <b-col cols="12" class="mt-4">
+                <b-row class="mt-4">
+                  <b-col cols="12" class="mt-4">
+                    <b-row>
+                      <b-col cols="2" md="1" class="m-0 p-0">
+                        <b-avatar
+                          class="d-inline-block avat"
+                          variant="primary"
+                          :src="post.logo"
+                          square
+                        ></b-avatar>
+                      </b-col>
+                      <b-col cols="10" md="11" class="pt-2">
+                        <h5 class="m-0 font-weight-bolder">{{ post.name }}</h5>
+                        <p class="duration">1h Ago</p>
+                      </b-col>
+                    </b-row>
+                    <!-- Comment-->
+                    <b-row>
+                      <b-col cols="12" class="mt-2">
+                        <p class="post-text">
+                          {{ post.description }}
+                        </p>
+                      </b-col>
+                    </b-row>
+                    <b-row>
+                      <!-- Images Place-->
+                      <b-col cols="12" class="mt-2">
+                        <lightbox :cells="4" :items="post.images"></lightbox>
+                      </b-col>
+                      <!-- Videos Place-->
+                      <b-row>
+                        <b-col
+                          cols="3"
+                          class="m-media"
+                          v-for="item in post.videos"
+                          :key="item.id"
+                        >
+                          <div class="container-fluid  " v-if="item.video">
+                            <b-embed
+                              type="iframe"
+                              aspect="16by9"
+                              :src="item.video"
+                              allowfullscreen
+                              class="s-embed"
+                            ></b-embed>
+                            <p class="text">
+                              {{ item.title }}<br />
+                              {{ item.description }}
+                            </p>
+                          </div>
+                        </b-col></b-row
+                      >
+                    </b-row>
+                  </b-col>
+                  <!-- Comment User -->
+                  <b-col class="mt-1">
+                    <span class="mr-3" @click="likePost(post.id, 5)"
+                      ><b-icon
+                        :icon="post.liked ? 'suit-heart-fill' : 'suit-heart'"
                         variant="primary"
-                        class="img-fluid avat-comment"
-                        src="https://www.fivesquid.com/pics/t2/1594480468-145752-1-1.jpg"
-                      ></b-avatar>
-                    </b-col>
-                    <b-col cols="9" md="11" class="p-0 m-0 pr-3">
-                      <input
-                        placeholder="Post a Comment"
-                        class="comment"
-                        type="text"
-                      />
-
-                      <fas-icon
-                        class="primary send-cmt"
-                        :icon="['fas', 'paper-plane']"
-                      />
-                    </b-col>
-                  </b-row>
-                </b-col>
-              </b-row>
-            </b-col>
-          </b-row>
-        </div>
-        <hr />
-        <div class="mt-2">
-          <b-row class="mt-4">
-            <b-col cols="12" class="mt-4">
-              <b-row>
-                <b-col cols="2" md="1" class="m-0 p-0">
-                  <b-avatar
-                    class="d-inline-block avat"
-                    variant="info"
-                    src="https://www.fivesquid.com/pics/t2/1594480468-145752-1-1.jpg"
-                    square
-                    rounded="xl"
-                  ></b-avatar>
-                </b-col>
-                <b-col cols="10" md="11" class="pt-2">
-                  <h5 class="m-0 font-weight-bolder">Heavy Gym</h5>
-                  <p class="duration">1h Ago</p>
-                </b-col>
-              </b-row>
-              <b-row>
-                <b-col cols="12" class="mt-2">
-                  <p class="post-text">
-                    Lorem Ipsum has been the industry's standard dummy text ever
-                    since the 1500s, when an unknown printer took a galley of
-                    type and scrambled it to make a type specimen book. It has
-                    survived not only five centuries, but also the leap into
-                    electronic typesetting, remaining essentially unchanged.😛
-                  </p>
-                </b-col>
-              </b-row>
-              <b-row>
-                <b-col class="mt-1">
-                  <span class="mr-3"
-                    ><b-icon
-                      icon="suit-heart"
-                      variant="primary"
-                      aria-hidden="true"
-                    ></b-icon>
-                    23</span
-                  >
-                  <span
-                    ><b-icon
-                      icon="chat-fill"
-                      variant="primary"
-                      aria-hidden="true"
-                    ></b-icon>
-                    123</span
-                  >
-
-                  <span>
-                    <fas-icon class="primary ml-3" :icon="['fas', 'share']" />
-                  </span>
-                </b-col>
-                <b-col cols="12">
-                  <b-row class="mt-2">
-                    <b-col cols="3" md="1" class="m-md-0 p-md-0">
-                      <b-avatar
+                        aria-hidden="true"
+                      ></b-icon>
+                      {{ post.likes.length }}</span
+                    >
+                    <span
+                      ><b-icon
+                        icon="chat-fill"
                         variant="primary"
-                        class="img-fluid avat-comment"
-                        src="https://www.fivesquid.com/pics/t2/1594480468-145752-1-1.jpg"
-                      ></b-avatar>
-                    </b-col>
-                    <b-col cols="9" md="11" class="p-0 m-0 pr-3">
-                      <b-input-group class="my-auto w-100 rounded">
+                        aria-hidden="true"
+                      ></b-icon>
+                      {{ post.comments.length }}</span
+                    >
+
+                    <span>
+                      <fas-icon class="primary ml-3" :icon="['fas', 'share']" />
+                    </span>
+                  </b-col>
+                  <b-col cols="12">
+                    <b-row class="mt-2">
+                      <b-col cols="3" md="1" class="m-md-0 p-md-0">
+                        <b-avatar
+                          variant="primary"
+                          class="img-fluid avat-comment"
+                          :src="post.logo"
+                        ></b-avatar>
+                      </b-col>
+                      <b-col cols="9" md="11" class="p-0 m-0 pr-3">
                         <input
                           placeholder="Post a Comment"
                           class="comment"
@@ -431,15 +114,23 @@
                           class="primary send-cmt"
                           :icon="['fas', 'paper-plane']"
                         />
-                      </b-input-group>
-                    </b-col>
-                  </b-row>
-                </b-col>
-
-                <Comment />
-              </b-row>
-            </b-col>
-          </b-row>
+                      </b-col>
+                    </b-row>
+                  </b-col>
+                  <Comment
+                    v-for="comment in post.comments"
+                    :key="comment.id"
+                    :comment="comment"
+                    :post_id="post.id"
+                    @likeComment="likeComment"
+                    @deleteComment="deleteComment"
+                    @updateComment="updateComment"
+                  />
+                </b-row>
+              </b-col>
+            </b-row>
+          </div>
+          <hr />
         </div>
       </div>
     </b-card>
@@ -456,41 +147,229 @@ export default {
   },
   data() {
     return {
-      images: [
-        "https://i.wifegeek.com/200426/f9459c52.jpg",
-        "https://pbs.twimg.com/media/DoNa_wKUUAASSCF.jpg",
-        "https://pbs.twimg.com/media/DKO62sVXUAA0_AL.jpg",
-        "https://i.wifegeek.com/200426/2d110780.jpg",
-        "https://i.wifegeek.com/200426/e73cd3fa.jpg",
-        "https://i.wifegeek.com/200426/15160d6e.jpg",
-        "https://i.wifegeek.com/200426/d0c881ae.jpg",
-        "https://i.wifegeek.com/200426/a154fc3d.jpg",
-        "https://i.wifegeek.com/200426/71d3aa60.jpg",
-        "https://i.wifegeek.com/200426/d17ce9a0.jpg",
-        "https://i.wifegeek.com/200426/7c4deca9.jpg",
-        "https://i.wifegeek.com/200426/64672676.jpg",
-        "https://i.wifegeek.com/200426/de6ab9c6.jpg",
-        "https://i.wifegeek.com/200426/d8bcb6a7.jpg",
-        "https://i.wifegeek.com/200426/4085d03b.jpg",
-        "https://i.wifegeek.com/200426/177ef44c.jpg",
-        "https://i.wifegeek.com/200426/d74d9040.jpg",
-        "https://i.wifegeek.com/200426/81e24a47.jpg",
-        "https://i.wifegeek.com/200426/43e2e8bb.jpg"
-      ],
-      imagees: [
-        "https://pbs.twimg.com/media/DoNa_wKUUAASSCF.jpg",
-        "https://pbs.twimg.com/media/DKO62sVXUAA0_AL.jpg"
-      ],
+      posts: [
+        {
+          id: 1,
+          video: "https://www.youtube.com/embed/JKJECtmqviQ",
+          title: "Title 1",
+          text:
+            " Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum quam, doloribus id sit consequuntur tempora molestiae blanditiis."
+        },
 
-      imagees3: [
-        "https://pbs.twimg.com/media/DoNa_wKUUAASSCF.jpg",
-        "https://pbs.twimg.com/media/DoNa_wKUUAASSCF.jpg",
-        "https://pbs.twimg.com/media/DKO62sVXUAA0_AL.jpg"
-      ]
+        {
+          id: 2,
+          video: "https://www.youtube.com/embed/xVISKL18jLs",
+          title: "Title 1",
+          text:
+            " Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum quam, doloribus id sit consequuntur tempora molestiae blanditiis."
+        },
+
+        {
+          id: 4,
+          video: "https://www.youtube.com/embed/nMBQrM1FHZw",
+          title: "Title 1",
+          text:
+            " Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum quam, doloribus id sit consequuntur tempora molestiae blanditiis."
+        },
+
+        {
+          id: 5,
+          video: "https://www.youtube.com/embed/iPhGrDZhaAU",
+          title: "Title 1",
+          text:
+            " Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum quam, doloribus id sit consequuntur tempora molestiae blanditiis."
+        },
+        {
+          id: 7,
+          image: "https://picsum.photos/300/150/?image=41",
+          title: "Title 2",
+          text:
+            " Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum quam, doloribus id sit consequuntur tempora molestiae blanditiis."
+        }
+      ],
+      liked_: [],
+      dashboard: null,
+      liked: false,
+      time: 0
     };
   },
-
+  watch: {},
+  computed: {
+    dashboard_() {
+      if (this.dashboard !== null) {
+        this.dashboardMethod();
+      }
+      return this.dashboard;
+    }
+  },
+  created() {
+    console.log("Load Posts Dashboard start  ++++");
+    this.$store
+      .dispatch("loadUserDashboardPosts", null)
+      .then(response => {
+        console.log(
+          "load Posts For Dashboard response in component (3)+++++",
+          response
+        );
+        console.log("load Posts For Dashboard end +++++++");
+      })
+      .catch(error => {
+        console.log(
+          "error from the server or the browser error(2) ++++++",
+          error
+        );
+        console.log("Load Posts For Dashboard end +++++");
+      })
+      .finally(() => {
+        this.dashboard = this.$store.getters.getDashboardPosts;
+        // this.liked_ = this.dashboard.map(post => {
+        //   return !!post.likes.find(like => {
+        //     return like.user_id === 5;
+        //   });
+        // });
+        console.log("Finally load Dashboard Posts +++++", this.dashboard);
+      });
+  },
   methods: {
+    likePost(id, user_id) {
+      this.dashboard[id - 1].liked = !this.dashboard[id - 1].liked;
+      if (this.dashboard[id - 1].liked) {
+        this.time = setTimeout(() => {
+          console.log("Liked post");
+          this.updatePostLikes(id, user_id, this.dashboard[id - 1].liked);
+        }, 1);
+      } else {
+        clearTimeout(this.time);
+        this.updatePostLikes(id, user_id, this.dashboard[id - 1].liked);
+        console.log("Disliked Post");
+      }
+    },
+    updatePostLikes(post_id, user_id, liked) {
+      console.log("update Post Likes start  ++++");
+      this.$store
+        .dispatch("updatePostLikes", {
+          post_id: post_id,
+          user_id: user_id,
+          liked: liked
+        })
+        .then(response => {
+          console.log(
+            "update Post Likes response in component (3)+++++",
+            response
+          );
+          console.log("update Post Likes end +++++++");
+        })
+        .catch(error => {
+          console.log(
+            "error from the server or the browser error(2) ++++++",
+            error
+          );
+          console.log("update Post Likes end +++++");
+        })
+        .finally(() => {
+          this.dashboard = this.$store.getters.getDashboardPosts;
+          console.log("Finally update Post Likes Posts +++++", this.dashboard);
+        });
+    },
+    dashboardMethod() {
+      this.dashboard = this.dashboard.map(post => {
+        const liked = !!post.likes.find(like => {
+          return like.user_id === 5;
+        });
+
+        post.comments = post.comments.map(comment => {
+          const liked_comment = !!comment.likes.find(like => {
+            return like.user_id === 5;
+          });
+          return { ...comment, liked_comment };
+        });
+        return { ...post, liked };
+      });
+      console.log("Changed+++++++++", this.dashboard);
+    },
+    likeComment(comment_id,post_id, user_id, liked) {
+      if (liked) {
+        this.time = setTimeout(() => {
+          console.log("Liked Comment +++++");
+          this.updateCommentLikes(comment_id,post_id, user_id, liked);
+        }, 1);
+      } else {
+        clearTimeout(this.time);
+        this.updateCommentLikes(comment_id,post_id, user_id, liked);
+        console.log("Disliked Comment");
+      }
+    },
+    updateCommentLikes(comment_id,post_id, user_id, liked) {
+      console.log("update Comment Likes start  ++++");
+      this.$store
+              .dispatch("updateCommentLikes", {
+                comment_id: comment_id,
+                post_id: post_id,
+                user_id: user_id,
+                liked: liked
+
+              })
+              .then(response => {
+                console.log(
+                        "update Comment Likes response in component (3)+++++",
+                        response
+                );
+                console.log("update Comment Likes end +++++++");
+              })
+              .catch(error => {
+                console.log(
+                        "error from the server or the browser error(2) ++++++",
+                        error
+                );
+                console.log("update Comment Likes end +++++");
+              })
+              .finally(() => {
+                this.dashboard = this.$store.getters.getDashboardPosts;
+                console.log("Finally update Comment Likes +++++", this.dashboard);
+              });
+    },
+    deleteComment(comment_id, post_id, user_id){
+      this.crudComment( {
+        comment_id: comment_id,
+        post_id: post_id,
+        user_id: user_id,
+        type: 'delete'
+
+      });
+    },
+    updateComment(comment_id, post_id, user_id, comment_updated){
+      this.crudComment( {
+        comment_id: comment_id,
+        post_id: post_id,
+        user_id: user_id,
+        comment_updated: comment_updated,
+        type: 'update'
+
+      });
+    },
+    crudComment( payload ) {
+      console.log("crud Comment start  ++++");
+      this.$store
+              .dispatch("crudComment", payload)
+              .then(response => {
+                console.log(
+                        "crud Comment response in component (3)+++++",
+                        response
+                );
+                console.log("crud Comment end +++++++");
+              })
+              .catch(error => {
+                console.log(
+                        "error from the server or the browser error(2) ++++++",
+                        error
+                );
+                console.log("crud Comment end +++++");
+              })
+              .finally(() => {
+                this.dashboard = this.$store.getters.getDashboardPosts;
+                console.log("Finally crud Comment +++++", this.dashboard);
+              });
+    },
     chooseImage: function() {
       document.getElementById("image").click();
     },

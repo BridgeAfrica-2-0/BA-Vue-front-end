@@ -275,10 +275,10 @@ export default {
   created() {
     console.log("Load User Info");
     this.$store.dispatch('loadUserPostIntro', null)
-            .then( response => {
-              console.log( 'Load User Intro test+++++ res')
+            .then(response => {
+              console.log('Load User Intro test+++++ res')
               console.log(response)
-              console.log( "Load User Intro Finish Loading" );
+              console.log("Load User Intro Finish Loading");
               this.userProfileOwner = this.$store.getters.getUserPostIntro;
               this.userProfileOwnerInput.workedAt = this.userProfileOwner.workedAt;
               this.userProfileOwnerInput.studiedAt = this.userProfileOwner.studiedAt;
@@ -287,9 +287,11 @@ export default {
               this.userProfileOwnerInput.numbersOfFollowers = this.userProfileOwner.numbersOfFollowers;
               return response
             })
-            .catch( error => { console.log( error ) });
+            .catch(error => {
+              console.log(error)
+            });
 
-
+  },
 
   data() {
     return {

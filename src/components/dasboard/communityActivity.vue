@@ -108,11 +108,13 @@
                           placeholder="Post a Comment"
                           class="comment"
                           type="text"
+                          v-model="post_comment_input"
                         />
 
                         <fas-icon
                           class="primary send-cmt"
                           :icon="['fas', 'paper-plane']"
+                          @click="savePostComment(post.id)"
                         />
                       </b-col>
                     </b-row>
@@ -147,6 +149,7 @@ export default {
   },
   data() {
     return {
+      post_comment_input: null,
       posts: [
         {
           id: 1,
@@ -346,6 +349,14 @@ export default {
         type: 'update'
 
       });
+    },
+    savePostComment(post_id, user_id){
+      this.crudComment({
+        post_id: post_id,
+        user_id: user_id,
+        comment_created: this.post_comment_input,
+        type: 'create'
+      })
     },
     crudComment( payload ) {
       console.log("crud Comment start  ++++");

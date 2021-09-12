@@ -740,6 +740,25 @@ const actions = {
           Authorization: `Bearer ${state.token}`
         }
       };
+    } else if (payload.type === "create") {
+      console.log("create comment start +++++ ++++++++++");
+      url =
+        process.env.VUE_APP_API_URL1 +
+        "" +
+        "?post_id=" +
+        payload.post_id +
+        "&user_id=" +
+        payload.user_id +
+        "?comment_created" +
+        payload.comment_created;
+
+      config = {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          Authorization: `Bearer ${state.token}`
+        }
+      };
     }
     await fetch(url, config)
       .then(response => {
@@ -839,15 +858,14 @@ const mutations = {
     });
     if (payload.type === "create") {
       post.comments.push({
-        id: post.comments.length,
+        id: post.comments.length + 1,
         logo: "https://www.fivesquid.com/pics/t2/1594480468-145752-1-1.jpg",
         videos: [],
-        description:
-          "um has been the industry's standard dummy text ever\n" +
-          "                    since the 1500s, when an unknown printer took a galley of\n" +
-          "                    type and scrambl",
+        description: payload.comment_created,
         photos: [],
-        likes: []
+        likes: [],
+        likes_numbers: 0,
+        replies: []
       });
     } else if (payload.type === "delete") {
       post.comments = post.comments.filter(comment => {

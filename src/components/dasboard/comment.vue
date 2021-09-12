@@ -169,7 +169,8 @@ export default {
       this.$emit("deleteComment", comment_id, post_id, 5);
     },
       updateComment(comment_id, post_id){
-        this.$emit( "updateComment", comment_id, post_id, 5, this.comment_input);
+        this.$emit( "updateComment", comment_id, post_id, 5, this.comment_input.trim() );
+        this.comment_input = null;
       }
   }
 };

@@ -11,7 +11,7 @@
               label-class="font-weight-bold pt-0 username"
               class="mb-0"
             >
-              <b-form-input id="bname" v-model="name" name="name" required></b-form-input>
+              <b-form-input id="bname" placeholder="" required></b-form-input>
             </b-form-group>
           </b-container>
         </div>
@@ -28,7 +28,6 @@
               <b-form-select
                 v-model="category"
                 :options="categories"
-                name="category"
                 class="mb-3"
                 value-field="item"
                 text-field="name"
@@ -47,9 +46,8 @@
               class="mb-0"
             >
               <b-form-textarea
-                id="Keywords"
-                v-model="Keywords"
-                name="Keywords"
+                id="textarea"
+                v-model="text"
                 placeholder="Enter something..."
                 rows="3"
                 max-rows="6"
@@ -58,7 +56,7 @@
           </b-container>
         </div>
 
-        <!-- <div class="b-bottom">
+        <div class="b-bottom">
           <b-container>
             <b-form-group
               label-cols-lg="3"
@@ -67,14 +65,14 @@
               label-class="font-weight-bold pt-0 username"
               class="mb-0"
             >
-              <b-form-select id="timezone" v-model="time_zone" name="language">
-                <option value="" selected="" disabled="true"> Select Language </option>
-                <option>English</option>
-                <option>Hindi</option>
+              <b-form-select v-model="selected">
+                <b-form-select-option value="a">
+                  --select option</b-form-select-option
+                >
               </b-form-select>
             </b-form-group>
           </b-container>
-        </div> -->
+        </div>
 
         <div class="b-bottom">
           <b-container>
@@ -85,14 +83,10 @@
               label-class="font-weight-bold pt-0 username"
               class="mb-0"
             >
-              <b-form-select
-                id="timezone"
-                v-model="time_zone"
-                :options="timezones"
-                name="timezone"
-                value-field="value"
-                text-field="label"
-              >
+              <b-form-select v-model="selected">
+                <b-form-select-option value="a">
+                  --select option</b-form-select-option
+                >
               </b-form-select>
             </b-form-group>
           </b-container>
@@ -108,8 +102,8 @@
               class="mb-0"
             >
               <b-form-textarea
-                id="about"
-                v-model="about"
+                id="textarea"
+                v-model="text"
                 placeholder="Enter something..."
                 rows="3"
                 max-rows="6"
@@ -137,7 +131,7 @@
                 </b-col>
 
                 <b-col cols="8">
-                  <b-form-input id="phone1" v-model="phone1" name="phone1"></b-form-input>
+                  <b-form-input id="bname" placeholder=""></b-form-input>
                 </b-col>
               </b-row>
             </b-form-group>
@@ -163,7 +157,7 @@
                 </b-col>
 
                 <b-col cols="8">
-                  <b-form-input id="phone2" v-model="phone2" name="phone2"></b-form-input>
+                  <b-form-input id="bname" placeholder=""></b-form-input>
                 </b-col>
               </b-row>
             </b-form-group>
@@ -179,8 +173,8 @@
               label-class="font-weight-bold pt-0 username"
               class="mb-0"
             >
-              <b-form-input id="bname" name="website" v-model="website" required></b-form-input>
-              <b-form-checkbox class="a-text text" id="" value="website N/V" name="nowebsite" v-model="nowebsite">
+              <b-form-input id="bname" placeholder="" required></b-form-input>
+              <b-form-checkbox class="a-text text" id="" name="" value="">
                 This Business does not have a Website
               </b-form-checkbox>
             </b-form-group>
@@ -196,8 +190,8 @@
               label-class="font-weight-bold pt-0 username"
               class="mb-0"
             >
-              <b-form-input id="bname" name="email" v-model="email" required></b-form-input>
-              <b-form-checkbox class="a-text text" id="" value="email N/V" name="noemail" v-model="noemail">
+              <b-form-input id="bname" placeholder="" required></b-form-input>
+              <b-form-checkbox class="a-text text" id="" name="" value="">
                 This Business does not have a Email
               </b-form-checkbox>
             </b-form-group>
@@ -216,7 +210,6 @@
               <country-select
                 v-model="country"
                 :country="country"
-                name="country"
                 topCountry="US"
                 class="form-control text"
               />
@@ -233,7 +226,7 @@
               label-class="font-weight-bold pt-0 username"
               class="mb-0"
             >
-              <b-form-input id="bname" name="city" v-model="city" required></b-form-input>
+              <b-form-input id="bname" placeholder="" required></b-form-input>
             </b-form-group>
           </b-container>
         </div>
@@ -247,7 +240,7 @@
               label-class="font-weight-bold pt-0 username"
               class="mb-0"
             >
-              <b-form-input id="bname" name="neighbourhood" v-mode="neighbourhood" required></b-form-input>
+              <b-form-input id="bname" placeholder="" required></b-form-input>
             </b-form-group>
           </b-container>
         </div>
@@ -261,7 +254,7 @@
               label-class="font-weight-bold pt-0 username"
               class="mb-0"
             >
-              <b-form-input id="bname" name="locationdesc" v-model="locationdesc" required></b-form-input>
+              <b-form-input id="bname" placeholder="" required></b-form-input>
             </b-form-group>
           </b-container>
         </div>
@@ -275,7 +268,7 @@
               label-class="font-weight-bold pt-0 username"
               class="mb-0"
             >
-              <b-form-checkbox id="" class="a-text text" name="Aaddress" v-model="Aaddress" value="address A/V">
+              <b-form-checkbox id="" class="a-text text" name="" value="">
                 This Business has an address</b-form-checkbox
               >
 
@@ -509,7 +502,7 @@
         </b-container>
 
         <div class="b-bottomm">
-          <b-button variant="primary" class="a-button-l" @click="updateInfo()">Save Changes</b-button>
+          <b-button variant="primary" class="a-button-l">Save Changes</b-button>
           <br />
           <br />
         </div>
@@ -521,12 +514,8 @@
 </template>
 
 <script>
-import { validationMixin } from "vuelidate";
-import axios from "axios";
-import { required, email, minLength } from "vuelidate/lib/validators";
 export default {
   name: "info",
-  mixins: [validationMixin],
   data() {
     return {
       category: "",
@@ -547,114 +536,8 @@ export default {
         { item: "station", name: " station  " },
         { item: "Mayor_concils", name: "Mayor_concils" },
         { item: "Taxis service", name: "Taxis service" }
-      ],
-      timezone:"",
-      timezones: [
-        { label: "(GMT-12:00) International Date Line West", value: "-12" },
-        { label: "(GMT-11:00) Midway Island, Samoa", value: "-11" },
-        { label: "(GMT-10:00) Hawaii", value: "-10" },
-        { label: "(GMT-09:00) Alaska", value: "-9" },
-        { label: "(GMT-08:00) Pacific Time (US & Canada)", value: "-8" },
-        { label: "(GMT-08:00) Tijuana, Baja California", value: "-8" },
-        { label: "(GMT-07:00) Arizona", value: "-7" },
-        { label: "(GMT-07:00) Chihuahua, La Paz, Mazatlan", value: "-7" },
-        { label: "(GMT-07:00) Mountain Time (US & Canada)", value: "-7" },
-        { label: "(GMT-06:00) Central America", value: "-6" },
-        { label: "(GMT-06:00) Central Time (US & Canada)", value: "-6" },
-        { label: "(GMT-05:00) Bogota, Lima, Quito, Rio Branco", value: "-5" },
-        { label: "(GMT-05:00) Eastern Time (US & Canada)", value: "-5" },
-        { label: "(GMT-05:00) Indiana (East)", value: "-5" },
-        { label: "(GMT-04:00) Atlantic Time (Canada)", value: "-4" },
-        { label: "(GMT-04:00) Caracas, La Paz", value: "-4" },
-        { label: "(GMT-04:00) Manaus", value: "-4" },
-        { label: "(GMT-04:00) Santiago", value: "-4" },
-        { label: "(GMT-03:30) Newfoundland", value: "-3.5" },
-        { label: "(GMT-03:00) Brasilia", value: "-3" },
-        { label: "(GMT-03:00) Buenos Aires, Georgetown", value: "-3" },
-        { label: "(GMT-03:00) Greenland", value: "-3" },
-        { label: "(GMT-03:00) Montevideo", value: "-3" },
-        { label: "(GMT-02:00) Mid-Atlantic", value: "-2" },
-        { label: "(GMT-01:00) Cape Verde Is.", value: "-1" },
-        { label: "(GMT-01:00) Azores", value: "-1" },
-        { label: "(GMT+00:00) Casablanca, Monrovia, Reykjavik", value: "0" },
-        { label: "(GMT+00:00) Greenwich Mean Time : Dublin, Edinburgh, Lisbon, London", value: "0", },
-        { label: "(GMT+01:00) Amsterdam, Berlin, Bern, Rome, Stockholm, Vienna", value: "1", },
-        { label: "(GMT+01:00) Belgrade, Bratislava, Budapest, Ljubljana, Prague", value: "1", },
-        { label: "(GMT+01:00) Brussels, Copenhagen, Madrid, Paris", value: "1", },
-        { label: "(GMT+01:00) Sarajevo, Skopje, Warsaw, Zagreb", value: "1" },
-        { label: "(GMT+01:00) West Central Africa", value: "1" },
-        { label: "(GMT+02:00) Amman", value: "2" },
-        { label: "(GMT+02:00) Athens, Bucharest, Istanbul", value: "2" },
-        { label: "(GMT+02:00) Beirut", value: "2" },
-        { label: "(GMT+02:00) Cairo", value: "2" },
-        { label: "(GMT+02:00) Harare, Pretoria", value: "2" },
-        { label: "(GMT+02:00) Helsinki, Kyiv, Riga, Sofia, Tallinn, Vilnius", value: "2", },
-        { label: "(GMT+02:00) Jerusalem", value: "2" },
-        { label: "(GMT+02:00) Minsk", value: "2" },
-        { label: "(GMT+02:00) Windhoek", value: "2" },
-        { label: "(GMT+03:00) Kuwait, Riyadh, Baghdad", value: "3" },
-        { label: "(GMT+03:00) Moscow, St. Petersburg, Volgograd", value: "3" },
-        { label: "(GMT+03:00) Nairobi", value: "3" },
-        { label: "(GMT+03:00) Tbilisi", value: "3" },
-        { label: "(GMT+03:30) Tehran", value: "3.5" },
-        { label: "(GMT+04:00) Abu Dhabi, Muscat", value: "4" },
-        { label: "(GMT+04:00) Baku", value: "4" },
-        { label: "(GMT+04:00) Yerevan", value: "4" },
-        { label: "(GMT+04:30) Kabul", value: "4.5" },
-        { label: "(GMT+05:00) Yekaterinburg", value: "5" },
-        { label: "(GMT+05:00) Islamabad, Karachi, Tashkent", value: "5" },
-        { label: "(GMT+05:30) Sri Jayawardenapura", value: "5.5" },
-        { label: "(GMT+05:30) Chennai, Kolkata, Mumbai, New Delhi", value: "5.5", },
-        { label: "(GMT+05:45) Kathmandu", value: "5.75" },
-        { label: "(GMT+06:00) Almaty, Novosibirsk", value: "6" },
-        { label: "(GMT+06:00) Astana, Dhaka", value: "6" },
-        { label: "(GMT+06:30) Yangon (Rangoon)", value: "6.5" },
-        { label: "(GMT+07:00) Bangkok, Hanoi, Jakarta", value: "7" },
-        { label: "(GMT+07:00) Krasnoyarsk", value: "7" },
-        { label: "(GMT+08:00) Beijing, Chongqing, Hong Kong, Urumqi", value: "8", },
-        { label: "(GMT+08:00) Kuala Lumpur, Singapore", value: "8" },
-        { label: "(GMT+08:00) Irkutsk, Ulaan Bataar", value: "8" },
-        { label: "(GMT+08:00) Perth", value: "8" },
-        { label: "(GMT+08:00) Taipei", value: "8" },
-      ],
-      options: [
-        { text: " Person", value: "person" },
-        { text: " Business ", value: "business" },
-      ],
+      ]
     };
-  },
-  
-
-  methods:{
-
-    updateInfo: function(){
-      return new Promise((resolve, reject) => {
-        let formData = new FormData();
-        formData.append("name", this.form.name);
-        formData.append("role", this.form.role);
-
-        this.axios.post("role/assignRole/{business}", formData)
-        .then(response => {
-          console.log(response);
-
-          this.flashMessage.show({
-            status: "success",
-            message: "New Role Assigned"
-          });
-            
-          resolve(true);
-        })
-        .catch(err => {
-          console.log({ err: err });
-          this.flashMessage.show({
-            status: "error",
-            message: "Unable to Assigned New Role"
-          });
-          resolve(false);
-        });
-      });
-		},
-
   }
 };
 </script>
@@ -668,23 +551,18 @@ export default {
   margin-bottom: 20px;
   padding-bottom: 10px;
 }
-
 .tabs {
   width: 100%;
 }
-
 .i-width {
   width: 40%;
 }
-
 .b-bottomm {
   padding-bottom: 10px;
 }
-
 .f-left {
   float: left;
 }
-
 .a-button-l {
   align-content: right;
   float: right;
@@ -694,19 +572,16 @@ export default {
   padding-left: 10px;
   padding-right: 10px;
 }
-
 .a-align {
   text-align: left;
   padding-left: 10px;
   padding-right: 10px;
 }
-
 .settings {
   margin-left: 90%;
   position: relative;
   top: 40px;
 }
-
 @media only screen and (max-width: 768px) {
   .settings {
     top: -5px;

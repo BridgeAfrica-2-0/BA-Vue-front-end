@@ -5,7 +5,6 @@ import businessBlocking from "./businessBlocking";
 import businessOwner from "./businessOwner";
 import businessRole from "./businessRole";
 import networkDetails from "./networkDetails";
-import networkProfile from "./networkProfile";
 import dashboardcommunity from "./dashboardcommunity";
 
 import axios from "axios";
@@ -21,7 +20,6 @@ export default new Vuex.Store({
     businessOwner,
     businessRole,
     networkDetails,
-    networkProfile,
     dashboardcommunity
   }
 });

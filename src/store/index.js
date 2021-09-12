@@ -3,7 +3,6 @@ import Vuex from "vuex";
 import auth from "./auth";
 import businessOwner from "./businessOwner";
 import networkDetails from "./networkDetails";
-import networkProfile from "./networkProfile";
 import dashboardcommunity from "./dashboardcommunity";
 
 import axios from "axios";
@@ -17,7 +16,6 @@ export default new Vuex.Store({
     auth,
     businessOwner,
     networkDetails,
-    networkProfile,
     dashboardcommunity
   }
 });

@@ -57,8 +57,12 @@
 
       <div v-if="selectedb != 'owner'">
         <b-row>
-          <b-col md="6" sm="12" class="mt-2"> <BusinessDashboard /> </b-col>
-          <b-col md="6" sm="12" class="mt-2"> <Insights /> </b-col>
+          <b-col md="6" sm="12" class="mt-2">
+            <BusinessDashboard :selectedb="selectedb" />
+          </b-col>
+          <b-col md="6" sm="12" class="mt-2">
+            <Insights :selectedb="selectedb" />
+          </b-col>
         </b-row>
       </div>
       <br />
@@ -115,147 +119,127 @@
 
 <script>
 import Navbar from "@/components/navbar";
+
 import CarousselDashboard from "@/components/dasboard/carousselDashboard";
 
 import BusinessDashboard from "@/components/dasboard/businessDashboard";
+
 import ComunitiDashboard from "@/components/dasboard/comunitiDashboard";
+
 import Insights from "@/components/dasboard/insights";
+
 import CommunityActivity from "@/components/dasboard/communityActivity";
 
 import Tutorial from "@/components/dasboard/tutorial";
 
 import Profile from "@/components/dasboard/profile";
 
-//import People from "@/components/dasboard/communityMember";
-import Business from "@/components/dasboard/communitybusiness";
+import Business from "@/components/dasboard/hotbusiness";
 
 import Map from "@/components/dasboard/map";
 
 import EmptyBusiness from "@/components/dasboard/emptybusiness";
 
 import Popularnetwork from "@/components/dasboard/popularnetwork";
-//import Hotbusiness from "@/components/dasboard/hotbusiness";
-//import People from '../components/businessOwner/tabs/owner/networks/people.vue';
-
 export default {
   name: "dashboard",
+
   data() {
     return {
       slide: 0,
+
       sliding: null,
 
-      selected: "all",
-      location: "any",
-      category: "any",
-      post: "any",
       selectedb: "owner",
-
-      educatio: "any",
-
-      professio: "any",
-
-      workplac: "any",
 
       map: false,
 
-      boptions: [
-        { value: "owner", text: "Owner's Name" },
-        { value: "a", text: "Business Name 1" },
-        { value: "b", text: "Business Name 2" },
-        { value: "c", text: "Business Name 3" }
-      ],
+      category: "",
 
-      optionss: [
-        { id: "all", label: "All" },
-        { id: "business", label: "Business" },
-        { id: "people", label: "People" },
-        { id: "network", label: "Network" },
-        { id: "marketplace", label: "Markeplace", notEnabled: true },
-        { id: "posts", label: "Posts" }
-      ],
+      boptions: [],
 
-      options: [
-        { item: "all", name: "All" },
-        { item: "business", name: "Business" },
-        { item: "people", name: "People" },
-        { item: "network", name: "Network" },
-        { item: "marketplace", name: "Markeplace", notEnabled: false },
-        { item: "posts", name: "Posts" }
-      ],
-      filters: [
-        { item: "any", name: "Location : Any" },
-        { item: "yaounde", name: "Yaounde, Cameroon" },
-        { item: "dhaka ", name: "Dhaka, Bangladesh" },
-        { item: "new york", name: "New York, United States" },
-        { item: "douala", name: "Douala, Cameroon" },
-        { item: "karachi", name: "Karachi, Pakistan" }
-      ],
-      categories: [
-        { item: "any", name: "Category : Any" },
-        { item: "restaurant", name: "Restaurant" },
-        { item: "home service", name: "Home Services" },
-        { item: "auto service", name: "Auto Services" },
-        { item: "argiculture", name: "Agriculture" },
-        { item: "technology", name: "Technology" }
-      ],
-      posts: [
-        { item: "any", name: "Post: Any" },
-        { item: "people", name: "People I am following" },
-        { item: "business", name: "Businesses i am following" },
-        { item: "networks", name: "Networks I am following" }
-      ],
-
-      education: [
-        { item: "any", name: "Education: Any" },
-        { item: "ub", name: "University Of Buea" },
-        { item: "uba", name: "University Of Yaounde" },
-        { item: "uy", name: "University Of Yaounde 1" }
-      ],
-
-      profession: [
-        { item: "any", name: "Profession: Any" },
-        { item: "engineer", name: "Engineen" },
-        { item: "teacher", name: "Teacher" },
-        { item: "farmer", name: "Farmer" }
-      ],
-
-      workplace: [
-        { item: "any", name: "Post: Any" },
-        { item: "yaounde", name: "Yaounde" },
-        { item: "douala", name: "Douala" },
-        { item: "Buea", name: "Buea" }
-      ],
-
-      sponsoredBusinesses: [
-        { title: "Business 1" },
-        { title: "Business 2" },
-        { title: "Business 3" },
-        { title: "Business 4" }
-      ]
+      detail: null
     };
   },
+
   components: {
     ComunitiDashboard,
     BusinessDashboard,
-    //People,
     Business,
     CommunityActivity,
     Tutorial,
     Insights,
     Popularnetwork,
-    //Hotbusiness,
-    //SelectBusiness,
-
     Map,
-
     EmptyBusiness,
-    //SelectBH,
     Profile,
-
     CarousselDashboard,
     Navbar
   },
-  methods: {}
+
+  methods: {
+    getbusiness() {
+
+      console.log(
+        JSON.parse(
+          JSON.stringify(
+            this.$store.getters["ProfileAndBusinessDetails/getdetails"]
+          )
+        ).owner
+      );
+
+
+      let owner = JSON.parse(
+        JSON.stringify(
+          this.$store.getters["ProfileAndBusinessDetails/getdetails"]
+        )
+      ).owner;
+
+
+      owner = owner.map(value => {
+        this.boptions.push({ text: value.name, value: "owner" });
+        return value;
+      });
+
+
+      console.log(
+        JSON.parse(
+          JSON.stringify(
+            this.$store.getters["ProfileAndBusinessDetails/getdetails"]
+          )
+        ).business
+      );
+      let businesses = JSON.parse(
+        JSON.stringify(
+          this.$store.getters["ProfileAndBusinessDetails/getdetails"]
+        )
+      ).business;
+      businesses = businesses.map(value => {
+        this.boptions.push({ text: value.name, value: value.id });
+        return value;
+      });
+      return this.boptions;
+    }
+  },
+
+  mounted() {},
+
+  created() {
+    this.$store
+      .dispatch("ProfileAndBusinessDetails/getdetails")
+      .then(response => {
+        this.getbusiness();
+      });
+  },
+
+  computed: {
+    details() {
+      return this.$store.getters["ProfileAndBusinessDetails/getdetails"];
+    }
+  },
+  watch: {
+    selectedb(newvalue) {}
+  }
 };
 </script>
 

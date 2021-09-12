@@ -78,7 +78,11 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
+.avatar-size {
+  width: 60px;
+}
+
 @media (max-width: 576px) {
   .show {
     display: none;

@@ -76,7 +76,7 @@
                       <b-dropdown-item v-b-modal.coverphoto>
                         Change Cover
                       </b-dropdown-item>
-                      <b-dropdown-item
+                          <b-dropdown-item
                         >Invite Friends On Bridge Africa</b-dropdown-item
                       >
                       <b-dropdown-item>View As</b-dropdown-item>

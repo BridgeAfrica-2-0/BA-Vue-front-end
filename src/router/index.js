@@ -5,10 +5,12 @@ import Login from "../views/login.vue";
 
 import signup from "../views/signup.vue";
 
-import SignIn from "../views/signIn.vue";
 import RecoverPass1 from "../views/recoverPassword1.vue";
 import RecoverPass2 from "../views/recoverPassword2.vue";
 import RecoverPass3 from "../views/recoverPassword3.vue";
+
+import verifyAccount from "../views/verifyAccount.vue";
+
 import createService from "@/views/createService";
 
 import businessOwnerSettingGeneral from "@/views/businessOwnerSettingGeneral";
@@ -51,7 +53,10 @@ const routes = [
   {
     path: "/",
     name: "home",
-    component: dashboard
+    component: dashboard,
+    meta: {
+      auth: true
+    }
   },
 
   {
@@ -63,7 +68,10 @@ const routes = [
   {
     path: "/welcome",
     name: "welcome",
-    component: welcome
+    component: welcome,
+    meta: {
+      auth: true
+    }
   },
 
   {
@@ -138,15 +146,17 @@ const routes = [
   },
 
   {
-    path: "/signin",
-    name: "SignIn",
-    component: SignIn
-  },
-  {
     path: "/recoverPass1",
     name: "RecoverPass1",
     component: RecoverPass1
   },
+
+  {
+    path: "/verify",
+    name: "verifyAccount",
+    component: verifyAccount
+  },
+
   {
     path: "/recoverPass2",
     name: "RecoverPass2",
@@ -158,10 +168,10 @@ const routes = [
     component: RecoverPass3
   },
   {
-    path: "/businessfollower",
+    path: "/businessfollower/:id?",
     name: "BusinessFollower",
-    component: businessFollower
-  },
+    component: businessFollower,
+  },                 
   {
     path: "/businessvisitor",
     name: "BusinessVisitor",
@@ -199,7 +209,7 @@ const routes = [
   },
 
   {
-    path: "/profilefollower",
+    path: "/follower",
     name: "Follower",
     component: Follower
   },
@@ -238,8 +248,30 @@ const routes = [
 ];
 
 const router = new VueRouter({
-  routes,
-  mode: "history"
+  mode: "history",
+  base: process.env.BASE_URL,
+  routes
+});
+
+router.beforeEach((to, from, next) => {
+  const loggedIn = localStorage.getItem("user");
+
+  if (to.matched.some(record => record.meta.auth) && !loggedIn) {
+    next("/login");
+
+    return;
+  }
+
+  if (to.matched.some(record => record.meta.auth)) {
+    const dat = localStorage.getItem("user");
+    const userdata = JSON.parse(dat);
+
+    if (userdata.user.verified_at == null) {
+      next("/verify");
+    }
+  }
+
+  next();
 });
 
 export default router;

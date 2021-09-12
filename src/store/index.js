@@ -9,58 +9,7 @@ import dashboardcommunity from "./dashboardcommunity";
 
 import axios from "axios";
 Vue.use(Vuex);
- axios.defaults.baseURL = process.env.VUE_APP_API_URL;
-export default new Vuex.Store({
-  modules: {
-    auth,
-    networkDetails,
-    dashboardcommunity,
-    ProfileAndBusinessDetails,
-    businessOwner,
-
-  },
-
-  state,
-  getters: {
-    recoverPassData: state => {
-      return state.recoverData;
-    },
-    doneTodos: state => {
-      return state.todos.filter(todo => todo.done);
-    },
-    loggedIn(state) {
-      return state.login;
-    },
-    getUser(state) {
-      return state.userData;
-    },
-    getService(state) {
-      return state.service;
-    },
-    getUsers(state) {
-      return state.users;
-    },
-    getProfilePicture(state) {
-      return state.userData[0].createPost.profile_picture_localstorage;
-    },
-    getCoverImage(state) {
-      return state.userData[0].coverImage;
-    },
-    getBusinessUserPost(state) {
-      return state.userData[0].business;
-    },
-    getCommunautyUserPost(state) {
-      return state.userData[0].communauty;
-    },
-    getPostLists(state) {
-      return state.userData[0].posts;
-    }
-  },
-  actions,
-  mutations
-});
-
-
+axios.defaults.baseURL = process.env.VUE_APP_API_URL;
 
 const getDefaultState = () => {
   return {
@@ -842,6 +791,7 @@ const actions = {
         throw error;
       });
     return response_;
+  },
   resetCartState({ commit }) {
     commit("resetState");
   },
@@ -1042,13 +992,13 @@ const actions = {
    * @param context
    * @param payload
    */
-   createPost(context, payload) {
+  createPost(context, payload) {
     console.log("Create Post ++++++");
     //console.log(payoad);
     // const url = "https://vuejs-backend-c42b8-default-rtdb.firebaseio.com/users.json";
     //const url = " http://localhost:3000/post";
     //console.log("test");
-     fetch(state.url_base + state.url_create_post, {
+    fetch(state.url_base + state.url_create_post, {
       method: "POST",
       headers: {
         "Content-Type": "multipart/form-data",
@@ -1066,7 +1016,8 @@ const actions = {
           throw "Error To Create Post";
         }
         console.log("Create Post Online +++++");
-        console.log(response);      })
+        console.log(response);
+      })
       .catch(error => {
         if (error instanceof TypeError) {
           console.log("create Post erreur Lié au navigateur");
@@ -1408,131 +1359,168 @@ export default new Vuex.Store({
     },
     getDashboardPosts(state) {
       return state.userData[0].posts;
+    },
+    resetState(state) {
+      // Merge rather than replace so we don't lose observers
+      // https://github.com/vuejs/vuex/issues/1118
+      Object.assign(state, getDefaultState());
+    },
+    recoverData: (state, data) => (state.recoverData = data),
+    increment(state, payload) {
+      state.count += payload.amount;
+    },
+    login(state, payload) {
+      for (let i = 0; i < state.users.length; i++) {
+        if (
+          state.users[i].username === payload.username &&
+          state.users[i].password === payload.password
+        ) {
+          state.login = true;
+          state.userData[0].id = state.users[i].id;
+          state.userData[0].fullname = state.users[i].fullname;
+          state.userData[0].username = state.users[i].username;
+          state.userData[0].email = state.users[i].email;
+          state.userData[0].password = state.users[i].password;
+        }
+      }
+    },
+    service(state, payload) {
+      for (let i = 0; i < state.services.length; i++) {
+        if (state.services[i].id === payload) {
+          state.service[0].id = state.services[i].id;
+          state.service[0].Name = state.services[i].Name;
+          state.service[0].Localisation = state.services[i].Localisation;
+          state.service[0].Resume = state.services[i].Resume;
+          if (state.userData[0].id === state.services[i].user_id) {
+            state.isToi = true;
+          } else {
+            state.isToi = false;
+          }
+        }
+      }
+    },
+    change(state, payload) {
+      for (let i = 0; i < state.services.length; i++) {
+        if (state.services[i].id === payload.id) {
+          state.services[i].id = payload.id;
+          state.services[i].Name = payload.name;
+          state.services[i].Localisation = payload.location;
+          state.services[i].Resume = payload.resume;
+        }
+      }
+      console.log("reussi");
+    },
+    signin(state, payload) {
+      state.users.push({
+        id: payload.id,
+        fullname: payload.fullname,
+        username: payload.username,
+        email: payload.email,
+        password: payload.password
+      });
+      console.log("reussi");
+    },
+    keepService(state, payload) {
+      state.services.push({
+        id: payload.id,
+        Name: payload.name,
+        Image: "Clet",
+        Localisation: payload.location,
+        Resume: payload.resume,
+        user_id: payload.user_id
+      });
+      console.log("reussi");
+    },
+    editPostUserIntro(state, payload) {
+      state.userData[0].userProfileOwner = payload.data;
+    },
+    changeProfilePicture(state, payload) {
+      //console.log("Profile Picture Updated");
+      //console.log(payload);
+      //console.log(state.userData);
+      state.userData[0].createPost.profile_picture = payload.profilePicture;
+      state.userData[0].createPost.profile_picture_localstorage =
+        payload.profilePictureLocalStorage;
+      state.userData[0].profilePicture = payload.profilePicture;
+      //state.userData[0].coverImage = payload.profilePictureLocalStorage;
+      //console.log(state.userData);
+    },
+    changeCoverImage(state, payload) {
+      //console.log("Profile Picture Updated");
+      //console.log(payload);
+      //console.log(state.userData);
+      state.userData[0].createPost.coverImage = payload.coverImage;
+      state.userData[0].coverImage = payload.coverImageLocalStorage;
+      //console.log(state.userData);
+    },
+    /**
+     *
+     * @param state
+     * @param payload
+     */
+    createPost(state, payload) {
+      state.userData[0].posts = payload.posts;
+    },
+    /**
+     *
+     * @param state
+     * @param payload
+     */
+    retrieveBusinessUserPost(state, payload) {
+      console.log("Retrieve business en cours");
+      console.log(state);
+      console.log(payload);
+      //state.userData[0].business = payload.business;
+    },
+    /**
+     *
+     * @param state
+     * @param payload
+     */
+    retrievePostsListUser(state, payload) {
+      state.userData[0].posts = payload.posts;
+    },
+    recoverPassData: state => {
+      return state.recoverData;
+    },
+    doneTodos: state => {
+      return state.todos.filter(todo => todo.done);
+    },
+    loggedIn(state) {
+      return state.login;
+    },
+    getUser(state) {
+      return state.userData;
+    },
+    getService(state) {
+      return state.service;
+    },
+    getUsers(state) {
+      return state.users;
+    },
+    getProfilePicture(state) {
+      return state.userData[0].createPost.profile_picture_localstorage;
+    },
+    getCoverImage(state) {
+      return state.userData[0].coverImage;
+    },
+    getBusinessUserPost(state) {
+      return state.userData[0].business;
+    },
+    getCommunautyUserPost(state) {
+      return state.userData[0].communauty;
+    },
+    getPostLists(state) {
+      return state.userData[0].posts;
     }
   },
   actions,
   mutations,
   modules: {
     auth,
+    networkDetails,
+    dashboardcommunity,
+    ProfileAndBusinessDetails,
     businessOwner
-  resetState(state) {
-    // Merge rather than replace so we don't lose observers
-    // https://github.com/vuejs/vuex/issues/1118
-    Object.assign(state, getDefaultState());
-  },
-  recoverData: (state, data) => (state.recoverData = data),
-  increment(state, payload) {
-    state.count += payload.amount;
-  },
-  login(state, payload) {
-    for (let i = 0; i < state.users.length; i++) {
-      if (
-        state.users[i].username === payload.username &&
-        state.users[i].password === payload.password
-      ) {
-        state.login = true;
-        state.userData[0].id = state.users[i].id;
-        state.userData[0].fullname = state.users[i].fullname;
-        state.userData[0].username = state.users[i].username;
-        state.userData[0].email = state.users[i].email;
-        state.userData[0].password = state.users[i].password;
-      }
-    }
-  },
-  service(state, payload) {
-    for (let i = 0; i < state.services.length; i++) {
-      if (state.services[i].id === payload) {
-        state.service[0].id = state.services[i].id;
-        state.service[0].Name = state.services[i].Name;
-        state.service[0].Localisation = state.services[i].Localisation;
-        state.service[0].Resume = state.services[i].Resume;
-        if (state.userData[0].id === state.services[i].user_id) {
-          state.isToi = true;
-        } else {
-          state.isToi = false;
-        }
-      }
-    }
-  },
-  change(state, payload) {
-    for (let i = 0; i < state.services.length; i++) {
-      if (state.services[i].id === payload.id) {
-        state.services[i].id = payload.id;
-        state.services[i].Name = payload.name;
-        state.services[i].Localisation = payload.location;
-        state.services[i].Resume = payload.resume;
-      }
-    }
-    console.log("reussi");
-  },
-  signin(state, payload) {
-    state.users.push({
-      id: payload.id,
-      fullname: payload.fullname,
-      username: payload.username,
-      email: payload.email,
-      password: payload.password
-    });
-    console.log("reussi");
-  },
-  keepService(state, payload) {
-    state.services.push({
-      id: payload.id,
-      Name: payload.name,
-      Image: "Clet",
-      Localisation: payload.location,
-      Resume: payload.resume,
-      user_id: payload.user_id
-    });
-    console.log("reussi");
-  },
-  editPostUserIntro(state, payload) {
-    state.userData[0].userProfileOwner = payload.data;
-  },
-  changeProfilePicture(state, payload) {
-    //console.log("Profile Picture Updated");
-    //console.log(payload);
-    //console.log(state.userData);
-    state.userData[0].createPost.profile_picture = payload.profilePicture;
-    state.userData[0].createPost.profile_picture_localstorage =
-      payload.profilePictureLocalStorage;
-    state.userData[0].profilePicture = payload.profilePicture;
-    //state.userData[0].coverImage = payload.profilePictureLocalStorage;
-    //console.log(state.userData);
-  },
-  changeCoverImage(state, payload) {
-    //console.log("Profile Picture Updated");
-    //console.log(payload);
-    //console.log(state.userData);
-    state.userData[0].createPost.coverImage = payload.coverImage;
-    state.userData[0].coverImage = payload.coverImageLocalStorage;
-    //console.log(state.userData);
-  },
-  /**
-   *
-   * @param state
-   * @param payload
-   */
-  createPost(state, payload) {
-    state.userData[0].posts = payload.posts;
-  },
-  /**
-   *
-   * @param state
-   * @param payload
-   */
-  retrieveBusinessUserPost(state, payload) {
-    console.log("Retrieve business en cours");
-    console.log(state);
-    console.log(payload);
-    //state.userData[0].business = payload.business;
-  },
-  /**
-   *
-   * @param state
-   * @param payload
-   */
-  retrievePostsListUser(state, payload) {
-    state.userData[0].posts = payload.posts;
   }
 });

@@ -360,6 +360,7 @@ export default {
         comment_created: this.post_comment_input,
         type: 'create'
       })
+      this.post_comment_input = null;
     },
     crudComment( payload ) {
       console.log("crud Comment start  ++++");

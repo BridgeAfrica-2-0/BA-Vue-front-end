@@ -892,7 +892,7 @@ export default {
       //formData2.append("media", this.createPost.hyperlinks);
       formData2.append("content", this.createPost.postNetworkUpdate);
       this.axios
-      .post("network/post/create"+this.networkInfo[0].id, formData2, {
+      .post("network/post/create/"+this.networkInfo[0].id, formData2, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
@@ -950,26 +950,15 @@ export default {
 </script>
 
 <style scoped>
-
-
-
-
-
-
-
 .custom-block-class {
   position: absolute;
   z-index: 1;
 }
 
-
-
 #preview {
   display: flex;
   justify-content: center;
   align-items: center;
-   
- 
 }
 
 .upload-cancel{
@@ -979,10 +968,6 @@ export default {
      margin-top: -40%;
     float: right;
 }
-
-
-
-
 .upload-cancel:hover{
 
    color:orange;

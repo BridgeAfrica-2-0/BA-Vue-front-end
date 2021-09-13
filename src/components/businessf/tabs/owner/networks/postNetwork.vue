@@ -512,7 +512,7 @@
         />  
        -->
       </b-row>
-      <infinite-loading @infinite="infiniteHandler"></infinite-loading>
+      <!-- <infinite-loading @infinite="infiniteHandler"></infinite-loading> -->
     </b-card>
   </div>
 </template>
@@ -530,7 +530,7 @@ export default {
     return {
       moment: moment,
       page:1,
-      post:this.$store.state.businessOwner.ownerPost,
+      post:this.$store.state.networkProfile.ownerPost,
      url:null,
      delete:[],
      edit_description:null,
@@ -591,32 +591,20 @@ export default {
     },
    
     business_logo() {
-      return  this.$store.state.businessOwner.businessInfo.logo_path;  
+      return  this.$store.state.networkProfile.businessInfo.logo_path;  
     },
     owner_post() {
-      return  this.$store.state.businessOwner.ownerPost;  
+      return  this.$store.state.networkProfile.ownerPost;  
     },
     profileNamePost() {
     return "yoo";
     }
   },
   mounted() {
-    this.getNetworkInfo();
     this.url = this.$route.params.id;
   },
   
   methods: {
-
-    getNetworkInfo() {
-      this.$store
-      .dispatch("networkProfile/getnetworkInfo")
-      .then(() => {
-        console.log('ohh yeah');
-      })
-      .catch(err => {
-        console.log({ err: err });
-      });
-    },
 
      nFormatter(num) {
       if (num >= 1000000000) {
@@ -632,7 +620,7 @@ export default {
     },
 
      infiniteHandler($state) {
-      this.axios.get('business/show/post/'+this.url+"/"+this.page)
+      this.axios.get('network/show/post/'+this.url+"/"+this.page)
       .then(({ data }) => {
       // commit('ownerPost', data.data);
       //  console.log(data);
@@ -864,7 +852,7 @@ export default {
 
     ownerPost() {
       this.$store
-        .dispatch("businessOwner/ownerPost", this.url)
+        .dispatch("networkProfile/ownerPost", this.url)
         .then(() => {
           console.log("hey yeah");
         })
@@ -892,7 +880,7 @@ export default {
       //formData2.append("media", this.createPost.hyperlinks);
       formData2.append("content", this.createPost.postNetworkUpdate);
       this.axios
-      .post("network/post/create/"+this.networkInfo[0].id, formData2, {
+      .post("network/post/create/"+this.url, formData2, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
@@ -920,7 +908,7 @@ export default {
         } else {
           this.flashMessage.show({
             status: "error",
-            message: "Unable to Create Your Business",
+            message: "Unable to Create Your Post",
             blockClass: "custom-block-class",
           });
           console.log({ err: err });

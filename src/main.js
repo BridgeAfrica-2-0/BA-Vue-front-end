@@ -24,7 +24,7 @@ Vue.use(LoadScript);
 Vue.use(Vuex);
 Vue.use(VueAxios, axios);
 
-Vue.use(require('vue-moment'));
+// Vue.use(require('vue-moment'));
 IconifyIcon.addIcon('home', homeIconData);
 
 Vue.use(ReadMore);
@@ -145,9 +145,9 @@ Vue.use(VueGoogleMaps, {
 
 
 
-import VueAgile from 'vue-agile'
+// import VueAgile from 'vue-agile'
 
-Vue.use(VueAgile);
+// Vue.use(VueAgile);
 
 
 Vue.component("v-select", vSelect);

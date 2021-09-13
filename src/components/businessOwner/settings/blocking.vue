@@ -34,7 +34,7 @@ export default {
   name: "blocking",
   data() {
     return {
-      
+      url: this.$route.params.id
     }
 	},
   computed: {
@@ -43,13 +43,13 @@ export default {
     }
   },
   mounted(){
-    this.blockUsers() 
+    this.blockUsers();
   },
   methods:{
      
     blockUsers() {
     this.$store
-      .dispatch("businessBlocking/getblockusers")
+      .dispatch("businessBlocking/getblockusers", this.url)
       .then(() => {
         console.log('ohh year');
       })
@@ -59,7 +59,7 @@ export default {
     },
      
     UnblockBlockUser(blockuser) {
-			axios.post("business/unblocking/6/10", blockuser)
+			axios.post("business/unblocking/6/"+this.url, blockuser)
 			.then(response => {
 			  console.log(response);
         this.blockUsers();

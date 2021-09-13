@@ -106,9 +106,26 @@
               EDIT EDITOR: {{clickedObject.name}}
             </template>
             <div class="d-block text-center">
-              <h3>You : {{clickedObject.name}}!</h3>
+               <b-form-group
+                  label-cols-lg="3"
+                  label="Role"
+                  label-size="md"
+                  label-class="font-weight-bold pt-0"
+                  class="mb-0"
+                >
+                  <b-form-select
+                    id="role"
+                    v-model="form.role"
+                    :options="roles"
+                    name="role"
+                    value-field="id"
+                    text-field="name"
+                    class="mb-3"
+                  >
+                  </b-form-select>
+                </b-form-group>
             </div>
-            <b-button class="mt-3" block @click="$bvModal.hide('edit-editor'); editEditor(clickedObject)">EDIT</b-button>
+            <b-button class="mt-3" block variant="primary" @click="$bvModal.hide('edit-editor'); editEditor(clickedObject)">EDIT</b-button>
           </b-modal>
 
           <b-modal id="delete-editor" hide-footer>
@@ -132,6 +149,7 @@ export default {
   name: "roles",
   data() {
 			return {
+        url: this.$route.params.id,
         clickedObject: {},
         form: {
           name: "",
@@ -187,7 +205,7 @@ export default {
     },
     displayEditor() {
     this.$store
-      .dispatch("businessRole/geteditors")
+      .dispatch("businessRole/geteditors", this.url)
       .then(() => {
         console.log('ohh yeah');
       })
@@ -195,25 +213,45 @@ export default {
         console.log({ err: err });
       });
     },
+    editEditor: function(clickedObject){
+      let formData = new FormData();
+      formData.append('name', clickedObject.name);
+      formData.append('role', this.form.role);
+      this.axios.post("business/role/update/"+this.url, formData)
+      .then(() => {
+        console.log('ohh yeah');
+        this.flashMessage.show({
+          status: "success",
+          message: "New Role Assigned"
+        });
+      })
+      .catch(err => {
+        console.log({ err: err });
+        this.flashMessage.show({
+          status: "error",
+          message: "Unable to Assigned New Role"
+        });
+      });
+		},
     assignRole: function(){
      
-        this.axios.post("business/role/update/2", this.form)
-        .then(() => {
-          console.log('ohh yeah');
+      this.axios.post("business/role/update/2", this.form)
+      .then(() => {
+        console.log('ohh yeah');
 
-          this.flashMessage.show({
-            status: "success",
-            message: "New Role Assigned"
-          });
-            
-        })
-        .catch(err => {
-          console.log({ err: err });
-          this.flashMessage.show({
-            status: "error",
-            message: "Unable to Assigned New Role"
-          });
+        this.flashMessage.show({
+          status: "success",
+          message: "New Role Assigned"
         });
+          
+      })
+      .catch(err => {
+        console.log({ err: err });
+        this.flashMessage.show({
+          status: "error",
+          message: "Unable to Assigned New Role"
+        });
+      });
 		},
     deleteEditor: function(editor){
       var formData = this.toFormData(editor)

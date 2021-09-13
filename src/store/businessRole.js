@@ -56,9 +56,9 @@ export default {
       })
     },
 
-    geteditors( {commit} ){
+    geteditors( {commit}, businessId ){
       return axios
-      .get("business/role/editor/1")
+      .get("business/role/editor/"+businessId)
       .then(({ data }) => {
           commit("seteditors", data.data);
         console.log(data);

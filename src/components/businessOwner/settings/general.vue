@@ -7,7 +7,6 @@
       <b-button variant="primary" class="a-button-l" @click="updateGeneralInfo()">Save Changes</b-button>
       <br />
     </div>
-<!-- {{id}} -->
     <div class="b-bottom">
       <b-container>
         <b-form-group
@@ -121,7 +120,7 @@
     </div>
 
     <b-container>
-      <b-link href="#" class="f-left" @click="$bvModal.show('delete-business'); selectObject({ id: '1' })">Delete Business Identity</b-link>
+      <b-link href="#" class="f-left" @click="$bvModal.show('delete-business'); selectObject(this.url)">Delete Business Identity</b-link>
       <div>
         <b-modal id="delete-business" hide-footer>
           <template #modal-title>
@@ -133,7 +132,7 @@
           <!-- <b-button class="mt-3" block @click="$bvModal.hide('delete-business'); deleteBusiness(clickedObject.id)">Delete Business</b-button> -->
           <b-button class="mt-2 " style="float:right" variant="primary" @click="$bvModal.hide('delete-business'); deleteBusiness(clickedObject.id)">Delete Business</b-button>
             
-          <b-button class="mt-2 " style="float:right" variant="primary" @click="$bvModal.hide('delete-business')">Cancel</b-button>
+          <b-button class="mt-2 " style="float:right" @click="$bvModal.hide('delete-business')">Cancel</b-button>
         </b-modal>
       </div>
     </b-container>
@@ -146,7 +145,7 @@ export default {
   name: "general",
   data(){
       return{
-        // id: this.$route.params.id ,
+        url: this.$route.params.id,
         clickedObject: {},
         busiess_id: "",
         businessVisibility: [
@@ -158,8 +157,8 @@ export default {
           { label: 'Allow visitors/followers to post', value: 'Allow visitors/followers to post'}
         ],
         form: {
-            visibility: "",
-            permissions: "",
+            visibility: "publish",
+            permissions: "Allow visitors/followers to post",
             post_approval: "",
             keywords_alert: "",
             marketplace: "",
@@ -175,13 +174,13 @@ export default {
   },
 
   mounted(){
-    this.getBusiness() 
+    this.getBusiness();
   },
 
   methods:{
     getBusiness() {
     this.$store
-      .dispatch("businessGeneral/getbusiness")
+      .dispatch("businessGeneral/getbusiness", this.url)
       .then(() => {
         console.log('ohh yeah');
       })
@@ -191,7 +190,7 @@ export default {
     },
 
     updateGeneralInfo: function(){
-      this.axios.post("business/general/update/2", this.form)
+      this.axios.post("business/general/update/"+this.url, this.form)
       .then(() => {
         console.log(this.form);
         this.flashMessage.show({

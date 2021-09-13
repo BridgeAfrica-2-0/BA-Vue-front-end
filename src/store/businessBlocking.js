@@ -23,9 +23,9 @@ export default {
   actions: {
 
 
-    getblockusers( {commit}, id ){
+    getblockusers( {commit}, businessId ){
       return axios
-      .get(`business/blocking/${id}`)
+      .get(`business/blocking/${businessId}`)
       .then(({ data }) => {
           commit("setblocking", data.data);
         console.log(data);

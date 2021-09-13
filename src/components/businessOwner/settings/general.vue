@@ -7,7 +7,7 @@
       <b-button variant="primary" class="a-button-l" @click="updateGeneralInfo()">Save Changes</b-button>
       <br />
     </div>
-
+<!-- {{id}} -->
     <div class="b-bottom">
       <b-container>
         <b-form-group
@@ -146,6 +146,7 @@ export default {
   name: "general",
   data(){
       return{
+        // id: this.$route.params.id ,
         clickedObject: {},
         busiess_id: "",
         businessVisibility: [
@@ -165,7 +166,30 @@ export default {
         }
       }
   },
+  
+  computed: {
+
+    business() {
+      return this.$store.state.businessGeneral.business;
+    }
+  },
+
+  mounted(){
+    this.getBusiness() 
+  },
+
   methods:{
+    getBusiness() {
+    this.$store
+      .dispatch("businessGeneral/getbusiness")
+      .then(() => {
+        console.log('ohh yeah');
+      })
+      .catch(err => {
+        console.log({ err: err });
+      });
+    },
+
     updateGeneralInfo: function(){
       this.axios.post("business/general/update/2", this.form)
       .then(() => {

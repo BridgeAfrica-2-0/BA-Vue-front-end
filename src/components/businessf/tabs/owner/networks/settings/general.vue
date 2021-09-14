@@ -1,6 +1,8 @@
 <template>
   <b-container>
-    <flashMessage />
+    <flashMessage/>
+
+
     <div class="">
       <b-container>
         <b-form-group
@@ -85,7 +87,6 @@
 </template>
 
 <script>
-import axios from "axios";
 export default {
   name: "general",
   data() {
@@ -101,29 +102,44 @@ export default {
 
   methods: {
     submit() {
-      this.axios.post("/network/generalSettings/1", this.form).then(
-        function(response) {
-          // Handle success
-        }.bind(this)
-      );
-      console.log(this.form);
-      this.flashMessage.show({
-        status: "success",
-        message: "Changes Made Successfuly"
-      });
+      this.axios
+        .post("/network/generalSettings/1", this.form)
+        .then(res => {
+          console.log(this.form);
+          this.flashMessage.success({
+            title: "OK",
+            message: "Changes Made Successfuly",
+            icon: true
+          });
+        })
+        .catch(() => {
+          this.flashMessage.error({
+            title: "Error",
+            message: "Changes not made",
+            icon: true
+          });
+        });
     },
 
     deleteNetwork() {
       this.$axios
         .post("/network", this.network_id)
-        .then(function(response){
+        .then(function(response) {
+          console.log(this.form);
+          this.flashMessage.success({
+            title: "OK",
+            message: "Deleted Successfuly",
+            icon: true
+          });
+        })
+        .catch(() => {
+          this.flashMessage.error({
+            title: "Error",
+            message: "Deletion Unsuccessful",
+            icon: true
 
-        }.bind(this));
-      console.log(this.form);
-      this.flashMessage.show({
-        status: "success",
-        message: "Deleted Successfuly"
-      });
+          });
+        });
     }
   }
 };

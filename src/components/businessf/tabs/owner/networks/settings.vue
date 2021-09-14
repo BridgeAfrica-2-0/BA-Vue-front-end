@@ -154,7 +154,7 @@
       <b-row>
         <b-col>
           <div class="b-bottomn f-right">
-            <b-button variant="primary" class="a-button-l b-font">
+            <b-button variant="primary" class="a-button-l b-font" v-on:click="submit()">
               Save Changes
             </b-button>
           </div>
@@ -168,7 +168,65 @@
 
 <script>
 export default {
-  name: "general"
+  name: "general",
+  data() {
+    return {
+      form: {
+        Network_Name:"",
+        Category:"",
+        Phone_1:"",
+        Phone_2:"",
+        Email:"",
+        Country:"",
+        City:"",
+        Neighborhood:"",
+        Website:"",
+        Description:"",
+      }
+    };
+  },
+  methods: {
+    submit() {
+      this.axios
+        .post("/network/generalSettings/1", this.form)
+        .then(res => {
+          console.log(this.form);
+          this.flashMessage.success({
+            title: "OK",
+            message: "Changes Made Successfuly",
+            icon: true
+          });
+        })
+        .catch(() => {
+          this.flashMessage.error({
+            title: "Error",
+            message: "Changes not made",
+            icon: true
+          });
+        });
+    },
+
+    deleteNetwork() {
+      this.$axios
+        .post("/network", this.network_id)
+        .then(function(response) {
+          console.log(this.form);
+          this.flashMessage.success({
+            title: "OK",
+            message: "Deleted Successfuly",
+            icon: true
+          });
+        })
+        .catch(() => {
+          this.flashMessage.error({
+            title: "Error",
+            message: "Deletion Unsuccessful",
+            icon: true
+
+          });
+        });
+    }
+  }
 };
 </script>
 

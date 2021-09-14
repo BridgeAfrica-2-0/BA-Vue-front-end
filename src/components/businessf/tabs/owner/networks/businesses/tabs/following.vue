@@ -17,8 +17,11 @@
     <br />
 
     <b-row>
-      <b-col md="12">
-        <CommunityBusiness />
+      <b-col v-if="followings.length <= 0" >
+        No Community Business
+      </b-col>
+      <b-col md="12" lg="6" v-for="member in followings" :key="member.id" v-else>
+        <CommunityBusiness :member="member" />
       </b-col>
     </b-row>
   </div>
@@ -29,7 +32,8 @@ import CommunityBusiness from "../../communitybusiness";
 export default {
   components: {
     CommunityBusiness
-  }
+  },
+  props: ["followings"]
 };
 </script>
 

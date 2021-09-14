@@ -2,9 +2,13 @@
   <div class="mt-3">
     <div>
       <b-tabs pills content-class="mt-3 f-left">
-        <b-tab title="People" active> <People /> </b-tab>
+        <b-tab title="People" active> 
+          <People :people="userdetails" /> 
+        </b-tab>
 
-        <b-tab title="Businesses"> <Businesses /> </b-tab>
+        <b-tab title="Businesses"> 
+          <Businesses :businesses="businessdetails" /> 
+        </b-tab>
       </b-tabs>
     </div>
   </div>
@@ -22,6 +26,7 @@ export default {
   },
   data() {
     return {
+      url: this.$route.params.id,
       perPage: 3,
       currentPage: 1,
       items: [
@@ -37,10 +42,47 @@ export default {
       ]
     };
   },
+
   computed: {
     rows() {
       return this.items.length;
+    },
+    userdetails() {
+      return this.$store.state.networkProfileCommunity.userdetails;
+    },
+    businessdetails() {
+      return this.$store.state.networkProfileCommunity.businessdetails;
     }
+  },
+
+  mounted(){
+    this.UserDetails();
+    this.businessDetails();
+  },
+
+  methods:{    
+
+    UserDetails() {
+    this.$store
+      .dispatch("networkProfileCommunity/getUserDetails", this.url)
+      .then(() => {
+        console.log('ohh year');
+      })
+      .catch(err => {
+        console.log({ err: err });
+      });
+    },
+
+    businessDetails() {
+    this.$store
+      .dispatch("networkProfileCommunity/getBusinessDetails", this.url)
+      .then(() => {
+        console.log('ohh year');
+      })
+      .catch(err => {
+        console.log({ err: err });
+      });
+    },
   }
 };
 </script>

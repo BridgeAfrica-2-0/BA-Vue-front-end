@@ -1,8 +1,12 @@
 <template>
   <div class="lalala">
     <b-tabs content-class="mt-3" fill pills>
-      <b-tab title="Followers"><Followers /></b-tab>
-      <b-tab title="Following"><Following /></b-tab>
+      <b-tab title="Followers">
+        <Followers :followers="businesses.Business_followers" />
+      </b-tab>
+      <b-tab title="Following">
+        <Following :followings="businesses.Business_following" />
+      </b-tab>
     </b-tabs>
   </div>
 </template>
@@ -14,7 +18,8 @@ export default {
   components: {
     Followers,
     Following
-  }
+  },
+  props: ["businesses"]
 };
 </script>
 

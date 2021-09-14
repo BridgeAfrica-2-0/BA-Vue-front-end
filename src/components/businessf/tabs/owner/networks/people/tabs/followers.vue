@@ -17,7 +17,12 @@
 
     <b-row>
       <b-col md="12" class="ml-0 mr-0">
-        <CommunityMembers />
+        <b-col v-if="followers.length <= 0" >
+          No Community Members
+        </b-col>
+        <b-col md="12" lg="6" v-for="member in followers" :key="member.id" v-else>
+          <CommunityMembers :member="member" />
+        </b-col>
       </b-col>
     </b-row>
   </div>
@@ -28,7 +33,8 @@ import CommunityMembers from "../../communityMember";
 export default {
   components: {
     CommunityMembers
-  }
+  },
+  props: ["followers"]
 };
 </script>
 

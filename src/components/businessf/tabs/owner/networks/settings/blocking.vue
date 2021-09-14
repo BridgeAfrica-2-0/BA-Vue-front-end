@@ -63,7 +63,7 @@ export default {
 
     UnblockBlockUser(blockuser) {
       axios
-        .post("business/unblocking/6/" + this.url, blockuser)
+        .post("/network/unblocking/6/" + this.url, blockuser)
         .then(response => {
           console.log(response);
           this.blockUsers();

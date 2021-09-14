@@ -223,7 +223,7 @@ export default {
       formData.append("name", clickedObject.name);
       formData.append("role", this.form.role);
       this.axios
-        .post("business/role/update/" + this.url, formData)
+        .post("/network/role/update/" + this.url, formData)
         .then(() => {
           console.log("ohh yeah");
           this.flashMessage.show({
@@ -241,7 +241,7 @@ export default {
     },
     assignRole: function() {
       this.axios
-        .post("business/role/update/2", this.form)
+        .post("/network/role/update/2", this.form)
         .then(() => {
           console.log("ohh yeah");
           this.flashMessage.show({

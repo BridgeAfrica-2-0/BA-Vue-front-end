@@ -76,12 +76,9 @@ export default {
   actions: {
 
     login({ commit }, credentials) {
-      return axios
-        .post('user/login', credentials)
-        .then(({ data }) => {
-          commit('setUserData', data.data)
-
-        })
+      return axios.post("user/login", credentials).then(({ data }) => {
+        commit("setUserData", data.data);
+      });
     },
 
 
@@ -176,8 +173,6 @@ export default {
 
 
     }
-
-
   },
 
   getters: {

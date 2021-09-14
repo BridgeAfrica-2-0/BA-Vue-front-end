@@ -25,7 +25,7 @@
         </b-card>
         <br />
       </div>
-      .
+
       <div v-if="selectedb == 'owner'">
         <b-row class=" p-0">
           <b-col md="6" sm="12" class="mt-2 "> <Profile /> </b-col>
@@ -57,8 +57,12 @@
 
       <div v-if="selectedb != 'owner'">
         <b-row>
-          <b-col md="6" sm="12" class="mt-2"> <BusinessDashboard /> </b-col>
-          <b-col md="6" sm="12" class="mt-2"> <Insights /> </b-col>
+          <b-col md="6" sm="12" class="mt-2">
+            <BusinessDashboard :selectedb="selectedb" />
+          </b-col>
+          <b-col md="6" sm="12" class="mt-2">
+            <Insights :selectedb="selectedb" />
+          </b-col>
         </b-row>
       </div>
       <br />
@@ -139,85 +143,25 @@ import EmptyBusiness from "@/components/dasboard/emptybusiness";
 import Popularnetwork from "@/components/dasboard/popularnetwork";
 export default {
   name: "dashboard",
+
   data() {
     return {
       slide: 0,
+
       sliding: null,
-      selected: "all",
-      location: "any",
-      category: "any",
-      post: "any",
+
       selectedb: "owner",
-      educatio: "any",
 
       map: false,
 
-      boptions: [
-        { value: "owner", text: "Owner's Name" },
-        { value: "a", text: "Business Name 1" },
-        { value: "b", text: "Business Name 2" },
-        { value: "c", text: "Business Name 3" }
-      ],
-      options: [
-        { item: "all", name: "All" },
-        { item: "business", name: "Business" },
-        { item: "people", name: "People" },
-        { item: "network", name: "Network" },
-        { item: "marketplace", name: "Markeplace", notEnabled: false },
-        { item: "posts", name: "Posts" },
-      ],
-      filters: [
-        { item: "any", name: "Location : Any" },
-        { item: "yaounde", name: "Yaounde, Cameroon" },
-        { item: "dhaka ", name: "Dhaka, Bangladesh" },
-        { item: "new york", name: "New York, United States" },
-        { item: "douala", name: "Douala, Cameroon" },
-        { item: "karachi", name: "Karachi, Pakistan" },
-      ],
-      categories: [
-        { item: "any", name: "Category : Any" },
-        { item: "restaurant", name: "Restaurant" },
-        { item: "home service", name: "Home Services" },
-        { item: "auto service", name: "Auto Services" },
-        { item: "argiculture", name: "Agriculture" },
-        { item: "technology", name: "Technology" },
-      ],
-      posts: [
-        { item: "any", name: "Post: Any" },
-        { item: "people", name: "People I am following" },
-        { item: "business", name: "Businesses i am following" },
-        { item: "networks", name: "Networks I am following" },
-      ],
+      category: "",
 
-      education: [
-        { item: "any", name: "Education: Any" },
-        { item: "ub", name: "University Of Buea" },
-        { item: "uba", name: "University Of Yaounde" },
-        { item: "uy", name: "University Of Yaounde 1" },
-      ],
+      boptions: [],
 
-      profession: [
-        { item: "any", name: "Profession: Any" },
-        { item: "engineer", name: "Engineen" },
-        { item: "teacher", name: "Teacher" },
-        { item: "farmer", name: "Farmer" },
-      ],
-
-      workplace: [
-        { item: "any", name: "Post: Any" },
-        { item: "yaounde", name: "Yaounde" },
-        { item: "douala", name: "Douala" },
-        { item: "Buea", name: "Buea" },
-      ],
-
-      sponsoredBusinesses: [
-        { title: "Business 1" },
-        { title: "Business 2" },
-        { title: "Business 3" },
-        { title: "Business 4" },
-      ],
+      detail: null
     };
   },
+
   components: {
     ComunitiDashboard,
     BusinessDashboard,
@@ -230,9 +174,72 @@ export default {
     EmptyBusiness,
     Profile,
     CarousselDashboard,
-    Navbar,
+    Navbar
   },
-  methods: {},
+
+  methods: {
+    getbusiness() {
+
+      console.log(
+        JSON.parse(
+          JSON.stringify(
+            this.$store.getters["ProfileAndBusinessDetails/getdetails"]
+          )
+        ).owner
+      );
+
+
+      let owner = JSON.parse(
+        JSON.stringify(
+          this.$store.getters["ProfileAndBusinessDetails/getdetails"]
+        )
+      ).owner;
+
+
+      owner = owner.map(value => {
+        this.boptions.push({ text: value.name, value: "owner" });
+        return value;
+      });
+
+
+      console.log(
+        JSON.parse(
+          JSON.stringify(
+            this.$store.getters["ProfileAndBusinessDetails/getdetails"]
+          )
+        ).business
+      );
+      let businesses = JSON.parse(
+        JSON.stringify(
+          this.$store.getters["ProfileAndBusinessDetails/getdetails"]
+        )
+      ).business;
+      businesses = businesses.map(value => {
+        this.boptions.push({ text: value.name, value: value.id });
+        return value;
+      });
+      return this.boptions;
+    }
+  },
+
+  mounted() {},
+
+  created() {
+    this.$store
+      .dispatch("ProfileAndBusinessDetails/getdetails")
+      .then(response => {
+        this.getbusiness();
+      });
+  },
+
+  computed: {
+    details() {
+      return this.$store.getters["ProfileAndBusinessDetails/getdetails"];
+    }
+  },
+  watch: {
+    selectedb(newvalue) {}
+  }
 };
 </script>
 

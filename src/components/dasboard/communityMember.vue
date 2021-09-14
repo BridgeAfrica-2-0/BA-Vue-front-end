@@ -187,7 +187,7 @@ export default {
 
 .a-left {
   text-align: left;
-  align-content: left;
+  /*align-content: left;*/
 }
 
 hr {
@@ -208,12 +208,12 @@ hr {
 
 f-right {
   text-align: right;
-  align-content: right;
+  /*align-content: right;*/
 }
 
 .f-left {
   text-align: left;
-  align-content: left;
+  /*align-content: left;*/
 }
 
 @media only screen and (max-width: 768px) {

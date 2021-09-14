@@ -10,13 +10,7 @@
             </div>
           </div>
         </b-col>
-        <b-col
-          cols="12"
-          md="4"
-          class="my-auto"
-          v-for="post in albums"
-          :key="post.id"
-        >
+        <b-col cols="12" md="4" class="my-auto" v-for="post in albums" :key="post.id">
           <b-img
             @click="openAlbum(post.id)"
             class="image-album"

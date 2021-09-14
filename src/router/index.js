@@ -97,10 +97,13 @@ const routes = [
     component: templateView
   },
   {
-    path: "/business_owner",
+    path: "/business_owner/:id?",
     name: "BusinessOwner",
     component: businessOwner
   },
+
+  
+
 
   {
     path: "/business_owner_setting_general",

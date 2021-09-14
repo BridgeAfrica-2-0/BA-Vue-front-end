@@ -9,7 +9,7 @@
               :icon="['fas', 'hands-helping']"
               size="lg"
             />
-            <b> Business </b>
+            <b> {{business.name}} </b>    
           </h6>
 
           <h6 class="float-right text-success font-weight-bolder">
@@ -21,37 +21,40 @@
       </span>
 
       <div class="d-flex col-md-12 mt-2">
-        <img class="img-fluid picture" src="@/assets/img/photo2.jpg" />
+        <img class="img-fluid picture" :src="business.picture" />
         <div class="text-lost">
-          <b>{{ business[selectedb - 2].name }}</b>
+          <b>  {{business.name}}  </b>
           <p class="mb-1">
-            {{ business[selectedb - 2].followers }} Community <br />
+              {{business.followers}}  Community <br />
             <span class=""
               >Current Plan: <span class="text-success">Basic</span></span
             >
           </p>
-          <p class="mb-1 mb-3">{{ business[selectedb - 2].category }}</p>
+          <p class="mb-1 mb-3"> {{business.category}} </p>
           <p class="mb-1">
             <b-icon-person-fill class="text-primary"></b-icon-person-fill>
-            Visit Profile
+              <router-link :to="'business_owner/'+business.id">
+                 Visit Profile
+          </router-link>
+
+
           </p>
           <p class="mb-1 ">
             <b-icon-chat-fill class="text-primary"></b-icon-chat-fill>
             Message
-            <span class="badge rounded-pill bg-primary float-right mt-1">{{
-              business[selectedb - 2].message
-            }}</span>
+            <span class="badge rounded-pill bg-primary float-right mt-1">
+              {{business.message}}
+            </span>
           </p>
           <p class="mb-1 ">
             <b-icon-bell-fill class="text-primary"></b-icon-bell-fill>
             Notifications
-            <span class="badge rounded-pill bg-primary float-right mt-1">{{
-              business[selectedb - 2].notification
-            }}</span>
+            <span class="badge rounded-pill bg-primary float-right mt-1">  {{business.notification}} </span>
+            
           </p>
           <p class="mb-1 ">
             <b-icon-globe class="text-primary"></b-icon-globe>
-            <a :href="business[selectedb - 2].website"> Visit Website</a>
+            <a > Visit Website</a>
           </p>
           <p class="mb-1 ">
             <b-icon-shop class="text-primary"></b-icon-shop>
@@ -70,10 +73,9 @@ export default {
   name: "businessDashboard",
   props: ["selectedb"],
   computed: {
+
     business() {
-      return this.$store.getters[
-        "ProfileAndBusinessDetails/getdetails.business"
-      ];
+      return this.$store.state.dashboard.dashboard_business;
     }
   },
   created() {
@@ -163,10 +165,17 @@ export default {
 }
 
 .picture {
+  
   border-radius: 10px;
-  width: 48%;
-  flex-basis: 40%;
+    width: 48%;
+    height: 250px;
+    flex-basis: 40%;
+    object-fit: contain;
 }
+
+
+
+
 
 .text-lost {
   flex-basis: 90%;

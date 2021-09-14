@@ -2,6 +2,8 @@
   <div>
     <div class="s-ccard">
       <b-row>
+
+        
         <b-col lg="6" sm="12" class="p-2" v-for="item in people" :key="item.id">
           <div class="people-style border shadow">
             <b-row class="mb-1">

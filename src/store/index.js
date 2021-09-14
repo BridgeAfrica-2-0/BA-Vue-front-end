@@ -1,6 +1,7 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import auth from "./auth";
+import dashboard from "./dashboard";
 import businessOwner from "./businessOwner";
 import ProfileAndBusinessDetails from "./ProfileAndBusinessDetails";
 import hotbusiness from "./hotbusiness";
@@ -9,7 +10,8 @@ import dashboardcommunity from "./dashboardcommunity";
 
 import axios from "axios";
 Vue.use(Vuex);
- axios.defaults.baseURL = process.env.VUE_APP_API_URL;
+ axios.defaults.baseURL = process.env.VUE_APP_API_URL;    
+ //axios.defaults.baseURL ="https://test.maxinemoffett.com/api/v1/";
 export default new Vuex.Store({
   modules: {
     auth,
@@ -17,6 +19,8 @@ export default new Vuex.Store({
     dashboardcommunity,
     ProfileAndBusinessDetails,
     businessOwner,
+    dashboard,
+    hotbusiness,
 
   },
 
@@ -1669,5 +1673,7 @@ const mutations = {
    */
   retrievePostsListUser(state, payload) {
     state.userData[0].posts = payload.posts;
-  }
-});
+  },
+}
+
+

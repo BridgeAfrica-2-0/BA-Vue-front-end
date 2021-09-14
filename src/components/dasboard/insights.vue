@@ -8,15 +8,16 @@
           <b> INSIGHTS </b>
         </h6>
       </span>
-      <p class="text">
-        Discover how customers feel about and interact with you  {{myValue.business[selectedb-2].total_shares}}
+      <p class="text"> 
+        Discover how customers feel about and interact with you  shares 
       </p>
 
         <div class="a-content"> 
             
-            <line-chart
+            <line-chart 
+                   v-if="loaded != false "
                     ref="skills_chart"
-                    :chart-data="chartData"
+                    :chart-data="chartDat[0]"
                     :options="options"
                     class="chart"
                   ></line-chart>
@@ -55,6 +56,8 @@ export default {
   data() {
     return {    
       options,
+      
+
       chartData: {
         labels: ["Posts 33k", "Visit 1.4k", "Share 870"],
         datasets: [
@@ -63,13 +66,82 @@ export default {
             data: [100, 50, 20]
           }
         ]
-      }
+      },
+     
+     
     };
   },
   computed: {
-    currentDataSet() {
-      return this.chartData.datasets[0].data;
-    }
+
+     business() {
+      return this.$store.state.dashboard.dashboard_business;
+    },
+
+
+
+
+     labelArray() {
+     
+      let label=[];
+         label.push('Post '+this.$store.state.dashboard.dashboard_business.total_post);
+        label.push('Visit '+this.$store.state.dashboard.dashboard_business.total_shares);
+         label.push('Share '+this.$store.state.dashboard.dashboard_business.total_visit);
+
+
+       
+        return label;
+       
+      },
+
+      insightData(){
+       
+       let insdata=[];
+       insdata.push(this.$store.state.dashboard.dashboard_business.total_post);
+        insdata.push(this.$store.state.dashboard.dashboard_business.total_shares);
+        insdata.push(this.$store.state.dashboard.dashboard_business.total_visit);
+        return insdata;
+
+
+      },
+
+      dataset(){
+
+        let backgroundColor = ["#f2f200", "#8c008a", "#40c600"];
+        let data = this.insightData;
+        let dat=[];
+
+        dat.push({ backgroundColor: backgroundColor, data: data  });
+     
+       
+       return dat;
+      },
+  
+  
+   chartDat(){
+
+     let chartData=[];
+   //chartData.push( "labels", this.labelArray );
+   chartData.push({ labels: this.labelArray, datasets: this.dataset });
+
+    return  chartData;
+   },
+
+
+   loded(){
+
+     let loaded=false;
+
+     if(this.$store.state.dashboard.dashboard_business.total_post == []){
+       return loaded;
+     }else {return true;}
+   }
+
+
+
+     
+
+
+   
   }
 };
 </script>

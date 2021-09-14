@@ -57,21 +57,6 @@
               alt=""
              @click="showPic(pictures.media, pictures.content )"
           /></a>   
-    <FlashMessage />
-    <div class="row">
-      <div class="container-fluid">
-        <b-modal hide-footer size="xl" id="Details" ref="Details">
-          <img class="card-img" :src="show_url" alt="" />
-        </b-modal>
-
-        <div class="img-gall" v-for="pictures in pictures" :key="pictures.id">
-          <a
-            ><img
-              class="card-img btn p-0 album-img"
-              :src="pictures.media_url"
-              alt=""
-              @click="showPic(pictures.media_url)"
-          /></a>
 
           <div class="mediadesc">
             <ul class="navbar-nav pull-right">
@@ -95,20 +80,44 @@
                   <b-dropdown-item @click="downloadPic(pictures.id)"
                     >Download</b-dropdown-item
                   >
-                  <b-dropdown-item @click="setProfilePic(pictures.id)"
+                    
+                 
+                  <b-dropdown-item  @click="downloadPic(pic.id)" >Download</b-dropdown-item>
+                  <b-dropdown-item   @click="setProfilePic(pic.id)"
                     >Make Profile Picture</b-dropdown-item
                   >
-                  <b-dropdown-item @click="setCoverPic(pictures.id)"
-                    >Make Cover Photo</b-dropdown-item
-                  >
-                  <b-dropdown-item @click="deleteImage(pictures.id)" href="#"
-                    >Delete</b-dropdown-item
-                  >
+                  <b-dropdown-item @click="setCoverPic(pic.id)" >Make Cover Photo</b-dropdown-item>
+                  <b-dropdown-item   @click="deleteImage(pic.id)" href="#">Delete</b-dropdown-item>
+
                 </b-dropdown>
               </li>
             </ul>
           </div>
         </div>
+
+        </div>
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
       </div>
     </div>
   </div>
@@ -121,15 +130,24 @@ export default {
 
   computed: {
     pictures() {
-      return this.$store.state.businessOwner.albumImages;
-    }
+      return this.$store.state.businessOwner.ownerPostImages;  
+    },
   },
 
   methods: {
-    showPic(url) {    
-      console.log(url);
-      this.show_url = url;
-      this.$refs["Details"].show();
+
+
+
+   
+
+
+    showPic(img, content){
+      
+       console.log(img);
+       this.content=content;
+         this.show_url=img;
+         this.$refs["Details"].show();
+
     },
 
     downloadPic(image_id) {

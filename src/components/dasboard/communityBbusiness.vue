@@ -26,7 +26,7 @@
                   >{{ item.country }}
                 </span>
                 <br />
-       <read-more
+<read-more
               more-str="read more"
               class="readmore"
               :text="item.about_business"

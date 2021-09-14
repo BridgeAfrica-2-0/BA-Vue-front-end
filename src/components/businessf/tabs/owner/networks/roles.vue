@@ -164,9 +164,8 @@ export default {
       url: this.$route.params.id,
       clickedObject: {},
       form: {
-        name: "",
-        role: [],
-        follower: []
+        user_id: "",
+        role_id: []
       }
     };
   },
@@ -220,8 +219,8 @@ export default {
     },
     editEditor: function(clickedObject) {
       let formData = new FormData();
-      formData.append("name", clickedObject.name);
-      formData.append("role", this.form.role);
+      formData.append("user_id", clickedObject.user_id);
+      formData.append("role_id", this.form.role_id);
       this.axios
         .post("/network/role/update/" + this.url, formData)
         .then(() => {
@@ -241,7 +240,7 @@ export default {
     },
     assignRole: function() {
       this.axios
-        .post("/network/role/update/2", this.form)
+        .post("/api/v1/network/assignRole/{id}", this.form)
         .then(() => {
           console.log("ohh yeah");
           this.flashMessage.show({

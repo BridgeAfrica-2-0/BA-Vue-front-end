@@ -36,7 +36,7 @@ export default {
     },
 
     getblockusers({ commit }, businessId) {
-      return axios.get(`/business/blocking/${businessId}`).then(({ data }) => {
+      return axios.get(`/network/blocking/${businessId}`).then(({ data }) => {
         commit("setblocking", data.data);
         console.log(data);
       });

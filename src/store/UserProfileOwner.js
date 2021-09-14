@@ -95,6 +95,6 @@ export default {
         commit("ownerPostImages", data.data);
         console.log(data);
       });
-    },
+    }
   }
 };

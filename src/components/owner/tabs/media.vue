@@ -19,49 +19,8 @@ import Album from "./album";
 import Images from "./images";
 import axios from "axios";
 export default {
-  components: {
-    Album,
-    Images
-  },
-  methods: {
-    onClick(i) {
-      this.index = i;
-    },
-
-    //function to get albums
-
-    getAlbums() {
-      this.$store
-        .dispatch("UserProfileOwner/getAlbums", this.url_data)
-        .then(() => {
-          console.log("hey yeah");
-        })
-        .catch(err => {
-          console.log({ err: err });
-        });
-    },
-
-    getImages() {
-      this.$store
-        .dispatch("UserProfileOwner/getImages", this.url_data)
-        .then(() => {
-          console.log("hey yeah");
-        })
-        .catch(err => {
-          console.log({ err: err });
-        });
-    }
-  },
-
-  mounted() {
-    this.url_data = this.$route.params.id;
-    this.getAlbums();
-    this.getImages();
-  },
-
   data: function() {
     return {
-      url_data: null,
       images: [
         "https://placekitten.com/801/800",
         "https://placekitten.com/802/800",
@@ -97,20 +56,48 @@ export default {
       ],
       index: 0
     };
+  },
+
+  components: {
+    Album,
+    Images
+  },
+  methods: {
+    onClick(i) {
+      this.index = i;
+    },
+    //function to get album
+    getAlbums() {
+      this.$store
+        .dispatch("UserProfileOwner/getAlbums", this.url_data)
+        .then(() => {
+          console.log("hey yeah");
+        })
+        .catch(err => {
+          console.log({ err: err });
+        });
+    },
+    getImages() {
+      this.$store
+        .dispatch("UserProfileOwner/getImages", this.url_data)
+        .then(() => {
+          console.log("hey yeah");
+        })
+        .catch(err => {
+          console.log({ err: err });
+        });
+    }
+  },
+
+  mounted() {
+    this.url_data = this.$route.params.id;
+    this.getAlbums();
+    this.getImages();
   }
 };
 </script>
 
-<style scoped>
-  .call-action {
-  border-radius: 50%;
-  background: gray;
-  height: 30px !important;
-  width: 30px !important;
-  /*font-weight: 50px !important;*/
-  text-align: center;
-  padding-right: 35px !important;
-  }
+<style>
 .text-design {
   align-items: first baseline;
 }
@@ -119,23 +106,7 @@ export default {
   color: black;
 }
 
-  .botmediadess {
-    text-align: center;
-    bottom: -5%;
-    width: 100%;
-    font-size: 20px;
-  }
-
 @media (min-width: 960px) {
-  .album-img {
-    height: 300px !important;
-    object-fit: cover !important;
-  }
-
-  .drag-textt {
-    height: 290px !important;
-    padding-top: 95px;
-  }
   .img-gall {
     background-size: contain;
     cursor: pointer;
@@ -143,13 +114,14 @@ export default {
     border-radius: 3px;
   }
 
-  .image-wrapp {
+  .image-wrap {
     border: 4px dashed #e75c18;
     position: relative;
 
     position: relative;
     margin: 5px;
     float: left;
+    width: 46.5%;
     transition-duration: 0.4s;
     border-radius: 5px;
     -webkit-animation: winanim 0.5s;
@@ -191,7 +163,7 @@ export default {
     backface-visibility: visible;
   }
 
-  .image-wrapp {
+  .image-wrap {
     border: 4px dashed #e75c18;
     position: relative;
 
@@ -209,16 +181,6 @@ export default {
 }
 
 @media only screen and (min-width: 768px) and (max-width: 1331px) {
-  .album-img {
-    height: 300px !important;
-    object-fit: cover !important;
-  }
-
-  .drag-textt {
-    height: 290px !important;
-    padding-top: 95px;
-  }
-
   .img-gall {
     background-size: contain;
     cursor: pointer;
@@ -239,13 +201,14 @@ export default {
     backface-visibility: visible;
   }
 
-  .image-wrapp {
+  .image-wrap {
     border: 4px dashed #e75c18;
     position: relative;
 
     position: relative;
     margin: 5px;
     float: left;
+    width: 46.5%;
     transition-duration: 0.4s;
     border-radius: 5px;
     -webkit-animation: winanim 0.5s;
@@ -256,16 +219,6 @@ export default {
 }
 
 @media (max-width: 762px) {
-  .album-img {
-    height: 200px !important;
-    object-fit: cover !important;
-  }
-
-  .drag-textt {
-    height: 190px !important;
-    padding-top: 55px;
-  }
-
   .img-gall {
     background-size: contain;
     cursor: pointer;
@@ -286,13 +239,14 @@ export default {
     backface-visibility: visible;
   }
 
-  .image-wrapp {
+  .image-wrap {
     border: 4px dashed #e75c18;
     position: relative;
 
     position: relative;
     margin: 5px;
     float: left;
+    width: 46.5%;
     transition-duration: 0.4s;
     border-radius: 5px;
     -webkit-animation: winanim 0.5s;

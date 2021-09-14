@@ -11,35 +11,24 @@ export default {
   },
 
   actions: {
-    getNetwork({ commit }) {
-      return axios.get("/popularNetwork", {}).then(function({ data }) {
-        commit("set_details", data.data);
-        console.log(data);
-      });
-    },
-    getRoles({ commit }) {
-      return axios.get("", {}).then(function({ data }) {
-        commit("set_roles", data.data);
-        console.log(data);
-      });
-    },
     getfollowers({ commit }) {
-      return axios.get("profile/community").then(({ data }) => {
+      return axios.get("/profile/community").then(({ data }) => {
         commit("setfollowers", data.data);
         console.log(data);
       });
     },
 
     getroles({ commit }) {
-      return axios.get("business/role/displayRole").then(({ data }) => {
+      return axios.get("/network/displayRole").then(({ data }) => {
         commit("setroles", data.data);
         console.log(data);
+        console.log("roles data")
       });
     },
 
     geteditors({ commit }, businessId) {
       return axios
-        .get("business/role/editor/" + businessId)
+        .get("/business/role/editor/" + businessId)
         .then(({ data }) => {
           commit("seteditors", data.data);
           console.log(data);
@@ -47,7 +36,7 @@ export default {
     },
 
     getblockusers({ commit }, businessId) {
-      return axios.get(`business/blocking/${businessId}`).then(({ data }) => {
+      return axios.get(`/business/blocking/${businessId}`).then(({ data }) => {
         commit("setblocking", data.data);
         console.log(data);
       });
@@ -57,9 +46,6 @@ export default {
   mutations: {
     set_details(state, details) {
       state.NetworkDetails = details;
-    },
-    set_roles(state, details) {
-      state.NetworkRoles = details;
     },
     setfollowers(state, followers) {
       state.followers = followers;
@@ -76,12 +62,6 @@ export default {
   },
 
   getters: {
-    getNetworkDetails(state) {
-      return state.NetworkDetails;
-    },
-    getNetworkROles(state) {
-      return state.NetworkRoles;
-    },
     getfollowers(state) {
       return state.followers;
     },

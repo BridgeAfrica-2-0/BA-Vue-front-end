@@ -1,3 +1,4 @@
+
 import Vue from "vue";
 import App from "./App.vue";
 import "./registerServiceWorker";
@@ -24,7 +25,7 @@ Vue.use(LoadScript);
 Vue.use(Vuex);
 Vue.use(VueAxios, axios);
 
-// Vue.use(require('vue-moment'));
+Vue.use(require('vue-moment'));
 IconifyIcon.addIcon('home', homeIconData);
 
 Vue.use(ReadMore);
@@ -145,9 +146,12 @@ Vue.use(VueGoogleMaps, {
 
 
 
-// import VueAgile from 'vue-agile'
+import VueAgile from 'vue-agile'
 
-// Vue.use(VueAgile);
+Vue.use(VueAgile);
+
+import InfiniteLoading from 'vue-infinite-loading';
+Vue.use(InfiniteLoading, { /* options */ });
 
 
 Vue.component("v-select", vSelect);

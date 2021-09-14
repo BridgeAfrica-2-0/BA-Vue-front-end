@@ -11,7 +11,7 @@ export default {
     communityPeople: [],
     CommunityBusiness: [],
     communityTotal: [],
-    businessInfo: [],
+    networkInfo: [],
     albums: [],
     images: [],
     albumImages: [],
@@ -28,8 +28,8 @@ export default {
       return state.images;
     },
 
-    getBusinessInfo(state) {
-      return state.businessInfo;
+    getNetworkInfo(state) {
+      return state.networkInfo;
     },
 
     getnetWorks(state) {
@@ -71,8 +71,8 @@ export default {
       state.communityPeople = data;
     },
 
-    setBusinessInfo(state, data) {
-      state.businessInfo = data;
+    setNetworkInfo(state, data) {
+      state.networkInfo = data;
     },
 
     setCommunityTotal(state, data) {
@@ -157,9 +157,9 @@ export default {
       });
     },
 
-    businessInfo({ commit }, networkId) {
-      return axios.get("business/info/" + networkId).then(({ data }) => {
-        commit("setBusinessInfo", data.data);
+    networkInfo({ commit }, networkId) {
+      return axios.get("network/edit-informaions/" + networkId).then(({ data }) => {
+        commit("setNetworkInfo", data.data);
         console.log(data);
       });
     },

@@ -502,17 +502,15 @@
             </b-col>
           </b-row>
         </b-col>
-
-        <Comment />
-        <!--
-   <Comment
+        
+        <Comment
           v-for="comment in item.comments"
           :key="comment.id"
           :comment="comment"
         />  
-       -->
+      
       </b-row>
-      <!-- <infinite-loading @infinite="infiniteHandler"></infinite-loading> -->
+      <infinite-loading @infinite="infiniteHandler"></infinite-loading>
     </b-card>
   </div>
 </template>
@@ -524,7 +522,7 @@ import axios from "axios";
 export default {
   name: "postNetwork",
   components: {
-  //  Comment
+   Comment
   },
   data() {
     return {
@@ -583,15 +581,12 @@ export default {
 
 
   computed: {
-    networkInfo() {
-      return this.$store.state.networkProfile.networkInfo;
-    },
     imageProfile() {
        return "yoo"
     },
    
     business_logo() {
-      return  this.$store.state.networkProfile.businessInfo.logo_path;  
+      return  this.$store.state.networkProfile.networkInfo.logo_path;  
     },
     owner_post() {
       return  this.$store.state.networkProfile.ownerPost;  
@@ -639,14 +634,14 @@ export default {
     deletePost(post){
       console.log(post);
           
-      let loader = this.$loading.show({
-        container: this.fullPage ? null : this.$refs.creatform,
-        canCancel: true,
-        onCancel: this.onCancel,
-        color: "#e75c18",
-      });
+      // let loader = this.$loading.show({
+      //   container: this.fullPage ? null : this.$refs.creatform,
+      //   canCancel: true,
+      //   onCancel: this.onCancel,
+      //   color: "#e75c18",
+      // });
       this.axios
-        .post("business/delete/post/"+post.post_id, {
+        .post("network/delete/post/"+post.post_id, {
           name: this.name,
         })
         .then((response) => {
@@ -657,7 +652,7 @@ export default {
             blockClass: "custom-block-class",
             message: "Post Deleted",
           });
-          loader.hide();
+          // loader.hide();
         }) .catch((err) => {
         this.sending = false;
 
@@ -669,7 +664,7 @@ export default {
              blockClass: "custom-block-class",
             message: err.response.data.message,
           });
-          loader.hide();
+          // loader.hide();
         } else {
           this.flashMessage.show({
             status: "error",
@@ -678,7 +673,7 @@ export default {
           });
           console.log({ err: err });
 
-          loader.hide();
+          // loader.hide();
         }
       });
     },
@@ -714,7 +709,7 @@ export default {
       //    formData2.append("media", this.createPost.hyperlinks);
       formData2.append("content", this.edit_description);
       this.axios
-      .post("business/update/post/"+this.edit_id, formData2, {
+      .post("network/edit/post/"+this.edit_id, formData2, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
@@ -862,12 +857,12 @@ export default {
     },
 
     submitPost() {
-      // let loader = this.$loading.show({
-      //   container: this.fullPage ? null : this.$refs.loader,
-      //   canCancel: true,
-      //   onCancel: this.onCancel,
-      //   color:"#e75c18"
-      // });
+      let loader = this.$loading.show({
+        container: this.fullPage ? null : this.$refs.loader,
+        canCancel: true,
+        onCancel: this.onCancel,
+        color:"#e75c18"
+      });
       const fileImage = this.createPost.movies[0].target.files[0];
       this.fileImageArr=this.createPost.movies;
 
@@ -892,7 +887,7 @@ export default {
             blockClass: "custom-block-class",
           message: "Content successfuly uploaded",
         });
-        // loader.hide()
+        loader.hide()
         this.$refs["modal-xl"].hide();
         this.ownerPost();
       }) .catch((err) => {
@@ -904,7 +899,7 @@ export default {
             message: err.response.data.message,
             blockClass: "custom-block-class",
           });
-          // loader.hide()
+          loader.hide()
         } else {
           this.flashMessage.show({
             status: "error",
@@ -912,7 +907,7 @@ export default {
             blockClass: "custom-block-class",
           });
           console.log({ err: err });
-          // loader.hide()
+          loader.hide()
         } 
       });
     },

@@ -10,7 +10,7 @@
             :value="category.value"
             name="flavour-4a"
             @change="selectedsidebar"
-            class="m-1   br-3"
+            class="m-1 br-3"
           >
             {{ category.text }}
           </b-form-checkbox>
@@ -31,7 +31,7 @@
           :value="agriculture.value"
           @change="switchcategoriesfilters"
           name="flavour-4a"
-          class="m-1   br-3"
+          class="m-1 br-3"
         >
           {{ agriculture.text }}
         </b-form-checkbox>
@@ -40,7 +40,7 @@
         <hr />
       </span>
       <b-modal ref="myfilters" id="myModalll" hide-footer title=" ">
-        <div style="column-count: 2;">
+        <div style="column-count: 2">
           <b-form-checkbox
             v-for="agriculture in categories_filters"
             v-model="selectedfilter"
@@ -55,7 +55,7 @@
         </div>
 
         <br />
-        <b-button variant="primary" class="m-3  float-right"> Search </b-button>
+        <b-button variant="primary" class="m-3 float-right"> Search </b-button>
       </b-modal>
 
       <b-form-checkbox
@@ -82,9 +82,7 @@
         </b-form-group>
 
         <b-form-select v-model="selected">
-          <b-form-select-option value="a">
-            Yaounde
-          </b-form-select-option>
+          <b-form-select-option value="a"> Yaounde </b-form-select-option>
         </b-form-select>
 
         <br />
@@ -99,9 +97,7 @@
         </b-form-group>
 
         <b-form-select v-model="selected">
-          <b-form-select-option value="a">
-            My Location
-          </b-form-select-option>
+          <b-form-select-option value="a"> My Location </b-form-select-option>
         </b-form-select>
 
         <br />
@@ -116,9 +112,7 @@
         </b-form-group>
 
         <b-form-select v-model="selected">
-          <b-form-select-option value="a">
-            My Location
-          </b-form-select-option>
+          <b-form-select-option value="a"> My Location </b-form-select-option>
         </b-form-select>
 
         <br />
@@ -133,9 +127,7 @@
         </b-form-group>
 
         <b-form-select v-model="selected">
-          <b-form-select-option value="a">
-            My Location
-          </b-form-select-option>
+          <b-form-select-option value="a"> My Location </b-form-select-option>
         </b-form-select>
 
         <br />
@@ -227,9 +219,7 @@
         </b-form-group>
 
         <b-form-select v-model="selected">
-          <b-form-select-option value="a">
-            Yaounde
-          </b-form-select-option>
+          <b-form-select-option value="a"> Yaounde </b-form-select-option>
         </b-form-select>
 
         <br />
@@ -244,9 +234,7 @@
         </b-form-group>
 
         <b-form-select v-model="selected">
-          <b-form-select-option value="a">
-            My Location
-          </b-form-select-option>
+          <b-form-select-option value="a"> My Location </b-form-select-option>
         </b-form-select>
 
         <br />
@@ -322,9 +310,7 @@
       </b-form-group>
 
       <b-form-select v-model="selected">
-        <b-form-select-option value="a">
-          Yaounde
-        </b-form-select-option>
+        <b-form-select-option value="a"> Yaounde </b-form-select-option>
       </b-form-select>
 
       <br />
@@ -422,7 +408,7 @@
     </b-modal>
 
     <b-modal ref="myfilters1" id="myModalllo" hide-footer title=" ">
-      <div style="column-count: 2;">
+      <div style="column-count: 2">
         <b-form-checkbox
           v-for="agriculture in selectcategories"
           v-model="default_category"
@@ -437,19 +423,20 @@
       </div>
 
       <br />
-      <b-button variant="primary" class="m-3  float-right"> Search </b-button>
+      <b-button variant="primary" class="m-3 float-right"> Search </b-button>
     </b-modal>
   </div>
 </template>
 
 <script>
+import axios from "axios";
 export default {
   name: "filters",
 
   props: ["filterType", "Selectedcategory", "Selectedparentcategory"],
 
   watch: {
-    Selectedparentcategory: function(newVal) {
+    Selectedparentcategory: function (newVal) {
       console.log(newVal);
 
       switch (newVal) {
@@ -470,7 +457,8 @@ export default {
           break;
 
         case "Mayorcouncils":
-          this.selectcategories = this.Mayor_councils_filters_and_public_institution;
+          this.selectcategories =
+            this.Mayor_councils_filters_and_public_institution;
           break;
 
         case "Healthunits":
@@ -488,7 +476,7 @@ export default {
       }
     },
 
-    Selectedcategory: function(newVal) {
+    Selectedcategory: function (newVal) {
       this.showform = false;
       console.log(newVal);
 
@@ -711,11 +699,12 @@ export default {
 
           break;
       }
-    }
+    },
   },
 
   data() {
     return {
+      newCategories:[],
       slide: 0,
       sliding: null,
 
@@ -744,12 +733,12 @@ export default {
         { value: "Peanuts", text: "Peanuts" },
         { value: "Chocolate", text: "Chocolate" },
 
-        { value: "Jam", text: "Jam" }
+        { value: "Jam", text: "Jam" },
       ],
 
       Coffee_filters: [
         { value: "tea", text: "Tea" },
-        { value: "coffe", text: "Coffe" }
+        { value: "coffe", text: "Coffe" },
       ],
 
       Dairy_filters: [
@@ -759,7 +748,7 @@ export default {
         { value: "Milk", text: "Milk" },
         { value: "Butter", text: "Butter" },
         { value: "Cheese", text: "Cheese" },
-        { value: "Ice_cream", text: "Ice cream " }
+        { value: "Ice_cream", text: "Ice cream " },
       ],
 
       Oils_filters: [
@@ -767,7 +756,7 @@ export default {
         { value: "Palm_oil", text: "Palm oil" },
         { value: "Palm_oil", text: "Palm oil" },
 
-        { value: "vetegetable_oil", text: " Vegetable " }
+        { value: "vetegetable_oil", text: " Vegetable " },
       ],
 
       Beans_filters: [
@@ -776,7 +765,7 @@ export default {
 
         { value: "White_beans", text: "White beans" },
         { value: "Senegalese_beans", text: "Senegalese beans" },
-        { value: "Koki_beans", text: "Koki beans" }
+        { value: "Koki_beans", text: "Koki beans" },
       ],
 
       Spices_filters: [
@@ -790,7 +779,7 @@ export default {
 
         { value: "white_pepper", text: "white pepper" },
 
-        { value: "Penja", text: "Penja" }
+        { value: "Penja", text: "Penja" },
       ],
 
       starch_filters: [
@@ -807,7 +796,7 @@ export default {
         { value: "Okra", text: "Okra" },
         { value: "Corn", text: "Corn" },
         { value: "Groundnuts", text: "Groundnuts" },
-        { value: "Bobolo", text: "Bobolo " }
+        { value: "Bobolo", text: "Bobolo " },
       ],
 
       Cereals_filters: [
@@ -819,7 +808,7 @@ export default {
 
         { value: "Barley", text: "Barley" },
 
-        { value: "Millet", text: "Millet" }
+        { value: "Millet", text: "Millet" },
       ],
 
       Raw_material_filters: [
@@ -827,7 +816,7 @@ export default {
         { value: "Coffee", text: "Coffee" },
 
         { value: "Rubber", text: "Rubber" },
-        { value: "Charcoal", text: "Charcoal" }
+        { value: "Charcoal", text: "Charcoal" },
       ],
 
       Livestock_filters: [
@@ -862,7 +851,7 @@ export default {
 
         { value: "Sardines_fish", text: "Sardines fish" },
 
-        { value: "Crabs", text: "Crabs" }
+        { value: "Crabs", text: "Crabs" },
       ],
 
       Vegetables_filters: [
@@ -886,7 +875,7 @@ export default {
         { value: "Green_leaf", text: "Green leaf" },
         { value: "huckleberry", text: "huckleberry " },
         { value: "Waterleaf", text: "Waterleaf " },
-        { value: "Bitter_leaf", text: "Bitter Leaf " }
+        { value: "Bitter_leaf", text: "Bitter Leaf " },
       ],
 
       Fruits_filters: [
@@ -901,10 +890,10 @@ export default {
         { value: "Coconut", text: "Coconut" },
         { value: "Mangoes", text: "Mangoes " },
         { value: "Avocado", text: "Avocado " },
-        { value: "Plums", text: "Plums " }
+        { value: "Plums", text: "Plums " },
       ],
 
-      selectcategories: [
+      selectnewC: [
         { value: "Vegetables", text: "Vegetables" },
         { value: "Starch", text: "Starch" },
 
@@ -923,10 +912,10 @@ export default {
 
         { value: "Dairy", text: "Dairy" },
 
-        { value: "Raw_material", text: "Raw material " }
+        { value: "Raw_material", text: "Raw material " },
       ],
 
-      categories: [
+      newC: [
         { item: "Professional_and_home_service", name: "Professionals" },
         { item: "Agriculture ", name: "Agriculture " },
         { item: "Restaurant ", name: " Restaurant " },
@@ -942,7 +931,7 @@ export default {
         { item: "Hotels", name: "Hotels" },
         { item: "station", name: " station  " },
         { item: "Mayor_concils", name: "Mayor_concils" },
-        { item: "Taxis service", name: "Taxis service" }
+        { item: "Taxis service", name: "Taxis service" },
       ],
 
       categories_filters: [],
@@ -967,7 +956,7 @@ export default {
         { value: "Dairy", text: "Dairy" },
         { value: "Beans", text: "Beans" },
 
-        { value: "Raw_material", text: "Raw material " }
+        { value: "Raw_material", text: "Raw material " },
       ],
 
       Electronics_filters: [
@@ -976,16 +965,16 @@ export default {
 
         {
           value: "Computers, Tablets and accessories",
-          text: "Computers, Tablets and accessories"
+          text: "Computers, Tablets and accessories",
         },
 
-        { value: "Office Electronics", text: "Office Electronics " }
+        { value: "Office Electronics", text: "Office Electronics " },
       ],
 
       station: [
         { value: "Gas station ", text: "Gas station " },
         { value: "Petrol station ", text: "Petrol station " },
-        { value: "Fuel station ", text: "Fuel station " }
+        { value: "Fuel station ", text: "Fuel station " },
       ],
 
       clothing_filters: [
@@ -994,7 +983,7 @@ export default {
         { value: "men", text: "Men" },
         { value: "female", text: "Female" },
         { value: "Men Accessories", text: "Men Accessories" },
-        { value: "Women accessories", text: "Women accessories" }
+        { value: "Women accessories", text: "Women accessories" },
       ],
 
       Health_unit_filters: [
@@ -1003,7 +992,7 @@ export default {
 
         { value: "COVID-19", text: "COVID-19" },
 
-        { value: "Pharmacies", text: "Pharmacies " }
+        { value: "Pharmacies", text: "Pharmacies " },
       ],
 
       restaurants_filters: [
@@ -1022,24 +1011,24 @@ export default {
         { value: "Delivery", text: "Delivery" },
         { value: "Catering", text: "Catering" },
         { value: "Pizza", text: "Pizza" },
-        { value: "Bakery", text: "Bakery" }
+        { value: "Bakery", text: "Bakery" },
       ],
 
       Mechanics_filters: [
         { value: "Car care", text: "Car care " },
         { value: "Spare part", text: "Spare parts " },
 
-        { value: "Auto Dealers", text: "Auto Dealers" }
+        { value: "Auto Dealers", text: "Auto Dealers" },
       ],
 
       Handicrafts_filters: [
         { value: "Home Decor", text: "Home Decor" },
-        { value: "Textile", text: "Textile" }
+        { value: "Textile", text: "Textile" },
       ],
 
       Health_unit: [
         { value: "Hopistal ", text: "Hopistal " },
-        { value: "clinic", text: "Clinic " }
+        { value: "clinic", text: "Clinic " },
       ],
 
       Pharmacies: [],
@@ -1051,13 +1040,13 @@ export default {
 
         { value: "Tertiary Education", text: "Tertiary Education" },
 
-        { value: "Vocational", text: "Vocational training centers" }
+        { value: "Vocational", text: "Vocational training centers" },
       ],
 
       Grooming_filters: [
         { value: "Women Grooming", text: "Women Grooming" },
 
-        { value: "Men Grooming", text: "Men Grooming" }
+        { value: "Men Grooming", text: "Men Grooming" },
       ],
 
       Transport_filters: [
@@ -1068,13 +1057,13 @@ export default {
 
         { value: "seaports", text: "seaports" },
         { value: "Taxis", text: "Taxis " },
-        { value: "import", text: "Import/Export " }
+        { value: "import", text: "Import/Export " },
       ],
 
       Hotels_filters: [
         { value: "Hotels ", text: "Hotels " },
         { value: "Resorts", text: "Resorts" },
-        { value: "Motels", text: "Motels" }
+        { value: "Motels", text: "Motels" },
       ],
 
       Hair_and_beauty: [
@@ -1086,7 +1075,7 @@ export default {
         { value: "tattoo", text: "tattoo" },
         { value: "makeup_salon", text: "makeup_salon" },
         { value: "teeth_whitening", text: "teeth whitening" },
-        { value: "nail_salon", text: "nail salon" }
+        { value: "nail_salon", text: "nail salon" },
       ],
 
       Bars: [
@@ -1094,14 +1083,14 @@ export default {
         { value: "nightclub", text: "nightclub " },
         { value: "snack", text: "snack" },
         { value: "drinks", text: "drinks" },
-        { value: "natural", text: "natural" }
+        { value: "natural", text: "natural" },
       ],
 
       Travelling: [
         { value: "bus_park ", text: "bus park " },
         { value: "car_parks ", text: "car parks  " },
         { value: "train_parks", text: "train parks " },
-        { value: "ship", text: "ship" }
+        { value: "ship", text: "ship" },
       ],
 
       Hotels: [
@@ -1109,7 +1098,7 @@ export default {
         { value: "4_stars", text: "4 stars " },
         { value: "3_stars", text: "3_stars" },
         { value: "Urban_hotel", text: "Urban_hotel" },
-        { value: "Resorts", text: "Resorts" }
+        { value: "Resorts", text: "Resorts" },
       ],
 
       Professional_and_home_service: [
@@ -1118,12 +1107,12 @@ export default {
 
         {
           value: "Web, Graphic Design and Printing",
-          text: "Web, Graphic Design and Printing"
+          text: "Web, Graphic Design and Printing",
         },
 
         {
           value: "Event Planning and Rentals",
-          text: "Event Planning and Rentals"
+          text: "Event Planning and Rentals",
         },
 
         { value: "Cleaning Services", text: "Cleaning Services" },
@@ -1134,12 +1123,12 @@ export default {
 
         {
           value: "Real Estate Agency and Land",
-          text: "Real Estate Agency and Land"
+          text: "Real Estate Agency and Land",
         },
 
         { value: "Housing and Construction", text: "Housing and Construction" },
 
-        { value: "Internet and Media", text: "Internet and Media" }
+        { value: "Internet and Media", text: "Internet and Media" },
       ],
 
       male: [
@@ -1153,7 +1142,7 @@ export default {
         { value: "Gloves", text: "Gloves " },
         { value: "Suit", text: "Suit " },
         { value: "Singlet", text: "Singlet  " },
-        { value: "sweater ", text: "sweater" }
+        { value: "sweater ", text: "sweater" },
       ],
 
       female: [
@@ -1171,7 +1160,7 @@ export default {
 
         { value: "Gown ", text: "Gown" },
         { value: "Tops ", text: "Tops" },
-        { value: "sweater ", text: "sweater" }
+        { value: "sweater ", text: "sweater" },
       ],
 
       Professional_services: [
@@ -1193,7 +1182,7 @@ export default {
         { value: "Employment_agency  ", text: "Employment agency  " },
         { value: "Private_investigators ", text: "Private investigators " },
         { value: "Personal_assistants ", text: "Personal assistants " },
-        { value: "Protocol ", text: "Protocol " }
+        { value: "Protocol ", text: "Protocol " },
       ],
 
       Home_service: [
@@ -1208,14 +1197,14 @@ export default {
         { value: "Painters", text: "Painters" },
 
         { value: "Gardeners", text: "Gardeners" },
-        { value: "Security system", text: "Security system" }
+        { value: "Security system", text: "Security system" },
       ],
 
       Financial_service: [
         { value: "Insurance", text: "Insurance " },
 
         { value: "Investing", text: "Investing" },
-        { value: "Banks", text: "Banks" }
+        { value: "Banks", text: "Banks" },
       ],
 
       Real_estate: [
@@ -1224,7 +1213,7 @@ export default {
         { value: "university_housing", text: "university housing" },
         { value: "home_staging", text: "home_staging" },
         { value: "commercial", text: "commercial" },
-        { value: "developers", text: "developers" }
+        { value: "developers", text: "developers" },
       ],
 
       Mayor_councils_filters_and_public_institution: [
@@ -1233,13 +1222,13 @@ export default {
 
         { value: "Hospital", text: "Hospitals " },
 
-        { value: "Ministries ", text: "Ministries " }
+        { value: "Ministries ", text: "Ministries " },
       ],
 
       Taxis_service: [
         { value: "Urban ", text: "Urban" },
         { value: "Airport", text: "Airport " },
-        { value: "Renting", text: "Renting" }
+        { value: "Renting", text: "Renting" },
       ],
 
       African_food: [
@@ -1253,7 +1242,7 @@ export default {
         { value: "Achu", text: "Achu" },
         { value: "Mbongo Tchobi", text: "Mbongo Tchobi" },
         { value: "Okok", text: "Okok" },
-        { value: "Okra", text: "Okra" }
+        { value: "Okra", text: "Okra" },
       ],
 
       Fast_food: [
@@ -1271,19 +1260,19 @@ export default {
         { value: "Grilled fish", text: "Grilled fish" },
         { value: "Soya", text: "Soya" },
         { value: "Shawarma", text: "Shawarma" },
-        { value: "Senegalese", text: "Senegalese" }
+        { value: "Senegalese", text: "Senegalese" },
       ],
 
       Asian_food_filters: [
         { value: "Chinese Food", text: "Chinese Food " },
-        { value: "Indian Food", text: "Indian Food" }
+        { value: "Indian Food", text: "Indian Food" },
       ],
 
       Bars_filters: [
         { value: "Non-alcoholic drinks", text: "Non-alcoholic drinks" },
         { value: "Alcoholic drinks", text: "Alcoholic drinks" },
         { value: "Snacks", text: "Snacks" },
-        { value: "Nightclubs", text: "Nightclubs" }
+        { value: "Nightclubs", text: "Nightclubs" },
       ],
 
       phone_filters: [
@@ -1304,14 +1293,14 @@ export default {
 
         { value: "Chargers", text: "Chargers" },
         { value: "headsets", text: "headsets" },
-        { value: "Phone casing", text: "Phone casing" }
+        { value: "Phone casing", text: "Phone casing" },
       ],
 
       Tailoring: [
         { value: "Men_taloring", text: " Men" },
         { value: "women_taloring", text: " Women" },
         { value: "male_kid_taloring", text: " male kid" },
-        { value: "female_kid_taloring", text: "female kid" }
+        { value: "female_kid_taloring", text: "female kid" },
       ],
 
       Tailoring_filters: [
@@ -1327,7 +1316,7 @@ export default {
         { value: "African print grown", text: "African print grown" },
         {
           value: "Traditional wedding dress",
-          text: "Traditional wedding dress"
+          text: "Traditional wedding dress",
         },
 
         { value: "Wax dress", text: "Wax dress" },
@@ -1347,7 +1336,7 @@ export default {
 
         { value: "Kid Wax dress", text: "Kid Wax dress" },
 
-        { value: "Kid Traditional dress", text: "Kid Traditional dress" }
+        { value: "Kid Traditional dress", text: "Kid Traditional dress" },
       ],
 
       Men_taloring: [
@@ -1357,7 +1346,7 @@ export default {
         { value: "African attires", text: "African attires" },
         { value: "Ankara", text: "Ankara" },
         { value: "Traditional dresses", text: "Traditional dresses" },
-        { value: "Shirts", text: "Shirts" }
+        { value: "Shirts", text: "Shirts" },
       ],
 
       women_taloring: [
@@ -1365,12 +1354,12 @@ export default {
         { value: "African print grown", text: "African print grown" },
         {
           value: "Traditional wedding dress",
-          text: "Traditional wedding dress"
+          text: "Traditional wedding dress",
         },
         { value: "Ankara", text: "Ankara " },
         { value: "Shirt", text: "Shirt " },
         { value: "Wax dress", text: "Wax dress" },
-        { value: "Traditional dress", text: "Traditional dress" }
+        { value: "Traditional dress", text: "Traditional dress" },
       ],
 
       male_kid_taloring: [
@@ -1387,7 +1376,7 @@ export default {
         { value: "Kid African attires", text: "Kid African attires" },
 
         { value: "Kid Ankara", text: "Kid Ankara" },
-        { value: "Kid Traditional dresses", text: "Kid Traditional dresses" }
+        { value: "Kid Traditional dresses", text: "Kid Traditional dresses" },
       ],
 
       female_kid_taloring: [
@@ -1403,7 +1392,7 @@ export default {
 
         { value: "Kid Traditional dress", text: "Kid Traditional dress" },
 
-        { value: "shirt", text: "shirt" }
+        { value: "shirt", text: "shirt" },
       ],
 
       Home_Appliances_filters: [
@@ -1422,7 +1411,7 @@ export default {
         { value: "regulator", text: "regulator" },
         { value: "Solar system", text: "Solar system" },
 
-        { value: "Gas cooker", text: " Gas cooker" }
+        { value: "Gas cooker", text: " Gas cooker" },
       ],
 
       Computers_filters: [
@@ -1434,14 +1423,14 @@ export default {
         { value: "Computer accessories ", text: "Computer accessories " },
 
         { value: "Tablets", text: " Tablets" },
-        { value: "Storage", text: "Storage" }
+        { value: "Storage", text: "Storage" },
       ],
 
       Office_Electronics_filters: [
         { value: "Laptops", text: " Laptops" },
         { value: "Desktops", text: "Desktops " },
         { value: "Scanners/Printers", text: "Scanners/Printers" },
-        { value: "AC", text: " AC" }
+        { value: "AC", text: " AC" },
       ],
 
       Home_Decor_filters: [
@@ -1449,39 +1438,39 @@ export default {
         { value: "Beaded Baskets", text: "Beaded Baskets " },
         { value: "Carpentry", text: "Carpentry" },
         { value: "Paintings", text: " Paintings" },
-        { value: "Hamburger", text: "Hamburger " }
+        { value: "Hamburger", text: "Hamburger " },
       ],
 
       Textile_filters: [
         { value: "Embroidery", text: " Embroidery" },
         { value: "Knitting", text: "Knitting " },
         { value: "Weaving", text: "Weaving" },
-        { value: "Tailoring", text: " Tailoring" }
+        { value: "Tailoring", text: " Tailoring" },
       ],
 
       Car_care_filters: [
         { value: "Car wash", text: " Car wash" },
         { value: "mechanic", text: "mechanic " },
         { value: "Parking", text: "Parking" },
-        { value: "maintenance products", text: " maintenance products" }
+        { value: "maintenance products", text: " maintenance products" },
       ],
 
       Spare_parts_filters: [
         { value: "Tires", text: "Tires" },
         { value: "lamps", text: "lamps" },
         { value: "Steering", text: "Steering" },
-        { value: "wheel", text: "wheel" }
+        { value: "wheel", text: "wheel" },
       ],
 
       Auto_Dealers_filters: [
         { value: "Car sales and rentals", text: "Car sales and rentals" },
-        { value: "Bike sales and rentals", text: "Bike sales and rentals" }
+        { value: "Bike sales and rentals", text: "Bike sales and rentals" },
       ],
 
       Hospitals_filters: [
         { value: "public", text: "public" },
         { value: "private", text: "private" },
-        { value: "Regional", text: "Regional" }
+        { value: "Regional", text: "Regional" },
       ],
 
       Clinics_filters: [
@@ -1489,22 +1478,22 @@ export default {
         { value: "Optics", text: "Optics" },
         { value: "physical therapy", text: "physical therapy" },
 
-        { value: "Maternal Health", text: "Maternal Health" }
+        { value: "Maternal Health", text: "Maternal Health" },
       ],
 
       primary_eduction_filters: [
         { value: "Public schools", text: "Public schools" },
-        { value: "Private schools", text: "Private schools" }
+        { value: "Private schools", text: "Private schools" },
       ],
 
       secondary_eduction_filters: [
         { value: "Public schools", text: "Public schools" },
-        { value: "Private schools", text: "Private schools" }
+        { value: "Private schools", text: "Private schools" },
       ],
 
       tertiary_eduction_filters: [
         { value: "Public University", text: "Public University" },
-        { value: "Private University", text: "Private University" }
+        { value: "Private University", text: "Private University" },
       ],
 
       Vocational_filters: [
@@ -1516,7 +1505,7 @@ export default {
         { value: "Mechanics", text: "Mechanics" },
         { value: "Plumber", text: "Plumber" },
         { value: "IT and Multimedia", text: "IT and Multimedia" },
-        { value: "Beautician", text: "Beautician" }
+        { value: "Beautician", text: "Beautician" },
       ],
 
       Women_Grooming_filters: [
@@ -1531,7 +1520,7 @@ export default {
         { value: "Eyelashes", text: "Eyelashes" },
         { value: "Beautician", text: "Beautician" },
 
-        { value: "Perfume", text: "Perfume" }
+        { value: "Perfume", text: "Perfume" },
       ],
 
       Men_Grooming_filters: [
@@ -1544,7 +1533,7 @@ export default {
 
         { value: "manicure and pedicure ", text: "manicure and pedicure " },
 
-        { value: "Perfume", text: "Perfume" }
+        { value: "Perfume", text: "Perfume" },
       ],
 
       Women_clothing: [
@@ -1555,7 +1544,7 @@ export default {
         { value: "Skirt", text: "Skirt" },
         { value: "Gowns", text: "Gowns" },
         { value: "	Weddings dresses", text: "	Weddings dresses" },
-        { value: "Coats", text: "Coats" }
+        { value: "Coats", text: "Coats" },
       ],
 
       Women_accessories: [
@@ -1565,7 +1554,7 @@ export default {
         { value: "watch", text: "watch" },
         { value: "Shoes", text: "Shoes" },
         { value: "Caps", text: "Caps" },
-        { value: "Head bands", text: "Head bands" }
+        { value: "Head bands", text: "Head bands" },
       ],
 
       Men_Clothing: [
@@ -1573,7 +1562,7 @@ export default {
         { value: "Jeans", text: "Jeans" },
         { value: "Suits", text: "Suits" },
         { value: "Singlets", text: "Singlets" },
-        { value: "CapSweaterss", text: "Sweaters" }
+        { value: "CapSweaterss", text: "Sweaters" },
       ],
 
       Men_Accessories: [
@@ -1583,18 +1572,18 @@ export default {
         { value: "Jewelry", text: "Jewelry" },
         { value: "Caps", text: "Caps" },
         { value: "Gloves", text: "Gloves" },
-        { value: "Shoes", text: "Shoes" }
+        { value: "Shoes", text: "Shoes" },
       ],
 
       Legal_service: [
         { value: "Lawyers ", text: "Lawyers" },
         { value: "Business consulting", text: "Business consulting" },
-        { value: "Patent law", text: "Patent law" }
+        { value: "Patent law", text: "Patent law" },
       ],
 
       Marketing: [
         { value: "Hostesses ", text: "Hostesses" },
-        { value: "Advertising", text: "Advertising" }
+        { value: "Advertising", text: "Advertising" },
       ],
 
       Web_Graphic: [
@@ -1604,26 +1593,26 @@ export default {
         { value: "computer hardware", text: "computer hardware" },
         {
           value: "computer hosting services",
-          text: "computer hosting services"
-        }
+          text: "computer hosting services",
+        },
       ],
 
       Event_Planning_and_Rentals: [
         { value: "Event planning ", text: "Event planning" },
         { value: "Rentals", text: "Rentals" },
-        { value: "Interior Design ", text: "Interior Design " }
+        { value: "Interior Design ", text: "Interior Design " },
       ],
 
       Cleaning_Services: [
         { value: "Office cleaning ", text: "Office cleaning" },
-        { value: "Home cleaning", text: "Home cleaning" }
+        { value: "Home cleaning", text: "Home cleaning" },
       ],
 
       Real_Estate: [
         { value: "Real Estate _Agency", text: "Real Estate _Agency" },
         { value: "property management", text: "property management" },
         { value: "commercial real estate", text: "commercial real estate" },
-        { value: "shared office space", text: "shared office space" }
+        { value: "shared office space", text: "shared office space" },
       ],
 
       Housing_and_Construction: [
@@ -1640,30 +1629,30 @@ export default {
         { value: "Gardeners", text: "Gardeners" },
         { value: "Gardeners", text: "Gardeners" },
 
-        { value: "Security system", text: "Security system" }
+        { value: "Security system", text: "Security system" },
       ],
 
       Internet_and_Media: [
         { value: "TV Cable", text: "TV Cable" },
         { value: "Internet services", text: "Internet services" },
-        { value: "Telephone services", text: "Telephone services" }
+        { value: "Telephone services", text: "Telephone services" },
       ],
 
       Mayor_Councils: [
         { value: "Regions ", text: "Regions" },
         { value: "Division", text: "Division" },
         { value: "Sub-divisions ", text: "Sub-divisions" },
-        { value: "City", text: "City" }
+        { value: "City", text: "City" },
       ],
 
       Schools: [
         { value: "Public ", text: "Public" },
-        { value: "Private", text: "Private" }
+        { value: "Private", text: "Private" },
       ],
 
       Hospitals: [
         { value: "Public ", text: "Public" },
-        { value: "Private", text: "Private" }
+        { value: "Private", text: "Private" },
       ],
 
       Ministries: [
@@ -1671,7 +1660,7 @@ export default {
         { value: "Division", text: "Division" },
 
         { value: "Sub-divisions", text: "Sub-divisions" },
-        { value: "City", text: "City" }
+        { value: "City", text: "City" },
       ],
 
       optionss: [
@@ -1680,7 +1669,7 @@ export default {
         { id: "people", label: "People" },
         { id: "network", label: "Network" },
         { id: "marketplace", label: "Markeplace", notEnabled: true },
-        { id: "posts", label: "Posts" }
+        { id: "posts", label: "Posts" },
       ],
 
       options: [
@@ -1689,7 +1678,7 @@ export default {
         { item: "people", name: "People" },
         { item: "network", name: "Network" },
         { item: "marketplace", name: "Markeplace", notEnabled: false },
-        { item: "posts", name: "Posts" }
+        { item: "posts", name: "Posts" },
       ],
       filters: [
         { item: "any", name: "Location : Any" },
@@ -1697,48 +1686,70 @@ export default {
         { item: "dhaka ", name: "Dhaka, Bangladesh" },
         { item: "new york", name: "New York, United States" },
         { item: "douala", name: "Douala, Cameroon" },
-        { item: "karachi", name: "Karachi, Pakistan" }
+        { item: "karachi", name: "Karachi, Pakistan" },
       ],
 
       posts: [
         { item: "any", name: "Post: Any" },
         { item: "people", name: "People I am following" },
         { item: "business", name: "Businesses i am following" },
-        { item: "networks", name: "Networks I am following" }
+        { item: "networks", name: "Networks I am following" },
       ],
 
       education: [
         { item: "any", name: "Education: Any" },
         { item: "ub", name: "University Of Buea" },
         { item: "uba", name: "University Of Yaounde" },
-        { item: "uy", name: "University Of Yaounde 1" }
+        { item: "uy", name: "University Of Yaounde 1" },
       ],
 
       profession: [
         { item: "any", name: "Profession: Any" },
         { item: "engineer", name: "Engineen" },
         { item: "teacher", name: "Teacher" },
-        { item: "farmer", name: "Farmer" }
+        { item: "farmer", name: "Farmer" },
       ],
 
       workplace: [
         { item: "any", name: "Post: Any" },
         { item: "yaounde", name: "Yaounde" },
         { item: "douala", name: "Douala" },
-        { item: "Buea", name: "Buea" }
+        { item: "Buea", name: "Buea" },
       ],
 
       sponsoredBusinesses: [
         { title: "Business 1" },
         { title: "Business 2" },
         { title: "Business 3" },
-        { title: "Business 4" }
-      ]
+        { title: "Business 4" },
+      ],
     };
   },
   components: {},
+  mounted() {
+    // this.getProducts();
+  },
 
   methods: {
+    getProducts() {
+      let token = JSON.parse(localStorage.getItem("user")).accessToken;
+      // console.log(JSON.parse(localStorage.getItem("user")).accessToken);
+      axios
+        .get("http://team2dev.maxinemoffett.com/api/v1/category/all", {
+          headers: {
+            Authorization: "Bearer 24|5uVwIzU7r82crJj936tmqkuIMRXxm1ADTCbuRceL",
+          },
+        })
+        .then((res) => {
+          console.log("Filters: ");
+          console.log(res.data.data);
+          this.newCategories = res.data.data
+        })
+        .catch((err) => {
+          console.log("Filters: ");
+          console.error(err);
+        });
+    },
     switchcategoriesfilters() {
       this.showform = false;
       console.log(this.selectedfilter);
@@ -2117,8 +2128,8 @@ export default {
           this.categories_filters = this.clothing;
           break;
       }
-    }
-  }
+    },
+  },
 };
 </script>
 

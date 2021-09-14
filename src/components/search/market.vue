@@ -320,10 +320,7 @@
                           </p>
                         </div>
                         <div class="col-md-12 pt-2 pl-0 mb-3">
-                          <i
-                            class="fa heart  fa-heart-o"
-                            aria-hidden="true"
-                          ></i>
+                          <i class="fa heart fa-heart-o" aria-hidden="true"></i>
                           23 &nbsp; &nbsp; &nbsp; <a href="#">Reply</a>
                         </div>
                       </div>
@@ -397,13 +394,23 @@
 </template>
 
 <script>
+
 export default {
   data() {
     return {
-      viewProduct: false
+      viewProduct: false,
     };
   },
-  components: {},
+  computed: {
+    products() {
+      return this.$store.state.market.products;
+    },
+  },
+
+  mounted() {
+    this.getProducts()
+
+  },
   methods: {
     /**
      * Used to view produduct details
@@ -412,8 +419,19 @@ export default {
      */
     productDetails() {
       this.viewProduct = true;
-    }
-  }
+      console.log(this.products);
+    },
+    getProducts() {
+      this.$store
+        .dispatch("market/getProducts", this.$route.params.id)
+        .then(( ) => {
+          console.log(this.products);
+        })
+        .catch((err) => {
+          console.error({ err: err });
+        });
+    },
+  },
 };
 </script>
 

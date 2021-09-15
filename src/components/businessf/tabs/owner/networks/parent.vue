@@ -219,7 +219,10 @@
             <h4>Upload a New picture</h4>
           </div>
 
-          <div class="col-sm-6 text-center">
+          <div class="col-sm-6 text-center" v-if="this.file">
+            <b-img :src="this.file" rounded fluid alt="Image"></b-img>
+          </div>
+          <div class="col-sm-6 text-center" v-else>
             <h1>
               <fas-icon class="primary" :icon="['fas', 'edit']" />
             </h1>
@@ -240,6 +243,7 @@ export default {
 
   data() {
     return {
+      url: this.$route.params.id,
       networkShow: true,
       showModal: false,
       text: "",
@@ -282,7 +286,7 @@ export default {
 
     getNetworkInfo() {
       this.$store
-      .dispatch("networkProfile/getnetworkInfo")
+      .dispatch("networkProfile/getnetworkInfo", this.url)
       .then(() => {
         console.log('ohh yeah');
       })
@@ -292,7 +296,7 @@ export default {
     },
 
     updateNetwork: function(){
-      this.axios.post("network/edit-informaions/"+this.networkInfo[0].id, this.updateNetwork_form)
+      this.axios.post("network/edit-informaions/"+this.url, this.updateNetwork_form)
       .then(() => {
         console.log(this.updateNetwork_form);
         this.flashMessage.show({

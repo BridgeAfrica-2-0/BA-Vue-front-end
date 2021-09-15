@@ -22,9 +22,9 @@ export default {
 
   actions: {
 
-    getnetworkInfo( {commit} ){
+    getnetworkInfo( {commit}, networkId ){
       return axios
-      .get("network/edit-informaions/1")
+      .get(`network/edit-informaions/${networkId}`)
       .then(({ data }) => {
           commit("setnetworkInfo", data.data);
         console.log(data);

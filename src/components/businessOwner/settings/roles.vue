@@ -235,7 +235,7 @@ export default {
 		},
     assignRole: function(){
      
-      this.axios.post("business/role/update/2", this.form)
+      this.axios.post("business/role/update/"+this.url, this.form)
       .then(() => {
         console.log('ohh yeah');
 
@@ -255,7 +255,7 @@ export default {
 		},
     deleteEditor: function(editor){
       var formData = this.toFormData(editor)
-      this.axios.post("#", formData)
+      this.axios.post("business/editor/delete/"+this.url, formData)
       .then(() => {
         console.log('ohh yeah');
 

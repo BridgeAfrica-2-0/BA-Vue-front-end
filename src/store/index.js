@@ -11,7 +11,7 @@ import networkProfile from "./networkProfile";
 import axios from "axios";
 Vue.use(Vuex);
 //  axios.defaults.baseURL = process.env.VUE_APP_API_URL;
- axios.defaults.baseURL = "https://664c-154-72-150-126.ngrok.io/api/v1/";
+ axios.defaults.baseURL = "https://7d4c-154-72-150-71.ngrok.io/api/v1/";
 //  axios.defaults.baseURL = "http://edson.maxinemoffett.com/api/v1/";
 export default new Vuex.Store({
   modules: {

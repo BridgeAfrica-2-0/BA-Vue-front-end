@@ -96,7 +96,7 @@
       <div class="pending-post-view pt-2 mt-3">
         <p>
           Your 3 Post(s) are pending for approval.&nbsp;&nbsp;&nbsp;&nbsp;<a
-            href="#"
+            @click="this.$router.push({ name: '/pendingPost'})"
             style="color: #e75c18; text-decoration:underline;"
             >View All</a
           >
@@ -389,7 +389,7 @@
         :key="item.post_id"
       >-->
       
-       <b-row class="mt-4"   v-for="item in post"  :key="item.post_id" > 
+       <b-row class="mt-4"   v-for="item in owner_post"  :key="item.post_id" > 
      
 
       <!--  :src="$store.getters.getProfilePicture"-->
@@ -528,7 +528,7 @@ export default {
     return {
       moment: moment,
       page:1,
-      post:this.$store.state.networkProfile.ownerPost,
+     // post:this.$store.state.networkProfile.ownerPost,
      url:null,
      delete:[],
      edit_description:null,
@@ -621,7 +621,7 @@ export default {
       //  console.log(data);
       if (data.data.length) {
         this.page += 1;
-        this.post.push(...data.data);
+        this.owner_post.push(...data.data);
           $state.loaded();
           } else {
           $state.complete();
@@ -646,7 +646,7 @@ export default {
         })
         .then((response) => {
           console.log(response.data);
-
+          this.ownerPost();
           this.flashMessage.show({
             status: "success",
             blockClass: "custom-block-class",
@@ -688,12 +688,12 @@ export default {
     },
 
     updatePost(){
-      let loader = this.$loading.show({
-        container: this.fullPage ? null : this.$refs.loader,
-        canCancel: true,
-        onCancel: this.onCancel,
-        color:"#e75c18"
-      });
+      // let loader = this.$loading.show({
+      //   container: this.fullPage ? null : this.$refs.loader,
+      //   canCancel: true,
+      //   onCancel: this.onCancel,
+      //   color:"#e75c18"
+      // });
     //  const fileImage = this.createPost.movies[0].target.files[0];
       this.fileImageArr=this.createPost.movies;
       let formData2 = new FormData();
@@ -716,12 +716,13 @@ export default {
       })
       .then((response) => {
         console.log(response);
+        this.ownerPost();
         this.flashMessage.show({
           status: "success",
             blockClass: "custom-block-class",
           message: "Content successfuly uploaded",
         });
-        loader.hide();
+        // loader.hide();
         this.$refs["modal-edit"].hide();
       }) .catch((err) => {
         if (err.response.status == 422) {
@@ -732,7 +733,7 @@ export default {
             message: err.response.data.message,
             blockClass: "custom-block-class",
           });
-          loader.hide()
+          // loader.hide()
           this.$refs["modal-edit"].hide();
         } else {
           this.flashMessage.show({
@@ -742,7 +743,7 @@ export default {
             blockClass: "custom-block-class",
           });
           console.log({ err: err });
-          loader.hide()
+          // loader.hide()
           this.$refs["modal-edit"].hide();
         }
       });
@@ -857,12 +858,12 @@ export default {
     },
 
     submitPost() {
-      let loader = this.$loading.show({
-        container: this.fullPage ? null : this.$refs.loader,
-        canCancel: true,
-        onCancel: this.onCancel,
-        color:"#e75c18"
-      });
+      // let loader = this.$loading.show({
+      //   container: this.fullPage ? null : this.$refs.loader,
+      //   canCancel: true,
+      //   onCancel: this.onCancel,
+      //   color:"#e75c18"
+      // });
       const fileImage = this.createPost.movies[0].target.files[0];
       this.fileImageArr=this.createPost.movies;
 
@@ -887,7 +888,7 @@ export default {
             blockClass: "custom-block-class",
           message: "Content successfuly uploaded",
         });
-        loader.hide()
+        // loader.hide()
         this.$refs["modal-xl"].hide();
         this.ownerPost();
       }) .catch((err) => {
@@ -899,7 +900,7 @@ export default {
             message: err.response.data.message,
             blockClass: "custom-block-class",
           });
-          loader.hide()
+          // loader.hide()
         } else {
           this.flashMessage.show({
             status: "error",
@@ -907,7 +908,7 @@ export default {
             blockClass: "custom-block-class",
           });
           console.log({ err: err });
-          loader.hide()
+          // loader.hide()
         } 
       });
     },

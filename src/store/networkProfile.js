@@ -4,7 +4,7 @@ export default {
   namespaced: true,
   state: {
     // token: "40|tmXqqig1dDCHVISy8DNSwVfNuet6AxWbwdiRFAIL",
-    token: "41|kUbS5pLLXODiwlpFFozkYqDLj6TIdGfjqsPc1BPH",
+    token: "62|osZvLwKVD2Q3cskoVKu8Hmy026cmaZWjjgRKcbd8",
     networks: [],
     loader: false,
     success: false,

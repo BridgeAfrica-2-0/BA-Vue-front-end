@@ -688,12 +688,12 @@ export default {
     },
 
     updatePost(){
-      // let loader = this.$loading.show({
-      //   container: this.fullPage ? null : this.$refs.loader,
-      //   canCancel: true,
-      //   onCancel: this.onCancel,
-      //   color:"#e75c18"
-      // });
+      let loader = this.$loading.show({
+        container: this.fullPage ? null : this.$refs.loader,
+        canCancel: true,
+        onCancel: this.onCancel,
+        color:"#e75c18"
+      });
     //  const fileImage = this.createPost.movies[0].target.files[0];
       this.fileImageArr=this.createPost.movies;
       let formData2 = new FormData();
@@ -722,7 +722,7 @@ export default {
             blockClass: "custom-block-class",
           message: "Content successfuly uploaded",
         });
-        // loader.hide();
+        loader.hide();
         this.$refs["modal-edit"].hide();
       }) .catch((err) => {
         if (err.response.status == 422) {
@@ -733,7 +733,7 @@ export default {
             message: err.response.data.message,
             blockClass: "custom-block-class",
           });
-          // loader.hide()
+          loader.hide()
           this.$refs["modal-edit"].hide();
         } else {
           this.flashMessage.show({
@@ -743,7 +743,7 @@ export default {
             blockClass: "custom-block-class",
           });
           console.log({ err: err });
-          // loader.hide()
+          loader.hide()
           this.$refs["modal-edit"].hide();
         }
       });
@@ -871,7 +871,11 @@ export default {
       this.fileImageArr.forEach((value, index) => {
         formData2.append("media["+index+"]", value.target.files[0]);
         console.log(value);
+        console.log(value.target.files[0]);
+        console.log("testingggg");
       });
+
+      console.log(this.fileImageArr);
       formData2.append("type", "image");
       //formData2.append("media", this.createPost.hyperlinks);
       formData2.append("content", this.createPost.postNetworkUpdate);

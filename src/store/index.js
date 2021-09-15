@@ -3,24 +3,26 @@ import Vuex from "vuex";
 import auth from "./auth";
 import businessBlocking from "./businessBlocking";
 import businessOwner from "./businessOwner";
-import businessGeneral from "./businessGeneral";
-import businessRole from "./businessRole";
+import ProfileAndBusinessDetails from "./ProfileAndBusinessDetails";
+import hotbusiness from "./hotbusiness";
 import networkDetails from "./networkDetails";
 import dashboardcommunity from "./dashboardcommunity";
+import businessGeneral from "./businessGeneral";
+import businessRole from "./businessRole";
 
 import axios from "axios";
 Vue.use(Vuex);
-// axios.defaults.baseURL = process.env.VUE_APP_API_URL;
-axios.defaults.baseURL = "http://team3dev.maxinemoffett.com/api/v1/";
+axios.defaults.baseURL = process.env.VUE_APP_API_URL;
 
 export default new Vuex.Store({
   modules: {
     auth,
-    businessBlocking,
+    networkDetails,
+    dashboardcommunity,
+    ProfileAndBusinessDetails,
     businessOwner,
+    businessBlocking,
     businessGeneral,
     businessRole,
-    networkDetails,
-    dashboardcommunity
   }
 });

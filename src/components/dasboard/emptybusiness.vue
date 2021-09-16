@@ -1,20 +1,14 @@
 <template>
   <div>
-    <b-card class="border shadow " style="height:250px">
+    <b-card class="border shadow " style="height:300px">
       <span>
         <h6 class="mybusi">
           <fas-icon class="icons" :icon="['fas', 'hands-helping']" size="lg" />
-          <b> My Businesses </b>
+          <b> My Businesses </b>  
         </h6>
       </span>
       <div class="s-card " style="overflow: -moz-scrollbars-vertical">
-        <div
-          v-if="
-            $store.getters[
-              'ProfileAndBusinessDetails/getdetails.business.length'
-            ] < 1
-          "
-        >
+        <div v-if="business.lenght ==0">
           <b-row>
             <b-col>
               <div class="p-top">
@@ -28,57 +22,34 @@
             </b-col>
           </b-row>
         </div>
-        <div
-          v-else
-          class="people-style shadow"
-          v-for="item in $store.getters[
-            'ProfileAndBusinessDetails/getdetails.business'
-          ]"
-          :key="item.id"
-        >
-          <b-row>
-            <b-col md="3" xl="3" lg="3" cols="5" sm="3">
-              <div class="center-img">
-                <splide-slide cl>
-                  <img :src="item.profilePicture" class="r-image" />
-                </splide-slide>
-              </div>
-            </b-col>
-            <b-col md="5" cols="7" lg="7" xl="5" sm="5">
-              <p class="textt">
-                <strong class="title"> {{ item.name }} </strong> <br />
-                {{ item.category }}
-                <br />
-                {{ item.followers }} Community <br />
 
-                <span class="location">
-                  <b-icon-geo-alt class="ico"></b-icon-geo-alt>
-                  {{ item.location_description }}
-                </span>
-                <br />
+        <Business  :business="business"   v-if="business.lenght !=0" />
 
-                {{ item.about_business }} <b-link>Read More</b-link>
-              </p>
-            </b-col>
-          </b-row>
-        </div>
+
+
+
+
+
       </div>
     </b-card>
   </div>
 </template>
 
 <script>
+import Business from "@/components/dasboard/businesses";
 export default {
   name: "emptybusiness",
-  created() {
-    this.$store
-      .dispatch("ProfileAndBusinessDetails/getdetails")
-      .then(() => {
-        console.log("the response");
-      })
-      .catch(err => {
-        console.log({ err: err });
-      });
+  
+  components: {
+    Business,
+    },
+  
+  computed: {
+   
+
+    business(){
+    return this.$store.state.ProfileAndBusinessDetails.business;
+    }
   }
 };
 </script>

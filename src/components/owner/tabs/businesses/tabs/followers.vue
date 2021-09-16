@@ -16,10 +16,8 @@
     </b-row>
     <br />
 
-    <br />
-
     <b-row>
-      <b-col v-if="followers.length <= 0" >
+      <b-col v-if="followers===null || followers.length <= 0" >
         No Community Business
       </b-col>
       <b-col md="12" lg="6" v-for="member in followers" :key="member.id" v-else>

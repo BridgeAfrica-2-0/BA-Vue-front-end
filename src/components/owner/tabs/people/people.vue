@@ -2,10 +2,10 @@
   <div class="lalala">
     <b-tabs content-class="mt-3" fill pills>
       <b-tab title="Followers"
-        ><Followers :followers="people.user_followers"
+        ><Followers :followers="people !== null ? people.user_followers : null"
       /></b-tab>
       <b-tab title="Following"
-        ><Following :followings="people.user_following"
+        ><Following :followings="people !== null ? people.user_following : null"
       /></b-tab>
     </b-tabs>
   </div>

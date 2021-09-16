@@ -5,14 +5,15 @@
         class="f-left"
         style="padding:0px; margin-left: -12px;
     margin-right: -12px;"
-
->        <b-tabs pills content-class="mt-3 f-left">
+      >
+        <b-tabs pills content-class="mt-3 f-left">
           <b-tab title="People" active>
-            <People :people="profile_community.people[0]" />
+
+            <People :people="profile_community !== null ? profile_community.people[0] : null" />
           </b-tab>
 
           <b-tab title="Businesses">
-            <Businesses :business="profile_community.business[0]" />
+            <Businesses :business=" profile_community!==null ? profile_community.business[0] : null" />
           </b-tab>
         </b-tabs>
       </b-card>
@@ -46,17 +47,22 @@ export default {
         { id: 9, first_name: "Pearl", last_name: "Slaghoople" }
       ],
       profile_community: null,
+        isLoading: false,
     };
   },
   provide() {
     return {};
   },
   created() {
+      this.isLoading = true;
     console.log("Load User Profile Community start+++++++");
     this.$store
       .dispatch("loadUserProfileCommuntity", null)
       .then(response => {
-        console.log(response, "Load User Profile Community end response (3) +++++++");
+        console.log(
+          response,
+          "Load User Profile Community end response (3) +++++++"
+        );
       })
       .catch(error => {
         console.log("Error from server or from browser error (2) ++++", error);
@@ -66,7 +72,11 @@ export default {
         this.profile_community = JSON.parse(
           JSON.stringify(this.$store.getters.getProfileCommunity)
         );
-        console.log("Finally Load User Profile Community +++++", this.profile_community);
+        console.log(
+          "Finally Load User Profile Community +++++",
+          this.profile_community
+        );
+        this.isLoading = false;
       });
   },
   computed: {
@@ -98,6 +108,7 @@ hr {
   text-align: left;
   align-content: flex-start;
 }
+
 @media only screen and (max-width: 768px) {
   .options {
     position: relative;

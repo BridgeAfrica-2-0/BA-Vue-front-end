@@ -17,7 +17,7 @@
     <br />
 
     <b-row>
-      <b-col v-if="followings.length <= 0" >
+      <b-col v-if="followings===null || followings.length <= 0" >
         No Community Members
       </b-col>
       <b-col md="12" lg="6" v-for="member in followings" :key="member.id" v-else>

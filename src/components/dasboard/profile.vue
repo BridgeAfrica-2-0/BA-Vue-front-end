@@ -16,18 +16,24 @@
         </h3>
       </span>
 
-      <div class="d-flex col-md-12 mt-2 ml-35">
+      <div
+        class="d-flex col-md-12 mt-2 ml-35"
+        v-for="item in getowner"
+        :key="item.name"
+      >
         <b-avatar
           class="p-avater"
           variant="primary"
-          src="https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg"
+          :src="item.picture"
           size="5em"
         ></b-avatar>
 
         <div class="text-lost">
-          <h6><b class="name"> Profile's Name </b></h6>
+          <h6>
+            <b class="name"> {{ item.name }} </b>
+          </h6>
           <p class="mb-1">
-            1.1M Community
+            {{ item.followers }} Community
             <span class="float-right m-60"
               >Current Plan: <span class="text-success">Basic</span></span
             >
@@ -40,16 +46,16 @@
           <p class="mb-1 ">
             <b-icon-chat-fill class="text-primary"></b-icon-chat-fill>
             Message
-            <span class="badge rounded-pill bg-primary float-right mt-1"
-              >3</span
-            >
+            <span class="badge rounded-pill bg-primary float-right mt-1">
+              {{ item.message }}
+            </span>
           </p>
           <p class="mb-1 ">
             <b-icon-bell-fill class="text-primary"></b-icon-bell-fill>
             Notifications
-            <span class="badge rounded-pill bg-primary float-right mt-1"
-              >9</span
-            >
+            <span class="badge rounded-pill bg-primary float-right mt-1">
+              {{ item.notification }}
+            </span>
           </p>
         </div>
       </div>
@@ -59,7 +65,40 @@
 
 <script>
 export default {
-  name: "profile"
+  name: "profile",
+  mounted() {
+
+  },
+
+  computed: {
+    details() {
+      return this.$store.getters["ProfileAndBusinessDetails/getdetails"];
+    }
+  },
+  created() {
+    this.$store
+      .dispatch("ProfileAndBusinessDetails/getdetails")
+      .then(() => {
+        this.getowner();
+        console.log("the response");
+      })
+      .catch(err => {
+        console.log({ err: err });
+      });
+  },
+
+  methods:{
+    getowner(){
+      console.log(
+        JSON.parse(
+          JSON.stringify(
+            this.$store.getters["ProfileAndBusinessDetails/getdetails"]
+          )
+        ).owner
+      );
+
+    }
+  }
 };
 </script>
 

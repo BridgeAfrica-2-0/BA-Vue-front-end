@@ -23,6 +23,8 @@ import LoadScript from 'vue-plugin-load-script';
 Vue.use(LoadScript);
 Vue.use(Vuex);
 Vue.use(VueAxios, axios);
+
+Vue.use(require('vue-moment'));
 IconifyIcon.addIcon('home', homeIconData);
 
 Vue.use(ReadMore);
@@ -70,7 +72,10 @@ Vue.use(VueSocialauth, {
   }
 });
 
-import FlashMessage from "@smartweb/vue-flash-message";
+
+
+
+import FlashMessage from '@smartweb/vue-flash-message';
 Vue.use(FlashMessage);
 
 
@@ -124,6 +129,10 @@ import "@/assets/css/bootstrap.css";
 Vue.use(BootstrapVue);
 Vue.use(IconsPlugin);
 
+
+
+
+
 Vue.use(VueGoogleMaps, {
   load: {
     key: "AIzaSyAGZU6cqra18t1fhN1AbzRsEc_pgt7n2C8",
@@ -132,6 +141,16 @@ Vue.use(VueGoogleMaps, {
   autobindAllEvents: false,
   installComponents: true
 });
+
+
+
+
+import VueAgile from 'vue-agile'
+
+Vue.use(VueAgile);
+
+Vue.use(InfiniteLoading, { /* options */ });
+
 
 Vue.component("v-select", vSelect);
 
@@ -142,11 +161,10 @@ Vue.config.productionTip = false;
 new Vue({
   router,
   store,
-  i18n,  
+  i18n,
 
   created() {
     const userInfo = localStorage.getItem("user");
-
     if (userInfo) {
       const userData = JSON.parse(userInfo);
       this.$store.commit("auth/setUserData", userData);

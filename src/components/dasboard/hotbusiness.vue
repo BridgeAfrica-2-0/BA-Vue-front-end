@@ -10,9 +10,9 @@
               <div class="center-img">
             <splide :options="options" class="r-image">
                   <splide-slide cl>
-                <img :src="item.picture" class="r-image" />
+                <img :src="item.picture" class="r-image" /> 
               </splide-slide>
-            </splide>
+            </splide> 
               </div>
             </b-col>
             <b-col md="5" cols="7" lg="7" xl="5" sm="5">
@@ -28,7 +28,15 @@
             </span>
             <br />
 
-            {{ item.about_business }} <b-link>Read More</b-link>
+            <read-more
+              more-str="read more"
+              class="readmore"
+              :text="item.about_business"
+              link="#"
+              less-str="read less"
+              :max-chars="15"
+            >
+            </read-more>
               </p>
             </b-col>
 

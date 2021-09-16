@@ -26,8 +26,15 @@
                   >{{ item.country }}
                 </span>
                 <br />
-
-                {{ item.about_description }} <b-link>Read More</b-link>
+       <read-more
+              more-str="read more"
+              class="readmore"
+              :text="item.about_business"
+              link="#"
+              less-str="read less"
+              :max-chars="15"
+            >
+            </read-more>
               </p>
             </b-col>
 

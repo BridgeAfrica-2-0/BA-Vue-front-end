@@ -5705,6 +5705,13 @@ infer-owner@^1.0.3:
   resolved "https://registry.yarnpkg.com/infer-owner/-/infer-owner-1.0.4.tgz#c4cefcaa8e51051c2a40ba2ce8a3d27295af9467"
   integrity sha512-IClj+Xz94+d7irH5qRyfJonOdfTzuDaifE6ZPWfx0N0+/ATZCbuTPq2prFl526urkQd90WyUKIh1DfBQ2hMz9A==
 
+infinite-loading@^0.2.8:
+  version "0.2.8"
+  resolved "https://registry.yarnpkg.com/infinite-loading/-/infinite-loading-0.2.8.tgz#db009ede805fd21cd23fbd865df0680f63cb4a0a"
+  integrity sha512-DDD7PLQR+TMlA2nkLwyk1tFcpyK1NLG5nesdQtqs3l/YtAe4eAT4xFdEfRnjfgE3ltXR2y8j46VWZuMjNoHlBA==
+  dependencies:
+    vue "^2.0.0"
+
 inflight@^1.0.4:
   version "1.0.6"
   resolved "https://registry.yarnpkg.com/inflight/-/inflight-1.0.6.tgz#49bd6331d7d02d0c09bc910a1075ba8165b56df9"
@@ -10498,7 +10505,7 @@ vue3-discordpicker@^1.0.7:
     tailwindcss "npm:@tailwindcss/postcss7-compat@^2.1.2"
     vue "^3.0.0"
 
-vue@^2.3.3, vue@^2.5.17, vue@^2.5.2, vue@^2.6.10, vue@^2.6.11, vue@^2.6.12:
+vue@^2.0.0, vue@^2.3.3, vue@^2.5.17, vue@^2.5.2, vue@^2.6.10, vue@^2.6.11, vue@^2.6.12:
   version "2.6.14"
   resolved "https://registry.yarnpkg.com/vue/-/vue-2.6.14.tgz#e51aa5250250d569a3fbad3a8a5a687d6036e235"
   integrity sha512-x2284lgYvjOMj3Za7kqzRcUSxBboHqtgRE2zlos1qWaOye5yUmHn42LB1250NJBLRwEcdrB0JRwyPTEPhfQjiQ==

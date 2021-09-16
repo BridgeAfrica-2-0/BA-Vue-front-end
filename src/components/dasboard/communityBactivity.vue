@@ -2,7 +2,7 @@
   <div>
 
 
-     <b-card class=" border shadow "  >
+     <b-card class="px-md-3 border shadow "  >
 
       <span> <h6 class="title mt-3 ">  <fas-icon class=" icons icon-color" :icon="['fab', 'readme']"  size="lg" />   <b> Post </b>  </h6>   </span>
 
@@ -301,7 +301,7 @@ infiniteHandler($state) {
 
      owner_post() {
 
-      return  this.$store.state.dashboard.pdashboard_post;  
+      return  this.$store.state.dashboard.bdashboard_post;  
 
     
     },  
@@ -323,7 +323,10 @@ infiniteHandler($state) {
 
 <style scoped>
 
+.card-body{
 
+  padding: 2px !important;
+}
 
 
 .action-intro {
@@ -500,8 +503,6 @@ infiniteHandler($state) {
   overflow: auto; 
   overflow-x: hidden;
   padding: 15px;
-  padding-right: 3px !important;
-
 
 
 }

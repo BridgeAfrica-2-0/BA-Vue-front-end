@@ -1,8 +1,8 @@
 <template>
-  <div style="overflow-x:hidden">
+  <div style="overflow-x:hidden" class="dashboard">
     <navbar></navbar>
 
-    <div class="text-justify  p-card ">
+    <div class="text-justify  p-card pr-3 ">
       <CarousselDashboard class="mm-top" /> <br />
 
       <br />
@@ -45,7 +45,7 @@
         <b-row>
           <b-col md="6" sm="12" class="mt-2">
             <div>
-              <b-card class=" border shadow" style="height:350px">
+              <b-card class=" border shadow pr-3" style="height:350px">
                 <h6 class="font-weight-bolder text-design">
                   Use Bridge Africa as Yourself or as one of your businesses
                 </h6>
@@ -81,14 +81,15 @@
       
        
          <comuniti-Bdashboard  v-if="selectedb != 'owner'" class="m-component m-3"></comuniti-Bdashboard> <br />
+
      </div>
      
      
 
       <div>
         <b-row>
-          <b-col sm="12" lg="8" class="mt-3"> <CommunityActivity /> </b-col>
-          <b-col sm="12" lg="4" class="mt-3"> <Tutorial /> </b-col>
+          <b-col sm="12" lg="8" > <CommunityActivity  v-if="selectedb == 'owner'" />      <CommunityBactivity    v-if="selectedb != 'owner'" />    </b-col>
+          <b-col sm="12" lg="4" > <Tutorial /> </b-col>
         </b-row>
       </div>
       <br />
@@ -146,6 +147,8 @@ import Insights from "@/components/dasboard/insights";
 
 import CommunityActivity from "@/components/dasboard/communityActivity";
 
+import CommunityBactivity from "@/components/dasboard/communityBactivity";
+
 import Tutorial from "@/components/dasboard/tutorial";
 
 import Profile from "@/components/dasboard/profile";
@@ -184,6 +187,7 @@ export default {
     BusinessDashboard,
     Business,
     CommunityActivity,
+    CommunityBactivity,
     Tutorial,
     Insights,
     Popularnetwork,
@@ -222,7 +226,8 @@ export default {
     this.CommunityPeople();
 
     this.businessCommunityTotal();
-    this.ownerPost();
+
+    this.dashboardBpost();
 
        }
 
@@ -231,7 +236,31 @@ export default {
 
 
 
+   dashboardPpost(){
+    
+       this.$store
+        .dispatch("dashboard/dashboardPpost")
+        .then(() => {
+          console.log("hey yeah");
+        })
+        .catch(err => {
+          console.log({ err: err });
+        });
 
+   },
+
+   dashboardBpost(){
+    
+      this.$store
+        .dispatch("dashboard/dashboardBpost", this.url_data)
+        .then(() => {
+          console.log("hey yeah");
+        })
+        .catch(err => {
+          console.log({ err: err });
+        });
+   
+   },
 
    
     CommunityBusiness() {
@@ -267,16 +296,7 @@ export default {
         });
     },
 
-    ownerPost() {
-      this.$store
-        .dispatch("businessOwner/ownerPost", this.url_data)
-        .then(() => {
-          console.log("hey yeah");
-        })
-        .catch(err => {
-          console.log({ err: err });
-        });
-    },
+   
 
 
 
@@ -324,14 +344,21 @@ export default {
     }
   },
 
-  mounted() {},
-
-  created() {
-    this.$store
+  mounted() {
+      
+       this.$store
       .dispatch("ProfileAndBusinessDetails/getdetails")
       .then(response => {
         this.getbusiness();
       });
+
+
+      this.dashboardPpost()
+
+  },
+
+  created() {
+   
   },
 
   computed: {
@@ -353,6 +380,11 @@ export default {
 .icons {
   color: #e75c18;
   width: 24px;
+}
+
+.dashboard .card-body {
+    
+    padding-right: 0px !important;
 }
 </style>
 

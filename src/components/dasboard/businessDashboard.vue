@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b-card class="border shadow " style="height:400px">
+    <b-card class="border shadow pr-3" style="height:400px">
       <span>
         <h4 class="mb-3">
           <h6 class="title">

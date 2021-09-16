@@ -83,7 +83,10 @@ const routes = [
   {
     path: "/dashboard",
     name: "dashboard",
-    component: dashboard
+    component: dashboard,
+    meta: {
+     // auth: true
+    }
   },
 
   {
@@ -270,11 +273,11 @@ router.beforeEach((to, from, next) => {
     const userdata = JSON.parse(dat);
 
     if (userdata.user.verified_at == null) {
-      next("/verify");
+    //  next("/verify");
     }
   }
 
-  next();
+  next();  
 });
 
 export default router;

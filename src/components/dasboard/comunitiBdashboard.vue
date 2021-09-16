@@ -120,6 +120,60 @@
               </b-tabs>
             </div>
           </b-tab>
+
+
+
+          <b-tab>
+            <template slot="title">
+              Network
+              <span class="spa-color">
+                {{ count(business.people[0].total_business) }}
+              </span>
+            </template>
+
+            <div>
+              <b-tabs fill pills content-class="mt-3  f-left m-up checkcheck">
+                <b-tab active>
+                  <template slot="title">
+                    Followers
+                    <span class="spa-color">
+                      {{ count(business.people[0].total_business_follower) }}
+                    </span>
+                  </template>
+
+                  <div class="s-comcard">
+                    <b-row>
+                      <div>
+                        <Network
+                          :business="business.business[0].business_followers"
+                        />
+                      </div>
+                    </b-row>
+                  </div>
+                </b-tab>
+
+                <b-tab>
+                  <template slot="title">
+                    Following
+                    <span class="spa-color">
+                      {{ count(business.people[0].total_business_following) }}
+                    </span>
+                  </template>
+
+                  <div class="s-comcard">
+                    <b-row>
+                      <div class="p-2">
+                        <Network
+                          :business="business.business[0].business_following"
+                        />
+                      </div>
+                    </b-row>
+                  </div>
+                </b-tab>
+              </b-tabs>
+            </div>
+          </b-tab>
+
         </b-tabs>
       </div>
     </b-card>
@@ -129,13 +183,15 @@
 <script>
 import People from "@/components/dasboard/communityBmember";
 import Business from "@/components/dasboard/communityBbusiness";
+import Network from "@/components/dasboard/communitynetwork";
 
 export default {
   name: "comunitiDashboard",
 
   components: {
     People,
-    Business
+    Business,
+    Network
   },
   computed: {   
     business() {

@@ -72,8 +72,8 @@
         <h5 class="a-text">Existing Editors</h5>
         <span v-for="editor in editors" :key="editor.id">
           <span class="d-flex align-items-center m-list">
-            <b-avatar class="mr-3 profile-pic"></b-avatar>
-            <span class="mr-auto username">{{ editors.name }}</span>
+            <b-avatar class="mr-3 profile-pic" :src="editor.picture"></b-avatar>
+            <span class="mr-auto username">{{ editor.name }}</span>
             <span>
               <div>
                 <b-dropdown
@@ -166,7 +166,7 @@ export default {
       form: {
         user_id: "",
         role_id: "",
-        follower:""
+        follower: ""
       }
     };
   },
@@ -317,7 +317,6 @@ export default {
 }
 
 .a-button-l {
-  /*align-content: right;*/
   float: right;
 }
 .a-text {

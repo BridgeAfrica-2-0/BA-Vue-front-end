@@ -1,6 +1,7 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import auth from "./auth";
+import dashboard from "./dashboard";
 import businessOwner from "./businessOwner";
 import ProfileAndBusinessDetails from "./ProfileAndBusinessDetails";
 import hotbusiness from "./hotbusiness";
@@ -19,6 +20,7 @@ export default new Vuex.Store({
     dashboardcommunity,
     ProfileAndBusinessDetails,
     businessOwner,
+    dashboard,
     hotbusiness,
     NetworkSettings
   }

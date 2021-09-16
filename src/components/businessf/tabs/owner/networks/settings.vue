@@ -207,7 +207,7 @@ export default {
   methods: {
     submit() {
       this.axios
-        .post("/network/generalSettings/1", this.form)
+        .post("/network/generalSettings/" + this.url, this.form)
         .then(res => {
           console.log(this.form);
           this.flashMessage.success({
@@ -227,7 +227,7 @@ export default {
 
     deleteNetwork() {
       this.$axios
-        .post("/network", this.network_id)
+        .delete("/network", this.network_id)
         .then(function(response) {
           console.log(this.form);
           this.flashMessage.success({

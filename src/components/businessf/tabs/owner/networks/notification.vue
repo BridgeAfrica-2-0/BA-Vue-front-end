@@ -59,9 +59,8 @@
         <div>
           Selected: <strong>{{ selected }}</strong
           ><br />
-          All Selected: <strong>{{ allSelected }}</strong
-          ><br />
-          Indeterminate: <strong>{{ indeterminate }}</strong>
+          All Selected: <strong>{{ allSelected }}</strong>
+
         </div>
       </b-row>
     </div>
@@ -73,29 +72,7 @@ export default {
   name: "notification",
   data() {
     return {
-      users: [
-        {
-          id: "1",
-          name: "Peter Parker",
-          time: "2",
-          picture: "https://business.bridgeafrica.info/assets/img/team/3.png",
-          text: "I am a man"
-        },
-        {
-          id: "2",
-          name: "Peter",
-          time: "23",
-          picture: "https://business.bridgeafrica.info/assets/img/team/3.png",
-          text: "I am a woman"
-        },
-        {
-          id: "3",
-          name: "Parker",
-          time: "69",
-          picture: "https://business.bridgeafrica.info/assets/img/team/3.png",
-          text: "I am a trans"
-        }
-      ],
+      users: [],
       selected: [],
       selectAll: false,
       indeterminate: false

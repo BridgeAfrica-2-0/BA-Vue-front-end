@@ -6,7 +6,7 @@ export default {
   state: {
     followers: [],
     roles: [],
-    editors: [],
+    editors: [{name:"type"}],
     blockusers: [],
     networkinfo: []
   },

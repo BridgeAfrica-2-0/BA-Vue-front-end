@@ -15,7 +15,7 @@
           <b-form-group class="mb-0" v-slot="{ ariaDescribedby }">
             <b-form-radio-group
               class="pt-2 text"
-              :options="['Publics', 'Private']"
+              :options="['Public', 'Private']"
               :aria-describedby="ariaDescribedby"
               v-model="form.privacy"
             ></b-form-radio-group>
@@ -103,7 +103,7 @@ export default {
   methods: {
     submit() {
       this.axios
-        .post("/network/generalSettings/1", this.form)
+        .post("/network/generalSettings/"+this.url, this.form)
         .then(res => {
           console.log(this.form);
           this.flashMessage.success({
@@ -170,7 +170,6 @@ export default {
 
 .a-button-l {
   margin-bottom: 1000px;
-  /*align-content: right;*/
   float: right;
 }
 .a-text {

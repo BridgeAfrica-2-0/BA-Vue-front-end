@@ -7,12 +7,13 @@ export default {
     followers: [],
     roles: [],
     editors: [],
-    blockusers: []
+    blockusers: [],
+    networkinfo: []
   },
 
   actions: {
     getfollowers({ commit }) {
-      return axios.get("/profile/community").then(({ data }) => {
+      return axios.get("/network/list/member/1").then(({ data }) => {
         commit("setfollowers", data.data);
         console.log(data);
       });
@@ -22,13 +23,13 @@ export default {
       return axios.get("/network/displayRole").then(({ data }) => {
         commit("setroles", data.data);
         console.log(data);
-        console.log("roles data")
+        console.log("roles data");
       });
     },
 
     geteditors({ commit }, businessId) {
       return axios
-        .get("/business/role/editor/" + businessId)
+        .get("/network/displayRole/user/${businessId}" )
         .then(({ data }) => {
           commit("seteditors", data.data);
           console.log(data);
@@ -38,6 +39,13 @@ export default {
     getblockusers({ commit }, businessId) {
       return axios.get(`/network/blocking/${businessId}`).then(({ data }) => {
         commit("setblocking", data.data);
+        console.log(data);
+      });
+    },
+
+    getnetworkinfo({ commit }, businessId) {
+      return axios.get(``).then(({ data }) => {
+        commit("setnetworkinfo", data.data);
         console.log(data);
       });
     }
@@ -58,6 +66,9 @@ export default {
     },
     setblocking(state, blockusers) {
       state.blockusers = blockusers;
+    },
+    setnetworkinfo(state, networkinfo) {
+      state.networkinfo = networkinfo;
     }
   },
 
@@ -73,6 +84,9 @@ export default {
     },
     getblockusers(state) {
       return state.blockusers;
+    },
+    getNinfo(state) {
+      return state.networkinfo;
     }
   }
 };

@@ -9,7 +9,14 @@
           label-class="font-weight-bold pt-0"
           class="mb-0"
         >
-          <b-form-input id="bname" placeholder="" required></b-form-input>
+          <b-form-input
+            id="bname"
+            v-model="form.Network_Name"
+
+            required
+            name="role"
+            text-field="name"
+          ></b-form-input>
         </b-form-group>
       </b-container>
     </div>
@@ -154,7 +161,11 @@
       <b-row>
         <b-col>
           <div class="b-bottomn f-right">
-            <b-button variant="primary" class="a-button-l b-font" v-on:click="submit()">
+            <b-button
+              variant="primary"
+              class="a-button-l b-font"
+              v-on:click="submit()"
+            >
               Save Changes
             </b-button>
           </div>
@@ -172,18 +183,26 @@ export default {
   data() {
     return {
       form: {
-        Network_Name:"",
-        Category:"",
-        Phone_1:"",
-        Phone_2:"",
-        Email:"",
-        Country:"",
-        City:"",
-        Neighborhood:"",
-        Website:"",
-        Description:"",
+        Network_Name: "",
+        Category: "",
+        Phone_1: "",
+        Phone_2: "",
+        Email: "",
+        Country: "",
+        City: "",
+        Neighborhood: "",
+        Website: "",
+        Description: ""
       }
     };
+  },
+  computed: {
+    networkinfo() {
+      return this.$store.state.NetworkSettings.networkinfo;
+    }
+  },
+  mounted() {
+    this.getnetworkinfo();
   },
   methods: {
     submit() {
@@ -222,8 +241,17 @@ export default {
             title: "Error",
             message: "Deletion Unsuccessful",
             icon: true
-
           });
+        });
+    },
+    getnetworkinfo() {
+      this.$store
+        .dispatch("NetworkSettings/getnetworkinfo")
+        .then(() => {
+          console.log("ohh yeah");
+        })
+        .catch(err => {
+          console.log({ err: err });
         });
     }
   }

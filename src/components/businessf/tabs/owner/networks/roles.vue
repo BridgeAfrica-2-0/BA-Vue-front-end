@@ -15,10 +15,10 @@
           >
             <b-form-select
               id="follower"
-              v-model="form.follower"
-              :options="followers.people[0].user_followers"
-              name="followers"
-              value-field="followers"
+              v-model="form.user_id"
+              :options="followers"
+              name="user"
+              value-field="id"
               text-field="name"
               class="mb-3"
             >
@@ -36,7 +36,7 @@
           >
             <b-form-select
               id="role"
-              v-model="form.role"
+              v-model="form.role_id"
               :options="roles"
               name="role"
               value-field="id"
@@ -121,7 +121,7 @@
           >
             <b-form-select
               id="role"
-              v-model="form.role"
+              v-model="form.role_id"
               :options="roles"
               name="role"
               value-field="id"
@@ -165,7 +165,8 @@ export default {
       clickedObject: {},
       form: {
         user_id: "",
-        role_id: []
+        role_id: "",
+        follower:""
       }
     };
   },
@@ -239,8 +240,10 @@ export default {
         });
     },
     assignRole: function() {
+      console.log(this.url);
+      console.log(this.form);
       this.axios
-        .post("/api/v1/network/assignRole/{id}", this.form)
+        .post("/network/assignRole/" + this.url, this.form)
         .then(() => {
           console.log("ohh yeah");
           this.flashMessage.show({

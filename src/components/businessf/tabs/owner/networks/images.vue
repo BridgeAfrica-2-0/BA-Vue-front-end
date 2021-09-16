@@ -2,47 +2,54 @@
   <div>
     <div class="row">
       <div class="container-fluid">
-        <div class="img-gall" v-for="pictures in pictures" :key="pictures.id">
-          <a href="#!"
-            ><img
-              class="card-img btn p-0"
-              src="@/assets/img/m1.jpg"
-              alt=""
-              v-b-modal.modal-8
-              @click="showPic(pictures.media_url)"
-          /></a>
 
-          <b-modal id="modal-8" title="Details">
-            <img class="card-img" src="@/assets/img/m1.jpg" alt="" />
-            <h4>{{pictures.title}}</h4>
-            <p class="my-4">{{pictures.content}}</p>
-          </b-modal>
-          <div class="mediadesc">
-            <ul class="navbar-nav pull-right">
-              <li class="nav-item dropdown m-0 p-0">
-                <b-dropdown
-                  size="sm"
-                  class="float-right"
-                  variant="link"
-                  toggle-class="text-decoration-none"
-                  no-caret
-                >
-                  <template #button-content>
-                    <fas-icon
-                      class="drop-color font-weight-bolder"
-                      :icon="['fas', 'ellipsis-v']"
-                    />
-                  </template>
-                  <b-dropdown-item @click="downloadPic(pictures.id)">Download</b-dropdown-item>
-                  <b-dropdown-item @click="setProfilePic(pictures.id)">Make Profile Picture</b-dropdown-item>
-                  <b-dropdown-item @click="setCoverPic(pictures.id)">Make Cover Photo</b-dropdown-item>
-                  <b-dropdown-item @click="deleteImage(pictures.id)">Delete</b-dropdown-item>
-                </b-dropdown>
-              </li>
-            </ul>
+        <div v-for="post in images" :key="post.id">
+          <div class="img-gall" v-for="image in post.media" :key="image.id">
+            <a href="#!"
+              ><b-img
+                class="card-img btn p-0"
+                thumbnail
+                fluid 
+                rounded
+                :src="image.media_url"
+                :alt="image.media_id"
+                v-b-modal="'modal-'+image.media_id"
+                v-bind="imageProps"
+              ></b-img>
+            </a>
+            <b-modal hide-footer :id="'modal-'+image.media_id" title="Details">
+              <img class="card-img" :src="image.media_url" alt="" />
+              <!-- <h4>{{image.title}}</h4> -->
+              <p class="my-4">{{image.post_content[0]}}</p>
+            </b-modal>
+            <div class="mediadesc">
+              <ul class="navbar-nav pull-right">
+                <li class="nav-item dropdown m-0 p-0">
+                  <b-dropdown
+                    size="sm"
+                    class="float-right"
+                    variant="link"
+                    toggle-class="text-decoration-none"
+                    no-caret
+                  >
+                    <template #button-content>
+                      <fas-icon
+                        class="drop-color font-weight-bolder"
+                        :icon="['fas', 'ellipsis-v']"
+                      />
+                    </template>
+                    <b-dropdown-item href="#" @click="downloadPic(image.media_id)">Download</b-dropdown-item>
+                    <b-dropdown-item href="#" @click="setProfilePic(image.media_id)">Make Profile Picture</b-dropdown-item>
+                    <b-dropdown-item href="#" @click="setCoverPic(image.media_id)">Make Cover Photo</b-dropdown-item>
+                    <b-dropdown-item href="#" @click="deleteImage(image.media_id)">Delete</b-dropdown-item>
+                  </b-dropdown>
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
-       
+         <FlashMessage />
+        <!-- {{images}} -->
       </div>
     </div>
   </div>
@@ -50,80 +57,69 @@
 
 <script>
 export default {
-  components: {},
-
+  props: ["images"],
   data: function() {
     return {
-      content:null,  
       show_url:null,
-      album_id:null,
       url:null,
-      fullPage:null,
       img_url: null,
-      profile_pic: null,
-      text: null,
-      images: [
-        "https://placekitten.com/801/800",
-        "https://placekitten.com/802/800",
-        "https://placekitten.com/803/800",
-        "https://placekitten.com/804/800",
-        "https://placekitten.com/805/800",
-        "https://placekitten.com/806/800",
-        "https://placekitten.com/807/800",
-        "https://placekitten.com/808/800",
-        "https://placekitten.com/809/800"
-      ],
-      imagees: [
-        "https://i.wifegeek.com/200426/f9459c52.jpg",
-        "https://i.wifegeek.com/200426/5ce1e1c7.jpg",
-        "https://i.wifegeek.com/200426/5fa51df3.jpg",
-        "https://i.wifegeek.com/200426/663181fe.jpg",
-        "https://i.wifegeek.com/200426/2d110780.jpg",
-        "https://i.wifegeek.com/200426/e73cd3fa.jpg",
-        "https://i.wifegeek.com/200426/15160d6e.jpg",
-        "https://i.wifegeek.com/200426/d0c881ae.jpg",
-        "https://i.wifegeek.com/200426/a154fc3d.jpg",
-        "https://i.wifegeek.com/200426/71d3aa60.jpg",
-        "https://i.wifegeek.com/200426/d17ce9a0.jpg",
-        "https://i.wifegeek.com/200426/7c4deca9.jpg",
-        "https://i.wifegeek.com/200426/64672676.jpg",
-        "https://i.wifegeek.com/200426/de6ab9c6.jpg",
-        "https://i.wifegeek.com/200426/d8bcb6a7.jpg",
-        "https://i.wifegeek.com/200426/4085d03b.jpg",
-        "https://i.wifegeek.com/200426/177ef44c.jpg",
-        "https://i.wifegeek.com/200426/d74d9040.jpg",
-        "https://i.wifegeek.com/200426/81e24a47.jpg",
-        "https://i.wifegeek.com/200426/43e2e8bb.jpg"
-      ],
-      index: 0
+      image_details:null,
+      // images: [
+      //   "https://placekitten.com/801/800",
+      //   "https://placekitten.com/802/800",
+      //   "https://placekitten.com/803/800",
+      //   "https://placekitten.com/804/800",
+      //   "https://placekitten.com/805/800",
+      //   "https://placekitten.com/806/800",
+      //   "https://placekitten.com/807/800",
+      //   "https://placekitten.com/808/800",
+      //   "https://placekitten.com/809/800"
+      // ],
+      // imagees: [
+      //   "https://i.wifegeek.com/200426/f9459c52.jpg",
+      //   "https://i.wifegeek.com/200426/5ce1e1c7.jpg",
+      //   "https://i.wifegeek.com/200426/5fa51df3.jpg",
+      //   "https://i.wifegeek.com/200426/663181fe.jpg",
+      //   "https://i.wifegeek.com/200426/2d110780.jpg",
+      //   "https://i.wifegeek.com/200426/e73cd3fa.jpg",
+      //   "https://i.wifegeek.com/200426/15160d6e.jpg",
+      //   "https://i.wifegeek.com/200426/d0c881ae.jpg",
+      //   "https://i.wifegeek.com/200426/a154fc3d.jpg",
+      //   "https://i.wifegeek.com/200426/71d3aa60.jpg",
+      //   "https://i.wifegeek.com/200426/d17ce9a0.jpg",
+      //   "https://i.wifegeek.com/200426/7c4deca9.jpg",
+      //   "https://i.wifegeek.com/200426/64672676.jpg",
+      //   "https://i.wifegeek.com/200426/de6ab9c6.jpg",
+      //   "https://i.wifegeek.com/200426/d8bcb6a7.jpg",
+      //   "https://i.wifegeek.com/200426/4085d03b.jpg",
+      //   "https://i.wifegeek.com/200426/177ef44c.jpg",
+      //   "https://i.wifegeek.com/200426/d74d9040.jpg",
+      //   "https://i.wifegeek.com/200426/81e24a47.jpg",
+      //   "https://i.wifegeek.com/200426/43e2e8bb.jpg"
+      // ],
+      index: 0,
+      imageProps: {  width: 75, height: 75}
     };
   },
-
-  mounted() {
+  mounted(){
     this.url = this.$route.params.id;
   },
-
-  computed: {
-    pictures() {
-      return this.$store.state.businessOwner.albumImages;
-    }
-  },
-
   methods: {
-      /**
+    /**
      *
      * @param i
      */
     onClick(i) {
       this.index = i;
     },
-    
-    showPic(url) {    
-      console.log(url);
-      this.show_url = url;
+
+
+
+    showPic(image) {    
+      console.log(image);
+      this.image_details = image;
       this.$refs["Details"].show();
     },
-
     downloadPic(image_id) {
       console.log("downloading");
       // let loader = this.$loading.show({
@@ -257,9 +253,7 @@ export default {
       //   color: "#e75c18"
       // });
       this.axios
-        .post("business/album/edit/" + this.url + "/" + self.album_id, {
-          name: this.name
-        })
+        .post("business/album/edit/" + this.url + "/" + self.album_id, {name: this.name})
         .then(response => {
           console.log(response.data);
           this.flashMessage.show({
@@ -287,8 +281,10 @@ export default {
           }
         });
     },
-  }
 
+
+
+  },
 };
 </script>
 
@@ -296,11 +292,9 @@ export default {
 .text-design {
   align-items: first baseline;
 }
-
 .drop-color {
   color: black;
 }
-
 @media (min-width: 960px) {
   .img-gall {
     background-size: contain;
@@ -308,7 +302,6 @@ export default {
     margin: 10px;
     border-radius: 3px;
   }
-
   .img-gall {
     position: relative;
     margin: 5px;
@@ -321,14 +314,12 @@ export default {
     -webkit-backface-visibility: visible;
     backface-visibility: visible;
   }
-
   @media (min-width: 1400px) {
     .lb-grid {
       height: 274px;
       margin-bottom: 8px;
     }
   }
-
   .img-gall {
     position: relative;
     margin: 5px;
@@ -342,7 +333,6 @@ export default {
     backface-visibility: visible;
   }
 }
-
 @media only screen and (min-width: 768px) and (max-width: 1331px) {
   .img-gall {
     background-size: contain;
@@ -350,7 +340,6 @@ export default {
     margin: 10px;
     border-radius: 3px;
   }
-
   .img-gall {
     position: relative;
     margin: 5px;
@@ -364,7 +353,6 @@ export default {
     backface-visibility: visible;
   }
 }
-
 @media (max-width: 762px) {
   .img-gall {
     background-size: contain;
@@ -372,7 +360,6 @@ export default {
     margin: 10px;
     border-radius: 3px;
   }
-
   .img-gall {
     position: relative;
     margin: 5px;

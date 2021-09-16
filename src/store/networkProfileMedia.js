@@ -3,9 +3,10 @@ import axios from "axios";
 export default {
   namespaced: true,
   state: {
+    token: "66|m1NNNlGJ98sYB0cl9SEe91VOekHLmoQzAQRgKDYm",
     albums: [],
-    images: [],
     albumImages: [],
+    ownerpostimages: [],
   },
   getters: {
     getAlbums(state) {
@@ -13,22 +14,9 @@ export default {
     },
 
     getImages(state) {
-      return state.images;
+      return state.ownerpostimages;
     },
 
-    getnetWorks(state) {
-      if (state.networks.length > 0) {
-        return state.networks.reverse();
-      }
-    },
-    // sending loader value
-    getLoader(state) {
-      return state.loader;
-    },
-    // sending success value
-    getSuccess(state) {
-      return state.success;
-    }
   },
   mutations: {
     //set media data
@@ -37,10 +25,9 @@ export default {
       state.albums = data;
     },
 
-    setImages(state, data){
+    setImages(state, ownerpostimages){
    
-      state.ownerPostImages=data;  
-
+      state.ownerpostimages = ownerpostimages;  
     },
 
     setAlbumImages(state, data) {
@@ -51,29 +38,31 @@ export default {
 
   actions: {
 
-    getAlbumImages( {commit}, busineeId){
-     
-           
+    getAlbumImages( {commit}, networkId){
       return axios
-      .get('business/album/show/'+busineeId )
+      .get('business/album/show/'+networkId )
       .then(({ data }) => {
        commit('setAlbumImages', data.data.media);
         console.log(data);
       });
     },
 
-    getImages({ commit }, busineeId) {
-      return axios.get("business/post/" + busineeId).then(({ data }) => {
-        commit("setImages", data.data);
-        console.log(data);
-      });
+    getImages({ commit }, networkId) {
+      return axios
+        .get(`network/post/media/${networkId}`)
+          .then(({ data }) => {
+          commit("setImages", data.data);
+          console.log(data);
+        });
     },
 
-    getAlbums({ commit }, busineeId) {
-      return axios.get("business/album/index/" + busineeId).then(({ data }) => {
-        commit("setAlbums", data.data);
-        console.log(data);
-      });
+    getAlbums({ commit }, networkId) {
+      return axios
+        .get("business/album/index/" + networkId)
+          .then(({ data }) => {
+          commit("setAlbums", data.data);
+          console.log(data);
+        });
     },
 
   }

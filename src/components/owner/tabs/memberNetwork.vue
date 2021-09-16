@@ -6,14 +6,25 @@
         style="padding:0px; margin-left: -12px;
     margin-right: -12px;"
       >
-        <b-tabs pills content-class="mt-3 f-left">
+        <div v-if="isLoading">Loading .......</div>
+        <div v-else-if="!isLoading && error!==null">{{ error }} </div>
+        <b-tabs v-else pills content-class="mt-3 f-left">
           <b-tab title="People" active>
-
-            <People :people="profile_community !== null ? profile_community.people[0] : null" />
+            <People
+              :people="
+                profile_community !== null ? profile_community.people[0] : null
+              "
+            />
           </b-tab>
 
           <b-tab title="Businesses">
-            <Businesses :business=" profile_community!==null ? profile_community.business[0] : null" />
+            <Businesses
+              :business="
+                profile_community !== null
+                  ? profile_community.business[0]
+                  : null
+              "
+            />
           </b-tab>
         </b-tabs>
       </b-card>
@@ -47,41 +58,47 @@ export default {
         { id: 9, first_name: "Pearl", last_name: "Slaghoople" }
       ],
       profile_community: null,
-        isLoading: false,
+      isLoading: false,
+      error: null,
     };
   },
   provide() {
     return {};
   },
   created() {
-      this.isLoading = true;
+    this.isLoading = true;
     console.log("Load User Profile Community start+++++++");
     this.$store
-      .dispatch("loadUserProfileCommuntity", null)
+      .dispatch("profileOwnerStore/loadUserProfileCommuntity")
       .then(response => {
         console.log(
           response,
           "Load User Profile Community end response (3) +++++++"
         );
+
       })
       .catch(error => {
         console.log("Error from server or from browser error (2) ++++", error);
+        this.error = "Error from server or from browser error";
       })
       .finally(() => {
-        console.log();
+        this.isLoading = false;
         this.profile_community = JSON.parse(
-          JSON.stringify(this.$store.getters.getProfileCommunity)
+          JSON.stringify(this.$store.getters["profileOwnerStore/getProfileCommunity"])
         );
         console.log(
           "Finally Load User Profile Community +++++",
           this.profile_community
         );
-        this.isLoading = false;
+
       });
   },
   computed: {
     rows() {
       return this.items.length;
+    },
+    community(){
+      return this.profile_community;
     }
   }
 };

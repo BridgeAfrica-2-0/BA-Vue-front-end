@@ -335,6 +335,7 @@ const actions = {
   }
 };
 
+
 const mutations = {
   updateUserProfileCommunity(state, payload) {
     state.userData[0].profile_community = payload.profile_community;

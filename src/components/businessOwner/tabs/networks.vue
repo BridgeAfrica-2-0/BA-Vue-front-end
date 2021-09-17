@@ -17,14 +17,12 @@
             <b-row @click="viewNetwork(network)">
               <b-col md="3" xl="3" lg="3" cols="5" sm="3">
                 <div class="center-img" v-b-modal.modal-1>
-                  {{ network.business_image }}
                   <img
                     :src="
-                      `http://team2dev.maxinemoffett.com/${network.business_image}`
+                      `${process.env.VUE_APP_BASE_URL}/${network.business_image}`
                     "
                     alt=""
                   />
-                  <!-- <img :src="network.image[0]" class="r-image" /> -->
                 </div>
               </b-col>
               <b-col md="9" cols="7" lg="9" xl="9" sm="9">

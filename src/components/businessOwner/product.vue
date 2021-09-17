@@ -19,7 +19,7 @@
             <br />
 
             <span class="price">
-              <strong> {{ product.price }} Fcfa </strong>
+              <strong> {{ product.price }} </strong>
             </span>
             <br />
           </p>

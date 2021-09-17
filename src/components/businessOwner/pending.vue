@@ -56,14 +56,7 @@ export default {
   components: {},
   data() {
     return {
-      posts: [
-        {
-          name: "test",
-          time: "2:20",
-          text:
-            "  Lorem ipsum, dolor sit amet consectetur adipisicing elit. Obcaecati iure qui nulla fuga, quas perferendis exercitationem. Amet similique quibusdam asperiores aspernatur nisi id velit iure voluptatibus laboriosam, ducimus est voluptatum.",
-        },
-      ],
+      posts: [],
     };
   },
   computed: {},
@@ -76,6 +69,14 @@ export default {
   methods: {
     getPosts() {
       // get pending posts
+      axios
+        .get("https://jsonplaceholder.typicode.com/todos")
+        .then(res => {
+          this.posts == res.data;
+        })
+        .catch(err => {
+          console.log(err);
+        });
     },
     approvePost(post) {
       let data = {

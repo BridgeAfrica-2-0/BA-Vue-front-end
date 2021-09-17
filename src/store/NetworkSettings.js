@@ -6,17 +6,19 @@ export default {
   state: {
     followers: [],
     roles: [],
-    editors: [{name:"type"}],
+    editors: [{ name: "type" }],
     blockusers: [],
     networkinfo: []
   },
 
   actions: {
-    getfollowers({ commit }) {
-      return axios.get("/network/list/member/1").then(({ data }) => {
-        commit("setfollowers", data.data);
-        console.log(data);
-      });
+    getfollowers({ commit }, businessId) {
+      return axios
+        .get(`/network/list/member/${businessId}`)
+        .then(({ data }) => {
+          commit("setfollowers", data.data);
+          console.log(data);
+        });
     },
 
     getroles({ commit }) {
@@ -29,7 +31,7 @@ export default {
 
     geteditors({ commit }, businessId) {
       return axios
-        .get("/network/displayRole/user/${businessId}" )
+        .get(`/network/displayRole/user/${businessId}`)
         .then(({ data }) => {
           commit("seteditors", data.data);
           console.log(data);

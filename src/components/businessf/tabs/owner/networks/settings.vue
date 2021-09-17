@@ -12,7 +12,7 @@
           <b-form-input
             id="bname"
             v-model="form.Network_Name"
-
+            :placeholder="networkinfo.name"
             required
             name="role"
             text-field="name"
@@ -198,7 +198,7 @@ export default {
   },
   computed: {
     networkinfo() {
-      return this.$store.state.NetworkSettings.networkinfo;
+      return this.$store.getters.NetworkSettings.getNinfo;
     }
   },
   mounted() {

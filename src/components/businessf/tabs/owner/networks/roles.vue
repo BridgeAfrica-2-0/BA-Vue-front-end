@@ -135,7 +135,7 @@
           class="mt-3"
           block
           variant="primary"
-          @click="$bvModal.hide('edit-editor'), editEditor(clickedObject)"
+          @click="editEditor(clickedObject)"
           >EDIT</b-button
         >
       </b-modal>
@@ -148,7 +148,7 @@
         <b-button
           class="mt-3"
           block
-          @click="$bvModal.hide('delete-editor'), deleteEditor(clickedObject)"
+          @click="deleteEditor(clickedObject)"
           >Delete</b-button
         >
       </b-modal>
@@ -219,12 +219,14 @@ export default {
         });
     },
     editEditor: function(clickedObject) {
+      this.$bvModal.hide('edit-editor')
       let formData = new FormData();
       formData.append("user_id", clickedObject.user_id);
       formData.append("role_id", this.form.role_id);
       this.axios
         .post("/network/role/update/" + this.url, formData)
         .then(() => {
+          this.displayEditor();
           console.log("ohh yeah");
           this.flashMessage.show({
             status: "success",
@@ -245,6 +247,7 @@ export default {
       this.axios
         .post("/network/assignRole/" + this.url, this.form)
         .then(() => {
+          this.displayEditor();
           console.log("ohh yeah");
           this.flashMessage.show({
             status: "success",
@@ -260,10 +263,12 @@ export default {
         });
     },
     deleteEditor: function(editor) {
+      this.$bvModal.hide('delete-editor');
       var formData = this.toFormData(editor);
       this.axios
-        .post("#", formData)
+        .delete("#"+this.editor.user_id)
         .then(() => {
+          this.displayEditor();
           console.log("ohh yeah");
           this.flashMessage.show({
             status: "success",

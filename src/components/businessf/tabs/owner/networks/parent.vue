@@ -54,7 +54,16 @@
             <b-col>
               <p class="a-center">
                 <b-icon icon="people-fill" variant="primary"></b-icon>
-                <span class="pivate text"> 3.5K community </span>
+                <span class="pivate text">
+                  {{
+                    networkInfo[0].commuity >= 1000000
+                      ? networkInfo[0].commuity / 1000000 + "M"
+                      : networkInfo[0].commuity >= 1000
+                      ? networkInfo[0].commuity / 1000 + "K"
+                      : networkInfo[0].commuity
+                  }}
+                  community 
+                </span>
               </p>
             </b-col>
           </b-row>

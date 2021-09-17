@@ -8,7 +8,7 @@
               <a href="#" v-b-modal.createalbumModal>
                 <div class="drag-textt">
                   <fas-icon :icon="['fas', 'plus']" />
-                  <h3>Create Album</h3>
+                  <h3>Create Albu</h3>
                 </div>
               </a>
             </div>
@@ -62,169 +62,7 @@
             </div>
           </div>
 
-          <div class="createp img-gall predit2" @click="showlbum">
-            <a href="#!">
-              <img
-                class="card-img"
-                src="@/assets/img/wankue-filler.jpg"
-                alt=""
-              />
-              <div class="createdesc botmedia">
-                <div class="botmediades">
-                  <h6>Cover Photos</h6>
-                  <p>36 Items</p>
-                </div>
-              </div>
-            </a>
-
-            <div class="mediadesc">
-              <ul class="navbar-nav pull-right">
-                <li class="nav-item dropdown">
-                  <b-dropdown
-                    size="sm"
-                    class="float-right"
-                    variant="link"
-                    toggle-class="text-decoration-none"
-                    no-caret
-                  >
-                    <template #button-content>
-                      <fas-icon
-                        class="drop-color font-weight-bolder"
-                        :icon="['fas', 'ellipsis-v']"
-                      />
-                    </template>
-
-                    <b-dropdown-item href="#">Edit</b-dropdown-item>
-
-                    <b-dropdown-item href="#">Delete</b-dropdown-item>
-                  </b-dropdown>
-                </li>
-              </ul>
-            </div>
-          </div>
-
-          <div class="createp img-gall predit2">
-            <a href="#!">
-              <img
-                class="card-img"
-                src="@/assets/img/wankue-filler.jpg"
-                alt=""
-              />
-              <div class="createdesc botmedia">
-                <div class="botmediades">
-                  <h6>Custom Album 1</h6>
-                  <p>13 Items</p>
-                </div>
-              </div>
-            </a>
-
-            <div class="mediadesc">
-              <ul class="navbar-nav pull-right">
-                <li class="nav-item dropdown">
-                  <b-dropdown
-                    size="sm"
-                    class="float-right"
-                    variant="link"
-                    toggle-class="text-decoration-none"
-                    no-caret
-                  >
-                    <template #button-content>
-                      <fas-icon
-                        class="drop-color font-weight-bolder"
-                        :icon="['fas', 'ellipsis-v']"
-                      />
-                    </template>
-
-                    <b-dropdown-item href="#">Edit</b-dropdown-item>
-
-                    <b-dropdown-item href="#">Delete</b-dropdown-item>
-                  </b-dropdown>
-                </li>
-              </ul>
-            </div>
-          </div>
-
-          <div class="createp img-gall predit2" @click="showlbum">
-            <a href="#!">
-              <img
-                class="card-img"
-                src="@/assets/img/wankue-filler.jpg"
-                alt=""
-              />
-              <div class="createdesc botmedia">
-                <div class="botmediades">
-                  <h6>Custom Album 2</h6>
-                  <p>23 Items</p>
-                </div>
-              </div>
-            </a>
-
-            <div class="mediadesc">
-              <ul class="navbar-nav pull-right">
-                <li class="nav-item dropdown">
-                  <b-dropdown
-                    size="sm"
-                    class="float-right"
-                    variant="link"
-                    toggle-class="text-decoration-none"
-                    no-caret
-                  >
-                    <template #button-content>
-                      <fas-icon
-                        class="drop-color font-weight-bolder"
-                        :icon="['fas', 'ellipsis-v']"
-                      />
-                    </template>
-
-                    <b-dropdown-item href="#">Edit</b-dropdown-item>
-
-                    <b-dropdown-item href="#">Delete</b-dropdown-item>
-                  </b-dropdown>
-                </li>
-              </ul>
-            </div>
-          </div>
-
-          <div class="createp img-gall predit2" @click="showlbum">
-            <a href="#!">
-              <img
-                class="card-img"
-                src="@/assets/img/wankue-filler.jpg"
-                alt=""
-              />
-              <div class="createdesc botmedia">
-                <div class="botmediades">
-                  <h6>Custom Album 3</h6>
-                  <p>33 Items</p>
-                </div>
-              </div>
-            </a>
-
-            <div class="mediadesc">
-              <ul class="navbar-nav pull-right">
-                <li class="nav-item dropdown">
-                  <b-dropdown
-                    size="sm"
-                    class="float-right"
-                    variant="link"
-                    toggle-class="text-decoration-none"
-                    no-caret
-                  >
-                    <template #button-content>
-                      <fas-icon
-                        class="drop-color font-weight-bolder"
-                        :icon="['fas', 'ellipsis-v']"
-                      />
-                    </template>
-
-                    <b-dropdown-item href="#">Edit</b-dropdown-item>
-
-                    <b-dropdown-item href="#">Delete</b-dropdown-item>
-                  </b-dropdown>
-                </li>
-              </ul>
-            </div>
-          </div>
+          
         </div>
 
         <div class="two2 d-none">
@@ -300,19 +138,7 @@ import Images from "./images";
 
 export default {
   components: { Images },
-  methods: {
-    hidealbum() {
-      this.showalbum = false;
-    },
-
-    showlbum() {
-      this.showalbum = true;
-    },
-
-    onClick(i) {
-      this.index = i;
-    }
-  },
+  props:["albums"],
   data: function() {
     return {
       showalbum: false,
@@ -352,7 +178,21 @@ export default {
       ],
       index: 0
     };
-  }
+  },
+  methods: {
+    hidealbum() {
+      this.showalbum = false;
+    },
+
+    showlbum() {
+      this.showalbum = true;
+    },
+
+    onClick(i) {
+      this.index = i;
+    }
+  },
+  
 };
 </script>
 

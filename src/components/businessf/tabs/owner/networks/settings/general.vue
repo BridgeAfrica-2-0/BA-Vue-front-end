@@ -1,7 +1,6 @@
 <template>
   <b-container>
-    <flashMessage/>
-
+    <flashMessage />
 
     <div class="">
       <b-container>
@@ -91,6 +90,7 @@ export default {
   name: "general",
   data() {
     return {
+      url: this.$route.params.id,
       form: {
         privacy: "",
         post_permission: "",
@@ -103,7 +103,7 @@ export default {
   methods: {
     submit() {
       this.axios
-        .post("/network/generalSettings/"+this.url, this.form)
+        .post("/network/generalSettings/" + this.url, this.form)
         .then(res => {
           console.log(this.form);
           this.flashMessage.success({
@@ -123,7 +123,7 @@ export default {
 
     deleteNetwork() {
       this.$axios
-        .post("/network", this.network_id)
+        .delete("/api/v1/network/delete/", this.url)
         .then(function(response) {
           console.log(this.form);
           this.flashMessage.success({
@@ -137,7 +137,6 @@ export default {
             title: "Error",
             message: "Deletion Unsuccessful",
             icon: true
-
           });
         });
     }

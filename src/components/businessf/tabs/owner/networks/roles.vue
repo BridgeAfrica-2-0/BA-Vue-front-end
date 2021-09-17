@@ -145,10 +145,7 @@
         <div class="d-block text-center">
           <h3>You Are About To Delete: {{ clickedObject.name }}!</h3>
         </div>
-        <b-button
-          class="mt-3"
-          block
-          @click="deleteEditor(clickedObject)"
+        <b-button class="mt-3" block @click="deleteEditor(clickedObject)"
           >Delete</b-button
         >
       </b-modal>
@@ -210,7 +207,7 @@ export default {
     },
     displayEditor() {
       this.$store
-        .dispatch("NetworkSettings/geteditors", this.url)
+        .dispatch("NetworkSettings/geteditors")
         .then(() => {
           console.log("ohh yeah");
         })
@@ -219,12 +216,12 @@ export default {
         });
     },
     editEditor: function(clickedObject) {
-      this.$bvModal.hide('edit-editor')
+      this.$bvModal.hide("edit-editor");
       let formData = new FormData();
       formData.append("user_id", clickedObject.user_id);
       formData.append("role_id", this.form.role_id);
       this.axios
-        .post("/network/role/update/" + this.url, formData)
+        .post("/network/roles/" + this.url + "/assign", formData)
         .then(() => {
           this.displayEditor();
           console.log("ohh yeah");
@@ -263,10 +260,10 @@ export default {
         });
     },
     deleteEditor: function(editor) {
-      this.$bvModal.hide('delete-editor');
+      this.$bvModal.hide("delete-editor");
       var formData = this.toFormData(editor);
       this.axios
-        .delete("#"+this.editor.user_id)
+        .delete("/network/roles/" + this.editor.user_id)
         .then(() => {
           this.displayEditor();
           console.log("ohh yeah");

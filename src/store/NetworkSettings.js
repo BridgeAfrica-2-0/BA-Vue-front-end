@@ -22,7 +22,7 @@ export default {
     },
 
     getroles({ commit }) {
-      return axios.get("/network/displayRole").then(({ data }) => {
+      return axios.get("/network/roles/").then(({ data }) => {
         commit("setroles", data.data);
         console.log(data);
         console.log("roles data");
@@ -30,23 +30,23 @@ export default {
     },
 
     geteditors({ commit }, businessId) {
-      return axios
-        .get(`/network/displayRole/user/${businessId}`)
-        .then(({ data }) => {
-          commit("seteditors", data.data);
-          console.log(data);
-        });
-    },
-
-    getblockusers({ commit }, businessId) {
-      return axios.get(`/network/blocking/${businessId}`).then(({ data }) => {
-        commit("setblocking", data.data);
+      return axios.get(`/network/roles/user/${businessId}`).then(({ data }) => {
+        commit("seteditors", data.data);
         console.log(data);
       });
     },
 
+    getblockusers({ commit }, businessId) {
+      return axios
+        .get(`/network/blocked-user/${businessId}`)
+        .then(({ data }) => {
+          commit("setblocking", data.data);
+          console.log(data);
+        });
+    },
+
     getnetworkinfo({ commit }, businessId) {
-      return axios.get(``).then(({ data }) => {
+      return axios.get(`/network/info/${businessId}`).then(({ data }) => {
         commit("setnetworkinfo", data.data);
         console.log(data);
       });

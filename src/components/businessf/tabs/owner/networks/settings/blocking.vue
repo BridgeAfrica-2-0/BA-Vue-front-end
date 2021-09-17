@@ -43,7 +43,7 @@ export default {
   },
   computed: {
     blockusers() {
-      return this.$store.state.NetworkSettings.blockusers;
+      return this.$store.getters["NetworkSettings/getblockusers"];
     }
   },
   mounted() {
@@ -63,7 +63,7 @@ export default {
 
     UnblockBlockUser(blockuser) {
       axios
-        .post("/network/unblocking/6/" + this.url, blockuser)
+        .post("/network/update/unblocked-user/" + this.url, blockuser)
         .then(response => {
           console.log(response);
           this.blockUsers();

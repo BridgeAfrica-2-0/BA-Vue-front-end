@@ -10,12 +10,8 @@
           class="mb-0"
         >
           <b-form-input
-            id="bname"
             v-model="form.Network_Name"
-            :placeholder="networkinfo.name"
-            required
-            name="role"
-            text-field="name"
+            :placeholder="networkinfo.Network_Name"
           ></b-form-input>
         </b-form-group>
       </b-container>
@@ -30,7 +26,12 @@
           label-class="font-weight-bold pt-0"
           class="mb-0"
         >
-          <b-form-input id="bname" placeholder="" required></b-form-input>
+          <b-form-input
+            id="bname"
+            v-model="form.Category"
+            :placeholder="networkinfo.Category"
+            required
+          ></b-form-input>
         </b-form-group>
       </b-container>
     </div>
@@ -42,9 +43,15 @@
           label="Phone 1"
           label-size="md"
           label-class="font-weight-bold pt-0"
+          :state="phone1"
           class="mb-0"
         >
-          <b-form-input id="bname" placeholder="" required></b-form-input>
+          <b-form-input
+            id="bname"
+            v-model="form.Phone_1"
+            :placeholder="networkinfo.Phone_1"
+            required
+          ></b-form-input>
         </b-form-group>
       </b-container>
     </div>
@@ -58,7 +65,12 @@
           label-class="font-weight-bold pt-0"
           class="mb-0"
         >
-          <b-form-input id="bname" placeholder="" required></b-form-input>
+          <b-form-input
+            id="bname"
+            v-model="form.Phone_2"
+            :placeholder="networkinfo.Phone_2"
+            required
+          ></b-form-input>
         </b-form-group>
       </b-container>
     </div>
@@ -72,7 +84,12 @@
           label-class="font-weight-bold pt-0"
           class="mb-0"
         >
-          <b-form-input id="bname" placeholder="" required></b-form-input>
+          <b-form-input
+            id="bname"
+            v-model="form.Email"
+            :placeholder="networkinfo.Email"
+            required
+          ></b-form-input>
         </b-form-group>
       </b-container>
     </div>
@@ -87,7 +104,7 @@
           class="mb-0"
         >
           <country-select
-            v-model="country"
+            v-model="form.country"
             :country="country"
             topCountry="US"
             class="form-control"
@@ -105,7 +122,12 @@
           label-class="font-weight-bold pt-0"
           class="mb-0"
         >
-          <b-form-input id="bname" placeholder="" required></b-form-input>
+          <b-form-input
+            id="bname"
+            v-model="form.City"
+            :placeholder="networkinfo.City"
+            required
+          ></b-form-input>
         </b-form-group>
       </b-container>
     </div>
@@ -133,7 +155,12 @@
           label-class="font-weight-bold pt-0"
           class="mb-0"
         >
-          <b-form-input id="bname" placeholder="" required></b-form-input>
+          <b-form-input
+            id="bname"
+            v-model="form.Website"
+            :placeholder="networkinfo.Website"
+            required
+          ></b-form-input>
         </b-form-group>
       </b-container>
     </div>
@@ -149,7 +176,8 @@
         >
           <b-form-textarea
             id="textarea"
-            placeholder="Enter something..."
+            v-model="form.Description"
+            :placeholder="networkinfo.Description"
             rows="3"
             max-rows="6"
           ></b-form-textarea>
@@ -198,7 +226,10 @@ export default {
   },
   computed: {
     networkinfo() {
-      return this.$store.getters.NetworkSettings.getNinfo;
+      return this.$store.getters["NetworkSettings/getNinfo"];
+    },
+    phone1() {
+      return this.form.Phone_1 < 9 ? true : false;
     }
   },
   mounted() {
@@ -207,7 +238,7 @@ export default {
   methods: {
     submit() {
       this.axios
-        .post("/network/generalSettings/" + this.url, this.form)
+        .post("/network/update/" + this.url, this.form)
         .then(res => {
           console.log(this.form);
           this.flashMessage.success({

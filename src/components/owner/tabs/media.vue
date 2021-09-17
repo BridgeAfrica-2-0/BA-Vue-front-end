@@ -69,7 +69,7 @@ export default {
     //function to get album
     getAlbums() {
       this.$store
-        .dispatch("UserProfileOwner/getAlbums", this.url_data)
+        .dispatch("UserProfileOwner/getAlbums", this.urlData)
         .then(() => {
           console.log("hey yeah");
         })
@@ -79,7 +79,7 @@ export default {
     },
     getImages() {
       this.$store
-        .dispatch("UserProfileOwner/getImages", this.url_data)
+        .dispatch("UserProfileOwner/getImages", this.urlData)
         .then(() => {
           console.log("hey yeah");
         })
@@ -90,7 +90,7 @@ export default {
   },
 
   mounted() {
-    this.url_data = this.$route.params.id;
+    this.urlData = this.$route.params.id;
     this.getAlbums();
     this.getImages();
   }

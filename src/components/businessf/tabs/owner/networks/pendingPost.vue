@@ -1,6 +1,5 @@
 <template>
   <div class="container">
-
     <!--
     <b-row>
       <b-col class="f-left">
@@ -14,10 +13,14 @@
 
 -->
 
-
     <b-row>
       <b-col cols="12" class="f-left">
-        <div v-for="i in 4" :key="i" class="mb-4">
+        <div
+          v-for="post in pendingPost"
+          :key="post.id"
+          :loading="load"
+          class="mb-4"
+        >
           <div class="mb-2">
             <div class="f-left">
               <b-row class="px-md-3">
@@ -31,7 +34,7 @@
                 </b-col>
                 <b-col cols="10" md="11" class="pt-2">
                   <h6 class="m-0 font-weight-bolder">
-                    Mapoure Agrobusiness
+                    {{ post.profileName }}
                     <span class="float-right">
                       <b-dropdown
                         size="lg"
@@ -43,18 +46,17 @@
                           <b-icon-three-dots-vertical></b-icon-three-dots-vertical
                           ><span class="sr-only">Settings</span>
                         </template>
-                        <b-dropdown-item href="#">
+                        <b-dropdown-item @click="approved" href="#">
                           Approved
                         </b-dropdown-item>
-                        <b-dropdown-item href="#">
+                        <b-dropdown-item @click="unapproved" href="#">
                           Unapproved
                         </b-dropdown-item>
-                       
                       </b-dropdown>
                     </span>
                   </h6>
                   <p>
-                    1h Ago -
+                    {{ post.timeCountdown }} -
                     <span class="text-primary">Commented on a Post</span>
                   </p>
                 </b-col>
@@ -62,34 +64,73 @@
               <b-row>
                 <b-col cols="12" class="mt-2">
                   <p class="text-justify text">
-                    Lorem Ipsum is simply dummy text of the printing and
-                    typesetting industry. Lorem Ipsum has been the industry's
-                    standard dummy text ever since the 1500s, Lorem Ipsum is
-                    simply dummy text of the printing and typesetting industry.
-                    Lorem Ipsum has been the industry's standard dummy text ever
-                    since the 1500s,
-                    <br />
-                    <br />
-                    Lorem Ipsum is simply dummy text of the printing and
-                    typesetting industry. Lorem Ipsum has been the industry's
-                    standard dummy text ever since the 1500s,
+                    {{ post.postContent }}
                   </p>
                 </b-col>
               </b-row>
             </div>
           </div>
-          
-    <hr width="100%" />
+
+          <hr width="100%" />
         </div>
       </b-col>
-      
     </b-row>
   </div>
 </template>
 
 <script>
+import axios from "axios";
 export default {
-  name: "pendingPost"
+  name: "pendingPost",
+  data: () => ({
+    pendingPosts: [],
+    profilePicture: "",
+    profileName: "",
+    postComment: "",
+    timeCountdown: "",
+    postContent: "",
+    approved: "",
+    unapproved: "",
+    load: null,
+  }),
+  beforeMount() {
+    this.getPendingPost();
+  },
+  methods: {
+    getPendingPost() {
+      this.load = true;
+      axios
+        .get()
+        .then((res) => {
+          this.pendingPosts = res.data.reverse();
+          this.load = false;
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    approved() {
+      axios
+        .post()
+        .then((res) => {
+          alert("success");
+        })
+        .catch((err) => {
+          alert("error");
+        });
+    },
+
+    unapproved() {
+      axios
+        .post()
+        .then((res) => {
+          alert("success");
+        })
+        .catch((err) => {
+          alert("error");
+        });
+    },
+  },
 };
 </script>
 

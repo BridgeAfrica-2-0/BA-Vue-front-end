@@ -4,6 +4,7 @@
       <div class="container-fluid">
 
         <div v-for="post in images" :key="post.id">
+          <!-- {{post.id}} -->
           <div class="img-gall" v-for="image in post.media" :key="image.id">
             <a href="#!"
               ><b-img
@@ -12,14 +13,13 @@
                 fluid 
                 rounded
                 :src="image.media_url"
-                :alt="image.media_id"
+                alt="media_img"
                 v-b-modal="'modal-'+image.media_id"
                 v-bind="imageProps"
               ></b-img>
             </a>
             <b-modal hide-footer :id="'modal-'+image.media_id" title="Details">
-              <img class="card-img" :src="image.media_url" alt="" />
-              <!-- <h4>{{image.title}}</h4> -->
+              <img class="card-img" :src="image.media_url" alt="media_img" />
               <p class="my-4">{{image.post_content[0]}}</p>
             </b-modal>
             <div class="mediadesc">
@@ -40,7 +40,6 @@
                     </template>
                     <b-dropdown-item href="#" @click="downloadPic(image.media_id)">Download</b-dropdown-item>
                     <b-dropdown-item href="#" @click="setProfilePic(image.media_id)">Make Profile Picture</b-dropdown-item>
-                    <b-dropdown-item href="#" @click="setCoverPic(image.media_id)">Make Cover Photo</b-dropdown-item>
                     <b-dropdown-item href="#" @click="deleteImage(image.media_id)">Delete</b-dropdown-item>
                   </b-dropdown>
                 </li>
@@ -50,6 +49,7 @@
         </div>
          <FlashMessage />
         <!-- {{images}} -->
+        <!-- {{images[0].type}} -->
       </div>
     </div>
   </div>
@@ -64,6 +64,7 @@ export default {
       url:null,
       img_url: null,
       image_details:null,
+      file: '',
       // images: [
       //   "https://placekitten.com/801/800",
       //   "https://placekitten.com/802/800",
@@ -98,7 +99,7 @@ export default {
       //   "https://i.wifegeek.com/200426/43e2e8bb.jpg"
       // ],
       index: 0,
-      imageProps: {  width: 75, height: 75}
+      imageProps: {  width: 205, height: 205}
     };
   },
   mounted(){
@@ -129,7 +130,7 @@ export default {
       //   color: "#e75c18"
       // });
       this.axios
-        .get("business/download/media/" + this.url + "/" + image_id, {})
+        .get("network/download/media/" + this.url + "/" + image_id, {})
         .then(response => {
           var fileURL = window.URL.createObjectURL(new Blob([response.data]));
           var fileLink = document.createElement("a");
@@ -172,11 +173,12 @@ export default {
       //   color: "#e75c18"
       // });
       this.axios
-        .post("business/delete/media/" + this.url + "/" + image_id, {
+        .post("network/delete/media/" + this.url + "/" + image_id, {
           name: this.name
         })
         .then(response => {
           console.log(response.data);
+          this.$emit('ownerPostImages');
           this.flashMessage.show({
             status: "success",
             message: "Album Deleted"
@@ -203,49 +205,9 @@ export default {
         });
     },
 
-    //set an image as a cover photo
-    setCoverPic(image_id) {
-      // let loader = this.$loading.show({
-      //   container: this.fullPage,
-      //   canCancel: true,
-      //   onCancel: this.onCancel,
-      //   color: "#e75c18"
-      // });
-      this.axios
-        .post("business/make/coverpic/" + this.url + "/" + image_id, {
-          name: this.name
-        })
-        .then(response => {
-          console.log(response.data);
-          this.flashMessage.show({
-            status: "success",
-            message: "cover Picture succesfully set"
-          });
-          // loader.hide();
-        })
-        .catch(err => {
-          this.sending = false;
-          if (err.response.status == 422) {
-            console.log({ err: err });
-            this.flashMessage.show({
-              status: "error",
-              message: err.response.data.message
-            });
-            // loader.hide();
-          } else {
-            this.flashMessage.show({
-              status: "error",
-              message: "Unable to set your cover picture"
-            });
-            console.log({ err: err });
-            // loader.hide();
-          }
-        });
-    },
-
     //set image as profile pic
     setProfilePic(image_id) {
-      let self = this;
+      // let self = this;
       // let loader = this.$loading.show({
       //   container: this.fullPage ? null : this.$refs.creatform,
       //   canCancel: true,
@@ -253,7 +215,7 @@ export default {
       //   color: "#e75c18"
       // });
       this.axios
-        .post("business/album/edit/" + this.url + "/" + self.album_id, {name: this.name})
+        .post("network/make/profile/" + this.url + "/" + image_id)
         .then(response => {
           console.log(response.data);
           this.flashMessage.show({
@@ -282,7 +244,34 @@ export default {
         });
     },
 
+    addAlbumImage(){
+      let formData = new FormData();
+      formData.append('file', this.file);
+      this.axios.post( 'network/addalbum/image',formData,
+        {
+          headers: {
+              'Content-Type': 'multipart/form-data'
+          }
+        }
+      ).then(function(){
+        console.log('SUCCESS!!');
+        this.flashMessage.show({
+          status: "success",
+          message: "Picture Added"
+        });
+      })
+      .catch(function(){
+        console.log('FAILURE!!');
+        this.flashMessage.show({
+          status: "error",
+          message: "Unable to Added Picture"
+        });
+      });
+    },
 
+    handleFileUpload(){
+      this.file = this.$refs.file.files[0];
+    }
 
   },
 };

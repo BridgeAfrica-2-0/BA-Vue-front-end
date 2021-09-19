@@ -4,13 +4,17 @@ export default {
   namespaced: true,
   state: {
     token: "66|m1NNNlGJ98sYB0cl9SEe91VOekHLmoQzAQRgKDYm",
-    albums: [],
-    albumImages: [],
+    owneralbums: [],
+    albumimages: [],
     ownerpostimages: [],
   },
   getters: {
     getAlbums(state) {
-      return state.albums;
+      return state.owneralbums;
+    },
+
+    getAlbumImages(state) {
+      return state.albumimages;
     },
 
     getImages(state) {
@@ -21,8 +25,8 @@ export default {
   mutations: {
     //set media data
 
-    setAlbums(state, data) {
-      state.albums = data;
+    setAlbums(state, owneralbums) {
+      state.owneralbums = owneralbums;
     },
 
     setImages(state, ownerpostimages){
@@ -30,20 +34,21 @@ export default {
       state.ownerpostimages = ownerpostimages;  
     },
 
-    setAlbumImages(state, data) {
-      state.albumImages = data;
+    setAlbumImages(state, albumimages) {
+      state.albumimages = albumimages;
     },
 
   },
 
   actions: {
 
-    getAlbumImages( {commit}, networkId){
+    getAlbumImages( {commit}, network_and_album_Id){
       return axios
-      .get('business/album/show/'+networkId )
+      .get('network/album/show/'+network_and_album_Id)
       .then(({ data }) => {
-       commit('setAlbumImages', data.data.media);
+       commit('setAlbumImages', data.data);
         console.log(data);
+        console.log('network/album/show/'+network_and_album_Id);
       });
     },
 
@@ -53,15 +58,17 @@ export default {
           .then(({ data }) => {
           commit("setImages", data.data);
           console.log(data);
+          console.log(`network/post/media/${networkId}`);
         });
     },
 
     getAlbums({ commit }, networkId) {
       return axios
-        .get("business/album/index/" + networkId)
+        .get(`network/album/index/${networkId}`)
           .then(({ data }) => {
           commit("setAlbums", data.data);
           console.log(data);
+          console.log(`network/album/index/${networkId}`);
         });
     },
 

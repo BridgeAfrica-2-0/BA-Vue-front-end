@@ -8,19 +8,19 @@
     <hr />
 
     <b-tabs content-class="mt-3" pills>
-      <b-tab title="Posts" active> <Images :images="ownerpostimages" /> </b-tab>
-      <b-tab title="Albums"> <Album /> </b-tab>
+      <b-tab title="Posts" active> <Images :images="ownerpostimages" @ownerPostImages="ownerPostImages" /> </b-tab>
+      <b-tab title="Albums"> <Albums :albums="owneralbums" @ownerAlbums="ownerAlbums" /> </b-tab>
     </b-tabs>
   </div>
 </template>
 
 <script>
-import Album from "./album";
+import Albums from "./albums";
 import Images from "./images";
 export default {
   name: "mediaNetwork",
   components: {
-    Album,
+    Albums,
     Images
   },
   data: function() {
@@ -65,11 +65,15 @@ export default {
   computed: {
     ownerpostimages() {
       return this.$store.state.networkProfileMedia.ownerpostimages;
-    }
+    },
+    owneralbums() {
+      return this.$store.state.networkProfileMedia.owneralbums;
+    },
   },
   mounted(){
     this.url = this.$route.params.id;
     this.ownerPostImages();
+    this.ownerAlbums();
   },
   methods: {
     onClick(i) {
@@ -78,6 +82,16 @@ export default {
     ownerPostImages() {
     this.$store
       .dispatch("networkProfileMedia/getImages", this.url)
+      .then(() => {
+        console.log('ohh year');
+      })
+      .catch(err => {
+        console.log({ err: err });
+      });
+    },
+    ownerAlbums() {
+    this.$store
+      .dispatch("networkProfileMedia/getAlbums", this.url)
       .then(() => {
         console.log('ohh year');
       })

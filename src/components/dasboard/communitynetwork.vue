@@ -4,11 +4,11 @@
       Do you want to join this network?
     </b-modal>
 
-    <div
-      class="people-style shadow"
-      v-for="item in $store.getters['networkDetails/getdetails']"
-      :key="item.id"
-    >
+
+    <b-row>
+        <b-col lg="6" sm="12" class="p-2" v-for="item in network" :key="item.id">
+
+    <div class="people-style shadow">
       <b-row>
         <b-col md="3" xl="3" lg="3" cols="5" sm="3">
           <div class="center-img">
@@ -72,12 +72,14 @@
         </b-col>
       </b-row>
     </div>
+        </b-col>
+    </b-row>
   </div>
 </template>
 
 <script>
 export default {
-  props: ["title", "image"],
+  props: ["network"],
   computed: {
     business() {
       return this.$store.getters["networkDetails/getdetails.category"];

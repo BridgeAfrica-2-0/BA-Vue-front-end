@@ -41,7 +41,7 @@
 
           <p class="mb-1">
             <b-icon-person-fill class="text-primary"></b-icon-person-fill>
-            Visit Profile
+        <router-link to="profile_owner">    Visit Profile   </router-link>
           </p>
           <p class="mb-1 ">
             <b-icon-chat-fill class="text-primary"></b-icon-chat-fill>
@@ -76,7 +76,9 @@ export default {
 
     profile(){
     return this.$store.state.ProfileAndBusinessDetails.profile;
-    }
+    },
+
+   
   },
   mounted() {
     this.$store

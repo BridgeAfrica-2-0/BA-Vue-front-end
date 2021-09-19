@@ -7,11 +7,14 @@ import ProfileAndBusinessDetails from "./ProfileAndBusinessDetails";
 import hotbusiness from "./hotbusiness";
 import networkDetails from "./networkDetails";
 import dashboardcommunity from "./dashboardcommunity";
+import profile from "./profile";
 
 import axios from "axios";
 Vue.use(Vuex);
  //axios.defaults.baseURL = process.env.VUE_APP_API_URL;    
- axios.defaults.baseURL ="https://team4.maxinemoffett.com/api/v1/";
+ //axios.defaults.baseURL ="https://team3dev.maxinemoffett.com/api/v1/";    
+ axios.defaults.baseURL ="https://team4.maxinemoffett.com/api/v1/";     
+ //axios.defaults.baseURL ="https://test.maxinemoffett.com/api/v1/";
 export default new Vuex.Store({
   modules: {
     auth,
@@ -21,6 +24,7 @@ export default new Vuex.Store({
     businessOwner,
     dashboard,
     hotbusiness,
+    profile
 
   },
 

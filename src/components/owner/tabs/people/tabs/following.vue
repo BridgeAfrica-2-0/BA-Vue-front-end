@@ -18,12 +18,10 @@
 
     <b-row>
       <b-col md="12" lg="6">
-        <CommunityMembers />
-      </b-col>
+        <CommunityMembers :people="folowing"  />
+      </b-col>  
 
-      <b-col md="12" lg="6">
-        <CommunityMembers />
-      </b-col>
+      
     </b-row>
   </div>
 </template>
@@ -33,7 +31,14 @@ import CommunityMembers from "../../communityMember";
 export default {
   components: {
     CommunityMembers
-  }
+  },
+
+  computed: {
+    folowing() {
+      return this.$store.state.profile.communityPeople.people_following;  
+    }
+  },
+
 };
 </script>
 

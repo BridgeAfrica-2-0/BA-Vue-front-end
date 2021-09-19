@@ -15,16 +15,8 @@
       </b-col>
     </b-row>
     <br />
-
-    <b-row>
-      <b-col md="12" lg="6">
-        <CommunityMembers />
-      </b-col>
-
-      <b-col md="12" lg="6">
-        <CommunityMembers />
-      </b-col>
-    </b-row>
+        <CommunityMembers  :people="folowers" />
+    
   </div>
 </template>
 
@@ -33,7 +25,13 @@ import CommunityMembers from "../../communityMember";
 export default {
   components: {
     CommunityMembers
-  }
+  },
+
+  computed: {
+    folowers() {
+      return this.$store.state.profile.communityPeople.people_followers;
+    }
+  },
 };
 </script>
 

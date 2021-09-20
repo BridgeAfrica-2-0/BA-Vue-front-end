@@ -11,11 +11,18 @@ export default {
     passwordToken: null,
     registerData: null,
 
-    businessAround: null,
-    peopleAround: null
+    businessAround: [],
+    peopleAround: [],
+    categories:[],
+    subcategories:[],
+    filters:[],
+    category_fiters:[],
+
+    
   },
 
   mutations: {
+
     setUserData(state, userData) {
       state.user = userData;
 
@@ -23,6 +30,28 @@ export default {
       axios.defaults.headers.common.Authorization = `Bearer ${userData.accessToken}`;
 
       const userInfo = localStorage.getItem("user");
+    },
+
+    
+
+
+    setCategories(state, data) {
+      state.categories = data;
+    },
+
+
+    setSubcategories(state, data) {
+      state.subcategories = data;
+    },
+
+
+    setFilters(state, data) {
+      state.filters = data;
+    },
+
+
+    Setcategoryfiters(state, data) {
+      state.category_fiters = data;
     },
 
     setPeopleAround(state, data) {
@@ -58,12 +87,58 @@ export default {
       });
     },
 
+
+
+
+    categories({ commit }) {
+      return axios.get("category").then(({ data }) => {
+        console.log(data);
+        commit("setCategories", data.data);
+      });
+    },
+
+
+
+
+    subcategories({ commit }, data) {
+      return axios.post("catergory/subcategory", data).then(({ data }) => {
+        console.log(data);
+        commit("setSubcategories", data.data);
+      });
+    },
+
+
+
+
+
+
+    filters({ commit }) {
+      return axios.get("user/completewelcome").then(({ data }) => {
+        console.log(data);
+        commit("setFilters", data.data);
+      });
+    },
+
+
+  
+    Setcategoryfiters({ commit }) {
+      return axios.get("user/completewelcome").then(({ data }) => {
+        console.log(data);
+        commit("Setcategoryfiters", data.data);
+      });
+    },
+
+   
+
+
     completeWelcome({ commit }) {
       return axios.get("user/completewelcome").then(({ data }) => {
         console.log(data);
         commit("setUserData", data.data);
       });
     },
+
+
 
     businessAround({ commit }) {
       return axios.get("business/around").then(({ data }) => {

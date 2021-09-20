@@ -47,21 +47,21 @@
 
       <b-container class="h-background">
         <div class="account-headnig">
-          <h3 class="heading-user h3-color">4755-xxxx-xxxx</h3>
+          <h3  class="heading-user h3-color">4755-xxxx-xxxx</h3>
           <p class="card-name">123456789</p>
         </div>
       </b-container>
 
       <div class=" mb-0">
-        <b-icon icon="plus" class="b-color"></b-icon>
+        <b-icon icon="plus" class='b-color' ></b-icon>  
         <b-link href="#">Add new Credit/Debit card</b-link>
       </div>
       <br />
 
       <div class=" mb-0">
         <p>
-          <b-icon icon="lock" class="b-color"></b-icon> Your payment information
-          is secure, <b-link href="#">Read more</b-link>
+          <b-icon icon="lock" class="b-color"></b-icon> Your payment
+          information is secure, <b-link href="#">Read more</b-link>
         </p>
       </div>
     </b-container>
@@ -81,11 +81,13 @@ export default {
   text-align: left;
 }
 
-.h3-color {
+
+.h3-color{
   color: #000;
 }
 
-.b-color {
+
+.b-color{
   color: #7952b3;
 }
 .tabs {

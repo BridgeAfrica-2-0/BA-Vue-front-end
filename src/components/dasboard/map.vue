@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b-card class=" border shadow" style="height:350px">
+    <b-card class=" border shadow pr-3" style="height:350px">
       <h6 class="title">
         <fas-icon class="icons" :icon="['fas', 'map-marker-alt']" size="lg" />
         <b> GET DIRECTIONS </b>

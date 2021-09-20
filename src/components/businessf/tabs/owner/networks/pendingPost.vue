@@ -85,7 +85,7 @@
 
 <script>
 export default {
-  name: "pendingPost"
+  name: "pendingPost",
 };
 </script>
 

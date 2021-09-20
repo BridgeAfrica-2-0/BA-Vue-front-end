@@ -123,9 +123,6 @@ export default {
   .image-wrap {
     border: 4px dashed #e75c18;
     position: relative;
-    position: relative;
-
-     position: relative;
     margin: 5px;
     float: left;
     width: 46.5%;
@@ -135,10 +132,8 @@ export default {
     animation: winanim 0.5s;
     -webkit-backface-visibility: visible;
     backface-visibility: visible;
-}
-
-
-.img-gall{
+  }
+  .img-gall {
     position: relative;
     margin: 5px;
     float: left;
@@ -171,9 +166,6 @@ export default {
   .image-wrap {
     border: 4px dashed #e75c18;
     position: relative;
-    position: relative;
-
-     position: relative;
     margin: 5px;
     float: left;
     width: 46.5%;
@@ -206,9 +198,6 @@ export default {
   .image-wrap {
     border: 4px dashed #e75c18;
     position: relative;
-    position: relative;
-
-     position: relative;
     margin: 5px;
     float: left;
     width: 46.5%;
@@ -218,7 +207,9 @@ export default {
     animation: winanim 0.5s;
     -webkit-backface-visibility: visible;
     backface-visibility: visible;
-  }
+}
+
+
 
 }
 @media (max-width: 762px) {
@@ -243,9 +234,6 @@ export default {
   .image-wrap {
     border: 4px dashed #e75c18;
     position: relative;
-    position: relative;
-
-     position: relative;
     margin: 5px;
     float: left;
     width: 46.5%;
@@ -263,5 +251,4 @@ export default {
     color: #000;
   }
 }
-
 </style>

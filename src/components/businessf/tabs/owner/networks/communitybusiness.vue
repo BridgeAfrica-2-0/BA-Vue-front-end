@@ -16,13 +16,7 @@
             <strong class="title"> {{ member.name }} </strong> <br />
             {{ member.category }}
             <br />
-            {{
-              member.community >= 1000000
-                ? member.community / 1000000 + "M"
-                : member.community >= 1000
-                ? member.community / 1000 + "K"
-                : member.community
-            }}
+            {{ nFormatter(member.community) }}
             Community <br />
 
             <span class="location">
@@ -117,6 +111,20 @@ export default {
         perMove: 1
       }
     };
+  },
+  method: {
+    nFormatter(num) {
+      if (num >= 1000000000) {
+         return (num / 1000000000).toFixed(1).replace(/\.0$/, '') + 'G';
+      }
+      if (num >= 1000000) {
+         return (num / 1000000).toFixed(1).replace(/\.0$/, '') + 'M';
+      }
+      if (num >= 1000) {
+         return (num / 1000).toFixed(1).replace(/\.0$/, '') + 'K';
+      }
+      return num;
+    },
   }
 };
 </script>

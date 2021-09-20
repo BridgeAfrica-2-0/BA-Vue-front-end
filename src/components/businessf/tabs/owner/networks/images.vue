@@ -297,7 +297,7 @@ export default {
     position: relative;
     margin: 5px;
     float: left;
-     width: 18.7%;
+    width: 18.7%;
     transition-duration: 0.4s;
     border-radius: 5px;
     -webkit-animation: winanim 0.5s;
@@ -322,6 +322,7 @@ export default {
     animation: winanim 0.5s;
     -webkit-backface-visibility: visible;
     backface-visibility: visible;
+  }
 }
 @media only screen and (min-width: 768px) and (max-width: 1331px) {
   .img-gall {

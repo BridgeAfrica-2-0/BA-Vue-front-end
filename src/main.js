@@ -153,9 +153,6 @@ import VueAgile from 'vue-agile'
 
 Vue.use(VueAgile);
 
-import InfiniteLoading from 'vue-infinite-loading';
-Vue.use(InfiniteLoading, { /* options */ });
-
 
 Vue.component("v-select", vSelect);
 

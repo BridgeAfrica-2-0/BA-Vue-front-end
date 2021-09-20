@@ -1,5 +1,17 @@
 <template>
   <div>
+
+
+
+
+
+
+
+
+
+
+
+
     <div class="people-style shadow">
       <b-row>
         <b-col md="3" xl="3" lg="3" cols="5" sm="3">
@@ -28,6 +40,11 @@
             {{ member.about_description }} <b-link>Read More</b-link>
           </p>
         </b-col>
+
+
+
+
+
 
         <b-col lg="12" xl="4" md="4" cols="12" sm="4">
           <div class="s-button">
@@ -94,10 +111,26 @@
         </b-col>
       </b-row>
     </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
   </div>
 </template>
 
 <script>
+
+
+
 export default {
   props: ["member"],
   data() {
@@ -130,6 +163,8 @@ export default {
 </script>
 
 <style scoped>
+
+
 @media only screen and (min-width: 768px) {
   .btn-text {
     margin-left: 8px;
@@ -190,7 +225,7 @@ export default {
     font-weight: normal;
     font-size: 14px;
     line-height: 30px;
-    color: rgba(117, 114, 128, 1);
+    color: rgba(117,114,128,1);
     text-align: left;
     font-weight: normal;
     line-height: 20px;
@@ -229,7 +264,7 @@ export default {
     font-weight: normal;
     font-size: 14px;
     line-height: 30px;
-    color: rgba(117, 114, 128, 1);
+    color: rgba(117,114,128,1);
     text-align: left;
     font-weight: normal;
     line-height: 20px;
@@ -267,6 +302,8 @@ export default {
   margin-left: -15px;
 }
 .btn {
+  
+
   display: flex;
 }
 .ico {
@@ -311,25 +348,25 @@ export default {
 @media only screen and (max-width: 520px) {
   .btn {
     display: flex;
-  }
+    
+}
 }
 @media only screen and (min-width: 992px) and (max-width: 1265px) {
   .textt {
     color: #000;
-    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: 'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif;
     font-weight: normal;
     font-size: 14px;
     line-height: 30px;
-    color: rgba(117, 114, 128, 1);
+    color: rgba(117,114,128,1);
     text-align: left;
-    font-weight: normal;
-    line-height: 20px;
+    Font-weight: normal;
+    Line-height: 20px;
     font-style: normal;
     padding: 1px;
     text-align: left;
     margin-left: 55px;
     margin-right: -5px;
     line-height: 25px;
-  }
 }
 </style>

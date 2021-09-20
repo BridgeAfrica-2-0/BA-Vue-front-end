@@ -127,6 +127,10 @@ import "@/assets/css/bootstrap.css";
 Vue.use(BootstrapVue);
 Vue.use(IconsPlugin);
 
+import InfiniteLoading from 'vue-infinite-loading';
+
+Vue.use(InfiniteLoading, { /* options */ });
+
 
 
 
@@ -140,6 +144,12 @@ Vue.use(VueGoogleMaps, {
   installComponents: true
 });
 
+
+
+
+import VueAgile from 'vue-agile'
+
+Vue.use(VueAgile);
 
 
 
@@ -165,8 +175,9 @@ new Vue({
       (response) => response,
       (error) => {
         if (error.response.status === 401) {
-         // this.$store.dispatch("auth/logout");
-         console.log("error has occure");
+          this.$store.dispatch("auth/logout");
+       
+         this.$router.push({ name: "welcome" });
         }
         return Promise.reject(error);
       }

@@ -1,7 +1,12 @@
 <template>
   <div>
     <div class="s-cardd">
-      <div class="people-style border shadow">
+
+
+
+
+
+ <div class="people-style border shadow">
         <b-row class="mb-1">
           <b-col md="3" cols="4" sm="4" class="my-auto">
             <b-avatar
@@ -11,10 +16,10 @@
             ></b-avatar>
           </b-col>
 
-          <b-col md="8" cols="8" sm="8">
+          <b-col md="8" cols="8" sm="8" >
             <div>
               <b-row class="shift">
-                <b-col md="12" lg="6" xl="6">
+                <b-col md="12" lg="6" xl="6" >
                   <div class="e-name">
                     <b-row>
                       <b-col md="6" lg="12" cols="6" xl="12" class="mt-lg-2">
@@ -27,17 +32,12 @@
                         md="6"
                         lg="12"
                         cols="6"
+                       
                         xl="12"
                         class="mt-3 mt-lg-1 mt-xl-3"
                       >
                         <h6 class="follower m-15">
-                          {{
-                            member.followers >= 1000000
-                              ? member.followers / 1000000 + "M"
-                              : member.followers >= 1000
-                              ? member.followers / 1000 + "K"
-                              : member.followers
-                          }}
+                          {{ nFormatter(member.followers) }}
                           Community
                         </h6>
                       </b-col>
@@ -45,13 +45,14 @@
                   </div>
                 </b-col>
 
-                <b-col lg="6" xl="6" cols="12" md="12">
+                <b-col lg="6" xl="6" cols="12"  md="12">
                   <div>
                     <b-row class="mt-lg-0">
                       <b-col
                         md="6"
                         lg="12"
                         cols="6"
+                       
                         xl="12"
                         class="mt-2 mt-lg-2 mt-xl-2 btn-2 center"
                       >
@@ -61,8 +62,7 @@
                           size="sm"
                           class="b-background flexx pobtn shadow"
                         >
-                          <i class="fas fa-envelope   fa-lg btn-icon "></i>
-                          <span class="btn-text">Message</span>
+                           <i class="fas fa-envelope   fa-lg btn-icon "></i>  <span class="btn-text">Message</span> 
                         </b-button>
                       </b-col>
 
@@ -70,6 +70,7 @@
                         md="6"
                         lg="12"
                         cols="6"
+                       
                         xl="12"
                         class="mt-2 mt-lg-2 mt-xl-2 btn-2 center"
                       >
@@ -79,8 +80,7 @@
                           class="b-background flexx pobtn shadow"
                           variant="primary"
                         >
-                          <i class="fas fa-user-plus  fa-lg btn-icon "></i>
-                          <span class="btn-com">Community</span>
+                                      <i class="fas fa-user-plus  fa-lg btn-icon "></i>  <span class="btn-com">Community</span>
                         </b-button>
                       </b-col>
                     </b-row>
@@ -91,20 +91,45 @@
           </b-col>
         </b-row>
       </div>
+
+
+
+
+
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  props: ["member"]
+  props: ["member"],
+  method: {
+    nFormatter(num) {
+      if (num >= 1000000000) {
+         return (num / 1000000000).toFixed(1).replace(/\.0$/, '') + 'G';
+      }
+      if (num >= 1000000) {
+         return (num / 1000000).toFixed(1).replace(/\.0$/, '') + 'M';
+      }
+      if (num >= 1000) {
+         return (num / 1000).toFixed(1).replace(/\.0$/, '') + 'K';
+      }
+      return num;
+    },
+  }
 };
 </script>
 
 <style scoped>
+
+
+
+
 @media only screen and (min-width: 768px) {
-  .s-cardd {
-    padding-left: 20px;
+
+  .s-cardd{
+
+  padding-left: 20px;
     padding-right: 20px;
   }
   .btn-text {
@@ -129,8 +154,10 @@ export default {
   }
 }
 @media only screen and (max-width: 768px) {
-  .btnpngs {
-    width: 16px;
+     
+
+     .btnpngs{
+      width: 16px;
     margin-right: 5px;
   }
   .s-cardd {
@@ -139,10 +166,10 @@ export default {
   }
 }
 @media only screen and (min-width: 768px) {
-  .btnpngs {
-    width: 20px;
+
+      .btnpngs{
+      width: 20px;
     margin-right: 5px;
-  }
 }
 .btn {
   border-radius: 5px;
@@ -229,7 +256,9 @@ f-right {
   margin-bottom: 10px;
 }
 @media only screen and (min-width: 1200px) {
-  .btn {
+  
+
+  .btn{
     width: 123px;
     height: 38px;
     font-size: 14px;
@@ -351,17 +380,19 @@ f-right {
   .follower {
     font-size: 10px;
     margin-top: 5px;
-  }
 }
 @media only screen and (min-width: 764px) and (max-width: 991.18px) {
-  .center {
+  
+  .center{
     text-align: left;
   }
+
 }
 @media only screen and (max-width: 762px) {
-  .username {
-    font-size: 16px;
-    text-overflow: ellipsis;
+
+.username{
+  font-size: 16px;
+  text-overflow: ellipsis;
     overflow: hidden;
     width: 100%;
     height: 1.2em;
@@ -394,21 +425,23 @@ f-right {
   }
   .pobtn {
     font-size: 10px;
+   
   }
-  .e-name {
+  .e-name{
     text-align: left;
   }
 }
 @media only screen and (max-width: 521px) {
-  .e-name {
+    .e-name{
     text-align: left;
-    margin-left: -20px;
+    margin-left:-20px
   }
+    
 }
-</style>
 
-<style>
 .follower {
   font-size: 12px !important;
 }
 </style>
+
+

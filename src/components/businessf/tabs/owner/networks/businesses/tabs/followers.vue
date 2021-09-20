@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b-row>
+         <b-row>
       <b-col cols="12" class="mx-auto">
         <b-input-group class="mb-2 px-md-3 mx-auto">
           <b-input-group-prepend is-text>
@@ -13,9 +13,27 @@
         </b-input-group>
       </b-col>
     </b-row>
-    <br />
+    <br/>
 
-    <br />
+    <br/>
+
+
+
+  
+
+
+
+  <b-row> 
+<b-col md="12" >  
+    <CommunityBusiness/>
+
+ </b-col>
+
+
+  
+
+     </b-row>
+
 
     <b-row>
       <b-col v-if="followers.length <= 0" >
@@ -29,7 +47,7 @@
 </template>
 
 <script>
-import CommunityBusiness from "../../communitybusiness";
+import CommunityBusiness from "../../communitybusiness"
 export default {
   components: {
     CommunityBusiness
@@ -38,4 +56,6 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+
+</style>

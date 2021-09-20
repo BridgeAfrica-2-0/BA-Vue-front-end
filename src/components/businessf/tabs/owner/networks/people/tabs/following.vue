@@ -1,6 +1,7 @@
 <template>
   <div>
-    <b-row>
+
+         <b-row>
       <b-col cols="12" class="mx-auto">
         <b-input-group class="mb-2 px-md-3 mx-auto">
           <b-input-group-prepend is-text>
@@ -26,7 +27,7 @@
 </template>
 
 <script>
-import CommunityMembers from "../../communityMember";
+import CommunityMembers from "../../communityMember"
 export default {
   components: {
     CommunityMembers
@@ -35,4 +36,6 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+
+</style>

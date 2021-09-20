@@ -44,10 +44,10 @@
                   <b-icon-three-dots-vertical></b-icon-three-dots-vertical
                   ><span class="sr-only">Settings</span>
                 </template>
-                <b-dropdown-item href="#">
+                <b-dropdown-item @click="removeAsAdmin()">
                   <b-icon-trash-fill></b-icon-trash-fill> Remove as Admin
                 </b-dropdown-item>
-                <b-dropdown-item href="#">
+                <b-dropdown-item @click="removeFromNetworks()">
                   <b-icon-trash-fill></b-icon-trash-fill> Remove From Networks
                 </b-dropdown-item>
               </b-dropdown>
@@ -88,7 +88,7 @@
                   <b-icon-three-dots-vertical></b-icon-three-dots-vertical
                   ><span class="sr-only">Settings</span>
                 </template>
-                <b-dropdown-item href="#">
+                <b-dropdown-item @click="removeFromNetworks()">
                   <b-icon-trash-fill></b-icon-trash-fill> Remove From Networks
                 </b-dropdown-item>
               </b-dropdown>
@@ -128,10 +128,10 @@
                   <b-icon-three-dots-vertical></b-icon-three-dots-vertical
                   ><span class="sr-only">Settings</span>
                 </template>
-                <b-dropdown-item href="#">
+                <b-dropdown-item @click="makeAdmin()">
                   <b-icon-person-plus-fill></b-icon-person-plus-fill> Make Admin
                 </b-dropdown-item>
-                <b-dropdown-item href="#">
+                <b-dropdown-item @click="removeFromNetworks()">
                   <b-icon-trash-fill></b-icon-trash-fill> Remove From Networks
                 </b-dropdown-item>
               </b-dropdown>
@@ -161,6 +161,7 @@ export default {
   name: "memberNetwork",
   data() {
     return {
+       url: null,
       perPage: 3,
       currentPage: 1,
       items: [
@@ -179,8 +180,119 @@ export default {
   computed: {
     rows() {
       return this.items.length;
-    }
-  }
+    },
+    networkadmins() {
+      return this.$store.state.networkProfileMember.networkadmins;
+    },
+    bussiness() {
+      return this.$store.state.networkProfileMember.bussiness;
+    },
+    members() {
+      return this.$store.state.networkProfileMember.members;
+    },
+  },
+  mounted(){
+    this.url = this.$route.params.id;
+    this.getNetworkAdmins();
+    this.getBussiness();
+    this.getNMembers();
+  },
+  methods:{
+     
+    getNetworkAdmins() {
+    this.$store
+      .dispatch("networkProfileMember/getnetworkadmins")
+      .then(() => {
+        console.log('ohh yeah');
+      })
+      .catch(err => {
+        console.log({ err: err });
+      });
+    },
+     
+    getBussiness() {
+    this.$store
+      .dispatch("networkProfileMember/getbussiness")
+      .then(() => {
+        console.log('ohh yeah');
+      })
+      .catch(err => {
+        console.log({ err: err });
+      });
+    },
+     
+    getNMembers() {
+    this.$store
+      .dispatch("networkProfileMember/getmembers")
+      .then(() => {
+        console.log('ohh yeah');
+      })
+      .catch(err => {
+        console.log({ err: err });
+      });
+    },
+
+    makeAdmin: function(){
+      var formdata = new FormData();
+      formdata.append("key", "obj[key]");
+      this.axios.post("#/"+this.url, this.form)
+      .then(() => {
+        console.log('ohh yeah');
+        this.flashMessage.show({
+          status: "success",
+          message: "The Member Is Now Admin"
+        });
+      })
+      .catch(err => {
+        console.log({ err: err });
+        this.flashMessage.show({
+          status: "error",
+          message: "Unable To Set Member As Admin"
+        });
+      });
+		},
+
+    removeAsAdmin: function(){
+      var formdata = new FormData();
+      formdata.append("key", "obj[key]");
+      this.axios.post("#/"+this.url, this.form)
+      .then(() => {
+        console.log('ohh yeah');
+        this.flashMessage.show({
+          status: "success",
+          message: "New Role Assigned"
+        });
+      })
+      .catch(err => {
+        console.log({ err: err });
+        this.flashMessage.show({
+          status: "error",
+          message: "Unable to Assigned New Role"
+        });
+      });
+		},
+
+    removeFromNetworks: function(){
+      var formdata = new FormData();
+      formdata.append("key", "obj[key]");
+      this.axios.post("#/"+this.url, this.form)
+      .then(() => {
+        console.log('ohh yeah');
+        this.flashMessage.show({
+          status: "success",
+          message: "New Role Assigned"
+        });
+      })
+      .catch(err => {
+        console.log({ err: err });
+        this.flashMessage.show({
+          status: "error",
+          message: "Unable to Assigned New Role"
+        });
+      });
+		},
+
+  },
 };
 </script>
 

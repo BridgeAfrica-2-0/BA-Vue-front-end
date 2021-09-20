@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-=======
 <template>
   <div>
 
@@ -772,4 +770,3 @@ export default {
 }
 
 </style>
->>>>>>> main

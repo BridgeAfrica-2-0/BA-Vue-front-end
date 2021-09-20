@@ -10,9 +10,7 @@ import networkProfileMedia from "./networkProfileMedia";
 
 import axios from "axios";
 Vue.use(Vuex);
-//  axios.defaults.baseURL = process.env.VUE_APP_API_URL;
- axios.defaults.baseURL = "https://edson.maxinemoffett.com/api/v1/";
-//  axios.defaults.baseURL = "https://419c-154-72-150-25.ngrok.io/api/v1/";
+ axios.defaults.baseURL = process.env.VUE_APP_API_URL;
 export default new Vuex.Store({
   modules: {
     auth,

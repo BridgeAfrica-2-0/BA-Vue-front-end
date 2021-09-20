@@ -3,7 +3,6 @@ import axios from "axios";
 export default {
   namespaced: true,
   state: {
-    token: "66|m1NNNlGJ98sYB0cl9SEe91VOekHLmoQzAQRgKDYm",
     owneralbums: [],
     albumimages: [],
     ownerpostimages: [],

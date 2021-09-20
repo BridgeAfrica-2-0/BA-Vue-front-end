@@ -4,7 +4,6 @@ import axios from "axios";
 export default {
   namespaced: true,
   state: {
-    token: "8|VjFtS2m3B9YuCz5Fw0r94gkWiCs0p9MhfrMpMDZW",
     networkInfo: []
   },
 

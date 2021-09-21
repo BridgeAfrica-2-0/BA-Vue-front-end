@@ -148,7 +148,7 @@ export default {
 
 
     locality({ commit }, data) {
-      return axios.get("neighborhood/show", data).then(({ data }) => {
+      return axios.post("neighborhood/show", data).then(({ data }) => {
         console.log(data);
         commit("setLocality", data.data);
       });

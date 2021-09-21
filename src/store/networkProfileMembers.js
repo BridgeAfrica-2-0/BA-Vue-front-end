@@ -1,69 +1,35 @@
-  
 import axios from "axios";
 
 export default {
   namespaced: true,
   state: {
-    networkadmins: [],
-    bussiness: [],
-    members: [],
+    token: "79|trGwUB4E3RT66gSokOp4tcoAPlvT0GR5fsukYJHK",
+    members: []
   },
 
   getters: {
-    getnetworkadmins(state) {
-        return state.networkadmins;
-    },
-    getbussiness(state) {
-        return state.bussiness;
-    },
     getmembers(state) {
         return state.members;
-    },
+      },
   },
 
   mutations: {
-    setnetworkadmins(state, networkadmins) {
-        state.networkadmins = networkadmins;
-    },
-    setbussiness(state, bussiness) {
-        state.bussiness = bussiness;
-    },
     setmembers(state, members) {
-        state.bussiness = members;
-    },
+        state.members = members;
+    }
   },
 
   actions: {
 
-    getnetworkadmins( {commit} ){
+    getmembers( {commit}, path ){
+      console.log(path);
       return axios
-      .get("#")
-      .then(({ data }) => {
-          commit("setnetworkadmins", data.data);
-        console.log(data);
-
-      })
-    },
-
-    getbussiness( {commit}, businessId ){
-      return axios
-      .get("#/"+businessId)
-      .then(({ data }) => {
-          commit("setbussiness", data.data);
-        console.log(data);
-
-      })
-    },
- 
-    getmembers( {commit}, businessId ){
-      return axios
-      .get("#/"+businessId)
+      .get(`network/${path}`)
       .then(({ data }) => {
           commit("setmembers", data.data);
         console.log(data);
-
       })
-    },
+    }
 
   },
 };

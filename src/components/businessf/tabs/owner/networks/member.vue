@@ -3,12 +3,16 @@
     <b-row>
       <b-col cols="12" class="mx-auto">
         <b-input-group class="mb-2 px-md-3 mx-auto">
-          <b-input-group-prepend is-text>
+          <b-input-group-prepend @onclick="search" is-text>
             <b-icon-search class="text-primary border-none"></b-icon-search>
           </b-input-group-prepend>
           <b-form-input
             aria-label="Text input with checkbox"
             placeholder="Search Something"
+            type="text"
+            class="form-control"
+            v-model="searchTitle"
+            @change="search"
           ></b-form-input>
         </b-input-group>
       </b-col>
@@ -44,10 +48,10 @@
                   <b-icon-three-dots-vertical></b-icon-three-dots-vertical
                   ><span class="sr-only">Settings</span>
                 </template>
-                <b-dropdown-item @click="removeAsAdmin()">
+                <b-dropdown-item href="#">
                   <b-icon-trash-fill></b-icon-trash-fill> Remove as Admin
                 </b-dropdown-item>
-                <b-dropdown-item @click="removeFromNetworks()">
+                <b-dropdown-item href="#">
                   <b-icon-trash-fill></b-icon-trash-fill> Remove From Networks
                 </b-dropdown-item>
               </b-dropdown>
@@ -74,7 +78,7 @@
                 size="3.5rem"
               ></b-avatar>
               <h5 class="m-0  username d-inline-block ml-2">
-               Mayor Council
+                Mayor Council
               </h5>
             </span>
             <span class="float-right mt-1">
@@ -88,7 +92,7 @@
                   <b-icon-three-dots-vertical></b-icon-three-dots-vertical
                   ><span class="sr-only">Settings</span>
                 </template>
-                <b-dropdown-item @click="removeFromNetworks()">
+                <b-dropdown-item href="#">
                   <b-icon-trash-fill></b-icon-trash-fill> Remove From Networks
                 </b-dropdown-item>
               </b-dropdown>
@@ -101,10 +105,15 @@
     <b-row class="mt-4">
       <b-col cols="12">
         <h6 class="font-weight-bolder">
-          All Members (200)
+          All Members ({{nFormatter(members.total)}})
         </h6>
         <hr width="100%" />
-        <div v-for="i in 6" :key="i">
+        <!-- <div v-for="i in 6" :key="i"> -->
+        <div          
+          :class="{ active: index == currentIndex }"
+          v-for="(member, index) in members.data"
+          :key="index"
+        >
           <p class="">
             <span class="">
               <b-avatar
@@ -114,7 +123,7 @@
                 size="3.5rem"
               ></b-avatar>
               <h5 class="m-0 username d-inline-block ml-2">
-                Mapoure Agrobusiness
+                {{member.fullname}}
               </h5>
             </span>
             <span class="float-right mt-1">
@@ -128,10 +137,10 @@
                   <b-icon-three-dots-vertical></b-icon-three-dots-vertical
                   ><span class="sr-only">Settings</span>
                 </template>
-                <b-dropdown-item @click="makeAdmin()">
+                <b-dropdown-item href="#">
                   <b-icon-person-plus-fill></b-icon-person-plus-fill> Make Admin
                 </b-dropdown-item>
-                <b-dropdown-item @click="removeFromNetworks()">
+                <b-dropdown-item href="#">
                   <b-icon-trash-fill></b-icon-trash-fill> Remove From Networks
                 </b-dropdown-item>
               </b-dropdown>
@@ -148,151 +157,94 @@
             v-model="currentPage"
             :total-rows="rows"
             :per-page="perPage"
+            @change="handlePageChange"
             aria-controls="my-table"
           ></b-pagination>
         </span>
       </b-col>
     </b-row>
+    <!-- {{members}} -->
   </div>
 </template>
 
 <script>
 export default {
-  name: "memberNetwork",
+  name: "member",
   data() {
     return {
-       url: null,
-      perPage: 3,
-      currentPage: 1,
-      items: [
-        { id: 1, first_name: "Fred", last_name: "Flintstone" },
-        { id: 2, first_name: "Wilma", last_name: "Flintstone" },
-        { id: 3, first_name: "Barney", last_name: "Rubble" },
-        { id: 4, first_name: "Betty", last_name: "Rubble" },
-        { id: 5, first_name: "Pebbles", last_name: "Flintstone" },
-        { id: 6, first_name: "Bamm Bamm", last_name: "Rubble" },
-        { id: 7, first_name: "The Great", last_name: "Gazzoo" },
-        { id: 8, first_name: "Rockhead", last_name: "Slate" },
-        { id: 9, first_name: "Pearl", last_name: "Slaghoople" }
-      ]
+      url:null,
+      perPage: null,
+      currentPage: null,
+      searchTitle: "",
+
+      currentIndex: -1,
+
     };
   },
   computed: {
     rows() {
-      return this.items.length;
-    },
-    networkadmins() {
-      return this.$store.state.networkProfileMember.networkadmins;
-    },
-    bussiness() {
-      return this.$store.state.networkProfileMember.bussiness;
+      return this.$store.state.networkProfileMembers.members.total;
     },
     members() {
-      return this.$store.state.networkProfileMember.members;
+      return this.$store.state.networkProfileMembers.members;
     },
   },
   mounted(){
-    this.url = this.$route.params.id;
-    this.getNetworkAdmins();
-    this.getBussiness();
-    this.getNMembers();
+    this.url = this.$route.params.id
+    this.getMembers()
   },
   methods:{
-     
-    getNetworkAdmins() {
+
+    nFormatter(num) {
+      if (num >= 1000000000) {
+         return (num / 1000000000).toFixed(1).replace(/\.0$/, '') + 'G';
+      }
+      if (num >= 1000000) {
+         return (num / 1000000).toFixed(1).replace(/\.0$/, '') + 'M';
+      }
+      if (num >= 1000) {
+         return (num / 1000).toFixed(1).replace(/\.0$/, '') + 'K';
+      }
+      return num;
+    },
+
+    getRequestDatas(searchTitle, currentPage) {
+      let data = "";
+
+      if (searchTitle) {
+        data = searchTitle;
+      }else if (currentPage) {
+        data = "?page="+currentPage;
+      }
+
+      return data;
+    },
+
+    getMembers() {
+      const data = this.getRequestDatas(this.searchTitle, this.currentPage);
     this.$store
-      .dispatch("networkProfileMember/getnetworkadmins")
+      .dispatch("networkProfileMembers/getmembers", this.url+"/members/list/"+data)
       .then(() => {
-        console.log('ohh yeah');
+        this.perPage = this.members.per_page;
+        this.currentPage = this.members.current_page;
+        console.log('Members Available');
+        console.log(this.perPage );
       })
       .catch(err => {
         console.log({ err: err });
       });
     },
-     
-    getBussiness() {
-    this.$store
-      .dispatch("networkProfileMember/getbussiness")
-      .then(() => {
-        console.log('ohh yeah');
-      })
-      .catch(err => {
-        console.log({ err: err });
-      });
+    search() {
+      console.log("searching...")
+      console.log(this.searchTitle)
+      this.getMembers();
     },
-     
-    getNMembers() {
-    this.$store
-      .dispatch("networkProfileMember/getmembers")
-      .then(() => {
-        console.log('ohh yeah');
-      })
-      .catch(err => {
-        console.log({ err: err });
-      });
+    handlePageChange(value) {
+      this.currentPage = value;
+      console.log(this.currentPage);
+      this.getMembers();
     },
-
-    makeAdmin: function(){
-      var formdata = new FormData();
-      formdata.append("key", "obj[key]");
-      this.axios.post("#/"+this.url, this.form)
-      .then(() => {
-        console.log('ohh yeah');
-        this.flashMessage.show({
-          status: "success",
-          message: "The Member Is Now Admin"
-        });
-      })
-      .catch(err => {
-        console.log({ err: err });
-        this.flashMessage.show({
-          status: "error",
-          message: "Unable To Set Member As Admin"
-        });
-      });
-		},
-
-    removeAsAdmin: function(){
-      var formdata = new FormData();
-      formdata.append("key", "obj[key]");
-      this.axios.post("#/"+this.url, this.form)
-      .then(() => {
-        console.log('ohh yeah');
-        this.flashMessage.show({
-          status: "success",
-          message: "New Role Assigned"
-        });
-      })
-      .catch(err => {
-        console.log({ err: err });
-        this.flashMessage.show({
-          status: "error",
-          message: "Unable to Assigned New Role"
-        });
-      });
-		},
-
-    removeFromNetworks: function(){
-      var formdata = new FormData();
-      formdata.append("key", "obj[key]");
-      this.axios.post("#/"+this.url, this.form)
-      .then(() => {
-        console.log('ohh yeah');
-        this.flashMessage.show({
-          status: "success",
-          message: "New Role Assigned"
-        });
-      })
-      .catch(err => {
-        console.log({ err: err });
-        this.flashMessage.show({
-          status: "error",
-          message: "Unable to Assigned New Role"
-        });
-      });
-		},
-
-  },
+  }
 };
 </script>
 

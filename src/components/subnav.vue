@@ -7,14 +7,14 @@
           <span
             v-for="(category, index) in categories"
             :key="index"
-            @mouseover="showSubCat(category.id)"
-            @click="showSubCat(category.id)"
-            @mouseleave="hideSubCat(category.id)"
+            @mouseover="showSubCat(category.category.id, category.sub_cat)"
+            @click="showSubCat(category.category.id)"
+            @mouseleave="hideSubCat(category.category.id)"
           >
             <b-nav-item-dropdown
               id="dropdown-1"
-              :text="category.name"
-              :ref="category.id"
+              :text="category.category.name"
+              :ref="category.category.id"
             >
               <hr
                 style="
@@ -29,33 +29,25 @@
               <div>
                 <b-row>
                   <b-col cols="6">
-                    <!-- <b-dropdown-item @click="category('Vegetables')" href="#"
-                      ><img
-                        class="img-fluid picture logo-img"
-                        src="@/assets/icons/vegetable1.png"
-                      />
-                      Vegetables</b-dropdown-item
-                    > -->
-
                     <b-dropdown-item
-                      v-for="(subCat, index) in subCategories"
-                      :key="index"
-                      @click="category(subCat.name)"
+                      v-for="(subCat, subIndex) in category.sub_cat"
+                      :key="subIndex"
+                      @click="category(subCat)"
                       href="#"
                       ><img
                         class="img-fluid picture logo-img"
                         :src="subCat.cat_image"
                       />
-                      {{ subCat.name }}</b-dropdown-item
-                    >
+                      {{ subCat.name }}
+                    </b-dropdown-item>
 
-                    <b-dropdown-item @click="category('More')" href="#"
+                    <!-- <b-dropdown-item @click="category('More')" href="#"
                       ><img
                         class="img-fluid picture logo-img"
                         src="@/assets/icons/more.png"
                       />
                       More</b-dropdown-item
-                    >
+                    > -->
                   </b-col>
                 </b-row>
               </div>
@@ -72,7 +64,6 @@
 </template>
 
 <script>
-
 export default {
   name: "subnav",
   data() {
@@ -92,46 +83,32 @@ export default {
 
   methods: {
     getCategories() {
+      let bussiness_id = this.$route.params;
       this.$store
-        .dispatch("market/getCategories")
+        .dispatch("market/getCategories", bussiness_id)
         .then((res) => {
-          console.log("categories loaded!");
+          // console.log("categories loaded!");
         })
         .catch((err) => {
-          console.error({ err: err });
+          console.log("Error erro!");
         });
     },
-    getSubCat(cat_id) {
-      let bussiness_id = this.$route.params;
-      // this.subCategories = [];
-      this.$store
-        .dispatch("market/getSubCat", {
-          bussiness_id: bussiness_id,
-          cat_id: cat_id
-        })
-        .then(res => {
-          console.log("categories loaded!");
-        })
-        .catch(err => {
-          console.error({ err: err });
-        });
-    },
+
     category(category) {
       this.$emit("category", category);
+      console.log(category);
     },
-    showSubCat(catId) {
+    showSubCat(catId, subCat) {
       this.$refs[catId][0].visible = true;
       this.$emit("parentcategory", catId);
-      if (this.subCategories.lenght>0) {
-      console.log('filled!');
-
-      }else {
-      this.getSubCat(catId);
-
-      }
+      // this.subCategories.push(subCat);
+      this.$store.commit('market/setSubCat', subCat)
+      if (!subCat.length) this.hideSubCat(catId)
+      console.log("Subcat:", this.subCategories);
     },
     hideSubCat(catId) {
       this.$refs[catId][0].visible = false;
+      this.subCategories = [];
     },
 
     // ------------------------------------

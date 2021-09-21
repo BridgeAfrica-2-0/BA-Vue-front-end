@@ -1,26 +1,32 @@
 <template>
   <div>
-    <div class="people-style shadow">
+    <!-- {{ products }} -->
+
+    <b-spinner v-if="prodLoader" variant="primary" label="Spinning"></b-spinner>
+
+    <div
+      class="people-style shadow"
+      v-for="(prod, index) in products.data"
+      :key="index"
+    >
       <b-row>
         <b-col cols="5" lg="4" sm="4" md="5">
           <div class="center-img">
-            <img
-              src="https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg"
-              class="r-image"
-            />
+            <img :src="prod.picture" class="r-image" />
           </div>
         </b-col>
         <b-col cols="7" sm="8" md="7">
           <p class="text">
-            <strong class="title"> Sneakers Blec cc </strong> <br />
+            <strong class="title"> {{ prod.name }} </strong> <br />
             <strong> Description </strong> <br />
             <span class="text">
-              This is just a dummy text dumy dummy things are always dummy and
-              dummy add things are always dummy hjykt
+              {{ prod.description }}
             </span>
             <b-link class="text"> see more </b-link> <br />
 
-            <span class="price"> <strong> 12,000 Fcfa </strong> </span> <br />
+            <span class="price">
+              <strong> {{ prod.price }} Fcfa </strong>
+            </span>
           </p>
 
           <span class="float-right">
@@ -28,12 +34,44 @@
           </span>
         </b-col>
       </b-row>
-
-      <div>
-        <br />
-      </div>
     </div>
+    <!-- pagination -->
+    <!-- <b-pagination
+      v-model="page"
+      :total-rows="28"
+      :per-page="10"
+      aria-controls="my-table"
+      @click="changePage"
+    ></b-pagination> -->
+    <b-row>
+      <b-col lg="2" class="pb-2">
+        <b-button class="pagination"
+          :disabled="products.previous ? false : true"
+          variant="primary"
+          @click="changePage(products.previous, 'prev')"
+        >
+          <b-spinner v-if="prodLoader" small></b-spinner>
 
+          <span v-else><b-icon icon="chevron-compact-left"></b-icon></span>
+        </b-button>
+      </b-col>
+
+      <b-col lg="2" class="pb-2">
+        <b-button class="pagination" variant="outline-primary">{{ page }}</b-button>
+      </b-col>
+      <b-col lg="2" class="pb-2">
+        <b-button class="pagination"
+          :disabled="products.next ? false : true"
+          variant="primary"
+          @click="changePage(products.next, 'next')"
+        >
+          <b-spinner v-if="prodLoader" small></b-spinner>
+
+          <span v-else><b-icon icon="chevron-compact-right"></b-icon></span>
+        </b-button>
+      </b-col>
+    </b-row>
+    <!-- End pagination -->
     <b-modal hide-footer title="Edit product">
       <b-form>
         <b-row>
@@ -394,11 +432,14 @@
 </template>
 
 <script>
-
 export default {
   data() {
     return {
       viewProduct: false,
+      prodLoader: false,
+      list: [],
+      page: 1,
+      nextLoad: false,
     };
   },
   computed: {
@@ -406,29 +447,69 @@ export default {
       return this.$store.state.market.products;
     },
   },
-
-  mounted() {
-    this.getProducts()
-
+  created() {
+    if (!this.products.length) {
+      this.getProducts();
+    }
   },
+  // mounted() {
+  //   this.getProducts();
+  // },
+
   methods: {
-    /**
-     * Used to view produduct details
-     * @param id
-     * @return void
-     */
-    productDetails() {
-      this.viewProduct = true;
-      console.log(this.products);
-    },
-    getProducts() {
+    // productDetails() {
+    //   this.viewProduct = true;
+    //   // console.log(this.products);
+    // },
+    changePage(pageUrl, type) {
+      this.$store.commit("setProducts", []);
+      this.prodLoader = true;
+      console.log(pageUrl);
+
+      const myArr = pageUrl.split("=");
+      let nextPage = Number(myArr[1]);
+      this.page =
+        type == "next"
+          ? nextPage === 2
+            ? 1
+            : nextPage - 1
+          : nextPage === 2
+          ? 1
+          : nextPage + 1;
+
+      console.log(nextPage);
+
       this.$store
-        .dispatch("market/getProducts", this.$route.params.id)
-        .then(( ) => {
+        .dispatch("market/nextPage", nextPage)
+        .then((res) => {
+          console.log("products list: ");
           console.log(this.products);
+          this.prodLoader = false;
         })
         .catch((err) => {
-          console.error({ err: err });
+          this.prodLoader = false;
+          console.log("products error: ");
+          console.error(err);
+        });
+    },
+
+    async getProducts() {
+      this.prodLoader = true;
+      console.log("loader: ", this.prodLoader);
+
+      await this.$store
+        .dispatch("market/getProducts")
+        .then((res) => {
+          console.log("products list: ");
+          console.log(this.products);
+          this.prodLoader = false;
+          // console.log("loader: ", this.prodLoader);
+        })
+        .catch((err) => {
+          this.prodLoader = false;
+          console.log("loader: ", this.prodLoader);
+          console.log("products error: ");
+          console.error(err);
         });
     },
   },
@@ -436,6 +517,13 @@ export default {
 </script>
 
 <style scoped>
+
+/* ED css */
+button.pagination {
+  width: 50px;
+}
+
+/* Not ED */
 .discount {
   color: orange;
   margin-left: 60px;

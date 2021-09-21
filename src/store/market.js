@@ -3,13 +3,14 @@ import axios from "axios";
 export default {
     namespaced: true,
     state: {
-        products: ["tomato", "test", "yam"],
+        products: [],
         categories: [],
         subCat: [],
+        subFilter: [],
+
         loader: false,
         success: false,
-        token: '24|5uVwIzU7r82crJj936tmqkuIMRXxm1ADTCbuRceL'
-
+        token: "24|5uVwIzU7r82crJj936tmqkuIMRXxm1ADTCbuRceL"
     },
     getters: {
         getProducts(state) {
@@ -23,6 +24,10 @@ export default {
         getSubCat(state) {
             return state.subCat;
         },
+        getSubFilters(state) {
+            return state.subFilter;
+        },
+
 
         // sending loader value
         getLoader(state) {
@@ -44,6 +49,11 @@ export default {
         setSubCat(state, data) {
             state.subCat = data;
         },
+        setSubFilters(state, data) {
+            state.subFilter = data
+        },
+
+
         setLoader(state, payload) {
             state.loader = payload;
         },
@@ -53,57 +63,95 @@ export default {
     },
 
     actions: {
-        getCategories({ state, commit }) {
-            return axios.get("http://team2dev.maxinemoffett.com/api/v1/category/all", {
+        getCategories({ state, commit }, bussiness_id) {
+            return axios
+                .get("category/all", {
                     headers: {
-                        Authorization: `Bearer ${state.token}`,
-                    },
+                        Authorization: `Bearer ${state.token}`
+                    }
                 })
                 .then(res => {
-                    console.log("Categories: ");
-                    console.log(res.data.data);
-                    commit('setCategories', res.data.data)
+                    console.log("my Categories: ");
+                    let categories = res.data.data;
+                    let all = [];
+
+                    // console.log(categories);
+
+                    categories.map(cat => {
+                        let data = {
+                            bussiness_id: bussiness_id,
+                            cat_id: cat.id
+                        };
+
+                        axios
+                            .get(
+                                `subcategory/all/${data.cat_id}?business_id=${data.bussiness_id}`, {
+                                    headers: {
+                                        Authorization: `Bearer ${state.token}`
+                                    }
+                                }
+                            )
+                            .then(res => {
+                                console.log("all loaded!");
+                                all.push({
+                                    category: cat,
+                                    sub_cat: res.data.data
+
+                                });
+                                console.log(all);
+                            })
+                            .catch(err => {
+                                console.error(err);
+                            });
+                    });
+
+                    console.log(all);
+                    commit("setCategories", all);
                 })
                 .catch(err => {
                     console.log("Categories: ");
                     console.error(err);
                 });
         },
-        getSubCat({ state, commit }, data) {
-            console.log(data);
-            axios
-                .get(`http://team2dev.maxinemoffett.com/api/v1/subcategory/all/${data.cat_id}?business_id=${data.bussiness_id}`, {
+
+        getFilter({ state }, sub_id) {
+            return axios
+                .get(`filters/subcategory/${sub_id}`, {
                     headers: {
-                        Authorization: `Bearer ${state.token}`,
+                        Authorization: `Bearer ${state.token}`
+                    }
+                })
+        },
+
+        getProducts({ commit }) {
+            return axios.get("market", {
+                    headers: {
+                        Authorization: "Bearer 24|5uVwIzU7r82crJj936tmqkuIMRXxm1ADTCbuRceL",
                     },
                 })
                 .then((res) => {
-                    console.log("SubCategories:");
-                    console.log(res.data.data);
-                    commit('setSubCat', res.data.data)
-
-                    // state.subCategories = res.data.data;
+                    console.log("products list: ", res.data);
+                    commit("setProducts", res.data);
                 })
                 .catch((err) => {
-                    console.log("SubCategories: ");
                     console.error(err);
-                    state.subCat = []
-
-
-                    // this.subCategories = {name: "No sub-category available!"};
-
                 });
         },
+        nextPage({ commit }, page) {
+            commit("setProducts", []);
 
-        async getProducts({ commit }, businessId) {
-
-            return await axios
-                .get(`market/products/${businessId}`)
-                .then((data) => {
-                    commit('setProducts', data.data.message);
-                    console.log(data.data);
+            return axios.get(`market?page=${page}`, {
+                    headers: {
+                        Authorization: "Bearer 24|5uVwIzU7r82crJj936tmqkuIMRXxm1ADTCbuRceL",
+                    },
+                })
+                .then((res) => {
+                    console.log("products list: ", res.data);
+                    commit("setProducts", res.data);
+                })
+                .catch((err) => {
+                    console.error(err);
                 });
-        },
-
+        }
     }
 };

@@ -1,57 +1,63 @@
 <template>
   <div>
+    {{ filterType }}
     <div v-if="filterType == '1' || filterType == '4'">
-      <div class="">
-        <span v-if="selectcategories.length">
-          <b-form-checkbox
-            v-for="category in selectcategories.slice(0, 4)"
-            v-model="default_category"
-            :key="category.value"
-            :value="category.value"
-            name="flavour-4a"
-            @change="selectedsidebar"
+      <div v-if="subCategories.length">
+        <span>
+          <b-form-radio
+            v-for="(subCat, index) in subCategories"
+            v-model="selected_sub_cat"
+            :key="index"
+            :value="subCat.id"
+            name="subcategories-list"
+            @change="getFilter(subCat.id)"
             class="m-1 br-3"
           >
-            {{ category.text }}
-          </b-form-checkbox>
+            {{ subCat.name }}
+          </b-form-radio>
+          <b-link v-b-modal="'myModalllo'">See all</b-link>
+          <hr />
+        </span>
 
-          <b-link v-b-modal="'myModalllo'"> See all </b-link>
+        <b-spinner
+          v-if="filterLoader"
+          variant="primary"
+          label="Spinning"
+        ></b-spinner>
+        <span v-if="subFilter.length">
+          <h6>Filters</h6>
+          <b-form-radio
+            v-for="(filter, i) in subFilter"
+            :key="i.value"
+            v-model="selectedFilter"
+            :value="filter.id"
+            @change="switchcategoriesfilters"
+            name="sub-filters"
+            class="m-1 br-3"
+          >
+            {{ filter.name }}
+          </b-form-radio>
 
+          <b-link v-b-modal="'myModalll'"> See all </b-link>
+          <hr />
+        </span>
+        <span v-if="noFilter.length">
+          <h6>{{ noFilter }}</h6>
           <hr />
         </span>
       </div>
-
-      <span v-if="categories_filters.length">
-        <h6>Filters</h6>
-
-        <b-form-checkbox
-          v-for="agriculture in categories_filters.slice(0, 4)"
-          v-model="selectedfilter"
-          :key="agriculture.value"
-          :value="agriculture.value"
-          @change="switchcategoriesfilters"
-          name="flavour-4a"
-          class="m-1 br-3"
-        >
-          {{ agriculture.text }}
-        </b-form-checkbox>
-
-        <b-link v-b-modal="'myModalll'"> See all </b-link>
-        <hr />
-      </span>
       <b-modal ref="myfilters" id="myModalll" hide-footer title=" ">
         <div style="column-count: 2">
-          <b-form-checkbox
-            v-for="agriculture in categories_filters"
-            v-model="selectedfilter"
-            :key="agriculture.value"
-            :value="agriculture.value"
+          <b-form-radio
+            v-for="(filter, i) in subFilter"
+            :key="i.value"
+            v-model="selectedFilter"
+            :value="filter.id"
             @change="switchcategoriesfilters"
-            name="flavour-4a"
-            class=""
+            name="sub-filters"
           >
-            {{ agriculture.text }}
-          </b-form-checkbox>
+            {{ filter.name }}
+          </b-form-radio>
         </div>
 
         <br />
@@ -407,19 +413,20 @@
       </b-form-group>
     </b-modal>
 
+    <!-- Sub categories modal -->
     <b-modal ref="myfilters1" id="myModalllo" hide-footer title=" ">
       <div style="column-count: 2">
-        <b-form-checkbox
-          v-for="agriculture in selectcategories"
-          v-model="default_category"
-          :key="agriculture.value"
-          :value="agriculture.value"
+        <b-form-radio
+          v-for="(sub, i) in subCategories"
+          v-model="selected_sub_cat"
+          :key="i"
+          :value="sub.id"
           @change="selectedsidebar"
-          name="flavour-4a"
+          name="subCategories-list-modal"
           class=""
         >
-          {{ agriculture.text }}
-        </b-form-checkbox>
+          {{ sub.name }}
+        </b-form-radio>
       </div>
 
       <br />
@@ -429,7 +436,6 @@
 </template>
 
 <script>
-import axios from "axios";
 export default {
   name: "filters",
 
@@ -704,7 +710,15 @@ export default {
 
   data() {
     return {
-      newCategories:[],
+      // [Edouard] data
+      selected_sub_cat: [],
+      newCategories: [],
+      selectedFilter: [],
+      filterLoader: false,
+      noFilter: "",
+
+      // -----------------
+
       slide: 0,
       sliding: null,
 
@@ -1725,29 +1739,42 @@ export default {
       ],
     };
   },
-  components: {},
-  mounted() {
-    // this.getProducts();
+  computed: {
+    subCategories() {
+      return this.$store.state.market.subCat;
+    },
+    subFilter() {
+      return this.$store.state.market.subFilter;
+    },
   },
 
   methods: {
-    getProducts() {
-      let token = JSON.parse(localStorage.getItem("user")).accessToken;
-      // console.log(JSON.parse(localStorage.getItem("user")).accessToken);
-      axios
-        .get("http://team2dev.maxinemoffett.com/api/v1/category/all", {
-          headers: {
-            Authorization: "Bearer 24|5uVwIzU7r82crJj936tmqkuIMRXxm1ADTCbuRceL",
-          },
-        })
+    getFilter(subId) {
+      this.filterLoader = true;
+      this.noFilter = "";
+
+      this.$store
+        .dispatch("market/getFilter", subId)
         .then((res) => {
           console.log("Filters: ");
+
           console.log(res.data.data);
-          this.newCategories = res.data.data
+          if (res.data.data.length === 0) {
+            let subName = ''
+            this.subCategories.map((sub)=>{
+              if (sub.id === subId) {
+                subName = sub.name
+              }
+            })
+            this.noFilter = `No filter available for ${subName}!`;
+          }
+
+          this.filterLoader = false;
+          this.$store.commit("market/setSubFilters", res.data.data);
         })
         .catch((err) => {
-          console.log("Filters: ");
           console.error(err);
+          this.filterLoader = false;
         });
     },
     switchcategoriesfilters() {

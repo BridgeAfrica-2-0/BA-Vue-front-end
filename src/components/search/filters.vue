@@ -161,7 +161,7 @@
         >
 
         <b-form-checkbox id="" class="a-text" name="" value="">
-          MUtengene</b-form-checkbox
+          Mutengene</b-form-checkbox
         >
       </b-form-group>
 
@@ -199,7 +199,7 @@
 
       <div>
         <span v-if="filterType == '4'">
-          <label for="range-2">Price Range</label>
+          <label>Price Range</label>
           <b-form-input
             id="range-2"
             v-model="priceRange"
@@ -268,7 +268,7 @@
         >
 
         <b-form-checkbox id="" class="a-text" name="" value="">
-          MUtengene</b-form-checkbox
+          Mutengene</b-form-checkbox
         >
       </b-form-group>
 
@@ -335,10 +335,53 @@
       <b-form-input placeholder="Search Profession"></b-form-input>
 
       <br />
-
-      <b-form-checkbox id="checkbox-1" name="checkbox-1">
-        Community
-      </b-form-checkbox>
+      <b-form-group
+        label-cols-lg="3"
+        label="Community"
+        label-size="md"
+        label-class="font-weight-bold pt-0"
+        class="mb-0 text-left"
+      >
+      </b-form-group>
+      People
+      <b-form-select v-model="selectsp">
+        <b-form-select-option value="a">
+          Followers
+        </b-form-select-option>
+        <b-form-select-option value="b">
+          Followings
+        </b-form-select-option>
+        <b-form-select-option value="c">
+          Community
+        </b-form-select-option>
+      </b-form-select>
+      Business
+      <b-form-select v-model="selectsb">
+        <b-form-select-option value="a">
+          Followers
+        </b-form-select-option>
+        <b-form-select-option value="b">
+          Followings
+        </b-form-select-option>
+        <b-form-select-option value="c">
+          Community
+        </b-form-select-option>
+      </b-form-select>
+      Network
+      <b-form-select v-model="selectsn">
+        <b-form-select-option value="a">
+          Followers
+        </b-form-select-option>
+        <b-form-select-option value="b">
+          Followings
+        </b-form-select-option>
+        <b-form-select-option value="c">
+          community
+        </b-form-select-option>
+        <b-form-select-option value="d">
+          Members
+        </b-form-select-option>
+      </b-form-select>
     </div>
 
     <div v-if="filterType == '5'">
@@ -356,9 +399,35 @@
 
       <br />
 
-      <b-form-checkbox id="checkbox-1" name="checkbox-1">
-        Community
+      <b-form-checkbox
+        v-model="selecteda"
+        id="customSwitch1"
+        name="customSwitch1"
+        switch
+      >
+        Recent Post
       </b-form-checkbox>
+      <b-form-checkbox
+        v-model="selectedc"
+        id="customSwitch2"
+        name="customSwitch2"
+        switch
+      >
+        Post you've not seen
+      </b-form-checkbox>
+      <br />
+      Post From
+      <b-form-select v-model="selectsp" >
+        <b-form-select-option value="a" >
+          editors
+        </b-form-select-option>
+        <b-form-select-option value="b">
+          Members
+        </b-form-select-option>
+        <b-form-select-option value="c">
+          Owner
+        </b-form-select-option>
+      </b-form-select>
     </div>
 
     <b-modal ref="myfilters" id="Neighbourhood" hide-footer title=" ">
@@ -382,7 +451,7 @@
         >
 
         <b-form-checkbox id="" class="a-text" name="" value="">
-          MUtengene</b-form-checkbox
+          Mutengene</b-form-checkbox
         >
       </b-form-group>
     </b-modal>
@@ -724,7 +793,11 @@ export default {
 
       priceRange: "1000",
       showform: false,
-
+      selectsp: "",
+      selectsb: "",
+      selectsn: "",
+      selecteda: "",
+      selectedc: "",
       selected: "all",
       location: "any",
       category: "any",

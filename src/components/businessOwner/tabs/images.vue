@@ -1,9 +1,8 @@
 <template>
   <div>
-
-      
     <div class="row">
       <div class="container-fluid">
+
        
 
       
@@ -33,28 +32,59 @@
 
 
         
-   
 
-  </div>
-     
-            
-           
-          </b-modal>
-
-         
-
-         
-      <div  v-for="pictures in pictures" :key="pictures.id"  >  
-
-        <div class="img-gall"  v-for="pic in pictures.media" :key="pic.id"   >
-
-        
-          <a 
+        <div class="img-gall">
+          <a href="#!"
             ><img
-              class="card-img btn p-0 album-img"
-             
-              :src="pic.media_ulr"
+              class="card-img btn p-0"
+              src="@/assets/img/m1.jpg"
               alt=""
+              v-b-modal.modal-8
+          /></a>
+
+          <b-modal id="modal-8" title="Details">
+            <img class="card-img" src="@/assets/img/m1.jpg" alt="" />
+            <h4>Post Title</h4>
+            <p class="my-4">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum
+              quisquam sequi, ullam aliquam ab illo suscipit, earum quam,
+              doloribus id sit consequuntur tempora molestiae blanditiis.
+            </p>
+          </b-modal>
+          <div class="mediadesc">
+            <ul class="navbar-nav pull-right">
+              <li class="nav-item dropdown m-0 p-0">
+                <b-dropdown
+                  size="sm"
+                  class="float-right"
+                  variant="link"
+                  toggle-class="text-decoration-none"
+                  no-caret
+                >
+                  <template #button-content>
+                    <fas-icon
+                      class="drop-color font-weight-bolder"
+                      :icon="['fas', 'ellipsis-v']"
+                    />
+                  </template>
+                  <b-dropdown-item href="#">Download</b-dropdown-item>
+                  <b-dropdown-item href="#"
+                    >Make Profile Picture</b-dropdown-item
+                  >
+                  <b-dropdown-item href="#">Make Cover Photo</b-dropdown-item>
+                  <b-dropdown-item href="#">Delete</b-dropdown-item>
+                </b-dropdown>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="img-gall">
+          <a href="#!"
+            ><img
+              class="card-img btn p-0"
+              src="@/assets/img/m2.jpg"
+              alt=""
+
              @click="showPic(pictures.media, pictures.content )"
           /></a>   </div>
     <FlashMessage />
@@ -63,47 +93,243 @@
         <b-modal hide-footer size="xl" id="Details" ref="Details">
           <img class="card-img" :src="show_url" alt="" />
         </b-modal>
-
-        <div class="img-gall" v-for="pictures in pictures" :key="pictures.id">
-          <a
-            ><img
-              class="card-img btn p-0 album-img"
-              :src="pictures.media_url"
-              alt=""
-              @click="showPic(pictures.media_url)"
+              v-b-modal.modal-a
           /></a>
 
+          <b-modal id="modal-a" title="Details">
+            <img class="card-img" src="@/assets/img/m2.jpg" alt="" />
+            <h4>Post Title</h4>
+            <p class="my-4">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum
+              quisquam sequi, ullam aliquam ab illo suscipit, earum quam,
+              doloribus id sit consequuntur tempora molestiae blanditiis.
+            </p>
+          </b-modal>
           <div class="mediadesc">
             <ul class="navbar-nav pull-right">
-              <li class="nav-item dropdown m-0 p-0">
+              <li class="nav-item dropdown">
                 <b-dropdown
                   size="sm"
-                  class=" call-action"
+                  class="float-right"
                   variant="link"
                   toggle-class="text-decoration-none"
                   no-caret
                 >
                   <template #button-content>
-                    <b-icon
-                      icon="three-dots-vertical"
-                      color="white"
-                      variant="light"
-                    >
-                    </b-icon>
+                    <fas-icon
+                      class="drop-color font-weight-bolder"
+                      :icon="['fas', 'ellipsis-v']"
+                    />
                   </template>
-
-                  <b-dropdown-item @click="downloadPic(pictures.id)"
-                    >Download</b-dropdown-item
-                  >
-                  <b-dropdown-item @click="setProfilePic(pictures.id)"
+                  <b-dropdown-item href="#">Download</b-dropdown-item>
+                  <b-dropdown-item href="#"
                     >Make Profile Picture</b-dropdown-item
                   >
-                  <b-dropdown-item @click="setCoverPic(pictures.id)"
-                    >Make Cover Photo</b-dropdown-item
+                  <b-dropdown-item href="#">Make Cover Photo</b-dropdown-item>
+                  <b-dropdown-item href="#">Delete</b-dropdown-item>
+                </b-dropdown>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+
+        <div class="img-gall">
+          <a href="#!"
+            ><img
+              class="card-img btn p-0"
+              src="@/assets/img/m3.jpg"
+              alt=""
+              v-b-modal.modal-b
+          /></a>
+
+          <b-modal id="modal-b" title="Details">
+            <img class="card-img" src="@/assets/img/m3.jpg" alt="" />
+            <h4>Post Title</h4>
+            <p class="my-4">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum
+              quisquam sequi, ullam aliquam ab illo suscipit, earum quam,
+              doloribus id sit consequuntur tempora molestiae blanditiis.
+            </p>
+          </b-modal>
+          <div class="mediadesc">
+            <ul class="navbar-nav pull-right">
+              <li class="nav-item dropdown">
+                <b-dropdown
+                  size="sm"
+                  class="float-right"
+                  variant="link"
+                  toggle-class="text-decoration-none"
+                  no-caret
+                >
+                  <template #button-content>
+                    <fas-icon
+                      class="drop-color font-weight-bolder"
+                      :icon="['fas', 'ellipsis-v']"
+                    />
+                  </template>
+                  <b-dropdown-item href="#">Download</b-dropdown-item>
+                  <b-dropdown-item href="#"
+                    >Make Profile Picture</b-dropdown-item
                   >
-                  <b-dropdown-item @click="deleteImage(pictures.id)" href="#"
-                    >Delete</b-dropdown-item
+                  <b-dropdown-item href="#">Make Cover Photo</b-dropdown-item>
+                  <b-dropdown-item href="#">Delete</b-dropdown-item>
+                </b-dropdown>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="img-gall">
+          <a href="#!"
+            ><img class="card-img" src="@/assets/img/m4.jpg" alt=""
+          /></a>
+          <div class="mediadesc">
+            <ul class="navbar-nav pull-right">
+              <li class="nav-item dropdown">
+                <b-dropdown
+                  size="sm"
+                  class="float-right"
+                  variant="link"
+                  toggle-class="text-decoration-none"
+                  no-caret
+                >
+                  <template #button-content>
+                    <fas-icon
+                      class="drop-color font-weight-bolder"
+                      :icon="['fas', 'ellipsis-v']"
+                    />
+                  </template>
+                  <b-dropdown-item href="#">Download</b-dropdown-item>
+                  <b-dropdown-item href="#"
+                    >Make Profile Picture</b-dropdown-item
                   >
+                  <b-dropdown-item href="#">Make Cover Photo</b-dropdown-item>
+                  <b-dropdown-item href="#">Delete</b-dropdown-item>
+                </b-dropdown>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="img-gall">
+          <a href="#!"
+            ><img class="card-img" src="@/assets/img/m5.jpg" alt=""
+          /></a>
+          <div class="mediadesc">
+            <ul class="navbar-nav pull-right">
+              <li class="nav-item dropdown">
+                <b-dropdown
+                  size="sm"
+                  class="float-right"
+                  variant="link"
+                  toggle-class="text-decoration-none"
+                  no-caret
+                >
+                  <template #button-content>
+                    <fas-icon
+                      class="drop-color font-weight-bolder"
+                      :icon="['fas', 'ellipsis-v']"
+                    />
+                  </template>
+                  <b-dropdown-item href="#">Download</b-dropdown-item>
+                  <b-dropdown-item href="#"
+                    >Make Profile Picture</b-dropdown-item
+                  >
+                  <b-dropdown-item href="#">Make Cover Photo</b-dropdown-item>
+                  <b-dropdown-item href="#">Delete</b-dropdown-item>
+                </b-dropdown>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="img-gall">
+          <a href="#!"
+            ><img class="card-img" src="@/assets/img/m6.jpg" alt=""
+          /></a>
+          <div class="mediadesc">
+            <ul class="navbar-nav pull-right">
+              <li class="nav-item dropdown">
+                <b-dropdown
+                  size="sm"
+                  class="float-right"
+                  variant="link"
+                  toggle-class="text-decoration-none"
+                  no-caret
+                >
+                  <template #button-content>
+                    <fas-icon
+                      class="drop-color font-weight-bolder"
+                      :icon="['fas', 'ellipsis-v']"
+                    />
+                  </template>
+                  <b-dropdown-item href="#">Download</b-dropdown-item>
+                  <b-dropdown-item href="#"
+                    >Make Profile Picture</b-dropdown-item
+                  >
+                  <b-dropdown-item href="#">Make Cover Photo</b-dropdown-item>
+                  <b-dropdown-item href="#">Delete</b-dropdown-item>
+                </b-dropdown>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="img-gall">
+          <a href="#!"
+            ><img class="card-img" src="@/assets/img/m7.jpg" alt=""
+          /></a>
+          <div class="mediadesc">
+            <ul class="navbar-nav pull-right">
+              <li class="nav-item dropdown">
+                <b-dropdown
+                  size="sm"
+                  class="float-right"
+                  variant="link"
+                  toggle-class="text-decoration-none"
+                  no-caret
+                >
+                  <template #button-content>
+                    <fas-icon
+                      class="drop-color font-weight-bolder"
+                      :icon="['fas', 'ellipsis-v']"
+                    />
+                  </template>
+                  <b-dropdown-item href="#">Download</b-dropdown-item>
+                  <b-dropdown-item href="#"
+                    >Make Profile Picture</b-dropdown-item
+                  >
+                  <b-dropdown-item href="#">Make Cover Photo</b-dropdown-item>
+                  <b-dropdown-item href="#">Delete</b-dropdown-item>
+                </b-dropdown>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="img-gall">
+          <a href="#!"
+            ><img class="card-img" src="@/assets/img/m8.jpg" alt=""
+          /></a>
+          <div class="mediadesc">
+            <ul class="navbar-nav pull-right">
+              <li class="nav-item dropdown">
+                <b-dropdown
+                  size="sm"
+                  class="float-right"
+                  variant="link"
+                  toggle-class="text-decoration-none"
+                  no-caret
+                >
+                  <template #button-content>
+                    <fas-icon
+                      class="drop-color font-weight-bolder"
+                      :icon="['fas', 'ellipsis-v']"
+                    />
+                  </template>
+                  <b-dropdown-item href="#">Download</b-dropdown-item>
+                  <b-dropdown-item href="#"
+                    >Make Profile Picture</b-dropdown-item
+                  >
+                  <b-dropdown-item href="#">Make Cover Photo</b-dropdown-item>
+                  <b-dropdown-item href="#">Delete</b-dropdown-item>
                 </b-dropdown>
               </li>
             </ul>
@@ -116,9 +342,9 @@
 </template>
 
 <script>
-import axios from "axios";
 export default {
   components: {},
+
 
   computed: {
     pictures() {
@@ -415,10 +641,18 @@ export default {
       this.$refs["modalxl"].show();
     },
 
+
+  methods: {
+    /**
+     *
+     * @param i
+     */
+
     onClick(i) {
       this.index = i;
     },
   },
+
 
   mounted() {
     this.url = this.$route.params.id;
@@ -441,6 +675,9 @@ export default {
       img_url: null,
       profile_pic: null,
       text: null,
+
+  data: function() {
+    return {
       images: [
         "https://placekitten.com/801/800",
         "https://placekitten.com/802/800",
@@ -480,16 +717,7 @@ export default {
 };
 </script>
 
-<style scoped>
-.call-action {
-  border-radius: 50%;
-  background: gray;
-  height: 30px !important;
-  width: 30px !important;
-  font-weight: 50px !important;
-  text-align: center;
-  padding-right: 35px !important;
-}
+<style>
 .text-design {
   align-items: first baseline;
 }
@@ -498,24 +726,7 @@ export default {
   color: black;
 }
 
-.botmediadess {
-  text-align: center;
-  bottom: -5%;
-  width: 100%;
-  font-size: 20px;
-}
-
 @media (min-width: 960px) {
-  .album-img {
-    height: 300px !important;
-    object-fit: cover !important;
-  }
-
-  .drag-textt {
-    height: 290px !important;
-    padding-top: 95px;
-  }
-
   .img-gall {
     background-size: contain;
     cursor: pointer;
@@ -523,14 +734,14 @@ export default {
     border-radius: 3px;
   }
 
-  .image-wrapp {
+  .image-wrap {
     border: 4px dashed #e75c18;
     position: relative;
 
     position: relative;
     margin: 5px;
     float: left;
-
+    width: 46.5%;
     transition-duration: 0.4s;
     border-radius: 5px;
     -webkit-animation: winanim 0.5s;
@@ -572,14 +783,14 @@ export default {
     backface-visibility: visible;
   }
 
-  .image-wrapp {
+  .image-wrap {
     border: 4px dashed #e75c18;
     position: relative;
 
     position: relative;
     margin: 5px;
     float: left;
-
+    width: 46.5%;
     transition-duration: 0.4s;
     border-radius: 5px;
     -webkit-animation: winanim 0.5s;
@@ -590,16 +801,6 @@ export default {
 }
 
 @media only screen and (min-width: 768px) and (max-width: 1331px) {
-  .album-img {
-    height: 300px !important;
-    object-fit: cover !important;
-  }
-
-  .drag-textt {
-    height: 290px !important;
-    padding-top: 95px;
-  }
-
   .img-gall {
     background-size: contain;
     cursor: pointer;
@@ -620,14 +821,14 @@ export default {
     backface-visibility: visible;
   }
 
-  .image-wrapp {
+  .image-wrap {
     border: 4px dashed #e75c18;
     position: relative;
 
     position: relative;
     margin: 5px;
     float: left;
-
+    width: 46.5%;
     transition-duration: 0.4s;
     border-radius: 5px;
     -webkit-animation: winanim 0.5s;
@@ -638,16 +839,6 @@ export default {
 }
 
 @media (max-width: 762px) {
-  .album-img {
-    height: 200px !important;
-    object-fit: cover !important;
-  }
-
-  .drag-textt {
-    height: 190px !important;
-    padding-top: 55px;
-  }
-
   .img-gall {
     background-size: contain;
     cursor: pointer;
@@ -668,14 +859,14 @@ export default {
     backface-visibility: visible;
   }
 
-  .image-wrapp {
+  .image-wrap {
     border: 4px dashed #e75c18;
     position: relative;
 
     position: relative;
     margin: 5px;
     float: left;
-
+    width: 46.5%;
     transition-duration: 0.4s;
     border-radius: 5px;
     -webkit-animation: winanim 0.5s;
@@ -692,6 +883,7 @@ export default {
   color: #000;
 }
 </style>
+
 
 <style>
 .agile__dots {
@@ -749,3 +941,4 @@ export default {
   right: 0;
 }
 </style>
+

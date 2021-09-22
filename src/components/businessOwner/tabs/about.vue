@@ -1,12 +1,15 @@
 <template>
   <div>
-    <b-icon icon="person-fill" class="icon-size" variant="primary"></b-icon>
-    <b>
-      About
-    </b>
 
-    <hr />
 
+      <b-icon icon="person-fill"  class="icon-size" variant="primary"></b-icon>
+      <b>
+        About
+      </b>
+
+      <hr />
+
+    
     <b-card>
       <div class="mb-3">
         <iframe
@@ -33,59 +36,59 @@
           </b-card>
         </b-col>
         <b-col>
-          <b-card>
-            <b-card-text>
-              <div class="edit" @click="editContact">
-                <b-icon icon="pencil-fill" variant="primary"></b-icon>
-              </div>
 
-              <p>
-                <b-icon
-                  icon="briefcase-fill"
-                  class="primary icon-size"
-                ></b-icon>
-                Agriculture
-              </p>
-              <p>
-                <b-icon icon="search" class="primary icon-size"></b-icon>
-                Chicken Seller
-              </p>
-              <p>
-                <b-icon icon="geo-alt-fill" class="primary icon-size"></b-icon>
-                Mokolo, Yaounde, Cameroon
-              </p>
-              <p>
-                <b-icon icon="link" class="primary icon-size"></b-icon>
-                www.business.com
-              </p>
-              <p>
-                <b-icon icon="people-fill" class="primary icon-size"></b-icon>
-                1.1M Community
-              </p>
-              <p>
-                <b-icon
-                  icon="telephone-fill"
-                  class="primary icon-size"
-                ></b-icon>
-                +1(542) 565- 536
-              </p>
-              <p>
-                <b-icon icon="envelope-fill" class="primary icon-size"></b-icon>
-                info@business.com
-              </p>
-              <p>
-                <b-icon icon="clock" class="primary icon-size"></b-icon>
-                <b-link> Open now</b-link>
-                <br />
-                <b-dropdown size="sm" variant="transperent">
-                  <template #button-content>
-                    10:00AM - 7:00PM
-                  </template>
-                  <b-dropdown-item> 10:00AM - 7:00PM</b-dropdown-item>
-                </b-dropdown>
-              </p>
-            </b-card-text>
-          </b-card>
+          
+
+ <b-card>
+
+            <b-card-text>
+
+              <div class="edit" @click="editContact">
+              <b-icon icon="pencil-fill" variant="primary"></b-icon>
+            </div>
+
+
+
+        <p>
+          <b-icon icon="briefcase-fill" class="primary icon-size"></b-icon> Agriculture
+        </p>
+        <p><b-icon icon="search" class="primary icon-size"></b-icon> Chicken Seller</p>
+        <p>
+          <b-icon icon="geo-alt-fill" class="primary icon-size"></b-icon> Mokolo, Yaounde,
+          Cameroon
+        </p>
+        <p><b-icon icon="link" class="primary icon-size"></b-icon> www.business.com</p>
+        <p>
+          <b-icon icon="people-fill" class="primary icon-size"></b-icon> 1.1M Community
+        </p>
+        <p>
+          <b-icon icon="telephone-fill" class="primary icon-size"></b-icon>
+          +1(542) 565- 536
+        </p>
+        <p>
+          <b-icon icon="envelope-fill" class="primary icon-size"></b-icon>
+          info@business.com
+        </p>
+        <p>
+          <b-icon icon="clock" class="primary icon-size"></b-icon>
+          <b-link> Open now</b-link>
+          <br />
+          <b-dropdown size="sm" variant="transperent">
+            <template #button-content>
+              10:00AM - 7:00PM
+            </template>
+            <b-dropdown-item> 10:00AM - 7:00PM</b-dropdown-item>
+          </b-dropdown>
+        </p>
+      </b-card-text>
+
+
+ </b-card>
+
+
+
+
+
         </b-col>
       </b-row>
     </b-card>
@@ -97,7 +100,11 @@
       v-model="edit1"
       size="md"
     >
-      <b-form> </b-form>
+      <b-form>
+        
+
+        
+      </b-form>
     </b-modal>
     <b-modal
       id="bv-modal-example2"
@@ -107,43 +114,55 @@
       size="lg"
     >
       <b-form>
-        <div class="form-group">
-          <label for="username">Busness Name:</label><br />
-          <input
-            type="text"
-            name="username"
-            id="username"
-            placeholder="Busness Name"
-            class="form-control"
-          />
-        </div>
+       
+         
 
-        <div class="form-group">
-          <label for="alias">Category:</label><br />
 
-          <b-form-select
+          <div class="form-group">
+                        <label for="username">Busness Name:</label><br />
+                        <input
+                          type="text"
+                          name="username"
+                          id="username"
+                          placeholder="Busness Name"
+                          class="form-control"
+                        />
+                      </div>
+
+
+
+
+                      
+                      <div class="form-group">
+                        <label for="alias">Category:</label><br />
+                       
+
+                          <b-form-select
             v-model="category"
             :options="categories"
             class="mb-3"
             value-field="item"
             text-field="name"
           ></b-form-select>
-        </div>
+                      </div>
 
-        <div class="form-group">
-          <label for="username">Keywords</label><br />
-          <div class="col-md-12 pl-0 pr-0">
-            No Choices
 
-            <input
-              type="text"
-              name="alias"
-              id="alias"
-              placeholder="Enter your Keywords"
-              class="form-control"
-            />
-          </div>
-        </div>
+
+                      <div class="form-group">
+                        <label for="username">Keywords</label><br />
+                        <div class="col-md-12 pl-0 pr-0">
+                          No Choices
+
+                          <input
+                          type="text"
+                          name="alias"
+                          id="alias"
+                          placeholder="Enter your Keywords"
+                          class="form-control"
+                        />
+
+                      </div>
+                    </div>
         <b-form-group
           id="input-group-1"
           label="Country"
@@ -153,6 +172,7 @@
           <b-form-input
             id="input-1"
             class="mt-1"
+          
             type="text"
             required
           ></b-form-input>
@@ -166,6 +186,7 @@
           <b-form-input
             id="input-1"
             class="mt-1"
+           
             type="text"
             required
           ></b-form-input>
@@ -176,14 +197,19 @@
           label-for="input-2"
           label-size="sm"
         >
-          <b-form-input
+
+
+
+         <b-form-input
             id="input-1"
             class="mt-1"
+           
             type="text"
             required
           ></b-form-input>
+         
         </b-form-group>
-
+        
         <b-form-group
           id="input-group-2"
           label="Phone Contact"
@@ -199,7 +225,8 @@
           ></b-form-input>
         </b-form-group>
 
-        <b-form-group
+
+         <b-form-group
           id="input-group-2"
           label="Phone 2"
           label-for="input-2"
@@ -213,6 +240,9 @@
             required
           ></b-form-input>
         </b-form-group>
+
+
+
 
         <b-form-group
           id="input-group-2"
@@ -229,140 +259,116 @@
           ></b-form-input>
         </b-form-group>
 
-        <div class="b-bottom">
-          <b-container>
-            <b-form-group
-              label-cols-lg="12"
-              label="Business Hours"
-              label-size="md"
-              label-class=" pt-0 "
-              class="mb-0"
-            >
-              <b-form-group class="mb-0" v-slot="{ ariaDescribedby }">
-                <b-form-radio-group
-                  class="a-text text"
-                  :options="['Always Open', 'Open for selected hours']"
-                  :aria-describedby="ariaDescribedby"
-                ></b-form-radio-group>
-                <br />
-                <b-container>
-                  <b-row>
-                    <b-col cols="6"
-                      ><b-form-checkbox
-                        id=""
-                        class="a-text text"
-                        name=""
-                        value=""
-                      >
-                        Monday</b-form-checkbox
-                      ></b-col
-                    >
 
-                    <b-col><b-form-input name=""></b-form-input></b-col>-
-                    -<b-col><b-form-input name=""></b-form-input></b-col>
-                  </b-row>
-                  <br />
 
-                  <b-row>
-                    <b-col cols="6"
-                      ><b-form-checkbox
-                        id=""
-                        class="a-text text"
-                        name=""
-                        value=""
-                      >
-                        Tuesday</b-form-checkbox
-                      ></b-col
-                    >
-                    <b-col><b-form-input name=""></b-form-input></b-col>- -
-                    <b-col><b-form-input name=""></b-form-input></b-col>
-                  </b-row>
-                  <br />
 
-                  <b-row>
-                    <b-col cols="6"
-                      ><b-form-checkbox
-                        id=""
-                        class="a-text text"
-                        name=""
-                        value=""
-                      >
-                        Wednesday</b-form-checkbox
-                      ></b-col
-                    >
-                    <b-col><b-form-input name=""></b-form-input></b-col>- -
-                    <b-col><b-form-input name=""></b-form-input></b-col>
-                  </b-row>
-                  <br />
 
-                  <b-row>
-                    <b-col cols="6"
-                      ><b-form-checkbox
-                        id=""
-                        class="a-text a-text text"
-                        name=""
-                        value=""
-                      >
-                        Thursday</b-form-checkbox
-                      ></b-col
-                    >
-                    <b-col><b-form-input name=""></b-form-input></b-col>- -
-                    <b-col><b-form-input name=""></b-form-input></b-col>
-                  </b-row>
-                  <br />
 
-                  <b-row>
-                    <b-col cols="6"
-                      ><b-form-checkbox
-                        id=""
-                        class="a-text text"
-                        name=""
-                        value=""
-                      >
-                        Friday
-                      </b-form-checkbox></b-col
-                    >
-                    <b-col><b-form-input name=""></b-form-input></b-col>- -
-                    <b-col><b-form-input name=""></b-form-input></b-col>
-                  </b-row>
-                  <br />
 
-                  <b-row>
-                    <b-col cols="6"
-                      ><b-form-checkbox
-                        id=""
-                        class="a-text text"
-                        name=""
-                        value=""
-                      >
-                        Saterday
-                      </b-form-checkbox></b-col
-                    >
-                    <b-col><b-form-input name=""></b-form-input></b-col>- -
-                    <b-col><b-form-input name=""></b-form-input></b-col>
-                  </b-row>
-                  <br />
+          
 
-                  <b-row>
-                    <b-col cols="6"
-                      ><b-form-checkbox
-                        id=""
-                        name=""
-                        class="a-text text"
-                        value=""
-                      >
-                        Sunday</b-form-checkbox
-                      ></b-col
-                    >
-                    <b-col><b-form-input name=""></b-form-input></b-col>- -
-                    <b-col><b-form-input name=""></b-form-input></b-col>
-                  </b-row>
+          <div class="b-bottom">
+            <b-container>
+              <b-form-group
+                label-cols-lg="12"
+                label="Business Hours"
+                label-size="md"
+                label-class=" pt-0 "
+                class="mb-0"
+              >
+                <b-form-group class="mb-0" v-slot="{ ariaDescribedby }">
+                  <b-form-radio-group
+                    class="a-text text"
+                    :options="['Always Open', 'Open for selected hours']"
+                    :aria-describedby="ariaDescribedby"
+                  ></b-form-radio-group>
                   <br />
-                </b-container>
+                  <b-container>
+                    <b-row>
+                      <b-col cols="6"
+                        ><b-form-checkbox id="" class="a-text text" name="" value="">
+                          Monday</b-form-checkbox
+                        ></b-col
+                      >
+
+
+                      <b-col><b-form-input name=""></b-form-input></b-col>-
+                      -<b-col><b-form-input name=""></b-form-input></b-col>
+                    </b-row>
+                    <br />
+
+                    <b-row>
+                      <b-col cols="6"
+                        ><b-form-checkbox id="" class="a-text text" name="" value="">
+                          Tuesday</b-form-checkbox
+                        ></b-col
+                      >
+                      <b-col><b-form-input name=""></b-form-input></b-col>- -
+                      <b-col><b-form-input name=""></b-form-input></b-col>
+                    </b-row>
+                    <br />
+
+                    <b-row>
+                      <b-col  cols="6"
+                        ><b-form-checkbox id="" class="a-text text" name="" value="">
+                          Wednesday</b-form-checkbox
+                        ></b-col
+                      >
+                      <b-col><b-form-input name=""></b-form-input></b-col>- -
+                      <b-col><b-form-input name=""></b-form-input></b-col>
+                    </b-row>
+                    <br />
+
+                    <b-row>
+                      <b-col cols="6"
+                        ><b-form-checkbox id="" class="a-text a-text text" name="" value="">
+                          Thursday</b-form-checkbox
+                        ></b-col
+                      >
+                      <b-col><b-form-input name=""></b-form-input></b-col>- -
+                      <b-col><b-form-input name=""></b-form-input></b-col>
+                    </b-row>
+                    <br />
+
+                    <b-row>
+                      <b-col cols="6"
+                        ><b-form-checkbox id="" class="a-text text" name="" value="">
+                          Friday
+                        </b-form-checkbox></b-col
+                      >
+                      <b-col><b-form-input name=""></b-form-input></b-col>- -
+                      <b-col><b-form-input name=""></b-form-input></b-col>
+                    </b-row>
+                    <br />
+
+                    <b-row>
+                      <b-col cols="6"
+                        ><b-form-checkbox id="" class="a-text text" name="" value="">
+                          Saterday
+                        </b-form-checkbox></b-col
+                      >
+                      <b-col><b-form-input name=""></b-form-input></b-col>- -
+                      <b-col><b-form-input name=""></b-form-input></b-col>
+                    </b-row>
+                    <br />
+
+                    <b-row>
+                      <b-col cols="6"
+                        ><b-form-checkbox id="" name="" class="a-text text" value="">
+                          Sunday</b-form-checkbox
+                        ></b-col
+                      >
+                      <b-col><b-form-input name=""></b-form-input></b-col>- -
+                      <b-col><b-form-input name=""></b-form-input></b-col>
+                    </b-row>
+                    <br />
+                  </b-container>
+                </b-form-group>
               </b-form-group>
-            </b-form-group>
-          </b-container>
-        </div>
+            </b-container>
+          </div>
+
+
 
         <b-button
           class="mt-3 btn-block"
@@ -383,8 +389,9 @@ export default {
       edit1: false,
       edit2: false,
 
-      category: "",
-      categories: [
+       category:'',
+       categories: [ 
+
         { item: "Professional_and_home_service", name: "Professionals" },
         { item: "Agriculture ", name: "Agriculture " },
         { item: "Restaurant ", name: " Restaurant " },
@@ -397,10 +404,11 @@ export default {
         { item: "Hair_and_beauty ", name: "Hair and beauty " },
         { item: "Real_estate ", name: "Real_estate " },
         { item: "Travelling ", name: "Travelling " },
-        { item: "Hotels", name: "Hotels" },
-        { item: "station", name: " station  " },
-        { item: "Mayor_concils", name: "Mayor_concils" },
-        { item: "Taxis service", name: "Taxis service" }
+         { item: "Hotels", name: "Hotels" },
+          { item: "station", name: " station  " },
+           { item: "Mayor_concils", name: "Mayor_concils" },
+           { item: "Taxis service", name: "Taxis service" },
+
       ],
 
       leftTitle: "About Mapoure Agrobusiness",
@@ -413,10 +421,10 @@ export default {
         "              iste id obcaecati quae odit accusamus reprehenderit, ipsa nam\n" +
         "              laudantium pariatur. Harum, soluta. Nam accusantium hic numquam\n" +
         "              architecto debitis. Asperiores temporibus, rerum iste id obcaecati\n" +
-        "              architecto debitis. Asperiores temporibus, rerum iste id obcaecati\n" +
-        "              architecto debitis. Asperiores temporibus, rerum iste id obcaecati\n" +
-        "              architecto debitis. Asperiores temporibus, rerum iste id obcaecati\n" +
-        "              architecto debitis. Asperiores temporibus, rerum iste id obcaecati\n" +
+         "              architecto debitis. Asperiores temporibus, rerum iste id obcaecati\n" +
+          "              architecto debitis. Asperiores temporibus, rerum iste id obcaecati\n" +
+           "              architecto debitis. Asperiores temporibus, rerum iste id obcaecati\n" +
+            "              architecto debitis. Asperiores temporibus, rerum iste id obcaecati\n" +
         "              quae odit accusamus reprehenderit, ipsa nam laudantium pariatur.\n" +
         "              quae odit accusamus reprehenderit, ipsa nam laudantium pariatur.\n" +
         "              Harum, soluta. Nam accusantium hic numquam architecto debitis.",
@@ -477,37 +485,68 @@ p {
   text-align: left;
 }
 
+ 
+
+ 
 @media (min-width: 762px) {
-  .primary {
-    margin-right: 6px;
-  }
+
+ .primary{
+            
+           margin-right: 6px;
+    }
+
+  
 }
 
+
+
 @media (min-width: 762px) {
-  .primary {
-    margin-right: 8px;
-  }
+
+ .primary{
+            
+           margin-right: 8px;
+    }
+
+   
+
 }
+
+
 
 @media (max-width: 768px) {
-  .primary {
-    margin-right: 6px;
-    font-size: 12px !important;
-  }
 
-  .card-text {
-    font-size: 14px !important;
-  }
+ .primary{
+            
+           margin-right: 6px;
+             font-size: 12px  !important;
+
+    }
+
+     .card-text{
+      font-size: 14px  !important;
+    }
+
+
+  
 }
+
+
 
 @media (min-width: 768px) {
-  .primary {
-    margin-right: 8px;
-    font-size: 14px !important;
-  }
 
-  .card-text {
-    font-size: 14px !important;
-  }
+ .primary{
+            
+           margin-right: 8px;
+           font-size: 14px  !important;
+    }
+
+    .card-text{
+      font-size: 14px  !important;
+    }
+
+   
+
 }
+
+    
 </style>

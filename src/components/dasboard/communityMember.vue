@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="s-card">
+    <div class="s-ccard">
       <b-row>
         <b-col lg="6" sm="12" class="p-2" v-for="item in people" :key="item.id">
           <div class="people-style border shadow">
@@ -149,9 +149,9 @@ export default {
     margin-right: 5px;
   }
 
-  .s-card {
-    padding-left: 5px;
-    padding-right: 5px;
+  .s-ccard {
+    padding-left: 20px;
+    padding-right: 20px;
   }
 }
 
@@ -159,6 +159,11 @@ export default {
   .btnpngs {
     width: 20px;
     margin-right: 5px;
+  }
+
+  .s-ccard {
+    padding-left: 29px;
+    padding-right: 29px;
   }
 }
 

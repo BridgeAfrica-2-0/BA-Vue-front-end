@@ -134,6 +134,8 @@ import InfiniteLoading from 'vue-infinite-loading';
 Vue.use(InfiniteLoading, { /* options */ });
 
 
+import ScrollShadow from 'vue-scroll-shadow';
+Vue.component('scroll-shadow', ScrollShadow);
 
 
 

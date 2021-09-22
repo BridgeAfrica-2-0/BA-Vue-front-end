@@ -2,6 +2,37 @@
   <div>
     <div class="row">
       <div class="container-fluid">
+
+       
+
+      
+    
+
+
+    <b-modal hide-footer size="md"  id="Details" ref="Details">
+
+   
+<div >  
+ 
+       
+
+       
+       
+  <agile :nav-buttons="false" :autoplay-speed="5000" :speed="2500" fade="fade" pause-on-hover="pause-on-hover" pause-on-dots-hover="pause-on-dots-hover" autoplay="autoplay" >   
+  
+    <div class="slide" v-for="img_url in show_url"  :key="img_url.id" >   <img :src="img_url.media_ulr" alt="">  </div>
+     <template slot="prevButton"><i class="fas fa-chevron-left"></i></template>
+    <template slot="nextButton"><i class="fas fa-chevron-right"></i></template>
+     <template slot="caption"> {{content}}</template>
+  
+
+  </agile>
+
+ 
+
+
+        
+
         <div class="img-gall">
           <a href="#!"
             ><img
@@ -53,6 +84,15 @@
               class="card-img btn p-0"
               src="@/assets/img/m2.jpg"
               alt=""
+
+             @click="showPic(pictures.media, pictures.content )"
+          /></a>   </div>
+    <FlashMessage />
+    <div class="row">
+      <div class="container-fluid">
+        <b-modal hide-footer size="xl" id="Details" ref="Details">
+          <img class="card-img" :src="show_url" alt="" />
+        </b-modal>
               v-b-modal.modal-a
           /></a>
 
@@ -92,6 +132,7 @@
             </ul>
           </div>
         </div>
+
 
         <div class="img-gall">
           <a href="#!"
@@ -297,20 +338,344 @@
       </div>
     </div>
   </div>
+      </div></div></div>
 </template>
 
 <script>
 export default {
   components: {},
+
+
+  computed: {
+    pictures() {
+      return this.$store.state.businessOwner.albumImages;
+    },
+  },
+
+  methods: {
+    showPic(url) {
+      console.log(url);
+      this.show_url = url;
+      this.$refs["Details"].show();
+    },
+
+    downloadPic(image_id) {
+      console.log("downloading");
+
+      let loader = this.$loading.show({
+        container: this.fullPage,
+        canCancel: true,
+        onCancel: this.onCancel,
+        color: "#e75c18",
+      });
+
+      axios
+        .get("business/download/media/" + this.url + "/" + image_id, {})
+        .then((response) => {
+          var fileURL = window.URL.createObjectURL(new Blob([response.data]));
+          var fileLink = document.createElement("a");
+
+          fileLink.href = fileURL;
+          fileLink.setAttribute("download", "file.jpg");
+          document.body.appendChild(fileLink);
+
+          fileLink.click();
+
+          this.flashMessage.show({
+            status: "success",
+
+            message: "Image Downloaded",
+          });
+
+          loader.hide();
+        })
+        .catch((err) => {
+          this.sending = false;
+
+          if (err.response.status == 422) {
+            console.log({ err: err });
+
+            this.flashMessage.show({
+              status: "error",
+
+              message: err.response.data.message,
+            });
+
+            loader.hide();
+          } else {
+            this.flashMessage.show({
+              status: "error",
+
+              message: "Unable to download ",
+            });
+            console.log({ err: err });
+
+            loader.hide();
+          }
+        });
+    },
+
+    deleteImage(image_id) {
+      console.log("deleting ----------");
+
+      let loader = this.$loading.show({
+        container: this.fullPage,
+        canCancel: true,
+        onCancel: this.onCancel,
+        color: "#e75c18",
+      });
+
+      axios
+        .post("business/delete/media/" + this.url + "/" + image_id, {
+          name: this.name,
+        })
+        .then((response) => {
+          console.log(response.data);
+
+          this.flashMessage.show({
+            status: "success",
+
+            message: "Album Deleted",
+          });
+
+          loader.hide();
+        })
+        .catch((err) => {
+          this.sending = false;
+
+          if (err.response.status == 422) {
+            console.log({ err: err });
+
+            this.flashMessage.show({
+              status: "error",
+
+              message: err.response.data.message,
+            });
+
+            loader.hide();
+          } else {
+            this.flashMessage.show({
+              status: "error",
+
+              message: "Unable to Delete your Image",
+            });
+            console.log({ err: err });
+
+            loader.hide();
+          }
+        });
+    },
+
+    //set an image as a cover photo
+
+    setCoverPic(image_id) {
+      let loader = this.$loading.show({
+        container: this.fullPage,
+        canCancel: true,
+        onCancel: this.onCancel,
+        color: "#e75c18",
+      });
+
+      axios
+        .post("business/make/coverpic/" + this.url + "/" + image_id, {
+          name: this.name,
+        })
+        .then((response) => {
+          console.log(response.data);
+
+          this.flashMessage.show({
+            status: "success",
+
+            message: "cover Picture succesfully set",
+          });
+
+          loader.hide();
+        })
+        .catch((err) => {
+          this.sending = false;
+
+          if (err.response.status == 422) {
+            console.log({ err: err });
+
+            this.flashMessage.show({
+              status: "error",
+
+              message: err.response.data.message,
+            });
+
+            loader.hide();
+          } else {
+            this.flashMessage.show({
+              status: "error",
+
+              message: "Unable to set your cover picture",
+            });
+            console.log({ err: err });
+
+            loader.hide();
+          }
+        });
+    },
+
+    //set image as profile pic
+
+    setProfilePic(image_id) {
+      let self = this;
+
+      let loader = this.$loading.show({
+        container: this.fullPage ? null : this.$refs.creatform,
+        canCancel: true,
+        onCancel: this.onCancel,
+        color: "#e75c18",
+      });
+
+      axios
+        .post("business/album/edit/" + this.url + "/" + self.album_id, {
+          name: this.name,
+        })
+        .then((response) => {
+          console.log(response.data);
+
+          this.flashMessage.show({
+            status: "success",
+
+            message: "Profile Picture set",
+          });
+
+          loader.hide();
+        })
+        .catch((err) => {
+          this.sending = false;
+
+          if (err.response.status == 422) {
+            console.log({ err: err });
+
+            this.flashMessage.show({
+              status: "error",
+
+              message: err.response.data.message,
+            });
+
+            loader.hide();
+          } else {
+            this.flashMessage.show({
+              status: "error",
+
+              message: "Unable to set your profile pic",
+            });
+            console.log({ err: err });
+
+            loader.hide();
+          }
+        });
+    },
+
+    submitPost() {
+      let loader = this.$loading.show({
+        container: this.fullPage ? null : this.$refs.preview,
+        canCancel: true,
+        onCancel: this.onCancel,
+        color: "#e75c18",
+      });
+
+      let formData = new FormData();
+      formData.append("media", this.profile_pic);
+
+      formData.append("dob", this.text);
+
+      this.axios
+        .post("business/store/media/" + this.url + "/" + this.album, formData, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        })
+        .then((response) => {
+          console.log(response);
+
+          this.flashMessage.show({
+            status: "success",
+
+            message: "Profile Updated",
+
+            blockClass: "custom-block-class",
+          });
+
+          loader.hide();
+          this.$refs["modalxl"].hide();
+        })
+
+        .catch((err) => {
+          console.log({ err: err });
+
+          if (err.response.status == 422) {
+            console.log({ err: err });
+
+            this.flashMessage.show({
+              status: "error",
+
+              message: err.response.data.message,
+              blockClass: "custom-block-class",
+            });
+
+            loader.hide();
+          } else {
+            this.flashMessage.show({
+              status: "error",
+
+              message: "Unable to upload your image",
+              blockClass: "custom-block-class",
+            });
+            console.log({ err: err });
+
+            loader.hide();
+          }
+        });
+    },
+    selectMoviesOutsidePost(e) {
+      this.profile_pic = e.target.files[0];
+      const file = e.target.files[0];
+      this.img_url = URL.createObjectURL(file);
+
+      console.log(this.img_url);
+
+      this.$refs["modalxl"].show();
+    },
+
+
   methods: {
     /**
      *
      * @param i
      */
+
     onClick(i) {
       this.index = i;
-    }
+    },
   },
+
+
+  mounted() {
+    this.url = this.$route.params.id;
+  },
+
+  props: ["album"],
+
+  watch: {
+    album: function (newVal) {
+      this.album_id = newVal;
+    },
+  },
+  data: function () {
+    return {
+      content: null,
+      show_url: null,
+      album_id: null,
+      url: null,
+      fullPage: null,
+      img_url: null,
+      profile_pic: null,
+      text: null,
+
   data: function() {
     return {
       images: [
@@ -322,7 +687,7 @@ export default {
         "https://placekitten.com/806/800",
         "https://placekitten.com/807/800",
         "https://placekitten.com/808/800",
-        "https://placekitten.com/809/800"
+        "https://placekitten.com/809/800",
       ],
       imagees: [
         "https://i.wifegeek.com/200426/f9459c52.jpg",
@@ -344,11 +709,11 @@ export default {
         "https://i.wifegeek.com/200426/177ef44c.jpg",
         "https://i.wifegeek.com/200426/d74d9040.jpg",
         "https://i.wifegeek.com/200426/81e24a47.jpg",
-        "https://i.wifegeek.com/200426/43e2e8bb.jpg"
+        "https://i.wifegeek.com/200426/43e2e8bb.jpg",
       ],
-      index: 0
+      index: 0,
     };
-  }
+  },
 };
 </script>
 
@@ -518,3 +883,62 @@ export default {
   color: #000;
 }
 </style>
+
+
+<style>
+.agile__dots {
+  bottom: 10px;
+  flex-direction: column;
+  right: 30px;
+  position: absolute;
+}
+.agile__dot {
+  margin: 5px 0;
+}
+.agile__dot button {
+  background-color: transparent;
+  border: 1px solid #fff;
+  cursor: pointer;
+  display: block;
+  height: 10px;
+  font-size: 0;
+  line-height: 0;
+  margin: 0;
+  padding: 0;
+  transition-duration: 0.3s;
+  width: 10px;
+}
+.agile__dot--current button,
+.agile__dot:hover button {
+  background-color: #fff;
+}
+
+.slide {
+  display: block;
+  height: auto;
+  -o-object-fit: cover;
+  object-fit: cover;
+  width: 100%;
+}
+
+.agile__nav-button {
+  background: transparent;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  font-size: 24px;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  transition-duration: 0.3s;
+  width: 80px;
+}
+
+.agile__nav-button--prev {
+  left: 0;
+}
+.agile__nav-button--next {
+  right: 0;
+}
+</style>
+

@@ -14,23 +14,11 @@
 
     <div
       v-if="first_page == 'true'"
-      class="container border mt-5 modal-lg p-welcome"     
+      class="container border mt-5 modal-lg p-welcome"
       id="modal-3"
       ref="modal-3"
     >
       <div>
-
-        
-
-   
-
-
-
-
-
-
-
-
         <h4 class="text-center username f-30">
           Hello <b> {{ username }} </b> let's get started
         </h4>

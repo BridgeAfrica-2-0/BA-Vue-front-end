@@ -17,10 +17,10 @@ export default {
   },
   actions: {
     getbdetails({ commit }) {
-        return axios.get("/business/details", {}).then(function({ data }) {
+      return axios.get("/business/details", {}).then(function({ data }) {
         commit("set_details", data.data);
         console.log(data);
       });
     }
-  },
+  }
 };

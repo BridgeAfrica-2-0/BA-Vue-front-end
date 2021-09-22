@@ -122,6 +122,10 @@ import "@/assets/css/bootstrap.css";
 Vue.use(BootstrapVue);
 Vue.use(IconsPlugin);
 
+import InfiniteLoading from 'vue-infinite-loading';
+
+Vue.use(InfiniteLoading, { /* options */ });
+
 Vue.use(VueGoogleMaps, {
     load: {
         key: "AIzaSyAGZU6cqra18t1fhN1AbzRsEc_pgt7n2C8",
@@ -161,7 +165,5 @@ new Vue({
         );
     },
 
-
-    render: (h) => h(App),
+  render: (h) => h(App),
 }).$mount("#app");
-

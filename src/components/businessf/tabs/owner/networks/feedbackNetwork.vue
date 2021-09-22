@@ -46,27 +46,19 @@
                 <b-col cols="10" md="11" class="pt-2">
                   <h5 class="m-0 font-weight-bolder  feedback-name ">
                     <b-link href="www.jackpot.com">
-                      {{ post.profileName }} Profile name
+                      {{ post.profileName }}
                     </b-link>
                   </h5>
-                  <p>{{ post.countDown }} 1h Ago</p>
+                  <p>{{ post.countDown }}</p>
                 </b-col>
               </b-row>
               <b-row>
                 <b-col cols="12" class="mt-2">
                   <p class="text-justify feedback-sent">
-                    Lorem Ipsum is simply dummy text of the printing and
-                    typesetting industry. Lorem Ipsum has been the industry's
-                    standard dummy text ever since the 1500s, Lorem Ipsum is
-                    simply dummy text of the printing and typesetting industry.
-                    Lorem Ipsum has been the industry's standard dummy text ever
-                    since the 1500s,
                     {{ post.postContent }}
                     <br />
                     <br />
-                    Lorem Ipsum is simply dummy text of the printing and
-                    typesetting industry. Lorem Ipsum has been the industry's
-                    standard dummy text ever since the 1500s,
+
                     {{ post.postContent }}
                   </p>
                 </b-col>

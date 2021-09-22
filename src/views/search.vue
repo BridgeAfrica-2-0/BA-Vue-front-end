@@ -529,12 +529,6 @@
               </h6>
 
               <Market />
-
-              <Market />
-
-              <Market />
-
-              <Market />
             </div>
 
             <!-- Filter out just the post  -->

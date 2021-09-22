@@ -45,34 +45,7 @@
       @change="changePage"
       align="center"
     ></b-pagination>
-    <!-- <b-row>
-      <b-col lg="2" class="pb-2">
-        <b-button class="pagination"
-          :disabled="products.previous ? false : true"
-          variant="primary"
-          @click="changePage(products.previous, 'prev')"
-        >
-          <b-spinner v-if="prodLoader" small></b-spinner>
-
-          <span v-else><b-icon icon="chevron-compact-left"></b-icon></span>
-        </b-button>
-      </b-col>
-
-      <b-col lg="2" class="pb-2">
-        <b-button class="pagination" variant="outline-primary">{{ page }}</b-button>
-      </b-col>
-      <b-col lg="2" class="pb-2">
-        <b-button class="pagination"
-          :disabled="products.next ? false : true"
-          variant="primary"
-          @click="changePage(products.next, 'next')"
-        >
-          <b-spinner v-if="prodLoader" small></b-spinner>
-
-          <span v-else><b-icon icon="chevron-compact-right"></b-icon></span>
-        </b-button>
-      </b-col>
-    </b-row> -->
+    
     <!-- End pagination -->
     <b-modal hide-footer title="Edit product">
       <b-form>

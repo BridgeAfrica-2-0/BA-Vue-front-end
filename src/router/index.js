@@ -132,7 +132,7 @@ const routes = [
     component: confirmPayment,
   },
   {
-    path: "/business_owner/network/:id",
+    path: "/business_owner/network/:id?",
     name: "networks",
     component: networks,
   },
@@ -178,7 +178,8 @@ const routes = [
   {
     path: "/businessfollower/:id?",
     name: "BusinessFollower",
-    component: businessFollower,
+
+    component: businessFollower
   },
   {
     path: "/businessvisitor",
@@ -227,7 +228,7 @@ const routes = [
     component: Visitor,
   },
   {
-    path: "/search",
+    path: "/search/:id",
     name: "Search",
     component: search,
   },

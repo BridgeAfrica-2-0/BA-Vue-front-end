@@ -1,12 +1,11 @@
 <template>
   <div>
-
-      
     <div class="row">
       <div class="container-fluid">
+
        
 
-
+      
     
 
 
@@ -33,121 +32,331 @@
 
 
         
-   
 
-  </div>
-     
-            
-           
-          </b-modal>
-
-         
-
-         
-      <div  v-for="pictures in pictures" :key="pictures.id"  >  
-
-        <div class="img-gall"  v-for="pic in pictures.media" :key="pic.id"   >
-
-        
-          <a 
+        <div class="img-gall">
+          <a href="#!"
             ><img
-              class="card-img btn p-0 album-img"
-             
-              :src="pic.media_ulr"
+              class="card-img btn p-0"
+              src="@/assets/img/m1.jpg"
               alt=""
-             @click="showPic(pictures.media, pictures.content )"
-          /></a>   
+              v-b-modal.modal-8
+          /></a>
 
+          <b-modal id="modal-8" title="Details">
+            <img class="card-img" src="@/assets/img/m1.jpg" alt="" />
+            <h4>Post Title</h4>
+            <p class="my-4">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum
+              quisquam sequi, ullam aliquam ab illo suscipit, earum quam,
+              doloribus id sit consequuntur tempora molestiae blanditiis.
+            </p>
+          </b-modal>
           <div class="mediadesc">
             <ul class="navbar-nav pull-right">
               <li class="nav-item dropdown m-0 p-0">
                 <b-dropdown
                   size="sm"
-                  class=" call-action"
+                  class="float-right"
                   variant="link"
                   toggle-class="text-decoration-none"
                   no-caret
                 >
                   <template #button-content>
-                    <b-icon
-                      icon="three-dots-vertical"
-                      color="white"
-                      variant="light"
-                    >
-                    </b-icon>
+                    <fas-icon
+                      class="drop-color font-weight-bolder"
+                      :icon="['fas', 'ellipsis-v']"
+                    />
                   </template>
-
-                  <b-dropdown-item @click="downloadPic(pictures.id)"
-                    >Download</b-dropdown-item
-                  >
-                    
-                 
-                  <b-dropdown-item  @click="downloadPic(pic.id)" >Download</b-dropdown-item>
-                  <b-dropdown-item   @click="setProfilePic(pic.id)"
+                  <b-dropdown-item href="#">Download</b-dropdown-item>
+                  <b-dropdown-item href="#"
                     >Make Profile Picture</b-dropdown-item
                   >
-                  <b-dropdown-item @click="setCoverPic(pic.id)" >Make Cover Photo</b-dropdown-item>
-                  <b-dropdown-item   @click="deleteImage(pic.id)" href="#">Delete</b-dropdown-item>
+                  <b-dropdown-item href="#">Make Cover Photo</b-dropdown-item>
+                  <b-dropdown-item href="#">Delete</b-dropdown-item>
+                </b-dropdown>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="img-gall">
+          <a href="#!"
+            ><img
+              class="card-img btn p-0"
+              src="@/assets/img/m2.jpg"
+              alt=""
 
+             @click="showPic(pictures.media, pictures.content )"
+          /></a>   </div>
+    <FlashMessage />
+    <div class="row">
+      <div class="container-fluid">
+        <b-modal hide-footer size="xl" id="Details" ref="Details">
+          <img class="card-img" :src="show_url" alt="" />
+        </b-modal>
+              v-b-modal.modal-a
+          /></a>
+
+          <b-modal id="modal-a" title="Details">
+            <img class="card-img" src="@/assets/img/m2.jpg" alt="" />
+            <h4>Post Title</h4>
+            <p class="my-4">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum
+              quisquam sequi, ullam aliquam ab illo suscipit, earum quam,
+              doloribus id sit consequuntur tempora molestiae blanditiis.
+            </p>
+          </b-modal>
+          <div class="mediadesc">
+            <ul class="navbar-nav pull-right">
+              <li class="nav-item dropdown">
+                <b-dropdown
+                  size="sm"
+                  class="float-right"
+                  variant="link"
+                  toggle-class="text-decoration-none"
+                  no-caret
+                >
+                  <template #button-content>
+                    <fas-icon
+                      class="drop-color font-weight-bolder"
+                      :icon="['fas', 'ellipsis-v']"
+                    />
+                  </template>
+                  <b-dropdown-item href="#">Download</b-dropdown-item>
+                  <b-dropdown-item href="#"
+                    >Make Profile Picture</b-dropdown-item
+                  >
+                  <b-dropdown-item href="#">Make Cover Photo</b-dropdown-item>
+                  <b-dropdown-item href="#">Delete</b-dropdown-item>
                 </b-dropdown>
               </li>
             </ul>
           </div>
         </div>
 
+
+        <div class="img-gall">
+          <a href="#!"
+            ><img
+              class="card-img btn p-0"
+              src="@/assets/img/m3.jpg"
+              alt=""
+              v-b-modal.modal-b
+          /></a>
+
+          <b-modal id="modal-b" title="Details">
+            <img class="card-img" src="@/assets/img/m3.jpg" alt="" />
+            <h4>Post Title</h4>
+            <p class="my-4">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum
+              quisquam sequi, ullam aliquam ab illo suscipit, earum quam,
+              doloribus id sit consequuntur tempora molestiae blanditiis.
+            </p>
+          </b-modal>
+          <div class="mediadesc">
+            <ul class="navbar-nav pull-right">
+              <li class="nav-item dropdown">
+                <b-dropdown
+                  size="sm"
+                  class="float-right"
+                  variant="link"
+                  toggle-class="text-decoration-none"
+                  no-caret
+                >
+                  <template #button-content>
+                    <fas-icon
+                      class="drop-color font-weight-bolder"
+                      :icon="['fas', 'ellipsis-v']"
+                    />
+                  </template>
+                  <b-dropdown-item href="#">Download</b-dropdown-item>
+                  <b-dropdown-item href="#"
+                    >Make Profile Picture</b-dropdown-item
+                  >
+                  <b-dropdown-item href="#">Make Cover Photo</b-dropdown-item>
+                  <b-dropdown-item href="#">Delete</b-dropdown-item>
+                </b-dropdown>
+              </li>
+            </ul>
+          </div>
         </div>
-        
+        <div class="img-gall">
+          <a href="#!"
+            ><img class="card-img" src="@/assets/img/m4.jpg" alt=""
+          /></a>
+          <div class="mediadesc">
+            <ul class="navbar-nav pull-right">
+              <li class="nav-item dropdown">
+                <b-dropdown
+                  size="sm"
+                  class="float-right"
+                  variant="link"
+                  toggle-class="text-decoration-none"
+                  no-caret
+                >
+                  <template #button-content>
+                    <fas-icon
+                      class="drop-color font-weight-bolder"
+                      :icon="['fas', 'ellipsis-v']"
+                    />
+                  </template>
+                  <b-dropdown-item href="#">Download</b-dropdown-item>
+                  <b-dropdown-item href="#"
+                    >Make Profile Picture</b-dropdown-item
+                  >
+                  <b-dropdown-item href="#">Make Cover Photo</b-dropdown-item>
+                  <b-dropdown-item href="#">Delete</b-dropdown-item>
+                </b-dropdown>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="img-gall">
+          <a href="#!"
+            ><img class="card-img" src="@/assets/img/m5.jpg" alt=""
+          /></a>
+          <div class="mediadesc">
+            <ul class="navbar-nav pull-right">
+              <li class="nav-item dropdown">
+                <b-dropdown
+                  size="sm"
+                  class="float-right"
+                  variant="link"
+                  toggle-class="text-decoration-none"
+                  no-caret
+                >
+                  <template #button-content>
+                    <fas-icon
+                      class="drop-color font-weight-bolder"
+                      :icon="['fas', 'ellipsis-v']"
+                    />
+                  </template>
+                  <b-dropdown-item href="#">Download</b-dropdown-item>
+                  <b-dropdown-item href="#"
+                    >Make Profile Picture</b-dropdown-item
+                  >
+                  <b-dropdown-item href="#">Make Cover Photo</b-dropdown-item>
+                  <b-dropdown-item href="#">Delete</b-dropdown-item>
+                </b-dropdown>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="img-gall">
+          <a href="#!"
+            ><img class="card-img" src="@/assets/img/m6.jpg" alt=""
+          /></a>
+          <div class="mediadesc">
+            <ul class="navbar-nav pull-right">
+              <li class="nav-item dropdown">
+                <b-dropdown
+                  size="sm"
+                  class="float-right"
+                  variant="link"
+                  toggle-class="text-decoration-none"
+                  no-caret
+                >
+                  <template #button-content>
+                    <fas-icon
+                      class="drop-color font-weight-bolder"
+                      :icon="['fas', 'ellipsis-v']"
+                    />
+                  </template>
+                  <b-dropdown-item href="#">Download</b-dropdown-item>
+                  <b-dropdown-item href="#"
+                    >Make Profile Picture</b-dropdown-item
+                  >
+                  <b-dropdown-item href="#">Make Cover Photo</b-dropdown-item>
+                  <b-dropdown-item href="#">Delete</b-dropdown-item>
+                </b-dropdown>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="img-gall">
+          <a href="#!"
+            ><img class="card-img" src="@/assets/img/m7.jpg" alt=""
+          /></a>
+          <div class="mediadesc">
+            <ul class="navbar-nav pull-right">
+              <li class="nav-item dropdown">
+                <b-dropdown
+                  size="sm"
+                  class="float-right"
+                  variant="link"
+                  toggle-class="text-decoration-none"
+                  no-caret
+                >
+                  <template #button-content>
+                    <fas-icon
+                      class="drop-color font-weight-bolder"
+                      :icon="['fas', 'ellipsis-v']"
+                    />
+                  </template>
+                  <b-dropdown-item href="#">Download</b-dropdown-item>
+                  <b-dropdown-item href="#"
+                    >Make Profile Picture</b-dropdown-item
+                  >
+                  <b-dropdown-item href="#">Make Cover Photo</b-dropdown-item>
+                  <b-dropdown-item href="#">Delete</b-dropdown-item>
+                </b-dropdown>
+              </li>
+            </ul>
+          </div>
+        </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
+        <div class="img-gall">
+          <a href="#!"
+            ><img class="card-img" src="@/assets/img/m8.jpg" alt=""
+          /></a>
+          <div class="mediadesc">
+            <ul class="navbar-nav pull-right">
+              <li class="nav-item dropdown">
+                <b-dropdown
+                  size="sm"
+                  class="float-right"
+                  variant="link"
+                  toggle-class="text-decoration-none"
+                  no-caret
+                >
+                  <template #button-content>
+                    <fas-icon
+                      class="drop-color font-weight-bolder"
+                      :icon="['fas', 'ellipsis-v']"
+                    />
+                  </template>
+                  <b-dropdown-item href="#">Download</b-dropdown-item>
+                  <b-dropdown-item href="#"
+                    >Make Profile Picture</b-dropdown-item
+                  >
+                  <b-dropdown-item href="#">Make Cover Photo</b-dropdown-item>
+                  <b-dropdown-item href="#">Delete</b-dropdown-item>
+                </b-dropdown>
+              </li>
+            </ul>
+          </div>
+        </div>
       </div>
     </div>
   </div>
+      </div></div></div>
 </template>
 
 <script>
-import axios from "axios";
 export default {
   components: {},
 
+
   computed: {
     pictures() {
-      return this.$store.state.businessOwner.ownerPostImages;  
+      return this.$store.state.businessOwner.albumImages;
     },
   },
 
   methods: {
-
-
-
-   
-
-
-    showPic(img, content){
-      
-       console.log(img);
-       this.content=content;
-         this.show_url=img;
-         this.$refs["Details"].show();
-
+    showPic(url) {
+      console.log(url);
+      this.show_url = url;
+      this.$refs["Details"].show();
     },
 
     downloadPic(image_id) {
@@ -157,12 +366,12 @@ export default {
         container: this.fullPage,
         canCancel: true,
         onCancel: this.onCancel,
-        color: "#e75c18"
+        color: "#e75c18",
       });
 
       axios
         .get("business/download/media/" + this.url + "/" + image_id, {})
-        .then(response => {
+        .then((response) => {
           var fileURL = window.URL.createObjectURL(new Blob([response.data]));
           var fileLink = document.createElement("a");
 
@@ -175,12 +384,12 @@ export default {
           this.flashMessage.show({
             status: "success",
 
-            message: "Image Downloaded"
+            message: "Image Downloaded",
           });
 
           loader.hide();
         })
-        .catch(err => {
+        .catch((err) => {
           this.sending = false;
 
           if (err.response.status == 422) {
@@ -189,7 +398,7 @@ export default {
             this.flashMessage.show({
               status: "error",
 
-              message: err.response.data.message
+              message: err.response.data.message,
             });
 
             loader.hide();
@@ -197,7 +406,7 @@ export default {
             this.flashMessage.show({
               status: "error",
 
-              message: "Unable to download "
+              message: "Unable to download ",
             });
             console.log({ err: err });
 
@@ -213,25 +422,25 @@ export default {
         container: this.fullPage,
         canCancel: true,
         onCancel: this.onCancel,
-        color: "#e75c18"
+        color: "#e75c18",
       });
 
       axios
         .post("business/delete/media/" + this.url + "/" + image_id, {
-          name: this.name
+          name: this.name,
         })
-        .then(response => {
+        .then((response) => {
           console.log(response.data);
 
           this.flashMessage.show({
             status: "success",
 
-            message: "Album Deleted"
+            message: "Album Deleted",
           });
 
           loader.hide();
         })
-        .catch(err => {
+        .catch((err) => {
           this.sending = false;
 
           if (err.response.status == 422) {
@@ -240,7 +449,7 @@ export default {
             this.flashMessage.show({
               status: "error",
 
-              message: err.response.data.message
+              message: err.response.data.message,
             });
 
             loader.hide();
@@ -248,7 +457,7 @@ export default {
             this.flashMessage.show({
               status: "error",
 
-              message: "Unable to Delete your Image"
+              message: "Unable to Delete your Image",
             });
             console.log({ err: err });
 
@@ -264,25 +473,25 @@ export default {
         container: this.fullPage,
         canCancel: true,
         onCancel: this.onCancel,
-        color: "#e75c18"
+        color: "#e75c18",
       });
 
       axios
         .post("business/make/coverpic/" + this.url + "/" + image_id, {
-          name: this.name
+          name: this.name,
         })
-        .then(response => {
+        .then((response) => {
           console.log(response.data);
 
           this.flashMessage.show({
             status: "success",
 
-            message: "cover Picture succesfully set"
+            message: "cover Picture succesfully set",
           });
 
           loader.hide();
         })
-        .catch(err => {
+        .catch((err) => {
           this.sending = false;
 
           if (err.response.status == 422) {
@@ -291,7 +500,7 @@ export default {
             this.flashMessage.show({
               status: "error",
 
-              message: err.response.data.message
+              message: err.response.data.message,
             });
 
             loader.hide();
@@ -299,7 +508,7 @@ export default {
             this.flashMessage.show({
               status: "error",
 
-              message: "Unable to set your cover picture"
+              message: "Unable to set your cover picture",
             });
             console.log({ err: err });
 
@@ -317,25 +526,25 @@ export default {
         container: this.fullPage ? null : this.$refs.creatform,
         canCancel: true,
         onCancel: this.onCancel,
-        color: "#e75c18"
+        color: "#e75c18",
       });
 
       axios
         .post("business/album/edit/" + this.url + "/" + self.album_id, {
-          name: this.name
+          name: this.name,
         })
-        .then(response => {
+        .then((response) => {
           console.log(response.data);
 
           this.flashMessage.show({
             status: "success",
 
-            message: "Profile Picture set"
+            message: "Profile Picture set",
           });
 
           loader.hide();
         })
-        .catch(err => {
+        .catch((err) => {
           this.sending = false;
 
           if (err.response.status == 422) {
@@ -344,7 +553,7 @@ export default {
             this.flashMessage.show({
               status: "error",
 
-              message: err.response.data.message
+              message: err.response.data.message,
             });
 
             loader.hide();
@@ -352,7 +561,7 @@ export default {
             this.flashMessage.show({
               status: "error",
 
-              message: "Unable to set your profile pic"
+              message: "Unable to set your profile pic",
             });
             console.log({ err: err });
 
@@ -366,7 +575,7 @@ export default {
         container: this.fullPage ? null : this.$refs.preview,
         canCancel: true,
         onCancel: this.onCancel,
-        color: "#e75c18"
+        color: "#e75c18",
       });
 
       let formData = new FormData();
@@ -377,10 +586,10 @@ export default {
       this.axios
         .post("business/store/media/" + this.url + "/" + this.album, formData, {
           headers: {
-            "Content-Type": "multipart/form-data"
-          }
+            "Content-Type": "multipart/form-data",
+          },
         })
-        .then(response => {
+        .then((response) => {
           console.log(response);
 
           this.flashMessage.show({
@@ -388,14 +597,14 @@ export default {
 
             message: "Profile Updated",
 
-            blockClass: "custom-block-class"
+            blockClass: "custom-block-class",
           });
 
           loader.hide();
           this.$refs["modalxl"].hide();
         })
 
-        .catch(err => {
+        .catch((err) => {
           console.log({ err: err });
 
           if (err.response.status == 422) {
@@ -405,7 +614,7 @@ export default {
               status: "error",
 
               message: err.response.data.message,
-              blockClass: "custom-block-class"
+              blockClass: "custom-block-class",
             });
 
             loader.hide();
@@ -414,7 +623,7 @@ export default {
               status: "error",
 
               message: "Unable to upload your image",
-              blockClass: "custom-block-class"
+              blockClass: "custom-block-class",
             });
             console.log({ err: err });
 
@@ -432,10 +641,18 @@ export default {
       this.$refs["modalxl"].show();
     },
 
+
+  methods: {
+    /**
+     *
+     * @param i
+     */
+
     onClick(i) {
       this.index = i;
-    }
+    },
   },
+
 
   mounted() {
     this.url = this.$route.params.id;
@@ -444,20 +661,23 @@ export default {
   props: ["album"],
 
   watch: {
-    album: function(newVal) {
+    album: function (newVal) {
       this.album_id = newVal;
-    }
+    },
   },
-  data: function() {
+  data: function () {
     return {
-      content:null,  
-      show_url:null,
-      album_id:null,
-      url:null,
-      fullPage:null,
+      content: null,
+      show_url: null,
+      album_id: null,
+      url: null,
+      fullPage: null,
       img_url: null,
       profile_pic: null,
       text: null,
+
+  data: function() {
+    return {
       images: [
         "https://placekitten.com/801/800",
         "https://placekitten.com/802/800",
@@ -467,7 +687,7 @@ export default {
         "https://placekitten.com/806/800",
         "https://placekitten.com/807/800",
         "https://placekitten.com/808/800",
-        "https://placekitten.com/809/800"
+        "https://placekitten.com/809/800",
       ],
       imagees: [
         "https://i.wifegeek.com/200426/f9459c52.jpg",
@@ -489,24 +709,15 @@ export default {
         "https://i.wifegeek.com/200426/177ef44c.jpg",
         "https://i.wifegeek.com/200426/d74d9040.jpg",
         "https://i.wifegeek.com/200426/81e24a47.jpg",
-        "https://i.wifegeek.com/200426/43e2e8bb.jpg"
+        "https://i.wifegeek.com/200426/43e2e8bb.jpg",
       ],
-      index: 0
+      index: 0,
     };
-  }
+  },
 };
 </script>
 
-<style scoped>
-.call-action {
-  border-radius: 50%;
-  background: gray;
-  height: 30px !important;
-  width: 30px !important;
-  font-weight: 50px !important;
-  text-align: center;
-  padding-right: 35px !important;
-}
+<style>
 .text-design {
   align-items: first baseline;
 }
@@ -515,24 +726,7 @@ export default {
   color: black;
 }
 
-.botmediadess {
-  text-align: center;
-  bottom: -5%;
-  width: 100%;
-  font-size: 20px;
-}
-
 @media (min-width: 960px) {
-  .album-img {
-    height: 300px !important;
-    object-fit: cover !important;
-  }
-
-  .drag-textt {
-    height: 290px !important;
-    padding-top: 95px;
-  }
-
   .img-gall {
     background-size: contain;
     cursor: pointer;
@@ -540,14 +734,14 @@ export default {
     border-radius: 3px;
   }
 
-  .image-wrapp {
+  .image-wrap {
     border: 4px dashed #e75c18;
     position: relative;
 
     position: relative;
     margin: 5px;
     float: left;
-
+    width: 46.5%;
     transition-duration: 0.4s;
     border-radius: 5px;
     -webkit-animation: winanim 0.5s;
@@ -589,14 +783,14 @@ export default {
     backface-visibility: visible;
   }
 
-  .image-wrapp {
+  .image-wrap {
     border: 4px dashed #e75c18;
     position: relative;
 
     position: relative;
     margin: 5px;
     float: left;
-
+    width: 46.5%;
     transition-duration: 0.4s;
     border-radius: 5px;
     -webkit-animation: winanim 0.5s;
@@ -607,16 +801,6 @@ export default {
 }
 
 @media only screen and (min-width: 768px) and (max-width: 1331px) {
-  .album-img {
-    height: 300px !important;
-    object-fit: cover !important;
-  }
-
-  .drag-textt {
-    height: 290px !important;
-    padding-top: 95px;
-  }
-
   .img-gall {
     background-size: contain;
     cursor: pointer;
@@ -637,14 +821,14 @@ export default {
     backface-visibility: visible;
   }
 
-  .image-wrapp {
+  .image-wrap {
     border: 4px dashed #e75c18;
     position: relative;
 
     position: relative;
     margin: 5px;
     float: left;
-
+    width: 46.5%;
     transition-duration: 0.4s;
     border-radius: 5px;
     -webkit-animation: winanim 0.5s;
@@ -655,16 +839,6 @@ export default {
 }
 
 @media (max-width: 762px) {
-  .album-img {
-    height: 200px !important;
-    object-fit: cover !important;
-  }
-
-  .drag-textt {
-    height: 190px !important;
-    padding-top: 55px;
-  }
-
   .img-gall {
     background-size: contain;
     cursor: pointer;
@@ -685,14 +859,14 @@ export default {
     backface-visibility: visible;
   }
 
-  .image-wrapp {
+  .image-wrap {
     border: 4px dashed #e75c18;
     position: relative;
 
     position: relative;
     margin: 5px;
     float: left;
-
+    width: 46.5%;
     transition-duration: 0.4s;
     border-radius: 5px;
     -webkit-animation: winanim 0.5s;
@@ -710,9 +884,8 @@ export default {
 }
 </style>
 
-<style>   
 
-
+<style>
 .agile__dots {
   bottom: 10px;
   flex-direction: column;
@@ -735,7 +908,8 @@ export default {
   transition-duration: 0.3s;
   width: 10px;
 }
-.agile__dot--current button, .agile__dot:hover button {
+.agile__dot--current button,
+.agile__dot:hover button {
   background-color: #fff;
 }
 
@@ -743,11 +917,9 @@ export default {
   display: block;
   height: auto;
   -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
   width: 100%;
 }
-
-
 
 .agile__nav-button {
   background: transparent;
@@ -768,5 +940,5 @@ export default {
 .agile__nav-button--next {
   right: 0;
 }
-
 </style>
+

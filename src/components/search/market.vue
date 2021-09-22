@@ -36,14 +36,16 @@
       </b-row>
     </div>
     <!-- pagination -->
-    <!-- <b-pagination
-      v-model="page"
-      :total-rows="28"
-      :per-page="10"
+
+    <b-pagination
+      v-model="currentPage"
+      :total-rows="total"
+      :per-page="per_page"
       aria-controls="my-table"
-      @click="changePage"
-    ></b-pagination> -->
-    <b-row>
+      @change="changePage"
+      align="center"
+    ></b-pagination>
+    <!-- <b-row>
       <b-col lg="2" class="pb-2">
         <b-button class="pagination"
           :disabled="products.previous ? false : true"
@@ -70,7 +72,7 @@
           <span v-else><b-icon icon="chevron-compact-right"></b-icon></span>
         </b-button>
       </b-col>
-    </b-row>
+    </b-row> -->
     <!-- End pagination -->
     <b-modal hide-footer title="Edit product">
       <b-form>
@@ -437,8 +439,10 @@ export default {
     return {
       viewProduct: false,
       prodLoader: false,
+      total:0,
+      per_page:10,
       list: [],
-      page: 1,
+      currentPage: 1,
       nextLoad: false,
     };
   },
@@ -452,35 +456,15 @@ export default {
       this.getProducts();
     }
   },
-  // mounted() {
-  //   this.getProducts();
-  // },
 
   methods: {
-    // productDetails() {
-    //   this.viewProduct = true;
-    //   // console.log(this.products);
-    // },
-    changePage(pageUrl, type) {
+    changePage(value) {
       this.$store.commit("setProducts", []);
       this.prodLoader = true;
-      console.log(pageUrl);
-
-      const myArr = pageUrl.split("=");
-      let nextPage = Number(myArr[1]);
-      this.page =
-        type == "next"
-          ? nextPage === 2
-            ? 1
-            : nextPage - 1
-          : nextPage === 2
-          ? 1
-          : nextPage + 1;
-
-      console.log(nextPage);
+      this.currentPage = value;
 
       this.$store
-        .dispatch("market/nextPage", nextPage)
+        .dispatch("market/nextPage", this.currentPage)
         .then((res) => {
           console.log("products list: ");
           console.log(this.products);
@@ -503,7 +487,7 @@ export default {
           console.log("products list: ");
           console.log(this.products);
           this.prodLoader = false;
-          // console.log("loader: ", this.prodLoader);
+          this.total = this.products.total
         })
         .catch((err) => {
           this.prodLoader = false;
@@ -517,7 +501,6 @@ export default {
 </script>
 
 <style scoped>
-
 /* ED css */
 button.pagination {
   width: 50px;

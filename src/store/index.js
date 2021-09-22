@@ -10,7 +10,9 @@ import dashboardcommunity from "./dashboardcommunity";
 
 import axios from "axios";
 Vue.use(Vuex);
-axios.defaults.baseURL = process.env.VUE_APP_API_URL;
+// axios.defaults.baseURL = process.env.VUE_APP_API_URL;
+axios.defaults.baseURL = process.env.VUE_APP_API_URL_DEV;
+
 export default new Vuex.Store({
     modules: {
         auth,
@@ -18,8 +20,7 @@ export default new Vuex.Store({
         dashboardcommunity,
         ProfileAndBusinessDetails,
         businessOwner,
-        market,
-
+        market
     },
 
     state,
@@ -61,8 +62,6 @@ export default new Vuex.Store({
     actions,
     mutations
 });
-
-
 
 const getDefaultState = () => {
     return {
@@ -1571,4 +1570,4 @@ const mutations = {
     retrievePostsListUser(state, payload) {
         state.userData[0].posts = payload.posts;
     }
-}
+};

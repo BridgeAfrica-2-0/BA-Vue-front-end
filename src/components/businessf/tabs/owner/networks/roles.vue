@@ -1,5 +1,6 @@
 <template>
   <b-container>
+    <flashMessage />
     <h5 class="a-text">Assign Role</h5>
 
     <b-container class="b-bottom">
@@ -12,9 +13,15 @@
             label-class="font-weight-bold pt-0"
             class="mb-0"
           >
-            <b-form-select >
-              <b-form-select-option :value="null">Admin</b-form-select-option>
-              <b-form-select-option value="a">User</b-form-select-option>
+            <b-form-select
+              id="follower"
+              v-model="form.user_id"
+              :options="followers"
+              name="user"
+              value-field="id"
+              text-field="name"
+              class="mb-3"
+            >
             </b-form-select>
           </b-form-group>
         </b-col>
@@ -27,15 +34,23 @@
             label-class="font-weight-bold pt-0"
             class="mb-0"
           >
-            <b-form-select class="mb-3">
-              <b-form-select-option :value="null">Admin</b-form-select-option>
-              <b-form-select-option value="a">User</b-form-select-option>
+            <b-form-select
+              id="role"
+              v-model="form.role_id"
+              :options="roles"
+              name="role"
+              value-field="id"
+              text-field="name"
+              class="mb-3"
+            >
             </b-form-select>
           </b-form-group>
         </b-col>
 
         <b-col>
-          <b-button variant="primary" class="assign-btn">Assign</b-button>
+          <b-button variant="primary" class="assign-btn" @click="assignRole()"
+            >Assign</b-button
+          >
         </b-col>
       </b-row>
 
@@ -54,11 +69,11 @@
 
     <div class="b-bottom">
       <b-container>
-        <h5 class="a-text">Existing Admins</h5>
-        <span>
+        <h5 class="a-text">Existing Editors</h5>
+        <span v-for="editor in editors" :key="editor.id">
           <span class="d-flex align-items-center m-list">
-            <b-avatar class="mr-3 profile-pic"   ></b-avatar>
-            <span class="mr-auto username">J. Circlehead</span>
+            <b-avatar class="mr-3 profile-pic" :src="editor.picture"></b-avatar>
+            <span class="mr-auto username">{{ editor.name }}</span>
             <span>
               <div>
                 <b-dropdown
@@ -68,44 +83,21 @@
                   no-caret
                 >
                   <template #button-content>
-                    <b-icon
-                      icon="three-dots-vertical"
-                    
-                      font-scale="1"
-                    ></b-icon>
+                    <b-icon icon="three-dots-vertical" font-scale="1"></b-icon>
                   </template>
-                  <b-dropdown-item href="#">Edit</b-dropdown-item>
-                  <b-dropdown-item href="#"> Delete </b-dropdown-item>
-                </b-dropdown>
-              </div>
-            </span>
-          </span>
-
-          <span class="d-flex align-items-center">
-            <b-avatar
-              variant="primary"
-              text="BV"
-              class="mr-3 profile-pic"
-            
-            ></b-avatar>
-            <span class="mr-auto">itz blec blec</span>
-            <span>
-              <div>
-                <b-dropdown
-                  size="lg"
-                  variant="link"
-                  toggle-class="text-decoration-none"
-                  no-caret
-                >
-                  <template #button-content>
-                    <b-icon
-                      icon="three-dots-vertical"
-                     
-                      font-scale="1"
-                    ></b-icon>
-                  </template>
-                  <b-dropdown-item href="#">Edit</b-dropdown-item>
-                  <b-dropdown-item href="#"> Delete </b-dropdown-item>
+                  <b-dropdown-item
+                    href="#"
+                    @click="$bvModal.show('edit-editor'), selectObject(editor)"
+                    >Edit</b-dropdown-item
+                  >
+                  <b-dropdown-item
+                    href="#"
+                    @click="
+                      $bvModal.show('delete-editor'), selectObject(editor)
+                    "
+                  >
+                    Delete
+                  </b-dropdown-item>
                 </b-dropdown>
               </div>
             </span>
@@ -114,73 +106,192 @@
       </b-container>
     </div>
 
-    <div class="b-bottom">
-      <b-container>
-        <h5 class="a-text">Existing Editors</h5>
-        <span>
-          <span class="d-flex align-items-center m-list">
-            <b-avatar class="mr-3 profile-pic"   ></b-avatar>
-            <span class="mr-auto username">J. Circlehead</span>
-            <span>
-              <div>
-                <b-dropdown
-                  size="lg"
-                  variant="link"
-                  toggle-class="text-decoration-none"
-                  no-caret
-                >
-                  <template #button-content>
-                    <b-icon
-                      icon="three-dots-vertical"
-                    
-                      font-scale="1"
-                    ></b-icon>
-                  </template>
-                  <b-dropdown-item href="#">Edit</b-dropdown-item>
-                  <b-dropdown-item href="#"> Delete </b-dropdown-item>
-                </b-dropdown>
-              </div>
-            </span>
-          </span>
+    <div>
+      <b-modal id="edit-editor" hide-footer>
+        <template #modal-title>
+          EDIT EDITOR: {{ clickedObject.name }}
+        </template>
+        <div class="d-block text-center">
+          <b-form-group
+            label-cols-lg="3"
+            label="Role"
+            label-size="md"
+            label-class="font-weight-bold pt-0"
+            class="mb-0"
+          >
+            <b-form-select
+              id="role"
+              v-model="form.role_id"
+              :options="roles"
+              name="role"
+              value-field="id"
+              text-field="name"
+              class="mb-3"
+            >
+            </b-form-select>
+          </b-form-group>
+        </div>
+        <b-button
+          class="mt-3"
+          block
+          variant="primary"
+          @click="editEditor(clickedObject)"
+          >EDIT</b-button
+        >
+      </b-modal>
 
-          <span class="d-flex align-items-center">
-            <b-avatar
-              variant="primary"
-              text="BV"
-              class="mr-3 profile-pic"
-           
-            ></b-avatar>
-            <span class="mr-auto username">itz blec blec</span>
-            <span>
-              <div>
-                <b-dropdown
-                  size="lg"
-                  variant="link"
-                  toggle-class="text-decoration-none"
-                  no-caret
-                >
-                  <template #button-content>
-                    <b-icon
-                      icon="three-dots-vertical"
-                    
-                      font-scale="1"
-                    ></b-icon>
-                  </template>
-                  <b-dropdown-item href="#">Edit</b-dropdown-item>
-                  <b-dropdown-item href="#"> Delete </b-dropdown-item>
-                </b-dropdown>
-              </div>
-            </span>
-          </span>
-        </span>
-      </b-container>
+      <b-modal id="delete-editor" hide-footer>
+        <template #modal-title> !!! <code>WARRING</code> !!! </template>
+        <div class="d-block text-center">
+          <h3>You Are About To Delete: {{ clickedObject.name }}!</h3>
+        </div>
+        <b-button class="mt-3" block @click="deleteEditor(clickedObject)"
+          >Delete</b-button
+        >
+      </b-modal>
     </div>
   </b-container>
 </template>
 
 <script>
 export default {
-  name: "roles"
+  name: "roles",
+  data() {
+    return {
+      url: this.$route.params.id,
+      clickedObject: {},
+      form: {
+        user_id: "",
+        role_id: "",
+        follower: ""
+      }
+    };
+  },
+  computed: {
+    followers() {
+      return this.$store.state.NetworkSettings.followers;
+    },
+    roles() {
+      return this.$store.state.NetworkSettings.roles;
+    },
+    editors() {
+      return this.$store.state.NetworkSettings.editors;
+    }
+  },
+
+  mounted() {
+    this.getFollowers();
+    this.getRoles();
+    this.displayEditor();
+  },
+  methods: {
+    getFollowers() {
+      this.$store
+        .dispatch("NetworkSettings/getfollowers")
+        .then(() => {
+          console.log("ohh yeah");
+        })
+        .catch(err => {
+          console.log({ err: err });
+        });
+    },
+    getRoles() {
+      this.$store
+        .dispatch("NetworkSettings/getroles")
+        .then(() => {
+          console.log("ohh yeah");
+        })
+        .catch(err => {
+          console.log({ err: err });
+        });
+    },
+    displayEditor() {
+      this.$store
+        .dispatch("NetworkSettings/geteditors")
+        .then(() => {
+          console.log("ohh yeah");
+        })
+        .catch(err => {
+          console.log({ err: err });
+        });
+    },
+    editEditor: function(clickedObject) {
+      this.$bvModal.hide("edit-editor");
+      let formData = new FormData();
+      formData.append("user_id", clickedObject.user_id);
+      formData.append("role_id", this.form.role_id);
+      this.axios
+        .post("/network/roles/" + this.url + "/assign", formData)
+        .then(() => {
+          this.displayEditor();
+          console.log("ohh yeah");
+          this.flashMessage.show({
+            status: "success",
+            message: "New Role Assigned"
+          });
+        })
+        .catch(err => {
+          console.log({ err: err });
+          this.flashMessage.show({
+            status: "error",
+            message: "Unable to Assigned New Role"
+          });
+        });
+    },
+    assignRole: function() {
+      console.log(this.url);
+      console.log(this.form);
+      this.axios
+        .post("/network/assignRole/" + this.url, this.form)
+        .then(() => {
+          this.displayEditor();
+          console.log("ohh yeah");
+          this.flashMessage.show({
+            status: "success",
+            message: "New Role Assigned"
+          });
+        })
+        .catch(err => {
+          console.log({ err: err });
+          this.flashMessage.show({
+            status: "error",
+            message: "Unable to Assigned New Role"
+          });
+        });
+    },
+    deleteEditor: function(editor) {
+      this.$bvModal.hide("delete-editor");
+      var formData = this.toFormData(editor);
+      this.axios
+        .delete("/network/roles/" + this.editor.user_id)
+        .then(() => {
+          this.displayEditor();
+          console.log("ohh yeah");
+          this.flashMessage.show({
+            status: "success",
+            message: "Editor Deleted"
+          });
+        })
+        .catch(err => {
+          console.log({ err: err });
+          this.flashMessage.show({
+            status: "error",
+            message: "Unable To Delete Editor"
+          });
+        });
+    },
+
+    toFormData: function(obj) {
+      var form_data = new FormData();
+      for (var key in obj) {
+        form_data.append(key, obj[key]);
+      }
+      return form_data;
+    },
+    selectObject(object) {
+      this.clickedObject = object;
+    }
+  }
 };
 </script>
 
@@ -208,7 +319,6 @@ export default {
 }
 
 .a-button-l {
-  align-content: right;
   float: right;
 }
 .a-text {
@@ -228,9 +338,8 @@ export default {
     left: -20px;
   }
 
-
-  .assign-btn{
-    margin-top:30px
+  .assign-btn {
+    margin-top: 30px;
   }
 }
 </style>

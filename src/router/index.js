@@ -55,14 +55,14 @@ const routes = [
     name: "home",
     component: dashboard,
     meta: {
-      auth: true
-    }
+      auth: true,
+    },
   },
 
   {
     path: "/market",
     name: "market",
-    component: market
+    component: market,
   },
 
   {
@@ -70,14 +70,14 @@ const routes = [
     name: "welcome",
     component: welcome,
     meta: {
-      auth: true
-    }
+      auth: true,
+    },
   },
 
   {
     path: "/settings",
     name: "settings",
-    component: settings
+    component: settings,
   },
 
   {
@@ -85,103 +85,106 @@ const routes = [
     name: "dashboard",
     component: dashboard,
     meta: {
-     // auth: true
-    }
+      // auth: true
+    },
   },
 
   {
     path: "/profile_owner",
     name: "profile_owner",
-    component: profile_owner
+    component: profile_owner,
   },
   {
     path: "/template_viewer",
     name: "templateViewer",
-    component: templateView
+    component: templateView,
   },
   {
     path: "/business_owner/:id?",
     name: "BusinessOwner",
-    component: businessOwner
+    component: businessOwner,
   },
-
-  
-
 
   {
     path: "/business_owner_setting_general",
     name: "businessOwnerSettingGeneral",
-    component: businessOwnerSettingGeneral
+    component: businessOwnerSettingGeneral,
   },
 
   {
     path: "/business_owner/create_website_step_one",
     name: "createWebSite",
-    component: webSiteCreate
+    component: webSiteCreate,
   },
   {
     path: "/business_owner/create_website_step_two",
     name: "createWebSiteTwo",
-    component: webSiteCreateTwo
+    component: webSiteCreateTwo,
   },
   {
     path: "/business_owner/create_website_plan",
     name: "payPlan",
-    component: paidPlan
+    component: paidPlan,
   },
   {
     path: "/business_owner/create_website_confirm_payment",
     name: "confirmPayment",
-    component: confirmPayment
+    component: confirmPayment,
   },
   {
-    path: "/business_owner/network",
+    path: "/business_owner/network/:id?",
     name: "networks",
-    component: networks
+    component: networks,
+  },
+  {
+    path: "/networks",
+    name: "networks",
+    component: networks,
   },
   {
     path: "/login",
     name: "Login",
-    component: Login
+    component: Login,
   },
 
   {
     path: "/signup",
     name: "signup",
-    component: signup
+    component: signup,
   },
 
   {
     path: "/recoverPass1",
     name: "RecoverPass1",
-    component: RecoverPass1
+    component: RecoverPass1,
   },
 
   {
     path: "/verify",
     name: "verifyAccount",
-    component: verifyAccount
+    component: verifyAccount,
   },
 
   {
     path: "/recoverPass2",
     name: "RecoverPass2",
-    component: RecoverPass2
+    component: RecoverPass2,
   },
   {
     path: "/recoverPass3",
     name: "RecoverPass3",
-    component: RecoverPass3
+    component: RecoverPass3,
   },
   {
     path: "/businessfollower/:id?",
     name: "BusinessFollower",
-    component: businessFollower,
-  },                 
+
+    component: businessFollower
+  },
   {
     path: "/businessvisitor",
     name: "BusinessVisitor",
-    component: businessVisitor
+    component: businessVisitor,
   },
   {
     path: "/services/create",
@@ -193,12 +196,12 @@ const routes = [
       } else {
         next({ name: "Login" });
       }
-    }
+    },
   },
   {
     path: "/services/:id",
     name: "Service",
-    component: service
+    component: service,
   },
   {
     path: "/services/modify/:id",
@@ -211,73 +214,73 @@ const routes = [
       } else {
         next({ name: "Login" });
       }
-    }
+    },
   },
 
   {
     path: "/follower",
     name: "Follower",
-    component: Follower
+    component: Follower,
   },
   {
     path: "/profilevisitor",
     name: "visitor",
-    component: Visitor
+    component: Visitor,
   },
   {
-    path: "/search",
+    path: "/search/:id",
     name: "Search",
-    component: search
+    component: search,
   },
   {
     path: "/forgotpass",
     name: "ForgotPassword",
-    component: forgotPassword
+    component: forgotPassword,
   },
   {
     path: "/messaging",
     name: "Nav Meassage",
-    component: navMessage
+    component: navMessage,
   },
 
   {
     path: "/blec",
     name: "Blec",
-    component: Blec
+    component: Blec,
   },
 
   {
     path: "/memberNetworkFollower",
     name: "Membar Network Follower",
-    component: memberNetworkFollower
-  }
+    component: memberNetworkFollower,
+  },
 ];
 
 const router = new VueRouter({
   mode: "history",
   base: process.env.BASE_URL,
-  routes
+  routes,
 });
 
 router.beforeEach((to, from, next) => {
   const loggedIn = localStorage.getItem("user");
 
-  if (to.matched.some(record => record.meta.auth) && !loggedIn) {
+  if (to.matched.some((record) => record.meta.auth) && !loggedIn) {
     next("/login");
 
     return;
   }
 
-  if (to.matched.some(record => record.meta.auth)) {
+  if (to.matched.some((record) => record.meta.auth)) {
     const dat = localStorage.getItem("user");
     const userdata = JSON.parse(dat);
 
     if (userdata.user.verified_at == null) {
-    //  next("/verify");
+      //  next("/verify");
     }
   }
 
-  next();  
+  next();
 });
 
 export default router;

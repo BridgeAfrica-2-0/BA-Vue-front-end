@@ -23,8 +23,8 @@
               <b-icon-geo-alt class="ico"></b-icon-geo-alt> {{ member.location_description }}
             </span>
             <br />
-
-            {{ member.about_business }} <b-link>Read More</b-link>
+            <span v-if="member.about_business.length<65">{{ member.about_business}}</span>
+            <span v-else >{{ member.about_business.substring(0,65)+"..." }} <b-link>Read More</b-link></span>
           </p>
         </b-col>
 

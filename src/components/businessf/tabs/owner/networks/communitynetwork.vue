@@ -23,8 +23,8 @@
               <b-icon-geo-alt class="ico"></b-icon-geo-alt> {{ member.city }}
             </span>
             <br />
-
-            {{ member.description }} <b-link>Read More</b-link>
+            <span v-if="member.description.length<65">{{ member.description}}</span>
+            <span v-else >{{ member.description.substring(0,65)+"..." }} <b-link>Read More</b-link></span>
           </p>
         </b-col>
 
@@ -84,7 +84,7 @@
                   variant="primary"
                 >
                   <i class="fas fa-map-marked-alt fa-lg btn-icon"></i>
-                  <span class="btn-text">Direction</span>
+                  <span class="btn-text">Join</span>
                 </b-button>
               </b-col>
             </b-row>

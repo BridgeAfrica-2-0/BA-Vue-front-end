@@ -35,7 +35,7 @@
         <CommunityBusiness :member="member" />
       </b-col>
     </b-row>
-    <b-row  v-if="businessfollowers.total != 0">
+    <b-row  v-if="businessfollowers.total  > perPage">
       <b-col cols="12">
         <span class="float-right">
           <b-pagination

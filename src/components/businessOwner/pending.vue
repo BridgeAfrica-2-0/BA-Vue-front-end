@@ -1,12 +1,9 @@
 <template>
   <div>
-    <b-container fluid  style="padding-left:30px; padding-right:30px">
-    
-
-
+    <b-container fluid style="padding-left:30px; padding-right:30px">
       <b-container class="bb-bottom">
         <b-list class="d-flex align-items-center m-list">
-          <b-avatar class="mr-3 profile-pic" ></b-avatar>
+          <b-avatar class="mr-3 profile-pic"></b-avatar>
           <span class="mr-auto username"
             >J. Circlehead
             <p class="duration">1hr</p>
@@ -20,16 +17,12 @@
                 no-caret
               >
                 <template #button-content>
-                  <b-icon
-                    icon="three-dots-vertical"
-                   
-                    font-scale="1"
-                  ></b-icon>
+                  <b-icon icon="three-dots-vertical" font-scale="1"></b-icon>
                 </template>
                 <b-dropdown-item href="#"> Approve</b-dropdown-item>
                 <b-dropdown-item href="#"> Un Approved </b-dropdown-item>
 
-               >
+                >
               </b-dropdown>
             </div>
           </span>
@@ -50,11 +43,11 @@
       <b-container class="bb-bottom">
         <b-list class="d-flex align-items-center m-list">
           <b-avatar class="mr-3 profile-pic"></b-avatar>
-          <span class="mr-auto">J. Circlehead  
-             <p class="duration">1hr</p>
-             
+          <span class="mr-auto"
+            >J. Circlehead
+            <p class="duration">1hr</p>
           </span>
-          
+
           <span class=" ">
             <div>
               <b-dropdown
@@ -64,16 +57,10 @@
                 no-caret
               >
                 <template #button-content>
-                  <b-icon
-                    icon="three-dots-vertical"
-                   
-                    font-scale="1"
-                  ></b-icon>
+                  <b-icon icon="three-dots-vertical" font-scale="1"></b-icon>
                 </template>
                 <b-dropdown-item href="#">Approve</b-dropdown-item>
                 <b-dropdown-item href="#"> Un Approve </b-dropdown-item>
-
-               
               </b-dropdown>
             </div>
           </span>
@@ -102,7 +89,7 @@ export default {
     return {};
   },
   computed: {},
-  methods: {}
+  methods: {},
 };
 </script>
 
@@ -121,6 +108,4 @@ export default {
   margin-bottom: 7px;
   margin-top: 5px;
 }
-
-
 </style>

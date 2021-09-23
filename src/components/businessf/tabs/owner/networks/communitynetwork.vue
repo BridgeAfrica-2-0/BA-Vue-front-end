@@ -20,11 +20,11 @@
             Community <br />
 
             <span class="location">
-              <b-icon-geo-alt class="ico"></b-icon-geo-alt> {{ member.location_description }}
+              <b-icon-geo-alt class="ico"></b-icon-geo-alt> {{ member.city }}
             </span>
             <br />
 
-            {{ member.about_business }} <b-link>Read More</b-link>
+            {{ member.description }} <b-link>Read More</b-link>
           </p>
         </b-col>
 
@@ -110,20 +110,7 @@ export default {
       },
     };
   },
-  method: {
-    // nFormatter(num) {
-    //   if (num >= 1000000000) {
-    //     return (num / 1000000000).toFixed(1).replace(/\.0$/, "") + "G";
-    //   }
-    //   if (num >= 1000000) {
-    //     return (num / 1000000).toFixed(1).replace(/\.0$/, "") + "M";
-    //   }
-    //   if (num >= 1000) {
-    //     return (num / 1000).toFixed(1).replace(/\.0$/, "") + "K";
-    //   }
-    //   return num;
-    // },
-  },
+
 };
 </script>
 

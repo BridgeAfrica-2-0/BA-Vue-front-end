@@ -3,11 +3,13 @@
     <div>
       <b-tabs pills content-class="mt-3 f-left">
         <b-tab title="People" active> 
-          <People :people="userdetails" /> 
+          <People /> 
         </b-tab>
-
         <b-tab title="Businesses"> 
-          <Businesses :businesses="businessdetails" /> 
+          <Businesses /> 
+        </b-tab>
+        <b-tab title="Network"> 
+          <Networks /> 
         </b-tab>
       </b-tabs>
     </div>
@@ -17,73 +19,15 @@
 <script>
 import People from "./people/people";
 import Businesses from "./businesses/businesses";
+import Networks from "./networks/networks";
 
 export default {
   name: "memberNetwork",
   components: {
     People,
-    Businesses
+    Businesses,
+    Networks
   },
-  data() {
-    return {
-      url: this.$route.params.id,
-      perPage: 3,
-      currentPage: 1,
-      items: [
-        { id: 1, first_name: "Fred", last_name: "Flintstone" },
-        { id: 2, first_name: "Wilma", last_name: "Flintstone" },
-        { id: 3, first_name: "Barney", last_name: "Rubble" },
-        { id: 4, first_name: "Betty", last_name: "Rubble" },
-        { id: 5, first_name: "Pebbles", last_name: "Flintstone" },
-        { id: 6, first_name: "Bamm Bamm", last_name: "Rubble" },
-        { id: 7, first_name: "The Great", last_name: "Gazzoo" },
-        { id: 8, first_name: "Rockhead", last_name: "Slate" },
-        { id: 9, first_name: "Pearl", last_name: "Slaghoople" }
-      ]
-    };
-  },
-
-  computed: {
-    rows() {
-      return this.items.length;
-    },
-    userdetails() {
-      return this.$store.state.networkProfileCommunity.userdetails;
-    },
-    businessdetails() {
-      return this.$store.state.networkProfileCommunity.businessdetails;
-    }
-  },
-
-  mounted(){
-    this.UserDetails();
-    this.businessDetails();
-  },
-
-  methods:{    
-
-    UserDetails() {
-    this.$store
-      .dispatch("networkProfileCommunity/getUserDetails", this.url)
-      .then(() => {
-        console.log('ohh year');
-      })
-      .catch(err => {
-        console.log({ err: err });
-      });
-    },
-
-    businessDetails() {
-    this.$store
-      .dispatch("networkProfileCommunity/getBusinessDetails", this.url)
-      .then(() => {
-        console.log('ohh year');
-      })
-      .catch(err => {
-        console.log({ err: err });
-      });
-    },
-  }
 };
 </script>
 

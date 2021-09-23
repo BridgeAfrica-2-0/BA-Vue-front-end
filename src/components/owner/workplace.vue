@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b>WorkPlace</b>
+    <b>WorkPlace</b>{{work}}
     <hr />
     <b-link class="mt-4 text-decoration-none" v-b-modal.modal-9>
       <b-icon icon="plus" variant="primary"></b-icon>
@@ -14,21 +14,22 @@
         <div class="row">
           <div
             class="media border-botmediatom mt-3 mb-4"
-            v-for="workPlace in educationAndWorks.workPlaces"
+            v-for="workPlace in work"
             :key="workPlace.id"
           >
-            <img
+            <!--  <img
               src="@/assets/img/about3.jpg"
               alt="John Doe"
               class="mr-2 picture-size"
-            />
+            /> -->
+            
             <div class="media-body">
               <h6 class="mb-0">
-                <b>{{ workPlace.companyName }}</b>
+                <b>{{ workPlace.company_name }} ({{orkPlace.manager}})</b>
               </h6>
-              <b>{{ workPlace.companyName }} - {{ workPlace.startDate }}</b>
+              <b>{{ workPlace.start_year }}/{{workPlace.start_month}}/{{workPlace.start_day}} -   {{ workPlace.end_year }}/{{workPlace.end_month}}/{{workPlace.end_day}}</b>
               <p class="mb-1">
-                {{ workPlace.jobResponsibilities }}
+                {{ workPlace.job_responsibilities }}
               </p>
             </div>
             <ul class="navbar-nav pull-right">
@@ -127,7 +128,7 @@ export default {
         { value: "public", text: "Public" },
       ],
       educationAndWorks: {
-        workPlaces: [],
+        workPlaces: this.work,
         professions: [],
         educations: [],
       },
@@ -148,20 +149,19 @@ export default {
   },
   created() {
     console.log("Load User Profile About Education and Works Places");
-    this.educationAndWorks = JSON.parse(
-      JSON.stringify(
-        this.$store.getters["profile/getProfileAboutEducationAndWorks"]
-      )
-    );
+    this.educationAndWorks.workPlaces = this.work
+  },
+
+  computed:{
+       work(){
+      return this.$store.state.profile.profile_about.user_experience;
+    }
   },
   methods: {
     cancel() {
       console.log("Cancel Another Action in User  ++++++");
-      this.educationAndWorks = JSON.parse(
-        JSON.stringify(
-          this.$store.getters["profile/getProfileAboutEducationAndWorks"]
-        )
-      );
+      this.educationAndWorks.workPlaces = this.workPlaces;
+      
       console.log(this.educationAndWorks);
       this.workPlaceInput = {
         companyName: null,

@@ -4,18 +4,25 @@
    
 
     <b-alert v-if="edited" show> {{ successmsg }} </b-alert>
-    <b-button
+
+    <span class="float-right">  
+    <b-icon
+
+     icon="pencil"
       v-if="!editing"
-      class="edit-btn float-right"
+       
+      class="edit-btn icon-size ebio"
       @click="edit(1)"
-      variant="outline-primary"
+      variant="primary"
       size="sm"
-      >Edit Profile</b-button
+      ></b-icon
     >
+
+     </span>
 
     <br />
  <p class="bold username"> Biography! <p/>
-  <p class="text">  {{ bio  }} </p>
+  <p class="text">  {{ bio.user.biography  }} </p>
    
     <div v-if="editing">
       <b-form @submit.prevent="save">
@@ -23,7 +30,7 @@
         <b-form-textarea
           required
           id="textarea"
-          v-model="bio"
+          v-model="bio.user.biography"
           placeholder="Enter something..."
           rows="3"
           max-rows="6"
@@ -105,8 +112,8 @@ export default {
       console.log(this.biography, "profile about save message start+++++++++");
       this.$store
         .dispatch("profile/updateUserBiography", {
-          info_access: this.biography.info_access,
-          description: this.biography.description,
+          info_access: 'public',
+          description:  this.bio.user.biography ,  
         })
         .then((response) => {
           console.log(
@@ -134,7 +141,7 @@ export default {
   computed:{
 
     bio(){
-      return this.$store.state.profile.profile_about.user.biography;
+      return this.$store.state.profile.profile_about;
     }
 
   },
@@ -142,6 +149,11 @@ export default {
 </script>
 
 <style scoped>
+
+.ebio :hover{
+  font-size: 55px;
+   color: #e75c18;
+}
 .edit-btn {
   margin-left: 660px;
   margin-bottom: 20px;

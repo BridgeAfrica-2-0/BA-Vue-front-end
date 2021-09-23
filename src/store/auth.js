@@ -27,20 +27,20 @@ export default {
     
   },
 
+
+
   mutations: {
-
-
-
     setUserData(state, userData) {
-      state.user = userData;
+      state.user = userData
 
-      localStorage.setItem("user", JSON.stringify(userData));
-      axios.defaults.headers.common.Authorization = `Bearer ${userData.accessToken}`;
+      localStorage.setItem('user', JSON.stringify(userData))
+      axios.defaults.headers.common.Authorization = `Bearer ${userData.accessToken}`
 
-      const userInfo = localStorage.getItem("user");
+      const userInfo = localStorage.getItem('user')
+
+
     },
 
-    
 
 
     setCountry(state, data) {
@@ -70,47 +70,48 @@ export default {
     },
 
 
-    setSubcategories(state, data) {
-      state.subcategories = data;
+
+
+
+
+
+
+    setPeopleAround(state, data){
+
+       state.peopleAround=data;
     },
 
+    setBusinessAround(state, data){
 
-    setFilters(state, data) {
-      state.filters = data;
-    },
+      state.businessAround=data;
+   },
 
 
-    Setcategoryfiters(state, data) {
-      state.category_fiters = data;
-    },
-
-    setPeopleAround(state, data) {
-      state.peopleAround = data;
-    },
-
-    setBusinessAround(state, data) {
-      state.businessAround = data;
-    },
 
     setVerifyToken(state, data) {
       state.verifyToken = data;
     },
 
+
     setRegisterdata(state, data) {
       state.registerData = data;
     },
+
+
 
     setPasswordToken(state, data) {
       state.passwordToken = data;
     },
 
     clearUserData() {
-      localStorage.removeItem("user");
-      location.reload();
-    }
+      localStorage.removeItem('user')
+      location.reload()
+    },
+
   },
 
   actions: {
+
     login({ commit }, credentials) {
       return axios.post("user/login", credentials).then(({ data }) => {
         commit("setUserData", data.data);
@@ -173,70 +174,64 @@ export default {
       });
     },
 
+    completeWelcome({commit}){
 
-
-
-    subcategories({ commit }, data) {
-      return axios.post("catergory/subcategory", data).then(({ data }) => {
+      return axios
+      .get('user/completewelcome')
+      .then(({ data }) => {
         console.log(data);
-        commit("setSubcategories", data.data);
-      });
+        commit('setUserData', data.data)
+
+      })
+    },
+
+    businessAround( {commit} ){
+
+      return axios
+      .get('business/around')
+      .then(({ data }) => {
+        commit('setBusinessAround', data.data);
+        console.log(data);
+
+      })
+
+    },
+
+
+
+    peopleAround( {commit} ){
+
+      return axios
+      .get('people/around')
+      .then(({ data }) => {
+        commit('setPeopleAround', data.data);
+        console.log(data);
+
+      })
+
     },
 
 
 
 
-
-
-    filters({ commit }) {
-      return axios.get("user/completewelcome").then(({ data }) => {
-        console.log(data);
-        commit("setFilters", data.data);
-      });
-    },
-
-
-  
-    Setcategoryfiters({ commit }) {
-      return axios.get("user/completewelcome").then(({ data }) => {
-        console.log(data);
-        commit("Setcategoryfiters", data.data);
-      });
-    },
-
-   
-
-
-    completeWelcome({ commit }) {
-      return axios.get("user/completewelcome").then(({ data }) => {
-        console.log(data);
-        commit("setUserData", data.data);
-      });
-    },
-
-
-
-    businessAround({ commit }) {
-      return axios.get("business/around").then(({ data }) => {
-        commit("setBusinessAround", data.data);
-        console.log(data);
-      });
-    },
-
-    peopleAround({ commit }) {
-      return axios.get("people/around").then(({ data }) => {
-        commit("setPeopleAround", data.data);
-        console.log(data);
-      });
-    },
 
     storeRegisterData({ commit }, userdata) {
-      commit("setUserData", userdata);
+
+
+      commit('setUserData', userdata)
     },
 
+
+
+
+
     logout({ commit }) {
-      commit("clearUserData");
-    },
+      commit('clearUserData')
+    }
+
+    ,
+
+
 
     recoverPassword2({ commit }, data) {
       return axios.post("user/reset", data).then(({ data }) => {
@@ -246,14 +241,26 @@ export default {
       });
     },
 
+
+
+
     verify({ commit }, mydata) {
-      const url = "user/verifyOtp/" + this.state.auth.user.user.id;
 
-      return axios.post(url, mydata).then(({ data }) => {
-        console.log(data.data);
 
-        commit("setUserData", data.data);
-      });
+      const url = 'user/verifyOtp/' + this.state.auth.user.user.id
+
+
+
+      return axios
+        .post(url, mydata)
+        .then(({ data }) => {
+          console.log(data.data);
+
+          commit('setUserData', data.data)
+
+        })
+
+
     }
   },
 
@@ -261,5 +268,9 @@ export default {
     isLogged: state => !!state.user,
     isVerified: state => !!state.user,
     user: state => state.user
-  }
-};
+  },
+
+}
+
+
+

@@ -3,6 +3,8 @@
     <b-container fluid class="p-0 gradient">
       <div class="container-flex">
 
+  
+
         <img  v-if="info.user.cover_picture == null "
           src="@/assets/img/banner.jpg"
           class="img-fluid  banner"
@@ -11,7 +13,7 @@
 
 
          <img  v-if="info.user.cover_picture !=null "
-          src="@/assets/img/banner.jpg"
+          :src="info.user.cover_picture"
           class="img-fluid  banner"
           alt="Kitten"
         />
@@ -31,7 +33,7 @@
 
 
             <b-avatar v-if="info.user.profile_picture !=null "
-              src="https://placekitten.com/400/300"
+              :src="info.user.profile_picture"
               class="  avat  text-center"
               badge-variant="primary"
               badge-offset="10px"
@@ -53,7 +55,7 @@
               </h6>
             </span>
 
-            
+             
                 <input
             type="file"
             id="cover_pic"
@@ -282,13 +284,13 @@ selectCover(){
 
 
        let formData = new FormData();
-        formData.append("profilePicture", this.profile_photo);
+        formData.append("image", this.profile_photo);
 
         
 
 
        this.axios 
-          .post("post", formData, {
+          .post("user/profile/picture", formData, {
             headers: {
               "Content-Type": "multipart/form-data",
             },
@@ -369,13 +371,13 @@ selectCover(){
 
 
        let formData = new FormData();
-        formData.append("cover_image", this.cover_photo);
+        formData.append("image", this.cover_photo);
 
         
 
 
        this.axios 
-          .post("cover_image", formData, {
+          .post("user/cover", formData, {
             headers: {
               "Content-Type": "multipart/form-data",
             },

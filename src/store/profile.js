@@ -9,7 +9,7 @@ export default {
     ownerPost: [],
     profileBusiness: [],
     ownerPostImages: [],
-    biography: [],
+    biography: null,
     basicInfo: [],
     dateOfBirth: [],
     websites: [],
@@ -233,9 +233,10 @@ export default {
       state.profile_about=payload;
     },
     updateUserBiography(state, payload) {
-      state.userData[0].profile_about.biography.info_access = payload.info_access;
-      state.userData[0].profile_about.biography.description = payload.description;
+      state.biography=payload.user.biography;
+     
     },
+
     updateUserBirthDate(state, payload) {
       state.userData[0].profile_about.basicInfo.dateOfBirth = payload.dateOfBirth;
     },
@@ -517,30 +518,17 @@ export default {
       console.log(payload, "edit user biography start +++++");
       let response_ = null;
       await axios.post("userIntro/biography?" + "biography=" + payload.description + "&value=" + payload.info_access)
-        .then(response => {
-          console.log("edit user biography response (1) +++++++", response);
-          if (response.status !== 200 && response.status !== 201) {
-            console.log("Error From the Server ++++ ");
-            throw "Error from the Server";
-          }
-          return response;
-        })
+       
         .then(response => {
           console.log("edit user biography response successsss +++", response);
-          if (!response) {
-            console.log("Erreur liée au serveur+++++++");
-            throw new Error("Erreur d edition de la biographie+++++");
-          }
-          context.commit("updateUserBiography", {
-            info_access: payload.info_access,
-            description: payload.description
-          });
+         
+          context.commit("updateUserBiography", response.data.data );
+          console.log(response);
           response_ = response;
         })
         .catch(error => {
           console.log(
-            "error from the browser or the server error(1) ++++++",
-            error
+            {erroe:error}
           );
           throw error;
         });

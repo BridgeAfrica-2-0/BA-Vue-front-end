@@ -18,6 +18,9 @@ export default {
     educations: [],
     professions: [],
 
+    profile_about:[],
+    profileIntro:[],
+
 
     userData: [
       {
@@ -89,6 +92,7 @@ export default {
           }
         },
         profile_about1: null,
+
         profile_about_new: {
           name: "marc doe",
           profile_picture: "http://localhost:80",
@@ -115,6 +119,10 @@ export default {
     getAlbums(state) {
       return state.albums;
     },
+    
+    getUserPostIntro(state) {
+      return state.profileIntro;
+    },
 
     getImages(state) {
       return state.images;
@@ -140,7 +148,7 @@ export default {
 
 
     getProfileAboutBiography(state) {
-      return state.userData[0].profile_about.biography;
+      return state.profile_about.user.biography;
     },
     getProfileAboutBasicInfos(state) {
       return state.userData[0].profile_about.basicInfo;
@@ -152,7 +160,7 @@ export default {
       return state.userData[0].profile_about.educationAndWorks;
     },
     getProfileAbout(state) {
-      return state.userData[0].profile_about1;
+      return state.profile_about;
     },
     getdetails(state) {
       return state.bdetails;
@@ -218,9 +226,11 @@ export default {
     setSuccess(state, payload) {
       state.success = payload;
     },
-
+    editPostUserIntro(state, payload) {
+      state.profileIntro = payload;
+    },
     updateUserProfileAbout(state, payload) {
-      state.userData[0].profile_about_new = payload.profile_about;
+      state.profile_about=payload;
     },
     updateUserBiography(state, payload) {
       state.userData[0].profile_about.biography.info_access = payload.info_access;
@@ -389,6 +399,79 @@ export default {
 
 
 
+
+
+
+     
+  async editPostUserIntro(context, payload) {
+    //console.log(payload);
+    //const url = "https://vuejs-backend-c42b8-default-rtdb.firebaseio.com/users.json";
+    //const url = state.url_update_user_infos;
+    context.commit("editPostUserIntro", {
+      data: {
+        workedAt: payload.workedAt,
+        studiedAt: payload.studiedAt,
+        homeTown: payload.homeTown,
+        currentCity: payload.currentCity,
+        numbersOfFollowers: 20
+      }
+    });
+
+   
+    const url = "userIntro?"+"companyName=" + payload.workedAt +"&address=" +1 +"&cityTown=" +payload.currentCity + "&schoolName=" +
+      payload.studiedAt;
+    await axios
+      .post(
+        url,
+        {},
+        {
+          headers: {
+            
+          }
+        }
+      )
+      
+      .then(response => {
+        console.log("user intro edited successssssssssss ++++++++++");
+        console.log("edit user intro test1 fuckk blec response");
+        console.log(response);
+        context.commit("editPostUserIntro",  response.data);
+      })
+      .catch(error => {
+        console.log("erreur liée au navigateur ou au serveur +++");
+        console.log(error);
+      });
+  },
+
+
+  
+    async loadUserPostIntro(context, payload) {
+      let response_ = null;
+      await axios.get('userIntro')
+       
+        .then(response => {
+          console.log("load user Intro Post test1 successsss +++");
+          console.log(response);
+          if (!response) {
+            throw "Cannot Found User Post Intro";
+          }
+          console.log(context);
+          console.log(payload);
+          console.log("Load User Intro Post test3 blec +++");
+          response_ = response.data[0];
+          context.commit("editPostUserIntro", response.data.data);
+        })
+        .catch(error => {
+          console.log("Load User Intro Echec");
+          if (error instanceof TypeError) {
+            console.log(error.message);
+          } else {
+            console.log(error);
+          }
+        });
+      return response_;
+    },
+
     async loadUserBiography(context, payload) {
 
 
@@ -477,7 +560,7 @@ export default {
 
 
 
-    async loadUserProfileAbout(context, payload) {
+    async loadUserProfileAbout({commit}, payload) {
       console.log(payload, "load user Profile About start +++++");
 
       let response_ = null;
@@ -505,17 +588,15 @@ export default {
             console.log("Error from the server+++++++");
             throw new Error("Error of load profile about ++++++++");
           }
-          context.commit("updateUserProfileAbout", {
-            profile_about: response.data
-          });
-          response_ = response;
+          commit("updateUserProfileAbout", response.data.data);
+      response_ = response;
         })
         .catch(error => {
           console.log("error from browser or server error(1)", error);
           throw error;
         });
       return response_;
-    },
+    }, 
 
 
 
@@ -568,7 +649,7 @@ export default {
         })
         .catch(error => {
           console.log("error from browser or server error(1)");
-          console.log(error);
+          console.log({error : error});
           throw error;
         });
       return response_;
@@ -977,6 +1058,8 @@ export default {
         });
       return response_;
     },
+
+    
     async updateUserEducation(context, payload) {
       console.log(payload, "save/edit/delete user education start +++++");
       let url = "",

@@ -1,92 +1,69 @@
 <template>
   <div>
+    <b-modal id="modal-sm" size="sm" hide-header>
+      Do you want to join this network?
+    </b-modal>
 
 
-
-
-
-
-
-
-
-
-
+    <b-row>
+        <b-col lg="6" sm="12" class="p-2" v-for="item in network" :key="item.id">
 
     <div class="people-style shadow">
       <b-row>
-        <b-col md="3"  xl="5"  lg="5" cols="5"  sm="3">
-          <div class="center-img" >
-
-
-
-
-              <splide :options="options" class="r-image">   
-    <splide-slide >
-       
-
-           
-
-
- <img
-             
-              :src="business.logo_path"
-              
-              class="r-image"
-            />
-
-
-    </splide-slide>
-              </splide>
-
-
+        <b-col md="3" xl="3" lg="3" cols="5" sm="3">
+          <div class="center-img">
+            <img :src="item.picture" class="r-image" />
           </div>
         </b-col>
-        <b-col md="5" cols="7"  lg="7" xl="7"  sm="5">
-           <div class="title textt bold username"> <strong> {{ business.name }}  </strong></div>
-          <p class="textt to">
-             <br />
-             Car marketing  {{business.category}}
-              <br /> {{business.followers}} Community <br />
-            
-            <span class="location"> <b-icon-geo-alt class="ico" ></b-icon-geo-alt> {{business.location_description}} </span> <br /> 
-            
-  <read-more  class="readmore" more-str="read more" :text="business.about_business" link="#" less-str="read less" :max-chars="25" > </read-more>
+        <b-col md="5" cols="7"  lg="7" xl="5" sm="5">
+         
+
+          <p class="textt">
+            <strong class="net-title"> {{ item.name }} </strong> <br />
+            {{ item.category }}
+            <br />
+            {{ item.followers }} Community <br />
+
+            <span class="location">
+              <b-icon-geo-alt class="ico"></b-icon-geo-alt>
+              {{ item.location_description }}
+            </span>
+            <br />
+
+            {{ item.about_network }} <b-link>Read More</b-link>
           </p>
         </b-col>
 
-
-
-
-
-
-        <b-col lg="12" xl="12" md="4" cols="12" sm="4">
+        <b-col lg="12" md="4" xl="4" cols="12" sm="4">
           <div class="s-button">
-     <b-row>  <b-col md="12"  lg="4"  xl="4" sm="12" cols="4" class="mt-2 text-center">    
+            <b-row>
+              <b-col md="12" lg="4" xl="12" sm="12" cols="4" class="mt-2">
+                <b-button
+                  block
+                  size="sm"
+                  class="b-background shadow"
+                  variant="primary"
+                >
+                  <i class="fas fa-user-plus  fa-lg btn-icon "></i>
+                  <span class="btn-com" v-b-modal.modal-sm>Community</span>
+                </b-button>
+              </b-col>
 
-            <b-button block size="sm" class="b-background shadow " variant="primary">
-                <i class="fas fa-user-plus  fa-lg btn-icon "></i>  <span class="btn-com">Community</span>
-            </b-button>   
+              <b-col md="12" lg="4" xl="12" sm="12" cols="4" class="mt-2">
+                <b-button
+                  block
+                  size="sm"
+                  class="b-background shadow"
+                  variant="primary"
 
-            </b-col>  
+                  ><i class="fas fa-envelope   fa-lg btn-icon "></i>
+                  <span class="btn-text">Message</span>
+                </b-button>
+              </b-col>
 
-        <b-col md="12"  lg="4"  xl="4" sm="12" cols="4" class="mt-2 text-center">  
+            <b-col md="12"  lg="4"  xl="12" sm="12" cols="4" class="mt-2"> 
 
-           
-
-             <b-button block size="sm" class="b-background shadow " variant="primary">
-                <i class="fas fa-envelope   fa-lg btn-icon "></i>  <span class="btn-text">Message</span>
-            </b-button>   
-
-
-            </b-col>  
-
-            <b-col  md="12"  lg="4"  xl="4" sm="12" cols="4"  class="mt-2 text-center">  
-
-              <b-button block size="sm" class="b-background shadow " variant="primary">
-                <i class="fas fa-map-marked-alt  fa-lg btn-icon "></i>  <span class="btn-text">Direction</span>
-            </b-button> 
-
-           
+            
 
             </b-col>  
    </b-row>
@@ -95,95 +72,33 @@
         </b-col>
       </b-row>
     </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        </b-col>
+    </b-row>
   </div>
 </template>
 
 <script>
-
-
-
 export default {
-  props: ["business"],
-
-   data() {
-      return {
-        options: {
-          rewind : true,
-          autoplay: true,
-          perPage: 1,
-          pagination:false,
-        
-          
-          type   : 'loop',
-          perMove: 1,
-
-
-        
-        },
-      };
-    },
+  props: ["network"],
+  computed: {
+    business() {
+      return this.$store.getters["networkDetails/getdetails.category"];
+    }
+  },
+  created() {
+    this.$store
+      .dispatch("networkDetails/getndetails")
+      .then(() => {
+        console.log("the response");
+      })
+      .catch(err => {
+        console.log({ err: err });
+      });
+  }
 };
 </script>
 
 <style scoped>
-
-
-.username {
-    
-    text-overflow: ellipsis;
-    overflow: hidden;
-   
-    height: 1.6em;
-    white-space: nowrap;
-  }
-
-  .to{
-    margin-top: -15px;
-  }
 
 
 @media only screen and (min-width: 768px) {
@@ -229,7 +144,6 @@ export default {
 
 }
 
-
 .btnpngs{
       width: 20px;
     margin-right: 5px;
@@ -238,6 +152,8 @@ export default {
 .btn{
   border-radius: 5px;
 }
+
+
 
 
 .card {
@@ -270,7 +186,7 @@ export default {
   margin-top: -15px;
 }
 
-.title{
+.net-title{
   font-size: 16px;
    color:black;
  
@@ -338,7 +254,7 @@ Width:100px
 
 @media only screen and (min-width: 768px) {
 
-.title{
+.net-title{
   font-size: 20px;
    color:black;
  
@@ -364,7 +280,7 @@ font-style:normal;
 padding: 1px;
   text-align: left;
 
- margin-left: 30px;
+  margin-left: 30px;
 
   margin-right: -5px;
 
@@ -376,23 +292,13 @@ padding: 1px;
   margin-bottom: 30px;
 }
 
-
-
-
 .btn{
   padding-top: 6px;
-Height : 38px;
-Width:110px;
-    font-size:12px;
-      margin-left: -10px;
 
- padding-top: 8px;
-    
+  Height : 38px;
+Width:123px
 
 }
-
-
-
 
 
 
@@ -525,54 +431,5 @@ h4{
     
 }
 }
-
-@media only screen and (min-width: 992px) and (max-width: 1331px) {
-
-       
-
-       
-
-
-
-  .btn{
-
-    width: 98px;
-    height: 33px;
-    font-size: 12px;
-    margin-left: -10px;
-    padding-top: 8px;
-}
-
-
-}
-
-</style>
-<style >
-.readmore p {
-    margin: 0px !important;
-}
-
-
-
-
-::-webkit-scrollbar {
-  width: 10px;
-}
-
-/* Track */
-::-webkit-scrollbar-track {
-  background: #f1f1f1; 
-}
- 
-/* Handle */
-::-webkit-scrollbar-thumb {
-  background: #888; 
-}
-
-/* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
-  background: #555; 
-}
-
 
 </style>

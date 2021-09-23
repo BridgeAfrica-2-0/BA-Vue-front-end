@@ -1,5 +1,8 @@
 <template>
   <div>
+
+   
+
     <b-alert v-if="edited" show> {{ successmsg }} </b-alert>
     <b-button
       v-if="!editing"
@@ -11,23 +14,16 @@
     >
 
     <br />
-    <br />
-    <br />
+ <p class="bold username"> Biography! <p/>
+  <p class="text">  {{ bio  }} </p>
+   
     <div v-if="editing">
       <b-form @submit.prevent="save">
-        <div style="width: 150px">
-          <b-form-select
-            required
-            class="mb-2"
-            size="sm"
-            v-model="biography.info_access"
-            :options="options"
-          ></b-form-select>
-        </div>
+        
         <b-form-textarea
           required
           id="textarea"
-          v-model="biography.description"
+          v-model="bio"
           placeholder="Enter something..."
           rows="3"
           max-rows="6"
@@ -133,6 +129,14 @@ export default {
           );
         });
     },
+  },
+
+  computed:{
+
+    bio(){
+      return this.$store.state.profile.profile_about.user.biography;
+    }
+
   },
 };
 </script>

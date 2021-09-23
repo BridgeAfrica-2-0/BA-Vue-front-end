@@ -13,6 +13,8 @@
         <b-tab title="BASIC INFO"> <ContactandInfo /> </b-tab>
         <b-tab title="EDUCATION AND WORK"><WorkAndEducation /></b-tab>
       </b-tabs>
+
+      {{this.$store.getters['profile/getProfileAbout_']}}   
     </div>
   </div>
 </template>
@@ -27,25 +29,42 @@ export default {
     ContactandInfo,
     WorkAndEducation
   },
-
   data() {
     return {
-      size: 0
+      size: 0,
+      profile_about: null,
     };
   },
-
+  created() {
+    this.profile_about = JSON.parse(
+            JSON.stringify(this.$store.getters['profile/getProfileAbout'])
+    );
+    console.log("Load User Profile About start ++++++", this.profile_about);
+    this.$store
+            .dispatch("profile/loadUserProfileAbout", null)
+            .then(response => {
+              
+            })
+            .catch(error => {
+              console.log("Error from server or from browser error (2) ++++", error);
+            })
+            .finally(() => {
+              this.profile_about = JSON.parse(
+                      JSON.stringify(this.$store.getters['profile/getProfileAbout_'])
+              );
+              console.log("Load User Profile About end ++++++", this.profile_about);
+            });
+  },
   computed: {
     vertical() {
       if (this.size > 768) return true;
       return false;
     },
-
     card() {
       if (this.size > 992) return true;
       return false;
     }
   },
-
   mounted() {
     var that = this;
     window.onresize = function() {

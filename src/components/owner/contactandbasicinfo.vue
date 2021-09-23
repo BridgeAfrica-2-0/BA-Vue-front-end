@@ -2,6 +2,8 @@
   <div>
     <div class="row">
       <h6 class="col-md-12"><b>Basic Information</b></h6>
+
+      { {{info}}}}
       <hr />
     </div>
     <div class="row mb-1">
@@ -386,7 +388,7 @@
     <div class="row">
       <div class="col-md-4">Gender</div>
       <div class="col-md-4">
-        {{ basicInfo.gender === "M" ? "Male" : "Female" }}
+          {{info.user.gender}}
       </div>
       <div class="col-md-4">
         <button
@@ -543,13 +545,13 @@
               Add a Website</a
             ><br />
 
-            <div v-for="website in basicInfo.websites" :key="website">
+            <div v-for="website in info.user_websites" :key="website.id">
               <fas-icon
                 class="primary float-left mr-1 mt-1"
                 :icon="['fas', 'globe']"
               />
-              <a :href="website" @click="redirect(website)" target="_blank">{{
-                website
+              <a :href="website" @click="redirect(website.website_url)" target="_blank">{{
+                website.website_url
               }}</a>
               <ul class="website navbar-nav pull-right">
                 <li class="nav-item dropdown">
@@ -571,6 +573,10 @@
           </div>
         </div>
         <div class="media mt-4">
+
+
+
+<!--
           <div class="media-body">
             <a v-b-modal.sociallinkModal data-target="#sociallinkModal">
               <fas-icon
@@ -606,6 +612,8 @@
               </ul>
             </div>
           </div>
+
+          -->
         </div>
       </div>
     </div>
@@ -654,6 +662,9 @@ export default {
         console.log("Load User birth Date end ++++++", this.basicInfo);
       });
   },
+
+
+  
   computed: {
     birthDate() {
       return (
@@ -664,6 +675,11 @@ export default {
         this.basicInfo.dateOfBirth.date_2.year
       );
     },
+
+      info(){
+   return this.$store.state.profile.profile_about;
+    },
+
   },
   methods: {
     cancel() {

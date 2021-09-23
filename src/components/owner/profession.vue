@@ -2,10 +2,12 @@
   <div>
     <b>Profession</b>
     <hr />
-    <b-link class="mt-4 doc" v-b-modal.modal-11>
+
+   <b-link class="mt-4 doc" v-b-modal.modal-11>
       <b-icon icon="plus" variant="primary"></b-icon>
       Add Profession</b-link
-    >
+    > 
+  <!--  
     <b-list-group-item class="d-flex align-items-center mb-4 b-none">
       <div class="datails">
         <div
@@ -33,6 +35,7 @@
         </div>
       </div>
     </b-list-group-item>
+       -->
 
     <b-modal
       ref="professionModal"
@@ -156,6 +159,13 @@ export default {
       }
     },
   },
+
+  computed:{
+
+    profession(){
+      return this.$store.state.profile.profile_about.user.profession;
+    }
+  }
 };
 </script>
 

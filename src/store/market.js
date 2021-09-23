@@ -123,10 +123,10 @@ export default {
                 })
         },
 
-        getProducts({ commit }) {
+        getProducts({ commit, state }) {
             return axios.get("market", {
                     headers: {
-                        Authorization: "Bearer 24|5uVwIzU7r82crJj936tmqkuIMRXxm1ADTCbuRceL",
+                        Authorization: `Bearer ${state.token}`,
                     },
                 })
                 .then((res) => {
@@ -137,12 +137,12 @@ export default {
                     console.error(err);
                 });
         },
-        nextPage({ commit }, page) {
+        nextPage({ commit, state }, page) {
             commit("setProducts", []);
 
             return axios.get(`market?page=${page}`, {
                     headers: {
-                        Authorization: "Bearer 24|5uVwIzU7r82crJj936tmqkuIMRXxm1ADTCbuRceL",
+                        Authorization: `Bearer ${state.token}`,
                     },
                 })
                 .then((res) => {

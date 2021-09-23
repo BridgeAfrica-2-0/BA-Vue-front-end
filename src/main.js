@@ -20,9 +20,6 @@ import VueSocialauth from "vue-social-auth";
 // import firebase from "firebase";
 
 import LoadScript from 'vue-plugin-load-script';
-import InfiniteLoading from 'vue-infinite-loading';
-
-import LoadScript from "vue-plugin-load-script";
 
 
 Vue.use(LoadScript);
@@ -164,4 +161,3 @@ new Vue({
 
     render: (h) => h(App),
 }).$mount("#app");
-

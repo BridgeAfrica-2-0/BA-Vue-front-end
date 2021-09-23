@@ -3,13 +3,8 @@
     <div class="row">
       <div class="container-fluid">
 
-       
 
-      
-    
-
-
-    <b-modal hide-footer size="md"  id="Details" ref="Details">
+    <!-- <b-modal hide-footer size="md"  id="Details" ref="Details"> -->
 
    
 <div >  
@@ -93,8 +88,6 @@
         <b-modal hide-footer size="xl" id="Details" ref="Details">
           <img class="card-img" :src="show_url" alt="" />
         </b-modal>
-              v-b-modal.modal-a
-          /></a>
 
           <b-modal id="modal-a" title="Details">
             <img class="card-img" src="@/assets/img/m2.jpg" alt="" />
@@ -338,10 +331,12 @@
       </div>
     </div>
   </div>
-      </div></div></div>
+      </div></div>
 </template>
 
 <script>
+  import axios from "axios"
+
 export default {
   components: {},
 
@@ -641,13 +636,6 @@ export default {
       this.$refs["modalxl"].show();
     },
 
-
-  methods: {
-    /**
-     *
-     * @param i
-     */
-
     onClick(i) {
       this.index = i;
     },
@@ -675,9 +663,6 @@ export default {
       img_url: null,
       profile_pic: null,
       text: null,
-
-  data: function() {
-    return {
       images: [
         "https://placekitten.com/801/800",
         "https://placekitten.com/802/800",

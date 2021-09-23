@@ -12,7 +12,6 @@ import NetworkSettings from "./NetworkSettings";
 import axios from "axios";
 
 Vue.use(Vuex);
-
 // axios.defaults.baseURL = process.env.VUE_APP_API_URL;
 axios.defaults.baseURL = process.env.VUE_APP_API_URL_DEV;
 
@@ -1574,4 +1573,3 @@ const mutations = {
         state.userData[0].posts = payload.posts;
     }
 };
-

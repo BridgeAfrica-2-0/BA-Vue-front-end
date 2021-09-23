@@ -17,7 +17,7 @@ export default {
     },
 
     gettotalcommunity({ commit }) {
-      return axios.get("profile/total/community", {}).then(function({ data }) {
+      return axios.get("/profile/total/community", {}).then(function({ data }) {
         commit("setcom", data.data);
         console.log(data);
       });

@@ -1,20 +1,114 @@
 <template>
   <div class="main">
-    <div class="splide">
-      <splide :options="options" class="banner r-image">
-        <splide-slide>
-          <img src="@/assets/img/Business 1.jpg" class="r-image" />
-        </splide-slide>
+    
+       <div class="splide"   v-if="!business_info.cover.length==0"  >
 
-        <splide-slide>
-          <img src="@/assets/img/business 2.jpg" class="r-image" />
-        </splide-slide>
+    <splide :options="options" class="banner r-image"   >  
+     
+ 
+  
+  
+  
+  
+           
+    
+  
+   <splide-slide   v-for="cover in business_info.cover" :key="  cover.id" >
+         
+  
+            <img  
+                
+              :src="cover.media_url"  
+                
+              class="r-image"  
+            />  
+  
+  
+    </splide-slide>  
 
-        <splide-slide>
-          <img src="@/assets/img/business 3.png" class="r-image" />
-        </splide-slide>
-      </splide>
-    </div>
+
+
+              </splide>
+
+   </div>
+
+
+
+
+
+
+
+
+
+
+   <div v-else class="splide"  >
+
+    <splide :options="options" class="banner r-image"   >
+   
+
+
+ 
+
+
+
+
+
+
+
+     
+
+     <splide-slide >
+       
+
+            <img
+              src="@/assets/img/Business 1.jpg"
+              
+              class="r-image"
+            />
+
+
+    </splide-slide>
+
+
+
+     <splide-slide >
+       
+       
+            <img
+             
+               src="@/assets/img/business 2.jpg"
+              
+              class="r-image"
+            />
+
+
+
+    </splide-slide>
+
+
+      <splide-slide >
+       
+
+            <img
+               src="@/assets/img/business 3.png"
+              
+              class="r-image"
+            />
+
+
+
+    </splide-slide>
+
+
+
+ 
+
+   
+
+
+              </splide>
+
+   </div>
 
     <b-button class=" float-right see-all">
       See All
@@ -24,15 +118,15 @@
       <b-col>
         <b-row class="profile">
           <div>
-            <img class="logo" src="@/assets/img/m5.jpg" />
+            <img class="logo" :src="business_info.logo_path" />
           </div>
           <div class="d-inline-block ml-4 float-left name-block">
             <b-link>
-              <h5 class="font-weight-bolder name">User Name</h5>
+              <h5 class="font-weight-bolder name">{{business_info.name}} </h5>
             </b-link>
             <p>
               <br />
-              1.5k Community
+              {{business_info.community}}  Community
             </p>
           </div>
         </b-row>
@@ -72,13 +166,13 @@
         <b-col>
           <b-row>
             <div>
-              <img class="logo" src="@/assets/img/m5.jpg" />
+              <img class="logo" :src="business_info.logo_path"  />
             </div>
             <div class="d-inline-block mt-4 ml-4 float-left texts">
-              <h6 class="font-weight-bolder name">User Name</h6>
+              <h6 class="font-weight-bolder name">{{business_info.name}} </h6>
               <p class="details">
-                www.bridgeafrica.com <br />
-                1.5k Community
+               <!-- www.bridgeafrica.com <br /> -->
+                {{business_info.community}}  Community
               </p>
             </div>
           </b-row>
@@ -137,7 +231,7 @@ import HomePage from "../businessf/tabs/businessHome";
 import About from "./tabs/about";
 import Media from "./tabs/media";
 import MarketPlace from "./tabs/marketPlace";
- import Community from "./tabs/memberNetwork";
+// import Community from "./tabs/memberNetwork";
 import Networks from "./tabs/networks";
 
 export default {
@@ -147,12 +241,12 @@ export default {
     About,
     Media,
     MarketPlace,
-    Community,
-    Networks
+    Networks,
   },
 
   data() {
     return {
+      url_data:null,
       options: {
         rewind: true,
         autoplay: true,
@@ -165,7 +259,7 @@ export default {
         breakpoints: {
           "760": {
             perPage: 1,
-            gap: "0rem"
+            gap: "0rem",
           },
           "992": {
             perPage: 2,
@@ -176,8 +270,109 @@ export default {
     };
   },
 
-  computed: {},
-  methods: {}
+  computed: {
+
+     business_info() {
+      return  this.$store.state.businessOwner.businessInfo;  
+
+    
+    }
+
+  },
+
+    mounted(){
+     this.url_data=this.$route.params.id;
+
+     console.log(this.url_data);
+
+     this.businessInfo();
+
+     this.CommunityBusiness();
+
+     this.CommunityPeople();
+
+     this.businessCommunityTotal();
+     this.ownerPost();
+    },
+  methods: {  
+
+
+
+                  
+      businessInfo() {
+      this.$store
+        .dispatch("businessOwner/businessInfo", this.url_data)
+        .then(() => {
+          console.log("hey yeah");
+        })
+        .catch((err) => {
+          console.log({ err: err });
+        });
+    },
+
+
+
+
+   CommunityBusiness() {
+      this.$store
+        .dispatch("businessOwner/CommunityBusiness", this.url_data)
+        .then(() => {
+          console.log("hey yeah");
+        })
+        .catch((err) => {
+          console.log({ err: err });
+        });
+    },
+
+   
+
+   CommunityPeople() {
+      this.$store
+        .dispatch("businessOwner/CommunityPeople", this.url_data)
+        .then(() => {
+          console.log("hey yeah");
+        })
+        .catch((err) => {
+          console.log({ err: err });
+        });
+    },
+
+
+
+
+
+
+       businessCommunityTotal() {
+      this.$store
+        .dispatch("businessOwner/businessCommunityTotal",  this.url_data)
+        .then(() => {
+          console.log("hey yeah");
+        })
+        .catch((err) => {
+          console.log({ err: err });
+        });
+    },
+
+
+
+
+
+   ownerPost() {
+      this.$store
+        .dispatch("businessOwner/ownerPost", this.url_data)
+        .then(() => {
+          console.log("hey yeah");
+        })
+        .catch((err) => {
+          console.log({ err: err });
+        });
+    },
+
+
+
+
+
+  },
 };
 </script>
 

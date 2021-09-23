@@ -83,7 +83,10 @@ const routes = [
   {
     path: "/dashboard",
     name: "dashboard",
-    component: dashboard
+    component: dashboard,
+    meta: {
+     // auth: true
+    }
   },
 
   {
@@ -97,10 +100,13 @@ const routes = [
     component: templateView
   },
   {
-    path: "/business_owner",
+    path: "/business_owner/:id?",
     name: "BusinessOwner",
     component: businessOwner
   },
+
+  
+
 
   {
     path: "/business_owner_setting_general",
@@ -168,10 +174,10 @@ const routes = [
     component: RecoverPass3
   },
   {
-    path: "/businessfollower",
+    path: "/businessfollower/:id?",
     name: "BusinessFollower",
-    component: businessFollower
-  },
+    component: businessFollower,
+  },                 
   {
     path: "/businessvisitor",
     name: "BusinessVisitor",
@@ -267,11 +273,11 @@ router.beforeEach((to, from, next) => {
     const userdata = JSON.parse(dat);
 
     if (userdata.user.verified_at == null) {
-      next("/verify");
+    //  next("/verify");
     }
   }
 
-  next();
+  next();  
 });
 
 export default router;

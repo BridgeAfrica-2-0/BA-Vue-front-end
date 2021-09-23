@@ -343,7 +343,7 @@ export default {
         color: "#e75c18"
       });
       axios
-        .post("business/album/create/9", {
+        .post("business/album/create/" + this.url, {
           name: this.name
         })
         .then(response => {

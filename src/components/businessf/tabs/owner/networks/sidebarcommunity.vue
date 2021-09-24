@@ -4,13 +4,13 @@
       <span>
         <h6 class="title m-3">
           <fas-icon class="icons" :icon="['fas', 'users']" size="lg" />
-          <b> COMMUNITY </b> <span class="h4-color"> 7K</span>
+          <b> COMMUNITY </b> <span class="h4-color"> {{nFormatter(userdetails.total_people+businessdetails.total_Business)}}</span>
         </h6>
       </span>
       <b-tabs pills content-class="mt-3  f-left ">
         <b-tab active>
           <template slot="title">
-            People <span class="spa-color"> 7K </span>
+            People <span class="spa-color"> {{nFormatter(userdetails.total_people)}} </span>
           </template>
           <div>
             <b-row>
@@ -18,15 +18,15 @@
                 <b-tabs fill pills content-class="mt-3  f-left m-up">
                   <b-tab active>
                     <template slot="title">
-                      Followers <span class="spa-color"> 7K </span>
+                      Followers <span class="spa-color"> {{nFormatter(userdetails.total_followers)}} </span>
                     </template>
-                    <div class="s-comcard"><People :people="people" /></div>
+                    <div class="s-comcard"><People :peoples="userdetails.user_followers" /></div>
                   </b-tab>
                   <b-tab>
                     <template slot="title">
-                      Following <span class="spa-color"> 7K </span>
+                      Following <span class="spa-color"> {{nFormatter(userdetails.totat_following)}} </span>
                     </template>
-                    <div class="s-comcard"><People :people="people" /></div>
+                    <div class="s-comcard"><People :peoples="userdetails.user_following" /></div>
                   </b-tab>
                 </b-tabs>
               </b-col>
@@ -35,21 +35,21 @@
         </b-tab>
         <b-tab>
           <template slot="title">
-            Businesses <span class="spa-color"> 7K </span>
+            Businesses <span class="spa-color"> {{nFormatter(businessdetails.total_Business)}} </span>
           </template>
           <div>
             <b-tabs fill pills content-class="mt-3  f-left m-up checkcheck">
               <b-tab active>
                 <template slot="title">
-                  Followers <span class="spa-color"> 7K </span>
+                  Followers <span class="spa-color"> {{nFormatter(businessdetails.total_followers)}} </span>
                 </template>
-                <div class="s-comcard"><Business :business="business" /></div>
+                <div class="s-comcard"><Business :businesses="businessdetails.Business_followers" /></div>
               </b-tab>
               <b-tab>
                 <template slot="title">
-                  Following <span class="spa-color"> 7K </span>
+                  Following <span class="spa-color"> {{nFormatter(businessdetails.totat_following)}} </span>
                 </template>
-                <div class="s-comcard"><Business :business="business" /></div>
+                <div class="s-comcard"><Business :businesses="businessdetails.Business_following" /></div>
               </b-tab>
             </b-tabs>
           </div>
@@ -62,47 +62,22 @@
 import People from "./people";
 import Business from "./business";
 export default {
-  name: "comunitiDashboard",
+  name: "sidebarcommunity",
   components: {
     People,
     Business,
   },
-    data() {
+  data() {
     return {
       url: null,
-      people: [
-        { id: 1, first_name: "Fred", last_name: "Flintstone" },
-        { id: 2, first_name: "Wilma", last_name: "Flintstone" },
-        { id: 3, first_name: "Barney", last_name: "Rubble" },
-        { id: 4, first_name: "Betty", last_name: "Rubble" },
-        { id: 5, first_name: "Pebbles", last_name: "Flintstone" },
-        { id: 6, first_name: "Bamm Bamm", last_name: "Rubble" },
-        { id: 7, first_name: "The Great", last_name: "Gazzoo" },
-        { id: 8, first_name: "Rockhead", last_name: "Slate" },
-        { id: 9, first_name: "Pearl", last_name: "Slaghoople" }
-      ],
-      business: [
-        { id: 1, first_name: "Fred", last_name: "Flintstone" },
-        { id: 2, first_name: "Wilma", last_name: "Flintstone" },
-        { id: 3, first_name: "Barney", last_name: "Rubble" },
-        { id: 4, first_name: "Betty", last_name: "Rubble" },
-        { id: 5, first_name: "Pebbles", last_name: "Flintstone" },
-        { id: 6, first_name: "Bamm Bamm", last_name: "Rubble" },
-        { id: 7, first_name: "The Great", last_name: "Gazzoo" },
-        { id: 8, first_name: "Rockhead", last_name: "Slate" },
-        { id: 9, first_name: "Pearl", last_name: "Slaghoople" }
-      ],
     };
   },
   computed: {
-    rows() {
-      return this.items.length;
-    },
     userdetails() {
-      return this.$store.state.networkProfileCommunity.userdetails;
+      return this.$store.state.networkProfileCommunitySidebar.userdetails;
     },
     businessdetails() {
-      return this.$store.state.networkProfileCommunity.businessdetails;
+      return this.$store.state.networkProfileCommunitySidebar.businessdetails;
     }
   },
   mounted(){
@@ -111,9 +86,22 @@ export default {
     this.businessDetails();
   },
   methods:{    
+    nFormatter: function(num) {
+      if (num >= 1000000000) {
+        return (num / 1000000000).toFixed(1).replace(/\.0$/, "") + "G";
+      }
+      if (num >= 1000000) {
+        return (num / 1000000).toFixed(1).replace(/\.0$/, "") + "M";
+      }
+      if (num >= 1000) {
+        return (num / 1000).toFixed(1).replace(/\.0$/, "") + "K";
+      }
+      return num;
+    },
+
     UserDetails() {
     this.$store
-      .dispatch("networkProfileCommunity/getUserDetails", this.url)
+      .dispatch("networkProfileCommunitySidebar/getUserDetails", this.url)
       .then(() => {
         console.log('ohh year');
       })
@@ -123,7 +111,7 @@ export default {
     },
     businessDetails() {
     this.$store
-      .dispatch("networkProfileCommunity/getBusinessDetails", this.url)
+      .dispatch("networkProfileCommunitySidebar/getBusinessDetails", this.url)
       .then(() => {
         console.log('ohh year');
       })

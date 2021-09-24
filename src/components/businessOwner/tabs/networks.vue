@@ -19,9 +19,7 @@
                 <div class="center-img" v-b-modal.modal-1>
                   {{ network.business_image }}
                   <img
-                    :src="
-                      `http://team2dev.maxinemoffett.com/${network.business_image}`
-                    "
+                    :src="BaseURL + `/` + `${network.business_image}`"
                     alt=""
                   />
                 </div>
@@ -76,12 +74,9 @@
       </b-row>
     </div>
     <b-col v-if="loader" class="load">
-      <b-spinner
-        style="width: 7rem; height: 7rem;"
-        variant="primary"
-      ></b-spinner>
+      <b-spinner class="spin" variant="primary"></b-spinner>
     </b-col>
-    <div class="h-100 w-100" v-if="!getNetworksFromStore && !loader">
+    <div class="engage" v-if="!getNetworksFromStore && !loader">
       <div class="mx-auto text-center my-5">
         <h2 class="my-3">Builds networks around your Business</h2>
         <p class="my-2">you want Engage, share, Make Plans and much more</p>
@@ -98,8 +93,7 @@
             class="row sub-sidebar-2 pending-post-view mt-4 pb-0 "
           >
             <div
-              class="col-md-12 col-lg-12 d-flex align-items-stretch mb-lg-0"
-              style="padding-left: 0; padding-top: 3px;"
+              class="col-md-12 col-lg-12 d-flex align-items-stretch mb-lg-0 styling"
             >
               <a
                 class="nav-link text-dark"
@@ -243,12 +237,7 @@
             {{ success.msg }}</b-alert
           >
           <b-spinner v-if="loader" variant="primary"></b-spinner>
-          <b-button
-            @click="edit"
-            class="mt-2 "
-            style="float:right"
-            variant="primary"
-          >
+          <b-button @click="edit" class="mt-2  button-btn" variant="primary">
             Edit Network</b-button
           >
         </b-form>
@@ -288,6 +277,7 @@ import { mapActions, mapGetters } from "vuex";
 export default {
   data() {
     return {
+      BaseURL: process.env.VUE_APP_API_URL,
       showModal: false,
       selectedFile: "",
       createdNetwork: {
@@ -409,6 +399,24 @@ export default {
 .prod {
   max-width: 14rem;
   cursor: pointer;
+}
+
+.engage {
+  height: 100%;
+  width: 100%;
+}
+
+.spin {
+  width: 7rem;
+  height: 7rem;
+}
+
+.styling {
+  padding-left: 0;
+  padding-top: 3px;
+}
+.button-btn {
+  float: right;
 }
 
 h2,

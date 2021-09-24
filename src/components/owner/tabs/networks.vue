@@ -30,12 +30,7 @@
                 sm="3"
               >
                 <div class="center-img" v-b-modal.modal-1>
-                  <img
-                    :src="
-                      `http://team2dev.maxinemoffett.com/api/v1/${network.image}`
-                    "
-                    alt=""
-                  />
+                  <img :src="BaseURL + `/` + `${network.image}`" alt="" />
                 </div>
               </b-col>
               <b-col md="9" cols="7" lg="9" xl="9" sm="9">
@@ -97,10 +92,7 @@
     </div>
 
     <b-col v-if="loader" class="load">
-      <b-spinner
-        style="width: 7rem; height: 7rem;"
-        variant="primary"
-      ></b-spinner>
+      <b-spinner class="spin" variant="primary"></b-spinner>
     </b-col>
     <div class="h-100 w-100" v-if="networks.length < 1 && !loader">
       <div class="mx-auto text-center my-5">
@@ -128,8 +120,7 @@
             class="row sub-sidebar-2 pending-post-view mt-4 pb-0 "
           >
             <div
-              class="col-md-12 col-lg-12 d-flex align-items-stretch mb-lg-0"
-              style="padding-left: 0; padding-top: 3px;"
+              class="col-md-12 col-lg-12 d-flex align-items-stretch mb-lg-0 styling"
             >
               <a
                 class="nav-link text-dark"
@@ -318,12 +309,7 @@
             {{ success.msg }}</b-alert
           >
           <b-spinner v-if="loader" variant="primary"></b-spinner>
-          <b-button
-            @click="action"
-            class="mt-2 "
-            style="float:right"
-            variant="primary"
-          >
+          <b-button @click="action" class="mt-2 button-btn" variant="primary">
             {{ editNet ? "Edit Network" : "Add Network" }}
           </b-button>
         </b-form>
@@ -368,6 +354,7 @@ import axios from "axios";
 export default {
   data() {
     return {
+      BaseURL: process.env.VUE_APP_API_URL,
       showModal: false,
       selectedFile: "",
       editNet: false,
@@ -425,11 +412,11 @@ export default {
       this.loader = true;
       axios
         .get("/network")
-        .then(res => {
+        .then((res) => {
           this.loader = false;
           this.networks = res.data.data;
         })
-        .catch(err => {
+        .catch((err) => {
           this.loader = false;
         });
     },
@@ -438,7 +425,7 @@ export default {
       this.loader = true;
       axios
         .post("/network", newNetwork)
-        .then(res => {
+        .then((res) => {
           this.success.state = true;
           this.success.msg = "Operation was successful !!";
           setTimeout(() => {
@@ -446,7 +433,7 @@ export default {
           }, 5000);
           this.getNetworks();
         })
-        .catch(err => {
+        .catch((err) => {
           this.success.state = true;
           this.success.msg = "Something wen't wrong !!";
           setTimeout(() => {
@@ -460,7 +447,7 @@ export default {
     editNetwork(editedNetwork) {
       axios
         .post(`network/${editedNetwork.id}`, editedNetwork.data)
-        .then(res => {
+        .then((res) => {
           this.success.state = true;
           this.success.msg = "Operation was successful !!";
           setTimeout(() => {
@@ -468,7 +455,7 @@ export default {
           }, 5000);
           this.getNetworks();
         })
-        .catch(err => {
+        .catch((err) => {
           this.success.state = true;
           this.success.msg = "Something wen't wrong !!";
           setTimeout(() => {
@@ -482,7 +469,7 @@ export default {
     deleteNetwork(network) {
       axios
         .delete(`network/${network.id}`)
-        .then(res => {
+        .then((res) => {
           this.success.state = true;
           this.success.msg = "Operation was successful !!";
           setTimeout(() => {
@@ -490,7 +477,7 @@ export default {
           }, 5000);
           this.getNetworks();
         })
-        .catch(err => {
+        .catch((err) => {
           this.success.state = true;
           this.success.msg = "Something wen't wrong !!";
           setTimeout(() => {
@@ -577,6 +564,17 @@ export default {
 </script>
 
 <style scoped>
+.spin {
+  width: 7rem;
+  height: 7rem;
+}
+.button-btn {
+  float: right;
+}
+.styling {
+  padding-left: 0;
+  padding-top: 3px;
+}
 .load {
   display: flex;
   justify-content: center;

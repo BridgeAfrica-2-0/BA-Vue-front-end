@@ -185,7 +185,7 @@ export default {
   },
   methods: {
     getProducts() {
-      axios.get("market/products/1").then(res => {
+      axios.get("/api/v1/market").then((res) => {
         this.products = res.data.data.data;
       });
     },
@@ -204,13 +204,13 @@ export default {
 
       axios
         .post("market", fd)
-        .then(res => {
+        .then((res) => {
           this.load = false;
           (this.success = true), (this.val = "success");
           this.msg = "Operation was successful !!";
           this.getProducts();
         })
-        .catch(err => {
+        .catch((err) => {
           this.load = false;
           (this.success = true), (this.val = "danger");
           this.msg = "Something wen't wrong !!";

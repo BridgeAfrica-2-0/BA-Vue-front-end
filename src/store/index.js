@@ -10,9 +10,9 @@ axios.defaults.baseURL = process.env.VUE_APP_API_URL;
 export default new Vuex.Store({
   modules: {
     auth,
-    networkDetails,
-    dashboardcommunity,
-    ProfileAndBusinessDetails,
+    // networkDetails,
+    // dashboardcommunity,
+    // ProfileAndBusinessDetails,
     businessOwner,
   },
 });

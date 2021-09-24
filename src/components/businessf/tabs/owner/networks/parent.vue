@@ -202,12 +202,12 @@ export default {
     return {
       networkShow: true,
       showModal: false,
-      text: ""
+      text: "",
     };
   },
 
   components: {
-    SidebarCommunity
+    SidebarCommunity,
   },
 
   methods: {
@@ -218,8 +218,8 @@ export default {
     addNetwork() {
       console.log("hello");
       this.showModal = !this.showModal;
-    }
-  }
+    },
+  },
 };
 </script>
 

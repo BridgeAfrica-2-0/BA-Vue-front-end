@@ -26,7 +26,7 @@
                 <b-dropdown-item href="#" @click="approvePost(post)">
                   Approve</b-dropdown-item
                 >
-                <b-dropdown-item href="#" @click="unApprovePost(post)">
+                <b-dropdown-item href="#" @click="DisapprovePost(post)">
                   Un Approved
                 </b-dropdown-item>
               </b-dropdown>
@@ -92,8 +92,15 @@ export default {
         this.getPosts();
       });
     },
-    unApprovePost(post) {
-      // Un approve the post
+    DisapprovePost(post) {
+      axios
+        .post()
+        .then(() => {
+          //code goes here
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     },
   },
 };

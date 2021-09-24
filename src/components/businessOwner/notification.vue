@@ -63,6 +63,7 @@
             Ipsum has been the industry's standard dummy text ever since the
             1500s,
           </p>
+        </b-col>
 
         <b-col v-if="loader" class="load">
           <b-spinner
@@ -118,7 +119,7 @@ export default {
     deleteAll(data) {
       this.checked = false;
       let ids = [];
-      data.forEach(element => {
+      data.forEach((element) => {
         ids.push(element.id);
       });
       this.deleteNotifications(ids);
@@ -130,7 +131,7 @@ export default {
 
     // select all the notifications
     selectall() {
-      this.getNotificationsStore.forEach(element => {
+      this.getNotificationsStore.forEach((element) => {
         this.selected.push(element);
       });
     },

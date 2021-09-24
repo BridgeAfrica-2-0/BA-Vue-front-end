@@ -10,7 +10,7 @@
               src="https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg"
             ></b-avatar>
           </b-col>
-
+      
           <b-col md="8" cols="8" lg="8">
             <div>
               <b-row class="shift">
@@ -257,7 +257,76 @@
 </template>
 
 <script>
-export default {};
+
+import moment from "moment";
+import axios from "axios";
+export default {
+
+
+   props:['type'],
+  data() {
+    return {
+      page: 1,
+      options: {
+        rewind: true,
+        autoplay: true,
+        perPage: 1,
+        pagination: false,
+
+        type: "loop",
+        perMove: 1
+      }
+    };
+  },
+
+
+    computed:{
+ 
+   businesses(){
+
+      if(this.type=="Followers"){ 
+
+      return  this.$store.state.follower.UcommunityFollower;  
+
+       }else{
+
+         return  this.$store.state.follower.UcommunityFollowing; 
+       }
+   }
+    
+    
+  },
+
+    methods:{
+      
+       infiniteHandler($state) {
+
+      let url = null;
+
+         if(this.type=="Follower"){  
+          url="profile/business/follower"
+         }else{
+          url="profile/network/following";
+         }
+      axios
+        .get(url + this.page)
+        .then(({ data }) => {
+          if (data.data.length) {
+            this.page += 1;
+
+            this.owner_post.push(...data.data);  
+            $state.loaded();
+          } else {
+            $state.complete();
+          }
+        })
+        .catch((err) => {
+          console.log({ err: err });
+        });
+    },
+
+  }  
+};
 </script>
 
 <style scoped>

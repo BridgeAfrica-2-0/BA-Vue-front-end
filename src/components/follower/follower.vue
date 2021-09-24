@@ -1,28 +1,44 @@
 <template>
   <div class="main">
+
     <div class="images">
       <div>
-        <img src="@/assets/img/banner.jpg" class="banner" />
+        <img src="@/assets/img/banner.jpg" v-if="info.user.cover_picture == null " class="banner" />     <img  :src="info.user.cover_picture" v-if="info.user.cover_picture != null " class="banner" />      
       </div>
       <b-row class="mt-2 mb-2 options">
         <b-col cols="6" class="avata">
-          <div>
-            <b-avatar
-              src="https://placekitten.com/400/300"
+          <div>     
+            
+
+
+            <b-avatar v-if="info.user.profile_picture !=null "
+               :src="info.user.profile_picture"
               class=" float-left avatar"
               badge-variant="primary"
               badge-offset="10px"
               variant="white"
             >
             </b-avatar>
+
+
+             <b-avatar v-if="info.user.profile_picture ==null "
+               src="https://placekitten.com/400/300"
+              class=" float-left avatar"
+              badge-variant="primary"
+              badge-offset="10px"
+              variant="white"
+            >
+            </b-avatar>
+
+
           </div>
           <div class="d-inline-block ml-4 float-left mt-4">
             <b-link>
-              <h5 class="font-weight-bolder name">Blezour Blec</h5>
+              <h5 class="font-weight-bolder name"> {{info.user.name}} </h5>
             </b-link>
             <br />
 
-            <span class="k15 duration"> 1.5k Community </span>
+            <span class="k15 duration"> 0{{info.user.community}} Community </span>
           </div>
         </b-col>
         <b-col cols="12">
@@ -68,9 +84,9 @@
             </b-avatar>
           </div>
           <div class="d-inline-block mt-4 ml-4 float-left texts">
-            <h6 class="font-weight-bolder name ">Blezour Blec</h6>
+            <h6 class="font-weight-bolder name ">  {{info.user.name}}  </h6>
             <p class="details">
-              1.5k Community
+              0{{info.user.community}} Community
             </p>
           </div>
         </b-col>
@@ -147,7 +163,126 @@ export default {
     Media,
     Community,
     Businesses
-  }
+  },
+
+
+  mounted(){
+     this.url = this.$route.params.id;
+
+
+
+      this.$store
+      .dispatch("follower/loadUserPostIntro", null)
+      .then((response) => {
+       
+      })
+      .catch((error) => {
+        console.log({error:error});
+      });
+
+
+ 
+      this.$store
+      .dispatch("follower/UcommunityFollower", null)
+      .then((response) => {
+       
+      })
+      .catch((error) => {
+        console.log({error:error});
+      });
+
+
+
+      
+      this.$store
+      .dispatch("follower/UcommunityFollowing", null)
+      .then((response) => {
+       
+      })
+      .catch((error) => {
+        console.log({error:error});
+      });
+
+
+  
+   
+      this.$store
+      .dispatch("follower/BcommunityFollower", null)
+      .then((response) => {
+       
+      })
+      .catch((error) => {
+        console.log({error:error});
+      });
+
+     
+      this.$store
+      .dispatch("follower/BcommunityFollowing", null)
+      .then((response) => {
+       
+      })
+      .catch((error) => {
+        console.log({error:error});
+      });
+
+
+
+      
+      this.$store
+      .dispatch("follower/NcommunityFollower", null)
+      .then((response) => {
+       
+      })
+      .catch((error) => {
+        console.log({error:error});
+      });
+
+      
+      this.$store
+      .dispatch("follower/UcommunityFollowing", null)
+      .then((response) => {
+       
+      })
+      .catch((error) => {
+        console.log({error:error});
+      });
+
+
+
+
+    
+    
+
+
+      
+
+
+
+
+
+
+},
+
+computed: {
+
+  
+
+      profile_info() {
+      return  this.$store.state.businessOwner.businessInfo;  
+
+    
+    },
+
+
+     info :function(){
+        return this.$store.getters['follower/getUserPostIntro'];
+      }
+
+
+
+  },
+
+
 };
 </script>
 

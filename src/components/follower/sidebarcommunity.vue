@@ -23,7 +23,7 @@
                       Followers <span class="spa-color"> 7K </span>
                     </template>
 
-                    <div class="s-comcard"><People /></div>
+                    <div class="s-comcard"><People   type="Followers" /></div>
                   </b-tab>
 
                   <b-tab>
@@ -31,7 +31,7 @@
                       Following <span class="spa-color"> 7K </span>
                     </template>
 
-                    <div class="s-comcard"><People /></div>
+                    <div class="s-comcard"><People  type="Following" /></div>
                   </b-tab>
                 </b-tabs>
               </b-col>
@@ -42,6 +42,35 @@
         <b-tab>
           <template slot="title">
             Businesses <span class="spa-color"> 7K </span>
+          </template>
+
+          <div>
+            <b-tabs fill pills content-class="mt-3  f-left m-up checkcheck">
+              <b-tab active>
+                <template slot="title">
+                  Followers <span class="spa-color"> 7K </span>
+                </template>
+
+                <div class="s-comcard"><Business type="Followers" /></div>
+              </b-tab>
+
+              <b-tab>
+                <template slot="title">
+                  Following <span class="spa-color"> 7K </span>
+                </template>
+
+                <div class="s-comcard"><Business type="following" /></div>
+              </b-tab>
+            </b-tabs>
+          </div>
+        </b-tab>
+
+
+
+
+          <b-tab>
+          <template slot="title">
+            Network <span class="spa-color"> 7K </span>
           </template>
 
           <div>
@@ -64,6 +93,10 @@
             </b-tabs>
           </div>
         </b-tab>
+
+
+
+
       </b-tabs>
     </div>
   </div>

@@ -30,7 +30,6 @@ export default {
     UcommunityFollowing:[],
 
 
-
     userData: [
       {
         profile_about: {
@@ -177,8 +176,8 @@ export default {
   },
   mutations: {
 
-    //set community data  
 
+    
     setNcommunityFollower(state, data){
 
       state.setNcommunityFollower = data;
@@ -215,6 +214,7 @@ export default {
 
       state.NcommunityFollowing = data;
     },
+
 
 
 
@@ -364,7 +364,9 @@ export default {
     },
 
 
+     
 
+    
     NcommunityFollower({ commit }){
       return axios
       .get('profile/network/follower')
@@ -414,6 +416,8 @@ export default {
         console.log(data);
       });
     },
+
+
 
     profileBusiness({ commit }) {
 

@@ -20,9 +20,7 @@ import VueSocialauth from "vue-social-auth";
 // import firebase from "firebase";
 
 import LoadScript from 'vue-plugin-load-script';
-import InfiniteLoading from 'vue-infinite-loading';
 
-import LoadScript from "vue-plugin-load-script";
 
 
 Vue.use(LoadScript);
@@ -134,6 +132,20 @@ Vue.use(VueGoogleMaps, {
     autobindAllEvents: false,
     installComponents: true
 });
+
+
+import VueLoading from 'vue-loading-overlay';
+import 'vue-loading-overlay/dist/vue-loading.css';
+
+
+Vue.use(VueLoading);
+
+import VueAgile from 'vue-agile'
+
+Vue.use(VueAgile);
+
+  
+
 
 Vue.component("v-select", vSelect);
 

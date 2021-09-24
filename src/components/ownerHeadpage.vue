@@ -2,17 +2,28 @@
   <div class="p-0">
     <b-container fluid class="p-0 gradient">
       <div class="container-flex">
-        <img
+
+  
+
+        <img  v-if="info.user.cover_picture == null "
           src="@/assets/img/banner.jpg"
           class="img-fluid  banner"
           alt="Kitten"
         />
+
+
+         <img  v-if="info.user.cover_picture !=null "
+          :src="info.user.cover_picture"
+          class="img-fluid  banner"
+          alt="Kitten"
+        />
+
       </div>
 
       <div class="container-fluid p-63">
         <b-row class="mt-md-2 text-left">
           <b-col cols="12" md="12" class="m-0 p-0 text-left put-top ">
-            <b-avatar
+            <b-avatar v-if="info.user.profile_picture ==null "
               src="https://placekitten.com/400/300"
               class="  avat  text-center"
               badge-variant="primary"
@@ -20,18 +31,51 @@
             >
             </b-avatar>
 
+
+            <b-avatar v-if="info.user.profile_picture !=null "
+              :src="info.user.profile_picture"
+              class="  avat  text-center"
+              badge-variant="primary"
+              badge-offset="10px"
+            >
+            </b-avatar>
+
+
             <b-icon
               icon="camera-fill"
               class="avatar-header-icon btn cursor-pointer size"
-              v-b-modal.modal-4
+               @click="selectlogo" 
+              
             ></b-icon>
 
             <span style="display: inline-block;">
               <h6 class=" profile-name text-center ">
-                <b> <b-link> Blezour Blec </b-link> </b> <br />
-                <span class="duration"> 1.5k Community </span>
+                <b> <b-link> {{info.user.name}} </b-link> </b> <br />
+                <span class="duration"> 0{{info.user.community}} Community </span>
               </h6>
             </span>
+
+             
+                <input
+            type="file"
+            id="cover_pic"
+            @change="selectMoviesOutsidePost"
+            accept="video/mpeg, video/mp4, image/*"
+            hidden
+            ref="movie"
+          />
+
+
+          
+            <input
+            type="file"
+            id="logo_pic"
+            @change="setlogo"
+            accept="video/mpeg, video/mp4, image/*"
+            hidden
+            ref="logo_pic"
+          />
+
 
             <div class="">
               <div class="text-box">
@@ -40,7 +84,7 @@
                     <b-button
                       variant="primary"
                       class="  d-none d-md-inline edit-btn"
-                      v-b-modal.coverphoto
+                       @click="selectCover"
                     >
                       <fas-icon
                         class="mr-2"
@@ -61,14 +105,15 @@
                         <b-icon-three-dots></b-icon-three-dots>
                       </template>
 
-                      <b-dropdown-item v-b-modal.coverphoto>
-                        Change Cover</b-dropdown-item
-                      >
+                     <b-dropdown-item  @click="selectCover" 
+                    > Change Cover</b-dropdown-item
+                  >
 
+  <!--
                       <b-dropdown-item
                         >Invite Friends On Bridge Africa</b-dropdown-item
                       >
-
+--> 
                       <b-dropdown-item>View As</b-dropdown-item>
                     </b-dropdown>
                   </span>
@@ -76,73 +121,49 @@
               </div>
             </div>
 
-            <b-modal id="modal-4" title="Upload Profile Picture">
-              <div class="w3-container">
-                <div class="row pb-3">
-                  <div
-                    class="col-sm-6 text-center"
-                    style="border-right:1px solid #dee2e6;"
-                    @click="chooseProfile1()"
-                  >
-                    <h1>
-                      <fas-icon class="primary" :icon="['fas', 'upload']" />
-                    </h1>
-                    <div>
-                      <input
-                        type="file"
-                        id="profile-imag"
-                        hidden
-                        name="img"
-                        accept="image/*"
-                      />
-                    </div>
-                    <h4>Upload a New picture</h4>
-                  </div>
 
-                  <div class="col-sm-6 text-center">
-                    <h1>
-                      <fas-icon class="primary" :icon="['fas', 'edit']" />
-                    </h1>
-                    <h4>Edit Your New picture</h4>
-                  </div>
-                </div>
+
+                     <b-modal id="logomodal" ref="logomodal"  @ok="submitLogo"  title="Upload Your Logo">
+                <div class="w3-container">
+
+                <div id="preview">
+
+                <img  :src="img_url" />   
+
+    
+
+                 </div>
+
+
               </div>
             </b-modal>
 
             <!-- second modal box  to edit the big cover photo -->
 
-            <b-modal id="coverphoto" title="Upload Profile Picture">
-              <div class="w3-container">
-                <div class="row pb-3">
-                  <div
-                    class="col-sm-6 text-center"
-                    style="border-right:1px solid #dee2e6;"
-                    @click="chooseProfile2()"
-                  >
-                    <h1>
-                      <fas-icon class="primary" :icon="['fas', 'upload']" />
-                    </h1>
-                    <div>
-                      <input
-                        type="file"
-                        hidden
-                        id="cover-imag"
-                        name="img"
-                        accept="image/*"
-                      />
-                    </div>
-                    <h4>Upload a New picture</h4>
-                  </div>
 
-                  <div class="col-sm-6 text-center">
-                    <h1>
-                      <fas-icon class="primary" :icon="['fas', 'edit']" />
-                    </h1>
-                    <h4>Edit Your New picture</h4>
-                  </div>
-                </div>
+          
+            
+            <b-modal id="coverphoto" ref="coverphoto" @ok="submitCover" title="Upload  Cover photo">
+              <div class="w3-container">
+
+
+
+    <div id="preview">
+
+     <img  :src="img_url" />   
+
+    
+
+  </div>
+
+
               </div>
             </b-modal>
+
+
+
+
+
           </b-col>
         </b-row>
       </div>
@@ -151,22 +172,324 @@
 </template>
 
 <script>
-export default {
-  name: "ownerheadPage",
+        
 
-  methods: {
-    chooseProfile2: function() {
-      document.getElementById("cover-imag").click();
+
+        export default {
+  name: "headPageOwner",
+
+  
+   data() {
+      return {
+
+          url:null,
+          img_url:null,
+          cover_photo:null,
+          profile_photo:null,
+
+        options: {
+          
+          rewind : true,
+          autoplay: true,
+          perPage: 3,
+          pagination:false,
+        
+          
+          type   : 'loop',
+          perMove: 1,
+
+
+          breakpoints: {
+          "760": {
+            perPage: 1,
+            gap: "0rem",
+          },
+          "992": {
+            perPage: 2,
+            gap: "1rem",
+          },
+        },
+
+
+        
+        },
+      };
     },
 
-    chooseProfile1: function() {
-      document.getElementById("profile-imag").click();
-    }
-  }
+    
+methods: {
+
+
+setlogo(e){
+    
+       console.log(e);
+     
+
+       this.profile_photo= e.target.files[0]
+      const file = e.target.files[0];
+      this.img_url = URL.createObjectURL(file);
+
+      this.$refs["logomodal"].show();  
+
+
+},
+
+
+
+selectlogo(){
+    document.getElementById("logo_pic").click();
+ 
+},
+
+selectCover(){
+
+ document.getElementById("cover_pic").click();
+
+},
+  selectMoviesOutsidePost(e) {
+      console.log(e);
+     
+
+       this.cover_photo= e.target.files[0]
+      const file = e.target.files[0];
+      this.img_url = URL.createObjectURL(file);
+
+      this.$refs["coverphoto"].show();
+    },
+
+  
+  chooseProfile2: function() {
+     
+        document.getElementById("cover-imag").click()
+    },
+
+
+     chooseProfile1: function() {
+     
+        document.getElementById("profile-imag").click()
+    },
+
+
+    submitLogo(){
+     
+        
+
+        let loader = this.$loading.show({
+                   
+                    container: this.fullPage ? null : this.$refs.preview,
+                    canCancel: true,
+                    onCancel: this.onCancel,
+                    color:"#e75c18"
+                });
+
+
+       let formData = new FormData();
+        formData.append("image", this.profile_photo);
+
+        
+
+
+       this.axios 
+          .post("user/profile/picture", formData, {
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
+          })
+          .then((response) => {
+            console.log(response);
+
+           
+
+            this.flashMessage.show({
+              status: "success",
+
+              message: "Logo Updated",
+
+              blockClass: "custom-block-class",
+            });
+
+
+             loader.hide()
+      this.$refs["modalxl"].hide();
+
+          })
+
+            .catch((err) => {
+            console.log({ err: err });
+
+            
+
+            if (err.response.status == 422) {
+              console.log({ err: err });
+              
+
+              this.flashMessage.show({
+                status: "error",
+
+                message: err.response.data.message,
+                blockClass: "custom-block-class",
+              });
+
+
+               loader.hide()
+      
+
+            } else {
+              this.flashMessage.show({
+                status: "error",
+                
+                message: "Unable to set your Logo",
+                blockClass: "custom-block-class",
+              });
+              console.log({ err: err });
+
+               loader.hide()
+     
+            }
+
+          });
+
+
+
+
+
+    },
+
+    
+
+    submitCover(){
+     
+        
+
+        let loader = this.$loading.show({
+                   
+                    container: this.fullPage ? null : this.$refs.preview,
+                    canCancel: true,
+                    onCancel: this.onCancel,
+                    color:"#e75c18"
+                });
+
+
+       let formData = new FormData();
+        formData.append("image", this.cover_photo);
+
+        
+
+
+       this.axios 
+          .post("user/cover", formData, {
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
+          })
+          .then((response) => {
+            console.log(response);
+
+           
+
+            this.flashMessage.show({
+              status: "success",
+
+              message: "Profile Updated",
+
+              blockClass: "custom-block-class",
+            });
+
+
+             loader.hide()
+      this.$refs["modalxl"].hide();
+
+          })
+
+            .catch((err) => {
+            console.log({ err: err });
+
+            
+
+            if (err.response.status == 422) {
+              console.log({ err: err });
+              
+
+              this.flashMessage.show({
+                status: "error",
+
+                message: err.response.data.message,
+                blockClass: "custom-block-class",
+              });
+
+
+               loader.hide()
+      
+
+            } else {
+              this.flashMessage.show({
+                status: "error",
+                
+                message: "Unable to upload your image",
+                blockClass: "custom-block-class",
+              });
+              console.log({ err: err });
+
+               loader.hide()
+     
+            }
+
+          });
+
+
+
+
+
+    },
+
+
+},
+
+mounted(){
+     this.url = this.$route.params.id;
+},
+
+computed: {
+
+  
+
+      profile_info() {
+      return  this.$store.state.businessOwner.businessInfo;  
+
+    
+    },
+
+
+     info :function(){
+        return this.$store.getters['profile/getUserPostIntro'];
+      }
+
+
+
+  },
+
+
+
 };
+
 </script>
 
 <style scoped>
+
+
+
+#preview {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#preview img {
+  max-width: 100%;
+  max-height: 300px;
+}
+
+
 .text-box {
   margin-top: 1.5rem;
   text-align: left;

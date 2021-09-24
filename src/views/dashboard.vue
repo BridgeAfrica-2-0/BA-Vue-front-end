@@ -204,11 +204,18 @@ export default {
     switchBusiness(value){
 
        if(value != "Owner"){ 
+           let loader = this.$loading.show({
+                   
+                    container: this.fullPage ? null : this.$refs.loader,
+                    canCancel: true,
+                    onCancel: this.onCancel,
+                    color:"#e75c18"
+                });
 
       console.log(value);
      this.url_data=value;
 
-
+ 
 
 
       this.$store
@@ -228,6 +235,9 @@ export default {
     this.businessCommunityTotal();
 
     this.dashboardBpost();
+
+
+     loader.hide()
 
        }
 

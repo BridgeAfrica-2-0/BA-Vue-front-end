@@ -8,12 +8,13 @@ import ProfileAndBusinessDetails from "./ProfileAndBusinessDetails";
 import hotbusiness from "./hotbusiness";
 import networkDetails from "./networkDetails";
 import dashboardcommunity from "./dashboardcommunity";
-import networkProfileMembers from "./networkProfileMembers";
-import NetworkSettings from "./NetworkSettings";
+import profile from "./profile";
+
 import axios from "axios";
 
 Vue.use(Vuex);
  axios.defaults.baseURL = process.env.VUE_APP_API_URL;    
+
 export default new Vuex.Store({
   modules: {
     auth,
@@ -23,7 +24,10 @@ export default new Vuex.Store({
     businessOwner,
     dashboard,
     hotbusiness,
-    networkProfileMembers,
-    market
-  }
+    profile
+
+  },
+
 });
+
+

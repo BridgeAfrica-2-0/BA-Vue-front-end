@@ -85,14 +85,17 @@ const routes = [
     name: "dashboard",
     component: dashboard,
     meta: {
-      // auth: true
-    },
+      auth: true
+    }
   },
 
   {
     path: "/profile_owner",
     name: "profile_owner",
     component: profile_owner,
+    meta: {
+     // auth: true
+    }
   },
   {
     path: "/template_viewer",

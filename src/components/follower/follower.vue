@@ -203,7 +203,15 @@ export default {
         console.log({error:error});
       });
 
-
+     
+      this.$store
+      .dispatch("follower/Tcommunity", null)
+      .then((response) => {
+       
+      })
+      .catch((error) => {
+        console.log({error:error});
+      });
   
    
       this.$store
@@ -239,7 +247,7 @@ export default {
 
       
       this.$store
-      .dispatch("follower/UcommunityFollowing", null)
+      .dispatch("follower/NcommunityFollowing", null)
       .then((response) => {
        
       })

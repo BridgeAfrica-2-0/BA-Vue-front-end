@@ -30,14 +30,14 @@
         </p>
         <p>
           <b-icon icon="book-fill" class="icon-size" variant="primary"></b-icon>
-          Studied at:  <!--     <span
-                v-for="edu in info.educ.slice(0, 1)"
+          Studied at:      <span
+                v-for="edu in info.user_education.slice(0, 1)"
                 :key="edu.id"
                 class="text"
               >
             
                 {{ edu.school_name }}</span
-              >-->
+              >
         </p>
         <p>
           <b-icon

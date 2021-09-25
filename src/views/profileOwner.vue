@@ -74,7 +74,18 @@ export default {
     
    
   },
-  methods: {}
+  methods: {},
+  mounted(){
+
+    this.$store
+      .dispatch("profile/Tcommunity", null)
+      .then((response) => {
+       
+      })
+      .catch((error) => {
+        console.log({error:error});
+      });
+  }
 };
 </script>
 

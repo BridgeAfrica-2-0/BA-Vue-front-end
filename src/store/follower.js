@@ -28,6 +28,7 @@ export default {
    
     UcommunityFollower:[],
     UcommunityFollowing:[],
+    Tcommunity:[],
 
 
     userData: [
@@ -176,11 +177,15 @@ export default {
   },
   mutations: {
 
+   setTcommunity(state, data){
+   
+     state.Tcommunity=data;
 
+   },
     
     setNcommunityFollower(state, data){
 
-      state.setNcommunityFollower = data;
+      state.NcommunityFollower = data;
 
     },
 
@@ -206,7 +211,7 @@ export default {
 
     setBcommunityFollower(state, data){
 
-      state.setBcommunityFollower = data;
+      state.BcommunityFollower = data;
     },
 
 
@@ -365,7 +370,16 @@ export default {
 
 
      
+    Tcommunity({commit}){
+     
+      return axios
+      .get('profile/total/community')
+      .then(({ data }) => {
+        commit('setTcommunity', data.data);
+        console.log(data);
+      });
 
+    },
     
     NcommunityFollower({ commit }){
       return axios
@@ -569,6 +583,8 @@ export default {
           context.commit("editPostUserIntro", response.data.data);
         })
         .catch(error => {
+
+          console.log({error:error});
           console.log("Load User Intro Echec");
           if (error instanceof TypeError) {
             console.log(error.message);

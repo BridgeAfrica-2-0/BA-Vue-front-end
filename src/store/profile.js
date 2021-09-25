@@ -28,7 +28,7 @@ export default {
    
     UcommunityFollower:[],
     UcommunityFollowing:[],
-
+    Tcommunity:[],
 
 
     userData: [
@@ -164,9 +164,13 @@ export default {
     },
     getProfileAbout_(state) {
       return state.userData[0].profile_about_new;
+    }, 
+    getProfileProfession(state) {
+      return state.profileIntro.user.profession;
     },
+
     getProfileAboutEducationAndWorks(state) {
-      return state.userData[0].profile_about.educationAndWorks;
+      return state.profileIntro.user_education;
     },
     getProfileAbout(state) {
       return state.profile_about;
@@ -178,6 +182,13 @@ export default {
   mutations: {
 
     //set community data  
+
+    setTcommunity(state, data){
+   
+      state.Tcommunity=data;
+ 
+    },
+     
 
     setNcommunityFollower(state, data){
 
@@ -349,6 +360,17 @@ export default {
 
   actions: {
 
+  
+    Tcommunity({commit}){
+     
+      return axios
+      .get('profile/total/community')
+      .then(({ data }) => {
+        commit('setTcommunity', data.data);
+        console.log(data);
+      });
+
+    },
 
     nFormatter(num) {
       if (num >= 1000000000) {

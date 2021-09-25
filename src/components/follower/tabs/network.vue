@@ -1,8 +1,13 @@
 <template>
   <div>
+    <b-modal id="modal-sm" size="sm" hide-header>
+      Do you want to join this network?
+    </b-modal>
 
-    
-    <div class="people-style shadow"  v-for="biz in businesses" :key="biz.id">
+
+      
+
+          <div class="people-style shadow"  v-for="biz in network" :key="biz.id">
       <b-row>
         <b-col md="3" xl="5" lg="5" cols="5" sm="3">
           <div class="center-img">
@@ -98,57 +103,45 @@
       </b-row>
     </div>
 
-  <infinite-loading @infinite="infiniteHandler"></infinite-loading>
+   
+  <infinite-loading @infinite="infiniteHandler"></infinite-loading>  
   </div>
 </template>
 
 <script>
 
-import moment from "moment";
 import axios from "axios";
-
 export default {
- props:['type'],
-  data() {
-    return {
-      page: 1,
-      options: {
-        rewind: true,
-        autoplay: true,
-        perPage: 1,
-        pagination: false,
+  props: ["type"],
+  computed: {
+    business() {
+      return this.$store.getters["networkDetails/getdetails.category"];
+    },
 
-        type: "loop",
-        perMove: 1
-      }
-    };
-  },
-
-  computed:{
- 
-   businesses(){
+        network(){
 
       if(this.type=="Follower"){ 
 
-      return  this.$store.state.follower.BcommunityFollower.business_followers;  
+      return  this.$store.state.follower.NcommunityFollower.network_followers;  
 
        }else{
 
-         return  this.$store.state.follower.BcommunityFollowing.business_following; 
+         return  this.$store.state.follower.NcommunityFollowing.network_following; 
        }
    }
-    
-    
+   
   },
 
-  methods:{
+
+
+   methods:{
       
        infiniteHandler($state) {
 
       let url = null;
 
          if(this.type=="Follower"){  
-          url="profile/business/follower/"
+          url="profile/network/follower/"
          }else{
           url="profile/network/following/";
          }
@@ -157,11 +150,12 @@ export default {
         .then(({ data }) => {
           if (data.data.length) {
             this.page += 1;
-           if(this.type=="Follower"){  
-            this.businesses.push(...data.data.business_followers); 
+      if(this.type=="Follower"){  
+            this.businesses.push(...data.data.network_followers); 
            }else{
-              this.businesses.push(...data.data.business_following);
+              this.businesses.push(...data.data.network_following);
            }
+
 
             $state.loaded();
           } else {
@@ -173,11 +167,21 @@ export default {
         });
     },
 
-  }  
+  } ,
 
-
+  created() {
+    this.$store
+      .dispatch("networkDetails/getndetails")
+      .then(() => {
+        console.log("the response");
+      })
+      .catch(err => {
+        console.log({ err: err });
+      });
+  }
 };
 </script>
+
 
 <style scoped>
 @media only screen and (min-width: 768px) {

@@ -13,8 +13,7 @@
         <b-tab title="BASIC INFO"> <ContactandInfo /> </b-tab>
         <b-tab title="EDUCATION AND WORK"><WorkAndEducation /></b-tab>
       </b-tabs>
-
-      {{this.$store.getters['profile/getProfileAbout_']}}   
+  
     </div>
   </div>
 </template>

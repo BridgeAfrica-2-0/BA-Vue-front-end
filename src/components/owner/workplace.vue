@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b>WorkPlace</b>  {{work[0]}}
+    <b>WorkPlace</b>  
     <hr />
     <b-link class="mt-4 text-decoration-none" v-b-modal.modal-9>
       <b-icon icon="plus" variant="primary"></b-icon>

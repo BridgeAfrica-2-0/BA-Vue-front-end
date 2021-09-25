@@ -1,91 +1,10 @@
 <template>
   <div>
     <div class="s-cardd">
-      <div class="people-style border shadow">
-        <b-row class="mb-1">
-          <b-col md="3" cols="4" lg="3" class="my-auto">
-            <b-avatar
-              class="p-avater"
-              variant="primary"
-              src="https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg"
-            ></b-avatar>
-          </b-col>
-      
-          <b-col md="8" cols="8" lg="8">
-            <div>
-              <b-row class="shift">
-                <b-col md="12" lg="12" sm="12" cols="12">
-                  <div class="e-name">
-                    <b-row>
-                      <b-col md="6" lg="6" cols="6" sm="6" class="mt-lg-2">
-                        <div class="mt-2 mt-lg-0 mt-xl-0 username">
-                          <b> howty Itz blec </b>
-                        </div>
-                      </b-col>
+     
 
-                      <b-col
-                        md="6"
-                        lg="6"
-                        cols="6"
-                        sm="6"
-                        class="mt-3 mt-lg-2 mt-xl-2"
-                      >
-                        <h6 class="follower">5K Community</h6>
-                      </b-col>
-                    </b-row>
-                  </div>
-                </b-col>
 
-                <b-col lg="12" xl="12" cols="12" sm="12" md="12">
-                  <div class="e-name">
-                    <b-row class="mt-lg-0">
-                      <b-col
-                        md="6"
-                        lg="6"
-                        cols="6"
-                        sm="6"
-                        xl="6"
-                        class="mt-2 mt-lg-2 mt-xl-2 btn-2 center"
-                      >
-                        <b-button
-                          block
-                          variant="primary"
-                          size="sm"
-                          class="b-background flexx pobtn shadow mr-lg-3 mr-xl-3"
-                        >
-                          <i class="fas fa-envelope   fa-lg btn-icon "></i>
-                          <span class="btn-text">Message</span>
-                        </b-button>
-                      </b-col>
-
-                      <b-col
-                        md="6"
-                        lg="6"
-                        cols="6"
-                        sm="6"
-                        xl="6"
-                        class="mt-2 mt-lg-2 mt-xl-2 btn-2 center"
-                      >
-                        <b-button
-                          block
-                          size="sm"
-                          class="b-background flexx pobtn shadow mr-lg-3 mr-xl-3"
-                          variant="primary"
-                        >
-                          <i class="fas fa-user-plus  fa-lg btn-icon "></i>
-                          <span class="btn-com">Community</span>
-                        </b-button>
-                      </b-col>
-                    </b-row>
-                  </div>
-                </b-col>
-              </b-row>
-            </div>
-          </b-col>
-        </b-row>
-      </div>
-
-      <div class="people-style border shadow">
+    <div class="people-style border shadow"  v-for="user in users" :key="user.id">
         <b-row class="mb-1">
           <b-col md="3" cols="4" lg="3" class="my-auto">
             <b-avatar
@@ -169,90 +88,10 @@
         </b-row>
       </div>
 
-      <div class="people-style border shadow">
-        <b-row class="mb-1">
-          <b-col md="3" cols="4" lg="3" class="my-auto">
-            <b-avatar
-              class="p-avater"
-              variant="primary"
-              src="https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg"
-            ></b-avatar>
-          </b-col>
 
-          <b-col md="8" cols="8" lg="8">
-            <div>
-              <b-row class="shift">
-                <b-col md="12" lg="12" sm="12" cols="12">
-                  <div class="e-name">
-                    <b-row>
-                      <b-col md="6" lg="6" cols="6" sm="6" class="mt-lg-2">
-                        <div class="mt-2 mt-lg-0 mt-xl-0 username">
-                          <b> howty Itz blec </b>
-                        </div>
-                      </b-col>
-
-                      <b-col
-                        md="6"
-                        lg="6"
-                        cols="6"
-                        sm="6"
-                        class="mt-3 mt-lg-2 mt-xl-2"
-                      >
-                        <h6 class="follower">5K Community</h6>
-                      </b-col>
-                    </b-row>
-                  </div>
-                </b-col>
-
-                <b-col lg="12" xl="12" cols="12" sm="12" md="12">
-                  <div class="e-name">
-                    <b-row class="mt-lg-0">
-                      <b-col
-                        md="6"
-                        lg="6"
-                        cols="6"
-                        sm="6"
-                        xl="6"
-                        class="mt-2 mt-lg-2 mt-xl-2 btn-2 center"
-                      >
-                        <b-button
-                          block
-                          variant="primary"
-                          size="sm"
-                          class="b-background flexx pobtn shadow mr-lg-3 mr-xl-3"
-                        >
-                          <i class="fas fa-envelope   fa-lg btn-icon "></i>
-                          <span class="btn-text">Message</span>
-                        </b-button>
-                      </b-col>
-
-                      <b-col
-                        md="6"
-                        lg="6"
-                        cols="6"
-                        sm="6"
-                        xl="6"
-                        class="mt-2 mt-lg-2 mt-xl-2 btn-2 center"
-                      >
-                        <b-button
-                          block
-                          size="sm"
-                          class="b-background flexx pobtn shadow mr-lg-3 mr-xl-3"
-                          variant="primary"
-                        >
-                          <i class="fas fa-user-plus  fa-lg btn-icon "></i>
-                          <span class="btn-com">Community</span>
-                        </b-button>
-                      </b-col>
-                    </b-row>
-                  </div>
-                </b-col>
-              </b-row>
-            </div>
-          </b-col>
-        </b-row>
-      </div>
     </div>
+    
+  <infinite-loading @infinite="infiniteHandler"></infinite-loading>
   </div>
 </template>
 
@@ -282,15 +121,15 @@ export default {
 
     computed:{
  
-   businesses(){
+   users(){
 
-      if(this.type=="Followers"){ 
+      if(this.type=="Follower"){ 
 
-      return  this.$store.state.follower.UcommunityFollower;  
+      return  this.$store.state.follower.UcommunityFollower.user_followers;  
 
        }else{
 
-         return  this.$store.state.follower.UcommunityFollowing; 
+         return  this.$store.state.follower.UcommunityFollowing.user_following; 
        }
    }
     
@@ -304,17 +143,23 @@ export default {
       let url = null;
 
          if(this.type=="Follower"){  
-          url="profile/business/follower"
+          url="profile/user/follower/"
          }else{
-          url="profile/network/following";
+          url="profile/user/following/";
          }
       axios
         .get(url + this.page)
         .then(({ data }) => {
           if (data.data.length) {
             this.page += 1;
+        if(this.type=="Follower"){  
+            this.businesses.push(...data.data.user_followers); 
+           }else{
+              this.businesses.push(...data.data.user_following);
+           }
 
-            this.owner_post.push(...data.data);  
+
+
             $state.loaded();
           } else {
             $state.complete();

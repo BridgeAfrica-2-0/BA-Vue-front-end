@@ -47,14 +47,14 @@
                 variant="primary"
               ></b-icon>
               <b> Studied at: </b>
-         <!--     <span
-                v-for="edu in info.educ.slice(0, 1)"
+             <span
+                v-for="edu in info.user_education.slice(0, 1)"
                 :key="edu.id"
                 class="text"
               >
             
                 {{ edu.school_name }}</span
-              >-->
+              >
             </p>
             <p>
               <b-icon
@@ -86,7 +86,7 @@
               ></b-icon>
               <b> Community: </b>
               <span class="text">
-                {{ info.user.community }}
+               {{ nFormatter(total.total_community)}}
               </span>
             </p>
           </b-card-text>
@@ -132,13 +132,13 @@
               </router-link>
 
               <b> Studied at: </b>
-         <!--     <span
-                v-for="edu in info.educ.slice(0, 1)"
+             <span
+                v-for="edu in info.user_education.slice(0, 1)"
                 :key="edu.id"
                 class="text"
               >
                 {{ edu.school_name }}</span
-              > -->
+              > 
             </p>
             <p>
                <b-icon @click="switchTab('about')"
@@ -197,6 +197,8 @@ export default {
     Owner_post,
     Community,
   },
+
+ 
   created() {
     console.log("Load User Info");
     this.$store
@@ -224,6 +226,11 @@ export default {
       return this.$store.getters["profile/getUserPostIntro"];
     },
 
+    
+    total(){
+    return  this.$store.state.profile.Tcommunity;
+   },
+ 
    
 
   },
@@ -252,6 +259,20 @@ export default {
   },
   methods: {
     
+
+     nFormatter(num) {
+      if (num >= 1000000000) {
+        return (num / 1000000000).toFixed(1).replace(/\.0$/, '') + 'G';
+      }
+      if (num >= 1000000) {
+        return (num / 1000000).toFixed(1).replace(/\.0$/, '') + 'M';
+      }
+      if (num >= 1000) {
+        return (num / 1000).toFixed(1).replace(/\.0$/, '') + 'K';
+      }
+      return num;
+    },
+
    
     handleOk(bvModalEvt) {
     

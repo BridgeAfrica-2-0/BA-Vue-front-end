@@ -250,7 +250,7 @@ const routes = [
   },
 
   {
-    path: "/memberNetworkFollower",
+    path: "/memberNetworkFollower/:id?",
     name: "Membar Network Follower",
     component: memberNetworkFollower,
   },

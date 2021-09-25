@@ -25,7 +25,7 @@
             <b-button
               variant="primary"
               size="sm"
-              @click="addNetwork"
+              @click="addFollower"
               style="width: 120px;"
               class="a-center"
             >
@@ -123,9 +123,23 @@ export default {
     openNetwork() {
       this.networkShow = false;
     },
-    addNetwork() {
-      console.log("hello");
-      this.showModal = !this.showModal;
+    addFollower() {
+      this.axios.post(this.url+"/about/follow")
+      .then(() => {
+        console.log(this.updateNetwork_form);
+        this.flashMessage.show({
+          status: "success",
+          message: "You Are Now Following"
+        });
+          
+      })
+      .catch(err => {
+        console.log({ err: err });
+        this.flashMessage.show({
+          status: "error",
+          message: "Unable To follow"
+        });
+      });
     },
     getNetworkInfo() {
       this.$store

@@ -42,13 +42,13 @@ export default {
     headPage,
     Post,
     About,
-    Media
+    Media,
   },
   data() {
     return {};
   },
   computed: {},
-  methods: {}
+  methods: {},
 };
 </script>
 

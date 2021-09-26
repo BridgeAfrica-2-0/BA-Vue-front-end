@@ -22,9 +22,8 @@ import VueSocialauth from "vue-social-auth";
 import LoadScript from 'vue-plugin-load-script';
 import InfiniteLoading from 'vue-infinite-loading';
 
-import LoadScript from "vue-plugin-load-script";
 
-
+Vue.use(InfiniteLoading);
 Vue.use(LoadScript);
 Vue.use(Vuex);
 Vue.use(VueAxios, axios);
@@ -164,4 +163,3 @@ new Vue({
 
     render: (h) => h(App),
 }).$mount("#app");
-

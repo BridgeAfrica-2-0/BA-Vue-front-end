@@ -31,6 +31,7 @@ import forgotPassword from "@/views/forgotPassword";
 import navMessage from "@/views/navMessaging";
 import Blec from "@/views/blec";
 import memberNetworkFollower from "@/views/memberNetworkFollower";
+import editorNetworkFollower from "@/views/editorNetworkFollower";
 // import Test from "@/views/test";
 import templateView from "@/views/templateView";
 import webSiteCreate from "@/views/webSiteCreate";
@@ -253,6 +254,12 @@ const routes = [
     path: "/memberNetworkFollower",
     name: "Membar Network Follower",
     component: memberNetworkFollower,
+  },
+
+  {
+    path: "/editorNetworkFollower/:id?",
+    name: "Editor Network Follower",
+    component: editorNetworkFollower,
   },
 ];
 

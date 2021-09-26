@@ -15,7 +15,7 @@
             >
               <div class="center-img">
                 <img
-                  src="https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg"
+                  :src="BaseURL + `/` + `${network.business_image}`"
                   class="r-image"
                 />
               </div>
@@ -24,9 +24,9 @@
               <p class="textt">
                 <strong class="net-title"> {{ network.name }} </strong>
                 <br />
-                Car Rental
+                {{ network.business_id }}
                 <br />
-                20k Community <br />
+                {{ network.member_count }} <br />
 
                 <span class="location">
                   <b-icon-geo-alt class="ico"></b-icon-geo-alt>
@@ -95,6 +95,9 @@
 import { mapActions, mapGetters } from "vuex";
 export default {
   props: ["network"],
+  data: () => ({
+    BaseURL: process.env.VUE_APP_API_URL,
+  }),
   beforeMount() {
     this.getNetworks();
   },

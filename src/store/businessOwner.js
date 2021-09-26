@@ -15,6 +15,8 @@ export default {
     checked: false,
     btnDelLoader: false,
     btnReadLoader: false,
+
+    pendingPosts: [],
   },
   getters: {
     // sending networks
@@ -39,17 +41,20 @@ export default {
     getSuccess(state) {
       return state.success;
     },
-
     // Sending notifications
     sendNotifications(state) {
       if (state.notifications.length > 0) {
         return state.notifications;
       }
     },
-
     // sending checked value
     sendChecked(state) {
       return state.checked;
+    },
+
+    //Getting all pending post
+    posts(state) {
+      return state.pendingPosts;
     },
   },
   mutations: {
@@ -68,8 +73,18 @@ export default {
       state.notifications = payload;
     },
 
+    //getting pending posts
+    getPosts(state, payload) {
+      state.pendingPosts = payload;
+    },
+
     // Set Pendinding posts
-    setPendingPosts(state, payload) {
+    Approve(state, payload) {
+      state.pendingPosts = payload;
+    },
+
+    //disapprove pending post
+    Disapprove(state, payload) {
       state.pendingPosts = payload;
     },
   },
@@ -78,7 +93,7 @@ export default {
     async getNetworks({ commit }) {
       await axios
         .get("/network")
-        .then(res => {
+        .then((res) => {
           let sucData = {
             state: true,
             succes: "success",
@@ -93,7 +108,7 @@ export default {
             commit("setSuccess", sucData);
           }, 2000);
         })
-        .catch(err => {
+        .catch((err) => {
           console.log("Unauthorized request !!");
           let sucData = {
             state: true,
@@ -115,10 +130,10 @@ export default {
       commit("setLoader", true);
       axios
         .post(`network/${editedNetwork.id}`, editedNetwork.data)
-        .then(async res => {
+        .then(async (res) => {
           await dispatch("getNetworks");
         })
-        .catch(err => {
+        .catch((err) => {
           console.log("Something went wrong !!");
           let sucData = {
             state: true,
@@ -141,7 +156,7 @@ export default {
 
       await axios
         .get("notification")
-        .then(res => {
+        .then((res) => {
           commit("setLoader", false);
           commit("setSuccess", true);
           commit("setNotifications", res.data.data);
@@ -149,7 +164,7 @@ export default {
             commit("setSuccess", false);
           }, 2000);
         })
-        .catch(err => {
+        .catch((err) => {
           commit("setLoader", false);
           console.log("Unauthorized request !!");
         });
@@ -161,7 +176,7 @@ export default {
         ids: [],
       };
 
-      payload.forEach(element => {
+      payload.forEach((element) => {
         let objId = {
           id: null,
         };
@@ -173,7 +188,7 @@ export default {
         .then(() => {
           dispatch("getNotifications");
         })
-        .catch(err => [console.log(err)]);
+        .catch((err) => [console.log(err)]);
     },
 
     // Delete All Notifications
@@ -182,7 +197,7 @@ export default {
         ids: [],
       };
 
-      payload.forEach(element => {
+      payload.forEach((element) => {
         let objId = {
           id: null,
         };
@@ -198,6 +213,27 @@ export default {
       axios.delete(`notification/${id}`).then(() => {
         dispatch("getNotifications");
       });
+    },
+
+    //Get pending posts from database
+    async getPendingPost({ commit }) {
+      const res = await axios.get("");
+
+      commit("getPosts", res.data);
+    },
+
+    // Approve pending post
+    async approvePost({ commit }, post) {
+      const res = await axios.post("/api/v1/business/post-approve", post);
+
+      commit("Approve", res.data);
+    },
+
+    //disapprove pending post
+    async disapprovePost({ commit }, post) {
+      const res = await axios.post("", post);
+
+      commit("Disapprove", res.data);
     },
   },
 };

@@ -72,7 +72,7 @@ export default {
   methods: {
     getFollowers() {
       axios
-        .get("/community/people-following/5")
+        .get("/api/v1/community/people-following/5/Lillian")
         .then((res) => {
           this.loader = false;
           this.followers = res.data.data.data;

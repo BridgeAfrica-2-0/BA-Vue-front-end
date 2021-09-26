@@ -3,7 +3,7 @@ export default {
   namespaced: true,
 
   state: {
-    details: []
+    details: [],
   },
 
   actions: {
@@ -12,18 +12,18 @@ export default {
         commit("setdetails", data.data);
         console.log(data);
       });
-    }
+    },
   },
 
   mutations: {
     setdetails(state, details) {
       state.details = details;
-    }
+    },
   },
 
   getters: {
     getdetails(state) {
       return state.details;
-    }
-  }
+    },
+  },
 };

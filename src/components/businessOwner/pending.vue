@@ -23,10 +23,10 @@
                 <template #button-content>
                   <b-icon icon="three-dots-vertical" font-scale="1"></b-icon>
                 </template>
-                <b-dropdown-item href="#" @click="approvePost(post)">
+                <b-dropdown-item href="#" @click="approvePost">
                   Approve</b-dropdown-item
                 >
-                <b-dropdown-item href="#" @click="DisapprovePost(post)">
+                <b-dropdown-item href="#" @click="disapprovePost">
                   Un Approved
                 </b-dropdown-item>
               </b-dropdown>
@@ -49,58 +49,25 @@
 </template>
 
 <script>
-import axios from "axios";
+import { mapActions, mapGetters } from "vuex";
 
 export default {
   name: "pending",
-  components: {},
-  data() {
-    return {
-      posts: [
-        {
-          name: "test",
-          time: "2:20",
-          text:
-            "  Lorem ipsum, dolor sit amet consectetur adipisicing elit. Obcaecati iure qui nulla fuga, quas perferendis exercitationem. Amet similique quibusdam asperiores aspernatur nisi id velit iure voluptatibus laboriosam, ducimus est voluptatum.",
-        },
-      ],
-    };
+  computed: {
+    ...mapGetters(["posts"]),
   },
-  computed: {},
-  beforeMount() {
-    // get the ending post
-    axios.defaults.headers.common["Authorization"] =
-      "Bearer " + localStorage.getItem("access_token");
-    this.getPosts();
-  },
-  methods: {
-    getPosts() {
-      // get pending posts
-    },
-    approvePost(post) {
-      let data = {
-        ids: [],
-      };
 
-      let item = {
-        id: null,
-      };
-      item.id = post.id;
-      data.ids.push(item);
-      axios.post("/business/post-approve", data).then(() => {
-        // code goes here
-        this.getPosts();
-      });
+  created() {
+    this.getPendingPost();
+  },
+
+  methods: {
+    ...mapActions(["approvePost", "disapprovePost", "getPendingPost"]),
+    approvePost() {
+      this.approvePost(this.post);
     },
-    DisapprovePost(post) {
-      axios
-        .post()
-        .then(() => {
-          //code goes here
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+    disapprovePost() {
+      this.disapprovePost(this.post);
     },
   },
 };

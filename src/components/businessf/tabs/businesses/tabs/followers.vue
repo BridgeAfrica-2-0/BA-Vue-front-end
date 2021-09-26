@@ -29,10 +29,7 @@
         <CommunityBusiness :follower="follower" />
       </b-col>
       <b-col v-if="loader" class="load">
-        <b-spinner
-          style="width: 7rem; height: 7rem;"
-          variant="primary"
-        ></b-spinner>
+        <b-spinner class="spin" variant="primary"></b-spinner>
       </b-col>
       <b-col v-if="followers.length < 1 && !loader" class="load">
         <p>No follower to show !!</p>
@@ -56,11 +53,11 @@ export default {
   computed: {
     theFollowers() {
       if (this.searchQuery) {
-        return this.followers.filter(item => {
+        return this.followers.filter((item) => {
           return this.searchQuery
             .toLowerCase()
             .split(" ")
-            .every(v => item.name.toLowerCase().includes(v));
+            .every((v) => item.name.toLowerCase().includes(v));
         });
       } else {
         return this.followers;
@@ -76,12 +73,12 @@ export default {
   methods: {
     getFollowers() {
       axios
-        .get("/community/business-follower/5")
-        .then(res => {
+        .get("/api/v1/community/business-follower/5/jarret")
+        .then((res) => {
           this.loader = false;
           this.followers = res.data.data.data;
         })
-        .catch(err => {
+        .catch((err) => {
           console.log(err);
           this.loader = false;
         });
@@ -93,5 +90,9 @@ export default {
 .load {
   display: flex;
   justify-content: center;
+}
+.spin {
+  width: 7rem;
+  height: 7rem;
 }
 </style>

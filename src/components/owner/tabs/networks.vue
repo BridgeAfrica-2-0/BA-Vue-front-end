@@ -69,7 +69,7 @@
 
                   {{ network.network_category }}
                   <br />
-                  20k Community <br />
+                  {{ network.member_count }} <br />
 
                   <span class="location">
                     <b-icon-geo-alt class="ico"></b-icon-geo-alt>
@@ -97,7 +97,9 @@
     <div class="h-100 w-100" v-if="networks.length < 1 && !loader">
       <div class="mx-auto text-center my-5">
         <h2 class="my-3">Builds networks around your Business</h2>
-        <p class="my-2">Create network to stay in touch with just the people</p>
+        <p class="my-2">
+          Create network to stay in touch with just the people
+        </p>
         <p class="my-2">you want Engage, share, Make Plans and much more</p>
         <p class="my-3">
           <b-button @click="showmodal(true, 'add')" variant="primary"
@@ -315,6 +317,7 @@
         </b-form>
       </b-container>
     </b-modal>
+
     <b-modal
       v-model="viewnetwork"
       id="modal-1"

@@ -56,7 +56,7 @@
 
                   {{ network.business_id }}
                   <br />
-                  {{network.member_count}} <br />
+                  {{ network.member_count }} <br />
 
                   <span class="location">
                     <b-icon-geo-alt class="ico"></b-icon-geo-alt>

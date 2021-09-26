@@ -37,7 +37,7 @@ import webSiteCreate from "@/views/webSiteCreate";
 import webSiteCreateTwo from "@/views/webSiteCreateTwo";
 import paidPlan from "@/views/paidPlan";
 import confirmPayment from "@/views/confirmPayment";
-import networks from "@/components/owner/tabs/networks";
+import networks from "@/views/networks";
 import dashboard from "@/views/dashboard";
 
 import welcome from "@/views/welcome";
@@ -57,12 +57,6 @@ const routes = [
     meta: {
       auth: true,
     },
-  },
-
-  {
-    path: "/components/owner/tabs/networks",
-    name: "networks",
-    component: networks,
   },
 
   {

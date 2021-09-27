@@ -4,6 +4,12 @@
       <fas-icon class=" icons" :icon="['fas', 'project-diagram']" size="lg" />
       <span class="t-color"> Network </span>
 
+      <b-button
+        class="float-right"
+        @click="showmodal(true, 'add')"
+        variant="primary"
+        >Add Network</b-button
+      >
       <hr />
       <b-row>
         <b-col
@@ -17,7 +23,6 @@
             <b-row @click="viewNetwork(network)">
               <b-col md="3" xl="3" lg="3" cols="5" sm="3">
                 <div class="center-img" v-b-modal.modal-1>
-                  {{ network.business_image }}
                   <img
                     :src="BaseURL + `/` + `${network.business_image}`"
                     alt=""
@@ -65,7 +70,11 @@
                   <br />
 
                   {{ network.description.substring(0, 90) }}
-                  <b-link>Read More</b-link>
+                  <b-link
+                    @click="viewnetwork = true"
+                    v-if="network.description.length > 90"
+                    >Read More</b-link
+                  >
                 </p>
               </b-col>
             </b-row>
@@ -79,17 +88,28 @@
     <div class="engage" v-if="!getNetworksFromStore && !loader">
       <div class="mx-auto text-center my-5">
         <h2 class="my-3">Builds networks around your Business</h2>
-        <p class="my-2">you want Engage, share, Make Plans and much more</p>
+        <p class="my-2">
+          you want Engage, share, Make Plans and much more
+        </p>
         <p class="my-2">No network to show !!</p>
-        <p class="my-3"></p>
+        <p class="my-3">
+          <b-button @click="showmodal(true, 'add')" variant="primary"
+            >Add Network</b-button
+          >
+        </p>
       </div>
     </div>
 
-    <b-modal hide-footer title="Edit network" size="lg" v-model="showModal">
+    <b-modal
+      hide-footer
+      :title="editNet ? 'Edit network' : 'Add Network'"
+      size="lg"
+      v-model="showModal"
+    >
       <b-container>
         <b-form>
           <div
-            v-show="false"
+            v-if="!editNet"
             class="row sub-sidebar-2 pending-post-view mt-4 pb-0 "
           >
             <div
@@ -237,13 +257,19 @@
             {{ success.msg }}</b-alert
           >
           <b-spinner v-if="loader" variant="primary"></b-spinner>
-          <b-button @click="edit" class="mt-2  button-btn" variant="primary">
-            Edit Network</b-button
-          >
+          <b-button @click="action" class="mt-2 button-btn" variant="primary">
+            {{ editNet ? "Edit Network" : "Add Network" }}
+          </b-button>
         </b-form>
       </b-container>
     </b-modal>
-    <b-modal id="modal-1" :title="chosenNetwork.name" hide-footer>
+
+    <b-modal
+      v-model="viewnetwork"
+      id="modal-1"
+      :title="chosenNetwork.name"
+      hide-footer
+    >
       <lightbox
         visible="true"
         css=" h-10"
@@ -280,6 +306,10 @@ export default {
       BaseURL: process.env.VUE_APP_API_URL,
       showModal: false,
       selectedFile: "",
+      editNet: false,
+      dat: true,
+      networks: [],
+      viewnetwork: false,
       createdNetwork: {
         name: "",
         description: "",
@@ -331,6 +361,23 @@ export default {
     //View network on pop up modal
     viewNetwork(network) {
       this.chosenNetwork = network;
+      this.viewnetwork = true;
+    },
+    showmodal(state, arg) {
+      this.showModal = state;
+      if (arg == "edit") {
+        this.editNet = true;
+      } else {
+        this.editNet = false;
+        this.createdNetwork.image = "";
+        this.createdNetwork.name = "";
+        this.createdNetwork.address = "";
+        this.createdNetwork.neighbourhood = "";
+        this.createdNetwork.description = "";
+        this.createdNetwork.purpose = "";
+        this.createdNetwork.special_needs = "";
+        this.createdNetwork.allow_business = 0;
+      }
     },
 
     //Show Edit network modal

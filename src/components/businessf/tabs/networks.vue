@@ -15,7 +15,7 @@
             >
               <div class="center-img">
                 <img
-                  :src="BaseURL + `/` + `${network.business_image}`"
+                  :src="BaseURL + `/` + `${network.image}`"
                   class="r-image"
                 />
               </div>
@@ -35,7 +35,9 @@
                 <br />
 
                 {{ network.description.substring(0, 90) }}
-                <b-link v-if="network.description.length > 90"
+                <b-link
+                  @click="viewnetwork = true"
+                  v-if="network.description.length > 90"
                   >Read More</b-link
                 >
               </p>
@@ -89,6 +91,34 @@
         </div>
       </b-col>
     </b-row>
+
+    <b-modal
+      v-model="viewnetwork"
+      id="modal-1"
+      :title="network.name"
+      hide-footer
+    >
+      <lightbox visible="true" css=" h-10" :items="network.image"></lightbox>
+      <p class="text-pop">
+        <strong class="net-title">
+          <router-link to="/businessfollower">
+            {{ network.name }}
+          </router-link>
+        </strong>
+        <br />
+        {{ network.business_id }}
+        <br />
+        {{ network.member_count }} <br />
+
+        <span class="location">
+          <b-icon-geo-alt class="ico"></b-icon-geo-alt>
+          {{ network.business_address }}
+        </span>
+        <br />
+
+        {{ network.description }}
+      </p>
+    </b-modal>
   </div>
 </template>
 
@@ -98,6 +128,7 @@ export default {
   props: ["network"],
   data: () => ({
     BaseURL: process.env.VUE_APP_API_URL,
+    viewnetwork: false,
   }),
   beforeMount() {
     this.getNetworks();
@@ -129,6 +160,12 @@ export default {
 
     joinNetwork() {
       this.Joining();
+    },
+
+    //View network on pop up modal
+    viewNetwork(network) {
+      this.chosenNetwork = network;
+      this.viewnetwork = true;
     },
   },
 };

@@ -362,7 +362,6 @@
         </b-col>
       </b-row>
     </div>
-
     <div class="container-flex p-md-3 p-t-0 upp">
       <b-row class="p-3">
         <b-col cols="0" md="0" xl="3" class="leftblock">

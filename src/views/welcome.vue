@@ -263,10 +263,12 @@
         <div>
           
           <form-wizard @on-complete="onComplete">
-            <tab-content
+           
+             <tab-content
               title=" Complete Profile "
               :before-change="updateUserProfile"
-            >   
+            > 
+
               <div class="form-card">
                 <div class="row">
                   <div class="col-md-6">
@@ -504,7 +506,7 @@
                     :options="pcategories"
                     :multiple="true"
                     :taggable="true"
-                    @tag="addTag"
+                    @tag="addCategoryTag"
                   ></multiselect>
                 </div>
 
@@ -562,14 +564,13 @@
                       <multiselect
                         v-model="countryy"
                         @input="Region"
-                        tag-placeholder="Add this as new tag"
-                        placeholder="Search or add a tag"
+                     
+                        placeholder="Search "
                         label="name"
                         track-by="id"
                         :options="countries"
                         :multiple="true"
-                        :taggable="true"
-                        @tag="addTag"
+                       
                       ></multiselect>
                     </div>
                   </div>
@@ -581,14 +582,14 @@
                       <multiselect
                         v-model="regionn"
                         @input="Division"
-                        tag-placeholder="Add this as new tag"
-                        placeholder="Search or add a tag"
+                        
+                        placeholder="Search "
                         label="name"
                         track-by="id"
                         :options="regions"
                         :multiple="true"
-                        :taggable="true"
-                        @tag="addTag"
+                        :taggable="false"
+                        
                       ></multiselect>
                     </div>
                   </div>
@@ -600,14 +601,14 @@
                       <multiselect
                         v-model="division"
                         @input="Municipality"
-                        tag-placeholder="Add this as new tag"
-                        placeholder="Search or add a tag"
+                       
+                        placeholder="Search "
                         label="name"
                         track-by="id"
                         :options="divisions"
                         :multiple="true"
                         :taggable="true"
-                        @tag="addTag"
+                       
                       ></multiselect>
                     </div>
                   </div>
@@ -621,14 +622,14 @@
                       <multiselect
                         v-model="municipality"
                         @input="Locality"
-                        tag-placeholder="Add this as new tag"
-                        placeholder="Search or add a tag"
+                      
+                        placeholder="Search "
                         label="name"
                         track-by="id"
                         :options="municipalities"
                         :multiple="true"
-                        :taggable="true"
-                        @tag="addTag"
+                       
+                       
                       ></multiselect>
                     </div>
                   </div>
@@ -641,14 +642,14 @@
                       ><br />
                       <multiselect
                         v-model="locality"
-                        tag-placeholder="Add this as new tag"
-                        placeholder="Search or add a tag"
+                       
+                        placeholder="Search "
                         label="name"
                         track-by="id"
                         :options="localities"
                         :multiple="true"
-                        :taggable="true"
-                        @tag="addTag"
+                        :taggable="false"
+                      
                       ></multiselect>
                     </div>
                   </div>
@@ -676,14 +677,14 @@
 
                       <multiselect
                         v-model="business_keyword"
-                        tag-placeholder="Add this as new tag"
-                        placeholder="Search or add a tag"
+                        tag-placeholder="Add this as new Keyword"
+                        placeholder="Add New Keyword"
                         label="name"
                         track-by="id"
-                        :options="[]"
+                        :options="keywordds"
                         :multiple="true"
                         :taggable="true"
-                        @tag="addTag"
+                        @tag="addkeywords"
                       ></multiselect>
                     </div>
                   </div>
@@ -799,7 +800,7 @@ export default {
       locality: [],
       division: [],
       selectedusecase: "",
-
+      keywordds:[],
       first_page: "true",
       country: "",
       countryy: [],
@@ -873,7 +874,33 @@ export default {
   },
 
   methods: {
+
     addTag(newTag) {
+      const tag = {
+        name: newTag,
+        id: newTag.substring(0, 2) + Math.floor(Math.random() * 10000000),
+      };
+      this.multiselec.push(tag);
+      this.multiselecvalue.push(tag);
+    },
+
+
+     addkeywords(newTag) {
+      const tag = {
+        name: newTag,
+        id: newTag.substring(0, 2) + Math.floor(Math.random() * 10000000),
+      };
+      this.keywordds.push(tag);
+      this.business_keyword.push(tag);
+    },
+
+
+
+
+
+
+
+    addCategoryTag(newTag) {
       const tag = {
         name: newTag,
         id: newTag.substring(0, 2) + Math.floor(Math.random() * 10000000),
@@ -962,7 +989,7 @@ export default {
 
     Region() {
       let formData2 = new FormData();
-      formData2.append("country_id", this.selectedcountry);
+      formData2.append("countryId", this.selectedcountry);
 
       this.$store
         .dispatch("auth/region", formData2)
@@ -1004,7 +1031,7 @@ export default {
 
     Locality() {
       let formData2 = new FormData();
-      formData2.append("council_id", this.selectedmunicipality);
+      formData2.append("councilId", this.selectedmunicipality);
 
       this.$store
         .dispatch("auth/locality", formData2)
@@ -1070,7 +1097,7 @@ export default {
           formData2.append("division", this.selecteddivision);
           formData2.append("council", this.selectedmunicipality);
 
-          formData2.append("neighborh", this.selectedlocality);
+          formData2.append("neigborhood", this.selectedlocality);
           formData2.append("lat", this.center.lat);
           formData2.append("lng", this.center.lng);
 

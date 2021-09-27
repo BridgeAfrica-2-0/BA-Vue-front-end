@@ -184,7 +184,8 @@
 <script>
 import "@morioh/v-lightbox/dist/lightbox.css";
 //import Followers from "../../followers";
-import Community from "./comunitiDashboard";
+import Community from "../sidebarcommunity"; 
+//import Community from "./comunitiDashboard";
 import Owner_post from "./owner_post";
 import Media from "../../media";
 // import CreatePost from "../../createPost";

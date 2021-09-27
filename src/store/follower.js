@@ -8,6 +8,7 @@ export default {
     CommunityBusiness: [],
     ownerPost: [],
     profileBusiness: [],
+    profileNetwork:[],
     ownerPostImages: [],
     biography: null,
     basicInfo: [],
@@ -166,7 +167,7 @@ export default {
       return state.userData[0].profile_about_new;
     },
     getProfileAboutEducationAndWorks(state) {
-      return state.userData[0].profile_about.educationAndWorks;
+      return state.profileIntro.user_education;
     },
     getProfileAbout(state) {
       return state.profile_about;
@@ -230,7 +231,11 @@ export default {
       state.albums = data;
     },
 
+    setprofileNetwork(state, data){
+     
+      state.profileNetwork=data;
 
+    },
 
     setProfileBusiness(state, data) {
       state.profileBusiness = data;
@@ -426,7 +431,7 @@ export default {
       return axios
       .get('profile/user/following')
       .then(({ data }) => {
-        commit('setUcommunityFollowing', data.data);
+        commit('setUcommunityFollowing', data.data);      
         console.log(data);
       });
     },
@@ -439,6 +444,18 @@ export default {
         .get('business/userBusiness')
         .then(({ data }) => {
           commit('setProfileBusiness', data.data);
+          console.log(data);
+        });
+
+    },
+
+
+    profileNetwork({ commit }) { 
+
+      return axios
+        .get('profile/userBusiness')
+        .then(({ data }) => {
+          commit('setProfileNetwork', data.data);
           console.log(data);
         });
 

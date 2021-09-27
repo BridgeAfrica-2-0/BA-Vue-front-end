@@ -2,25 +2,31 @@
   <div>
     <b class="social">Web & Soial Links</b>
     <hr />
-    <div>
-      <b-link class="text-decoration-none" v-b-modal.modal-7
-        ><b-icon icon="globe" variant="primary"></b-icon>
-        https://www.yourwebsite.com</b-link
-      >
-    </div>
+    
 
-    <div>
-      <b-link
-        class="text-decoration-none position-relative top-10"
-        v-b-modal.modal-7
-        ><b-icon icon="facebook" class="primary"></b-icon>
-        https://www.facebook.com/yourid</b-link
-      >
-    </div>
+
+
+
+
+
+     <div v-for="website in info.user_websites" :key="website.id">
+              <fas-icon
+                class="primary float-left mr-1 mt-1"
+                :icon="['fas', 'globe']"
+              />
+              <a :href="website" @click="redirect(website.website_url)" target="_blank">{{
+                website.website_url
+              }}</a>
+             
+            </div>
+
+
+
+
   </div>
 </template>
 
-<script>
+<script>  
 export default {
   data() {
     return {
@@ -39,7 +45,17 @@ export default {
         { value: "google-plus", text: "Google+" }
       ]
     };
-  }
+  },
+
+   computed: {
+  
+
+      info(){
+   return this.$store.state.follower.profileIntro;
+    },
+
+  },
+
 };
 </script>
 

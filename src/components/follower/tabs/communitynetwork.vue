@@ -1,7 +1,7 @@
 <template>
   <div>
     <b-modal id="modal-sm" size="sm" hide-header>
-      Do you want to join this network?
+      Do you want to join this network? 
     </b-modal>
 
 
@@ -74,27 +74,85 @@
     </div>
         </b-col>
     </b-row>
+
+     
+  <infinite-loading @infinite="infiniteHandler"></infinite-loading>  
+
   </div>
 </template>
 
 <script>
+import axios from "axios";
 export default {
-  props: ["network"],
-  computed: {
-    business() {
-      return this.$store.getters["networkDetails/getdetails.category"];
-    }
+  props: ["type"],
+   data() {
+    return {
+      page: 1,
+      options: {
+        rewind: true,
+        autoplay: true,
+        perPage: 1,
+        pagination: false,
+
+        type: "loop",
+        perMove: 1
+      }
+    };
   },
-  created() {
-    this.$store
-      .dispatch("networkDetails/getndetails")
-      .then(() => {
-        console.log("the response");
-      })
-      .catch(err => {
-        console.log({ err: err });
-      });
+  computed: {
+   
+        network(){
+
+      if(this.type=="Follower"){ 
+
+      return  this.$store.state.follower.NcommunityFollower.network_followers;  
+
+       }else{
+
+         return  this.$store.state.follower.NcommunityFollowing.network_following; 
+       }
+   }
+   
+  },
+
+  methods:{
+
+    
+      
+       infiniteHandler($state) {
+
+      let url = null;
+
+         if(this.type=="Follower"){  
+          url="profile/network/follower/"
+         }else{
+          url="profile/network/following/";
+         }
+      axios
+        .get(url + this.page)
+        .then(({ data }) => {
+          if (data.data.length) {
+            this.page += 1;
+      if(this.type=="Follower"){  
+            this.businesses.push(...data.data.network_followers); 
+           }else{
+              this.businesses.push(...data.data.network_following);
+           }
+
+
+            $state.loaded();
+          } else {
+            $state.complete();
+          }
+        })
+        .catch((err) => {
+          console.log({ err: err });
+        });
+    },
+
   }
+  
+
 };
 </script>
 

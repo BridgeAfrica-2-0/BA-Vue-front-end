@@ -192,14 +192,13 @@
                       <multiselect
                         v-model="country"
                         @input="Region"
-                        tag-placeholder="Add this as new tag"
-                        placeholder="Search or add a tag"
+                        
+                        placeholder="Search "
                         label="name"
                         track-by="id"
                         :options="countries"
                         :multiple="true"
-                        :taggable="true"
-                        @tag="addTag"
+                       
                       ></multiselect>
                     </div>
                   </div>
@@ -211,14 +210,13 @@
                       <multiselect
                         v-model="region"
                         @input="Division"
-                        tag-placeholder="Add this as new tag"
-                        placeholder="Search or add a tag"
+                       
+                        placeholder="Search"
                         label="name"
                         track-by="id"
                         :options="regions"
                         :multiple="true"
-                        :taggable="true"
-                        @tag="addTag"
+                       
                       ></multiselect>
                     </div>
                   </div>
@@ -230,14 +228,13 @@
                       <multiselect
                         v-model="division"
                         @input="Municipality"
-                        tag-placeholder="Add this as new tag"
-                        placeholder="Search or add a tag"
+                       
+                        placeholder="Search"
                         label="name"
                         track-by="id"
                         :options="divisions"
                         :multiple="true"
-                        :taggable="true"
-                        @tag="addTag"
+                       
                       ></multiselect>
                     </div>
                   </div>
@@ -251,14 +248,13 @@
                       <multiselect
                         v-model="municipality"
                         @input="Locality"
-                        tag-placeholder="Add this as new tag"
-                        placeholder="Search or add a tag"
+                        
+                        placeholder="Search"
                         label="name"
                         track-by="id"
                         :options="municipalities"
                         :multiple="true"
-                        :taggable="true"
-                        @tag="addTag"
+                       
                       ></multiselect>
                     </div>
                   </div>
@@ -271,14 +267,13 @@
                       ><br />
                       <multiselect
                         v-model="locality"
-                        tag-placeholder="Add this as new tag"
-                        placeholder="Search or add a tag"
+                       
+                        placeholder="Search"
                         label="name"
                         track-by="id"
                         :options="localities"
                         :multiple="true"
-                        :taggable="true"
-                        @tag="addTag"
+                       
                       ></multiselect>
                     </div>
                   </div>
@@ -382,10 +377,10 @@
               lg="6"
               class="p-0"
               v-for="business in profilebusiness"
-              :key="business.id"
+              :key="business.business_id"
             >
-              <div class="people-style shadow">
-                <b-link v-b-modal.createBusinessModal>
+              <div class="people-style shadow"> 
+                <b-link v-b-modal.createBusinessModal  @click="editBusiness(business.business_id)">
                   <div class="float-right">
                     <b-icon
                       icon="three-dots-vertical"
@@ -407,7 +402,7 @@
                   <b-col md="5" cols="7" lg="7" xl="9" sm="5">
                     <p class="textt text">
                       <strong class="title">
-                        {{ business.bussines_name }}
+                        {{ business.bussines_name }} 
                       </strong>
                       <br />
                       {{ business.category }}
@@ -459,7 +454,7 @@ export default {
   data() {
     return {
       useas: "",
-
+      editbiz:"",
       selectedusecase: "",
       phone1: null,
       phone2: null,
@@ -533,7 +528,50 @@ export default {
   },
 
   methods: {
+
+    editBusiness(id){
+
+
+
+
+         axios.get("business/edit/"+id).then(({ data }) => {
+        console.log(data);
+    
+      }).catch((err) => {
+          console.log({ err: err });
+        });
+
+
+
+    }
+   ,
+
     addTag(newTag) {
+      const tag = {
+        name: newTag,
+        id: newTag.substring(0, 2) + Math.floor(Math.random() * 10000000),
+      };
+      this.multiselec.push(tag);
+      this.multiselecvalue.push(tag);
+    },
+
+
+     addkeywords(newTag) {
+      const tag = {
+        name: newTag,
+        id: newTag.substring(0, 2) + Math.floor(Math.random() * 10000000),
+      };
+      this.keywordds.push(tag);
+      this.business_keyword.push(tag);
+    },
+
+
+
+
+
+
+
+    addCategoryTag(newTag) {
       const tag = {
         name: newTag,
         id: newTag.substring(0, 2) + Math.floor(Math.random() * 10000000),
@@ -549,84 +587,6 @@ export default {
       };
       this.multiselec.push(tag);
       this.filterselectvalue.push(tag);
-    },
-
-    Country() {
-      this.$store
-        .dispatch("auth/country")
-        .then(() => {
-          console.log("hey yeah");
-        })
-        .catch((err) => {
-          console.log({ err: err });
-        });
-    },
-
-    profileBusiness() {
-      this.$store
-        .dispatch("profile/profileBusiness")
-        .then(() => {
-          console.log("hey yeah");
-        })
-        .catch((err) => {
-          console.log({ err: err });
-        });
-    },
-
-    Region() {
-      let formData2 = new FormData();
-      formData2.append("country_id", this.selectedcountry);
-
-      this.$store
-        .dispatch("auth/region", formData2)
-        .then(() => {
-          console.log("hey yeah");
-        })
-        .catch((err) => {
-          console.log({ err: err });
-        });
-    },
-
-    Division() {
-      let formData2 = new FormData();
-      formData2.append("regionId", this.selectedregion);
-
-      this.$store
-        .dispatch("auth/division", formData2)
-        .then(() => {
-          console.log("hey yeah");
-        })
-        .catch((err) => {
-          console.log({ err: err });
-        });
-    },
-
-    Municipality() {
-      let formData2 = new FormData();
-      formData2.append("divisionId", this.selecteddivision);
-
-      this.$store
-        .dispatch("auth/municipality", formData2)
-        .then(() => {
-          console.log("hey yeah");
-        })
-        .catch((err) => {
-          console.log({ err: err });
-        });
-    },
-
-    Locality() {
-      let formData2 = new FormData();
-      formData2.append("council_id", this.selectedmunicipality);
-
-      this.$store
-        .dispatch("auth/locality", formData2)
-        .then(() => {
-          console.log("hey yeah");
-        })
-        .catch((err) => {
-          console.log({ err: err });
-        });
     },
 
     categories() {
@@ -676,6 +636,83 @@ export default {
         });
     },
 
+    Country() {
+      this.$store
+        .dispatch("auth/country")
+        .then(() => {
+          console.log("hey yeah");
+        })
+        .catch((err) => {
+          console.log({ err: err });
+        });
+    },
+
+    profileBusiness() {
+      this.$store
+        .dispatch("profile/profileBusiness")
+        .then(() => {
+          console.log("hey yeah");
+        })
+        .catch((err) => {
+          console.log({ err: err });
+        });
+    },
+
+    Region() {
+      let formData2 = new FormData();
+      formData2.append("countryId", this.selectedcountry);
+
+      this.$store
+        .dispatch("auth/region", formData2)
+        .then(() => {
+          console.log("hey yeah");
+        })
+        .catch((err) => {
+          console.log({ err: err });
+        });
+    },
+
+    Division() {
+      let formData2 = new FormData();
+      formData2.append("regionId", this.selectedregion);
+
+      this.$store
+        .dispatch("auth/division", formData2)
+        .then(() => {
+          console.log("hey yeah");
+        })
+        .catch((err) => {
+          console.log({ err: err });
+        });
+    },
+
+    Municipality() {
+      let formData2 = new FormData();
+      formData2.append("divisionId", this.selecteddivision);
+
+      this.$store
+        .dispatch("auth/municipality", formData2)
+        .then(() => {
+          console.log("hey yeah");
+        })
+        .catch((err) => {
+          console.log({ err: err });
+        });
+    },
+
+    Locality() {
+      let formData2 = new FormData();
+      formData2.append("councilId", this.selectedmunicipality);
+
+      this.$store
+        .dispatch("auth/locality", formData2)
+        .then(() => {
+          console.log("hey yeah");
+        })
+        .catch((err) => {
+          console.log({ err: err });
+        });
+    },
     setLoading: function (value) {
       this.loadingWizard = value;
     },
@@ -723,7 +760,7 @@ export default {
           formData2.append("division", this.selecteddivision);
           formData2.append("council", this.selectedmunicipality);
 
-          formData2.append("neighborh", this.selectedlocality);
+          formData2.append("neigborhood", this.selectedlocality);
           formData2.append("lat", this.center.lat);
           formData2.append("lng", this.center.lng);
 

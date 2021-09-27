@@ -139,6 +139,7 @@
             </b-tab>
             <b-tab title="About"><About /></b-tab>
             <b-tab title="Business"><Businesses /></b-tab>
+            <b-tab title="Network"><Network /></b-tab>
             <b-tab title="Media"><Media /></b-tab>
             <b-tab title="Community"><Community /></b-tab>
           </b-tabs>
@@ -154,6 +155,7 @@ import About from "@/components/follower/tabs/about";
 import Media from "@/components/follower/tabs/media";
 import Community from "@/components/follower/tabs/community";
 import Businesses from "@/components/follower/tabs/businesses";
+import Network from "@/components/follower/tabs/networkk";
 
 export default {
   name: "Home",
@@ -162,7 +164,8 @@ export default {
     About,
     Media,
     Community,
-    Businesses
+    Businesses,
+    Network
   },
 
 

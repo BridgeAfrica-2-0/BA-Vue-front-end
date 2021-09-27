@@ -4,13 +4,13 @@
      
 
 
-    <div class="people-style border shadow"  v-for="user in users" :key="user.id">
+    <div class="people-style border shadow"  v-for="item in users" :key="item.id">
         <b-row class="mb-1">
           <b-col md="3" cols="4" lg="3" class="my-auto">
             <b-avatar
               class="p-avater"
               variant="primary"
-              src="https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg"
+              :src="item.profile_picture"
             ></b-avatar>
           </b-col>
 
@@ -22,7 +22,7 @@
                     <b-row>
                       <b-col md="6" lg="6" cols="6" sm="6" class="mt-lg-2">
                         <div class="mt-2 mt-lg-0 mt-xl-0 username">
-                          <b> howty Itz blec </b>
+                          <b> {{ item.name }} </b>
                         </div>
                       </b-col>
 
@@ -33,7 +33,7 @@
                         sm="6"
                         class="mt-3 mt-lg-2 mt-xl-2"
                       >
-                        <h6 class="follower">5K Community</h6>
+                        <h6 class="follower">{{ count(item.followers) }} Community</h6>
                       </b-col>
                     </b-row>
                   </div>
@@ -137,6 +137,17 @@ export default {
   },
 
     methods:{
+
+
+      count(number) {
+      if (number >= 1000000) {
+        return number / 1000000 + "M";
+      }
+      if (number >= 1000) {
+        return number / 1000 + "K";
+      } else return number;
+    },
+
       
        infiniteHandler($state) {
 

@@ -69,7 +69,19 @@ export default {
       state.categories = data;
     },
 
+    setSubcategories(state, data) {
+      state.subcategories = data;
+    },
 
+
+    setFilters(state, data) {
+      state.filters = data;
+    },
+
+
+    Setcategoryfiters(state, data) {
+      state.category_fiters = data;
+    },
 
 
 
@@ -123,7 +135,7 @@ export default {
 
 
     country({ commit }) {
-      return axios.get("country/show").then(({ data }) => {
+      return axios.get("countries").then(({ data }) => {
         console.log(data);
         commit("setCountry", data.data);
       });
@@ -133,7 +145,7 @@ export default {
 
 
     region({ commit }, data) {
-      return axios.post("region/show", data).then(({ data }) => {
+      return axios.post("regions", data).then(({ data }) => {
         console.log(data);
         commit("setRegion", data.data);
       });
@@ -141,7 +153,7 @@ export default {
 
 
     municipality({ commit }, data) {
-      return axios.get("council/show",data).then(({ data }) => {
+      return axios.get("councils",data).then(({ data }) => {
         console.log(data);
         commit("setMunicipality", data.data); 
       });
@@ -149,7 +161,7 @@ export default {
 
 
     locality({ commit }, data) {
-      return axios.post("neighborhood/show", data).then(({ data }) => {
+      return axios.post("neighborhoods", data).then(({ data }) => {
         console.log(data);
         commit("setLocality", data.data);
       });
@@ -159,7 +171,7 @@ export default {
 
     
     division({ commit }, data) {
-      return axios.get("division/show", data).then(({ data }) => {
+      return axios.get("divisions ", data).then(({ data }) => {
         console.log(data);
         commit("setDivision", data.data);
       });
@@ -173,6 +185,36 @@ export default {
         commit("setCategories", data.data);
       });
     },
+
+    
+    subcategories({ commit }, data) {
+      return axios.post("catergory/subcategory", data).then(({ data }) => {
+        console.log(data);
+        commit("setSubcategories", data.data);
+      });
+    },
+
+
+
+
+
+
+    filters({ commit }) {
+      return axios.get("user/completewelcome").then(({ data }) => {
+        console.log(data);
+        commit("setFilters", data.data);
+      });
+    },
+
+
+  
+    Setcategoryfiters({ commit }) {
+      return axios.get("user/completewelcome").then(({ data }) => {
+        console.log(data);
+        commit("Setcategoryfiters", data.data);
+      });
+    },
+
 
     completeWelcome({commit}){
 

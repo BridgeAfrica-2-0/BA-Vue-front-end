@@ -1,16 +1,16 @@
 <template>
   <div>
-    {{ filterType }}
+    <!-- {{ filterType }} -->
     <div v-if="filterType == '1' || filterType == '4'">
       <div v-if="subCategories.length">
         <span>
           <b-form-radio
-            v-for="(subCat, index) in subCategories"
+            v-for="(subCat, index) in subCategories.slice(0, 4)"
             v-model="selected_sub_cat"
             :key="index"
             :value="subCat.id"
             name="subcategories-list"
-            @change="getFilter(subCat.id)"
+            @change="getFilter(subCat)"
             class="m-1 br-3"
           >
             {{ subCat.name }}
@@ -27,11 +27,11 @@
         <span v-if="subFilter.length">
           <h6>Filters</h6>
           <b-form-radio
-            v-for="(filter, i) in subFilter"
+            v-for="(filter, i) in subFilter.slice(0, 4)"
             :key="i.value"
             v-model="selectedFilter"
             :value="filter.id"
-            @change="switchcategoriesfilters"
+            @change="searchByFIlter(filter)"
             name="sub-filters"
             class="m-1 br-3"
           >
@@ -53,7 +53,7 @@
             :key="i.value"
             v-model="selectedFilter"
             :value="filter.id"
-            @change="switchcategoriesfilters"
+            @change="searchByFIlter(filter)"
             name="sub-filters"
           >
             {{ filter.name }}
@@ -207,6 +207,7 @@
             min="1000"
             max="200000000"
             step="0.5"
+            @change="searchByDistance"
           ></b-form-input>
           <div class="mt-2 text-left">min: 1000 Max: {{ priceRange }}</div>
         </span>
@@ -345,42 +346,22 @@
       </b-form-group>
       People
       <b-form-select v-model="selectsp">
-        <b-form-select-option value="a">
-          Followers
-        </b-form-select-option>
-        <b-form-select-option value="b">
-          Followings
-        </b-form-select-option>
-        <b-form-select-option value="c">
-          Community
-        </b-form-select-option>
+        <b-form-select-option value="a"> Followers </b-form-select-option>
+        <b-form-select-option value="b"> Followings </b-form-select-option>
+        <b-form-select-option value="c"> Community </b-form-select-option>
       </b-form-select>
       Business
       <b-form-select v-model="selectsb">
-        <b-form-select-option value="a">
-          Followers
-        </b-form-select-option>
-        <b-form-select-option value="b">
-          Followings
-        </b-form-select-option>
-        <b-form-select-option value="c">
-          Community
-        </b-form-select-option>
+        <b-form-select-option value="a"> Followers </b-form-select-option>
+        <b-form-select-option value="b"> Followings </b-form-select-option>
+        <b-form-select-option value="c"> Community </b-form-select-option>
       </b-form-select>
       Network
       <b-form-select v-model="selectsn">
-        <b-form-select-option value="a">
-          Followers
-        </b-form-select-option>
-        <b-form-select-option value="b">
-          Followings
-        </b-form-select-option>
-        <b-form-select-option value="c">
-          community
-        </b-form-select-option>
-        <b-form-select-option value="d">
-          Members
-        </b-form-select-option>
+        <b-form-select-option value="a"> Followers </b-form-select-option>
+        <b-form-select-option value="b"> Followings </b-form-select-option>
+        <b-form-select-option value="c"> community </b-form-select-option>
+        <b-form-select-option value="d"> Members </b-form-select-option>
       </b-form-select>
     </div>
 
@@ -417,16 +398,10 @@
       </b-form-checkbox>
       <br />
       Post From
-      <b-form-select v-model="selectsp" >
-        <b-form-select-option value="a" >
-          editors
-        </b-form-select-option>
-        <b-form-select-option value="b">
-          Members
-        </b-form-select-option>
-        <b-form-select-option value="c">
-          Owner
-        </b-form-select-option>
+      <b-form-select v-model="selectsp">
+        <b-form-select-option value="a"> editors </b-form-select-option>
+        <b-form-select-option value="b"> Members </b-form-select-option>
+        <b-form-select-option value="c"> Owner </b-form-select-option>
       </b-form-select>
     </div>
 
@@ -490,7 +465,7 @@
           v-model="selected_sub_cat"
           :key="i"
           :value="sub.id"
-          @change="selectedsidebar"
+          @change="searchByFIlter(filter)"
           name="subCategories-list-modal"
           class=""
         >
@@ -1814,71 +1789,70 @@ export default {
   },
   computed: {
     subCategories() {
-      return this.$store.state.market.subCat;
+      return this.$store.getters["market/getSubCat"];
     },
     subFilter() {
-      return this.$store.state.market.subFilter;
+      return this.$store.getters["market/getSubFilters"];
     },
   },
 
   methods: {
-    getFilter(subId) {
+    getFilter(subCat) {
       this.filterLoader = true;
       this.noFilter = "";
 
       this.$store
-        .dispatch("market/getFilter", subId)
+        .dispatch("market/getFilter", subCat.id)
         .then((res) => {
+          this.searchProducts({ cat_id: subCat.cat_id, sub_cat: subCat.id });
           console.log("Filters: ");
-
           console.log(res.data.data);
           if (res.data.data.length === 0) {
-            let subName = ''
-            this.subCategories.map((sub)=>{
-              if (sub.id === subId) {
-                subName = sub.name
-              }
-            })
-            this.noFilter = `No filter available for ${subName}!`;
+            this.noFilter = `No filter available for ${subCat.name}!`;
           }
 
           this.filterLoader = false;
-          this.$store.commit("market/setSubFilters", res.data.data);
+          let filter = [];
+          res.data.data.map((filt) => {
+            filter.push({
+              cat_id: subCat.cat_id,
+              sub_cat_id: subCat.id,
+              ...filt,
+            });
+          });
+
+          this.$store.commit("market/setSubFilters", filter);
+          console.log("[DeBUG] FILTER: ", this.subFilter);
         })
         .catch((err) => {
           console.error(err);
           this.filterLoader = false;
         });
     },
-    switchcategoriesfilters() {
-      this.showform = false;
-      console.log(this.selectedfilter);
 
-      switch (this.selectedfilter) {
-        case "male":
-          this.categories_sub_filters = this.male;
-          break;
+    searchProducts(data) {
+      this.$store
+        .dispatch("market/searchProducts", data)
+        .then((res) => {
+          // console.log("categories loaded!");
+        })
+        .catch((err) => {
+          console.log("Error erro!");
+        });
+    },
 
-        case "female":
-          this.categories_sub_filters = this.female;
-          break;
+    searchByFIlter(filter) {
+      // this.showform = false;
+      console.log("[DEBUG] Filter: ", filter);
+      this.searchProducts({
+        cat_id: filter.cat_id,
+        sub_cat: filter.sub_cat_id,
+        filter_id: filter.id,
+      });
+    },
 
-        case "Legal_service":
-          this.categories_sub_filters = this.Legal_service;
-          break;
-
-        case "Professional_services":
-          this.categories_sub_filters = this.Professional_services;
-          break;
-
-        case "Home_service":
-          this.categories_sub_filters = this.Home_service;
-          break;
-
-        case "Financial_service":
-          this.categories_sub_filters = this.Financial_service;
-          break;
-      }
+    searchByDistance(value) {
+      console.log("[DEBUG] PRICE: ", value);
     },
 
     selectedsidebar() {

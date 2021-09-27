@@ -1,37 +1,33 @@
 <template>
-  <header class=" ">
-    <nav class="navbar  navbar-expand-xl  p-3 mb-3 rounded ">
-      <div class="container-fluid ">
-        <div class="col-md-12  col-lg-2 col-xl-2  text-center ">
+  <header class="">
+    <nav class="navbar navbar-expand-xl p-3 mb-3 rounded">
+      <div class="container-fluid">
+        <div class="col-md-12 col-lg-2 col-xl-2 text-center">
           <span class="d-block d-lg-none">
             <b-icon
               icon="house-fill"
-              style=" float:left"
+              style="float: left"
               font-scale="1.5; margin-top:5px"
               variant="primary"
             ></b-icon>
           </span>
 
-          <a class=" d-inline-block align-top mt-1 " href="#">
+          <a class="d-inline-block align-top mt-1" href="#">
             <img src="@/assets/logo.png" alt="" class="balogo" loading="lazy" />
           </a>
         </div>
 
-        <div class="col-lg-9 col-xl-6 ">
+        <div class="col-lg-9 col-xl-6">
           <form class="d-block d-lg-none">
-            <b-input-group class="b-shadow mt-3  ">
-              <div
-                class="input-group-append color-mobile "
-                style=" 
-             border:none "
-              >
+            <b-input-group class="b-shadow mt-3">
+              <div class="input-group-append color-mobile" style="border: none">
                 <span
-                  class="input-group-text border-left-0 color-mobile "
-                  style="width:40px;  border-right: none; "
+                  class="input-group-text border-left-0 color-mobile"
+                  style="width: 40px; border-right: none"
                 >
                   <b-icon
                     icon="search"
-                    style="color:#e75c18"
+                    style="color: #e75c18"
                     font-scale="1.5"
                   ></b-icon>
                 </span>
@@ -41,8 +37,8 @@
                 id="search-ba"
                 type="search"
                 data-toggle="popover"
-                class="form-control  search-mobile "
-                style=" border-left: none; "
+                class="form-control search-mobile"
+                style="border-left: none"
                 placeholder="Find Pharmacy"
                 aria-label=""
                 data-original-title=""
@@ -51,20 +47,19 @@
               />
             </b-input-group>
 
-            <span style="display:none" ref="mobileinput">
-              <b-input-group class=" b-shadow  mt-2 ">
+            <span style="display: none" ref="mobileinput">
+              <b-input-group class="b-shadow mt-2">
                 <div
-                  class="input-group-append color-mobile "
-                  style=" 
-             border:none "
+                  class="input-group-append color-mobile"
+                  style="border: none"
                 >
                   <span
-                    class="input-group-text border-left-0 color-mobile "
-                    style="width:40px;  border-right: none; "
+                    class="input-group-text border-left-0 color-mobile"
+                    style="width: 40px; border-right: none"
                   >
                     <b-icon
                       icon="geo-alt"
-                      style="color:#e75c18"
+                      style="color: #e75c18"
                       font-scale="1.5"
                     ></b-icon>
                   </span>
@@ -75,8 +70,8 @@
                   type="search"
                   list="browsers"
                   data-toggle="popover"
-                  class="form-control  search-mobile "
-                  style=" border-left: none; "
+                  class="form-control search-mobile"
+                  style="border-left: none"
                   placeholder="Find Pharmacy"
                   aria-label=""
                   data-original-title=""
@@ -84,7 +79,7 @@
                 />
 
                 <datalist id="browsers">
-                  <option value=" Current Location "> </option>
+                  <option value=" Current Location "></option>
                   <option value="Yaounde " />
                 </datalist>
               </b-input-group>
@@ -92,14 +87,14 @@
           </form>
 
           <span class="d-none d-lg-block">
-            <form class="form-inline input-group b-shadow b-radius  ">
+            <form class="form-inline input-group b-shadow b-radius">
               <input
                 id="search-ba"
                 type="search"
                 data-toggle="popover"
-                class="form-control  search-h"
-                style=" "
-                placeholder="Find Pharmacy"
+                class="form-control search-h"
+                style=""
+                placeholder="Find Pharmacy jlkshdfkbnsdkfhskdhfsdhj"
                 aria-label=""
                 data-original-title=""
                 title=""
@@ -111,7 +106,7 @@
                 type="search"
                 list="browsers"
                 data-toggle="popover"
-                class="form-control   search-h"
+                class="form-control search-h"
                 placeholder="Where "
                 aria-label="search bridge africa"
                 data-original-title=""
@@ -119,22 +114,25 @@
               />
 
               <datalist id="browsers">
-                <option value=" Current Location "> </option>
+                <option value=" Current Location "></option>
                 <option value="Yaounde " />
               </datalist>
 
               <div
                 class="input-group-append color-sit"
-                style="color:white;   border-top-right-radius: 10px;
-            border-bottom-right-radius: 10px; "
+                style="
+                  color: white;
+                  border-top-right-radius: 10px;
+                  border-bottom-right-radius: 10px;
+                "
               >
                 <span
-                  class="input-group-text border-left-0 color-sit "
-                  style="width:56px"
+                  class="input-group-text border-left-0 color-sit"
+                  style="width: 56px"
                 >
                   <b-icon
                     icon="search"
-                    style="color:white"
+                    style="color: white"
                     font-scale="1.5"
                   ></b-icon>
                 </span>
@@ -162,18 +160,14 @@
             <fas-icon class="primary search" :icon="['fas', 'bars']" />
           </button>
 
-          <div style="float: right;">
+          <div style="float: right">
             <b-collapse id="nav-collapse" is-nav>
               <div class="nav-item">
-                <a class="nav-link text-dark hov" href="">
-                  Home
-                </a>
+                <a class="nav-link text-dark hov" href=""> Home </a>
               </div>
 
               <div class="nav-item">
-                <a class="nav-link text-dark hov" href="">
-                  Market
-                </a>
+                <a class="nav-link text-dark hov" href=""> Market </a>
               </div>
 
               <div class="nav-item">
@@ -187,14 +181,21 @@
                   ><span class="text-ored"
                     ><fas-icon
                       class="primary"
-                      :icon="['fas', 'comment']"/></span
+                      :icon="['fas', 'comment']" /></span
                 ></a>
                 <b-popover target="messages" triggers="hover" placement="top">
                   <div class="popover-body">
                     <p class="font-weight-bold">Messages</p>
                     <hr class="h-divider" />
                     <div
-                      class="d-inline-flex flex-row justify-content-between align-items-center suggest-item cursor-pointer"
+                      class="
+                        d-inline-flex
+                        flex-row
+                        justify-content-between
+                        align-items-center
+                        suggest-item
+                        cursor-pointer
+                      "
                     >
                       <div class="d-inline-flex flex-row align-items-center">
                         <div>
@@ -215,7 +216,14 @@
                     </div>
                     <hr class="h-divider" />
                     <div
-                      class="d-inline-flex flex-row justify-content-between align-items-center suggest-item cursor-pointer"
+                      class="
+                        d-inline-flex
+                        flex-row
+                        justify-content-between
+                        align-items-center
+                        suggest-item
+                        cursor-pointer
+                      "
                     >
                       <div class="d-inline-flex flex-row align-items-center">
                         <div>
@@ -236,7 +244,14 @@
                     </div>
                     <hr class="h-divider" />
                     <div
-                      class="d-inline-flex flex-row justify-content-between align-items-center suggest-item cursor-pointer"
+                      class="
+                        d-inline-flex
+                        flex-row
+                        justify-content-between
+                        align-items-center
+                        suggest-item
+                        cursor-pointer
+                      "
                     >
                       <div class="d-inline-flex flex-row align-items-center">
                         <div>
@@ -257,7 +272,14 @@
                     </div>
                     <hr class="h-divider" />
                     <div
-                      class="d-inline-flex flex-row justify-content-between align-items-center suggest-item cursor-pointer"
+                      class="
+                        d-inline-flex
+                        flex-row
+                        justify-content-between
+                        align-items-center
+                        suggest-item
+                        cursor-pointer
+                      "
                     >
                       <div class="d-inline-flex flex-row align-items-center">
                         <div>
@@ -278,7 +300,14 @@
                     </div>
                     <hr class="h-divider" />
                     <div
-                      class="d-inline-flex flex-row justify-content-between align-items-center suggest-item cursor-pointer"
+                      class="
+                        d-inline-flex
+                        flex-row
+                        justify-content-between
+                        align-items-center
+                        suggest-item
+                        cursor-pointer
+                      "
                     >
                       <div class="d-inline-flex flex-row align-items-center">
                         <div>
@@ -323,7 +352,13 @@
                     <p class="font-weight-bold">Notifications</p>
                     <hr class="h-divider" />
                     <div
-                      class="d-inline-flex flex-row align-items-center suggest-item cursor-pointer"
+                      class="
+                        d-inline-flex
+                        flex-row
+                        align-items-center
+                        suggest-item
+                        cursor-pointer
+                      "
                     >
                       <div>
                         <img
@@ -344,7 +379,13 @@
                     </div>
                     <hr class="h-divider" />
                     <div
-                      class="d-inline-flex flex-row align-items-center suggest-item cursor-pointer"
+                      class="
+                        d-inline-flex
+                        flex-row
+                        align-items-center
+                        suggest-item
+                        cursor-pointer
+                      "
                     >
                       <div>
                         <img
@@ -365,7 +406,13 @@
                     </div>
                     <hr class="h-divider" />
                     <div
-                      class="d-inline-flex flex-row align-items-center suggest-item cursor-pointer"
+                      class="
+                        d-inline-flex
+                        flex-row
+                        align-items-center
+                        suggest-item
+                        cursor-pointer
+                      "
                     >
                       <div>
                         <img
@@ -386,7 +433,13 @@
                     </div>
                     <hr class="h-divider" />
                     <div
-                      class="d-inline-flex flex-row align-items-center suggest-item cursor-pointer"
+                      class="
+                        d-inline-flex
+                        flex-row
+                        align-items-center
+                        suggest-item
+                        cursor-pointer
+                      "
                     >
                       <div>
                         <img
@@ -407,7 +460,13 @@
                     </div>
                     <hr class="h-divider" />
                     <div
-                      class="d-inline-flex flex-row align-items-center suggest-item cursor-pointer"
+                      class="
+                        d-inline-flex
+                        flex-row
+                        align-items-center
+                        suggest-item
+                        cursor-pointer
+                      "
                     >
                       <div>
                         <img
@@ -488,10 +547,17 @@
 
                     <a
                       href="/settings"
-                      class="other-menu suggest-item cursor-pointer text-decoration-none text-dark"
+                      class="
+                        other-menu
+                        suggest-item
+                        cursor-pointer
+                        text-decoration-none text-dark
+                      "
                     >
                       <span class="mr-2"
-                        ><fas-icon class="violet search" :icon="['fas', 'cogs']"
+                        ><fas-icon
+                          class="violet search"
+                          :icon="['fas', 'cogs']"
                       /></span>
                       Account Settings
                     </a>
@@ -516,7 +582,12 @@
                     <hr class="h-divider" />
                     <a
                       href="https://bridgeafrica.info/nav/owner-other-menu.html"
-                      class="other-menu suggest-item cursor-pointer text-decoration-none text-dark"
+                      class="
+                        other-menu
+                        suggest-item
+                        cursor-pointer
+                        text-decoration-none text-dark
+                      "
                     >
                       <span class="mr-2"
                         ><fas-icon
@@ -533,7 +604,7 @@
         </div>
 
         <b-modal ref="setcat" id="myModallnav" hide-footer title=" ">
-          <div class=" d-block d-lg-block d-xl-none ">
+          <div class="d-block d-lg-block d-xl-none">
             <div class="mt-3">
               <div class="d-inline-flex flex-row align-items-center">
                 <div>
@@ -572,7 +643,12 @@
 
             <a
               href="/settings"
-              class="other-menu suggest-item cursor-pointer text-decoration-none text-dark"
+              class="
+                other-menu
+                suggest-item
+                cursor-pointer
+                text-decoration-none text-dark
+              "
             >
               <span class="mr-2"
                 ><fas-icon class="violet search" :icon="['fas', 'cogs']"
@@ -598,10 +674,17 @@
             <hr class="h-divider" />
             <a
               href="https://bridgeafrica.info/nav/owner-other-menu.html"
-              class="other-menu suggest-item cursor-pointer text-decoration-none text-dark"
+              class="
+                other-menu
+                suggest-item
+                cursor-pointer
+                text-decoration-none text-dark
+              "
             >
               <span class="mr-2"
-                ><fas-icon class="violet search" :icon="['fas', 'sign-out-alt']"
+                ><fas-icon
+                  class="violet search"
+                  :icon="['fas', 'sign-out-alt']"
               /></span>
               Logout
             </a>
@@ -621,15 +704,18 @@ export default {
   data() {
     return {
       isActive: false,
-      shownav: false
+      shownav: false,
     };
   },
 
   methods: {
+    // eteme code
     toggleinput() {
       this.$refs.mobileinput.style.display = "block";
       this.isActive = true;
     },
+
+    // eteme code
 
     togglenav() {
       if (this.shownav == false) {
@@ -639,8 +725,8 @@ export default {
         this.shownav = false;
         console.log(this.shownav);
       }
-    }
-  }
+    },
+  },
 };
 </script>
 

@@ -11,6 +11,7 @@ import networkProfile from "./networkProfile";
 import networkProfileMedia from "./networkProfileMedia";
 import networkProfileCommunity  from "./networkProfileCommunity";
 import networkProfileCommunitySidebar  from "./networkProfileCommunitySidebar";
+import networkProfileFeedback  from "./networkProfileFeedback";
 
 import axios from "axios";
 Vue.use(Vuex);
@@ -27,5 +28,6 @@ export default new Vuex.Store({
     networkProfileMedia,
     networkProfileCommunity ,
     networkProfileCommunitySidebar ,
+    networkProfileFeedback
   },
 });

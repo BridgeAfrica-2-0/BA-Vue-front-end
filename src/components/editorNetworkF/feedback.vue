@@ -1,137 +1,241 @@
 <template>
-  <div>
-    <b-card>
-      <p class="title"><b>Your Feedback is about</b></p>
-      <b-form-select
-        required
-        v-model="selected"
-        :options="options"
-      ></b-form-select>
-      <p class="mt-2 username "><b>Brief description of your feedback</b></p>
-      <b-form-textarea
-        id="textarea"
-        v-model="description"
-        placeholder="Enter something..."
-        rows="3"
-        class="text"
-        max-rows="6"
-        required
-      ></b-form-textarea>
-      <b-button class="float-right mt-2" variant="primary"> Submit</b-button>
-    </b-card>
+  <div class="mt-3 container">
+    <b-row> </b-row>
+    <b-row>
+      <b-col cols="12">
+        <span class="float-right">
+          <b-dropdown
+            size="lg"
+            variant="link"
+            toggle-class="text-decoration-none pull-left"
+            right
+            class="pull-left"
+            no-caret
+          >
+            <template #button-content>
+              <b-icon-filter></b-icon-filter><span class="sr-only">Search</span>
+            </template>
+            <p class="font-weight-bolder px-3 m-0">Feedbacks Type</p>
 
-    <fas-icon
-      class="primary float-right mt-2 filter"
-      :icon="['fas', 'filter']"
-      @click="filterFeedback"
-    />
-    <b-card class="mt-3" v-if="filterData">
-      <p class="primary text"><strong>Feedback Type</strong></p>
-      <b-form-select
-        required
-        v-model="filter"
-        :options="filters"
-      ></b-form-select>
-      <b-row class="float-right mt-2">
-        <b-col>
-          <b-button class="reset">Reset</b-button>
-        </b-col>
-        <b-col>
-          <b-button variant="primary" class="apply">Apply</b-button>
-        </b-col>
-      </b-row>
-    </b-card>
-
-    <b-card class="mt-5">
-      <div style="display:inline-flex">
-        <b-avatar
-          variant="primary"
-          class="mt-2 avat"
-          src="https://placekitten.com/300/300"
-        ></b-avatar>
-
-        <span class=" username  ml-3 mt-3">
-          <strong>
-            Mapoure Agrobusiness
-          </strong>
-          <br />
-          <small class="duration">
-            1 hr ago - <span class="primary">Feedback Type</span>
-          </small>
+            <b-dropdown-item @click="applyFilter('0')">Any</b-dropdown-item>
+            <b-dropdown-item @click="applyFilter('Improvement')">Suggestion For Improvement</b-dropdown-item>
+            <b-dropdown-item @click="applyFilter('Complain')">Complain</b-dropdown-item>
+          </b-dropdown>
         </span>
+      </b-col>
+    </b-row>
+    <b-row>
+      <div v-if="spinner" class="text-center">
+        <b-spinner variant="primary" label="Spinning"></b-spinner>
       </div>
+      <b-col cols="12">
+        <div 
+          :class="{ active: index == currentIndex }"
+          v-for="(feedback, index) in feedbacks.data"
+          :key="index"
+          class="mb-4"
+        >
+          <b-card class="mb-2">
+            <b-card-text>
+              <b-row class="px-md-3">
+                <b-col cols="2" md="1" class="m-0 p-0">
+                  <b-avatar
+                    class="d-inline-block"
+                    variant="info"
+                    :src="feedback.profile_picture"
+                    square
+                    size="3.5rem"
+                    rounded="xl"
+                  ></b-avatar>
+                </b-col>
+                <b-col cols="8" md="10" class="pt-2">
+                  <h5 class="m-0 font-weight-bolder feedback-name">
+                    <b-link>  {{feedback.user_name}} </b-link>
+                  </h5>
+                  <p>{{  moment(feedback.created_at).fromNow() }} - <span class="primary">{{feedback.title}}</span></p>
+                </b-col>
+                <b-col cols="2" md="1" class="float-right">
+                  <span 
+                    @click="deleteFeedback(feedback.user_id)"
+                  > <b-link><b-icon icon="trash-fill" aria-hidden="true"></b-icon></b-link>
+                  </span>
+                </b-col>
+              </b-row>
+              <b-row>
+                <b-col cols="12" class="mt-2">
+                  <p class="text-justify feedback-sent"> {{feedback.description}} </p>
+                </b-col>
+              </b-row>
+            </b-card-text>
+          </b-card>
+        </div>
+      </b-col>
+      <b-col v-if="feedbacks.per_page < feedbacks.total" cols="12">
+        <span class="float-right">
+          <b-pagination
+            v-model="currentPage"
+            :total-rows="feedbacks.total"
+            :per-page="feedbacks.per_page"
+            @change="handlePageChange"
+            aria-controls="my-table"
+          ></b-pagination>
+        </span>
+      </b-col>
+    </b-row>
 
-      <p class="mt-2 text ">
-        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Earum quis ad
-        assumenda soluta, fuga vel minus pariatur neque, aut doloribus culpa
-        ipsum quos facilis sunt. Iusto aliquid dolor repudiandae eum doloremque,
-        vero, placeat reiciendis ullam expedita pariatur quae quis
-        necessitatibus est minus quasi quibusdam sapiente commodi. Consectetur
-        dicta nobis voluptas?
-      </p>
-    </b-card>
+    <FlashMessage />
+    
   </div>
 </template>
 
 <script>
+import moment from 'moment';
+
 export default {
+  name: "feedbackNetwork",
   data() {
     return {
-      selected: "Improvement",
-      filter: "any",
-      description: "",
+      url: null,
+      moment: moment,
+      filter: "0",
       filterData: false,
+      spinner: false,
+      currentPage: null,
+      currentIndex: -1,
       options: [
         { value: "Improvement", text: "Suggestion for Improvement" },
-        { value: "complaints", text: "Complaints" }
+        { value: "Complaints", text: "Complaints" }
       ],
       filters: [
-        { value: "any", text: "Any" },
+        { value: "0", text: "Any" },
         { value: "Improvement", text: "Suggestion for Improvement" },
-        { value: "complaints", text: "Complaints" }
-      ]
+        { value: "Complaints", text: "Complaints" }
+      ],
+      feedbackForm: {
+        title: "Improvement",
+        description: "",
+      },
     };
+  },
+  computed: {
+    feedbacks() {
+      return this.$store.state.networkProfileFeedback.feedbacks;
+    },
+  },
+  mounted(){
+    this.url = this.$route.params.id;
+    this.displayFeedback(); 
   },
   methods: {
     filterFeedback() {
       this.filterData = !this.filterData;
-    }
+    },
+    getRequestDatas(filterData, currentPage) {
+      let data = "";
+      if (filterData) {
+        data = "/"+filterData;
+      }else if (currentPage) {
+        data = "/?page="+currentPage;
+      }
+      console.log(data);
+      return data;
+    },
+    applyFilter(data){
+      this.filterData = data
+      console.log("searching...");
+      console.log(this.filterData);
+      this.displayFeedback();
+    },
+    displayFeedback() {
+      const data = this.getRequestDatas(this.filterData, this.currentPage);
+      this.$store
+      .dispatch("networkProfileFeedback/getFeedbacks", this.url+"/feedback"+data)
+      .then(() => {
+        console.log('ohh yeah');
+      })
+      .catch( err => {
+        console.log({ err: err });
+      });
+    },
+    createFeedback: function(){
+      this.spinner = true;
+      let formData = new FormData();
+      formData.append('title', this.feedbackForm.title);
+      formData.append('description', this.feedbackForm.description);
+      console.log('title', this.feedbackForm.title);
+      console.log('description', this.feedbackForm.description);
+      this.axios.post("network/"+this.url+"/feedback/create", formData)
+      .then(() => {
+        this.displayFeedback();
+        console.log('ohh yeah');
+        this.spinner = false;
+        this.flashMessage.show({
+          status: "success",
+          message: "You Just Created A New Feedback"
+        });
+      })
+      .catch(err => {
+        console.log({ err: err });
+        this.spinner = false;
+        this.flashMessage.show({
+          status: "error",
+          message: "Unable to Create Feedback"
+        });
+      });
+		},
+
+    deleteFeedback: function(user_id){
+      this.spinner = true;
+      console.log('user_id: ', user_id);
+      this.axios.delete("network/"+this.url+"/feedback/delete/"+user_id)
+      .then(() => {
+        this.displayFeedback();
+        console.log('ohh yeah');
+        this.spinner = false;
+        this.flashMessage.show({
+          status: "success",
+          message: "Feedback Deleted"
+        });
+      })
+      .catch(err => {
+        console.log({ err: err });
+        this.spinner = false;
+        this.flashMessage.show({
+          status: "error",
+          message: "Unable to Deleted Feedback"
+        });
+      });
+		},
+
+    handlePageChange(value) {
+      this.currentPage = value;
+      console.log(this.currentPage);
+      this.getMembers();
+    },
   }
 };
 </script>
 
 <style scoped>
-.filter {
-  cursor: pointer;
-}
-.reset {
-  background-color: #bbb;
-  border: none;
-  color: white;
-}
-.apply {
-  border: none;
-}
-.detail {
-  position: relative;
-  left: -197px;
-}
-@media only screen and (max-width: 768px) {
-  .avat {
-    width: 64px;
-    height: 64px;
+@media (min-width: 762px) {
+  .feedback-name {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 20px;
   }
-
-  .detail {
-    position: relative;
-    left: -70px;
+  .feedback-sent {
+    font-size: 14px;
+    font-family: Arial, Helvetica, sans-serif;
   }
 }
 
-@media only screen and (min-width: 768px) {
-  .avat {
-    width: 64px;
-    height: 64px;
+@media (max-width: 762px) {
+  .feedback-name {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 16px;
+  }
+  .feedback-sent {
+    font-size: 12px;
+    font-family: Arial, Helvetica, sans-serif;
   }
 }
 </style>

@@ -37,8 +37,8 @@
 </template>
 
 <script>
-import axios from "axios";
 import CommunityBusiness from "../../communitybusiness";
+import { mapActions, mapGetters } from "vuex";
 export default {
   components: {
     CommunityBusiness,
@@ -58,29 +58,22 @@ export default {
             .every((v) => item.name.toLowerCase().includes(v));
         });
       } else {
-        return this.followers;
+        return this.getFollowing;
       }
     },
+
+    ...mapGetters(["getFollowing"]),
   },
   beforeMount() {
-    axios.defaults.headers.common["Authorization"] =
-      "Bearer " + localStorage.getItem("access_token");
-    this.getFollowers();
-    this.loader = true;
+    this.getFollowing();
   },
+
+  created() {
+    this.gettingFollowings();
+  },
+
   methods: {
-    getFollowers() {
-      axios
-        .get("/api/v1/community/business-following/5/erald")
-        .then((res) => {
-          this.loader = false;
-          this.followers = res.data.data.data;
-        })
-        .catch((err) => {
-          console.log(err);
-          this.loader = false;
-        });
-    },
+    ...mapActions(["gettingFollowings"]),
   },
 };
 </script>

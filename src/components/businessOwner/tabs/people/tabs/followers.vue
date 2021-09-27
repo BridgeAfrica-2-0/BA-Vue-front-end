@@ -38,8 +38,8 @@
 </template>
 
 <script>
-import axios from "axios";
 import CommunityMembers from "../../communityMember";
+import { mapActions, mapGetters } from "vuex";
 export default {
   components: {
     CommunityMembers,
@@ -59,30 +59,22 @@ export default {
             .every((v) => item.name.toLowerCase().includes(v));
         });
       } else {
-        return this.followers;
+        return this.ppleFollowers;
       }
     },
+
+    ...mapGetters(["ppleFollowers"]),
   },
   beforeMount() {
-    axios.defaults.headers.common["Authorization"] =
-      "Bearer " + localStorage.getItem("access_token");
-
-    this.getFollowers();
+    this.ppleFollowers();
   },
+
+  created() {
+    this.peopleFollowers();
+  },
+
   methods: {
-    getFollowers() {
-      this.loader = true;
-      axios
-        .get("/api/v1/community/people-follower/5/Const")
-        .then((res) => {
-          this.loader = false;
-          this.followers = res.data.data.data;
-        })
-        .catch((err) => {
-          console.log(err);
-          this.loader = false;
-        });
-    },
+    ...mapActions(["peopleFollowers"]),
   },
 };
 </script>

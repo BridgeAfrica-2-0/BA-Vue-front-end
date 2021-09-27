@@ -17,6 +17,12 @@ export default {
     btnReadLoader: false,
 
     pendingPosts: [],
+
+    Following: [],
+    Followers: [],
+
+    peopleFollowing: [],
+    peopleFollowers: [],
   },
   getters: {
     // sending networks
@@ -56,6 +62,26 @@ export default {
     posts(state) {
       return state.pendingPosts;
     },
+
+    // getting all followers
+    getFollowing(state) {
+      return state.Following;
+    },
+
+    // getting all followers
+    getFollowers(state) {
+      return state.Followers;
+    },
+
+    // getting business people following
+    ppleFollowing(state) {
+      return state.peopleFollowing;
+    },
+
+    // getting business people followers
+    ppleFollowers(state) {
+      return state.peopleFollowers;
+    },
   },
   mutations: {
     setNetworks(state, payload) {
@@ -86,6 +112,26 @@ export default {
     //disapprove pending post
     Disapprove(state, payload) {
       state.pendingPosts = payload;
+    },
+
+    //getting all business following
+    Following(state, payload) {
+      state.Following = payload;
+    },
+
+    //getting all business followers
+    Followers(state, payload) {
+      state.Followers = payload;
+    },
+
+    // setting all business people following to the store
+    ppleFollowing(state, payload) {
+      state.peopleFollowing = payload;
+    },
+
+    // setting all business people following to the store
+    ppleFollowers(state, payload) {
+      state.peopleFollowers = payload;
     },
   },
   actions: {
@@ -234,6 +280,34 @@ export default {
       const res = await axios.post("", post);
 
       commit("Disapprove", res.data);
+    },
+
+    //Getting all business following
+    async allFollowing({ commit }) {
+      const res = await axios.get("/community/business-following");
+
+      commit("Following", res.data);
+    },
+
+    //Getting all business followers
+    async allFollowers({ commit }) {
+      const res = await axios.get("/community/business-follower");
+
+      commit("Followers", res.data);
+    },
+
+    //Getting business people following
+    async peopleFollowing({ commit }) {
+      const res = await axios.get("/api/v1/community/people-following");
+
+      commit("ppleFollowing", res.data);
+    },
+
+    //Getting business people following
+    async peopleFollowers({ commit }) {
+      const res = await axios.get("/api/v1/community/people-follower");
+
+      commit("ppleFollowers", res.data);
     },
   },
 };

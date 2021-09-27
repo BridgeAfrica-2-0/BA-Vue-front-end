@@ -73,6 +73,7 @@
                       size="sm"
                       class="b-background shadow"
                       variant="primary"
+                      @click="joinNetwork"
                     >
                       <i class="fas fa-plus   fa-lg btn-icon "></i>
                       <span class="btn-text">Join</span>
@@ -123,7 +124,12 @@ export default {
       addNetwork: "businessOwner/addNetwork",
       getNetworks: "businessOwner/getNetworks",
       editNetwork: "businessOwner/editNetwork",
+      Joining: "businessFollowers/Joining",
     }),
+
+    joinNetwork() {
+      this.Joining();
+    },
   },
 };
 </script>

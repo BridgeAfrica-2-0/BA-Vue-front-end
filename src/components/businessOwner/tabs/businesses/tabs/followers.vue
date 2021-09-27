@@ -39,7 +39,7 @@
 </template>
 
 <script>
-import axios from "axios";
+import { mapActions, mapGetters } from "vuex";
 import CommunityBusiness from "../../communitybusiness";
 export default {
   components: {
@@ -60,29 +60,20 @@ export default {
             .every((v) => item.name.toLowerCase().includes(v));
         });
       } else {
-        return this.followers;
+        return this.getFollowers;
       }
     },
+
+    ...mapGetters(["getFollowers"]),
   },
   beforeMount() {
-    axios.defaults.headers.common["Authorization"] =
-      "Bearer " + localStorage.getItem("access_token");
-    this.loader = true;
     this.getFollowers();
   },
+  created() {
+    this.allFollowers();
+  },
   methods: {
-    getFollowers() {
-      axios
-        .get("/community/business-follower/5")
-        .then((res) => {
-          this.loader = false;
-          this.followers = res.data.data.data;
-        })
-        .catch((err) => {
-          console.log(err);
-          this.loader = false;
-        });
-    },
+    ...mapActions(["allFollowers"]),
   },
 };
 </script>

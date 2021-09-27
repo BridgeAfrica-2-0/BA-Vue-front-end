@@ -373,7 +373,7 @@
               v-bind:Selectedparentcategory="Selectedparentcategory"
             />
 
-            <PeopleFilter v-if="selectedId == 2" @new:people="(data) => peoples = data" />
+            <PeopleFilter v-if="selectedId == 2" />
             <PostFilter v-if="selectedId == 5"  />
           </div>
         </b-col>
@@ -538,6 +538,18 @@
 
             <div v-if="selectedId == '5'">
               <h6>
+                Sponsored Result
+                <fas-icon
+                  class="icons"
+                  :icon="['fas', 'exclamation-circle']"
+                  size="lg"
+                />
+              </h6>
+
+              <div>
+                <Sponsor />
+              </div>
+              <h6>
                 <fas-icon class="icons" :icon="['fab', 'readme']" size="lg" />
                 Post
               </h6>
@@ -575,6 +587,8 @@ import Sponsor from "@/components/search/sponsoredBusiness";
 import { PeopleFilter } from "@/components/search/peopleFilters";
 import { PostFilter } from "@/components/search/postFilters";
 
+import {mapGetters} from 'vuex'
+
 export default {
   components: {
     LyTab,
@@ -593,6 +607,12 @@ export default {
 
     // Footer,
   },
+
+  computed:{
+    ...mapGetters({
+      peoples:'search/GET_RESULT'
+    })
+  },
   data() {
     return {
       selected: "all",
@@ -607,7 +627,7 @@ export default {
       map: false,
       selectedfilter: "",
       showform: false,
-      peoples:[], 
+      
 
       //selectcategories:[],
 

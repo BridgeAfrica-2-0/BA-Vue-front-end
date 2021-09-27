@@ -6,7 +6,7 @@
             <b-avatar
               class="p-avater"
               variant="primary"
-              src="https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg"
+              :src="people.profile_picture"
             ></b-avatar>
           </b-col>
 
@@ -37,7 +37,7 @@
                         xl="12"
                         class="mt-3 mt-lg-1 mt-xl-0"
                       >
-                        <h6 class="follower text">{{people.community}} Community</h6>
+                        <h6 class="follower text">{{people.followers}} Community</h6>
                       </b-col>
                     </b-row>
                   </div>
@@ -100,6 +100,7 @@ export default {
   props:{
     people:{
       type: Object,
+      required: true
     }
     
   }

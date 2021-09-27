@@ -1,5 +1,10 @@
 <template>
-  <div>
+  <div class="mx-4">
+    <b-form class="mb-4">
+      <label for="feedback-user">Profession</label>
+      <b-form-input @input="debounceInput"  id="feedback-user" v-model="profession"></b-form-input>
+    </b-form>
+
     <a
       :class="['cursor',rootSectionIsVisible ? 'w-100' : 'collapsed w-100']"
       :aria-expanded="rootSectionIsVisible ? 'true' : 'false'"
@@ -8,17 +13,12 @@
     >
       <b-row class="fl">
         <span>People from</span>
-        <i
-          :class="[
-            'fas',
-            rootSectionIsVisible ? 'fa-arrow-down' : 'fa-arrow-up',
-          ]"
-        ></i>
+        <b-icon  :icon="rootSectionIsVisible ? 'arrow-down' : 'arrow-up'"></b-icon>
       </b-row>
     </a>
 
     <b-collapse id="collapse-4" v-model="rootSectionIsVisible">
-      <b-card>
+      <b-card class="row">
         <!--begin people section-->
         <a
           :class="['cursor',peopleSectionIsVisible ? 'w-100' : 'collapsed w-100']"
@@ -27,13 +27,8 @@
           @click.prevent="peopleSectionIsVisible = !peopleSectionIsVisible"
         >
           <b-row class="fl">
-            <span>People</span>
-            <i
-              :class="[
-                'fas',
-                peopleSectionIsVisible ? 'fa-arrow-down' : 'fa-arrow-up',
-              ]"
-            ></i>
+            <span>People  </span>
+            <b-icon  :icon="peopleSectionIsVisible ? 'arrow-down' : 'arrow-up'"></b-icon>
           </b-row>
         </a>
         <b-collapse
@@ -63,13 +58,8 @@
           @click.prevent="buisnessSectionIsVisible = !buisnessSectionIsVisible"
         >
           <b-row class="fl">
-            <span>Buisness</span>
-            <i
-              :class="[
-                'fas',
-                buisnessSectionIsVisible ? 'fa-arrow-down' : 'fa-arrow-up',
-              ]"
-            ></i>
+            <span>Buisness </span>
+            <b-icon  :icon="buisnessSectionIsVisible ? 'arrow-down' : 'arrow-up'"></b-icon>
           </b-row>
         </a>
         <b-collapse
@@ -100,12 +90,7 @@
         >
           <b-row class="fl">
             <span>Network</span>
-            <i
-              :class="[
-                'fa',
-                networkSectionIsVisible ? 'fa-arrow-down' : 'fa-arrow-up',
-              ]"
-            ></i>
+            <b-icon  :icon="networkSectionIsVisible ? 'arrow-down' : 'arrow-up'"></b-icon>
           </b-row>
         </a>
         <b-collapse
@@ -132,6 +117,9 @@
 </template>
 
 <script>
+import _ from 'lodash'
+
+import {mapActions} from 'vuex'
 
 const options = [
   { text: "Follower", value: "Follower" },
@@ -141,6 +129,7 @@ const options = [
 
 export default {
   data: () => ({
+    profession:null,
     rootSectionIsVisible: false,
     peopleSectionIsVisible: false,
     buisnessSectionIsVisible: false,
@@ -151,42 +140,21 @@ export default {
     optionsPeople: options,
     optionsBuisness: options,
     optionsNetwork: [...options, { text: "Member", value: "Member" }],
-    peoples:[
-      {
-        'name':'test me',
-        'community': 50000
-      },
-       {
-        'name':'test me pl',
-        'community': 50000
-      },
-       {
-        'name':'test me ll',
-        'community': 50000
-      },
-      {
-        'name':'test me',
-        'community': 50000
-      },
-       {
-        'name':'test me pl',
-        'community': 50000
-      },
-      {
-        'name':'test me',
-        'community': 50000
-      },
-       {
-        'name':'test me pl',
-        'community': 50000
-      },
-    ]
+   
   }),
 
   created(){
     this.$emit('new:people', this.peoples);
   },
   methods: {
+    ...mapActions({
+      findProfession: 'search/FIND_PROFESSION'
+    }),
+     debounceInput: _.debounce(function (e) {
+     console.log(e)
+     this.findProfession(e)
+    }, 1000),
+
     toogleRootSection() {
       this.rootSectionIsVisible = !this.rootSectionIsVisible;
 
@@ -213,7 +181,7 @@ export default {
 }
 .fl {
   align-items: center;
-  justify-content: space-evenly;
+  justify-content: space-between;
 }
 .cursor {
   cursor: pointer;

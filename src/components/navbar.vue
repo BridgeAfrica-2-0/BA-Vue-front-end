@@ -43,7 +43,8 @@
                 data-toggle="popover"
                 class="form-control  search-mobile "
                 style=" border-left: none; "
-                placeholder="Find Pharmacy"
+                :placeholder="credentials.placeholder"
+                v-model="credentials.username"
                 aria-label=""
                 data-original-title=""
                 title=""
@@ -617,6 +618,16 @@
 <script>
 export default {
   name: "navbar",
+
+  props: {
+    credentials:{
+      type: Object,
+      default:() => ({
+        username:'test me',
+        placeholder:'hello man'
+      })
+    }
+  },
 
   data() {
     return {

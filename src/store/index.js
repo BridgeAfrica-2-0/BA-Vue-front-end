@@ -10,10 +10,13 @@ import networkDetails from "./networkDetails";
 import dashboardcommunity from "./dashboardcommunity";
 import profile from "./profile";
 
+
 import axios from "axios";
+import { search } from "./search/people";
 
 Vue.use(Vuex);
- axios.defaults.baseURL = process.env.VUE_APP_API_URL;    
+ //axios.defaults.baseURL = process.env.VUE_APP_API_URL;    
+ axios.defaults.baseURL = "https://097e-154-72-150-111.ngrok.io/api/v1/";    
 
 export default new Vuex.Store({
   modules: {
@@ -24,8 +27,8 @@ export default new Vuex.Store({
     businessOwner,
     dashboard,
     hotbusiness,
-    profile
-
+    profile,
+    search
   },
 
 });

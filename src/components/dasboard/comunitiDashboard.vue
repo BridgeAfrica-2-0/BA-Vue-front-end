@@ -35,13 +35,13 @@
                       </template>
 
                       <div class="s-comcard">
-                        <b-row>
+                       
                           <div>
                             <People
                               :people="business.people[0].user_followers"
                             />
                           </div>
-                        </b-row>
+                      
                       </div>
                     </b-tab>
 
@@ -54,13 +54,13 @@
                       </template>
 
                       <div class="s-comcard">
-                        <b-row>
+                       
                           <div>
                             <People
                               :people="business.people[0].user_following"
                             />
                           </div>
-                        </b-row>
+                      
                       </div>
                     </b-tab>
                   </b-tabs>
@@ -88,13 +88,13 @@
                   </template>
 
                   <div class="s-comcard">
-                    <b-row>
+                    
                       <div>
                         <Business
                           :business="business.business[0].business_followers"
                         />
                       </div>
-                    </b-row>
+                   
                   </div>
                 </b-tab>
 
@@ -107,18 +107,72 @@
                   </template>
 
                   <div class="s-comcard">
-                    <b-row>
+                  
                       <div>
                         <Business
                           :business="business.business[0].business_following"
                         />
                       </div>
-                    </b-row>
+                    
                   </div>
                 </b-tab>
               </b-tabs>
             </div>
           </b-tab>
+
+
+                    <b-tab>
+            <template slot="title">
+              Network
+              <span class="spa-color">
+                {{ count(business.network[0].total_network) }}
+              </span>
+            </template>
+
+            <div>
+              <b-tabs fill pills content-class="mt-3  f-left m-up checkcheck">
+                <b-tab active>
+                  <template slot="title">
+                    Followers
+                    <span class="spa-color">
+                      {{count( business.network[0].total_network_follower) }}
+                    </span>
+                  </template>
+
+                  <div class="s-comcard">
+                   
+                      <div>
+                        <Network
+                          :network="business.network[0].network_followers" 
+                        />
+                      </div>
+                    
+                  </div>
+                </b-tab>
+
+                <b-tab>
+                  <template slot="title">
+                    Following
+                    <span class="spa-color">
+                      {{ count(business.network[0].total_network_following) }}
+                    </span>
+                  </template>
+
+                  <div class="s-comcard">
+                  
+                      <div class="p-2">
+                        <Network
+                          :network="business.network[0].network_following"
+                        />
+                      </div>
+                    
+                  </div>
+                </b-tab>
+              </b-tabs>
+            </div>
+          </b-tab>
+
+
         </b-tabs>
       </div>
     </b-card>
@@ -128,13 +182,15 @@
 <script>
 import People from "@/components/dasboard/communityMember";
 import Business from "@/components/dasboard/communitybusiness";
+import Network from "@/components/dasboard/communitynetwork";
 
 export default {
   name: "comunitiDashboard",
 
   components: {
     People,
-    Business
+    Business,
+    Network,
   },
   computed: {
     business() {

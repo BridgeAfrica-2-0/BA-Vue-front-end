@@ -1,8 +1,8 @@
 <template>
-  <div style="overflow-x:hidden">
+  <div style="overflow-x:hidden" class="dashboard">
     <navbar></navbar>
 
-    <div class="text-justify  p-card ">
+    <div class="text-justify  p-card pr-3 ">
       <CarousselDashboard class="mm-top" /> <br />
 
       <br />
@@ -12,14 +12,21 @@
           <b-row>
             <b-col md="6" sm="12" class="">
               <h6 class="font-weight-bolder text-design">
-                Use Bridge Africa as Yourself or as one of your businesses
+                Use Bridge Africa as Yourself or as one of your businesses 
               </h6>
             </b-col>
             <b-col sm="12" md="6" class="mb-3">
-              <b-form-select
+             
+
+              <b-form-select 
                 v-model="selectedb"
                 :options="boptions"
+                  @input="switchBusiness"
               ></b-form-select>
+
+            
+
+
             </b-col>
           </b-row>
         </b-card>
@@ -38,12 +45,13 @@
         <b-row>
           <b-col md="6" sm="12" class="mt-2">
             <div>
-              <b-card class=" border shadow" style="height:350px">
+              <b-card class=" border shadow pr-3" style="height:350px">
                 <h6 class="font-weight-bolder text-design">
                   Use Bridge Africa as Yourself or as one of your businesses
                 </h6>
                 <b-form-select
                   v-model="selectedb"
+                   @input="switchBusiness"
                   :options="boptions"
                 ></b-form-select>
               </b-card>
@@ -67,14 +75,21 @@
       </div>
       <br />
 
-      <b-row>
-        <comuniti-dashboard class="m-component m-3"></comuniti-dashboard> <br />
-      </b-row>
+     
+      <div class="com-dash" >
+          <comuniti-dashboard  v-if="selectedb == 'owner'" class="m-component m-3"></comuniti-dashboard> <br />
+      
+       
+         <comuniti-Bdashboard  v-if="selectedb != 'owner'" class="m-component m-3"></comuniti-Bdashboard> <br />
+
+     </div>
+     
+     
 
       <div>
         <b-row>
-          <b-col sm="12" lg="8" class="mt-3"> <CommunityActivity /> </b-col>
-          <b-col sm="12" lg="4" class="mt-3"> <Tutorial /> </b-col>
+          <b-col sm="12" lg="8" > <CommunityActivity  v-if="selectedb == 'owner'" />      <CommunityBactivity    v-if="selectedb != 'owner'" />    </b-col>
+          <b-col sm="12" lg="4" > <Tutorial /> </b-col>
         </b-row>
       </div>
       <br />
@@ -126,9 +141,13 @@ import BusinessDashboard from "@/components/dasboard/businessDashboard";
 
 import ComunitiDashboard from "@/components/dasboard/comunitiDashboard";
 
+import ComunitiBdashboard from "@/components/dasboard/comunitiBdashboard";
+
 import Insights from "@/components/dasboard/insights";
 
 import CommunityActivity from "@/components/dasboard/communityActivity";
+
+import CommunityBactivity from "@/components/dasboard/communityBactivity";
 
 import Tutorial from "@/components/dasboard/tutorial";
 
@@ -149,7 +168,7 @@ export default {
       slide: 0,
 
       sliding: null,
-
+       url_data:null,
       selectedb: "owner",
 
       map: false,
@@ -164,9 +183,11 @@ export default {
 
   components: {
     ComunitiDashboard,
+    ComunitiBdashboard,
     BusinessDashboard,
     Business,
     CommunityActivity,
+    CommunityBactivity,
     Tutorial,
     Insights,
     Popularnetwork,
@@ -178,6 +199,117 @@ export default {
   },
 
   methods: {
+
+
+    switchBusiness(value){
+
+       if(value != "Owner"){ 
+           let loader = this.$loading.show({
+                   
+                    container: this.fullPage ? null : this.$refs.loader,
+                    canCancel: true,
+                    onCancel: this.onCancel,
+                    color:"#e75c18"
+                });
+
+      console.log(value);
+     this.url_data=value;
+
+ 
+
+
+      this.$store
+        .dispatch("dashboard/dashboardBusiness", value)
+        .then(() => {
+          console.log("business switch");
+        })
+        .catch((err) => {
+          console.log({ err: err });
+        });
+
+
+        this.CommunityBusiness();
+
+    this.CommunityPeople();
+
+    this.businessCommunityTotal();
+
+    this.dashboardBpost();
+
+
+     loader.hide()
+
+       }
+
+       
+    },
+
+
+
+   dashboardPpost(){
+    
+       this.$store
+        .dispatch("dashboard/dashboardPpost")
+        .then(() => {
+          console.log("hey yeah");
+        })
+        .catch(err => {
+          console.log({ err: err });
+        });
+
+   },
+
+   dashboardBpost(){
+    
+      this.$store
+        .dispatch("dashboard/dashboardBpost", this.url_data)
+        .then(() => {
+          console.log("hey yeah");
+        })
+        .catch(err => {
+          console.log({ err: err });
+        });
+   
+   },
+
+   
+    CommunityBusiness() {
+      this.$store
+        .dispatch("businessOwner/CommunityBusiness", this.url_data)
+        .then(() => {
+          console.log("hey yeah");
+        })
+        .catch(err => {
+          console.log({ err: err });
+        });
+    },
+
+    CommunityPeople() {
+      this.$store
+        .dispatch("businessOwner/CommunityPeople", this.url_data)
+        .then(() => {
+          console.log("hey yeah");
+        })
+        .catch(err => {
+          console.log({ err: err });
+        });
+    },
+
+    businessCommunityTotal() {
+      this.$store
+        .dispatch("businessOwner/businessCommunityTotal", this.url_data)
+        .then(() => {
+          console.log("hey yeah");
+        })
+        .catch(err => {
+          console.log({ err: err });
+        });
+    },
+
+   
+
+
+
     getbusiness() {
 
       console.log(
@@ -222,14 +354,21 @@ export default {
     }
   },
 
-  mounted() {},
-
-  created() {
-    this.$store
+  mounted() {
+      
+       this.$store
       .dispatch("ProfileAndBusinessDetails/getdetails")
       .then(response => {
         this.getbusiness();
       });
+
+
+      this.dashboardPpost()
+
+  },
+
+  created() {
+   
   },
 
   computed: {
@@ -252,9 +391,21 @@ export default {
   color: #e75c18;
   width: 24px;
 }
+
+.dashboard .card-body {
+    
+    padding-right: 0px !important;
+}
 </style>
 
 <style scoped>
+
+.com-dash{
+
+margin-right: -15px;
+margin-left: -15px;
+}
+
 .card-body {
   padding: 8px;
 }

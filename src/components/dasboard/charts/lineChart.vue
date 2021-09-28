@@ -19,6 +19,8 @@ export default {
   methods: {
     update() {
       this.$data._chart.update();
+      this.renderChart(this.chartData, this.options);
+
     }
   },
   mounted() {

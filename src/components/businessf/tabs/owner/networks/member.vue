@@ -3,183 +3,398 @@
     <b-row>
       <b-col cols="12" class="mx-auto">
         <b-input-group class="mb-2 px-md-3 mx-auto">
-          <b-input-group-prepend is-text>
+          <b-input-group-prepend @onclick="search" is-text>
             <b-icon-search class="text-primary border-none"></b-icon-search>
           </b-input-group-prepend>
           <b-form-input
             aria-label="Text input with checkbox"
             placeholder="Search Something"
+            type="text"
+            class="form-control"
+            v-model="searchTitle"
+            @change="search"
           ></b-form-input>
         </b-input-group>
       </b-col>
     </b-row>
 
-    <b-row class="mt-4">
+    <b-row class="mt-4" v-if="admins.length != 0">
       <b-col cols="12">
         <h6 class="username">
-          Network Admins (2)
+          Network Admins ({{nFormatter(admins.length)}})
         </h6>
         <hr width="100%" />
-        <div v-for="i in 2" :key="i">
-          <p class="">
-            <span class="">
-              <b-avatar
-                class="d-inline-block"
-                variant="primary"
-                src="https://business.bridgeafrica.info/assets/img/team/3.png"
-                size="3.5rem"
-              ></b-avatar>
-              <h5 class="m-0 bold username d-inline-block ml-2">
-                Mapoure Agrobusiness
-              </h5>
-            </span>
-            <span class="float-right mt-1">
-              <b-dropdown
-                size="lg"
-                variant="link"
-                toggle-class="text-decoration-none"
-                no-caret
-              >
-                <template #button-content>
-                  <b-icon-three-dots-vertical></b-icon-three-dots-vertical
-                  ><span class="sr-only">Settings</span>
-                </template>
-                <b-dropdown-item href="#">
-                  <b-icon-trash-fill></b-icon-trash-fill> Remove as Admin
-                </b-dropdown-item>
-                <b-dropdown-item href="#">
-                  <b-icon-trash-fill></b-icon-trash-fill> Remove From Networks
-                </b-dropdown-item>
-              </b-dropdown>
-            </span>
-          </p>
-        </div>
+        <b-skeleton-wrapper :loading="loading">
+          <template #loading>
+            <b-card>
+              <b-skeleton width="85%"></b-skeleton>
+              <b-skeleton width="55%"></b-skeleton>
+              <b-skeleton width="70%"></b-skeleton>
+            </b-card>
+          </template>
+          <div class="scroll">
+            <div v-for="admin in admins" :key="admin.id">
+              <p class="">
+                <span class="">
+                  <b-avatar
+                    class="d-inline-block"
+                    variant="primary"
+                    :src="admin.profile_picture"
+                    :text="admin.fullname.charAt(0)"
+                    size="3.5rem"
+                  ></b-avatar>
+                  <h5 class="m-0 bold username d-inline-block ml-2">
+                    {{admin.fullname}}
+                  </h5>
+                </span>
+                <span class="float-right mt-1">
+                  <b-dropdown
+                    size="lg"
+                    variant="link"
+                    toggle-class="text-decoration-none"
+                    no-caret
+                  >
+                    <template #button-content>
+                      <b-icon-three-dots-vertical></b-icon-three-dots-vertical
+                      ><span class="sr-only">Settings</span>
+                    </template>
+                    <b-dropdown-item href="#" @click="removeAsAdmin(admin.user_id)">
+                      <b-icon-trash-fill></b-icon-trash-fill> Remove as Admin
+                    </b-dropdown-item>
+                    <b-dropdown-item href="#" @click="removeFromNetworks(admin.user_id)">
+                      <b-icon-trash-fill></b-icon-trash-fill> Remove From Networks
+                    </b-dropdown-item>
+                  </b-dropdown>
+                </span>
+              </p>
+            </div>
+          </div>
+        </b-skeleton-wrapper>
       </b-col>
     </b-row>
 
-    <b-row class="mt-4">
+    <b-row class="mt-4" v-if="business.length != 0">
+      <b-col cols="12" >
+        <h6 class="font-weight-bolder">
+          Bussiness ({{nFormatter(business.length)}})
+        </h6>
+        <hr width="100%" />
+        <b-skeleton-wrapper :loading="loading">
+          <template #loading>
+            <b-card>
+              <b-skeleton width="85%"></b-skeleton>
+              <b-skeleton width="55%"></b-skeleton>
+              <b-skeleton width="70%"></b-skeleton>
+            </b-card>
+          </template>
+          <div class="scroll">
+            <div v-for="busines in business" :key="busines.id">
+              <p class="">
+                <span class="">
+                  <b-avatar
+                    class="d-inline-block"
+                    variant="primary"
+                    square
+                    :src="busines.logo_path"
+                    :text="busines.name.charAt(0)"
+                    size="3.5rem"
+                  ></b-avatar>
+                  <h5 class="m-0  username d-inline-block ml-2">
+                    {{busines.name}}
+                  </h5>
+                </span>
+                <span class="float-right mt-1">
+                  <b-dropdown
+                    size="lg"
+                    variant="link"
+                    toggle-class="text-decoration-none"
+                    no-caret
+                  >
+                    <template #button-content>
+                      <b-icon-three-dots-vertical></b-icon-three-dots-vertical
+                      ><span class="sr-only">Settings</span>
+                    </template>
+                    <b-dropdown-item href="#" @click="removeFromNetworks(busines.business_id)">
+                      <b-icon-trash-fill></b-icon-trash-fill> Remove From Networks
+                    </b-dropdown-item>
+                  </b-dropdown>
+                </span>
+              </p>
+            </div>
+          </div>
+        </b-skeleton-wrapper>
+      </b-col>
+    </b-row>
+
+    <b-row class="mt-4" v-if="members.total != 0">
       <b-col cols="12">
         <h6 class="font-weight-bolder">
-          Bussiness (2)
+          All Members ({{nFormatter(members.total)}})
         </h6>
         <hr width="100%" />
-        <div v-for="i in 2" :key="i">
-          <p class="">
-            <span class="">
-              <b-avatar
-                class="d-inline-block"
-                variant="primary"
-                square
-                src="https://business.bridgeafrica.info/assets/img/team/3.png"
-                size="3.5rem"
-              ></b-avatar>
-              <h5 class="m-0  username d-inline-block ml-2">
-                Mayor Council
-              </h5>
-            </span>
-            <span class="float-right mt-1">
-              <b-dropdown
-                size="lg"
-                variant="link"
-                toggle-class="text-decoration-none"
-                no-caret
-              >
-                <template #button-content>
-                  <b-icon-three-dots-vertical></b-icon-three-dots-vertical
-                  ><span class="sr-only">Settings</span>
-                </template>
-                <b-dropdown-item href="#">
-                  <b-icon-trash-fill></b-icon-trash-fill> Remove From Networks
-                </b-dropdown-item>
-              </b-dropdown>
-            </span>
-          </p>
-        </div>
+        <b-skeleton-wrapper :loading="loading">
+          <template #loading>
+            <b-card>
+              <b-skeleton width="85%"></b-skeleton>
+              <b-skeleton width="55%"></b-skeleton>
+              <b-skeleton width="70%"></b-skeleton>
+            </b-card>
+          </template>
+          <div          
+            :class="{ active: index == currentIndex }"
+            v-for="(member, index) in members.data"
+            :key="index"
+          >
+            <p class="">
+              <span class="">
+                <b-avatar
+                  class="d-inline-block"
+                  variant="primary"
+                  :src="member.profile_picture"
+                  :text="member.fullname.charAt(0)"
+                  size="3.5rem"
+                ></b-avatar>
+                <h5 class="m-0 username d-inline-block ml-2">
+                  {{member.fullname}}
+                </h5>
+              </span>
+              <span class="float-right mt-1">
+                <b-dropdown
+                  size="lg"
+                  variant="link"
+                  toggle-class="text-decoration-none"
+                  no-caret
+                >
+                  <template #button-content>
+                    <b-icon-three-dots-vertical></b-icon-three-dots-vertical
+                    ><span class="sr-only">Settings</span>
+                  </template>
+                  <b-dropdown-item href="#" @click="makeAdmin(member.user_id)">
+                    <b-icon-person-plus-fill></b-icon-person-plus-fill> Make Admin
+                  </b-dropdown-item>
+                  <b-dropdown-item href="#" @click="removeFromNetworks(member.user_id)">
+                    <b-icon-trash-fill></b-icon-trash-fill> Remove From Networks
+                  </b-dropdown-item>
+                </b-dropdown>
+              </span>
+            </p>
+          </div>
+        </b-skeleton-wrapper>
       </b-col>
     </b-row>
 
-    <b-row class="mt-4">
-      <b-col cols="12">
-        <h6 class="font-weight-bolder">
-          All Members (200)
-        </h6>
-        <hr width="100%" />
-        <div v-for="i in 6" :key="i">
-          <p class="">
-            <span class="">
-              <b-avatar
-                class="d-inline-block"
-                variant="primary"
-                src="https://business.bridgeafrica.info/assets/img/team/3.png"
-                size="3.5rem"
-              ></b-avatar>
-              <h5 class="m-0 username d-inline-block ml-2">
-                Mapoure Agrobusiness
-              </h5>
-            </span>
-            <span class="float-right mt-1">
-              <b-dropdown
-                size="lg"
-                variant="link"
-                toggle-class="text-decoration-none"
-                no-caret
-              >
-                <template #button-content>
-                  <b-icon-three-dots-vertical></b-icon-three-dots-vertical
-                  ><span class="sr-only">Settings</span>
-                </template>
-                <b-dropdown-item href="#">
-                  <b-icon-person-plus-fill></b-icon-person-plus-fill> Make Admin
-                </b-dropdown-item>
-                <b-dropdown-item href="#">
-                  <b-icon-trash-fill></b-icon-trash-fill> Remove From Networks
-                </b-dropdown-item>
-              </b-dropdown>
-            </span>
-          </p>
-        </div>
-      </b-col>
-    </b-row>
-
-    <b-row>
+    <b-row v-if="members.total != 0">
       <b-col cols="12">
         <span class="float-right">
           <b-pagination
             v-model="currentPage"
             :total-rows="rows"
             :per-page="perPage"
+            @change="handlePageChange"
             aria-controls="my-table"
           ></b-pagination>
         </span>
       </b-col>
     </b-row>
+    <FlashMessage />
   </div>
 </template>
 
 <script>
 export default {
-  name: "memberNetwork",
+  name: "member",
   data() {
     return {
-      perPage: 3,
-      currentPage: 1,
-      items: [
-        { id: 1, first_name: "Fred", last_name: "Flintstone" },
-        { id: 2, first_name: "Wilma", last_name: "Flintstone" },
-        { id: 3, first_name: "Barney", last_name: "Rubble" },
-        { id: 4, first_name: "Betty", last_name: "Rubble" },
-        { id: 5, first_name: "Pebbles", last_name: "Flintstone" },
-        { id: 6, first_name: "Bamm Bamm", last_name: "Rubble" },
-        { id: 7, first_name: "The Great", last_name: "Gazzoo" },
-        { id: 8, first_name: "Rockhead", last_name: "Slate" },
-        { id: 9, first_name: "Pearl", last_name: "Slaghoople" }
-      ]
+      url:null,
+      perPage: null,
+      currentPage: null,
+      searchTitle: "",
+
+      currentIndex: -1,
+      loading: false,
     };
   },
   computed: {
     rows() {
-      return this.items.length;
+      return this.$store.state.networkProfileMembers.members.total;
+    },
+    members() {
+      return this.$store.state.networkProfileMembers.members;
+    },
+    admins() {
+      return this.$store.state.networkProfileMembers.admins;
+    },
+    business() {
+      return this.$store.state.networkProfileMembers.business;
     }
+  },
+  mounted(){
+    this.url = this.$route.params.id
+    this.getMembers()
+    this.getAdmins()
+    this.getBusiness()
+  },
+  methods:{
+
+    nFormatter(num) {
+      if (num >= 1000000000) {
+        return (num / 1000000000).toFixed(1).replace(/\.0$/, '') + 'G';
+      }
+      if (num >= 1000000) {
+        return (num / 1000000).toFixed(1).replace(/\.0$/, '') + 'M';
+      }
+      if (num >= 1000) {
+        return (num / 1000).toFixed(1).replace(/\.0$/, '') + 'K';
+      }
+      return num;
+    },
+
+    getRequestDatas(searchTitle, currentPage) {
+      let data = "";
+
+      if (searchTitle) {
+        data = searchTitle;
+      }else if (currentPage) {
+        data = "?page="+currentPage;
+      }
+      console.log(data);
+      return data;
+    },
+
+    getMembers() {
+      this.loading = true;
+      const data = this.getRequestDatas(this.searchTitle, this.currentPage);
+      this.$store
+        .dispatch("networkProfileMembers/getmembers", this.url+"/members/list/"+data)
+        .then(() => {
+          this.perPage = this.members.per_page;
+          this.currentPage = this.members.current_page;
+          console.log('Members Available');
+          console.log(this.perPage );
+          this.loading = false;
+        })
+        .catch(err => {
+          console.log({ err: err });
+          this.loading = false;
+        });
+    },
+    getAdmins() {
+      this.loading = true;
+      const data = this.getRequestDatas(this.searchTitle, 0);
+      this.$store
+        .dispatch("networkProfileMembers/getadmins", this.url+"/members/admin/"+data)
+        .then(() => {
+          console.log('Admins Available');
+          this.loading = false;
+        })
+        .catch(err => {
+          console.log({ err: err });
+          this.loading = false;
+        });
+    },
+    getBusiness() {
+      this.loading = true;
+      const data = this.getRequestDatas(this.searchTitle, 0);
+      this.$store
+        .dispatch("networkProfileMembers/getbusiness", this.url+"/members/business/"+data)
+        .then(() => {
+          console.log('Business Available');
+          this.loading = false;
+        })
+        .catch(err => {
+          console.log({ err: err });
+          this.loading = false;
+        });
+    },
+    search() {
+      // this.loading = true;
+      this.loading = true;
+      console.log("searching...");
+      console.log(this.searchTitle);
+      this.getMembers();
+      this.getAdmins();
+      this.getBusiness();
+    },
+    handlePageChange(value) {
+      this.loading = true;
+      this.currentPage = value;
+      console.log(this.currentPage);
+      this.getMembers();
+    },
+
+    makeAdmin: function(user_id){
+      this.loading = true;
+      this.axios.put("network/"+this.url+"/make/admin/"+user_id)
+      .then(() => {
+        console.log('ohh yeah');
+        this.searchTitle = "";
+        this.getMembers();
+        this.getAdmins();
+        this.getBusiness();
+        this.loading = false;
+        this.flashMessage.show({
+          status: "success",
+          message: "The Member Is Now Admin"
+        });
+      })
+      .catch(err => {
+        console.log({ err: err });
+        this.loading = false;
+        this.flashMessage.show({
+          status: "error",
+          message: "Unable To Set Member As Admin"
+        });
+      });
+    },
+    removeAsAdmin: function(user_id){
+      this.loading = true;
+      this.axios.put("network/"+this.url+"/remove/admin/"+user_id)
+      .then(() => {
+        console.log('ohh yeah');
+        this.searchTitle = "";
+        this.getMembers();
+        this.getAdmins();
+        this.getBusiness();
+        this.loading = false;
+        this.flashMessage.show({
+          status: "success",
+          message: "Member Successfully Removerd As Admin"
+        });
+      })
+      .catch(err => {
+        console.log({ err: err });
+        this.loading = false;
+        this.flashMessage.show({
+          status: "error",
+          message: "Unable To Removerd Member As Admin"
+        });
+      });
+		},
+    removeFromNetworks: function(user_id){
+      this.loading = true;
+      this.axios.delete("network/"+this.url+"/members/remove/"+user_id)
+      .then(() => {
+        console.log('ohh yeah');
+        this.searchTitle = "";
+        this.getMembers();
+        this.getAdmins();
+        this.getBusiness();
+        this.loading = false;
+        this.flashMessage.show({
+          status: "success",
+          message: "Member Successfully Removerd From Network"
+        });
+      })
+      .catch(err => {
+        console.log({ err: err });
+        this.loading = false;
+        this.flashMessage.show({
+          status: "error",
+          message: "Unable to Removerd Member From Network"
+        });
+      });
+		},
+
   }
 };
 </script>
@@ -188,4 +403,10 @@ export default {
 hr {
   border: solid 1px dimgray;
 }
+.scroll{
+  max-height: 200px;
+  overflow-y: scroll;
+  scrollbar-width: thin;
+}
+
 </style>

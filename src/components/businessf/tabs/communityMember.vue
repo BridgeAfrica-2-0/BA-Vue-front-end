@@ -93,12 +93,12 @@ export default {
 </script>
 
 <style scoped>
-@media only screen and (min-width: 768px) {
-  .s-cardd {
-    padding-left: 20px;
-    padding-right: 20px;
-  }
+.s-cardd {
+  padding-left: 20px;
+  padding-right: 20px;
+}
 
+@media only screen and (min-width: 768px) {
   .btn-text {
     margin-left: 8px;
   }
@@ -129,6 +129,11 @@ export default {
   .btnpngs {
     width: 16px;
     margin-right: 5px;
+  }
+
+  .s-cardd {
+    padding-left: 25px;
+    padding-right: 25px;
   }
 
   .s-cardd {

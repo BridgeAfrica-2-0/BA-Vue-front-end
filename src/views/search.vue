@@ -168,7 +168,6 @@
         <b-col cols="3">
           <b-button
             class="shadow border  mob-btn"
-            id="show-btn"
             v-b-modal="'myModall'"
           >
             Filter
@@ -301,7 +300,7 @@
               >
 
               <b-form-checkbox id="" class="a-text" name="" value="">
-                MUtengene</b-form-checkbox
+                Mutengene</b-form-checkbox
               >
             </b-form-group>
 
@@ -372,7 +371,7 @@
     <div class="container-flex p-md-3 p-t-0 upp">
       <b-row class="p-3">
         <b-col cols="0" md="0" xl="3" class="leftblock">
-          <div id="all" class="ml-3">
+          <div class="ml-3">
             <Filters
               v-bind:filterType="selectedId"
               v-bind:Selectedcategory="Selectedcategory"
@@ -484,7 +483,7 @@
 
             <!-- filter out only people -->
 
-            <div id="people" v-if="selectedId == '2'">
+            <div v-if="selectedId == '2'">
               <h6>
                 <fas-icon class="icons" :icon="['fas', 'users']" size="lg" />
                 People
@@ -501,7 +500,7 @@
 
             <!-- filter out just the network  -->
 
-            <div id="people" v-if="selectedId == '3'">
+            <div v-if="selectedId == '3'">
               <h6>
                 <fas-icon
                   class=" icons"
@@ -522,24 +521,18 @@
 
             <!-- Filter out just the market place -->
 
-            <div id="people" v-if="selectedId == '4'">
+            <div v-if="selectedId == '4'">
               <h6>
                 <fas-icon class="icons " :icon="['fas', 'store']" size="lg" />
                 Market
               </h6>
 
               <Market />
-
-              <Market />
-
-              <Market />
-
-              <Market />
             </div>
 
             <!-- Filter out just the post  -->
 
-            <div id="people" v-if="selectedId == '5'">
+            <div v-if="selectedId == '5'">
               <h6>
                 <fas-icon class=" icons" :icon="['fab', 'readme']" size="lg" />
                 Post

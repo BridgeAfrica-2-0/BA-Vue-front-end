@@ -1,10 +1,10 @@
 <template>
   <div>
     <b-card>
-      <b-tabs content-class="mt-3" pills>
-        <b-tab title="People" active><People /></b-tab>
-        <b-tab title="Businesses"><Businesses /></b-tab>
-      </b-tabs>
+     <b-tabs content-class="mt-3" pills>
+    <b-tab title="People" active><People/></b-tab>
+    <b-tab title="Businesses"><Businesses/></b-tab>
+  </b-tabs>
     </b-card>
   </div>
 </template>
@@ -13,7 +13,7 @@
 import People from "./people/people";
 import Businesses from "./businesses/businesses";
 export default {
-  components: {
+  components:{
     People,
     Businesses,
   },

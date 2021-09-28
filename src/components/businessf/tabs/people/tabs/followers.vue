@@ -3,15 +3,18 @@
     <b-row>
       <b-col cols="12" md="6">
         <b-input-group class="mb-2 px-md-3 float-right">
+         
           <b-form-input
             aria-label="Text input with checkbox"
             placeholder="Search Something"
             v-model="searchQuery"
           ></b-form-input>
 
-          <b-input-group-prepend is-text>
+           <b-input-group-prepend is-text>
             <b-icon-search class="text-primary border-none"></b-icon-search>
           </b-input-group-prepend>
+
+
         </b-input-group>
       </b-col>
     </b-row>
@@ -34,10 +37,55 @@
         <p>No Follower to show !!</p>
       </b-col>
     </b-row>
+    <br/>
+
+
+
+
+
+
+
+
+
+
+
+
+<b-row class="p-0"> 
+<b-col md="12" lg="6" class="p-0">  
+    <CommunityMembers/>
+
+ </b-col>
+
+
+ <b-col md="12" lg="6" class="p-0">  
+    <CommunityMembers/>
+
+ </b-col>
+
+     </b-row>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
   </div>
 </template>
 
 <script>
+<<<<<<< HEAD
 import CommunityMembers from "../../communityMember";
 import { mapActions, mapGetters } from "vuex";
 export default {
@@ -88,3 +136,16 @@ export default {
   height: 7rem;
 }
 </style>
+=======
+import CommunityMembers from "../../communityMember"
+export default {
+  components:{
+      CommunityMembers
+  }
+}
+</script>
+
+<style>
+
+</style>
+>>>>>>> origin

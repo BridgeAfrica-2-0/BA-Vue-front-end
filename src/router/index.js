@@ -84,12 +84,24 @@ const routes = [
     path: "/dashboard",
     name: "dashboard",
     component: dashboard,
+<<<<<<< HEAD
+=======
+    meta: {
+      auth: true
+    }
+>>>>>>> origin
   },
 
   {
     path: "/profile_owner",
     name: "profile_owner",
     component: profile_owner,
+<<<<<<< HEAD
+=======
+    meta: {
+     // auth: true
+    }
+>>>>>>> origin
   },
   {
     path: "/template_viewer",
@@ -97,7 +109,7 @@ const routes = [
     component: templateView,
   },
   {
-    path: "/business_owner",
+    path: "/business_owner/:id?",
     name: "BusinessOwner",
     component: businessOwner,
   },
@@ -129,9 +141,17 @@ const routes = [
     component: confirmPayment,
   },
   {
-    path: "/business_owner/network",
+    path: "/business_owner/network/:id?",
     name: "networks",
     component: networks,
+<<<<<<< HEAD
+=======
+  },
+  {
+    path: "/networks",
+    name: "networks",
+    component: networks,
+>>>>>>> origin
   },
   {
     path: "/login",
@@ -168,9 +188,14 @@ const routes = [
     component: RecoverPass3,
   },
   {
-    path: "/businessfollower",
+    path: "/businessfollower/:id?",
     name: "BusinessFollower",
+<<<<<<< HEAD
     component: businessFollower,
+=======
+
+    component: businessFollower
+>>>>>>> origin
   },
   {
     path: "/businessvisitor",
@@ -209,7 +234,7 @@ const routes = [
   },
 
   {
-    path: "/follower",
+    path: "/follower/:id?",
     name: "Follower",
     component: Follower,
   },
@@ -219,7 +244,7 @@ const routes = [
     component: Visitor,
   },
   {
-    path: "/search",
+    path: "/search/:id",
     name: "Search",
     component: search,
   },
@@ -267,7 +292,7 @@ router.beforeEach((to, from, next) => {
     const userdata = JSON.parse(dat);
 
     if (userdata.user.verified_at == null) {
-      next("/verify");
+      //  next("/verify");
     }
   }
 

@@ -2,11 +2,12 @@
   <div>
     <div class="row">
       <h6 class="col-md-12"><b>Basic Information</b></h6>
+
       <hr />
     </div>
     <div class="row mb-1">
       <div class="col-md-4">Date Of Birth</div>
-      <div class="col-md-4">1-January-2001</div>
+      <div class="col-md-4">{{ info.user.dob }}</div>
       <div class="col-md-4">
         <button
           type="button"
@@ -19,94 +20,151 @@
         </button>
       </div>
 
-      <b-modal id="phonemodal" title="Add Phone Number" hide-footer>
+      <b-modal
+        id="phonemodal"
+        title="Add Phone Number"
+        hide-footer
+        ref="phonemodal"
+        @close="cancel"
+      >
         <div class="modal-body">
-          <form class="form" action="" method="post">
+          <form
+            class="form"
+            action=""
+            method="post"
+            @submit.prevent="savePhoneNumber"
+          >
             <b-form-input
               class="mt-2 mb-2"
-              v-model="Phone"
+              v-model="phoneInput"
               placeholder="phone"
+              type="text"
+              required
             ></b-form-input>
 
             <div class="fosrm-group text-right w-100">
-              <button type="button" class="btn btn-primary orange">
-                Save
-              </button>
+              <button type="submit" class="btn btn-primary orange">Save</button>
             </div>
           </form>
         </div>
       </b-modal>
 
-      <b-modal id="currentcityModal" title="Add current city" hide-footer>
+      <b-modal
+        id="currentcityModal"
+        title="Add current city"
+        hide-footer
+        ref="currentcityModal"
+        @close="cancel"
+      >
         <div class="modal-body">
-          <form class="form" action="" method="post">
+          <form
+            class="form"
+            action=""
+            method="post"
+            @submit.prevent="saveCurrentCity"
+          >
             <b-form-input
               class="mt-2 mb-2"
               placeholder="current city"
+              type="text"
+              v-model="basicInfo.currentCity"
             ></b-form-input>
 
             <div class="fosrm-group text-right w-100">
-              <button type="button" class="btn btn-primary orange">
-                Save
-              </button>
+              <button type="submit" class="btn btn-primary orange">Save</button>
             </div>
           </form>
         </div>
       </b-modal>
 
-      <b-modal id="hometownModal" title="Add home town" hide-footer>
+      <b-modal
+        id="hometownModal"
+        ref="hometownModal"
+        title="Add home town"
+        hide-footer
+        @close="cancel"
+      >
         <div class="modal-body">
-          <form class="form" action="" method="post">
+          <form
+            class="form"
+            action=""
+            method="post"
+            @submit.prevent="saveHomeTown"
+          >
             <b-form-input
               class="mt-2 mb-2"
-              v-model="Phone"
+              v-model="basicInfo.homeTown"
               placeholder="home town"
             ></b-form-input>
 
             <div class="fosrm-group text-right w-100">
-              <button type="button" class="btn btn-primary orange">
-                Save
-              </button>
+              <button type="submit" class="btn btn-primary orange">Save</button>
             </div>
           </form>
         </div>
       </b-modal>
 
-      <b-modal id="websiteModal" title="Add a website" hide-footer>
+      <b-modal
+        id="websiteModal"
+        ref="websiteModal"
+        title="Add a website"
+        hide-footer
+        @close="cancel"
+      >
         <div class="modal-body">
-          <form class="form" action="" method="post">
+          <form
+            class="form"
+            action=""
+            method="post"
+            @submit.prevent="saveWebsite"
+          >
             <b-form-input
               class="mt-2 mb-2"
               placeholder="Website"
+              v-model="websiteInput"
             ></b-form-input>
 
             <div class="fosrm-group text-right w-100">
-              <button type="button" class="btn btn-primary orange">
-                Save
-              </button>
+              <button type="submit" class="btn btn-primary orange">Save</button>
             </div>
           </form>
         </div>
       </b-modal>
 
-      <b-modal id="sociallinkModal" title="Add A social link" hide-footer>
+      <b-modal
+        id="sociallinkModal"
+        title="Add A social link"
+        hide-footer
+        ref="sociallinkModal"
+        @close="cancel"
+      >
         <div class="modal-body">
-          <form class="form" action="" method="post">
+          <form
+            class="form"
+            action=""
+            method="post"
+            @submit.prevent="saveSocialLink"
+          >
             <b-form-input
               class="mt-2 mb-2"
               placeholder="soclial link"
+              v-model="sociallinkInput"
             ></b-form-input>
 
             <div class="fosrm-group text-right w-100">
-              <button type="button" class="btn btn-primary orange">
-                Save
-              </button>
+              <button type="submit" class="btn btn-primary orange">Save</button>
             </div>
           </form>
         </div>
       </b-modal>
 
-      <b-modal id="modal-6" title="Edit Date of Birth" hide-footer>
+      <b-modal
+        id="modal-6"
+        ref="model-6"
+        title="Edit Date of Birth"
+        hide-footer
+        @close="cancel"
+      >
         <div class="modal-body">
           <form class="form-inline" action="" method="post">
             <div class="input-group col-md-12 pl-0 pr-0 mb-4 selec">
@@ -115,9 +173,13 @@
               >
               <div class="col-md-3 pr-0 pl-0">
                 <div class="form-group">
-                  <select id="DOBDay" class="form-control">
+                  <select
+                    id="DOBDay"
+                    class="form-control"
+                    v-model="basicInfo.dateOfBirth.date_1.day"
+                  >
                     <option>- Day -</option>
-                    <option value="1">1</option>
+                    <option selected value="1">1</option>
                     <option value="2">2</option>
                     <option value="3">3</option>
                     <option value="4">4</option>
@@ -139,7 +201,7 @@
                     <option value="20">20</option>
                     <option value="21">21</option>
                     <option value="22">22</option>
-                    <option value=" 23"> 23</option>
+                    <option value="23">23</option>
                     <option value="24">24</option>
                     <option value="25">25</option>
                     <option value="26">26</option>
@@ -153,9 +215,13 @@
               </div>
               <div class="col-md-3 pr-0 pl-0">
                 <div class="form-group">
-                  <select name="DOBMonth" class="form-control">
+                  <select
+                    name="DOBMonth"
+                    class="form-control"
+                    v-model="basicInfo.dateOfBirth.date_1.month"
+                  >
                     <option>- Month -</option>
-                    <option value="January">January</option>
+                    <option selected value="January">January</option>
                     <option value="Febuary">Febuary</option>
                     <option value="March">March</option>
                     <option value="April">April</option>
@@ -172,10 +238,14 @@
               </div>
               <div class="col-md-3 pl-0 pr-0">
                 <div class="form-group pull-right mb-3">
-                  <select id="country" class="form-control ">
-                    <option value="" selected="" disabled="">Select</option>
-                    <option>Public</option>
-                    <option>Private</option>
+                  <select
+                    id="country_"
+                    class="form-control"
+                    v-model="basicInfo.dateOfBirth.date_1.access"
+                  >
+                    <option value="" disabled="">Select</option>
+                    <option value="public">Public</option>
+                    <option selected value="private">Private</option>
                   </select>
                 </div>
               </div>
@@ -184,9 +254,13 @@
               <label class="col-md-3 pl-0 pr-0 control-label">Birth Year</label>
               <div class="col-md-6 pr-0 pl-0">
                 <div class="form-group">
-                  <select name="DOBYear" class="form-control w-100">
+                  <select
+                    name="DOBYear"
+                    class="form-control w-100"
+                    v-model="basicInfo.dateOfBirth.date_2.year"
+                  >
                     <option>Year</option>
-                    <option value="2020">2020</option>
+                    <option selected value="2020">2020</option>
                     <option value="2019">2019</option>
                     <option value="2018">2018</option>
                     <option value="2017">2017</option>
@@ -282,17 +356,29 @@
               </div>
               <div class="col-md-3 pl-0 pr-0">
                 <div class="form-group pull-right mb-3">
-                  <select id="country" class="form-control ">
-                    <option value="" selected="" disabled="">Select</option>
-                    <option>Public</option>
-                    <option>Private</option>
+                  <select
+                    id="country"
+                    class="form-control"
+                    v-model="basicInfo.dateOfBirth.date_2.access"
+                  >
+                    <option value="" disabled="">Select</option>
+                    <option selected value="public">Public</option>
+                    <option value="private">Private</option>
                   </select>
                 </div>
               </div>
             </div>
             <div class="fosrm-group text-right w-100">
-              <button type="button" class="btn btn-dark">cancel</button>
-              <button type="button" class="btn btn-primary orange">Save</button>
+              <button type="button" class="btn btn-dark" @click="cancel">
+                cancel
+              </button>
+              <button
+                type="button"
+                class="btn btn-primary orange"
+                @click="saveBirthDate"
+              >
+                Save
+              </button>
             </div>
           </form>
         </div>
@@ -300,7 +386,9 @@
     </div>
     <div class="row">
       <div class="col-md-4">Gender</div>
-      <div class="col-md-4">Male</div>
+      <div class="col-md-4">
+          {{info.user.gender}}
+      </div>
       <div class="col-md-4">
         <button
           type="button"
@@ -311,26 +399,40 @@
         >
           Edit
         </button>
-        <b-modal id="modal-7" title="Add/Edit Gender" hide-footer>
+        <b-modal
+          id="modal-7"
+          title="Add/Edit Gender"
+          hide-footer
+          ref="modal-7"
+          @close="cancel"
+        >
           <div class="modal-body">
             <form class="form-inline" action="" method="post">
               <div class="input-group col-md-12 mb-4 selec">
                 <label
                   class="col-md-4 control-label"
-                  style="align-items: first baseline;"
-                  for="name"
+                  style="align-items: first baseline"
+                  for="gender"
                   >Gender</label
                 >
                 <div class="col-md-8 pl-0 pr-0">
-                  <select id="gender" class="form-control w-100">
-                    <option>Male</option>
-                    <option>Female</option>
+                  <select
+                    id="gender"
+                    class="form-control w-100"
+                    v-model="basicInfo.gender"
+                  >
+                    <option value="M">Male</option>
+                    <option value="F">Female</option>
                   </select>
                 </div>
               </div>
               <!-- End number In input-->
               <div class="fosrm-group text-right w-100">
-                <button type="button" class="btn btn-primary orange">
+                <button
+                  type="button"
+                  class="btn btn-primary orange"
+                  @click="saveGender"
+                >
                   Save
                 </button>
               </div>
@@ -345,7 +447,14 @@
         <hr />
         <div class="row mt-3 mb-3">
           <div class="col-md-4">Mobile Phone</div>
-          <div class="col-md-4">+1- 234-567-8912</div>
+          <br />
+          <div
+            class="col-md-4"
+            v-for="phone in basicInfo.mobilePhones"
+            :key="phone"
+          >
+            {{ phone }}
+          </div>
         </div>
         <a v-b-modal.phonemodal data-target="#phonemodal">
           + Add Other Phones</a
@@ -353,46 +462,72 @@
       </div>
     </div>
     <div class="row mb-4">
-      <div class="col">
-        <!--
-        <h6 class="mb-0"><b>Business Visited</b></h6>
-        <hr />
-      
-
-
-       
-        <a href="#" data-toggle="modal" data-target="#addbusinessModal"
-          ><fas-icon
-            class="primary float-left mr-1 mt-1"
-            :icon="['fas', 'plus-circle']"
-          />
-          Add a Business</a
-        >
-
-
-         -->
-      </div>
+      <div class="col"></div>
     </div>
     <div class="row mb-4">
       <div class="col">
         <h6 class="mb-0"><b>Places you lived</b></h6>
-        <hr />
+        <h6
+          class="mb-0"
+          v-if="basicInfo.currentCity !== null && basicInfo.currentCity !== ''"
+        >
+          <b>City : {{ basicInfo.currentCity }}</b>
+        </h6>
+        <h6
+          class="mb-0"
+          v-if="basicInfo.homeTown !== null && basicInfo.homeTown !== ''"
+        >
+          <b>Home Town : {{ basicInfo.homeTown }}</b>
+        </h6>
         <hr />
 
-        <a v-b-modal.currentcityModal data-target="#currentcityModal">
+        <a
+          v-b-modal.currentcityModal
+          data-target="#currentcityModal"
+          v-if="
+            basicInfo.currentCity !== null &&
+            basicInfo.currentCity !== '' &&
+            basicInfo.currentCity.length !== 0
+          "
+        >
+          <fas-icon
+            class="primary float-left mr-1 mt-1"
+            :icon="['fas', 'plus-circle']"
+          />
+          Update your current city</a
+        >
+        <a v-b-modal.currentcityModal data-target="#currentcityModal" v-else>
           <fas-icon
             class="primary float-left mr-1 mt-1"
             :icon="['fas', 'plus-circle']"
           />
           Add your current city</a
-        ><br />
-        <a v-b-modal.hometownModal data-target="#hometownModal">
-          <fas-icon
-            class="primary float-left mr-1 mt-1"
-            :icon="['fas', 'plus-circle']"
-          />
-          Add your home town</a
         >
+        <br />
+        <div>
+          <a
+            v-b-modal.hometownModal
+            data-target="#hometownModal"
+            v-if="
+              basicInfo.homeTown !== null &&
+              basicInfo.homeTown !== '' &&
+              basicInfo.homeTown.length !== 0
+            "
+          >
+            <fas-icon
+              class="primary float-left mr-1 mt-1"
+              :icon="['fas', 'plus-circle']"
+            />
+            Update your home town</a
+          >
+          <a v-b-modal.hometownModal data-target="#hometownModal" v-else>
+            <fas-icon
+              class="primary float-left mr-1 mt-1"
+              :icon="['fas', 'plus-circle']"
+            />
+            Add your home town</a
+          >
+        </div>
       </div>
     </div>
     <div class="row mb-4">
@@ -408,26 +543,39 @@
               />
               Add a Website</a
             ><br />
-            <fas-icon
-              class="primary float-left mr-1 mt-1"
-              :icon="['fas', 'globe']"
-            />
-            <a href="#">https://www.myname.com/</a><br />
+
+            <div v-for="website in info.user_websites" :key="website.id">
+              <fas-icon
+                class="primary float-left mr-1 mt-1"
+                :icon="['fas', 'globe']"
+              />
+              <a :href="website" @click="redirect(website.website_url)" target="_blank">{{
+                website.website_url
+              }}</a>
+              <ul class="website navbar-nav pull-right">
+                <li class="nav-item dropdown">
+                  <b-dropdown
+                    id="dropdown-dropup"
+                    dropdown
+                    variant="primary-outline"
+                  >
+                    <b-dropdown-item @click="edit('website', website)"
+                      >Edit</b-dropdown-item
+                    >
+                    <b-dropdown-item @click="deleteElement('website', website)"
+                      >Delete</b-dropdown-item
+                    >
+                  </b-dropdown>
+                </li>
+              </ul>
+            </div>
           </div>
-          <ul class="navbar-nav pull-right">
-            <li class="nav-item dropdown">
-              <b-dropdown
-                id="dropdown-dropup"
-                dropdown
-                variant="primary-outline"
-              >
-                <b-dropdown-item href="#">Edit</b-dropdown-item>
-                <b-dropdown-item href="#">Delete</b-dropdown-item>
-              </b-dropdown>
-            </li>
-          </ul>
         </div>
         <div class="media mt-4">
+
+
+
+<!--
           <div class="media-body">
             <a v-b-modal.sociallinkModal data-target="#sociallinkModal">
               <fas-icon
@@ -436,27 +584,35 @@
               />
               Add a social link</a
             ><br />
-            <a href="#">www.instagram.com/bridgeafrica</a><br />
-            <a href="#"
-              ><fas-icon
-                class="primary float-left mr-1 mt-1"
-                :icon="['fab', 'instagram']"
-              />
-              www.snapchat.com/bridgeafrica</a
-            ><br />
-          </div>
-          <ul class="navbar-nav pull-right">
-            <li class="nav-item dropdown">
-              <b-dropdown
-                id="dropdown-dropup"
-                dropdown
-                variant="primary-outline"
+            <a href="#"></a><br />
+            <div v-for="socialLink in basicInfo.socialLinks" :key="socialLink">
+              <a :href="website" @click="redirect(socialLink)" target="_blank"
+                ><fas-icon
+                  class="primary float-left mr-1 mt-1"
+                  :icon="['fab', 'instagram']"
+                />
+                {{ socialLink }}</a
               >
-                <b-dropdown-item href="#">Edit</b-dropdown-item>
-                <b-dropdown-item href="#">Delete</b-dropdown-item>
-              </b-dropdown>
-            </li>
-          </ul>
+              <ul class="website navbar-nav pull-right">
+                <li class="nav-item dropdown">
+                  <b-dropdown
+                    id="dropdown-dropup"
+                    dropdown
+                    variant="primary-outline"
+                  >
+                    <b-dropdown-item @click="edit('socialLink', socialLink)"
+                      >Edit</b-dropdown-item
+                    >
+                    <b-dropdown-item @click="delet('socialLink', socialLink)"
+                      >Delete</b-dropdown-item
+                    >
+                  </b-dropdown>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          -->
         </div>
       </div>
     </div>
@@ -464,25 +620,354 @@
 </template>
 
 <script>
-//import BasicInfo from "./basicInfo";
-//import ContactInfo from "./contactInfo";
-//import BusinessVisited from "./businessVisited";
-//import PlacesLived from "./placesLived";
-//import WebAndSocials from "./webAndSocial";
 export default {
-  components: {
-    //  BasicInfo,
-    //  ContactInfo,
-    // BusinessVisited,
-    //  PlacesLived,
-    //  WebAndSocials
-  }
+  data() {
+    return {
+      basicInfo: {
+        dateOfBirth: { day: "12", month: "1", year: "2000" },
+        gender: "M",
+        mobilePhones: [],
+        currentCity: null,
+        homeTown: null,
+        websites: [],
+        socialLinks: [],
+      },
+      phoneInput: null,
+      websiteInput: null,
+      sociallinkInput: null,
+      index: null,
+    };
+  },
+  created() {
+    this.basicInfo = JSON.parse(
+      JSON.stringify(this.$store.getters["profile/getProfileAboutBasicInfos"])
+    );
+    console.log("Load User birth Date start ++++++", this.basicInfo);
+    this.$store
+      .dispatch("profile/loadUserBasicInfosBirthDate", null)
+      .then((response) => {
+        console.log("load user birth date response (3) ++++", response);
+        console.log("Load User BirthDate end+++++++");
+      })
+      .catch((error) => {
+        console.log("Error from server or from browser error (2) ++++", error);
+      })
+      .finally(() => {
+        this.basicInfo = JSON.parse(
+          JSON.stringify(
+            this.$store.getters["profile/getProfileAboutBasicInfos"]
+          )
+        );
+        console.log("Load User birth Date end ++++++", this.basicInfo);
+      });
+  },
+
+
+  
+  computed: {
+    birthDate() {
+      return (
+        this.basicInfo.dateOfBirth.date_1.day +
+        "-" +
+        this.basicInfo.dateOfBirth.date_1.month +
+        "-" +
+        this.basicInfo.dateOfBirth.date_2.year
+      );
+    },
+
+      info(){
+   return this.$store.state.profile.profile_about;
+    },
+
+  },
+  methods: {
+    cancel() {
+      console.log("Cancel edit birth date user  ++++++");
+      this.basicInfo = JSON.parse(
+        JSON.stringify(this.$store.getters["profile/getProfileAboutBasicInfos"])
+      );
+      this.phoneInput = null;
+    },
+    saveBirthDate() {
+      console.log("save new birth date user start +++++");
+      console.log(this.basicInfo.dateOfBirth);
+      this.$store
+        .dispatch("profile/updateUserBasicInfosBirthDate", {
+          dateOfBirth: this.basicInfo.dateOfBirth,
+        })
+        .then((response) => {
+          console.log("save new birth date user response (3) +++++", response);
+          console.log("save new birth date user end +++++");
+        })
+        .catch((error) => {
+          console.log(
+            "not save new birth date user end error (2) +++++",
+            error
+          );
+        })
+        .finally(() => {
+          this.basicInfo = JSON.parse(
+            JSON.stringify(
+              this.$store.getters["profile/getProfileAboutBasicInfos"]
+            )
+          );
+          console.log(this.basicInfo);
+          this.$refs["model-6"].hide();
+        });
+    },
+    saveGender() {
+      console.log("save new gender user start +++++");
+      console.log(this.basicInfo.gender);
+      this.$store
+        .dispatch("profile/updateUserBasicInfosGender", {
+          gender: this.basicInfo.gender,
+        })
+        .then((response) => {
+          console.log("save new gender user response (3)", response);
+        })
+        .catch((error) => {
+          console.log(
+            error,
+            "not save new birth date user end error( 2 ) +++++"
+          );
+        })
+        .finally(() => {
+          console.log("finally save new gender user ");
+          this.basicInfo = JSON.parse(
+            JSON.stringify(
+              this.$store.getters["profile/getProfileAboutBasicInfos"]
+            )
+          );
+          console.log(this.basicInfo);
+          this.$refs["modal-7"].hide();
+        });
+    },
+    savePhoneNumber() {
+      console.log("save new phone Number user start +++++");
+      if (this.basicInfo.mobilePhones.includes(this.phoneInput)) {
+        console.log("Phone Number In Duplication  +++++++");
+      } else {
+        console.log("Phone Number Not In Duplication +++++++");
+        this.basicInfo.mobilePhones.push(this.phoneInput);
+      }
+      this.phoneInput = null;
+      console.log(this.basicInfo.mobilePhones);
+      this.$store
+        .dispatch("profile/updateUserBasicInfosMobilePhones", {
+          mobilePhones: this.basicInfo.mobilePhones,
+        })
+        .then((response) => {
+          console.log("save new phone number user response (3) ++++", response);
+        })
+        .catch((error) => {
+          console.log(
+            error,
+            "not save new mobilePhones user end error(2) +++++"
+          );
+        })
+        .finally(() => {
+          console.log("finally save new mobilePhones user ++++++ ");
+          this.basicInfo = JSON.parse(
+            JSON.stringify(
+              this.$store.getters["profile/getProfileAboutBasicInfos"]
+            )
+          );
+          console.log(this.basicInfo);
+          this.$refs["phonemodal"].hide();
+        });
+    },
+    saveCurrentCity() {
+      console.log("save new current City user start +++++");
+      console.log(this.basicInfo.currentCity);
+      this.$store
+        .dispatch("profile/updateUserBasicInfosCurrentCity", {
+          currentCity: this.basicInfo.currentCity,
+        })
+        .then((response) => {
+          console.log(
+            "save new current city user response (3) ++++++",
+            response
+          );
+        })
+        .catch((error) => {
+          console.log(
+            "not save new mobilePhones user end error (2) +++++++",
+            error
+          );
+        })
+        .finally(() => {
+          console.log("finally save new current city user ");
+          this.basicInfo = JSON.parse(
+            JSON.stringify(
+              this.$store.getters["profile/getProfileAboutBasicInfos"]
+            )
+          );
+          console.log(this.basicInfo);
+          this.$refs["currentcityModal"].hide();
+        });
+    },
+    saveHomeTown() {
+      console.log("save new home Town  user start +++++");
+      console.log(this.basicInfo.homeTown);
+      this.$store
+        .dispatch("profile/updateUserBasicInfosHomeTown", {
+          homeTown: this.basicInfo.homeTown,
+        })
+        .then((response) => {
+          console.log(
+            "save new current home town user response (3) ++++++",
+            response
+          );
+        })
+        .catch((error) => {
+          console.log(error, "not save new homeTown user end error (2)+++++");
+        })
+        .finally(() => {
+          console.log("finally save new current Home Town user ");
+          this.basicInfo = JSON.parse(
+            JSON.stringify(
+              this.$store.getters["profile/getProfileAboutBasicInfos"]
+            )
+          );
+          console.log(this.basicInfo);
+          this.$refs["hometownModal"].hide();
+        });
+    },
+    saveWebsite() {
+      console.log("save new websites user start +++++");
+      if (this.basicInfo.websites.includes(this.websiteInput)) {
+        console.log("Duplication of website  +++++++");
+      } else if (this.index !== null) {
+        this.basicInfo.websites[this.index] = this.websiteInput;
+      } else {
+        console.log("website don't duplicate +++++++++");
+        this.basicInfo.websites.push(this.websiteInput);
+      }
+      this.websiteInput = null;
+      console.log(this.basicInfo.websites);
+      this.$store
+        .dispatch("profile/updateUserBasicInfosWebsites", {
+          websites: this.basicInfo.websites,
+        })
+        .then((response) => {
+          console.log("save new websites user response (3) ++++++", response);
+          console.log("save new websites user end +++++");
+        })
+        .catch((error) => {
+          console.log(error, "not save new websites user end error (2) +++++");
+        })
+        .finally(() => {
+          console.log("finally save new website user ");
+          this.basicInfo = JSON.parse(
+            JSON.stringify(
+              this.$store.getters["profile/getProfileAboutBasicInfos"]
+            )
+          );
+          console.log(this.basicInfo);
+          this.$refs["websiteModal"].hide();
+        });
+    },
+    saveSocialLink() {
+      console.log("save new sociallinks  user start +++++");
+      if (this.basicInfo.socialLinks.includes(this.sociallinkInput)) {
+        console.log("Duplication of sociallink  +++++++");
+      } else if (this.index !== null) {
+        this.basicInfo.socialLinks[this.index] = this.sociallinkInput;
+      } else {
+        console.log("No Duplication of sociallink +++++++");
+        this.basicInfo.socialLinks.push(this.sociallinkInput);
+      }
+      this.sociallinkInput = null;
+      console.log(this.basicInfo.socialLinks);
+      this.$store
+        .dispatch("profile/updateUserBasicInfosSocialLinks", {
+          socialLinks: this.basicInfo.socialLinks,
+        })
+        .then((response) => {
+          console.log();
+          console.log(
+            "save new socialLinks user response (3) ++++++",
+            response
+          );
+          console.log("save new socialLinks user end +++++");
+        })
+        .catch((error) => {
+          console.log(
+            error,
+            "not save new socialLinks user end error(2) +++++"
+          );
+        })
+        .finally(() => {
+          console.log("finally save new socialLink user ");
+          this.basicInfo = JSON.parse(
+            JSON.stringify(
+              this.$store.getters["profile/getProfileAboutBasicInfos"]
+            )
+          );
+          console.log(this.basicInfo);
+          this.$refs["sociallinkModal"].hide();
+        });
+    },
+    deleteElement(type, value) {
+      switch (type) {
+        case "website":
+          this.basicInfo.websites = this.basicInfo.websites.filter(
+            (website) => {
+              return website !== value;
+            }
+          );
+          this.$store.state.userData[0].profile_about.basicInfo =
+            this.basicInfo;
+          break;
+        case "socialLink":
+          this.basicInfo.socialLinks = this.basicInfo.socialLinks.filter(
+            (socialLink) => {
+              return socialLink !== value;
+            }
+          );
+          this.$store.state.userData[0].profile_about.basicInfo =
+            this.basicInfo;
+          break;
+        default:
+          console.log("No Correspondance");
+          break;
+      }
+    },
+    edit(type, value) {
+      switch (type) {
+        case "website":
+          console.log("edit website");
+          this.index = this.basicInfo.websites.findIndex((website) => {
+            return website === value;
+          });
+          console.log(this.index);
+          this.websiteInput = value;
+          this.$refs["websiteModal"].show();
+          break;
+        case "socialLink":
+          console.log("edit socialLink");
+          this.index = this.basicInfo.socialLinks.findIndex((socialLink) => {
+            return socialLink === value;
+          });
+          console.log(this.index);
+          this.sociallinkInput = value;
+          this.$refs["sociallinkModal"].show();
+      }
+    },
+    redirect(website) {
+      console.log(website);
+      window.location.replace(website);
+    },
+  },
 };
 </script>
 
 <style scoped>
 .details {
   display: flex;
+}
+ul.website {
+  display: inline;
 }
 @media only screen and (max-width: 768px) {
 }

@@ -73,6 +73,8 @@
         </b-col>
         <b-col v-if="!getNotificationsStore && !loader" class="load">
           <p>No notifications to show !!</p>
+
+          <hr width="100%" />
         </b-col>
       </b-row>
     </div>
@@ -151,6 +153,7 @@ export default {
   display: flex;
   justify-content: center;
 }
+
 .f-left {
   float: left;
 }

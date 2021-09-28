@@ -10,6 +10,10 @@ export const mutations = {
         state.users = payload
     },
 
+    [TYPES.FIND_COMMUNITY](state,payload) {
+        state.users = payload
+    },
+
     [TYPES.RESET_RESULT](state) {
         state.users = []
     },

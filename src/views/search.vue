@@ -596,6 +596,8 @@ import Sponsor from "@/components/search/sponsoredBusiness";
 
 import { PeopleFilter,PostFilter } from "@/components/search";
 
+import {loader} from "@/mixins"
+
 import {mapGetters, mapActions} from 'vuex'
 
 
@@ -618,6 +620,8 @@ export default {
 
     // Footer,
   },
+
+  mixins: [loader],
 
   computed:{
     ...mapGetters({

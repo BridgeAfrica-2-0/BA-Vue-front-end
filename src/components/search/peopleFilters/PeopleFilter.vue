@@ -180,6 +180,11 @@ export default {
         ,{}
       )
 
+      const loader = this.$loading.show({
+        container: this.$refs.formContainer,
+        canCancel: true,
+      });
+
       this.findCommunity(data)
 
     },

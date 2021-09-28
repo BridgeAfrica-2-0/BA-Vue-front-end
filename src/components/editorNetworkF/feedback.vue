@@ -25,9 +25,11 @@
       </b-col>
     </b-row>
     <b-row>
-      <div v-if="spinner" class="text-center">
-        <b-spinner variant="primary" label="Spinning"></b-spinner>
-      </div>
+      <b-col cols="12">
+        <div v-if="spinner" class="text-center">
+          <b-spinner variant="primary" label="Spinning"></b-spinner>
+        </div>
+      </b-col>
       <b-col cols="12">
         <div 
           :class="{ active: index == currentIndex }"
@@ -56,7 +58,7 @@
                 </b-col>
                 <b-col cols="2" md="1" class="float-right">
                   <span 
-                    @click="deleteFeedback(feedback.user_id)"
+                    @click="deleteFeedback(feedback.id)"
                   > <b-link><b-icon icon="trash-fill" aria-hidden="true"></b-icon></b-link>
                   </span>
                 </b-col>
@@ -141,48 +143,26 @@ export default {
       return data;
     },
     applyFilter(data){
+      this.spinner = true;
       this.filterData = data
       console.log("searching...");
       console.log(this.filterData);
       this.displayFeedback();
     },
     displayFeedback() {
+      this.spinner = true;
       const data = this.getRequestDatas(this.filterData, this.currentPage);
       this.$store
       .dispatch("networkProfileFeedback/getFeedbacks", this.url+"/feedback"+data)
       .then(() => {
+        this.spinner = false;
         console.log('ohh yeah');
       })
       .catch( err => {
         console.log({ err: err });
+        this.spinner = false;
       });
     },
-    createFeedback: function(){
-      this.spinner = true;
-      let formData = new FormData();
-      formData.append('title', this.feedbackForm.title);
-      formData.append('description', this.feedbackForm.description);
-      console.log('title', this.feedbackForm.title);
-      console.log('description', this.feedbackForm.description);
-      this.axios.post("network/"+this.url+"/feedback/create", formData)
-      .then(() => {
-        this.displayFeedback();
-        console.log('ohh yeah');
-        this.spinner = false;
-        this.flashMessage.show({
-          status: "success",
-          message: "You Just Created A New Feedback"
-        });
-      })
-      .catch(err => {
-        console.log({ err: err });
-        this.spinner = false;
-        this.flashMessage.show({
-          status: "error",
-          message: "Unable to Create Feedback"
-        });
-      });
-		},
 
     deleteFeedback: function(user_id){
       this.spinner = true;

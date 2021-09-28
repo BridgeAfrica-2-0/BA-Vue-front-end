@@ -1,7 +1,6 @@
 <template>
   <div>
 
-   
 
     <b-alert v-if="edited" show> {{ successmsg }} </b-alert>
 

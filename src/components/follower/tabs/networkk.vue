@@ -10,7 +10,7 @@
 
     <div class="people-style shadow">
       <b-row>
-        <b-col md="3" xl="3" lg="3" cols="5" sm="3">
+        <b-col md="3" xl="3" lg="3" cols="5" sm="3">  
           <div class="center-img">
             <img :src="item.picture" class="r-image" />
           </div>
@@ -102,20 +102,32 @@ export default {
   computed: {
    
         network(){
+ 
+      
 
-      if(this.type=="Follower"){ 
-
-      return  this.$store.state.profile.NcommunityFollower.network_followers;  
-
-       }else{
-
-         return  this.$store.state.profile.NcommunityFollowing.network_following; 
-       }
+         return  this.$store.state.follower.NcommunityFollowing.network_follower; 
+       
    }
    
   },
 
-  methods:{
+
+
+   mounted(){
+
+     
+      this.$store
+      .dispatch("follower/profileNetwork", null)
+      .then((response) => {
+       
+      })
+      .catch((error) => {
+        console.log({error:error});
+      });
+
+  },
+
+  methods:{ 
 
     
       
@@ -123,21 +135,17 @@ export default {
 
       let url = null;
 
-         if(this.type=="Follower"){  
-          url="profile/network/follower/"
-         }else{
+         
           url="profile/network/following/";
-         }
+         
       axios
         .get(url + this.page)
         .then(({ data }) => {
           if (data.data.length) {
             this.page += 1;
-      if(this.type=="Follower"){  
-            this.businesses.push(...data.data.network_followers); 
-           }else{
-              this.businesses.push(...data.data.network_following);
-           }
+   
+            this.network.push(...data.data); 
+           
 
 
             $state.loaded();

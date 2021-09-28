@@ -8,6 +8,7 @@ export default {
     CommunityBusiness: [],
     ownerPost: [],
     profileBusiness: [],
+    profileNetwork:[],
     ownerPostImages: [],
     biography: null,
     basicInfo: [],
@@ -164,11 +165,7 @@ export default {
     },
     getProfileAbout_(state) {
       return state.userData[0].profile_about_new;
-    }, 
-    getProfileProfession(state) {
-      return state.profileIntro.user.profession;
     },
-
     getProfileAboutEducationAndWorks(state) {
       return state.profileIntro.user_education;
     },
@@ -181,18 +178,15 @@ export default {
   },
   mutations: {
 
-    //set community data  
-
-    setTcommunity(state, data){
+   setTcommunity(state, data){
    
-      state.Tcommunity=data;
- 
-    },
-     
+     state.Tcommunity=data;
 
+   },
+    
     setNcommunityFollower(state, data){
 
-      state.setNcommunityFollower = data;
+      state.NcommunityFollower = data;
 
     },
 
@@ -218,7 +212,7 @@ export default {
 
     setBcommunityFollower(state, data){
 
-      state.setBcommunityFollower = data;
+      state.BcommunityFollower = data;
     },
 
 
@@ -230,13 +224,18 @@ export default {
 
 
 
+
     //set media data
 
     setAlbums(state, data) {
       state.albums = data;
     },
 
+    setprofileNetwork(state, data){
+     
+      state.profileNetwork=data;
 
+    },
 
     setProfileBusiness(state, data) {
       state.profileBusiness = data;
@@ -360,17 +359,6 @@ export default {
 
   actions: {
 
-  
-    Tcommunity({commit}){
-     
-      return axios
-      .get('profile/total/community')
-      .then(({ data }) => {
-        commit('setTcommunity', data.data);
-        console.log(data);
-      });
-
-    },
 
     nFormatter(num) {
       if (num >= 1000000000) {
@@ -386,7 +374,18 @@ export default {
     },
 
 
+     
+    Tcommunity({commit}){
+     
+      return axios
+      .get('profile/total/community')
+      .then(({ data }) => {
+        commit('setTcommunity', data.data);
+        console.log(data);
+      });
 
+    },
+    
     NcommunityFollower({ commit }){
       return axios
       .get('profile/network/follower')
@@ -432,10 +431,12 @@ export default {
       return axios
       .get('profile/user/following')
       .then(({ data }) => {
-        commit('setUcommunityFollowing', data.data);
+        commit('setUcommunityFollowing', data.data);      
         console.log(data);
       });
     },
+
+
 
     profileBusiness({ commit }) {
 
@@ -443,6 +444,18 @@ export default {
         .get('business/userBusiness')
         .then(({ data }) => {
           commit('setProfileBusiness', data.data);
+          console.log(data);
+        });
+
+    },
+
+
+    profileNetwork({ commit }) { 
+
+      return axios
+        .get('profile/userBusiness')
+        .then(({ data }) => {
+          commit('setProfileNetwork', data.data);
           console.log(data);
         });
 
@@ -587,6 +600,8 @@ export default {
           context.commit("editPostUserIntro", response.data.data);
         })
         .catch(error => {
+
+          console.log({error:error});
           console.log("Load User Intro Echec");
           if (error instanceof TypeError) {
             console.log(error.message);

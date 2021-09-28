@@ -2,7 +2,7 @@
   <div>
     <div class="s-ccard">
       <b-row>
-        <b-col lg="6" sm="12" class="p-2" v-for="item in people" :key="item.id">
+        <b-col lg="6" sm="12" class="p-2" v-for="item in users" :key="item.id">
           <div class="people-style border shadow">
             <b-row class="mb-1">
               <b-col md="3" cols="4" sm="4" class="my-auto">
@@ -95,13 +95,45 @@
           </div>
         </b-col>
       </b-row>
+      <infinite-loading @infinite="infiniteHandler"></infinite-loading>
     </div>
   </div>
 </template>
 
 <script>
+import axios from "axios";
 export default {
-  props: ["people"],
+  props: ["type"],
+   data() {
+    return {
+      page: 1,
+      options: {
+        rewind: true,
+        autoplay: true,
+        perPage: 1,
+        pagination: false,
+
+        type: "loop",
+        perMove: 1
+      }
+    };
+  },
+   computed:{
+ 
+   users(){
+
+      if(this.type=="Follower"){ 
+
+      return  this.$store.state.profile.UcommunityFollower.user_followers;  
+
+       }else{
+
+         return  this.$store.state.profile.UcommunityFollowing.user_following; 
+       }
+   }
+    
+    
+  },
   methods: {
     count(number) {
       if (number >= 1000000) {
@@ -110,7 +142,41 @@ export default {
       if (number >= 1000) {
         return number / 1000 + "K";
       } else return number;
-    }
+    },
+
+
+
+     infiniteHandler($state) {
+
+      let url = null;
+
+         if(this.type=="Follower"){  
+          url="profile/user/follower/"
+         }else{
+          url="profile/user/following/";
+         }
+      axios
+        .get(url + this.page)
+        .then(({ data }) => {
+          if (data.data.length) {
+            this.page += 1;
+        if(this.type=="Follower"){  
+            this.businesses.push(...data.data.user_followers); 
+           }else{
+              this.businesses.push(...data.data.user_following);
+           }
+
+
+
+            $state.loaded();
+          } else {
+            $state.complete();
+          }
+        })
+        .catch((err) => {
+          console.log({ err: err });
+        });
+    },
   }
 };
 </script>
@@ -484,7 +550,7 @@ f-right {
 
   .pobtn {
     font-size: 10px;
-  }
+  }  
   .e-name {
     text-align: left;
   }

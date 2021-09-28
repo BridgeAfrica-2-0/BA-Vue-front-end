@@ -17,7 +17,7 @@
 
     <br />
 
-          <CommunityBusiness   :business="folowing"  />
+          <CommunityBusiness   type="Following"  />
      
   </div>
 </template>
@@ -30,9 +30,7 @@ export default {
   },
 
    computed: {
-    folowing() {
-      return this.$store.state.profile.CommunityBusiness.business_following;
-    }
+   
   },
 
 };

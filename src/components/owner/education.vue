@@ -3,7 +3,6 @@
     <b>Education</b>
 
 
-
     <hr />
     <b-link style="text-decoration: none" class="mt-4" v-b-modal.educationModal>
       <b-icon icon="plus" variant="primary"></b-icon>
@@ -16,19 +15,23 @@
       <div class="datails">
         <div
           class="row"
-          v-for="education in educations"
-          :key="education.schoolName"
+          v-for="education in this.$store.getters['profile/getProfileAboutEducationAndWorks'] " 
+          :key="education.school_name"
         >
           <div class="col">
             <span class="mr-auto">
-              <b>School Name : {{ education.schoolName }}</b>
+              <b>School Name : {{ education.school_name }}</b>
             </span>
+            <span>
+           <br>   <b>   Major  {{ education.major_subjects }}  </b>
+            </span>
+
             <p>
-              Duration From {{ education.durationFrom }} To
-              {{ education.durationTo }}
+              Duration From {{ education.start_year }} To
+              {{ education.end_year }}
             </p>
             <p>
-              {{ education.jobResponsibilities }}
+              {{ education.description }}
             </p>
           </div>
           <div class="col-1">
@@ -122,7 +125,7 @@ export default {
     console.log("Load User Profile About Education");
     this.educations = JSON.parse(
       JSON.stringify(
-        this.$store.getters['profile/getProfileAboutEducationAndWorks'].educations
+        this.$store.getters['profile/getProfileAboutEducationAndWorks']
       )
     );
   },
@@ -131,7 +134,7 @@ export default {
       console.log("Cancel Another Action in User  ++++++");
       this.educations = JSON.parse(  
         JSON.stringify(
-          this.$store.getters['profile/getProfileAboutEducationAndWorks'].educations
+          this.$store.getters['profile/getProfileAboutEducationAndWorks']
         )
       );
       console.log(this.educations);
@@ -170,7 +173,7 @@ export default {
           console.log("finally save new website user ");
           this.educations = JSON.parse(
             JSON.stringify(
-              this.$store.getters['profile/getProfileAboutEducationAndWorks'].educations
+              this.$store.getters['profile/getProfileAboutEducationAndWorks']
             )
           );
           this.index = null;

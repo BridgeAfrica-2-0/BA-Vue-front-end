@@ -105,11 +105,11 @@ export default {
 
       if(this.type=="Follower"){ 
 
-      return  this.$store.state.profile.NcommunityFollower.network_followers;  
+      return  this.$store.state.follower.NcommunityFollower.network_followers;  
 
        }else{
 
-         return  this.$store.state.profile.NcommunityFollowing.network_following; 
+         return  this.$store.state.follower.NcommunityFollowing.network_following; 
        }
    }
    

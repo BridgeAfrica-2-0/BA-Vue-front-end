@@ -15,7 +15,7 @@
       </b-col>
     </b-row>
     <br />
-        <CommunityMembers  :people="folowers" />
+        <CommunityMembers type="Follower" />
     
   </div>
 </template>
@@ -28,9 +28,7 @@ export default {
   },
 
   computed: {
-    folowers() {
-      return this.$store.state.profile.communityPeople.people_followers;
-    }
+   
   },
 };
 </script>

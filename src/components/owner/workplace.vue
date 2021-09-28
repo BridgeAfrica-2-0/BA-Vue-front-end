@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b>WorkPlace</b>{{work}}
+    <b>WorkPlace</b>  
     <hr />
     <b-link class="mt-4 text-decoration-none" v-b-modal.modal-9>
       <b-icon icon="plus" variant="primary"></b-icon>
@@ -25,7 +25,7 @@
             
             <div class="media-body">
               <h6 class="mb-0">
-                <b>{{ workPlace.company_name }} ({{orkPlace.manager}})</b>
+                <b>{{ workPlace.company_name }} ({{workPlace.position}})</b>
               </h6>
               <b>{{ workPlace.start_year }}/{{workPlace.start_month}}/{{workPlace.start_day}} -   {{ workPlace.end_year }}/{{workPlace.end_month}}/{{workPlace.end_day}}</b>
               <p class="mb-1">
@@ -40,12 +40,12 @@
                   variant="primary-outline"
                 >
                   <b-dropdown-item
-                    @click="edit('workPlaces', workPlace.companyName)"
+                    @click="editt(workPlace)"
                     >Edit</b-dropdown-item
                   >
                   <b-dropdown-item
                     @click="
-                      deleteWorkPlace('workPlaces', workPlace.companyName)
+                      deleteWorkPlace('workPlaces', workPlace.id)
                     "
                     >Delete</b-dropdown-item
                   >
@@ -56,6 +56,94 @@
         </div>
       </div>
     </b-list-group-item>
+
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+    <b-modal
+      ref="edit-contact"
+      id="edit"
+      title="edit Workplace "
+      @close="cancel"
+      @ok="updatesave"
+    >
+      <div class="div-design">
+     <!--   <b-form-select
+          class="mb-2"
+          size="sm"
+          v-model="editData.access"
+          :options="options"
+        ></b-form-select>  -->
+      </div>
+      <b-form-input
+        class="mt-2"
+        v-model="editData.company_name"
+        placeholder="Company"
+      ></b-form-input>
+      <b-form-input
+        class="mt-2"
+        v-model="editData.position"
+        placeholder="Position"
+      ></b-form-input>
+      <b-form-input
+        class="mt-2"
+        v-model="editData.city_town"
+        placeholder="City"
+      ></b-form-input>
+      <b-form-input
+        class="mt-2"
+        v-model="editData.job_responsibilities"
+        placeholder="Responsibilities"
+      ></b-form-input>
+      <b-form-checkbox
+        id="checkbox-1"
+        v-model="editData.currently_working"
+        name="checkbox-1"
+        :checked="editData.currently_working === 1 ? true : false"
+      >
+        Currently Working
+      </b-form-checkbox>
+      <label>Start Date</label>
+      <b-form-datepicker
+        id="example-datepicker"
+        v-model="editData.start_year"
+        class="mb-2"
+        placeholder="Start Date"
+      ></b-form-datepicker>
+      <label>End Date</label>
+      <b-form-datepicker
+        id="example-datepicker"
+        v-model="editData.end_year"
+        class="mb-2"
+        placeholder="End Date"
+      ></b-form-datepicker>
+    </b-modal>
+
+
+
+
+
+
+
+
+
+
 
     <b-modal
       ref="add-contact"
@@ -74,7 +162,7 @@
       </div>
       <b-form-input
         class="mt-2"
-        v-model="workPlaceInput.companyName"
+        v-model="workPlaceInput.company_name"
         placeholder="Company"
       ></b-form-input>
       <b-form-input
@@ -122,6 +210,7 @@
 export default {
   data() {
     return {
+      editData:[],
       options: [
         { value: null, text: "Select" },
         { value: "private", text: "Private" },
@@ -155,9 +244,20 @@ export default {
   computed:{
        work(){
       return this.$store.state.profile.profile_about.user_experience;
+    },
+
+     workk(){
+      return this.$store.state.profile.profile_about;
     }
+
   },
   methods: {
+
+    editt(value){
+
+       this.editData = value;
+       this.$refs["edit-contact"].show(); 
+    },
     cancel() {
       console.log("Cancel Another Action in User  ++++++");
       this.educationAndWorks.workPlaces = this.workPlaces;
@@ -174,6 +274,47 @@ export default {
         access: "private",
       };
     },
+
+
+    updatesave(){
+    
+    let method="PUT"
+    console.log(this.editData);
+
+     this.$store
+        .dispatch("profile/updateUserWorkPlaces", {
+          workPlace: this.editData,
+          method: method,
+        })
+        .then((response) => {
+          console.log(
+            response,
+            "save/update/delete new workPlace user end +++++"
+          );
+        })
+        .catch((error) => {
+          console.log(
+            error,
+            "not save/update/delete new workPlace user end error (2) +++++"
+          );
+        })
+
+        .finally(() => {
+          this.educationAndWorks = JSON.parse(
+            JSON.stringify(
+              this.$store.getters["profile/getProfileAboutEducationAndWorks"]
+            )
+          );
+          console.log(
+            "Finally save/update/delete new workplace user +++++",
+            this.educationAndWorks,
+            "+++++++++++"
+          );
+          this.$refs["edit-contact"].hide();
+        });
+
+    },
+
     save() {
       console.log("Save/edit/delete WorkPlace User Profile About");
       let method = "";
@@ -184,6 +325,7 @@ export default {
         this.educationAndWorks.workPlaces.push(this.workPlaceInput);
         method = "POST";
       }
+
       this.$store
         .dispatch("profile/updateUserWorkPlaces", {
           workPlace: this.workPlaceInput,
@@ -251,13 +393,9 @@ export default {
       switch (type) {
         case "workPlaces":
           console.log("edit workPlace +++++++");
-          this.index = this.educationAndWorks.workPlaces.findIndex(
-            (workPlace) => {
-              return workPlace.companyName === value;
-            }
-          );
-          this.workPlaceInput = this.educationAndWorks.workPlaces[this.index];
-          this.$refs["add-contact"].show();
+         
+          this.workPlaceInput = this.work[value];
+          this.$refs["add-contact"].show();      
           break;
         case "educations":
           console.log("edit education");

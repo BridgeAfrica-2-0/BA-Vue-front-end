@@ -1,14 +1,14 @@
 <template>
   <div>
     <b-row>
-      <b-col lg="6" sm="12" class="p-2" v-for="item in business" :key="item.id">
+      <b-col lg="6" sm="12" class="p-2" v-for="item in businesses" :key="item.id">
         <div class="people-style shadow">
           <b-row>
             <b-col md="3" xl="3" lg="3" cols="5" sm="3">
               <div class="center-img">
                 <splide :options="options" class="r-image">
                   <splide-slide cl>
-                    <img :src="item.picture" class="r-image" />
+                    <img :src="item.picture" class="r-image" />   
                   </splide-slide>
                 </splide>
               </div>
@@ -104,14 +104,20 @@
         </div>
       </b-col>
     </b-row>
+     <infinite-loading @infinite="infiniteHandler"></infinite-loading>
   </div>
 </template>
 
 <script>
+import moment from "moment";
+import axios from "axios";
+
 export default {
-  props: ["title", "image", "business"],
-  data() {
+  props: ["type"],
+  
+   data() {
     return {
+      page: 1,
       options: {
         rewind: true,
         autoplay: true,
@@ -123,6 +129,21 @@ export default {
       }
     };
   },
+  computed:{
+   
+    businesses(){
+
+      if(this.type=="Follower"){ 
+
+      return  this.$store.state.profile.BcommunityFollower.business_followers;  
+
+       }else{
+
+         return  this.$store.state.profile.BcommunityFollowing.business_following; 
+       }
+   }
+
+  },
   methods: {
     count(number) {
       if (number >= 1000000) {
@@ -131,7 +152,39 @@ export default {
       if (number >= 1000) {
         return number / 1000 + "K";
       } else return number;
-    }
+    },
+
+
+      infiniteHandler($state) { 
+
+      let url = null;
+
+         if(this.type=="Follower"){  
+          url="profile/business/follower/"
+         }else{
+          url="profile/network/following/";
+         }
+      axios
+        .get(url + this.page)
+        .then(({ data }) => {
+          if (data.data.length) {
+            this.page += 1;
+           if(this.type=="Follower"){  
+            this.businesses.push(...data.data.business_followers); 
+           }else{
+              this.businesses.push(...data.data.business_following);
+           }
+
+            $state.loaded();
+          } else {
+            $state.complete();
+          }
+        })
+        .catch((err) => {
+          console.log({ err: err });
+        });
+    },
+
   }
 };
 </script>

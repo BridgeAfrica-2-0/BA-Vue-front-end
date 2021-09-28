@@ -1,66 +1,41 @@
 <template>
   <div>
-    <fas-icon
-      class="primary mr-2 pt-1 icon-size primary"
-      :icon="['fas', 'handshake']"
-    />
-    Businesses
+    <b-modal id="modal-sm" size="sm" hide-header>
+      Do you want to join this network?
+    </b-modal>
 
-    <hr />
 
-    <div class="business" v-if="noBusiness == false">
+      
+
+          <div class="people-style shadow"  v-for="item in network" :key="item.id">
       <b-row>
-        <b-col lg="6" v-for="item in busineses" :key="item.id" > 
-          
-          
-          
-          
-          
-          
-              <div class="people-style shadow">
-      <b-row>
-        <b-col md="3" xl="3" lg="3" cols="5" sm="3">
-          <div class="center-img">
-            <splide :options="options" class="r-image">
-              <splide-slide cl>
-                 <img :src="item.picture" class="r-image" />  
-              </splide-slide>
-            </splide>
-          </div>
+        <b-col md="3" xl="5" lg="5" cols="5" sm="3">
+         
+            <div class="center-img">
+            <img :src="item.picture" class="r-image" />
+          </div>   
+        
         </b-col>
-        <b-col md="5" cols="7" lg="9" xl="5" sm="5">
-          <p class="textt text">
+
+        
+        <b-col md="5" cols="7" lg="7" xl="7" sm="5">
+          <p class="textt">
             <strong class="title"> {{ item.name }} </strong> <br />
-             {{ item.category }}
+            {{ item.category }}
             <br />
-            {{ count(item.followers) }} Community <br />
+           {{ item.followers }} Community<br />
 
-            <span class="location">
-              <b-icon-geo-alt class="ico"></b-icon-geo-alt> {{ item.country }}
-            </span>
-            <br />
-          
-
-           <read-more
-              more-str="read more"
-              class="readmore"
-              :text="item.about_business"
-              link="#"
-              less-str="read less"
-              :max-chars="15"
-            >
-            </read-more>
-
+           {{ item.about_network }} <b-link>Read More</b-link>
           </p>
         </b-col>
 
-        <b-col lg="12" xl="4" md="4" cols="12" sm="4">
+        <b-col lg="12" xl="12" md="4" cols="12" sm="4">
           <div class="s-button">
             <b-row>
               <b-col
                 md="12"
                 lg="4"
-                xl="12"
+                xl="4"
                 sm="12"
                 cols="4"
                 class="mt-2 text-center"
@@ -79,7 +54,7 @@
               <b-col
                 md="12"
                 lg="4"
-                xl="12"
+                xl="4"
                 sm="12"
                 cols="4"
                 class="mt-2 text-center"
@@ -98,7 +73,7 @@
               <b-col
                 md="12"
                 lg="4"
-                xl="12"
+                xl="4"
                 sm="12"
                 cols="4"
                 class="mt-2 text-center"
@@ -118,107 +93,78 @@
         </b-col>
       </b-row>
     </div>
-    
-    
-    
-    
-     </b-col>
 
-      </b-row>
-    </div>
-    <div v-show="noBusiness" class="no-business">
-      <b-container>
-        <h2>No Businesses Listed</h2>
-        <hr />
-      </b-container>
-      <p>User  has not listed any business. Please check back later</p>
-    </div>
+   
+  <infinite-loading @infinite="infiniteHandler"></infinite-loading>  
   </div>
 </template>
 
 <script>
-export default {
-  data() {
-    return {
-      noBusiness: false
-    };
-  },
+
+import axios from "axios";
  
- methods:{
-      count(number) {
-      if (number >= 1000000) {
-        return number / 1000000 + "M";
-      }
-      if (number >= 1000) {
-        return number / 1000 + "K";
-      } else return number;
+export default {
+  props: ["type"],
+  computed: {
+   
+
+        network(){
+
+      if(this.type=="Follower"){ 
+
+      return  this.$store.state.follower.NcommunityFollower.network_followers;  
+
+       }else{
+
+         return  this.$store.state.follower.NcommunityFollowing.network_following; 
+       }
+   }
+   
+  },
+
+
+
+   methods:{
+      
+       infiniteHandler($state) {
+
+      let url = null;
+
+         if(this.type=="Follower"){  
+          url="profile/network/follower/"
+         }else{
+          url="profile/network/following/";
+         }
+      axios
+        .get(url + this.page)
+        .then(({ data }) => {
+          if (data.data.length) {
+            this.page += 1;
+      if(this.type=="Follower"){  
+            this.businesses.push(...data.data.network_followers); 
+           }else{
+              this.businesses.push(...data.data.network_following);
+           }
+
+
+            $state.loaded();
+          } else {
+            $state.complete();
+          }
+        })
+        .catch((err) => {
+          console.log({ err: err });
+        });
     },
 
- },
-  computed:{
-      
-      busineses(){
-        return this.$store.state.follower.profileBusiness;
-      }
-  },
-  mounted(){
+  } ,
 
-     
-      this.$store
-      .dispatch("follower/profileBusiness", null)
-      .then((response) => {
-       
-      })
-      .catch((error) => {
-        console.log({error:error});
-      });
-
-  }
+ 
 };
 </script>
 
+
 <style scoped>
-.no-business {
-  border: 1px solid #ccc;
-  width: 50%;
-  height: 40%;
-  padding: 40px;
-  margin-left: 270px;
-}
-
-.icon {
-  height: 24px;
-  width: 24px;
-}
-
-span {
-  margin-left: 8px;
-}
-.primary-bg {
-  background-color: rgb(242, 242, 242);
-  border: none;
-}
-
-h2,
-p {
-  text-align: center;
-  font-size: 12px;
-  font-family: Helvetica;
-}
-
-@media only screen and (max-width: 768px) {
-  p {
-    font-size: 12px;
-    font-family: Helvetica;
-  }
-  span {
-    margin-left: 6px;
-  }
-}
-
-
-
-
 @media only screen and (min-width: 768px) {
   .btn-text {
     margin-left: 8px;
@@ -372,8 +318,11 @@ p {
   .btn {
     padding-top: 6px;
     height: 38px;
-    width: 123px;
-    font-size: 14px;
+    width: 110px;
+    font-size: 12px;
+    margin-left: -10px;
+
+    padding-top: 8px;
   }
 
   .r-image {
@@ -447,6 +396,8 @@ p {
     border: 1px solid rgba(0, 0, 0, 0.125);
     margin-bottom: 10px;
 
+    margin-right: 8px;
+
     padding: 7px;
   }
 
@@ -467,23 +418,13 @@ p {
   }
 }
 
-@media only screen and (min-width: 992px) and (max-width: 1265px) {
-  .textt {
-    color: #000;
-    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
-    font-weight: normal;
-    font-size: 14px;
-    line-height: 30px;
-    color: rgba(117, 114, 128, 1);
-    text-align: left;
-    font-weight: normal;
-    line-height: 20px;
-    font-style: normal;
-    padding: 1px;
-    text-align: left;
-    margin-left: 55px;
-    margin-right: -5px;
-    line-height: 25px;
+@media only screen and (min-width: 992px) and (max-width: 1331px) {
+  .btn {
+    width: 98px;
+    height: 33px;
+    font-size: 12px;
+    margin-left: -10px;
+    padding-top: 8px;
   }
 }
 </style>

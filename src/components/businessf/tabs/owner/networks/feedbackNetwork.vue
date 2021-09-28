@@ -16,7 +16,6 @@
               <b-icon-filter></b-icon-filter><span class="sr-only">Search</span>
             </template>
             <p class="font-weight-bolder px-3 m-0">Feedbacks Type</p>
-
             <b-dropdown-item @click="applyFilter('0')">Any</b-dropdown-item>
             <b-dropdown-item @click="applyFilter('Improvement')">Suggestion For Improvement</b-dropdown-item>
             <b-dropdown-item @click="applyFilter('Complain')">Complain</b-dropdown-item>
@@ -26,50 +25,54 @@
     </b-row>
     <b-row>
       <b-col cols="12">
-        <div v-if="spinner" class="text-center">
-          <b-spinner variant="primary" label="Spinning"></b-spinner>
-        </div>
-      </b-col>
-      <b-col cols="12">
         <div 
           :class="{ active: index == currentIndex }"
           v-for="(feedback, index) in feedbacks.data"
           :key="index"
           class="mb-4"
         >
-          <b-card class="mb-2">
-            <b-card-text>
-              <b-row class="px-md-3">
-                <b-col cols="2" md="1" class="m-0 p-0">
-                  <b-avatar
-                    class="d-inline-block"
-                    variant="info"
-                    :src="feedback.profile_picture"
-                    square
-                    size="3.5rem"
-                    rounded="xl"
-                  ></b-avatar>
-                </b-col>
-                <b-col cols="8" md="10" class="pt-2">
-                  <h5 class="m-0 font-weight-bolder feedback-name">
-                    <b-link>  {{feedback.user_name}} </b-link>
-                  </h5>
-                  <p>{{  moment(feedback.created_at).fromNow() }} - <span class="primary">{{feedback.title}}</span></p>
-                </b-col>
-                <b-col cols="2" md="1" class="float-right">
-                  <span 
-                    @click="deleteFeedback(feedback.id)"
-                  > <b-link><b-icon icon="trash-fill" aria-hidden="true"></b-icon></b-link>
-                  </span>
-                </b-col>
-              </b-row>
-              <b-row>
-                <b-col cols="12" class="mt-2">
-                  <p class="text-justify feedback-sent"> {{feedback.description}} </p>
-                </b-col>
-              </b-row>
-            </b-card-text>
-          </b-card>
+          <b-skeleton-wrapper :loading="loading">
+            <template #loading>
+              <b-card>
+                <b-skeleton width="85%"></b-skeleton>
+                <b-skeleton width="55%"></b-skeleton>
+                <b-skeleton width="70%"></b-skeleton>
+              </b-card>
+            </template>
+            <b-card class="mb-2">
+              <b-card-text>
+                <b-row class="px-md-3">
+                  <b-col cols="2" md="1" class="m-0 p-0">
+                    <b-avatar
+                      class="d-inline-block"
+                      variant="info"
+                      :src="feedback.profile_picture"
+                      square
+                      size="3.5rem"
+                      rounded="xl"
+                    ></b-avatar>
+                  </b-col>
+                  <b-col cols="8" md="10" class="pt-2">
+                    <h5 class="m-0 font-weight-bolder feedback-name">
+                      <b-link>  {{feedback.user_name}} </b-link>
+                    </h5>
+                    <p>{{  moment(feedback.created_at).fromNow() }} - <span class="primary">{{feedback.title}}</span></p>
+                  </b-col>
+                  <b-col cols="2" md="1" class="float-right">
+                    <span 
+                      @click="deleteFeedback(feedback.id)"
+                    > <b-link><b-icon icon="trash-fill" aria-hidden="true"></b-icon></b-link>
+                    </span>
+                  </b-col>
+                </b-row>
+                <b-row>
+                  <b-col cols="12" class="mt-2">
+                    <p class="text-justify feedback-sent"> {{feedback.description}} </p>
+                  </b-col>
+                </b-row>
+              </b-card-text>
+            </b-card>
+          </b-skeleton-wrapper>
         </div>
       </b-col>
       <b-col v-if="feedbacks.per_page < feedbacks.total" cols="12">
@@ -101,7 +104,7 @@ export default {
       moment: moment,
       filter: "0",
       filterData: false,
-      spinner: false,
+      loading: false,
       currentPage: null,
       currentIndex: -1,
       options: [
@@ -143,34 +146,34 @@ export default {
       return data;
     },
     applyFilter(data){
-      this.spinner = true;
+      this.loading = true;
       this.filterData = data
       console.log("searching...");
       console.log(this.filterData);
       this.displayFeedback();
     },
     displayFeedback() {
-      this.spinner = true;
+      this.loading = true;
       const data = this.getRequestDatas(this.filterData, this.currentPage);
       this.$store
       .dispatch("networkProfileFeedback/getFeedbacks", this.url+"/feedback"+data)
       .then(() => {
-        this.spinner = false;
+        this.loading = false;
         console.log('ohh yeah');
       })
       .catch( err => {
         console.log({ err: err });
-        this.spinner = false;
+        this.loading = false;
       });
     },
     deleteFeedback: function(user_id){
-      this.spinner = true;
+      this.loading = true;
       console.log('user_id: ', user_id);
       this.axios.delete("network/"+this.url+"/feedback/delete/"+user_id)
       .then(() => {
         this.displayFeedback();
         console.log('ohh yeah');
-        this.spinner = false;
+        this.loading = false;
         this.flashMessage.show({
           status: "success",
           message: "Feedback Deleted"
@@ -178,7 +181,7 @@ export default {
       })
       .catch(err => {
         console.log({ err: err });
-        this.spinner = false;
+        this.loading = false;
         this.flashMessage.show({
           status: "error",
           message: "Unable to Deleted Feedback"

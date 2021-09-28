@@ -14,9 +14,9 @@ import follower from "./follower";
 import axios from "axios";
 
 Vue.use(Vuex);
-// axios.defaults.baseURL = process.env.VUE_APP_API_URL;    
+ axios.defaults.baseURL = process.env.VUE_APP_API_URL;    
 
- axios.defaults.baseURL="https://test.maxinemoffett.com/api/v1/"; 
+// axios.defaults.baseURL="https://test.maxinemoffett.com/api/v1/"; 
 
 export default new Vuex.Store({
   modules: {

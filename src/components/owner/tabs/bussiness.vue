@@ -407,7 +407,7 @@
                       <br />
                       {{ business.category }}
                       <br />
-                      {{ business.community }} Community <br />
+                      {{ business.community }} Community  {{business.business_id}} <br />
 
                       <span class="location">
                         <b-icon-geo-alt class="ico"></b-icon-geo-alt>
@@ -536,6 +536,7 @@ export default {
 
          axios.get("business/edit/"+id).then(({ data }) => {
         console.log(data);
+        this.editbiz=data.data;
     
       }).catch((err) => {
           console.log({ err: err });

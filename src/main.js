@@ -22,7 +22,8 @@ import VueSocialauth from "vue-social-auth";
 import LoadScript from 'vue-plugin-load-script';
 import InfiniteLoading from 'vue-infinite-loading';
 
-import LoadScript from "vue-plugin-load-script";
+import VModal from 'vue-js-modal';
+Vue.use(VModal);
 
 
 Vue.use(LoadScript);

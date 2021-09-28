@@ -18,6 +18,13 @@ import homeIconData from "@iconify-icons/mdi-light/home";
 import ReadMore from "vue-read-more";
 import VueSocialauth from "vue-social-auth";
 // import firebase from "firebase";
+<<<<<<< HEAD
+
+IconifyIcon.addIcon("home", homeIconData);
+
+Vue.use(Vuex);
+Vue.use(VueAxios, axios);
+=======
 
 import LoadScript from 'vue-plugin-load-script';
 
@@ -28,24 +35,24 @@ Vue.use(Vuex);
 Vue.use(VueAxios, axios);
 IconifyIcon.addIcon("home", homeIconData);
 
+>>>>>>> origin
 Vue.use(ReadMore);
 Vue.prototype.$axios = axios;
 
-//temporary comented for build
 // const firebaseConfig = {
-//   apiKey: "AIzaSyDu9rL6_YDSeTyU89tF8JcI9kWNR6617Fg",
-//   authDomain: "bridge-africa-api.firebaseapp.com",
-//   projectId: "bridge-africa-api",
-//   storageBucket: "bridge-africa-api.appspot.com",
-//   messagingSenderId: "50055115922",
-//   appId: "1:50055115922:web:81e9b59a354a0c6e9ee24b",
-//   measurementId: "G-9K2WHP9Y13",
+//   apiKey: process.env.API_KEY,
+//   authDomain: process.env.AUTH_DOMAIN,
+//   projectId: process.env.PROJECT_ID,
+//   storageBucket: process.env.STORAGE_BUCKET,
+//   messagingSenderId: process.env.MESSAGING_SENDER_ID,
+//   appId: process.env.APP_ID,
+//   measurementId: process.env.MEARSUREMENT_ID,
 // };
-//
+
 // firebase.initializeApp(firebaseConfig);
-//
+
 // const messaging = firebase.messaging();
-//
+
 // messaging
 //   .requestPermission()
 //   .then(() => {
@@ -59,6 +66,20 @@ Vue.prototype.$axios = axios;
 //   });
 
 Vue.use(VueSocialauth, {
+<<<<<<< HEAD
+  providers: {
+    facebook: {
+      clientId: process.env.VUE_APP_FACEBOOK_CLIENT_ID,
+      client_secret: process.env.VUE_APP_FACEBOOK_CLIENT_SECRETE,
+      redirectUri: process.env.VUE_APP_FACEBOOK_RETURN_URL,
+    },
+    google: {
+      clientId: process.env.VUE_APP_GOOGLE_CLIENT_ID,
+      client_secret: process.env.VUE_APP_GOOGLE_CLIENT_SECRETE,
+      redirectUri: process.env.VUE_APP_GOOGLE_RETURN_URL,
+    },
+  },
+=======
     providers: {
         facebook: {
             clientId: process.env.VUE_APP_FACEBOOK_CLIENT_ID,
@@ -71,6 +92,7 @@ Vue.use(VueSocialauth, {
             redirectUri: process.env.VUE_APP_GOOGLE_RETURN_URL
         }
     }
+>>>>>>> origin
 });
 
 import FlashMessage from "@smartweb/vue-flash-message";
@@ -177,5 +199,5 @@ new Vue({
         );
     },
 
-  render: (h) => h(App),
+  render: h => h(App),
 }).$mount("#app");

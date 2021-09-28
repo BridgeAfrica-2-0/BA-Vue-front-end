@@ -13,40 +13,30 @@ export default {
 
     businessAround: [],
     peopleAround: [],
-    categories:[],
-    subcategories:[],
-    filters:[],
-    category_fiters:[],
-    country:[],
-    region:[],
-    municipality:[],
-    locality:[],
-    division:[],
-
-
-    
+    categories: [],
+    subcategories: [],
+    filters: [],
+    category_fiters: [],
+    country: [],
+    region: [],
+    municipality: [],
+    locality: [],
+    division: [],
   },
-
-
 
   mutations: {
     setUserData(state, userData) {
-      state.user = userData
+      state.user = userData;
 
-      localStorage.setItem('user', JSON.stringify(userData))
-      axios.defaults.headers.common.Authorization = `Bearer ${userData.accessToken}`
+      localStorage.setItem("user", JSON.stringify(userData));
+      axios.defaults.headers.common.Authorization = `Bearer ${userData.accessToken}`;
 
-      const userInfo = localStorage.getItem('user')
-
-
+      const userInfo = localStorage.getItem("user");
     },
-
-
 
     setCountry(state, data) {
       state.country = data;
     },
-
 
     setRegion(state, data) {
       state.region = data;
@@ -59,11 +49,10 @@ export default {
     setMunicipality(state, data) {
       state.municipality = data;
     },
-  
+
     setLocality(state, data) {
       state.locality = data;
     },
-
 
     setCategories(state, data) {
       state.categories = data;
@@ -73,66 +62,46 @@ export default {
       state.subcategories = data;
     },
 
-
     setFilters(state, data) {
       state.filters = data;
     },
-
 
     Setcategoryfiters(state, data) {
       state.category_fiters = data;
     },
 
-
-
-
-
-
-    setPeopleAround(state, data){
-
-       state.peopleAround=data;
+    setPeopleAround(state, data) {
+      state.peopleAround = data;
     },
 
-    setBusinessAround(state, data){
-
-      state.businessAround=data;
-   },
-
-
+    setBusinessAround(state, data) {
+      state.businessAround = data;
+    },
 
     setVerifyToken(state, data) {
       state.verifyToken = data;
     },
 
-
     setRegisterdata(state, data) {
       state.registerData = data;
     },
-
-
 
     setPasswordToken(state, data) {
       state.passwordToken = data;
     },
 
     clearUserData() {
-      localStorage.removeItem('user')
-      location.reload()
+      localStorage.removeItem("user");
+      location.reload();
     },
-
   },
 
   actions: {
-
     login({ commit }, credentials) {
       return axios.post("user/login", credentials).then(({ data }) => {
         commit("setUserData", data.data);
       });
     },
-
-
-
-
 
     country({ commit }) {
       return axios.get("countries").then(({ data }) => {
@@ -140,9 +109,6 @@ export default {
         commit("setCountry", data.data);
       });
     },
-  
-
-
 
     region({ commit }, data) {
       return axios.post("regions", data).then(({ data }) => {
@@ -151,14 +117,12 @@ export default {
       });
     },
 
-
     municipality({ commit }, data) {
-      return axios.get("councils",data).then(({ data }) => {
+      return axios.get("councils", data).then(({ data }) => {
         console.log(data);
-        commit("setMunicipality", data.data); 
+        commit("setMunicipality", data.data);
       });
     },
-
 
     locality({ commit }, data) {
       return axios.post("neighborhoods", data).then(({ data }) => {
@@ -167,17 +131,12 @@ export default {
       });
     },
 
-
-
-    
     division({ commit }, data) {
       return axios.get("divisions ", data).then(({ data }) => {
         console.log(data);
         commit("setDivision", data.data);
       });
     },
-
-
 
     categories({ commit }) {
       return axios.get("category").then(({ data }) => {
@@ -186,18 +145,12 @@ export default {
       });
     },
 
-    
     subcategories({ commit }, data) {
       return axios.post("catergory/subcategory", data).then(({ data }) => {
         console.log(data);
         commit("setSubcategories", data.data);
       });
     },
-
-
-
-
-
 
     filters({ commit }) {
       return axios.get("user/completewelcome").then(({ data }) => {
@@ -206,8 +159,6 @@ export default {
       });
     },
 
-
-  
     Setcategoryfiters({ commit }) {
       return axios.get("user/completewelcome").then(({ data }) => {
         console.log(data);
@@ -215,104 +166,57 @@ export default {
       });
     },
 
-
-    completeWelcome({commit}){
-
-      return axios
-      .get('user/completewelcome')
-      .then(({ data }) => {
+    completeWelcome({ commit }) {
+      return axios.get("user/completewelcome").then(({ data }) => {
         console.log(data);
-        commit('setUserData', data.data)
-
-      })
+        commit("setUserData", data.data);
+      });
     },
 
-    businessAround( {commit} ){
-
-      return axios
-      .get('business/around')
-      .then(({ data }) => {
-        commit('setBusinessAround', data.data);
+    businessAround({ commit }) {
+      return axios.get("business/around").then(({ data }) => {
+        commit("setBusinessAround", data.data);
         console.log(data);
-
-      })
-
+      });
     },
 
-
-
-    peopleAround( {commit} ){
-
-      return axios
-      .get('people/around')
-      .then(({ data }) => {
-        commit('setPeopleAround', data.data);
+    peopleAround({ commit }) {
+      return axios.get("people/around").then(({ data }) => {
+        commit("setPeopleAround", data.data);
         console.log(data);
-
-      })
-
+      });
     },
-
-
-
-
 
     storeRegisterData({ commit }, userdata) {
-
-
-      commit('setUserData', userdata)
+      commit("setUserData", userdata);
     },
 
-
-
-
-
     logout({ commit }) {
-      commit('clearUserData')
-    }
-
-    ,
-
-
+      commit("clearUserData");
+    },
 
     recoverPassword2({ commit }, data) {
       return axios.post("user/reset", data).then(({ data }) => {
-        console.log(data.data);
+        console.log(data);
 
         commit("setPasswordToken", data.data);
       });
     },
 
-
-
-
     verify({ commit }, mydata) {
+      const url = "user/verifyOtp/" + this.state.auth.user.user.id;
 
+      return axios.post(url, mydata).then(({ data }) => {
+        console.log(data.data);
 
-      const url = 'user/verifyOtp/' + this.state.auth.user.user.id
-
-
-
-      return axios
-        .post(url, mydata)
-        .then(({ data }) => {
-          console.log(data.data);
-
-          commit('setUserData', data.data)
-
-        })
-
-
-    }
+        commit("setUserData", data.data);
+      });
+    },
   },
 
   getters: {
-    isLogged: state => !!state.user,
-    isVerified: state => !!state.user,
-    user: state => state.user
+    isLogged: (state) => !!state.user,
+    isVerified: (state) => !!state.user,
+    user: (state) => state.user,
   },
-
-}
-
-
-
+};

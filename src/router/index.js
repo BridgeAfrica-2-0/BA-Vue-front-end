@@ -84,18 +84,24 @@ const routes = [
     path: "/dashboard",
     name: "dashboard",
     component: dashboard,
+<<<<<<< HEAD
+=======
     meta: {
       auth: true
     }
+>>>>>>> origin
   },
 
   {
     path: "/profile_owner",
     name: "profile_owner",
     component: profile_owner,
+<<<<<<< HEAD
+=======
     meta: {
      // auth: true
     }
+>>>>>>> origin
   },
   {
     path: "/template_viewer",
@@ -138,11 +144,14 @@ const routes = [
     path: "/business_owner/network/:id?",
     name: "networks",
     component: networks,
+<<<<<<< HEAD
+=======
   },
   {
     path: "/networks",
     name: "networks",
     component: networks,
+>>>>>>> origin
   },
   {
     path: "/login",
@@ -181,8 +190,12 @@ const routes = [
   {
     path: "/businessfollower/:id?",
     name: "BusinessFollower",
+<<<<<<< HEAD
+    component: businessFollower,
+=======
 
     component: businessFollower
+>>>>>>> origin
   },
   {
     path: "/businessvisitor",

@@ -1,17 +1,18 @@
 import { mapGetters } from "vuex";
 
 export const loader = {
-    computed:{
+    computed: {
         ...mapGetters({
-            loading:'search/LOADING'
-          })
+            loading: 'search/LOADING'
+        })
     },
 
     data: () => ({
         overlay: null
     }),
-    watch:{
-        loading: function (newValue){
+    watch: {
+        loading: function (newValue) {
+            console.log('mixins', this.loading)
             if (newValue)
                 this.overlay = this.$loading.show({
                     container: this.$refs.formContainer,

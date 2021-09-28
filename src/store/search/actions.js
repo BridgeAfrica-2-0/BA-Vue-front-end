@@ -5,9 +5,8 @@ export const actions = {
     
     [TYPES.FIND_USER]({commit},payload) {
         commit(TYPES.RESET_RESULT)
-        axios.get(`search/listUsers/q=${payload}`)
+        axios.get(`search/listUsers/?q=${payload}`)
         .then(({ data }) => {
-            console.log(data);
             commit(TYPES.FIND_USER, data.data)
         })
     }, 
@@ -18,6 +17,18 @@ export const actions = {
         .then(({ data }) => {
             commit(TYPES.FIND_PROFESSION, data.data)
         })
-    }, 
+    },
+
+    [TYPES.FIND_COMMUNITY]({commit},payload) {
+        commit(TYPES.RESET_RESULT)
+        axios.post(`search/community/profession`, payload)
+        .then(({ data }) => {
+            commit(TYPES.FIND_COMMUNITY, data.data)
+        })
+    },
+
+    [TYPES.LOADING]({commit}){
+        commit(TYPES.LOADING)
+    }
 
 }

@@ -12,10 +12,12 @@ import profile from "./profile";
 
 
 import axios from "axios";
-import { search } from "./search/people";
+import { search } from "./search";
 
 Vue.use(Vuex);
- axios.defaults.baseURL = process.env.VUE_APP_API_URL; 
+
+//axios.defaults.baseURL = process.env.VUE_APP_API_URL; 
+axios.defaults.baseURL = "https://e9f3-154-72-150-40.ngrok.io/api/v1/"
 
 export default new Vuex.Store({
   modules: {

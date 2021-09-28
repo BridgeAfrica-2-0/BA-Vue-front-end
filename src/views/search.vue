@@ -1,6 +1,13 @@
 <template>
   <div style="overflow-x: hidden; color: black">
-    <Nav />
+    <Nav 
+      :credentials.sync="navBarParams"
+    >  
+      <template v-slot:button>
+        <Button @click.native="strategy['users']"/>
+      </template>
+    </Nav>
+
 
     <SubNav
       @category="getCategory"
@@ -497,7 +504,6 @@
                 <fas-icon class="icons" :icon="['fas', 'users']" size="lg" />
                 People
               </h6>
-
               <People v-for="(people,index) in peoples" :people="people"  :key="index" />
             </div>
 
@@ -566,9 +572,14 @@
 </template>
 
 <script>
+
+import _ from 'lodash'
+
 import LyTab from "@/tab/src/index.vue";
 
 import Map from "@/components/search/map";
+
+import Button from "@/components/ButtonNavBarFind"
 
 import Business from "@/components/search/business";
 import People from "@/components/search/people";
@@ -583,13 +594,14 @@ import SubNav from "@/components/subnav";
 
 import Sponsor from "@/components/search/sponsoredBusiness";
 
-import { PeopleFilter } from "@/components/search/peopleFilters";
-import { PostFilter } from "@/components/search/postFilters";
+import { PeopleFilter,PostFilter } from "@/components/search";
 
-import {mapGetters} from 'vuex'
+import {mapGetters, mapActions} from 'vuex'
+
 
 export default {
   components: {
+    Button,
     LyTab,
     Nav,
     SubNav,
@@ -612,8 +624,19 @@ export default {
       peoples:'search/GET_RESULT'
     })
   },
+
+  created(){
+    this.strategy = {
+      'users': () => this.onFindUser()
+    }
+  },
   data() {
     return {
+      navBarParams:{
+        username:'',
+        placeholder:'Find user'
+      },
+      strategy: null,
       selected: "all",
       selectedId: 0,
       Setcategoryr: "all",
@@ -1553,6 +1576,14 @@ export default {
   },
 
   methods: {
+    ...mapActions({
+      find: 'search/FIND_USER'
+    }),
+
+    onFindUser() {
+      this.find(this.navBarParams.username)
+    },
+
     SetCat(cat) {
       console.log(cat);
 

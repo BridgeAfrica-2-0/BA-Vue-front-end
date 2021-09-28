@@ -43,8 +43,7 @@
                 data-toggle="popover"
                 class="form-control  search-mobile "
                 style=" border-left: none; "
-                :placeholder="credentials.placeholder"
-                v-model="credentials.username"
+                placeholder="Find Pharmacies"
                 aria-label=""
                 data-original-title=""
                 title=""
@@ -99,8 +98,9 @@
                 type="search"
                 data-toggle="popover"
                 class="form-control  search-h"
-                style=" "
-                placeholder="Find Pharmacy"
+                style=""
+                :placeholder="credentials.placeholder"
+                v-model="credentials.username"
                 aria-label=""
                 data-original-title=""
                 title=""
@@ -123,23 +123,10 @@
                 <option value=" Current Location "> </option>
                 <option value="Yaounde " />
               </datalist>
-
-              <div
-                class="input-group-append color-sit"
-                style="color:white;   border-top-right-radius: 10px;
-            border-bottom-right-radius: 10px; "
-              >
-                <span
-                  class="input-group-text border-left-0 color-sit "
-                  style="width:56px"
-                >
-                  <b-icon
-                    icon="search"
-                    style="color:white"
-                    font-scale="1.5"
-                  ></b-icon>
-                </span>
-              </div>
+             <slot name="button">
+               <Button />
+             </slot>
+              
             </form>
           </span>
           <div id="search-popover" class="d-none"></div>
@@ -616,17 +603,24 @@
 </template>
 
 <script>
+
+import Button from './ButtonNavBarFind.vue'
+
 export default {
   name: "navbar",
-
+  components:{
+    Button
+  },
   props: {
     credentials:{
       type: Object,
-      default:() => ({
-        username:'test me',
-        placeholder:'hello man'
-      })
-    }
+      default: function(){
+        return {
+          username:'',
+          placeholder:''
+        }
+      }
+    },
   },
 
   data() {
@@ -637,6 +631,8 @@ export default {
   },
 
   methods: {
+
+
     toggleinput() {
       this.$refs.mobileinput.style.display = "block";
       this.isActive = true;

@@ -111,7 +111,14 @@
           </b-card>
         </b-collapse>
         <!--end network section-->
+         <Button
+          @click.native="onProcess"
+          title="Search" 
+          class="mt-4"
+          fas="fas fa-search  fa-lg btn-icon " 
+          />
       </b-card>
+     
     </b-collapse>
   </div>
 </template>
@@ -127,7 +134,13 @@ const options = [
   { text: "Community", value: "Community" },
 ];
 
+import Button from "@/components/Button"
+
 export default {
+
+  components:{
+    Button
+  },
   data: () => ({
     profession:null,
     rootSectionIsVisible: false,
@@ -143,15 +156,36 @@ export default {
    
   }),
 
-  created(){
-    this.$emit('new:people', this.peoples);
-  },
+  
   methods: {
     ...mapActions({
-      findProfession: 'search/FIND_PROFESSION'
+      findProfession: 'search/FIND_PROFESSION',
+      findCommunity: 'search/FIND_COMMUNITY'
     }),
-     debounceInput: _.debounce(function (e) {
-     console.log(e)
+
+    map(data,type){
+      return data.map(e => `${type}_${e.toLowerCase()}`)
+    },
+
+    onProcess(){
+      const user = this.map(this.selectedPeople, `user`)
+      const buisness = this.map(this.selectedBuisness, `buisness`)
+      const network = this.map(this.selectedNetwork, `network`)
+      
+      const data = [...user,...buisness,...network].reduce(
+        (hash,value) => {
+          hash[value] = ""
+          return hash
+        }
+        ,{}
+      )
+
+      this.findCommunity(data)
+
+    },
+    
+    debounceInput: _.debounce(function (e) {
+     
      this.findProfession(e)
     }, 1000),
 

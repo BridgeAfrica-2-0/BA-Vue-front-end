@@ -100,7 +100,6 @@ export default {
   props:{
     people:{
       type: Object,
-      required: true
     }
     
   }

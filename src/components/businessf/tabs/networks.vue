@@ -158,6 +158,7 @@ export default {
       Joining: "businessFollowers/Joining",
     }),
 
+    //To join a network
     joinNetwork() {
       this.Joining();
     },

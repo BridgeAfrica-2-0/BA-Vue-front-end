@@ -87,7 +87,7 @@
     </b-col>
     <div class="engage" v-if="!getNetworksFromStore && !loader">
       <div class="mx-auto text-center my-5">
-        <h2 class="my-3">Builds networks around your Business</h2>
+        <h2 class="my-3">Build networks around your Business</h2>
         <p class="my-2">
           you want Engage, share, Make Plans and much more
         </p>
@@ -931,7 +931,6 @@ p {
     font-size: 15px;
   }
 }
-
 @media only screen and (max-width: 720px) {
   .card-body {
     padding: 0px;
@@ -946,7 +945,6 @@ p {
     padding: 2px;
   }
 }
-
 .t-color {
   color: #000;
 }

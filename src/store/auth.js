@@ -2,6 +2,7 @@ import axios from "axios";
 
 axios.defaults.baseURL = process.env.VUE_APP_API_URL;
 
+
 export default {
   namespaced: true,
 
@@ -112,7 +113,7 @@ export default {
 
   actions: {
 
-    login({ commit }, credentials) {
+    login({ commit }, credentials) {alert("hello")
       return axios.post("user/login", credentials).then(({ data }) => {
         commit("setUserData", data.data);
       });

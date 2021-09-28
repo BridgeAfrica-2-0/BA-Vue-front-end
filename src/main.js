@@ -5,7 +5,7 @@ import router from "./router";
 import store from "./store";
 import { BootstrapVue, IconsPlugin } from "bootstrap-vue";
 import axios from "axios";
-import VueAxios from "vue-axios";
+// import VueAxios from "vue-axios";
 import VueGallerySlideshow from "vue-gallery-slideshow";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { fas } from "@fortawesome/free-solid-svg-icons";
@@ -25,7 +25,7 @@ import LoadScript from 'vue-plugin-load-script';
 
 Vue.use(LoadScript);
 Vue.use(Vuex);
-Vue.use(VueAxios, axios);
+//Vue.use(VueAxios, axios);
 IconifyIcon.addIcon("home", homeIconData);
 
 Vue.use(ReadMore);
@@ -165,16 +165,16 @@ new Vue({
             const userData = JSON.parse(userInfo);
             this.$store.commit("auth/setUserData", userData);
         }
-        axios.interceptors.response.use(
-            (response) => response,
-            (error) => {
-                if (error.response.status === 401) {
-                    // this.$store.dispatch("auth/logout");
-                    console.log("error has occure");
-                }
-                return Promise.reject(error);
-            }
-        );
+        // axios.interceptors.response.use(
+        //     (response) => response,
+        //     (error) => {
+        //         if (error.response.status === 401) {
+        //             // this.$store.dispatch("auth/logout");
+        //             console.log("error has occure");
+        //         }
+        //         return Promise.reject(error);
+        //     }
+        // );
     },
 
   render: (h) => h(App),

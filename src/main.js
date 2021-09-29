@@ -25,6 +25,8 @@ Vue.use(VueAxios, axios);
 
 import LoadScript from 'vue-plugin-load-script';
 
+import { loader } from "./mixins"
+
 
 
 Vue.use(LoadScript);
@@ -144,7 +146,7 @@ import VueAgile from 'vue-agile'
 
 Vue.use(VueAgile);
 
-  
+
 
 
 Vue.component("v-select", vSelect);
@@ -168,14 +170,22 @@ new Vue({
         axios.interceptors.response.use(
             (response) => response,
             (error) => {
+
+                // remove loader when request return error
+                this.$store.dispatch("search/LOADING", false);
+
                 if (error.response.status === 401) {
                     // this.$store.dispatch("auth/logout");
                     console.log("error has occure");
+
+
                 }
                 return Promise.reject(error);
             }
         );
     },
 
+
   render: h => h(App),
+
 }).$mount("#app");

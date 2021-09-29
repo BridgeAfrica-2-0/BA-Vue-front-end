@@ -23,7 +23,6 @@ export default {
 
     peopleFollowing: [],
     peopleFollowers: [],
-    success: false,
     communityPeople: [],
     CommunityBusiness: [],
     communityTotal: [],
@@ -291,6 +290,7 @@ export default {
     },
     // Get networks from the backend
     async getNetworks({ commit }) {
+      let sucData = [];
       await axios
         .get("network", {
           headers: {

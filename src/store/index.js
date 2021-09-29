@@ -8,10 +8,7 @@ import dashboardcommunity from "./dashboardcommunity";
 import ProfileAndBusinessDetails from "./ProfileAndBusinessDetails";
 import businessFollowers from "./businessFollowers";
 import market from "./market";
-import ProfileAndBusinessDetails from "./ProfileAndBusinessDetails";
 import hotbusiness from "./hotbusiness";
-import networkDetails from "./networkDetails";
-import dashboardcommunity from "./dashboardcommunity";
 import profile from "./profile";
 import follower from "./follower";
 

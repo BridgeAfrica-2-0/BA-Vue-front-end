@@ -18,24 +18,17 @@ import homeIconData from "@iconify-icons/mdi-light/home";
 import ReadMore from "vue-read-more";
 import VueSocialauth from "vue-social-auth";
 // import firebase from "firebase";
-<<<<<<< HEAD
-
 IconifyIcon.addIcon("home", homeIconData);
 
 Vue.use(Vuex);
 Vue.use(VueAxios, axios);
-=======
 
 import LoadScript from 'vue-plugin-load-script';
 
 
 
 Vue.use(LoadScript);
-Vue.use(Vuex);
-Vue.use(VueAxios, axios);
-IconifyIcon.addIcon("home", homeIconData);
 
->>>>>>> origin
 Vue.use(ReadMore);
 Vue.prototype.$axios = axios;
 
@@ -66,7 +59,6 @@ Vue.prototype.$axios = axios;
 //   });
 
 Vue.use(VueSocialauth, {
-<<<<<<< HEAD
   providers: {
     facebook: {
       clientId: process.env.VUE_APP_FACEBOOK_CLIENT_ID,
@@ -78,21 +70,7 @@ Vue.use(VueSocialauth, {
       client_secret: process.env.VUE_APP_GOOGLE_CLIENT_SECRETE,
       redirectUri: process.env.VUE_APP_GOOGLE_RETURN_URL,
     },
-  },
-=======
-    providers: {
-        facebook: {
-            clientId: process.env.VUE_APP_FACEBOOK_CLIENT_ID,
-            client_secret: process.env.VUE_APP_FACEBOOK_CLIENT_SECRETE,
-            redirectUri: process.env.VUE_APP_FACEBOOK_RETURN_URL
-        },
-        google: {
-            clientId: process.env.VUE_APP_GOOGLE_CLIENT_ID,
-            client_secret: process.env.VUE_APP_GOOGLE_CLIENT_SECRETE,
-            redirectUri: process.env.VUE_APP_GOOGLE_RETURN_URL
-        }
-    }
->>>>>>> origin
+  }
 });
 
 import FlashMessage from "@smartweb/vue-flash-message";

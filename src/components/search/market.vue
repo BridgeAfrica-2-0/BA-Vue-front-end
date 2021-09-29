@@ -28,7 +28,7 @@
             <b-link class="text"> see more </b-link> <br />
 
             <span class="price">
-              <strong> {{ prod.price }} Fcfa </strong>
+              <strong> {{ prod.price }}  Fcfa </strong>
             </span>
           </p>
 
@@ -41,7 +41,7 @@
     <!-- pagination -->
 
     <b-pagination
-    v-if="products.data.length > 0"
+    v-if="products.next"
       v-model="currentPage"
       :total-rows="total"
       :per-page="per_page"
@@ -434,6 +434,7 @@ export default {
   created() {
     if (!this.products.length) {
       this.getProducts();
+      console.log("[debug]baseUrl : ", process.env.VUE_APP_API_URL_DEV);
     }
   },
 

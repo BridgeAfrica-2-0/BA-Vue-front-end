@@ -766,7 +766,7 @@ export default {
       slide: 0,
       sliding: null,
 
-      priceRange: "1000",
+      priceRange: 1000,
       showform: false,
       selectsp: "",
       selectsb: "",
@@ -1853,6 +1853,13 @@ export default {
 
     searchByDistance(value) {
       console.log("[DEBUG] PRICE: ", value);
+      console.log("[DEBUG] subcat: ", this.subCategories[0].cat_id);
+      let catId = this.subCategories[0].cat_id;
+      let data = {
+        cat_id: catId,
+        price_range: `${[1000, value]}`,
+      };
+      this.searchProducts(data);
     },
 
     selectedsidebar() {

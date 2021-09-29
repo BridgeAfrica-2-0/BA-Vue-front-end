@@ -1,6 +1,10 @@
 <template>
   <div style="overflow-x: hidden; color: black">
-    <Nav />
+    <Nav :credentials.sync="navBarParams">
+      <template v-slot:button>
+        <Button @click.native="searchProducts" v-if="selectedId == 4" />
+      </template>
+    </Nav>
 
     <SubNav
       @category="getCategory"
@@ -517,6 +521,19 @@
             <!-- Filter out just the market place -->
 
             <div v-if="selectedId == '4'">
+              <h6>
+                Sponsored Result
+                <fas-icon
+                  class="icons"
+                  :icon="['fas', 'exclamation-circle']"
+                  size="lg"
+                />
+              </h6>
+
+              <div>
+                <Sponsor />
+              </div> 
+
               <h6 class="mb-3">
                 <fas-icon class="icons" :icon="['fas', 'store']" size="lg" />
                 Market
@@ -579,6 +596,7 @@ import Filters from "@/components/search/filters";
 import SubNav from "@/components/subnav";
 
 import Sponsor from "@/components/search/sponsoredBusiness";
+import Button from '@/components/ButtonNavBarFind'
 
 export default {
   components: {
@@ -593,11 +611,16 @@ export default {
     Network,
     Post,
     Market,
+    Button
 
     // Footer,
   },
   data() {
     return {
+      navBarParams: {
+        keyword: "",
+        placeholder: "Find Pharmacy",
+      },
       alert: false,
       showDismissibleAlert: false,
       prodLoader: false,
@@ -1545,6 +1568,10 @@ export default {
 
   methods: {
     // [ED]----------
+    getKeyword(){
+      console.log(this.navBarParams.keyword);
+      console.log("[DEBUG]", this.subCategories);
+    },
     async getProducts() {
       this.prodLoader = true;
       console.log("loader: ", this.prodLoader);
@@ -1565,6 +1592,17 @@ export default {
           console.log("products error: ");
           console.error(err);
           this.showDismissibleAlert = false;
+        });
+    },
+
+    searchProducts() {
+      this.$store
+        .dispatch("market/searchProducts", {keyword: this.navBarParams.keyword})
+        .then((res) => {
+          // console.log("categories loaded!");
+        })
+        .catch((err) => {
+          console.log("Error erro!");
         });
     },
     // ------------

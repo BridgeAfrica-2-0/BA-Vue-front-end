@@ -192,14 +192,11 @@
                       <multiselect
                         v-model="country"
                         @input="Region"
-                        tag-placeholder="Add this as new tag"
-                        placeholder="Search or add a tag"
+                        placeholder="Search "
                         label="name"
                         track-by="id"
                         :options="countries"
                         :multiple="true"
-                        :taggable="true"
-                        @tag="addTag"
                       ></multiselect>
                     </div>
                   </div>
@@ -211,14 +208,11 @@
                       <multiselect
                         v-model="region"
                         @input="Division"
-                        tag-placeholder="Add this as new tag"
-                        placeholder="Search or add a tag"
+                        placeholder="Search"
                         label="name"
                         track-by="id"
                         :options="regions"
                         :multiple="true"
-                        :taggable="true"
-                        @tag="addTag"
                       ></multiselect>
                     </div>
                   </div>
@@ -230,14 +224,11 @@
                       <multiselect
                         v-model="division"
                         @input="Municipality"
-                        tag-placeholder="Add this as new tag"
-                        placeholder="Search or add a tag"
+                        placeholder="Search"
                         label="name"
                         track-by="id"
                         :options="divisions"
                         :multiple="true"
-                        :taggable="true"
-                        @tag="addTag"
                       ></multiselect>
                     </div>
                   </div>
@@ -251,14 +242,11 @@
                       <multiselect
                         v-model="municipality"
                         @input="Locality"
-                        tag-placeholder="Add this as new tag"
-                        placeholder="Search or add a tag"
+                        placeholder="Search"
                         label="name"
                         track-by="id"
                         :options="municipalities"
                         :multiple="true"
-                        :taggable="true"
-                        @tag="addTag"
                       ></multiselect>
                     </div>
                   </div>
@@ -271,14 +259,11 @@
                       ><br />
                       <multiselect
                         v-model="locality"
-                        tag-placeholder="Add this as new tag"
-                        placeholder="Search or add a tag"
+                        placeholder="Search"
                         label="name"
                         track-by="id"
                         :options="localities"
                         :multiple="true"
-                        :taggable="true"
-                        @tag="addTag"
                       ></multiselect>
                     </div>
                   </div>
@@ -382,10 +367,13 @@
               lg="6"
               class="p-0"
               v-for="business in profilebusiness"
-              :key="business.id"
+              :key="business.business_id"
             >
               <div class="people-style shadow">
-                <b-link v-b-modal.createBusinessModal>
+                <b-link
+                  v-b-modal.createBusinessModal
+                  @click="editBusiness(business.business_id)"
+                >
                   <div class="float-right">
                     <b-icon
                       icon="three-dots-vertical"
@@ -441,9 +429,6 @@
   </div>
 </template>
 
-
-
-
 <script>
 import axios from "axios";
 
@@ -459,7 +444,7 @@ export default {
   data() {
     return {
       useas: "",
-
+      editbiz: "",
       selectedusecase: "",
       phone1: null,
       phone2: null,
@@ -510,7 +495,7 @@ export default {
         { name: "Javascript", code: "js" },
         { name: "Open Source", code: "os" },
       ],
- timezone: [
+      timezone: [
         { text: "(GMT+1) West African ", value: "+1" },
         { text: "(GMT-11:00) Midway Island, Samoa", value: "-11" },
       ],
@@ -528,12 +513,39 @@ export default {
       business_name: {
         required,
       },
-
     },
   },
 
   methods: {
+    editBusiness(id) {
+      axios
+        .get("business/edit/" + id)
+        .then(({ data }) => {
+          console.log(data);
+        })
+        .catch((err) => {
+          console.log({ err: err });
+        });
+    },
     addTag(newTag) {
+      const tag = {
+        name: newTag,
+        id: newTag.substring(0, 2) + Math.floor(Math.random() * 10000000),
+      };
+      this.multiselec.push(tag);
+      this.multiselecvalue.push(tag);
+    },
+
+    addkeywords(newTag) {
+      const tag = {
+        name: newTag,
+        id: newTag.substring(0, 2) + Math.floor(Math.random() * 10000000),
+      };
+      this.keywordds.push(tag);
+      this.business_keyword.push(tag);
+    },
+
+    addCategoryTag(newTag) {
       const tag = {
         name: newTag,
         id: newTag.substring(0, 2) + Math.floor(Math.random() * 10000000),
@@ -549,84 +561,6 @@ export default {
       };
       this.multiselec.push(tag);
       this.filterselectvalue.push(tag);
-    },
-
-    Country() {
-      this.$store
-        .dispatch("auth/country")
-        .then(() => {
-          console.log("hey yeah");
-        })
-        .catch((err) => {
-          console.log({ err: err });
-        });
-    },
-
-    profileBusiness() {
-      this.$store
-        .dispatch("profile/profileBusiness")
-        .then(() => {
-          console.log("hey yeah");
-        })
-        .catch((err) => {
-          console.log({ err: err });
-        });
-    },
-
-    Region() {
-      let formData2 = new FormData();
-      formData2.append("country_id", this.selectedcountry);
-
-      this.$store
-        .dispatch("auth/region", formData2)
-        .then(() => {
-          console.log("hey yeah");
-        })
-        .catch((err) => {
-          console.log({ err: err });
-        });
-    },
-
-    Division() {
-      let formData2 = new FormData();
-      formData2.append("regionId", this.selectedregion);
-
-      this.$store
-        .dispatch("auth/division", formData2)
-        .then(() => {
-          console.log("hey yeah");
-        })
-        .catch((err) => {
-          console.log({ err: err });
-        });
-    },
-
-    Municipality() {
-      let formData2 = new FormData();
-      formData2.append("divisionId", this.selecteddivision);
-
-      this.$store
-        .dispatch("auth/municipality", formData2)
-        .then(() => {
-          console.log("hey yeah");
-        })
-        .catch((err) => {
-          console.log({ err: err });
-        });
-    },
-
-    Locality() {
-      let formData2 = new FormData();
-      formData2.append("council_id", this.selectedmunicipality);
-
-      this.$store
-        .dispatch("auth/locality", formData2)
-        .then(() => {
-          console.log("hey yeah");
-        })
-        .catch((err) => {
-          console.log({ err: err });
-        });
     },
 
     categories() {
@@ -676,7 +610,84 @@ export default {
         });
     },
 
-    setLoading: function (value) {
+    Country() {
+      this.$store
+        .dispatch("auth/country")
+        .then(() => {
+          console.log("hey yeah");
+        })
+        .catch((err) => {
+          console.log({ err: err });
+        });
+    },
+
+    profileBusiness() {
+      this.$store
+        .dispatch("profile/profileBusiness")
+        .then(() => {
+          console.log("hey yeah");
+        })
+        .catch((err) => {
+          console.log({ err: err });
+        });
+    },
+
+    Region() {
+      let formData2 = new FormData();
+      formData2.append("countryId", this.selectedcountry);
+
+      this.$store
+        .dispatch("auth/region", formData2)
+        .then(() => {
+          console.log("hey yeah");
+        })
+        .catch((err) => {
+          console.log({ err: err });
+        });
+    },
+
+    Division() {
+      let formData2 = new FormData();
+      formData2.append("regionId", this.selectedregion);
+
+      this.$store
+        .dispatch("auth/division", formData2)
+        .then(() => {
+          console.log("hey yeah");
+        })
+        .catch((err) => {
+          console.log({ err: err });
+        });
+    },
+
+    Municipality() {
+      let formData2 = new FormData();
+      formData2.append("divisionId", this.selecteddivision);
+
+      this.$store
+        .dispatch("auth/municipality", formData2)
+        .then(() => {
+          console.log("hey yeah");
+        })
+        .catch((err) => {
+          console.log({ err: err });
+        });
+    },
+
+    Locality() {
+      let formData2 = new FormData();
+      formData2.append("councilId", this.selectedmunicipality);
+
+      this.$store
+        .dispatch("auth/locality", formData2)
+        .then(() => {
+          console.log("hey yeah");
+        })
+        .catch((err) => {
+          console.log({ err: err });
+        });
+    },
+    setLoading: function(value) {
       this.loadingWizard = value;
     },
 
@@ -723,7 +734,7 @@ export default {
           formData2.append("division", this.selecteddivision);
           formData2.append("council", this.selectedmunicipality);
 
-          formData2.append("neighborh", this.selectedlocality);
+          formData2.append("neigborhood", this.selectedlocality);
           formData2.append("lat", this.center.lat);
           formData2.append("lng", this.center.lng);
 
@@ -826,7 +837,7 @@ export default {
       }
     },
 
-    locateGeoLocation: function () {
+    locateGeoLocation: function() {
       navigator.geolocation.getCurrentPosition((res) => {
         this.center = {
           lat: res.coords.latitude,
@@ -834,7 +845,7 @@ export default {
         };
       });
     },
-    createBusiness: function () {
+    createBusiness: function() {
       return new Promise((resolve, reject) => {
         this.sendingB = true;
         let loader = this.$loading.show({
@@ -923,7 +934,7 @@ export default {
       });
     },
 
-    updateUserProfile: function () {
+    updateUserProfile: function() {
       return new Promise((resolve, reject) => {
         console.log("sending user data");
 
@@ -996,11 +1007,11 @@ export default {
       });
     },
 
-    chooseProfile1: function () {
+    chooseProfile1: function() {
       document.getElementById("profile1").click();
     },
 
-    chooseProfile2: function () {
+    chooseProfile2: function() {
       document.getElementById("profile2").click();
     },
 
@@ -1016,7 +1027,7 @@ export default {
       this.logoimg_url = URL.createObjectURL(logofile);
     },
 
-    chooselogo: function () {
+    chooselogo: function() {
       document.getElementById("logo").click();
     },
 
@@ -1059,53 +1070,53 @@ export default {
   },
 
   computed: {
-    profilebusiness: function () {
+    profilebusiness: function() {
       return this.$store.state.profile.profileBusiness;
     },
 
-    selectedcategories: function () {
+    selectedcategories: function() {
       let selectedUsers = [];
       this.multiselecvalue.forEach((item) => {
         selectedUsers.push(item.id);
       });
       return selectedUsers;
     },
-    selectedsubcategories: function () {
+    selectedsubcategories: function() {
       let sub_cat = [];
       this.filterselectvalue.forEach((item) => {
         sub_cat.push(item.sub_cat_id);
       });
       return sub_cat;
     },
-    selectedcountry: function () {
+    selectedcountry: function() {
       let sub_cat = [];
       this.country.forEach((item) => {
         sub_cat.push(item.id);
       });
       return sub_cat;
     },
-    selectedregion: function () {
+    selectedregion: function() {
       let sub_cat = [];
       this.region.forEach((item) => {
         sub_cat.push(item.id);
       });
       return sub_cat;
     },
-    selecteddivision: function () {
+    selecteddivision: function() {
       let sub_cat = [];
       this.division.forEach((item) => {
         sub_cat.push(item.id);
       });
       return sub_cat;
     },
-    selectedmunicipality: function () {
+    selectedmunicipality: function() {
       let sub_cat = [];
       this.municipality.forEach((item) => {
         sub_cat.push(item.id);
       });
       return sub_cat;
     },
-    selectedlocality: function () {
+    selectedlocality: function() {
       let sub_cat = [];
       this.locality.forEach((item) => {
         sub_cat.push(item.id);

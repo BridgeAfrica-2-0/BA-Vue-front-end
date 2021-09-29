@@ -3,17 +3,17 @@ import axios from "axios";
 export default {
   namespaced: true,
   state: {
-    bdetails: []
+    bdetails: [],
   },
   getters: {
     getdetails(state) {
       return state.bdetails;
-    }
+    },
   },
   mutations: {
     set_details(state, bdetails) {
       state.bdetails = bdetails;
-    }
+    },
   },
   actions: {
     getbdetails({ commit }) {
@@ -21,6 +21,6 @@ export default {
         commit("set_details", data.data);
         console.log(data);
       });
-    }
-  }
+    },
+  },
 };

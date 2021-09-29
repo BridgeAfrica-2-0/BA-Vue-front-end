@@ -1,6 +1,6 @@
 <template>
   <div class=" p-0 mt-3">
-    <div class="container-fluid">
+    <div class="container-fluid border">
       <b-tabs pills content-class="mt-3  f-left">
         <b-tab title="People" active>
           <People />
@@ -8,6 +8,10 @@
 
         <b-tab title="Businesses">
           <Business />
+        </b-tab>
+
+        <b-tab title="Netwoks">
+          <Network />
         </b-tab>
       </b-tabs>
     </div>
@@ -17,12 +21,14 @@
 <script>
 import Business from "./businesses/businesses";
 import People from "./people/people";
+import Network from "./network/network";
 
 export default {
   name: "SidebarCommunity",
   components: {
     Business,
-    People
+    People,
+    Network
   },
 
   data() {

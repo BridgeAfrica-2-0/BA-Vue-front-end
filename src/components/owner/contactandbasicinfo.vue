@@ -3,12 +3,11 @@
     <div class="row">
       <h6 class="col-md-12"><b>Basic Information</b></h6>
 
-      { {{info}}}}
       <hr />
     </div>
     <div class="row mb-1">
       <div class="col-md-4">Date Of Birth</div>
-      <div class="col-md-4">{{ birthDate }}</div>
+      <div class="col-md-4">{{ info.user.dob }}</div>
       <div class="col-md-4">
         <button
           type="button"

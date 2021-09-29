@@ -5,8 +5,12 @@
 
    <b-link class="mt-4 doc" v-b-modal.modal-11>
       <b-icon icon="plus" variant="primary"></b-icon>
-      Add Profession</b-link
+      Edit Profession</b-link
     > 
+    <br>
+
+
+    {{ this.$store.getters["profile/getProfileProfession"]}}
   <!--  
     <b-list-group-item class="d-flex align-items-center mb-4 b-none">
       <div class="datails">
@@ -73,7 +77,7 @@ export default {
       ],
       professions: [],
       professionInput: {
-        profession: null,
+        profession:  this.$store.getters["profile/getProfileProfession"],
         access: "private",
       },
       index: null,
@@ -83,8 +87,8 @@ export default {
     console.log("Load User Post About Profession");
     this.professions = JSON.parse(
       JSON.stringify(
-        this.$store.getters["profile/getProfileAboutEducationAndWorks"]
-          .professions
+        this.$store.getters["profile/getProfileProfession"]
+         
       )
     );
   },
@@ -93,12 +97,12 @@ export default {
       console.log("Cancel Add Profession in User  ++++++");
       this.professions = JSON.parse(
         JSON.stringify(
-          this.$store.getters["profile/getProfileAboutEducationAndWorks"]
-            .professions
+          this.$store.getters["profile/getProfileProfession"]
+            
         )
       );
       this.professionInput = {
-        profession: null,
+        profession:  this.$store.getters["profile/getProfileProfession"],
         access: "private",
       };
     },
@@ -115,7 +119,7 @@ export default {
         })
         .then((response) => {
           console.log("save new profession user end +++++", response);
-          this.$store.state.userData[0].profile_about.educationAndWorks =
+          this.$store.state.profile.profileIntro.user.profession =
             this.educationAndWorks;
           this.professionInput = {
             profession: null,

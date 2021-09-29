@@ -4,9 +4,9 @@ export default {
 
   state: {
     details: [],
-    profile:[],
+    profile: [],
 
-    business:[]
+    business: [],
   },
 
   actions: {
@@ -15,10 +15,10 @@ export default {
         commit("setdetails", data.data);
         commit("setBusiness", data.data.business);
         commit("setProfile", data.data.owner[0]);
-       
+
         console.log(data);
       });
-    }
+    },
   },
 
   mutations: {
@@ -26,20 +26,18 @@ export default {
       state.details = details;
     },
 
-
     setProfile(state, details) {
       state.profile = details;
     },
 
     setBusiness(state, details) {
       state.business = details;
-    }
-
+    },
   },
 
   getters: {
     getdetails(state) {
       return state.details;
-    }
-  }
+    },
+  },
 };

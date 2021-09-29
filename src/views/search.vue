@@ -617,6 +617,7 @@ export default {
     PeopleFilter,
     PostFilter,
 
+
     // Footer,
   },
 
@@ -660,7 +661,6 @@ export default {
       map: false,
       selectedfilter: "",
       showform: false,
-
       //selectcategories:[],
 
       categories_filters: [],
@@ -673,6 +673,7 @@ export default {
         { label: "Market" },
         { label: "Post" },
       ],
+
 
       Finished_Branded_Products_filters: [
         { value: "Peanuts", text: "Peanuts" },

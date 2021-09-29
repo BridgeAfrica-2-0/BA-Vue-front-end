@@ -21,6 +21,15 @@ export default {
     profile_about:[],
     profileIntro:[],
 
+    NcommunityFollower:[],
+    NcommunityFollowing:[],
+    BcommunityFollower:[],
+    BcommunityFollowing:[],
+   
+    UcommunityFollower:[],
+    UcommunityFollowing:[],
+    Tcommunity:[],
+
 
     userData: [
       {
@@ -155,9 +164,13 @@ export default {
     },
     getProfileAbout_(state) {
       return state.userData[0].profile_about_new;
+    }, 
+    getProfileProfession(state) {
+      return state.profileIntro.user.profession;
     },
+
     getProfileAboutEducationAndWorks(state) {
-      return state.userData[0].profile_about.educationAndWorks;
+      return state.profileIntro.user_education;
     },
     getProfileAbout(state) {
       return state.profile_about;
@@ -167,6 +180,56 @@ export default {
     }
   },
   mutations: {
+
+    //set community data  
+
+    setTcommunity(state, data){
+   
+      state.Tcommunity=data;
+ 
+    },
+     
+
+    setNcommunityFollower(state, data){
+
+      state.setNcommunityFollower = data;
+
+    },
+
+    setUcommunityFollowing(state, data){
+
+
+      state.UcommunityFollowing = data;
+
+    },
+
+
+    setUcommunityFollower(state, data){
+    
+      state.UcommunityFollower = data;
+
+    },
+
+    setBcommunityFollowing(state, data){
+      state.BcommunityFollowing = data;
+
+    },
+
+
+    setBcommunityFollower(state, data){
+
+      state.setBcommunityFollower = data;
+    },
+
+
+    setNcommunityFollowing(state, data){
+
+      state.NcommunityFollowing = data;
+    },
+
+
+
+
     //set media data
 
     setAlbums(state, data) {
@@ -297,6 +360,17 @@ export default {
 
   actions: {
 
+  
+    Tcommunity({commit}){
+     
+      return axios
+      .get('profile/total/community')
+      .then(({ data }) => {
+        commit('setTcommunity', data.data);
+        console.log(data);
+      });
+
+    },
 
     nFormatter(num) {
       if (num >= 1000000000) {
@@ -312,6 +386,56 @@ export default {
     },
 
 
+
+    NcommunityFollower({ commit }){
+      return axios
+      .get('profile/network/follower')
+      .then(({ data }) => {
+        commit('setNcommunityFollower', data.data);
+        console.log(data);
+      });
+    },
+    NcommunityFollowing({ commit }){
+      return axios
+      .get('profile/network/following')
+      .then(({ data }) => {
+        commit('setNcommunityFollowing', data.data);
+        console.log(data);
+      });
+    },
+    BcommunityFollower({ commit }){
+      return axios
+      .get('profile/business/follower')
+      .then(({ data }) => {
+        commit('setBcommunityFollower', data.data);
+        console.log(data);
+      });
+    },
+    BcommunityFollowing({ commit }){
+      return axios
+      .get('profile/business/following')
+      .then(({ data }) => {
+        commit('setBcommunityFollowing', data.data);  
+        console.log(data);
+      });
+    },
+   
+    UcommunityFollower({ commit }){
+      return axios
+      .get('profile/user/follower')
+      .then(({ data }) => {
+        commit('setUcommunityFollower', data.data);
+        console.log(data);
+      });
+    },
+    UcommunityFollowing({ commit }){
+      return axios
+      .get('profile/user/following')
+      .then(({ data }) => {
+        commit('setUcommunityFollowing', data.data);
+        console.log(data);
+      });
+    },
 
     profileBusiness({ commit }) {
 
@@ -999,14 +1123,13 @@ export default {
         };
       } else if (payload.method === "PUT") {
         const workplace = payload.workPlace === true ? 1 : 0;
-        (url = "userIntro/updateWorking" + "/11" + "?companyName=" + payload.workPlace.companyName),
-          "&cityTown=" + payload.workPlace.cityTown,
-          "&position=" + "YAOUNDE",
-          "&jobResponsibilities=" +
-          "Job descrioption dummny textJob descrioption dummny text Jobdescrioption dummny text",
-          "&currentlyWorking=" + workplace,
-          "&startDate=" + "2012-09-12",
-          "&endDate=" + "2012-09-12";
+        (url = "userIntro/updateWorking/" +payload.id + "?companyName=" + payload.work_place),
+          "&cityTown=" + payload.city_town,
+          "&position=" + payload.position,
+          "&jobResponsibilities=" +payload.job_responsibilities,
+          "&currentlyWorking=" + payload.currently_working,
+          "&startDate=" + payload.start_date
+          "&endDate=" + payload.end_date;
         config = {
           method: "POST",
           headers: {

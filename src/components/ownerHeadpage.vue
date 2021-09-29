@@ -51,7 +51,7 @@
             <span style="display: inline-block;">
               <h6 class=" profile-name text-center ">
                 <b> <b-link> {{info.user.name}} </b-link> </b> <br />
-                <span class="duration"> 0{{info.user.community}} Community </span>
+                <span class="duration">  {{ nFormatter(total.total_community)}} Community </span>
               </h6>
             </span>
 
@@ -219,6 +219,18 @@
     
 methods: {
 
+   nFormatter(num) {
+      if (num >= 1000000000) {
+        return (num / 1000000000).toFixed(1).replace(/\.0$/, '') + 'G';
+      }
+      if (num >= 1000000) {
+        return (num / 1000000).toFixed(1).replace(/\.0$/, '') + 'M';
+      }
+      if (num >= 1000) {
+        return (num / 1000).toFixed(1).replace(/\.0$/, '') + 'K';
+      }
+      return num;
+    },
 
 setlogo(e){
     
@@ -451,12 +463,16 @@ mounted(){
 
 computed: {
 
-  
+    
+    total(){
+    return  this.$store.state.profile.Tcommunity;
+   },
+ 
 
       profile_info() {
       return  this.$store.state.businessOwner.businessInfo;  
 
-    
+     
     },
 
 

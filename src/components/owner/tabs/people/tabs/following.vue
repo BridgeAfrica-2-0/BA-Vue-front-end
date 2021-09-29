@@ -18,7 +18,7 @@
 
     <b-row>
       <b-col md="12" lg="6">
-        <CommunityMembers :people="folowing"  />
+        <CommunityMembers type="Following"  />
       </b-col>  
 
       
@@ -34,9 +34,7 @@ export default {
   },
 
   computed: {
-    folowing() {
-      return this.$store.state.profile.communityPeople.people_following;  
-    }
+   
   },
 
 };

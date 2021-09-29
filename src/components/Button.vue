@@ -15,8 +15,10 @@ export default {
   props: {
     title: {
       required: true,
+      type: String
     },
     fas: {
+      required: true,
       type: String,
     },
   },

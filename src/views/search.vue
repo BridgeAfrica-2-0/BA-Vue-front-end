@@ -634,8 +634,10 @@ export default {
     };
     this.strategyForPlaceHolder = {
       2: () => "Find User",
-      0: () => "All"
+      0: () => "All",
     };
+
+    this.changePlaceHolder();
   },
 
   data() {

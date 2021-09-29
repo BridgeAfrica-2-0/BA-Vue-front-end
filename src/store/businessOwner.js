@@ -201,7 +201,7 @@ export default {
       commit("setLoader", true);
 
       await axios
-        .get("notification")
+        .get("/api/v1/notification")
         .then((res) => {
           commit("setLoader", false);
           commit("setSuccess", true);

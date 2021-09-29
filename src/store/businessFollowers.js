@@ -9,8 +9,15 @@ export default {
     peopleFollowers: [],
     peopleFollowing: [],
     Networks: [],
+    loader: false,
+    notifications: [],
   },
   getters: {
+    // sending loader value
+    getLoader(state) {
+      return state.loader;
+    },
+
     //getting followers from store
     getFollowers(state) {
       return state.Followers;
@@ -30,8 +37,18 @@ export default {
     getPeopleFollowing(state) {
       return state.peopleFollowing;
     },
+    // Sending notifications
+    sendNotifications(state) {
+      if (state.notifications.length > 0) {
+        return state.notifications;
+      }
+    },
   },
   mutations: {
+    setLoader(state, payload) {
+      state.loader = payload;
+    },
+
     //setting followers
     allFollowers(state, payload) {
       state.Followers = payload;
@@ -55,29 +72,34 @@ export default {
     Join(state, payload) {
       state.Networks = payload;
     },
+
+    // Setting the notifications in the state
+    setNotifications(state, payload) {
+      state.notifications = payload;
+    },
   },
   actions: {
     //getting business followers
     async gettingFollowers({ commit }) {
-      const res = await axios.get("/api/v1/community/business-follower");
+      const res = await axios.get("/community/business-follower");
       commit("allFollowers", res.data);
     },
 
     //getting business people followers
     async gettingPeopleFollowers({ commit }) {
-      const res = await axios.get("/api/v1/community/people-follower");
+      const res = await axios.get("/community/people-follower");
       commit("ppFollowers", res.data);
     },
 
     //getting business folowings
     async gettingFollowings({ commit }) {
-      const res = await axios.get("/api/v1/community/business-following");
+      const res = await axios.get("/community/business-following");
       commit("allFollowing", res.data);
     },
 
     //getting business people folowings
     async gettingPeopleFollowings({ commit }) {
-      const res = await axios.get("/api/v1/community/people-following");
+      const res = await axios.get("/community/people-following");
       commit("ppFollowing", res.data);
     },
 
@@ -85,6 +107,59 @@ export default {
     async Joining({ commit }) {
       const res = await axios.post("");
       commit("Join", res.data);
+    },
+
+    // Getting the notifications
+    async getNotifications({ dispatch, commit }) {
+      commit("setLoader", true);
+      await axios
+        .get("/notification")
+        .then((res) => {
+          commit("setLoader", false);
+          commit("setNotifications", res.data.data);
+        })
+        .catch((err) => {
+          commit("setLoader", false);
+          console.log("Unauthorized request !!");
+        });
+    },
+
+    // Sending a read request
+    async readNotifiactions({ dispatch, commit }, payload) {
+      let items = {
+        ids: [],
+      };
+
+      payload.forEach((element) => {
+        let objId = {
+          id: null,
+        };
+        objId.id = element.id;
+        items.ids.push(objId);
+      });
+      await axios
+        .post("/notification/mark-read", items)
+        .then(() => {
+          dispatch("getNotifications");
+        })
+        .catch((err) => [console.log(err)]);
+    },
+
+    // Sending a read request
+    async readOneNotifiaction({ dispatch, commit }, id) {
+      await axios
+        .post("/notification/mark-read", id)
+        .then(() => {
+          dispatch("getNotifications");
+        })
+        .catch((err) => [console.log(err)]);
+    },
+
+    // delete a single notification
+    deleteOne({ dispatch }, id) {
+      axios.delete(`/notification/${id}`).then(() => {
+        dispatch("getNotifications");
+      });
     },
   },
 };

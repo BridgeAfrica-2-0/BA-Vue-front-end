@@ -1,13 +1,10 @@
 <template>
   <div style="overflow-x: hidden; color: black">
-    <Nav 
-      :credentials.sync="navBarParams"
-    >  
+    <Nav :credentials.sync="navBarParams">
       <template v-slot:button>
-        <Button @click.native="strategy['users']"/>
+        <Button @click.native="strategies" />
       </template>
     </Nav>
-
 
     <SubNav
       @category="getCategory"
@@ -380,7 +377,7 @@
             />
 
             <PeopleFilter v-if="selectedId == 2" />
-            <PostFilter v-if="selectedId == 5"  />
+            <PostFilter v-if="selectedId == 5" />
           </div>
         </b-col>
 
@@ -504,7 +501,11 @@
                 <fas-icon class="icons" :icon="['fas', 'users']" size="lg" />
                 People
               </h6>
-              <People v-for="(people,index) in peoples" :people="people"  :key="index" />
+              <People
+                v-for="(people, index) in peoples"
+                :people="people"
+                :key="index"
+              />
             </div>
 
             <!-- filter out just the network  -->
@@ -572,14 +573,13 @@
 </template>
 
 <script>
-
-import _ from 'lodash'
+import _ from "lodash";
 
 import LyTab from "@/tab/src/index.vue";
 
 import Map from "@/components/search/map";
 
-import Button from "@/components/ButtonNavBarFind"
+import Button from "@/components/ButtonNavBarFind";
 
 import Business from "@/components/search/business";
 import People from "@/components/search/people";
@@ -594,12 +594,11 @@ import SubNav from "@/components/subnav";
 
 import Sponsor from "@/components/search/sponsoredBusiness";
 
-import { PeopleFilter,PostFilter } from "@/components/search";
+import { PeopleFilter, PostFilter } from "@/components/search";
 
-import {loader} from "@/mixins"
+import { loader } from "@/mixins";
 
-import {mapGetters, mapActions} from 'vuex'
-
+import { mapGetters, mapActions } from "vuex";
 
 export default {
   components: {
@@ -616,31 +615,37 @@ export default {
     Post,
     Market,
     PeopleFilter,
-    PostFilter
+    PostFilter,
 
     // Footer,
   },
 
   mixins: [loader],
 
-  computed:{
+  computed: {
     ...mapGetters({
-      peoples:'search/GET_RESULT'
-    })
+      peoples: "search/GET_RESULT",
+    }),
   },
 
-  created(){
+  created() {
     this.strategy = {
-      'users': () => this.onFindUser()
-    }
+      2: () => this.onFindUser(),
+    };
+    this.strategyForPlaceHolder = {
+      2: () => "Find User",
+      0: () => "All"
+    };
   },
+
   data() {
     return {
-      navBarParams:{
-        username:'',
-        placeholder:'Find user'
+      navBarParams: {
+        keyword: "",
+        placeholder: "",
       },
-      strategy: null,
+      strategy: {},
+      strategyForPlaceHolder: {},
       selected: "all",
       selectedId: 0,
       Setcategoryr: "all",
@@ -653,7 +658,6 @@ export default {
       map: false,
       selectedfilter: "",
       showform: false,
-      
 
       //selectcategories:[],
 
@@ -1579,13 +1583,39 @@ export default {
     };
   },
 
+  watch: {
+    selectedId: function () {
+      this.changePlaceHolder();
+    },
+  },
+
   methods: {
     ...mapActions({
-      find: 'search/FIND_USER'
+      find: "search/FIND_USER",
     }),
+    changePlaceHolder() {
+      try {
+        const newPlaceholder = this.strategyForPlaceHolder[this.selectedId]();
+        this.navBarParams = Object.assign(this.navBarParams, {
+          placeholder: newPlaceholder,
+        });
+      } catch (error) {
+        this.navBarParams = Object.assign(this.navBarParams, {
+          placeholder: "",
+        });
+      }
+    },
 
+    strategies() {
+      try {
+        this.strategy[`${this.selectedId}`]();
+      } catch (error) {
+        console.warn(`Implement function for selectedId=${this.selectedId}`);
+      }
+    },
     onFindUser() {
-      this.find(this.navBarParams.username)
+      if (this.navBarParams.keyword.trim())
+        this.find(this.navBarParams.keyword);
     },
 
     SetCat(cat) {
@@ -1686,14 +1716,10 @@ export default {
     },
     getparentCategory(value) {
       this.Selectedparentcategory = value;
-
-      //   console.log(this.Selectedparentcategory);
     },
 
     switchcategories() {
       this.showform = false;
-
-      console.log(this.default_category);
 
       switch (this.default_category) {
         case "Primary Education":

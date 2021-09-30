@@ -1,4 +1,5 @@
 export const state = {
-    users:[],
-    isLoading: false,
+  users: [],
+  posts: [],
+  isLoading: false,
 }

@@ -501,10 +501,12 @@
                 <fas-icon class="icons" :icon="['fas', 'users']" size="lg" />
                 People
               </h6>
+              <NotFound v-if="peoples.length" title="Not user found" />
               <People
                 v-for="(people, index) in peoples"
                 :people="people"
                 :key="index"
+                v-else
               />
             </div>
 
@@ -560,7 +562,13 @@
                 Post
               </h6>
 
-              <Post />
+              <NotFound v-if="posts.length" title="Not user found" />
+              <Post
+                v-for="(post, index) in posts"
+                :post="post"
+                :key="index"
+                v-else
+              />
             </div>
           </div>
         </b-col>
@@ -617,7 +625,6 @@ export default {
     PeopleFilter,
     PostFilter,
 
-
     // Footer,
   },
 
@@ -625,7 +632,8 @@ export default {
 
   computed: {
     ...mapGetters({
-      peoples: "search/GET_RESULT",
+      peoples: "search/GET_RESULT_USER",
+      posts: "search/GET_RESULT_POST",
     }),
   },
 
@@ -673,7 +681,6 @@ export default {
         { label: "Market" },
         { label: "Post" },
       ],
-
 
       Finished_Branded_Products_filters: [
         { value: "Peanuts", text: "Peanuts" },

@@ -46,4 +46,25 @@ export const mutations = {
       state.isLoading = !state.isLoading
   },
 
+  [TYPES.GET_CURRENT_PAGINATION_PAGE](state, payload) {
+    if (typeof (payload) === 'number')
+      state.page = payload
+    else
+      console.error(`${payload} should be a number`)
+  },
+
+  [TYPES.SET_CURRENT_PAGINATE_CALLBACT](state, payload) {
+    if (typeof (payload) === 'function')
+      state.callback = payload
+    else
+      console.error(`${payload} should be a function`)
+  },
+
+  [TYPES.POST_KEYWORD](state, payload) {
+    if (typeof (payload) === 'string')
+      state.postKeyword = payload
+    else
+      console.error(`${payload} should be a string`)
+  }
+
 }

@@ -631,17 +631,23 @@ export default {
     ...mapGetters({
       peoples: "search/GET_RESULT_USER",
       posts: "search/GET_RESULT_POST",
+      page: "search/GET_CURRENT_PAGINATION_PAGE",
+      callbackForPagination: "search/GET_CURRENT_PAGINATION_PAGE",
     }),
   },
 
   created() {
     this.strategy = {
       2: () => this.onFindUser(),
+      5: () => this.onFindPost(),
     };
+
     this.strategyForPlaceHolder = {
       2: () => "Find User",
+      5: () => "Find Post",
       0: () => "All",
     };
+
     this.strategyForNotFoundComponentTitle = {
       2: () => "Not Find users",
       5: () => "Not Find posts",
@@ -1603,10 +1609,29 @@ export default {
     },
   },
 
+  mounted() {
+    this.handleScroll();
+  },
+
   methods: {
     ...mapActions({
-      find: "search/FIND_USER",
+      findUser: "search/FIND_USER",
+      findPost: "search/FIND_POST",
+      postKeyword: "search/POST_KEYWORD",
+      newCallbackForPagination: "search/SET_CURRENT_PAGINATE_CALLBACK",
     }),
+
+    handleScroll() {
+      window.onscroll = () => {
+        let bottomOfWindow =
+          document.documentElement.scrollTop + window.innerHeight ===
+          document.documentElement.offsetHeight;
+
+        if (bottomOfWindow) {
+          //this.callbackForPagination();
+        }
+      };
+    },
 
     changeNotFoundTitle() {
       try {
@@ -1634,13 +1659,22 @@ export default {
     strategies() {
       try {
         this.strategy[`${this.selectedId}`]();
+        this.newCallbackForPagination(this.strategy[`${this.selectedId}`]);
       } catch (error) {
+        console.log(error);
         console.warn(`Implement function for selectedId=${this.selectedId}`);
       }
     },
     onFindUser() {
       if (this.navBarParams.keyword.trim())
-        this.find(this.navBarParams.keyword);
+        this.findUser(this.navBarParams.keyword);
+    },
+
+    onFindPost() {
+      if (this.navBarParams.keyword.trim()) {
+        this.postKeyword(this.navBarParams.keyword);
+        this.findPost({ data: "", lauchLoader: "true", endLoader: "true" });
+      }
     },
 
     SetCat(cat) {

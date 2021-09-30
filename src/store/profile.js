@@ -29,6 +29,7 @@ export default {
     UcommunityFollower:[],
     UcommunityFollowing:[],
     Tcommunity:[],
+    images:[],
 
 
     userData: [
@@ -245,8 +246,8 @@ export default {
 
     setImages(state, data) {
 
-      state.ownerPostImages = data;
-
+      state.images = data;
+   
     },
 
     setAlbumImages(state, data) {
@@ -459,8 +460,8 @@ export default {
         });
     },
 
-    getImages({ commit }, busineeId) {
-      return axios.get("business/post/" + busineeId).then(({ data }) => {
+    getImages({ commit }) {
+      return axios.get("profile/user/media").then(({ data }) => {
         commit("setImages", data.data);
         console.log(data);
       });

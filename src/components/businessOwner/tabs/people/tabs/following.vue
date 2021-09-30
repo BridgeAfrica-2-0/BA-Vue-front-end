@@ -49,6 +49,8 @@
         <p>No one is following you !!</p>
       </b-col>
     </b-row>
+</b-col>
+ </b-row>
   </div>
 </template>
 

@@ -1,14 +1,15 @@
 <template>
-  <b-alert>{{ title }}</b-alert>
+  <b-alert show variant="warning">{{ title }}</b-alert>
 </template>
 
 <script>
 export default {
   name: "NotFoundComponent",
+
   props: {
     title: {
       type: String,
-      required: true,
+      default: () => "Not Found",
     },
   },
 };

@@ -194,11 +194,6 @@ export default {
         return hash;
       }, {});
 
-      const loader = this.$loading.show({
-        container: this.$refs.formContainer,
-        canCancel: true,
-      });
-
       this.findCommunity(data);
     },
 

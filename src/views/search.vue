@@ -501,12 +501,14 @@
                 <fas-icon class="icons" :icon="['fas', 'users']" size="lg" />
                 People
               </h6>
-              <NotFound v-if="peoples.length" title="Not user found" />
+              <NotFound
+                v-if="!peoples.length"
+                :title="notFoundComponentTitle"
+              />
               <People
                 v-for="(people, index) in peoples"
                 :people="people"
                 :key="index"
-                v-else
               />
             </div>
 
@@ -562,13 +564,8 @@
                 Post
               </h6>
 
-              <NotFound v-if="posts.length" title="Not user found" />
-              <Post
-                v-for="(post, index) in posts"
-                :post="post"
-                :key="index"
-                v-else
-              />
+              <NotFound v-if="!posts.length" :title="notFoundComponentTitle" />
+              <Post v-for="(post, index) in posts" :post="post" :key="index" />
             </div>
           </div>
         </b-col>
@@ -645,6 +642,10 @@ export default {
       2: () => "Find User",
       0: () => "All",
     };
+    this.strategyForNotFoundComponentTitle = {
+      2: () => "Not Find users",
+      5: () => "Not Find posts",
+    };
 
     this.changePlaceHolder();
   },
@@ -655,8 +656,10 @@ export default {
         keyword: "",
         placeholder: "",
       },
+      notFoundComponentTitle: "",
       strategy: {},
       strategyForPlaceHolder: {},
+      strategyForNotFoundComponentTitle: {},
       selected: "all",
       selectedId: 0,
       Setcategoryr: "all",
@@ -1596,6 +1599,7 @@ export default {
   watch: {
     selectedId: function () {
       this.changePlaceHolder();
+      this.changeNotFoundTitle();
     },
   },
 
@@ -1603,6 +1607,17 @@ export default {
     ...mapActions({
       find: "search/FIND_USER",
     }),
+
+    changeNotFoundTitle() {
+      try {
+        this.notFoundComponentTitle = this.strategyForNotFoundComponentTitle[
+          this.selectedId
+        ]();
+      } catch (error) {
+        this.notFoundComponentTitle = "";
+      }
+    },
+
     changePlaceHolder() {
       try {
         const newPlaceholder = this.strategyForPlaceHolder[this.selectedId]();

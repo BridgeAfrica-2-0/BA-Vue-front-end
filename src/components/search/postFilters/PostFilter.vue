@@ -189,6 +189,9 @@ const options = [
 ];
 
 export default {
+  components: {
+    Button,
+  },
   data: () => ({
     isRecentPost: false,
     isPostHaveNotSeen: false,
@@ -210,17 +213,38 @@ export default {
       { text: "Member", value: "Member" },
       { text: "Owner", value: "Owner" },
     ],
-    posts: [],
+    strategies: null,
   }),
 
+  created() {
+    this.strategies = {
+      user: (data) => this.findPeoplePost(data),
+      buisness: (data) => this.findBuisnessPost(data),
+      network: (data) => this.findNetworkPost(data),
+    };
+  },
+
+  watch: {
+    isRecentPost: function (newValue) {
+      if (newValue)
+        this.findPeoplePost({ data: { recent_post: "" }, lauchLoader: true });
+    },
+    isPostHaveNotSeen: function (newValue) {
+      this.findPeoplePost({ data: { not_see: "" }, lauchLoader: true });
+    },
+  },
   methods: {
     ...mapActions({
-      findProfession: "search/FIND_PROFESSION",
-      findCommunity: "search/FIND_COMMUNITY_POST",
+      findPeoplePost: "search/FIND_POST",
+      findBuisnessPost: "search/FIND_BUISNESS_POST",
+      findNetworkPost: "search/FIND_NETWORK_POST",
     }),
 
     map(data, type) {
-      return data.map((e) => `${type}_${e.toLowerCase()}`);
+      return data.map((e) => ({
+        key: type,
+        value: `${type}_${e.toLowerCase()}`,
+      }));
     },
 
     onProcess() {
@@ -228,12 +252,29 @@ export default {
       const buisness = this.map(this.selectedBuisness, `buisness`);
       const network = this.map(this.selectedNetwork, `network`);
 
-      const data = [...user, ...buisness, ...network].reduce((hash, value) => {
-        hash[value] = "";
+      const data = [...user, ...buisness, ...network].reduce((hash, item) => {
+        if (hash[item.key]) {
+          hash[item.key] = { [item.value]: "", ...hash[item.key] };
+        } else hash[item.key] = { [item.value]: "" };
+
         return hash;
       }, {});
 
-      this.findCommunity(data);
+      const credentials = Object.keys(data);
+
+      const stopLoader = (index) =>
+        credentials.length - 1 === index ? false : true;
+
+      const startLoader = (item) =>
+        credentials.indexOf(item) == 0 ? true : false;
+
+      credentials.map((item, index) => {
+        this.strategies[item]({
+          data: data[item],
+          lauchLoader: startLoader(item),
+          endLoader: stopLoader(index),
+        });
+      });
     },
 
     showRecentPost() {

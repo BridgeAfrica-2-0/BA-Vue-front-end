@@ -14,6 +14,23 @@ export const mutations = {
     state.users = payload
   },
 
+
+  [TYPES.FIND_BUISNESS_POST](state, payload) {
+    state.posts = payload
+  },
+
+  [TYPES.FIND_POST](state, payload) {
+    state.posts = payload
+  },
+
+  [TYPES.FIND_NETWORK_POST](state, payload) {
+    state.posts = payload
+  },
+
+  [TYPES.FIND_MIXED_POST](state, payload) {
+    state.posts = [...state.posts, ...payload].sort((a, b) => a.id > b.id)
+  },
+
   [TYPES.RESET_RESULT](state) {
 
     if (state.users.length)

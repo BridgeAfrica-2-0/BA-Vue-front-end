@@ -30,7 +30,12 @@
       <br />
 
       <b-row>
-        <b-col cols="12" class="mr-3" v-for="i in 6" :key="i">
+        <b-col
+          cols="12"
+          class="mr-3"
+          v-for="post in getNotificationsStore"
+          :key="post.id"
+        >
           <p class="">
             <span style="display:inline-flex">
               <b-form-checkbox
@@ -40,6 +45,7 @@
                 value="accepted"
                 class="m-left-top"
                 unchecked-value="not_accepted"
+                @click="select"
               >
               </b-form-checkbox>
               <b-avatar
@@ -48,20 +54,15 @@
                 src="https://business.bridgeafrica.info/assets/img/team/3.png"
               ></b-avatar>
               <h6 class="m-0  d-inline-block ml-2 username">
-                Mapoure Agrobusiness
-                <p class="duration">1hr</p>
+                {{ post.reference_type }}
+                <p class="duration">{{ post.created_at }}</p>
               </h6>
             </span>
             <span class="float-right mt-1"> </span>
           </p>
 
           <p class="text">
-            Lorem Ipsum is this is just a dummy text to post simply dummy text
-            of the printing and typesetting industry. Lorem Ipsum has been the
-            industry's standard dummy text ever since the 1500s, Lorem Ipsum is
-            simply dummy text of the printing and typesetting industry. Lorem
-            Ipsum has been the industry's standard dummy text ever since the
-            1500s,
+            {{ post.notification_text }}
           </p>
         </b-col>
 

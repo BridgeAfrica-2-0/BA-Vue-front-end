@@ -250,7 +250,7 @@ export default {
         objId.id = element;
         items.ids.push(objId);
       });
-      await axios.post("notification/deleteAll", items).then(() => {
+      await axios.post("/notification/deleteAll", items).then(() => {
         dispatch("getNotifications");
       });
     },
@@ -270,7 +270,7 @@ export default {
 
     // Approve pending post
     async approvePost({ commit }, post) {
-      const res = await axios.post("/api/v1/business/post-approve", post);
+      const res = await axios.post("/business/post-approve", post);
 
       commit("Approve", res.data);
     },
@@ -298,14 +298,14 @@ export default {
 
     //Getting business people following
     async peopleFollowing({ commit }) {
-      const res = await axios.get("/api/v1/community/people-following");
+      const res = await axios.get("/community/people-following");
 
       commit("ppleFollowing", res.data);
     },
 
     //Getting business people following
     async peopleFollowers({ commit }) {
-      const res = await axios.get("/api/v1/community/people-follower");
+      const res = await axios.get("/community/people-follower");
 
       commit("ppleFollowers", res.data);
     },

@@ -203,6 +203,8 @@ export default {
 
     switchBusiness(value){
 
+       console.log("business switch"+value);
+
        if(value != "Owner"){ 
            let loader = this.$loading.show({
                    

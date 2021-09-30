@@ -85,7 +85,7 @@ export default {
     Inbox,
     navbar,
     Footer,
-    Parent
+    Parent,
   },
 
   data() {
@@ -103,20 +103,20 @@ export default {
 
         { label: "Keyword Alert", icon: "fas fa-exclamation-triangle fa-lg" },
         { label: "Roles", icon: "fas fa-user-cog fa-lg" },
-        { label: "Settings", icon: "fas fa-cog fa-lg" }
+        { label: "Settings", icon: "fas fa-cog fa-lg" },
       ],
 
       options: {
-        activeColor: "#32a400"
-      }
+        activeColor: "#32a400",
+      },
     };
   },
 
   methods: {
     handleChange(item, index) {
       console.log(item, index);
-    }
-  }
+    },
+  },
 };
 </script>
 

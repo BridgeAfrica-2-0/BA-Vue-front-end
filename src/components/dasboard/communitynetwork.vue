@@ -73,28 +73,85 @@
       </b-row>
     </div>
         </b-col>
+
+         <infinite-loading @infinite="infiniteHandler"></infinite-loading>  
+         
     </b-row>
   </div>
 </template>
 
 <script>
+import axios from "axios";
 export default {
-  props: ["network"],
-  computed: {
-    business() {
-      return this.$store.getters["networkDetails/getdetails.category"];
-    }
+  props: ["type"],
+
+   data() {
+    return {
+      page: 1,
+      options: {
+        rewind: true,
+        autoplay: true,
+        perPage: 1,
+        pagination: false,
+
+        type: "loop",
+        perMove: 1
+      }
+    };
   },
-  created() {
-    this.$store
-      .dispatch("networkDetails/getndetails")
-      .then(() => {
-        console.log("the response");
-      })
-      .catch(err => {
-        console.log({ err: err });
-      });
+
+
+   computed: {
+   
+        network(){
+
+      if(this.type=="Follower"){ 
+
+      return  this.$store.state.profile.NcommunityFollower.network_followers;  
+
+       }else{
+
+         return  this.$store.state.profile.NcommunityFollowing.network_following; 
+       }
+   }
+   
+  },
+  methods:{
+
+      infiniteHandler($state) {
+
+      let url = null;
+
+         if(this.type=="Follower"){  
+          url="profile/network/follower/"
+         }else{
+          url="profile/network/following/";
+         }
+      axios
+        .get(url + this.page)   
+        .then(({ data }) => {
+          if (data.data.length) {
+            this.page += 1;
+      if(this.type=="Follower"){  
+            this.network.push(...data.data.network_followers); 
+           }else{
+              this.network.push(...data.data.network_following);
+           }
+
+
+            $state.loaded();
+          } else {
+            $state.complete();
+          }
+        }) 
+        .catch((err) => {
+          console.log({ err: err });
+        });
+    },
+
   }
+ 
+  
 };
 </script>
 

@@ -104,7 +104,7 @@
 import axios from "axios";
 export default {
   props: ["type"],
-   data() {
+  data() {
     return {
       page: 1,
       options: {
@@ -114,25 +114,18 @@ export default {
         pagination: false,
 
         type: "loop",
-        perMove: 1
-      }
+        perMove: 1,
+      },
     };
   },
-   computed:{
- 
-   users(){
-
-      if(this.type=="Follower"){ 
-
-      return  this.$store.state.profile.UcommunityFollower.user_followers;  
-
-       }else{
-
-         return  this.$store.state.profile.UcommunityFollowing.user_following; 
-       }
-   }
-    
-    
+  computed: {
+    users() {
+      if (this.type == "Follower") {
+        return this.$store.state.profile.UcommunityFollower.user_followers;
+      } else {
+        return this.$store.state.profile.UcommunityFollowing.user_following;
+      }
+    },
   },
   methods: {
     count(number) {
@@ -144,29 +137,24 @@ export default {
       } else return number;
     },
 
-
-
-     infiniteHandler($state) {
-
+    infiniteHandler($state) {
       let url = null;
 
-         if(this.type=="Follower"){  
-          url="profile/user/follower/"
-         }else{
-          url="profile/user/following/";
-         }
+      if (this.type == "Follower") {
+        url = "profile/user/follower/";
+      } else {
+        url = "profile/user/following/";
+      }
       axios
         .get(url + this.page)
         .then(({ data }) => {
           if (data.data.length) {
             this.page += 1;
-        if(this.type=="Follower"){  
-            this.businesses.push(...data.data.user_followers); 
-           }else{
+            if (this.type == "Follower") {
+              this.businesses.push(...data.data.user_followers);
+            } else {
               this.businesses.push(...data.data.user_following);
-           }
-
-
+            }
 
             $state.loaded();
           } else {
@@ -177,7 +165,7 @@ export default {
           console.log({ err: err });
         });
     },
-  }
+  },
 };
 </script>
 
@@ -215,9 +203,9 @@ export default {
     margin-right: 5px;
   }
 
-  .s-ccard {
-    padding-left: 20px;
-    padding-right: 20px;
+  .s-cardd {
+    padding-left: 6px;
+    padding-right: 1px;
   }
 }
 
@@ -225,11 +213,6 @@ export default {
   .btnpngs {
     width: 20px;
     margin-right: 5px;
-  }
-
-  .s-ccard {
-    padding-left: 29px;
-    padding-right: 29px;
   }
 }
 
@@ -550,7 +533,7 @@ f-right {
 
   .pobtn {
     font-size: 10px;
-  }  
+  }
   .e-name {
     text-align: left;
   }

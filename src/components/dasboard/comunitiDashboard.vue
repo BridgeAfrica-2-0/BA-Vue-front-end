@@ -37,8 +37,7 @@
                       <div class="s-comcard">
                        
                           <div>
-                            <People
-                              :people="business.people[0].user_followers"
+                            <People type="Follower"
                             />
                           </div>
                       
@@ -57,7 +56,7 @@
                        
                           <div>
                             <People
-                              :people="business.people[0].user_following"
+                              type="Following"
                             />
                           </div>
                       
@@ -91,7 +90,7 @@
                     
                       <div>
                         <Business
-                          :business="business.business[0].business_followers"
+                         type="Follower"
                         />
                       </div>
                    
@@ -110,7 +109,7 @@
                   
                       <div>
                         <Business
-                          :business="business.business[0].business_following"
+                         type="Following"
                         />
                       </div>
                     
@@ -143,7 +142,7 @@
                    
                       <div>
                         <Network
-                          :network="business.network[0].network_followers" 
+                           type="Follower"
                         />
                       </div>
                     
@@ -162,7 +161,7 @@
                   
                       <div class="p-2">
                         <Network
-                          :network="business.network[0].network_following"
+                          type="Following"
                         />
                       </div>
                     
@@ -191,6 +190,89 @@ export default {
     People,
     Business,
     Network,
+  },
+
+  mounted(){
+    
+      this.$store
+      .dispatch("profile/Tcommunity", null)
+      .then((response) => {
+       
+      })
+      .catch((error) => {
+        console.log({error:error});
+      });
+
+
+
+
+      
+
+ 
+      this.$store
+      .dispatch("profile/UcommunityFollower", null)
+      .then((response) => {
+       
+      })
+      .catch((error) => {
+        console.log({error:error});
+      });
+
+
+
+      
+      this.$store
+      .dispatch("profile/UcommunityFollowing", null)
+      .then((response) => {
+       
+      })
+      .catch((error) => {
+        console.log({error:error});
+      });
+
+     
+   
+      this.$store
+      .dispatch("profile/BcommunityFollower", null)
+      .then((response) => {
+       
+      })
+      .catch((error) => {
+        console.log({error:error});
+      });
+
+     
+      this.$store
+      .dispatch("profile/BcommunityFollowing", null)
+      .then((response) => {
+       
+      })
+      .catch((error) => {
+        console.log({error:error});
+      });
+
+
+
+      
+      this.$store
+      .dispatch("profile/NcommunityFollower", null)
+      .then((response) => {
+       
+      })
+      .catch((error) => {
+        console.log({error:error});
+      });
+
+      
+      this.$store
+      .dispatch("profile/NcommunityFollowing", null)
+      .then((response) => {
+       
+      })
+      .catch((error) => {
+        console.log({error:error});
+      });
+
   },
   computed: {
     business() {

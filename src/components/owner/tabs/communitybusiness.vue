@@ -129,21 +129,7 @@ export default {
       }
     };
   },
-  computed:{
    
-    businesses(){
-
-      if(this.type=="Follower"){ 
-
-      return  this.$store.state.profile.BcommunityFollower.business_followers;  
-
-       }else{
-
-         return  this.$store.state.profile.BcommunityFollowing.business_following; 
-       }
-   }
-
-  },
   methods: {
     count(number) {
       if (number >= 1000000) {
@@ -162,7 +148,7 @@ export default {
          if(this.type=="Follower"){  
           url="profile/business/follower/"
          }else{
-          url="profile/network/following/";
+          url="profile/business/following/";
          }
       axios
         .get(url + this.page)

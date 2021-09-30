@@ -230,7 +230,7 @@ export default {
 
 infiniteHandler($state) {
 
-        axios.get('business/show/post/'+this.url+"/"+this.page)
+        axios.get('profile/dashboard/post/user')
       .then(({ data }) => {
       // commit('ownerPost', data.data);
       //  console.log(data);
@@ -297,6 +297,9 @@ infiniteHandler($state) {
 
     
     },
+
+
+    
 
 
      owner_post() {

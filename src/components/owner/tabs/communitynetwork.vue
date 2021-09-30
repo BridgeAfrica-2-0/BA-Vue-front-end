@@ -77,7 +77,7 @@
 
      
   <infinite-loading @infinite="infiniteHandler"></infinite-loading>  
-
+  
   </div>
 </template>
 
@@ -134,9 +134,9 @@ export default {
           if (data.data.length) {
             this.page += 1;
       if(this.type=="Follower"){  
-            this.businesses.push(...data.data.network_followers); 
+            this.network.push(...data.data.network_followers); 
            }else{
-              this.businesses.push(...data.data.network_following);
+              this.network.push(...data.data.network_following);
            }
 
 
@@ -144,7 +144,7 @@ export default {
           } else {
             $state.complete();
           }
-        })
+        }) 
         .catch((err) => {
           console.log({ err: err });
         });

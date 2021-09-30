@@ -47,7 +47,7 @@ export default {
 
 
     dashboardBusiness({ commit }, id) {
-      return axios.get("businessInfo/"+id).then(({ data }) => {
+      return axios.get("profile/businessInfo/"+id).then(({ data }) => {
         console.log(data);
         commit("setDashboardBusiness", data.data);
       });

@@ -84,18 +84,12 @@ const routes = [
     path: "/dashboard",
     name: "dashboard",
     component: dashboard,
-    meta: {
-      auth: true
-    }
   },
 
   {
     path: "/profile_owner",
     name: "profile_owner",
     component: profile_owner,
-    meta: {
-     // auth: true
-    }
   },
   {
     path: "/template_viewer",
@@ -181,8 +175,7 @@ const routes = [
   {
     path: "/businessfollower/:id?",
     name: "BusinessFollower",
-
-    component: businessFollower
+    component: businessFollower,
   },
   {
     path: "/businessvisitor",

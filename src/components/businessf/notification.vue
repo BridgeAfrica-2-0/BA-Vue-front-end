@@ -118,6 +118,7 @@ export default {
     }),
   },
   methods: {
+    // getting actions from store
     ...mapActions({
       getNotifications: "businessFollowers/getNotifications",
       readNotifiactions: "businessFollowers/readNotifiactions",

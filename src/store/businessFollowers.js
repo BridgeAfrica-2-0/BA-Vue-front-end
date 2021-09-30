@@ -105,7 +105,7 @@ export default {
       commit("ppFollowing", res.data);
     },
 
-    //joining a network
+    // joining a network
     async Joining({ commit }) {
       const res = await axios.post("");
       commit("Join", res.data);

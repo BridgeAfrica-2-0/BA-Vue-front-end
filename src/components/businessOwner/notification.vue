@@ -100,6 +100,7 @@ export default {
     },
   },
   methods: {
+    // getting getters from the store
     ...mapGetters({
       sendNotifications: "businessOwner/sendNotifications",
       getLoader: "businessOwner/getLoader",

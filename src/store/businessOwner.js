@@ -90,6 +90,8 @@ export default {
     setLoader(state, payload) {
       state.loader = payload;
     },
+
+    //setsuccess
     setSuccess(state, payload) {
       state.success = payload;
     },

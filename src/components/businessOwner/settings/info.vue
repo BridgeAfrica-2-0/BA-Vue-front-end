@@ -314,17 +314,18 @@
               class="mb-0"
             >
               <b-form-group class="mb-0">
-                <b-form-radio-group
-                  v-model="openHours"
-                  class="a-text text"
-                  :options="['Always Open',  'Open for selected hours']"
-                  value-field="value"
-                  text-field="name"
-                ></b-form-radio-group>
+                <b-form-checkbox
+                  v-model="openHour"
+                  name="checkbox-1"
+                  switch
+                  value="1"
+                >
+                  Always Open
+                </b-form-checkbox>
                 <br />
-                <b-container >
+                <b-container v-if="!openHour">
                   <b-row>
-                    <b-col cols="6"
+                    <b-col cols="3"
                       ><b-form-checkbox
                         id=""
                         class="a-text text"
@@ -335,13 +336,13 @@
                       ></b-col
                     >
 
-                    <b-col><b-form-input name="" v-model="Odays.mS"></b-form-input></b-col>-
-                    -<b-col><b-form-input name="" v-model="Odays.mE"></b-form-input></b-col>
+                    <b-col><b-form-input name="" type="time" v-model="businessForm.openHours.mondayStart"></b-form-input></b-col>-
+                    -<b-col><b-form-input name="" type="time" v-model="businessForm.openHours.mondayEnd"></b-form-input></b-col>
                   </b-row>
                   <br />
 
                   <b-row>
-                    <b-col cols="6"
+                    <b-col cols="3"
                       ><b-form-checkbox
                         id=""
                         class="a-text text"
@@ -351,13 +352,13 @@
                         Tuesday</b-form-checkbox
                       ></b-col
                     >
-                    <b-col><b-form-input name="" v-model="Odays.mS"></b-form-input></b-col>- -
-                    <b-col><b-form-input name="" v-model="Odays.mE"></b-form-input></b-col>
+                    <b-col><b-form-input name="" type="time" v-model="businessForm.openHours.tuesdayStart"></b-form-input></b-col>- -
+                    <b-col><b-form-input name="" type="time" v-model="businessForm.openHours.tuesdayEnd"></b-form-input></b-col>
                   </b-row>
                   <br />
 
                   <b-row>
-                    <b-col cols="6"
+                    <b-col cols="3"
                       ><b-form-checkbox
                         id=""
                         class="a-text text"
@@ -367,13 +368,13 @@
                         Wednesday</b-form-checkbox
                       ></b-col
                     >
-                    <b-col><b-form-input name=""></b-form-input></b-col>- -
-                    <b-col><b-form-input name=""></b-form-input></b-col>
+                    <b-col><b-form-input name="" type="time" v-model="businessForm.openHours.wednesdayStart"></b-form-input></b-col>- -
+                    <b-col><b-form-input name="" type="time" v-model="businessForm.openHours.wednesdayEnd"></b-form-input></b-col>
                   </b-row>
                   <br />
 
                   <b-row>
-                    <b-col cols="6"
+                    <b-col cols="3"
                       ><b-form-checkbox
                         id=""
                         class="a-text a-text text"
@@ -383,13 +384,13 @@
                         Thursday</b-form-checkbox
                       ></b-col
                     >
-                    <b-col><b-form-input name=""></b-form-input></b-col>- -
-                    <b-col><b-form-input name=""></b-form-input></b-col>
+                    <b-col><b-form-input name="" type="time" v-model="businessForm.openHours.thursdayStart"></b-form-input></b-col>- -
+                    <b-col><b-form-input name="" type="time" v-model="businessForm.openHours.thursdayEnd"></b-form-input></b-col>
                   </b-row>
                   <br />
 
                   <b-row>
-                    <b-col cols="6"
+                    <b-col cols="3"
                       ><b-form-checkbox
                         id=""
                         class="a-text text"
@@ -399,13 +400,12 @@
                         Friday
                       </b-form-checkbox></b-col
                     >
-                    <b-col><b-form-input name=""></b-form-input></b-col>- -
-                    <b-col><b-form-input name=""></b-form-input></b-col>
+                    <b-col><b-form-input name="" type="time" v-model="businessForm.openHours.fridayStart"></b-form-input></b-col>- -
+                    <b-col><b-form-input name="" type="time" v-model="businessForm.openHours.fridayEnd"></b-form-input></b-col>
                   </b-row>
                   <br />
-
                   <b-row>
-                    <b-col cols="6"
+                    <b-col cols="3"
                       ><b-form-checkbox
                         id=""
                         class="a-text text"
@@ -415,25 +415,25 @@
                         Saturday
                       </b-form-checkbox></b-col
                     >
-                    <b-col><b-form-input name=""></b-form-input></b-col>- -
-                    <b-col><b-form-input name=""></b-form-input></b-col>
+                    <b-col><b-form-input name="" type="time" v-model="businessForm.openHours.satudayStart"></b-form-input></b-col>- -
+                    <b-col><b-form-input name="" type="time" v-model="businessForm.openHours.satudayEnd"></b-form-input></b-col>
                   </b-row>
                   <br />
-
                   <b-row>
-                    <b-col cols="6"
+                    <b-col cols="3"
                       ><b-form-checkbox
                         id=""
-                        name=""
                         class="a-text text"
+                        name=""
                         value=""
                       >
-                        Sunday</b-form-checkbox
-                      ></b-col
-                    >
-                    <b-col><b-form-input name=""></b-form-input></b-col>- -
-                    <b-col><b-form-input name=""></b-form-input></b-col>
+                        Sunday
+                      </b-form-checkbox>
+                    </b-col>
+                    <b-col ><b-form-input name="" type="time" v-model="businessForm.openHours.sundayStart"></b-form-input></b-col>- -
+                    <b-col ><b-form-input name="" type="time" v-model="businessForm.openHours.sundayEnd"></b-form-input></b-col>
                   </b-row>
+  
                   <br />
                 </b-container>
               </b-form-group>
@@ -619,8 +619,12 @@ export default {
         { text: " Person", value: "person" },
         { text: " Business ", value: "business" },
       ],
+      OpenHours: [
+        {name:'Always Open', value:'1'}, 
+        {name:'Open for selected hours', value:'0'}
+      ],
       Aaddress:"",
-      openHours:1,
+      openHour:"",
       Odays: {
         mS:"",mE:"",
         tuS:"",tuE:"",
@@ -649,15 +653,22 @@ export default {
           City: "",
           PostalCode: "",
         },
-        // openHours:{
-        //   monday:this.Odays.mS+'--'+this.Odays.mE,
-        //   tuesday:this.Odays.tuS+'--'+this.Odays.tuE,
-        //   wednesday:this.Odays.wS+'--'+this.Odays.wE,
-        //   thursday:this.Odays.thS+'--'+this.Odays.thE,
-        //   friday:this.Odays.fS+'--'+this.Odays.fE,
-        //   satuday:this.Odays.saS+'--'+this.Odays.saE,
-        //   sunday:this.Odays.suS+'--'+this.Odays.suE,
-        // },
+        openHours:{
+          mondayStart:"",
+          mondayEnd:"",
+          tuesdayStart:"",
+          tuesdayEnd:"",
+          wednesdayStart:"",
+          wednesdayEnd:"",
+          thursdayStart:"",
+          thursdayEnd:"",
+          fridayStart:"",
+          fridayEnd:"",
+          satudayStart:"",
+          satudayEnd:"",
+          sundayStart:"",
+          sundayEnd:"",
+        },
         Akeywords:"",
         Marketplace:"",
       }

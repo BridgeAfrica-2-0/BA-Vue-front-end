@@ -11,7 +11,7 @@
               label-class="font-weight-bold pt-0 username"
               class="mb-0"
             >
-              <b-form-input id="bname" v-model="name" name="name" required></b-form-input>
+              <b-form-input id="bname" v-model="businessForm.name" name="name" required></b-form-input>
             </b-form-group>
           </b-container>
         </div>
@@ -26,7 +26,7 @@
               class="mb-0"
             >
               <b-form-select
-                v-model="category"
+                v-model="businessForm.category"
                 :options="categories"
                 name="category"
                 class="mb-3"
@@ -46,14 +46,10 @@
               label-class="font-weight-bold pt-0 username"
               class="mb-0"
             >
-              <b-form-textarea
-                id="Keywords"
-                v-model="Keywords"
-                name="Keywords"
-                placeholder="Enter something..."
-                rows="3"
-                max-rows="6"
-              ></b-form-textarea>
+              <b-form-tags 
+                input-id="tags-basic" 
+                v-model="businessForm.Skeywords"
+              ></b-form-tags>
             </b-form-group>
           </b-container>
         </div>
@@ -87,7 +83,7 @@
             >
               <b-form-select
                 id="timezone"
-                v-model="time_zone"
+                v-model="businessForm.time_zone"
                 :options="timezones"
                 name="timezone"
                 value-field="value"
@@ -109,7 +105,7 @@
             >
               <b-form-textarea
                 id="about"
-                v-model="about"
+                v-model="businessForm.about"
                 placeholder="Enter something..."
                 rows="3"
                 max-rows="6"
@@ -137,7 +133,7 @@
                 </b-col>
 
                 <b-col cols="8">
-                  <b-form-input id="phone1" v-model="phone1" name="phone1"></b-form-input>
+                  <b-form-input id="phone1" v-model="businessForm.phone1" name="phone1"></b-form-input>
                 </b-col>
               </b-row>
             </b-form-group>
@@ -163,7 +159,7 @@
                 </b-col>
 
                 <b-col cols="8">
-                  <b-form-input id="phone2" v-model="phone2" name="phone2"></b-form-input>
+                  <b-form-input id="phone2" v-model="businessForm.phone2" name="phone2"></b-form-input>
                 </b-col>
               </b-row>
             </b-form-group>
@@ -179,8 +175,8 @@
               label-class="font-weight-bold pt-0 username"
               class="mb-0"
             >
-              <b-form-input id="bname" name="website" v-model="website" required></b-form-input>
-              <b-form-checkbox class="a-text text" id="" value="website N/V" name="nowebsite" v-model="nowebsite">
+              <b-form-input id="bname" name="website" v-if="businessForm.website != 'website N/V'" v-model="businessForm.website" placeholder="http://wwww.example.com" required></b-form-input>
+              <b-form-checkbox class="a-text text" id="" value="website N/V" name="nowebsite" unchecked-value="website A/V" v-model="businessForm.website">
                 This Business does not have a Website
               </b-form-checkbox>
             </b-form-group>
@@ -196,8 +192,8 @@
               label-class="font-weight-bold pt-0 username"
               class="mb-0"
             >
-              <b-form-input id="bname" name="email" v-model="email" required></b-form-input>
-              <b-form-checkbox class="a-text text" id="" value="email N/V" name="noemail" v-model="noemail">
+              <b-form-input id="bname" name="email" v-if="businessForm.email != 'email N/V'" v-model="businessForm.email" required></b-form-input>
+              <b-form-checkbox class="a-text text" id="" value="email N/V" name="noemail" unchecked-value="email A/V" v-model="businessForm.email">
                 This Business does not have a Email
               </b-form-checkbox>
             </b-form-group>
@@ -214,7 +210,7 @@
               class="mb-0"
             >
               <country-select
-                v-model="country"
+                v-model="businessForm.country"
                 :country="country"
                 name="country"
                 topCountry="US"
@@ -233,7 +229,7 @@
               label-class="font-weight-bold pt-0 username"
               class="mb-0"
             >
-              <b-form-input id="bname" name="city" v-model="city" required></b-form-input>
+              <b-form-input id="bname" name="city" v-model="businessForm.city" required></b-form-input>
             </b-form-group>
           </b-container>
         </div>
@@ -247,7 +243,7 @@
               label-class="font-weight-bold pt-0 username"
               class="mb-0"
             >
-              <b-form-input id="bname" name="neighbourhood" v-mode="neighbourhood" required></b-form-input>
+              <b-form-input id="bname" name="neighbourhood" v-mode="businessForm.neighbourhood" required></b-form-input>
             </b-form-group>
           </b-container>
         </div>
@@ -261,7 +257,7 @@
               label-class="font-weight-bold pt-0 username"
               class="mb-0"
             >
-              <b-form-input id="bname" name="locationdesc" v-model="locationdesc" required></b-form-input>
+              <b-form-input id="bname" name="locationdesc" v-model="businessForm.locationdesc" required></b-form-input>
             </b-form-group>
           </b-container>
         </div>
@@ -279,24 +275,22 @@
                 This Business has an address</b-form-checkbox
               >
 
-              <b-container>
+              <b-container v-if="Aaddress">
                 <b-row class="text">
                   <b-col>
                     <p>Street Address</p>
-                    <b-form-input name=""></b-form-input>
+                    <b-form-input name="" v-model="businessForm.Aaddresses.Street"></b-form-input>
                   </b-col>
                   <b-col>
                     <p>City</p>
-                    <b-form-input name=""></b-form-input
+                    <b-form-input name="" v-model="businessForm.Aaddresses.City"></b-form-input
                   ></b-col>
                   <b-col>
                     <p>Postal Code</p>
-                    <b-form-input name=""></b-form-input
+                    <b-form-input name="" v-model="businessForm.Aaddresses.PostalCode"></b-form-input
                   ></b-col>
                 </b-row>
-
                 <br />
-
                 <div>
                   <b-embed
                     type="iframe"
@@ -319,14 +313,16 @@
               label-class="font-weight-bold pt-0 username"
               class="mb-0"
             >
-              <b-form-group class="mb-0" v-slot="{ ariaDescribedby }">
+              <b-form-group class="mb-0">
                 <b-form-radio-group
+                  v-model="openHours"
                   class="a-text text"
-                  :options="['Always Open', 'Open for selected hours']"
-                  :aria-describedby="ariaDescribedby"
+                  :options="['Always Open',  'Open for selected hours']"
+                  value-field="value"
+                  text-field="name"
                 ></b-form-radio-group>
                 <br />
-                <b-container>
+                <b-container >
                   <b-row>
                     <b-col cols="6"
                       ><b-form-checkbox
@@ -339,8 +335,8 @@
                       ></b-col
                     >
 
-                    <b-col><b-form-input name=""></b-form-input></b-col>-
-                    -<b-col><b-form-input name=""></b-form-input></b-col>
+                    <b-col><b-form-input name="" v-model="Odays.mS"></b-form-input></b-col>-
+                    -<b-col><b-form-input name="" v-model="Odays.mE"></b-form-input></b-col>
                   </b-row>
                   <br />
 
@@ -355,8 +351,8 @@
                         Tuesday</b-form-checkbox
                       ></b-col
                     >
-                    <b-col><b-form-input name=""></b-form-input></b-col>- -
-                    <b-col><b-form-input name=""></b-form-input></b-col>
+                    <b-col><b-form-input name="" v-model="Odays.mS"></b-form-input></b-col>- -
+                    <b-col><b-form-input name="" v-model="Odays.mE"></b-form-input></b-col>
                   </b-row>
                   <br />
 
@@ -416,7 +412,7 @@
                         name=""
                         value=""
                       >
-                        Saterday
+                        Saturday
                       </b-form-checkbox></b-col
                     >
                     <b-col><b-form-input name=""></b-form-input></b-col>- -
@@ -477,12 +473,10 @@
               label-class="font-weight-bold pt-0 username"
               class="mb-0"
             >
-              <b-form-textarea
-                id="textarea"
-                placeholder="Enter something..."
-                rows="3"
-                max-rows="6"
-              ></b-form-textarea>
+              <b-form-tags 
+                input-id="tags-basic" 
+                v-model="businessForm.Akeywords"
+              ></b-form-tags>
             </b-form-group>
           </b-container>
         </div>
@@ -496,7 +490,13 @@
               label-class="font-weight-bold pt-0 username"
               class="mb-0"
             >
-              <b-form-checkbox v-model="checked" name="check-button" switch>
+              <b-form-checkbox 
+                v-model="businessForm.Marketplace"
+                name="check-button" 
+                switch
+                value="1"
+                unchecked-value="0"
+              >
               </b-form-checkbox>
             </b-form-group>
           </b-container>
@@ -529,7 +529,6 @@ export default {
   mixins: [validationMixin],
   data() {
     return {
-      category: "",
       categories: [
         { item: "Professional_and_home_service", name: "Professionals" },
         { item: "Agriculture ", name: "Agriculture " },
@@ -548,7 +547,6 @@ export default {
         { item: "Mayor_concils", name: "Mayor_concils" },
         { item: "Taxis service", name: "Taxis service" }
       ],
-      timezone:"",
       timezones: [
         { label: "(GMT-12:00) International Date Line West", value: "-12" },
         { label: "(GMT-11:00) Midway Island, Samoa", value: "-11" },
@@ -621,6 +619,48 @@ export default {
         { text: " Person", value: "person" },
         { text: " Business ", value: "business" },
       ],
+      Aaddress:"",
+      openHours:1,
+      Odays: {
+        mS:"",mE:"",
+        tuS:"",tuE:"",
+        wS:"",wE:"",
+        thS:"",thE:"",
+        fS:"",fE:"",
+        saS:"",saE:"",
+        suS:"",suE:"",
+      },
+      businessForm: {
+        name: "",
+        category: "",
+        Skeywords: "",
+        timezone: "",
+        about: "",
+        phone1: "",
+        phone2: "",
+        website: "",
+        email: "",
+        country: "",
+        city: "",
+        neighbourhood: "",
+        locationdesc: "",
+        Aaddresses: {
+          Street: "",
+          City: "",
+          PostalCode: "",
+        },
+        // openHours:{
+        //   monday:this.Odays.mS+'--'+this.Odays.mE,
+        //   tuesday:this.Odays.tuS+'--'+this.Odays.tuE,
+        //   wednesday:this.Odays.wS+'--'+this.Odays.wE,
+        //   thursday:this.Odays.thS+'--'+this.Odays.thE,
+        //   friday:this.Odays.fS+'--'+this.Odays.fE,
+        //   satuday:this.Odays.saS+'--'+this.Odays.saE,
+        //   sunday:this.Odays.suS+'--'+this.Odays.suE,
+        // },
+        Akeywords:"",
+        Marketplace:"",
+      }
     };
   },
   

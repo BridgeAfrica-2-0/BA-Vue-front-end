@@ -425,10 +425,10 @@ export default {
   },
   computed: {
     products() {
-      return this.$store.getters["market/getProducts"];
+      return this.$store.getters["marketSearch/getProducts"];
     },
     prodLoader() {
-      return this.$store.getters["market/getLoader"];
+      return this.$store.getters["marketSearch/getLoader"];
     },
   },
   created() {
@@ -440,14 +440,14 @@ export default {
 
   methods: {
     changePage(value) {
-      // this.$store.commit("market/setProducts", '');
-      // this.$store.commit("market/setLoader", true);
+      // this.$store.commit("marketSearch/setProducts", '');
+      // this.$store.commit("marketSearch/setLoader", true);
 
       // this.prodLoader = true;
       this.currentPage = value;
 
       this.$store
-        .dispatch("market/nextPage", this.currentPage)
+        .dispatch("marketSearch/nextPage", this.currentPage)
         .then((res) => {
           console.log("products list: ");
           console.log(this.products);
@@ -465,7 +465,7 @@ export default {
       console.log("loader: ", this.prodLoader);
 
       await this.$store
-        .dispatch("market/getProducts")
+        .dispatch("marketSearch/getProducts")
         .then((res) => {
           console.log("products list: ");
           console.log(this.products);

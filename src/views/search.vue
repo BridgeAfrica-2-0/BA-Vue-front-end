@@ -510,12 +510,6 @@
               </h6>
 
               <Network />
-
-              <Network />
-
-              <Network />
-
-              <Network />
             </div>
 
             <!-- Filter out just the market place -->
@@ -1580,7 +1574,7 @@ export default {
       this.$store.commit("setProducts", []);
       // this.products = []
       await this.$store
-        .dispatch("market/getProducts")
+        .dispatch("marketSearch/getProducts")
         .then((res) => {
           console.log("products list: ");
           console.log(this.products);
@@ -1597,7 +1591,7 @@ export default {
 
     searchProducts() {
       this.$store
-        .dispatch("market/searchProducts", {keyword: this.navBarParams.keyword})
+        .dispatch("marketSearch/searchProducts", {keyword: this.navBarParams.keyword})
         .then((res) => {
           // console.log("categories loaded!");
         })
@@ -1606,6 +1600,7 @@ export default {
         });
     },
     // ------------
+
     SetCat(cat) {
       console.log(cat);
 

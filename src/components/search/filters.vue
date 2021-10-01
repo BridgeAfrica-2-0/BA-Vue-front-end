@@ -1789,10 +1789,10 @@ export default {
   },
   computed: {
     subCategories() {
-      return this.$store.getters["market/getSubCat"];
+      return this.$store.getters["marketSearch/getSubCat"];
     },
     subFilter() {
-      return this.$store.getters["market/getSubFilters"];
+      return this.$store.getters["marketSearch/getSubFilters"];
     },
   },
 
@@ -1802,7 +1802,7 @@ export default {
       this.noFilter = "";
 
       this.$store
-        .dispatch("market/getFilter", subCat.id)
+        .dispatch("marketSearch/getFilter", subCat.id)
         .then((res) => {
           this.searchProducts({ cat_id: subCat.cat_id, sub_cat: subCat.id });
           console.log("Filters: ");
@@ -1821,7 +1821,7 @@ export default {
             });
           });
 
-          this.$store.commit("market/setSubFilters", filter);
+          this.$store.commit("marketSearch/setSubFilters", filter);
           console.log("[DeBUG] FILTER: ", this.subFilter);
         })
         .catch((err) => {
@@ -1832,7 +1832,7 @@ export default {
 
     searchProducts(data) {
       this.$store
-        .dispatch("market/searchProducts", data)
+        .dispatch("marketSearch/searchProducts", data)
         .then((res) => {
           // console.log("categories loaded!");
         })

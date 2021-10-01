@@ -36,11 +36,13 @@
                     @click="category(subCat)"
                     @mouseover="getFilter(subCat)"
                   >
-                    <b-dropdown-item href="#"
-                      ><img
+                    <b-dropdown-item href="#">
+                      <img
+                      v-if="subCat.cat_image"
                         class="img-fluid picture logo-img"
-                        :src="`../../assets${subCat.cat_image}`"
+                        :src="require(`@/assets${subCat.cat_image}`)"
                       />
+                      <span v-else>!@</span>
                       {{ subCat.name }}
                     </b-dropdown-item>
 
@@ -87,7 +89,7 @@
                       
                       ><img
                         class="img-fluid picture logo-img"
-                        :src="`@/assets${category.category.cat_image}`"
+                        :src="require(`@/assets${category.category.cat_image}`)"
                       />
                       {{ category.category.name }}
                     </b-dropdown-item>
@@ -122,10 +124,10 @@ export default {
   },
   computed: {
     categories() {
-      return this.$store.getters["market/getCategories"];
+      return this.$store.getters["marketSearch/getCategories"];
     },
     subCategories() {
-      return this.$store.getters["market/getSubCat"];
+      return this.$store.getters["marketSearch/getSubCat"];
     },
   },
   created() {
@@ -136,7 +138,7 @@ export default {
     getCategories() {
       let bussiness_id = this.$route.params;
       this.$store
-        .dispatch("market/getCategories", bussiness_id)
+        .dispatch("marketSearch/getCategories", bussiness_id)
         .then((res) => {
           // console.log("categories loaded!");
         })
@@ -155,7 +157,7 @@ export default {
       this.$emit("parentcategory", catId);
 
       // this.subCategories.push(subCat);
-      this.$store.commit("market/setSubCat", subCat);
+      this.$store.commit("marketSearch/setSubCat", subCat);
 
       if (!subCat.length) this.hideSubCat(catId);
       console.log("Subcat:", this.subCategories);
@@ -170,7 +172,7 @@ export default {
 
     searchProducts(data) {
       this.$store
-        .dispatch("market/searchProducts", data)
+        .dispatch("marketSearch/searchProducts", data)
         .then((res) => {
           // console.log("categories loaded!");
         })
@@ -191,7 +193,7 @@ export default {
 
 
       // this.subCategories.push(subCat);
-      this.$store.commit("market/setSubCat", subCat);
+      this.$store.commit("marketSearch/setSubCat", subCat);
       // console.log("Subcat:", this.subCategories);
 
       // // Search by categories
@@ -207,7 +209,7 @@ export default {
       console.log("[DEBUG] Subcategories: ", subCat);
 
        this.$store
-        .dispatch("market/getFilter", subCat.id)
+        .dispatch("marketSearch/getFilter", subCat.id)
         .then((res) => {
           this.searchProducts({ cat_id: subCat.cat_id, sub_cat: subCat.id });
           console.log("Filters: ");
@@ -217,7 +219,7 @@ export default {
           // }
 
           // this.filterLoader = false;
-          this.$store.commit("market/setSubFilters", res.data.data);
+          this.$store.commit("marketSearch/setSubFilters", res.data.data);
         })
         .catch((err) => {
           console.error(err);

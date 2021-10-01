@@ -3,7 +3,8 @@ import Vuex from "vuex";
 import auth from "./auth";
 import dashboard from "./dashboard";
 import businessOwner from "./businessOwner";
-import market from "./market";
+import marketSearch from "./marketSearch";
+import networkSearch from "./networkSearch";
 import ProfileAndBusinessDetails from "./ProfileAndBusinessDetails";
 import hotbusiness from "./hotbusiness";
 import networkDetails from "./networkDetails";
@@ -28,6 +29,7 @@ export default new Vuex.Store({
         dashboard,
         hotbusiness,
         networkProfileMembers,
-        market
+        marketSearch,
+        networkSearch
     }
 });

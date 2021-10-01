@@ -15,15 +15,17 @@ export const loader = {
     overlay: null
   }),
   watch: {
-    loading: function (newValue) {
-      console.log('mixins', this.loading)
-      if (newValue)
+    loading: function (newValue, oldValue) {
+
+      if (newValue) {
         this.overlay = this.$loading.show({
           container: this.$refs.formContainer,
           canCancel: true,
         });
-      else
+      } else {
         this.overlay.hide()
+      }
+
     }
   }
 }

@@ -28,11 +28,10 @@ export const mutations = {
   },
 
   [TYPES.FIND_MIXED_POST](state, payload) {
-    state.posts = [...state.posts, ...payload].sort((a, b) => a.id > b.id)
+    state.posts = [...state.posts, ...payload].sort((a, b) => a.post_id > b.post_id)
   },
 
   [TYPES.RESET_RESULT](state) {
-
     if (state.users.length)
       state.users = []
     else
@@ -40,8 +39,12 @@ export const mutations = {
   },
 
   [TYPES.LOADING](state, payload = null) {
-    if (null != payload)
-      state.isLoading = payload
+    if (null != payload) {
+      if (typeof (payload) == 'boolean')
+        state.isLoading = payload
+      else
+        throw new Error('payload must be a bolean')
+    }
     else
       state.isLoading = !state.isLoading
   },

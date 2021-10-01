@@ -17,6 +17,11 @@ import IconifyIcon from "@iconify/vue";
 import homeIconData from "@iconify-icons/mdi-light/home";
 import ReadMore from "vue-read-more";
 import VueSocialauth from "vue-social-auth";
+import Notifications from 'vue-notification'
+
+
+
+Vue.use(Notifications)
 // import firebase from "firebase";
 IconifyIcon.addIcon("home", homeIconData);
 
@@ -127,12 +132,12 @@ import InfiniteLoading from 'vue-infinite-loading';
 Vue.use(InfiniteLoading, { /* options */ });
 
 Vue.use(VueGoogleMaps, {
-    load: {
-        key: "AIzaSyAGZU6cqra18t1fhN1AbzRsEc_pgt7n2C8",
-        libraries: "places"
-    },
-    autobindAllEvents: false,
-    installComponents: true
+  load: {
+    key: "AIzaSyAGZU6cqra18t1fhN1AbzRsEc_pgt7n2C8",
+    libraries: "places"
+  },
+  autobindAllEvents: false,
+  installComponents: true
 });
 
 
@@ -157,33 +162,33 @@ Vue.config.productionTip = false;
 
 new Vue({
 
-    router,
-    store,
-    i18n,
+  router,
+  store,
+  i18n,
 
-    created() {
-        const userInfo = localStorage.getItem("user");
-        if (userInfo) {
-            const userData = JSON.parse(userInfo);
-            this.$store.commit("auth/setUserData", userData);
+  created() {
+    const userInfo = localStorage.getItem("user");
+    if (userInfo) {
+      const userData = JSON.parse(userInfo);
+      this.$store.commit("auth/setUserData", userData);
+    }
+    axios.interceptors.response.use(
+      (response) => response,
+      (error) => {
+
+        // remove loader when request return error
+        this.$store.dispatch("search/LOADING", false);
+
+        if (error.response.status === 401) {
+          // this.$store.dispatch("auth/logout");
+          console.log("error has occure");
+
+
         }
-        axios.interceptors.response.use(
-            (response) => response,
-            (error) => {
-
-                // remove loader when request return error
-                this.$store.dispatch("search/LOADING", false);
-
-                if (error.response.status === 401) {
-                    // this.$store.dispatch("auth/logout");
-                    console.log("error has occure");
-
-
-                }
-                return Promise.reject(error);
-            }
-        );
-    },
+        return Promise.reject(error);
+      }
+    );
+  },
 
 
   render: h => h(App),

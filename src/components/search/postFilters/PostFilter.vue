@@ -3,6 +3,7 @@
     <div class="fl mb-5">
       <label for="datepicker-dateformat1">Posted Date</label>
       <b-form-datepicker
+        v-model="created_at"
         id="datepicker-dateformat1"
         :date-format-options="{
           year: 'numeric',
@@ -193,6 +194,7 @@ export default {
     Button,
   },
   data: () => ({
+    created_at: null,
     isRecentPost: false,
     isPostHaveNotSeen: false,
     rootSectionIsVisible: false,
@@ -227,10 +229,27 @@ export default {
   watch: {
     isRecentPost: function (newValue) {
       if (newValue)
-        this.findPeoplePost({ data: { recent_post: "" }, lauchLoader: true });
+        this.findPeoplePost({
+          credentials: { recent_post: "" },
+          lauchLoader: true,
+          endLoader: false,
+        });
     },
     isPostHaveNotSeen: function (newValue) {
-      this.findPeoplePost({ data: { not_see: "" }, lauchLoader: true });
+      if (newValue)
+        this.findPeoplePost({
+          credentials: { not_seen: "" },
+          lauchLoader: true,
+          endLoader: false,
+        });
+    },
+
+    created_at: function (newValue) {
+      this.findPeoplePost({
+        credentials: { created_at: this.created_at },
+        lauchLoader: true,
+        endLoader: false,
+      });
     },
   },
   methods: {
@@ -270,7 +289,7 @@ export default {
 
       credentials.map((item, index) => {
         this.strategies[item]({
-          data: data[item],
+          credentials: data[item],
           lauchLoader: startLoader(item),
           endLoader: stopLoader(index),
         });

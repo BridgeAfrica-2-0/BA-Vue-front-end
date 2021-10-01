@@ -4,5 +4,5 @@ export const state = {
   isLoading: false,
   page: 1,
   callback: null,
-  postKeyword: 'a'
+  postKeyword: null,
 }

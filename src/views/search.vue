@@ -561,7 +561,7 @@
               </div>
               <h6>
                 <fas-icon class="icons" :icon="['fab', 'readme']" size="lg" />
-                Post
+                Posting man
               </h6>
 
               <NotFound v-if="!posts.length" :title="notFoundComponentTitle" />
@@ -1659,21 +1659,37 @@ export default {
     strategies() {
       try {
         this.strategy[`${this.selectedId}`]();
-        this.newCallbackForPagination(this.strategy[`${this.selectedId}`]);
+        //this.newCallbackForPagination(this.strategy[`${this.selectedId}`]);
       } catch (error) {
-        console.log(error);
         console.warn(`Implement function for selectedId=${this.selectedId}`);
       }
+    },
+
+    onNotified(text) {
+      this.$notify({
+        group: "notification",
+        title: "Important message",
+        type: "warn",
+        duration: 5000,
+        text,
+      });
     },
     onFindUser() {
       if (this.navBarParams.keyword.trim())
         this.findUser(this.navBarParams.keyword);
+      else this.onNotified("");
     },
 
     onFindPost() {
       if (this.navBarParams.keyword.trim()) {
         this.postKeyword(this.navBarParams.keyword);
-        this.findPost({ data: "", lauchLoader: "true", endLoader: "true" });
+        this.findPost({
+          credentials: {},
+          lauchLoader: true,
+          endLoader: false,
+        });
+      } else {
+        this.onNotified("the word must have at least 3 letters");
       }
     },
 

@@ -56,7 +56,7 @@ export const mutations = {
       console.error(`${payload} should be a number`)
   },
 
-  [TYPES.SET_CURRENT_PAGINATE_CALLBACT](state, payload) {
+  [TYPES.SET_CURRENT_PAGINATE_CALLBACK](state, payload) {
     if (typeof (payload) === 'function')
       state.callback = payload
     else

@@ -228,6 +228,11 @@ export default {
 
   watch: {
     isRecentPost: function (newValue) {
+      if (!this.keyword) {
+        this.onNotified("the keyword does not exist");
+        this.isRecentPost = false;
+        return false;
+      }
       if (newValue)
         this.findPeoplePost({
           credentials: { recent_post: "" },
@@ -236,6 +241,11 @@ export default {
         });
     },
     isPostHaveNotSeen: function (newValue) {
+      if (!this.keyword) {
+        this.isPostHaveNotSeen = false;
+        this.onNotified("the keyword does not exist");
+        return false;
+      }
       if (newValue)
         this.findPeoplePost({
           credentials: { not_seen: "" },
@@ -252,12 +262,26 @@ export default {
       });
     },
   },
+
+  computed: {
+    keyword: "search/POST_KEYWORD",
+  },
   methods: {
     ...mapActions({
       findPeoplePost: "search/FIND_POST",
       findBuisnessPost: "search/FIND_BUISNESS_POST",
       findNetworkPost: "search/FIND_NETWORK_POST",
     }),
+
+    onNotified(text) {
+      this.$notify({
+        group: "notification",
+        title: "Important message",
+        type: "warn",
+        duration: 5000,
+        text,
+      });
+    },
 
     map(data, type) {
       return data.map((e) => ({
@@ -267,6 +291,11 @@ export default {
     },
 
     onProcess() {
+      console.log(this.keyword);
+      if (!this.keyword) {
+        this.onNotified("the keyword does not exist");
+        return false;
+      }
       const user = this.map(this.selectedPeople, `user`);
       const buisness = this.map(this.selectedBuisness, `buisness`);
       const network = this.map(this.selectedNetwork, `network`);

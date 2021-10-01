@@ -561,7 +561,7 @@
               </div>
               <h6>
                 <fas-icon class="icons" :icon="['fab', 'readme']" size="lg" />
-                Posting man
+                Posting
               </h6>
 
               <NotFound v-if="!posts.length" :title="notFoundComponentTitle" />
@@ -632,7 +632,7 @@ export default {
       peoples: "search/GET_RESULT_USER",
       posts: "search/GET_RESULT_POST",
       page: "search/GET_CURRENT_PAGINATION_PAGE",
-      callbackForPagination: "search/GET_CURRENT_PAGINATION_PAGE",
+      callbackForPagination: "search/SET_CURRENT_PAGINATE_CALLBACK",
     }),
   },
 
@@ -1628,7 +1628,7 @@ export default {
           document.documentElement.offsetHeight;
 
         if (bottomOfWindow) {
-          //this.callbackForPagination();
+          this.callbackForPagination();
         }
       };
     },
@@ -1659,7 +1659,7 @@ export default {
     strategies() {
       try {
         this.strategy[`${this.selectedId}`]();
-        //this.newCallbackForPagination(this.strategy[`${this.selectedId}`]);
+        this.newCallbackForPagination(this.strategy[`${this.selectedId}`]);
       } catch (error) {
         console.warn(`Implement function for selectedId=${this.selectedId}`);
       }
@@ -1677,7 +1677,7 @@ export default {
     onFindUser() {
       if (this.navBarParams.keyword.trim())
         this.findUser(this.navBarParams.keyword);
-      else this.onNotified("");
+      else this.onNotified("the word must have at least 3 letters");
     },
 
     onFindPost() {

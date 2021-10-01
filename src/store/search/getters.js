@@ -14,7 +14,12 @@ export const getters = {
 		return state.isLoading
 	},
 
-	[TYPES.GET_CURRENT_PAGINATION_PAGE](state) {
+
+	[TYPES.POST_KEYWORD](state) {
+		return state.postKeyword
+	},
+
+	[TYPES.SET_CURRENT_PAGINATE_CALLBACK](state) {
 		return state.callback
 	}
 

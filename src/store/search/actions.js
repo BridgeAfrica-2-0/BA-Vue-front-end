@@ -104,9 +104,9 @@ export const actions = {
   },
 
 
-  [TYPES.SET_CURRENT_PAGINATE_CALLBACT]({ commit }, payload) {
+  [TYPES.SET_CURRENT_PAGINATE_CALLBACK]({ commit }, payload) {
     if (typeof (payload) === 'function')
-      commit(TYPES.SET_CURRENT_PAGINATE_CALLBACT, payload)
+      commit(TYPES.SET_CURRENT_PAGINATE_CALLBACK, payload)
     else
       console.error(`${payload} should be a function`)
   },

@@ -139,8 +139,7 @@
                     </ul>
                   </div>
                   <div class="input-group col-md-12 text-center mb-4 selec">
-                    <label
-                      class="col-md-4 control-label pr-0 text-design"
+                    <label class="col-md-4 control-label pr-0 text-design"
                       >14 Items -
                     </label>
                     <div class="col-md-5 pl-0 pr-0">
@@ -173,7 +172,7 @@
 
 <script>
 import Images from "./images";
-import axios from "axios";
+import { mapActions } from "vuex";
 export default {
   components: { Images },
   data: function() {
@@ -195,7 +194,7 @@ export default {
         "https://placekitten.com/806/800",
         "https://placekitten.com/807/800",
         "https://placekitten.com/808/800",
-        "https://placekitten.com/809/800"
+        "https://placekitten.com/809/800",
       ],
       imagees: [
         "https://i.wifegeek.com/200426/f9459c52.jpg",
@@ -217,9 +216,9 @@ export default {
         "https://i.wifegeek.com/200426/177ef44c.jpg",
         "https://i.wifegeek.com/200426/d74d9040.jpg",
         "https://i.wifegeek.com/200426/81e24a47.jpg",
-        "https://i.wifegeek.com/200426/43e2e8bb.jpg"
+        "https://i.wifegeek.com/200426/43e2e8bb.jpg",
       ],
-      index: 0
+      index: 0,
     };
   },
   methods: {
@@ -236,7 +235,7 @@ export default {
         container: this.fullPage ? null : this.$refs.creatform,
         canCancel: true,
         onCancel: this.onCancel,
-        color: "#e75c18"
+        color: "#e75c18",
       });
       const albumUrl = this.url + "/" + abum_id;
       this.$store
@@ -246,7 +245,7 @@ export default {
           this.showalbum = true;
           loader.hide();
         })
-        .catch(err => {
+        .catch((err) => {
           console.log({ err: err });
           loader.hide();
         });
@@ -259,129 +258,130 @@ export default {
       this.edit_name = album_name;
       this.$refs["editalbum"].show();
     },
-    deleteAlbum(album_id) {
-      let loader = this.$loading.show({
-        container: this.fullPage ? null : this.$refs.creatform,
-        canCancel: true,
-        onCancel: this.onCancel,
-        color: "#e75c18"
-      });
-      axios
-        .post("business/album/edit/" + this.url + "/" + album_id, {
-          name: this.name
-        })
-        .then(response => {
-          console.log(response.data);
-          this.flashMessage.show({
-            status: "success",
-            message: "Album Deleted"
-          });
-          loader.hide();
-        })
-        .catch(err => {
-          this.sending = false;
-          if (err.response.status == 422) {
-            console.log({ err: err });
-            this.flashMessage.show({
-              status: "error",
-              message: err.response.data.message
-            });
-            loader.hide();
-          } else {
-            this.flashMessage.show({
-              status: "error",
-              message: "Unable to Delete your abum"
-            });
-            console.log({ err: err });
-            loader.hide();
-          }
-        });
-    },
-    updateAlbum(album_id) {
-      let loader = this.$loading.show({
-        container: this.fullPage ? null : this.$refs.creatform,
-        canCancel: true,
-        onCancel: this.onCancel,
-        color: "#e75c18"
-      });
-      axios
-        .post("business/album/update/" + this.url + "/" + album_id, {
-          name: this.edit_name
-        })
-        .then(response => {
-          console.log(response.data);
-          this.flashMessage.show({
-            status: "success",
-            message: "Album Updated"
-          });
-          loader.hide();
-        })
-        .catch(err => {
-          this.sending = false;
-          if (err.response.status == 422) {
-            console.log({ err: err });
-            this.flashMessage.show({
-              status: "error",
-              message: err.response.data.message
-            });
-            loader.hide();
-          } else {
-            this.flashMessage.show({
-              status: "error",
-              message: "Unable to create your Album"
-            });
-            console.log({ err: err });
-            loader.hide();
-          }
-        });
-    },
+
+    ...mapActions({
+      createAlbum: "UserProfileOwner/createAlbum",
+      updateAlbum: "UserProfileOwner/updateAlbum",
+      deleteAlbum: "UserProfileOwner/deleteAlbum",
+      getAlbums: "UserProfileOwner/getAlbums",
+    }),
+
     createAlbum() {
       let loader = this.$loading.show({
         container: this.fullPage ? null : this.$refs.creatform,
         canCancel: true,
         onCancel: this.onCancel,
-        color: "#e75c18"
+        color: "#e75c18",
       });
-      axios
-        .post("business/album/create/" + this.url, {
-          name: this.name
-        })
-        .then(response => {
-          console.log(response.data);
+      this.createAlbum(this.name)
+        .then((response) => {
           this.flashMessage.show({
             status: "success",
-            message: "Album Created"
+            message: "Album Created",
           });
           loader.hide();
         })
-        .catch(err => {
+        .catch((err) => {
           this.sending = false;
           if (err.response.status == 422) {
             console.log({ err: err });
             this.flashMessage.show({
               status: "error",
-              message: err.response.data.message
+              message: err.response.data.message,
             });
             loader.hide();
           } else {
             this.flashMessage.show({
               status: "error",
-              message: "Unable to create your Album"
+              message: "Unable to create your Album",
             });
             console.log({ err: err });
             loader.hide();
           }
         });
-    }
+    },
+
+    updateAlbum() {
+      let loader = this.$loading.show({
+        container: this.fullPage ? null : this.$refs.creatform,
+        canCancel: true,
+        onCancel: this.onCancel,
+        color: "#e75c18",
+      });
+      this.updateAlbum(this.edit_name, this.album_id)
+        .then(() => {
+          this.flashMessage.show({
+            status: "success",
+            message: "Album Updated",
+          });
+          loader.hide();
+        })
+        .catch((err) => {
+          this.sending = false;
+          if (err.response.status == 422) {
+            console.log({ err: err });
+            this.flashMessage.show({
+              status: "error",
+              message: err.response.data.message,
+            });
+            loader.hide();
+          } else {
+            this.flashMessage.show({
+              status: "error",
+              message: "Unable to create your Album",
+            });
+            console.log({ err: err });
+            loader.hide();
+          }
+        });
+    },
+
+    deleteAlbum() {
+      let loader = this.$loading.show({
+        container: this.fullPage ? null : this.$refs.creatform,
+        canCancel: true,
+        onCancel: this.onCancel,
+        color: "#e75c18",
+      });
+      this.deleteAlbum(this.name, this.album_id)
+        .then(() => {
+          this.flashMessage.show({
+            status: "success",
+            message: "Album Deleted",
+          });
+          loader.hide();
+        })
+        .catch((err) => {
+          this.sending = false;
+          if (err.response.status == 422) {
+            console.log({ err: err });
+            this.flashMessage.show({
+              status: "error",
+              message: err.response.data.message,
+            });
+            loader.hide();
+          } else {
+            this.flashMessage.show({
+              status: "error",
+              message: "Unable to Delete your abum",
+            });
+            console.log({ err: err });
+            loader.hide();
+          }
+        });
+    },
   },
   mounted() {
     this.url = this.$route.params.id;
   },
+  beforeMount() {
+    this.getAlbums();
+  },
   computed: {
     albums() {
       return this.$store.state.UserProfileOwner.albums;
-    }
-  }
+    },
+  },
 };
 </script>
 

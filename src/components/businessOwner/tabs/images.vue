@@ -2,349 +2,354 @@
   <div>
     <div class="row">
       <div class="container-fluid">
+        <b-modal hide-footer size="md" id="Details" ref="Details"> </b-modal>
+        <div>
+          <agile
+            :nav-buttons="false"
+            :autoplay-speed="5000"
+            :speed="2500"
+            fade="fade"
+            pause-on-hover="pause-on-hover"
+            pause-on-dots-hover="pause-on-dots-hover"
+            autoplay="autoplay"
+          >
+            <div class="slide" v-for="img_url in show_url" :key="img_url.id">
+              <img :src="img_url.media_ulr" alt="" />
+            </div>
+            <template slot="prevButton"
+              ><i class="fas fa-chevron-left"></i
+            ></template>
+            <template slot="nextButton"
+              ><i class="fas fa-chevron-right"></i
+            ></template>
+            <template slot="caption"> {{ content }}</template>
+          </agile>
+          <div class="img-gall">
+            <a href="#!"
+              ><img
+                class="card-img btn p-0"
+                src="@/assets/img/m1.jpg"
+                alt=""
+                v-b-modal.modal-8
+            /></a>
 
-       
-
-      
-    
-
-
-    <b-modal hide-footer size="md"  id="Details" ref="Details">
-
-   
-<div >  
- 
-       
-
-       
-       
-  <agile :nav-buttons="false" :autoplay-speed="5000" :speed="2500" fade="fade" pause-on-hover="pause-on-hover" pause-on-dots-hover="pause-on-dots-hover" autoplay="autoplay" >   
-  
-    <div class="slide" v-for="img_url in show_url"  :key="img_url.id" >   <img :src="img_url.media_ulr" alt="">  </div>
-     <template slot="prevButton"><i class="fas fa-chevron-left"></i></template>
-    <template slot="nextButton"><i class="fas fa-chevron-right"></i></template>
-     <template slot="caption"> {{content}}</template>
-  
-
-  </agile>
-
- 
-
-
-        
-
-        <div class="img-gall">
-          <a href="#!"
-            ><img
-              class="card-img btn p-0"
-              src="@/assets/img/m1.jpg"
-              alt=""
-              v-b-modal.modal-8
-          /></a>
-
-          <b-modal id="modal-8" title="Details">
-            <img class="card-img" src="@/assets/img/m1.jpg" alt="" />
-            <h4>Post Title</h4>
-            <p class="my-4">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum
-              quisquam sequi, ullam aliquam ab illo suscipit, earum quam,
-              doloribus id sit consequuntur tempora molestiae blanditiis.
-            </p>
-          </b-modal>
-          <div class="mediadesc">
-            <ul class="navbar-nav pull-right">
-              <li class="nav-item dropdown m-0 p-0">
-                <b-dropdown
-                  size="sm"
-                  class="float-right"
-                  variant="link"
-                  toggle-class="text-decoration-none"
-                  no-caret
-                >
-                  <template #button-content>
-                    <fas-icon
-                      class="drop-color font-weight-bolder"
-                      :icon="['fas', 'ellipsis-v']"
-                    />
-                  </template>
-                  <b-dropdown-item href="#">Download</b-dropdown-item>
-                  <b-dropdown-item href="#"
-                    >Make Profile Picture</b-dropdown-item
+            <b-modal id="modal-8" title="Details">
+              <img class="card-img" src="@/assets/img/m1.jpg" alt="" />
+              <h4>Post Title</h4>
+              <p class="my-4">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum
+                quisquam sequi, ullam aliquam ab illo suscipit, earum quam,
+                doloribus id sit consequuntur tempora molestiae blanditiis.
+              </p>
+            </b-modal>
+            <div class="mediadesc">
+              <ul class="navbar-nav pull-right">
+                <li class="nav-item dropdown m-0 p-0">
+                  <b-dropdown
+                    size="sm"
+                    class="float-right"
+                    variant="link"
+                    toggle-class="text-decoration-none"
+                    no-caret
                   >
-                  <b-dropdown-item href="#">Make Cover Photo</b-dropdown-item>
-                  <b-dropdown-item href="#">Delete</b-dropdown-item>
-                </b-dropdown>
-              </li>
-            </ul>
+                    <template #button-content>
+                      <fas-icon
+                        class="drop-color font-weight-bolder"
+                        :icon="['fas', 'ellipsis-v']"
+                      />
+                    </template>
+                    <b-dropdown-item href="#">Download</b-dropdown-item>
+                    <b-dropdown-item href="#"
+                      >Make Profile Picture</b-dropdown-item
+                    >
+                    <b-dropdown-item href="#">Make Cover Photo</b-dropdown-item>
+                    <b-dropdown-item href="#">Delete</b-dropdown-item>
+                  </b-dropdown>
+                </li>
+              </ul>
+            </div>
           </div>
-        </div>
-        <div class="img-gall">
-          <a href="#!"
-            ><img
-              class="card-img btn p-0"
-              src="@/assets/img/m2.jpg"
-              alt=""
-
-             @click="showPic(pictures.media, pictures.content )"
-          /></a>   </div>
-    <FlashMessage />
-    <div class="row">
-      <div class="container-fluid">
-        <b-modal hide-footer size="xl" id="Details" ref="Details">
-          <img class="card-img" :src="show_url" alt="" />
-        </b-modal>
-              v-b-modal.modal-a
-          /></a>
-
-          <b-modal id="modal-a" title="Details">
-            <img class="card-img" src="@/assets/img/m2.jpg" alt="" />
-            <h4>Post Title</h4>
-            <p class="my-4">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum
-              quisquam sequi, ullam aliquam ab illo suscipit, earum quam,
-              doloribus id sit consequuntur tempora molestiae blanditiis.
-            </p>
-          </b-modal>
-          <div class="mediadesc">
-            <ul class="navbar-nav pull-right">
-              <li class="nav-item dropdown">
-                <b-dropdown
-                  size="sm"
-                  class="float-right"
-                  variant="link"
-                  toggle-class="text-decoration-none"
-                  no-caret
-                >
-                  <template #button-content>
-                    <fas-icon
-                      class="drop-color font-weight-bolder"
-                      :icon="['fas', 'ellipsis-v']"
-                    />
-                  </template>
-                  <b-dropdown-item href="#">Download</b-dropdown-item>
-                  <b-dropdown-item href="#"
-                    >Make Profile Picture</b-dropdown-item
-                  >
-                  <b-dropdown-item href="#">Make Cover Photo</b-dropdown-item>
-                  <b-dropdown-item href="#">Delete</b-dropdown-item>
-                </b-dropdown>
-              </li>
-            </ul>
+          <div class="img-gall">
+            <a href="#!"
+              ><img
+                class="card-img btn p-0"
+                src="@/assets/img/m2.jpg"
+                alt=""
+                @click="showPic(pictures.media, pictures.content)"
+            /></a>
           </div>
-        </div>
+          <FlashMessage />
+          <div class="row">
+            <div class="container-fluid">
+              <b-modal hide-footer size="xl" id="Details" ref="Details">
+                <img class="card-img" :src="show_url" alt="" />
+              </b-modal>
 
+              <b-modal id="modal-a" title="Details">
+                <img class="card-img" src="@/assets/img/m2.jpg" alt="" />
+                <h4>Post Title</h4>
+                <p class="my-4">
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum
+                  quam, doloribus id sit consequuntur tempora molestiae
+                  blanditiis.
+                </p>
+              </b-modal>
+              <div class="mediadesc">
+                <ul class="navbar-nav pull-right">
+                  <li class="nav-item dropdown">
+                    <b-dropdown
+                      size="sm"
+                      class="float-right"
+                      variant="link"
+                      toggle-class="text-decoration-none"
+                      no-caret
+                    >
+                      <template #button-content>
+                        <fas-icon
+                          class="drop-color font-weight-bolder"
+                          :icon="['fas', 'ellipsis-v']"
+                        />
+                      </template>
+                      <b-dropdown-item href="#">Download</b-dropdown-item>
+                      <b-dropdown-item href="#"
+                        >Make Profile Picture</b-dropdown-item
+                      >
+                      <b-dropdown-item href="#"
+                        >Make Cover Photo</b-dropdown-item
+                      >
+                      <b-dropdown-item href="#">Delete</b-dropdown-item>
+                    </b-dropdown>
+                  </li>
+                </ul>
+              </div>
+            </div>
 
-        <div class="img-gall">
-          <a href="#!"
-            ><img
-              class="card-img btn p-0"
-              src="@/assets/img/m3.jpg"
-              alt=""
-              v-b-modal.modal-b
-          /></a>
+            <div class="img-gall">
+              <a href="#!"
+                ><img
+                  class="card-img btn p-0"
+                  src="@/assets/img/m3.jpg"
+                  alt=""
+                  v-b-modal.modal-b
+              /></a>
 
-          <b-modal id="modal-b" title="Details">
-            <img class="card-img" src="@/assets/img/m3.jpg" alt="" />
-            <h4>Post Title</h4>
-            <p class="my-4">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum
-              quisquam sequi, ullam aliquam ab illo suscipit, earum quam,
-              doloribus id sit consequuntur tempora molestiae blanditiis.
-            </p>
-          </b-modal>
-          <div class="mediadesc">
-            <ul class="navbar-nav pull-right">
-              <li class="nav-item dropdown">
-                <b-dropdown
-                  size="sm"
-                  class="float-right"
-                  variant="link"
-                  toggle-class="text-decoration-none"
-                  no-caret
-                >
-                  <template #button-content>
-                    <fas-icon
-                      class="drop-color font-weight-bolder"
-                      :icon="['fas', 'ellipsis-v']"
-                    />
-                  </template>
-                  <b-dropdown-item href="#">Download</b-dropdown-item>
-                  <b-dropdown-item href="#"
-                    >Make Profile Picture</b-dropdown-item
-                  >
-                  <b-dropdown-item href="#">Make Cover Photo</b-dropdown-item>
-                  <b-dropdown-item href="#">Delete</b-dropdown-item>
-                </b-dropdown>
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div class="img-gall">
-          <a href="#!"
-            ><img class="card-img" src="@/assets/img/m4.jpg" alt=""
-          /></a>
-          <div class="mediadesc">
-            <ul class="navbar-nav pull-right">
-              <li class="nav-item dropdown">
-                <b-dropdown
-                  size="sm"
-                  class="float-right"
-                  variant="link"
-                  toggle-class="text-decoration-none"
-                  no-caret
-                >
-                  <template #button-content>
-                    <fas-icon
-                      class="drop-color font-weight-bolder"
-                      :icon="['fas', 'ellipsis-v']"
-                    />
-                  </template>
-                  <b-dropdown-item href="#">Download</b-dropdown-item>
-                  <b-dropdown-item href="#"
-                    >Make Profile Picture</b-dropdown-item
-                  >
-                  <b-dropdown-item href="#">Make Cover Photo</b-dropdown-item>
-                  <b-dropdown-item href="#">Delete</b-dropdown-item>
-                </b-dropdown>
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div class="img-gall">
-          <a href="#!"
-            ><img class="card-img" src="@/assets/img/m5.jpg" alt=""
-          /></a>
-          <div class="mediadesc">
-            <ul class="navbar-nav pull-right">
-              <li class="nav-item dropdown">
-                <b-dropdown
-                  size="sm"
-                  class="float-right"
-                  variant="link"
-                  toggle-class="text-decoration-none"
-                  no-caret
-                >
-                  <template #button-content>
-                    <fas-icon
-                      class="drop-color font-weight-bolder"
-                      :icon="['fas', 'ellipsis-v']"
-                    />
-                  </template>
-                  <b-dropdown-item href="#">Download</b-dropdown-item>
-                  <b-dropdown-item href="#"
-                    >Make Profile Picture</b-dropdown-item
-                  >
-                  <b-dropdown-item href="#">Make Cover Photo</b-dropdown-item>
-                  <b-dropdown-item href="#">Delete</b-dropdown-item>
-                </b-dropdown>
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div class="img-gall">
-          <a href="#!"
-            ><img class="card-img" src="@/assets/img/m6.jpg" alt=""
-          /></a>
-          <div class="mediadesc">
-            <ul class="navbar-nav pull-right">
-              <li class="nav-item dropdown">
-                <b-dropdown
-                  size="sm"
-                  class="float-right"
-                  variant="link"
-                  toggle-class="text-decoration-none"
-                  no-caret
-                >
-                  <template #button-content>
-                    <fas-icon
-                      class="drop-color font-weight-bolder"
-                      :icon="['fas', 'ellipsis-v']"
-                    />
-                  </template>
-                  <b-dropdown-item href="#">Download</b-dropdown-item>
-                  <b-dropdown-item href="#"
-                    >Make Profile Picture</b-dropdown-item
-                  >
-                  <b-dropdown-item href="#">Make Cover Photo</b-dropdown-item>
-                  <b-dropdown-item href="#">Delete</b-dropdown-item>
-                </b-dropdown>
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div class="img-gall">
-          <a href="#!"
-            ><img class="card-img" src="@/assets/img/m7.jpg" alt=""
-          /></a>
-          <div class="mediadesc">
-            <ul class="navbar-nav pull-right">
-              <li class="nav-item dropdown">
-                <b-dropdown
-                  size="sm"
-                  class="float-right"
-                  variant="link"
-                  toggle-class="text-decoration-none"
-                  no-caret
-                >
-                  <template #button-content>
-                    <fas-icon
-                      class="drop-color font-weight-bolder"
-                      :icon="['fas', 'ellipsis-v']"
-                    />
-                  </template>
-                  <b-dropdown-item href="#">Download</b-dropdown-item>
-                  <b-dropdown-item href="#"
-                    >Make Profile Picture</b-dropdown-item
-                  >
-                  <b-dropdown-item href="#">Make Cover Photo</b-dropdown-item>
-                  <b-dropdown-item href="#">Delete</b-dropdown-item>
-                </b-dropdown>
-              </li>
-            </ul>
-          </div>
-        </div>
+              <b-modal id="modal-b" title="Details">
+                <img class="card-img" src="@/assets/img/m3.jpg" alt="" />
+                <h4>Post Title</h4>
+                <p class="my-4">
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum
+                  quam, doloribus id sit consequuntur tempora molestiae
+                  blanditiis.
+                </p>
+              </b-modal>
+              <div class="mediadesc">
+                <ul class="navbar-nav pull-right">
+                  <li class="nav-item dropdown">
+                    <b-dropdown
+                      size="sm"
+                      class="float-right"
+                      variant="link"
+                      toggle-class="text-decoration-none"
+                      no-caret
+                    >
+                      <template #button-content>
+                        <fas-icon
+                          class="drop-color font-weight-bolder"
+                          :icon="['fas', 'ellipsis-v']"
+                        />
+                      </template>
+                      <b-dropdown-item href="#">Download</b-dropdown-item>
+                      <b-dropdown-item href="#"
+                        >Make Profile Picture</b-dropdown-item
+                      >
+                      <b-dropdown-item href="#"
+                        >Make Cover Photo</b-dropdown-item
+                      >
+                      <b-dropdown-item href="#">Delete</b-dropdown-item>
+                    </b-dropdown>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="img-gall">
+              <a href="#!"
+                ><img class="card-img" src="@/assets/img/m4.jpg" alt=""
+              /></a>
+              <div class="mediadesc">
+                <ul class="navbar-nav pull-right">
+                  <li class="nav-item dropdown">
+                    <b-dropdown
+                      size="sm"
+                      class="float-right"
+                      variant="link"
+                      toggle-class="text-decoration-none"
+                      no-caret
+                    >
+                      <template #button-content>
+                        <fas-icon
+                          class="drop-color font-weight-bolder"
+                          :icon="['fas', 'ellipsis-v']"
+                        />
+                      </template>
+                      <b-dropdown-item href="#">Download</b-dropdown-item>
+                      <b-dropdown-item href="#"
+                        >Make Profile Picture</b-dropdown-item
+                      >
+                      <b-dropdown-item href="#"
+                        >Make Cover Photo</b-dropdown-item
+                      >
+                      <b-dropdown-item href="#">Delete</b-dropdown-item>
+                    </b-dropdown>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="img-gall">
+              <a href="#!"
+                ><img class="card-img" src="@/assets/img/m5.jpg" alt=""
+              /></a>
+              <div class="mediadesc">
+                <ul class="navbar-nav pull-right">
+                  <li class="nav-item dropdown">
+                    <b-dropdown
+                      size="sm"
+                      class="float-right"
+                      variant="link"
+                      toggle-class="text-decoration-none"
+                      no-caret
+                    >
+                      <template #button-content>
+                        <fas-icon
+                          class="drop-color font-weight-bolder"
+                          :icon="['fas', 'ellipsis-v']"
+                        />
+                      </template>
+                      <b-dropdown-item href="#">Download</b-dropdown-item>
+                      <b-dropdown-item href="#"
+                        >Make Profile Picture</b-dropdown-item
+                      >
+                      <b-dropdown-item href="#"
+                        >Make Cover Photo</b-dropdown-item
+                      >
+                      <b-dropdown-item href="#">Delete</b-dropdown-item>
+                    </b-dropdown>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="img-gall">
+              <a href="#!"
+                ><img class="card-img" src="@/assets/img/m6.jpg" alt=""
+              /></a>
+              <div class="mediadesc">
+                <ul class="navbar-nav pull-right">
+                  <li class="nav-item dropdown">
+                    <b-dropdown
+                      size="sm"
+                      class="float-right"
+                      variant="link"
+                      toggle-class="text-decoration-none"
+                      no-caret
+                    >
+                      <template #button-content>
+                        <fas-icon
+                          class="drop-color font-weight-bolder"
+                          :icon="['fas', 'ellipsis-v']"
+                        />
+                      </template>
+                      <b-dropdown-item href="#">Download</b-dropdown-item>
+                      <b-dropdown-item href="#"
+                        >Make Profile Picture</b-dropdown-item
+                      >
+                      <b-dropdown-item href="#"
+                        >Make Cover Photo</b-dropdown-item
+                      >
+                      <b-dropdown-item href="#">Delete</b-dropdown-item>
+                    </b-dropdown>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="img-gall">
+              <a href="#!"
+                ><img class="card-img" src="@/assets/img/m7.jpg" alt=""
+              /></a>
+              <div class="mediadesc">
+                <ul class="navbar-nav pull-right">
+                  <li class="nav-item dropdown">
+                    <b-dropdown
+                      size="sm"
+                      class="float-right"
+                      variant="link"
+                      toggle-class="text-decoration-none"
+                      no-caret
+                    >
+                      <template #button-content>
+                        <fas-icon
+                          class="drop-color font-weight-bolder"
+                          :icon="['fas', 'ellipsis-v']"
+                        />
+                      </template>
+                      <b-dropdown-item href="#">Download</b-dropdown-item>
+                      <b-dropdown-item href="#"
+                        >Make Profile Picture</b-dropdown-item
+                      >
+                      <b-dropdown-item href="#"
+                        >Make Cover Photo</b-dropdown-item
+                      >
+                      <b-dropdown-item href="#">Delete</b-dropdown-item>
+                    </b-dropdown>
+                  </li>
+                </ul>
+              </div>
+            </div>
 
-        <div class="img-gall">
-          <a href="#!"
-            ><img class="card-img" src="@/assets/img/m8.jpg" alt=""
-          /></a>
-          <div class="mediadesc">
-            <ul class="navbar-nav pull-right">
-              <li class="nav-item dropdown">
-                <b-dropdown
-                  size="sm"
-                  class="float-right"
-                  variant="link"
-                  toggle-class="text-decoration-none"
-                  no-caret
-                >
-                  <template #button-content>
-                    <fas-icon
-                      class="drop-color font-weight-bolder"
-                      :icon="['fas', 'ellipsis-v']"
-                    />
-                  </template>
-                  <b-dropdown-item href="#">Download</b-dropdown-item>
-                  <b-dropdown-item href="#"
-                    >Make Profile Picture</b-dropdown-item
-                  >
-                  <b-dropdown-item href="#">Make Cover Photo</b-dropdown-item>
-                  <b-dropdown-item href="#">Delete</b-dropdown-item>
-                </b-dropdown>
-              </li>
-            </ul>
+            <div class="img-gall">
+              <a href="#!"
+                ><img class="card-img" src="@/assets/img/m8.jpg" alt=""
+              /></a>
+              <div class="mediadesc">
+                <ul class="navbar-nav pull-right">
+                  <li class="nav-item dropdown">
+                    <b-dropdown
+                      size="sm"
+                      class="float-right"
+                      variant="link"
+                      toggle-class="text-decoration-none"
+                      no-caret
+                    >
+                      <template #button-content>
+                        <fas-icon
+                          class="drop-color font-weight-bolder"
+                          :icon="['fas', 'ellipsis-v']"
+                        />
+                      </template>
+                      <b-dropdown-item href="#">Download</b-dropdown-item>
+                      <b-dropdown-item href="#"
+                        >Make Profile Picture</b-dropdown-item
+                      >
+                      <b-dropdown-item href="#"
+                        >Make Cover Photo</b-dropdown-item
+                      >
+                      <b-dropdown-item href="#">Delete</b-dropdown-item>
+                    </b-dropdown>
+                  </li>
+                </ul>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-      </div></div></div>
 </template>
 
 <script>
+import axios from "axios";
 export default {
   components: {},
-
 
   computed: {
     pictures() {
@@ -641,18 +646,10 @@ export default {
       this.$refs["modalxl"].show();
     },
 
-
-  methods: {
-    /**
-     *
-     * @param i
-     */
-
     onClick(i) {
       this.index = i;
     },
   },
-
 
   mounted() {
     this.url = this.$route.params.id;
@@ -661,11 +658,12 @@ export default {
   props: ["album"],
 
   watch: {
-    album: function (newVal) {
+    album: function(newVal) {
       this.album_id = newVal;
     },
   },
-  data: function () {
+
+  data: function() {
     return {
       content: null,
       show_url: null,
@@ -675,9 +673,6 @@ export default {
       img_url: null,
       profile_pic: null,
       text: null,
-
-  data: function() {
-    return {
       images: [
         "https://placekitten.com/801/800",
         "https://placekitten.com/802/800",
@@ -884,7 +879,6 @@ export default {
 }
 </style>
 
-
 <style>
 .agile__dots {
   bottom: 10px;
@@ -941,4 +935,3 @@ export default {
   right: 0;
 }
 </style>
-

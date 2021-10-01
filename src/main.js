@@ -19,11 +19,10 @@ import ReadMore from "vue-read-more";
 import VueSocialauth from "vue-social-auth";
 // import firebase from "firebase";
 
-import LoadScript from 'vue-plugin-load-script';
-import InfiniteLoading from 'vue-infinite-loading';
-
 import LoadScript from "vue-plugin-load-script";
+import InfiniteLoading from "vue-infinite-loading";
 
+//import LoadScript from "vue-plugin-load-script";
 
 Vue.use(LoadScript);
 Vue.use(Vuex);
@@ -61,18 +60,18 @@ Vue.prototype.$axios = axios;
 //   });
 
 Vue.use(VueSocialauth, {
-    providers: {
-        facebook: {
-            clientId: process.env.VUE_APP_FACEBOOK_CLIENT_ID,
-            client_secret: process.env.VUE_APP_FACEBOOK_CLIENT_SECRETE,
-            redirectUri: process.env.VUE_APP_FACEBOOK_RETURN_URL
-        },
-        google: {
-            clientId: process.env.VUE_APP_GOOGLE_CLIENT_ID,
-            client_secret: process.env.VUE_APP_GOOGLE_CLIENT_SECRETE,
-            redirectUri: process.env.VUE_APP_GOOGLE_RETURN_URL
-        }
-    }
+  providers: {
+    facebook: {
+      clientId: process.env.VUE_APP_FACEBOOK_CLIENT_ID,
+      client_secret: process.env.VUE_APP_FACEBOOK_CLIENT_SECRETE,
+      redirectUri: process.env.VUE_APP_FACEBOOK_RETURN_URL,
+    },
+    google: {
+      clientId: process.env.VUE_APP_GOOGLE_CLIENT_ID,
+      client_secret: process.env.VUE_APP_GOOGLE_CLIENT_SECRETE,
+      redirectUri: process.env.VUE_APP_GOOGLE_RETURN_URL,
+    },
+  },
 });
 
 import FlashMessage from "@smartweb/vue-flash-message";
@@ -122,17 +121,19 @@ import "@/assets/css/bootstrap.css";
 Vue.use(BootstrapVue);
 Vue.use(IconsPlugin);
 
-import InfiniteLoading from 'vue-infinite-loading';
+//import InfiniteLoading from "vue-infinite-loading";
 
-Vue.use(InfiniteLoading, { /* options */ });
+Vue.use(InfiniteLoading, {
+  /* options */
+});
 
 Vue.use(VueGoogleMaps, {
-    load: {
-        key: "AIzaSyAGZU6cqra18t1fhN1AbzRsEc_pgt7n2C8",
-        libraries: "places"
-    },
-    autobindAllEvents: false,
-    installComponents: true
+  load: {
+    key: "AIzaSyAGZU6cqra18t1fhN1AbzRsEc_pgt7n2C8",
+    libraries: "places",
+  },
+  autobindAllEvents: false,
+  installComponents: true,
 });
 
 Vue.component("v-select", vSelect);
@@ -142,28 +143,27 @@ import i18n from "./i18n";
 Vue.config.productionTip = false;
 
 new Vue({
+  router,
+  store,
+  i18n,
 
-    router,
-    store,
-    i18n,
-
-    created() {
-        const userInfo = localStorage.getItem("user");
-        if (userInfo) {
-            const userData = JSON.parse(userInfo);
-            this.$store.commit("auth/setUserData", userData);
+  created() {
+    const userInfo = localStorage.getItem("user");
+    if (userInfo) {
+      const userData = JSON.parse(userInfo);
+      this.$store.commit("auth/setUserData", userData);
+    }
+    axios.interceptors.response.use(
+      (response) => response,
+      (error) => {
+        if (error.response.status === 401) {
+          // this.$store.dispatch("auth/logout");
+          console.log("error has occure");
         }
-        axios.interceptors.response.use(
-            (response) => response,
-            (error) => {
-                if (error.response.status === 401) {
-                    // this.$store.dispatch("auth/logout");
-                    console.log("error has occure");
-                }
-                return Promise.reject(error);
-            }
-        );
-    },
+        return Promise.reject(error);
+      }
+    );
+  },
 
   render: (h) => h(App),
 }).$mount("#app");

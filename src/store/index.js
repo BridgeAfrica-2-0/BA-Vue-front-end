@@ -11,6 +11,7 @@ import dashboardcommunity from "./dashboardcommunity";
 import UserProfileOwner from "./UserProfileOwner";
 import networkProfileMembers from "./networkProfileMembers";
 import NetworkSettings from "./NetworkSettings";
+
 import axios from "axios";
 
 Vue.use(Vuex);
@@ -26,7 +27,6 @@ export default new Vuex.Store({
     dashboard,
     UserProfileOwner,
     networkProfileMembers,
-    market
-  }
+    market,
+  },
 });
-

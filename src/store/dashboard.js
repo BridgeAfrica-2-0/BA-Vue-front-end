@@ -8,6 +8,7 @@ export default {
     dashboard_business: [],
     bdasboard_post:[],
     pdashboard_post:[],
+    dBusinessId:null,
 
     
 
@@ -34,7 +35,12 @@ export default {
       state.pdashboard_post = userData;
 
     },
+  
+    setdBusinessId(state, data){
 
+      state.dBusinessId=data
+      console.log('yoo mother fucker passing business id to the dsostrore file');
+    }
 
     
 

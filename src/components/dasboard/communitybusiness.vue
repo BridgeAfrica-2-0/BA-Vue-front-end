@@ -32,7 +32,7 @@
               :text="item.about_business"
               link="#"
               less-str="read less"
-              :max-chars="15"
+              :max-chars="35"
             >
             </read-more>
               </p>
@@ -168,18 +168,43 @@ export default {
       axios
         .get(url + this.page)
         .then(({ data }) => {
-          if (data.data.length) {
-            this.page += 1;
-           if(this.type=="Follower"){  
+        
+          if(this.type=="Follower"){  
+
+
+          if (data.data.business_followers.length) {
+            
+         
             this.businesses.push(...data.data.business_followers); 
+            this.page += 1;
+            
+            $state.loaded();
+
            }else{
-              this.businesses.push(...data.data.business_following);
+              $state.complete();
+             
+           }
+        
+          }else{
+
+
+
+
+             if (data.data.business_following.length) {
+            
+         
+            this.businesses.push(...data.data.business_following); 
+            this.page += 1;
+            
+            $state.loaded();
+
+           }else{
+              $state.complete();
+             
            }
 
-            $state.loaded();
-          } else {
-            $state.complete();
           }
+           
         })
         .catch((err) => {
           console.log({ err: err });
@@ -391,7 +416,7 @@ export default {
     border-bottom-right-radius: 5px;
 
     background: white;
-
+    height: 100%;
     background-color: #fff;
     background-clip: border-box;
     border: 1px solid rgba(0, 0, 0, 0.125);
@@ -414,7 +439,7 @@ export default {
     border-bottom-right-radius: 5px;
 
     background: white;
-
+   height: 100%;
     background-color: #fff;
     background-clip: border-box;
     border: 1px solid rgba(0, 0, 0, 0.125);

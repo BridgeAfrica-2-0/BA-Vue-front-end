@@ -70,9 +70,9 @@
 
           <b-tab>
             <template slot="title">
-              Businesses
+              Businesses 
               <span class="spa-color">
-                {{ count(business.people[0].total_business) }}
+                {{ count(business.business[0].total_business) }}
               </span>
             </template>
 
@@ -82,7 +82,7 @@
                   <template slot="title">
                     Followers
                     <span class="spa-color">
-                      {{ count(business.people[0].total_business_follower) }}
+                      {{ count(business.business[0].total_business_follower) }}
                     </span>
                   </template>
 
@@ -101,7 +101,7 @@
                   <template slot="title">
                     Following
                     <span class="spa-color">
-                      {{ count(business.people[0].total_business_following) }}
+                      {{ count(business.business[0].total_business_following) }}
                     </span>
                   </template>
 

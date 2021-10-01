@@ -30,7 +30,17 @@
             </span>
             <br />
 
-            {{ item.about_network }} <b-link>Read More</b-link>
+
+            <read-more
+              more-str="read more"
+              class="readmore"
+              :text="item.about_network"
+              link="#"
+              less-str="read less"
+              :max-chars="50"
+            >
+            </read-more>
+
           </p>
 
 
@@ -138,7 +148,7 @@ export default {
     
     infiniteHandler($state) {
      
-      let url = "profile/hot/business/";
+      let url = "profile/popular/network/";
   
    
       axios

@@ -4,7 +4,6 @@
       Do you want to join this network?
     </b-modal>
 
-
     <b-row>
         <b-col lg="6" sm="12" class="p-2" v-for="item in network" :key="item.id">
 
@@ -29,8 +28,17 @@
               {{ item.location_description }}
             </span>
             <br />
+       
+        <read-more
+              more-str="read more"
+              class="readmore"
+              :text="item.about_network"
+              link="#"
+              less-str="read less"
+              :max-chars="35"
+            >
+            </read-more>
 
-            {{ item.about_network }} <b-link>Read More</b-link>
           </p>
         </b-col>
 
@@ -74,9 +82,10 @@
     </div>
         </b-col>
 
-         <infinite-loading @infinite="infiniteHandler"></infinite-loading>  
+         
          
     </b-row>
+    <infinite-loading @infinite="infiniteHandler"></infinite-loading>  
   </div>
 </template>
 
@@ -120,6 +129,8 @@ export default {
 
       infiniteHandler($state) {
 
+        console.log("loading network 1 1")
+
       let url = null;
 
          if(this.type=="Follower"){  
@@ -130,18 +141,39 @@ export default {
       axios
         .get(url + this.page)   
         .then(({ data }) => {
-          if (data.data.length) {
+          console.log("lading network after response")
+          console.log(data);
+        if(this.type=="Follower"){
+         
+
+          if (data.data.network_followers.length) {
             this.page += 1;
-      if(this.type=="Follower"){  
-            this.network.push(...data.data.network_followers); 
+            this.network.push(...data.data.network_followers);
+            
+            
+            $state.loaded();
            }else{
-              this.network.push(...data.data.network_following);
+              $state.complete();
            }
 
 
-            $state.loaded();
           } else {
-            $state.complete();
+            
+
+
+             if (data.data.network_following.length) {
+            this.page += 1;
+      
+            this.network.push(...data.data.network_following);
+            
+            
+            $state.loaded();
+           }else{
+              $state.complete();
+           }
+
+
+
           }
         }) 
         .catch((err) => {
@@ -411,7 +443,7 @@ Width:160px
   border-bottom-right-radius: 5px;
 
   background: white;
-
+ height: 100%;
   background-color: #fff;
   background-clip: border-box;
   border: 1px solid rgba(0, 0, 0, 0.125);
@@ -441,7 +473,7 @@ Width:160px
   border-top-right-radius: 5px;
 
   border-bottom-right-radius: 5px;
-
+ height: 100%;
 
 
 

@@ -34,7 +34,7 @@
               :text="item.about_business"
               link="#"
               less-str="read less"
-              :max-chars="15"
+              :max-chars="50"
             >
             </read-more>
               </p>

@@ -193,7 +193,7 @@ export default {
 
     setNcommunityFollower(state, data){
 
-      state.setNcommunityFollower = data;
+      state.NcommunityFollower = data;
 
     },
 
@@ -219,7 +219,7 @@ export default {
 
     setBcommunityFollower(state, data){
 
-      state.setBcommunityFollower = data;
+      state.BcommunityFollower = data;
     },
 
 

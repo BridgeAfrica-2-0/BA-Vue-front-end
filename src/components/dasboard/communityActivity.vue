@@ -12,6 +12,7 @@
 
 
 
+
           
        <b-row class="mt-4"   v-for="item in owner_post"  :key="item.post_id" > 
      

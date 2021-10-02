@@ -497,13 +497,7 @@
 <script>
 export default {
   name: "info",
-<<<<<<< HEAD
   data() {
-=======
-
-
-   data() {
->>>>>>> main
     return {
       
 

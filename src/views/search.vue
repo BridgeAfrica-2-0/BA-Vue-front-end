@@ -505,11 +505,16 @@
                 v-if="!peoples.length"
                 :title="notFoundComponentTitle"
               />
+
               <People
                 v-for="(people, index) in peoples"
                 :people="people"
                 :key="index"
               />
+              <infinite-loading @infinite="handleScroll">
+                <div class="text-red" slot="no-more">No More Request</div>
+                <div class="text-red" slot="no-results">No More Request</div>
+              </infinite-loading>
             </div>
 
             <!-- filter out just the network  -->
@@ -1613,10 +1618,6 @@ export default {
     },
   },
 
-  mounted() {
-    this.handleScroll();
-  },
-
   methods: {
     ...mapActions({
       findUser: "search/FIND_USER",
@@ -1624,20 +1625,16 @@ export default {
       postKeyword: "search/POST_KEYWORD",
       newCallbackForPagination: "search/SET_CURRENT_PAGINATE_CALLBACK",
       updateCurrentPaginatinPage: "search/SET_CURRENT_PAGINATION_PAGE",
+      scrollState: "search/SET_SCROLL_STATE"
     }),
 
-    handleScroll() {
-      window.onscroll = () => {
-        let bottomOfWindow =
-          document.documentElement.scrollTop + window.innerHeight ===
-          document.documentElement.offsetHeight;
+    handleScroll($state) {
+      this.scrollState($state)
+      console.log("scroolling");
+      this.updateCurrentPaginatinPage(this.currentPaginationPage + 1);
+      //$state.loaded();
 
-        if (bottomOfWindow) {
-          if (this.callbackForPagination) {
-            this.updateCurrentPaginatinPage(this.currentPaginationPage + 1);
-          }
-        }
-      };
+      //$state.complete();
     },
 
     changeNotFoundTitle() {

@@ -31,11 +31,13 @@ export const mutations = {
     state.posts = [...state.posts, ...payload].sort((a, b) => a.post_id > b.post_id)
   },
 
+  [TYPES.FIND_MIXED_USER](state, payload) {
+    state.users = [...state.users, ...payload].sort((a, b) => a.post_id > b.post_id)
+  },
+
   [TYPES.RESET_RESULT](state) {
-    if (state.users.length)
-      state.users = []
-    else
-      state.posts = []
+    state.users = []
+    state.posts = []
   },
 
   [TYPES.LOADING](state, payload = null) {
@@ -66,6 +68,14 @@ export const mutations = {
     else
       console.error(`${payload} should be a function`)
   },
+
+  [TYPES.SET_SCROLL_STATE](state, payload) {
+    if (typeof (payload) === 'function')
+      state.scrool = payload
+    else
+      console.error(`${payload} should be a function`)
+  },
+
 
   [TYPES.POST_KEYWORD](state, payload) {
 

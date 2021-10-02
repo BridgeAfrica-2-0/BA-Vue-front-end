@@ -227,6 +227,18 @@ export default {
   },
 
   watch: {
+    selectedPeople: function () {
+      console.log(this.selectedPeople);
+      this.communityIsChecked(this.selectedPeople);
+      console.log(this.selectedPeople);
+    },
+    selectedBuisness: function () {
+      this.communityIsChecked(this.selectedBuisness);
+    },
+    selectedNetwork: function () {
+      this.communityIsChecked(this.selectedNetwork);
+    },
+
     isRecentPost: function (newValue) {
       if (!this.keyword && newValue) {
         this.onNotified("the keyword does not exist");
@@ -293,6 +305,7 @@ export default {
       keyword: "search/POST_KEYWORD",
     }),
   },
+
   methods: {
     ...mapActions({
       findPeoplePost: "search/FIND_POST",
@@ -300,6 +313,26 @@ export default {
       findNetworkPost: "search/FIND_NETWORK_POST",
       newCallbackForPagination: "search/SET_CURRENT_PAGINATE_CALLBACK",
     }),
+
+    communityIsChecked(data) {
+      console.log(data);
+      const useSelectFollowerAndFollowing = data.filter(
+        (item) => "Follower" == item || "Following" == item
+      );
+
+      console.log(useSelectFollowerAndFollowing);
+
+      if (
+        useSelectFollowerAndFollowing.length == 2 &&
+        data.indexOf("Community") != -1
+      ) {
+        const newData = data.filter(
+          (item) => "Follower" !== item || "Following" !== item
+        );
+
+        console.log(newData);
+      }
+    },
 
     onNotified(text) {
       this.$notify({

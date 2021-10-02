@@ -198,7 +198,7 @@ export default {
     },
 
     debounceInput: _.debounce(function (e) {
-      this.findProfession(e);
+      if (e) this.findProfession(e);
     }, 1000),
 
     toogleRootSection() {

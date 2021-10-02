@@ -57,13 +57,24 @@ export const actions = {
   },
 
   [TYPES.FIND_USER]({ commit, state }, payload) {
+
     commit(TYPES.LOADING, true)
     commit(TYPES.RESET_RESULT)
-    //axios.get(`search/listUsers/${state.page}/?q=${payload}`)
-    axios.get(`search/listUsers?q=${payload}`)
-      .then(({ data }) => {
-        commit(TYPES.FIND_USER, data.data)
+
+    axios.get(`search/listUsers?q=${payload}&page=${state.page}`)
+      .then(({ data: { data } }) => {
+        if (state.page > 1)
+          commit(TYPES.FIND_MIXED_USER, data)
+        else
+          commit(TYPES.FIND_USER, data)
+
         commit(TYPES.LOADING, false)
+
+        if (data.length)
+          state.scrool.loaded()
+        else
+          state.scrool.complete()
+
       })
       .catch(e => commit(TYPES.LOADING, false))
   },
@@ -71,10 +82,14 @@ export const actions = {
   [TYPES.FIND_PROFESSION]({ commit, state }, payload) {
     commit(TYPES.LOADING, true)
     commit(TYPES.RESET_RESULT)
-    //axios.get(`search/listProfessions/${state.page}/?q=${payload}`)
-    axios.get(`search/listProfessions?q=${payload}`)
-      .then(({ data }) => {
-        commit(TYPES.FIND_PROFESSION, data.data)
+
+    axios.get(`search/listProfessions?q=${payload}&page=${state.page}`)
+      .then(({ data: { data } }) => {
+        if (state.page > 1)
+          commit(TYPES.FIND_MIXED_USER, data)
+        else
+          commit(TYPES.FIND_PROFESSION, data)
+
         commit(TYPES.LOADING, false)
       })
       .catch(e => commit(TYPES.LOADING, false))
@@ -83,10 +98,12 @@ export const actions = {
   [TYPES.FIND_COMMUNITY]({ commit, state }, payload) {
     commit(TYPES.RESET_RESULT)
     commit(TYPES.LOADING, true)
-    //axios.post(`search/community/profession/${state.page}/`, payload)
-    axios.post(`search/community/profession`, payload)
-      .then(({ data }) => {
-        commit(TYPES.FIND_COMMUNITY, data.data)
+    axios.post(`search/community/profession?page=${state.page}`, payload)
+      .then(({ data: { data } }) => {
+        if (state.page > 1)
+          commit(TYPES.FIND_MIXED_USER, data)
+        else
+          commit(TYPES.FIND_COMMUNITY, data)
         commit(TYPES.LOADING, false)
       })
       .catch(e => commit(TYPES.LOADING, false))
@@ -111,6 +128,16 @@ export const actions = {
     else
       console.error(`${payload} should be a function`)
   },
+
+  [TYPES.SET_SCROLL_STATE]({ commit }, payload) {
+    if (typeof (payload) === 'function')
+      commit(TYPES.SET_SCROLL_STATE, payload)
+    else
+      console.error(`${payload} should be a function`)
+  },
+
+
+
 
   [TYPES.POST_KEYWORD]({ commit }, payload) {
     if (typeof (payload) === 'string' || false === payload)

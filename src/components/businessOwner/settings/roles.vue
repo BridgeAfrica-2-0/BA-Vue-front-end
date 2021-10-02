@@ -14,7 +14,7 @@
             label-class="font-weight-bold pt-0"
             class="mb-0"
           >
-            <b-form-select
+            <!-- <b-form-select
               id="follower"
               v-model="form.follower"
               :options="followers.people[0].user_followers"
@@ -23,7 +23,7 @@
               text-field="name"
               class="mb-3"
             >
-            </b-form-select>
+            </b-form-select> -->
           </b-form-group>
         </b-col>
 
@@ -50,7 +50,9 @@
 
 
         <b-col>
-          <b-button variant="primary" class="" @click="assignRole()">Assign</b-button>
+          <b-button variant="primary" class="" @click="assignRole()">
+            <b-spinner v-if="SPassign" small type="grow"></b-spinner>Assign
+          </b-button>
         </b-col>
       </b-row>
       <p class="a-text">
@@ -149,7 +151,8 @@ export default {
   name: "roles",
   data() {
 			return {
-        url: this.$route.params.id,
+        url: null,
+        SPassign: false,
         clickedObject: {},
         form: {
           name: "",
@@ -175,6 +178,7 @@ export default {
 
   
   mounted(){
+    this.url = this.$route.params.id
     this.getFollowers() 
     this.getRoles() 
     this.displayEditor() 
@@ -234,11 +238,14 @@ export default {
       });
 		},
     assignRole: function(){
-     
-      this.axios.post("business/role/update/2", this.form)
+      this.SPassign = true;
+      let formData = new FormData();
+      formData.append('name', this.form.name);
+      formData.append('role', this.form.role);
+      this.axios.post("business/role/update/"+this.url, formData)
       .then(() => {
         console.log('ohh yeah');
-
+        this.SPassign = false;
         this.flashMessage.show({
           status: "success",
           message: "New Role Assigned"
@@ -247,6 +254,7 @@ export default {
       })
       .catch(err => {
         console.log({ err: err });
+        this.SPassign = false;
         this.flashMessage.show({
           status: "error",
           message: "Unable to Assigned New Role"
@@ -255,10 +263,9 @@ export default {
 		},
     deleteEditor: function(editor){
       var formData = this.toFormData(editor)
-      this.axios.post("#", formData)
+      this.axios.delete("business/role/delete/"+this.url, formData)
       .then(() => {
         console.log('ohh yeah');
-
         this.flashMessage.show({
           status: "success",
           message: "Editor Deleted"

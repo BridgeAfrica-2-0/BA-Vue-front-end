@@ -4,7 +4,9 @@
     <FlashMessage />
 
     <div class="b-bottomn">
-      <b-button variant="primary" class="a-button-l" @click="updateGeneralInfo()">Save Changes</b-button>
+      <b-button variant="primary" class="a-button-l" @click="updateGeneralInfo()">
+        <b-spinner v-if="SPupdateGeneralInfo" small type="grow"></b-spinner> Save Changes
+      </b-button>
       <br />
     </div>
     <div class="b-bottom">
@@ -130,7 +132,7 @@
             <h3>Delete Business: {{clickedObject.id}}!</h3>
           </div>
           <!-- <b-button class="mt-3" block @click="$bvModal.hide('delete-business'); deleteBusiness(clickedObject.id)">Delete Business</b-button> -->
-          <b-button class="mt-2 " style="float:right" variant="primary" @click="$bvModal.hide('delete-business'); deleteBusiness(clickedObject.id)">Delete Business</b-button>
+          <b-button class="mt-2" style="float:right" variant="primary" @click="$bvModal.hide('delete-business'); deleteBusiness(clickedObject.id)">Delete Business</b-button>
             
           <b-button class="mt-2 " style="float:right" @click="$bvModal.hide('delete-business')">Cancel</b-button>
         </b-modal>
@@ -146,6 +148,7 @@ export default {
   data(){
       return{
         url: this.$route.params.id,
+        SPupdateGeneralInfo: false,
         clickedObject: {},
         busiess_id: "",
         businessVisibility: [
@@ -190,28 +193,37 @@ export default {
     },
 
     updateGeneralInfo: function(){
-      this.axios.post("business/general/update/"+this.url, this.form)
+      this.SPupdateGeneralInfo = true;
+      let formData = new FormData();
+      formData.append('visibility', this.form.visibility);
+      formData.append('permissions', this.form.permissions);
+      formData.append('post_approval', this.form.post_approval);
+      formData.append('keywords_alert', this.form.keywords_alert);
+      formData.append('marketplace', this.form.marketplace);
+      console.log(formData);
+      this.axios.post("business/general/update/"+this.url, formData)
       .then(() => {
         console.log(this.form);
+        this.SPupdateGeneralInfo = false;
         this.flashMessage.show({
           status: "success",
           message: "Changes Made Successfuly"
-        });
-          
+        });  
       })
       .catch(err => {
         console.log({ err: err });
+        this.SPupdateGeneralInfo = false;
         this.flashMessage.show({
           status: "error",
-          message: "Unable To Make Changes "
+          message: "Unable To Make Changes"
         });
       });
     },
+
     deleteBusiness: function(busiess_id){
       this.axios.post(`business/general/delete/${busiess_id}`)
       .then(() => {
         console.log('ohh yeah');
-
         this.flashMessage.show({
           status: "success",
           message: "Business Deleted"
@@ -230,8 +242,6 @@ export default {
     selectObject(object){
 			this.clickedObject = object
 		},
-
-
   }
 };
 </script>

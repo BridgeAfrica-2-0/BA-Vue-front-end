@@ -96,9 +96,10 @@ export const actions = {
     commit(TYPES.LOADING, payload)
   },
 
-  [TYPES.GET_CURRENT_PAGINATION_PAGE]({ commit }, payload) {
+  [TYPES.SET_CURRENT_PAGINATION_PAGE]({ commit }, payload) {
+
     if (typeof (payload) === 'number')
-      commit(TYPES.GET_CURRENT_PAGINATION_PAGE, payload)
+      commit(TYPES.SET_CURRENT_PAGINATION_PAGE, payload)
     else
       console.error(`${payload} should be a number`)
   },
@@ -112,7 +113,7 @@ export const actions = {
   },
 
   [TYPES.POST_KEYWORD]({ commit }, payload) {
-    if (typeof (payload) === 'string')
+    if (typeof (payload) === 'string' || false === payload)
       commit(TYPES.POST_KEYWORD, payload)
     else
       console.error(`${payload} should be a string`)

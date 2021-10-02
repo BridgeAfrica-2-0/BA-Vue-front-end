@@ -2,6 +2,7 @@
 import * as TYPES from './types'
 
 export const getters = {
+
 	[TYPES.GET_RESULT_USER](state) {
 		return state.users
 	},
@@ -19,8 +20,13 @@ export const getters = {
 		return state.postKeyword
 	},
 
-	[TYPES.SET_CURRENT_PAGINATE_CALLBACK](state) {
+	[TYPES.GET_CURRENT_PAGINATE_CALLBACK](state) {
 		return state.callback
+	},
+
+	[TYPES.GET_CURRENT_PAGINATION_PAGE](state) {
+		return state.page
 	}
+
 
 }

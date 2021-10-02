@@ -49,9 +49,13 @@ export const mutations = {
       state.isLoading = !state.isLoading
   },
 
-  [TYPES.GET_CURRENT_PAGINATION_PAGE](state, payload) {
-    if (typeof (payload) === 'number')
-      state.page = payload
+  [TYPES.SET_CURRENT_PAGINATION_PAGE](state, payload) {
+
+    if (typeof (payload) === 'number' || false === payload)
+      if (payload)
+        state.page = payload
+      else
+        state.payload = 1
     else
       console.error(`${payload} should be a number`)
   },
@@ -64,6 +68,7 @@ export const mutations = {
   },
 
   [TYPES.POST_KEYWORD](state, payload) {
+
     if (typeof (payload) === 'string')
       state.postKeyword = payload
     else

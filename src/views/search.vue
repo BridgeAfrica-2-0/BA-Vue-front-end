@@ -631,8 +631,8 @@ export default {
     ...mapGetters({
       peoples: "search/GET_RESULT_USER",
       posts: "search/GET_RESULT_POST",
-      page: "search/GET_CURRENT_PAGINATION_PAGE",
-      callbackForPagination: "search/SET_CURRENT_PAGINATE_CALLBACK",
+      callbackForPagination: "search/GET_CURRENT_PAGINATE_CALLBACK",
+      currentPaginationPage: "search/GET_CURRENT_PAGINATION_PAGE",
     }),
   },
 
@@ -1607,6 +1607,10 @@ export default {
       this.changePlaceHolder();
       this.changeNotFoundTitle();
     },
+
+    currentPaginationPage: function (newValue) {
+      if (newValue > 1) this.callbackForPagination();
+    },
   },
 
   mounted() {
@@ -1619,6 +1623,7 @@ export default {
       findPost: "search/FIND_POST",
       postKeyword: "search/POST_KEYWORD",
       newCallbackForPagination: "search/SET_CURRENT_PAGINATE_CALLBACK",
+      updateCurrentPaginatinPage: "search/SET_CURRENT_PAGINATION_PAGE",
     }),
 
     handleScroll() {
@@ -1628,7 +1633,9 @@ export default {
           document.documentElement.offsetHeight;
 
         if (bottomOfWindow) {
-          this.callbackForPagination();
+          if (this.callbackForPagination) {
+            this.updateCurrentPaginatinPage(this.currentPaginationPage + 1);
+          }
         }
       };
     },

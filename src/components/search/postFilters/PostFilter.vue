@@ -179,7 +179,7 @@
 <script>
 import _ from "lodash";
 
-import { mapActions } from "vuex";
+import { mapActions, mapGetters } from "vuex";
 
 import Button from "@/components/Button";
 
@@ -228,49 +228,77 @@ export default {
 
   watch: {
     isRecentPost: function (newValue) {
-      if (!this.keyword) {
+      if (!this.keyword && newValue) {
         this.onNotified("the keyword does not exist");
         this.isRecentPost = false;
         return false;
       }
-      if (newValue)
+      if (newValue) {
+        this.newCallbackForPagination(
+          this.findPeoplePost({
+            credentials: { recent_post: "" },
+            lauchLoader: true,
+            endLoader: false,
+          })
+        );
         this.findPeoplePost({
           credentials: { recent_post: "" },
           lauchLoader: true,
           endLoader: false,
         });
+      }
     },
     isPostHaveNotSeen: function (newValue) {
-      if (!this.keyword) {
+      if (!this.keyword && newValue) {
         this.isPostHaveNotSeen = false;
         this.onNotified("the keyword does not exist");
         return false;
       }
-      if (newValue)
+      if (newValue) {
+        this.newCallbackForPagination(
+          this.findPeoplePost({
+            credentials: { not_seen: "" },
+            lauchLoader: true,
+            endLoader: false,
+          })
+        );
         this.findPeoplePost({
           credentials: { not_seen: "" },
           lauchLoader: true,
           endLoader: false,
         });
+      }
     },
 
     created_at: function (newValue) {
-      this.findPeoplePost({
-        credentials: { created_at: this.created_at },
-        lauchLoader: true,
-        endLoader: false,
-      });
+      if (newValue) {
+        this.newCallbackForPagination(
+          this.findPeoplePost({
+            credentials: { created_at: this.created_at },
+            lauchLoader: true,
+            endLoader: false,
+          })
+        );
+        this.findPeoplePost({
+          credentials: { created_at: this.created_at },
+          lauchLoader: true,
+          endLoader: false,
+        });
+      }
     },
   },
 
   computed: {
-    keyword: "search/POST_KEYWORD",
+    ...mapGetters({
+      keyword: "search/POST_KEYWORD",
+    }),
   },
   methods: {
     ...mapActions({
       findPeoplePost: "search/FIND_POST",
       findBuisnessPost: "search/FIND_BUISNESS_POST",
       findNetworkPost: "search/FIND_NETWORK_POST",
+      newCallbackForPagination: "search/SET_CURRENT_PAGINATE_CALLBACK",
     }),
 
     onNotified(text) {
@@ -290,8 +318,25 @@ export default {
       }));
     },
 
+    _onFind(data) {
+      const credentials = Object.keys(data);
+
+      const stopLoader = (index) =>
+        credentials.length - 1 === index ? false : true;
+
+      const startLoader = (item) =>
+        credentials.indexOf(item) == 0 ? true : false;
+
+      credentials.map((item, index) => {
+        this.strategies[item]({
+          credentials: data[item],
+          lauchLoader: startLoader(item),
+          endLoader: stopLoader(index),
+        });
+      });
+    },
+
     onProcess() {
-      console.log(this.keyword);
       if (!this.keyword) {
         this.onNotified("the keyword does not exist");
         return false;
@@ -308,21 +353,8 @@ export default {
         return hash;
       }, {});
 
-      const credentials = Object.keys(data);
-
-      const stopLoader = (index) =>
-        credentials.length - 1 === index ? false : true;
-
-      const startLoader = (item) =>
-        credentials.indexOf(item) == 0 ? true : false;
-
-      credentials.map((item, index) => {
-        this.strategies[item]({
-          credentials: data[item],
-          lauchLoader: startLoader(item),
-          endLoader: stopLoader(index),
-        });
-      });
+      this.newCallbackForPagination(this._onFind(data));
+      this._onFind(data);
     },
 
     showRecentPost() {

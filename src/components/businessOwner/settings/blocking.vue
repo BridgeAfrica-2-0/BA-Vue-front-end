@@ -8,6 +8,7 @@
       </p>
     </b-container>
 
+<<<<<<< HEAD
     <b-container class="bv-example-row">
       <b-list-group v-for="blockuser in blockusers" :key="blockuser.id">
         <b-skeleton-wrapper :loading="loading">
@@ -31,6 +32,53 @@
           </b-list>
         </b-skeleton-wrapper>
       </b-list-group>
+=======
+    <b-container class="bv-example-row text">
+      <b-li-group>
+        <b-li class="d-flex align-items-center m-list">
+          <b-avatar class="mr-3" size="4em"></b-avatar>
+          <span class="mr-auto username">J. Circlehead</span>
+          <span class=""><b-link href="#">Unblock</b-link></span>
+        </b-li>
+       <hr width="100%" />
+
+        <b-li class="d-flex align-items-center">
+          <b-avatar
+            variant="primary"
+            text="BV"
+            class="mr-3"
+            size="4em"
+          ></b-avatar>
+          <span class="mr-auto username">itz blec blec</span>
+          <span class=""><b-link href="#">Unblock</b-link></span>
+        </b-li>
+
+         <hr width="100%" />
+
+        <b-li class="d-flex align-items-center m-list">
+          <b-avatar class="mr-3" size="4em"></b-avatar>
+          <span class="mr-auto username">J. Circlehead</span>
+          <span class=""><b-link href="#">Unblock</b-link></span>
+        </b-li>
+        <hr width="100%" />
+
+
+        <b-li class="d-flex align-items-center">
+          <b-avatar
+            variant="primary"
+            text="BV"
+            class="mr-3"
+            size="4em"
+          ></b-avatar>
+          <span class="mr-auto username">itz blec blec</span>
+          <span class=""><b-link href="#">Unblock</b-link></span> 
+         
+        </b-li>
+        <hr width="100%" />
+
+
+      </b-li-group>
+>>>>>>> main
     </b-container>
   </b-container>
 </template>

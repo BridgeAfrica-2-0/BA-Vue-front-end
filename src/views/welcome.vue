@@ -6,6 +6,12 @@
 
     <FlashMessage />
 
+
+
+
+
+
+
     <div
       v-if="first_page == 'true'"
       class="container border mt-5 modal-lg p-welcome"
@@ -476,24 +482,7 @@
 
                     <div></div>
 
-                    <div class="form-group">
-                      <label for="alias" class="username">Category:</label
-                      ><br />
-
-                      <b-form-select
-                        v-model="form.business_category"
-                        :options="categories"
-                        :state="validateState('business_category')"
-                        aria-describedby="business_category-feedback"
-                        class="mb-3"
-                        value-field="item"
-                        text-field="name"
-                      ></b-form-select>
-
-                      <b-form-invalid-feedback id="business_category-feedback"
-                        >Business Category Is Required.</b-form-invalid-feedback
-                      >
-                    </div>
+                  
 
                     <div class="form-group">
                       <label for="country" class="username"> Country :</label
@@ -508,6 +497,83 @@
                     </div>
                   </div>
                 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                
+
+
+                  
+
+   <div>
+  <label class="typo__label"> Category </label>
+  <multiselect v-model="multiselecvalue"   @input="subcategories"  tag-placeholder="Add this as new tag" placeholder="Search or add a tag" label="name" track-by="id" :options="pcategories" :multiple="true" :taggable="true" @tag="addTag"></multiselect>
+  
+</div>
+
+
+
+
+   <div>
+  <label class="typo__label"> Sub Category</label>
+  <multiselect v-model="filterselectvalue"    tag-placeholder="Add this as new tag" placeholder="Search or add a tag" label="subcategory" track-by="sub_cat_id" :options="scategories" :multiple="true" :taggable="true" @tag="addFilter"></multiselect>
+  
+  </div>
+
+
+
+
+
+ 
+  <label class="typo__label">Fiters</label>
+ <div>
+  <b-card no-body>
+    <b-tabs pills card vertical>
+
+      <b-tab :title="filters.subcategory"     v-for="filters in filterselectvalue" :key="filters.id" active><b-card-text>
+        
+            
+            <b-form-group label="Filters">
+
+      <b-form-checkbox-group
+        id=""
+        v-model="select_filterss"
+      
+        name="filters"
+      >
+        <b-form-checkbox  v-for="fil in filters.filters" :key="fil.id" :value="fil.id" > {{fil.name}} </b-form-checkbox>
+       
+       
+      </b-form-checkbox-group>
+    </b-form-group>
+
+
+
+        
+         </b-card-text></b-tab>
+
+     
+    </b-tabs>
+  </b-card>   
+</div>
+
+
+
+
 
                 <div class="row">
                   <div class="col-md-6">
@@ -680,9 +746,12 @@ import Tutorial from "@/components/dasboard/tutorial";
 
 import axios from "axios";
 
+import Multiselect from 'vue-multiselect';
 import { validationMixin } from "vuelidate";
 
 import { required, email, minLength } from "vuelidate/lib/validators";
+
+
 
 export default {
   mixins: [validationMixin],
@@ -697,6 +766,7 @@ export default {
       region: "",
       username: this.$store.state.auth.user.user.name,
       img_url: null,
+      select_filterss:[],
       sendingP: false,
       sendingB: false,
       profile_pic: "",
@@ -711,7 +781,7 @@ export default {
       form: {
         business_name: null,
       },
-      business_category: null,
+      business_category: "Testing",
       business_keyword: null,
       time_zone: null,
       language: null,
@@ -725,6 +795,15 @@ export default {
       locationMarkers: [],
       locPlaces: [],
       existingPlace: null,
+
+
+      multiselecvalue: [ ], 
+      filterselectvalue:[], 
+      multiselec: [
+        { name: 'Vue.js', code: 'vu' },
+        { name: 'Javascript', code: 'js' },
+        { name: 'Open Source', code: 'os' }
+      ],
 
       timezone: [
         { label: "(GMT-12:00) International Date Line West", value: "-12" },
@@ -801,24 +880,7 @@ export default {
       ],
 
       category: "",
-      categories: [
-        { item: "Professional_and_home_service", name: "Professionals" },
-        { item: "Agriculture ", name: "Agriculture " },
-        { item: "Restaurant ", name: " Restaurant " },
-        { item: "Electronics ", name: "Electronics " },
-        { item: "Handicrafts", name: "Handicrafts" },
-        { item: "clothing", name: "clothing" },
-        { item: "Mechanics", name: "Mechanics" },
-        { item: "Health_unit ", name: "Health unit " },
-        { item: "Bars", name: "Bars" },
-        { item: "Hair_and_beauty ", name: "Hair and beauty " },
-        { item: "Real_estate ", name: "Real_estate " },
-        { item: "Travelling ", name: "Travelling " },
-        { item: "Hotels", name: "Hotels" },
-        { item: "station", name: " station  " },
-        { item: "Mayor_concils", name: "Mayor_concils" },
-        { item: "Taxis service", name: "Taxis service" },
-      ],
+     
     };
   },
 
@@ -828,13 +890,106 @@ export default {
         required,
       },
 
-      business_category: {
-        required,
-      },
+    //  business_category: {
+     //   required,
+    //  },
     },
   },
 
   methods: {
+
+    addTag (newTag) {
+      const tag = {
+        name: newTag,
+        id: newTag.substring(0, 2) + Math.floor((Math.random() * 10000000))
+      }
+      this.multiselec.push(tag)
+      this.multiselecvalue.push(tag)
+    },
+
+
+
+
+ addFilter (newTag) {
+      const tag = {
+        name: newTag,
+        id: newTag.substring(0, 2) + Math.floor((Math.random() * 10000000))
+      }
+      this.multiselec.push(tag)
+      this.filterselectvalue.push(tag)
+    },
+
+    
+  
+    categories() {
+      this.$store
+        .dispatch("auth/categories")
+        .then(() => {
+          console.log("hey yeah");
+        })
+        .catch((err) => {
+          console.log({ err: err });
+        });
+
+    },
+
+
+
+
+    subcategories() {
+      
+
+       let formData2 = new FormData();
+          formData2.append("categoryId", this.selectedcategories);
+
+      this.$store
+        .dispatch("auth/subcategories", formData2)
+        .then(() => {
+          console.log("hey yeah");
+        })
+        .catch((err) => {
+          console.log({ err: err });
+        });
+
+    },
+
+
+
+
+    filters() {
+        
+         this.$store
+        .dispatch("auth/filters")
+        .then(() => {
+          console.log("hey yeah");
+        })
+        .catch((err) => {
+          console.log({ err: err });
+        });
+
+    },
+
+
+  
+    Setcategoryfiters() {
+       
+        this.$store
+        .dispatch("auth/Setcategoryfiters")
+        .then(() => {
+          console.log("hey yeah");
+        })
+        .catch((err) => {
+          console.log({ err: err });
+        });
+
+    },
+
+
+
+
+
+
+
     setLoading: function (value) {
       this.loadingWizard = value;
     },
@@ -877,8 +1032,13 @@ export default {
           formData2.append("lat", this.center.lat);
           formData2.append("lng", this.center.lng);
 
-          formData2.append("name", this.business_name);
+          formData2.append("name", this.form.business_name);
           formData2.append("category", this.business_category);
+          
+          formData2.append("categoryId", this.selectedcategories);    
+          formData2.append("subCategoryId", this.selectedsubcategories);
+          formData2.append("filterId", this.select_filterss);
+ 
           formData2.append("keywords", this.business_keyword);
           formData2.append("timezone", this.time_zone);
           formData2.append("language", this.language);
@@ -1192,16 +1352,57 @@ export default {
   mounted() {
     this.locateGeoLocation();
 
+    
+    this.categories() 
+
+
+
+    //this.filters() 
+
+    //this.Setcategoryfiters() 
+
    
   },
 
   components: {
+
+    Multiselect,
     People,
     Business,
     Tutorial,
+    
   },
 
   computed: {
+
+     selectedcategories: function () {
+                let selectedUsers = [];
+                this.multiselecvalue.forEach((item) => {
+                    selectedUsers.push(item.id);
+                });
+                return selectedUsers;
+            }
+            ,
+
+
+
+             selectedsubcategories: function () {
+                let sub_cat = [];
+                this.filterselectvalue.forEach((item) => {
+                    sub_cat.push(item.sub_cat_id);
+                });
+                return sub_cat;
+            }
+            ,
+
+
+    pcategories(){
+        return this.$store.state.auth.categories;
+    },
+
+    scategories(){
+        return this.$store.state.auth.subcategories;
+    },
     people_around() {
       return this.$store.state.auth.peopleAround;
     },
@@ -1382,3 +1583,5 @@ import "vue-form-wizard/dist/vue-form-wizard.min.css";
   border-color: #e75c18 !important;
 }
 </style>
+
+<style src="vue-multiselect/dist/vue-multiselect.min.css"></style>  

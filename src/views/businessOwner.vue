@@ -54,6 +54,8 @@ import Inbox from "../components/businessOwner/inbox";
 
 import LyTab from "@/tab/src/index.vue";
 
+import axios from "axios";
+
 import Footer from "../components/footer";
 export default {
   name: "Home",
@@ -66,12 +68,13 @@ export default {
     //  Insight,
     Inbox,
     // Notification,
-    Footer,
+    Footer
   },
   data() {
     return {
       selectedId: 0,
       bottomSelectedId: 0,
+      url_data: null,
       items: [
         { label: "Home ", icon: "" },
 
@@ -87,7 +90,79 @@ export default {
       }
     };
   },
-  computed: {}
+
+  methods: {
+    businessInfo() {
+      this.$store
+        .dispatch("businessOwner/businessInfo", this.url_data)
+        .then(() => {
+          console.log("hey yeah");
+        })
+        .catch(err => {
+          console.log({ err: err });
+        });
+    },
+
+    CommunityBusiness() {
+      this.$store
+        .dispatch("businessOwner/CommunityBusiness", this.url_data)
+        .then(() => {
+          console.log("hey yeah");
+        })
+        .catch(err => {
+          console.log({ err: err });
+        });
+    },
+
+    CommunityPeople() {
+      this.$store
+        .dispatch("businessOwner/CommunityPeople", this.url_data)
+        .then(() => {
+          console.log("hey yeah");
+        })
+        .catch(err => {
+          console.log({ err: err });
+        });
+    },
+
+    businessCommunityTotal() {
+      this.$store
+        .dispatch("businessOwner/businessCommunityTotal", this.url_data)
+        .then(() => {
+          console.log("hey yeah");
+        })
+        .catch(err => {
+          console.log({ err: err });
+        });
+    },
+
+    ownerPost() {
+      this.$store
+        .dispatch("businessOwner/ownerPost", this.url_data)
+        .then(() => {
+          console.log("hey yeah");
+        })
+        .catch(err => {
+          console.log({ err: err });
+        });
+    }
+  },
+  computed: {},
+
+  mounted() {
+    this.url_data = this.$route.params.id;
+
+    console.log(this.url_data);
+
+    this.businessInfo();
+
+    this.CommunityBusiness();
+
+    this.CommunityPeople();
+
+    this.businessCommunityTotal();
+    this.ownerPost();
+  }
 };
 </script>
 

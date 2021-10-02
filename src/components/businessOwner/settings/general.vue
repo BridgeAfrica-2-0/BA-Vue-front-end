@@ -285,5 +285,8 @@ export default {
     top: -5px;
     left: -20px;
   }
+  .btn{
+    font-size: 12px;
+  }
 }
 </style>

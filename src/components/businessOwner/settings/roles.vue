@@ -14,7 +14,7 @@
             label-class="font-weight-bold pt-0"
             class="mb-0"
           >
-            <!-- <b-form-select
+            <b-form-select
               id="follower"
               v-model="form.follower"
               :options="followers.people[0].user_followers"
@@ -23,7 +23,7 @@
               text-field="name"
               class="mb-3"
             >
-            </b-form-select> -->
+            </b-form-select>
           </b-form-group>
         </b-col>
 
@@ -335,7 +335,7 @@ export default {
 }
 
 .a-button-l {
-  align-content: right;
+  /*align-content: right;*/
   float: right;
 }
 .a-text {
@@ -353,6 +353,9 @@ export default {
   .settings {
     top: -5px;
     left: -20px;
+  }
+  .assign-btn{
+    margin-top:30px
   }
 }
 </style>

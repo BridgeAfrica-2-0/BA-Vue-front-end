@@ -11,7 +11,6 @@ export default {
     albumImages: [],
     ownerPost: [],
     ownerPostImages: [],
-    posts: [],
   },
   getters: {
     getAlbums(state) {
@@ -70,7 +69,7 @@ export default {
     upAlbum(state, payload) {
       state.albums = payload;
     },
-
+    //for album images
     setSubmitPost(state, payload) {
       state.albums = payload;
     },

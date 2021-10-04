@@ -9,6 +9,12 @@ class Repository {
     return await response.data.data
   }
 
+  async findPostByKeyword(credentials) {
+    const { page, data, keyword } = credentials
+    const response = await axios.post(`search/people/post/${keyword}`, data)
+    return await response.data.data
+  }
+
 }
 
 

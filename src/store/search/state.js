@@ -5,5 +5,5 @@ export const state = {
   page: 1,
   callback: null,
   postKeyword: null,
-  scrool: f => f
+  stack: null
 }

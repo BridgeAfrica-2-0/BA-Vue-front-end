@@ -1,7 +1,11 @@
 export const FIND_USER = 'FIND_USER'
+export const FIND_POST = 'FIND_POST'
+export const STACK_VALUE = 'STACK_VALUE'
+
+
+
 export const FIND_PROFESSION = 'FIND_PROFESSION'
 export const FIND_COMMUNITY = 'FIND_COMMUNITY'
-export const FIND_POST = 'FIND_POST'
 export const FIND_BUISNESS_POST = 'FIND_BUISNESS_POST'
 export const FIND_MIXED_POST = 'FIND_MIXED_POST'
 export const FIND_MIXED_USER = 'FIND_MIXED_USER'

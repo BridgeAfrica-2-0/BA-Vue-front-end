@@ -3,8 +3,27 @@ import * as TYPES from './types'
 export const mutations = {
 
   [TYPES.FIND_USER](state, payload) {
-    state.users = payload
-  },
+
+    if (state.page > 2)
+      state.users = [...payload, ...state.users]
+    else
+      state.users = payload
+
+  }, //[TYPES.FIND_USER]
+
+  [TYPES.FIND_POST](state, payload) {
+
+    if (state.page > 2)
+      state.posts = [...payload, ...state.posts]
+    else
+      state.posts = payload
+
+  }, //[TYPES.FIND_POST]
+
+  [TYPES.STACK_VALUE](state, payload) {
+    state.stack = payload
+  }, //[TYPES.STACK_VALUE]
+
 
   [TYPES.FIND_PROFESSION](state, payload) {
     state.users = payload
@@ -73,14 +92,6 @@ export const mutations = {
     else
       console.error(`${payload} should be a function`)
   },
-
-  [TYPES.SET_SCROLL_STATE](state, payload) {
-    if (typeof (payload) === 'function')
-      state.scrool = payload
-    else
-      console.error(`${payload} should be a function`)
-  },
-
 
   [TYPES.POST_KEYWORD](state, payload) {
 

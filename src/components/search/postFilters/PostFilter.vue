@@ -230,7 +230,6 @@ export default {
     selectedPeople: function () {
       console.log(this.selectedPeople);
       this.communityIsChecked(this.selectedPeople);
-      console.log(this.selectedPeople);
     },
     selectedBuisness: function () {
       this.communityIsChecked(this.selectedBuisness);
@@ -246,17 +245,9 @@ export default {
         return false;
       }
       if (newValue) {
-        this.newCallbackForPagination(
-          this.findPeoplePost({
-            credentials: { recent_post: "" },
-            lauchLoader: true,
-            endLoader: false,
-          })
-        );
-        this.findPeoplePost({
-          credentials: { recent_post: "" },
-          lauchLoader: true,
-          endLoader: false,
+        this._onFindPost({
+          data: { recent_post: "" },
+          keyword: this.keyword,
         });
       }
     },
@@ -267,34 +258,18 @@ export default {
         return false;
       }
       if (newValue) {
-        this.newCallbackForPagination(
-          this.findPeoplePost({
-            credentials: { not_seen: "" },
-            lauchLoader: true,
-            endLoader: false,
-          })
-        );
-        this.findPeoplePost({
-          credentials: { not_seen: "" },
-          lauchLoader: true,
-          endLoader: false,
+        this._onFindPost({
+          data: { not_seen: "" },
+          keyword: this.keyword,
         });
       }
     },
 
     created_at: function (newValue) {
       if (newValue) {
-        this.newCallbackForPagination(
-          this.findPeoplePost({
-            credentials: { created_at: this.created_at },
-            lauchLoader: true,
-            endLoader: false,
-          })
-        );
-        this.findPeoplePost({
-          credentials: { created_at: this.created_at },
-          lauchLoader: true,
-          endLoader: false,
+        this._onFindPost({
+          data: { created_at: this.created_at },
+          keyword: this.keyword,
         });
       }
     },
@@ -312,7 +287,23 @@ export default {
       findBuisnessPost: "search/FIND_BUISNESS_POST",
       findNetworkPost: "search/FIND_NETWORK_POST",
       newCallbackForPagination: "search/SET_CURRENT_PAGINATE_CALLBACK",
+      lauchLoader: "search/LOADING",
     }),
+
+    async _onFindPost(e) {
+      try {
+        this.lauchLoader(true);
+        const request = await this.$repository.search.findPostByKeyword({
+          ...e,
+          page: 1,
+        });
+        this.findPeoplePost(request);
+      } catch (error) {
+        this.lauchLoader(false);
+      }
+
+      this.lauchLoader(false);
+    },
 
     communityIsChecked(data) {
       console.log(data);

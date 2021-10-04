@@ -568,9 +568,15 @@
                 <fas-icon class="icons" :icon="['fab', 'readme']" size="lg" />
                 Posting
               </h6>
-
               <NotFound v-if="!posts.length" :title="notFoundComponentTitle" />
               <Post v-for="(post, index) in posts" :post="post" :key="index" />
+              <infinite-loading
+                @infinite="handleScroll"
+                v-if="this.navBarParams.keyword.trim()"
+              >
+                <div class="text-red" slot="no-more">No More Request</div>
+                <div class="text-red" slot="no-results">No More Request</div>
+              </infinite-loading>
             </div>
           </div>
         </b-col>
@@ -638,6 +644,7 @@ export default {
       posts: "search/GET_RESULT_POST",
       callbackForPagination: "search/GET_CURRENT_PAGINATE_CALLBACK",
       currentPaginationPage: "search/GET_CURRENT_PAGINATION_PAGE",
+      getStack: "search/STACK_VALUE",
     }),
   },
 
@@ -1612,10 +1619,6 @@ export default {
       this.changePlaceHolder();
       this.changeNotFoundTitle();
     },
-
-    currentPaginationPage: function (newValue) {
-      if (newValue > 1) this.callbackForPagination();
-    },
   },
 
   methods: {
@@ -1625,14 +1628,14 @@ export default {
       postKeyword: "search/POST_KEYWORD",
       newCallbackForPagination: "search/SET_CURRENT_PAGINATE_CALLBACK",
       updateCurrentPaginatinPage: "search/SET_CURRENT_PAGINATION_PAGE",
-      scrollState: "search/SET_SCROLL_STATE",
+      stack: "search/STACK_VALUE",
       lauchLoader: "search/LOADING",
     }),
 
     handleScroll($state) {
-      this.scrollState($state);
-      console.log("scroolling");
-      this.updateCurrentPaginatinPage(this.currentPaginationPage + 1);
+      if (this.currentPaginationPage > 1) {
+        this.callbackForPagination();
+      }
     },
 
     changeNotFoundTitle() {
@@ -1690,14 +1693,38 @@ export default {
       } else this.onNotified("the word must have at least 3 letters");
     },
 
-    onFindPost() {
-      if (this.navBarParams.keyword.trim()) {
-        this.postKeyword(this.navBarParams.keyword);
-        this.findPost({
-          credentials: {},
-          lauchLoader: true,
-          endLoader: false,
+    async _onFindPost($state) {
+      console.log(this.getStack);
+      try {
+        this.lauchLoader(true);
+        const request = await this.$repository.search.findPostByKeyword({
+          ...this.getStack,
+          page: this.currentPaginationPage,
         });
+
+        if (request.length) {
+          this.updateCurrentPaginatinPage(this.currentPaginationPage + 1);
+          $state ? $state.loaded() : null;
+        } else $state ? $state.completed() : null;
+
+        this.findPost(request);
+      } catch (error) {
+        this.lauchLoader(false);
+      }
+
+      this.lauchLoader(false);
+    },
+
+    onFindPost($state = null) {
+      if (this.navBarParams.keyword.trim()) {
+        this.postKeyword(this.navBarParams.keyword.trim());
+
+        this.stack({
+          data: {},
+          keyword: this.navBarParams.keyword.trim(),
+        });
+
+        this._onFindPost($state);
       } else {
         this.onNotified("the word must have at least 3 letters");
       }

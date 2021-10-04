@@ -177,7 +177,6 @@ export default {
   methods: {
     ...mapActions({
       findUser: "search/FIND_USER",
-      findCommunity: "search/FIND_COMMUNITY",
       lauchLoader: "search/LOADING",
     }),
 
@@ -195,17 +194,14 @@ export default {
         return hash;
       }, {});
 
-      this.findCommunity(data);
+      this._onFindUser({ payload: { ...data }, page: 1 });
     },
 
     async _onFindUser(payload) {
       try {
         this.lauchLoader(true);
         const request = await this.$repository.search.findUserByParam({
-          payload: {
-            profession: payload,
-            page: 1,
-          },
+          payload,
           page: 1,
         });
         this.findUser(request);
@@ -217,7 +213,11 @@ export default {
     },
 
     debounceInput: _.debounce(function (e) {
-      if (e) this._onFindUser(e);
+      if (e)
+        this._onFindUser({
+          profession: e,
+          page: 1,
+        });
     }, 1000),
 
     toogleRootSection() {

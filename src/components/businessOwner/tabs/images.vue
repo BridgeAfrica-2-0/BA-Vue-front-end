@@ -2,6 +2,34 @@
   <div>
     <div class="row">
       <div class="container-fluid">
+        <div class="img-gall" v-for="image in image" :key="image.id">
+          <a href="#!"
+            ><img
+              class="card-img btn p-0"
+              :src="image"
+              :key="image.id"
+              alt=""
+              @click="testing(image.id)"
+          /></a>
+        </div>
+        <b-modal v-model="mymodal" id="modal" title="Details">
+          <div>
+            <transition-group name="fade" tag="div">
+              <div v-for="i in [currentIndex]" :key="i">
+                <a :href="currentImg"><img :src="currentImg"/></a>
+              </div>
+            </transition-group>
+            <a class="prev" @click="prev" href="#">&#10094; Previous</a>
+            <a class="next" @click="next" href="#">&#10095; Next</a>
+            <h4>Post Title</h4>
+            <p class="my-4">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum
+              quisquam sequi, ullam aliquam ab illo suscipit, earum quam,
+              doloribus id sit consequuntur tempora molestiae blanditiis.
+            </p>
+          </div>
+        </b-modal>
+
         <div class="img-gall">
           <a href="#!"
             ><img
@@ -140,8 +168,21 @@
         </div>
         <div class="img-gall">
           <a href="#!"
-            ><img class="card-img" src="@/assets/img/m4.jpg" alt=""
+            ><img
+              class="card-img"
+              src="@/assets/img/m4.jpg"
+              alt=""
+              v-b-modal.modal-c
           /></a>
+          <b-modal id="modal-c" title="Details">
+            <img class="card-img" src="@/assets/img/m4.jpg" alt="" />
+            <h4>Post Title</h4>
+            <p class="my-4">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum
+              quisquam sequi, ullam aliquam ab illo suscipit, earum quam,
+              doloribus id sit consequuntur tempora molestiae blanditiis.
+            </p>
+          </b-modal>
           <div class="mediadesc">
             <ul class="navbar-nav pull-right">
               <li class="nav-item dropdown">
@@ -171,8 +212,21 @@
         </div>
         <div class="img-gall">
           <a href="#!"
-            ><img class="card-img" src="@/assets/img/m5.jpg" alt=""
+            ><img
+              class="card-img"
+              src="@/assets/img/m5.jpg"
+              alt=""
+              v-b-modal.modal-d
           /></a>
+          <b-modal id="modal-d" title="Details">
+            <img class="card-img" src="@/assets/img/m5.jpg" alt="" />
+            <h4>Post Title</h4>
+            <p class="my-4">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum
+              quisquam sequi, ullam aliquam ab illo suscipit, earum quam,
+              doloribus id sit consequuntur tempora molestiae blanditiis.
+            </p>
+          </b-modal>
           <div class="mediadesc">
             <ul class="navbar-nav pull-right">
               <li class="nav-item dropdown">
@@ -202,8 +256,21 @@
         </div>
         <div class="img-gall">
           <a href="#!"
-            ><img class="card-img" src="@/assets/img/m6.jpg" alt=""
+            ><img
+              class="card-img"
+              src="@/assets/img/m6.jpg"
+              alt=""
+              v-b-modal.modal-e
           /></a>
+          <b-modal id="modal-e" title="Details">
+            <img class="card-img" src="@/assets/img/m6.jpg" alt="" />
+            <h4>Post Title</h4>
+            <p class="my-4">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum
+              quisquam sequi, ullam aliquam ab illo suscipit, earum quam,
+              doloribus id sit consequuntur tempora molestiae blanditiis.
+            </p>
+          </b-modal>
           <div class="mediadesc">
             <ul class="navbar-nav pull-right">
               <li class="nav-item dropdown">
@@ -233,8 +300,21 @@
         </div>
         <div class="img-gall">
           <a href="#!"
-            ><img class="card-img" src="@/assets/img/m7.jpg" alt=""
+            ><img
+              class="card-img"
+              src="@/assets/img/m7.jpg"
+              alt=""
+              v-b-modal.modal-f
           /></a>
+          <b-modal id="modal-f" title="Details">
+            <img class="card-img" src="@/assets/img/m7.jpg" alt="" />
+            <h4>Post Title</h4>
+            <p class="my-4">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum
+              quisquam sequi, ullam aliquam ab illo suscipit, earum quam,
+              doloribus id sit consequuntur tempora molestiae blanditiis.
+            </p>
+          </b-modal>
           <div class="mediadesc">
             <ul class="navbar-nav pull-right">
               <li class="nav-item dropdown">
@@ -265,8 +345,21 @@
 
         <div class="img-gall">
           <a href="#!"
-            ><img class="card-img" src="@/assets/img/m8.jpg" alt=""
+            ><img
+              class="card-img"
+              src="@/assets/img/m8.jpg"
+              alt=""
+              v-b-modal.modal-g
           /></a>
+          <b-modal id="modal-g" title="Details">
+            <img class="card-img" src="@/assets/img/m8.jpg" alt="" />
+            <h4>Post Title</h4>
+            <p class="my-4">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum
+              quisquam sequi, ullam aliquam ab illo suscipit, earum quam,
+              doloribus id sit consequuntur tempora molestiae blanditiis.
+            </p>
+          </b-modal>
           <div class="mediadesc">
             <ul class="navbar-nav pull-right">
               <li class="nav-item dropdown">
@@ -302,17 +395,59 @@
 <script>
 export default {
   components: {},
-  methods: {
-    /**
-     *
-     * @param i
-     */
-    onClick(i) {
-      this.index = i;
-    }
-  },
+
   data: function() {
     return {
+      model: 0,
+      mymodal: false,
+      activeImage: 0,
+
+      timer: null,
+      currentIndex: 0,
+      imagee: [
+        {
+          id: "1",
+          img: require("@/assets/img/m1.jpg"),
+        },
+        {
+          id: "2",
+          img: require("@/assets/img/m2.jpg"),
+        },
+        {
+          id: "3",
+          img: require("@/assets/img/m3.jpg"),
+        },
+        {
+          id: "4",
+          img: require("@/assets/img/m4.jpg"),
+        },
+        {
+          id: "5",
+          img: require("@/assets/img/m5.jpg"),
+        },
+        {
+          id: "6",
+          img: require("@/assets/img/m6.jpg"),
+        },
+        {
+          id: "7",
+          img: require("@/assets/img/m7.jpg"),
+        },
+        {
+          id: "8",
+          img: require("@/assets/img/m8.jpg"),
+        },
+      ],
+      image: [
+        require("@/assets/img/m1.jpg"),
+        require("@/assets/img/m2.jpg"),
+        require("@/assets/img/m3.jpg"),
+        require("@/assets/img/m4.jpg"),
+        require("@/assets/img/m5.jpg"),
+        require("@/assets/img/m6.jpg"),
+        require("@/assets/img/m7.jpg"),
+        require("@/assets/img/m8.jpg"),
+      ],
       images: [
         "https://placekitten.com/801/800",
         "https://placekitten.com/802/800",
@@ -322,7 +457,7 @@ export default {
         "https://placekitten.com/806/800",
         "https://placekitten.com/807/800",
         "https://placekitten.com/808/800",
-        "https://placekitten.com/809/800"
+        "https://placekitten.com/809/800",
       ],
       imagees: [
         "https://i.wifegeek.com/200426/f9459c52.jpg",
@@ -344,11 +479,39 @@ export default {
         "https://i.wifegeek.com/200426/177ef44c.jpg",
         "https://i.wifegeek.com/200426/d74d9040.jpg",
         "https://i.wifegeek.com/200426/81e24a47.jpg",
-        "https://i.wifegeek.com/200426/43e2e8bb.jpg"
+        "https://i.wifegeek.com/200426/43e2e8bb.jpg",
       ],
-      index: 0
+      index: 0,
     };
-  }
+  },
+
+  mounted: function() {
+    //this.startSlide();
+  },
+
+  methods: {
+    testing(id) {
+      console.log(id);
+      this.mymodal = true;
+    },
+
+    startSlide: function() {
+      this.timer = setInterval(this.next, 4000);
+    },
+
+    next: function() {
+      this.currentIndex += 1;
+    },
+    prev: function() {
+      this.currentIndex -= 1;
+    },
+  },
+
+  computed: {
+    currentImg: function() {
+      return this.image[Math.abs(this.currentIndex) % this.image.length];
+    },
+  },
 };
 </script>
 
@@ -360,6 +523,61 @@ export default {
 .drop-color {
   color: black;
 }
+
+/* slider css */
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: all 0.9s ease;
+  overflow: hidden;
+  visibility: visible;
+  position: absolute;
+  width: 100%;
+  opacity: 1;
+}
+
+.fade-enter,
+.fade-leave-to {
+  visibility: hidden;
+  width: 100%;
+  opacity: 0;
+}
+
+img {
+  height: 600px;
+  width: 100%;
+}
+
+.prev,
+.next {
+  cursor: pointer;
+  position: absolute;
+  top: 40%;
+  width: auto;
+  padding: 16px;
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+  transition: 0.7s ease;
+  border-radius: 0 4px 4px 0;
+  text-decoration: none;
+  user-select: none;
+}
+
+.next {
+  right: 0;
+}
+
+.prev {
+  left: 0;
+}
+
+.prev:hover,
+.next:hover {
+  background-color: rgba(0, 0, 0, 0.9);
+}
+
+/* end of slider css */
 
 @media (min-width: 960px) {
   .img-gall {

@@ -159,6 +159,7 @@ export default {
   components: {},
   data() {  
     return {
+      business_id:null,
       planetChartData: planetChartData,
       business_insights: null,
        startDate:  moment().startOf('month').format('YYYY-MM-DD'),
@@ -174,7 +175,7 @@ export default {
 
         moment(newValue, "YYYY-MM-DD").format("YYYY-MM-DD")
       );
-      this.load({ startDate: this.startDate, endDate: this.endDate });
+      this.load({ startDate: this.startDate, endDate: this.endDate, business_id:this.business_id });
     },
     startDate(newValue) {
       console.log(
@@ -187,7 +188,9 @@ export default {
     
   },
   mounted() {
-    this.load({ startDate: this.startDate, endDate: this.endDate });
+
+    this.business_id = this.$route.params.id;
+    this.load({ startDate: this.startDate, endDate: this.endDate,business_id:this.business_id });
     const ctx = document.getElementById("planet-chart");
     new Chart(ctx, this.planetChartData);
     
@@ -199,13 +202,14 @@ export default {
     return moment( new Date(datee)).format('MMM d, YYYY')
 
     },
+
     load(payload) {
       console.log("Load Business Insights start  ++++");
       this.$store
         .dispatch("businessOwner/loadUserBusinessInsight", payload)
         .then(response => {
           console.log("load Business Insights response in component (3)+++++", response);
-          console.log("load Business Insights end +++++++");
+         
         })
         .catch(error => {
           console.log("error from the server or the browser error(2) ++++++", error);

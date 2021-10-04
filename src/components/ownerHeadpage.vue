@@ -470,13 +470,21 @@ computed: {
  
 
       profile_info() {
-      return  this.$store.state.businessOwner.businessInfo;  
+
+         if(this.$store.state.businessOwner.businessInfo ==[] ){  
+      return  this.$store.state.businessOwner.businessInfo;   }else{
+
+        return  this.$store.state.businessOwner.businessInfo;
+      }
 
      
     },
 
 
      info :function(){
+
+       console.log("helloodhdjdhdjdd dhdjdhdd sgysjshs");
+       console.log(this.$store.getters['profile/getUserPostIntro'])
         return this.$store.getters['profile/getUserPostIntro'];
       }
 

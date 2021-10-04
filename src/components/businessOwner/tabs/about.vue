@@ -366,6 +366,7 @@
 export default {
   data() {
     return {
+      business_id:null,
       categories: [
         { item: "Professional_and_home_service", name: "Professionals" },
         { item: "Agriculture ", name: "Agriculture " },
@@ -505,7 +506,10 @@ export default {
   created() {
     console.log("Load Business About start +++++");
     this.$store
-      .dispatch("businessOwner/loadUserBusinessAbout", null)
+      .dispatch("businessOwner/loadUserBusinessAbout",  {
+              business_abobusiness_id: this.business_about_input,
+              business_id:this.business_id
+            })
       .then(response => {
         console.log(response, "load business about response end response (3) ++++");
         this.dayOfWorks = this.initialize(this.dayOfWorks);
@@ -520,6 +524,9 @@ export default {
         );
         console.log(this.business_about);
       });
+  },
+  mounted(){
+    this.business_id = this.$route.params.id;
   },
   computed: {
     hoursOpen() {
@@ -575,7 +582,8 @@ export default {
           this.test();
           this.$store
             .dispatch("businessOwner/updateUserBusinessAbout", {
-              business_about: this.business_about_input
+              business_about: this.business_about_input,
+              business_id: this.business_id,
             })
             .then(response => {
               console.log("fetch finished on the database response (3) ", response);
@@ -599,7 +607,8 @@ export default {
           console.log(this.business_about_input);
           this.$store
             .dispatch("businessOwner/updateUserBusinessAbout", {
-              business_about: this.business_about_input
+              business_about: this.business_about_input,
+              business_id:this.business_id
             })
             .then(response => {
               console.log("update user business about response ++++++", response);

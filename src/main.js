@@ -20,6 +20,10 @@ import VueSocialauth from "vue-social-auth";
 import Notifications from 'vue-notification'
 
 
+import plugin from './http'
+
+Vue.use(plugin)
+
 
 Vue.use(Notifications)
 // import firebase from "firebase";
@@ -29,10 +33,6 @@ Vue.use(Vuex);
 Vue.use(VueAxios, axios);
 
 import LoadScript from 'vue-plugin-load-script';
-
-import { loader } from "./mixins"
-
-
 
 Vue.use(LoadScript);
 

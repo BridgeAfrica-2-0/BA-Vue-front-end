@@ -61,29 +61,18 @@ export const actions = {
     commit(TYPES.LOADING, true)
     commit(TYPES.RESET_RESULT)
 
-    axios.get(`search/listUsers?q=${payload}&page=${state.page}`)
-      .then(({ data: { data } }) => {
-        if (state.page > 1)
-          commit(TYPES.FIND_MIXED_USER, data)
-        else
-          commit(TYPES.FIND_USER, data)
+    if (state.page > 1)
+      commit(TYPES.FIND_MIXED_USER, payload)
+    else
+      commit(TYPES.FIND_USER, payload)
 
-        commit(TYPES.LOADING, false)
-
-        if (data.length)
-          state.scrool.loaded()
-        else
-          state.scrool.complete()
-
-      })
-      .catch(e => commit(TYPES.LOADING, false))
-  },
+  }, // [TYPES.FIND_USER]
 
   [TYPES.FIND_PROFESSION]({ commit, state }, payload) {
     commit(TYPES.LOADING, true)
     commit(TYPES.RESET_RESULT)
 
-    axios.get(`search/listProfessions?q=${payload}&page=${state.page}`)
+    axios.post(`search/listUsers/${state.page}`, { profession: payload, page: state.page })
       .then(({ data: { data } }) => {
         if (state.page > 1)
           commit(TYPES.FIND_MIXED_USER, data)
@@ -98,7 +87,7 @@ export const actions = {
   [TYPES.FIND_COMMUNITY]({ commit, state }, payload) {
     commit(TYPES.RESET_RESULT)
     commit(TYPES.LOADING, true)
-    axios.post(`search/community/profession?page=${state.page}`, payload)
+    axios.post(`search/listUsers/${state.page}`, { ...payload, page: state.page })
       .then(({ data: { data } }) => {
         if (state.page > 1)
           commit(TYPES.FIND_MIXED_USER, data)

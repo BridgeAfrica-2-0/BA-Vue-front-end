@@ -5,6 +5,17 @@ export const loader = {
   components: {
     NotFound
   },
+  methods: {
+    onNotified(text) {
+      this.$notify({
+        group: "notification",
+        title: "Important message",
+        type: "warn",
+        duration: 5000,
+        text,
+      });
+    },
+  },
   computed: {
     ...mapGetters({
       loading: 'search/LOADING'

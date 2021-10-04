@@ -1625,16 +1625,14 @@ export default {
       postKeyword: "search/POST_KEYWORD",
       newCallbackForPagination: "search/SET_CURRENT_PAGINATE_CALLBACK",
       updateCurrentPaginatinPage: "search/SET_CURRENT_PAGINATION_PAGE",
-      scrollState: "search/SET_SCROLL_STATE"
+      scrollState: "search/SET_SCROLL_STATE",
+      lauchLoader: "search/LOADING",
     }),
 
     handleScroll($state) {
-      this.scrollState($state)
+      this.scrollState($state);
       console.log("scroolling");
       this.updateCurrentPaginatinPage(this.currentPaginationPage + 1);
-      //$state.loaded();
-
-      //$state.complete();
     },
 
     changeNotFoundTitle() {
@@ -1662,26 +1660,34 @@ export default {
 
     strategies() {
       try {
-        this.strategy[`${this.selectedId}`]();
         this.newCallbackForPagination(this.strategy[`${this.selectedId}`]);
+        this.strategy[`${this.selectedId}`]();
       } catch (error) {
         console.warn(`Implement function for selectedId=${this.selectedId}`);
       }
     },
 
-    onNotified(text) {
-      this.$notify({
-        group: "notification",
-        title: "Important message",
-        type: "warn",
-        duration: 5000,
-        text,
-      });
+    async _onFindUser() {
+      try {
+        this.lauchLoader(true);
+        const request = await this.$repository.search.findUserByParam({
+          payload: {
+            keyword: this.navBarParams.keyword.trim(),
+          },
+          page: 1,
+        });
+        this.findUser(request);
+      } catch (error) {
+        this.lauchLoader(false);
+      }
+
+      this.lauchLoader(false);
     },
+
     onFindUser() {
-      if (this.navBarParams.keyword.trim())
-        this.findUser(this.navBarParams.keyword);
-      else this.onNotified("the word must have at least 3 letters");
+      if (this.navBarParams.keyword.trim()) {
+        this._onFindUser();
+      } else this.onNotified("the word must have at least 3 letters");
     },
 
     onFindPost() {

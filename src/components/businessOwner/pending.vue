@@ -71,10 +71,10 @@ export default {
       // get pending posts
       axios
         .get("https://jsonplaceholder.typicode.com/todos")
-        .then(res => {
+        .then((res) => {
           this.posts == res.data;
         })
-        .catch(err => {
+        .catch((err) => {
           console.log(err);
         });
     },

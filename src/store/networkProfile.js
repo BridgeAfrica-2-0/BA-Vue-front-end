@@ -7,7 +7,7 @@ export default {
     loader: false,
     success: false,
     communityPeople: [],
-    CommunityBusiness: [],
+    Communitynetwork: [],
     communityTotal: [],
     networkInfo: [],
     albums: [],
@@ -61,8 +61,8 @@ export default {
       state.albumImages = data;
     },
 
-    setCommunityBusiness(state, data) {
-      state.CommunityBusiness = data;
+    setCommunitynetwork(state, data) {
+      state.Communitynetwork = data;
     },
 
     setCommunityPeople(state, data) {
@@ -117,17 +117,17 @@ export default {
 
     getnetworkInfo( {commit}, networkId ){
       return axios
-      .get(`network/edit-informaions/${networkId}`)
+      .get(`network/${networkId}/about/information`)
       .then(({ data }) => {
-          commit("setnetworkInfo", data.data);
+          commit("setNetworkInfo", data.data);
         console.log(data);
 
       })
-    }, 
+    },
 
     getAlbumImages( {commit}, networkId){
       return axios
-      .get('business/album/show/'+networkId )
+      .get('network/album/show/'+networkId )
       .then(({ data }) => {
        commit('setAlbumImages', data.data.media);
         console.log(data);
@@ -135,14 +135,14 @@ export default {
     },
 
     getImages({ commit }, networkId) {
-      return axios.get("business/post/" + networkId).then(({ data }) => {
+      return axios.get("network/post/" + networkId).then(({ data }) => {
         commit("setImages", data.data);
         console.log(data);
       });
     },
 
     getAlbums({ commit }, networkId) {
-      return axios.get("business/album/index/" + networkId).then(({ data }) => {
+      return axios.get("network/album/index/" + networkId).then(({ data }) => {
         commit("setAlbums", data.data);
         console.log(data);
       });
@@ -156,40 +156,40 @@ export default {
     },
 
     ownerPostImages({ commit }, networkId) {
-      return axios.get("business/show/images/" + networkId).then(({ data }) => {
+      return axios.get("network/show/images/" + networkId).then(({ data }) => {
         commit("ownerPostImages", data.data);
         console.log(data);
       });
     },
 
     networkInfo({ commit }, networkId) {
-      return axios.get("network/edit-informaions/" + networkId).then(({ data }) => {
+      return axios.get(`network/${networkId}/about/information`).then(({ data }) => {
         commit("setNetworkInfo", data.data);
         console.log(data);
       });
     },
 
-    CommunityBusiness({ commit }, networkId) {
+    Communitynetwork({ commit }, networkId) {
       return axios
-        .get("business/community/business/" + networkId)
+        .get("network/community/network/" + networkId)
         .then(({ data }) => {
-          commit("setCommunityBusiness", data.data);
+          commit("setCommunitynetwork", data.data);
           console.log(data);
         });
     },
 
     CommunityPeople({ commit }, networkId) {
       return axios
-        .get("business/community/people/" + networkId)
+        .get("network/community/people/" + networkId)
         .then(({ data }) => {
           commit("setCommunityPeople", data.data);
           console.log(data);
         });
     },
 
-    businessCommunityTotal({ commit }, networkId) {
+    networkCommunityTotal({ commit }, networkId) {
       return axios
-        .get("business/community/total/" + networkId)
+        .get("network/community/total/" + networkId)
         .then(({ data }) => {
           commit("setCommunityTotal", data.data);
           console.log(data);

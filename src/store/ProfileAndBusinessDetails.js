@@ -11,7 +11,7 @@ export default {
 
   actions: {
     async getdetails({ commit }) {
-      return await axios.get("/profileInfo", {}).then(function({ data }) {
+      return await axios.get("profile/user/info", {}).then(function({ data }) {
         commit("setdetails", data.data);
         commit("setBusiness", data.data.business);
         commit("setProfile", data.data.owner[0]);

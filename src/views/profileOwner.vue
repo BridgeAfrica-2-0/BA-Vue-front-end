@@ -20,7 +20,7 @@
             
             <b-tab title="Media"  href="#media"><Media /></b-tab>
             <b-tab title="Community"  href="#community" class="m-0 p-0"
-              ><following></following>
+              ><following></following>  </b-tab>
             
           </b-tabs>
         </b-col>

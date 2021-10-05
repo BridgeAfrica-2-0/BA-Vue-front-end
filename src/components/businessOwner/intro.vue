@@ -307,10 +307,6 @@ export default {
      * @return void
      */
 
-    validateState(name) {
-      const { $dirty, $error } = this.$v.form[name];
-      return $dirty ? !$error : null;
-    },
 
     getValidationClass(fieldName) {
       const field = this.$v.form[fieldName];
@@ -419,9 +415,9 @@ export default {
      *
      * @param idForm
      */
-    validate(idForm) {
-      this.$bvModal.hide(idForm);
-    },
+ //   validate(idForm) {
+ //     this.$bvModal.hide(idForm);
+ //   }, 
   },
 
   computed: {

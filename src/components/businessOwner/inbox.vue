@@ -449,6 +449,7 @@
                       </emoji-picker>
                     </div>
                   </b-col>
+                </b-row>
 
    
               <b-row v-if="!checked">

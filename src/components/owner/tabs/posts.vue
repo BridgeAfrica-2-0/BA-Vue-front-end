@@ -187,7 +187,7 @@ import "@morioh/v-lightbox/dist/lightbox.css";
 import Community from "../sidebarcommunity"; 
 //import Community from "./comunitiDashboard";
 import Owner_post from "./owner_post";
-import Media from "../../media";
+import Media from "../media";
 // import CreatePost from "../../createPost";
 // import Post from "../../post";
 export default {
@@ -221,6 +221,19 @@ export default {
       .catch((error) => {
         console.log(error);
       });
+
+
+
+
+        this.$store
+      .dispatch("profile/getImages")
+      .then((response) => {
+       
+      })
+      .catch((error) => {
+        console.log({error:error});
+      });
+      
   },
   computed: {
     info: function () {

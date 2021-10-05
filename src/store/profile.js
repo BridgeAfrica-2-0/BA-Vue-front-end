@@ -29,14 +29,37 @@ export default {
     UcommunityFollower:[],
     UcommunityFollowing:[],
     Tcommunity:[],
+    images:[],
 
 
-    userData: [
-      {
+    userData: 
+      { 
+        user:{
+          address: "",
+          biography: "",
+          city: "",
+          country: "",
+          cover_picture: "",
+          dob: "2021-09-24",
+          email: "",
+          id: 63,
+          language: "",
+          name: "",
+          neighbor: "",
+          phone: null,
+          profession: "",
+          profile_complete: 1,
+          profile_picture: "",
+          provider: 0,
+          provider_id: 0,
+          region: "01",
+          status: 1,
+          updated_at: "2021-10-04T08:37:57.000000Z",
+          user_account_package_id: null },
         profile_about: {
           biography: {
             info_access: "private",
-            description: "No Description"
+            description: ""
           },
           basicInfo: {
             dateOfBirth: {
@@ -51,19 +74,14 @@ export default {
               }
             },
             gender: "M",
-            mobilePhones: ["237656602212", "237677873626"],
+            mobilePhones: [],
             currentCity: null,
             homeTown: null,
             websites: [
-              "https://www.google.com",
-              "https://www.facebook.com",
-              "https://www.udemy.com"
+              
             ],
             socialLinks: [
-              "www.instagram.com/bridgeafrica",
-              "https://www.google.com",
-              "https://www.facebook.com",
-              "https://www.udemy.com"
+              
             ]
           },
           educationAndWorks: {
@@ -71,11 +89,11 @@ export default {
 
               {
                 id: 3,
-                companyName: "Coc Cla Pvt Ltd. Team Lead",
-                cityTown: "YAOUNDE",
-                position: "YAOUNDE",
+                companyName: "",
+                cityTown: "",
+                position: "",
                 jobResponsibilities:
-                  "Job descrioption dummny textJob descrioption dummny text Jobdescrioption dummny text",
+                  "",
                 currentlyWorking: false,
                 starDate: "2012-09-12",
                 endDate: "2012-09-12",
@@ -83,20 +101,10 @@ export default {
               }
             ],
             educations: [
-              {
-                id: 1,
-                access: "private",
-                schoolName: null,
-                graduated: false,
-                durationFrom: null,
-                durationTo: null,
-                major: null
-              }
+             
             ],
             professions: [
-              { profession: "Cultivateur", access: "public" },
-              { profession: "Macon", access: "private" },
-              { profession: "Cuisinier", access: "public" }
+              
             ]
           }
         },
@@ -122,7 +130,7 @@ export default {
           ]
         }
       }
-    ]
+    
   },
   getters: {
     getAlbums(state) {
@@ -130,7 +138,13 @@ export default {
     },
     
     getUserPostIntro(state) {
+      if(state.profileIntro == []) { 
+
+      return state.userData;
+      } else{    
       return state.profileIntro;
+
+    }
     },
 
     getImages(state) {
@@ -192,7 +206,7 @@ export default {
 
     setNcommunityFollower(state, data){
 
-      state.setNcommunityFollower = data;
+      state.NcommunityFollower = data;
 
     },
 
@@ -218,7 +232,7 @@ export default {
 
     setBcommunityFollower(state, data){
 
-      state.setBcommunityFollower = data;
+      state.BcommunityFollower = data;
     },
 
 
@@ -245,8 +259,8 @@ export default {
 
     setImages(state, data) {
 
-      state.ownerPostImages = data;
-
+      state.images = data;
+   
     },
 
     setAlbumImages(state, data) {
@@ -459,8 +473,8 @@ export default {
         });
     },
 
-    getImages({ commit }, busineeId) {
-      return axios.get("business/post/" + busineeId).then(({ data }) => {
+    getImages({ commit }) {
+      return axios.get("profile/user/media").then(({ data }) => {
         commit("setImages", data.data);
         console.log(data);
       });

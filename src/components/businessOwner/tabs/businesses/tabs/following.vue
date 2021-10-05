@@ -21,20 +21,17 @@
 
     <b-row>
       <b-col
-        v-for="(follower, index) in theFollowers"
+        v-for="(following, index) in theFollowing"
         :key="index"
         md="12"
         lg="6"
       >
-        <CommunityBusiness :follower="follower" />
+        <CommunityBusiness :following="following" />
       </b-col>
       <b-col v-if="loader" class="load">
-        <b-spinner
-          style="width: 7rem; height: 7rem;"
-          variant="primary"
-        ></b-spinner>
+        <b-spinner class="spin" variant="primary"></b-spinner>
       </b-col>
-      <b-col v-if="followers.length < 1 && !loader" class="load">
+      <b-col v-if="following.length < 1 && !loader" class="load">
         <p>No one is following you !!</p>
       </b-col>
     </b-row>
@@ -42,55 +39,52 @@
 </template>
 
 <script>
-import axios from "axios";
 import CommunityBusiness from "../../communitybusiness";
+import { mapGetters, mapActions } from "vuex";
 export default {
   components: {
     CommunityBusiness,
   },
   data: () => ({
     loader: false,
-    followers: [],
+    following: [],
     searchQuery: "",
   }),
   computed: {
-    theFollowers() {
+    ...mapGetters({
+      getFollowing: "businessOwner/getFollowing",
+    }),
+
+    theFollowing() {
       if (this.searchQuery) {
-        return this.followers.filter(item => {
+        return this.following.filter((item) => {
           return this.searchQuery
             .toLowerCase()
             .split(" ")
-            .every(v => item.name.toLowerCase().includes(v));
+            .every((v) => item.name.toLowerCase().includes(v));
         });
       } else {
-        return this.followers;
+        return this.following;
       }
     },
   },
   beforeMount() {
-    axios.defaults.headers.common["Authorization"] =
-      "Bearer " + localStorage.getItem("access_token");
-    this.loader = true;
-    this.getFollowers();
+    this.getFollowing();
+    this.following = this.getFollowing();
   },
   methods: {
-    getFollowers() {
-      axios
-        .get("/community/business-following/5")
-        .then(res => {
-          this.loader = false;
-          this.followers = res.data.data.data;
-        })
-        .catch(err => {
-          console.log(err);
-          this.loader = false;
-        });
-    },
+    ...mapActions({
+      getFollowing: "businessOwner/getFollowing",
+    }),
   },
 };
 </script>
 
 <style>
+.spin {
+  width: 7rem;
+  height: 7rem;
+}
 .load {
   display: flex;
   justify-content: center;

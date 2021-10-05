@@ -141,7 +141,7 @@
 
 <script>
 import Product from "../product";
-import axios from "axios";
+import { mapActions, mapGetters } from "vuex";
 export default {
   data() {
     return {
@@ -167,17 +167,22 @@ export default {
   components: {
     Product,
   },
+  computed: {
+    ...mapGetters({
+      getLoader: "businessOwner/getLoader",
+      getProducts: "businessOwner/getProducts",
+    }),
+  },
   beforeMount() {
-    axios.defaults.headers.common["Authorization"] =
-      "Bearer " + localStorage.getItem("access_token");
     this.getProducts();
+    this.products = this.getProducts();
   },
   methods: {
-    getProducts() {
-      axios.get("market/products/1").then(res => {
-        this.products = res.data.data.data;
-      });
-    },
+    ...mapActions({
+      getProducts: "businessOwner/getProducts",
+      addProducts: "businessOwner/addProducts",
+    }),
+
     addProduct() {
       this.load = true;
       let fd = new FormData();
@@ -191,15 +196,14 @@ export default {
       fd.append("condition", this.newProduct.condition);
       fd.append("is_service", this.newProduct.is_service);
 
-      axios
-        .post("market", fd)
-        .then(res => {
+      this.addProducts(fd)
+        .then((res) => {
           this.load = false;
           (this.success = true), (this.val = "success");
           this.msg = "Operation was successful !!";
           this.getProducts();
         })
-        .catch(err => {
+        .catch((err) => {
           this.load = false;
           (this.success = true), (this.val = "danger");
           this.msg = "Something wen't wrong !!";

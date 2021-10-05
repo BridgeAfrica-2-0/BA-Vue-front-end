@@ -27,10 +27,7 @@
         <CommunityBusiness :follower="follower" />
       </b-col>
       <b-col v-if="loader" class="load">
-        <b-spinner
-          style="width: 7rem; height: 7rem;"
-          variant="primary"
-        ></b-spinner>
+        <b-spinner class="spin" variant="primary"></b-spinner>
       </b-col>
       <b-col v-if="followers.length < 1 && !loader" class="load">
         <p>No one is following you !!</p>
@@ -40,7 +37,7 @@
 </template>
 
 <script>
-import axios from "axios";
+import { mapGetters, mapActions } from "vuex";
 import CommunityBusiness from "../../communitybusiness";
 export default {
   components: {
@@ -52,13 +49,17 @@ export default {
     searchQuery: "",
   }),
   computed: {
+    ...mapGetters({
+      getFollowing: "businessFollowers/getFollowing",
+    }),
+
     theFollowers() {
       if (this.searchQuery) {
-        return this.followers.filter(item => {
+        return this.followers.filter((item) => {
           return this.searchQuery
             .toLowerCase()
             .split(" ")
-            .every(v => item.name.toLowerCase().includes(v));
+            .every((v) => item.name.toLowerCase().includes(v));
         });
       } else {
         return this.followers;
@@ -66,29 +67,22 @@ export default {
     },
   },
   beforeMount() {
-    axios.defaults.headers.common["Authorization"] =
-      "Bearer " + localStorage.getItem("access_token");
-    this.getFollowers();
-    this.loader = true;
+    this.getFollowing();
+    this.following = this.getFollowing();
   },
   methods: {
-    getFollowers() {
-      axios
-        .get("/community/business-following/5")
-        .then(res => {
-          this.loader = false;
-          this.followers = res.data.data.data;
-        })
-        .catch(err => {
-          console.log(err);
-          this.loader = false;
-        });
-    },
+    ...mapActions({
+      getFollowing: "businessFollowers/getFollowing",
+    }),
   },
 };
 </script>
 
 <style>
+.spin {
+  width: 7rem;
+  height: 7rem;
+}
 .load {
   display: flex;
   justify-content: center;

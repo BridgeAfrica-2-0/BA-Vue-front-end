@@ -124,7 +124,8 @@ export default {
     openNetwork() {
       this.networkShow = false;
     },
-    addFollower() {
+    addFollower: function() {
+      this.SPcommunity = !this.SPcommunity;
       this.axios.post("network/"+this.url+"/about/follow")
       .then(() => {
         this.getNetworkInfo();

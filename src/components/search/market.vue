@@ -432,10 +432,7 @@ export default {
     },
   },
   created() {
-    if (!this.products.length) {
-      this.getProducts();
-      console.log("[debug]baseUrl : ", process.env.VUE_APP_API_URL_DEV);
-    }
+    if (!this.products.length) this.getProducts();
   },
 
   methods: {

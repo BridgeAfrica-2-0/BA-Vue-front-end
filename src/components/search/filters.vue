@@ -31,7 +31,7 @@
             :key="i.value"
             v-model="selectedFilter"
             :value="filter.id"
-            @change="searchByFIlter(filter)"
+            @change="searchByFilter(filter)"
             name="sub-filters"
             class="m-1 br-3"
           >
@@ -53,7 +53,7 @@
             :key="i.value"
             v-model="selectedFilter"
             :value="filter.id"
-            @change="searchByFIlter(filter)"
+            @change="searchByFilter(filter)"
             name="sub-filters"
           >
             {{ filter.name }}
@@ -306,22 +306,144 @@
       <b-link v-b-modal="'distance'"> See all </b-link>
     </div>
 
+    <!-- Network -->
     <div v-if="filterType == '3'">
-      <b-form-group
-        label-cols-lg="3"
-        label="Location"
-        label-size="md"
-        label-class="font-weight-bold pt-0"
-        class="mb-0 text-left"
+      <b-button
+        v-if="networkFilter.region || networkFilter.category"
+        class="float-right"
+        size="sm"
+        variant="outline-primary"
+        @click="networkFilterReset()"
+        >Reset</b-button
       >
-      </b-form-group>
+      <br />
+      <div>
+        <!-- Category -->
+        <div v-if="categories.length>0">
+          <b-form-group
+            label-cols-lg="3"
+            label="Categories"
+            label-size="md"
+            label-class="font-weight-bold pt-0"
+            class="mb-0 pt-6 text-left"
+          >
+          </b-form-group>
+          <b-form-select
+            v-model="networkSelect.category"
+            :options="categories"
+            value-field="category.id"
+            text-field="category.name"
+            @change="searchNetworks({cat_id: networkSelect.category})"
+          >
+          </b-form-select>
+        </div>
+        <!-- Country -->
+        <div>
+          <b-form-group
+            label-cols-lg="3"
+            label="Country"
+            label-size="md"
+            label-class="font-weight-bold pt-0"
+            class="mb-0 pt-6 text-left"
+          >
+          </b-form-group>
+          <b-form-select
+            v-model="networkSelect.country"
+            :options="countries"
+            value-field="id"
+            text-field="name"
+            @change="networkFilterFill()"
+          >
+          </b-form-select>
+        </div>
 
-      <b-form-select v-model="selected">
-        <b-form-select-option value="a"> Yaounde </b-form-select-option>
-      </b-form-select>
+        <!-- Region -->
+        <div v-if="networkFilter.region">
+          <b-form-group
+            label-cols-lg="3"
+            label="Region"
+            label-size="md"
+            label-class="font-weight-bold pt-0"
+            class="mb-0 text-left"
+          >
+          </b-form-group>
+
+          <b-form-select
+            v-model="networkSelect.region"
+            :options="regions"
+            value-field="id"
+            text-field="name"
+            @change="networkFilterFill()"
+          >
+          </b-form-select>
+        </div>
+
+        <!-- Division -->
+        <div v-if="networkFilter.division">
+          <b-form-group
+            label-cols-lg="3"
+            label="Division"
+            label-size="md"
+            label-class="font-weight-bold pt-0"
+            class="mb-0 text-left"
+          >
+          </b-form-group>
+          <b-form-select
+            v-model="networkSelect.division"
+            :options="divisions"
+            value-field="id"
+            text-field="name"
+            @change="networkFilterFill()"
+          >
+          </b-form-select>
+        </div>
+
+        <!-- Council -->
+        <div v-if="networkFilter.council">
+          <b-form-group
+            label-cols-lg="3"
+            label="Council"
+            label-size="md"
+            label-class="font-weight-bold pt-0"
+            class="mb-0 text-left"
+          >
+          </b-form-group>
+          <b-form-select
+            v-model="networkSelect.council"
+            :options="councils"
+            value-field="id"
+            text-field="name"
+            @change="networkFilterFill()"
+          >
+          </b-form-select>
+        </div>
+
+        <!-- Neighbourhood -->
+        <div v-if="networkFilter.neighbourhood">
+          <b-form-group
+            label-cols-lg="3"
+            label="Neighbourhood"
+            label-size="md"
+            label-class="font-weight-bold pt-0"
+            class="mb-0 text-left"
+          >
+          </b-form-group>
+
+          <b-form-checkbox-group
+            v-model="selected"
+            @change="networkFilterFill()"
+            :options="options"
+            class="mb-3"
+            value-field="item"
+            text-field="name"
+            disabled-field="notEnabled"
+          ></b-form-checkbox-group>
+        </div>
+      </div>
 
       <br />
     </div>
+    <!-- End Network -->
 
     <div v-if="filterType == '2'">
       <b-form-group
@@ -465,7 +587,7 @@
           v-model="selected_sub_cat"
           :key="i"
           :value="sub.id"
-          @change="searchByFIlter(filter)"
+          @change="searchByFilter(filter)"
           name="subCategories-list-modal"
           class=""
         >
@@ -761,6 +883,20 @@ export default {
       filterLoader: false,
       noFilter: "",
 
+      networkFilter: {
+        category: false,
+        region: false,
+        division: false,
+        council: false,
+        neighbourhood: false,
+      },
+      networkSelect: {
+        category: null,
+        country: null,
+        region: null,
+        division: null,
+        council: null,
+      },
       // -----------------
 
       slide: 0,
@@ -1788,12 +1924,30 @@ export default {
     };
   },
   computed: {
+    categories() {
+      return this.$store.getters["marketSearch/getCategories"];
+    },
     subCategories() {
       return this.$store.getters["marketSearch/getSubCat"];
     },
     subFilter() {
       return this.$store.getters["marketSearch/getSubFilters"];
     },
+    countries() {
+      return this.$store.getters["networkSearch/getCountries"];
+    },
+    regions() {
+      return this.$store.getters["networkSearch/getRegions"];
+    },
+    divisions() {
+      return this.$store.getters["networkSearch/getDivisions"];
+    },
+    councils() {
+      return this.$store.getters["networkSearch/getCouncils"];
+    },
+  },
+  created() {
+    this.getCountries();
   },
 
   methods: {
@@ -1841,7 +1995,7 @@ export default {
         });
     },
 
-    searchByFIlter(filter) {
+    searchByFilter(filter) {
       // this.showform = false;
       console.log("[DEBUG] Filter: ", filter);
       this.searchProducts({
@@ -1861,6 +2015,121 @@ export default {
       };
       this.searchProducts(data);
     },
+
+    // Network search filter
+    getCountries() {
+      console.log("[debug] Networks: ", this.networkSelect);
+      this.$store
+        .dispatch("networkSearch/COUNTRIES")
+        .then((res) => {
+          // console.log("categories loaded!");
+          console.log("countries: ", this.countries);
+        })
+        .catch((err) => {
+          console.log("Error erro!");
+        });
+
+      console.log("zzzz[debug]country: ", this.countries);
+    },
+    getRegions() {
+      console.log("[debug] Networks: ", this.networkSelect);
+      const data = { country_id: this.networkSelect.country };
+      this.searchNetworks(data);
+
+      this.$store
+        .dispatch("networkSearch/REGIONS", data)
+        .then((res) => {
+          console.log("regions: ", this.regions);
+        })
+        .catch((err) => {
+          console.log("Error erro!");
+        });
+    },
+    getDivisions() {
+      console.log("[debug] networks: ", this.networkSelect);
+      const data = { region_id: this.networkSelect.region };
+      this.searchNetworks(data);
+
+      this.$store
+        .dispatch("networkSearch/DIVISIONS", data)
+        .then((res) => {
+          console.log("divisions: ", this.divisions);
+        })
+        .catch((err) => {
+          console.log("Error erro!");
+        });
+    },
+    getCouncils() {
+      console.log("[debug] networks: ", this.networkSelect);
+      const data = { division_id: this.networkSelect.division };
+      this.searchNetworks(data);
+      this.$store
+        .dispatch("networkSearch/COUNCILS", data)
+        .then((res) => {
+          console.log("councils: ", this.councils);
+        })
+        .catch((err) => {
+          console.log("Error erro!");
+        });
+    },
+
+    networkFilterFill() {
+      if (this.networkFilter.region == false) this.getRegions();
+
+      if (
+        this.networkFilter.region == true &&
+        this.networkFilter.division == false &&
+        this.networkFilter.council == false
+      ) {
+        this.getDivisions();
+        this.networkFilter.division = true;
+      } else if (
+        this.networkFilter.division == true &&
+        this.networkFilter.council == false
+      ) {
+        this.getCouncils();
+        this.networkFilter.council = true;
+      } else if (this.networkFilter.council == true) {
+        this.searchNetworks({ council_id: this.networkSelect.council });
+        this.networkFilter.neighbourhood = true;
+      }
+
+      this.networkFilter.region = true;
+    },
+
+    networkFilterReset() {
+      this.searchNetworks({});
+
+      this.networkFilter = {
+        category: false,
+        region: false,
+        division: false,
+        council: false,
+        neighbourhood: false,
+      };
+
+      this.networkSelect = {
+        country: [],
+        region: [],
+        division: [],
+        council: [],
+      };
+    },
+
+    async searchNetworks(data) {
+      this.networkFilter.category = true
+      await this.$store
+        .dispatch("networkSearch/SEARCH", data)
+        .then((res) => {
+          // console.log("categories loaded!");
+        })
+        .catch((err) => {
+          console.log("Error erro!");
+        });
+    },
+    // END Network search filter
+
+    // Not ED code
 
     selectedsidebar() {
       console.log(this.default_category);

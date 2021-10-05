@@ -3,28 +3,32 @@ import axios from "axios";
 export default {
     namespaced: true,
     state: {
-        products: [],
-        categories: [],
-        subCat: [],
-        subFilter: [],
+        networks: { data: [] },
+        countries: [],
+        regions: [],
+        divisions: [],
+        councils: [],
+
         prodLoader: false,
         success: false,
         token: "51|HZT2jfu5klFDkJhpvEI6dBhAQBDEdBQ2fABwhhaf"
     },
     getters: {
-        getProducts(state) {
-            return state.products;
+        getNetworks(state) {
+            return state.networks;
         },
 
-        getCategories(state) {
-            return state.categories;
+        getCountries(state) {
+            return state.countries;
         },
-
-        getSubCat(state) {
-            return state.subCat;
+        getRegions(state) {
+            return state.regions;
         },
-        getSubFilters(state) {
-            return state.subFilter;
+        getDivisions(state) {
+            return state.divisions;
+        },
+        getCouncils(state) {
+            return state.councils;
         },
 
 
@@ -38,19 +42,23 @@ export default {
         }
     },
     mutations: {
-        //set media data
-        setProducts(state, data) {
-            state.products = data;
+        //set Network data
+        setNetworks(state, data) {
+            state.networks = data;
         },
-        setCategories(state, data) {
-            state.categories = data;
+        setCountries(state, data) {
+            state.countries = data;
         },
-        setSubCat(state, data) {
-            state.subCat = data;
+        setRegions(state, data) {
+            state.regions = data;
         },
-        setSubFilters(state, data) {
-            state.subFilter = data
+        setDivisions(state, data) {
+            state.divisions = data;
         },
+        setCouncils(state, data) {
+            state.councils = data;
+        },
+
         setLoader(state, payload) {
             state.prodLoader = payload;
         },
@@ -60,134 +68,70 @@ export default {
     },
 
     actions: {
-        getCategories({ state, commit }, bussiness_id) {
-            return axios
-                .get("category/all", {
-                    headers: {
-                        Authorization: `Bearer ${state.token}`
-                    }
+        COUNTRIES({ commit, state }) {
+            console.log("[DEBUG] Getting countries");
+
+            return axios.get("countries")
+                .then((res) => {
+                    commit("setCountries", res.data.data);
+                    console.log("countries results: ", state.countries);
                 })
-                .then(res => {
-                    console.log("my Categories: ");
-                    let categories = res.data.data;
-                    let all = [];
-
-                    // console.log(categories);
-
-                    categories.map(cat => {
-                        let data = {
-                            bussiness_id: bussiness_id,
-                            cat_id: cat.id
-                        };
-
-                        axios
-                            .get(
-                                `subcategory/all/${data.cat_id}?business_id=${data.bussiness_id}`, {
-                                    headers: {
-                                        Authorization: `Bearer ${state.token}`
-                                    }
-                                }
-                            )
-                            .then(res => {
-                                console.log("all loaded!");
-                                let sub_categories = []
-                                res.data.data.map((sub) => {
-                                        sub_categories.push({ cat_id: cat.id, ...sub })
-                                    })
-                                    // console.log("final sub categories: ", sub_categories);
-
-                                all.push({
-                                    category: cat,
-                                    sub_cat: sub_categories
-
-                                });
-                                console.log(all);
-                            })
-                            .catch(err => {
-                                console.error(err);
-                            });
-                    });
-
-                    console.log(all);
-                    commit("setCategories", all);
+                .catch((err) => {
+                    console.error(err);
+                });
+        },
+        REGIONS({ commit }, data) {
+            return axios.post("regions", { country_id: data.country_id })
+                .then((res) => {
+                    commit("setRegions", res.data.data);
                 })
-                .catch(err => {
-                    console.log("Categories: ");
+                .catch((err) => {
                     console.error(err);
                 });
         },
 
-        getFilter({ state }, sub_id) {
-            return axios
-                .get(`filters/subcategory/${sub_id}`, {
-                    headers: {
-                        Authorization: `Bearer ${state.token}`
-                    }
-                })
-        },
-
-        getProducts({ commit, state }) {
-            commit("setLoader", true);
-
-
-            return axios.get("market", {
-                    headers: {
-                        Authorization: `Bearer ${state.token}`,
-                    },
-                })
+        DIVISIONS({ commit }, data) {
+            return axios.post("divisions", { region_id: data.region_id })
                 .then((res) => {
-                    commit("setLoader", false);
-
-                    console.log("products list: ", res.data);
-                    commit("setProducts", res.data);
+                    commit("setDivisions", res.data.data);
                 })
                 .catch((err) => {
-                    commit("setLoader", false);
-
                     console.error(err);
                 });
         },
-        nextPage({ commit, state }, page) {
-            commit("setLoader", true);
-            commit("setProducts", { data: [] });
-
-            return axios.get(`market?page=${page}`, {
-                    headers: {
-                        Authorization: `Bearer ${state.token}`,
-                    },
-                })
+        COUNCILS({ commit }, data) {
+            return axios.post("councils", { division_id: data.division_id })
                 .then((res) => {
-                    commit("setLoader", false);
-
-                    console.log("products list: ", res.data);
-                    commit("setProducts", res.data);
+                    commit("setCouncils", res.data.data);
                 })
                 .catch((err) => {
-                    commit("setLoader", false);
-
                     console.error(err);
                 });
         },
-        searchProducts({ commit, state }, data) {
-            commit("setProducts", { data: [] });
-            commit("setLoader", true);
 
-            return axios.post("market/search", data, {
+        async SEARCH({ commit, state }, data) {
+            commit("setNetworks", { data: [] });
+            commit("setLoader", true);
+            console.log("[DEBUG] HELLO NETWORK SEARCH", data);
+            let page = 1
+            if (data.page) page = data.page
+            else console.log("Page not set!");
+            console.log("[debug] page:", page);
+            try {
+                const res = await axios.post(`network/search?page=${page}`, data, {
                     headers: {
                         Authorization: `Bearer ${state.token}`
                     }
-                })
-                .then((res) => {
-                    commit("setLoader", false);
-                    console.log("Search results: ", res.data);
-                    commit("setProducts", res.data);
-
-                })
-                .catch((err) => {
-                    commit("setLoader", false);
-                    console.log(err);
                 });
-        },
+                commit("setLoader", false);
+                console.log("Network Search results: ", res.data);
+                commit("setNetworks", res.data);
+            } catch (err) {
+                commit("setLoader", false);
+                console.log(err);
+            }
+
+        }
 
 
     }

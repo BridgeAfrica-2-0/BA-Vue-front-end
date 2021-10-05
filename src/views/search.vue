@@ -3,7 +3,10 @@
     <Nav :credentials.sync="navBarParams">
       <template v-slot:button>
         <Button @click.native="searchProducts" v-if="selectedId == 4" />
+        <Button @click.native="searchNetworks" v-if="selectedId == 3" />
+
       </template>
+      
     </Nav>
 
     <SubNav
@@ -1566,6 +1569,7 @@ export default {
       console.log(this.navBarParams.keyword);
       console.log("[DEBUG]", this.subCategories);
     },
+
     async getProducts() {
       this.prodLoader = true;
       console.log("loader: ", this.prodLoader);
@@ -1588,10 +1592,22 @@ export default {
           this.showDismissibleAlert = false;
         });
     },
+    
 
     searchProducts() {
       this.$store
         .dispatch("marketSearch/searchProducts", {keyword: this.navBarParams.keyword})
+        .then((res) => {
+          // console.log("categories loaded!");
+        })
+        .catch((err) => {
+          console.log("Error erro!");
+        });
+    },
+
+    searchNetworks() {
+      this.$store
+        .dispatch("networkSearch/SEARCH", {keyword: this.navBarParams.keyword})
         .then((res) => {
           // console.log("categories loaded!");
         })

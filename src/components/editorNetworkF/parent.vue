@@ -29,8 +29,11 @@
               style="width: 120px;"
               class="a-center"
             >
-              <b-icon icon="pencil"></b-icon> Community
+              <b-spinner v-if="SPcommunity" small></b-spinner>
+              <b-icon v-if="!SPcommunity" icon="pencil"></b-icon> 
+              <span v-if="networkInfo[0].is_follow"> Unfollow</span> <span v-else> Follow</span>
             </b-button>
+            <b-tooltip target="Follow-Unfollow" variant="secondary">Click To Follow/Unfollow</b-tooltip>
           </b-col>
         </b-row>
       </b-container>
@@ -58,12 +61,16 @@
           </b-row>
         </b-container>
         <h6 class="mt-2 font-weight-bolder title ">About</h6>
-        <p class="text-justify text">
-          {{ networkInfo[0].description }}
+        <p v-if="networkInfo[0].description.length<130" class="text-justify text">{{ networkInfo[0].description }}</p>
+        <p v-else class="text-justify text">
+          {{ networkInfo[0].description.substring(0,130)+"..." }}
           <span class="d-inline-block float-right">
-            <a href="#">lire la Suite</a>
+            <a @click="$bvToast.show('example-toast')" style="cursor:pointer;">lire la Suite</a>
           </span>
         </p>
+        <b-toast id="example-toast" static no-auto-hide>
+          {{ networkInfo[0].description }}
+        </b-toast>
       </b-card-text>
     </b-card>
     
@@ -78,26 +85,19 @@
 import SidebarCommunity from "@/components/businessf/tabs/owner/networks/sidebarcommunity";
 export default {
   name: "parent",
-  data() {
-    return {
-      url: this.$route.params.id,
-      networkShow: true,
-      showModal: false,
-      text: "",
-      file: '',
-      updateNetwork_form: {
-        name: "",
-        description: "",
-        email: "",
-        phone1: "",
-        phone2: "",
-        address: "",
-        allow_business:""
-      }
-    };
-  },
   components: {
     SidebarCommunity
+  },
+  data() {
+    return {
+      url: null,
+      networkShow: true,
+      showModal: false,
+      Pcommunity: false,
+      text: "",
+      file: '',
+
+    };
   },
   computed: {
     networkInfo() {
@@ -105,6 +105,7 @@ export default {
     },
   },
   mounted(){
+    this.url = this.$route.params.id;
     this.getNetworkInfo() 
   },
   methods: {
@@ -124,14 +125,21 @@ export default {
       this.networkShow = false;
     },
     addFollower() {
-      this.axios.post(this.url+"/about/follow")
+      this.axios.post("network/"+this.url+"/about/follow")
       .then(() => {
-        console.log(this.updateNetwork_form);
-        this.flashMessage.show({
-          status: "success",
-          message: "You Are Now Following"
-        });
-          
+        this.getNetworkInfo();
+        this.SPcommunity = !this.SPcommunity;
+        if (this.networkInfo[0].is_follow) {
+          this.flashMessage.show({
+            status: "success",
+            message: "You Are Not more Following"
+          });
+        } else {
+          this.flashMessage.show({
+            status: "success",
+            message: "You Are Now Following"
+          });
+        }
       })
       .catch(err => {
         console.log({ err: err });
@@ -150,53 +158,8 @@ export default {
       .catch(err => {
         console.log({ err: err });
       });
-    },
-    updateNetwork: function(){
-      this.axios.post("network/edit-informaions/"+this.url, this.updateNetwork_form)
-      .then(() => {
-        console.log(this.updateNetwork_form);
-        this.flashMessage.show({
-          status: "success",
-          message: "Changes Made Successfuly"
-        });
-          
-      })
-      .catch(err => {
-        console.log({ err: err });
-        this.flashMessage.show({
-          status: "error",
-          message: "Unable To Make Changes "
-        });
-      });
-    },
-    submitFile(){
-      let formData = new FormData();
-      formData.append('image', this.file);
-      this.axios.post( 'network/edit-profile-image/'+this.networkInfo[0].id, formData,
-        {
-          headers: {
-              'Content-Type': 'multipart/form-data'
-          }
-        }
-      )
-      .then(() => {
-        console.log(formData);
-        this.flashMessage.show({
-          status: "success",
-          message: "Image Uploaded Successfuly"
-        });
-      })
-      .catch(err => {
-        console.log({ err: err });
-        this.flashMessage.show({
-          status: "error",
-          message: "Unable To Uploaded Image "
-        });
-      });
-    },
-    handleFileUpload(){
-      this.file = this.$refs.file.files[0];
     }
+
   }
 };
 </script>

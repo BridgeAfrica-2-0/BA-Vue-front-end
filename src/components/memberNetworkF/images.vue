@@ -2,10 +2,9 @@
   <div>
     <div class="row">
       <div class="container-fluid">
-
         <div v-for="post in images" :key="post.id">
           <!-- {{post.id}} -->
-          <div class="img-gall" v-for="image in post.media" :key="image.id">
+          <div class="img-gall" v-for="(image, index) in post.media" :key="index">
             <a href="#!"
               ><b-img
                 class="card-img btn p-0"
@@ -19,11 +18,17 @@
               ></b-img>
             </a>
             <b-modal hide-footer :id="'modal-'+image.media_id" title="Details">
-              <img class="card-img" :src="image.media_url" alt="media_img" />
+              <img class="card-img" :src="image.media_url" @click="() => showImg(index)" alt="media_img" />
               <p class="my-4">{{image.post_content[0]}}</p>
             </b-modal>
           </div>
         </div>
+        <vue-easy-lightbox
+          :visible="visible"
+          :imgs="Slideimges"
+          :index="index"
+          @hide="handleHide"
+        ></vue-easy-lightbox>
          <FlashMessage />
       </div>
     </div>
@@ -41,12 +46,15 @@ export default {
       image_details:null,
       file: '',
     
+      visible: false,
       index: 0,
-      imageProps: {  width: 205, height: 205}
+      imageProps: {  width: 205, height: 205},
+      Slideimges: [],
     };
   },
   mounted(){
     this.url = this.$route.params.id;
+    this.loadImages();
   },
   methods: {
     /**
@@ -56,12 +64,31 @@ export default {
     onClick(i) {
       this.index = i;
     },
+        
+    showImg(index) {
+      console.log(index);
+      this.index = index
+      this.visible = true
+    },
+    handleHide() {
+      this.visible = false
+    },
 
     showPic(image) {    
       console.log(image);
       this.image_details = image;
       this.$refs["Details"].show();
     },
+    
+    loadImages: function(){
+      this.images.forEach(post => {
+        post.media.forEach(media => {
+          this.Slideimges.push(media.media_url);
+        });
+        // this.Slideimges = post.media;
+      });
+      // this.Slideimges = this.images;
+    }
 
   },
 };

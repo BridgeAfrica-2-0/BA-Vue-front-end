@@ -77,17 +77,17 @@
     
     <FlashMessage />
 
-    <!-- <SidebarCommunity /> -->
+    <SidebarCommunity />
 
   </div>
 </template>
 
 <script>
-// import SidebarCommunity from "@/components/businessf/tabs/owner/networks/sidebarcommunity";
+import SidebarCommunity from "@/components/businessf/tabs/owner/networks/sidebarcommunity";
 export default {
   name: "parent",
   components: {
-    // SidebarCommunity
+    SidebarCommunity
   },
   data() {
     return {

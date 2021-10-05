@@ -21,8 +21,10 @@ import VueSocialauth from "vue-social-auth";
 
 import LoadScript from 'vue-plugin-load-script';
 import InfiniteLoading from 'vue-infinite-loading';
+import VueEasyLightbox from 'vue-easy-lightbox'
 
 
+Vue.use(VueEasyLightbox);
 Vue.use(InfiniteLoading);
 Vue.use(LoadScript);
 Vue.use(Vuex);

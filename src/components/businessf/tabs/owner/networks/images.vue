@@ -5,7 +5,7 @@
 
         <div v-for="post in images" :key="post.id">
           <!-- {{post.id}} -->
-          <div class="img-gall" v-for="image in post.media" :key="image.id">
+          <div class="img-gall" v-for="(image, index) in post.media" :key="index">
             <a href="#!"
               ><b-img
                 class="card-img btn p-0"
@@ -19,7 +19,7 @@
               ></b-img>
             </a>
             <b-modal hide-footer :id="'modal-'+image.media_id" title="Details">
-              <img class="card-img" :src="image.media_url" alt="media_img" />
+              <img class="card-img" :src="image.media_url"  @click="() => showImg(index)" alt="media_img" />
               <p class="my-4">{{image.post_content[0]}}</p>
             </b-modal>
             <div class="mediadesc">
@@ -47,6 +47,13 @@
             </div>
           </div>
         </div>
+        <vue-easy-lightbox
+          :visible="visible"
+          :imgs="Slideimges"
+          :index="index"
+          @hide="handleHide"
+        ></vue-easy-lightbox>
+
          <FlashMessage />
         <!-- {{images}} -->
         <!-- {{images[0].type}} -->
@@ -65,41 +72,11 @@ export default {
       img_url: null,
       image_details:null,
       file: '',
-      // images: [
-      //   "https://placekitten.com/801/800",
-      //   "https://placekitten.com/802/800",
-      //   "https://placekitten.com/803/800",
-      //   "https://placekitten.com/804/800",
-      //   "https://placekitten.com/805/800",
-      //   "https://placekitten.com/806/800",
-      //   "https://placekitten.com/807/800",
-      //   "https://placekitten.com/808/800",
-      //   "https://placekitten.com/809/800"
-      // ],
-      // imagees: [
-      //   "https://i.wifegeek.com/200426/f9459c52.jpg",
-      //   "https://i.wifegeek.com/200426/5ce1e1c7.jpg",
-      //   "https://i.wifegeek.com/200426/5fa51df3.jpg",
-      //   "https://i.wifegeek.com/200426/663181fe.jpg",
-      //   "https://i.wifegeek.com/200426/2d110780.jpg",
-      //   "https://i.wifegeek.com/200426/e73cd3fa.jpg",
-      //   "https://i.wifegeek.com/200426/15160d6e.jpg",
-      //   "https://i.wifegeek.com/200426/d0c881ae.jpg",
-      //   "https://i.wifegeek.com/200426/a154fc3d.jpg",
-      //   "https://i.wifegeek.com/200426/71d3aa60.jpg",
-      //   "https://i.wifegeek.com/200426/d17ce9a0.jpg",
-      //   "https://i.wifegeek.com/200426/7c4deca9.jpg",
-      //   "https://i.wifegeek.com/200426/64672676.jpg",
-      //   "https://i.wifegeek.com/200426/de6ab9c6.jpg",
-      //   "https://i.wifegeek.com/200426/d8bcb6a7.jpg",
-      //   "https://i.wifegeek.com/200426/4085d03b.jpg",
-      //   "https://i.wifegeek.com/200426/177ef44c.jpg",
-      //   "https://i.wifegeek.com/200426/d74d9040.jpg",
-      //   "https://i.wifegeek.com/200426/81e24a47.jpg",
-      //   "https://i.wifegeek.com/200426/43e2e8bb.jpg"
-      // ],
+     
+      visible: false,
       index: 0,
-      imageProps: {  width: 205, height: 205}
+      imageProps: {  width: 205, height: 205},
+      Slideimges: [],
     };
   },
   mounted(){
@@ -114,13 +91,29 @@ export default {
       this.index = i;
     },
 
-
+    showImg(index) {
+      console.log(index);
+      this.index = index
+      this.visible = true
+    },
+    handleHide() {
+      this.visible = false
+    },
 
     showPic(image) {    
       console.log(image);
       this.image_details = image;
       this.$refs["Details"].show();
     },
+    
+    loadImages: function(){
+      this.images.forEach(post => {
+        post.media.forEach(media => {
+          this.Slideimges.push(media.media_url);
+        });
+      });
+    },
+
     downloadPic(image_id) {
       console.log("downloading");
       // let loader = this.$loading.show({

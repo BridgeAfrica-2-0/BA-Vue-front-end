@@ -11,6 +11,7 @@ import networkDetails from "./networkDetails";
 import dashboardcommunity from "./dashboardcommunity";
 import businessGeneral from "./businessGeneral";
 import businessRole from "./businessRole";
+import businessAccountType from "./businessAccountType";
 
 import NetworkSettings from "./NetworkSettings";
 import axios from "axios";
@@ -32,6 +33,7 @@ export default new Vuex.Store({
     ProfileAndBusinessDetails,
     hotbusiness,
     businessRole,
+    businessAccountType,
     NetworkSettings
   }
 });

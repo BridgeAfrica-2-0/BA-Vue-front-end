@@ -16,10 +16,10 @@
           >
             <b-form-select
               id="follower"
-              v-model="form.follower"
-              :options="followers.people[0].user_followers"
+              v-model="form.name"
+              :options="followers.user_followers"
               name="followers"
-              value-field="followers"
+              value-field="id"
               text-field="name"
               class="mb-3"
             >
@@ -189,7 +189,7 @@ export default {
      
     getFollowers() {
     this.$store
-      .dispatch("businessRole/getfollowers")
+      .dispatch("businessRole/getfollowers", this.url)
       .then(() => {
         console.log('ohh yeah');
       })
@@ -219,32 +219,37 @@ export default {
     },
     editEditor: function(clickedObject){
       let formData = new FormData();
-      formData.append('name', clickedObject.name);
       formData.append('role', this.form.role);
-      this.axios.post("business/role/update/"+this.url, formData)
+      this.axios.post("business/role/update/"+clickedObject.id, formData)
       .then(() => {
         console.log('ohh yeah');
+        this.displayEditor();
         this.flashMessage.show({
           status: "success",
-          message: "New Role Assigned"
+          message: "New Role Updated"
         });
       })
       .catch(err => {
         console.log({ err: err });
         this.flashMessage.show({
           status: "error",
-          message: "Unable to Assigned New Role"
+          message: "Unable to Update New Role"
         });
       });
 		},
     assignRole: function(){
       this.SPassign = true;
       let formData = new FormData();
-      formData.append('name', this.form.name);
-      formData.append('role', this.form.role);
-      this.axios.post("business/role/update/"+this.url, formData)
+      formData.append('user_id', this.form.name);
+      formData.append('role_id', this.form.role);
+      console.log('name: ', this.form.name);
+      console.log('role: ', this.form.role);
+      console.log(formData);
+      this.axios.post("business/role/assignRole/"+this.url, formData)
       .then(() => {
         console.log('ohh yeah');
+        this.getFollowers();
+        this.displayEditor();
         this.SPassign = false;
         this.flashMessage.show({
           status: "success",
@@ -261,11 +266,11 @@ export default {
         });
       });
 		},
-    deleteEditor: function(editor){
-      var formData = this.toFormData(editor)
-      this.axios.delete("business/role/delete/"+this.url, formData)
+    deleteEditor: function(clickedObject){
+      this.axios.delete("business/role/delete/"+clickedObject.id)
       .then(() => {
         console.log('ohh yeah');
+        this.displayEditor();
         this.flashMessage.show({
           status: "success",
           message: "Editor Deleted"
@@ -279,14 +284,6 @@ export default {
           message: "Unable To Delete Editor"
         });
       });
-		},
-    
-    toFormData: function(obj){
-			var form_data = new FormData();
-			for(var key in obj){
-				form_data.append(key, obj[key]);
-			}
-			return form_data
 		},
 
     selectObject(object){

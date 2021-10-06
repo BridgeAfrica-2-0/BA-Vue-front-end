@@ -35,9 +35,9 @@ export default {
 
   actions: {
 
-    getfollowers( {commit} ){
+    getfollowers( {commit}, businessId ){
       return axios
-      .get("profile/community")
+      .get(`business/community/people/${businessId}`)
       .then(({ data }) => {
           commit("setfollowers", data.data);
         console.log(data);

@@ -57,7 +57,7 @@
       </b-container>
     </div>
 
-    <div class="b-bottom">
+    <div v-if="form.permissions == 'Allow editor to post'" class="b-bottom">
       <b-container>
         <b-form-group
           label-cols-lg="3"
@@ -157,11 +157,11 @@ export default {
         ],
         postingPermissions: [ 
           { label: 'Admin only', value: 'Admin only' }, 
-          { label: 'Allow visitors/followers to post', value: 'Allow visitors/followers to post'}
+          { label: 'Allow editor to post', value: 'Allow editor to post'}
         ],
         form: {
             visibility: "publish",
-            permissions: "Allow visitors/followers to post",
+            permissions: "Allow editor to post",
             post_approval: "",
             keywords_alert: "",
             marketplace: "",

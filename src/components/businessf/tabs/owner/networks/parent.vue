@@ -268,45 +268,19 @@
 </template>
 
 <script>
-<<<<<<< HEAD
 import SidebarCommunity from "@/components/businessf/tabs/owner/networks/sidebarcommunity";
 export default {
   name: "parent",
-=======
-
-import SidebarCommunity from "@/components/businessf/tabs/owner/networks/sidebarcommunity";     
-
-
-
-
-export default {
-  name: "parent",
-
-
-
->>>>>>> main
   data() {
     return {
       networkShow: true,
       showModal: false,
-<<<<<<< HEAD
       text: ""
     };
   },
   components: {
     SidebarCommunity
   },
-=======
-      text: "",}},
-
-   components: {
-    SidebarCommunity,
-   
-   
-  },
-
-
->>>>>>> main
   methods: {
     openNetwork() {
       this.networkShow = false;
@@ -341,22 +315,9 @@ export default {
 .t-align{
   text-align: left;
 }
-<<<<<<< HEAD
 .i-color {
   color: #e75c18;
 }
-=======
-
-
-
-.i-color{
-  color:#e75c18;
-}
-
-
-
-
->>>>>>> main
 @media only screen and (min-width: 768px) {
 
   
@@ -364,22 +325,13 @@ export default {
     position: absolute;
     width: 2rem;
     height: 2rem;
-<<<<<<< HEAD
     top: 200px;
     margin-left: 200px;
-=======
-     
-
-     top: 200px;
-    margin-left: 200px;
-    
->>>>>>> main
     padding: 0px 0px;
     color: #ffff;
     background: #e75c18;
     border-radius: 25px;
     border: 4px solid #ffff;
-<<<<<<< HEAD
   }
   .network-name {
     font-size: 20px;
@@ -412,96 +364,11 @@ export default {
     height: 2rem;
     top: 200px;
     margin-left: 200px;
-=======
-}
-
-
-
-.network-name{
-  font-size: 20px;
- 
-
-}
-
-.pivate{
-
-   
-  
-  padding-left:8px;
-  text-align:left;
-}
-
-
-.network-logo{
-
-    width:200px  !important;
-    height:200px !important;
-}
-
-
-}
-
-
-
-
-@media only screen and (max-width: 768px) {
-     
-
-
-.network-logo{
-
-    width:200px  !important;
-    height:200px !important;
-}
-
-
-
-.network-name{
-
-    font-size: 16px;
- 
-}
-
-.pivate{
-
-   font-size: 12px;
- 
-  padding-left:8px;
-
-  text-align:left;
-}
-
-
- .network-avatar-icon {
-    position: absolute;
-    width: 2rem;
-    height: 2rem;
-     
-
-     top: 200px;
-    margin-left: 200px;
-    
->>>>>>> main
     padding: 0px 0px;
     color: #ffff;
     background: #e75c18;
     border-radius: 25px;
     border: 4px solid #ffff;
+  }
 }
-<<<<<<< HEAD
 </style>
-=======
-
-
-}
-
-
-
-
-
-
-
-
-
-</style>
->>>>>>> main

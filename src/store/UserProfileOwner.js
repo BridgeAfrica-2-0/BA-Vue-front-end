@@ -114,7 +114,7 @@ export default {
     },
 
     async createAlbum({ commit }, name) {
-      const res = await axios.post("business/album/create/" + this.url, {
+      const res = await axios.post("profile/album/create/" + this.url, {
         name,
       });
       commit("newAlbum", res.data);
@@ -122,7 +122,7 @@ export default {
 
     async updateAlbum({ commit }, edit_name, album_id) {
       const res = await axios.post(
-        "business/album/update/" + this.url + "/" + album_id,
+        "profile/album/edit/" + this.url + "/" + album_id,
         {
           edit_name,
         }
@@ -132,7 +132,7 @@ export default {
 
     async deleteAlbum({ commit }, name, album_id) {
       const res = await axios.post(
-        "business/album/edit/" + this.url + "/" + album_id,
+        "profile/album/delete/" + this.url + "/" + album_id,
         { name }
       );
       commit("delAlbum", res.data);
@@ -141,7 +141,7 @@ export default {
     // for images
     async submitPost({ commit }, formData, headers) {
       const res = await axios.post(
-        "business/store/media/" + this.url + "/" + this.album,
+        "profile/post/media/" + this.url + "/" + this.album,
         formData,
         {
           headers: {
@@ -154,7 +154,7 @@ export default {
 
     async setProfilePic({ commit }, image_id, name) {
       const res = await axios.post(
-        "business/album/edit/" + this.url + "/" + self.album_id,
+        "profile/makeProfile/picture/" + this.url + "/" + self.album_id,
         {
           name,
         }
@@ -164,7 +164,7 @@ export default {
 
     async setCoverPic({ commit }, image_id, name) {
       const res = await axios.post(
-        "business/make/coverpic/" + this.url + "/" + image_id,
+        "profile/makeCover/picture/" + this.url + "/" + image_id,
         {
           name,
         }
@@ -174,7 +174,7 @@ export default {
 
     async deleteImage({ commit }, image_id, name) {
       const res = await axios.post(
-        "business/delete/media/" + this.url + "/" + image_id,
+        "profile/albumPicture/delete/" + this.url + "/" + image_id,
         {
           name,
         }
@@ -184,7 +184,7 @@ export default {
 
     async downloadPic({ commit }, image_id) {
       const res = await axios.get(
-        "business/download/media/" + this.url + "/" + image_id
+        "profile/downloadMedia/" + this.url + "/" + image_id
       );
       commit("downloadPic", res.data);
     },

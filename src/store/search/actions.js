@@ -8,6 +8,7 @@ export const actions = {
 
 
   [TYPES.FIND_POST]({ commit, state }, data) {
+
     if (state.page > 1)
       commit(TYPES.RESET_RESULT)
 

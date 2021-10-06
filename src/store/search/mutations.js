@@ -46,13 +46,6 @@ export const mutations = {
     state.posts = payload
   },
 
-  [TYPES.FIND_MIXED_POST](state, payload) {
-    state.posts = [...state.posts, ...payload].sort((a, b) => a.post_id > b.post_id)
-  },
-
-  [TYPES.FIND_MIXED_USER](state, payload) {
-    state.users = [...state.users, ...payload].sort((a, b) => a.post_id > b.post_id)
-  },
 
   [TYPES.RESET_RESULT](state) {
     state.users = []

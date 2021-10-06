@@ -511,7 +511,7 @@
                 :people="people"
                 :key="index"
               />
-              <infinite-loading @infinite="handleScroll">
+              <infinite-loading @infinite="peopleScroll" v-if="peoples.length">
                 <div class="text-red" slot="no-more">No More Request</div>
                 <div class="text-red" slot="no-results">No More Request</div>
               </infinite-loading>
@@ -570,10 +570,7 @@
               </h6>
               <NotFound v-if="!posts.length" :title="notFoundComponentTitle" />
               <Post v-for="(post, index) in posts" :post="post" :key="index" />
-              <infinite-loading
-                @infinite="handleScroll"
-                v-if="this.navBarParams.keyword.trim()"
-              >
+              <infinite-loading @infinite="postScroll" v-if="posts.length">
                 <div class="text-red" slot="no-more">No More Request</div>
                 <div class="text-red" slot="no-results">No More Request</div>
               </infinite-loading>
@@ -642,8 +639,8 @@ export default {
     ...mapGetters({
       peoples: "search/GET_RESULT_USER",
       posts: "search/GET_RESULT_POST",
-      callbackForPagination: "search/GET_CURRENT_PAGINATE_CALLBACK",
-      currentPaginationPage: "search/GET_CURRENT_PAGINATION_PAGE",
+      getCallback: "search/GET_CURRENT_PAGINATE_CALLBACK",
+      getCurrentPage: "search/GET_CURRENT_PAGINATION_PAGE",
       getStack: "search/STACK_VALUE",
     }),
   },
@@ -1626,15 +1623,23 @@ export default {
       findUser: "search/FIND_USER",
       findPost: "search/FIND_POST",
       postKeyword: "search/POST_KEYWORD",
-      newCallbackForPagination: "search/SET_CURRENT_PAGINATE_CALLBACK",
-      updateCurrentPaginatinPage: "search/SET_CURRENT_PAGINATION_PAGE",
+      setCallback: "search/SET_CURRENT_PAGINATE_CALLBACK",
+      setCurrentPage: "search/SET_CURRENT_PAGINATION_PAGE",
       stack: "search/STACK_VALUE",
       lauchLoader: "search/LOADING",
     }),
 
-    handleScroll($state) {
-      if (this.currentPaginationPage > 1) {
-        this.callbackForPagination();
+    postScroll($state) {
+      console.log($state);
+      if (this.getCurrentPage > 1) {
+        this.onFindUser($state);
+      }
+    },
+
+    peopleScroll($state) {
+      console.log($state);
+      if (this.getCurrentPage > 1) {
+        this.getCallback($state);
       }
     },
 
@@ -1663,14 +1668,14 @@ export default {
 
     strategies() {
       try {
-        this.newCallbackForPagination(this.strategy[`${this.selectedId}`]);
+        this.setCallback(this.strategy[`${this.selectedId}`]);
         this.strategy[`${this.selectedId}`]();
       } catch (error) {
         console.warn(`Implement function for selectedId=${this.selectedId}`);
       }
     },
 
-    async _onFindUser() {
+    async _onFindUser($state) {
       try {
         this.lauchLoader(true);
         const request = await this.$repository.search.findUserByParam({
@@ -1680,30 +1685,37 @@ export default {
           page: 1,
         });
         this.findUser(request);
+
+        if (request.length) {
+          this.setCurrentPage(this.getCurrentPage + 1);
+          $state.loaded();
+        } else $state.completed();
       } catch (error) {
+        console.log(error);
         this.lauchLoader(false);
       }
 
       this.lauchLoader(false);
     },
 
-    onFindUser() {
+    onFindUser($state) {
       if (this.navBarParams.keyword.trim()) {
-        this._onFindUser();
+        this._onFindUser($state);
       } else this.onNotified("the word must have at least 3 letters");
     },
 
     async _onFindPost($state) {
-      console.log(this.getStack);
       try {
         this.lauchLoader(true);
+
         const request = await this.$repository.search.findPostByKeyword({
           ...this.getStack,
-          page: this.currentPaginationPage,
+          page: this.getCurrentPage,
         });
 
         if (request.length) {
-          this.updateCurrentPaginatinPage(this.currentPaginationPage + 1);
+          this.setCurrentPage(this.getCurrentPage + 1);
+
           $state ? $state.loaded() : null;
         } else $state ? $state.completed() : null;
 

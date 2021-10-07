@@ -75,7 +75,8 @@
             <tab-content
               title=" Complete Profile "
               :before-change="updateUserProfile"
-            >
+            > 
+
               <div class="form-card">
                 <div class="row">
                   <div class="col-md-6">
@@ -260,11 +261,14 @@
         />
 
         <div>
+          
           <form-wizard @on-complete="onComplete">
-            <tab-content
+           
+             <tab-content
               title=" Complete Profile "
               :before-change="updateUserProfile"
-            >
+            > 
+
               <div class="form-card">
                 <div class="row">
                   <div class="col-md-6">
@@ -477,34 +481,156 @@
                     <div></div>
 
                     <div class="form-group">
-                      <label for="alias" class="username">Category:</label
-                      ><br />
-
-                      <b-form-select
-                        v-model="form.business_category"
-                        :options="categories"
-                        :state="validateState('business_category')"
-                        aria-describedby="business_category-feedback"
-                        class="mb-3"
-                        value-field="item"
-                        text-field="name"
-                      ></b-form-select>
-
-                      <b-form-invalid-feedback id="business_category-feedback"
-                        >Business Category Is Required.</b-form-invalid-feedback
-                      >
+                      <label for="username" class="username">About</label><br />
+                      <textarea
+                        type="textarea"
+                        name="business_about"
+                        v-model="about"
+                        id="description"
+                        placeholder="Brief description about your Busness"
+                        class="form-control text"
+                      ></textarea>
                     </div>
+                  </div>
+                </div>
 
+                <div>
+                  <label class="typo__label"> Category </label>
+                  <multiselect
+                    v-model="multiselecvalue"
+                    @input="subcategories"
+                    tag-placeholder="Add this as new tag"
+                    placeholder="Search or add a tag"
+                    label="name"
+                    track-by="id"
+                    :options="pcategories"
+                    :multiple="true"
+                    :taggable="true"
+                    @tag="addCategoryTag"
+                  ></multiselect>
+                </div>
+
+                <div>
+                  <label class="typo__label"> Sub Category</label>
+                  <multiselect
+                    v-model="filterselectvalue"
+                    tag-placeholder="Add this as new tag"
+                    placeholder="Search or add a tag"
+                    label="subcategory"
+                    track-by="sub_cat_id"
+                    :options="scategories"
+                    :multiple="true"
+                    :taggable="true"
+                    @tag="addFilter"
+                  ></multiselect>
+                </div>
+
+                <label class="typo__label">Fiters</label>
+                <div>
+                  <b-card no-body>
+                    <b-tabs pills card vertical>
+                      <b-tab
+                        :title="filters.subcategory"
+                        v-for="filters in filterselectvalue"
+                        :key="filters.id"
+                        active
+                        ><b-card-text>
+                          <b-form-group label="Filters">
+                            <b-form-checkbox-group
+                              id=""
+                              v-model="select_filterss"
+                              name="filters"
+                            >
+                              <b-form-checkbox
+                                v-for="fil in filters.filters"
+                                :key="fil.id"
+                                :value="fil.id"
+                              >
+                                {{ fil.name }}
+                              </b-form-checkbox>
+                            </b-form-checkbox-group>
+                          </b-form-group>
+                        </b-card-text></b-tab
+                      >
+                    </b-tabs>
+                  </b-card>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-6">
                     <div class="form-group">
                       <label for="country" class="username"> Country :</label
                       ><br />
+                      <multiselect
+                        v-model="countryy"
+                        @input="Region"
+                     
+                        placeholder="Search "
+                        label="name"
+                        track-by="id"
+                        :options="countries"
+                        :multiple="true"
+                       
+                      ></multiselect>
+                    </div>
+                  </div>
 
-                      <country-select
-                        v-model="country"
-                        :country="country"
-                        topCountry="CM"
-                        class="form-control text"
-                      />
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="country" class="username"> Region :</label
+                      ><br />
+                      <multiselect
+                        v-model="regionn"
+                        @input="Division"
+                        
+                        placeholder="Search "
+                        label="name"
+                        track-by="id"
+                        :options="regions"
+                        :multiple="true"
+                        :taggable="false"
+                        
+                      ></multiselect>
+                    </div>
+                  </div>
+
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="country" class="username"> Division :</label
+                      ><br />
+                      <multiselect
+                        v-model="division"
+                        @input="Municipality"
+                       
+                        placeholder="Search "
+                        label="name"
+                        track-by="id"
+                        :options="divisions"
+                        :multiple="true"
+                        :taggable="true"
+                       
+                      ></multiselect>
+                    </div>
+                  </div>
+
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="country" class="username">
+                        Municipality :</label
+                      ><br />
+
+                      <multiselect
+                        v-model="municipality"
+                        @input="Locality"
+                      
+                        placeholder="Search "
+                        label="name"
+                        track-by="id"
+                        :options="municipalities"
+                        :multiple="true"
+                       
+                       
+                      ></multiselect>
                     </div>
                   </div>
                 </div>
@@ -512,15 +638,19 @@
                 <div class="row">
                   <div class="col-md-6">
                     <div class="form-group">
-                      <label for="country" class="username"> Region :</label
+                      <label for="Neighbor" class="username"> Neighbor :</label
                       ><br />
-
-                      <region-select
-                        v-model="region"
-                        :country="country"
-                        :region="region"
-                        class="form-control text"
-                      />
+                      <multiselect
+                        v-model="locality"
+                       
+                        placeholder="Search "
+                        label="name"
+                        track-by="id"
+                        :options="localities"
+                        :multiple="true"
+                        :taggable="false"
+                      
+                      ></multiselect>
                     </div>
                   </div>
 
@@ -542,18 +672,23 @@
                 <div class="row">
                   <div class="col-md-6">
                     <div class="form-group">
-                      <label for="Neighbor" class="username"> Neighbor :</label
+                      <label for="country" class="username"> Keywords :</label
                       ><br />
-                      <input
-                        type="text"
-                        name="alias"
-                        v-model="Neighbor"
-                        id="Neighbor"
-                        placeholder="Neighbor"
-                        class="form-control text"
-                      />
+
+                      <multiselect
+                        v-model="business_keyword"
+                        tag-placeholder="Add this as new Keyword"
+                        placeholder="Add New Keyword"
+                        label="name"
+                        track-by="id"
+                        :options="keywordds"
+                        :multiple="true"
+                        :taggable="true"
+                        @tag="addkeywords"
+                      ></multiselect>
                     </div>
                   </div>
+
                   <div class="col-md-6">
                     <div class="form-group">
                       <label for="alias" class="username">Language:</label
@@ -590,44 +725,15 @@
 
                   <div class="col-md-6">
                     <div class="form-group">
-                      <span class="text mt-2"> No Choices </span>
+                      <label for="Neighbor" class="username"> Adress :</label>
 
-                      <input
-                        type="text"
-                        name="business_keyword"
-                        v-model="business_keyword"
-                        id="alias"
-                        placeholder="Enter  Keywords Alerts"
-                        class="form-control text"
-                      />
+                      <gmap-autocomplete
+                        @place_changed="initMarker"
+                        class="form-control"
+                      >
+                      </gmap-autocomplete>
                     </div>
                   </div>
-                </div>
-
-                <div class="row">
-                  <div class="col-md-12">
-                    <div class="form-group">
-                      <label for="username" class="username">About</label><br />
-                      <textarea
-                        type="textarea"
-                        name="business_about"
-                        v-model="about"
-                        id="description"
-                        placeholder="Brief description about your Busness"
-                        class="form-control text"
-                      ></textarea>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="form-group">
-                  <label for="Neighbor" class="username"> Adress :</label>
-
-                  <gmap-autocomplete
-                    @place_changed="initMarker"
-                    class="form-control"
-                  >
-                  </gmap-autocomplete>
                 </div>
 
                 <gmap-map
@@ -680,6 +786,7 @@ import Tutorial from "@/components/dasboard/tutorial";
 
 import axios from "axios";
 
+import Multiselect from "vue-multiselect";
 import { validationMixin } from "vuelidate";
 
 import { required, email, minLength } from "vuelidate/lib/validators";
@@ -689,15 +796,21 @@ export default {
   data() {
     return {
       useas: "",
-
+      municipality: [],
+      locality: [],
+      division: [],
       selectedusecase: "",
-
+      keywordds:[],
       first_page: "true",
       country: "",
+      countryy: [],
+      regionn: [],
       region: "",
       username: this.$store.state.auth.user.user.name,
       img_url: null,
+      select_filterss: [],
       sendingP: false,
+      address: null,
       sendingB: false,
       profile_pic: "",
       dob: null,
@@ -711,8 +824,8 @@ export default {
       form: {
         business_name: null,
       },
-      business_category: null,
-      business_keyword: null,
+      business_category: "Testing",
+      business_keyword: [],
       time_zone: null,
       language: null,
       about: null,
@@ -726,73 +839,17 @@ export default {
       locPlaces: [],
       existingPlace: null,
 
+      multiselecvalue: [],
+      filterselectvalue: [],
+      multiselec: [
+        { name: "Vue.js", code: "vu" },
+        { name: "Javascript", code: "js" },
+        { name: "Open Source", code: "os" },
+      ],
+
       timezone: [
-        { label: "(GMT-12:00) International Date Line West", value: "-12" },
-        { label: "(GMT-11:00) Midway Island, Samoa", value: "-11" },
-        { label: "(GMT-10:00) Hawaii", value: "-10" },
-        { label: "(GMT-09:00) Alaska", value: "-9" },
-        { label: "(GMT-08:00) Pacific Time (US & Canada)", value: "-8" },
-        { label: "(GMT-08:00) Tijuana, Baja California", value: "-8" },
-        { label: "(GMT-07:00) Arizona", value: "-7" },
-        { label: "(GMT-07:00) Chihuahua, La Paz, Mazatlan", value: "-7" },
-        { label: "(GMT-07:00) Mountain Time (US & Canada)", value: "-7" },
-        { label: "(GMT-06:00) Central America", value: "-6" },
-        { label: "(GMT-06:00) Central Time (US & Canada)", value: "-6" },
-        { label: "(GMT-05:00) Bogota, Lima, Quito, Rio Branco", value: "-5" },
-        { label: "(GMT-05:00) Eastern Time (US & Canada)", value: "-5" },
-        { label: "(GMT-05:00) Indiana (East)", value: "-5" },
-        { label: "(GMT-04:00) Atlantic Time (Canada)", value: "-4" },
-        { label: "(GMT-04:00) Caracas, La Paz", value: "-4" },
-        { label: "(GMT-04:00) Manaus", value: "-4" },
-        { label: "(GMT-04:00) Santiago", value: "-4" },
-        { label: "(GMT-03:30) Newfoundland", value: "-3.5" },
-        { label: "(GMT-03:00) Brasilia", value: "-3" },
-        { label: "(GMT-03:00) Buenos Aires, Georgetown", value: "-3" },
-        { label: "(GMT-03:00) Greenland", value: "-3" },
-        { label: "(GMT-03:00) Montevideo", value: "-3" },
-        { label: "(GMT-02:00) Mid-Atlantic", value: "-2" },
-        { label: "(GMT-01:00) Cape Verde Is.", value: "-1" },
-        { label: "(GMT-01:00) Azores", value: "-1" },
-        { label: "(GMT+00:00) Casablanca, Monrovia, Reykjavik", value: "0" },
-        { label: "(GMT+00:00) Greenwich Mean Time : Dublin, Edinburgh, Lisbon, London", value: "0", },
-        { label: "(GMT+01:00) Amsterdam, Berlin, Bern, Rome, Stockholm, Vienna", value: "1", },
-        { label: "(GMT+01:00) Belgrade, Bratislava, Budapest, Ljubljana, Prague", value: "1", },
-        { label: "(GMT+01:00) Brussels, Copenhagen, Madrid, Paris", value: "1", },
-        { label: "(GMT+01:00) Sarajevo, Skopje, Warsaw, Zagreb", value: "1" },
-        { label: "(GMT+01:00) West Central Africa", value: "1" },
-        { label: "(GMT+02:00) Amman", value: "2" },
-        { label: "(GMT+02:00) Athens, Bucharest, Istanbul", value: "2" },
-        { label: "(GMT+02:00) Beirut", value: "2" },
-        { label: "(GMT+02:00) Cairo", value: "2" },
-        { label: "(GMT+02:00) Harare, Pretoria", value: "2" },
-        { label: "(GMT+02:00) Helsinki, Kyiv, Riga, Sofia, Tallinn, Vilnius", value: "2", },
-        { label: "(GMT+02:00) Jerusalem", value: "2" },
-        { label: "(GMT+02:00) Minsk", value: "2" },
-        { label: "(GMT+02:00) Windhoek", value: "2" },
-        { label: "(GMT+03:00) Kuwait, Riyadh, Baghdad", value: "3" },
-        { label: "(GMT+03:00) Moscow, St. Petersburg, Volgograd", value: "3" },
-        { label: "(GMT+03:00) Nairobi", value: "3" },
-        { label: "(GMT+03:00) Tbilisi", value: "3" },
-        { label: "(GMT+03:30) Tehran", value: "3.5" },
-        { label: "(GMT+04:00) Abu Dhabi, Muscat", value: "4" },
-        { label: "(GMT+04:00) Baku", value: "4" },
-        { label: "(GMT+04:00) Yerevan", value: "4" },
-        { label: "(GMT+04:30) Kabul", value: "4.5" },
-        { label: "(GMT+05:00) Yekaterinburg", value: "5" },
-        { label: "(GMT+05:00) Islamabad, Karachi, Tashkent", value: "5" },
-        { label: "(GMT+05:30) Sri Jayawardenapura", value: "5.5" },
-        { label: "(GMT+05:30) Chennai, Kolkata, Mumbai, New Delhi", value: "5.5", },
-        { label: "(GMT+05:45) Kathmandu", value: "5.75" },
-        { label: "(GMT+06:00) Almaty, Novosibirsk", value: "6" },
-        { label: "(GMT+06:00) Astana, Dhaka", value: "6" },
-        { label: "(GMT+06:30) Yangon (Rangoon)", value: "6.5" },
-        { label: "(GMT+07:00) Bangkok, Hanoi, Jakarta", value: "7" },
-        { label: "(GMT+07:00) Krasnoyarsk", value: "7" },
-        { label: "(GMT+08:00) Beijing, Chongqing, Hong Kong, Urumqi", value: "8", },
-        { label: "(GMT+08:00) Kuala Lumpur, Singapore", value: "8" },
-        { label: "(GMT+08:00) Irkutsk, Ulaan Bataar", value: "8" },
-        { label: "(GMT+08:00) Perth", value: "8" },
-        { label: "(GMT+08:00) Taipei", value: "8" },
+        { text: "(GMT+1) West African ", value: "+1" },
+        { text: "(GMT-11:00) Midway Island, Samoa", value: "-11" },
       ],
 
       options: [
@@ -801,24 +858,6 @@ export default {
       ],
 
       category: "",
-      categories: [
-        { item: "Professional_and_home_service", name: "Professionals" },
-        { item: "Agriculture ", name: "Agriculture " },
-        { item: "Restaurant ", name: " Restaurant " },
-        { item: "Electronics ", name: "Electronics " },
-        { item: "Handicrafts", name: "Handicrafts" },
-        { item: "clothing", name: "clothing" },
-        { item: "Mechanics", name: "Mechanics" },
-        { item: "Health_unit ", name: "Health unit " },
-        { item: "Bars", name: "Bars" },
-        { item: "Hair_and_beauty ", name: "Hair and beauty " },
-        { item: "Real_estate ", name: "Real_estate " },
-        { item: "Travelling ", name: "Travelling " },
-        { item: "Hotels", name: "Hotels" },
-        { item: "station", name: " station  " },
-        { item: "Mayor_concils", name: "Mayor_concils" },
-        { item: "Taxis service", name: "Taxis service" },
-      ],
     };
   },
 
@@ -828,13 +867,182 @@ export default {
         required,
       },
 
-      business_category: {
-        required,
-      },
+      //  business_category: {
+      //   required,
+      //  },
     },
   },
 
   methods: {
+
+    addTag(newTag) {
+      const tag = {
+        name: newTag,
+        id: newTag.substring(0, 2) + Math.floor(Math.random() * 10000000),
+      };
+      this.multiselec.push(tag);
+      this.multiselecvalue.push(tag);
+    },
+
+
+     addkeywords(newTag) {
+      const tag = {
+        name: newTag,
+        id: newTag.substring(0, 2) + Math.floor(Math.random() * 10000000),
+      };
+      this.keywordds.push(tag);
+      this.business_keyword.push(tag);
+    },
+
+
+
+
+
+
+
+    addCategoryTag(newTag) {
+      const tag = {
+        name: newTag,
+        id: newTag.substring(0, 2) + Math.floor(Math.random() * 10000000),
+      };
+      this.multiselec.push(tag);
+      this.multiselecvalue.push(tag);
+    },
+
+    addFilter(newTag) {
+      const tag = {
+        name: newTag,
+        id: newTag.substring(0, 2) + Math.floor(Math.random() * 10000000),
+      };
+      this.multiselec.push(tag);
+      this.filterselectvalue.push(tag);
+    },
+
+    categories() {
+      this.$store
+        .dispatch("auth/categories")
+        .then(() => {
+          console.log("hey yeah");
+        })
+        .catch((err) => {
+          console.log({ err: err });
+        });
+    },
+
+    subcategories() {
+      let formData2 = new FormData();
+      formData2.append("categoryId", this.selectedcategories);
+
+      this.$store
+        .dispatch("auth/subcategories", formData2)
+        .then(() => {
+          console.log("hey yeah");
+        })
+        .catch((err) => {
+          console.log({ err: err });
+        });
+    },
+
+    filters() {
+      this.$store
+        .dispatch("auth/filters")
+        .then(() => {
+          console.log("hey yeah");
+        })
+        .catch((err) => {
+          console.log({ err: err });
+        });
+    },
+
+    Setcategoryfiters() {
+      this.$store
+        .dispatch("auth/Setcategoryfiters")
+        .then(() => {
+          console.log("hey yeah");
+        })
+        .catch((err) => {
+          console.log({ err: err });
+        });
+    },
+
+    Country() {
+      this.$store
+        .dispatch("auth/country")
+        .then(() => {
+          console.log("hey yeah");
+        })
+        .catch((err) => {
+          console.log({ err: err });
+        });
+    },
+
+    profileBusiness() {
+      this.$store
+        .dispatch("profile/profileBusiness")
+        .then(() => {
+          console.log("hey yeah");
+        })
+        .catch((err) => {
+          console.log({ err: err });
+        });
+    },
+
+    Region() {
+      let formData2 = new FormData();
+      formData2.append("countryId", this.selectedcountry);
+
+      this.$store
+        .dispatch("auth/region", formData2)
+        .then(() => {
+          console.log("hey yeah");
+        })
+        .catch((err) => {
+          console.log({ err: err });
+        });
+    },
+
+    Division() {
+      let formData2 = new FormData();
+      formData2.append("regionId", this.selectedregion);
+
+      this.$store
+        .dispatch("auth/division", formData2)
+        .then(() => {
+          console.log("hey yeah");
+        })
+        .catch((err) => {
+          console.log({ err: err });
+        });
+    },
+
+    Municipality() {
+      let formData2 = new FormData();
+      formData2.append("divisionId", this.selecteddivision);
+
+      this.$store
+        .dispatch("auth/municipality", formData2)
+        .then(() => {
+          console.log("hey yeah");
+        })
+        .catch((err) => {
+          console.log({ err: err });
+        });
+    },
+
+    Locality() {
+      let formData2 = new FormData();
+      formData2.append("councilId", this.selectedmunicipality);
+
+      this.$store
+        .dispatch("auth/locality", formData2)
+        .then(() => {
+          console.log("hey yeah");
+        })
+        .catch((err) => {
+          console.log({ err: err });
+        });
+    },
+
     setLoading: function (value) {
       this.loadingWizard = value;
     },
@@ -858,31 +1066,49 @@ export default {
         this.$v.form.$touch();
         if (this.$v.form.$anyError) {
           console.log("error error");
+          resolve(false);
           return false;
         } else {
           console.log("no error error");
 
+          let loader = this.$loading.show({
+            container: this.fullPage ? null : this.$refs.loader,
+            canCancel: true,
+            onCancel: this.onCancel,
+            color: "#e75c18",
+          });
+
           this.sendingB = true;
 
           let formData2 = new FormData();
+
+          formData2.append("category", this.business_category);
+
+          formData2.append("categoryId", this.selectedcategories);
+          formData2.append("subCategoryId", this.selectedsubcategories);
+          formData2.append("filterId", this.select_filterss);
+
           formData2.append("logo_path", this.logo_pic);
-
-          formData2.append("region", this.region);
+          formData2.append("region", this.selectedregion);
           formData2.append("city", this.city);
-          formData2.append("country", this.country);
+          formData2.append("country", this.selectedcountry);
 
-          formData2.append("address", this.adress);
+          formData2.append("address", this.address);
+          formData2.append("division", this.selecteddivision);
+          formData2.append("council", this.selectedmunicipality);
 
-          formData2.append("neighbor", this.Neighbor);
+          formData2.append("neigborhood", this.selectedlocality);
           formData2.append("lat", this.center.lat);
           formData2.append("lng", this.center.lng);
 
-          formData2.append("name", this.business_name);
-          formData2.append("category", this.business_category);
-          formData2.append("keywords", this.business_keyword);
+          formData2.append("name", this.form.business_name);
+          //  formData2.append("keywords", this.selectedKeywords);
+          formData2.append("keywords", "blec this");
           formData2.append("timezone", this.time_zone);
           formData2.append("language", this.language);
           formData2.append("about_business", this.about);
+
+          console.log("sending");
 
           this.axios
             .post("business/create", formData2, {
@@ -900,7 +1126,7 @@ export default {
 
                 message: "Business Profile Created",
               });
-
+              loader.hide();
               resolve(true);
             })
             .catch((err) => {
@@ -927,7 +1153,7 @@ export default {
                 });
                 console.log({ err: err });
               }
-
+              loader.hide();
               resolve(false);
             });
         }
@@ -989,20 +1215,22 @@ export default {
 
         let formData2 = new FormData();
         formData2.append("logo_path", this.logo_pic);
-
-        formData2.append("region", this.region);
+        formData2.append("region", this.selectedregion);
         formData2.append("city", this.city);
-        formData2.append("country", this.country);
+        formData2.append("country", this.selectedcountry);
 
         formData2.append("address", this.adress);
+        formData2.append("division", this.selecteddivision);
+        formData2.append("council", this.selectedmunicipality);
 
-        formData2.append("neighbor", this.Neighbor);
+        formData2.append("neighborh", this.selectedlocality);
         formData2.append("lat", this.center.lat);
         formData2.append("lng", this.center.lng);
 
-        formData2.append("name", this.business_name);
+        formData2.append("name", this.form.business_name);
         formData2.append("category", this.business_category);
-        formData2.append("keywords", this.business_keyword);
+        //  formData2.append("keywords", this.selectedKeywords);
+        formData2.append("keywords", "blec this");
         formData2.append("timezone", this.time_zone);
         formData2.append("language", this.language);
         formData2.append("about_business", this.about);
@@ -1096,9 +1324,9 @@ export default {
               blockClass: "custom-block-class",
             });
 
-             this.peopleAround();
+            this.peopleAround();
 
-             this.businessAround();
+            this.businessAround();
 
             resolve(true);
           })
@@ -1192,16 +1420,106 @@ export default {
   mounted() {
     this.locateGeoLocation();
 
-   
+    this.Country();
+    this.categories();
+
+    //this.filters()
+
+    //this.Setcategoryfiters()
   },
 
   components: {
+    Multiselect,
     People,
     Business,
     Tutorial,
   },
 
   computed: {
+    selectedcategories: function () {
+      let selectedUsers = [];
+      this.multiselecvalue.forEach((item) => {
+        selectedUsers.push(item.id);
+      });
+      return selectedUsers;
+    },
+    selectedKeywords: function () {
+      let selectedUsers = [];
+      this.business_keyword.forEach((item) => {
+        selectedUsers.push(item.id);
+      });
+      return selectedUsers;
+    },
+
+    selectedsubcategories: function () {
+      let sub_cat = [];
+      this.filterselectvalue.forEach((item) => {
+        sub_cat.push(item.sub_cat_id);
+      });
+      return sub_cat;
+    },
+    selectedcountry: function () {
+      let sub_cat = [];
+      this.countryy.forEach((item) => {
+        sub_cat.push(item.id);
+      });
+      return sub_cat;
+    },
+    selectedregion: function () {
+      let sub_cat = [];
+      this.regionn.forEach((item) => {
+        sub_cat.push(item.id);
+      });
+      return sub_cat;
+    },
+    selecteddivision: function () {
+      let sub_cat = [];
+      this.division.forEach((item) => {
+        sub_cat.push(item.id);
+      });
+      return sub_cat;
+    },
+    selectedmunicipality: function () {
+      let sub_cat = [];
+      this.municipality.forEach((item) => {
+        sub_cat.push(item.id);
+      });
+      return sub_cat;
+    },
+    selectedlocality: function () {
+      let sub_cat = [];
+      this.locality.forEach((item) => {
+        sub_cat.push(item.id);
+      });
+      return sub_cat;
+    },
+    countries() {
+      return this.$store.state.auth.country;
+    },
+
+    regions() {
+      return this.$store.state.auth.region;
+    },
+
+    divisions() {
+      return this.$store.state.auth.division;
+    },
+
+    municipalities() {
+      return this.$store.state.auth.municipality;
+    },
+
+    localities() {
+      return this.$store.state.auth.locality;
+    },
+
+    pcategories() {
+      return this.$store.state.auth.categories;
+    },
+
+    scategories() {
+      return this.$store.state.auth.subcategories;
+    },
     people_around() {
       return this.$store.state.auth.peopleAround;
     },
@@ -1382,3 +1700,5 @@ import "vue-form-wizard/dist/vue-form-wizard.min.css";
   border-color: #e75c18 !important;
 }
 </style>
+
+<style src="vue-multiselect/dist/vue-multiselect.min.css"></style>  

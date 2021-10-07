@@ -6,12 +6,31 @@
           <b-form-input
             aria-label="Text input with checkbox"
             placeholder="Search Something"
+            v-model="searchQuery"
           ></b-form-input>
 
           <b-input-group-prepend is-text>
             <b-icon-search class="text-primary border-none"></b-icon-search>
           </b-input-group-prepend>
         </b-input-group>
+      </b-col>
+    </b-row>
+    <br />
+    <br />
+    <b-row>
+      <b-col
+        v-for="(follower, index) in theFollowers"
+        :key="index"
+        md="12"
+        lg="6"
+      >
+        <CommunityBusiness :follower="follower" />
+      </b-col>
+      <b-col v-if="loader" class="load">
+        <b-spinner class="spin" variant="primary"></b-spinner>
+      </b-col>
+      <b-col v-if="followers.length < 1 && !loader" class="load">
+        <p>No one is following you !!</p>
       </b-col>
     </b-row>
     <br />
@@ -30,11 +49,53 @@
 
 <script>
 import CommunityBusiness from "../../communitybusiness";
+import { mapActions, mapGetters } from "vuex";
 export default {
   components: {
-    CommunityBusiness
-  }
+    CommunityBusiness,
+  },
+  data: () => ({
+    loader: false,
+    followers: [],
+    searchQuery: "",
+  }),
+  computed: {
+    theFollowers() {
+      if (this.searchQuery) {
+        return this.followers.filter((item) => {
+          return this.searchQuery
+            .toLowerCase()
+            .split(" ")
+            .every((v) => item.name.toLowerCase().includes(v));
+        });
+      } else {
+        return this.getFollowing;
+      }
+    },
+
+    ...mapGetters(["getFollowing"]),
+  },
+  beforeMount() {
+    this.getFollowing();
+  },
+
+  created() {
+    this.gettingFollowings();
+  },
+
+  methods: {
+    ...mapActions(["gettingFollowings"]),
+  },
 };
 </script>
 
-<style></style>
+<style>
+.load {
+  display: flex;
+  justify-content: center;
+}
+.spin {
+  width: 7rem;
+  height: 7rem;
+}
+</style>

@@ -79,8 +79,8 @@ export default {
   name: "parent",
 
   components: {
-    SidebarCommunity
-  }
+    SidebarCommunity,
+  },
 };
 </script>
 

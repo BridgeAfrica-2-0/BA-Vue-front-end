@@ -35,13 +35,12 @@
                       </template>
 
                       <div class="s-comcard">
-                        <b-row>
+                       
                           <div>
-                            <People
-                              :people="business.people[0].user_followers"
+                            <People type="Follower"
                             />
                           </div>
-                        </b-row>
+                      
                       </div>
                     </b-tab>
 
@@ -54,13 +53,13 @@
                       </template>
 
                       <div class="s-comcard">
-                        <b-row>
+                       
                           <div>
                             <People
-                              :people="business.people[0].user_following"
+                              type="Following"
                             />
                           </div>
-                        </b-row>
+                      
                       </div>
                     </b-tab>
                   </b-tabs>
@@ -71,9 +70,9 @@
 
           <b-tab>
             <template slot="title">
-              Businesses
+              Businesses 
               <span class="spa-color">
-                {{ count(business.people[0].total_business) }}
+                {{ count(business.business[0].total_business) }}
               </span>
             </template>
 
@@ -83,18 +82,18 @@
                   <template slot="title">
                     Followers
                     <span class="spa-color">
-                      {{ count(business.people[0].total_business_follower) }}
+                      {{ count(business.business[0].total_business_follower) }}
                     </span>
                   </template>
 
                   <div class="s-comcard">
-                    <b-row>
+                    
                       <div>
                         <Business
-                          :business="business.business[0].business_followers"
+                         type="Follower"
                         />
                       </div>
-                    </b-row>
+                   
                   </div>
                 </b-tab>
 
@@ -102,23 +101,77 @@
                   <template slot="title">
                     Following
                     <span class="spa-color">
-                      {{ count(business.people[0].total_business_following) }}
+                      {{ count(business.business[0].total_business_following) }}
                     </span>
                   </template>
 
                   <div class="s-comcard">
-                    <b-row>
+                  
                       <div>
                         <Business
-                          :business="business.business[0].business_following"
+                         type="Following"
                         />
                       </div>
-                    </b-row>
+                    
                   </div>
                 </b-tab>
               </b-tabs>
             </div>
           </b-tab>
+
+
+                    <b-tab>
+            <template slot="title">
+              Network
+              <span class="spa-color">
+                {{ count(business.network[0].total_network) }}
+              </span>
+            </template>
+
+            <div>
+              <b-tabs fill pills content-class="mt-3  f-left m-up checkcheck">
+                <b-tab active>
+                  <template slot="title">
+                    Followers
+                    <span class="spa-color">
+                      {{count( business.network[0].total_network_follower) }}
+                    </span>
+                  </template>
+
+                  <div class="s-comcard">
+                   
+                      <div>
+                        <Network
+                           type="Follower"
+                        />
+                      </div>
+                    
+                  </div>
+                </b-tab>
+
+                <b-tab>
+                  <template slot="title">
+                    Following
+                    <span class="spa-color">
+                      {{ count(business.network[0].total_network_following) }}
+                    </span>
+                  </template>
+
+                  <div class="s-comcard">
+                  
+                      <div class="p-2">
+                        <Network
+                          type="Following"
+                        />
+                      </div>
+                    
+                  </div>
+                </b-tab>
+              </b-tabs>
+            </div>
+          </b-tab>
+
+
         </b-tabs>
       </div>
     </b-card>
@@ -126,26 +179,106 @@
 </template>
 
 <script>
-
-
 import People from "@/components/dasboard/communityMember";
 import Business from "@/components/dasboard/communitybusiness";
-
+import Network from "@/components/dasboard/communitynetwork";
 
 export default {
   name: "comunitiDashboard",
 
-   components: {
+  components: {
     People,
-    Business
+    Business,
+    Network,
+  },
+
+  mounted(){
+    
+      this.$store
+      .dispatch("profile/Tcommunity", null)
+      .then((response) => {
+       
+      })
+      .catch((error) => {
+        console.log({error:error});
+      });
+
+
+
+
+      
+
+ 
+      this.$store
+      .dispatch("profile/UcommunityFollower", null)
+      .then((response) => {
+       
+      })
+      .catch((error) => {
+        console.log({error:error});
+      });
+
+
+
+      
+      this.$store
+      .dispatch("profile/UcommunityFollowing", null)
+      .then((response) => {
+       
+      })
+      .catch((error) => {
+        console.log({error:error});
+      });
+
+     
+   
+      this.$store
+      .dispatch("profile/BcommunityFollower", null)
+      .then((response) => {
+       
+      })
+      .catch((error) => {
+        console.log({error:error});
+      });
+
+     
+      this.$store
+      .dispatch("profile/BcommunityFollowing", null)
+      .then((response) => {
+       
+      })
+      .catch((error) => {
+        console.log({error:error});
+      });
+
+
+
+      
+      this.$store
+      .dispatch("profile/NcommunityFollower", null)
+      .then((response) => {
+       
+      })
+      .catch((error) => {
+        console.log({error:error});
+      });
+
+      
+      this.$store
+      .dispatch("profile/NcommunityFollowing", null)
+      .then((response) => {
+       
+      })
+      .catch((error) => {
+        console.log({error:error});
+      });
+
   },
   computed: {
     business() {
-      //return this.$store.getters.getProfileCommunity;
       return this.$store.getters["dashboardcommunity/getProfileCommunity"];
     },
     com() {
-      // return this.$store.getters.getcom;
       return this.$store.getters["dashboardcommunity/getcom"];
     }
   },
@@ -182,89 +315,49 @@ export default {
 };
 </script>
 
-
 <style scoped>
-.card-body{
-
+.card-body {
   padding: 0px;
 }
 </style>
 
-<style >
-
-  
-
-
-   .lala .nav-fill{
-   
-    margin-top: -19px;
-     border: 1px solid rgba(0, 0, 0, 0.125);
-  }
-
-
-
-
-
-
-
-
-  .s-comcard{
-  height:350px; 
-  overflow: auto; 
-  overflow-x: hidden;
-
+<style>
+.lala .nav-fill {
+  margin-top: -19px;
+  border: 1px solid rgba(0, 0, 0, 0.125);
 }
 
+.s-comcard {
+  height: 350px;
+  overflow: auto;
+  overflow-x: hidden;
+}
 
-.spa-color{
+.spa-color {
   color: white;
   margin-left: 10px;
   font-size: 14px;
 }
 
-
-.h4-color{
+.h4-color {
   color: orangered;
   margin-left: 10px;
   font-size: 14px;
 }
 
-.m-up{
-
-  margin-top:-5px;
+.m-up {
+  margin-top: -5px;
 }
 
-
-
-
- 
 @media only screen and (min-width: 768px) {
-
-  
-
-  .title{
+  .title {
     font-size: 20px;
   }
+}
 
-
- }
-
-
-
-
-
-
- 
 @media only screen and (min-width: 768px) {
-
-  
-  .title{
+  .title {
     font-size: 16px;
   }
-
-   
- }
-
-
-
+}
 </style>

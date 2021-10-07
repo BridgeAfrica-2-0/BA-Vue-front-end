@@ -6,6 +6,7 @@
           <b-form-input
             aria-label="Text input with checkbox"
             placeholder="Search Something"
+            v-model="searchQuery"
           ></b-form-input>
 
           <b-input-group-prepend is-text>
@@ -18,12 +19,19 @@
     <br />
 
     <b-row>
-      <b-col md="12" lg="6">
-        <CommunityMembers />
+      <b-col
+        v-for="(follower, index) in theFollowers"
+        :key="index"
+        md="12"
+        lg="6"
+      >
+        <CommunityMembers :follower="follower" />
       </b-col>
-
-      <b-col md="12" lg="6">
-        <CommunityMembers />
+      <b-col v-if="loader" class="load">
+        <b-spinner class="spin" variant="primary"></b-spinner>
+      </b-col>
+      <b-col v-if="followers.length < 1 && !loader" class="load">
+        <p>No follower to show !!</p>
       </b-col>
     </b-row>
   </div>
@@ -31,11 +39,54 @@
 
 <script>
 import CommunityMembers from "../../communityMember";
+import { mapActions, mapGetters } from "vuex";
 export default {
   components: {
-    CommunityMembers
-  }
+    CommunityMembers,
+  },
+  data: () => ({
+    loader: false,
+    followers: [],
+    searchQuery: "",
+  }),
+  computed: {
+    theFollowers() {
+      if (this.searchQuery) {
+        return this.followers.filter((item) => {
+          return this.searchQuery
+            .toLowerCase()
+            .split(" ")
+            .every((v) => item.name.toLowerCase().includes(v));
+        });
+      } else {
+        return this.ppleFollowers;
+      }
+    },
+
+    ...mapGetters(["ppleFollowers"]),
+  },
+  beforeMount() {
+    this.ppleFollowers();
+  },
+
+  created() {
+    this.peopleFollowers();
+  },
+
+  methods: {
+    ...mapActions(["peopleFollowers"]),
+  },
 };
 </script>
 
-<style></style>
+<style>
+.load {
+  display: flex;
+  justify-content: center;
+}
+
+.spin {
+  width: 7rem;
+  height: 7rem;
+}
+</style>

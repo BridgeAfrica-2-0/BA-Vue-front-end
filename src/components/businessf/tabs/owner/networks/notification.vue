@@ -5,13 +5,13 @@
         <b-col>
           <div class="b-bottomn f-left">
             <b-form-checkbox
-              id="checkbox-1"
+              v-model="selectAll"
+              :indeterminate="indeterminate"
               name="checkbox-1"
-              value="accepted"
+              @click="select"
               class="m-left-top username"
-              unchecked-value="not_accepted"
             >
-              Select All
+              {{ selectAll ? "Un-select All" : "Select All" }}
             </b-form-checkbox>
           </div>
         </b-col>
@@ -26,41 +26,42 @@
       <br />
 
       <b-row>
-        <b-col cols="12" class="mr-3" v-for="i in 6" :key="i">
+        <b-col cols="12" class="mr-3" v-for="user in users" :key="user.id">
           <p class="">
             <span style="display:inline-flex">
               <b-form-checkbox
-                id="checkbox-1"
+                v-model="selected"
+                :value="user.name"
+                @change="updateCheckall"
                 name="checkbox-1"
-                value="accepted"
                 class="m-left-top"
-                unchecked-value="not_accepted"
               >
               </b-form-checkbox>
               <b-avatar
                 class="d-inline-block profile-pic"
                 variant="primary"
-                src="https://business.bridgeafrica.info/assets/img/team/3.png"
+                :src="user.picture"
               ></b-avatar>
               <h6 class="m-0  d-inline-block ml-2 username">
-                Mapoure Agrobusiness
-                <p class="duration">1hr</p>
+                {{ user.name }}
+                <div class="duration">{{ user.time }}hr</div>
               </h6>
             </span>
             <span class="float-right mt-1"> </span>
           </p>
 
           <p class="text">
-            Lorem Ipsum is this is just a dummy text to post simply dummy text
-            of the printing and typesetting industry. Lorem Ipsum has been the
-            industry's standard dummy text ever since the 1500s, Lorem Ipsum is
-            simply dummy text of the printing and typesetting industry. Lorem
-            Ipsum has been the industry's standard dummy text ever since the
-            1500s,
+            {{ user.text }}
           </p>
 
           <hr width="100%" />
         </b-col>
+        <div>
+          Selected: <strong>{{ selected }}</strong
+          ><br />
+          All Selected: <strong>{{ allSelected }}</strong>
+
+        </div>
       </b-row>
     </div>
   </div>
@@ -68,7 +69,49 @@
 
 <script>
 export default {
-  name: "notification"
+  name: "notification",
+  data() {
+    return {
+      users: [],
+      selected: [],
+      selectAll: false,
+      indeterminate: false
+    };
+  },
+
+  methods: {
+    select() {
+      this.selected = [];
+      if (!this.selectAll) {
+        for (let i in this.users) {
+          this.selected.push(this.users[i]);
+        }
+      }
+    },
+
+    updateCheckall: function() {
+      if (this.users.length === this.selected.length) {
+        this.selectAll = true;
+      } else {
+        this.selectAll = false;
+      }
+    }
+  },
+  watch: {
+    selected(newValue, oldValue) {
+      // Handle changes in individual users checkboxes
+      if (newValue.length === 0) {
+        this.indeterminate = false;
+        this.selectAll = false;
+      } else if (newValue.length === this.users.length) {
+        this.indeterminate = false;
+        this.selectAll = true;
+      } else {
+        this.indeterminate = true;
+        this.selectAll = false;
+      }
+    }
+  }
 };
 </script>
 

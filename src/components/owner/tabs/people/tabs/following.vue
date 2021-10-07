@@ -18,12 +18,10 @@
 
     <b-row>
       <b-col md="12" lg="6">
-        <CommunityMembers />
-      </b-col>
+        <CommunityMembers type="Following"  />
+      </b-col>  
 
-      <b-col md="12" lg="6">
-        <CommunityMembers />
-      </b-col>
+      
     </b-row>
   </div>
 </template>
@@ -33,7 +31,12 @@ import CommunityMembers from "../../communityMember";
 export default {
   components: {
     CommunityMembers
-  }
+  },
+
+  computed: {
+   
+  },
+
 };
 </script>
 

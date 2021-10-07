@@ -57,8 +57,8 @@ export default {
 
     comunitiDashboard,
     // Personalise,
-    Post
-  }
+    Post,
+  },
 };
 </script>
 

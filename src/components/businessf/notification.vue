@@ -25,105 +25,106 @@
         </b-col>
       </b-row>
     </b-container>
-    <br />
+      <br />
 
-    <div>
-      <b-container class="bb-bottom">
-        <b-list class="d-flex align-items-center m-list">
-          <b-form-checkbox
-            class="m-left"
-            id="checkbox-1"
-            v-model="status"
-            name="checkbox-1"
-            value="accepted"
-            unchecked-value="not_accepted"
-          >
-          </b-form-checkbox>
-          <b-avatar class="mr-3" size="4em"></b-avatar>
-          <span class="mr-auto"
-            >J. Circlehead
-            <p>1hr</p>
-          </span>
-          <span class=" ">
-            <div>
-              <b-dropdown
-                size="lg"
-                variant="link"
-                toggle-class="text-decoration-none"
-                no-caret
-              >
-                <template #button-content>
-                  <b-icon
-                    icon="three-dots-vertical"
-                    animation="cylon-vertical"
-                    font-scale="1"
-                  ></b-icon>
-                </template>
+      <div>
+        <b-container class="bb-bottom">
+          <b-list class="d-flex align-items-center m-list">
+            <b-form-checkbox
+              class="m-left"
+              id="checkbox-1"
+              v-model="status"
+              name="checkbox-1"
+              value="accepted"
+              unchecked-value="not_accepted"
+            >
+            </b-form-checkbox>
+            <b-avatar class="mr-3" size="4em"></b-avatar>
+            <span class="mr-auto"
+              >J. Circlehead
+              <p>1hr</p>
+            </span>
+            <span class=" ">
+              <div>
+                <b-dropdown
+                  size="lg"
+                  variant="link"
+                  toggle-class="text-decoration-none"
+                  no-caret
+                >
+                  <template #button-content>
+                    <b-icon
+                      icon="three-dots-vertical"
+                      animation="cylon-vertical"
+                      font-scale="1"
+                    ></b-icon>
+                  </template>
 
-                <b-dropdown-item href="#"> Delete </b-dropdown-item>
-                <b-dropdown-item href="#"> Read </b-dropdown-item>
-              </b-dropdown>
-            </div>
-          </span>
-        </b-list>
-        <p>
-          Lorem Ipsum is this is just a dummy text to post simply dummy text of
-          the printing and typesetting industry. Lorem Ipsum has been the
-          industry's standard dummy text ever since the 1500s, Lorem Ipsum is
-          simply dummy text of the printing and typesetting industry. Lorem
-          Ipsum has been the industry's standard dummy text ever since the
-          1500s,
-        </p>
-      </b-container>
+                  <b-dropdown-item href="#"> Delete </b-dropdown-item>
+                  <b-dropdown-item href="#"> Read </b-dropdown-item>
+                </b-dropdown>
+              </div>
+            </span>
+          </b-list>
+          <p>
+            Lorem Ipsum is this is just a dummy text to post simply dummy text
+            of the printing and typesetting industry. Lorem Ipsum has been the
+            industry's standard dummy text ever since the 1500s, Lorem Ipsum is
+            simply dummy text of the printing and typesetting industry. Lorem
+            Ipsum has been the industry's standard dummy text ever since the
+            1500s,
+          </p>
+        </b-container>
 
-      <b-container class="bb-bottom">
-        <b-list class="d-flex align-items-center m-list">
-          <b-form-checkbox
-            class="m-left"
-            id="checkbox-1"
-            v-model="status"
-            name="checkbox-1"
-            value="accepted"
-            unchecked-value="not_accepted"
-          >
-          </b-form-checkbox>
-          <b-avatar class="mr-3" size="4em"></b-avatar>
-          <span class="mr-auto"
-            >J. Circlehead
-            <p>1hr</p>
-          </span>
-          <span class=" ">
-            <div>
-              <b-dropdown
-                size="lg"
-                variant="link"
-                toggle-class="text-decoration-none"
-                no-caret
-              >
-                <template #button-content>
-                  <b-icon
-                    icon="three-dots-vertical"
-                    animation="cylon-vertical"
-                    font-scale="1"
-                  ></b-icon>
-                </template>
+        <b-container class="bb-bottom">
+          <b-list class="d-flex align-items-center m-list">
+            <b-form-checkbox
+              class="m-left"
+              id="checkbox-1"
+              v-model="status"
+              name="checkbox-1"
+              value="accepted"
+              unchecked-value="not_accepted"
+            >
+            </b-form-checkbox>
+            <b-avatar class="mr-3" size="4em"></b-avatar>
+            <span class="mr-auto"
+              >J. Circlehead
+              <p>1hr</p>
+            </span>
+            <span class=" ">
+              <div>
+                <b-dropdown
+                  size="lg"
+                  variant="link"
+                  toggle-class="text-decoration-none"
+                  no-caret
+                >
+                  <template #button-content>
+                    <b-icon
+                      icon="three-dots-vertical"
+                      animation="cylon-vertical"
+                      font-scale="1"
+                    ></b-icon>
+                  </template>
 
-                <b-dropdown-item href="#"> Delete </b-dropdown-item>
-                <b-dropdown-item href="#"> Read </b-dropdown-item>
-              </b-dropdown>
-            </div>
-          </span>
-        </b-list>
-        <p>
-          Lorem Ipsum is this is just a dummy text to post simply dummy text of
-          the printing and typesetting industry. Lorem Ipsum has been the
-          industry's standard dummy text ever since the 1500s, Lorem Ipsum is
-          simply dummy text of the printing and typesetting industry. Lorem
-          Ipsum has been the industry's standard dummy text ever since the
-          1500s,
-        </p>
-      </b-container>
-    </div>
+                  <b-dropdown-item href="#"> Delete </b-dropdown-item>
+                  <b-dropdown-item href="#"> Read </b-dropdown-item>
+                </b-dropdown>
+              </div>
+            </span>
+          </b-list>
+          <p>
+            Lorem Ipsum is this is just a dummy text to post simply dummy text
+            of the printing and typesetting industry. Lorem Ipsum has been the
+            industry's standard dummy text ever since the 1500s, Lorem Ipsum is
+            simply dummy text of the printing and typesetting industry. Lorem
+            Ipsum has been the industry's standard dummy text ever since the
+            1500s,
+          </p>
+        </b-container>
+      </div>
+   
   </div>
 </template>
 
@@ -160,10 +161,14 @@ export default {
   margin-left: -20px;
 }
 
-.m-left-top {
+
+
+
+.m-left-top{
   margin-left: -15px;
 }
-.p-notifaction {
+.p-notifaction{
+
   padding: 30px;
 }
 </style>

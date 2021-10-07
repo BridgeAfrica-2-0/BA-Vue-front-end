@@ -1,19 +1,19 @@
 <template>
   <div>
     <b-list-group-item class="d-flex align-items-center mb-4 style-group">
-      <b-avatar class="mr-3 avatar-style"></b-avatar>
-      <div>
+      <b-avatar :src=" bio.user.profile_picture" class="mr-3 avatar-style"></b-avatar>
+      <div>  
         <div class="row">
           <div class="col">
             <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero
+              {{ bio.user.biography  }}
             </p>
           </div>
         </div>
       </div>
     </b-list-group-item>
   </div>
-</template>
+</template>     
 
 <script>
 export default {
@@ -22,7 +22,15 @@ export default {
       defaultBio: ""
     };
   },
-  methods: {}
+  methods: {},
+
+  computed:{
+
+    bio(){
+      return this.$store.state.follower.profileIntro;
+    }
+
+  },
 };
 </script>
 

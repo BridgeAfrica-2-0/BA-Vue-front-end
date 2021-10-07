@@ -254,7 +254,7 @@ export default {
   },
 
   components: {
-    SidebarCommunity
+    SidebarCommunity,
   },
 
   computed: {

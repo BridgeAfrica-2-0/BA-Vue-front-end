@@ -23,7 +23,7 @@ actions: {
 
     getbusiness( {commit}, businessId ){
       return axios
-      .get("business/info/"+businessId )
+      .get("business/general/update/"+businessId )
       .then(({ data }) => {
           commit("setbusiness", data.data);
         console.log(data);

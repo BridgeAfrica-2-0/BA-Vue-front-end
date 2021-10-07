@@ -22,11 +22,12 @@
             <b-form-radio-group
               class="pt-2"
               :options="businessVisibility"
-              v-model="form.visibility"
+              v-model="business_form.visibility"
               name="visibility"
               type="text"
               value-field="value"
               text-field="label"
+              required
             ></b-form-radio-group>
           </b-form-group>
         </b-form-group>
@@ -46,18 +47,19 @@
             <b-form-radio-group
               class="pt-2"
               :options="postingPermissions"
-              v-model="form.permissions"
+              v-model="permission"
               name="permissions"
               type="text"
               value-field="value"
               text-field="label"
+              required
             ></b-form-radio-group>
           </b-form-group>
         </b-form-group>
       </b-container>
     </div>
 
-    <div v-if="form.permissions == 'Allow editor to post'" class="b-bottom">
+    <div v-if="business_form.permissions == 'Allow editor to post'" class="b-bottom">
       <b-container>
         <b-form-group
           label-cols-lg="3"
@@ -67,7 +69,7 @@
           class="mb-0"
         >
           <b-form-checkbox
-            v-model="form.post_approval"
+            v-model="business_form.post_approval"
             name="post_approval"
             value="1"
             unchecked-value="0"
@@ -87,15 +89,15 @@
           label-class="font-weight-bold pt-0"
           class="mb-0"
         >
-          <b-form-textarea
-            id="textarea"
-            v-model="form.keywords_alert"
-            name="keywords_alert"
-            type="text"
-            placeholder="Enter something..."
-            rows="3"
-            max-rows="6"
-          ></b-form-textarea>
+          <b-form-tags
+            input-id="tags-separators"
+            v-model="business_form.keywords_alert"
+            tag-variant="primary"
+            separator=" ,;"
+            placeholder="Enter new keywords_alert separated by space, comma or semicolon"
+            no-add-on-enter
+            required
+          ></b-form-tags>
         </b-form-group>
       </b-container>
     </div>
@@ -110,11 +112,12 @@
           class="mb-0"
         >
           <b-form-checkbox 
-            v-model="form.marketplace" 
+            v-model="business_form.marketplace" 
             name="marketplace" 
             switch
             value="1"
             unchecked-value="0"
+            required
           >
           </b-form-checkbox>
         </b-form-group>
@@ -147,7 +150,7 @@ export default {
   name: "general",
   data(){
       return{
-        url: this.$route.params.id,
+        url: null,
         SPupdateGeneralInfo: false,
         clickedObject: {},
         busiess_id: "",
@@ -159,13 +162,8 @@ export default {
           { label: 'Admin only', value: 'Admin only' }, 
           { label: 'Allow editor to post', value: 'Allow editor to post'}
         ],
-        form: {
-            visibility: "publish",
-            permissions: "Allow editor to post",
-            post_approval: "",
-            keywords_alert: "",
-            marketplace: "",
-        }
+        permission: "Allow editor to post",
+        business_form: null
       }
   },
   
@@ -176,11 +174,32 @@ export default {
     }
   },
 
+  created(){
+    this.business_form = {
+      name: this.business[0].name,
+      visibility: this.business[0].visibility,
+      permissions: this.business[0].permissions,
+      post_approval: this.business[0].post_approval,
+      keywords_alert: this.business[0].keywords_alert,
+      marketplace: this.business[0].marketplace[0].marketplace,
+    }
+  },
+
+  watch : {
+    permission:function(val) {
+      this.form.permissions = val;
+      this.form.post_approval = "0";
+      console.log("Unchecked: "+this.business_form.post_approval);
+    }
+  },
+
   mounted(){
+    this.url = this.$route.params.id;
     this.getBusiness();
   },
 
   methods:{
+
     getBusiness() {
     this.$store
       .dispatch("businessGeneral/getbusiness", this.url)
@@ -193,18 +212,25 @@ export default {
     },
 
     updateGeneralInfo: function(){
-      this.SPupdateGeneralInfo = true;
+      this.SPupdateGeneralInfo = !this.SPupdateGeneralInfo;
       let formData = new FormData();
-      formData.append('visibility', this.form.visibility);
-      formData.append('permissions', this.form.permissions);
-      formData.append('post_approval', this.form.post_approval);
-      formData.append('keywords_alert', this.form.keywords_alert);
-      formData.append('marketplace', this.form.marketplace);
+      formData.append('visibility', this.business_form.visibility);
+      formData.append('permissions', this.business_form.permissions);
+      formData.append('post_approval', this.business_form.post_approval);
+      // for( var i = 0; i < this.form.keywords_alert.length; i++ ){
+      //   let keyword = this.form.keywords_alert[i];
+      //   console.log(keyword);
+      //   formData.append('keywords_alert[' + i + ']', keyword);
+      // }
+      formData.append('keywords_alert', String(this.business_form.keywords_alert));
+      console.log(String(this.business_form.keywords_alert));
+      formData.append('marketplace', this.business_form.marketplace);
       console.log(formData);
       this.axios.post("business/general/update/"+this.url, formData)
       .then(() => {
         console.log(this.form);
-        this.SPupdateGeneralInfo = false;
+        this.getBusiness();
+        this.SPupdateGeneralInfo = !this.SPupdateGeneralInfo;
         this.flashMessage.show({
           status: "success",
           message: "Changes Made Successfuly"
@@ -212,7 +238,7 @@ export default {
       })
       .catch(err => {
         console.log({ err: err });
-        this.SPupdateGeneralInfo = false;
+        this.SPupdateGeneralInfo = !this.SPupdateGeneralInfo;
         this.flashMessage.show({
           status: "error",
           message: "Unable To Make Changes"

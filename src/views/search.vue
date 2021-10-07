@@ -483,39 +483,7 @@
             </div>
 
             <!-- filter out only people -->
-
-            <div v-if="selectedId == '2'">
-              <h6>
-                Sponsored Result
-                <fas-icon
-                  class="icons"
-                  :icon="['fas', 'exclamation-circle']"
-                  size="lg"
-                />
-              </h6>
-
-              <div>
-                <Sponsor />
-              </div>
-              <h6>
-                <fas-icon class="icons" :icon="['fas', 'users']" size="lg" />
-                People
-              </h6>
-              <NotFound
-                v-if="!peoples.length"
-                :title="notFoundComponentTitle"
-              />
-
-              <People
-                v-for="(people, index) in peoples"
-                :people="people"
-                :key="index"
-              />
-              <infinite-loading @infinite="peopleScroll" v-if="peoples.length">
-                <div class="text-red" slot="no-more">No More Request</div>
-                <div class="text-red" slot="no-results">No More Request</div>
-              </infinite-loading>
-            </div>
+            <component :is="isComponent" :title="notFoundComponentTitle" />
 
             <!-- filter out just the network  -->
 
@@ -548,33 +516,6 @@
 
               <Market />
             </div>
-
-            <!-- Filter out just the post  -->
-
-            <div v-if="selectedId == '5'">
-              <h6>
-                Sponsored Result
-                <fas-icon
-                  class="icons"
-                  :icon="['fas', 'exclamation-circle']"
-                  size="lg"
-                />
-              </h6>
-
-              <div>
-                <Sponsor />
-              </div>
-              <h6>
-                <fas-icon class="icons" :icon="['fab', 'readme']" size="lg" />
-                Posting
-              </h6>
-              <NotFound v-if="!posts.length" :title="notFoundComponentTitle" />
-              <Post v-for="(post, index) in posts" :post="post" :key="index" />
-              <infinite-loading @infinite="postScroll" v-if="posts.length">
-                <div class="text-red" slot="no-more">No More Request</div>
-                <div class="text-red" slot="no-results">No More Request</div>
-              </infinite-loading>
-            </div>
           </div>
         </b-col>
         <b-col cols="12" md="4" lg="4" xl="3" class="showmap" ref="mapblock">
@@ -586,8 +527,6 @@
 </template>
 
 <script>
-import _ from "lodash";
-
 import LyTab from "@/tab/src/index.vue";
 
 import Map from "@/components/search/map";
@@ -607,7 +546,12 @@ import SubNav from "@/components/subnav";
 
 import Sponsor from "@/components/search/sponsoredBusiness";
 
-import { PeopleFilter, PostFilter } from "@/components/search";
+import {
+  PeopleFilter,
+  PostFilter,
+  PostComponent,
+  PeopleComponent,
+} from "@/components/search";
 
 import { loader } from "@/mixins";
 
@@ -629,21 +573,13 @@ export default {
     Market,
     PeopleFilter,
     PostFilter,
+    PostComponent,
+    PeopleComponent,
 
     // Footer,
   },
 
   mixins: [loader],
-
-  computed: {
-    ...mapGetters({
-      peoples: "search/GET_RESULT_USER",
-      posts: "search/GET_RESULT_POST",
-      getCallback: "search/GET_CURRENT_PAGINATE_CALLBACK",
-      getCurrentPage: "search/GET_CURRENT_PAGINATION_PAGE",
-      getStack: "search/STACK_VALUE",
-    }),
-  },
 
   created() {
     this.strategy = {
@@ -652,8 +588,14 @@ export default {
     };
 
     this.strategyForPlaceHolder = {
-      2: () => "Find User",
-      5: () => "Find Post",
+      2: () => {
+        this.isComponent = PeopleComponent;
+        return "Find User";
+      },
+      5: () => {
+        this.isComponent = PostComponent;
+        return "Find Post";
+      },
       0: () => "All",
     };
 
@@ -672,6 +614,7 @@ export default {
         placeholder: "",
       },
       notFoundComponentTitle: "",
+      isComponent: null,
       strategy: {},
       strategyForPlaceHolder: {},
       strategyForNotFoundComponentTitle: {},
@@ -1620,28 +1563,15 @@ export default {
 
   methods: {
     ...mapActions({
-      findUser: "search/FIND_USER",
-      findPost: "search/FIND_POST",
+      userStore: "search/FIND_USER",
+      postStore: "search/FIND_POST",
       postKeyword: "search/POST_KEYWORD",
-      setCallback: "search/SET_CURRENT_PAGINATE_CALLBACK",
-      setCurrentPage: "search/SET_CURRENT_PAGINATION_PAGE",
-      stack: "search/STACK_VALUE",
       lauchLoader: "search/LOADING",
+      page: "search/SET_CURRENT_PAGINATION_PAGE",
+      stack: "search/STACK_VALUE",
+      setCallback: "search/SET_CURRENT_PAGINATE_CALLBACK",
+      startScrolling: "search/END_INITIAL_REQUEST",
     }),
-
-    postScroll($state) {
-      console.log($state);
-      if (this.getCurrentPage > 1) {
-        this.onFindUser($state);
-      }
-    },
-
-    peopleScroll($state) {
-      console.log($state);
-      if (this.getCurrentPage > 1) {
-        this.getCallback($state);
-      }
-    },
 
     changeNotFoundTitle() {
       try {
@@ -1668,14 +1598,14 @@ export default {
 
     strategies() {
       try {
-        this.setCallback(this.strategy[`${this.selectedId}`]);
         this.strategy[`${this.selectedId}`]();
       } catch (error) {
+        console.log(error);
         console.warn(`Implement function for selectedId=${this.selectedId}`);
       }
     },
 
-    async _onFindUser($state) {
+    async _onFindUser() {
       try {
         this.lauchLoader(true);
         const request = await this.$repository.search.findUserByParam({
@@ -1684,59 +1614,59 @@ export default {
           },
           page: 1,
         });
-        this.findUser(request);
+        this.userStore(request);
 
-        if (request.length) {
-          this.setCurrentPage(this.getCurrentPage + 1);
-          $state.loaded();
-        } else $state.completed();
+        this.lauchLoader(false);
+        this.page(2);
+        this.startScrolling(true);
+        this.setCallback(this.$repository.search.findUserByParam);
       } catch (error) {
         console.log(error);
         this.lauchLoader(false);
       }
-
-      this.lauchLoader(false);
     },
 
-    onFindUser($state) {
+    onFindUser() {
       if (this.navBarParams.keyword.trim()) {
-        this._onFindUser($state);
+        this.stack({
+          payload: {
+            keyword: this.navBarParams.keyword.trim(),
+          },
+        });
+
+        this._onFindUser();
       } else this.onNotified("the word must have at least 3 letters");
     },
 
-    async _onFindPost($state) {
+    async _onFindPost() {
       try {
         this.lauchLoader(true);
 
         const request = await this.$repository.search.findPostByKeyword({
-          ...this.getStack,
-          page: this.getCurrentPage,
+          data: {},
+          keyword: this.navBarParams.keyword.trim(),
+
+          page: 1,
         });
 
-        if (request.length) {
-          this.setCurrentPage(this.getCurrentPage + 1);
-
-          $state ? $state.loaded() : null;
-        } else $state ? $state.completed() : null;
-
-        this.findPost(request);
+        this.postStore(request);
+        this.page(2);
+        this.lauchLoader(false);
       } catch (error) {
         this.lauchLoader(false);
       }
-
-      this.lauchLoader(false);
     },
 
-    onFindPost($state = null) {
+    onFindPost() {
       if (this.navBarParams.keyword.trim()) {
         this.postKeyword(this.navBarParams.keyword.trim());
-
         this.stack({
           data: {},
           keyword: this.navBarParams.keyword.trim(),
         });
 
-        this._onFindPost($state);
+        this.setCallback(this.$repository.search.findPostByKeyword);
+        this._onFindPost();
       } else {
         this.onNotified("the word must have at least 3 letters");
       }

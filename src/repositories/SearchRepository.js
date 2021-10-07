@@ -5,7 +5,7 @@ class Repository {
 
   async findUserByParam(credentials) {
     const { page, payload } = credentials
-    const response = await axios.post(`search/listUsers/${page}`, payload)
+    const response = await axios.post(`search/listUsers/${page}`, { ...payload, page })
     return await response.data.data
   }
 

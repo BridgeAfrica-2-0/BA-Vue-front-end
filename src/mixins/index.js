@@ -1,10 +1,9 @@
-import { mapGetters } from "vuex";
+
+import { mapGetters, mapActions } from "vuex";
+
 import NotFound from "@/components/NotFoundComponent"
 
 export const loader = {
-  components: {
-    NotFound
-  },
   methods: {
     onNotified(text) {
       this.$notify({
@@ -26,8 +25,7 @@ export const loader = {
     overlay: null
   }),
   watch: {
-    loading: function (newValue, oldValue) {
-
+    loading: function (newValue) {
       if (newValue) {
         this.overlay = this.$loading.show({
           container: this.$refs.formContainer,
@@ -38,5 +36,31 @@ export const loader = {
       }
 
     }
+  }
+}
+
+export const search = {
+  components: {
+    NotFound
+  },
+  props: {
+    title: {
+      type: String
+    }
+  },
+
+  computed: {
+    ...mapGetters({
+      callback: "search/GET_CURRENT_PAGINATE_CALLBACK",
+      getStack: "search/STACK_VALUE",
+      canScrool: "search/END_INITIAL_REQUEST"
+    }),
+  },
+  methods: {
+    ...mapActions({
+      lauchLoader: "search/LOADING",
+      page: "search/SET_CURRENT_PAGINATION_PAGE",
+    }),
+
   }
 }

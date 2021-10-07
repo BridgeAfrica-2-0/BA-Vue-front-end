@@ -4,21 +4,32 @@ export const mutations = {
 
   [TYPES.FIND_USER](state, payload) {
 
-    if (state.page > 2)
-      state.users = [...payload, ...state.users]
-    else
+    if (state.page > 1)
+      state.users = [...state.users, ...payload]
+    else {
       state.users = payload
+      if (!state.startScrolling)
+        state.startScrolling = true
+    }
 
   }, //[TYPES.FIND_USER]
 
   [TYPES.FIND_POST](state, payload) {
-
-    if (state.page > 2)
-      state.posts = [...payload, ...state.posts]
-    else
+    console.log(state.page)
+    console.log(payload)
+    if (state.page > 1)
+      state.posts = [...state.posts, ...payload,]
+    else {
       state.posts = payload
+      if (!state.startScrolling)
+        state.startScrolling = true
+    }
 
   }, //[TYPES.FIND_POST]
+
+  [TYPES.END_INITIAL_REQUEST](state, payload) {
+    state.init = payload
+  },
 
   [TYPES.STACK_VALUE](state, payload) {
     state.stack = payload
@@ -65,17 +76,11 @@ export const mutations = {
 
   [TYPES.SET_CURRENT_PAGINATION_PAGE](state, payload) {
 
-    if (state.callback) {
-      if (typeof (payload) === 'number' || false === payload)
-        if (payload)
-          state.page = payload
-        else
-          state.payload = 1
-      else
-        console.error(`${payload} should be a number`)
-    } else {
-      state.payload = 1
-    }
+    if (typeof (payload) === 'number')
+      state.page = payload
+    else
+      throw new Error(`${payload} should be a number`)
+
 
   },
 
@@ -83,7 +88,7 @@ export const mutations = {
     if (typeof (payload) === 'function')
       state.callback = payload
     else
-      console.error(`${payload} should be a function`)
+      throw new Error(`${payload} should be a function`)
   },
 
   [TYPES.POST_KEYWORD](state, payload) {
@@ -91,7 +96,7 @@ export const mutations = {
     if (typeof (payload) === 'string')
       state.postKeyword = payload
     else
-      console.error(`${payload} should be a string`)
+      throw new Error(`${payload} should be a string`)
   }
 
 }

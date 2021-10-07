@@ -19,7 +19,6 @@ export const getters = {
 		return state.isLoading
 	}, //[TYPES.LOADING]
 
-
 	[TYPES.POST_KEYWORD](state) {
 		return state.postKeyword
 	}, //[TYPES.POST_KEYWORD]
@@ -30,7 +29,14 @@ export const getters = {
 
 	[TYPES.GET_CURRENT_PAGINATION_PAGE](state) {
 		return state.page
-	}
+	},
 
+	[TYPES.START_SCROOLING](state) {
+		return state.startScrolling
+	},
+
+	[TYPES.END_INITIAL_REQUEST](state) {
+		return state.init
+	},
 
 }

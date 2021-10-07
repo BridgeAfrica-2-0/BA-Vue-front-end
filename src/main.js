@@ -179,11 +179,9 @@ new Vue({
         // remove loader when request return error
         this.$store.dispatch("search/LOADING", false);
 
-        if (error.response.status === 401) {
+        if (error.response && error.response.status === 401) {
           // this.$store.dispatch("auth/logout");
           console.log("error has occure");
-
-
         }
         return Promise.reject(error);
       }

@@ -43,7 +43,7 @@
                   variant="primary"
                   aria-hidden="true"
                 ></b-icon>
-                {{ post.likes_count }}</span
+                {{ post.likes_count | formatNumber }}</span
               >
               <span
                 ><b-icon
@@ -51,7 +51,7 @@
                   variant="primary"
                   aria-hidden="true"
                 ></b-icon>
-                {{ post.comment_count }}</span
+                {{ post.comment_count | formatNumber }}</span
               >
             </b-col>
           </b-row>
@@ -201,7 +201,7 @@
 </template>
 
 <script>
-import { fromNow } from "@/helpers";
+import { fromNow, formatNumber } from "@/helpers";
 export default {
   name: "postNetwork",
   props: {
@@ -212,6 +212,7 @@ export default {
   },
   filters: {
     fromNow,
+    formatNumber,
   },
   data() {
     return {

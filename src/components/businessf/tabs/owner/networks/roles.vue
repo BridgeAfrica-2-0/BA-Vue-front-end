@@ -12,7 +12,7 @@
             label-class="font-weight-bold pt-0"
             class="mb-0"
           >
-            <b-form-select >
+            <b-form-select>
               <b-form-select-option :value="null">Admin</b-form-select-option>
               <b-form-select-option value="a">User</b-form-select-option>
             </b-form-select>
@@ -35,7 +35,9 @@
         </b-col>
 
         <b-col>
-          <b-button variant="primary" class="assign-btn">Assign</b-button>
+          <b-button variant="primary" class="assign-btn" @click="assign"
+            >Assign</b-button
+          >
         </b-col>
       </b-row>
 
@@ -57,7 +59,7 @@
         <h5 class="a-text">Existing Admins</h5>
         <span>
           <span class="d-flex align-items-center m-list">
-            <b-avatar class="mr-3 profile-pic"   ></b-avatar>
+            <b-avatar class="mr-3 profile-pic"></b-avatar>
             <span class="mr-auto username">J. Circlehead</span>
             <span>
               <div>
@@ -68,11 +70,7 @@
                   no-caret
                 >
                   <template #button-content>
-                    <b-icon
-                      icon="three-dots-vertical"
-                    
-                      font-scale="1"
-                    ></b-icon>
+                    <b-icon icon="three-dots-vertical" font-scale="1"></b-icon>
                   </template>
                   <b-dropdown-item href="#">Edit</b-dropdown-item>
                   <b-dropdown-item href="#"> Delete </b-dropdown-item>
@@ -86,7 +84,6 @@
               variant="primary"
               text="BV"
               class="mr-3 profile-pic"
-            
             ></b-avatar>
             <span class="mr-auto">itz blec blec</span>
             <span>
@@ -98,11 +95,7 @@
                   no-caret
                 >
                   <template #button-content>
-                    <b-icon
-                      icon="three-dots-vertical"
-                     
-                      font-scale="1"
-                    ></b-icon>
+                    <b-icon icon="three-dots-vertical" font-scale="1"></b-icon>
                   </template>
                   <b-dropdown-item href="#">Edit</b-dropdown-item>
                   <b-dropdown-item href="#"> Delete </b-dropdown-item>
@@ -118,9 +111,15 @@
       <b-container>
         <h5 class="a-text">Existing Editors</h5>
         <span>
-          <span class="d-flex align-items-center m-list">
-            <b-avatar class="mr-3 profile-pic"   ></b-avatar>
-            <span class="mr-auto username">J. Circlehead</span>
+          <span
+            v-for="editor in allEditors"
+            :key="editor.id"
+            class="d-flex align-items-center m-list"
+          >
+            <b-avatar class="mr-3 profile-pic">
+              <img :src="editor.image" alt="" />
+            </b-avatar>
+            <span class="mr-auto username">{{ editor.name }}</span>
             <span>
               <div>
                 <b-dropdown
@@ -130,44 +129,12 @@
                   no-caret
                 >
                   <template #button-content>
-                    <b-icon
-                      icon="three-dots-vertical"
-                    
-                      font-scale="1"
-                    ></b-icon>
+                    <b-icon icon="three-dots-vertical" font-scale="1"></b-icon>
                   </template>
-                  <b-dropdown-item href="#">Edit</b-dropdown-item>
-                  <b-dropdown-item href="#"> Delete </b-dropdown-item>
-                </b-dropdown>
-              </div>
-            </span>
-          </span>
-
-          <span class="d-flex align-items-center">
-            <b-avatar
-              variant="primary"
-              text="BV"
-              class="mr-3 profile-pic"
-           
-            ></b-avatar>
-            <span class="mr-auto username">itz blec blec</span>
-            <span>
-              <div>
-                <b-dropdown
-                  size="lg"
-                  variant="link"
-                  toggle-class="text-decoration-none"
-                  no-caret
-                >
-                  <template #button-content>
-                    <b-icon
-                      icon="three-dots-vertical"
-                    
-                      font-scale="1"
-                    ></b-icon>
-                  </template>
-                  <b-dropdown-item href="#">Edit</b-dropdown-item>
-                  <b-dropdown-item href="#"> Delete </b-dropdown-item>
+                  <b-dropdown-item @click="editEditor">Edit</b-dropdown-item>
+                  <b-dropdown-item @click="deleteEditor">
+                    Delete
+                  </b-dropdown-item>
                 </b-dropdown>
               </div>
             </span>
@@ -179,8 +146,45 @@
 </template>
 
 <script>
+import { mapActions, mapGetters } from "vuex";
 export default {
-  name: "roles"
+  name: "roles",
+  data: () => ({
+    roleString: [],
+    memberString: [],
+    roleAssignment: {
+      user: "",
+      admin: "",
+    },
+  }),
+  async beforeMount() {
+    this.getRoles();
+
+    this.allRoles.forEach((role) => {
+      this.roleString.push(role);
+    });
+
+    this.allMembers.forEach((member) => {
+      this.memberString.push(member);
+    });
+  },
+  computed: {
+    ...mapGetters({
+      allRoles: "networkSetting/allRoles",
+      allMembers: "networkSetting/allMembers",
+      allEditors: "networkSetting/allEditors",
+    }),
+  },
+  methods: {
+    ...mapActions({
+      getRoles: "networkSetting/getRoles",
+      getMembers: "networkSetting/getMembers",
+      assignRole: "networkSetting/assignRole",
+      getEditors: "networkSetting/getEditors",
+      editEditor: "networkSetting/editEditor",
+      deleteEditor: "networkSetting/deleteEditor",
+    }),
+  },
 };
 </script>
 
@@ -228,9 +232,8 @@ export default {
     left: -20px;
   }
 
-
-  .assign-btn{
-    margin-top:30px
+  .assign-btn {
+    margin-top: 30px;
   }
 }
 </style>

@@ -15,7 +15,12 @@
 
     <b-row>
       <b-col cols="12" class="f-left">
-        <div v-for="post in 4" :key="post" :loading="load" class="mb-4">
+        <div
+          v-for="post in allPendingPost"
+          :key="post.id"
+          :loading="load"
+          class="mb-4"
+        >
           <div class="mb-2">
             <div class="f-left">
               <b-row class="px-md-3">
@@ -41,10 +46,16 @@
                           <b-icon-three-dots-vertical></b-icon-three-dots-vertical
                           ><span class="sr-only">Settings</span>
                         </template>
-                        <b-dropdown-item @click="approvedPost" href="#">
+                        <b-dropdown-item
+                          @click="approved(post.id)"
+                          :loading="load"
+                        >
                           Approved
                         </b-dropdown-item>
-                        <b-dropdown-item @click="unapprovedPost" href="#">
+                        <b-dropdown-item
+                          @click="unapproved(post.id)"
+                          :loading="load"
+                        >
                           Unapproved
                         </b-dropdown-item>
                       </b-dropdown>
@@ -70,52 +81,58 @@
         </div>
       </b-col>
     </b-row>
+    <b-row>
+      <b-col>
+        <p class="text-center" v-if="allPendingPost < 1">
+          No Pending Posts To Show
+        </p>
+      </b-col>
+    </b-row>
   </div>
 </template>
 
 <script>
-import axios from "axios";
+import { mapActions, mapGetters } from "vuex";
 export default {
   name: "pendingPost",
   data: () => ({
-    pendingPosts: [],
     load: null,
   }),
   beforeMount() {
     this.getPendingPost();
   },
+  computed: {
+    ...mapGetters({
+      allPendingPost: "networkSetting/allPendingPost",
+    }),
+  },
   methods: {
-    getPendingPost() {
+    ...mapActions({
+      getPendingPost: "networkSetting/getPendingPost",
+      approvedPost: "networkSetting/approvedPost",
+      unapprovedPost: "networkSetting/unapprovedPost",
+    }),
+    approved(id) {
       this.load = true;
-      axios
-        .get()
-        .then((res) => {
-          this.pendingPosts = res.data.reverse();
+      this.approvedPost(id)
+        .then(() => {
           this.load = false;
         })
         .catch((err) => {
+          this.load = true;
           console.log(err);
         });
     },
-    approvedPost() {
-      axios
-        .post()
-        .then((res) => {
-          alert("success");
-        })
-        .catch((err) => {
-          alert("error");
-        });
-    },
 
-    unapprovedPost() {
-      axios
-        .post()
-        .then((res) => {
-          alert("success");
+    unapproved(id) {
+      this.load = true;
+      this.unapprovedPost(id)
+        .then(() => {
+          this.load = false;
         })
         .catch((err) => {
-          alert("error");
+          this.load = true;
+          console.log(err);
         });
     },
   },

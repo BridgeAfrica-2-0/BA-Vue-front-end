@@ -7,11 +7,12 @@ import ProfileAndBusinessDetails from "./ProfileAndBusinessDetails";
 import hotbusiness from "./hotbusiness";
 import networkDetails from "./networkDetails";
 import dashboardcommunity from "./dashboardcommunity";
+import networkSetting from "./networkSetting";
 
 import axios from "axios";
 Vue.use(Vuex);
- //axios.defaults.baseURL = process.env.VUE_APP_API_URL;    
- axios.defaults.baseURL ="https://team4.maxinemoffett.com/api/v1/";
+//axios.defaults.baseURL = process.env.VUE_APP_API_URL;
+axios.defaults.baseURL = "https://team4.maxinemoffett.com/api/v1/";
 export default new Vuex.Store({
   modules: {
     auth,
@@ -21,16 +22,16 @@ export default new Vuex.Store({
     businessOwner,
     dashboard,
     hotbusiness,
-
+    networkSetting,
   },
 
   state,
   getters: {
-    recoverPassData: state => { 
+    recoverPassData: (state) => {
       return state.recoverData;
     },
-    doneTodos: state => {
-      return state.todos.filter(todo => todo.done);
+    doneTodos: (state) => {
+      return state.todos.filter((todo) => todo.done);
     },
     loggedIn(state) {
       return state.login;
@@ -58,13 +59,11 @@ export default new Vuex.Store({
     },
     getPostLists(state) {
       return state.userData[0].posts;
-    }
+    },
   },
   actions,
-  mutations
+  mutations,
 });
-
-
 
 const getDefaultState = () => {
   return {
@@ -98,7 +97,7 @@ const getDefaultState = () => {
                 "                not only five centuries, but also the leap into electronic\n" +
                 "                typesetting, remaining essentially unchanged.😛",
               movies: [],
-              hyperlinks: []
+              hyperlinks: [],
             },
             timeCountDown: "1h",
             likes: [
@@ -107,15 +106,15 @@ const getDefaultState = () => {
                 post_id: 30,
                 user_id: 4,
                 created_at: null,
-                updated_at: null
+                updated_at: null,
               },
               {
                 id: 2,
                 post_id: 30,
                 user_id: 3,
                 created_at: null,
-                updated_at: null
-              }
+                updated_at: null,
+              },
             ],
             comments: [
               {
@@ -138,16 +137,16 @@ const getDefaultState = () => {
                     post_id: 30,
                     user_id: 4,
                     created_at: null,
-                    updated_at: null
+                    updated_at: null,
                   },
                   {
                     like_id: 2,
                     post_id: 30,
                     user_id: 3,
                     created_at: null,
-                    updated_at: null
-                  }
-                ]
+                    updated_at: null,
+                  },
+                ],
               },
               {
                 comment_id: 2,
@@ -168,16 +167,16 @@ const getDefaultState = () => {
                     post_id: 30,
                     user_id: 4,
                     created_at: null,
-                    updated_at: null
+                    updated_at: null,
                   },
                   {
                     like_id: 2,
                     post_id: 30,
                     user_id: 3,
                     created_at: null,
-                    updated_at: null
-                  }
-                ]
+                    updated_at: null,
+                  },
+                ],
               },
               {
                 comment_id: 3,
@@ -198,18 +197,18 @@ const getDefaultState = () => {
                     post_id: 30,
                     user_id: 4,
                     created_at: null,
-                    updated_at: null
+                    updated_at: null,
                   },
                   {
                     like_id: 2,
                     post_id: 30,
                     user_id: 3,
                     created_at: null,
-                    updated_at: null
-                  }
-                ]
-              }
-            ]
+                    updated_at: null,
+                  },
+                ],
+              },
+            ],
           },
           {
             post_id: 31,
@@ -230,15 +229,15 @@ const getDefaultState = () => {
                 post_id: 30,
                 user_id: 4,
                 created_at: null,
-                updated_at: null
+                updated_at: null,
               },
               {
                 id: 2,
                 post_id: 30,
                 user_id: 3,
                 created_at: null,
-                updated_at: null
-              }
+                updated_at: null,
+              },
             ],
             comments: [
               {
@@ -260,16 +259,16 @@ const getDefaultState = () => {
                     post_id: 30,
                     user_id: 4,
                     created_at: null,
-                    updated_at: null
+                    updated_at: null,
                   },
                   {
                     like_id: 2,
                     post_id: 30,
                     user_id: 3,
                     created_at: null,
-                    updated_at: null
-                  }
-                ]
+                    updated_at: null,
+                  },
+                ],
               },
               {
                 comment_id: 2,
@@ -290,16 +289,16 @@ const getDefaultState = () => {
                     post_id: 30,
                     user_id: 4,
                     created_at: null,
-                    updated_at: null
+                    updated_at: null,
                   },
                   {
                     like_id: 2,
                     post_id: 30,
                     user_id: 3,
                     created_at: null,
-                    updated_at: null
-                  }
-                ]
+                    updated_at: null,
+                  },
+                ],
               },
               {
                 comment_id: 3,
@@ -320,18 +319,18 @@ const getDefaultState = () => {
                     post_id: 30,
                     user_id: 4,
                     created_at: null,
-                    updated_at: null
+                    updated_at: null,
                   },
                   {
                     like_id: 2,
                     post_id: 30,
                     user_id: 3,
                     created_at: null,
-                    updated_at: null
-                  }
-                ]
-              }
-            ]
+                    updated_at: null,
+                  },
+                ],
+              },
+            ],
           },
           {
             post_id: 32,
@@ -352,15 +351,15 @@ const getDefaultState = () => {
                 post_id: 30,
                 user_id: 4,
                 created_at: null,
-                updated_at: null
+                updated_at: null,
               },
               {
                 id: 2,
                 post_id: 30,
                 user_id: 3,
                 created_at: null,
-                updated_at: null
-              }
+                updated_at: null,
+              },
             ],
             comments: [
               {
@@ -382,16 +381,16 @@ const getDefaultState = () => {
                     post_id: 30,
                     user_id: 4,
                     created_at: null,
-                    updated_at: null
+                    updated_at: null,
                   },
                   {
                     like_id: 2,
                     post_id: 30,
                     user_id: 3,
                     created_at: null,
-                    updated_at: null
-                  }
-                ]
+                    updated_at: null,
+                  },
+                ],
               },
               {
                 comment_id: 2,
@@ -412,16 +411,16 @@ const getDefaultState = () => {
                     post_id: 30,
                     user_id: 4,
                     created_at: null,
-                    updated_at: null
+                    updated_at: null,
                   },
                   {
                     like_id: 2,
                     post_id: 30,
                     user_id: 3,
                     created_at: null,
-                    updated_at: null
-                  }
-                ]
+                    updated_at: null,
+                  },
+                ],
               },
               {
                 comment_id: 3,
@@ -442,18 +441,18 @@ const getDefaultState = () => {
                     post_id: 30,
                     user_id: 4,
                     created_at: null,
-                    updated_at: null
+                    updated_at: null,
                   },
                   {
                     like_id: 2,
                     post_id: 30,
                     user_id: 3,
                     created_at: null,
-                    updated_at: null
-                  }
-                ]
-              }
-            ]
+                    updated_at: null,
+                  },
+                ],
+              },
+            ],
           },
           {
             post_id: 33,
@@ -474,15 +473,15 @@ const getDefaultState = () => {
                 post_id: 30,
                 user_id: 4,
                 created_at: null,
-                updated_at: null
+                updated_at: null,
               },
               {
                 id: 2,
                 post_id: 30,
                 user_id: 3,
                 created_at: null,
-                updated_at: null
-              }
+                updated_at: null,
+              },
             ],
             comments: [
               {
@@ -504,16 +503,16 @@ const getDefaultState = () => {
                     post_id: 30,
                     user_id: 4,
                     created_at: null,
-                    updated_at: null
+                    updated_at: null,
                   },
                   {
                     like_id: 2,
                     post_id: 30,
                     user_id: 3,
                     created_at: null,
-                    updated_at: null
-                  }
-                ]
+                    updated_at: null,
+                  },
+                ],
               },
               {
                 comment_id: 2,
@@ -534,16 +533,16 @@ const getDefaultState = () => {
                     post_id: 30,
                     user_id: 4,
                     created_at: null,
-                    updated_at: null
+                    updated_at: null,
                   },
                   {
                     like_id: 2,
                     post_id: 30,
                     user_id: 3,
                     created_at: null,
-                    updated_at: null
-                  }
-                ]
+                    updated_at: null,
+                  },
+                ],
               },
               {
                 comment_id: 3,
@@ -564,18 +563,18 @@ const getDefaultState = () => {
                     post_id: 30,
                     user_id: 4,
                     created_at: null,
-                    updated_at: null
+                    updated_at: null,
                   },
                   {
                     like_id: 2,
                     post_id: 30,
                     user_id: 3,
                     created_at: null,
-                    updated_at: null
-                  }
-                ]
-              }
-            ]
+                    updated_at: null,
+                  },
+                ],
+              },
+            ],
           },
           {
             post_id: 34,
@@ -596,15 +595,15 @@ const getDefaultState = () => {
                 post_id: 30,
                 user_id: 4,
                 created_at: null,
-                updated_at: null
+                updated_at: null,
               },
               {
                 id: 2,
                 post_id: 30,
                 user_id: 3,
                 created_at: null,
-                updated_at: null
-              }
+                updated_at: null,
+              },
             ],
             comments: [
               {
@@ -626,16 +625,16 @@ const getDefaultState = () => {
                     post_id: 30,
                     user_id: 4,
                     created_at: null,
-                    updated_at: null
+                    updated_at: null,
                   },
                   {
                     like_id: 2,
                     post_id: 30,
                     user_id: 3,
                     created_at: null,
-                    updated_at: null
-                  }
-                ]
+                    updated_at: null,
+                  },
+                ],
               },
               {
                 comment_id: 2,
@@ -656,16 +655,16 @@ const getDefaultState = () => {
                     post_id: 30,
                     user_id: 4,
                     created_at: null,
-                    updated_at: null
+                    updated_at: null,
                   },
                   {
                     like_id: 2,
                     post_id: 30,
                     user_id: 3,
                     created_at: null,
-                    updated_at: null
-                  }
-                ]
+                    updated_at: null,
+                  },
+                ],
               },
               {
                 comment_id: 3,
@@ -686,18 +685,18 @@ const getDefaultState = () => {
                     post_id: 30,
                     user_id: 4,
                     created_at: null,
-                    updated_at: null
+                    updated_at: null,
                   },
                   {
                     like_id: 2,
                     post_id: 30,
                     user_id: 3,
                     created_at: null,
-                    updated_at: null
-                  }
-                ]
-              }
-            ]
+                    updated_at: null,
+                  },
+                ],
+              },
+            ],
           },
           {
             post_id: 35,
@@ -718,15 +717,15 @@ const getDefaultState = () => {
                 post_id: 30,
                 user_id: 4,
                 created_at: null,
-                updated_at: null
+                updated_at: null,
               },
               {
                 id: 2,
                 post_id: 30,
                 user_id: 3,
                 created_at: null,
-                updated_at: null
-              }
+                updated_at: null,
+              },
             ],
             comments: [
               {
@@ -748,16 +747,16 @@ const getDefaultState = () => {
                     post_id: 30,
                     user_id: 4,
                     created_at: null,
-                    updated_at: null
+                    updated_at: null,
                   },
                   {
                     like_id: 2,
                     post_id: 30,
                     user_id: 3,
                     created_at: null,
-                    updated_at: null
-                  }
-                ]
+                    updated_at: null,
+                  },
+                ],
               },
               {
                 comment_id: 2,
@@ -778,16 +777,16 @@ const getDefaultState = () => {
                     post_id: 30,
                     user_id: 4,
                     created_at: null,
-                    updated_at: null
+                    updated_at: null,
                   },
                   {
                     like_id: 2,
                     post_id: 30,
                     user_id: 3,
                     created_at: null,
-                    updated_at: null
-                  }
-                ]
+                    updated_at: null,
+                  },
+                ],
               },
               {
                 comment_id: 3,
@@ -808,19 +807,19 @@ const getDefaultState = () => {
                     post_id: 30,
                     user_id: 4,
                     created_at: null,
-                    updated_at: null
+                    updated_at: null,
                   },
                   {
                     like_id: 2,
                     post_id: 30,
                     user_id: 3,
                     created_at: null,
-                    updated_at: null
-                  }
-                ]
-              }
-            ]
-          }
+                    updated_at: null,
+                  },
+                ],
+              },
+            ],
+          },
         ],
         business: {
           businessNumberFollowers: 10,
@@ -831,85 +830,85 @@ const getDefaultState = () => {
               businessProfilePicture: [
                 "https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg",
                 "https://i.wifegeek.com/200426/f9459c52.jpg",
-                "https://i.wifegeek.com/200426/5fa51df3.jpg"
+                "https://i.wifegeek.com/200426/5fa51df3.jpg",
               ],
               businessName: "Super Car ltd",
               businessCategory: "Car Marketing",
               businessDetails:
                 "super best car seller in the world adipisicing elit. lorem epsep",
               businessLocation: "Douala cameroon",
-              businessNumberFollowers: 20
+              businessNumberFollowers: 20,
             },
             {
               id: 2,
               businessProfilePicture: [
                 "https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg",
                 "https://i.wifegeek.com/200426/f9459c52.jpg",
-                "https://i.wifegeek.com/200426/5fa51df3.jpg"
+                "https://i.wifegeek.com/200426/5fa51df3.jpg",
               ],
               businessName: "Super Car ltd",
               businessCategory: "Car Marketing",
               businessDetails:
                 "super best car seller in the world adipisicing elit. lorem epsep",
               businessLocation: "Douala cameroon",
-              businessNumberFollowers: 20
+              businessNumberFollowers: 20,
             },
             {
               id: 3,
               businessProfilePicture: [
                 "https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg",
                 "https://i.wifegeek.com/200426/f9459c52.jpg",
-                "https://i.wifegeek.com/200426/5fa51df3.jpg"
+                "https://i.wifegeek.com/200426/5fa51df3.jpg",
               ],
               businessName: "Super Car ltd",
               businessCategory: "Car Marketing",
               businessDetails:
                 "super best car seller in the world adipisicing elit. lorem epsep",
               businessLocation: "Douala cameroon",
-              businessNumberFollowers: 20
+              businessNumberFollowers: 20,
             },
             {
               id: 4,
               businessProfilePicture: [
                 "https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg",
                 "https://i.wifegeek.com/200426/f9459c52.jpg",
-                "https://i.wifegeek.com/200426/5fa51df3.jpg"
+                "https://i.wifegeek.com/200426/5fa51df3.jpg",
               ],
               businessName: "Super Car ltd",
               businessCategory: "Car Marketing",
               businessDetails:
                 "super best car seller in the world adipisicing elit. lorem epsep",
               businessLocation: "Douala cameroon",
-              businessNumberFollowers: 20
+              businessNumberFollowers: 20,
             },
             {
               id: 5,
               businessProfilePicture: [
                 "https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg",
                 "https://i.wifegeek.com/200426/f9459c52.jpg",
-                "https://i.wifegeek.com/200426/5fa51df3.jpg"
+                "https://i.wifegeek.com/200426/5fa51df3.jpg",
               ],
               businessName: "Super Car ltd",
               businessCategory: "Car Marketing",
               businessDetails:
                 "super best car seller in the world adipisicing elit. lorem epsep",
               businessLocation: "Douala cameroon",
-              businessNumberFollowers: 20
+              businessNumberFollowers: 20,
             },
             {
               id: 6,
               businessProfilePicture: [
                 "https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg",
                 "https://i.wifegeek.com/200426/f9459c52.jpg",
-                "https://i.wifegeek.com/200426/5fa51df3.jpg"
+                "https://i.wifegeek.com/200426/5fa51df3.jpg",
               ],
               businessName: "Super Car ltd",
               businessCategory: "Car Marketing",
               businessDetails:
                 "super best car seller in the world adipisicing elit. lorem epsep",
               businessLocation: "Douala cameroon",
-              businessNumberFollowers: 20
-            }
+              businessNumberFollowers: 20,
+            },
           ],
           followings: [
             {
@@ -917,16 +916,16 @@ const getDefaultState = () => {
               businessProfilePicture: [
                 "https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg",
                 "https://i.wifegeek.com/200426/f9459c52.jpg",
-                "https://i.wifegeek.com/200426/5fa51df3.jpg"
+                "https://i.wifegeek.com/200426/5fa51df3.jpg",
               ],
               businessName: "Super Car ltd",
               businessCategory: "Car Marketing",
               businessDetails:
                 "super best car seller in the world adipisicing elit. lorem epsep",
               businessLocation: "Douala cameroon",
-              businessNumberFollowers: 20
-            }
-          ]
+              businessNumberFollowers: 20,
+            },
+          ],
         },
         communauty: {
           communautyNumberFollowers: 10,
@@ -937,43 +936,43 @@ const getDefaultState = () => {
               communautyProfilePicture:
                 "https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg",
               communautyName: "Super Car ltd",
-              communautyNumberFollowers: 20
+              communautyNumberFollowers: 20,
             },
             {
               id: 2,
               communautyProfilePicture:
                 "https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg",
               communautyName: "Super Car ltd",
-              communautyNumberFollowers: 20
+              communautyNumberFollowers: 20,
             },
             {
               id: 3,
               communautyProfilePicture:
                 "https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg",
               communautyName: "Super Car ltd",
-              communautyNumberFollowers: 20
+              communautyNumberFollowers: 20,
             },
             {
               id: 4,
               communautyProfilePicture:
                 "https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg",
               communautyName: "Super Car ltd",
-              communautyNumberFollowers: 20
+              communautyNumberFollowers: 20,
             },
             {
               id: 5,
               communautyProfilePicture:
                 "https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg",
               communautyName: "Super Car ltd",
-              communautyNumberFollowers: 20
+              communautyNumberFollowers: 20,
             },
             {
               id: 6,
               communautyProfilePicture:
                 "https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg",
               communautyName: "Super Car ltd",
-              communautyNumberFollowers: 20
-            }
+              communautyNumberFollowers: 20,
+            },
           ],
           followings: [
             {
@@ -981,9 +980,9 @@ const getDefaultState = () => {
               communautyProfilePicture:
                 "https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg",
               communautyName: "Super Car ltd",
-              communautyNumberFollowings: 20
-            }
-          ]
+              communautyNumberFollowings: 20,
+            },
+          ],
         },
         createPost: {
           profile_picture: null,
@@ -992,16 +991,16 @@ const getDefaultState = () => {
           profileNamePost: "TONTON LA FORCE",
           postBusinessUpdate: "",
           movies: [],
-          hyperlinks: []
+          hyperlinks: [],
         },
         userProfileOwner: {
           workedAt: "Current or Last Organization",
           studiedAt: "Last Education",
           homeTown: "Dummy",
           currentCity: "Dummy",
-          numbersOfFollowers: 256
-        }
-      }
+          numbersOfFollowers: 256,
+        },
+      },
     ],
     users: [
       {
@@ -1009,36 +1008,36 @@ const getDefaultState = () => {
         fullname: "Prime",
         username: "Clet",
         email: "primeclet89@gmail.com",
-        password: "1234568"
+        password: "1234568",
       },
       {
         id: "S002",
         fullname: "John",
         username: "Doe",
         email: "jondoe@gmail.com",
-        password: "azertuiop"
+        password: "azertuiop",
       },
       {
         id: "S003",
         fullname: "test",
         username: "1",
         email: "test1@gmail.com",
-        password: "qsdfrtgrd"
+        password: "qsdfrtgrd",
       },
       {
         id: "S004",
         fullname: "holu",
         username: "lol",
         email: "lol@gmail.com",
-        password: "holulol"
+        password: "holulol",
       },
       {
         id: "S005",
         fullname: "gregre",
         username: "io",
         email: "gregre@gmail.com",
-        password: "987654321"
-      }
+        password: "987654321",
+      },
     ],
     services: [
       {
@@ -1048,7 +1047,7 @@ const getDefaultState = () => {
         Localisation: "Douala, PK14",
         Resume:
           "La coiffure est métier où l'on est le plus souvent debout. ... Le coiffeur / la coiffeuse travaille comme salarié dans un salon de coiffure indépendant ou franchisé ou à domicile. C'est également un commerçant qui vend des produits capillaires et des accessoires.",
-        user_id: "S001"
+        user_id: "S001",
       },
       {
         id: "S2021-2",
@@ -1057,7 +1056,7 @@ const getDefaultState = () => {
         Localisation: "Bonanjo, Bastos",
         Resume:
           "C'est également un commerçant qui vend des produits capillaires et des accessoires.",
-        user_id: "S001"
+        user_id: "S001",
       },
       {
         id: "S2021-3",
@@ -1066,7 +1065,7 @@ const getDefaultState = () => {
         Localisation: "Biyem Assi, TKC",
         Resume:
           "comprend toutes sortes de formes de surveillance et de protection des biens et des personnes.",
-        user_id: "S003"
+        user_id: "S003",
       },
       {
         id: "S2021-4",
@@ -1074,8 +1073,8 @@ const getDefaultState = () => {
         Image: "Clet",
         Localisation: "AKWA, DJoungolo",
         Resume: "Batiment et travaux Publics......",
-        user_id: "S004"
-      }
+        user_id: "S004",
+      },
     ],
     service: [
       {
@@ -1083,9 +1082,9 @@ const getDefaultState = () => {
         Name: "",
         Image: "Clet",
         Localisation: "",
-        Resume: ""
-      }
-    ]
+        Resume: "",
+      },
+    ],
   };
 };
 
@@ -1130,27 +1129,27 @@ const actions = {
         workedAt: payload.workedAt,
         studiedAt: payload.studiedAt,
         homeTown: payload.homeTown,
-        city: payload.city
-      }
+        city: payload.city,
+      },
     });
     const url =
       "https://vuejs-backend-c42b8-default-rtdb.firebaseio.com/users.json";
     fetch(url, {
       method: "POST",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({
         workedAt: payload.workedAt,
         studiedAt: payload.studiedAt,
         homeTown: payload.homeTown,
-        city: payload.city
-      })
+        city: payload.city,
+      }),
     })
-      .then(response => {
+      .then((response) => {
         return response.json();
       })
-      .then(response => {
+      .then((response) => {
         console.log(response);
       });
   },
@@ -1168,27 +1167,27 @@ const actions = {
     let profile = null;
     if (file.files) {
       const reader = new FileReader();
-      reader.onload = e => {
+      reader.onload = (e) => {
         profile = e.target.result;
         context.commit("changeProfilePicture", {
           profilePicture: payload.profilePicture,
-          profilePictureLocalStorage: profile
+          profilePictureLocalStorage: profile,
         });
         fetch(url, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            Accept: "application/json"
+            Accept: "application/json",
           },
           body: JSON.stringify({
             target: payload.profilePicture,
-            media: profile
-          })
+            media: profile,
+          }),
         })
-          .then(response => {
+          .then((response) => {
             return response.json();
           })
-          .then(response => {
+          .then((response) => {
             console.log(response);
           });
       };
@@ -1230,7 +1229,7 @@ const actions = {
     //console.log(payload.media);
     context.commit("changeProfilePicture", {
       profilePicture: payload.target,
-      profilePictureLocalStorage: payload.media
+      profilePictureLocalStorage: payload.media,
     });
   },
   changeCoverImageService(context, payload) {
@@ -1238,7 +1237,7 @@ const actions = {
     //console.log(payload.media);
     context.commit("changeCoverImage", {
       coverImage: payload.target,
-      coverImageLocalStorage: payload.media
+      coverImageLocalStorage: payload.media,
     });
   },
   /**
@@ -1255,14 +1254,14 @@ const actions = {
     let cover = null;
     if (file.files) {
       const reader = new FileReader();
-      reader.onload = e => {
+      reader.onload = (e) => {
         //localStorage.setItem("profile_image", e.target.result);
         cover = e.target.result;
         //console.log("test");
         //console.log(profile);
         context.commit("changeCoverImage", {
           coverImage: payload.cover_image,
-          coverImageLocalStorage: cover
+          coverImageLocalStorage: cover,
         });
         //console.log("test");
         //console.log(state.userData[0].profilePicture);
@@ -1270,17 +1269,17 @@ const actions = {
           method: "POST",
           headers: {
             Accept: "application/json",
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
           },
           body: JSON.stringify({
             target: file,
-            media: cover
-          })
+            media: cover,
+          }),
         })
-          .then(response => {
+          .then((response) => {
             return response.json();
           })
-          .then(response => {
+          .then((response) => {
             console.log("change Cover Image Online ");
             console.log(response);
           });
@@ -1293,32 +1292,33 @@ const actions = {
    * @param context
    * @param payload
    */
-   createPost(context, payload) {
+  createPost(context, payload) {
     console.log("Create Post ++++++");
     //console.log(payoad);
     // const url = "https://vuejs-backend-c42b8-default-rtdb.firebaseio.com/users.json";
     //const url = " http://localhost:3000/post";
     //console.log("test");
-     fetch(state.url_base + state.url_create_post, {
+    fetch(state.url_base + state.url_create_post, {
       method: "POST",
       headers: {
         "Content-Type": "multipart/form-data",
-        Authorization: `Bearer ${state.token}`
+        Authorization: `Bearer ${state.token}`,
       },
       body: {
-        media: payload.movies
-      }
+        media: payload.movies,
+      },
     })
-      .then(response => {
+      .then((response) => {
         return response.json();
       })
-      .then(response => {
+      .then((response) => {
         if (!response) {
           throw "Error To Create Post";
         }
         console.log("Create Post Online +++++");
-        console.log(response);      })
-      .catch(error => {
+        console.log(response);
+      })
+      .catch((error) => {
         if (error instanceof TypeError) {
           console.log("create Post erreur Lié au navigateur");
           console.log(error.message);
@@ -1341,16 +1341,16 @@ const actions = {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        accept: "application/json"
+        accept: "application/json",
       },
       body: JSON.stringify({
-        business: state.userData[0].business
-      })
+        business: state.userData[0].business,
+      }),
     })
-      .then(response => {
+      .then((response) => {
         return response.json();
       })
-      .then(response => {
+      .then((response) => {
         if (!response.ok) {
           console.log(
             "Erreur survenue au niveau du serveur et non au niveau du navigateur"
@@ -1362,7 +1362,7 @@ const actions = {
         console.log(response);
         context.commit("retrieveBusinessUserPost", null);
       })
-      .catch(error => {
+      .catch((error) => {
         if (error instanceof TypeError) {
           console.log("Erreur liée au navigateur et non au serveur backend");
           console.log(error.message);
@@ -1385,16 +1385,16 @@ const actions = {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        accept: "application/json"
+        accept: "application/json",
       },
       body: JSON.stringify({
-        community: state.userData[0].community
-      })
+        community: state.userData[0].community,
+      }),
     })
-      .then(response => {
+      .then((response) => {
         return response.json();
       })
-      .then(response => {
+      .then((response) => {
         if (!response.ok) {
           console.log(
             "Erreur survenue au niveau du serveur et non au niveau du navigateur"
@@ -1406,7 +1406,7 @@ const actions = {
         console.log(response);
         context.commit("retrieveBusinessUserPost", null);
       })
-      .catch(error => {
+      .catch((error) => {
         if (error instanceof TypeError) {
           console.log("Erreur liée au navigateur et non au serveur backend");
           console.log(error.message);
@@ -1427,13 +1427,13 @@ const actions = {
       headers: {
         "Content-Type": "application/json",
         accept: "application/json",
-        Authorization: `Bearer ${state.token}`
-      }
+        Authorization: `Bearer ${state.token}`,
+      },
     })
-      .then(response => {
+      .then((response) => {
         return response.json();
       })
-      .then(response => {
+      .then((response) => {
         console.log("recuperation de la liste des posts de l User");
         console.log(context);
         console.log(payload);
@@ -1445,7 +1445,7 @@ const actions = {
         //   posts: response.data.posts
         // });
       })
-      .catch(error => {
+      .catch((error) => {
         if (error instanceof TypeError) {
           console.log(error.message);
         } else {
@@ -1456,12 +1456,12 @@ const actions = {
   async loadProfilePicture(context, payload) {
     let response_ = null;
     await fetch("http://localhost:3000/profile_picture", {
-      method: "GET"
+      method: "GET",
     })
-      .then(response => {
+      .then((response) => {
         return response.json();
       })
-      .then(response => {
+      .then((response) => {
         //console.log("test1");
         //console.log(response);
         if (!response) {
@@ -1472,7 +1472,7 @@ const actions = {
         //console.log("test1");
         response_ = response;
       })
-      .catch(error => {
+      .catch((error) => {
         //console.log("echec");
         if (error instanceof TypeError) {
           console.log(error.message);
@@ -1482,19 +1482,19 @@ const actions = {
       });
     await context.dispatch("changeProfileImageService", {
       target: response_.target,
-      media: response_.media
+      media: response_.media,
     });
     return response_;
   },
   async loadCoverImage(context, payload) {
     let response_ = null;
     await fetch("http://localhost:3000/cover_image", {
-      method: "GET"
+      method: "GET",
     })
-      .then(response => {
+      .then((response) => {
         return response.json();
       })
-      .then(response => {
+      .then((response) => {
         //console.log("test1");
         //console.log(response);
         if (!response) {
@@ -1505,7 +1505,7 @@ const actions = {
         //console.log("test3");
         response_ = response;
       })
-      .catch(error => {
+      .catch((error) => {
         //console.log("echec");
         if (error instanceof TypeError) {
           console.log(error.message);
@@ -1515,19 +1515,19 @@ const actions = {
       });
     await context.dispatch("changeCoverImageService", {
       target: response_.target,
-      media: response_.media
+      media: response_.media,
     });
     return response_;
   },
   async loadPostsList(context, payload) {
     let response_ = null;
     await fetch("http://localhost:3001/data", {
-      method: "GET"
+      method: "GET",
     })
-      .then(response => {
+      .then((response) => {
         return response.json();
       })
-      .then(response => {
+      .then((response) => {
         console.log("test1");
         console.log(response);
         if (!response) {
@@ -1538,10 +1538,10 @@ const actions = {
         console.log("test3");
         response_ = response;
         context.commit("retrievePostsListUser", {
-          posts: response.posts
+          posts: response.posts,
         });
       })
-      .catch(error => {
+      .catch((error) => {
         //console.log("echec");
         if (error instanceof TypeError) {
           console.log(error.message);
@@ -1550,7 +1550,7 @@ const actions = {
         }
       });
     return response_;
-  }
+  },
 };
 
 const mutations = {
@@ -1610,7 +1610,7 @@ const mutations = {
       fullname: payload.fullname,
       username: payload.username,
       email: payload.email,
-      password: payload.password
+      password: payload.password,
     });
     console.log("reussi");
   },
@@ -1621,7 +1621,7 @@ const mutations = {
       Image: "Clet",
       Localisation: payload.location,
       Resume: payload.resume,
-      user_id: payload.user_id
+      user_id: payload.user_id,
     });
     console.log("reussi");
   },
@@ -1674,6 +1674,4 @@ const mutations = {
   retrievePostsListUser(state, payload) {
     state.userData[0].posts = payload.posts;
   },
-}
-
-
+};

@@ -1,39 +1,21 @@
 <template>
   <b-container>
     <div class="s-card">
-
-
-    
-
-
-
-
-     
-
-
-
-
-
-
-
-
-
-
-
-
-
- <div class="people-style border shadow">
+      <div
+        v-for="member in allMemberRequest"
+        :key="member.id"
+        class="people-style border shadow"
+      >
         <b-row class="mb-1">
           <b-col md="3" cols="4" sm="3" lg="3" class="my-auto">
             <b-avatar
               class="p-avater"
               variant="primary"
-              src="https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg"
-             
+              :src="member.image"
             ></b-avatar>
           </b-col>
 
-          <b-col md="8" cols="8" lg="8" sm="8" >
+          <b-col md="8" cols="8" lg="8" sm="8">
             <div>
               <b-row class="shift">
                 <b-col md="12" lg="12" xl="6" sm="6">
@@ -47,9 +29,9 @@
                         xl="12"
                         class="mt-lg-2"
                       >
-                       <div class="mt-2 mt-lg-0 mt-xl-0 username">
-                          <b> howty Itz blec </b>
-                       </div>
+                        <div class="mt-2 mt-lg-0 mt-xl-0 username">
+                          <b>{{ member.name }}</b>
+                        </div>
                       </b-col>
 
                       <b-col
@@ -60,7 +42,7 @@
                         xl="12"
                         class="mt-3 mt-lg-2 mt-xl-0"
                       >
-                        <h6 class="follower">5K Community</h6>
+                        <h6 class="follower">{{ member.community }}</h6>
                       </b-col>
                     </b-row>
                   </div>
@@ -83,7 +65,12 @@
                           size="sm"
                           class="b-background flexx pobtn shadow"
                         >
-                           <span class="btn-text text-center">Approve</span> 
+                          <span
+                            class="btn-text text-center"
+                            @click="approve(member.id)"
+                            :loading="load"
+                            >Approve</span
+                          >
                         </b-button>
                       </b-col>
 
@@ -101,7 +88,12 @@
                           class="b-background flexx pobtn shadow   text-center "
                           variant="primary"
                         >
-                                      <span class="btn-com  text-center">Decline</span>
+                          <span
+                            class="btn-com  text-center"
+                            @click="decline(member.id)"
+                            :loading="load"
+                            >Decline</span
+                          >
                         </b-button>
                       </b-col>
                     </b-row>
@@ -112,647 +104,115 @@
           </b-col>
         </b-row>
       </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- <div class="people-style border shadow">
-        <b-row class="mb-1">
-          <b-col md="3" cols="4" sm="3" lg="3" class="my-auto">
-            <b-avatar
-              class="p-avater"
-              variant="primary"
-              src="https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg"
-             
-            ></b-avatar>
-          </b-col>
-
-          <b-col md="8" cols="8" lg="8" sm="8" >
-            <div>
-              <b-row class="shift">
-                <b-col md="12" lg="12" xl="6" sm="6">
-                  <div class="e-name">
-                    <b-row>
-                      <b-col
-                        md="6"
-                        lg="6"
-                        cols="6"
-                        sm="12"
-                        xl="12"
-                        class="mt-lg-2"
-                      >
-                       <div class="mt-2 mt-lg-0 mt-xl-0 username">
-                          <b> howty Itz blec </b>
-                       </div>
-                      </b-col>
-
-                      <b-col
-                        md="6"
-                        lg="6"
-                        cols="6"
-                        sm="12"
-                        xl="12"
-                        class="mt-3 mt-lg-2 mt-xl-0"
-                      >
-                        <h6 class="follower">5K Community</h6>
-                      </b-col>
-                    </b-row>
-                  </div>
-                </b-col>
-
-                <b-col lg="12" xl="6" cols="12" sm="6" md="12">
-                  <div>
-                    <b-row class="mt-lg-0">
-                      <b-col
-                        md="6"
-                        lg="6"
-                        cols="6"
-                        sm="12"
-                        xl="12"
-                        class="mt-2 mt-lg-2 mt-xl-2 btn-2 center"
-                      >
-                        <b-button
-                          block
-                          variant="primary"
-                          size="sm"
-                          class="b-background flexx pobtn shadow"
-                        >
-                           <span class="btn-text">Approve</span> 
-                        </b-button>
-                      </b-col>
-
-                      <b-col
-                        md="6"
-                        lg="6"
-                        cols="6"
-                        sm="12"
-                        xl="12"
-                        class="mt-2 mt-lg-2 mt-xl-2 btn-2 center"
-                      >
-                        <b-button
-                          block
-                          size="sm"
-                          class="b-background flexx pobtn shadow"
-                          variant="primary"
-                        >
-                                      <span class="btn-com">Decline</span>
-                        </b-button>
-                      </b-col>
-                    </b-row>
-                  </div>
-                </b-col>
-              </b-row>
-            </div>
-          </b-col>
-        </b-row>
-      </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- <div class="people-style border shadow">
-        <b-row class="mb-1">
-          <b-col md="3" cols="4" sm="3" lg="3" class="my-auto">
-            <b-avatar
-              class="p-avater"
-              variant="primary"
-              src="https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg"
-             
-            ></b-avatar>
-          </b-col>
-
-          <b-col md="8" cols="8" lg="8" sm="8" >
-            <div>
-              <b-row class="shift">
-                <b-col md="12" lg="12" xl="6" sm="6">
-                  <div class="e-name">
-                    <b-row>
-                      <b-col
-                        md="6"
-                        lg="6"
-                        cols="6"
-                        sm="12"
-                        xl="12"
-                        class="mt-lg-2"
-                      >
-                       <div class="mt-2 mt-lg-0 mt-xl-0 username">
-                          <b> howty Itz blec </b>
-                       </div>
-                      </b-col>
-
-                      <b-col
-                        md="6"
-                        lg="6"
-                        cols="6"
-                        sm="12"
-                        xl="12"
-                        class="mt-3 mt-lg-2 mt-xl-0"
-                      >
-                        <h6 class="follower">5K Community</h6>
-                      </b-col>
-                    </b-row>
-                  </div>
-                </b-col>
-
-                <b-col lg="12" xl="6" cols="12" sm="6" md="12">
-                  <div>
-                    <b-row class="mt-lg-0">
-                      <b-col
-                        md="6"
-                        lg="6"
-                        cols="6"
-                        sm="12"
-                        xl="12"
-                        class="mt-2 mt-lg-2 mt-xl-2 btn-2 center"
-                      >
-                        <b-button
-                          block
-                          variant="primary"
-                          size="sm"
-                          class="b-background flexx pobtn shadow text-center t-center"
-                        >
-                           <span class="">Approve</span> 
-                        </b-button>
-                      </b-col>
-
-                      <b-col
-                        md="6"
-                        lg="6"
-                        cols="6"
-                        sm="12"
-                        xl="12"
-                        class="mt-2 mt-lg-2 mt-xl-2 btn-2 center"
-                      >
-                        <b-button
-                          block
-                          size="sm"
-                          class="b-background flexx pobtn shadow t-center  text-center"
-                          variant="primary"
-                        >
-                                      <span class="btn-com text-center t-center">Decline</span>
-                        </b-button>
-                      </b-col>
-                    </b-row>
-                  </div>
-                </b-col>
-              </b-row>
-            </div>
-          </b-col>
-        </b-row>
-      </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- <div class="people-style border shadow">
-        <b-row class="mb-1">
-          <b-col md="3" cols="4" sm="3" lg="3" class="my-auto">
-            <b-avatar
-              class="p-avater"
-              variant="primary"
-              src="https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg"
-             
-            ></b-avatar>
-          </b-col>
-
-          <b-col md="8" cols="8" lg="8" sm="8" >
-            <div>
-              <b-row class="shift">
-                <b-col md="12" lg="12" xl="6" sm="6">
-                  <div class="e-name">
-                    <b-row>
-                      <b-col
-                        md="6"
-                        lg="6"
-                        cols="6"
-                        sm="12"
-                        xl="12"
-                        class="mt-lg-2"
-                      >
-                       <div class="mt-2 mt-lg-0 mt-xl-0 username">
-                          <b> howty Itz blec </b>
-                       </div>
-                      </b-col>
-
-                      <b-col
-                        md="6"
-                        lg="6"
-                        cols="6"
-                        sm="12"
-                        xl="12"
-                        class="mt-3 mt-lg-2 mt-xl-0"
-                      >
-                        <h6 class="follower">5K Community</h6>
-                      </b-col>
-                    </b-row>
-                  </div>
-                </b-col>
-
-                <b-col lg="12" xl="6" cols="12" sm="6" md="12">
-                  <div>
-                    <b-row class="mt-lg-0">
-                      <b-col
-                        md="6"
-                        lg="6"
-                        cols="6"
-                        sm="12"
-                        xl="12"
-                        class="mt-2 mt-lg-2 mt-xl-2 btn-2 center"
-                      >
-                        <b-button
-                          block
-                          variant="primary"
-                          size="sm"
-                          class="b-background flexx pobtn shadow"
-                        >
-                           <span class="btn-text">Approve</span> 
-                        </b-button>
-                      </b-col>
-
-                      <b-col
-                        md="6"
-                        lg="6"
-                        cols="6"
-                        sm="12"
-                        xl="12"
-                        class="mt-2 mt-lg-2 mt-xl-2 btn-2 center"
-                      >
-                        <b-button
-                          block
-                          size="sm"
-                          class="b-background flexx pobtn shadow"
-                          variant="primary"
-                        >
-                                      <span class="btn-com">Decline</span>
-                        </b-button>
-                      </b-col>
-                    </b-row>
-                  </div>
-                </b-col>
-              </b-row>
-            </div>
-          </b-col>
-        </b-row>
-      </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
- <div class="people-style border shadow">
-        <b-row class="mb-1">
-          <b-col md="3" cols="4" sm="3" lg="3" class="my-auto">
-            <b-avatar
-              class="p-avater"
-              variant="primary"
-              src="https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg"
-             
-            ></b-avatar>
-          </b-col>
-
-          <b-col md="8" cols="8" lg="8" sm="8" >
-            <div>
-              <b-row class="shift">
-                <b-col md="12" lg="12" xl="6" sm="6">
-                  <div class="e-name">
-                    <b-row>
-                      <b-col
-                        md="6"
-                        lg="6"
-                        cols="6"
-                        sm="12"
-                        xl="12"
-                        class="mt-lg-2"
-                      >
-                       <div class="mt-2 mt-lg-0 mt-xl-0 username">
-                          <b> howty Itz blec </b>
-                       </div>
-                      </b-col>
-
-                      <b-col
-                        md="6"
-                        lg="6"
-                        cols="6"
-                        sm="12"
-                        xl="12"
-                        class="mt-3 mt-lg-2 mt-xl-0"
-                      >
-                        <h6 class="follower">5K Community</h6>
-                      </b-col>
-                    </b-row>
-                  </div>
-                </b-col>
-
-                <b-col lg="12" xl="6" cols="12" sm="6" md="12">
-                  <div>
-                    <b-row class="mt-lg-0">
-                      <b-col
-                        md="6"
-                        lg="6"
-                        cols="6"
-                        sm="12"
-                        xl="12"
-                        class="mt-2 mt-lg-2 mt-xl-2 btn-2 center"
-                      >
-                        <b-button
-                          block
-                          variant="primary"
-                          size="sm"
-                          class="b-background flexx pobtn shadow"
-                        >
-                           <span class="btn-text">Approve</span> 
-                        </b-button>
-                      </b-col>
-
-                      <b-col
-                        md="6"
-                        lg="6"
-                        cols="6"
-                        sm="12"
-                        xl="12"
-                        class="mt-2 mt-lg-2 mt-xl-2 btn-2 center"
-                      >
-                        <b-button
-                          block
-                          size="sm"
-                          class="b-background flexx pobtn shadow"
-                          variant="primary"
-                        >
-                                      <span class="btn-com">Decline</span>
-                        </b-button>
-                      </b-col>
-                    </b-row>
-                  </div>
-                </b-col>
-              </b-row>
-            </div>
-          </b-col>
-        </b-row>
-      </div>
-
-
-
-
-
-
-
-
-
-
-
-
- <div class="people-style border shadow">
-        <b-row class="mb-1">
-          <b-col md="3" cols="4" sm="3" lg="3" class="my-auto">
-            <b-avatar
-              class="p-avater"
-              variant="primary"
-              src="https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg"
-             
-            ></b-avatar>
-          </b-col>
-
-          <b-col md="8" cols="8" lg="8" sm="8" >
-            <div>
-              <b-row class="shift">
-                <b-col md="12" lg="12" xl="6" sm="6">
-                  <div class="e-name">
-                    <b-row>
-                      <b-col
-                        md="6"
-                        lg="6"
-                        cols="6"
-                        sm="12"
-                        xl="12"
-                        class="mt-lg-2"
-                      >
-                       <div class="mt-2 mt-lg-0 mt-xl-0 username">
-                          <b> howty Itz blec </b>
-                       </div>
-                      </b-col>
-
-                      <b-col
-                        md="6"
-                        lg="6"
-                        cols="6"
-                        sm="12"
-                        xl="12"
-                        class="mt-3 mt-lg-2 mt-xl-0"
-                      >
-                        <h6 class="follower">5K Community</h6>
-                      </b-col>
-                    </b-row>
-                  </div>
-                </b-col>
-
-                <b-col lg="12" xl="6" cols="12" sm="6" md="12">
-                  <div>
-                    <b-row class="mt-lg-0">
-                      <b-col
-                        md="6"
-                        lg="6"
-                        cols="6"
-                        sm="12"
-                        xl="12"
-                        class="mt-2 mt-lg-2 mt-xl-2 btn-2 center"
-                      >
-                        <b-button
-                          block
-                          variant="primary"
-                          size="sm"
-                          class="b-background flexx pobtn shadow"
-                        >
-                           <span class="btn-text">Approve</span> 
-                        </b-button>
-                      </b-col>
-
-                      <b-col
-                        md="6"
-                        lg="6"
-                        cols="6"
-                        sm="12"
-                        xl="12"
-                        class="mt-2 mt-lg-2 mt-xl-2 btn-2 center"
-                      >
-                        <b-button
-                          block
-                          size="sm"
-                          class="b-background flexx pobtn shadow"
-                          variant="primary"
-                        >
-                                      <span class="btn-com">Decline</span>
-                        </b-button>
-                      </b-col>
-                    </b-row>
-                  </div>
-                </b-col>
-              </b-row>
-            </div>
-          </b-col>
-        </b-row>
-      </div>
-
-
-
-
-
-
-
-
-
+      <b-row>
+        <b-col>
+          <p class="text-center" v-if="allMemberRequest < 1">
+            No Member Request To Show
+          </p>
+        </b-col>
+      </b-row>
     </div>
   </b-container>
 </template>
 
 <script>
-export default {};
+import { mapActions, mapGetters } from "vuex";
+export default {
+  data: () => ({
+    load: null,
+  }),
+  computed: {
+    ...mapGetters({
+      allMemberRequest: "networkSetting/allMemberRequest",
+    }),
+  },
+  beforeMount() {
+    this.getMemberRequest();
+  },
+  methods: {
+    ...mapActions({
+      getMemberRequest: "networkSetting/getMemberRequest",
+      approveUser: "networkSetting/approveUser",
+      declineUser: "networkSetting/declineUser",
+    }),
+
+    approve(id) {
+      this.load = true;
+      this.approveUser(id)
+        .then(() => {
+          this.load = false;
+        })
+        .catch((err) => {
+          this.load = false;
+          console.log(err);
+        });
+    },
+
+    decline(id) {
+      this.load = true;
+      this.declineUser(id)
+        .then(() => {
+          this.load = false;
+        })
+        .catch((err) => {
+          this.load = false;
+          console.log(err);
+        });
+    },
+  },
+};
 </script>
 
 <style scoped>
-
-
 @media only screen and (min-width: 768px) {
-.btn-text{
+  .btn-text {
+    margin-left: 8px;
+  }
 
-   margin-left: 8px;
+  .btn-com {
+    margin-left: 4px;
+  }
+  .btn-icon {
+    margin-top: 3px;
+  }
 }
-
-.btn-com{
-  margin-left:4px;
-}
-.btn-icon{
-  margin-top:3px;
-}
-
-
-}
-
 
 @media only screen and (max-width: 768px) {
+  .btn-icon {
+    margin-top: 3px;
+  }
 
-    
+  .btn-text {
+    margin-left: 5px;
+  }
 
-    .btn-icon{
-  margin-top:3px;
+  .btn-com {
+    margin-left: 3px;
+  }
 }
-
-
-.btn-text{
-
-   margin-left: 5px;
-}
-
-
-.btn-com{
-  margin-left:3px;
-}
-
-
-}
-
-
-
-
-
 
 @media only screen and (max-width: 768px) {
-     
-
-     .btnpngs{
-      width: 16px;
+  .btnpngs {
+    width: 16px;
     margin-right: 5px;
+  }
+
+  .s-card {
+    padding-left: 5px;
+    padding-right: 5px;
+  }
 }
-
-.s-card{
-
-  padding-left: 5px;
-  padding-right:5px;
-
-}
-
-}
-
-
 
 @media only screen and (min-width: 768px) {
-
-      .btnpngs{
-      width: 20px;
+  .btnpngs {
+    width: 20px;
     margin-right: 5px;
+  }
 }
 
-
-}
-
-.btn{
+.btn {
   border-radius: 5px;
 }
-
-
 
 .flexx {
   display: inline-block;
@@ -857,13 +317,11 @@ f-right {
 }
 
 @media only screen and (min-width: 1200px) {
-  
-
-  .btn{
+  .btn {
     width: 123px;
     height: 38px;
-    font-size:14px;
-}
+    font-size: 14px;
+  }
 
   .center {
     text-align: right;
@@ -875,8 +333,6 @@ f-right {
     margin-right: -15px;
     margin-top: 3px;
   }
-
-  
 
   .btn-2 {
     margin-left: 0px;
@@ -903,8 +359,6 @@ f-right {
     background-clip: border-box;
     border: 1px solid rgba(0, 0, 0, 0.125);
     margin-bottom: 10px;
-
-   
   }
 
   h6 {
@@ -914,7 +368,6 @@ f-right {
   h7 {
     font-size: 10px;
   }
-
 
   .btn {
     display: flex;
@@ -957,7 +410,6 @@ f-right {
     background-clip: border-box;
     border: 1px solid rgba(0, 0, 0, 0.125);
     margin-bottom: 10px;
-
   }
 
   h6 {
@@ -968,154 +420,124 @@ f-right {
     font-size: 10px;
   }
 
-  
   .btn {
     display: flex;
     font-size: 10px;
   }
 }
 
+@media only screen and (min-width: 764px) {
+  .p-buttons {
+    margin-right: 50px;
+    margin-left: 50px;
+    margin-bottom: 5px;
+    margin-top: 7px;
+    padding-right: 5px;
+  }
 
- @media only screen and  (min-width: 764px) {
-.p-buttons {
-  margin-right: 50px;
-  margin-left: 50px;
-  margin-bottom: 5px;
-  margin-top: 7px;
-  padding-right: 5px;
-}
-
-.p-avater {
-    
+  .p-avater {
     width: 95px;
     height: 95px;
     margin-bottom: -4px;
     margin-left: -5px;
-}
+  }
 
-
-
-
-
-
-
-  .btn{
+  .btn {
     width: 123px;
     height: 38px;
-    font-size:14px;
-}
+    font-size: 14px;
+  }
 
+  .center {
+    text-align: right;
+  }
 
-.center{
-  text-align: right;
-}
-
-
-.username{
-  font-size: 20px;
-  text-overflow: ellipsis;
+  .username {
+    font-size: 20px;
+    text-overflow: ellipsis;
     overflow: hidden;
     width: 100%;
     height: 1.2em;
     white-space: nowrap;
-}
-
-.follower{
-    font-size: 10px;
-    margin-top: 5px;
-}
-
- }
-
-
-
-
-@media only screen and (min-width: 764px) and (max-width: 991.18px) {
-  
-  .center{
-    text-align: left;
   }
 
+  .follower {
+    font-size: 10px;
+    margin-top: 5px;
+  }
+}
+
+@media only screen and (min-width: 764px) and (max-width: 991.18px) {
+  .center {
+    text-align: left;
+  }
 }
 
 @media only screen and (max-width: 762px) {
-
-.username{
-  font-size: 16px;
-  text-overflow: ellipsis;
+  .username {
+    font-size: 16px;
+    text-overflow: ellipsis;
     overflow: hidden;
     width: 100%;
     height: 1.2em;
     white-space: nowrap;
-}
+  }
 
-.btn{width: 85px;
+  .btn {
+    width: 85px;
     height: 28px;
     font-size: 10px;
-    }
+  }
 
-
-
-    .p-avater {
+  .p-avater {
     width: 75px;
     height: 75px;
     margin-bottom: -8px;
     margin-left: -5px;
     margin-top: -4px;
-}
+  }
 
-.shift{
-  margin-left: -40px;
-}
+  .shift {
+    margin-left: -40px;
+  }
 
-.follower {
+  .follower {
     font-size: 10px;
     text-align: left;
-    
-}
+  }
 
-.center{
-  text-align: left;
-}
+  .center {
+    text-align: left;
+  }
 
-.a-text {
-  margin-top: 2px;
-}
-
+  .a-text {
+    margin-top: 2px;
+  }
 
   .pobtn {
     font-size: 10px;
-   
   }
-  .e-name{
+  .e-name {
     text-align: left;
   }
 }
 
 @media only screen and (max-width: 521px) {
-    .e-name{
+  .e-name {
     text-align: left;
-    margin-left:-20px
+    margin-left: -20px;
   }
-    
 }
 
-
-
-
-.follower{
+.follower {
   display: none;
 }
 
- .btn{
+.btn {
+  text-align: center;
+}
 
-   text-align: center;
- }
-
- .pobtn{
-   text-align: center;
- }
+.pobtn {
+  text-align: center;
+}
 </style>
-
-
-

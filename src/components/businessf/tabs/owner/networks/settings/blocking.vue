@@ -10,56 +10,57 @@
 
     <b-container class="bv-example-row">
       <b-li-group>
-        <b-li class="d-flex align-items-center m-list">
-          <b-avatar class="mr-3" size="4em"></b-avatar>
-          <span class="mr-auto">J. Circlehead</span>
-          <span class=""><b-link href="#">Unblock</b-link></span>
+        <b-li
+          v-for="blocked in getBlocked"
+          :key="blocked.id"
+          class="d-flex align-items-center m-list"
+        >
+          <b-avatar class="mr-3" size="4em">
+            <img :src="blocked.image" alt="" />
+          </b-avatar>
+          <span class="mr-auto">blocked.name</span>
+          <span class=""
+            ><b-link @click="unblock(getNetworks.id, blocked.id)"
+              >Unblock</b-link
+            ></span
+          >
+          <hr width="100%" />
         </b-li>
-       <hr width="100%" />
-
-        <b-li class="d-flex align-items-center">
-          <b-avatar
-            variant="primary"
-            text="BV"
-            class="mr-3"
-            size="4em"
-          ></b-avatar>
-          <span class="mr-auto">itz blec blec</span>
-          <span class=""><b-link href="#">Unblock</b-link></span>
-        </b-li>
-
-         <hr width="100%" />
-
-        <b-li class="d-flex align-items-center m-list">
-          <b-avatar class="mr-3" size="4em"></b-avatar>
-          <span class="mr-auto">J. Circlehead</span>
-          <span class=""><b-link href="#">Unblock</b-link></span>
-        </b-li>
-        <hr width="100%" />
-
-
-        <b-li class="d-flex align-items-center">
-          <b-avatar
-            variant="primary"
-            text="BV"
-            class="mr-3"
-            size="4em"
-          ></b-avatar>
-          <span class="mr-auto">itz blec blec</span>
-          <span class=""><b-link href="#">Unblock</b-link></span> 
-         
-        </b-li>
-        <hr width="100%" />
-
-
+        <v-row>
+          <v-col>
+            <p class="text-center" v-if="getBlocked < 1">No Blocked Users</p>
+          </v-col>
+        </v-row>
       </b-li-group>
     </b-container>
   </b-container>
 </template>
 
 <script>
+import { mapGetters, mapActions } from "vuex";
 export default {
-  name: "blocking"
+  name: "blocking",
+  computed: {
+    ...mapGetters({
+      getBlocked: "networkSetting/getBlocked",
+      getNetworks: "networkSetting/getNetworks",
+    }),
+  },
+  methods: {
+    ...mapActions({
+      getBlockedUsers: "networkSetting/getBlockedUsers",
+      unblockUser: "networkSetting/unblockUser",
+      getNetworks: "networkSetting/getNetworks",
+    }),
+    unblock(networkId, userId) {
+      this.unblockUser(networkId, userId);
+    },
+  },
+  beforeMount() {
+    this.getBlockedUsers();
+    this.getNetworks();
+    return this.getNetworks.id;
+  },
 };
 </script>
 

@@ -35,13 +35,12 @@
                       </template>
 
                       <div class="s-comcard">
-                        <b-row>
+                       
                           <div>
-                            <People
-                              :people="business.people[0].user_followers"
+                            <People type="Follower"
                             />
                           </div>
-                        </b-row>
+                      
                       </div>
                     </b-tab>
 
@@ -54,13 +53,13 @@
                       </template>
 
                       <div class="s-comcard">
-                        <b-row>
+                       
                           <div>
                             <People
-                              :people="business.people[0].user_following"
+                              type="Following"
                             />
                           </div>
-                        </b-row>
+                      
                       </div>
                     </b-tab>
                   </b-tabs>
@@ -71,9 +70,9 @@
 
           <b-tab>
             <template slot="title">
-              Businesses
+              Businesses 
               <span class="spa-color">
-                {{ count(business.people[0].total_business) }}
+                {{ count(business.business[0].total_business) }}
               </span>
             </template>
 
@@ -83,18 +82,18 @@
                   <template slot="title">
                     Followers
                     <span class="spa-color">
-                      {{ count(business.people[0].total_business_follower) }}
+                      {{ count(business.business[0].total_business_follower) }}
                     </span>
                   </template>
 
                   <div class="s-comcard">
-                    <b-row>
+                    
                       <div>
                         <Business
-                          :business="business.business[0].business_followers"
+                         type="Follower"
                         />
                       </div>
-                    </b-row>
+                   
                   </div>
                 </b-tab>
 
@@ -102,18 +101,18 @@
                   <template slot="title">
                     Following
                     <span class="spa-color">
-                      {{ count(business.people[0].total_business_following) }}
+                      {{ count(business.business[0].total_business_following) }}
                     </span>
                   </template>
 
                   <div class="s-comcard">
-                    <b-row>
+                  
                       <div>
                         <Business
-                          :business="business.business[0].business_following"
+                         type="Following"
                         />
                       </div>
-                    </b-row>
+                    
                   </div>
                 </b-tab>
               </b-tabs>
@@ -125,7 +124,7 @@
             <template slot="title">
               Network
               <span class="spa-color">
-                {{ count(business.people[0].total_business) }}
+                {{ count(business.network[0].total_network) }}
               </span>
             </template>
 
@@ -135,18 +134,18 @@
                   <template slot="title">
                     Followers
                     <span class="spa-color">
-                      {{ count(business.people[0].total_business_follower) }}
+                      {{count( business.network[0].total_network_follower) }}
                     </span>
                   </template>
 
                   <div class="s-comcard">
-                    <b-row>
+                   
                       <div>
                         <Network
-                          :business="business.business[0].business_followers"
+                           type="Follower"
                         />
                       </div>
-                    </b-row>
+                    
                   </div>
                 </b-tab>
 
@@ -154,18 +153,18 @@
                   <template slot="title">
                     Following
                     <span class="spa-color">
-                      {{ count(business.people[0].total_business_following) }}
+                      {{ count(business.network[0].total_network_following) }}
                     </span>
                   </template>
 
                   <div class="s-comcard">
-                    <b-row>
+                  
                       <div class="p-2">
                         <Network
-                          :business="business.business[0].business_following"
+                          type="Following"
                         />
                       </div>
-                    </b-row>
+                    
                   </div>
                 </b-tab>
               </b-tabs>
@@ -191,6 +190,89 @@ export default {
     People,
     Business,
     Network,
+  },
+
+  mounted(){
+    
+      this.$store
+      .dispatch("profile/Tcommunity", null)
+      .then((response) => {
+       
+      })
+      .catch((error) => {
+        console.log({error:error});
+      });
+
+
+
+
+      
+
+ 
+      this.$store
+      .dispatch("profile/UcommunityFollower", null)
+      .then((response) => {
+       
+      })
+      .catch((error) => {
+        console.log({error:error});
+      });
+
+
+
+      
+      this.$store
+      .dispatch("profile/UcommunityFollowing", null)
+      .then((response) => {
+       
+      })
+      .catch((error) => {
+        console.log({error:error});
+      });
+
+     
+   
+      this.$store
+      .dispatch("profile/BcommunityFollower", null)
+      .then((response) => {
+       
+      })
+      .catch((error) => {
+        console.log({error:error});
+      });
+
+     
+      this.$store
+      .dispatch("profile/BcommunityFollowing", null)
+      .then((response) => {
+       
+      })
+      .catch((error) => {
+        console.log({error:error});
+      });
+
+
+
+      
+      this.$store
+      .dispatch("profile/NcommunityFollower", null)
+      .then((response) => {
+       
+      })
+      .catch((error) => {
+        console.log({error:error});
+      });
+
+      
+      this.$store
+      .dispatch("profile/NcommunityFollowing", null)
+      .then((response) => {
+       
+      })
+      .catch((error) => {
+        console.log({error:error});
+      });
+
   },
   computed: {
     business() {

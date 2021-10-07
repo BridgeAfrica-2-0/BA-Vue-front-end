@@ -230,7 +230,7 @@ export default {
 
 infiniteHandler($state) {
 
-        axios.get('business/show/post/'+this.url+"/"+this.page)
+        axios.get('profile/dashboard/post/business/'+this.businessId+"/"+this.page)
       .then(({ data }) => {
       // commit('ownerPost', data.data);
       //  console.log(data);
@@ -296,6 +296,12 @@ infiniteHandler($state) {
       return  this.$store.state.businessOwner.businessInfo.logo_path;  
 
     
+    },
+
+    businessId(){
+
+    return  this.$store.state.dashboard.dBusinessId; 
+
     },
 
 

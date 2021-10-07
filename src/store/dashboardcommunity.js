@@ -5,7 +5,7 @@ export default {
 
   state: {
     profile_community: [],
-    community: []
+    community: [],
   },
 
   actions: {
@@ -21,7 +21,7 @@ export default {
         commit("setcom", data.data);
         console.log(data);
       });
-    }
+    },
   },
 
   mutations: {
@@ -30,7 +30,7 @@ export default {
     },
     setcom(state, details) {
       state.community = details;
-    }
+    },
   },
 
   getters: {
@@ -39,6 +39,6 @@ export default {
     },
     getcom(state) {
       return state.community;
-    }
-  }
+    },
+  },
 };

@@ -2,7 +2,8 @@
   <div>
     <div class="s-ccard">
       <b-row>
-        <b-col lg="6" sm="12" class="p-2" v-for="item in people" :key="item.id">
+ 
+        <b-col lg="6" sm="12" class="p-2" v-for="item in users" :key="item.id">
           <div class="people-style border shadow">
             <b-row class="mb-1">
               <b-col md="3" cols="4" sm="4" class="my-auto">
@@ -95,13 +96,44 @@
           </div>
         </b-col>
       </b-row>
+
+       <infinite-loading @infinite="infiniteHandler"></infinite-loading>
     </div>
   </div>
 </template>
 
 <script>
+import axios from "axios";  
 export default {
-  props: ["people"],
+  props: ['type'],
+
+  data() {
+    return {
+      page: 1,
+      options: {
+        rewind: true,
+        autoplay: true,
+        perPage: 1,
+        pagination: false,
+
+        type: "loop",
+        perMove: 1,
+      },
+    };
+  },
+
+
+
+    computed: {
+    users() {
+      if (this.type == "Follower") {
+        return this.$store.state.profile.UcommunityFollower.user_followers;
+      } else {
+        return this.$store.state.profile.UcommunityFollowing.user_following;
+      }
+    },
+  },
+
   methods: {
     count(number) {
       if (number >= 1000000) {
@@ -110,11 +142,68 @@ export default {
       if (number >= 1000) {
         return number / 1000 + "K";
       } else return number;
-    }
+    },
+
+
+    
+    infiniteHandler($state) {
+      console.log("hahahahahahahah");
+      let url = null;
+
+      if (this.type == "Follower") {
+      url = "profile/user/follower/";
+
+
+
+        
+      } else {
+        url = "profile/user/following/";
+      }
+      axios
+        .get(url + this.page)
+        .then(({ data }) => {
+
+           
+            if (this.type == "Follower") {
+             
+
+               if (data.data.user_followers.length) {
+           this.page += 1;
+           
+              this.users.push(...data.data.user_followers);
+            $state.loaded();
+          } else {
+            $state.complete();
+          }
+
+            } else {
+         
+
+             if (data.data.user_following.length) {
+           this.page += 1;
+           
+              this.users.push(...data.data.user_following);
+            $state.loaded();
+          } else {
+            $state.complete();
+          }
+
+
+            }
+
+            
+          console.log(data);
+         
+        })
+        .catch((err) => {
+          console.log({ err: err });
+        });
+    },
+
   }
 };
 </script>
-
+    
 <style scoped>
 @media only screen and (min-width: 768px) {
   .btn-text {
@@ -150,8 +239,8 @@ export default {
   }
 
   .s-ccard {
-    padding-left: 20px;
-    padding-right: 20px;
+    padding-left: 5px;
+    padding-right: 5px;
   }
 }
 

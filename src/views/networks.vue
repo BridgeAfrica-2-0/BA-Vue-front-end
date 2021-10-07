@@ -81,7 +81,7 @@ export default {
     Inbox,
     navbar,
     Footer,
-    Parent
+    Parent,
   },
 
   data() {
@@ -99,20 +99,20 @@ export default {
 
         { label: "Keyword Alert", icon: "" },
 
-        { label: "Settings", icon: "" }
+        { label: "Settings", icon: "" },
       ],
 
       options: {
-        activeColor: "#32a400"
-      }
+        activeColor: "#32a400",
+      },
     };
   },
 
   methods: {
     handleChange(item, index) {
       console.log(item, index);
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -122,42 +122,6 @@ export default {
     margin-top: 20px;
   }
 
-  /**
-  
-.lynetowrk .ly-tab-active-bar {
-    position: absolute;
-    bottom: 3px;
-    left: 0;
-    width: 30px;
-    height: 3px;
-    border-radius: 4px;
-    background-color: yellow;
-    
-    display: none;
-}
-
-
-
-
-
-.ly-tab-item {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-decoration: none;
-    text-align: center;
-    border-style: solid;
-    border-width: 1px;
-   
-    border-radius: 10px;
-    padding-top: 5px;
-    padding-bottom: 5px;
-
-    width: 170px;
-   
-}
-*/
 }
 
 .m-top {
@@ -180,9 +144,7 @@ export default {
   border: 1px solid rgba(0, 0, 0, 0.125);
 }
 
-.a-left {
-  align-content: left;
-}
+
 
 .nav-text {
   cursor: pointer;

@@ -74,7 +74,7 @@
 
 <script>
 export default {
-  name: "following"
+  name: "following",
 };
 </script>
 

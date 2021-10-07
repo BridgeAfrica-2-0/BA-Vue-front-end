@@ -8,6 +8,7 @@ export default {
         regions: [],
         divisions: [],
         councils: [],
+        neighbourhoods: [],
 
         prodLoader: false,
         success: false,
@@ -29,6 +30,9 @@ export default {
         },
         getCouncils(state) {
             return state.councils;
+        },
+        getNeighbourhoods(state) {
+            return state.neighbourhoods;
         },
 
 
@@ -57,6 +61,9 @@ export default {
         },
         setCouncils(state, data) {
             state.councils = data;
+        },
+        setNeighbourhoods(state, data) {
+            state.neighbourhoods = data;
         },
 
         setLoader(state, payload) {
@@ -108,6 +115,17 @@ export default {
                     console.error(err);
                 });
         },
+        NEIGHBOURHOODS({ commit }, data) {
+            return axios.post("neighborhood/show", { council_id: data.council_id })
+                .then((res) => {
+                    commit("setNeighbourhoods", res.data.data);
+                })
+                .catch((err) => {
+                    console.error(err);
+                });
+        },
+
+
 
         async SEARCH({ commit, state }, data) {
             commit("setNetworks", { data: [] });

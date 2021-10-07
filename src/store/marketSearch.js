@@ -62,7 +62,7 @@ export default {
     actions: {
         getCategories({ state, commit }, bussiness_id) {
             return axios
-                .get("category/all", {
+                .get("category", {
                     headers: {
                         Authorization: `Bearer ${state.token}`
                     }
@@ -82,7 +82,7 @@ export default {
 
                         axios
                             .get(
-                                `subcategory/all/${data.cat_id}?business_id=${data.bussiness_id}`, {
+                                `subcategory/${data.cat_id}?business_id=${data.bussiness_id}`, {
                                     headers: {
                                         Authorization: `Bearer ${state.token}`
                                     }

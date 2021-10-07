@@ -319,7 +319,7 @@
       <br />
       <div>
         <!-- Category -->
-        <div v-if="categories.length>0">
+        <div v-if="categories.length > 0">
           <b-form-group
             label-cols-lg="3"
             label="Categories"
@@ -333,7 +333,7 @@
             :options="categories"
             value-field="category.id"
             text-field="category.name"
-            @change="searchNetworks({cat_id: networkSelect.category})"
+            @change="searchNetworks({ cat_id: networkSelect.category })"
           >
           </b-form-select>
         </div>
@@ -428,16 +428,16 @@
             class="mb-0 text-left"
           >
           </b-form-group>
-
-          <b-form-checkbox-group
-            v-model="selected"
-            @change="networkFilterFill()"
-            :options="options"
-            class="mb-3"
-            value-field="item"
+          <b-form-select
+            v-model="networkSelect.neighbourhood"
+            :options="neighbourhoods"
+            value-field="id"
             text-field="name"
-            disabled-field="notEnabled"
-          ></b-form-checkbox-group>
+            @change="searchNetworks({ neighborhood_id: networkSelect.neighbourhood })"
+          >
+          </b-form-select>
+
+
         </div>
       </div>
 
@@ -896,6 +896,7 @@ export default {
         region: null,
         division: null,
         council: null,
+        neighbourhood: null,
       },
       // -----------------
 
@@ -1945,6 +1946,9 @@ export default {
     councils() {
       return this.$store.getters["networkSearch/getCouncils"];
     },
+    neighbourhoods() {
+      return this.$store.getters["networkSearch/getNeighbourhoods"];
+    },
   },
   created() {
     this.getCountries();
@@ -2072,6 +2076,18 @@ export default {
           console.log("Error erro!");
         });
     },
+    getNeighbourhoods(data) {
+      console.log("[debug] Neighbourhoods: ", this.neighbourhoods);
+      this.searchNetworks(data);
+      this.$store
+        .dispatch("networkSearch/NEIGHBOURHOODS", data)
+        .then((res) => {
+          console.log("Neighbourhoods: ", this.neighbourhoods);
+        })
+        .catch((err) => {
+          console.log("Error erro!");
+        });
+    },
 
     networkFilterFill() {
       if (this.networkFilter.region == false) this.getRegions();
@@ -2090,6 +2106,7 @@ export default {
         this.getCouncils();
         this.networkFilter.council = true;
       } else if (this.networkFilter.council == true) {
+        this.getNeighbourhoods({ council_id: this.networkSelect.council });
         this.searchNetworks({ council_id: this.networkSelect.council });
         this.networkFilter.neighbourhood = true;
       }
@@ -2113,11 +2130,12 @@ export default {
         region: [],
         division: [],
         council: [],
+        neighbourhood: [],
       };
     },
 
     async searchNetworks(data) {
-      this.networkFilter.category = true
+      this.networkFilter.category = true;
       await this.$store
         .dispatch("networkSearch/SEARCH", data)
         .then((res) => {

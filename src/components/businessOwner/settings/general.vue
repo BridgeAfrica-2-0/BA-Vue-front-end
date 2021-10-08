@@ -162,7 +162,7 @@ export default {
           { label: 'Admin only', value: 'Admin only' }, 
           { label: 'Allow editor to post', value: 'Allow editor to post'}
         ],
-        permission: "Allow editor to post",
+        permission: null,
         business_form: null
       }
   },
@@ -175,6 +175,7 @@ export default {
   },
 
   created(){
+    this.permission = this.business[0].permissions,
     this.business_form = {
       name: this.business[0].name,
       visibility: this.business[0].visibility,
@@ -187,8 +188,10 @@ export default {
 
   watch : {
     permission:function(val) {
-      this.form.permissions = val;
-      this.form.post_approval = "0";
+      console.log(val);
+      this.business_form.permissions = this.permission;
+      console.log("permissions: "+this.business_form.permissions);
+      this.business_form.post_approval = "0";
       console.log("Unchecked: "+this.business_form.post_approval);
     }
   },
@@ -217,11 +220,6 @@ export default {
       formData.append('visibility', this.business_form.visibility);
       formData.append('permissions', this.business_form.permissions);
       formData.append('post_approval', this.business_form.post_approval);
-      // for( var i = 0; i < this.form.keywords_alert.length; i++ ){
-      //   let keyword = this.form.keywords_alert[i];
-      //   console.log(keyword);
-      //   formData.append('keywords_alert[' + i + ']', keyword);
-      // }
       formData.append('keywords_alert', String(this.business_form.keywords_alert));
       console.log(String(this.business_form.keywords_alert));
       formData.append('marketplace', this.business_form.marketplace);

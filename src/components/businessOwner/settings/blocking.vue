@@ -8,7 +8,7 @@
       </p>
     </b-container>
 
-    <b-container class="bv-example-row">
+    <b-container v-if="blockusers != 0" class="bv-example-row">
       <b-list-group v-for="blockuser in blockusers" :key="blockuser.id">
         <b-skeleton-wrapper :loading="loading">
           <template #loading>
@@ -31,6 +31,11 @@
           </b-list>
         </b-skeleton-wrapper>
       </b-list-group>
+    </b-container>
+    <b-container v-else>
+      <b-card bg-variant="white" text-variant="black" class="text-center">
+        <b-card-text>No Blocked User Available.</b-card-text>
+      </b-card>
     </b-container>
   </b-container>
 </template>

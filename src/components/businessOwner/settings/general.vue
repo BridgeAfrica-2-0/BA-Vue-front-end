@@ -125,17 +125,17 @@
     </div>
 
     <b-container>
-      <b-link href="#" class="f-left" @click="$bvModal.show('delete-business'); selectObject(this.url)">Delete Business Identity</b-link>
+      <b-link href="#" class="f-left" @click="$bvModal.show('delete-business'); selectObject(business[0])">Delete Business Identity</b-link>
       <div>
         <b-modal id="delete-business" hide-footer>
           <template #modal-title>
             !!! <code>DELETE BUSINESS</code> !!! 
           </template>
           <div class="d-block text-center">
-            <h3>Delete Business: {{clickedObject.id}}!</h3>
+            <h3>Delete Business: {{clickedObject.business_id}}!</h3>
           </div>
           <!-- <b-button class="mt-3" block @click="$bvModal.hide('delete-business'); deleteBusiness(clickedObject.id)">Delete Business</b-button> -->
-          <b-button class="mt-2" style="float:right" variant="primary" @click="$bvModal.hide('delete-business'); deleteBusiness(clickedObject.id)">Delete Business</b-button>
+          <b-button class="mt-2" style="float:right" variant="primary" @click="$bvModal.hide('delete-business'); deleteBusiness(clickedObject.business_id)">Delete Business</b-button>
             
           <b-button class="mt-2 " style="float:right" @click="$bvModal.hide('delete-business')">Cancel</b-button>
         </b-modal>
@@ -245,9 +245,11 @@ export default {
     },
 
     deleteBusiness: function(busiess_id){
-      this.axios.post(`business/general/delete/${busiess_id}`)
+      console.log("busiess_id: "+busiess_id);
+      this.axios.delete(`business/general/delete/${busiess_id}`)
       .then(() => {
         console.log('ohh yeah');
+        console.log(`business/general/delete/${busiess_id}`);
         this.flashMessage.show({
           status: "success",
           message: "Business Deleted"

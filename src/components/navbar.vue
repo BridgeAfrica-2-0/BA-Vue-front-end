@@ -37,9 +37,9 @@
                 id="search-ba"
                 type="search"
                 data-toggle="popover"
-                class="form-control search-mobile"
-                style="border-left: none"
-                placeholder="Find Pharmacy"
+                class="form-control  search-mobile "
+                style=" border-left: none; "
+                placeholder="Find Pharmacies"
                 aria-label=""
                 data-original-title=""
                 title=""
@@ -119,9 +119,10 @@
                 <option value=" Current Location "></option>
                 <option value="Yaounde " />
               </datalist>
-              <slot name="button">
+             <slot name="button">
                <Button />
              </slot>
+              
             </form>
           </span>
           <div id="search-popover" class="d-none"></div>
@@ -710,8 +711,8 @@ export default {
   },
 
   methods: {
-    
-    // eteme code
+
+
     toggleinput() {
       this.$refs.mobileinput.style.display = "block";
       this.isActive = true;

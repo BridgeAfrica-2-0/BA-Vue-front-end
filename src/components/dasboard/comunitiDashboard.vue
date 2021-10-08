@@ -35,13 +35,13 @@
                       </template>
 
                       <div class="s-comcard">
-                        <b-row>
+                       
                           <div>
                             <People
                               :people="business.people[0].user_followers"
                             />
                           </div>
-                        </b-row>
+                      
                       </div>
                     </b-tab>
 
@@ -54,13 +54,13 @@
                       </template>
 
                       <div class="s-comcard">
-                        <b-row>
+                       
                           <div>
                             <People
                               :people="business.people[0].user_following"
                             />
                           </div>
-                        </b-row>
+                      
                       </div>
                     </b-tab>
                   </b-tabs>
@@ -88,13 +88,13 @@
                   </template>
 
                   <div class="s-comcard">
-                    <b-row>
+                    
                       <div>
                         <Business
                           :business="business.business[0].business_followers"
                         />
                       </div>
-                    </b-row>
+                   
                   </div>
                 </b-tab>
 
@@ -107,13 +107,13 @@
                   </template>
 
                   <div class="s-comcard">
-                    <b-row>
+                  
                       <div>
                         <Business
                           :business="business.business[0].business_following"
                         />
                       </div>
-                    </b-row>
+                    
                   </div>
                 </b-tab>
               </b-tabs>
@@ -125,7 +125,7 @@
             <template slot="title">
               Network
               <span class="spa-color">
-                {{ count(business.people[0].total_business) }}
+                {{ count(business.network[0].total_network) }}
               </span>
             </template>
 
@@ -135,18 +135,18 @@
                   <template slot="title">
                     Followers
                     <span class="spa-color">
-                      {{ count(business.people[0].total_business_follower) }}
+                      {{count( business.network[0].total_network_follower) }}
                     </span>
                   </template>
 
                   <div class="s-comcard">
-                    <b-row>
+                   
                       <div>
                         <Network
-                          :business="business.business[0].business_followers"
+                          :network="business.network[0].network_followers" 
                         />
                       </div>
-                    </b-row>
+                    
                   </div>
                 </b-tab>
 
@@ -154,18 +154,18 @@
                   <template slot="title">
                     Following
                     <span class="spa-color">
-                      {{ count(business.people[0].total_business_following) }}
+                      {{ count(business.network[0].total_network_following) }}
                     </span>
                   </template>
 
                   <div class="s-comcard">
-                    <b-row>
+                  
                       <div class="p-2">
                         <Network
-                          :business="business.business[0].business_following"
+                          :network="business.network[0].network_following"
                         />
                       </div>
-                    </b-row>
+                    
                   </div>
                 </b-tab>
               </b-tabs>

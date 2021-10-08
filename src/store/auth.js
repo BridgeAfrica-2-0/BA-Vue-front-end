@@ -6,13 +6,25 @@ export default {
   namespaced: true,
 
   state: {
-    user: null,
+    user: [],
     isVerified: null,
     passwordToken: null,
     registerData: null,
 
-    businessAround: null,
-    peopleAround: null
+    businessAround: [],
+    peopleAround: [],
+    categories:[],
+    subcategories:[],
+    filters:[],
+    category_fiters:[],
+    country:[],
+    region:[],
+    municipality:[],
+    locality:[],
+    division:[],
+
+
+    
   },
 
 
@@ -31,6 +43,31 @@ export default {
 
 
 
+    setCountry(state, data) {
+      state.country = data;
+    },
+
+
+    setRegion(state, data) {
+      state.region = data;
+    },
+
+    setDivision(state, data) {
+      state.division = data;
+    },
+
+    setMunicipality(state, data) {
+      state.municipality = data;
+    },
+  
+    setLocality(state, data) {
+      state.locality = data;
+    },
+
+
+    setCategories(state, data) {
+      state.categories = data;
+    },
 
 
 
@@ -84,6 +121,58 @@ export default {
 
 
 
+
+    country({ commit }) {
+      return axios.get("country/show").then(({ data }) => {
+        console.log(data);
+        commit("setCountry", data.data);
+      });
+    },
+  
+
+
+
+    region({ commit }, data) {
+      return axios.post("region/show", data).then(({ data }) => {
+        console.log(data);
+        commit("setRegion", data.data);
+      });
+    },
+
+
+    municipality({ commit }, data) {
+      return axios.get("council/show",data).then(({ data }) => {
+        console.log(data);
+        commit("setMunicipality", data.data); 
+      });
+    },
+
+
+    locality({ commit }, data) {
+      return axios.post("neighborhood/show", data).then(({ data }) => {
+        console.log(data);
+        commit("setLocality", data.data);
+      });
+    },
+
+
+
+    
+    division({ commit }, data) {
+      return axios.get("division/show", data).then(({ data }) => {
+        console.log(data);
+        commit("setDivision", data.data);
+      });
+    },
+
+
+
+    categories({ commit }) {
+      return axios.get("category").then(({ data }) => {
+        console.log(data);
+        commit("setCategories", data.data);
+      });
+    },
 
     completeWelcome({commit}){
 

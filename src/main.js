@@ -132,6 +132,20 @@ Vue.use(VueGoogleMaps, {
     installComponents: true
 });
 
+
+import VueLoading from 'vue-loading-overlay';
+import 'vue-loading-overlay/dist/vue-loading.css';
+
+
+Vue.use(VueLoading);
+
+import VueAgile from 'vue-agile'
+
+Vue.use(VueAgile);
+
+
+
+
 Vue.component("v-select", vSelect);
 
 import i18n from "./i18n";
@@ -165,4 +179,3 @@ new Vue({
 
     render: (h) => h(App),
 }).$mount("#app");
-

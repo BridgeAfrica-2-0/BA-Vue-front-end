@@ -1,13 +1,21 @@
 <template>
   <div style="overflow-x: hidden; color: black">
-    <Nav :credentials.sync="navBarParams">
+    <!-- <Nav :credentials.sync="navBarParams">
       <template v-slot:button>
         <Button @click.native="searchProducts" v-if="selectedId == 4" />
         <Button @click.native="searchNetworks" v-if="selectedId == 3" />
 
       </template>
       
+    </Nav> -->
+    <Nav 
+      :credentials.sync="navBarParams"
+    >  
+      <template v-slot:button>
+        <Button @click.native="strategy['users']"/>
+      </template>
     </Nav>
+
 
     <SubNav
       @category="getCategory"
@@ -369,7 +377,6 @@
         </b-col>
       </b-row>
     </div>
-
     <div class="container-flex p-md-3 p-t-0 upp">
       <b-row class="p-3">
         <b-col cols="0" md="0" xl="3" class="leftblock">
@@ -379,6 +386,9 @@
               v-bind:Selectedcategory="Selectedcategory"
               v-bind:Selectedparentcategory="Selectedparentcategory"
             />
+
+            <PeopleFilter v-if="selectedId == 2" />
+            <PostFilter v-if="selectedId == 5"  />
           </div>
         </b-col>
 
@@ -487,17 +497,22 @@
 
             <div v-if="selectedId == '2'">
               <h6>
+                Sponsored Result
+                <fas-icon
+                  class="icons"
+                  :icon="['fas', 'exclamation-circle']"
+                  size="lg"
+                />
+              </h6>
+
+              <div>
+                <Sponsor />
+              </div>
+              <h6>
                 <fas-icon class="icons" :icon="['fas', 'users']" size="lg" />
                 People
               </h6>
-
-              <People />
-
-              <People />
-
-              <People />
-
-              <People />
+              <People v-for="(people,index) in peoples" :people="people"  :key="index" />
             </div>
 
             <!-- filter out just the network  -->
@@ -519,12 +534,8 @@
 
             <div v-if="selectedId == '4'">
               <h6>
-                Sponsored Result
-                <fas-icon
-                  class="icons"
-                  :icon="['fas', 'exclamation-circle']"
-                  size="lg"
-                />
+                <fas-icon class="icons" :icon="['fas', 'store']" size="lg" />
+                Market
               </h6>
 
               <div>
@@ -559,6 +570,18 @@
 
             <div v-if="selectedId == '5'">
               <h6>
+                Sponsored Result
+                <fas-icon
+                  class="icons"
+                  :icon="['fas', 'exclamation-circle']"
+                  size="lg"
+                />
+              </h6>
+
+              <div>
+                <Sponsor />
+              </div>
+              <h6>
                 <fas-icon class="icons" :icon="['fab', 'readme']" size="lg" />
                 Post
               </h6>
@@ -567,7 +590,6 @@
             </div>
           </div>
         </b-col>
-
         <b-col cols="12" md="4" lg="4" xl="3" class="showmap" ref="mapblock">
           <div id="map" style="margin-top: 20px" class=""><Map /></div>
         </b-col>
@@ -577,9 +599,14 @@
 </template>
 
 <script>
+
+import _ from 'lodash'
+
 import LyTab from "@/tab/src/index.vue";
 
 import Map from "@/components/search/map";
+
+import Button from "@/components/ButtonNavBarFind"
 
 import Business from "@/components/search/business";
 import People from "@/components/search/people";
@@ -595,8 +622,16 @@ import SubNav from "@/components/subnav";
 import Sponsor from "@/components/search/sponsoredBusiness";
 import Button from '@/components/ButtonNavBarFind'
 
+import { PeopleFilter,PostFilter } from "@/components/search";
+
+import {loader} from "@/mixins"
+
+import {mapGetters, mapActions} from 'vuex'
+
+
 export default {
   components: {
+    Button,
     LyTab,
     Nav,
     SubNav,
@@ -608,9 +643,24 @@ export default {
     Network,
     Post,
     Market,
-    Button
+    PeopleFilter,
+    PostFilter
 
     // Footer,
+  },
+
+  mixins: [loader],
+
+  computed:{
+    ...mapGetters({
+      peoples:'search/GET_RESULT'
+    })
+  },
+
+  created(){
+    this.strategy = {
+      'users': () => this.onFindUser()
+    }
   },
   data() {
     return {
@@ -618,6 +668,8 @@ export default {
         keyword: "",
         placeholder: "Find Pharmacy",
       },
+      strategy: null, 
+
       alert: false,
       showDismissibleAlert: false,
       prodLoader: false,
@@ -633,6 +685,7 @@ export default {
       map: false,
       selectedfilter: "",
       showform: false,
+      
 
       //selectcategories:[],
 
@@ -1616,6 +1669,16 @@ export default {
         });
     },
     // ------------
+
+// Eteme 
+    ...mapActions({
+      find: 'search/FIND_USER'
+    }),
+
+    onFindUser() {
+      this.find(this.navBarParams.username)
+    },
+// -------
 
     SetCat(cat) {
       console.log(cat);

@@ -36,13 +36,13 @@
                       </template>
 
                       <div class="s-comcard">
-                        <b-row>
+                      
                           <div>
                             <People
                               :people="peoplecommunity.user_followers" 
                             />
                           </div>  
-                        </b-row>
+                        
                       </div>
                     </b-tab>
 
@@ -50,18 +50,18 @@
                       <template slot="title">
                         Following
                         <span class="spa-color">
-                          {{businesscommunity.totat_following}} 
+                          {{peoplecommunity.totat_following}} 
                         </span>
                       </template>
 
                       <div class="s-comcard">
-                        <b-row>
+                      
                           <div>
                             <People
                               :people="peoplecommunity.user_following"
                             />
                           </div>
-                        </b-row>
+                        
                       </div>
                     </b-tab>
                   </b-tabs>
@@ -74,7 +74,7 @@
             <template slot="title">
               Businesses
               <span class="spa-color">
-                {{ count(business.people[0].total_business) }}
+                {{ count(businesscommunity.total_Business) }}
               </span>
             </template>
 
@@ -84,18 +84,18 @@
                   <template slot="title">
                     Followers
                     <span class="spa-color">
-                      {{ count(business.people[0].total_business_follower) }}
+                      {{ count(businesscommunity.total_followers) }}
                     </span>
                   </template>
 
                   <div class="s-comcard">
-                    <b-row>
+                  
                       <div>
                         <Business
                           :business="businesscommunity.Business_followers" 
                         />
                       </div>
-                    </b-row>
+                   
                   </div>
                 </b-tab>
 
@@ -127,7 +127,7 @@
             <template slot="title">
               Network
               <span class="spa-color">
-                {{ count(business.people[0].total_business) }}
+               {{ count(businesscommunity.total_Business) }}
               </span>
             </template>
 
@@ -137,18 +137,18 @@
                   <template slot="title">
                     Followers
                     <span class="spa-color">
-                      {{ count(business.people[0].total_business_follower) }}
+                      {{ count(businesscommunity.total_followers) }}
                     </span>
                   </template>
 
                   <div class="s-comcard">
-                    <b-row>
+                   
                       <div>
                         <Network
-                          :business="business.business[0].business_followers"
+                         :network="businesscommunity.Business_followers" 
                         />
                       </div>
-                    </b-row>
+                  
                   </div>
                 </b-tab>
 
@@ -156,18 +156,18 @@
                   <template slot="title">
                     Following
                     <span class="spa-color">
-                      {{ count(business.people[0].total_business_following) }}
+                    {{ count(businesscommunity.total_followers) }}
                     </span>
                   </template>
 
                   <div class="s-comcard">
-                    <b-row>
+                   
                       <div class="p-2">
                         <Network
-                          :business="business.business[0].business_following"
+                          :network="businesscommunity.Business_followers" 
                         />
                       </div>
-                    </b-row>
+                   
                   </div>
                 </b-tab>
               </b-tabs>

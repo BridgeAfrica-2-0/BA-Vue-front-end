@@ -5,11 +5,14 @@ import dashboard from "./dashboard";
 import businessOwner from "./businessOwner";
 import marketSearch from "./marketSearch";
 import networkSearch from "./networkSearch";
+import allSearch from "./allSearch";
 import ProfileAndBusinessDetails from "./ProfileAndBusinessDetails";
 import hotbusiness from "./hotbusiness";
 import networkDetails from "./networkDetails";
 import dashboardcommunity from "./dashboardcommunity";
 import profile from "./profile";
+import profile from "./networkProfileMembers";
+
 
 
 import axios from "axios";
@@ -32,6 +35,8 @@ export default new Vuex.Store({
         hotbusiness,
         networkProfileMembers,
         marketSearch,
-        networkSearch
+        networkSearch,
+        allSearch
+
     }
 });

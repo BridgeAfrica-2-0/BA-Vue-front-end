@@ -2048,12 +2048,17 @@ export default {
         .catch((err) => {
           console.log("Error erro!");
         });
+        // this.networkSelect = {
+        //   division:null,
+        //   council:null,
+        //   neighbourhood:null
+
+        // }
     },
     getDivisions() {
       console.log("[debug] networks: ", this.networkSelect);
       const data = { region_id: this.networkSelect.region };
       this.searchNetworks(data);
-
       this.$store
         .dispatch("networkSearch/DIVISIONS", data)
         .then((res) => {
@@ -2062,6 +2067,8 @@ export default {
         .catch((err) => {
           console.log("Error erro!");
         });
+
+        
     },
     getCouncils() {
       console.log("[debug] networks: ", this.networkSelect);

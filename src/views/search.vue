@@ -4,18 +4,14 @@
       <template v-slot:button>
         <Button @click.native="searchProducts" v-if="selectedId == 4" />
         <Button @click.native="searchNetworks" v-if="selectedId == 3" />
-
       </template>
       
     </Nav> -->
-    <Nav 
-      :credentials.sync="navBarParams"
-    >  
+    <Nav :credentials.sync="navBarParams">
       <template v-slot:button>
-        <Button @click.native="strategy['users']"/>
+        <Button @click.native="strategy['users']" />
       </template>
     </Nav>
-
 
     <SubNav
       @category="getCategory"
@@ -388,7 +384,7 @@
             />
 
             <PeopleFilter v-if="selectedId == 2" />
-            <PostFilter v-if="selectedId == 5"  />
+            <PostFilter v-if="selectedId == 5" />
           </div>
         </b-col>
 
@@ -419,7 +415,7 @@
                 Businesses
               </h6>
 
-              <Business />
+              <MiniBusiness :searchParams.sync="searchParams" />
 
               <span class="float-right mb-3">
                 <b-link> see more </b-link>
@@ -430,7 +426,7 @@
               <fas-icon class="icons" :icon="['fas', 'users']" size="lg" />
               <h6>People</h6>
 
-              <People />
+              <MiniPeople />
               <span class="float-right mb-3"> see more </span> <br />
 
               <hr />
@@ -444,7 +440,7 @@
                 Network
               </h6>
 
-              <Network />
+              <MiniNetwork />
               <span class="float-right mb-3"> see more </span> <br />
 
               <hr />
@@ -454,7 +450,7 @@
                 Market
               </h6>
 
-              <Market />
+              <MiniMarket />
 
               <span class="float-right mb-3"> see more </span> <br />
 
@@ -465,7 +461,7 @@
                 Post
               </h6>
 
-              <Post />
+              <MiniPost />
 
               <span class="float-right mb-3"> see more </span> <br />
 
@@ -483,12 +479,6 @@
                 />
                 Businesses
               </h6>
-
-              <Business />
-
-              <Business />
-
-              <Business />
 
               <Business />
             </div>
@@ -512,7 +502,12 @@
                 <fas-icon class="icons" :icon="['fas', 'users']" size="lg" />
                 People
               </h6>
-              <People v-for="(people,index) in peoples" :people="people"  :key="index" />
+
+              <People
+                v-for="(people, index) in peoples"
+                :people="people"
+                :key="index"
+              />
             </div>
 
             <!-- filter out just the network  -->
@@ -530,7 +525,7 @@
               <Network />
             </div>
 
-            <!-- Filter out just the market place -->
+            <!-- Filter out just the market -->
 
             <div v-if="selectedId == '4'">
               <h6>
@@ -540,7 +535,7 @@
 
               <div>
                 <Sponsor />
-              </div> 
+              </div>
 
               <h6 class="mb-3">
                 <fas-icon class="icons" :icon="['fas', 'store']" size="lg" />
@@ -599,20 +594,17 @@
 </template>
 
 <script>
-
-import _ from 'lodash'
+import _ from "lodash";
 
 import LyTab from "@/tab/src/index.vue";
 
 import Map from "@/components/search/map";
 
-import Button from "@/components/ButtonNavBarFind"
-
-import Business from "@/components/search/business";
-import People from "@/components/search/people";
-import Network from "@/components/search/network";
-import Post from "@/components/search/posts";
-import Market from "@/components/search/market";
+import MiniBusiness from "@/components/search/allSearchComps/allBusiness";
+import MiniPeople from "@/components/search/allSearchComps/allPeople";
+import MiniNetwork from "@/components/search/allSearchComps/allNetwork";
+import MiniPost from "@/components/search/allSearchComps/allPosts";
+import MiniMarket from "@/components/search/allSearchComps/allMarket";
 import Nav from "@/components/navbar";
 
 import Filters from "@/components/search/filters";
@@ -620,14 +612,13 @@ import Filters from "@/components/search/filters";
 import SubNav from "@/components/subnav";
 
 import Sponsor from "@/components/search/sponsoredBusiness";
-import Button from '@/components/ButtonNavBarFind'
+import Button from "@/components/ButtonNavBarFind";
 
-import { PeopleFilter,PostFilter } from "@/components/search";
+import { PeopleFilter, PostFilter } from "@/components/search";
 
-import {loader} from "@/mixins"
+import { loader } from "@/mixins";
 
-import {mapGetters, mapActions} from 'vuex'
-
+import { mapGetters, mapActions } from "vuex";
 
 export default {
   components: {
@@ -637,30 +628,32 @@ export default {
     SubNav,
     Filters,
     Map,
-    Business,
     Sponsor,
-    People,
-    Network,
-    Post,
-    Market,
-    PeopleFilter,
-    PostFilter
+
+    MiniBusiness,
+    MiniPeople,
+    MiniNetwork,
+    MiniPost,
+    MiniMarket,
 
     // Footer,
   },
 
   mixins: [loader],
 
-  computed:{
+  computed: {
     ...mapGetters({
-      peoples:'search/GET_RESULT'
-    })
+      peoples: "search/GET_RESULT",
+    }),
+    products() {
+      return this.$store.state.market.products;
+    },
   },
 
-  created(){
+  created() {
     this.strategy = {
-      'users': () => this.onFindUser()
-    }
+      users: () => this.onFindUser(),
+    };
   },
   data() {
     return {
@@ -668,7 +661,11 @@ export default {
         keyword: "",
         placeholder: "Find Pharmacy",
       },
-      strategy: null, 
+      strategy: null,
+      searchParams: {
+        keyword: "",
+        cat_id: "",
+      },
 
       alert: false,
       showDismissibleAlert: false,
@@ -685,7 +682,6 @@ export default {
       map: false,
       selectedfilter: "",
       showform: false,
-      
 
       //selectcategories:[],
 
@@ -1610,15 +1606,10 @@ export default {
       },
     };
   },
-  computed: {
-    products() {
-      return this.$store.state.market.products;
-    },
-  },
 
   methods: {
     // [ED]----------
-    getKeyword(){
+    getKeyword() {
       console.log(this.navBarParams.keyword);
       console.log("[DEBUG]", this.subCategories);
     },
@@ -1645,11 +1636,12 @@ export default {
           this.showDismissibleAlert = false;
         });
     },
-    
 
     searchProducts() {
       this.$store
-        .dispatch("marketSearch/searchProducts", {keyword: this.navBarParams.keyword})
+        .dispatch("marketSearch/searchProducts", {
+          keyword: this.navBarParams.keyword,
+        })
         .then((res) => {
           // console.log("categories loaded!");
         })
@@ -1660,7 +1652,9 @@ export default {
 
     searchNetworks() {
       this.$store
-        .dispatch("networkSearch/SEARCH", {keyword: this.navBarParams.keyword})
+        .dispatch("networkSearch/SEARCH", {
+          keyword: this.navBarParams.keyword,
+        })
         .then((res) => {
           // console.log("categories loaded!");
         })
@@ -1670,15 +1664,15 @@ export default {
     },
     // ------------
 
-// Eteme 
+    // Eteme
     ...mapActions({
-      find: 'search/FIND_USER'
+      find: "search/FIND_USER",
     }),
 
     onFindUser() {
-      this.find(this.navBarParams.username)
+      this.find(this.navBarParams.username);
     },
-// -------
+    // -------
 
     SetCat(cat) {
       console.log(cat);

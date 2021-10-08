@@ -228,7 +228,6 @@ export default {
 
   watch: {
     selectedPeople: function () {
-      console.log(this.selectedPeople);
       this.communityIsChecked(this.selectedPeople);
     },
     selectedBuisness: function () {
@@ -245,12 +244,22 @@ export default {
         return false;
       }
       if (newValue) {
+        this.page(1);
+        this.newCallbackForPagination(
+          this.$repository.search.findPostByKeyword
+        );
+        this.stack({
+          data: { recent_post: "" },
+          keyword: this.keyword,
+        });
+
         this._onFindPost({
           data: { recent_post: "" },
           keyword: this.keyword,
         });
       }
     },
+
     isPostHaveNotSeen: function (newValue) {
       if (!this.keyword && newValue) {
         this.isPostHaveNotSeen = false;
@@ -258,6 +267,14 @@ export default {
         return false;
       }
       if (newValue) {
+        this.page(1);
+        this.newCallbackForPagination(
+          this.$repository.search.findPostByKeyword
+        );
+        this.stack({
+          data: { not_seen: "" },
+          keyword: this.keyword,
+        });
         this._onFindPost({
           data: { not_seen: "" },
           keyword: this.keyword,
@@ -267,6 +284,14 @@ export default {
 
     created_at: function (newValue) {
       if (newValue) {
+        this.page(1);
+        this.newCallbackForPagination(
+          this.$repository.search.findPostByKeyword
+        );
+        this.stack({
+          data: { created_at: this.created_at },
+          keyword: this.keyword,
+        });
         this._onFindPost({
           data: { created_at: this.created_at },
           keyword: this.keyword,
@@ -288,6 +313,8 @@ export default {
       findNetworkPost: "search/FIND_NETWORK_POST",
       newCallbackForPagination: "search/SET_CURRENT_PAGINATE_CALLBACK",
       lauchLoader: "search/LOADING",
+      page: "search/SET_CURRENT_PAGINATION_PAGE",
+      stack: "search/STACK_VALUE", //
     }),
 
     async _onFindPost(e) {
@@ -297,16 +324,16 @@ export default {
           ...e,
           page: 1,
         });
+        if (request.length) this.page(2);
         this.findPeoplePost(request);
       } catch (error) {
-        this.lauchLoader(false);
+        console.log(error);
       }
 
       this.lauchLoader(false);
     },
 
     communityIsChecked(data) {
-      console.log(data);
       const useSelectFollowerAndFollowing = data.filter(
         (item) => "Follower" == item || "Following" == item
       );
@@ -320,7 +347,6 @@ export default {
         const newData = data.filter(
           (item) => "Follower" !== item || "Following" !== item
         );
-
         console.log(newData);
       }
     },

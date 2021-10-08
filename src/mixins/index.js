@@ -49,11 +49,21 @@ export const search = {
     }
   },
 
+  data: () => ({
+    endLoading: false
+  }),
+
+  destroyed() {
+    this.page(1);
+    this.$store.commit('search/RESET_RESULT')
+  },
+
   computed: {
     ...mapGetters({
       callback: "search/GET_CURRENT_PAGINATE_CALLBACK",
       getStack: "search/STACK_VALUE",
-      canScrool: "search/END_INITIAL_REQUEST"
+      canScrool: "search/END_INITIAL_REQUEST",
+      loadingHasActivated: "search/LOADING",
     }),
   },
   methods: {
@@ -61,6 +71,5 @@ export const search = {
       lauchLoader: "search/LOADING",
       page: "search/SET_CURRENT_PAGINATION_PAGE",
     }),
-
   }
 }

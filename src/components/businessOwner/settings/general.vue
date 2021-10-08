@@ -94,6 +94,8 @@
             v-model="business_form.keywords_alert"
             tag-variant="primary"
             separator=" ,;"
+            :limit="limit"
+            :tag-validator="validator"
             placeholder="Enter new keywords_alert separated by space, comma or semicolon"
             no-add-on-enter
             required
@@ -153,6 +155,7 @@ export default {
         url: null,
         SPupdateGeneralInfo: false,
         clickedObject: {},
+        limit: 20,
         busiess_id: "",
         businessVisibility: [
           { label: "Published", value: "publish" },
@@ -202,6 +205,9 @@ export default {
   },
 
   methods:{
+    validator(tag) {
+      return tag.length > 2 && tag.length < 20
+    },
 
     getBusiness() {
     this.$store

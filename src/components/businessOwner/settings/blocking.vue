@@ -18,7 +18,7 @@
               <b-skeleton width="70%"></b-skeleton>
             </b-card>
           </template>
-          <b-list class="d-flex align-items-center">
+          <b-list class="d-flex align-items-center m-list">
             <b-avatar
               variant="primary"
               :text="blockuser.name.charAt(0)"

@@ -4,7 +4,6 @@ import axios from "axios";
 export default {
   namespaced: true,
   state: {
-    token: "1|l03kpc4VV9SgYtaebfNXbclriJR9fANkZHSSRVoT",
     blockusers: []
   },
 

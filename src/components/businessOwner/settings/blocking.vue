@@ -37,6 +37,9 @@
         <b-card-text>No Blocked User Available.</b-card-text>
       </b-card>
     </b-container>
+
+    <FlashMessage />
+
   </b-container>
 </template>
 
@@ -77,7 +80,8 @@ export default {
      
     UnblockBlockUser(blockuser) {
       this.loading = true;
-			axios.post("business/unblocking/6/"+this.url, blockuser)
+      console.log("business/unblocking/"+this.url+"/"+blockuser.user_id);
+			axios.delete("business/unblocking/"+this.url+"/"+blockuser.user_id)
 			.then(response => {
 			  console.log(response);
         this.blockUsers();

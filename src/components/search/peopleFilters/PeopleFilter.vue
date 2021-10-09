@@ -1,5 +1,5 @@
 <template>
-  <div class="mx-4">
+  <div>
     <b-form class="mb-4">
       <label for="feedback-user">Profession</label>
       <b-form-input

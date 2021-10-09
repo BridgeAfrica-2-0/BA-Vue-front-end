@@ -375,9 +375,6 @@
               v-bind:Selectedcategory="Selectedcategory"
               v-bind:Selectedparentcategory="Selectedparentcategory"
             />
-
-            <PeopleFilter v-if="selectedId == 2" />
-            <PostFilter v-if="selectedId == 5" />
           </div>
         </b-col>
 
@@ -547,15 +544,13 @@ import SubNav from "@/components/subnav";
 import Sponsor from "@/components/search/sponsoredBusiness";
 
 import {
-  PeopleFilter,
-  PostFilter,
   PostComponent,
   PeopleComponent,
 } from "@/components/search";
 
 import { loader } from "@/mixins";
 
-import { mapGetters, mapActions } from "vuex";
+import { mapActions } from "vuex";
 
 export default {
   components: {
@@ -571,8 +566,6 @@ export default {
     Network,
     Post,
     Market,
-    PeopleFilter,
-    PostFilter,
     PostComponent,
     PeopleComponent,
     // Footer,

@@ -27,6 +27,7 @@ export const actions = {
   }, // [TYPES.LOADING]
 
   [TYPES.SET_CURRENT_PAGINATION_PAGE]({ commit }, payload) {
+    console.log(payload)
 
     if (typeof (payload) === 'number')
       commit(TYPES.SET_CURRENT_PAGINATION_PAGE, payload)
@@ -47,37 +48,5 @@ export const actions = {
     else
       throw new Error(`${payload} should be a string`)
   }, // [TYPES.POST_KEYWORD]
-
-  [TYPES.FIND_BUISNESS_POST]({ commit, state }, payload) {
-    const { credentials, lauchLoader, endLoader } = payload
-
-    commit(TYPES.LOADING, lauchLoader)
-
-    if (lauchLoader)
-      commit(TYPES.RESET_RESULT)
-
-    axios.post(`search/business/post/${state.postKeyword}`, credentials)
-      .then(({ data: { data } }) => {
-        commit(TYPES.FIND_MIXED_POST, data)
-        commit(TYPES.LOADING, endLoader)
-      })
-      .catch(e => commit(TYPES.LOADING, false))
-  },
-
-  [TYPES.FIND_NETWORK_POST]({ commit, state }, payload) {
-    const { credentials, lauchLoader, endLoader } = payload
-
-    commit(TYPES.LOADING, lauchLoader)
-
-    if (lauchLoader)
-      commit(TYPES.RESET_RESULT)
-
-    axios.post(`search/network/post/${state.postKeyword}`, credentials)
-      .then(({ data: { data } }) => {
-        commit(TYPES.FIND_MIXED_POST, data)
-        commit(TYPES.LOADING, endLoader)
-      })
-      .catch(e => commit(TYPES.LOADING, false))
-  },
 
 }

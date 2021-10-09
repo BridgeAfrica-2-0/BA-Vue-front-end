@@ -13,8 +13,9 @@
             class="mb-0"
           >
             <b-form-select>
-              <b-form-select-option :value="null">Admin</b-form-select-option>
-              <b-form-select-option value="a">User</b-form-select-option>
+              <b-form-select-option :value="memberString">{{
+                memberString.name
+              }}</b-form-select-option>
             </b-form-select>
           </b-form-group>
         </b-col>
@@ -28,8 +29,9 @@
             class="mb-0"
           >
             <b-form-select class="mb-3">
-              <b-form-select-option :value="null">Admin</b-form-select-option>
-              <b-form-select-option value="a">User</b-form-select-option>
+              <b-form-select-option :value="roleString">{{
+                roleString.name
+              }}</b-form-select-option>
             </b-form-select>
           </b-form-group>
         </b-col>

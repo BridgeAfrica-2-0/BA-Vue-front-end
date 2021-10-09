@@ -10,6 +10,7 @@
               value="accepted"
               class="m-left-top username"
               unchecked-value="not_accepted"
+              @click="selectAll"
             >
               Select All
             </b-form-checkbox>
@@ -40,6 +41,7 @@
                 value="accepted"
                 class="m-left-top"
                 unchecked-value="not_accepted"
+                @click="selectOne"
               >
               </b-form-checkbox>
               <b-avatar
@@ -79,6 +81,7 @@ export default {
   name: "notification",
   data: () => ({
     selected: [],
+    checkbox: true,
   }),
   beforeMount() {
     this.getNotifications();

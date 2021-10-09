@@ -32,11 +32,14 @@
         >
           <b-form-group class="mb-0" v-slot="{ ariaDescribedby }">
             <b-form-radio-group
-              class="pt-2 text "
-              :options="['Admin only', 'Allow visitors/followers to post']"
+              :options="options"
+              v-model="Selected"
               :aria-describedby="ariaDescribedby"
+              name="radio-options"
+              @change="check"
             ></b-form-radio-group>
           </b-form-group>
+          <div class="mt-3">{{ Selected }}</div>
         </b-form-group>
       </b-container>
 
@@ -51,17 +54,19 @@
           label-size="md"
           label-class="font-weight-bold pt-0 username"
           class="mb-0"
+          v-slot="{ ariaDescribedby }"
         >
-          <b-form-checkbox
-            id="checkbox-1"
+          <b-form-checkbox-group
             class="text"
-            name="checkbox-1"
-            value="accepted"
-            unchecked-value="not_accepted"
+            name="checkbox-options"
+            :options="lists"
+            v-model="SelectedList"
+            :aria-describedby="ariaDescribedby"
+            @change="test"
           >
-            All posts must be approved by an admin
-          </b-form-checkbox>
+          </b-form-checkbox-group>
         </b-form-group>
+        <div class="mt-3">{{ SelectedList }}</div>
       </b-container>
       <hr />
     </div>
@@ -82,6 +87,66 @@
 <script>
 export default {
   name: "general",
+  data: () => ({
+    Selected: "",
+    SelectedList: "",
+    options: [
+      {
+        text: "Admin Only",
+        value: "admin",
+      },
+      {
+        text: "Editor",
+        value: "editor",
+      },
+      {
+        text: "Member",
+        value: "member",
+      },
+      {
+        text: "Editor And Member",
+        value: "editor and member",
+      },
+    ],
+    lists: [
+      {
+        text: "Approval by admin",
+        value: "admin approval",
+        disabled: false,
+      },
+      {
+        text: "Approval by editor and admin",
+        value: "editor and admin approval",
+        disabled: false,
+      },
+      {
+        text: "Approve only member post",
+        value: "only member post approval",
+        disabled: false,
+      },
+    ],
+  }),
+  methods: {
+    check() {
+      if (this.Selected == "admin") {
+        this.lists[0].disabled = true;
+        this.lists[1].disabled = true;
+        this.lists[2].disabled = true;
+      } else if (this.Selected == "editor") {
+        this.lists[0].disabled = false;
+        this.lists[1].disabled = false;
+        this.lists[2].disabled = true;
+      } else if (this.Selected == "member") {
+        this.lists[0].disabled = true;
+        this.lists[1].disabled = true;
+        this.lists[2].disabled = false;
+      } else if (this.Selected == "editor and member") {
+        this.lists[0].disabled = false;
+        this.lists[1].disabled = false;
+        this.lists[2].disabled = true;
+      }
+    },
+  },
 };
 </script>
 

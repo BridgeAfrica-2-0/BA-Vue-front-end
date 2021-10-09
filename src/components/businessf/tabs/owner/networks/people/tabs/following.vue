@@ -4,7 +4,7 @@
     <b-row>
       <b-col cols="12" class="mx-auto">
         <b-input-group class="mb-2 px-md-3 mx-auto">
-          <b-input-group-prepend @onclick="search" is-text>
+          <b-input-group-prepend @click="search" is-text style="cursor:pointer;">
             <b-icon-search class="text-primary border-none"></b-icon-search>
           </b-input-group-prepend>
           <b-form-input
@@ -13,25 +13,18 @@
             type="text"
             class="form-control"
             v-model="searchTitle"
-            @keyup="search"
           ></b-form-input>
         </b-input-group>
       </b-col>
     </b-row>
     <br/>
 
-<!-- {{peoplefollowing}} -->
-
     <b-row cols="2">
-      <b-col v-if="peoplefollowing == 0" >
-        No Community Members
-      </b-col>
       <b-col class="ml-0 mr-0"
-        v-for="member in peoplefollowing"
+        v-for="member in displayfollowing"
         :key="member.id"
-        v-else
       >
-        <b-skeleton-wrapper :loading="loading">
+        <b-skeleton-wrapper :loading="loading" >
           <template #loading>
             <b-card>
               <b-skeleton width="85%"></b-skeleton>
@@ -39,8 +32,8 @@
               <b-skeleton width="70%"></b-skeleton>
             </b-card>
           </template>
-        <div style="display:none;">{{member['communityNum'] = nFormatter(member.following)}}</div>
-        <CommunityMembers :member="member" />
+        <div style="display:none;">{{member['communityNum'] = nFormatter(member.followers)}}</div>
+        <CommunityMembers :member="member" @BlockUser="BlockUser" />
         </b-skeleton-wrapper>
       </b-col>
     </b-row>
@@ -52,6 +45,8 @@
         </infinite-loading>
       </b-col>
     </b-row>
+    
+    <FlashMessage />
   </div>
 </template>
 
@@ -67,7 +62,8 @@ export default {
       searchTitle: "",
       page: 0,
       loading: false,
-      peoplefollowing: []
+      peoplefollowing: [],
+      displayfollowing: []
     };
   },
   mounted(){
@@ -97,38 +93,74 @@ export default {
     },
 
     search() {
-      this.loading = true;
-      this.page = 0;
-      console.log("searching...");
-      console.log(this.searchTitle);
-      this.infiniteHandler();
+      if(this.searchTitle){
+        this.loading = true;
+        this.page -= 1;
+        console.log("searching...");
+        console.log(this.searchTitle);
+        this.infiniteHandler();
+      }else{
+        console.log("Empty search title: "+this.searchTitle);
+        this.infiniteHandler();
+      }
     },
-
+    
     infiniteHandler($state) {
       console.log("loop");
-      const data = this.getRequestDatas(this.searchTitle);
-      console.log('keyword: '+data);
+      const keyword = this.getRequestDatas(this.searchTitle);
+      console.log('keyword: '+keyword);
       let formData = new FormData();
-      formData.append('keyword', data);
+      formData.append('keyword', keyword);
       console.log("network/"+this.url+"/people/following/"+this.page);
       this.axios
       .post("network/"+this.url+"/people/following/"+this.page, formData)
       .then(({ data }) => {
        console.log(data);
        console.log(this.page);
-        if (data.data.length) {
-          this.page += 1;
-          console.log(this.page);
-          console.log(...data.data);
-          this.peoplefollowing.push(...data.data);
-          $state.loaded();
-        } else {
+        if(keyword){
+          this.displayfollowing = data.data;
+          this.searchTitle = "";
           $state.complete();
+        }else{
+          if (data.data.length) {
+            this.page += 1;
+            console.log(this.page);
+            console.log(...data.data);
+            this.peoplefollowing.push(...data.data);
+            this.displayfollowing = this.peoplefollowing;
+            $state.loaded();
+          } else {
+            $state.complete();
+          }
         }
       }) .catch((err) => {
           console.log({ err: err });
       })
+      this.loading = false;
     },
+
+    BlockUser(user_id) {
+      this.loading = true;
+      console.log("network/"+this.url+"/lock/user/"+user_id);
+      this.axios.delete("network/"+this.url+"/lock/user/"+user_id)
+      .then(response => {
+        console.log(response);
+        this.blockUsers();
+        this.loading = false;
+        this.flashMessage.show({
+          status: "success",
+          message: "User blocked"
+        });
+      })
+      .catch(err => {
+        console.log({ err: err });
+        this.loading = false;
+        this.flashMessage.show({
+          status: "error",
+          message: "Unable to blocked User"
+        });
+      });
+    }
 
   }
 };

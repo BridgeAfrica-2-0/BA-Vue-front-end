@@ -20,32 +20,36 @@
     </b-row>
     <br/>
 
+<!-- {{peoplefollowing}} -->
 
-    <b-row>
-      <b-col v-if="peoplefollowings.total == 0" >
+    <b-row cols="2">
+      <b-col v-if="peoplefollowing == 0" >
         No Community Members
       </b-col>
-      <b-col col="6" class="ml-0 mr-0"
-        :class="{ active: index == currentIndex }"
-        v-for="(member, index) in peoplefollowings.data"
-        :key="index"
+      <b-col class="ml-0 mr-0"
+        v-for="member in peoplefollowing"
+        :key="member.id"
         v-else
       >
-        <div style="display:none;">{{member['communityNum'] = nFormatter(member.followers)}}</div>
-        <CommunityMembers :member="member"/>
+        <b-skeleton-wrapper :loading="loading">
+          <template #loading>
+            <b-card>
+              <b-skeleton width="85%"></b-skeleton>
+              <b-skeleton width="55%"></b-skeleton>
+              <b-skeleton width="70%"></b-skeleton>
+            </b-card>
+          </template>
+        <div style="display:none;">{{member['communityNum'] = nFormatter(member.following)}}</div>
+        <CommunityMembers :member="member" />
+        </b-skeleton-wrapper>
       </b-col>
     </b-row>
-    <b-row  v-if="peoplefollowings.total  > perPage">
-      <b-col cols="12">
-        <span class="float-right">
-          <b-pagination
-            v-model="currentPage"
-            :total-rows="peoplefollowings.total"
-            :per-page="perPage"
-            @change="handlePageChange"
-            aria-controls="my-table"
-          ></b-pagination>
-        </span>
+    <b-row >
+      <b-col col="12">
+        <infinite-loading @infinite="infiniteHandler">
+          <div class="text-red" slot="no-more">No More Request</div>
+          <div class="text-red" slot="no-results">No More Request</div>
+        </infinite-loading>
       </b-col>
     </b-row>
   </div>
@@ -60,21 +64,14 @@ export default {
   data() {
     return {
       url:null,
-      perPage: null,
-      currentPage: null,
       searchTitle: "",
-      currentIndex: -1,
+      page: 0,
+      loading: false,
+      peoplefollowing: []
     };
-  },
-  computed: {
-    peoplefollowings() {
-      return this.$store.state.networkProfileCommunity.peoplefollowings;
-    }
   },
   mounted(){
     this.url = this.$route.params.id;
-    this.perpage = this.peoplefollowings.per_page;
-    this.PeopleFollowings();
   },
   methods:{
     nFormatter: function(num) {
@@ -89,39 +86,50 @@ export default {
       }
       return num;
     },
-    getRequestDatas(searchTitle, currentPage) {
+
+    getRequestDatas(searchTitle) {
       let data = "";
       if (searchTitle) {
-        data = "/"+searchTitle;
-      }else if (currentPage) {
-        data = "/?page="+currentPage;
+        data = searchTitle;
       }
       console.log(data);
       return data;
     },
+
     search() {
+      this.loading = true;
+      this.page = 0;
       console.log("searching...");
       console.log(this.searchTitle);
-      this.PeopleFollowings()
-    },
-    handlePageChange(value) {
-      // this.loading = true;
-      this.currentPage = value;
-      console.log(this.currentPage);
-      this.PeopleFollowings();
+      this.infiniteHandler();
     },
 
-    PeopleFollowings() {
-      let data = this.getRequestDatas(this.searchTitle, this.currentPage)
-    this.$store
-      .dispatch("networkProfileCommunity/getPeopleFollowings", this.url+"/people/following"+data)
-      .then(() => {
-        console.log('ohh year: followings');
+    infiniteHandler($state) {
+      console.log("loop");
+      const data = this.getRequestDatas(this.searchTitle);
+      console.log('keyword: '+data);
+      let formData = new FormData();
+      formData.append('keyword', data);
+      console.log("network/"+this.url+"/people/following/"+this.page);
+      this.axios
+      .post("network/"+this.url+"/people/following/"+this.page, formData)
+      .then(({ data }) => {
+       console.log(data);
+       console.log(this.page);
+        if (data.data.length) {
+          this.page += 1;
+          console.log(this.page);
+          console.log(...data.data);
+          this.peoplefollowing.push(...data.data);
+          $state.loaded();
+        } else {
+          $state.complete();
+        }
+      }) .catch((err) => {
+          console.log({ err: err });
       })
-      .catch(err => {
-        console.log({ err: err });
-      });
     },
+
   }
 };
 </script>

@@ -117,9 +117,9 @@ export default {
 
     getnetworkInfo( {commit}, networkId ){
       return axios
-      .get(`network/edit-informaions/${networkId}`)
+      .get(`network/${networkId}/about/information`)
       .then(({ data }) => {
-          commit("setnetworkInfo", data.data);
+          commit("setNetworkInfo", data.data);
         console.log(data);
 
       })

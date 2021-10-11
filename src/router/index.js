@@ -31,7 +31,7 @@ import forgotPassword from "@/views/forgotPassword";
 import navMessage from "@/views/navMessaging";
 import Blec from "@/views/blec";
 import memberNetworkFollower from "@/views/memberNetworkFollower";
-import editorNetworkFollower from "@/views/editorNetworkFollower";
+import editors from "@/views/editors";
 // import Test from "@/views/test";
 import templateView from "@/views/templateView";
 import webSiteCreate from "@/views/webSiteCreate";
@@ -141,6 +141,16 @@ const routes = [
     path: "/networks",
     name: "networks",
     component: networks,
+  },
+  {
+    path: "/business_owner/editors/:id?",
+    name: "editors",
+    component: editors,
+  },
+  {
+    path: "/editors/:id?",
+    name: "editors",
+    component: editors,
   },
   {
     path: "/login",
@@ -256,11 +266,6 @@ const routes = [
     component: memberNetworkFollower,
   },
 
-  {
-    path: "/editorNetworkFollower/:id?",
-    name: "Editor Network Follower",
-    component: editorNetworkFollower,
-  },
 ];
 
 const router = new VueRouter({

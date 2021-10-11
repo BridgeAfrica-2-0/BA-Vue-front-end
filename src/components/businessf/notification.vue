@@ -52,7 +52,12 @@
             @click="select"
           >
           </b-form-checkbox>
-          <b-avatar class="mr-3" size="4em"></b-avatar>
+          <b-avatar
+            size="4em"
+            class="mr-3 d-inline-block profile-pic"
+            variant="primary"
+            :src="post.image"
+          ></b-avatar>
           <span class="mr-auto">
             {{ post.reference_type }}
             <p>{{ post.created_at }}</p>

@@ -51,7 +51,7 @@
               <b-avatar
                 class="d-inline-block profile-pic"
                 variant="primary"
-                src="https://business.bridgeafrica.info/assets/img/team/3.png"
+                :src="post.image"
               ></b-avatar>
               <h6 class="m-0  d-inline-block ml-2 username">
                 {{ post.reference_type }}

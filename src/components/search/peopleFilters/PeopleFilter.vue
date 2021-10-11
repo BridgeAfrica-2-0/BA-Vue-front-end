@@ -1,5 +1,5 @@
 <template>
-  <div class="mx-4">
+  <div>
     <b-form class="mb-4">
       <label for="feedback-user">Profession</label>
       <b-form-input
@@ -176,8 +176,11 @@ export default {
 
   methods: {
     ...mapActions({
-      findUser: "search/FIND_USER",
+      userStore: "search/FIND_USER",
       lauchLoader: "search/LOADING",
+      setCallback: "search/SET_CURRENT_PAGINATE_CALLBACK",
+      stack: "search/STACK_VALUE",
+      page: "search/SET_CURRENT_PAGINATION_PAGE",
     }),
 
     map(data, type) {
@@ -185,6 +188,7 @@ export default {
     },
 
     onProcess() {
+      this.page(1);
       const user = this.map(this.selectedPeople, `user`);
       const buisness = this.map(this.selectedBuisness, `buisness`);
       const network = this.map(this.selectedNetwork, `network`);
@@ -194,6 +198,8 @@ export default {
         return hash;
       }, {});
 
+      this.stack({ payload: { ...data }, page: 1 });
+      this.setCallback(this.$repository.search.findUserByParam);
       this._onFindUser({ payload: { ...data }, page: 1 });
     },
 
@@ -204,25 +210,29 @@ export default {
           payload,
           page: 1,
         });
-        this.findUser(request);
+        this.userStore(request);
+        this.page(2);
       } catch (error) {
-        this.lauchLoader(false);
+        console.log(error);
       }
 
       this.lauchLoader(false);
     },
 
     debounceInput: _.debounce(function (e) {
-      if (e)
+      if (e) {
+        this.page(1);
+        this.stack({ profession: e });
+        this.setCallback(this.$repository.search.findUserByParam);
         this._onFindUser({
           profession: e,
           page: 1,
         });
+      }
     }, 1000),
 
     toogleRootSection() {
       this.rootSectionIsVisible = !this.rootSectionIsVisible;
-
       if (!this.rootSectionIsVisible) this.closeAllSections();
     },
     closeAllSections() {

@@ -375,9 +375,6 @@
               v-bind:Selectedcategory="Selectedcategory"
               v-bind:Selectedparentcategory="Selectedparentcategory"
             />
-
-            <PeopleFilter v-if="selectedId == 2" />
-            <PostFilter v-if="selectedId == 5" />
           </div>
         </b-col>
 
@@ -547,15 +544,13 @@ import SubNav from "@/components/subnav";
 import Sponsor from "@/components/search/sponsoredBusiness";
 
 import {
-  PeopleFilter,
-  PostFilter,
   PostComponent,
   PeopleComponent,
 } from "@/components/search";
 
 import { loader } from "@/mixins";
 
-import { mapGetters, mapActions } from "vuex";
+import { mapActions } from "vuex";
 
 export default {
   components: {
@@ -571,40 +566,15 @@ export default {
     Network,
     Post,
     Market,
-    PeopleFilter,
-    PostFilter,
     PostComponent,
     PeopleComponent,
-
     // Footer,
   },
 
   mixins: [loader],
 
   created() {
-    this.strategy = {
-      2: () => this.onFindUser(),
-      5: () => this.onFindPost(),
-    };
-
-    this.strategyForPlaceHolder = {
-      2: () => {
-        this.isComponent = PeopleComponent;
-        return "Find User";
-      },
-      5: () => {
-        this.isComponent = PostComponent;
-        return "Find Post";
-      },
-      0: () => "All",
-    };
-
-    this.strategyForNotFoundComponentTitle = {
-      2: () => "Not Find users",
-      5: () => "Not Find posts",
-    };
-
-    this.changePlaceHolder();
+    this.initialize();
   },
 
   data() {
@@ -1570,8 +1540,33 @@ export default {
       page: "search/SET_CURRENT_PAGINATION_PAGE",
       stack: "search/STACK_VALUE",
       setCallback: "search/SET_CURRENT_PAGINATE_CALLBACK",
-      startScrolling: "search/END_INITIAL_REQUEST",
     }),
+
+    initialize() {
+      this.strategy = {
+        2: () => this.onFindUser(),
+        5: () => this.onFindPost(),
+      };
+
+      this.strategyForPlaceHolder = {
+        2: () => {
+          this.isComponent = PeopleComponent;
+          return "Find User";
+        },
+        5: () => {
+          this.isComponent = PostComponent;
+          return "Find Post";
+        },
+        0: () => "All",
+      };
+
+      this.strategyForNotFoundComponentTitle = {
+        2: () => "Not Find users",
+        5: () => "Not Find posts",
+      };
+
+      this.changePlaceHolder();
+    },
 
     changeNotFoundTitle() {
       try {
@@ -1615,10 +1610,8 @@ export default {
           page: 1,
         });
         this.userStore(request);
-
         this.lauchLoader(false);
         this.page(2);
-        this.startScrolling(true);
         this.setCallback(this.$repository.search.findUserByParam);
       } catch (error) {
         console.log(error);
@@ -1628,12 +1621,12 @@ export default {
 
     onFindUser() {
       if (this.navBarParams.keyword.trim()) {
+        this.page(1);
         this.stack({
           payload: {
             keyword: this.navBarParams.keyword.trim(),
           },
         });
-
         this._onFindUser();
       } else this.onNotified("the word must have at least 3 letters");
     },
@@ -1645,7 +1638,6 @@ export default {
         const request = await this.$repository.search.findPostByKeyword({
           data: {},
           keyword: this.navBarParams.keyword.trim(),
-
           page: 1,
         });
 
@@ -1653,12 +1645,14 @@ export default {
         this.page(2);
         this.lauchLoader(false);
       } catch (error) {
+        console.log(error);
         this.lauchLoader(false);
       }
     },
 
     onFindPost() {
       if (this.navBarParams.keyword.trim()) {
+        this.page(1);
         this.postKeyword(this.navBarParams.keyword.trim());
         this.stack({
           data: {},

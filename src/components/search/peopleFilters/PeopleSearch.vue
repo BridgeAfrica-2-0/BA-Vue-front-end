@@ -13,24 +13,9 @@
       People
     </h6>
 
-    <div infinite-wrapper>
-      <div style="overflow: auto">
-        <People
-          v-for="(people, index) in peoples"
-          :people="people"
-          :key="index"
-        />
-        <NotFound v-if="!peoples.length" :title="title" />
-        <infinite-loading
-          @infinite="peopleScroll"
-          spinner="circles"
-          v-if="peoples.length"
-        >
-          <div class="text-red" slot="no-more">No More Request</div>
-          <div class="text-red" slot="no-results">No More Request</div>
-        </infinite-loading>
-      </div>
-    </div>
+    <NotFound v-if="!peoples.length" :title="title" />
+
+    <People v-for="(people, index) in peoples" :people="people" :key="index" />
   </div>
 </template>
 
@@ -38,8 +23,8 @@
 import { mapGetters, mapActions } from "vuex";
 
 import { loader, search } from "@/mixins";
-import Sponsor from "@/components/search/sponsoredBusiness";
 
+import Sponsor from "@/components/search/sponsoredBusiness";
 import People from "@/components/search/people";
 
 export default {
@@ -49,9 +34,6 @@ export default {
     People,
   },
 
-  destroyed() {
-    this.page(1);
-  },
   computed: {
     ...mapGetters({
       peoples: "search/GET_RESULT_USER",
@@ -59,7 +41,9 @@ export default {
       getPage: "search/GET_CURRENT_PAGINATION_PAGE",
     }),
   },
-
+  mounted() {
+    window.addEventListener("scroll", this.onscroll);
+  },
   methods: {
     ...mapActions({
       userStore: "search/FIND_USER",
@@ -67,25 +51,30 @@ export default {
       page: "search/SET_CURRENT_PAGINATION_PAGE",
     }),
 
-    async peopleScroll($state) {
-      console.log("yes");
-      try {
+    onscroll: async function (event) {
+      const scrollY = window.scrollY;
+      const visible = document.documentElement.clientHeight;
+      const pageHeight = document.documentElement.scrollHeight;
+      const bottomOfPage = visible + scrollY >= pageHeight;
+
+      if (
+        this.callback &&
+        (bottomOfPage || pageHeight < visible) &&
+        !this.endLoading &&
+        !this.loadingHasActivated
+      ) {
         this.lauchLoader(true);
-        this.busy = true;
         const request = await this.callback({
           ...this.getStack,
           page: this.getPage,
         });
 
         if (request.length) {
-          $state.loaded();
           this.userStore(request);
-          //this.page(this.getPage + 1);
-        } else $state.complete();
+          this.page(this.getPage + 1);
+        } else this.endLoading = true;
 
-        this.lauchLoader(false);
-      } catch (error) {
-        console.log(error);
+        console.log("At the bottom");
         this.lauchLoader(false);
       }
     },

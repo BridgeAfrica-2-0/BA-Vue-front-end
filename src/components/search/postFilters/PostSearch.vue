@@ -14,13 +14,6 @@
     </h6>
     <NotFound v-if="!posts.length" :title="title" />
     <Post v-for="(post, index) in posts" :post="post" :key="index" />
-
-    <!--<b-col col="12" v-if="posts.length">
-      <infinite-loading @infinite="postScroll" slot="append" spinner="waveDots">
-        <div class="text-red" slot="no-more">No More Request</div>
-        <div class="text-red" slot="no-results">No More Request</div>
-      </infinite-loading> 
-    </b-col>-->
   </div>
 </template>
 
@@ -48,7 +41,7 @@ export default {
   },
 
   mounted() {
-    this.getNext();
+    window.addEventListener("scroll", this.onscroll);
   },
 
   methods: {
@@ -58,51 +51,32 @@ export default {
       page: "search/SET_CURRENT_PAGINATION_PAGE",
     }),
 
-    getNext() {
-      window.onscroll = () => {
-        try {
-          let bottomOfWindow =
-            document.documentElement.scrollTop + window.innerHeight ===
-            document.documentElement.offsetHeight;
-          console.log(
-            document.documentElement.scrollTop,
-            window.innerHeight,
-            document.documentElement.offsetHeight
-          );
+    onscroll: async function (event) {
+      const scrollY = window.scrollY;
+      const visible = document.documentElement.clientHeight;
+      const pageHeight = document.documentElement.scrollHeight;
+      const bottomOfPage = visible + scrollY >= pageHeight;
 
-          console.log("stest scrool", bottomOfWindow);
-          if (bottomOfWindow) {
-            this.postScroll();
-          }
-        } catch (error) {
-          console.log(error);
-        }
-      };
-    },
+      if (
+        this.callback &&
+        (bottomOfPage || pageHeight < visible) &&
+        !this.endLoading &&
+        !this.loadingHasActivated
+      ) {
+        this.lauchLoader(true);
+        const request = await this.callback({
+          ...this.getStack,
+          page: this.getPage,
+        });
 
-    async postScroll() {
-      if (this.callback)
-        try {
-          //this.lauchLoader(true);
-          const request = await this.callback({
-            ...this.getStack,
-            page: this.getPage,
-          });
+        if (request.length) {
+          this.postStore(request);
+          this.page(this.getPage + 1);
+        } else this.endLoading = true;
 
-          if (request.length) {
-            console.log("data");
-            this.postStore(request);
-
-            //this.page(this.getPage + 1);
-          } else {
-            console.log("no data");
-          }
-
-          //this.lauchLoader(false);
-        } catch (error) {
-          console.log(error);
-          //this.lauchLoader(false);
-        }
+        console.log("At the bottom");
+        this.lauchLoader(false);
+      }
     },
   },
 };

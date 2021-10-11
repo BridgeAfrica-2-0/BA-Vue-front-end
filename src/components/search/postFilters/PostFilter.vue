@@ -1,6 +1,6 @@
 <template>
-  <div class="mx-4">
-    <div class="fl mb-5">
+  <div>
+    <div class="fl mb-3">
       <label for="datepicker-dateformat1">Posted Date</label>
       <b-form-datepicker
         v-model="created_at"
@@ -14,52 +14,43 @@
         locale="en"
       ></b-form-datepicker>
     </div>
-    <b-row class="fl my-2" @click="showRecentPost">
-      <span>Recent post</span>
-      <b-icon-toggle-on
-        v-if="isRecentPost"
-        class="color"
-        font-scale="1.5"
-      ></b-icon-toggle-on>
-      <b-icon-toggle-off
-        v-else
-        class="color"
-        font-scale="1.5"
-      ></b-icon-toggle-off>
-    </b-row>
 
-    <b-row class="fl my-2" @click="showPostHaveNotSeen">
-      <span>Post you've not see</span>
-      <b-icon-toggle-on
-        v-if="isPostHaveNotSeen"
-        class="color"
-        font-scale="1.5"
-      ></b-icon-toggle-on>
-      <b-icon-toggle-off
-        v-else
-        class="color"
-        font-scale="1.5"
-      ></b-icon-toggle-off>
-    </b-row>
+    <b-form-checkbox
+      @click="showRecentPost"
+        v-model="isRecentPost"
+        id="customSwitch1"
+        name="customSwitch1"
+        switch
+      >
+        Recent Post
+    </b-form-checkbox>
+    <b-form-checkbox
+      @click="showPostHaveNotSeen"
+        v-model="isPostHaveNotSeen"
+        id="customSwitch2"
+        name="customSwitch2"
+        switch
+      >
+        Post you've not seen
+    </b-form-checkbox>
 
-    <a
-      :class="['cursor', rootSectionIsVisible ? 'w-100' : 'collapsed w-100']"
+    <div class="ab"
+      :class="['cursor mt-3', rootSectionIsVisible ? 'w-100' : 'collapsed w-100']"
       :aria-expanded="rootSectionIsVisible ? 'true' : 'false'"
       aria-controls="collapse-4"
       @click.prevent="toogleRootSection"
     >
-      <b-row class="fl">
-        <span>Post from</span>
         <b-icon
           :icon="rootSectionIsVisible ? 'arrow-down' : 'arrow-up'"
         ></b-icon>
-      </b-row>
-    </a>
+        <span>Post from</span>
+
+    </div>
 
     <b-collapse id="collapse-4" v-model="rootSectionIsVisible">
-      <b-card class="row">
+      <b-card>
         <!--begin buisness section-->
-        <a
+        <div class="db"
           :class="[
             'cursor',
             buisnessSectionIsVisible ? 'w-100  my-2' : 'collapsed w-100',
@@ -68,13 +59,12 @@
           aria-controls="collapse-2"
           @click.prevent="buisnessSectionIsVisible = !buisnessSectionIsVisible"
         >
-          <b-row class="fl">
-            <span>Buisness</span>
-            <b-icon
+             <b-icon
               :icon="buisnessSectionIsVisible ? 'arrow-down' : 'arrow-up'"
             ></b-icon>
-          </b-row>
-        </a>
+            <span>Buisness</span>
+          
+        </div>
         <b-collapse
           id="collapse-2"
           v-model="buisnessSectionIsVisible"
@@ -95,7 +85,7 @@
         <!--end buiness section-->
 
         <!--begin people section-->
-        <a
+        <div class="db"
           :class="[
             'cursor',
             peopleSectionIsVisible ? 'w-100' : 'collapsed w-100',
@@ -104,13 +94,12 @@
           aria-controls="collapse-1"
           @click.prevent="peopleSectionIsVisible = !peopleSectionIsVisible"
         >
-          <b-row class="fl">
-            <span>People</span>
             <b-icon
               :icon="peopleSectionIsVisible ? 'arrow-down' : 'arrow-up'"
             ></b-icon>
-          </b-row>
-        </a>
+            <span>People</span>
+      
+        </div>
         <b-collapse
           id="collapse-1"
           v-model="peopleSectionIsVisible"
@@ -131,7 +120,7 @@
         <!--end people section-->
 
         <!--begin network section-->
-        <a
+        <div class="db"
           :class="[
             'cursor',
             networkSectionIsVisible ? 'w-100' : 'collapsed w-100',
@@ -140,13 +129,12 @@
           aria-controls="collapse-4"
           @click.prevent="networkSectionIsVisible = !networkSectionIsVisible"
         >
-          <b-row class="fl">
-            <span>Network</span>
             <b-icon
               :icon="networkSectionIsVisible ? 'arrow-down' : 'arrow-up'"
             ></b-icon>
-          </b-row>
-        </a>
+            <span>Network</span>
+            
+        </div>
         <b-collapse
           id="collapse-4"
           v-model="networkSectionIsVisible"
@@ -169,7 +157,8 @@
           @click.native="onProcess"
           title="Search"
           class="mt-4"
-          fas="fas fa-search  fa-lg btn-icon "
+          fas="fas fa-search  fa-lg btn-icon"
+          style="align-items: center"
         />
       </b-card>
     </b-collapse>
@@ -218,17 +207,9 @@ export default {
     strategies: null,
   }),
 
-  created() {
-    this.strategies = {
-      user: (data) => this.findPeoplePost(data),
-      buisness: (data) => this.findBuisnessPost(data),
-      network: (data) => this.findNetworkPost(data),
-    };
-  },
 
   watch: {
     selectedPeople: function () {
-      console.log(this.selectedPeople);
       this.communityIsChecked(this.selectedPeople);
     },
     selectedBuisness: function () {
@@ -245,12 +226,22 @@ export default {
         return false;
       }
       if (newValue) {
+        this.page(1);
+        this.newCallbackForPagination(
+          this.$repository.search.findPostByKeyword
+        );
+        this.stack({
+          data: { recent_post: "" },
+          keyword: this.keyword,
+        });
+
         this._onFindPost({
           data: { recent_post: "" },
           keyword: this.keyword,
         });
       }
     },
+
     isPostHaveNotSeen: function (newValue) {
       if (!this.keyword && newValue) {
         this.isPostHaveNotSeen = false;
@@ -258,6 +249,14 @@ export default {
         return false;
       }
       if (newValue) {
+        this.page(1);
+        this.newCallbackForPagination(
+          this.$repository.search.findPostByKeyword
+        );
+        this.stack({
+          data: { not_seen: "" },
+          keyword: this.keyword,
+        });
         this._onFindPost({
           data: { not_seen: "" },
           keyword: this.keyword,
@@ -267,6 +266,14 @@ export default {
 
     created_at: function (newValue) {
       if (newValue) {
+        this.page(1);
+        this.newCallbackForPagination(
+          this.$repository.search.findPostByKeyword
+        );
+        this.stack({
+          data: { created_at: this.created_at },
+          keyword: this.keyword,
+        });
         this._onFindPost({
           data: { created_at: this.created_at },
           keyword: this.keyword,
@@ -284,10 +291,10 @@ export default {
   methods: {
     ...mapActions({
       findPeoplePost: "search/FIND_POST",
-      findBuisnessPost: "search/FIND_BUISNESS_POST",
-      findNetworkPost: "search/FIND_NETWORK_POST",
       newCallbackForPagination: "search/SET_CURRENT_PAGINATE_CALLBACK",
       lauchLoader: "search/LOADING",
+      page: "search/SET_CURRENT_PAGINATION_PAGE",
+      stack: "search/STACK_VALUE", //
     }),
 
     async _onFindPost(e) {
@@ -297,16 +304,16 @@ export default {
           ...e,
           page: 1,
         });
+        if (request.length) this.page(2);
         this.findPeoplePost(request);
       } catch (error) {
-        this.lauchLoader(false);
+        console.log(error);
       }
 
       this.lauchLoader(false);
     },
 
     communityIsChecked(data) {
-      console.log(data);
       const useSelectFollowerAndFollowing = data.filter(
         (item) => "Follower" == item || "Following" == item
       );
@@ -321,7 +328,6 @@ export default {
           (item) => "Follower" !== item || "Following" !== item
         );
 
-        console.log(newData);
       }
     },
 
@@ -342,29 +348,44 @@ export default {
       }));
     },
 
-    _onFind(data) {
+    async _onFind(data) {
+
+      this.lauchLoader(true);
       const credentials = Object.keys(data);
+      const render = []
 
-      const stopLoader = (index) =>
-        credentials.length - 1 === index ? false : true;
+      if(credentials.includes('users')){
+        let response = await this.$repository.search.findPostByKeyword({ page:1, data:data['users'], keyword:this.keyword})
+        render.push(response)
+      }
 
-      const startLoader = (item) =>
-        credentials.indexOf(item) == 0 ? true : false;
+      if(credentials.includes('buisness')){
+        let response = await this.$repository.search.findPostByBuisness({ page:1, data:data['buisness'], keyword:this.keyword})
+        render.push(response)
+      }
 
-      credentials.map((item, index) => {
-        this.strategies[item]({
-          credentials: data[item],
-          lauchLoader: startLoader(item),
-          endLoader: stopLoader(index),
-        });
-      });
+      if(credentials.includes('network')){
+        let response = await this.$repository.search.findPostByNetWork({ page:1, data:data['network'], keyword:this.keyword})
+        render.push(response)
+      }
+
+      this.findPeoplePost(render)
+
+      this.lauchLoader(true);
+
     },
+
+
+
+
 
     onProcess() {
       if (!this.keyword) {
         this.onNotified("the keyword does not exist");
         return false;
       }
+
+      this.page(1)
       const user = this.map(this.selectedPeople, `user`);
       const buisness = this.map(this.selectedBuisness, `buisness`);
       const network = this.map(this.selectedNetwork, `network`);
@@ -376,8 +397,8 @@ export default {
 
         return hash;
       }, {});
-
-      this.newCallbackForPagination(this._onFind(data));
+      this.stack(data)
+      this.newCallbackForPagination(this._onFind);
       this._onFind(data);
     },
 
@@ -426,5 +447,12 @@ span {
 }
 .cursor {
   cursor: pointer;
+}
+.av{
+    display: flex;
+    align-items: center;
+}
+.db {
+  display: block
 }
 </style>

@@ -29,7 +29,7 @@ export default {
       state.user = userData;
 
       localStorage.setItem("user", JSON.stringify(userData));
-      axios.defaults.headers.common.Authorization = `Bearer ${userData.accessToken}`;
+     // axios.defaults.headers.common.Authorization = `Bearer ${userData.accessToken}`;
 
       const userInfo = localStorage.getItem("user");
     },

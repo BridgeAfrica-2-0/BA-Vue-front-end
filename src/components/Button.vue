@@ -26,6 +26,9 @@ export default {
 </script>
 
 <style scoped>
+.btn-com{
+  font-size: 17px;
+}
 #btn-bg {
   background-color: #e75c18 !important;
   color: white !important;

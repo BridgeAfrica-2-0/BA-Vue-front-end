@@ -1,8 +1,7 @@
 <template>
   <div>
-    <div>
-      <b-row class="m-1 mt-4">
-        <b-col cols="12" class="">
+      <b-row class="row m-1 mt-4 pb-1 border">
+        <b-col cols="12" class="mt-4">
           <b-row>
             <b-col cols="2" md="1" class="m-0 p-0">
               <b-avatar
@@ -37,7 +36,7 @@
               ></lightbox>
             </b-col>
             <b-col class="mt-1">
-              <span class="mr-3"
+              <span class="mr-3 cursor"
                 ><b-icon
                   icon="suit-heart"
                   variant="primary"
@@ -45,8 +44,9 @@
                 ></b-icon>
                 {{ post.likes_count | formatNumber }}</span
               >
-              <span
-                ><b-icon
+              <span class="cursor" @click="() => toggle = !toggle">
+                <b-icon
+                 
                   icon="chat-fill"
                   variant="primary"
                   aria-hidden="true"
@@ -54,11 +54,15 @@
                 {{ post.comment_count | formatNumber }}</span
               >
             </b-col>
+            
           </b-row>
+          <div v-show="toggle" >
+            <Comment v-for="(comment,index) in comments" :key="index" :comment="comment" />
+          </div>
         </b-col>
       </b-row>
-      <!--
-      <b-row class="m-1 mt-4">
+     <!--
+      <b-row class="row m-1 mt-4 pb-1 border">
         <b-col cols="12" class="mt-4">
           <b-row>
             <b-col cols="2" md="1" class="m-0 p-0">
@@ -106,7 +110,7 @@
         </b-col>
       </b-row>
 
-      <b-row class="m-1 mt-4">
+      <b-row class="row m-1 mt-4 pb-1 border">
         <b-col cols="12" class="mt-4">
           <b-row>
             <b-col cols="2" md="1" class="m-0 p-0">
@@ -152,7 +156,7 @@
           </b-row>
         </b-col>
       </b-row>
-
+      
       <b-row class="mt-4 m-1">
         <b-col cols="12" class="mt-4">
           <b-row>
@@ -196,12 +200,14 @@
         </b-col>
       </b-row>
       -->
+  
     </div>
-  </div>
 </template>
 
 <script>
+import Comment from './comment.vue'
 import { fromNow, formatNumber } from "@/helpers";
+
 export default {
   name: "postNetwork",
   props: {
@@ -210,12 +216,24 @@ export default {
       required: true,
     },
   },
+
+  components:{
+    Comment
+  },
+
+  created(){
+    this.comments= this.post.comments
+  },
+
   filters: {
     fromNow,
     formatNumber,
   },
+  
   data() {
     return {
+      toggle:false,
+      comments:[],
       images: [
         "https://i.wifegeek.com/200426/f9459c52.jpg",
         "https://i.wifegeek.com/200426/5ce1e1c7.jpg",
@@ -269,6 +287,14 @@ export default {
 </script>
 
 <style scoped>
+.cursor{
+  cursor: pointer
+}
+
+.border {
+    border: 1px solid #eaeef1;
+    border-radius: 16px;
+}
 .action-intro {
   font-size: 1rem;
 }

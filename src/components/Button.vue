@@ -3,10 +3,10 @@
     block
     size="sm"
     id="btn-bg"
-    class="btn btn-bg flexx pobtn mt-4 p-3 btn-primary btn-sm btn-block"
+    :class="styleClass"
     variant="primary"
   >
-    <i :class="fas"></i>
+    <i :class="fas" v-if="fas"></i>
     <span class="btn-com">{{ title }}</span>
   </b-button>
 </template>
@@ -17,9 +17,13 @@ export default {
       required: true,
       type: String
     },
+    styleClass:{
+      default:"btn btn-bg flexx pobtn mt-4 p-3 btn-primary btn-sm btn-block",
+      type:String
+    },
     fas: {
-      required: true,
       type: String,
+      default:""
     },
   },
 };

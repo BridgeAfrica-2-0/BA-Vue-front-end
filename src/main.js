@@ -18,6 +18,7 @@ import homeIconData from "@iconify-icons/mdi-light/home";
 import ReadMore from "vue-read-more";
 import VueSocialauth from "vue-social-auth";
 import Notifications from 'vue-notification'
+import VueSocialSharing from 'vue-social-sharing'
 
 
 import plugin from './http'
@@ -151,9 +152,7 @@ import VueAgile from 'vue-agile'
 
 Vue.use(VueAgile);
 
-
-
-
+Vue.use(VueSocialSharing);
 Vue.component("v-select", vSelect);
 
 import i18n from "./i18n";

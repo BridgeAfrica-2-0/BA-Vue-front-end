@@ -209,16 +209,7 @@ export default {
 
 
   watch: {
-    selectedPeople: function () {
-      this.communityIsChecked(this.selectedPeople);
-    },
-    selectedBuisness: function () {
-      this.communityIsChecked(this.selectedBuisness);
-    },
-    selectedNetwork: function () {
-      this.communityIsChecked(this.selectedNetwork);
-    },
-
+   
     isRecentPost: function (newValue) {
       if (!this.keyword && newValue) {
         this.onNotified("the keyword does not exist");
@@ -352,32 +343,28 @@ export default {
 
       this.lauchLoader(true);
       const credentials = Object.keys(data);
-      const render = []
+      let render = []
 
       if(credentials.includes('users')){
         let response = await this.$repository.search.findPostByKeyword({ page:1, data:data['users'], keyword:this.keyword})
-        render.push(response)
+        render = [...render,...response]
       }
 
       if(credentials.includes('buisness')){
         let response = await this.$repository.search.findPostByBuisness({ page:1, data:data['buisness'], keyword:this.keyword})
-        render.push(response)
+        render = [...render,...response]
       }
 
       if(credentials.includes('network')){
         let response = await this.$repository.search.findPostByNetWork({ page:1, data:data['network'], keyword:this.keyword})
-        render.push(response)
+        render = [...render,...response]
       }
 
       this.findPeoplePost(render)
 
-      this.lauchLoader(true);
+      this.lauchLoader(false);
 
     },
-
-
-
-
 
     onProcess() {
       if (!this.keyword) {

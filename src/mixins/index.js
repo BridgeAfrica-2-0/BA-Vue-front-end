@@ -55,7 +55,8 @@ export const search = {
 
   destroyed() {
     this.page(1);
-    this.$store.commit('search/RESET_RESULT')
+    this.$store.commit('search/RESET_RESULT');
+    window.removeEventListener('scroll', this.onscroll)
   },
 
   computed: {

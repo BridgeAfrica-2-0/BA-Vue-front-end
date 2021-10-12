@@ -5,7 +5,7 @@
         <h3 class="name">
           <h6 class="name">
             <fas-icon class="icons" :icon="['fas', 'user']" size="lg" />
-            <b> Profile </b>
+            <b> {{$t("profile.title")}} </b>
           </h6>
  
 

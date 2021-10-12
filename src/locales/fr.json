@@ -28,7 +28,11 @@
     "First_Name_is_required": "Le prénom est requis",
     "last_Name_is_required": "Le nom de famille est requis",
     "Sign_Up_with_facebook": "Sign Up with facebook",
-    "Login_To_Bridge_Africa": "Connectez-vous pour Bridge Africa"
+    "Login_To_Bridge_Africa": "Connectez-vous pour Bridge Africa",
+    "profile": {
+      "title": "Profil"
+      }
+    
     
     
   }

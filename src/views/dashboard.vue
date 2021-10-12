@@ -247,8 +247,6 @@ export default {
        
     },
 
-
-
    dashboardPpost(){
     
        this.$store

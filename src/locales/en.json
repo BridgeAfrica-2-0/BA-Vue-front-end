@@ -30,7 +30,39 @@
     "Sign_Up_with_facebook": "Sign Up with facebook",
     "Login_To_Bridge_Africa": "Login To Bridge Africa",
     "profile": {
-      "title": "Profile"
+      "title": "Profile",
+      "upgrade_plan": "upgrade plan",
+      "community": "communities",
+      "visit_profile": "Visit Profile",
+      "messages": "Messages",
+      "notifications": "Notifications",
+      "current_plan":"Current Plan",
+      "basic": "Basic"
+      }, 
+    "business": {
+      "my_businesses": "My Businesses",
+      "no_business": "No Business",
+      "add_business":"Add Business",
+      "upgrade_plan": "upgrade plan",
+      "community": "communities",
+      "current_plan":"Current Plan",
+      "basic": "Basic",
+      "visit_profile": "Visit Profile",
+      "messages": "Messages",
+      "notifications": "Notifications",
+      "visit_website":"Visit Website",
+      "market_place":"Market Place",
+      "get_direction": "get direction",
+      "posts": "Posts",
+      "edit":"Edit",
+      "delete":"Delete",
+      "reply":"Reply",
+      "post_comment":"Post a Comment"
+    },
+      "dashboard": {
+        "use_bridge": "Use Bridge Africa as yourself or as one of your businesses",
+        "hot_bussinesses": "hot bussinesses",
+        "popular_networks": "popular networks"
       }
     
     

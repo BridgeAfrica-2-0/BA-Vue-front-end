@@ -3,29 +3,30 @@ import Vuex from "vuex";
 import auth from "./auth";
 import dashboard from "./dashboard";
 import businessOwner from "./businessOwner";
-import market from "./market";
-import ProfileAndBusinessDetails from "./ProfileAndBusinessDetails";
-import hotbusiness from "./hotbusiness";
 import networkDetails from "./networkDetails";
 import dashboardcommunity from "./dashboardcommunity";
-import NetworkSettings from "./NetworkSettings";
-import networkProfileMembers from "./networkProfileMembers";
+import ProfileAndBusinessDetails from "./ProfileAndBusinessDetails";
+import market from "./market";
+import hotbusiness from "./hotbusiness";
+import networkNotification from "./networkNotification";
 
 import axios from "axios";
 
 Vue.use(Vuex);
+//  axios.defaults.baseURL = process.env.VUE_APP_API_URL;     
+axios.defaults.baseURL = process.env.VUE_APP_API_URL_EDS;     
 
-// axios.defaults.baseURL = process.env.VUE_APP_API_URL;
-axios.defaults.baseURL = process.env.VUE_APP_API_URL_EDS;
 
 export default new Vuex.Store({
-    modules: {
-        auth,
-        networkDetails,
-        dashboardcommunity,
-        ProfileAndBusinessDetails,
-        businessOwner,
-        market,
-        networkProfileMembers
-    },
+  modules: {
+    auth,
+    networkDetails,
+    dashboardcommunity,
+    ProfileAndBusinessDetails,
+    businessOwner,
+    dashboard,
+    hotbusiness,
+    market,
+    networkNotification
+  },
 });

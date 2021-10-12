@@ -1,3 +1,4 @@
+   
 <template>
   <div class="container" style=" ">
     <div class="container">
@@ -8,7 +9,7 @@
               v-model="selectAll"
               :indeterminate="indeterminate"
               name="checkbox-1"
-              @click="select"
+              @change="select"
               class="m-left-top username"
             >
               {{ selectAll ? "Un-select All" : "Select All" }}
@@ -26,6 +27,11 @@
       <br />
 
       <b-row>
+        <div>
+          Selected: <strong>{{ selected }}</strong
+          ><br />
+          All Selected: <strong>{{ selectAll }}</strong>
+        </div>
         <b-col cols="12" class="mr-3" v-for="user in users" :key="user.id">
           <p class="">
             <span style="display:inline-flex">
@@ -51,17 +57,11 @@
           </p>
 
           <p class="text">
-            {{ user.text }}
+            {{ user.description }}
           </p>
 
           <hr width="100%" />
         </b-col>
-        <div>
-          Selected: <strong>{{ selected }}</strong
-          ><br />
-          All Selected: <strong>{{ allSelected }}</strong>
-
-        </div>
       </b-row>
     </div>
   </div>
@@ -72,23 +72,30 @@ export default {
   name: "notification",
   data() {
     return {
-      users: [],
+      users: [ 
+        { "id": "1", "name": "Shad Jast", "time": "1", "picture": "Shad Jast", "description": "Lorem Ipsum is this is just a dummy text to post simply dummy "}, 
+        { "id": "2", "name": "Duane Metz", "time": "2", "picture": "Shad Jast", "description": "standard dummy text ever since the 1500s, Lorem Ipsum is"}, 
+        { "id": "3", "name": "Myah Kris", "time": "3", "picture": "Shad Jast", "description": "simply dummy text of the printing and typesetting industry. Lorem"}, 
+        { "id": "4", "name": "Dr. Kamron Wunsch", "time": "4", "picture": "Shad Jast", "description": "Ipsum has been the industry's standard dummy text ever since the"}, 
+        { "id": "5", "name": "Brendon Rogahn", "time": "4", "picture": "Shad Jast", "description": "of the printing and typesetting industry. Lorem Ipsum has been the"}
+      ],
       selected: [],
       selectAll: false,
       indeterminate: false
     };
   },
-
   methods: {
-    select() {
+    select(checked) {
+      console.log("this.selectAll: "+this.selectAll);
+      console.log("checked: "+checked);
       this.selected = [];
-      if (!this.selectAll) {
-        for (let i in this.users) {
-          this.selected.push(this.users[i]);
+      if (checked) {
+        for (let user in this.users) {
+          console.log("this.users[user].id: "+this.users[user].name)
+          this.selected.push(this.users[user].name.toString());
         }
       }
     },
-
     updateCheckall: function() {
       if (this.users.length === this.selected.length) {
         this.selectAll = true;
@@ -119,7 +126,6 @@ export default {
 .f-left {
   float: left;
 }
-
 .f-right {
   float: right;
 }
@@ -127,32 +133,26 @@ export default {
   margin-top: 20px;
   margin-bottom: 30px;
   padding-bottom: 10px;
-
   border-bottom: 0.5px solid;
   border-color: gray;
 }
-
 .m-left {
   margin-left: -20px;
 }
-
 .m-left-top {
   margin-left: -15px;
 }
 .p-notifaction {
   padding: 30px;
 }
-
 h5 {
   font-size: 15px;
 }
-
 @media screen and (min-width: 768px) {
   .btn {
     font-size: 16px;
   }
 }
-
 @media screen and (max-width: 768px) {
   .btn {
     font-size: 12px;
@@ -165,37 +165,30 @@ h5 {
   .username {
     font-size: 16px !important;
   }
-
   .duration {
     font-size: 14px;
     font-weight: 100;
   }
-
   .text {
     font-size: 14px;
   }
-
   .profile-pic {
     width: 64px !important;
     height: 64px !important;
     margin-top: -5px;
   }
 }
-
 @media only screen and (max-width: 768px) {
   .username {
     font-size: 14px !important;
   }
-
   .duration {
     font-size: 12px;
     font-weight: 100;
   }
-
   .text {
     font-size: 12px;
   }
-
   .profile-pic {
     width: 30px !important;
     margin-top: -5px;

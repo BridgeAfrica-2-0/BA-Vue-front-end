@@ -137,7 +137,7 @@ const routes = [
     component: networks,
   },
   {
-    path: "/networks",
+    path: "/networks/:id?",
     name: "networks",
     component: networks,
   },

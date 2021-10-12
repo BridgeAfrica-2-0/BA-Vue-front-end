@@ -3,7 +3,7 @@
 
     <slot name="owner">
     </slot>
-    <b-form-input  :placeholder="placeholder" class="input-search" v-model="text"></b-form-input>
+    <b-form-input  :placeholder="placeholder" class="input-search" v-model="text" ></b-form-input>
     <h6 class="mt-3 fw-b">{{subtitle}}</h6>
     
     <b-list-group>
@@ -13,6 +13,7 @@
 </template>
 
 <script>
+import _ from "lodash"
 import Contact from "./Link.vue"
 export default {
   name:"Box",
@@ -28,6 +29,8 @@ export default {
       text:""
     }
   },
+
+ 
 }
 </script>
 

@@ -30,7 +30,7 @@
               >{{$t("business.current_plan")}}: <span class="text-success">{{$t("business.basic")}}</span></span
             >
           </p>
-          <p class="mb-1 mb-3"> {{business.category}} </p>
+          <p class="mb-1 mb-3"> <span v-for="(item,i) in business.category" :key="i">{{item.name}},</span> </p>
           <p class="mb-1">
             <b-icon-person-fill class="text-primary"></b-icon-person-fill>
               <router-link :to="'business_owner/'+business.id">

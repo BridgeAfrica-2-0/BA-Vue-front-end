@@ -580,9 +580,12 @@
 									/></span>
 									Language
 								</template>
-								<b-dropdown-item @click="setLocale(lang)" v-for="(lang, i) in langs" :key="i">{{
-									lang.toUpperCase()
-								}}</b-dropdown-item>
+								<b-dropdown-item
+									@click="setLocale(lang)"
+									v-for="(lang, i) in langs"
+									:key="i"
+									>{{ lang.toUpperCase() }}</b-dropdown-item
+								>
 							</b-dropdown>
 						</div>
 						<hr class="h-divider" />
@@ -632,13 +635,13 @@
 			};
 		},
 		mounted() {
-      const locale = sessionStorage.getItem('locale')
-      if(locale){
-        this.$i18n.locale = locale
-        return
-      }
-      this.$i18n.locale ='en'
-    },
+			const locale = sessionStorage.getItem("locale");
+			if (locale) {
+				this.$i18n.locale = locale;
+				return;
+			}
+			this.$i18n.locale = "en";
+		},
 		methods: {
 			toggleinput() {
 				this.$refs.mobileinput.style.display = "block";
@@ -646,16 +649,14 @@
 			},
 			setLocale(lang) {
 				this.$i18n.locale = lang;
-        console.log('change language to: ', lang);
+				this.togglenav();
 				sessionStorage.setItem("locale", lang);
 			},
 			togglenav() {
 				if (this.shownav == false) {
 					this.shownav = true;
-					console.log(this.shownav);
 				} else {
 					this.shownav = false;
-					console.log(this.shownav);
 				}
 			},
 		},

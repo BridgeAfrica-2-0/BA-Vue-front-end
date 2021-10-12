@@ -18,7 +18,7 @@
     <br />
 
 
-        <CommunityBusiness  searchh="search" ref="search" type="Follower" />
+        <CommunityBusiness  :searchh="search" ref="search" type="Follower" />
         
      
   </div>

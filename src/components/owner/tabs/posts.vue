@@ -32,6 +32,7 @@
                 variant="primary"
               ></b-icon>
               <b> Work at: </b>
+              <span v-if="info.user_experience"> 
               <span
                 class="text"
                 v-for="exp in info.user_experience.slice(0, 1)"
@@ -39,6 +40,7 @@
               >
                 {{ exp.company_name }}
               </span>
+               </span>
             </p>
             <p>
               <b-icon
@@ -118,13 +120,14 @@
               
 
               <b> Work at: </b>
+              <span v-if="info.user_experience">  
               <span
                 class="text"
                 v-for="exp in info.user_experience.slice(0, 1)"
                 :key="exp.id"
               >
                 {{ exp.company_name }}
-              </span>
+              </span>  </span>
             </p>
             <p>
             <router-link to="profile_owner">

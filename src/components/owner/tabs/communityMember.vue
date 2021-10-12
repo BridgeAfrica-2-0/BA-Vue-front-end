@@ -1,8 +1,7 @@
 <template>
-  <div>
+  <div class="p-2">
     <div class="s-ccard">
       <b-row>
-        {{blec}} mother fucker
         <b-col lg="6" sm="12" class="p-2" v-for="item in users" :key="item.id">
           <div class="people-style border shadow">
             <b-row class="mb-1">
@@ -96,7 +95,7 @@
           </div>
         </b-col>
       </b-row>
-      <infinite-loading @infinite="infiniteHandler"  ref="infiniteLoading" ></infinite-loading>
+      <infinite-loading :identifier="infiniteId"  @infinite="infiniteHandler"  ref="infiniteLoading" ></infinite-loading>
     </div>
   </div>
 </template>
@@ -108,10 +107,11 @@ export default {
   data() {
     return {
       page: 1,
+       infiniteId: +new Date(),
       options: {
         rewind: true,
         autoplay: true,
-        perPage: 1,
+        perPage: 2,
         pagination: false,
 
         type: "loop",
@@ -125,14 +125,14 @@ export default {
     users() {
       if (this.type == "Follower") {
 
-       // return this.$store.state.profile.UcommunityFollower.user_followers;
+        return this.$store.state.profile.UcommunityFollower.user_followers;
       // return this.$store.state.profile.UcommunityFollower.user_followers;
-      return [];
+     
 
       } else {
-      //  return this.$store.state.profile.UcommunityFollowing.user_following;
+        return this.$store.state.profile.UcommunityFollowing.user_following;
      // return this.$store.state.profile.UcommunityFollower.user_followers;
-     return [];
+    
       }
     },
 
@@ -143,21 +143,25 @@ export default {
 
 
     search(){
-    
+     
+       console.log('search started');
        
          if(this.type=="Follower"){ 
          
-        //this.$store.commit("profile/setPcommunityFollower",[]); 
+        this.$store.commit("profile/setUcommunityFollower",{ "user_followers": [ ], "total_user_follower": 0 }); 
 
        }else{
        
-       //  this.$store.commit("profile/setPcommunityFollowing", []); 
+        
+        this.$store.commit("profile/setUcommunityFollowing",{ "user_following": [ ], "total_user_following": 0 }); 
        }
 
       this.page = 1;
+      this.infiniteId += 1;
 
      
-      this.$refs.infiniteLoading.attemptLoad();
+     this.$refs.infiniteLoading.attemptLoad();
+    
 
     },
 
@@ -174,8 +178,8 @@ export default {
 
   
     infiniteHandler($state) {
-      console.log("hahahahahahahah");
-      console.log($state);
+      
+     
       let url = null;
 
       if (this.type == "Follower") {
@@ -187,8 +191,9 @@ export default {
       } else {
         url = "profile/user/following/";
       }
+
       axios
-        .get(url + this.page)
+        .get(url + this.page+"?keyword="+this.searchh)
         .then(({ data }) => {
 
             console.log(data);
@@ -200,9 +205,9 @@ export default {
            
            console.log(this.users);
               this.users.push(...data.data.user_followers);
-          //  $state.loaded();
+            $state.loaded();
           } else {
-          //  $state.complete();
+            $state.complete();
           }
 
             } else {
@@ -212,9 +217,9 @@ export default {
            this.page += 1;
            
               this.users.push(...data.data.user_following);
-          //  $state.loaded();
+            $state.loaded();
           } else {
-           // $state.complete();
+           $state.complete();
           }
 
 

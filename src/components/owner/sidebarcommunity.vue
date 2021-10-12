@@ -8,7 +8,7 @@
         </h6>
       </span>
 
-      <b-tabs pills content-class="mt-3  f-left ">
+      <b-tabs pills lazy content-class="mt-3  f-left ">
         <b-tab active>
           <template slot="title">
             People <span class="spa-color"> {{ nFormatter(total.total_people)}}  </span>
@@ -17,7 +17,7 @@
           <div>  
             <b-row>
               <b-col>
-                <b-tabs fill pills content-class="mt-3  f-left m-up">
+                <b-tabs  lazy fill pills content-class="mt-3  f-left m-up">
                   <b-tab active>
                     <template slot="title">
                       Followers <span class="spa-color">  {{ nFormatter(total.total_user_follower)}} </span>
@@ -45,7 +45,7 @@
           </template>
 
           <div>
-            <b-tabs fill pills content-class="mt-3  f-left m-up checkcheck">
+            <b-tabs lazy fill pills content-class="mt-3  f-left m-up checkcheck">
               <b-tab active>
                 <template slot="title">
                   Followers <span class="spa-color">  {{ nFormatter(total.total_business_follower)}} </span>
@@ -74,7 +74,7 @@
           </template>
 
           <div>
-            <b-tabs fill pills content-class="mt-3  f-left m-up checkcheck">
+            <b-tabs lazy fill pills content-class="mt-3  f-left m-up checkcheck">
               <b-tab active>
                 <template slot="title">
                   Followers <span class="spa-color">  {{ nFormatter(total.total_network_follower)}} </span>
@@ -103,11 +103,11 @@
 </template>
 
 <script>
-import Business from "@/components/follower/tabs/business";
-import People from "@/components/follower/tabs/people";
-import Network from "@/components/follower/tabs/network";
+import Business from "@/components/owner/tabs/business";
+import People from "@/components/owner/tabs/people";
+import Network from "@/components/owner/tabs/network";
 export default {
-  name: "comunitiDashboard",
+  name: "comunitiDashboard",  
 
   components: {
     People,

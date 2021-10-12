@@ -462,6 +462,7 @@
             </b-col>
           </b-row>
           <b-row>
+
             <b-col v-if="item.media.length > 0" cols="12" class="mt-2">
               <div class="">
                 <lightbox
@@ -528,7 +529,7 @@
         />
       </b-row>
 
-      <infinite-loading @infinite="infiniteHandler"></infinite-loading>
+      <infinite-loading :identifier="infiniteId"   ref="infiniteLoading"   @infinite="infiniteHandler"></infinite-loading>
     </b-card>
   </div>
 </template>
@@ -546,6 +547,7 @@ export default {
     return {
       moment: moment,
       page: 1,
+      infiniteId: +new Date(),
       post: this.$store.state.businessOwner.ownerPost,
       url: null,
       delete: [],
@@ -589,10 +591,12 @@ export default {
     },
 
     infiniteHandler($state) {
+      console.log("user/post/" + this.page);
       axios
-        .get("post/" + this.page)
+        .get("user/post/" + this.page)
         .then(({ data }) => {
-          if (data.data.length) {
+          console.log(data);
+          if (data.data.length) { 
             this.page += 1;
 
             this.owner_post.push(...data.data);
@@ -868,7 +872,7 @@ export default {
       formData2.append("content", this.createPost.postBusinessUpdate);
 
       this.axios
-        .post("post", formData2, {
+        .post("user/post", formData2, {
           headers: {
             "Content-Type": "multipart/form-data",
           },
@@ -883,8 +887,13 @@ export default {
           });
           loader.hide();
           this.$refs["modal-xl"].hide();
+    
+        this.$store.commit("businessOwner/ownerPost",[]); 
 
-          this.ownerPost();
+           this.page = 1;
+      this.infiniteId += 1;
+   console.log("post create complete");
+
         })
         .catch((err) => {
           if (err.response.status == 422) {

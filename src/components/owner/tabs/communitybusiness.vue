@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="p-2">
     <b-row>
       <b-col lg="6" sm="12" class="p-2" v-for="item in businesses" :key="item.id">
         <div class="people-style shadow">
@@ -104,7 +104,8 @@
         </div>
       </b-col>
     </b-row>
-     <infinite-loading @infinite="infiniteHandler"></infinite-loading>
+     
+      <infinite-loading :identifier="infiniteId"  @infinite="infiniteHandler"  ref="infiniteLoading" ></infinite-loading>
   </div>
 </template>
 
@@ -118,6 +119,7 @@ export default {
    data() {
     return {
       page: 1,
+      infiniteId: +new Date(),
       options: {
         rewind: true,
         autoplay: true,
@@ -157,62 +159,31 @@ export default {
     },
 
 
-     search(){
     
-       this.infiniteHandler();
-      let url = null;
-    
-      
+
+       search(){
+     
+       console.log('search started');
+       
          if(this.type=="Follower"){ 
-          url="profile/business/follower/"
-        this.$store.commit("profile/setBcommunityFollower",[]); 
+         
+        this.$store.commit("profile/setBcommunityFollower",{ "business_followers": [ ], "total_business_follower": 0 }); 
 
        }else{
-        url="profile/business/following/";
-         this.$store.commit("profile/setBcommunityFollowing", []); 
+       
+        
+        this.$store.commit("profile/setBcommunityFollowing",{ "business_following": [ ], "total_business_following": 0 }); 
        }
 
-console.log("your canas");
+      this.page = 1;
+      this.infiniteId += 1;
 
+     
+     this.$refs.infiniteLoading.attemptLoad();
+    
 
- axios.get(url + this.page+"?keyword="+this.searchh )
-        .then(({ data }) => {
+    },
 
-          console.log(data);
-        
-          if(this.type=="Follower"){  
-
-
-          if (data.data.business_followers.length) {
-            
-         
-            this.businesses.push(...data.data.business_followers); 
-           
-           }
-        
-          }else{
-
-
-
-
-             if (data.data.business_following.length) {
-            
-         
-            this.businesses.push(...data.data.business_following); 
-           
-
-           }
-
-          }
-           
-        })
-        .catch((err) => {
-          console.log({ err: err });
-        });
-
-     this.page = 1;
-
-     },
 
      
 
@@ -231,6 +202,7 @@ console.log("your canas");
       axios
         .get(url + this.page+"?keyword="+this.searchh )
         .then(({ data }) => {
+          console.log(data);
         
           if(this.type=="Follower"){  
 

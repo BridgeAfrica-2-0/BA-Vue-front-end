@@ -47,14 +47,18 @@
                 variant="primary"
               ></b-icon>
               <b> Studied at: </b>
-             <span
+              <span v-if="info.user_education !=null">   
+          <span
                 v-for="edu in info.user_education.slice(0, 1)"
                 :key="edu.id"
                 class="text"
               >
-            
+           
                 {{ edu.school_name }}</span
               >
+
+             
+                </span>
             </p>
             <p>
               <b-icon
@@ -132,13 +136,15 @@
               </router-link>
 
               <b> Studied at: </b>
-             <span
+       
+              <span v-if="info.user_education !=null">      <span
                 v-for="edu in info.user_education.slice(0, 1)"
                 :key="edu.id"
                 class="text"
               >
                 {{ edu.school_name }}</span
-              > 
+              >
+              </span>
             </p>
             <p>
                <b-icon @click="switchTab('about')"

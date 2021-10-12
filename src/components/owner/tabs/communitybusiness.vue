@@ -113,7 +113,7 @@ import moment from "moment";
 import axios from "axios";
 
 export default {
-  props: ["type"],
+  props: ["type", "searchh"],
   
    data() {
     return {
@@ -129,6 +129,22 @@ export default {
       }
     };
   },
+
+  computed:{
+   
+    businesses(){
+
+      if(this.type=="Follower"){ 
+
+      return  this.$store.state.profile.BcommunityFollower.business_followers;  
+
+       }else{
+
+         return  this.$store.state.profile.BcommunityFollowing.business_following; 
+       }
+   }
+
+  },
    
   methods: {
     count(number) {
@@ -141,7 +157,69 @@ export default {
     },
 
 
-      infiniteHandler($state) { 
+     search(){
+    
+       this.infiniteHandler();
+      let url = null;
+    
+      
+         if(this.type=="Follower"){ 
+          url="profile/business/follower/"
+        this.$store.commit("profile/setBcommunityFollower",[]); 
+
+       }else{
+        url="profile/business/following/";
+         this.$store.commit("profile/setBcommunityFollowing", []); 
+       }
+
+console.log("your canas");
+
+
+ axios.get(url + this.page+"?keyword="+this.searchh )
+        .then(({ data }) => {
+
+          console.log(data);
+        
+          if(this.type=="Follower"){  
+
+
+          if (data.data.business_followers.length) {
+            
+         
+            this.businesses.push(...data.data.business_followers); 
+           
+           }
+        
+          }else{
+
+
+
+
+             if (data.data.business_following.length) {
+            
+         
+            this.businesses.push(...data.data.business_following); 
+           
+
+           }
+
+          }
+           
+        })
+        .catch((err) => {
+          console.log({ err: err });
+        });
+
+     this.page = 1;
+
+     },
+
+     
+
+
+     
+          infiniteHandler($state) { 
+           
 
       let url = null;
 
@@ -151,25 +229,51 @@ export default {
           url="profile/business/following/";
          }
       axios
-        .get(url + this.page)
+        .get(url + this.page+"?keyword="+this.searchh )
         .then(({ data }) => {
-          if (data.data.length) {
-            this.page += 1;
-           if(this.type=="Follower"){  
+        
+          if(this.type=="Follower"){  
+
+
+          if (data.data.business_followers.length) {
+            
+         
             this.businesses.push(...data.data.business_followers); 
+            this.page += 1;
+            
+            $state.loaded();
+
            }else{
-              this.businesses.push(...data.data.business_following);
+              $state.complete();
+             
+           }
+        
+          }else{
+
+
+
+
+             if (data.data.business_following.length) {
+            
+         
+            this.businesses.push(...data.data.business_following); 
+            this.page += 1;
+            
+            $state.loaded();
+
+           }else{
+              $state.complete();
+             
            }
 
-            $state.loaded();
-          } else {
-            $state.complete();
           }
+           
         })
         .catch((err) => {
           console.log({ err: err });
         });
     },
+
 
   }
 };

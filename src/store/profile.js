@@ -6,6 +6,7 @@ export default {
 
     communityPeople: [],
     CommunityBusiness: [],
+    profilenetwork:[],
     ownerPost: [],
     profileBusiness: [],
     ownerPostImages: [],
@@ -257,6 +258,11 @@ export default {
     },
 
 
+    setProfileNetwork(state, data) {
+      state.profileNetwork = data;
+    },
+
+
     setImages(state, data) {
 
       state.images = data;
@@ -461,6 +467,20 @@ export default {
         });
 
     },
+
+
+    profileNetwork({ commit }) {
+
+      return axios
+        .get('network')
+        .then(({ data }) => {
+          commit('setProfileNetwork', data.data);
+          console.log(data);
+        });
+
+    },
+
+
 
     getAlbumImages({ commit }, busineeId) {
 

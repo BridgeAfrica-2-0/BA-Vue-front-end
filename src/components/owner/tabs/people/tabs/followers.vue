@@ -6,16 +6,17 @@
           <b-form-input
             aria-label="Text input with checkbox"
             placeholder="Search Something"
+            v-model="search"
           ></b-form-input>
 
           <b-input-group-prepend is-text>
-            <b-icon-search class="text-primary border-none"></b-icon-search>
+            <b-icon-search  @click="$refs.search.search()" class="text-primary border-none"></b-icon-search>
           </b-input-group-prepend>
         </b-input-group>
       </b-col>
     </b-row>
     <br />
-        <CommunityMembers type="Follower" />
+        <CommunityMembers  searchh="search" ref="search" type="Follower" />
     
   </div>
 </template>
@@ -23,6 +24,11 @@
 <script>
 import CommunityMembers from "../../communityMember";
 export default {
+   data() {
+    return {
+        search:"",
+    }
+    },
   components: {
     CommunityMembers
   },

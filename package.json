@@ -17,7 +17,7 @@
     "@morioh/v-lightbox": "^1.0.3",
     "@smartweb/vue-flash-message": "^0.6.10",
     "@splidejs/vue-splide": "splidejs/vue-splide",
-    "axios": "^0.21.1",
+    "axios": "^0.22.0",
     "bootstrap": "^4.5.3",
     "bootstrap-vue": "^2.21.2",
     "chart.js": "2.9.4",

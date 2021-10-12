@@ -14,7 +14,7 @@
             People <span class="spa-color"> {{ nFormatter(total.total_people)}}  </span>
           </template>
 
-          <div>
+          <div>  
             <b-row>
               <b-col>
                 <b-tabs fill pills content-class="mt-3  f-left m-up">
@@ -132,10 +132,19 @@ export default {
 
 
   computed:{
-   total(){
+   
+   
+
+     total(){
     return  this.$store.state.follower.Tcommunity;
    },
- 
+
+    business() {
+      return this.$store.getters["dashboardcommunity/getProfileCommunity"];
+    },
+    com() {
+      return this.$store.getters["dashboardcommunity/getcom"];
+    }
 
   }
 };

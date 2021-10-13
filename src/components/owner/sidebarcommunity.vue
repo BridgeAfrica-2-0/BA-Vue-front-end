@@ -136,7 +136,7 @@ export default {
    
 
      total(){
-    return  this.$store.state.follower.Tcommunity;
+    return  this.$store.state.profile.Tcommunity;
    },
 
     business() {

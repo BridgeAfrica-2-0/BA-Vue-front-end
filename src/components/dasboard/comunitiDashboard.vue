@@ -9,7 +9,7 @@
         <span>
           <h6 class="title">
             <fas-icon class="icons" :icon="['fas', 'users']" size="lg" />
-            <b> COMMUNITY </b> <span class="h4-color"> {{ com.total }} </span>
+            <b> COMMUNITY </b> <span class="h4-color"> {{ nFormatter(total.total_community)}} </span>
           </h6>
         </span>
 
@@ -18,7 +18,7 @@
             <template slot="title">
               People
               <span class="spa-color">
-                {{ count(business.people[0].total_people) }}
+               {{ nFormatter(total.total_people)}} 
               </span>
             </template>
 
@@ -30,7 +30,7 @@
                       <template slot="title">
                         Followers
                         <span class="spa-color">
-                          {{ count(business.people[0].total_user_follower) }}
+                         {{ nFormatter(total.total_user_follower)}}
                         </span>
                       </template>
 
@@ -48,7 +48,7 @@
                       <template slot="title">
                         Following
                         <span class="spa-color">
-                          {{ count(business.people[0].total_user_following) }}
+                           {{ nFormatter(total.total_user_following)}}
                         </span>
                       </template>
 
@@ -72,7 +72,7 @@
             <template slot="title">
               Businesses 
               <span class="spa-color">
-                {{ count(business.business[0].total_business) }}
+               {{ nFormatter(total.total_business)}}
               </span>
             </template>
 
@@ -82,7 +82,7 @@
                   <template slot="title">
                     Followers
                     <span class="spa-color">
-                      {{ count(business.business[0].total_business_follower) }}
+                    {{ nFormatter(total.total_business_follower)}}
                     </span>
                   </template>
 
@@ -101,7 +101,7 @@
                   <template slot="title">
                     Following
                     <span class="spa-color">
-                      {{ count(business.business[0].total_business_following) }}
+                      {{ nFormatter(total.total_business_following)}}
                     </span>
                   </template>
 
@@ -124,7 +124,7 @@
             <template slot="title">
               Network
               <span class="spa-color">
-                {{ count(business.network[0].total_network) }}
+             {{ nFormatter(total.total_network)}}
               </span>
             </template>
 
@@ -134,7 +134,7 @@
                   <template slot="title">
                     Followers
                     <span class="spa-color">
-                      {{count( business.network[0].total_network_follower) }}
+                   {{ nFormatter(total.total_network_follower)}}
                     </span>
                   </template>
 
@@ -153,7 +153,7 @@
                   <template slot="title">
                     Following
                     <span class="spa-color">
-                      {{ count(business.network[0].total_network_following) }}
+                      {{ nFormatter(total.total_network_following)}}
                     </span>
                   </template>
 
@@ -275,6 +275,11 @@ export default {
 
   },
   computed: {
+
+      total(){
+    return  this.$store.state.profile.Tcommunity;
+   },
+
     business() {
       return this.$store.getters["dashboardcommunity/getProfileCommunity"];
     },
@@ -310,7 +315,22 @@ export default {
       if (number >= 1000) {
         return number / 1000 + "K";
       } else return number;
-    }
+    },
+
+
+       nFormatter(num) {
+      if (num >= 1000000000) {
+        return (num / 1000000000).toFixed(1).replace(/\.0$/, '') + 'G';
+      }
+      if (num >= 1000000) {
+        return (num / 1000000).toFixed(1).replace(/\.0$/, '') + 'M';
+      }
+      if (num >= 1000) {
+        return (num / 1000).toFixed(1).replace(/\.0$/, '') + 'K';
+      }
+      return num;
+    },
+
   }
 };
 </script>

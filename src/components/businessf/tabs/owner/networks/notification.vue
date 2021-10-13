@@ -32,12 +32,12 @@
           ><br />
           All Selected: <strong>{{ selectAll }}</strong>
         </div>
-        <b-col cols="12" class="mr-3" v-for="user in users" :key="user.id">
+        <b-col cols="12" class="mr-3" v-for="notification in notifications" :key="notification.id">
           <p class="">
             <span style="display:inline-flex">
               <b-form-checkbox
                 v-model="selected"
-                :value="user.name"
+                :value="notification.name"
                 @change="updateCheckall"
                 name="checkbox-1"
                 class="m-left-top"
@@ -46,18 +46,19 @@
               <b-avatar
                 class="d-inline-block profile-pic"
                 variant="primary"
-                :src="user.picture"
+                :src="notification.picture"
               ></b-avatar>
               <h6 class="m-0  d-inline-block ml-2 username">
-                {{ user.name }}
-                <div class="duration">{{ user.time }}hr</div>
+                {{ notification.name }}
+                <div class="duration">{{ notification.time }}hr</div>
+                <!-- <div class="duration">{{ moment(notification.time).fromNow() }}</div> -->
               </h6>
             </span>
             <span class="float-right mt-1"> </span>
           </p>
 
           <p class="text">
-            {{ user.description }}
+            {{ notification.description }}
           </p>
 
           <hr width="100%" />
@@ -68,16 +69,19 @@
 </template>
 
 <script>
+// import moment from 'moment';
+
 export default {
   name: "notification",
   data() {
     return {
-      users: [ 
-        { "id": "1", "name": "Shad Jast", "time": "1", "picture": "Shad Jast", "description": "Lorem Ipsum is this is just a dummy text to post simply dummy "}, 
-        { "id": "2", "name": "Duane Metz", "time": "2", "picture": "Shad Jast", "description": "standard dummy text ever since the 1500s, Lorem Ipsum is"}, 
-        { "id": "3", "name": "Myah Kris", "time": "3", "picture": "Shad Jast", "description": "simply dummy text of the printing and typesetting industry. Lorem"}, 
-        { "id": "4", "name": "Dr. Kamron Wunsch", "time": "4", "picture": "Shad Jast", "description": "Ipsum has been the industry's standard dummy text ever since the"}, 
-        { "id": "5", "name": "Brendon Rogahn", "time": "4", "picture": "Shad Jast", "description": "of the printing and typesetting industry. Lorem Ipsum has been the"}
+      // moment: moment,
+      notifications: [ 
+        { "id": "1", "name": "Shad Jast", "time": "1", "picture": "https://picsum.photos/250/250/?image=58", "description": "Lorem Ipsum is this is just a dummy text to post simply dummy "}, 
+        { "id": "2", "name": "Duane Metz", "time": "2", "picture": "https://picsum.photos/250/250/?image=59", "description": "standard dummy text ever since the 1500s, Lorem Ipsum is"}, 
+        { "id": "3", "name": "Myah Kris", "time": "3", "picture": "https://picsum.photos/250/250/?image=55", "description": "simply dummy text of the printing and typesetting industry. Lorem"}, 
+        { "id": "4", "name": "Dr. Kamron Wunsch", "time": "4", "picture": "https://picsum.photos/250/250/?image=56", "description": "Ipsum has been the industry's standard dummy text ever since the"}, 
+        { "id": "5", "name": "Brendon Rogahn", "time": "4", "picture": "https://picsum.photos/250/250/?image=57", "description": "of the printing and typesetting industry. Lorem Ipsum has been the"}
       ],
       selected: [],
       selectAll: false,
@@ -90,14 +94,14 @@ export default {
       console.log("checked: "+checked);
       this.selected = [];
       if (checked) {
-        for (let user in this.users) {
-          console.log("this.users[user].id: "+this.users[user].name)
-          this.selected.push(this.users[user].name.toString());
+        for (let notification in this.notifications) {
+          console.log("this.notifications[notification].id: "+this.notifications[notification].name)
+          this.selected.push(this.notifications[notification].name.toString());
         }
       }
     },
     updateCheckall: function() {
-      if (this.users.length === this.selected.length) {
+      if (this.notifications.length === this.selected.length) {
         this.selectAll = true;
       } else {
         this.selectAll = false;
@@ -106,11 +110,11 @@ export default {
   },
   watch: {
     selected(newValue, oldValue) {
-      // Handle changes in individual users checkboxes
+      // Handle changes in individual notifications checkboxes
       if (newValue.length === 0) {
         this.indeterminate = false;
         this.selectAll = false;
-      } else if (newValue.length === this.users.length) {
+      } else if (newValue.length === this.notifications.length) {
         this.indeterminate = false;
         this.selectAll = true;
       } else {

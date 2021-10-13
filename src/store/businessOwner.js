@@ -763,12 +763,8 @@ async updateUserBusinessAbout(context, payload) {
           };
           commit("setLoader", false);
           commit("setSuccess", sucData);
-          setTimeout(() => {
-            sucData.state = false;
-            sucData.msg = "";
-            commit("setSuccess", sucData);
-          }, 2000);
-        });
+         
+        
     },
 
     // Getting the notifications

@@ -169,6 +169,7 @@ new Vue({
     const userInfo = localStorage.getItem("user");
     if (userInfo) {
       const userData = JSON.parse(userInfo);
+      user=userData;
       this.$store.commit("auth/setUserData", userData);
     }
     axios.interceptors.response.use(
@@ -181,6 +182,15 @@ new Vue({
         return Promise.reject(error);
       }
     );
+
+      axios.interceptors.request.use(function (config) {
+
+
+          config.headers.Authorization =  `Bearer  ${user.accessToken}`;
+
+          return config;
+      });
+
   },
 
 

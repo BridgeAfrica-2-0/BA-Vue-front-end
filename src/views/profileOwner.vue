@@ -5,7 +5,7 @@
     <div class=" container-fluid text-justify   corps prof center-content">
       <b-row class=""> 
         <b-col cols="12" class="p-3">
-          <b-tabs content-class="mt-3" pills small fill  v-model="tabIndex">
+          <b-tabs content-class="mt-3" pills small fill lazy  v-model="tabIndex">
             <b-tab title="Posts"   href="#post">
               <Post />
             </b-tab>
@@ -83,11 +83,14 @@ export default {
         });
     }
   },
+
+ 
   computed: {},
    created() {
       this.tabIndex = this.tabs.findIndex(tab => tab === this.$route.hash);
   },
   mounted(){
+
 
     this.$store
       .dispatch("profile/Tcommunity", null)

@@ -32,6 +32,7 @@
                 variant="primary"
               ></b-icon>
               <b> Work at: </b>
+              <span v-if="info.user_experience"> 
               <span
                 class="text"
                 v-for="exp in info.user_experience.slice(0, 1)"
@@ -39,6 +40,7 @@
               >
                 {{ exp.company_name }}
               </span>
+               </span>
             </p>
             <p>
               <b-icon
@@ -47,14 +49,18 @@
                 variant="primary"
               ></b-icon>
               <b> Studied at: </b>
-             <span
+              <span v-if="info.user_education !=null">   
+          <span
                 v-for="edu in info.user_education.slice(0, 1)"
                 :key="edu.id"
                 class="text"
               >
-            
+           
                 {{ edu.school_name }}</span
               >
+
+             
+                </span>
             </p>
             <p>
               <b-icon
@@ -114,13 +120,14 @@
               
 
               <b> Work at: </b>
+              <span v-if="info.user_experience">  
               <span
                 class="text"
                 v-for="exp in info.user_experience.slice(0, 1)"
                 :key="exp.id"
               >
                 {{ exp.company_name }}
-              </span>
+              </span>  </span>
             </p>
             <p>
             <router-link to="profile_owner">
@@ -132,13 +139,15 @@
               </router-link>
 
               <b> Studied at: </b>
-             <span
+       
+              <span v-if="info.user_education !=null">      <span
                 v-for="edu in info.user_education.slice(0, 1)"
                 :key="edu.id"
                 class="text"
               >
                 {{ edu.school_name }}</span
-              > 
+              >
+              </span>
             </p>
             <p>
                <b-icon @click="switchTab('about')"
@@ -200,7 +209,7 @@ export default {
   },
 
  
-  created() {
+  mounted() {
     console.log("Load User Info");
     this.$store
       .dispatch("profile/loadUserPostIntro", null)
@@ -232,7 +241,7 @@ export default {
       })
       .catch((error) => {
         console.log({error:error});
-      });
+      });  
       
   },
   computed: {

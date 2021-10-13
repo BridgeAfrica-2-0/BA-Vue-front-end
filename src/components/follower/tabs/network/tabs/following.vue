@@ -6,9 +6,10 @@
           <b-form-input
             aria-label="Text input with checkbox"
             placeholder="Search Something"
+            v-model="keywords"
           ></b-form-input>
 
-          <b-input-group-prepend is-text>
+          <b-input-group-prepend is-text  @click="$refs.search.search()">
             <b-icon-search class="text-primary border-none"></b-icon-search>
           </b-input-group-prepend>
         </b-input-group>
@@ -17,7 +18,7 @@
 
     <br />
 
-          <CommunityBusiness type="Following" />
+          <CommunityBusiness  :searchh="keywords" ref="search" type="Following" />
      
   </div>
 </template>
@@ -25,6 +26,11 @@
 <script>
 import CommunityBusiness from "../../communitybusiness";
 export default {
+  data() {
+    return {
+        keywords:"",
+    }
+    },
   components: {
     CommunityBusiness
   },

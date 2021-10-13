@@ -11,12 +11,13 @@
         >Add Network</b-button
       >
       <hr />
+
       <b-row>
         <b-col
           cols="12"
           md="12"
           lg="6"
-          v-for="(network, index) in networks"
+          v-for="(network, index) in profileNetworks"
           :key="index"
         >
           <div class="people-style shadow">
@@ -190,6 +191,105 @@
             >
             </b-form-input>
           </b-form-group>
+
+
+                    <div class="form-group">
+                      <label for="country" class="username"> Country :</label
+                      ><br />
+
+
+                      <multiselect
+                        v-model="country"
+                        @input="Region"
+                        placeholder="Search "
+                        label="name"
+                        track-by="id"
+                        :options="countries"
+                        :multiple="false"
+                      ></multiselect>
+
+                     
+
+                    </div>
+                 
+
+
+
+
+                    <div class="form-group">
+                      <label for="country" class="username"> Region :</label
+                      ><br />
+                      
+                      <multiselect
+                        v-model="region"
+                        @input="Division"
+                        placeholder="Search"
+                        label="name"
+                        track-by="id"
+                        :options="regions"
+                        :multiple="false"
+                      ></multiselect>
+
+
+
+
+                    </div>
+             
+
+                    <div class="form-group">
+                      <label for="country" class="username"> Division :</label
+                      ><br />
+                      <multiselect
+                        v-model="division"
+                        @input="Municipality"
+                        placeholder="Search"
+                        label="name"
+                        track-by="id"
+                        :options="divisions"
+                        :multiple="false"
+                      ></multiselect>
+                    </div>
+
+
+
+
+
+                     <div class="form-group">
+                      <label for="country" class="username">
+                        Municipality :</label
+                      ><br />
+
+                      <multiselect
+                        v-model="municipality"
+                        @input="Locality"
+                        placeholder="Search"
+                        label="name"
+                        track-by="id"
+                        :options="municipalities"
+                        :multiple="false"
+                      ></multiselect>
+                    </div>
+
+
+
+
+                      <div class="form-group">
+                      <label for="Neighbor" class="username"> Neighbor :</label
+                      ><br />
+                      <multiselect
+                        v-model="locality"
+                        placeholder="Search"
+                        label="name"
+                        track-by="id"
+                        :options="localities"
+                        :multiple="false"
+                      ></multiselect>
+                    </div>
+                 
+
+
+
+
           <b-form-group
             label-cols-lg="12"
             label="City"
@@ -289,7 +389,7 @@
             label-class="font-weight-bold pt-0"
             class="mb-0"
           >
-            <input @change="selectImage" type="file" accept="image/*" />
+            <input @change="onLogoChange"  type="file" accept="image/*" />
           </b-form-group>
           <b-form-group
             label-cols-md="6"
@@ -354,13 +454,22 @@
 
 <script>
 import axios from "axios";
+import Multiselect from "vue-multiselect";
 export default {
+  
   data() {
     return {
       BaseURL: process.env.VUE_APP_API_URL,
       showModal: false,
       selectedFile: "",
       editNet: false,
+      logo:null,
+       country: [],
+      region: [],
+      division: [],
+      municipality: [],
+      locality: [],
+
       dat: true,
       networks: [],
       viewnetwork: false,
@@ -404,30 +513,191 @@ export default {
       },
     };
   },
-  beforeMount() {
-    axios.defaults.headers.common["Authorization"] =
-      "Bearer " + localStorage.getItem("access_token");
-    this.getNetworks();
+
+   components: {
+    Multiselect,
+  },
+ 
+ 
+  beforeMount(){
+     this.getNetworks();
+    this.Country(); 
   },
 
+  computed:{
+
+   
+
+    profileNetworks: function() {
+      return this.$store.state.profile.profileNetwork;
+    },
+
+
+      countries() {
+      return this.$store.state.auth.country;
+    },
+
+    regions() {
+      return this.$store.state.auth.region;
+    },
+
+      divisions() {
+      return this.$store.state.auth.division;
+    },
+
+    municipalities() {
+      return this.$store.state.auth.municipality;
+    },
+
+    localities() {
+      return this.$store.state.auth.locality;
+    },
+
+    selectedcountry: function() {
+     
+      return this.country.id;
+    },
+    selectedregion: function() {
+     
+     return this.region.id;
+    },
+
+
+
+     selecteddivision: function() {
+      
+       return this.division.id;
+    },
+    selectedmunicipality: function() {
+      
+
+       return this.municipality.id;
+    },
+    selectedlocality: function() {
+      
+       return this.locality.id;
+    },
+
+
+
+  }, 
+
   methods: {
-    getNetworks() {
-      this.loader = true;
-      axios
-        .get("/network")
-        .then((res) => {
-          this.loader = false;
-          this.networks = res.data.data;
+
+      Country() {
+      this.$store
+        .dispatch("auth/country")
+        .then(() => {
+          console.log("hey yeah");
         })
         .catch((err) => {
+          console.log({ err: err });
+        });
+    },
+
+
+  
+
+     onLogoChange(e) {
+      this.logo = e.target.files[0];
+      
+    },
+
+
+
+
+
+    Region() {
+      let formData2 = new FormData();
+      formData2.append("countryId", this.selectedcountry);
+
+      this.$store
+        .dispatch("auth/region", formData2)
+        .then(() => {
+          console.log("hey yeah");
+        })
+        .catch((err) => {
+          console.log({ err: err });
+        });
+    },
+
+    Division() {
+      let formData2 = new FormData();
+      formData2.append("regionId", this.selectedregion);
+
+      this.$store
+        .dispatch("auth/division", formData2)
+        .then(() => {
+          console.log("hey yeah");
+        })
+        .catch((err) => {
+          console.log({ err: err });
+        });
+    },
+
+    Municipality() {
+      let formData2 = new FormData();
+      formData2.append("divisionId", this.selecteddivision);
+
+      this.$store
+        .dispatch("auth/municipality", formData2)
+        .then(() => {
+          console.log("hey yeah");
+        })
+        .catch((err) => {
+          console.log({ err: err });
+        });
+    },
+
+    Locality() {
+      let formData2 = new FormData();
+      formData2.append("councilId", this.selectedmunicipality);
+
+      this.$store
+        .dispatch("auth/locality", formData2)
+        .then(() => {
+          console.log("hey yeah");
+        })
+        .catch((err) => {
+          console.log({ err: err });
+        });
+    },
+
+    // getNetworks() {
+    //   this.loader = true;
+    //   axios
+    //     .get("profile/user/networks")
+    //     .then((res) => {
+    //       this.loader = false;
+    //       this.networks = res.data.data;
+    //     })
+    //     .catch((err) => {
+    //       this.loader = false;
+    //     });
+    // },
+
+
+     getNetworks() {
+       this.loader = true;
+       console.log("network loading !!!!!")
+      this.$store
+        .dispatch("profile/profileNetwork")
+        .then(() => {
+          console.log("hey yeah");
+          this.loader = false;
+        })
+        .catch((err) => {
+          console.log({ err: err });
           this.loader = false;
         });
     },
+
+
     // Add network to the database but doesn't work correctly for now
     addNetwork(newNetwork) {
       this.loader = true;
       axios
-        .post("/network", newNetwork)
+        .post("network", newNetwork)
         .then((res) => {
           this.success.state = true;
           this.success.msg = "Operation was successful !!";
@@ -437,6 +707,8 @@ export default {
           this.getNetworks();
         })
         .catch((err) => {
+
+          console.log({err:err});
           this.success.state = true;
           this.success.msg = "Something wen't wrong !!";
           setTimeout(() => {
@@ -505,7 +777,13 @@ export default {
       fd.append("description", this.createdNetwork.description);
       fd.append("purpose", this.createdNetwork.purpose);
       fd.append("special_needs", this.createdNetwork.special_needs);
-      fd.append("image", this.createdNetwork.image);
+      fd.append("region_id", this.selectedregion);
+      fd.append("country_id", this.selectedcountry);
+       fd.append("division_id", this.selecteddivision);
+      fd.append("council_id", this.selectedmunicipality);
+      fd.append("image", this.logo);
+      
+
       fd.append("allow_business", this.createdNetwork.allow_business);
       if (this.editNet) {
         fd.append("_method", "PUT");

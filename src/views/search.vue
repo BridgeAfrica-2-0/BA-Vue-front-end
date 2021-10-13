@@ -543,10 +543,7 @@ import SubNav from "@/components/subnav";
 
 import Sponsor from "@/components/search/sponsoredBusiness";
 
-import {
-  PostComponent,
-  PeopleComponent,
-} from "@/components/search";
+import { PostComponent, PeopleComponent } from "@/components/search";
 
 import { loader } from "@/mixins";
 

@@ -70,18 +70,23 @@ export default {
         console.log(from);
     }
   },
-  computed: { 
+  methods: {
 
-  
+    ownerPost() {
+      this.$store
+        .dispatch("UserProfileOwner/ownerPost", this.url_data)
+        .then(() => {
+          console.log("hey yeah");
+        })
+        .catch(err => {
+          console.log({ err: err });
+        });
+    }
   },
-
+  computed: {},
    created() {
-     
       this.tabIndex = this.tabs.findIndex(tab => tab === this.$route.hash);
-    
-   
   },
-  methods: {},
   mounted(){
 
     this.$store

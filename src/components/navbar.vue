@@ -193,7 +193,7 @@
 													<div class="small text-muted">Hi</div>
 												</div>
 											</div>
-											<div class="small text-muted">1 min ago</div>
+											<div class="small text-muted">{{ $t("nav.1_min_ago") }}</div>
 										</div>
 										<hr class="h-divider" />
 										<div
@@ -214,7 +214,7 @@
 													<div class="small text-muted">How are you</div>
 												</div>
 											</div>
-											<div class="small text-muted">3 hours ago</div>
+											<div class="small text-muted">{{ $t("nav.3_hours_ago") }}</div>
 										</div>
 										<hr class="h-divider" />
 										<div
@@ -235,7 +235,7 @@
 													<div class="small text-muted">Please call me</div>
 												</div>
 											</div>
-											<div class="small text-muted">Yesterday</div>
+											<div class="small text-muted"> {{ $t("nav.yesterday") }}</div>
 										</div>
 										<hr class="h-divider" />
 										<div

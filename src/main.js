@@ -23,11 +23,13 @@ IconifyIcon.addIcon("home", homeIconData);
 Vue.use(Vuex);
 Vue.use(VueAxios, axios);
 
-import LoadScript from 'vue-plugin-load-script';
+
+import LoadScript from "vue-plugin-load-script";
+import InfiniteLoading from "vue-infinite-loading";
 
 import { loader } from "./mixins"
 
-
+//import LoadScript from "vue-plugin-load-script";
 
 Vue.use(LoadScript);
 
@@ -72,7 +74,7 @@ Vue.use(VueSocialauth, {
       client_secret: process.env.VUE_APP_GOOGLE_CLIENT_SECRETE,
       redirectUri: process.env.VUE_APP_GOOGLE_RETURN_URL,
     },
-  }
+  },
 });
 
 import FlashMessage from "@smartweb/vue-flash-message";
@@ -122,17 +124,19 @@ import "@/assets/css/bootstrap.css";
 Vue.use(BootstrapVue);
 Vue.use(IconsPlugin);
 
-import InfiniteLoading from 'vue-infinite-loading';
+//import InfiniteLoading from "vue-infinite-loading";
 
-Vue.use(InfiniteLoading, { /* options */ });
+Vue.use(InfiniteLoading, {
+  /* options */
+});
 
 Vue.use(VueGoogleMaps, {
-    load: {
-        key: "AIzaSyAGZU6cqra18t1fhN1AbzRsEc_pgt7n2C8",
-        libraries: "places"
-    },
-    autobindAllEvents: false,
-    installComponents: true
+  load: {
+    key: "AIzaSyAGZU6cqra18t1fhN1AbzRsEc_pgt7n2C8",
+    libraries: "places",
+  },
+  autobindAllEvents: false,
+  installComponents: true,
 });
 
 
@@ -157,45 +161,27 @@ Vue.config.productionTip = false;
 var user=null;
 
 new Vue({
+  router,
+  store,
+  i18n,
 
-    router,
-    store,
-    i18n,
-    
-
-    created() {
-        const userInfo = localStorage.getItem("user");
-        if (userInfo) {
-            const userData = JSON.parse(userInfo);
-            user=userData;
-            this.$store.commit("auth/setUserData", userData);
+  created() {
+    const userInfo = localStorage.getItem("user");
+    if (userInfo) {
+      const userData = JSON.parse(userInfo);
+      this.$store.commit("auth/setUserData", userData);
+    }
+    axios.interceptors.response.use(
+      (response) => response,
+      (error) => {
+        if (error.response.status === 401) {
+          // this.$store.dispatch("auth/logout");
+          console.log("error has occure");
         }
-        axios.interceptors.response.use(
-            (response) => response,
-            (error) => {
-
-                // remove loader when request return error
-                this.$store.dispatch("search/LOADING", false);
-
-                if (error.response.status === 401) {
-                    // this.$store.dispatch("auth/logout");
-                    console.log("error has occure");
-
-
-                }
-                return Promise.reject(error);
-            }
-        );
-
-        axios.interceptors.request.use(function (config) {
-
-
-          config.headers.Authorization =  `Bearer  ${user.accessToken}`;
-     
-          return config;
-      });
-
-    },
+        return Promise.reject(error);
+      }
+    );
+  },
 
 
   render: h => h(App),

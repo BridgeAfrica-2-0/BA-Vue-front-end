@@ -1,26 +1,32 @@
 <template>
   <div>
-    <div class="people-style shadow">
+    <!-- {{ products }} -->
+
+    <b-spinner v-if="prodLoader" variant="primary" label="Spinning"></b-spinner>
+
+    <div
+      class="people-style shadow"
+      v-for="(prod, index) in products.data"
+      :key="index"
+    >
       <b-row>
         <b-col cols="5" lg="4" sm="4" md="5">
           <div class="center-img">
-            <img
-              src="https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg"
-              class="r-image"
-            />
+            <img :src="prod.picture" class="r-image" />
           </div>
         </b-col>
         <b-col cols="7" sm="8" md="7">
           <p class="text">
-            <strong class="title"> Sneakers Blec cc </strong> <br />
+            <strong class="title"> {{ prod.name }} </strong> <br />
             <strong> Description </strong> <br />
             <span class="text">
-              This is just a dummy text dumy dummy things are always dummy and
-              dummy add things are always dummy hjykt
+              {{ prod.description }}
             </span>
             <b-link class="text"> see more </b-link> <br />
 
-            <span class="price"> <strong> 12,000 Fcfa </strong> </span> <br />
+            <span class="price">
+              <strong> {{ prod.price }} Fcfa </strong>
+            </span>
           </p>
 
           <span class="float-right">
@@ -28,12 +34,19 @@
           </span>
         </b-col>
       </b-row>
-
-      <div>
-        <br />
-      </div>
     </div>
+    <!-- pagination -->
 
+    <b-pagination
+      v-model="currentPage"
+      :total-rows="total"
+      :per-page="per_page"
+      aria-controls="my-table"
+      @change="changePage"
+      align="center"
+    ></b-pagination>
+    
+    <!-- End pagination -->
     <b-modal hide-footer title="Edit product">
       <b-form>
         <b-row>
@@ -320,10 +333,7 @@
                           </p>
                         </div>
                         <div class="col-md-12 pt-2 pl-0 mb-3">
-                          <i
-                            class="fa heart  fa-heart-o"
-                            aria-hidden="true"
-                          ></i>
+                          <i class="fa heart fa-heart-o" aria-hidden="true"></i>
                           23 &nbsp; &nbsp; &nbsp; <a href="#">Reply</a>
                         </div>
                       </div>
@@ -400,24 +410,76 @@
 export default {
   data() {
     return {
-      viewProduct: false
+      viewProduct: false,
+      prodLoader: false,
+      total:0,
+      per_page:10,
+      list: [],
+      currentPage: 1,
+      nextLoad: false,
     };
   },
-  components: {},
-  methods: {
-    /**
-     * Used to view produduct details
-     * @param id
-     * @return void
-     */
-    productDetails() {
-      this.viewProduct = true;
+  computed: {
+    products() {
+      return this.$store.state.market.products;
+    },
+  },
+  created() {
+    if (!this.products.length) {
+      this.getProducts();
     }
-  }
+  },
+
+  methods: {
+    changePage(value) {
+      this.$store.commit("setProducts", []);
+      this.prodLoader = true;
+      this.currentPage = value;
+
+      this.$store
+        .dispatch("market/nextPage", this.currentPage)
+        .then((res) => {
+          console.log("products list: ");
+          console.log(this.products);
+          this.prodLoader = false;
+        })
+        .catch((err) => {
+          this.prodLoader = false;
+          console.log("products error: ");
+          console.error(err);
+        });
+    },
+
+    async getProducts() {
+      this.prodLoader = true;
+      console.log("loader: ", this.prodLoader);
+
+      await this.$store
+        .dispatch("market/getProducts")
+        .then((res) => {
+          console.log("products list: ");
+          console.log(this.products);
+          this.prodLoader = false;
+          this.total = this.products.total
+        })
+        .catch((err) => {
+          this.prodLoader = false;
+          console.log("loader: ", this.prodLoader);
+          console.log("products error: ");
+          console.error(err);
+        });
+    },
+  },
 };
 </script>
 
 <style scoped>
+/* ED css */
+button.pagination {
+  width: 50px;
+}
+
+/* Not ED */
 .discount {
   color: orange;
   margin-left: 60px;

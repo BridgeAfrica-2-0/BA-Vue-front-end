@@ -6,49 +6,65 @@ export default {
   namespaced: true,
 
   state: {
-    user: null,
+    user: [],
     isVerified: null,
     passwordToken: null,
     registerData: null,
 
     businessAround: [],
     peopleAround: [],
-    categories:[],
-    subcategories:[],
-    filters:[],
-    category_fiters:[],
-
-    
+    categories: [],
+    subcategories: [],
+    filters: [],
+    category_fiters: [],
+    country: [],
+    region: [],
+    municipality: [],
+    locality: [],
+    division: [],
   },
 
   mutations: {
-
     setUserData(state, userData) {
       state.user = userData;
 
       localStorage.setItem("user", JSON.stringify(userData));
-      axios.defaults.headers.common.Authorization = `Bearer ${userData.accessToken}`;
+     // axios.defaults.headers.common.Authorization = `Bearer ${userData.accessToken}`;
 
       const userInfo = localStorage.getItem("user");
     },
 
-    
+    setCountry(state, data) {
+      state.country = data;
+    },
 
+    setRegion(state, data) {
+      state.region = data;
+    },
+
+    setDivision(state, data) {
+      state.division = data;
+    },
+
+    setMunicipality(state, data) {
+      state.municipality = data;
+    },
+
+    setLocality(state, data) {
+      state.locality = data;
+    },
 
     setCategories(state, data) {
       state.categories = data;
     },
 
-
     setSubcategories(state, data) {
       state.subcategories = data;
     },
 
-
     setFilters(state, data) {
       state.filters = data;
     },
-
 
     Setcategoryfiters(state, data) {
       state.category_fiters = data;
@@ -77,7 +93,7 @@ export default {
     clearUserData() {
       localStorage.removeItem("user");
       location.reload();
-    }
+    },
   },
 
   actions: {
@@ -87,8 +103,40 @@ export default {
       });
     },
 
+    country({ commit }) {
+      return axios.get("countries").then(({ data }) => {
+        console.log(data);
+        commit("setCountry", data.data);
+      });
+    },
 
+    region({ commit }, data) {
+      return axios.post("regions", data).then(({ data }) => {
+        console.log(data);
+        commit("setRegion", data.data);
+      });
+    },
 
+    municipality({ commit }, data) {
+      return axios.get("councils", data).then(({ data }) => {
+        console.log(data);
+        commit("setMunicipality", data.data);
+      });
+    },
+
+    locality({ commit }, data) {
+      return axios.post("neighborhoods", data).then(({ data }) => {
+        console.log(data);
+        commit("setLocality", data.data);
+      });
+    },
+
+    division({ commit }, data) {
+      return axios.get("divisions ", data).then(({ data }) => {
+        console.log(data);
+        commit("setDivision", data.data);
+      });
+    },
 
     categories({ commit }) {
       return axios.get("category").then(({ data }) => {
@@ -97,20 +145,12 @@ export default {
       });
     },
 
-
-
-
     subcategories({ commit }, data) {
       return axios.post("catergory/subcategory", data).then(({ data }) => {
         console.log(data);
         commit("setSubcategories", data.data);
       });
     },
-
-
-
-
-
 
     filters({ commit }) {
       return axios.get("user/completewelcome").then(({ data }) => {
@@ -119,8 +159,6 @@ export default {
       });
     },
 
-
-  
     Setcategoryfiters({ commit }) {
       return axios.get("user/completewelcome").then(({ data }) => {
         console.log(data);
@@ -128,17 +166,12 @@ export default {
       });
     },
 
-   
-
-
     completeWelcome({ commit }) {
       return axios.get("user/completewelcome").then(({ data }) => {
         console.log(data);
         commit("setUserData", data.data);
       });
     },
-
-
 
     businessAround({ commit }) {
       return axios.get("business/around").then(({ data }) => {
@@ -164,7 +197,7 @@ export default {
 
     recoverPassword2({ commit }, data) {
       return axios.post("user/reset", data).then(({ data }) => {
-        console.log(data.data);
+        console.log(data);
 
         commit("setPasswordToken", data.data);
       });
@@ -178,12 +211,12 @@ export default {
 
         commit("setUserData", data.data);
       });
-    }
+    },
   },
 
   getters: {
-    isLogged: state => !!state.user,
-    isVerified: state => !!state.user,
-    user: state => state.user
-  }
+    isLogged: (state) => !!state.user,
+    isVerified: (state) => !!state.user,
+    user: (state) => state.user,
+  },
 };

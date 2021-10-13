@@ -17,7 +17,11 @@
             <b-row @click="viewNetwork(network)">
               <b-col md="3" xl="3" lg="3" cols="5" sm="3">
                 <div class="center-img" v-b-modal.modal-1>
-                  <!-- <img :src="network.image[0]" class="r-image" /> -->
+                  {{ network.business_image }}
+                  <img
+                    :src="BaseURL + `/` + `${network.business_image}`"
+                    alt=""
+                  />
                 </div>
               </b-col>
               <b-col md="9" cols="7" lg="9" xl="9" sm="9">
@@ -52,7 +56,7 @@
 
                   {{ network.business_id }}
                   <br />
-                  20k Community <br />
+                  {{ network.member_count }} <br />
 
                   <span class="location">
                     <b-icon-geo-alt class="ico"></b-icon-geo-alt>
@@ -69,11 +73,14 @@
         </b-col>
       </b-row>
     </div>
-    <div class="h-100 w-100" v-if="getNetworksFromStore.length < 1">
+    <b-col v-if="loader" class="load">
+      <b-spinner class="spin" variant="primary"></b-spinner>
+    </b-col>
+    <div class="engage" v-if="!getNetworksFromStore && !loader">
       <div class="mx-auto text-center my-5">
         <h2 class="my-3">Builds networks around your Business</h2>
-        <p class="my-2">Create network to stay in touch with just the people</p>
         <p class="my-2">you want Engage, share, Make Plans and much more</p>
+        <p class="my-2">No network to show !!</p>
         <p class="my-3"></p>
       </div>
     </div>
@@ -86,8 +93,7 @@
             class="row sub-sidebar-2 pending-post-view mt-4 pb-0 "
           >
             <div
-              class="col-md-12 col-lg-12 d-flex align-items-stretch mb-lg-0"
-              style="padding-left: 0; padding-top: 3px;"
+              class="col-md-12 col-lg-12 d-flex align-items-stretch mb-lg-0 styling"
             >
               <a
                 class="nav-link text-dark"
@@ -209,7 +215,7 @@
             label-class="font-weight-bold pt-0"
             class="mb-0"
           >
-            <input type="file" />
+            <input @change="selectImage" type="file" accept="image/*" />
           </b-form-group>
           <b-form-group
             label-cols-md="6"
@@ -219,22 +225,19 @@
             class="mb-0"
           >
             <b-form-checkbox
-              :v-model="createdNetwork.allow_business == '0' ? false : true"
+              value="1"
+              unchecked-value="0"
+              v-model="createdNetwork.allow_business"
               name="check-button"
               switch
             >
             </b-form-checkbox>
           </b-form-group>
-          <b-alert :show="success" variant="success"
-            >Operation was Successfull !!</b-alert
+          <b-alert :show="success.state" :variant="success.success">
+            {{ success.msg }}</b-alert
           >
           <b-spinner v-if="loader" variant="primary"></b-spinner>
-          <b-button
-            @click="edit"
-            class="mt-2 "
-            style="float:right"
-            variant="primary"
-          >
+          <b-button @click="edit" class="mt-2  button-btn" variant="primary">
             Edit Network</b-button
           >
         </b-form>
@@ -255,7 +258,7 @@
         <br />
         {{ chosenNetwork.business_id }}
         <br />
-        20k Community <br />
+        {{ chosenNetwork.member_count }} <br />
 
         <span class="location">
           <b-icon-geo-alt class="ico"></b-icon-geo-alt>
@@ -274,28 +277,26 @@ import { mapActions, mapGetters } from "vuex";
 export default {
   data() {
     return {
+      BaseURL: process.env.VUE_APP_API_URL,
       showModal: false,
+      selectedFile: "",
       createdNetwork: {
-        id: null,
-        business_id: "",
         name: "",
         description: "",
         purpose: "",
         special_needs: "",
         business_address: "",
         business_image: "",
-        allow_business: "0",
+        allow_business: 0,
       },
       chosenNetwork: {
-        id: null,
-        business_id: "",
         name: "",
         description: "",
         purpose: "",
         special_needs: "",
         business_address: "",
         business_image: "",
-        allow_business: "0",
+        allow_business: 0,
       },
     };
   },
@@ -329,12 +330,7 @@ export default {
 
     //View network on pop up modal
     viewNetwork(network) {
-      this.chosenNetwork.business_image = network.business_image;
-      this.chosenNetwork.name = network.name;
-      this.chosenNetwork.business_id = network.business_id;
-      this.chosenNetwork.business_address = network.business_address;
-      this.chosenNetwork.description = network.description;
-      this.createdNetwork.allow_business = network.allow_business;
+      this.chosenNetwork = network;
     },
 
     //Show Edit network modal
@@ -343,7 +339,6 @@ export default {
       this.createdNetwork.business_image = network.business_image;
       this.createdNetwork.name = network.name;
       this.createdNetwork.business_id = network.business_id;
-      // this.createdNetwork.community = network.community;
       this.createdNetwork.business_address = network.business_address;
       this.createdNetwork.description = network.description;
       this.createdNetwork.purpose = network.purpose;
@@ -352,13 +347,34 @@ export default {
       this.showModal = true;
     },
     edit() {
-      this.editNetwork(this.createdNetwork);
+      const fd = new FormData();
+      fd.append("_method", "PUT");
+      fd.append("name", this.createdNetwork.name);
+      fd.append("business_id", 1);
+      fd.append("business_address", this.createdNetwork.business_address);
+      fd.append("description", this.createdNetwork.description);
+      fd.append("purpose", this.createdNetwork.purpose);
+      fd.append("special_needs", this.createdNetwork.special_needs);
+      fd.append("business_image", this.createdNetwork.business_image);
+      fd.append("allow_busines", this.createdNetwork.allow_busines);
+      let data = {
+        id: this.createdNetwork.id,
+        data: fd,
+      };
+      this.editNetwork(data);
+    },
+    selectImage(e) {
+      this.createdNetwork.business_image = e.target.files[0];
     },
   },
 };
 </script>
 
 <style scoped>
+.load {
+  display: flex;
+  justify-content: center;
+}
 .post-pending {
   font-size: 12;
   text-align: left;
@@ -383,6 +399,24 @@ export default {
 .prod {
   max-width: 14rem;
   cursor: pointer;
+}
+
+.engage {
+  height: 100%;
+  width: 100%;
+}
+
+.spin {
+  width: 7rem;
+  height: 7rem;
+}
+
+.styling {
+  padding-left: 0;
+  padding-top: 3px;
+}
+.button-btn {
+  float: right;
 }
 
 h2,

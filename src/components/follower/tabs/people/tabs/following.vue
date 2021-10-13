@@ -1,7 +1,7 @@
 <template>
   <div>
-    <b-row class="p-0">
-      <b-col cols="12" md="6" class="p-0">
+    <b-row>
+      <b-col cols="12" md="6">
         <b-input-group class="mb-2 px-md-3 float-right">
           <b-form-input
             aria-label="Text input with checkbox"
@@ -16,14 +16,12 @@
     </b-row>
     <br />
 
-    <b-row class="p-0">
-      <b-col md="12" lg="6" class="p-0">
-        <CommunityMembers />
-      </b-col>
+    <b-row>
+      <b-col md="12" lg="6">
+        <CommunityMembers type="Following"  />
+      </b-col>  
 
-      <b-col md="12" lg="6" class="p-0">
-        <CommunityMembers />
-      </b-col>
+      
     </b-row>
   </div>
 </template>
@@ -33,7 +31,12 @@ import CommunityMembers from "../../communityMember";
 export default {
   components: {
     CommunityMembers
-  }
+  },
+
+  computed: {
+   
+  },
+
 };
 </script>
 

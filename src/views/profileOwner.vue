@@ -70,16 +70,27 @@ export default {
         console.log(from);
     }
   },
-  computed: { 
+  methods: {
 
-  
+    ownerPost() {
+      this.$store
+        .dispatch("UserProfileOwner/ownerPost", this.url_data)
+        .then(() => {
+          console.log("hey yeah");
+        })
+        .catch(err => {
+          console.log({ err: err });
+        });
+    }
   },
 
  
-  methods: {},
-  created(){
+  computed: {},
+   created() {
+      this.tabIndex = this.tabs.findIndex(tab => tab === this.$route.hash);
+  },
+  mounted(){
 
-     this.tabIndex = this.tabs.findIndex(tab => tab === this.$route.hash);
 
     this.$store
       .dispatch("profile/Tcommunity", null)

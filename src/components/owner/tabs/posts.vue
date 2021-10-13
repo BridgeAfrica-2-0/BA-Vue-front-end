@@ -209,7 +209,7 @@ export default {
   },
 
  
-  created() {
+  mounted() {
     console.log("Load User Info");
     this.$store
       .dispatch("profile/loadUserPostIntro", null)
@@ -241,7 +241,7 @@ export default {
       })
       .catch((error) => {
         console.log({error:error});
-      });
+      });  
       
   },
   computed: {

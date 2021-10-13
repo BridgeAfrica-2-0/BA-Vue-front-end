@@ -1,7 +1,7 @@
 <template>
   <div>
     <FlashMessage />
-    <!-- DOM to Create Post By A UserOwner-->
+    <!-- DOM to Create Post By A UserOwner--> 
     <b-card class="px-md-3 mb-3">
       <b-row class="mt-2">
         <b-col cols="3" md="1" class="m-md-0 p-md-0">
@@ -275,7 +275,7 @@
                 ></b-avatar>
               </b-col>
               <b-col cols="9" class="pt-2" style="margin-left: -5px">
-                <h5 class="m-0 font-weight-bolder">{{}}</h5>
+                <h5 class="m-0 font-weight-bolder">{{info.user.name}}</h5>
               </b-col>
             </b-row>
             <b-row>
@@ -399,6 +399,7 @@
       >-->
 
       <b-row class="mt-4" v-for="item in owner_post" :key="item.post_id">
+
         <!--  :src="$store.getters.getProfilePicture"-->
         <b-col cols="12" class="mt-4">
           <b-row>
@@ -411,7 +412,7 @@
             </b-col>
             <b-col cols="10" md="11" class="pt-2">
               <h5 class="m-0 font-weight-bolder">
-                {{ item.bussines_name }}
+                {{ item.name }}
                 <span class="float-right">
                   <b-dropdown variant="outline-primary" size="sm" no-caret>
                     <template #button-content>
@@ -466,6 +467,7 @@
             <b-col v-if="item.media.length > 0" cols="12" class="mt-2">
               <div class="">
                 <lightbox
+                css="h-200 h-lg-250 h-lg-500"
                   :cells="item.media.length"
                   :items="
                     item.media.map(function (a) {
@@ -854,18 +856,25 @@ export default {
         onCancel: this.onCancel,
         color: "#e75c18",
       });
-
-      const fileImage = this.createPost.movies[0].target.files[0];
+ 
+      let fileImage=null;
+      
+      let formData2 = new FormData();
+      console.log( this.createPost.movies);
+      console.log("lalla allak kajkajjaja")
+      if( this.createPost.movies[0]){ 
+      
+     fileImage = this.createPost.movies[0].target.files[0];
 
       this.fileImageArr = this.createPost.movies;
 
-      let formData2 = new FormData();
 
       this.fileImageArr.forEach((value, index) => {
         formData2.append("media[" + index + "]", value.target.files[0]);
 
         console.log(value);
       });
+      }
 
       formData2.append("type", "image");
 
@@ -942,6 +951,10 @@ export default {
       return "yoo";
     },
 
+     info: function () {
+      return this.$store.getters["profile/getUserPostIntro"];
+    },
+
     business_logo() {
       return this.$store.state.businessOwner.businessInfo.logo_path;
     },
@@ -960,7 +973,17 @@ export default {
 };
 </script>
 
+<style >
+  
+  .h-lg-250{
+
+    height: 500px !important;
+  }
+ 
+</style>
+
 <style scoped>
+
 .custom-block-class {
   position: absolute;
   z-index: 1;

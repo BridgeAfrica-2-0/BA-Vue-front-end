@@ -39,7 +39,7 @@
 								data-toggle="popover"
 								class="form-control search-mobile"
 								style="border-left: none"
-								placeholder="Find Pharmacies"
+								:placeholder="`${$t('nav.find_pharmacies')}`"
 								aria-label=""
 								data-original-title=""
 								title=""
@@ -72,7 +72,7 @@
 									data-toggle="popover"
 									class="form-control search-mobile"
 									style="border-left: none"
-									placeholder="Find Pharmacy"
+									:placeholder="`${$t('nav.find_pharmacies')}`"
 									aria-label=""
 									data-original-title=""
 									title=""
@@ -108,7 +108,7 @@
 								list="browsers"
 								data-toggle="popover"
 								class="form-control search-h"
-								placeholder="Where "
+								:placeholder="`${$t('nav.where')}`"
 								aria-label="search bridge africa"
 								data-original-title=""
 								title=""
@@ -147,11 +147,15 @@
 					<div style="float: right">
 						<b-collapse id="nav-collapse" is-nav>
 							<div class="nav-item">
-								<a class="nav-link text-dark hov" href=""> Home </a>
+								<a class="nav-link text-dark hov" href="">
+									{{ $t("nav.home") }}
+								</a>
 							</div>
 
 							<div class="nav-item">
-								<a class="nav-link text-dark hov" href=""> Market </a>
+								<a class="nav-link text-dark hov" href="">
+									{{ $t("nav.market") }}
+								</a>
 							</div>
 
 							<div class="nav-item">
@@ -169,7 +173,7 @@
 								></a>
 								<b-popover target="messages" triggers="hover" placement="top">
 									<div class="popover-body">
-										<p class="font-weight-bold">Messages</p>
+										<p class="font-weight-bold">{{ $t("nav.messages") }}</p>
 										<hr class="h-divider" />
 										<div
 											class="d-inline-flex flex-row justify-content-between align-items-center suggest-item cursor-pointer"
@@ -279,7 +283,7 @@
 										<a
 											href="https://bridgeafrica.info/nav/inbox.html"
 											class="text-ored"
-											><u>See Inbox</u></a
+											><u>{{ $t("nav.see_inbox") }}</u></a
 										>
 									</div>
 								</b-popover>
@@ -298,7 +302,9 @@
 								></a>
 								<b-popover target="notif" triggers="hover" placement="top">
 									<div class="popover-body">
-										<p class="font-weight-bold">Notifications</p>
+										<p class="font-weight-bold">
+											{{ $t("nav.notifications") }}
+										</p>
 										<hr class="h-divider" />
 										<div
 											class="d-inline-flex flex-row align-items-center suggest-item cursor-pointer"
@@ -314,8 +320,8 @@
 											</div>
 											<div class="d-flex flex-column ml-3">
 												<div>
-													<span class="font-weight-bold">David</span> started
-													following you
+													<span class="font-weight-bold">David</span>
+													{{ $t("nav.started_following") }}
 												</div>
 												<div class="small text-muted">1m</div>
 											</div>
@@ -335,8 +341,8 @@
 											</div>
 											<div class="d-flex flex-column ml-3">
 												<div>
-													<span class="font-weight-bold">Alina</span> commented
-													on your post
+													<span class="font-weight-bold">Alina</span>
+													{{ $t("nav.commented_on_your_post") }}
 												</div>
 												<div class="small text-muted">1m</div>
 											</div>
@@ -356,8 +362,8 @@
 											</div>
 											<div class="d-flex flex-column ml-3">
 												<div>
-													<span class="font-weight-bold">Maxine</span> liked
-													your post
+													<span class="font-weight-bold">Maxine</span>
+													{{ $t("nav.liked_your_post") }}
 												</div>
 												<div class="small text-muted">1m</div>
 											</div>
@@ -377,8 +383,8 @@
 											</div>
 											<div class="d-flex flex-column ml-3">
 												<div>
-													<span class="font-weight-bold">Paul</span> approuved
-													your request to join the network
+													<span class="font-weight-bold">Paul</span>
+													{{ $t("nav.approuved_request_network") }}
 												</div>
 												<div class="small text-muted">1m</div>
 											</div>
@@ -398,8 +404,8 @@
 											</div>
 											<div class="d-flex flex-column ml-3">
 												<div>
-													<span class="font-weight-bold">David</span> started
-													following you
+													<span class="font-weight-bold">David</span>
+													{{ $t("nav.started_following") }}
 												</div>
 												<div class="small text-muted">1m</div>
 											</div>
@@ -408,7 +414,7 @@
 										<a
 											href="https://bridgeafrica.info/nav/notifications-view-all.html"
 											class="text-ored"
-											><u>See all Notifications</u></a
+											><u> {{ $t("nav.see_all_notifications") }}</u></a
 										>
 									</div>
 								</b-popover>
@@ -428,7 +434,7 @@
 							</div>
 
 							<b-tooltip target="profilepic" variant="light" triggers="hover">
-								Maxine Moff
+								Maxine Moffet
 							</b-tooltip>
 
 							<div class="nav-item">
@@ -458,7 +464,9 @@
 													/>
 												</div>
 												<div class="ml-3 mt-2">
-													<p class="font-weight-bold">Your Businesses</p>
+													<p class="font-weight-bold">
+														{{ $t("nav.your_businesses") }}
+													</p>
 												</div>
 											</div>
 										</div>
@@ -471,7 +479,7 @@
 											<span class="mr-2"
 												><fas-icon class="violet search" :icon="['fas', 'cogs']"
 											/></span>
-											Account Settings
+											{{ $t("nav.account_settings") }}
 										</a>
 										<hr class="h-divider" />
 										<div class="other-menu suggest-item cursor-pointer">
@@ -480,16 +488,31 @@
 													class="violet search"
 													:icon="['fas', 'question']"
 											/></span>
-											Help and Support
+											{{ $t("nav.help_and_support") }}
 										</div>
 										<hr class="h-divider" />
 										<div class="other-menu suggest-item cursor-pointer">
-											<span class="mr-2"
-												><fas-icon
-													class="violet search"
-													:icon="['fas', 'globe-americas']"
-											/></span>
-											Language
+											<b-dropdown
+												block
+												toggle-class="text-decoration-none"
+												no-caret
+												menu-class="w-100"
+											>
+												<template #button-content>
+													<span class="mr-2"
+														><fas-icon
+															class="violet search"
+															:icon="['fas', 'globe-americas']"
+													/></span>
+													{{ $t("nav.language") }}
+												</template>
+												<b-dropdown-item
+													@click="setLocale(lang)"
+													v-for="(lang, i) in langs"
+													:key="i"
+													>{{ lang.toUpperCase() }}</b-dropdown-item
+												>
+											</b-dropdown>
 										</div>
 										<hr class="h-divider" />
 										<a
@@ -501,7 +524,7 @@
 													class="violet search"
 													:icon="['fas', 'sign-out-alt']"
 											/></span>
-											Logout
+											{{ $t("nav.logout") }}
 										</a>
 									</div>
 								</b-popover>
@@ -525,7 +548,7 @@
 								</div>
 								<div class="d-flex flex-column ml-1 line-size">
 									<div class="font-weight-bold">Maxine Moffet GG</div>
-									<div class="small text-muted">Active</div>
+									<div class="small text-muted">{{ $t("nav.active") }}</div>
 								</div>
 							</div>
 
@@ -542,7 +565,9 @@
 									/>
 								</div>
 								<div class="ml-3 mt-2">
-									<p class="font-weight-bold">Your Businesses</p>
+									<p class="font-weight-bold">
+										{{ $t("nav.your_businesses") }}
+									</p>
 								</div>
 							</div>
 						</div>
@@ -555,14 +580,14 @@
 							<span class="mr-2"
 								><fas-icon class="violet search" :icon="['fas', 'cogs']"
 							/></span>
-							Account Settings
+							{{ $t("nav.account_settings") }}
 						</a>
 						<hr class="h-divider" />
 						<div class="other-menu suggest-item cursor-pointer">
 							<span class="mr-1"
 								><fas-icon class="violet search" :icon="['fas', 'question']"
 							/></span>
-							Help and Support
+							{{ $t("nav.help_and_support") }}
 						</div>
 						<hr class="h-divider" />
 						<div class="other-menu suggest-item cursor-pointer">
@@ -578,7 +603,7 @@
 											class="violet search"
 											:icon="['fas', 'globe-americas']"
 									/></span>
-									Language
+									{{ $t("nav.language") }}
 								</template>
 								<b-dropdown-item
 									@click="setLocale(lang)"
@@ -596,7 +621,7 @@
 							<span class="mr-2"
 								><fas-icon class="violet search" :icon="['fas', 'sign-out-alt']"
 							/></span>
-							Logout
+							{{ $t("nav.logout") }}
 						</a>
 					</div>
 				</b-modal>

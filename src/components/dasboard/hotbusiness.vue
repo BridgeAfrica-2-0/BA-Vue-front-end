@@ -2,7 +2,7 @@
   <div>
     <div
       class="people-style shadow"
-      v-for="item in $store.getters['hotbusiness/getdetails']"
+      v-for="item in business "
       :key="item.id"
     >
       <b-row>
@@ -10,9 +10,9 @@
               <div class="center-img">
             <splide :options="options" class="r-image">
                   <splide-slide cl>
-                <img :src="item.picture" class="r-image" />
+                <img :src="item.picture" class="r-image" /> 
               </splide-slide>
-            </splide>
+            </splide> 
               </div>
             </b-col>
             <b-col md="5" cols="7" lg="7" xl="5" sm="5">
@@ -28,7 +28,15 @@
             </span>
             <br />
 
-            {{ item.about_business }} <b-link>Read More</b-link>
+            <read-more
+              more-str="read more"
+              class="readmore"
+              :text="item.about_business"
+              link="#"
+              less-str="read less"
+              :max-chars="50"
+            >
+            </read-more>
               </p>
             </b-col>
 
@@ -95,16 +103,20 @@
           </div>
         </b-col>
       </b-row>
+      
     </div>
+     <infinite-loading @infinite="infiniteHandler"></infinite-loading>
   </div>
 </template>
 
 <script>
+import axios from "axios";  
 export default {
   props: ["title", "image"],
 
   data() {
     return {
+       page: 1,
       options: {
         rewind: true,
         autoplay: true,
@@ -118,7 +130,7 @@ export default {
   },
   computed: {
     business() {
-      return this.$store.state["hotbusiness/bdetails"];
+      return this.$store.getters['hotbusiness/getdetails'];  
     }
   },
   created() {
@@ -130,6 +142,34 @@ export default {
       .catch(err => {
         console.log({ err: err });
       });
+  },
+
+  methods:{
+    
+    infiniteHandler($state) {
+     
+      let url = "profile/hot/business/";
+  
+   
+      axios
+        .get(url + this.page)
+        .then(({ data }) => {
+
+      if (data.data.length) {
+           this.page += 1;
+           
+              this.business.push(...data.data);
+            $state.loaded();
+          } else {
+            $state.complete();
+          }
+
+         
+        })
+        .catch((err) => {
+          console.log({ err: err });
+        });
+    },
   }
 };
 </script>

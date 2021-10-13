@@ -33,6 +33,17 @@
         <p>No one is following you !!</p>
       </b-col>
     </b-row>
+    <br />
+
+    <b-row>
+      <b-col md="12" lg="6">
+        <CommunityBusiness />
+      </b-col>
+
+      <b-col md="12" lg="6">
+        <CommunityBusiness />
+      </b-col>
+    </b-row>
   </div>
 </template>
 

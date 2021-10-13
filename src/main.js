@@ -18,11 +18,21 @@ import homeIconData from "@iconify-icons/mdi-light/home";
 import ReadMore from "vue-read-more";
 import VueSocialauth from "vue-social-auth";
 // import firebase from "firebase";
-
 IconifyIcon.addIcon("home", homeIconData);
 
 Vue.use(Vuex);
 Vue.use(VueAxios, axios);
+
+
+import LoadScript from "vue-plugin-load-script";
+import InfiniteLoading from "vue-infinite-loading";
+
+import { loader } from "./mixins"
+
+//import LoadScript from "vue-plugin-load-script";
+
+Vue.use(LoadScript);
+
 Vue.use(ReadMore);
 Vue.prototype.$axios = axios;
 
@@ -114,6 +124,12 @@ import "@/assets/css/bootstrap.css";
 Vue.use(BootstrapVue);
 Vue.use(IconsPlugin);
 
+//import InfiniteLoading from "vue-infinite-loading";
+
+Vue.use(InfiniteLoading, {
+  /* options */
+});
+
 Vue.use(VueGoogleMaps, {
   load: {
     key: "AIzaSyAGZU6cqra18t1fhN1AbzRsEc_pgt7n2C8",
@@ -123,11 +139,26 @@ Vue.use(VueGoogleMaps, {
   installComponents: true,
 });
 
+
+import VueLoading from 'vue-loading-overlay';
+import 'vue-loading-overlay/dist/vue-loading.css';
+
+
+Vue.use(VueLoading);
+
+import VueAgile from 'vue-agile'
+
+Vue.use(VueAgile);
+
+
+
+
 Vue.component("v-select", vSelect);
 
 import i18n from "./i18n";
 
 Vue.config.productionTip = false;
+var user=null;
 
 new Vue({
   router,
@@ -141,8 +172,8 @@ new Vue({
       this.$store.commit("auth/setUserData", userData);
     }
     axios.interceptors.response.use(
-      response => response,
-      error => {
+      (response) => response,
+      (error) => {
         if (error.response.status === 401) {
           // this.$store.dispatch("auth/logout");
           console.log("error has occure");
@@ -152,5 +183,7 @@ new Vue({
     );
   },
 
+
   render: h => h(App),
+
 }).$mount("#app");

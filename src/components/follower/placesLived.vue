@@ -6,23 +6,30 @@
     <p class="place">
       <b> Current City</b>
     </p>
-    <p class="place">Cameroon, South Africa</p>
+    <p class="place"> {{info.user.city}}</p>
 
     <hr />
 
-    <p class="place">
+    <p class="place"> 
       <b> Home City</b>
     </p>
 
-    <p class="place">New York, United States</p>
-  </div>
+    <p class="place">  {{info.user.city}} </p>
+  </div> 
 </template>
 
 <script>
 export default {
   data() {
     return {};
-  }
+  },
+   computed:{
+
+    info(){
+      return this.$store.state.follower.profileIntro;
+    }
+
+  },
 };
 </script>
 

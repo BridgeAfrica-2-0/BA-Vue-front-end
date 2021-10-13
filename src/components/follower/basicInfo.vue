@@ -7,7 +7,7 @@
         Date Of Birth:
       </div>
       <div class="col">
-        {{ dateOfBirth }}
+        {{ info.user.dob }}
       </div>
     </div>
     <div class=" basic row">
@@ -15,7 +15,7 @@
         Gender:
       </div>
       <div class="col">
-        {{ gender }}
+        {{ info.user.gender }}
       </div>
     </div>
   </div>
@@ -25,11 +25,19 @@
 export default {
   data() {
     return {
-      dateOfBirth: "20/20/2020",
+      dateOfBirth: "20/20/2020",  
       gender: "Male"
     };
   },
-  methods: {}
+  methods: {},
+
+   computed:{
+
+    info(){
+      return this.$store.state.follower.profileIntro;
+    }
+
+  },
 };
 </script>
 

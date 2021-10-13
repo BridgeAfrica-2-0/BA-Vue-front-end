@@ -1,7 +1,7 @@
 <template>
   <div>
     <b-row>
-      <b-col lg="6" sm="12" class="p-2" v-for="item in business" :key="item.id">
+      <b-col lg="6" sm="12" class="p-2" v-for="item in businesses" :key="item.id">
         <div class="people-style shadow">
           <b-row>
             <b-col md="3" xl="3" lg="3" cols="5" sm="3">
@@ -13,7 +13,7 @@
                 </splide>
               </div>
             </b-col>
-            <b-col md="5" cols="7" lg="7" xl="5" sm="5">
+            <b-col md="5" cols="7" lg="7" xl="5" sm="5">  
               <p class="textt">
                 <strong class="title"> {{ item.name }} </strong> <br />
                 {{ item.category }}
@@ -26,8 +26,15 @@
                   >{{ item.country }}
                 </span>
                 <br />
-
-                {{ item.about_description }} <b-link>Read More</b-link>
+       <read-more
+              more-str="read more"
+              class="readmore"
+              :text="item.about_business"
+              link="#"
+              less-str="read less"
+              :max-chars="35"
+            >
+            </read-more>
               </p>
             </b-col>
 
@@ -97,14 +104,17 @@
         </div>
       </b-col>
     </b-row>
+     <infinite-loading @infinite="infiniteHandler"></infinite-loading>
   </div>
 </template>
 
 <script>
+import axios from "axios";
 export default {
-  props: ["title", "image", "business"],
+  props: ["type"],
   data() {
     return {
+      page: 1,
       options: {
         rewind: true,
         autoplay: true,
@@ -116,6 +126,23 @@ export default {
       }
     };
   },
+
+  computed:{
+   
+    businesses(){
+
+      if(this.type=="Follower"){ 
+
+      return  this.$store.state.profile.BcommunityFollower.business_followers;  
+
+       }else{
+
+         return  this.$store.state.profile.BcommunityFollowing.business_following; 
+       }
+   }
+
+  },
+
   methods: {
     count(number) {
       if (number >= 1000000) {
@@ -124,7 +151,67 @@ export default {
       if (number >= 1000) {
         return number / 1000 + "K";
       } else return number;
-    }
+    },
+
+
+
+
+          infiniteHandler($state) { 
+
+      let url = null;
+
+         if(this.type=="Follower"){  
+          url="profile/business/follower/"
+         }else{
+          url="profile/business/following/";
+         }
+      axios
+        .get(url + this.page)
+        .then(({ data }) => {
+        
+          if(this.type=="Follower"){  
+
+
+          if (data.data.business_followers.length) {
+            
+         
+            this.businesses.push(...data.data.business_followers); 
+            this.page += 1;
+            
+            $state.loaded();
+
+           }else{
+              $state.complete();
+             
+           }
+        
+          }else{
+
+
+
+
+             if (data.data.business_following.length) {
+            
+         
+            this.businesses.push(...data.data.business_following); 
+            this.page += 1;
+            
+            $state.loaded();
+
+           }else{
+              $state.complete();
+             
+           }
+
+          }
+           
+        })
+        .catch((err) => {
+          console.log({ err: err });
+        });
+    },
+
+
   }
 };
 </script>
@@ -329,7 +416,7 @@ export default {
     border-bottom-right-radius: 5px;
 
     background: white;
-
+    height: 100%;
     background-color: #fff;
     background-clip: border-box;
     border: 1px solid rgba(0, 0, 0, 0.125);
@@ -352,7 +439,7 @@ export default {
     border-bottom-right-radius: 5px;
 
     background: white;
-
+   height: 100%;
     background-color: #fff;
     background-clip: border-box;
     border: 1px solid rgba(0, 0, 0, 0.125);

@@ -9,8 +9,10 @@ export default {
 
   actions: {
     getndetails({ commit }) {
-      return axios.get("/popularNetwork", {}).then(function({ data }) {
+      return axios.get("profile/popular/network", {}).then(function({ data }) {
         commit("set_details", data.data);
+
+        console.log('lalaads shskdjdjdd djdjdhdjee djeejejeje ejsjsjsjsjs jcjcjcjcjc ');
         console.log(data);
       });
     }

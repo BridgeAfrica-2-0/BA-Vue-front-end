@@ -37,7 +37,8 @@
         </b-col>
       </b-row>
     </b-container>
-    <br />
+      <br />
+
 
     <div v-for="post in sendNotifications" :key="post.id">
       <b-container class="bb-bottom">
@@ -102,6 +103,7 @@
         </b-col>
       </b-container>
     </div>
+
   </div>
 </template>
 
@@ -184,10 +186,14 @@ export default {
   margin-left: -20px;
 }
 
-.m-left-top {
+
+
+
+.m-left-top{
   margin-left: -15px;
 }
-.p-notifaction {
+.p-notifaction{
+
   padding: 30px;
 }
 </style>

@@ -1,14 +1,18 @@
 <template>
-  <div style="overflow-x: hidden; color:black ">
-    <Nav />
+  <div style="overflow-x: hidden; color: black">
+    <Nav :credentials.sync="navBarParams">
+      <template v-slot:button>
+        <Button @click.native="strategies" />
+      </template>
+    </Nav>
 
     <SubNav
       @category="getCategory"
       @parentcategory="getparentCategory"
-      style="margin-top:-25px"
+      style="margin-top: -25px"
     />
 
-    <hr style="margin-top:-0px" class="d-none d-sm-none d-lg-block" />
+    <hr style="margin-top: -0px" class="d-none d-sm-none d-lg-block" />
 
     <div class="container searchly moveup">
       <ly-tab
@@ -21,10 +25,10 @@
       </ly-tab>
     </div>
 
-    <hr style="margin-top:-0px" />
+    <hr style="margin-top: -0px" />
 
     <div
-      class="d-block d- d-sm-block  d-md-block d-lg-block d-xl-none"
+      class="d-block d- d-sm-block d-md-block d-lg-block d-xl-none"
       v-if="selectedId == '1' || selectedId == '4'"
     >
       <b-row>
@@ -59,7 +63,7 @@
           </b-link>
         </b-col>
 
-        <b-col cols="3" class="text-center ">
+        <b-col cols="3" class="text-center">
           <b-link class="cat" @click="SetCat('MC')">
             <img
               class="img-fluid picture logo-img"
@@ -163,21 +167,17 @@
       </b-modal>
     </div>
 
-    <div class="container-fluid medium-filters ">
+    <div class="container-fluid medium-filters">
       <b-row>
         <b-col cols="3">
-          <b-button
-            class="shadow border  mob-btn"
-            id="show-btn"
-            v-b-modal="'myModall'"
-          >
+          <b-button class="shadow border mob-btn" v-b-modal="'myModall'">
             Filter
           </b-button>
         </b-col>
 
         <b-modal ref="myfilters" id="myModall" hide-footer title=" ">
-          <div class="d-block d- d-sm-block  d-md-block d-lg-block d-xl-none">
-            <div style="column-count: 2;">
+          <div class="d-block d- d-sm-block d-md-block d-lg-block d-xl-none">
+            <div style="column-count: 2">
               <b-form-checkbox
                 v-for="category in selectcategories"
                 @change="switchcategories"
@@ -196,14 +196,14 @@
             <span v-if="categories_filters.length">
               <h6>Filters</h6>
             </span>
-            <div style="column-count: 2;">
+            <div style="column-count: 2">
               <b-form-checkbox
                 v-for="agriculture in categories_filters"
                 v-model="selectedfilter"
                 :key="agriculture.value"
                 :value="agriculture.value"
                 name="flavour-4a"
-                class="m-1   br-3"
+                class="m-1 br-3"
               >
                 {{ agriculture.text }}
               </b-form-checkbox>
@@ -220,9 +220,7 @@
               </b-form-group>
 
               <b-form-select v-model="selected">
-                <b-form-select-option value="a">
-                  Yaounde
-                </b-form-select-option>
+                <b-form-select-option value="a"> Yaounde </b-form-select-option>
               </b-form-select>
 
               <br />
@@ -301,7 +299,7 @@
               >
 
               <b-form-checkbox id="" class="a-text" name="" value="">
-                MUtengene</b-form-checkbox
+                Mutengene</b-form-checkbox
               >
             </b-form-group>
 
@@ -333,7 +331,7 @@
               >
             </b-form-group>
 
-            <b-button variant="primary" class="m-3  float-right">
+            <b-button variant="primary" class="m-3 float-right">
               Search
             </b-button>
           </div>
@@ -347,7 +345,7 @@
       <b-row>
         <b-col cols="5">
           <b-button
-            class="shadow border  mob-btn"
+            class="shadow border mob-btn"
             id="show-btn"
             @click="showFilters"
           >
@@ -356,28 +354,30 @@
         </b-col>
 
         <b-col cols="3" md>
-          <b-button class="shadow border   mob-btn " @click="togglelist">
+          <b-button class="shadow border mob-btn" @click="togglelist">
             List
           </b-button>
         </b-col>
 
         <b-col cols="4">
-          <b-button class="shadow border   mob-btn " @click="togglemap()">
+          <b-button class="shadow border mob-btn" @click="togglemap()">
             Map
           </b-button>
         </b-col>
       </b-row>
     </div>
-
     <div class="container-flex p-md-3 p-t-0 upp">
       <b-row class="p-3">
         <b-col cols="0" md="0" xl="3" class="leftblock">
-          <div id="all" class="ml-3">
+          <div class="ml-3">
             <Filters
               v-bind:filterType="selectedId"
               v-bind:Selectedcategory="Selectedcategory"
               v-bind:Selectedparentcategory="Selectedparentcategory"
             />
+
+            <PeopleFilter v-if="selectedId == 2" />
+            <PostFilter v-if="selectedId == 5" />
           </div>
         </b-col>
 
@@ -389,7 +389,7 @@
               <h6>
                 Sponsored Result
                 <fas-icon
-                  class=" icons"
+                  class="icons"
                   :icon="['fas', 'exclamation-circle']"
                   size="lg"
                 />
@@ -426,7 +426,7 @@
 
               <h6>
                 <fas-icon
-                  class=" icons"
+                  class="icons"
                   :icon="['fas', 'project-diagram']"
                   size="lg"
                 />
@@ -439,7 +439,7 @@
               <hr />
 
               <h6>
-                <fas-icon class="icons " :icon="['fas', 'store']" size="lg" />
+                <fas-icon class="icons" :icon="['fas', 'store']" size="lg" />
                 Market
               </h6>
 
@@ -450,7 +450,7 @@
               <hr />
 
               <h6>
-                <fas-icon class=" icons" :icon="['fab', 'readme']" size="lg" />
+                <fas-icon class="icons" :icon="['fab', 'readme']" size="lg" />
                 Post
               </h6>
 
@@ -484,27 +484,36 @@
 
             <!-- filter out only people -->
 
-            <div id="people" v-if="selectedId == '2'">
+            <div v-if="selectedId == '2'">
+              <h6>
+                Sponsored Result
+                <fas-icon
+                  class="icons"
+                  :icon="['fas', 'exclamation-circle']"
+                  size="lg"
+                />
+              </h6>
+
+              <div>
+                <Sponsor />
+              </div>
               <h6>
                 <fas-icon class="icons" :icon="['fas', 'users']" size="lg" />
                 People
               </h6>
-
-              <People />
-
-              <People />
-
-              <People />
-
-              <People />
+              <People
+                v-for="(people, index) in peoples"
+                :people="people"
+                :key="index"
+              />
             </div>
 
             <!-- filter out just the network  -->
 
-            <div id="people" v-if="selectedId == '3'">
+            <div v-if="selectedId == '3'">
               <h6>
                 <fas-icon
-                  class=" icons"
+                  class="icons"
                   :icon="['fas', 'project-diagram']"
                   size="lg"
                 />
@@ -522,26 +531,32 @@
 
             <!-- Filter out just the market place -->
 
-            <div id="people" v-if="selectedId == '4'">
+            <div v-if="selectedId == '4'">
               <h6>
-                <fas-icon class="icons " :icon="['fas', 'store']" size="lg" />
+                <fas-icon class="icons" :icon="['fas', 'store']" size="lg" />
                 Market
               </h6>
-
-              <Market />
-
-              <Market />
-
-              <Market />
 
               <Market />
             </div>
 
             <!-- Filter out just the post  -->
 
-            <div id="people" v-if="selectedId == '5'">
+            <div v-if="selectedId == '5'">
               <h6>
-                <fas-icon class=" icons" :icon="['fab', 'readme']" size="lg" />
+                Sponsored Result
+                <fas-icon
+                  class="icons"
+                  :icon="['fas', 'exclamation-circle']"
+                  size="lg"
+                />
+              </h6>
+
+              <div>
+                <Sponsor />
+              </div>
+              <h6>
+                <fas-icon class="icons" :icon="['fab', 'readme']" size="lg" />
                 Post
               </h6>
 
@@ -549,9 +564,8 @@
             </div>
           </div>
         </b-col>
-
         <b-col cols="12" md="4" lg="4" xl="3" class="showmap" ref="mapblock">
-          <div id="map" style="margin-top: 20px;" class=""><Map /></div>
+          <div id="map" style="margin-top: 20px" class=""><Map /></div>
         </b-col>
       </b-row>
     </div>
@@ -559,9 +573,13 @@
 </template>
 
 <script>
+import _ from "lodash";
+
 import LyTab from "@/tab/src/index.vue";
 
 import Map from "@/components/search/map";
+
+import Button from "@/components/ButtonNavBarFind";
 
 import Business from "@/components/search/business";
 import People from "@/components/search/people";
@@ -576,8 +594,15 @@ import SubNav from "@/components/subnav";
 
 import Sponsor from "@/components/search/sponsoredBusiness";
 
+import { PeopleFilter, PostFilter } from "@/components/search";
+
+import { loader } from "@/mixins";
+
+import { mapGetters, mapActions } from "vuex";
+
 export default {
   components: {
+    Button,
     LyTab,
     Nav,
     SubNav,
@@ -589,11 +614,41 @@ export default {
     Network,
     Post,
     Market,
+    PeopleFilter,
+    PostFilter,
+
 
     // Footer,
   },
+
+  mixins: [loader],
+
+  computed: {
+    ...mapGetters({
+      peoples: "search/GET_RESULT",
+    }),
+  },
+
+  created() {
+    this.strategy = {
+      2: () => this.onFindUser(),
+    };
+    this.strategyForPlaceHolder = {
+      2: () => "Find User",
+      0: () => "All",
+    };
+
+    this.changePlaceHolder();
+  },
+
   data() {
     return {
+      navBarParams: {
+        keyword: "",
+        placeholder: "",
+      },
+      strategy: {},
+      strategyForPlaceHolder: {},
       selected: "all",
       selectedId: 0,
       Setcategoryr: "all",
@@ -606,13 +661,19 @@ export default {
       map: false,
       selectedfilter: "",
       showform: false,
-      // [
-      //   { label: "All" },
-      //   { label: "Business" },
-      //   { label: "Network" },
-      //   { label: "Market" },
-      //   { label: "Post" }
-      // ],
+      //selectcategories:[],
+
+      categories_filters: [],
+      items: [
+        { label: "All " },
+
+        { label: "Business" },
+        { label: "People" },
+        { label: "Network" },
+        { label: "Market" },
+        { label: "Post" },
+      ],
+
 
       Finished_Branded_Products_filters: [
         { value: "Peanuts", text: "Peanuts" },
@@ -1525,7 +1586,41 @@ export default {
     };
   },
 
+  watch: {
+    selectedId: function () {
+      this.changePlaceHolder();
+    },
+  },
+
   methods: {
+    ...mapActions({
+      find: "search/FIND_USER",
+    }),
+    changePlaceHolder() {
+      try {
+        const newPlaceholder = this.strategyForPlaceHolder[this.selectedId]();
+        this.navBarParams = Object.assign(this.navBarParams, {
+          placeholder: newPlaceholder,
+        });
+      } catch (error) {
+        this.navBarParams = Object.assign(this.navBarParams, {
+          placeholder: "",
+        });
+      }
+    },
+
+    strategies() {
+      try {
+        this.strategy[`${this.selectedId}`]();
+      } catch (error) {
+        console.warn(`Implement function for selectedId=${this.selectedId}`);
+      }
+    },
+    onFindUser() {
+      if (this.navBarParams.keyword.trim())
+        this.find(this.navBarParams.keyword);
+    },
+
     SetCat(cat) {
       console.log(cat);
 
@@ -1624,14 +1719,10 @@ export default {
     },
     getparentCategory(value) {
       this.Selectedparentcategory = value;
-
-      //   console.log(this.Selectedparentcategory);
     },
 
     switchcategories() {
       this.showform = false;
-
-      console.log(this.default_category);
 
       switch (this.default_category) {
         case "Primary Education":

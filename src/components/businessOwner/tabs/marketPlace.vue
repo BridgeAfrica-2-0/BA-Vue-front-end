@@ -1,19 +1,5 @@
 <template>
   <div>
-    <fas-icon class="icons " :icon="['fas', 'store']" size="lg" /> Market
-    <button
-      type="button"
-      data-toggle="modal"
-      data-target="#addbusinessbtnModal"
-      class="btn btn-outline-primary pull-right float-right mb-2"
-      style="margin-top: -6px;"
-      @click="createProduct"
-    >
-      Add product
-    </button>
-
-    <hr />
-
     <div class="products ">
       <div class="col-md-6" v-for="(product, index) in products" :key="index">
         <Product :product="product" />
@@ -86,7 +72,7 @@
 
         <b-form-group
           id="input-group-1"
-          label="product Price"
+          label="Product Description"
           label-for="input-1"
           label-size="sm"
         >
@@ -101,6 +87,15 @@
           value="1"
           v-model="newProduct.on_discount"
           unchecked-value="0"
+        >
+          <b-form-input class="mt-1" id="price"></b-form-input>
+        </b-form-checkbox>
+
+        <b-form-checkbox
+          id="checkbox-1"
+          name="checkbox-1"
+          value="accepted"
+          unchecked-value="not_accepted"
         >
           This Product Is On Discount
         </b-form-checkbox>

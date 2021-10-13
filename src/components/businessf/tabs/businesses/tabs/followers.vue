@@ -17,8 +17,6 @@
     </b-row>
     <br />
 
-    <br />
-
     <b-row>
       <b-col
         v-for="(follower, index) in theFollowers"

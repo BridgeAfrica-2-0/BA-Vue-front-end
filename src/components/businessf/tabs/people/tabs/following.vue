@@ -34,6 +34,17 @@
         <p>No one is following you !!</p>
       </b-col>
     </b-row>
+    <br />
+
+    <b-row class="p-0">
+      <b-col md="12" lg="6" class="p-0">
+        <CommunityMembers />
+      </b-col>
+
+      <b-col md="12" lg="6" class="p-0">
+        <CommunityMembers />
+      </b-col>
+    </b-row>
   </div>
 </template>
 

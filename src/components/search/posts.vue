@@ -1,67 +1,69 @@
 <template>
   <div>
-      <b-row class="row m-1 mt-4 pb-1 border">
-        <b-col cols="12" class="mt-4">
-          <b-row>
-            <b-col cols="2" md="1" class="m-0 p-0">
-              <b-avatar
-                class="d-inline-block avat"
+    <b-row class="row m-1 mt-4 pb-1 border">
+      <b-col cols="12" class="mt-4">
+        <b-row>
+          <b-col cols="2" md="1" class="m-0 p-0">
+            <b-avatar
+              class="d-inline-block avat"
+              variant="primary"
+              :src="post.profile_picture"
+            ></b-avatar>
+          </b-col>
+          <b-col cols="10" md="11" class="pt-2">
+            <h5 class="m-0 font-weight-bolder">{{ post.name }}</h5>
+            <p class="duration">{{ post.created_at | fromNow }}</p>
+          </b-col>
+        </b-row>
+        <b-row>
+          <b-col cols="12" class="mt-2">
+            <p class="post-text">{{ post.content }}</p>
+          </b-col>
+        </b-row>
+        <b-row>
+          <b-col cols="12" class="mt-2" v-if="post.media.length">
+            <div class="" v-if="1 === post.media.length">
+              <img
+                class="img-fluid post-container"
+                :src="post.media[0]"
+                alt="Photo1"
+              />
+            </div>
+            <lightbox
+              :cells="post.media.length"
+              :items="post.media"
+              v-else
+            ></lightbox>
+          </b-col>
+          <b-col class="mt-1">
+            <span class="mr-3 cursor"
+              ><b-icon
+                icon="suit-heart"
                 variant="primary"
-                :src="post.profile_picture"
-              ></b-avatar>
-            </b-col>
-            <b-col cols="10" md="11" class="pt-2">
-              <h5 class="m-0 font-weight-bolder">{{ post.name }}</h5>
-              <p class="duration">{{ post.created_at | fromNow }}</p>
-            </b-col>
-          </b-row>
-          <b-row>
-            <b-col cols="12" class="mt-2">
-              <p class="post-text">{{ post.content }}</p>
-            </b-col>
-          </b-row>
-          <b-row>
-            <b-col cols="12" class="mt-2" v-if="post.media.length">
-              <div class="" v-if="1 === post.media.length">
-                <img
-                  class="img-fluid post-container"
-                  :src="post.media[0]"
-                  alt="Photo1"
-                />
-              </div>
-              <lightbox
-                :cells="post.media.length"
-                :items="post.media"
-                v-else
-              ></lightbox>
-            </b-col>
-            <b-col class="mt-1">
-              <span class="mr-3 cursor"
-                ><b-icon
-                  icon="suit-heart"
-                  variant="primary"
-                  aria-hidden="true"
-                ></b-icon>
-                {{ post.likes_count | formatNumber }}</span
-              >
-              <span class="cursor" @click="() => toggle = !toggle">
-                <b-icon
-                 
-                  icon="chat-fill"
-                  variant="primary"
-                  aria-hidden="true"
-                ></b-icon>
-                {{ post.comment_count | formatNumber }}</span
-              >
-            </b-col>
-            
-          </b-row>
-          <div v-show="toggle" >
-            <Comment v-for="(comment,index) in comments" :key="index" :comment="comment" />
-          </div>
-        </b-col>
-      </b-row>
-     <!--
+                aria-hidden="true"
+              ></b-icon>
+              {{ post.likes_count | formatNumber }}</span
+            >
+            <span class="cursor" @click="() => (toggle = !toggle)">
+              <b-icon
+                icon="chat-fill"
+                variant="primary"
+                aria-hidden="true"
+              ></b-icon>
+              {{ post.comment_count | formatNumber }}</span
+            >
+          </b-col>
+        </b-row>
+        <div v-show="toggle">
+          <Comment
+            v-for="(comment, index) in comments"
+            :key="index"
+            :comment="comment"
+          />
+        </div>
+      </b-col>
+    </b-row>
+    <!--
       <b-row class="row m-1 mt-4 pb-1 border">
         <b-col cols="12" class="mt-4">
           <b-row>
@@ -200,12 +202,11 @@
         </b-col>
       </b-row>
       -->
-  
-    </div>
+  </div>
 </template>
 
 <script>
-import Comment from './comment.vue'
+import Comment from "./comment.vue";
 import { fromNow, formatNumber } from "@/helpers";
 
 export default {
@@ -213,26 +214,27 @@ export default {
   props: {
     post: {
       type: Object,
+      require: true,
     },
   },
 
-  components:{
-    Comment
+  components: {
+    Comment,
   },
 
-  created(){
-    this.comments= this.post.comments
+  created() {
+    this.comments = this.post.comments;
   },
 
   filters: {
     fromNow,
     formatNumber,
   },
-  
+
   data() {
     return {
-      toggle:false,
-      comments:[],
+      toggle: false,
+      comments: [],
       images: [
         "https://i.wifegeek.com/200426/f9459c52.jpg",
         "https://i.wifegeek.com/200426/5ce1e1c7.jpg",
@@ -286,13 +288,13 @@ export default {
 </script>
 
 <style scoped>
-.cursor{
-  cursor: pointer
+.cursor {
+  cursor: pointer;
 }
 
 .border {
-    border: 1px solid #eaeef1;
-    border-radius: 16px;
+  border: 1px solid #eaeef1;
+  border-radius: 16px;
 }
 .action-intro {
   font-size: 1rem;

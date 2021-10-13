@@ -2,6 +2,7 @@
 import { mapGetters, mapActions } from "vuex";
 
 import NotFound from "@/components/NotFoundComponent"
+import ClipLoader from 'vue-spinner/src/ClipLoader.vue'
 
 export const loader = {
   methods: {
@@ -14,11 +15,6 @@ export const loader = {
         text,
       });
     },
-  },
-  computed: {
-    ...mapGetters({
-      loading: 'search/LOADING'
-    })
   },
 
   data: () => ({
@@ -34,14 +30,14 @@ export const loader = {
       } else {
         this.overlay.hide()
       }
-
     }
   }
 }
 
 export const search = {
   components: {
-    NotFound
+    NotFound,
+    Loader: ClipLoader
   },
   props: {
     title: {
@@ -50,7 +46,8 @@ export const search = {
   },
 
   data: () => ({
-    endLoading: false
+    loading: false,
+    haveNotData: false
   }),
 
   destroyed() {
@@ -64,7 +61,6 @@ export const search = {
       callback: "search/GET_CURRENT_PAGINATE_CALLBACK",
       getStack: "search/STACK_VALUE",
       canScrool: "search/END_INITIAL_REQUEST",
-      loadingHasActivated: "search/LOADING",
     }),
   },
   methods: {

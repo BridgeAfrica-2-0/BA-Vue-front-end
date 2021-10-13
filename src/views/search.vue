@@ -543,10 +543,7 @@ import SubNav from "@/components/subnav";
 
 import Sponsor from "@/components/search/sponsoredBusiness";
 
-import {
-  PostComponent,
-  PeopleComponent,
-} from "@/components/search";
+import { PostComponent, PeopleComponent } from "@/components/search";
 
 import { loader } from "@/mixins";
 
@@ -583,6 +580,7 @@ export default {
         keyword: "",
         placeholder: "",
       },
+      strategyForComponent: null,
       notFoundComponentTitle: "",
       isComponent: null,
       strategy: {},
@@ -1526,6 +1524,7 @@ export default {
 
   watch: {
     selectedId: function () {
+      this.changeComponent();
       this.changePlaceHolder();
       this.changeNotFoundTitle();
     },
@@ -1549,15 +1548,14 @@ export default {
       };
 
       this.strategyForPlaceHolder = {
-        2: () => {
-          this.isComponent = PeopleComponent;
-          return "Find User";
-        },
-        5: () => {
-          this.isComponent = PostComponent;
-          return "Find Post";
-        },
+        2: () => "Find User",
+        5: () => "Find Post",
         0: () => "All",
+      };
+
+      this.strategyForComponent = {
+        2: () => PeopleComponent,
+        5: () => PostComponent,
       };
 
       this.strategyForNotFoundComponentTitle = {
@@ -1570,11 +1568,18 @@ export default {
 
     changeNotFoundTitle() {
       try {
-        this.notFoundComponentTitle = this.strategyForNotFoundComponentTitle[
-          this.selectedId
-        ]();
+        this.notFoundComponentTitle =
+          this.strategyForNotFoundComponentTitle[this.selectedId]();
       } catch (error) {
         this.notFoundComponentTitle = "";
+      }
+    },
+
+    changeComponent() {
+      try {
+        this.isComponent = this.strategyForComponent[this.selectedId]();
+      } catch (error) {
+        this.isComponent = null;
       }
     },
 
@@ -1609,14 +1614,14 @@ export default {
           },
           page: 1,
         });
+
         this.userStore(request);
-        this.lauchLoader(false);
         this.page(2);
         this.setCallback(this.$repository.search.findUserByParam);
       } catch (error) {
         console.log(error);
-        this.lauchLoader(false);
       }
+      this.lauchLoader(false);
     },
 
     onFindUser() {
@@ -1640,14 +1645,12 @@ export default {
           keyword: this.navBarParams.keyword.trim(),
           page: 1,
         });
-
         this.postStore(request);
         this.page(2);
-        this.lauchLoader(false);
       } catch (error) {
         console.log(error);
-        this.lauchLoader(false);
       }
+      this.lauchLoader(false);
     },
 
     onFindPost() {
@@ -1690,7 +1693,8 @@ export default {
           break;
 
         case "MC":
-          this.selectcategories = this.Mayor_councils_filters_and_public_institution;
+          this.selectcategories =
+            this.Mayor_councils_filters_and_public_institution;
 
           break;
 

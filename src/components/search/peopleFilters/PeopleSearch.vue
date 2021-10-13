@@ -14,8 +14,15 @@
     </h6>
 
     <NotFound v-if="!peoples.length" :title="title" />
-
-    <People v-for="(people, index) in peoples" :people="people" :key="index" />
+    <div v-else>
+      <People
+        v-for="(people, index) in peoples"
+        :people="people"
+        :key="index"
+      />
+    </div>
+    <p class="text-center" v-if="haveNotData">Not Data</p>
+    <Loader :loading="loading" color="#ced4da"></Loader>
   </div>
 </template>
 
@@ -47,11 +54,11 @@ export default {
   methods: {
     ...mapActions({
       userStore: "search/FIND_USER",
-      lauchLoader: "search/LOADING",
-      page: "search/SET_CURRENT_PAGINATION_PAGE",
+      page: "search/SET_CURRENT_PAGINATION_PAGE"
     }),
 
     onscroll: async function (event) {
+      
       const scrollY = window.scrollY;
       const visible = document.documentElement.clientHeight;
       const pageHeight = document.documentElement.scrollHeight;
@@ -60,10 +67,11 @@ export default {
       if (
         this.callback &&
         (bottomOfPage || pageHeight < visible) &&
-        !this.endLoading &&
-        !this.loadingHasActivated
+        !this.loading &&
+        !this.haveNotData
       ) {
-        this.lauchLoader(true);
+        this.loading = true;
+
         const request = await this.callback({
           ...this.getStack,
           page: this.getPage,
@@ -72,10 +80,9 @@ export default {
         if (request.length) {
           this.userStore(request);
           this.page(this.getPage + 1);
-        } else this.endLoading = true;
+        } else this.haveNotData = true;
 
-        console.log("At the bottom");
-        this.lauchLoader(false);
+        this.loading = false;
       }
     },
   },

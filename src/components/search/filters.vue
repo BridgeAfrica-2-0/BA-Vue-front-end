@@ -321,7 +321,6 @@
       <br />
     </div>
 
-
     <component :is="currentFilter" />
 
     <!--
@@ -511,30 +510,25 @@
 </template>
 
 <script>
-
-
-import {
-  PeopleFilter,
-  PostFilter,
-} from "@/components/search";
+import { PeopleFilter, PostFilter } from "@/components/search";
 
 export default {
   name: "filters",
 
   props: ["filterType", "Selectedcategory", "Selectedparentcategory"],
 
-  created(){
+  created() {
     this.strategies = {
-      2: () => this.currentFilter = PeopleFilter,
-      5: () => this.currentFilter = PostFilter,
-    }
+      2: () => PeopleFilter,
+      5: () => PostFilter,
+    };
   },
   watch: {
-    filterType: function(newId){
+    filterType: function (newId) {
       try {
-        this.currentFilter = this.strategies[newId]
+        this.currentFilter = this.strategies[newId]();
       } catch (error) {
-        this.currentFilter = null
+        this.currentFilter = null;
       }
     },
     Selectedparentcategory: function (newVal) {
@@ -814,7 +808,7 @@ export default {
 
       // -----------------
       strategies: null,
-      currentFilter:null,
+      currentFilter: null,
       slide: 0,
       sliding: null,
 
@@ -1861,12 +1855,12 @@ export default {
 
           console.log(res.data.data);
           if (res.data.data.length === 0) {
-            let subName = ''
-            this.subCategories.map((sub)=>{
+            let subName = "";
+            this.subCategories.map((sub) => {
               if (sub.id === subId) {
-                subName = sub.name
+                subName = sub.name;
               }
-            })
+            });
             this.noFilter = `No filter available for ${subName}!`;
           }
 

@@ -18,9 +18,7 @@
         </b-col>
         <b-col>
           <div class="b-bottomn f-right">
-            <b-button variant="primary" class="a-button-l duration">
-              Mark as Read</b-button
-            >
+            <b-button variant="primary" @click="MarkAsRead" class="a-button-l duration">Mark as Read</b-button>
           </div>
         </b-col>
       </b-row>
@@ -46,68 +44,87 @@
               <b-avatar
                 class="d-inline-block profile-pic"
                 variant="primary"
-                :src="notification.picture"
+                :src="notification.data[0].profile_picture"
               ></b-avatar>
               <h6 class="m-0  d-inline-block ml-2 username">
-                {{ notification.name }}
-                <div class="duration">{{ notification.time }}hr</div>
-                <!-- <div class="duration">{{ moment(notification.time).fromNow() }}</div> -->
+                {{ notification.data[0].fullname }}
+                <!-- <div class="duration">{{ notification.created_at }}hr</div> -->
+                <div class="duration">{{ moment(notification.created_at).fromNow() }}</div>
               </h6>
             </span>
             <span class="float-right mt-1"> </span>
           </p>
 
           <p class="text">
-            {{ notification.description }}
+            {{ notification.notification_text }}
           </p>
 
           <hr width="100%" />
         </b-col>
       </b-row>
+      {{notifications}}
     </div>
+
+    <FlashMessage />
+
   </div>
 </template>
 
 <script>
-// import moment from 'moment';
+import moment from 'moment';
 
 export default {
   name: "notification",
   data() {
     return {
-      // moment: moment,
+      url: null,
+      moment: moment,
       notifications: [ 
-        { "id": "1", "name": "Shad Jast", "time": "1", "picture": "https://picsum.photos/250/250/?image=58", "description": "Lorem Ipsum is this is just a dummy text to post simply dummy "}, 
-        { "id": "2", "name": "Duane Metz", "time": "2", "picture": "https://picsum.photos/250/250/?image=59", "description": "standard dummy text ever since the 1500s, Lorem Ipsum is"}, 
-        { "id": "3", "name": "Myah Kris", "time": "3", "picture": "https://picsum.photos/250/250/?image=55", "description": "simply dummy text of the printing and typesetting industry. Lorem"}, 
-        { "id": "4", "name": "Dr. Kamron Wunsch", "time": "4", "picture": "https://picsum.photos/250/250/?image=56", "description": "Ipsum has been the industry's standard dummy text ever since the"}, 
-        { "id": "5", "name": "Brendon Rogahn", "time": "4", "picture": "https://picsum.photos/250/250/?image=57", "description": "of the printing and typesetting industry. Lorem Ipsum has been the"}
+        {
+          "data": [
+              {
+                  "fullname": "Cyclone wifi",
+                  "profile_picture": "https://picsum.photos/250/250/?image=22"
+              }
+          ],
+          "notification_id": 4,
+          "reference_id": 1,
+          "notification_text": "You’ve unblock Ramona Braun",
+          "created_at": "2021-10-12T15:28:23.000000Z",
+          "updated_at": "2021-10-12T15:28:23.000000Z",
+          "is_read": 0,
+          "user_id": 1,
+          "mark_as_read": 0
+        },
+        {
+          "data": [
+              {
+                  "fullname": "Cyclone ",
+                  "profile_picture": "https://picsum.photos/250/250/?image=22"
+              }
+          ],
+          "notification_id": 4,
+          "reference_id": 1,
+          "notification_text": "Aww yeah, you successfully read this important alert message. This example text is going to run a bit longer so that you can see how spacing within an alert works with this kind of content.",
+          "created_at": "2021-1-12T15:28:23.000000Z",
+          "updated_at": "2021-12-12T15:28:23.000000Z",
+          "is_read": 0,
+          "user_id": 1,
+          "mark_as_read": 1
+        },
       ],
       selected: [],
       selectAll: false,
       indeterminate: false
     };
   },
-  methods: {
-    select(checked) {
-      console.log("this.selectAll: "+this.selectAll);
-      console.log("checked: "+checked);
-      this.selected = [];
-      if (checked) {
-        for (let notification in this.notifications) {
-          console.log("this.notifications[notification].id: "+this.notifications[notification].name)
-          this.selected.push(this.notifications[notification].name.toString());
-        }
-      }
+  
+  computed: {
+    notificationss() {
+      return this.$store.state.networkNotification.notifications;
     },
-    updateCheckall: function() {
-      if (this.notifications.length === this.selected.length) {
-        this.selectAll = true;
-      } else {
-        this.selectAll = false;
-      }
-    }
   },
+
   watch: {
     selected(newValue, oldValue) {
       // Handle changes in individual notifications checkboxes
@@ -122,7 +139,68 @@ export default {
         this.selectAll = false;
       }
     }
+  },
+  mounted(){
+    this.url = this.$route.params.id
+    this.getNotifications() 
+  },
+  methods: {
+    select(checked) {
+      console.log("this.selectAll: "+this.selectAll);
+      console.log("checked: "+checked);
+      this.selected = [];
+      if (checked) {
+        for (let notification in this.notifications) {
+          console.log("this.notifications[notification].notification_id: "+this.notifications[notification].notification_id)
+          this.selected.push(this.notifications[notification].notification_id.toString());
+        }
+      }
+    },
+    updateCheckall: function() {
+      if (this.notifications.length === this.selected.length) {
+        this.selectAll = true;
+      } else {
+        this.selectAll = false;
+      }
+    },
+    getNotifications() {
+      console.log('getNotifications Mounted');
+    this.$store
+      .dispatch("networkNotification/getNotifications", {"id":this.url,"path":"notifications"})
+      .then(() => {
+        console.log('ohh yeah');
+      })
+      .catch(err => {
+        console.log({ err: err });
+      });
+    },
+
+    MarkAsRead: function(){
+      let formData = new FormData();
+      for (let i = 0; i < this.selected.length; i++) {
+        console.log(this.selected[i]);
+        formData.append('ids['+i+']', this.selected[i]);
+      }
+      this.axios.post("#", formData)
+      .then(() => {
+        console.log('ohh yeah');
+        this.getNotifications();
+        this.flashMessage.show({
+          status: "success",
+          message: "New Role Updated"
+        });
+      })
+      .catch(err => {
+        console.log({ err: err });
+        this.flashMessage.show({
+          status: "error",
+          message: "Unable to Update New Role"
+        });
+      });
+		},
+
   }
+
 };
 </script>
 

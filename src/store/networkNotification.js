@@ -13,20 +13,23 @@ export default {
   },
 
   mutations: {
-    setnotifications(state, notifications) {
+    setNotifications(state, notifications) {
         state.notifications = notifications;
     },
   },
 
   actions: {
 
-    getNotifications( {commit}, path ){
-      console.log(path);
+    getNotifications( {commit}, dataInfo ){
+      console.log("Store File");
+      console.log(dataInfo.id);
+      console.log(dataInfo.path);
       return axios
-      .post(`network/${path}`)
+      .get(`network/${dataInfo.id}/${dataInfo.path}`)
       .then(({ data }) => {
-          commit("setnotifications", data.data);
+          commit("setNotifications", data.data);
         console.log(data);
+        console.log(`network/${dataInfo.id}/${dataInfo.path}`);
       })
     },
  

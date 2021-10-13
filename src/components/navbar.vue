@@ -165,7 +165,7 @@
                   ><span class="text-ored"
                     ><fas-icon
                       class="primary"
-                      :icon="['fas', 'comment']" /></span
+                      :icon="['fas', 'comment']"/></span
                 ></a>
                 <b-popover target="messages" triggers="hover" placement="top">
                   <div class="popover-body">
@@ -469,9 +469,7 @@
                       class="other-menu suggest-item cursor-pointer text-decoration-none text-dark"
                     >
                       <span class="mr-2"
-                        ><fas-icon
-                          class="violet search"
-                          :icon="['fas', 'cogs']"
+                        ><fas-icon class="violet search" :icon="['fas', 'cogs']"
                       /></span>
                       Account Settings
                     </a>
@@ -581,9 +579,7 @@
               class="other-menu suggest-item cursor-pointer text-decoration-none text-dark"
             >
               <span class="mr-2"
-                ><fas-icon
-                  class="violet search"
-                  :icon="['fas', 'sign-out-alt']"
+                ><fas-icon class="violet search" :icon="['fas', 'sign-out-alt']"
               /></span>
               Logout
             </a>
@@ -607,7 +603,7 @@ export default {
   props: {
     credentials: {
       type: Object,
-      default: function () {
+      default: function() {
         return {
           keyword: "",
           placeholder: "",

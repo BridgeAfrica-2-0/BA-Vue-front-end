@@ -11,6 +11,8 @@ export default {
     albumImages: [],
     ownerPost: [],
     ownerPostImages: [],
+
+    notifications: [],
   },
   getters: {
     getAlbums(state) {
@@ -28,6 +30,10 @@ export default {
     // sending success value
     getSuccess(state) {
       return state.success;
+    },
+    //sending notifications
+    getNotifications(state) {
+      return state.notifications;
     },
   },
   mutations: {
@@ -84,6 +90,11 @@ export default {
     },
     downloadPic(state, payload) {
       state.images = payload;
+    },
+
+    // Setting the notifications in the state
+    setNotifications(state, payload) {
+      state.notifications = payload;
     },
   },
 
@@ -188,5 +199,70 @@ export default {
       );
       commit("downloadPic", res.data);
     },
+  },
+
+  // Getting the notifications
+  async getNotifications({ dispatch, commit }) {
+    commit("setLoader", true);
+
+    await axios
+      .get("notification")
+      .then((res) => {
+        commit("setLoader", false);
+        commit("setSuccess", true);
+        commit("setNotifications", res.data.data);
+        setTimeout(() => {
+          commit("setSuccess", false);
+        }, 2000);
+      })
+      .catch((err) => {
+        commit("setLoader", false);
+        console.log("Unauthorized request !!");
+      });
+  },
+
+  // Sending a read request
+  async readNotifiactions({ dispatch, commit }, payload) {
+    let items = {
+      ids: [],
+    };
+
+    payload.forEach((element) => {
+      let objId = {
+        id: null,
+      };
+      objId.id = element.id;
+      items.ids.push(objId);
+    });
+    await axios
+      .post("notification/mark-read", items)
+      .then(() => {
+        dispatch("getNotifications");
+      })
+      .catch((err) => [console.log(err)]);
+  },
+
+  // Delete All Notifications
+  async deleteNotifications({ dispatch, commit }, payload) {
+    let items = {
+      ids: [],
+    };
+
+    payload.forEach((element) => {
+      let objId = {
+        id: null,
+      };
+      objId.id = element;
+      items.ids.push(objId);
+    });
+    await axios.post("notification/deleteAll", items).then(() => {
+      dispatch("getNotifications");
+    });
+  },
+  // delete a single notification
+  deleteOne({ dispatch }, id) {
+    axios.delete(`notification/${id}`).then(() => {
+      dispatch("getNotifications");
+    });
   },
 };

@@ -58,7 +58,6 @@ const routes = [
       auth: true,
     },
   },
-
   {
     path: "/market",
     name: "market",

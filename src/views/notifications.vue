@@ -24,6 +24,7 @@
                 class="msg-icon mark-as"
                 icon="pen"
                 variant="primary"
+                @click="readAll(selected)"
               ></b-icon>
             </b-col>
             <b-col class="col-1 mt-4">
@@ -31,6 +32,7 @@
                 class="msg-icon del"
                 icon="trash"
                 variant="primary"
+                @click="deleteAll(selected)"
               ></b-icon>
             </b-col>
           </b-row>
@@ -38,7 +40,7 @@
       </b-row>
       <hr />
       <div class="main">
-        <b-row>
+        <b-row v-for="post in Notifications" :key="post.id">
           <b-col class="col-1">
             <b-form-checkbox
               id="checkbox-2"
@@ -46,6 +48,7 @@
               name="checkbox-2"
               value="accepted"
               unchecked-value="not_accepted"
+              @click="checkedOne(post)"
             >
             </b-form-checkbox>
           </b-col>
@@ -66,6 +69,7 @@
                   class="msg-icon pen"
                   icon="pen"
                   variant="primary"
+                  @click="readOne(post.id)"
                 ></b-icon>
               </b-col>
               <b-col class="show">
@@ -73,6 +77,7 @@
                   class="msg-icon trash show"
                   icon="trash"
                   variant="primary"
+                  @click="deleteOne(post.id)"
                 ></b-icon>
               </b-col>
             </b-row>
@@ -87,23 +92,66 @@
 <script>
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
+import { mapActions } from "vuex";
 export default {
   components: {
     Navbar,
-    Footer
+    Footer,
+  },
+  computed: {
+    ...mapGetter({
+      Notifications: "UserProfileOwner/getNotifications",
+    }),
   },
 
   data() {
     return {
       checked: false,
-      checkAll: false
+      checkAll: false,
+      selected: "",
     };
   },
   methods: {
+    ...mapActions({
+      readNotifiactions: "UserProfileOwner/readNotifiactions",
+      deleteNotifications: "UserProfileOwner/deleteNotifications",
+      deleteOne: "UserProfileOwner/deleteOne",
+    }),
+    selectAll() {
+      this.Notifications.forEach((element) => {
+        this.selected.push(element);
+      });
+    },
+    select(notification, index) {
+      if (this.selected[index]) {
+        this.selected.splice(index, 1);
+        return;
+      }
+      this.selected.push(notification);
+    },
     checkedAll() {
       this.checked = true;
-    }
-  }
+      this.selectAll();
+    },
+    checkedOne() {
+      this.select();
+    },
+
+    readAll(data) {
+      this.readNotifications(data);
+    },
+    deleteAll(data) {
+      this.checked = false;
+      let ids = [];
+      data.forEach((element) => {
+        ids.push(element.id);
+      });
+      this.deleteNotifications(data);
+    },
+    deleteOne(id) {
+      this.deleteOne(id);
+    },
+  },
 };
 </script>
 

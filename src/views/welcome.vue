@@ -50,7 +50,7 @@
       </div>
     </div>
 
-    <p class="text-center">
+    <!-- <p class="text-center">
       <span class="display-inline">
         <b-link @click="$i18n.locale = 'en'"> {{ $t("english") }} </b-link>
         <span class="vl"></span>
@@ -59,7 +59,7 @@
         </b-link>
       </span>
       Bridge Africa © 2021
-    </p>
+    </p> -->
 
 
     <div class="modal-backdro">
@@ -83,14 +83,14 @@
               hidden
             />
 
-         <!-- .   <tab-content
+         .   <tab-content
               :title= " $t('complete_profile') "
               :before-change="updateUserProfile"
-            >  -->
- <tab-content
+            > 
+ <!-- <tab-content
               :title= " $t('complete_profile') "
               
-            > 
+            >  -->
 
               <div class="form-card">
                 <div class="row">
@@ -105,8 +105,8 @@
                         @click="chooseProfile2()"
                         variant="primary"
                         class="mt-3 text-center"
-                      >
-                        change Image
+                      > 
+                      {{$t('change_image')}}
                       </b-button>
                     </div>
 
@@ -279,15 +279,15 @@
           
           <form-wizard @on-complete="onComplete">
            
-             <!-- <tab-content
+             <tab-content
               :title="$t('complete_profile') "
               :before-change="updateUserProfile"
-            >  -->
+            > 
 
-  <tab-content
+  <!-- <tab-content
               :title="$t('complete_profile') "
               
-            > 
+            >  -->
 
 
               <div class="form-card">
@@ -433,14 +433,14 @@
               </div>
             </tab-content>
 
-            <!-- <tab-content
+            <tab-content
               :title="$t('business_identity')"
               :before-change="validateBusiness"
-            >  -->
-             <tab-content
+            > 
+             <!-- <tab-content
               :title="$t('business_identity')"
               
-            >
+            > -->
               <div class="form-card">
                 <div class="row">
                   <div class="col-md-6">

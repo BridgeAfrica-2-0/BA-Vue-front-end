@@ -17,13 +17,14 @@
             </b-col>
             <b-col sm="12" md="6" class="mb-3">
              
-
+          <div class="container"> 
               <b-form-select 
                 v-model="selectedb"
+                class="mr-3"
                 :options="boptions"
                   @input="switchBusiness"
               ></b-form-select>
-
+            </div>
             
 
 
@@ -35,15 +36,15 @@
 
       <div v-if="selectedb == 'owner'">
         <b-row class=" p-0">
-          <b-col md="6" sm="12" class="mt-2 "> <Profile /> </b-col>
-          <b-col md="6" sm="12" class="mt-2  "> <EmptyBusiness /> </b-col>
+          <b-col md="6" sm="12" class="mt-2 centerdiv "> <Profile /> </b-col>
+          <b-col md="6" sm="12" class="mt-2  centerdiv "> <EmptyBusiness /> </b-col>
         </b-row>
         <br />
       </div>
 
       <div v-if="selectedb != 'owner'">
         <b-row>
-          <b-col md="6" sm="12" class="mt-2">
+          <b-col md="6" sm="12" class="mt-2 centerdiv">
             <div>
               <b-card class=" border shadow pr-3" style="height:350px">
                 <h6 class="font-weight-bolder text-design">
@@ -65,10 +66,10 @@
 
       <div v-if="selectedb != 'owner'">
         <b-row>
-          <b-col md="6" sm="12" class="mt-2">
+          <b-col md="6" sm="12" class="mt-2 centerdiv ">
             <BusinessDashboard :selectedb="selectedb" />
           </b-col>
-          <b-col md="6" sm="12" class="mt-2">
+          <b-col md="6" sm="12" class="mt-2 centerdiv ">
             <Insights :selectedb="selectedb" />
           </b-col>
         </b-row>
@@ -88,15 +89,15 @@
 
       <div>
         <b-row>
-          <b-col sm="12" lg="8" > <CommunityActivity  v-if="selectedb == 'owner'" />      <CommunityBactivity    v-if="selectedb != 'owner'" />    </b-col>
-          <b-col sm="12" lg="4" > <Tutorial /> </b-col>
+          <b-col sm="12" lg="8" class="centerdiv" > <CommunityActivity  v-if="selectedb == 'owner'" />      <CommunityBactivity    v-if="selectedb != 'owner'" />    </b-col>
+          <b-col sm="12" lg="4" class="centerdiv" > <Tutorial /> </b-col>
         </b-row>
       </div>
       <br />
 
       <div>
         <b-row>
-          <b-col sm="12" lg="6" class="mt-3">
+          <b-col sm="12" lg="6" class="mt-3  ">
             <b-card class="border shadow card  card-hight">
               <h6 class=" titlle">
                 <fas-icon
@@ -203,12 +204,21 @@ export default {
 
     switchBusiness(value){
 
+       console.log("business switch"+value);
+ 
        if(value != "Owner"){ 
+           let loader = this.$loading.show({
+                   
+                    container: this.fullPage ? null : this.$refs.loader,
+                    canCancel: true,
+                    onCancel: this.onCancel,
+                    color:"#e75c18"
+                });
 
       console.log(value);
-     this.url_data=value;
+     this.url_data = value;
 
-
+     this.$store.commit("dashboard/setdBusinessId", value);
 
 
       this.$store
@@ -221,13 +231,16 @@ export default {
         });
 
 
-        this.CommunityBusiness();
+    this.CommunityBusiness();
 
     this.CommunityPeople();
 
     this.businessCommunityTotal();
 
     this.dashboardBpost();
+
+
+     loader.hide()
 
        }
 
@@ -390,11 +403,7 @@ export default {
 
 <style scoped>
 
-.com-dash{
 
-margin-right: -15px;
-margin-left: -15px;
-}
 
 .card-body {
   padding: 8px;
@@ -409,13 +418,33 @@ margin-left: -15px;
   .titlle {
     font-size: 20px;
   }
+
+  .com-dash{
+
+margin-right: -15px;
+margin-left: -15px;
+}
+
 }
 
 @media only screen and (max-width: 768px) {
   .titlle {
     font-size: 16px;
   }
+
+  .com-dash{
+
+margin-right: -35px;
+margin-left: -20px;
 }
+
+.centerdiv{
+  padding: 0px;
+}
+}
+
+
+
 
 .card-hight {
   height: 550px;

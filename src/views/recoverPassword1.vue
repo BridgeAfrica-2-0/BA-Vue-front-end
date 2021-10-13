@@ -43,7 +43,7 @@ import { mapActions } from "vuex";
 export default {
   data() {
     return {
-      phone: ""
+      phone: "",
     };
   },
   methods: {
@@ -52,7 +52,7 @@ export default {
     verify() {
       this.$store
         .dispatch("auth/recoverPassword2", {
-          phone: this.phone
+          phone: this.phone,
         })
         .then(() => {
           this.$router.push({ name: "RecoverPass2" });
@@ -65,12 +65,12 @@ export default {
             this.flashMessage.show({
               status: "error",
 
-              message: err.response.data.message
+              message: err.response.data.message,
             });
           }
         });
-    }
-  }
+    },
+  },
 };
 </script>
 

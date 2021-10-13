@@ -255,19 +255,19 @@ import Footer from "@/components/footer";
 export default {
   components: {
     Navbar,
-    Footer
+    Footer,
   },
 
   computed: {
     vertical() {
       if (this.size > 992) return true;
       return false;
-    }
+    },
   },
 
   data() {
     return {
-      size: 0
+      size: 0,
     };
   },
 
@@ -284,7 +284,7 @@ export default {
       that.size = window.innerWidth;
       console.log("lolo");
     }
-  }
+  },
 };
 </script>
 

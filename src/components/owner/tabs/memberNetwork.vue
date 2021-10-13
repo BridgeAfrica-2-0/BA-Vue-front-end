@@ -8,8 +8,10 @@
       >
         <b-tabs pills content-class="mt-3 f-left">
           <b-tab title="People" active> <People /> </b-tab>
-
+  
           <b-tab title="Businesses" > <Businesses /> </b-tab>
+
+           <b-tab title="Network" > <Network /> </b-tab>
         </b-tabs>
       </b-card>
     </div>
@@ -19,12 +21,14 @@
 <script>
 import People from "./people/people";
 import Businesses from "./businesses/businesses";
+import Network from "./network/network";
 
 export default {
   name: "memberNetwork",
   components: {
     People,
-    Businesses
+    Businesses,
+    Network,
   },
   data() {
     return {
@@ -43,6 +47,31 @@ export default {
       ]
     };
   },
+
+   methods:{
+       
+       community() {
+         
+      this.$store
+        .dispatch("profile/profilecommunity", null)
+        .then(() => {
+          console.log("hey yeah");
+        })
+        .catch(err => {
+          console.log({ err: err });
+        });
+    },
+
+  },
+  mounted() {
+      this.isLoading = true;
+
+     
+    console.log("Load User Profile Community start+++++++");
+    this.community();
+    
+    },
+
   computed: {
     rows() {
       return this.items.length;

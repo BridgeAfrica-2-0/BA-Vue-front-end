@@ -4,27 +4,47 @@ import axios from "axios"
 class Repository {
 
   async findUserByParam(credentials) {
-    const { page, payload } = credentials
-    const response = await axios.post(`search/listUsers/${page}`, { ...payload, page })
-    return await response.data.data
+    try {
+      const { page, payload } = credentials
+      const response = await axios.post(`search/listUsers/${page}`, { ...payload, page })
+      return response.data.data
+    } catch (error) {
+      return false
+    }
+
   }
 
   async findPostByKeyword(credentials) {
-    const { page, data, keyword } = credentials
-    const response = await axios.post(`search/people/post/${keyword}/${page}`, { ...data, page })
-    return await response.data.data
+    try {
+      const { page, data, keyword } = credentials
+      const response = await axios.post(`search/people/post/${keyword}/${page}`, { ...data, page })
+      return response.data.data
+    } catch (error) {
+      return false
+    }
+
   }
 
   async findPostByBuisness(credentials) {
-    const { page, data, keyword } = credentials
-    const response = await axios.post(`search/business/post/${keyword}/${page}`, { ...data, page })
-    return await response.data.data
+    try {
+      const { page, data, keyword } = credentials
+      const response = await axios.post(`search/business/post/${keyword}/${page}`, { ...data, page })
+      return response.data.data
+    } catch (error) {
+      return false
+    }
+
   }
 
   async findPostByNetWork(credentials) {
-    const { page, data, keyword } = credentials
-    const response = await axios.post(`search/network/post/${keyword}/${page}`, { ...data, page })
-    return await response.data.data
+    try {
+      const { page, data, keyword } = credentials
+      const response = await axios.post(`search/network/post/${keyword}/${page}`, { ...data, page })
+      return response.data.data
+    } catch (error) {
+      return false
+    }
+
   }
 
 }

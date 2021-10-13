@@ -49,201 +49,6 @@
 
     <Post id="modal-4" />
 
-    <!--
-    <div style="width: 3rem">
-      <a
-        id="sharing"
-        class="nav-link"
-        data-toggle="popover"
-        role="button"
-        data-original-title=""
-        title=""
-        ><span class="text-ored"
-          ><b-icon-share class="col-bg"></b-icon-share></span
-      ></a>
-      <b-popover target="sharing" triggers="hover" placement="top">
-        <div class="popover-body">
-          <p class="font-weight-bold close"></p>
-          <hr class="h-divider" />
-
-          <div
-            class="d-inline-flex flex-row align-items-center suggest-item py-2 cursor-pointer"
-          >
-            <span class="text-ored">
-              <b-icon-bell-fill class="col-bg"></b-icon-bell-fill>
-            </span>
-            <div class="d-flex flex-column ml-3">
-              <span>Share to your profile</span>
-            </div>
-          </div>
-
-          <div
-            class="d-inline-flex flex-row align-items-center suggest-item py-2 cursor-pointer"
-          >
-            <span class="text-ored">
-              <b-icon-bell-fill class="col-bg"></b-icon-bell-fill>
-            </span>
-            <div class="d-flex flex-column ml-3">
-              <span>Share to New fedd</span>
-            </div>
-          </div>
-
-          <div
-            class="d-inline-flex flex-row align-items-center suggest-item py-2 cursor-pointer"
-          >
-            <span class="text-ored">
-              <b-icon-bell-fill class="col-bg"></b-icon-bell-fill>
-            </span>
-            <div class="d-flex flex-column ml-3">
-              <span>Share inbox</span>
-            </div>
-          </div>
-
-          <div
-            class="d-inline-flex flex-row align-items-center suggest-item py-2 cursor-pointer"
-            v-b-modal.modal-2
-          >
-            <span class="text-ored">
-              <b-icon-bell-fill class="col-bg"></b-icon-bell-fill>
-            </span>
-            <div class="d-flex flex-column ml-3">
-              <span>Share to network</span>
-            </div>
-          </div>
-
-          <div
-            class="d-inline-flex flex-row align-items-center suggest-item py-2 cursor-pointer"
-            v-b-modal.modal-3
-          >
-            <span class="text-ored">
-              <b-icon-bell-fill class="col-bg"></b-icon-bell-fill>
-            </span>
-            <div class="d-flex flex-column ml-3">
-              <span>Share to business</span>
-            </div>
-          </div>
-
-          <div
-            class="d-inline-flex flex-row align-items-center suggest-item py-2 cursor-pointer"
-            id="sharing-community"
-            data-toggle="popover"
-            role="button"
-            data-original-title=""
-          >
-            <span class="text-ored">
-              <b-icon-bell-fill class="col-bg"></b-icon-bell-fill>
-            </span>
-            <div class="d-flex flex-column ml-3">
-              <span>Share to your community</span>
-            </div>
-          </div>
-          <b-popover target="sharing-community" triggers="hover">
-            <div class="popover-body">
-              <div
-                class="d-inline-flex flex-row align-items-center suggest-item py-2 cursor-pointer"
-              >
-                <span class="text-ored">
-                  <b-icon-bell-fill class="col-bg"></b-icon-bell-fill>
-                </span>
-                <div class="d-flex flex-column ml-3">
-                  <span>Share to your profile</span>
-                </div>
-              </div>
-
-              <div
-                class="d-inline-flex flex-row align-items-center suggest-item py-2 cursor-pointer"
-                v-b-modal.modal-2
-              >
-                <span class="text-ored">
-                  <b-icon-bell-fill class="col-bg"></b-icon-bell-fill>
-                </span>
-                <div class="d-flex flex-column ml-3">
-                  <span>Share to network</span>
-                </div>
-              </div>
-
-              <div
-                class="d-inline-flex flex-row align-items-center suggest-item py-2 cursor-pointer"
-                v-b-modal.modal-3
-              >
-                <span class="text-ored">
-                  <b-icon-bell-fill class="col-bg"></b-icon-bell-fill>
-                </span>
-                <div class="d-flex flex-column ml-3">
-                  <span>Share to your business</span>
-                </div>
-              </div>
-            </div>
-          </b-popover>
-
-          <div
-            class="d-inline-flex flex-row align-items-center suggest-item py-2 cursor-pointer"
-          >
-            <span class="text-ored">
-              <b-icon-bell-fill class="col-bg"></b-icon-bell-fill>
-            </span>
-            <div class="d-flex flex-column ml-3">
-              <span>Copy link</span>
-            </div>
-          </div>
-
-          <div
-            class="d-inline-flex flex-row align-items-center suggest-item py-2 cursor-pointer"
-            id="sharing-via"
-            data-toggle="popover"
-            role="button"
-            data-original-title=""
-          >
-            <span class="text-ored">
-              <b-icon-bell-fill class="col-bg"></b-icon-bell-fill>
-            </span>
-            <div class="d-flex flex-column ml-3">
-              <span>Share via</span>
-            </div>
-            <span class="text-ored">
-              <b-icon-bell-fill class="col-bg"></b-icon-bell-fill>
-            </span>
-          </div>
-          <b-popover target="sharing-via" triggers="hover" placement="left">
-            <div class="popover-body">
-              <div
-                class="d-inline-flex flex-row align-items-center suggest-item py-2 cursor-pointer"
-              >
-                <span class="text-ored">
-                  <b-icon-bell-fill class="col-bg"></b-icon-bell-fill>
-                </span>
-                <div class="d-flex flex-column ml-3">
-                  <span>Share to your profile</span>
-                </div>
-              </div>
-
-              <div
-                class="d-inline-flex flex-row align-items-center suggest-item py-2 cursor-pointer"
-              >
-                <span class="text-ored">
-                  <b-icon-bell-fill class="col-bg"></b-icon-bell-fill>
-                </span>
-                <div class="d-flex flex-column ml-3">
-                  <span>Share to network</span>
-                </div>
-              </div>
-
-              <div
-                class="d-inline-flex flex-row align-items-center suggest-item py-2 cursor-pointer"
-              >
-                <span class="text-ored">
-                  <b-icon-bell-fill class="col-bg"></b-icon-bell-fill>
-                </span>
-                <div class="d-flex flex-column ml-3">
-                  <span>Share to your business</span>
-                </div>
-              </div>
-            </div>
-          </b-popover>
-        </div>
-      </b-popover>
-    </div>
-    -->
     <b-dropdown
       size="lg"
       variant="link"
@@ -252,14 +57,16 @@
       position="bottom"
     >
       <template #button-content>
-        &#x1f50d;<span class="sr-only">Search</span>
+        <b-icon-reply-fill class="col-bg text-ored"></b-icon-reply-fill
+        ><span class="sr-only">Search</span>
       </template>
-      <b-dropdown-item href="#" class="d-flex py-2 cursor-pointer">
+      <b-dropdown-text class="box-title"> Share </b-dropdown-text>
+      <b-dropdown-item href="#" class="d-flex py-2 cursor-pointer" @click="shareToYourProfile">
         <span class="text-ored">
           <b-icon-bell-fill class="col-bg"></b-icon-bell-fill>
         </span>
         <div class="d-flex flex-column ml-1">
-          <span>Share to your profile</span>
+          <span>Share to your Profile</span>
         </div>
       </b-dropdown-item>
 
@@ -268,38 +75,44 @@
           <b-icon-bell-fill class="col-bg"></b-icon-bell-fill>
         </span>
         <div class="d-flex flex-column ml-1">
-          <span>Share to New Feed</span>
+          <span>Share to News Feed</span>
         </div>
       </b-dropdown-item>
 
-      <b-dropdown-item href="#" class="d-flex py-2 cursor-pointer">
+      <b-dropdown-item
+        href="#"
+        class="d-flex py-2 cursor-pointer"
+        v-b-modal.modal-2
+      >
         <span class="text-ored">
           <b-icon-bell-fill class="col-bg"></b-icon-bell-fill>
         </span>
         <div class="d-flex flex-column ml-1">
-          <span>Share inbox</span>
+          <span>Share to Network</span>
         </div>
       </b-dropdown-item>
 
-      <b-dropdown-item href="#" class="d-flex py-2 cursor-pointer">
+      <b-dropdown-item
+        href="#"
+        class="d-flex py-2 cursor-pointer"
+        v-b-modal.modal-3
+      >
         <span class="text-ored">
           <b-icon-bell-fill class="col-bg"></b-icon-bell-fill>
         </span>
         <div class="d-flex flex-column ml-1">
-          <span>Share to network</span>
+          <span>Share to Business</span>
         </div>
       </b-dropdown-item>
 
-      <b-dropdown-item href="#" class="d-flex py-2 cursor-pointer">
-        <span class="text-ored">
-          <b-icon-bell-fill class="col-bg"></b-icon-bell-fill>
-        </span>
-        <div class="d-flex flex-column ml-1">
-          <span>Share to business</span>
-        </div>
-      </b-dropdown-item>
-
-      <b-dropdown-item href="#" class="d-flex py-2 cursor-pointer">
+      <b-dropdown-item
+        href="#"
+        class="d-flex py-2 cursor-pointer"
+        id="sharing-community"
+        data-toggle="popover"
+        role="button"
+        data-original-title=""
+      >
         <span class="text-ored">
           <b-icon-bell-fill class="col-bg"></b-icon-bell-fill>
         </span>
@@ -307,6 +120,65 @@
           <span>Share to commnunity</span>
         </div>
       </b-dropdown-item>
+      <b-popover target="sharing-community" triggers="hover">
+        <div class="popover-body">
+          <div
+            class="
+              d-inline-flex
+              flex-row
+              align-items-center
+              suggest-item
+              py-2
+              cursor-pointer
+            "
+          >
+            <span class="text-ored">
+              <b-icon-bell-fill class="col-bg"></b-icon-bell-fill>
+            </span>
+            <div class="d-flex flex-column ml-3">
+              <span>Share to People</span>
+            </div>
+          </div>
+
+          <div
+            class="
+              d-inline-flex
+              flex-row
+              align-items-center
+              suggest-item
+              py-2
+              cursor-pointer
+            "
+            v-b-modal.modal-2
+          >
+            <span class="text-ored">
+              <b-icon-bell-fill class="col-bg"></b-icon-bell-fill>
+            </span>
+            <div class="d-flex flex-column ml-3">
+              <span>Share to Network</span>
+            </div>
+          </div>
+
+          <div
+            class="
+              d-inline-flex
+              flex-row
+              align-items-center
+              suggest-item
+              py-2
+              cursor-pointer
+            "
+            v-b-modal.modal-3
+          >
+            <span class="text-ored">
+              <b-icon-bell-fill class="col-bg"></b-icon-bell-fill>
+            </span>
+            <div class="d-flex flex-column ml-3">
+              <span>Share to Business</span>
+            </div>
+          </div>
+        </div>
+      </b-popover>
 
       <b-dropdown-item href="#" class="d-flex py-2 cursor-pointer">
         <span class="text-ored">
@@ -317,14 +189,78 @@
         </div>
       </b-dropdown-item>
 
-      <b-dropdown-item href="#" class="d-flex py-2 cursor-pointer">
+      <b-dropdown-item
+        href="#"
+        class="d-flex py-2 cursor-pointer"
+        id="sharing-via"
+        data-toggle="popover"
+        role="button"
+        data-original-title=""
+      >
         <span class="text-ored">
-          <b-icon-bell-fill class="col-bg"></b-icon-bell-fill>
+          <b-icon-share-fill class="col-bg"></b-icon-share-fill>
         </span>
         <div class="d-flex flex-column ml-1">
           <span>Share via</span>
         </div>
       </b-dropdown-item>
+      <b-popover target="sharing-via" triggers="hover" placement="left">
+        <div class="popover-body">
+          <div
+            class="
+              d-inline-flex
+              flex-row
+              align-items-center
+              suggest-item
+              py-2
+              cursor-pointer
+            "
+          >
+            <span class="text-ored">
+              <b-icon-bell-fill class="col-bg"></b-icon-bell-fill>
+            </span>
+            <div class="d-flex flex-column ml-3">
+              <span>Share to your profile</span>
+            </div>
+          </div>
+
+          <div
+            class="
+              d-inline-flex
+              flex-row
+              align-items-center
+              suggest-item
+              py-2
+              cursor-pointer
+            "
+          >
+            <span class="text-ored">
+              <b-icon-bell-fill class="col-bg"></b-icon-bell-fill>
+            </span>
+            <div class="d-flex flex-column ml-3">
+              <span>Share to network</span>
+            </div>
+          </div>
+
+          <div
+            class="
+              d-inline-flex
+              flex-row
+              align-items-center
+              suggest-item
+              py-2
+              cursor-pointer
+            "
+          >
+            <span class="text-ored">
+              <b-icon-bell-fill class="col-bg"></b-icon-bell-fill>
+            </span>
+            <div class="d-flex flex-column ml-3">
+              <span>Share to your business</span>
+            </div>
+          </div>
+        </div>
+      </b-popover>
     </b-dropdown>
   </div>
 </template>
@@ -334,9 +270,20 @@ import Box from "./Box";
 import Post from "./SharePost";
 export default {
   name: "ShareButton",
+  props: {
+    post: {
+      type: Object,
+    },
+  },
   components: {
     Box,
     Post,
+  },
+
+  methods: {
+    shareToYourProfile: async function () {
+      const request = await this.$repository.share.userPost();
+    },
   },
 };
 </script>
@@ -348,7 +295,23 @@ export default {
 .fb {
   font-weight: bold;
 }
+.align-items-center {
+  width: 100%;
+}
 .d-flex {
   display: inline-flex !important;
+  width: 100%;
+}
+.dropdown-menu {
+  border: 1px solid red !important;
+  border-radius: 12px;
+}
+
+li:hover {
+  background: transparent;
+}
+
+.box-title {
+  border-bottom: 1px solid #ced4da;
 }
 </style>

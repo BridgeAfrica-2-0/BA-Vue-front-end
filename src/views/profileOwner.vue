@@ -5,8 +5,13 @@
     <div class=" container-fluid text-justify   corps prof center-content">
       <b-row class=""> 
         <b-col cols="12" class="p-3">
+<<<<<<< HEAD
           <b-tabs content-class="mt-3" pills small fill  v-model="tabIndex">
             <b-tab :title="`${$t('profile_owner.posts')}`"   href="#post">
+=======
+          <b-tabs content-class="mt-3" pills small fill lazy  v-model="tabIndex">
+            <b-tab title="Posts"   href="#post">
+>>>>>>> 07690a28119529d72b67448579f1c77551826d4a
               <Post />
             </b-tab>
             <b-tab :title="`${$t('profile_owner.about')}`"   href="#about"><About /></b-tab>
@@ -70,19 +75,27 @@ export default {
         console.log(from);
     }
   },
-  computed: { 
+  methods: {
 
-  
+    ownerPost() {
+      this.$store
+        .dispatch("UserProfileOwner/ownerPost", this.url_data)
+        .then(() => {
+          console.log("hey yeah");
+        })
+        .catch(err => {
+          console.log({ err: err });
+        });
+    }
   },
 
+ 
+  computed: {},
    created() {
-     
       this.tabIndex = this.tabs.findIndex(tab => tab === this.$route.hash);
-    
-   
   },
-  methods: {},
   mounted(){
+
 
     this.$store
       .dispatch("profile/Tcommunity", null)

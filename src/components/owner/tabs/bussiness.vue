@@ -92,16 +92,20 @@
                     </b-form-group>
 
                     <div class="form-group">
-                      <span class="text mt-2"> No Choices </span>
-
-                      <input
-                        type="text"
-                        name="business_keyword"
+                      <label for="country" class="username"> Keywords :</label
+                      ><br />
+              
+                      <multiselect
                         v-model="business_keyword"
-                        id="alias"
-                        placeholder="Enter  Keywords Alerts"
-                        class="form-control text"
-                      />
+                        tag-placeholder="Add this as new Keyword"
+                        placeholder="Add New Keyword"
+                        label="name"
+                        track-by="id"
+                        :options="keywordds"
+                        :multiple="true"
+                        :taggable="true"
+                        @tag="addkeywords"
+                      ></multiselect>
                     </div>
 
                     <div class="form-group">
@@ -159,13 +163,15 @@
                         :key="filters.id"
                         active
                         ><b-card-text>
-                          <b-form-group label="Filters">
+                          <b-form-group label="Filters" class="colorblack">
                             <b-form-checkbox-group
                               id=""
+                              class="colorblack"
                               v-model="select_filterss"
                               name="filters"
                             >
                               <b-form-checkbox
+                              class="colorblack"
                                 v-for="fil in filters.filters"
                                 :key="fil.id"
                                 :value="fil.id"
@@ -299,12 +305,13 @@
             <tab-content title=" Contact ">
               <b-card>
                 <b-row>
+                
                   <b-col md="6">
-                    <label> Phone1 </label>
+                    <label class="username"> Phone1 </label>
                     <VuePhoneNumberInput v-model="phone1" />
                   </b-col>
-                  <b-col md="6">
-                    <label> Phone2 </label>
+                  <b-col md="6">  
+                    <label class="username"> Phone2 </label>
                     <VuePhoneNumberInput v-model="phone2" />
                   </b-col>
                 </b-row>
@@ -318,7 +325,7 @@
                         type="text"
                         name="alias"
                         v-model="website"
-                        id="Neighbor"
+                        id="Website"
                         placeholder="Neighbor"
                         class="form-control text"
                       />
@@ -372,7 +379,7 @@
               <div class="people-style shadow">
                 <b-link
                   v-b-modal.createBusinessModal
-                  @click="editBusiness(business.business_id)"
+                  @click="editBusiness(business.id)"
                 >
                   <div class="float-right">
                     <b-icon
@@ -394,13 +401,15 @@
 
                   <b-col md="5" cols="7" lg="7" xl="9" sm="5">
                     <p class="textt text">
+                     
                       <strong class="title">
-                        {{ business.bussines_name }}
+                        {{ business.name }}
                       </strong>
                       <br />
-                      {{ business.category }}
+                      <span v-if=" Array.isArray(business.category) ">  
+                      <span class="m-1" v-for=" cat in business.category" :key="cat.name "> {{cat.name}} </span> </span>
                       <br />
-                      {{ business.community }} Community  {{business.business_id}} <br />
+                      {{ business.community }} Community  {{business.id}} <br />
 
                       <span class="location">
                         <b-icon-geo-alt class="ico"></b-icon-geo-alt>
@@ -414,7 +423,7 @@
                         :text="business.about_business"
                         link="#"
                         less-str="read less"
-                        :max-chars="15"
+                        :max-chars="55"
                       >
                       </read-more>
                     </p>
@@ -446,6 +455,7 @@ export default {
       useas: "",
       editbiz: "",
       selectedusecase: "",
+      keywordds:[],
       phone1: null,
       phone2: null,
       emaill: null,
@@ -474,7 +484,7 @@ export default {
         business_name: null,
       },
       business_category: "Testing",
-      business_keyword: null,
+      business_keyword: [],
       time_zone: null,
       language: null,
       about: null,
@@ -526,11 +536,36 @@ export default {
          axios.get("business/edit/"+id).then(({ data }) => {
         console.log(data);
         this.editbiz=data.data;
-    
+        this.setEditData(data.data)
       }).catch((err) => {
           console.log({ err: err });
         });
     },
+
+
+
+
+    setEditData(business){
+      
+      this.multiselecvalue=business.category;
+      this.filterselectvalue=business.subCategory;
+      this.select_filterss=business.filter;
+      this.country=business.country;
+      this.region=business.region;
+      this.division=business.division
+      this.municipality=business.council
+      this.phone1=business.phone1;
+      this.phone2=business.phone2
+      this.website=business.this.website;
+      this.locality=business.neigborhood;
+      this.email=business.email;
+      this.time_zone=business.timeZone;
+      this.business_keyword=business.keywords;
+      this.address=business.address;
+      
+
+    }
+,
     addTag(newTag) {
       const tag = {
         name: newTag,
@@ -709,96 +744,6 @@ export default {
       }
     },
 
-    validateBusiness() {
-      return new Promise((resolve, reject) => {
-        this.$v.form.$touch();
-        if (this.$v.form.$anyError) {
-          console.log("error error");
-          return false;
-        } else {
-          console.log("no error error");
-
-          this.sendingB = true;
-
-          let loader = this.$loading.show({
-            container: this.fullPage ? null : this.$refs.loader,
-            canCancel: true,
-            onCancel: this.onCancel,
-            color: "#e75c18",
-          });
-
-          let formData2 = new FormData();
-
-          formData2.append("logo_path", this.logo_pic);
-          formData2.append("region", this.selectedregion);
-          formData2.append("city", this.city);
-          formData2.append("country", this.selectedcountry);
-
-          formData2.append("address", this.adress);
-          formData2.append("division", this.selecteddivision);
-          formData2.append("council", this.selectedmunicipality);
-
-          formData2.append("neigborhood", this.selectedlocality);
-          formData2.append("lat", this.center.lat);
-          formData2.append("lng", this.center.lng);
-
-          formData2.append("name", this.form.business_name);
-          formData2.append("category", this.business_category);
-          //  formData2.append("keywords", this.selectedKeywords);
-          formData2.append("keywords", "blec this");
-          formData2.append("timezone", this.time_zone);
-          formData2.append("language", this.language);
-          formData2.append("about_business", this.about);
-
-          this.axios
-            .post("business/add", formData2, {
-              headers: {
-                "Content-Type": "multipart/form-data",
-              },
-            })
-            .then((response) => {
-              console.log(response);
-
-              this.sendingB = false;
-
-              this.flashMessage.show({
-                status: "success",
-
-                message: "Business Profile Created",
-              });
-
-              resolve(true);
-            })
-            .catch((err) => {
-              console.log({ err: err });
-
-              this.sendingB = false;
-
-              if (err.response.status == 422) {
-                console.log({ err: err });
-                console.log(err.response.data.message);
-
-                this.flashMessage.show({
-                  status: "error",
-
-                  message: err.response.data.message,
-                  blockClass: "custom-block-class",
-                });
-              } else {
-                this.flashMessage.show({
-                  status: "error",
-
-                  message: "Unable to Create Your Business",
-                  blockClass: "custom-block-class",
-                });
-                console.log({ err: err });
-              }
-              loader.hide();
-              resolve(false);
-            });
-        }
-      });
-    },
 
     businessAround() {
       this.$store
@@ -897,7 +842,8 @@ export default {
             console.log(response);
 
             this.sendingB = false;
-            this.profilebusiness();
+            this.profileBusiness();
+           
             this.$refs["createBusinessModal"].hide();
             this.flashMessage.show({
               status: "success",
@@ -938,78 +884,7 @@ export default {
       });
     },
 
-    updateUserProfile: function() {
-      return new Promise((resolve, reject) => {
-        console.log("sending user data");
-
-        this.sendingP = true;
-
-        let formData = new FormData();
-        formData.append("profile_picture", this.profile_pic);
-
-        formData.append("dob", this.dob);
-        formData.append("gender", this.gender);
-        formData.append("city", this.city);
-        formData.append("country", this.country);
-        formData.append("region", this.region);
-        formData.append("city", this.city);
-        formData.append("neighbor", this.Neighbor);
-        formData.append("lat", this.center.lat);
-        formData.append("lng", this.center.lng);
-        formData.append("address", this.region);
-
-        this.axios
-          .post("/complete/profile", formData, {
-            headers: {
-              "Content-Type": "multipart/form-data",
-            },
-          })
-          .then((response) => {
-            console.log(response);
-
-            this.step1 = true;
-            this.sending = false;
-
-            this.flashMessage.show({
-              status: "success",
-
-              message: "Profile Updated",
-
-              blockClass: "custom-block-class",
-            });
-
-            resolve(true);
-          })
-          .catch((err) => {
-            console.log({ err: err });
-
-            this.sending = false;
-            this.step1 = false;
-
-            if (err.response.status == 422) {
-              console.log({ err: err });
-              console.log(err.response.data.message);
-
-              this.flashMessage.show({
-                status: "error",
-
-                message: err.response.data.message,
-                blockClass: "custom-block-class",
-              });
-            } else {
-              this.flashMessage.show({
-                status: "error",
-                title: "Registration Failed",
-                message: "Unable to update your Information",
-                blockClass: "custom-block-class",
-              });
-              console.log({ err: err });
-            }
-
-            resolve(false);
-          });
-      });
-    },
+  
 
     chooseProfile1: function() {
       document.getElementById("profile1").click();
@@ -1074,6 +949,14 @@ export default {
   },
 
   computed: {
+      selectedKeywords: function () {
+      let selectedUsers = [];
+      this.business_keyword.forEach((item) => {
+        selectedUsers.push(item.id);
+      });
+      return selectedUsers;
+    },
+
     profilebusiness: function() {
       return this.$store.state.profile.profileBusiness;
     },
@@ -1160,6 +1043,12 @@ import "vue-form-wizard/dist/vue-form-wizard.min.css";
 </script>
 
 <style scoped>
+.username{
+  color: black;
+}
+.colorblack{
+  color:black;
+}
 .logo-img {
   width: 60px;
 }

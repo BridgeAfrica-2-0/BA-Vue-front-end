@@ -2,10 +2,10 @@
   <div style="overflow-x:hidden" class="dashboard">
     <navbar></navbar>
 
-    <div class="text-justify  p-card pr-3 ">
+    <div class="text-justify  p-card pr-1 ">
       <CarousselDashboard class="mm-top" /> <br />
 
-      <br />
+    
 
       <div v-if="selectedb == 'owner'">
         <b-card class=" border shadow hselect">
@@ -36,15 +36,15 @@
 
       <div v-if="selectedb == 'owner'">
         <b-row class=" p-0">
-          <b-col md="6" sm="12" class="mt-2 centerdiv "> <Profile /> </b-col>
-          <b-col md="6" sm="12" class="mt-2  centerdiv "> <EmptyBusiness /> </b-col>
+          <b-col md="6" sm="12" class="mt-2 "> <Profile /> </b-col>
+          <b-col md="6" sm="12" class="mt-2   "> <EmptyBusiness /> </b-col>
         </b-row>
         <br />
       </div>
 
       <div v-if="selectedb != 'owner'">
         <b-row>
-          <b-col md="6" sm="12" class="mt-2 centerdiv">
+          <b-col md="6" sm="12" class="mt-2 ">
             <div>
               <b-card class=" border shadow pr-3" style="height:350px">
                 <h6 class="font-weight-bolder text-design">
@@ -66,22 +66,22 @@
 
       <div v-if="selectedb != 'owner'">
         <b-row>
-          <b-col md="6" sm="12" class="mt-2 centerdiv ">
+          <b-col md="6" sm="12" class="mt-2  ">
             <BusinessDashboard :selectedb="selectedb" />
           </b-col>
-          <b-col md="6" sm="12" class="mt-2 centerdiv ">
+          <b-col md="6" sm="12" class="mt-2  ">
             <Insights :selectedb="selectedb" />
           </b-col>
         </b-row>
       </div>
-      <br />
+      
 
      
       <div class="com-dash" >
-          <comuniti-dashboard  v-if="selectedb == 'owner'" class="m-component m-3"></comuniti-dashboard> <br />
+          <comuniti-dashboard  v-if="selectedb == 'owner'" class="m-component m-3"></comuniti-dashboard> 
       
        
-         <comuniti-Bdashboard  v-if="selectedb != 'owner'" class="m-component m-3"></comuniti-Bdashboard> <br />
+         <comuniti-Bdashboard  v-if="selectedb != 'owner'" class="m-component m-3"></comuniti-Bdashboard>
 
      </div>
      
@@ -89,15 +89,15 @@
 
       <div>
         <b-row>
-          <b-col sm="12" lg="8" class="centerdiv" > <CommunityActivity  v-if="selectedb == 'owner'" />      <CommunityBactivity    v-if="selectedb != 'owner'" />    </b-col>
-          <b-col sm="12" lg="4" class="centerdiv" > <Tutorial /> </b-col>
+          <b-col sm="12" lg="8" class="" > <CommunityActivity  v-if="selectedb == 'owner'" />      <CommunityBactivity    v-if="selectedb != 'owner'" />    </b-col>
+          <b-col sm="12" lg="4" class="" > <Tutorial /> </b-col>
         </b-row>
       </div>
       <br />
 
       <div>
         <b-row>
-          <b-col sm="12" lg="6" class="mt-3  ">
+          <b-col sm="12" lg="6" class=" ">
             <b-card class="border shadow card  card-hight">
               <h6 class=" titlle">
                 <fas-icon
@@ -113,7 +113,7 @@
               </div>
             </b-card>
           </b-col>
-          <b-col sm="12" lg="6" class="mt-3">
+          <b-col sm="12" lg="6" class="">
             <b-card class="border shadow  card card-hight">
               <h6 class=" titlle">
                 <fas-icon

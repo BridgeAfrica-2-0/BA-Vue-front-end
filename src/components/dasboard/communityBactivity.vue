@@ -262,6 +262,7 @@
 </script>
 
 <style scoped>
+<<<<<<< HEAD
 	.card-body {
 		padding: 2px !important;
 	}
@@ -439,3 +440,196 @@
 		padding: 15px;
 	}
 </style>
+=======
+
+.card-body{
+
+  padding: 2px !important;
+}
+
+
+
+
+.s-card{
+  height:560px !important; 
+  overflow: auto; 
+  overflow-x: hidden;
+  padding: 15px;
+
+
+}
+
+
+
+.action-intro {
+  font-size: 1rem;
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+}
+
+.color-site {
+  color: #e75c18;
+}
+
+@media (min-width: 762px) {
+  .avat {
+    width: 64px;
+    height: 64px;
+  }
+
+  .send-cmt {
+    position: relative;
+    margin-left: 95%;
+    top: -28px;
+    cursor: pointer;
+  }
+
+  .post-btn {
+    border: none !important;
+    margin-right: 50px;
+  }
+
+  .post-container {
+    max-width: 500px;
+    max-height: 462px;
+  }
+
+  .post-text {
+    font-size: 14px;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+
+  .avat-comment {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+@media (max-width: 762px) {
+  .post-btn {
+    border: none !important;
+    margin-right: 0px;
+  }
+
+  .send-cmt {
+    position: relative;
+    margin-left: 90%;
+    top: -28px;
+    cursor: pointer;
+  }
+
+  .avat {
+    width: 40px;
+    height: 40px;
+  }
+
+  .avat-comment {
+    width: 36px;
+    height: 36px;
+  }
+
+  .post-text {
+    font-size: 12px;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+}
+
+.comment-box {
+  margin-left: -40px;
+  position: relative;
+  background-color: white;
+}
+
+.comment-input {
+  border-radius: 24px;
+  height: 34px;
+  width: 315px;
+}
+
+.comment {
+  width: 100%;
+  border: solid 1px #ccc;
+  border-radius: 25px;
+  background-color: #ddd;
+  height: 34px;
+  padding-left: 10px;
+}
+.comment:focus {
+  outline: none;
+}
+
+.time {
+  position: relative;
+  margin-left: 80px;
+  top: -28px;
+}
+
+.border-none {
+  border: none;
+  height: 100px;
+}
+
+.cursor {
+  position: relative;
+}
+.cursor i {
+  position: absolute;
+  width: 1px;
+  height: 20%;
+  background-color: gray;
+  left: 5px;
+  top: 10%;
+  animation-name: blink;
+  animation-duration: 800ms;
+  animation-iteration-count: infinite;
+  opacity: 1;
+}
+
+.cursor input:focus + i {
+  display: none;
+}
+
+@keyframes blink {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+.bordder {
+  border: 1px solid #e75c18;
+  height: 50px;
+  padding: 6px;
+}
+
+.username {
+  color: black;
+}
+
+.btn {
+  border-radius: 5px;
+  text-align: center;
+}
+
+.btn:hover {
+  background-color: #ccc;
+}
+</style>
+
+<style>
+.lb-grid {
+  height: 274px;
+  margin-bottom: 8px;
+}
+
+.m-up {
+  margin-top: -5px;
+}
+
+
+
+
+
+</style>
+>>>>>>> 07690a28119529d72b67448579f1c77551826d4a

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="p-2">
     <div class="s-ccard">
       <b-row>
         <b-col lg="6" sm="12" class="p-2" v-for="item in users" :key="item.id">
@@ -95,7 +95,7 @@
           </div>
         </b-col>
       </b-row>
-      <infinite-loading @infinite="infiniteHandler"></infinite-loading>
+      <infinite-loading :identifier="infiniteId"  @infinite="infiniteHandler"  ref="infiniteLoading" ></infinite-loading>
     </div>
   </div>
 </template>
@@ -103,31 +103,68 @@
 <script>
 import axios from "axios";
 export default {
-  props: ["type"],
+  props: ["type","searchh"],
   data() {
     return {
       page: 1,
+       infiniteId: +new Date(),
       options: {
         rewind: true,
         autoplay: true,
-        perPage: 1,
+        perPage: 2,
         pagination: false,
 
         type: "loop",
         perMove: 1,
       },
-    };
+    };    
   },
+ 
   computed: {
+
     users() {
       if (this.type == "Follower") {
+
         return this.$store.state.profile.UcommunityFollower.user_followers;
+      // return this.$store.state.profile.UcommunityFollower.user_followers;
+     
+
       } else {
         return this.$store.state.profile.UcommunityFollowing.user_following;
+     // return this.$store.state.profile.UcommunityFollower.user_followers;
+    
       }
     },
+
+ 
   },
+
   methods: {
+
+
+    search(){
+     
+       console.log('search started');
+       
+         if(this.type=="Follower"){ 
+         
+        this.$store.commit("profile/setUcommunityFollower",{ "user_followers": [ ], "total_user_follower": 0 }); 
+
+       }else{
+       
+        
+        this.$store.commit("profile/setUcommunityFollowing",{ "user_following": [ ], "total_user_following": 0 }); 
+       }
+
+      this.page = 1;
+      this.infiniteId += 1;
+
+     
+     this.$refs.infiniteLoading.attemptLoad();
+    
+
+    },
+
     count(number) {
       if (number >= 1000000) {
         return number / 1000000 + "M";
@@ -137,34 +174,66 @@ export default {
       } else return number;
     },
 
+  
+
+  
     infiniteHandler($state) {
+      
+     
       let url = null;
 
       if (this.type == "Follower") {
-        url = "profile/user/follower/";
+      url = "profile/user/follower/";
+
+
+
+        
       } else {
         url = "profile/user/following/";
       }
-      axios
-        .get(url + this.page)
-        .then(({ data }) => {
-          if (data.data.length) {
-            this.page += 1;
-            if (this.type == "Follower") {
-              this.businesses.push(...data.data.user_followers);
-            } else {
-              this.businesses.push(...data.data.user_following);
-            }
 
+      axios
+        .get(url + this.page+"?keyword="+this.searchh)
+        .then(({ data }) => {
+
+            console.log(data);
+            if (this.type == "Follower") {
+             
+
+               if (data.data.user_followers.length) {
+           this.page += 1;
+           
+           console.log(this.users);
+              this.users.push(...data.data.user_followers);
             $state.loaded();
           } else {
             $state.complete();
           }
+
+            } else {
+         
+
+             if (data.data.user_following.length) {
+           this.page += 1;
+           
+              this.users.push(...data.data.user_following);
+            $state.loaded();
+          } else {
+           $state.complete();
+          }
+
+
+            }
+
+            
+          console.log(data);
+         
         })
         .catch((err) => {
           console.log({ err: err });
         });
     },
+
   },
 };
 </script>

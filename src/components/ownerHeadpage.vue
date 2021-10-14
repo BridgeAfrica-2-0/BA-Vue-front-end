@@ -163,6 +163,7 @@
 </template>
 
 <script>
+<<<<<<< HEAD
 	export default {
 		name: "headPageOwner",
 
@@ -390,6 +391,332 @@
 			},
 		},
 	};
+=======
+        
+
+
+        export default {
+  name: "headPageOwner",
+
+  
+   data() {
+      return {
+
+          url:null,
+          img_url:null,
+          cover_photo:null,
+          profile_photo:null,
+
+        options: {
+          
+          rewind : true,
+          autoplay: true,
+          perPage: 3,
+          pagination:false,
+        
+          
+          type   : 'loop',
+          perMove: 1,
+
+
+          breakpoints: {
+          "760": {
+            perPage: 1,
+            gap: "0rem",
+          },
+          "992": {
+            perPage: 2,
+            gap: "1rem",
+          },
+        },
+
+
+        
+        },
+      };
+    },
+
+    
+methods: {
+
+   nFormatter(num) {
+      if (num >= 1000000000) {
+        return (num / 1000000000).toFixed(1).replace(/\.0$/, '') + 'G';
+      }
+      if (num >= 1000000) {
+        return (num / 1000000).toFixed(1).replace(/\.0$/, '') + 'M';
+      }
+      if (num >= 1000) {
+        return (num / 1000).toFixed(1).replace(/\.0$/, '') + 'K';
+      }
+      return num;
+    },
+
+setlogo(e){
+    
+       console.log(e);
+     
+
+       this.profile_photo= e.target.files[0]
+      const file = e.target.files[0];
+      this.img_url = URL.createObjectURL(file);
+
+      this.$refs["logomodal"].show();  
+
+
+},
+
+
+
+selectlogo(){
+    document.getElementById("logo_pic").click();
+ 
+},
+
+selectCover(){
+
+ document.getElementById("cover_pic").click();
+
+},
+  selectMoviesOutsidePost(e) {
+      console.log(e);
+     
+
+       this.cover_photo= e.target.files[0]
+      const file = e.target.files[0];
+      this.img_url = URL.createObjectURL(file);
+
+      this.$refs["coverphoto"].show();
+    },
+
+  
+  chooseProfile2: function() {
+     
+        document.getElementById("cover-imag").click()
+    },
+
+
+     chooseProfile1: function() {
+     
+        document.getElementById("profile-imag").click()
+    },
+
+
+    submitLogo(){
+     
+        
+
+        let loader = this.$loading.show({
+                   
+                    container: this.fullPage ? null : this.$refs.preview,
+                    canCancel: true,
+                    onCancel: this.onCancel,
+                    color:"#e75c18"
+                });
+
+
+       let formData = new FormData();
+        formData.append("image", this.profile_photo);
+
+        
+
+
+       this.axios 
+          .post("user/upload/profile-picture", formData, {
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
+          })
+          .then((response) => {
+            console.log(response);
+
+           
+
+            this.flashMessage.show({
+              status: "success",
+
+              message: "Logo Updated",
+
+              blockClass: "custom-block-class",
+            });
+
+
+             loader.hide()
+      this.$refs["modalxl"].hide();
+
+          })
+
+            .catch((err) => {
+            console.log({ err: err });
+
+            
+
+            if (err.response.status == 422) {
+              console.log({ err: err });
+              
+
+              this.flashMessage.show({
+                status: "error",
+
+                message: err.response.data.message,
+                blockClass: "custom-block-class",
+              });
+
+
+               loader.hide()
+      
+
+            } else {
+              this.flashMessage.show({
+                status: "error",
+                
+                message: "Unable to set your Logo",
+                blockClass: "custom-block-class",
+              });
+              console.log({ err: err });
+
+               loader.hide()
+     
+            }
+
+          });
+
+
+
+
+
+    },
+
+    
+
+    submitCover(){
+     
+        
+
+        let loader = this.$loading.show({
+                   
+                    container: this.fullPage ? null : this.$refs.preview,
+                    canCancel: true,
+                    onCancel: this.onCancel,
+                    color:"#e75c18"
+                });
+
+
+       let formData = new FormData();
+        formData.append("image", this.cover_photo);
+
+        
+
+
+       this.axios 
+          .post("user/upload-cover", formData, {
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
+          })
+          .then((response) => {
+            console.log(response);
+
+           
+
+            this.flashMessage.show({
+              status: "success",
+
+              message: "Profile Updated",
+
+              blockClass: "custom-block-class",
+            });
+
+
+             loader.hide()
+      this.$refs["modalxl"].hide();
+
+          })
+
+            .catch((err) => {
+            console.log({ err: err });
+
+            
+
+            if (err.response.status == 422) {
+              console.log({ err: err });
+              
+
+              this.flashMessage.show({
+                status: "error",
+
+                message: err.response.data.message,
+                blockClass: "custom-block-class",
+              });
+
+
+               loader.hide()
+      
+
+            } else {
+              this.flashMessage.show({
+                status: "error",
+                
+                message: "Unable to upload your image",
+                blockClass: "custom-block-class",
+              });
+              console.log({ err: err });
+
+               loader.hide()
+     
+            }
+
+          });
+
+
+
+
+
+    },
+
+
+},
+
+mounted(){
+     this.url = this.$route.params.id;
+},
+
+computed: {
+
+    
+    total(){
+    return  this.$store.state.profile.Tcommunity;
+   },
+ 
+
+      profile_info() {
+
+         if(this.$store.state.businessOwner.businessInfo ==[] ){  
+      return  this.$store.state.businessOwner.businessInfo;   }else{
+
+        return  this.$store.state.businessOwner.businessInfo;
+      }
+
+     
+    },
+
+
+     info :function(){
+
+       console.log("helloodhdjdhdjdd dhdjdhdd sgysjshs");
+       console.log(this.$store.getters['profile/getUserPostIntro'])
+        return this.$store.getters['profile/getUserPostIntro'];
+      }
+
+
+
+  },
+
+
+
+};
+
+>>>>>>> 07690a28119529d72b67448579f1c77551826d4a
 </script>
 
 <style scoped>

@@ -6,6 +6,7 @@ export default {
 
     communityPeople: [],
     CommunityBusiness: [],
+    profilenetwork:[],
     ownerPost: [],
     profileBusiness: [],
     ownerPostImages: [],
@@ -18,16 +19,17 @@ export default {
     educations: [],
     professions: [],
 
-    profile_about:[],
-    profileIntro:[],
 
-    NcommunityFollower:[],
-    NcommunityFollowing:[],
-    BcommunityFollower:[],
-    BcommunityFollowing:[],
-   
-    UcommunityFollower:[],
-    UcommunityFollowing:[],
+
+    profile_about:{"user":{},"user_address":[], "user_education":[],"user_experience":[],"user_websites":[]  },
+    profileIntro:{"user":{},"user_address":[], "user_education":[],"user_experience":[],"user_websites":[]  },
+    NcommunityFollower:{ "network_followers": [ ], "total_network_follower": 0 },
+    NcommunityFollowing:{ "network_following": [ ], "total_network_following": 0 },
+    BcommunityFollower:{ "business_followers": [ ], "total_business_follower": 0 },
+    BcommunityFollowing:{ "business_following": [ ], "total_business_following": 0 },
+  
+    UcommunityFollower:{ "user_followers": [ ], "total_user_follower": 0 },
+    UcommunityFollowing:{ "user_following": [ ], "total_user_following": 0 },
     Tcommunity:[],
     images:[],
 
@@ -138,13 +140,11 @@ export default {
     },
     
     getUserPostIntro(state) {
-      if(state.profileIntro == []) { 
 
-      return state.userData;
-      } else{    
+      
       return state.profileIntro;
 
-    }
+    
     },
 
     getImages(state) {
@@ -254,6 +254,11 @@ export default {
 
     setProfileBusiness(state, data) {
       state.profileBusiness = data;
+    },
+
+
+    setProfileNetwork(state, data) {
+      state.profileNetwork = data;
     },
 
 
@@ -461,6 +466,20 @@ export default {
         });
 
     },
+
+
+    profileNetwork({ commit }) {
+
+      return axios
+        .get('network')
+        .then(({ data }) => {
+          commit('setProfileNetwork', data.data);
+          console.log(data);
+        });
+
+    },
+
+
 
     getAlbumImages({ commit }, busineeId) {
 

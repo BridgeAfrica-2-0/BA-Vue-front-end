@@ -17,16 +17,8 @@
 <script>
 import Album from "./album";
 import Images from "./images";
+import axios from "axios";
 export default {
-  components: {
-    Album,
-    Images
-  },
-  methods: {
-    onClick(i) {
-      this.index = i;
-    }
-  },
   data: function() {
     return {
       images: [
@@ -38,7 +30,7 @@ export default {
         "https://placekitten.com/806/800",
         "https://placekitten.com/807/800",
         "https://placekitten.com/808/800",
-        "https://placekitten.com/809/800"
+        "https://placekitten.com/809/800",
       ],
       imagees: [
         "https://i.wifegeek.com/200426/f9459c52.jpg",
@@ -60,11 +52,48 @@ export default {
         "https://i.wifegeek.com/200426/177ef44c.jpg",
         "https://i.wifegeek.com/200426/d74d9040.jpg",
         "https://i.wifegeek.com/200426/81e24a47.jpg",
-        "https://i.wifegeek.com/200426/43e2e8bb.jpg"
+        "https://i.wifegeek.com/200426/43e2e8bb.jpg",
       ],
-      index: 0
+      index: 0,
     };
-  }
+  },
+
+  components: {
+    Album,
+    Images,
+  },
+  methods: {
+    onClick(i) {
+      this.index = i;
+    },
+    //function to get album
+    getAlbums() {
+      this.$store
+        .dispatch("UserProfileOwner/getAlbums", this.urlData)
+        .then(() => {
+          console.log("hey yeah");
+        })
+        .catch((err) => {
+          console.log({ err: err });
+        });
+    },
+    getImages() {
+      this.$store
+        .dispatch("UserProfileOwner/getImages", this.urlData)
+        .then(() => {
+          console.log("hey yeah");
+        })
+        .catch((err) => {
+          console.log({ err: err });
+        });
+    },
+  },
+
+  mounted() {
+    this.urlData = this.$route.params.id;
+    this.getAlbums();
+    this.getImages();
+  },
 };
 </script>
 

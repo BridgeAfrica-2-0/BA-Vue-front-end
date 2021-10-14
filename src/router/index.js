@@ -41,6 +41,7 @@ import networks from "@/views/networks";
 import dashboard from "@/views/dashboard";
 
 import welcome from "@/views/welcome";
+import PaymentPage from "@/views/PaymentPage";
 
 Vue.use(VueRouter);
 
@@ -64,7 +65,11 @@ const routes = [
     name: "market",
     component: market,
   },
-
+  {
+    path: "/checkout",
+    name: "PaymentPage",
+    component: PaymentPage,
+  },
   {
     path: "/welcome",
     name: "welcome",

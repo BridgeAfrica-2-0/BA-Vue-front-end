@@ -67,7 +67,8 @@
     "vuex": "^3.6.2",
     "vuex-persistedstate": "^4.0.0-beta.1",
     "x5-gmaps": "^0.5.7",
-    "yarn": "^1.22.11"
+    "yarn": "^1.22.11",
+    "vue-stepper": "^1.4.2"
   },
   "devDependencies": {
     "@iconify/vue": "1",

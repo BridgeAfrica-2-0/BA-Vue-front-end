@@ -1574,15 +1574,6 @@ export default {
         this.notFoundComponentTitle = "";
       }
     },
- 
-    changeComponent() {
-      try {
-        this.isComponent = this.strategyForComponent[this.selectedId]();
-      } catch (error) {
-        this.isComponent = null;
-      }
-    },
-
 
     changeComponent() {
       try {
@@ -1604,7 +1595,7 @@ export default {
         });
       }
     },
-    
+
     strategies() {
       try {
         this.strategy[`${this.selectedId}`]();

@@ -5,9 +5,16 @@ class Repository {
   async userPost(credentials) {
     try {
       const response = await axios.post(`share/user`, credentials)
-      return response.data.data
+      return {
+        success: (response.data.data) ? true : false,
+        data: (response.data.data) ? response.data.data : []
+      }
+
     } catch (error) {
-      return false
+      return {
+        success: false,
+        data: error
+      }
     }
   }
 }

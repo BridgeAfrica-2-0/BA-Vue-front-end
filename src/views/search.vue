@@ -1614,10 +1614,11 @@ export default {
           },
           page: 1,
         });
-
-        this.userStore(request);
-        this.page(2);
-        this.setCallback(this.$repository.search.findUserByParam);
+        if (request.success) {
+          this.userStore(request.data);
+          this.page(2);
+          this.setCallback(this.$repository.search.findUserByParam);
+        }
       } catch (error) {
         console.log(error);
       }
@@ -1645,8 +1646,14 @@ export default {
           keyword: this.navBarParams.keyword.trim(),
           page: 1,
         });
-        this.postStore(request);
-        this.page(2);
+
+        if (request.success){ 
+          this.postStore(request);
+          this.page(2);
+          this.setCallback(this.$repository.search.findPostByKeyword);
+        }
+
+        
       } catch (error) {
         console.log(error);
       }
@@ -1662,7 +1669,7 @@ export default {
           keyword: this.navBarParams.keyword.trim(),
         });
 
-        this.setCallback(this.$repository.search.findPostByKeyword);
+        
         this._onFindPost();
       } else {
         this.onNotified("the word must have at least 3 letters");

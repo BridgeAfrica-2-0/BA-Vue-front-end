@@ -52,7 +52,7 @@ export default {
   methods: {
     ...mapActions({
       postStore: "search/FIND_POST",
-      page: "search/SET_CURRENT_PAGINATION_PAGE"
+      page: "search/SET_CURRENT_PAGINATION_PAGE",
     }),
 
     onscroll: async function (event) {
@@ -74,10 +74,12 @@ export default {
           page: this.getPage,
         });
 
-        if (request.length) {
-          this.postStore(request);
-          this.page(this.getPage + 1);
-        } else this.haveNotData = true;
+        if (request.success) {
+          if (request.data.length) {
+            this.postStore(request);
+            this.page(this.getPage + 1);
+          } else this.haveNotData = true;
+        }
 
         this.loading = false;
       }

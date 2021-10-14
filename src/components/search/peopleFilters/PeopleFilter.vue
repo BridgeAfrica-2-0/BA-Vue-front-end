@@ -210,8 +210,11 @@ export default {
           payload,
           page: 1,
         });
-        this.userStore(request);
-        this.page(2);
+
+        if (request.success) {
+          this.userStore(request);
+          this.page(2);
+        }
       } catch (error) {
         console.log(error);
       }

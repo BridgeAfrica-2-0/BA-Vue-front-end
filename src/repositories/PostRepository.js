@@ -6,11 +6,17 @@ class Repository {
     try {
       const { page, uuid } = credentials
       const response = await axios.get(`search/comment/${uuid}/${page}`)
-      return response.data.data
-    } catch (error) {
-      return false
-    }
+      return {
+        success: (response.data.data) ? true : false,
+        data: (response.data.data) ? response.data.data : []
+      }
 
+    } catch (error) {
+      return {
+        success: false,
+        data: error
+      }
+    }
   }
 }
 

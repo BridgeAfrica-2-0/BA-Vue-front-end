@@ -11,7 +11,7 @@
     <h6>
       <fas-icon class="icons" :icon="['fas', 'users']" size="lg" />
       <ShareButton />
-      
+
       People
     </h6>
 
@@ -35,14 +35,14 @@ import { loader, search } from "@/mixins";
 
 import Sponsor from "@/components/search/sponsoredBusiness";
 import People from "@/components/search/people";
-import {ShareButton} from "@/components/shareButton"
+import { ShareButton } from "@/components/shareButton";
 
 export default {
   mixins: [loader, search],
   components: {
     Sponsor,
     People,
-    ShareButton
+    ShareButton,
   },
 
   computed: {
@@ -58,11 +58,10 @@ export default {
   methods: {
     ...mapActions({
       userStore: "search/FIND_USER",
-      page: "search/SET_CURRENT_PAGINATION_PAGE"
+      page: "search/SET_CURRENT_PAGINATION_PAGE",
     }),
 
     onscroll: async function (event) {
-      
       const scrollY = window.scrollY;
       const visible = document.documentElement.clientHeight;
       const pageHeight = document.documentElement.scrollHeight;
@@ -81,10 +80,12 @@ export default {
           page: this.getPage,
         });
 
-        if (request.length) {
-          this.userStore(request);
-          this.page(this.getPage + 1);
-        } else this.haveNotData = true;
+        if (request.success) {
+          if (request.data.length) {
+            this.userStore(request);
+            this.page(this.getPage + 1);
+          } else this.haveNotData = true;
+        }
 
         this.loading = false;
       }

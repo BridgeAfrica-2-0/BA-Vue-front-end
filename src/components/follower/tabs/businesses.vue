@@ -125,39 +125,6 @@
 </template>
 
 <script>
-<<<<<<< HEAD
-	export default {
-		data() {
-			return {
-				noBusiness: false,
-			};
-		},
-
-		methods: {
-			count(number) {
-				if (number >= 1000000) {
-					return number / 1000000 + "M";
-				}
-				if (number >= 1000) {
-					return number / 1000 + "K";
-				} else return number;
-			},
-		},
-		computed: {
-			busineses() {
-				return this.$store.state.follower.profileBusiness;
-			},
-		},
-		mounted() {
-			this.$store
-				.dispatch("follower/profileBusiness", null)
-				.then((response) => {})
-				.catch((error) => {
-					console.log({ error: error });
-				});
-		},
-	};
-=======
 export default {
   data() {
     return {
@@ -197,7 +164,6 @@ export default {
 
   }
 };
->>>>>>> 07690a28119529d72b67448579f1c77551826d4a
 </script>
 
 <style scoped>

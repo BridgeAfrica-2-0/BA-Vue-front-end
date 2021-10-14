@@ -9,11 +9,7 @@
         <span>
           <h6 class="title">
             <fas-icon class="icons" :icon="['fas', 'users']" size="lg" />
-<<<<<<< HEAD
             <b> {{ $t("profile.community").toUpperCase() }} </b> <span class="h4-color"> {{ com.total }} </span>
-=======
-            <b> COMMUNITY </b> <span class="h4-color"> {{ nFormatter(total.total_community)}} </span>
->>>>>>> 07690a28119529d72b67448579f1c77551826d4a
           </h6>
         </span>
 

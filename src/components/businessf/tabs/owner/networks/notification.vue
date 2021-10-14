@@ -18,7 +18,12 @@
         </b-col>
         <b-col>
           <div class="b-bottomn f-right">
-            <b-button variant="primary" @click="MarkAsRead" class="a-button-l duration">Mark as Read</b-button>
+            <b-button 
+              variant="primary" 
+              @click="MarkAsRead" 
+              :disabled="indeterminate ? false : true"
+              class="a-button-l duration"
+            >Mark as Read</b-button>
           </div>
         </b-col>
       </b-row>
@@ -30,14 +35,16 @@
           ><br />
           All Selected: <strong>{{ selectAll }}</strong>
         </div>
-        <b-col cols="12" class="mr-3" v-for="notification in notifications" :key="notification.id">
+        <b-col cols="12" class="mr-3 " v-for="notification in notifications" :key="notification.id">
+          <div :class="notification.is_read ? 'text-black' : 'text-primary'">
           <p class="">
             <span style="display:inline-flex">
               <b-form-checkbox
-                v-model="selected"
-                :value="notification.name"
-                @change="updateCheckall"
                 name="checkbox-1"
+                v-model="selected"
+                :value="notification.notification_id"
+                @change="updateCheckall"
+                :disabled="notification.is_read ? true : false"
                 class="m-left-top"
               >
               </b-form-checkbox>
@@ -48,7 +55,6 @@
               ></b-avatar>
               <h6 class="m-0  d-inline-block ml-2 username">
                 {{ notification.data[0].fullname }}
-                <!-- <div class="duration">{{ notification.created_at }}hr</div> -->
                 <div class="duration">{{ moment(notification.created_at).fromNow() }}</div>
               </h6>
             </span>
@@ -58,6 +64,7 @@
           <p class="text">
             {{ notification.notification_text }}
           </p>
+          </div>
 
           <hr width="100%" />
         </b-col>
@@ -83,8 +90,8 @@ export default {
         {
           "data": [
               {
-                  "fullname": "Cyclone wifi",
-                  "profile_picture": "https://picsum.photos/250/250/?image=22"
+                  "fullname": "wifi",
+                  "profile_picture": "https://picsum.photos/250/250/?image=27"
               }
           ],
           "notification_id": 4,
@@ -94,7 +101,23 @@ export default {
           "updated_at": "2021-10-12T15:28:23.000000Z",
           "is_read": 0,
           "user_id": 1,
-          "mark_as_read": 0
+          "mark_as_read": 1
+        },
+        {
+          "data": [
+              {
+                  "fullname": "Cyclone wifi",
+                  "profile_picture": "https://picsum.photos/250/250/?image=22"
+              }
+          ],
+          "notification_id": 9,
+          "reference_id": 1,
+          "notification_text": "You’ve unblock Ramona Braun",
+          "created_at": "2021-10-12T15:28:23.000000Z",
+          "updated_at": "2021-10-12T15:28:23.000000Z",
+          "is_read": 0,
+          "user_id": 1,
+          "mark_as_read": 1
         },
         {
           "data": [
@@ -103,12 +126,12 @@ export default {
                   "profile_picture": "https://picsum.photos/250/250/?image=22"
               }
           ],
-          "notification_id": 4,
+          "notification_id": 6,
           "reference_id": 1,
           "notification_text": "Aww yeah, you successfully read this important alert message. This example text is going to run a bit longer so that you can see how spacing within an alert works with this kind of content.",
-          "created_at": "2021-1-12T15:28:23.000000Z",
-          "updated_at": "2021-12-12T15:28:23.000000Z",
-          "is_read": 0,
+          "created_at": "2021-12-12T15:28:23.000000Z",
+          "updated_at": "2021-10-12T15:28:23.000000Z",
+          "is_read": 1,
           "user_id": 1,
           "mark_as_read": 1
         },
@@ -151,8 +174,8 @@ export default {
       this.selected = [];
       if (checked) {
         for (let notification in this.notifications) {
-          console.log("this.notifications[notification].notification_id: "+this.notifications[notification].notification_id)
-          this.selected.push(this.notifications[notification].notification_id.toString());
+            this.selected.push(this.notifications[notification].notification_id.toString());
+            console.log("this.notifications[notification].notification_id: "+this.notifications[notification].notification_id);
         }
       }
     },
@@ -181,20 +204,20 @@ export default {
         console.log(this.selected[i]);
         formData.append('ids['+i+']', this.selected[i]);
       }
-      this.axios.post("#", formData)
+      this.axios.post("network/"+this.url+"/notifications/mark", formData)
       .then(() => {
         console.log('ohh yeah');
         this.getNotifications();
         this.flashMessage.show({
           status: "success",
-          message: "New Role Updated"
+          message: "Marked As Read"
         });
       })
       .catch(err => {
         console.log({ err: err });
         this.flashMessage.show({
           status: "error",
-          message: "Unable to Update New Role"
+          message: "Unable To Mark As Read"
         });
       });
 		},

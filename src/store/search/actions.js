@@ -4,7 +4,6 @@ import * as TYPES from './types'
 export const actions = {
 
   [TYPES.FIND_POST]({ commit, state }, data) {
-    console.log(state.page)
     if (state.page == 1)
       commit(TYPES.RESET_RESULT)
 
@@ -23,12 +22,11 @@ export const actions = {
   }, //[TYPES.STACK_VALUE]
 
   [TYPES.LOADING]({ commit }, payload = null) {
+    
     commit(TYPES.LOADING, payload)
   }, // [TYPES.LOADING]
 
   [TYPES.SET_CURRENT_PAGINATION_PAGE]({ commit }, payload) {
-    console.log(payload)
-
     if (typeof (payload) === 'number')
       commit(TYPES.SET_CURRENT_PAGINATION_PAGE, payload)
     else
@@ -48,5 +46,4 @@ export const actions = {
     else
       throw new Error(`${payload} should be a string`)
   }, // [TYPES.POST_KEYWORD]
-
 }

@@ -1584,6 +1584,14 @@ export default {
     },
 
 
+    changeComponent() {
+      try {
+        this.isComponent = this.strategyForComponent[this.selectedId]();
+      } catch (error) {
+        this.isComponent = null;
+      }
+    },
+
     changePlaceHolder() {
       try {
         const newPlaceholder = this.strategyForPlaceHolder[this.selectedId]();

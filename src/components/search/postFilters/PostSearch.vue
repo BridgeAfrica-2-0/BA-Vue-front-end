@@ -13,7 +13,12 @@
       Posting
     </h6>
     <NotFound v-if="!posts.length" :title="title" />
-    <Post v-for="(post, index) in posts" :post="post" :key="index" />
+    <div v-else>
+      <Post v-for="(post, index) in posts" :post="post" :key="index" />
+    </div>
+
+    <p class="text-center" v-if="haveNotData">Not Data</p>
+    <Loader :loading="loading" color="#ced4da"></Loader>
   </div>
 </template>
 
@@ -47,8 +52,7 @@ export default {
   methods: {
     ...mapActions({
       postStore: "search/FIND_POST",
-      lauchLoader: "search/LOADING",
-      page: "search/SET_CURRENT_PAGINATION_PAGE",
+      page: "search/SET_CURRENT_PAGINATION_PAGE"
     }),
 
     onscroll: async function (event) {
@@ -60,10 +64,11 @@ export default {
       if (
         this.callback &&
         (bottomOfPage || pageHeight < visible) &&
-        !this.endLoading &&
-        !this.loadingHasActivated
+        !this.loading &&
+        !this.haveNotData
       ) {
-        this.lauchLoader(true);
+        this.loading = true;
+
         const request = await this.callback({
           ...this.getStack,
           page: this.getPage,
@@ -72,10 +77,9 @@ export default {
         if (request.length) {
           this.postStore(request);
           this.page(this.getPage + 1);
-        } else this.endLoading = true;
+        } else this.haveNotData = true;
 
-        console.log("At the bottom");
-        this.lauchLoader(false);
+        this.loading = false;
       }
     },
   },

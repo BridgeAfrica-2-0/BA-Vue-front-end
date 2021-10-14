@@ -26,15 +26,13 @@ export const mutations = {
     state.posts = []
   }, //[TYPES.RESET_RESULT]
 
-  [TYPES.LOADING](state, payload = null) {
-    if (null != payload) {
-      if (typeof (payload) == 'boolean')
-        state.isLoading = payload
-      else
-        throw new Error('payload must be a bolean')
-    }
+  [TYPES.LOADING](state, payload) {
+
+    if (typeof (payload) == 'boolean')
+      state.isLoading = payload
     else
-      state.isLoading = !state.isLoading
+      throw new Error('payload must be a bolean')
+
   }, // [TYPES.LOADING]
 
   [TYPES.SET_CURRENT_PAGINATION_PAGE](state, payload) {

@@ -285,8 +285,9 @@ export default {
       newCallbackForPagination: "search/SET_CURRENT_PAGINATE_CALLBACK",
       lauchLoader: "search/LOADING",
       page: "search/SET_CURRENT_PAGINATION_PAGE",
-      stack: "search/STACK_VALUE", //
+      stack: "search/STACK_VALUE", 
     }),
+
 
     async _onFindPost(e) {
       try {

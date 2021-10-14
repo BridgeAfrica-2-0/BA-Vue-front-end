@@ -6,20 +6,20 @@
       <b-row class=""> 
         <b-col cols="12" class="p-3">
           <b-tabs content-class="mt-3" pills small fill  v-model="tabIndex">
-            <b-tab title="Posts"   href="#post">
+            <b-tab :title="`${$t('profile_owner.posts')}`"   href="#post">
               <Post />
             </b-tab>
-            <b-tab title="About"  href="#about"><About /></b-tab>
-            <b-tab title="Business"  href="#business" class="m-0 p-0"
+            <b-tab :title="`${$t('profile_owner.about')}`"   href="#about"><About /></b-tab>
+            <b-tab :title="`${$t('profile_owner.business')}`"   href="#business" class="m-0 p-0"
               ><bussiness></bussiness
             ></b-tab>
-            <b-tab title="Media"><Media /></b-tab>
-            <b-tab title="Networks">
+            <b-tab :title="`${$t('profile_owner.media')}`" ><Media /></b-tab>
+            <b-tab :title="`${$t('profile_owner.networks')}`" >
               <Networks />
             </b-tab>
             
-            <b-tab title="Media"  href="#media"><Media /></b-tab>
-            <b-tab title="Community"  href="#community" class="m-0 p-0"
+            <!-- <b-tab :title="`${$t('profile_owner.media')}`"   href="#media"><Media /></b-tab> -->
+            <b-tab :title="`${$t('profile_owner.community')}`"  href="#community" class="m-0 p-0"
               ><following></following>  </b-tab>
             
           </b-tabs>

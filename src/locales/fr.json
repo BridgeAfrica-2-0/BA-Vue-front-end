@@ -94,7 +94,9 @@
         "people":"Personnes",
         "followers":"Followers",
         "following":"Following",
-        "network":"Réseau"
+        "network":"Réseau",
+        "insights": "insights",
+        "discover_customers_shares": "Découvrez ce que les clients pensent de vos partages et interagissez"
       },
       "network":{
         "title": "Network",

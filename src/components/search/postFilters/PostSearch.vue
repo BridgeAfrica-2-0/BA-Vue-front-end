@@ -76,7 +76,7 @@ export default {
 
         if (request.success) {
           if (request.data.length) {
-            this.postStore(request);
+            this.postStore(request.data);
             this.page(this.getPage + 1);
           } else this.haveNotData = true;
         }

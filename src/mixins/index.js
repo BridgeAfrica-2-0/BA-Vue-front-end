@@ -54,7 +54,7 @@ export const search = {
     loading: false,
     haveNotData: false
   }),
-
+  
   destroyed() {
     this.page(1);
     this.$store.commit('search/RESET_RESULT');

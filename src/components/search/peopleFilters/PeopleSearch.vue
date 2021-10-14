@@ -82,7 +82,7 @@ export default {
 
         if (request.success) {
           if (request.data.length) {
-            this.userStore(request);
+            this.userStore(request.data);
             this.page(this.getPage + 1);
           } else this.haveNotData = true;
         }

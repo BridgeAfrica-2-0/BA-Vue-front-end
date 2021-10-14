@@ -297,7 +297,7 @@ export default {
 
         if (request.success) {
           this.page(2);
-          this.findPeoplePost(request);
+          this.findPeoplePost(request.data);
         }
       } catch (error) {
         console.log(error);
@@ -351,7 +351,8 @@ export default {
           data: data["users"],
           keyword: this.keyword,
         });
-        render = [...render, ...response];
+
+        if (response.success) render = [...render, ...response.data];
       }
 
       if (credentials.includes("buisness")) {
@@ -360,7 +361,8 @@ export default {
           data: data["buisness"],
           keyword: this.keyword,
         });
-        render = [...render, ...response];
+
+        if (response.success) render = [...render, ...response.data];
       }
 
       if (credentials.includes("network")) {
@@ -369,7 +371,8 @@ export default {
           data: data["network"],
           keyword: this.keyword,
         });
-        render = [...render, ...response];
+
+        if (response.success) render = [...render, ...response.data];
       }
 
       this.findPeoplePost(render);

@@ -212,7 +212,7 @@ export default {
         });
 
         if (request.success) {
-          this.userStore(request);
+          this.userStore(request.data);
           this.page(2);
         }
       } catch (error) {

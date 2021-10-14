@@ -9,7 +9,7 @@ export default {
         products: { data: [] },
         posts: { data: [] },
 
-        prodLoader: false,
+        loader: false,
         success: false,
         token: "51|HZT2jfu5klFDkJhpvEI6dBhAQBDEdBQ2fABwhhaf"
     },
@@ -34,7 +34,7 @@ export default {
 
         // sending loader value
         getLoader(state) {
-            return state.prodLoader;
+            return state.loader;
         },
         // sending success value
         getSuccess(state) {
@@ -55,9 +55,12 @@ export default {
         setBusinesses(state, data) {
             state.businesses = data;
         },
+        setPosts(state, data) {
+            state.posts = data;
+        },
 
         setLoader(state, payload) {
-            state.prodLoader = payload;
+            state.loader = payload;
         },
         setSuccess(state, payload) {
             state.success = payload;
@@ -66,43 +69,50 @@ export default {
 
     actions: {
 
-        async SEARCH({ commit, state }, data) {
+        SEARCH({ commit, state }, data) {
             commit("setNetworks", { data: [] });
+            commit("setPeoples", { data: [] });
+            commit("setProducts", { data: [] });
+            commit("setBusinesses", { data: [] });
+            commit("setPosts", { data: [] });
             commit("setLoader", true);
+
             console.log("[DEBUG] HELLO NETWORK SEARCH", data);
             let page = 1
-            let type = ''
+            const TYPES = ['business', 'user', 'network', 'market', 'post']
 
-            if (data.page) page = data.page
-            if (data.type == 'market') {
-                type = 'market'
-            } else if (data.type == 'business') {
-                type = 'business'
-            } else if (data.type == 'business') {
-                type = 'business'
-            } else if (data.type == 'network') {
-                type = 'network'
-            } else if (data.type == 'post') {
-                type = 'post'
-            } else if (data.type == 'user') {
-                type = 'user'
-            }
+            TYPES.map((type) => {
+                axios.post(`/search/${type}`, data, {
+                        headers: {
+                            Authorization: `Bearer ${state.token}`
+                        }
+                    })
+                    .then((res) => {
+                        if (type == 'business') {
+                            commit("setBusinesses", res.data);
+                        } else if (type == 'user') {
+                            commit("setPeoples", res.data);
+                        } else if (type == 'market') {
+                            commit("setProducts", res.data);
+                        } else if (type == 'network') {
+                            commit("setNetworks", res.data);
+                        } else if (type == 'post') {
+                            commit("setPosts", res.data);
+                        }
+
+                        commit("setLoader", false);
+                        console.log("All Search results: ", res.data);
+                    })
+
+                .catch((err) => {
+                    commit("setLoader", false);
+                    console.log(err);
+                })
+            })
 
 
-            console.log("[debug] page:", page);
-            try {
-                const res = await axios.post(`/search/${type}?page=${page}`, data, {
-                    headers: {
-                        Authorization: `Bearer ${state.token}`
-                    }
-                });
-                commit("setLoader", false);
-                console.log("Network Search results: ", res.data);
-                commit("setNetworks", res.data);
-            } catch (err) {
-                commit("setLoader", false);
-                console.log(err);
-            }
+            // console.log("[debug] page:", page);
+
 
         }
 

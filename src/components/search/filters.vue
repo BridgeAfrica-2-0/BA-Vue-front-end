@@ -215,40 +215,37 @@
     </div>
 
     <div v-if="filterType == '0'">
-      <span v-if="showform == true">
-        <b-form-group
-          label-cols-lg="3"
-          label="Region"
-          label-size="md"
-          label-class="font-weight-bold pt-0"
-          class="mb-0 text-left"
-        >
-        </b-form-group>
-
-        <b-form-select v-model="selected">
-          <b-form-select-option value="a"> Yaounde </b-form-select-option>
-        </b-form-select>
-
-        <br />
-
-        <b-form-group
-          label-cols-lg="3"
-          label="Division"
-          label-size="md"
-          label-class="font-weight-bold pt-0"
-          class="mb-0 text-left"
-        >
-        </b-form-group>
-
-        <b-form-select v-model="selected">
-          <b-form-select-option value="a"> My Location </b-form-select-option>
-        </b-form-select>
-
-        <br />
+      <b-button
+        v-if="networkSelect.category"
+        class="float-right"
+        size="sm"
+        variant="outline-primary"
+        @click="allSearchByCat({})"
+        >Reset</b-button
+      >
+      <br />
+        <!-- Category -->
+        <div v-if="categories.length > 0">
+          <b-form-group
+            label-cols-lg="3"
+            label="Categories"
+            label-size="md"
+            label-class="font-weight-bold pt-0"
+            class="mb-0 pt-6 text-left"
+          >
+          </b-form-group>
+          <b-form-select
+            v-model="networkSelect.category"
+            :options="categories"
+            value-field="category.id"
+            text-field="category.name"
+            @change="allSearchByCat({ cat_id: networkSelect.category })"
+          >
+          </b-form-select>
+        </div>
 
         <hr />
-      </span>
-
+      <!-- 
       <b-form-group
         label-cols-lg="12"
         label="Neighbourhood"
@@ -304,6 +301,7 @@
       </b-form-group>
 
       <b-link v-b-modal="'distance'"> See all </b-link>
+       -->
     </div>
 
     <!-- Network -->
@@ -2153,6 +2151,19 @@ export default {
         });
     },
     // END Network search filter
+
+    // All Search 
+    allSearchByCat(data) {
+      console.log("the category is: ", data);
+      this.$store
+        .dispatch("allSearch/SEARCH", data)
+        .then((res) => {
+          // console.log("categories loaded!");
+        })
+        .catch((err) => {
+          console.log("Error erro!");
+        });
+    },
 
     // Not ED code
 

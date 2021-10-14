@@ -95,7 +95,7 @@ export default {
       if (this.fixBottom) return {};
       return {
         transitionTimingFunction: this.transitionTimingFunction,
-        transitionDuration: `${this.transitionDuration()}ms`,
+        transitionDuration: `${this.transitionDuration}ms`,
         transform: `translate3d(${this.translateX}px, 0px, 0px)`
       };
     },
@@ -115,6 +115,7 @@ export default {
       if (this.reBounding && !this.touching) {
         return this.reBoundingDuration;
       }
+      else return 0
     },
     transitionTimingFunction() {
       return this.reBounding

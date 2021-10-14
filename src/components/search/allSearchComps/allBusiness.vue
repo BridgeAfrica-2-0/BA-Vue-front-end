@@ -1,6 +1,18 @@
 <template>
   <div>
-    <div class="people-style shadow">
+    <b-spinner v-if="loader" variant="primary" label="Spinning"></b-spinner>
+
+    <b-alert v-if="businesses.total == 0" show variant="warning"
+      ><a href="#" class="alert-link">
+        No data available for that search!
+      </a></b-alert
+    >
+    <div></div>
+    <div
+      class="people-style shadow"
+      v-for="(business, index) in businesses.data"
+      :key="index"
+    >
       <b-row>
         <b-col md="3" xl="3" lg="3" cols="5" sm="3">
           <div class="center-img">
@@ -16,18 +28,21 @@
         </b-col>
         <b-col md="9" cols="7" lg="5" sm="5">
           <p class="textt">
-            <strong class="title"> Super Car ltd </strong> <br />
-            Car marketing
+            <strong class="title"> {{ business.name }} </strong> <br />
+            {{ business.category }}
             <br />
-            20k Community <br />
+            {{ business.followers }} Followers <br />
 
             <span class="location">
-              <b-icon-geo-alt class="ico"></b-icon-geo-alt> Douala cameroon
+              Lat: {{ business.lat }}<br />
+              Long: {{ business.lng }}<br />
+              <b-icon-geo-alt class="ico"></b-icon-geo-alt>
+              {{ business.location_description }}
             </span>
             <br />
-
-            super best car seller in the world adipisicing elit. lorem epsep
-            this is <b-link>Read More</b-link>
+            {{ business.about_business }}
+            <br />
+            <b-link>Read More</b-link>
           </p>
         </b-col>
 
@@ -45,10 +60,10 @@
                 <b-button
                   block
                   size="sm"
-                  class="b-background shadow "
+                  class="b-background shadow"
                   variant="primary"
                 >
-                  <i class="fas fa-user-plus  fa-lg btn-icon "></i>
+                  <i class="fas fa-user-plus fa-lg btn-icon"></i>
                   <span class="btn-com">Community</span>
                 </b-button>
               </b-col>
@@ -64,10 +79,10 @@
                 <b-button
                   block
                   size="sm"
-                  class="b-background shadow "
+                  class="b-background shadow"
                   variant="primary"
                 >
-                  <i class="fas fa-envelope   fa-lg btn-icon "></i>
+                  <i class="fas fa-envelope fa-lg btn-icon"></i>
                   <span class="btn-text">Message</span>
                 </b-button>
               </b-col>
@@ -83,10 +98,10 @@
                 <b-button
                   block
                   size="sm"
-                  class="b-background shadow "
+                  class="b-background shadow"
                   variant="primary"
                 >
-                  <i class="fas fa-map-marked-alt  fa-lg btn-icon "></i>
+                  <i class="fas fa-map-marked-alt fa-lg btn-icon"></i>
                   <span class="btn-text">Direction</span>
                 </b-button>
               </b-col>
@@ -100,17 +115,6 @@
 
 <script>
 export default {
-  props:  {
-    searchParams:{
-      type: Object,
-      default: function(){
-        return {
-          keyword:'',
-          cat_id:''
-        }
-      }
-    }},
-   
   data() {
     return {
       options: {
@@ -120,16 +124,19 @@ export default {
         pagination: false,
 
         type: "loop",
-        perMove: 1
-      }
+        perMove: 1,
+      },
     };
   },
+  computed: {
+    businesses() {
+      return this.$store.getters["allSearch/getBusinesses"];
+    },
+    loader() {
+      return this.$store.getters["allSearch/getLoader"];
+    },
+  },
 
-  methods:{
-    search(data){
-      console.log("[debug] Business:", this.searchParams);
-    }
-  }
 };
 </script>
 

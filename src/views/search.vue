@@ -7,9 +7,12 @@
       </template>
       
     </Nav> -->
-    <Nav :credentials.sync="navBarParams">
+    <Nav :credentials.sync="searchParams" id="top">
       <template v-slot:button>
-        <Button @click.native="strategy['users']" />
+        <Button
+          @click.native="strategy['miniBusiness']"
+          v-if="selectedId == 0"
+        />
       </template>
     </Nav>
 
@@ -415,10 +418,10 @@
                 Businesses
               </h6>
 
-              <MiniBusiness :searchParams.sync="searchParams" />
+              <MiniBusiness />
 
-              <span class="float-right mb-3">
-                <b-link> see more </b-link>
+              <span class="float-right mb-3" @click="selectedId=1">
+                <b-link href='#top'> see more </b-link>
               </span>
               <br />
 
@@ -427,7 +430,9 @@
               <h6>People</h6>
 
               <MiniPeople />
-              <span class="float-right mb-3"> see more </span> <br />
+              <span class="float-right mb-3" @click="selectedId=2"> 
+                <b-link href='#top'> see more </b-link>
+               </span> <br />
 
               <hr />
 
@@ -441,7 +446,9 @@
               </h6>
 
               <MiniNetwork />
-              <span class="float-right mb-3"> see more </span> <br />
+              <span class="float-right mb-3" @click="selectedId=3"> 
+                <b-link href='#top'> see more </b-link>
+                 </span> <br />
 
               <hr />
 
@@ -452,7 +459,8 @@
 
               <MiniMarket />
 
-              <span class="float-right mb-3"> see more </span> <br />
+              <span class="float-right mb-3" @click="selectedId=4"> 
+                <b-link href='#top'> see more </b-link> </span> <br />
 
               <hr />
 
@@ -463,7 +471,8 @@
 
               <MiniPost />
 
-              <span class="float-right mb-3"> see more </span> <br />
+              <span class="float-right mb-3" @click="selectedId=5"> 
+                <b-link href='#top'> see more </b-link> </span> <br />
 
               <hr />
             </div>
@@ -600,6 +609,12 @@ import LyTab from "@/tab/src/index.vue";
 
 import Map from "@/components/search/map";
 
+import Business from "@/components/search/business";
+import People from "@/components/search/people";
+import Network from "@/components/search/network";
+import Post from "@/components/search/posts";
+import Market from "@/components/search/market";
+
 import MiniBusiness from "@/components/search/allSearchComps/allBusiness";
 import MiniPeople from "@/components/search/allSearchComps/allPeople";
 import MiniNetwork from "@/components/search/allSearchComps/allNetwork";
@@ -630,6 +645,12 @@ export default {
     Map,
     Sponsor,
 
+    Business,
+    People,
+    Network,
+    Post,
+    Market,
+
     MiniBusiness,
     MiniPeople,
     MiniNetwork,
@@ -653,8 +674,11 @@ export default {
   created() {
     this.strategy = {
       users: () => this.onFindUser(),
+      miniBusiness: () => this.getKeyword(),
     };
+    this.getKeyword()
   },
+
   data() {
     return {
       navBarParams: {
@@ -665,6 +689,7 @@ export default {
       searchParams: {
         keyword: "",
         cat_id: "",
+        placeholder: "Find In All",
       },
 
       alert: false,
@@ -1602,7 +1627,7 @@ export default {
       default_category: "",
 
       optionsnav: {
-        activeColor: "#1d98bd",
+        activeColor: "#top1d98bd",
       },
     };
   },
@@ -1610,8 +1635,17 @@ export default {
   methods: {
     // [ED]----------
     getKeyword() {
-      console.log(this.navBarParams.keyword);
-      console.log("[DEBUG]", this.subCategories);
+      console.log("the keyword is: ", this.searchParams.keyword);
+      this.$store
+        .dispatch("allSearch/SEARCH", {
+          keyword: this.searchParams.keyword,
+        })
+        .then((res) => {
+          // console.log("categories loaded!");
+        })
+        .catch((err) => {
+          console.log("Error erro!");
+        });
     },
 
     async getProducts() {

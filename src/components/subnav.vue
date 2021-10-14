@@ -37,12 +37,12 @@
                     @mouseover="getFilter(subCat)"
                   >
                     <b-dropdown-item href="#">
-                      <img
+                      <!-- <img
                       v-if="subCat.cat_image"
                         class="img-fluid picture logo-img"
                         :src="require(`@/assets${subCat.cat_image}`)"
                       />
-                      <span v-else>!@</span>
+                      <span v-else>!@</span> -->
                       {{ subCat.name }}
                     </b-dropdown-item>
 
@@ -78,19 +78,14 @@
                     cols="6"
                     v-for="(category, index) in categories.slice(6)"
                     :key="index"
-                    @mouseover="
-                        showMoreSubCat(category.category.id, category.sub_cat)
-                      "
-                      @click="showMoreSubCat(category.category.id,category.sub_cat)"
                   >
-                    <b-dropdown-item
-                      class="ml-1"
-                      href="#"
-                      
-                      ><img
+                    <b-dropdown-item class="ml-1" href="#">
+                      <img
+                        v-if="category.category.cat_image"
                         class="img-fluid picture logo-img"
                         :src="require(`@/assets${category.category.cat_image}`)"
                       />
+                      <span v-else>!@</span>
                       {{ category.category.name }}
                     </b-dropdown-item>
 
@@ -123,6 +118,9 @@ export default {
     return {};
   },
   computed: {
+    option(){
+      return[{},{}]
+    },
     categories() {
       return this.$store.getters["marketSearch/getCategories"];
     },
@@ -164,6 +162,7 @@ export default {
 
       // // Search by categories
       this.searchProducts({ cat_id: catId });
+      this.searchAll({ cat_id: catId });
     },
     hideSubCat(catId) {
       this.$refs[catId][0].visible = false;
@@ -180,8 +179,19 @@ export default {
           console.log("Error erro!");
         });
     },
+    searchAll(data) {
+      console.log("the category is: ", data);
+      this.$store
+        .dispatch("allSearch/SEARCH", data)
+        .then((res) => {
+          // console.log("categories loaded!");
+        })
+        .catch((err) => {
+          console.log("Error erro!");
+        });
+    },
 
-    // ------------------------------------
+    // -----------------------------------
 
     onOverMore() {
       this.$refs.more.visible = true;
@@ -190,7 +200,6 @@ export default {
     showMoreSubCat(catId, subCat) {
       console.log("[debuging] cat:  ", catId);
       console.log("[debuging] subcat:  ", subCat);
-
 
       // this.subCategories.push(subCat);
       this.$store.commit("marketSearch/setSubCat", subCat);
@@ -208,7 +217,7 @@ export default {
       // this.noFilter = "";
       console.log("[DEBUG] Subcategories: ", subCat);
 
-       this.$store
+      this.$store
         .dispatch("marketSearch/getFilter", subCat.id)
         .then((res) => {
           this.searchProducts({ cat_id: subCat.cat_id, sub_cat: subCat.id });

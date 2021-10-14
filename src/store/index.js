@@ -11,7 +11,7 @@ import hotbusiness from "./hotbusiness";
 import networkDetails from "./networkDetails";
 import dashboardcommunity from "./dashboardcommunity";
 import profile from "./profile";
-import profile from "./networkProfileMembers";
+import networkProfileMembers from "./networkProfileMembers";
 
 
 

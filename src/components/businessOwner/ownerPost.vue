@@ -972,6 +972,7 @@ export default {
     },
 
     business_logo() {
+      console.log(this.$store.businessOwner.businessInfo.logo_path);
       return this.$store.state.businessOwner.businessInfo.logo_path;
     },
 

@@ -100,25 +100,13 @@
 
         <b-modal
           id="modal-5"
-          title=" Edit Intro"
+          title="Edit Intro"
           ref="modal"
-          @show="resetModal"
-          @hidden="resetModal"
           @ok="handleOk"
         >
           <div class="">
              
-            <p>   
-
-
-              <b-icon @click="switchTab('about')"
-                icon="pencil"
-                class="eedit"
-                variant=""
-              ></b-icon>
-
-              
-
+            <p>
               <b> Work at: </b>
               <span v-if="info.user_experience">  
               <span
@@ -130,45 +118,25 @@
               </span>  </span>
             </p>
             <p>
-            <router-link to="profile_owner">
-               <b-icon @click="switchTab('about')"
-                icon="pencil"
-                class="eedit"
-                variant=""
-              ></b-icon>
-              </router-link>
-
               <b> Studied at: </b>
        
-              <span v-if="info.user_education !=null">      <span
+              <span v-if="info.user_education !=null">
+                <span
                 v-for="edu in info.user_education.slice(0, 1)"
                 :key="edu.id"
                 class="text"
-              >
-                {{ edu.school_name }}</span
-              >
+                >
+                  {{ edu.school_name }}
+                </span>
               </span>
             </p>
             <p>
-               <b-icon @click="switchTab('about')"
-                icon="pencil"
-                class="eedit"
-                variant=""
-              ></b-icon>
-             
               <b> Home Town : </b>
               <span class="text">
                 {{ info.user.neighbor }}
               </span>
             </p>
             <p>
-             
-
-              <b-icon @click="switchTab('about')"
-                icon="pencil"
-                class="eedit"
-                variant=""
-              ></b-icon> 
               <b> Current City : </b>
               <span class="text">
                 {{ info.user.city }}

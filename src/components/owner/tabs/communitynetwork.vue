@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="p-2">
     <b-modal id="modal-sm" size="sm" hide-header>
       Do you want to join this network? 
     </b-modal>
@@ -76,7 +76,8 @@
     </b-row>
 
      
-  <infinite-loading @infinite="infiniteHandler"></infinite-loading>  
+ 
+      <infinite-loading :identifier="infiniteId"  @infinite="infiniteHandler"  ref="infiniteLoading" ></infinite-loading> 
   
   </div>
 </template>
@@ -84,10 +85,11 @@
 <script>
 import axios from "axios";
 export default {
-  props: ["type"],
+  props: ["type","searchh"],
    data() {
     return {
       page: 1,
+      infiniteId: +new Date(),
       options: {
         rewind: true,
         autoplay: true,
@@ -115,11 +117,38 @@ export default {
    
   },
 
+
   methods:{
+   
+
+
+        search(){
+     
+       console.log('search started');
+       console.log(this.type);
+        
+         if(this.type=="Follower"){ 
+         console.log("follower");
+        this.$store.commit("profile/setNcommunityFollower",{ "network_followers": [ ], "total_network_follower": 0 }); 
+
+       }else{
+       
+        
+        this.$store.commit("profile/setNcommunityFollowing",{ "network_following": [ ], "total_network_following": 0 }); 
+       }
+
+      this.page = 1;
+      this.infiniteId += 1;
+
+     
+     this.$refs.infiniteLoading.attemptLoad();
+    
+
+    },
 
     
-      
-       infiniteHandler($state) {
+      infiniteHandler($state) {
+
 
       let url = null;
 
@@ -128,21 +157,44 @@ export default {
          }else{
           url="profile/network/following/";
          }
+         
+      console.log(url + this.page+"?keyword="+this.searchh);
       axios
-        .get(url + this.page)
+        .get(url + this.page+"?keyword="+this.searchh)   
         .then(({ data }) => {
-          if (data.data.length) {
+          console.log("lading network after response")
+          console.log(data);
+        if(this.type=="Follower"){
+         
+
+          if (data.data.network_followers.length) {
             this.page += 1;
-      if(this.type=="Follower"){  
-            this.network.push(...data.data.network_followers); 
+            this.network.push(...data.data.network_followers);
+            
+            
+            $state.loaded();
            }else{
-              this.network.push(...data.data.network_following);
+              $state.complete();
            }
 
 
-            $state.loaded();
           } else {
-            $state.complete();
+            
+
+
+             if (data.data.network_following.length) {
+            this.page += 1;
+      
+            this.network.push(...data.data.network_following);
+            
+            
+            $state.loaded();
+           }else{
+              $state.complete();
+           }
+
+
+
           }
         }) 
         .catch((err) => {

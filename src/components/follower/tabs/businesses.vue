@@ -140,7 +140,8 @@
 export default {
   data() {
     return {
-      noBusiness: false
+      noBusiness: false,
+      foll_id:""
     };
   },
  
@@ -163,9 +164,9 @@ export default {
   },
   mounted(){
 
-     
+     this.foll_id = this.$route.params.id;
       this.$store
-      .dispatch("follower/profileBusiness", null)
+      .dispatch("follower/profileBusiness", this.foll_id)
       .then((response) => {
        
       })

@@ -17,6 +17,8 @@ export default {
         commit("setProfile", data.data.owner[0]);
 
         console.log(data);
+      }).catch(err => {
+        console.log({ err: err });
       });
     },
   },

@@ -57,7 +57,7 @@ export default {
 
 .imgheight{
 
-    height: 200px !important;
+    height: auto !important;
 }
 
 </style>

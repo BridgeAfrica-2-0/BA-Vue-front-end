@@ -19,111 +19,18 @@ export default {
     educations: [],
     professions: [],
 
-    profile_about:[],
-    profileIntro:[],
-
-    NcommunityFollower:[],
-    NcommunityFollowing:[],
-    BcommunityFollower:[],
-    BcommunityFollowing:[],
-   
-    UcommunityFollower:[],
-    UcommunityFollowing:[],
+    profile_about:{"user":{},"user_address":[], "user_education":[],"user_experience":[],"user_websites":[]  },
+    profileIntro:{"user":{},"user_address":[], "user_education":[],"user_experience":[],"user_websites":[]  },
+    NcommunityFollower:{ "network_followers": [ ], "total_network_follower": 0 },
+    NcommunityFollowing:{ "network_following": [ ], "total_network_following": 0 },
+    BcommunityFollower:{ "business_followers": [ ], "total_business_follower": 0 },
+    BcommunityFollowing:{ "business_following": [ ], "total_business_following": 0 },
+  
+    UcommunityFollower:{ "user_followers": [ ], "total_user_follower": 0 },
+    UcommunityFollowing:{ "user_following": [ ], "total_user_following": 0 },
     Tcommunity:[],
 
 
-    userData: [
-      {
-        profile_about: {
-          biography: {
-            info_access: "private",
-            description: "No Description"
-          },
-          basicInfo: {
-            dateOfBirth: {
-              date_1: {
-                day: "12",
-                month: "January",
-                access: "private"
-              },
-              date_2: {
-                year: "2000",
-                access: "private"
-              }
-            },
-            gender: "M",
-            mobilePhones: ["237656602212", "237677873626"],
-            currentCity: null,
-            homeTown: null,
-            websites: [
-              "https://www.google.com",
-              "https://www.facebook.com",
-              "https://www.udemy.com"
-            ],
-            socialLinks: [
-              "www.instagram.com/bridgeafrica",
-              "https://www.google.com",
-              "https://www.facebook.com",
-              "https://www.udemy.com"
-            ]
-          },
-          educationAndWorks: {
-            workPlaces: [
-
-              {
-                id: 3,
-                companyName: "Coc Cla Pvt Ltd. Team Lead",
-                cityTown: "YAOUNDE",
-                position: "YAOUNDE",
-                jobResponsibilities:
-                  "Job descrioption dummny textJob descrioption dummny text Jobdescrioption dummny text",
-                currentlyWorking: false,
-                starDate: "2012-09-12",
-                endDate: "2012-09-12",
-                access: ""
-              }
-            ],
-            educations: [
-              {
-                id: 1,
-                access: "private",
-                schoolName: null,
-                graduated: false,
-                durationFrom: null,
-                durationTo: null,
-                major: null
-              }
-            ],
-            professions: [
-              { profession: "Cultivateur", access: "public" },
-              { profession: "Macon", access: "private" },
-              { profession: "Cuisinier", access: "public" }
-            ]
-          }
-        },
-        profile_about1: null,
-
-        profile_about_new: {
-          name: "marc doe",
-          profile_picture: "http://localhost:80",
-          gender: "female",
-          addresses: [],
-          work_experiences: [],
-          website: [
-            {
-              website_id: 1,
-              website_url: "http://www.googl.fr"
-            }
-          ],
-          contacts: [
-            {
-              phoneNumber: "677889955",
-              phone_id: 1
-            }
-          ]
-        }
-      }
-    ]
   },
   getters: {
     getAlbums(state) {
@@ -161,10 +68,10 @@ export default {
       return state.profile_about.user.biography;
     },
     getProfileAboutBasicInfos(state) {
-      return state.userData[0].profile_about.basicInfo;
+      return state.profileIntro;
     },
     getProfileAbout_(state) {
-      return state.userData[0].profile_about_new;
+      return state.profileIntro;
     },
     getProfileAboutEducationAndWorks(state) {
       return state.profileIntro.user_education;

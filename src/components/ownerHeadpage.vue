@@ -302,7 +302,7 @@ selectCover(){
 
 
        this.axios 
-          .post("user/profile/picture", formData, {
+          .post("user/upload/profile-picture", formData, {
             headers: {
               "Content-Type": "multipart/form-data",
             },
@@ -389,7 +389,7 @@ selectCover(){
 
 
        this.axios 
-          .post("user/cover", formData, {
+          .post("user/upload-cover", formData, {
             headers: {
               "Content-Type": "multipart/form-data",
             },

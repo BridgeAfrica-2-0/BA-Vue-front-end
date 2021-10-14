@@ -16,12 +16,17 @@ export const loader = {
       });
     },
   },
-
+  computed: {
+    ...mapGetters({
+      loaderState: "search/LOADING"
+    })
+  },
   data: () => ({
     overlay: null
   }),
+
   watch: {
-    loading: function (newValue) {
+    loaderState: function (newValue) {
       if (newValue) {
         this.overlay = this.$loading.show({
           container: this.$refs.formContainer,

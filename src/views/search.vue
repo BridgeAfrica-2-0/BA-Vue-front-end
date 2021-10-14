@@ -1595,7 +1595,7 @@ export default {
         });
       }
     },
-
+    
     strategies() {
       try {
         this.strategy[`${this.selectedId}`]();

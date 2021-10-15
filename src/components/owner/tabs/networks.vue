@@ -92,9 +92,11 @@
       </b-row>
     </div>
 
-    <b-col v-if="loader" class="load">
-      <b-spinner class="spin" variant="primary"></b-spinner>
-    </b-col>
+
+
+
+      <infinite-loading :identifier="infiniteId"   ref="infiniteLoading"   @infinite="infiniteHandler"></infinite-loading>
+
     <div class="h-100 w-100" v-if="networks.length < 1 && !loader">
       <div class="mx-auto text-center my-5">
         <h2 class="my-3">Builds networks around your Business</h2>
@@ -146,13 +148,17 @@
             </div>
           </div>
 
+    
+     <b-row>   <b-col md="6">  
+
           <b-form-group
             label-cols-lg="12"
             label="Network Name"
             label-size="md"
-            label-class="font-weight-bold pt-0"
+            label-class=" pt-0 "
             class="mb-0"
           >
+
             <b-form-input
               v-model="createdNetwork.name"
               id="network_name"
@@ -161,11 +167,13 @@
             >
             </b-form-input>
           </b-form-group>
+
+            </b-col>   <b-col md="6"> 
           <b-form-group
             label-cols-lg="12"
             label="Network Category"
             label-size="md"
-            label-class="font-weight-bold pt-0"
+            label-class=" pt-0"
             class="mb-0"
           >
             <b-form-input
@@ -176,11 +184,17 @@
             >
             </b-form-input>
           </b-form-group>
+
+</b-col>
+       
+
+
+         <b-col md="6">  
           <b-form-group
             label-cols-lg="12"
             label="Network Address"
             label-size="md"
-            label-class="font-weight-bold pt-0"
+            label-class=" pt-0"
             class="mb-0"
           >
             <b-form-input
@@ -193,6 +207,9 @@
           </b-form-group>
 
 
+         </b-col>
+
+  <b-col md="6">  
                     <div class="form-group">
                       <label for="country" class="username"> Country :</label
                       ><br />
@@ -211,10 +228,10 @@
                      
 
                     </div>
+
                  
 
-
-
+  </b-col>  <b-col md="6">  
 
                     <div class="form-group">
                       <label for="country" class="username"> Region :</label
@@ -235,6 +252,8 @@
 
                     </div>
              
+             
+           </b-col>    <b-col md="6">  
 
                     <div class="form-group">
                       <label for="country" class="username"> Division :</label
@@ -250,9 +269,7 @@
                       ></multiselect>
                     </div>
 
-
-
-
+</b-col>   <b-col md="6">  
 
                      <div class="form-group">
                       <label for="country" class="username">
@@ -271,7 +288,7 @@
                     </div>
 
 
-
+</b-col>   <b-col md="6">  
 
                       <div class="form-group">
                       <label for="Neighbor" class="username"> Neighbor :</label
@@ -287,14 +304,14 @@
                     </div>
                  
 
-
+  </b-col>   <b-col md="6">  
 
 
           <b-form-group
             label-cols-lg="12"
             label="City"
             label-size="md"
-            label-class="font-weight-bold pt-0"
+            label-class=" pt-0"
             class="mb-0"
           >
             <b-form-input
@@ -305,11 +322,12 @@
             >
             </b-form-input>
           </b-form-group>
+          </b-col>  <b-col md="6">  
           <b-form-group
             label-cols-lg="12"
             label="Primary Phone"
             label-size="md"
-            label-class="font-weight-bold pt-0"
+            label-class="pt-0"
             class="mb-0"
           >
             <b-form-input
@@ -320,11 +338,12 @@
             >
             </b-form-input>
           </b-form-group>
+          </b-col>   <b-col md="6">  
           <b-form-group
             label-cols-lg="12"
             label="Secondary Phone"
             label-size="md"
-            label-class="font-weight-bold pt-0"
+            label-class=" pt-0"
             class="mb-0"
           >
             <b-form-input
@@ -335,11 +354,13 @@
             >
             </b-form-input>
           </b-form-group>
+
+          </b-col>    <b-col md="6">  
           <b-form-group
             label-cols-lg="12"
             label=" Brief Description"
             label-size="md"
-            label-class="font-weight-bold pt-0"
+            label-class=" pt-0"
             class="mb-0"
           >
             <b-form-textarea
@@ -351,11 +372,12 @@
             ></b-form-textarea>
           </b-form-group>
 
+        </b-col>     <b-col md="6">  
           <b-form-group
             label-cols-lg="12"
             label="Purpose Of Network"
             label-size="md"
-            label-class="font-weight-bold pt-0"
+            label-class=" pt-0"
             class="mb-0"
           >
             <b-form-textarea
@@ -367,11 +389,13 @@
             ></b-form-textarea>
           </b-form-group>
 
+
+  </b-col>    <b-col md="6">  
           <b-form-group
             label-cols-lg="12"
             label="Special Needs"
             label-size="md"
-            label-class="font-weight-bold pt-0"
+            label-class=" pt-0"
             class="mb-0"
           >
             <b-form-textarea
@@ -382,20 +406,59 @@
               max-rows="6"
             ></b-form-textarea>
           </b-form-group>
+
+          </b-col>   <b-col md="6">  
           <b-form-group
             label-cols-lg="12"
             label="Network Image"
             label-size="md"
-            label-class="font-weight-bold pt-0"
+            label-class="pt-0"
             class="mb-0"
           >
-            <input @change="onLogoChange"  type="file" accept="image/*" />
+            <input @change="onLogoChangge" hidden type="file" id="net_pic" ref="net_pic" accept="image/*" />
+  
+             <div id="preview">
+                      <img v-if="logoimg_url" :src="logoimg_url" />
+                    </div>
+                    <br />
+                    <div class="text-center">
+                      <b-button
+                        v-if="logoimg_url"
+                        @click="chooseNlogo()"
+                        variant="primary"
+                        class="mt-3 text-center"
+                      >
+                        change Image
+                      </b-button>
+                    </div>
+
+
+                      <div
+                      class="image-upload-wrap"
+                      v-if="!logoimg_url"
+                      @click="chooseNlogo()"
+                    >
+                      <a
+                        href="#"
+                        data-toggle="modal"
+                        data-target="#createalbumModal"
+                      >
+                        <div class="drag-text">
+                          <i class="fa fa-plus"> </i>
+                          <h3 class="username">Business Logo</h3>
+                        </div>
+                      </a>
+                      <div></div>
+                    </div>
+
+
           </b-form-group>
+          </b-col>   <b-col md="6">  
           <b-form-group
             label-cols-md="6"
             label="Allow Business to join network"
             label-size="md"
-            label-class="font-weight-bold pt-0"
+            label-class=" pt-0"
             class="mb-0"
           >
             <b-form-checkbox
@@ -407,6 +470,7 @@
             >
             </b-form-checkbox>
           </b-form-group>
+          </b-col> </b-row>
           <b-alert :show="success.state" variant="info">
             {{ success.msg }}</b-alert
           >
@@ -459,6 +523,9 @@ export default {
   
   data() {
     return {
+      page: 1,
+      infiniteId:1,
+      logoimg_url: null,
       BaseURL: process.env.VUE_APP_API_URL,
       showModal: false,
       selectedFile: "",
@@ -584,6 +651,11 @@ export default {
 
   methods: {
 
+    chooseNlogo(){
+    document.getElementById("net_pic").click();
+ 
+},
+
       Country() {
       this.$store
         .dispatch("auth/country")
@@ -598,8 +670,10 @@ export default {
 
   
 
-     onLogoChange(e) {
+     onLogoChangge(e) {
       this.logo = e.target.files[0];
+      const logofile = e.target.files[0];
+      this.logoimg_url = URL.createObjectURL(logofile);
       
     },
 
@@ -678,23 +752,50 @@ export default {
 
 
      getNetworks() {
-       this.loader = true;
+       
        console.log("network loading !!!!!")
       this.$store
         .dispatch("profile/profileNetwork")
         .then(() => {
           console.log("hey yeah");
-          this.loader = false;
+         
         })
         .catch((err) => {
           console.log({ err: err });
-          this.loader = false;
+         
         });
     },
+    
 
+
+
+
+
+    infiniteHandler($state) {
+      console.log("network?page=" + this.page);
+      axios
+        .get("network?page=" + this.page)
+        .then(({ data }) => {
+          console.log(data);
+          console.log("yoyoyooyoy");
+          if (data.data.length) { 
+            this.page += 1;
+
+            this.profileNetworks.push(...data.data);
+            $state.loaded();
+          } else {
+            $state.complete();
+          }
+        })
+        .catch((err) => {
+          console.log({ err: err });
+        });
+    },
+    
 
     // Add network to the database but doesn't work correctly for now
     addNetwork(newNetwork) {
+      console.log("jkjkjk");
       this.loader = true;
       axios
         .post("network", newNetwork)
@@ -705,6 +806,9 @@ export default {
             this.success.state = false;
           }, 5000);
           this.getNetworks();
+          
+           this.page = 1;
+      this.infiniteId += 1;
         })
         .catch((err) => {
 
@@ -835,6 +939,12 @@ export default {
       this.createdNetwork.purpose = network.purpose;
       this.createdNetwork.special_needs = network.special_needs;
       this.createdNetwork.allow_business = network.allow_business;
+      
+      this.createdNetwork.country = network.country;
+      this.createdNetwork.region = network.region;
+      this.createdNetwork.division = network.division;
+      this.createdNetwork.municipality = network.municipality;
+      this.createdNetwork.localities = network.localities;
       this.showmodal(true, "edit");
     },
     selectImage(e) {

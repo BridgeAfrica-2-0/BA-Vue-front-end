@@ -150,7 +150,10 @@ import VueAgile from 'vue-agile'
 
 Vue.use(VueAgile);
 
+import CoolLightBox from 'vue-cool-lightbox'
+import 'vue-cool-lightbox/dist/vue-cool-lightbox.min.css'
 
+Vue.use(CoolLightBox)
 
 
 Vue.component("v-select", vSelect);
@@ -185,9 +188,9 @@ new Vue({
 
       axios.interceptors.request.use(function (config) {
 
-
+          if(user != null){  
           config.headers.Authorization =  `Bearer  ${user.accessToken}`;
-
+        }
           return config;
       });
 

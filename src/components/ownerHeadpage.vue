@@ -71,7 +71,7 @@
             type="file"
             id="logo_pic"
             @change="setlogo"
-            accept="video/mpeg, video/mp4, image/*"
+            accept=" image/*"
             hidden
             ref="logo_pic"
           />
@@ -308,9 +308,21 @@ selectCover(){
             },
           })
           .then((response) => {
+
+
+
+
+         
+
             console.log(response);
 
-           
+
+               this.$store
+      .dispatch("profile/loadUserPostIntro", null)
+      .then((response) => {
+         console.log(response);
+
+
 
             this.flashMessage.show({
               status: "success",
@@ -323,6 +335,17 @@ selectCover(){
 
              loader.hide()
       this.$refs["modalxl"].hide();
+
+
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
+
+           
+
+
 
           })
 
@@ -397,12 +420,19 @@ selectCover(){
           .then((response) => {
             console.log(response);
 
-           
+            
 
+               this.$store
+      .dispatch("profile/loadUserPostIntro", null)
+      .then((response) => {
+         console.log(response);
+
+
+         
             this.flashMessage.show({
               status: "success",
 
-              message: "Profile Updated",
+              message: "Cover  Updated",
 
               blockClass: "custom-block-class",
             });
@@ -410,6 +440,13 @@ selectCover(){
 
              loader.hide()
       this.$refs["modalxl"].hide();
+      
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
+
 
           })
 
@@ -483,8 +520,6 @@ computed: {
 
      info :function(){
 
-       console.log("helloodhdjdhdjdd dhdjdhdd sgysjshs");
-       console.log(this.$store.getters['profile/getUserPostIntro'])
         return this.$store.getters['profile/getUserPostIntro'];
       }
 

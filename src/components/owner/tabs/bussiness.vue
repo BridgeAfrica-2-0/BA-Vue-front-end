@@ -378,14 +378,24 @@
             >
               <div class="people-style shadow">
                 <b-link
-                  v-b-modal.createBusinessModal
-                  @click="editBusiness(business.id)"
                 >
                   <div class="float-right">
-                    <b-icon
+
+
+                    <b-dropdown size="lg"  variant="link" toggle-class="text-decoration-none" no-caret>
+    <template #button-content>
+     <b-icon
                       icon="three-dots-vertical"
                       class="icon-size"
                     ></b-icon>
+    </template>
+    <b-dropdown-item 
+                  v-b-modal.createBusinessModal
+                  @click="editBusiness(business.id)">Edit</b-dropdown-item>
+    <b-dropdown-item > Delete</b-dropdown-item>
+  </b-dropdown>
+  
+                    
                   </div>
                 </b-link>
                 <b-row>
@@ -423,7 +433,7 @@
                         :text="business.about_business"
                         link="#"
                         less-str="read less"
-                        :max-chars="55"
+                        :max-chars="100"
                       >
                       </read-more>
                     </p>
@@ -432,6 +442,10 @@
               </div>
             </b-col>
           </b-row>
+
+          
+      <infinite-loading :identifier="infiniteId"   ref="infiniteLoading"   @infinite="infiniteHandler"></infinite-loading>
+
         </div>
       </div>
     </div>
@@ -453,6 +467,8 @@ export default {
   data() {
     return {
       useas: "",
+      page:"",
+      infiniteId:2,
       editbiz: "",
       selectedusecase: "",
       keywordds:[],
@@ -528,6 +544,28 @@ export default {
 
   methods: {
 
+    
+    infiniteHandler($state) {
+      console.log("business/userBusiness/" + this.page);
+      axios
+        .get("user/post/" + this.page)
+        .then(({ data }) => {
+          console.log(data);
+          if (data.data.length) { 
+            this.page += 1;
+
+            this.profilebusiness.push(...data.data);
+            $state.loaded();
+          } else {
+            $state.complete();
+          }
+        })
+        .catch((err) => {
+          console.log({ err: err });
+        });
+    },
+
+
     editBusiness(id){
 
 
@@ -560,8 +598,9 @@ export default {
       this.locality=business.neigborhood;
       this.email=business.email;
       this.time_zone=business.timeZone;
-      this.business_keyword=business.keywords;
-      this.address=business.address;
+      this.business_keyword=business.business_keyword;
+      this.address=business.address; 
+
       
 
     }
@@ -852,6 +891,9 @@ export default {
             });
 
             loader.hide();
+            this.page = 1;
+      this.infiniteId += 1;
+
             resolve(true);
           })
           .catch((err) => {
@@ -949,13 +991,15 @@ export default {
   },
 
   computed: {
-      selectedKeywords: function () {
+     
+     selectedKeywords: function () {
       let selectedUsers = [];
       this.business_keyword.forEach((item) => {
         selectedUsers.push(item.id);
       });
       return selectedUsers;
     },
+
 
     profilebusiness: function() {
       return this.$store.state.profile.profileBusiness;

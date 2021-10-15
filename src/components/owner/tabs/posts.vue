@@ -102,8 +102,7 @@
           id="modal-5"
           title=" Edit Intro"
           ref="modal"
-          @show="resetModal"
-          @hidden="resetModal"
+         
           @ok="handleOk"
         >
           <div class="">

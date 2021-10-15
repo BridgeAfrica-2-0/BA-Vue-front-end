@@ -14,7 +14,7 @@
 
           <h6 class="float-right text-success font-weight-bolder">
             <b-button variant="outline-primary" class="upgrade-btn" size="sm"
-              ><b-icon-star></b-icon-star> &nbsp;&nbsp;Upgrade Plan</b-button
+              ><b-icon-star></b-icon-star> &nbsp;&nbsp; {{$t("business.upgrade_plan")}}</b-button
             >
           </h6>
         </h4>
@@ -25,40 +25,40 @@
         <div class="text-lost">
           <b>  {{business.name}}  </b>
           <p class="mb-1">
-              {{business.followers}}  Community <br />
+              {{business.followers}} {{$t("business.community")}} <br />
             <span class=""
-              >Current Plan: <span class="text-success">Basic</span></span
+              >{{$t("business.current_plan")}}: <span class="text-success">{{$t("business.basic")}}</span></span
             >
           </p>
-          <p class="mb-1 mb-3"> {{business.category}} </p>
+          <p class="mb-1 mb-3"> <span v-for="(item,i) in business.category" :key="i">{{item.name}},</span> </p>
           <p class="mb-1">
             <b-icon-person-fill class="text-primary"></b-icon-person-fill>
               <router-link :to="'business_owner/'+business.id">
-                 Visit Profile
+                 {{$t("business.visit_profile")}}
           </router-link>
 
 
           </p>
           <p class="mb-1 ">
             <b-icon-chat-fill class="text-primary"></b-icon-chat-fill>
-            Message
+            {{$t("business.messages")}}
             <span class="badge rounded-pill bg-primary float-right mt-1">
               {{business.message}}
             </span>
           </p>
           <p class="mb-1 ">
             <b-icon-bell-fill class="text-primary"></b-icon-bell-fill>
-            Notifications
+            {{$t("business.notifications")}}
             <span class="badge rounded-pill bg-primary float-right mt-1">  {{business.notification}} </span>
             
           </p>
           <p class="mb-1 ">
             <b-icon-globe class="text-primary"></b-icon-globe>
-            <a > Visit Website</a>
+            <a> {{$t("business.visit_website")}}</a>
           </p>
           <p class="mb-1 ">
             <b-icon-shop class="text-primary"></b-icon-shop>
-            Market Place
+            {{$t("business.market_place")}}
           </p>
         </div>
       </div>

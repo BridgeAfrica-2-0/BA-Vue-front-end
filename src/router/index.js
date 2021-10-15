@@ -41,6 +41,7 @@ import networks from "@/views/networks";
 import dashboard from "@/views/dashboard";
 
 import welcome from "@/views/welcome";
+import payment from "@/views/payment";
 
 Vue.use(VueRouter);
 
@@ -63,6 +64,11 @@ const routes = [
     path: "/market",
     name: "market",
     component: market,
+  },
+  {
+    path: "/checkout",
+    name: "payment",
+    component: payment
   },
 
   {

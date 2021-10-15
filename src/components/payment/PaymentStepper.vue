@@ -62,16 +62,29 @@
 			</b-col>
 		</b-row>
 
-	<!-- Card stepper -->
+		
+		<b-row v-if="current_step == 1">
+			<!-- Card Stepper for Shipping Address Start -->
+			<b-col  class="my-4" cols="12">
+				<ShippingAdress/>
+			</b-col>
+			<!-- Card Stepper for Shipping Address End -->
+
+			<!-- Card Stepper for Order Start -->
+			<b-col class="my-4" cols="12">
+				<Order />
+			</b-col>
+			<!-- Card Stepper for Order End -->
+		</b-row>
+		<!-- Stepper Page 1  End -->
+
+
+
+
+
 		<b-row>
 			<b-col>
 				<div>
-					<b-card v-if="current_step == 1" class="card-style" title="STEP1">
-						<b-card-text>Something for first step.</b-card-text>
-						<b-button class="float-right" variant="primary" @click="onClickNext"
-							>Next</b-button
-						>
-					</b-card>
 					<b-card v-if="current_step == 2" class="card-style" title="STEP2">
 						<b-card-text>Do something for second step.</b-card-text>
 						<b-button
@@ -129,8 +142,14 @@
 	</b-container>
 </template>
 <script>
+	import Order from "./Order";
+	import ShippingAdress from "./ShippingAdress";
 	export default {
 		name: "PaymentStepper",
+		components: {
+			Order,
+			ShippingAdress
+		},
 		data() {
 			return {
 				current_step: 1,

@@ -1,77 +1,57 @@
-<template>
-<div class="container">
-<div class="card mt-5 mx-auto" style="width:50rem;">
-     <div class="card-header bg-white h-50">
-    Review and confirm your Order
-    <br/>
-    Business:Largo
-  </div>
-  <div class="card-body">
-   
-   <div class="container">
-  <div class="row">
-    <div class="col">
-    
-<div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-  <div class="carousel-inner">
-    <div class="carousel-item active">
-      <img class="d-block w-100" src="@/assets/headset.jpg" alt="First slide">
-    </div>
-    <div class="carousel-item">
-      <img class="d-block w-100" src="@/assets/headset.jpg" alt="Second slide">
-    </div>
-    <div class="carousel-item">
-      <img class="d-block w-100" src="@/assets/headset.jpg" alt="Third slide">
-    </div>
-  </div>
-  <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="sr-only">Previous</span>
-  </a>
-  <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="sr-only">Next</span>
-  </a>
-</div>
-
-
-    </div>
-    <div class="col-2">
-     Name of item:
-     <br/><br/>
-     Shipping:
-     <br/><br/>
-     Total:
-    </div>
-    <div class="col-2">
-      500XAf
-     <br/><br/>
-     100
-     <br/><br/>
-     1000
-    </div>
-    <div class="col">
-    <button type="button" class="btn btn-warning px-5 mt-5">Order</button>
-    </div>
-  </div>
-  
-</div>
-
-
-  </div>
-</div>
-</div>
+<template
+	><b-card class="">
+		<div class="card-header font-weight-bold bg-white h-50">
+			Review and confirm your Order (1 item)
+			<br />
+			Business: Largo
+		</div>
+		<div class="card-body">
+			<div>
+				<div class="row">
+					<div class="col">
+						<ProductCaroussel/>
+					</div>
+					<div class="col-2">
+						Name of item:
+						<br /><br />
+						Shipping:
+						<br /><br />
+						Total:
+					</div>
+					<div class="col-4">
+						500XAf
+						<br /><br />
+						100
+						<br /><br />
+						1000
+					</div>
+				</div>
+				<div class="row">
+					<div class="col">
+						<button class="btn btn-primary float-right px-5 shadow-sm">
+							Order
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</b-card>
 </template>
 
 <script>
-export default {
+import ProductCaroussel from "./ProductCaroussel"
+	export default {
+		name: "Order", 
+		components: {
+			ProductCaroussel
+		}
 
-}
+	};
 </script>
 
 <style>
-.user_img{
-     width:40px;
-    height: 40px;
-}
+	.user_img {
+		width: 40px;
+		height: 40px;
+	}
 </style>

@@ -24,13 +24,26 @@
           label-class="font-weight-bold pt-0 username"
           class="mb-0 text"
         >
-          <b-form-input
-            id="textarea"
-          
+        <div class="row align-items-start">
+          <div class="col">
+
+          <b-form-tags
+            
+            input-id="tags-separators"
+            separator=" ,;"
             placeholder="Enter keyword alert..."
             rows="3"
             max-rows="6"
-          ></b-form-input>
+            no-add-on-enter
+            required
+            v-model="value"
+          ></b-form-tags>
+          </div>
+          <div class="col">
+
+            <b-button type="button" @click="addKeyword" variant="primary">Ajouter</b-button>
+          </div>
+        </div>
         </b-form-group>
       </b-container>
       <hr />
@@ -87,7 +100,7 @@
               </b-row>
               <b-row>
                 <b-col cols="12" class="mt-2">
-                  <p class="text-justify text">
+                  <p class="text-justify text"> testt
                     Lorem Ipsum is simply dummy text of the printing and
                     typesetting industry. Lorem Ipsum has been the industry's
                     standard dummy text ever since the 1500s, Lorem Ipsum is
@@ -114,7 +127,26 @@
 
 <script>
 export default {
-  name: "keywordAlert"
+  name: "keywordAlert",
+
+  data(){
+    return {
+      value: []
+      
+    }
+  },
+
+  methods:{
+    addKeyword(){ console.log("addddddddddddddddddddddddddddddd")
+      console.log(this.value);
+      let listTag = "";
+      for (let i=0 ; i<this.value.length; i++){
+       listTag= listTag+this.value[i]+"," ;
+      }
+      console.log(listTag)
+
+    }
+  }
 };
 </script>
 

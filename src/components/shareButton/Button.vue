@@ -8,14 +8,14 @@
 
     <Box
       id="modal-1"
-      title="Share people"
+      title="Share to people"
       placeholder="Search for people..."
       subtitle="All peoples"
     />
 
     <Box
       id="modal-2"
-      title="Share network"
+      title="Share to network"
       placeholder="Search for network..."
       subtitle="All networks"
     >
@@ -26,6 +26,30 @@
             <span class="mr-auto">Share as</span><br />
             <span class="mr-auto">J. Circlehead</span>
           </p>
+        </div>
+      </template>
+    </Box>
+
+    <Box
+      id="modal-5"
+      title="Send Inbox"
+      placeholder="Search for network..."
+      subtitle="All networks"
+    >
+      <template v-slot:owner>
+        <div class="d-flex flex-direction py-3 px-2 mb-2 border">
+          <div class="d-flex align-items-center py-3 px-2 mb-2">
+            <b-avatar class="mr-3"></b-avatar>
+            <p>
+              <span class="mr-auto">Share as</span><br />
+              <span class="mr-auto">2h</span>
+            </p>
+          </div>
+          <div class="d-flex align-items-center py-3 px-2 mb-2">
+            <p>
+              Le lorem ipsum est, en imprimerie, une provisoire pour calibrer une mise en page, le texte définitif venant remplacer le faux-texte dès qu'il est prêt ou que la mise en page est achevée. Généralement, on utilise un texte en faux latin, le Lorem ipsum ou Lipsum.
+            </p>
+          </div>
         </div>
       </template>
     </Box>
@@ -60,9 +84,10 @@
         <b-icon-reply-fill class="col-bg text-ored"></b-icon-reply-fill
         ><span class="sr-only">Search</span>
       </template>
+
       <b-dropdown-text class="box-title"> Share </b-dropdown-text>
+
       <b-dropdown-item
-        href="#"
         class="d-flex py-2 cursor-pointer"
         @click="shareToYourProfile"
       >
@@ -74,7 +99,7 @@
         </div>
       </b-dropdown-item>
 
-      <b-dropdown-item href="#" class="d-flex py-2 cursor-pointer">
+      <b-dropdown-item class="d-flex py-2 cursor-pointer" v-b-modal.modal-4>
         <span class="text-ored">
           <b-icon-bell-fill class="col-bg"></b-icon-bell-fill>
         </span>
@@ -83,11 +108,7 @@
         </div>
       </b-dropdown-item>
 
-      <b-dropdown-item
-        href="#"
-        class="d-flex py-2 cursor-pointer"
-        v-b-modal.modal-2
-      >
+      <b-dropdown-item class="d-flex py-2 cursor-pointer" v-b-modal.modal-2>
         <span class="text-ored">
           <b-icon-bell-fill class="col-bg"></b-icon-bell-fill>
         </span>
@@ -96,11 +117,7 @@
         </div>
       </b-dropdown-item>
 
-      <b-dropdown-item
-        href="#"
-        class="d-flex py-2 cursor-pointer"
-        v-b-modal.modal-3
-      >
+      <b-dropdown-item class="d-flex py-2 cursor-pointer" v-b-modal.modal-3>
         <span class="text-ored">
           <b-icon-bell-fill class="col-bg"></b-icon-bell-fill>
         </span>
@@ -110,7 +127,6 @@
       </b-dropdown-item>
 
       <b-dropdown-item
-        href="#"
         class="d-flex py-2 cursor-pointer"
         id="sharing-community"
         data-toggle="popover"
@@ -124,9 +140,11 @@
           <span>Share to commnunity</span>
         </div>
       </b-dropdown-item>
+
       <b-popover target="sharing-community" triggers="hover">
         <div class="popover-body">
           <div
+            @mousedown="open('modal-1')"
             class="
               d-inline-flex
               flex-row
@@ -145,7 +163,7 @@
           </div>
 
           <div
-            v-b-modal.modal-2
+            @mousedown="open('modal-5')"
             class="
               d-inline-flex
               flex-row
@@ -164,7 +182,7 @@
           </div>
 
           <div
-            v-b-modal.modal-3
+            @mousedown="open('modal-5')"
             class="
               d-inline-flex
               flex-row
@@ -184,7 +202,7 @@
         </div>
       </b-popover>
 
-      <b-dropdown-item href="#" class="d-flex py-2 cursor-pointer">
+      <b-dropdown-item class="d-flex py-2 cursor-pointer">
         <span class="text-ored">
           <b-icon-bell-fill class="col-bg"></b-icon-bell-fill>
         </span>
@@ -194,7 +212,6 @@
       </b-dropdown-item>
 
       <b-dropdown-item
-        href="#"
         class="d-flex py-2 cursor-pointer"
         id="sharing-via"
         data-toggle="popover"
@@ -285,8 +302,24 @@ export default {
   },
 
   methods: {
+    open(id) {
+      this.$bvModal.show(id);
+    },
     shareToYourProfile: async function () {
-      const request = await this.$repository.share.userPost();
+      // type
+
+      /*
+        type . profile, network, business
+        si type profile on ne met pas le target
+      */
+      const data = {
+        profile:"",
+        post_id:"", // id du post
+        source_id: "" // auteur du post
+
+      }
+      
+      const request = await this.$repository.share.userPost(data);
     },
   },
 };
@@ -317,5 +350,8 @@ li:hover {
 
 .box-title {
   border-bottom: 1px solid #ced4da;
+}
+.flex-direction{
+  flex-direction: column;
 }
 </style>

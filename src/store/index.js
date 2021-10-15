@@ -37,3 +37,5 @@ export default new Vuex.Store({
     market
   },
 });
+
+

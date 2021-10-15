@@ -12,6 +12,8 @@
       <fas-icon class="icons" :icon="['fas', 'users']" size="lg" />
       People
     </h6>
+    <ShareButton />
+  
 
     <NotFound v-if="!peoples.length" :title="title" />
     <div v-else>
@@ -34,11 +36,14 @@ import { loader, search } from "@/mixins";
 import Sponsor from "@/components/search/sponsoredBusiness";
 import People from "@/components/search/people";
 
+import {ShareButton} from "@/components/shareButton";
+
 export default {
   mixins: [loader, search],
   components: {
     Sponsor,
-    People
+    People,
+    ShareButton
   },
 
   computed: {

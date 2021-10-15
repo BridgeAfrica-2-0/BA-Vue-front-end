@@ -4,8 +4,9 @@
     <hr />
     <b-link class="mt-4 text-decoration-none" v-b-modal.modal-9>
       <b-icon icon="plus" variant="primary"></b-icon>
-      Add Workplace</b-link
-    >
+      Add Workplace 
+    </b-link>
+
     <b-list-group-item
       class="d-flex align-items-center mb-4"
       style="border: none"
@@ -16,13 +17,7 @@
             class="media border-botmediatom mt-3 mb-4"
             v-for="workPlace in work"
             :key="workPlace.id"
-          >
-            <!--  <img
-              src="@/assets/img/about3.jpg"
-              alt="John Doe"
-              class="mr-2 picture-size"
-            /> -->
-            
+          > 
             <div class="media-body">
               <h6 class="mb-0">
                 <b>{{ workPlace.company_name }} ({{workPlace.position}})</b>
@@ -135,16 +130,6 @@
       ></b-form-datepicker>
     </b-modal>
 
-
-
-
-
-
-
-
-
-
-
     <b-modal
       ref="add-contact"
       id="modal-9"
@@ -162,7 +147,7 @@
       </div>
       <b-form-input
         class="mt-2"
-        v-model="workPlaceInput.company_name"
+        v-model="workPlaceInput.companyName"
         placeholder="Company"
       ></b-form-input>
       <b-form-input

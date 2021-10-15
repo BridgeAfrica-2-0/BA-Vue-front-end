@@ -12,7 +12,7 @@
 
         <div class="step-2">
           <b-card-text class="w-75 mx-auto mt-5 text-left">
-            <div class="text-center">You will get an OTP by SMS</div>
+            <div class="text-center">You will get an OTP by SMS</div> 
           </b-card-text>
           <b-form class="w-75 mx-auto text-center">
             <md-field>

@@ -1,13 +1,14 @@
 {
     "message": "Un message",
-    
+
     "email": "E-mail",
     "password": "Mot de passe",
     "Privacy_policies": "Les politiques de confidentialité",
     "login_with_google": "connexion google",
     "Login_With_Facebook": "connexion Facebook ",
     "or": " Ou ",
-    "french": " Française ",
+    "OR": "OU",
+    "french": " Français ",
     "english": " Anglais ",
     "the_email_is_required": "L'e-mail est requis",
     "invalid_email": "Email invalide",
@@ -16,19 +17,54 @@
     "signup": "S'inscrire ",
     "terms_and_conditions": " Termes et conditions",
     "forget_password": "Mot de passe oublié ",
-    "by_loging_in_you_agree_to_bridge_africa": "En vous connectant, vous acceptez de jeter un pont sur l'Afrique ",
+    "by_loging_in_you_agree_to_bridge_africa": "En vous connectant à Bridge Africa vous acceptez ses ",
     "the_user": "The User",
-    "was_saved_with_success": "a été sauvé avec succès" ,
-    "Sign_Up_On_Bridge_Africa":"Sign Up On Bridge Africa",
+    "was_saved_with_success": "a été sauvgardé avec succès",
+    "Sign_Up_On_Bridge_Africa": "Connectez vous à Bridge Africa",
     "confirm_password": "Confirmez le mot de passe",
     "Tel": "Téléphone",
-    "Last_Name":"Nom de famille",
-    "First_Name":"prénom",
-   
+    "Last_Name": "Nom de famille",
+    "First_Name": "Prénom",
+
     "First_Name_is_required": "Le prénom est requis",
     "last_Name_is_required": "Le nom de famille est requis",
-    "Sign_Up_with_facebook": "Sign Up with facebook",
-    "Login_To_Bridge_Africa": "Connectez-vous pour Bridge Africa"
-    
-    
-  }
+    "Sign_Up_with_Google": "Connexion avec Google",
+    "Sign_Up_with_facebook": "Connexion avec facebook",
+    "Login_To_Bridge_Africa": "Connectez-vous à Bridge Africa",
+
+
+    "Hello": "Salut",
+    "let's_get_started": "Commençons",
+    "Use_BridgeAfirca.com_as_a": "Use BridgeAfirca.com as a",
+    "Person": "Personne",
+    "Business": "Entreprise",
+    "Complete_Profile": "Completez le profil",
+    "Follow_Businesses": "Suivez des entreprises",
+    "Follow_People": "Suivez des personnes",
+    "Tutorial": "Tutoriel",
+    "ADD_PROFILE_PHOTO": "AJOUTEZ UNE PHOTO DE PROFIL",
+    "DOB": "Date de naissance",
+    "Gender": "Sexe",
+    "Country": "Pays",
+    "Select_Country": "Choisissez un pays",
+    "Region": "Région",
+    "Select_Region": "Choisissez une région",
+    "City": "Ville",
+    "Neighbor": "Quartier",
+    "Enter_a_location": "Entrez une localisation",
+    "Map": "Carte",
+    "Satellite": "Satellite",
+    "Next": "Suivant",
+    "Community": "Commauté",
+    "Message": "Message",
+    "Direction": "Direction",
+    "Back": "Précédent",
+    "video_name": "nom de la vidéo",
+    "video_description": "description de la vidéo",
+    "Finish": "Terminez"
+
+
+
+
+
+}

@@ -154,13 +154,13 @@
           </b-card>
         </b-collapse>
         <!--end network section-->
-        <Button
+        <!--<Button
           @click.native="onProcess"
           title="Search"
           class="mt-4"
           fas="fas fa-search  fa-lg btn-icon"
           style="align-items: center"
-        />
+        /> -->
       </b-card>
     </b-collapse>
   </div>
@@ -171,7 +171,7 @@ import _ from "lodash";
 
 import { mapActions, mapGetters } from "vuex";
 
-import Button from "@/components/Button";
+//import Button from "@/components/Button";
 
 const options = [
   { text: "Follower", value: "Follower" },
@@ -180,9 +180,9 @@ const options = [
 ];
 
 export default {
-  components: {
+  /* components: {
     Button,
-  },
+  },*/
   data: () => ({
     created_at: null,
     isRecentPost: false,
@@ -270,6 +270,16 @@ export default {
         });
       }
     },
+
+    selectedPeople: function () {
+      this.onProcess();
+    },
+    selectedBuisness: function () {
+      this.onProcess();
+    },
+    selectedNetwork: function () {
+      this.onProcess();
+    },
   },
 
   computed: {
@@ -285,11 +295,13 @@ export default {
       lauchLoader: "search/LOADING",
       page: "search/SET_CURRENT_PAGINATION_PAGE",
       stack: "search/STACK_VALUE",
+      reset: "search/RESET_RESULT",
     }),
 
     async _onFindPost(e) {
       try {
         this.lauchLoader(true);
+        this.reset();
         const request = await this.$repository.search.findPostByKeyword({
           ...e,
           page: 1,
@@ -342,6 +354,7 @@ export default {
 
     async _onFind(data) {
       this.lauchLoader(true);
+      this.reset();
       const credentials = Object.keys(data);
       let render = [];
 
@@ -380,7 +393,7 @@ export default {
       this.lauchLoader(false);
     },
 
-    onProcess() {
+    onProcess: _.debounce(function (e) {
       if (!this.keyword) {
         this.onNotified("the keyword does not exist");
         return false;
@@ -401,7 +414,7 @@ export default {
       this.stack(data);
       this.newCallbackForPagination(this._onFind);
       this._onFind(data);
-    },
+    }, 2000),
 
     showRecentPost() {
       this.isRecentPost = !this.isRecentPost;

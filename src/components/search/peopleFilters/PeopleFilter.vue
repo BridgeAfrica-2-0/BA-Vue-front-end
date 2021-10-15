@@ -132,12 +132,12 @@
           </b-card>
         </b-collapse>
         <!--end network section-->
-        <Button
+        <!---<Button
           @click.native="onProcess"
           title="Search"
           class="mt-4"
           fas="fas fa-search  fa-lg btn-icon "
-        />
+        /> -->
       </b-card>
     </b-collapse>
   </div>
@@ -154,12 +154,12 @@ const options = [
   { text: "Community", value: "Community" },
 ];
 
-import Button from "@/components/Button";
+//import Button from "@/components/Button";
 
 export default {
-  components: {
+  /*components: {
     Button,
-  },
+  },*/
   data: () => ({
     profession: null,
     rootSectionIsVisible: false,
@@ -174,6 +174,18 @@ export default {
     optionsNetwork: [...options, { text: "Member", value: "Member" }],
   }),
 
+  watch: {
+    selectedPeople: function () {
+      this.onProcess();
+    },
+    selectedBuisness: function () {
+      this.onProcess();
+    },
+    selectedNetwork: function () {
+      this.onProcess();
+    },
+  },
+
   methods: {
     ...mapActions({
       userStore: "search/FIND_USER",
@@ -181,13 +193,14 @@ export default {
       setCallback: "search/SET_CURRENT_PAGINATE_CALLBACK",
       stack: "search/STACK_VALUE",
       page: "search/SET_CURRENT_PAGINATION_PAGE",
+      reset: "search/RESET_RESULT",
     }),
 
     map(data, type) {
       return data.map((e) => `${type}_${e.toLowerCase()}`);
     },
 
-    onProcess() {
+    onProcess: _.debounce(function (e) {
       this.page(1);
       const user = this.map(this.selectedPeople, `user`);
       const buisness = this.map(this.selectedBuisness, `buisness`);
@@ -201,11 +214,12 @@ export default {
       this.stack({ payload: { ...data }, page: 1 });
       this.setCallback(this.$repository.search.findUserByParam);
       this._onFindUser({ payload: { ...data }, page: 1 });
-    },
+    },2000),
 
     async _onFindUser(payload) {
       try {
         this.lauchLoader(true);
+        this.reset();
         const request = await this.$repository.search.findUserByParam({
           payload,
           page: 1,

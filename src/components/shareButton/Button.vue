@@ -61,7 +61,11 @@
         ><span class="sr-only">Search</span>
       </template>
       <b-dropdown-text class="box-title"> Share </b-dropdown-text>
-      <b-dropdown-item href="#" class="d-flex py-2 cursor-pointer" @click="shareToYourProfile">
+      <b-dropdown-item
+        href="#"
+        class="d-flex py-2 cursor-pointer"
+        @click="shareToYourProfile"
+      >
         <span class="text-ored">
           <b-icon-bell-fill class="col-bg"></b-icon-bell-fill>
         </span>
@@ -141,6 +145,7 @@
           </div>
 
           <div
+            v-b-modal.modal-2
             class="
               d-inline-flex
               flex-row
@@ -149,7 +154,6 @@
               py-2
               cursor-pointer
             "
-            v-b-modal.modal-2
           >
             <span class="text-ored">
               <b-icon-bell-fill class="col-bg"></b-icon-bell-fill>
@@ -160,6 +164,7 @@
           </div>
 
           <div
+            v-b-modal.modal-3
             class="
               d-inline-flex
               flex-row
@@ -168,7 +173,6 @@
               py-2
               cursor-pointer
             "
-            v-b-modal.modal-3
           >
             <span class="text-ored">
               <b-icon-bell-fill class="col-bg"></b-icon-bell-fill>

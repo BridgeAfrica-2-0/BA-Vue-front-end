@@ -162,7 +162,7 @@
       </div>
       <b-form-input
         class="mt-2"
-        v-model="workPlaceInput.company_name"
+        v-model="workPlaceInput.companyName"
         placeholder="Company"
       ></b-form-input>
       <b-form-input
@@ -188,16 +188,16 @@
       >
         Currently Working
       </b-form-checkbox>
-      <label>Start Date</label>
+      <label for="startDate">Start Date</label>
       <b-form-datepicker
-        id="example-datepicker"
+        id="startDate"
         v-model="workPlaceInput.startDate"
         class="mb-2"
         placeholder="Start Date"
       ></b-form-datepicker>
-      <label>End Date</label>
+      <label for="endDate">End Date</label>
       <b-form-datepicker
-        id="example-datepicker"
+        id="endDater"
         v-model="workPlaceInput.endDate"
         class="mb-2"
         placeholder="End Date"
@@ -242,11 +242,13 @@ export default {
   },
 
   computed:{
-       work(){
+    work(){
+      console.log("this.$store.state.profile.profile_about.user_experience");
       return this.$store.state.profile.profile_about.user_experience;
     },
 
      workk(){
+       console.log("this.$store.state.profile.profile_about");
       return this.$store.state.profile.profile_about;
     }
 
@@ -317,6 +319,7 @@ export default {
 
     save() {
       console.log("Save/edit/delete WorkPlace User Profile About");
+      console.log(this.workPlaceInput);
       let method = "";
       if (this.index !== null) {
         this.educationAndWorks.workPlaces[this.index] = this.workPlaceInput;
@@ -342,6 +345,9 @@ export default {
             error,
             "not save/update/delete new workPlace user end error (2) +++++"
           );
+        // this.$store.dispatch("profile/loadUserProfileAbout", null);
+          // this.educationAndWorks.workPlaces = this.work;
+          // this.work = this.$store.state.profile.profile_about.user_experience;
         })
         .finally(() => {
           this.educationAndWorks = JSON.parse(

@@ -1188,7 +1188,8 @@ export default {
           if (response.errors) {
             console.log("Error from the server +++++++");
             throw new Error("Error from save/edit/delete workplace+++++");
-          }
+          };
+          // this.loadUserProfileAbout()
           context.commit("storeWorkPlace", {
             workPlace: payload.workPlace,
             method: payload.method

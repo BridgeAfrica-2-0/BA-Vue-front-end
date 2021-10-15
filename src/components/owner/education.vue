@@ -15,7 +15,7 @@
       <div class="datails">
         <div
           class="row"
-          v-for="education in this.$store.getters['profile/getProfileAboutEducationAndWorks'] " 
+          v-for="education in educations " 
           :key="education.school_name"
         >
           <div class="col">

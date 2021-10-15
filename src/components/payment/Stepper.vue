@@ -1,226 +1,246 @@
 <template>
 	<div>
-		<div class="container">
-			<div class="stepper">
-				<div class="steps">
-					<a class="step">
-						<span class="icon"></span>
-						<span class="label">checkout</span>
-						<div class="step-divider"></div>
-					</a>
-					<div class="step-divider"></div>
-					<a class="step">
-						<span class="icon"></span>
-						<span class="label">payment</span>
-					</a>
-					<div class="step-divider"></div>
-				</div>
+		<b-container class="">
+			<b-row>
+				<b-col>
+					<div class="stepper">
+						<b-container fluid>
+							<b-row>
+								<div class="steps">
+									<b-col>
+										<a class="step">
+											<span class="icon"></span>
+											<span class="label font-weight-bold">Payment</span>
+										</a>
+										<div class="step-divider"></div>
+									</b-col>
+									<b-col>
+										<a class="step">
+											<span class="icon"></span>
+											<span class="label font-weight-bold">Checkout</span>
+											<div class="step-divider"></div>
+										</a>
+										<div class="step-divider"></div>
+									</b-col>
+								</div>
+							</b-row>
 
-				<div v-show="stepflag == 1" class="border-top-1" id="stepnext">
-					<div class="card mt-2 mx-auto" style="width:50rem;">
-						<div class="card-body">
-							<div class="row">
-								<div class="col-sm p-4">
-									<h5>Shipping Address</h5>
+							<div v-show="stepflag == 1" class="border-top-1" id="stepnext">
+								<div class="card mt-2 mx-auto" style="width:50rem;">
+									<div class="card-body">
+										<div class="row">
+											<div class="col-sm p-4">
+												<h5>Shipping Address</h5>
+											</div>
+											<div class="col-sm p-4 ">
+												<a
+													href="#"
+													class="card-link text-uppercase float-right mr-5"
+													>Change</a
+												>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-sm  p-4">
+												<p class="card-text">Jack Doe. +2373XXXXXXXX</p>
+												<p>Camerron,youande,bastos.</p>
+											</div>
+											<div class="col-sm p-4"></div>
+										</div>
+									</div>
 								</div>
-								<div class="col-sm p-4 ">
-									<a href="#" class="card-link text-uppercase float-right mr-5"
-										>Change</a
-									>
-								</div>
-							</div>
-							<div class="row">
-								<div class="col-sm  p-4">
-									<p class="card-text">Jack Doe. +2373XXXXXXXX</p>
-									<p>Camerron,youande,bastos.</p>
-								</div>
-								<div class="col-sm p-4"></div>
-							</div>
-						</div>
-					</div>
 
-					<div class="card mt-5 mx-auto" style="width:50rem;">
-						<div class="card-header bg-white h-50">
-							Review and confirm your Order
-							<br />
-							Business:Largo
-						</div>
-						<div class="card-body">
-							<div>
-								<div class="row">
-									<div class="col">
-										<div
-											id="carouselExampleControls"
-											class="carousel slide"
-											data-ride="carousel"
-										>
-											<div class="carousel-inner">
-												<div class="carousel-item active">
-													<img
-														class="d-block w-100"
-														src="@/assets/img/payment/headset.jpg"
-														alt="First slide"
-													/>
+								<div class="card mt-5 mx-auto" style="width:50rem;">
+									<div class="card-header bg-white h-50">
+										Review and confirm your Order
+										<br />
+										Business:Largo
+									</div>
+									<div class="card-body">
+										<div>
+											<div class="row">
+												<div class="col">
+													<div
+														id="carouselExampleControls"
+														class="carousel slide"
+														data-ride="carousel"
+													>
+														<div class="carousel-inner">
+															<div class="carousel-item active">
+																<img
+																	class="d-block w-100"
+																	src="@/assets/img/payment/headset.jpg"
+																	alt="First slide"
+																/>
+															</div>
+															<div class="carousel-item">
+																<img
+																	class="d-block w-100"
+																	src="@/assets/img/payment/headset.jpg"
+																	alt="Second slide"
+																/>
+															</div>
+															<div class="carousel-item">
+																<img
+																	class="d-block w-100"
+																	src="@/assets/img/payment/headset.jpg"
+																	alt="Third slide"
+																/>
+															</div>
+														</div>
+														<a
+															class="carousel-control-prev"
+															href="#carouselExampleControls"
+															role="button"
+															data-slide="prev"
+														>
+															<span
+																class="carousel-control-prev-icon"
+																aria-hidden="true"
+															></span>
+															<span class="sr-only">Previous</span>
+														</a>
+														<a
+															class="carousel-control-next"
+															href="#carouselExampleControls"
+															role="button"
+															data-slide="next"
+														>
+															<span
+																class="carousel-control-next-icon"
+																aria-hidden="true"
+															></span>
+															<span class="sr-only">Next</span>
+														</a>
+													</div>
 												</div>
-												<div class="carousel-item">
-													<img
-														class="d-block w-100"
-														src="@/assets/img/payment/headset.jpg"
-														alt="Second slide"
-													/>
+												<div class="col-2">
+													Name of item:
+													<br /><br />
+													Shipping:
+													<br /><br />
+													Total:
 												</div>
-												<div class="carousel-item">
-													<img
-														class="d-block w-100"
-														src="@/assets/img/payment/headset.jpg"
-														alt="Third slide"
-													/>
+												<div class="col-2">
+													500XAf
+													<br /><br />
+													100
+													<br /><br />
+													1000
+												</div>
+												<div class="col">
+													<div class="buttons">
+														<button
+															v-show="stepflag == 3"
+															class="btn step-back"
+															@click="backstep"
+															disabled
+														>
+															Back
+														</button>
+														<button
+															class="btn step-next btn-warning px-5 mt-5"
+															@click="nextstep"
+														>
+															Order
+														</button>
+														<button
+															v-show="stepflag == 3"
+															class="btn step-complete "
+														>
+															Complete Step
+														</button>
+														<button
+															v-show="stepflag == 4"
+															class="btn step-finish "
+														>
+															Finish
+														</button>
+													</div>
 												</div>
 											</div>
-											<a
-												class="carousel-control-prev"
-												href="#carouselExampleControls"
-												role="button"
-												data-slide="prev"
-											>
-												<span
-													class="carousel-control-prev-icon"
-													aria-hidden="true"
-												></span>
-												<span class="sr-only">Previous</span>
-											</a>
-											<a
-												class="carousel-control-next"
-												href="#carouselExampleControls"
-												role="button"
-												data-slide="next"
-											>
-												<span
-													class="carousel-control-next-icon"
-													aria-hidden="true"
-												></span>
-												<span class="sr-only">Next</span>
-											</a>
-										</div>
-									</div>
-									<div class="col-2">
-										Name of item:
-										<br /><br />
-										Shipping:
-										<br /><br />
-										Total:
-									</div>
-									<div class="col-2">
-										500XAf
-										<br /><br />
-										100
-										<br /><br />
-										1000
-									</div>
-									<div class="col">
-										<div class="buttons">
-											<button
-												v-show="stepflag == 3"
-												class="btn step-back"
-												@click="backstep"
-												disabled
-											>
-												Back
-											</button>
-											<button
-												class="btn step-next btn-warning px-5 mt-5"
-												@click="nextstep"
-											>
-												Order
-											</button>
-											<button v-show="stepflag == 3" class="btn step-complete ">
-												Complete Step
-											</button>
-											<button v-show="stepflag == 4" class="btn step-finish ">
-												Finish
-											</button>
 										</div>
 									</div>
 								</div>
 							</div>
-						</div>
-					</div>
-				</div>
 
-				<div v-show="stepflag == 2" class="border-top-1" id="stepnext">
-					<div class="card mt-2 mx-auto" style="width:50rem;">
-						<div class="card-body">
-							<div class="row p-4">
-								<div class="col">
-									<img
-										class="d-block w-50"
-										src="@/assets/img/payment/mtn.png"
-										alt="Third slide"
-									/>
-								</div>
-								<div class="col">
-									<p class="p-3">MTN Mobile Money</p>
-								</div>
-								<div class="col">
-									<input
-										class="p-3"
-										type="radio"
-										name="drone"
-										value="huey"
-										checked
-									/>
+							<div v-show="stepflag == 2" class="border-top-1" id="stepnext">
+								<div class="card mt-2 mx-auto" style="width:50rem;">
+									<div class="card-body">
+										<div class="row p-4">
+											<div class="col">
+												<img
+													class="d-block w-50"
+													src="@/assets/img/payment/mtn.png"
+													alt="Third slide"
+												/>
+											</div>
+											<div class="col">
+												<p class="p-3">MTN Mobile Money</p>
+											</div>
+											<div class="col">
+												<input
+													class="p-3"
+													type="radio"
+													name="drone"
+													value="huey"
+													checked
+												/>
+											</div>
+										</div>
+										<div class="row p-4">
+											<div class="col">
+												<img
+													class="d-block w-50"
+													src="@/assets/img/payment/orange_money.png"
+													alt="Third slide"
+												/>
+											</div>
+											<div class="col">
+												<p class="p-3">Orange Money</p>
+											</div>
+											<div class="col">
+												<input type="radio" name="drone" value="huey" checked />
+											</div>
+										</div>
+										<div class="row p-4">
+											<div class="col">
+												<img
+													class="d-block w-25 "
+													src="@/assets/img/payment/gimac.jpg"
+													alt="Third slide"
+												/>
+											</div>
+											<div class="col">
+												<p class="p-3">GIMAC</p>
+											</div>
+											<div class="col">
+												<input
+													type="radio"
+													name="drone"
+													class="mt-3"
+													value="huey"
+													checked
+												/>
+											</div>
+										</div>
+										<div class="row p-4">
+											<div class="col"></div>
+											<div class="col"></div>
+											<div class="col">
+												<button class="btn step-next btn-warning px-5 mt-5">
+													Pay:00XXX
+												</button>
+											</div>
+										</div>
+									</div>
 								</div>
 							</div>
-							<div class="row p-4">
-								<div class="col">
-									<img
-										class="d-block w-50"
-										src="@/assets/img/payment/orange_money.png"
-										alt="Third slide"
-									/>
-								</div>
-								<div class="col">
-									<p class="p-3">Orange Money</p>
-								</div>
-								<div class="col">
-									<input type="radio" name="drone" value="huey" checked />
-								</div>
-							</div>
-							<div class="row p-4">
-								<div class="col">
-									<img
-										class="d-block w-25 "
-										src="@/assets/img/payment/gimac.jpg"
-										alt="Third slide"
-									/>
-								</div>
-								<div class="col">
-									<p class="p-3">GIMAC</p>
-								</div>
-								<div class="col">
-									<input
-										type="radio"
-										name="drone"
-										class="mt-3"
-										value="huey"
-										checked
-									/>
-								</div>
-							</div>
-							<div class="row p-4">
-								<div class="col"></div>
-								<div class="col"></div>
-								<div class="col">
-									<button class="btn step-next btn-warning px-5 mt-5">
-										Pay:00XXX
-									</button>
-								</div>
-							</div>
-						</div>
+						</b-container>
 					</div>
-				</div>
-			</div>
-		</div>
+				</b-col>
+			</b-row>
+		</b-container>
 	</div>
 </template>
 

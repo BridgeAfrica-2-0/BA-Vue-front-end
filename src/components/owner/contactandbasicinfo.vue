@@ -67,7 +67,7 @@
               class="mt-2 mb-2"
               placeholder="current city"
               type="text"
-              v-model="basicInfo.currentCity"
+              v-model="info.user.city"
             ></b-form-input>
 
             <div class="fosrm-group text-right w-100">
@@ -93,7 +93,7 @@
           >
             <b-form-input
               class="mt-2 mb-2"
-              v-model="basicInfo.homeTown"
+              v-model="info.user.home_town"
               placeholder="home town"
             ></b-form-input>
 
@@ -492,15 +492,15 @@
         <h6 class="mb-0"><b>Places you lived</b></h6>
         <h6
           class="mb-0"
-          v-if="basicInfo.currentCity !== null && basicInfo.currentCity !== ''"
+          v-if="info.user.city !== null && info.user.city !== ''"
         >
-          <b>City : {{ basicInfo.currentCity }}</b>
+          City : {{ info.user.city }}
         </h6>
         <h6
           class="mb-0"
-          v-if="basicInfo.homeTown !== null && basicInfo.homeTown !== ''"
+          v-if="info.user.home_town !== null && info.user.home_town !== ''"
         >
-          <b>Home Town : {{ basicInfo.homeTown }}</b>
+          Home Town : {{ info.user.home_town }}
         </h6>
         <hr />
 
@@ -822,36 +822,37 @@ export default {
         });
     },
     saveHomeTown() {
-      console.log("save new home Town  user start +++++");
-      console.log(this.basicInfo.homeTown);
+     
       this.$store
         .dispatch("profile/updateUserBasicInfosHomeTown", {
-          homeTown: this.basicInfo.homeTown,
+          homeTown: this.info.user.home_town,
         })
         .then((response) => {
-          console.log(
-            "save new current home town user response (3) ++++++",
-            response
-          );
+          
         })
         .catch((error) => {
           console.log(error, "not save new homeTown user end error (2)+++++");
         })
         .finally(() => {
-          console.log("finally save new current Home Town user ");
-          this.basicInfo = JSON.parse(
-            JSON.stringify(
-              this.$store.getters["profile/getProfileAboutBasicInfos"]
-            )
-          );
-          console.log(this.basicInfo);
+        
+         
+           this.$store
+      .dispatch("profile/loadUserPostIntro", null)
+      .then((response) => {
+         console.log(response);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  
+
+
           this.$refs["hometownModal"].hide();
         });
     },
 
     saveWebsite() {
-      console.log("save new websites user start +++++");
-      
+
       this.$store
         .dispatch("profile/updateUserBasicInfosWebsites", {
           websites: this.websiteInput,
@@ -864,7 +865,16 @@ export default {
           console.log(error, "not save new websites user end error (2) +++++");
         })
         .finally(() => {
-          console.log("finally save new website user ");
+
+            this.$store
+      .dispatch("profile/loadUserPostIntro", null)
+      .then((response) => {
+         console.log(response);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  
          
           this.$refs["websiteModal"].hide();
         });

@@ -11,7 +11,6 @@
         >Add Network</b-button
       >
       <hr />
-
       <b-row>
         <b-col
           cols="12"
@@ -19,7 +18,7 @@
           lg="6"
           v-for="(network, index) in profileNetworks"
           :key="index"
-        >
+        > 
           <div class="people-style shadow">
             <b-row>
               <b-col
@@ -45,15 +44,14 @@
                       </strong></b-col
                     >
                     <b-col cols="4">
-                      <b-dropdown
-                        class="options ml-4"
-                        variant="primary"
-                        size="sm"
-                        id="dropdown-left"
-                      >
+                     
+                    <b-dropdown size="lg"  variant="link" toggle-class="text-decoration-none" no-caret>
                         <template #button-content>
-                          <b-icon icon="three-dots" aria-hidden="true"></b-icon>
-                        </template>
+     <b-icon
+                      icon="three-dots-vertical"
+                      class="icon-size"
+                    ></b-icon>
+    </template>
                         <b-dropdown-item-button
                           @click="showEditNetwork(network)"
                         >
@@ -776,7 +774,7 @@ export default {
       axios
         .get("network?page=" + this.page)
         .then(({ data }) => {
-          console.log(data);
+          console.log(data.data);
           console.log("yoyoyooyoy");
           if (data.data.length) { 
             this.page += 1;

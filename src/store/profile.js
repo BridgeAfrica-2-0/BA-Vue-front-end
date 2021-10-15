@@ -961,13 +961,11 @@ export default {
       return response_;
     },
     async updateUserBasicInfosHomeTown(context, payload) {
-      console.log(payload, "edit user homeTown start +++++");
-      let response_ = null;
-      await axios.post(
+       
+      console.log(payload);
 
-        "userIntro/addCurrentHome/11" +
-        "?homeTown=" +
-        payload.homeTown,
+      let response_ = null;
+      await axios.post("userIntro/addHomeTown"+"?home_town=" + payload.homeTown,
         {
           method: "POST",
           headers: {
@@ -976,11 +974,7 @@ export default {
         }
       )
         .then(response => {
-          console.log("edit user homeTown response (1) +++++++", response);
-          if (response.status !== 200 && response.status !== 201) {
-            console.log("Error From The Server");
-            throw "Error From The Server";
-          }
+      
           return response;
         })
         .then(response => {
@@ -998,8 +992,7 @@ export default {
           response_ = response;
         })
         .catch(error => {
-          console.log("error From browser or server", error);
-          throw error;
+            console.log({error:error});
         });
       return response_;
     },

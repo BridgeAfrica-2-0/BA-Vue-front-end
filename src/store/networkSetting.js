@@ -157,14 +157,14 @@ export default {
     },
 
     async getBlockedUsers({ commit }) {
-      const res = await axios.get("network/blocked-user");
+      const res = await axios.get("network/users/blocked");
 
       commit("setBlockedUsers", res.data);
     },
 
     async unblockUser({ commit }, networkId, userId) {
       const res = await axios.post(
-        `network/update/unblocked-user/${networkId}/${userId}`
+        `network/users/unblocked/${networkId}/${userId}`
       );
 
       commit("setUnblock", res.data);

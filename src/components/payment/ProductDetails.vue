@@ -1,5 +1,10 @@
 <template>
-	<b-modal id="product-details" size="lg" title="Product Details">
+	<b-modal
+		hide-footer
+		id="product-details"
+		size="lg"
+		title="Product Details"
+	>
 		<b-container>
 			<b-row>
 				<b-col cols="12" md="4">

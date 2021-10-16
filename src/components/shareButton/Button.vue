@@ -7,16 +7,21 @@
     <b-button v-b-modal.modal-4>post</b-button> -->
 
     <Box
-      id="modal-1"
+      :id="modal"
+      modal="modal-1"
+      :isActivated="strategy"
       title="Share to people"
       placeholder="Search for people..."
       subtitle="All peoples"
       :type="type"
       :post="post"
     />
+    <!-- modal-1 -->
 
     <Box
-      id="modal-2"
+      :id="modal"
+      modal="modal-2"
+      :isActivated="strategy"
       title="Share to network"
       placeholder="Search for network..."
       subtitle="All networks"
@@ -33,9 +38,12 @@
         </div>
       </template>
     </Box>
+    <!-- modal-2 -->
 
     <Box
-      id="modal-5"
+      :id="modal"
+      modal="modal-5"
+      :isActivated="strategy"
       title="Send Inbox"
       placeholder="Search for network..."
       subtitle="All networks"
@@ -63,14 +71,17 @@
         </div>
       </template>
     </Box>
+    <!-- modal-5 -->
 
     <Box
-      id="modal-3"
+      :id="modal"
+      modal="modal-3"
       title="Share business"
       placeholder="Search for business..."
       subtitle="All business"
       :type="type"
       :post="post"
+      :isActivated="strategy"
     >
       <template v-slot:owner>
         <div class="d-flex align-items-center py-3 px-2 mb-2 border">
@@ -82,8 +93,10 @@
         </div>
       </template>
     </Box>
+    <!-- modal-3 -->
 
-    <Post id="modal-4" />
+    <Post :id="modal" :isActivated="strategy" modal="modal-4" />
+    <!-- modal-4 -->
 
     <b-dropdown
       size="lg"
@@ -110,7 +123,10 @@
         </div>
       </b-dropdown-item>
 
-      <b-dropdown-item class="d-flex py-2 cursor-pointer" v-b-modal.modal-4>
+      <b-dropdown-item
+        class="d-flex py-2 cursor-pointer"
+        @click="open('modal-4')"
+      >
         <span class="text-ored">
           <b-icon-bell-fill class="col-bg"></b-icon-bell-fill>
         </span>
@@ -122,7 +138,7 @@
       <b-dropdown-item
         v-if="'network' !== type"
         class="d-flex py-2 cursor-pointer"
-        v-b-modal.modal-2
+        @click="open('modal-2')"
       >
         <span class="text-ored">
           <b-icon-bell-fill class="col-bg"></b-icon-bell-fill>
@@ -135,7 +151,7 @@
       <b-dropdown-item
         v-if="'business' !== type"
         class="d-flex py-2 cursor-pointer"
-        v-b-modal.modal-3
+        @click="open('modal-3')"
       >
         <span class="text-ored">
           <b-icon-bell-fill class="col-bg"></b-icon-bell-fill>
@@ -164,7 +180,14 @@
         <div class="popover-body">
           <div
             @mousedown="open('modal-1')"
-            class="d-inline-flex flex-row align-items-center suggest-item py-2 cursor-pointer"
+            class="
+              d-inline-flex
+              flex-row
+              align-items-center
+              suggest-item
+              py-2
+              cursor-pointer
+            "
           >
             <span class="text-ored">
               <b-icon-bell-fill class="col-bg"></b-icon-bell-fill>
@@ -177,7 +200,14 @@
           <div
             v-if="'network' !== type"
             @mousedown="open('modal-5')"
-            class="d-inline-flex flex-row align-items-center suggest-item py-2 cursor-pointer"
+            class="
+              d-inline-flex
+              flex-row
+              align-items-center
+              suggest-item
+              py-2
+              cursor-pointer
+            "
           >
             <span class="text-ored">
               <b-icon-bell-fill class="col-bg"></b-icon-bell-fill>
@@ -190,7 +220,14 @@
           <div
             v-if="'business' !== type"
             @mousedown="open('modal-5')"
-            class="d-inline-flex flex-row align-items-center suggest-item py-2 cursor-pointer"
+            class="
+              d-inline-flex
+              flex-row
+              align-items-center
+              suggest-item
+              py-2
+              cursor-pointer
+            "
           >
             <span class="text-ored">
               <b-icon-bell-fill class="col-bg"></b-icon-bell-fill>
@@ -228,7 +265,14 @@
       <b-popover target="sharing-via" triggers="hover" placement="left">
         <div class="popover-body">
           <div
-            class="d-inline-flex flex-row align-items-center suggest-item py-2 cursor-pointer"
+            class="
+              d-inline-flex
+              flex-row
+              align-items-center
+              suggest-item
+              py-2
+              cursor-pointer
+            "
           >
             <span class="text-ored">
               <b-icon-bell-fill class="col-bg"></b-icon-bell-fill>
@@ -239,7 +283,14 @@
           </div>
 
           <div
-            class="d-inline-flex flex-row align-items-center suggest-item py-2 cursor-pointer"
+            class="
+              d-inline-flex
+              flex-row
+              align-items-center
+              suggest-item
+              py-2
+              cursor-pointer
+            "
           >
             <span class="text-ored">
               <b-icon-bell-fill class="col-bg"></b-icon-bell-fill>
@@ -250,7 +301,14 @@
           </div>
 
           <div
-            class="d-inline-flex flex-row align-items-center suggest-item py-2 cursor-pointer"
+            class="
+              d-inline-flex
+              flex-row
+              align-items-center
+              suggest-item
+              py-2
+              cursor-pointer
+            "
           >
             <span class="text-ored">
               <b-icon-bell-fill class="col-bg"></b-icon-bell-fill>
@@ -264,6 +322,7 @@
     </b-dropdown>
   </div>
 </template>
+
 
 <script>
 import Box from "./Box";
@@ -287,22 +346,36 @@ export default {
     Post,
   },
 
+  data: () => ({
+    modal: null,
+  }),
+
+  computed: {
+    strategy: function () {
+      if (['modal-1','modal-2','modal-3','modal-4','modal-5'].includes(this.modal)) return true;
+      else return false;
+    },
+  },
+
   methods: {
     open(id) {
       this.$bvModal.show(id);
+      this.modal = id;
     },
 
     shareToYourProfile: async function () {
       let data = {
         [this.type]: "",
-        post_id: this.post.id,
-        source_id: this.post.source_id,
+        post_id: parseInt(this.post.post_id),
+        source_id: parseInt(this.post.user_id),
       };
 
       if ("profile" !== this.type)
         data = Object.assign(data, { target_id: this.post.target_id });
 
       const request = await this.$repository.share.userPost(data);
+
+      if (request.success) console.log("ok");
     },
   },
 };

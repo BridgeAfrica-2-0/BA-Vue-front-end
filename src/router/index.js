@@ -136,7 +136,7 @@ const routes = [
   },
   {
     path: "/business_owner/network/:id?",
-    name: "networks",
+    name: "networks_business",
     component: networks,
   },
   {

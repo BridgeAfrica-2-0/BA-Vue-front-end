@@ -79,7 +79,7 @@
 
 			<div class="row p-2">
 				<div class="col">
-					<button class="float-right p-2 btn btn-primary mt-2">
+					<button @click="requestPayment" class="float-right p-2 btn btn-primary mt-2">
 						Pay: 13 000 XAF
 					</button>
 				</div>
@@ -95,6 +95,9 @@
 			showRewiew() {
 				this.$emit("showreview");
 			},
+			requestPayment(){
+				this.$emit("requestpayment")
+			}
 		},
 	};
 </script>

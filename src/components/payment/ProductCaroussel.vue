@@ -16,8 +16,17 @@
 				class="product-slide"
 				v-for="(product, i) in productImages"
 				:key="i"
-				:img-src="product.img"
-			></b-carousel-slide>
+			>
+				<template #img>
+					<img
+						class="d-block img-fluid w-100"
+						width="180"
+						height="180"
+						:src="product.img"
+						alt="product"
+					/>
+				</template>
+			</b-carousel-slide>
 		</b-carousel>
 	</div>
 </template>
@@ -57,7 +66,7 @@
 
 <style scoped>
 	.product-slide img {
-    display: block;
+		display: block;
 		height: 200px !important;
 	}
 	@media only screen and (min-width: 768px) {

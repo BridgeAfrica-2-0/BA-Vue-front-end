@@ -1,162 +1,85 @@
 <template>
-	<b-container>
-		<b-row>
-			<b-col>
-				<hr class="h-divider" />
-				<!-- Stepper header start-->
-				<b-container class="my-4" fluid>
-					<b-row>
-						<b-col>
-							<div
-								class="d-flex align-items-center flex-row justify-content-start"
-							>
-								<div
-									class="mr-3 d-flex align-items-center flex-row justify-content-start"
-								>
-									<b-avatar
-										variant="success"
-										:size="sizeStepperIndicator"
-										class="mr-2"
-										text="1"
-									></b-avatar>
-									<a class="step">
-										<span class="label">Checkout</span>
-									</a>
-								</div>
-								<div class="card-style">
-									<b-progress
-										class="rounded-pill"
-										height="8px"
-										:value="100"
-										variant="success"
-									></b-progress>
-								</div>
-							</div>
-						</b-col>
-						<b-col>
-							<div
-								class="d-flex align-items-center flex-row justify-content-start"
-							>
-								<div
-									class="mr-3 d-flex align-items-center flex-row justify-content-start"
-								>
-									<b-avatar class="mr-2" text="2"></b-avatar>
-									<a class="step">
-										<span class="label text-secondary">Payment</span>
-									</a>
-								</div>
-								<div class="card-style">
-									<b-progress
-										class="rounded-pill"
-										height="8px"
-										:value="0"
-										variant="success"
-									></b-progress>
-								</div>
-							</div>
-						</b-col>
-					</b-row>
-				</b-container>
-				<!-- Stepper header end-->
-				<hr class="h-divider" />
-			</b-col>
-		</b-row>
+	<div>
+		<b-button v-b-modal.product-details variant="primary">Product Details</b-button>
+		<ProductDetails/>
+		<b-container>
+			<b-row>
+				<b-col>
+					<hr class="h-divider" />
+					<!-- Stepper header start-->
+					<b-container class="my-4" fluid>
+						<PaymentProgress :steps="steps" />
+					</b-container>
+					<!-- Stepper header end-->
+					<hr class="h-divider" />
+				</b-col>
+			</b-row>
 
-		<b-row v-if="current_step == 1">
-			<!-- Card Stepper for Shipping Address Start -->
-			<b-col v-if="showReview" class="my-4" cols="12">
-				<ShippingAdress />
-			</b-col>
-			<!-- Card Stepper for Shipping Address End -->
+			<b-row v-if="current_step == 1">
+				<!-- Card Stepper for Shipping Address Start -->
+				<b-col v-if="showReview" class="my-4" cols="12">
+					<ShippingAdress />
+				</b-col>
+				<!-- Card Stepper for Shipping Address End -->
 
-			<!-- Card Stepper for Order Start -->
-			<b-col v-if="showReview" class="my-4" cols="12">
-				<Order @showoperator="handleShowOperator" />
-			</b-col>
-			<!-- Card Stepper for Order End -->
-			<b-col v-if="showOperators" class="my-4" cols="12">
-				<PaymentOperator @showreview="handleShowReview"/>
-			</b-col>
-		</b-row>
-		<!-- Stepper Page 1  End -->
+				<!-- Card Stepper for Order Start -->
+				<b-col v-if="showReview" class="my-4" cols="12">
+					<Order @showoperator="handleShowOperator" />
+				</b-col>
+				<!-- Card Stepper for Order End -->
+				<b-col v-if="showOperators" class="my-4" cols="12">
+					<PaymentOperator
+						@requestpayment="handleRequestPayment"
+						@showreview="handleShowReview"
+					/>
+				</b-col>
+			</b-row>
+			<!-- Stepper Page 1  End -->
 
-		<b-row>
-			<b-col>
-				<div>
-					<b-card v-if="current_step == 2" class="card-style" title="STEP2">
-						<b-card-text>Do something for second step.</b-card-text>
-						<b-button
-							class="float-left"
-							variant="secondary"
-							@click="onClickBack"
-							>Back</b-button
-						>
-						<b-button class="float-right" variant="primary" @click="onClickNext"
-							>Next</b-button
-						>
-					</b-card>
-					<b-card v-if="current_step == 3" class="card-style" title="STEP3">
-						<b-card-text>For furthermore in 3rd step.</b-card-text>
-						<b-button
-							class="float-left"
-							variant="secondary"
-							@click="onClickBack"
-							>Back</b-button
-						>
-						<b-button class="float-right" variant="primary" @click="onClickNext"
-							>Next</b-button
-						>
-					</b-card>
-					<b-card v-if="current_step == 4" class="card-style" title="STEP4">
-						<b-card-text>Will soon finish.</b-card-text>
-						<b-button
-							class="float-left"
-							variant="secondary"
-							@click="onClickBack"
-							>Back</b-button
-						>
-						<b-button class="float-right" variant="primary" @click="onClickNext"
-							>Next</b-button
-						>
-					</b-card>
-					<b-card v-if="current_step == 5" class="card-style" title="STEP5">
-						<b-card-text>Finished!</b-card-text>
-						<b-button
-							class="float-left"
-							variant="secondary"
-							@click="onClickBack"
-							>Back</b-button
-						>
-						<b-button
-							class="float-center"
-							variant="success"
-							@click="onClickFirst"
-							>Back to first</b-button
-						>
-					</b-card>
-				</div>
-			</b-col>
-		</b-row>
-	</b-container>
+			<b-row v-if="current_step == 2">
+				<b-col class="my-4" cols="12">
+					<RequestPayment
+						v-if="showRequestPayment"
+						@confirmpayment="handleConfirmPayment"
+					/>
+				</b-col>
+				<b-col v-if="showConfirmPayment" class="my-4" cols="12">
+					<ConfirmPayment />
+				</b-col>
+			</b-row>
+		</b-container>
+	</div>
 </template>
 <script>
 	import Order from "./Order";
 	import ShippingAdress from "./ShippingAdress";
 	import PaymentOperator from "./PaymentOperator";
+	import RequestPayment from "./RequestPayment";
+	import ConfirmPayment from "./ConfirmPayment";
+	import PaymentProgress from "./PaymentProgress";
+	import ProductDetails from "./ProductDetails";
+
 	export default {
 		name: "PaymentStepper",
 		components: {
 			Order,
 			ShippingAdress,
 			PaymentOperator,
+			RequestPayment,
+			ConfirmPayment,
+			PaymentProgress,
+			ProductDetails,
 		},
 		data() {
 			return {
 				current_step: 1,
 				max_step: 5,
+				steps: ["Checkout", "Payment"],
 				sizeStepperIndicator: "md",
 				showOperators: false,
 				showReview: true,
+				showRequestPayment: true,
+				showConfirmPayment: false,
 			};
 		},
 		computed: {
@@ -184,6 +107,15 @@
 			handleShowReview() {
 				this.showReview = true;
 				this.showOperators = false;
+			},
+			handleRequestPayment() {
+				this.steps = ["Request Payment", "Confirm Payment"];
+				this.onClickNext();
+			},
+			handleConfirmPayment() {
+				this.$emit("nextpaymentstep");
+				this.showRequestPayment = false;
+				this.showConfirmPayment = true;
 			},
 		},
 	};

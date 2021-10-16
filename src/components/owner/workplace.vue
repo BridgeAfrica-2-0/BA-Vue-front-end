@@ -27,7 +27,7 @@
               <h6 class="mb-0">
                 <b>{{ workPlace.company_name }} ({{workPlace.position}})</b>
               </h6>
-              <b>{{ workPlace.start_year }}/{{workPlace.start_month}}/{{workPlace.start_day}} -   {{ workPlace.end_year }}/{{workPlace.end_month}}/{{workPlace.end_day}}</b>
+              <b>{{ workPlace.start_year }}/{{ workPlace.start_month }}/{{ workPlace.start_day }} - {{ workPlace.end_year }}/{{ workPlace.end_month }}/{{ workPlace.end_day }}</b>
               <p class="mb-1">
                 {{ workPlace.job_responsibilities }}
               </p>
@@ -115,21 +115,22 @@
         id="checkbox-1"
         v-model="editData.currently_working"
         name="checkbox-1"
-        :checked="editData.currently_working === 1 ? true : false"
+        checked="1"
+        unchecked="0"
       >
         Currently Working
       </b-form-checkbox>
       <label>Start Date</label>
       <b-form-datepicker
         id="example-datepicker"
-        v-model="editData.start_year"
+        v-model="editData.startDate"
         class="mb-2"
         placeholder="Start Date"
       ></b-form-datepicker>
       <label>End Date</label>
       <b-form-datepicker
         id="example-datepicker"
-        v-model="editData.end_year"
+        v-model="editData.endDate"
         class="mb-2"
         placeholder="End Date"
       ></b-form-datepicker>
@@ -203,6 +204,9 @@
         placeholder="End Date"
       ></b-form-datepicker>
     </b-modal>
+
+    <FlashMessage />
+
   </div>
 </template>
 
@@ -257,7 +261,11 @@ export default {
 
     editt(value){
 
+      console.log("this.editData Before Assign", value)
        this.editData = value;
+       this.editData['startDate'] = value.start_day+'-'+value.start_month+'-'+value.start_year;
+       this.editData['endDate'] = value.end_day+'-'+value.end_month+'-'+value.end_year;
+       console.log("this.editData Before Update", this.editData)
        this.$refs["edit-contact"].show(); 
     },
     cancel() {
@@ -278,44 +286,34 @@ export default {
     },
 
 
-    updatesave(){
-    
-    let method="PUT"
-    console.log(this.editData);
-
-     this.$store
-        .dispatch("profile/updateUserWorkPlaces", {
-          workPlace: this.editData,
-          method: method,
-        })
-        .then((response) => {
-          console.log(
-            response,
-            "save/update/delete new workPlace user end +++++"
-          );
-        })
-        .catch((error) => {
-          console.log(
-            error,
-            "not save/update/delete new workPlace user end error (2) +++++"
-          );
-        })
-
-        .finally(() => {
-          this.educationAndWorks = JSON.parse(
-            JSON.stringify(
-              this.$store.getters["profile/getProfileAboutEducationAndWorks"]
-            )
-          );
-          console.log(
-            "Finally save/update/delete new workplace user +++++",
-            this.educationAndWorks,
-            "+++++++++++"
-          );
-          this.$refs["edit-contact"].hide();
+     updatesave: function(){
+      console.log(this.editData);
+        let formData = new FormData();
+        formData.append("companyName", this.editData.company_name);
+        formData.append("cityTown", this.editData.city_town);
+        formData.append("position", this.editData.position);
+        formData.append("jobResponsibilities", this.editData.job_responsibilities);
+        formData.append("currentlyWorking", this.editData.currently_working);
+        formData.append("startDate", this.editData.startDate);
+        formData.append("endDate", this.editData.endDate);
+        formData.append("access", "public");
+      this.axios.post("userIntro/updateWorking/"+this.editData.id, formData)
+      .then(() => {
+        console.log('ohh yeah');
+        this.$store.dispatch("profile/loadUserProfileAbout", null);
+        this.flashMessage.show({
+          status: "success",
+          message: "Workplace Updated"
         });
-
-    },
+      })
+      .catch(err => {
+        console.log({ err: err });
+        this.flashMessage.show({
+          status: "error",
+          message: "Unable to Update Workplace"
+        });
+      });
+		},
 
     save() {
       console.log("Save/edit/delete WorkPlace User Profile About");
@@ -341,11 +339,8 @@ export default {
           );
         })
         .catch((error) => {
-          console.log(
-            error,
-            "not save/update/delete new workPlace user end error (2) +++++"
-          );
-        // this.$store.dispatch("profile/loadUserProfileAbout", null);
+          console.log( error, "not save/update/delete new workPlace user end error (2) +++++");
+          this.$store.dispatch("profile/loadUserProfileAbout", null);
           // this.educationAndWorks.workPlaces = this.work;
           // this.work = this.$store.state.profile.profile_about.user_experience;
         })
@@ -363,38 +358,58 @@ export default {
           this.$refs["add-contact"].hide();
         });
     },
-    deleteWorkPlace(type, value) {
-      switch (type) {
-        case "workPlaces":
-          console.log("delete one workplace");
-          this.educationAndWorks.workPlaces =
-            this.educationAndWorks.workPlaces.filter((workPlace) => {
-              return workPlace.companyName !== value;
-            });
-          this.$store.state.userData[0].profile_about.educationAndWorks =
-            this.educationAndWorks;
-          break;
-        case "educations":
-          this.educationAndWorks.educations =
-            this.educationAndWorks.educations.filter((education) => {
-              return education !== value;
-            });
-          this.$store.state.userData[0].profile_about.educationAndWorks =
-            this.educationAndWorks;
-          break;
-        case "professions":
-          this.educationAndWorks.professions =
-            this.educationAndWorks.professions.filter((profession) => {
-              return profession !== value;
-            });
-          this.$store.state.userData[0].profile_about.educationAndWorks =
-            this.educationAndWorks;
-          break;
-        default:
-          console.log("No Correspondance");
-          break;
-      }
+    
+    deleteWorkPlace() {
+      this.axios.delete("userIntro/updateWorking/"+this.editData.id)
+      .then(() => {
+        console.log('ohh yeah');
+        this.displayEditor();
+        this.flashMessage.show({
+          status: "success",
+          message: "WorkPlace Deleted"
+        });
+          
+      })
+      .catch(err => {
+        console.log({ err: err });
+        this.flashMessage.show({
+          status: "error",
+          message: "Unable To Delete WorkPlace"
+        });
+      });
     },
+    // deleteWorkPlace(type, value) {
+    //   switch (type) {
+    //     case "workPlaces":
+    //       console.log("delete one workplace");
+    //       this.educationAndWorks.workPlaces =
+    //         this.educationAndWorks.workPlaces.filter((workPlace) => {
+    //           return workPlace.companyName !== value;
+    //         });
+    //       this.$store.state.userData[0].profile_about.educationAndWorks =
+    //         this.educationAndWorks;
+    //       break;
+    //     case "educations":
+    //       this.educationAndWorks.educations =
+    //         this.educationAndWorks.educations.filter((education) => {
+    //           return education !== value;
+    //         });
+    //       this.$store.state.userData[0].profile_about.educationAndWorks =
+    //         this.educationAndWorks;
+    //       break;
+    //     case "professions":
+    //       this.educationAndWorks.professions =
+    //         this.educationAndWorks.professions.filter((profession) => {
+    //           return profession !== value;
+    //         });
+    //       this.$store.state.userData[0].profile_about.educationAndWorks =
+    //         this.educationAndWorks;
+    //       break;
+    //     default:
+    //       console.log("No Correspondance");
+    //       break;
+    //   }
+    // },
     edit(type, value) {
       switch (type) {
         case "workPlaces":

@@ -97,6 +97,9 @@
         placeholder="Major"
       ></b-form-input>
     </b-modal>
+
+    <FlashMessage />
+    
   </div>
 </template>
 
@@ -189,38 +192,86 @@ export default {
           this.$refs["educationModal"].hide();
         });
     },
-    deleteEducation(type, value) {
-      switch (type) {
-        case "educations":
-          console.log("delete one education");
-          this.educations = this.educations.filter(education => {
-            return education.schoolName !== value;
-          });
-          console.log(value);
-          this.$store.state.userData[0].profile_about.educationAndWorks.educations = this.educations;
-          console.log(this.educations);
-          break;
-        default:
-          console.log("Aucune Correspondance");
-          break;
-      }
+
+    deleteEducation() {
+      this.axios.delete("userIntro/updateWorking/"+this.editData.id)
+      .then(() => {
+        console.log('ohh yeah');
+        this.displayEditor();
+        this.flashMessage.show({
+          status: "success",
+          message: "WorkPlace Deleted"
+        });
+          
+      })
+      .catch(err => {
+        console.log({ err: err });
+        this.flashMessage.show({
+          status: "error",
+          message: "Unable To Delete WorkPlace"
+        });
+      });
     },
-    edit(type, value) {
-      switch (type) {
-        case "educations":
-          console.log("edit education");
-          this.index = this.educations.findIndex(education => {
-            return education.schoolName === value;
-          });
-          console.log(this.index);
-          this.educationInput = this.educations[this.index];
-          this.$refs["educationModal"].show();
-          break;
-        default:
-          console.log("Aucune Correspondance");
-          break;
-      }
-    }
+    // deleteEducation(type, value) {
+    //   switch (type) {
+    //     case "educations":
+    //       console.log("delete one education");
+    //       this.educations = this.educations.filter(education => {
+    //         return education.schoolName !== value;
+    //       });
+    //       console.log(value);
+    //       this.$store.state.userData[0].profile_about.educationAndWorks.educations = this.educations;
+    //       console.log(this.educations);
+    //       break;
+    //     default:
+    //       console.log("Aucune Correspondance");
+    //       break;
+    //   }
+    // },
+
+    edit: function(){
+      console.log(this.editData);
+        let formData = new FormData();
+        formData.append("companyName", this.editData.company_name);
+        formData.append("cityTown", this.editData.city_town);
+        formData.append("position", this.editData.position);
+        formData.append("jobResponsibilities", this.editData.job_responsibilities);
+        formData.append("currentlyWorking", this.editData.currently_working);
+        formData.append("startDate", this.editData.start_year);
+        formData.append("endDate", this.editData.end_year);
+        formData.append("access", "public");
+      this.axios.post("userIntro/updateWorking/"+this.editData.id, formData)
+      .then(() => {
+        console.log('ohh yeah');
+        this.flashMessage.show({
+          status: "success",
+          message: "Workplace Updated"
+        });
+      })
+      .catch(err => {
+        console.log({ err: err });
+        this.flashMessage.show({
+          status: "error",
+          message: "Unable to Update Workplace"
+        });
+      });
+		},
+    // edit(type, value) {
+    //   switch (type) {
+    //     case "educations":
+    //       console.log("edit education");
+    //       this.index = this.educations.findIndex(education => {
+    //         return education.schoolName === value;
+    //       });
+    //       console.log(this.index);
+    //       this.educationInput = this.educations[this.index];
+    //       this.$refs["educationModal"].show();
+    //       break;
+    //     default:
+    //       console.log("Aucune Correspondance");
+    //       break;
+    //   }
+    // }
   }
 };
 </script>

@@ -10,6 +10,10 @@ export const actions = {
     commit(TYPES.FIND_POST, data)
   }, // [TYPES.FIND_POST]
 
+  [TYPES.RESET_RESULT]({ commit }) {
+    commit(TYPES.RESET_RESULT)
+  }, // [TYPES.FIND_POST]
+
   [TYPES.FIND_USER]({ commit, state }, payload) {
     if (state.page == 1)
       commit(TYPES.RESET_RESULT)
@@ -22,7 +26,7 @@ export const actions = {
   }, //[TYPES.STACK_VALUE]
 
   [TYPES.LOADING]({ commit }, payload = null) {
-    
+
     commit(TYPES.LOADING, payload)
   }, // [TYPES.LOADING]
 

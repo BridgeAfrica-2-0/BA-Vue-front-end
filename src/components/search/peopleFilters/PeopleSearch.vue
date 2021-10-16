@@ -10,10 +10,9 @@
     </div>
     <h6>
       <fas-icon class="icons" :icon="['fas', 'users']" size="lg" />
-      <ShareButton />
-
       People
     </h6>
+    <ShareButton :post="{ id: 1 }" type="network" />
 
     <NotFound v-if="!peoples.length" :title="title" />
     <div v-else>
@@ -35,6 +34,7 @@ import { loader, search } from "@/mixins";
 
 import Sponsor from "@/components/search/sponsoredBusiness";
 import People from "@/components/search/people";
+
 import { ShareButton } from "@/components/shareButton";
 
 export default {

@@ -1539,6 +1539,7 @@ export default {
       page: "search/SET_CURRENT_PAGINATION_PAGE",
       stack: "search/STACK_VALUE",
       setCallback: "search/SET_CURRENT_PAGINATE_CALLBACK",
+      reset: "search/RESET_RESULT",
     }),
 
     initialize() {
@@ -1608,6 +1609,7 @@ export default {
     async _onFindUser() {
       try {
         this.lauchLoader(true);
+        this.reset();
         const request = await this.$repository.search.findUserByParam({
           payload: {
             keyword: this.navBarParams.keyword.trim(),
@@ -1641,7 +1643,7 @@ export default {
     async _onFindPost() {
       try {
         this.lauchLoader(true);
-
+        this.reset();
         const request = await this.$repository.search.findPostByKeyword({
           data: {},
           keyword: this.navBarParams.keyword.trim(),

@@ -8,16 +8,20 @@
 
     <Box
       id="modal-1"
-      title="Share people"
+      title="Share to people"
       placeholder="Search for people..."
       subtitle="All peoples"
+      :type="type"
+      :post="post"
     />
 
     <Box
       id="modal-2"
-      title="Share network"
+      title="Share to network"
       placeholder="Search for network..."
       subtitle="All networks"
+      :type="type"
+      :post="post"
     >
       <template v-slot:owner>
         <div class="d-flex align-items-center py-3 px-2 mb-2 border">
@@ -31,10 +35,42 @@
     </Box>
 
     <Box
+      id="modal-5"
+      title="Send Inbox"
+      placeholder="Search for network..."
+      subtitle="All networks"
+      :type="type"
+      :post="post"
+    >
+      <template v-slot:owner>
+        <div class="d-flex flex-direction py-3 px-2 mb-2 border">
+          <div class="d-flex align-items-center py-3 px-2 mb-2">
+            <b-avatar class="mr-3"></b-avatar>
+            <p>
+              <span class="mr-auto">Share as</span><br />
+              <span class="mr-auto">2h</span>
+            </p>
+          </div>
+          <div class="d-flex align-items-center py-3 px-2 mb-2">
+            <p>
+              Le lorem ipsum est, en imprimerie, une provisoire pour calibrer
+              une mise en page, le texte définitif venant remplacer le
+              faux-texte dès qu'il est prêt ou que la mise en page est achevée.
+              Généralement, on utilise un texte en faux latin, le Lorem ipsum ou
+              Lipsum.
+            </p>
+          </div>
+        </div>
+      </template>
+    </Box>
+
+    <Box
       id="modal-3"
       title="Share business"
       placeholder="Search for business..."
       subtitle="All business"
+      :type="type"
+      :post="post"
     >
       <template v-slot:owner>
         <div class="d-flex align-items-center py-3 px-2 mb-2 border">
@@ -59,9 +95,10 @@
       <template #button-content>
         <b-icon-reply-fill class="col-bg text-ored"></b-icon-reply-fill>
       </template>
+
       <b-dropdown-text class="box-title"> Share </b-dropdown-text>
+
       <b-dropdown-item
-        href="#"
         class="d-flex py-2 cursor-pointer"
         @click="shareToYourProfile"
       >
@@ -73,7 +110,7 @@
         </div>
       </b-dropdown-item>
 
-      <b-dropdown-item href="#" class="d-flex py-2 cursor-pointer">
+      <b-dropdown-item class="d-flex py-2 cursor-pointer" v-b-modal.modal-4>
         <span class="text-ored">
           <b-icon-bell-fill class="col-bg"></b-icon-bell-fill>
         </span>
@@ -83,7 +120,7 @@
       </b-dropdown-item>
 
       <b-dropdown-item
-        href="#"
+        v-if="'network' !== type"
         class="d-flex py-2 cursor-pointer"
         v-b-modal.modal-2
       >
@@ -96,7 +133,7 @@
       </b-dropdown-item>
 
       <b-dropdown-item
-        href="#"
+        v-if="'business' !== type"
         class="d-flex py-2 cursor-pointer"
         v-b-modal.modal-3
       >
@@ -109,7 +146,6 @@
       </b-dropdown-item>
 
       <b-dropdown-item
-        href="#"
         class="d-flex py-2 cursor-pointer"
         id="sharing-community"
         data-toggle="popover"
@@ -123,9 +159,11 @@
           <span>Share to commnunity</span>
         </div>
       </b-dropdown-item>
+
       <b-popover target="sharing-community" triggers="hover">
         <div class="popover-body">
           <div
+            @mousedown="open('modal-1')"
             class="d-inline-flex flex-row align-items-center suggest-item py-2 cursor-pointer"
           >
             <span class="text-ored">
@@ -137,8 +175,9 @@
           </div>
 
           <div
+            v-if="'network' !== type"
+            @mousedown="open('modal-5')"
             class="d-inline-flex flex-row align-items-center suggest-item py-2 cursor-pointer"
-            v-b-modal.modal-2
           >
             <span class="text-ored">
               <b-icon-bell-fill class="col-bg"></b-icon-bell-fill>
@@ -149,7 +188,8 @@
           </div>
 
           <div
-            v-b-modal.modal-3
+            v-if="'business' !== type"
+            @mousedown="open('modal-5')"
             class="d-inline-flex flex-row align-items-center suggest-item py-2 cursor-pointer"
           >
             <span class="text-ored">
@@ -162,7 +202,7 @@
         </div>
       </b-popover>
 
-      <b-dropdown-item href="#" class="d-flex py-2 cursor-pointer">
+      <b-dropdown-item class="d-flex py-2 cursor-pointer">
         <span class="text-ored">
           <b-icon-bell-fill class="col-bg"></b-icon-bell-fill>
         </span>
@@ -172,7 +212,6 @@
       </b-dropdown-item>
 
       <b-dropdown-item
-        href="#"
         class="d-flex py-2 cursor-pointer"
         id="sharing-via"
         data-toggle="popover"
@@ -229,11 +268,18 @@
 <script>
 import Box from "./Box";
 import Post from "./SharePost";
+
 export default {
   name: "ShareButton",
   props: {
     post: {
       type: Object,
+    },
+    type: {
+      type: String,
+      validator: function (value) {
+        if (["network", "business", "profile"].includes(value)) return true;
+      },
     },
   },
   components: {
@@ -242,8 +288,21 @@ export default {
   },
 
   methods: {
+    open(id) {
+      this.$bvModal.show(id);
+    },
+
     shareToYourProfile: async function () {
-      const request = await this.$repository.share.userPost();
+      let data = {
+        [this.type]: "",
+        post_id: this.post.id,
+        source_id: this.post.source_id,
+      };
+
+      if ("profile" !== this.type)
+        data = Object.assign(data, { target_id: this.post.target_id });
+
+      const request = await this.$repository.share.userPost(data);
     },
   },
 };
@@ -274,5 +333,8 @@ li:hover {
 
 .box-title {
   border-bottom: 1px solid #ced4da;
+}
+.flex-direction {
+  flex-direction: column;
 }
 </style>

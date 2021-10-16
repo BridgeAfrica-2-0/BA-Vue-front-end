@@ -8,27 +8,31 @@
 		<div class="card-body">
 			<div>
 				<div class="row">
-					<div class="col">
+					<div class="col-12 col-sm-6 col-md-3">
 						<ProductCaroussel/>
 					</div>
-					<div class="col-2">
+					<div class="col-6 col-sm-3">
 						Name of item:
+						<br /><br />
+						Amount :
 						<br /><br />
 						Shipping:
 						<br /><br />
 						Total:
 					</div>
-					<div class="col-4">
-						500XAf
+					<div class="col-6 col-sm-3">
+						Headset
 						<br /><br />
-						100
+						12 000XAF
 						<br /><br />
-						1000
+						1 000 XAF
+						<br /><br />
+						13 000 XAF
 					</div>
 				</div>
 				<div class="row">
-					<div class="col">
-						<button class="btn btn-primary float-right px-5 shadow-sm">
+					<div class="col mt-4">
+						<button @click="showOperator" class="btn btn-primary float-right px-5 shadow-sm">
 							Order
 						</button>
 					</div>
@@ -44,6 +48,11 @@ import ProductCaroussel from "./ProductCaroussel"
 		name: "Order", 
 		components: {
 			ProductCaroussel
+		},
+		methods: {
+			showOperator(){
+				this.$emit('showoperator')
+			}
 		}
 
 	};

@@ -62,25 +62,23 @@
 			</b-col>
 		</b-row>
 
-		
 		<b-row v-if="current_step == 1">
 			<!-- Card Stepper for Shipping Address Start -->
-			<b-col  class="my-4" cols="12">
-				<ShippingAdress/>
+			<b-col v-if="showReview" class="my-4" cols="12">
+				<ShippingAdress />
 			</b-col>
 			<!-- Card Stepper for Shipping Address End -->
 
 			<!-- Card Stepper for Order Start -->
-			<b-col class="my-4" cols="12">
-				<Order />
+			<b-col v-if="showReview" class="my-4" cols="12">
+				<Order @showoperator="handleShowOperator" />
 			</b-col>
 			<!-- Card Stepper for Order End -->
+			<b-col v-if="showOperators" class="my-4" cols="12">
+				<PaymentOperator @showreview="handleShowReview"/>
+			</b-col>
 		</b-row>
 		<!-- Stepper Page 1  End -->
-
-
-
-
 
 		<b-row>
 			<b-col>
@@ -144,17 +142,21 @@
 <script>
 	import Order from "./Order";
 	import ShippingAdress from "./ShippingAdress";
+	import PaymentOperator from "./PaymentOperator";
 	export default {
 		name: "PaymentStepper",
 		components: {
 			Order,
-			ShippingAdress
+			ShippingAdress,
+			PaymentOperator,
 		},
 		data() {
 			return {
 				current_step: 1,
 				max_step: 5,
 				sizeStepperIndicator: "md",
+				showOperators: false,
+				showReview: true,
 			};
 		},
 		computed: {
@@ -174,6 +176,14 @@
 			},
 			onClickFirst: function() {
 				this.current_step = 1;
+			},
+			handleShowOperator() {
+				this.showOperators = true;
+				this.showReview = false;
+			},
+			handleShowReview() {
+				this.showReview = true;
+				this.showOperators = false;
 			},
 		},
 	};

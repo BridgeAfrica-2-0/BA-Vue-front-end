@@ -57,11 +57,14 @@
       position="bottom"
     >
       <template #button-content>
-        <b-icon-reply-fill class="col-bg text-ored"></b-icon-reply-fill
-        ><span class="sr-only">Search</span>
+        <b-icon-reply-fill class="col-bg text-ored"></b-icon-reply-fill>
       </template>
       <b-dropdown-text class="box-title"> Share </b-dropdown-text>
-      <b-dropdown-item href="#" class="d-flex py-2 cursor-pointer" @click="shareToYourProfile">
+      <b-dropdown-item
+        href="#"
+        class="d-flex py-2 cursor-pointer"
+        @click="shareToYourProfile"
+      >
         <span class="text-ored">
           <b-icon-bell-fill class="col-bg"></b-icon-bell-fill>
         </span>
@@ -123,14 +126,7 @@
       <b-popover target="sharing-community" triggers="hover">
         <div class="popover-body">
           <div
-            class="
-              d-inline-flex
-              flex-row
-              align-items-center
-              suggest-item
-              py-2
-              cursor-pointer
-            "
+            class="d-inline-flex flex-row align-items-center suggest-item py-2 cursor-pointer"
           >
             <span class="text-ored">
               <b-icon-bell-fill class="col-bg"></b-icon-bell-fill>
@@ -141,14 +137,7 @@
           </div>
 
           <div
-            class="
-              d-inline-flex
-              flex-row
-              align-items-center
-              suggest-item
-              py-2
-              cursor-pointer
-            "
+            class="d-inline-flex flex-row align-items-center suggest-item py-2 cursor-pointer"
             v-b-modal.modal-2
           >
             <span class="text-ored">
@@ -160,15 +149,8 @@
           </div>
 
           <div
-            class="
-              d-inline-flex
-              flex-row
-              align-items-center
-              suggest-item
-              py-2
-              cursor-pointer
-            "
             v-b-modal.modal-3
+            class="d-inline-flex flex-row align-items-center suggest-item py-2 cursor-pointer"
           >
             <span class="text-ored">
               <b-icon-bell-fill class="col-bg"></b-icon-bell-fill>
@@ -207,14 +189,7 @@
       <b-popover target="sharing-via" triggers="hover" placement="left">
         <div class="popover-body">
           <div
-            class="
-              d-inline-flex
-              flex-row
-              align-items-center
-              suggest-item
-              py-2
-              cursor-pointer
-            "
+            class="d-inline-flex flex-row align-items-center suggest-item py-2 cursor-pointer"
           >
             <span class="text-ored">
               <b-icon-bell-fill class="col-bg"></b-icon-bell-fill>
@@ -225,14 +200,7 @@
           </div>
 
           <div
-            class="
-              d-inline-flex
-              flex-row
-              align-items-center
-              suggest-item
-              py-2
-              cursor-pointer
-            "
+            class="d-inline-flex flex-row align-items-center suggest-item py-2 cursor-pointer"
           >
             <span class="text-ored">
               <b-icon-bell-fill class="col-bg"></b-icon-bell-fill>
@@ -243,14 +211,7 @@
           </div>
 
           <div
-            class="
-              d-inline-flex
-              flex-row
-              align-items-center
-              suggest-item
-              py-2
-              cursor-pointer
-            "
+            class="d-inline-flex flex-row align-items-center suggest-item py-2 cursor-pointer"
           >
             <span class="text-ored">
               <b-icon-bell-fill class="col-bg"></b-icon-bell-fill>

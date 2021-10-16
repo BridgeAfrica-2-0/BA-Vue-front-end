@@ -62,7 +62,6 @@ export default {
   },
 
   beforeMount() {
-    this.loader = true;
     this.getPosts();
   },
   computed: {

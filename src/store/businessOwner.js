@@ -247,8 +247,8 @@ export default {
     async getPendingPosts({ commit }) {
       commit("setLoader", true);
       const res = await axios
-        .get("https://jsonplaceholder.typicode.com/todos")
-        .then(() => {
+        .get("business/show/post")
+        .then((res) => {
           commit("setPendingPosts", res.data);
           commit("setLoader", false);
         })
@@ -261,8 +261,8 @@ export default {
     async approvePost({ dispatch, commit }, id) {
       commit("setLoader", true);
       const res = await axios
-        .get(`business/show/post/${id}`)
-        .then(() => {
+        .get(`business/post-approve/${id}`)
+        .then((res) => {
           commit("setApprove", res.data);
           dispatch("getPendingPosts");
           commit("setLoader", false);
@@ -277,7 +277,7 @@ export default {
       commit("setLoader", true);
       const res = await axios
         .get(`business/show/post/${id}`)
-        .then(() => {
+        .then((res) => {
           commit("setDisApprove", res.data);
           dispatch("getPendingPosts");
           commit("setLoader", false);
@@ -293,7 +293,7 @@ export default {
       commit("setLoader", true);
       const res = await axios
         .get("community/business-follower")
-        .then(() => {
+        .then((res) => {
           commit("setFollowers", res.data);
           commit("setLoader", false);
         })
@@ -308,7 +308,7 @@ export default {
       commit("setLoader", true);
       const res = await axios
         .get("community/people-follower")
-        .then(() => {
+        .then((res) => {
           commit("setPeopleFollowers", res.data);
           commit("setLoader", false);
         })
@@ -323,7 +323,7 @@ export default {
       commit("setLoader", true);
       const res = await axios
         .get("community/business-following")
-        .then(() => {
+        .then((res) => {
           commit("setFollowing", res.data);
           commit("setLoader", false);
         })
@@ -338,7 +338,7 @@ export default {
       commit("setLoader", true);
       const res = await axios
         .get("community/people-following")
-        .then(() => {
+        .then((res) => {
           commit("setPeopleFollowing", res.data);
           commit("setLoader", false);
         })
@@ -353,7 +353,7 @@ export default {
       commit("setLoader", true);
       const res = await axios
         .get("market/products")
-        .then(() => {
+        .then((res) => {
           commit("setProducts", res.data);
           commit("setLoader", false);
         })
@@ -368,7 +368,7 @@ export default {
       commit("setLoader", true);
       const res = await axios
         .post("market", fd)
-        .then(() => {
+        .then((res) => {
           commit("postProducts", res.data);
           commit("setLoader", false);
         })

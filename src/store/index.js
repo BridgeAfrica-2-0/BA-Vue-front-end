@@ -11,12 +11,13 @@ import market from "./market";
 import hotbusiness from "./hotbusiness";
 import profile from "./profile";
 import follower from "./follower";
+import keywordOperationOnNetwork from "./keywordOperationOnNetwork";
 
 import axios from "axios";
 import { search } from "./search";
 
 Vue.use(Vuex);
- axios.defaults.baseURL = process.env.VUE_APP_API_URL;     
+ axios.defaults.baseURL = process.env.VUE_APP_API_URL_DEV_MARC;     
 
 
 export default new Vuex.Store({
@@ -31,6 +32,7 @@ export default new Vuex.Store({
     profile,
     follower,
     search,
-    market
+    market,
+    keywordOperationOnNetwork
   },
 });

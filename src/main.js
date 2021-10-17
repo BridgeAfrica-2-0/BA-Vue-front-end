@@ -189,9 +189,9 @@ new Vue({
 
         axios.interceptors.request.use(function (config) {
 
-
+if (user!=null){    
           config.headers.Authorization =  `Bearer  ${user.accessToken}`;
-     
+        }
           return config;
       });
 

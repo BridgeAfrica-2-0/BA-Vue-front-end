@@ -44,10 +44,8 @@
                     >Edit</b-dropdown-item
                   >
                   <b-dropdown-item
-                    @click="
-                      deleteWorkPlace('workPlaces', workPlace.id)
-                    "
-                    >Delete</b-dropdown-item
+                    @click="deleteWorkPlace(workPlace.id)"
+                  >Delete</b-dropdown-item
                   >
                 </b-dropdown>
               </li>
@@ -288,31 +286,29 @@ export default {
 
      updatesave: function(){
       console.log(this.editData);
-        let formData = new FormData();
-        formData.append("companyName", this.editData.company_name);
-        formData.append("cityTown", this.editData.city_town);
-        formData.append("position", this.editData.position);
-        formData.append("jobResponsibilities", this.editData.job_responsibilities);
-        formData.append("currentlyWorking", this.editData.currently_working);
-        formData.append("startDate", this.editData.startDate);
-        formData.append("endDate", this.editData.endDate);
-        formData.append("access", "public");
-      this.axios.post("userIntro/updateWorking/"+this.editData.id, formData)
-      .then(() => {
-        console.log('ohh yeah');
-        this.$store.dispatch("profile/loadUserProfileAbout", null);
-        this.flashMessage.show({
-          status: "success",
-          message: "Workplace Updated"
+       this.$store
+        .dispatch("profile/updateUserWorkPlaces", {
+          workPlace: this.editData,
+          method: 'PUT',
+        })
+        .then((response) => {
+          console.log( response, "lewsi save/update/delete new workPlace user end +++++" );
+        })
+        .catch((error) => {
+          console.log( error, "lewis not save/update/delete new workPlace user end error (2) +++++");
+        })
+        .finally(() => {
+          this.$store.dispatch("profile/loadUserProfileAbout", null);
+          this.educationAndWorks = JSON.parse(
+            JSON.stringify(
+              this.$store.getters["profile/getProfileAboutEducationAndWorks"]
+            )
+          );
+          console.log("Lewis Finally save/update/delete new workplace user +++++", this.educationAndWorks, "+++++++++++");
         });
-      })
-      .catch(err => {
-        console.log({ err: err });
-        this.flashMessage.show({
-          status: "error",
-          message: "Unable to Update Workplace"
-        });
-      });
+
+
+
 		},
 
     save() {
@@ -333,10 +329,7 @@ export default {
           method: method,
         })
         .then((response) => {
-          console.log(
-            response,
-            "save/update/delete new workPlace user end +++++"
-          );
+          console.log( response, "save/update/delete new workPlace user end +++++" );
         })
         .catch((error) => {
           console.log( error, "not save/update/delete new workPlace user end error (2) +++++");
@@ -350,66 +343,40 @@ export default {
               this.$store.getters["profile/getProfileAboutEducationAndWorks"]
             )
           );
-          console.log(
-            "Finally save/update/delete new workplace user +++++",
-            this.educationAndWorks,
-            "+++++++++++"
-          );
+          console.log("Finally save/update/delete new workplace user +++++", this.educationAndWorks, "+++++++++++");
           this.$refs["add-contact"].hide();
         });
     },
     
-    deleteWorkPlace() {
-      this.axios.delete("userIntro/updateWorking/"+this.editData.id)
-      .then(() => {
-        console.log('ohh yeah');
-        this.displayEditor();
-        this.flashMessage.show({
-          status: "success",
-          message: "WorkPlace Deleted"
+    deleteWorkPlace(workPlace_id) {
+
+       console.log("Lewis delete WorkPlace User Profile About", workPlace_id);
+
+      this.$store
+        .dispatch("profile/updateUserWorkPlaces", {
+          workPlace: workPlace_id,
+          method: 'DELETE',
+        })
+        .then((response) => {
+          console.log( response, "Lewis delete new workPlace user end +++++" );
+        })
+        .catch((error) => {
+          console.log( error, "not Lewis delete new workPlace user end error (2) +++++");
+          // this.educationAndWorks.workPlaces = this.work;
+          // this.work = this.$store.state.profile.profile_about.user_experience;
+        })
+        .finally(() => {
+          this.$store.dispatch("profile/loadUserProfileAbout", null);
+          this.educationAndWorks = JSON.parse(
+            JSON.stringify(
+              this.$store.getters["profile/getProfileAboutEducationAndWorks"]
+            )
+          );
+          console.log("Finally Lewis delete new workplace user +++++", this.educationAndWorks, "+++++++++++");
         });
-          
-      })
-      .catch(err => {
-        console.log({ err: err });
-        this.flashMessage.show({
-          status: "error",
-          message: "Unable To Delete WorkPlace"
-        });
-      });
+
     },
-    // deleteWorkPlace(type, value) {
-    //   switch (type) {
-    //     case "workPlaces":
-    //       console.log("delete one workplace");
-    //       this.educationAndWorks.workPlaces =
-    //         this.educationAndWorks.workPlaces.filter((workPlace) => {
-    //           return workPlace.companyName !== value;
-    //         });
-    //       this.$store.state.userData[0].profile_about.educationAndWorks =
-    //         this.educationAndWorks;
-    //       break;
-    //     case "educations":
-    //       this.educationAndWorks.educations =
-    //         this.educationAndWorks.educations.filter((education) => {
-    //           return education !== value;
-    //         });
-    //       this.$store.state.userData[0].profile_about.educationAndWorks =
-    //         this.educationAndWorks;
-    //       break;
-    //     case "professions":
-    //       this.educationAndWorks.professions =
-    //         this.educationAndWorks.professions.filter((profession) => {
-    //           return profession !== value;
-    //         });
-    //       this.$store.state.userData[0].profile_about.educationAndWorks =
-    //         this.educationAndWorks;
-    //       break;
-    //     default:
-    //       console.log("No Correspondance");
-    //       break;
-    //   }
-    // },
+
     edit(type, value) {
       switch (type) {
         case "workPlaces":

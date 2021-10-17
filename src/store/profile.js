@@ -1156,40 +1156,41 @@ export default {
         };
       } else if (payload.method === "PUT") {
         const workplace = payload.workPlace === true ? 1 : 0;
-        (url = "userIntro/updateWorking/" +payload.id + "?companyName=" + payload.work_place),
-          "&cityTown=" + payload.city_town,
-          "&position=" + payload.position,
-          "&jobResponsibilities=" +payload.job_responsibilities,
-          "&currentlyWorking=" + payload.currently_working,
-          "&startDate=" + payload.start_date
-          "&endDate=" + payload.end_date;
+        url = "userIntro/updateWorking/" +payload.workPlace.id;
         config = {
           method: "POST",
           headers: {
             Accept: "application/json",
+          },
+          data: {
+            companyName: payload.workPlace.company_name,
+            cityTown: payload.workPlace.city_town,
+            position: payload.workPlace.position,
+            jobResponsibilities: payload.workPlace.job_responsibilities,
+            currentlyWorking: payload.workPlace === true ? 1 : 0,
+            startDate: payload.workPlace.startDate,
+            endDate: payload.workPlace.endDate,
           }
+        };
+      } else if (payload.method === "DELETE") {
+        url = "userIntro/deleteWorking/" +payload.workPlace;
+        config = {
+          method: "DELETE",
         };
       }
 
       let response_ = null;
       await axios(url, config)
         .then(response => {
-          console.log(
-            "save/edit/delete user workPlace response (1) +++++++",
-            response
-          );
+          console.log( "save/edit/delete user workPlace response (1) +++++++", response);
           return response;
         })
         .then(response => {
-          console.log(
-            "save/edit/delete user workPlace response successsss +++",
-            response
-          );
+          console.log( "save/edit/delete user workPlace response successsss +++", response );
           if (response.errors) {
             console.log("Error from the server +++++++");
             throw new Error("Error from save/edit/delete workplace+++++");
           };
-          // this.loadUserProfileAbout()
           context.commit("storeWorkPlace", {
             workPlace: payload.workPlace,
             method: payload.method
@@ -1203,7 +1204,6 @@ export default {
         });
       return response_;
     },
-
     
     async updateUserEducation(context, payload) {
       console.log(payload, "save/edit/delete user education start +++++");

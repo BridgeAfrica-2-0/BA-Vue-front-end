@@ -267,19 +267,19 @@ export default {
     }),
 
     createAlbum() {
-      // let loader = this.$loading.show({
-      //   container: this.fullPage ? null : this.$refs.creatform,
-      //   canCancel: true,
-      //   onCancel: this.onCancel,
-      //   color: "#e75c18",
-      // });
+      let loader = this.$loading.show({
+        container: this.fullPage ? null : this.$refs.creatform,
+        canCancel: true,
+        onCancel: this.onCancel,
+        color: "#e75c18",
+      });
       this.createAlbum(this.name)
         .then((response) => {
           this.flashMessage.show({
             status: "success",
             message: "Album Created",
           });
-          // loader.hide();
+          loader.hide();
         })
         .catch((err) => {
           this.sending = false;
@@ -289,14 +289,14 @@ export default {
               status: "error",
               message: err.response.data.message,
             });
-            // loader.hide();
+            loader.hide();
           } else {
             this.flashMessage.show({
               status: "error",
               message: "Unable to create your Album",
             });
             console.log({ err: err });
-            // loader.hide();
+            loader.hide();
           }
         });
     },

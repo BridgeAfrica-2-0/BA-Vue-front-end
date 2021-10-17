@@ -1,23 +1,32 @@
 <template>
   <div>
-    <b class="education">Education</b>
+    <b class="education">Education</b>   
     <hr />
-
+<div
+          class="row"
+          v-for="education in this.$store.getters['follower/getProfileAboutEducationAndWorks'] " 
+          :key="education.school_name"
+        >
+  
     <b-list-group-item class="d-flex align-items-center mb-4 border-0 education">
-      <b-avatar class="mr-3 avatar"></b-avatar>
+  <!--    <b-avatar class="mr-3 avatar"></b-avatar> -->
       <div class="datails">
         <div class="row">
           <div class="col">
-            <span class="mr-auto"> <b>School</b> </span>
-            <p>Duration</p>
+            <span class="mr-auto"> <b> {{ education.school_name }}</b> </span>
             <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas
-              quibusdam harum maxime!
+             Duration From {{ education.start_year }} To
+              {{ education.end_year }}  </p>
+
+            <p> 
+               {{ education.description }}
             </p>
           </div>
         </div>
       </div>
     </b-list-group-item>
+
+</div>
   </div>
 </template>
 

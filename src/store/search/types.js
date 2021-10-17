@@ -1,0 +1,6 @@
+export const FIND_USER = 'FIND_USER'
+export const FIND_PROFESSION = 'FIND_PROFESSION'
+export const FIND_COMMUNITY = 'FIND_COMMUNITY'
+export const GET_RESULT = 'GET_RESULT'
+export const RESET_RESULT = 'RESET_RESULT'
+export const LOADING = 'LOADING'

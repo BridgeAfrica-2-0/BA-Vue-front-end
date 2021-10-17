@@ -18,35 +18,38 @@ import homeIconData from "@iconify-icons/mdi-light/home";
 import ReadMore from "vue-read-more";
 import VueSocialauth from "vue-social-auth";
 // import firebase from "firebase";
+IconifyIcon.addIcon("home", homeIconData);
+
+Vue.use(Vuex);
+Vue.use(VueAxios, axios);
+
 
 import LoadScript from "vue-plugin-load-script";
 import InfiniteLoading from "vue-infinite-loading";
 
+import { loader } from "./mixins"
+
 //import LoadScript from "vue-plugin-load-script";
 
 Vue.use(LoadScript);
-Vue.use(Vuex);
-Vue.use(VueAxios, axios);
-IconifyIcon.addIcon("home", homeIconData);
 
 Vue.use(ReadMore);
 Vue.prototype.$axios = axios;
 
-//temporary comented for build
 // const firebaseConfig = {
-//   apiKey: "AIzaSyDu9rL6_YDSeTyU89tF8JcI9kWNR6617Fg",
-//   authDomain: "bridge-africa-api.firebaseapp.com",
-//   projectId: "bridge-africa-api",
-//   storageBucket: "bridge-africa-api.appspot.com",
-//   messagingSenderId: "50055115922",
-//   appId: "1:50055115922:web:81e9b59a354a0c6e9ee24b",
-//   measurementId: "G-9K2WHP9Y13",
+//   apiKey: process.env.API_KEY,
+//   authDomain: process.env.AUTH_DOMAIN,
+//   projectId: process.env.PROJECT_ID,
+//   storageBucket: process.env.STORAGE_BUCKET,
+//   messagingSenderId: process.env.MESSAGING_SENDER_ID,
+//   appId: process.env.APP_ID,
+//   measurementId: process.env.MEARSUREMENT_ID,
 // };
-//
+
 // firebase.initializeApp(firebaseConfig);
-//
+
 // const messaging = firebase.messaging();
-//
+
 // messaging
 //   .requestPermission()
 //   .then(() => {
@@ -136,11 +139,26 @@ Vue.use(VueGoogleMaps, {
   installComponents: true,
 });
 
+
+import VueLoading from 'vue-loading-overlay';
+import 'vue-loading-overlay/dist/vue-loading.css';
+
+
+Vue.use(VueLoading);
+
+import VueAgile from 'vue-agile'
+
+Vue.use(VueAgile);
+
+
+
+
 Vue.component("v-select", vSelect);
 
 import i18n from "./i18n";
 
 Vue.config.productionTip = false;
+var user=null;
 
 new Vue({
   router,
@@ -151,6 +169,7 @@ new Vue({
     const userInfo = localStorage.getItem("user");
     if (userInfo) {
       const userData = JSON.parse(userInfo);
+      user=userData;
       this.$store.commit("auth/setUserData", userData);
     }
     axios.interceptors.response.use(
@@ -163,7 +182,18 @@ new Vue({
         return Promise.reject(error);
       }
     );
+
+      axios.interceptors.request.use(function (config) {
+
+          if(user!=null){  
+          config.headers.Authorization =  `Bearer  ${user.accessToken}`;
+        }
+          return config;
+      });
+
   },
 
-  render: (h) => h(App),
+
+  render: h => h(App),
+
 }).$mount("#app");

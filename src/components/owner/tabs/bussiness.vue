@@ -1,8 +1,8 @@
 <template>
   <div class="p-0 m-0">
-    <div class="col-md-12 p-0 ">
+    <div class="col-md-12 p-0">
       <fas-icon
-        class="violet float-left mr-1  icon-size primary"
+        class="violet float-left mr-1 icon-size primary"
         :icon="['fas', 'building']"
       />Businesss
       <button
@@ -10,438 +10,390 @@
         data-toggle="modal"
         data-target="#addbusinessbtnModal"
         class="btn btn-outline-primary pull-right float-right mb-2"
-        style="margin-top: -6px;"
-        v-b-modal.modal-1
+        style="margin-top: -6px"
+        v-b-modal.createBusinessModal
       >
         Add Business
       </button>
 
       <hr />
 
-      <b-modal id="modal-1" title="Add Bussiness" size="lg" hide-footer>
-        <div class="row">
-          <div class="col-md-12 mx-0">
-            <form id="msform">
-              <!-- progressbar -->
-              <ul id="progressbar">
-                <li class="active" id="general"><strong>General</strong></li>
-                <li id="contact" class="" v-bind:class="{ active: fieldset5 }">
-                  <strong>Contact</strong>
-                </li>
-                <li
-                  id="location"
-                  class=""
-                  v-bind:class="{ active: fieldset2, active: fieldset3 }"
+      <b-modal
+        id="createBusinessModal"
+        ref="createBusinessModal"
+        title="Add Bussiness"
+        size="lg"
+        hide-footer
+        @close="cancel"
+      >
+        <div>
+          <form-wizard @on-complete="createBusiness">
+            <tab-content title="Business Indentity">
+              <div class="form-card">
+                <div class="row">
+                  <div class="col-md-6">
+                    <input
+                      id="logo"
+                      type="file"
+                      @change="onLogoChange"
+                      hidden
+                    />
+
+                    <div id="preview">
+                      <img v-if="logoimg_url" :src="logoimg_url" />
+                    </div>
+                    <br />
+                    <div class="text-center">
+                      <b-button
+                        v-if="logoimg_url"
+                        @click="chooselogo()"
+                        variant="primary"
+                        class="mt-3 text-center"
+                      >
+                        change Image
+                      </b-button>
+                    </div>
+
+                    <div
+                      class="image-upload-wrap"
+                      v-if="!logoimg_url"
+                      @click="chooselogo()"
+                    >
+                      <a
+                        href="#"
+                        data-toggle="modal"
+                        data-target="#createalbumModal"
+                      >
+                        <div class="drag-text">
+                          <i class="fa fa-plus"> </i>
+                          <h3 class="username">Business Logo</h3>
+                        </div>
+                      </a>
+                      <div></div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <b-form-group
+                      id="business_name"
+                      label="Business Name"
+                      label-for="business_name"
+                    >
+                      <b-form-input
+                        id="business_name"
+                        name="business_name"
+                        v-model="form.business_name"
+                        :state="validateState('business_name')"
+                        aria-describedby="business_name-feedback"
+                      ></b-form-input>
+
+                      <b-form-invalid-feedback id="business_name-feedback"
+                        >Business Name Is Required.</b-form-invalid-feedback
+                      >
+                    </b-form-group>
+
+                    <div class="form-group">
+                      <label for="country" class="username"> Keywords :</label
+                      ><br />
+              
+                      <multiselect
+                        v-model="business_keyword"
+                        tag-placeholder="Add this as new Keyword"
+                        placeholder="Add New Keyword"
+                        label="name"
+                        track-by="id"
+                        :options="keywordds"
+                        :multiple="true"
+                        :taggable="true"
+                        @tag="addkeywords"
+                      ></multiselect>
+                    </div>
+
+                    <div class="form-group">
+                      <label for="username" class="username">About</label><br />
+                      <textarea
+                        type="textarea"
+                        name="business_about"
+                        v-model="about"
+                        id="description"
+                        placeholder="Brief description about your Busness"
+                        class="form-control text"
+                      ></textarea>
+                    </div>
+                  </div>
+                </div>
+
+                <div>
+                  <label class="typo__label"> Category </label>
+                  <multiselect
+                    v-model="multiselecvalue"
+                    @input="subcategories"
+                    tag-placeholder="Add this as new tag"
+                    placeholder="Search or add a tag"
+                    label="name"
+                    track-by="id"
+                    :options="pcategories"
+                    :multiple="true"
+                    :taggable="true"
+                    @tag="addTag"
+                  ></multiselect>
+                </div>
+
+                <div>
+                  <label class="typo__label"> Sub Category</label>
+                  <multiselect
+                    v-model="filterselectvalue"
+                    tag-placeholder="Add this as new tag"
+                    placeholder="Search or add a tag"
+                    label="subcategory"
+                    track-by="sub_cat_id"
+                    :options="scategories"
+                    :multiple="true"
+                    :taggable="true"
+                    @tag="addFilter"
+                  ></multiselect>
+                </div>
+
+                <label class="typo__label">Fiters</label>
+                <div>
+                  <b-card no-body>
+                    <b-tabs pills card vertical>
+                      <b-tab
+                        :title="filters.subcategory"
+                        v-for="filters in filterselectvalue"
+                        :key="filters.id"
+                        active
+                        ><b-card-text>
+                          <b-form-group label="Filters" class="colorblack">
+                            <b-form-checkbox-group
+                              id=""
+                              class="colorblack"
+                              v-model="select_filterss"
+                              name="filters"
+                            >
+                              <b-form-checkbox
+                              class="colorblack"
+                                v-for="fil in filters.filters"
+                                :key="fil.id"
+                                :value="fil.id"
+                              >
+                                {{ fil.name }}
+                              </b-form-checkbox>
+                            </b-form-checkbox-group>
+                          </b-form-group>
+                        </b-card-text></b-tab
+                      >
+                    </b-tabs>
+                  </b-card>
+                </div>
+              </div>
+            </tab-content>
+
+            <tab-content title=" Location ">
+              <div class="form-card">
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="country" class="username"> Country :</label
+                      ><br />
+                      <multiselect
+                        v-model="country"
+                        @input="Region"
+                        placeholder="Search "
+                        label="name"
+                        track-by="id"
+                        :options="countries"
+                        :multiple="true"
+                      ></multiselect>
+                    </div>
+                  </div>
+
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="country" class="username"> Region :</label
+                      ><br />
+                      <multiselect
+                        v-model="region"
+                        @input="Division"
+                        placeholder="Search"
+                        label="name"
+                        track-by="id"
+                        :options="regions"
+                        :multiple="true"
+                      ></multiselect>
+                    </div>
+                  </div>
+
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="country" class="username"> Division :</label
+                      ><br />
+                      <multiselect
+                        v-model="division"
+                        @input="Municipality"
+                        placeholder="Search"
+                        label="name"
+                        track-by="id"
+                        :options="divisions"
+                        :multiple="true"
+                      ></multiselect>
+                    </div>
+                  </div>
+
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="country" class="username">
+                        Municipality :</label
+                      ><br />
+
+                      <multiselect
+                        v-model="municipality"
+                        @input="Locality"
+                        placeholder="Search"
+                        label="name"
+                        track-by="id"
+                        :options="municipalities"
+                        :multiple="true"
+                      ></multiselect>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="Neighbor" class="username"> Neighbor :</label
+                      ><br />
+                      <multiselect
+                        v-model="locality"
+                        placeholder="Search"
+                        label="name"
+                        track-by="id"
+                        :options="localities"
+                        :multiple="true"
+                      ></multiselect>
+                    </div>
+                  </div>
+
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="Neighbor" class="username"> Adress :</label>
+
+                      <gmap-autocomplete
+                        @place_changed="initMarker"
+                        class="form-control"
+                      >
+                      </gmap-autocomplete>
+                    </div>
+                  </div>
+                </div>
+
+                <gmap-map
+                  :zoom="14"
+                  :center="center"
+                  style="width: 100%; height: 200px"
                 >
-                  <strong>Location</strong>
-                </li>
-              </ul>
-              <!-- fieldsets -->
-              <fieldset class="position-relative opacity-100" v-if="fieldset1">
-                <div class="form-card">
-                  <div class="row">
-                    <div class="col-md-6">
-                      <div class="image-upload-wrap">
-                        <a
-                          href="#"
-                          data-toggle="modal"
-                          data-target="#createalbumModal"
-                        >
-                          <div class="drag-text">
-                            <i class="fa fa-plus" aria-hidden="true"></i>
-                            <h3>Add Logo</h3>
-                          </div>
-                        </a>
-                        <div></div>
-                      </div>
-                    </div>
-                    <div class="col-md-6">
-                      <div class="form-group">
-                        <label for="username">Busness Name:</label><br />
-                        <input
-                          type="text"
-                          name="username"
-                          id="username"
-                          placeholder="Busness Name"
-                          class="form-control"
-                        />
-                      </div>
+                  <gmap-marker
+                    :key="index"
+                    v-for="(m, index) in locationMarkers"
+                    :position="m.position"
+                    @click="center = m.position"
+                  ></gmap-marker>
+                </gmap-map>
+              </div>
+            </tab-content>
 
-                      <div class="form-group">
-                        <label for="category">Business Category:</label><br />
+            <tab-content title=" Contact ">
+              <b-card>
+                <b-row>
+                
+                  <b-col md="6">
+                    <label class="username"> Phone1 </label>
+                    <VuePhoneNumberInput v-model="phone1" />
+                  </b-col>
+                  <b-col md="6">  
+                    <label class="username"> Phone2 </label>
+                    <VuePhoneNumberInput v-model="phone2" />
+                  </b-col>
+                </b-row>
 
-                        <b-form-select
-                          v-model="category"
-                          :options="categories"
-                          class="mb-3"
-                          value-field="item"
-                          text-field="name"
-                        ></b-form-select>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="row">
-                    <div class="col-md-6">
-                      <div class="form-group">
-                        <label for="username">Keywords</label><br />
-                        <div class="col-md-12 pl-0 pr-0">
-                          <input
-                            type="text"
-                            name="username"
-                            id="username"
-                            placeholder="Enter Keyword"
-                            class="form-control"
-                          />
-                        </div>
-                      </div>
-                    </div>
-
-                    <div class="col-md-6">
-                      <div class="form-group">
-                        <label for="username"> TomeZone: </label><br />
-                        <select id="category" class="form-control ">
-                          <option value="" selected="" disabled=""
-                            >Select Timezone</option
-                          >
-                          <option>(UTC - 09:00) Alaska</option>
-                          <option>(UTC - 09:00) Alaska1</option>
-                          <option>(UTC - 09:00) Alaska2</option>
-                          <option>(UTC - 09:00) Alaska3</option>
-                        </select>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="row">
-                    <div class="col-md-12">
-                      <div class="form-group">
-                        <label for="username">About</label><br />
-                        <textarea
-                          type="textarea"
-                          name="description"
-                          id="description"
-                          placeholder="Brief description about your Busness"
-                          class="form-control"
-                        ></textarea>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <input
-                  type="button"
-                  name="cancel"
-                  class="cancel btn btn-dark-gray"
-                  value="Cancel"
-                />
-                <input
-                  type="button"
-                  name="next"
-                  class="next btn ml-3 btn-outline-primary orange"
-                  value="Next Step"
-                  v-on:click="closeOne"
-                />
-              </fieldset>
-
-              <fieldset class="position-relative opacity-100" v-if="fieldset2">
-                <div class="form-card">
-                  <div class="row">
-                    <label
-                      class=" pl-0 ml-3 control-label float-left"
-                      for="name"
-                      >Phone</label
-                    >
-
-                    <div class="input-group col-md-12 mb-4 selec">
-                      <div class="col-md-12  pl-0 pr-0">
-                        <select
-                          id="country"
-                          class="form-control col-md-3 float-left"
-                        >
-                          <option>USA(+1)</option>
-                          <option>USA(+1)</option>
-                          <option>USA(+1)</option>
-                          <option>India(+91)</option>
-                        </select>
-
-                        <input
-                          id="tel"
-                          name="tel"
-                          type="tel"
-                          placeholder=""
-                          class="form-control col-md-9"
-                        />
-                      </div>
-
-                      <div class="checkbox">
-                        <label
-                          ><input type="checkbox" value="" />This business does
-                          not have a Phone</label
-                        >
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="row">
-                    <label
-                      class=" pl-0 ml-3 control-label float-left"
-                      for="name"
-                      >Phone 2</label
-                    >
-
-                    <div class="input-group col-md-12 mb-4 selec">
-                      <div class="col-md-12  pl-0 pr-0">
-                        <select
-                          id="country"
-                          class="form-control col-md-3 float-left"
-                        >
-                          <option>USA(+1)</option>
-                          <option>USA(+1)</option>
-                          <option>USA(+1)</option>
-                          <option>India(+91)</option>
-                        </select>
-
-                        <input
-                          id="tel"
-                          name="tel"
-                          type="tel"
-                          placeholder=""
-                          class="form-control col-md-9"
-                        />
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="row mb-3">
-                    <div class="col-md-12">
-                      <div class="form-group">
-                        <label for="alias">Website</label><br />
-                        <input
-                          type="text"
-                          name="Website"
-                          id="Website"
-                          placeholder="www.Website.comm"
-                          class="form-control"
-                        />
-                        <div class="checkbox">
-                          <label
-                            ><input type="checkbox" value="" />This business
-                            does not have a Website</label
-                          >
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="row mb-5">
-                    <div class="col-md-12">
-                      <div class="form-group">
-                        <label for="alias">Email</label><br />
-                        <input
-                          type="Email"
-                          name="Email"
-                          id="Emaisl"
-                          placeholder="Email.com"
-                          class="form-control"
-                        />
-                        <div class="checkbox">
-                          <label
-                            ><input type="checkbox" value="" />This business
-                            does not have a Email</label
-                          >
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <input
-                  type="button"
-                  name="cancel"
-                  class="cancel btn btn-dark-gray"
-                  value="Cancel"
-                />
-                <input
-                  type="button"
-                  name="previous"
-                  class="previous ml-3 btn btn-dark"
-                  value="Previous"
-                />
-                <input
-                  type="button"
-                  name="next"
-                  class="next ml-3 btn btn-outline-primary orange"
-                  value="Next Step"
-                  v-on:click="closeTwo"
-                />
-              </fieldset>
-
-              <fieldset class="position-relative opacity-100" v-if="fieldset3">
-                <div class="form-card">
-                  <div class="row">
-                    <div class="col-md-12">
-                      <div class="col-md-6 pl-0">
-                        <div class="form-group">
-                          <label for="username">City </label><br />
-                          <input
-                            type="text"
-                            name="username"
-                            id="username"
-                            placeholder="City, Country"
-                            class="form-control"
-                          />
-                        </div>
-                      </div>
-                      <div class="col-md-6 pl-0">
-                        <div class="form-group">
-                          <label for="alias">Neighbourhood </label><br />
-                          <input
-                            type="text"
-                            name="alias"
-                            id="alias"
-                            placeholder="Neighbourhood name, City, Country"
-                            class="form-control"
-                          />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="row">
-                    <div class="col-md-12">
-                      <div class="form-group">
-                        <label for="username">Three Location Descriptions</label
-                        ><br />
-                        <div class="col-md-12 pl-0 pr-0">
-                          Choix
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="row">
-                    <div class="col-md-12">
-                      <iframe
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d26373534.241211604!2d-113.7593 23355 12333!3d36.204849821363666!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x54eab584e43 2360b%3A0x1c3bb99243deb742!2sUnited%20States!5e0!3m2!1sen!2sin!4v1597127134108!5m2!1sen!2sin"
-                        allowfullscreen=""
-                        aria-hidden="false"
-                        tabindex="0"
-                        height="350"
-                        class="w-100"
-                        frameborder="0"
-                      ></iframe>
-                    </div>
-                  </div>
-                </div>
-
-                <input
-                  type="button"
-                  name="cancel"
-                  class="cancel btn btn-dark-gray"
-                  value="Cancel"
-                />
-                <input
-                  type="button"
-                  name="previous"
-                  class="previous ml-3 btn btn-dark"
-                  value="Previous"
-                />
-                <input
-                  type="button"
-                  name="Save"
-                  class="next ml-3 btn btn-outline-primary save orange"
-                  value="Save"
-                  v-on:click="closeThree"
-                />
-              </fieldset>
-
-              <fieldset>
-                <div class="form-card">
-                  <h4 class="fs-title text-center">
-                    <i aria-hidden="true" class="fa fa-check-circle"></i> Your
-                    business identity is successfully created !
-                  </h4>
-
-                  <div class="row justify-content-center">
-                    <div class="col-9 text-center">
-                      <h5>Business Name Here</h5>
-                      <a href="#">http://business.com</a>
-                      <p><b>Business Category </b></p>
+                <b-row>
+                  <b-col md="6">
+                    <div class="form-group">
+                      <label for="Neighbor" class="username"> Website :</label
+                      ><br />
                       <input
-                        type="button"
-                        name="Save"
-                        class="btn savebtnn orange"
-                        value="View Profile"
+                        type="text"
+                        name="alias"
+                        v-model="website"
+                        id="Website"
+                        placeholder="Neighbor"
+                        class="form-control text"
                       />
                     </div>
-                  </div>
+                  </b-col>
 
-                  <div class="row">
-                    <div class="col-md-12 text-left p-3">
-                      <div class="col-md-12 float-left border bg-modb p-3">
-                        <p class="w-100">
-                          <i class="fa fa-info-circle" aria-hidden="true"></i>
-                          Get your personalised website<span
-                            class="pull-right fontis pt-1"
-                            >Cureent Plan Basic (Free)</span
-                          >
-                        </p>
+                  <b-col md="6">
+                    <div class="form-group">
+                      <label for="email" class="username"> Email :</label><br />
+                      <input
+                        type="text"
+                        name="alias"
+                        v-model="email"
+                        id="email"
+                        placeholder="Neighbor"
+                        class="form-control text"
+                      />
+                    </div>
+                  </b-col>
 
-                        <p class="w-100 fontis">
-                          Now you can create personalised website for your
-                          business, select from a collection of free and premium
-                          templates, connect your domain, premium support and
-                          much more exciting features.
-                        </p>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="username" class="username">TimeZone:</label
+                      ><br />
 
-                        <a class="pull-right" href="#">View Plans</a>
-                      </div>
+                      <b-form-select
+                        id="timezone"
+                        v-model="time_zone"
+                        :options="timezone"
+                      ></b-form-select>
                     </div>
                   </div>
-                </div>
-              </fieldset>
-            </form>
-          </div>
+                </b-row>
+              </b-card>
+            </tab-content>
+          </form-wizard>
         </div>
       </b-modal>
 
       <div class="row mb-4">
         <div class="col">
           <h6 class="mb-0"><b></b></h6>
-
-          <!--
-          <hr />
-
-
-          <div id="btnContainer">
-            <button class="btn primary" onclick="listView()">
-              <fas-icon
-                class="primary float-left mr-1 mt-1"
-                :icon="['fas', 'list']"
-              />
-              List
-            </button>
-            <button class="btn activegrid" onclick="gridView()">
-              <fas-icon
-                class="primary float-left mr-1 mt-1"
-                :icon="['fas', 'th-large']"
-              />Grid
-            </button>
-          </div>
-
--->
-
           <b-row>
-            <b-col md="12" lg="6" class="p-0">
+            <b-col
+              md="12"
+              lg="6"
+              class="p-0"
+              v-for="business in profilebusiness"
+              :key="business.business_id"
+            >
               <div class="people-style shadow">
+                <b-link
+                  v-b-modal.createBusinessModal
+                  @click="editBusiness(business.id)"
+                >
+                  <div class="float-right">
+                    <b-icon
+                      icon="three-dots-vertical"
+                      class="icon-size"
+                    ></b-icon>
+                  </div>
+                </b-link>
                 <b-row>
                   <b-col md="3" xl="3" lg="5" cols="5" sm="3">
                     <div class="center-img">
                       <splide :options="options" class="r-image">
                         <splide-slide cl>
-                          <img
-                            src="https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg"
-                            class="r-image"
-                          />
+                          <img :src="business.logo_path" class="r-image" />
                         </splide-slide>
                       </splide>
                     </div>
@@ -449,55 +401,31 @@
 
                   <b-col md="5" cols="7" lg="7" xl="9" sm="5">
                     <p class="textt text">
-                      <strong class="title"> Super Car ltd </strong> <br />
-                      Car marketing
+                     
+                      <strong class="title">
+                        {{ business.name }}
+                      </strong>
                       <br />
-                      20k Community <br />
+                      <span v-if=" Array.isArray(business.category) ">  
+                      <span class="m-1" v-for=" cat in business.category" :key="cat.name "> {{cat.name}} </span> </span>
+                      <br />
+                      {{ business.community }} Community  {{business.id}} <br />
 
                       <span class="location">
-                        <b-icon-geo-alt class="ico"></b-icon-geo-alt> Douala
-                        cameroon
+                        <b-icon-geo-alt class="ico"></b-icon-geo-alt>
+                        {{ business.city }} {{ business.country }}
                       </span>
                       <br />
 
-                      super best car seller in the world adipisicing elit. lorem
-                      epsep this is <b-link>Read More</b-link>
-                    </p>
-                  </b-col>
-                </b-row>
-              </div>
-            </b-col>
-            <b-col md="12" lg="6" class="p-0">
-              <div class="people-style shadow">
-                <b-row>
-                  <b-col md="3" xl="3" lg="5" cols="5" sm="3">
-                    <div class="center-img">
-                      <splide :options="options" class="r-image">
-                        <splide-slide cl>
-                          <img
-                            src="https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg"
-                            class="r-image"
-                          />
-                        </splide-slide>
-                      </splide>
-                    </div>
-                  </b-col>
-
-                  <b-col md="5" cols="7" lg="7" xl="9" sm="5">
-                    <p class="textt text">
-                      <strong class="title"> Super Car ltd </strong> <br />
-                      Car marketing
-                      <br />
-                      20k Community <br />
-
-                      <span class="location">
-                        <b-icon-geo-alt class="ico"></b-icon-geo-alt> Douala
-                        cameroon
-                      </span>
-                      <br />
-
-                      super best car seller in the world adipisicing elit. lorem
-                      epsep this is <b-link>Read More</b-link>
+                      <read-more
+                        more-str="read more"
+                        class="readmore"
+                        :text="business.about_business"
+                        link="#"
+                        less-str="read less"
+                        :max-chars="55"
+                      >
+                      </read-more>
                     </p>
                   </b-col>
                 </b-row>
@@ -511,82 +439,631 @@
 </template>
 
 <script>
+import axios from "axios";
+
+import Multiselect from "vue-multiselect";
+import { validationMixin } from "vuelidate";
+
+import { required, email, minLength } from "vuelidate/lib/validators";
+import VuePhoneNumberInput from "vue-phone-number-input";
+import "vue-phone-number-input/dist/vue-phone-number-input.css";
+
 export default {
-  name: "bussiness",
+  mixins: [validationMixin],
   data() {
     return {
-      category: "",
-      categories: [
-        { item: "Professional_and_home_service", name: "Professionals" },
-        { item: "Agriculture ", name: "Agriculture " },
-        { item: "Restaurant ", name: " Restaurant " },
-        { item: "Electronics ", name: "Electronics " },
-        { item: "Handicrafts", name: "Handicrafts" },
-        { item: "clothing", name: "clothing" },
-        { item: "Mechanics", name: "Mechanics" },
-        { item: "Health_unit ", name: "Health unit " },
-        { item: "Bars", name: "Bars" },
-        { item: "Hair_and_beauty ", name: "Hair and beauty " },
-        { item: "Real_estate ", name: "Real_estate " },
-        { item: "Travelling ", name: "Travelling " },
-        { item: "Hotels", name: "Hotels" },
-        { item: "station", name: " station  " },
-        { item: "Mayor_concils", name: "Mayor_concils" },
-        { item: "Taxis service", name: "Taxis service" }
+      useas: "",
+      editbiz: "",
+      selectedusecase: "",
+      keywordds:[],
+      phone1: null,
+      phone2: null,
+      emaill: null,
+      website: null,
+      first_page: "true",
+      country: [],
+      region: [],
+      division: [],
+      municipality: [],
+      locality: [],
+      username: this.$store.state.auth.user.user.name,
+      img_url: null,
+      select_filterss: [],
+      sendingP: false,
+      sendingB: false,
+      profile_pic: "",
+      dob: null,
+      gender: null,
+      city: null,
+      Neighbor: null,
+      step1: false,
+      step2: false,
+      logo_pic: "",
+      logoimg_url: null,
+      form: {
+        business_name: null,
+      },
+      business_category: "Testing",
+      business_keyword: [],
+      time_zone: null,
+      language: null,
+      about: null,
+      loadingWizard: false,
+
+      center: {
+        lat: 39.7837304,
+        lng: -100.4458825,
+      },
+      locationMarkers: [],
+      locPlaces: [],
+      existingPlace: null,
+
+      multiselecvalue: [],
+      filterselectvalue: [],
+      multiselec: [
+        { name: "Vue.js", code: "vu" },
+        { name: "Javascript", code: "js" },
+        { name: "Open Source", code: "os" },
+      ],
+      timezone: [
+        { text: "(GMT+1) West African ", value: "+1" },
+        { text: "(GMT-11:00) Midway Island, Samoa", value: "-11" },
+      ],
+      options: [
+        { text: " Person", value: "person" },
+        { text: " Business ", value: "business" },
       ],
 
-      fieldset1: true,
-      fieldset2: false,
-      fieldset3: false,
-      fieldset4: false,
-      fieldset5: false
+      category: "",
     };
   },
+
+  validations: {
+    form: {
+      business_name: {
+        required,
+      },
+    },
+  },
+
   methods: {
-    closeOne() {
-      this.fieldset1 = false;
-      this.fieldset2 = true;
-      this.fieldset3 = false;
-      this.fieldset4 = false;
-      this.fieldset5 = true;
+
+    editBusiness(id){
+
+
+
+
+         axios.get("business/edit/"+id).then(({ data }) => {
+        console.log(data);
+        this.editbiz=data.data;
+        this.setEditData(data.data)
+      }).catch((err) => {
+          console.log({ err: err });
+        });
     },
-    closeTwo() {
-      this.fieldset1 = false;
-      this.fieldset2 = false;
-      this.fieldset3 = true;
-      this.fieldset4 = false;
-      this.fieldset5 = this.fieldset4 || this.fieldset3;
-    },
-    closeThree() {
-      this.fieldset1 = false;
-      this.fieldset2 = false;
-      this.fieldset3 = false;
-      this.fieldset4 = true;
+
+
+
+
+    setEditData(business){
+      
+      this.multiselecvalue=business.category;
+      this.filterselectvalue=business.subCategory;
+      this.select_filterss=business.filter;
+      this.country=business.country;
+      this.region=business.region;
+      this.division=business.division
+      this.municipality=business.council
+      this.phone1=business.phone1;
+      this.phone2=business.phone2
+      this.website=business.this.website;
+      this.locality=business.neigborhood;
+      this.email=business.email;
+      this.time_zone=business.timeZone;
+      this.business_keyword=business.keywords;
+      this.address=business.address;
+      
+
     }
-  }
+,
+    addTag(newTag) {
+      const tag = {
+        name: newTag,
+        id: newTag.substring(0, 2) + Math.floor(Math.random() * 10000000),
+      };
+      this.multiselec.push(tag);
+      this.multiselecvalue.push(tag);
+    },
+
+    addkeywords(newTag) {
+      const tag = {
+        name: newTag,
+        id: newTag.substring(0, 2) + Math.floor(Math.random() * 10000000),
+      };
+      this.keywordds.push(tag);
+      this.business_keyword.push(tag);
+    },
+
+    addCategoryTag(newTag) {
+      const tag = {
+        name: newTag,
+        id: newTag.substring(0, 2) + Math.floor(Math.random() * 10000000),
+      };
+      this.multiselec.push(tag);
+      this.multiselecvalue.push(tag);
+    },
+
+    addFilter(newTag) {
+      const tag = {
+        name: newTag,
+        id: newTag.substring(0, 2) + Math.floor(Math.random() * 10000000),
+      };
+      this.multiselec.push(tag);
+      this.filterselectvalue.push(tag);
+    },
+
+    categories() {
+      this.$store
+        .dispatch("auth/categories")
+        .then(() => {
+          console.log("hey yeah");
+        })
+        .catch((err) => {
+          console.log({ err: err });
+        });
+    },
+
+    subcategories() {
+      let formData2 = new FormData();
+      formData2.append("categoryId", this.selectedcategories);
+
+      this.$store
+        .dispatch("auth/subcategories", formData2)
+        .then(() => {
+          console.log("hey yeah");
+        })
+        .catch((err) => {
+          console.log({ err: err });
+        });
+    },
+
+    filters() {
+      this.$store
+        .dispatch("auth/filters")
+        .then(() => {
+          console.log("hey yeah");
+        })
+        .catch((err) => {
+          console.log({ err: err });
+        });
+    },
+
+    Setcategoryfiters() {
+      this.$store
+        .dispatch("auth/Setcategoryfiters")
+        .then(() => {
+          console.log("hey yeah");
+        })
+        .catch((err) => {
+          console.log({ err: err });
+        });
+    },
+
+    Country() {
+      this.$store
+        .dispatch("auth/country")
+        .then(() => {
+          console.log("hey yeah");
+        })
+        .catch((err) => {
+          console.log({ err: err });
+        });
+    },
+
+    profileBusiness() {
+      this.$store
+        .dispatch("profile/profileBusiness")
+        .then(() => {
+          console.log("hey yeah");
+        })
+        .catch((err) => {
+          console.log({ err: err });
+        });
+    },
+
+    Region() {
+      let formData2 = new FormData();
+      formData2.append("countryId", this.selectedcountry);
+
+      this.$store
+        .dispatch("auth/region", formData2)
+        .then(() => {
+          console.log("hey yeah");
+        })
+        .catch((err) => {
+          console.log({ err: err });
+        });
+    },
+
+    Division() {
+      let formData2 = new FormData();
+      formData2.append("regionId", this.selectedregion);
+
+      this.$store
+        .dispatch("auth/division", formData2)
+        .then(() => {
+          console.log("hey yeah");
+        })
+        .catch((err) => {
+          console.log({ err: err });
+        });
+    },
+
+    Municipality() {
+      let formData2 = new FormData();
+      formData2.append("divisionId", this.selecteddivision);
+
+      this.$store
+        .dispatch("auth/municipality", formData2)
+        .then(() => {
+          console.log("hey yeah");
+        })
+        .catch((err) => {
+          console.log({ err: err });
+        });
+    },
+
+    Locality() {
+      let formData2 = new FormData();
+      formData2.append("councilId", this.selectedmunicipality);
+
+      this.$store
+        .dispatch("auth/locality", formData2)
+        .then(() => {
+          console.log("hey yeah");
+        })
+        .catch((err) => {
+          console.log({ err: err });
+        });
+    },
+    setLoading: function(value) {
+      this.loadingWizard = value;
+    },
+
+    validateState(name) {
+      const { $dirty, $error } = this.$v.form[name];
+      return $dirty ? !$error : null;
+    },
+
+    getValidationClass(fieldName) {
+      const field = this.$v.form[fieldName];
+      if (field) {
+        return {
+          red: field.$invalid && field.$dirty,
+        };
+      }
+    },
+
+
+    businessAround() {
+      this.$store
+        .dispatch("auth/businessAround")
+        .then(() => {
+          console.log("hey yeah");
+        })
+        .catch((err) => {
+          console.log({ err: err });
+        });
+    },
+
+    peopleAround() {
+      this.$store
+        .dispatch("auth/peopleAround")
+        .then(() => {
+          console.log("hey yeah");
+        })
+        .catch((err) => {
+          console.log({ err: err });
+        });
+    },
+
+    initMarker(loc) {
+      this.existingPlace = loc;
+      this.addLocationMarker();
+    },
+
+    addLocationMarker() {
+      if (this.existingPlace) {
+        const marker = {
+          lat: this.existingPlace.geometry.location.lat(),
+          lng: this.existingPlace.geometry.location.lng(),
+        };
+
+        this.locationMarkers.push({ position: marker });
+        this.locPlaces.push(this.existingPlace);
+        this.center = marker;
+        this.existingPlace = null;
+      }
+    },
+
+    locateGeoLocation: function() {
+      navigator.geolocation.getCurrentPosition((res) => {
+        this.center = {
+          lat: res.coords.latitude,
+          lng: res.coords.longitude,
+        };
+      });
+    },
+    createBusiness: function() {
+      return new Promise((resolve, reject) => {
+        this.sendingB = true;
+        let loader = this.$loading.show({
+          container: this.fullPage ? null : this.$refs.loader,
+          canCancel: true,
+          onCancel: this.onCancel,
+          color: "#e75c18",
+        });
+
+        let formData2 = new FormData();
+        formData2.append("logo_path", this.logo_pic);
+
+        formData2.append("region", this.selectedregion);
+        formData2.append("city", this.city);
+        formData2.append("country", this.selectedcountry);
+
+        formData2.append("address", this.adress);
+        formData2.append("division", this.selecteddivision);
+        formData2.append("council", this.selectedmunicipality);
+
+        formData2.append("neigborhood", this.selectedlocality);
+        formData2.append("lat", this.center.lat);
+        formData2.append("lng", this.center.lng);
+        formData2.append("phone1", this.phone1);
+        formData2.append("phone2", this.phone2);
+        formData2.append("email", this.email);
+        formData2.append("website", this.website);
+
+        formData2.append("name", this.form.business_name);
+        formData2.append("categoryId", this.selectedcategories);
+        formData2.append("subCategoryId", this.selectedsubcategories);
+        formData2.append("filterId", this.select_filterss);
+        formData2.append("keywords", this.business_keyword);
+        formData2.append("timezone", this.time_zone);
+        formData2.append("language", this.language);
+        formData2.append("about_business", this.about);
+
+        this.axios
+          .post("business/add", formData2, {
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
+          })
+          .then((response) => {
+            console.log(response);
+
+            this.sendingB = false;
+            this.profileBusiness();
+           
+            this.$refs["createBusinessModal"].hide();
+            this.flashMessage.show({
+              status: "success",
+              blockClass: "custom-block-class",
+              message: "Business Profile Created",
+            });
+
+            loader.hide();
+            resolve(true);
+          })
+          .catch((err) => {
+            console.log({ err: err });
+
+            this.sendingB = false;
+
+            if (err.response.status == 422) {
+              console.log({ err: err });
+              console.log(err.response.data.message);
+
+              this.flashMessage.show({
+                status: "error",
+
+                message: err.response.data.message,
+                blockClass: "custom-block-class",
+              });
+            } else {
+              this.flashMessage.show({
+                status: "error",
+
+                message: "Unable to Create Your Business",
+                blockClass: "custom-block-class",
+              });
+              console.log({ err: err });
+            }
+            loader.hide();
+            resolve(false);
+          });
+      });
+    },
+
+  
+
+    chooseProfile1: function() {
+      document.getElementById("profile1").click();
+    },
+
+    chooseProfile2: function() {
+      document.getElementById("profile2").click();
+    },
+
+    onFileChange(e) {
+      this.profile_pic = e.target.files[0];
+      const file = e.target.files[0];
+      this.img_url = URL.createObjectURL(file);
+    },
+
+    onLogoChange(e) {
+      this.logo_pic = e.target.files[0];
+      const logofile = e.target.files[0];
+      this.logoimg_url = URL.createObjectURL(logofile);
+    },
+
+    chooselogo: function() {
+      document.getElementById("logo").click();
+    },
+
+    showModal() {
+      this.$refs["modal-3"].show();
+    },
+    hideModal() {
+      this.$refs["modal-3"].hide();
+    },
+
+    choseModal() {
+      if (this.useas == "") {
+        this.useas = "person";
+        this.selectedusecase = this.useas;
+      } else {
+        this.selectedusecase = this.useas;
+      }
+
+      this.first_page = false;
+    },
+  },
+
+  mounted() {
+    this.locateGeoLocation();
+
+    this.categories();
+
+    this.Country();
+
+    this.profileBusiness();
+
+    //this.filters()
+
+    //this.Setcategoryfiters()
+  },
+
+  components: {
+    Multiselect,
+    VuePhoneNumberInput,
+  },
+
+  computed: {
+      selectedKeywords: function () {
+      let selectedUsers = [];
+      this.business_keyword.forEach((item) => {
+        selectedUsers.push(item.id);
+      });
+      return selectedUsers;
+    },
+
+    profilebusiness: function() {
+      return this.$store.state.profile.profileBusiness;
+    },
+
+    selectedcategories: function() {
+      let selectedUsers = [];
+      this.multiselecvalue.forEach((item) => {
+        selectedUsers.push(item.id);
+      });
+      return selectedUsers;
+    },
+    selectedsubcategories: function() {
+      let sub_cat = [];
+      this.filterselectvalue.forEach((item) => {
+        sub_cat.push(item.sub_cat_id);
+      });
+      return sub_cat;
+    },
+    selectedcountry: function() {
+      let sub_cat = [];
+      this.country.forEach((item) => {
+        sub_cat.push(item.id);
+      });
+      return sub_cat;
+    },
+    selectedregion: function() {
+      let sub_cat = [];
+      this.region.forEach((item) => {
+        sub_cat.push(item.id);
+      });
+      return sub_cat;
+    },
+    selecteddivision: function() {
+      let sub_cat = [];
+      this.division.forEach((item) => {
+        sub_cat.push(item.id);
+      });
+      return sub_cat;
+    },
+    selectedmunicipality: function() {
+      let sub_cat = [];
+      this.municipality.forEach((item) => {
+        sub_cat.push(item.id);
+      });
+      return sub_cat;
+    },
+    selectedlocality: function() {
+      let sub_cat = [];
+      this.locality.forEach((item) => {
+        sub_cat.push(item.id);
+      });
+      return sub_cat;
+    },
+    pcategories() {
+      return this.$store.state.auth.categories;
+    },
+
+    scategories() {
+      return this.$store.state.auth.subcategories;
+    },
+
+    countries() {
+      return this.$store.state.auth.country;
+    },
+
+    regions() {
+      return this.$store.state.auth.region;
+    },
+
+    divisions() {
+      return this.$store.state.auth.division;
+    },
+
+    municipalities() {
+      return this.$store.state.auth.municipality;
+    },
+
+    localities() {
+      return this.$store.state.auth.locality;
+    },
+  },
 };
+import "vue-form-wizard/dist/vue-form-wizard.min.css";
 </script>
 
 <style scoped>
+.username{
+  color: black;
+}
+.colorblack{
+  color:black;
+}
 .logo-img {
   width: 60px;
 }
-
 @media only screen and (max-width: 768px) {
   .btn {
     font-size: 10px;
   }
-
   .text-lost {
     flex-basis: 70%;
     padding-left: 10px;
     font-size: 12px;
   }
-
   h4 {
     font-size: 15px;
   }
-
   .logo-img {
     width: 30px;
   }
@@ -594,36 +1071,29 @@ export default {
     font-size: 10px;
   }
 }
-
 .picture {
   border-radius: 10px;
   width: 48%;
   flex-basis: 40%;
 }
-
 .text-lost {
   flex-basis: 90%;
   padding-left: 30px;
 }
-
 .colum {
   justify-content: space-around;
 }
-
 .chart {
   display: block;
   height: 315px;
   width: 400px;
 }
-
 .text-design {
   line-height: 40px;
 }
-
 .bg-dark {
   background-color: #3d8d79 !important;
 }
-
 @media (max-width: 576px) {
   .lb-grid {
     height: 200px;
@@ -659,173 +1129,125 @@ export default {
   .lb-grid {
     height: 500px;
   }
-
   .corps {
     margin-top: 6rem !important;
   }
 }
-
 @media only screen and (min-width: 768px) {
   .center-img {
     margin-right: -60px;
   }
 }
-
 .card {
   color: orange;
 }
-
 .s-button {
   align-content: center;
   text-align: center;
-
   padding: 15px;
 }
-
 @media only screen and (max-width: 768px) {
   .a-flex {
     margin-right: -15px;
   }
-
   .title {
     font-size: 16px;
     color: black;
-
     line-height: 35px;
     font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
   }
-
   .textt {
     color: #000;
-
     font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-weight: normal;
     font-size: 12px;
     line-height: 30px;
     color: rgba(117, 114, 128, 1);
     text-align: left;
-
     font-weight: normal;
     line-height: 20px;
     font-style: normal;
-
     padding: 1px;
     text-align: left;
-
     margin-left: -30px;
-
     margin-right: -5px;
-
     line-height: 25px;
   }
-
   .location {
     margin-bottom: 30px;
   }
-
   .r-image {
     border-radius: 8px;
-
     height: 100px;
     width: 100px;
   }
 }
-
 @media only screen and (min-width: 768px) {
   .title {
     font-size: 20px;
     color: black;
-
     line-height: 35px;
     font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
   }
-
   .textt {
     color: #000;
-
     font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-weight: normal;
     font-size: 12px;
     line-height: 30px;
     color: rgba(117, 114, 128, 1);
     text-align: left;
-
     font-weight: normal;
     line-height: 20px;
     font-style: normal;
-
     padding: 1px;
     text-align: left;
-
     margin-left: 30px;
-
     margin-right: -5px;
-
     line-height: 25px;
   }
-
   .location {
     margin-bottom: 30px;
   }
-
   .r-image {
     border-radius: 8px;
-
     height: 160px;
     width: 160px;
   }
 }
-
 .stock {
   color: green;
 }
-
 .ico {
   margin-right: 5px;
 }
-
 @media only screen and (min-width: 768px) {
   .people-style {
     border-top-left-radius: 5px;
-
     border-bottom-left-radius: 5px;
-
     border-top-right-radius: 5px;
-
     border-bottom-right-radius: 5px;
-
     background: white;
-
     background-color: #fff;
     background-clip: border-box;
     border: 1px solid rgba(0, 0, 0, 0.125);
     margin-bottom: 10px;
-
     margin-right: 8px;
-
     padding: 7px;
   }
 }
-
 @media only screen and (max-width: 768px) {
   .people-style {
     border-top-left-radius: 5px;
-
     border-bottom-left-radius: 5px;
-
     border-top-right-radius: 5px;
-
     border-bottom-right-radius: 5px;
-
     background: white;
-
     background-color: #fff;
     background-clip: border-box;
     border: 1px solid rgba(0, 0, 0, 0.125);
     margin-bottom: 10px;
-
     margin-right: 8px;
-
     padding: 7px;
   }
 }

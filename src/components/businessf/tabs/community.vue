@@ -15,8 +15,8 @@ import Businesses from "./businesses/businesses";
 export default {
   components:{
     People,
-    Businesses
-  }
+    Businesses,
+  },
 };
 </script>
 

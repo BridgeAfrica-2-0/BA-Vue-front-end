@@ -103,7 +103,7 @@ export default {
     Navbar,
     Footer,
     Market,
-    caroussel
+    caroussel,
   },
   data() {
     return {
@@ -113,10 +113,10 @@ export default {
         { text: "Handicfraft", value: "Handicfraft" },
         { text: "Electronics", value: "Electronics" },
         { text: "Restaurant", value: "Restaurant" },
-        { text: "clothing", value: "clothing" }
-      ]
+        { text: "clothing", value: "clothing" },
+      ],
     };
-  }
+  },
 };
 </script>
 

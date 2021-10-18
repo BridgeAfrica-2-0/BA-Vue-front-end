@@ -14,20 +14,17 @@
     >
       <div>
         <h4 class="text-center username f-30">
-          Hello <b> {{ username }} </b> let's get started
+          {{$t("welcome.Hello")}} <b> {{ username }} </b> {{$t("welcome.letsget_started")}}
         </h4>
         <br />
         <br />
 
         <p class="text f-16">
-          is simply dummy text of the printing and typesetting industry. Lorem
-          Ipsum has been the industry's standard dummy text ever since the
-          1500s, when an unknown printer took a galley of type and scrambled it
-          to make a type specimen book. It has survived not only five centuries,
-          but also the leap into electronic typesetting, remaining essentially
-          unchanged. It was popularised in the 1960s with the release of
-          Letraset sheets containing Lorem Ipsum passages, and more recently
-          with desktop publishing
+          {{ $t("welcome.Welcome") }} {{ $t("welcome.and") }} {{ $t("welcome.thank_you") }} {{ $t("welcome.for_joining") }} BidgeAfrica.com !
+          {{ $t("welcome.On_Bridge_Africa") }} {{ $t("welcome.you_can_quickly") }} {{ $t("welcome.create") }} {{ $t("welcome.your") }} {{ $t("welcome.website") }} {{ $t("welcome.less_than") }} 5 {{ $t("welcome.minutes") }};              
+          {{$t("welcome.access_an_online_marketplace")}} {{$t("welcome.for")}} {{$t("welcome.buying")}} {{$t("welcome.and")}} {{$t("welcome.selling")}} ; 
+          {{$t("welcome.search_for_and_compare")}} {{$t("welcome.product_prices")}} {{$t("welcome.through")}} {{$t("welcome.our")}} {{$t("welcome.localised_business_directly")}}, 
+          {{$t("welcome.and")}} {{$t("welcome.engage")}} {{$t("welcome.with")}} {{$t("welcome.your")}} {{$t("welcome.community")}}. {{$t("welcome.Get_started")}}.
         </p>
 
         <b-form-group
@@ -45,7 +42,7 @@
         </b-form-group>
         <div class="text-center">
           <b-button variant="outline-primary" @click="choseModal">
-            Continue <b-icon icon="arrow-right"> </b-icon>
+            {{$t("welcome.Continue")}} <b-icon icon="arrow-right"> </b-icon>
           </b-button>
         </div>
       </div>

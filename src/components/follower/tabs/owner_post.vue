@@ -184,7 +184,7 @@ export default {
 
     infiniteHandler($state) {
       axios
-        .get("post/" + this.page+"?id="+this.foll_id)
+        .get("user/post/" + this.page+"?id="+this.foll_id)
         .then(({ data }) => {
           if (data.data.length) {
             this.page += 1;

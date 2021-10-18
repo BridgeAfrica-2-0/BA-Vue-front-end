@@ -125,6 +125,8 @@
      </b-col>
 
       </b-row>
+      
+  <infinite-loading @infinite="infiniteHandler"></infinite-loading> 
     </div>
     <div v-show="noBusiness" class="no-business">
       <b-container>
@@ -137,11 +139,13 @@
 </template>
 
 <script>
+import axios from "axios";
 export default {
   data() {
     return {
       noBusiness: false,
-      foll_id:""
+      foll_id:"",
+      page:1
     };
   },
  
@@ -154,6 +158,29 @@ export default {
         return number / 1000 + "K";
       } else return number;
     },
+
+     infiniteHandler($state) {
+     let url="business/userBusiness/"+this.page+"?id="+this.foll_id;
+    
+       this.$store.dispatch("follower/loadMoreUserBusiness",url)
+        .then(({ data }) => {
+          console.log("lala baledddd");
+          console.log(data);
+          if (data.length) {    
+            this.page += 1;
+
+            this.busineses.push(...data);
+            $state.loaded();
+          } else {
+            $state.complete();
+          }
+        })
+        .catch((err) => {
+          console.log({ err: err });
+        });
+    },
+
+
 
  },
   computed:{

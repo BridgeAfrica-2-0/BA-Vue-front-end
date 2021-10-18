@@ -319,14 +319,14 @@
                 <b-row>
                   <b-col md="6">
                     <div class="form-group">
-                      <label for="Neighbor" class="username"> Website :</label
+                      <label for="website" class="username"> Website :</label
                       ><br />
                       <input
                         type="text"
                         name="alias"
                         v-model="website"
                         id="Website"
-                        placeholder="Neighbor"
+                        placeholder="Website"
                         class="form-control text"
                       />
                     </div>
@@ -336,11 +336,11 @@
                     <div class="form-group">
                       <label for="email" class="username"> Email :</label><br />
                       <input
-                        type="text"
+                        type="email"
                         name="alias"
                         v-model="email"
                         id="email"
-                        placeholder="Neighbor"
+                        placeholder="Email"
                         class="form-control text"
                       />
                     </div>
@@ -365,6 +365,362 @@
         </div>
       </b-modal>
 
+
+
+      <!-- update method --->
+
+
+
+      
+      <b-modal
+        id="updateBusinessModal"
+        ref="updateBusinessModal"
+        title="Update Bussiness"
+        size="lg"
+        hide-footer
+        @close="cancel"
+      >
+        <div>
+          <form-wizard @on-complete="updateBusiness">
+            <tab-content title="Business Indentity">
+              <div class="form-card">
+                <div class="row">
+                  <div class="col-md-6">
+                    <input
+                      id="logo"
+                      type="file"
+                      @change="onLogoChange"
+                      hidden
+                    />
+
+                    <div id="preview">
+                      <img v-if="logoimg_url" :src="logoimg_url" />
+                    </div>
+                    <br />
+                    <div class="text-center">
+                      <b-button
+                        v-if="logoimg_url"
+                        @click="chooselogo()"
+                        variant="primary"
+                        class="mt-3 text-center"
+                      >
+                        change Image
+                      </b-button>
+                    </div>
+
+                    <div
+                      class="image-upload-wrap"
+                      v-if="!logoimg_url"
+                      @click="chooselogo()"
+                    >
+                      <a
+                        href="#"
+                        data-toggle="modal"
+                        data-target="#createalbumModal"
+                      >
+                        <div class="drag-text">
+                          <i class="fa fa-plus"> </i>
+                          <h3 class="username">Business Logo</h3>
+                        </div>
+                      </a>
+                      <div></div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <b-form-group
+                      id="business_name"
+                      label="Business Name"
+                      label-for="business_name"
+                    >
+                      <b-form-input
+                        id="business_name"
+                        name="business_name"
+                        v-model="form.business_name"
+                        :state="validateState('business_name')"
+                        aria-describedby="business_name-feedback"
+                      ></b-form-input>
+
+                      <b-form-invalid-feedback id="business_name-feedback"
+                        >Business Name Is Required.</b-form-invalid-feedback
+                      >
+                    </b-form-group>
+
+                    <div class="form-group">
+                      <label for="country" class="username"> Keywords :</label
+                      ><br />
+              
+                      <multiselect
+                        v-model="business_keyword"
+                        tag-placeholder="Add this as new Keyword"
+                        placeholder="Add New Keyword"
+                        label="name"
+                        track-by="id"
+                        :options="keywordds"
+                        :multiple="true"
+                        :taggable="true"
+                        @tag="addkeywords"
+                      ></multiselect>
+                    </div>
+
+                    <div class="form-group">
+                      <label for="username" class="username">About</label><br />
+                      <textarea
+                        type="textarea"
+                        name="business_about"
+                        v-model="about"
+                        id="description"
+                        placeholder="Brief description about your Busness"
+                        class="form-control text"
+                      ></textarea>
+                    </div>
+                  </div>
+                </div>
+
+                <div>
+                  <label class="typo__label"> Category </label>
+                  <multiselect
+                    v-model="multiselecvalue"
+                    @input="subcategories"
+                    tag-placeholder="Add this as new tag"
+                    placeholder="Search or add a tag"
+                    label="name"
+                    track-by="id"
+                    :options="pcategories"
+                    :multiple="true"
+                    :taggable="true"
+                    @tag="addTag"
+                  ></multiselect>
+                </div>
+
+                <div>
+                  <label class="typo__label"> Sub Category</label>
+                  <multiselect
+                    v-model="filterselectvalue"
+                    tag-placeholder="Add this as new tag"
+                    placeholder="Search or add a tag"
+                    label="subcategory"
+                    track-by="sub_cat_id"
+                    :options="scategories"
+                    :multiple="true"
+                    :taggable="true"
+                    @tag="addFilter"
+                  ></multiselect>
+                </div>
+
+                <label class="typo__label">Fiters</label>
+                <div>
+                  <b-card no-body>
+                    <b-tabs pills card vertical>
+                      <b-tab
+                        :title="filters.subcategory"
+                        v-for="filters in filterselectvalue"
+                        :key="filters.id"
+                        active
+                        ><b-card-text>
+                          <b-form-group label="Filters" class="colorblack">
+                            <b-form-checkbox-group
+                              id=""
+                              class="colorblack"
+                              v-model="select_filterss"
+                              name="filters"
+                            >
+                              <b-form-checkbox
+                              class="colorblack"
+                                v-for="fil in filters.filters"
+                                :key="fil.id"
+                                :value="fil.id"
+                              >
+                                {{ fil.name }}
+                              </b-form-checkbox>
+                            </b-form-checkbox-group>
+                          </b-form-group>
+                        </b-card-text></b-tab
+                      >
+                    </b-tabs>
+                  </b-card>
+                </div>
+              </div>
+            </tab-content>
+
+            <tab-content title=" Location ">
+              <div class="form-card">
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="country" class="username"> Country :</label
+                      ><br />
+                      <multiselect
+                        v-model="country"
+                        @input="Region"
+                        placeholder="Search "
+                        label="name"
+                        track-by="id"
+                        :options="countries"
+                        :multiple="true"
+                      ></multiselect>
+                    </div>
+                  </div>
+
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="country" class="username"> Region :</label
+                      ><br />
+                      <multiselect
+                        v-model="region"
+                        @input="Division"
+                        placeholder="Search"
+                        label="name"
+                        track-by="id"
+                        :options="regions"
+                        :multiple="true"
+                      ></multiselect>
+                    </div>
+                  </div>
+
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="country" class="username"> Division :</label
+                      ><br />
+                      <multiselect
+                        v-model="division"
+                        @input="Municipality"
+                        placeholder="Search"
+                        label="name"
+                        track-by="id"
+                        :options="divisions"
+                        :multiple="true"
+                      ></multiselect>
+                    </div>
+                  </div>
+
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="country" class="username">
+                        Municipality :</label
+                      ><br />
+
+                      <multiselect
+                        v-model="municipality"
+                        @input="Locality"
+                        placeholder="Search"
+                        label="name"
+                        track-by="id"
+                        :options="municipalities"
+                        :multiple="true"
+                      ></multiselect>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="Neighbor" class="username"> Neighbor :</label
+                      ><br />
+                      <multiselect
+                        v-model="locality"
+                        placeholder="Search"
+                        label="name"
+                        track-by="id"
+                        :options="localities"
+                        :multiple="true"
+                      ></multiselect>
+                    </div>
+                  </div>
+
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="Neighbor" class="username"> Adress :</label>
+
+                      <gmap-autocomplete
+                        @place_changed="initMarker"
+                        class="form-control"
+                      >
+                      </gmap-autocomplete>
+                    </div>
+                  </div>
+                </div>
+
+                <gmap-map
+                  :zoom="14"
+                  :center="center"
+                  style="width: 100%; height: 200px"
+                >
+                  <gmap-marker
+                    :key="index"
+                    v-for="(m, index) in locationMarkers"
+                    :position="m.position"
+                    @click="center = m.position"
+                  ></gmap-marker>
+                </gmap-map>
+              </div>
+            </tab-content>
+
+            <tab-content title=" Contact ">
+              <b-card>
+                <b-row>
+                
+                  <b-col md="6">
+                    <label class="username"> Phone1 </label>
+                    <VuePhoneNumberInput v-model="phone1" />
+                  </b-col>
+                  <b-col md="6">  
+                    <label class="username"> Phone2 </label>
+                    <VuePhoneNumberInput v-model="phone2" />
+                  </b-col>
+                </b-row>
+
+                <b-row>
+                  <b-col md="6">
+                    <div class="form-group">
+                      <label for="website" class="username"> Website :</label
+                      ><br />
+                      <input
+                        type="text"
+                        name="alias"
+                        v-model="website"
+                        id="Website"
+                        placeholder="Website"
+                        class="form-control text"
+                      />
+                    </div>
+                  </b-col>
+
+                  <b-col md="6">
+                    <div class="form-group">
+                      <label for="email" class="username"> Email :</label><br />
+                      <input
+                        type="text"
+                        name="alias"
+                        v-model="email"
+                        id="email"
+                        placeholder="Email"
+                        class="form-control text"
+                      />
+                    </div>
+                  </b-col>
+
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="username" class="username">TimeZone:</label
+                      ><br />
+
+                      <b-form-select
+                        id="timezone"
+                        v-model="time_zone"
+                        :options="timezone"
+                      ></b-form-select>
+                    </div>
+                  </div>
+                </b-row>
+              </b-card>
+            </tab-content>
+          </form-wizard>
+        </div>
+      </b-modal>
+
+      <!-- end of update modal -->
+
       <div class="row mb-4">
         <div class="col">
           <h6 class="mb-0"><b></b></h6>
@@ -378,14 +734,24 @@
             >
               <div class="people-style shadow">
                 <b-link
-                  v-b-modal.createBusinessModal
-                  @click="editBusiness(business.id)"
                 >
                   <div class="float-right">
-                    <b-icon
+
+
+                    <b-dropdown size="lg"  variant="link" toggle-class="text-decoration-none" no-caret>
+    <template #button-content>
+     <b-icon
                       icon="three-dots-vertical"
                       class="icon-size"
                     ></b-icon>
+    </template>
+    <b-dropdown-item 
+                  
+                  @click="editBusiness(business.id)"  v-b-modal.updateBusinessModal variant="">Edit</b-dropdown-item>
+    <b-dropdown-item > Delete</b-dropdown-item>
+  </b-dropdown>
+  
+                    
                   </div>
                 </b-link>
                 <b-row>
@@ -423,7 +789,7 @@
                         :text="business.about_business"
                         link="#"
                         less-str="read less"
-                        :max-chars="55"
+                        :max-chars="100"
                       >
                       </read-more>
                     </p>
@@ -432,6 +798,10 @@
               </div>
             </b-col>
           </b-row>
+
+          
+      <infinite-loading :identifier="infiniteId"   ref="infiniteLoading"   @infinite="infiniteHandler"></infinite-loading>
+
         </div>
       </div>
     </div>
@@ -453,6 +823,9 @@ export default {
   data() {
     return {
       useas: "",
+      page:"",
+      bizId:"",
+      infiniteId:2,
       editbiz: "",
       selectedusecase: "",
       keywordds:[],
@@ -528,10 +901,32 @@ export default {
 
   methods: {
 
+    
+    infiniteHandler($state) {  
+      console.log("business/userBusiness/" + this.page);
+      let url = "business/userBusiness/" + this.page;
+      this.$store.dispatch("profile/loadMore",url)
+        .then(({ data }) => {
+          console.log(data);
+          if (data.data.length) { 
+            this.page += 1;
+
+            this.profilebusiness.push(...data.data);
+            $state.loaded();
+          } else {
+            $state.complete();
+          }
+        })
+        .catch((err) => {
+          console.log({ err: err });
+        });
+    },
+
+
     editBusiness(id){
 
 
-
+       this.bizId=id;
 
          axios.get("business/edit/"+id).then(({ data }) => {
         console.log(data);
@@ -545,8 +940,15 @@ export default {
 
 
 
+
+        
+
     setEditData(business){
-      
+      this.logo_url=business.logo
+      this.business_name=business.name;
+      this.about=business.about;
+      this.lat=business.lat;
+      this.lng=business.lng;
       this.multiselecvalue=business.category;
       this.filterselectvalue=business.subCategory;
       this.select_filterss=business.filter;
@@ -560,8 +962,9 @@ export default {
       this.locality=business.neigborhood;
       this.email=business.email;
       this.time_zone=business.timeZone;
-      this.business_keyword=business.keywords;
-      this.address=business.address;
+      this.business_keyword=business.business_keyword;
+      this.address=business.address; 
+
       
 
     }
@@ -794,6 +1197,8 @@ export default {
         };
       });
     },
+
+
     createBusiness: function() {
       return new Promise((resolve, reject) => {
         this.sendingB = true;
@@ -852,6 +1257,9 @@ export default {
             });
 
             loader.hide();
+            this.page = 1;
+      this.infiniteId += 1;
+
             resolve(true);
           })
           .catch((err) => {
@@ -885,6 +1293,104 @@ export default {
     },
 
   
+
+
+
+
+  
+    updateBusiness: function() {
+      return new Promise((resolve, reject) => {
+        this.sendingB = true;
+        let loader = this.$loading.show({
+          container: this.fullPage ? null : this.$refs.loader,
+          canCancel: true,
+          onCancel: this.onCancel,
+          color: "#e75c18",
+        });
+
+        let formData2 = new FormData();
+        formData2.append("logo_path", this.logo_pic);
+
+        formData2.append("region", this.selectedregion);
+        formData2.append("city", this.city);
+        formData2.append("country", this.selectedcountry);
+
+        formData2.append("address", this.adress);
+        formData2.append("division", this.selecteddivision);
+        formData2.append("council", this.selectedmunicipality);
+
+        formData2.append("neigborhood", this.selectedlocality);
+        formData2.append("lat", this.center.lat);
+        formData2.append("lng", this.center.lng);
+        formData2.append("phone1", this.phone1);
+        formData2.append("phone2", this.phone2);
+        formData2.append("email", this.email);
+        formData2.append("website", this.website);
+
+        formData2.append("name", this.form.business_name);
+        formData2.append("categoryId", this.selectedcategories);
+        formData2.append("subCategoryId", this.selectedsubcategories);
+        formData2.append("filterId", this.select_filterss);
+        formData2.append("keywords", this.business_keyword);
+        formData2.append("timezone", this.time_zone);
+        formData2.append("language", this.language);
+        formData2.append("about_business", this.about);
+
+        this.axios
+          .post("business/edit"+this.bizId, formData2, {
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
+          })
+          .then((response) => {
+            console.log(response);
+
+            this.sendingB = false;
+            this.profileBusiness();
+           
+            this.$refs["updateBusinessModal"].hide();
+            this.flashMessage.show({
+              status: "success",
+              blockClass: "custom-block-class",
+              message: "Business Profile Created",
+            });
+
+            loader.hide();
+            this.page = 1;
+      this.infiniteId += 1;
+
+            resolve(true);
+          })
+          .catch((err) => {
+            console.log({ err: err });
+
+            this.sendingB = false;
+
+            if (err.response.status == 422) {
+              console.log({ err: err });
+              console.log(err.response.data.message);
+
+              this.flashMessage.show({
+                status: "error",
+
+                message: err.response.data.message,
+                blockClass: "custom-block-class",
+              });
+            } else {
+              this.flashMessage.show({
+                status: "error",
+
+                message: "Unable to Update Your Business",
+                blockClass: "custom-block-class",
+              });
+              console.log({ err: err });
+            }
+            loader.hide();
+            resolve(false);
+          });
+      });
+    },
+
 
     chooseProfile1: function() {
       document.getElementById("profile1").click();
@@ -949,13 +1455,15 @@ export default {
   },
 
   computed: {
-      selectedKeywords: function () {
+     
+     selectedKeywords: function () {
       let selectedUsers = [];
       this.business_keyword.forEach((item) => {
         selectedUsers.push(item.id);
       });
       return selectedUsers;
     },
+
 
     profilebusiness: function() {
       return this.$store.state.profile.profileBusiness;
@@ -1251,4 +1759,11 @@ import "vue-form-wizard/dist/vue-form-wizard.min.css";
     padding: 7px;
   }
 }
+</style>
+
+<style >
+   
+   .r-image{
+     object-fit: cover;
+   }
 </style>

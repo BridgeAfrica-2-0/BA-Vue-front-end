@@ -1,16 +1,11 @@
 <template>
-	<b-modal
-		hide-footer
-		id="product-details"
-		size="lg"
-		title="Product Details"
-	>
+	<b-modal hide-footer id="product-details" size="xl" title="Product Details">
 		<b-container>
 			<b-row>
-				<b-col cols="12" md="4">
+				<b-col cols="12" sm="12" md="4">
 					<ProductCaroussel />
 				</b-col>
-				<b-col cols="12" md="8">
+				<b-col cols="12" sm="12" md="8">
 					<div>
 						<h4 class="font-weight-bold">Headset</h4>
 						<span class="text-success">In Stock</span>
@@ -28,17 +23,19 @@
 					</div>
 					<hr class="h-divider" />
 
-					<div class="buttons">
-						<b-button
-							variant="primary"
-							class="font-weight-light float-left shadow-sm"
+					<div
+						class="buttons my-3 d-flex justify-content-between align-items-center"
+					>
+						<b-button variant="primary" class="font-weight-light shadow-sm"
 							>Buy Now</b-button
 						>
-						<b-button
-							variant="success"
-							class="font-weight-light float-right shadow-sm"
+						<b-button variant="success" class="font-weight-light shadow-sm"
 							>Check On Website</b-button
 						>
+					</div>
+					<hr class="h-divider" />
+					<div class="mt-3">
+						<ProductComments />
 					</div>
 				</b-col>
 			</b-row>
@@ -48,10 +45,12 @@
 
 <script>
 	import ProductCaroussel from "./ProductCaroussel";
+	import ProductComments from "./ProductComments";
 	export default {
 		name: "ProductDetails",
 		components: {
 			ProductCaroussel,
+			ProductComments,
 		},
 	};
 </script>

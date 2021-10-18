@@ -145,7 +145,7 @@ export default {
   },
   actions: {
     async getNetworks({ commit }) {
-      const res = await axios.get("network/{id}");
+      const res = await axios.get("network");
 
       commit("setNetwork", res.data);
     },
@@ -178,8 +178,8 @@ export default {
     },
 
     //getting network members
-    async getMembers({ commit }) {
-      const res = await axios.get("network/{id}/members");
+    async getMembers({ commit }, networkId) {
+      const res = await axios.get(`network/${networkId}/members`);
 
       commit("setMembers", res.data);
     },

@@ -30,8 +30,8 @@
           <b-form-tags
             
             input-id="tags-separators"
-            separator=" ,;"
-            placeholder="Enter keyword alert..."
+            separator=" ,"
+            placeholder="Enter keyword alert separate by space or , ..."
             rows="3"
             w-100
             max-rows="6"
@@ -86,11 +86,11 @@
                           ><span class="sr-only">Settings</span>
                         </template>
 
-                        <b-dropdown-item  href="#">
+                        <b-dropdown-item  href="#" @click="approvePost">
                           Approved
                         </b-dropdown-item>
-                        <b-dropdown-item href="#">
-                          Unapproved
+                        <b-dropdown-item href="#" @click="unApprovePost">
+                          decline
                         </b-dropdown-item>
 
 
@@ -149,7 +149,7 @@ export default {
        moment: moment,
       value: [],
       limit: 8,
-      posts: []
+      posts: [],
 
       
     }
@@ -180,6 +180,41 @@ export default {
 
          this.$store
         .dispatch("keywordOperationOnNetwork/newKeyWord", data )
+        .then(() => {
+          console.log("hey yeah");
+        })
+        .catch((err) => {
+          console.log({ err: err });
+        });
+    },
+
+    approvePost(){
+     
+        let data = {
+          id: 13,
+          dat:{network_id: 1}
+        };
+       
+       this.$store
+        .dispatch("keywordOperationOnNetwork/approvePost", data)
+        .then(() => {
+          console.log("hey yeah");
+        })
+        .catch((err) => {
+          console.log({ err: err });
+        });
+    },
+
+    unApprovePost(){
+
+        let data = {
+          network_id: 1,
+          id: 5,
+          
+        };
+
+        this.$store
+        .dispatch("keywordOperationOnNetwork/unApprovePost", data)
         .then(() => {
           console.log("hey yeah");
         })
@@ -232,9 +267,7 @@ export default {
   },
 
   computed: {
-   user(){
-      return this.$store.state.keywordOperationOnNetwork.getUser
-   }
+   
   }
 };
 </script>

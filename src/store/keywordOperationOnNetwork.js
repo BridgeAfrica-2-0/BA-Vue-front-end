@@ -39,8 +39,8 @@ axios.defaults.headers.common["Authorization"] =
 
     newKeyWord({ commit },data) {
         
-      return axios.post("/alerts/storetAlertnetwork" ,data).then( data  => {
-        console.log(data);
+      return axios.post("/alerts/storetAlertnetwork" ,data).then( response  => {
+        console.log(response);
         //commit("setUserData", data.data);
       });
     },
@@ -59,6 +59,20 @@ axios.defaults.headers.common["Authorization"] =
         console.log(response.data.data);
         commit("setListPost", response.data.data)
       })
+    },
+
+    approvePost({commit},data){ console.log(data);
+      return axios.post("/alerts/approveAlertnetwork"+data.id, data.dat)
+      .then(response =>{
+        console.log(response);
+      })
+    },
+    unApprovePost({commit},data){ console.log(data);
+      return axios.post("/alerts/unapprovedAlertnetwork",data)
+      .then(response =>{
+        console.log(response);
+      })
+
     }
 
   }

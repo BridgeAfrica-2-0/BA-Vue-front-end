@@ -8,7 +8,7 @@
           <b-avatar
             variant="primary"
             class="img-fluid avat-comment"
-            :src="business_logo"
+            :src="info.user.profile_picture"
           ></b-avatar>
         </b-col>
         <b-col cols="9" md="11" class="p-0 m-0 pr-3">
@@ -134,6 +134,7 @@
                 <div class="cursor">
                   <b-form-textarea
                     id="textarea-small"
+                    autofocus
                     class="mb-2 border-none"
                     placeholder="Post a business update"
                     v-model="edit_description"
@@ -143,7 +144,6 @@
                     }"
                   ></b-form-textarea>
 
-                  <i></i>
                 </div>
                 <div class="bordder">
                   <span class="float-left"> Add to Your Post </span>
@@ -271,7 +271,7 @@
                 <b-avatar
                   class="d-inline-block avat"
                   variant="primary"
-                  :src="imageProfile"
+                  :src="info.user.profile_picture"
                 ></b-avatar>
               </b-col>
               <b-col cols="9" class="pt-2" style="margin-left: -5px">
@@ -285,7 +285,8 @@
                 <div class="cursor">
                   <b-form-textarea
                     id="textarea-small"
-                    class="mb-2 border-none"
+                    class="mb-2 border-none "
+                    autofocus
                     placeholder="Post a business update"
                     v-model="createPost.postBusinessUpdate"
                     :class="{
@@ -294,7 +295,6 @@
                     }"
                   ></b-form-textarea>
 
-                  <i></i>
                 </div>
                 <div class="bordder">
                   <span class="float-left"> Add to Your Post </span>
@@ -399,7 +399,7 @@
       >-->
 
       <b-row class="mt-4" v-for="item in owner_post" :key="item.post_id">
-
+       
         <!--  :src="$store.getters.getProfilePicture"-->
         <b-col cols="12" class="mt-4">
           <b-row>
@@ -407,7 +407,7 @@
               <b-avatar
                 class="d-inline-block avat"
                 variant="primary"
-                :src="item.logo_path"
+                :src="item.profile_picture"
               ></b-avatar>
             </b-col>
             <b-col cols="10" md="11" class="pt-2">
@@ -511,6 +511,7 @@
             <b-col cols="3" md="1" class="m-md-0 p-md-0">
               <b-avatar
                 variant="primary"
+                :src="info.user.profile_picture"
                 class="img-fluid avat-comment"
               ></b-avatar>
             </b-col>
@@ -594,8 +595,10 @@ export default {
 
     infiniteHandler($state) {
       console.log("user/post/" + this.page);
-      axios
-        .get("user/post/" + this.page)
+      let url= "user/post/" + this.page;
+      
+       this.$store.dispatch("profile/loadMore",url)
+      //axios.get("user/post/" + this.page)
         .then(({ data }) => {
           console.log(data);
           if (data.data.length) { 
@@ -974,7 +977,11 @@ export default {
   
   .h-lg-250{
 
-    height: 500px !important;
+   height: 350px !important;   
+  }
+
+  .lb-item{
+    background-size: contain;
   }
  
 </style>
@@ -1121,13 +1128,13 @@ export default {
 }
 .cursor i {
   position: absolute;
-  width: 1px;
+  width: 2px;
   height: 20%;
   background-color: gray;
   left: 5px;
   top: 10%;
   animation-name: blink;
-  animation-duration: 800ms;
+  animation-duration: 1200ms;
   animation-iteration-count: infinite;
   opacity: 1;
 }
@@ -1143,9 +1150,12 @@ export default {
   }
 }
 .bordder {
-  border: 1px solid #e75c18;
-  height: 50px;
-  padding: 6px;
+ 
+
+  border: 1px solid gray;
+    height: 50px;
+    padding: 6px;
+    border-radius: 10px;
 }
 .username {
   color: black;

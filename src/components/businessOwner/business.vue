@@ -5,12 +5,12 @@
       <div  class="text-justify mt-2 container-fluid" >
         <b-row class="center-content" >
           <b-col cols="12">
-            <b-tabs content-class="mt-3 mobile-tab" fill pills >
+            <b-tabs lazy content-class="mt-3 mobile-tab" fill pills >
               <b-tab title="Home"><HomePage /></b-tab>
               <b-tab title="About"><About /></b-tab>
               <b-tab title="Media"><Media /></b-tab>
               <b-tab title="Market"><MarketPlace /></b-tab>
-              <b-tab title="Networks"><Networks /></b-tab>    
+            <!--  <b-tab title="Networks"><Networks /></b-tab> -->   
               <b-tab title="Community"><Followers /></b-tab>
             </b-tabs>
           </b-col>
@@ -26,7 +26,7 @@ import About from "./tabs/about";
 import Media from "./tabs/media";
 import MarketPlace from "./tabs/marketPlace";
 import Followers from "./tabs/memberNetwork";
-import Networks from "./tabs/networks";
+//import Networks from "./tabs/networks";
 import HeadPageOwner from "@/components/businessOwner/headPageOwner";
 
 export default {
@@ -38,7 +38,7 @@ export default {
     Media,
     MarketPlace,
     Followers,
-    Networks
+  //  Networks
   },
   data() {
     return {};

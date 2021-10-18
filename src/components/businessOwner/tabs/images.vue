@@ -1,6 +1,8 @@
 <template>
   <div>
     <FlashMessage />
+
+    {{picturess}}
     <div class="row">
       <div class="container-fluid">
 
@@ -332,50 +334,80 @@ export default {
           }
         });
     },
+
+
+
+
+
+
     submitPost() {
       let loader = this.$loading.show({
         container: this.fullPage ? null : this.$refs.preview,
         canCancel: true,
         onCancel: this.onCancel,
-        color: "#e75c18",
+        color: "#e75c18"
       });
+
       let formData = new FormData();
       formData.append("media", this.profile_pic);
+
       formData.append("dob", this.text);
-      this.submitPost(formData, this.headers)
-        .then(() => {
+
+      this.axios
+        .post("business/store/media/" + this.url + "/" + this.album, formData, {
+          headers: {
+            "Content-Type": "multipart/form-data"
+          }
+        })
+        .then(response => {
+          console.log(response);
+
           this.flashMessage.show({
             status: "success",
+
             message: "Profile Updated",
-            blockClass: "custom-block-class",
+
+            blockClass: "custom-block-class"
           });
+
           loader.hide();
           this.$refs["modalxl"].hide();
         })
-        .catch((err) => {
+
+        .catch(err => {
           console.log({ err: err });
+
           if (err.response.status == 422) {
             console.log({ err: err });
+
             this.flashMessage.show({
               status: "error",
+
               message: err.response.data.message,
-              blockClass: "custom-block-class",
+              blockClass: "custom-block-class"
             });
+
             loader.hide();
           } else {
             this.flashMessage.show({
               status: "error",
+
               message: "Unable to upload your image",
-              blockClass: "custom-block-class",
+              blockClass: "custom-block-class"
             });
             console.log({ err: err });
+
             loader.hide();
           }
         });
     },
 
+
+
+
     selectMoviesOutsidePost(e) {
       this.profile_pic = e.target.files[0];
+
       const file = e.target.files[0];
       this.img_url = URL.createObjectURL(file);
       console.log(this.img_url);

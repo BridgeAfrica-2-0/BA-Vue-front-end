@@ -36,7 +36,7 @@
               <router-link :to="'business_owner/'+business.id">
                  Visit Profile
           </router-link>
-
+{{business}}
 
           </p>
           <p class="mb-1 ">

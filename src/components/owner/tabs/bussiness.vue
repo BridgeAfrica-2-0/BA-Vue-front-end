@@ -902,10 +902,10 @@ export default {
   methods: {
 
     
-    infiniteHandler($state) {
+    infiniteHandler($state) {  
       console.log("business/userBusiness/" + this.page);
-      axios
-        .get("user/post/" + this.page)
+      let url = "business/userBusiness/" + this.page;
+      this.$store.dispatch("profile/loadMore",url)
         .then(({ data }) => {
           console.log(data);
           if (data.data.length) { 

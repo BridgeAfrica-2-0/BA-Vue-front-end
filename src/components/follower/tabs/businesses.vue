@@ -145,7 +145,7 @@ export default {
     return {
       noBusiness: false,
       foll_id:"",
-      page:""
+      page:1
     };
   },
  
@@ -160,14 +160,16 @@ export default {
     },
 
      infiniteHandler($state) {
-      axios 
-        .get("business/userBusiness/"+this.page+"?id="+this.foll_id ) 
+     let url="business/userBusiness/"+this.page+"?id="+this.foll_id;
+    
+       this.$store.dispatch("follower/loadMoreUserBusiness",url)
         .then(({ data }) => {
-          
-          if (data.data.length) {
+          console.log("lala baledddd");
+          console.log(data);
+          if (data.length) {    
             this.page += 1;
 
-            this.busineses.push(...data.data);
+            this.busineses.push(...data);
             $state.loaded();
           } else {
             $state.complete();

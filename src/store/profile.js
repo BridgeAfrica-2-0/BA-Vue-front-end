@@ -404,7 +404,14 @@ export default {
       return num;
     },
 
+   loadMore({commit}, url){
+   
+    return axios.get(url)
+    .then(( data ) => {
+     return data;
+    });
 
+   },
 
     NcommunityFollower({ commit }){
       return axios

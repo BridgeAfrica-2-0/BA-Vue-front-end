@@ -5,14 +5,14 @@
 
   
 
-        <img  v-if="info.user.cover_picture == null "
+        <img  v-if="info.user.cover_picture =='' "
           src="@/assets/img/banner.jpg"
           class="img-fluid  banner"
           alt="Kitten"
         />
 
 
-         <img  v-if="info.user.cover_picture !=null "
+         <img  v-if="info.user.cover_picture !='' "
           :src="info.user.cover_picture"
           class="img-fluid  banner"
           alt="Kitten"
@@ -23,7 +23,7 @@
       <div class="container-fluid p-63">
         <b-row class="mt-md-2 text-left">
           <b-col cols="12" md="12" class="m-0 p-0 text-left put-top ">
-            <b-avatar v-if="info.user.profile_picture ==null "
+            <b-avatar v-if="info.user.profile_picture =='' "
               src="https://placekitten.com/400/300"
               class="  avat  text-center"
               badge-variant="primary"
@@ -32,7 +32,7 @@
             </b-avatar>
 
 
-            <b-avatar v-if="info.user.profile_picture !=null "
+            <b-avatar v-if="info.user.profile_picture !='' "
               :src="info.user.profile_picture"
               class="  avat  text-center"
               badge-variant="primary"

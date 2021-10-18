@@ -41,7 +41,7 @@
     <img
               class="mb-2  img-fluid imgheight"
                :src="image"
-              alt="Fluid image"
+            
             />
         
           </b-col>     

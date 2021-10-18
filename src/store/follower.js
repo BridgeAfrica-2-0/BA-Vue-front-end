@@ -280,7 +280,16 @@ export default {
       return num;
     },
 
+    loadMoreUserBusiness({commit}, url){
+         
+      return axios.get(url)
+      .then(({ data }) => {
 
+       // console.log(data);
+       return data;
+      });
+
+    },
      
     Tcommunity({commit}, id){
      

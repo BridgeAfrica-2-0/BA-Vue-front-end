@@ -595,8 +595,10 @@ export default {
 
     infiniteHandler($state) {
       console.log("user/post/" + this.page);
-      axios
-        .get("user/post/" + this.page)
+      let url= "user/post/" + this.page;
+      
+       this.$store.dispatch("profile/loadMore",url)
+      //axios.get("user/post/" + this.page)
         .then(({ data }) => {
           console.log(data);
           if (data.data.length) { 
@@ -975,7 +977,11 @@ export default {
   
   .h-lg-250{
 
-    height: 500px !important;   
+   height: 350px !important;   
+  }
+
+  .lb-item{
+    background-size: contain;
   }
  
 </style>

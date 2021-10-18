@@ -1611,7 +1611,7 @@ export default {
         this.lauchLoader(true);
         this.reset();
         const request = await this.$repository.search.findUserByParam({
-          payload: {
+          data: {
             keyword: this.navBarParams.keyword.trim(),
           },
           page: 1,
@@ -1631,8 +1631,9 @@ export default {
     onFindUser() {
       if (this.navBarParams.keyword.trim()) {
         this.page(1);
+        this.postKeyword(this.navBarParams.keyword.trim());
         this.stack({
-          payload: {
+          data: {
             keyword: this.navBarParams.keyword.trim(),
           },
         });
@@ -1645,8 +1646,9 @@ export default {
         this.lauchLoader(true);
         this.reset();
         const request = await this.$repository.search.findPostByKeyword({
-          data: {},
-          keyword: this.navBarParams.keyword.trim(),
+          data: {
+            keyword: this.navBarParams.keyword.trim(),
+          },
           page: 1,
         });
 
@@ -1666,8 +1668,10 @@ export default {
         this.page(1);
         this.postKeyword(this.navBarParams.keyword.trim());
         this.stack({
-          data: {},
-          keyword: this.navBarParams.keyword.trim(),
+          data: {
+            keyword: this.navBarParams.keyword.trim(),
+          },
+          page: 1,
         });
 
         this._onFindPost();

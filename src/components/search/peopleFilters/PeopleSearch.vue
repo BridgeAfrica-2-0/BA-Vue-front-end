@@ -12,9 +12,10 @@
       <fas-icon class="icons" :icon="['fas', 'users']" size="lg" />
       People
     </h6>
-    <ShareButton :post="{ post_id: 1, user_id:1 }" type="profile" />
+    <ShareButton :post="{ post_id: 1, user_id: 1 }" type="network" />
 
-    <NotFound v-if="!peoples.length" :title="title" />
+    <Loader v-if="!pageHasLoad || loaderState" />
+    <NotFound v-if="!peoples.length && !loaderState" :title="title" />
     <div v-else>
       <People
         v-for="(people, index) in peoples"
@@ -22,8 +23,9 @@
         :key="index"
       />
     </div>
+
     <p class="text-center" v-if="haveNotData">Not Data</p>
-    <Loader :loading="loading" color="#ced4da"></Loader>
+    <ScrollLoader :loading="loadingIsActive" color="#ced4da" />
   </div>
 </template>
 
@@ -37,13 +39,20 @@ import People from "@/components/search/people";
 
 import { ShareButton } from "@/components/shareButton";
 
+import Loader from "@/components/Loader";
+
 export default {
   mixins: [loader, search],
   components: {
     Sponsor,
     People,
     ShareButton,
+    Loader,
   },
+
+  data: () => ({
+    pageHasLoad: false,
+  }),
 
   computed: {
     ...mapGetters({
@@ -51,15 +60,55 @@ export default {
       canScrool: "search/END_INITIAL_REQUEST",
       getPage: "search/GET_CURRENT_PAGINATION_PAGE",
     }),
+
+    loadingIsActive: function () {
+      return this.loaderState && this.peoples.length ? true : false;
+    },
   },
+
   mounted() {
     window.addEventListener("scroll", this.onscroll);
   },
+
+  created() {
+    this.init();
+  },
+
   methods: {
     ...mapActions({
       userStore: "search/FIND_USER",
       page: "search/SET_CURRENT_PAGINATION_PAGE",
+      setCallback: "search/SET_CURRENT_PAGINATE_CALLBACK",
+      stack: "search/STACK_VALUE",
     }),
+
+    init: async function () {
+      this.stack({
+        data: {
+          keyword: "",
+        },
+        page: 1,
+      });
+      this.setLoaderState(true);
+      this.setCallback(this.$repository.search.findUserByParam);
+
+      const request = await this.$repository.search.findUserByParam({
+        data: {
+          keyword: "",
+        },
+        page: 1,
+      });
+
+      if (request.success) {
+        if (request.data.length) {
+          this.userStore(request.data);
+          this.page(this.getPage + 1);
+        }
+      }
+
+      this.pageHasLoad = true;
+      this.setLoaderState(false);
+    },
 
     onscroll: async function (event) {
       const scrollY = window.scrollY;
@@ -73,7 +122,7 @@ export default {
         !this.loading &&
         !this.haveNotData
       ) {
-        this.loading = true;
+        this.setLoaderState(true);
 
         const request = await this.callback({
           ...this.getStack,
@@ -87,7 +136,7 @@ export default {
           } else this.haveNotData = true;
         }
 
-        this.loading = false;
+        this.setLoaderState(false);
       }
     },
   },

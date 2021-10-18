@@ -174,8 +174,7 @@ new Vue({
     axios.interceptors.response.use(
       (response) => response,
       (error) => {
-
-        // remove loader when request return error
+        console.log(error)        // remove loader when request return error
         this.$store.dispatch("search/LOADING", false);
 
         if (error.response && error.response.status === 401) {

@@ -146,7 +146,7 @@
 <script>
 import _ from "lodash";
 
-import { mapActions } from "vuex";
+import { mapActions, mapGetters } from "vuex";
 
 const options = [
   { text: "Follower", value: "Follower" },
@@ -186,6 +186,12 @@ export default {
     },
   },
 
+  computed: {
+    ...mapGetters({
+      keyword: "search/POST_KEYWORD",
+    }),
+  },
+
   methods: {
     ...mapActions({
       userStore: "search/FIND_USER",
@@ -211,19 +217,20 @@ export default {
         return hash;
       }, {});
 
-      this.stack({ payload: { ...data }, page: 1 });
+      this.stack({ data: { ...data, keyword: this.keyword }, page: 1 });
+
       this.setCallback(this.$repository.search.findUserByParam);
-      this._onFindUser({ payload: { ...data }, page: 1 });
-    },2000),
+      this._onFindUser({
+        data: { ...data, keyword: this.keyword },
+        page: 1,
+      });
+    }, 2000),
 
     async _onFindUser(payload) {
       try {
         this.lauchLoader(true);
         this.reset();
-        const request = await this.$repository.search.findUserByParam({
-          payload,
-          page: 1,
-        });
+        const request = await this.$repository.search.findUserByParam(payload);
 
         if (request.success) {
           this.userStore(request.data);
@@ -239,10 +246,19 @@ export default {
     debounceInput: _.debounce(function (e) {
       if (e) {
         this.page(1);
-        this.stack({ profession: e });
+        this.stack({
+          data: {
+            profession: e,
+            keyword: this.keyword,
+          },
+          page: 1,
+        });
         this.setCallback(this.$repository.search.findUserByParam);
         this._onFindUser({
-          profession: e,
+          data: {
+            profession: e,
+            keyword: this.keyword,
+          },
           page: 1,
         });
       }

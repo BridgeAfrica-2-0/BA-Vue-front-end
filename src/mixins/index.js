@@ -15,6 +15,9 @@ export const loader = {
         text,
       });
     },
+    ...mapActions({
+      setLoaderState: "search/LOADING"
+    })
   },
   computed: {
     ...mapGetters({
@@ -25,24 +28,12 @@ export const loader = {
     overlay: null
   }),
 
-  watch: {
-    loaderState: function (newValue) {
-      if (newValue) {
-        this.overlay = this.$loading.show({
-          container: this.$refs.formContainer,
-          canCancel: true,
-        });
-      } else {
-        this.overlay.hide()
-      }
-    }
-  }
 }
 
 export const search = {
   components: {
     NotFound,
-    Loader: ClipLoader
+    ScrollLoader: ClipLoader
   },
   props: {
     title: {
@@ -51,7 +42,6 @@ export const search = {
   },
 
   data: () => ({
-    loading: false,
     haveNotData: false
   }),
   
@@ -65,12 +55,10 @@ export const search = {
     ...mapGetters({
       callback: "search/GET_CURRENT_PAGINATE_CALLBACK",
       getStack: "search/STACK_VALUE",
-      canScrool: "search/END_INITIAL_REQUEST",
     }),
   },
   methods: {
     ...mapActions({
-      lauchLoader: "search/LOADING",
       page: "search/SET_CURRENT_PAGINATION_PAGE",
     }),
   }

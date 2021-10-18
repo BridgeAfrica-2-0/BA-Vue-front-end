@@ -215,19 +215,24 @@ export default {
         this.isRecentPost = false;
         return false;
       }
+
       if (newValue) {
         this.page(1);
         this.newCallbackForPagination(
           this.$repository.search.findPostByKeyword
         );
         this.stack({
-          data: { recent_post: "" },
-          keyword: this.keyword,
+          data: {
+            recent_post: "",
+            keyword: this.keyword,
+          },
         });
 
         this._onFindPost({
-          data: { recent_post: "" },
-          keyword: this.keyword,
+          data: {
+            recent_post: "",
+            keyword: this.keyword,
+          },
         });
       }
     },
@@ -248,25 +253,35 @@ export default {
           keyword: this.keyword,
         });
         this._onFindPost({
-          data: { not_seen: "" },
-          keyword: this.keyword,
+          data: {
+            not_seen: "",
+            keyword: this.keyword,
+          },
         });
       }
     },
 
     created_at: function (newValue) {
+      if (!this.keyword && newValue) {
+        this.onNotified("the keyword does not exist");
+        return false;
+      }
       if (newValue) {
         this.page(1);
         this.newCallbackForPagination(
           this.$repository.search.findPostByKeyword
         );
         this.stack({
-          data: { created_at: this.created_at },
-          keyword: this.keyword,
+          data: {
+            created_at: this.created_at,
+            keyword: this.keyword,
+          },
         });
         this._onFindPost({
-          data: { created_at: this.created_at },
-          keyword: this.keyword,
+          data: {
+            created_at: this.created_at,
+            keyword: this.keyword,
+          },
         });
       }
     },
@@ -297,6 +312,13 @@ export default {
       stack: "search/STACK_VALUE",
       reset: "search/RESET_RESULT",
     }),
+
+    hasKeyWord() {
+      if (!this.keyword) {
+        this.onNotified("the keyword does not exist");
+        return false;
+      } else return true;
+    },
 
     async _onFindPost(e) {
       try {
@@ -361,8 +383,10 @@ export default {
       if (credentials.includes("users")) {
         let response = await this.$repository.search.findPostByKeyword({
           page: 1,
-          data: data["users"],
-          keyword: this.keyword,
+          data: {
+            ...data["users"],
+            keyword: this.keyword,
+          },
         });
 
         if (response.success) render = [...render, ...response.data];
@@ -371,8 +395,10 @@ export default {
       if (credentials.includes("buisness")) {
         let response = await this.$repository.search.findPostByBuisness({
           page: 1,
-          data: data["buisness"],
-          keyword: this.keyword,
+          data: {
+            ...data["buisness"],
+            keyword: this.keyword,
+          },
         });
 
         if (response.success) render = [...render, ...response.data];
@@ -381,8 +407,10 @@ export default {
       if (credentials.includes("network")) {
         let response = await this.$repository.search.findPostByNetWork({
           page: 1,
-          data: data["network"],
-          keyword: this.keyword,
+          data: {
+            ...data["network"],
+            keyword: this.keyword,
+          },
         });
 
         if (response.success) render = [...render, ...response.data];
@@ -394,11 +422,6 @@ export default {
     },
 
     onProcess: _.debounce(function (e) {
-      if (!this.keyword) {
-        this.onNotified("the keyword does not exist");
-        return false;
-      }
-
       this.page(1);
       const user = this.map(this.selectedPeople, `user`);
       const buisness = this.map(this.selectedBuisness, `buisness`);

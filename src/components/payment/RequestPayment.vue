@@ -3,48 +3,45 @@
 		<div class="card-header text-black border-bottom-0  bg-white h-50">
 			Enter your MTN Mobile Money number
 		</div>
-    <div class="card-body">
-      <div class="row">
-			<div class="col">
-				<b-form-input
-					placeholder="237 6XX XXX XXX"
-					id="number"
-					size="lg"
-					type="tel"
-				></b-form-input>
+		<div class="px-0">
+			<div class="row">
+				<div class="col-8 col-sm-9 col-md-6">
+					<b-form-input
+						placeholder="237 6XX XXX XXX"
+						id="number"
+						type="tel"
+					></b-form-input>
+				</div>
+				<div class="col-4 col-sm-3 col-md-6 btn-custom-box">
+					<b-button
+						variant="primary"
+						class="font-weight-light btn-custom text-14 shadow-sm"
+						>CHANGE</b-button
+					>
+				</div>
 			</div>
-			<div class="col">
-				<b-button
-					variant="primary"
-					class="font-weight-light shadow-sm"
-					size="lg"
-					>CHANGE</b-button
-				>
+			<div class="row my-3">
+				<div class="col btn-custom-box">
+					<b-button
+						variant="primary"
+						class="font-weight-light shadow-sm btn-custom text-14"
+						@click="confirmPayment"
+						>PAY 13 000XAF</b-button
+					>
+				</div>
 			</div>
-		</div>
-		<div class="row my-3">
-			<div class="col">
-				<b-button
-					variant="primary"
-					class="font-weight-light shadow-sm"
-					size="lg"
-          @click="confirmPayment"
-					>PAY 13 000XAF</b-button
-				>
-			</div>
-		</div>
-		<div class="row my-3">
-			<div class="col">
-				<p>
-					Please make sure your account balance is greater than 13 000XAF,
-					Otherwise your payment will not be completed.
-				</p>
-				<p>
-					Reference NO: XXXXXXXXXXXX
-				</p>
+			<div class="row my-3">
+				<div class="col body-font-size">
+					<p>
+						Please make sure your account balance is greater than 13 000XAF,
+						Otherwise your payment will not be completed.
+					</p>
+					<p>
+						Reference NO: XXXXXXXXXXXX
+					</p>
+				</div>
 			</div>
 		</div>
-    </div>
 	</b-card>
 </template>
 
@@ -59,12 +56,29 @@
 				type: String,
 			},
 		},
-    methods:{
-      confirmPayment(){
-        this.$emit('confirmpayment')
-      }
-    }
+		methods: {
+			confirmPayment() {
+				this.$emit("confirmpayment");
+			},
+		},
 	};
 </script>
 
-<style></style>
+<style scoped>
+	.btn-custom {
+		height: 38px;
+		min-width: 123px;
+		font-size: 14px;
+	}
+	@media only screen and (max-width: 768px) {
+		/* .btn-custom {
+			float: right;
+		} */
+		/* .btn-custom-box{
+			width: fit-content;
+		} */
+		/* .payment-body{
+			padding: 20px 0px !important;
+		} */
+	}
+</style>

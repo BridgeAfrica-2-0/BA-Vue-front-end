@@ -2,7 +2,7 @@
   <div>
     <BasicInfo />
     <ContactInfo class="mt-3" />
-    <BusinessVisited class="mt-3" />
+  <!--  <BusinessVisited class="mt-3" /> -->
     <PlacesLived class="mt-3" />
     <WebAndSocials class="mt-3" />
   </div>
@@ -11,14 +11,14 @@
 <script>
 import BasicInfo from "./basicInfo";
 import ContactInfo from "./contactInfo";
-import BusinessVisited from "./businessVisited";
+//import BusinessVisited from "./businessVisited";
 import PlacesLived from "./placesLived";
 import WebAndSocials from "./webAndSocial";
 export default {
   components: {
     BasicInfo,
     ContactInfo,
-    BusinessVisited,
+  //  BusinessVisited,
     PlacesLived,
     WebAndSocials
   }

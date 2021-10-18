@@ -8,7 +8,7 @@
             placeholder="Search Something"
           ></b-form-input>
 
-          <b-input-group-prepend is-text>
+          <b-input-group-prepend  @click="$refs.search.search()" is-text>
             <b-icon-search class="text-primary border-none"></b-icon-search>
           </b-input-group-prepend>
         </b-input-group>
@@ -18,22 +18,30 @@
 
     <b-row>
       <b-col md="12" lg="6">
-        <CommunityMembers />
-      </b-col>
+        <CommunityMembers  :searchh="keywords" ref="search" type="Following"  />
+      </b-col>  
 
-      <b-col md="12" lg="6">
-        <CommunityMembers />
-      </b-col>
+      
     </b-row>
   </div>
 </template>
 
 <script>
-import CommunityMembers from "../../communityMember";
+import CommunityMembers from "../../communitynetwork";
 export default {
+  data() {
+    return {
+        keywords:"",
+    }
+    },
   components: {
     CommunityMembers
-  }
+  },
+
+  computed: {
+   
+  },
+
 };
 </script>
 

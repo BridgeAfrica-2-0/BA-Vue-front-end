@@ -1,8 +1,11 @@
 <template>
   <div>
     <FlashMessage />
+
+    {{picturess}}
     <div class="row">
       <div class="container-fluid">
+
         <b-modal
           id="modalxl"
           ref="modalxl"
@@ -100,6 +103,7 @@
                 </b-dropdown>
               </li>
             </ul>
+
           </div>
         </div>
       </div>
@@ -166,7 +170,6 @@ export default {
       return this.$store.state.businessOwner.albumImages;
     },
   },
-
   methods: {
     ...mapActions({
       submitPost: "businessOwner/submitPost",
@@ -183,7 +186,6 @@ export default {
     },
     downloadPic(image_id) {
       console.log("downloading");
-
       let loader = this.$loading.show({
         container: this.fullPage,
         canCancel: true,
@@ -194,11 +196,9 @@ export default {
         .then((response) => {
           var fileURL = window.URL.createObjectURL(new Blob([response.data]));
           var fileLink = document.createElement("a");
-
           fileLink.href = fileURL;
           fileLink.setAttribute("download", "file.jpg");
           document.body.appendChild(fileLink);
-
           fileLink.click();
           this.flashMessage.show({
             status: "success",
@@ -225,10 +225,8 @@ export default {
           }
         });
     },
-
     deleteImage(image_id) {
       console.log("deleting ----------");
-
       let loader = this.$loading.show({
         container: this.fullPage,
         canCancel: true,
@@ -300,10 +298,8 @@ export default {
         });
     },
     //set image as profile pic
-
     setProfilePic(image_id) {
       let self = this;
-
       let loader = this.$loading.show({
         container: this.fullPage ? null : this.$refs.creatform,
         canCancel: true,
@@ -338,27 +334,47 @@ export default {
           }
         });
     },
+
+
+
+
+
+
     submitPost() {
       let loader = this.$loading.show({
         container: this.fullPage ? null : this.$refs.preview,
         canCancel: true,
         onCancel: this.onCancel,
-        color: "#e75c18",
+        color: "#e75c18"
       });
+
       let formData = new FormData();
       formData.append("media", this.profile_pic);
+
       formData.append("dob", this.text);
-      this.submitPost(formData, this.headers)
-        .then(() => {
+
+      this.axios
+        .post("business/store/media/" + this.url + "/" + this.album, formData, {
+          headers: {
+            "Content-Type": "multipart/form-data"
+          }
+        })
+        .then(response => {
+          console.log(response);
+
           this.flashMessage.show({
             status: "success",
+
             message: "Profile Updated",
-            blockClass: "custom-block-class",
+
+            blockClass: "custom-block-class"
           });
+
           loader.hide();
           this.$refs["modalxl"].hide();
         })
-        .catch((err) => {
+
+        .catch(err => {
           console.log({ err: err });
 
           if (err.response.status == 422) {
@@ -366,25 +382,32 @@ export default {
 
             this.flashMessage.show({
               status: "error",
+
               message: err.response.data.message,
-              blockClass: "custom-block-class",
+              blockClass: "custom-block-class"
             });
+
             loader.hide();
           } else {
             this.flashMessage.show({
               status: "error",
 
               message: "Unable to upload your image",
-              blockClass: "custom-block-class",
+              blockClass: "custom-block-class"
             });
             console.log({ err: err });
+
             loader.hide();
           }
         });
     },
 
+
+
+
     selectMoviesOutsidePost(e) {
       this.profile_pic = e.target.files[0];
+
       const file = e.target.files[0];
       this.img_url = URL.createObjectURL(file);
       console.log(this.img_url);
@@ -398,7 +421,6 @@ export default {
   mounted() {
     this.url = this.$route.params.id;
   },
-
   watch: {
     album: function(newVal) {
       this.album_id = newVal;
@@ -407,31 +429,49 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+.call-action {
+  border-radius: 50%;
+  background: gray;
+  height: 30px !important;
+  width: 30px !important;
+  font-weight: 50px !important;
+  text-align: center;
+  padding-right: 35px !important;
+}
 .text-design {
   align-items: first baseline;
 }
-
 .drop-color {
   color: black;
 }
-
+.botmediadess {
+  text-align: center;
+  bottom: -5%;
+  width: 100%;
+  font-size: 20px;
+}
 @media (min-width: 960px) {
+  .album-img {
+    height: 300px !important;
+    object-fit: cover !important;
+  }
+  .drag-textt {
+    height: 290px !important;
+    padding-top: 95px;
+  }
   .img-gall {
     background-size: contain;
     cursor: pointer;
     margin: 10px;
     border-radius: 3px;
   }
-
-  .image-wrap {
+  .image-wrapp {
     border: 4px dashed #e75c18;
     position: relative;
-
     position: relative;
     margin: 5px;
     float: left;
-    width: 46.5%;
     transition-duration: 0.4s;
     border-radius: 5px;
     -webkit-animation: winanim 0.5s;
@@ -439,7 +479,6 @@ export default {
     -webkit-backface-visibility: visible;
     backface-visibility: visible;
   }
-
   .img-gall {
     position: relative;
     margin: 5px;
@@ -452,14 +491,12 @@ export default {
     -webkit-backface-visibility: visible;
     backface-visibility: visible;
   }
-
   @media (min-width: 1400px) {
     .lb-grid {
       height: 274px;
       margin-bottom: 8px;
     }
   }
-
   .img-gall {
     position: relative;
     margin: 5px;
@@ -472,15 +509,12 @@ export default {
     -webkit-backface-visibility: visible;
     backface-visibility: visible;
   }
-
-  .image-wrap {
+  .image-wrapp {
     border: 4px dashed #e75c18;
     position: relative;
-
     position: relative;
     margin: 5px;
     float: left;
-    width: 46.5%;
     transition-duration: 0.4s;
     border-radius: 5px;
     -webkit-animation: winanim 0.5s;
@@ -489,15 +523,21 @@ export default {
     backface-visibility: visible;
   }
 }
-
 @media only screen and (min-width: 768px) and (max-width: 1331px) {
+  .album-img {
+    height: 300px !important;
+    object-fit: cover !important;
+  }
+  .drag-textt {
+    height: 290px !important;
+    padding-top: 95px;
+  }
   .img-gall {
     background-size: contain;
     cursor: pointer;
     margin: 10px;
     border-radius: 3px;
   }
-
   .img-gall {
     position: relative;
     margin: 5px;
@@ -510,15 +550,12 @@ export default {
     -webkit-backface-visibility: visible;
     backface-visibility: visible;
   }
-
-  .image-wrap {
+  .image-wrapp {
     border: 4px dashed #e75c18;
     position: relative;
-
     position: relative;
     margin: 5px;
     float: left;
-    width: 46.5%;
     transition-duration: 0.4s;
     border-radius: 5px;
     -webkit-animation: winanim 0.5s;
@@ -527,15 +564,21 @@ export default {
     backface-visibility: visible;
   }
 }
-
 @media (max-width: 762px) {
+  .album-img {
+    height: 200px !important;
+    object-fit: cover !important;
+  }
+  .drag-textt {
+    height: 190px !important;
+    padding-top: 55px;
+  }
   .img-gall {
     background-size: contain;
     cursor: pointer;
     margin: 10px;
     border-radius: 3px;
   }
-
   .img-gall {
     position: relative;
     margin: 5px;
@@ -548,15 +591,12 @@ export default {
     -webkit-backface-visibility: visible;
     backface-visibility: visible;
   }
-
-  .image-wrap {
+  .image-wrapp {
     border: 4px dashed #e75c18;
     position: relative;
-
     position: relative;
     margin: 5px;
     float: left;
-    width: 46.5%;
     transition-duration: 0.4s;
     border-radius: 5px;
     -webkit-animation: winanim 0.5s;
@@ -565,7 +605,6 @@ export default {
     backface-visibility: visible;
   }
 }
-
 .drag-textt {
   text-align: center;
   font-weight: 100;

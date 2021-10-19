@@ -3,21 +3,17 @@
 		<!-- <b-button v-b-modal.product-details variant="primary">Product Details</b-button>
 		<ProductDetails/> -->
 		<!-- Stepper header start-->
-		<b-container class="my-4" fluid="md">
+		<b-container class="my-4" fluid="lg">
 			<hr class="h-divider" />
-			<PaymentProgress @switchstep="handleSwitchStep" :steps="steps" />
+			<PaymentProgress :current_step="current_step" @switchstep="handleSwitchStep" :steps="steps" />
 			<hr class="h-divider" />
 		</b-container>
 		<!-- Stepper header end-->
 
-		<b-container fluid="md">
-			<b-row>
-				<b-col> </b-col>
-			</b-row>
-
+		<b-container fluid="lg">
 			<b-row v-if="current_step == 1">
-				<b-col>
-					<h1 class="text-center">No yet Define</h1>
+				<b-col class="my-4" cols="12">
+					<CreateShippingAddress />
 				</b-col>
 			</b-row>
 
@@ -33,17 +29,17 @@
 					<Order @showoperator="handleShowOperator" />
 				</b-col>
 				<!-- Card Stepper for Order End -->
-				<b-col v-if="showOperators" class="my-4" cols="12">
-					<PaymentOperator
-						@requestpayment="handleRequestPayment"
-						@showreview="handleShowReview"
-					/>
-				</b-col>
 			</b-row>
 			<!-- Stepper Page 1  End -->
 
 			<b-row v-if="current_step == 3">
 				<b-col class="my-4" cols="12">
+					<PaymentOperator
+						@requestpayment="handleRequestPayment"
+						@showreview="handleShowReview"
+					/>
+				</b-col>
+				<!-- <b-col class="my-4" cols="12">
 					<RequestPayment
 						v-if="showRequestPayment"
 						@confirmpayment="handleConfirmPayment"
@@ -51,7 +47,7 @@
 				</b-col>
 				<b-col v-if="showConfirmPayment" class="my-4" cols="12">
 					<ConfirmPayment />
-				</b-col>
+				</b-col> -->
 			</b-row>
 		</b-container>
 	</div>
@@ -60,9 +56,10 @@
 	import Order from "./Order";
 	import ShippingAdress from "./ShippingAdress";
 	import PaymentOperator from "./PaymentOperator";
-	import RequestPayment from "./RequestPayment";
-	import ConfirmPayment from "./ConfirmPayment";
+	// import RequestPayment from "./RequestPayment";
+	// import ConfirmPayment from "./ConfirmPayment";
 	import PaymentProgress from "./PaymentProgress";
+	import CreateShippingAddress from "./CreateShippingAddress";
 	// import ProductDetails from "./ProductDetails";
 
 	export default {
@@ -71,9 +68,8 @@
 			Order,
 			ShippingAdress,
 			PaymentOperator,
-			RequestPayment,
-			ConfirmPayment,
 			PaymentProgress,
+			CreateShippingAddress,
 		},
 		data() {
 			return {
@@ -105,11 +101,10 @@
 				return Math.round(100 / this.max_step) * this.current_step;
 			},
 		},
-		created() {
-			window.addEventListener("resize", this.resizeHandler);
-		},
 		methods: {
 			onClickNext: function() {
+				
+				this.changeStatusProgress(this.current_step, this.current_step +1)
 				this.current_step++;
 			},
 			onClickBack: function() {
@@ -119,11 +114,19 @@
 				this.current_step = 1;
 			},
 			handleSwitchStep(step) {
+				// this.steps[this.current_step - 1].status = false;
+				// this.steps[step - 1].status = true;
+				this.changeStatusProgress(this.current_step, step)
 				this.current_step = step;
 			},
+			changeStatusProgress(current_step, next_step) {
+				this.steps[current_step - 1].status = false;
+				this.steps[next_step - 1].status = true;
+			},
 			handleShowOperator() {
-				this.showOperators = true;
-				this.showReview = false;
+				// this.showOperators = true;
+				// this.showReview = false;
+				this.onClickNext();
 			},
 			handleShowReview() {
 				this.showReview = true;

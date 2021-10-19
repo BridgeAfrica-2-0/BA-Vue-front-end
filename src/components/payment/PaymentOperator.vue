@@ -120,7 +120,7 @@
 		width: 100%;
 	}
 	.operator-name {
-		width: 20rem;
+		width: 30rem;
 	}
 	.operator-select > input {
 		cursor: pointer !important;

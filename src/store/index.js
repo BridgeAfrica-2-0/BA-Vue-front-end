@@ -12,6 +12,7 @@ import hotbusiness from "./hotbusiness";
 import profile from "./profile";
 import follower from "./follower";
 import UserProfileOwner from "./UserProfileOwner"
+import checkout from "./checkout"
 import axios from "axios";
 import { search } from "./search";
 
@@ -32,6 +33,7 @@ export default new Vuex.Store({
     follower,
     search,
     market,
-    UserProfileOwner
+    UserProfileOwner, 
+    checkout
   },
 });

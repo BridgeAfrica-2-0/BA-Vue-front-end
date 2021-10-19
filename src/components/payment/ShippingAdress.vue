@@ -11,16 +11,64 @@
 				</div>
 			</div>
 			<div class="col-sm">
-				<a href="#" class="text-primary text-14 font-weight-bold text-uppercase float-right mr-5"
-					>Change</a
-				>
+				<div class="float-right">
+					<a
+						href="#"
+						class="text-primary text-14 font-weight-bold text-uppercase mr-1 mr-sm-2"
+						>Change</a
+					>
+					<div class="d-inline-block">
+						<b-dropdown
+							size="lg"
+							right
+							variant="link"
+							toggle-class="text-decoration-none"
+							no-caret
+						>
+							<template #button-content>
+								<b-icon icon="three-dots-vertical"></b-icon>
+							</template>
+							<b-dropdown-item-button>
+								<b-icon
+									variant=""
+									class="mr-2"
+									icon="plus"
+									aria-hidden="true"
+								></b-icon>
+								<span class="">Add</span>
+							</b-dropdown-item-button>
+							<b-dropdown-item-button>
+								<b-icon
+									variant=""
+									class="mr-2"
+									icon="trash-fill"
+									aria-hidden="true"
+								></b-icon>
+								<span class="">Delete</span>
+							</b-dropdown-item-button>
+						</b-dropdown>
+					</div>
+				</div>
 			</div>
 		</b-card-text>
 	</b-card>
 </template>
 
 <script>
-	export default {};
+	export default {
+		name: "ShippingAddress",
+		data() {
+			return {
+				shippingsTab: [],
+			};
+		},
+		mounted() {
+			const ctx = this;
+			this.$store.dispatch("loginToShipping").then(() => {
+				ctx.$store.dispatch("getShipping");
+			});
+		},
+	};
 </script>
 
 <style></style>

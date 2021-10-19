@@ -1,5 +1,5 @@
 <template>
-  <header class=" ">
+  <header class="">
     <nav class="navbar navbar-expand-xl p-3 mb-3 rounded">
       <div class="container-fluid">
         <div class="col-md-12 col-lg-2 col-xl-2 text-center">
@@ -172,7 +172,14 @@
                     <p class="font-weight-bold">Messages</p>
                     <hr class="h-divider" />
                     <div
-                      class="d-inline-flex flex-row justify-content-between align-items-center suggest-item cursor-pointer"
+                      class="
+                        d-inline-flex
+                        flex-row
+                        justify-content-between
+                        align-items-center
+                        suggest-item
+                        cursor-pointer
+                      "
                     >
                       <div class="d-inline-flex flex-row align-items-center">
                         <div>
@@ -193,7 +200,14 @@
                     </div>
                     <hr class="h-divider" />
                     <div
-                      class="d-inline-flex flex-row justify-content-between align-items-center suggest-item cursor-pointer"
+                      class="
+                        d-inline-flex
+                        flex-row
+                        justify-content-between
+                        align-items-center
+                        suggest-item
+                        cursor-pointer
+                      "
                     >
                       <div class="d-inline-flex flex-row align-items-center">
                         <div>
@@ -214,7 +228,14 @@
                     </div>
                     <hr class="h-divider" />
                     <div
-                      class="d-inline-flex flex-row justify-content-between align-items-center suggest-item cursor-pointer"
+                      class="
+                        d-inline-flex
+                        flex-row
+                        justify-content-between
+                        align-items-center
+                        suggest-item
+                        cursor-pointer
+                      "
                     >
                       <div class="d-inline-flex flex-row align-items-center">
                         <div>
@@ -235,7 +256,14 @@
                     </div>
                     <hr class="h-divider" />
                     <div
-                      class="d-inline-flex flex-row justify-content-between align-items-center suggest-item cursor-pointer"
+                      class="
+                        d-inline-flex
+                        flex-row
+                        justify-content-between
+                        align-items-center
+                        suggest-item
+                        cursor-pointer
+                      "
                     >
                       <div class="d-inline-flex flex-row align-items-center">
                         <div>
@@ -256,7 +284,14 @@
                     </div>
                     <hr class="h-divider" />
                     <div
-                      class="d-inline-flex flex-row justify-content-between align-items-center suggest-item cursor-pointer"
+                      class="
+                        d-inline-flex
+                        flex-row
+                        justify-content-between
+                        align-items-center
+                        suggest-item
+                        cursor-pointer
+                      "
                     >
                       <div class="d-inline-flex flex-row align-items-center">
                         <div>
@@ -301,7 +336,13 @@
                     <p class="font-weight-bold">Notifications</p>
                     <hr class="h-divider" />
                     <div
-                      class="d-inline-flex flex-row align-items-center suggest-item cursor-pointer"
+                      class="
+                        d-inline-flex
+                        flex-row
+                        align-items-center
+                        suggest-item
+                        cursor-pointer
+                      "
                     >
                       <div>
                         <img
@@ -322,7 +363,13 @@
                     </div>
                     <hr class="h-divider" />
                     <div
-                      class="d-inline-flex flex-row align-items-center suggest-item cursor-pointer"
+                      class="
+                        d-inline-flex
+                        flex-row
+                        align-items-center
+                        suggest-item
+                        cursor-pointer
+                      "
                     >
                       <div>
                         <img
@@ -343,7 +390,13 @@
                     </div>
                     <hr class="h-divider" />
                     <div
-                      class="d-inline-flex flex-row align-items-center suggest-item cursor-pointer"
+                      class="
+                        d-inline-flex
+                        flex-row
+                        align-items-center
+                        suggest-item
+                        cursor-pointer
+                      "
                     >
                       <div>
                         <img
@@ -364,7 +417,13 @@
                     </div>
                     <hr class="h-divider" />
                     <div
-                      class="d-inline-flex flex-row align-items-center suggest-item cursor-pointer"
+                      class="
+                        d-inline-flex
+                        flex-row
+                        align-items-center
+                        suggest-item
+                        cursor-pointer
+                      "
                     >
                       <div>
                         <img
@@ -385,7 +444,13 @@
                     </div>
                     <hr class="h-divider" />
                     <div
-                      class="d-inline-flex flex-row align-items-center suggest-item cursor-pointer"
+                      class="
+                        d-inline-flex
+                        flex-row
+                        align-items-center
+                        suggest-item
+                        cursor-pointer
+                      "
                     >
                       <div>
                         <img
@@ -466,7 +531,12 @@
 
                     <a
                       href="/settings"
-                      class="other-menu suggest-item cursor-pointer text-decoration-none text-dark"
+                      class="
+                        other-menu
+                        suggest-item
+                        cursor-pointer
+                        text-decoration-none text-dark
+                      "
                     >
                       <span class="mr-2"
                         ><fas-icon
@@ -496,7 +566,12 @@
                     <hr class="h-divider" />
                     <a
                       href="https://bridgeafrica.info/nav/owner-other-menu.html"
-                      class="other-menu suggest-item cursor-pointer text-decoration-none text-dark"
+                      class="
+                        other-menu
+                        suggest-item
+                        cursor-pointer
+                        text-decoration-none text-dark
+                      "
                     >
                       <span class="mr-2"
                         ><fas-icon
@@ -526,7 +601,7 @@
                   />
                 </div>
                 <div class="d-flex flex-column ml-1 line-size">
-                  <div class="font-weight-bold">Maxine Moffet GG</div>
+                  <div class="font-weight-bold">Maxine Moffet</div>
                   <div class="small text-muted">Active</div>
                 </div>
               </div>
@@ -545,6 +620,7 @@
                 </div>
                 <div class="ml-3 mt-2">
                   <p class="font-weight-bold">Your Businesses</p>
+                   <Activity />
                 </div>
               </div>
             </div>
@@ -552,7 +628,12 @@
 
             <a
               href="/settings"
-              class="other-menu suggest-item cursor-pointer text-decoration-none text-dark"
+              class="
+                other-menu
+                suggest-item
+                cursor-pointer
+                text-decoration-none text-dark
+              "
             >
               <span class="mr-2"
                 ><fas-icon class="violet search" :icon="['fas', 'cogs']"
@@ -578,7 +659,12 @@
             <hr class="h-divider" />
             <a
               href="https://bridgeafrica.info/nav/owner-other-menu.html"
-              class="other-menu suggest-item cursor-pointer text-decoration-none text-dark"
+              class="
+                other-menu
+                suggest-item
+                cursor-pointer
+                text-decoration-none text-dark
+              "
             >
               <span class="mr-2"
                 ><fas-icon
@@ -597,12 +683,16 @@
 </template>
 
 <script>
-import Button from "./ButtonNavBarFind.vue";
+import Button from "@/components/ButtonNavBarFind.vue";
+import Activity from "@/components/ShowActivity.vue";
+
+import { mapGetters, mapActions } from "vuex";
 
 export default {
   name: "navbar",
   components: {
     Button,
+    Activity,
   },
   props: {
     credentials: {
@@ -623,12 +713,55 @@ export default {
     };
   },
 
+  computed: {
+    ...mapGetters({
+      hasLauchNetworkRequest: "social/INIT",
+    }),
+  },
+
+  created() {
+    this.init();
+  },
+
   methods: {
+    ...mapActions({
+      setNetworks: "social/FIND_USER_NETWORK",
+      setBusiness: "social/FIND_USER_BUSNESS",
+      lauchNetworkRequest: "social/INIT",
+    }),
+
     toggleinput() {
       this.$refs.mobileinput.style.display = "block";
       this.isActive = true;
     },
 
+    getNetworks: async function () {
+      let request = await this.$repository.share.getNetworks();
+
+      if (request.success) this.setNetworks(request.data);
+    },
+
+    getBusiness: async function () {
+      let request = await this.$repository.share.getBusiness();
+
+      if (request.success) this.setBusiness(request.data);
+    },
+
+    init() {
+      try {
+        if (!this.hasLauchNetworkRequest) {
+          console.log("init navbar", this.hasLauchNetworkRequest);
+          this.getNetworks();
+          this.getBusiness();
+
+          this.lauchNetworkRequest();
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    },
+
+    
     togglenav() {
       if (this.shownav == false) {
         this.shownav = true;

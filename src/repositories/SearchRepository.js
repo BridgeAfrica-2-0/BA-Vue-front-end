@@ -6,7 +6,6 @@ class Repository {
   async findUserByParam(credentials) {
     try {
       const { page, data } = credentials
-      console.log(credentials)
       const response = await axios.post(`search/listUsers/${page}?keyword=${data.keyword}`, { ...data, page })
       return {
         success: (response.data.data) ? true : false,

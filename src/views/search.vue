@@ -375,7 +375,10 @@
               v-bind:Selectedcategory="Selectedcategory"
               v-bind:Selectedparentcategory="Selectedparentcategory"
             />
+
+            <Activity />
           </div>
+          
         </b-col>
 
         <b-col cols="12" md="8" lg="8" xl="6" ref="middleblock">
@@ -549,6 +552,8 @@ import { loader } from "@/mixins";
 
 import { mapActions } from "vuex";
 
+import Activity from "@/components/ShowActivity";
+
 export default {
   components: {
     Button,
@@ -565,6 +570,7 @@ export default {
     Market,
     PostComponent,
     PeopleComponent,
+    Activity
     // Footer,
   },
 

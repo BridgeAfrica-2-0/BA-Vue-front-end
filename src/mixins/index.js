@@ -4,6 +4,11 @@ import { mapGetters, mapActions } from "vuex";
 import NotFound from "@/components/NotFoundComponent"
 import ClipLoader from 'vue-spinner/src/ClipLoader.vue'
 
+export const cancelRequest  = {
+  destroyed(){
+
+  }
+}
 export const loader = {
   methods: {
     onNotified(text) {
@@ -46,6 +51,7 @@ export const search = {
   }),
   
   destroyed() {
+    console.log("destroy component")
     this.page(1);
     this.$store.commit('search/RESET_RESULT');
     window.removeEventListener('scroll', this.onscroll)

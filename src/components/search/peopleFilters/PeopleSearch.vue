@@ -12,7 +12,7 @@
       <fas-icon class="icons" :icon="['fas', 'users']" size="lg" />
       People
     </h6>
-    <ShareButton :post="{ post_id: 1, user_id: 1 }" type="network" />
+    <ShareButton :post="{ post_id: 1, user_id: 1 }" type="profile" />
 
     <Loader v-if="!pageHasLoad || loaderState" />
     <NotFound v-if="!peoples.length && !loaderState" :title="title" />

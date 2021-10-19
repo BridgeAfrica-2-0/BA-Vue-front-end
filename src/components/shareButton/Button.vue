@@ -5,6 +5,7 @@
     <b-button v-b-modal.modal-2>share netword</b-button>
     <b-button v-b-modal.modal-3>share business</b-button>
     <b-button v-b-modal.modal-4>post</b-button> -->
+    <FlashMessage style="z-index: 99999" />
 
     <Box
       :id="modal"
@@ -32,7 +33,7 @@
         <div class="d-flex align-items-center py-3 px-2 mb-2 border">
           <b-avatar class="mr-3"></b-avatar>
           <p>
-            <span class="mr-auto">Share as</span><br />
+            <span class="mr-auto">Share Post As ...</span><br />
             <span class="mr-auto">J. Circlehead</span>
           </p>
         </div>
@@ -55,7 +56,7 @@
           <div class="d-flex align-items-center py-3 px-2 mb-2">
             <b-avatar class="mr-3"></b-avatar>
             <p>
-              <span class="mr-auto">Share as</span><br />
+              <span class="mr-auto">Share Post As ...</span><br />
               <span class="mr-auto">2h</span>
             </p>
           </div>
@@ -87,7 +88,7 @@
         <div class="d-flex align-items-center py-3 px-2 mb-2 border">
           <b-avatar class="mr-3"></b-avatar>
           <p>
-            <span class="mr-auto">Share as</span><br />
+            <span class="mr-auto">Share Post As ...</span><br />
             <span class="mr-auto">J. Circlehead</span>
           </p>
         </div>
@@ -341,6 +342,7 @@ export default {
       },
     },
   },
+
   components: {
     Box,
     Post,
@@ -352,7 +354,12 @@ export default {
 
   computed: {
     strategy: function () {
-      if (['modal-1','modal-2','modal-3','modal-4','modal-5'].includes(this.modal)) return true;
+      if (
+        ["modal-1", "modal-2", "modal-3", "modal-4", "modal-5"].includes(
+          this.modal
+        )
+      )
+        return true;
       else return false;
     },
   },
@@ -375,7 +382,11 @@ export default {
 
       const request = await this.$repository.share.userPost(data);
 
-      if (request.success) console.log("ok");
+      if (request.success)
+        this.flashMessage.success({
+          time: 5000,
+          message: "Operation success",
+        });
     },
   },
 };

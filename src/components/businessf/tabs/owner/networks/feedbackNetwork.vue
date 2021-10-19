@@ -27,7 +27,7 @@
       <b-col cols="12">
         <div 
           :class="{ active: index == currentIndex }"
-          v-for="(feedback, index) in feedbacks.data"
+          v-for="(feedback, index) in feedbacks"
           :key="index"
           class="mb-4"
         >
@@ -166,20 +166,30 @@ export default {
         this.loading = false;
       });
     },
+
     deleteFeedback: function(user_id){
       this.loading = true;
-      console.log('user_id: ', user_id);
-      this.axios.delete("network/"+this.url+"/feedback/delete/"+user_id)
-      .then(() => {
+      let info = {
+        user_id: user_id,
+        url: this.url,
+      };
+      this.$store
+      .dispatch("networkProfileFeedback/feedbackRequests", {
+        method:'DELETE',
+        data: info
+      })
+      .then(response => {
         this.displayFeedback();
-        console.log('ohh yeah');
         this.loading = false;
+        console.log(response);
+        console.log('ohh yeah');
         this.flashMessage.show({
           status: "success",
           message: "Feedback Deleted"
         });
       })
-      .catch(err => {
+      .catch( err => {
+         this.displayFeedback();
         console.log({ err: err });
         this.loading = false;
         this.flashMessage.show({

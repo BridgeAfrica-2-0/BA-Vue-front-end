@@ -32,5 +32,39 @@ export default {
       })
     },
 
+    async feedbackRequests( {commit}, payload) {
+      console.log(payload, "save/edit/delete network feedback start +++++");
+      let url = null;
+      let config = {};
+      if (payload.method === "DELETE") {
+
+        url = "network/"+payload.data.url+"/feedback/delete/"+payload.data.user_id;
+        config = {
+          method: "DELETE",
+        };
+      } 
+
+      let response_ = null;
+      await axios(url, config)
+        .then(response => {
+          console.log("save/edit/delete network feedback response (1) +++++++", response );
+          return response;
+        })
+        .then(response => {
+          console.log( "save/edit/delete network feedback response successsss +++", response);
+          if (response.errors) {
+            console.log("Error from the server +++++++");
+            throw new Error("Error from save/edit/delete network feedback+++++");
+          }
+          response_ = response;
+        })
+        .catch(err => {
+          console.group({ err: err });
+          console.log("error from the server or the browser", err);
+          throw err;
+        });
+      return response_;
+    },
+
   },
 };

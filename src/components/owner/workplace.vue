@@ -291,9 +291,6 @@ export default {
           );
           console.log("Lewis Finally save/update/delete new workplace user +++++", this.educationAndWorks, "+++++++++++");
         });
-
-
-
 		},
 
     save() {

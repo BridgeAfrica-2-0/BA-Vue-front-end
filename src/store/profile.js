@@ -1257,6 +1257,7 @@ export default {
       let url = "",
         config = {};
       if (payload.method.toLowerCase() === "post") {
+        console.log("Method: "+payload.method.toLowerCase());
         url = "userIntro/addSchool";
         config = {
           method: "POST",
@@ -1279,22 +1280,27 @@ export default {
             durationTo: payload.education.durationFrom
           })
         };
-      } else if (payload.method.toLowerCase() === "update") {
-        const graduated = payload.education.graduated ? 1 : 0;
-        (url =
-          "userIntro/updateSchool" +
-          "/11" +
-          "?schoolName=" +
-          payload.education.schoolName),
-          "&graduated=" + graduated,
-          "&durationFrom=" + payload.education.durationFrom,
-          "&major=" + payload.education.major,
-          "&durationTo=" + payload.education.durationFrom;
+      } else if (payload.method.toLowerCase() === "put") {
+        const workplace = payload.education === true ? 1 : 0;
+        console.log("Method: "+payload.method.toLowerCase());
+        url = "userIntro/updateSchool/"+payload.education.id;
         config = {
           method: "POST",
           headers: {
             Accept: "application/json",
+          },
+          data: {
+            schoolName: payload.education.school_name,
+            graduated: payload.education.is_graduated,
+            startDate: payload.education.startDate,
+            endDate: payload.education.endDate,
+            major_subjects: payload.education.major_subjects,
           }
+        };
+      } else if (payload.method === "DELETE") {
+        url = "userIntro/deleteSchool/" +payload.workPlace;
+        config = {
+          method: "DELETE",
         };
       }
 

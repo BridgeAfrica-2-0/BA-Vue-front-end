@@ -598,42 +598,38 @@ async updateUserBusinessAbout(context, payload) {
         });
     },
 
-    async createAlbum({ commit }, name) {
-      const res = await axios.post("business/album/create/" + this.url, {
-        name,
+     createAlbum({ commit }, payload) {
+      return axios.post("business/album/create/" + payload.id, {
+        name : payload.name
+      }) .then(({ data }) => {
+       
+        commit("newAlbum", data.data);
+        console.log(data);
       });
-      commit("newAlbum", res.data);
-    },
 
-    async updateAlbum({ commit }, edit_name, album_id) {
-      const res = await axios.post(
-        "business/album/update/" + this.url + "/" + album_id,
+     
+    },  
+
+     updateAlbum({ commit }, payload) {
+     return axios.post(
+        "business/album/update/" + payload.url + "/" + payload.id,
         {
-          edit_name,
+         name: payload.name,
         }
-      );
-      commit("upAlbum", res.data);
+      ) .then(({ data }) => {
+       
+      commit("upAlbum", data.data);
+        console.log(data);
+      });
     },
 
-    async deleteAlbum({ commit }, name, album_id) {
-      const res = await axios.post(
-        "business/album/edit/" + this.url + "/" + album_id,
-        { name }
+     deleteAlbum({ commit }, payload) {
+       return axios.post(
+        "business/album/delete/" + payload.url + "/" + payload.id
       );
-      commit("delAlbum", res.data);
     },
 
-    // temporal signin to get token for developement purpose
-    async signIn() {
-      axios
-        .post("/user/login", {
-          email: "info@moazateeq.com",
-          password: "12345678",
-        })
-        .then((res) => {
-          localStorage.setItem("access_token", res.data.data.accessToken);
-        });
-    },
+    
     // Get networks from the backend
     async getNetworks({ commit }) {
       let sucData = [];

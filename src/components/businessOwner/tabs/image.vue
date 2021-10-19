@@ -1,7 +1,7 @@
 <template>
   <div>
 
-      <FlashMessage />
+  {{album}}
     <div class="row">
       <div class="container-fluid">
         <b-modal
@@ -124,7 +124,8 @@
 
       
         
-
+       
+      <infinite-loading :identifier="infiniteId"   ref="infiniteLoading"   @infinite="infiniteHandler"></infinite-loading>
 
 
 
@@ -154,6 +155,13 @@
 import axios from "axios";
 export default {
   components: {},
+  prob:[album],
+   data() {
+    return {
+     
+      infiniteId: +new Date(),
+
+    }},
 
    computed: {
     pictures() {
@@ -164,7 +172,29 @@ export default {
   methods: {
 
 
+   
+     infiniteHandler($state) {
+      console.log("user/post/" + this.page);
+      let url="business/album/show/" + this.url + "/" + abum_id
+      let url= "user/post/" + this.page;
+      
+       this.$store.dispatch("profile/loadMore",url)
+      //axios.get("user/post/" + this.page)
+        .then(({ data }) => {
+          console.log(data);
+          if (data.data.length) { 
+            this.page += 1;
 
+            this.owner_post.push(...data.data);
+            $state.loaded();
+          } else {
+            $state.complete();
+          }
+        })
+        .catch((err) => {
+          console.log({ err: err });
+        });
+    },
    
 
 

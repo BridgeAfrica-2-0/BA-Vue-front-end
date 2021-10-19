@@ -84,9 +84,6 @@ const routes = [
     path: "/dashboard",
     name: "dashboard",
     component: dashboard,
-    meta: {
-      // auth: true
-    },
   },
 
   {
@@ -178,8 +175,7 @@ const routes = [
   {
     path: "/businessfollower/:id?",
     name: "BusinessFollower",
-
-    component: businessFollower
+    component: businessFollower,
   },
   {
     path: "/businessvisitor",
@@ -218,7 +214,7 @@ const routes = [
   },
 
   {
-    path: "/follower",
+    path: "/follower/:id?",
     name: "Follower",
     component: Follower,
   },

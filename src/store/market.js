@@ -10,7 +10,7 @@ export default {
 
         loader: false,
         success: false,
-        token: "24|5uVwIzU7r82crJj936tmqkuIMRXxm1ADTCbuRceL"
+     //   token: "24|5uVwIzU7r82crJj936tmqkuIMRXxm1ADTCbuRceL"
     },
     getters: {
         getProducts(state) {
@@ -67,7 +67,7 @@ export default {
             return axios
                 .get("category/all", {
                     headers: {
-                        Authorization: `Bearer ${state.token}`
+                     //   Authorization: `Bearer ${state.token}`
                     }
                 })
                 .then(res => {
@@ -87,7 +87,7 @@ export default {
                             .get(
                                 `subcategory/all/${data.cat_id}?business_id=${data.bussiness_id}`, {
                                     headers: {
-                                        Authorization: `Bearer ${state.token}`
+                                 //       Authorization: `Bearer ${state.token}`
                                     }
                                 }
                             )
@@ -118,7 +118,7 @@ export default {
             return axios
                 .get(`filters/subcategory/${sub_id}`, {
                     headers: {
-                        Authorization: `Bearer ${state.token}`
+                    //    Authorization: `Bearer ${state.token}`
                     }
                 })
         },
@@ -126,7 +126,7 @@ export default {
         getProducts({ commit }) {
             return axios.get("market", {
                     headers: {
-                        Authorization: "Bearer 24|5uVwIzU7r82crJj936tmqkuIMRXxm1ADTCbuRceL",
+                  //      Authorization: "Bearer 24|5uVwIzU7r82crJj936tmqkuIMRXxm1ADTCbuRceL",
                     },
                 })
                 .then((res) => {
@@ -142,7 +142,7 @@ export default {
 
             return axios.get(`market?page=${page}`, {
                     headers: {
-                        Authorization: "Bearer 24|5uVwIzU7r82crJj936tmqkuIMRXxm1ADTCbuRceL",
+                 //       Authorization: "Bearer 24|5uVwIzU7r82crJj936tmqkuIMRXxm1ADTCbuRceL",
                     },
                 })
                 .then((res) => {

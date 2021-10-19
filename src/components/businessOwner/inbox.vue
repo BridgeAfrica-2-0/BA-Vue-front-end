@@ -377,6 +377,79 @@
               </div>
               </section>
               <div class="bottom ">
+                <b-row v-if="!checked">
+                  <b-col cols="2" class="p-0">
+                    <b-icon
+                      class="msg-icon primary icon-size  icon-top float-right text-right"
+                      icon="paperclip"
+                    ></b-icon>
+                  </b-col>
+                  <b-col cols="8" class="p-0">
+                    <b-form-input
+                      id="textarea"
+                      v-model="input"
+                      class="input-background"
+                      placeholder="Enter something..."
+                    ></b-form-input>
+
+                    <div class="wrapper">
+                      <emoji-picker @emoji="append" :search="search">
+                        <div
+                          class="emoji-invoker"
+                          slot="emoji-invoker"
+                          slot-scope="{ events: { click: clickEvent } }"
+                          @click.stop="clickEvent"
+                        >
+                          <svg
+                            height="24"
+                            viewBox="0 0 24 24"
+                            width="24"
+                            class="svgg"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path d="M0 0h24v24H0z" fill="none" />
+                            <path
+                              d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm3.5-9c.83 0 1.5-.67 1.5-1.5S16.33 8 15.5 8 14 8.67 14 9.5s.67 1.5 1.5 1.5zm-7 0c.83 0 1.5-.67 1.5-1.5S9.33 8 8.5 8 7 8.67 7 9.5 7.67 11 8.5 11zm3.5 6.5c2.33 0 4.31-1.46 5.11-3.5H6.89c.8 2.04 2.78 3.5 5.11 3.5z"
+                            />
+                          </svg>
+                        </div>
+                        <div
+                          slot="emoji-picker"
+                          slot-scope="{ emojis, insert, display }"
+                        >
+                          <div
+                            class="emoji-picker"
+                            :style="{
+                              top: display.y + 'px',
+                              left: display.x + 'px',
+                            }"
+                          >
+                            <div class="emoji-picker__search">
+                              <input type="text" v-model="search" v-focus />
+                            </div>
+                            <div>
+                              <div
+                                v-for="(emojiGroup, category) in emojis"
+                                :key="category"
+                              >
+                                <h5>{{ category }}</h5>
+                                <div class="emojis">
+                                  <span
+                                    v-for="(emoji, emojiName) in emojiGroup"
+                                    :key="emojiName"
+                                    @click="insert(emoji)"
+                                    :title="emojiName"
+                                    >{{ emoji }}</span
+                                  >
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </emoji-picker>
+                    </div>
+                  </b-col>
+                </b-row>
 
    
               <b-row v-if="!checked">
@@ -701,8 +774,7 @@
 
 export default {
   components: {
-   
-        EmojiPicker,
+    EmojiPicker,
   },
   data() {
     return {
@@ -713,41 +785,84 @@ export default {
         showsearch:true,
      selecteduser:false,
 
+      searchQuery: null,
+      resources1: [
+        { title: "ABE Attendance", uri: "aaaa.com", category: "a", icon: null },
+        {
+          title: "Accounting Services",
+          uri: "aaaa.com",
+          category: "a",
+          icon: null,
+        },
+        { title: "Administration", uri: "aaaa.com", category: "a", icon: null },
+        {
+          title: "Advanced Student Lookup",
+          uri: "bbbb.com",
+          category: "b",
+          icon: null,
+        },
+        { title: "Art & Sciences", uri: "bbbb.com", category: "b", icon: null },
+        {
+          title: "Auxiliares Services",
+          uri: "bbbb.com",
+          category: "b",
+          icon: null,
+        },
+        { title: "Basic Skills", uri: "cccc.com", category: "c", icon: null },
+        {
+          title: "Board of Trustees",
+          uri: "dddd.com",
+          category: "d",
+          icon: null,
+        },
+      ],
+      resources: [
+        {
+          name: "blezour blec",
+          profile:
+            "https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg",
+          type: "person",
+          id: "1",
+        },
+        {
+          name: "itz blec blec",
+          profile:
+            "https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg",
+          type: "person",
+          id: "2",
+        },
 
-     allSelected: false,
-        userIds: [],
+        {
+          name: "Maxine Moffet",
+          profile:
+            "https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg",
+          type: "person",
+          id: "3",
+        },
 
-      
-       searchQuery: null,
-        resources1:[
-            {title:"ABE Attendance",uri:"aaaa.com",category:"a",icon:null},
-            {title:"Accounting Services",uri:"aaaa.com",category:"a",icon:null},
-            {title:"Administration",uri:"aaaa.com",category:"a",icon:null},
-            {title:"Advanced Student Lookup",uri:"bbbb.com",category:"b",icon:null},
-            {title:"Art & Sciences",uri:"bbbb.com",category:"b",icon:null},
-            {title:"Auxiliares Services",uri:"bbbb.com",category:"b",icon:null},
-            {title:"Basic Skills",uri:"cccc.com",category:"c",icon:null},
-            {title:"Board of Trustees",uri:"dddd.com",category:"d",icon:null}
-        ]
-,
+        {
+          name: "Alicia kays",
+          profile:
+            "https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg",
+          type: "person",
+          id: "4",
+        },
 
-
-      resources:[
-            {name:"blezour blec",profile:"https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg",type:"person",id:"1"},
-             {name:"itz blec blec",profile:"https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg",type:"person",id:"2"},
-
-              {name:"Maxine Moffet",profile:"https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg",type:"person",id:"3"},
-
-               {name:"Alicia kays",profile:"https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg",type:"person",id:"4"},
-
-                {name:"Lorem Ipsum",profile:"https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg",type:"person",id:"5"},
-                 {name:"blezour blec",profile:"https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg",type:"person",id:"6"},
-           
-        ]
-,
-
-
-
+        {
+          name: "Lorem Ipsum",
+          profile:
+            "https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg",
+          type: "person",
+          id: "5",
+        },
+        {
+          name: "blezour blec",
+          profile:
+            "https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg",
+          type: "person",
+          id: "6",
+        },
+      ],
       message: {
         type: "",
         name: "Louis Litt",
@@ -828,8 +943,7 @@ export default {
           name: "Blec blezour blec",
           startMessage: "yoo nigga sup lola blec",
           timeStamp: "7:00am",
-           messageCount: "60",
-          
+          messageCount: "60",
         },
 
 
@@ -838,49 +952,49 @@ export default {
           name: "baba blecc ",
           startMessage: "Lorem ipsum la lola blec vlr ",
           timeStamp: "9:00am",
-           messageCount: "60",
+          messageCount: "60",
         },
         {
           id: 4,
           name: "Louis Litt",
           startMessage: "Lorem  sit amet this is goo.",
-           timeStamp: "6:00am",
-           messageCount: "6",
+          timeStamp: "6:00am",
+          messageCount: "6",
         },
         {
           id: 5,
           name: "Louis Litt",
           startMessage: "Lorem this   sit amet.",
           timeStamp: "7:00am",
-           messageCount: "100",
+          messageCount: "100",
         },
         {
           id: 6,
           name: "Louis Litt",
           startMessage: "Lorem ithe amet.",
           timeStamp: "7:00am",
-           messageCount: "3",
+          messageCount: "3",
         },
         {
           id: 7,
           name: "Louis Litt",
           startMessage: "Lordol sit amet.",
           timeStamp: "7:00am",
-           messageCount: "10",
+          messageCount: "10",
         },
         {
           id: 8,
           name: "Louis Litt",
           startMessage: "Lorem vheck ",
           timeStamp: "7:00am",
-           messageCount: "40",
+          messageCount: "40",
         },
         {
           id: 9,
           name: "Louis Litt",
           startMessage: "Lorem papa .",
           timeStamp: "7:00am",
-           messageCount: "15",
+          messageCount: "15",
         },
       ],
     };
@@ -889,7 +1003,7 @@ export default {
    directives: {
     focus: {
       inserted(el) {
-        el.focus()
+        el.focus();
       },
     },
   },
@@ -976,10 +1090,8 @@ showsearchh(){
       }else{
         return this.resources;
       }
-    }
-  }
-
-
+    },
+  },
 };
 </script>
 

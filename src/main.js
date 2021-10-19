@@ -18,34 +18,38 @@ import homeIconData from "@iconify-icons/mdi-light/home";
 import ReadMore from "vue-read-more";
 import VueSocialauth from "vue-social-auth";
 // import firebase from "firebase";
+IconifyIcon.addIcon("home", homeIconData);
 
-import LoadScript from 'vue-plugin-load-script';
-import InfiniteLoading from 'vue-infinite-loading';
-
-
-Vue.use(LoadScript);
 Vue.use(Vuex);
 Vue.use(VueAxios, axios);
-IconifyIcon.addIcon("home", homeIconData);
+
+
+import LoadScript from "vue-plugin-load-script";
+import InfiniteLoading from "vue-infinite-loading";
+
+import { loader } from "./mixins"
+
+//import LoadScript from "vue-plugin-load-script";
+
+Vue.use(LoadScript);
 
 Vue.use(ReadMore);
 Vue.prototype.$axios = axios;
 
-//temporary comented for build
 // const firebaseConfig = {
-//   apiKey: "AIzaSyDu9rL6_YDSeTyU89tF8JcI9kWNR6617Fg",
-//   authDomain: "bridge-africa-api.firebaseapp.com",
-//   projectId: "bridge-africa-api",
-//   storageBucket: "bridge-africa-api.appspot.com",
-//   messagingSenderId: "50055115922",
-//   appId: "1:50055115922:web:81e9b59a354a0c6e9ee24b",
-//   measurementId: "G-9K2WHP9Y13",
+//   apiKey: process.env.API_KEY,
+//   authDomain: process.env.AUTH_DOMAIN,
+//   projectId: process.env.PROJECT_ID,
+//   storageBucket: process.env.STORAGE_BUCKET,
+//   messagingSenderId: process.env.MESSAGING_SENDER_ID,
+//   appId: process.env.APP_ID,
+//   measurementId: process.env.MEARSUREMENT_ID,
 // };
-//
+
 // firebase.initializeApp(firebaseConfig);
-//
+
 // const messaging = firebase.messaging();
-//
+
 // messaging
 //   .requestPermission()
 //   .then(() => {
@@ -59,18 +63,18 @@ Vue.prototype.$axios = axios;
 //   });
 
 Vue.use(VueSocialauth, {
-    providers: {
-        facebook: {
-            clientId: process.env.VUE_APP_FACEBOOK_CLIENT_ID,
-            client_secret: process.env.VUE_APP_FACEBOOK_CLIENT_SECRETE,
-            redirectUri: process.env.VUE_APP_FACEBOOK_RETURN_URL
-        },
-        google: {
-            clientId: process.env.VUE_APP_GOOGLE_CLIENT_ID,
-            client_secret: process.env.VUE_APP_GOOGLE_CLIENT_SECRETE,
-            redirectUri: process.env.VUE_APP_GOOGLE_RETURN_URL
-        }
-    }
+  providers: {
+    facebook: {
+      clientId: process.env.VUE_APP_FACEBOOK_CLIENT_ID,
+      client_secret: process.env.VUE_APP_FACEBOOK_CLIENT_SECRETE,
+      redirectUri: process.env.VUE_APP_FACEBOOK_RETURN_URL,
+    },
+    google: {
+      clientId: process.env.VUE_APP_GOOGLE_CLIENT_ID,
+      client_secret: process.env.VUE_APP_GOOGLE_CLIENT_SECRETE,
+      redirectUri: process.env.VUE_APP_GOOGLE_RETURN_URL,
+    },
+  },
 });
 
 import FlashMessage from "@smartweb/vue-flash-message";
@@ -120,46 +124,79 @@ import "@/assets/css/bootstrap.css";
 Vue.use(BootstrapVue);
 Vue.use(IconsPlugin);
 
-Vue.use(VueGoogleMaps, {
-    load: {
-        key: "AIzaSyAGZU6cqra18t1fhN1AbzRsEc_pgt7n2C8",
-        libraries: "places"
-    },
-    autobindAllEvents: false,
-    installComponents: true
+//import InfiniteLoading from "vue-infinite-loading";
+
+Vue.use(InfiniteLoading, {
+  /* options */
 });
+
+Vue.use(VueGoogleMaps, {
+  load: {
+    key: "AIzaSyAGZU6cqra18t1fhN1AbzRsEc_pgt7n2C8",
+    libraries: "places",
+  },
+  autobindAllEvents: false,
+  installComponents: true,
+});
+
+
+import VueLoading from 'vue-loading-overlay';
+import 'vue-loading-overlay/dist/vue-loading.css';
+
+
+Vue.use(VueLoading);
+
+import VueAgile from 'vue-agile'
+
+Vue.use(VueAgile);
+
+import CoolLightBox from 'vue-cool-lightbox'
+import 'vue-cool-lightbox/dist/vue-cool-lightbox.min.css'
+
+Vue.use(CoolLightBox)
+
 
 Vue.component("v-select", vSelect);
 
 import i18n from "./i18n";
 
 Vue.config.productionTip = false;
+var user=null;
 
 new Vue({
+  router,
+  store,
+  i18n,
 
-    router,
-    store,
-    i18n,
-
-    created() {
-        const userInfo = localStorage.getItem("user");
-        if (userInfo) {
-            const userData = JSON.parse(userInfo);
-            this.$store.commit("auth/setUserData", userData);
+  created() {
+    const userInfo = localStorage.getItem("user");
+    if (userInfo) {
+      const userData = JSON.parse(userInfo);
+      user=userData;
+      this.$store.commit("auth/setUserData", userData);
+    }
+    axios.interceptors.response.use(
+      (response) => response,
+      (error) => {
+        if (error.response.status === 401) {
+          // this.$store.dispatch("auth/logout");
+          console.log("error has occure");
         }
-        axios.interceptors.response.use(
-            (response) => response,
-            (error) => {
-                if (error.response.status === 401) {
-                    // this.$store.dispatch("auth/logout");
-                    console.log("error has occure");
-                }
-                return Promise.reject(error);
-            }
-        );
-    },
+        return Promise.reject(error);
+      }
+    );
+
+      axios.interceptors.request.use(function (config) {
+
+          if(user != null){  
+          config.headers.Authorization =  `Bearer  ${user.accessToken}`;
+        }
+          return config;
+      });
+
+  },
 
 
-    render: (h) => h(App),
+  render: h => h(App),
+
 }).$mount("#app");
-

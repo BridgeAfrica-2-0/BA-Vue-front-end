@@ -7,7 +7,7 @@
         Mobile Phone:
       </div>
       <div class="col">
-        +1 644841545
+       {{info.user.phone}}
       </div>
     </div>
   </div>
@@ -18,7 +18,15 @@ export default {
   data() {
     return {};
   },
-  methods: {}
+  methods: {},
+
+    computed:{
+
+    info(){
+      return this.$store.state.follower.profileIntro;
+    }
+
+  },
 };
 </script>
 

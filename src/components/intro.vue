@@ -19,11 +19,25 @@
             class="icon-size"
             variant="primary"
           ></b-icon>
-          Work at: Current or Last Organization
+          Work at: 
+              <span
+                class="text"
+                v-for="exp in info.user_experience.slice(0, 1)"
+                :key="exp.id"
+              >
+                {{ exp.company_name }}
+              </span>
         </p>
         <p>
           <b-icon icon="book-fill" class="icon-size" variant="primary"></b-icon>
-          Studied at: Last Education
+          Studied at:      <span
+                v-for="edu in info.user_education.slice(0, 1)"
+                :key="edu.id"
+                class="text"
+              >
+            
+                {{ edu.school_name }}</span
+              >
         </p>
         <p>
           <b-icon
@@ -31,7 +45,7 @@
             class="icon-size"
             variant="primary"
           ></b-icon>
-          Home Town Name:Dummy
+          Home Town Name {{ info.user.town }}
         </p>
         <p>
           <b-icon
@@ -39,7 +53,7 @@
             class="icon-size"
             variant="primary"
           ></b-icon>
-          Current City Name:Dummy
+          Current City Name: {{ info.user.city }}
         </p>
         <p>
           <b-icon
@@ -47,7 +61,7 @@
             class="icon-size"
             variant="primary"
           ></b-icon>
-          Followed by: 525
+         Community:  {{ info.user.community }}
         </p>
       </b-card-text>
     </b-card>
@@ -55,7 +69,13 @@
 </template>
 
 <script>
-export default {};
+export default {
+  computed:{
+     info :function(){
+        return this.$store.getters['follower/getUserPostIntro'];
+      }
+  }
+};
 </script>
 
 <style></style>

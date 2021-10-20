@@ -20,7 +20,7 @@ export default {
       return state.blocking;
     },
     //getting networkss
-    getNetworks(state) {
+    getNetwork(state) {
       return state.networks;
     },
 
@@ -144,8 +144,8 @@ export default {
     },
   },
   actions: {
-    async getNetworks({ commit }) {
-      const res = await axios.get("network");
+    async getNetworks({ commit }, networkId) {
+      const res = await axios.get(`network/${networkId}`);
 
       commit("setNetwork", res.data);
     },
@@ -192,29 +192,29 @@ export default {
     },
 
     // getting editors
-    async getEditors({ commit }) {
-      const res = await axios.get("network/{id}/editors");
+    async getEditors({ commit }, id) {
+      const res = await axios.get(`network/${id}/editors`);
 
       commit("setEditors", res.data);
     },
 
     //edit editor
-    async editEditor({ commit }) {
-      const res = await axios.post("network/roles/{id}/assign");
+    async editEditor({ commit }, id) {
+      const res = await axios.post(`network/roles/${id}/assign`);
 
       commit("editEditor", res.data);
     },
 
     //edit editor
-    async deleteEditor({ commit }) {
-      const res = await axios.post("network/roles/{id}");
+    async deleteEditor({ commit }, id) {
+      const res = await axios.post(`network/roles/${id}`);
 
       commit("deletetEditor", res.data);
     },
 
     //getting membre request
-    async getMemberRequest({ commit }) {
-      const res = await axios.get("");
+    async getMemberRequest({ commit }, networkId) {
+      const res = await axios.get(`network/${networkId}/members`);
 
       commit("setMemberRequest", res.data);
     },

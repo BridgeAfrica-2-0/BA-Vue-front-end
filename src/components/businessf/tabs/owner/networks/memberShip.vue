@@ -120,14 +120,17 @@ import { mapActions, mapGetters } from "vuex";
 export default {
   data: () => ({
     load: null,
+    networkId: "",
   }),
   computed: {
     ...mapGetters({
       allMemberRequest: "networkSetting/allMemberRequest",
+      getNetwork: "networkSetting/getNetwork",
     }),
   },
   beforeMount() {
-    this.getMemberRequest();
+    this.networkId = this.getNetwork.id;
+    this.getMemberRequest(this.networkId);
   },
   methods: {
     ...mapActions({

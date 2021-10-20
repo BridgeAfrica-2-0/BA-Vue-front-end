@@ -54,7 +54,7 @@
         </div>
 
         <b-modal hide-footer size="xl" id="Details" ref="Details">
-          <img class="card-img" :src="showImage" alt="Oops" />
+          <img class="card-img" :src="postImage" alt="Oops" />
           <div>
             <p>
               {{ this.content }}
@@ -69,7 +69,7 @@
               class="card-img btn p-0 album-img"
               :src="image.media.path"
               alt=""
-              @click="showPic(image, image.content)"
+              @click="showPic(image.media.path, image.content)"
           /></a>
 
           <div class="mediadesc">
@@ -123,6 +123,7 @@ export default {
       showImage: null,
       showIndex: "",
       content: "",
+      postImage: "",
       album_id: null,
       url: null,
       fullPage: null,
@@ -155,9 +156,10 @@ export default {
       downloadPic: "UserProfileOwner/downloadPic",
     }),
 
-    showPic(image, content) {
-      this.showIndex = this.getImages.indexOf(image);
-      this.showImage = Object.assign({}, image);
+    showPic(path, content) {
+      // this.showIndex = this.getImages.indexOf(image);
+      // this.showImage = Object.assign({}, image);
+      this.postImage = path;
       this.content = content;
       this.$refs["Details"].show();
     },
@@ -324,7 +326,8 @@ export default {
       this.profile_pic = e.target.files[0];
       const file = e.target.files[0];
       this.img_url = URL.createObjectURL(file);
-      console.log(this.img_url);
+      console.log("look down");
+      console.log(this.profile_pic);
       console.log("look up");
       this.$refs["modalxl"].show();
     },

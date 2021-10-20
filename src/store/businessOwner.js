@@ -351,6 +351,16 @@ export default {
  },
 
 
+ 
+ loadMore({commit}, url){
+   
+  return axios.get(url)
+  .then(( data ) => {
+   return data;
+  });
+
+ },
+
  async loadUserBusinessAbout(context, payload) {
   console.log(payload, "load user Business About start +++++");
   let response_ = null;

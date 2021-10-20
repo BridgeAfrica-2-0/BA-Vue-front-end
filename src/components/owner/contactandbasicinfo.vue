@@ -19,6 +19,73 @@
           Edit
         </button>
       </div>
+ 
+
+ 
+
+
+
+  <b-modal
+        id="phoneumodal"
+        title="Update Phone Number"
+        hide-footer
+        ref="phoneumodal"
+        @close="cancel"
+      >
+        <div class="modal-body">
+          <form
+            class="form"
+            action=""
+            method="post"
+            @submit.prevent="updateNphoneNumber"
+          >
+            <b-form-input
+              class="mt-2 mb-2"
+              v-model="editContact.phone_number"
+              placeholder="phone"
+              type="text"
+              required
+            ></b-form-input>
+
+            <div class="fosrm-group text-right w-100">
+              <button type="submit" class="btn btn-primary orange">Update</button>
+            </div>
+          </form>
+        </div>
+      </b-modal>
+
+
+        <b-modal
+        id="phonenmodal"
+        title="Add Phone Number"
+        hide-footer
+        ref="phonenmodal"
+        @close="cancel"
+      >
+        <div class="modal-body">
+          <form
+            class="form"
+            action=""
+            method="post"
+            @submit.prevent="saveNphoneNumber"
+          >
+            <b-form-input
+              class="mt-2 mb-2"
+              v-model="newphone"
+              placeholder="phone"
+              type="text"
+              required
+            ></b-form-input>
+
+            <div class="fosrm-group text-right w-100">
+              <button type="submit" class="btn btn-primary orange">Save</button>
+            </div>
+          </form>
+        </div>
+      </b-modal>
+
+
+
 
       <b-modal
         id="phonemodal"
@@ -483,7 +550,51 @@
      icon="pencil" variant="primary">   </b-icon> Update Phone
             </a>
       </div>
+
+
+  <br>
+  
+        
+        
+            
+           
+
     </div>
+
+      <a v-b-modal.phonenmodal data-target="#phonemodal">
+          
+
+<fas-icon
+                class="primary float-left mr-1 mt-1"
+                :icon="['fas', 'plus-circle']"
+              /> Add other contact
+            </a>
+
+
+<div class="">
+          <div class="col-md-4" v-for="con in info.user_contact" :key="con.id"> {{con.phone_number }}       
+                    <b-dropdown size="lg"  variant="link" toggle-class="text-decoration-none" no-caret>
+    <template #button-content>
+     <b-icon
+                      icon="pencil"
+                      class="icon-size"
+                      variant="primary"
+                    ></b-icon>
+    </template>
+    <b-dropdown-item 
+                  
+                  @click="editContactt(con)"  v-b-modal.phoneumodal variant="">Edit</b-dropdown-item>
+    <b-dropdown-item   @click="deleteNphoneNumber(con)" > Delete</b-dropdown-item>
+  </b-dropdown>
+  
+  
+   <br /> </div>
+         
+          
+        </div>
+
+
+
     <div class="row mb-4">
       <div class="col"></div>
     </div>
@@ -626,6 +737,7 @@ export default {
   data() {
     return {
       websiteId:null,
+      editContact:[],
       basicInfo: {
         dateOfBirth: { day: "12", month: "1", year: "2000" },
         gender: "M",
@@ -642,27 +754,9 @@ export default {
     };
   },
   created() {
-    this.basicInfo = JSON.parse(
-      JSON.stringify(this.$store.getters["profile/getProfileAboutBasicInfos"])
-    );
-    console.log("Load User birth Date start ++++++", this.basicInfo);
+    
     this.$store
-      .dispatch("profile/loadUserBasicInfosBirthDate", null)
-      .then((response) => {
-        console.log("load user birth date response (3) ++++", response);
-        console.log("Load User BirthDate end+++++++");
-      })
-      .catch((error) => {
-        console.log("Error from server or from browser error (2) ++++", error);
-      })
-      .finally(() => {
-        this.basicInfo = JSON.parse(
-          JSON.stringify(
-            this.$store.getters["profile/getProfileAboutBasicInfos"]
-          )
-        );
-        console.log("Load User birth Date end ++++++", this.basicInfo);
-      });
+  
   },
 
 
@@ -769,9 +863,132 @@ export default {
           this.$refs["modal-7"].hide();
         });
     },
+
+
+    saveNphoneNumber(){
+        
+           
+             this.$store
+        .dispatch("profile/createContact", {
+          phone: this.newphone,
+        })
+        .then((response) => {
+          console.log("update phone user response (3) ++++", response);
+
+
+           this.$store
+      .dispatch("profile/loadUserPostIntro", null)
+      .then((response) => {
+         console.log(response);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
+
+        })
+        .catch((error) => {
+          console.log(
+            error,
+           
+          );
+        })
+        .finally(() => {
+          console.log("finally save new mobilePhones user ++++++ ");
+         
+          this.$refs["phonenmodal"].hide();
+        });
+
+    },
+
+      editContactt(contact){
+         
+         console.log(contact);
+         this.editContact=contact;
+
+          
+      },
+
+       updateNphoneNumber(){
+        
+           
+             this.$store
+        .dispatch("profile/updateContact", {
+          id: this.editContact.id,
+          phone:this.editContact.phone_number
+        })
+        .then((response) => {
+          console.log("update phone user response (3) ++++", response);
+
+           this.$store
+      .dispatch("profile/loadUserPostIntro", null)
+      .then((response) => {
+         console.log(response);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
+        })
+        .catch((error) => {
+          console.log(
+            error,
+           
+          );
+        })
+        .finally(() => {
+          console.log("finally save new mobilePhones user ++++++ ");
+         
+          this.$refs["phoneumodal"].hide();
+        });
+
+    },
+
+
+
+
+
+
+   deleteNphoneNumber(con){
+        
+           
+             this.$store
+        .dispatch("profile/deleteContact", {
+          id: con.id,
+        })
+        .then((response) => {
+          console.log("update phone user response (3) ++++", response);
+           this.$store
+      .dispatch("profile/loadUserPostIntro", null)
+      .then((response) => {
+         console.log(response);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
+        })
+        .catch((error) => {
+          console.log(
+            error,
+           
+          );
+        })
+        .finally(() => {
+          console.log("finally deleted number ");
+        
+        });
+
+    },
+
+
+
+
+
+
     savePhoneNumber() {
 
-     
+      
       this.$store
         .dispatch("profile/updateUserBasicInfosMobilePhones", {
           mobilePhones: this.info.user.phone,

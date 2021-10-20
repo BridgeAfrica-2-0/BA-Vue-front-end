@@ -30,13 +30,13 @@
               >Current Plan: <span class="text-success">Basic</span></span
             >
           </p>
-          <p class="mb-1 mb-3"> {{business.category}} </p>
+          <p class="mb-1 mb-3">  <span v-for="cat in business.category" :key="cat.name">  {{cat.name}}  </span> </p>
           <p class="mb-1">
             <b-icon-person-fill class="text-primary"></b-icon-person-fill>
               <router-link :to="'business_owner/'+business.id">
                  Visit Profile
           </router-link>
-{{business}}
+
 
           </p>
           <p class="mb-1 ">

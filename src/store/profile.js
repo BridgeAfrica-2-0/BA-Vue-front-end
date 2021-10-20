@@ -413,6 +413,71 @@ export default {
 
    },
 
+
+
+   createContact({ commit },payload){
+       
+        console.log(payload)
+        return  axios.post("user/contact-create", {phone:payload.phone}, {
+         
+        })
+        .then((res) => {
+          console.log(res.data);
+        })
+        .catch((err) => {
+          console.log("Something went wrong");
+          console.log({err:err})
+        });
+ 
+
+   },
+
+
+
+
+
+
+
+
+
+updateContact({ commit },payload){
+       
+  console.log(payload)
+  return  axios.post("user/contact-update/"+payload.id, {phone:payload.phone}, {
+   
+  })
+  .then((res) => {
+    console.log(res.data);
+  })
+  .catch((err) => {
+    console.log("Something went wrong");
+    console.log({err:err})
+  });
+
+
+},
+
+
+deleteContact({ commit },payload){
+       
+  console.log(payload)
+  return  axios.post("user/contact-delete/"+payload.id,{
+   
+  })
+  .then((res) => {
+    console.log(res.data);
+  })
+  .catch((err) => {
+    console.log("Something went wrong");
+    console.log({err:err})
+  });
+
+
+},
+
+
+
+
     NcommunityFollower({ commit }){
       return axios
       .get('profile/network/follower')

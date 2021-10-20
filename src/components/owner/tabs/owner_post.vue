@@ -593,12 +593,16 @@ export default {
       return num;
     },
 
+    reloads(){
+         this.$store.commit("profile/ownerPost", []);
+    },
+
     infiniteHandler($state) {
       console.log("user/post/" + this.page);
       let url= "user/post/" + this.page;
       
        this.$store.dispatch("profile/loadMore",url)
-      //axios.get("user/post/" + this.page)
+     
         .then(({ data }) => {
           console.log(data);
           if (data.data.length) { 
@@ -626,7 +630,7 @@ export default {
       });
 
       axios
-        .post("post/" + post.post_id, {
+        .delete("user/post/delete/" + post.post_id, {
           name: this.name,
         })
         .then((response) => {
@@ -637,7 +641,9 @@ export default {
             blockClass: "custom-block-class",
             message: "Post Deleted",
           });
-
+          this.reloads()
+      this.page = 1;
+      this.infiniteId += 1;
           loader.hide();
         })
         .catch((err) => {
@@ -705,7 +711,7 @@ export default {
       formData2.append("content", this.edit_description);
 
       this.axios
-        .post("update/post/" + this.edit_id, formData2, {
+        .post("user/post/update/" + this.edit_id, formData2, {
           headers: {
             "Content-Type": "multipart/form-data",
           },
@@ -718,6 +724,11 @@ export default {
             blockClass: "custom-block-class",
             message: "Content successfuly uploaded",
           });
+          
+           this.reloads()
+           this.page = 1;
+         this.infiniteId += 1;
+
           loader.hide();
 
           this.$refs["modal-edit"].hide();
@@ -901,7 +912,7 @@ export default {
           this.$refs["modal-xl"].hide();
     
         this.$store.commit("businessOwner/ownerPost",[]); 
-
+            this.reloads()
            this.page = 1;
       this.infiniteId += 1;
    console.log("post create complete");

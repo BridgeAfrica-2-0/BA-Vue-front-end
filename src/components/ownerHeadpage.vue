@@ -2,20 +2,12 @@
   <div class="p-0">
     <b-container fluid class="p-0 gradient">
       <div class="container-flex">
-
   
 
-        <img  v-if="info.user.cover_picture =='' "
-          src="@/assets/img/banner.jpg"
-          class="img-fluid  banner"
-          alt="Kitten"
-        />
-
-
-         <img  v-if="info.user.cover_picture !='' "
+         <img 
           :src="info.user.cover_picture"
           class="img-fluid  banner"
-          alt="Kitten"
+          alt="banner"
         />
 
       </div>
@@ -49,9 +41,10 @@
             ></b-icon>
 
             <span style="display: inline-block;">
-              <h6 class=" profile-name text-center ">
-                <b> <b-link> {{info.user.name}} </b-link> </b> <br />
-                <span class="duration">  {{ nFormatter(total.total_community)}} Community </span>
+              <h6 class=" profile-name text-center  ">
+                <div class="username">  <b> {{info.user.name}}     </b>  </div>
+               
+                <span class="duration float-left">  {{ nFormatter(total.total_community)}} Community </span>
               </h6>
             </span>
 
@@ -536,7 +529,29 @@ computed: {
 <style scoped>
 
 
+  @media only screen and (min-width: 762px) {
+  .username {
+   
+   text-overflow: ellipsis;
+    overflow: hidden;
+    width: 100%;
+    height: 1.5em;
+    white-space: nowrap;
+    font-size: 32px !important;
+  }
+  }
 
+
+  @media only screen and (max-width: 762px) {
+  .username {
+  
+    text-overflow: ellipsis;
+    overflow: hidden;
+    width: 100%;
+    height: 1.5em;
+    white-space: nowrap;
+    font-size: 22px;
+  }}
 #preview {
   display: flex;
   justify-content: center;

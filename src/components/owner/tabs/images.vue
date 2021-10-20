@@ -67,7 +67,7 @@
           <a
             ><img
               class="card-img btn p-0 album-img"
-              :src="image.media"
+              :src="image.media.path"
               alt=""
               @click="showPic(image, image.content)"
           /></a>

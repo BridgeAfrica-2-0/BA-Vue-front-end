@@ -107,7 +107,7 @@
       position="bottom"
     >
       <template #button-content>
-        <b-icon-reply-fill class="col-bg text-ored"></b-icon-reply-fill>
+        <fas-icon class="primary ml-3" icon="['fas', 'share']" />
       </template>
 
       <b-dropdown-text class="box-title"> Share </b-dropdown-text>

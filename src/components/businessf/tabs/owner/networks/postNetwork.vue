@@ -478,13 +478,14 @@
                   variant="primary"
                   aria-hidden="true"
                 ></b-icon>
-                {{  nFormatter(item.comment_count)  }}    </span
+                {{  nFormatter(item.comment_count)  }} </span
               >
               <span>
-                <fas-icon class="primary ml-3" :icon="['fas', 'share']" />
+                <ShareButton type="network" :post="{post_id: item.post_id , user_id: item.user_id}"/>
               </span>
             </b-col>
           </b-row>
+
 <!--  :src="$store.getters.getProfilePicture"  -->
           <b-row class="mt-2">
             <b-col cols="3" md="1" class="m-md-0 p-md-0">
@@ -519,10 +520,13 @@
 import Comment from "./comment";
 import moment from 'moment'
 import axios from "axios";
+
+import {ShareButton} from "@/components/shareButton"
 export default {
   name: "postNetwork",
   components: {
-   Comment
+   Comment,
+   ShareButton
   },
   data() {
     return {

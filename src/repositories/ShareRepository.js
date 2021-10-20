@@ -70,6 +70,7 @@ class Repository {
       const response = (uuid) ? await axios.get(`switch?id=${uuid}`) : await axios.get(`switch`)
       return {
         success: true,
+        data: response.data.message
       }
 
     } catch (error) {

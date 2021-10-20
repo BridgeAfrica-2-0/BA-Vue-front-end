@@ -15,9 +15,17 @@
           <div
             v-for="(item, index) in business"
             :key="index"
-            class="d-inline-flex flex-row align-items-center suggest-item cursor-pointer w-full"
+            class="
+              d-inline-flex
+              flex-row
+              align-items-center
+              suggest-item
+              cursor-pointer
+              w-full
+            "
+            @click="activedBusiness(item)"
           >
-            <div @click="connect(item)">
+            <div>
               <img
                 :src="item.logo_path"
                 class="rounded-circle"
@@ -45,8 +53,15 @@
           <div
             v-for="(item, index) in networks"
             :key="index"
-            @click="() => $router.push({ name: 'networks', params: { id: item.network_id}})"
-            class="d-inline-flex flex-row align-items-center suggest-item cursor-pointer w-full"
+            @click="activedNetwork(item)"
+            class="
+              d-inline-flex
+              flex-row
+              align-items-center
+              suggest-item
+              cursor-pointer
+              w-full
+            "
           >
             <div>
               <img
@@ -79,15 +94,44 @@ export default {
       hasLauchNetworkRequest: "social/INIT",
     }),
   },
-  methods: {
-    connect: async function (item) {
-      let request = await this.$repository.share.switch(item.business_id);
 
-      if (request.success)
-       this.flashMessage.success({
+  data: () => ({
+    pending: false,
+  }),
+
+  methods: {
+    process: async function (item, type) {
+      let request =
+        "business" == type
+          ? await this.$repository.share.switch(item.business_id)
+          : await this.$repository.share.switch();
+
+      if (request.success) {
+        this.flashMessage.success({
           time: 5000,
-          message: "Operation success",
+          message:
+            "business" == type
+              ? "new" == request.data
+                ? `You are connected to ${item.business_name}`
+                : `You are already connected to ${item.business_name}`
+              : `You are connected to ${item.network_name}`,
         });
+
+        if ("network" == type) {
+          this.$router.push({
+            name: "networks",
+            params: { id: item.network_id },
+          });
+        }
+      }
+    },
+
+    activedBusiness(item) {
+      if (!this.pending) this.process(item, "business");
+    },
+
+    activedNetwork(item) {
+      if (!this.pending) this.process(item, "network");
     },
   },
 };

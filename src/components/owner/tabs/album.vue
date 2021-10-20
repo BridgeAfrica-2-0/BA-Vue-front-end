@@ -182,10 +182,8 @@ export default {
         name: "",
         type: "",
       },
-
       editName: "",
       editId: "",
-
       url: "",
       fullPage: "",
       album_id: "",

@@ -201,7 +201,7 @@ export default {
     handlePageChange(value) {
       this.currentPage = value;
       console.log(this.currentPage);
-      this.getMembers();
+      this.displayFeedback();
     },
   }
 };

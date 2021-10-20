@@ -80,6 +80,54 @@ class Repository {
       }
     }
   }
+
+  async commentLike(data) {
+    try {
+      const response =  await axios.get(`comment/like`, data)
+      return {
+        success: true,
+        data: response.data.message
+      }
+
+    } catch (error) {
+      return {
+        success: false,
+        data: error
+      }
+    }
+  }
+
+  async createPost(data) {
+    try {
+      const response = await axios.post(`network/create/post`, data)
+      return {
+        success: true,
+        data: response.data.message
+      }
+
+    } catch (error) {
+      return {
+        success: false,
+        data: error
+      }
+    }
+  }
+
+  async createComment(data) {
+    try {
+      const response = await axios.post(`post/comment`,data)
+      return {
+        success: true,
+        data: response.data.message
+      }
+
+    } catch (error) {
+      return {
+        success: false,
+        data: error
+      }
+    }
+  }
 }
 
 export default new Repository()

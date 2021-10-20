@@ -81,7 +81,7 @@ export default {
     Inbox,
     navbar,
     Footer,
-    Parent
+    Parent,
   },
 
   data() {
@@ -99,20 +99,20 @@ export default {
 
         { label: "Keyword Alert", icon: "" },
 
-        { label: "Settings", icon: "" }
+        { label: "Settings", icon: "" },
       ],
 
       options: {
-        activeColor: "#32a400"
-      }
+        activeColor: "#32a400",
+      },
     };
   },
 
   methods: {
     handleChange(item, index) {
       console.log(item, index);
-    }
-  }
+    },
+  },
 };
 </script>
 

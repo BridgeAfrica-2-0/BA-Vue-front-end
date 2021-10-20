@@ -32,7 +32,7 @@
               :text="item.about_business"
               link="#"
               less-str="read less"
-              :max-chars="15"
+              :max-chars="35"
             >
             </read-more>
               </p>
@@ -328,7 +328,7 @@ export default {
 @media only screen and (min-width: 768px) {
   .people-style {
     border-top-left-radius: 5px;
-
+    height: 100%;
     border-bottom-left-radius: 5px;
 
     border-top-right-radius: 5px;
@@ -359,7 +359,7 @@ export default {
     border-bottom-right-radius: 5px;
 
     background: white;
-
+   height: 100%;
     background-color: #fff;
     background-clip: border-box;
     border: 1px solid rgba(0, 0, 0, 0.125);

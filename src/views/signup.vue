@@ -139,18 +139,15 @@
                 style="color: white"
                 :disabled="sending"
               >
-               {{ $t("signup") }}
+                {{ $t("signup") }}
               </md-button>
             </b-col>
             <b-col cols="6">
-
-               <router-link to="login">
+              <router-link to="login">
                 <md-button class="md-raised f-right"
                   >{{ $t("login") }}
                 </md-button>
               </router-link>
-
-             
             </b-col>
           </b-row>
         </div>
@@ -182,7 +179,9 @@
       <span class="display-inline">
         <b-link @click="$i18n.locale = 'en'"> {{ $t("english") }}</b-link>
         <span class="vl"></span>
-        <b-link class="ml-2" @click="$i18n.locale = 'fr'"> {{ $t("french") }} </b-link>
+        <b-link class="ml-2" @click="$i18n.locale = 'fr'">
+          {{ $t("french") }}
+        </b-link>
       </span>
       Bridge Africa © 2021
     </p>
@@ -309,7 +308,7 @@ export default {
           phone: this.form.tel,
           password_confirmation: this.form.password,
         })
-        .then(({ data }) => {       
+        .then(({ data }) => {
           console.log(data.data);
           this.$store.commit("auth/setUserData", data.data);
 

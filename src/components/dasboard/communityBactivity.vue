@@ -335,6 +335,19 @@ infiniteHandler($state) {
 }
 
 
+
+
+.s-card{
+  height:560px !important; 
+  overflow: auto; 
+  overflow-x: hidden;
+  padding: 15px;
+
+
+}
+
+
+
 .action-intro {
   font-size: 1rem;
   font-family: Avenir, Helvetica, Arial, sans-serif;
@@ -503,15 +516,6 @@ infiniteHandler($state) {
 
 
 
-
-.s-card{
-  height:540px; 
-  overflow: auto; 
-  overflow-x: hidden;
-  padding: 15px;
-
-
-}
 
 
 </style>

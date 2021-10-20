@@ -280,7 +280,7 @@
                         variant="primary"
                         class="mt-3 text-center"
                       >
-                        change Image
+                        {{$t("welcome.change_Image")}}
                       </b-button>
                     </div>
 
@@ -296,7 +296,7 @@
                       >
                         <div class="drag-text">
                           <i class="fa fa-plus"> </i>
-                          <h3 class="username">Add Profile Photo</h3>
+                          <h3 class="username">{{$t("welcome.Add_Profile_Photo")}}</h3>
                         </div>
                       </a>
                       <div></div>
@@ -850,8 +850,8 @@ export default {
       ],
 
       options: [
-        { text: " Person", value: "person" },
-        { text: " Business ", value: "business" },
+        { text: "Person", value: "person" },
+        { text: "Business", value: "business" },
       ],
 
       category: "",

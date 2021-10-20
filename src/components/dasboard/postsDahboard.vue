@@ -13,10 +13,10 @@
             </b-col>
             <b-col cols="10" md="11" class="pt-2">
               <h5 class="m-0 font-weight-bolder">
-                Heavy Gym
+                {{$t("dashboard.Heavy_Gym")}}
                 <span class="float-right"> </span>
               </h5>
-              <p class="duration">1h Ago</p>
+              <p class="duration">{{$t("dashboard.1h_Ago")}}</p>
             </b-col>
           </b-row>
           <b-row>
@@ -101,8 +101,8 @@
               ></b-avatar>
             </b-col>
             <b-col cols="10" md="11" class="pt-2">
-              <h5 class="m-0 font-weight-bolder">Heavy Gym</h5>
-              <p class="duration">1h Ago</p>
+              <h5 class="m-0 font-weight-bolder">{{$t("dashboard.Heavy_Gym")}}</h5>
+              <p class="duration">{{$t("dashboard.1h_Ago")}}</p>
             </b-col>
           </b-row>
           <b-row>
@@ -181,8 +181,8 @@
               ></b-avatar>
             </b-col>
             <b-col cols="10" md="11" class="pt-2">
-              <h5 class="m-0 font-weight-bolder">Post with 3 pics</h5>
-              <p class="duration">1h Ago</p>
+              <h5 class="m-0 font-weight-bolder">{{$t("dashboard.Post_with_3_pics")}}</h5>
+              <p class="duration">{{$t("dashboard.1h_Ago")}}</p>
             </b-col>
           </b-row>
           <b-row>
@@ -260,8 +260,8 @@
               ></b-avatar>
             </b-col>
             <b-col cols="10" md="11" class="pt-2">
-              <h5 class="m-0 font-weight-bolder">Heavy Gym</h5>
-              <p class="duration">1h Ago</p>
+              <h5 class="m-0 font-weight-bolder">{{$t("dashboard.Heavy_Gym")}}</h5>
+              <p class="duration">{{$t("dashboard.1h_Ago")}}</p>
             </b-col>
           </b-row>
           <b-row>
@@ -343,8 +343,8 @@
               ></b-avatar>
             </b-col>
             <b-col cols="10" md="11" class="pt-2">
-              <h5 class="m-0 font-weight-bolder">Heavy Gym</h5>
-              <p class="duration">1h Ago</p>
+              <h5 class="m-0 font-weight-bolder">{{$t("dashboard.Heavy_Gym")}}</h5>
+              <p class="duration">{{$t("dashboard.1h_Ago")}}</p>
             </b-col>
           </b-row>
           <b-row>

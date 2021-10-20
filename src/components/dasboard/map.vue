@@ -3,7 +3,7 @@
     <b-card class=" border shadow pr-3" style="height:350px">
       <h6 class="title">
         <fas-icon class="icons" :icon="['fas', 'map-marker-alt']" size="lg" />
-        <b> GET DIRECTIONS </b>
+        <b> {{$t("dashboard.GET_DIRECTIONS")}} </b>
       </h6>
 
       <div>

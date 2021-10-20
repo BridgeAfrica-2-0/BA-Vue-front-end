@@ -4,7 +4,7 @@
 
      <b-card class="px-md-3 border shadow "  >
 
-      <span> <h6 class="title mt-3 ">  <fas-icon class=" icons icon-color" :icon="['fab', 'readme']"  size="lg" />   <b> Post </b>  </h6>   </span>
+      <span> <h6 class="title mt-3 ">  <fas-icon class=" icons icon-color" :icon="['fab', 'readme']"  size="lg" />   <b> {{$t("dashboard.Post")}} </b>  </h6>   </span>
 
       <div class="s-card ">     
 

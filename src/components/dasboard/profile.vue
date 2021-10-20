@@ -5,13 +5,13 @@
         <h3 class="name">
           <h6 class="name">
             <fas-icon class="icons" :icon="['fas', 'user']" size="lg" />
-            <b> Profile </b>
+            <b> {{$t("dashboard.Profile")}} </b>
           </h6>
  
 
           <h6 class="float-right text-success font-weight-bolder">
             <b-button variant="outline-primary upgrade-btn mt-top-60" size="sm"
-              ><b-icon-star></b-icon-star> &nbsp;&nbsp;Upgrade Plan</b-button
+              ><b-icon-star></b-icon-star> &nbsp;&nbsp;{{$t("dashboard.Upgrade_Plan")}}</b-button
             >
           </h6>
         </h3>
@@ -33,26 +33,26 @@
             <b class="name"> {{ profile.name }} </b>
           </h6>
           <p class="mb-1">
-            {{ profile.followers }} Community
+            {{ profile.followers }} {{$t("dashboard.Community")}}
             <span class="float-right m-60"
-              >Current Plan: <span class="text-success">Basic</span></span
+              >{{$t("dashboard.Current_Plan")}}: <span class="text-success">{{$t("dashboard.Basic")}}</span></span
             >
           </p>
 
           <p class="mb-1">
             <b-icon-person-fill class="text-primary"></b-icon-person-fill>
-        <router-link to="profile_owner">    Visit Profile   </router-link>
+        <router-link to="profile_owner">    {{$t("dashboard.Visit_Profile")}}   </router-link>
           </p>
           <p class="mb-1 ">
             <b-icon-chat-fill class="text-primary"></b-icon-chat-fill>
-            Message
+            {{$t("dashboard.Message")}}
             <span class="badge rounded-pill bg-primary float-right mt-1">
               {{ profile.message }}
             </span>
           </p>
           <p class="mb-1 ">
             <b-icon-bell-fill class="text-primary"></b-icon-bell-fill>
-            Notifications
+            {{$t("dashboard.Notifications")}}
             <span class="badge rounded-pill bg-primary float-right mt-1">
               {{ profile.notification }}
             </span>

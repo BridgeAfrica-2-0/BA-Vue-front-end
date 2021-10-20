@@ -7,8 +7,8 @@
             class="img-fluid picture logo-img"
             src="@/assets/icons/network.png"
           />
-          NETWORKS
-          <h6 style="float:right" class="see-all-link">666 result found</h6>
+          {{$t("dashboard.NETWORKS")}}
+          <h6 style="float:right" class="see-all-link">{{$t("dashboard.666_result_found")}}</h6>
         </h4>
       </span>
 
@@ -29,11 +29,11 @@
                 </b-col>
                 <b-col md="6" cols="7" sm="7">
                   <p class="text">
-                    <strong> Shipping Network </strong> <br />
+                    <strong> {{$t("dashboard.Shipping_Network")}} </strong> <br />
                     <br />
-                    Public <br />
-                    20k Members <br />
-                    Business Name <br />
+                    {{$t("dashboard.Public")}} <br />
+                    {{$t("dashboard.20k_Members")}} <br />
+                    {{$t("dashboard.Business_Name")}} <br />
                   </p>
                 </b-col>
 
@@ -48,7 +48,7 @@
                           variant="primary"
                         >
                           <b-icon class="ico" icon="plus-circle"> </b-icon>
-                          Community
+                          {{$t("dashboard.Community")}}
                         </b-button>
                       </b-col>
 
@@ -59,7 +59,7 @@
                           class="b-background"
                           variant="primary"
                         >
-                          <b-icon class="ico" icon="chat"> </b-icon> Message
+                          <b-icon class="ico" icon="chat"> </b-icon> {{$t("dashboard.Message")}}
                         </b-button>
                       </b-col>
 

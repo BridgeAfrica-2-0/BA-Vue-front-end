@@ -123,7 +123,7 @@
               :disabled="sending"
             />
             <span class="md-error" v-if="!$v.form.confirmPassword.required"
-              >Password is required {{ $t("auth.password_is_required") }}
+              > {{ $t("auth.password_is_required") }}
             </span>
           </md-field>
         </md-card-content>

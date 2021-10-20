@@ -6,11 +6,11 @@
         <h6 class="mb-3 pl-1 title">
           <fas-icon class="icons" :icon="['fas', 'chart-line']" size="lg" />
 
-          <b> INSIGHTS </b>
+          <b> {{$t("dashboard.INSIGHTS")}} </b>
         </h6>
       </span>
       <p class="text"> 
-        Discover how customers feel about and interact with you  shares 
+        {{$t("dashboard.Discover_how_customers_feel_about_and_interact_with_you_shares")}} 
       </p>
 
         <div class="a-content"> 

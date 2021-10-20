@@ -1,12 +1,11 @@
 <template>
 	<div>
 		<b-carousel
-			id="carousel-1"
+			id="caroussel-product"
 			v-model="slide"
 			:interval="2000"
 			controls
 			background="#ababab"
-			img-width="100px"
 			style="text-shadow: 1px 1px 2px #333;"
 			@sliding-start="onSlideStart"
 			@sliding-end="onSlideEnd"
@@ -67,11 +66,12 @@
 <style scoped>
 	.product-slide img {
 		display: block;
-		height: 200px !important;
+		height: 100px !important;
 	}
 	@media only screen and (min-width: 768px) {
+
 		.product-slide img {
-			height: 200px !important;
+			height: 100px !important;
 		}
 	}
 </style>

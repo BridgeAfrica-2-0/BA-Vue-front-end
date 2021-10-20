@@ -27,7 +27,6 @@ export default {
   mutations: {
     setUserData(state, userData) {
       state.user = userData;
-
       localStorage.setItem("user", JSON.stringify(userData));
      // axios.defaults.headers.common.Authorization = `Bearer ${userData.accessToken}`;
 
@@ -105,7 +104,6 @@ export default {
 
     country({ commit }) {
       return axios.get("countries").then(({ data }) => {
-        console.log(data);
         commit("setCountry", data.data);
       });
     },

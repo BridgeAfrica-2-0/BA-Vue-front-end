@@ -64,9 +64,10 @@
         </b-container>
         <h6 class="mt-2 font-weight-bolder title ">About</h6>
         <p class="text-justify text">
-          {{ networkInfo[0].description }}
-          <span class="d-inline-block float-right">
-            <a href="#">lire la Suite</a>
+          <span v-if="networkInfo[0].description.length<130">{{ networkInfo[0].description }}</span>
+          <span v-else>{{ networkInfo[0].description.substring(0,130)+moreText }}</span>
+          <span v-if="moreText === '...'" class="d-inline-block float-right">
+            <a @click="moreText = networkInfo[0].description" style="cursor:pointer;">lire la Suite</a>
           </span>
         </p>
       </b-card-text>
@@ -245,7 +246,7 @@ export default {
       networkShow: true,
       showModal: false,
       SPupdateN: false,
-      text: "",
+      moreText: "...",
       fileToUpload: '',
       selectedImagePrv: '',
       updateNetwork_form: null,
@@ -264,6 +265,7 @@ export default {
   },
 
   created(){
+    console.log(this.networkInfo);
     this.updateNetwork_form = {
       name: this.networkInfo[0].name,
       description: this.networkInfo[0].description,
@@ -286,6 +288,7 @@ export default {
     },
 
     addNetwork() {
+      // console.log(this.networkInfo[0]);
       console.log("hello");
       this.showModal = !this.showModal;
     },
@@ -316,9 +319,13 @@ export default {
 
     updateNetwork: function(){
       this.SPupdateN = true;
-      this.axios.post("network/"+this.url+"/about/update", this.updateNetwork_form)
-      .then(() => {
-        console.log(this.updateNetwork_form);
+      console.log("this.updateNetwork_form", this.updateNetwork_form);
+      this.$store.dispatch("networkProfile/updateNetwork", {
+        path: "network/"+this.url+"/about/update",
+        formData: this.updateNetwork_form
+      })
+      .then(({ data }) => {
+        console.log(data);
         this.SPupdateN = false;
         this.getNetworkInfo();
         this.flashMessage.show({
@@ -340,15 +347,14 @@ export default {
       this.SPupdateN = !this.SPupdateN;
       let formData = new FormData();
       formData.append('image', this.fileToUpload);
-      this.axios.post( 'network/'+this.url+'/about/update/logo', formData,
-        {
-          headers: {
-              'Content-Type': 'multipart/form-data'
-          }
-        }
-      )
-      .then(() => {
-        console.log(formData);
+      console.log("this.fileToUpload",this.fileToUpload)
+      console.log("formData",formData)
+      this.$store.dispatch("networkProfile/submitFile", {
+        path: 'network/'+this.url+'/about/update/logo',
+        formData: formData
+      })
+      .then(({ data }) => {
+        console.log(data);
         this.getNetworkInfo()
         this.SPupdateN = !this.SPupdateN;
         this.flashMessage.show({

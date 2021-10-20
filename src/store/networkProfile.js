@@ -29,6 +29,33 @@ export default {
         console.log(data);
 
       })
+    },
+
+    updateNetwork( {commit}, networkData ){
+      console.log("networkData.path",networkData.path);
+      console.log("networkData.formData",networkData.formData);
+      return axios
+      .post(networkData.path, networkData.formData)
+      .then(({ data }) => {
+        console.log(data);
+        return data;
+      })
+    },
+
+    submitFile( {commit}, networkData ){
+      console.log("networkData.path",networkData.path);
+      console.log("networkData.formData",networkData.formData);
+      return axios.post( networkData.path, networkData.formData,
+        {
+          headers: {
+              'Content-Type': 'multipart/form-data'
+          }
+        }
+      )
+      .then(({ data }) => {
+        console.log(data);
+        return data;
+      })
     }
 
 

@@ -62,11 +62,7 @@ export default {
     actions: {
         getCategories({ state, commit }, bussiness_id) {
             return axios
-                .get("category", {
-                    headers: {
-                        Authorization: `Bearer ${state.token}`
-                    }
-                })
+                .get("category")
                 .then(res => {
                     console.log("my Categories: ");
                     let categories = res.data.data;
@@ -82,11 +78,7 @@ export default {
 
                         axios
                             .get(
-                                `subcategory/${data.cat_id}?business_id=${data.bussiness_id}`, {
-                                    headers: {
-                                        Authorization: `Bearer ${state.token}`
-                                    }
-                                }
+                                `subcategory/${data.cat_id}?business_id=${data.bussiness_id}`
                             )
                             .then(res => {
                                 console.log("all loaded!");
@@ -119,22 +111,14 @@ export default {
 
         getFilter({ state }, sub_id) {
             return axios
-                .get(`filters/subcategory/${sub_id}`, {
-                    headers: {
-                        Authorization: `Bearer ${state.token}`
-                    }
-                })
+                .get(`filters/subcategory/${sub_id}`)
         },
 
         getProducts({ commit, state }) {
             commit("setLoader", true);
 
 
-            return axios.get("market", {
-                    headers: {
-                        Authorization: `Bearer ${state.token}`,
-                    },
-                })
+            return axios.get("market")
                 .then((res) => {
                     commit("setLoader", false);
 
@@ -151,11 +135,7 @@ export default {
             commit("setLoader", true);
             commit("setProducts", { data: [] });
 
-            return axios.get(`market?page=${page}`, {
-                    headers: {
-                        Authorization: `Bearer ${state.token}`,
-                    },
-                })
+            return axios.get(`market?page=${page}`)
                 .then((res) => {
                     commit("setLoader", false);
 

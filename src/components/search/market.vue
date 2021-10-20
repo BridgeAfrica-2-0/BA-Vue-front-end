@@ -2,12 +2,13 @@
   <div>
     <b-spinner v-if="prodLoader" variant="primary" label="Spinning"></b-spinner>
 
-    <b-alert v-if="products.data.length === 0" show variant="warning"><a href="#" class="alert-link">
-      No product available for that search!
-      </a></b-alert>
+    <b-alert v-if="products.data.length === 0" show variant="warning"
+      ><a href="#" class="alert-link">
+        No product available for that search!
+      </a></b-alert
+    >
 
     <div
-    
       class="people-style shadow"
       v-for="(prod, index) in products.data"
       :key="index"
@@ -28,7 +29,7 @@
             <b-link class="text"> see more </b-link> <br />
 
             <span class="price">
-              <strong> {{ prod.price }}  Fcfa </strong>
+              <strong> {{ prod.price }} Fcfa </strong>
             </span>
           </p>
 
@@ -38,10 +39,10 @@
         </b-col>
       </b-row>
     </div>
-    <!-- pagination -->
 
+    <!-- pagination -->
     <b-pagination
-    v-if="products.next"
+      v-if="products.next || products.previous"
       v-model="currentPage"
       :total-rows="total"
       :per-page="per_page"
@@ -50,8 +51,8 @@
       align="center"
       :disabled="products.data.length > 0 ? false : true"
     ></b-pagination>
-
     <!-- End pagination -->
+    
     <b-modal hide-footer title="Edit product">
       <b-form>
         <b-row>

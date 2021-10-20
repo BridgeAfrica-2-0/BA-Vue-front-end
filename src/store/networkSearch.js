@@ -136,11 +136,7 @@ export default {
             else console.log("Page not set!");
             console.log("[debug] page:", page);
             try {
-                const res = await axios.post(`network/search?page=${page}`, data, {
-                    headers: {
-                        Authorization: `Bearer ${state.token}`
-                    }
-                });
+                const res = await axios.post(`network/search?page=${page}`, data);
                 commit("setLoader", false);
                 console.log("Network Search results: ", res.data);
                 commit("setNetworks", res.data);

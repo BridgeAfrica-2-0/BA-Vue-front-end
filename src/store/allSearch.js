@@ -82,11 +82,7 @@ export default {
             const TYPES = ['business', 'user', 'network', 'market', 'post']
 
             TYPES.map((type) => {
-                axios.post(`/search/${type}`, data, {
-                        headers: {
-                            Authorization: `Bearer ${state.token}`
-                        }
-                    })
+                axios.post(`/search/${type}`, data)
                     .then((res) => {
                         if (type == 'business') {
                             commit("setBusinesses", res.data);

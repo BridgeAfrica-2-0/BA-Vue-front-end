@@ -10,8 +10,16 @@
     <Nav :credentials.sync="searchParams" id="top">
       <template v-slot:button>
         <Button
-          @click.native="strategy['miniBusiness']"
+          @click.native="strategy['all']"
           v-if="selectedId == 0"
+        />
+        <Button
+          @click.native="strategy['network']"
+          v-if="selectedId == 3"
+        />
+        <Button
+          @click.native="strategy['market']"
+          v-if="selectedId == 4"
         />
       </template>
     </Nav>
@@ -674,7 +682,11 @@ export default {
   created() {
     this.strategy = {
       users: () => this.onFindUser(),
-      miniBusiness: () => this.getKeyword(),
+      all: () => this.getKeyword(),
+      market: () => this.searchProducts(),
+      network: () => this.searchNetworks(),
+
+
     };
     this.getKeyword()
   },
@@ -1674,7 +1686,7 @@ export default {
     searchProducts() {
       this.$store
         .dispatch("marketSearch/searchProducts", {
-          keyword: this.navBarParams.keyword,
+          keyword: this.searchParams.keyword,
         })
         .then((res) => {
           // console.log("categories loaded!");
@@ -1687,7 +1699,7 @@ export default {
     searchNetworks() {
       this.$store
         .dispatch("networkSearch/SEARCH", {
-          keyword: this.navBarParams.keyword,
+          keyword: this.searchParams.keyword,
         })
         .then((res) => {
           // console.log("categories loaded!");

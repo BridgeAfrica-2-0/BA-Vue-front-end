@@ -224,27 +224,27 @@
         >Reset</b-button
       >
       <br />
-        <!-- Category -->
-        <div v-if="categories.length > 0">
-          <b-form-group
-            label-cols-lg="3"
-            label="Categories"
-            label-size="md"
-            label-class="font-weight-bold pt-0"
-            class="mb-0 pt-6 text-left"
-          >
-          </b-form-group>
-          <b-form-select
-            v-model="networkSelect.category"
-            :options="categories"
-            value-field="category.id"
-            text-field="category.name"
-            @change="allSearchByCat({ cat_id: networkSelect.category })"
-          >
-          </b-form-select>
-        </div>
+      <!-- Category -->
+      <div v-if="categories.length > 0">
+        <b-form-group
+          label-cols-lg="3"
+          label="Categories"
+          label-size="md"
+          label-class="font-weight-bold pt-0"
+          class="mb-0 pt-6 text-left"
+        >
+        </b-form-group>
+        <b-form-select
+          v-model="networkSelect.category"
+          :options="categories"
+          value-field="category.id"
+          text-field="category.name"
+          @change="allSearchByCat({ cat_id: networkSelect.category })"
+        >
+        </b-form-select>
+      </div>
 
-        <hr />
+      <hr />
       <!-- 
       <b-form-group
         label-cols-lg="12"
@@ -431,11 +431,11 @@
             :options="neighbourhoods"
             value-field="id"
             text-field="name"
-            @change="searchNetworks({ neighborhood_id: networkSelect.neighbourhood })"
+            @change="
+              searchNetworks({ neighborhood_id: networkSelect.neighbourhood })
+            "
           >
           </b-form-select>
-
-
         </div>
       </div>
 
@@ -1954,8 +1954,9 @@ export default {
 
   methods: {
     getFilter(subCat) {
-      this.filterLoader = true;
+      // this.filterLoader = true;
       this.noFilter = "";
+      this.$store.commit("marketSearch/setSubFilters", []);
 
       this.$store
         .dispatch("marketSearch/getFilter", subCat.id)
@@ -1967,7 +1968,7 @@ export default {
             this.noFilter = `No filter available for ${subCat.name}!`;
           }
 
-          this.filterLoader = false;
+          // this.filterLoader = false;
           let filter = [];
           res.data.data.map((filt) => {
             filter.push({
@@ -1982,7 +1983,7 @@ export default {
         })
         .catch((err) => {
           console.error(err);
-          this.filterLoader = false;
+          // this.filterLoader = false;
         });
     },
 
@@ -2046,12 +2047,12 @@ export default {
         .catch((err) => {
           console.log("Error erro!");
         });
-        // this.networkSelect = {
-        //   division:null,
-        //   council:null,
-        //   neighbourhood:null
+      // this.networkSelect = {
+      //   division:null,
+      //   council:null,
+      //   neighbourhood:null
 
-        // }
+      // }
     },
     getDivisions() {
       console.log("[debug] networks: ", this.networkSelect);
@@ -2065,8 +2066,6 @@ export default {
         .catch((err) => {
           console.log("Error erro!");
         });
-
-        
     },
     getCouncils() {
       console.log("[debug] networks: ", this.networkSelect);
@@ -2152,7 +2151,7 @@ export default {
     },
     // END Network search filter
 
-    // All Search 
+    // All Search
     allSearchByCat(data) {
       console.log("the category is: ", data);
       this.$store

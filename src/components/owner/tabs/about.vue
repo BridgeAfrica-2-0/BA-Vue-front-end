@@ -3,7 +3,7 @@
     <b-icon icon="person-fill" variant="primary" class="icon-size"> </b-icon>
 
     <b>
-      About
+      {{$t("profileowner.About")}}
     </b>
     <hr />
 

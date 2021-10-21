@@ -12,7 +12,7 @@
                   :icon="['fas', 'exclamation-circle']"
                   size="lg"
                 />
-                Intro
+                {{$t("profileowner.Intro")}}
               </b>
             </h2>
             <span class="float-right btn m-0 p-0 action-intro" v-b-modal.modal-5
@@ -31,7 +31,7 @@
                 class="icon-size"
                 variant="primary"
               ></b-icon>
-              <b> Work at: </b>
+              <b> {{$t("profileowner.Work_at")}}: </b>
               <span v-if="info.user_experience"> 
               <span
                 class="text"
@@ -48,7 +48,7 @@
                 class="icon-size"
                 variant="primary"
               ></b-icon>
-              <b> Studied at: </b>
+              <b> {{$t("profileowner.Studied_at")}}: </b>
               <span v-if="info.user_education !=null">   
           <span
                 v-for="edu in info.user_education.slice(0, 1)"
@@ -68,7 +68,7 @@
                 class="icon-size"
                 variant="primary"
               ></b-icon>
-              <b> Home Town : </b>
+              <b> {{$t("profileowner.Home_Town")}} : </b>
               <span class="text">
                 {{ info.user.neighbor }}
               </span>
@@ -79,7 +79,7 @@
                 class="icon-size"
                 variant="primary"
               ></b-icon
-              ><b> Current City : </b>
+              ><b> {{$t("profileowner.Current_City")}} : </b>
               <span class="text">
                 {{ info.user.city }}
               </span>
@@ -90,7 +90,7 @@
                 class="icon-size"
                 variant="primary"
               ></b-icon>
-              <b> Community: </b>
+              <b> {{$t("profileowner.Community")}}: </b>
               <span class="text">
                {{ nFormatter(total.total_community)}}
               </span>
@@ -107,7 +107,7 @@
           <div class="">
              
             <p>
-              <b> Work at: </b>
+              <b> {{$t("profileowner.Work_at")}}: </b>
               <span v-if="info.user_experience">  
               <span
                 class="text"
@@ -118,7 +118,7 @@
               </span>  </span>
             </p>
             <p>
-              <b> Studied at: </b>
+              <b> {{$t("profileowner.Studied_at")}}: </b>
        
               <span v-if="info.user_education !=null">
                 <span
@@ -131,13 +131,13 @@
               </span>
             </p>
             <p>
-              <b> Home Town : </b>
+              <b> {{$t("profileowner.Home_Town")}} : </b>
               <span class="text">
                 {{ info.user.neighbor }}
               </span>
             </p>
             <p>
-              <b> Current City : </b>
+              <b> {{$t("profileowner.Current_City")}} : </b>
               <span class="text">
                 {{ info.user.city }}
               </span>

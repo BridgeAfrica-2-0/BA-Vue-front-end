@@ -3,7 +3,7 @@
     <fas-icon
       class="violet mr-2 pt-1 icon-size primary"
       :icon="['fas', 'file-image']"
-    />Media
+    />{{$t("profileowner.Media")}}
 
     <hr />
 

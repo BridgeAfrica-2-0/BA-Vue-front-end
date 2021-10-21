@@ -20,7 +20,7 @@
      </span>
 
     <br />
- <p class="bold username"> Biography! <p/>
+ <p class="bold username"> {{ $t("profileowner.Biography")}} <p/>
   <p class="text">  {{ bio.user.biography  }} </p>
    
     <div v-if="editing">
@@ -35,9 +35,9 @@
           max-rows="6"
         ></b-form-textarea>
         <div class="pt-2 action-btn">
-          <b-button variant="success" type="submit">Save</b-button>
+          <b-button variant="success" type="submit">{{ $t("profileowner.Save")}}</b-button>
           <b-button class="ml-2" variant="primary" @click="edit(0)"
-            >Cancel</b-button
+            >{{ $t("profileowner.Cancel")}}</b-button
           >
         </div>
       </b-form>

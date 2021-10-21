@@ -4,14 +4,14 @@
       <span>
         <h6 class="title m-3">
           <fas-icon class="icons" :icon="['fas', 'users']" size="lg" />
-          <b> COMMUNITY </b> <span class="h4-color">  </span>
+          <b> {{$t("profileowner.COMMUNITY")}} </b> <span class="h4-color">  </span>
         </h6>
       </span>
 
       <b-tabs pills content-class="mt-3  f-left ">
         <b-tab active>
           <template slot="title">
-            People <span class="spa-color">  </span>
+            {{$t("profileowner.People")}} <span class="spa-color">  </span>
           </template>  
 
           <div>
@@ -20,7 +20,7 @@
                 <b-tabs fill pills content-class="mt-3  f-left m-up">
                   <b-tab active>
                     <template slot="title">
-                      Followers <span class="spa-color">  </span>
+                      {{$t("profileowner.Followers")}} <span class="spa-color">  </span>
                     </template>
 
                     <div class="s-comcard"><People  :people="people.people_followers" /></div>
@@ -28,7 +28,7 @@
 
                   <b-tab>
                     <template slot="title">
-                      Following <span class="spa-color">  </span>
+                      {{$t("profileowner.Following")}} <span class="spa-color">  </span>
                     </template>
 
                     <div class="s-comcard"><People  :people="people.people_following" /></div>
@@ -41,14 +41,14 @@
 
         <b-tab>
           <template slot="title">
-            Businesses <span class="spa-color">  </span>
+            {{$t("profileowner.Businesses")}} <span class="spa-color">  </span>
           </template>
 
           <div>
             <b-tabs fill pills content-class="mt-3  f-left m-up checkcheck">
               <b-tab active>
                 <template slot="title">
-                  Followers <span class="spa-color">  </span>
+                  {{$t("profileowner.Followers")}} <span class="spa-color">  </span>
                 </template>
 
                 <div class="s-comcard"><Business :business='business.business_followers' /></div>
@@ -56,7 +56,7 @@
 
               <b-tab>
                 <template slot="title">
-                  Following <span class="spa-color">  </span>
+                  {{$t("profileowner.Following")}} <span class="spa-color">  </span>
                 </template>
 
                 <div class="s-comcard"><Business   :business='business.business_following' /></div>
@@ -72,14 +72,14 @@
 
          <b-tab>
           <template slot="title">
-            Networks <span class="spa-color">  </span>
+            {{$t("profileowner.Networks")}} <span class="spa-color">  </span>
           </template>
 
           <div>
             <b-tabs fill pills content-class="mt-3  f-left m-up checkcheck">
               <b-tab active>
                 <template slot="title">
-                  Followers <span class="spa-color">  </span>
+                  {{$t("profileowner.Followers")}} <span class="spa-color">  </span>
                 </template>
 
                 <div class="s-comcard"><Network :network='network.business_followers' /></div>
@@ -87,7 +87,7 @@
 
               <b-tab>
                 <template slot="title">
-                  Following <span class="spa-color">  </span>
+                  {{$t("profileowner.Following")}} <span class="spa-color">  </span>
                 </template>
 
                 <div class="s-comcard"><Network   :network='network.business_following' /></div>

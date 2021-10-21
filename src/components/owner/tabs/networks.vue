@@ -2,13 +2,13 @@
   <div class=" t-color">
     <div>
       <fas-icon class=" icons" :icon="['fas', 'project-diagram']" size="lg" />
-      <span class="t-color"> Network </span>
+      <span class="t-color"> {{$t("profileowner.Network")}} </span>
 
       <b-button
         class="float-right"
         @click="showmodal(true, 'add')"
         variant="primary"
-        >Add Network</b-button
+        >{{$t("profileowner.Add_Network")}}</b-button
       >
       <hr />
 
@@ -58,11 +58,11 @@
                           @click="showEditNetwork(network)"
                         >
                           <b-icon icon="pencil" aria-hidden="true"></b-icon>
-                          Edit
+                          {{$t("profileowner.Edit")}}
                         </b-dropdown-item-button>
                         <b-dropdown-item-button @click="deleteNetwork(network)">
                           <b-icon icon="trash" aria-hidden="true"></b-icon>
-                          Delete
+                          {{$t("profileowner.Delete")}}
                         </b-dropdown-item-button>
                       </b-dropdown>
                     </b-col>
@@ -82,7 +82,7 @@
                   <b-link
                     @click="viewnetwork = true"
                     v-if="network.description.length > 90"
-                    >Read More</b-link
+                    >{{$t("profileowner.Read_More")}}</b-link
                   >
                 </p>
               </b-col>
@@ -97,14 +97,14 @@
     </b-col>
     <div class="h-100 w-100" v-if="networks.length < 1 && !loader">
       <div class="mx-auto text-center my-5">
-        <h2 class="my-3">Builds networks around your Business</h2>
+        <h2 class="my-3">{{$t("profileowner.Build_networks_around_your_Business")}}</h2>
         <p class="my-2">
-          Create network to stay in touch with just the people
+          {{$t("profileowner.Create_network_to_stay_in_touch_with_just_the_people")}}
         </p>
-        <p class="my-2">you want Engage, share, Make Plans and much more</p>
+        <p class="my-2">{{$t("profileowner.you_want_Engage_share_Make_Plans_and_much_more")}}</p>
         <p class="my-3">
           <b-button @click="showmodal(true, 'add')" variant="primary"
-            >Add Network</b-button
+            >{{$t("profileowner.Add_Network")}}</b-button
           >
         </p>
       </div>
@@ -137,10 +137,10 @@
               </a>
               <div class="post-pending pt-2">
                 <p>
-                  Approval Required <br />
-                  Bridge Africa admin will review your request to create a
-                  network and notify you upon approval you can the change the
-                  network settings and invite people to join your network
+                  {{$t("profileowner.Approval_Required")}} <br />
+                  {{$t("profileowner.Bridge_Africa_admin_will_review_your_request")}}  {{$t("profileowner.to_create_a")}}
+                  {{$t("profileowner.network")}} {{$t("profileowner.and")}} {{$t("profileowner.notify_you")}} {{$t("profileowner.upon_approval_you_can_the_change_the")}}
+                  {{$t("profileowner.network_settings")}} {{$t("profileowner.and")}} {{$t("profileowner.invite_people_to_join_your_network")}}
                 </p>
               </div>
             </div>
@@ -148,7 +148,7 @@
 
           <b-form-group
             label-cols-lg="12"
-            label="Network Name"
+            :label="$t('profileowner.Network_Name')"
             label-size="md"
             label-class="font-weight-bold pt-0"
             class="mb-0"
@@ -163,7 +163,7 @@
           </b-form-group>
           <b-form-group
             label-cols-lg="12"
-            label="Network Category"
+            :label="$t('profileowner.Network_Category')"
             label-size="md"
             label-class="font-weight-bold pt-0"
             class="mb-0"
@@ -178,7 +178,7 @@
           </b-form-group>
           <b-form-group
             label-cols-lg="12"
-            label="Network Address"
+            :label="$t('profileowner.Network_Address')"
             label-size="md"
             label-class="font-weight-bold pt-0"
             class="mb-0"
@@ -194,14 +194,14 @@
 
 
                     <div class="form-group">
-                      <label for="country" class="username"> Country :</label
+                      <label for="country" class="username"> {{$t("profileowner.Country")}} :</label
                       ><br />
 
 
                       <multiselect
                         v-model="country"
                         @input="Region"
-                        placeholder="Search "
+                        :placeholder="$t('profileowner.Search') "
                         label="name"
                         track-by="id"
                         :options="countries"
@@ -217,13 +217,13 @@
 
 
                     <div class="form-group">
-                      <label for="country" class="username"> Region :</label
+                      <label for="country" class="username"> {{$t("profileowner.Region")}} :</label
                       ><br />
                       
                       <multiselect
                         v-model="region"
                         @input="Division"
-                        placeholder="Search"
+                        :placeholder="$t('profileowner.Search')"
                         label="name"
                         track-by="id"
                         :options="regions"
@@ -237,12 +237,12 @@
              
 
                     <div class="form-group">
-                      <label for="country" class="username"> Division :</label
+                      <label for="country" class="username"> {{$t("profileowner.Division")}} :</label
                       ><br />
                       <multiselect
                         v-model="division"
                         @input="Municipality"
-                        placeholder="Search"
+                        :placeholder="$t('profileowner.Search')"
                         label="name"
                         track-by="id"
                         :options="divisions"
@@ -256,14 +256,14 @@
 
                      <div class="form-group">
                       <label for="country" class="username">
-                        Municipality :</label
+                        {{$t("profileowner.Municipality")}} :</label
                       ><br />
 
                       <multiselect
                         v-model="municipality"
                         @input="Locality"
-                        placeholder="Search"
-                        label="name"
+                        :placeholder="$t('profileowner.Search')"
+                        :label="$t('profileowner.name')"
                         track-by="id"
                         :options="municipalities"
                         :multiple="false"
@@ -274,12 +274,12 @@
 
 
                       <div class="form-group">
-                      <label for="Neighbor" class="username"> Neighbor :</label
+                      <label for="Neighbor" class="username"> {{$t("profileowner.Neighbor")}} :</label
                       ><br />
                       <multiselect
                         v-model="locality"
-                        placeholder="Search"
-                        label="name"
+                        :placeholder="$t('profileowner.Search')"
+                        :label="$t('profileowner.name')"
                         track-by="id"
                         :options="localities"
                         :multiple="false"
@@ -292,7 +292,7 @@
 
           <b-form-group
             label-cols-lg="12"
-            label="City"
+            :label="$t('profileowner.City')"
             label-size="md"
             label-class="font-weight-bold pt-0"
             class="mb-0"
@@ -307,7 +307,7 @@
           </b-form-group>
           <b-form-group
             label-cols-lg="12"
-            label="Primary Phone"
+            :label="$t('profileowner.Primary_Phone')"
             label-size="md"
             label-class="font-weight-bold pt-0"
             class="mb-0"
@@ -322,7 +322,7 @@
           </b-form-group>
           <b-form-group
             label-cols-lg="12"
-            label="Secondary Phone"
+            :label="$t('profileowner.Secondary_Phone')"
             label-size="md"
             label-class="font-weight-bold pt-0"
             class="mb-0"
@@ -337,7 +337,7 @@
           </b-form-group>
           <b-form-group
             label-cols-lg="12"
-            label=" Brief Description"
+            :label="$t('profileowner.Brief_Description')"
             label-size="md"
             label-class="font-weight-bold pt-0"
             class="mb-0"
@@ -345,7 +345,7 @@
             <b-form-textarea
               id="textarea"
               v-model="createdNetwork.description"
-              placeholder="Enter something..."
+              :placeholder="$t('profileowner.Enter_something')"
               rows="3"
               max-rows="6"
             ></b-form-textarea>
@@ -353,7 +353,7 @@
 
           <b-form-group
             label-cols-lg="12"
-            label="Purpose Of Network"
+            :label="$t('profileowner.Purpose_Of_Network')"
             label-size="md"
             label-class="font-weight-bold pt-0"
             class="mb-0"
@@ -369,7 +369,7 @@
 
           <b-form-group
             label-cols-lg="12"
-            label="Special Needs"
+            :label="$t('profileowner.Special_Needs')"
             label-size="md"
             label-class="font-weight-bold pt-0"
             class="mb-0"
@@ -384,7 +384,7 @@
           </b-form-group>
           <b-form-group
             label-cols-lg="12"
-            label="Network Image"
+            :label="$t('profileowner.Network_Image')"
             label-size="md"
             label-class="font-weight-bold pt-0"
             class="mb-0"
@@ -393,7 +393,7 @@
           </b-form-group>
           <b-form-group
             label-cols-md="6"
-            label="Allow Business to join network"
+            :label="$t('profileowner.Allow_Business_to_join_network')"
             label-size="md"
             label-class="font-weight-bold pt-0"
             class="mb-0"

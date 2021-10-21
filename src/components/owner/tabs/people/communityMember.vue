@@ -8,13 +8,13 @@
               <b-row>
                 <b-col>
                   <b-avatar variant="primary" text="BV" size="80"></b-avatar>
-                  <span><b-link class="mt-2 name">J. Circlehead</b-link></span>
+                  <span><b-link class="mt-2 name">{{ $t("profileowner.JCirclehead")}}</b-link></span>
                 </b-col>
               </b-row>
               <b-row>
                 <b-col cols="12">
                   <p class="detail">
-                    Cameroon,
+                    {{ $t("profileowner.Cameroon")}},
                     <span class="desktop"
                       ><b-icon icon="house" class="primary"></b-icon> 2,
                       <b-icon icon="globe" class="primary"></b-icon> 3,
@@ -31,13 +31,13 @@
         <b-row>
           <b-col>
             <b-button variant="primary" size="sm" class="">
-              +Community</b-button
+              {{ $t("profileowner.Community")}}</b-button
             >
           </b-col>
           <b-col>
             <b-button variant="outline-primary" size="sm">
               <b-icon icon="chat-fill"></b-icon>
-              Message</b-button
+              {{ $t("profileowner.Message")}}</b-button
             >
           </b-col>
         </b-row>

@@ -8,15 +8,15 @@
         <img src="../assets/logo.png" class="image" alt="" /> <br />
         <br />
 
-        <span class="verif-text mb-5"> Verification </span>
+        <span class="verif-text mb-5"> {{$t("verification.Verification")}} </span>
 
         <div class="step-2">
           <b-card-text class="w-75 mx-auto mt-5 text-left">
-            <div class="text-center">You will get an OTP by SMS</div> 
+            <div class="text-center">{{$t("verification.You_will_get_an_OTP_by_SMS")}}</div> 
           </b-card-text>
           <b-form class="w-75 mx-auto text-center">
             <md-field>
-              <label for="otp"> OTP</label>
+              <label for="otp"> {{$t("verification.OTP")}}</label>
               <md-input
                 type="text"
                 name="otp"
@@ -34,13 +34,13 @@
               variant="primary"
               type="submit"
             >
-              Verify
+              {{$t("verification.Verify")}}
             </b-button>
           </b-form>
 
           <p class="mt-5 mt-md-2">
-            Didn't recieved the verification OTP?
-            <b-link @click.prevent="resendOtp()"> Resend OTP </b-link>
+            {{$t("verification.Didnt_recieved_the_verification_OTP")}}
+            <b-link @click.prevent="resendOtp()"> {{$t("verification.Resend_OTP")}} </b-link>
           </p>
         </div>
       </b-card>

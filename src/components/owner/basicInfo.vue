@@ -1,10 +1,10 @@
 <template>
   <div>
-    <b>Basic Infomation</b>  {{info}}
+    <b>{{ $t("profileowner.Basic_Infomation")}}</b>  {{info}}
     <hr />
     <div class="row">
       <div class="col">
-        Date Of Birth:
+        {{ $t("profileowner.Date_Of_Birth")}}:
       </div>
       <div class="col">
         {{ dateOfBirth }}
@@ -13,11 +13,11 @@
         class="edit-btn mb-2"
         variant="outline-primary"
         v-b-modal.modal-1
-        >Edit
+        >{{ $t("profileowner.Edit")}}
       </b-button>
       <b-modal hide-footer id="modal-1" title="Date Of Birth">
         <div>
-          <label>Choose a date</label>
+          <label>{{ $t("profileowner.Choose_a_date")}}</label>
           <b-form @submit="add">
             <div class="row">
               <div class="col">
@@ -42,7 +42,7 @@
               class="ml-2 mt-2 button-design"
               type="submit"
               variant="primary"
-              >Add</b-button
+              >{{ $t("profileowner.Add")}}</b-button
             >
           </b-form>
         </div>
@@ -50,7 +50,7 @@
     </div>
     <div class="row">
       <div class="col">
-        Gender:
+        {{ $t("profileowner.Gender")}}:
       </div>
       <div class="col">
         {{ gender }}
@@ -59,7 +59,7 @@
         class="edit-btn mb-2"
         variant="outline-primary"
         v-b-modal.modal-2
-        >Edit
+        >{{ $t("profileowner.Edit")}}
       </b-button>
       <b-modal hide-footer id="modal-2" title="Gender">
         <b-form>
@@ -89,7 +89,7 @@
             class="ml-2 mt-2 button-design"
             type="submit"
             variant="primary"
-            >Add</b-button
+            >{{ $t("profileowner.Add")}}</b-button
           >
         </b-form>
       </b-modal>

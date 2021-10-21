@@ -771,7 +771,16 @@
         </div>
       </form>
     </div>
+    <span class="display-inline">
+        <b-link @click="$i18n.locale = 'en'"> {{ $t("auth.english") }} </b-link>
+        <span class="vl"></span>
+        <b-link class="ml-2" @click="$i18n.locale = 'fr'">
+          {{ $t("auth.french") }}
+        </b-link>
+      </span>
   </div>
+
+  
 </template>
 
 <script>

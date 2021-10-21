@@ -48,7 +48,7 @@
                   :icon="['fas', 'photo-video']"
                   size="lg"
                 />
-                <span class="username"> Photo/ Video </span>
+                <span class="username"> {{$t("profileowner.PhotoVideo")}} </span>
               </b-button>
             </b-col>
             <!-- Attach File-->
@@ -69,7 +69,7 @@
                 class="post-btn"
               >
                 <fas-icon class="icons" :icon="['fas', 'file']" size="lg" />
-                <span class="username"> Attach File </span>
+                <span class="username"> {{$t("profileowner.Attach_File")}} </span>
               </b-button>
             </b-col>
             <!-- Post-->
@@ -86,7 +86,7 @@
                   :icon="['fas', 'paper-plane']"
                   size="lg"
                 />
-                <span class="username"> Post </span>
+                <span class="username"> {{$t("profileowner.Post")}} </span>
               </b-button>
             </b-col>
           </b-row>
@@ -146,7 +146,7 @@
                   <i></i>
                 </div>
                 <div class="bordder">
-                  <span class="float-left"> Add to Your Post </span>
+                  <span class="float-left"> {{$t("profileowner.Add_to_Your_Post")}} </span>
                   <span class="float-right">
                     <b-button-group size="sm" class="">
                       <input id="video" type="file" hidden />
@@ -206,7 +206,7 @@
                     class="float-right"
                     @click="deleteItem(hyperlink.fileName)"
                   >
-                    delete
+                    {{$t("profileowner.delete")}}
                   </span>
                 </div>
 
@@ -249,7 +249,7 @@
                 <span>
                   <b-button @click="updatePost" variant="primary" block
                     ><b-icon icon="cursor-fill" variant="primary"></b-icon>
-                    Publish</b-button
+                    {{$t("profileowner.Publish")}}</b-button
                   >
                 </span>
               </b-col>
@@ -297,7 +297,7 @@
                   <i></i>
                 </div>
                 <div class="bordder">
-                  <span class="float-left"> Add to Your Post </span>
+                  <span class="float-left"> {{$t("profileowner.Add_to_Your_Post")}} </span>
                   <span class="float-right">
                     <b-button-group size="sm" class="">
                       <input id="video" type="file" hidden />
@@ -357,7 +357,7 @@
                     class="float-right"
                     @click="deleteItem(hyperlink.fileName)"
                   >
-                    delete
+                    {{$t("profileowner.delete")}}
                   </span>
                 </div>
 
@@ -382,7 +382,7 @@
                 <span>
                   <b-button @click="submitPost" variant="primary" block
                     ><b-icon icon="cursor-fill" variant="primary"></b-icon>
-                    Publish</b-button
+                    {{$t("profileowner.Publish")}}</b-button
                   >
                 </span>
               </b-col>
@@ -432,7 +432,7 @@
                       @click="editPost(item)"
                     >
                       <b-icon icon="pencil" aria-hidden="true"></b-icon>
-                      Edit
+                      {{$t("profileowner.Edit")}}
                     </b-dropdown-item-button>
 
                     <b-dropdown-item-button
@@ -440,7 +440,7 @@
                       @click="deletePost(item)"
                     >
                       <b-icon icon="trash-fill" aria-hidden="true"></b-icon>
-                      Delete
+                      {{$t("profileowner.Delete")}}
                     </b-dropdown-item-button>
                   </b-dropdown>
                 </span>

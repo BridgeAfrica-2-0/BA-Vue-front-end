@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="s-cardd">
+    <div style="overflow-y: scroll;" class="s-cardd">
 
       <div v-for="people in peoples" :key="people.id" class="people-style border shadow">
         <b-row class="mb-1">

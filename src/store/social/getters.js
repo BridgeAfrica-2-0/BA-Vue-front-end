@@ -15,4 +15,8 @@ export const getters = {
     return state.isLoading
   }, // [TYPES.INIT]
 
+  [TYPES.AUTH](state) {
+    return state.auth
+  }, // [TYPES.AUTH]
+
 }

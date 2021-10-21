@@ -1,3 +1,4 @@
+import { state } from '../search/state'
 import * as TYPES from './types'
 
 export const mutations = {
@@ -13,5 +14,9 @@ export const mutations = {
   [TYPES.INIT](state) {
     state.isLoading = true
   }, // [TYPES.INIT]
+
+  [TYPES.AUTH](state,payload) {
+    state.auth = payload
+  }, // [TYPES.AUTH]
 
 }

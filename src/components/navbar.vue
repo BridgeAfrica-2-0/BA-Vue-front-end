@@ -483,7 +483,7 @@
                 <a class="nav-link text-dark" href="">
                   <span
                     ><img
-                      src="@/assets/img/profile-pic.jpg"
+                      :src="auth.user.profile_picture"
                       class="rounded-circle"
                       alt=""
                       width="50"
@@ -493,7 +493,7 @@
               </div>
 
               <b-tooltip target="profilepic" variant="light" triggers="hover">
-                Maxine Moff
+                {{ auth.user.name }}
               </b-tooltip>
 
               <div class="nav-item">
@@ -509,24 +509,13 @@
                 </a>
                 <b-popover target="other-menu" triggers="hover" placement="top">
                   <div class="popover-body">
-                    <div>
+                   
                       <div
-                        class="d-inline-flex flex-row align-items-center mb-1"
+                        class="d-inline-flex flex-row align-items-center mb-1 w-full"
                       >
-                        <div>
-                          <img
-                            src="@/assets/img/logo3.png"
-                            class="rounded-circle"
-                            alt=""
-                            width="25"
-                            height="25"
-                          />
-                        </div>
-                        <div class="ml-3 mt-2">
-                          <p class="font-weight-bold">Your Businesses</p>
-                        </div>
+                        <Activity />
                       </div>
-                    </div>
+                    
                     <hr />
 
                     <a
@@ -601,7 +590,7 @@
                   />
                 </div>
                 <div class="d-flex flex-column ml-1 line-size">
-                  <div class="font-weight-bold">Maxine Moffet</div>
+                  <div class="font-weight-bold">{{ auth.user.name }}</div>
                   <div class="small text-muted">Active</div>
                 </div>
               </div>
@@ -620,7 +609,6 @@
                 </div>
                 <div class="ml-3 mt-2">
                   <p class="font-weight-bold">Your Businesses</p>
-                   <Activity />
                 </div>
               </div>
             </div>
@@ -716,7 +704,13 @@ export default {
   computed: {
     ...mapGetters({
       hasLauchNetworkRequest: "social/INIT",
+      user: "auth/user",
+      social: "social/AUTH",
     }),
+
+    auth(){
+      return (this.social) ? this.social : this.user
+    }
   },
 
   created() {
@@ -761,7 +755,6 @@ export default {
       }
     },
 
-    
     togglenav() {
       if (this.shownav == false) {
         this.shownav = true;

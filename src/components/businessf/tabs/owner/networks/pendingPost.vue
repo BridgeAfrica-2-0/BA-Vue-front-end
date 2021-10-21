@@ -28,13 +28,13 @@
                   <b-avatar
                     class="d-inline-block mt-1"
                     variant="primary"
-                    :src="post.image"
+                    :src="post.profile_picture"
                     size="3.5rem"
                   ></b-avatar>
                 </b-col>
                 <b-col cols="10" md="11" class="pt-2">
                   <h6 class="m-0 font-weight-bolder">
-                    {{ post.profileName }}
+                    {{ post.name }}
                     <span class="float-right">
                       <b-dropdown
                         size="lg"
@@ -62,15 +62,15 @@
                     </span>
                   </h6>
                   <p>
-                    {{ post.timeCountdown }} -
-                    <span class="text-primary">{{ post.postComment }}</span>
+                    {{ post.created_at }} -
+                    <span class="text-primary">{{ post.comment }}</span>
                   </p>
                 </b-col>
               </b-row>
               <b-row>
                 <b-col cols="12" class="mt-2">
                   <p class="text-justify text">
-                    {{ post.postContent }}
+                    {{ post.content }}
                   </p>
                 </b-col>
               </b-row>

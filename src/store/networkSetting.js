@@ -235,21 +235,21 @@ export default {
 
     //getting pending post
     async getPendingPost({ commit }) {
-      const res = await axios.get("");
+      const res = await axios.get("network/network/post/pending");
 
       commit("setPendingPost", res.data);
     },
 
     //approve pending post
     async approvedPost({ commit }, id) {
-      const res = await axios.post("", id);
+      const res = await axios.post("network/network/post/approve", id);
 
       commit("setApprovedPost", res.data);
     },
 
     //decline pending post
     async unapprovedPost({ commit }, id) {
-      const res = await axios.post("", id);
+      const res = await axios.post("network/network/post/decline", id);
 
       commit("setDeclinedPost", res.data);
     },

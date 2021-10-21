@@ -2,10 +2,9 @@
 import axios from "axios"
 
 class Repository {
-  async comments(credentials) {
+  async fetch({uuid, page}) {
     try {
-      const { page, uuid } = credentials
-      const response = await axios.get(`search/comment/${uuid}/${page}`)
+      const response = await axios.get(`post/comment/${uuid}`)
       return {
         success: (response.data.data) ? true : false,
         data: (response.data.data) ? response.data.data : []
@@ -18,6 +17,7 @@ class Repository {
       }
     }
   }
+
 }
 
 export default new Repository()

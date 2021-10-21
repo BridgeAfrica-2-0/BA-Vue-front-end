@@ -53,9 +53,9 @@ export default {
       state.albums = data;
     },
 
-    setImages(state, data){
-   
-      state.ownerPostImages=data;  
+    setImages(state, data) {
+
+      state.ownerPostImages = data;
 
     },
 
@@ -104,29 +104,29 @@ export default {
   actions: {
 
 
-     nFormatter(num) {
+    nFormatter(num) {
       if (num >= 1000000000) {
-         return (num / 1000000000).toFixed(1).replace(/\.0$/, '') + 'G';
+        return (num / 1000000000).toFixed(1).replace(/\.0$/, '') + 'G';
       }
       if (num >= 1000000) {
-         return (num / 1000000).toFixed(1).replace(/\.0$/, '') + 'M';
+        return (num / 1000000).toFixed(1).replace(/\.0$/, '') + 'M';
       }
       if (num >= 1000) {
-         return (num / 1000).toFixed(1).replace(/\.0$/, '') + 'K';
+        return (num / 1000).toFixed(1).replace(/\.0$/, '') + 'K';
       }
       return num;
- },
-     
+    },
 
-    getAlbumImages( {commit}, networkId){
-     
-           
+
+    getAlbumImages({ commit }, networkId) {
+
+
       return axios
-      .get('business/album/show/'+networkId )
-      .then(({ data }) => {
-       commit('setAlbumImages', data.data.media);
-        console.log(data);
-      });
+        .get('business/album/show/' + networkId)
+        .then(({ data }) => {
+          commit('setAlbumImages', data.data.media);
+          console.log(data);
+        });
     },
 
     getImages({ commit }, networkId) {
@@ -241,7 +241,7 @@ export default {
         });
     },
     //delete network
-    async deleteNetwork() {},
+    async deleteNetwork() { },
     // Edit a network
     async editNetwork({ dispatch, commit }, editedNetwork) {
       commit("setLoader", true);

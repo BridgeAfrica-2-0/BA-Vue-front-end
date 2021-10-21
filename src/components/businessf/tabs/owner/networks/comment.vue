@@ -39,7 +39,12 @@
           class="cursor"
         ></b-icon>
         {{ comment.reply_comment_count | nFormatter }}
-        <span @click="showReply" class="primary ml-2 reply"><b>Reply</b></span>
+        <span
+          @click="showReply"
+          class="primary ml-2 reply"
+          v-if="'reply' == type"
+          ><b>Reply</b></span
+        >
         <div v-if="reply">
           <b-row class="mt-2">
             <b-col cols="1">
@@ -57,6 +62,13 @@
                 :icon="['fas', 'paper-plane']"
               />
             </b-col>
+            <b-col cols="12" class="mt-4">
+              <Comment
+                v-for="comment in comments"
+                :key="comment.id"
+                :item="comment"
+              />
+            </b-col>
           </b-row>
         </div>
       </b-col>
@@ -66,22 +78,43 @@
 
 <script>
 import moment from "moment";
+import Comment from "./comment";
 
 export default {
   props: {
-    comment: {
+    item: {
       type: Object,
       required: true,
     },
+    uuid: {
+      required: true,
+    },
+    type: {
+      type: String,
+      validator: function (value) {
+        if (["reply", "comment"].includes(value)) return true;
+      },
+      default: function () {
+        return "comment";
+      },
+    },
+  },
+  components: {
+    Comment,
   },
   data() {
     return {
       reply: false,
+      comment: null,
+      comments: [],
     };
   },
-
+  created() {
+    this.comment = this.item;
+  },
   computed: {
     icon() {
+      console.log(this.comment);
       return this.comment.is_liked ? "suit-heart-fill" : "suit-heart";
     },
   },
@@ -112,7 +145,7 @@ export default {
 
       if (request.success)
         this.comment = Object.assign(this.comment, {
-          is_liked: 1,
+          is_liked: this.comment.is_liked ? 0 : 1,
           comment_likes: !this.comment.is_liked
             ? this.comment.comment_likes + 1
             : this.comment.comment_likes
@@ -120,8 +153,20 @@ export default {
             : 0,
         });
     },
+
+    onShowReply: async function () {
+      const request = await this.$repository.share.fetchReplyComment({
+        post: this.uuid,
+        comment: this.comment.id,
+        page: 1,
+      });
+
+      if (request.success) this.comments = request.data;
+    },
+
     showReply() {
       this.reply = !this.reply;
+      if (this.reply) this.onShowReply();
     },
   },
 };

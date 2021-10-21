@@ -115,11 +115,7 @@
       </b-row>
     </b-col>
     <b-col cols="12" class="mt-4" v-if="showComment">
-      <Comment
-        v-for="comment in comments"
-        :key="comment.id"
-        :comment="comment"
-      />
+      <Comment v-for="comment in comments" :key="comment.id" :item="comment" :uuid="post.id" />
     </b-col>
   </b-row>
 </template>

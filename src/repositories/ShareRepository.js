@@ -82,7 +82,6 @@ class Repository {
   }
 
   async commentLike(data) {
-    console.log(data)
     try {
       const response = await axios.post(`comment/${data.comment}/like`, { networkId: data.network })
       return {
@@ -145,7 +144,23 @@ class Repository {
     }
   }
 
-  async replyComment({ post, comment, data }) {
+  async fetchReplyComment({ post, comment }) {
+    try {
+      const response = await axios.get(`reply/post/${post}/comment/${comment}`)
+      return {
+        success: true,
+        data: response.data.message
+      }
+
+    } catch (error) {
+      return {
+        success: false,
+        data: error
+      }
+    }
+  }
+
+  async createReplyComment({ post, comment, data }) {
     try {
       const response = await axios.post(`reply/post/${post}/comment/${comment}`, data)
       return {

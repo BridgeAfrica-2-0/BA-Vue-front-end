@@ -1,5 +1,6 @@
 <template>
   <div>
+    <FlashMessage style="z-index: 99999" :position="'right top'" />
     <div class="fl mb-3">
       <label for="datepicker-dateformat1">Posted Date</label>
       <b-form-datepicker
@@ -345,8 +346,6 @@ export default {
         (item) => "Follower" == item || "Following" == item
       );
 
-      console.log(useSelectFollowerAndFollowing);
-
       if (
         useSelectFollowerAndFollowing.length == 2 &&
         data.indexOf("Community") != -1
@@ -357,13 +356,10 @@ export default {
       }
     },
 
-    onNotified(text) {
-      this.$notify({
-        group: "notification",
+    onNotified(message) {
+      this.flashMessage.error({
         title: "Important message",
-        type: "warn",
-        duration: 5000,
-        text,
+        message,
       });
     },
 

@@ -6,7 +6,7 @@
       <b-row class="mt-2">
         <b-col cols="3" md="1" class="m-md-0 p-md-0">
           <b-avatar
-            variant="primary"
+            variant="primary" 
             class="img-fluid avat-comment"
             :src="info.user.profile_picture"
           ></b-avatar>
@@ -541,6 +541,7 @@
 import Comment from "../comment";
 import moment from "moment";
 import axios from "axios";
+
 export default {
   name: "postNetwork",
   components: {
@@ -594,7 +595,10 @@ export default {
     },
 
     reloads(){
-         this.$store.commit("profile/ownerPost", []);
+
+      console.log("reoading");
+      this.$store.commit("profile/ownerPost", []);
+
     },
 
     infiniteHandler($state) {
@@ -875,24 +879,25 @@ export default {
       
       let formData2 = new FormData();
       console.log( this.createPost.movies);
-      console.log("lalla allak kajkajjaja")
       if( this.createPost.movies[0]){ 
       
      fileImage = this.createPost.movies[0].target.files[0];
 
       this.fileImageArr = this.createPost.movies;
+      console.log(this.fileImageArr);
 
 
       this.fileImageArr.forEach((value, index) => {
         formData2.append("media[" + index + "]", value.target.files[0]);
 
-        console.log(value);
       });
       }
 
       formData2.append("type", "image");
 
       formData2.append("content", this.createPost.postBusinessUpdate);
+
+      console.log(formData2);
 
       this.axios
         .post("user/post", formData2, {
@@ -951,8 +956,8 @@ export default {
       this.$refs["modal-3"].hide();
     },
     resetPostData() {
-      console.log("Test");
-      console.log("Reinitialisation des donnees du POST");
+      console.log("Resetting the post data");
+     
       if (!this.isSubmitted) {
         this.createPost.hyperlinks = [];
         this.createPost.movies = [];
@@ -971,7 +976,7 @@ export default {
 
    
     owner_post() {
-      return this.$store.state.businessOwner.ownerPost;
+      return this.$store.state.profile.ownerPost;
     },
 
     profileNamePost() {
@@ -992,7 +997,7 @@ export default {
   }
 
   .lb-item{
-    background-size: contain;
+    background-size: auto;
   }
  
 </style>

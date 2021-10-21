@@ -1,8 +1,10 @@
 <template>
+
   <div class="t-color">
+     <FlashMessage />
     <div>
       <fas-icon class="icons" :icon="['fas', 'project-diagram']" size="lg" />
-      <span class="t-color"> Network </span>
+      <span class="t-color">  Network </span>
 
       <b-button
         class="btn btn-outline-primary pull-right float-right mb-2 blec-font"
@@ -31,7 +33,7 @@
                 sm="3"
               >
                 <div class="center-img" v-b-modal.modal-1>
-                  <img :src="BaseURL + `/` + `${network.image}`" alt="" />
+                  <img :src="network.image" alt="" />
                 </div>
               </b-col>
               <b-col md="9" cols="7" lg="9" xl="9" sm="9">
@@ -122,6 +124,7 @@
       :title="editNet ? 'Edit network' : 'Add Network'"
       size="lg"
       v-model="showModal"
+      ref="netmodal"
     >
       <b-container>
         <b-form>
@@ -572,13 +575,23 @@ export default {
   },
 
   mounted() {
-    this.getNetworks();
+    //this.getNetworks();
     this.Country();
+    
   },
+
+  
 
   computed: {
     profileNetworks: function () {
+      
       return this.$store.state.profile.profilenetwork;
+     
+     
+    },
+
+    pagee: function(){
+       return this.page;
     },
 
     countries() {
@@ -620,6 +633,9 @@ export default {
   },
 
   methods: {
+
+
+
     chooseNlogo() {
       document.getElementById("net_pic").click();
     },
@@ -725,10 +741,18 @@ export default {
     infiniteHandler($state) {
       console.log("network?page=" + this.page);
       let url = "network?page=" + this.page;
+      if(this.page==1){
+        
+         this.$store.commit("profile/setProfileNetwork", []);
+         console.log("commited the ne w profile networks");
+         
+
+         this.profileNetworks.splice(0);
+         console.log(this.profileNetworks);
+      }
       
        this.$store.dispatch("profile/loadMore",url)
-      axios
-        .get("network?page=" + this.page)
+    
         .then(({ data }) => {
           console.log(data.data);
           console.log("yoyoyooyoy");
@@ -748,13 +772,29 @@ export default {
 
     // Add network to the database but doesn't work correctly for now
     addNetwork(newNetwork) {
-      console.log("jkjkjk");
-      this.loader = true;
+     ;
+       let loader = this.$loading.show({
+        container: this.fullPage ? null : this.$refs.preview,
+        canCancel: true,
+        onCancel: this.onCancel,
+        color: "#e75c18",
+      });
+
       axios
         .post("network", newNetwork)
         .then((res) => {
+          loader.hide();
           this.success.state = true;
           this.success.msg = "Operation was successful !!";
+          
+           this.flashMessage.show({
+                status: "success",
+
+                message: "Network created",
+
+                blockClass: "custom-block-class",
+              });
+      this.$refs["netmodal"].hide();
           setTimeout(() => {
             this.success.state = false;
           }, 5000);
@@ -766,11 +806,18 @@ export default {
         .catch((err) => {
           console.log({ err: err });
           this.success.state = true;
+           this.flashMessage.show({
+                status: "error",
+
+                message: "Something went wrong",
+
+                blockClass: "custom-block-class",
+              });
           this.success.msg = "Something wen't wrong !!";
           setTimeout(() => {
             this.success.state = false;
           }, 5000);
-          this.loader = false;
+          loader.hide();
         });
     },
 

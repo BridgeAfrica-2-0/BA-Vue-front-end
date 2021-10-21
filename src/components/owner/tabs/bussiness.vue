@@ -723,6 +723,80 @@
 
       <div class="row mb-4">
         <div class="col">
+
+
+
+
+
+
+
+
+      <div class="people-style shadow">
+               
+
+                <b-row>
+                  <b-col md="3" xl="3" lg="5" cols="5" sm="3">
+                    <div class="center-img">
+                      <splide :options="options" class="r-image">
+                        <splide-slide cl>
+                          <img :src="business.logo_path" class="r-image" />
+                        </splide-slide>
+                      </splide>
+                    </div>
+                  </b-col>
+
+                  <b-col md="5" cols="7" lg="7" xl="9" sm="5">
+                    <p class="textt text">
+                     
+                      <strong class="title">
+                        {{ business.name }}
+                      </strong>
+                      <br />
+                      <span v-if=" Array.isArray(business.category) ">  
+                      <span class="m-1" v-for=" cat in business.category" :key="cat.name "> {{cat.name}} </span> </span>
+                      <br />
+                      {{ business.community }} Community  {{business.id}} <br />
+
+                      <span class="location">
+                        <b-icon-geo-alt class="ico"></b-icon-geo-alt>
+                        {{ business.city }} {{ business.country }}
+                      </span>
+                      <br />
+
+                      <read-more
+                        more-str="read more"
+                        class="readmore"
+                        :text="business.about_business"
+                        link="#"
+                        less-str="read less"
+                        :max-chars="100"
+                      >
+                      </read-more>
+                    </p>
+                  </b-col>
+                </b-row>
+              </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
           <h6 class="mb-0"><b></b></h6>
           <b-row>
             <b-col
@@ -738,7 +812,7 @@
                   <div class="float-right">
 
 
-                    <b-dropdown size="lg"  variant="link" toggle-class="text-decoration-none" no-caret>
+                    <b-dropdown size="lg"  variant="primary" toggle-class="text-decoration-none" no-caret>
     <template #button-content>
      <b-icon
                       icon="three-dots-vertical"

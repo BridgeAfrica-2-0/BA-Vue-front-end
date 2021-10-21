@@ -242,7 +242,7 @@ export default {
     },
 
 
-
+   
 
     //set media data
 
@@ -258,6 +258,7 @@ export default {
 
 
     setProfileNetwork(state, data) {
+      console.log("commiting this issdshd");
       state.profileNetwork = data;
     },
 
@@ -289,6 +290,8 @@ export default {
     },
 
     ownerPost(state, data) {
+
+      
       state.ownerPost = data;
     },
 
@@ -379,6 +382,15 @@ export default {
 
   actions: {
 
+    deleteCover({commit}){
+
+      return axios
+      .delete('user/cover')
+      .then(({ data }) => {
+        console.log(data);
+      });
+
+    },
   
     Tcommunity({commit}){
      

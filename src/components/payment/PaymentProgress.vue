@@ -1,32 +1,33 @@
 <template>
-	<b-row class="">
+	<b-row class="progress-content P-0">
 		<b-col
-			class="progress-content mx-2 p-2"
-			:class="`box-${i + 1}`"
+			class="progress-item-box p-2"
+			:class="step.status ? 'progress-item-check' : ''"
 			v-for="(step, i) in steps"
 			:key="i"
+			@click="switchStep(i)"
 		>
-			<div
-				class="progress-item-box d-flex align-items-center flex-row justify-content-start"
-			>
+			<div class="d-flex align-items-center flex-row justify-content-start">
 				<div
-					class="mr-3 z-index-sup d-flex align-items-center flex-row justify-content-start"
+					class="mx-2 progress-item-name d-flex align-items-center flex-row justify-content-start"
 				>
+					<!-- :variant="step.status ? 'success' : 'secondary'" -->
 					<b-avatar
-						:variant="step.status ? 'success' : 'secondary'"
 						class="mr-2 avatar-size"
+						:class="step.status ? 'avatar-color-success' : 'avatar-color'"
 						:text="(i + 1).toString()"
 					></b-avatar>
-					<a class="step" @click="switchStep(i)">
+					<a class="step">
 						<span class="label title-font-size font-weight-bold text-black">{{
 							step.text
 						}}</span>
 					</a>
 				</div>
-				<div class=".z-index-sup card-style">
+				<div class="payment-progress-bar flex-grow-1">
 					<b-progress
 						class="rounded-pill"
 						height="8px"
+						width="100%"
 						:value="current_step >= i + 1 ? 100 : 0"
 						:variant="current_step === i + 1 ? 'success' : 'secondary'"
 					></b-progress>
@@ -64,33 +65,19 @@
 </script>
 
 <style scoped>
-	/* .progress-content {
-		background: #28a745;
-		height: 100% !important;
-	} */
-	/* .progress-item-box {
-		position: relative;
-	} */
-	/* .box-progress {
-		position: absolute;
-		top: 0;
-		left: 0;
-		height: 100%;
+	.payment-progress-bar {
+		display: block;
 		width: 100% !important;
-		background: crimson;
 	}
-	.z-index-sup{
-		z-index: 12;
-	} */
-	/* .box-1 {
-		clip-path: polygon(0% 0%, 75% 0%, 87% 50%, 75% 100%, 0% 100%);
+	.progress-item-box {
+		cursor: pointer;
 	}
-	.box-2 {
-		clip-path: polygon(75% 0%, 85% 50%, 75% 100%, 0% 100%, 5% 51%, 0% 0%);
+	.progress-item-name{
+		width: fit-content;
 	}
-	.box-3 {
-		clip-path: polygon(100% 0, 100% 100%, 0% 100%, 4% 51%, 0% 0%);
-	} */
+	.step {
+		width: 100% !important;
+	}
 
 	.title-font-size {
 		font-size: 16px;
@@ -101,14 +88,74 @@
 		height: 40px;
 		width: 40px;
 	}
-
+	.avatar-color {
+		background-color: #6c757d;
+	}
+	.avatar-color-success {
+		background-color: #28a745;
+	}
 	@media only screen and (max-width: 768px) {
 		.title-font-size {
 			font-size: 14px !important;
 		}
 		.avatar-size {
-			height: 35px !important;
-			width: 35px !important;
+			height: 30px !important;
+			width: 30px !important;
+			background: #fff;
+			color: #000;
+		}
+		.avatar-color {
+			background-color: #fff;
+		}
+		.avatar-color-success {
+			background-color: #fff;
+		}
+		.payment-progress-bar {
+			display: none !important;
+		}
+		.progress-content {
+			background: #bfbfbf;
+			/* height: 100% !important; */
+		}
+		span.label {
+			display: inline-block;
+			width: 100%;
+		}
+		.progress-item-box {
+			position: relative;
+		}
+		.progress-item-check {
+			background: #28a745;
+		}
+		.progress-item-box:not(:last-child):after {
+			position: absolute;
+			top: 0;
+			right: -10px;
+			content: " ";
+			background: #fff;
+			height: 100%;
+			width: 20px;
+			z-index: 12;
+			clip-path: polygon(65% 1%, 100% 50%, 66% 100%, 0% 100%, 50% 50%, 0% 0%);
+		}
+	}
+	@media only screen and (max-width: 420px) {
+		.title-font-size {
+			font-size: 12px !important;
+		}
+		.avatar-size {
+			height: 25px !important;
+			width: 25px !important;
+			margin-left: 10px !important;
+		}
+		.progress-item-box{
+			padding: 4px !important;
+			display: flex;
+			justify-content: start;
+			align-items: center;
+		}
+		.progress-item-name{
+			margin: 0 !important;
 		}
 	}
 </style>

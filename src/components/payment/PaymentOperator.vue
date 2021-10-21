@@ -1,6 +1,6 @@
 <template>
 	<b-card>
-		<div class="card-body">
+		<div class="">
 			<!-- <div class="row p-2">
 				<div class="col">
 					<button @click="showRewiew" class="float-left p-2 btn btn-primary">
@@ -33,7 +33,7 @@
 				<div class="">
 					<img
 						:src="require('@/assets/img/payment/orange_money.png')"
-						alt="MOBILE MONEY"
+						alt="ORANGE MONEY"
 					/>
 				</div>
 				<div class="operator-name">

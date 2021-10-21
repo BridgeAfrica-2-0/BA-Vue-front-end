@@ -1,35 +1,13 @@
 <template
 	><b-card class="">
 		<div class="card-header title-font-size font-weight-bold bg-white h-50">
-			Review and confirm your Order (1 item)
+			Review and confirm your Order ( {{order_items.length}} item)
 			<br />
 			Business: Largo
 		</div>
-		<div class="card-body">
+		<div class="order card-body">
 			<div>
-				<div class="row">
-					<div class="col-12 col-sm-6 mb-3 col-md-3">
-						<ProductCaroussel />
-					</div>
-					<div class="col-6 body-font-size col-sm-3">
-						Name of item:
-						<br /><br />
-						Amount :
-						<br /><br />
-						Shipping:
-						<br /><br />
-						Total:
-					</div>
-					<div class="col-6 body-font-size col-sm-3">
-						Headset
-						<br /><br />
-						12 000XAF
-						<br /><br />
-						1 000 XAF
-						<br /><br />
-						13 000 XAF
-					</div>
-				</div>
+				<OrderProductsList :order_items="order_items" />
 				<div class="row">
 					<div class="col d-flex justify-content-end mt-4">
 						<button
@@ -46,11 +24,60 @@
 </template>
 
 <script>
-	import ProductCaroussel from "./ProductCaroussel";
+	// import ProductCaroussel from "./ProductCaroussel";
+	import OrderProductsList from "./OrderProductsList.vue";
 	export default {
 		name: "Order",
 		components: {
-			ProductCaroussel,
+			OrderProductsList,
+		},
+		data() {
+			return {
+				order_items: [
+					{
+						name: "Headset",
+						amount: 12000,
+						quantity: 3,
+						shipping: 1000,
+						total: 13000,
+					},
+					{
+						name: "Smartphone",
+						amount: 120000,
+						quantity: 2,
+						shipping: 2000,
+						total: 13000,
+					},
+					{
+						name: "HP computer",
+						amount: 602000,
+						quantity: 1,
+						shipping: 5000,
+						total: 13000,
+					},
+					{
+						name: "Smart Watch",
+						amount: 12000,
+						quantity: 3,
+						shipping: 1000,
+						total: 13000,
+					},
+					{
+						name: "USB Key",
+						amount: 120000,
+						quantity: 2,
+						shipping: 2000,
+						total: 13000,
+					},
+					{
+						name: "Computer Keyboard",
+						amount: 602000,
+						quantity: 1,
+						shipping: 5000,
+						total: 13000,
+					},
+				],
+			};
 		},
 		methods: {
 			showOperator() {
@@ -75,6 +102,12 @@
 			height: 38px;
 			width: 100%;
 			min-width: 100% !important;
+		}
+		.order.card-body, .card-header {
+			padding: 0 !important;
+		}
+		.order.card-body{
+			margin-top: 15px !important;
 		}
 	}
 </style>

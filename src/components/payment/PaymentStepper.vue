@@ -5,49 +5,60 @@
 		<!-- Stepper header start-->
 		<b-container class="my-4" fluid="lg">
 			<hr class="h-divider" />
-			<PaymentProgress :current_step="current_step" @switchstep="handleSwitchStep" :steps="steps" />
+			<PaymentProgress
+				:current_step="current_step"
+				@switchstep="handleSwitchStep"
+				:steps="steps"
+			/>
 			<hr class="h-divider" />
 		</b-container>
 		<!-- Stepper header end-->
 
 		<b-container fluid="lg">
-			<b-row v-if="current_step == 1">
+			<b-row v-if="current_step === 1 && !showRequestPayment">
 				<b-col class="my-4" cols="12">
-					<CreateShippingAddress />
+					<CreateShippingAddress @switchstep="handleSwitchStep"/>
 				</b-col>
 			</b-row>
 
-			<b-row v-if="current_step == 2">
+			<b-row v-if="current_step === 2 && !showRequestPayment">
 				<!-- Card Stepper for Shipping Address Start -->
-				<b-col v-if="showReview" class="my-4" cols="12">
+				<b-col class="my-4" cols="12">
 					<ShippingAdress />
 				</b-col>
 				<!-- Card Stepper for Shipping Address End -->
 
 				<!-- Card Stepper for Order Start -->
-				<b-col v-if="showReview" class="my-4" cols="12">
+				<b-col class="my-4" cols="12">
 					<Order @showoperator="handleShowOperator" />
 				</b-col>
 				<!-- Card Stepper for Order End -->
 			</b-row>
 			<!-- Stepper Page 1  End -->
 
-			<b-row v-if="current_step == 3">
+			<b-row v-if="current_step === 3 && !showRequestPayment">
 				<b-col class="my-4" cols="12">
 					<PaymentOperator
 						@requestpayment="handleRequestPayment"
 						@showreview="handleShowReview"
 					/>
 				</b-col>
-				<!-- <b-col class="my-4" cols="12">
-					<RequestPayment
-						v-if="showRequestPayment"
-						@confirmpayment="handleConfirmPayment"
-					/>
+			</b-row>
+			<b-row>
+				<b-col
+					v-if="current_step === 1 && showRequestPayment"
+					class="my-4"
+					cols="12"
+				>
+					<RequestPayment @confirmpayment="handleConfirmPayment" />
 				</b-col>
-				<b-col v-if="showConfirmPayment" class="my-4" cols="12">
+				<b-col
+					v-if="current_step === 2 && showConfirmPayment"
+					class="my-4"
+					cols="12"
+				>
 					<ConfirmPayment />
-				</b-col> -->
+				</b-col>
 			</b-row>
 		</b-container>
 	</div>
@@ -56,8 +67,8 @@
 	import Order from "./Order";
 	import ShippingAdress from "./ShippingAdress";
 	import PaymentOperator from "./PaymentOperator";
-	// import RequestPayment from "./RequestPayment";
-	// import ConfirmPayment from "./ConfirmPayment";
+	import RequestPayment from "./RequestPayment";
+	import ConfirmPayment from "./ConfirmPayment";
 	import PaymentProgress from "./PaymentProgress";
 	import CreateShippingAddress from "./CreateShippingAddress";
 	// import ProductDetails from "./ProductDetails";
@@ -70,6 +81,8 @@
 			PaymentOperator,
 			PaymentProgress,
 			CreateShippingAddress,
+			RequestPayment,
+			ConfirmPayment,
 		},
 		data() {
 			return {
@@ -91,8 +104,8 @@
 				],
 				sizeStepperIndicator: "md",
 				showOperators: false,
-				showReview: true,
-				showRequestPayment: true,
+				showReview: false,
+				showRequestPayment: false,
 				showConfirmPayment: false,
 			};
 		},
@@ -103,8 +116,7 @@
 		},
 		methods: {
 			onClickNext: function() {
-				
-				this.changeStatusProgress(this.current_step, this.current_step +1)
+				this.changeStatusProgress(this.current_step, this.current_step + 1);
 				this.current_step++;
 			},
 			onClickBack: function() {
@@ -116,7 +128,7 @@
 			handleSwitchStep(step) {
 				// this.steps[this.current_step - 1].status = false;
 				// this.steps[step - 1].status = true;
-				this.changeStatusProgress(this.current_step, step)
+				this.changeStatusProgress(this.current_step, step);
 				this.current_step = step;
 			},
 			changeStatusProgress(current_step, next_step) {
@@ -133,13 +145,25 @@
 				this.showOperators = false;
 			},
 			handleRequestPayment() {
-				this.steps = ["Request Payment", "Confirm Payment"];
-				this.onClickNext();
+				this.showRequestPayment = true;
+				this.current_step = 1;
+				this.steps = [
+					{
+						text: "Request Payment",
+						status: true,
+					},
+					{
+						text: "Confirm Payment",
+						status: false,
+					},
+				];
 			},
 			handleConfirmPayment() {
-				this.$emit("nextpaymentstep");
-				this.showRequestPayment = false;
+				// this.$emit("nextpaymentstep");
+				// this.showRequestPayment = false;
+				// this.showConfirmPayment = true;
 				this.showConfirmPayment = true;
+				this.onClickNext();
 			},
 		},
 	};

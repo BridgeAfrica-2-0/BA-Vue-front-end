@@ -1,6 +1,7 @@
 <template>
 	<div>
 		<b-form @submit="onSubmit" @reset="onReset">
+			<b-alert :show="errorAppend" variant="danger">One problem must append!</b-alert>
 			<b-form-group
 				class="body-font-size"
 				id="input-group-name"
@@ -39,7 +40,7 @@
 					>
 						<b-form-select
 							id="country-input"
-							v-model="form.country"
+							v-model="form.country_id"
 							:options="countries"
 							value-field="id"
 							text-field="name"
@@ -57,7 +58,7 @@
 					>
 						<b-form-select
 							id="region-input"
-							v-model="form.region"
+							v-model="form.region_id"
 							:options="regions"
 							value-field="id"
 							text-field="name"
@@ -77,7 +78,7 @@
 					>
 						<b-form-select
 							id="division-input"
-							v-model="form.division"
+							v-model="form.division_id"
 							:options="divisions"
 							value-field="id"
 							text-field="name"
@@ -95,7 +96,7 @@
 					>
 						<b-form-select
 							id="council-input"
-							v-model="form.council"
+							v-model="form.council_id"
 							:options="councils"
 							@change="getNeigbourhoods"
 							value-field="id"
@@ -127,7 +128,7 @@
 			>
 				<b-form-select
 					id="neigbourhood-input"
-					v-model="form.neigbourhood"
+					v-model="form.neighbourhood_id"
 					:options="neigbourhoods"
 					value-field="id"
 					text-field="name"
@@ -152,15 +153,16 @@
 		name: "FormCreateShippingAddress",
 		data() {
 			return {
+				errorAppend: false,
 				form: {
 					name: "",
 					phone: "",
-					country: "",
-					region: "",
-					division: "",
-					council: "",
+					country_id: "",
+					region_id: "",
+					division_id: "",
+					council_id: "",
 					city: "",
-					neigbourhood: "",
+					neighbourhood_id: "",
 				},
 			};
 		},
@@ -190,27 +192,47 @@
 		methods: {
 			onSubmit(event) {
 				event.preventDefault();
-				alert(JSON.stringify(this.form));
+				this.form.name = this.username;
+				this.$store.dispatch("checkout/createShipping", this.form)
+				.then(()=>{
+					this.errorAppend= false
+					this.$emit("switchstep", 2);
+				})
+				.catch(()=>{
+					this.errorAppend = true
+				})
 			},
 			onReset(event) {
 				event.preventDefault();
-				// Reset our form values
 				this.form.name = "";
 				this.form.phone = "";
-				this.form.country = "";
+				this.form.country_id = "";
 				this.form.city = "";
-				this.form.neigbourhood = "";
+				this.form.neighbourhood_id = "";
+				this.form.region_id = "";
+				this.form.division_id = "";
+				this.form.council_id = "";
 			},
 			getRegions(country_id) {
+				this.form.region_id = undefined;
+				this.form.division_id = undefined;
+				this.form.council_id = undefined;
+				this.form.neighbourhood_id = undefined;
 				this.$store.dispatch("auth/region", { countryId: country_id });
 			},
 			getDivisions(region_id) {
+				this.form.division_id = undefined;
+				this.form.council_id = undefined;
+				this.form.neighbourhood_id = undefined;
 				this.$store.dispatch("auth/division", { regionId: region_id });
 			},
 			getCouncils(division_id) {
+				this.form.council_id = undefined;
+				this.form.neighbourhood_id = undefined;
 				this.$store.dispatch("auth/municipality", { divisionId: division_id });
 			},
 			getNeigbourhoods(council_id) {
+				this.form.neighbourhood_id = undefined;
 				this.$store.dispatch("auth/locality", { councilId: council_id });
 			},
 		},

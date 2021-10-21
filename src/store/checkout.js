@@ -3,46 +3,42 @@ import axios from 'axios'
 
 
 const state = {
-  shipping: [
+  allShipping: [
 
-  ], 
-  token: ''
+  ],
 }
 const getters = {
-  getShipping: (state) => state.shipping
+  getAllShipping: (state) => state.allShipping
 }
 const actions = {
-  async loginToShipping({ commit }) {
-    await axios.post('/user/login', {
-      email: 'edson@gmail.com',
-      password: '123123123'
-    })
+  async createShipping({ commit }, newShippingAdd) {
+    await axios.post("shipping-address", newShippingAdd)
       .then((response) => {
-        commit('logUserToShipping', response.data.data.accessToken)
+        console.log(response.data)
+        commit
       })
       .catch((error) => {
-        console.log(error);
+        console.log(error)
       })
   },
-  async getShipping({ commit }) {
-    await axios.get('/shipping/checkout')
+
+  async getAllShippingAdd({ commit }) {
+    await axios.get('shipping/checkout/shippingAddresses')
       .then((response) => {
-        commit('setShipping', response.data.data)
+        console.log(response.data)
+        commit('setAllShipping', response.data.data)
       })
       .catch((error) => {
         console.log(error);
       })
   }
 }
-const mutations = { 
-  setShipping: (state, newShipping) => state.shipping = newShipping,
-  logUserToShipping: (state, newToken)=> {
-    axios.defaults.headers.common['Authorization'] =`Bearer ${newToken}`
-    state.token= newToken
-    state.token = newToken
-  }
+const mutations = {
+  setAllShipping: (state, newShippingTab) => state.allShipping = newShippingTab,
+  addShipping: (state, newShippingAdd) => state.allShipping.unshift(newShippingAdd)
 }
 export default {
+  namespaced: true,
   state,
   getters,
   actions,

@@ -5,9 +5,20 @@
 		</b-card-title>
 		<b-card-text class="mt-4 d-flex justify-content-between align-items-start">
 			<div class="row">
-				<div class="col-sm">
-					<p class="body-font-size">Jack Doe. +237XXXXXXXX</p>
-					<p class="body-font-size">Cameroon,yaounde,bastos.</p>
+				<div
+					class="col-sm"
+					v-for="shipping_item in shippingsTab"
+					:key="shipping_item.id"
+				>
+					<p class="body-font-size">
+						{{ shipping_item.user_name }}. {{ shipping_item.phone }},{{ shipping_item.country_name }}
+					</p>
+					<p class="body-font-size">
+						{{ shipping_item.region_name }},{{
+							shipping_item.division_name
+						}}.{{ shipping_item.council_name }}, {{ shipping_item.city }},
+						{{ shipping_item.neighbourhood_name }}
+					</p>
 				</div>
 			</div>
 			<div class="col-sm">
@@ -15,7 +26,7 @@
 					<a
 						href="#"
 						class="text-primary text-14 font-weight-bold text-uppercase mr-1 mr-sm-2"
-						>Change</a
+						>Edit</a
 					>
 					<div class="d-inline-block">
 						<b-dropdown
@@ -41,6 +52,15 @@
 								<b-icon
 									variant=""
 									class="mr-2"
+									icon="arrow-down-up"
+									aria-hidden="true"
+								></b-icon>
+								<span class="">Change</span>
+							</b-dropdown-item-button>
+							<b-dropdown-item-button>
+								<b-icon
+									variant=""
+									class="mr-2"
 									icon="trash-fill"
 									aria-hidden="true"
 								></b-icon>
@@ -58,15 +78,15 @@
 	export default {
 		name: "ShippingAddress",
 		data() {
-			return {
-				shippingsTab: [],
-			};
+			return {};
+		},
+		computed: {
+			shippingsTab() {
+				return this.$store.state.checkout.allShipping;
+			},
 		},
 		mounted() {
-			const ctx = this;
-			this.$store.dispatch("loginToShipping").then(() => {
-				ctx.$store.dispatch("getShipping");
-			});
+			this.$store.dispatch("checkout/getAllShippingAdd");
 		},
 	};
 </script>

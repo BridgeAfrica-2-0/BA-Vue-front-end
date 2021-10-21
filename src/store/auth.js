@@ -130,7 +130,7 @@ export default {
     },
 
     division({ commit }, data) {
-      return axios.get("divisions ", data).then(({ data }) => {
+      return axios.get("divisions", data).then(({ data }) => {
         console.log(data);
         commit("setDivision", data.data);
       });

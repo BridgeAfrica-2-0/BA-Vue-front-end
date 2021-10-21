@@ -166,7 +166,7 @@
 		background-color: #13b93c;
 	}
 	.title-font-size {
-		font-size: 16px;
+		font-size: 16px !important;
 		cursor: pointer !important;
 		color: #000;
 	}

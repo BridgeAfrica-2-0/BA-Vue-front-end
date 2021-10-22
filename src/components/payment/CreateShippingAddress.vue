@@ -23,9 +23,9 @@
 				</div>
 				<OrderProductsList :order_items="order_items" />
 				<div class="row my-3">
-					<div class="col-12  d-flex justify-content-center">
+					<!-- <div class="col-12  d-flex justify-content-center">
 						<b-button class="btn-custom" variant="primary">Order</b-button>
-					</div>
+					</div> -->
 					<div
 						class="col-12 mt-3 text-center text-success font-weight-bold title-font-size"
 					>

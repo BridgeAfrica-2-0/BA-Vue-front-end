@@ -1,12 +1,12 @@
 <template>
   <div>
     <div class="row">
-      <h6 class="col-md-12"><b>Basic Information</b></h6>
+      <h6 class="col-md-12"><b>{{ $t("profileowner.Basic_Information")}}</b></h6>
 
       <hr />
     </div>
     <div class="row mb-1">
-      <div class="col-md-4">Date Of Birth</div>
+      <div class="col-md-4">{{ $t("profileowner.Date_Of_Birth")}}</div>
       <div class="col-md-4">{{ info.user.dob }}</div>
       <div class="col-md-4">
         <button
@@ -16,7 +16,7 @@
           data-target="#dobModal"
           v-b-modal.modal-6
         >
-          Edit
+          {{ $t("profileowner.Edit")}}
         </button>
       </div>
 
@@ -37,13 +37,13 @@
             <b-form-input
               class="mt-2 mb-2"
               v-model="phoneInput"
-              placeholder="phone"
+              :placeholder="$t('profileowner.phone')"
               type="text"
               required
             ></b-form-input>
 
             <div class="fosrm-group text-right w-100">
-              <button type="submit" class="btn btn-primary orange">Save</button>
+              <button type="submit" class="btn btn-primary orange">{{ $t("profileowner.Save")}}</button>
             </div>
           </form>
         </div>
@@ -65,13 +65,13 @@
           >
             <b-form-input
               class="mt-2 mb-2"
-              placeholder="current city"
+              :placeholder="$t('profileowner.current_city')"
               type="text"
               v-model="basicInfo.currentCity"
             ></b-form-input>
 
             <div class="fosrm-group text-right w-100">
-              <button type="submit" class="btn btn-primary orange">Save</button>
+              <button type="submit" class="btn btn-primary orange">{{ $t("profileowner.Save")}}</button>
             </div>
           </form>
         </div>
@@ -94,11 +94,11 @@
             <b-form-input
               class="mt-2 mb-2"
               v-model="basicInfo.homeTown"
-              placeholder="home town"
+              :placeholder="$t('profileowner.home_town')"
             ></b-form-input>
 
             <div class="fosrm-group text-right w-100">
-              <button type="submit" class="btn btn-primary orange">Save</button>
+              <button type="submit" class="btn btn-primary orange">{{ $t("profileowner.Save")}}</button>
             </div>
           </form>
         </div>
@@ -120,12 +120,12 @@
           >
             <b-form-input
               class="mt-2 mb-2"
-              placeholder="Website"
+              :placeholder="$t('profileowner.Website')"
               v-model="websiteInput"
             ></b-form-input>
 
             <div class="fosrm-group text-right w-100">
-              <button type="submit" class="btn btn-primary orange">Save</button>
+              <button type="submit" class="btn btn-primary orange">{{ $t("profileowner.Save")}}</button>
             </div>
           </form>
         </div>
@@ -147,12 +147,12 @@
           >
             <b-form-input
               class="mt-2 mb-2"
-              placeholder="soclial link"
+              :placeholder="$t('profileowner.soclial_link')"
               v-model="sociallinkInput"
             ></b-form-input>
 
             <div class="fosrm-group text-right w-100">
-              <button type="submit" class="btn btn-primary orange">Save</button>
+              <button type="submit" class="btn btn-primary orange">{{ $t("profileowner.Save")}}</button>
             </div>
           </form>
         </div>
@@ -169,7 +169,7 @@
           <form class="form-inline" action="" method="post">
             <div class="input-group col-md-12 pl-0 pr-0 mb-4 selec">
               <label class="col-md-3 pl-0 pr-0 control-label"
-                >Birth Day / Month</label
+                >{{ $t("profileowner.Birth_Day_Month")}}</label
               >
               <div class="col-md-3 pr-0 pl-0">
                 <div class="form-group">
@@ -178,7 +178,7 @@
                     class="form-control"
                     v-model="basicInfo.dateOfBirth.date_1.day"
                   >
-                    <option>- Day -</option>
+                    <option>- {{ $t("profileowner.Day")}} -</option>
                     <option selected value="1">1</option>
                     <option value="2">2</option>
                     <option value="3">3</option>
@@ -220,19 +220,19 @@
                     class="form-control"
                     v-model="basicInfo.dateOfBirth.date_1.month"
                   >
-                    <option>- Month -</option>
-                    <option selected value="January">January</option>
-                    <option value="Febuary">Febuary</option>
-                    <option value="March">March</option>
-                    <option value="April">April</option>
-                    <option value="May">May</option>
-                    <option value="June">June</option>
-                    <option value="July">July</option>
-                    <option value="August">August</option>
-                    <option value="September">September</option>
-                    <option value="October">October</option>
-                    <option value="November">November</option>
-                    <option value="December">December</option>
+                    <option>- {{ $t("profileowner.Month")}} -</option>
+                    <option selected value="January">{{ $t("profileowner.January")}}</option>
+                    <option value="Febuary">{{ $t("profileowner.Febuary")}}</option>
+                    <option value="March">{{ $t("profileowner.March")}}</option>
+                    <option value="April">{{ $t("profileowner.April")}}</option>
+                    <option value="May">{{ $t("profileowner.May")}}</option>
+                    <option value="June">{{ $t("profileowner.June")}}</option>
+                    <option value="July">{{ $t("profileowner.July")}}</option>
+                    <option value="August">{{ $t("profileowner.August")}}</option>
+                    <option value="September">{{ $t("profileowner.September")}}</option>
+                    <option value="October">{{ $t("profileowner.October")}}</option>
+                    <option value="November">{{ $t("profileowner.November")}}</option>
+                    <option value="December">{{ $t("profileowner.December")}}</option>
                   </select>
                 </div>
               </div>
@@ -243,15 +243,15 @@
                     class="form-control"
                     v-model="basicInfo.dateOfBirth.date_1.access"
                   >
-                    <option value="" disabled="">Select</option>
-                    <option value="public">Public</option>
-                    <option selected value="private">Private</option>
+                    <option value="" disabled="">{{ $t("profileowner.Select")}}</option>
+                    <option value="public">{{ $t("profileowner.Public")}}</option>
+                    <option selected value="private">{{ $t("profileowner.Private")}}</option>
                   </select>
                 </div>
               </div>
             </div>
             <div class="input-group col-md-12 pl-0 pr-0 mb-4 selec">
-              <label class="col-md-3 pl-0 pr-0 control-label">Birth Year</label>
+              <label class="col-md-3 pl-0 pr-0 control-label">{{ $t("profileowner.Birth_Year")}}</label>
               <div class="col-md-6 pr-0 pl-0">
                 <div class="form-group">
                   <select
@@ -259,7 +259,7 @@
                     class="form-control w-100"
                     v-model="basicInfo.dateOfBirth.date_2.year"
                   >
-                    <option>Year</option>
+                    <option>{{ $t("profileowner.Year")}}</option>
                     <option selected value="2020">2020</option>
                     <option value="2019">2019</option>
                     <option value="2018">2018</option>
@@ -361,23 +361,23 @@
                     class="form-control"
                     v-model="basicInfo.dateOfBirth.date_2.access"
                   >
-                    <option value="" disabled="">Select</option>
-                    <option selected value="public">Public</option>
-                    <option value="private">Private</option>
+                    <option value="" disabled="">{{ $t("profileowner.Select")}}</option>
+                    <option selected value="public">{{ $t("profileowner.Public")}}</option>
+                    <option value="private">{{ $t("profileowner.Private")}}</option>
                   </select>
                 </div>
               </div>
             </div>
             <div class="fosrm-group text-right w-100">
               <button type="button" class="btn btn-dark" @click="cancel">
-                cancel
+                {{ $t("profileowner.cancel")}}
               </button>
               <button
                 type="button"
                 class="btn btn-primary orange"
                 @click="saveBirthDate"
               >
-                Save
+                {{ $t("profileowner.Save")}}
               </button>
             </div>
           </form>
@@ -385,7 +385,7 @@
       </b-modal>
     </div>
     <div class="row">
-      <div class="col-md-4">Gender</div>
+      <div class="col-md-4">{{ $t("profileowner.Gender")}}</div>
       <div class="col-md-4">
           {{info.user.gender}}
       </div>
@@ -397,7 +397,7 @@
           data-target="#genderModal"
           v-b-modal.modal-7
         >
-          Edit
+          {{ $t("profileowner.Edit")}}
         </button>
         <b-modal
           id="modal-7"
@@ -413,7 +413,7 @@
                   class="col-md-4 control-label"
                   style="align-items: first baseline"
                   for="gender"
-                  >Gender</label
+                  >{{ $t("profileowner.Gender")}}</label
                 >
                 <div class="col-md-8 pl-0 pr-0">
                   <select
@@ -421,8 +421,8 @@
                     class="form-control w-100"
                     v-model="basicInfo.gender"
                   >
-                    <option value="M">Male</option>
-                    <option value="F">Female</option>
+                    <option value="M">{{ $t("profileowner.Male")}}</option>
+                    <option value="F">{{ $t("profileowner.Female")}}</option>
                   </select>
                 </div>
               </div>
@@ -433,7 +433,7 @@
                   class="btn btn-primary orange"
                   @click="saveGender"
                 >
-                  Save
+                  {{ $t("profileowner.Save")}}
                 </button>
               </div>
             </form>
@@ -443,10 +443,10 @@
     </div>
     <div class="row mb-4 mt-3">
       <div class="col">
-        <h6 class="mb-0"><b>Contact Information</b></h6>
+        <h6 class="mb-0"><b>{{ $t("profileowner.Contact_Information")}}</b></h6>
         <hr />
         <div class="row mt-3 mb-3">
-          <div class="col-md-4">Mobile Phone</div>
+          <div class="col-md-4">{{ $t("profileowner.Mobile_Phone")}}</div>
           <br />
           <div
             class="col-md-4"
@@ -457,7 +457,7 @@
           </div>
         </div>
         <a v-b-modal.phonemodal data-target="#phonemodal">
-          + Add Other Phones</a
+          {{ $t("profileowner.Add_Other_Phones")}}</a
         >
       </div>
     </div>
@@ -466,7 +466,7 @@
     </div>
     <div class="row mb-4">
       <div class="col">
-        <h6 class="mb-0"><b>Places you lived</b></h6>
+        <h6 class="mb-0"><b>{{ $t("profileowner.Places_you_lived")}}</b></h6>
         <h6
           class="mb-0"
           v-if="basicInfo.currentCity !== null && basicInfo.currentCity !== ''"
@@ -477,7 +477,7 @@
           class="mb-0"
           v-if="basicInfo.homeTown !== null && basicInfo.homeTown !== ''"
         >
-          <b>Home Town : {{ basicInfo.homeTown }}</b>
+          <b>{{ $t("profileowner.Home_Town")}} : {{ basicInfo.homeTown }}</b>
         </h6>
         <hr />
 
@@ -494,14 +494,14 @@
             class="primary float-left mr-1 mt-1"
             :icon="['fas', 'plus-circle']"
           />
-          Update your current city</a
+          {{ $t("profileowner.Update_your_current_city")}}</a
         >
         <a v-b-modal.currentcityModal data-target="#currentcityModal" v-else>
           <fas-icon
             class="primary float-left mr-1 mt-1"
             :icon="['fas', 'plus-circle']"
           />
-          Add your current city</a
+          {{ $t("profileowner.Add_your_current_city")}}</a
         >
         <br />
         <div>
@@ -518,21 +518,21 @@
               class="primary float-left mr-1 mt-1"
               :icon="['fas', 'plus-circle']"
             />
-            Update your home town</a
+            {{ $t("profileowner.Update_your_home_town")}}</a
           >
           <a v-b-modal.hometownModal data-target="#hometownModal" v-else>
             <fas-icon
               class="primary float-left mr-1 mt-1"
               :icon="['fas', 'plus-circle']"
             />
-            Add your home town</a
+            {{ $t("profileowner.Add_your_home_town")}}</a
           >
         </div>
       </div>
     </div>
     <div class="row mb-4">
       <div class="col">
-        <h6 class="mb-0"><b>Web &amp; Social Links</b></h6>
+        <h6 class="mb-0"><b>{{ $t("profileowner.Web")}} &amp; {{ $t("profileowner.Social_Links")}}</b></h6>
         <hr />
         <div class="media">
           <div class="media-body">
@@ -541,7 +541,7 @@
                 class="primary float-left mr-1 mt-1"
                 :icon="['fas', 'plus-circle']"
               />
-              Add a Website</a
+              {{ $t("profileowner.Add_a_Website")}}</a
             ><br />
 
             <div v-for="website in info.user_websites" :key="website.id">
@@ -560,10 +560,10 @@
                     variant="primary-outline"
                   >
                     <b-dropdown-item @click="edit('website', website)"
-                      >Edit</b-dropdown-item
+                      >{{ $t("profileowner.Edit")}}</b-dropdown-item
                     >
                     <b-dropdown-item @click="deleteElement('website', website)"
-                      >Delete</b-dropdown-item
+                      >{{ $t("profileowner.Delete")}}</b-dropdown-item
                     >
                   </b-dropdown>
                 </li>

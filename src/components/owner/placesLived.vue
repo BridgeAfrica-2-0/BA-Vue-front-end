@@ -1,24 +1,24 @@
 <template>
   <div>
-    <b>Places you lived</b>
+    <b>{{ $t("profileowner.Places_you_lived")}}</b>
     <hr />
-    <p><b>Cameroon, South Africa</b></p>
+    <p><b>{{ $t("profileowner.Cameroon")}}, {{ $t("profileowner.South_Africa")}}</b></p>
     <p>
-      Current City
+      {{ $t("profileowner.Current_City")}}
     </p>
     <b-link style="text-decoration: none" class="mt-4" v-b-modal.modal-6>
       <b-icon icon="plus" variant="primary"></b-icon>
-      Add Other Places</b-link
+      {{ $t("profileowner.Add_Other_Places")}}</b-link
     >
     <b-modal id="modal-6" title="Add other places">
       <div>
         <div class="row">
           <div class="col">
-            <b-form-input v-model="city" placeholder="City"></b-form-input>
+            <b-form-input v-model="city" :placeholder="$t('profileowner.City')"></b-form-input>
             <b-form-input
               class="mt-2"
               v-model="hometown"
-              placeholder="Hometown"
+              :placeholder="$t('profileowner.Hometown')"
             ></b-form-input>
           </div>
           <div class="col-4">

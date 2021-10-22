@@ -1,11 +1,11 @@
 <template>
   <div>
-    <b>Profession</b>
+    <b>{{ $t("profileowner.Profession")}}</b>
     <hr />
 
    <b-link class="mt-4 doc" v-b-modal.modal-11>
       <b-icon icon="plus" variant="primary"></b-icon>
-      Edit Profession</b-link
+      {{ $t("profileowner.Edit_Profession")}}</b-link
     > 
     <br>
 
@@ -44,7 +44,7 @@
     <b-modal
       ref="professionModal"
       id="modal-11"
-      title="Add Profession"
+      :title="$t('profileowner.Add_Profession')"
       @close="cancel"
       @ok="save"
     >
@@ -59,7 +59,7 @@
       <b-form-input
         class="mt-2 mb-2"
         v-model="professionInput.profession"
-        placeholder="Profession"
+        :placeholder="$t('profileowner.Profession')"
       ></b-form-input>
     </b-modal>
   </div>

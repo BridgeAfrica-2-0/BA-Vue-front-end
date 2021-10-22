@@ -3,11 +3,11 @@
     <div class="row">
       <h6 class="col-md-12"><b>Basic Information</b></h6>
 
-      <hr />  
+      <hr />
     </div>
     <div class="row mb-1">
       <div class="col-md-4">Date Of Birth</div>
-      <div class="col-md-4">{{ info.user.dob }} </div>
+      <div class="col-md-4">{{ info.user.dob }}</div>
       <div class="col-md-4">
         <button
           type="button"
@@ -117,13 +117,12 @@
             action=""
             method="post"
             @submit.prevent="saveWebsite"
-          >  
+          >
             <b-form-input
               class="mt-2 mb-2"
               placeholder="Website"
               v-model="websiteInput"
             ></b-form-input>
-            
 
             <div class="fosrm-group text-right w-100">
               <button type="submit" class="btn btn-primary orange">Save</button>
@@ -132,16 +131,10 @@
         </div>
       </b-modal>
 
-
-
-
-
-
-  
       <b-modal
         id="websiteEModal"
         ref="websiteEModal"
-        title="Add a website"
+        title="Edit website"
         hide-footer
         @close="cancel"
       >
@@ -151,13 +144,12 @@
             action=""
             method="post"
             @submit.prevent="saveEWebsite"
-          >  
+          >
             <b-form-input
               class="mt-2 mb-2"
               placeholder="Website"
               v-model="websiteInput"
             ></b-form-input>
-            
 
             <div class="fosrm-group text-right w-100">
               <button type="submit" class="btn btn-primary orange">Save</button>
@@ -165,9 +157,6 @@
           </form>
         </div>
       </b-modal>
-
-
-      
 
       <b-modal
         id="sociallinkModal"
@@ -205,81 +194,72 @@
       >
         <div class="modal-body">
           <form class="form-inline" action="" method="post">
-            <div class="input-group col-md-12 pl-0 pr-0 mb-4 selec"> 
-
-
+            <div class="input-group col-md-12 pl-0 pr-0 mb-4 selec">
               <label class="col-md-3 pl-0 pr-0 control-label"
                 >Birth Day / Month</label
               >
               <div class="col-md-4 pr-1 pl-0">
-               
-                  <select
-                    id="DOBDay"
-                    class="form-control  w-100 pr-1"
-                    v-model="birthDate.day"
-                  >
-                    <option>- Day -</option>
-                    <option selected value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                    <option value="6">6</option>
-                    <option value="7">7</option>
-                    <option value="8">8</option>
-                    <option value="9">9</option>
-                    <option value="10">10</option>
-                    <option value="11">11</option>
-                    <option value="12">12</option>
-                    <option value="13">13</option>
-                    <option value="14">14</option>
-                    <option value="15">15</option>
-                    <option value="16">16</option>
-                    <option value="17">17</option>
-                    <option value="18">18</option>
-                    <option value="19">19</option>
-                    <option value="20">20</option>
-                    <option value="21">21</option>
-                    <option value="22">22</option>
-                    <option value="23">23</option>
-                    <option value="24">24</option>
-                    <option value="25">25</option>
-                    <option value="26">26</option>
-                    <option value="27">27</option>
-                    <option value="28">28</option>
-                    <option value="29">29</option>
-                    <option value="30">30</option>
-                    <option value="31">31</option>
-                  </select>
-                
+                <select
+                  id="DOBDay"
+                  class="form-control w-100 pr-1"
+                  v-model="birthDate.day"
+                >
+                  <option>- Day -</option>
+                  <option selected value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                  <option value="6">6</option>
+                  <option value="7">7</option>
+                  <option value="8">8</option>
+                  <option value="9">9</option>
+                  <option value="10">10</option>
+                  <option value="11">11</option>
+                  <option value="12">12</option>
+                  <option value="13">13</option>
+                  <option value="14">14</option>
+                  <option value="15">15</option>
+                  <option value="16">16</option>
+                  <option value="17">17</option>
+                  <option value="18">18</option>
+                  <option value="19">19</option>
+                  <option value="20">20</option>
+                  <option value="21">21</option>
+                  <option value="22">22</option>
+                  <option value="23">23</option>
+                  <option value="24">24</option>
+                  <option value="25">25</option>
+                  <option value="26">26</option>
+                  <option value="27">27</option>
+                  <option value="28">28</option>
+                  <option value="29">29</option>
+                  <option value="30">30</option>
+                  <option value="31">31</option>
+                </select>
               </div>
 
               <div class="col-md-5 pr-0 pl-0">
-                
-                  <select
-                    name="DOBMonth"
-                    class="form-control  w-100"
-                    v-model="birthDate.month"
-                  >
-                    <option>- Month -</option>
-                    <option  value="1">January</option>
-                    <option value="2">Febuary</option>
-3                    <option value="3">April</option>
-                    <option value="4">May</option>
-                    <option value="5">June</option>
-                    <option value="6">July</option>
-                    <option value="7">August</option>
-                    <option value="8">September</option>
-                    <option value="9">October</option>
-                    <option value="10">November</option>
-                    <option value="11">December</option>
-                  </select>
-                </div>
-             
-
-             
-
-
+                <select
+                  name="DOBMonth"
+                  class="form-control w-100"
+                  v-model="birthDate.month"
+                >
+                  <option>- Month -</option>
+                  <option value="1">January</option>
+                  <option value="2">Febuary</option>
+                  3
+                  <option value="3">April</option>
+                  <option value="4">May</option>
+                  <option value="5">June</option>
+                  <option value="6">July</option>
+                  <option value="7">August</option>
+                  <option value="8">September</option>
+                  <option value="9">October</option>
+                  <option value="10">November</option>
+                  <option value="11">December</option>
+                </select>
+              </div>
             </div>
             <div class="input-group col-md-12 pl-0 pr-0 mb-4 selec">
               <label class="col-md-3 pl-0 pr-0 control-label">Birth Year</label>
@@ -386,9 +366,6 @@
                   </select>
                 </div>
               </div>
-
-
-             
             </div>
             <div class="fosrm-group text-right w-100">
               <button type="button" class="btn btn-dark pr-1" @click="cancel">
@@ -408,9 +385,7 @@
     </div>
     <div class="row">
       <div class="col-md-4">Gender</div>
-      <div class="col-md-4">
-          {{info.user.gender}}
-      </div>
+      <div class="col-md-4">{{ info.user.gender }}</div>
       <div class="col-md-4">
         <button
           type="button"
@@ -435,7 +410,8 @@
                   class="col-md-4 control-label"
                   style="align-items: first baseline"
                   for="gender"
-                  >Gender </label >
+                  >Gender
+                </label>
                 <div class="col-md-8 pl-0 pr-0">
                   <select
                     id="gender"
@@ -462,73 +438,59 @@
         </b-modal>
       </div>
     </div>
-    <div class="row mb-4 mt-3">
-      <div class="col">
-        <h6 class="mb-0"><b>Contact Information</b></h6>
-        <hr />
-        <div class="row mt-3 mb-3">
-          <div class="col-md-4">Mobile Phone</div>
-          <br />
-          <div
-            class="col-md-4"
-            
-          >
-            {{info.user.phone }}
-          </div>
-        </div>
-        <a v-b-modal.phonemodal data-target="#phonemodal">
-          
- <b-icon
 
-     icon="pencil" variant="primary">   </b-icon> Update Phone
-            </a>
+    <div class="row">
+      <h6 class="col-md-12"><b>Contact Information</b></h6>
+    </div>
+    <hr />
+    <div class="row mb-1 mt-3">
+      <div class="col-md-4">Phone</div>
+      <div class="col-md-4">{{ info.user.phone }}</div>
+      <div class="col-md-4">
+        <button
+          type="button"
+          class="btn btn-outline-primary float-md-right"
+          data-toggle="modal"
+          data-target="#phonemodal"
+          v-b-modal.phonemodal
+        >
+          Edit
+        </button>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12"><b>Places you lived</b></div>
+    </div>
+    <hr>
+    <div class="row mb-4">
+      <div class="col-md-4">City :</div>
+      <div class="col-md-4">{{ info.user.city }}</div>
+      <div class="col-md-4">
+        <button
+          type="button"
+          class="btn btn-outline-primary float-md-right"
+          data-toggle="modal"
+          data-target="#currentcityModal"
+          v-b-modal.currentcityModal
+        >
+          Edit
+        </button>
       </div>
     </div>
     <div class="row mb-4">
-      <div class="col"></div>
-    </div>
-    <div class="row mb-4">
-      <div class="col">
-        <h6 class="mb-0"><b>Places you lived</b></h6>
-        <h6
-          class="mb-0"
-          v-if="info.user.city !== null && info.user.city !== ''"
+      <div class="col-md-4">Home Town :</div>
+      <div class="col-md-4">{{ info.user.home_town }}</div>
+      <div class="col-md-4">
+        <button
+          type="button"
+          class="btn btn-outline-primary float-md-right"
+          data-toggle="modal"
+          data-target="#hometownModal"
+          v-b-modal.hometownModal
         >
-          City : {{ info.user.city }}
-        </h6>
-        <h6
-          class="mb-0"
-          v-if="info.user.home_town !== null && info.user.home_town !== ''"
-        >
-          Home Town : {{ info.user.home_town }}
-        </h6>
-        <hr />
-
-        <a
-          v-b-modal.currentcityModal
-          data-target="#currentcityModal"
-         
-        >   <b-icon
-
-     icon="pencil" variant="primary">   </b-icon>
-         
-          Update your current city</a
-        >
-       
-        <br />
-        <div>
-          <a
-            v-b-modal.hometownModal
-            data-target="#hometownModal"
-           
-          >
-             <b-icon
-
-     icon="pencil" variant="primary" class="icon">   </b-icon>
-            Update your home town</a
-          >
-          
-        </div>
+          Edit
+        </button>
       </div>
     </div>
     <div class="row mb-4">
@@ -550,9 +512,12 @@
                 class="primary float-left mr-1 mt-1"
                 :icon="['fas', 'globe']"
               />
-              <a :href="website" @click="redirect(website.website_url)" target="_blank">{{
-                website.website_url
-              }}</a>
+              <a
+                :href="website"
+                @click="redirect(website.website_url)"
+                target="_blank"
+                >{{ website.website_url }}</a
+              >
               <ul class="website navbar-nav pull-right">
                 <li class="nav-item dropdown">
                   <b-dropdown
@@ -573,10 +538,7 @@
           </div>
         </div>
         <div class="media mt-4">
-
-
-
-<!--
+          <!--
           <div class="media-body">
             <a v-b-modal.sociallinkModal data-target="#sociallinkModal">
               <fas-icon
@@ -625,7 +587,7 @@ import moment from "moment";
 export default {
   data() {
     return {
-      websiteId:null,
+      websiteId: null,
       basicInfo: {
         dateOfBirth: { day: "12", month: "1", year: "2000" },
         gender: "M",
@@ -665,27 +627,21 @@ export default {
       });
   },
 
-
-  
   computed: {
-
     birthDate() {
+      let dob = this.info.user.dob;
 
-      let dob=this.info.user.dob;
+      let check = moment(dob, "YYYY/MM/DD");
 
-      let check = moment(dob, 'YYYY/MM/DD');
-    
-      var month = check.format('M');
-      var day   = check.format('D');
-      var year  = check.format('YYYY');
-      return {day:day, month:month, year:year}
-
+      var month = check.format("M");
+      var day = check.format("D");
+      var year = check.format("YYYY");
+      return { day: day, month: month, year: year };
     },
 
-      info(){
-   return this.$store.state.profile.profileIntro;
+    info() {
+      return this.$store.state.profile.profileIntro;
     },
-
   },
   methods: {
     cancel() {
@@ -696,9 +652,7 @@ export default {
       this.phoneInput = null;
     },
 
-
-    saveBirthDate() {  
-
+    saveBirthDate() {
       console.log(this.birthDate);
       this.$store
         .dispatch("profile/updateUserBasicInfosBirthDate", {
@@ -708,20 +662,14 @@ export default {
           console.log("save new birth date user response (3) +++++", response);
           console.log("save new birth date user end +++++");
 
-            
-       this.$store
-      .dispatch("profile/loadUserPostIntro", null)
-      .then((response) => {
-         console.log(response);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  
-
-
-
-
+          this.$store
+            .dispatch("profile/loadUserPostIntro", null)
+            .then((response) => {
+              console.log(response);
+            })
+            .catch((error) => {
+              console.log(error);
+            });
         })
         .catch((error) => {
           console.log(
@@ -730,12 +678,9 @@ export default {
           );
         })
         .finally(() => {
-         
           this.$refs["model-6"].hide();
         });
     },
-
-
 
     saveGender() {
       console.log("save new gender user start +++++");
@@ -745,15 +690,14 @@ export default {
           gender: this.basicInfo.gender,
         })
         .then((response) => {
-           this.$store
-      .dispatch("profile/loadUserPostIntro", null)
-      .then((response) => {
-         console.log(response);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  
+          this.$store
+            .dispatch("profile/loadUserPostIntro", null)
+            .then((response) => {
+              console.log(response);
+            })
+            .catch((error) => {
+              console.log(error);
+            });
 
           console.log("save new gender user response (3)", response);
         })
@@ -765,13 +709,11 @@ export default {
         })
         .finally(() => {
           console.log("finally save new gender user ");
-         
+
           this.$refs["modal-7"].hide();
         });
     },
     savePhoneNumber() {
-
-     
       this.$store
         .dispatch("profile/updateUserBasicInfosMobilePhones", {
           mobilePhones: this.info.user.phone,
@@ -787,7 +729,7 @@ export default {
         })
         .finally(() => {
           console.log("finally save new mobilePhones user ++++++ ");
-         
+
           this.$refs["phonemodal"].hide();
         });
     },
@@ -822,37 +764,29 @@ export default {
         });
     },
     saveHomeTown() {
-     
       this.$store
         .dispatch("profile/updateUserBasicInfosHomeTown", {
           homeTown: this.info.user.home_town,
         })
-        .then((response) => {
-          
-        })
+        .then((response) => {})
         .catch((error) => {
           console.log(error, "not save new homeTown user end error (2)+++++");
         })
         .finally(() => {
-        
-         
-           this.$store
-      .dispatch("profile/loadUserPostIntro", null)
-      .then((response) => {
-         console.log(response);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  
-
+          this.$store
+            .dispatch("profile/loadUserPostIntro", null)
+            .then((response) => {
+              console.log(response);
+            })
+            .catch((error) => {
+              console.log(error);
+            });
 
           this.$refs["hometownModal"].hide();
         });
     },
 
     saveWebsite() {
-
       this.$store
         .dispatch("profile/updateUserBasicInfosWebsites", {
           websites: this.websiteInput,
@@ -865,52 +799,47 @@ export default {
           console.log(error, "not save new websites user end error (2) +++++");
         })
         .finally(() => {
+          this.$store
+            .dispatch("profile/loadUserPostIntro", null)
+            .then((response) => {
+              console.log(response);
+            })
+            .catch((error) => {
+              console.log(error);
+            });
 
-            this.$store
-      .dispatch("profile/loadUserPostIntro", null)
-      .then((response) => {
-         console.log(response);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  
-         
           this.$refs["websiteModal"].hide();
         });
     },
 
-
-
- deleteWebsite(website) {
+    deleteWebsite(website) {
       console.log("save new websites user start +++++");
-      
+      console.log(website);
+
       this.$store
         .dispatch("profile/deleteUserBasicInfosWebsites", {
-          id: this.website.id
+          id: website.id,
         })
         .then((response) => {
           console.log("save new websites user response (3) ++++++", response);
-     
         })
         .catch((error) => {
           console.log(error, "not save new websites user end error (2) +++++");
         })
         .finally(() => {
           console.log("finally save new website user ");
-         
-          this.$refs["websiteModal"].hide();
+          this.$store.dispatch("profile/loadUserPostIntro", null)
+          this.$refs["websiteEModal"].hide();
         });
     },
 
-
-
-     saveEWebsite() {
+    saveEWebsite() {
       console.log("save new websites user start +++++");
-      
+
       this.$store
         .dispatch("profile/updateUserBasicInfosEWebsites", {
-          websites: this.websiteInput,id:this.websiteId
+          websites: this.websiteInput,
+          id: this.websiteId,
         })
         .then((response) => {
           console.log("save new websites user response (3) ++++++", response);
@@ -921,12 +850,10 @@ export default {
         })
         .finally(() => {
           console.log("finally save new website user ");
-         
-          this.$refs["websiteModal"].hide();
+          this.$store.dispatch("profile/loadUserPostIntro", null)
+          this.$refs["websiteEModal"].hide();
         });
     },
-
-
 
     saveSocialLink() {
       console.log("save new sociallinks  user start +++++");
@@ -978,7 +905,7 @@ export default {
               return website !== value;
             }
           );
-         
+
           break;
         case "socialLink":
           this.basicInfo.socialLinks = this.basicInfo.socialLinks.filter(
@@ -986,7 +913,7 @@ export default {
               return socialLink !== value;
             }
           );
-         
+
           break;
         default:
           console.log("No Correspondance");
@@ -1002,7 +929,7 @@ export default {
           });
           console.log(this.index);
           this.websiteInput = value.website_url;
-          this.websiteId=value.id;
+          this.websiteId = value.id;
           this.$refs["websiteEModal"].show();
           break;
         case "socialLink":

@@ -82,7 +82,6 @@ export default {
   },
   computed: {},
 
-  computed: {},
   created() {
     this.tabIndex = this.tabs.findIndex((tab) => tab === this.$route.hash);
 

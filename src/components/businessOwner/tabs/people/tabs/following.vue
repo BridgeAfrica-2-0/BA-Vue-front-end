@@ -40,8 +40,6 @@
         </b-row>
       </b-col>
     </b-row>
-</b-col>
- </b-row>
   </div>
 </template>
 

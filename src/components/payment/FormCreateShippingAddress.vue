@@ -1,7 +1,9 @@
 <template>
 	<div>
 		<b-form @submit="onSubmit" @reset="onReset">
-			<b-alert :show="errorAppend" variant="danger">One problem must append!</b-alert>
+			<b-alert :show="errorAppend" variant="danger"
+				>One problem must append!</b-alert
+			>
 			<b-form-group
 				class="body-font-size"
 				id="input-group-name"
@@ -137,8 +139,13 @@
 			</b-form-group>
 
 			<div class="d-flex justify-content-between align-items-center">
-				<b-button class="btn-custom mr-3" type="submit" variant="primary"
-					>Save</b-button
+				<b-button class="btn-custom mr-3" type="submit" variant="primary">
+					<b-spinner
+						v-if="loading"
+						small
+						variant="light"
+					></b-spinner>
+					Save</b-button
 				>
 				<b-button class="btn-custom" type="reset" variant="success"
 					>Cancel</b-button
@@ -151,19 +158,17 @@
 <script>
 	export default {
 		name: "FormCreateShippingAddress",
+		props: {
+			form: {
+				type: Object,
+				require: true,
+			},
+			modal: Boolean,
+		},
 		data() {
 			return {
 				errorAppend: false,
-				form: {
-					name: "",
-					phone: "",
-					country_id: "",
-					region_id: "",
-					division_id: "",
-					council_id: "",
-					city: "",
-					neighbourhood_id: "",
-				},
+				loading: false,
 			};
 		},
 		computed: {
@@ -192,15 +197,19 @@
 		methods: {
 			onSubmit(event) {
 				event.preventDefault();
+				this.loading = true;
 				this.form.name = this.username;
-				this.$store.dispatch("checkout/createShipping", this.form)
-				.then(()=>{
-					this.errorAppend= false
-					this.$emit("switchstep", 2);
-				})
-				.catch(()=>{
-					this.errorAppend = true
-				})
+				this.$store
+					.dispatch("checkout/createShipping", this.form)
+					.then(() => {
+						this.loading = false;
+						this.errorAppend = false;
+						this.$emit("switchstep", 2);
+					})
+					.catch(() => {
+						this.loading = false;
+						this.errorAppend = true;
+					});
 			},
 			onReset(event) {
 				event.preventDefault();
@@ -212,6 +221,9 @@
 				this.form.region_id = "";
 				this.form.division_id = "";
 				this.form.council_id = "";
+				if (this.modal) {
+					this.$emit("closecshippingm");
+				}
 			},
 			getRegions(country_id) {
 				this.form.region_id = undefined;

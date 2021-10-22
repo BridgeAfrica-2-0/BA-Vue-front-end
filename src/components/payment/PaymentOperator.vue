@@ -17,7 +17,9 @@
 					/>
 				</div>
 				<div class="operator-name">
-					<p class="mb-0 mx-4 title-font-size font-weight-bold">MTN Mobile Money</p>
+					<p class="mb-0 mx-4 title-font-size font-weight-bold">
+						MTN Mobile Money
+					</p>
 				</div>
 				<div class="operator-select-box">
 					<b-form-radio
@@ -56,7 +58,9 @@
 					/>
 				</div>
 				<div class="operator-name">
-					<p class="mb-0 mx-4 title-font-size font-weight-bold">Express Union</p>
+					<p class="mb-0 mx-4 title-font-size font-weight-bold">
+						Express Union
+					</p>
 				</div>
 				<div class="operator-select-box">
 					<b-form-radio
@@ -72,7 +76,7 @@
 				<div class="col">
 					<button
 						@click="requestPayment"
-						class="float-right text-14 p-2 btn btn-primary mt-2"
+						class="float-right btn-custom p-2 btn btn-primary mt-2"
 					>
 						Pay: 13 000 XAF
 					</button>
@@ -106,12 +110,17 @@
 		display: block;
 		width: 60px !important;
 	} */
+	.btn-custom {
+		height: 38px;
+		min-width: 123px;
+		font-size: 14px;
+	}
 	.operator {
 		display: flex;
 		justify-content: start;
 		align-items: center;
 	}
-	.operator-img-box{
+	.operator-img-box {
 		width: 50px !important;
 	}
 	.operator img {

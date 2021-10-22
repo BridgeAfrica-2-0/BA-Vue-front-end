@@ -5,7 +5,10 @@
 				<b-card-title class="headline-font-size mb-3">
 					Create Shipping Address
 				</b-card-title>
-				<FormCreateShippingAddress @switchstep="handleSwitchStep"/>
+				<FormCreateShippingAddress
+					:form="shippingAddress"
+					@switchstep="handleSwitchStep"
+				/>
 			</div>
 			<div class="col-12 col-sm-12 col-md-7 col-lg-7 mb-4">
 				<div class="row mb-3">
@@ -18,7 +21,7 @@
 						>
 					</div>
 				</div>
-				<OrderProductsList :order_items="order_items"/>
+				<OrderProductsList :order_items="order_items" />
 				<div class="row my-3">
 					<div class="col-12  d-flex justify-content-center">
 						<b-button class="btn-custom" variant="primary">Order</b-button>
@@ -46,12 +49,22 @@
 			OrderProductsList,
 		},
 		methods: {
-			handleSwitchStep(){
+			handleSwitchStep() {
 				this.$emit("switchstep", 2);
-			}
+			},
 		},
 		data() {
 			return {
+				shippingAddress: {
+					name: "",
+					phone: "",
+					country_id: "",
+					region_id: "",
+					division_id: "",
+					council_id: "",
+					city: "",
+					neighbourhood_id: "",
+				},
 				order_items: [
 					{
 						name: "Headset",
@@ -98,7 +111,6 @@
 				],
 			};
 		},
-
 	};
 </script>
 
@@ -126,5 +138,4 @@
 			padding: 0 !important;
 		}
 	}
-
 </style>

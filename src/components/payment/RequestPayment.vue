@@ -1,6 +1,6 @@
 <template>
 	<b-card class="border-0">
-		<div class="card-header text-black border-bottom-0  bg-white h-50">
+		<div class="card-header px-0 text-black border-bottom-0  bg-white h-50">
 			Enter your MTN Mobile Money number
 		</div>
 		<div class="px-0">
@@ -12,7 +12,7 @@
 						type="tel"
 					></b-form-input>
 				</div>
-				<div class="col-4 col-sm-3 col-md-6 btn-custom-box">
+				<div class="col-4 col-sm-3 col-md-6 px-0 btn-custom-box">
 					<b-button
 						variant="primary"
 						class="font-weight-light btn-custom text-14 shadow-sm"
@@ -80,5 +80,8 @@
 		/* .payment-body{
 			padding: 20px 0px !important;
 		} */
+		.card-body{
+			padding: 0 !important;
+		}
 	}
 </style>

@@ -31,11 +31,20 @@ const actions = {
       .catch((error) => {
         console.log(error);
       })
+  },
+  async deleteShippingAdd({ commit }, id) {
+    await axios.delete(`shipping/shippingAddress/${id}/delete`).then(() => {
+      commit('deleteShippingAdd', id)
+    })
+    .catch((error)=>{
+      console.log(error);
+    })
   }
 }
 const mutations = {
   setAllShipping: (state, newShippingTab) => state.allShipping = newShippingTab,
-  addShipping: (state, newShippingAdd) => state.allShipping.unshift(newShippingAdd)
+  addShipping: (state, newShippingAdd) => state.allShipping.unshift(newShippingAdd),
+  deleteShippingAdd: (state, idShipping) => state.allShipping = state.allShipping.filter(el => el.id !== idShipping)
 }
 export default {
   namespaced: true,

@@ -12,19 +12,19 @@
 				</div>
 			</div>
 			<div class="row my-3">
-				<div class="col">
+				<div
+					class="col-12 back-buttons-group d-flex justify-content-between flex-wrap align-items-center"
+				>
 					<b-button
 						variant="success"
 						href="/"
-						class="btn-custom text-14 font-weight-light float-left shadow-sm"
+						class="btn-custom text-14 font-weight-light mb-3  shadow-sm"
 						size="lg"
 						><b-icon icon="arrow-left-circle-fill"></b-icon> To Home</b-button
 					>
-				</div>
-				<div class="col">
 					<b-button
 						variant="primary"
-						class="btn-custom text-14 font-weight-light float-right shadow-sm"
+						class="btn-custom text-14 mb-3 font-weight-light  shadow-sm"
 						size="lg"
 						><b-icon icon="arrow-right-circle-fill"></b-icon> To
 						Search</b-button
@@ -57,4 +57,10 @@
 		.text-36 {
 			font-size: 30px;
 		}
-	}</style>
+	}
+	@media only screen and (max-width: 362px) {
+		.back-buttons-group {
+			justify-content: center !important;
+		}
+	}
+</style>

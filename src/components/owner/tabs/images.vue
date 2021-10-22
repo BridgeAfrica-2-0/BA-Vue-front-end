@@ -27,13 +27,17 @@
 
           <br />
 
-          <b-button @click="submitPosts" variant="primary" block
+          <b-button
+            @click="submitPosts"
+            variant="primary"
+            block
+            :disabled="loading"
             ><b-icon icon="cursor-fill" variant="primary"></b-icon>
             Publish</b-button
           >
         </b-modal>
 
-        <div class="createp img-gall image-wrapp">
+        <div class="createp img-gall image-wrapp" v-if="canUpload">
           <div class="">
             <input
               type="file"
@@ -66,18 +70,27 @@
           <span></span>
           <a
             ><img
+              v-if="image.media.length"
               class="card-img btn p-0 album-img"
-              :src="image.media"
+              :src="image.media[0].path | path"
               alt=""
               @click="showPic(image, image.content)"
-          /></a>
+            />
+            <img
+              v-else
+              class="card-img btn p-0 album-img"
+              src=""
+              alt=""
+              @click="showPic(image, image.content)"
+            />
+          </a>
 
           <div class="mediadesc">
             <ul class="navbar-nav pull-right">
               <li class="nav-item dropdown m-0 p-0">
                 <b-dropdown
                   size="sm"
-                  class=" call-action"
+                  class="call-action"
                   variant="link"
                   toggle-class="text-decoration-none"
                   no-caret
@@ -115,8 +128,18 @@
 
 <script>
 import { mapActions, mapGetters } from "vuex";
+import { fullMediaLink } from "@/helpers";
+
 export default {
-  props: ["album"],
+  props: {
+    album: {},
+    canUpload: {
+      type: Boolean,
+      default: function () {
+        return false;
+      },
+    },
+  },
 
   data() {
     return {
@@ -129,9 +152,13 @@ export default {
       img_url: null,
       profile_pic: null,
       text: null,
+      loading: false,
     };
   },
-  components: {},
+
+  filters: {
+    path: fullMediaLink,
+  },
 
   computed: {
     ...mapGetters({
@@ -153,6 +180,7 @@ export default {
       setCoverPic: "UserProfileOwner/setCoverPic",
       deleteImage: "UserProfileOwner/deleteImage",
       downloadPic: "UserProfileOwner/downloadPic",
+      fetchImages: "UserProfileOwner/getImages",
     }),
 
     showPic(image, content) {
@@ -276,7 +304,9 @@ export default {
           }
         });
     },
+
     submitPosts() {
+      this.loading = true;
       let albumId = this.album;
       console.log(albumId);
 
@@ -289,7 +319,9 @@ export default {
         data: formData,
       };
       this.submitPost(payload)
+        .then(() => this.fetchImages())
         .then(() => {
+          this.loading = false;
           this.flashMessage.show({
             status: "success",
             message: "Profile Updated",
@@ -298,6 +330,7 @@ export default {
           this.$refs["modalxl"].hide();
         })
         .catch((err) => {
+          this.loading = false;
           console.log({ err: err });
 
           if (err.response.status == 422) {
@@ -335,7 +368,7 @@ export default {
   },
 
   watch: {
-    album: function(newVal) {
+    album: function (newVal) {
       this.album_id = newVal;
     },
   },

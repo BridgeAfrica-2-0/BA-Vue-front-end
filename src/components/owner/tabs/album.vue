@@ -27,7 +27,12 @@
                   class="mt-2"
                   v-model="albumInfo.type"
                 ></b-form-input>
-                <b-button class="mt-2" variant="primary" @click="createAlbums">
+                <b-button
+                  class="mt-2"
+                  variant="primary"
+                  @click="createAlbums"
+                  :disabled="loading || canCreateAlbum"
+                >
                   Create</b-button
                 >
               </b-form>
@@ -41,7 +46,11 @@
           >
             <a>
               <span @click="showlbum(album.id, album.name)">
-                <img class="card-img album-img" :src="album.cover" alt="" />
+                <img
+                  class="card-img album-img"
+                  :src="album.cover[0] | path"
+                  alt=""
+                />
               </span>
 
               <div class="botmediadess">
@@ -52,12 +61,12 @@
               </div>
             </a>
 
-            <div class="mediadesc">
+            <div class="mediadesc" v-if="canBeUpdate(album)">
               <ul class="navbar-nav pull-right">
                 <li class="nav-item dropdown">
                   <b-dropdown
                     size="sm"
-                    class=" call-action"
+                    class="call-action"
                     variant="link"
                     toggle-class="text-decoration-none"
                     no-caret
@@ -71,7 +80,7 @@
                       </b-icon>
                     </template>
 
-                    <b-dropdown-item @click="editAlbum(album.id)"
+                    <b-dropdown-item @click="editAlbum(album)"
                       >Edit</b-dropdown-item
                     >
 
@@ -85,19 +94,19 @@
           </div>
         </div>
 
-        <b-modal
-          hide-footer
-          title="Create album"
-          ref="editalbum"
-          id="editalbum"
-        >
+        <b-modal hide-footer title="Edit album" ref="editalbum" id="editalbum">
           <div ref="creatform">
             <b-form>
               <b-form-input
                 placeholder="Album name"
                 v-model="editName"
               ></b-form-input>
-              <b-button class="mt-2" variant="primary" @click="update">
+              <b-button
+                class="mt-2"
+                variant="primary"
+                @click="update"
+                :disabled="loading || editName.trim().length ? false : true"
+              >
                 Update</b-button
               >
             </b-form>
@@ -165,37 +174,45 @@
       </b-button>
       <span class="text-center ml-2 f-20"> {{ this.album_name }} </span>
 
-      <Images v-bind:album="album_id" />
+      <Images v-bind:album="album_id" :canUpload="canUpload"/>
     </div>
   </div>
 </template>
 
 <script>
 import Images from "./images";
-import { mapActions, mapGetters } from "vuex";
+import { mapActions, mapGetters, mapMutations } from "vuex";
+
+import { fullMediaLink } from "@/helpers";
 export default {
-  components: { Images },
-  data: function() {
+  components: {
+    Images,
+  },
+  data: function () {
     return {
       showalbum: false,
       albumInfo: {
         name: "",
         type: "",
       },
-
+      loading: false,
       editName: "",
       editId: "",
-
       url: "",
       fullPage: "",
       album_id: "",
       album_name: "",
       album_type: "",
       edit_name: "",
+      canUpload:true
     };
   },
   mounted() {
     this.url = this.$route.params.id;
+  },
+
+  filters: {
+    path: fullMediaLink,
   },
 
   computed: {
@@ -203,6 +220,10 @@ export default {
       getAlbums: "UserProfileOwner/getAlbums",
       getAlbumImage: "UserProfileOwner/getAlbumImage",
     }),
+
+    canCreateAlbum() {
+      return this.albumInfo.name && this.albumInfo.type ? false : true;
+    },
   },
   beforeMount() {
     this.getAlbums;
@@ -214,6 +235,12 @@ export default {
       updateAlbum: "UserProfileOwner/updateAlbum",
       deleteAlbum: "UserProfileOwner/deleteAlbum",
       getAlbumImages: "UserProfileOwner/getAlbumImages",
+      fetchAlbums: "UserProfileOwner/getAlbums"
+    }),
+
+    ...mapMutations({
+      mapUpdate: "UserProfileOwner/updateAlbum",
+      remove: "UserProfileOwner/removeAlbum",
     }),
 
     hidealbum() {
@@ -232,16 +259,31 @@ export default {
         });
     },
 
+    canBeUpdate(album){
+      return (["profile_picture","cover_photo","post"].includes(album.name)) ? false : true
+    },
+
     createAlbums() {
+      this.loading = true;
       this.createAlbum(this.albumInfo)
         .then(() => {
+          this.fetchAlbums();
+        })
+        .then(() => {
+          this.$bvModal.hide("createalbumModal");
+          this.albumInfo = {
+            name: "",
+            type: "",
+          };
           this.flashMessage.show({
             status: "success",
             message: "Album Created",
           });
-          this.getAlbums();
+
+          this.loading = true;
         })
         .catch((err) => {
+          this.loading = false;
           this.sending = false;
           if (err.response.status == 422) {
             console.log({ err: err });
@@ -259,9 +301,9 @@ export default {
         });
     },
 
-    editAlbum(id) {
-      this.editId = id;
-      console.log(this.editId);
+    editAlbum(item) {
+      this.editId = item.id;
+      this.editName = item.name;
       this.$refs["editalbum"].show();
     },
 
@@ -274,14 +316,23 @@ export default {
         id: id,
         name: name,
       };
+      console.log(user);
+      this.loading = true;
+
       this.updateAlbum(user)
         .then(() => {
+          this.mapUpdate({ name: this.editName, id: this.editId });
+          this.$bvModal.hide("editalbum");
           this.flashMessage.show({
             status: "success",
             message: "Album Updated",
           });
+          this.loading = false;
+          this.editId = "";
+          this.editName = "";
         })
         .catch((err) => {
+          console.log(err);
           this.sending = false;
           if (err.response.status == 422) {
             console.log({ err: err });
@@ -292,16 +343,18 @@ export default {
           } else {
             this.flashMessage.show({
               status: "error",
-              message: "Unable to create your Album",
+              message: "Unable to update your Album",
             });
             console.log({ err: err });
           }
+          this.loading = false;
         });
     },
 
     deleteAlbums(id) {
       this.deleteAlbum(id)
         .then(() => {
+          this.remove(id);
           this.flashMessage.show({
             status: "success",
             message: "Album Deleted",

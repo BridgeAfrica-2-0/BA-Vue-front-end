@@ -12,6 +12,7 @@ export default {
     ownerPost: [],
     ownerPostImages: [],
   },
+
   getters: {
     getAlbums(state) {
       return state.albums;
@@ -34,6 +35,7 @@ export default {
       return state.success;
     },
   },
+
   mutations: {
     //set media data
 
@@ -89,6 +91,15 @@ export default {
     downloadPic(state, payload) {
       state.images = payload;
     },
+
+    updateAlbum(state, payload) {
+      const newState = state.albums.map(album => (album.id == payload.id) ? Object.assign(album, { name: payload.name }) : payload)
+      state.albums = newState
+    },
+
+    removeAlbum(state, uuid) {
+      state.albums = state.albums.filter(album => album.id != uuid)
+    }
   },
 
   actions: {
@@ -115,19 +126,16 @@ export default {
     },
 
     async createAlbum({ commit }, albumInfo) {
-      console.log(albumInfo);
-      const res = await axios.post("profile/album/create", albumInfo);
-      commit("newAlbum", res.data.data.album);
+      return axios.post("profile/album/create", albumInfo);
+
     },
 
     async updateAlbum({ commit }, user) {
-      const res = await axios.post(`profile/album/edit/${user.id}`, user);
-      commit("upAlbum", res.data.data.album);
+      return axios.post(`profile/album/edit/${user.id}`, user);
     },
 
     async deleteAlbum({ commit }, id) {
-      const res = await axios.delete(`profile/album/delete/${id}`);
-      commit("delAlbum", res.data.data.album);
+      return axios.delete(`profile/album/delete/${id}`);
     },
 
     // for images
@@ -146,9 +154,8 @@ export default {
       commit("setProfilePic", res.data.data);
     },
 
-    async setCoverPic({ commit }, id) {
+    async setCoverPic(id) {
       const res = await axios.post(`profile/makeCover/picture/${id}`);
-      commit("setCoverPic", res.data.data);
     },
 
     async deleteImage({ commit }, id) {

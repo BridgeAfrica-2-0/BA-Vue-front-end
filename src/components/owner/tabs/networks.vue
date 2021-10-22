@@ -19,83 +19,87 @@
           cols="12"
           md="12"
           lg="6"
+          class="p-0 pr-1"
           v-for="(network, index) in profileNetworks"
           :key="index"
         >
-          <div class="people-style shadow">
-            <b-row class="p-1">
-              <b-col
-                @click="viewNetwork(network)"
-                md="3"
-                xl="3"
-                lg="3"
-                cols="5"
-                sm="3"
-              >
-                <div class="center-img" v-b-modal.modal-1>
-                  <img :src="network.image" alt="" />
-                </div>
-              </b-col>
-              <b-col md="9" cols="7" lg="9" xl="9" sm="9">
-                <p class="textt ml-5">
-                  <b-row>
-                    <b-col>
-                      <strong class="net-title">
-                        <router-link to="/businessfollower">
+
+        
+
+        
+
+
+         <div class="people-style shadow">
+                <b-link
+                >
+                  <div class="float-right others">
+
+
+                    <b-dropdown size="lg"  variant="link" toggle-class="text-decoration-none" no-caret>
+                 <template #button-content>
+                  <b-icon
+                      icon="three-dots-vertical"
+                      variant="primary"
+                      class="icon-size"
+                                      ></b-icon>
+                      </template>
+                      <b-dropdown-item 
+                                    
+                                     @click="showEditNetwork(network)"  v-b-modal.updateBusinessModal variant="">Edit</b-dropdown-item>
+                      <b-dropdown-item  @click="deleteNetwork(network)" > Delete</b-dropdown-item>
+                    </b-dropdown>
+  
+                    
+                  </div>
+                </b-link>
+                <div class="inline-flex">
+                  <div >
+                    <div class="center-img">
+                      
+                         <img :src="network.image" class="r-image" /> 
+                        
+                    </div>
+                  </div>
+
+                  <div>
+                    <p class="textt text">
+                     
+                      <strong class="title">
+                       <router-link to="/businessfollower">
                           {{ network.name }}
                         </router-link>
-                      </strong></b-col
-                    >
-                    <b-col cols="4">
-                      <b-dropdown
-                        size="lg"
-                        variant="link"
-                        toggle-class="text-decoration-none"
-                        no-caret
+                      </strong>
+                      <br />
+                      <span v-if=" Array.isArray(network.network_category) ">  
+                      <span class="m-1" v-for=" cat in network.network_category" :key="cat.name "> {{cat.name}} </span> </span>
+                      <br />
+                      
+                    {{ network.member_count }}  Community  <br />
+
+                      <span class="location">
+                        <b-icon-geo-alt class="ico"></b-icon-geo-alt>
+                        {{ network.city }} {{ network.country }}  {{ network.address }} 
+                      </span>
+                      <br />
+
+                      <read-more
+                        more-str="read more"
+                        class="readmore"
+                        :text="network.description"
+                        link="#"
+                        less-str="read less"
+                        :max-chars="100"
                       >
-                        <template #button-content>
-                          <b-icon
-                            icon="three-dots-vertical"
-                            class="icon-size"
-                          ></b-icon>
-                        </template>
-                        <b-dropdown-item-button
-                          @click="showEditNetwork(network)"
-                        >
-                          <b-icon icon="pencil" aria-hidden="true"></b-icon>
-                          Edit
-                        </b-dropdown-item-button>
-                        <b-dropdown-item-button @click="deleteNetwork(network)">
-                          <b-icon icon="trash" aria-hidden="true"></b-icon>
-                          Delete
-                        </b-dropdown-item-button>
-                      </b-dropdown>
-                    </b-col>
-                  </b-row>
+                      </read-more>
+                    </p>
+                  </div>
+                </div>
+              </div>
 
-                  {{ network.network_category }}
-                  <br />
-                  {{ network.member_count }} <br />
 
-                  <span class="location">
-                    <b-icon-geo-alt class="ico"></b-icon-geo-alt>
-                    {{ network.address }}
-                  </span>
-                  <br />
 
-                  <read-more
-                    more-str="read more"
-                    class="readmore"
-                    :text="network.description"
-                    link="#"
-                    less-str="read less"
-                    :max-chars="100"
-                  >
-                  </read-more>
-                </p>
-              </b-col>
-            </b-row>
-          </div>
+
+  
         </b-col>
       </b-row>
     </div>
@@ -743,12 +747,8 @@ export default {
       let url = "network?page=" + this.page;
       if(this.page==1){
         
-         this.$store.commit("profile/setProfileNetwork", []);
-         console.log("commited the ne w profile networks");
-         
-
          this.profileNetworks.splice(0);
-         console.log(this.profileNetworks);
+        
       }
       
        this.$store.dispatch("profile/loadMore",url)
@@ -953,6 +953,10 @@ export default {
 </script>
 
 <style scoped>
+.inline-flex{
+ display: inline-flex;
+}
+
 @media only screen and (max-width: 768px) {
   .blec-font {
     font-size: 10px;
@@ -1076,8 +1080,9 @@ p {
   margin-top: -0px;
 }
 
-.text {
-  margin-top: 50px;
+.others{
+      position: absolute;
+    right: 0px;
 }
 
 .network {
@@ -1098,9 +1103,7 @@ p {
   .create {
     height: 150px;
   }
-  .text {
-    margin-top: 30px;
-  }
+ 
 
   .white-box {
     position: relative;
@@ -1234,7 +1237,6 @@ p {
     padding: 1px;
     text-align: left;
 
-    margin-left: -30px;
 
     margin-right: -5px;
 
@@ -1256,8 +1258,7 @@ p {
 
     padding: 1px;
     text-align: left;
-
-    margin-left: -30px;
+  padding-left: 10px !important;
 
     margin-right: -5px;
 
@@ -1279,9 +1280,10 @@ p {
     font-style: normal;
 
     padding: 1px;
+    padding-left: 10px;
     text-align: left;
 
-    margin-left: -30px;
+    
 
     margin-right: -5px;
 
@@ -1305,7 +1307,7 @@ p {
     padding: 1px;
     text-align: left;
 
-    margin-left: -30px;
+   
 
     margin-right: -5px;
 
@@ -1372,7 +1374,7 @@ p {
     padding: 1px;
     text-align: left;
 
-    margin-left: 30px;
+    margin-left: 70px;
 
     margin-right: -5px;
 

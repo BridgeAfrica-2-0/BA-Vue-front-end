@@ -1,5 +1,6 @@
 <template>
   <div class="p-0 m-0">
+    
     <div class="col-md-12 p-0">
       <fas-icon
         class="violet float-left mr-1 icon-size primary"
@@ -145,7 +146,7 @@
                     tag-placeholder="Add this as new tag"
                     placeholder="Search or add a tag"
                     label="subcategory"
-                    track-by="sub_cat_id"
+                    track-by="subcategory_id"
                     :options="scategories"
                     :multiple="true"
                     :taggable="true"
@@ -435,7 +436,7 @@
                       <b-form-input
                         id="business_name"
                         name="business_name"
-                        v-model="form.business_name"
+                        v-model="business_name"
                         :state="validateState('business_name')"
                         aria-describedby="business_name-feedback"
                       ></b-form-input>
@@ -448,7 +449,7 @@
                     <div class="form-group">
                       <label for="country" class="username"> Keywords :</label
                       ><br />
-              
+                      {{business_keyword}}
                       <multiselect
                         v-model="business_keyword"
                         tag-placeholder="Add this as new Keyword"
@@ -494,12 +495,13 @@
 
                 <div>
                   <label class="typo__label"> Sub Category</label>
+                  {{filterselectvalue}}
                   <multiselect
                     v-model="filterselectvalue"
                     tag-placeholder="Add this as new tag"
                     placeholder="Search or add a tag"
-                    label="subcategory"
-                    track-by="sub_cat_id"
+                    label="name"
+                    track-by="subcategory_id"
                     :options="scategories"
                     :multiple="true"
                     :taggable="true"
@@ -723,81 +725,7 @@
 
       <div class="row mb-4">
         <div class="col">
-
-
-
-
-
-
-
-
-      <div class="people-style shadow">
-               
-
-                <b-row>
-                  <b-col md="3" xl="3" lg="5" cols="5" sm="3">
-                    <div class="center-img">
-                      <splide :options="options" class="r-image">
-                        <splide-slide cl>
-                          <img :src="business.logo_path" class="r-image" />
-                        </splide-slide>
-                      </splide>
-                    </div>
-                  </b-col>
-
-                  <b-col md="5" cols="7" lg="7" xl="9" sm="5">
-                    <p class="textt text">
-                     
-                      <strong class="title">
-                        {{ business.name }}
-                      </strong>
-                      <br />
-                      <span v-if=" Array.isArray(business.category) ">  
-                      <span class="m-1" v-for=" cat in business.category" :key="cat.name "> {{cat.name}} </span> </span>
-                      <br />
-                      {{ business.community }} Community  {{business.id}} <br />
-
-                      <span class="location">
-                        <b-icon-geo-alt class="ico"></b-icon-geo-alt>
-                        {{ business.city }} {{ business.country }}
-                      </span>
-                      <br />
-
-                      <read-more
-                        more-str="read more"
-                        class="readmore"
-                        :text="business.about_business"
-                        link="#"
-                        less-str="read less"
-                        :max-chars="100"
-                      >
-                      </read-more>
-                    </p>
-                  </b-col>
-                </b-row>
-              </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-          <h6 class="mb-0"><b></b></h6>
+      <h6 class="mb-0"><b></b></h6> 
           <b-row>
             <b-col
               md="12"
@@ -812,34 +740,35 @@
                   <div class="float-right">
 
 
-                    <b-dropdown size="lg"  variant="primary" toggle-class="text-decoration-none" no-caret>
-    <template #button-content>
-     <b-icon
+                    <b-dropdown size="lg"  variant="link" toggle-class="text-decoration-none" no-caret>
+                 <template #button-content>
+                  <b-icon
                       icon="three-dots-vertical"
+                      variant="primary"
                       class="icon-size"
-                    ></b-icon>
-    </template>
-    <b-dropdown-item 
-                  
-                  @click="editBusiness(business.id)"  v-b-modal.updateBusinessModal variant="">Edit</b-dropdown-item>
-    <b-dropdown-item > Delete</b-dropdown-item>
-  </b-dropdown>
+                                      ></b-icon>
+                      </template>
+                      <b-dropdown-item 
+                                    
+                                    @click="editBusiness(business.id)"  v-b-modal.updateBusinessModal variant="">Edit</b-dropdown-item>
+                      <b-dropdown-item   @click="deleteBusiness(business.id)" > Delete</b-dropdown-item>
+                    </b-dropdown>
   
                     
                   </div>
                 </b-link>
-                <b-row>
-                  <b-col md="3" xl="3" lg="5" cols="5" sm="3">
+                <div class="inline-flex">
+                  <div >
                     <div class="center-img">
                       <splide :options="options" class="r-image">
                         <splide-slide cl>
-                          <img :src="business.logo_path" class="r-image" />
+                         <img :src="business.logo_path" class="r-image" /> 
                         </splide-slide>
                       </splide>
                     </div>
-                  </b-col>
+                  </div>
 
-                  <b-col md="5" cols="7" lg="7" xl="9" sm="5">
+                  <div >
                     <p class="textt text">
                      
                       <strong class="title">
@@ -867,8 +796,8 @@
                       >
                       </read-more>
                     </p>
-                  </b-col>
-                </b-row>
+                  </div>
+                </div>
               </div>
             </b-col>
           </b-row>
@@ -897,7 +826,7 @@ export default {
   data() {
     return {
       useas: "",
-      page:"",
+      page:1,
       bizId:"",
       infiniteId:2,
       editbiz: "",
@@ -906,6 +835,9 @@ export default {
       phone1: null,
       phone2: null,
       emaill: null,
+      email: null,
+      cancel:null,
+      business:null,
       website: null,
       first_page: "true",
       country: [],
@@ -977,7 +909,14 @@ export default {
 
     
     infiniteHandler($state) {  
-      console.log("business/userBusiness/" + this.page);
+
+      console.log("loading started");
+
+       if(this.page==1){
+        
+       //  this.profilebusiness.splice(0);
+        
+      }
       let url = "business/userBusiness/" + this.page;
       this.$store.dispatch("profile/loadMore",url)
         .then(({ data }) => {
@@ -992,7 +931,7 @@ export default {
           }
         })
         .catch((err) => {
-          console.log({ err: err });
+         // console.log({ err: err });
         });
     },
 
@@ -1013,6 +952,51 @@ export default {
 
 
 
+    deleteBusiness(id){
+
+       let loader = this.$loading.show({
+        container: this.fullPage ? null : this.$refs.preview,
+        canCancel: true,
+        onCancel: this.onCancel,
+        color: "#e75c18",
+      });
+
+
+       let url="business/delete/"+id;
+        this.$store
+        .dispatch("profile/deleteBusiness", url) 
+        .then(() => {
+          console.log("wow biz deleted");
+
+           loader.hide();
+
+            this.page = 1;
+           this.infiniteId += 1;
+
+            this.flashMessage.show({
+                status: "success",
+
+                message: "Business Deleted",
+
+                blockClass: "custom-block-class",
+              }); 
+        })
+        .catch((err) => {
+          console.log({ err: err });
+           loader.hide();
+            this.flashMessage.show({
+                status: "error",
+
+                message: "Unable to Delete this Business",
+
+                blockClass: "custom-block-class",
+              });
+
+        });
+    },
+
+
+
 
 
         
@@ -1020,29 +1004,47 @@ export default {
     setEditData(business){
       this.logo_url=business.logo
       this.business_name=business.name;
-      this.about=business.about;
+      this.about=business.about_business;
       this.lat=business.lat;
       this.lng=business.lng;
       this.multiselecvalue=business.category;
       this.filterselectvalue=business.subCategory;
-      this.select_filterss=business.filter;
+    
+     this.select_filterss=business.filter;
+     this.business_name=business.name;
+     this.country=business.country;
       this.country=business.country;
       this.region=business.region;
-      this.division=business.division
+      this.division=business.division;
       this.municipality=business.council
       this.phone1=business.phone1;
       this.phone2=business.phone2
-      this.website=business.this.website;
+      this.website=business.website;
       this.locality=business.neigborhood;
       this.email=business.email;
       this.time_zone=business.timeZone;
-      this.business_keyword=business.business_keyword;
+      this.address=business.address;
+     // this.business_keyword=business.keywords;
+       this.business_keyword=[{ id:"2" , name:"blec"}];
+       console.log(this.business_keyword);
       this.address=business.address; 
+
 
       
 
     }
 ,
+
+
+
+      getpFilters: function() {
+      let sub_cat = [];
+      this.filterselectvalue.forEach((item) => {
+        sub_cat.push(item.subcategory_id);
+      });
+      return sub_cat;
+    },
+
     addTag(newTag) {
       const tag = {
         name: newTag,
@@ -1411,7 +1413,7 @@ export default {
         formData2.append("about_business", this.about);
 
         this.axios
-          .post("business/edit"+this.bizId, formData2, {
+          .post("business/edit/"+this.bizId, formData2, {
             headers: {
               "Content-Type": "multipart/form-data",
             },
@@ -1553,7 +1555,7 @@ export default {
     selectedsubcategories: function() {
       let sub_cat = [];
       this.filterselectvalue.forEach((item) => {
-        sub_cat.push(item.sub_cat_id);
+        sub_cat.push(item.subcategory_id);
       });
       return sub_cat;
     },
@@ -1625,6 +1627,11 @@ import "vue-form-wizard/dist/vue-form-wizard.min.css";
 </script>
 
 <style scoped>
+
+.inline-flex{
+ display: inline-flex;
+}
+
 .username{
   color: black;
 }
@@ -1751,7 +1758,7 @@ import "vue-form-wizard/dist/vue-form-wizard.min.css";
     font-style: normal;
     padding: 1px;
     text-align: left;
-    margin-left: -30px;
+    padding-left: 10px;
     margin-right: -5px;
     line-height: 25px;
   }
@@ -1784,7 +1791,7 @@ import "vue-form-wizard/dist/vue-form-wizard.min.css";
     font-style: normal;
     padding: 1px;
     text-align: left;
-    margin-left: 30px;
+    margin-left: 70px;
     margin-right: -5px;
     line-height: 25px;
   }

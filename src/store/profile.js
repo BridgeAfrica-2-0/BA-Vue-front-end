@@ -391,6 +391,19 @@ export default {
       });
 
     },
+
+
+    deleteBusiness({commit}, url){
+
+      return axios
+      .delete(url)
+      .then(({ data }) => {
+        console.log(data);
+      });
+
+    },
+  
+
   
     Tcommunity({commit}){
      
@@ -417,11 +430,15 @@ export default {
     },
 
    loadMore({commit}, url){
-   
+     console.log("hello you are loading now");
+     console.log(url);
     return axios.get(url)
     .then(( data ) => {
      return data;
-    });
+    }) .catch((err) => {
+      console.log("Something went wrong");
+      console.log({err:err})
+    });       
 
    },
 

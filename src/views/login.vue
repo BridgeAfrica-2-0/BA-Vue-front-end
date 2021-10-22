@@ -263,6 +263,7 @@ export default {
           }
         })
         .catch(err => {
+          console.log(err);
           this.sending = false;
 
           if (err.response.status == 422) {

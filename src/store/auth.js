@@ -218,5 +218,10 @@ export default {
     isLogged: (state) => !!state.user,
     isVerified: (state) => !!state.user,
     user: (state) => state.user,
+
+    getAuthToken(state) {
+      return `Bearer ${state.user.accessToken}`
+    },
+    
   },
 };

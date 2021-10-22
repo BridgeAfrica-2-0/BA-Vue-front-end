@@ -13,6 +13,7 @@ import profile from "./profile";
 import follower from "./follower";
 import networkProfile from "./networkProfile";
 
+import UserProfileOwner from "./UserProfileOwner"
 import axios from "axios";
 import { search } from "./search";
 import { social } from "./social";
@@ -20,9 +21,7 @@ import { social } from "./social";
 Vue.use(Vuex);
 
 //axios.defaults.baseURL = process.env.VUE_APP_API_URL;
-//axios.defaults.baseURL = "https://team4test.maxinemoffett.com/api/v1/"
-axios.defaults.baseURL = "https://686a-154-72-167-33.ngrok.io/api/v1/"
-
+axios.defaults.baseURL = "https://team4test.maxinemoffett.com/api/v1/"
 
 export default new Vuex.Store({
   modules: {
@@ -40,7 +39,6 @@ export default new Vuex.Store({
     market,
     social,
     networkProfile,
-
-  }
-
+    UserProfileOwner
+  },
 });

@@ -4,34 +4,34 @@
       class="border-0 p-0 m-0"
       style="
     padding: 3px;"
-    >
+    >  
       <div class=" border shadow   p-tab p-3">
         <span>
           <h6 class="title">
             <fas-icon class="icons" :icon="['fas', 'users']" size="lg" />
-            <b> COMMUNITY </b> <span class="h4-color"> {{peoplecommunity.total_followers}}  </span>
+            <b> COMMUNITY </b> <span class="h4-color"> {{totalcommunity.total}} </span>
           </h6>
         </span>
 
-        <b-tabs pills content-class="mt-3  f-left ">
+        <b-tabs lazy pills content-class="mt-3  f-left ">
           <b-tab active>
             <template slot="title">
               People
               <span class="spa-color">
-                {{peoplecommunity.totat_following}} 
+                {{peoplecommunity.total_people}} 
               </span>
             </template>
 
             <div>
               <b-row>
                 <b-col class="p-2">
-                  <b-tabs fill pills content-class="mt-3  f-left m-up">
+                  <b-tabs lazy fill pills content-class="mt-3  f-left m-up">
 
                     <b-tab active>
                       <template slot="title">
                         Followers
                         <span class="spa-color">
-                          {{businesscommunity.total_Business}}
+                          {{peoplecommunity.total_followers}}
                         </span>
                       </template>
 
@@ -50,7 +50,7 @@
                       <template slot="title">
                         Following
                         <span class="spa-color">
-                          {{peoplecommunity.totat_following}} 
+                          {{peoplecommunity.total_following}} 
                         </span>
                       </template>
 
@@ -79,7 +79,7 @@
             </template>
 
             <div>
-              <b-tabs fill pills content-class="mt-3  f-left m-up checkcheck">
+              <b-tabs lazy fill pills content-class="mt-3  f-left m-up checkcheck">
                 <b-tab active>
                   <template slot="title">
                     Followers
@@ -108,36 +108,36 @@
                   </template>
 
                   <div class="s-comcard">
-                    <b-row>
+                
                       <div>
                         <Business
                           :business="businesscommunity.Business_following"
                         />
                       </div>
-                    </b-row>
+                  
                   </div>
                 </b-tab>
               </b-tabs>
             </div>
           </b-tab>
-
+         
 
 
           <b-tab>
             <template slot="title">
               Network
               <span class="spa-color">
-               {{ count(businesscommunity.total_Business) }}
+               0
               </span>
             </template>
 
             <div>
-              <b-tabs fill pills content-class="mt-3  f-left m-up checkcheck">
+              <b-tabs lazy fill pills content-class="mt-3  f-left m-up checkcheck">
                 <b-tab active>
                   <template slot="title">
                     Followers
                     <span class="spa-color">
-                      {{ count(businesscommunity.total_followers) }}
+                     0
                     </span>
                   </template>
 
@@ -145,7 +145,7 @@
                    
                       <div>
                         <Network
-                         :network="businesscommunity.Business_followers" 
+                         :network="[]" 
                         />
                       </div>
                   
@@ -156,7 +156,7 @@
                   <template slot="title">
                     Following
                     <span class="spa-color">
-                    {{ count(businesscommunity.total_followers) }}
+                 0
                     </span>
                   </template>
 
@@ -164,7 +164,7 @@
                    
                       <div class="p-2">
                         <Network
-                          :network="businesscommunity.Business_followers" 
+                          :network="[]" 
                         />
                       </div>
                    

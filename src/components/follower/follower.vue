@@ -133,7 +133,7 @@
     <div class="body p-2">
       <b-row>
         <b-col cols="12" class="p-3">
-          <b-tabs content-class="mt-3" fill pills>
+          <b-tabs lazy content-class="mt-3" fill pills>
             <b-tab title="Posts" active>
               <Post />
             </b-tab>
@@ -159,6 +159,13 @@ import Network from "@/components/follower/tabs/networkk";
 
 export default {
   name: "Home",
+  data() {
+    return {
+      foll_id: '',  
+     
+    };    
+  },
+
   components: {
     Post,
     About,
@@ -170,12 +177,12 @@ export default {
 
 
   mounted(){
-     this.url = this.$route.params.id;
+     this.foll_id = this.$route.params.id;
 
 
 
       this.$store
-      .dispatch("follower/loadUserPostIntro", null)
+      .dispatch("follower/loadUserPostIntro", this.foll_id)
       .then((response) => {
        
       })
@@ -186,7 +193,7 @@ export default {
 
  
       this.$store
-      .dispatch("follower/UcommunityFollower", null)
+      .dispatch("follower/UcommunityFollower", this.foll_id)
       .then((response) => {
        
       })
@@ -198,7 +205,7 @@ export default {
 
       
       this.$store
-      .dispatch("follower/UcommunityFollowing", null)
+      .dispatch("follower/UcommunityFollowing", this.foll_id)
       .then((response) => {
        
       })
@@ -208,7 +215,7 @@ export default {
 
      
       this.$store
-      .dispatch("follower/Tcommunity", null)
+      .dispatch("follower/Tcommunity", this.foll_id)
       .then((response) => {
        
       })
@@ -218,7 +225,7 @@ export default {
   
    
       this.$store
-      .dispatch("follower/BcommunityFollower", null)
+      .dispatch("follower/BcommunityFollower", this.foll_id)
       .then((response) => {
        
       })
@@ -228,7 +235,7 @@ export default {
 
      
       this.$store
-      .dispatch("follower/BcommunityFollowing", null)
+      .dispatch("follower/BcommunityFollowing", this.foll_id)
       .then((response) => {
        
       })
@@ -240,7 +247,7 @@ export default {
 
       
       this.$store
-      .dispatch("follower/NcommunityFollower", null)
+      .dispatch("follower/NcommunityFollower", this.foll_id)
       .then((response) => {
        
       })
@@ -250,7 +257,7 @@ export default {
 
       
       this.$store
-      .dispatch("follower/NcommunityFollowing", null)
+      .dispatch("follower/NcommunityFollowing", this.foll_id)
       .then((response) => {
        
       })
@@ -269,7 +276,7 @@ export default {
 
 
 
-
+   
 
 
 },

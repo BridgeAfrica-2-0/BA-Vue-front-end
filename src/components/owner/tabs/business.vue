@@ -136,11 +136,11 @@ export default {
 
       if(this.type=="Follower"){ 
 
-      return  this.$store.state.profile.BcommunityFollower.business_followers;  
+      return  this.$store.state.follower.BcommunityFollower.business_followers;  
 
        }else{
 
-         return  this.$store.state.profile.BcommunityFollowing.business_following; 
+         return  this.$store.state.follower.BcommunityFollowing.business_following; 
        }
    }
     
@@ -159,30 +159,56 @@ export default {
     },
 
       
-       infiniteHandler($state) { 
+      
+          infiniteHandler($state) { 
 
       let url = null;
 
          if(this.type=="Follower"){  
           url="profile/business/follower/"
          }else{
-          url="profile/network/following/";
+          url="profile/business/following/";
          }
       axios
         .get(url + this.page)
         .then(({ data }) => {
-          if (data.data.length) {
-            this.page += 1;
-           if(this.type=="Follower"){  
+        
+          if(this.type=="Follower"){  
+
+
+          if (data.data.business_followers.length) {
+            
+         
             this.businesses.push(...data.data.business_followers); 
+            this.page += 1;
+            
+            $state.loaded();
+
            }else{
-              this.businesses.push(...data.data.business_following);
+              $state.complete();
+             
+           }
+        
+          }else{
+
+
+
+
+             if (data.data.business_following.length) {
+            
+         
+            this.businesses.push(...data.data.business_following); 
+            this.page += 1;
+            
+            $state.loaded();
+
+           }else{
+              $state.complete();
+             
            }
 
-            $state.loaded();
-          } else {
-            $state.complete();
           }
+           
         })
         .catch((err) => {
           console.log({ err: err });

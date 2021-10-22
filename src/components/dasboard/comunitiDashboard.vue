@@ -9,36 +9,35 @@
         <span>
           <h6 class="title">
             <fas-icon class="icons" :icon="['fas', 'users']" size="lg" />
-            <b> COMMUNITY </b> <span class="h4-color"> {{ com.total }} </span>
+            <b> COMMUNITY </b> <span class="h4-color"> {{ nFormatter(total.total_community)}} </span>
           </h6>
         </span>
 
-        <b-tabs pills content-class="mt-3  f-left ">
+        <b-tabs lazy pills content-class="mt-3  f-left ">
           <b-tab active>
             <template slot="title">
               People
               <span class="spa-color">
-                {{ count(business.people[0].total_people) }}
+               {{ nFormatter(total.total_people)}} 
               </span>
             </template>
 
             <div>
               <b-row>
                 <b-col class="p-2">
-                  <b-tabs fill pills content-class="mt-3  f-left m-up">
+                  <b-tabs lazy fill pills content-class="mt-3  f-left m-up">
                     <b-tab active>
                       <template slot="title">
                         Followers
                         <span class="spa-color">
-                          {{ count(business.people[0].total_user_follower) }}
+                         {{ nFormatter(total.total_user_follower)}}
                         </span>
                       </template>
 
                       <div class="s-comcard">
                        
                           <div>
-                            <People
-                              :people="business.people[0].user_followers"
+                            <People type="Follower"
                             />
                           </div>
                       
@@ -49,7 +48,7 @@
                       <template slot="title">
                         Following
                         <span class="spa-color">
-                          {{ count(business.people[0].total_user_following) }}
+                           {{ nFormatter(total.total_user_following)}}
                         </span>
                       </template>
 
@@ -57,7 +56,7 @@
                        
                           <div>
                             <People
-                              :people="business.people[0].user_following"
+                              type="Following"
                             />
                           </div>
                       
@@ -71,19 +70,19 @@
 
           <b-tab>
             <template slot="title">
-              Businesses
+              Businesses 
               <span class="spa-color">
-                {{ count(business.people[0].total_business) }}
+               {{ nFormatter(total.total_business)}}
               </span>
             </template>
 
             <div>
-              <b-tabs fill pills content-class="mt-3  f-left m-up checkcheck">
+              <b-tabs  lazy fill pills content-class="mt-3  f-left m-up checkcheck">
                 <b-tab active>
                   <template slot="title">
                     Followers
                     <span class="spa-color">
-                      {{ count(business.people[0].total_business_follower) }}
+                    {{ nFormatter(total.total_business_follower)}}
                     </span>
                   </template>
 
@@ -91,7 +90,7 @@
                     
                       <div>
                         <Business
-                          :business="business.business[0].business_followers"
+                         type="Follower"
                         />
                       </div>
                    
@@ -102,7 +101,7 @@
                   <template slot="title">
                     Following
                     <span class="spa-color">
-                      {{ count(business.people[0].total_business_following) }}
+                      {{ nFormatter(total.total_business_following)}}
                     </span>
                   </template>
 
@@ -110,7 +109,7 @@
                   
                       <div>
                         <Business
-                          :business="business.business[0].business_following"
+                         type="Following"
                         />
                       </div>
                     
@@ -125,17 +124,17 @@
             <template slot="title">
               Network
               <span class="spa-color">
-                {{ count(business.network[0].total_network) }}
+             {{ nFormatter(total.total_network)}}
               </span>
             </template>
 
             <div>
-              <b-tabs fill pills content-class="mt-3  f-left m-up checkcheck">
+              <b-tabs lazy fill pills content-class="mt-3  f-left m-up checkcheck">
                 <b-tab active>
                   <template slot="title">
                     Followers
                     <span class="spa-color">
-                      {{count( business.network[0].total_network_follower) }}
+                   {{ nFormatter(total.total_network_follower)}}
                     </span>
                   </template>
 
@@ -143,7 +142,7 @@
                    
                       <div>
                         <Network
-                          :network="business.network[0].network_followers" 
+                           type="Follower"
                         />
                       </div>
                     
@@ -154,7 +153,7 @@
                   <template slot="title">
                     Following
                     <span class="spa-color">
-                      {{ count(business.network[0].total_network_following) }}
+                      {{ nFormatter(total.total_network_following)}}
                     </span>
                   </template>
 
@@ -162,7 +161,7 @@
                   
                       <div class="p-2">
                         <Network
-                          :network="business.network[0].network_following"
+                          type="Following"
                         />
                       </div>
                     
@@ -192,7 +191,95 @@ export default {
     Business,
     Network,
   },
+
+  mounted(){
+    
+      this.$store
+      .dispatch("profile/Tcommunity", null)
+      .then((response) => {
+       
+      })
+      .catch((error) => {
+        console.log({error:error});
+      });
+
+
+
+
+      
+
+ 
+      this.$store
+      .dispatch("profile/UcommunityFollower", null)
+      .then((response) => {
+       
+      })
+      .catch((error) => {
+        console.log({error:error});
+      });
+
+
+
+      
+      this.$store
+      .dispatch("profile/UcommunityFollowing", null)
+      .then((response) => {
+       
+      })
+      .catch((error) => {
+        console.log({error:error});
+      });
+
+     
+   
+      this.$store
+      .dispatch("profile/BcommunityFollower", null)
+      .then((response) => {
+       
+      })
+      .catch((error) => {
+        console.log({error:error});
+      });
+
+     
+      this.$store
+      .dispatch("profile/BcommunityFollowing", null)
+      .then((response) => {
+       
+      })
+      .catch((error) => {
+        console.log({error:error});
+      });
+
+
+
+      
+      this.$store
+      .dispatch("profile/NcommunityFollower", null)
+      .then((response) => {
+       
+      })
+      .catch((error) => {
+        console.log({error:error});
+      });
+
+      
+      this.$store
+      .dispatch("profile/NcommunityFollowing", null)
+      .then((response) => {
+       
+      })
+      .catch((error) => {
+        console.log({error:error});
+      });
+
+  },
   computed: {
+
+      total(){
+    return  this.$store.state.profile.Tcommunity;
+   },
+
     business() {
       return this.$store.getters["dashboardcommunity/getProfileCommunity"];
     },
@@ -228,7 +315,22 @@ export default {
       if (number >= 1000) {
         return number / 1000 + "K";
       } else return number;
-    }
+    },
+
+
+       nFormatter(num) {
+      if (num >= 1000000000) {
+        return (num / 1000000000).toFixed(1).replace(/\.0$/, '') + 'G';
+      }
+      if (num >= 1000000) {
+        return (num / 1000000).toFixed(1).replace(/\.0$/, '') + 'M';
+      }
+      if (num >= 1000) {
+        return (num / 1000).toFixed(1).replace(/\.0$/, '') + 'K';
+      }
+      return num;
+    },
+
   }
 };
 </script>

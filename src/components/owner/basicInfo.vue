@@ -122,9 +122,6 @@ export default {
     info(){
    return this.$store.state.profile.profile_about;
     },
-
-
-
   }
 };
 </script>

@@ -4,7 +4,6 @@
       Do you want to join this network?
     </b-modal>
 
-
     <b-row>
         <b-col lg="6" sm="12" class="p-2" v-for="item in network" :key="item.id">
 
@@ -29,8 +28,17 @@
               {{ item.location_description }}
             </span>
             <br />
+       
+        <read-more
+              more-str="read more"
+              class="readmore"
+              :text="item.about_network"
+              link="#"
+              less-str="read less"
+              :max-chars="35"
+            >
+            </read-more>
 
-            {{ item.about_network }} <b-link>Read More</b-link>
           </p>
         </b-col>
 
@@ -73,28 +81,109 @@
       </b-row>
     </div>
         </b-col>
+
+         
+         
     </b-row>
+    <infinite-loading @infinite="infiniteHandler"></infinite-loading>  
   </div>
 </template>
 
 <script>
+import axios from "axios";
 export default {
-  props: ["network"],
-  computed: {
-    business() {
-      return this.$store.getters["networkDetails/getdetails.category"];
-    }
+  props: ["type"],
+
+   data() {
+    return {
+      page: 1,
+      options: {
+        rewind: true,
+        autoplay: true,
+        perPage: 1,
+        pagination: false,
+
+        type: "loop",
+        perMove: 1
+      }
+    };
   },
-  created() {
-    this.$store
-      .dispatch("networkDetails/getndetails")
-      .then(() => {
-        console.log("the response");
-      })
-      .catch(err => {
-        console.log({ err: err });
-      });
+
+
+   computed: {
+   
+        network(){
+
+      if(this.type=="Follower"){ 
+
+      return  this.$store.state.profile.NcommunityFollower.network_followers;  
+
+       }else{
+
+         return  this.$store.state.profile.NcommunityFollowing.network_following; 
+       }
+   }
+   
+  },
+  methods:{
+
+      infiniteHandler($state) {
+
+        console.log("loading network 1 1")
+
+      let url = null;
+
+         if(this.type=="Follower"){  
+          url="profile/network/follower/"
+         }else{
+          url="profile/network/following/";
+         }
+      axios
+        .get(url + this.page)   
+        .then(({ data }) => {
+          console.log("lading network after response")
+          console.log(data);
+        if(this.type=="Follower"){
+         
+
+          if (data.data.network_followers.length) {
+            this.page += 1;
+            this.network.push(...data.data.network_followers);
+            
+            
+            $state.loaded();
+           }else{
+              $state.complete();
+           }
+
+
+          } else {
+            
+
+
+             if (data.data.network_following.length) {
+            this.page += 1;
+      
+            this.network.push(...data.data.network_following);
+            
+            
+            $state.loaded();
+           }else{
+              $state.complete();
+           }
+
+
+
+          }
+        }) 
+        .catch((err) => {
+          console.log({ err: err });
+        });
+    },
+
   }
+ 
+  
 };
 </script>
 
@@ -354,7 +443,7 @@ Width:160px
   border-bottom-right-radius: 5px;
 
   background: white;
-
+ height: 100%;
   background-color: #fff;
   background-clip: border-box;
   border: 1px solid rgba(0, 0, 0, 0.125);
@@ -384,7 +473,7 @@ Width:160px
   border-top-right-radius: 5px;
 
   border-bottom-right-radius: 5px;
-
+ height: 100%;
 
 
 

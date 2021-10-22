@@ -34,7 +34,13 @@ IconifyIcon.addIcon("home", homeIconData);
 Vue.use(Vuex);
 Vue.use(VueAxios, axios);
 
-import LoadScript from 'vue-plugin-load-script';
+
+import LoadScript from "vue-plugin-load-script";
+import InfiniteLoading from "vue-infinite-loading";
+
+import { loader } from "./mixins"
+
+//import LoadScript from "vue-plugin-load-script";
 
 Vue.use(LoadScript);
 
@@ -79,7 +85,7 @@ Vue.use(VueSocialauth, {
       client_secret: process.env.VUE_APP_GOOGLE_CLIENT_SECRETE,
       redirectUri: process.env.VUE_APP_GOOGLE_RETURN_URL,
     },
-  }
+  },
 });
 
 import FlashMessage from "@smartweb/vue-flash-message";
@@ -129,17 +135,19 @@ import "@/assets/css/bootstrap.css";
 Vue.use(BootstrapVue);
 Vue.use(IconsPlugin);
 
-import InfiniteLoading from 'vue-infinite-loading';
+//import InfiniteLoading from "vue-infinite-loading";
 
-Vue.use(InfiniteLoading, { /* options */ });
+Vue.use(InfiniteLoading, {
+  /* options */
+});
 
 Vue.use(VueGoogleMaps, {
   load: {
     key: "AIzaSyAGZU6cqra18t1fhN1AbzRsEc_pgt7n2C8",
-    libraries: "places"
+    libraries: "places",
   },
   autobindAllEvents: false,
-  installComponents: true
+  installComponents: true,
 });
 
 
@@ -154,14 +162,20 @@ import VueAgile from 'vue-agile'
 Vue.use(VueAgile);
 
 Vue.use(VueSocialSharing);
+import CoolLightBox from 'vue-cool-lightbox'
+import 'vue-cool-lightbox/dist/vue-cool-lightbox.min.css'
+
+Vue.use(CoolLightBox)
+
+
 Vue.component("v-select", vSelect);
 
 import i18n from "./i18n";
 
 Vue.config.productionTip = false;
+var user = null;
 
 new Vue({
-
   router,
   store,
   i18n,
@@ -170,23 +184,28 @@ new Vue({
     const userInfo = localStorage.getItem("user");
     if (userInfo) {
       const userData = JSON.parse(userInfo);
+      user = userData;
       this.$store.commit("auth/setUserData", userData);
     }
     axios.interceptors.response.use(
       (response) => response,
       (error) => {
-        console.log(error)        // remove loader when request return error
-        this.$store.dispatch("search/LOADING", false);
-
-        if (error.response && error.response.status === 401) {
+        if (error.response.status === 401) {
           // this.$store.dispatch("auth/logout");
-          //this.$router.push('/login')
           console.log("error has occure");
         }
         return Promise.reject(error);
       }
     );
-  },
 
+    axios.interceptors.request.use(function (config) {
+
+      if (user != null) {
+        config.headers.Authorization = `Bearer  ${user.accessToken}`;
+      }
+      return config;
+    });
+
+  },
   render: (h) => h(App),
 }).$mount("#app");

@@ -32,7 +32,7 @@
             </b-col>
             <b-col cols="10" md="11" class="pt-2">
               <h5 class="m-0 font-weight-bolder">
-                {{ item.bussines_name }}
+                {{ item.name }}
                 
               </h5>
               <p class="duration">{{ moment(item.created_at).fromNow() }}</p>
@@ -56,6 +56,7 @@
             <b-col v-if="item.media.length > 0" cols="12" class="mt-2">
               <div class="">
                 <lightbox
+                 css="h-200 h-lg-250 h-lg-500"
                   :cells="item.media.length"
                   :items="
                     item.media.map(function (a) {
@@ -135,6 +136,8 @@ export default {
   },
   data() {
     return {
+      
+      foll_id:'',
       moment: moment,
       page: 1,
       post: this.$store.state.businessOwner.ownerPost,
@@ -181,7 +184,7 @@ export default {
 
     infiniteHandler($state) {
       axios
-        .get("post/" + this.page)
+        .get("user/post/" + this.page+"?id="+this.foll_id)
         .then(({ data }) => {
           if (data.data.length) {
             this.page += 1;
@@ -243,16 +246,7 @@ export default {
       console.log("User cancelled the loader.");
     },
 
-    ownerPost() {
-      this.$store
-        .dispatch("profile/ownerPost")
-        .then(() => {
-          console.log("hey yeah");
-        })
-        .catch((err) => {
-          console.log({ err: err });
-        });
-    },
+ 
 
   
 
@@ -262,27 +256,20 @@ export default {
     hideModal() {
       this.$refs["modal-3"].hide();
     },
-    resetPostData() {
-      console.log("Test");
-      console.log("Reinitialisation des donnees du POST");
-      if (!this.isSubmitted) {
-        this.createPost.hyperlinks = [];
-        this.createPost.movies = [];
-        this.createPost.postBusinessUpdate = "";
-      }
-    },
+   
   },
   computed: {
     imageProfile() {
       return "yoo";
     },
 
-    business_logo() {
-      return this.$store.state.businessOwner.businessInfo.logo_path;
+ info: function () {
+      return this.$store.getters["profile/getUserPostIntro"];
     },
 
+    
     owner_post() {
-      return this.$store.state.businessOwner.ownerPost;
+      return this.$store.state.follower.ownerPost;
     },
 
     profileNamePost() {
@@ -294,6 +281,15 @@ export default {
   },
 };
 </script>
+
+<style >
+  
+  .h-lg-250{
+
+    height: 500px !important;
+  }
+ 
+</style>
 
 <style scoped>
 .custom-block-class {

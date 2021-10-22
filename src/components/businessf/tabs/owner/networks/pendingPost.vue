@@ -97,12 +97,14 @@ export default {
   name: "pendingPost",
   data: () => ({
     load: null,
+    networkId: "",
   }),
   beforeMount() {
     this.getPendingPost();
   },
   computed: {
     ...mapGetters({
+      getNetwork: "networkSetting/getNetwork",
       allPendingPost: "networkSetting/allPendingPost",
     }),
   },
@@ -114,7 +116,12 @@ export default {
     }),
     approved(id) {
       this.load = true;
-      this.approvedPost(id)
+      this.networkId = this.getNetwork.id;
+      let payload = {
+        network_id: this.networkId,
+        post_id: id,
+      };
+      this.approvedPost(payload)
         .then(() => {
           this.load = false;
         })
@@ -126,7 +133,12 @@ export default {
 
     unapproved(id) {
       this.load = true;
-      this.unapprovedPost(id)
+      this.networkId = this.getNetwork.id;
+      let payload = {
+        network_id: this.networkId,
+        post_id: id,
+      };
+      this.unapprovedPost(payload)
         .then(() => {
           this.load = false;
         })

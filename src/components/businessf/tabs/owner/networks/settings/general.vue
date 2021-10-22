@@ -12,10 +12,12 @@
           <b-form-group class="mb-0" v-slot="{ ariaDescribedby }">
             <b-form-radio-group
               class="pt-2 text"
+              v-model="privacy"
               :options="['Public', 'Private']"
               :aria-describedby="ariaDescribedby"
             ></b-form-radio-group>
           </b-form-group>
+          <div class="mt-3">{{ privacy }}</div>
         </b-form-group>
       </b-container>
       <hr />
@@ -33,13 +35,13 @@
           <b-form-group class="mb-0" v-slot="{ ariaDescribedby }">
             <b-form-radio-group
               :options="options"
-              v-model="Selected"
+              v-model="permissions"
               :aria-describedby="ariaDescribedby"
               name="radio-options"
               @change="check"
             ></b-form-radio-group>
           </b-form-group>
-          <div class="mt-3">{{ Selected }}</div>
+          <div class="mt-3">{{ permissions }}</div>
         </b-form-group>
       </b-container>
 
@@ -60,13 +62,13 @@
             class="text"
             name="checkbox-options"
             :options="lists"
-            v-model="SelectedList"
+            v-model="approval"
             :aria-describedby="ariaDescribedby"
             @change="test"
           >
           </b-form-checkbox-group>
         </b-form-group>
-        <div class="mt-3">{{ SelectedList }}</div>
+        <div class="mt-3">{{ approval }}</div>
       </b-container>
       <hr />
     </div>
@@ -76,7 +78,11 @@
     </b-container>
 
     <div class="b-bottomn">
-      <b-button variant="primary" class="a-button-l text"
+      <b-button
+        variant="primary"
+        class="a-button-l text"
+        @click="save"
+        :loading="load"
         >Save Changes</b-button
       >
       <br />
@@ -85,11 +91,15 @@
 </template>
 
 <script>
+import { mapActions, mapGetters } from "vuex";
 export default {
   name: "general",
   data: () => ({
-    Selected: "",
-    SelectedList: "",
+    load: false,
+    permissions: "",
+    approval: "",
+    privacy: "",
+    networkId: "",
     options: [
       {
         text: "Admin Only",
@@ -126,25 +136,56 @@ export default {
       },
     ],
   }),
+
+  computed: {
+    ...mapGetters({
+      getNetwork: "networkSetting/getNetwork",
+    }),
+  },
+
   methods: {
+    ...mapActions({
+      generalSave: "networkSetting/generalSave",
+    }),
+
     check() {
-      if (this.Selected == "admin") {
+      if (this.permissions == "admin") {
         this.lists[0].disabled = true;
         this.lists[1].disabled = true;
         this.lists[2].disabled = true;
-      } else if (this.Selected == "editor") {
+      } else if (this.permissions == "editor") {
         this.lists[0].disabled = false;
         this.lists[1].disabled = false;
         this.lists[2].disabled = true;
-      } else if (this.Selected == "member") {
+      } else if (this.permissions == "member") {
         this.lists[0].disabled = true;
         this.lists[1].disabled = true;
         this.lists[2].disabled = false;
-      } else if (this.Selected == "editor and member") {
+      } else if (this.permissions == "editor and member") {
         this.lists[0].disabled = false;
         this.lists[1].disabled = false;
         this.lists[2].disabled = true;
       }
+    },
+
+    save() {
+      this.laod = true;
+      this.networkId = this.getNetwork.id;
+      let payload = {
+        networkId: this.networkId,
+        privacy: this.privacy,
+        post_permission: this.permissions,
+        post_approval: this.approval,
+      };
+      this.generalSave(payload)
+        .then(() => {
+          this.load = false;
+          alert("Successful");
+        })
+        .catch((err) => {
+          this.load = false;
+          console.log(err);
+        });
     },
   },
 };

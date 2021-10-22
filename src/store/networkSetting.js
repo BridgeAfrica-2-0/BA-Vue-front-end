@@ -13,6 +13,7 @@ export default {
     pendingPosts: [],
     keywordAlerts: [],
     notifications: [],
+    general: [],
   },
   getters: {
     //getting blocked users from store
@@ -59,6 +60,11 @@ export default {
     },
   },
   mutations: {
+    // setting general section
+    generalSave(state, payload) {
+      state.general = payload;
+    },
+
     // setting network info
     saveChange(state, payload) {
       state.networks = payload;
@@ -150,6 +156,15 @@ export default {
       commit("setNetwork", res.data);
     },
 
+    async generalSave({ commit }, payload) {
+      const res = await axios.post(
+        `network/general-settings/${payload.networkId}`,
+        payload
+      );
+
+      commit("generalSave", res.data);
+    },
+
     async saveChange({ commit }, info, networkId) {
       const res = await axios.post(`network/update/${networkId}`, info);
 
@@ -185,8 +200,11 @@ export default {
     },
 
     // assigning roles
-    async assignRole({ commit }) {
-      const res = await axios.post("");
+    async assignRole({ commit }, payload) {
+      const res = await axios.post(
+        `network/roles/${payload.networkId}/assign`,
+        payload
+      );
 
       commit("assignRole", res.data);
     },
@@ -241,15 +259,15 @@ export default {
     },
 
     //approve pending post
-    async approvedPost({ commit }, id) {
-      const res = await axios.post("network/network/post/approve", id);
+    async approvedPost({ commit }, payload) {
+      const res = await axios.post("network/network/post/approve", payload);
 
       commit("setApprovedPost", res.data);
     },
 
     //decline pending post
-    async unapprovedPost({ commit }, id) {
-      const res = await axios.post("network/network/post/decline", id);
+    async unapprovedPost({ commit }, payload) {
+      const res = await axios.post("network/network/post/decline", payload);
 
       commit("setDeclinedPost", res.data);
     },

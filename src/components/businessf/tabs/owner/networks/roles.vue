@@ -12,10 +12,12 @@
             label-class="font-weight-bold pt-0"
             class="mb-0"
           >
-            <b-form-select>
-              <b-form-select-option :value="memberString">{{
-                memberString.name
-              }}</b-form-select-option>
+            <b-form-select v-model="roleAssignment.user">
+              <b-form-select-option
+                v-for="(member, index) in memberString"
+                :key="index"
+                >{{ member }}</b-form-select-option
+              >
             </b-form-select>
           </b-form-group>
         </b-col>
@@ -28,16 +30,21 @@
             label-class="font-weight-bold pt-0"
             class="mb-0"
           >
-            <b-form-select class="mb-3">
-              <b-form-select-option :value="roleString">{{
-                roleString.name
-              }}</b-form-select-option>
+            <b-form-select v-model="roleAssignment.role" class="mb-3">
+              <b-form-select-option
+                v-for="(member, index) in roleString"
+                :key="index"
+                >{{ roleString }}</b-form-select-option
+              >
             </b-form-select>
           </b-form-group>
         </b-col>
 
         <b-col>
-          <b-button variant="primary" class="assign-btn" @click="assign"
+          <b-button
+            variant="primary"
+            class="assign-btn"
+            @click="assign(user.id, role.id)"
             >Assign</b-button
           >
         </b-col>
@@ -156,8 +163,9 @@ export default {
     memberString: [],
     roleAssignment: {
       user: "",
-      admin: "",
+      role: "",
     },
+    networkId: "",
   }),
   async beforeMount() {
     this.getRoles();
@@ -172,6 +180,7 @@ export default {
   },
   computed: {
     ...mapGetters({
+      getNetwork: "networkSetting/getNetwork",
       allRoles: "networkSetting/allRoles",
       allMembers: "networkSetting/allMembers",
       allEditors: "networkSetting/allEditors",
@@ -186,6 +195,16 @@ export default {
       editEditor: "networkSetting/editEditor",
       deleteEditor: "networkSetting/deleteEditor",
     }),
+
+    assign(user_id, role_id) {
+      this.networkId = this.getNetwork.id;
+      let payload = {
+        networkId: this.networkId,
+        user_id: user_id,
+        role_id: role_id,
+      };
+      this.assignRole(payload);
+    },
   },
 };
 </script>

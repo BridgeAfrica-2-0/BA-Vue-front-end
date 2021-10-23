@@ -1,6 +1,5 @@
 <template>
   <div class="p-0 m-0">
-    
     <div class="col-md-12 p-0">
       <fas-icon
         class="violet float-left mr-1 icon-size primary"
@@ -95,7 +94,7 @@
                     <div class="form-group">
                       <label for="country" class="username"> Keywords :</label
                       ><br />
-              
+
                       <multiselect
                         v-model="business_keyword"
                         tag-placeholder="Add this as new Keyword"
@@ -154,7 +153,7 @@
                   ></multiselect>
                 </div>
 
-                <label class="typo__label">Fiters</label>
+                <label class="typo__label">Fiters </label>
                 <div>
                   <b-card no-body>
                     <b-tabs pills card vertical>
@@ -172,7 +171,7 @@
                               name="filters"
                             >
                               <b-form-checkbox
-                              class="colorblack"
+                                class="colorblack"
                                 v-for="fil in filters.filters"
                                 :key="fil.id"
                                 :value="fil.id"
@@ -275,6 +274,21 @@
                     </div>
                   </div>
 
+                  <b-col md="6">
+                    <div class="form-group">
+                      <label for="website" class="username"> city :</label
+                      ><br />
+                      <input
+                        type="text"
+                        name="alias"
+                        v-model="city"
+                        id="city"
+                        placeholder="City"
+                        class="form-control text"
+                      />
+                    </div>
+                  </b-col>
+
                   <div class="col-md-6">
                     <div class="form-group">
                       <label for="Neighbor" class="username"> Adress :</label>
@@ -306,12 +320,11 @@
             <tab-content title=" Contact ">
               <b-card>
                 <b-row>
-                
                   <b-col md="6">
                     <label class="username"> Phone1 </label>
                     <VuePhoneNumberInput v-model="phone1" />
                   </b-col>
-                  <b-col md="6">  
+                  <b-col md="6">
                     <label class="username"> Phone2 </label>
                     <VuePhoneNumberInput v-model="phone2" />
                   </b-col>
@@ -366,13 +379,8 @@
         </div>
       </b-modal>
 
-
-
       <!-- update method --->
 
-
-
-      
       <b-modal
         id="updateBusinessModal"
         ref="updateBusinessModal"
@@ -449,7 +457,7 @@
                     <div class="form-group">
                       <label for="country" class="username"> Keywords :</label
                       ><br />
-                      {{business_keyword}}
+                      {{ business_keyword }}
                       <multiselect
                         v-model="business_keyword"
                         tag-placeholder="Add this as new Keyword"
@@ -495,13 +503,12 @@
 
                 <div>
                   <label class="typo__label"> Sub Category</label>
-                  {{filterselectvalue}}
                   <multiselect
                     v-model="filterselectvalue"
                     tag-placeholder="Add this as new tag"
                     placeholder="Search or add a tag"
                     label="name"
-                    track-by="subcategory_id"
+                    track-by="subcategoryId"
                     :options="scategories"
                     :multiple="true"
                     :taggable="true"
@@ -509,12 +516,14 @@
                   ></multiselect>
                 </div>
 
-                <label class="typo__label">Fiters</label>
+                <label class="typo__label"
+                  >Fiters
+                </label>
                 <div>
                   <b-card no-body>
                     <b-tabs pills card vertical>
                       <b-tab
-                        :title="filters.subcategory"
+                        :title="filters.name"
                         v-for="filters in filterselectvalue"
                         :key="filters.id"
                         active
@@ -527,7 +536,7 @@
                               name="filters"
                             >
                               <b-form-checkbox
-                              class="colorblack"
+                                class="colorblack"
                                 v-for="fil in filters.filters"
                                 :key="fil.id"
                                 :value="fil.id"
@@ -600,7 +609,7 @@
                       <label for="country" class="username">
                         Municipality :</label
                       ><br />
-
+                    
                       <multiselect
                         v-model="municipality"
                         @input="Locality"
@@ -617,7 +626,8 @@
                 <div class="row">
                   <div class="col-md-6">
                     <div class="form-group">
-                      <label for="Neighbor" class="username"> Neighbor :</label
+                      <label for="Neighbor" class="username">
+                        Neighbor  :</label
                       ><br />
                       <multiselect
                         v-model="locality"
@@ -629,6 +639,21 @@
                       ></multiselect>
                     </div>
                   </div>
+
+                  <b-col md="6">
+                    <div class="form-group">
+                      <label for="website" class="username"> city :</label
+                      ><br />
+                      <input
+                        type="text"
+                        name="alias"
+                        v-model="city"
+                        id="city"
+                        placeholder="City"
+                        class="form-control text"
+                      />
+                    </div>
+                  </b-col>
 
                   <div class="col-md-6">
                     <div class="form-group">
@@ -661,12 +686,11 @@
             <tab-content title=" Contact ">
               <b-card>
                 <b-row>
-                
                   <b-col md="6">
                     <label class="username"> Phone1 </label>
                     <VuePhoneNumberInput v-model="phone1" />
                   </b-col>
-                  <b-col md="6">  
+                  <b-col md="6">
                     <label class="username"> Phone2 </label>
                     <VuePhoneNumberInput v-model="phone2" />
                   </b-col>
@@ -725,7 +749,7 @@
 
       <div class="row mb-4">
         <div class="col">
-      <h6 class="mb-0"><b></b></h6> 
+          <h6 class="mb-0"><b></b></h6>
           <b-row>
             <b-col
               md="12"
@@ -735,54 +759,68 @@
               :key="business.business_id"
             >
               <div class="people-style shadow">
-                <b-link
-                >
-                  <div class="float-right">
-
-
-                    <b-dropdown size="lg"  variant="link" toggle-class="text-decoration-none" no-caret>
-                 <template #button-content>
-                  <b-icon
-                      icon="three-dots-vertical"
-                      variant="primary"
-                      class="icon-size"
-                                      ></b-icon>
+                <b-link>
+                  <div class="float-right others">
+                    <b-dropdown
+                      size="lg"
+                      variant="link"
+                      toggle-class="text-decoration-none"
+                      no-caret
+                    >
+                      <template #button-content>
+                        <b-icon
+                          icon="three-dots-vertical"
+                          variant="primary"
+                          class="icon-size"
+                        ></b-icon>
                       </template>
-                      <b-dropdown-item 
-                                    
-                                    @click="editBusiness(business.id)"  v-b-modal.updateBusinessModal variant="">Edit</b-dropdown-item>
-                      <b-dropdown-item   @click="deleteBusiness(business.id)" > Delete</b-dropdown-item>
+                      <b-dropdown-item
+                        @click="editBusiness(business.id)"
+                        v-b-modal.updateBusinessModal
+                        variant=""
+                        >Edit</b-dropdown-item
+                      >
+                      <b-dropdown-item @click="deleteBusiness(business.id)">
+                        Delete</b-dropdown-item
+                      >
                     </b-dropdown>
-  
-                    
                   </div>
                 </b-link>
                 <div class="inline-flex">
-                  <div >
+                  <div>
                     <div class="center-img">
                       <splide :options="options" class="r-image">
                         <splide-slide cl>
-                         <img :src="business.logo_path" class="r-image" /> 
+                          <img :src="business.logo_path" class="r-image" />
                         </splide-slide>
                       </splide>
                     </div>
                   </div>
 
-                  <div >
+                  <div>
                     <p class="textt text">
-                     
                       <strong class="title">
                         {{ business.name }}
                       </strong>
                       <br />
-                      <span v-if=" Array.isArray(business.category) ">  
-                      <span class="m-1" v-for=" cat in business.category" :key="cat.name "> {{cat.name}} </span> </span>
+                      <span v-if="Array.isArray(business.category)">
+                        <span
+                          class=""
+                          v-for="cat in business.category"
+                          :key="cat.name"
+                        >
+                          {{ cat.name }}
+                        </span>
+                      </span>
                       <br />
-                      {{ business.community }} Community  {{business.id}} <br />
+                      {{ business.community }} Community <br />
 
                       <span class="location">
                         <b-icon-geo-alt class="ico"></b-icon-geo-alt>
-                        {{ business.city }} {{ business.country }}
+                        {{ business.city }}
+                        <span v-for="nei in business.neigborhood" :key="nei.id">
+                          {{ nei.name }}
+                        </span>
                       </span>
                       <br />
 
@@ -802,9 +840,11 @@
             </b-col>
           </b-row>
 
-          
-      <infinite-loading :identifier="infiniteId"   ref="infiniteLoading"   @infinite="infiniteHandler"></infinite-loading>
-
+          <infinite-loading
+            :identifier="infiniteId"
+            ref="infiniteLoading"
+            @infinite="infiniteHandler"
+          ></infinite-loading>
         </div>
       </div>
     </div>
@@ -826,18 +866,18 @@ export default {
   data() {
     return {
       useas: "",
-      page:1,
-      bizId:"",
-      infiniteId:2,
+      page: 1,
+      bizId: "",
+      infiniteId: 2,
       editbiz: "",
       selectedusecase: "",
-      keywordds:[],
+      keywordds: [],
       phone1: null,
       phone2: null,
       emaill: null,
       email: null,
-      cancel:null,
-      business:null,
+
+      business: null,
       website: null,
       first_page: "true",
       country: [],
@@ -906,22 +946,18 @@ export default {
   },
 
   methods: {
-
-    
-    infiniteHandler($state) {  
-
+    infiniteHandler($state) {
       console.log("loading started");
 
-       if(this.page==1){
-        
-       //  this.profilebusiness.splice(0);
-        
+      if (this.page == 1) {
+        this.profilebusiness.splice(0);
       }
       let url = "business/userBusiness/" + this.page;
-      this.$store.dispatch("profile/loadMore",url)
+      this.$store
+        .dispatch("profile/loadMore", url)
         .then(({ data }) => {
           console.log(data);
-          if (data.data.length) { 
+          if (data.data.length) {
             this.page += 1;
 
             this.profilebusiness.push(...data.data);
@@ -931,113 +967,137 @@ export default {
           }
         })
         .catch((err) => {
-         // console.log({ err: err });
+          // console.log({ err: err });
         });
     },
 
+    editBusiness(id) {
+      this.bizId = id;
 
-    editBusiness(id){
-
-
-       this.bizId=id;
-
-         axios.get("business/edit/"+id).then(({ data }) => {
-        console.log(data);
-        this.editbiz=data.data;
-        this.setEditData(data.data)
-      }).catch((err) => {
+      axios
+        .get("business/edit/" + id)
+        .then(({ data }) => {
+          console.log(data);
+          this.editbiz = data.data;
+          this.setEditData(data.data);
+        })
+        .catch((err) => {
           console.log({ err: err });
         });
     },
 
-
-
-    deleteBusiness(id){
-
-       let loader = this.$loading.show({
+    deleteBusiness(id) {
+      let loader = this.$loading.show({
         container: this.fullPage ? null : this.$refs.preview,
         canCancel: true,
         onCancel: this.onCancel,
         color: "#e75c18",
       });
 
-
-       let url="business/delete/"+id;
-        this.$store
-        .dispatch("profile/deleteBusiness", url) 
+      let url = "business/delete/" + id;
+      this.$store
+        .dispatch("profile/deleteBusiness", url)
         .then(() => {
           console.log("wow biz deleted");
 
-           loader.hide();
+          loader.hide();
 
-            this.page = 1;
-           this.infiniteId += 1;
+          this.page = 1;
+          this.infiniteId += 1;
 
-            this.flashMessage.show({
-                status: "success",
+          this.flashMessage.show({
+            status: "success",
 
-                message: "Business Deleted",
+            message: "Business Deleted",
 
-                blockClass: "custom-block-class",
-              }); 
+            blockClass: "custom-block-class",
+          });
         })
         .catch((err) => {
           console.log({ err: err });
-           loader.hide();
-            this.flashMessage.show({
-                status: "error",
+          loader.hide();
+          this.flashMessage.show({
+            status: "error",
 
-                message: "Unable to Delete this Business",
+            message: "Unable to Delete this Business",
 
-                blockClass: "custom-block-class",
-              });
-
+            blockClass: "custom-block-class",
+          });
         });
     },
 
+    cancel() {
+      this.logo_url = "";
+      this.business_name = "";
+      this.about = "";
 
+      this.multiselecvalue = [];
+      this.filterselectvalue = [];
 
+      this.city = "";
+      this.select_filterss = [];
+      this.business_name = "";
+      this.country = [];
+      this.region = [];
+      this.division = [];
+      this.municipality = [];
+      this.phone1 = "";
+      this.phone2 = "";
+      this.website = "";
+      this.locality = [];
+      this.email = "";
+      this.time_zone ='';
+      this.address = "";
+      this.business_keyword = [];
+      this.address = "";
+    },
 
+   editfilters(filter){
+      let fil =[];
 
-        
+      filter.forEach((item) => {
+       
+        fil.push(item.filter_id);
+      });
 
-    setEditData(business){
-      this.logo_url=business.logo
-      this.business_name=business.name;
-      this.about=business.about_business;
-      this.lat=business.lat;
-      this.lng=business.lng;
-      this.multiselecvalue=business.category;
-      this.filterselectvalue=business.subCategory;
-    
-     this.select_filterss=business.filter;
-     this.business_name=business.name;
-     this.country=business.country;
-      this.country=business.country;
-      this.region=business.region;
-      this.division=business.division;
-      this.municipality=business.council
-      this.phone1=business.phone1;
-      this.phone2=business.phone2
-      this.website=business.website;
-      this.locality=business.neigborhood;
-      this.email=business.email;
-      this.time_zone=business.timeZone;
-      this.address=business.address;
-     // this.business_keyword=business.keywords;
-       this.business_keyword=[{ id:"2" , name:"blec"}];
-       console.log(this.business_keyword);
-      this.address=business.address; 
+      return fil;
 
+   },
 
-      
+    setEditData(business) {
+      this.logo_url = business.logo;
+      this.business_name = business.name;
+      this.about = business.about_business;
+      this.lat = business.lat;
+      this.lng = business.lng;
+      this.multiselecvalue = business.category;
+      this.filterselectvalue = business.subCatFilter;
 
-    }
-,
+      this.city = business.city;
+      this.select_filterss = this.editfilters(business.filter);
 
+      this.business_name = business.name;
+      this.country = business.country;
+      this.region = business.region;
+      this.division = business.division;
+      this.municipality = business.council;
+      this.phone1 = business.phone1;
+      this.phone2 = business.phone2;
+      this.website = business.website;
+      this.locality = business.neigborhood;
+      this.email = business.email;
+      this.time_zone = business.timeZone;
+      this.address = business.address;
+      this.business_keyword = business.keywords;
+      this.address = business.address;
 
-
-      getpFilters: function() {
+      this.subcategories();
+      this.Region();
+      this.Division();
+      this.Municipality();
+      this.Locality();
+    },
+    getpFilters: function () {
       let sub_cat = [];
       this.filterselectvalue.forEach((item) => {
         sub_cat.push(item.subcategory_id);
@@ -1094,6 +1154,7 @@ export default {
 
     subcategories() {
       let formData2 = new FormData();
+
       formData2.append("categoryId", this.selectedcategories);
 
       this.$store
@@ -1152,6 +1213,8 @@ export default {
 
     Region() {
       let formData2 = new FormData();
+      console.log("region regions");
+
       formData2.append("countryId", this.selectedcountry);
 
       this.$store
@@ -1195,7 +1258,8 @@ export default {
     Locality() {
       let formData2 = new FormData();
       formData2.append("councilId", this.selectedmunicipality);
-
+      console.log("loding locallity");
+      console.log(this.selectedmunicipality);
       this.$store
         .dispatch("auth/locality", formData2)
         .then(() => {
@@ -1205,7 +1269,7 @@ export default {
           console.log({ err: err });
         });
     },
-    setLoading: function(value) {
+    setLoading: function (value) {
       this.loadingWizard = value;
     },
 
@@ -1222,7 +1286,6 @@ export default {
         };
       }
     },
-
 
     businessAround() {
       this.$store
@@ -1265,7 +1328,7 @@ export default {
       }
     },
 
-    locateGeoLocation: function() {
+    locateGeoLocation: function () {
       navigator.geolocation.getCurrentPosition((res) => {
         this.center = {
           lat: res.coords.latitude,
@@ -1274,8 +1337,7 @@ export default {
       });
     },
 
-
-    createBusiness: function() {
+    createBusiness: function () {
       return new Promise((resolve, reject) => {
         this.sendingB = true;
         let loader = this.$loading.show({
@@ -1324,7 +1386,7 @@ export default {
 
             this.sendingB = false;
             this.profileBusiness();
-           
+
             this.$refs["createBusinessModal"].hide();
             this.flashMessage.show({
               status: "success",
@@ -1334,7 +1396,7 @@ export default {
 
             loader.hide();
             this.page = 1;
-      this.infiniteId += 1;
+            this.infiniteId += 1;
 
             resolve(true);
           })
@@ -1368,13 +1430,7 @@ export default {
       });
     },
 
-  
-
-
-
-
-  
-    updateBusiness: function() {
+    updateBusiness: function () {
       return new Promise((resolve, reject) => {
         this.sendingB = true;
         let loader = this.$loading.show({
@@ -1403,17 +1459,17 @@ export default {
         formData2.append("email", this.email);
         formData2.append("website", this.website);
 
-        formData2.append("name", this.form.business_name);
+        formData2.append("name", this.business_name);
         formData2.append("categoryId", this.selectedcategories);
         formData2.append("subCategoryId", this.selectedsubcategories);
-        formData2.append("filterId", this.select_filterss);
+        formData2.append("filterId", this.selectedfilters);
         formData2.append("keywords", this.business_keyword);
         formData2.append("timezone", this.time_zone);
         formData2.append("language", this.language);
         formData2.append("about_business", this.about);
 
         this.axios
-          .post("business/edit/"+this.bizId, formData2, {
+          .post("business/edit/" + this.bizId, formData2, {
             headers: {
               "Content-Type": "multipart/form-data",
             },
@@ -1423,7 +1479,7 @@ export default {
 
             this.sendingB = false;
             this.profileBusiness();
-           
+
             this.$refs["updateBusinessModal"].hide();
             this.flashMessage.show({
               status: "success",
@@ -1433,7 +1489,7 @@ export default {
 
             loader.hide();
             this.page = 1;
-      this.infiniteId += 1;
+            this.infiniteId += 1;
 
             resolve(true);
           })
@@ -1467,12 +1523,11 @@ export default {
       });
     },
 
-
-    chooseProfile1: function() {
+    chooseProfile1: function () {
       document.getElementById("profile1").click();
     },
 
-    chooseProfile2: function() {
+    chooseProfile2: function () {
       document.getElementById("profile2").click();
     },
 
@@ -1488,7 +1543,7 @@ export default {
       this.logoimg_url = URL.createObjectURL(logofile);
     },
 
-    chooselogo: function() {
+    chooselogo: function () {
       document.getElementById("logo").click();
     },
 
@@ -1531,8 +1586,7 @@ export default {
   },
 
   computed: {
-     
-     selectedKeywords: function () {
+    selectedKeywords: function () {
       let selectedUsers = [];
       this.business_keyword.forEach((item) => {
         selectedUsers.push(item.id);
@@ -1540,57 +1594,98 @@ export default {
       return selectedUsers;
     },
 
-
-    profilebusiness: function() {
+    profilebusiness: function () {
       return this.$store.state.profile.profileBusiness;
     },
 
-    selectedcategories: function() {
+    selectedcategories: function () {
       let selectedUsers = [];
+
       this.multiselecvalue.forEach((item) => {
-        selectedUsers.push(item.id);
+        if (item.id) {
+          selectedUsers.push(item.id);
+        } else {
+          selectedUsers.push(item.category_id);
+        }
       });
       return selectedUsers;
     },
-    selectedsubcategories: function() {
+    selectedsubcategories: function () {
       let sub_cat = [];
+      console.log(this.filterselectvalue);
       this.filterselectvalue.forEach((item) => {
         sub_cat.push(item.subcategory_id);
       });
       return sub_cat;
     },
-    selectedcountry: function() {
+
+    selectedfilters: function () {
+      let sub_cat = [];
+
+      this.select_filterss.forEach((item) => {
+        if (item.filter_id) {
+          sub_cat.push(item.filter_id);
+        } else {
+          sub_cat.push(item);
+        }
+      });
+      return sub_cat;
+    },
+
+    selectedcountry: function () {
       let sub_cat = [];
       this.country.forEach((item) => {
-        sub_cat.push(item.id);
+        if (item.country_id) {
+          sub_cat.push(item.country_id);
+        } else {
+          sub_cat.push(item.id);
+        }
       });
       return sub_cat;
     },
-    selectedregion: function() {
+    selectedregion: function () {
       let sub_cat = [];
       this.region.forEach((item) => {
-        sub_cat.push(item.id);
+        if (item.region_id) {
+          sub_cat.push(item.region_id);
+        } else {
+          sub_cat.push(item.id);
+        }
       });
       return sub_cat;
     },
-    selecteddivision: function() {
+    selecteddivision: function () {
       let sub_cat = [];
       this.division.forEach((item) => {
-        sub_cat.push(item.id);
+        if (item.division_id) {
+          sub_cat.push(item.division_id);
+        } else {
+          sub_cat.push(item.id);
+        }
       });
       return sub_cat;
     },
-    selectedmunicipality: function() {
+    selectedmunicipality: function () {
       let sub_cat = [];
       this.municipality.forEach((item) => {
-        sub_cat.push(item.id);
+        if (item.council_id) {
+          sub_cat.push(item.council_id);
+        } else {
+          sub_cat.push(item.id);
+        }
       });
       return sub_cat;
     },
-    selectedlocality: function() {
+    selectedlocality: function () {
       let sub_cat = [];
+      console.log("loging localities");
+      console.log(this.locality);
       this.locality.forEach((item) => {
-        sub_cat.push(item.id);
+        if (item.neighborhood_id) {
+          sub_cat.push(item.neighborhood_id);
+        } else {
+          sub_cat.push(item.id);
+        }
       });
       return sub_cat;
     },
@@ -1627,16 +1722,20 @@ import "vue-form-wizard/dist/vue-form-wizard.min.css";
 </script>
 
 <style scoped>
-
-.inline-flex{
- display: inline-flex;
+.others {
+  position: absolute;
+  right: 0px;
 }
 
-.username{
+.inline-flex {
+  display: inline-flex;
+}
+
+.username {
   color: black;
 }
-.colorblack{
-  color:black;
+.colorblack {
+  color: black;
 }
 .logo-img {
   width: 60px;
@@ -1843,8 +1942,7 @@ import "vue-form-wizard/dist/vue-form-wizard.min.css";
 </style>
 
 <style >
-   
-   .r-image{
-     object-fit: cover;
-   }
+.r-image {
+  object-fit: cover;
+}
 </style>

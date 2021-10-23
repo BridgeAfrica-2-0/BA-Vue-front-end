@@ -81,10 +81,10 @@
       </b-row>
     </div>
         </b-col>
+        
     </b-row>
 
-     
-  <infinite-loading @infinite="infiniteHandler"></infinite-loading>  
+     <infinite-loading @infinite="infiniteHandler"></infinite-loading> 
 
   </div>
 </template>
@@ -96,7 +96,8 @@ export default {
    data() {
     return {
       page: 1,
-      options: {
+      foll_id:'',
+       options: {
         rewind: true,
         autoplay: true,
         perPage: 1,
@@ -113,7 +114,7 @@ export default {
  
       
 
-         return  this.$store.state.follower.NcommunityFollowing.network_follower; 
+         return  this.$store.state.follower.profileNetwork; 
        
    }
    
@@ -123,16 +124,8 @@ export default {
 
    mounted(){
 
+      this.foll_id = this.$route.params.id;
      
-      this.$store
-      .dispatch("follower/profileNetwork", null)
-      .then((response) => {
-       
-      })
-      .catch((error) => {
-        console.log({error:error});
-      });
-
   },
 
   methods:{ 
@@ -141,20 +134,26 @@ export default {
       
        infiniteHandler($state) {
 
-      let url = null;
+     let url = "network?page=" + this.page+"&id="+this.foll_id;
 
          
-          url="profile/network/following/";
+          console.log( "network?page=" + this.page+"&id="+this.foll_id);
+          if(this.page==1){
+        
+         this.network.splice(0);
+        
+      }
          
       axios
         .get(url + this.page)
         .then(({ data }) => {
+          console.log(data.data);
           if (data.data.length) {
-            this.page += 1;
-   
+            
+   if(this.page==1){
             this.network.push(...data.data); 
-           
-
+   }   
+   this.page += 1;
 
             $state.loaded();
           } else {

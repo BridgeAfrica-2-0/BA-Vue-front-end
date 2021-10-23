@@ -1,6 +1,6 @@
 <template>
   <div class="p-0">
-     <FlashMessage />
+    
     <b-container fluid class="p-0 gradient">
       <div class="container-flex">
         <img

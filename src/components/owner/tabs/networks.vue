@@ -66,12 +66,12 @@
                      
                       <strong class="title">
                        <router-link to="/businessfollower">
-                          {{ network.name }}
+                          {{ network.name }} <span v-if="network.is_approve == 1">  (Approved) </span>    <span v-else> (UnApproved)  </span>
                         </router-link>
                       </strong>
-                      <br />
-                      <span v-if=" Array.isArray(network.network_category) ">  
-                      <span class="m-1" v-for=" cat in network.network_category" :key="cat.name "> {{cat.name}} </span> </span>
+                      <br />   {{network.categories}}
+                      <span v-if=" Array.isArray(network.categories) ">  
+                      <span class="m-1" v-for=" cat in network.categories" :key="cat "> {{cat}} </span> </span>
                       <br />
                       
                     {{ network.member_count }}  Community  <br />
@@ -793,11 +793,15 @@ export default {
                 message: "Network created",
 
                 blockClass: "custom-block-class",
-              });
-      this.$refs["netmodal"].hide();
+            });
+
+              this.$refs["netmodal"].hide();
+
           setTimeout(() => {
             this.success.state = false;
           }, 5000);
+
+
           this.getNetworks();
 
           this.page = 1;

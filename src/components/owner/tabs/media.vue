@@ -74,13 +74,13 @@ export default {
 
           if (!item.media.length) return Object.assign(value, { media: [] });
           else {
-            const data = item.media.map((e) =>
-              Object.assign(value, { media: [{ path: e.path, type: e.type }] })
+            const data = item.media.map((et) =>
+              Object.assign(value, { media: [{ path: et.path, type: et.type }] })
             );
             return data;
           }
         })
-        .map((e) => (Array.isArray(e) ? _.flatten(e) : e));
+       
      
 
       return _.flatten(data);

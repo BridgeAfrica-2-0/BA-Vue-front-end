@@ -1297,39 +1297,41 @@ deleteContact({ commit },payload){
         };
       } else if (payload.method === "PUT") {
         const workplace = payload.workPlace === true ? 1 : 0;
-        (url = "userIntro/updateWorking/" +payload.id + "?companyName=" + payload.work_place),
-          "&cityTown=" + payload.city_town,
-          "&position=" + payload.position,
-          "&jobResponsibilities=" +payload.job_responsibilities,
-          "&currentlyWorking=" + payload.currently_working,
-          "&startDate=" + payload.start_date
-          "&endDate=" + payload.end_date;
+        url = "userIntro/updateWorking/" +payload.workPlace.id;
         config = {
           method: "POST",
           headers: {
             Accept: "application/json",
+          },
+          data: {
+            companyName: payload.workPlace.company_name,
+            cityTown: payload.workPlace.city_town,
+            position: payload.workPlace.position,
+            jobResponsibilities: payload.workPlace.job_responsibilities,
+            currentlyWorking: payload.workPlace === true ? 1 : 0,
+            startDate: payload.workPlace.startDate,
+            endDate: payload.workPlace.endDate,
           }
+        };
+      } else if (payload.method === "DELETE") {
+        url = "userIntro/deleteWorking/" +payload.workPlace;
+        config = {
+          method: "DELETE",
         };
       }
 
       let response_ = null;
       await axios(url, config)
         .then(response => {
-          console.log(
-            "save/edit/delete user workPlace response (1) +++++++",
-            response
-          );
+          console.log( "save/edit/delete user workPlace response (1) +++++++", response);
           return response;
         })
         .then(response => {
-          console.log(
-            "save/edit/delete user workPlace response successsss +++",
-            response
-          );
+          console.log( "save/edit/delete user workPlace response successsss +++", response );
           if (response.errors) {
             console.log("Error from the server +++++++");
             throw new Error("Error from save/edit/delete workplace+++++");
-          }
+          };
           context.commit("storeWorkPlace", {
             workPlace: payload.workPlace,
             method: payload.method
@@ -1343,13 +1345,13 @@ deleteContact({ commit },payload){
         });
       return response_;
     },
-
     
     async updateUserEducation(context, payload) {
       console.log(payload, "save/edit/delete user education start +++++");
       let url = "",
         config = {};
       if (payload.method.toLowerCase() === "post") {
+        console.log("Method: "+payload.method.toLowerCase());
         url = "userIntro/addSchool";
         config = {
           method: "POST",
@@ -1372,22 +1374,27 @@ deleteContact({ commit },payload){
             durationTo: payload.education.durationFrom
           })
         };
-      } else if (payload.method.toLowerCase() === "update") {
-        const graduated = payload.education.graduated ? 1 : 0;
-        (url =
-          "userIntro/updateSchool" +
-          "/11" +
-          "?schoolName=" +
-          payload.education.schoolName),
-          "&graduated=" + graduated,
-          "&durationFrom=" + payload.education.durationFrom,
-          "&major=" + payload.education.major,
-          "&durationTo=" + payload.education.durationFrom;
+      } else if (payload.method.toLowerCase() === "put") {
+        const workplace = payload.education === true ? 1 : 0;
+        console.log("Method: "+payload.method.toLowerCase());
+        url = "userIntro/updateSchool/"+payload.education.id;
         config = {
           method: "POST",
           headers: {
             Accept: "application/json",
+          },
+          data: {
+            schoolName: payload.education.school_name,
+            graduated: payload.education.is_graduated,
+            startDate: payload.education.startDate,
+            endDate: payload.education.endDate,
+            major_subjects: payload.education.major_subjects,
           }
+        };
+      } else if (payload.method === "DELETE") {
+        url = "userIntro/deleteSchool/" +payload.workPlace;
+        config = {
+          method: "DELETE",
         };
       }
 

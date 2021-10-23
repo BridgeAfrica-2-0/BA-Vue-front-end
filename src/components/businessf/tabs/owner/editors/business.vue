@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="overflow-y: scroll;">
 
     <div v-for="business in businesses" :key="business.id"  class="people-style shadow">
       <b-row>
@@ -20,7 +20,7 @@
             <strong class="title"> {{business.name}} </strong> <br />
             {{business.category}}
             <br />
-            {{business.followers}} Community <br />
+            {{this.$emit("nFormatter", business.followers)}} Community <br />
 
             <span class="location">
               <b-icon-geo-alt class="ico"></b-icon-geo-alt> {{business.location_description}}

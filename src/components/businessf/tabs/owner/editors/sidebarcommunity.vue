@@ -20,13 +20,13 @@
                     <template slot="title">
                       Followers <span class="spa-color"> {{nFormatter(userdetails.total_followers)}} </span>
                     </template>
-                    <div class="s-comcard"><People :peoples="userdetails.user_followers" /></div>
+                    <div class="s-comcard"><People :peoples="userdetails.user_followers"  @nFormatter="nFormatter"/></div>
                   </b-tab>
                   <b-tab>
                     <template slot="title">
                       Following <span class="spa-color"> {{nFormatter(userdetails.totat_following)}} </span>
                     </template>
-                    <div class="s-comcard"><People :peoples="userdetails.user_following" /></div>
+                    <div class="s-comcard"><People :peoples="userdetails.user_following"  @nFormatter="nFormatter"/></div>
                   </b-tab>
                 </b-tabs>
               </b-col>
@@ -43,13 +43,13 @@
                 <template slot="title">
                   Followers <span class="spa-color"> {{nFormatter(businessdetails.total_followers)}} </span>
                 </template>
-                <div class="s-comcard"><Business :businesses="businessdetails.Business_followers" /></div>
+                <div class="s-comcard"><Business :businesses="businessdetails.Business_followers" @nFormatter="nFormatter"/></div>
               </b-tab>
               <b-tab>
                 <template slot="title">
                   Following <span class="spa-color"> {{nFormatter(businessdetails.totat_following)}} </span>
                 </template>
-                <div class="s-comcard"><Business :businesses="businessdetails.Business_following" /></div>
+                <div class="s-comcard"><Business :businesses="businessdetails.Business_following" @nFormatter="nFormatter"/></div>
               </b-tab>
             </b-tabs>
           </div>

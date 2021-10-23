@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="s-cardd">
+    <div class="s-cardd" style="overflow-y: scroll;">
 
       <div v-for="people in peoples" :key="people.id" class="people-style border shadow">
         <b-row class="mb-1">
@@ -31,7 +31,7 @@
                         sm="6"
                         class="mt-3 mt-lg-2 mt-xl-2"
                       >
-                        <h6 class="follower">{{people.followers}} Community</h6>
+                        <h6 class="follower">{{ this.$emit("nFormatter", people.followers)}} Community</h6>
                       </b-col>
                     </b-row>
                   </div>

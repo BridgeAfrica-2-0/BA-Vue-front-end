@@ -168,13 +168,23 @@
 
     <!-- show  images in an album -->
 
-    <div class="container-flex" v-if="showalbum == true">
+    <div class="container-flex" v-if="showalbum">
       <b-button variant="outline-primary" size="sm" @click="hidealbum">
         Back
       </b-button>
       <span class="text-center ml-2 f-20"> {{ this.album_name }} </span>
 
-      <Images v-bind:album="album_id" :canUpload="canUpload"/>
+      <Images
+        :album="album_id"
+        :albumName="album_name"
+        :showAlbum="canViewAlbum"
+        :canUpload="
+          ['profile_picture', 'cover_photo', 'post'].indexOf(album_name) == -1
+            ? true
+            : false
+        "
+        :images="albumImages"
+      />
     </div>
   </div>
 </template>
@@ -190,6 +200,7 @@ export default {
   },
   data: function () {
     return {
+      canViewAlbum: true,
       showalbum: false,
       albumInfo: {
         name: "",
@@ -204,7 +215,6 @@ export default {
       album_name: "",
       album_type: "",
       edit_name: "",
-      canUpload:true
     };
   },
   mounted() {
@@ -219,23 +229,26 @@ export default {
     ...mapGetters({
       getAlbums: "UserProfileOwner/getAlbums",
       getAlbumImage: "UserProfileOwner/getAlbumImage",
+      albumImages: "UserProfileOwner/getalbumImages",
     }),
+
+    /*...mapGetters({
+      getImages: "UserProfileOwner/getImages",
+      albumImages: "UserProfileOwner/getalbumImages",
+    }),*/
 
     canCreateAlbum() {
       return this.albumInfo.name && this.albumInfo.type ? false : true;
     },
   },
-  beforeMount() {
-    this.getAlbums;
-    this.getAlbumImages;
-  },
+
   methods: {
     ...mapActions({
       createAlbum: "UserProfileOwner/createAlbum",
       updateAlbum: "UserProfileOwner/updateAlbum",
       deleteAlbum: "UserProfileOwner/deleteAlbum",
       getAlbumImages: "UserProfileOwner/getAlbumImages",
-      fetchAlbums: "UserProfileOwner/getAlbums"
+      fetchAlbums: "UserProfileOwner/getAlbums",
     }),
 
     ...mapMutations({
@@ -246,12 +259,12 @@ export default {
     hidealbum() {
       this.showalbum = false;
     },
+
     showlbum(id, name) {
-      this.album_name = name;
-      this.album_id = id;
       this.getAlbumImages(id)
         .then(() => {
-          console.log("hey yeah photo loaded");
+          this.album_name = name;
+          this.album_id = id;
           this.showalbum = true;
         })
         .catch((err) => {
@@ -259,8 +272,10 @@ export default {
         });
     },
 
-    canBeUpdate(album){
-      return (["profile_picture","cover_photo","post"].includes(album.name)) ? false : true
+    canBeUpdate(album) {
+      return ["profile_picture", "cover_photo", "post"].includes(album.name)
+        ? false
+        : true;
     },
 
     createAlbums() {

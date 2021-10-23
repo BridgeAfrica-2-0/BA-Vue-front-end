@@ -8,8 +8,25 @@
     <hr />
 
     <b-tabs content-class="mt-3" pills>
-      <b-tab title="Posts" active> <Images :canUpload="canUpload" /> </b-tab>
-      <b-tab title="Albums"> <Album /> </b-tab>
+      <b-tab title="Posts" active @click="getImages">
+        <div v-if="!hasLoadPicture">
+          <b-spinner class="load" label="Large Spinner"></b-spinner>
+        </div>
+
+        <Images
+          :canUpload="canUpload"
+          :images="all(getPictures)"
+          :albumName="'notFound'"
+          :showAlbum="showAlbum"
+          v-else
+        />
+      </b-tab>
+      <b-tab title="Albums" @click="getAlbums">
+        <div v-if="!hasLoadAlbum">
+          <b-spinner class="load" label="Large Spinner"></b-spinner>
+        </div>
+        <Album v-else />
+      </b-tab>
     </b-tabs>
   </div>
 </template>
@@ -18,11 +35,19 @@
 import Album from "./album";
 import Images from "./images";
 
+import _ from "lodash";
+
+import { mapGetters } from "vuex";
+
 export default {
   data: function () {
     return {
-      index: 0,
-      canUpload:false
+      canUpload: false,
+      loading: false,
+      hasLoadAlbum: false,
+      hasLoadPicture: false,
+      showAlbum: false,
+      allImage: [],
     };
   },
 
@@ -30,42 +55,84 @@ export default {
     Album,
     Images,
   },
+
+  computed: {
+    ...mapGetters({
+      getPictures: "UserProfileOwner/getImages",
+    }),
+  },
+
   methods: {
-    onClick(i) {
-      this.index = i;
-    },
     //function to get album
-    getAlbums() {
-      this.$store
-        .dispatch("UserProfileOwner/getAlbums", this.urlData)
-        .then(() => {
-          console.log("hey yeah");
+    all(allImage) {
+      const data = allImage.filter(e => e.media.length != 0 )
+        .map((item) => {
+          const value = {
+            id: item.id,
+            content: item.content,
+          };
+
+          if (!item.media.length) return Object.assign(value, { media: [] });
+          else {
+            const data = item.media.map((e) =>
+              Object.assign(value, { media: [{ path: e.path, type: e.type }] })
+            );
+            return data;
+          }
         })
-        .catch((err) => {
-          console.log({ err: err });
-        });
+        .map((e) => (Array.isArray(e) ? _.flatten(e) : e));
+     
+
+      return _.flatten(data);
     },
+
+    getAlbums() {
+      if (!this.hasLoadAlbum) {
+        this.$store
+          .dispatch("UserProfileOwner/getAlbums", this.urlData)
+          .then(() => {
+            console.log("hey yeah");
+            this.hasLoadAlbum = true;
+          })
+          .catch((err) => {
+            this.hasLoadAlbum = false;
+            console.log({ err: err });
+          });
+      }
+    },
+
     getImages() {
-      this.$store
-        .dispatch("UserProfileOwner/getImages", this.urlData)
-        .then(() => {
-          console.log("hey yeah");
-        })
-        .catch((err) => {
-          console.log({ err: err });
-        });
+      if (!this.hasLoadPicture) {
+        this.$store
+          .dispatch("UserProfileOwner/getImages", this.urlData)
+          .then(() => {
+            console.log("hey yeah");
+            this.hasLoadPicture = true;
+          })
+          .catch((err) => {
+            this.hasLoadPicture = false;
+            console.log({ err: err });
+          });
+      }
     },
   },
 
-  mounted() {
+  created() {
     this.urlData = this.$route.params.id;
-    this.getAlbums();
     this.getImages();
   },
 };
 </script>
 
-<style>
+<style scoped>
+.load {
+  width: 4rem;
+  height: 4rem;
+  color: rgb(231, 92, 24);
+  align-self: center;
+  margin: auto;
+  display: block;
+}
 .text-design {
   align-items: first baseline;
 }

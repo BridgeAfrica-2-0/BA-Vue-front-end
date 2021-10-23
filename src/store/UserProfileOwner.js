@@ -22,7 +22,7 @@ export default {
       return state.images;
     },
 
-    getalbumImage(state) {
+    getalbumImages(state) {
       return state.albumImages;
     },
 
@@ -99,7 +99,8 @@ export default {
 
     removeAlbum(state, uuid) {
       state.albums = state.albums.filter(album => album.id != uuid)
-    }
+    },
+
   },
 
   actions: {
@@ -145,27 +146,23 @@ export default {
     },
 
     async submitPost({ commit }, payload) {
-      const res = await axios.post(`profile/upload/${payload.id}`, payload);
-      commit("setSubmitPost", res.data.data);
+      const res = await axios.post(`profile/upload/${payload.id}`, payload.data);
     },
 
     async setProfilePic({ commit }, id) {
       const res = await axios.post(`profile/makeProfile/picture/${id}`);
-      commit("setProfilePic", res.data.data);
     },
 
-    async setCoverPic(id) {
+    async setCoverPic({ commit }, id) {
       const res = await axios.post(`profile/makeCover/picture/${id}`);
     },
 
     async deleteImage({ commit }, id) {
-      const res = await axios.delete(`profile/albumPicture/delete/${id}`);
-      commit("deleteImage", res.data.data);
+      const res = await axios.delete(`profile/image/${id}`);
     },
 
     async downloadPic({ commit }, id) {
-      const res = await axios.post(`profile/album/pictures/${id}`);
-      commit("downloadPic", res.data.data);
+      const res = await axios.post(`profile/downloadMedia/${id}`);
     },
   },
 };

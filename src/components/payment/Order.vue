@@ -1,7 +1,7 @@
 <template
 	><b-card class="">
 		<div class="card-header title-font-size font-weight-bold bg-white h-50">
-			Review and confirm your Order ( {{order_items.length}} item)
+			Review and confirm your Order ( {{ order_items.length }} item)
 			<br />
 			Business: Largo
 		</div>
@@ -83,7 +83,26 @@
 			showOperator() {
 				this.$emit("showoperator");
 			},
+			prepareOrder() {
+				let order_data = {};
+				const productlength = this.order_items.length;
+
+				for (let index = 0; index < productlength; index++) {
+					order_data[this.order_items[index].name] = {
+						order_id: 1,
+						product_id: index + 1,
+						quantity: this.order_items[index].quantity,
+						price: this.order_items[index].amount,
+						total_amount:
+							this.order_items[index].amount * this.order_items[index].quantity,
+					};
+				}
+				console.log(order_data);
+			},
 		},
+		mounted(){
+			this.prepareOrder()
+		}
 	};
 </script>
 
@@ -103,10 +122,11 @@
 			width: 100%;
 			min-width: 100% !important;
 		}
-		.order.card-body, .card-header {
+		.order.card-body,
+		.card-header {
 			padding: 0 !important;
 		}
-		.order.card-body{
+		.order.card-body {
 			margin-top: 15px !important;
 		}
 	}

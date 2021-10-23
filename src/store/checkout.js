@@ -6,6 +6,10 @@ const state = {
   allShipping: [
 
   ],
+  order: {
+
+  },
+  cart: []
 }
 const getters = {
   getAllShipping: (state) => state.allShipping
@@ -36,15 +40,37 @@ const actions = {
     await axios.delete(`shipping/shippingAddress/${id}/delete`).then(() => {
       commit('deleteShippingAdd', id)
     })
-    .catch((error)=>{
-      console.log(error);
+      .catch((error) => {
+        console.log(error);
+      })
+  },
+  async createOrder({ commit }, newOrder) {
+    await axios.post('cart/create', newOrder).then((response) => {
+      commit
+      console.log(response.data);
+    })
+  },
+  async getCart({ commit }) {
+    await axios.get('cart').then((response) => {
+      console.log(response.data)
+      commit('setCart', response.data)
+    }).catch((error) => {
+      console.log(error)
     })
   }
 }
 const mutations = {
   setAllShipping: (state, newShippingTab) => state.allShipping = newShippingTab,
   addShipping: (state, newShippingAdd) => state.allShipping.unshift(newShippingAdd),
-  deleteShippingAdd: (state, idShipping) => state.allShipping = state.allShipping.filter(el => el.id !== idShipping)
+  deleteShippingAdd: (state, idShipping) => state.allShipping = state.allShipping.filter(el => el.id !== idShipping),
+  setOrder: (state, newOrder) => state.order = newOrder,
+  setCart: (state, newCart) => {
+     newCart.data.map((el) => {
+      el.quantity = 1;
+    });
+    state.cart = newCart
+    
+  }
 }
 export default {
   namespaced: true,

@@ -1,12 +1,21 @@
 <template>
     <div class="lb" v-if="items.length>0">
-        <div class="lb-grid" :class="[css,items.length>cells?'lb-grid-' + cells: 'lb-grid-' + items.length]">
+        <div  v-if="items.length==1"  class="" :class="[css,items.length>cells?'lb-grid-' + cells: 'lb-grid-' + items.length]">
+            <div class="" v-for="(src, i) in items" :key="i" @click="show(i)">
+
+                <img :src="src" class="single-image" alt="">
+
+            </div>
+        </div>
+
+
+        <div v-else class="lb-grid" :class="[css,items.length>cells?'lb-grid-' + cells: 'lb-grid-' + items.length]">
             <div class="lb-item" v-for="(src, i) in items" :key="i" @click="show(i)" :style="bg(src)">
 
-                <img src="src">
                 <span class="lb-more" v-if="i==cells-1 && items.length - cells>0">{{ items.length - cells}}+</span>
             </div>
         </div>
+
 
         <transition enter-active-class="animated fadeIn" leave-active-class="animated fadeOut">
             <div class="lb-modal" v-if="index>=0">
@@ -138,3 +147,23 @@
 
     }
 </script>
+<style >
+
+.lb-item{   
+   
+    background-size: cover !important;
+    background-position: top center;
+
+    /* display: flex;
+  flex-direction: column;
+  max-height: 1000px;
+  border-bottom: 2px solid red; */
+    
+
+}
+
+.single-image{
+    width: 100%;
+
+}
+</style>

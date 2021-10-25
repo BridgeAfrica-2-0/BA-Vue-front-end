@@ -23,7 +23,7 @@
           <div class="center-img">
             <splide :options="options" class="r-image">
               <splide-slide cl>
-                 <img :src="item.picture" class="r-image" />  
+                 <img :src="item.logo_path" class="r-image" />  
               </splide-slide>
             </splide>
           </div>
@@ -48,7 +48,7 @@
               :text="item.about_business"
               link="#"
               less-str="read less"
-              :max-chars="15"
+              :max-chars="100"
             >
             </read-more>
 

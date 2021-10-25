@@ -1,7 +1,7 @@
 <template>
 
   <div class="t-color">
-     <FlashMessage />
+    
     <div>
       <fas-icon class="icons" :icon="['fas', 'project-diagram']" size="lg" />
       <span class="t-color">  Network </span>
@@ -13,7 +13,7 @@
         >Add Network</b-button
       >
 
-      <hr />
+      <hr />   
       <b-row>
         <b-col
           cols="12"
@@ -69,9 +69,9 @@
                           {{ network.name }} <span v-if="network.is_approve == 1">  (Approved) </span>    <span v-else> (UnApproved)  </span>
                         </router-link>
                       </strong>
-                      <br />   {{network.categories}}
-                      <span v-if=" Array.isArray(network.categories) ">  
-                      <span class="m-1" v-for=" cat in network.categories" :key="cat "> {{cat}} </span> </span>
+                      <br />   
+                      <span v-if=" Array.isArray(network.assign_categories) ">  
+                      <span class="m-1" v-for=" cat in network.assign_categories" :key="cat "> {{cat}} </span> </span>
                       <br />
                       
                     {{ network.member_count }}  Community  <br />
@@ -129,7 +129,7 @@
       size="lg"
       v-model="showModal"
       ref="netmodal"
-    >
+    >   <FlashMessage />
       <b-container>
         <b-form>
           <div
@@ -223,8 +223,7 @@
             <b-col md="6">
               <div class="form-group">
                 <label for="country" class="username"> Country :</label><br />
-
-                <multiselect
+  <multiselect
                   v-model="country"
                   @input="Region"
                   placeholder="Search "
@@ -253,7 +252,7 @@
             <b-col md="6">
               <div class="form-group">
                 <label for="country" class="username"> Division :</label><br />
-                <multiselect
+            <multiselect
                   v-model="division"
                   @input="Municipality"
                   placeholder="Search"
@@ -269,7 +268,7 @@
                 <label for="country" class="username"> Municipality :</label
                 ><br />
 
-                <multiselect
+             <multiselect
                   v-model="municipality"
                   @input="Locality"
                   placeholder="Search"
@@ -638,7 +637,14 @@ export default {
 
   methods: {
 
+    flashErrors(errors) {
+      let err = "";
+      Object.values(errors).forEach((element) => {
+        err = element[0];
+      });
 
+      return err;
+    },
 
     chooseNlogo() {
       document.getElementById("net_pic").click();
@@ -767,6 +773,30 @@ export default {
         })
         .catch((err) => {
           console.log({ err: err });
+
+
+
+
+           if (err.response.status == 422) {
+              
+
+              this.flashMessage.show({
+                status: "error",
+
+                message: this.flashErrors(err.response.data.errors),
+                blockClass: "custom-block-class",
+              });
+            } else {
+              this.flashMessage.show({
+                status: "error",
+
+                message: "Unable to Create Your Network",
+                blockClass: "custom-block-class",
+              });
+              console.log({ err: err });
+            }
+
+
         });
     },
 
@@ -827,6 +857,14 @@ export default {
 
     // Edit a network
     editNetwork(editedNetwork) {
+
+      let loader = this.$loading.show({
+        container: this.fullPage ? null : this.$refs.preview,
+        canCancel: true,
+        onCancel: this.onCancel,
+        color: "#e75c18",
+      });
+
       axios
         .post(`network/${editedNetwork.id}`, editedNetwork.data)
         .then((res) => {
@@ -835,11 +873,35 @@ export default {
           setTimeout(() => {
             this.success.state = false;
           }, 5000);
-          this.getNetworks();
+          this.getNetworks();   
+          loader.hide();
         })
         .catch((err) => {
+          console.log({err:err});
           this.success.state = true;
           this.success.msg = "Something wen't wrong !!";
+
+          
+
+           if (err.response.status == 422) {
+              
+
+              this.flashMessage.show({
+                status: "error",
+
+                message: this.flashErrors(err.response.data.errors),
+                blockClass: "custom-block-class",
+              });
+            } else {
+              this.flashMessage.show({
+                status: "error",
+
+                message: "Unable to Create Your Network",
+                blockClass: "custom-block-class",
+              });
+              console.log({ err: err });
+            }
+          loader.hide();
           setTimeout(() => {
             this.success.state = false;
           }, 5000);
@@ -890,6 +952,7 @@ export default {
       fd.append("council_id", this.selectedmunicipality);
       fd.append("image", this.logo);
 
+
       fd.append("allow_business", this.createdNetwork.allow_business);
       if (this.editNet) {
         fd.append("_method", "PUT");
@@ -926,6 +989,26 @@ export default {
 
     //Show Edit network modal
     showEditNetwork(network) {
+
+
+      axios
+        .get("network/edit/"+network.id)
+        .then(({ data }) => {
+          console.log(data);
+
+      this.country=data.data.country[0];
+      this.region=data.data.region[0];
+      this.division=data.data.division[0];
+      this.municipality=data.data.council[0];
+      this.locality=data.data.locality[0];
+          
+        })
+        .catch((err) => {
+          console.log({ err: err });
+        });
+    
+        
+
       this.createdNetwork.id = network.id;
       this.createdNetwork.image = network.image;
       this.createdNetwork.name = network.name;
@@ -947,6 +1030,11 @@ export default {
       this.createdNetwork.division = network.division;
       this.createdNetwork.municipality = network.municipality;
       this.createdNetwork.localities = network.localities;
+      
+         this.Region();
+         this.Division();
+         this.Municipality();
+         this.Locality();
       this.showmodal(true, "edit");
     },
     selectImage(e) {

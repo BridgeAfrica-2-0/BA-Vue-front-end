@@ -27,6 +27,7 @@
         @close="cancel"
       >
         <div>
+          <FlashMessage />
           <form-wizard @on-complete="createBusiness">
             <tab-content title="Business Indentity">
               <div class="form-card">
@@ -144,7 +145,7 @@
                     v-model="filterselectvalue"
                     tag-placeholder="Add this as new tag"
                     placeholder="Search or add a tag"
-                    label="subcategory"
+                    label="name" 
                     track-by="subcategory_id"
                     :options="scategories"
                     :multiple="true"
@@ -158,7 +159,7 @@
                   <b-card no-body>
                     <b-tabs pills card vertical>
                       <b-tab
-                        :title="filters.subcategory"
+                        :title="filters.name"
                         v-for="filters in filterselectvalue"
                         :key="filters.id"
                         active
@@ -388,8 +389,10 @@
         size="lg"
         hide-footer
         @close="cancel"
+        @hidden="cancel"
       >
         <div>
+          <FlashMessage />
           <form-wizard @on-complete="updateBusiness">
             <tab-content title="Business Indentity">
               <div class="form-card">
@@ -457,7 +460,7 @@
                     <div class="form-group">
                       <label for="country" class="username"> Keywords :</label
                       ><br />
-                      {{ business_keyword }}
+                    
                       <multiselect
                         v-model="business_keyword"
                         tag-placeholder="Add this as new Keyword"
@@ -502,7 +505,7 @@
                 </div>
 
                 <div>
-                  <label class="typo__label"> Sub Category</label>
+                  <label class="typo__label"> Sub Category</label> 
                   <multiselect
                     v-model="filterselectvalue"
                     tag-placeholder="Add this as new tag"
@@ -516,9 +519,7 @@
                   ></multiselect>
                 </div>
 
-                <label class="typo__label"
-                  >Fiters
-                </label>
+                <label class="typo__label">Fiters </label>
                 <div>
                   <b-card no-body>
                     <b-tabs pills card vertical>
@@ -609,7 +610,7 @@
                       <label for="country" class="username">
                         Municipality :</label
                       ><br />
-                    
+
                       <multiselect
                         v-model="municipality"
                         @input="Locality"
@@ -626,8 +627,7 @@
                 <div class="row">
                   <div class="col-md-6">
                     <div class="form-group">
-                      <label for="Neighbor" class="username">
-                        Neighbor  :</label
+                      <label for="Neighbor" class="username"> Neighbor :</label
                       ><br />
                       <multiselect
                         v-model="locality"
@@ -1046,23 +1046,21 @@ export default {
       this.website = "";
       this.locality = [];
       this.email = "";
-      this.time_zone ='';
+      this.time_zone = "";
       this.address = "";
       this.business_keyword = [];
       this.address = "";
     },
 
-   editfilters(filter){
-      let fil =[];
+    editfilters(filter) {
+      let fil = [];
 
       filter.forEach((item) => {
-       
         fil.push(item.filter_id);
       });
 
       return fil;
-
-   },
+    },
 
     setEditData(business) {
       this.logo_url = business.logo;
@@ -1412,7 +1410,7 @@ export default {
               this.flashMessage.show({
                 status: "error",
 
-                message: err.response.data.message,
+                message: this.flashErrors(err.response.data.errors),
                 blockClass: "custom-block-class",
               });
             } else {
@@ -1484,7 +1482,7 @@ export default {
             this.flashMessage.show({
               status: "success",
               blockClass: "custom-block-class",
-              message: "Business Profile Created",
+              message: "Business Updated",
             });
 
             loader.hide();
@@ -1500,12 +1498,11 @@ export default {
 
             if (err.response.status == 422) {
               console.log({ err: err });
-              console.log(err.response.data.message);
 
               this.flashMessage.show({
                 status: "error",
 
-                message: err.response.data.message,
+                message: this.flashErrors(err.response.data.errors),
                 blockClass: "custom-block-class",
               });
             } else {
@@ -1521,6 +1518,15 @@ export default {
             resolve(false);
           });
       });
+    },
+
+    flashErrors(errors) {
+      let err = "";
+      Object.values(errors).forEach((element) => {
+        err = element[0];
+      });
+
+      return err;
     },
 
     chooseProfile1: function () {
@@ -1573,11 +1579,8 @@ export default {
 
     this.Country();
 
-    this.profileBusiness();
+   // this.profileBusiness();
 
-    //this.filters()
-
-    //this.Setcategoryfiters()
   },
 
   components: {
@@ -1612,9 +1615,16 @@ export default {
     },
     selectedsubcategories: function () {
       let sub_cat = [];
-      console.log(this.filterselectvalue);
+     
       this.filterselectvalue.forEach((item) => {
-        sub_cat.push(item.subcategory_id);
+      
+         if (item.subcategory_id) {
+         sub_cat.push(item.subcategory_id);
+        } else {
+          sub_cat.push(item.subcategoryId);
+        }
+
+
       });
       return sub_cat;
     },

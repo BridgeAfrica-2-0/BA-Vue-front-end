@@ -1,5 +1,5 @@
 <template>
-   <div class="row">
+  <div class="row">
     <div class="container-fluid">
       <div v-for="(image, cmp) in allImages" :key="cmp">
         <!-- {{post.id}} -->
@@ -30,7 +30,7 @@
           </b-modal>
 
           <div class="mediadesc">
-            <ul class="navbar-nav pull-right">
+            <ul class="navbar-nav pull-right options">
               <li class="nav-item dropdown m-0 p-0">
                 <b-dropdown
                   size="sm"
@@ -47,13 +47,18 @@
                     >
                     </b-icon>
                   </template>
-                  <b-dropdown-item href="#" @click="downloadPic(im.id)"
+                  <b-dropdown-item href="#" @click="downloadPic(im)"
                     >Download</b-dropdown-item
                   >
-                  <b-dropdown-item href="#" @click="setProfilePic(im.id)"
+                  <b-dropdown-item
+                    href="#"
+                    @click="setProfilePic(im.id)"
+                    v-if="typeOfMedia(im.path) != 'video'"
                     >Make Profile Picture</b-dropdown-item
                   >
-                  <b-dropdown-item @click="setCoverPics(im.id)"
+                  <b-dropdown-item
+                    @click="setCoverPics(im.id)"
+                    v-if="typeOfMedia(im.path) != 'video'"
                     >Make Cover Photo</b-dropdown-item
                   >
                   <b-dropdown-item href="#" @click="deleteImage(im.id)"
@@ -63,6 +68,8 @@
               </li>
             </ul>
           </div>
+
+          <br />
         </div>
       </div>
       <vue-easy-lightbox
@@ -80,9 +87,10 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from "vuex";
+import { mapActions } from "vuex";
 import { fullMediaLink } from "@/helpers";
 
+import { v4 } from "uuid";
 export default {
   props: {
     album: {},
@@ -111,7 +119,6 @@ export default {
 
   data() {
     return {
-      
       img_url: null,
       profile_pic: null,
       loading: false,
@@ -206,17 +213,16 @@ export default {
       this.allImages = newImage;
     },
 
-    downloadPics(url, id) {
-      const imageSrc = fullMediaLink(url);
-      console.log(imageSrc);
-
-      this.onDownloadPic(id)
-
+    downloadPic(media) {
+      this.onDownloadPic(media.id)
         .then((response) => {
           var fileURL = window.URL.createObjectURL(new Blob([response.data]));
           var fileLink = document.createElement("a");
           fileLink.href = fileURL;
-          fileLink.setAttribute("download", "file.png");
+          fileLink.setAttribute(
+            "download",
+            `${v4()}.${this.getFileExtension(media.path)}`
+          );
           document.body.appendChild(fileLink);
           fileLink.click();
           this.flashMessage.show({
@@ -358,6 +364,10 @@ export default {
 </script>
 
 <style>
+.options {
+  background: #e75c18;
+  border-radius: 50%;
+}
 .notFound {
   text-align: center;
   font-weight: bold;

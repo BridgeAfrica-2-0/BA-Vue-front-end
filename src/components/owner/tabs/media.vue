@@ -40,14 +40,13 @@ import _ from "lodash";
 import { mapGetters } from "vuex";
 
 export default {
-
-  props:{
-    type:{
-      type:String,
+  props: {
+    type: {
+      type: String,
       validator: function (value) {
-        return ['profile', 'network', 'business'].indexOf(value) !== -1
-      }
-    }
+        return ["profile", "network", "business"].indexOf(value) !== -1;
+      },
+    },
   },
   data: function () {
     return {
@@ -131,6 +130,7 @@ export default {
 </script>
 
 <style scoped>
+
 .load {
   width: 4rem;
   height: 4rem;

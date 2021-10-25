@@ -62,7 +62,7 @@
             </a>
 
             <div class="mediadesc" v-if="canBeUpdate(album)">
-              <ul class="navbar-nav pull-right">
+              <ul class="navbar-nav pull-right options">
                 <li class="nav-item dropdown">
                   <b-dropdown
                     size="sm"
@@ -193,7 +193,7 @@
 import Images from "./images";
 import { mapActions, mapGetters, mapMutations } from "vuex";
 
-import defaultImage from "@/assets/img/wankue-filler.jpg"
+import defaultImage from "@/assets/img/nothing.jpg";
 
 import { fullMediaLink } from "@/helpers";
 export default {
@@ -264,9 +264,7 @@ export default {
     getFullMediaLink: fullMediaLink,
 
     cover(cover) {
-      return cover.length
-        ? this.getFullMediaLink(cover[0])
-        : defaultImage;
+      return cover.length ? this.getFullMediaLink(cover[0]) : defaultImage;
     },
 
     ...mapMutations({
@@ -316,11 +314,11 @@ export default {
         .catch(() => {
           this.loading = false;
           this.sending = false;
-            this.flashMessage.show({
-              status: "error",
-              message: "Album already exists with this name",
-            });
-         
+          this.$bvModal.hide("createalbumModal");
+          this.flashMessage.show({
+            status: "error",
+            message: "Album already exists with this name",
+          });
         });
     },
 
@@ -405,6 +403,11 @@ export default {
 </script>
 
 <style scoped>
+.options {
+  background: #e75c18 !important;
+  border-radius: 50%;
+}
+
 .botmediadess-position {
   text-align: center;
   bottom: -50%;

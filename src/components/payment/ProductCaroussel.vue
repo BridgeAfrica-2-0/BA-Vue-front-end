@@ -32,24 +32,27 @@
 
 <script>
 	export default {
+		props: {
+			productImages: Array
+		},
 		data() {
 			return {
 				slide: 0,
 				sliding: null,
-				productImages: [
-					{
-						img: require("@/assets/img/payment/headset.jpg"),
-					},
-					{
-						img: require("@/assets/img/payment/headset1.jpg"),
-					},
-					{
-						img: require("@/assets/img/payment/headset2.jpg"),
-					},
-					{
-						img: require("@/assets/img/payment/headset3.jpg"),
-					},
-				],
+				// productImages: [
+				// 	{
+				// 		img: require("@/assets/img/payment/headset.jpg"),
+				// 	},
+				// 	{
+				// 		img: require("@/assets/img/payment/headset1.jpg"),
+				// 	},
+				// 	{
+				// 		img: require("@/assets/img/payment/headset2.jpg"),
+				// 	},
+				// 	{
+				// 		img: require("@/assets/img/payment/headset3.jpg"),
+				// 	},
+				// ],
 			};
 		},
 		methods: {

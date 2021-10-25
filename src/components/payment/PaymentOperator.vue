@@ -50,7 +50,7 @@
 					></b-form-radio>
 				</div>
 			</div>
-			<div class="mt-4 mb-3 operator">
+			<div class="my-4 operator">
 				<div class="operator-img-box">
 					<img
 						:src="require('@/assets/img/payment/expressU.jpg')"
@@ -62,7 +62,7 @@
 						Express Union
 					</p>
 				</div>
-				<div class="operator-select-box">
+				<div class="operator-select-box ml-md-2">
 					<b-form-radio
 						v-model="operator"
 						name="operator"
@@ -78,7 +78,7 @@
 						@click="requestPayment"
 						class="float-right btn-custom p-2 btn btn-primary mt-2"
 					>
-						Pay: 13 000 XAF
+						Pay: {{ formatMoney(price) }}
 					</button>
 				</div>
 			</div>
@@ -89,9 +89,20 @@
 <script>
 	export default {
 		name: "PaymentOperator",
+		props: {
+			price: {
+				type: Number,
+				default: 0,
+			},
+		},
 		data() {
 			return {
 				operator: "",
+				formatObject: new Intl.NumberFormat("fr-FR", {
+					style: "currency",
+					currency: "XAF",
+					minimumFractionDigits: 2,
+				}),
 			};
 		},
 		methods: {
@@ -99,7 +110,10 @@
 				this.$emit("showreview");
 			},
 			requestPayment() {
-				this.$emit("requestpayment");
+				this.$emit("requestpayment", this.price);
+			},
+			formatMoney(money) {
+				return this.formatObject.format(money);
 			},
 		},
 	};
@@ -131,7 +145,7 @@
 	.operator-name {
 		width: 30rem;
 	}
-	.operator-select > input {
+	.operator-select {
 		cursor: pointer !important;
 	}
 

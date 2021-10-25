@@ -46,8 +46,10 @@ const actions = {
   },
   async createOrder({ commit }, newOrder) {
     await axios.post('cart/create', newOrder).then((response) => {
-      commit
+      commit('setOrder', newOrder)
       console.log(response.data);
+    }).catch((error)=>{
+      console.log(error)
     })
   },
   async getCart({ commit }) {

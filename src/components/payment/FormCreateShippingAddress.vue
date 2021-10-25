@@ -140,11 +140,7 @@
 
 			<div class="d-flex justify-content-between align-items-center">
 				<b-button class="btn-custom mr-3" type="submit" variant="primary">
-					<b-spinner
-						v-if="loading"
-						small
-						variant="light"
-					></b-spinner>
+					<b-spinner v-if="loading" small variant="light"></b-spinner>
 					Save</b-button
 				>
 				<b-button class="btn-custom" type="reset" variant="success"
@@ -164,6 +160,10 @@
 				require: true,
 			},
 			modal: Boolean,
+			mode: {
+				type: String,
+				default: "create",
+			},
 		},
 		data() {
 			return {
@@ -193,34 +193,46 @@
 		},
 		mounted() {
 			this.$store.dispatch("auth/country");
+			if (this.mode !== "create") {
+				this.getRegions(this.form.country_id);
+				this.getDivisions(this.form.region_id);
+				this.getCouncils(this.form.division_id);
+				this.getNeigbourhoods(this.form.council_id);
+			}
 		},
 		methods: {
 			onSubmit(event) {
 				event.preventDefault();
 				this.loading = true;
 				this.form.name = this.username;
-				this.$store
-					.dispatch("checkout/createShipping", this.form)
-					.then(() => {
-						this.loading = false;
-						this.errorAppend = false;
-						this.$emit("switchstep", 2);
-					})
-					.catch(() => {
-						this.loading = false;
-						this.errorAppend = true;
-					});
+				if (this.mode === "create") {
+					this.$store
+						.dispatch("checkout/createShipping", this.form)
+						.then(() => {
+							this.loading = false;
+							this.errorAppend = false;
+							this.$emit("switchstep", 2);
+						})
+						.catch(() => {
+							this.loading = false;
+							this.errorAppend = true;
+						});
+				} else {
+					console("update shipping");
+				}
 			},
 			onReset(event) {
 				event.preventDefault();
-				this.form.name = "";
-				this.form.phone = "";
-				this.form.country_id = "";
-				this.form.city = "";
-				this.form.neighbourhood_id = "";
-				this.form.region_id = "";
-				this.form.division_id = "";
-				this.form.council_id = "";
+				if (this.mode === "create") {
+					this.form.name = "";
+					this.form.phone = "";
+					this.form.country_id = "";
+					this.form.city = "";
+					this.form.neighbourhood_id = "";
+					this.form.region_id = "";
+					this.form.division_id = "";
+					this.form.council_id = "";
+				}
 				if (this.modal) {
 					this.$emit("closecshippingm");
 				}

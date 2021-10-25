@@ -1,19 +1,20 @@
 <template
 	><b-card class="">
 		<div class="card-header title-font-size font-weight-bold bg-white h-50">
-			Review and confirm your Order ( {{ order_items.length }} item)
+			Review and confirm your Order ( {{ cartLenght }} item)
 			<br />
 			Business: Largo
 		</div>
 		<div class="order card-body">
 			<div>
-				<OrderProductsList :order_items="order_items" />
+				<OrderProductsList />
 				<div class="row">
 					<div class="col d-flex justify-content-end mt-4">
 						<button
-							@click="showOperator"
+							@click="handleCreateOrder"
 							class="btn text-14 btn-custom btn-primary px-5 shadow-sm"
 						>
+							<b-spinner v-if="loading" small variant="light"></b-spinner>
 							Order
 						</button>
 					</div>
@@ -33,76 +34,64 @@
 		},
 		data() {
 			return {
-				order_items: [
-					{
-						name: "Headset",
-						amount: 12000,
-						quantity: 3,
-						shipping: 1000,
-						total: 13000,
-					},
-					{
-						name: "Smartphone",
-						amount: 120000,
-						quantity: 2,
-						shipping: 2000,
-						total: 13000,
-					},
-					{
-						name: "HP computer",
-						amount: 602000,
-						quantity: 1,
-						shipping: 5000,
-						total: 13000,
-					},
-					{
-						name: "Smart Watch",
-						amount: 12000,
-						quantity: 3,
-						shipping: 1000,
-						total: 13000,
-					},
-					{
-						name: "USB Key",
-						amount: 120000,
-						quantity: 2,
-						shipping: 2000,
-						total: 13000,
-					},
-					{
-						name: "Computer Keyboard",
-						amount: 602000,
-						quantity: 1,
-						shipping: 5000,
-						total: 13000,
-					},
-				],
+				loading: false,
 			};
+		},
+		computed: {
+			cartLenght() {
+				return this.$store.state.checkout.cart.data.length;
+			},
+			cart() {
+				return this.$store.state.checkout.cart;
+			},
+			allShipping() {
+				return this.$store.state.checkout.allShipping;
+			},
 		},
 		methods: {
 			showOperator() {
+				this.prepareOrder();
 				this.$emit("showoperator");
 			},
-			prepareOrder() {
+			handleCreateOrder() {
+				this.loading = true;
 				let order_data = {};
-				const productlength = this.order_items.length;
+				order_data["produits"] = {};
+				let order_items = this.cart.data;
+				const productlength = this.cartLenght;
 
+				//init variable
+				order_data.total_amount = 0;
+				order_data.tax_amount = 200;
+				order_data.shipping_address = this.allShipping[0].id;
+				order_data.shipping_amount = 3000;
+
+				console.log(order_items[0]);
 				for (let index = 0; index < productlength; index++) {
-					order_data[this.order_items[index].name] = {
-						order_id: 1,
-						product_id: index + 1,
-						quantity: this.order_items[index].quantity,
-						price: this.order_items[index].amount,
+					order_data["produits"][`data${index}`] = {
+						product_id: order_items[index].product_id,
+						quantity: order_items[index].quantity,
+						price: order_items[index].product_price,
 						total_amount:
-							this.order_items[index].amount * this.order_items[index].quantity,
+							order_items[index].product_price * order_items[index].quantity,
 					};
+					order_data.total_amount +=
+						order_data["produits"][`data${index}`].total_amount;
 				}
+				order_data.total_amount += order_data.shipping_amount;
 				console.log(order_data);
+				this.$store
+					.dispatch("checkout/createOrder", order_data)
+					.then(() => {
+						this.$emit("showoperator", order_data.total_amount);
+						this.loading = false;
+					})
+					.catch(() => {
+						this.loading = false;
+					});
 			},
 		},
-		mounted(){
-			this.prepareOrder()
-		}
+		mounted() {},
 	};
 </script>
 

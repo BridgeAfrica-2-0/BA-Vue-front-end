@@ -21,7 +21,7 @@
 						>
 					</div>
 				</div>
-				<OrderProductsList :order_items="order_items" />
+				<OrderProductsList />
 				<div class="row my-3">
 					<!-- <div class="col-12  d-flex justify-content-center">
 						<b-button class="btn-custom" variant="primary">Order</b-button>

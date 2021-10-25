@@ -1,16 +1,33 @@
 <template>
-	<b-modal
-		id="create-shipping-modal"
-		:title="title"
-		ref="create-shipping-modal"
-		hide-footer
-	>
-		<FormCreateShippingAddress
-			@closecshippingm="hideModal"
-			:modal="true"
-			:form="shippingAddress"
-		/>
-	</b-modal>
+	<div class="modal-shi">
+		<b-modal
+			id="create-shipping-modal"
+			:title="title"
+			ref="create-shipping-modal"
+			hide-footer
+			v-if="mode === 'create'"
+		>
+			<FormCreateShippingAddress
+				@closecshippingm="hideModal"
+				:modal="true"
+				:form="shippingAddress"
+			/>
+		</b-modal>
+		<b-modal
+			v-else
+			id="edit-shipping-modal"
+			:title="title"
+			ref="create-shipping-modal"
+			hide-footer
+		>
+			<FormCreateShippingAddress
+			:mode="mode"
+				@closecshippingm="hideModal"
+				:modal="true"
+				:form="editForm"
+			/>
+		</b-modal>
+	</div>
 </template>
 
 <script>
@@ -23,6 +40,13 @@
 				type: String,
 				default: "Add Shipping Address",
 			},
+			mode: {
+			type: String,
+			default: 'create'
+			},
+			editForm: {
+				type: Object
+			}
 		},
 		components: {
 			FormCreateShippingAddress,

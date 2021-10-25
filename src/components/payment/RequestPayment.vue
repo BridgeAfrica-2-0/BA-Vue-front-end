@@ -26,7 +26,7 @@
 						variant="primary"
 						class="font-weight-light shadow-sm btn-custom text-14"
 						@click="confirmPayment"
-						>PAY 13 000XAF</b-button
+						>PAY {{formatMoney(price)}}</b-button
 					>
 				</div>
 			</div>
@@ -55,10 +55,26 @@
 			amount: {
 				type: String,
 			},
+			price: {
+				type: Number,
+				default: 0,
+			},
+		},
+		data() {
+			return {
+				formatObject: new Intl.NumberFormat("fr-FR", {
+					style: "currency",
+					currency: "XAF",
+					minimumFractionDigits: 2,
+				}),
+			};
 		},
 		methods: {
 			confirmPayment() {
 				this.$emit("confirmpayment");
+			},
+			formatMoney(money) {
+				return this.formatObject.format(money);
 			},
 		},
 	};
@@ -80,7 +96,7 @@
 		/* .payment-body{
 			padding: 20px 0px !important;
 		} */
-		.card-body{
+		.card-body {
 			padding: 0 !important;
 		}
 	}

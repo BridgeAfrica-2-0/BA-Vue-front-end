@@ -7,6 +7,12 @@
 			<div class="col-12">
 				<CreateShippingModal />
 			</div>
+			<div class="col-12">
+				<CreateShippingModal title="Edit Shipping Address" mode="edit" :editForm="shippingsTab[0]" />
+			</div>
+			<div class="col-12">
+				<ChangeShippingAddress :shippingTab="shippingTab" :currentShipping="1"/>
+			</div>
 		</div>
 		<b-card-text class="mt-4 d-flex justify-content-between align-items-start">
 			<div class="row w-100">
@@ -32,6 +38,7 @@
 						<div class="">
 							<a
 								href="#"
+								v-b-modal.edit-shipping-modal
 								class="text-primary text-14 font-weight-bold text-uppercase mr-1 mr-sm-2"
 								>Edit</a
 							>
@@ -55,7 +62,7 @@
 										></b-icon>
 										<span class="">Add</span>
 									</b-dropdown-item-button>
-									<b-dropdown-item-button>
+									<b-dropdown-item-button v-b-modal.change-shipping-modal>
 										<b-icon
 											variant=""
 											class="mr-2"
@@ -87,6 +94,7 @@
 <script>
 	import ConfirmOperation from "./ConfirmOperation.vue";
 	import CreateShippingModal from "./CreateShippingModal.vue";
+	import ChangeShippingAddress from "./ChangeShippingAddress.vue";
 	export default {
 		name: "ShippingAddress",
 		data() {
@@ -97,6 +105,7 @@
 		components: {
 			ConfirmOperation,
 			CreateShippingModal,
+			ChangeShippingAddress
 		},
 		methods: {
 			handleDeleteShipping(id) {
@@ -109,6 +118,7 @@
 		computed: {
 			shippingsTab() {
 				return this.$store.state.checkout.allShipping;
+
 			},
 		},
 		mounted() {

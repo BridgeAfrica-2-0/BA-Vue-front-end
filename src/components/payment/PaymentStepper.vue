@@ -17,7 +17,7 @@
 		<b-container fluid="lg">
 			<b-row v-if="current_step === 1 && !showRequestPayment">
 				<b-col class="my-4" cols="12">
-					<CreateShippingAddress @switchstep="handleSwitchStep"/>
+					<CreateShippingAddress @switchstep="handleSwitchStep" />
 				</b-col>
 			</b-row>
 
@@ -41,6 +41,7 @@
 					<PaymentOperator
 						@requestpayment="handleRequestPayment"
 						@showreview="handleShowReview"
+						:price="order_price"
 					/>
 				</b-col>
 			</b-row>
@@ -50,7 +51,7 @@
 					class="my-4"
 					cols="12"
 				>
-					<RequestPayment @confirmpayment="handleConfirmPayment" />
+					<RequestPayment :price="order_price" @confirmpayment="handleConfirmPayment" />
 				</b-col>
 				<b-col
 					v-if="current_step === 2 && showConfirmPayment"
@@ -107,6 +108,7 @@
 				showReview: false,
 				showRequestPayment: false,
 				showConfirmPayment: false,
+				order_price: 0,
 			};
 		},
 		computed: {
@@ -135,18 +137,20 @@
 				this.steps[current_step - 1].status = false;
 				this.steps[next_step - 1].status = true;
 			},
-			handleShowOperator() {
+			handleShowOperator(price) {
 				// this.showOperators = true;
 				// this.showReview = false;
+				this.order_price = price;
 				this.onClickNext();
 			},
 			handleShowReview() {
 				this.showReview = true;
 				this.showOperators = false;
 			},
-			handleRequestPayment() {
+			handleRequestPayment(price) {
 				this.showRequestPayment = true;
 				this.current_step = 1;
+				this.order_price = price;
 				this.steps = [
 					{
 						text: "Request Payment",

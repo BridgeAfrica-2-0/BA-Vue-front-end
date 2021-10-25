@@ -25,7 +25,7 @@
         <div v-if="!hasLoadAlbum">
           <b-spinner class="load" label="Large Spinner"></b-spinner>
         </div>
-        <Album v-else />
+        <Album :canUpload="!canUpload" v-else />
       </b-tab>
     </b-tabs>
   </div>
@@ -40,6 +40,15 @@ import _ from "lodash";
 import { mapGetters } from "vuex";
 
 export default {
+
+  props:{
+    type:{
+      type:String,
+      validator: function (value) {
+        return ['profile', 'network', 'business'].indexOf(value) !== -1
+      }
+    }
+  },
   data: function () {
     return {
       canUpload: false,
@@ -64,24 +73,22 @@ export default {
 
   methods: {
     //function to get album
-    all(allImage) {
-      const data = allImage.filter(e => e.media.length != 0 )
-        .map((item) => {
-          const value = {
-            id: item.id,
-            content: item.content,
-          };
+    all(images) {
+      const data = images
+        .filter((img) => img.media.length)
+        .map((img) => {
+          let render = img.media.map((picture) => {
+            return {
+              id: img.id,
+              content: img.content,
+              media: [
+                { path: picture.path, type: picture.type, id: picture.id },
+              ],
+            };
+          });
 
-          if (!item.media.length) return Object.assign(value, { media: [] });
-          else {
-            const data = item.media.map((et) =>
-              Object.assign(value, { media: [{ path: et.path, type: et.type }] })
-            );
-            return data;
-          }
-        })
-       
-     
+          return render;
+        });
 
       return _.flatten(data);
     },
@@ -106,7 +113,6 @@ export default {
         this.$store
           .dispatch("UserProfileOwner/getImages", this.urlData)
           .then(() => {
-            console.log("hey yeah");
             this.hasLoadPicture = true;
           })
           .catch((err) => {

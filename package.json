@@ -43,6 +43,7 @@
     "vue-core-video-player": "^0.2.0",
     "vue-country-region-select": "^2.0.14",
     "vue-country-select": "^0.2.2",
+    "vue-easy-lightbox": "^0.16.2",
     "vue-emoji-picker": "^1.0.3",
     "vue-form-wizard": "^0.8.4",
     "vue-gallery-slideshow": "^1.5.2",

@@ -160,6 +160,11 @@ Vue.component("v-select", vSelect);
 
 import i18n from "./i18n";
 
+import VueEasyLightbox from 'vue-easy-lightbox'
+
+// Method 1. via Vue.use
+Vue.use(VueEasyLightbox)
+
 Vue.config.productionTip = false;
 var user=null;
 

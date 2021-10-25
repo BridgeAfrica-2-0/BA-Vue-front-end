@@ -43,21 +43,21 @@
             class="createp img-gall predit2"
             v-for="album in getAlbums"
             :key="album.id"
+            @click="showlbum(album.id, album.name)"
           >
             <a>
-              <span @click="showlbum(album.id, album.name)">
+              <span>
                 <img
                   class="card-img album-img"
-                  :src="album.cover[0] | path"
+                  :src="cover(album.cover)"
                   alt=""
                 />
               </span>
-
-              <div class="botmediadess">
-                <p>
-                  {{ album.name }} <br />
-                  {{ album.items }} Items
-                </p>
+              <div class="createdesc botmedia">
+                <div class="botmediadess-position">
+                  <h6>{{ album.name }}</h6>
+                  <p>{{ album.items | plural }}</p>
+                </div>
               </div>
             </a>
 
@@ -181,7 +181,7 @@
         :canUpload="
           ['profile_picture', 'cover_photo', 'post'].indexOf(album_name) == -1
             ? true
-            : false
+            : canUpload
         "
         :images="albumImages"
       />
@@ -193,10 +193,17 @@
 import Images from "./images";
 import { mapActions, mapGetters, mapMutations } from "vuex";
 
+import defaultImage from "@/assets/img/wankue-filler.jpg"
+
 import { fullMediaLink } from "@/helpers";
 export default {
   components: {
     Images,
+  },
+  props: {
+    canUpload: {
+      type: Boolean,
+    },
   },
   data: function () {
     return {
@@ -223,6 +230,9 @@ export default {
 
   filters: {
     path: fullMediaLink,
+    plural: function (val) {
+      return val ? "Items" : "Item";
+    },
   },
 
   computed: {
@@ -251,6 +261,14 @@ export default {
       fetchAlbums: "UserProfileOwner/getAlbums",
     }),
 
+    getFullMediaLink: fullMediaLink,
+
+    cover(cover) {
+      return cover.length
+        ? this.getFullMediaLink(cover[0])
+        : defaultImage;
+    },
+
     ...mapMutations({
       mapUpdate: "UserProfileOwner/updateAlbum",
       remove: "UserProfileOwner/removeAlbum",
@@ -273,9 +291,7 @@ export default {
     },
 
     canBeUpdate(album) {
-      return ["profile_picture", "cover_photo", "post"].includes(album.name)
-        ? false
-        : true;
+      return ["Profile", "Cover", "post"].includes(album.name) ? false : true;
     },
 
     createAlbums() {
@@ -297,22 +313,14 @@ export default {
 
           this.loading = true;
         })
-        .catch((err) => {
+        .catch(() => {
           this.loading = false;
           this.sending = false;
-          if (err.response.status == 422) {
-            console.log({ err: err });
             this.flashMessage.show({
               status: "error",
-              message: err.response.data.message,
+              message: "Album already exists with this name",
             });
-          } else {
-            this.flashMessage.show({
-              status: "error",
-              message: "Unable to create your Album",
-            });
-            console.log({ err: err });
-          }
+         
         });
     },
 
@@ -395,6 +403,16 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.botmediadess-position {
+  text-align: center;
+  bottom: -50%;
+  width: 100%;
+  font-size: 20px;
+  position: relative;
+}
+</style>
 
 <style>
 .text-design {

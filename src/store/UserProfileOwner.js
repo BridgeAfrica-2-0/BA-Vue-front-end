@@ -122,7 +122,6 @@ export default {
     // for albums
     async getAlbums({ commit }) {
       const res = await axios.get("profile/album/show");
-      console.log(res.data.data.album);
       commit("setAlbums", res.data.data.album);
     },
 
@@ -162,7 +161,11 @@ export default {
     },
 
     async downloadPic({ commit }, id) {
-      const res = await axios.post(`profile/downloadMedia/${id}`);
+      return axios({
+        url: `profile/downloadMedia/${id}`,
+        method: "post",
+        responseType: "blob"
+      });
     },
   },
 };

@@ -100,7 +100,7 @@
 
         <b-modal
           id="modal-5"
-          title="Edit Intro"
+          :title="$t('profileowner.Edit_Intro')"
           ref="modal"
           @ok="handleOk"
         >

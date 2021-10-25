@@ -51,7 +51,7 @@
             <span style="display: inline-block;">
               <h6 class=" profile-name text-center ">
                 <b> <b-link> {{info.user.name}} </b-link> </b> <br />
-                <span class="duration">  {{ nFormatter(total.total_community)}} Community </span>
+                <span class="duration">  {{ nFormatter(total.total_community)}} {{ $t("profileowner.Community") }} </span>
               </h6>
             </span>
 
@@ -91,7 +91,7 @@
                         :icon="['fas', 'pencil-alt']"
                         size="lg"
                       />
-                      Edit
+                      {{ $t("profileowner.Edit") }}
                     </b-button>
 
                     <b-dropdown
@@ -106,7 +106,7 @@
                       </template>
 
                      <b-dropdown-item  @click="selectCover" 
-                    > Change Cover</b-dropdown-item
+                    > {{ $t("profileowner.Change_Cover") }}</b-dropdown-item
                   >
 
   <!--
@@ -114,7 +114,7 @@
                         >Invite Friends On Bridge Africa</b-dropdown-item
                       >
 --> 
-                      <b-dropdown-item>View As</b-dropdown-item>
+                      <b-dropdown-item>{{ $t("profileowner.View_As") }}</b-dropdown-item>
                     </b-dropdown>
                   </span>
                 </div>
@@ -143,7 +143,7 @@
 
           
             
-            <b-modal id="coverphoto" ref="coverphoto" @ok="submitCover" title="Upload  Cover photo">
+            <b-modal id="coverphoto" ref="coverphoto" @ok="submitCover" :title="$t('profileowner.Upload_Cover_photo')">
               <div class="w3-container">
 
 

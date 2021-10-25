@@ -34,7 +34,7 @@
           class="modal w-25"
           hide-footer
           id="modal-5"
-          title="Add other Business"
+          :title="$t('profileowner.Add_other_Business')"
         >
           <b-form>
             <div>
@@ -42,7 +42,7 @@
                 <div class="col">
                   <b-form-input
                     v-model="business"
-                    placeholder="Business"
+                    :placeholder="$t('profileowner.Business')"
                     required
                   ></b-form-input>
                 </div>

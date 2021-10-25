@@ -13,7 +13,7 @@
         </b-col>
         <b-col cols="9" md="11" class="p-0 m-0 pr-3">
           <input
-            placeholder="Post a business update"
+            :placeholder="$t('profileowner.Post_a_business_update')"
             v-b-modal.modal-xl
             class="comment"
             type="text"
@@ -37,7 +37,7 @@
             <!-- Add Movie -->
             <b-col cols="5" class="text-right m-0 p-0">
               <b-button
-                title="Add Movie"
+                :title="$t('profileowner.Add_Movie')"
                 size="sm"
                 variant="outline-primary"
                 @click="$refs.movie.click()"
@@ -62,7 +62,7 @@
                 ref="document2"
               />
               <b-button
-                title="Add Hyperlink"
+                :title="$t('profileowner.Add_Hyperlink')"
                 size="sm"
                 variant="outline-primary"
                 @click="$refs.document2.click()"
@@ -75,7 +75,7 @@
             <!-- Post-->
             <b-col cols="3" class="text-right p-0 m-0">
               <b-button
-                title="Add Hyperlink"
+                :title="$t('profileowner.Add_Hyperlink')"
                 size="sm"
                 variant="outline-primary"
                 @click="createPost_"
@@ -111,7 +111,7 @@
             ref="modal-edit"
             centered
             hide-footer
-            title="Update Post"
+            :title="$t('profileowner.Update_Post')"
             @hidden="resetPostData"
           >
             <b-row ref="loader">
@@ -135,7 +135,7 @@
                   <b-form-textarea
                     id="textarea-small"
                     class="mb-2 border-none"
-                    placeholder="Post a business update"
+                    :placeholder="$t('profileowner.Post_a_business_update')"
                     v-model="edit_description"
                     :class="{
                       'is-valid': createPost.postBusinessUpdate !== '',
@@ -168,7 +168,7 @@
                       />
 
                       <b-button
-                        title="Add Movie"
+                        :title="$t('profileowner.Add_Movie')"
                         size="sm"
                         variant="outline-primary"
                         @click="$refs.movies.click()"
@@ -180,7 +180,7 @@
                         />
                       </b-button>
                       <b-button
-                        title="Add Hyperlink"
+                        :title="$t('profileowner.Add_Hyperlink')"
                         size="sm"
                         variant="outline-primary"
                         @click="$refs.document.click()"
@@ -262,7 +262,7 @@
             ref="modal-xl"
             centered
             hide-footer
-            title="Create Post"
+            :title="$t('profileowner.Create_Post')"
             @hidden="resetPostData"
           >
             <b-row ref="loader">
@@ -286,7 +286,7 @@
                   <b-form-textarea
                     id="textarea-small"
                     class="mb-2 border-none"
-                    placeholder="Post a business update"
+                    :placeholder="$t('profileowner.Post_a_business_update')"
                     v-model="createPost.postBusinessUpdate"
                     :class="{
                       'is-valid': createPost.postBusinessUpdate !== '',
@@ -319,7 +319,7 @@
                       />
 
                       <b-button
-                        title="Add Movie"
+                        :title="$t('profileowner.Add_Movie')"
                         size="sm"
                         variant="outline-primary"
                         @click="$refs.movies.click()"
@@ -331,7 +331,7 @@
                         />
                       </b-button>
                       <b-button
-                        title="Add Hyperlink"
+                        :title="$t('profileowner.Add_Hyperlink')"
                         size="sm"
                         variant="outline-primary"
                         @click="$refs.document.click()"

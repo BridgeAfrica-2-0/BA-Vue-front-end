@@ -7,11 +7,11 @@
     margin-right: -12px;"
       >
         <b-tabs pills content-class="mt-3 f-left">
-          <b-tab title="People" active> <People /> </b-tab>
+          <b-tab :title="$t('profileowner.People')" active> <People /> </b-tab>
   
-          <b-tab title="Businesses" > <Businesses /> </b-tab>
+          <b-tab :title="$t('profileowner.Businesses')" > <Businesses /> </b-tab>
 
-           <b-tab title="Network" > <Network /> </b-tab>
+           <b-tab :title="$t('profileowner.Network')" > <Network /> </b-tab>
         </b-tabs>
       </b-card>
     </div>

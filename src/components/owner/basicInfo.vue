@@ -15,7 +15,7 @@
         v-b-modal.modal-1
         >{{ $t("profileowner.Edit")}}
       </b-button>
-      <b-modal hide-footer id="modal-1" title="Date Of Birth">
+      <b-modal hide-footer id="modal-1" :title="$t('profileowner.Date_Of_Birth')">
         <div>
           <label>{{ $t("profileowner.Choose_a_date")}}</label>
           <b-form @submit="add">
@@ -61,7 +61,7 @@
         v-b-modal.modal-2
         >{{ $t("profileowner.Edit")}}
       </b-button>
-      <b-modal hide-footer id="modal-2" title="Gender">
+      <b-modal hide-footer id="modal-2" :title="$t('profileowner.Gender')">
         <b-form>
           <div>
             <div class="row">

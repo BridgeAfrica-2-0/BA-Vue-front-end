@@ -4,6 +4,7 @@ import welcome from './welcome.json'
 import dashboard from './dashboard.json'
 import verification from './verification.json'
 import profileowner from './profileowner.json'
+import passrecover from './passrecover.json'
 
 export const defaultLocale = 'fr'
 
@@ -14,4 +15,5 @@ export const fr = {
     dashboard: dashboard,
     verification: verification,
     profileowner: profileowner,
+    passrecover: passrecover,
 }

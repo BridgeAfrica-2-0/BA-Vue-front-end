@@ -112,7 +112,7 @@
 
     <b-modal
       hide-footer
-      :title="editNet ? 'Edit network' : 'Add Network'"
+      :title="editNet ? $t('profileowner.Edit_network') : $t('profileowner.Add_Network')"
       size="lg"
       v-model="showModal"
     >

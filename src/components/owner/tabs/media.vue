@@ -8,8 +8,8 @@
     <hr />
 
     <b-tabs content-class="mt-3" pills>
-      <b-tab title="Posts" active> <Images /> </b-tab>
-      <b-tab title="Albums"> <Album /> </b-tab>
+      <b-tab :title="$t('profileowner.Posts')" active> <Images /> </b-tab>
+      <b-tab :title="$t('profileowner.Albums')"> <Album /> </b-tab>
     </b-tabs>
   </div>
 </template>

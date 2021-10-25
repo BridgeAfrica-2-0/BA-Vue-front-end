@@ -5,7 +5,7 @@
         <h6 class="mb-0"><b-icon icon="people-fill"></b-icon> {{$t("profileowner.Following")}}</h6>
       </template>
       <b-tabs content-class="mt-3">
-        <b-tab title="People Who Follow Me" active>
+        <b-tab :title="$t('profileowner.People_Who_Follow_Me')" active>
           <b-row>
             <b-col sm="12" md="4" v-for="i in 12" :key="i" class="mb-2">
               <b-list-group-item class="d-flex align-items-center">
@@ -36,7 +36,7 @@
             </b-col>
           </b-row>
         </b-tab>
-        <b-tab title="People I Am Following">
+        <b-tab :title="$t('profileowner.People_I_Am_Following')">
           <b-row>
             <b-col sm="12" md="4" v-for="i in 12" :key="i" class="mb-2">
               <b-list-group-item class="d-flex align-items-center">

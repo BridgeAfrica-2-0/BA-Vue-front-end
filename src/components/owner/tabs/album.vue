@@ -15,11 +15,11 @@
             </div>
           </div>
 
-          <b-modal hide-footer title="Create album" id="createalbumModal">
+          <b-modal hide-footer :title="$t('profileowner.Create_album')" id="createalbumModal">
             <div ref="creatform">
               <b-form>
                 <b-form-input
-                  placeholder="Album name"
+                  :placeholder="$t('profileowner.Album_name')"
                   v-model="name"
                 ></b-form-input>
                 <b-button class="mt-2" variant="primary" @click="createAlbum">
@@ -83,14 +83,14 @@
 
         <b-modal
           hide-footer
-          title="Create album"
+          :title="$t('profileowner.Create_album')"
           ref="editalbum"
           id="editalbum"
         >
           <div ref="creatform">
             <b-form>
               <b-form-input
-                placeholder="Album name"
+                :placeholder="$t('profileowner.Album_name')"
                 v-model="edit_name"
               ></b-form-input>
               <b-button

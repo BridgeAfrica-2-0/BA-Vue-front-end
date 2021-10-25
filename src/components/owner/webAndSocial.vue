@@ -11,7 +11,7 @@
     <b-link class="text-decoration-none" v-b-modal.modal-7
       ><b-icon icon="plus" variant="primary"></b-icon> {{ $t("profileowner.Add_a_Website")}}</b-link
     >
-    <b-modal id="modal-7" title="Add a Website">
+    <b-modal id="modal-7" :title="$t('profileowner.Add_a_Website')">
       <div>
         <div class="row">
           <div class="col">

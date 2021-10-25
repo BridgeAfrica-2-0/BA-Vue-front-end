@@ -21,14 +21,14 @@
       <b-modal
         id="createBusinessModal"
         ref="createBusinessModal"
-        title="Add Bussiness"
+        :title="$t('profileowner.Add_Bussiness')"
         size="lg"
         hide-footer
         @close="cancel"
       >
         <div>
           <form-wizard @on-complete="createBusiness">
-            <tab-content title="Business Indentity">
+            <tab-content :title="$t('profileowner.Business_Indentity')">
               <div class="form-card">
                 <div class="row">
                   <div class="col-md-6">
@@ -188,7 +188,7 @@
               </div>
             </tab-content>
 
-            <tab-content title=" Location ">
+            <tab-content :title="$t('profileowner.Location') ">
               <div class="form-card">
                 <div class="row">
                   <div class="col-md-6">
@@ -302,7 +302,7 @@
               </div>
             </tab-content>
 
-            <tab-content title=" Contact ">
+            <tab-content :title="$t('profileowner.Contact') ">
               <b-card>
                 <b-row>
                 

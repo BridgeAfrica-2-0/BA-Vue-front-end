@@ -22,7 +22,7 @@
 
       <b-modal
         id="phonemodal"
-        title="Add Phone Number"
+        :title="$t('profileowner.Add_Phone_Number')"
         hide-footer
         ref="phonemodal"
         @close="cancel"
@@ -51,7 +51,7 @@
 
       <b-modal
         id="currentcityModal"
-        title="Add current city"
+        :title="$t('profileowner.Add_current_city')"
         hide-footer
         ref="currentcityModal"
         @close="cancel"
@@ -80,7 +80,7 @@
       <b-modal
         id="hometownModal"
         ref="hometownModal"
-        title="Add home town"
+        :title="$t('profileowner.Add_home_town')"
         hide-footer
         @close="cancel"
       >
@@ -107,7 +107,7 @@
       <b-modal
         id="websiteModal"
         ref="websiteModal"
-        title="Add a website"
+        :title="$t('profileowner.Add_a_website')"
         hide-footer
         @close="cancel"
       >
@@ -133,7 +133,7 @@
 
       <b-modal
         id="sociallinkModal"
-        title="Add A social link"
+        :title="$t('profileowner.Add_A_social_link')"
         hide-footer
         ref="sociallinkModal"
         @close="cancel"
@@ -161,7 +161,7 @@
       <b-modal
         id="modal-6"
         ref="model-6"
-        title="Edit Date of Birth"
+        :title="$t('profileowner.Edit_Date_of_Birth')"
         hide-footer
         @close="cancel"
       >
@@ -401,7 +401,7 @@
         </button>
         <b-modal
           id="modal-7"
-          title="Add/Edit Gender"
+          :title="$t('profileowner.Add_Edit_Gender')"
           hide-footer
           ref="modal-7"
           @close="cancel"

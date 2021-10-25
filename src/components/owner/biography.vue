@@ -30,7 +30,7 @@
           required
           id="textarea"
           v-model="bio.user.biography"
-          placeholder="Enter something..."
+          :placeholder="$t('profileowner.Enter_something')"
           rows="3"
           max-rows="6"
         ></b-form-textarea>

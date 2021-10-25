@@ -8,7 +8,7 @@
           ref="modalxl"
           centered
           hide-footer
-          title="Upoad Image"
+          :title="$t('profileowner.Upoad_Image')"
         >
           <br />
 

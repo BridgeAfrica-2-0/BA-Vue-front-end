@@ -9,9 +9,9 @@
 
     <div no-body class="p-2">
       <b-tabs pills vertical>
-        <b-tab title="BIOGRAPHY" active><Biography /></b-tab>
-        <b-tab title="BASIC INFO"> <ContactandInfo /> </b-tab>
-        <b-tab title="EDUCATION AND WORK"><WorkAndEducation /></b-tab>
+        <b-tab :title="$t('profileowner.BIOGRAPHY')" active><Biography /></b-tab>
+        <b-tab :title="$t('profileowner.BASIC_INFO')"> <ContactandInfo /> </b-tab>
+        <b-tab :title="$t('profileowner.EDUCATION_AND_WORK')"><WorkAndEducation /></b-tab>
       </b-tabs>
   
     </div>

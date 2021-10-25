@@ -61,16 +61,8 @@ export default {
 
     actions: {
         getCategories({ state, commit }, bussiness_id) {
-            return axios <<
-                << << < HEAD: src / store / marketSearch.js
-                .get("category") ===
-                === =
-                .get("category/all", {
-                    headers: {
-                        //   Authorization: `Bearer ${state.token}`
-                    }
-                }) >>>
-                >>> > main: src / store / market.js
+            return axios
+                .get("category")
                 .then(res => {
                     console.log("my Categories: ");
                     let categories = res.data.data;
@@ -85,15 +77,8 @@ export default {
                         };
 
                         axios
-                            .get( <<
-                                << << < HEAD: src / store / marketSearch.js `subcategory/${data.cat_id}?business_id=${data.bussiness_id}` ===
-                                === =
-                                `subcategory/all/${data.cat_id}?business_id=${data.bussiness_id}`, {
-                                    headers: {
-                                        //       Authorization: `Bearer ${state.token}`
-                                    }
-                                } >>>
-                                >>> > main: src / store / market.js
+                            .get(
+                                `subcategory/${data.cat_id}?business_id=${data.bussiness_id}`
                             )
                             .then(res => {
                                 console.log("all loaded!");
@@ -125,8 +110,7 @@ export default {
         },
 
         getFilter({ state }, sub_id) {
-            return axios <<
-                << << < HEAD: src / store / marketSearch.js
+            return axios
                 .get(`filters/subcategory/${sub_id}`)
         },
 
@@ -136,75 +120,55 @@ export default {
 
             return axios.get("market")
                 .then((res) => {
-                        commit("setLoader", false);
+                    commit("setLoader", false);
 
-                        console.log("products list: ", res.data);
-                        commit("setProducts", res.data); ===
-                        === =
-                        .get(`filters/subcategory/${sub_id}`, {
-                            headers: {
-                                //    Authorization: `Bearer ${state.token}`
-                            }
-                        })
-                    },
+                    console.log("products list: ", res.data);
+                    commit("setProducts", res.data);
+                })
+                .catch((err) => {
+                    commit("setLoader", false);
 
-                    getProducts({ commit }) {
-                        return axios.get("market", {
-                                headers: {
-                                    //      Authorization: "Bearer 24|5uVwIzU7r82crJj936tmqkuIMRXxm1ADTCbuRceL",
-                                },
-                                >>>
-                                >>> > main: src / store / market.js
-                            })
-                            .catch((err) => {
-                                commit("setLoader", false);
+                    console.error(err);
+                });
+        },
+        nextPage({ commit, state }, page) {
+            commit("setLoader", true);
+            commit("setProducts", { data: [] });
 
-                                console.error(err);
-                            });
-                    },
-                    nextPage({ commit, state }, page) {
-                        commit("setLoader", true);
-                        commit("setProducts", { data: [] });
+            return axios.get(`market?page=${page}`)
+                .then((res) => {
+                    commit("setLoader", false);
 
-                        return axios.get(`market?page=${page}`)
-                            .then((res) => {
-                                commit("setLoader", false);
+                    console.log("products list: ", res.data);
+                    commit("setProducts", res.data);
+                })
+                .catch((err) => {
+                    commit("setLoader", false);
 
-                                console.log("products list: ", res.data);
-                                commit("setProducts", res.data);
-                            })
-                            .catch((err) => {
-                                commit("setLoader", false);
+                    console.error(err);
+                });
+        },
+        searchProducts({ commit, state }, data) {
+            commit("setProducts", { data: [] });
+            commit("setLoader", true);
 
-                                console.error(err);
-                            });
-                    },
-                    searchProducts({ commit, state }, data) {
-                        commit("setProducts", { data: [] });
-                        commit("setLoader", true);
+            return axios.post("market/search", data, {
+                    headers: {
+                        Authorization: `Bearer ${state.token}`
+                    }
+                })
+                .then((res) => {
+                    commit("setLoader", false);
+                    console.log("Search results: ", res.data);
+                    commit("setProducts", res.data);
 
-                        return axios.post("market/search", data, {
-                                headers: { <<
-                                    << << < HEAD: src / store / marketSearch.js
-                                    Authorization: `Bearer ${state.token}`
-                                } ===
-                                === =
-                                //       Authorization: "Bearer 24|5uVwIzU7r82crJj936tmqkuIMRXxm1ADTCbuRceL",
-                            }, >>>
-                            >>> > main: src / store / market.js
-                        })
-                    .then((res) => {
-                        commit("setLoader", false);
-                        console.log("Search results: ", res.data);
-                        commit("setProducts", res.data);
-
-                    })
-                    .catch((err) => {
-                        commit("setLoader", false);
-                        console.log(err);
-                    });
-                },
+                })
+                .catch((err) => {
+                    commit("setLoader", false);
+                    console.log(err);
+                });
+        },
 
 
-        }
-    };
+    }
+};

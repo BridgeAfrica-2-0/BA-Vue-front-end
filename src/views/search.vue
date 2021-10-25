@@ -516,7 +516,7 @@
                 <fas-icon class="icons" :icon="['fas', 'users']" size="lg" />
                 People
               </h6>
-              <<<<<<< HEAD ======= >>>>>>> main
+              
               <People
                 v-for="(people, index) in peoples"
                 :people="people"
@@ -609,13 +609,8 @@
 
 <script>
 import _ from "lodash";
-
 import LyTab from "@/tab/src/index.vue";
-
 import Map from "@/components/search/map";
-
-import Button from "@/components/ButtonNavBarFind";
-
 import Business from "@/components/search/business";
 import People from "@/components/search/people";
 import Network from "@/components/search/network";

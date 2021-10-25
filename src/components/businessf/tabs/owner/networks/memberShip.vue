@@ -141,7 +141,12 @@ export default {
 
     approve(id) {
       this.load = true;
-      this.approveUser(id)
+      this.networkId = this.getNetwork.id;
+      let payload = {
+        networkId: this.networkId,
+        id: id,
+      };
+      this.approveUser(payload)
         .then(() => {
           this.load = false;
         })
@@ -152,8 +157,13 @@ export default {
     },
 
     decline(id) {
-      this.load = true;
-      this.declineUser(id)
+       this.load = true;
+      this.networkId = this.getNetwork.id;
+      let payload = {
+        networkId: this.networkId,
+        id: id,
+      };
+      this.declineUser(payload)
         .then(() => {
           this.load = false;
         })

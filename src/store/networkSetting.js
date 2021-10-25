@@ -251,51 +251,51 @@ export default {
       commit("setDecline", res.data);
     },
 
-    //getting pending post
-    async getPendingPost({ commit }) {
-      const res = await axios.get("network/network/post/pending");
+    //getting pending post, 
+    async getPendingPost({ commit }, networkId) {
+      const res = await axios.get(`network/${networkId}/post/pending`);
 
       commit("setPendingPost", res.data);
     },
 
     //approve pending post
     async approvedPost({ commit }, payload) {
-      const res = await axios.post("network/network/post/approve", payload);
+      const res = await axios.post(`network/${payload.network_id}/post/approve`, payload);
 
       commit("setApprovedPost", res.data);
     },
 
     //decline pending post
     async unapprovedPost({ commit }, payload) {
-      const res = await axios.post("network/network/post/decline", payload);
+      const res = await axios.post(`network/${payload.network_id}/post/decline`, payload);
 
       commit("setDeclinedPost", res.data);
     },
 
     //getting keyword alerts
     async getAlerts({ commit }) {
-      const res = await axios.get("");
+      const res = await axios.get("listPostKeywordAlert");
 
       commit("setAlerts", res.data);
     },
 
     //approve keyword alerts
     async approvedAlerts({ commit }, id) {
-      const res = await axios.post("", id);
+      const res = await axios.post("approveAlertnetwork", id);
 
       commit("setApprovedAlerts", res.data);
     },
 
     //decline keyword alerts
     async unapprovedAlerts({ commit }, id) {
-      const res = await axios.post("", id);
+      const res = await axios.post("unapprovedAlertnetwork", id);
 
       commit("setDeclinedAlerts", res.data);
     },
 
     //getting notifications
     async getNotifications({ commit }) {
-      const res = await axios.get("");
+      const res = await axios.get("notification");
 
       commit("setNotification", res.data);
     },

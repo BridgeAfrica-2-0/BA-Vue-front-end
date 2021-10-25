@@ -366,16 +366,14 @@
                   >
                     delete
                   </span>
-                </div>  
-
+                </div>      
 
                 
-                {{createPost.movies}}
                 <div
                   v-for="movie in createPost.movies"
                   :key="movie.fileName"
                   class=""
-                >
+                >  
                   <div id="preview">
                     <span
                       class="upload-cancel"
@@ -384,9 +382,9 @@
                       <b-icon icon="x-circle" class="oorange"> </b-icon>
                     </span>
 
-                   <img v-if="movie.type='video'" :src="movie.link" />  
+               <span>   </span>    <img v-if="movie.fileType=='image'" :src="movie.link" />  
    
-      <video  v-if="movie.type='image'"  width="320" height="240" autoplay>
+      <video v-else  width="97%" height="240" autoplay>
   <source :src="movie.link" type="video/mp4">
 </video>
 
@@ -395,7 +393,7 @@
 
           </div>  
 <vue-core-video-player ></vue-core-video-player>       
-                <br />
+              <hr>
 
                 <span>
                   <b-button @click="submitPost" variant="primary" block
@@ -472,10 +470,8 @@
               </p>
            
           </div>
-          <b-row>
 
-            <b-col v-if="item.media.length > 0" cols="12" class="mt-2 p-0">
-              <div class="">
+           <div   v-if="item.media.length > 0" class="">
                 <light
                 css=" "
                   :cells="item.media.length"
@@ -484,9 +480,11 @@
                       return a.media_url;
                     })
                   "
-                ></light>
+                ></light> 
               </div>
-            </b-col>
+          <b-row>
+
+           
 
             <!--   v-if="item.content.movies.length <= 0"  -->
             <b-col cols="12" class="mt-2">
@@ -517,24 +515,29 @@
           </b-row>
 
           <!--  :src="$store.getters.getProfilePicture"  -->
-          <b-row class="mt-2">
-            <b-col cols="2" md="1" class="m-md-0 p-md-0">
+         
+        </div>
+
+         <div class="mt-2 d-inline-flex w-100">
+            <div  class="m-md-0 p-md-0">
               <b-avatar
                 variant="primary"
                 :src="info.user.profile_picture"
                 class="img-fluid avat-comment"
               ></b-avatar>
-            </b-col>
-            <b-col cols="9" md="11" class="p-0 m-0 pr-3">
+            </div>
+
+            <div  class="p-0 m-0 pr-3 inline-comment">
               <input placeholder="Post a Comment" class="comment" type="text" />
 
               <fas-icon
                 class="primary send-cmt"
                 :icon="['fas', 'paper-plane']"
               />
-            </b-col>
-          </b-row>
-        </div>
+            </div>
+
+          </div>
+
         <Comment
           v-for="comment in item.comments"
           :key="comment.id"
@@ -791,6 +794,7 @@ export default {
       const file = event.target;
 
       if (file.files) {
+        console.log("logging start")
         let reader = new FileReader();
         reader.onload = (e) => {
           this.createPost.movies.push({
@@ -798,12 +802,17 @@ export default {
             movie: e.target.result,
             fileName: event.target.files[0].name,
             link: URL.createObjectURL(event.target.files[0]),
-            type: e.target.result.match(/^data:([^/]+)\/([^;]+);/)[1]
+            fileType: e.target.result.match(/^data:([^/]+)\/([^;]+);/)[1] || [],
+           
           });
+          console.log()
         };
         reader.readAsDataURL(file.files[0]);
 
+
       }
+
+      
     },
     service(file) {
       let result = null;
@@ -818,16 +827,25 @@ export default {
       }
     },
     selectMoviesOutsidePost(event) {
+        
+       
+        const file = event.target;
+
+      if (file.files) {
         let reader = new FileReader();
-       reader.onload = (e) => {
+        reader.onload = (e) => {    
           this.createPost.movies.push({
             target: event.target,
             movie: e.target.result,
             fileName: event.target.files[0].name,
             link: URL.createObjectURL(event.target.files[0]),
-            type: e.target.result.match(/^data:([^/]+)\/([^;]+);/)[1]
+            fileType: e.target.result.match(/^data:([^/]+)\/([^;]+);/)[1] || [],
+           
           });
         };
+        reader.readAsDataURL(file.files[0]);
+
+      }
 
       
       this.$refs["modal-xl"].show();
@@ -1063,7 +1081,7 @@ export default {
 
 .h300px{
   height: 300px;
-  overflow-x:auto;
+  overflow-x:hidden;
 }
 
 #preview img {
@@ -1089,7 +1107,28 @@ export default {
 .color-site {
   color: #e75c18;
 }
+@media (max-width: 762px) {
+.usernamee{
+  font-weight: 600;
+  font-size: 15px;
+  color:black;
+}
+
+
+
+}
+.inline-comment{
+  width: 95%;
+}
+
 @media (min-width: 762px) {
+
+  .usernamee{
+  font-weight: 600;
+  font-size: 20px;
+  color:black;
+}
+
   .avat {
     width: 64px;
     height: 64px;
@@ -1154,12 +1193,13 @@ export default {
   width: 315px;
 }
 .comment {
-  width: 100%;
+  width: 90%;
   border: solid 1px #ccc;
   border-radius: 25px;
   background-color: #ddd;
   height: 34px;
   padding-left: 10px;
+  margin-left: 8%;
 }
 .comment:focus {
   outline: none;
@@ -1242,11 +1282,7 @@ export default {
 
 
 }
-.usernamee{
-  font-weight: 600;
-  font-size: 20px;
-  color:black;
-}
+
 </style>
 <style>
 .custom-block-class {

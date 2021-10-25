@@ -1112,7 +1112,7 @@ export default {
   border-radius: 25px;
   background-color: #ddd;
   height: 34px;
-  padding-left: 10px;
+  padding-left: 8px;
 }
 .comment:focus {
   outline: none;

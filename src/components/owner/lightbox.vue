@@ -1,22 +1,37 @@
 <template>
-    <div class="lb" v-if="items.length>0">
-        <div  v-if="items.length==1"  class="" :class="[css,items.length>cells?'lb-grid-' + cells: 'lb-grid-' + items.length]">
+    <div  v-if="items.length>0">
+        <div class="lb"    v-if="items.length==1" > 
+        <div   class="" :class="[css,items.length>cells?'lb-grid-' + cells: 'lb-grid-' + items.length]">
             <div class="" v-for="(src, i) in items" :key="i" @click="show(i)">
 
                 <img :src="src" class="single-image" alt="">
 
             </div>
         </div>
+        
+       </div>
 
+   <div class=""  style="position:relative" v-else-if="items.length==2"  > 
+        
 
-        <div v-else class="lb-grid" :class="[css,items.length>cells?'lb-grid-' + cells: 'lb-grid-' + items.length]">
+        <b-row class="p-0">       
+            
+            
+            <b-col col="6" class="p-0"  v-for="(src, i) in items" :key="i" @click="show(i)" >      
+                <img :src="src" class="single-image pr-1" style="object-fit:cover; height:100%">
+                </b-col>    </b-row>
+   </div>
+
+   <div class="lb"  v-else  > 
+
+        <div class="lb-grid" :class="[css,items.length>cells?'lb-grid-' + cells: 'lb-grid-' + items.length]">
             <div class="lb-item" v-for="(src, i) in items" :key="i" @click="show(i)" :style="bg(src)">
 
                 <span class="lb-more" v-if="i==cells-1 && items.length - cells>0">{{ items.length - cells}}+</span>
             </div>
         </div>
 
-
+   </div>
         <transition enter-active-class="animated fadeIn" leave-active-class="animated fadeOut">
             <div class="lb-modal" v-if="index>=0">
                 <button class="btn btn-outline-danger btn-sm lb-modal-close" @click="close">
@@ -149,6 +164,10 @@
 </script>
 <style >
 
+.lb .lb-blec{
+    position: relative !important;
+}
+
 .lb-item{   
    
     background-size: cover !important;
@@ -165,5 +184,57 @@
 .single-image{
     width: 100%;
 
+}
+
+
+
+@media (max-width: 762px) {
+
+  .lb-grid-3{
+    height: 500px !important;
+    margin-bottom: 8px;
+}
+
+.lb-grid-4{
+    height: 350px !important;
+    margin-bottom: 8px;
+}
+
+.lb-grid-5{
+    height: 500px !important;
+    margin-bottom: 8px;
+}
+
+
+}
+
+
+@media (min-width: 762px) {
+
+  .lb-grid-3{
+    height: 400px !important;
+    margin-bottom: 8px;
+}
+
+ .lb-grid-4{
+    height: 500px !important;
+    margin-bottom: 8px;
+}
+
+.lb-grid-5{
+    height: 800px !important;
+    margin-bottom: 8px;
+}
+
+}
+
+.lb-grid-2{
+   
+    margin-bottom: 8px;
+    max-height: auto;
+}
+
+.lb-grid-blec{
+ height: auto;
 }
 </style>

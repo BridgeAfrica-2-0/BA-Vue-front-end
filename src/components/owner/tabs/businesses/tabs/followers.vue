@@ -5,11 +5,12 @@
         <b-input-group class="mb-2 px-md-3 float-right">
           <b-form-input
             aria-label="Text input with checkbox"
+            v-model="search"
             placeholder="Search Something"
           ></b-form-input>
 
           <b-input-group-prepend is-text>
-            <b-icon-search class="text-primary border-none"></b-icon-search>
+            <b-icon-search class="text-primary border-none"  @click="$refs.search.search()"></b-icon-search>
           </b-input-group-prepend>
         </b-input-group>
       </b-col>
@@ -17,7 +18,7 @@
     <br />
 
 
-        <CommunityBusiness   :business="folowers"  />
+        <CommunityBusiness  :searchh="search" ref="search" type="Follower" />
         
      
   </div>
@@ -26,16 +27,23 @@
 <script>
 import CommunityBusiness from "../../communitybusiness";
 export default {
+
+   data() {
+    return {
+        search:"",
+    }
+    },
   components: {
     CommunityBusiness
   },
+  
+  methods:{
 
 
-   computed: {
-    folowers() {
-      return this.$store.state.profile.CommunityBusiness.business_followers;
-    }
-  },
+
+  }
+
+  
 
 };
 </script>

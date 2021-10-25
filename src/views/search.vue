@@ -9,18 +9,9 @@
     </Nav> -->
     <Nav :credentials.sync="searchParams" id="top">
       <template v-slot:button>
-        <Button
-          @click.native="strategy['all']"
-          v-if="selectedId == 0"
-        />
-        <Button
-          @click.native="strategy['network']"
-          v-if="selectedId == 3"
-        />
-        <Button
-          @click.native="strategy['market']"
-          v-if="selectedId == 4"
-        />
+        <Button @click.native="strategy['all']" v-if="selectedId == 0" />
+        <Button @click.native="strategy['network']" v-if="selectedId == 3" />
+        <Button @click.native="strategy['market']" v-if="selectedId == 4" />
       </template>
     </Nav>
 
@@ -428,8 +419,8 @@
 
               <MiniBusiness />
 
-              <span class="float-right mb-3" @click="selectedId=1">
-                <b-link href='#top'> see more </b-link>
+              <span class="float-right mb-3" @click="selectedId = 1">
+                <b-link href="#top"> see more </b-link>
               </span>
               <br />
 
@@ -438,9 +429,10 @@
               <h6>People</h6>
 
               <MiniPeople />
-              <span class="float-right mb-3" @click="selectedId=2"> 
-                <b-link href='#top'> see more </b-link>
-               </span> <br />
+              <span class="float-right mb-3" @click="selectedId = 2">
+                <b-link href="#top"> see more </b-link>
+              </span>
+              <br />
 
               <hr />
 
@@ -454,9 +446,10 @@
               </h6>
 
               <MiniNetwork />
-              <span class="float-right mb-3" @click="selectedId=3"> 
-                <b-link href='#top'> see more </b-link>
-                 </span> <br />
+              <span class="float-right mb-3" @click="selectedId = 3">
+                <b-link href="#top"> see more </b-link>
+              </span>
+              <br />
 
               <hr />
 
@@ -467,8 +460,10 @@
 
               <MiniMarket />
 
-              <span class="float-right mb-3" @click="selectedId=4"> 
-                <b-link href='#top'> see more </b-link> </span> <br />
+              <span class="float-right mb-3" @click="selectedId = 4">
+                <b-link href="#top"> see more </b-link>
+              </span>
+              <br />
 
               <hr />
 
@@ -479,8 +474,10 @@
 
               <MiniPost />
 
-              <span class="float-right mb-3" @click="selectedId=5"> 
-                <b-link href='#top'> see more </b-link> </span> <br />
+              <span class="float-right mb-3" @click="selectedId = 5">
+                <b-link href="#top"> see more </b-link>
+              </span>
+              <br />
 
               <hr />
             </div>
@@ -519,7 +516,7 @@
                 <fas-icon class="icons" :icon="['fas', 'users']" size="lg" />
                 People
               </h6>
-
+              <<<<<<< HEAD ======= >>>>>>> main
               <People
                 v-for="(people, index) in peoples"
                 :people="people"
@@ -617,6 +614,8 @@ import LyTab from "@/tab/src/index.vue";
 
 import Map from "@/components/search/map";
 
+import Button from "@/components/ButtonNavBarFind";
+
 import Business from "@/components/search/business";
 import People from "@/components/search/people";
 import Network from "@/components/search/network";
@@ -664,6 +663,8 @@ export default {
     MiniNetwork,
     MiniPost,
     MiniMarket,
+    PeopleFilter,
+    PostFilter,
 
     // Footer,
   },
@@ -685,10 +686,8 @@ export default {
       all: () => this.getKeyword(),
       market: () => this.searchProducts(),
       network: () => this.searchNetworks(),
-
-
     };
-    this.getKeyword()
+    this.getKeyword();
   },
 
   data() {
@@ -1644,6 +1643,12 @@ export default {
     };
   },
 
+  watch: {
+    selectedId: function () {
+      this.changePlaceHolder();
+    },
+  },
+
   methods: {
     // [ED]----------
     getKeyword() {
@@ -1714,9 +1719,30 @@ export default {
     ...mapActions({
       find: "search/FIND_USER",
     }),
+    changePlaceHolder() {
+      try {
+        const newPlaceholder = this.strategyForPlaceHolder[this.selectedId]();
+        this.navBarParams = Object.assign(this.navBarParams, {
+          placeholder: newPlaceholder,
+        });
+      } catch (error) {
+        this.navBarParams = Object.assign(this.navBarParams, {
+          placeholder: "",
+        });
+      }
+    },
 
+    strategies() {
+      try {
+        this.strategy[`${this.selectedId}`]();
+      } catch (error) {
+        console.warn(`Implement function for selectedId=${this.selectedId}`);
+      }
+    },
     onFindUser() {
       this.find(this.navBarParams.username);
+      if (this.navBarParams.keyword.trim())
+        this.find(this.navBarParams.keyword);
     },
     // -------
 
@@ -1819,14 +1845,10 @@ export default {
     },
     getparentCategory(value) {
       this.Selectedparentcategory = value;
-
-      //   console.log(this.Selectedparentcategory);
     },
 
     switchcategories() {
       this.showform = false;
-
-      console.log(this.default_category);
 
       switch (this.default_category) {
         case "Primary Education":

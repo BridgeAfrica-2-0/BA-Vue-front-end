@@ -1,14 +1,12 @@
 <template>
   <div>
-
-
-      <FlashMessage />
+    <FlashMessage />
     <div class="row">
       <div class="container-fluid" v-if="showalbum == false">
         <div class="one2">
           <div class="createp img-gall image-wrapp">
             <div class="">
-              <a  v-b-modal.createalbumModal>
+              <a v-b-modal.createalbumModal>
                 <div class="drag-textt">
                   <fas-icon :icon="['fas', 'plus']" />
                   <h3>Create Album</h3>
@@ -35,57 +33,50 @@
             class="createp img-gall predit2"
             v-for="albums in albums"
             :key="albums.id"
-           
           >
             <a>
-              <span  @click="showlbum(albums.id, albums.album_name)">
+              <span @click="showlbum(albums.id, albums.album_name)">
                 <img class="card-img album-img" :src="albums.cover[0]" alt="" />
               </span>
 
-
-              
-
-
-
-
-
-               <div class="botmediadess">
-                 <p>  {{ albums.album_name }}   <br/>
-                 {{ albums.item_number }} Items</p>
-                </div>
+              <div class="botmediadess">
+                <p>
+                  {{ albums.album_name }} <br />
+                  {{ albums.item_number }} Items
+                </p>
+              </div>
             </a>
 
             <div class="mediadesc">
               <ul class="navbar-nav pull-right">
-                <li class="nav-item dropdown">
-                  
-                </li>
+                <li class="nav-item dropdown"></li>
               </ul>
             </div>
           </div>
         </div>
 
-
- 
-
-       
-               <b-modal hide-footer title="Create album" ref="editalbum" id="editalbum">
-            <div ref="creatform">
-              <b-form>
-                <b-form-input
-                  placeholder="Album name"
-                  v-model="edit_name"
-                ></b-form-input>
-                <b-button class="mt-2" variant="primary" @click="updateAlbum(edit_id)">
-                  Update</b-button
-                >
-              </b-form>
-            </div>
-          </b-modal>
-
-
-
-
+        <b-modal
+          hide-footer
+          title="Create album"
+          ref="editalbum"
+          id="editalbum"
+        >
+          <div ref="creatform">
+            <b-form>
+              <b-form-input
+                placeholder="Album name"
+                v-model="edit_name"
+              ></b-form-input>
+              <b-button
+                class="mt-2"
+                variant="primary"
+                @click="updateAlbum(edit_id)"
+              >
+                Update</b-button
+              >
+            </b-form>
+          </div>
+        </b-modal>
 
         <div class="two2 d-none">
           <div class="row">
@@ -148,12 +139,10 @@
       <b-button variant="outline-primary" size="sm" @click="hidealbum">
         Back
       </b-button>
-      <span class="text-center ml-2 f-20"> {{album_name}} </span>
+      <span class="text-center ml-2 f-20"> {{ album_name }} </span>
 
-      <Images    v-bind:album="album_id" />
+      <Images v-bind:album="album_id" />
     </div>
-
-    
   </div>
 </template>
 
@@ -170,76 +159,57 @@ export default {
     },
 
     showlbum(abum_id, album_name) {
-       this.album_name=album_name;
-       this.album_id=abum_id;
-       console.log(abum_id);
-       console.log("yoo yoo yooy ");
-       console.log(this.url);
-       
-           let loader = this.$loading.show({
+      this.album_name = album_name;
+      this.album_id = abum_id;
+      console.log(abum_id);
+      console.log("yoo yoo yooy ");
+      console.log(this.url);
+
+      let loader = this.$loading.show({
         container: this.fullPage ? null : this.$refs.creatform,
         canCancel: true,
         onCancel: this.onCancel,
         color: "#e75c18",
       });
-   
-    const albumUrl=this.url+'/'+abum_id;
+
+      const albumUrl = this.url + "/" + abum_id;
 
       this.$store
         .dispatch("businessOwner/getAlbumImages", albumUrl)
         .then(() => {
           console.log("hey yeah photo loaded");
 
-            
-      this.showalbum = true;
-           loader.hide();
+          this.showalbum = true;
+          loader.hide();
         })
         .catch((err) => {
           console.log({ err: err });
 
-           loader.hide();
+          loader.hide();
         });
-
-
-
-
-
     },
 
     onClick(i) {
       this.index = i;
     },
 
+    editAlbum(album_id, album_name) {
+      this.edit_id = album_id;
+      this.edit_name = album_name;
 
-
-
-   editAlbum(album_id, album_name){
-    
-this.edit_id=album_id;
-this.edit_name=album_name;
-
-this.$refs["editalbum"].show();
-
-
-
-   },
-
-
+      this.$refs["editalbum"].show();
+    },
 
     deleteAlbum(album_id) {
-
-          
-           let loader = this.$loading.show({
+      let loader = this.$loading.show({
         container: this.fullPage ? null : this.$refs.creatform,
         canCancel: true,
         onCancel: this.onCancel,
         color: "#e75c18",
       });
 
-
-
-       axios
-        .post("business/album/edit/" +this.url + "/" + album_id, {
+      axios
+        .post("business/album/edit/" + this.url + "/" + album_id, {
           name: this.name,
         })
         .then((response) => {
@@ -252,35 +222,32 @@ this.$refs["editalbum"].show();
           });
 
           loader.hide();
-        }) .catch((err) => {
-        this.sending = false;
+        })
+        .catch((err) => {
+          this.sending = false;
 
-        if (err.response.status == 422) {
-          console.log({ err: err });
+          if (err.response.status == 422) {
+            console.log({ err: err });
 
-          this.flashMessage.show({
-            status: "error",
+            this.flashMessage.show({
+              status: "error",
 
-            message: err.response.data.message,
-          });
+              message: err.response.data.message,
+            });
 
-          loader.hide();
-        } else {
-          this.flashMessage.show({
-            status: "error",
+            loader.hide();
+          } else {
+            this.flashMessage.show({
+              status: "error",
 
-            message: "Unable to Delete your abum",
-          });
-          console.log({ err: err });
+              message: "Unable to Delete your abum",
+            });
+            console.log({ err: err });
 
-          loader.hide();
-        }
-      });
-
-
-
+            loader.hide();
+          }
+        });
     },
-    
 
     updateAlbum(album_id) {
       let loader = this.$loading.show({
@@ -305,82 +272,81 @@ this.$refs["editalbum"].show();
 
           loader.hide();
         })
-         .catch((err) => {
-        this.sending = false;
+        .catch((err) => {
+          this.sending = false;
 
-        if (err.response.status == 422) {
-          console.log({ err: err });
+          if (err.response.status == 422) {
+            console.log({ err: err });
 
-          this.flashMessage.show({
-            status: "error",
+            this.flashMessage.show({
+              status: "error",
 
-            message: err.response.data.message,
-          });
+              message: err.response.data.message,
+            });
 
-          loader.hide();
-        } else {
-          this.flashMessage.show({
-            status: "error",
+            loader.hide();
+          } else {
+            this.flashMessage.show({
+              status: "error",
 
-            message: "Unable to create your Album",
-          });
-          console.log({ err: err });
+              message: "Unable to create your Album",
+            });
+            console.log({ err: err });
 
-          loader.hide();
-        }
-      });
-    },
-  
-
-  createAlbum() {
-
-    let loader = this.$loading.show({
-      container: this.fullPage ? null : this.$refs.creatform,
-      canCancel: true,
-      onCancel: this.onCancel,
-      color: "#e75c18",
-    });
-
-    axios
-      .post("business/album/create/9", {
-        name: this.name,
-      })
-      .then((response) => {
-        console.log(response.data);
-
-        this.flashMessage.show({
-          status: "success",
-
-          message: "Album Created",
+            loader.hide();
+          }
         });
+    },
 
-        loader.hide();
-      })
-      .catch((err) => {
-        this.sending = false;
-
-        if (err.response.status == 422) {
-          console.log({ err: err });
-
-          this.flashMessage.show({
-            status: "error",
-
-            message: err.response.data.message,
-          });
-
-          loader.hide();
-        } else {
-          this.flashMessage.show({
-            status: "error",
-
-            message: "Unable to create your Album",
-          });
-          console.log({ err: err });
-
-          loader.hide();
-        }
+    createAlbum() {
+      let loader = this.$loading.show({
+        container: this.fullPage ? null : this.$refs.creatform,
+        canCancel: true,
+        onCancel: this.onCancel,
+        color: "#e75c18",
       });
-  },},
+
+      axios
+        .post("business/album/create/9", {
+          name: this.name,
+        })
+        .then((response) => {
+          console.log(response.data);
+
+          this.flashMessage.show({
+            status: "success",
+
+            message: "Album Created",
+          });
+
+          loader.hide();
+        })
+        .catch((err) => {
+          this.sending = false;
+
+          if (err.response.status == 422) {
+            console.log({ err: err });
+
+            this.flashMessage.show({
+              status: "error",
+
+              message: err.response.data.message,
+            });
+
+            loader.hide();
+          } else {
+            this.flashMessage.show({
+              status: "error",
+
+              message: "Unable to create your Album",
+            });
+            console.log({ err: err });
+
+            loader.hide();
+          }
+        });
+    },
+  },
 
   mounted() {
     this.url = this.$route.params.id;
@@ -392,18 +358,17 @@ this.$refs["editalbum"].show();
     },
   },
 
-  data: function () {
+  data: function() {
     return {
       showalbum: false,
       name: null,
       url: null,
-      fullPage:null,
-     album_id:null,
-     album_name:null,
-     
-      edit_id:null,
-      edit_name:null,
+      fullPage: null,
+      album_id: null,
+      album_name: null,
 
+      edit_id: null,
+      edit_name: null,
 
       images: [
         "https://placekitten.com/801/800",
@@ -439,15 +404,13 @@ this.$refs["editalbum"].show();
         "https://i.wifegeek.com/200426/43e2e8bb.jpg",
       ],
       index: 0,
-    }
+    };
   },
-}
+};
 </script>
 
 <style>
-
-.call-action{
-
+.call-action {
   border-radius: 50%;
   background: gray;
   height: 30px !important;
@@ -465,34 +428,26 @@ this.$refs["editalbum"].show();
 }
 
 .botmediadess {
-   
-    text-align: center;
-    bottom: -5%;
-    width: 100%;
-    font-size: 20px;
-}
-
-
-
-@media (min-width: 960px) {
-  .album-img{
-
-  height: 300px !important;
-    object-fit: cover !important;
-       
-}
-
-
-.drag-textt {
-    
-    height: 290px !important;
-        padding-top: 95px;
-}
-
-
-.f-20{
+  text-align: center;
+  bottom: -5%;
+  width: 100%;
   font-size: 20px;
 }
+
+@media (min-width: 960px) {
+  .album-img {
+    height: 300px !important;
+    object-fit: cover !important;
+  }
+
+  .drag-textt {
+    height: 290px !important;
+    padding-top: 95px;
+  }
+
+  .f-20 {
+    font-size: 20px;
+  }
 
   .img-gall {
     background-size: contain;
@@ -568,21 +523,15 @@ this.$refs["editalbum"].show();
 }
 
 @media only screen and (min-width: 768px) and (max-width: 1331px) {
-
-  .album-img{
-
-  height: 300px !important;
+  .album-img {
+    height: 300px !important;
     object-fit: cover !important;
-}
+  }
 
-
-.drag-textt {
-    
+  .drag-textt {
     height: 290px !important;
-        padding-top: 95px;
-}
-
-
+    padding-top: 95px;
+  }
 
   .img-gall {
     background-size: contain;
@@ -622,21 +571,15 @@ this.$refs["editalbum"].show();
 }
 
 @media (max-width: 762px) {
-
-  .album-img{
-
-  height: 200px !important;
+  .album-img {
+    height: 200px !important;
     object-fit: cover !important;
-}
+  }
 
-
-.drag-textt {
-    
+  .drag-textt {
     height: 190px !important;
-        padding-top: 55px;
-}
-
-
+    padding-top: 55px;
+  }
 
   .img-gall {
     background-size: contain;

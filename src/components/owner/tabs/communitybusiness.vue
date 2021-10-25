@@ -1,14 +1,14 @@
 <template>
-  <div>
+  <div class="p-2">
     <b-row>
-      <b-col lg="6" sm="12" class="p-2" v-for="item in business" :key="item.id">
+      <b-col lg="6" sm="12" class="p-2" v-for="item in businesses" :key="item.id">
         <div class="people-style shadow">
           <b-row>
             <b-col md="3" xl="3" lg="3" cols="5" sm="3">
               <div class="center-img">
                 <splide :options="options" class="r-image">
                   <splide-slide cl>
-                    <img :src="item.picture" class="r-image" />
+                    <img :src="item.picture" class="r-image" />   
                   </splide-slide>
                 </splide>
               </div>
@@ -104,14 +104,22 @@
         </div>
       </b-col>
     </b-row>
+     
+      <infinite-loading :identifier="infiniteId"  @infinite="infiniteHandler"  ref="infiniteLoading" ></infinite-loading>
   </div>
 </template>
 
 <script>
+import moment from "moment";
+import axios from "axios";
+
 export default {
-  props: ["title", "image", "business"],
-  data() {
+  props: ["type", "searchh"],
+  
+   data() {
     return {
+      page: 1,
+      infiniteId: +new Date(),
       options: {
         rewind: true,
         autoplay: true,
@@ -123,6 +131,23 @@ export default {
       }
     };
   },
+
+  computed:{
+   
+    businesses(){
+
+      if(this.type=="Follower"){ 
+
+      return  this.$store.state.profile.BcommunityFollower.business_followers;  
+
+       }else{
+
+         return  this.$store.state.profile.BcommunityFollowing.business_following; 
+       }
+   }
+
+  },
+   
   methods: {
     count(number) {
       if (number >= 1000000) {
@@ -131,7 +156,97 @@ export default {
       if (number >= 1000) {
         return number / 1000 + "K";
       } else return number;
-    }
+    },
+
+
+    
+
+       search(){
+     
+       console.log('search started');
+       
+         if(this.type=="Follower"){ 
+         
+        this.$store.commit("profile/setBcommunityFollower",{ "business_followers": [ ], "total_business_follower": 0 }); 
+
+       }else{
+       
+        
+        this.$store.commit("profile/setBcommunityFollowing",{ "business_following": [ ], "total_business_following": 0 }); 
+       }
+
+      this.page = 1;
+      this.infiniteId += 1;
+
+     
+     this.$refs.infiniteLoading.attemptLoad();
+    
+
+    },
+
+
+     
+
+
+     
+          infiniteHandler($state) { 
+           
+
+      let url = null;
+
+         if(this.type=="Follower"){  
+          url="profile/business/follower/"
+         }else{
+          url="profile/business/following/";
+         }
+      axios
+        .get(url + this.page+"?keyword="+this.searchh )
+        .then(({ data }) => {
+          console.log(data);
+        
+          if(this.type=="Follower"){  
+
+
+          if (data.data.business_followers.length) {
+            
+         
+            this.businesses.push(...data.data.business_followers); 
+            this.page += 1;
+            
+            $state.loaded();
+
+           }else{
+              $state.complete();
+             
+           }
+        
+          }else{
+
+
+
+
+             if (data.data.business_following.length) {
+            
+         
+            this.businesses.push(...data.data.business_following); 
+            this.page += 1;
+            
+            $state.loaded();
+
+           }else{
+              $state.complete();
+             
+           }
+
+          }
+           
+        })
+        .catch((err) => {
+          console.log({ err: err });
+        });
+    },
+
+
   }
 };
 </script>

@@ -32,6 +32,7 @@
                 variant="primary"
               ></b-icon>
               <b> Work at: </b>
+              <span v-if="info.user_experience"> 
               <span
                 class="text"
                 v-for="exp in info.user_experience.slice(0, 1)"
@@ -39,6 +40,7 @@
               >
                 {{ exp.company_name }}
               </span>
+               </span>
             </p>
             <p>
               <b-icon
@@ -47,14 +49,18 @@
                 variant="primary"
               ></b-icon>
               <b> Studied at: </b>
-         <!--     <span
-                v-for="edu in info.educ.slice(0, 1)"
+              <span v-if="info.user_education !=null">   
+          <span
+                v-for="edu in info.user_education.slice(0, 1)"
                 :key="edu.id"
                 class="text"
               >
-            
+           
                 {{ edu.school_name }}</span
-              >-->
+              >
+
+             
+                </span>
             </p>
             <p>
               <b-icon
@@ -86,7 +92,7 @@
               ></b-icon>
               <b> Community: </b>
               <span class="text">
-                {{ info.user.community }}
+               {{ nFormatter(total.total_community)}}
               </span>
             </p>
           </b-card-text>
@@ -94,72 +100,44 @@
 
         <b-modal
           id="modal-5"
-          title=" Edit Intro"
+          title="Edit Intro"
           ref="modal"
-          @show="resetModal"
-          @hidden="resetModal"
+         
           @ok="handleOk"
         >
           <div class="">
              
-            <p>   
-
-
-              <b-icon @click="switchTab('about')"
-                icon="pencil"
-                class="eedit"
-                variant=""
-              ></b-icon>
-
-              
-
+            <p>
               <b> Work at: </b>
+              <span v-if="info.user_experience">  
               <span
                 class="text"
                 v-for="exp in info.user_experience.slice(0, 1)"
                 :key="exp.id"
               >
                 {{ exp.company_name }}
+              </span>  </span>
+            </p>
+            <p>
+              <b> Studied at: </b>
+       
+              <span v-if="info.user_education !=null">
+                <span
+                v-for="edu in info.user_education.slice(0, 1)"
+                :key="edu.id"
+                class="text"
+                >
+                  {{ edu.school_name }}
+                </span>
               </span>
             </p>
             <p>
-            <router-link to="profile_owner">
-               <b-icon @click="switchTab('about')"
-                icon="pencil"
-                class="eedit"
-                variant=""
-              ></b-icon>
-              </router-link>
-
-              <b> Studied at: </b>
-         <!--     <span
-                v-for="edu in info.educ.slice(0, 1)"
-                :key="edu.id"
-                class="text"
-              >
-                {{ edu.school_name }}</span
-              > -->
-            </p>
-            <p>
-               <b-icon @click="switchTab('about')"
-                icon="pencil"
-                class="eedit"
-                variant=""
-              ></b-icon>
-             
               <b> Home Town : </b>
               <span class="text">
                 {{ info.user.neighbor }}
               </span>
             </p>
             <p>
-             
-
-              <b-icon @click="switchTab('about')"
-                icon="pencil"
-                class="eedit"
-                variant=""
-              ></b-icon> 
               <b> Current City : </b>
               <span class="text">
                 {{ info.user.city }}
@@ -184,9 +162,10 @@
 <script>
 import "@morioh/v-lightbox/dist/lightbox.css";
 //import Followers from "../../followers";
-import Community from "./comunitiDashboard";
+import Community from "../sidebarcommunity"; 
+//import Community from "./comunitiDashboard";
 import Owner_post from "./owner_post";
-import Media from "../../media";
+import Media from "../media";
 // import CreatePost from "../../createPost";
 // import Post from "../../post";
 export default {
@@ -197,7 +176,9 @@ export default {
     Owner_post,
     Community,
   },
-  created() {
+
+ 
+  mounted() {
     console.log("Load User Info");
     this.$store
       .dispatch("profile/loadUserPostIntro", null)
@@ -218,12 +199,30 @@ export default {
       .catch((error) => {
         console.log(error);
       });
+
+
+
+
+        this.$store
+      .dispatch("profile/getImages")
+      .then((response) => {
+       
+      })
+      .catch((error) => {
+        console.log({error:error});
+      });  
+      
   },
   computed: {
     info: function () {
       return this.$store.getters["profile/getUserPostIntro"];
     },
 
+    
+    total(){
+    return  this.$store.state.profile.Tcommunity;
+   },
+ 
    
 
   },
@@ -252,6 +251,20 @@ export default {
   },
   methods: {
     
+
+     nFormatter(num) {
+      if (num >= 1000000000) {
+        return (num / 1000000000).toFixed(1).replace(/\.0$/, '') + 'G';
+      }
+      if (num >= 1000000) {
+        return (num / 1000000).toFixed(1).replace(/\.0$/, '') + 'M';
+      }
+      if (num >= 1000) {
+        return (num / 1000).toFixed(1).replace(/\.0$/, '') + 'K';
+      }
+      return num;
+    },
+
    
     handleOk(bvModalEvt) {
     

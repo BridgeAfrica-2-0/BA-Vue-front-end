@@ -8,13 +8,12 @@
     <hr />
 
     <div no-body class="p-2">
-      <b-tabs pills vertical>
+      <b-tabs lazy pills vertical>
         <b-tab title="BIOGRAPHY" active><Biography /></b-tab>
         <b-tab title="BASIC INFO"> <ContactandInfo /> </b-tab>
         <b-tab title="EDUCATION AND WORK"><WorkAndEducation /></b-tab>
       </b-tabs>
-
-      {{this.$store.getters['profile/getProfileAbout_']}}   
+  
     </div>
   </div>
 </template>

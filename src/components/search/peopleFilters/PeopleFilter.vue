@@ -2,33 +2,44 @@
   <div class="mx-4">
     <b-form class="mb-4">
       <label for="feedback-user">Profession</label>
-      <b-form-input @input="debounceInput"  id="feedback-user" v-model="profession"></b-form-input>
+      <b-form-input
+        @input="debounceInput"
+        id="feedback-user"
+        v-model="profession"
+      ></b-form-input>
     </b-form>
 
     <a
-      :class="['cursor',rootSectionIsVisible ? 'w-100' : 'collapsed w-100']"
+      :class="['cursor', rootSectionIsVisible ? 'w-100' : 'collapsed w-100']"
       :aria-expanded="rootSectionIsVisible ? 'true' : 'false'"
       aria-controls="collapse-4"
       @click.prevent="toogleRootSection"
     >
-      <b-row class="fl">
+      <b-row class="fl px-3">
         <span>People from</span>
-        <b-icon  :icon="rootSectionIsVisible ? 'arrow-down' : 'arrow-up'"></b-icon>
+        <b-icon
+          :icon="rootSectionIsVisible ? 'arrow-down' : 'arrow-up'"
+        ></b-icon>
       </b-row>
     </a>
 
     <b-collapse id="collapse-4" v-model="rootSectionIsVisible">
-      <b-card class="row">
+      <b-card class="row mx-1">
         <!--begin people section-->
         <a
-          :class="['cursor',peopleSectionIsVisible ? 'w-100' : 'collapsed w-100']"
+          :class="[
+            'cursor',
+            peopleSectionIsVisible ? 'w-100' : 'collapsed w-100',
+          ]"
           :aria-expanded="peopleSectionIsVisible ? 'true' : 'false'"
           aria-controls="collapse-1"
           @click.prevent="peopleSectionIsVisible = !peopleSectionIsVisible"
         >
-          <b-row class="fl">
-            <span>People  </span>
-            <b-icon  :icon="peopleSectionIsVisible ? 'arrow-down' : 'arrow-up'"></b-icon>
+          <b-row class="fl px-3">
+            <span>People </span>
+            <b-icon
+              :icon="peopleSectionIsVisible ? 'arrow-down' : 'arrow-up'"
+            ></b-icon>
           </b-row>
         </a>
         <b-collapse
@@ -52,14 +63,19 @@
 
         <!--begin buisness section-->
         <a
-          :class="['cursor', buisnessSectionIsVisible ? 'w-100' : 'collapsed w-100']"
+          :class="[
+            'cursor',
+            buisnessSectionIsVisible ? 'w-100' : 'collapsed w-100',
+          ]"
           :aria-expanded="buisnessSectionIsVisible ? 'true' : 'false'"
           aria-controls="collapse-2"
           @click.prevent="buisnessSectionIsVisible = !buisnessSectionIsVisible"
         >
-          <b-row class="fl">
+          <b-row class="fl px-3">
             <span>Buisness </span>
-            <b-icon  :icon="buisnessSectionIsVisible ? 'arrow-down' : 'arrow-up'"></b-icon>
+            <b-icon
+              :icon="buisnessSectionIsVisible ? 'arrow-down' : 'arrow-up'"
+            ></b-icon>
           </b-row>
         </a>
         <b-collapse
@@ -83,14 +99,19 @@
 
         <!--begin network section-->
         <a
-          :class="['cursor', networkSectionIsVisible ? 'w-100' : 'collapsed w-100']"
+          :class="[
+            'cursor',
+            networkSectionIsVisible ? 'w-100' : 'collapsed w-100',
+          ]"
           :aria-expanded="networkSectionIsVisible ? 'true' : 'false'"
           aria-controls="collapse-4"
           @click.prevent="networkSectionIsVisible = !networkSectionIsVisible"
         >
-          <b-row class="fl">
+          <b-row class="fl px-3">
             <span>Network</span>
-            <b-icon  :icon="networkSectionIsVisible ? 'arrow-down' : 'arrow-up'"></b-icon>
+            <b-icon
+              :icon="networkSectionIsVisible ? 'arrow-down' : 'arrow-up'"
+            ></b-icon>
           </b-row>
         </a>
         <b-collapse
@@ -111,22 +132,21 @@
           </b-card>
         </b-collapse>
         <!--end network section-->
-         <Button
+        <Button
           @click.native="onProcess"
-          title="Search" 
+          title="Search"
           class="mt-4"
-          fas="fas fa-search  fa-lg btn-icon " 
-          />
+          fas="fas fa-search  fa-lg btn-icon "
+        />
       </b-card>
-     
     </b-collapse>
   </div>
 </template>
 
 <script>
-import _ from 'lodash'
+import _ from "lodash";
 
-import {mapActions} from 'vuex'
+import { mapActions } from "vuex";
 
 const options = [
   { text: "Follower", value: "Follower" },
@@ -134,15 +154,14 @@ const options = [
   { text: "Community", value: "Community" },
 ];
 
-import Button from "@/components/Button"
+import Button from "@/components/Button";
 
 export default {
-
-  components:{
-    Button
+  components: {
+    Button,
   },
   data: () => ({
-    profession:null,
+    profession: null,
     rootSectionIsVisible: false,
     peopleSectionIsVisible: false,
     buisnessSectionIsVisible: false,
@@ -153,45 +172,38 @@ export default {
     optionsPeople: options,
     optionsBuisness: options,
     optionsNetwork: [...options, { text: "Member", value: "Member" }],
-   
   }),
 
-  
   methods: {
     ...mapActions({
-      findProfession: 'search/FIND_PROFESSION',
-      findCommunity: 'search/FIND_COMMUNITY'
+      findProfession: "search/FIND_PROFESSION",
+      findCommunity: "search/FIND_COMMUNITY",
     }),
 
-    map(data,type){
-      return data.map(e => `${type}_${e.toLowerCase()}`)
+    map(data, type) {
+      return data.map((e) => `${type}_${e.toLowerCase()}`);
     },
 
-    onProcess(){
-      const user = this.map(this.selectedPeople, `user`)
-      const buisness = this.map(this.selectedBuisness, `buisness`)
-      const network = this.map(this.selectedNetwork, `network`)
-      
-      const data = [...user,...buisness,...network].reduce(
-        (hash,value) => {
-          hash[value] = ""
-          return hash
-        }
-        ,{}
-      )
+    onProcess() {
+      const user = this.map(this.selectedPeople, `user`);
+      const buisness = this.map(this.selectedBuisness, `buisness`);
+      const network = this.map(this.selectedNetwork, `network`);
+
+      const data = [...user, ...buisness, ...network].reduce((hash, value) => {
+        hash[value] = "";
+        return hash;
+      }, {});
 
       const loader = this.$loading.show({
         container: this.$refs.formContainer,
         canCancel: true,
       });
 
-      this.findCommunity(data)
-
+      this.findCommunity(data);
     },
-    
+
     debounceInput: _.debounce(function (e) {
-     
-     this.findProfession(e)
+      this.findProfession(e);
     }, 1000),
 
     toogleRootSection() {

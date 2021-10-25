@@ -12,6 +12,7 @@
 
 
 
+
           
        <b-row class="mt-4"   v-for="item in owner_post"  :key="item.post_id" > 
      
@@ -230,7 +231,7 @@ export default {
 
 infiniteHandler($state) {
 
-        axios.get('business/show/post/'+this.url+"/"+this.page)
+        axios.get('profile/dashboard/post/user')
       .then(({ data }) => {
       // commit('ownerPost', data.data);
       //  console.log(data);
@@ -297,6 +298,9 @@ infiniteHandler($state) {
 
     
     },
+
+
+    
 
 
      owner_post() {
@@ -480,6 +484,20 @@ infiniteHandler($state) {
 .btn:hover {
   background-color: #ccc;
 }
+
+
+.s-card{
+  height:525px !important; 
+  overflow: auto; 
+  overflow-x: hidden;
+  padding: 15px;
+  padding-right: 3px !important;
+
+
+
+}
+
+
 </style>
 
 <style>
@@ -494,17 +512,6 @@ infiniteHandler($state) {
 
 
 
-
-.s-card{
-  height:540px; 
-  overflow: auto; 
-  overflow-x: hidden;
-  padding: 15px;
-  padding-right: 3px !important;
-
-
-
-}
 
 
 </style>

@@ -92,16 +92,20 @@
                     </b-form-group>
 
                     <div class="form-group">
-                      <span class="text mt-2"> No Choices </span>
-
-                      <input
-                        type="text"
-                        name="business_keyword"
+                      <label for="country" class="username"> Keywords :</label
+                      ><br />
+              
+                      <multiselect
                         v-model="business_keyword"
-                        id="alias"
-                        placeholder="Enter  Keywords Alerts"
-                        class="form-control text"
-                      />
+                        tag-placeholder="Add this as new Keyword"
+                        placeholder="Add New Keyword"
+                        label="name"
+                        track-by="id"
+                        :options="keywordds"
+                        :multiple="true"
+                        :taggable="true"
+                        @tag="addkeywords"
+                      ></multiselect>
                     </div>
 
                     <div class="form-group">
@@ -159,13 +163,15 @@
                         :key="filters.id"
                         active
                         ><b-card-text>
-                          <b-form-group label="Filters">
+                          <b-form-group label="Filters" class="colorblack">
                             <b-form-checkbox-group
                               id=""
+                              class="colorblack"
                               v-model="select_filterss"
                               name="filters"
                             >
                               <b-form-checkbox
+                              class="colorblack"
                                 v-for="fil in filters.filters"
                                 :key="fil.id"
                                 :value="fil.id"
@@ -192,14 +198,11 @@
                       <multiselect
                         v-model="country"
                         @input="Region"
-                        tag-placeholder="Add this as new tag"
-                        placeholder="Search or add a tag"
+                        placeholder="Search "
                         label="name"
                         track-by="id"
                         :options="countries"
                         :multiple="true"
-                        :taggable="true"
-                        @tag="addTag"
                       ></multiselect>
                     </div>
                   </div>
@@ -211,14 +214,11 @@
                       <multiselect
                         v-model="region"
                         @input="Division"
-                        tag-placeholder="Add this as new tag"
-                        placeholder="Search or add a tag"
+                        placeholder="Search"
                         label="name"
                         track-by="id"
                         :options="regions"
                         :multiple="true"
-                        :taggable="true"
-                        @tag="addTag"
                       ></multiselect>
                     </div>
                   </div>
@@ -230,14 +230,11 @@
                       <multiselect
                         v-model="division"
                         @input="Municipality"
-                        tag-placeholder="Add this as new tag"
-                        placeholder="Search or add a tag"
+                        placeholder="Search"
                         label="name"
                         track-by="id"
                         :options="divisions"
                         :multiple="true"
-                        :taggable="true"
-                        @tag="addTag"
                       ></multiselect>
                     </div>
                   </div>
@@ -251,14 +248,11 @@
                       <multiselect
                         v-model="municipality"
                         @input="Locality"
-                        tag-placeholder="Add this as new tag"
-                        placeholder="Search or add a tag"
+                        placeholder="Search"
                         label="name"
                         track-by="id"
                         :options="municipalities"
                         :multiple="true"
-                        :taggable="true"
-                        @tag="addTag"
                       ></multiselect>
                     </div>
                   </div>
@@ -271,14 +265,11 @@
                       ><br />
                       <multiselect
                         v-model="locality"
-                        tag-placeholder="Add this as new tag"
-                        placeholder="Search or add a tag"
+                        placeholder="Search"
                         label="name"
                         track-by="id"
                         :options="localities"
                         :multiple="true"
-                        :taggable="true"
-                        @tag="addTag"
                       ></multiselect>
                     </div>
                   </div>
@@ -314,12 +305,13 @@
             <tab-content title=" Contact ">
               <b-card>
                 <b-row>
+                
                   <b-col md="6">
-                    <label> Phone1 </label>
+                    <label class="username"> Phone1 </label>
                     <VuePhoneNumberInput v-model="phone1" />
                   </b-col>
-                  <b-col md="6">
-                    <label> Phone2 </label>
+                  <b-col md="6">  
+                    <label class="username"> Phone2 </label>
                     <VuePhoneNumberInput v-model="phone2" />
                   </b-col>
                 </b-row>
@@ -327,14 +319,14 @@
                 <b-row>
                   <b-col md="6">
                     <div class="form-group">
-                      <label for="Neighbor" class="username"> Website :</label
+                      <label for="website" class="username"> Website :</label
                       ><br />
                       <input
                         type="text"
                         name="alias"
                         v-model="website"
-                        id="Neighbor"
-                        placeholder="Neighbor"
+                        id="Website"
+                        placeholder="Website"
                         class="form-control text"
                       />
                     </div>
@@ -344,11 +336,11 @@
                     <div class="form-group">
                       <label for="email" class="username"> Email :</label><br />
                       <input
-                        type="text"
+                        type="email"
                         name="alias"
                         v-model="email"
                         id="email"
-                        placeholder="Neighbor"
+                        placeholder="Email"
                         class="form-control text"
                       />
                     </div>
@@ -373,6 +365,362 @@
         </div>
       </b-modal>
 
+
+
+      <!-- update method --->
+
+
+
+      
+      <b-modal
+        id="updateBusinessModal"
+        ref="updateBusinessModal"
+        title="Update Bussiness"
+        size="lg"
+        hide-footer
+        @close="cancel"
+      >
+        <div>
+          <form-wizard @on-complete="updateBusiness">
+            <tab-content title="Business Indentity">
+              <div class="form-card">
+                <div class="row">
+                  <div class="col-md-6">
+                    <input
+                      id="logo"
+                      type="file"
+                      @change="onLogoChange"
+                      hidden
+                    />
+
+                    <div id="preview">
+                      <img v-if="logoimg_url" :src="logoimg_url" />
+                    </div>
+                    <br />
+                    <div class="text-center">
+                      <b-button
+                        v-if="logoimg_url"
+                        @click="chooselogo()"
+                        variant="primary"
+                        class="mt-3 text-center"
+                      >
+                        change Image
+                      </b-button>
+                    </div>
+
+                    <div
+                      class="image-upload-wrap"
+                      v-if="!logoimg_url"
+                      @click="chooselogo()"
+                    >
+                      <a
+                        href="#"
+                        data-toggle="modal"
+                        data-target="#createalbumModal"
+                      >
+                        <div class="drag-text">
+                          <i class="fa fa-plus"> </i>
+                          <h3 class="username">Business Logo</h3>
+                        </div>
+                      </a>
+                      <div></div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <b-form-group
+                      id="business_name"
+                      label="Business Name"
+                      label-for="business_name"
+                    >
+                      <b-form-input
+                        id="business_name"
+                        name="business_name"
+                        v-model="form.business_name"
+                        :state="validateState('business_name')"
+                        aria-describedby="business_name-feedback"
+                      ></b-form-input>
+
+                      <b-form-invalid-feedback id="business_name-feedback"
+                        >Business Name Is Required.</b-form-invalid-feedback
+                      >
+                    </b-form-group>
+
+                    <div class="form-group">
+                      <label for="country" class="username"> Keywords :</label
+                      ><br />
+              
+                      <multiselect
+                        v-model="business_keyword"
+                        tag-placeholder="Add this as new Keyword"
+                        placeholder="Add New Keyword"
+                        label="name"
+                        track-by="id"
+                        :options="keywordds"
+                        :multiple="true"
+                        :taggable="true"
+                        @tag="addkeywords"
+                      ></multiselect>
+                    </div>
+
+                    <div class="form-group">
+                      <label for="username" class="username">About</label><br />
+                      <textarea
+                        type="textarea"
+                        name="business_about"
+                        v-model="about"
+                        id="description"
+                        placeholder="Brief description about your Busness"
+                        class="form-control text"
+                      ></textarea>
+                    </div>
+                  </div>
+                </div>
+
+                <div>
+                  <label class="typo__label"> Category </label>
+                  <multiselect
+                    v-model="multiselecvalue"
+                    @input="subcategories"
+                    tag-placeholder="Add this as new tag"
+                    placeholder="Search or add a tag"
+                    label="name"
+                    track-by="id"
+                    :options="pcategories"
+                    :multiple="true"
+                    :taggable="true"
+                    @tag="addTag"
+                  ></multiselect>
+                </div>
+
+                <div>
+                  <label class="typo__label"> Sub Category</label>
+                  <multiselect
+                    v-model="filterselectvalue"
+                    tag-placeholder="Add this as new tag"
+                    placeholder="Search or add a tag"
+                    label="subcategory"
+                    track-by="sub_cat_id"
+                    :options="scategories"
+                    :multiple="true"
+                    :taggable="true"
+                    @tag="addFilter"
+                  ></multiselect>
+                </div>
+
+                <label class="typo__label">Fiters</label>
+                <div>
+                  <b-card no-body>
+                    <b-tabs pills card vertical>
+                      <b-tab
+                        :title="filters.subcategory"
+                        v-for="filters in filterselectvalue"
+                        :key="filters.id"
+                        active
+                        ><b-card-text>
+                          <b-form-group label="Filters" class="colorblack">
+                            <b-form-checkbox-group
+                              id=""
+                              class="colorblack"
+                              v-model="select_filterss"
+                              name="filters"
+                            >
+                              <b-form-checkbox
+                              class="colorblack"
+                                v-for="fil in filters.filters"
+                                :key="fil.id"
+                                :value="fil.id"
+                              >
+                                {{ fil.name }}
+                              </b-form-checkbox>
+                            </b-form-checkbox-group>
+                          </b-form-group>
+                        </b-card-text></b-tab
+                      >
+                    </b-tabs>
+                  </b-card>
+                </div>
+              </div>
+            </tab-content>
+
+            <tab-content title=" Location ">
+              <div class="form-card">
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="country" class="username"> Country :</label
+                      ><br />
+                      <multiselect
+                        v-model="country"
+                        @input="Region"
+                        placeholder="Search "
+                        label="name"
+                        track-by="id"
+                        :options="countries"
+                        :multiple="true"
+                      ></multiselect>
+                    </div>
+                  </div>
+
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="country" class="username"> Region :</label
+                      ><br />
+                      <multiselect
+                        v-model="region"
+                        @input="Division"
+                        placeholder="Search"
+                        label="name"
+                        track-by="id"
+                        :options="regions"
+                        :multiple="true"
+                      ></multiselect>
+                    </div>
+                  </div>
+
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="country" class="username"> Division :</label
+                      ><br />
+                      <multiselect
+                        v-model="division"
+                        @input="Municipality"
+                        placeholder="Search"
+                        label="name"
+                        track-by="id"
+                        :options="divisions"
+                        :multiple="true"
+                      ></multiselect>
+                    </div>
+                  </div>
+
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="country" class="username">
+                        Municipality :</label
+                      ><br />
+
+                      <multiselect
+                        v-model="municipality"
+                        @input="Locality"
+                        placeholder="Search"
+                        label="name"
+                        track-by="id"
+                        :options="municipalities"
+                        :multiple="true"
+                      ></multiselect>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="Neighbor" class="username"> Neighbor :</label
+                      ><br />
+                      <multiselect
+                        v-model="locality"
+                        placeholder="Search"
+                        label="name"
+                        track-by="id"
+                        :options="localities"
+                        :multiple="true"
+                      ></multiselect>
+                    </div>
+                  </div>
+
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="Neighbor" class="username"> Adress :</label>
+
+                      <gmap-autocomplete
+                        @place_changed="initMarker"
+                        class="form-control"
+                      >
+                      </gmap-autocomplete>
+                    </div>
+                  </div>
+                </div>
+
+                <gmap-map
+                  :zoom="14"
+                  :center="center"
+                  style="width: 100%; height: 200px"
+                >
+                  <gmap-marker
+                    :key="index"
+                    v-for="(m, index) in locationMarkers"
+                    :position="m.position"
+                    @click="center = m.position"
+                  ></gmap-marker>
+                </gmap-map>
+              </div>
+            </tab-content>
+
+            <tab-content title=" Contact ">
+              <b-card>
+                <b-row>
+                
+                  <b-col md="6">
+                    <label class="username"> Phone1 </label>
+                    <VuePhoneNumberInput v-model="phone1" />
+                  </b-col>
+                  <b-col md="6">  
+                    <label class="username"> Phone2 </label>
+                    <VuePhoneNumberInput v-model="phone2" />
+                  </b-col>
+                </b-row>
+
+                <b-row>
+                  <b-col md="6">
+                    <div class="form-group">
+                      <label for="website" class="username"> Website :</label
+                      ><br />
+                      <input
+                        type="text"
+                        name="alias"
+                        v-model="website"
+                        id="Website"
+                        placeholder="Website"
+                        class="form-control text"
+                      />
+                    </div>
+                  </b-col>
+
+                  <b-col md="6">
+                    <div class="form-group">
+                      <label for="email" class="username"> Email :</label><br />
+                      <input
+                        type="text"
+                        name="alias"
+                        v-model="email"
+                        id="email"
+                        placeholder="Email"
+                        class="form-control text"
+                      />
+                    </div>
+                  </b-col>
+
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="username" class="username">TimeZone:</label
+                      ><br />
+
+                      <b-form-select
+                        id="timezone"
+                        v-model="time_zone"
+                        :options="timezone"
+                      ></b-form-select>
+                    </div>
+                  </div>
+                </b-row>
+              </b-card>
+            </tab-content>
+          </form-wizard>
+        </div>
+      </b-modal>
+
+      <!-- end of update modal -->
+
       <div class="row mb-4">
         <div class="col">
           <h6 class="mb-0"><b></b></h6>
@@ -382,15 +730,28 @@
               lg="6"
               class="p-0"
               v-for="business in profilebusiness"
-              :key="business.id"
+              :key="business.business_id"
             >
               <div class="people-style shadow">
-                <b-link v-b-modal.createBusinessModal>
+                <b-link
+                >
                   <div class="float-right">
-                    <b-icon
+
+
+                    <b-dropdown size="lg"  variant="link" toggle-class="text-decoration-none" no-caret>
+    <template #button-content>
+     <b-icon
                       icon="three-dots-vertical"
                       class="icon-size"
                     ></b-icon>
+    </template>
+    <b-dropdown-item 
+                  
+                  @click="editBusiness(business.id)"  v-b-modal.updateBusinessModal variant="">Edit</b-dropdown-item>
+    <b-dropdown-item > Delete</b-dropdown-item>
+  </b-dropdown>
+  
+                    
                   </div>
                 </b-link>
                 <b-row>
@@ -406,13 +767,15 @@
 
                   <b-col md="5" cols="7" lg="7" xl="9" sm="5">
                     <p class="textt text">
+                     
                       <strong class="title">
-                        {{ business.bussines_name }}
+                        {{ business.name }}
                       </strong>
                       <br />
-                      {{ business.category }}
+                      <span v-if=" Array.isArray(business.category) ">  
+                      <span class="m-1" v-for=" cat in business.category" :key="cat.name "> {{cat.name}} </span> </span>
                       <br />
-                      {{ business.community }} Community <br />
+                      {{ business.community }} Community  {{business.id}} <br />
 
                       <span class="location">
                         <b-icon-geo-alt class="ico"></b-icon-geo-alt>
@@ -426,7 +789,7 @@
                         :text="business.about_business"
                         link="#"
                         less-str="read less"
-                        :max-chars="15"
+                        :max-chars="100"
                       >
                       </read-more>
                     </p>
@@ -435,14 +798,15 @@
               </div>
             </b-col>
           </b-row>
+
+          
+      <infinite-loading :identifier="infiniteId"   ref="infiniteLoading"   @infinite="infiniteHandler"></infinite-loading>
+
         </div>
       </div>
     </div>
   </div>
 </template>
-
-
-
 
 <script>
 import axios from "axios";
@@ -459,8 +823,12 @@ export default {
   data() {
     return {
       useas: "",
-
+      page:"",
+      bizId:"",
+      infiniteId:2,
+      editbiz: "",
       selectedusecase: "",
+      keywordds:[],
       phone1: null,
       phone2: null,
       emaill: null,
@@ -489,7 +857,7 @@ export default {
         business_name: null,
       },
       business_category: "Testing",
-      business_keyword: null,
+      business_keyword: [],
       time_zone: null,
       language: null,
       about: null,
@@ -510,7 +878,7 @@ export default {
         { name: "Javascript", code: "js" },
         { name: "Open Source", code: "os" },
       ],
- timezone: [
+      timezone: [
         { text: "(GMT+1) West African ", value: "+1" },
         { text: "(GMT-11:00) Midway Island, Samoa", value: "-11" },
       ],
@@ -528,12 +896,98 @@ export default {
       business_name: {
         required,
       },
-
     },
   },
 
   methods: {
+
+    
+    infiniteHandler($state) {  
+      console.log("business/userBusiness/" + this.page);
+      let url = "business/userBusiness/" + this.page;
+      this.$store.dispatch("profile/loadMore",url)
+        .then(({ data }) => {
+          console.log(data);
+          if (data.data.length) { 
+            this.page += 1;
+
+            this.profilebusiness.push(...data.data);
+            $state.loaded();
+          } else {
+            $state.complete();
+          }
+        })
+        .catch((err) => {
+          console.log({ err: err });
+        });
+    },
+
+
+    editBusiness(id){
+
+
+       this.bizId=id;
+
+         axios.get("business/edit/"+id).then(({ data }) => {
+        console.log(data);
+        this.editbiz=data.data;
+        this.setEditData(data.data)
+      }).catch((err) => {
+          console.log({ err: err });
+        });
+    },
+
+
+
+
+
+        
+
+    setEditData(business){
+      this.logo_url=business.logo
+      this.business_name=business.name;
+      this.about=business.about;
+      this.lat=business.lat;
+      this.lng=business.lng;
+      this.multiselecvalue=business.category;
+      this.filterselectvalue=business.subCategory;
+      this.select_filterss=business.filter;
+      this.country=business.country;
+      this.region=business.region;
+      this.division=business.division
+      this.municipality=business.council
+      this.phone1=business.phone1;
+      this.phone2=business.phone2
+      this.website=business.this.website;
+      this.locality=business.neigborhood;
+      this.email=business.email;
+      this.time_zone=business.timeZone;
+      this.business_keyword=business.business_keyword;
+      this.address=business.address; 
+
+      
+
+    }
+,
     addTag(newTag) {
+      const tag = {
+        name: newTag,
+        id: newTag.substring(0, 2) + Math.floor(Math.random() * 10000000),
+      };
+      this.multiselec.push(tag);
+      this.multiselecvalue.push(tag);
+    },
+
+    addkeywords(newTag) {
+      const tag = {
+        name: newTag,
+        id: newTag.substring(0, 2) + Math.floor(Math.random() * 10000000),
+      };
+      this.keywordds.push(tag);
+      this.business_keyword.push(tag);
+    },
+
+    addCategoryTag(newTag) {
       const tag = {
         name: newTag,
         id: newTag.substring(0, 2) + Math.floor(Math.random() * 10000000),
@@ -549,84 +1003,6 @@ export default {
       };
       this.multiselec.push(tag);
       this.filterselectvalue.push(tag);
-    },
-
-    Country() {
-      this.$store
-        .dispatch("auth/country")
-        .then(() => {
-          console.log("hey yeah");
-        })
-        .catch((err) => {
-          console.log({ err: err });
-        });
-    },
-
-    profileBusiness() {
-      this.$store
-        .dispatch("profile/profileBusiness")
-        .then(() => {
-          console.log("hey yeah");
-        })
-        .catch((err) => {
-          console.log({ err: err });
-        });
-    },
-
-    Region() {
-      let formData2 = new FormData();
-      formData2.append("country_id", this.selectedcountry);
-
-      this.$store
-        .dispatch("auth/region", formData2)
-        .then(() => {
-          console.log("hey yeah");
-        })
-        .catch((err) => {
-          console.log({ err: err });
-        });
-    },
-
-    Division() {
-      let formData2 = new FormData();
-      formData2.append("regionId", this.selectedregion);
-
-      this.$store
-        .dispatch("auth/division", formData2)
-        .then(() => {
-          console.log("hey yeah");
-        })
-        .catch((err) => {
-          console.log({ err: err });
-        });
-    },
-
-    Municipality() {
-      let formData2 = new FormData();
-      formData2.append("divisionId", this.selecteddivision);
-
-      this.$store
-        .dispatch("auth/municipality", formData2)
-        .then(() => {
-          console.log("hey yeah");
-        })
-        .catch((err) => {
-          console.log({ err: err });
-        });
-    },
-
-    Locality() {
-      let formData2 = new FormData();
-      formData2.append("council_id", this.selectedmunicipality);
-
-      this.$store
-        .dispatch("auth/locality", formData2)
-        .then(() => {
-          console.log("hey yeah");
-        })
-        .catch((err) => {
-          console.log({ err: err });
-        });
     },
 
     categories() {
@@ -676,7 +1052,84 @@ export default {
         });
     },
 
-    setLoading: function (value) {
+    Country() {
+      this.$store
+        .dispatch("auth/country")
+        .then(() => {
+          console.log("hey yeah");
+        })
+        .catch((err) => {
+          console.log({ err: err });
+        });
+    },
+
+    profileBusiness() {
+      this.$store
+        .dispatch("profile/profileBusiness")
+        .then(() => {
+          console.log("hey yeah");
+        })
+        .catch((err) => {
+          console.log({ err: err });
+        });
+    },
+
+    Region() {
+      let formData2 = new FormData();
+      formData2.append("countryId", this.selectedcountry);
+
+      this.$store
+        .dispatch("auth/region", formData2)
+        .then(() => {
+          console.log("hey yeah");
+        })
+        .catch((err) => {
+          console.log({ err: err });
+        });
+    },
+
+    Division() {
+      let formData2 = new FormData();
+      formData2.append("regionId", this.selectedregion);
+
+      this.$store
+        .dispatch("auth/division", formData2)
+        .then(() => {
+          console.log("hey yeah");
+        })
+        .catch((err) => {
+          console.log({ err: err });
+        });
+    },
+
+    Municipality() {
+      let formData2 = new FormData();
+      formData2.append("divisionId", this.selecteddivision);
+
+      this.$store
+        .dispatch("auth/municipality", formData2)
+        .then(() => {
+          console.log("hey yeah");
+        })
+        .catch((err) => {
+          console.log({ err: err });
+        });
+    },
+
+    Locality() {
+      let formData2 = new FormData();
+      formData2.append("councilId", this.selectedmunicipality);
+
+      this.$store
+        .dispatch("auth/locality", formData2)
+        .then(() => {
+          console.log("hey yeah");
+        })
+        .catch((err) => {
+          console.log({ err: err });
+        });
+    },
+    setLoading: function(value) {
       this.loadingWizard = value;
     },
 
@@ -694,96 +1147,6 @@ export default {
       }
     },
 
-    validateBusiness() {
-      return new Promise((resolve, reject) => {
-        this.$v.form.$touch();
-        if (this.$v.form.$anyError) {
-          console.log("error error");
-          return false;
-        } else {
-          console.log("no error error");
-
-          this.sendingB = true;
-
-          let loader = this.$loading.show({
-            container: this.fullPage ? null : this.$refs.loader,
-            canCancel: true,
-            onCancel: this.onCancel,
-            color: "#e75c18",
-          });
-
-          let formData2 = new FormData();
-
-          formData2.append("logo_path", this.logo_pic);
-          formData2.append("region", this.selectedregion);
-          formData2.append("city", this.city);
-          formData2.append("country", this.selectedcountry);
-
-          formData2.append("address", this.adress);
-          formData2.append("division", this.selecteddivision);
-          formData2.append("council", this.selectedmunicipality);
-
-          formData2.append("neighborh", this.selectedlocality);
-          formData2.append("lat", this.center.lat);
-          formData2.append("lng", this.center.lng);
-
-          formData2.append("name", this.form.business_name);
-          formData2.append("category", this.business_category);
-          //  formData2.append("keywords", this.selectedKeywords);
-          formData2.append("keywords", "blec this");
-          formData2.append("timezone", this.time_zone);
-          formData2.append("language", this.language);
-          formData2.append("about_business", this.about);
-
-          this.axios
-            .post("business/add", formData2, {
-              headers: {
-                "Content-Type": "multipart/form-data",
-              },
-            })
-            .then((response) => {
-              console.log(response);
-
-              this.sendingB = false;
-
-              this.flashMessage.show({
-                status: "success",
-
-                message: "Business Profile Created",
-              });
-
-              resolve(true);
-            })
-            .catch((err) => {
-              console.log({ err: err });
-
-              this.sendingB = false;
-
-              if (err.response.status == 422) {
-                console.log({ err: err });
-                console.log(err.response.data.message);
-
-                this.flashMessage.show({
-                  status: "error",
-
-                  message: err.response.data.message,
-                  blockClass: "custom-block-class",
-                });
-              } else {
-                this.flashMessage.show({
-                  status: "error",
-
-                  message: "Unable to Create Your Business",
-                  blockClass: "custom-block-class",
-                });
-                console.log({ err: err });
-              }
-              loader.hide();
-              resolve(false);
-            });
-        }
-      });
-    },
 
     businessAround() {
       this.$store
@@ -826,7 +1189,7 @@ export default {
       }
     },
 
-    locateGeoLocation: function () {
+    locateGeoLocation: function() {
       navigator.geolocation.getCurrentPosition((res) => {
         this.center = {
           lat: res.coords.latitude,
@@ -834,7 +1197,9 @@ export default {
         };
       });
     },
-    createBusiness: function () {
+
+
+    createBusiness: function() {
       return new Promise((resolve, reject) => {
         this.sendingB = true;
         let loader = this.$loading.show({
@@ -882,7 +1247,8 @@ export default {
             console.log(response);
 
             this.sendingB = false;
-            this.profilebusiness();
+            this.profileBusiness();
+           
             this.$refs["createBusinessModal"].hide();
             this.flashMessage.show({
               status: "success",
@@ -891,6 +1257,9 @@ export default {
             });
 
             loader.hide();
+            this.page = 1;
+      this.infiniteId += 1;
+
             resolve(true);
           })
           .catch((err) => {
@@ -923,28 +1292,52 @@ export default {
       });
     },
 
-    updateUserProfile: function () {
+  
+
+
+
+
+  
+    updateBusiness: function() {
       return new Promise((resolve, reject) => {
-        console.log("sending user data");
+        this.sendingB = true;
+        let loader = this.$loading.show({
+          container: this.fullPage ? null : this.$refs.loader,
+          canCancel: true,
+          onCancel: this.onCancel,
+          color: "#e75c18",
+        });
 
-        this.sendingP = true;
+        let formData2 = new FormData();
+        formData2.append("logo_path", this.logo_pic);
 
-        let formData = new FormData();
-        formData.append("profile_picture", this.profile_pic);
+        formData2.append("region", this.selectedregion);
+        formData2.append("city", this.city);
+        formData2.append("country", this.selectedcountry);
 
-        formData.append("dob", this.dob);
-        formData.append("gender", this.gender);
-        formData.append("city", this.city);
-        formData.append("country", this.country);
-        formData.append("region", this.region);
-        formData.append("city", this.city);
-        formData.append("neighbor", this.Neighbor);
-        formData.append("lat", this.center.lat);
-        formData.append("lng", this.center.lng);
-        formData.append("address", this.region);
+        formData2.append("address", this.adress);
+        formData2.append("division", this.selecteddivision);
+        formData2.append("council", this.selectedmunicipality);
+
+        formData2.append("neigborhood", this.selectedlocality);
+        formData2.append("lat", this.center.lat);
+        formData2.append("lng", this.center.lng);
+        formData2.append("phone1", this.phone1);
+        formData2.append("phone2", this.phone2);
+        formData2.append("email", this.email);
+        formData2.append("website", this.website);
+
+        formData2.append("name", this.form.business_name);
+        formData2.append("categoryId", this.selectedcategories);
+        formData2.append("subCategoryId", this.selectedsubcategories);
+        formData2.append("filterId", this.select_filterss);
+        formData2.append("keywords", this.business_keyword);
+        formData2.append("timezone", this.time_zone);
+        formData2.append("language", this.language);
+        formData2.append("about_business", this.about);
 
         this.axios
-          .post("/complete/profile", formData, {
+          .post("business/edit"+this.bizId, formData2, {
             headers: {
               "Content-Type": "multipart/form-data",
             },
@@ -952,24 +1345,26 @@ export default {
           .then((response) => {
             console.log(response);
 
-            this.step1 = true;
-            this.sending = false;
-
+            this.sendingB = false;
+            this.profileBusiness();
+           
+            this.$refs["updateBusinessModal"].hide();
             this.flashMessage.show({
               status: "success",
-
-              message: "Profile Updated",
-
               blockClass: "custom-block-class",
+              message: "Business Profile Created",
             });
+
+            loader.hide();
+            this.page = 1;
+      this.infiniteId += 1;
 
             resolve(true);
           })
           .catch((err) => {
             console.log({ err: err });
 
-            this.sending = false;
-            this.step1 = false;
+            this.sendingB = false;
 
             if (err.response.status == 422) {
               console.log({ err: err });
@@ -984,23 +1379,24 @@ export default {
             } else {
               this.flashMessage.show({
                 status: "error",
-                title: "Registration Failed",
-                message: "Unable to update your Information",
+
+                message: "Unable to Update Your Business",
                 blockClass: "custom-block-class",
               });
               console.log({ err: err });
             }
-
+            loader.hide();
             resolve(false);
           });
       });
     },
 
-    chooseProfile1: function () {
+
+    chooseProfile1: function() {
       document.getElementById("profile1").click();
     },
 
-    chooseProfile2: function () {
+    chooseProfile2: function() {
       document.getElementById("profile2").click();
     },
 
@@ -1016,7 +1412,7 @@ export default {
       this.logoimg_url = URL.createObjectURL(logofile);
     },
 
-    chooselogo: function () {
+    chooselogo: function() {
       document.getElementById("logo").click();
     },
 
@@ -1059,53 +1455,63 @@ export default {
   },
 
   computed: {
-    profilebusiness: function () {
+     
+     selectedKeywords: function () {
+      let selectedUsers = [];
+      this.business_keyword.forEach((item) => {
+        selectedUsers.push(item.id);
+      });
+      return selectedUsers;
+    },
+
+
+    profilebusiness: function() {
       return this.$store.state.profile.profileBusiness;
     },
 
-    selectedcategories: function () {
+    selectedcategories: function() {
       let selectedUsers = [];
       this.multiselecvalue.forEach((item) => {
         selectedUsers.push(item.id);
       });
       return selectedUsers;
     },
-    selectedsubcategories: function () {
+    selectedsubcategories: function() {
       let sub_cat = [];
       this.filterselectvalue.forEach((item) => {
         sub_cat.push(item.sub_cat_id);
       });
       return sub_cat;
     },
-    selectedcountry: function () {
+    selectedcountry: function() {
       let sub_cat = [];
       this.country.forEach((item) => {
         sub_cat.push(item.id);
       });
       return sub_cat;
     },
-    selectedregion: function () {
+    selectedregion: function() {
       let sub_cat = [];
       this.region.forEach((item) => {
         sub_cat.push(item.id);
       });
       return sub_cat;
     },
-    selecteddivision: function () {
+    selecteddivision: function() {
       let sub_cat = [];
       this.division.forEach((item) => {
         sub_cat.push(item.id);
       });
       return sub_cat;
     },
-    selectedmunicipality: function () {
+    selectedmunicipality: function() {
       let sub_cat = [];
       this.municipality.forEach((item) => {
         sub_cat.push(item.id);
       });
       return sub_cat;
     },
-    selectedlocality: function () {
+    selectedlocality: function() {
       let sub_cat = [];
       this.locality.forEach((item) => {
         sub_cat.push(item.id);
@@ -1145,6 +1551,12 @@ import "vue-form-wizard/dist/vue-form-wizard.min.css";
 </script>
 
 <style scoped>
+.username{
+  color: black;
+}
+.colorblack{
+  color:black;
+}
 .logo-img {
   width: 60px;
 }
@@ -1347,4 +1759,11 @@ import "vue-form-wizard/dist/vue-form-wizard.min.css";
     padding: 7px;
   }
 }
+</style>
+
+<style >
+   
+   .r-image{
+     object-fit: cover;
+   }
 </style>

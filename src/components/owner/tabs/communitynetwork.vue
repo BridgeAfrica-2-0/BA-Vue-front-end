@@ -1,7 +1,7 @@
 <template>
-  <div>
+  <div class="p-2">
     <b-modal id="modal-sm" size="sm" hide-header>
-      Do you want to join this network?
+      Do you want to join this network? 
     </b-modal>
 
 
@@ -74,27 +74,137 @@
     </div>
         </b-col>
     </b-row>
+
+     
+ 
+      <infinite-loading :identifier="infiniteId"  @infinite="infiniteHandler"  ref="infiniteLoading" ></infinite-loading> 
+  
   </div>
 </template>
 
 <script>
+import axios from "axios";
 export default {
-  props: ["network"],
-  computed: {
-    business() {
-      return this.$store.getters["networkDetails/getdetails.category"];
-    }
+  props: ["type","searchh"],
+   data() {
+    return {
+      page: 1,
+      infiniteId: +new Date(),
+      options: {
+        rewind: true,
+        autoplay: true,
+        perPage: 1,
+        pagination: false,
+
+        type: "loop",
+        perMove: 1
+      }
+    };
   },
-  created() {
-    this.$store
-      .dispatch("networkDetails/getndetails")
-      .then(() => {
-        console.log("the response");
-      })
-      .catch(err => {
-        console.log({ err: err });
-      });
+  computed: {
+   
+        network(){
+
+      if(this.type=="Follower"){ 
+
+      return  this.$store.state.profile.NcommunityFollower.network_followers;  
+
+       }else{
+
+         return  this.$store.state.profile.NcommunityFollowing.network_following; 
+       }
+   }
+   
+  },
+
+
+  methods:{
+   
+
+
+        search(){
+     
+       console.log('search started');
+       console.log(this.type);
+        
+         if(this.type=="Follower"){ 
+         console.log("follower");
+        this.$store.commit("profile/setNcommunityFollower",{ "network_followers": [ ], "total_network_follower": 0 }); 
+
+       }else{
+       
+        
+        this.$store.commit("profile/setNcommunityFollowing",{ "network_following": [ ], "total_network_following": 0 }); 
+       }
+
+      this.page = 1;
+      this.infiniteId += 1;
+
+     
+     this.$refs.infiniteLoading.attemptLoad();
+    
+
+    },
+
+    
+      infiniteHandler($state) {
+
+
+      let url = null;
+
+         if(this.type=="Follower"){  
+          url="profile/network/follower/"
+         }else{
+          url="profile/network/following/";
+         }
+         
+      console.log(url + this.page+"?keyword="+this.searchh);
+      axios
+        .get(url + this.page+"?keyword="+this.searchh)   
+        .then(({ data }) => {
+          console.log("lading network after response")
+          console.log(data);
+        if(this.type=="Follower"){
+         
+
+          if (data.data.network_followers.length) {
+            this.page += 1;
+            this.network.push(...data.data.network_followers);
+            
+            
+            $state.loaded();
+           }else{
+              $state.complete();
+           }
+
+
+          } else {
+            
+
+
+             if (data.data.network_following.length) {
+            this.page += 1;
+      
+            this.network.push(...data.data.network_following);
+            
+            
+            $state.loaded();
+           }else{
+              $state.complete();
+           }
+
+
+
+          }
+        }) 
+        .catch((err) => {
+          console.log({ err: err });
+        });
+    },
+
   }
+  
+
 };
 </script>
 

@@ -37,8 +37,8 @@
                 id="search-ba"
                 type="search"
                 data-toggle="popover"
-                class="form-control  search-mobile "
-                style=" border-left: none; "
+                class="form-control search-mobile"
+                style="border-left: none"
                 placeholder="Find Pharmacies"
                 aria-label=""
                 data-original-title=""
@@ -92,7 +92,7 @@
                 id="search-ba"
                 type="search"
                 data-toggle="popover"
-                class="form-control  search-h"
+                class="form-control search-h"
                 style=""
                 :placeholder="credentials.placeholder"
                 v-model="credentials.keyword"
@@ -119,10 +119,9 @@
                 <option value=" Current Location "></option>
                 <option value="Yaounde " />
               </datalist>
-             <slot name="button">
-               <Button />
-             </slot>
-              
+              <slot name="button">
+                <Button />
+              </slot>
             </form>
           </span>
           <div id="search-popover" class="d-none"></div>
@@ -692,9 +691,9 @@ export default {
     Button
   },
   props: {
-    credentials:{
+    credentials: {
       type: Object,
-      default: function(){
+      default: function () {
         return {
           keyword:'',
           placeholder:''
@@ -711,8 +710,6 @@ export default {
   },
 
   methods: {
-
-
     toggleinput() {
       this.$refs.mobileinput.style.display = "block";
       this.isActive = true;

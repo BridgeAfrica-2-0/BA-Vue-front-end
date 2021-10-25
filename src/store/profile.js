@@ -6,6 +6,7 @@ export default {
 
     communityPeople: [],
     CommunityBusiness: [],
+    profilenetwork:[],
     ownerPost: [],
     profileBusiness: [],
     ownerPostImages: [],
@@ -18,16 +19,49 @@ export default {
     educations: [],
     professions: [],
 
-    profile_about:[],
-    profileIntro:[],
+   
+
+    profile_about:{"user":{},"user_address":[], "user_education":[],"user_experience":[],"user_websites":[]  },
+    profileIntro:{"user":{},"user_address":[], "user_education":[],"user_experience":[],"user_websites":[]  },
+    NcommunityFollower:{ "network_followers": [ ], "total_network_follower": 0 },
+    NcommunityFollowing:{ "network_following": [ ], "total_network_following": 0 },
+    BcommunityFollower:{ "business_followers": [ ], "total_business_follower": 0 },
+    BcommunityFollowing:{ "business_following": [ ], "total_business_following": 0 },
+  
+    UcommunityFollower:{ "user_followers": [ ], "total_user_follower": 0 },
+    UcommunityFollowing:{ "user_following": [ ], "total_user_following": 0 },
+    Tcommunity:[],
+    images:[],
 
 
-    userData: [
-      {
+    userData: 
+      { 
+        user:{
+          address: "",
+          biography: "",
+          city: "",
+          country: "",
+          cover_picture: "",
+          dob: "2021-09-24",
+          email: "",
+          id: 63,
+          language: "",
+          name: "",
+          neighbor: "",
+          phone: null,
+          profession: "",
+          profile_complete: 1,
+          profile_picture: "",
+          provider: 0,
+          provider_id: 0,
+          region: "01",
+          status: 1,
+          updated_at: "2021-10-04T08:37:57.000000Z",
+          user_account_package_id: null },
         profile_about: {
           biography: {
             info_access: "private",
-            description: "No Description"
+            description: ""
           },
           basicInfo: {
             dateOfBirth: {
@@ -42,19 +76,14 @@ export default {
               }
             },
             gender: "M",
-            mobilePhones: ["237656602212", "237677873626"],
+            mobilePhones: [],
             currentCity: null,
             homeTown: null,
             websites: [
-              "https://www.google.com",
-              "https://www.facebook.com",
-              "https://www.udemy.com"
+              
             ],
             socialLinks: [
-              "www.instagram.com/bridgeafrica",
-              "https://www.google.com",
-              "https://www.facebook.com",
-              "https://www.udemy.com"
+              
             ]
           },
           educationAndWorks: {
@@ -62,11 +91,11 @@ export default {
 
               {
                 id: 3,
-                companyName: "Coc Cla Pvt Ltd. Team Lead",
-                cityTown: "YAOUNDE",
-                position: "YAOUNDE",
+                companyName: "",
+                cityTown: "",
+                position: "",
                 jobResponsibilities:
-                  "Job descrioption dummny textJob descrioption dummny text Jobdescrioption dummny text",
+                  "",
                 currentlyWorking: false,
                 starDate: "2012-09-12",
                 endDate: "2012-09-12",
@@ -74,20 +103,10 @@ export default {
               }
             ],
             educations: [
-              {
-                id: 1,
-                access: "private",
-                schoolName: null,
-                graduated: false,
-                durationFrom: null,
-                durationTo: null,
-                major: null
-              }
+             
             ],
             professions: [
-              { profession: "Cultivateur", access: "public" },
-              { profession: "Macon", access: "private" },
-              { profession: "Cuisinier", access: "public" }
+              
             ]
           }
         },
@@ -113,7 +132,7 @@ export default {
           ]
         }
       }
-    ]
+    
   },
   getters: {
     getAlbums(state) {
@@ -121,7 +140,11 @@ export default {
     },
     
     getUserPostIntro(state) {
+
+      
       return state.profileIntro;
+
+    
     },
 
     getImages(state) {
@@ -151,13 +174,17 @@ export default {
       return state.profile_about.user.biography;
     },
     getProfileAboutBasicInfos(state) {
-      return state.userData[0].profile_about.basicInfo;
+      return state.profile_about;
     },
     getProfileAbout_(state) {
-      return state.userData[0].profile_about_new;
+      return state.profile_about;
+    }, 
+    getProfileProfession(state) {
+      return state.profileIntro.user.profession;
     },
+
     getProfileAboutEducationAndWorks(state) {
-      return state.userData[0].profile_about.educationAndWorks;
+      return state.profileIntro.user_education;
     },
     getProfileAbout(state) {
       return state.profile_about;
@@ -167,6 +194,56 @@ export default {
     }
   },
   mutations: {
+
+    //set community data  
+
+    setTcommunity(state, data){
+   
+      state.Tcommunity=data;
+ 
+    },
+     
+
+    setNcommunityFollower(state, data){
+
+      state.NcommunityFollower = data;
+
+    },
+
+    setUcommunityFollowing(state, data){
+
+
+      state.UcommunityFollowing = data;
+
+    },
+
+
+    setUcommunityFollower(state, data){
+    
+      state.UcommunityFollower = data;
+
+    },
+
+    setBcommunityFollowing(state, data){
+      state.BcommunityFollowing = data;
+
+    },
+
+
+    setBcommunityFollower(state, data){
+
+      state.BcommunityFollower = data;
+    },
+
+
+    setNcommunityFollowing(state, data){
+
+      state.NcommunityFollowing = data;
+    },
+
+
+
+
     //set media data
 
     setAlbums(state, data) {
@@ -180,10 +257,15 @@ export default {
     },
 
 
+    setProfileNetwork(state, data) {
+      state.profileNetwork = data;
+    },
+
+
     setImages(state, data) {
 
-      state.ownerPostImages = data;
-
+      state.images = data;
+   
     },
 
     setAlbumImages(state, data) {
@@ -297,6 +379,17 @@ export default {
 
   actions: {
 
+  
+    Tcommunity({commit}){
+     
+      return axios
+      .get('profile/total/community')
+      .then(({ data }) => {
+        commit('setTcommunity', data.data);
+        console.log(data);
+      });
+
+    },
 
     nFormatter(num) {
       if (num >= 1000000000) {
@@ -311,7 +404,64 @@ export default {
       return num;
     },
 
+   loadMore({commit}, url){
+   
+    return axios.get(url)
+    .then(( data ) => {
+     return data;
+    });
 
+   },
+
+    NcommunityFollower({ commit }){
+      return axios
+      .get('profile/network/follower')
+      .then(({ data }) => {
+        commit('setNcommunityFollower', data.data);
+        console.log(data);
+      });
+    },
+    NcommunityFollowing({ commit }){
+      return axios
+      .get('profile/network/following')
+      .then(({ data }) => {
+        commit('setNcommunityFollowing', data.data);
+        console.log(data);
+      });
+    },
+    BcommunityFollower({ commit }){
+      return axios
+      .get('profile/business/follower')
+      .then(({ data }) => {
+        commit('setBcommunityFollower', data.data);
+        console.log(data);
+      });
+    },
+    BcommunityFollowing({ commit }){
+      return axios
+      .get('profile/business/following')
+      .then(({ data }) => {
+        commit('setBcommunityFollowing', data.data);  
+        console.log(data);
+      });
+    },
+   
+    UcommunityFollower({ commit }){
+      return axios
+      .get('profile/user/follower')
+      .then(({ data }) => {
+        commit('setUcommunityFollower', data.data);
+        console.log(data);
+      });
+    },
+    UcommunityFollowing({ commit }){
+      return axios
+      .get('profile/user/following')
+      .then(({ data }) => {
+        commit('setUcommunityFollowing', data.data);
+        console.log(data);
+      });
+    },
 
     profileBusiness({ commit }) {
 
@@ -324,6 +474,20 @@ export default {
 
     },
 
+
+    profileNetwork({ commit }) {
+
+      return axios
+        .get('network')
+        .then(({ data }) => {
+          commit('setProfileNetwork', data.data);
+          console.log(data);
+        });
+
+    },
+
+
+
     getAlbumImages({ commit }, busineeId) {
 
 
@@ -335,8 +499,8 @@ export default {
         });
     },
 
-    getImages({ commit }, busineeId) {
-      return axios.get("business/post/" + busineeId).then(({ data }) => {
+    getImages({ commit }) {
+      return axios.get("profile/user/media").then(({ data }) => {
         commit("setImages", data.data);
         console.log(data);
       });
@@ -620,17 +784,7 @@ export default {
           context.commit("updateUserBirthDate", {
             dateOfBirth:
               response.data === null
-                ? {
-                  date_1: {
-                    day: "12",
-                    month: "January",
-                    access: "private"
-                  },
-                  date_2: {
-                    year: "2000",
-                    access: "private"
-                  }
-                }
+                ? { }
                 : response.data
           });
           response_ = response;
@@ -643,32 +797,17 @@ export default {
       return response_;
     },
     async updateUserBasicInfosBirthDate(context, payload) {
-      console.log(payload);
-      console.log("edit user birtDate start +++++");
-      console.log(
-        moment(
-          payload.dateOfBirth.date_2.year +
-          " " +
-          payload.dateOfBirth.date_1.month +
-          " " +
-          payload.dateOfBirth.date_1.day
-        ).format("YYYY-MM-DD")
-      );
+     
+      let date = payload.dateOfBirth.year +"-"+payload.dateOfBirth.month +"-" +payload.dateOfBirth.day ;
+      console.log("converting the date in to momonet ");
+      console.log(date);
+     
 
       let response_ = null;
-      await fetch(
+      await axios(
 
         "userIntro/dob?" +
-        "dob=" +
-        moment(
-          payload.dateOfBirth.date_2.year +
-          " " +
-          payload.dateOfBirth.date_1.month +
-          " " +
-          payload.dateOfBirth.date_1.day
-        ).format("YYYY-MM-DD") +
-        "&value=" +
-        payload.dateOfBirth.date_1.access,
+        "dob=" +date,
         {
           method: "POST",
           headers: {
@@ -685,18 +824,7 @@ export default {
           console.log(response);
           return response;
         })
-        .then(response => {
-          console.log("edit user birthDate response successsss (2)+++");
-          console.log(response);
-          if (!response) {
-            console.log("Error From The Server error(1) ++++++");
-            throw new Error("Error For Edit BirthDate+++++");
-          }
-          context.commit("updateUserBirthDate", {
-            dateOfBirth: payload.dateOfBirth
-          });
-          response_ = response;
-        })
+        
         .catch(error => {
           console.log("error from Server or browser");
           console.log(error);
@@ -704,6 +832,8 @@ export default {
         });
       return response_;
     },
+
+
     async updateUserBasicInfosGender(context, payload) {
       console.log(payload, "edit user gender start +++++");
       const gender = payload.gender === "F" ? "female" : "male";
@@ -741,9 +871,7 @@ export default {
             console.log("Erreur liée au serveur+++++++");
             throw new Error("Erreur d edition du BirthDate+++++");
           }
-          context.commit("updateUserGender", {
-            gender: payload.gender
-          });
+          
           response_ = response;
         })
         .catch(error => {
@@ -752,10 +880,11 @@ export default {
         });
       return response_;
     },
+
     async updateUserBasicInfosMobilePhones(context, payload) {
       console.log(payload, "edit user mobile Phones start +++++");
       const lastPhoneNumber =
-        payload.mobilePhones[payload.mobilePhones.length - 1];
+        payload.mobilePhones;
       let response_ = null;
       await
         axios({
@@ -784,9 +913,7 @@ export default {
               console.log("Error From The Server +++++++");
               throw new Error("Error To Add MobilesPhones+++++");
             }
-            context.commit("storeMobilePhones", {
-              mobilePhones: [...payload.mobilePhones]
-            });
+           
             response_ = response;
           })
           .catch(error => {
@@ -795,6 +922,7 @@ export default {
           });
       return response_;
     },
+    
     async updateUserBasicInfosCurrentCity(context, payload) {
       console.log(payload, "edit user currentcity start +++++");
       let response_ = null;
@@ -840,13 +968,11 @@ export default {
       return response_;
     },
     async updateUserBasicInfosHomeTown(context, payload) {
-      console.log(payload, "edit user homeTown start +++++");
-      let response_ = null;
-      await axios.post(
+       
+      console.log(payload);
 
-        "userIntro/addCurrentHome/11" +
-        "?homeTown=" +
-        payload.homeTown,
+      let response_ = null;
+      await axios.post("userIntro/addHomeTown"+"?home_town=" + payload.homeTown,
         {
           method: "POST",
           headers: {
@@ -855,11 +981,7 @@ export default {
         }
       )
         .then(response => {
-          console.log("edit user homeTown response (1) +++++++", response);
-          if (response.status !== 200 && response.status !== 201) {
-            console.log("Error From The Server");
-            throw "Error From The Server";
-          }
+      
           return response;
         })
         .then(response => {
@@ -877,11 +999,11 @@ export default {
           response_ = response;
         })
         .catch(error => {
-          console.log("error From browser or server", error);
-          throw error;
+            console.log({error:error});
         });
       return response_;
     },
+
     async updateUserBasicInfosWebsites(context, payload) {
       console.log(payload, "edit user website start +++++");
 
@@ -890,7 +1012,7 @@ export default {
 
         "/userIntro/storeWebLink" +
         "?webUrl=" +
-        payload.websites[payload.websites.length - 1],
+        payload.websites,
         {
           method: "POST",
           headers: {
@@ -916,17 +1038,99 @@ export default {
             console.log("Error From The Server +++++++");
             throw new Error("Error From Add Website+++++");
           }
-          context.commit("storeWebsites", {
-            websites: payload.websites
-          });
+         
           response_ = response;
         })
         .catch(error => {
           console.log("error from browser or server error (1)", error);
+          console.log({error:error});
           throw error;
         });
       return response_;
     },
+   
+    async deleteUserBasicInfosWebsites(context, payload) {
+      console.log(payload, "edit user website start +++++");
+
+      let response_ = null;
+      await axios.patch(
+
+        "/userIntro/storeWebLink/" +payload.id +
+        "?webUrl=" +
+        payload.websites,
+        {
+          method: "POST",
+          headers: {
+            Accept: "application/json",
+
+          }
+        }
+      )
+        .then(response => {
+          console.log("edit user websites response (1) +++++++", response);
+          if (response.status !== 200 && response.status !== 201) {
+            console.log("Error From The Server");
+            throw "Error From The Server";
+          }
+          return response;
+        })
+        .then(response => {
+         
+         
+          response_ = response;
+        })
+        .catch(error => {
+          console.log({error:error});
+        
+        });
+      return response_;
+    },
+
+    async updateUserBasicInfosEWebsites(context, payload) {
+      console.log(payload, "edit user website start +++++");
+
+      let response_ = null;
+      await axios.put(
+
+        "/userIntro/storeWebLink/" +payload.id +
+        "?webUrl=" +
+        payload.websites,
+        {
+          method: "POST",
+          headers: {
+            Accept: "application/json",
+
+          }
+        }
+      )
+        .then(response => {
+          console.log("edit user websites response (1) +++++++", response);
+          if (response.status !== 200 && response.status !== 201) {
+            console.log("Error From The Server");
+            throw "Error From The Server";
+          }
+          return response;
+        })
+        .then(response => {
+          console.log(
+            "edit user websites response successsss response (1) +++",
+            response
+          );
+          if (!response) {
+            console.log("Error From The Server +++++++");
+            throw new Error("Error From Add Website+++++");
+          }
+         
+          response_ = response;
+        })
+        .catch(error => {
+          console.log("error from browser or server error (1)", error);
+          console.log({error:error});
+          throw error;
+        });
+      return response_;
+    },
+
     async updateUserBasicInfosSocialLinks(context, payload) {
       console.log(payload, "edit user socialLinks start +++++");
 
@@ -999,40 +1203,41 @@ export default {
         };
       } else if (payload.method === "PUT") {
         const workplace = payload.workPlace === true ? 1 : 0;
-        (url = "userIntro/updateWorking" + "/11" + "?companyName=" + payload.workPlace.companyName),
-          "&cityTown=" + payload.workPlace.cityTown,
-          "&position=" + "YAOUNDE",
-          "&jobResponsibilities=" +
-          "Job descrioption dummny textJob descrioption dummny text Jobdescrioption dummny text",
-          "&currentlyWorking=" + workplace,
-          "&startDate=" + "2012-09-12",
-          "&endDate=" + "2012-09-12";
+        url = "userIntro/updateWorking/" +payload.workPlace.id;
         config = {
           method: "POST",
           headers: {
             Accept: "application/json",
+          },
+          data: {
+            companyName: payload.workPlace.company_name,
+            cityTown: payload.workPlace.city_town,
+            position: payload.workPlace.position,
+            jobResponsibilities: payload.workPlace.job_responsibilities,
+            currentlyWorking: payload.workPlace === true ? 1 : 0,
+            startDate: payload.workPlace.startDate,
+            endDate: payload.workPlace.endDate,
           }
+        };
+      } else if (payload.method === "DELETE") {
+        url = "userIntro/deleteWorking/" +payload.workPlace;
+        config = {
+          method: "DELETE",
         };
       }
 
       let response_ = null;
       await axios(url, config)
         .then(response => {
-          console.log(
-            "save/edit/delete user workPlace response (1) +++++++",
-            response
-          );
+          console.log( "save/edit/delete user workPlace response (1) +++++++", response);
           return response;
         })
         .then(response => {
-          console.log(
-            "save/edit/delete user workPlace response successsss +++",
-            response
-          );
+          console.log( "save/edit/delete user workPlace response successsss +++", response );
           if (response.errors) {
             console.log("Error from the server +++++++");
             throw new Error("Error from save/edit/delete workplace+++++");
-          }
+          };
           context.commit("storeWorkPlace", {
             workPlace: payload.workPlace,
             method: payload.method
@@ -1046,13 +1251,13 @@ export default {
         });
       return response_;
     },
-
     
     async updateUserEducation(context, payload) {
       console.log(payload, "save/edit/delete user education start +++++");
       let url = "",
         config = {};
       if (payload.method.toLowerCase() === "post") {
+        console.log("Method: "+payload.method.toLowerCase());
         url = "userIntro/addSchool";
         config = {
           method: "POST",
@@ -1075,22 +1280,27 @@ export default {
             durationTo: payload.education.durationFrom
           })
         };
-      } else if (payload.method.toLowerCase() === "update") {
-        const graduated = payload.education.graduated ? 1 : 0;
-        (url =
-          "userIntro/updateSchool" +
-          "/11" +
-          "?schoolName=" +
-          payload.education.schoolName),
-          "&graduated=" + graduated,
-          "&durationFrom=" + payload.education.durationFrom,
-          "&major=" + payload.education.major,
-          "&durationTo=" + payload.education.durationFrom;
+      } else if (payload.method.toLowerCase() === "put") {
+        const workplace = payload.education === true ? 1 : 0;
+        console.log("Method: "+payload.method.toLowerCase());
+        url = "userIntro/updateSchool/"+payload.education.id;
         config = {
           method: "POST",
           headers: {
             Accept: "application/json",
+          },
+          data: {
+            schoolName: payload.education.school_name,
+            graduated: payload.education.is_graduated,
+            startDate: payload.education.startDate,
+            endDate: payload.education.endDate,
+            major_subjects: payload.education.major_subjects,
           }
+        };
+      } else if (payload.method === "DELETE") {
+        url = "userIntro/deleteSchool/" +payload.workPlace;
+        config = {
+          method: "DELETE",
         };
       }
 

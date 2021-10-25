@@ -2,28 +2,29 @@
   <div style="overflow-x:hidden" class="dashboard">
     <navbar></navbar>
 
-    <div class="text-justify  p-card pr-3 ">
+    <div class="text-justify  p-card pr-1 ">
       <CarousselDashboard class="mm-top" /> <br />
 
-      <br />
+    
 
       <div v-if="selectedb == 'owner'">
         <b-card class=" border shadow hselect">
           <b-row>
             <b-col md="6" sm="12" class="">
-              <h6 class="font-weight-bolder text-design">
+              <h6 class="font-weight-bolder text-design p-2">
                 Use Bridge Africa as Yourself or as one of your businesses 
               </h6>
             </b-col>
             <b-col sm="12" md="6" class="mb-3">
              
-
+          <div class="container"> 
               <b-form-select 
                 v-model="selectedb"
+                class="mr-3"
                 :options="boptions"
                   @input="switchBusiness"
               ></b-form-select>
-
+            </div>
             
 
 
@@ -36,14 +37,14 @@
       <div v-if="selectedb == 'owner'">
         <b-row class=" p-0">
           <b-col md="6" sm="12" class="mt-2 "> <Profile /> </b-col>
-          <b-col md="6" sm="12" class="mt-2  "> <EmptyBusiness /> </b-col>
+          <b-col md="6" sm="12" class="mt-2   "> <EmptyBusiness /> </b-col>
         </b-row>
         <br />
       </div>
 
       <div v-if="selectedb != 'owner'">
         <b-row>
-          <b-col md="6" sm="12" class="mt-2">
+          <b-col md="6" sm="12" class="mt-2 ">
             <div>
               <b-card class=" border shadow pr-3" style="height:350px">
                 <h6 class="font-weight-bolder text-design">
@@ -65,22 +66,22 @@
 
       <div v-if="selectedb != 'owner'">
         <b-row>
-          <b-col md="6" sm="12" class="mt-2">
+          <b-col md="6" sm="12" class="mt-2  ">
             <BusinessDashboard :selectedb="selectedb" />
           </b-col>
-          <b-col md="6" sm="12" class="mt-2">
+          <b-col md="6" sm="12" class="mt-2  ">
             <Insights :selectedb="selectedb" />
           </b-col>
         </b-row>
       </div>
-      <br />
+      
 
      
       <div class="com-dash" >
-          <comuniti-dashboard  v-if="selectedb == 'owner'" class="m-component m-3"></comuniti-dashboard> <br />
+          <comuniti-dashboard  v-if="selectedb == 'owner'" class="m-component m-3"></comuniti-dashboard> 
       
        
-         <comuniti-Bdashboard  v-if="selectedb != 'owner'" class="m-component m-3"></comuniti-Bdashboard> <br />
+         <comuniti-Bdashboard  v-if="selectedb != 'owner'" class="m-component m-3"></comuniti-Bdashboard>
 
      </div>
      
@@ -88,15 +89,15 @@
 
       <div>
         <b-row>
-          <b-col sm="12" lg="8" > <CommunityActivity  v-if="selectedb == 'owner'" />      <CommunityBactivity    v-if="selectedb != 'owner'" />    </b-col>
-          <b-col sm="12" lg="4" > <Tutorial /> </b-col>
+          <b-col sm="12" lg="8" class="" > <CommunityActivity  v-if="selectedb == 'owner'" />      <CommunityBactivity    v-if="selectedb != 'owner'" />    </b-col>
+          <b-col sm="12" lg="4" class="" > <Tutorial /> </b-col>
         </b-row>
       </div>
       <br />
 
       <div>
         <b-row>
-          <b-col sm="12" lg="6" class="mt-3">
+          <b-col sm="12" lg="6" class=" ">
             <b-card class="border shadow card  card-hight">
               <h6 class=" titlle">
                 <fas-icon
@@ -112,7 +113,7 @@
               </div>
             </b-card>
           </b-col>
-          <b-col sm="12" lg="6" class="mt-3">
+          <b-col sm="12" lg="6" class="">
             <b-card class="border shadow  card card-hight">
               <h6 class=" titlle">
                 <fas-icon
@@ -203,6 +204,8 @@ export default {
 
     switchBusiness(value){
 
+       console.log("business switch"+value);
+ 
        if(value != "Owner"){ 
            let loader = this.$loading.show({
                    
@@ -213,9 +216,9 @@ export default {
                 });
 
       console.log(value);
-     this.url_data=value;
+     this.url_data = value;
 
- 
+     this.$store.commit("dashboard/setdBusinessId", value);
 
 
       this.$store
@@ -228,7 +231,7 @@ export default {
         });
 
 
-        this.CommunityBusiness();
+    this.CommunityBusiness();
 
     this.CommunityPeople();
 
@@ -400,11 +403,7 @@ export default {
 
 <style scoped>
 
-.com-dash{
 
-margin-right: -15px;
-margin-left: -15px;
-}
 
 .card-body {
   padding: 8px;
@@ -419,13 +418,33 @@ margin-left: -15px;
   .titlle {
     font-size: 20px;
   }
+
+  .com-dash{
+
+margin-right: -15px;
+margin-left: -15px;
+}
+
 }
 
 @media only screen and (max-width: 768px) {
   .titlle {
     font-size: 16px;
   }
+
+  .com-dash{
+
+margin-right: -35px;
+margin-left: -20px;
 }
+
+.centerdiv{
+  padding: 0px;
+}
+}
+
+
+
 
 .card-hight {
   height: 550px;

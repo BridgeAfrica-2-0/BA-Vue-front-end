@@ -7,14 +7,14 @@ import marketSearch from "./marketSearch";
 import networkSearch from "./networkSearch";
 import allSearch from "./allSearch";
 import ProfileAndBusinessDetails from "./ProfileAndBusinessDetails";
-import hotbusiness from "./hotbusiness";
 import networkDetails from "./networkDetails";
 import dashboardcommunity from "./dashboardcommunity";
+import businessFollowers from "./businessFollowers";
+import hotbusiness from "./hotbusiness";
 import profile from "./profile";
 import networkProfileMembers from "./networkProfileMembers";
-
-
-
+import follower from "./follower";
+import UserProfileOwner from "./UserProfileOwner"
 import axios from "axios";
 import { search } from "./search";
 
@@ -36,7 +36,12 @@ export default new Vuex.Store({
         networkProfileMembers,
         marketSearch,
         networkSearch,
-        allSearch
+        allSearch,
+        profile,
+        follower,
+        search,
+        market,
+        UserProfileOwner
 
     }
 });

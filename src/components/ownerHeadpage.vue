@@ -5,14 +5,14 @@
 
   
 
-        <img  v-if="info.user.cover_picture == null "
+        <img  v-if="info.user.cover_picture =='' "
           src="@/assets/img/banner.jpg"
           class="img-fluid  banner"
           alt="Kitten"
         />
 
 
-         <img  v-if="info.user.cover_picture !=null "
+         <img  v-if="info.user.cover_picture !='' "
           :src="info.user.cover_picture"
           class="img-fluid  banner"
           alt="Kitten"
@@ -23,7 +23,7 @@
       <div class="container-fluid p-63">
         <b-row class="mt-md-2 text-left">
           <b-col cols="12" md="12" class="m-0 p-0 text-left put-top ">
-            <b-avatar v-if="info.user.profile_picture ==null "
+            <b-avatar v-if="info.user.profile_picture =='' "
               src="https://placekitten.com/400/300"
               class="  avat  text-center"
               badge-variant="primary"
@@ -32,7 +32,7 @@
             </b-avatar>
 
 
-            <b-avatar v-if="info.user.profile_picture !=null "
+            <b-avatar v-if="info.user.profile_picture !='' "
               :src="info.user.profile_picture"
               class="  avat  text-center"
               badge-variant="primary"
@@ -51,7 +51,7 @@
             <span style="display: inline-block;">
               <h6 class=" profile-name text-center ">
                 <b> <b-link> {{info.user.name}} </b-link> </b> <br />
-                <span class="duration"> 0{{info.user.community}} Community </span>
+                <span class="duration">  {{ nFormatter(total.total_community)}} Community </span>
               </h6>
             </span>
 
@@ -71,7 +71,7 @@
             type="file"
             id="logo_pic"
             @change="setlogo"
-            accept="video/mpeg, video/mp4, image/*"
+            accept=" image/*"
             hidden
             ref="logo_pic"
           />
@@ -219,6 +219,18 @@
     
 methods: {
 
+   nFormatter(num) {
+      if (num >= 1000000000) {
+        return (num / 1000000000).toFixed(1).replace(/\.0$/, '') + 'G';
+      }
+      if (num >= 1000000) {
+        return (num / 1000000).toFixed(1).replace(/\.0$/, '') + 'M';
+      }
+      if (num >= 1000) {
+        return (num / 1000).toFixed(1).replace(/\.0$/, '') + 'K';
+      }
+      return num;
+    },
 
 setlogo(e){
     
@@ -290,15 +302,27 @@ selectCover(){
 
 
        this.axios 
-          .post("user/profile/picture", formData, {
+          .post("user/upload/profile-picture", formData, {
             headers: {
               "Content-Type": "multipart/form-data",
             },
           })
           .then((response) => {
+
+
+
+
+         
+
             console.log(response);
 
-           
+
+               this.$store
+      .dispatch("profile/loadUserPostIntro", null)
+      .then((response) => {
+         console.log(response);
+
+
 
             this.flashMessage.show({
               status: "success",
@@ -311,6 +335,17 @@ selectCover(){
 
              loader.hide()
       this.$refs["modalxl"].hide();
+
+
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
+
+           
+
+
 
           })
 
@@ -377,7 +412,7 @@ selectCover(){
 
 
        this.axios 
-          .post("user/cover", formData, {
+          .post("user/upload-cover", formData, {
             headers: {
               "Content-Type": "multipart/form-data",
             },
@@ -385,12 +420,19 @@ selectCover(){
           .then((response) => {
             console.log(response);
 
-           
+            
 
+               this.$store
+      .dispatch("profile/loadUserPostIntro", null)
+      .then((response) => {
+         console.log(response);
+
+
+         
             this.flashMessage.show({
               status: "success",
 
-              message: "Profile Updated",
+              message: "Cover  Updated",
 
               blockClass: "custom-block-class",
             });
@@ -398,6 +440,13 @@ selectCover(){
 
              loader.hide()
       this.$refs["modalxl"].hide();
+      
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
+
 
           })
 
@@ -451,16 +500,26 @@ mounted(){
 
 computed: {
 
-  
+    
+    total(){
+    return  this.$store.state.profile.Tcommunity;
+   },
+ 
 
       profile_info() {
-      return  this.$store.state.businessOwner.businessInfo;  
 
-    
+         if(this.$store.state.businessOwner.businessInfo ==[] ){  
+      return  this.$store.state.businessOwner.businessInfo;   }else{
+
+        return  this.$store.state.businessOwner.businessInfo;
+      }
+
+     
     },
 
 
      info :function(){
+
         return this.$store.getters['profile/getUserPostIntro'];
       }
 

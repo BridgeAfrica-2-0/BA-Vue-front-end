@@ -163,6 +163,15 @@ import i18n from "./i18n";
 Vue.config.productionTip = false;
 var user = null;
 
+import Echo from 'laravel-echo'
+window.io = require('socket.io-client')
+
+window.Echo = new Echo({
+    broadcaster: 'socket.io',
+    host: ' http: //localhost:6001',
+    auth: { headers: { Authorization: 'Bearer ' + localStorage.getItem('token') } }
+})
+
 new Vue({
     router,
     store,
@@ -195,6 +204,8 @@ new Vue({
         });
 
     },
+
+
 
 
 

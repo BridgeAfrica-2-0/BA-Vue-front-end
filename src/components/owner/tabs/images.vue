@@ -29,7 +29,7 @@
 
           <youtube
             v-else
-            :video-id="im.videoId"
+            :video-id="getYoutubeKey(im.path)"
             :player-vars="playerVars"
           ></youtube>
 
@@ -195,6 +195,15 @@ export default {
       //fetchImages: "UserProfileOwner/getImages",
       getAlbumImages: "UserProfileOwner/getAlbumImages",
     }),
+
+    getYoutubeKey(path) {
+      let videoID = path.split("v=")[1];
+      const ampersandPosition = videoID.indexOf("&");
+      if (ampersandPosition != -1) {
+        videoID = videoID.substring(0, ampersandPosition);
+      }
+      return videoID;
+    },
 
     showImg(index) {
       console.log(index);

@@ -797,12 +797,7 @@ export default {
       return response_;
     },
     async updateUserBasicInfosBirthDate(context, payload) {
-     
-      let date = payload.dateOfBirth.year +"-"+payload.dateOfBirth.month +"-" +payload.dateOfBirth.day ;
-      console.log("converting the date in to momonet ");
-      console.log(date);
-     
-
+      let date = payload.dateOfBirth.date ;
       let response_ = null;
       await axios(
 
@@ -1008,19 +1003,10 @@ export default {
       console.log(payload, "edit user website start +++++");
 
       let response_ = null;
-      await axios.post(
-
-        "/userIntro/storeWebLink" +
-        "?webUrl=" +
-        payload.websites,
-        {
-          method: "POST",
-          headers: {
-            Accept: "application/json",
-
-          }
-        }
-      )
+      let url = "/userIntro/storeWebLink";
+      let formData = new FormData();
+      formData.append('webUrl', payload.websites)
+      await axios.post(url, formData)
         .then(response => {
           console.log("edit user websites response (1) +++++++", response);
           if (response.status !== 200 && response.status !== 201) {
@@ -1053,19 +1039,7 @@ export default {
       console.log(payload, "edit user website start +++++");
 
       let response_ = null;
-      await axios.patch(
-
-        "/userIntro/storeWebLink/" +payload.id +
-        "?webUrl=" +
-        payload.websites,
-        {
-          method: "POST",
-          headers: {
-            Accept: "application/json",
-
-          }
-        }
-      )
+      await axios.delete("/userIntro/deleteWebLink/" +payload.id)
         .then(response => {
           console.log("edit user websites response (1) +++++++", response);
           if (response.status !== 200 && response.status !== 201) {
@@ -1090,19 +1064,10 @@ export default {
       console.log(payload, "edit user website start +++++");
 
       let response_ = null;
-      await axios.put(
-
-        "/userIntro/storeWebLink/" +payload.id +
-        "?webUrl=" +
-        payload.websites,
-        {
-          method: "POST",
-          headers: {
-            Accept: "application/json",
-
-          }
-        }
-      )
+      let url = "/userIntro/updateWebLink/"+payload.id
+      let formData = new FormData();
+      formData.append('webUrl', payload.websites);
+      await axios.post(url, formData)
         .then(response => {
           console.log("edit user websites response (1) +++++++", response);
           if (response.status !== 200 && response.status !== 201) {
@@ -1216,7 +1181,9 @@ export default {
             jobResponsibilities: payload.workPlace.job_responsibilities,
             currentlyWorking: payload.workPlace === true ? 1 : 0,
             startDate: payload.workPlace.startDate,
-            endDate: payload.workPlace.endDate,
+            // endDate: null,
+            // endDate: payload.workPlace.endDate,
+            endDate: payload.workPlace === true ? null : payload.workPlace.endDate ,
           }
         };
       } else if (payload.method === "DELETE") {

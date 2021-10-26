@@ -71,37 +71,44 @@
     <div class="b-bottom">
       <b-container>
         <h5 class="a-text">Existing Editors</h5>
-        <b-list-group v-for="editor in editors" :key="editor.id">
-          <b-list class="d-flex align-items-center m-list">
-            <b-avatar 
-              class="mr-3" 
-              :text="editor.name.charAt(0)"
-              :src="editor.profile_picture"
-              size="4em"
-            ></b-avatar>
-            <span class="mr-auto">{{editor.name}}</span>
-            <span>
-              <div>
-                <b-dropdown
-                  size="lg"
-                  variant="link"
-                  toggle-class="text-decoration-none"
-                  no-caret
-                >
-                  <template #button-content>
-                    <b-icon
-                      icon="three-dots-vertical"
-                      animation="cylon-vertical"
-                      font-scale="1"
-                    ></b-icon>
-                  </template>
-                  <b-dropdown-item href="#" @click="$bvModal.show('edit-editor'); selectObject(editor)">Edit</b-dropdown-item>
-                  <b-dropdown-item href="#" @click="$bvModal.show('delete-editor'); selectObject(editor)"> Delete </b-dropdown-item>
-                </b-dropdown>
-              </div>
-            </span>
-          </b-list>
-        </b-list-group>
+        <div v-if="editors != 0">
+          <b-list-group v-for="editor in editors" :key="editor.id">
+            <b-list class="d-flex align-items-center m-list">
+              <b-avatar 
+                class="mr-3" 
+                :text="editor.name.charAt(0)"
+                :src="editor.profile_picture"
+                size="4em"
+              ></b-avatar>
+              <span class="mr-auto">{{editor.name}}</span>
+              <span>
+                <div>
+                  <b-dropdown
+                    size="lg"
+                    variant="link"
+                    toggle-class="text-decoration-none"
+                    no-caret
+                  >
+                    <template #button-content>
+                      <b-icon
+                        icon="three-dots-vertical"
+                        animation="cylon-vertical"
+                        font-scale="1"
+                      ></b-icon>
+                    </template>
+                    <b-dropdown-item href="#" @click="$bvModal.show('edit-editor'); selectObject(editor)">Edit</b-dropdown-item>
+                    <b-dropdown-item href="#" @click="$bvModal.show('delete-editor'); selectObject(editor)"> Delete </b-dropdown-item>
+                  </b-dropdown>
+                </div>
+              </span>
+            </b-list>
+          </b-list-group>
+        </div>
+        <div v-else>
+          <b-card bg-variant="white" text-variant="black" class="text-center">
+            <b-card-text>No Editor Available.</b-card-text>
+          </b-card>
+        </div>
         <div>
           <b-modal id="edit-editor" hide-footer>
             <template #modal-title>
@@ -220,8 +227,12 @@ export default {
     editEditor: function(clickedObject){
       let formData = new FormData();
       formData.append('role', this.form.role);
-      this.axios.post("business/role/update/"+clickedObject.id, formData)
-      .then(() => {
+      this.$store
+        .dispatch("businessRole/updateEditor", {
+          path: "business/role/update/"+clickedObject.id,
+          formData: formData,
+        })
+        .then(({ data }) => {
         console.log('ohh yeah');
         this.displayEditor();
         this.flashMessage.show({
@@ -289,17 +300,6 @@ export default {
     selectObject(object){
 			this.clickedObject = object
 		},
-
-    // deleteEditor(editor) {
-    //   if (confirm('Delete ' + editor.name)) {
-    //     axios.delete(`#/${editor.id}`)
-    //     .then(response => {
-    //         this.displayEditor();
-    //         return response;
-    //     });
-    //   }
-    // }
-
 
   },
 

@@ -136,9 +136,7 @@
           <div class="d-block text-center">
             <h3>Delete Business: {{clickedObject.business_id}}!</h3>
           </div>
-          <!-- <b-button class="mt-3" block @click="$bvModal.hide('delete-business'); deleteBusiness(clickedObject.id)">Delete Business</b-button> -->
           <b-button class="mt-2" style="float:right" variant="primary" @click="$bvModal.hide('delete-business'); deleteBusiness(clickedObject.business_id)">Delete Business</b-button>
-            
           <b-button class="mt-2 " style="float:right" @click="$bvModal.hide('delete-business')">Cancel</b-button>
         </b-modal>
       </div>

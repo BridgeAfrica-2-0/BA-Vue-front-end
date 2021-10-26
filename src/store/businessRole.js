@@ -63,7 +63,18 @@ export default {
         console.log(data);
 
       })
-    }
+    },
+
+    updateEditor( {commit}, businessData ){
+      console.log("businessData.path",businessData.path);
+      console.log("businessData.formData",businessData.formData);
+      return axios
+      .post(businessData.path, businessData.formData)
+      .then(({ data }) => {
+        console.log(data);
+        return data;
+      })
+    },
 
   },
 };

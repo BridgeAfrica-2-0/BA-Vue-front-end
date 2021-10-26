@@ -131,7 +131,6 @@ export default {
 </script>
 
 <style scoped>
-
 .load {
   width: 4rem;
   height: 4rem;

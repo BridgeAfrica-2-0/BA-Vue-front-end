@@ -4,6 +4,7 @@
   </div>
   <div class="row" v-else>
     <div class="container-fluid">
+      <p v-if="!allImages.length" style="font-size: 3rem">No items found</p>
       <div v-for="(image, cmp) in allImages" :key="cmp">
         <div class="img-gall" v-for="(im, index) in image.media" :key="index">
           <a v-if="typeOfMedia(im.path) == 'image'"
@@ -30,7 +31,6 @@
             v-else
             :video-id="im.videoId"
             :player-vars="playerVars"
-            @playing="playing"
           ></youtube>
 
           <b-modal hide-footer :id="`modal-${im.id}`" title="Details" size="md">
@@ -61,7 +61,7 @@
                     >
                     </b-icon>
                   </template>
-                  <b-dropdown-item :href="getFullMediaLink(im.path)" download>
+                  <b-dropdown-item @click="downloadPic(im)">
                     Download</b-dropdown-item
                   >
                   <b-dropdown-item
@@ -71,7 +71,7 @@
                     >Make Profile Picture</b-dropdown-item
                   >
                   <b-dropdown-item
-                    @click="setCoverPics(im.id)"
+                    @click="setCoverPic(im.id)"
                     v-if="typeOfMedia(im.path) != 'video'"
                     >Make Cover Photo</b-dropdown-item
                   >
@@ -92,14 +92,11 @@
         :index="index"
         @hide="handleHide"
       ></vue-easy-lightbox>
-
-      <FlashMessage />
     </div>
   </div>
 </template>
 
 <script>
-import Vue from "vue";
 import VueYoutube from "vue-youtube";
 
 import { mapActions } from "vuex";
@@ -107,6 +104,9 @@ import { fullMediaLink } from "@/helpers";
 import { v4 } from "uuid";
 
 export default {
+  components: {
+    youtube: VueYoutube,
+  },
   props: {
     album: {},
     canUpload: {
@@ -151,6 +151,9 @@ export default {
       Slideimges: [],
       visible: false,
       index: 0,
+      playerVars: {
+        autoplay: 1,
+      },
     };
   },
 
@@ -177,13 +180,17 @@ export default {
     this.url = this.$route.params.id;
   },
 
+  destroyed() {
+    this.$emit("close:album");
+  },
+
   methods: {
     getFullMediaLink: fullMediaLink,
     ...mapActions({
       submitPost: "UserProfileOwner/submitPost",
-      setProfilePic: "UserProfileOwner/setProfilePic",
-      setCoverPic: "UserProfileOwner/setCoverPic",
-      deleteImage: "UserProfileOwner/deleteImage",
+      setProfilePicture: "UserProfileOwner/setProfilePic",
+      setCoverPicture: "UserProfileOwner/setCoverPic",
+      deleteImagePicture: "UserProfileOwner/deleteImage",
       onDownloadPic: "UserProfileOwner/downloadPic",
       //fetchImages: "UserProfileOwner/getImages",
       getAlbumImages: "UserProfileOwner/getAlbumImages",
@@ -214,7 +221,7 @@ export default {
     getFileExtension(file) {
       const fileArray = file.split(".");
 
-      return (fileArray.length)
+      return fileArray.length
         ? fileArray[fileArray.length - 1]
         : file.startsWith("https://www.youtube.com/")
         ? "youtube"
@@ -244,7 +251,7 @@ export default {
 
     downloadPic(media) {
       //download(this.getFileExtension(media.path), `${v4()}.${this.getFileExtension(media.path)}`, media.type);
-      /*
+
       this.onDownloadPic(media.id)
         .then((response) => {
           var fileURL = window.URL.createObjectURL(new Blob([response.data]));
@@ -269,21 +276,22 @@ export default {
             status: "error",
             message: "Unable to download ",
           });
-        }); */
+        });
     },
 
-    deleteImages(id, key) {
-      this.deleteImage(id)
+    deleteImage(id, key) {
+      this.deleteImagePicture(id)
         .then(() => {
+          console.log("delete");
           this.removePicture(id, key);
           this.flashMessage.show({
             status: "success",
             message: "Album Deleted",
           });
         })
-        .catch(() => {
+        .catch((error) => {
+          console.log(error);
           this.sending = false;
-
           this.flashMessage.show({
             status: "error",
             message: "Unable to delete image",
@@ -291,12 +299,14 @@ export default {
         });
     },
     //set an image as a cover photo
-    setCoverPics(id) {
+
+    setCoverPic(id) {
       this.setCoverPic(id)
         .then(() => {
+          console.log("cover");
           this.flashMessage.show({
             status: "success",
-            message: "cover Picture succesfully set",
+            message: "Cover Picture succesfully set",
           });
         })
         .catch(() => {
@@ -310,9 +320,10 @@ export default {
     },
     //set image as profile pic
 
-    setProfilePics(id) {
-      this.setProfilePic(id)
+    setProfilePic(id) {
+      this.setProfilePicture(id)
         .then(() => {
+          console.log("profile");
           this.flashMessage.show({
             status: "success",
             message: "Profile Picture set",
@@ -377,7 +388,6 @@ export default {
       }
     },
   },
-
 };
 </script>
 

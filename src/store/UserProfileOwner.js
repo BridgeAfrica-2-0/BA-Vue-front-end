@@ -93,7 +93,7 @@ export default {
     },
 
     updateAlbum(state, payload) {
-      const newState = state.albums.map(album => (album.id == payload.id) ? Object.assign(album, { name: payload.name }) : payload)
+      const newState = state.albums.map(album => (album.id == payload.id) ? Object.assign(album, { name: payload.name }) : album)
       state.albums = newState
     },
 
@@ -144,23 +144,23 @@ export default {
       commit("setImages", res.data.data);
     },
 
-    async submitPost(_, payload) {
-      return await axios.post(`profile/upload/${payload.id}`, payload.data);
+    async submitPost({ commit }, payload) {
+      return axios.post(`profile/upload/${payload.id}`, payload.data);
     },
 
-    async setProfilePic(_, id) {
-      return await axios.post(`profile/makeProfile/picture/${id}`);
+    async setProfilePic({ commit }, id) {
+      return axios.post(`profile/makeProfile/picture/${id}`);
     },
 
-    async setCoverPic(_, id) {
-      return await axios.post(`profile/makeCover/picture/${id}`);
+    async setCoverPic({ commit }, id) {
+      return axios.post(`profile/makeCover/picture/${id}`);
     },
 
-    async deleteImage(_, id) {
-      return await axios.delete(`profile/image/${id}`);
+    async deleteImage({ commit }, id) {
+      return axios.delete(`profile/image/${id}`);
     },
 
-    async downloadPic(_, id) {
+    async downloadPic({ commit }, id) {
       return axios({
         url: `profile/downloadMedia/${id}`,
         method: "post",

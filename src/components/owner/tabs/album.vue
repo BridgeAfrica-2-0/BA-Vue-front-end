@@ -1,6 +1,6 @@
 <template>
   <div>
-    <FlashMessage />
+    <FlashMessage class="glash" />
     <div class="row">
       <div class="container-fluid" v-if="showalbum == false">
         <div class="one2">
@@ -39,63 +39,15 @@
             </div>
           </b-modal>
 
-          <div
-            class="createp img-gall predit2"
+          <AlbumItem
             v-for="album in getAlbums"
             :key="album.id"
-            @click="showlbum(album.id, album.name)"
-          >
-            <a>
-              <span>
-                <img
-                  class="card-img album-img"
-                  :src="cover(album.cover)"
-                  alt=""
-                />
-              </span>
-              <div class="createdesc botmedia">
-                <div class="botmediadess-position">
-                  <h6 style="font-size: 26px; font-weight: bold">
-                    {{ album.name }}
-                  </h6>
-                  <p style="font-size: 24px; font-weight: bold">
-                    {{ album.items | plural }}
-                  </p>
-                </div>
-              </div>
-            </a>
-
-            <div class="mediadesc" v-if="canBeUpdate(album)">
-              <ul class="navbar-nav pull-right options">
-                <li class="nav-item dropdown">
-                  <b-dropdown
-                    size="sm"
-                    class="call-action"
-                    variant="link"
-                    toggle-class="text-decoration-none"
-                    no-caret
-                  >
-                    <template #button-content>
-                      <b-icon
-                        icon="three-dots-vertical"
-                        color="white"
-                        variant="light"
-                      >
-                      </b-icon>
-                    </template>
-
-                    <b-dropdown-item @click="editAlbum(album)"
-                      >Edit</b-dropdown-item
-                    >
-
-                    <b-dropdown-item @click="deleteAlbums(album.id)"
-                      >Delete</b-dropdown-item
-                    >
-                  </b-dropdown>
-                </li>
-              </ul>
-            </div>
-          </div>
+            :album="album"
+            :editAlbum="() => editAlbum(album)"
+            :deleteAlbums="() => deleteAlbums(album.id)"
+            :canBeUpdate="() => canBeUpdate(album)"
+            :showAlbumPictures="() => showAlbumPictures(album)"
+          />
         </div>
 
         <b-modal hide-footer title="Edit album" ref="editalbum" id="editalbum">
@@ -189,6 +141,7 @@
             : canUpload
         "
         :images="albumImages"
+        @close:album="() => hidealbum()"
       />
     </div>
   </div>
@@ -196,6 +149,7 @@
 
 <script>
 import Images from "./images";
+import AlbumItem from "./albumItem";
 import { mapActions, mapGetters, mapMutations } from "vuex";
 
 import defaultImage from "@/assets/img/nothing.jpg";
@@ -204,6 +158,7 @@ import { fullMediaLink } from "@/helpers";
 export default {
   components: {
     Images,
+    AlbumItem,
   },
   props: {
     canUpload: {
@@ -248,11 +203,6 @@ export default {
       albumImages: "UserProfileOwner/getalbumImages",
     }),
 
-    /*...mapGetters({
-      getImages: "UserProfileOwner/getImages",
-      albumImages: "UserProfileOwner/getalbumImages",
-    }),*/
-
     canCreateAlbum() {
       return this.albumInfo.name && this.albumInfo.type ? false : true;
     },
@@ -282,11 +232,11 @@ export default {
       this.showalbum = false;
     },
 
-    showlbum(id, name) {
-      this.getAlbumImages(id)
+    showAlbumPictures(album) {
+      this.getAlbumImages(album.id)
         .then(() => {
-          this.album_id = id;
-          this.album_name = name;
+          this.album_id = album.id;
+          this.album_name = album.name;
           this.showalbum = true;
           this.hasLoadPicture = false;
         })
@@ -316,7 +266,7 @@ export default {
             message: "Album Created",
           });
 
-          this.loading = true;
+          this.loading = false;
         })
         .catch(() => {
           this.loading = false;
@@ -340,15 +290,14 @@ export default {
     },
 
     updateAlbums(id, name) {
-      let user = {
-        id: id,
-        name: name,
-      };
       this.loading = true;
 
-      this.updateAlbum(user)
+      this.updateAlbum({
+        id: id,
+        name: name,
+      })
         .then(() => {
-          this.mapUpdate({ name: this.editName, id: this.editId });
+          this.mapUpdate({ name, id });
           this.$bvModal.hide("editalbum");
           this.flashMessage.show({
             status: "success",
@@ -358,23 +307,12 @@ export default {
           this.editId = "";
           this.editName = "";
         })
-        .catch((err) => {
-          console.log(err);
+        .catch(() => {
           this.sending = false;
-          if (err.response.status == 422) {
-            console.log({ err: err });
-            this.flashMessage.show({
-              status: "error",
-              message: err.response.data.message,
-            });
-          } else {
-            this.flashMessage.show({
-              status: "error",
-              message: "Unable to update your Album",
-            });
-            console.log({ err: err });
-          }
-          this.loading = false;
+          this.flashMessage.show({
+            status: "error",
+            message: "Unable to update your Album",
+          });
         });
     },
 
@@ -389,19 +327,11 @@ export default {
         })
         .catch((err) => {
           this.sending = false;
-          if (err.response.status == 422) {
-            console.log({ err: err });
-            this.flashMessage.show({
-              status: "error",
-              message: err.response.data.message,
-            });
-          } else {
-            this.flashMessage.show({
-              status: "error",
-              message: "Unable to Delete your abum",
-            });
-            console.log({ err: err });
-          }
+
+          this.flashMessage.show({
+            status: "error",
+            message: "Unable to Delete your abum",
+          });
         });
     },
   },
@@ -409,6 +339,10 @@ export default {
 </script>
 
 <style scoped>
+._vue-flash-msg-body._vue-flash-msg-body_success,
+._vue-flash-msg-body._vue-flash-msg-body_error {
+  z-index: 10000 !important;
+}
 .options {
   background: #e75c18 !important;
   border-radius: 50%;

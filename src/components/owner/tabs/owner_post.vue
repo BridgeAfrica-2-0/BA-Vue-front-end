@@ -1,6 +1,6 @@
 <template>
   <div>
-    <FlashMessage />
+  
     <!-- DOM to Create Post By A UserOwner--> 
     <b-card class="px-md-3 mb-3">
       <b-row class="mt-2">
@@ -114,6 +114,7 @@
             title="Update Post"
             @hidden="resetPostData"
           >
+            <FlashMessage />
             <b-row ref="loader">
               <b-col cols="1" class="m-0 p-0"></b-col>
               <b-col cols="2" class="m-0 p-0">
@@ -269,8 +270,10 @@
             hide-footer
             title="Create Post"
             @hidden="resetPostData"
-          >
+          >    <FlashMessage />
             <b-row ref="loader">
+               
+         
               <b-col cols="1" class="m-0 p-0"></b-col>
               <b-col cols="2" class="m-0 p-0">
                 <b-avatar
@@ -392,6 +395,11 @@
                 </div>
 
           </div>  
+
+               <progress-bar
+      :options="options"
+      :value="uploadPercentage"
+      />
 <vue-core-video-player ></vue-core-video-player>       
               <hr>
 
@@ -460,7 +468,7 @@
             
               <p  class="post-text">
                 <!--     :text="item.content.details"   -->
-                <read-more
+                <read-more v-if="item.content"
                   more-str="read more"
                   :text="item.content"
                   link="#"
@@ -553,7 +561,7 @@
 
 <script>
 import Comment from "../comment";
-import light from "../lightbox";
+import light from "../../lightbox";
 import moment from "moment";
 import axios from "axios";
 import VueCoreVideoPlayer from 'vue-core-video-player';
@@ -576,7 +584,7 @@ export default {
       edit_description: null,
       edit_image: null,
       edit_id: null,
-
+      uploadPercentage:0,
       fullPage: false,
       images: ["https://i.wifegeek.com/200426/f9459c52.jpg"],
       imagees: [
@@ -588,6 +596,33 @@ export default {
         "https://pbs.twimg.com/media/DKO62sVXUAA0_AL.jpg",
         "https://i.wifegeek.com/200426/5ce1e1c7.jpg",
       ],
+
+      options: {
+  text: {
+    color: '#FFFFFF',
+    shadowEnable: true,
+    shadowColor: '#000000',
+    fontSize: 14,
+    fontFamily: 'Helvetica',
+    dynamicPosition: false,
+    hideText: false
+  },
+  progress: {
+    color: '#2dbd2d',
+    backgroundColor: '#C0C0C0'
+  },
+  layout: {
+    height: 35,
+    width: 140,
+    verticalTextAlign: 61,
+    horizontalTextAlign: 43,
+    zeroOffset: 0,
+    strokeWidth: 30,
+    progressPadding: 0,
+    type: 'circle'
+  }
+},
+
       createPost: {
         postBusinessUpdate: "",
         movies: [],
@@ -944,6 +979,11 @@ export default {
           headers: {
             "Content-Type": "multipart/form-data",
           },
+
+          onUploadProgress: function( progressEvent ) {
+      this.uploadPercentage = parseInt( Math.round( ( progressEvent.loaded / progressEvent.total ) * 100 ) );
+    }.bind(this)
+
         })
         .then((response) => {
           console.log(response);
@@ -980,7 +1020,7 @@ export default {
             this.flashMessage.show({
               status: "error",
 
-              message: "Unable to Create Your Business",
+              message: "Unable to Create Your Post",
               blockClass: "custom-block-class",
             });
             console.log({ err: err });

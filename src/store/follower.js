@@ -292,11 +292,11 @@ export default {
     },
 
     getImages({ commit }, id) {
-      return axios.get("profile/user/media?id="+id).then(({ data }) => {
+      return axios.get("profile/user/media?id="+id).then(( {data} ) => {
         commit("setImagess", data.data);
         console.log(data);
       });
-    },
+     },
 
     loadMoreUserBusiness({commit}, url){
          
@@ -307,6 +307,19 @@ export default {
        return data;
       });
 
+    },
+
+    loadMore({commit}, url){
+      console.log("hello you are loading now");
+      console.log(url);
+     return axios.get(url)
+     .then(( data ) => {
+      return data;
+     }) .catch((err) => {
+       console.log("Something went wrong");
+       console.log({err:err})
+     });       
+ 
     },
      
     Tcommunity({commit}, id){

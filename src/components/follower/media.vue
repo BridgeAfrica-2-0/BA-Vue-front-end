@@ -53,7 +53,7 @@ export default {
 
   data: function () {
     return {
-     
+      foll_id:null,
       index: null
     };
   },
@@ -76,6 +76,7 @@ export default {
 
   mounted(){
  
+  this.foll_id = this.$route.params.id;
 
   this.$store
       .dispatch("follower/getImages", this.foll_id)
@@ -101,6 +102,7 @@ export default {
 .imgheight{
 
     height: 150px !important;
+    width: 100%;
     object-fit: cover;
 }
 

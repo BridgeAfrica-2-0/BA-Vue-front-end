@@ -10915,6 +10915,11 @@ vuejs-google-maps@^0.0.13:
   dependencies:
     vue "^2.6.12"
 
+vuejs-progress-bar@^1.2.7:
+  version "1.2.7"
+  resolved "https://registry.yarnpkg.com/vuejs-progress-bar/-/vuejs-progress-bar-1.2.7.tgz#40ffb8427ccde109a3b2fb038848dff433673060"
+  integrity sha512-w6lKwYT5kLSp5aCywSoBD01rZF1MeurOGX1u4gwSKCuWLZj3GB+/Trq+rI7ESesGgFYFfcg6050NyPAiCstJgw==
+
 vuelidate@^0.7.6:
   version "0.7.6"
   resolved "https://registry.yarnpkg.com/vuelidate/-/vuelidate-0.7.6.tgz#84100c13b943470660d0416642845cd2a1edf4b2"

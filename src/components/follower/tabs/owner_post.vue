@@ -1,48 +1,38 @@
 <template>
   <div>
-    <FlashMessage />
+    
 
-   
-
-    <!-- User Posts Listing Section-->
-    <b-card class="px-md-3">
-      <div class="">
-        <div
-          class="col-md-12 col-lg-12 d-flex align-items-stretch mb-lg-0"
-          style="padding-left: 0; padding-top: 3px"
-        >
-        
-
-        
-        </div>
-      </div>
-
+    <b-card class="px-md-3 mt-3">
+      
      
-
-      <b-row class="mt-4" v-for="item in owner_post" :key="item.post_id">
-        <!--  :src="$store.getters.getProfilePicture"-->
-        <b-col cols="12" class="mt-4">
-          <b-row>
-            <b-col cols="2" md="1" class="m-0 p-0">
+      <div v-for="item in owner_post" :key="item.post_id">
+       
+        <div  class="mt-2">
+          <div class="d-inline-flex"> 
+            <span  md="1" class="m-0 p-0">
               <b-avatar
                 class="d-inline-block avat"
                 variant="primary"
-                :src="item.logo_path"
+                :src="item.profile_picture"
               ></b-avatar>
-            </b-col>
-            <b-col cols="10" md="11" class="pt-2">
-              <h5 class="m-0 font-weight-bolder">
+            </span>
+            <div  class="pl-2 pl-md-3  pt-md-2">
+              <h5 class="m-0  usernamee">
                 {{ item.name }}
-                
+               
               </h5>
-              <p class="duration">{{ moment(item.created_at).fromNow() }}</p>
-            </b-col>
-          </b-row>
-          <b-row>
-            <b-col cols="12" class="mt-2">
-              <p class="post-text">
+              <p class="durationn">{{ moment(item.created_at).fromNow() }}</p>
+            </div>
+
+
+             <div class="toright pt-2"> </div>
+
+          </div>
+          <div class="m-0 p-0">
+            
+              <p  class="post-text">
                 <!--     :text="item.content.details"   -->
-                <read-more
+                <read-more v-if="item.content"
                   more-str="read more"
                   :text="item.content"
                   link="#"
@@ -50,22 +40,23 @@
                   :max-chars="200"
                 ></read-more>
               </p>
-            </b-col>
-          </b-row>
-          <b-row>
-            <b-col v-if="item.media.length > 0" cols="12" class="mt-2">
-              <div class="">
-                <lightbox
-                 css="h-200 h-lg-250 h-lg-500"
+           
+          </div>
+
+           <div   v-if="item.media.length > 0" class="">
+                <light
+                css=" "
                   :cells="item.media.length"
                   :items="
                     item.media.map(function (a) {
                       return a.media_url;
                     })
                   "
-                ></lightbox>
+                ></light> 
               </div>
-            </b-col>
+          <b-row>
+
+           
 
             <!--   v-if="item.content.movies.length <= 0"  -->
             <b-col cols="12" class="mt-2">
@@ -96,51 +87,61 @@
           </b-row>
 
           <!--  :src="$store.getters.getProfilePicture"  -->
-          <b-row class="mt-2">
-            <b-col cols="3" md="1" class="m-md-0 p-md-0">
+         
+        </div>
+
+         <div class="mt-2 d-inline-flex w-100">
+            <div  class="m-md-0 p-md-0">
               <b-avatar
                 variant="primary"
+                :src="info.user.profile_picture"
                 class="img-fluid avat-comment"
               ></b-avatar>
-            </b-col>
-            <b-col cols="9" md="11" class="p-0 m-0 pr-3">
+            </div>
+
+            <div  class="p-0 m-0 pr-3 inline-comment">
               <input placeholder="Post a Comment" class="comment" type="text" />
 
               <fas-icon
                 class="primary send-cmt"
                 :icon="['fas', 'paper-plane']"
               />
-            </b-col>
-          </b-row>
-        </b-col>
+            </div>
+
+          </div>
+
         <Comment
           v-for="comment in item.comments"
           :key="comment.id"
           :comment="comment"
         />
-      </b-row>
+        <hr>
+      </div>
 
-      <infinite-loading @infinite="infiniteHandler"></infinite-loading>
+      <infinite-loading :identifier="infiniteId"   ref="infiniteLoading"   @infinite="infiniteHandler"></infinite-loading>
     </b-card>
   </div>
 </template>
 
 <script>
 import Comment from "../comment";
+import light from "../../lightbox";
 import moment from "moment";
 import axios from "axios";
+
 export default {
   name: "postNetwork",
   components: {
     Comment,
+    light,
+   
   },
   data() {
     return {
-      
-      foll_id:'',
       moment: moment,
       page: 1,
-      post: this.$store.state.businessOwner.ownerPost,
+      infiniteId: +new Date(),
+      
       url: null,
       delete: [],
       edit_description: null,
@@ -182,11 +183,16 @@ export default {
       return num;
     },
 
+   
     infiniteHandler($state) {
-      axios
-        .get("user/post/" + this.page+"?id="+this.foll_id)
+     
+      let url= "user/post/" + this.page+"?id="+this.url;
+      
+       this.$store.dispatch("follower/loadMore",url)
+     
         .then(({ data }) => {
-          if (data.data.length) {
+          console.log(data);
+          if (data.data.length) { 
             this.page += 1;
 
             this.owner_post.push(...data.data);
@@ -200,62 +206,7 @@ export default {
         });
     },
 
-
-
-    chooseImage: function () {},
-    chooseVideo: function () {
-      document.getElementById("chosefile").click();
-    },
-    chooseDocument() {
-      document.getElementById("chosefile").click();
-    },
-    selectMovies(event) {
-      const file = event.target;
-
-      if (file.files) {
-        let reader = new FileReader();
-        reader.onload = (e) => {
-          this.createPost.movies.push({
-            target: event.target,
-            movie: e.target.result,
-            fileName: event.target.files[0].name,
-            link: URL.createObjectURL(event.target.files[0]),
-          });
-        };
-        reader.readAsDataURL(file.files[0]);
-      }
-    },
-    service(file) {
-      let result = null;
-      if (file.files) {
-        let reader = new FileReader();
-        reader.onload = (e) => {
-          result = e.target.result;
-
-          return result;
-        };
-        reader.readAsDataURL(file.files[0]);
-      }
-    },
    
-    
-
-
-
-    onCancel() {
-      console.log("User cancelled the loader.");
-    },
-
- 
-
-  
-
-    showModal() {
-      this.$refs["modal-3"].show();
-    },
-    hideModal() {
-      this.$refs["modal-3"].hide();
-    },
    
   },
   computed: {
@@ -263,18 +214,16 @@ export default {
       return "yoo";
     },
 
- info: function () {
-      return this.$store.getters["profile/getUserPostIntro"];
+     info: function () {
+      return this.$store.getters["follower/getUserPostIntro"];
     },
 
-    
+   
     owner_post() {
       return this.$store.state.follower.ownerPost;
     },
 
-    profileNamePost() {
-      return "yoo";
-    },
+  
   },
   mounted() {
     this.url = this.$route.params.id;
@@ -286,12 +235,17 @@ export default {
   
   .h-lg-250{
 
-    height: 500px !important;
+   height: 350px !important;   
+  }
+
+  .lb-item{
+    background-size: auto;
   }
  
 </style>
 
 <style scoped>
+
 .custom-block-class {
   position: absolute;
   z-index: 1;
@@ -304,10 +258,13 @@ export default {
 }
 
 .upload-cancel {
-  z-index: 1;
-
-  margin-top: -40%;
-  float: right;
+   
+   z-index: 1;
+    margin-top: -40%;
+    float: right;
+    margin-left: -10px;
+    right: -97%;
+    position: relative;
 }
 
 .upload-cancel:hover {
@@ -316,8 +273,17 @@ export default {
 }
 
 .oorange {
+  
   color: red;
-  font-size: 20px;
+    font-size: 20px;
+    background: white;
+    border-radius: 50%;
+
+}
+
+.h300px{
+  height: 300px;
+  overflow-x:hidden;
 }
 
 #preview img {
@@ -343,7 +309,28 @@ export default {
 .color-site {
   color: #e75c18;
 }
+@media (max-width: 762px) {
+.usernamee{
+  font-weight: 600;
+  font-size: 15px;
+  color:black;
+}
+
+
+
+}
+.inline-comment{
+  width: 95%;
+}
+
 @media (min-width: 762px) {
+
+  .usernamee{
+  font-weight: 600;
+  font-size: 20px;
+  color:black;
+}
+
   .avat {
     width: 64px;
     height: 64px;
@@ -363,7 +350,7 @@ export default {
     max-height: 462px;
   }
   .post-text {
-    font-size: 14px;
+    font-size: 16px;
     font-family: Arial, Helvetica, sans-serif;
     text-align: left;
   }
@@ -392,7 +379,7 @@ export default {
     height: 36px;
   }
   .post-text {
-    font-size: 12px;
+    font-size: 16px;
     font-family: Arial, Helvetica, sans-serif;
     text-align: left;
   }
@@ -408,12 +395,13 @@ export default {
   width: 315px;
 }
 .comment {
-  width: 100%;
+  width: 90%;
   border: solid 1px #ccc;
   border-radius: 25px;
   background-color: #ddd;
   height: 34px;
   padding-left: 10px;
+  margin-left: 8%;
 }
 .comment:focus {
   outline: none;
@@ -432,13 +420,13 @@ export default {
 }
 .cursor i {
   position: absolute;
-  width: 1px;
+  width: 2px;
   height: 20%;
   background-color: gray;
   left: 5px;
   top: 10%;
   animation-name: blink;
-  animation-duration: 800ms;
+  animation-duration: 1200ms;
   animation-iteration-count: infinite;
   opacity: 1;
 }
@@ -454,9 +442,12 @@ export default {
   }
 }
 .bordder {
-  border: 1px solid #e75c18;
-  height: 50px;
-  padding: 6px;
+ 
+
+  border: 1px solid gray;
+    height: 50px;
+    padding: 6px;
+    border-radius: 10px;
 }
 .username {
   color: black;
@@ -485,10 +476,26 @@ export default {
 .is.invalid {
   border-color: red;
 }
+
+.durationn{
+  font-weight:400;
+  font-size: 15px;
+  color:black
+
+
+}
+
 </style>
 <style>
 .custom-block-class {
   position: absolute;
   z-index: 1;
+}
+.post-text p{
+  margin: 0px;
+}
+.toright{
+  position: absolute;
+    right: 1%;
 }
 </style>

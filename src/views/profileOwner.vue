@@ -24,9 +24,7 @@
               <following />
             </b-tab>
 
-             <b-tab title="My orders"  href="#community" class="m-0 p-0">
-              <myorders />
-            </b-tab>
+            
             
           </b-tabs>
         </b-col>
@@ -44,7 +42,7 @@ import Media from "@/components/owner/tabs/media";
 import Networks from "@/components/owner/tabs/networks";
 import Following from "@/components/owner/tabs/memberNetwork";
 import Bussiness from "@/components/owner/tabs/bussiness";
-import myorders from "../components/owner/tabs/myOders.vue"
+
 export default {
   name: "profileOwner",
 
@@ -57,7 +55,7 @@ export default {
     About,
     Media,
     Networks,
-    myorders
+   
   },
   data() {
     return {   

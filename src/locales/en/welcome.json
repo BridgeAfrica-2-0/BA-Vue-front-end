@@ -81,5 +81,8 @@
     "Adress": "Adress",
     "TimeZone": "TimeZone",
     "Address": "Address",
-    "Business_Name_Is_Required": "Business Name Is Required"
+    "Business_Name_Is_Required": "Business Name Is Required",
+    "Registration_Failed": "Registration Failed",
+    "Business_Profile_Created": "Business Profile Created",
+    "Unable_to_Create_Your_Business": "Unable to Create Your Business"
 }

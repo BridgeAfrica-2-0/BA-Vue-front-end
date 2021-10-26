@@ -97,9 +97,9 @@ export default {
 
               this.flashMessage.show({
                 status: "success",
-                title: "Password Reset Success",
+                title: this.$t('passrecover.Password_Reset_Success'),
                 message:
-                  "You have successfully Reset your password you will be redirected in a second"
+                  this.$t('passrecover.You_have_successfull_Reset_your_password_you_will_be_redirected_in_a_second')
               });
 
               this.$router.push({ name: "Login" });

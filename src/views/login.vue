@@ -221,7 +221,7 @@ export default {
           this.flashMessage.show({
             status: "success",
 
-            message: "Successfully Register"
+            message: this.$t('auth.Successfully_Register')
           });
 
           if (this.$store.state.auth.user.user.profile_complete == null) {
@@ -278,7 +278,7 @@ export default {
             this.flashMessage.show({
               status: "error",
 
-              message: "An error has occure"
+              message: this.$t('auth.An_error_has_occured')
             });
           }
         });

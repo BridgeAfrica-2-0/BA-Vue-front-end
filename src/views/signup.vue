@@ -268,7 +268,7 @@ export default {
           this.flashMessage.show({
             status: "success",
 
-            message: "Successfully Register",
+            message: this.$t('auth.Successfully_Register'),
           });
 
           this.$router.push({ name: "welcome" });
@@ -314,9 +314,9 @@ export default {
 
           this.flashMessage.show({
             status: "success",
-            title: "Successfully Register",
+            title: this.$t('auth.Successfully_Register'),
             message:
-              "Thanks for registering. You will get your otp code in a second",
+              this.$t('auth.Thanks_for_registering_You_will_get_your_otp_code_in_a_second'),
           });
 
           this.$router.push({ name: "verifyAccount" });
@@ -336,8 +336,8 @@ export default {
           } else {
             this.flashMessage.show({
               status: "error",
-              title: "Registration Failed",
-              message: "Unable to store this data",
+              title: this.$t('auth.Registration_Failed'),
+              message: this.$t('auth.Unable_to_store_this_data'),
             });
             console.log({ err: err });
           }

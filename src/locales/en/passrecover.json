@@ -8,5 +8,7 @@
     "Create_New_Password": "Create New Password",
     "Password": "Password",
     "Confirm_Password": "Confirm Password",
-    "Finish": "Finish"
+    "Finish": "Finish",
+    "Password_Reset_Success": "Password Reset Success",
+    "You_have_successfull_Reset_your_password_you_will_be_redirected_in_a_second": "You have successfull Reset your password. You will be redirected in a second"
 }

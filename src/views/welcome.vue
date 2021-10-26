@@ -410,7 +410,7 @@
             </tab-content>
 
             <tab-content
-              title="Business Indentity"
+              :title="$t('welcome.Business_Indentity')"
               :before-change="validateBusiness"
             >
               <div class="form-card">
@@ -771,13 +771,6 @@
         </div>
       </form>
     </div>
-    <span class="display-inline">
-        <b-link @click="$i18n.locale = 'en'"> {{ $t("auth.english") }} </b-link>
-        <span class="vl"></span>
-        <b-link class="ml-2" @click="$i18n.locale = 'fr'">
-          {{ $t("auth.french") }}
-        </b-link>
-      </span>
   </div>
 
   
@@ -1126,7 +1119,7 @@ export default {
               this.flashMessage.show({
                 status: "success",
 
-                message: "Business Profile Created",
+                message: this.$t('welcome.Business_Profile_Created'),
               });
               loader.hide();
               resolve(true);
@@ -1150,7 +1143,7 @@ export default {
                 this.flashMessage.show({
                   status: "error",
 
-                  message: "Unable to Create Your Business",
+                  message: this.$t('welcome.Unable_to_Create_Your_Business'),
                   blockClass: "custom-block-class",
                 });
                 console.log({ err: err });
@@ -1247,7 +1240,7 @@ export default {
             this.flashMessage.show({
               status: "success",
               blockClass: "custom-block-class",
-              message: "Business Profile Created",
+              message: this.$t('welcome.Business_Profile_Created'),
             });
 
             resolve(true);
@@ -1271,7 +1264,7 @@ export default {
               this.flashMessage.show({
                 status: "error",
 
-                message: "Unable to Create Your Business",
+                message: this.$t('welcome.Unable_to_Create_Your_Business'),
                 blockClass: "custom-block-class",
               });
               console.log({ err: err });
@@ -1313,7 +1306,7 @@ export default {
             this.flashMessage.show({
               status: "success",
 
-              message: "Profile Updated",
+              message: this.$t('welcome.Profile_Updated'),
 
               blockClass: "custom-block-class",
             });
@@ -1343,8 +1336,8 @@ export default {
             } else {
               this.flashMessage.show({
                 status: "error",
-                title: "Registration Failed",
-                message: "Unable to update your Information",
+                title: this.$t('welcome.Registration_Failed'),
+                message: this.$t('welcome.Unable_to_update_your_Information'),
                 blockClass: "custom-block-class",
               });
               console.log({ err: err });

@@ -82,7 +82,7 @@
               <b-tabs lazy fill pills content-class="mt-3  f-left m-up checkcheck">
                 <b-tab active>
                   <template slot="title">
-                    Followers
+                    {{$t("dashboard.Followers")}}
                     <span class="spa-color">
                       {{ count(businesscommunity.total_followers) }}
                     </span>

@@ -8,5 +8,7 @@
     "Create_New_Password": "Créer un nouveau mot de passe",
     "Password": "Mot de passe",
     "Confirm_Password": "Confirmer  Mot de passe",
-    "Finish": "Terminer"
+    "Finish": "Terminer",
+    "Password_Reset_Success": "Succès de la réinitialisation du mot de passe",
+    "You_have_successfull_Reset_your_password_you_will_be_redirected_in_a_second": "Vous avez réussi à réinitialiser votre mot de passe. Vous serez redirigé dans une seconde"
 }

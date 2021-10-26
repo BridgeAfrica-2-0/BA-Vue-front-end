@@ -14,7 +14,7 @@
 
           <h6 class="float-right text-success font-weight-bolder">
             <b-button variant="outline-primary" class="upgrade-btn" size="sm"
-              ><b-icon-star></b-icon-star> &nbsp;&nbsp;{{$t("dashboard.Upgrade_Plan")}}/b-button
+              ><b-icon-star></b-icon-star> &nbsp;&nbsp;{{$t("dashboard.Upgrade_Plan")}}</b-button
             >
           </h6>
         </h4>

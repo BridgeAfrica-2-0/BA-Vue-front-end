@@ -4,11 +4,11 @@
       <div class="">
         <h5 class="a-text"><b-icon-gear></b-icon-gear> Business Settings</h5>
       </div>
-      <hr class="solid" />
+      <hr class="solid">
 
       <div class="bv-example-row">
         <div>
-          <b-tabs pills vertical>
+          <b-tabs pills  vertical>
             <b-tab active>
               <template slot="title" class="t-color">
                 <h6 class="t-color">General</h6>

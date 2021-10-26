@@ -20,11 +20,17 @@
               </md-field>
             </b-form-group>
 
-             <b-row class="mt-2">  <b-col cols="6">  </b-col>    <b-col cols="6"> 
-            <b-button class="btn btn-primary button float-right"  @click.prevent="next" > Next </b-button>  </b-col>  </b-row>
-            
-
-           
+            <b-row class="mt-2">
+              <b-col cols="6"> </b-col>
+              <b-col cols="6">
+                <b-button
+                  class="btn btn-primary button float-right"
+                  @click.prevent="next"
+                >
+                  Next
+                </b-button>
+              </b-col>
+            </b-row>
           </b-form>
         </div>
       </b-card>
@@ -39,7 +45,7 @@ import axios from "axios";
 export default {
   data() {
     return {
-      code: ""
+      code: "",
     };
   },
   computed: mapGetters(["recoverPassData"]),
@@ -54,7 +60,7 @@ export default {
       axios
         .post(otpVerifcationUrl, {
           OTP: this.code,
-          phone: this.$store.state.auth.passwordToken.user.phone
+          phone: this.$store.state.auth.passwordToken.user.phone,
         })
         .then(response => {
           if (response.status === 200) {
@@ -72,12 +78,12 @@ export default {
             this.flashMessage.show({
               status: "error",
 
-              message: err.response.data.message
+              message: err.response.data.message,
             });
           }
         });
-    }
-  }
+    },
+  },
 };
 </script>
 

@@ -97,7 +97,7 @@
               ></b-avatar>
               <input placeholder="Post a Comment" class="comment" type="text" />
 
-              <fas-icon
+             ` <fas-icon
                 class="primary send-cmt"
                 :icon="['fas', 'paper-plane']"
               />

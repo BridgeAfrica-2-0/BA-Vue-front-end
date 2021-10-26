@@ -2,24 +2,18 @@
   <div>
     <div class="row">
       <div class="container-fluid">
-        <div class="img-gall">
+        <b-modal hide-footer id="Details" ref="Details">
+          <img class="card-img" :src="show_url" alt="" />
+        </b-modal>
+        <div class="img-gall" v-for="pictures in picturess" :key="pictures.id">
           <a href="#!"
             ><img
               class="card-img btn p-0"
-              src="@/assets/img/m1.jpg"
+              :src="pictures.media_url"
               alt=""
-              v-b-modal.modal-8
+              @click="showPic(pictures.media_url)"
           /></a>
 
-          <b-modal id="modal-8" title="Details">
-            <img class="card-img" src="@/assets/img/m1.jpg" alt="" />
-            <h4>Post Title</h4>
-            <p class="my-4">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum
-              quisquam sequi, ullam aliquam ab illo suscipit, earum quam,
-              doloribus id sit consequuntur tempora molestiae blanditiis.
-            </p>
-          </b-modal>
           <div class="mediadesc">
             <ul class="navbar-nav pull-right">
               <li class="nav-item dropdown m-0 p-0">
@@ -36,219 +30,9 @@
                       :icon="['fas', 'ellipsis-v']"
                     />
                   </template>
-                  <b-dropdown-item href="#">Download</b-dropdown-item>
-                </b-dropdown>
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div class="img-gall">
-          <a href="#!"
-            ><img
-              class="card-img btn p-0"
-              src="@/assets/img/m2.jpg"
-              alt=""
-              v-b-modal.modal-a
-          /></a>
-
-          <b-modal id="modal-a" title="Details">
-            <img class="card-img" src="@/assets/img/m2.jpg" alt="" />
-            <h4>Post Title</h4>
-            <p class="my-4">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum
-              quisquam sequi, ullam aliquam ab illo suscipit, earum quam,
-              doloribus id sit consequuntur tempora molestiae blanditiis.
-            </p>
-          </b-modal>
-          <div class="mediadesc">
-            <ul class="navbar-nav pull-right">
-              <li class="nav-item dropdown">
-                <b-dropdown
-                  size="sm"
-                  class="float-right"
-                  variant="link"
-                  toggle-class="text-decoration-none"
-                  no-caret
-                >
-                  <template #button-content>
-                    <fas-icon
-                      class="drop-color font-weight-bolder"
-                      :icon="['fas', 'ellipsis-v']"
-                    />
-                  </template>
-                  <b-dropdown-item href="#">Download</b-dropdown-item>
-                </b-dropdown>
-              </li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="img-gall">
-          <a href="#!"
-            ><img
-              class="card-img btn p-0"
-              src="@/assets/img/m3.jpg"
-              alt=""
-              v-b-modal.modal-b
-          /></a>
-
-          <b-modal id="modal-b" title="Details">
-            <img class="card-img" src="@/assets/img/m3.jpg" alt="" />
-            <h4>Post Title</h4>
-            <p class="my-4">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum
-              quisquam sequi, ullam aliquam ab illo suscipit, earum quam,
-              doloribus id sit consequuntur tempora molestiae blanditiis.
-            </p>
-          </b-modal>
-          <div class="mediadesc">
-            <ul class="navbar-nav pull-right">
-              <li class="nav-item dropdown">
-                <b-dropdown
-                  size="sm"
-                  class="float-right"
-                  variant="link"
-                  toggle-class="text-decoration-none"
-                  no-caret
-                >
-                  <template #button-content>
-                    <fas-icon
-                      class="drop-color font-weight-bolder"
-                      :icon="['fas', 'ellipsis-v']"
-                    />
-                  </template>
-                  <b-dropdown-item href="#">Download</b-dropdown-item>
-                </b-dropdown>
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div class="img-gall">
-          <a href="#!"
-            ><img class="card-img" src="@/assets/img/m4.jpg" alt=""
-          /></a>
-          <div class="mediadesc">
-            <ul class="navbar-nav pull-right">
-              <li class="nav-item dropdown">
-                <b-dropdown
-                  size="sm"
-                  class="float-right"
-                  variant="link"
-                  toggle-class="text-decoration-none"
-                  no-caret
-                >
-                  <template #button-content>
-                    <fas-icon
-                      class="drop-color font-weight-bolder"
-                      :icon="['fas', 'ellipsis-v']"
-                    />
-                  </template>
-                  <b-dropdown-item href="#">Download</b-dropdown-item>
-                </b-dropdown>
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div class="img-gall">
-          <a href="#!"
-            ><img class="card-img" src="@/assets/img/m5.jpg" alt=""
-          /></a>
-          <div class="mediadesc">
-            <ul class="navbar-nav pull-right">
-              <li class="nav-item dropdown">
-                <b-dropdown
-                  size="sm"
-                  class="float-right"
-                  variant="link"
-                  toggle-class="text-decoration-none"
-                  no-caret
-                >
-                  <template #button-content>
-                    <fas-icon
-                      class="drop-color font-weight-bolder"
-                      :icon="['fas', 'ellipsis-v']"
-                    />
-                  </template>
-                  <b-dropdown-item href="#">Download</b-dropdown-item>
-                </b-dropdown>
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div class="img-gall">
-          <a href="#!"
-            ><img class="card-img" src="@/assets/img/m6.jpg" alt=""
-          /></a>
-          <div class="mediadesc">
-            <ul class="navbar-nav pull-right">
-              <li class="nav-item dropdown">
-                <b-dropdown
-                  size="sm"
-                  class="float-right"
-                  variant="link"
-                  toggle-class="text-decoration-none"
-                  no-caret
-                >
-                  <template #button-content>
-                    <fas-icon
-                      class="drop-color font-weight-bolder"
-                      :icon="['fas', 'ellipsis-v']"
-                    />
-                  </template>
-                  <b-dropdown-item href="#">Download</b-dropdown-item>
-                </b-dropdown>
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div class="img-gall">
-          <a href="#!"
-            ><img class="card-img" src="@/assets/img/m7.jpg" alt=""
-          /></a>
-          <div class="mediadesc">
-            <ul class="navbar-nav pull-right">
-              <li class="nav-item dropdown">
-                <b-dropdown
-                  size="sm"
-                  class="float-right"
-                  variant="link"
-                  toggle-class="text-decoration-none"
-                  no-caret
-                >
-                  <template #button-content>
-                    <fas-icon
-                      class="drop-color font-weight-bolder"
-                      :icon="['fas', 'ellipsis-v']"
-                    />
-                  </template>
-                  <b-dropdown-item href="#">Download</b-dropdown-item>
-                </b-dropdown>
-              </li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="img-gall">
-          <a href="#!"
-            ><img class="card-img" src="@/assets/img/m8.jpg" alt=""
-          /></a>
-          <div class="mediadesc">
-            <ul class="navbar-nav pull-right">
-              <li class="nav-item dropdown">
-                <b-dropdown
-                  size="sm"
-                  class="float-right"
-                  variant="link"
-                  toggle-class="text-decoration-none"
-                  no-caret
-                >
-                  <template #button-content>
-                    <fas-icon
-                      class="drop-color font-weight-bolder"
-                      :icon="['fas', 'ellipsis-v']"
-                    />
-                  </template>
-                  <b-dropdown-item href="#">Download</b-dropdown-item>
+                  <b-dropdown-item @click="downloadPic(pictures.id)"
+                    >Download</b-dropdown-item
+                  >
                 </b-dropdown>
               </li>
             </ul>
@@ -260,17 +44,11 @@
 </template>
 
 <script>
+import { mapActions } from "vuex";
 export default {
   components: {},
-  methods: {
-    /**
-     *
-     * @param i
-     */
-    onClick(i) {
-      this.index = i;
-    }
-  },
+  props: ["album"],
+
   data: function() {
     return {
       images: [
@@ -282,7 +60,7 @@ export default {
         "https://placekitten.com/806/800",
         "https://placekitten.com/807/800",
         "https://placekitten.com/808/800",
-        "https://placekitten.com/809/800"
+        "https://placekitten.com/809/800",
       ],
       imagees: [
         "https://i.wifegeek.com/200426/f9459c52.jpg",
@@ -304,11 +82,84 @@ export default {
         "https://i.wifegeek.com/200426/177ef44c.jpg",
         "https://i.wifegeek.com/200426/d74d9040.jpg",
         "https://i.wifegeek.com/200426/81e24a47.jpg",
-        "https://i.wifegeek.com/200426/43e2e8bb.jpg"
+        "https://i.wifegeek.com/200426/43e2e8bb.jpg",
       ],
-      index: 0
+      index: 0,
     };
-  }
+  },
+
+  computed: {
+    picturess() {
+      return this.$store.state.UserProfileOwner.albumImages;
+    },
+  },
+
+  methods: {
+    ...mapActions({
+      downloadPic: "UserProfileOwner/downloadPic",
+    }),
+
+    showPic(url) {
+      console.log(url);
+      this.show_url = url;
+      this.$refs["Details"].show();
+    },
+
+    downloadPic(image_id) {
+      console.log("downloading");
+
+      let loader = this.$loading.show({
+        container: this.fullPage,
+        canCancel: true,
+        onCancel: this.onCancel,
+        color: "#e75c18",
+      });
+      this.downloadPic(image_id)
+        .then((response) => {
+          var fileURL = window.URL.createObjectURL(new Blob([response.data]));
+          var fileLink = document.createElement("a");
+
+          fileLink.href = fileURL;
+          fileLink.setAttribute("download", "file.jpg");
+          document.body.appendChild(fileLink);
+
+          fileLink.click();
+          this.flashMessage.show({
+            status: "success",
+            message: "Image Downloaded",
+          });
+          loader.hide();
+        })
+        .catch((err) => {
+          this.sending = false;
+          if (err.response.status == 422) {
+            console.log({ err: err });
+            this.flashMessage.show({
+              status: "error",
+              message: err.response.data.message,
+            });
+            loader.hide();
+          } else {
+            this.flashMessage.show({
+              status: "error",
+              message: "Unable to download ",
+            });
+            console.log({ err: err });
+            loader.hide();
+          }
+        });
+    },
+  },
+
+  mounted() {
+    this.url = this.$route.params.id;
+  },
+
+  watch: {
+    album: function(newVal) {
+      this.album_id = newVal;
+    },
+  },
 };
 </script>
 

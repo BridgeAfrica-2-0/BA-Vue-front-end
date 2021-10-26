@@ -4,22 +4,25 @@
       <b-row>
         <b-col>
           <div class="b-bottomn f-left">
-            <b-form-checkbox
-              id="checkbox-1"
-              v-model="status"
-              name="checkbox-1"
-              value="accepted"
-              class="m-left-top username"
-              unchecked-value="not_accepted"
-            >
-              Select All
-            </b-form-checkbox>
+            <input @click="selectall" type="checkbox" />
+            Select All
           </div>
         </b-col>
         <b-col>
           <div class="b-bottomn f-right">
-            <b-button variant="primary" class="a-button-l duration">
+            <b-button
+              @click="readAll(selected)"
+              variant="primary"
+              class="a-button-l duration"
+            >
               Mark as Read</b-button
+            >
+            <b-button
+              @click="deleteAll(selected)"
+              variant="primary"
+              class="a-button-l duration ml-1"
+            >
+              Delete</b-button
             >
           </div>
         </b-col>
@@ -60,6 +63,16 @@
             Ipsum has been the industry's standard dummy text ever since the
             1500s,
           </p>
+        </b-col>
+
+        <b-col v-if="loader" class="load">
+          <b-spinner
+            style="width: 7rem; height: 7rem;"
+            variant="primary"
+          ></b-spinner>
+        </b-col>
+        <b-col v-if="!getNotificationsStore && !loader" class="load">
+          <p>No notifications to show !!</p>
 
           <hr width="100%" />
         </b-col>
@@ -69,12 +82,78 @@
 </template>
 
 <script>
+import { mapActions, mapGetters } from "vuex";
 export default {
-  name: "notification"
+  name: "notification",
+  data: () => ({
+    all: 24,
+    selected: [],
+  }),
+  beforeMount() {
+    this.getNotifications();
+  },
+  computed: {
+    getNotificationsStore() {
+      return this.sendNotifications();
+    },
+    loader() {
+      return this.getLoader();
+    },
+  },
+  methods: {
+    ...mapGetters({
+      sendNotifications: "businessOwner/sendNotifications",
+      getLoader: "businessOwner/getLoader",
+      getSuccess: "businessOwner/getSuccess",
+    }),
+
+    // getting actions from the store
+    ...mapActions({
+      getNotifications: "businessOwner/getNotifications",
+      readNotifiactions: "businessOwner/readNotifiactions",
+      deleteNotifications: "businessOwner/deleteNotifications",
+      delete: "businessOwner/delete",
+    }),
+
+    readAll(data) {
+      this.readNotifiactions(data);
+    },
+    deleteAll(data) {
+      this.checked = false;
+      let ids = [];
+      data.forEach((element) => {
+        ids.push(element.id);
+      });
+      this.deleteNotifications(ids);
+    },
+
+    deleteOne(id) {
+      this.delete(id);
+    },
+
+    // select all the notifications
+    selectall() {
+      this.getNotificationsStore.forEach((element) => {
+        this.selected.push(element);
+      });
+    },
+    select(notification, index) {
+      if (this.selected[index]) {
+        this.selected.splice(index, 1);
+        return;
+      }
+      this.selected.push(notification);
+    },
+  },
 };
 </script>
 
 <style scoped>
+.load {
+  display: flex;
+  justify-content: center;
+}
+
 .f-left {
   float: left;
 }
@@ -104,6 +183,10 @@ export default {
 
 h5 {
   font-size: 15px;
+}
+
+.delete {
+  cursor: pointer;
 }
 
 @media screen and (min-width: 768px) {

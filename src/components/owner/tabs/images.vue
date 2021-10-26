@@ -1,294 +1,108 @@
 <template>
   <div>
+    <FlashMessage />
     <div class="row">
       <div class="container-fluid">
-        <div class="img-gall">
-          <a href="#!"
+        <b-modal
+          id="modalxl"
+          ref="modalxl"
+          centered
+          hide-footer
+          title="Upoad Image"
+        >
+          <br />
+
+          <div id="preview" ref="preview">
+            <img v-if="img_url" :src="img_url" />
+          </div>
+
+          <br />
+          <b-form-textarea
+            id="textarea-small"
+            class="mb-2 border-none"
+            v-model="text"
+            placeholder="Enter a description"
+          >
+          </b-form-textarea>
+
+          <br />
+
+          <b-button @click="submitPosts" variant="primary" block
+            ><b-icon icon="cursor-fill" variant="primary"></b-icon>
+            Publish</b-button
+          >
+        </b-modal>
+
+        <div class="createp img-gall image-wrapp">
+          <div class="">
+            <input
+              type="file"
+              id="chosefile"
+              @change="selectMoviesOutsidePost"
+              accept="video/mpeg, video/mp4, image/*"
+              hidden
+              ref="movie"
+            />
+
+            <a @click="$refs.movie.click()">
+              <div class="drag-textt">
+                <fas-icon :icon="['fas', 'plus']" />
+                <h3>Add Item</h3>
+              </div>
+            </a>
+          </div>
+        </div>
+
+        <b-modal hide-footer size="xl" id="Details" ref="Details">
+          <img class="card-img" :src="showImage" alt="Oops" />
+          <div>
+            <p>
+              {{ this.content }}
+            </p>
+          </div>
+        </b-modal>
+
+        <div class="img-gall" v-for="image in getImages" :key="image.id">
+          <span></span>
+          <a
             ><img
-              class="card-img btn p-0"
-              src="@/assets/img/m1.jpg"
+              class="card-img btn p-0 album-img"
+              :src="image.media"
               alt=""
-              v-b-modal.modal-8
+              @click="showPic(image, image.content)"
           /></a>
 
-          <b-modal id="modal-8" title="Details">
-            <img class="card-img" src="@/assets/img/m1.jpg" alt="" />
-            <h4>Post Title</h4>
-            <p class="my-4">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum
-              quisquam sequi, ullam aliquam ab illo suscipit, earum quam,
-              doloribus id sit consequuntur tempora molestiae blanditiis.
-            </p>
-          </b-modal>
           <div class="mediadesc">
             <ul class="navbar-nav pull-right">
               <li class="nav-item dropdown m-0 p-0">
                 <b-dropdown
                   size="sm"
-                  class="float-right"
+                  class=" call-action"
                   variant="link"
                   toggle-class="text-decoration-none"
                   no-caret
                 >
                   <template #button-content>
-                    <fas-icon
-                      class="drop-color font-weight-bolder"
-                      :icon="['fas', 'ellipsis-v']"
-                    />
+                    <b-icon
+                      icon="three-dots-vertical"
+                      color="white"
+                      variant="light"
+                    >
+                    </b-icon>
                   </template>
-                  <b-dropdown-item href="#">Download</b-dropdown-item>
-                  <b-dropdown-item href="#"
-                    >Make Profile Picture</b-dropdown-item
-                  >
-                  <b-dropdown-item href="#">Make Cover Photo</b-dropdown-item>
-                  <b-dropdown-item href="#">Delete</b-dropdown-item>
-                </b-dropdown>
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div class="img-gall">
-          <a href="#!"
-            ><img
-              class="card-img btn p-0"
-              src="@/assets/img/m2.jpg"
-              alt=""
-              v-b-modal.modal-a
-          /></a>
 
-          <b-modal id="modal-a" title="Details">
-            <img class="card-img" src="@/assets/img/m2.jpg" alt="" />
-            <h4>Post Title</h4>
-            <p class="my-4">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum
-              quisquam sequi, ullam aliquam ab illo suscipit, earum quam,
-              doloribus id sit consequuntur tempora molestiae blanditiis.
-            </p>
-          </b-modal>
-          <div class="mediadesc">
-            <ul class="navbar-nav pull-right">
-              <li class="nav-item dropdown">
-                <b-dropdown
-                  size="sm"
-                  class="float-right"
-                  variant="link"
-                  toggle-class="text-decoration-none"
-                  no-caret
-                >
-                  <template #button-content>
-                    <fas-icon
-                      class="drop-color font-weight-bolder"
-                      :icon="['fas', 'ellipsis-v']"
-                    />
-                  </template>
-                  <b-dropdown-item href="#">Download</b-dropdown-item>
-                  <b-dropdown-item href="#"
+                  <b-dropdown-item @click="downloadPics(image.id)"
+                    >Download</b-dropdown-item
+                  >
+                  <b-dropdown-item @click="setProfilePics(image.id)"
                     >Make Profile Picture</b-dropdown-item
                   >
-                  <b-dropdown-item href="#">Make Cover Photo</b-dropdown-item>
-                  <b-dropdown-item href="#">Delete</b-dropdown-item>
-                </b-dropdown>
-              </li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="img-gall">
-          <a href="#!"
-            ><img
-              class="card-img btn p-0"
-              src="@/assets/img/m3.jpg"
-              alt=""
-              v-b-modal.modal-b
-          /></a>
-
-          <b-modal id="modal-b" title="Details">
-            <img class="card-img" src="@/assets/img/m3.jpg" alt="" />
-            <h4>Post Title</h4>
-            <p class="my-4">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum
-              quisquam sequi, ullam aliquam ab illo suscipit, earum quam,
-              doloribus id sit consequuntur tempora molestiae blanditiis.
-            </p>
-          </b-modal>
-          <div class="mediadesc">
-            <ul class="navbar-nav pull-right">
-              <li class="nav-item dropdown">
-                <b-dropdown
-                  size="sm"
-                  class="float-right"
-                  variant="link"
-                  toggle-class="text-decoration-none"
-                  no-caret
-                >
-                  <template #button-content>
-                    <fas-icon
-                      class="drop-color font-weight-bolder"
-                      :icon="['fas', 'ellipsis-v']"
-                    />
-                  </template>
-                  <b-dropdown-item href="#">Download</b-dropdown-item>
-                  <b-dropdown-item href="#"
-                    >Make Profile Picture</b-dropdown-item
+                  <b-dropdown-item @click="setCoverPics(image.id)"
+                    >Make Cover Photo</b-dropdown-item
                   >
-                  <b-dropdown-item href="#">Make Cover Photo</b-dropdown-item>
-                  <b-dropdown-item href="#">Delete</b-dropdown-item>
-                </b-dropdown>
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div class="img-gall">
-          <a href="#!"
-            ><img class="card-img" src="@/assets/img/m4.jpg" alt=""
-          /></a>
-          <div class="mediadesc">
-            <ul class="navbar-nav pull-right">
-              <li class="nav-item dropdown">
-                <b-dropdown
-                  size="sm"
-                  class="float-right"
-                  variant="link"
-                  toggle-class="text-decoration-none"
-                  no-caret
-                >
-                  <template #button-content>
-                    <fas-icon
-                      class="drop-color font-weight-bolder"
-                      :icon="['fas', 'ellipsis-v']"
-                    />
-                  </template>
-                  <b-dropdown-item href="#">Download</b-dropdown-item>
-                  <b-dropdown-item href="#"
-                    >Make Profile Picture</b-dropdown-item
+                  <b-dropdown-item @click="deleteImages(image.id)" href="#"
+                    >Delete</b-dropdown-item
                   >
-                  <b-dropdown-item href="#">Make Cover Photo</b-dropdown-item>
-                  <b-dropdown-item href="#">Delete</b-dropdown-item>
-                </b-dropdown>
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div class="img-gall">
-          <a href="#!"
-            ><img class="card-img" src="@/assets/img/m5.jpg" alt=""
-          /></a>
-          <div class="mediadesc">
-            <ul class="navbar-nav pull-right">
-              <li class="nav-item dropdown">
-                <b-dropdown
-                  size="sm"
-                  class="float-right"
-                  variant="link"
-                  toggle-class="text-decoration-none"
-                  no-caret
-                >
-                  <template #button-content>
-                    <fas-icon
-                      class="drop-color font-weight-bolder"
-                      :icon="['fas', 'ellipsis-v']"
-                    />
-                  </template>
-                  <b-dropdown-item href="#">Download</b-dropdown-item>
-                  <b-dropdown-item href="#"
-                    >Make Profile Picture</b-dropdown-item
-                  >
-                  <b-dropdown-item href="#">Make Cover Photo</b-dropdown-item>
-                  <b-dropdown-item href="#">Delete</b-dropdown-item>
-                </b-dropdown>
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div class="img-gall">
-          <a href="#!"
-            ><img class="card-img" src="@/assets/img/m6.jpg" alt=""
-          /></a>
-          <div class="mediadesc">
-            <ul class="navbar-nav pull-right">
-              <li class="nav-item dropdown">
-                <b-dropdown
-                  size="sm"
-                  class="float-right"
-                  variant="link"
-                  toggle-class="text-decoration-none"
-                  no-caret
-                >
-                  <template #button-content>
-                    <fas-icon
-                      class="drop-color font-weight-bolder"
-                      :icon="['fas', 'ellipsis-v']"
-                    />
-                  </template>
-                  <b-dropdown-item href="#">Download</b-dropdown-item>
-                  <b-dropdown-item href="#"
-                    >Make Profile Picture</b-dropdown-item
-                  >
-                  <b-dropdown-item href="#">Make Cover Photo</b-dropdown-item>
-                  <b-dropdown-item href="#">Delete</b-dropdown-item>
-                </b-dropdown>
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div class="img-gall">
-          <a href="#!"
-            ><img class="card-img" src="@/assets/img/m7.jpg" alt=""
-          /></a>
-          <div class="mediadesc">
-            <ul class="navbar-nav pull-right">
-              <li class="nav-item dropdown">
-                <b-dropdown
-                  size="sm"
-                  class="float-right"
-                  variant="link"
-                  toggle-class="text-decoration-none"
-                  no-caret
-                >
-                  <template #button-content>
-                    <fas-icon
-                      class="drop-color font-weight-bolder"
-                      :icon="['fas', 'ellipsis-v']"
-                    />
-                  </template>
-                  <b-dropdown-item href="#">Download</b-dropdown-item>
-                  <b-dropdown-item href="#"
-                    >Make Profile Picture</b-dropdown-item
-                  >
-                  <b-dropdown-item href="#">Make Cover Photo</b-dropdown-item>
-                  <b-dropdown-item href="#">Delete</b-dropdown-item>
-                </b-dropdown>
-              </li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="img-gall">
-          <a href="#!"
-            ><img class="card-img" src="@/assets/img/m8.jpg" alt=""
-          /></a>
-          <div class="mediadesc">
-            <ul class="navbar-nav pull-right">
-              <li class="nav-item dropdown">
-                <b-dropdown
-                  size="sm"
-                  class="float-right"
-                  variant="link"
-                  toggle-class="text-decoration-none"
-                  no-caret
-                >
-                  <template #button-content>
-                    <fas-icon
-                      class="drop-color font-weight-bolder"
-                      :icon="['fas', 'ellipsis-v']"
-                    />
-                  </template>
-                  <b-dropdown-item href="#">Download</b-dropdown-item>
-                  <b-dropdown-item href="#"
-                    >Make Profile Picture</b-dropdown-item
-                  >
-                  <b-dropdown-item href="#">Make Cover Photo</b-dropdown-item>
-                  <b-dropdown-item href="#">Delete</b-dropdown-item>
                 </b-dropdown>
               </li>
             </ul>
@@ -300,55 +114,231 @@
 </template>
 
 <script>
+import { mapActions, mapGetters } from "vuex";
 export default {
-  components: {},
-  methods: {
-    /**
-     *
-     * @param i
-     */
-    onClick(i) {
-      this.index = i;
-    }
-  },
-  data: function() {
+  props: ["album"],
+
+  data() {
     return {
-      images: [
-        "https://placekitten.com/801/800",
-        "https://placekitten.com/802/800",
-        "https://placekitten.com/803/800",
-        "https://placekitten.com/804/800",
-        "https://placekitten.com/805/800",
-        "https://placekitten.com/806/800",
-        "https://placekitten.com/807/800",
-        "https://placekitten.com/808/800",
-        "https://placekitten.com/809/800"
-      ],
-      imagees: [
-        "https://i.wifegeek.com/200426/f9459c52.jpg",
-        "https://i.wifegeek.com/200426/5ce1e1c7.jpg",
-        "https://i.wifegeek.com/200426/5fa51df3.jpg",
-        "https://i.wifegeek.com/200426/663181fe.jpg",
-        "https://i.wifegeek.com/200426/2d110780.jpg",
-        "https://i.wifegeek.com/200426/e73cd3fa.jpg",
-        "https://i.wifegeek.com/200426/15160d6e.jpg",
-        "https://i.wifegeek.com/200426/d0c881ae.jpg",
-        "https://i.wifegeek.com/200426/a154fc3d.jpg",
-        "https://i.wifegeek.com/200426/71d3aa60.jpg",
-        "https://i.wifegeek.com/200426/d17ce9a0.jpg",
-        "https://i.wifegeek.com/200426/7c4deca9.jpg",
-        "https://i.wifegeek.com/200426/64672676.jpg",
-        "https://i.wifegeek.com/200426/de6ab9c6.jpg",
-        "https://i.wifegeek.com/200426/d8bcb6a7.jpg",
-        "https://i.wifegeek.com/200426/4085d03b.jpg",
-        "https://i.wifegeek.com/200426/177ef44c.jpg",
-        "https://i.wifegeek.com/200426/d74d9040.jpg",
-        "https://i.wifegeek.com/200426/81e24a47.jpg",
-        "https://i.wifegeek.com/200426/43e2e8bb.jpg"
-      ],
-      index: 0
+      showImage: null,
+      showIndex: "",
+      content: "",
+      album_id: null,
+      url: null,
+      fullPage: null,
+      img_url: null,
+      profile_pic: null,
+      text: null,
     };
-  }
+  },
+  components: {},
+
+  computed: {
+    ...mapGetters({
+      getImages: "UserProfileOwner/getImages",
+      albumImages: "UserProfileOwner/getalbumImages",
+      getAlbums: "UserProfileOwner/getAlbums",
+    }),
+  },
+
+  beforeMount() {
+    this.getImages;
+    this.albumImages;
+  },
+
+  methods: {
+    ...mapActions({
+      submitPost: "UserProfileOwner/submitPost",
+      setProfilePic: "UserProfileOwner/setProfilePic",
+      setCoverPic: "UserProfileOwner/setCoverPic",
+      deleteImage: "UserProfileOwner/deleteImage",
+      downloadPic: "UserProfileOwner/downloadPic",
+    }),
+
+    showPic(image, content) {
+      this.showIndex = this.getImages.indexOf(image);
+      this.showImage = Object.assign({}, image);
+      this.content = content;
+      this.$refs["Details"].show();
+    },
+    downloadPics(id) {
+      this.downloadPic(id)
+        .then((response) => {
+          var fileURL = window.URL.createObjectURL(new Blob([response.data]));
+          var fileLink = document.createElement("a");
+
+          fileLink.href = fileURL;
+          fileLink.setAttribute("download", "file.jpg");
+          document.body.appendChild(fileLink);
+
+          fileLink.click();
+          this.flashMessage.show({
+            status: "success",
+            message: "Image Downloaded",
+          });
+        })
+        .catch((err) => {
+          this.sending = false;
+          if (err.response.status == 422) {
+            console.log({ err: err });
+            this.flashMessage.show({
+              status: "error",
+              message: err.response.data.message,
+            });
+          } else {
+            this.flashMessage.show({
+              status: "error",
+              message: "Unable to download ",
+            });
+            console.log({ err: err });
+          }
+        });
+    },
+
+    deleteImages(id) {
+      this.deleteImage(id)
+        .then((response) => {
+          console.log(response.data);
+          this.flashMessage.show({
+            status: "success",
+            message: "Album Deleted",
+          });
+        })
+        .catch((err) => {
+          this.sending = false;
+          if (err.response.status == 422) {
+            console.log({ err: err });
+            this.flashMessage.show({
+              status: "error",
+              message: err.response.data.message,
+            });
+          } else {
+            this.flashMessage.show({
+              status: "error",
+              message: "Unable to Delete your Image",
+            });
+            console.log({ err: err });
+          }
+        });
+    },
+    //set an image as a cover photo
+    setCoverPics(id) {
+      this.setCoverPic(id)
+        .then((response) => {
+          console.log(response.data);
+          this.flashMessage.show({
+            status: "success",
+            message: "cover Picture succesfully set",
+          });
+        })
+        .catch((err) => {
+          this.sending = false;
+          if (err.response.status == 422) {
+            console.log({ err: err });
+            this.flashMessage.show({
+              status: "error",
+              message: err.response.data.message,
+            });
+          } else {
+            this.flashMessage.show({
+              status: "error",
+              message: "Unable to set your cover picture",
+            });
+            console.log({ err: err });
+          }
+        });
+    },
+    //set image as profile pic
+
+    setProfilePics(id) {
+      this.setProfilePic(id)
+        .then((response) => {
+          console.log(response.data);
+          this.flashMessage.show({
+            status: "success",
+            message: "Profile Picture set",
+          });
+        })
+        .catch((err) => {
+          this.sending = false;
+          if (err.response.status == 422) {
+            console.log({ err: err });
+            this.flashMessage.show({
+              status: "error",
+              message: err.response.data.message,
+            });
+          } else {
+            this.flashMessage.show({
+              status: "error",
+              message: "Unable to set your profile pic",
+            });
+            console.log({ err: err });
+          }
+        });
+    },
+    submitPosts() {
+      let albumId = this.album;
+      console.log(albumId);
+
+      let formData = new FormData();
+      formData.append("media", this.profile_pic);
+      formData.append("dob", this.text);
+      let payload = {
+        id: albumId,
+        headers: { "Content-Type": "multipart/form-data" },
+        data: formData,
+      };
+      this.submitPost(payload)
+        .then(() => {
+          this.flashMessage.show({
+            status: "success",
+            message: "Profile Updated",
+            blockClass: "custom-block-class",
+          });
+          this.$refs["modalxl"].hide();
+        })
+        .catch((err) => {
+          console.log({ err: err });
+
+          if (err.response.status == 422) {
+            console.log({ err: err });
+
+            this.flashMessage.show({
+              status: "error",
+              message: err.response.data.message,
+              blockClass: "custom-block-class",
+            });
+          } else {
+            this.flashMessage.show({
+              status: "error",
+
+              message: "Unable to upload your image",
+              blockClass: "custom-block-class",
+            });
+            console.log({ err: err });
+          }
+        });
+    },
+
+    selectMoviesOutsidePost(e) {
+      this.profile_pic = e.target.files[0];
+      const file = e.target.files[0];
+      this.img_url = URL.createObjectURL(file);
+      console.log(this.img_url);
+      console.log("look up");
+      this.$refs["modalxl"].show();
+    },
+  },
+
+  mounted() {
+    this.url = this.$route.params.id;
+  },
+
+  watch: {
+    album: function(newVal) {
+      this.album_id = newVal;
+    },
+  },
 };
 </script>
 

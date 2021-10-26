@@ -125,6 +125,7 @@ export default {
 }
 
 .b-bottomn {
+ 
   margin-bottom: 30px;
   padding-bottom: 10px;
 }

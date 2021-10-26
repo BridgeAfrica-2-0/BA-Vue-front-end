@@ -102,17 +102,14 @@
           <div class="center-img">
             <splide :options="options" class="r-image">
               <splide-slide cl>
-                <img
-                  src="https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg"
-                  class="r-image"
-                />
+                <img :src="follower.profile_picture" class="r-image" />
               </splide-slide>
             </splide>
           </div>
         </b-col>
-        <b-col md="5" cols="7" lg="7" xl="5" sm="5">
+        <b-col md="5" cols="7" lg="9" xl="5" sm="5">
           <p class="textt text">
-            <strong class="title"> Super Car ltd </strong> <br />
+            <strong class="title"> {{ follower.name }} </strong> <br />
             Car marketing
             <br />
             20k Community <br />
@@ -121,9 +118,10 @@
               <b-icon-geo-alt class="ico"></b-icon-geo-alt> Douala cameroon
             </span>
             <br />
-
-            super best car seller in the world adipisicing elit. lorem epsep
-            this is <b-link>Read More</b-link>
+            {{ follower.about_business.substring(0, 30) }}
+            <b-link v-if="follower.about_business.length > 30"
+              >Read More</b-link
+            >
           </p>
         </b-col>
 
@@ -196,7 +194,7 @@
 
 <script>
 export default {
-  props: ["title", "image"],
+  props: ["follower"],
 
   data() {
     return {
@@ -207,10 +205,10 @@ export default {
         pagination: false,
 
         type: "loop",
-        perMove: 1
-      }
+        perMove: 1,
+      },
     };
-  }
+  },
 };
 </script>
 

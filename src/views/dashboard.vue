@@ -1,49 +1,58 @@
 <template>
-  <div style="overflow-x:hidden">
+  <div style="overflow-x:hidden" class="dashboard">
     <navbar></navbar>
 
-    <div class="text-justify  p-card ">
+    <div class="text-justify  p-card pr-1 ">
       <CarousselDashboard class="mm-top" /> <br />
 
-      <br />
+    
 
       <div v-if="selectedb == 'owner'">
         <b-card class=" border shadow hselect">
           <b-row>
             <b-col md="6" sm="12" class="">
-              <h6 class="font-weight-bolder text-design">
-                Use Bridge Africa as Yourself or as one of your businesses
+              <h6 class="font-weight-bolder text-design p-2">
+                Use Bridge Africa as Yourself or as one of your businesses 
               </h6>
             </b-col>
             <b-col sm="12" md="6" class="mb-3">
-              <b-form-select
+             
+          <div class="container"> 
+              <b-form-select 
                 v-model="selectedb"
+                class="mr-3"
                 :options="boptions"
+                  @input="switchBusiness"
               ></b-form-select>
+            </div>
+            
+
+
             </b-col>
           </b-row>
         </b-card>
         <br />
       </div>
-      .
+
       <div v-if="selectedb == 'owner'">
         <b-row class=" p-0">
           <b-col md="6" sm="12" class="mt-2 "> <Profile /> </b-col>
-          <b-col md="6" sm="12" class="mt-2  "> <EmptyBusiness /> </b-col>
+          <b-col md="6" sm="12" class="mt-2   "> <EmptyBusiness /> </b-col>
         </b-row>
         <br />
       </div>
 
       <div v-if="selectedb != 'owner'">
         <b-row>
-          <b-col md="6" sm="12" class="mt-2">
+          <b-col md="6" sm="12" class="mt-2 ">
             <div>
-              <b-card class=" border shadow" style="height:350px">
+              <b-card class=" border shadow pr-3" style="height:350px">
                 <h6 class="font-weight-bolder text-design">
                   Use Bridge Africa as Yourself or as one of your businesses
                 </h6>
                 <b-form-select
                   v-model="selectedb"
+                   @input="switchBusiness"
                   :options="boptions"
                 ></b-form-select>
               </b-card>
@@ -57,27 +66,38 @@
 
       <div v-if="selectedb != 'owner'">
         <b-row>
-          <b-col md="6" sm="12" class="mt-2"> <BusinessDashboard /> </b-col>
-          <b-col md="6" sm="12" class="mt-2"> <Insights /> </b-col>
+          <b-col md="6" sm="12" class="mt-2  ">
+            <BusinessDashboard :selectedb="selectedb" />
+          </b-col>
+          <b-col md="6" sm="12" class="mt-2  ">
+            <Insights :selectedb="selectedb" />
+          </b-col>
+        </b-row>
+      </div>
+      
+
+     
+      <div class="com-dash" >
+          <comuniti-dashboard  v-if="selectedb == 'owner'" class="m-component m-3"></comuniti-dashboard> 
+      
+       
+         <comuniti-Bdashboard  v-if="selectedb != 'owner'" class="m-component m-3"></comuniti-Bdashboard>
+
+     </div>
+     
+     
+
+      <div>
+        <b-row>
+          <b-col sm="12" lg="8" class="" > <CommunityActivity  v-if="selectedb == 'owner'" />      <CommunityBactivity    v-if="selectedb != 'owner'" />    </b-col>
+          <b-col sm="12" lg="4" class="" > <Tutorial /> </b-col>
         </b-row>
       </div>
       <br />
 
-      <b-row>
-        <comuniti-dashboard class="m-component m-3"></comuniti-dashboard> <br />
-      </b-row>
-
       <div>
         <b-row>
-          <b-col sm="12" lg="8" class="mt-3"> <CommunityActivity /> </b-col>
-          <b-col sm="12" lg="4" class="mt-3"> <Tutorial /> </b-col>
-        </b-row>
-      </div>
-      <br />
-
-      <div>
-        <b-row>
-          <b-col sm="12" lg="6" class="mt-3">
+          <b-col sm="12" lg="6" class=" ">
             <b-card class="border shadow card  card-hight">
               <h6 class=" titlle">
                 <fas-icon
@@ -93,7 +113,7 @@
               </div>
             </b-card>
           </b-col>
-          <b-col sm="12" lg="6" class="mt-3">
+          <b-col sm="12" lg="6" class="">
             <b-card class="border shadow  card card-hight">
               <h6 class=" titlle">
                 <fas-icon
@@ -118,94 +138,50 @@ import Navbar from "@/components/navbar";
 import CarousselDashboard from "@/components/dasboard/carousselDashboard";
 import BusinessDashboard from "@/components/dasboard/businessDashboard";
 import ComunitiDashboard from "@/components/dasboard/comunitiDashboard";
+
+import ComunitiBdashboard from "@/components/dasboard/comunitiBdashboard";
+
 import Insights from "@/components/dasboard/insights";
 import CommunityActivity from "@/components/dasboard/communityActivity";
+
+import CommunityBactivity from "@/components/dasboard/communityBactivity";
+
 import Tutorial from "@/components/dasboard/tutorial";
 import Profile from "@/components/dasboard/profile";
+
 import Business from "@/components/dasboard/hotbusiness";
+
 import Map from "@/components/dasboard/map";
 import EmptyBusiness from "@/components/dasboard/emptybusiness";
 import Popularnetwork from "@/components/dasboard/popularnetwork";
 export default {
   name: "dashboard",
+
   data() {
     return {
       slide: 0,
+
       sliding: null,
-      selected: "all",
-      location: "any",
-      category: "any",
-      post: "any",
+       url_data:null,
       selectedb: "owner",
-      educatio: "any",
+
       map: false,
-      boptions: [
-        { value: "owner", text: "Owner's Name" },
-        { value: "a", text: "Business Name 1" },
-        { value: "b", text: "Business Name 2" },
-        { value: "c", text: "Business Name 3" }
-      ],
-      options: [
-        { item: "all", name: "All" },
-        { item: "business", name: "Business" },
-        { item: "people", name: "People" },
-        { item: "network", name: "Network" },
-        { item: "marketplace", name: "Markeplace", notEnabled: false },
-        { item: "posts", name: "Posts" },
-      ],
-      filters: [
-        { item: "any", name: "Location : Any" },
-        { item: "yaounde", name: "Yaounde, Cameroon" },
-        { item: "dhaka ", name: "Dhaka, Bangladesh" },
-        { item: "new york", name: "New York, United States" },
-        { item: "douala", name: "Douala, Cameroon" },
-        { item: "karachi", name: "Karachi, Pakistan" },
-      ],
-      categories: [
-        { item: "any", name: "Category : Any" },
-        { item: "restaurant", name: "Restaurant" },
-        { item: "home service", name: "Home Services" },
-        { item: "auto service", name: "Auto Services" },
-        { item: "argiculture", name: "Agriculture" },
-        { item: "technology", name: "Technology" },
-      ],
-      posts: [
-        { item: "any", name: "Post: Any" },
-        { item: "people", name: "People I am following" },
-        { item: "business", name: "Businesses i am following" },
-        { item: "networks", name: "Networks I am following" },
-      ],
-      education: [
-        { item: "any", name: "Education: Any" },
-        { item: "ub", name: "University Of Buea" },
-        { item: "uba", name: "University Of Yaounde" },
-        { item: "uy", name: "University Of Yaounde 1" },
-      ],
-      profession: [
-        { item: "any", name: "Profession: Any" },
-        { item: "engineer", name: "Engineen" },
-        { item: "teacher", name: "Teacher" },
-        { item: "farmer", name: "Farmer" },
-      ],
-      workplace: [
-        { item: "any", name: "Post: Any" },
-        { item: "yaounde", name: "Yaounde" },
-        { item: "douala", name: "Douala" },
-        { item: "Buea", name: "Buea" },
-      ],
-      sponsoredBusinesses: [
-        { title: "Business 1" },
-        { title: "Business 2" },
-        { title: "Business 3" },
-        { title: "Business 4" },
-      ],
+
+      category: "",
+
+      boptions: [],
+
+      detail: null
     };
   },
+
   components: {
     ComunitiDashboard,
+    ComunitiBdashboard,
     BusinessDashboard,
     Business,
     CommunityActivity,
+    CommunityBactivity,
     Tutorial,
     Insights,
     Popularnetwork,
@@ -213,9 +189,192 @@ export default {
     EmptyBusiness,
     Profile,
     CarousselDashboard,
-    Navbar,
+    Navbar
   },
-  methods: {},
+
+  methods: {
+
+
+    switchBusiness(value){
+
+       console.log("business switch"+value);
+ 
+       if(value != "Owner"){ 
+           let loader = this.$loading.show({
+                   
+                    container: this.fullPage ? null : this.$refs.loader,
+                    canCancel: true,
+                    onCancel: this.onCancel,
+                    color:"#e75c18"
+                });
+
+      console.log(value);
+     this.url_data = value;
+
+     this.$store.commit("dashboard/setdBusinessId", value);
+
+
+      this.$store
+        .dispatch("dashboard/dashboardBusiness", value)
+        .then(() => {
+          console.log("business switch");
+        })
+        .catch((err) => {
+          console.log({ err: err });
+        });
+
+
+    this.CommunityBusiness();
+
+    this.CommunityPeople();
+
+    this.businessCommunityTotal();
+
+    this.dashboardBpost();
+
+
+     loader.hide()
+
+       }
+
+       
+    },
+
+
+
+   dashboardPpost(){
+    
+       this.$store
+        .dispatch("dashboard/dashboardPpost")
+        .then(() => {
+          console.log("hey yeah");
+        })
+        .catch(err => {
+          console.log({ err: err });
+        });
+
+   },
+
+   dashboardBpost(){
+    
+      this.$store
+        .dispatch("dashboard/dashboardBpost", this.url_data)
+        .then(() => {
+          console.log("hey yeah");
+        })
+        .catch(err => {
+          console.log({ err: err });
+        });
+   
+   },
+
+   
+    CommunityBusiness() {
+      this.$store
+        .dispatch("businessOwner/CommunityBusiness", this.url_data)
+        .then(() => {
+          console.log("hey yeah");
+        })
+        .catch(err => {
+          console.log({ err: err });
+        });
+    },
+
+    CommunityPeople() {
+      this.$store
+        .dispatch("businessOwner/CommunityPeople", this.url_data)
+        .then(() => {
+          console.log("hey yeah");
+        })
+        .catch(err => {
+          console.log({ err: err });
+        });
+    },
+
+    businessCommunityTotal() {
+      this.$store
+        .dispatch("businessOwner/businessCommunityTotal", this.url_data)
+        .then(() => {
+          console.log("hey yeah");
+        })
+        .catch(err => {
+          console.log({ err: err });
+        });
+    },
+
+   
+
+
+
+    getbusiness() {
+
+      console.log(
+        JSON.parse(
+          JSON.stringify(
+            this.$store.getters["ProfileAndBusinessDetails/getdetails"]
+          )
+        ).owner
+      );
+
+
+      let owner = JSON.parse(
+        JSON.stringify(
+          this.$store.getters["ProfileAndBusinessDetails/getdetails"]
+        )
+      ).owner;
+
+
+      owner = owner.map(value => {
+        this.boptions.push({ text: value.name, value: "owner" });
+        return value;
+      });
+
+
+      console.log(
+        JSON.parse(
+          JSON.stringify(
+            this.$store.getters["ProfileAndBusinessDetails/getdetails"]
+          )
+        ).business
+      );
+      let businesses = JSON.parse(
+        JSON.stringify(
+          this.$store.getters["ProfileAndBusinessDetails/getdetails"]
+        )
+      ).business;
+      businesses = businesses.map(value => {
+        this.boptions.push({ text: value.name, value: value.id });
+        return value;
+      });
+      return this.boptions;
+    }
+  },
+
+  mounted() {
+      
+       this.$store
+      .dispatch("ProfileAndBusinessDetails/getdetails")
+      .then(response => {
+        this.getbusiness();
+      });
+
+
+      this.dashboardPpost()
+
+  },
+
+  created() {
+   
+  },
+
+  computed: {
+    details() {
+      return this.$store.getters["ProfileAndBusinessDetails/getdetails"];
+    }
+  },
+  watch: {
+    selectedb(newvalue) {}
+  }
 };
 </script>
 
@@ -227,9 +386,17 @@ export default {
   color: #e75c18;
   width: 24px;
 }
+
+.dashboard .card-body {
+    
+    padding-right: 0px !important;
+}
 </style>
 
 <style scoped>
+
+
+
 .card-body {
   padding: 8px;
 }
@@ -241,12 +408,33 @@ export default {
   .titlle {
     font-size: 20px;
   }
+
+  .com-dash{
+
+margin-right: -15px;
+margin-left: -15px;
+}
+
 }
 @media only screen and (max-width: 768px) {
   .titlle {
     font-size: 16px;
   }
+
+  .com-dash{
+
+margin-right: -35px;
+margin-left: -20px;
 }
+
+.centerdiv{
+  padding: 0px;
+}
+}
+
+
+
+
 .card-hight {
   height: 550px;
   overflow-y: auto;

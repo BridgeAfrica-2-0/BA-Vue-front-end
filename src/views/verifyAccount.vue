@@ -62,12 +62,14 @@ export default {
   },
   methods: {
     resendOtp() {
+      console.log(this.$store.state.auth.user.user.phone);
       axios
         .post("user/resendOtp", {
           phone: this.$store.state.auth.user.user.phone
         })
         .then(response => {
           if (response.status === 200) {
+            console.log("response: ",response);
             this.flashMessage.show({
               status: "success",
               title: "Successfully Send",

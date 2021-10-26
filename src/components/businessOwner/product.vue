@@ -12,13 +12,16 @@
         </b-col>
         <b-col cols="7" sm="8" md="7">
           <p class="text">
-            <strong class="title"> Sneakers Blec cc </strong> <br />
+            <strong class="title"> {{ product.name }} </strong> <br />
             <strong> Description </strong> <br />
-            This is just a dummy text dumy dummy things are always dummy and
-            dummy add things are always dummy hjykt
-            <b-link> see more </b-link> <br />
+            {{ product.description.substring(0, 30) }}
+            <b-link v-if="product.description.length >= 30"> see more </b-link>
+            <br />
 
-            <span class="price"> <strong> 12,000 Fcfa </strong> </span> <br />
+            <span class="price">
+              <strong> {{ product.price }} </strong>
+            </span>
+            <br />
           </p>
         </b-col>
       </b-row>
@@ -145,9 +148,11 @@
           ></b-img>
         </b-col>
         <b-col>
-          <h2 class="mb-4 text-center">Product Name</h2>
-          <p><span class="stock">In Stock</span></p>
-          <p>0.00 XAF</p>
+          <h2 class="mb-4 text-center">{{ product.name }}</h2>
+          <p>
+            <span class="stock" v-if="product.in_stock == 1">In Stock</span>
+          </p>
+          <p>{{ product.price }} XAF</p>
           <hr />
           <b-row>
             <b-col>
@@ -162,10 +167,7 @@
           <hr />
           <h5>Product Detail</h5>
           <p>
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Corporis
-            quod, reprehenderit neque atque recusandae laborum quia vel,
-            assumenda repellendus rem ab ex, odio aperiam quidem id deleniti
-            commodi consequatur optio.
+            {{ product.description }}
           </p>
           <hr />
           <b-row>
@@ -392,9 +394,10 @@
 
 <script>
 export default {
+  props: ["product"],
   data() {
     return {
-      viewProduct: false
+      viewProduct: false,
     };
   },
   components: {},
@@ -406,8 +409,8 @@ export default {
      */
     productDetails() {
       this.viewProduct = true;
-    }
-  }
+    },
+  },
 };
 </script>
 

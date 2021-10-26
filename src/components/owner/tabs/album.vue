@@ -1,11 +1,12 @@
 <template>
   <div>
+    <FlashMessage />
     <div class="row">
       <div class="container-fluid" v-if="showalbum == false">
         <div class="one2">
           <div class="createp img-gall image-wrapp">
-            <div class=" ">
-              <a href="#" v-b-modal.createalbumModal>
+            <div class="">
+              <a v-b-modal.createalbumModal>
                 <div class="drag-textt">
                   <fas-icon :icon="['fas', 'plus']" />
                   <h3>Create Album</h3>
@@ -15,24 +16,39 @@
           </div>
 
           <b-modal hide-footer title="Create album" id="createalbumModal">
-            <b-form>
-              <b-form-input placeholder="Album name"></b-form-input>
-              <b-button class="mt-2" variant="primary"> Create</b-button>
-            </b-form>
+            <div ref="creatform">
+              <b-form>
+                <b-form-input
+                  placeholder="Album name"
+                  v-model="albumInfo.name"
+                ></b-form-input>
+                <b-form-input
+                  placeholder="Album Type"
+                  class="mt-2"
+                  v-model="albumInfo.type"
+                ></b-form-input>
+                <b-button class="mt-2" variant="primary" @click="createAlbums">
+                  Create</b-button
+                >
+              </b-form>
+            </div>
           </b-modal>
 
-          <div class="createp img-gall predit2" @click="showlbum">
-            <a href="#!">
-              <img
-                class="card-img"
-                src="@/assets/img/wankue-filler.jpg"
-                alt=""
-              />
-              <div class="createdesc botmedia">
-                <div class="botmediades">
-                  <h6>Profile Picture</h6>
-                  <p>36 Items</p>
-                </div>
+          <div
+            class="createp img-gall predit2"
+            v-for="album in getAlbums"
+            :key="album.id"
+          >
+            <a>
+              <span @click="showlbum(album.id, album.name)">
+                <img class="card-img album-img" :src="album.cover" alt="" />
+              </span>
+
+              <div class="botmediadess">
+                <p>
+                  {{ album.name }} <br />
+                  {{ album.items }} Items
+                </p>
               </div>
             </a>
 
@@ -41,191 +57,52 @@
                 <li class="nav-item dropdown">
                   <b-dropdown
                     size="sm"
-                    class="float-right"
+                    class=" call-action"
                     variant="link"
                     toggle-class="text-decoration-none"
                     no-caret
                   >
                     <template #button-content>
-                      <fas-icon
-                        class="drop-color font-weight-bolder"
-                        :icon="['fas', 'ellipsis-v']"
-                      />
+                      <b-icon
+                        icon="three-dots-vertical"
+                        color="white"
+                        variant="light"
+                      >
+                      </b-icon>
                     </template>
 
-                    <b-dropdown-item href="#">Edit</b-dropdown-item>
+                    <b-dropdown-item @click="editAlbum(album.id)"
+                      >Edit</b-dropdown-item
+                    >
 
-                    <b-dropdown-item href="#">Delete</b-dropdown-item>
-                  </b-dropdown>
-                </li>
-              </ul>
-            </div>
-          </div>
-
-          <div class="createp img-gall predit2" @click="showlbum">
-            <a href="#!">
-              <img
-                class="card-img"
-                src="@/assets/img/wankue-filler.jpg"
-                alt=""
-              />
-              <div class="createdesc botmedia">
-                <div class="botmediades">
-                  <h6>Cover Photos</h6>
-                  <p>36 Items</p>
-                </div>
-              </div>
-            </a>
-
-            <div class="mediadesc">
-              <ul class="navbar-nav pull-right">
-                <li class="nav-item dropdown">
-                  <b-dropdown
-                    size="sm"
-                    class="float-right"
-                    variant="link"
-                    toggle-class="text-decoration-none"
-                    no-caret
-                  >
-                    <template #button-content>
-                      <fas-icon
-                        class="drop-color font-weight-bolder"
-                        :icon="['fas', 'ellipsis-v']"
-                      />
-                    </template>
-
-                    <b-dropdown-item href="#">Edit</b-dropdown-item>
-
-                    <b-dropdown-item href="#">Delete</b-dropdown-item>
-                  </b-dropdown>
-                </li>
-              </ul>
-            </div>
-          </div>
-
-          <div class="createp img-gall predit2">
-            <a href="#!">
-              <img
-                class="card-img"
-                src="@/assets/img/wankue-filler.jpg"
-                alt=""
-              />
-              <div class="createdesc botmedia">
-                <div class="botmediades">
-                  <h6>Custom Album 1</h6>
-                  <p>13 Items</p>
-                </div>
-              </div>
-            </a>
-
-            <div class="mediadesc">
-              <ul class="navbar-nav pull-right">
-                <li class="nav-item dropdown">
-                  <b-dropdown
-                    size="sm"
-                    class="float-right"
-                    variant="link"
-                    toggle-class="text-decoration-none"
-                    no-caret
-                  >
-                    <template #button-content>
-                      <fas-icon
-                        class="drop-color font-weight-bolder"
-                        :icon="['fas', 'ellipsis-v']"
-                      />
-                    </template>
-
-                    <b-dropdown-item href="#">Edit</b-dropdown-item>
-
-                    <b-dropdown-item href="#">Delete</b-dropdown-item>
-                  </b-dropdown>
-                </li>
-              </ul>
-            </div>
-          </div>
-
-          <div class="createp img-gall predit2" @click="showlbum">
-            <a href="#!">
-              <img
-                class="card-img"
-                src="@/assets/img/wankue-filler.jpg"
-                alt=""
-              />
-              <div class="createdesc botmedia">
-                <div class="botmediades">
-                  <h6>Custom Album 2</h6>
-                  <p>23 Items</p>
-                </div>
-              </div>
-            </a>
-
-            <div class="mediadesc">
-              <ul class="navbar-nav pull-right">
-                <li class="nav-item dropdown">
-                  <b-dropdown
-                    size="sm"
-                    class="float-right"
-                    variant="link"
-                    toggle-class="text-decoration-none"
-                    no-caret
-                  >
-                    <template #button-content>
-                      <fas-icon
-                        class="drop-color font-weight-bolder"
-                        :icon="['fas', 'ellipsis-v']"
-                      />
-                    </template>
-
-                    <b-dropdown-item href="#">Edit</b-dropdown-item>
-
-                    <b-dropdown-item href="#">Delete</b-dropdown-item>
-                  </b-dropdown>
-                </li>
-              </ul>
-            </div>
-          </div>
-
-          <div class="createp img-gall predit2" @click="showlbum">
-            <a href="#!">
-              <img
-                class="card-img"
-                src="@/assets/img/wankue-filler.jpg"
-                alt=""
-              />
-              <div class="createdesc botmedia">
-                <div class="botmediades">
-                  <h6>Custom Album 3</h6>
-                  <p>33 Items</p>
-                </div>
-              </div>
-            </a>
-
-            <div class="mediadesc">
-              <ul class="navbar-nav pull-right">
-                <li class="nav-item dropdown">
-                  <b-dropdown
-                    size="sm"
-                    class="float-right"
-                    variant="link"
-                    toggle-class="text-decoration-none"
-                    no-caret
-                  >
-                    <template #button-content>
-                      <fas-icon
-                        class="drop-color font-weight-bolder"
-                        :icon="['fas', 'ellipsis-v']"
-                      />
-                    </template>
-
-                    <b-dropdown-item href="#">Edit</b-dropdown-item>
-
-                    <b-dropdown-item href="#">Delete</b-dropdown-item>
+                    <b-dropdown-item @click="deleteAlbums(album.id)"
+                      >Delete</b-dropdown-item
+                    >
                   </b-dropdown>
                 </li>
               </ul>
             </div>
           </div>
         </div>
+
+        <b-modal
+          hide-footer
+          title="Create album"
+          ref="editalbum"
+          id="editalbum"
+        >
+          <div ref="creatform">
+            <b-form>
+              <b-form-input
+                placeholder="Album name"
+                v-model="editName"
+              ></b-form-input>
+              <b-button class="mt-2" variant="primary" @click="update">
+                Update</b-button
+              >
+            </b-form>
+          </div>
+        </b-modal>
 
         <div class="two2 d-none">
           <div class="row">
@@ -262,9 +139,7 @@
                     </ul>
                   </div>
                   <div class="input-group col-md-12 text-center mb-4 selec">
-                    <label
-                      class="col-md-4 control-label pr-0 text-design"
-                      for="name"
+                    <label class="col-md-4 control-label pr-0 text-design"
                       >14 Items -
                     </label>
                     <div class="col-md-5 pl-0 pr-0">
@@ -288,71 +163,168 @@
       <b-button variant="outline-primary" size="sm" @click="hidealbum">
         Back
       </b-button>
-      <span class="text-center ml-2"> Album Name </span>
+      <span class="text-center ml-2 f-20"> {{ this.album_name }} </span>
 
-      <Images />
+      <Images v-bind:album="album_id" />
     </div>
   </div>
 </template>
 
 <script>
 import Images from "./images";
-
+import { mapActions, mapGetters } from "vuex";
 export default {
   components: { Images },
-  methods: {
-    hidealbum() {
-      this.showalbum = false;
-    },
-
-    showlbum() {
-      this.showalbum = true;
-    },
-
-    onClick(i) {
-      this.index = i;
-    }
-  },
   data: function() {
     return {
       showalbum: false,
+      albumInfo: {
+        name: "",
+        type: "",
+      },
 
-      images: [
-        "https://placekitten.com/801/800",
-        "https://placekitten.com/802/800",
-        "https://placekitten.com/803/800",
-        "https://placekitten.com/804/800",
-        "https://placekitten.com/805/800",
-        "https://placekitten.com/806/800",
-        "https://placekitten.com/807/800",
-        "https://placekitten.com/808/800",
-        "https://placekitten.com/809/800"
-      ],
-      imagees: [
-        "https://i.wifegeek.com/200426/f9459c52.jpg",
-        "https://i.wifegeek.com/200426/5ce1e1c7.jpg",
-        "https://i.wifegeek.com/200426/5fa51df3.jpg",
-        "https://i.wifegeek.com/200426/663181fe.jpg",
-        "https://i.wifegeek.com/200426/2d110780.jpg",
-        "https://i.wifegeek.com/200426/e73cd3fa.jpg",
-        "https://i.wifegeek.com/200426/15160d6e.jpg",
-        "https://i.wifegeek.com/200426/d0c881ae.jpg",
-        "https://i.wifegeek.com/200426/a154fc3d.jpg",
-        "https://i.wifegeek.com/200426/71d3aa60.jpg",
-        "https://i.wifegeek.com/200426/d17ce9a0.jpg",
-        "https://i.wifegeek.com/200426/7c4deca9.jpg",
-        "https://i.wifegeek.com/200426/64672676.jpg",
-        "https://i.wifegeek.com/200426/de6ab9c6.jpg",
-        "https://i.wifegeek.com/200426/d8bcb6a7.jpg",
-        "https://i.wifegeek.com/200426/4085d03b.jpg",
-        "https://i.wifegeek.com/200426/177ef44c.jpg",
-        "https://i.wifegeek.com/200426/d74d9040.jpg",
-        "https://i.wifegeek.com/200426/81e24a47.jpg",
-        "https://i.wifegeek.com/200426/43e2e8bb.jpg"
-      ],
-      index: 0
+      editName: "",
+      editId: "",
+
+      url: "",
+      fullPage: "",
+      album_id: "",
+      album_name: "",
+      album_type: "",
+      edit_name: "",
     };
-  }
+  },
+  mounted() {
+    this.url = this.$route.params.id;
+  },
+
+  computed: {
+    ...mapGetters({
+      getAlbums: "UserProfileOwner/getAlbums",
+      getAlbumImage: "UserProfileOwner/getAlbumImage",
+    }),
+  },
+  beforeMount() {
+    this.getAlbums;
+    this.getAlbumImages;
+  },
+  methods: {
+    ...mapActions({
+      createAlbum: "UserProfileOwner/createAlbum",
+      updateAlbum: "UserProfileOwner/updateAlbum",
+      deleteAlbum: "UserProfileOwner/deleteAlbum",
+      getAlbumImages: "UserProfileOwner/getAlbumImages",
+    }),
+
+    hidealbum() {
+      this.showalbum = false;
+    },
+    showlbum(id, name) {
+      this.album_name = name;
+      this.album_id = id;
+      this.getAlbumImages(id)
+        .then(() => {
+          console.log("hey yeah photo loaded");
+          this.showalbum = true;
+        })
+        .catch((err) => {
+          console.log({ err: err });
+        });
+    },
+
+    createAlbums() {
+      this.createAlbum(this.albumInfo)
+        .then(() => {
+          this.flashMessage.show({
+            status: "success",
+            message: "Album Created",
+          });
+          this.getAlbums();
+        })
+        .catch((err) => {
+          this.sending = false;
+          if (err.response.status == 422) {
+            console.log({ err: err });
+            this.flashMessage.show({
+              status: "error",
+              message: err.response.data.message,
+            });
+          } else {
+            this.flashMessage.show({
+              status: "error",
+              message: "Unable to create your Album",
+            });
+            console.log({ err: err });
+          }
+        });
+    },
+
+    editAlbum(id) {
+      this.editId = id;
+      console.log(this.editId);
+      this.$refs["editalbum"].show();
+    },
+
+    update() {
+      this.updateAlbums(this.editId, this.editName);
+    },
+
+    updateAlbums(id, name) {
+      let user = {
+        id: id,
+        name: name,
+      };
+      this.updateAlbum(user)
+        .then(() => {
+          this.flashMessage.show({
+            status: "success",
+            message: "Album Updated",
+          });
+        })
+        .catch((err) => {
+          this.sending = false;
+          if (err.response.status == 422) {
+            console.log({ err: err });
+            this.flashMessage.show({
+              status: "error",
+              message: err.response.data.message,
+            });
+          } else {
+            this.flashMessage.show({
+              status: "error",
+              message: "Unable to create your Album",
+            });
+            console.log({ err: err });
+          }
+        });
+    },
+
+    deleteAlbums(id) {
+      this.deleteAlbum(id)
+        .then(() => {
+          this.flashMessage.show({
+            status: "success",
+            message: "Album Deleted",
+          });
+        })
+        .catch((err) => {
+          this.sending = false;
+          if (err.response.status == 422) {
+            console.log({ err: err });
+            this.flashMessage.show({
+              status: "error",
+              message: err.response.data.message,
+            });
+          } else {
+            this.flashMessage.show({
+              status: "error",
+              message: "Unable to Delete your abum",
+            });
+            console.log({ err: err });
+          }
+        });
+    },
+  },
 };
 </script>
 

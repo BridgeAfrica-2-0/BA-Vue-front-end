@@ -274,6 +274,51 @@
               <b-form-checkbox id="" class="a-text text" name="Aaddress" v-model="Aaddress" value="address A/V">
                 This Business has an address</b-form-checkbox
               >
+                <b-form-input id="bname" placeholder="" required></b-form-input>
+              </b-form-group>
+            </b-container>
+          </div>
+
+          <div class="b-bottom">
+            <b-container>
+              <b-form-group
+                label-cols-lg="3"
+                label="Neighbourhood"
+                label-size="md"
+                label-class="font-weight-bold pt-0 username"
+                class="mb-0"
+              >
+                <b-form-input id="bname" placeholder="" required></b-form-input>
+              </b-form-group>
+            </b-container>
+          </div>
+
+          <div class="b-bottom">
+            <b-container>
+              <b-form-group
+                label-cols-lg="3"
+                label="Three Location Description"
+                label-size="md"
+                label-class="font-weight-bold pt-0 username"
+                class="mb-0"
+              >
+                <b-form-input id="bname" placeholder="" required></b-form-input>
+              </b-form-group>
+            </b-container>
+          </div>
+
+          <div class="b-bottom">
+            <b-container>
+              <b-form-group
+                label-cols-lg="3"
+                label="Address"
+                label-size="md"
+                label-class="font-weight-bold pt-0 username"
+                class="mb-0"
+              >
+                <b-form-checkbox id="" class="a-text text" name="" value="">
+                  This Business has an address</b-form-checkbox
+                >
 
               <b-container v-if="Aaddress">
                 <b-row class="text">
@@ -339,7 +384,6 @@
                     <b-col><b-form-input name="" type="time" v-model="businessForm.openHours.mondayStart"></b-form-input></b-col>-
                     -<b-col><b-form-input name="" type="time" v-model="businessForm.openHours.mondayEnd"></b-form-input></b-col>
                   </b-row>
-                  <br />
 
                   <b-row>
                     <b-col cols="3"
@@ -437,34 +481,67 @@
                   <br />
                 </b-container>
               </b-form-group>
-            </b-form-group>
-          </b-container>
-        </div>
+            </b-container>
+          </div>
 
-        <div class="b-bottom">
-          <b-container>
-            <b-form-group
-              label-cols-lg="3"
-              label="Post Approval"
-              label-size="md"
-              label-class="font-weight-bold pt-0 username"
-              class="mb-0 text"
-            >
-              <b-form-checkbox
-                id="checkbox-1"
-                v-model="status"
-                name="checkbox-1"
-                value="accepted"
-                unchecked-value="not_accepted"
-                class="text"
+          <div class="b-bottom">
+            <b-container>
+              <b-form-group
+                label-cols-lg="3"
+                label="Post Approval"
+                label-size="md"
+                label-class="font-weight-bold pt-0 username"
+                class="mb-0 text"
               >
-                All business posts must be approved by an admin
-              </b-form-checkbox>
-            </b-form-group>
-          </b-container>
-        </div>
+                <b-form-checkbox
+                  id="checkbox-1"
+                  v-model="status"
+                  name="checkbox-1"
+                  value="accepted"
+                  unchecked-value="not_accepted"
+                  class="text"
+                >
+                  All business posts must be approved by an admin
+                </b-form-checkbox>
+              </b-form-group>
+            </b-container>
+          </div>
 
-        <div class="b-bottom">
+          <div class="b-bottom">
+            <b-container>
+              <b-form-group
+                label-cols-lg="3"
+                label="Keyword Alerts"
+                label-size="md"
+                label-class="font-weight-bold pt-0 username"
+                class="mb-0"
+              >
+                <b-form-textarea
+                  id="textarea"
+               
+                  placeholder="Enter something..."
+                  rows="3"
+                  max-rows="6"
+                ></b-form-textarea>
+              </b-form-group>
+            </b-container>
+          </div>
+
+          <div class="b-bottom">
+            <b-container>
+              <b-form-group
+                label-cols-lg="3"
+                label="Marketplace"
+                label-size="md"
+                label-class="font-weight-bold pt-0 username"
+                class="mb-0"
+              >
+                <b-form-checkbox v-model="checked" name="check-button" switch>
+                </b-form-checkbox>
+              </b-form-group>
+            </b-container>
+          </div>
+
           <b-container>
             <b-form-group
               label-cols-lg="3"
@@ -479,16 +556,12 @@
               ></b-form-tags>
             </b-form-group>
           </b-container>
-        </div>
 
-        <div class="b-bottom">
-          <b-container>
-            <b-form-group
-              label-cols-lg="3"
-              label="Marketplace"
-              label-size="md"
-              label-class="font-weight-bold pt-0 username"
-              class="mb-0"
+
+
+            <div class="b-bottomm">
+            <b-button variant="primary" class="a-button-l"
+              >Save Changes</b-button
             >
               <b-form-checkbox 
                 v-model="businessForm.Marketplace"
@@ -516,8 +589,6 @@
       </b-form>
     </b-container>
 
-    <Footer />
-  </b-container>
 </template>
 
 <script>
@@ -706,7 +777,8 @@ export default {
 </script>
 
 <style scoped>
-.bv-example-row {
+
+.bv-example-row{
   font-size: 12px;
 }
 .b-bottom {

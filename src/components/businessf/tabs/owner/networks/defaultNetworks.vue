@@ -28,12 +28,13 @@
           <h6 class="h6">Members</h6>
         </template>
 
-        <Members> </Members>
+        <Members>  </Members>
       </b-tab>
+
 
       <b-tab>
         <template slot="title">
-          <h6 class="h6">Feedback</h6>
+          <h6 class="h6" >Feedback</h6>
         </template>
         <feedback-network></feedback-network>
       </b-tab>
@@ -62,22 +63,32 @@ export default {
 };
 </script>
 
-<style>
+<style >
 .t-color {
   color: black;
 }
 
-.t-left {
+.t-left{
+
   text-align: left;
 }
 
 .bongo .yolo .nav {
+   
+   
+ 
   border-style: hidden;
+  
 }
 
+
 @media (max-width: 768px) {
-  .h6 {
-    font-size: 12px !important;
-  }
+
+.h6{
+  font-size: 12px !important;
 }
+}
+
+
 </style>
+

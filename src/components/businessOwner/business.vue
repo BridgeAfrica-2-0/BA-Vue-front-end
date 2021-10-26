@@ -2,15 +2,15 @@
   <div>
     <head-page-owner></head-page-owner>
     <div class="row">
-      <div class="text-justify mt-2 container-fluid">
-        <b-row class="center-content">
+      <div  class="text-justify mt-2 container-fluid" >
+        <b-row class="center-content" >
           <b-col cols="12">
-            <b-tabs content-class="mt-3 mobile-tab" fill pills>
+            <b-tabs lazy content-class="mt-3 mobile-tab" fill pills >
               <b-tab title="Home"><HomePage /></b-tab>
               <b-tab title="About"><About /></b-tab>
               <b-tab title="Media"><Media /></b-tab>
               <b-tab title="Market"><MarketPlace /></b-tab>
-              <b-tab title="Networks"><Networks /></b-tab>
+            <!--  <b-tab title="Networks"><Networks /></b-tab> -->   
               <b-tab title="Community"><Followers /></b-tab>
             </b-tabs>
           </b-col>
@@ -21,12 +21,12 @@
 </template>
 
 <script>
-import HomePage from "../businessOwner/tabs/businessHome";
+import HomePage from "../businessOwner/tabs/businessHome";   
 import About from "./tabs/about";
 import Media from "./tabs/media";
 import MarketPlace from "./tabs/marketPlace";
 import Followers from "./tabs/memberNetwork";
-import Networks from "./tabs/networks";
+//import Networks from "./tabs/networks";
 import HeadPageOwner from "@/components/businessOwner/headPageOwner";
 
 export default {
@@ -38,7 +38,7 @@ export default {
     Media,
     MarketPlace,
     Followers,
-    Networks
+  //  Networks
   },
   data() {
     return {};
@@ -48,20 +48,37 @@ export default {
 };
 </script>
 <style>
+
+
+
+
 @media only screen and (max-width: 768px) {
-  .mobile-tab .nav-fill > .nav-link,
-  .nav-fill .nav-item {
+   
+
+  .mobile-tab .nav-fill > .nav-link, .nav-fill .nav-item {
     flex: 1 1 auto;
     text-align: center;
     width: 20px;
-  }
 }
+
+
+}
+
+
+
+
 </style>
 
+
+
 <style scoped>
-alig {
-  padding-left: 70px;
-  padding-right: 70px;
+
+
+
+alig{
+
+  padding-left:70px;
+   padding-right:70px
 }
 .images {
   display: flex;
@@ -95,11 +112,22 @@ img {
   }
 }
 
+
+
 @media only screen and (min-width: 768px) {
+ 
   .center-content {
     padding-right: 63px;
 
     padding-left: 63px;
+
   }
+
 }
+
+
+
+
+
+
 </style>

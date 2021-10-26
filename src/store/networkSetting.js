@@ -238,15 +238,15 @@ export default {
     },
 
     //approve member request
-    async approveUser({ commit }, id) {
-      const res = await axios.post("", id);
+    async approveUser({ commit }, payload) {
+      const res = await axios.patch(`network/${payload.networkId}/members/${payload.id}/approve`, payload);
 
       commit("setApprove", res.data);
     },
 
     //decline member request
-    async declineUser({ commit }, id) {
-      const res = await axios.post("", id);
+    async declineUser({ commit }, payload) {
+      const res = await axios.post(`network/${payload.networkId}/members/${payload.id}/unapprove`, payload);
 
       commit("setDecline", res.data);
     },

@@ -118,7 +118,6 @@ export default {
 
     approved(id) {
       this.load = true;
-      
       this.approvedAlerts(id)
         .then(() => {
           this.load = false;
@@ -131,7 +130,6 @@ export default {
 
     unapproved(id) {
      this.load = true;
-      
       this.unapprovedAlerts(id)
         .then(() => {
           this.load = false;

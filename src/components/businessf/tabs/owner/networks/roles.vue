@@ -140,8 +140,10 @@
                   <template #button-content>
                     <b-icon icon="three-dots-vertical" font-scale="1"></b-icon>
                   </template>
-                  <b-dropdown-item @click="editEditor">Edit</b-dropdown-item>
-                  <b-dropdown-item @click="deleteEditor">
+                  <b-dropdown-item @click="editEditors(editor.id)"
+                    >Edit</b-dropdown-item
+                  >
+                  <b-dropdown-item @click="deleteEditors(editor.id)">
                     Delete
                   </b-dropdown-item>
                 </b-dropdown>
@@ -166,6 +168,7 @@ export default {
       role: "",
     },
     networkId: "",
+    load: "",
   }),
   async beforeMount() {
     this.getRoles();
@@ -204,6 +207,30 @@ export default {
         role_id: role_id,
       };
       this.assignRole(payload);
+    },
+
+    editEditors(id) {
+      this.load = true;
+      this.editEditor(id)
+        .then(() => {
+          this.load = false;
+        })
+        .catch((err) => {
+          this.load = false;
+          console.log(err);
+        });
+    },
+
+    deleteEditors(id) {
+      this.load = true;
+      this.deleteEditor(id)
+        .then(() => {
+          this.load = false;
+        })
+        .catch((err) => {
+          this.load = false;
+          console.log(err);
+        });
     },
   },
 };

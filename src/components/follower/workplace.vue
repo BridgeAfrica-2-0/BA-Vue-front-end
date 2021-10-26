@@ -7,7 +7,6 @@
       <b-list-group-item
         class="d-flex align-items-center mb-4 item border-none"
       >
-        <!--  <b-avatar class="mr-3 avatar"></b-avatar> -->
 
         <div class="media-body">
           <h6 class="mb-0">

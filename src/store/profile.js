@@ -797,12 +797,7 @@ export default {
       return response_;
     },
     async updateUserBasicInfosBirthDate(context, payload) {
-     
-      let date = payload.dateOfBirth.year +"-"+payload.dateOfBirth.month +"-" +payload.dateOfBirth.day ;
-      console.log("converting the date in to momonet ");
-      console.log(date);
-     
-
+      let date = payload.dateOfBirth.date ;
       let response_ = null;
       await axios(
 

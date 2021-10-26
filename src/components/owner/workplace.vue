@@ -251,7 +251,6 @@ export default {
        this.editData = value;
        this.editData['startDate'] = value.start_day+'-'+value.start_month+'-'+value.start_year;
        if(value.currently_working){
-         console.log('trueeeeeeee')
          this.editData['endDate'] = value.end_day+'-'+value.end_month+'-'+value.end_year;
        } else{
          console.log('falseeeeeeee')

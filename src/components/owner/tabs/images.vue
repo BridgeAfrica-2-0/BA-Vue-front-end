@@ -1,8 +1,11 @@
 <template>
-  <div class="row">
+  <div v-if="hasLoadPicture">
+    <b-spinner class="custom-loader" label="Large Spinner"></b-spinner>
+  </div>
+  <div class="row" v-else>
     <div class="container-fluid">
       <div v-for="(image, cmp) in allImages" :key="cmp">
-        <!-- {{post.id}} -->
+        
         <div class="img-gall" v-for="(im, index) in image.media" :key="index">
           <a v-if="typeOfMedia(im.path) == 'image'"
             ><b-img
@@ -47,8 +50,11 @@
                     >
                     </b-icon>
                   </template>
-                  <b-dropdown-item href="#" @click="downloadPic(im)"
-                    >Download</b-dropdown-item
+                  <b-dropdown-item
+                    :href="getFullMediaLink(im.path)"
+                    download
+                  >
+                    Download</b-dropdown-item
                   >
                   <b-dropdown-item
                     href="#"
@@ -80,8 +86,6 @@
       ></vue-easy-lightbox>
 
       <FlashMessage />
-      <!-- {{images}} -->
-      <!-- {{images[0].type}} -->
     </div>
   </div>
 </template>
@@ -103,6 +107,13 @@ export default {
     albumName: {
       type: String,
       required: true,
+    },
+
+    hasLoadPicture: {
+      type: Boolean,
+      default: function () {
+        return false;
+      },
     },
     images: {
       type: Array,
@@ -214,6 +225,8 @@ export default {
     },
 
     downloadPic(media) {
+      //download(this.getFileExtension(media.path), `${v4()}.${this.getFileExtension(media.path)}`, media.type);
+      /*
       this.onDownloadPic(media.id)
         .then((response) => {
           var fileURL = window.URL.createObjectURL(new Blob([response.data]));
@@ -238,7 +251,7 @@ export default {
             status: "error",
             message: "Unable to download ",
           });
-        });
+        }); */
     },
 
     deleteImages(id, key) {
@@ -363,6 +376,16 @@ export default {
 };
 </script>
 
+<style scoped>
+.custom-loader {
+  width: 4rem !important;
+  height: 4rem !important;
+  color: rgb(231, 92, 24);
+  align-self: center !important;
+  margin: auto;
+  display: block !important;
+}
+</style>
 <style>
 .options {
   background: #e75c18;

@@ -15,6 +15,7 @@
 
         <Images
           :canUpload="canUpload"
+          :hasLoadPicture="!hasLoadPicture"
           :images="all(getPictures)"
           :albumName="'notFound'"
           :showAlbum="showAlbum"

@@ -55,8 +55,12 @@
               </span>
               <div class="createdesc botmedia">
                 <div class="botmediadess-position">
-                  <h6>{{ album.name }}</h6>
-                  <p>{{ album.items | plural }}</p>
+                  <h6 style="font-size: 26px; font-weight: bold">
+                    {{ album.name }}
+                  </h6>
+                  <p style="font-size: 24px; font-weight: bold">
+                    {{ album.items | plural }}
+                  </p>
                 </div>
               </div>
             </a>
@@ -175,6 +179,7 @@
       <span class="text-center ml-2 f-20"> {{ this.album_name }} </span>
 
       <Images
+        :hasLoadPicture="hasLoadPicture"
         :album="album_id"
         :albumName="album_name"
         :showAlbum="canViewAlbum"
@@ -207,6 +212,7 @@ export default {
   },
   data: function () {
     return {
+      hasLoadPicture: true,
       canViewAlbum: true,
       showalbum: false,
       albumInfo: {
@@ -231,7 +237,7 @@ export default {
   filters: {
     path: fullMediaLink,
     plural: function (val) {
-      return val ? "Items" : "Item";
+      return val ? `${val} items` : "No item";
     },
   },
 
@@ -279,12 +285,13 @@ export default {
     showlbum(id, name) {
       this.getAlbumImages(id)
         .then(() => {
-          this.album_name = name;
           this.album_id = id;
+          this.album_name = name;
           this.showalbum = true;
+          this.hasLoadPicture = false;
         })
-        .catch((err) => {
-          console.log({ err: err });
+        .catch(() => {
+          this.hasLoadPicture = false;
         });
     },
 
@@ -337,7 +344,6 @@ export default {
         id: id,
         name: name,
       };
-      console.log(user);
       this.loading = true;
 
       this.updateAlbum(user)

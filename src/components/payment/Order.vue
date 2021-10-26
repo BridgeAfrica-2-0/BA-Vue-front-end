@@ -40,9 +40,50 @@
 		computed: {
 			cartLenght() {
 				return this.$store.state.checkout.cart.data.length;
+				// return this.cart.data.length;
 			},
 			cart() {
 				return this.$store.state.checkout.cart;
+				// return {
+				// 	data: [
+				// 		{
+				// 			product_name: "Headset1",
+				// 			quantity: 3,
+				// 			product_price: 2000,
+				// 		},
+				// 		{
+				// 			product_name: "Headset2",
+				// 			quantity: 3,
+				// 			product_price: 2000,
+				// 		},
+				// 		{
+				// 			product_name: "Headset3",
+				// 			quantity: 3,
+				// 			product_price: 2000,
+				// 		},
+				// 		{
+				// 			product_name: "Headset4",
+				// 			quantity: 3,
+				// 			product_price: 2000,
+				// 		},
+				// 		{
+				// 			product_name: "Headset5",
+				// 			quantity: 3,
+				// 			product_price: 2000,
+				// 		},
+				// 		{
+				// 			product_name: "Headset6",
+				// 			quantity: 3,
+				// 			product_price: 2000,
+				// 		},
+				// 		{
+				// 			product_name: "Headset6",
+				// 			quantity: 3,
+				// 			product_price: 2000,
+				// 		},
+				// 	],
+				// 	shipping_amount: 1000,
+				// };
 			},
 			allShipping() {
 				return this.$store.state.checkout.allShipping;
@@ -60,6 +101,7 @@
 				let order_items = this.cart.data;
 				const productlength = this.cartLenght;
 
+				this.$store.dispatch("checkout/getBussiness", 1);
 				//init variable
 				order_data.total_amount = 0;
 				order_data.tax_amount = 200;

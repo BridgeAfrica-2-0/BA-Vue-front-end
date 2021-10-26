@@ -211,14 +211,24 @@
 						.then(() => {
 							this.loading = false;
 							this.errorAppend = false;
-							this.$emit("switchstep", 2);
+							if (this.modal) {
+								this.$emit("closecshippingm");
+							} else {
+								this.$emit("switchstep", 2);
+							}
 						})
 						.catch(() => {
 							this.loading = false;
 							this.errorAppend = true;
+							if (this.modal) {
+								this.$emit("closecshippingm");
+							}
 						});
 				} else {
-					console("update shipping");
+					console.log("update shipping");
+					if (this.modal) {
+						this.$emit("closecshippingm");
+					}
 				}
 			},
 			onReset(event) {

@@ -50,7 +50,7 @@
 								Shipping:
 							</b-td>
 							<b-th>
-								<!-- {{ formatMoney(Number(cart.shipping_amount)) }}  -->
+								<!-- {{ formatMoney(Number(cart.shipping_amount)) }} -->
 								{{ formatMoney(Number(1000)) }}
 							</b-th>
 						</b-tr>
@@ -110,15 +110,17 @@
 		components: {
 			ProductCaroussel,
 		},
-		async mounted() {
+		async created() {
 			this.loading = true;
 			await this.$store
 				.dispatch("checkout/getCart")
 				.then(() => {
 					this.loading = false;
 					this.error = false;
-					this.orderForCurrentPage = this.cart.data;
-					// console.log(this.cart);
+					this.orderForCurrentPage = this.makeOrderforCurrentPage(
+						this.cart,
+						this.currentPage
+					);
 				})
 				.catch(() => {
 					this.loading = false;
@@ -136,6 +138,12 @@
 			},
 			formatMoney(money) {
 				return this.formatObject.format(money);
+			},
+			makeOrderforCurrentPage(cart, currentPage) {
+				return cart["data"].slice(
+					(currentPage - 1) * this.per_page,
+					currentPage * this.per_page
+				);
 			},
 		},
 		data() {
@@ -177,6 +185,46 @@
 			},
 			cart() {
 				return this.$store.state.checkout.cart;
+				// return {
+				// 	data: [
+				// 		{
+				// 			product_name: "Headset1",
+				// 			quantity: 3,
+				// 			product_price: 2000,
+				// 		},
+				// 		{
+				// 			product_name: "Headset2",
+				// 			quantity: 3,
+				// 			product_price: 2000,
+				// 		},
+				// 		{
+				// 			product_name: "Headset3",
+				// 			quantity: 3,
+				// 			product_price: 2000,
+				// 		},
+				// 		{
+				// 			product_name: "Headset4",
+				// 			quantity: 3,
+				// 			product_price: 2000,
+				// 		},
+				// 		{
+				// 			product_name: "Headset5",
+				// 			quantity: 3,
+				// 			product_price: 2000,
+				// 		},
+				// 		{
+				// 			product_name: "Headset6",
+				// 			quantity: 3,
+				// 			product_price: 2000,
+				// 		},
+				// 		{
+				// 			product_name: "Headset6",
+				// 			quantity: 3,
+				// 			product_price: 2000,
+				// 		},
+				// 	],
+				// 	shipping_amount: 1000,
+				// };
 			},
 		},
 		watch: {

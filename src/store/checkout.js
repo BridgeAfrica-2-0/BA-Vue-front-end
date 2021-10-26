@@ -9,7 +9,9 @@ const state = {
   order: {
 
   },
-  cart: []
+  cart: [],
+  buisinessOrdered: []
+
 }
 const getters = {
   getAllShipping: (state) => state.allShipping
@@ -48,7 +50,7 @@ const actions = {
     await axios.post('cart/create', newOrder).then((response) => {
       commit('setOrder', newOrder)
       console.log(response.data);
-    }).catch((error)=>{
+    }).catch((error) => {
       console.log(error)
     })
   },
@@ -59,6 +61,15 @@ const actions = {
     }).catch((error) => {
       console.log(error)
     })
+  },
+  async getBussiness({ commit }, id) {
+    await axios.get(`profile/businessInfo/${id}`).then((response) => {
+      commit("setBuisiness", response.data)
+      console.log(response.data);
+    })
+    .catch((error)=>{
+      console.log(error)
+    })
   }
 }
 const mutations = {
@@ -67,12 +78,13 @@ const mutations = {
   deleteShippingAdd: (state, idShipping) => state.allShipping = state.allShipping.filter(el => el.id !== idShipping),
   setOrder: (state, newOrder) => state.order = newOrder,
   setCart: (state, newCart) => {
-     newCart.data.map((el) => {
+    newCart.data.map((el) => {
       el.quantity = 1;
     });
     state.cart = newCart
-    
-  }
+
+  },
+  setBuisiness: (state, newBuis) => { state.buisinessOrdered = newBuis }
 }
 export default {
   namespaced: true,

@@ -10,7 +10,7 @@
 			<span class="">Delete</span>
 		</b-dropdown-item-button>
 
-		<b-modal ref="confirm-modal" hide-footer>
+		<b-modal title="Delete Shipping Address" ref="confirm-modal" hide-footer>
 			<p class="my-4 headline-font-size text-center">{{ message }}</p>
 			<div class="d-flex align-items-center justify-content-end">
 				<b-button class="mt-2 btn-custom" variant="primary" @click="sendId"

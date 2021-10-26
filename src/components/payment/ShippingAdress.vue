@@ -8,13 +8,20 @@
 				<CreateShippingModal />
 			</div>
 			<div class="col-12">
-				<CreateShippingModal title="Edit Shipping Address" mode="edit" :editForm="shippingsTab[0]" />
+				<CreateShippingModal
+					title="Edit Shipping Address"
+					mode="edit"
+					:editForm="shippingsTab[0]"
+				/>
 			</div>
 			<div class="col-12">
-				<ChangeShippingAddress :shippingTab="shippingTab" :currentShipping="1"/>
+				<ChangeShippingAddress
+					:shippingsTab="shippingsTab"
+					:currentShipping="1"
+				/>
 			</div>
 		</div>
-		<b-card-text class="mt-4 d-flex justify-content-between align-items-start">
+		<b-card-text class="mt-4 mr-0 w-100 d-flex justify-content-between align-items-start">
 			<div class="row w-100">
 				<div
 					class="ship-add w-100 col-12 d-flex justify-content-between align-items-start"
@@ -44,7 +51,7 @@
 							>
 							<div class="d-inline-block">
 								<b-dropdown
-									size="lg"
+									
 									right
 									variant="link"
 									toggle-class="text-decoration-none"
@@ -105,11 +112,11 @@
 		components: {
 			ConfirmOperation,
 			CreateShippingModal,
-			ChangeShippingAddress
+			ChangeShippingAddress,
 		},
 		methods: {
 			handleDeleteShipping(id) {
-				this.$store.dispatch('checkout/deleteShippingAdd', id)
+				this.$store.dispatch("checkout/deleteShippingAdd", id);
 			},
 			showConfirmModal() {
 				this.$emit("showconfirm");
@@ -118,7 +125,28 @@
 		computed: {
 			shippingsTab() {
 				return this.$store.state.checkout.allShipping;
-
+				// return [
+				// 	{
+				// 		user_name: "Rivaland",
+				// 		phone: "+23752513344",
+				// 		country_name: "Cameroun",
+				// 		region_name: "Centre",
+				// 		council_name: "Yaoundé IV",
+				// 		division_name: "MEFOU",
+				// 		neighbourhood_name: "Mimboman",
+				// 		city: "Yaoundé",
+				// 	},
+				// 	{
+				// 		user_name: "Rivaland",
+				// 		phone: "+23752513344",
+				// 		country_name: "Gabon",
+				// 		region_name: "Nord",
+				// 		council_name: "Libreville IV",
+				// 		division_name: "Ondo Ondo",
+				// 		neighbourhood_name: "Adjougou",
+				// 		city: "Libreville",
+				// 	},
+				// ];
 			},
 		},
 		mounted() {

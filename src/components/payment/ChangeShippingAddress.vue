@@ -12,7 +12,7 @@
 					v-for="shipping_item in shippingsTab"
 					:key="shipping_item.id"
 				>
-					<div class="row">
+					<div class="row w-100">
 						<div class="col-9">
 							<p class="body-font-size">
 								{{ shipping_item.user_name }}. {{ shipping_item.phone }},{{
@@ -29,13 +29,27 @@
 						<div class="col-3">
 							<b-form-radio
 								v-model="currentShipping"
+								class="float-right"
 								name="currentShipping"
-								:value="shipping_item.id" 
+								:value="shipping_item.id"
 							></b-form-radio>
 						</div>
 					</div>
 					<div class="row">
 						<hr />
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-12 w-100">
+					<div class="d-flex w-100 justify-content-between align-items-center">
+						<b-button class="btn-custom mr-3" type="submit" variant="primary">
+							<!-- <b-spinner v-if="loading" small variant="light"></b-spinner> -->
+							Save</b-button
+						>
+						<b-button class="btn-custom" @click="hideModal" variant="success"
+							>Cancel</b-button
+						>
 					</div>
 				</div>
 			</div>
@@ -48,9 +62,26 @@
 		name: "ChangeShippingAddress",
 		props: {
 			currentShipping: Number,
-			shippingTab: Array,
+			shippingsTab: Array,
+		},
+		methods: {
+			hideModal() {
+				this.$refs["change-shipping-modal"].hide();
+			},
 		},
 	};
 </script>
 
-<style></style>
+<style scoped>
+	.btn-custom {
+		height: 38px;
+		min-width: 123px;
+		font-size: 14px;
+	}
+	@media only screen and (max-width: 768px) {
+		.btn-custom {
+			display: block !important;
+			width: 100% !important;
+		}
+	}
+</style>

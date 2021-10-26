@@ -321,13 +321,27 @@
                 <h3>10000 XAF</h3>
                 <h3>13000 XAF</h3>
               </div>
-              <div class="col" id="hidedesktop1">
+
+              <div class="col" id="hidedesktop1" >
+                <h3 class="bold1">status</h3>
+                <h3 class="text-success">{{ etat }}</h3>
+              </div>
+
+              <div
+                class="container d-flex justify-content-end btn-marg"
+                
+              >
+                <button class="button btn shadow">
+                  <h3 class="h3 button-text">Re-order</h3>
+                </button>
+              </div>
+              <!-- <div class="col" id="hidedesktop1">
                 <h3>status</h3>
                 <h3 class="text-success">{{ etat }}</h3>
                 <button class="button btn shadow btn-margd">
                   <h3 class="h3 button-text">Re-order</h3>
                 </button>
-              </div>
+              </div> -->
               
 
               <div class="justify-content-center container row">
@@ -355,7 +369,7 @@
                 </splide>
               </div>
               
-              <div class="col-2 text-end text-start">
+              <div class="col-2 text-end text-start bold">
                 <h3>Name :</h3>
                 <h3>Product ID :</h3>
                 <h3>Quantity :</h3>
@@ -373,7 +387,7 @@
                 <h3>13000 XAF</h3>
               </div>
               <div class="col" id="hidedesktop1" >
-                <h3>status</h3>
+                <h3 class="bold1">status</h3>
                 <h3 class="text-success">{{ etat }}</h3>
               </div>
               
@@ -420,7 +434,7 @@
                 </splide>
               </div>
              
-              <div class="col-2 text-end text-start">
+              <div class="col-2 text-end text-start bold">
                 <h3>Name :</h3>
                 <h3>Product ID :</h3>
                 <h3>Quantity :</h3>
@@ -438,7 +452,7 @@
                 <h3>13000 XAF</h3>
               </div>
               <div class="col" id="hidedesktop1" >
-                <h3>status</h3>
+                <h3 class="bold1">status</h3>
                 <h3 class="text-success">{{ etat }}</h3>
               </div>
               
@@ -646,7 +660,7 @@ h1 {
 }
 h2 {
   font-size: 16px;
-  font-weight: bold;
+  /* font-weight: bold; */
 }
 
 h3 {
@@ -707,7 +721,7 @@ h3 {
   color: black;
   margin-left: -20px;
   text-align: center;
-  line-height: 20px;
+  line-height: 23px;
 }
 .cercle2 {
   margin-top: 15px;
@@ -719,7 +733,7 @@ h3 {
   color: black;
   margin-right: -20px;
   text-align: center;
-  line-height: 20px;
+  line-height: 23px;
 }
 .bar {
   background-color: #28a745;
@@ -762,7 +776,7 @@ h3 {
 .mobile1 {
   width: 200px;
   height: 50px;
-  margin-left: -20px;
+  margin-left: -22px;
   color: white;
   z-index: 20px;
   background-color: #bfbfbf;
@@ -784,6 +798,7 @@ h3 {
   line-height: 25px;
   margin-top: -22px;
   font-size: 14px;
+  margin-left: 5px;
 }
 /* .button-text{
     color:white;
@@ -876,6 +891,9 @@ h3 {
   font-size: 14px;
 }
 
+.bold1{
+  font-weight: bold;
+}
 /* .hidedesktop{
     visibility: hidden;
   } */

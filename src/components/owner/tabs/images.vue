@@ -1,83 +1,43 @@
 <template>
-  <div>
-    <FlashMessage />
-    <div class="row">
-      <div class="container-fluid">
-        <b-modal
-          id="modalxl"
-          ref="modalxl"
-          centered
-          hide-footer
-          title="Upoad Image"
-        >
-          <br />
-
-          <div id="preview" ref="preview">
-            <img v-if="img_url" :src="img_url" />
-          </div>
-
-          <br />
-          <b-form-textarea
-            id="textarea-small"
-            class="mb-2 border-none"
-            v-model="text"
-            placeholder="Enter a description"
-          >
-          </b-form-textarea>
-
-          <br />
-
-          <b-button @click="submitPosts" variant="primary" block
-            ><b-icon icon="cursor-fill" variant="primary"></b-icon>
-            Publish</b-button
-          >
-        </b-modal>
-
-        <div class="createp img-gall image-wrapp">
-          <div class="">
-            <input
-              type="file"
-              id="chosefile"
-              @change="selectMoviesOutsidePost"
-              accept="video/mpeg, video/mp4, image/*"
-              hidden
-              ref="movie"
-            />
-
-            <a @click="$refs.movie.click()">
-              <div class="drag-textt">
-                <fas-icon :icon="['fas', 'plus']" />
-                <h3>Add Item</h3>
-              </div>
-            </a>
-          </div>
-        </div>
-
-        <b-modal hide-footer size="xl" id="Details" ref="Details">
-          <img class="card-img" :src="showImage" alt="Oops" />
-          <div>
-            <p>
-              {{ this.content }}
-            </p>
-          </div>
-        </b-modal>
-
-        <div class="img-gall" v-for="image in getImages" :key="image.id">
-          <span></span>
-          <a
-            ><img
+  <div v-if="hasLoadPicture">
+    <b-spinner class="custom-loader" label="Large Spinner"></b-spinner>
+  </div>
+  <div class="row" v-else>
+    <div class="container-fluid">
+      <div v-for="(image, cmp) in allImages" :key="cmp">
+        
+        <div class="img-gall" v-for="(im, index) in image.media" :key="index">
+          <a v-if="typeOfMedia(im.path) == 'image'"
+            ><b-img
               class="card-img btn p-0 album-img"
-              :src="image.media"
-              alt=""
-              @click="showPic(image, image.content)"
-          /></a>
+              thumbnail
+              fluid
+              rounded
+              :src="getFullMediaLink(im.path)"
+              alt="media_img"
+              v-b-modal="`modal-${im.id}`"
+              v-bind="imageProps"
+            ></b-img>
+          </a>
+          <video controls v-else class="card-img btn p-0 album-img">
+            <source :src="getFullMediaLink(im.path)" />
+          </video>
+          <b-modal hide-footer :id="`modal-${im.id}`" title="Details" size="md">
+            <img
+              class="card-img"
+              :src="getFullMediaLink(im.path)"
+              @click="() => showImg(index)"
+              alt="media_img"
+            />
+            <p class="my-4">{{ image.content }}</p>
+          </b-modal>
 
           <div class="mediadesc">
-            <ul class="navbar-nav pull-right">
+            <ul class="navbar-nav pull-right options">
               <li class="nav-item dropdown m-0 p-0">
                 <b-dropdown
                   size="sm"
-                  class=" call-action"
+                  class="float-right"
                   variant="link"
                   toggle-class="text-decoration-none"
                   no-caret
@@ -90,115 +50,214 @@
                     >
                     </b-icon>
                   </template>
-
-                  <b-dropdown-item @click="downloadPics(image.id)"
-                    >Download</b-dropdown-item
+                  <b-dropdown-item
+                    :href="getFullMediaLink(im.path)"
+                    download
                   >
-                  <b-dropdown-item @click="setProfilePics(image.id)"
+                    Download</b-dropdown-item
+                  >
+                  <b-dropdown-item
+                    href="#"
+                    @click="setProfilePic(im.id)"
+                    v-if="typeOfMedia(im.path) != 'video'"
                     >Make Profile Picture</b-dropdown-item
                   >
-                  <b-dropdown-item @click="setCoverPics(image.id)"
+                  <b-dropdown-item
+                    @click="setCoverPics(im.id)"
+                    v-if="typeOfMedia(im.path) != 'video'"
                     >Make Cover Photo</b-dropdown-item
                   >
-                  <b-dropdown-item @click="deleteImages(image.id)" href="#"
+                  <b-dropdown-item href="#" @click="deleteImage(im.id)"
                     >Delete</b-dropdown-item
                   >
                 </b-dropdown>
               </li>
             </ul>
           </div>
+
+          <br />
         </div>
       </div>
+      <vue-easy-lightbox
+        :visible="visible"
+        :imgs="Slideimges"
+        :index="index"
+        @hide="handleHide"
+      ></vue-easy-lightbox>
+
+      <FlashMessage />
     </div>
   </div>
 </template>
 
 <script>
-import { mapActions, mapGetters } from "vuex";
+import { mapActions } from "vuex";
+import { fullMediaLink } from "@/helpers";
+
+import { v4 } from "uuid";
 export default {
-  props: ["album"],
+  props: {
+    album: {},
+    canUpload: {
+      type: Boolean,
+      default: function () {
+        return false;
+      },
+    },
+    albumName: {
+      type: String,
+      required: true,
+    },
+
+    hasLoadPicture: {
+      type: Boolean,
+      default: function () {
+        return false;
+      },
+    },
+    images: {
+      type: Array,
+      required: true,
+    },
+
+    showAlbum: {
+      type: Boolean,
+      default: function () {
+        return false;
+      },
+    },
+  },
 
   data() {
     return {
-      showImage: null,
-      showIndex: "",
-      content: "",
-      album_id: null,
-      url: null,
-      fullPage: null,
       img_url: null,
       profile_pic: null,
-      text: null,
+      loading: false,
+      allImages: [],
+      strategy: null,
+      media: null,
+      imageProps: { width: 205, height: 205 },
+      Slideimges: [],
+      visible: false,
+      index: 0,
     };
   },
-  components: {},
 
-  computed: {
-    ...mapGetters({
-      getImages: "UserProfileOwner/getImages",
-      albumImages: "UserProfileOwner/getalbumImages",
-      getAlbums: "UserProfileOwner/getAlbums",
-    }),
+  filters: {
+    path: fullMediaLink,
   },
 
-  beforeMount() {
-    this.getImages;
-    this.albumImages;
+  created() {
+    this.allImages = this.images;
+    this.strategy = {
+      jpeg: () => "image",
+      jpg: () => "image",
+      png: () => "image",
+      mpeg: () => "video",
+      mp4: () => "video",
+      "image/jpeg": () => "image",
+      "image/jpg": () => "image",
+      "image/png": () => "image",
+      "video/mpeg": () => "video",
+      "video/mp4": () => "video",
+    };
+    this.loadImages();
   },
 
   methods: {
+    getFullMediaLink: fullMediaLink,
     ...mapActions({
       submitPost: "UserProfileOwner/submitPost",
       setProfilePic: "UserProfileOwner/setProfilePic",
       setCoverPic: "UserProfileOwner/setCoverPic",
       deleteImage: "UserProfileOwner/deleteImage",
-      downloadPic: "UserProfileOwner/downloadPic",
+      onDownloadPic: "UserProfileOwner/downloadPic",
+      //fetchImages: "UserProfileOwner/getImages",
+      getAlbumImages: "UserProfileOwner/getAlbumImages",
     }),
 
-    showPic(image, content) {
-      this.showIndex = this.getImages.indexOf(image);
-      this.showImage = Object.assign({}, image);
-      this.content = content;
+    showImg(index) {
+      console.log(index);
+      this.index = index;
+      this.visible = true;
+    },
+    handleHide() {
+      this.visible = false;
+    },
+    showPic(image) {
+      console.log(image);
+      this.image_details = image;
       this.$refs["Details"].show();
     },
-    downloadPics(id) {
-      this.downloadPic(id)
+
+    loadImages() {
+      const pictures = this.allImages.map((e) =>
+        this.getFullMediaLink(e.media[0].path)
+      );
+
+      this.Slideimges = pictures;
+    },
+
+    getFileExtension(file) {
+      const fileArray = file.split(".");
+      return fileArray[fileArray.length - 1];
+    },
+
+    typeOfMedia(file) {
+      try {
+        return this.strategy[this.getFileExtension(file)]();
+      } catch (error) {
+        console.log(error);
+        return "image";
+      }
+    },
+
+    removePicture(imageID, key) {
+      const newImage = this.allImages.map((im, index) => {
+        if (index == key) {
+          return im.media.filter((i) => i.id != imageID);
+        } else {
+          return im;
+        }
+      });
+
+      this.allImages = newImage;
+    },
+
+    downloadPic(media) {
+      //download(this.getFileExtension(media.path), `${v4()}.${this.getFileExtension(media.path)}`, media.type);
+      /*
+      this.onDownloadPic(media.id)
         .then((response) => {
           var fileURL = window.URL.createObjectURL(new Blob([response.data]));
           var fileLink = document.createElement("a");
-
           fileLink.href = fileURL;
-          fileLink.setAttribute("download", "file.jpg");
+          fileLink.setAttribute(
+            "download",
+            `${v4()}.${this.getFileExtension(media.path)}`
+          );
           document.body.appendChild(fileLink);
-
           fileLink.click();
           this.flashMessage.show({
             status: "success",
             message: "Image Downloaded",
           });
+          // loader.hide();
         })
-        .catch((err) => {
+        .catch((error) => {
+          console.log(error);
           this.sending = false;
-          if (err.response.status == 422) {
-            console.log({ err: err });
-            this.flashMessage.show({
-              status: "error",
-              message: err.response.data.message,
-            });
-          } else {
-            this.flashMessage.show({
-              status: "error",
-              message: "Unable to download ",
-            });
-            console.log({ err: err });
-          }
-        });
+          this.flashMessage.show({
+            status: "error",
+            message: "Unable to download ",
+          });
+        }); */
     },
 
-    deleteImages(id) {
+    deleteImages(id, key) {
       this.deleteImage(id)
-        .then((response) => {
-          console.log(response.data);
+        .then(() => {
+          this.removePicture(id, key);
           this.flashMessage.show({
             status: "success",
             message: "Album Deleted",
@@ -224,8 +283,7 @@ export default {
     //set an image as a cover photo
     setCoverPics(id) {
       this.setCoverPic(id)
-        .then((response) => {
-          console.log(response.data);
+        .then(() => {
           this.flashMessage.show({
             status: "success",
             message: "cover Picture succesfully set",
@@ -233,27 +291,19 @@ export default {
         })
         .catch((err) => {
           this.sending = false;
-          if (err.response.status == 422) {
-            console.log({ err: err });
-            this.flashMessage.show({
-              status: "error",
-              message: err.response.data.message,
-            });
-          } else {
-            this.flashMessage.show({
-              status: "error",
-              message: "Unable to set your cover picture",
-            });
-            console.log({ err: err });
-          }
+
+          this.flashMessage.show({
+            status: "error",
+            message: "Unable to set your cover picture",
+          });
+          console.log({ err: err });
         });
     },
     //set image as profile pic
 
     setProfilePics(id) {
       this.setProfilePic(id)
-        .then((response) => {
-          console.log(response.data);
+        .then(() => {
           this.flashMessage.show({
             status: "success",
             message: "Profile Picture set",
@@ -261,35 +311,31 @@ export default {
         })
         .catch((err) => {
           this.sending = false;
-          if (err.response.status == 422) {
-            console.log({ err: err });
-            this.flashMessage.show({
-              status: "error",
-              message: err.response.data.message,
-            });
-          } else {
-            this.flashMessage.show({
-              status: "error",
-              message: "Unable to set your profile pic",
-            });
-            console.log({ err: err });
-          }
+
+          this.flashMessage.show({
+            status: "error",
+            message: "Unable to set your profile pic",
+          });
+          console.log({ err: err });
         });
     },
+
     submitPosts() {
+      this.loading = true;
       let albumId = this.album;
-      console.log(albumId);
 
       let formData = new FormData();
       formData.append("media", this.profile_pic);
       formData.append("dob", this.text);
       let payload = {
         id: albumId,
-        headers: { "Content-Type": "multipart/form-data" },
         data: formData,
       };
+
       this.submitPost(payload)
+        .then(() => this.getAlbumImages(albumId))
         .then(() => {
+          this.loading = false;
           this.flashMessage.show({
             status: "success",
             message: "Profile Updated",
@@ -297,52 +343,59 @@ export default {
           });
           this.$refs["modalxl"].hide();
         })
-        .catch((err) => {
-          console.log({ err: err });
+        .catch(() => {
+          this.loading = false;
 
-          if (err.response.status == 422) {
-            console.log({ err: err });
-
-            this.flashMessage.show({
-              status: "error",
-              message: err.response.data.message,
-              blockClass: "custom-block-class",
-            });
-          } else {
-            this.flashMessage.show({
-              status: "error",
-
-              message: "Unable to upload your image",
-              blockClass: "custom-block-class",
-            });
-            console.log({ err: err });
-          }
+          this.flashMessage.show({
+            status: "error",
+            message: "Unable to upload your image",
+            blockClass: "Size too large. It must be lower or equal to 25Mb",
+          });
         });
     },
 
     selectMoviesOutsidePost(e) {
+      this.type = null;
       this.profile_pic = e.target.files[0];
       const file = e.target.files[0];
       this.img_url = URL.createObjectURL(file);
       console.log(this.img_url);
-      console.log("look up");
       this.$refs["modalxl"].show();
+
+      try {
+        this.media = this.strategy[this.profile_pic.type]();
+      } catch (error) {
+        this.media = null;
+      }
     },
   },
 
   mounted() {
     this.url = this.$route.params.id;
   },
-
-  watch: {
-    album: function(newVal) {
-      this.album_id = newVal;
-    },
-  },
 };
 </script>
 
+<style scoped>
+.custom-loader {
+  width: 4rem !important;
+  height: 4rem !important;
+  color: rgb(231, 92, 24);
+  align-self: center !important;
+  margin: auto;
+  display: block !important;
+}
+</style>
 <style>
+.options {
+  background: #e75c18;
+  border-radius: 50%;
+}
+.notFound {
+  text-align: center;
+  font-weight: bold;
+  font-size: 24px;
+}
 .text-design {
   align-items: first baseline;
 }

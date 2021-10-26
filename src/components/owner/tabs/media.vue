@@ -8,8 +8,26 @@
     <hr />
 
     <b-tabs content-class="mt-3" pills>
-      <b-tab title="Posts" active> <Images /> </b-tab>
-      <b-tab title="Albums"> <Album /> </b-tab>
+      <b-tab title="Posts" active @click="getImages">
+        <div v-if="!hasLoadPicture">
+          <b-spinner class="load" label="Large Spinner"></b-spinner>
+        </div>
+
+        <Images
+          :canUpload="canUpload"
+          :hasLoadPicture="!hasLoadPicture"
+          :images="all(getPictures)"
+          :albumName="'notFound'"
+          :showAlbum="showAlbum"
+          v-else
+        />
+      </b-tab>
+      <b-tab title="Albums" @click="getAlbums">
+        <div v-if="!hasLoadAlbum">
+          <b-spinner class="load" label="Large Spinner"></b-spinner>
+        </div>
+        <Album :canUpload="!canUpload" v-else />
+      </b-tab>
     </b-tabs>
   </div>
 </template>
@@ -17,44 +35,28 @@
 <script>
 import Album from "./album";
 import Images from "./images";
-import axios from "axios";
+
+import _ from "lodash";
+
+import { mapGetters } from "vuex";
+
 export default {
-  data: function() {
+  props: {
+    type: {
+      type: String,
+      validator: function (value) {
+        return ["profile", "network", "business"].indexOf(value) !== -1;
+      },
+    },
+  },
+  data: function () {
     return {
-      images: [
-        "https://placekitten.com/801/800",
-        "https://placekitten.com/802/800",
-        "https://placekitten.com/803/800",
-        "https://placekitten.com/804/800",
-        "https://placekitten.com/805/800",
-        "https://placekitten.com/806/800",
-        "https://placekitten.com/807/800",
-        "https://placekitten.com/808/800",
-        "https://placekitten.com/809/800",
-      ],
-      imagees: [
-        "https://i.wifegeek.com/200426/f9459c52.jpg",
-        "https://i.wifegeek.com/200426/5ce1e1c7.jpg",
-        "https://i.wifegeek.com/200426/5fa51df3.jpg",
-        "https://i.wifegeek.com/200426/663181fe.jpg",
-        "https://i.wifegeek.com/200426/2d110780.jpg",
-        "https://i.wifegeek.com/200426/e73cd3fa.jpg",
-        "https://i.wifegeek.com/200426/15160d6e.jpg",
-        "https://i.wifegeek.com/200426/d0c881ae.jpg",
-        "https://i.wifegeek.com/200426/a154fc3d.jpg",
-        "https://i.wifegeek.com/200426/71d3aa60.jpg",
-        "https://i.wifegeek.com/200426/d17ce9a0.jpg",
-        "https://i.wifegeek.com/200426/7c4deca9.jpg",
-        "https://i.wifegeek.com/200426/64672676.jpg",
-        "https://i.wifegeek.com/200426/de6ab9c6.jpg",
-        "https://i.wifegeek.com/200426/d8bcb6a7.jpg",
-        "https://i.wifegeek.com/200426/4085d03b.jpg",
-        "https://i.wifegeek.com/200426/177ef44c.jpg",
-        "https://i.wifegeek.com/200426/d74d9040.jpg",
-        "https://i.wifegeek.com/200426/81e24a47.jpg",
-        "https://i.wifegeek.com/200426/43e2e8bb.jpg",
-      ],
-      index: 0,
+      canUpload: false,
+      loading: false,
+      hasLoadAlbum: false,
+      hasLoadPicture: false,
+      showAlbum: false,
+      allImage: [],
     };
   },
 
@@ -62,42 +64,82 @@ export default {
     Album,
     Images,
   },
+
+  computed: {
+    ...mapGetters({
+      getPictures: "UserProfileOwner/getImages",
+    }),
+  },
+
   methods: {
-    onClick(i) {
-      this.index = i;
-    },
     //function to get album
-    getAlbums() {
-      this.$store
-        .dispatch("UserProfileOwner/getAlbums", this.urlData)
-        .then(() => {
-          console.log("hey yeah");
-        })
-        .catch((err) => {
-          console.log({ err: err });
+    all(images) {
+      const data = images
+        .filter((img) => img.media.length)
+        .map((img) => {
+          let render = img.media.map((picture) => {
+            return {
+              id: img.id,
+              content: img.content,
+              media: [
+                { path: picture.path, type: picture.type, id: picture.id },
+              ],
+            };
+          });
+
+          return render;
         });
+
+      return _.flatten(data);
     },
+
+    getAlbums() {
+      if (!this.hasLoadAlbum) {
+        this.$store
+          .dispatch("UserProfileOwner/getAlbums", this.urlData)
+          .then(() => {
+            console.log("hey yeah");
+            this.hasLoadAlbum = true;
+          })
+          .catch((err) => {
+            this.hasLoadAlbum = false;
+            console.log({ err: err });
+          });
+      }
+    },
+
     getImages() {
-      this.$store
-        .dispatch("UserProfileOwner/getImages", this.urlData)
-        .then(() => {
-          console.log("hey yeah");
-        })
-        .catch((err) => {
-          console.log({ err: err });
-        });
+      if (!this.hasLoadPicture) {
+        this.$store
+          .dispatch("UserProfileOwner/getImages", this.urlData)
+          .then(() => {
+            this.hasLoadPicture = true;
+          })
+          .catch((err) => {
+            this.hasLoadPicture = false;
+            console.log({ err: err });
+          });
+      }
     },
   },
 
-  mounted() {
+  created() {
     this.urlData = this.$route.params.id;
-    this.getAlbums();
     this.getImages();
   },
 };
 </script>
 
-<style>
+<style scoped>
+
+.load {
+  width: 4rem;
+  height: 4rem;
+  color: rgb(231, 92, 24);
+  align-self: center;
+  margin: auto;
+  display: block;
+}
 .text-design {
   align-items: first baseline;
 }

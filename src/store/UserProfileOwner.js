@@ -144,23 +144,23 @@ export default {
       commit("setImages", res.data.data);
     },
 
-    async submitPost({ commit }, payload) {
-      const res = await axios.post(`profile/upload/${payload.id}`, payload.data);
+    async submitPost(_, payload) {
+      return await axios.post(`profile/upload/${payload.id}`, payload.data);
     },
 
-    async setProfilePic({ commit }, id) {
-      const res = await axios.post(`profile/makeProfile/picture/${id}`);
+    async setProfilePic(_, id) {
+      return await axios.post(`profile/makeProfile/picture/${id}`);
     },
 
-    async setCoverPic({ commit }, id) {
-      const res = await axios.post(`profile/makeCover/picture/${id}`);
+    async setCoverPic(_, id) {
+      return await axios.post(`profile/makeCover/picture/${id}`);
     },
 
-    async deleteImage({ commit }, id) {
-      const res = await axios.delete(`profile/image/${id}`);
+    async deleteImage(_, id) {
+      return await axios.delete(`profile/image/${id}`);
     },
 
-    async downloadPic({ commit }, id) {
+    async downloadPic(_, id) {
       return axios({
         url: `profile/downloadMedia/${id}`,
         method: "post",

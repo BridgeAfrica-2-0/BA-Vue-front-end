@@ -5,7 +5,6 @@
   <div class="row" v-else>
     <div class="container-fluid">
       <div v-for="(image, cmp) in allImages" :key="cmp">
-        
         <div class="img-gall" v-for="(im, index) in image.media" :key="index">
           <a v-if="typeOfMedia(im.path) == 'image'"
             ><b-img
@@ -19,9 +18,21 @@
               v-bind="imageProps"
             ></b-img>
           </a>
-          <video controls v-else class="card-img btn p-0 album-img">
+          <video
+            controls
+            v-else-if="typeOfMedia(im.path) == 'videos'"
+            class="card-img btn p-0 album-img"
+          >
             <source :src="getFullMediaLink(im.path)" />
           </video>
+
+          <youtube
+            v-else
+            :video-id="im.videoId"
+            :player-vars="playerVars"
+            @playing="playing"
+          ></youtube>
+
           <b-modal hide-footer :id="`modal-${im.id}`" title="Details" size="md">
             <img
               class="card-img"
@@ -50,10 +61,7 @@
                     >
                     </b-icon>
                   </template>
-                  <b-dropdown-item
-                    :href="getFullMediaLink(im.path)"
-                    download
-                  >
+                  <b-dropdown-item :href="getFullMediaLink(im.path)" download>
                     Download</b-dropdown-item
                   >
                   <b-dropdown-item
@@ -91,10 +99,13 @@
 </template>
 
 <script>
+import Vue from "vue";
+import VueYoutube from "vue-youtube";
+
 import { mapActions } from "vuex";
 import { fullMediaLink } from "@/helpers";
-
 import { v4 } from "uuid";
+
 export default {
   props: {
     album: {},
@@ -155,6 +166,7 @@ export default {
       png: () => "image",
       mpeg: () => "video",
       mp4: () => "video",
+      youtube: () => "youtube",
       "image/jpeg": () => "image",
       "image/jpg": () => "image",
       "image/png": () => "image",
@@ -162,6 +174,7 @@ export default {
       "video/mp4": () => "video",
     };
     this.loadImages();
+    this.url = this.$route.params.id;
   },
 
   methods: {
@@ -200,7 +213,12 @@ export default {
 
     getFileExtension(file) {
       const fileArray = file.split(".");
-      return fileArray[fileArray.length - 1];
+
+      return (fileArray.length)
+        ? fileArray[fileArray.length - 1]
+        : file.startsWith("https://www.youtube.com/")
+        ? "youtube"
+        : null;
     },
 
     typeOfMedia(file) {
@@ -263,21 +281,13 @@ export default {
             message: "Album Deleted",
           });
         })
-        .catch((err) => {
+        .catch(() => {
           this.sending = false;
-          if (err.response.status == 422) {
-            console.log({ err: err });
-            this.flashMessage.show({
-              status: "error",
-              message: err.response.data.message,
-            });
-          } else {
-            this.flashMessage.show({
-              status: "error",
-              message: "Unable to Delete your Image",
-            });
-            console.log({ err: err });
-          }
+
+          this.flashMessage.show({
+            status: "error",
+            message: "Unable to delete image",
+          });
         });
     },
     //set an image as a cover photo
@@ -289,14 +299,13 @@ export default {
             message: "cover Picture succesfully set",
           });
         })
-        .catch((err) => {
+        .catch(() => {
           this.sending = false;
 
           this.flashMessage.show({
             status: "error",
-            message: "Unable to set your cover picture",
+            message: "Unable to set Cover Picture",
           });
-          console.log({ err: err });
         });
     },
     //set image as profile pic
@@ -348,8 +357,8 @@ export default {
 
           this.flashMessage.show({
             status: "error",
-            message: "Unable to upload your image",
-            blockClass: "Size too large. It must be lower or equal to 25Mb",
+            message:
+              "Unable to submit a post. Size too large. It must be lower or equal to 25Mb",
           });
         });
     },
@@ -359,7 +368,6 @@ export default {
       this.profile_pic = e.target.files[0];
       const file = e.target.files[0];
       this.img_url = URL.createObjectURL(file);
-      console.log(this.img_url);
       this.$refs["modalxl"].show();
 
       try {
@@ -370,9 +378,6 @@ export default {
     },
   },
 
-  mounted() {
-    this.url = this.$route.params.id;
-  },
 };
 </script>
 

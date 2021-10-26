@@ -23,7 +23,6 @@ IconifyIcon.addIcon("home", homeIconData);
 Vue.use(Vuex);
 Vue.use(VueAxios, axios);
 
-
 import LoadScript from "vue-plugin-load-script";
 import InfiniteLoading from "vue-infinite-loading";
 

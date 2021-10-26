@@ -64,6 +64,7 @@
     "vue-search-select": "^2.9.3",
     "vue-select": "^3.11.2",
     "vue-social-auth": "^1.4.9",
+    "vue-youtube": "^1.4.0",
     "vue2-google-maps": "^0.10.7",
     "vue3-discordpicker": "^1.0.7",
     "vuejs-google-maps": "^0.0.13",

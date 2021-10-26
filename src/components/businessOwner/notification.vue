@@ -19,6 +19,7 @@
             >
             <b-button
               @click="deleteAll(selected)"
+              v-if="seleceted > 0"
               variant="primary"
               class="a-button-l duration ml-1"
             >
@@ -72,11 +73,12 @@
             variant="primary"
           ></b-spinner>
         </b-col>
-        <b-col v-if="!getNotificationsStore && !loader" class="load">
-          <p>No notifications to show !!</p>
-
-          <hr width="100%" />
+        <b-col v-if="!getNotificationsStore && !loader" class="load text-center">
+          <b-row class="text-center">
+            <p>No notifications to show !!</p>
+          </b-row>
         </b-col>
+        <hr width="100%" />
       </b-row>
     </div>
   </div>

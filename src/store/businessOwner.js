@@ -338,7 +338,7 @@ export default {
     },
   },
 
-  actions: {
+  actions:{
     nFormatter(num) {
       if (num >= 1000000000) {
         return (num / 1000000000).toFixed(1).replace(/\.0$/, "") + "G";
@@ -350,282 +350,271 @@ export default {
         return (num / 1000).toFixed(1).replace(/\.0$/, "") + "K";
       }
       return num;
- },
-
-
- async loadUserBusinessAbout(context, payload) {
-  console.log(payload, "load user Business About start +++++");
-  let response_ = null;
-  const id_Business = 47;
-  await axios("business/info" +
-      "/" +
-      id_Business,
-    {
-      method: "GET",
-      headers: {
-        Accept: "application/json",
-       
-      }
-    }
-  )
-    .then(response => {
-      console.log("load user Business About response (1) +++++++", response);
-      if (response.status !== 200 && response.status !== 201) {
-        throw "Error from the server";
-      }
-      return response.data;
-    })
-    .then(response => {
-      console.log(
-        "load user Business About response successsss +++",
-        response
-      );
-      if (!response) {
-        console.log("Error from the server+++++++");
-        throw new Error("Error for loading Business About +++++");
-      }
-      context.commit("updateUserBusinessAbout", {
-        businessAbout: response.data
-      });
-      response_ = response;
-    })
-    .catch(error => {
-      console.log("error from the server or the browser", error);
-    });
-  return response_;
-},
-
-
-
-
-
-
-
-
-async updateUserBusinessAbout(context, payload) {
-  console.log(payload, "update user Business About start +++++");
-  let response_ = null;
-  const id_Business = 47;
-  await axios( "business/update" +
-      "/" +
-      id_Business,
-    {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-       
-      },
-      body: JSON.stringify({
-        name: payload.business_about.name,
-        category: payload.business_about.category,
-        keywords: payload.business_about.keywords,
-        phone: payload.business_about.phone,
-        email: payload.business_about.email,
-        region: payload.business_about.region,
-        city: payload.business_about.city,
-        country: payload.business_about.country,
-        openHours: payload.business_about.business_open_hours
-      })
-    }
-  )
-    .then(response => {
-      console.log(
-        "update user Business About response (1) +++++++",
-        response
-      );
-      if (response.status !== 200 && response.status !== 201) {
-        throw "Error From The Server";
-      }
-      return response.data;
-    })
-    .then(response => {
-      console.log(
-        "update user Business About response successsss (2) +++",
-        response
-      );
-      if (!response) {
-        console.log("Error THe Server++++++");
-        throw new Error("Error For Updating Business About +++++");
-      }
-      context.commit("updateUserBusinessAbout", {
-        businessAbout: payload.business_about
-      });
-      response_ = response;
-    })
-    .catch(error => {
-      console.log("Error From the Server or Browser error(1)", error);
-      throw error;
-    });
-  return response_;
-},
-
-
-
- async loadUserBusinessInsight(context, payload) {
-  console.log(payload);
-  console.log("load user Business Insight start +++++");
-  let response_ = null;
-  let url = null;
-  let config = {};
-  if (payload !== null) {
-    console.log("Payload does not null ++++++++++");
-    url ="business/insights/"+payload.business_id +
-      "?dateStarting=" +
-      payload.startDate +
-      "&dateClosing=" +
-      payload.endDate;
-    config = {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-      
-      }
-    };
-  } else {
-    console.log("Payload is null");
-    url = 'business/insights';
-    config = {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-      
-      }
-    };
-  }
-  await axios(url, config)
-    .then(response => {
-      console.log(
-        "load user Business Insight response (1) +++++++",
-        response
-      );
-      if (response.status !== 200 && response.status !== 201) {
-        throw "Errors during processing by the server";
-      }
-      return response;
-    })
-    .then(response => {
-      console.log(
-        "load User Business Insight response successsss +++",
-        response
-      );
-      if (!response) {
-        console.log("Error From the server +++++++");
-        throw new Error("Error for loading Business Insight +++++");
-      }
-      context.commit("updateUserBusinessInsights", {
-        businessInsights: response.data
-      });
-      response_ = response;
-    })
-    .catch(error => {
-
-      console.log({error: error});
-      console.log("error from the server or the browser");
-      console.log(error);
-      context.commit("updateUserBusinessInsights", {
-        businessInsights: null
-      });
-    });
-  return response_;
-},
-     
-
-    getAlbumImages({ commit }, busineeId) {
-      return axios.get("business/album/show/" + busineeId).then(({ data }) => {
-        commit("setAlbumImages", data.data.media);
-        console.log(data);
-      });
     },
 
-    getImages({ commit }, busineeId) {
-      return axios.get("business/post/" + busineeId).then(({ data }) => {
-        commit("setImages", data.data);
-        console.log(data);
-      });
-    },
-
-    getAlbums({ commit }, busineeId) {
-      return axios.get("business/album/index/" + busineeId).then(({ data }) => {
-        commit("setAlbums", data.data);
-        console.log(data);
-      });
-    },
-
-    ownerPost({ commit }, busineeId) {
-      return axios.get("business/show/post/" + busineeId).then(({ data }) => {
-        commit("ownerPost", data.data);
-        console.log(data);
-      });
-    },
-
-    ownerPostImages({ commit }, busineeId) {
-      return axios.get("business/show/images/" + busineeId).then(({ data }) => {
-        commit("ownerPostImages", data.data);
-        console.log(data);
-      });
-    },
-
-    businessInfo({ commit }, busineeId) {
-      return axios.get("business/info/" + busineeId).then(({ data }) => {
-        commit("setBusinessInfo", data.data);
-        console.log(data);
-      });
-    },
-
-    CommunityBusiness({ commit }, businessId) {
-      return axios
-        .get("business/community/business/" + businessId)
-        .then(({ data }) => {
-          commit("setCommunityBusiness", data.data);
-          console.log(data);
-        });
-    },
-
-    CommunityPeople({ commit }, businessId) {
-      return axios
-        .get("business/community/people/" + businessId)
-        .then(({ data }) => {
-          commit("setCommunityPeople", data.data);
-          console.log(data);
-        });
-    },
-
-    businessCommunityTotal({ commit }, businessId) {
-      return axios
-        .get("business/community/total/" + businessId)
-        .then(({ data }) => {
-          commit("setCommunityTotal", data.data);
-          console.log(data);
-        });
-    },
-
-    async createAlbum({ commit }, name) {
-      const res = await axios.post("business/album/create/" + this.url, {
-        name,
-      });
-      commit("newAlbum", res.data);
-    },
-
-    async updateAlbum({ commit }, edit_name, album_id) {
-      const res = await axios.post(
-        "business/album/update/" + this.url + "/" + album_id,
+    async loadUserBusinessAbout(context, payload) {
+      console.log(payload, "load user Business About start +++++");
+      let response_ = null;
+      const id_Business = 47;
+      await axios("business/info" +
+          "/" +
+          id_Business,
         {
-          edit_name,
+          method: "GET",
+          headers: {
+            Accept: "application/json",
+           
+          }
         }
-      );
-      commit("upAlbum", res.data);
+      )
+        .then(response => {
+          console.log("load user Business About response (1) +++++++", response);
+          if (response.status !== 200 && response.status !== 201) {
+            throw "Error from the server";
+          }
+          return response.data;
+        })
+        .then(response => {
+          console.log(
+            "load user Business About response successsss +++",
+            response
+          );
+          if (!response) {
+            console.log("Error from the server+++++++");
+            throw new Error("Error for loading Business About +++++");
+          }
+          context.commit("updateUserBusinessAbout", {
+            businessAbout: response.data
+          });
+          response_ = response;
+        })
+        .catch(error => {
+          console.log("error from the server or the browser", error);
+        });
+      return response_;
     },
 
-    async deleteAlbum({ commit }, name, album_id) {
-      const res = await axios.post(
-        "business/album/edit/" + this.url + "/" + album_id,
-        { name }
-      );
-      commit("delAlbum", res.data);
+    async updateUserBusinessAbout(context, payload) {
+      console.log(payload, "update user Business About start +++++");
+      let response_ = null;
+      const id_Business = 47;
+      await axios( "business/update" +
+          "/" +
+          id_Business,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+           
+          },
+          body: JSON.stringify({
+            name: payload.business_about.name,
+            category: payload.business_about.category,
+            keywords: payload.business_about.keywords,
+            phone: payload.business_about.phone,
+            email: payload.business_about.email,
+            region: payload.business_about.region,
+            city: payload.business_about.city,
+            country: payload.business_about.country,
+            openHours: payload.business_about.business_open_hours
+          })
+        }
+      )
+        .then(response => {
+          console.log(
+            "update user Business About response (1) +++++++",
+            response
+          );
+          if (response.status !== 200 && response.status !== 201) {
+            throw "Error From The Server";
+          }
+          return response.data;
+        })
+        .then(response => {
+          console.log(
+            "update user Business About response successsss (2) +++",
+            response
+          );
+          if (!response) {
+            console.log("Error THe Server++++++");
+            throw new Error("Error For Updating Business About +++++");
+          }
+          context.commit("updateUserBusinessAbout", {
+            businessAbout: payload.business_about
+          });
+          response_ = response;
+        })
+        .catch(error => {
+          console.log("Error From the Server or Browser error(1)", error);
+          throw error;
+        });
+      return response_;
     },
 
-    // temporal signin to get token for developement purpose
+    async loadUserBusinessInsight(context, payload) {
+      console.log(payload);
+      console.log("load user Business Insight start +++++");
+      let response_ = null;
+      let url = null;
+      let config = {};
+      if (payload !== null) {
+        console.log("Payload does not null ++++++++++");
+        url ="business/insights/"+payload.business_id +
+          "?dateStarting=" +
+          payload.startDate +
+          "&dateClosing=" +
+          payload.endDate;
+        config = {
+          method: "POST",
+          headers: {
+            Accept: "application/json",
+          
+          }
+        };
+      } else {
+        console.log("Payload is null");
+        url = 'business/insights';
+        config = {
+          method: "POST",
+          headers: {
+            Accept: "application/json",
+          
+          }
+        };
+      }
+      await axios(url, config)
+        .then(response => {
+          console.log(
+            "load user Business Insight response (1) +++++++",
+            response
+          );
+          if (response.status !== 200 && response.status !== 201) {
+            throw "Errors during processing by the server";
+          }
+          return response;
+        })
+        .then(response => {
+          console.log(
+            "load User Business Insight response successsss +++",
+            response
+          );
+          if (!response) {
+            console.log("Error From the server +++++++");
+            throw new Error("Error for loading Business Insight +++++");
+          }
+          context.commit("updateUserBusinessInsights", {
+            businessInsights: response.data
+          });
+          response_ = response;
+        })
+        .catch(error => {
+    
+          console.log({error: error});
+          console.log("error from the server or the browser");
+          console.log(error);
+          context.commit("updateUserBusinessInsights", {
+            businessInsights: null
+          });
+        });
+      return response_;
+          },
+
+          getAlbumImages({ commit }, busineeId) {
+            return axios.get("business/album/show/" + busineeId).then(({ data }) => {
+              commit("setAlbumImages", data.data.media);
+              console.log(data);
+            });
+          },
+
+          getImages({ commit }, busineeId) {
+            return axios.get("business/post/" + busineeId).then(({ data }) => {
+              commit("setImages", data.data);
+              console.log(data);
+            });
+          },
+
+          getAlbums({ commit }, busineeId) {
+            return axios.get("business/album/index/" + busineeId).then(({ data }) => {
+              commit("setAlbums", data.data);
+              console.log(data);
+            });
+          },
+
+          ownerPost({ commit }, busineeId) {
+            return axios.get("business/show/post/" + busineeId).then(({ data }) => {
+              commit("ownerPost", data.data);
+              console.log(data);
+            });
+          },
+
+          ownerPostImages({ commit }, busineeId) {
+            return axios.get("business/show/images/" + busineeId).then(({ data }) => {
+              commit("ownerPostImages", data.data);
+              console.log(data);
+            });
+          },
+
+          businessInfo({ commit }, busineeId) {
+            return axios.get("business/info/" + busineeId).then(({ data }) => {
+              commit("setBusinessInfo", data.data);
+              console.log(data);
+            });
+          },
+
+          CommunityBusiness({ commit }, businessId) {
+            return axios
+              .get("business/community/business/" + businessId)
+              .then(({ data }) => {
+                commit("setCommunityBusiness", data.data);
+                console.log(data);
+              });
+          },
+
+          CommunityPeople({ commit }, businessId) {
+            return axios
+              .get("business/community/people/" + businessId)
+              .then(({ data }) => {
+                commit("setCommunityPeople", data.data);
+                console.log(data);
+              });
+          },
+
+          businessCommunityTotal({ commit }, businessId) {
+            return axios
+              .get("business/community/total/" + businessId)
+              .then(({ data }) => {
+                commit("setCommunityTotal", data.data);
+                console.log(data);
+              });
+          },
+
+          async createAlbum({ commit }, name) {
+            const res = await axios.post("business/album/create/" + this.url, {
+              name,
+            });
+            commit("newAlbum", res.data);
+          },
+
+          async updateAlbum({ commit }, edit_name, album_id) {
+            const res = await axios.post(
+              "business/album/update/" + this.url + "/" + album_id,
+              {
+                edit_name,
+              }
+            );
+            commit("upAlbum", res.data);
+          },
+      
+          async deleteAlbum({ commit }, name, album_id) {
+            const res = await axios.post(
+              "business/album/edit/" + this.url + "/" + album_id,
+              { name }
+            );
+            commit("delAlbum", res.data);
+          },
+
+          // temporal signin to get token for developement purpose
     async signIn() {
       axios
         .post("/user/login", {
@@ -636,6 +625,7 @@ async updateUserBusinessAbout(context, payload) {
           localStorage.setItem("access_token", res.data.data.accessToken);
         });
     },
+
     // Get networks from the backend
     async getNetworks({ commit }) {
       let sucData = [];
@@ -690,8 +680,9 @@ async updateUserBusinessAbout(context, payload) {
     },
     //delete network
     async deleteNetwork() {},
-    // Edit a network
-    async editNetwork({ dispatch, commit }, editedNetwork) {
+
+     // Edit a network
+     async editNetwork({ dispatch, commit }, editedNetwork) {
       commit("setLoader", true);
       axios
         .put(`network/${editedNetwork.id}`, editedNetwork, {
@@ -720,7 +711,7 @@ async updateUserBusinessAbout(context, payload) {
       );
       commit("setSubmitPost", res.data);
     },
-
+      
     async setProfilePic({ commit }, image_id, name) {
       const res = await axios.post(
         "business/album/edit/" + this.url + "/" + self.album_id,
@@ -763,15 +754,15 @@ async updateUserBusinessAbout(context, payload) {
             succes: "danger",
             msg: "Something went wrong !!",
           };
-          commit("setLoader", false);
+         commit("setLoader", false);
           commit("setSuccess", sucData);
           setTimeout(() => {
             sucData.state = false;
             sucData.msg = "";
             commit("setSuccess", sucData);
           }, 2000);
-        });
     },
+      
 
     // Getting the notifications
     async getNotifications({ dispatch, commit }) {
@@ -886,5 +877,7 @@ async updateUserBusinessAbout(context, payload) {
 
       commit("ppleFollowers", res.data);
     },
-  },
+  }, 
 };
+
+

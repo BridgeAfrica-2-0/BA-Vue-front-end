@@ -1,12 +1,8 @@
 <template>
   <div>
     <b-icon icon="person-fill" class="icon-size" variant="primary"></b-icon>
-    <b>
-      About
-    </b>
-
+    <b>About</b>
     <hr />
-
     <b-card>
       <div class="mb-3">
         <iframe
@@ -23,15 +19,7 @@
       <b-row>
         <b-col>
           <b-card class="mb-2">
-            <div
-              class="edit"
-              v-b-modal.biographyModal
-              @click="
-                business_about_input = JSON.parse(
-                  JSON.stringify(business_about)
-                )
-              "
-            >
+            <div class="edit" v-b-modal.biographyModal>
               <b-icon icon="pencil-fill" variant="primary"></b-icon>
             </div>
             <h4 class="mb-4 text-center username">
@@ -155,6 +143,7 @@
         </b-button>
       </b-form>
     </b-modal>
+
     <b-modal
       id="addressBusinessModal"
       ref="addressBusinessModal"
@@ -311,7 +300,6 @@
                   name="open"
                   :aria-describedby="ariaDescribedby"
                   v-model="open"
-                  disabled
                 ></b-form-radio-group>
                 <br />
                 <b-container>
@@ -366,7 +354,7 @@
 export default {
   data() {
     return {
-      business_id:null,
+      business_id: null,
       categories: [
         { item: "Professional_and_home_service", name: "Professionals" },
         { item: "Agriculture ", name: "Agriculture " },
@@ -487,7 +475,7 @@ export default {
     dayOfWorks: {
       handler(newValue, oldValue) {
         let num = 0;
-        newValue.map(day => {
+        newValue.map((day) => {
           if (day.check) {
             num = num + 1;
           }
@@ -497,21 +485,21 @@ export default {
         } else {
           this.open = "Open for selected hours";
         }
-        console.log(newValue);
-        console.log(oldValue);
       },
-      deep: true
-    }
+      deep: true,
+    },
   },
   created() {
-    console.log("Load Business About start +++++");
     this.$store
-      .dispatch("businessOwner/loadUserBusinessAbout",  {
-              business_abobusiness_id: this.business_about_input,
-              business_id:this.business_id
-            })
+      .dispatch("businessOwner/loadUserBusinessAbout", {
+        business_abobusiness_id: this.business_about_input,
+        business_id: this.business_id
+      })
       .then(response => {
-        console.log(response, "load business about response end response (3) ++++");
+        console.log(
+          response,
+          "load business about response end response (3) ++++"
+        );
         this.dayOfWorks = this.initialize(this.dayOfWorks);
         console.log(this.business_about);
       })
@@ -525,7 +513,7 @@ export default {
         console.log(this.business_about);
       });
   },
-  mounted(){
+  mounted() {
     this.business_id = this.$route.params.id;
   },
   computed: {
@@ -537,19 +525,19 @@ export default {
             " AM - " +
             this.openNow.closing_time +
             " PM";
-    }
+    },
   },
   methods: {
     selectHour(day) {
       this.openNow = day;
     },
     initialize(daysOfWorks) {
-      const zdaysOfWorks = daysOfWorks.map(day => {
+      const zdaysOfWorks = daysOfWorks.map((day) => {
         this.open =
           this.business_about.business_open_hours.length >= 7
             ? "Always Open"
             : "Open for selected hours";
-        this.business_about.business_open_hours.map(dayOpen => {
+        this.business_about.business_open_hours.map((dayOpen) => {
           if (day.day.toLowerCase() === dayOpen.day.toLowerCase()) {
             day.closing_time = dayOpen.closing_time;
             day.opening_time = dayOpen.opening_time;
@@ -562,7 +550,6 @@ export default {
       return zdaysOfWorks;
     },
     cancel() {
-      console.log("cancel method ");
       this.business_about_input = JSON.parse(
         JSON.stringify(this.business_about)
       );
@@ -575,7 +562,8 @@ export default {
       switch (type) {
         case "modifyBiography":
           console.log(
-            "vuex store +++++ " + this.$store.getters['businessOwner/getBusinessAbout']
+            "vuex store +++++ " +
+              this.$store.getters["businessOwner/getBusinessAbout"]
           );
           console.log(this.$store.getters["businessOwner/getBusinessAbout"]);
           console.log("Modify Business Biography start++++");
@@ -585,34 +573,45 @@ export default {
               business_about: this.business_about_input,
               business_id: this.business_id,
             })
-            .then(response => {
-              console.log("fetch finished on the database response (3) ", response);
+            .then((response) => {
+              console.log(
+                "fetch finished on the database response (3) ",
+                response
+              );
               console.log("Modify Business Biography end++++");
             })
-            .catch(error => {
-              console.log(error, "Modify Business Biography end error (2) ++++");
+            .catch((error) => {
+              console.log(
+                error,
+                "Modify Business Biography end error (2) ++++"
+              );
             })
             .finally(() => {
               console.log("Finally Modify Business About Biography  +++++");
               this.business_about = JSON.parse(
-                JSON.stringify(this.$store.getters['businessOwner/getBusinessAbout'])
+                JSON.stringify(
+                  this.$store.getters["businessOwner/getBusinessAbout"]
+                )
               );
               console.log(this.business_about);
               this.$refs["biographyModal"].hide();
             });
           break;
         case "editAddress":
-          console.log("edit address business");
           this.test();
-          console.log(this.business_about_input);
           this.$store
             .dispatch("businessOwner/updateUserBusinessAbout", {
               business_about: this.business_about_input,
-              business_id:this.business_id
+              business_id: this.business_id
             })
             .then(response => {
-              console.log("update user business about response ++++++", response);
-              this.business_about = this.$store.getters['businessOwner/getBusinessAbout'];
+              console.log(
+                "update user business about response ++++++",
+                response
+              );
+              this.business_about = this.$store.getters[
+                "businessOwner/getBusinessAbout"
+              ];
               console.log("update user business about end");
             })
             .catch(error => {
@@ -621,38 +620,28 @@ export default {
             .finally(() => {
               console.log("Finally Update Business About Biography  +++++");
               this.business_about = JSON.parse(
-                JSON.stringify(this.$store.getters["businessOwner/getBusinessAbout"])
+                JSON.stringify(
+                  this.$store.getters["businessOwner/getBusinessAbout"]
+                )
               );
               console.log(this.business_about);
               this.$refs["addressBusinessModal"].hide();
               this.$refs["biographyModal"].hide();
             });
           break;
-        default:
-          console.log("No Correspondance");
-          break;
       }
     },
     test() {
-      let businessAddress = this.dayOfWorks.filter(day => {
-        return day.check === true;
-      });
-      if ( businessAddress.length > 0 ){
-        businessAddress = businessAddress.map(day => {
-          return [ day.day, day.opening_time, day.closing_time ]
-        });
-      }else {
-        businessAddress = [];
-      }
-      console.log( this.business_about_input.business_open_hours )
-      this.business_about_input.business_open_hours = businessAddress;
+      this.business_about_input.business_open_hours = this.dayOfWorks
+        .filter(elt => elt.check === true)
+        .map(day => [day.day, day.opening_time, day.closing_time]);
     },
     load() {
       this.business_about_input = JSON.parse(
         JSON.stringify(this.business_about)
       );
-    }
-  }
+    },
+  },
 };
 </script>
 

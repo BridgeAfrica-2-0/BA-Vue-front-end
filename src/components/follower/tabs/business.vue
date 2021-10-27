@@ -21,7 +21,7 @@
             <strong class="title"> {{ item.name }}</strong> <br />
             {{ item.category }}
             <br />
-            {{ count(item.followers) }} Community <br />
+            {{ count(item.followers) }} {{ $t("follower.Community") }} <br />
 
             <span class="location">
               <b-icon-geo-alt class="ico"></b-icon-geo-alt>{{ item.country }}
@@ -57,7 +57,7 @@
                   variant="primary"
                 >
                   <i class="fas fa-user-plus  fa-lg btn-icon "></i>
-                  <span class="btn-com">Community</span>
+                  <span class="btn-com">{{ $t("follower.Community") }}</span>
                 </b-button>
               </b-col>
 
@@ -76,7 +76,7 @@
                   variant="primary"
                 >
                   <i class="fas fa-envelope   fa-lg btn-icon "></i>
-                  <span class="btn-text">Message</span>
+                  <span class="btn-text">{{ $t("follower.Message") }}</span>
                 </b-button>
               </b-col>
 
@@ -95,7 +95,7 @@
                   variant="primary"
                 >
                   <i class="fas fa-map-marked-alt  fa-lg btn-icon "></i>
-                  <span class="btn-text">Direction</span>
+                  <span class="btn-text">{{ $t("follower.Direction") }}</span>
                 </b-button>
               </b-col>
             </b-row>

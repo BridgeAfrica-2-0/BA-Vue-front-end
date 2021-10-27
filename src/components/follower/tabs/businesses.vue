@@ -4,7 +4,7 @@
       class="primary mr-2 pt-1 icon-size primary"
       :icon="['fas', 'handshake']"
     />
-    Businesses
+    {{ $t("follower.Businesses") }}
 
     <hr />
 
@@ -33,7 +33,7 @@
             <strong class="title"> {{ item.name }} </strong> <br />
              {{ item.category }}
             <br />
-            {{ count(item.followers) }} Community <br />
+            {{ count(item.followers) }} {{ $t("follower.Community") }} <br />
 
             <span class="location">
               <b-icon-geo-alt class="ico"></b-icon-geo-alt> {{ item.country }}
@@ -72,7 +72,7 @@
                   variant="primary"
                 >
                   <i class="fas fa-user-plus  fa-lg btn-icon "></i>
-                  <span class="btn-com">Community</span>
+                  <span class="btn-com">{{ $t("follower.Community") }}</span>
                 </b-button>
               </b-col>
 
@@ -91,7 +91,7 @@
                   variant="primary"
                 >
                   <i class="fas fa-envelope   fa-lg btn-icon "></i>
-                  <span class="btn-text">Message</span>
+                  <span class="btn-text">{{ $t("follower.Message") }}</span>
                 </b-button>
               </b-col>
 
@@ -110,7 +110,7 @@
                   variant="primary"
                 >
                   <i class="fas fa-map-marked-alt  fa-lg btn-icon "></i>
-                  <span class="btn-text">Direction</span>
+                  <span class="btn-text">{{ $t("follower.Direction") }}</span>
                 </b-button>
               </b-col>
             </b-row>
@@ -130,10 +130,10 @@
     </div>
     <div v-show="noBusiness" class="no-business">
       <b-container>
-        <h2>No Businesses Listed</h2>
+        <h2>{{ $t("follower.No_Businesses_Listed") }}</h2>
         <hr />
       </b-container>
-      <p>User  has not listed any business. Please check back later</p>
+      <p>{{ $t("follower.User_has_not_listed_any_business") }}. {{ $t("follower.Please_check_back_later") }}</p>
     </div>
   </div>
 </template>

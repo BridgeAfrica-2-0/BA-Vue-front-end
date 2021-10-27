@@ -104,7 +104,7 @@
               ></b-avatar>
             </b-col>
             <b-col cols="9" md="11" class="p-0 m-0 pr-3">
-              <input placeholder="Post a Comment" class="comment" type="text" />
+              <input :placeholder="$t('follower.Post_a_Comment')" class="comment" type="text" />
 
               <fas-icon
                 class="primary send-cmt"

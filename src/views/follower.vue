@@ -3,6 +3,13 @@
     <navbar />
     <Profile />
     <Footer />
+    <span class="display-inline">
+        <b-link @click="$i18n.locale = 'en'"> {{ $t("follower.english") }}</b-link>
+        <span class="vl"></span>
+        <b-link class="ml-2" @click="$i18n.locale = 'fr'">
+          {{ $t("follower.french") }}
+        </b-link>
+      </span>
   </div>
 </template>
 

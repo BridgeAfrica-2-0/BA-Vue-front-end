@@ -6,16 +6,16 @@
       </div>
       <div class=" col details">
         <h4>
-          <b-link class="link">Business Name</b-link>
+          <b-link class="link">{{ $t("follower.Business_Name") }}</b-link>
         </h4>
         <p>
-          <a href="">mywebsite.com</a> <br />
-          <strong>Category:</strong> Business Category <br />
-          <strong>Community:</strong> 1.1M Community <br />
-          <strong>Location:</strong> Neighbourhood, city country <br />
-          <strong>Keyword:</strong> Keyword 1 Keyword 2 Keyword 3 <br />
-          <strong>About:</strong> Lorem ipsum, dolor sit amet consectetur
-          adipisicing elit. <b-link>Read More</b-link>
+          <a href="">{{ $t("follower.mywebsitecom") }}</a> <br />
+          <strong>{{ $t("follower.Category") }}:</strong> {{ $t("follower.Business_Category") }} <br />
+          <strong>{{ $t("follower.Community") }}:</strong> {{ $t("follower.11M_Community") }} <br />
+          <strong>{{ $t("follower.Location") }}:</strong> {{ $t("follower.Neighbourhood") }}, {{ $t("follower.City") }}, {{ $t("follower.Country") }} <br />
+          <strong>{{ $t("follower.Keyword") }}:</strong> {{ $t("follower.Keyword")}} 1 {{ $t("follower.Keyword")}} 2 {{ $t("follower.Keyword")}} 3 <br />
+          <strong>{{ $t("follower.About") }}:</strong> Lorem ipsum, dolor sit amet consectetur
+          adipisicing elit. <b-link>{{ $t("follower.Read_More") }}</b-link>
         </p>
       </div>
       <div>
@@ -31,19 +31,19 @@
               >
                 <b-dropdown-item>
                   <b-icon icon="chat-fill" variant="primary"></b-icon>
-                  Message</b-dropdown-item
+                  {{ $t("follower.Message") }}</b-dropdown-item
                 >
 
                 <b-dropdown-item>
-                  <b-icon icon="geo-alt" variant="primary"></b-icon> Get
-                  Direction</b-dropdown-item
+                  <b-icon icon="geo-alt" variant="primary"></b-icon> {{ $t("follower.Get") }}
+                  {{ $t("follower.Direction") }}</b-dropdown-item
                 >
               </b-dropdown>
             </b-col>
             <b-col>
               <b-button class=" community  mt-2" size="sm">
                 <b-icon icon="plus"></b-icon>
-                Community</b-button
+                {{ $t("follower.Community") }}</b-button
               >
             </b-col>
           </b-row>

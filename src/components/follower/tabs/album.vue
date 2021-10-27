@@ -3,10 +3,10 @@
     <div class="row">
       <div class="container-fluid" v-if="showalbum == false">
         <div class="one2">
-          <b-modal hide-footer title="Create album" id="createalbumModal">
+          <b-modal hide-footer :title="$t('follower.Create_album')" id="createalbumModal">
             <b-form>
               <b-form-input placeholder="Album name"></b-form-input>
-              <b-button class="mt-2" variant="primary"> Create</b-button>
+              <b-button class="mt-2" variant="primary"> {{ $t("follower.Create") }}</b-button>
             </b-form>
           </b-modal>
 
@@ -19,8 +19,8 @@
               />
               <div class="createdesc botmedia">
                 <div class="botmediades">
-                  <h6>Profile Picture</h6>
-                  <p>36 Items</p>
+                  <h6>{{ $t("follower.Profile_Picture") }} </h6>
+                  <p>36 {{ $t("follower.Items") }}</p>
                 </div>
               </div>
             </a>
@@ -41,8 +41,8 @@
               />
               <div class="createdesc botmedia">
                 <div class="botmediades">
-                  <h6>Cover Photos</h6>
-                  <p>36 Items</p>
+                  <h6>{{ $t("follower.Cover_Photos") }}</h6>
+                  <p>36 {{ $t("follower.Items") }}</p>
                 </div>
               </div>
             </a>
@@ -63,8 +63,8 @@
               />
               <div class="createdesc botmedia">
                 <div class="botmediades">
-                  <h6>Custom Album 1</h6>
-                  <p>13 Items</p>
+                  <h6>{{ $t("follower.Custom_Album") }} 1</h6>
+                  <p>13 {{ $t("follower.Items") }}</p>
                 </div>
               </div>
             </a>
@@ -85,8 +85,8 @@
               />
               <div class="createdesc botmedia">
                 <div class="botmediades">
-                  <h6>Custom Album 2</h6>
-                  <p>23 Items</p>
+                  <h6>{{ $t("follower.Custom_Album") }} 2</h6>
+                  <p>23 {{ $t("follower.Items")}}</p>
                 </div>
               </div>
             </a>
@@ -107,8 +107,8 @@
               />
               <div class="createdesc botmedia">
                 <div class="botmediades">
-                  <h6>Custom Album 3</h6>
-                  <p>33 Items</p>
+                  <h6>{{ $t("follower.Custom_Album") }} 3</h6>
+                  <p>33 {{ $t("follower.Items")}}</p>
                 </div>
               </div>
             </a>
@@ -137,7 +137,7 @@
                           data-toggle="dropdown"
                           aria-haspopup="true"
                           aria-expanded="false"
-                          >Custom Album 1
+                          >{{ $t("follower.Custom_Album") }} 1
                           <i class="fa fa-caret-down" aria-hidden="true"></i
                         ></a>
                         <div
@@ -148,9 +148,9 @@
                             class="dropdown-item"
                             data-toggle="modal"
                             data-target="#namealbumModal"
-                            >Edit Name</a
+                            >{{ $t("follower.Edit_Name") }}</a
                           >
-                          <a class="dropdown-item">Delete Album</a>
+                          <a class="dropdown-item">{{ $t("follower.Delete_Album") }}</a>
                         </div>
                       </li>
                     </ul>
@@ -159,12 +159,12 @@
                     <label
                       class="col-md-4 control-label pr-0 text-design"
                       for="name"
-                      >14 Items -
+                      >14 {{ $t("follower.Items") }} -
                     </label>
                     <div class="col-md-5 pl-0 pr-0">
                       <select id="gender" class="form-control w-100">
-                        <option>Public</option>
-                        <option>Private</option>
+                        <option>{{ $t("follower.Public") }}</option>
+                        <option>{{ $t("follower.Private") }}</option>
                       </select>
                     </div>
                   </div>
@@ -180,9 +180,9 @@
 
     <div class="container-flex" v-if="showalbum == true">
       <b-button variant="outline-primary" size="sm" @click="hidealbum">
-        Back
+        {{ $t("follower.Back") }}
       </b-button>
-      <span class="text-center ml-2"> Album Name </span>
+      <span class="text-center ml-2"> {{ $t("follower.Album_Name") }} </span>
 
       <Images />
     </div>

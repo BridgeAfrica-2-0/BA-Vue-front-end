@@ -3,7 +3,7 @@
     <div class="container">
       <b-row>
         <b-col>
-          <div class="b-bottomn f-left">
+          <div class="b-bottom f-left">
             <input @click="selectall" type="checkbox" />
             Select All
           </div>
@@ -169,7 +169,7 @@ export default {
   margin-top: 20px;
   margin-bottom: 30px;
   padding-bottom: 10px;
-
+  margin-left: -10px;
   border-bottom: 0.5px solid;
   border-color: gray;
 }

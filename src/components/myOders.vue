@@ -31,11 +31,11 @@
       </div>
 
       <div class="justify-content-between container row my-4">
-        <div class="col order"><h3>My orders</h3></div>
-        <div class="col"><h3 class="text-danger">clear history</h3></div>
-        <div class="status" v-if="titre">
+        <div class="col order"><h3 class="margclear1">My orders</h3></div>
+        <div class="col "><h3 class="text-danger text-center margclear">clear history</h3></div>
+        <!-- <div class="status" v-if="titre">
           <h5 class="text-danger">clear history</h5>
-        </div>
+        </div> -->
       </div>
       <hr />
       
@@ -88,12 +88,12 @@
                 <button class="buttonm btn shadow text-center">
                   <h3 class="h3 button-text">Re-order</h3>
                 </button>
-              </div>
+              </div> 
               
             </div>
-            <div class="justify-content-center container row">
+            <!-- <div class="justify-content-center container row">
               <br />
-            </div>
+            </div> <hr /> --> <hr />
           </div>
         </div>
 
@@ -148,9 +148,9 @@
               </div>
               
             </div>
-            <div class="justify-content-center container row">
+            <!-- <div class="justify-content-center container row">
               <br />
-            </div>
+            </div> --> <hr />
           </div>
         </div>
 
@@ -205,9 +205,9 @@
               </div>
               
             </div>
-            <div class="justify-content-center container row">
+            <!-- <div class="justify-content-center container row">
               <br />
-            </div>
+            </div> --> <hr />
           </div>
         </div>
       </div>
@@ -598,10 +598,10 @@ export default {
       console.log("---  test");
       this.rimg = "r-img1";
       let node = document.getElementById("hidedesktop");
-      let node2 = document.getElementById("hidedesktop1");
-      console.log(node2);
-      node.remove();
-      node2.remove();
+      // let node2 = document.getElementById("hidedesktop1");
+      
+      // node.remove();
+      // node2.remove();
 
       let h1 = document.querySelectorAll(".h1");
       let h2 = document.querySelectorAll(".h2");
@@ -621,13 +621,15 @@ export default {
       this.titre = true;
       this.rimg = "r-img";
       var node1 = document.getElementById("hidemobile");
-      node1.remove();
+      // node1.remove();
     }
   },
 };
 </script>
 
 <style scoped>
+
+
 /* style for desktop------------------------- */
 .margd1 {
   margin-left: 50px;
@@ -709,6 +711,16 @@ h3 {
   font-size: 12px;
   
 }
+.margclear{
+  margin-left: 40px;
+  margin-top: 30px;
+  margin-bottom: -20px;
+  
+}
+.margclear1{
+  margin-top: 30px;
+  margin-bottom: -20px;
+}
 
 /*  end style mobile------------------------- */
 .cercle1 {
@@ -731,7 +743,8 @@ h3 {
   font-size: 10px;
   background-color: white;
   color: black;
-  margin-right: -20px;
+  /* margin-right: -20px; */
+  margin-left: 3px;
   text-align: center;
   line-height: 23px;
 }
@@ -897,4 +910,25 @@ h3 {
 /* .hidedesktop{
     visibility: hidden;
   } */
+  @media only screen and (max-width: 768px) {
+    
+    .bold h3{
+      font-weight: normal !important;
+    }
+
+    #hidedesktop{
+       display: none;
+   }
+     
+
+}
+
+ @media only screen and (min-width: 900px) {
+    
+   #hidemobile {
+        display: none !important;
+      }
+    
+
+}
 </style>

@@ -4,7 +4,66 @@
   </div>
   <div class="row" v-else>
     <div class="container-fluid">
-      <p v-if="!allImages.length" style="font-size: 3rem">No items found</p>
+      <p v-if="!allImages.length && !canUpload" style="font-size: 3rem">No items found</p>
+
+      <b-modal
+        id="modalxl"
+        ref="modalxl"
+        centered
+        hide-footer
+        title="Upoad Image"
+      >
+        <br />
+
+        <div id="preview" ref="preview" v-if="img_url">
+          <img :src="img_url" v-if="'image' == media" />
+
+          <video controls v-else>
+            <source :src="img_url" />
+            <source type="video/webm" />
+          </video>
+        </div>
+
+        <br />
+        <!-- <b-form-textarea
+          id="textarea-small"
+          class="mb-2 border-none"
+          v-model="text"
+          placeholder="Enter a description"
+        >
+        </b-form-textarea> -->
+
+        <br />
+
+        <b-button
+          @click="submitPosts"
+          variant="primary"
+          block
+          :disabled="loading"
+          ><b-icon icon="cursor-fill" variant="primary"></b-icon>
+          Publish</b-button
+        >
+      </b-modal>
+
+      <div class="createp img-gall image-wrapp" v-if="canUpload">
+        <div class="">
+          <input
+            type="file"
+            id="chosefile"
+            @change="selectMoviesOutsidePost"
+            accept="video/mpeg, video/mp4, image/*"
+            hidden
+            ref="movie"
+          />
+
+          <a @click="$refs.movie.click()">
+            <div class="drag-textt">
+              <fas-icon :icon="['fas', 'plus']" />
+              <h3>Add Item</h3>
+            </div>
+          </a>
+        </div>
+      </div>
       <div v-for="(image, cmp) in allImages" :key="cmp">
         <div class="img-gall" v-for="(im, index) in image.media" :key="index">
           <a v-if="typeOfMedia(im.path) == 'image'"
@@ -28,8 +87,9 @@
           </video>
 
           <youtube
+            class="card-img btn p-0 album-img"
             v-else
-            :video-id="getYoutubeKey(im.path)"
+            :video-id="getYoutubeKey(getFullMediaLink(im.path))"
             :player-vars="playerVars"
           ></youtube>
 
@@ -43,7 +103,7 @@
             <p class="my-4">{{ image.content }}</p>
           </b-modal>
 
-          <div class="mediadesc">
+          <div class="mediadesc"  v-if="!['youtube'].includes(typeOfMedia(im.path))">
             <ul class="navbar-nav pull-right options">
               <li class="nav-item dropdown m-0 p-0">
                 <b-dropdown
@@ -67,12 +127,12 @@
                   <b-dropdown-item
                     href="#"
                     @click="setProfilePic(im.id)"
-                    v-if="typeOfMedia(im.path) != 'video'"
+                    v-if="!['video'].includes(typeOfMedia(im.path))"
                     >Make Profile Picture</b-dropdown-item
                   >
                   <b-dropdown-item
                     @click="setCoverPic(im.id)"
-                    v-if="typeOfMedia(im.path) != 'video'"
+                    v-if="!['video'].includes(typeOfMedia(im.path))"
                     >Make Cover Photo</b-dropdown-item
                   >
                   <b-dropdown-item href="#" @click="deleteImage(im.id)"
@@ -97,16 +157,11 @@
 </template>
 
 <script>
-import VueYoutube from "vue-youtube";
-
 import { mapActions } from "vuex";
 import { fullMediaLink } from "@/helpers";
 import { v4 } from "uuid";
 
 export default {
-  components: {
-    youtube: VueYoutube,
-  },
   props: {
     album: {},
     canUpload: {
@@ -154,6 +209,7 @@ export default {
       playerVars: {
         autoplay: 1,
       },
+      text: "",
     };
   },
 
@@ -199,6 +255,7 @@ export default {
     getYoutubeKey(path) {
       let videoID = path.split("v=")[1];
       const ampersandPosition = videoID.indexOf("&");
+
       if (ampersandPosition != -1) {
         videoID = videoID.substring(0, ampersandPosition);
       }
@@ -206,7 +263,6 @@ export default {
     },
 
     showImg(index) {
-      console.log(index);
       this.index = index;
       this.visible = true;
     },
@@ -214,7 +270,6 @@ export default {
       this.visible = false;
     },
     showPic(image) {
-      console.log(image);
       this.image_details = image;
       this.$refs["Details"].show();
     },
@@ -228,18 +283,18 @@ export default {
     },
 
     getFileExtension(file) {
-      const fileArray = file.split(".");
+      if (file.startsWith("https://www.youtube.com")) return "youtube";
 
-      return fileArray.length
-        ? fileArray[fileArray.length - 1]
-        : file.startsWith("https://www.youtube.com/")
-        ? "youtube"
-        : null;
+      const fileArray = file.split(".");
+      return fileArray[fileArray.length - 1];
     },
 
     typeOfMedia(file) {
       try {
-        return this.strategy[this.getFileExtension(file)]();
+        const extension = this.getFileExtension(this.getFullMediaLink(file));
+        return "youtube" == extension
+          ? extension
+          : this.strategy[this.getFileExtension(file)]();
       } catch (error) {
         console.log(error);
         return "image";
@@ -291,7 +346,6 @@ export default {
     deleteImage(id, key) {
       this.deleteImagePicture(id)
         .then(() => {
-          console.log("delete");
           this.removePicture(id, key);
           this.flashMessage.show({
             status: "success",
@@ -312,7 +366,6 @@ export default {
     setCoverPic(id) {
       this.setCoverPic(id)
         .then(() => {
-          console.log("cover");
           this.flashMessage.show({
             status: "success",
             message: "Cover Picture succesfully set",
@@ -332,7 +385,6 @@ export default {
     setProfilePic(id) {
       this.setProfilePicture(id)
         .then(() => {
-          console.log("profile");
           this.flashMessage.show({
             status: "success",
             message: "Profile Picture set",
@@ -362,9 +414,10 @@ export default {
       };
 
       this.submitPost(payload)
-        .then(() => this.getAlbumImages(albumId))
         .then(() => {
+          this.getAlbumImages(albumId)
           this.loading = false;
+          this.text = "";
           this.flashMessage.show({
             status: "success",
             message: "Profile Updated",

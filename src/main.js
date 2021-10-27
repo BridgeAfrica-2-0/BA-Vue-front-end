@@ -26,8 +26,6 @@ Vue.use(VueAxios, axios);
 import LoadScript from "vue-plugin-load-script";
 import InfiniteLoading from "vue-infinite-loading";
 
-import { loader } from "./mixins"
-
 //import LoadScript from "vue-plugin-load-script";
 
 Vue.use(LoadScript);
@@ -142,7 +140,9 @@ Vue.use(VueGoogleMaps, {
 import VueLoading from 'vue-loading-overlay';
 import 'vue-loading-overlay/dist/vue-loading.css';
 
-
+import VueYoutube from 'vue-youtube'
+ 
+Vue.use(VueYoutube)
 Vue.use(VueLoading);
 
 import VueAgile from 'vue-agile'
@@ -165,7 +165,7 @@ import VueEasyLightbox from 'vue-easy-lightbox'
 Vue.use(VueEasyLightbox)
 
 Vue.config.productionTip = false;
-var user=null;
+var user = null;
 
 new Vue({
   router,
@@ -176,7 +176,7 @@ new Vue({
     const userInfo = localStorage.getItem("user");
     if (userInfo) {
       const userData = JSON.parse(userInfo);
-      user=userData;
+      user = userData;
       this.$store.commit("auth/setUserData", userData);
     }
     axios.interceptors.response.use(
@@ -190,13 +190,13 @@ new Vue({
       }
     );
 
-      axios.interceptors.request.use(function (config) {
+    axios.interceptors.request.use(function (config) {
 
-          if(user != null){  
-          config.headers.Authorization =  `Bearer  ${user.accessToken}`;
-        }
-          return config;
-      });
+      if (user != null) {
+        config.headers.Authorization = `Bearer  ${user.accessToken}`;
+      }
+      return config;
+    });
 
   },
 

@@ -106,7 +106,7 @@ export default {
 
 .botmediadess-position {
   text-align: center;
-  bottom: -50%;
+  bottom: -45%;
   width: 100%;
   font-size: 20px;
   position: relative;

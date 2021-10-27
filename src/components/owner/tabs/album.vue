@@ -246,7 +246,7 @@ export default {
     },
 
     canBeUpdate(album) {
-      return ["Profile", "Cover", "post"].includes(album.name) ? false : true;
+      return  ["Profile", "Cover", "post"].includes(album.name) ? false : true;
     },
 
     createAlbums() {
@@ -348,13 +348,6 @@ export default {
   border-radius: 50%;
 }
 
-.botmediadess-position {
-  text-align: center;
-  bottom: -50%;
-  width: 100%;
-  font-size: 20px;
-  position: relative;
-}
 </style>
 
 <style>

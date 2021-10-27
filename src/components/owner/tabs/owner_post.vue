@@ -1,12 +1,11 @@
 <template>
   <div>
-  
-    <!-- DOM to Create Post By A UserOwner--> 
+    <!-- DOM to Create Post By A UserOwner-->
     <b-card class="px-md-3 mb-3">
       <b-row class="mt-2">
-        <b-col cols="3" md="1" class="m-md-0 p-md-0">
+        <b-col cols="2" md="1" class="m-md-0 p-md-0">
           <b-avatar
-            variant="primary" 
+            variant="primary"
             class="img-fluid avat-comment"
             :src="info.user.profile_picture"
           ></b-avatar>
@@ -15,7 +14,7 @@
           <input
             placeholder="Post a business update"
             v-b-modal.modal-xl
-            class="comment"
+            class="comment commentt "
             type="text"
           />
           <fas-icon class="primary send-cmt" :icon="['fas', 'paper-plane']" />
@@ -144,7 +143,6 @@
                       'is-invalid': createPost.postBusinessUpdate === '',
                     }"
                   ></b-form-textarea>
-
                 </div>
                 <div class="bordder">
                   <span class="float-left"> Add to Your Post </span>
@@ -197,58 +195,55 @@
                 </div>
                 <br />
 
-             <div class="h300px">
-                <div
-                  v-for="hyperlink in createPost.hyperlinks"
-                  :key="hyperlink.fileName"
-                  class="bordder"
-                >
-                  <span class="float-left"> {{ hyperlink.fileName }} </span>
-                  <span
-                    class="float-right"
-                    @click="deleteItem(hyperlink.fileName)"
+                <div class="h300px">
+                  <div
+                    v-for="hyperlink in createPost.hyperlinks"
+                    :key="hyperlink.fileName"
+                    class="bordder"
                   >
-                    delete
-                  </span>
-                </div>
-
-
-                <span
-                  v-for="(movie, index) in edit_image"
-                  :key="movie.id"
-                  class=""
-                >
-                      <div id="preview">
-                        <span
-                          class="upload-cancel"
-                          @click="deleteImage(index, movie)"
-                        >
-                          <b-icon icon="x-circle" class="oorange"> </b-icon>
-                        </span>
-
-                        <img :src="movie.media_url" />
-                      </div>
-                  <hr>
-                </span>
-                
-
-                <br />
-
-                <div
-                  v-for="movie in createPost.movies"
-                  :key="movie.fileName"
-                  class=""
-                >
-                  <div id="preview">
+                    <span class="float-left"> {{ hyperlink.fileName }} </span>
                     <span
-                      class="upload-cancel"
-                      @click="deleteItem(movie.fileName)"
+                      class="float-right"
+                      @click="deleteItem(hyperlink.fileName)"
                     >
-                      <b-icon icon="x-circle" class="oorange"> </b-icon>
+                      delete
                     </span>
-
                   </div>
-                </div>
+
+                  <span
+                    v-for="(movie, index) in edit_image"
+                    :key="movie.id"
+                    class=""
+                  >
+                    <div id="preview">
+                      <span
+                        class="upload-cancel"
+                        @click="deleteImage(index, movie)"
+                      >
+                        <b-icon icon="x-circle" class="oorange"> </b-icon>
+                      </span>
+
+                      <img :src="movie.media_url" />
+                    </div>
+                    <hr />
+                  </span>
+
+                  <br />
+
+                  <div
+                    v-for="movie in createPost.movies"
+                    :key="movie.fileName"
+                    class=""
+                  >
+                    <div id="preview">
+                      <span
+                        class="upload-cancel"
+                        @click="deleteItem(movie.fileName)"
+                      >
+                        <b-icon icon="x-circle" class="oorange"> </b-icon>
+                      </span>
+                    </div>
+                  </div>
                 </div>
                 <br />
 
@@ -262,7 +257,7 @@
               <b-col cols="1" md="1" class="m-0 p-0"></b-col>
             </b-row>
           </b-modal>
-<!-- create post -->
+          <!-- create post -->
           <b-modal
             id="modal-xl"
             ref="modal-xl"
@@ -270,10 +265,9 @@
             hide-footer
             title="Create Post"
             @hidden="resetPostData"
-          >    <FlashMessage />
+          >
+            <FlashMessage />
             <b-row ref="loader">
-               
-         
               <b-col cols="1" class="m-0 p-0"></b-col>
               <b-col cols="2" class="m-0 p-0">
                 <b-avatar
@@ -283,7 +277,7 @@
                 ></b-avatar>
               </b-col>
               <b-col cols="9" class="pt-2" style="margin-left: -5px">
-                <h5 class="m-0 font-weight-bolder">{{info.user.name}}</h5>
+                <h5 class="m-0 font-weight-bolder">{{ info.user.name }}</h5>
               </b-col>
             </b-row>
             <b-row>
@@ -293,7 +287,7 @@
                 <div class="cursor">
                   <b-form-textarea
                     id="textarea-small"
-                    class="mb-2 border-none "
+                    class="mb-2 border-none"
                     autofocus
                     placeholder="Post a business update"
                     v-model="createPost.postBusinessUpdate"
@@ -302,7 +296,6 @@
                       'is-invalid': createPost.postBusinessUpdate === '',
                     }"
                   ></b-form-textarea>
-
                 </div>
                 <div class="bordder">
                   <span class="float-left"> Add to Your Post </span>
@@ -355,53 +348,55 @@
                 </div>
                 <br />
 
-
-      <div class="h300px">   
-                <div
-                  v-for="hyperlink in createPost.hyperlinks"
-                  :key="hyperlink.fileName"
-                  class="bordder"
-                >
-                  <span class="float-left"> {{ hyperlink.fileName }} </span>
-                  <span
-                    class="float-right"
-                    @click="deleteItem(hyperlink.fileName)"
+                <div class="h300px">
+                  <div
+                    v-for="hyperlink in createPost.hyperlinks"
+                    :key="hyperlink.fileName"
+                    class="bordder"
                   >
-                    delete
-                  </span>
-                </div>      
-
-                
-                <div
-                  v-for="movie in createPost.movies"
-                  :key="movie.fileName"
-                  class=""
-                >  
-                  <div id="preview">
+                    <span class="float-left"> {{ hyperlink.fileName }} </span>
                     <span
-                      class="upload-cancel"
-                      @click="deleteItem(movie.fileName)"
+                      class="float-right"
+                      @click="deleteItem(hyperlink.fileName)"
                     >
-                      <b-icon icon="x-circle" class="oorange"> </b-icon>
+                      delete
                     </span>
+                  </div>
 
-               <span>   </span>    <img v-if="movie.fileType=='image'" :src="movie.link" />  
-   
-      <video v-else  width="97%" height="240" autoplay>
-  <source :src="movie.link" type="video/mp4">
-</video>
+                  <div
+                    v-for="movie in createPost.movies"
+                    :key="movie.fileName"
+                    class=""
+                  >
+                    <div id="preview">
+                      <span
+                        class="upload-cancel"
+                        @click="deleteItem(movie.fileName)"
+                      >
+                        <b-icon icon="x-circle" class="oorange"> </b-icon>
+                      </span>
 
+                      <span> </span>
+                      <img v-if="movie.fileType == 'image'" :src="movie.link" />
+
+                      <video v-else width="97%" height="240" autoplay>
+                        <source :src="movie.link" type="video/mp4" />
+                      </video>
+                    </div>
                   </div>
                 </div>
 
-          </div>  
+                <vue-core-video-player></vue-core-video-player>
 
-               <progress-bar
-      :options="options"
-      :value="uploadPercentage"
-      />
-<vue-core-video-player ></vue-core-video-player>       
-              <hr>
+                <b-progress
+                  v-if="isUploading"
+                  :value="uploadPercentage"
+                  variant="primary"
+                  class="m13"
+                  show-progress
+                  :animated="animate"
+                ></b-progress>
+                <hr />
 
                 <span>
                   <b-button @click="submitPost" variant="primary" block
@@ -416,84 +411,74 @@
         </div>
       </div>
 
-     
       <div v-for="item in owner_post" :key="item.post_id">
-       
-        <div  class="mt-2">
-          <div class="d-inline-flex"> 
-            <span  md="1" class="m-0 p-0">
+        <div class="mt-2">
+          <div class="d-inline-flex">
+            <span md="1" class="m-0 p-0">
               <b-avatar
                 class="d-inline-block avat"
                 variant="primary"
                 :src="item.profile_picture"
               ></b-avatar>
             </span>
-            <div  class="pl-2 pl-md-3  pt-md-2">
-              <h5 class="m-0  usernamee">
+            <div class="pl-2 pl-md-3 pt-md-2">
+              <h5 class="m-0 usernamee">
                 {{ item.name }}
-               
               </h5>
               <p class="durationn">{{ moment(item.created_at).fromNow() }}</p>
             </div>
 
+            <div class="toright pt-2">
+              <b-dropdown variant="link" size="sm" no-caret>
+                <template #button-content>
+                  <b-icon
+                    icon="three-dots"
+                    variant="primary"
+                    aria-hidden="true"
+                  ></b-icon>
+                </template>
 
-             <div class="toright pt-2">
-                  <b-dropdown variant="link" size="sm" no-caret>
-                    <template #button-content>
-                      <b-icon icon="three-dots" variant="primary" aria-hidden="true"></b-icon>
-                    </template>
+                <b-dropdown-item-button variant="info" @click="editPost(item)">
+                  <b-icon icon="pencil" aria-hidden="true"></b-icon>
+                  Edit
+                </b-dropdown-item-button>
 
-                   
-
-                    <b-dropdown-item-button
-                      variant="info"
-                      @click="editPost(item)"
-                    >
-                      <b-icon icon="pencil" aria-hidden="true"></b-icon>
-                      Edit
-                    </b-dropdown-item-button>
-
-                    <b-dropdown-item-button
-                      variant="danger"
-                      @click="deletePost(item)"
-                    >
-                      <b-icon icon="trash-fill" aria-hidden="true"></b-icon>
-                      Delete
-                    </b-dropdown-item-button>
-                  </b-dropdown>
-                </div>
-
+                <b-dropdown-item-button
+                  variant="danger"
+                  @click="deletePost(item)"
+                >
+                  <b-icon icon="trash-fill" aria-hidden="true"></b-icon>
+                  Delete
+                </b-dropdown-item-button>
+              </b-dropdown>
+            </div>
           </div>
           <div class="m-0 p-0">
-            
-              <p  class="post-text">
-                <!--     :text="item.content.details"   -->
-                <read-more v-if="item.content"
-                  more-str="read more"
-                  :text="item.content"
-                  link="#"
-                  less-str="read less"
-                  :max-chars="200"
-                ></read-more>
-              </p>
-           
+            <p class="post-text">
+              <!--     :text="item.content.details"   -->
+              <read-more
+                v-if="item.content"
+                more-str="read more"
+                :text="item.content"
+                link="#"
+                less-str="read less"
+                :max-chars="200"
+              ></read-more>
+            </p>
           </div>
 
-           <div   v-if="item.media.length > 0" class="">
-                <light
-                css=" "
-                  :cells="item.media.length"
-                  :items="
-                    item.media.map(function (a) {
-                      return a.media_url;
-                    })
-                  "
-                ></light> 
-              </div>
+          <div v-if="item.media.length > 0" class="">
+            <light
+              css=" "
+              :cells="item.media.length"
+              :items="
+                item.media.map(function (a) {
+                  return a.media_url;
+                })
+              "
+            ></light>
+          </div>
           <b-row>
-
-           
-
             <!--   v-if="item.content.movies.length <= 0"  -->
             <b-col cols="12" class="mt-2">
               <!--  :src="$store.getters.getProfilePicture"  -->
@@ -523,38 +508,37 @@
           </b-row>
 
           <!--  :src="$store.getters.getProfilePicture"  -->
-         
         </div>
 
-         <div class="mt-2 d-inline-flex w-100">
-            <div  class="m-md-0 p-md-0">
-              <b-avatar
-                variant="primary"
-                :src="info.user.profile_picture"
-                class="img-fluid avat-comment"
-              ></b-avatar>
-            </div>
-
-            <div  class="p-0 m-0 pr-3 inline-comment">
-              <input placeholder="Post a Comment" class="comment" type="text" />
-
-              <fas-icon
-                class="primary send-cmt"
-                :icon="['fas', 'paper-plane']"
-              />
-            </div>
-
+        <div class="mt-2 d-inline-flex w-100">
+          <div class="m-md-0 p-md-0">
+            <b-avatar
+              variant="primary"
+              :src="info.user.profile_picture"
+              class="img-fluid avat-comment"
+            ></b-avatar>
           </div>
+
+          <div class="p-0 m-0 pr-3 inline-comment">
+            <input placeholder="Post a Comment" class="comment" type="text" />
+
+            <fas-icon class="primary send-cmt" :icon="['fas', 'paper-plane']" />
+          </div>
+        </div>
 
         <Comment
           v-for="comment in item.comments"
           :key="comment.id"
           :comment="comment"
         />
-        <hr>
+        <hr />
       </div>
 
-      <infinite-loading :identifier="infiniteId"   ref="infiniteLoading"   @infinite="infiniteHandler"></infinite-loading>
+      <infinite-loading
+        :identifier="infiniteId"
+        ref="infiniteLoading"
+        @infinite="infiniteHandler"
+      ></infinite-loading>
     </b-card>
   </div>
 </template>
@@ -564,17 +548,21 @@ import Comment from "../comment";
 import light from "../../lightbox";
 import moment from "moment";
 import axios from "axios";
-import VueCoreVideoPlayer from 'vue-core-video-player';
+import VueCoreVideoPlayer from "vue-core-video-player";
 
 export default {
   name: "postNetwork",
   components: {
     Comment,
     light,
-    VueCoreVideoPlayer
+    VueCoreVideoPlayer,
   },
   data() {
     return {
+      videoId: "lG0Ys-2d4MA",
+      playerVars: {
+        autoplay: 0,
+      },
       moment: moment,
       page: 1,
       infiniteId: +new Date(),
@@ -584,7 +572,7 @@ export default {
       edit_description: null,
       edit_image: null,
       edit_id: null,
-      uploadPercentage:0,
+      uploadPercentage: 0,
       fullPage: false,
       images: ["https://i.wifegeek.com/200426/f9459c52.jpg"],
       imagees: [
@@ -596,33 +584,8 @@ export default {
         "https://pbs.twimg.com/media/DKO62sVXUAA0_AL.jpg",
         "https://i.wifegeek.com/200426/5ce1e1c7.jpg",
       ],
-
-      options: {
-  text: {
-    color: '#FFFFFF',
-    shadowEnable: true,
-    shadowColor: '#000000',
-    fontSize: 14,
-    fontFamily: 'Helvetica',
-    dynamicPosition: false,
-    hideText: false
-  },
-  progress: {
-    color: '#2dbd2d',
-    backgroundColor: '#C0C0C0'
-  },
-  layout: {
-    height: 35,
-    width: 140,
-    verticalTextAlign: 61,
-    horizontalTextAlign: 43,
-    zeroOffset: 0,
-    strokeWidth: 30,
-    progressPadding: 0,
-    type: 'circle'
-  }
-},
-
+      animate: true,
+      isUploading: false,
       createPost: {
         postBusinessUpdate: "",
         movies: [],
@@ -647,22 +610,21 @@ export default {
       return num;
     },
 
-    reloads(){
-
+    reloads() {
       console.log("reoading");
       this.$store.commit("profile/ownerPost", []);
-
     },
 
     infiniteHandler($state) {
       console.log("user/post/" + this.page);
-      let url= "user/post/" + this.page;
-      
-       this.$store.dispatch("profile/loadMore",url)
-     
+      let url = "user/post/" + this.page;
+
+      this.$store
+        .dispatch("profile/loadMore", url)
+
         .then(({ data }) => {
           console.log(data);
-          if (data.data.length) { 
+          if (data.data.length) {
             this.page += 1;
 
             this.owner_post.push(...data.data);
@@ -698,9 +660,9 @@ export default {
             blockClass: "custom-block-class",
             message: "Post Deleted",
           });
-          this.reloads()
-      this.page = 1;
-      this.infiniteId += 1;
+          this.reloads();
+          this.page = 1;
+          this.infiniteId += 1;
           loader.hide();
         })
         .catch((err) => {
@@ -781,10 +743,10 @@ export default {
             blockClass: "custom-block-class",
             message: "Content successfuly uploaded",
           });
-          
-           this.reloads()
-           this.page = 1;
-         this.infiniteId += 1;
+
+          this.reloads();
+          this.page = 1;
+          this.infiniteId += 1;
 
           loader.hide();
 
@@ -829,7 +791,7 @@ export default {
       const file = event.target;
 
       if (file.files) {
-        console.log("logging start")
+        console.log("logging start");
         let reader = new FileReader();
         reader.onload = (e) => {
           this.createPost.movies.push({
@@ -838,16 +800,11 @@ export default {
             fileName: event.target.files[0].name,
             link: URL.createObjectURL(event.target.files[0]),
             fileType: e.target.result.match(/^data:([^/]+)\/([^;]+);/)[1] || [],
-           
           });
-          console.log()
+          console.log();
         };
         reader.readAsDataURL(file.files[0]);
-
-
       }
-
-      
     },
     service(file) {
       let result = null;
@@ -862,27 +819,22 @@ export default {
       }
     },
     selectMoviesOutsidePost(event) {
-        
-       
-        const file = event.target;
+      const file = event.target;
 
       if (file.files) {
         let reader = new FileReader();
-        reader.onload = (e) => {    
+        reader.onload = (e) => {
           this.createPost.movies.push({
             target: event.target,
             movie: e.target.result,
             fileName: event.target.files[0].name,
             link: URL.createObjectURL(event.target.files[0]),
             fileType: e.target.result.match(/^data:([^/]+)\/([^;]+);/)[1] || [],
-           
           });
         };
         reader.readAsDataURL(file.files[0]);
-
       }
 
-      
       this.$refs["modal-xl"].show();
     },
     selectDocument(event) {
@@ -943,29 +895,27 @@ export default {
     },
 
     submitPost() {
+      this.isUploading = true;
       let loader = this.$loading.show({
         container: this.$refs.loader,
         canCancel: true,
         onCancel: this.onCancel,
         color: "#e75c18",
       });
- 
-      let fileImage=null;
-      
+
+      let fileImage = null;
+
       let formData2 = new FormData();
-      console.log( this.createPost.movies);
-      if( this.createPost.movies[0]){ 
-      
-     fileImage = this.createPost.movies[0].target.files[0];
+      console.log(this.createPost.movies);
+      if (this.createPost.movies[0]) {
+        fileImage = this.createPost.movies[0].target.files[0];
 
-      this.fileImageArr = this.createPost.movies;
-      console.log(this.fileImageArr);
+        this.fileImageArr = this.createPost.movies;
+        console.log(this.fileImageArr);
 
-
-      this.fileImageArr.forEach((value, index) => {
-        formData2.append("media[" + index + "]", value.target.files[0]);
-
-      });
+        this.fileImageArr.forEach((value, index) => {
+          formData2.append("media[" + index + "]", value.target.files[0]);
+        });
       }
 
       formData2.append("type", "image");
@@ -980,10 +930,11 @@ export default {
             "Content-Type": "multipart/form-data",
           },
 
-          onUploadProgress: function( progressEvent ) {
-      this.uploadPercentage = parseInt( Math.round( ( progressEvent.loaded / progressEvent.total ) * 100 ) );
-    }.bind(this)
-
+          onUploadProgress: function (progressEvent) {
+            this.uploadPercentage = parseInt(
+              Math.round((progressEvent.loaded / progressEvent.total) * 100)
+            );
+          }.bind(this),
         })
         .then((response) => {
           console.log(response);
@@ -993,15 +944,15 @@ export default {
             blockClass: "custom-block-class",
             message: "Content successfuly uploaded",
           });
+          this.isUploading = false;
           loader.hide();
           this.$refs["modal-xl"].hide();
-    
-        this.$store.commit("businessOwner/ownerPost",[]); 
-            this.reloads()
-           this.page = 1;
-      this.infiniteId += 1;
-   console.log("post create complete");
 
+          this.$store.commit("businessOwner/ownerPost", []);
+          this.reloads();
+          this.page = 1;
+          this.infiniteId += 1;
+          console.log("post create complete");
         })
         .catch((err) => {
           if (err.response.status == 422) {
@@ -1016,6 +967,7 @@ export default {
             });
 
             loader.hide();
+            this.isUploading = false;
           } else {
             this.flashMessage.show({
               status: "error",
@@ -1025,6 +977,7 @@ export default {
             });
             console.log({ err: err });
             loader.hide();
+            this.isUploading = false;
           }
         });
     },
@@ -1037,7 +990,7 @@ export default {
     },
     resetPostData() {
       console.log("Resetting the post data");
-     
+
       if (!this.isSubmitted) {
         this.createPost.hyperlinks = [];
         this.createPost.movies = [];
@@ -1050,11 +1003,10 @@ export default {
       return "yoo";
     },
 
-     info: function () {
+    info: function () {
       return this.$store.getters["profile/getUserPostIntro"];
     },
 
-   
     owner_post() {
       return this.$store.state.profile.ownerPost;
     },
@@ -1070,19 +1022,19 @@ export default {
 </script>
 
 <style >
-  
-  .h-lg-250{
+.h-lg-250 {
+  height: 350px !important;
+}
 
-   height: 350px !important;   
-  }
-
-  .lb-item{
-    background-size: auto;
-  }
- 
+.lb-item {
+  background-size: auto;
+}
 </style>
 
 <style scoped>
+.m13 {
+  margin-bottom: -13px;
+}
 
 .custom-block-class {
   position: absolute;
@@ -1096,13 +1048,12 @@ export default {
 }
 
 .upload-cancel {
-   
-   z-index: 1;
-    margin-top: -40%;
-    float: right;
-    margin-left: -10px;
-    right: -97%;
-    position: relative;
+  z-index: 1;
+  margin-top: -40%;
+  float: right;
+  margin-left: -10px;
+  right: -97%;
+  position: relative;
 }
 
 .upload-cancel:hover {
@@ -1111,17 +1062,15 @@ export default {
 }
 
 .oorange {
-  
   color: red;
-    font-size: 20px;
-    background: white;
-    border-radius: 50%;
-
+  font-size: 20px;
+  background: white;
+  border-radius: 50%;
 }
 
-.h300px{
+.h300px {
   height: 300px;
-  overflow-x:hidden;
+  overflow-x: hidden;
 }
 
 #preview img {
@@ -1148,26 +1097,22 @@ export default {
   color: #e75c18;
 }
 @media (max-width: 762px) {
-.usernamee{
-  font-weight: 600;
-  font-size: 15px;
-  color:black;
+  .usernamee {
+    font-weight: 600;
+    font-size: 15px;
+    color: black;
+  }
 }
-
-
-
-}
-.inline-comment{
+.inline-comment {
   width: 95%;
 }
 
 @media (min-width: 762px) {
-
-  .usernamee{
-  font-weight: 600;
-  font-size: 20px;
-  color:black;
-}
+  .usernamee {
+    font-weight: 600;
+    font-size: 20px;
+    color: black;
+  }
 
   .avat {
     width: 64px;
@@ -1198,6 +1143,16 @@ export default {
   }
 }
 @media (max-width: 762px) {
+  .commentt[data-v-41fcb621] {
+    width: 99%;
+    border: solid 1 px #ccc;
+    border-radius: 25 px;
+    background-color: #ddd;
+    height: 34 px;
+    padding-left: 10 px;
+     margin-left: 2%; 
+  }
+
   .post-btn {
     border: none !important;
     margin-right: 0px;
@@ -1280,12 +1235,10 @@ export default {
   }
 }
 .bordder {
- 
-
   border: 1px solid gray;
-    height: 50px;
-    padding: 6px;
-    border-radius: 10px;
+  height: 50px;
+  padding: 6px;
+  border-radius: 10px;
 }
 .username {
   color: black;
@@ -1315,25 +1268,22 @@ export default {
   border-color: red;
 }
 
-.durationn{
-  font-weight:400;
+.durationn {
+  font-weight: 400;
   font-size: 15px;
-  color:black
-
-
+  color: black;
 }
-
 </style>
 <style>
 .custom-block-class {
   position: absolute;
   z-index: 1;
 }
-.post-text p{
+.post-text p {
   margin: 0px;
 }
-.toright{
+.toright {
   position: absolute;
-    right: 1%;
+  right: 1%;
 }
 </style>

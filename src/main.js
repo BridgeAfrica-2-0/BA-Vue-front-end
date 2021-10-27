@@ -28,9 +28,9 @@ import LoadScript from "vue-plugin-load-script";
 import InfiniteLoading from "vue-infinite-loading";
 
 import { loader } from "./mixins"
-import ProgressBar from 'vuejs-progress-bar'
-Vue.use(ProgressBar)
-
+import VueYoutube from 'vue-youtube'
+ 
+Vue.use(VueYoutube)
 //import LoadScript from "vue-plugin-load-script";
 
 Vue.use(LoadScript);

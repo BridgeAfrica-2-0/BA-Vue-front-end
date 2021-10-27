@@ -14,7 +14,7 @@
               <bussiness />
             </b-tab>
             <b-tab title="Media" href="#media">
-              <Media />
+              <Media type="profile" />
             </b-tab>
             <b-tab title="Networks">
               <Networks />

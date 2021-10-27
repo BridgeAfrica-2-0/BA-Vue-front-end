@@ -567,17 +567,18 @@
 
 <script>
 import EmojiPicker from "vue-emoji-picker";
-
+import io from "socket.io-client"
 export default {
   components: {
     EmojiPicker,
   },
   data() {
     return {
+      socket:io(),
+ 
       chatSelected: [],
       input: "",
       search: "",
-
       showsearch: true,
       selecteduser: false,
 

@@ -472,7 +472,7 @@
                       <span class="mr-2"
                         ><fas-icon
                           class="violet search"
-                          :icon="['fas', 'cogs']"
+                          :icon="['fas', 'cart-arrow-down']"
                       /></span>
                      My orders
                     </a>
@@ -571,7 +571,7 @@
               class="other-menu suggest-item cursor-pointer text-decoration-none text-dark"
             >
               <span class="mr-2"
-                ><fas-icon class="violet search" :icon="['fas', 'cogs']"
+                ><fas-icon class="violet search" :icon="['fas', 'cart-arrow-down']"
               /></span>
              My orders
             </a>

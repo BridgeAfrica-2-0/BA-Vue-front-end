@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <!-- <div>
     <b class="place">Places you lived</b>
     <hr />
 
@@ -15,7 +15,28 @@
     </p>
 
     <p class="place">  {{info.user.city}} </p>
-  </div> 
+  </div>  -->
+
+  <div>
+    <b class="basic">Places you lived</b>
+    <hr />
+    <div class="basic row">
+      <div class="col">
+        Current City:
+      </div>
+      <div class="col">
+        {{info.user.city}}
+      </div>
+    </div>
+    <div class=" basic row">
+      <div class="col">
+         Home City:
+      </div>
+      <div class="col">
+        {{ info.user.home_town }}
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>

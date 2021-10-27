@@ -17,10 +17,12 @@ import follower from "./follower";
 import UserProfileOwner from "./UserProfileOwner"
 import axios from "axios";
 import { search } from "./search";
+import chat from "./chat";
+
 
 Vue.use(Vuex);
 
-axios.defaults.baseURL = process.env.VUE_APP_API_URL;
+axios.defaults.baseURL = process.env.VUE_APP_API_URL_DEV;
 // axios.defaults.baseURL = process.env.VUE_APP_API_URL_DEV;
 
 
@@ -40,7 +42,8 @@ export default new Vuex.Store({
         profile,
         follower,
         search,
-        UserProfileOwner
+        UserProfileOwner,
+        chat
 
     }
 });

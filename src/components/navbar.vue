@@ -100,7 +100,6 @@
                 data-original-title=""
                 title=""
               />
-                
 
               <input
                 id="search-location"
@@ -683,22 +682,22 @@
 </template>
 
 <script>
-import Button from '@/components/ButtonNavBarFind'
+import Button from "@/components/ButtonNavBarFind";
 
 export default {
   name: "navbar",
-   components:{
-    Button
+  components: {
+    Button,
   },
   props: {
     credentials: {
       type: Object,
       default: function () {
         return {
-          keyword:'',
-          placeholder:''
-        }
-      }
+          keyword: "",
+          placeholder: "",
+        };
+      },
     },
   },
 
@@ -708,8 +707,23 @@ export default {
       shownav: false,
     };
   },
-
+  computed: {
+    users() {
+      return this.$store.getters["chat/getUsers"];
+    },
+  },
+  created() {
+    this.getUsers();
+  },
   methods: {
+    getUsers() {
+      this.$store
+        .dispatch("chat/GET_USERS")
+        .then(() => {
+          console.log("->[Data logged]<-");
+        })
+        .catch(() => console.log("error"));
+    },
     toggleinput() {
       this.$refs.mobileinput.style.display = "block";
       this.isActive = true;

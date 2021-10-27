@@ -29,6 +29,7 @@
         "infinite-loading": "^0.2.8",
         "laravel-echo": "^1.11.2",
         "ly-tab": "^2.1.2",
+        "moment": "^2.29.1",
         "node-sass": "^5.0.0",
         "register-service-worker": "^1.7.1",
         "sass-loader": "^11.0.1",

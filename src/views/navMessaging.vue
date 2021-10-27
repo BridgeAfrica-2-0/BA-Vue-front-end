@@ -4,6 +4,7 @@
     <b-container>
       <div class="chat-box">
         <b-row>
+          <!-- Mobile -->
           <b-col class="pr-0" cols="12" xl="4" v-if="show">
             <div class="right-mobile">
               <b-row>
@@ -11,7 +12,8 @@
                   <b-avatar
                     class="d-inline-block profile-pic"
                     variant="primary"
-                    src="https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg"
+                    src="https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg"
+                    square
                   ></b-avatar>
                 </b-col>
                 <b-col>
@@ -42,14 +44,14 @@
                   @click="showMessages(false)"
                 >
                   <b-col class="col-10">
-                    <span style="display:inline-flex mb-2">
+                    <span style="display: inline-flex mb-2">
                       <b-avatar
                         class="d-inline-block profile-pic"
                         variant="primary"
                         src="https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg"
                       ></b-avatar>
 
-                      <h6 class="d-inline-block ml-2  ">
+                      <h6 class="d-inline-block ml-2">
                         <b class="bold"> {{ message.name }}</b>
                         <p class="duration">{{ message.startMessage }}</p>
                       </h6>
@@ -68,19 +70,23 @@
               </div>
             </div>
           </b-col>
+          <!-- ---- -->
 
           <b-col class="pr-0">
-            <div class="right ">
+            <div class="right">
               <b-row>
                 <b-col class="p-2">
                   <b-avatar
                     class="d-inline-block profile-pic"
                     variant="primary"
-                    src="https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg"
+                    src="https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg"
+                    square
                   ></b-avatar>
                 </b-col>
                 <b-col>
-                  <h3 class="mt-4 title">Messages</h3>
+                  <h1 class="mt-4 title text-bold">
+                    {{ currentUser.user.name.split(" ")[0] }}
+                  </h1>
                 </b-col>
                 <b-col>
                   <b-icon
@@ -96,57 +102,74 @@
                 placeholder="Search inbox"
               />
             </div>
+
+            <!-- Chats Available  -->
             <div>
               <div class="messages">
                 <b-row
-                  v-for="message in messages"
-                  :key="message.id"
-                  class="p-2 message"
-                  @click="showInfo(false)"
+                  v-for="(chat, index) in chatList"
+                  :key="index"
+                  :class="[
+                    'p-2 message ',
+                    {
+                      messageSelected:
+                        index ==
+                        (chatSelected.clickedId != null
+                          ? chatSelected.clickedId
+                          : false)
+                          ? chatSelected.active
+                          : false,
+                    },
+                  ]"
+                  @click="selectedChat(chat, index)"
                 >
                   <b-col class="col-9">
-                    <span style="display:inline-flex">
+                    <span style="display: inline-flex">
                       <b-avatar
                         class="d-inline-block profile-pic"
                         variant="primary"
                         src="https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg"
                       ></b-avatar>
 
-                      <h6 class="mt-2  d-inline-block ml-2  ">
-                        <b class="bold"> {{ message.name }}</b>
-                        <p class="duration">{{ message.startMessage }}</p>
+                      <h6 class="mt-2 d-inline-block ml-2">
+                        <b class="bold"> {{ chat.name }}</b>
+                        <p class="duration">{{ chat.startMessage }}</p>
                       </h6>
                     </span>
                   </b-col>
 
                   <b-col class="col-3 text-center">
-                    <small class="text-center"> {{ message.timeStamp }} </small>
+                    <small class="text-center"> {{ chat.timeStamp }} </small>
                     <p class="text-center">
                       <b-badge variant="info">
-                        {{ message.messageCount }}
+                        {{ chat.messageCount }}
                       </b-badge>
                     </p>
                   </b-col>
                 </b-row>
               </div>
             </div>
+
+            <!-- End Chats -->
           </b-col>
+
+          <!-- selected Chat  -->
           <b-col
-            v-if="show == false && info == false && newMsg == false"
-            class="p-0 back-image "
+            v-if="newMsg == false && info == false"
+            class="p-0 back-image"
             cols="12"
             xl="8"
-            style="margin-right: 14px;"
+            style="margin-right: 14px"
           >
-            <div class="">
-              <div class="chat-nav shadow ">
+            <div>
+              <div class="chat-nav shadow">
                 <b-row class="mobile">
                   <b-col class="col-1">
                     <b-icon
                       @click="showMessages(true)"
                       icon="arrow-left"
                       aria-hidden="true"
-                      class="primary "
+                      class="primary"
                     ></b-icon>
                   </b-col>
                   <b-col class="col-3">
@@ -158,8 +181,8 @@
                   </b-col>
 
                   <b-col class="detale">
-                    <h6>Louis Litt</h6>
-                    <small>Online</small>
+                    <h6>{{ receiver.name }}</h6>
+                    <small>Online </small>
                   </b-col>
                   <b-col cols="3">
                     <b-row class="mt-3">
@@ -177,16 +200,16 @@
                     </b-row>
                   </b-col>
                 </b-row>
-                <b-row class="desk">
-                  <b-col class="col-2">
+                <b-row class="desk" v-if="chatSelected.active">
+                  <b-col class="col-2" @click="info = true">
                     <b-avatar
                       variant="primary"
                       src="https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg"
                       size="60"
                     ></b-avatar>
                   </b-col>
-                  <b-col class="detail">
-                    <h5>Louis Litt</h5>
+                  <b-col class="detail" @click="info = true">
+                    <h5>{{ receiver.name }}</h5>
                     <p>Online</p>
                   </b-col>
                   <b-col class="col-4">
@@ -201,7 +224,7 @@
                       <b-col>
                         <b-dropdown
                           id="dropdown-1"
-                          class=" mt-md-0 drop-hover"
+                          class="mt-md-0 drop-hover"
                           no-caret
                           dropleft
                           variant="outline-light"
@@ -235,56 +258,60 @@
               </div>
 
               <section
+                v-if="chatSelected.active"
                 class="chats"
-                style="
-             margin-left: 1px;"
+                style="margin-left: 1px"
+                ref="feed"
               >
-                <div v-for="chat in chats" :key="chat.id">
-                  <div v-if="chat.type == 'received'" id="received">
+
+                <div v-if="loader" class="text-center mt-12 pt-12">
+                  <b-spinner variant="primary" label="Spinning" class="spinner centralizer"></b-spinner>
+                </div>
+                <div v-else v-for="chat in userToUser" :key="chat.id">
+                  <div v-if="currentUser.user.id==chat.sender_id">
                     <b-row class="p-4">
-                      <b-avatar
-                        variant="primary"
-                        src="https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg"
-                      ></b-avatar>
                       <b-col>
-                        <p>
-                          <span class="name"> {{ chat.name }} </span>
-                        </p>
                         <p class="msg-text mt-0 text">
                           {{ chat.message }}
-                          <span class="float-right mt-2 white ">
-                            {{ chat.timeStamp }}
-                          </span>
+                          <small class="float-right mt-2 text-white pr-1 pt-1">
+                            {{ chat.created_at }}
+                          </small>
                         </p>
                       </b-col>
                     </b-row>
                   </div>
-                  <div v-if="chat.type == 'sent'">
+                  <div v-else>
                     <b-row class="p-4">
                       <b-col>
-                        <p class="sent-name">
-                          <span class="name">{{ chat.name }}</span>
-                        </p>
                         <p id="sent" class="msg-text-sent text">
                           {{ chat.message }}
-                          <span class="float-right mt-2 white">
-                            {{ chat.timeStamp }}
-                          </span>
+                          <small class="float-right mt-2 text-white pr-1 pt-1">
+                            {{ getCreatedAt(chat.created_at) }}
+                          </small>
                         </p>
                       </b-col>
-                      <b-avatar
-                        variant="primary"
-                        src="https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg"
-                      ></b-avatar>
                     </b-row>
                   </div>
                 </div>
               </section>
-              <div class="bottom ">
+
+              <section v-else class="chats" style="margin-left: 1px" ref="feed">
+                <div class="mt-12 pt-12">
+                  <h1 class="text-center">Select a chat</h1>
+                </div>
+              </section>
+
+              <div class="bottom" v-if="chatSelected.active">
                 <b-row v-if="!checked">
                   <b-col cols="2" class="p-0">
                     <b-icon
-                      class="msg-icon primary icon-size  icon-top float-right text-right"
+                      class="
+                        msg-icon
+                        primary
+                        icon-size icon-top
+                        float-right
+                        text-right
+                      "
                       icon="paperclip"
                     ></b-icon>
                   </b-col>
@@ -292,8 +319,9 @@
                     <b-form-input
                       id="textarea"
                       v-model="input"
+                      @keyup.enter="send"
                       class="input-background"
-                      placeholder="Enter something..."
+                      placeholder="Enter the message..."
                     ></b-form-input>
 
                     <div class="wrapper">
@@ -325,7 +353,7 @@
                             class="emoji-picker"
                             :style="{
                               top: display.y + 'px',
-                              left: display.x + 'px'
+                              left: display.x + 'px',
                             }"
                           >
                             <div class="emoji-picker__search">
@@ -357,18 +385,19 @@
                   <b-col cols="2" class="p-0">
                     <b-icon
                       @click="send"
-                      class="msg-icon primary icon-size icon-top "
+                      class="msg-icon primary icon-size icon-top"
                       icon="cursor-fill"
                     ></b-icon>
                   </b-col>
                 </b-row>
-                <p v-if="checked" class="ml-5">
+                <!-- <p v-if="checked" class="ml-5">
                   You have blocked messages and calls from this user.
                   <b-link @click="showInfo(true)">Unblock Now</b-link>
-                </p>
+                </p> -->
               </div>
             </div>
           </b-col>
+          <!-- End selected Chat -->
 
           <b-col v-if="info">
             <div class="info-nav">
@@ -385,7 +414,7 @@
                 size="200"
               ></b-avatar>
               <div class="info-detail">
-                <h1 class="info-name">Louis Litt</h1>
+                <h1 class="info-name">{{ receiver.name }}</h1>
                 <b-link class="primary">View Profile</b-link>
               </div>
             </div>
@@ -394,9 +423,7 @@
                 <li>Options</li>
                 <li>
                   <b-row
-                    ><b-col>
-                      Block Messages
-                    </b-col>
+                    ><b-col> Block Messages </b-col>
                     <b-col>
                       <b-form-checkbox
                         v-model="checked"
@@ -412,16 +439,16 @@
               </ul>
             </div>
           </b-col>
+
+          <!-- New message -->
           <b-col
             v-if="newMsg == true && info == false"
             class="p-0 col-xl-8 col-12"
           >
-            <div class="new-msg back-image" style="margin-right: 17px;">
+            <div class="new-msg back-image" style="margin-right: 17px">
               <div class="info-nav">
                 <b-row>
-                  <b-col class="col-1 mt-3">
-                    To
-                  </b-col>
+                  <b-col class="col-1 mt-3"> To </b-col>
                   <b-col>
                     <b-form-input
                       id="textarea"
@@ -434,58 +461,31 @@
 
                     <br />
 
-                    <div class="table-responsive" v-if="showsearch == true">
-                      <table v-if="resources.length" class="table">
+                    <div class="table-responsive">
+                      <table v-if="users.length" class="table">
                         <thead>
                           <tr></tr>
                         </thead>
                         <tbody>
                           <tr
-                            v-for="item in resultQuery"
-                            :key="item.key"
+                            v-for="(user, index) in users"
+                            :key="index"
                             class="p-2 message"
                             @click="showInfo(false)"
                           >
                             <td>
                               <b-avatar
-                                class="d-inline-block "
+                                class="d-inline-block"
                                 variant="primary"
                                 size="30"
-                                v-bind:src="item.profile"
+                                :src="user.profile"
                               ></b-avatar>
-                              <span class="bold"> {{ item.name }} </span>
+                              <span class="bold"> {{ user.name }} </span>
                             </td>
                           </tr>
                         </tbody>
                       </table>
                     </div>
-                  </b-col>
-                </b-row>
-              </div>
-
-              <div class="bottom newMsg-bottom">
-                <b-row>
-                  <b-col cols="2" class="p-0">
-                    <b-icon
-                      class="msg-icon primary icon-size     icon-top float-right text-right"
-                      icon="paperclip"
-                    ></b-icon>
-                  </b-col>
-                  <b-col cols="8" class="p-0">
-                    <b-form-input
-                      id="textarea"
-                      v-model="text"
-                      class="input-background"
-                      placeholder="Enter something..."
-                    ></b-form-input>
-                  </b-col>
-
-                  <b-col cols="2" class="p-0">
-                    <b-icon
-                      @click="send"
-                      class="msg-icon primary icon-size icon-top "
-                      icon="cursor-fill"
-                    ></b-icon>
                   </b-col>
                 </b-row>
               </div>
@@ -499,20 +499,56 @@
 </template>
 
 <script>
+import io from "socket.io-client";
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
 import EmojiPicker from "vue-emoji-picker";
+import moment from "moment"
 
 export default {
   components: {
     Navbar,
     Footer,
-    EmojiPicker
+    EmojiPicker,
   },
   data() {
     return {
       input: "",
       search: "",
+      socket: io(),
+
+      chatSelected: [],
+      chatList: [
+        {
+          id: 0,
+          name: "Blezour blec",
+          startMessage: "Hello Blec lola blec ",
+          timeStamp: "3:00pm",
+          messageCount: "10",
+        },
+        {
+          id: 1,
+          name: "Blec blezour blec",
+          startMessage: "yoo nigga sup lola blec",
+          timeStamp: "7:00am",
+          messageCount: "60",
+        },
+
+        {
+          id: 2,
+          name: "Edouard yonga",
+          startMessage: "Lorem ipsum la lola blec vlr ",
+          timeStamp: "9:00am",
+          messageCount: "60",
+        },
+        {
+          id: 4,
+          name: "baba blecc ",
+          startMessage: "Lorem ipsum la lola blec vlr ",
+          timeStamp: "9:00am",
+          messageCount: "60",
+        },
+      ],
 
       showsearch: true,
       selecteduser: false,
@@ -524,29 +560,29 @@ export default {
           title: "Accounting Services",
           uri: "aaaa.com",
           category: "a",
-          icon: null
+          icon: null,
         },
         { title: "Administration", uri: "aaaa.com", category: "a", icon: null },
         {
           title: "Advanced Student Lookup",
           uri: "bbbb.com",
           category: "b",
-          icon: null
+          icon: null,
         },
         { title: "Art & Sciences", uri: "bbbb.com", category: "b", icon: null },
         {
           title: "Auxiliares Services",
           uri: "bbbb.com",
           category: "b",
-          icon: null
+          icon: null,
         },
         { title: "Basic Skills", uri: "cccc.com", category: "c", icon: null },
         {
           title: "Board of Trustees",
           uri: "dddd.com",
           category: "d",
-          icon: null
-        }
+          icon: null,
+        },
       ],
       resources: [
         {
@@ -554,14 +590,14 @@ export default {
           profile:
             "https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg",
           type: "person",
-          id: "1"
+          id: "1",
         },
         {
           name: "itz blec blec",
           profile:
             "https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg",
           type: "person",
-          id: "2"
+          id: "2",
         },
 
         {
@@ -569,7 +605,7 @@ export default {
           profile:
             "https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg",
           type: "person",
-          id: "3"
+          id: "3",
         },
 
         {
@@ -577,7 +613,7 @@ export default {
           profile:
             "https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg",
           type: "person",
-          id: "4"
+          id: "4",
         },
 
         {
@@ -585,21 +621,21 @@ export default {
           profile:
             "https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg",
           type: "person",
-          id: "5"
+          id: "5",
         },
         {
           name: "blezour blec",
           profile:
             "https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg",
           type: "person",
-          id: "6"
-        }
+          id: "6",
+        },
       ],
       message: {
         type: "",
-        name: "Louis Litt",
+        name: "{{ receiver.name }}",
         timeStamp: "",
-        message: ""
+        message: "",
       },
       newMsg: false,
       show: false,
@@ -615,7 +651,7 @@ export default {
           timeStamp: "3:00 PM",
 
           message:
-            "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Explicabo, quos? Fuga, nam dolores? Tempora, qui."
+            "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Explicabo, quos? Fuga, nam dolores? Tempora, qui.",
         },
         {
           id: 1,
@@ -623,7 +659,7 @@ export default {
           name: "Louis Litt",
           timeStamp: "3:00 PM",
           message:
-            "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Explicabo, quos? Fuga, nam dolores? Tempora, qui."
+            "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Explicabo, quos? Fuga, nam dolores? Tempora, qui.",
         },
         {
           id: 2,
@@ -631,7 +667,7 @@ export default {
           name: "Louis Litt",
           timeStamp: "3:00 PM",
           message:
-            "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Explicabo, quos? Fuga, nam dolores? Tempora, qui."
+            "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Explicabo, quos? Fuga, nam dolores? Tempora, qui.",
         },
         {
           id: 3,
@@ -639,7 +675,7 @@ export default {
           name: "Louis Litt",
           timeStamp: "3:00 PM",
           message:
-            "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Explicabo, quos? Fuga, nam dolores? Tempora, qui."
+            "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Explicabo, quos? Fuga, nam dolores? Tempora, qui.",
         },
         {
           id: 4,
@@ -647,7 +683,7 @@ export default {
           name: "Louis Litt",
           timeStamp: "3:00 PM",
           message:
-            "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Explicabo, quos? Fuga, nam dolores? Tempora, qui."
+            "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Explicabo, quos? Fuga, nam dolores? Tempora, qui.",
         },
         {
           id: 5,
@@ -655,8 +691,8 @@ export default {
           name: "Louis Litt",
           timeStamp: "3:00 PM",
           message:
-            "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Explicabo, quos? Fuga, nam dolores? Tempora, qui."
-        }
+            "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Explicabo, quos? Fuga, nam dolores? Tempora, qui.",
+        },
       ],
       messages: [
         {
@@ -664,14 +700,14 @@ export default {
           name: "Blezour blec",
           startMessage: "Hello Blec lola blec ",
           timeStamp: "3:00pm",
-          messageCount: "10"
+          messageCount: "10",
         },
         {
           id: 1,
           name: "Blec blezour blec",
           startMessage: "yoo nigga sup lola blec",
           timeStamp: "7:00am",
-          messageCount: "60"
+          messageCount: "60",
         },
 
         {
@@ -679,51 +715,51 @@ export default {
           name: "baba blecc ",
           startMessage: "Lorem ipsum la lola blec vlr ",
           timeStamp: "9:00am",
-          messageCount: "60"
+          messageCount: "60",
         },
         {
           id: 4,
           name: "Louis Litt",
           startMessage: "Lorem  sit amet this is goo.",
           timeStamp: "6:00am",
-          messageCount: "6"
+          messageCount: "6",
         },
         {
           id: 5,
           name: "Louis Litt",
           startMessage: "Lorem this   sit amet.",
           timeStamp: "7:00am",
-          messageCount: "100"
+          messageCount: "100",
         },
         {
           id: 6,
           name: "Louis Litt",
           startMessage: "Lorem ithe amet.",
           timeStamp: "7:00am",
-          messageCount: "3"
+          messageCount: "3",
         },
         {
           id: 7,
           name: "Louis Litt",
           startMessage: "Lordol sit amet.",
           timeStamp: "7:00am",
-          messageCount: "10"
+          messageCount: "10",
         },
         {
           id: 8,
           name: "Louis Litt",
           startMessage: "Lorem vheck ",
           timeStamp: "7:00am",
-          messageCount: "40"
+          messageCount: "40",
         },
         {
           id: 9,
           name: "Louis Litt",
           startMessage: "Lorem papa .",
           timeStamp: "7:00am",
-          messageCount: "15"
-        }
-      ]
+          messageCount: "15",
+        },
+      ],
     };
   },
 
@@ -731,11 +767,70 @@ export default {
     focus: {
       inserted(el) {
         el.focus();
+      },
+    },
+  },
+  computed: {
+    currentUser() {
+      return this.$store.getters["chat/getUser"];
+    },
+    users() {
+      return this.$store.getters["chat/getUsers"];
+    },
+    userToUser() {
+      return this.$store.getters["chat/getUserToUser"];
+    },
+    loader() {
+      return this.$store.getters["chat/getLoader"];
+    },
+    receiver() {
+      return this.userToUser[0] ? this.userToUser[0].receiver : "";
+    },
+    resultQuery() {
+      if (this.searchQuery) {
+        return this.users.filter((user) => {
+          return this.searchQuery
+            .toLowerCase()
+            .split(" ")
+            .every((v) => user.name.toLowerCase().includes(v));
+        });
+      } else {
+        return this.users.data;
       }
-    }
+    },
+  },
+  mounted() {
+    this.getUsers();
   },
 
   methods: {
+    getCreatedAt(data){
+      return moment(data).format('LT')
+    },
+    getUsers() {
+      this.$store
+        .dispatch("chat/GET_USERS")
+        .then(() => {
+          console.log("->[Data logged]<-");
+        })
+        .catch(() => console.log("error"));
+    },
+    histUserToUser(receiverId) {
+      this.$store
+        .dispatch("chat/GET_USER_TO_USER", receiverId)
+        .then(() => {
+          console.log("->[Data logged]<-");
+        })
+        .catch(() => console.log("error"));
+    },
+    selectedChat(chat, index) {
+      this.histUserToUser(index);
+      this.newMsg = false;
+      this.chatSelected = { active: true, clickedId: index, ...chat };
+      console.log("[DEBUG] Chat selected:", this.chatSelected);
+    },
+    //-------
+
     insert(emoji) {
       this.input += emoji;
     },
@@ -776,27 +871,24 @@ export default {
       this.message.message = this.text;
       this.chats.push(this.message);
       this.text = "";
-    }
+    },
   },
-
-  computed: {
-    resultQuery() {
-      if (this.searchQuery) {
-        return this.resources.filter(item => {
-          return this.searchQuery
-            .toLowerCase()
-            .split(" ")
-            .every(v => item.name.toLowerCase().includes(v));
-        });
-      } else {
-        return this.resources;
-      }
-    }
-  }
 };
 </script>
 
 <style scoped>
+.spinner{
+  font-size: 30px;
+  width: 08%;
+  height: 07%;
+
+}
+.centralizer {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+}
 .right {
   padding: 10px;
   border-right: 2px solid #ccc;
@@ -852,6 +944,11 @@ h1 {
 }
 .txt {
   font-size: 13px;
+}
+
+.messageSelected {
+  background-color: #f09675;
+  color: #fff;
 }
 .message {
   cursor: pointer;

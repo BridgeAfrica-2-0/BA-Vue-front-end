@@ -6,15 +6,15 @@
   >
     <a>
       <span>
-        <img class="card-img album-img" :src="cover(album.cover)" alt="" />
+        <img class="card-img album-img" :src="cover(item.cover)" alt="" />
       </span>
       <div class="createdesc botmedia">
         <div class="botmediadess-position">
           <h6 style="font-size: 26px; font-weight: bold">
-            {{ album.name }}
+            {{ item.name }}
           </h6>
           <p style="font-size: 24px; font-weight: bold">
-            {{ album.items | plural }}
+            {{ item.items | plural }}
           </p>
 
           <b-button
@@ -61,6 +61,7 @@ import { fullMediaLink } from "@/helpers";
 export default {
   props: [
     "album",
+    "type",
     "deleteAlbums",
     "editAlbum",
     "canBeUpdate",
@@ -69,7 +70,30 @@ export default {
 
   data: () => ({
     upHere: false,
+    item: null,
+    strategy: (data, type) => {
+      const scheam = {
+        business: {
+          name: data.name,
+          items: data.items,
+          cover: data.cover,
+        },
+
+        profile: {
+          name: data.album_name,
+          items: data.item_number,
+          cover: data.media,
+        },
+      };
+
+      return scheam[data];
+    },
   }),
+
+  created() {
+    this.item = this.strategy(this.album, this.type);
+    console.log(this.item);
+  },
 
   filters: {
     path: fullMediaLink,
@@ -88,6 +112,7 @@ export default {
     getFullMediaLink: fullMediaLink,
 
     cover(cover) {
+      console.log(cover);
       return cover.length ? this.getFullMediaLink(cover[0]) : defaultImage;
     },
   },

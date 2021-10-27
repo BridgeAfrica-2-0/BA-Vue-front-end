@@ -40,13 +40,14 @@
           </b-modal>
 
           <AlbumItem
-            v-for="album in getAlbums"
+            v-for="album in strategy[type]().albums"
             :key="album.id"
             :album="album"
             :editAlbum="() => editAlbum(album)"
             :deleteAlbums="() => deleteAlbums(album.id)"
             :canBeUpdate="() => canBeUpdate(album)"
             :showAlbumPictures="() => showAlbumPictures(album)"
+            :type="type"
           />
         </div>
 
@@ -160,11 +161,17 @@ export default {
     Images,
     AlbumItem,
   },
+
   props: {
     canUpload: {
       type: Boolean,
     },
+    type: {
+      type: String,
+      require: true,
+    },
   },
+
   data: function () {
     return {
       hasLoadPicture: true,
@@ -183,10 +190,20 @@ export default {
       album_name: "",
       album_type: "",
       edit_name: "",
+      strategy: null,
     };
   },
-  mounted() {
+  created() {
     this.url = this.$route.params.id;
+
+    this.strategy = {
+      business: () => ({
+        albums: this.getAlbumsBusiness,
+      }),
+      profile: () => ({
+        albums: this.getAlbumsProfile,
+      }),
+    };
   },
 
   filters: {
@@ -198,9 +215,13 @@ export default {
 
   computed: {
     ...mapGetters({
-      getAlbums: "UserProfileOwner/getAlbums",
-      getAlbumImage: "UserProfileOwner/getAlbumImage",
-      albumImages: "UserProfileOwner/getalbumImages",
+      getAlbumsProfile: "UserProfileOwner/getAlbums",
+      getAlbumImageProfile: "UserProfileOwner/getAlbumImage",
+      albumImagesProfile: "UserProfileOwner/getalbumImages",
+
+      getAlbumsBusiness: "businessOwner/getAlbums",
+      getAlbumImageBusiness: "businessOwner/getAlbumImage",
+      albumImagesBusiness: "businessOwner/getalbumImages",
     }),
 
     canCreateAlbum() {
@@ -246,7 +267,7 @@ export default {
     },
 
     canBeUpdate(album) {
-      return  ["Profile", "Cover", "post"].includes(album.name) ? false : true;
+      return ["Profile", "Cover", "post"].includes(album.name) ? false : true;
     },
 
     createAlbums() {
@@ -347,7 +368,6 @@ export default {
   background: #e75c18 !important;
   border-radius: 50%;
 }
-
 </style>
 
 <style>

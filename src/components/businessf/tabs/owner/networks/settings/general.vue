@@ -1,5 +1,7 @@
 <template>
   <b-container>
+    <flashMessage />
+
     <div class="">
       <b-container>
         <b-form-group
@@ -74,7 +76,9 @@
     </div>
 
     <b-container>
-      <b-link href="#foo" class="f-left text">Delete Network</b-link>
+      <b-link href="#foo" class="f-left text" v-on:click="deleteNetwork"
+        >Delete Network</b-link
+      >
     </b-container>
 
     <div class="b-bottomn">
@@ -216,7 +220,6 @@ export default {
 
 .a-button-l {
   margin-bottom: 1000px;
-  align-content: right;
   float: right;
 }
 .a-text {

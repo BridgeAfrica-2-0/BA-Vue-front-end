@@ -274,35 +274,16 @@ export default {
 
     
     imageProfile() {
-   
-
-
        return "yoo"
-
     },
    
-
     business_logo() {
-      return  this.$store.state.businessOwner.businessInfo.logo_path;  
-
-    
+      return  this.$store.state.businessOwner.businessInfo.logo_path;
     },
-
 
      owner_post() {
-
-      return  this.$store.state.businessOwner.ownerPost;  
-
-    
+      return  this.$store.state.businessOwner.ownerPost;
     },
-
-
-
-
-
-
-
-
 
     profileNamePost() {
     return "yoo";

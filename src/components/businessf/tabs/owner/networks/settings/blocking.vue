@@ -8,7 +8,11 @@
       </p>
     </b-container>
 
-    <b-container class="bv-example-row">
+    <b-container
+      v-for="blockuser in blockusers"
+      :key="blockuser.id"
+      class="bv-example-row"
+    >
       <b-li-group>
         <b-li
           v-for="blocked in getBlocked"

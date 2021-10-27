@@ -1,23 +1,32 @@
 <template>
   <div>
     <b class="work">WorkPlace</b>
-    <hr />
+    <hr />     
+
+<div
+          class="row"
+          v-for="workPlace in work "   
+          :key="workPlace.id"
+        >
 
     <b-list-group-item class="d-flex align-items-center mb-4 item  border-none">
-      <b-avatar class="mr-3 avatar"></b-avatar>
-      <div class="datails">
-        <div class="row">
-          <div class="col">
-            <span class="mr-auto"> <b>Company</b> </span>
-            <p><b>Position - 7 Feb</b></p>
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas
-              quibusdam harum maxime!
-            </p>
-          </div>
-        </div>
-      </div>
+    <!--  <b-avatar class="mr-3 avatar"></b-avatar> -->
+     
+
+      <div class="media-body">
+              <h6 class="mb-0">
+                <b>{{ workPlace.company_name }} ({{workPlace.position}})</b>
+              </h6>
+              <b>{{ workPlace.start_year }}/{{workPlace.start_month}}/{{workPlace.start_day}} -   {{ workPlace.end_year }}/{{workPlace.end_month}}/{{workPlace.end_day}}</b>
+              <p class="mb-1">
+                {{ workPlace.job_responsibilities }}
+              </p>
+            </div>
+
     </b-list-group-item>
+
+
+</div>
   </div>
 </template>
 
@@ -25,7 +34,16 @@
 export default {
   data() {
     return {};
-  }
+  },
+
+  computed:{
+       work(){
+      return this.$store.state.follower.profileIntro.user_experience;
+    },
+
+     workk(){
+      return this.$store.state.follower.profile_about;
+    }}
 };
 </script>
 

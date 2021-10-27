@@ -7,12 +7,11 @@
             <b-form-checkbox
               id="checkbox-1"
               name="checkbox-1"
-              value="accepted"
               class="m-left-top username"
               unchecked-value="not_accepted"
               @click="selectAll"
             >
-              Select All
+              {{ selectAll ? "Un-select All" : "Select All" }}
             </b-form-checkbox>
           </div>
         </b-col>

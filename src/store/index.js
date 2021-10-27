@@ -3,15 +3,22 @@ import Vuex from "vuex";
 import auth from "./auth";
 import dashboard from "./dashboard";
 import businessOwner from "./businessOwner";
-import ProfileAndBusinessDetails from "./ProfileAndBusinessDetails";
-import hotbusiness from "./hotbusiness";
 import networkDetails from "./networkDetails";
 import dashboardcommunity from "./dashboardcommunity";
 import networkSetting from "./networkSetting";
 
+import ProfileAndBusinessDetails from "./ProfileAndBusinessDetails";
+import businessFollowers from "./businessFollowers";
+import market from "./market";
+import hotbusiness from "./hotbusiness";
+import profile from "./profile";
+import follower from "./follower";
+import UserProfileOwner from "./UserProfileOwner"
 import axios from "axios";
+import { search } from "./search";
+
 Vue.use(Vuex);
-axios.defaults.baseURL = process.env.VUE_APP_API_URL_DEV;
+ axios.defaults.baseURL = process.env.VUE_APP_API_URL; 
 
 export default new Vuex.Store({
   modules: {
@@ -23,6 +30,11 @@ export default new Vuex.Store({
     dashboard,
     hotbusiness,
     networkSetting,
+    profile,
+    follower,
+    search,
+    market,
+ 
   },
 
   state,
@@ -1675,3 +1687,4 @@ const mutations = {
     state.userData[0].posts = payload.posts;
   },
 };
+   

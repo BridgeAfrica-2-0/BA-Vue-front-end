@@ -190,7 +190,7 @@ export default {
 }
 
 .a-button-l {
-  align-content: right;
+  /*align-content: right;*/
   float: right;
 }
 .a-text {

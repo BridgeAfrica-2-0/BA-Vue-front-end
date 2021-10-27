@@ -1,5 +1,6 @@
 <template>
   <b-container>
+    <flashMessage />
     <h5 class="a-text">Assign Role</h5>
 
     <b-container class="b-bottom">
@@ -30,7 +31,8 @@
             label-class="font-weight-bold pt-0"
             class="mb-0"
           >
-            <b-form-select v-model="roleAssignment.role" class="mb-3">
+      
+      <b-form-select v-model="roleAssignment.role" class="mb-3">
               <b-form-select-option
                 v-for="(member, index) in roleString"
                 :key="index"
@@ -65,8 +67,8 @@
 
     <div class="b-bottom">
       <b-container>
-        <h5 class="a-text">Existing Admins</h5>
-        <span>
+        <h5 class="a-text">Existing Editors</h5>
+        <span v-for="editor in editors" :key="editor.id">
           <span class="d-flex align-items-center m-list">
             <b-avatar class="mr-3 profile-pic"></b-avatar>
             <span class="mr-auto username">J. Circlehead</span>
@@ -106,8 +108,19 @@
                   <template #button-content>
                     <b-icon icon="three-dots-vertical" font-scale="1"></b-icon>
                   </template>
-                  <b-dropdown-item href="#">Edit</b-dropdown-item>
-                  <b-dropdown-item href="#"> Delete </b-dropdown-item>
+                  <b-dropdown-item
+                    href="#"
+                    @click="$bvModal.show('edit-editor'), selectObject(editor)"
+                    >Edit</b-dropdown-item
+                  >
+                  <b-dropdown-item
+                    href="#"
+                    @click="
+                      $bvModal.show('delete-editor'), selectObject(editor)
+                    "
+                  >
+                    Delete
+                  </b-dropdown-item>
                 </b-dropdown>
               </div>
             </span>
@@ -260,7 +273,6 @@ export default {
 }
 
 .a-button-l {
-  align-content: right;
   float: right;
 }
 .a-text {

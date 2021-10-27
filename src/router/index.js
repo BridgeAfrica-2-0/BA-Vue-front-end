@@ -39,6 +39,7 @@ import paidPlan from "@/views/paidPlan";
 import confirmPayment from "@/views/confirmPayment";
 import networks from "@/views/networks";
 import dashboard from "@/views/dashboard";
+import myordersBusiness from "@/views/businessOwnerOrders"
 
 import welcome from "@/views/welcome";
 
@@ -50,6 +51,12 @@ const routes = [
   //   name: "Home",
   //   component: Test,
   // },
+  {
+    path: "/business_owner/myorders",
+    name: "myorders",
+    component: myordersBusiness,
+  },
+
   {
     path: "/",
     name: "home",
@@ -101,6 +108,7 @@ const routes = [
     name: "BusinessOwner",
     component: businessOwner,
   },
+
 
   {
     path: "/business_owner_setting_general",

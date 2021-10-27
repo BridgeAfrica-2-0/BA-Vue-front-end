@@ -19,7 +19,7 @@
             >
             <b-button
               @click="deleteAll(selected)"
-              v-if="seleceted > 0"
+              v-if="selected.length > 0"
               variant="primary"
               class="a-button-l duration ml-1"
             >

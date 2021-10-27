@@ -1,135 +1,151 @@
 <template>
-	<div>
-		<fas-icon
-			class="primary mr-2 pt-1 icon-size primary"
-			:icon="['fas', 'handshake']"
-		/>
-		{{ $t("business.businesses") }}
+  <div>
+    <fas-icon
+      class="primary mr-2 pt-1 icon-size primary"
+      :icon="['fas', 'handshake']"
+    />
+    Businesses
 
-		<hr />
+    <hr />
 
-		<div class="business" v-if="noBusiness == false">
-			<b-row>
-				<b-col lg="6" v-for="item in busineses" :key="item.id">
-					<div class="people-style shadow">
-						<b-row>
-							<b-col md="3" xl="3" lg="3" cols="5" sm="3">
-								<div class="center-img">
-									<splide :options="options" class="r-image">
-										<splide-slide cl>
-											<img :src="item.picture" class="r-image" />
-										</splide-slide>
-									</splide>
-								</div>
-							</b-col>
-							<b-col md="5" cols="7" lg="9" xl="5" sm="5">
-								<p class="textt text">
-									<strong class="title"> {{ item.name }} </strong> <br />
-									{{ item.category }}
-									<br />
-									{{ count(item.followers) }} 	{{ $t("business.community") }} <br />
+    <div class="business" v-if="noBusiness == false">
+      <b-row>
+        <b-col lg="6" v-for="item in busineses" :key="item.id" > 
+          
+          
+          
+          
+          
+          
+              <div class="people-style shadow">
+      <b-row>
+        <b-col md="3" xl="3" lg="3" cols="5" sm="3">
+          <div class="center-img">
+            <splide :options="options" class="r-image">
+              <splide-slide cl>
+                 <img :src="item.picture" class="r-image" />  
+              </splide-slide>
+            </splide>
+          </div>
+        </b-col>
+        <b-col md="5" cols="7" lg="9" xl="5" sm="5">
+          <p class="textt text">
+            <strong class="title"> {{ item.name }} </strong> <br />
+             {{ item.category }}
+            <br />
+            {{ count(item.followers) }} Community <br />
 
-									<span class="location">
-										<b-icon-geo-alt class="ico"></b-icon-geo-alt>
-										{{ item.country }}
-									</span>
-									<br />
+            <span class="location">
+              <b-icon-geo-alt class="ico"></b-icon-geo-alt> {{ item.country }}
+            </span>
+            <br />
+          
 
-									<read-more
-										more-str="read more"
-										class="readmore"
-										:text="item.about_business"
-										link="#"
-										less-str="read less"
-										:max-chars="15"
-									>
-									</read-more>
-								</p>
-							</b-col>
+           <read-more
+              more-str="read more"
+              class="readmore"
+              :text="item.about_business"
+              link="#"
+              less-str="read less"
+              :max-chars="15"
+            >
+            </read-more>
 
-							<b-col lg="12" xl="4" md="4" cols="12" sm="4">
-								<div class="s-button">
-									<b-row>
-										<b-col
-											md="12"
-											lg="4"
-											xl="12"
-											sm="12"
-											cols="4"
-											class="mt-2 text-center"
-										>
-											<b-button
-												block
-												size="sm"
-												class="b-background shadow "
-												variant="primary"
-											>
-												<i class="fas fa-user-plus  fa-lg btn-icon "></i>
-												<span class="btn-com">	{{ $t("business.community") }}</span>
-											</b-button>
-										</b-col>
+          </p>
+        </b-col>
 
-										<b-col
-											md="12"
-											lg="4"
-											xl="12"
-											sm="12"
-											cols="4"
-											class="mt-2 text-center"
-										>
-											<b-button
-												block
-												size="sm"
-												class="b-background shadow "
-												variant="primary"
-											>
-												<i class="fas fa-envelope   fa-lg btn-icon "></i>
-												<span class="btn-text">{{ $t("business.message") }}</span>
-											</b-button>
-										</b-col>
+        <b-col lg="12" xl="4" md="4" cols="12" sm="4">
+          <div class="s-button">
+            <b-row>
+              <b-col
+                md="12"
+                lg="4"
+                xl="12"
+                sm="12"
+                cols="4"
+                class="mt-2 text-center"
+              >
+                <b-button
+                  block
+                  size="sm"
+                  class="b-background shadow "
+                  variant="primary"
+                >
+                  <i class="fas fa-user-plus  fa-lg btn-icon "></i>
+                  <span class="btn-com">Community</span>
+                </b-button>
+              </b-col>
 
-										<b-col
-											md="12"
-											lg="4"
-											xl="12"
-											sm="12"
-											cols="4"
-											class="mt-2 text-center"
-										>
-											<b-button
-												block
-												size="sm"
-												class="b-background shadow "
-												variant="primary"
-											>
-												<i class="fas fa-map-marked-alt  fa-lg btn-icon "></i>
-												<span class="btn-text">{{ $t("business.direction") }}</span>
-											</b-button>
-										</b-col>
-									</b-row>
-								</div>
-							</b-col>
-						</b-row>
-					</div>
-				</b-col>
-			</b-row>
-		</div>
-		<div v-show="noBusiness" class="no-business">
-			<b-container>
-				<h2>No Businesses Listed</h2>
-				<hr />
-			</b-container>
-			<p>User has not listed any business. Please check back later</p>
-		</div>
-	</div>
+              <b-col
+                md="12"
+                lg="4"
+                xl="12"
+                sm="12"
+                cols="4"
+                class="mt-2 text-center"
+              >
+                <b-button
+                  block
+                  size="sm"
+                  class="b-background shadow "
+                  variant="primary"
+                >
+                  <i class="fas fa-envelope   fa-lg btn-icon "></i>
+                  <span class="btn-text">Message</span>
+                </b-button>
+              </b-col>
+
+              <b-col
+                md="12"
+                lg="4"
+                xl="12"
+                sm="12"
+                cols="4"
+                class="mt-2 text-center"
+              >
+                <b-button
+                  block
+                  size="sm"
+                  class="b-background shadow "
+                  variant="primary"
+                >
+                  <i class="fas fa-map-marked-alt  fa-lg btn-icon "></i>
+                  <span class="btn-text">Direction</span>
+                </b-button>
+              </b-col>
+            </b-row>
+          </div>
+        </b-col>
+      </b-row>
+    </div>
+    
+    
+    
+    
+     </b-col>
+
+      </b-row>
+      
+  <infinite-loading @infinite="infiniteHandler"></infinite-loading> 
+    </div>
+    <div v-show="noBusiness" class="no-business">
+      <b-container>
+        <h2>No Businesses Listed</h2>
+        <hr />
+      </b-container>
+      <p>User  has not listed any business. Please check back later</p>
+    </div>
+  </div>
 </template>
 
 <script>
+import axios from "axios";
 export default {
   data() {
     return {
       noBusiness: false,
-      foll_id:""
+      foll_id:"",
+      page:1
     };
   },
  
@@ -142,6 +158,29 @@ export default {
         return number / 1000 + "K";
       } else return number;
     },
+
+     infiniteHandler($state) {
+     let url="business/userBusiness/"+this.page+"?id="+this.foll_id;
+    
+       this.$store.dispatch("follower/loadMoreUserBusiness",url)
+        .then(({ data }) => {
+          console.log("lala baledddd");
+          console.log(data);
+          if (data.length) {    
+            this.page += 1;
+
+            this.busineses.push(...data);
+            $state.loaded();
+          } else {
+            $state.complete();
+          }
+        })
+        .catch((err) => {
+          console.log({ err: err });
+        });
+    },
+
+
 
  },
   computed:{

@@ -20,9 +20,14 @@
               <b-form>
                 <b-form-input
                   placeholder="Album name"
-                  v-model="name"
+                  v-model="albumInfo.name"
                 ></b-form-input>
-                <b-button class="mt-2" variant="primary" @click="createAlbum">
+                <b-form-input
+                  placeholder="Album Type"
+                  class="mt-2"
+                  v-model="albumInfo.type"
+                ></b-form-input>
+                <b-button class="mt-2" variant="primary" @click="createAlbums">
                   Create</b-button
                 >
               </b-form>
@@ -31,18 +36,18 @@
 
           <div
             class="createp img-gall predit2"
-            v-for="albums in albums"
-            :key="albums.id"
+            v-for="album in getAlbums"
+            :key="album.id"
           >
             <a>
-              <span @click="showlbum(albums.id, albums.album_name)">
-                <img class="card-img album-img" :src="albums.cover[0]" alt="" />
+              <span @click="showlbum(album.id, album.name)">
+                <img class="card-img album-img" :src="album.cover" alt="" />
               </span>
 
               <div class="botmediadess">
                 <p>
-                  {{ albums.album_name }} <br />
-                  {{ albums.item_number }} Items
+                  {{ album.name }} <br />
+                  {{ album.items }} Items
                 </p>
               </div>
             </a>
@@ -66,12 +71,11 @@
                       </b-icon>
                     </template>
 
-                    <b-dropdown-item
-                      @click="editAlbum(albums.id, albums.album_name)"
+                    <b-dropdown-item @click="editAlbum(album.id)"
                       >Edit</b-dropdown-item
                     >
 
-                    <b-dropdown-item @click="deleteAlbum(albums.id)"
+                    <b-dropdown-item @click="deleteAlbums(album.id)"
                       >Delete</b-dropdown-item
                     >
                   </b-dropdown>
@@ -91,13 +95,9 @@
             <b-form>
               <b-form-input
                 placeholder="Album name"
-                v-model="edit_name"
+                v-model="editName"
               ></b-form-input>
-              <b-button
-                class="mt-2"
-                variant="primary"
-                @click="updateAlbum(edit_id)"
-              >
+              <b-button class="mt-2" variant="primary" @click="update">
                 Update</b-button
               >
             </b-form>
@@ -163,7 +163,7 @@
       <b-button variant="outline-primary" size="sm" @click="hidealbum">
         Back
       </b-button>
-      <span class="text-center ml-2 f-20"> {{ album_name }} </span>
+      <span class="text-center ml-2 f-20"> {{ this.album_name }} </span>
 
       <Images v-bind:album="album_id" />
     </div>
@@ -172,114 +172,74 @@
 
 <script>
 import Images from "./images";
-import { mapActions } from "vuex";
+import { mapActions, mapGetters } from "vuex";
 export default {
   components: { Images },
   data: function() {
     return {
       showalbum: false,
-      name: null,
-      url: null,
-      fullPage: null,
-      album_id: null,
-      album_name: null,
-      edit_id: null,
-      edit_name: null,
-      images: [
-        "https://placekitten.com/801/800",
-        "https://placekitten.com/802/800",
-        "https://placekitten.com/803/800",
-        "https://placekitten.com/804/800",
-        "https://placekitten.com/805/800",
-        "https://placekitten.com/806/800",
-        "https://placekitten.com/807/800",
-        "https://placekitten.com/808/800",
-        "https://placekitten.com/809/800",
-      ],
-      imagees: [
-        "https://i.wifegeek.com/200426/f9459c52.jpg",
-        "https://i.wifegeek.com/200426/5ce1e1c7.jpg",
-        "https://i.wifegeek.com/200426/5fa51df3.jpg",
-        "https://i.wifegeek.com/200426/663181fe.jpg",
-        "https://i.wifegeek.com/200426/2d110780.jpg",
-        "https://i.wifegeek.com/200426/e73cd3fa.jpg",
-        "https://i.wifegeek.com/200426/15160d6e.jpg",
-        "https://i.wifegeek.com/200426/d0c881ae.jpg",
-        "https://i.wifegeek.com/200426/a154fc3d.jpg",
-        "https://i.wifegeek.com/200426/71d3aa60.jpg",
-        "https://i.wifegeek.com/200426/d17ce9a0.jpg",
-        "https://i.wifegeek.com/200426/7c4deca9.jpg",
-        "https://i.wifegeek.com/200426/64672676.jpg",
-        "https://i.wifegeek.com/200426/de6ab9c6.jpg",
-        "https://i.wifegeek.com/200426/d8bcb6a7.jpg",
-        "https://i.wifegeek.com/200426/4085d03b.jpg",
-        "https://i.wifegeek.com/200426/177ef44c.jpg",
-        "https://i.wifegeek.com/200426/d74d9040.jpg",
-        "https://i.wifegeek.com/200426/81e24a47.jpg",
-        "https://i.wifegeek.com/200426/43e2e8bb.jpg",
-      ],
-      index: 0,
+      albumInfo: {
+        name: "",
+        type: "",
+      },
+
+      editName: "",
+      editId: "",
+
+      url: "",
+      fullPage: "",
+      album_id: "",
+      album_name: "",
+      album_type: "",
+      edit_name: "",
     };
   },
-  methods: {
-    hidealbum() {
-      this.showalbum = false;
-    },
-    showlbum(abum_id, album_name) {
-      this.album_name = album_name;
-      this.album_id = abum_id;
-      console.log(abum_id);
-      console.log("yoo yoo yooy ");
-      console.log(this.url);
-      let loader = this.$loading.show({
-        container: this.fullPage ? null : this.$refs.creatform,
-        canCancel: true,
-        onCancel: this.onCancel,
-        color: "#e75c18",
-      });
-      const albumUrl = this.url + "/" + abum_id;
-      this.$store
-        .dispatch("UserProfileOwner/getAlbumImages", albumUrl)
-        .then(() => {
-          console.log("hey yeah photo loaded");
-          this.showalbum = true;
-          loader.hide();
-        })
-        .catch((err) => {
-          console.log({ err: err });
-          loader.hide();
-        });
-    },
-    onClick(i) {
-      this.index = i;
-    },
-    editAlbum(album_id, album_name) {
-      this.edit_id = album_id;
-      this.edit_name = album_name;
-      this.$refs["editalbum"].show();
-    },
+  mounted() {
+    this.url = this.$route.params.id;
+  },
 
+  computed: {
+    ...mapGetters({
+      getAlbums: "UserProfileOwner/getAlbums",
+      getAlbumImage: "UserProfileOwner/getAlbumImage",
+    }),
+  },
+  beforeMount() {
+    this.getAlbums;
+    this.getAlbumImages;
+  },
+  methods: {
     ...mapActions({
       createAlbum: "UserProfileOwner/createAlbum",
       updateAlbum: "UserProfileOwner/updateAlbum",
       deleteAlbum: "UserProfileOwner/deleteAlbum",
-      getAlbums: "UserProfileOwner/getAlbums",
+      getAlbumImages: "UserProfileOwner/getAlbumImages",
     }),
 
-    createAlbum() {
-      let loader = this.$loading.show({
-        container: this.fullPage ? null : this.$refs.creatform,
-        canCancel: true,
-        onCancel: this.onCancel,
-        color: "#e75c18",
-      });
-      this.createAlbum(this.name)
-        .then((response) => {
+    hidealbum() {
+      this.showalbum = false;
+    },
+    showlbum(id, name) {
+      this.album_name = name;
+      this.album_id = id;
+      this.getAlbumImages(id)
+        .then(() => {
+          console.log("hey yeah photo loaded");
+          this.showalbum = true;
+        })
+        .catch((err) => {
+          console.log({ err: err });
+        });
+    },
+
+    createAlbums() {
+      this.createAlbum(this.albumInfo)
+        .then(() => {
           this.flashMessage.show({
             status: "success",
             message: "Album Created",
           });
-          loader.hide();
+          this.getAlbums();
         })
         .catch((err) => {
           this.sending = false;
@@ -289,32 +249,37 @@ export default {
               status: "error",
               message: err.response.data.message,
             });
-            loader.hide();
           } else {
             this.flashMessage.show({
               status: "error",
               message: "Unable to create your Album",
             });
             console.log({ err: err });
-            loader.hide();
           }
         });
     },
 
-    updateAlbum() {
-      let loader = this.$loading.show({
-        container: this.fullPage ? null : this.$refs.creatform,
-        canCancel: true,
-        onCancel: this.onCancel,
-        color: "#e75c18",
-      });
-      this.updateAlbum(this.edit_name, this.album_id)
+    editAlbum(id) {
+      this.editId = id;
+      console.log(this.editId);
+      this.$refs["editalbum"].show();
+    },
+
+    update() {
+      this.updateAlbums(this.editId, this.editName);
+    },
+
+    updateAlbums(id, name) {
+      let user = {
+        id: id,
+        name: name,
+      };
+      this.updateAlbum(user)
         .then(() => {
           this.flashMessage.show({
             status: "success",
             message: "Album Updated",
           });
-          loader.hide();
         })
         .catch((err) => {
           this.sending = false;
@@ -324,32 +289,23 @@ export default {
               status: "error",
               message: err.response.data.message,
             });
-            loader.hide();
           } else {
             this.flashMessage.show({
               status: "error",
               message: "Unable to create your Album",
             });
             console.log({ err: err });
-            loader.hide();
           }
         });
     },
 
-    deleteAlbum() {
-      let loader = this.$loading.show({
-        container: this.fullPage ? null : this.$refs.creatform,
-        canCancel: true,
-        onCancel: this.onCancel,
-        color: "#e75c18",
-      });
-      this.deleteAlbum(this.name, this.album_id)
+    deleteAlbums(id) {
+      this.deleteAlbum(id)
         .then(() => {
           this.flashMessage.show({
             status: "success",
             message: "Album Deleted",
           });
-          loader.hide();
         })
         .catch((err) => {
           this.sending = false;
@@ -359,27 +315,14 @@ export default {
               status: "error",
               message: err.response.data.message,
             });
-            loader.hide();
           } else {
             this.flashMessage.show({
               status: "error",
               message: "Unable to Delete your abum",
             });
             console.log({ err: err });
-            loader.hide();
           }
         });
-    },
-  },
-  mounted() {
-    this.url = this.$route.params.id;
-  },
-  beforeMount() {
-    this.getAlbums();
-  },
-  computed: {
-    albums() {
-      return this.$store.state.UserProfileOwner.albums;
     },
   },
 };

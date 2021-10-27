@@ -108,24 +108,55 @@
 								variant=""
 							></b-icon>
 
-							<b> {{ $t("profile_owner.posts_tab.work_at") }}: </b>
-							<span
-								class="text"
-								v-for="exp in info.user_experience.slice(0, 1)"
-								:key="exp.id"
-							>
-								{{ exp.company_name }}
-							</span>
-						</p>
-						<p>
-							<router-link to="profile_owner">
-								<b-icon
-									@click="switchTab('about')"
-									icon="pencil"
-									class="eedit"
-									variant=""
-								></b-icon>
-							</router-link>
+        <b-modal
+          id="modal-5"
+          title="Edit Intro"
+          ref="modal"
+         
+          @ok="handleOk"
+        >
+          <div class="">
+             
+            <p>
+              <b> Work at: </b>
+              <span v-if="info.user_experience">  
+              <span
+                class="text"
+                v-for="exp in info.user_experience.slice(0, 1)"
+                :key="exp.id"
+              >
+                {{ exp.company_name }}
+              </span>  </span>
+            </p>
+            <p>
+              <b> Studied at: </b>
+       
+              <span v-if="info.user_education !=null">
+                <span
+                v-for="edu in info.user_education.slice(0, 1)"
+                :key="edu.id"
+                class="text"
+                >
+                  {{ edu.school_name }}
+                </span>
+              </span>
+            </p>
+            <p>
+              <b> Home Town : </b>
+              <span class="text">
+                {{ info.user.neighbor }}
+              </span>
+            </p>
+            <p>
+              <b> Current City : </b>
+              <span class="text">
+                {{ info.user.city }}
+              </span>
+            </p>
+           
+         
+          </div>
+        </b-modal>
 
 							<b> {{ $t("profile_owner.posts_tab.studied_at") }}: </b>
 							<span

@@ -1,5 +1,13 @@
 <template>
   <div>
+
+    <fas-icon
+      class="primary mr-2 pt-1 icon-size primary"
+      :icon="['fas', 'handshake']"
+    />
+    Network
+
+    <hr />
     <b-modal id="modal-sm" size="sm" hide-header>
       Do you want to join this network? 
     </b-modal>

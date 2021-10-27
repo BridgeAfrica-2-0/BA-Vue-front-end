@@ -1,118 +1,115 @@
 <template>
-	<div class="p-0">
-		<b-container fluid class="p-0 gradient">
-			<div class="container-flex">
-				<img
-					v-if="info.user.cover_picture == null"
-					src="@/assets/img/banner.jpg"
-					class="img-fluid  banner"
-					alt="Kitten"
-				/>
+  <div class="p-0">
+    <b-container fluid class="p-0 gradient">
+      <div class="container-flex">
 
-				<img
-					v-if="info.user.cover_picture !== null"
-					:src="info.user.cover_picture"
-					class="img-fluid  banner"
-					alt="Kitten"
-				/>
-			</div>
+  
 
-			<div class="container-fluid p-63">
-				<b-row class="mt-md-2 text-left">
-					<b-col cols="12" md="12" class="m-0 p-0 text-left put-top ">
-						<b-avatar
-							v-if="info.user.profile_picture == null"
-							src="https://placekitten.com/400/300"
-							class="  avat  text-center"
-							badge-variant="primary"
-							badge-offset="10px"
-						>
-						</b-avatar>
+        <img  v-if="info.user.cover_picture =='' "
+          src="@/assets/img/banner.jpg"
+          class="img-fluid  banner"
+          alt="Kitten"
+        />
 
-						<b-avatar
-							v-if="info.user.profile_picture !== null"
-							:src="info.user.profile_picture"
-							class="  avat  text-center"
-							badge-variant="primary"
-							badge-offset="10px"
-						>
-						</b-avatar>
 
-						<b-icon
-							icon="camera-fill"
-							class="avatar-header-icon btn cursor-pointer size"
-							@click="selectlogo"
-						></b-icon>
+         <img  v-if="info.user.cover_picture !='' "
+          :src="info.user.cover_picture"
+          class="img-fluid  banner"
+          alt="Kitten"
+        />
 
-						<span style="display: inline-block;">
-							<h6 class=" profile-name text-center ">
-								<b>
-									<b-link> {{ info.user.name }} </b-link>
-								</b>
-								<br />
-								<span class="duration">
-									{{ nFormatter(total.total_community) }} 		{{
-													$t("profile_owner.owner_head_page.community")
-												}}
-								</span>
-							</h6>
-						</span>
+      </div>
 
-						<input
-							type="file"
-							id="cover_pic"
-							@change="selectMoviesOutsidePost"
-							accept="video/mpeg, video/mp4, image/*"
-							hidden
-							ref="movie"
-						/>
+      <div class="container-fluid p-63">
+        <b-row class="mt-md-2 text-left">
+          <b-col cols="12" md="12" class="m-0 p-0 text-left put-top ">
+            <b-avatar v-if="info.user.profile_picture =='' "
+              src="https://placekitten.com/400/300"
+              class="  avat  text-center"
+              badge-variant="primary"
+              badge-offset="10px"
+            >
+            </b-avatar>
 
-						<input
-							type="file"
-							id="logo_pic"
-							@change="setlogo"
-							accept="video/mpeg, video/mp4, image/*"
-							hidden
-							ref="logo_pic"
-						/>
 
-						<div class="">
-							<div class="text-box">
-								<div class=" ">
-									<span class="float-right profileedit-btn  put-topbtn ">
-										<b-button
-											variant="primary"
-											class="  d-none d-md-inline edit-btn"
-											@click="selectCover"
-										>
-											<fas-icon
-												class="mr-2"
-												:icon="['fas', 'pencil-alt']"
-												size="lg"
-											/>
-													{{
-													$t("profile_owner.owner_head_page.edit")
-												}}
-										</b-button>
+            <b-avatar v-if="info.user.profile_picture !='' "
+              :src="info.user.profile_picture"
+              class="  avat  text-center"
+              badge-variant="primary"
+              badge-offset="10px"
+            >
+            </b-avatar>
 
-										<b-dropdown
-											id="dropdown-1"
-											class="float-right options dot-btn mt-2 mt-sm-2 mt-md-0 mr-3"
-											no-caret
-											variant="outline"
-											style="border-color: #ffD20; color:  #ffD20"
-										>
-											<template #button-content>
-												<b-icon-three-dots></b-icon-three-dots>
-											</template>
 
-											<b-dropdown-item @click="selectCover">
-												{{
-													$t("profile_owner.owner_head_page.change_cover")
-												}}</b-dropdown-item
-											>
+            <b-icon
+              icon="camera-fill"
+              class="avatar-header-icon btn cursor-pointer size"
+               @click="selectlogo" 
+              
+            ></b-icon>
 
-											<!--
+            <span style="display: inline-block;">
+              <h6 class=" profile-name text-center ">
+                <b> <b-link> {{info.user.name}} </b-link> </b> <br />
+                <span class="duration">  {{ nFormatter(total.total_community)}} Community </span>
+              </h6>
+            </span>
+
+             
+                <input
+            type="file"
+            id="cover_pic"
+            @change="selectMoviesOutsidePost"
+            accept="video/mpeg, video/mp4, image/*"
+            hidden
+            ref="movie"
+          />
+
+
+          
+            <input
+            type="file"
+            id="logo_pic"
+            @change="setlogo"
+            accept=" image/*"
+            hidden
+            ref="logo_pic"
+          />
+
+
+            <div class="">
+              <div class="text-box">
+                <div class=" ">
+                  <span class="float-right profileedit-btn  put-topbtn ">
+                    <b-button
+                      variant="primary"
+                      class="  d-none d-md-inline edit-btn"
+                       @click="selectCover"
+                    >
+                      <fas-icon
+                        class="mr-2"
+                        :icon="['fas', 'pencil-alt']"
+                        size="lg"
+                      />
+                      Edit
+                    </b-button>
+
+                    <b-dropdown
+                      id="dropdown-1"
+                      class="float-right options dot-btn mt-2 mt-sm-2 mt-md-0 mr-3"
+                      no-caret
+                      variant="outline"
+                      style="border-color: #ffD20; color:  #ffD20"
+                    >
+                      <template #button-content>
+                        <b-icon-three-dots></b-icon-three-dots>
+                      </template>
+
+                     <b-dropdown-item  @click="selectCover" 
+                    > Change Cover</b-dropdown-item
+                  >
+
+  <!--
                       <b-dropdown-item
                         >Invite Friends On Bridge Africa</b-dropdown-item
                       >
@@ -163,233 +160,365 @@
 </template>
 
 <script>
-	export default {
-		name: "headPageOwner",
+        
 
-		data() {
-			return {
-				url: null,
-				img_url: null,
-				cover_photo: null,
-				profile_photo: null,
 
-				options: {
-					rewind: true,
-					autoplay: true,
-					perPage: 3,
-					pagination: false,
+        export default {
+  name: "headPageOwner",
 
-					type: "loop",
-					perMove: 1,
+  
+   data() {
+      return {
 
-					breakpoints: {
-						"760": {
-							perPage: 1,
-							gap: "0rem",
-						},
-						"992": {
-							perPage: 2,
-							gap: "1rem",
-						},
-					},
-				},
-			};
-		},
+          url:null,
+          img_url:null,
+          cover_photo:null,
+          profile_photo:null,
 
-		methods: {
-			nFormatter(num) {
-				if (num >= 1000000000) {
-					return (num / 1000000000).toFixed(1).replace(/\.0$/, "") + "G";
-				}
-				if (num >= 1000000) {
-					return (num / 1000000).toFixed(1).replace(/\.0$/, "") + "M";
-				}
-				if (num >= 1000) {
-					return (num / 1000).toFixed(1).replace(/\.0$/, "") + "K";
-				}
-				return num;
-			},
+        options: {
+          
+          rewind : true,
+          autoplay: true,
+          perPage: 3,
+          pagination:false,
+        
+          
+          type   : 'loop',
+          perMove: 1,
 
-			setlogo(e) {
-				console.log(e);
 
-				this.profile_photo = e.target.files[0];
-				const file = e.target.files[0];
-				this.img_url = URL.createObjectURL(file);
+          breakpoints: {
+          "760": {
+            perPage: 1,
+            gap: "0rem",
+          },
+          "992": {
+            perPage: 2,
+            gap: "1rem",
+          },
+        },
 
-				this.$refs["logomodal"].show();
-			},
 
-			selectlogo() {
-				document.getElementById("logo_pic").click();
-			},
+        
+        },
+      };
+    },
 
-			selectCover() {
-				document.getElementById("cover_pic").click();
-			},
-			selectMoviesOutsidePost(e) {
-				console.log(e);
+    
+methods: {
 
-				this.cover_photo = e.target.files[0];
-				const file = e.target.files[0];
-				this.img_url = URL.createObjectURL(file);
+   nFormatter(num) {
+      if (num >= 1000000000) {
+        return (num / 1000000000).toFixed(1).replace(/\.0$/, '') + 'G';
+      }
+      if (num >= 1000000) {
+        return (num / 1000000).toFixed(1).replace(/\.0$/, '') + 'M';
+      }
+      if (num >= 1000) {
+        return (num / 1000).toFixed(1).replace(/\.0$/, '') + 'K';
+      }
+      return num;
+    },
 
-				this.$refs["coverphoto"].show();
-			},
+setlogo(e){
+    
+       console.log(e);
+     
 
-			chooseProfile2: function() {
-				document.getElementById("cover-imag").click();
-			},
+       this.profile_photo= e.target.files[0]
+      const file = e.target.files[0];
+      this.img_url = URL.createObjectURL(file);
 
-			chooseProfile1: function() {
-				document.getElementById("profile-imag").click();
-			},
+      this.$refs["logomodal"].show();  
 
-			submitLogo() {
-				let loader = this.$loading.show({
-					container: this.fullPage ? null : this.$refs.preview,
-					canCancel: true,
-					onCancel: this.onCancel,
-					color: "#e75c18",
-				});
 
-				let formData = new FormData();
-				formData.append("image", this.profile_photo);
+},
 
-				this.axios
-					.post("user/profile/picture", formData, {
-						headers: {
-							"Content-Type": "multipart/form-data",
-						},
-					})
-					.then((response) => {
-						console.log(response);
 
-						this.flashMessage.show({
-							status: "success",
 
-							message: "Logo Updated",
+selectlogo(){
+    document.getElementById("logo_pic").click();
+ 
+},
 
-							blockClass: "custom-block-class",
-						});
+selectCover(){
 
-						loader.hide();
-						this.$refs["modalxl"].hide();
-					})
+ document.getElementById("cover_pic").click();
 
-					.catch((err) => {
-						console.log({ err: err });
+},
+  selectMoviesOutsidePost(e) {
+      console.log(e);
+     
 
-						if (err.response.status == 422) {
-							console.log({ err: err });
+       this.cover_photo= e.target.files[0]
+      const file = e.target.files[0];
+      this.img_url = URL.createObjectURL(file);
 
-							this.flashMessage.show({
-								status: "error",
+      this.$refs["coverphoto"].show();
+    },
 
-								message: err.response.data.message,
-								blockClass: "custom-block-class",
-							});
+  
+  chooseProfile2: function() {
+     
+        document.getElementById("cover-imag").click()
+    },
 
-							loader.hide();
-						} else {
-							this.flashMessage.show({
-								status: "error",
 
-								message: "Unable to set your Logo",
-								blockClass: "custom-block-class",
-							});
-							console.log({ err: err });
+     chooseProfile1: function() {
+     
+        document.getElementById("profile-imag").click()
+    },
 
-							loader.hide();
-						}
-					});
-			},
 
-			submitCover() {
-				let loader = this.$loading.show({
-					container: this.fullPage ? null : this.$refs.preview,
-					canCancel: true,
-					onCancel: this.onCancel,
-					color: "#e75c18",
-				});
+    submitLogo(){
+     
+        
 
-				let formData = new FormData();
-				formData.append("image", this.cover_photo);
+        let loader = this.$loading.show({
+                   
+                    container: this.fullPage ? null : this.$refs.preview,
+                    canCancel: true,
+                    onCancel: this.onCancel,
+                    color:"#e75c18"
+                });
 
-				this.axios
-					.post("user/cover", formData, {
-						headers: {
-							"Content-Type": "multipart/form-data",
-						},
-					})
-					.then((response) => {
-						console.log(response);
 
-						this.flashMessage.show({
-							status: "success",
+       let formData = new FormData();
+        formData.append("image", this.profile_photo);
 
-							message: "Profile Updated",
+        
 
-							blockClass: "custom-block-class",
-						});
 
-						loader.hide();
-						this.$refs["modalxl"].hide();
-					})
+       this.axios 
+          .post("user/upload/profile-picture", formData, {
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
+          })
+          .then((response) => {
 
-					.catch((err) => {
-						console.log({ err: err });
 
-						if (err.response.status == 422) {
-							console.log({ err: err });
 
-							this.flashMessage.show({
-								status: "error",
 
-								message: err.response.data.message,
-								blockClass: "custom-block-class",
-							});
+         
 
-							loader.hide();
-						} else {
-							this.flashMessage.show({
-								status: "error",
+            console.log(response);
 
-								message: "Unable to upload your image",
-								blockClass: "custom-block-class",
-							});
-							console.log({ err: err });
 
-							loader.hide();
-						}
-					});
-			},
-		},
+               this.$store
+      .dispatch("profile/loadUserPostIntro", null)
+      .then((response) => {
+         console.log(response);
 
-		mounted() {
-			this.url = this.$route.params.id;
-		},
 
-		computed: {
-			total() {
-				return this.$store.state.profile.Tcommunity;
-			},
 
-			profile_info() {
-				if (this.$store.state.businessOwner.businessInfo == []) {
-					return this.$store.state.businessOwner.businessInfo;
-				} else {
-					return this.$store.state.businessOwner.businessInfo;
-				}
-			},
+            this.flashMessage.show({
+              status: "success",
 
-			info: function() {
-				console.log("helloodhdjdhdjdd dhdjdhdd sgysjshs");
-				console.log(this.$store.getters["profile/getUserPostIntro"]);
-				return this.$store.getters["profile/getUserPostIntro"];
-			},
-		},
-	};
+              message: "Logo Updated",
+
+              blockClass: "custom-block-class",
+            });
+
+
+             loader.hide()
+      this.$refs["modalxl"].hide();
+
+
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
+
+           
+
+
+
+          })
+
+            .catch((err) => {
+            console.log({ err: err });
+
+            
+
+            if (err.response.status == 422) {
+              console.log({ err: err });
+              
+
+              this.flashMessage.show({
+                status: "error",
+
+                message: err.response.data.message,
+                blockClass: "custom-block-class",
+              });
+
+
+               loader.hide()
+      
+
+            } else {
+              this.flashMessage.show({
+                status: "error",
+                
+                message: "Unable to set your Logo",
+                blockClass: "custom-block-class",
+              });
+              console.log({ err: err });
+
+               loader.hide()
+     
+            }
+
+          });
+
+
+
+
+
+    },
+
+    
+
+    submitCover(){
+     
+        
+
+        let loader = this.$loading.show({
+                   
+                    container: this.fullPage ? null : this.$refs.preview,
+                    canCancel: true,
+                    onCancel: this.onCancel,
+                    color:"#e75c18"
+                });
+
+
+       let formData = new FormData();
+        formData.append("image", this.cover_photo);
+
+        
+
+
+       this.axios 
+          .post("user/upload-cover", formData, {
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
+          })
+          .then((response) => {
+            console.log(response);
+
+            
+
+               this.$store
+      .dispatch("profile/loadUserPostIntro", null)
+      .then((response) => {
+         console.log(response);
+
+
+         
+            this.flashMessage.show({
+              status: "success",
+
+              message: "Cover  Updated",
+
+              blockClass: "custom-block-class",
+            });
+
+
+             loader.hide()
+      this.$refs["modalxl"].hide();
+      
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
+
+
+          })
+
+            .catch((err) => {
+            console.log({ err: err });
+
+            
+
+            if (err.response.status == 422) {
+              console.log({ err: err });
+              
+
+              this.flashMessage.show({
+                status: "error",
+
+                message: err.response.data.message,
+                blockClass: "custom-block-class",
+              });
+
+
+               loader.hide()
+      
+
+            } else {
+              this.flashMessage.show({
+                status: "error",
+                
+                message: "Unable to upload your image",
+                blockClass: "custom-block-class",
+              });
+              console.log({ err: err });
+
+               loader.hide()
+     
+            }
+
+          });
+
+
+
+
+
+    },
+
+
+},
+
+mounted(){
+     this.url = this.$route.params.id;
+},
+
+computed: {
+
+    
+    total(){
+    return  this.$store.state.profile.Tcommunity;
+   },
+ 
+
+      profile_info() {
+
+         if(this.$store.state.businessOwner.businessInfo ==[] ){  
+      return  this.$store.state.businessOwner.businessInfo;   }else{
+
+        return  this.$store.state.businessOwner.businessInfo;
+      }
+
+     
+    },
+
+
+     info :function(){
+
+        return this.$store.getters['profile/getUserPostIntro'];
+      }
+
+
+
+  },
+
+
+
+};
+
 </script>
 
 <style scoped>

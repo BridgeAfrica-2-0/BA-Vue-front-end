@@ -1110,12 +1110,8 @@ export default {
 
           console.log("sending");
 
-          this.axios
-            .post("business/create", formData2, {
-              headers: {
-                "Content-Type": "multipart/form-data",
-              },
-            })
+          axios
+            .post("business/create", formData2)
             .then((response) => {
               console.log(response);
 
@@ -1235,12 +1231,8 @@ export default {
         formData2.append("language", this.language);
         formData2.append("about_business", this.about);
 
-        this.axios
-          .post("business/create", formData2, {
-            headers: {
-              "Content-Type": "multipart/form-data",
-            },
-          })
+        axios
+          .post("business/create", formData2)
           .then((response) => {
             console.log(response);
 
@@ -1304,12 +1296,8 @@ export default {
         formData.append("lng", this.center.lng);
         formData.append("address", this.region);
 
-        this.axios
-          .post("/complete/profile", formData, {
-            headers: {
-              "Content-Type": "multipart/form-data",
-            },
-          })
+        axios
+          .post("/complete/profile", formData)
           .then((response) => {
             console.log(response);
 

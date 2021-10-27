@@ -149,32 +149,56 @@ export default {
     },
 
       
-       infiniteHandler($state) {
-
+      
+    
+    infiniteHandler($state) {
+      console.log("hahahahahahahah");
       let url = null;
 
-         if(this.type=="Follower"){  
-          url="profile/user/follower/"
-         }else{
-          url="profile/user/following/";
-         }
+      if (this.type == "Follower") {
+      url = "profile/user/follower/";
+
+
+
+        
+      } else {
+        url = "profile/user/following/";
+      }
       axios
         .get(url + this.page)
         .then(({ data }) => {
-          if (data.data.length) {
-            this.page += 1;
-        if(this.type=="Follower"){  
-            this.businesses.push(...data.data.user_followers); 
-           }else{
-              this.businesses.push(...data.data.user_following);
-           }
 
+           
+            if (this.type == "Follower") {
+             
 
-
+               if (data.data.user_followers.length) {
+           this.page += 1;
+           
+              this.users.push(...data.data.user_followers);
             $state.loaded();
           } else {
             $state.complete();
           }
+
+            } else {
+         
+
+             if (data.data.user_following.length) {
+           this.page += 1;
+           
+              this.users.push(...data.data.user_following);
+            $state.loaded();
+          } else {
+            $state.complete();
+          }
+
+
+            }
+
+            
+          console.log(data);
+         
         })
         .catch((err) => {
           console.log({ err: err });

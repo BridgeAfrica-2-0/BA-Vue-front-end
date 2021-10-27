@@ -1,14 +1,14 @@
 <template>
   <div>
     <FlashMessage />
-    <!-- DOM to Create Post By A UserOwner-->
+    <!-- DOM to Create Post By A UserOwner--> 
     <b-card class="px-md-3 mb-3">
       <b-row class="mt-2">
         <b-col cols="3" md="1" class="m-md-0 p-md-0">
           <b-avatar
             variant="primary"
             class="img-fluid avat-comment"
-            :src="business_logo"
+            :src="info.user.profile_picture"
           ></b-avatar>
         </b-col>
         <b-col cols="9" md="11" class="p-0 m-0 pr-3">
@@ -134,6 +134,7 @@
                 <div class="cursor">
                   <b-form-textarea
                     id="textarea-small"
+                    autofocus
                     class="mb-2 border-none"
                     placeholder="Post a business update"
                     v-model="edit_description"
@@ -143,7 +144,6 @@
                     }"
                   ></b-form-textarea>
 
-                  <i></i>
                 </div>
                 <div class="bordder">
                   <span class="float-left"> Add to Your Post </span>
@@ -271,11 +271,11 @@
                 <b-avatar
                   class="d-inline-block avat"
                   variant="primary"
-                  :src="imageProfile"
+                  :src="info.user.profile_picture"
                 ></b-avatar>
               </b-col>
               <b-col cols="9" class="pt-2" style="margin-left: -5px">
-                <h5 class="m-0 font-weight-bolder">{{}}</h5>
+                <h5 class="m-0 font-weight-bolder">{{info.user.name}}</h5>
               </b-col>
             </b-row>
             <b-row>
@@ -285,7 +285,8 @@
                 <div class="cursor">
                   <b-form-textarea
                     id="textarea-small"
-                    class="mb-2 border-none"
+                    class="mb-2 border-none "
+                    autofocus
                     placeholder="Post a business update"
                     v-model="createPost.postBusinessUpdate"
                     :class="{
@@ -294,7 +295,6 @@
                     }"
                   ></b-form-textarea>
 
-                  <i></i>
                 </div>
                 <div class="bordder">
                   <span class="float-left"> Add to Your Post </span>
@@ -399,6 +399,7 @@
       >-->
 
       <b-row class="mt-4" v-for="item in owner_post" :key="item.post_id">
+       
         <!--  :src="$store.getters.getProfilePicture"-->
         <b-col cols="12" class="mt-4">
           <b-row>
@@ -406,12 +407,12 @@
               <b-avatar
                 class="d-inline-block avat"
                 variant="primary"
-                :src="item.logo_path"
+                :src="item.profile_picture"
               ></b-avatar>
             </b-col>
             <b-col cols="10" md="11" class="pt-2">
               <h5 class="m-0 font-weight-bolder">
-                {{ item.bussines_name }}
+                {{ item.name }}
                 <span class="float-right">
                   <b-dropdown variant="outline-primary" size="sm" no-caret>
                     <template #button-content>
@@ -462,9 +463,11 @@
             </b-col>
           </b-row>
           <b-row>
+
             <b-col v-if="item.media.length > 0" cols="12" class="mt-2">
               <div class="">
                 <lightbox
+                css="h-200 h-lg-250 h-lg-500"
                   :cells="item.media.length"
                   :items="
                     item.media.map(function (a) {
@@ -508,6 +511,7 @@
             <b-col cols="3" md="1" class="m-md-0 p-md-0">
               <b-avatar
                 variant="primary"
+                :src="info.user.profile_picture"
                 class="img-fluid avat-comment"
               ></b-avatar>
             </b-col>
@@ -528,7 +532,7 @@
         />
       </b-row>
 
-      <infinite-loading @infinite="infiniteHandler"></infinite-loading>
+      <infinite-loading :identifier="infiniteId"   ref="infiniteLoading"   @infinite="infiniteHandler"></infinite-loading>
     </b-card>
   </div>
 </template>
@@ -546,6 +550,7 @@ export default {
     return {
       moment: moment,
       page: 1,
+      infiniteId: +new Date(),
       post: this.$store.state.businessOwner.ownerPost,
       url: null,
       delete: [],
@@ -589,10 +594,14 @@ export default {
     },
 
     infiniteHandler($state) {
-      axios
-        .get("post/" + this.page)
+      console.log("user/post/" + this.page);
+      let url= "user/post/" + this.page;
+      
+       this.$store.dispatch("profile/loadMore",url)
+      //axios.get("user/post/" + this.page)
         .then(({ data }) => {
-          if (data.data.length) {
+          console.log(data);
+          if (data.data.length) { 
             this.page += 1;
 
             this.owner_post.push(...data.data);
@@ -844,31 +853,38 @@ export default {
     },
 
     submitPost() {
-      let loader = this.$loading.show({
-        container: this.$refs.loader,
-        canCancel: true,
-        onCancel: this.onCancel,
-        color: "#e75c18",
-      });
-
-      const fileImage = this.createPost.movies[0].target.files[0];
+      // let loader = this.$loading.show({
+      //   container: this.$refs.loader,
+      //   canCancel: true,
+      //   onCancel: this.onCancel,
+      //   color: "#e75c18",
+      // });
+ 
+      let fileImage=null;
+      
+      let formData2 = new FormData();
+      console.log( this.createPost.movies);
+      console.log("lalla allak kajkajjaja")
+      if( this.createPost.movies[0]){ 
+      
+     fileImage = this.createPost.movies[0].target.files[0];
 
       this.fileImageArr = this.createPost.movies;
 
-      let formData2 = new FormData();
 
       this.fileImageArr.forEach((value, index) => {
         formData2.append("media[" + index + "]", value.target.files[0]);
 
         console.log(value);
       });
+      }
 
       formData2.append("type", "image");
 
       formData2.append("content", this.createPost.postBusinessUpdate);
 
       this.axios
-        .post("post", formData2, {
+        .post("user/post", formData2, {
           headers: {
             "Content-Type": "multipart/form-data",
           },
@@ -881,10 +897,15 @@ export default {
             blockClass: "custom-block-class",
             message: "Content successfuly uploaded",
           });
-          loader.hide();
+          // loader.hide();
           this.$refs["modal-xl"].hide();
+    
+        this.$store.commit("businessOwner/ownerPost",[]); 
 
-          this.ownerPost();
+           this.page = 1;
+      this.infiniteId += 1;
+   console.log("post create complete");
+
         })
         .catch((err) => {
           if (err.response.status == 422) {
@@ -898,7 +919,7 @@ export default {
               blockClass: "custom-block-class",
             });
 
-            loader.hide();
+            // loader.hide();
           } else {
             this.flashMessage.show({
               status: "error",
@@ -907,7 +928,7 @@ export default {
               blockClass: "custom-block-class",
             });
             console.log({ err: err });
-            loader.hide();
+            // loader.hide();
           }
         });
     },
@@ -933,10 +954,11 @@ export default {
       return "yoo";
     },
 
-    business_logo() {
-      return this.$store.state.businessOwner.businessInfo.logo_path;
+     info: function () {
+      return this.$store.getters["profile/getUserPostIntro"];
     },
 
+   
     owner_post() {
       return this.$store.state.businessOwner.ownerPost;
     },
@@ -951,7 +973,21 @@ export default {
 };
 </script>
 
+<style >
+  
+  .h-lg-250{
+
+   height: 350px !important;   
+  }
+
+  .lb-item{
+    background-size: contain;
+  }
+ 
+</style>
+
 <style scoped>
+
 .custom-block-class {
   position: absolute;
   z-index: 1;
@@ -1092,13 +1128,13 @@ export default {
 }
 .cursor i {
   position: absolute;
-  width: 1px;
+  width: 2px;
   height: 20%;
   background-color: gray;
   left: 5px;
   top: 10%;
   animation-name: blink;
-  animation-duration: 800ms;
+  animation-duration: 1200ms;
   animation-iteration-count: infinite;
   opacity: 1;
 }
@@ -1114,9 +1150,12 @@ export default {
   }
 }
 .bordder {
-  border: 1px solid #e75c18;
-  height: 50px;
-  padding: 6px;
+ 
+
+  border: 1px solid gray;
+    height: 50px;
+    padding: 6px;
+    border-radius: 10px;
 }
 .username {
   color: black;

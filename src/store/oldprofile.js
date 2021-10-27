@@ -19,7 +19,7 @@ export default {
     educations: [],
     professions: [],
 
-   
+
 
     profile_about:{"user":{},"user_address":[], "user_education":[],"user_experience":[],"user_websites":[]  },
     profileIntro:{"user":{},"user_address":[], "user_education":[],"user_experience":[],"user_websites":[]  },
@@ -404,14 +404,7 @@ export default {
       return num;
     },
 
-   loadMore({commit}, url){
-   
-    return axios.get(url)
-    .then(( data ) => {
-     return data;
-    });
 
-   },
 
     NcommunityFollower({ commit }){
       return axios
@@ -797,12 +790,24 @@ export default {
       return response_;
     },
     async updateUserBasicInfosBirthDate(context, payload) {
-      let date = payload.dateOfBirth.date ;
+      console.log(payload);
+      console.log("edit user birtDate start +++++");
+     
+
       let response_ = null;
-      await axios(
+      await fetch(
 
         "userIntro/dob?" +
-        "dob=" +date,
+        "dob=" +
+        moment(
+          payload.dateOfBirth.date_2.year +
+          " " +
+          payload.dateOfBirth.date_1.month +
+          " " +
+          payload.dateOfBirth.date_1.day
+        ).format("YYYY-MM-DD") +
+        "&value=" +
+        payload.dateOfBirth.date_1.access,
         {
           method: "POST",
           headers: {
@@ -819,7 +824,18 @@ export default {
           console.log(response);
           return response;
         })
-        
+        .then(response => {
+          console.log("edit user birthDate response successsss (2)+++");
+          console.log(response);
+          if (!response) {
+            console.log("Error From The Server error(1) ++++++");
+            throw new Error("Error For Edit BirthDate+++++");
+          }
+          context.commit("updateUserBirthDate", {
+            dateOfBirth: payload.dateOfBirth
+          });
+          response_ = response;
+        })
         .catch(error => {
           console.log("error from Server or browser");
           console.log(error);
@@ -827,8 +843,6 @@ export default {
         });
       return response_;
     },
-
-
     async updateUserBasicInfosGender(context, payload) {
       console.log(payload, "edit user gender start +++++");
       const gender = payload.gender === "F" ? "female" : "male";
@@ -866,7 +880,9 @@ export default {
             console.log("Erreur liée au serveur+++++++");
             throw new Error("Erreur d edition du BirthDate+++++");
           }
-          
+          context.commit("updateUserGender", {
+            gender: payload.gender
+          });
           response_ = response;
         })
         .catch(error => {
@@ -875,11 +891,10 @@ export default {
         });
       return response_;
     },
-
     async updateUserBasicInfosMobilePhones(context, payload) {
       console.log(payload, "edit user mobile Phones start +++++");
       const lastPhoneNumber =
-        payload.mobilePhones;
+        payload.mobilePhones[payload.mobilePhones.length - 1];
       let response_ = null;
       await
         axios({
@@ -908,7 +923,9 @@ export default {
               console.log("Error From The Server +++++++");
               throw new Error("Error To Add MobilesPhones+++++");
             }
-           
+            context.commit("storeMobilePhones", {
+              mobilePhones: [...payload.mobilePhones]
+            });
             response_ = response;
           })
           .catch(error => {
@@ -917,7 +934,6 @@ export default {
           });
       return response_;
     },
-    
     async updateUserBasicInfosCurrentCity(context, payload) {
       console.log(payload, "edit user currentcity start +++++");
       let response_ = null;
@@ -963,11 +979,13 @@ export default {
       return response_;
     },
     async updateUserBasicInfosHomeTown(context, payload) {
-       
-      console.log(payload);
-
+      console.log(payload, "edit user homeTown start +++++");
       let response_ = null;
-      await axios.post("userIntro/addHomeTown"+"?home_town=" + payload.homeTown,
+      await axios.post(
+
+        "userIntro/addCurrentHome/11" +
+        "?homeTown=" +
+        payload.homeTown,
         {
           method: "POST",
           headers: {
@@ -976,7 +994,11 @@ export default {
         }
       )
         .then(response => {
-      
+          console.log("edit user homeTown response (1) +++++++", response);
+          if (response.status !== 200 && response.status !== 201) {
+            console.log("Error From The Server");
+            throw "Error From The Server";
+          }
           return response;
         })
         .then(response => {
@@ -994,19 +1016,28 @@ export default {
           response_ = response;
         })
         .catch(error => {
-            console.log({error:error});
+          console.log("error From browser or server", error);
+          throw error;
         });
       return response_;
     },
-
     async updateUserBasicInfosWebsites(context, payload) {
       console.log(payload, "edit user website start +++++");
 
       let response_ = null;
-      let url = "/userIntro/storeWebLink";
-      let formData = new FormData();
-      formData.append('webUrl', payload.websites)
-      await axios.post(url, formData)
+      await axios.post(
+
+        "/userIntro/storeWebLink" +
+        "?webUrl=" +
+        payload.websites[payload.websites.length - 1],
+        {
+          method: "POST",
+          headers: {
+            Accept: "application/json",
+
+          }
+        }
+      )
         .then(response => {
           console.log("edit user websites response (1) +++++++", response);
           if (response.status !== 200 && response.status !== 201) {
@@ -1024,78 +1055,17 @@ export default {
             console.log("Error From The Server +++++++");
             throw new Error("Error From Add Website+++++");
           }
-         
+          context.commit("storeWebsites", {
+            websites: payload.websites
+          });
           response_ = response;
         })
         .catch(error => {
           console.log("error from browser or server error (1)", error);
-          console.log({error:error});
           throw error;
         });
       return response_;
     },
-   
-    async deleteUserBasicInfosWebsites(context, payload) {
-      console.log(payload, "edit user website start +++++");
-
-      let response_ = null;
-      await axios.delete("/userIntro/deleteWebLink/" +payload.id)
-        .then(response => {
-          console.log("edit user websites response (1) +++++++", response);
-          if (response.status !== 200 && response.status !== 201) {
-            console.log("Error From The Server");
-            throw "Error From The Server";
-          }
-          return response;
-        })
-        .then(response => {
-         
-         
-          response_ = response;
-        })
-        .catch(error => {
-          console.log({error:error});
-        
-        });
-      return response_;
-    },
-
-    async updateUserBasicInfosEWebsites(context, payload) {
-      console.log(payload, "edit user website start +++++");
-
-      let response_ = null;
-      let url = "/userIntro/updateWebLink/"+payload.id
-      let formData = new FormData();
-      formData.append('webUrl', payload.websites);
-      await axios.post(url, formData)
-        .then(response => {
-          console.log("edit user websites response (1) +++++++", response);
-          if (response.status !== 200 && response.status !== 201) {
-            console.log("Error From The Server");
-            throw "Error From The Server";
-          }
-          return response;
-        })
-        .then(response => {
-          console.log(
-            "edit user websites response successsss response (1) +++",
-            response
-          );
-          if (!response) {
-            console.log("Error From The Server +++++++");
-            throw new Error("Error From Add Website+++++");
-          }
-         
-          response_ = response;
-        })
-        .catch(error => {
-          console.log("error from browser or server error (1)", error);
-          console.log({error:error});
-          throw error;
-        });
-      return response_;
-    },
-
     async updateUserBasicInfosSocialLinks(context, payload) {
       console.log(payload, "edit user socialLinks start +++++");
 
@@ -1168,43 +1138,39 @@ export default {
         };
       } else if (payload.method === "PUT") {
         const workplace = payload.workPlace === true ? 1 : 0;
-        url = "userIntro/updateWorking/" +payload.workPlace.id;
+        (url = "userIntro/updateWorking/" +payload.id + "?companyName=" + payload.work_place),
+          "&cityTown=" + payload.city_town,
+          "&position=" + payload.position,
+          "&jobResponsibilities=" +payload.job_responsibilities,
+          "&currentlyWorking=" + payload.currently_working,
+          "&startDate=" + payload.start_date
+          "&endDate=" + payload.end_date;
         config = {
           method: "POST",
           headers: {
             Accept: "application/json",
-          },
-          data: {
-            companyName: payload.workPlace.company_name,
-            cityTown: payload.workPlace.city_town,
-            position: payload.workPlace.position,
-            jobResponsibilities: payload.workPlace.job_responsibilities,
-            currentlyWorking: payload.workPlace === true ? 1 : 0,
-            startDate: payload.workPlace.startDate,
-            // endDate: null,
-            // endDate: payload.workPlace.endDate,
-            endDate: payload.workPlace === true ? null : payload.workPlace.endDate ,
           }
-        };
-      } else if (payload.method === "DELETE") {
-        url = "userIntro/deleteWorking/" +payload.workPlace;
-        config = {
-          method: "DELETE",
         };
       }
 
       let response_ = null;
       await axios(url, config)
         .then(response => {
-          console.log( "save/edit/delete user workPlace response (1) +++++++", response);
+          console.log(
+            "save/edit/delete user workPlace response (1) +++++++",
+            response
+          );
           return response;
         })
         .then(response => {
-          console.log( "save/edit/delete user workPlace response successsss +++", response );
+          console.log(
+            "save/edit/delete user workPlace response successsss +++",
+            response
+          );
           if (response.errors) {
             console.log("Error from the server +++++++");
             throw new Error("Error from save/edit/delete workplace+++++");
-          };
+          }
           context.commit("storeWorkPlace", {
             workPlace: payload.workPlace,
             method: payload.method
@@ -1218,13 +1184,13 @@ export default {
         });
       return response_;
     },
+
     
     async updateUserEducation(context, payload) {
       console.log(payload, "save/edit/delete user education start +++++");
       let url = "",
         config = {};
       if (payload.method.toLowerCase() === "post") {
-        console.log("Method: "+payload.method.toLowerCase());
         url = "userIntro/addSchool";
         config = {
           method: "POST",
@@ -1247,27 +1213,22 @@ export default {
             durationTo: payload.education.durationFrom
           })
         };
-      } else if (payload.method.toLowerCase() === "put") {
-        const workplace = payload.education === true ? 1 : 0;
-        console.log("Method: "+payload.method.toLowerCase());
-        url = "userIntro/updateSchool/"+payload.education.id;
+      } else if (payload.method.toLowerCase() === "update") {
+        const graduated = payload.education.graduated ? 1 : 0;
+        (url =
+          "userIntro/updateSchool" +
+          "/11" +
+          "?schoolName=" +
+          payload.education.schoolName),
+          "&graduated=" + graduated,
+          "&durationFrom=" + payload.education.durationFrom,
+          "&major=" + payload.education.major,
+          "&durationTo=" + payload.education.durationFrom;
         config = {
           method: "POST",
           headers: {
             Accept: "application/json",
-          },
-          data: {
-            schoolName: payload.education.school_name,
-            graduated: payload.education.is_graduated,
-            startDate: payload.education.startDate,
-            endDate: payload.education.endDate,
-            major_subjects: payload.education.major_subjects,
           }
-        };
-      } else if (payload.method === "DELETE") {
-        url = "userIntro/deleteSchool/" +payload.workPlace;
-        config = {
-          method: "DELETE",
         };
       }
 

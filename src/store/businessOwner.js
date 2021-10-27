@@ -756,11 +756,13 @@ export default {
           };
          commit("setLoader", false);
           commit("setSuccess", sucData);
+
           setTimeout(() => {
             sucData.state = false;
             sucData.msg = "";
             commit("setSuccess", sucData);
           }, 2000);
+
     },
       
 

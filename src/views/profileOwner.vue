@@ -5,22 +5,24 @@
     <div class=" container-fluid text-justify   corps prof center-content">
       <b-row class=""> 
         <b-col cols="12" class="p-3">
-          <b-tabs content-class="mt-3" pills small fill  v-model="tabIndex">
-            <b-tab title="Posts"   href="#post">
+          <b-tabs content-class="mt-3" pills small fill lazy  v-model="tabIndex">
+            <b-tab title="Posts" href="#post">
               <Post />
             </b-tab>
-            <b-tab title="About"  href="#about"><About /></b-tab>
-            <b-tab title="Business"  href="#business" class="m-0 p-0"
-              ><bussiness></bussiness
-            ></b-tab>
-            <b-tab title="Media"><Media /></b-tab>
+            <b-tab title="About" href="#about"><About /></b-tab>
+            <b-tab title="Business"  href="#business" class="m-0 p-0">
+              <bussiness />
+            </b-tab>
+            <b-tab title="Media" href="#media">
+              <Media />
+            </b-tab>
             <b-tab title="Networks">
               <Networks />
             </b-tab>
             
-            <b-tab title="Media"  href="#media"><Media /></b-tab>
-            <b-tab title="Community"  href="#community" class="m-0 p-0"
-              ><following></following>  </b-tab>
+            <b-tab title="Community"  href="#community" class="m-0 p-0">
+              <following />
+            </b-tab>
             
           </b-tabs>
         </b-col>
@@ -41,8 +43,6 @@ import Bussiness from "@/components/owner/tabs/bussiness";
 
 export default {
   name: "profileOwner",
-
- 
 
   components: {
     Bussiness,
@@ -83,26 +83,32 @@ export default {
         });
     }
   },
+
+ 
   computed: {},
    created() {
       this.tabIndex = this.tabs.findIndex(tab => tab === this.$route.hash);
+      
+               this.$store
+      .dispatch("profile/loadUserPostIntro", null)
+      .then((response) => {
+         console.log(response);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   },
   mounted(){
+
 
     this.$store
       .dispatch("profile/Tcommunity", null)
       .then((response) => {
        
-      })
+      })  
       .catch((error) => {
         console.log({error:error});
       });
-
-
-
-
-      
-
  
       this.$store
       .dispatch("follower/UcommunityFollower", null)
@@ -113,9 +119,6 @@ export default {
         console.log({error:error});
       });
 
-
-
-      
       this.$store
       .dispatch("profile/UcommunityFollowing", null)
       .then((response) => {

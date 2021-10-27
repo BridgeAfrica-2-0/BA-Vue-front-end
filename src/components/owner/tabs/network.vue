@@ -105,18 +105,32 @@ import axios from "axios";
  
 export default {
   props: ["type"],
+  data() {
+    return {
+      page: 1,
+      options: {
+        rewind: true,
+        autoplay: true,
+        perPage: 1,
+        pagination: false,
+
+        type: "loop",
+        perMove: 1
+      }
+    };
+  },
+
   computed: {
    
-
         network(){
 
       if(this.type=="Follower"){ 
 
-      return  this.$store.state.follower.NcommunityFollower.network_followers;  
+      return  this.$store.state.profile.NcommunityFollower.network_followers;  
 
        }else{
 
-         return  this.$store.state.follower.NcommunityFollowing.network_following; 
+         return  this.$store.state.profile.NcommunityFollowing.network_following; 
        }
    }
    
@@ -124,9 +138,13 @@ export default {
 
 
 
+
    methods:{
       
-       infiniteHandler($state) {
+     
+      infiniteHandler($state) {
+
+        console.log("loading network 1 1")
 
       let url = null;
 
@@ -136,22 +154,43 @@ export default {
           url="profile/network/following/";
          }
       axios
-        .get(url + this.page)
+        .get(url + this.page)   
         .then(({ data }) => {
-          if (data.data.length) {
+          console.log("lading network after response")
+          console.log(data);
+        if(this.type=="Follower"){
+         
+
+          if (data.data.network_followers.length) {
             this.page += 1;
-      if(this.type=="Follower"){  
-            this.businesses.push(...data.data.network_followers); 
+            this.network.push(...data.data.network_followers);
+            
+            
+            $state.loaded();
            }else{
-              this.businesses.push(...data.data.network_following);
+              $state.complete();
            }
 
 
-            $state.loaded();
           } else {
-            $state.complete();
+            
+
+
+             if (data.data.network_following.length) {
+            this.page += 1;
+      
+            this.network.push(...data.data.network_following);
+            
+            
+            $state.loaded();
+           }else{
+              $state.complete();
+           }
+
+
+
           }
-        })
+        }) 
         .catch((err) => {
           console.log({ err: err });
         });

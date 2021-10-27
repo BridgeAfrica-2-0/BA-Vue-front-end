@@ -1,20 +1,23 @@
 <template>
   <div>
-    <b-icon icon="person-fill" variant="primary" class="icon-size"> </b-icon>
+    <b-icon class="icon" variant="primary" icon="person-fill"></b-icon> About
 
-    <b>
-      About
-    </b>
     <hr />
 
-    <div no-body class="p-2">
-      <b-tabs pills vertical>
-        <b-tab title="BIOGRAPHY" active><Biography /></b-tab>
-        <b-tab title="BASIC INFO"> <ContactandInfo /> </b-tab>
-        <b-tab title="EDUCATION AND WORK"><WorkAndEducation /></b-tab>
+    <b-card no-body class="desktop">
+      <b-tabs pills card vertical>
+        <b-tab title="BIOGRAPHY" active><Biography /></b-tab>  
+        <b-tab title="CONTACT & BASIC INFO"><ContactandInfo /> </b-tab>
+        <b-tab title="WORK & EDUCATION"><WorkAndEducation /></b-tab>  
       </b-tabs>
-  
-    </div>
+    </b-card>
+    <b-card no-body class="mobile p-2">
+      <b-tabs pills card justified>
+        <b-tab title="BIOGRAPHY" active><Biography /></b-tab>
+        <b-tab title="CONTACT & BASIC INFO"><ContactandInfo /> </b-tab>
+        <b-tab title="WORK & EDUCATION"><WorkAndEducation /></b-tab>
+      </b-tabs>
+    </b-card>
   </div>
 </template>
 
@@ -73,4 +76,34 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped>
+.mobile {
+  display: none;
+}
+
+.icon {
+  height: 24px;
+  width: 24px;
+}
+.primary-bg {
+  background-color: rgb(242, 242, 242);
+  border: none;
+}
+
+span {
+  margin-left: 8px;
+}
+
+@media only screen and (max-width: 768px) {
+  .desktop {
+    display: none;
+  }
+
+  .mobile {
+    display: block;
+  }
+  span {
+    margin-left: 6px;
+  }
+}
+</style>

@@ -19,7 +19,7 @@
           cols="12"
           md="12"
           lg="6"
-          class="p-0 pr-1"
+          class="p-0 pr-1 mb-2"
           v-for="(network, index) in profileNetworks"
           :key="index"
         >
@@ -29,7 +29,7 @@
         
 
 
-         <div class="people-style shadow">
+         <div class="people-style shadow h-100">
                 <b-link
                 >
                   <div class="float-right others">
@@ -802,7 +802,7 @@ export default {
 
     // Add network to the database but doesn't work correctly for now
     addNetwork(newNetwork) {
-     ;
+     
        let loader = this.$loading.show({
         container: this.fullPage ? null : this.$refs.preview,
         canCancel: true,

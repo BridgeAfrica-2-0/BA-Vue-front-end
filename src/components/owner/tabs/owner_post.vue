@@ -1,5 +1,6 @@
 <template>
   <div>
+     <FlashMessage />
     <!-- DOM to Create Post By A UserOwner-->
     <b-card class="px-md-3 mb-3">
       <b-row class="mt-2">
@@ -138,10 +139,7 @@
                     class="mb-2 border-none"
                     placeholder="Post a business update"
                     v-model="edit_description"
-                    :class="{
-                      'is-valid': createPost.postBusinessUpdate !== '',
-                      'is-invalid': createPost.postBusinessUpdate === '',
-                    }"
+                   
                   ></b-form-textarea>
                 </div>
                 <div class="bordder">
@@ -291,10 +289,7 @@
                     autofocus
                     placeholder="Post a business update"
                     v-model="createPost.postBusinessUpdate"
-                    :class="{
-                      'is-valid': createPost.postBusinessUpdate !== '',
-                      'is-invalid': createPost.postBusinessUpdate === '',
-                    }"
+                   
                   ></b-form-textarea>
                 </div>
                 <div class="bordder">
@@ -468,14 +463,18 @@
           </div>
 
           <div v-if="item.media.length > 0" class="">
+
+         <span v-for="video in mapvideo(item.media)" :key='video' > 
+
+
+            <youtube  class="w-100 videoh" :video-id="getId(video)" :player-vars="playerVars" @playing="playing"></youtube>
+
+           </span>
+ 
             <light
               css=" "
               :cells="item.media.length"
-              :items="
-                item.media.map(function (a) {
-                  return a.media_url;
-                })
-              "
+              :items="mapmediae(item.media)"
             ></light>
           </div>
           <b-row>
@@ -546,20 +545,20 @@
 <script>
 import Comment from "../comment";
 import light from "../../lightbox";
+
 import moment from "moment";
 import axios from "axios";
-import VueCoreVideoPlayer from "vue-core-video-player";
 
 export default {
   name: "postNetwork",
   components: {
     Comment,
     light,
-    VueCoreVideoPlayer,
+
   },
   data() {
     return {
-      videoId: "lG0Ys-2d4MA",
+     
       playerVars: {
         autoplay: 0,
       },
@@ -597,6 +596,59 @@ export default {
   },
 
   methods: {
+
+      mapmediae(media){
+
+       let mediaarr=[];
+
+       media.forEach((item) => {
+
+        let type = this.checkMediaType(item.media_type);
+       if(type != "video") {  
+        mediaarr.push(item.media_url);
+         }
+
+       });
+
+      return mediaarr;
+
+    },
+
+
+
+    
+      mapvideo(media){
+
+       let mediaarr=[];
+
+       media.forEach((item) => {
+
+        let type = this.checkMediaType(item.media_type);
+       if(type == "video") {  
+        mediaarr.push(item.media_url);
+         }
+
+       });
+
+      return mediaarr;
+
+    },
+
+
+    checkMediaType(media){
+
+     return media.split("/")[0] ;    
+
+    },
+
+  
+
+
+
+  getId (video_url) {
+      return this.$youtube.getIdFromUrl(video_url)
+    },
+
     nFormatter(num) {
       if (num >= 1000000000) {
         return (num / 1000000000).toFixed(1).replace(/\.0$/, "") + "G";
@@ -609,6 +661,10 @@ export default {
       }
       return num;
     },
+
+    
+
+
 
     reloads() {
       console.log("reoading");
@@ -1090,7 +1146,7 @@ export default {
 }
 .row.sub-sidebar-2.pending-post-view {
   background-color: #8bd06c;
-  border-color: #000;
+  border-color: #000; 
   border: solid 3px;
 }
 .color-site {
@@ -1102,12 +1158,23 @@ export default {
     font-size: 15px;
     color: black;
   }
+
+   .videoh{
+    
+    height: 200px !important;
+   }
 }
 .inline-comment {
   width: 95%;
 }
 
 @media (min-width: 762px) {
+
+   .videoh{
+    
+    height: 400px !important;
+   }
+
   .usernamee {
     font-weight: 600;
     font-size: 20px;
@@ -1275,6 +1342,35 @@ export default {
 }
 </style>
 <style>
+
+
+
+
+@media (max-width: 762px) {
+  .usernamee {
+    font-weight: 600;
+    font-size: 15px;
+    color: black;
+  }
+
+   .videoh{
+    
+    height: 200px !important;
+   }
+}
+
+
+@media (min-width: 762px) {
+
+   .videoh{
+    
+    height: 400px !important;
+   }
+
+}
+
+
+
 .custom-block-class {
   position: absolute;
   z-index: 1;

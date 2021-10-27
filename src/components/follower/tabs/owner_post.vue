@@ -44,6 +44,22 @@
           </div>
 
            <div   v-if="item.media.length > 0" class="">
+
+
+             <span v-for="video in mapvideo(item.media)" :key='video' > 
+
+
+            <youtube  class="w-100 videoh" :video-id="getId(video)" :player-vars="playerVars" @playing="playing"></youtube>
+
+           </span>
+ 
+            <light
+              css=" "
+              :cells="item.media.length"
+              :items="mapmediae(item.media)"
+            ></light>
+
+
                 <light
                 css=" "
                   :cells="item.media.length"
@@ -138,6 +154,9 @@ export default {
   },
   data() {
     return {
+      playerVars: {
+        autoplay: 0,
+      },
       moment: moment,
       page: 1,
       infiniteId: +new Date(),
@@ -170,6 +189,56 @@ export default {
   },
 
   methods: {
+
+
+     mapmediae(media){
+
+       let mediaarr=[];
+
+       media.forEach((item) => {
+
+        let type = this.checkMediaType(item.media_type);
+       if(type != "video") {  
+        mediaarr.push(item.media_url);
+         }
+
+       });
+
+      return mediaarr;
+
+    },
+
+
+
+  getId (video_url) {
+      return this.$youtube.getIdFromUrl(video_url)
+    },
+    
+      mapvideo(media){
+
+       let mediaarr=[];
+
+       media.forEach((item) => {
+
+        let type = this.checkMediaType(item.media_type);
+       if(type == "video") {  
+        mediaarr.push(item.media_url);
+         }
+
+       });
+
+      return mediaarr;
+
+    },
+
+
+    checkMediaType(media){
+
+     return media.split("/")[0] ;  
+
+    },
+
+
     nFormatter(num) {
       if (num >= 1000000000) {
         return (num / 1000000000).toFixed(1).replace(/\.0$/, "") + "G";

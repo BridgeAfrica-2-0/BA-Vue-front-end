@@ -9,7 +9,7 @@
       <b-card-text>
         <p>
           <b-icon icon="briefcase-fill" class="primary icon-size"></b-icon>
-          {{ business_intro.category }}
+         <span v-for=" cat in business_intro.category " :key="cat-id">  {{cat.name}} </span>
         </p>
         <p>
           <b-icon icon="search" class="primary icon-size"></b-icon>
@@ -75,7 +75,7 @@
               id="name"
               placeholder="Busness Name"
               class="form-control"
-              :state="validateState('name')"
+             
               v-model="form.name"
             />
           </div>

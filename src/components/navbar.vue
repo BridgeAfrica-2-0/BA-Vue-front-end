@@ -462,11 +462,10 @@
                         </div>
                       </div>
                     </div>
-
                      <hr />
 
-                    <a
-                      href="/myorders"
+                    <router-link
+                      to="/myorders"
                       class="other-menu suggest-item cursor-pointer text-decoration-none text-dark"
                     >
                       <span class="mr-2"
@@ -475,7 +474,7 @@
                           :icon="['fas', 'cart-arrow-down']"
                       /></span>
                      My orders
-                    </a>
+                    </router-link>
 
                     <hr />
 
@@ -566,15 +565,15 @@
 
              <hr class="mup" />
 
-            <a
-              href="/myorders"
+            <router-link
+              to="/myorders"
               class="other-menu suggest-item cursor-pointer text-decoration-none text-dark"
             >
               <span class="mr-2"
                 ><fas-icon class="violet search" :icon="['fas', 'cart-arrow-down']"
               /></span>
              My orders
-            </a>
+            </router-link>
             <hr class="mup" />
 
             <a

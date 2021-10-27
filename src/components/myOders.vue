@@ -22,6 +22,7 @@
           @click="changeElementType(2)"
         >
           <div class="cercle2">2</div>
+          reduce size of arrow on
           <h2 class="h2 text-position text-center">Complete</h2>
         </div>
         <div id="m3" class="mobile2 col t" @click="changeElementType(3)">
@@ -32,13 +33,15 @@
 
       <div class="justify-content-between container row my-4">
         <div class="col order"><h3 class="margclear1">My orders</h3></div>
-        <div class="col "><h3 class="text-danger text-center margclear">clear history</h3></div>
+        <div class="col">
+          <h3 class="text-danger text-center margclear">clear history</h3>
+        </div>
         <!-- <div class="status" v-if="titre">
           <h5 class="text-danger">clear history</h5>
         </div> -->
       </div>
       <hr />
-      
+
       <div>
         <div v-if="status == 1" class="inprogress">
           <div v-for="i in 4" :key="i">
@@ -55,9 +58,9 @@
                   </splide-slide>
                 </splide>
               </div>
-              
-              <div class="col-4 text-end ">
-                <h3 class="h3 margm2 ">Name :</h3>
+
+              <div class="col-4 text-end">
+                <h3 class="h3 margm2">Name :</h3>
                 <h3 class="h3 margm2">Product ID :</h3>
                 <h3 class="h3 margm2">Quantity :</h3>
                 <h3 class="h3 margm2">price :</h3>
@@ -65,35 +68,31 @@
                 <h3 class="h3 margm2">Total Cost :</h3>
               </div>
 
-              <div class="col-4 ">
-                <h3 class="h3 ">Sneaker</h3>
+              <div class="col-4">
+                <h3 class="h3">Sneaker</h3>
                 <h3 class="h3">#123v3c13</h3>
                 <h3 class="h3">1 Item</h3>
                 <h3 class="h3">12000 XAF</h3>
                 <h3 class="h3">10000 XAF</h3>
                 <h3 class="h3">13000 XAF</h3>
               </div>
-              
             </div>
-            
 
             <div class="justify-content-center container row">
               <br />
             </div>
 
-            
             <div class="justify-content-center container row">
-              
               <div class="">
                 <button class="buttonm btn shadow text-center">
                   <h3 class="h3 button-text">Re-order</h3>
                 </button>
-              </div> 
-              
+              </div>
             </div>
             <!-- <div class="justify-content-center container row">
               <br />
-            </div> <hr /> --> <hr />
+            </div> <hr /> -->
+            <hr />
           </div>
         </div>
 
@@ -112,7 +111,7 @@
                   </splide-slide>
                 </splide>
               </div>
-              
+
               <div class="col-4 text-end">
                 <h3 class="h3 margm2">Name :</h3>
                 <h3 class="h3 margm2">Product ID :</h3>
@@ -130,27 +129,23 @@
                 <h3 class="h3">10000 XAF</h3>
                 <h3 class="h3">13000 XAF</h3>
               </div>
-              
             </div>
-            
 
             <div class="justify-content-center container row">
               <br />
             </div>
 
-            
             <div class="justify-content-center container row">
-              
               <div class="">
                 <button class="buttonm btn shadow text-center">
                   <h3 class="h3 button-text">Re-order</h3>
                 </button>
               </div>
-              
             </div>
             <!-- <div class="justify-content-center container row">
               <br />
-            </div> --> <hr />
+            </div> -->
+            <hr />
           </div>
         </div>
 
@@ -169,7 +164,7 @@
                   </splide-slide>
                 </splide>
               </div>
-              
+
               <div class="col-4 text-end">
                 <h3 class="h3 margm2">Name :</h3>
                 <h3 class="h3 margm2">Product ID :</h3>
@@ -187,27 +182,23 @@
                 <h3 class="h3">10000 XAF</h3>
                 <h3 class="h3">13000 XAF</h3>
               </div>
-              
             </div>
-            
 
             <div class="justify-content-center container row">
               <br />
             </div>
 
-            
             <div class="justify-content-center container row">
-              
               <div class="">
                 <button class="buttonm btn shadow text-center">
                   <h3 class="h3 button-text">Re-order</h3>
                 </button>
               </div>
-              
             </div>
             <!-- <div class="justify-content-center container row">
               <br />
-            </div> --> <hr />
+            </div> -->
+            <hr />
           </div>
         </div>
       </div>
@@ -226,7 +217,7 @@
             <div class="pos1">
               <b-avatar text="1" :variant="success1"></b-avatar>
             </div>
-            
+
             <div class="col-4"><h2 class="h2 pos2">In progress</h2></div>
             <div id="r1" class="progress col bar" style="height: 10px">
               <div
@@ -238,7 +229,6 @@
                 aria-valuemax="100"
               ></div>
             </div>
-            
           </div>
         </div>
 
@@ -247,7 +237,7 @@
             <div class="pos1">
               <b-avatar text="2" :variant="success2"></b-avatar>
             </div>
-           
+
             <div class="col-4"><h2 class="h2 pos">Complete</h2></div>
             <div id="r2" class="progress col gris" style="height: 10px">
               <div
@@ -259,7 +249,6 @@
                 aria-valuemax="100"
               ></div>
             </div>
-            
           </div>
         </div>
 
@@ -268,7 +257,7 @@
             <div class="pos1">
               <b-avatar text="3" :variant="success3"></b-avatar>
             </div>
-            
+
             <div class="col-3"><h2 class="h2 pos">Cancel</h2></div>
             <div id="r3" class="progress col gris" style="height: 10px">
               <div
@@ -280,7 +269,6 @@
                 aria-valuemax="100"
               ></div>
             </div>
-            
           </div>
         </div>
       </div>
@@ -290,20 +278,19 @@
         <div class="status"><h3 class="text-danger">clear history</h3></div>
       </div>
       <hr />
-      
+
       <div>
         <div v-if="status == 1" class="inprogress">
           <div v-for="i in 4" :key="i">
             <div class="justify-content-between row">
               <div class="col-3">
-                
                 <splide :options="{ rewind: true }" class="r-img">
                   <splide-slide cl v-for="(im, index) in img" :key="index">
                     <img :src="img[index]" class="r-img" />
                   </splide-slide>
                 </splide>
               </div>
-              
+
               <div class="col-2 text-end text-start bold">
                 <h3>Name :</h3>
                 <h3>Product ID :</h3>
@@ -322,15 +309,12 @@
                 <h3>13000 XAF</h3>
               </div>
 
-              <div class="col" id="hidedesktop1" >
+              <div class="col" id="hidedesktop1">
                 <h3 class="bold1">status</h3>
                 <h3 class="text-success">{{ etat }}</h3>
               </div>
 
-              <div
-                class="container d-flex justify-content-end btn-marg"
-                
-              >
+              <div class="container d-flex justify-content-end btn-marg">
                 <button class="button btn shadow">
                   <h3 class="h3 button-text">Re-order</h3>
                 </button>
@@ -342,33 +326,29 @@
                   <h3 class="h3 button-text">Re-order</h3>
                 </button>
               </div> -->
-              
 
               <div class="justify-content-center container row">
                 <br />
               </div>
 
-              
               <div class="justify-content-center container row">
-                <br /> 
+                <br />
               </div>
             </div>
           </div>
-            
         </div>
 
         <div v-if="status == 2" class="complete">
           <div v-for="i in 4" :key="i">
             <div class="justify-content-between row">
               <div class="col-3">
-                
                 <splide :options="{ rewind: true }" class="r-img">
                   <splide-slide cl v-for="(im, index) in img" :key="index">
                     <img :src="img[index]" class="r-img" />
                   </splide-slide>
                 </splide>
               </div>
-              
+
               <div class="col-2 text-end text-start bold">
                 <h3>Name :</h3>
                 <h3>Product ID :</h3>
@@ -386,35 +366,27 @@
                 <h3>10000 XAF</h3>
                 <h3>13000 XAF</h3>
               </div>
-              <div class="col" id="hidedesktop1" >
+              <div class="col" id="hidedesktop1">
                 <h3 class="bold1">status</h3>
                 <h3 class="text-success">{{ etat }}</h3>
               </div>
-              
-              <div
-                class="container d-flex justify-content-end btn-marg"
-                
-              >
+
+              <div class="container d-flex justify-content-end btn-marg">
                 <button class="button btn shadow">
                   <h3 class="h3 button-text">Re-order</h3>
                 </button>
               </div>
 
-              
-
               <div class="justify-content-center container row">
                 <br />
               </div>
 
-              
               <div class="justify-content-center container row">
-                
                 <!-- <div class="bg-warning" v-if="!titre">
                   <button class="button btn shadow text-center">
                     <h3 class="h3 button-text">Re-order</h3>
                   </button>
                 </div> -->
-                
               </div>
               <div class="justify-content-center container row">
                 <br />
@@ -426,14 +398,13 @@
           <div v-for="i in 4" :key="i">
             <div class="justify-content-between row">
               <div class="col-3">
-                
                 <splide :options="{ rewind: true }" class="r-img">
                   <splide-slide cl v-for="(im, index) in img" :key="index">
                     <img :src="img[index]" class="r-img" />
                   </splide-slide>
                 </splide>
               </div>
-             
+
               <div class="col-2 text-end text-start bold">
                 <h3>Name :</h3>
                 <h3>Product ID :</h3>
@@ -451,35 +422,27 @@
                 <h3>10000 XAF</h3>
                 <h3>13000 XAF</h3>
               </div>
-              <div class="col" id="hidedesktop1" >
+              <div class="col" id="hidedesktop1">
                 <h3 class="bold1">status</h3>
                 <h3 class="text-success">{{ etat }}</h3>
               </div>
-              
-              <div
-                class="container d-flex justify-content-end btn-marg"
-                
-              >
+
+              <div class="container d-flex justify-content-end btn-marg">
                 <button class="button btn shadow">
                   <h3 class="h3 button-text">Re-order</h3>
                 </button>
               </div>
 
-              
-
               <div class="justify-content-center container row">
                 <br />
               </div>
 
-              
               <div class="justify-content-center container row">
-                
                 <!-- <div class="bg-warning" v-if="!titre">
                   <button class="button btn shadow text-center">
                     <h3 class="h3 button-text">Re-order</h3>
                   </button>
                 </div> -->
-               
               </div>
               <div class="justify-content-center container row">
                 <br />
@@ -516,7 +479,7 @@ export default {
 
   methods: {
     changeElementType(p) {
-      console.log(window.screen);
+     
       console.log("------------------" + p);
       this.status = p;
 
@@ -599,7 +562,7 @@ export default {
       this.rimg = "r-img1";
       let node = document.getElementById("hidedesktop");
       // let node2 = document.getElementById("hidedesktop1");
-      
+
       // node.remove();
       // node2.remove();
 
@@ -628,8 +591,6 @@ export default {
 </script>
 
 <style scoped>
-
-
 /* style for desktop------------------------- */
 .margd1 {
   margin-left: 50px;
@@ -669,7 +630,7 @@ h3 {
   font-size: 14px;
   /* font-weight: bold; */
 }
-.bold h3{
+.bold h3 {
   font-weight: bold !important;
 }
 
@@ -709,15 +670,13 @@ h3 {
 }
 .h3 {
   font-size: 12px;
-  
 }
-.margclear{
+.margclear {
   margin-left: 40px;
   margin-top: 30px;
   margin-bottom: -20px;
-  
 }
-.margclear1{
+.margclear1 {
   margin-top: 30px;
   margin-bottom: -20px;
 }
@@ -904,31 +863,25 @@ h3 {
   font-size: 14px;
 }
 
-.bold1{
+.bold1 {
   font-weight: bold;
 }
 /* .hidedesktop{
     visibility: hidden;
   } */
-  @media only screen and (max-width: 768px) {
-    
-    .bold h3{
-      font-weight: normal !important;
-    }
+@media only screen and (max-width: 768px) {
+  .bold h3 {
+    font-weight: normal !important;
+  }
 
-    #hidedesktop{
-       display: none;
-   }
-     
-
+  #hidedesktop {
+    display: none;
+  }
 }
 
- @media only screen and (min-width: 900px) {
-    
-   #hidemobile {
-        display: none !important;
-      }
-    
-
+@media only screen and (min-width: 900px) {
+  #hidemobile {
+    display: none !important;
+  }
 }
 </style>

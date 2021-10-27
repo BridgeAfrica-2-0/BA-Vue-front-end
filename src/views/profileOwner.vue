@@ -23,9 +23,6 @@
             <b-tab title="Community"  href="#community" class="m-0 p-0">
               <following />
             </b-tab>
-
-            
-            
           </b-tabs>
         </b-col>
       </b-row>

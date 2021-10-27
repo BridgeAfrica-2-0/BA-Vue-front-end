@@ -205,6 +205,7 @@
 				event.preventDefault();
 				this.loading = true;
 				this.form.name = this.username;
+				//if component is called in create mode
 				if (this.mode === "create") {
 					this.$store
 						.dispatch("checkout/createShipping", this.form)
@@ -225,7 +226,35 @@
 							}
 						});
 				} else {
-					console.log("update shipping");
+					//if component is called in edit mode
+					let formData = new FormData();
+					let shippingUp = {
+						id: this.form.id,
+						data: {
+							region_id: this.form.region_id,
+							country_id: this.form.country_id,
+							name: this.username,
+							phone: this.form.phone,
+							city: this.form.city,
+							neighbourhood_id: 1,
+							email: "ideal@gmail.com",
+						},
+					};
+
+					for (let key in shippingUp.data) {
+						formData.append(key, shippingUp.data[key]);
+					}
+					shippingUp.data = formData;
+
+					this.$store
+						.dispatch("checkout/updateShippingAddress", shippingUp)
+						.then(() => {
+							this.loading = false;
+						})
+						.catch(() => {
+							this.loading = false;
+						});
+						//close modal if component is modal
 					if (this.modal) {
 						this.$emit("closecshippingm");
 					}

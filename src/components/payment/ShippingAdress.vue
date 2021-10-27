@@ -124,6 +124,7 @@
 		},
 		computed: {
 			shippingsTab() {
+				console.log(this.$store.state.checkout.allShipping);
 				return this.$store.state.checkout.allShipping;
 				// return [
 				// 	{

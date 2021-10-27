@@ -67,9 +67,19 @@ const actions = {
       commit("setBuisiness", response.data)
       console.log(response.data);
     })
-    .catch((error)=>{
-      console.log(error)
-    })
+      .catch((error) => {
+        console.log(error)
+      })
+  },
+  async updateShippingAddress({ commit }, shippingUp) {
+    await axios.post(`shipping/shippingAddress/${shippingUp.id}/update`, shippingUp.data)
+      .then((response) => {
+        commit('upShippingAdd', shippingUp)
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.log(error)
+      })
   }
 }
 const mutations = {
@@ -84,7 +94,16 @@ const mutations = {
     state.cart = newCart
 
   },
-  setBuisiness: (state, newBuis) => { state.buisinessOrdered = newBuis }
+  setBuisiness: (state, newBuis) => { state.buisinessOrdered = newBuis },
+  upShippingAdd: (state, shippingUp) => {
+    let shippingData = {
+    }
+    shippingUp.data.forEach(function (value, key) {
+      shippingData[key] = value;
+    });
+
+    console.log('mutation update', shippingData);
+  }
 }
 export default {
   namespaced: true,

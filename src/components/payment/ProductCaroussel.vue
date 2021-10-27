@@ -33,7 +33,7 @@
 <script>
 	export default {
 		props: {
-			productImages: Array
+			productImages: Array,
 		},
 		data() {
 			return {
@@ -69,12 +69,22 @@
 <style scoped>
 	.product-slide img {
 		display: block;
-		height: 100px !important;
+		height: 200px;
+	}
+
+	@media only screen and (min-width: 548px) {
+		.product-slide img {
+			display: block;
+			height: 130px;
+		}
 	}
 	@media only screen and (min-width: 768px) {
-
 		.product-slide img {
+			display: block !important;
 			height: 100px !important;
 		}
+		/* .caroussel-product{
+			height: 400px !important;
+		} */
 	}
 </style>

@@ -254,13 +254,13 @@
 	}
 
 	.order-item {
-		max-height: 250px !important;
+		max-height: 350px !important;
 	}
 	.order-item-caroussel {
 		max-width: 200px;
 	}
 
-	@media only screen and (max-width: 446px) {
+	@media only screen and (max-width: 548px) {
 		.order-item-caroussel {
 			max-width: 100%;
 		}

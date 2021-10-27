@@ -5,7 +5,7 @@
 
     <h5 class="a-text">Assign Role</h5>
     <b-container class="b-bottom">
-    <b-row>
+      <b-row>
         <b-col cols="5">
           <b-form-group
             label-cols-lg="3"
@@ -109,6 +109,7 @@
             <b-card-text>No Editor Available.</b-card-text>
           </b-card>
         </div>
+
         <div>
           <b-modal id="edit-editor" hide-footer>
             <template #modal-title>
@@ -170,27 +171,23 @@ export default {
 	},
 
   computed: {
-
     followers() {
       return this.$store.state.businessRole.followers;
     },
     roles() {
-    
        return this.$store.state.businessRole.roles;
     },
     editors() {
       return this.$store.state.businessRole.editors;
     },
   },
-
-  
+ 
   mounted(){
     this.url = this.$route.params.id
     this.getFollowers() 
     this.getRoles() 
     this.displayEditor() 
   },
-
 
   methods:{
      
@@ -233,6 +230,7 @@ export default {
           formData: formData,
         })
         .then(({ data }) => {
+        console.log(data);
         console.log('ohh yeah');
         this.displayEditor();
         this.flashMessage.show({
@@ -256,8 +254,13 @@ export default {
       console.log('name: ', this.form.name);
       console.log('role: ', this.form.role);
       console.log(formData);
-      this.axios.post("business/role/assignRole/"+this.url, formData)
-      .then(() => {
+      this.$store
+        .dispatch("businessRole/updateEditor", {
+          path: "business/role/assignRole/"+this.url,
+          formData: formData,
+        })
+        .then(({ data }) => {
+        console.log(data);
         console.log('ohh yeah');
         this.getFollowers();
         this.displayEditor();
@@ -278,8 +281,12 @@ export default {
       });
 		},
     deleteEditor: function(clickedObject){
-      this.axios.delete("business/role/delete/"+clickedObject.id)
-      .then(() => {
+      this.$store
+        .dispatch("businessRole/deleteEditor", {
+          path: "business/role/delete/"+clickedObject.id,
+        })
+        .then(({ data }) => {
+        console.log(data);
         console.log('ohh yeah');
         this.displayEditor();
         this.flashMessage.show({
@@ -302,8 +309,6 @@ export default {
 		},
 
   },
-
-  
 
 };
 </script>

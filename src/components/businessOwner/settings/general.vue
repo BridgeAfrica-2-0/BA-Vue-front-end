@@ -1,8 +1,6 @@
 <template>
-  <b-container>
-
+  <b-container v-if="business_form">
     <FlashMessage />
-
     <div class="b-bottomn">
       <b-button variant="primary" class="a-button-l" @click="updateGeneralInfo()">
         <b-spinner v-if="SPupdateGeneralInfo" small type="grow"></b-spinner> Save Changes
@@ -142,6 +140,11 @@
       </div>
     </b-container>
   </b-container>
+  <b-container v-else>
+    <div class="text-center">
+      <b-spinner variant="primary" style="width: 3rem; height: 3rem;" label="Large Spinner Text Centered"></b-spinner>
+    </div>
+  </b-container>
 </template>
 
 <script>
@@ -175,18 +178,6 @@ export default {
     }
   },
 
-  created(){
-    this.permission = this.business[0].permissions,
-    this.business_form = {
-      name: this.business[0].name,
-      visibility: this.business[0].visibility,
-      permissions: this.business[0].permissions,
-      post_approval: this.business[0].post_approval,
-      keywords_alert: this.business[0].keywords_alert,
-      marketplace: this.business[0].marketplace[0].marketplace,
-    }
-  },
-
   watch : {
     permission:function(val) {
       console.log(val);
@@ -196,8 +187,8 @@ export default {
       console.log("Unchecked: "+this.business_form.post_approval);
     }
   },
-
-  mounted(){
+  
+  mounted() {
     this.url = this.$route.params.id;
     this.getBusiness();
   },
@@ -211,7 +202,16 @@ export default {
     this.$store
       .dispatch("businessGeneral/getbusiness", this.url)
       .then(() => {
-        console.log('ohh yeah');
+        console.log("this.business", this.business);
+        this.permission = this.business[0].permissions;
+        this.business_form = {
+          visibility: this.business[0].visibility,
+          permissions: this.business[0].permissions,
+          post_approval: this.business[0].post_approval,
+          keywords_alert: this.business[0].keywords_alert,
+          marketplace: this.business[0].marketplace[0].marketplace,
+        };
+        console.log('business data available');
       })
       .catch(err => {
         console.log({ err: err });
@@ -230,8 +230,8 @@ export default {
       console.log(formData);
       this.axios.post("business/general/update/"+this.url, formData)
       .then(() => {
-        console.log(this.form);
         this.getBusiness();
+        console.log(this.business_form);
         this.SPupdateGeneralInfo = !this.SPupdateGeneralInfo;
         this.flashMessage.show({
           status: "success",

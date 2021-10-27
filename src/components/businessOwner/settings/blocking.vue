@@ -53,15 +53,18 @@ export default {
       loading: false,
     }
 	},
+
   computed: {
     blockusers() {
       return this.$store.state.businessBlocking.blockusers;
     }
   },
+
   mounted(){
     this.url = this.$route.params.id;
     this.blockUsers();
   },
+  
   methods:{
      
     blockUsers() {

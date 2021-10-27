@@ -76,5 +76,26 @@ export default {
       })
     },
 
+    assignRole( {commit}, businessData ){
+      console.log("businessData.path",businessData.path);
+      console.log("businessData.formData",businessData.formData);
+      return axios
+      .post(businessData.path, businessData.formData)
+      .then(({ data }) => {
+        console.log(data);
+        return data;
+      })
+    },
+
+    deleteEditor( {commit}, businessData ){
+      console.log("businessData.path",businessData.path);
+      return axios
+      .post(businessData.path)
+      .then(({ data }) => {
+        console.log(data);
+        return data;
+      })
+    },
+
   },
 };

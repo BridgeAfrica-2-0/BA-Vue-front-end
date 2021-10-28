@@ -350,7 +350,25 @@ export default {
         return (num / 1000).toFixed(1).replace(/\.0$/, "") + "K";
       }
       return num;
-    },
+ },
+
+
+ 
+ loadMore({commit}, url){
+   
+  return axios.get(url)
+  .then(( data ) => {
+   return data;
+  });
+
+ },
+
+ 
+
+
+
+
+
 
     async loadUserBusinessAbout(context, payload) {
       console.log(payload, "load user Business About start +++++");
@@ -580,6 +598,38 @@ export default {
               });
           },
 
+     createAlbum({ commit }, payload) {
+      return axios.post("business/album/create/" + payload.id, {
+        name : payload.name
+      }) .then(({ data }) => {
+       
+        commit("newAlbum", data.data);
+        console.log(data);
+      });
+
+     
+    },  
+
+     updateAlbum({ commit }, payload) {
+     return axios.post(
+        "business/album/update/" + payload.url + "/" + payload.id,
+        {
+         name: payload.name,
+        }
+      ) .then(({ data }) => {
+       
+      commit("upAlbum", data.data);
+        console.log(data);
+      });
+    },
+
+     deleteAlbum({ commit }, payload) {
+       return axios.post(
+        "business/album/delete/" + payload.url + "/" + payload.id
+      );
+    },
+
+    
           businessCommunityTotal({ commit }, businessId) {
             return axios
               .get("business/community/total/" + businessId)
@@ -589,37 +639,12 @@ export default {
               });
           },
 
-          async createAlbum({ commit }, name) {
-            const res = await axios.post("business/album/create/" + this.url, {
-              name,
-            });
-            commit("newAlbum", res.data);
-          },
-
-          async updateAlbum({ commit }, edit_name, album_id) {
-            const res = await axios.post(
-              "business/album/update/" + this.url + "/" + album_id,
-              {
-                edit_name,
-              }
-            );
-            commit("upAlbum", res.data);
-          },
-      
-          async deleteAlbum({ commit }, name, album_id) {
-            const res = await axios.post(
-              "business/album/edit/" + this.url + "/" + album_id,
-              { name }
-            );
-            commit("delAlbum", res.data);
-          },
-
-          // temporal signin to get token for developement purpose
+        
     async signIn() {
       axios
         .post("/user/login", {
           email: "info@moazateeq.com",
-          password: "12345678",
+          password: "12345678", 
         })
         .then((res) => {
           localStorage.setItem("access_token", res.data.data.accessToken);
@@ -662,7 +687,7 @@ export default {
         });
     },
 
-    // Add network to the database but doesn't work correctly for now
+    
     async addNetwork({ commit }, newNetwork) {
       console.log(newNetwork);
       axios

@@ -516,8 +516,8 @@
                     v-model="filterselectvalue"
                     tag-placeholder="Add this as new tag"
                     placeholder="Search or add a tag"
-                    label="subcategory"
-                    track-by="sub_cat_id"
+                    label="name"
+                    track-by="subcategory_id"
                     :options="scategories"
                     :multiple="true"
                     :taggable="true"
@@ -530,7 +530,7 @@
                   <b-card no-body>
                     <b-tabs pills card vertical>
                       <b-tab
-                        :title="filters.subcategory"
+                        :title="filters.name"
                         v-for="filters in filterselectvalue"
                         :key="filters.id"
                         active
@@ -1442,7 +1442,7 @@ export default {
     selectedsubcategories: function () {
       let sub_cat = [];
       this.filterselectvalue.forEach((item) => {
-        sub_cat.push(item.sub_cat_id);
+        sub_cat.push(item.subcategory_id);
       });
       return sub_cat;
     },

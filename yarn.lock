@@ -10754,6 +10754,11 @@ vue-loader@^15.9.2:
     vue-hot-reload-api "^2.3.0"
     vue-style-loader "^4.1.0"
 
+vue-loading-bar@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/vue-loading-bar/-/vue-loading-bar-1.0.0.tgz#6004635f092cd2af0cb01a22624c55758b8ed739"
+  integrity sha1-YARjXwks0q8MsBoiYkxVdYuO1zk=
+
 vue-loading-overlay@3.x:
   version "3.4.2"
   resolved "https://registry.yarnpkg.com/vue-loading-overlay/-/vue-loading-overlay-3.4.2.tgz#34792a83218df1d35dff50121ce9fac2114f1c38"
@@ -10912,6 +10917,13 @@ vue2-google-maps@^0.10.7:
     babel-runtime "^6.26.0"
     marker-clusterer-plus "^2.1.4"
 
+vue2-loading-bar@^0.0.1:
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/vue2-loading-bar/-/vue2-loading-bar-0.0.1.tgz#5fec3acaa07e4d9dabf10b769b1c3ad5a3018787"
+  integrity sha1-X+w6yqB+TZ2r8Qt2mxw61aMBh4c=
+  dependencies:
+    vue ""
+
 vue3-discordpicker@^1.0.7:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/vue3-discordpicker/-/vue3-discordpicker-1.1.0.tgz#8f5d05884ff585f51eab9391bbf45495ae916b29"
@@ -10922,7 +10934,7 @@ vue3-discordpicker@^1.0.7:
     tailwindcss "npm:@tailwindcss/postcss7-compat@^2.1.2"
     vue "^3.0.0"
 
-vue@^2.0.0, vue@^2.3.3, vue@^2.5.17, vue@^2.5.2, vue@^2.6.10, vue@^2.6.11, vue@^2.6.12:
+vue@, vue@^2.0.0, vue@^2.3.3, vue@^2.5.17, vue@^2.5.2, vue@^2.6.10, vue@^2.6.11, vue@^2.6.12:
   version "2.6.14"
   resolved "https://registry.yarnpkg.com/vue/-/vue-2.6.14.tgz#e51aa5250250d569a3fbad3a8a5a687d6036e235"
   integrity sha512-x2284lgYvjOMj3Za7kqzRcUSxBboHqtgRE2zlos1qWaOye5yUmHn42LB1250NJBLRwEcdrB0JRwyPTEPhfQjiQ==
@@ -10942,6 +10954,11 @@ vuejs-google-maps@^0.0.13:
   integrity sha512-i5wtZlLvLIST9aQncEXa3ODYi2NzRf7GMLgm28OwwnZDQpXV/1ytgCv6teowbK9c9ql5N29IydNfNbJ9ufAP2Q==
   dependencies:
     vue "^2.6.12"
+
+vuejs-progress-bar@^1.2.7:
+  version "1.2.7"
+  resolved "https://registry.yarnpkg.com/vuejs-progress-bar/-/vuejs-progress-bar-1.2.7.tgz#40ffb8427ccde109a3b2fb038848dff433673060"
+  integrity sha512-w6lKwYT5kLSp5aCywSoBD01rZF1MeurOGX1u4gwSKCuWLZj3GB+/Trq+rI7ESesGgFYFfcg6050NyPAiCstJgw==
 
 vuelidate@^0.7.6:
   version "0.7.6"

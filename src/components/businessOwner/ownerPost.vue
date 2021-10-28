@@ -11,7 +11,7 @@
             square
             class="img-fluid avat-comment"
             :src="business_intro.logo_path"
-          ></b-avatar>  
+          ></b-avatar>
         </b-col>
         <b-col cols="9" md="11" class="p-0 m-0 pr-3">
           <input
@@ -101,13 +101,8 @@
       <div class="">
         <div
           class="col-md-12 col-lg-12 d-flex align-items-stretch mb-lg-0"
-          style="padding-left: 0; padding-top: 3px;"
+          style="padding-left: 0; padding-top: 3px"
         >
-          <!-- <b-button v-b-modal.modal-xl variant="primary">xl modal</b-button> -->
-          <!-- Modal For Create Post User-->
-
-          <!--   edit array   -->
-
           <b-modal
             id="modal-edit"
             ref="modal-edit"
@@ -125,8 +120,10 @@
                   :src="business_intro.logo_path"
                 ></b-avatar>
               </b-col>
-              <b-col cols="9" class="pt-2" style="margin-left:-5px">
-                <h5 class="m-0 font-weight-bolder">{{business_intro.name}} </h5>
+              <b-col cols="9" class="pt-2" style="margin-left: -5px">
+                <h5 class="m-0 font-weight-bolder">
+                  {{ business_intro.name }}
+                </h5>
               </b-col>
             </b-row>
             <b-row>
@@ -139,7 +136,6 @@
                     class="mb-2 border-none"
                     placeholder="Post a business update"
                     v-model="edit_description"
-                    
                   ></b-form-textarea>
 
                   <i></i>
@@ -245,8 +241,8 @@
                 </div>
                 <br />
 
-                  <b-progress
-                  v-if="isUploading"
+                <b-progress
+                
                   :value="uploadPercentage"
                   variant="primary"
                   class="m13"
@@ -283,8 +279,10 @@
                   :src="business_intro.logo_path"
                 ></b-avatar>
               </b-col>
-              <b-col cols="9" class="pt-2" style="margin-left:-5px">
-                <h5 class="m-0 font-weight-bolder">{{business_intro.name}} </h5>
+              <b-col cols="9" class="pt-2" style="margin-left: -5px">
+                <h5 class="m-0 font-weight-bolder">
+                  {{ business_intro.name }}
+                </h5>
               </b-col>
             </b-row>
             <b-row>
@@ -293,15 +291,12 @@
                 <br />
                 <div class="cursor">
                   <b-form-textarea
-                   id="textarea-small"
+                    id="textarea-small"
                     autofocus
                     class="mb-2 border-none"
                     placeholder="Post a business update"
-                    
                     v-model="createPost.postBusinessUpdate"
-                   
                   ></b-form-textarea>
-
                 </div>
                 <div class="bordder">
                   <span class="float-left"> Add to Your Post </span>
@@ -354,8 +349,7 @@
                 </div>
                 <br />
 
-
-                 <div class="h300px">
+                <div class="h300px">
                   <div
                     v-for="hyperlink in createPost.hyperlinks"
                     :key="hyperlink.fileName"
@@ -369,7 +363,7 @@
                       delete
                     </span>
                   </div>
-                    
+
                   <div
                     v-for="movie in createPost.movies"
                     :key="movie.fileName"
@@ -386,19 +380,21 @@
                       <span> </span>
                       <img v-if="movie.fileType == 'image'" :src="movie.link" />
 
-                       <video v-else width="97%" height="240" autoplay>
+                      <video v-else width="97%" height="240" autoplay>
                         <source :src="movie.link" type="video/mp4" />
                       </video>
                     </div>
                   </div>
                 </div>
-
-
-
-                 
-
-                
-
+                  <b-progress
+                  v-if="isUploading"
+                  :value="uploadPercentage"
+                  variant="primary"
+                  class="m13"
+                  show-progress
+                  :animated="animate"
+                ></b-progress>
+                <hr>
                 <span>
                   <b-button @click="submitPost" variant="primary" block
                     ><b-icon icon="cursor-fill" variant="primary"></b-icon>
@@ -412,79 +408,89 @@
         </div>
       </div>
 
-      <!--<b-row
-        class="mt-4"
-        v-for="item in $store.getters.getPostLists"
-        :key="item.post_id"
-      >-->
 
-      <b-row class="mt-4" v-for="item in post" :key="item.post_id">
-        <!--  :src="$store.getters.getProfilePicture"-->
-        <b-col cols="12" class="mt-4">
-          <b-row>
-            <b-col cols="2" md="1" class="m-0 p-0">
+     
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+           <div v-for="item in owner_post" :key="item.post_id">
+        <div class="mt-2">
+          <div class="d-inline-flex">
+            <span md="1" class="m-0 p-0">
               <b-avatar
                 class="d-inline-block avat"
+                square
                 variant="primary"
                 :src="item.logo_path"
               ></b-avatar>
-            </b-col>
-            <b-col cols="10" md="11" class="pt-2">
-              <h5 class="m-0 font-weight-bolder">
+            </span>
+            <div class="pl-2 pl-md-3 pt-md-2">
+              <h5 class="m-0 usernamee">
                 {{ item.bussines_name }}
-                <span class="float-right">
-                  <b-dropdown variant="outline-primary" size="sm" no-caret>
-                    <template #button-content>
-                      <b-icon icon="three-dots" aria-hidden="true"></b-icon>
-                    </template>
-
-                    <!--
-                            <b-dropdown-item-button>
-                              <b-icon icon="lock-fill" aria-hidden="true"></b-icon>
-                              Locked <span class="sr-only">(Click to unlock)</span>
-                            </b-dropdown-item-button>
-                            <b-dropdown-divider></b-dropdown-divider>
-                            -->
-
-                    <b-dropdown-item-button
-                      variant="info"
-                      @click="editPost(item)"
-                    >
-                      <b-icon icon="pencil" aria-hidden="true"></b-icon>
-                      Edit
-                    </b-dropdown-item-button>
-
-                    <b-dropdown-item-button
-                      variant="danger"
-                      @click="deletePost(item)"
-                    >
-                      <b-icon icon="trash-fill" aria-hidden="true"></b-icon>
-                      Delete
-                    </b-dropdown-item-button>
-                  </b-dropdown>
-                </span>
               </h5>
-              <p class="duration">{{ moment(item.created_at).fromNow() }}</p>
-            </b-col>
-          </b-row>
-          <b-row>
-            <b-col cols="12" class="mt-2">
-              <p class="post-text">
-                <!--     :text="item.content.details"   -->
-                <read-more
-                  more-str="read more"
-                  :text="item.content"
-                  link="#"
-                  less-str="read less"
-                  :max-chars="200"
-                ></read-more>
-              </p>
-            </b-col>
-          </b-row>
-          <b-row>
-            <b-col v-if="item.media.length > 0" cols="12" class="mt-2">
+              <p class="durationn">{{ moment(item.created_at).fromNow() }}</p>
+            </div>
 
-              
+            <div class="toright pt-2">
+              <b-dropdown variant="link" size="sm" no-caret>
+                <template #button-content>
+                  <b-icon
+                    icon="three-dots"
+                    variant="primary"
+                    aria-hidden="true"
+                  ></b-icon>
+                </template>
+
+                <b-dropdown-item-button variant="info" @click="editPost(item)">
+                  <b-icon icon="pencil" aria-hidden="true"></b-icon>
+                  Edit
+                </b-dropdown-item-button>
+
+                <b-dropdown-item-button
+                  variant="danger"
+                  @click="deletePost(item)"
+                >
+                  <b-icon icon="trash-fill" aria-hidden="true"></b-icon>
+                  Delete
+                </b-dropdown-item-button>
+              </b-dropdown>
+            </div>
+          </div>
+          <div class="m-0 p-0">
+            <p class="post-text">
+              <!--     :text="item.content.details"   -->
+              <read-more
+                v-if="item.content"
+                more-str="read more"
+                :text="item.content"
+                link="#"
+                less-str="read less"
+                :max-chars="200"
+              ></read-more>
+            </p>
+          </div>
+
+          <div v-if="item.media.length > 0" class="">
+
          <span v-for="video in mapvideo(item.media)" :key='video' > 
 
 
@@ -497,11 +503,8 @@
               :cells="item.media.length"
               :items="mapmediae(item.media)"
             ></light>
-
-
-              
-            </b-col>
-
+          </div>
+          <b-row>
             <!--   v-if="item.content.movies.length <= 0"  -->
             <b-col cols="12" class="mt-2">
               <!--  :src="$store.getters.getProfilePicture"  -->
@@ -531,31 +534,39 @@
           </b-row>
 
           <!--  :src="$store.getters.getProfilePicture"  -->
-          <b-row class="mt-2">
-            <b-col cols="3" md="1" class="m-md-0 p-md-0">
-              <b-avatar
-                variant="primary"
-                class="img-fluid avat-comment"
-              ></b-avatar>
-            </b-col>
-            <b-col cols="9" md="11" class="p-0 m-0 pr-3">
-              <input placeholder="Post a Comment" class="comment" type="text" />
+        </div>
 
-              <fas-icon
-                class="primary send-cmt"
-                :icon="['fas', 'paper-plane']"
-              />
-            </b-col>
-          </b-row>
-        </b-col>
+        <div class="mt-2 d-inline-flex w-100">
+          <div class="m-md-0 p-md-0">
+            <b-avatar
+              variant="primary"
+              square
+              :src="business_intro.logo_path"  
+              class="img-fluid avat-comment"
+            ></b-avatar>
+          </div>
+
+          <div class="p-0 m-0 pr-3 inline-comment">
+            <input placeholder="Post a Comment" class="comment" type="text" />
+
+            <fas-icon class="primary send-cmt" :icon="['fas', 'paper-plane']" />
+          </div>
+        </div>
+
         <Comment
           v-for="comment in item.comments"
           :key="comment.id"
           :comment="comment"
         />
-      </b-row>
+        <hr />
+      </div>
+ 
+      <infinite-loading
+        :identifier="infiniteId"
+        ref="infiniteLoading"
+        @infinite="infiniteHandler"
+      ></infinite-loading>
 
-      <infinite-loading @infinite="infiniteHandler"></infinite-loading>
     </b-card>
   </div>
 </template>
@@ -569,12 +580,15 @@ export default {
   name: "postNetwork",
   components: {
     Comment,
-    light
+    light,
   },
   data() {
     return {
       animate: true,
+     
+      infiniteId: +new Date(),
       isUploading: false,
+       uploadPercentage: 0,
       moment: moment,
       page: 1,
       post: this.$store.state.businessOwner.ownerPost,
@@ -624,63 +638,43 @@ export default {
       },
       isSubmitted: false,
       fileImageArr: [],
-    };     
+    };
   },
 
   methods: {
+    mapmediae(media) {
+      let mediaarr = [];
 
-     mapmediae(media){
-
-       let mediaarr=[];
-
-       media.forEach((item) => {
-
+      media.forEach((item) => {
         let type = this.checkMediaType(item.media_type);
-       if(type != "video") {  
-        mediaarr.push(item.media_url);
-         }
-
-       });
+        if (type != "video") {
+          mediaarr.push(item.media_url);
+        }
+      });
 
       return mediaarr;
-
     },
 
+    mapvideo(media) {
+      let mediaarr = [];
 
-
-    
-      mapvideo(media){
-
-       let mediaarr=[];
-
-       media.forEach((item) => {
-
+      media.forEach((item) => {
         let type = this.checkMediaType(item.media_type);
-       if(type == "video") {  
-        mediaarr.push(item.media_url);
-         }
-
-       });
+        if (type == "video") {
+          mediaarr.push(item.media_url);
+        }
+      });
 
       return mediaarr;
-
     },
 
-
-    checkMediaType(media){
-
-     return media.split("/")[0] ;    
-
+    checkMediaType(media) {
+      return media.split("/")[0];
     },
 
-  
-
-
-
-  getId (video_url) {
-      return this.$youtube.getIdFromUrl(video_url)
+    getId(video_url) {
+      return this.$youtube.getIdFromUrl(video_url);
     },
-
 
     nFormatter(num) {
       if (num >= 1000000000) {
@@ -696,15 +690,18 @@ export default {
     },
 
     infiniteHandler($state) {
-      axios
-        .get("business/show/post/" + this.url + "/" + this.page)
+      let url="business/show/post/" + this.url + "/" + this.page;
+       if (this.page == 1) {
+        this.owner_post.splice(0);
+      }
+       this.$store
+        .dispatch("businessOwner/loadMore", url)
         .then(({ data }) => {
-          // commit('ownerPost', data.data);
-          //  console.log(data);
+          
           if (data.data.length) {
             this.page += 1;
 
-            this.post.push(...data.data);
+            this.owner_post.push(...data.data);
             $state.loaded();
           } else {
             $state.complete();
@@ -854,8 +851,8 @@ export default {
         });
     },
 
-    chooseImage: function() {},
-    chooseVideo: function() {
+    chooseImage: function () {},
+    chooseVideo: function () {
       document.getElementById("chosefile").click();
     },
     chooseDocument() {
@@ -866,8 +863,8 @@ export default {
 
       if (file.files) {
         let reader = new FileReader();
-       
-       reader.onload = (e) => {
+
+        reader.onload = (e) => {
           this.createPost.movies.push({
             target: event.target,
             movie: e.target.result,
@@ -887,13 +884,13 @@ export default {
         let reader = new FileReader();
         reader.onload = (e) => {
           result = e.target.result;
-          
+
           return result;
         };
         reader.readAsDataURL(file.files[0]);
       }
     },
-   
+
     selectMoviesOutsidePost(event) {
       const file = event.target;
 
@@ -972,7 +969,7 @@ export default {
     },
 
     submitPost() {
-       this.isUploading = true;
+      this.isUploading = true;
       let loader = this.$loading.show({
         container: this.fullPage ? null : this.$refs.loader,
         canCancel: true,
@@ -980,15 +977,15 @@ export default {
         color: "#e75c18",
       });
 
-     let fileImage = null;
+      let fileImage = null;
 
       let formData2 = new FormData();
-      console.log(this.createPost.movies);
+      
       if (this.createPost.movies[0]) {
         fileImage = this.createPost.movies[0].target.files[0];
 
         this.fileImageArr = this.createPost.movies;
-        console.log(this.fileImageArr);
+    
 
         this.fileImageArr.forEach((value, index) => {
           formData2.append("media[" + index + "]", value.target.files[0]);
@@ -996,24 +993,41 @@ export default {
       }
 
 
+      formData2.append("type", "image");
+
+      formData2.append("content", this.createPost.postBusinessUpdate);
+
+      console.log(formData2);
+
+
       this.axios
         .post("business/create/post/" + this.url, formData2, {
           headers: {
             "Content-Type": "multipart/form-data",
           },
+          
+          onUploadProgress: function (progressEvent) {
+            this.uploadPercentage = parseInt(
+              Math.round((progressEvent.loaded / progressEvent.total) * 100)
+            );
+          }.bind(this),
+
         })
         .then((response) => {
           console.log(response);
-
+      
           this.flashMessage.show({
             status: "success",
             blockClass: "custom-block-class",
             message: "Content successfuly uploaded",
           });
+          this.isUploading = false;
           loader.hide();
           this.$refs["modal-xl"].hide();
-
-          this.ownerPost();
+           this.reloads();
+          this.page = 1;
+          this.infiniteId += 1;
+          console.log("post create complete");
         })
         .catch((err) => {
           if (err.response.status == 422) {
@@ -1041,6 +1055,12 @@ export default {
         });
     },
 
+  
+    reloads() {
+      console.log("reoading");
+      this.$store.commit("profile/ownerPost", []);
+    },
+
     showModal() {
       this.$refs["modal-3"].show();
     },
@@ -1058,7 +1078,7 @@ export default {
     },
   },
   computed: {
-     business_intro() {
+    business_intro() {
       return this.$store.state.businessOwner.businessInfo;
     },
 
@@ -1067,8 +1087,8 @@ export default {
     },
 
     business_logo() {
-    //  return this.$store.state.businessOwner.businessInfo.logo_path;
-    return this.$store.state.businessOwner.businessInfo;
+      //  return this.$store.state.businessOwner.businessInfo.logo_path;
+      return this.$store.state.businessOwner.businessInfo;
     },
 
     owner_post() {
@@ -1084,8 +1104,21 @@ export default {
   },
 };
 </script>
+<style >
+.h-lg-250 {
+  height: 350px !important;
+}
+
+.lb-item {
+  background-size: auto;
+}
+</style>
 
 <style scoped>
+.m13 {
+  margin-bottom: -13px;
+}
+
 .custom-block-class {
   position: absolute;
   z-index: 1;
@@ -1099,16 +1132,17 @@ export default {
 
 .upload-cancel {
   z-index: 1;
-
   margin-top: -40%;
   float: right;
+  margin-left: -10px;
+  right: -97%;
+  position: relative;
 }
 
 .upload-cancel:hover {
   color: orange;
   font-size: 24px;
 }
-
 
 .oorange {
   color: red;
@@ -1128,13 +1162,6 @@ export default {
   height: 200px !important;
 }
 
- 
-#preview img {
-  object-fit: cover;
-  width: 100% !important;
-  height: 200px !important;
-}
-
 .pending-post-view {
   background-color: #8bd06c;
   border-color: #000;
@@ -1146,13 +1173,41 @@ export default {
 }
 .row.sub-sidebar-2.pending-post-view {
   background-color: #8bd06c;
-  border-color: #000;
+  border-color: #000; 
   border: solid 3px;
 }
 .color-site {
   color: #e75c18;
 }
+@media (max-width: 762px) {
+  .usernamee {
+    font-weight: 600;
+    font-size: 15px;
+    color: black;
+  }
+
+   .videoh{
+    
+    height: 200px !important;
+   }
+}
+.inline-comment {
+  width: 95%;
+}
+
 @media (min-width: 762px) {
+
+   .videoh{
+    
+    height: 400px !important;
+   }
+
+  .usernamee {
+    font-weight: 600;
+    font-size: 20px;
+    color: black;
+  }
+
   .avat {
     width: 64px;
     height: 64px;
@@ -1172,7 +1227,7 @@ export default {
     max-height: 462px;
   }
   .post-text {
-    font-size: 14px;
+    font-size: 16px;
     font-family: Arial, Helvetica, sans-serif;
     text-align: left;
   }
@@ -1182,6 +1237,16 @@ export default {
   }
 }
 @media (max-width: 762px) {
+  .commentt[data-v-41fcb621] {
+    width: 99%;
+    border: solid 1 px #ccc;
+    border-radius: 25 px;
+    background-color: #ddd;
+    height: 34 px;
+    padding-left: 10 px;
+     margin-left: 2%; 
+  }
+
   .post-btn {
     border: none !important;
     margin-right: 0px;
@@ -1201,7 +1266,7 @@ export default {
     height: 36px;
   }
   .post-text {
-    font-size: 12px;
+    font-size: 16px;
     font-family: Arial, Helvetica, sans-serif;
     text-align: left;
   }
@@ -1217,12 +1282,13 @@ export default {
   width: 315px;
 }
 .comment {
-  width: 100%;
+  width: 90%;
   border: solid 1px #ccc;
   border-radius: 25px;
   background-color: #ddd;
   height: 34px;
-  padding-left: 8px;
+  padding-left: 10px;
+  margin-left: 8%;
 }
 .comment:focus {
   outline: none;
@@ -1241,13 +1307,13 @@ export default {
 }
 .cursor i {
   position: absolute;
-  width: 1px;
+  width: 2px;
   height: 20%;
   background-color: gray;
   left: 5px;
   top: 10%;
   animation-name: blink;
-  animation-duration: 800ms;
+  animation-duration: 1200ms;
   animation-iteration-count: infinite;
   opacity: 1;
 }
@@ -1262,14 +1328,12 @@ export default {
     opacity: 0;
   }
 }
-
 .bordder {
   border: 1px solid gray;
   height: 50px;
   padding: 6px;
   border-radius: 10px;
 }
-
 .username {
   color: black;
 }
@@ -1297,10 +1361,52 @@ export default {
 .is.invalid {
   border-color: red;
 }
+
+.durationn {
+  font-weight: 400;
+  font-size: 15px;
+  color: black;
+}
 </style>
 <style>
+
+
+
+
+@media (max-width: 762px) {
+  .usernamee {
+    font-weight: 600;
+    font-size: 15px;
+    color: black;
+  }
+
+   .videoh{
+    
+    height: 200px !important;
+   }
+}
+
+
+@media (min-width: 762px) {
+
+   .videoh{
+    
+    height: 400px !important;
+   }
+
+}
+
+
+
 .custom-block-class {
   position: absolute;
   z-index: 1;
+}
+.post-text p {
+  margin: 0px;
+}
+.toright {
+  position: absolute;
+  right: 1%;
 }
 </style>

@@ -381,7 +381,7 @@
                   </div>
                 </div>
 
-                <vue-core-video-player></vue-core-video-player>
+                
 
                 <b-progress
                   v-if="isUploading"
@@ -674,7 +674,10 @@ export default {
     infiniteHandler($state) {
       console.log("user/post/" + this.page);
       let url = "user/post/" + this.page;
-
+  
+      if (this.page == 1) {
+        this.owner_post.splice(0);
+      }
       this.$store
         .dispatch("profile/loadMore", url)
 

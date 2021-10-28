@@ -676,7 +676,7 @@ async updateUserBusinessAbout(context, payload) {
         });
     },
 
-    // Add network to the database but doesn't work correctly for now
+    
     async addNetwork({ commit }, newNetwork) {
       console.log(newNetwork);
       axios

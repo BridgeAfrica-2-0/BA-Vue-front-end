@@ -209,8 +209,29 @@
     
     <!--  partie desktop---------------------------------------------------------------------------------------- -->
 
+
     <div class="hidedesktop" id="hidedesktop">
-      <!-- navigation--------------- -->
+      <div class="row parent">
+        <b-avatar  class="avatar " text="1" :variant="success1" ></b-avatar>  
+        <h2 class="text cursor" @click="changeElementType(1)">In Process</h2> 
+        <div class="progress prog cursor gris" @click="changeElementType(1)">
+          <div class="progress-bar bg-success " role="progressbar" :style="style1" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
+
+         <b-avatar class="avatar " text="2" :variant="success2" ></b-avatar>  
+        <h2 class="text cursor" @click="changeElementType(2)">Shipped</h2> 
+        <div class="progress prog cursor gris" @click="changeElementType(2)">
+          <div class="progress-bar bg-success " role="progressbar" :style="style2" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
+
+         <b-avatar class="avatar " text="3" :variant="success3" ></b-avatar>  
+        <h2 class="text cursor" @click="changeElementType(3)">Re-schedule</h2> 
+        <div class="progress prog cursor gris" @click="changeElementType(3)">
+          <div class="progress-bar bg-success " role="progressbar" :style="style3" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
+
+      </div>
+      <!-- navigation---------------
       <div class="row cursor justify-content-center">
         <div class="col-4" @click="changeElementType(1)">
           <div class="row">
@@ -271,7 +292,7 @@
             </div>
           </div>
         </div>
-      </div>
+      </div> -->
 
       <div class="justify-content-between container row my-4">
         <div class="col order"><h3>My orders</h3></div>
@@ -504,80 +525,64 @@ export default {
         this.etat = "re-schedule";
       }
       //transition partie mobile
-      if (
-        window.screen.width > 240 &&
-        window.screen.width < 500 &&
-        window.screen.height > 320 &&
-        window.screen.height < 900
-      ) {
+      
         const el = document.getElementById("m" + p);
         const els = document.querySelectorAll(".t");
         els.forEach((dat) => {
           dat.classList.remove("green");
         });
         el.classList.add("green");
-      } else {
+     
         //transition partie desktop
-        const el1 = document.getElementById("c" + p);
-        const el2 = document.getElementById("l" + p);
-        const cercles = document.querySelectorAll(".cercle");
-        const lignes = document.querySelectorAll(".line");
-        const r = document.getElementById("r" + p);
-        const rs = document.querySelectorAll(".progress");
-        rs.forEach((dat) => {
-          dat.classList.remove("bar");
-          dat.classList.add("gris");
-        });
-        r.classList.remove("gris");
-        r.classList.add("bar");
-        cercles.forEach((dat) => {
-          dat.classList.remove("cercle-actif");
-        });
-        lignes.forEach((dat) => {
-          dat.classList.remove("line-actif");
-        });
-        el1.classList.add("cercle-actif");
-        el2.classList.add("line-actif");
-      }
+        // const el1 = document.getElementById("c" + p);
+        // const el2 = document.getElementById("l" + p);
+        // const cercles = document.querySelectorAll(".cercle");
+        // const lignes = document.querySelectorAll(".line");
+        // // const r = document.getElementById("r" + p);
+        // const rs = document.querySelectorAll(".progress");
+        // rs.forEach((dat) => {
+        //   dat.classList.remove("bar");
+        //   dat.classList.add("gris");
+        // });
+        // r.classList.remove("gris");
+        // r.classList.add("bar");
+        // cercles.forEach((dat) => {
+        //   dat.classList.remove("cercle-actif");
+        // });
+        // lignes.forEach((dat) => {
+        //   dat.classList.remove("line-actif");
+        // });
+        // el1.classList.add("cercle-actif");
+        // el2.classList.add("line-actif");
+      
     },
   },
   mounted() {
-    if (
-      window.screen.width > 240 &&
-      window.screen.width < 500 &&
-      window.screen.height > 320 &&
-      window.screen.height < 900
-    ) {
-      console.log("---  test");
-      this.rimg = "r-img1";
-      let node = document.getElementById("hidedesktop");
-      // let node2 = document.getElementById("hidedesktop1");
-      // node.remove();
-      // node2.remove();
-      let h1 = document.querySelectorAll(".h1");
-      let h2 = document.querySelectorAll(".h2");
-      let h3 = document.querySelectorAll(".h3");
-      h1.forEach((dat) => {
-        dat.classList.add("h11");
-      });
-      h2.forEach((dat) => {
-        dat.classList.add("h22");
-      });
-      h3.forEach((dat) => {
-        dat.classList.add("h33");
-      });
-    } else {
-      this.titre = true;
-      this.rimg = "r-img";
-      var node1 = document.getElementById("hidemobile");
-      // node1.remove();
-    }
+   
   },
 };
 </script>
 
 <style scoped>
 /* style for desktop------------------------- */
+.avatar{
+  margin-top: 23px;
+  margin-right: 10px;
+}
+.text{
+  margin-right: 50px;
+  margin-top: 35px;
+}
+.prog{
+  height: 10px;
+  margin-left: 20px;
+  margin-right: 10px !important;
+  width: 190px !important; 
+}
+.parent{
+   margin-left: 40px;
+}
+
 .margd1 {
   margin-left: 50px;
 }

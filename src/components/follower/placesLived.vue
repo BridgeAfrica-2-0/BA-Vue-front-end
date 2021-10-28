@@ -1,17 +1,17 @@
 <template>
   <div>
-    <b class="place">Places you lived</b>
+    <b class="place">{{ $t("follower.Places_you_lived") }}</b>
     <hr />
 
     <p class="place">
-      <b> Current City</b>
+      <b> {{ $t("follower.Current_City") }}</b>
     </p>
     <p class="place"> {{info.user.city}}</p>
 
     <hr />
 
     <p class="place"> 
-      <b> Home City</b>
+      <b> {{ $t("follower.Home_City") }}</b>
     </p>
 
     <p class="place">  {{info.user.city}} </p>

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b class="work">WorkPlace</b>
+    <b class="work">{{ $t("follower.WorkPlace") }}</b>
     <hr />     
 
 <div

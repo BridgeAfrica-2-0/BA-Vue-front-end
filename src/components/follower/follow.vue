@@ -7,7 +7,7 @@
           <div class="datails">
             <div class="row">
               <div class="col">
-                <span class="mr-auto"> <b>Username</b> </span>
+                <span class="mr-auto"> <b>{{ $t("follower.Username") }}</b> </span>
               </div>
             </div>
           </div>
@@ -16,7 +16,7 @@
       <div class="col-2">
            <b-button class="btn" variant="outline-primary">
                <b-icon icon="plus" class="mr-1"></b-icon>
-               Follow</b-button>
+               {{ $t("follower.Follow") }}</b-button>
       </div>
     </div>
   </div>

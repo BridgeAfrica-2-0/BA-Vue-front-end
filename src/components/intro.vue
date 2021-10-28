@@ -19,7 +19,7 @@
             class="icon-size"
             variant="primary"
           ></b-icon>
-          Work at: 
+          {{ $t("follower.Work_at") }}: 
               <span
                 class="text"
                 v-for="exp in info.user_experience.slice(0, 1)"
@@ -30,7 +30,7 @@
         </p>
         <p>
           <b-icon icon="book-fill" class="icon-size" variant="primary"></b-icon>
-          Studied at:      <span
+          {{ $t("follower.Studied_at") }}:      <span
                 v-for="edu in info.user_education.slice(0, 1)"
                 :key="edu.id"
                 class="text"
@@ -45,7 +45,7 @@
             class="icon-size"
             variant="primary"
           ></b-icon>
-          Home Town Name {{ info.user.town }}
+          {{ $t("follower.Home_Town_Name") }} {{ info.user.town }}
         </p>
         <p>
           <b-icon
@@ -53,7 +53,7 @@
             class="icon-size"
             variant="primary"
           ></b-icon>
-          Current City Name: {{ info.user.city }}
+          {{ $t("follower.Current_City_Name") }}: {{ info.user.city }}
         </p>
         <p>
           <b-icon
@@ -61,7 +61,7 @@
             class="icon-size"
             variant="primary"
           ></b-icon>
-         Community:  {{ info.user.community }}
+         {{ $t("follower.Community") }}:  {{ info.user.community }}
         </p>
       </b-card-text>
     </b-card>

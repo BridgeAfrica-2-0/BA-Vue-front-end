@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b class="education">Education</b>   
+    <b class="education">{{ $t("follower.Education") }}</b>   
     <hr />
 <div
           class="row"
@@ -15,7 +15,7 @@
           <div class="col">
             <span class="mr-auto"> <b> {{ education.school_name }}</b> </span>
             <p>
-             Duration From {{ education.start_year }} To
+             {{ $t("follower.Duration_From") }} {{ education.start_year }} {{ $t("follower.To") }}
               {{ education.end_year }}  </p>
 
             <p> 

@@ -837,7 +837,7 @@ export default {
         
          
            this.$store
-      .dispatch("profile/loadUserPostIntro", null)
+      .dispatch("profile/loadUserPost", null)
       .then((response) => {
          console.log(response);
       })

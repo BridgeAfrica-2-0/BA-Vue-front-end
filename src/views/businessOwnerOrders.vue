@@ -533,27 +533,6 @@ export default {
         });
         el.classList.add("green");
      
-        //transition partie desktop
-        // const el1 = document.getElementById("c" + p);
-        // const el2 = document.getElementById("l" + p);
-        // const cercles = document.querySelectorAll(".cercle");
-        // const lignes = document.querySelectorAll(".line");
-        // // const r = document.getElementById("r" + p);
-        // const rs = document.querySelectorAll(".progress");
-        // rs.forEach((dat) => {
-        //   dat.classList.remove("bar");
-        //   dat.classList.add("gris");
-        // });
-        // r.classList.remove("gris");
-        // r.classList.add("bar");
-        // cercles.forEach((dat) => {
-        //   dat.classList.remove("cercle-actif");
-        // });
-        // lignes.forEach((dat) => {
-        //   dat.classList.remove("line-actif");
-        // });
-        // el1.classList.add("cercle-actif");
-        // el2.classList.add("line-actif");
       
     },
   },
@@ -853,15 +832,28 @@ h3 {
 /* .hidedesktop{
     visibility: hidden;
   } */
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 1200px) {
   .bold h3 {
     font-weight: normal !important;
+  }
+  .cercle2 {
+    margin-left: 50px !important;
   }
   #hidedesktop {
     display: none;
   }
 }
-@media only screen and (min-width: 900px) {
+
+@media only screen and (max-width: 768px) {
+  .bold h3 {
+    font-weight: normal !important;
+  }
+  .cercle2 {
+    margin-left: 3px !important;
+  }
+}
+
+@media only screen and (min-width: 1200px) {
   #hidemobile {
     display: none !important;
   }

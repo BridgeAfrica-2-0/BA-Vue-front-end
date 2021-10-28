@@ -1,7 +1,7 @@
 <template>
   <div>
 
-      <FlashMessage />
+  {{album}}
     <div class="row">
       <div class="container-fluid">
         <b-modal
@@ -76,9 +76,6 @@
 
 
 
-
-
-
         <div class="img-gall"   v-for="pictures in pictures" :key="pictures.id" >
           <a
             ><img
@@ -124,7 +121,8 @@
 
       
         
-
+       
+      <infinite-loading :identifier="infiniteId"   ref="infiniteLoading"   @infinite="infiniteHandler"></infinite-loading>
 
 
 
@@ -154,17 +152,38 @@
 import axios from "axios";
 export default {
   components: {},
+  props:['album'],
+  
 
    computed: {
     pictures() {
       return this.$store.state.businessOwner.albumImages;
+   
     },
   },
 
   methods: {
 
 
+   
+     infiniteHandler($state) {
+     let urll="business/album/show/" + this.url + "/" + this.album+"/"+this.page
+    this.$store.dispatch("profileOwner/loadMore",urll)
+        .then(({ data }) => {
+          console.log(data.data.media);
+          if (data.data.media.length) { 
+            this.page += 1;
 
+            this.pictures.push(...data.data.media);
+            $state.loaded();
+          } else {
+            $state.complete();
+          }
+        })
+        .catch((err) => {
+          console.log({ err: err });
+        });
+    },
    
 
 
@@ -547,7 +566,6 @@ export default {
     this.url = this.$route.params.id;
   },
 
- props: ['album'],
 
  watch: {
         album: function(newVal) { 
@@ -565,39 +583,11 @@ export default {
       img_url: null,
       profile_pic: null,
       text:null,
-      images: [
-        "https://placekitten.com/801/800",
-        "https://placekitten.com/802/800",
-        "https://placekitten.com/803/800",
-        "https://placekitten.com/804/800",
-        "https://placekitten.com/805/800",
-        "https://placekitten.com/806/800",
-        "https://placekitten.com/807/800",
-        "https://placekitten.com/808/800",
-        "https://placekitten.com/809/800",
-      ],
-      imagees: [
-        "https://i.wifegeek.com/200426/f9459c52.jpg",
-        "https://i.wifegeek.com/200426/5ce1e1c7.jpg",
-        "https://i.wifegeek.com/200426/5fa51df3.jpg",
-        "https://i.wifegeek.com/200426/663181fe.jpg",
-        "https://i.wifegeek.com/200426/2d110780.jpg",
-        "https://i.wifegeek.com/200426/e73cd3fa.jpg",
-        "https://i.wifegeek.com/200426/15160d6e.jpg",
-        "https://i.wifegeek.com/200426/d0c881ae.jpg",
-        "https://i.wifegeek.com/200426/a154fc3d.jpg",
-        "https://i.wifegeek.com/200426/71d3aa60.jpg",
-        "https://i.wifegeek.com/200426/d17ce9a0.jpg",
-        "https://i.wifegeek.com/200426/7c4deca9.jpg",
-        "https://i.wifegeek.com/200426/64672676.jpg",
-        "https://i.wifegeek.com/200426/de6ab9c6.jpg",
-        "https://i.wifegeek.com/200426/d8bcb6a7.jpg",
-        "https://i.wifegeek.com/200426/4085d03b.jpg",
-        "https://i.wifegeek.com/200426/177ef44c.jpg",
-        "https://i.wifegeek.com/200426/d74d9040.jpg",
-        "https://i.wifegeek.com/200426/81e24a47.jpg",
-        "https://i.wifegeek.com/200426/43e2e8bb.jpg",
-      ],
+      page:1,
+    
+      
+      infiniteId: +new Date(),
+     
       index: 0,
     };
   },
@@ -638,7 +628,7 @@ export default {
 @media (min-width: 960px) {
   .album-img{
 
-  height: 300px !important;
+  height: 200px !important;
     object-fit: cover !important;
        
 }
@@ -685,6 +675,7 @@ export default {
     animation: winanim 0.5s;
     -webkit-backface-visibility: visible;
     backface-visibility: visible;
+    height: 200px;
   }
 
   @media (min-width: 1400px) {
@@ -699,6 +690,7 @@ export default {
     margin: 5px;
     float: left;
     width: 19.1%;
+    height: 200px;
     transition-duration: 0.4s;
     border-radius: 5px;
     -webkit-animation: winanim 0.5s;

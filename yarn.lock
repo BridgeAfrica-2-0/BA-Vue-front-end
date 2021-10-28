@@ -10522,6 +10522,11 @@ uuid@^3.3.2, uuid@^3.4.0:
   resolved "https://registry.yarnpkg.com/uuid/-/uuid-3.4.0.tgz#b23e4358afa8a202fe7a100af1f5f883f02007ee"
   integrity sha512-HjSDRw6gZE5JMggctHBcjVak08+KEVhSIiDzFnT9S9aegmp85S/bReBVTb4QTFaRNptJ9kuYaNhnbNEOkbKb/A==
 
+uuid@^8.3.2:
+  version "8.3.2"
+  resolved "https://registry.yarnpkg.com/uuid/-/uuid-8.3.2.tgz#80d5b5ced271bb9af6c445f21a1a04c606cefbe2"
+  integrity sha512-+NYs2QeMWy+GWFOEm9xnn6HCDp0l7QBD7ml8zLUmJ+93Q5NF0NocErnwkTkXVFNiX3/fpC6afS8Dhb/gz7R7eg==
+
 v-emoji-picker@^2.3.3:
   version "2.3.3"
   resolved "https://registry.yarnpkg.com/v-emoji-picker/-/v-emoji-picker-2.3.3.tgz#afff5d9be2d9c949b395616bcffd4d74f753289f"
@@ -10640,6 +10645,11 @@ vue-country-select@^0.2.2:
   version "0.2.2"
   resolved "https://registry.yarnpkg.com/vue-country-select/-/vue-country-select-0.2.2.tgz#f53e7665fbdffd6b3633071997ec007dc37a1a6d"
   integrity sha1-9T52Zfvf/Ws2MwcZl+wAfcN6Gm0=
+
+vue-easy-lightbox@^0.16.2:
+  version "0.16.2"
+  resolved "https://registry.yarnpkg.com/vue-easy-lightbox/-/vue-easy-lightbox-0.16.2.tgz#4390c5ac2aaaa60300d1f51969eaeedd21dd8f88"
+  integrity sha512-pkfLBk9dZ9T+fk6bRgehDpIvaS81hOgDqsGpVEDgw8cGtO9FLfAT8hakaqNQOgMTCwrnkQcdfLTLqnad2rq46w==
 
 vue-emoji-picker@^1.0.3:
   version "1.0.3"

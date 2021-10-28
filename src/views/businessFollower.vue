@@ -16,13 +16,13 @@ export default {
   components: {
     navbar,
     Business,
-    Footer
+    Footer,
   },
   data() {
     return {};
   },
   computed: {},
-  methods: {}
+  methods: {},
 };
 </script>
 

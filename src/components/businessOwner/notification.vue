@@ -3,16 +3,12 @@
     <div class="container">
       <b-row>
         <b-col>
-          <div class="b-bottom f-left">
-            <!-- <input @click="selectall" type="checkbox" /> -->
-            <b-form-checkbox
-              class="f-left"
-              @click="selectall"
-              value="accepted"
-              unchecked-value="not_accepted"
-              v-model="status"
-            >
-            </b-form-checkbox>
+          <div class="b-bottomn f-left">
+            <input
+              class="m-left-top"
+              type="checkbox"
+              @click="selectall($event)"
+            />
             Select All
           </div>
         </b-col>
@@ -38,7 +34,7 @@
       </b-row>
       <br />
 
-      <!-- <b-row>
+      <b-row>
         <b-col
           cols="12"
           class="mr-3"
@@ -47,14 +43,14 @@
         >
           <p class="">
             <span style="display:inline-flex">
-              <b-form-checkbox
-              @click="select(post.id)"
-                class="m-left-top"
-                value="accepted"
-                unchecked-value="not_accepted"
-                v-model="status"
-              >
-              </b-form-checkbox>
+             <input
+                class="m-left-top my-checkbox"
+                type="checkbox"
+                :value="post.id"
+                :id="post.id"
+                :checked="post.checked"
+                @click="check(post,$event)"
+              />
               <b-avatar
                 class="d-inline-block profile-pic"
                 variant="primary"
@@ -88,50 +84,9 @@
           </b-row>
         </b-col>
         <hr width="100%" />
-      </b-row> -->
-
-      <!-- testing section -->
-
-      <b-row>
-        <b-col cols="12" class="mr-3" v-for="i in 9" :key="i">
-          <p class="">
-            <span style="display:inline-flex">
-              <!-- <input type="checkbox" :value=item.id :id="item.id" :checked="item.checked" @click="check($event)"> -->
-              <b-form role="form" onsubmit="return false">
-                <b-form-checkbox class="m-left-top" @click="test($event)">
-                </b-form-checkbox>
-              </b-form>
-              <b-avatar
-                class="d-inline-block profile-pic"
-                variant="primary"
-              ></b-avatar>
-              <h6 class="m-0  d-inline-block ml-2 username">
-                john wick
-                <p class="duration">3 hrs ago</p>
-              </h6>
-            </span>
-            <span class="float-right mt-1"> </span>
-          </p>
-
-          <p class="text">
-            In publishing and graphic design, Lorem ipsum is a placeholder text
-            commonly used to demonstrate the visual form of a document or a
-            typeface without relying on meaningful content. Lorem ipsum may be
-            used as a placeholder before final copy is available.
-          </p>
-        </b-col>
-
-        <b-col v-if="loader" class="load">
-          <b-spinner
-            style="width: 7rem; height: 7rem;"
-            variant="primary"
-          ></b-spinner>
-        </b-col>
-
-        <hr width="100%" />
       </b-row>
 
-      <!-- end of testing section -->
+      
     </div>
   </div>
 </template>
@@ -141,10 +96,7 @@ import { mapActions, mapGetters } from "vuex";
 export default {
   name: "notification",
   data: () => ({
-    all: 24,
     selected: [],
-
-    testing: 0,
   }),
   beforeMount() {
     this.getNotifications();
@@ -190,22 +142,19 @@ export default {
     },
 
     // select all the notifications
-    selectall() {
-      this.getNotificationsStore.forEach((element) => {
-        this.selected.push(element);
-      });
-    },
-    select(notification, index) {
-      if (this.selected[index]) {
-        this.selected.splice(index, 1);
-        return;
+    selectall(e) {
+      if (e.target.checked) {
+        console.log("selected");
+        this.getNotificationsStore.forEach((element) => {
+          this.selected.push(element);
+        });
       }
-      this.selected.push(notification);
     },
 
-    test(e) {
+    check(value, e) {
       if (e.target.checked) {
-        console.log("checked");
+        this.selected.push(value);
+        console.log("selected");
       }
     },
   },
@@ -213,6 +162,10 @@ export default {
 </script>
 
 <style scoped>
+.my-checkbox {
+  margin-right: 10px;
+}
+
 .load {
   display: flex;
   justify-content: center;

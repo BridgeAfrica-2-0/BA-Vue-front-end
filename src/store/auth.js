@@ -1,6 +1,7 @@
 import axios from "axios";
 
-axios.defaults.baseURL = process.env.VUE_APP_API_URL;
+// axios.defaults.baseURL = process.env.VUE_APP_API_URL;
+axios.defaults.baseURL = "https://test.maxinemoffett.com/api/v1";
 
 export default {
   namespaced: true,
@@ -222,6 +223,6 @@ export default {
     getAuthToken(state) {
       return `Bearer ${state.user.accessToken}`
     },
-    
+
   },
 };

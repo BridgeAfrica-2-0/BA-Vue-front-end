@@ -134,13 +134,10 @@
               <div class="w3-container">
                 <div class="row pb3">
                   <div class="col-sm-6 text-center" style="border-right: 1px solid rgb(222, 226, 230);">
-                    <h1>
+                    <h1 @click="selectCover">
                       <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="upload" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="primary svg-inline--fa fa-upload fa-w-16">
                         <path fill="currentColor" d="M296 384h-80c-13.3 0-24-10.7-24-24V192h-87.7c-17.8 0-26.7-21.5-14.1-34.1L242.3 5.7c7.5-7.5 19.8-7.5 27.3 0l152.2 152.2c12.6 12.6 3.7 34.1-14.1 34.1H320v168c0 13.3-10.7 24-24 24zm216-8v112c0 13.3-10.7 24-24 24H24c-13.3 0-24-10.7-24-24V376c0-13.3 10.7-24 24-24h136v8c0 30.9 25.1 56 56 56h80c30.9 0 56-25.1 56-56v-8h136c13.3 0 24 10.7 24 24zm-124 88c0-11-9-20-20-20s-20 9-20 20 9 20 20 20 20-9 20-20zm64 0c0-11-9-20-20-20s-20 9-20 20 9 20 20 20 20-9 20-20z" class=""></path>
                       </svg>
-                      <div>
-                        <input type="file" hidden="hidden" id="cover-imag" name="img" accept="image/*">
-                      </div>
                       <h4>Upload a New picture</h4>
                     </h1>
                   </div>
@@ -220,261 +217,153 @@ methods: {
       return num;
     },
 
-setlogo(e){
-    
-  console.log(e);
-  this.profile_photo= e.target.files[0]
-  const file = e.target.files[0];
-  this.img_url = URL.createObjectURL(file);
-  this.$refs["logomodal"].show();
+  setlogo(e){
+    console.log(e);
+    this.profile_photo= e.target.files[0]
+    const file = e.target.files[0];
+    this.img_url = URL.createObjectURL(file);
+    this.$refs["logomodal"].show();
 
-},
+  },
 
-
-selectlogo(){
+  selectlogo(){
     document.getElementById("logo_pic").click();
- 
-},
+  },
 
-selectCover(){
-
- document.getElementById("cover_pic").click();
-
-},
-  selectMoviesOutsidePost(e) {
-      console.log(e);
-     
-
-       this.cover_photo= e.target.files[0]
-      const file = e.target.files[0];
-      this.img_url = URL.createObjectURL(file);
-
-      this.$refs["coverphoto"].show();
-    },
-
+  selectCover(){
+    document.getElementById("cover_pic").click();
+    console.log("Cover test");
+  },
   
+  selectMoviesOutsidePost(e) {
+    console.log(e);
+    this.cover_photo= e.target.files[0]
+    const file = e.target.files[0];
+    this.img_url = URL.createObjectURL(file);
+    this.$refs["coverphoto"].show();
+  },
+
   chooseProfile2: function() {
-     
-        document.getElementById("cover-imag").click()
-    },
+    document.getElementById("cover-imag").click()
+  },
 
+  chooseProfile1: function() {
+    document.getElementById("profile-imag").click()
+  },
 
-     chooseProfile1: function() {
-     
-        document.getElementById("profile-imag").click()
-    },
+submitLogo(){
+  let loader = this.$loading.show({               
+    container: this.fullPage ? null : this.$refs.preview,
+    canCancel: true,
+    onCancel: this.onCancel,
+    color:"#e75c18"
+  });
 
-
-    submitLogo(){
-     
-        
-
-        let loader = this.$loading.show({
-                   
-                    container: this.fullPage ? null : this.$refs.preview,
-                    canCancel: true,
-                    onCancel: this.onCancel,
-                    color:"#e75c18"
-                });
-
-
-       let formData = new FormData();
-        formData.append("image", this.profile_photo);
-
-        
-
-
-       this.axios 
-          .post("user/upload/profile-picture", formData, {
-            headers: {
-              "Content-Type": "multipart/form-data",
-            },
-          })
+  let formData = new FormData();
+  formData.append("image", this.profile_photo);
+  this.axios 
+    .post("user/upload/profile-picture", formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    })
+    .then((response) => {
+      console.log(response);
+      this.$store
+        .dispatch("profile/loadUserPostIntro", null)
           .then((response) => {
-
-
-
-
-         
-
             console.log(response);
-
-
-               this.$store
-      .dispatch("profile/loadUserPostIntro", null)
-      .then((response) => {
-         console.log(response);
-
-
-
             this.flashMessage.show({
               status: "success",
-
               message: "Logo Updated",
-
               blockClass: "custom-block-class",
             });
-
-
-             loader.hide()
-      this.$refs["modalxl"].hide();
-
-
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-
-
-           
-
-
-
+            loader.hide();
+            this.$refs["modalxl"].hide();
           })
-
-            .catch((err) => {
-            console.log({ err: err });
-
-            
-
-            if (err.response.status == 422) {
-              console.log({ err: err });
-              
-
-              this.flashMessage.show({
-                status: "error",
-
-                message: err.response.data.message,
-                blockClass: "custom-block-class",
-              });
-
-
-               loader.hide()
-      
-
-            } else {
-              this.flashMessage.show({
-                status: "error",
-                
-                message: "Unable to set your Logo",
-                blockClass: "custom-block-class",
-              });
-              console.log({ err: err });
-
-               loader.hide()
-     
-            }
-
+          .catch((error) => {
+            console.log(error);
           });
+    })
+    .catch((err) => {
+      console.log({ err: err });
+      if (err.response.status == 422) {
+        console.log({ err: err });
+        this.flashMessage.show({
+          status: "error",
+          message: err.response.data.message,
+          blockClass: "custom-block-class",
+        });
+        loader.hide()
+      } 
+      else {
+        this.flashMessage.show({
+          status: "error",       
+          message: "Unable to set your Logo",
+          blockClass: "custom-block-class",
+        });
+        console.log({ err: err });
+        loader.hide()
+      }
 
+    });
+},
 
-
-
-
-    },
-
-    
-
-    submitCover(){
-     
-        
-
-        let loader = this.$loading.show({
-                   
-                    container: this.fullPage ? null : this.$refs.preview,
-                    canCancel: true,
-                    onCancel: this.onCancel,
-                    color:"#e75c18"
-                });
-
-
-       let formData = new FormData();
-        formData.append("image", this.cover_photo);
-
-        
-
-
-       this.axios 
-          .post("user/upload-cover", formData, {
-            headers: {
-              "Content-Type": "multipart/form-data",
-            },
-          })
-          .then((response) => {
-            console.log(response);
-
-            
-
-               this.$store
-      .dispatch("profile/loadUserPostIntro", null)
-      .then((response) => {
-         console.log(response);
-
-
-         
-            this.flashMessage.show({
-              status: "success",
-
-              message: "Cover  Updated",
-
-              blockClass: "custom-block-class",
-            });
-
-
-             loader.hide()
-      this.$refs["modalxl"].hide();
-      
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-
-
-
-          })
-
-            .catch((err) => {
-            console.log({ err: err });
-
-            
-
-            if (err.response.status == 422) {
-              console.log({ err: err });
-              
-
-              this.flashMessage.show({
-                status: "error",
-
-                message: err.response.data.message,
-                blockClass: "custom-block-class",
-              });
-
-
-               loader.hide()
-      
-
-            } else {
-              this.flashMessage.show({
-                status: "error",
-                
-                message: "Unable to upload your image",
-                blockClass: "custom-block-class",
-              });
-              console.log({ err: err });
-
-               loader.hide()
-     
-            }
-
+submitCover(){
+  let loader = this.$loading.show({                
+    container: this.fullPage ? null : this.$refs.preview,
+    canCancel: true,
+    onCancel: this.onCancel,
+    color:"#e75c18"
+  });
+  let formData = new FormData();
+  formData.append("image", this.cover_photo);
+  this.axios 
+    .post("user/upload-cover", formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    })
+    .then((response) => {
+      console.log(response);
+      this.$store
+        .dispatch("profile/loadUserPostIntro", null)
+        .then((response) => {
+          console.log(response);
+          this.flashMessage.show({
+            status: "success",
+            message: "Cover Updated",
+            blockClass: "custom-block-class",
           });
-
-
-
-
-
-    },
-
-
+          loader.hide()
+          this.$refs["modalxl"].hide();
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    })
+    .catch((err) => {
+      console.log({ err: err });
+      if (err.response.status == 422) {
+        console.log({ err: err });
+        this.flashMessage.show({
+          status: "error",
+          message: err.response.data.message,
+          blockClass: "custom-block-class",
+        });
+        loader.hide()
+      } 
+      else {
+        this.flashMessage.show({
+          status: "error",
+          message: "Unable to upload your image",
+          blockClass: "custom-block-class",
+        });
+        console.log({ err: err });
+        loader.hide()
+      }
+    });
+  },
 },
 
 mounted(){

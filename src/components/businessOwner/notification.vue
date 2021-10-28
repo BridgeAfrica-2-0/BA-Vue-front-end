@@ -3,7 +3,7 @@
     <div class="container">
       <b-row>
         <b-col>
-          <div class="b-bottomn f-left">
+          <div class="b-bottom f-left">
             <input @click="selectall" type="checkbox" />
             Select All
           </div>
@@ -39,16 +39,14 @@
         >
           <p class="">
             <span style="display:inline-flex">
-              <b-form-checkbox
-                id="checkbox-1"
+              <input
+                @click="select(post.id)"
+                type="checkbox"
                 v-model="status"
-                name="checkbox-1"
                 value="accepted"
                 class="m-left-top"
                 unchecked-value="not_accepted"
-                @click="select"
-              >
-              </b-form-checkbox>
+              />
               <b-avatar
                 class="d-inline-block profile-pic"
                 variant="primary"
@@ -73,7 +71,10 @@
             variant="primary"
           ></b-spinner>
         </b-col>
-        <b-col v-if="!getNotificationsStore && !loader" class="load text-center">
+        <b-col
+          v-if="!getNotificationsStore && !loader"
+          class="load text-center"
+        >
           <b-row class="text-center">
             <p>No notifications to show !!</p>
           </b-row>
@@ -169,9 +170,7 @@ export default {
   margin-top: 20px;
   margin-bottom: 30px;
   padding-bottom: 10px;
-
-  border-bottom: 0.5px solid;
-  border-color: gray;
+  margin-left: -15px;
 }
 
 .m-left {

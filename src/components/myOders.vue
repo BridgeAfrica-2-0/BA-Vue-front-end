@@ -208,6 +208,27 @@
 
     <!-- <div class="container d-flex justify-content-end">clear history</div> -->
     <!--  partie desktop---------------------------------------------------------------------------------------- -->
+      
+        <div class="row parent">
+        <b-avatar  class="avatar " text="1" :variant="success1" ></b-avatar>  
+        <h2 class="text cursor" @click="changeElementType(1)">In Process</h2> 
+        <div class="progress prog cursor gris" @click="changeElementType(1)">
+          <div class="progress-bar bg-success " role="progressbar" :style="style1" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
+
+         <b-avatar class="avatar " text="2" :variant="success2" ></b-avatar>  
+        <h2 class="text cursor" @click="changeElementType(2)">Shipped</h2> 
+        <div class="progress prog cursor gris" @click="changeElementType(2)">
+          <div class="progress-bar bg-success " role="progressbar" :style="style2" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
+
+         <b-avatar class="avatar " text="3" :variant="success3" ></b-avatar>  
+        <h2 class="text cursor" @click="changeElementType(3)">Re-schedule</h2> 
+        <div class="progress prog cursor gris" @click="changeElementType(3)">
+          <div class="progress-bar bg-success " role="progressbar" :style="style3" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
+
+      </div>
 
     <div class="hidedesktop" id="hidedesktop">
       <!-- navigation--------------- -->
@@ -592,6 +613,24 @@ export default {
 
 <style scoped>
 /* style for desktop------------------------- */
+
+.avatar{
+  margin-top: 23px;
+  margin-right: 10px;
+}
+.text{
+  margin-right: 50px;
+  margin-top: 35px;
+}
+.prog{
+  height: 10px;
+  margin-left: 20px;
+  margin-right: 10px !important;
+  width: 190px !important; 
+}
+.parent{
+   margin-left: 40px;
+}
 .margd1 {
   margin-left: 50px;
 }

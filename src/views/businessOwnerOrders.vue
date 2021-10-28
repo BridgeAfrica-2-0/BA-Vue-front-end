@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <navbar />
+    <!-- <navbar /> -->
     <hr />
     <!-- partie mobile--------------------------------------------------------------------- 
     
@@ -212,87 +212,33 @@
 
     <div class="hidedesktop" id="hidedesktop">
       <div class="row parent">
+
         <b-avatar  class="avatar " text="1" :variant="success1" ></b-avatar>  
+        <h2 class="text cursor" @click="changeElementType(1)">All</h2> 
+        <div class="progress prog cursor gris" @click="changeElementType(1)">
+          <div class="progress-bar bg-success " role="progressbar" :style="style1" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
+
+        <b-avatar  class="avatar " text="2" :variant="success1" ></b-avatar>  
         <h2 class="text cursor" @click="changeElementType(1)">In Process</h2> 
         <div class="progress prog cursor gris" @click="changeElementType(1)">
           <div class="progress-bar bg-success " role="progressbar" :style="style1" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
         </div>
 
-         <b-avatar class="avatar " text="2" :variant="success2" ></b-avatar>  
+         <b-avatar class="avatar " text="3" :variant="success2" ></b-avatar>  
         <h2 class="text cursor" @click="changeElementType(2)">Shipped</h2> 
         <div class="progress prog cursor gris" @click="changeElementType(2)">
           <div class="progress-bar bg-success " role="progressbar" :style="style2" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
         </div>
 
-         <b-avatar class="avatar " text="3" :variant="success3" ></b-avatar>  
+         <b-avatar class="avatar " text="4" :variant="success3" ></b-avatar>  
         <h2 class="text cursor" @click="changeElementType(3)">Re-schedule</h2> 
         <div class="progress prog cursor gris" @click="changeElementType(3)">
           <div class="progress-bar bg-success " role="progressbar" :style="style3" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
         </div>
 
       </div>
-      <!-- navigation---------------
-      <div class="row cursor justify-content-center">
-        <div class="col-4" @click="changeElementType(1)">
-          <div class="row">
-            <div class="pos1">
-              <b-avatar text="1" :variant="success1"></b-avatar>
-            </div>
-
-            <div class="col-4"><h2 class="h2 pos2">In Process</h2></div>
-            <div id="r1" class="progress col bar" style="height: 10px">
-              <div
-                class="progress-bar bg-success"
-                role="progressbar"
-                :style="style1"
-                aria-valuenow="25"
-                aria-valuemin="0"
-                aria-valuemax="100"
-              ></div>
-            </div>
-          </div>
-        </div>
-
-        <div class="row col-4" @click="changeElementType(2)">
-          <div class="row">
-            <div class="pos1">
-              <b-avatar text="2" :variant="success2"></b-avatar>
-            </div>
-
-            <div class="col-4"><h2 class="h2 pos">Shipped</h2></div>
-            <div id="r2" class="progress col gris" style="height: 10px">
-              <div
-                class="progress-bar bg-success gris"
-                role="progressbar"
-                :style="style2"
-                aria-valuenow="25"
-                aria-valuemin="0"
-                aria-valuemax="100"
-              ></div>
-            </div>
-          </div>
-        </div>
-
-        <div class="row col-4" @click="changeElementType(3)">
-          <div class="row">
-            <div class="pos1">
-              <b-avatar text="3" :variant="success3"></b-avatar>
-            </div>
-
-            <div class="col-4  "><h2 class=" marge4">Re_schedule</h2></div>
-            <div id="r3" class="progress col gris" style="height: 10px">
-              <div
-                class="progress-bar gris"
-                role="progressbar"
-                :style="style3"
-                aria-valuenow="25"
-                aria-valuemin="0"
-                aria-valuemax="100"
-              ></div>
-            </div>
-          </div>
-        </div>
-      </div> -->
+      
 
       <div class="justify-content-between container row my-4">
         <div class="col order"><h3>My orders</h3></div>
@@ -302,7 +248,25 @@
 
       <div>
         <div v-if="status == 1" class="inprogress">
+              Show : <input type="date">
           <div v-for="i in 4" :key="i">
+           <div class="justify-content-start container">
+               <div class="container d-flex justify-content-end btn-marg ">
+                <div class="dropdown">
+                  <button class="btn btn-warning dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                    Manage
+                  </button>
+                  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                    <li><a class="dropdown-item" href="#">Delete</a></li>
+                    <li><a class="dropdown-item" href="#">Archive</a></li>
+                    
+                  </ul>
+                </div>
+              </div>
+               Order #12324253 <br>
+               yaoundé 12/12/2021 12H00
+           </div>
+            <hr style="height: 23px"/>
             <div class="justify-content-between row">
               <div class="col-3">
                 <splide :options="{ rewind: true }" class="r-img">
@@ -313,18 +277,18 @@
               </div>
 
               <div class="col-2 text-end text-start bold">
-                <h3>Name :</h3>
+               
                 <h3>Product ID :</h3>
-                <h3>Quantity :</h3>
+                
                 <h3>price :</h3>
                 <h3>shipping cost:</h3>
                 <h3>Total Cost :</h3>
               </div>
 
               <div class="col-3 text-start">
-                <h3>Sneaker</h3>
+               
                 <h3>#123v3c13</h3>
-                <h3>1 Item</h3>
+                
                 <h3>12000 XAF</h3>
                 <h3>10000 XAF</h3>
                 <h3>13000 XAF</h3>
@@ -477,9 +441,9 @@
 </template>
 
 <script>
-import navbar from "@/components/navbar.vue";
+//import navbar from "@/components/navbar.vue";
 export default {
-  components: { navbar },
+  //components: { navbar },
   data() {
     return {
       rimg: "",
@@ -556,10 +520,11 @@ export default {
   height: 10px;
   margin-left: 20px;
   margin-right: 10px !important;
-  width: 190px !important; 
+  width: 130px !important; 
 }
 .parent{
-   margin-left: 40px;
+   margin-left: 0px;
+  
 }
 
 .margd1 {

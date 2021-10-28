@@ -14,7 +14,11 @@
         <p>No notifications to show !!</p>
       </b-col>
     </div>
-
+          <button class="button" @click="displayOrders">my orders</button>
+          <div class="orders" v-if="orders" >
+            
+            <Orders />
+          </div>
     <b-modal hide-footer title="Add product" v-model="showModal">
       <b-form>
         <b-row>
@@ -146,9 +150,11 @@
 <script>
 import Product from "../product";
 import axios from "axios";
+import Orders from "@/views/businessOwnerOrders";
 export default {
   data() {
     return {
+      orders: false,
       showModal: false,
       load: false,
       loader: false,
@@ -171,6 +177,7 @@ export default {
   },
   components: {
     Product,
+    Orders
   },
   beforeMount() {
     this.loader = true;
@@ -179,8 +186,14 @@ export default {
     this.getProducts();
   },
   methods: {
+    displayOrders(){ 
+      this.orders = !this.orders ;
+      
+    },
     getProducts() {
-      axios.get("/api/v1/market").then((res) => {
+      axios.get("market").then((res) => { 
+        this.loader = false ;
+
         this.products = res.data.data.data;
       });
     },
@@ -229,6 +242,14 @@ export default {
 </script>
 
 <style scoped>
+.button {
+  width: 120px;
+  height: 40px;
+  color: white;
+  border-radius: 5px;
+  border: none;
+  background-color: #e75c18;
+}
 .load {
   display: flex;
   justify-content: center;

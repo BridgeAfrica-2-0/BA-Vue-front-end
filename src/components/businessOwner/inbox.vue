@@ -927,7 +927,6 @@ export default {
 
 .chat-box {
   position: relative;
-
   border: solid 2px rgb(223, 223, 223);
   margin-bottom: 100px;
 }
@@ -936,9 +935,7 @@ export default {
   position: relative;
   min-height: 70px;
   border-right: 2px solid #ccc;
-
   width: 100%;
-
   padding: 10px;
 }
 .chats {
@@ -993,7 +990,7 @@ h1 {
   margin-top: 10px;
 }
 .msg-text {
-  width: 60%;
+  max-width: 60%;
   border-radius: 25px;
   color: #fff;
   background-color: #ed9970;

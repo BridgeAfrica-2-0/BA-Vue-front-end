@@ -263,12 +263,15 @@
                 style="margin-left: 1px"
                 ref="feed"
               >
-
                 <div v-if="loader" class="text-center mt-12 pt-12">
-                  <b-spinner variant="primary" label="Spinning" class="spinner centralizer"></b-spinner>
+                  <b-spinner
+                    variant="primary"
+                    label="Spinning"
+                    class="spinner centralizer"
+                  ></b-spinner>
                 </div>
                 <div v-else v-for="chat in userToUser" :key="chat.id">
-                  <div v-if="currentUser.user.id==chat.sender_id">
+                  <div v-if="currentUser.user.id == chat.sender_id">
                     <b-row class="p-4">
                       <b-col>
                         <p class="msg-text mt-0 text">
@@ -503,7 +506,7 @@ import io from "socket.io-client";
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
 import EmojiPicker from "vue-emoji-picker";
-import moment from "moment"
+import moment from "moment";
 
 export default {
   components: {
@@ -515,7 +518,9 @@ export default {
     return {
       input: "",
       search: "",
-      socket: io(),
+      socket: io("http://localhost:5000", {
+        transports: ['websocket', 'polling', 'flashsocket']
+      }),
 
       chatSelected: [],
       chatList: [
@@ -802,10 +807,19 @@ export default {
   mounted() {
     this.getUsers();
   },
-
+  created() {
+    this.socket.on("chat-message", (data) => {
+      console.log("test");
+      this.messages.push({
+        message: data.message,
+        type: 1,
+        user: data.user,
+      });
+    });
+  },
   methods: {
-    getCreatedAt(data){
-      return moment(data).format('LT')
+    getCreatedAt(data) {
+      return moment(data).format("LT");
     },
     getUsers() {
       this.$store
@@ -863,25 +877,29 @@ export default {
       this.show = false;
     },
     send() {
+      this.socket.emit("chat-message", {
+        message: this.input,
+        user: this.username,
+      });
+
       this.message.type = "sent";
       let today = new Date();
       let h = today.getHours();
       let m = today.getMinutes();
       this.message.timeStamp = h + ":" + m;
-      this.message.message = this.text;
+      this.message.message = this.input;
       this.chats.push(this.message);
-      this.text = "";
+      this.input = "";
     },
   },
 };
 </script>
 
 <style scoped>
-.spinner{
+.spinner {
   font-size: 30px;
   width: 08%;
   height: 07%;
-
 }
 .centralizer {
   margin: 0;
@@ -968,7 +986,7 @@ h1 {
   margin-top: 10px;
 }
 .msg-text {
-  width: 60%;
+  max-width: 60%;
   border-radius: 25px;
   color: #fff;
   background-color: #ed9970;
@@ -977,7 +995,7 @@ h1 {
 }
 .msg-text-sent {
   position: relative;
-  min-width: 60%;
+  max-width: 50%;
   border-radius: 25px;
   background-color: #bfbfbf;
   padding: 10px;
@@ -988,6 +1006,7 @@ h1 {
 }
 
 #sent {
+  float: right;
   margin-left: 200px;
 }
 .sent-name {

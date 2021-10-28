@@ -4,7 +4,7 @@
       <b-container>
         <b-form-group
           label-cols-lg="3"
-          label="Network Name"
+          :label="$t('follower.Network_Name')"
           label-size="md"
           label-class="font-weight-bold pt-0"
           class="mb-0"
@@ -18,7 +18,7 @@
       <b-container>
         <b-form-group
           label-cols-lg="3"
-          label="Category"
+          :label="$t('follower.Category')"
           label-size="md"
           label-class="font-weight-bold pt-0"
           class="mb-0"
@@ -32,7 +32,7 @@
       <b-container>
         <b-form-group
           label-cols-lg="3"
-          label="Phone 1"
+          :label="$t('follower.Phone_1')"
           label-size="md"
           label-class="font-weight-bold pt-0"
           class="mb-0"
@@ -46,7 +46,7 @@
       <b-container>
         <b-form-group
           label-cols-lg="3"
-          label="Phone 2"
+          :label="$t('follower.Phone_2')"
           label-size="md"
           label-class="font-weight-bold pt-0"
           class="mb-0"
@@ -60,7 +60,7 @@
       <b-container>
         <b-form-group
           label-cols-lg="3"
-          label="Email"
+          :label="$t('follower.Email')"
           label-size="md"
           label-class="font-weight-bold pt-0"
           class="mb-0"
@@ -74,7 +74,7 @@
       <b-container>
         <b-form-group
           label-cols-lg="3"
-          label="Country"
+          :label="$t('follower.Country')"
           label-size="md"
           label-class="font-weight-bold pt-0"
           class="mb-0"
@@ -93,7 +93,7 @@
       <b-container>
         <b-form-group
           label-cols-lg="3"
-          label="City"
+          :label="$t('follower.City')"
           label-size="md"
           label-class="font-weight-bold pt-0"
           class="mb-0"
@@ -107,7 +107,7 @@
       <b-container>
         <b-form-group
           label-cols-lg="3"
-          label="Neighborhood"
+          :label="$t('follower.Neighborhood')"
           label-size="md"
           label-class="font-weight-bold pt-0"
           class="mb-0"
@@ -121,7 +121,7 @@
       <b-container>
         <b-form-group
           label-cols-lg="3"
-          label="Website"
+          :label="$t('follower.Website')"
           label-size="md"
           label-class="font-weight-bold pt-0"
           class="mb-0"
@@ -135,7 +135,7 @@
       <b-container>
         <b-form-group
           label-cols-lg="3"
-          label=" Description "
+          :label="$t('follower.Description') "
           label-size="md"
           label-class="font-weight-bold pt-0"
           class="mb-0"
@@ -155,7 +155,7 @@
         <b-col>
           <div class="b-bottomn f-right">
             <b-button variant="primary" class="a-button-l b-font">
-              Save Changes
+              {{ $t("follower.Save_Changes") }}
             </b-button>
           </div>
         </b-col>

@@ -15,7 +15,7 @@
                   ></b-avatar>
                 </b-col>
                 <b-col>
-                  <h4 class="title m-10">Messages</h4>
+                  <h4 class="title m-10">{{ $t("follower.Messages") }}</h4>
                 </b-col>
                 <b-col>
                   <b-icon
@@ -29,7 +29,7 @@
                 <input
                   type="text"
                   class="form-control input-background"
-                  placeholder="Search inbox"
+                  :placeholder="$t('follower.Search_inbox')"
                 />
               </b-container>
             </div>
@@ -81,7 +81,7 @@
                   ></b-avatar>
                 </b-col>
                 <b-col>
-                  <h3 class="mt-4 title">Messages</h3>
+                  <h3 class="mt-4 title">{{ $t("follower.Messages") }}</h3>
                 </b-col>
                 <b-col>
                   <b-icon
@@ -94,7 +94,7 @@
               <input
                 type="text"
                 class="form-control input-background"
-                placeholder="Search inbox"
+                :placeholder="$t('follower.Search_inbox')"
               />
             </div>
             <div>
@@ -160,7 +160,7 @@
 
                   <b-col class="detale">
                     <h6>Louis Litt</h6>
-                    <small>Online</small>
+                    <small>{{ $t("follower.Online") }}</small>
                   </b-col>
                   <b-col cols="3">
                     <b-row class="mt-3">
@@ -188,7 +188,7 @@
                   </b-col>
                   <b-col class="detail">
                     <h5>Louis Litt</h5>
-                    <p>Online</p>
+                    <p>{{ $t("follower.Online") }}</p>
                   </b-col>
                   <b-col class="col-4">
                     <b-row class="mt-3 ml-5">
@@ -214,19 +214,19 @@
                           </template>
 
                           <b-dropdown-item-button @click="showInfo(true)">
-                            View Profile
+                            {{ $t("follower.View_Profile") }}
                           </b-dropdown-item-button>
 
                           <b-dropdown-item-button>
-                            Disable Notification
+                            {{ $t("follower.Disable_Notification") }}
                           </b-dropdown-item-button>
 
                           <b-dropdown-item-button>
-                            Delete Contact
+                            {{ $t("follower.Delete_Contact") }}
                           </b-dropdown-item-button>
 
                           <b-dropdown-item-button>
-                            Delete Chat
+                            {{ $t("follower.Delete_Chat") }}
                           </b-dropdown-item-button>
                         </b-dropdown>
                       </b-col>
@@ -294,7 +294,7 @@
                       id="textarea"
                       v-model="text"
                       class="input-background"
-                      placeholder="Enter something..."
+                      :placeholder="$t('follower.Enter_something')"
                     ></b-form-input>
                   </b-col>
 
@@ -307,8 +307,8 @@
                   </b-col>
                 </b-row>
                 <p v-if="checked" class="ml-5">
-                  You have blocked messages and calls from this user.
-                  <b-link @click="showInfo(true)">Unblock Now</b-link>
+                  {{ $t("follower.You_have_blocked_messages_and_calls_from_this_user") }}.
+                  <b-link @click="showInfo(true)">{{ $t("follower.Unblock_Now") }}</b-link>
                 </p>
               </div>
             </div>
@@ -319,7 +319,7 @@
               <b-button class="primary-bg" @click="showInfo(false)">
                 <fas-icon :icon="['fas', 'arrow-left']" />
               </b-button>
-              <span class="cnt-info"> Contact Info</span>
+              <span class="cnt-info"> {{ $t("follower.Contact_Info") }}</span>
             </div>
             <div class="info-bottom">
               <b-avatar
@@ -330,16 +330,16 @@
               ></b-avatar>
               <div class="info-detail">
                 <h1 class="info-name">Louis Litt</h1>
-                <b-link class="primary">View Profile</b-link>
+                <b-link class="primary">{{ $t("follower.View_Profile") }}</b-link>
               </div>
             </div>
             <div>
               <ul>
-                <li>Options</li>
+                <li>{{ $t("follower.Options") }}</li>
                 <li>
                   <b-row
                     ><b-col>
-                      Block Messages
+                      {{ $t("follower.Block_Messages") }}
                     </b-col>
                     <b-col>
                       <b-form-checkbox
@@ -352,7 +352,7 @@
                     </b-col>
                   </b-row>
                 </li>
-                <li>Report User</li>
+                <li>{{ $t("follower.Report_User") }}</li>
               </ul>
             </div>
           </b-col>
@@ -372,7 +372,7 @@
                       v-model="searchQuery"
                       class="input-background"
                       style="width: 100%"
-                      placeholder="Type the name of person or Business..."
+                      :placeholder="$t('follower.Type_the_name_of_person_or_Business')"
                       @click="showsearchh()"
                     ></b-form-input>
 
@@ -420,7 +420,7 @@
                       id="textarea"
                       v-model="text"
                       class="input-background"
-                      placeholder="Enter something..."
+                      :placeholder="$t('follower.Enter_something')"
                     ></b-form-input>
                   </b-col>
 

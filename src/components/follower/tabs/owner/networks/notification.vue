@@ -11,14 +11,14 @@
               class="m-left-top username"
               unchecked-value="not_accepted"
             >
-              Select All
+              {{ $t("follower.Select_All") }}
             </b-form-checkbox>
           </div>
         </b-col>
         <b-col>
           <div class="b-bottomn f-right">
             <b-button variant="primary" class="a-button-l duration">
-              Mark as Read</b-button
+              {{ $t("follower.Mark_as_Read") }}</b-button
             >
           </div>
         </b-col>
@@ -43,7 +43,7 @@
                 src="https://business.bridgeafrica.info/assets/img/team/3.png"
               ></b-avatar>
               <h6 class="m-0  d-inline-block ml-2 username">
-                Mapoure Agrobusiness
+                {{ $t("follower.Mapoure_Agrobusiness") }}
                 <p class="duration">1hr</p>
               </h6>
             </span>

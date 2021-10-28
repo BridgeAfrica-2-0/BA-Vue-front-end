@@ -23,7 +23,7 @@
       <b-container>
         <b-row>
           <b-col cols="6">
-            <h6 class="  m-0 p-0 a-center network-name "><b> Heavy Gym </b></h6>
+            <h6 class="  m-0 p-0 a-center network-name "><b> {{ $t("follower.Heavy_Gym") }} </b></h6>
           </b-col>
           <b-col cols="6">
             <b-button
@@ -33,7 +33,7 @@
               style="width: 120px;"
               class="a-center"
             >
-              <b-icon icon="pencil"></b-icon> Edit
+              <b-icon icon="pencil"></b-icon> {{ $t("follower.Edit") }}
             </b-button>
           </b-col>
         </b-row>
@@ -47,19 +47,19 @@
             <b-col>
               <p class="a-center ">
                 <b-icon icon="globe" variant="primary"></b-icon>
-                <span class="pivate text"> Private </span>
+                <span class="pivate text"> {{ $t("follower.Private") }} </span>
               </p>
             </b-col>
             <b-col>
               <p class="a-center">
                 <b-icon icon="people-fill" variant="primary"></b-icon>
-                <span class="pivate text"> 3.5K community </span>
+                <span class="pivate text"> 3.5K {{ $t("follower.Community") }} </span>
               </p>
             </b-col>
           </b-row>
         </b-container>
 
-        <h6 class="mt-2 font-weight-bolder title ">About</h6>
+        <h6 class="mt-2 font-weight-bolder title ">{{ $t("follower.About") }}</h6>
         <p class="text-justify text">
           Lorem Ipsum is simply dummy text of the printing and typesetting
           industry. Lorem Ipsum has been the industry's standard dummy text ever
@@ -74,12 +74,12 @@
 
     <SidebarCommunity />
 
-    <b-modal hide-footer title="Edit network" size="md" v-model="showModal">
+    <b-modal hide-footer :title="$t('follower.Edit_network')" size="md" v-model="showModal">
       <b-container>
         <b-form>
           <b-form-group
             label-cols-lg="12"
-            label="Network Name"
+            :label="$t('follower.Network_Name')"
             label-size="md"
             label-class="font-weight-bold pt-0"
             class="mb-0"
@@ -90,7 +90,7 @@
 
           <b-form-group
             label-cols-lg="12"
-            label=" Brief Description"
+            :label="$t('follower.Brief_Description') "
             label-size="md"
             label-class="font-weight-bold pt-0"
             class="mb-0"
@@ -98,7 +98,7 @@
             <b-form-textarea
               id="textarea"
               v-model="text"
-              placeholder="Enter something..."
+              :placeholder="$t('follower.Enter_something')"
               rows="3"
               max-rows="6"
             ></b-form-textarea>
@@ -106,7 +106,7 @@
 
           <b-form-group
             label-cols-lg="12"
-            label="Email"
+            :label="$t('follower.Email')"
             label-size="md"
             label-class="font-weight-bold pt-0"
             class="mb-0"
@@ -117,7 +117,7 @@
 
           <b-form-group
             label-cols-lg="12"
-            label="Tel 1"
+            :label="$t('follower.Tel_1')"
             label-size="md"
             label-class="font-weight-bold pt-0"
             class="mb-0"
@@ -127,7 +127,7 @@
 
           <b-form-group
             label-cols-lg="12"
-            label="Tel 2"
+            :label="$t('follower.Tel_2')"
             label-size="md"
             label-class="font-weight-bold pt-0"
             class="mb-0"
@@ -138,7 +138,7 @@
 
           <b-form-group
             label-cols-lg="12"
-            label="Location"
+            :label="$t('follower.Location')"
             label-size="md"
             label-class="font-weight-bold pt-0"
             class="mb-0"
@@ -149,7 +149,7 @@
 
           <b-form-group
             label-cols-md="6"
-            label="Allow Business to join network"
+            :label="$t('follower.Allow_Business_to_join_network')"
             label-size="md"
             label-class="font-weight-bold pt-0"
             class="mb-0"
@@ -158,13 +158,13 @@
           </b-form-group>
 
           <b-button class="mt-2 " style="float:right" variant="primary">
-            Update Network</b-button
+            {{ $t("follower.Update_Network") }}</b-button
           >
         </b-form>
       </b-container>
     </b-modal>
 
-    <b-modal id="modal-4" title="Upload Profile Picture">
+    <b-modal id="modal-4" :title="$t('follower.Upload_Profile_Picture')">
       <div class="w3-container">
         <div class="row pb-3">
           <div
@@ -177,14 +177,14 @@
             <div>
               <input type="file" id="img" name="img" accept="image/*" />
             </div>
-            <h4>Upload a New picture</h4>
+            <h4>{{ $t("follower.Upload_a_New_picture") }}</h4>
           </div>
 
           <div class="col-sm-6 text-center">
             <h1>
               <fas-icon class="primary" :icon="['fas', 'edit']" />
             </h1>
-            <h4>Edit Your New picture</h4>
+            <h4>{{ $t("follower.Edit_Your_New_picture") }}</h4>
           </div>
         </div>
       </div>

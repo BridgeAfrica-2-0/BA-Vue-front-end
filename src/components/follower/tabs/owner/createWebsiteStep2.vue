@@ -5,22 +5,21 @@
         <div class="h-100 w-100">
           <div class="mx-auto text-center my-5">
             <h2 class="my-3 font-weight-bolder">
-              Create personalised website for your business
+              {{ $t("follower.Create_personalised_website_for_your_business") }}
             </h2>
             <p class="my-2">
-              Start with a template and male it your own, with easy drag and
-              drop & 1000s of design features
+              {{ $t("follower.Start_with_a_template_and_male_it_your_own") }}, {{ $t("follower.with_easy_drag_and_drop") }} {{ $t("follower.1000s_of_design_features") }}
             </p>
             <br /><br />
             <b-col class="my-3" cols="8" offset-md="2">
               <p class="d-inline-block float-left">
                 <b-icon-card-image class="select-temp"></b-icon-card-image>
-                <span class="d-block">Select a template</span>
+                <span class="d-block">{{ $t("follower.Select_a_template") }}</span>
               </p>
               <hr width="80%" class="row-step" />
               <p class="d-inline-block float-right">
                 <b-icon-cursor-fill class="select-temp2"></b-icon-cursor-fill>
-                <span class="d-block">Launch</span>
+                <span class="d-block">{{ $t("follower.Launch") }}</span>
               </p>
             </b-col>
           </div>
@@ -35,16 +34,16 @@
               <template #header>
                 <p>
                   <span class="float-right">
-                    Selected Template
+                    {{ $t("follower.Selected_Template") }}
                   </span>
                 </p>
               </template>
               <p class="mt-1 m-0 p-0">
                 <span class="float-left m-0 p-0">
-                  Template Name <strong class="color-site">Free</strong>
+                  {{ $t("follower.Template_Name") }} <strong class="color-site">{{ $t("follower.Free") }}</strong>
                 </span>
                 <span class="float-right p-0 m-0">
-                  <b-link href="#foo">Choose Another Template</b-link>
+                  <b-link href="#foo">{{ $t("follower.Choose_Another_Template") }}</b-link>
                 </span>
               </p>
               <img
@@ -61,7 +60,7 @@
                   class="upload-pic-icon"
                   aria-hidden="true"
                 ></b-icon-image-fill>
-                <p class="upload-text">Add Company logo</p>
+                <p class="upload-text">{{ $t("follower.Add_Company_logo") }}</p>
               </div>
               <div id="fileName"></div>
             </div>
@@ -73,7 +72,7 @@
             ></b-form-file>
             <b-form-group
               id="fieldset-1"
-              label="Website Title*"
+              :label="$t('follower.Website_Title')"
               label-for="input-1"
               class="mt-3"
             >
@@ -82,14 +81,14 @@
 
             <b-form-group
               id="fieldset-1"
-              label="Pick a subdomain name*"
+              :label="$t('follower.Pick_a_subdomain_name')"
               label-for="input-1"
             >
               <b-form-input
                 id="input-1"
                 v-model="title"
                 trim
-                placeholder="http://"
+                :placeholder="$t('follower.http')"
               ></b-form-input>
             </b-form-group>
             <b-row>
@@ -102,18 +101,17 @@
                   </div>
                   <div class="d-inline-block">
                     <h5 class="font-weight-bolder text-left mt-2">
-                      You are currently subscribed to free plan
+                      {{ $t("follower.You_are_currently_subscribed_to_free_plan") }}
                     </h5>
                     <p class="text-left text-design">
-                      You can get access to features like mapping your domain,
-                      premium template, premium support and much more. Simply
-                      upgrade your plan.
+                      {{ $t("follower.You_can_get_access_to_features") }} {{ $t("follower.like_mapping_your_domain") }},
+                      {{ $t("follower.premium_template") }}, {{ $t("follower.premium_support_and_much_more") }}. {{ $t("follower.Simply_upgrade_your_plan") }}.
                     </p>
                   </div>
 
                   <p class="text-right">
                     <b-link href="/business_owner/create_website_plan"
-                      >Change Plan</b-link
+                      >{{ $t("follower.Change_Plan") }}</b-link
                     >
                   </p>
                 </div>
@@ -125,13 +123,13 @@
                   variant="outline-dark"
                   class="ml-3 float-left"
                   size="sm"
-                  >Cancel</b-button
+                  >{{ $t("follower.Cancel") }}</b-button
                 >
                 <b-button variant="primary" class="ml-3 float-right" size="sm"
-                  >Save & Open Editor</b-button
+                  >{{ $t("follower.Save_Open_Editor") }}</b-button
                 >
                 <b-button variant="primary" class="ml-3 float-right" size="sm"
-                  >Save</b-button
+                  >{{ $t("follower.Save") }}</b-button
                 >
               </b-col>
             </b-row>

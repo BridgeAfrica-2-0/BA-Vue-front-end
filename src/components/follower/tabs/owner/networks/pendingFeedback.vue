@@ -1,9 +1,9 @@
 <template>
   <div>
     <h5 class="font-weight-bolder d-inline-block">
-      <b-icon-star-fill></b-icon-star-fill> Pending Feedbacks
+      <b-icon-star-fill></b-icon-star-fill> {{ $t("follower.Pending_Feedbacks") }}
     </h5>
-    <span class="float-right">35 Pending</span>
+    <span class="float-right">35 {{ $t("follower.Pending") }}</span>
 
     <hr width="100%" />
     <b-row>
@@ -22,7 +22,7 @@
                 </b-col>
                 <b-col cols="10" md="11" class="pt-2">
                   <h5 class="m-0 font-weight-bolder">
-                    Mapoure Agrobusiness
+                    {{ $t("follower.Mapoure_Agrobusiness") }}
                     <span class="float-right">
                       <b-dropdown
                         size="lg"
@@ -32,19 +32,19 @@
                       >
                         <template #button-content>
                           <b-icon-three-dots-vertical></b-icon-three-dots-vertical
-                          ><span class="sr-only">Settings</span>
+                          ><span class="sr-only">{{ $t("follower.Settings") }}</span>
                         </template>
                         <b-dropdown-item href="#">
-                          Approve
+                          {{ $t("follower.Approve") }}
                         </b-dropdown-item>
                         <b-dropdown-item href="#">
-                          Reject
+                          {{ $t("follower.Reject") }}
                         </b-dropdown-item>
                       </b-dropdown>
                     </span>
                   </h5>
                   <p>
-                    1h Ago - <span class="text-primary">Feedback Type</span>
+                    {{ $t("follower.1h_Ago") }} - <span class="text-primary">{{ $t("follower.Feedback_Type") }}</span>
                   </p>
                 </b-col>
               </b-row>

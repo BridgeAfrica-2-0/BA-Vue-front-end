@@ -4,7 +4,7 @@
       <b-container>
         <b-form-group
           label-cols-lg="3"
-          label="Privacy"
+          :label="$t('follower.Privacy')"
           label-size="md"
           label-class="font-weight-bold pt-0 username"
           class="mb-0 text"
@@ -25,7 +25,7 @@
       <b-container>
         <b-form-group
           label-cols-lg="3"
-          label="Posting Permissions"
+          :label="$t('follower.Posting_Permissions')"
           label-size="md"
           label-class="font-weight-bold pt-0 username"
           class="mb-0 text"
@@ -47,7 +47,7 @@
       <b-container>
         <b-form-group
           label-cols-lg="3"
-          label="Post Approval"
+          :label="$t('follower.Post_Approval')"
           label-size="md"
           label-class="font-weight-bold pt-0 username"
           class="mb-0"
@@ -59,7 +59,7 @@
             value="accepted"
             unchecked-value="not_accepted"
           >
-            All posts must be approved by an admin
+            {{ $t("follower.All_posts_must_be_approved_by_an_admin") }}
           </b-form-checkbox>
         </b-form-group>
       </b-container>
@@ -67,12 +67,12 @@
     </div>
 
     <b-container>
-      <b-link href="#foo" class="f-left text">Delete Network</b-link>
+      <b-link href="#foo" class="f-left text">{{ $t("follower.Delete_Network") }}</b-link>
     </b-container>
 
     <div class="b-bottomn">
       <b-button variant="primary" class="a-button-l text"
-        >Save Changes</b-button
+        >{{ $t("follower.Save_Changes") }}</b-button
       >
       <br />
     </div>

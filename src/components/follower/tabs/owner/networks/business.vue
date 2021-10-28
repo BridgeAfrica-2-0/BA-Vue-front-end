@@ -16,18 +16,18 @@
         </b-col>
         <b-col md="5" cols="7" lg="7" xl="7" sm="5">
           <p class="textt">
-            <strong class="title"> Super Car ltd </strong> <br />
-            Car marketing
+            <strong class="title"> {{ $t("follower.Super_Car_ltd")}} </strong> <br />
+            {{ $t("follower.Car_marketing")}}
             <br />
-            20k Community <br />
+            20k {{ $t("follower.Community")}} <br />
 
             <span class="location">
-              <b-icon-geo-alt class="ico"></b-icon-geo-alt> Douala cameroon
+              <b-icon-geo-alt class="ico"></b-icon-geo-alt> {{ $t("follower.Douala")}} {{ $t("follower.Cameroon")}}
             </span>
             <br />
 
             super best car seller in the world adipisicing elit. lorem epsep
-            this is <b-link>Read More</b-link>
+            this is <b-link>{{ $t("follower.Read_More")}}</b-link>
           </p>
         </b-col>
 
@@ -49,7 +49,7 @@
                   variant="primary"
                 >
                   <i class="fas fa-user-plus  fa-lg btn-icon "></i>
-                  <span class="btn-com">Community</span>
+                  <span class="btn-com">{{ $t("follower.Community")}}</span>
                 </b-button>
               </b-col>
 
@@ -68,7 +68,7 @@
                   variant="primary"
                 >
                   <i class="fas fa-envelope   fa-lg btn-icon "></i>
-                  <span class="btn-text">Message</span>
+                  <span class="btn-text">{{ $t("follower.Message")}}</span>
                 </b-button>
               </b-col>
 
@@ -87,7 +87,7 @@
                   variant="primary"
                 >
                   <i class="fas fa-map-marked-alt  fa-lg btn-icon "></i>
-                  <span class="btn-text">Direction</span>
+                  <span class="btn-text">{{ $t("follower.Direction")}}</span>
                 </b-button>
               </b-col>
             </b-row>
@@ -112,18 +112,18 @@
         </b-col>
         <b-col md="5" cols="7" lg="7" xl="7" sm="5">
           <p class="textt">
-            <strong class="title"> Super Car ltd </strong> <br />
-            Car marketing
+            <strong class="title"> {{ $t("follower.Super_Car_ltd")}} </strong> <br />
+            {{ $t("follower.Car_marketing")}}
             <br />
-            20k Community <br />
+            20k {{ $t("follower.Community")}} <br />
 
             <span class="location">
-              <b-icon-geo-alt class="ico"></b-icon-geo-alt> Douala cameroon
+              <b-icon-geo-alt class="ico"></b-icon-geo-alt> {{ $t("follower.Douala")}} {{ $t("follower.Cameroon")}}
             </span>
             <br />
 
             super best car seller in the world adipisicing elit. lorem epsep
-            this is <b-link>Read More</b-link>
+            this is <b-link>{{ $t("follower.Read_More")}}</b-link>
           </p>
         </b-col>
 
@@ -145,7 +145,7 @@
                   variant="primary"
                 >
                   <i class="fas fa-user-plus  fa-lg btn-icon "></i>
-                  <span class="btn-com">Community</span>
+                  <span class="btn-com">{{ $t("follower.Community")}}</span>
                 </b-button>
               </b-col>
 
@@ -164,7 +164,7 @@
                   variant="primary"
                 >
                   <i class="fas fa-envelope   fa-lg btn-icon "></i>
-                  <span class="btn-text">Message</span>
+                  <span class="btn-text">{{ $t("follower.Message")}}</span>
                 </b-button>
               </b-col>
 
@@ -183,7 +183,7 @@
                   variant="primary"
                 >
                   <i class="fas fa-map-marked-alt  fa-lg btn-icon "></i>
-                  <span class="btn-text">Direction</span>
+                  <span class="btn-text">{{ $t("follower.Direction")}}</span>
                 </b-button>
               </b-col>
             </b-row>

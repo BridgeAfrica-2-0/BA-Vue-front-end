@@ -4,10 +4,10 @@
       <b-row>
         <b-col class="f-left">
           <h6 class=" d-inline-block">
-            Membership Requests
+            {{ $t("follower.Membership_Requests") }}
           </h6>
         </b-col>
-        <b-col class="f-right"> <span class="">35 Pending</span> </b-col>
+        <b-col class="f-right"> <span class="">35 {{ $t("follower.Pending") }}</span> </b-col>
       </b-row>
     </div>
 
@@ -21,14 +21,14 @@
           </b-input-group-prepend>
           <b-form-input
             aria-label="Text input with checkbox"
-            placeholder="Search Something"
+            :placeholder="$t('follower.Search_something')"
           ></b-form-input>
         </b-input-group>
       </b-col>
 
       <b-col cols="3">
         <b-button variant="primary" block class="mem-btn">
-          Send Request
+          {{ $t("follower.Send_Request") }}
         </b-button>
       </b-col>
     </b-row>
@@ -77,7 +77,7 @@
                             class="mt-3 mt-xl-0 "
                           >
                             <h6 class="follower">
-                              5K Follower
+                              5K {{ $t("follower.Follower") }}
                             </h6>
                           </b-col>
                         </b-row>
@@ -102,7 +102,7 @@
                               class="b-background  flexx pobtn"
                             >
                               <b-icon icon="chat" class="mr-1"> </b-icon>
-                              Message
+                              {{ $t("follower.Message") }}
                             </b-button>
                           </b-col>
 
@@ -121,7 +121,7 @@
                               variant="primary"
                             >
                               <b-icon icon="plus-circle" class="mr-1"> </b-icon>
-                              community
+                              {{ $t("follower.Community") }}
                             </b-button>
                           </b-col>
                         </b-row>
@@ -142,13 +142,13 @@
                   >
                     <template #button-content>
                       <b-icon-three-dots-vertical></b-icon-three-dots-vertical
-                      ><span class="sr-only">Settings</span>
+                      ><span class="sr-only">{{ $t("follower.Settings") }}</span>
                     </template>
                     <b-dropdown-item href="#">
-                      Approve
+                      {{ $t("follower.Approve") }}
                     </b-dropdown-item>
                     <b-dropdown-item href="#">
-                      Reject
+                      {{ $t("follower.Reject") }}
                     </b-dropdown-item>
                   </b-dropdown>
                 </span>
@@ -197,7 +197,7 @@
                             class="mt-3 mt-xl-0 "
                           >
                             <h6 class="follower">
-                              5K Follower
+                              5K {{ $t("follower.Follower") }}
                             </h6>
                           </b-col>
                         </b-row>
@@ -222,7 +222,7 @@
                               class="b-background  flexx pobtn"
                             >
                               <b-icon icon="chat" class="mr-1"> </b-icon>
-                              Message
+                              {{ $t("follower.Message") }}
                             </b-button>
                           </b-col>
 
@@ -241,7 +241,7 @@
                               variant="primary"
                             >
                               <b-icon icon="plus-circle" class="mr-1"> </b-icon>
-                              community
+                              {{ $t("follower.Community") }}
                             </b-button>
                           </b-col>
                         </b-row>
@@ -262,13 +262,13 @@
                   >
                     <template #button-content>
                       <b-icon-three-dots-vertical></b-icon-three-dots-vertical
-                      ><span class="sr-only">Settings</span>
+                      ><span class="sr-only">{{ $t("follower.Settings") }}</span>
                     </template>
                     <b-dropdown-item href="#">
-                      Approve
+                      {{ $t("follower.Approve") }}
                     </b-dropdown-item>
                     <b-dropdown-item href="#">
-                      Reject
+                      {{ $t("follower.Reject") }}
                     </b-dropdown-item>
                   </b-dropdown>
                 </span>

@@ -11,9 +11,9 @@
               v-b-modal.modal-8
           /></a>
 
-          <b-modal id="modal-8" title="Details">
+          <b-modal id="modal-8" :title="$t('follower.Details')">
             <img class="card-img" src="@/assets/img/m1.jpg" alt="" />
-            <h4>Post Title</h4>
+            <h4>{{ $t("follower.Post_Title") }}</h4>
             <p class="my-4">
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum
               quisquam sequi, ullam aliquam ab illo suscipit, earum quam,
@@ -36,12 +36,12 @@
                       :icon="['fas', 'ellipsis-v']"
                     />
                   </template>
-                  <b-dropdown-item href="#">Download</b-dropdown-item>
+                  <b-dropdown-item href="#">{{ $t("follower.Download") }}</b-dropdown-item>
                   <b-dropdown-item href="#"
-                    >Make Profile Picture</b-dropdown-item
+                    >{{ $t("follower.Make_Profile_Picture") }}</b-dropdown-item
                   >
-                  <b-dropdown-item href="#">Make Cover Photo</b-dropdown-item>
-                  <b-dropdown-item href="#">Delete</b-dropdown-item>
+                  <b-dropdown-item href="#">{{ $t("follower.Make_Cover_Photo") }}</b-dropdown-item>
+                  <b-dropdown-item href="#">{{ $t("follower.Delete") }}</b-dropdown-item>
                 </b-dropdown>
               </li>
             </ul>
@@ -56,9 +56,9 @@
               v-b-modal.modal-a
           /></a>
 
-          <b-modal id="modal-a" title="Details">
+          <b-modal id="modal-a" :title="$t('follower.Details')">
             <img class="card-img" src="@/assets/img/m2.jpg" alt="" />
-            <h4>Post Title</h4>
+            <h4>{{ $t("follower.Post_Title") }}</h4>
             <p class="my-4">
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum
               quisquam sequi, ullam aliquam ab illo suscipit, earum quam,
@@ -81,12 +81,12 @@
                       :icon="['fas', 'ellipsis-v']"
                     />
                   </template>
-                  <b-dropdown-item href="#">Download</b-dropdown-item>
+                  <b-dropdown-item href="#">{{ $t("follower.Download") }}</b-dropdown-item>
                   <b-dropdown-item href="#"
-                    >Make Profile Picture</b-dropdown-item
+                    >{{ $t("follower.Make_Profile_Picture") }}</b-dropdown-item
                   >
-                  <b-dropdown-item href="#">Make Cover Photo</b-dropdown-item>
-                  <b-dropdown-item href="#">Delete</b-dropdown-item>
+                  <b-dropdown-item href="#">{{ $t("follower.Make_Cover_Photo") }}</b-dropdown-item>
+                  <b-dropdown-item href="#">{{ $t("follower.Delete") }}</b-dropdown-item>
                 </b-dropdown>
               </li>
             </ul>
@@ -102,9 +102,9 @@
               v-b-modal.modal-b
           /></a>
 
-          <b-modal id="modal-b" title="Details">
+          <b-modal id="modal-b" :title="$t('follower.Details')">
             <img class="card-img" src="@/assets/img/m3.jpg" alt="" />
-            <h4>Post Title</h4>
+            <h4>{{ $t("follower.Post_Title") }}</h4>
             <p class="my-4">
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum
               quisquam sequi, ullam aliquam ab illo suscipit, earum quam,
@@ -127,12 +127,12 @@
                       :icon="['fas', 'ellipsis-v']"
                     />
                   </template>
-                  <b-dropdown-item href="#">Download</b-dropdown-item>
+                  <b-dropdown-item href="#">{{ $t("follower.Download")}}</b-dropdown-item>
                   <b-dropdown-item href="#"
-                    >Make Profile Picture</b-dropdown-item
+                    >{{ $t("follower.Make_Profile_Picture")}}</b-dropdown-item
                   >
-                  <b-dropdown-item href="#">Make Cover Photo</b-dropdown-item>
-                  <b-dropdown-item href="#">Delete</b-dropdown-item>
+                  <b-dropdown-item href="#">{{ $t("follower.Make_Cover_Photo")}}</b-dropdown-item>
+                  <b-dropdown-item href="#">{{ $t("follower.Delete")}}</b-dropdown-item>
                 </b-dropdown>
               </li>
             </ul>
@@ -158,12 +158,12 @@
                       :icon="['fas', 'ellipsis-v']"
                     />
                   </template>
-                  <b-dropdown-item href="#">Download</b-dropdown-item>
+                  <b-dropdown-item href="#">{{ $t("follower.Download")}}</b-dropdown-item>
                   <b-dropdown-item href="#"
-                    >Make Profile Picture</b-dropdown-item
+                    >{{ $t("follower.Make_Profile_Picture")}}</b-dropdown-item
                   >
-                  <b-dropdown-item href="#">Make Cover Photo</b-dropdown-item>
-                  <b-dropdown-item href="#">Delete</b-dropdown-item>
+                  <b-dropdown-item href="#">{{ $t("follower.Make_Cover_Photo")}}</b-dropdown-item>
+                  <b-dropdown-item href="#">{{ $t("follower.Delete")}}</b-dropdown-item>
                 </b-dropdown>
               </li>
             </ul>
@@ -189,12 +189,12 @@
                       :icon="['fas', 'ellipsis-v']"
                     />
                   </template>
-                  <b-dropdown-item href="#">Download</b-dropdown-item>
+                  <b-dropdown-item href="#">{{ $t("follower.Download")}}</b-dropdown-item>
                   <b-dropdown-item href="#"
-                    >Make Profile Picture</b-dropdown-item
+                    >{{ $t("follower.Make_Profile_Picture")}}</b-dropdown-item
                   >
-                  <b-dropdown-item href="#">Make Cover Photo</b-dropdown-item>
-                  <b-dropdown-item href="#">Delete</b-dropdown-item>
+                  <b-dropdown-item href="#">{{ $t("follower.Make_Cover_Photo")}}</b-dropdown-item>
+                  <b-dropdown-item href="#">{{ $t("follower.Delete")}}</b-dropdown-item>
                 </b-dropdown>
               </li>
             </ul>
@@ -220,12 +220,12 @@
                       :icon="['fas', 'ellipsis-v']"
                     />
                   </template>
-                  <b-dropdown-item href="#">Download</b-dropdown-item>
+                  <b-dropdown-item href="#">{{ $t("follower.Download")}}</b-dropdown-item>
                   <b-dropdown-item href="#"
-                    >Make Profile Picture</b-dropdown-item
+                    >{{ $t("follower.Make_Profile_Picture")}}</b-dropdown-item
                   >
-                  <b-dropdown-item href="#">Make Cover Photo</b-dropdown-item>
-                  <b-dropdown-item href="#">Delete</b-dropdown-item>
+                  <b-dropdown-item href="#">{{ $t("follower.Make_Cover_Photo")}}</b-dropdown-item>
+                  <b-dropdown-item href="#">{{ $t("follower.Delete")}}</b-dropdown-item>
                 </b-dropdown>
               </li>
             </ul>
@@ -251,12 +251,12 @@
                       :icon="['fas', 'ellipsis-v']"
                     />
                   </template>
-                  <b-dropdown-item href="#">Download</b-dropdown-item>
+                  <b-dropdown-item href="#">{{ $t("follower.Download")}}</b-dropdown-item>
                   <b-dropdown-item href="#"
-                    >Make Profile Picture</b-dropdown-item
+                    >{{ $t("follower.Make_Profile_Picture")}}</b-dropdown-item
                   >
-                  <b-dropdown-item href="#">Make Cover Photo</b-dropdown-item>
-                  <b-dropdown-item href="#">Delete</b-dropdown-item>
+                  <b-dropdown-item href="#">{{ $t("follower.Make_Cover_Photo")}}</b-dropdown-item>
+                  <b-dropdown-item href="#">{{ $t("follower.Delete")}}</b-dropdown-item>
                 </b-dropdown>
               </li>
             </ul>
@@ -283,12 +283,12 @@
                       :icon="['fas', 'ellipsis-v']"
                     />
                   </template>
-                  <b-dropdown-item href="#">Download</b-dropdown-item>
+                  <b-dropdown-item href="#">{{ $t("follower.Download")}}</b-dropdown-item>
                   <b-dropdown-item href="#"
-                    >Make Profile Picture</b-dropdown-item
+                    >{{ $t("follower.Make_Profile_Picture")}}</b-dropdown-item
                   >
-                  <b-dropdown-item href="#">Make Cover Photo</b-dropdown-item>
-                  <b-dropdown-item href="#">Delete</b-dropdown-item>
+                  <b-dropdown-item href="#">{{ $t("follower.Make_Cover_Photo")}}</b-dropdown-item>
+                  <b-dropdown-item href="#">{{ $t("follower.Delete")}}</b-dropdown-item>
                 </b-dropdown>
               </li>
             </ul>

@@ -11,7 +11,7 @@
         </b-col>
         <b-col cols="9" md="11" class="p-0 m-0 pr-3">
           <input
-            placeholder="Post a business update"
+            :placeholder="$t('follower.Post_a_business_update')"
             v-b-modal.modal-xl
             class="comment"
             type="text"
@@ -28,7 +28,7 @@
           <b-row class="m-0 p-0">
             <b-col cols="5" class="text-right m-0 p-0">
               <b-button
-                title="Add Movie"
+                :title="$t('follower.Add_Movie')"
                 size="sm"
                 variant="outline-primary"
                 @click="chooseVideo()"
@@ -39,25 +39,25 @@
                   :icon="['fas', 'photo-video']"
                   size="lg"
                 />
-                <span class="username"> Photo/Video </span>
+                <span class="username"> {{ $t("follower.Photo_Video") }} </span>
               </b-button>
             </b-col>
             <b-col cols="4" class="text-right m-0 p-0">
               <b-button
-                title="Add Hyperlink"
+                :title="$t('follower.Add_Hyperlink')"
                 size="sm"
                 variant="outline-primary"
                 @click="chooseDocument()"
                 class="post-btn"
               >
                 <fas-icon class="icons" :icon="['fas', 'file']" size="lg" />
-                <span class="username"> Attach File </span>
+                <span class="username"> {{ $t("follower.Attach_File") }} </span>
               </b-button>
             </b-col>
 
             <b-col cols="3" class="text-right p-0 m-0">
               <b-button
-                title="Add Hyperlink"
+                :title="$t('follower.Add_Hyperlink')"
                 size="sm"
                 variant="outline-primary"
                 @click="chooseDocument()"
@@ -69,7 +69,7 @@
                   size="lg"
                 />
 
-                <span class="username"> Post </span>
+                <span class="username"> {{ $t("follower.Post") }} </span>
               </b-button>
             </b-col>
           </b-row>
@@ -78,10 +78,10 @@
 
       <div class="pending-post-view pt-2 mt-3">
         <p>
-          Your 3 Post(s) are pending for approval.&nbsp;&nbsp;&nbsp;&nbsp;<a
+          {{ $t("follower.Your_3_Post_are_pending_for_approval") }}.&nbsp;&nbsp;&nbsp;&nbsp;<a
             href="#"
             style="color: #e75c18; text-decoration:underline;"
-            >View All</a
+            >{{ $t("follower.View_All") }}</a
           >
         </p>
       </div>
@@ -93,7 +93,7 @@
         >
           <!-- <b-button v-b-modal.modal-xl variant="primary">xl modal</b-button> -->
 
-          <b-modal id="modal-xl" centered hide-footer title="Create Post">
+          <b-modal id="modal-xl" centered hide-footer :title="$t('follower.Create_Post')">
             <b-row>
               <b-col cols="1" class="m-0 p-0"> </b-col>
               <b-col cols="2" class="m-0 p-0">
@@ -107,7 +107,7 @@
               </b-col>
               <b-col cols="9" class="pt-2" style="margin-left:-5px">
                 <h5 class="m-0 font-weight-bolder">
-                  Agrobusiness
+                  {{ $t("follower.Agrobusiness") }}
                 </h5>
               </b-col>
             </b-row>
@@ -120,13 +120,13 @@
                   <b-form-textarea
                     id="textarea-small"
                     class="mb-2 border-none"
-                    placeholder="Post a business update"
+                    :placeholder="$t('follower.Post_a_business_update')"
                   ></b-form-textarea>
 
                   <i></i>
                 </div>
                 <div class="bordder">
-                  <span class="float-left"> Add to Your Post </span>
+                  <span class="float-left"> {{ $t("follower.Add_to_Your_Post") }} </span>
                   <span class="float-right">
                     <b-button-group size="sm" class="">
                       <input id="video" type="file" hidden />
@@ -134,7 +134,7 @@
                       <input id="document" type="file" hidden />
 
                       <b-button
-                        title="Add Movie"
+                        :title="$t('follower.Add_Movie')"
                         size="sm"
                         variant="outline-primary"
                         @click="chooseVideo()"
@@ -146,7 +146,7 @@
                         />
                       </b-button>
                       <b-button
-                        title="Add Hyperlink"
+                        :title="$t('follower.Add_Hyperlink')"
                         size="sm"
                         variant="outline-primary"
                         @click="chooseDocument()"
@@ -165,7 +165,7 @@
                 <span>
                   <b-button variant="primary" block
                     ><b-icon icon="cursor-fill" variant="primary"></b-icon>
-                    Publish</b-button
+                    {{ $t("follower.Publish") }}</b-button
                   >
                 </span>
               </b-col>
@@ -192,7 +192,7 @@
             </b-col>
             <b-col cols="10" md="11" class="pt-2">
               <h5 class="m-0 font-weight-bolder">
-                Heavy Gym
+                {{ $t("follower.Heavy_Gym") }}
                 <span class="float-right">
                   <b-dropdown variant="outline-primary" size="sm" no-caret>
                     <template #button-content>
@@ -210,17 +210,17 @@
 
                     <b-dropdown-item-button variant="info">
                       <b-icon icon="pencil" aria-hidden="true"></b-icon>
-                      Edit
+                      {{ $t("follower.Edit") }}
                     </b-dropdown-item-button>
 
                     <b-dropdown-item-button variant="danger">
                       <b-icon icon="trash-fill" aria-hidden="true"></b-icon>
-                      Delete
+                      {{ $t("follower.Delete") }}
                     </b-dropdown-item-button>
                   </b-dropdown>
                 </span>
               </h5>
-              <p class="duration">1h Ago</p>
+              <p class="duration">{{ $t("follower.1h_Ago") }}</p>
             </b-col>
           </b-row>
           <b-row>
@@ -275,7 +275,7 @@
               ></b-avatar>
             </b-col>
             <b-col cols="9" md="11" class="p-0 m-0 pr-3">
-              <input placeholder="Post a Comment" class="comment" type="text" />
+              <input :placeholder="$t('follower.Post_a_Comment')" class="comment" type="text" />
 
               <fas-icon
                 class="primary send-cmt"
@@ -304,7 +304,7 @@
             </b-col>
             <b-col cols="10" md="11" class="pt-2">
               <h5 class="m-0 font-weight-bolder">
-                Heavy Gym
+                {{ $t("follower.Heavy_Gym") }}
                 <span class="float-right">
                   <b-dropdown variant="outline-primary" size="sm" no-caret>
                     <template #button-content>
@@ -322,17 +322,17 @@
 
                     <b-dropdown-item-button variant="info">
                       <b-icon icon="pencil" aria-hidden="true"></b-icon>
-                      Edit
+                      {{ $t("follower.Edit") }}
                     </b-dropdown-item-button>
 
                     <b-dropdown-item-button variant="danger">
                       <b-icon icon="trash-fill" aria-hidden="true"></b-icon>
-                      Delete
+                      {{ $t("follower.Delete") }}
                     </b-dropdown-item-button>
                   </b-dropdown>
                 </span>
               </h5>
-              <p class="duration">1h Ago</p>
+              <p class="duration">{{ $t("follower.1h_Ago") }}</p>
             </b-col>
           </b-row>
           <b-row>
@@ -381,7 +381,7 @@
               ></b-avatar>
             </b-col>
             <b-col cols="9" md="11" class="p-0 m-0 pr-3">
-              <input placeholder="Post a Comment" class="comment" type="text" />
+              <input :placeholder="$t('follower.Post_a_Comment')" class="comment" type="text" />
 
               <fas-icon
                 class="primary send-cmt"
@@ -410,7 +410,7 @@
             </b-col>
             <b-col cols="10" md="11" class="pt-2">
               <h5 class="m-0 font-weight-bolder">
-                Heavy Gym
+                {{ $t("follower.Heavy_Gym")}}
                 <span class="float-right">
                   <b-dropdown variant="outline-primary" size="sm" no-caret>
                     <template #button-content>
@@ -428,17 +428,17 @@
 
                     <b-dropdown-item-button variant="info">
                       <b-icon icon="pencil" aria-hidden="true"></b-icon>
-                      Edit
+                      {{ $t("follower.Edit")}}
                     </b-dropdown-item-button>
 
                     <b-dropdown-item-button variant="danger">
                       <b-icon icon="trash-fill" aria-hidden="true"></b-icon>
-                      Delete
+                      {{ $t("follower.Delete") }}
                     </b-dropdown-item-button>
                   </b-dropdown>
                 </span>
               </h5>
-              <p class="duration">1h Ago</p>
+              <p class="duration">{{ $t("follower.1h_Ago") }}</p>
             </b-col>
           </b-row>
           <b-row>
@@ -486,7 +486,7 @@
                 </b-col>
                 <b-col cols="9" md="11" class="p-0 m-0 pr-3">
                   <input
-                    placeholder="Post a Comment"
+                    :placeholder="$t('follower.Post_a_Comment')"
                     class="comment"
                     type="text"
                   />
@@ -518,7 +518,7 @@
             </b-col>
             <b-col cols="10" md="11" class="pt-2">
               <h5 class="m-0 font-weight-bolder">
-                Heavy Gym
+                {{ $t("follower.Heavy_Gym")}}
                 <span class="float-right">
                   <b-dropdown variant="outline-primary" size="sm" no-caret>
                     <template #button-content>
@@ -536,17 +536,17 @@
 
                     <b-dropdown-item-button variant="info">
                       <b-icon icon="pencil" aria-hidden="true"></b-icon>
-                      Edit
+                      {{ $t("follower.Edit")}}
                     </b-dropdown-item-button>
 
                     <b-dropdown-item-button variant="danger">
                       <b-icon icon="trash-fill" aria-hidden="true"></b-icon>
-                      Delete
+                      {{ $t("follower.Delete") }}
                     </b-dropdown-item-button>
                   </b-dropdown>
                 </span>
               </h5>
-              <p class="duration">1h Ago</p>
+              <p class="duration">{{ $t("follower.1h_Ago") }}</p>
             </b-col>
           </b-row>
           <b-row>
@@ -592,7 +592,7 @@
                 <b-col cols="9" md="11" class="p-0 m-0 pr-3">
                   <b-input-group class="my-auto w-100 rounded">
                     <input
-                      placeholder="Post a Comment"
+                      :placeholder="$t('follower.Post_a_Comment')"
                       class="comment"
                       type="text"
                     />

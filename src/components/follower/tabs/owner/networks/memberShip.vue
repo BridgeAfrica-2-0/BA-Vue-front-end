@@ -38,7 +38,7 @@
                         xl="12"
                         class="mt-3 mt-lg-2 mt-xl-0"
                       >
-                        <h6 class="follower">5K Community</h6>
+                        <h6 class="follower">5K {{ $t("follower.Community") }}</h6>
                       </b-col>
                     </b-row>
                   </div>
@@ -61,7 +61,7 @@
                           size="sm"
                           class="b-background flexx pobtn shadow"
                         >
-                          <span class="btn-text">Approve</span>
+                          <span class="btn-text">{{ $t("follower.Approve")}}</span>
                         </b-button>
                       </b-col>
 
@@ -79,7 +79,7 @@
                           class="b-background flexx pobtn shadow"
                           variant="primary"
                         >
-                          <span class="btn-com">Decline</span>
+                          <span class="btn-com">{{ $t("follower.Decline")}}</span>
                         </b-button>
                       </b-col>
                     </b-row>
@@ -128,7 +128,7 @@
                         xl="12"
                         class="mt-3 mt-lg-2 mt-xl-0"
                       >
-                        <h6 class="follower">5K Community</h6>
+                        <h6 class="follower">5K {{ $t("follower.Community")}}</h6>
                       </b-col>
                     </b-row>
                   </div>
@@ -151,7 +151,7 @@
                           size="sm"
                           class="b-background flexx pobtn shadow"
                         >
-                          <span class="btn-text">Approve</span>
+                          <span class="btn-text">{{ $t("follower.Approve")}}</span>
                         </b-button>
                       </b-col>
 
@@ -169,7 +169,7 @@
                           class="b-background flexx pobtn shadow"
                           variant="primary"
                         >
-                          <span class="btn-com">Decline</span>
+                          <span class="btn-com">{{ $t("follower.Decline")}}</span>
                         </b-button>
                       </b-col>
                     </b-row>
@@ -218,7 +218,7 @@
                         xl="12"
                         class="mt-3 mt-lg-2 mt-xl-0"
                       >
-                        <h6 class="follower">5K Community</h6>
+                        <h6 class="follower">5K {{ $t("follower.Community")}}</h6>
                       </b-col>
                     </b-row>
                   </div>
@@ -241,7 +241,7 @@
                           size="sm"
                           class="b-background flexx pobtn shadow"
                         >
-                          <span class="btn-text">Approve</span>
+                          <span class="btn-text">{{ $t("follower.Approve")}}</span>
                         </b-button>
                       </b-col>
 
@@ -259,7 +259,7 @@
                           class="b-background flexx pobtn shadow"
                           variant="primary"
                         >
-                          <span class="btn-com">Decline</span>
+                          <span class="btn-com">{{ $t("follower.Decline")}}</span>
                         </b-button>
                       </b-col>
                     </b-row>
@@ -308,7 +308,7 @@
                         xl="12"
                         class="mt-3 mt-lg-2 mt-xl-0"
                       >
-                        <h6 class="follower">5K Community</h6>
+                        <h6 class="follower">5K {{ $t("follower.Community")}}</h6>
                       </b-col>
                     </b-row>
                   </div>
@@ -331,7 +331,7 @@
                           size="sm"
                           class="b-background flexx pobtn shadow"
                         >
-                          <span class="btn-text">Approve</span>
+                          <span class="btn-text">{{ $t("follower.Approve")}}</span>
                         </b-button>
                       </b-col>
 
@@ -349,7 +349,7 @@
                           class="b-background flexx pobtn shadow"
                           variant="primary"
                         >
-                          <span class="btn-com">Decline</span>
+                          <span class="btn-com">{{ $t("follower.Decline")}}</span>
                         </b-button>
                       </b-col>
                     </b-row>
@@ -398,7 +398,7 @@
                         xl="12"
                         class="mt-3 mt-lg-2 mt-xl-0"
                       >
-                        <h6 class="follower">5K Community</h6>
+                        <h6 class="follower">5K {{ $t("follower.Community")}}</h6>
                       </b-col>
                     </b-row>
                   </div>
@@ -421,7 +421,7 @@
                           size="sm"
                           class="b-background flexx pobtn shadow"
                         >
-                          <span class="btn-text">Approve</span>
+                          <span class="btn-text">{{ $t("follower.Approve")}}</span>
                         </b-button>
                       </b-col>
 
@@ -439,7 +439,7 @@
                           class="b-background flexx pobtn shadow"
                           variant="primary"
                         >
-                          <span class="btn-com">Decline</span>
+                          <span class="btn-com">{{ $t("follower.Decline")}}</span>
                         </b-button>
                       </b-col>
                     </b-row>
@@ -488,7 +488,7 @@
                         xl="12"
                         class="mt-3 mt-lg-2 mt-xl-0"
                       >
-                        <h6 class="follower">5K Community</h6>
+                        <h6 class="follower">5K {{ $t("follower.Community")}}</h6>
                       </b-col>
                     </b-row>
                   </div>
@@ -511,7 +511,7 @@
                           size="sm"
                           class="b-background flexx pobtn shadow"
                         >
-                          <span class="btn-text">Approve</span>
+                          <span class="btn-text">{{ $t("follower.Approve")}}</span>
                         </b-button>
                       </b-col>
 
@@ -529,7 +529,7 @@
                           class="b-background flexx pobtn shadow"
                           variant="primary"
                         >
-                          <span class="btn-com">Decline</span>
+                          <span class="btn-com">{{ $t("follower.Decline")}}</span>
                         </b-button>
                       </b-col>
                     </b-row>

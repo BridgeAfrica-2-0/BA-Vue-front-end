@@ -2,9 +2,9 @@
   <b-container>
     <b-container class="bv-example-row">
       <p class="t-left text">
-        Blocked users can no longer see things you post on your business, invite
-        your business to networks, strat a conversation, or follow your
-        business.
+        {{ $t("follower.Blocked_users_can_no_longer_see_things_you_post_on_your_business") }}, 
+        {{ $t("follower.invite_your_business_to_networks") }}, {{ $t("follower.strat_a_conversation") }}, 
+        {{ $t("follower.or_follow_your_business") }}.
       </p>
     </b-container>
 
@@ -13,7 +13,7 @@
         <b-li class="d-flex align-items-center m-list">
           <b-avatar class="mr-3" size="4em"></b-avatar>
           <span class="mr-auto">J. Circlehead</span>
-          <span class=""><b-link href="#">Unblock</b-link></span>
+          <span class=""><b-link href="#">{{ $t("follower.Unblock") }}</b-link></span>
         </b-li>
         <hr width="100%" />
 
@@ -25,7 +25,7 @@
             size="4em"
           ></b-avatar>
           <span class="mr-auto">itz blec blec</span>
-          <span class=""><b-link href="#">Unblock</b-link></span>
+          <span class=""><b-link href="#">{{ $t("follower.Unblock") }}</b-link></span>
         </b-li>
 
         <hr width="100%" />
@@ -33,7 +33,7 @@
         <b-li class="d-flex align-items-center m-list">
           <b-avatar class="mr-3" size="4em"></b-avatar>
           <span class="mr-auto">J. Circlehead</span>
-          <span class=""><b-link href="#">Unblock</b-link></span>
+          <span class=""><b-link href="#">{{ $t("follower.Unblock") }}</b-link></span>
         </b-li>
         <hr width="100%" />
 
@@ -45,7 +45,7 @@
             size="4em"
           ></b-avatar>
           <span class="mr-auto">itz blec blec</span>
-          <span class=""><b-link href="#">Unblock</b-link></span>
+          <span class=""><b-link href="#">{{ $t("follower.Unblock") }}</b-link></span>
         </b-li>
         <hr width="100%" />
       </b-li-group>

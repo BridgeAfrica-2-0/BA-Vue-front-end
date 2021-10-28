@@ -30,7 +30,7 @@
                         sm="6"
                         class="mt-3 mt-lg-2 mt-xl-2"
                       >
-                        <h6 class="follower">5K Community</h6>
+                        <h6 class="follower">5K {{ $t("follower.Community") }}</h6>
                       </b-col>
                     </b-row>
                   </div>
@@ -54,7 +54,7 @@
                           class="b-background flexx pobtn shadow mr-lg-3 mr-xl-3"
                         >
                           <i class="fas fa-envelope   fa-lg btn-icon "></i>
-                          <span class="btn-text">Message</span>
+                          <span class="btn-text">{{ $t("follower.Message") }}</span>
                         </b-button>
                       </b-col>
 
@@ -73,7 +73,7 @@
                           variant="primary"
                         >
                           <i class="fas fa-user-plus  fa-lg btn-icon "></i>
-                          <span class="btn-com">Community</span>
+                          <span class="btn-com">{{ $t("follower.Community") }}</span>
                         </b-button>
                       </b-col>
                     </b-row>
@@ -114,7 +114,7 @@
                         sm="6"
                         class="mt-3 mt-lg-2 mt-xl-2"
                       >
-                        <h6 class="follower">5K Community</h6>
+                        <h6 class="follower">5K {{ $t("follower.Community") }}</h6>
                       </b-col>
                     </b-row>
                   </div>
@@ -138,7 +138,7 @@
                           class="b-background flexx pobtn shadow mr-lg-3 mr-xl-3"
                         >
                           <i class="fas fa-envelope   fa-lg btn-icon "></i>
-                          <span class="btn-text">Message</span>
+                          <span class="btn-text">{{ $t("follower.Message") }}</span>
                         </b-button>
                       </b-col>
 
@@ -157,7 +157,7 @@
                           variant="primary"
                         >
                           <i class="fas fa-user-plus  fa-lg btn-icon "></i>
-                          <span class="btn-com">Community</span>
+                          <span class="btn-com">{{ $t("follower.Community") }}</span>
                         </b-button>
                       </b-col>
                     </b-row>
@@ -198,7 +198,7 @@
                         sm="6"
                         class="mt-3 mt-lg-2 mt-xl-2"
                       >
-                        <h6 class="follower">5K Community</h6>
+                        <h6 class="follower">5K {{ $t("follower.Community") }}</h6>
                       </b-col>
                     </b-row>
                   </div>
@@ -222,7 +222,7 @@
                           class="b-background flexx pobtn shadow mr-lg-3 mr-xl-3"
                         >
                           <i class="fas fa-envelope   fa-lg btn-icon "></i>
-                          <span class="btn-text">Message</span>
+                          <span class="btn-text">{{ $t("follower.Message") }}</span>
                         </b-button>
                       </b-col>
 
@@ -241,7 +241,7 @@
                           variant="primary"
                         >
                           <i class="fas fa-user-plus  fa-lg btn-icon "></i>
-                          <span class="btn-com">Community</span>
+                          <span class="btn-com">{{ $t("follower.Community") }}</span>
                         </b-button>
                       </b-col>
                     </b-row>

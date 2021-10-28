@@ -13,15 +13,15 @@
             no-caret
           >
             <template #button-content>
-              <b-icon-filter></b-icon-filter><span class="sr-only">Search</span>
+              <b-icon-filter></b-icon-filter><span class="sr-only">{{ $t("follower.search") }}</span>
             </template>
-            <p class="font-weight-bolder px-3 m-0">Feedbacks Type</p>
-            <b-dropdown-item href="#">Any</b-dropdown-item>
+            <p class="font-weight-bolder px-3 m-0">{{ $t("follower.Feedbacks_Type") }}</p>
+            <b-dropdown-item href="#">{{ $t("follower.Any") }}</b-dropdown-item>
             <b-dropdown-item href="#"
-              >suggestion for improvement</b-dropdown-item
+              >{{ $t("follower.suggestion_for_improvement") }}</b-dropdown-item
             >
-            <b-dropdown-item href="#">Progress to your program</b-dropdown-item>
-            <b-dropdown-item href="#">New Idea for PEA-JEUNES</b-dropdown-item>
+            <b-dropdown-item href="#">{{ $t("follower.Progress_to_your_program") }}</b-dropdown-item>
+            <b-dropdown-item href="#">{{ $t("follower.New_Idea_for_PEA_JEUNES") }}</b-dropdown-item>
           </b-dropdown>
         </span>
       </b-col>
@@ -44,9 +44,9 @@
                 </b-col>
                 <b-col cols="10" md="11" class="pt-2">
                   <h5 class="m-0 font-weight-bolder  feedback-name ">
-                    <b-link> Mapoure Agrobusiness </b-link>
+                    <b-link> {{ $t("follower.Mapoure_Agrobusiness") }} </b-link>
                   </h5>
-                  <p>1h Ago</p>
+                  <p>{{ $t("follower.1h_Ago") }}</p>
                 </b-col>
               </b-row>
               <b-row>

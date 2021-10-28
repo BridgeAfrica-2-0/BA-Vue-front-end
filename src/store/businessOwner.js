@@ -343,9 +343,8 @@ export default {
     },
 
     async loadUserBusinessAbout(context, payload) {
-      console.log(payload, 'load user Business About start +++++');
       let response_ = null;
-      const id_Business = 47;
+      const id_Business = 2;
       await axios('business/info' + '/' + id_Business, {
         method: 'GET',
         headers: {
@@ -353,16 +352,13 @@ export default {
         },
       })
         .then(response => {
-          console.log('load user Business About response (1) +++++++', response);
           if (response.status !== 200 && response.status !== 201) {
             throw 'Error from the server';
           }
           return response.data;
         })
         .then(response => {
-          console.log('load user Business About response successsss +++', response);
           if (!response) {
-            console.log('Error from the server+++++++');
             throw new Error('Error for loading Business About +++++');
           }
           context.commit('updateUserBusinessAbout', {
@@ -370,9 +366,7 @@ export default {
           });
           response_ = response;
         })
-        .catch(error => {
-          console.log('error from the server or the browser', error);
-        });
+        .catch(error => {});
       return response_;
     },
 
@@ -424,13 +418,10 @@ export default {
     },
 
     async loadUserBusinessInsight(context, payload) {
-      console.log(payload);
-      console.log('load user Business Insight start +++++');
       let response_ = null;
       let url = null;
       let config = {};
       if (payload !== null) {
-        console.log('Payload does not null ++++++++++');
         url =
           'business/insights/' +
           payload.business_id +
@@ -445,7 +436,6 @@ export default {
           },
         };
       } else {
-        console.log('Payload is null');
         url = 'business/insights';
         config = {
           method: 'POST',
@@ -456,16 +446,13 @@ export default {
       }
       await axios(url, config)
         .then(response => {
-          console.log('load user Business Insight response (1) +++++++', response);
           if (response.status !== 200 && response.status !== 201) {
             throw 'Errors during processing by the server';
           }
           return response;
         })
         .then(response => {
-          console.log('load User Business Insight response successsss +++', response);
           if (!response) {
-            console.log('Error From the server +++++++');
             throw new Error('Error for loading Business Insight +++++');
           }
           context.commit('updateUserBusinessInsights', {
@@ -474,9 +461,6 @@ export default {
           response_ = response;
         })
         .catch(error => {
-          console.log({ error: error });
-          console.log('error from the server or the browser');
-          console.log(error);
           context.commit('updateUserBusinessInsights', {
             businessInsights: null,
           });

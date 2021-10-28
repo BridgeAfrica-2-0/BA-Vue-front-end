@@ -22,7 +22,7 @@
           @click="changeElementType(2)"
         >
           <div class="cercle2">2</div>
-          reduce size of arrow on
+
           <h2 class="h2 text-position text-center">Complete</h2>
         </div>
         <div id="m3" class="mobile2 col t" @click="changeElementType(3)">
@@ -208,89 +208,47 @@
 
     <!-- <div class="container d-flex justify-content-end">clear history</div> -->
     <!--  partie desktop---------------------------------------------------------------------------------------- -->
-      
-        <div class="row parent">
-        <b-avatar  class="avatar " text="1" :variant="success1" ></b-avatar>  
-        <h2 class="text cursor" @click="changeElementType(1)">In Process</h2> 
-        <div class="progress prog cursor gris" @click="changeElementType(1)">
-          <div class="progress-bar bg-success " role="progressbar" :style="style1" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-        </div>
-
-         <b-avatar class="avatar " text="2" :variant="success2" ></b-avatar>  
-        <h2 class="text cursor" @click="changeElementType(2)">Shipped</h2> 
-        <div class="progress prog cursor gris" @click="changeElementType(2)">
-          <div class="progress-bar bg-success " role="progressbar" :style="style2" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-        </div>
-
-         <b-avatar class="avatar " text="3" :variant="success3" ></b-avatar>  
-        <h2 class="text cursor" @click="changeElementType(3)">Re-schedule</h2> 
-        <div class="progress prog cursor gris" @click="changeElementType(3)">
-          <div class="progress-bar bg-success " role="progressbar" :style="style3" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-        </div>
-
-      </div>
 
     <div class="hidedesktop" id="hidedesktop">
       <!-- navigation--------------- -->
-      <div class="row cursor justify-content-center">
-        <div class="col-4" @click="changeElementType(1)">
-          <div class="row">
-            <div class="pos1">
-              <b-avatar text="1" :variant="success1"></b-avatar>
-            </div>
-
-            <div class="col-4"><h2 class="h2 pos2">In progress</h2></div>
-            <div id="r1" class="progress col bar" style="height: 10px">
-              <div
-                class="progress-bar bg-success"
-                role="progressbar"
-                :style="style1"
-                aria-valuenow="25"
-                aria-valuemin="0"
-                aria-valuemax="100"
-              ></div>
-            </div>
-          </div>
+      <div class="row parent">
+        <b-avatar class="avatar" text="1" :variant="success1"></b-avatar>
+        <h2 class="text cursor" @click="changeElementType(1)">In Progress</h2>
+        <div class="progress prog cursor gris" @click="changeElementType(1)">
+          <div
+            class="progress-bar bg-success"
+            role="progressbar"
+            :style="style1"
+            aria-valuenow="25"
+            aria-valuemin="0"
+            aria-valuemax="100"
+          ></div>
         </div>
 
-        <div class="row col-4" @click="changeElementType(2)">
-          <div class="row">
-            <div class="pos1">
-              <b-avatar text="2" :variant="success2"></b-avatar>
-            </div>
-
-            <div class="col-4"><h2 class="h2 pos">Complete</h2></div>
-            <div id="r2" class="progress col gris" style="height: 10px">
-              <div
-                class="progress-bar bg-success gris"
-                role="progressbar"
-                :style="style2"
-                aria-valuenow="25"
-                aria-valuemin="0"
-                aria-valuemax="100"
-              ></div>
-            </div>
-          </div>
+        <b-avatar class="avatar" text="2" :variant="success2"></b-avatar>
+        <h2 class="text cursor" @click="changeElementType(2)">Complete</h2>
+        <div class="progress prog cursor gris" @click="changeElementType(2)">
+          <div
+            class="progress-bar bg-success"
+            role="progressbar"
+            :style="style2"
+            aria-valuenow="25"
+            aria-valuemin="0"
+            aria-valuemax="100"
+          ></div>
         </div>
 
-        <div class="row col-4" @click="changeElementType(3)">
-          <div class="row">
-            <div class="pos1">
-              <b-avatar text="3" :variant="success3"></b-avatar>
-            </div>
-
-            <div class="col-3"><h2 class="h2 pos">Cancel</h2></div>
-            <div id="r3" class="progress col gris" style="height: 10px">
-              <div
-                class="progress-bar bg-success gris"
-                role="progressbar"
-                :style="style3"
-                aria-valuenow="25"
-                aria-valuemin="0"
-                aria-valuemax="100"
-              ></div>
-            </div>
-          </div>
+        <b-avatar class="avatar" text="3" :variant="success3"></b-avatar>
+        <h2 class="text cursor" @click="changeElementType(3)">Cancel</h2>
+        <div class="progress prog cursor gris" @click="changeElementType(3)">
+          <div
+            class="progress-bar bg-success"
+            role="progressbar"
+            :style="style3"
+            aria-valuenow="25"
+            aria-valuemin="0"
+            aria-valuemax="100"
+          ></div>
         </div>
       </div>
 
@@ -402,13 +360,7 @@
                 <br />
               </div>
 
-              <div class="justify-content-center container row">
-                <!-- <div class="bg-warning" v-if="!titre">
-                  <button class="button btn shadow text-center">
-                    <h3 class="h3 button-text">Re-order</h3>
-                  </button>
-                </div> -->
-              </div>
+              <div class="justify-content-center container row"></div>
               <div class="justify-content-center container row">
                 <br />
               </div>
@@ -458,13 +410,7 @@
                 <br />
               </div>
 
-              <div class="justify-content-center container row">
-                <!-- <div class="bg-warning" v-if="!titre">
-                  <button class="button btn shadow text-center">
-                    <h3 class="h3 button-text">Re-order</h3>
-                  </button>
-                </div> -->
-              </div>
+              <div class="justify-content-center container row"></div>
               <div class="justify-content-center container row">
                 <br />
               </div>
@@ -490,7 +436,7 @@ export default {
       success1: "success",
       success2: "secondary",
       success3: "secondary",
-      titre: false,
+
       status: 1,
       etat: "pending",
 
@@ -500,7 +446,6 @@ export default {
 
   methods: {
     changeElementType(p) {
-     
       console.log("------------------" + p);
       this.status = p;
 
@@ -532,104 +477,39 @@ export default {
       }
 
       //transition partie mobile
-      if (
-        window.screen.width > 240 &&
-        window.screen.width < 500 &&
-        window.screen.height > 320 &&
-        window.screen.height < 900
-      ) {
-        const el = document.getElementById("m" + p);
-        const els = document.querySelectorAll(".t");
-        els.forEach((dat) => {
-          dat.classList.remove("green");
-        });
-        el.classList.add("green");
-      } else {
-        //transition partie desktop
-        const el1 = document.getElementById("c" + p);
-        const el2 = document.getElementById("l" + p);
-        const cercles = document.querySelectorAll(".cercle");
-        const lignes = document.querySelectorAll(".line");
-        const r = document.getElementById("r" + p);
-        const rs = document.querySelectorAll(".progress");
 
-        rs.forEach((dat) => {
-          dat.classList.remove("bar");
-          dat.classList.add("gris");
-        });
-        r.classList.remove("gris");
-        r.classList.add("bar");
-
-        cercles.forEach((dat) => {
-          dat.classList.remove("cercle-actif");
-        });
-        lignes.forEach((dat) => {
-          dat.classList.remove("line-actif");
-        });
-        el1.classList.add("cercle-actif");
-        el2.classList.add("line-actif");
-      }
+      const el = document.getElementById("m" + p);
+      const els = document.querySelectorAll(".t");
+      els.forEach((dat) => {
+        dat.classList.remove("green");
+      });
+      el.classList.add("green");
     },
   },
 
-  mounted() {
-    if (
-      window.screen.width > 240 &&
-      window.screen.width < 500 &&
-      window.screen.height > 320 &&
-      window.screen.height < 900
-    ) {
-      console.log("---  test");
-      this.rimg = "r-img1";
-      let node = document.getElementById("hidedesktop");
-      // let node2 = document.getElementById("hidedesktop1");
-
-      // node.remove();
-      // node2.remove();
-
-      let h1 = document.querySelectorAll(".h1");
-      let h2 = document.querySelectorAll(".h2");
-      let h3 = document.querySelectorAll(".h3");
-      h1.forEach((dat) => {
-        dat.classList.add("h11");
-      });
-
-      h2.forEach((dat) => {
-        dat.classList.add("h22");
-      });
-
-      h3.forEach((dat) => {
-        dat.classList.add("h33");
-      });
-    } else {
-      this.titre = true;
-      this.rimg = "r-img";
-      var node1 = document.getElementById("hidemobile");
-      // node1.remove();
-    }
-  },
+  mounted() {},
 };
 </script>
 
 <style scoped>
 /* style for desktop------------------------- */
 
-.avatar{
+.avatar {
   margin-top: 23px;
   margin-right: 10px;
 }
-.text{
+.text {
   margin-right: 50px;
   margin-top: 35px;
 }
-.prog{
+.prog {
   height: 10px;
   margin-left: 20px;
   margin-right: 10px !important;
-  width: 190px !important; 
+  width: 200px !important;
 }
-.parent{
-   margin-left: 40px;
+.parent {
+  margin-left: 40px;
 }
 .margd1 {
   margin-left: 50px;
@@ -908,9 +788,12 @@ h3 {
 /* .hidedesktop{
     visibility: hidden;
   } */
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 1200px) {
   .bold h3 {
     font-weight: normal !important;
+  }
+  .cercle2 {
+    margin-left: 50px !important;
   }
 
   #hidedesktop {
@@ -918,7 +801,20 @@ h3 {
   }
 }
 
-@media only screen and (min-width: 900px) {
+@media only screen and (max-width: 768px) {
+  .bold h3 {
+    font-weight: normal !important;
+  }
+  .cercle2 {
+    margin-left: 3px !important;
+  }
+
+  #hidedesktop {
+    display: none;
+  }
+}
+
+@media only screen and (min-width: 1200px) {
   #hidemobile {
     display: none !important;
   }

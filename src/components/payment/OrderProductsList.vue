@@ -86,7 +86,7 @@
 		</div>
 		<div class="row" v-if="error">
 			<div class="col-12">
-				<b-alert dismissible show variant="danger">Error!</b-alert>
+				<b-alert dismissible show variant="secondary">Your cart is empty!</b-alert>
 			</div>
 		</div>
 		<div class="row my-4">

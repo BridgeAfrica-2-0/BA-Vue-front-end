@@ -4,7 +4,15 @@
       <b-row>
         <b-col>
           <div class="b-bottom f-left">
-            <input @click="selectall" type="checkbox" />
+            <!-- <input @click="selectall" type="checkbox" /> -->
+            <b-form-checkbox
+              class="f-left"
+              @click="selectall"
+              value="accepted"
+              unchecked-value="not_accepted"
+              v-model="status"
+            >
+            </b-form-checkbox>
             Select All
           </div>
         </b-col>
@@ -19,7 +27,7 @@
             >
             <b-button
               @click="deleteAll(selected)"
-              v-if="selected.length > 0"
+              v-if="testing > 0"
               variant="primary"
               class="a-button-l duration ml-1"
             >
@@ -30,7 +38,7 @@
       </b-row>
       <br />
 
-      <b-row>
+      <!-- <b-row>
         <b-col
           cols="12"
           class="mr-3"
@@ -39,14 +47,14 @@
         >
           <p class="">
             <span style="display:inline-flex">
-              <input
-                @click="select(post.id)"
-                type="checkbox"
-                v-model="status"
-                value="accepted"
+              <b-form-checkbox
+              @click="select(post.id)"
                 class="m-left-top"
+                value="accepted"
                 unchecked-value="not_accepted"
-              />
+                v-model="status"
+              >
+              </b-form-checkbox>
               <b-avatar
                 class="d-inline-block profile-pic"
                 variant="primary"
@@ -80,7 +88,50 @@
           </b-row>
         </b-col>
         <hr width="100%" />
+      </b-row> -->
+
+      <!-- testing section -->
+
+      <b-row>
+        <b-col cols="12" class="mr-3" v-for="i in 9" :key="i">
+          <p class="">
+            <span style="display:inline-flex">
+              <!-- <input type="checkbox" :value=item.id :id="item.id" :checked="item.checked" @click="check($event)"> -->
+              <b-form role="form" onsubmit="return false">
+                <b-form-checkbox class="m-left-top" @click="test($event)">
+                </b-form-checkbox>
+              </b-form>
+              <b-avatar
+                class="d-inline-block profile-pic"
+                variant="primary"
+              ></b-avatar>
+              <h6 class="m-0  d-inline-block ml-2 username">
+                john wick
+                <p class="duration">3 hrs ago</p>
+              </h6>
+            </span>
+            <span class="float-right mt-1"> </span>
+          </p>
+
+          <p class="text">
+            In publishing and graphic design, Lorem ipsum is a placeholder text
+            commonly used to demonstrate the visual form of a document or a
+            typeface without relying on meaningful content. Lorem ipsum may be
+            used as a placeholder before final copy is available.
+          </p>
+        </b-col>
+
+        <b-col v-if="loader" class="load">
+          <b-spinner
+            style="width: 7rem; height: 7rem;"
+            variant="primary"
+          ></b-spinner>
+        </b-col>
+
+        <hr width="100%" />
       </b-row>
+
+      <!-- end of testing section -->
     </div>
   </div>
 </template>
@@ -92,6 +143,8 @@ export default {
   data: () => ({
     all: 24,
     selected: [],
+
+    testing: 0,
   }),
   beforeMount() {
     this.getNotifications();
@@ -148,6 +201,12 @@ export default {
         return;
       }
       this.selected.push(notification);
+    },
+
+    test(e) {
+      if (e.target.checked) {
+        console.log("checked");
+      }
     },
   },
 };

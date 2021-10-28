@@ -19,6 +19,7 @@
           :images="all()"
           :albumName="'notFound'"
           :showAlbum="showAlbum"
+          :type="type"
           v-else
         />
       </b-tab>
@@ -56,7 +57,6 @@ export default {
       hasLoadAlbum: false,
       hasLoadPicture: false,
       showAlbum: false,
-      allImage: [],
       strategy: null,
     };
   },
@@ -69,17 +69,15 @@ export default {
   computed: {
     ...mapGetters({
       getProfilePictures: "UserProfileOwner/getImages",
-      getBusinessPictures: "businessOwner/getImages",
+      getBusinessPictures: "businessOwner/getAllImages",
     }),
   },
 
   methods: {
     //function to get album
     all() {
-      if ("profile" == this.type) {
-        console.log("in profile");
-        const data = this.getProfilePictures
-          .filter((img) => img.media.length)
+      const wrapper = (data) => {
+        data.filter((img) => img.media.length)
           .map((img) => {
             let render = img.media.map((picture) => {
               return {
@@ -95,27 +93,8 @@ export default {
           });
 
         return _.flatten(data);
-      }
-
-      if ("business" == this.type) {
-        console.log("in business");
-        console.log(this.getBusinessPictures);
-        const data = this.getBusinessPictures
-          .filter((img) => img.media.length)
-          .map((img) => {
-            let render = img.media.map((picture) => {
-              return {
-                id: img.id,
-                content: "not data",
-                media: [{ path: picture }],
-              };
-            });
-
-            return render;
-          });
-        console.log(_.flatten(data));
-        return _.flatten(data);
-      }
+      };
+      return wrapper(this.strategy[this.type]().pictures)
     },
 
     getAlbums() {
@@ -142,7 +121,7 @@ export default {
     getImages() {
       try {
         const type = this.strategy[this.type]();
-
+        console.log(type);
         // if (!this.hasLoadPicture) {
         this.$store
           .dispatch(type.image, this.urlData)
@@ -168,12 +147,12 @@ export default {
       business: () => ({
         album: "businessOwner/getAlbums",
         image: "businessOwner/getImages",
-        allImage: this.getBusinessPictures,
+        pictures: this.getBusinessPictures,
       }),
       profile: () => ({
         album: "UserProfileOwner/getAlbums",
         image: "UserProfileOwner/getImages",
-        allImage: this.getProfilePictures,
+        pictures: this.getProfilePictures,
       }),
     };
 

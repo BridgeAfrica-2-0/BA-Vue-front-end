@@ -130,6 +130,10 @@ export default {
       return state.albums;
     },
 
+    getalbumImages(state) {
+      return state.albumImages
+    },
+
     getdetails(state) {
       return state.bdetails;
     },
@@ -143,6 +147,10 @@ export default {
 
     getImages(state) {
       return state.images;
+    },
+
+    getAllImages(state) {
+      return state.ownerPostImages;
     },
 
     getBusinessInfo(state) {
@@ -208,6 +216,16 @@ export default {
   },
   mutations: {
     //set media data
+    updateAlbum(state, payload) {
+      const newState = state.albums.map(album => (album.id == payload.id) ? Object.assign(album, { name: payload.name }) : album)
+      state.albums = newState
+    },
+
+    removeAlbum(state, uuid) {
+      console.log(state.albums)
+      state.albums = state.albums.filter(album => album.id != uuid)
+    },
+
 
     updateUserBusinessInsights(state, payload) {
       state.userData[0].business_insights = payload.businessInsights;
@@ -524,10 +542,10 @@ export default {
     },
 
 
-    getAlbumImages({ commit }, busineeId) {
-      return axios.get("business/album/show/" + busineeId).then(({ data }) => {
-        commit("setAlbumImages", data.data.media);
-        console.log(data);
+    getAlbumImages({ commit }, { businessId, albumId }) {
+      return axios.get("business/album/show/" + businessId + '/' + albumId).then(({ data }) => {
+        commit("setAlbumImages", data.data);
+
       });
     },
 
@@ -591,10 +609,8 @@ export default {
         });
     },
 
-    async createAlbum({ commit }, name) {
-      const res = await axios.post("business/album/create/" + this.url, {
-        name,
-      });
+    async createAlbum({ commit }, { id, data }) {
+      const res = await axios.post("business/album/create/" + id, data);
       commit("newAlbum", res.data);
     },
 
@@ -606,6 +622,14 @@ export default {
         }
       );
       commit("upAlbum", res.data);
+    },
+
+    async deletedAlbum({ commit }, { businessID, albumID }) {
+      return await axios.delete(`business/album/${albumID}`);
+    },
+
+    async updatedAlbum({ commit }, { id, name }) {
+      return await axios.post(`business/album/update/${id}`, { name });
     },
 
     async deleteAlbum({ commit }, name, album_id) {
@@ -696,68 +720,6 @@ export default {
         .catch((err) => {
           console.log("Something went wrong");
         });
-    },
-
-    // for images
-    async submitPost({ commit }, formData, headers) {
-      const res = await axios.post(
-        "business/store/media/" + this.url + "/" + this.album,
-        formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      );
-      commit("setSubmitPost", res.data);
-    },
-
-    async setProfilePic({ commit }, image_id, name) {
-      const res = await axios.post(
-        "business/album/edit/" + this.url + "/" + self.album_id,
-        {
-          name,
-        }
-      );
-      commit("setProfilePic", res.data);
-    },
-
-    async setCoverPic({ commit }, image_id, name) {
-      const res = await axios.post(
-        "business/make/coverpic/" + this.url + "/" + image_id,
-        {
-          name,
-        }
-      );
-      commit("setCoverPic", res.data);
-    },
-
-    async deleteImage({ commit }, image_id, name) {
-      const res = await axios.post(
-        "business/delete/media/" + this.url + "/" + image_id,
-        {
-          name,
-        }
-      );
-      commit("deleteImage", res.data);
-    },
-
-    async downloadPic({ commit }, image_id) {
-      const res = await axios.get(
-        "business/download/media/" + this.url + "/" + image_id
-      );
-      commit("downloadPic", res.data);
-
-      console.log("Something went wrong !!");
-      let sucData = {
-        state: true,
-        succes: "danger",
-        msg: "Something went wrong !!",
-      };
-      commit("setLoader", false);
-      commit("setSuccess", sucData);
-
-
     },
 
     // Getting the notifications
@@ -872,6 +834,30 @@ export default {
       const res = await axios.get("/api/v1/community/people-follower");
 
       commit("ppleFollowers", res.data);
+    },
+
+    async submitPost({ commit }, payload) {
+      return axios.post(`business/store/media/${payload.businessID}/${payload.albumID}`, payload.data);
+    },
+
+    async setProfilePic({ commit }, { businessID, albumID }) {
+      return axios.post(`business/make/logopic/${businessID}/${albumID}`);
+    },
+
+    async setCoverPic({ commit }, { businessID, albumID }) {
+      return axios.post(`business/make/coverpic/${businessID}/${albumID}`);
+    },
+
+    async deleteImage({ commit }, id) {
+      return axios.delete(`business/picture/${id}`);
+    },
+
+    async downloadPic({ commit }, id) {
+      return axios({
+        url: `business/download/media/${id}`,
+        method: "get",
+        responseType: "blob"
+      });
     },
   },
 };

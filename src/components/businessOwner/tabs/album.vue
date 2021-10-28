@@ -52,7 +52,7 @@
                 <li class="nav-item dropdown">
                   <b-dropdown
                     size="sm"
-                    class=" call-action"
+                    class="call-action"
                     variant="link"
                     toggle-class="text-decoration-none"
                     no-caret
@@ -175,7 +175,7 @@ import Images from "./images";
 import { mapActions } from "vuex";
 export default {
   components: { Images },
-  data: function() {
+  data: function () {
     return {
       showalbum: false,
       name: null,

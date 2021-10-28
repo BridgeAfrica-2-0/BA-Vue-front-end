@@ -4,14 +4,16 @@
   </div>
   <div class="row" v-else>
     <div class="container-fluid">
-      <p v-if="!allImages.length && !canUpload" style="font-size: 3rem">No items found</p>
+      <p v-if="!allImages.length && !canUpload" style="font-size: 3rem">
+        No items found
+      </p>
 
       <b-modal
         id="modalxl"
         ref="modalxl"
         centered
         hide-footer
-        title="Upoad Image"
+        :title="'image' == media ? 'Upload image' : 'Upload video'"
       >
         <br />
 
@@ -20,7 +22,6 @@
 
           <video controls v-else>
             <source :src="img_url" />
-            <source type="video/webm" />
           </video>
         </div>
 
@@ -74,13 +75,13 @@
               rounded
               :src="getFullMediaLink(im.path)"
               alt="media_img"
-              v-b-modal="`modal-${im.id}`"
+              v-b-modal="`modal-${image.id+index}`"
               v-bind="imageProps"
             ></b-img>
           </a>
           <video
             controls
-            v-else-if="typeOfMedia(im.path) == 'videos'"
+            v-else-if="typeOfMedia(im.path) == 'video'"
             class="card-img btn p-0 album-img"
           >
             <source :src="getFullMediaLink(im.path)" />
@@ -93,7 +94,7 @@
             :player-vars="playerVars"
           ></youtube>
 
-          <b-modal hide-footer :id="`modal-${im.id}`" title="Details" size="md">
+          <b-modal hide-footer :id="`modal-${image.id+index}`" title="Details" size="md">
             <img
               class="card-img"
               :src="getFullMediaLink(im.path)"
@@ -103,7 +104,10 @@
             <p class="my-4">{{ image.content }}</p>
           </b-modal>
 
-          <div class="mediadesc"  v-if="!['youtube'].includes(typeOfMedia(im.path))">
+          <div
+            class="mediadesc"
+            v-if="!['youtube'].includes(typeOfMedia(im.path))"
+          >
             <ul class="navbar-nav pull-right options">
               <li class="nav-item dropdown m-0 p-0">
                 <b-dropdown
@@ -175,6 +179,11 @@ export default {
       required: true,
     },
 
+    type: {
+      type: String,
+      required: true,
+    },
+
     hasLoadPicture: {
       type: Boolean,
       default: function () {
@@ -210,6 +219,8 @@ export default {
         autoplay: 1,
       },
       text: "",
+
+      pattern: null,
     };
   },
 
@@ -219,6 +230,26 @@ export default {
 
   created() {
     this.allImages = this.images;
+
+    this.pattern = {
+      profile: () => ({
+        submitPost: this.submitPost,
+        setProfilePicture: this.setProfilePicture,
+        setCoverPicture: this.setCoverPicture,
+        deleteImagePicture: this.deleteImagePicture,
+        onDownloadPic: this.onDownloadPic,
+        getAlbumImages: this.getAlbumImages,
+      }),
+      business: () => ({
+        submitPost: this.submitPostBusiness,
+        setProfilePicture: this.setProfilePictureBusiness,
+        setCoverPicture: this.setCoverPictureBusiness,
+        deleteImagePicture: this.deleteImagePictureBusiness,
+        onDownloadPic: this.onDownloadPicBusiness,
+        getAlbumImages: this.getAlbumImagesBusiness,
+      }),
+    };
+
     this.strategy = {
       jpeg: () => "image",
       jpg: () => "image",
@@ -248,8 +279,14 @@ export default {
       setCoverPicture: "UserProfileOwner/setCoverPic",
       deleteImagePicture: "UserProfileOwner/deleteImage",
       onDownloadPic: "UserProfileOwner/downloadPic",
-      //fetchImages: "UserProfileOwner/getImages",
       getAlbumImages: "UserProfileOwner/getAlbumImages",
+
+      submitPostBusiness: "businessOwner/submitPost",
+      setProfilePictureBusiness: "businessOwner/setProfilePic",
+      setCoverPictureBusiness: "businessOwner/setCoverPic",
+      deleteImagePictureBusiness: "businessOwner/deleteImage",
+      onDownloadPicBusiness: "businessOwner/downloadPic",
+      getAlbumImagesBusiness: "businessOwner/getAlbumImages",
     }),
 
     getYoutubeKey(path) {
@@ -316,7 +353,8 @@ export default {
     downloadPic(media) {
       //download(this.getFileExtension(media.path), `${v4()}.${this.getFileExtension(media.path)}`, media.type);
 
-      this.onDownloadPic(media.id)
+      this.pattern[this.type]()
+        .onDownloadPic(media.id)
         .then((response) => {
           var fileURL = window.URL.createObjectURL(new Blob([response.data]));
           var fileLink = document.createElement("a");
@@ -344,12 +382,13 @@ export default {
     },
 
     deleteImage(id, key) {
-      this.deleteImagePicture(id)
+      this.pattern[this.type]()
+        .deleteImagePicture(id)
         .then(() => {
           this.removePicture(id, key);
           this.flashMessage.show({
             status: "success",
-            message: "Album Deleted",
+            message:"Media Deleted",
           });
         })
         .catch((error) => {
@@ -357,14 +396,20 @@ export default {
           this.sending = false;
           this.flashMessage.show({
             status: "error",
-            message: "Unable to delete image",
+            message: "Unable to delete media",
           });
         });
     },
     //set an image as a cover photo
 
     setCoverPic(id) {
-      this.setCoverPic(id)
+      const data =
+        "business" == this.type
+          ? { businessID: this.$route.params.id, albumID: id }
+          : id;
+
+      this.pattern[this.type]()
+        .setCoverPicture(data)
         .then(() => {
           this.flashMessage.show({
             status: "success",
@@ -383,7 +428,12 @@ export default {
     //set image as profile pic
 
     setProfilePic(id) {
-      this.setProfilePicture(id)
+      const data =
+        "business" == this.type
+          ? { businessID: this.$route.params.id, albumID: id }
+          : id;
+      this.pattern[this.type]()
+        .setProfilePicture(data)
         .then(() => {
           this.flashMessage.show({
             status: "success",
@@ -409,13 +459,20 @@ export default {
       formData.append("media", this.profile_pic);
       formData.append("dob", this.text);
       let payload = {
-        id: albumId,
+        albumID: albumId,
+        businessID: "business" == this.type ? this.$route.params.id : null,
         data: formData,
       };
 
-      this.submitPost(payload)
+      const data =
+        "business" == this.type
+          ? { businessId: this.$route.params.id, albumId }
+          : null;
+      
+      this.pattern[this.type]()
+        .submitPost(payload)
         .then(() => {
-          this.getAlbumImages(albumId)
+          this.pattern[this.type]().getAlbumImages(data);
           this.loading = false;
           this.text = "";
           this.flashMessage.show({
@@ -434,10 +491,11 @@ export default {
               "Unable to submit a post. Size too large. It must be lower or equal to 25Mb",
           });
         });
+
+      this.$emit("reste");
     },
 
     selectMoviesOutsidePost(e) {
-      this.type = null;
       this.profile_pic = e.target.files[0];
       const file = e.target.files[0];
       this.img_url = URL.createObjectURL(file);

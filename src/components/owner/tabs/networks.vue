@@ -158,7 +158,6 @@
               </div>
             </div>
           </div>
-
           <b-row>
             <b-col md="6">
               <b-form-group
@@ -458,6 +457,7 @@
               </b-form-group>
             </b-col>
           </b-row>
+
           <b-alert :show="success.state" variant="info">
             {{ success.msg }}</b-alert
           >
@@ -535,6 +535,7 @@ export default {
       createdNetwork: {
         name: "",
         description: "",
+        neighbourhood: "",
         city: "",
         network_category: "",
         purpose: "",
@@ -551,6 +552,7 @@ export default {
       chosenNetwork: {
         name: "",
         description: "",
+        neighbourhood: "",
         city: "",
         network_category: "",
         purpose: "",
@@ -823,6 +825,7 @@ export default {
       fd.append("business_id", "1");
       fd.append("name", this.createdNetwork.name);
       fd.append("address", this.createdNetwork.address);
+      fd.append("neighbourhood", this.createdNetwork.neighbourhood);
       fd.append("city", this.createdNetwork.city);
       fd.append("country_id", 2);
       fd.append("primary_phone", this.createdNetwork.primary_phone);
@@ -866,6 +869,7 @@ export default {
         this.createdNetwork.image = "";
         this.createdNetwork.name = "";
         this.createdNetwork.address = "";
+        this.createdNetwork.neighbourhood = "";
         this.createdNetwork.description = "";
         this.createdNetwork.purpose = "";
         this.createdNetwork.special_needs = "";
@@ -886,6 +890,7 @@ export default {
       this.createdNetwork.network_category_id = network.network_category_id;
       this.createdNetwork.business_id = network.business_id;
       this.createdNetwork.address = network.address;
+      this.createdNetwork.neighbourhood = network.neighbourhood;
       this.createdNetwork.description = network.description;
       this.createdNetwork.purpose = network.purpose;
       this.createdNetwork.special_needs = network.special_needs;

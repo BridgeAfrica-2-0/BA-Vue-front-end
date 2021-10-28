@@ -853,12 +853,12 @@ export default {
     },
 
     submitPost() {
-      let loader = this.$loading.show({
-        container: this.$refs.loader,
-        canCancel: true,
-        onCancel: this.onCancel,
-        color: "#e75c18",
-      });
+      // let loader = this.$loading.show({
+      //   container: this.$refs.loader,
+      //   canCancel: true,
+      //   onCancel: this.onCancel,
+      //   color: "#e75c18",
+      // });
  
       let fileImage=null;
       
@@ -897,7 +897,7 @@ export default {
             blockClass: "custom-block-class",
             message: "Content successfuly uploaded",
           });
-          loader.hide();
+          // loader.hide();
           this.$refs["modal-xl"].hide();
     
         this.$store.commit("businessOwner/ownerPost",[]); 
@@ -919,7 +919,7 @@ export default {
               blockClass: "custom-block-class",
             });
 
-            loader.hide();
+            // loader.hide();
           } else {
             this.flashMessage.show({
               status: "error",
@@ -928,7 +928,7 @@ export default {
               blockClass: "custom-block-class",
             });
             console.log({ err: err });
-            loader.hide();
+            // loader.hide();
           }
         });
     },

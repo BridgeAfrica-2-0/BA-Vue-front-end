@@ -32,7 +32,7 @@
 						<p class="body-font-size">
 							{{ shipping_item.user_name }}. {{ shipping_item.phone }},{{
 								shipping_item.country_name
-							}}
+							}}, {{shipping_item.email}}
 						</p>
 						<p class="body-font-size">
 							{{ shipping_item.region_name }},{{

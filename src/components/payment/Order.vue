@@ -114,6 +114,7 @@
 						product_id: order_items[index].product_id,
 						quantity: order_items[index].quantity,
 						price: order_items[index].product_price,
+						business_id: order_items[index].business_id,
 						total_amount:
 							order_items[index].product_price * order_items[index].quantity,
 					};

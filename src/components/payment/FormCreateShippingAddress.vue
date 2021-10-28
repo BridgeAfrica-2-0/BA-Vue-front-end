@@ -32,6 +32,19 @@
 					required
 				></b-form-input>
 			</b-form-group>
+			<b-form-group
+				class="body-font-size"
+				id="input-group-email"
+				label="email :"
+				label-for="email-input"
+			>
+				<b-form-input
+					id="email-input"
+					v-model="form.email"
+					type="email"
+					required
+				></b-form-input>
+			</b-form-group>
 			<div class="row">
 				<div class="col">
 					<b-form-group
@@ -237,7 +250,7 @@
 							phone: this.form.phone,
 							city: this.form.city,
 							neighbourhood_id: 1,
-							email: "ideal@gmail.com",
+							email: this.form.email,
 						},
 					};
 

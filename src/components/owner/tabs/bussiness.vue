@@ -168,7 +168,7 @@
                               id=""
                               class="colorblack"
                               v-model="select_filterss"
-                              name="filters"
+                              :name="filters.name"
                             >
                               <b-form-checkbox
                               class="colorblack"

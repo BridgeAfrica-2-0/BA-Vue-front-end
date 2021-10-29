@@ -5,7 +5,7 @@
 
       <b-card-text>
         <p>
-          <b-icon icon="briefcase-fill" class="primary"></b-icon>  {{business_intro.category}}     
+          <b-icon icon="briefcase-fill" class="primary"></b-icon>  <span v-for="cat in business_intro.category" :key="cat.id" > {{cat.name}} </span>     
         </p>
         <p><b-icon icon="search" class="primary"></b-icon>  {{business_intro.keywords}} </p>
         <p>
@@ -39,14 +39,14 @@
       
 
           <GmapMap
-      :center='position'
+      :center='business_intro.position'
       :zoom='12'
       style='width:100%;  height: 250px;'
     >
       <GmapMarker
        
        
-        :position="position"
+        :position="business_intro.position"
        
       />
     </GmapMap>

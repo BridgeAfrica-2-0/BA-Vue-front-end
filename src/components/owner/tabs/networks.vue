@@ -25,7 +25,6 @@
         >
 
         
-
         
 
 
@@ -70,8 +69,9 @@
                         </router-link>
                       </strong>
                       <br />   
-                      <span v-if=" Array.isArray(network.assign_categories) ">  
-                      <span class="m-1" v-for=" cat in network.assign_categories" :key="cat "> {{cat}} </span> </span>
+                   
+                      
+                      <span class="m-1" v-for=" cat in network.categories" :key="cat "> {{cat}}  </span>
                       <br />
                       
                     {{ network.member_count }}  Community  <br />
@@ -648,6 +648,17 @@ export default {
       return err;
     },
 
+    netCategory(category){
+    let cat="";
+
+    category.forEach((item) => {
+        cat=cat+item+",";
+
+      });
+
+return cat;
+    },
+
     chooseNlogo() {
       document.getElementById("net_pic").click();
     },
@@ -1024,7 +1035,8 @@ export default {
       this.createdNetwork.network_category_id = network.network_category_id;
       this.createdNetwork.business_id = network.business_id;
       this.createdNetwork.address = network.address;
-      this.createdNetwork.neighbourhood = network.neighbourhood;
+      this.createdNetwork.neighbourhood = network.neighbourhood;    
+      this.createdNetwork.network_category =  this.netCategory( network.categories);
       this.createdNetwork.description = network.description;
       this.createdNetwork.purpose = network.purpose;
       this.createdNetwork.special_needs = network.special_needs;

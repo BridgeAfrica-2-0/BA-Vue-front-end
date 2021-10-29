@@ -65,6 +65,7 @@
           </a>
         </div>
       </div>
+
       <div v-for="(image, cmp) in allImages" :key="cmp">
         <div class="img-gall" v-for="(im, index) in image.media" :key="index">
           <a v-if="typeOfMedia(im.path) == 'image'"
@@ -75,7 +76,7 @@
               rounded
               :src="getFullMediaLink(im.path)"
               alt="media_img"
-              v-b-modal="`modal-${image.id+index}`"
+              v-b-modal="`modal-${im.id}`"
               v-bind="imageProps"
             ></b-img>
           </a>
@@ -94,7 +95,12 @@
             :player-vars="playerVars"
           ></youtube>
 
-          <b-modal hide-footer :id="`modal-${image.id+index}`" title="Details" size="md">
+          <b-modal
+            hide-footer
+            :id="`modal-${im.id}`"
+            title="Details"
+            size="md"
+          >
             <img
               class="card-img"
               :src="getFullMediaLink(im.path)"
@@ -139,7 +145,7 @@
                     v-if="!['video'].includes(typeOfMedia(im.path))"
                     >Make Cover Photo</b-dropdown-item
                   >
-                  <b-dropdown-item href="#" @click="deleteImage(im.id)"
+                  <b-dropdown-item href="#" @click="deleteImage(im.id,cmp)"
                     >Delete</b-dropdown-item
                   >
                 </b-dropdown>
@@ -339,6 +345,7 @@ export default {
     },
 
     removePicture(imageID, key) {
+      
       const newImage = this.allImages.map((im, index) => {
         if (index == key) {
           return im.media.filter((i) => i.id != imageID);
@@ -381,14 +388,14 @@ export default {
         });
     },
 
-    deleteImage(id, key) {
+    deleteImage(id,key) {
       this.pattern[this.type]()
         .deleteImagePicture(id)
         .then(() => {
           this.removePicture(id, key);
           this.flashMessage.show({
             status: "success",
-            message:"Media Deleted",
+            message: "Media Deleted",
           });
         })
         .catch((error) => {
@@ -467,8 +474,8 @@ export default {
       const data =
         "business" == this.type
           ? { businessId: this.$route.params.id, albumId }
-          : null;
-      
+          : albumId;
+
       this.pattern[this.type]()
         .submitPost(payload)
         .then(() => {
@@ -477,10 +484,13 @@ export default {
           this.text = "";
           this.flashMessage.show({
             status: "success",
-            message: "Profile Updated",
+            message: "Media Updated",
             blockClass: "custom-block-class",
           });
           this.$refs["modalxl"].hide();
+        })
+        .then(() => {
+         // this.$emit("reste");
         })
         .catch(() => {
           this.loading = false;
@@ -491,8 +501,6 @@ export default {
               "Unable to submit a post. Size too large. It must be lower or equal to 25Mb",
           });
         });
-
-      this.$emit("reste");
     },
 
     selectMoviesOutsidePost(e) {

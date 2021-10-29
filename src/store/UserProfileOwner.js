@@ -114,6 +114,7 @@ export default {
       commit("ownerPostImages", res.data);
     },
 
+    
     async getAlbumImages({ commit }, id) {
       const res = await axios.get(`profile/album/pictures/${id}`);
       commit("setAlbumImages", res.data.data);
@@ -145,7 +146,8 @@ export default {
     },
 
     async submitPost({ commit }, payload) {
-      return axios.post(`profile/upload/${payload.id}`, payload.data);
+      console.log(payload)
+      return axios.post(`profile/upload/${payload.albumID}`, payload.data);
     },
 
     async setProfilePic({ commit }, id) {

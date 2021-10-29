@@ -77,7 +77,8 @@ export default {
     //function to get album
     all() {
       const wrapper = (data) => {
-        data.filter((img) => img.media.length)
+        data
+          .filter((img) => img.media.length)
           .map((img) => {
             let render = img.media.map((picture) => {
               return {
@@ -94,24 +95,24 @@ export default {
 
         return _.flatten(data);
       };
-      return wrapper(this.strategy[this.type]().pictures)
+      return wrapper(this.strategy[this.type]().pictures);
     },
 
     getAlbums() {
       try {
         const type = this.strategy[this.type]();
 
-        // if (!this.hasLoadAlbum) {
-        this.$store
-          .dispatch(type.album, this.urlData)
-          .then(() => {
-            this.hasLoadAlbum = true;
-          })
-          .catch((err) => {
-            this.hasLoadAlbum = false;
-            console.log(err);
-          });
-        // }
+        if (!this.hasLoadAlbum) {
+          this.$store
+            .dispatch(type.album, this.urlData)
+            .then(() => {
+              this.hasLoadAlbum = true;
+            })
+            .catch((err) => {
+              this.hasLoadAlbum = false;
+              console.log(err);
+            });
+        }
       } catch (error) {
         console.log(error);
         throw new Error("Invalid type", this.type);
@@ -121,18 +122,18 @@ export default {
     getImages() {
       try {
         const type = this.strategy[this.type]();
-        console.log(type);
-        // if (!this.hasLoadPicture) {
-        this.$store
-          .dispatch(type.image, this.urlData)
-          .then(() => {
-            this.hasLoadPicture = true;
-          })
-          .catch((err) => {
-            this.hasLoadPicture = false;
-            console.log({ err: err });
-          });
-        // }
+
+        if (!this.hasLoadPicture) {
+          this.$store
+            .dispatch(type.image, this.urlData)
+            .then(() => {
+              this.hasLoadPicture = true;
+            })
+            .catch((err) => {
+              this.hasLoadPicture = false;
+              console.log({ err: err });
+            });
+        }
       } catch (error) {
         console.log(error);
         throw new Error("Invalid type", this.type);

@@ -137,7 +137,7 @@
         :albumName="album_name"
         :showAlbum="canViewAlbum"
         :canUpload="
-          ['profile_picture', 'cover_photo', 'logo', 'post'].includes(
+          ['profile_picture', 'Profile', 'Cover', 'cover_photo', 'logo', 'post'].includes(
             album_name
           ) ? false: true || canUpload
         "
@@ -284,7 +284,7 @@ export default {
           ? {
               data: { businessId: this.$route.params.id, albumId: album.id },
             }
-          : { data: { id: album.id } };
+          : { data: album.id };
 
       this.strategy[this.type]()
         .showalbum(credentials.data)
@@ -300,7 +300,7 @@ export default {
     },
 
     canBeUpdate(album) {
-      return ["profile_picture", "cover_photo", "logo", "post"].includes(
+      return ["profile_picture", 'Profile', 'Cover', "cover_photo", "logo", "post"].includes(
         album.name
       )
         ? false

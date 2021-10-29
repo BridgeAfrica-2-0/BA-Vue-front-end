@@ -214,7 +214,7 @@ const routes = [
   },
 
   {
-    path: "/follower/:id?",
+    path: "/profile/:id?",
     name: "Follower",
     component: Follower,
   },

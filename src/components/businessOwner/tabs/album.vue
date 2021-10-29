@@ -35,9 +35,9 @@
             :key="albums.id"
           >
             <a>
-              <span @click="showlbum(albums.id, albums.album_name)">
-                <img class="card-img album-img" :src="albums.cover[0]" alt="" />
-              </span>
+            <span @click="showlbum(albums.id, albums.album_name)">
+                <img class="card-img album-img" :src="albums.media[0]" alt="" />
+              </span>  
 
               <div class="botmediadess">
                 <p>
@@ -165,13 +165,13 @@
       </b-button>
       <span class="text-center ml-2 f-20"> {{ album_name }} </span>
 
-      <Images v-bind:album="album_id" />
+      <Images :album="album_id"  />
     </div>
   </div>
 </template>
 
 <script>
-import Images from "./images";
+import Images from "./image";
 import { mapActions } from "vuex";
 export default {
   components: { Images },
@@ -185,39 +185,8 @@ export default {
       album_name: null,
       edit_id: null,
       edit_name: null,
-      images: [
-        "https://placekitten.com/801/800",
-        "https://placekitten.com/802/800",
-        "https://placekitten.com/803/800",
-        "https://placekitten.com/804/800",
-        "https://placekitten.com/805/800",
-        "https://placekitten.com/806/800",
-        "https://placekitten.com/807/800",
-        "https://placekitten.com/808/800",
-        "https://placekitten.com/809/800",
-      ],
-      imagees: [
-        "https://i.wifegeek.com/200426/f9459c52.jpg",
-        "https://i.wifegeek.com/200426/5ce1e1c7.jpg",
-        "https://i.wifegeek.com/200426/5fa51df3.jpg",
-        "https://i.wifegeek.com/200426/663181fe.jpg",
-        "https://i.wifegeek.com/200426/2d110780.jpg",
-        "https://i.wifegeek.com/200426/e73cd3fa.jpg",
-        "https://i.wifegeek.com/200426/15160d6e.jpg",
-        "https://i.wifegeek.com/200426/d0c881ae.jpg",
-        "https://i.wifegeek.com/200426/a154fc3d.jpg",
-        "https://i.wifegeek.com/200426/71d3aa60.jpg",
-        "https://i.wifegeek.com/200426/d17ce9a0.jpg",
-        "https://i.wifegeek.com/200426/7c4deca9.jpg",
-        "https://i.wifegeek.com/200426/64672676.jpg",
-        "https://i.wifegeek.com/200426/de6ab9c6.jpg",
-        "https://i.wifegeek.com/200426/d8bcb6a7.jpg",
-        "https://i.wifegeek.com/200426/4085d03b.jpg",
-        "https://i.wifegeek.com/200426/177ef44c.jpg",
-        "https://i.wifegeek.com/200426/d74d9040.jpg",
-        "https://i.wifegeek.com/200426/81e24a47.jpg",
-        "https://i.wifegeek.com/200426/43e2e8bb.jpg",
-      ],
+      images: [],
+      imagees: [ ],
       index: 0,
     };
   },
@@ -260,9 +229,9 @@ export default {
     },
 
     ...mapActions({
-      createAlbum: "businessOwner/createAlbum",
-      updateAlbum: "businessOwner/updateAlbum",
-      deleteAlbum: "businessOwner/deleteAlbum",
+    createAlbumm: "businessOwner/createAlbum",       
+      updateAlbumm: "businessOwner/updateAlbum",
+      deleteAlbumm: "businessOwner/deleteAlbum",
       getAlbums: "businessOwner/getAlbums",
     }),
 
@@ -273,12 +242,13 @@ export default {
         onCancel: this.onCancel,
         color: "#e75c18",
       });
-      this.createAlbum(this.name)
+      this.createAlbumm({name:this.name, id:this.url })
         .then((response) => {
           this.flashMessage.show({
             status: "success",
             message: "Album Created",
           });
+          this.getAlbums(this.url);
           loader.hide();
         })
         .catch((err) => {
@@ -301,20 +271,22 @@ export default {
         });
     },
 
-    updateAlbum() {
+    updateAlbum(album ) {
       let loader = this.$loading.show({
         container: this.fullPage ? null : this.$refs.creatform,
         canCancel: true,
         onCancel: this.onCancel,
         color: "#e75c18",
       });
-      this.updateAlbum(this.edit_name, this.album_id)
+      this.updateAlbumm({name:this.edit_name,url:this.url, id:album})
         .then(() => {
           this.flashMessage.show({
             status: "success",
             message: "Album Updated",
           });
+          this.getAlbums(this.url);
           loader.hide();
+            this.$refs["editalbum"].hide(); 
         })
         .catch((err) => {
           this.sending = false;
@@ -336,19 +308,21 @@ export default {
         });
     },
 
-    deleteAlbum() {
+    deleteAlbum(album) {
+     
       let loader = this.$loading.show({
         container: this.fullPage ? null : this.$refs.creatform,
         canCancel: true,
         onCancel: this.onCancel,
         color: "#e75c18",
       });
-      this.deleteAlbum(this.name, this.album_id)
+      this.deleteAlbumm( { url:this.url, id:album})
         .then(() => {
           this.flashMessage.show({
             status: "success",
             message: "Album Deleted",
           });
+          this.getAlbums(this.url);
           loader.hide();
         })
         .catch((err) => {
@@ -371,11 +345,10 @@ export default {
         });
     },
   },
-  mounted() {
-    this.url = this.$route.params.id;
-  },
+  
   beforeMount() {
-    this.getAlbums();
+    this.url = this.$route.params.id;
+    this.getAlbums(this.url);
   },
   computed: {
     albums() {
@@ -385,7 +358,17 @@ export default {
 };
 </script>
 
+
 <style>
+.call-action {
+  border-radius: 50%;
+  background: gray;
+  height: 30px !important;
+  width: 30px !important;
+  font-weight: 50px !important;
+  text-align: center;
+  padding-right: 35px !important;
+}
 .text-design {
   align-items: first baseline;
 }
@@ -394,7 +377,28 @@ export default {
   color: black;
 }
 
+.botmediadess {
+  text-align: center;
+  bottom: -5%;
+  width: 100%;
+  font-size: 20px;
+}
+
 @media (min-width: 960px) {
+  .album-img {
+    height: 300px !important;
+    object-fit: contain !important;
+  }
+
+  .drag-textt {
+    height: 290px !important;
+    padding-top: 95px;
+  }
+
+  .f-20 {
+    font-size: 20px;
+  }
+
   .img-gall {
     background-size: contain;
     cursor: pointer;
@@ -402,7 +406,7 @@ export default {
     border-radius: 3px;
   }
 
-  .image-wrap {
+  .image-wrapp {
     border: 4px dashed #e75c18;
     position: relative;
 
@@ -469,6 +473,16 @@ export default {
 }
 
 @media only screen and (min-width: 768px) and (max-width: 1331px) {
+  .album-img {
+    height: 300px !important;
+    object-fit: contain !important;
+  }
+
+  .drag-textt {
+    height: 290px !important;
+    padding-top: 95px;
+  }
+
   .img-gall {
     background-size: contain;
     cursor: pointer;
@@ -507,6 +521,16 @@ export default {
 }
 
 @media (max-width: 762px) {
+  .album-img {
+    height: 200px !important;
+    object-fit: contain !important;
+  }
+
+  .drag-textt {
+    height: 190px !important;
+    padding-top: 55px;
+  }
+
   .img-gall {
     background-size: contain;
     cursor: pointer;

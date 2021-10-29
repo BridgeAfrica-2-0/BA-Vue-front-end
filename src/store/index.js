@@ -4,7 +4,9 @@ import Vuex from "vuex";
 import auth from "./auth";
 import businessOwner from "./businessOwner";
 import networkDetails from "./networkDetails";
+import dashboard from "./dashboard";
 import dashboardcommunity from "./dashboardcommunity";
+import networkProfileMedia from "./networkProfileMedia";
 import ProfileAndBusinessDetails from "./ProfileAndBusinessDetails";
 import businessFollowers from "./businessFollowers";
 import market from "./market";
@@ -25,6 +27,8 @@ export default new Vuex.Store({
     dashboardcommunity,
     ProfileAndBusinessDetails,
     businessOwner,
+    networkProfileMedia,
+    dashboard,
     hotbusiness,
     profile,
     networkProfile,

@@ -122,11 +122,12 @@ import "@/assets/css/bootstrap.css";
 Vue.use(BootstrapVue);
 Vue.use(IconsPlugin);
 
-//import InfiniteLoading from "vue-infinite-loading";
+import InfiniteLoading from 'vue-infinite-loading';
+import VueEasyLightbox from 'vue-easy-lightbox'
 
-Vue.use(InfiniteLoading, {
-  /* options */
-});
+
+Vue.use(VueEasyLightbox);
+Vue.use(InfiniteLoading, { /* options */ });
 
 Vue.use(VueGoogleMaps, {
   load: {
@@ -152,9 +153,6 @@ Vue.use(VueAgile);
 
 import CoolLightBox from 'vue-cool-lightbox'
 import 'vue-cool-lightbox/dist/vue-cool-lightbox.min.css'
-
-Vue.use(CoolLightBox)
-
 
 Vue.component("v-select", vSelect);
 

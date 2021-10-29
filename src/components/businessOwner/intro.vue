@@ -4,7 +4,7 @@
       <div style="float:right" class="edit" @click="editContact">
         <b-icon icon="pencil-fill" variant="primary"></b-icon>
       </div>
-      <h6 class="mb-2"><b>Intro</b></h6>
+      <h6 class="mb-2"><b>{{ $t("businessowner.Intro") }}</b></h6>
 
       <b-card-text>
         <p>
@@ -17,15 +17,15 @@
         </p>
         <p>
           <b-icon icon="geo-alt-fill" class="primary icon-size"></b-icon>
-          Mokolo, Yaounde, Cameroon
+          {{ $t("businessowner.Mokolo") }}, {{ $t("businessowner.Yaounde") }}, {{ $t("businessowner.Cameroon") }}
         </p>
         <p>
           <b-icon icon="link" class="primary icon-size"></b-icon>
-          www.business.com
+          {{ $t("businessowner.www_business_com") }}
         </p>
         <p>
           <b-icon icon="people-fill" class="primary icon-size"></b-icon>
-          {{ business_intro.community }} Community
+          {{ business_intro.community }} {{ $t("businessowner.Community") }}
         </p>
         <p>
           <b-icon icon="telephone-fill" class="primary icon-size"></b-icon>
@@ -37,13 +37,13 @@
         </p>
         <p>
           <b-icon icon="clock" class="primary icon-size"></b-icon>
-          <b-link> Open now</b-link>
+          <b-link> {{ $t("businessowner.Open_now") }}</b-link>
           <br />
           <b-dropdown size="sm" variant="transperent">
             <template #button-content>
-              10:00AM - 7:00PM
+              {{ $t("businessowner.10_00AM_7_00PM") }}
             </template>
-            <b-dropdown-item> 10:00AM - 7:00PM</b-dropdown-item>
+            <b-dropdown-item> {{ $t("businessowner.10_00AM_7_00PM") }} </b-dropdown-item>
           </b-dropdown>
         </p>
       </b-card-text>
@@ -60,7 +60,7 @@
     <b-modal
       id="bv-modal-example2"
       hide-footer
-      title="Edit Address"
+      :title="$t('businessowner.Edit_Address')"
       v-model="edit2"
       size="lg"
     >
@@ -68,12 +68,12 @@
         {{ blec }}
         <b-row>
           <div class="form-group col-md-6">
-            <label for="username">Busness Name:</label><br />
+            <label for="username">{{ $t("businessowner.Busness_Name") }}:</label><br />
             <input
               type="text"
               name="name"
               id="name"
-              placeholder="Busness Name"
+              :placeholder="$t('businessowner.Business_Name')"
               class="form-control"
               :state="validateState('name')"
               v-model="form.name"
@@ -81,7 +81,7 @@
           </div>
 
           <div class="form-group col-md-6">
-            <label for="alias">Category:</label><br />
+            <label for="alias">{{ $t("businessowner.Category") }}:</label><br />
 
             <b-form-select
               :options="categories"
@@ -129,7 +129,7 @@
 
         <b-row>
           <div class="form-group col-md-6">
-            <label for="username">Keywords</label><br />
+            <label for="username">{{ $t("businessowner.Keywords") }}</label><br />
             <div class="col-md-12 pl-0 pr-0">
               {{ form.keywords }}
 
@@ -137,7 +137,7 @@
                 type="text"
                 name="alias"
                 id="alias"
-                placeholder="Enter your Keywords"
+                :placeholder="$t('businessowner.Enter_your_Keywords')"
                 class="form-control"
                 v-model="form.keywords"
               />
@@ -145,7 +145,7 @@
           </div>
 
           <div class="form-group col-md-6">
-            <label for="country" class="username"> Country :</label><br />
+            <label for="country" class="username"> {{ $t("businessowner.Country") }} :</label><br />
 
             <country-select
               v-model="form.country"
@@ -158,7 +158,7 @@
 
         <b-row>
           <div class="form-group col-md-6">
-            <label for="country" class="username"> Region :</label><br />
+            <label for="country" class="username"> {{ $t("businessowner.Region") }} :</label><br />
 
             <region-select
               v-model="form.region"
@@ -208,7 +208,7 @@
 -->
 
         <b-button class="mt-3 btn-block" variant="primary" @click="validate">
-          Modify
+          {{ $t("businessowner.Modify") }}
         </b-button>
       </b-form>
     </b-modal>

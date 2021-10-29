@@ -5,7 +5,7 @@
         <b-col>
           <div class="b-bottomn f-left">
             <input @click="selectall" type="checkbox" />
-            Select All
+            {{ $t("businessowner.Select_All") }}
           </div>
         </b-col>
         <b-col>
@@ -15,14 +15,14 @@
               variant="primary"
               class="a-button-l duration"
             >
-              Mark as Read</b-button
+              {{ $t("businessowner.Mark_as_Read") }}</b-button
             >
             <b-button
               @click="deleteAll(selected)"
               variant="primary"
               class="a-button-l duration ml-1"
             >
-              Delete</b-button
+              {{ $t("businessowner.Delete") }}</b-button
             >
           </div>
         </b-col>
@@ -48,8 +48,8 @@
                 src="https://business.bridgeafrica.info/assets/img/team/3.png"
               ></b-avatar>
               <h6 class="m-0  d-inline-block ml-2 username">
-                Mapoure Agrobusiness
-                <p class="duration">1hr</p>
+                {{ $t("businessowner.Mapoure_Agrobusiness") }}
+                <p class="duration">{{ $t("businessowner.1hr") }}</p>
               </h6>
             </span>
             <span class="float-right mt-1"> </span>
@@ -72,7 +72,7 @@
           ></b-spinner>
         </b-col>
         <b-col v-if="!getNotificationsStore && !loader" class="load">
-          <p>No notifications to show !!</p>
+          <p>{{ $t("businessowner.No_notifications_to_show") }}</p>
 
           <hr width="100%" />
         </b-col>

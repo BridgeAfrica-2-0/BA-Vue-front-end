@@ -3,7 +3,7 @@
   <div >
     <div class="">
       <div class="">
-        <h5 class="a-text"><b-icon-gear></b-icon-gear> Business Settings</h5>
+        <h5 class="a-text"><b-icon-gear></b-icon-gear> {{ $t("businessowner.Business_Settings") }}</h5>
       </div>
       <hr class="solid">
 
@@ -13,7 +13,7 @@
           <b-tabs pills  :vertical="vertical" :card="card" v-model="tabIndex"  class="itzlala" >
             <b-tab active>
               <template slot="title" class="t-color">
-                <h6 class="t-color">General</h6>
+                <h6 class="t-color">{{ $t("businessowner.General") }}</h6>
               </template>
 
               <b-card-text> <General /> </b-card-text
@@ -25,7 +25,7 @@
 
              <b-tab active>
               <template slot="title" class="t-color">      
-                <h6 class="t-color"> Notifications</h6>
+                <h6 class="t-color"> {{ $t("businessowner.Notifications") }}</h6>
               </template>
 
               <b-card-text> <Notification /> </b-card-text
@@ -42,14 +42,14 @@
 
             <b-tab>                       
               <template slot="title" class="t-color">
-                <h6 class="t-color">Business Info</h6>
+                <h6 class="t-color">{{ $t("businessowner.Business_Info") }}</h6>
               </template>
               <b-card-text> <Info /> </b-card-text
             ></b-tab>
 
             <b-tab>
               <template slot="title" class="t-color">
-                <h6 class="t-color">Business Roles</h6>
+                <h6 class="t-color">{{ $t("businessowner.Business_Roles") }}</h6>
               </template>
               <b-card-text> <Roles /> </b-card-text
             ></b-tab>
@@ -59,7 +59,7 @@
            
             <b-tab>
               <template slot="title" class="t-color">
-                <h6 class="t-color"> Insight </h6>
+                <h6 class="t-color"> {{ $t("businessowner.Insight") }} </h6>
               </template>
               <b-card-text> <Insight /> </b-card-text
             ></b-tab>
@@ -69,7 +69,7 @@
   
             <b-tab>
               <template slot="title" class="t-color">
-                <h6 class="t-color"> Pending Post </h6>
+                <h6 class="t-color"> {{ $t("businessowner.Pending_Post") }} </h6>
               </template>
               <b-card-text> <Pending /> </b-card-text
             ></b-tab>
@@ -81,7 +81,7 @@
 
             <b-tab>
               <template slot="title" class="t-color">
-                <h6 class="t-color">Payment</h6>
+                <h6 class="t-color">{{ $t("businessowner.Payment") }}</h6>
               </template>
 
               <b-card-text> <Payment /> </b-card-text
@@ -89,14 +89,14 @@
 
             <b-tab>
               <template slot="title" class="t-color">
-                <h6 class="t-color">Website</h6>
+                <h6 class="t-color">{{ $t("businessowner.Website") }}</h6>
               </template>
 
               <b-card-text> <Website /> </b-card-text
             ></b-tab>
             <b-tab>
               <template slot="title" class="t-color">
-                <h6 class="t-color">Blocking</h6>
+                <h6 class="t-color">{{ $t("businessowner.Blocking") }}</h6>
               </template>
 
               <b-card-text> <Blocking /> </b-card-text
@@ -104,8 +104,8 @@
           </b-tabs>
 
 
-           <b-button @click="tabIndex=1">Previous</b-button>
-        <b-button @click="tabIndex=4">Next</b-button>
+           <b-button @click="tabIndex=1">{{ $t("businessowner.Previous") }}</b-button>
+        <b-button @click="tabIndex=4">{{ $t("businessowner.Next") }}</b-button>
           
         </div>
       </div>

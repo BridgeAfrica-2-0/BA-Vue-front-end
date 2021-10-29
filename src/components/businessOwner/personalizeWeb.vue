@@ -1,7 +1,7 @@
 <template>
   <div>
     <b-card class="mt-4" header-tag="header" footer-tag="footer">
-      <h6 class="mb-2 "><b>Your personalized website</b></h6>
+      <h6 class="mb-2 "><b>{{ $t("businessowner.Your_personalized_website") }}</b></h6>
 
       <fas-icon class="view" :icon="['fas', 'eye']" />
       <b-img

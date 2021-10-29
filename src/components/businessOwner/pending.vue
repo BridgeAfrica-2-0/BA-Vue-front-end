@@ -24,10 +24,10 @@
                   <b-icon icon="three-dots-vertical" font-scale="1"></b-icon>
                 </template>
                 <b-dropdown-item href="#" @click="approvePost">
-                  Approve</b-dropdown-item
+                  {{ $t("businessowner.Approve") }}</b-dropdown-item
                 >
                 <b-dropdown-item href="#" @click="disapprovePost">
-                  Un Approved
+                  {{ $t("businessowner.Un_Approved") }}
                 </b-dropdown-item>
               </b-dropdown>
             </div>

@@ -14,7 +14,7 @@
         </b-col>
         <b-col cols="9" md="11" class="p-0 m-0 pr-3">
           <input
-            placeholder="Post a business update"
+            :placeholder="$t('businessowner.Post_a_business_update')"
             v-b-modal.modal-xl
             class="comment"
             type="text"
@@ -38,7 +38,7 @@
             <!-- Add Movie -->
             <b-col cols="5" class="text-right m-0 p-0">
               <b-button
-                title="Add Movie"
+                :title="$t('businessowner.Add_Movie')"
                 size="sm"
                 variant="outline-primary"
                 @click="$refs.movie.click()"
@@ -49,7 +49,7 @@
                   :icon="['fas', 'photo-video']"
                   size="lg"
                 />
-                <span class="username"> Photo/ Video </span>
+                <span class="username"> {{ $t("businessowner.PhotoVideo") }} </span>
               </b-button>
             </b-col>
             <!-- Attach File-->
@@ -63,20 +63,20 @@
                 ref="document2"
               />
               <b-button
-                title="Add Hyperlink"
+                :title="$t('businessowner.Add_Hyperlink')"
                 size="sm"
                 variant="outline-primary"
                 @click="$refs.document2.click()"
                 class="post-btn"
               >
                 <fas-icon class="icons" :icon="['fas', 'file']" size="lg" />
-                <span class="username"> Attach File </span>
+                <span class="username"> {{ $t("businessowner.Attach_File") }} </span>
               </b-button>
             </b-col>
             <!-- Post-->
             <b-col cols="3" class="text-right p-0 m-0">
               <b-button
-                title="Add Hyperlink"
+                :title="$t('businessowner.Add_Hyperlink')"
                 size="sm"
                 variant="outline-primary"
                 @click="createPost_"
@@ -87,7 +87,7 @@
                   :icon="['fas', 'paper-plane']"
                   size="lg"
                 />
-                <span class="username"> Post </span>
+                <span class="username"> {{ $t("businessowner.Post") }} </span>
               </b-button>
             </b-col>
           </b-row>
@@ -112,7 +112,7 @@
             ref="modal-edit"
             centered
             hide-footer
-            title="Update Post"
+            :title="$t('businessowner.Update_Post')"
             @hidden="resetPostData"
           >
             <b-row ref="loader">
@@ -125,7 +125,7 @@
                 ></b-avatar>
               </b-col>
               <b-col cols="9" class="pt-2" style="margin-left:-5px">
-                <h5 class="m-0 font-weight-bolder">{{}} profileNamePost</h5>
+                <h5 class="m-0 font-weight-bolder">{{}} {{ $t("businessowner.profileNamePost") }}</h5>
               </b-col>
             </b-row>
             <b-row>
@@ -136,7 +136,7 @@
                   <b-form-textarea
                     id="textarea-small"
                     class="mb-2 border-none"
-                    placeholder="Post a business update"
+                    :placeholder="$t('businessowner.Post_a_business_update')"
                     v-model="edit_description"
                     :class="{
                       'is-valid': createPost.postBusinessUpdate !== '',
@@ -169,7 +169,7 @@
                       />
 
                       <b-button
-                        title="Add Movie"
+                        :title="$t('businessowner.Add_Movie')"
                         size="sm"
                         variant="outline-primary"
                         @click="$refs.movies.click()"
@@ -181,7 +181,7 @@
                         />
                       </b-button>
                       <b-button
-                        title="Add Hyperlink"
+                        :title="$t('businessowner.Add_Hyperlink')"
                         size="sm"
                         variant="outline-primary"
                         @click="$refs.document.click()"
@@ -207,7 +207,7 @@
                     class="float-right"
                     @click="deleteItem(hyperlink.fileName)"
                   >
-                    delete
+                    {{ $t("businessowner.delete") }}
                   </span>
                 </div>
 
@@ -250,7 +250,7 @@
                 <span>
                   <b-button @click="updatePost" variant="primary" block
                     ><b-icon icon="cursor-fill" variant="primary"></b-icon>
-                    Publish</b-button
+                    {{ $t("businessowner.Publish") }}</b-button
                   >
                 </span>
               </b-col>
@@ -263,7 +263,7 @@
             ref="modal-xl"
             centered
             hide-footer
-            title="Create Post"
+            :title="$t('businessowner.Create_Post')"
             @hidden="resetPostData"
           >
             <b-row ref="loader">
@@ -276,7 +276,7 @@
                 ></b-avatar>
               </b-col>
               <b-col cols="9" class="pt-2" style="margin-left:-5px">
-                <h5 class="m-0 font-weight-bolder">{{}} profileNamePost</h5>
+                <h5 class="m-0 font-weight-bolder">{{}} {{ $t("businessowner.profileNamePost") }}</h5>
               </b-col>
             </b-row>
             <b-row>
@@ -287,7 +287,7 @@
                   <b-form-textarea
                     id="textarea-small"
                     class="mb-2 border-none"
-                    placeholder="Post a business update"
+                    :placeholder="$t('businessowner.Post_a_business_update')"
                     v-model="createPost.postBusinessUpdate"
                     :class="{
                       'is-valid': createPost.postBusinessUpdate !== '',
@@ -298,7 +298,7 @@
                   <i></i>
                 </div>
                 <div class="bordder">
-                  <span class="float-left"> Add to Your Post </span>
+                  <span class="float-left"> {{ $t("businessowner.Add_to_Your_Post") }} </span>
                   <span class="float-right">
                     <b-button-group size="sm" class="">
                       <input id="video" type="file" hidden />
@@ -320,7 +320,7 @@
                       />
 
                       <b-button
-                        title="Add Movie"
+                        :title="$t('businessowner.Add_Movie')"
                         size="sm"
                         variant="outline-primary"
                         @click="$refs.movies.click()"
@@ -332,7 +332,7 @@
                         />
                       </b-button>
                       <b-button
-                        title="Add Hyperlink"
+                        :title="$t('businessowner.Add_Hyperlink')"
                         size="sm"
                         variant="outline-primary"
                         @click="$refs.document.click()"
@@ -358,7 +358,7 @@
                     class="float-right"
                     @click="deleteItem(hyperlink.fileName)"
                   >
-                    delete
+                    {{ $t("businessowner.delete") }}
                   </span>
                 </div>
 
@@ -383,7 +383,7 @@
                 <span>
                   <b-button @click="submitPost" variant="primary" block
                     ><b-icon icon="cursor-fill" variant="primary"></b-icon>
-                    Publish</b-button
+                    {{ $t("businessowner.Publish") }}</b-button
                   >
                 </span>
               </b-col>
@@ -432,7 +432,7 @@
                       @click="editPost(item)"
                     >
                       <b-icon icon="pencil" aria-hidden="true"></b-icon>
-                      Edit
+                      {{ $t("businessowner.Edit") }}
                     </b-dropdown-item-button>
 
                     <b-dropdown-item-button
@@ -440,7 +440,7 @@
                       @click="deletePost(item)"
                     >
                       <b-icon icon="trash-fill" aria-hidden="true"></b-icon>
-                      Delete
+                      {{ $t("businessowner.Delete") }}
                     </b-dropdown-item-button>
                   </b-dropdown>
                 </span>
@@ -513,7 +513,7 @@
               ></b-avatar>
             </b-col>
             <b-col cols="9" md="11" class="p-0 m-0 pr-3">
-              <input placeholder="Post a Comment" class="comment" type="text" />
+              <input :placeholder="$t('businessowner.Post_a_Comment')" class="comment" type="text" />
 
               <fas-icon
                 class="primary send-cmt"

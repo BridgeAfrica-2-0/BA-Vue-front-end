@@ -119,7 +119,7 @@
    </div>
 
 <b-button class=" float-right see-all">
-      See All
+      {{ $t("businessowner.See_All") }}
     </b-button>
 
    
@@ -203,7 +203,7 @@
 
 
             
-            <b-modal id="logomodal" ref="logomodal"  @ok="submitLogo"  title="Upload Your Logo">
+            <b-modal id="logomodal" ref="logomodal"  @ok="submitLogo"  :title="$t('businessowner.Upload_Your_Logo')">
               <div class="w3-container">
 
                 <div id="preview">
@@ -259,7 +259,7 @@
 
 
             
-            <b-modal id="coverphoto" ref="coverphoto" @ok="submitCover" title="Upload  Cover photo">
+            <b-modal id="coverphoto" ref="coverphoto" @ok="submitCover" :title="$t('businessowner.Upload_Cover_photo')">
               <div class="w3-container">
 
 
@@ -320,7 +320,7 @@
     
 
                   <b-dropdown-item  @click="selectCover" 
-                    > Change Cover</b-dropdown-item
+                    > {{ $t("businessowner.Change_Cover") }}</b-dropdown-item
                   >
 
 
@@ -331,7 +331,7 @@
 
  -->
 
-                  <b-dropdown-item>View As</b-dropdown-item> 
+                  <b-dropdown-item>{{ $t("businessowner.View_As") }}</b-dropdown-item> 
                 </b-dropdown>
 
                 

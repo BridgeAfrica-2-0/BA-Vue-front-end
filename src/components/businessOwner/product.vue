@@ -37,7 +37,7 @@
           <b-col cols="12" md="6">
             <b-form-group
               id="input-group-1"
-              label="Product Name"
+              :label="$t('businessowner.Product_Name')"
               label-for="input-1"
               label-size="sm"
             >
@@ -51,7 +51,7 @@
 
             <b-form-group
               id="input-group-1"
-              label="Product Description"
+              :label="$t('businessowner.Product_Description')"
               label-for="input-1"
               label-size="sm"
             >
@@ -78,7 +78,7 @@
 
         <b-form-group
           id="input-group-1"
-          label="product Price"
+          :label="$t('businessowner.Product_Price')"
           label-for="input-1"
           label-size="sm"
         >
@@ -96,7 +96,7 @@
 
         <b-form-group
           id="conditions"
-          label="Conditions"
+          :label="$t('businessowner.Conditions')"
           label-for="input-1"
           label-size="sm"
         >

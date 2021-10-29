@@ -278,6 +278,8 @@ export default {
     setLoader(state, payload) {
       state.loader = payload;
     },
+
+    //setsuccess
     setSuccess(state, payload) {
       state.success = payload;
     },
@@ -364,6 +366,16 @@ export default {
     },
 
 
+
+    loadMore({ commit }, url) {
+
+      return axios.get(url)
+        .then((data) => {
+          return data;
+        });
+
+    },
+
     async loadUserBusinessAbout(context, payload) {
       console.log(payload, "load user Business About start +++++");
       let response_ = null;
@@ -405,12 +417,6 @@ export default {
         });
       return response_;
     },
-
-
-
-
-
-
 
 
     async updateUserBusinessAbout(context, payload) {
@@ -470,8 +476,6 @@ export default {
         });
       return response_;
     },
-
-
 
     async loadUserBusinessInsight(context, payload) {
       console.log(payload);
@@ -541,23 +545,24 @@ export default {
       return response_;
     },
 
-
     getAlbumImages({ commit }, { businessId, albumId }) {
       return axios.get("business/album/show/" + businessId + '/' + albumId).then(({ data }) => {
         commit("setAlbumImages", data.data);
-
+        console.log(data);
       });
     },
 
     getImages({ commit }, busineeId) {
       return axios.get("business/post/media/" + busineeId).then(({ data }) => {
         commit("setImages", data.data);
+        console.log(data);
       });
     },
 
     getAlbums({ commit }, busineeId) {
       return axios.get("business/album/index/" + busineeId).then(({ data }) => {
         commit("setAlbums", data.data);
+        console.log(data);
       });
     },
 
@@ -591,6 +596,10 @@ export default {
         });
     },
 
+    async createAlbum({ commit }, { id, data }) {
+      const res = await axios.post("business/album/create/" + id, data);
+      commit("newAlbum", res.data);
+    },
     CommunityPeople({ commit }, businessId) {
       return axios
         .get("business/community/people/" + businessId)
@@ -600,28 +609,19 @@ export default {
         });
     },
 
-    businessCommunityTotal({ commit }, businessId) {
-      return axios
-        .get("business/community/total/" + businessId)
-        .then(({ data }) => {
-          commit("setCommunityTotal", data.data);
-          console.log(data);
-        });
-    },
 
-    async createAlbum({ commit }, { id, data }) {
-      const res = await axios.post("business/album/create/" + id, data);
-      commit("newAlbum", res.data);
-    },
 
-    async updateAlbum({ commit }, edit_name, album_id) {
-      const res = await axios.post(
-        "business/album/update/" + this.url + "/" + album_id,
+    updateAlbum({ commit }, payload) {
+      return axios.post(
+        "business/album/update/" + payload.url + "/" + payload.id,
         {
-          edit_name,
+          name: payload.name,
         }
-      );
-      commit("upAlbum", res.data);
+      ).then(({ data }) => {
+
+        commit("upAlbum", data.data);
+        console.log(data);
+      });
     },
 
     async deletedAlbum({ commit }, { businessID, albumID }) {
@@ -637,10 +637,19 @@ export default {
         "business/album/edit/" + this.url + "/" + album_id,
         { name }
       );
-      commit("delAlbum", res.data);
     },
 
-    // temporal signin to get token for developement purpose
+
+    businessCommunityTotal({ commit }, businessId) {
+      return axios
+        .get("business/community/total/" + businessId)
+        .then(({ data }) => {
+          commit("setCommunityTotal", data.data);
+          console.log(data);
+        });
+    },
+
+
     async signIn() {
       axios
         .post("/user/login", {
@@ -651,6 +660,7 @@ export default {
           localStorage.setItem("access_token", res.data.data.accessToken);
         });
     },
+
     // Get networks from the backend
     async getNetworks({ commit }) {
       let sucData = [];
@@ -687,7 +697,7 @@ export default {
         });
     },
 
-    // Add network to the database but doesn't work correctly for now
+
     async addNetwork({ commit }, newNetwork) {
       console.log(newNetwork);
       axios
@@ -705,6 +715,7 @@ export default {
     },
     //delete network
     async deleteNetwork() { },
+
     // Edit a network
     async editNetwork({ dispatch, commit }, editedNetwork) {
       commit("setLoader", true);
@@ -776,7 +787,7 @@ export default {
         objId.id = element;
         items.ids.push(objId);
       });
-      await axios.post("notification/deleteAll", items).then(() => {
+      await axios.post("/notification/deleteAll", items).then(() => {
         dispatch("getNotifications");
       });
     },
@@ -796,7 +807,7 @@ export default {
 
     // Approve pending post
     async approvePost({ commit }, post) {
-      const res = await axios.post("/api/v1/business/post-approve", post);
+      const res = await axios.post("/business/post-approve", post);
 
       commit("Approve", res.data);
     },
@@ -824,14 +835,14 @@ export default {
 
     //Getting business people following
     async peopleFollowing({ commit }) {
-      const res = await axios.get("/api/v1/community/people-following");
+      const res = await axios.get("/community/people-following");
 
       commit("ppleFollowing", res.data);
     },
 
     //Getting business people following
     async peopleFollowers({ commit }) {
-      const res = await axios.get("/api/v1/community/people-follower");
+      const res = await axios.get("/community/people-follower");
 
       commit("ppleFollowers", res.data);
     },
@@ -861,3 +872,5 @@ export default {
     },
   },
 };
+
+

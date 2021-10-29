@@ -10,20 +10,16 @@
 
     <div class="business" v-if="noBusiness == false">
       <b-row>
-        <b-col lg="6" v-for="item in busineses" :key="item.id" > 
+        <b-col lg="6" class="p-0 mb-2" v-for="item in busineses" :key="item.id" > 
+         
           
-          
-          
-          
-          
-          
-              <div class="people-style shadow">
+              <div class="people-style shadow h-100">
       <b-row>
         <b-col md="3" xl="3" lg="3" cols="5" sm="3">
           <div class="center-img">
             <splide :options="options" class="r-image">
               <splide-slide cl>
-                 <img :src="item.picture" class="r-image" />  
+                 <img :src="item.logo_path" class="r-image" />  
               </splide-slide>
             </splide>
           </div>
@@ -31,12 +27,13 @@
         <b-col md="5" cols="7" lg="9" xl="5" sm="5">
           <p class="textt text">
             <strong class="title"> {{ item.name }} </strong> <br />
-             {{ item.category }}
+             <span v-for="cat in item.category" :key="cat.id"> {{cat.name}}   
+            </span>
             <br />
             {{ count(item.followers) }} Community <br />
 
             <span class="location">
-              <b-icon-geo-alt class="ico"></b-icon-geo-alt> {{ item.country }}
+              <b-icon-geo-alt class="ico"></b-icon-geo-alt> {{ item.city }}, <span v-for="nei in item.neigborhood" :key="nei.id"> {{nei.name}}   </span>
             </span>
             <br />
           
@@ -47,7 +44,7 @@
               :text="item.about_business"
               link="#"
               less-str="read less"
-              :max-chars="15"
+              :max-chars="100"
             >
             </read-more>
 
@@ -160,6 +157,12 @@ export default {
     },
 
      infiniteHandler($state) {
+
+        if(this.page==1){
+        
+         this.busineses.splice(0);
+        
+      }
      let url="business/userBusiness/"+this.page+"?id="+this.foll_id;
     
        this.$store.dispatch("follower/loadMoreUserBusiness",url)
@@ -219,9 +222,7 @@ export default {
   width: 24px;
 }
 
-span {
-  margin-left: 8px;
-}
+
 .primary-bg {
   background-color: rgb(242, 242, 242);
   border: none;

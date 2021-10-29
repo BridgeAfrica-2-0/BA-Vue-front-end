@@ -26,7 +26,8 @@ Vue.use(VueAxios, axios);
 import LoadScript from "vue-plugin-load-script";
 import InfiniteLoading from "vue-infinite-loading";
 
-//import LoadScript from "vue-plugin-load-script";
+import { loader } from "./mixins"
+
 
 Vue.use(LoadScript);
 
@@ -87,9 +88,9 @@ Vue.use(VueMaterial);
 import Lightbox from "@morioh/v-lightbox";
 import * as VueGoogleMaps from "gmap-vue";
 
-import VueSplide from "@splidejs/vue-splide";
-Vue.use(VueSplide);
-import "@splidejs/splide/dist/css/themes/splide-default.min.css";
+// import VueSplide from "@splidejs/vue-splide";
+// Vue.use(VueSplide);
+// import "@splidejs/splide/dist/css/themes/splide-default.min.css";
 
 // global register
 Vue.use(VueGallerySlideshow);
@@ -183,7 +184,7 @@ new Vue({
       (response) => response,
       (error) => {
         if (error.response.status === 401) {
-          // this.$store.dispatch("auth/logout");
+           this.$store.dispatch("auth/logout");
           console.log("error has occure");
         }
         return Promise.reject(error);

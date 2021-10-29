@@ -95,16 +95,11 @@
             :player-vars="playerVars"
           ></youtube>
 
-          <b-modal
-            hide-footer
-            :id="`modal-${im.id}`"
-            title="Details"
-            size="md"
-          >
+          <b-modal hide-footer :id="`modal-${im.id}`" title="Details" size="md">
             <img
               class="card-img"
               :src="getFullMediaLink(im.path)"
-              @click="() => showImg(index)"
+              @click="() => showImg(getFullMediaLink(im.path))"
               alt="media_img"
             />
             <p class="my-4">{{ image.content }}</p>
@@ -145,7 +140,7 @@
                     v-if="!['video'].includes(typeOfMedia(im.path))"
                     >Make Cover Photo</b-dropdown-item
                   >
-                  <b-dropdown-item href="#" @click="deleteImage(im.id,cmp)"
+                  <b-dropdown-item href="#" @click="deleteImage(im.id, cmp)"
                     >Delete</b-dropdown-item
                   >
                 </b-dropdown>
@@ -159,7 +154,7 @@
       <vue-easy-lightbox
         :visible="visible"
         :imgs="Slideimges"
-        :index="index"
+        :index="currentPicture"
         @hide="handleHide"
       ></vue-easy-lightbox>
     </div>
@@ -220,7 +215,7 @@ export default {
       imageProps: { width: 205, height: 205 },
       Slideimges: [],
       visible: false,
-      index: 0,
+      currentPicture: 0,
       playerVars: {
         autoplay: 1,
       },
@@ -274,7 +269,7 @@ export default {
   },
 
   destroyed() {
-    this.$emit("close:album");
+    this.$emit("reste");
   },
 
   methods: {
@@ -306,7 +301,7 @@ export default {
     },
 
     showImg(index) {
-      this.index = index;
+      this.currentPicture = this.Slideimges.indexOf(index) 
       this.visible = true;
     },
     handleHide() {
@@ -318,9 +313,11 @@ export default {
     },
 
     loadImages() {
-      const pictures = this.allImages.map((e) =>
-        this.getFullMediaLink(e.media[0].path)
-      );
+      const pictures = this.allImages
+        .filter((e) => e.media.length)
+        .map((e) => {
+          return this.getFullMediaLink(e.media[0].path);
+        });
 
       this.Slideimges = pictures;
     },
@@ -345,7 +342,6 @@ export default {
     },
 
     removePicture(imageID, key) {
-      
       const newImage = this.allImages.map((im, index) => {
         if (index == key) {
           return im.media.filter((i) => i.id != imageID);
@@ -388,7 +384,7 @@ export default {
         });
     },
 
-    deleteImage(id,key) {
+    deleteImage(id, key) {
       this.pattern[this.type]()
         .deleteImagePicture(id)
         .then(() => {
@@ -490,7 +486,7 @@ export default {
           this.$refs["modalxl"].hide();
         })
         .then(() => {
-         // this.$emit("reste");
+          this.$emit("reste");
         })
         .catch(() => {
           this.loading = false;

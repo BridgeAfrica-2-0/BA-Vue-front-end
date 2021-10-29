@@ -718,7 +718,7 @@ export default {
   methods: {
     getUsers() {
       this.$store
-        .dispatch("chat/GET_USERS")
+        .dispatch("chat/GET_USERS",'')
         .then(() => {
           console.log("->[Data logged]<-");
         })

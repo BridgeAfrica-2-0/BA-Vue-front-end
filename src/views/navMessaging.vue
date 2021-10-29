@@ -459,13 +459,19 @@
                       class="input-background"
                       style="width: 100%"
                       placeholder="Type the name of person or Business..."
-                      @click="showsearchh()"
+                      @keydown.enter="searchUser(searchQuery)"
                     ></b-form-input>
 
                     <br />
 
                     <div class="table-responsive">
-                      <table v-if="users.length" class="table">
+                      <div v-if="loader" class="text-center mt-12 pt-12">
+                  <b-spinner
+                    variant="primary"
+                    label="Spinning"
+                  ></b-spinner>
+                </div>
+                      <table v-else class="table">
                         <thead>
                           <tr></tr>
                         </thead>
@@ -518,8 +524,8 @@ export default {
     return {
       input: "",
       search: "",
-      socket: io("http://localhost:5000", {
-        transports: ['websocket', 'polling', 'flashsocket']
+      socket: io("http://localhost:7000", {
+        transports: ["websocket", "polling", "flashsocket"],
       }),
 
       chatSelected: [],
@@ -557,8 +563,7 @@ export default {
 
       showsearch: true,
       selecteduser: false,
-
-      searchQuery: null,
+      searchQuery: '',
       resources1: [
         { title: "ABE Attendance", uri: "aaaa.com", category: "a", icon: null },
         {
@@ -808,13 +813,18 @@ export default {
     this.getUsers();
   },
   created() {
-    this.socket.on("chat-message", (data) => {
-      console.log("test");
-      this.messages.push({
-        message: data.message,
-        type: 1,
-        user: data.user,
-      });
+    this.socket.on("privateMessage", (data) => {
+      console.log("Received")
+      console.log(data);
+
+      // this.messages.push({
+      //   message: data.message,
+      //   type: 1,
+      //   user: data.user,
+      // });
+    });
+    this.socket.on("addUser", (data) => {
+      console.log("User:",data);
     });
   },
   methods: {
@@ -830,6 +840,7 @@ export default {
         .catch(() => console.log("error"));
     },
     histUserToUser(receiverId) {
+      this.socket.emit('addUser', {socketID:this.socket.id,...this.receiver})
       this.$store
         .dispatch("chat/GET_USER_TO_USER", receiverId)
         .then(() => {
@@ -842,6 +853,14 @@ export default {
       this.newMsg = false;
       this.chatSelected = { active: true, clickedId: index, ...chat };
       console.log("[DEBUG] Chat selected:", this.chatSelected);
+    },
+    searchUser(keyword) {
+      this.$store
+        .dispatch("chat/GET_USERS",keyword)
+        .then(() => {
+          console.log("->[Data logged]<-");
+        })
+        .catch(() => console.log("error"));
     },
     //-------
 
@@ -877,10 +896,12 @@ export default {
       this.show = false;
     },
     send() {
-      this.socket.emit("chat-message", {
+      this.socket.emit("privateMessage", {
         message: this.input,
-        user: this.username,
+        sender: {socketId:this.socket.id, ...this.currentUser.user},
+        receiver: this.receiver,
       });
+      console.log("SENT...");
 
       this.message.type = "sent";
       let today = new Date();

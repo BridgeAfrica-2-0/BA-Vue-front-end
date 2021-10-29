@@ -82,11 +82,12 @@ export default {
     },
 
     actions: {
-        GET_USERS({ commit, state }) {
+        GET_USERS({ commit, state }, data) {
 
             commit("setLoader", true);
+            let keyword = data ? '/' + data : ''
 
-            axios.get(`/users`)
+            axios.get(`/user/all-user${keyword}`)
                 .then((res) => {
                     commit("setLoader", false);
                     console.log("All Users: ", res.data.data);

@@ -1,31 +1,36 @@
 <template>
   <div>
-
+<!-- {{bio}} -->
 
     <b-alert v-if="edited" show> {{ successmsg }} </b-alert>
 
     <span class="float-right">  
-    <b-icon
-
-     icon="pencil"
-      v-if="!editing"
-       
-      class="edit-btn icon-size ebio"
-      @click="edit(1)"
-      variant="primary"
-      size="sm"
-      ></b-icon
-    >
-
-     </span>
+      <button
+        type="button"
+        class="btn btn-outline-primary edit-btn"
+        v-if="!editing"
+        @click="edit(1)"
+        variant="primary"
+        size="sm"
+      >Edit Profile
+      </button>
+    </span>
+    
 
     <br />
- <p class="bold username"> Biography! <p/>
+    <br />
+    <br />
+  
   <p class="text">  {{ bio.user.biography  }} </p>
    
     <div v-if="editing">
       <b-form @submit.prevent="save">
-        
+        <b-form-select
+          class="mb-2"
+          size="sm"
+          v-model="info_access"
+          :options="options"
+        ></b-form-select>
         <b-form-textarea
           required
           id="textarea"
@@ -47,6 +52,32 @@
 
 <script>
 export default {
+    data() {
+    return {
+      editing: false,
+
+      successmsg: "",
+      edited: false,
+      access: null,
+      info_access: null,
+      options: [
+        { value: null, text: "Select" },
+        { value: "private", text: "Private" },
+        { value: "public", text: "Public" },
+      ],
+      biography: {
+        info_access: null,
+        description: null,
+      },
+    };
+  },
+  computed:{
+
+    bio(){
+      return this.$store.state.profile.profile_about;
+    }
+
+  },
   created() {
     this.$store
       .dispatch("profile/loadUserBiography", null)
@@ -66,24 +97,7 @@ export default {
         console.log(this.biography, "Finally load User Biography ++++++++++++");
       });
   },
-  data() {
-    return {
-      editing: false,
 
-      successmsg: "",
-      edited: false,
-      access: null,
-      options: [
-        { value: null, text: "Select" },
-        { value: "private", text: "Private" },
-        { value: "public", text: "Public" },
-      ],
-      biography: {
-        info_access: null,
-        description: null,
-      },
-    };
-  },
   methods: {
     edit(value) {
       if (value === 0) {
@@ -109,9 +123,10 @@ export default {
         this.edited = false;
       }, 2000);
       console.log(this.biography, "profile about save message start+++++++++");
+      console.log(this.info_access);
       this.$store
         .dispatch("profile/updateUserBiography", {
-          info_access: 'public',
+          info_access: this.info_access,
           description:  this.bio.user.biography ,  
         })
         .then((response) => {
@@ -137,13 +152,6 @@ export default {
     },
   },
 
-  computed:{
-
-    bio(){
-      return this.$store.state.profile.profile_about;
-    }
-
-  },
 };
 </script>
 

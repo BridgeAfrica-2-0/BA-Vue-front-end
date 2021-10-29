@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="profession">
     <b class="profession">Profession</b> 
     <hr />
       <div class="datails">

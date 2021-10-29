@@ -1,15 +1,14 @@
 <template>
   <b-container>
     <div class="b-bottomn">
-      <b-button variant="primary" class="a-button-l">Save Changes</b-button>
-      <br />
+      <b-button variant="primary" class="a-button-l">{{$t("buinessf.Save changes")}}</b-button>
     </div>
 
     <div class="b-bottom">
       <b-container>
         <b-form-group
           label-cols-lg="3"
-          label="Business Visibility"
+          label="$t('businessf.Business_Visibility')"
           label-size="md"
           label-class="font-weight-bold pt-0"
           class="mb-0"
@@ -29,7 +28,7 @@
       <b-container>
         <b-form-group
           label-cols-lg="3"
-          label="Posting Permissions"
+          label="$t('businessf.Posting_Permission')"
           label-size="md"
           label-class="font-weight-bold pt-0"
           class="mb-0"
@@ -49,7 +48,7 @@
       <b-container>
         <b-form-group
           label-cols-lg="3"
-          label="Post Approval"
+          label="$t('businessf.Post_Approval')"
           label-size="md"
           label-class="font-weight-bold pt-0"
           class="mb-0"
@@ -61,7 +60,7 @@
             value="accepted"
             unchecked-value="not_accepted"
           >
-            All business posts must be approved by an admin
+            {{$t("buinessf.All_business_posts_must_be_approved_by_an_admin")}}
           </b-form-checkbox>
         </b-form-group>
       </b-container>
@@ -79,7 +78,7 @@
           <b-form-textarea
             id="textarea"
             v-model="text"
-            placeholder="Enter something..."
+            :placeholder="$t('businessf.Enter_something')"
             rows="3"
             max-rows="6"
           ></b-form-textarea>
@@ -91,7 +90,7 @@
       <b-container>
         <b-form-group
           label-cols-lg="3"
-          label="Marketplace"
+          :label="$t('businessf.Marketplace')"
           label-size="md"
           label-class="font-weight-bold pt-0"
           class="mb-0"
@@ -103,7 +102,7 @@
     </div>
 
     <b-container>
-      <b-link href="#foo" class="f-left">Delete Business Identity</b-link>
+      <b-link href="#foo" class="f-left">{{$t("buinessf.Delete_Business_Identity")}}</b-link>
     </b-container>
   </b-container>
 </template>

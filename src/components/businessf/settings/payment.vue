@@ -2,7 +2,7 @@
   <b-container>
     <b-container>
       <p class="a-text">
-        Select a payment method for your bridget africa account
+       {{$t("buinessf.Select_a_payment_method_for_your_bridge_africa_account")}} 
       </p>
     </b-container>
 
@@ -24,7 +24,7 @@
           name="mobile-payment"
           value="mobile-money"
         >
-          Mobile Payment
+          {{$t("buinessf.Mobile_Payment")}}
         </b-form-radio>
         <br />
         <b-form-radio
@@ -33,7 +33,7 @@
           id="Credit-card"
           name="credit-card"
           value="credit-card"
-          >Credit/Debit card</b-form-radio
+          >{{$t("buinessf.credit/Debit card")}}</b-form-radio
         >
       </b-form-group>
 
@@ -54,14 +54,13 @@
 
       <div class=" mb-0">
         <b-icon icon="plus" class='b-color' ></b-icon>  
-        <b-link href="#">Add new Credit/Debit card</b-link>
+        <b-link href="#">{{$t("buinessf.Add_new_Credit/Debit_card")}}</b-link>
       </div>
       <br />
 
       <div class=" mb-0">
         <p>
-          <b-icon icon="lock" class="b-color"></b-icon> Your payment
-          information is secure, <b-link href="#">Read more</b-link>
+          <b-icon icon="lock" class="b-color"></b-icon> {{$t("buinessf.Your_payment_information_is_secure")}}, <b-link href="#">Read more</b-link>
         </p>
       </div>
     </b-container>

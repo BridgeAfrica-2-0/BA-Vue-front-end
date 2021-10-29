@@ -2,9 +2,9 @@
   <b-container>
     <b-container class="bv-example-row">
       <p class="t-left">
-        Blocked users can no longer see things you post on your business, invite
-        your business to networks, strat a conversation, or follow your
-        business.
+       {{$t("businessf.Blocked_users_can_no_longer_see_things_you_post_on_your_business")}} ,
+       {{$t("businessf.invite_your_business_to_networks")}} ,{{$t("buinessf.strat_a_conversation")}} ,
+        {{$t("buinessf.or_follow_your_business")}}.
       </p>
     </b-container>
 
@@ -13,7 +13,7 @@
         <b-list class="d-flex align-items-center m-list">
           <b-avatar class="mr-3" size="4em"></b-avatar>
           <span class="mr-auto">J. Circlehead</span>
-          <span class="mr-auto"><b-link href="#">Unblock</b-link></span>
+          <span class="mr-auto"><b-link href="#">{{$t("buinessf.Unblock")}}</b-link></span>
         </b-list>
 
         <b-list class="d-flex align-items-center">
@@ -24,13 +24,13 @@
             size="4em"
           ></b-avatar>
           <span class="mr-auto">itz blec blec</span>
-          <span class="mr-auto"><b-link href="#">Unblock</b-link></span>
+          <span class="mr-auto"><b-link href="#">{{$t("buinessf.Unblock")}}</b-link></span>
         </b-list>
 
         <b-list class="d-flex align-items-center m-list">
           <b-avatar class="mr-3" size="4em"></b-avatar>
           <span class="mr-auto">J. Circlehead</span>
-          <span class="mr-auto"><b-link href="#">Unblock</b-link></span>
+          <span class="mr-auto"><b-link href="#">{{$t("buinessf.Unblock")}}</b-link></span>
         </b-list>
 
         <b-list class="d-flex align-items-center">
@@ -41,7 +41,7 @@
             size="4em"
           ></b-avatar>
           <span class="mr-auto">itz blec blec</span>
-          <span class="mr-auto"><b-link href="#">Unblock</b-link></span>
+          <span class="mr-auto"><b-link href="#">{{$t("buinessf.unblock")}}</b-link></span>
         </b-list>
       </b-list-group>
     </b-container>

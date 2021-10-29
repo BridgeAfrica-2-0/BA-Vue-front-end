@@ -10,6 +10,7 @@ export default {};
 </script>
 
 
+<style src="@/assets/scss/public_main.scss" lang="scss"></style>
 <style lang="less">
 
 

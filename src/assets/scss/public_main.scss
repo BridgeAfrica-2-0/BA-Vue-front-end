@@ -1,0 +1,29 @@
+*,
+*:before,
+*:after {
+  transition: all 0.5s cubic-bezier(0.6, 2, 0.4, 1) !important;
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box !important;
+  -moz-box-sizing: border-box !important;
+  box-sizing: border-box !important;
+}
+
+header,
+body,
+#app {
+  overflow-x: hidden;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.elt {
+  min-width: 780px;
+  width: 65vw;
+}
+
+.flex-centered {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

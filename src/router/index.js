@@ -40,6 +40,7 @@ import confirmPayment from "@/views/confirmPayment";
 import networks from "@/views/networks";
 import dashboard from "@/views/dashboard";
 
+import publicHome from "@/views/_public/Home";
 import welcome from "@/views/welcome";
 
 Vue.use(VueRouter);
@@ -50,6 +51,11 @@ const routes = [
   //   name: "Home",
   //   component: Test,
   // },
+  {
+    path: "/public",
+    name: "publicHome",
+    component: publicHome
+  },
   {
     path: "/",
     name: "home",

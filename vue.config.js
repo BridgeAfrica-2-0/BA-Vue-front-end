@@ -6,5 +6,9 @@ module.exports = {
       localeDir: "locales",
       enableInSFC: false
     }
-  }
+  },
+  chainWebpack: config => {
+    config.module.rules.delete('eslint');
+  },
+  lintOnSave: false
 };

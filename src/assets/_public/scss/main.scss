@@ -1,0 +1,84 @@
+$pColor: #e75c18;
+
+@font-face {
+  font-family: "Josefin";
+  src: url("../fonts/JosefinSans.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Josefin-slab";
+  src: url("../fonts/JosefinSlab.ttf") format("truetype");
+}
+
+*,
+*:before,
+*:after {
+  transition: all 0.5s cubic-bezier(0.6, 2, 0.4, 1) !important;
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box !important;
+  -moz-box-sizing: border-box !important;
+  box-sizing: border-box !important;
+}
+
+header,
+body,
+#app {
+  overflow-x: hidden;
+  margin: 0 !important;
+  padding: 0 !important;
+  font-family: "Josefin" !important;
+}
+
+.elt {
+  min-width: 780px;
+  width: 65vw;
+}
+
+.flex-centered {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.deco {
+  cursor: pointer;
+  background: linear-gradient(currentColor 0 0) 0 100% / var(--d, 0) 1px
+    no-repeat;
+  transition: 0.5s;
+  transition-timing-function: ease !important;
+  &:hover {
+    color: $pColor;
+    --d: 100%;
+  }
+}
+
+.section {
+  padding: 4rem 2rem;
+  padding-bottom: 6rem;
+
+  &.gray--section {
+    background-color: #f2f6f7;
+  }
+
+  &.dark--section {
+    background-color: #111;
+  }
+
+  &.contact--section {
+    background: url('../imgs/map.jpg') center no-repeat;
+    background-size: cover;
+  }
+}
+
+.s--title {
+  font-weight: 600;
+  font-size: 2.6rem;
+  margin: 1rem 0;
+  color: $pColor;
+  margin-bottom: 2.2rem;
+
+  &.center {
+    text-align: center;
+  }
+}

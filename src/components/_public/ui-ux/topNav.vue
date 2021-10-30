@@ -24,16 +24,42 @@
       </div>
     </div>
     <div class="elt tn--content flex-centered">
+      <div class="tnc--logo">
+        <img src="@/assets/_public/imgs/logo.png" alt="BRIDGE AFRICA" />
+      </div>
+      <ul class="tnc--menu flex-centered">
+        <li v-for="link in menuItems" :key="link.id">
+          <router-link :to="link.uri">
+            {{ link.label }}
+          </router-link>
+        </li>
+      </ul>
+      <div class="tnc--btn">
+        <i class="far fa-search"></i>
+        <i class="far fa-question-circle"></i>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-export default {};
+export default {
+  data() {
+    return {
+      menuItems: [
+        { label: "Home", uri: "#" },
+        { label: "About Us", uri: "#" },
+        { label: "Team", uri: "#" },
+        { label: "Contact Us", uri: "#" },
+      ],
+    };
+  },
+};
 </script>
 
 <style lang="scss">
 $pColor: #e75c18;
+$pColorTa: #e75c1899;
 .top-nav {
   position: fixed;
   left: 0;
@@ -42,8 +68,8 @@ $pColor: #e75c18;
   height: 130px;
   background-color: #ffffff;
   z-index: 2;
-  // box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
+    rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
   border-bottom: solid 2px $pColor;
   display: flex;
   flex-direction: column;
@@ -82,7 +108,7 @@ $pColor: #e75c18;
             }
           }
           i {
-            font-size: .9rem;
+            font-size: 0.9rem;
             margin-right: 10px;
           }
         }
@@ -91,7 +117,7 @@ $pColor: #e75c18;
           display: inline-block;
           background-color: #fff;
           padding: 0.4rem 1.2rem;
-          border-radius: 0.25rem;
+          border-radius: 0.25rem 0.1rem;
           color: $pColor;
         }
       }
@@ -100,6 +126,48 @@ $pColor: #e75c18;
 
   .tn--content {
     background-color: #fff;
+    height: 90px;
+    justify-content: space-between;
+
+    .tnc--logo {
+      img {
+        height: 45px;
+      }
+    }
+
+    .tnc--menu {
+      height: 90px;
+      list-style-type: none;
+      margin: 0 !important;
+      li {
+        margin: 0 20px;
+        font-size: 1.1rem;
+
+        &:last-child {
+          margin-right: 0;
+        }
+      }
+    }
+
+    .tnc--btn {
+      i {
+        display: inline-block;
+        box-shadow: rgba(149, 157, 165, 0.4) 0px 8px 14px;
+        margin-left: 10px;
+        padding: 0.8rem;
+        cursor: pointer;
+        position: relative;
+        z-index: 10;
+        font-size: 0.84rem;
+        color: $pColor;
+        border: solid 0.1px $pColorTa;
+
+        &:hover {
+          background-color: $pColor;
+          color: #fff;
+        }
+      }
+    }
   }
 }
 </style>

@@ -68,7 +68,21 @@
 
       <div v-for="(image, cmp) in allImages" :key="cmp">
         <div class="img-gall" v-for="(im, index) in image.media" :key="index">
-          <a v-if="typeOfMedia(im.path) == 'image'"
+          <Picture
+            :im="im"
+            :typeOfMedia="() => typeOfMedia(im.path)"
+            :getFullMediaLink="() => getFullMediaLink(im.path)"
+            :getYoutubeKey="() => getYoutubeKey(getFullMediaLink(im.path))"
+            :showImg="() => showImg(getFullMediaLink(im.path))"
+            :downloadPic="() => downloadPic(im)"
+            :setProfilePic="() => setProfilePic(im.id)"
+            :setCoverPic="() => setCoverPic(im.id)"
+            :deleteImage="() => deleteImage(im.id, cmp)"
+            :content="image.content"
+            :imageProps="imageProps"
+          />
+
+          <!-- <a v-if="typeOfMedia(im.path) == 'image' && !loading"
             ><b-img
               class="card-img btn p-0 album-img"
               thumbnail
@@ -82,19 +96,24 @@
           </a>
           <video
             controls
-            v-else-if="typeOfMedia(im.path) == 'video'"
+            v-else-if="typeOfMedia(im.path) == 'video' && !loading"
             class="card-img btn p-0 album-img"
           >
             <source :src="getFullMediaLink(im.path)" />
           </video>
-
           <youtube
             class="card-img btn p-0 album-img"
-            v-else
+            v-if="typeOfMedia(im.path) == 'youtube' && !loading"
             :video-id="getYoutubeKey(getFullMediaLink(im.path))"
             :player-vars="playerVars"
           ></youtube>
 
+          <div class="botmediadess-position" v-if="loading">
+            <b-spinner
+              style="width: 3rem; height: 3rem; color: #e75c18"
+              label="Large Spinner"
+            ></b-spinner>
+          </div>
           <b-modal hide-footer :id="`modal-${im.id}`" title="Details" size="md">
             <img
               class="card-img"
@@ -146,11 +165,12 @@
                 </b-dropdown>
               </li>
             </ul>
-          </div>
+          </div> -->
 
           <br />
         </div>
       </div>
+
       <vue-easy-lightbox
         :visible="visible"
         :imgs="Slideimges"
@@ -162,11 +182,15 @@
 </template>
 
 <script>
+import Picture from "./imagesItems.vue";
 import { mapActions, mapMutations } from "vuex";
 import { fullMediaLink } from "@/helpers";
 import { v4 } from "uuid";
 
 export default {
+  components: {
+    Picture,
+  },
   props: {
     album: {},
     canUpload: {
@@ -220,7 +244,6 @@ export default {
         autoplay: 1,
       },
       text: "",
-
       pattern: null,
     };
   },
@@ -312,9 +335,11 @@ export default {
       this.currentPicture = this.Slideimges.indexOf(index);
       this.visible = true;
     },
+
     handleHide() {
       this.visible = false;
     },
+
     showPic(image) {
       this.image_details = image;
       this.$refs["Details"].show();
@@ -362,8 +387,7 @@ export default {
     },
 
     downloadPic(media) {
-      //download(this.getFileExtension(media.path), `${v4()}.${this.getFileExtension(media.path)}`, media.type);
-
+      this.loading = true;
       this.pattern[this.type]()
         .onDownloadPic(media.id)
         .then((response) => {
@@ -380,18 +404,22 @@ export default {
             status: "success",
             message: "Image Downloaded",
           });
-          // loader.hide();
+          this.loading = false;
+          return false;
         })
         .catch(() => {
           this.sending = false;
+          this.loading = false;
           this.flashMessage.show({
             status: "error",
             message: "Unable to download ",
           });
+          return false;
         });
     },
 
     deleteImage(id, key) {
+      this.loading = true;
       this.pattern[this.type]()
         .deleteImagePicture(id)
         .then(() => {
@@ -401,23 +429,27 @@ export default {
             id: this.album,
             action: "remove",
           });
-
+          this.loading = false;
           this.flashMessage.show({
             status: "success",
             message: "Media Deleted",
           });
+          return false;
         })
         .catch(() => {
           this.sending = false;
+          this.loading = false;
           this.flashMessage.show({
             status: "error",
             message: "Unable to delete media",
           });
+          return false;
         });
     },
     //set an image as a cover photo
 
     setCoverPic(id) {
+      this.loading = true;
       const data =
         "business" == this.type
           ? { businessID: this.$route.params.id, albumID: id }
@@ -426,23 +458,27 @@ export default {
       this.pattern[this.type]()
         .setCoverPicture(data)
         .then(() => {
+          this.loading = false;
           this.flashMessage.show({
             status: "success",
             message: "Cover Picture succesfully set",
           });
+          return false;
         })
         .catch(() => {
           this.sending = false;
-
+          this.loading = false;
           this.flashMessage.show({
             status: "error",
             message: "Unable to set Cover Picture",
           });
+          return false;
         });
     },
     //set image as profile pic
 
     setProfilePic(id) {
+      this.loading = true;
       const data =
         "business" == this.type
           ? { businessID: this.$route.params.id, albumID: id }
@@ -450,19 +486,21 @@ export default {
       this.pattern[this.type]()
         .setProfilePicture(data)
         .then(() => {
+          this.loading = false;
           this.flashMessage.show({
             status: "success",
             message: "Profile Picture set",
           });
+          return false;
         })
-        .catch((err) => {
+        .catch(() => {
           this.sending = false;
-
+          this.loading = false;
           this.flashMessage.show({
             status: "error",
             message: "Unable to set your profile pic",
           });
-          console.log({ err: err });
+          return false;
         });
     },
 
@@ -529,6 +567,13 @@ export default {
 </script>
 
 <style scoped>
+.botmediadess-position {
+  text-align: center;
+  bottom: -45%;
+  width: 100%;
+  font-size: 20px;
+  position: relative;
+}
 .custom-loader {
   width: 4rem !important;
   height: 4rem !important;

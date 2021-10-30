@@ -74,7 +74,6 @@ export default {
   },
 
   methods: {
-    //function to get album
     all() {
       const wrapper = (data) => {
         data
@@ -84,9 +83,7 @@ export default {
               return {
                 id: img.id,
                 content: img.content,
-                media: [
-                  { path: picture.path, type: picture.type, id: picture.id },
-                ],
+                media: [{ path: picture.path, type: picture.type, id: picture.id }],
               };
             });
 

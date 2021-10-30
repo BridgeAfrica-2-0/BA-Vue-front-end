@@ -21,12 +21,12 @@
 </template>
 
 <script>
-import HomePage from "../businessOwner/tabs/businessHome";   
-import About from "./tabs/about";
-import Media from "./tabs/media";
-import MarketPlace from "./tabs/marketPlace";
-import Followers from "./tabs/memberNetwork";
-import Networks from "./tabs/networks";
+import HomePage from "./tabs/businessHome";   
+import About from "@/components/businessf/tabs/about";
+import Media from "@/components/businessOwner/tabs/media";
+import MarketPlace from "@/components/businessOwner/tabs/marketPlace";
+import Followers from "@/components/businessOwner/tabs/memberNetwork";
+import Networks from "@/components/businessOwner/tabs/networks";
 import HeadPageOwner from "@/components/businessOwner/headPageOwner";
 
 export default {

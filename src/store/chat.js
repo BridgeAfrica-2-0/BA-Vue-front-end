@@ -83,6 +83,7 @@ export default {
 
     actions: {
         GET_USERS({ commit, state }, data) {
+            commit("setUsers", []);
 
             commit("setLoader", true);
             let keyword = data ? '/' + data : ''
@@ -102,12 +103,12 @@ export default {
                 })
         },
 
-        GET_USER_TO_USER({ commit, state }, data) {
+        async GET_USER_TO_USER({ commit, state }, data) {
             commit("setLoader", true);
 
             console.log("[DEBUG] user to user", data);
 
-            axios.get(`/messages/${data}`)
+            await axios.get(`/messages/${data}`)
                 .then((res) => {
                     commit("setLoader", false);
                     console.log("User to user: ", res.data.data);

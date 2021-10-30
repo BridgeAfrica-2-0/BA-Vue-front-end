@@ -255,6 +255,29 @@
                     </b-row>
                   </b-col>
                 </b-row>
+                <b-row class="desk" v-else>
+                  <b-col class="col-2" @click="info = true">
+                    <b-avatar
+                      variant="primary"
+                      src="https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg"
+                      size="60"
+                    ></b-avatar>
+                  </b-col>
+                  <b-col class="detail" @click="info = true">
+                    <h5>General Chat</h5>
+                    <p>Online(4)</p>
+                  </b-col>
+                  <b-col class="col-4">
+                    <b-row class="mt-3 ml-5">
+                      <b-col class="col-3">
+                        <b-icon
+                          class="msg-icon primary icon-size"
+                          icon="search"
+                        ></b-icon>
+                      </b-col>
+                    </b-row>
+                  </b-col>
+                </b-row>
               </div>
 
               <section
@@ -299,12 +322,44 @@
               </section>
 
               <section v-else class="chats" style="margin-left: 1px" ref="feed">
-                <div class="mt-12 pt-12">
-                  <h1 class="text-center">Select a chat</h1>
+                <div v-for="(message, index) in messages" :key="index" >
+                  <div v-if="message.sender != currentUser.user.name">
+                    <b-row class="p-4">
+                      <b-col>
+                        <p class="msg-text mt-0 text">
+                          <b>{{ message.sender }}</b
+                          >: {{ message.message }}
+                          <small class="float-right mt-2 text-white pr-1 pt-1">
+                            {{ getCreatedAt(message.date) }}
+                          </small>
+                        </p>
+                      </b-col>
+                    </b-row>
+                  </div>
+
+                  <div v-else>
+                    <b-row class="p-4">
+                      <b-col>
+                        <p id="sent" class="msg-text-sent text">
+                          <b>Me</b
+                          >: {{ message.message }}
+                          <small class="float-right mt-2 text-white pr-1 pt-1">
+                            {{ getCreatedAt(message.date) }}
+                          </small>
+                        </p>
+                      </b-col>
+                    </b-row>
+                  </div>
                 </div>
               </section>
 
-              <div class="bottom" v-if="chatSelected.active">
+              <!-- <section v-else class="chats" style="margin-left: 1px" ref="feed">
+                <div class="mt-12 pt-12">
+                  <h1 class="text-center">Select a chat</h1>
+                </div>
+              </section> -->
+
+              <div class="bottom">
                 <b-row v-if="!checked">
                   <b-col cols="2" class="p-0">
                     <b-icon
@@ -322,7 +377,7 @@
                     <b-form-input
                       id="textarea"
                       v-model="input"
-                      @keyup.enter="send"
+                      @keypress.enter="send"
                       class="input-background"
                       placeholder="Enter the message..."
                     ></b-form-input>
@@ -459,18 +514,18 @@
                       class="input-background"
                       style="width: 100%"
                       placeholder="Type the name of person or Business..."
-                      @keydown.enter="searchUser(searchQuery)"
+                      @keydown="searchUser(searchQuery)"
                     ></b-form-input>
 
                     <br />
 
                     <div class="table-responsive">
                       <div v-if="loader" class="text-center mt-12 pt-12">
-                  <b-spinner
-                    variant="primary"
-                    label="Spinning"
-                  ></b-spinner>
-                </div>
+                        <b-spinner
+                          variant="primary"
+                          label="Spinning"
+                        ></b-spinner>
+                      </div>
                       <table v-else class="table">
                         <thead>
                           <tr></tr>
@@ -563,7 +618,7 @@ export default {
 
       showsearch: true,
       selecteduser: false,
-      searchQuery: '',
+      searchQuery: "",
       resources1: [
         { title: "ABE Attendance", uri: "aaaa.com", category: "a", icon: null },
         {
@@ -708,14 +763,14 @@ export default {
         {
           id: 0,
           name: "Blezour blec",
-          startMessage: "Hello Blec lola blec ",
+          message: "Hello Blec lola blec ",
           timeStamp: "3:00pm",
           messageCount: "10",
         },
         {
           id: 1,
           name: "Blec blezour blec",
-          startMessage: "yoo nigga sup lola blec",
+          message: "yoo nigga sup lola blec",
           timeStamp: "7:00am",
           messageCount: "60",
         },
@@ -723,49 +778,49 @@ export default {
         {
           id: 3,
           name: "baba blecc ",
-          startMessage: "Lorem ipsum la lola blec vlr ",
+          message: "Lorem ipsum la lola blec vlr ",
           timeStamp: "9:00am",
           messageCount: "60",
         },
         {
           id: 4,
           name: "Louis Litt",
-          startMessage: "Lorem  sit amet this is goo.",
+          message: "Lorem  sit amet this is goo.",
           timeStamp: "6:00am",
           messageCount: "6",
         },
         {
           id: 5,
           name: "Louis Litt",
-          startMessage: "Lorem this   sit amet.",
+          message: "Lorem this   sit amet.",
           timeStamp: "7:00am",
           messageCount: "100",
         },
         {
           id: 6,
           name: "Louis Litt",
-          startMessage: "Lorem ithe amet.",
+          message: "Lorem ithe amet.",
           timeStamp: "7:00am",
           messageCount: "3",
         },
         {
           id: 7,
           name: "Louis Litt",
-          startMessage: "Lordol sit amet.",
+          message: "Lordol sit amet.",
           timeStamp: "7:00am",
           messageCount: "10",
         },
         {
           id: 8,
           name: "Louis Litt",
-          startMessage: "Lorem vheck ",
+          message: "Lorem vheck ",
           timeStamp: "7:00am",
           messageCount: "40",
         },
         {
           id: 9,
           name: "Louis Litt",
-          startMessage: "Lorem papa .",
+          message: "Lorem papa .",
           timeStamp: "7:00am",
           messageCount: "15",
         },
@@ -810,11 +865,20 @@ export default {
     },
   },
   mounted() {
+    this.$refs.feed.scrollTop =
+      this.$refs.feed.scrollHeight - this.$refs.feed.clientHeight;
+
     this.getUsers();
   },
   created() {
+    this.socket.on("generalMessage", (data) => {
+      console.log("Received");
+      console.log(data);
+      this.messages.push(data);
+    });
     this.socket.on("privateMessage", (data) => {
-      console.log("Received")
+       
+      console.log("Received");
       console.log(data);
 
       // this.messages.push({
@@ -823,8 +887,13 @@ export default {
       //   user: data.user,
       // });
     });
+    this.socket.emit("addUser", {
+      socketID: this.socket.id,
+      user: this.currentUser.user,
+    });
+
     this.socket.on("addUser", (data) => {
-      console.log("User:",data);
+      console.log("User:", data);
     });
   },
   methods: {
@@ -839,12 +908,15 @@ export default {
         })
         .catch(() => console.log("error"));
     },
-    histUserToUser(receiverId) {
-      this.socket.emit('addUser', {socketID:this.socket.id,...this.receiver})
-      this.$store
+    async histUserToUser(receiverId) {
+      await this.$store
         .dispatch("chat/GET_USER_TO_USER", receiverId)
         .then(() => {
-          console.log("->[Data logged]<-");
+          console.log("->[User selected]<-");
+          this.socket.emit("addUser", {
+            socketID: this.socket.id,
+            ...this.receiver,
+          });
         })
         .catch(() => console.log("error"));
     },
@@ -856,7 +928,7 @@ export default {
     },
     searchUser(keyword) {
       this.$store
-        .dispatch("chat/GET_USERS",keyword)
+        .dispatch("chat/GET_USERS", keyword)
         .then(() => {
           console.log("->[Data logged]<-");
         })
@@ -896,13 +968,20 @@ export default {
       this.show = false;
     },
     send() {
-      this.socket.emit("privateMessage", {
+      // this.socket.emit("privateMessage", {
+      //   message: this.input,
+      //   sender: {socketId:this.socket.id, ...this.currentUser.user},
+      //   receiver: this.receiver,
+      // });
+      this.socket.emit("generalMessage", {
         message: this.input,
-        sender: {socketId:this.socket.id, ...this.currentUser.user},
-        receiver: this.receiver,
+        sender: this.currentUser.user.name,
+        date: new Date(),
       });
       console.log("SENT...");
-
+      this.$refs.feed.scrollTop =
+        this.$refs.feed.scrollHeight - this.$refs.feed.clientHeight;
+      console.log("scroll...", this.$refs.feed.scrollHeight);
       this.message.type = "sent";
       let today = new Date();
       let h = today.getHours();

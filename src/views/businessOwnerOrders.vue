@@ -244,7 +244,7 @@
         <div class="col order"><h3>My orders</h3></div>
         <div class="status"><h3 class="text-danger">clear history</h3></div>
       </div>
-      <hr />
+      
 
       <div>
         <div v-if="status == 1" class="inprogress">
@@ -252,21 +252,19 @@
           <div v-for="i in 4" :key="i">
            <div class="justify-content-start container">
                <div class="container d-flex justify-content-end btn-marg ">
-                <div class="dropdown">
-                  <button class="btn btn-warning dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                    Manage
-                  </button>
-                  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                    <li><a class="dropdown-item" href="#">Delete</a></li>
-                    <li><a class="dropdown-item" href="#">Archive</a></li>
-                    
-                  </ul>
+                <div>
+                  <b-dropdown variant="ligth" id="dropdown-1" text="Manage" class="m-md-2">
+                    <b-dropdown-item>Archive</b-dropdown-item>
+                    <b-dropdown-item>Delete</b-dropdown-item>
+                  
+                  </b-dropdown>
                 </div>
               </div>
                Order #12324253 <br>
                yaoundé 12/12/2021 12H00
+                <hr /> 
            </div>
-            <hr style="height: 23px"/>
+            
             <div class="justify-content-between row">
               <div class="col-3">
                 <splide :options="{ rewind: true }" class="r-img">
@@ -278,16 +276,17 @@
 
               <div class="col-2 text-end text-start bold">
                
-                <h3>Product ID :</h3>
+                <h3>Product Qty :</h3>
                 
-                <h3>price :</h3>
-                <h3>shipping cost:</h3>
-                <h3>Total Cost :</h3>
+                
+                <h3>Total price:</h3>
+                <h3>Total shipping :</h3>
+                <h3>Total cost:</h3>
               </div>
 
               <div class="col-3 text-start">
                
-                <h3>#123v3c13</h3>
+                <h3>4</h3>
                 
                 <h3>12000 XAF</h3>
                 <h3>10000 XAF</h3>

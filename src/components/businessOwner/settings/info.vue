@@ -309,7 +309,7 @@
           </b-container>
         </div>
 
-        {{regions}}
+        <!-- {{regions}} -->
 
         <div class="b-bottom">
           <b-container>
@@ -381,7 +381,7 @@
           </b-container>
         </div>
 
-        {{localities}}
+        <!-- {{localities}} -->
 
         <div class="b-bottom">
           <b-container>
@@ -545,7 +545,7 @@
 
         <div class="b-bottomm">
           <b-button variant="primary" class="a-button-l" @click="updateInfo(businessInfo)"
-          ><b-spinner v-if="spinner" small type="grow"></b-spinner>Save Changes</b-button>
+          ><b-spinner v-if="Lspinner" small type="grow"></b-spinner>Save Changes</b-button>
           <br />
           <br />
         </div>
@@ -581,7 +581,7 @@ export default {
       url: null,
 
       limit: 20,
-      spinner: false,
+      Lspinner: false,
 
       editbiz: "",
       multiselecvalue: [],
@@ -678,16 +678,10 @@ export default {
         { label: "(GMT-01:00) Cape Verde Is.", value: "-1" },
         { label: "(GMT-01:00) Azores", value: "-1" },
         { label: "(GMT+00:00) Casablanca, Monrovia, Reykjavik", value: "0" },
-        { label: "(GMT+00:00) Greenwich Mean Time : Dublin, Edinburgh, Lisbon, London", value: "0", },
-        { label: "(GMT+01:00) Amsterdam, Berlin, Bern, Rome, Stockholm, Vienna", value: "1", },
-        { label:
-            "(GMT+01:00) Belgrade, Bratislava, Budapest, Ljubljana, Prague",
-          value: "1",
-        },
-        {
-          label: "(GMT+01:00) Brussels, Copenhagen, Madrid, Paris",
-          value: "1",
-        },
+        { label: "(GMT+00:00) Greenwich Mean Time : Dublin, Edinburgh, Lisbon, London", value: "0" },
+        { label: "(GMT+01:00) Amsterdam, Berlin, Bern, Rome, Stockholm, Vienna", value: "1" },
+        { label: "(GMT+01:00) Belgrade, Bratislava, Budapest, Ljubljana, Prague", value: "1" },
+        { label: "(GMT+01:00) Brussels, Copenhagen, Madrid, Paris", value: "1" },
         { label: "(GMT+01:00) Sarajevo, Skopje, Warsaw, Zagreb", value: "1" },
         { label: "(GMT+01:00) West Central Africa", value: "1" },
         { label: "(GMT+02:00) Amman", value: "2" },
@@ -695,10 +689,7 @@ export default {
         { label: "(GMT+02:00) Beirut", value: "2" },
         { label: "(GMT+02:00) Cairo", value: "2" },
         { label: "(GMT+02:00) Harare, Pretoria", value: "2" },
-        {
-          label: "(GMT+02:00) Helsinki, Kyiv, Riga, Sofia, Tallinn, Vilnius",
-          value: "2",
-        },
+        { label: "(GMT+02:00) Helsinki, Kyiv, Riga, Sofia, Tallinn, Vilnius", value: "2" },
         { label: "(GMT+02:00) Jerusalem", value: "2" },
         { label: "(GMT+02:00) Minsk", value: "2" },
         { label: "(GMT+02:00) Windhoek", value: "2" },
@@ -714,10 +705,7 @@ export default {
         { label: "(GMT+05:00) Yekaterinburg", value: "5" },
         { label: "(GMT+05:00) Islamabad, Karachi, Tashkent", value: "5" },
         { label: "(GMT+05:30) Sri Jayawardenapura", value: "5.5" },
-        {
-          label: "(GMT+05:30) Chennai, Kolkata, Mumbai, New Delhi",
-          value: "5.5",
-        },
+        { label: "(GMT+05:30) Chennai, Kolkata, Mumbai, New Delhi", value: "5.5" },
         { label: "(GMT+05:45) Kathmandu", value: "5.75" },
         { label: "(GMT+06:00) Almaty, Novosibirsk", value: "6" },
         { label: "(GMT+06:00) Astana, Dhaka", value: "6" },
@@ -748,53 +736,6 @@ export default {
       ],
    
 
-
-
-      // businessInfo: {
-      //   "category": [ 
-      //     { 
-      //       "id": 1, "name": "Agriculture", "cat_image": null,"created_at": "2021-10-27T14:28:23.000000Z", 
-      //       "updated_at": "2021-10-27T14:28:23.000000Z", "deleted_at": null 
-      //     }, 
-      //     { 
-      //       "id": 25, "name": "AutoMechanic", "cat_image": "/icons/mechanic.png", 
-      //       "created_at": "2021-10-27T14:58:43.000000Z", "updated_at": "2021-10-27T14:58:43.000000Z", 
-      //       "deleted_at": null 
-      //     } 
-      //   ], 
-      //   "keywords": [ "bbbb", "kkkk" ], 
-      //   "location_description": "Omnis non vel nisi fuga vero quisquam in. Nemo delectus eligendi facilis. Sit neque ipsum nostrum id aliquid odit. Rem facere nam non.", 
-      //   "website": "sdfghytre", 
-      //   "community": 0, 
-      //   "phone": "(655) 555-555", 
-      //   "email": "bbb@bbb.com", 
-      //   "region": [], 
-      //   "city": "douala", 
-      //   "country": [ 
-      //     { "id": 1, "name": "Cameroon", "created_at": "2021-10-27T14:28:37.000000Z", "updated_at": "2021-10-27T14:28:37.000000Z" }, 
-      //     { "id": 1, "name": "Cameroon", "created_at": "2021-10-27T14:28:37.000000Z", "updated_at": "2021-10-27T14:28:37.000000Z" }, 
-      //     { "id": 3, "name": "france", "created_at": "2021-10-28T12:37:32.000000Z", "updated_at": "2021-10-28T12:37:33.000000Z" }, 
-      //     { "id": 4, "name": "belgique", "created_at": "2021-10-28T12:37:54.000000Z", "updated_at": "2021-10-28T12:37:56.000000Z" } 
-      //   ], 
-      //   "address": "essos", 
-      //   "business_open_hours": [ 
-      //     { "day": "Monday", "opening_time": "09:15:13", "closing_time": "07:49:12" }, 
-      //     { "day": "Tuesday", "opening_time": "04:06:23", "closing_time": "18:04:28" }, 
-      //     { "day": "Wednesday", "opening_time": "13:10:41", "closing_time": "20:36:37" }, 
-      //     { "day": "Thursday", "opening_time": "03:58:58", "closing_time": "03:28:55" }, 
-      //     { "day": "Friday", "opening_time": "09:50:17", "closing_time": "01:45:28" }, 
-      //     { "day": "Saturday", "opening_time": "13:53:52", "closing_time": "04:18:04" }, 
-      //     { "day": "Sunday", "opening_time": "03:44:50", "closing_time": "19:32:25" } 
-      //   ], 
-      //   "about_business": "Error et dolorum placeat natus omnis velit. Illo architecto et asperiores tempore repellendus omnis cupiditate. Et atque quis sit et. Molestiae perferendis dolor molestiae totam.", 
-      //   "lat": -67.600358, 
-      //   "lng": 174.872177, 
-      //   "name": "Kristofer Wilderman DDS", 
-      //   "logo_path": ":80000", 
-      //   "cover": [], 
-      //   "secondary_phone": 656555555, 
-      //   "timezone": "ddddd" 
-      // }
       
     };
   },
@@ -1132,7 +1073,7 @@ export default {
     },
 
     updateInfo: function (businessInfo) {
-      this.spinner = !this.spinner;
+      this.Lspinner = true;
       console.log("updateInfo", businessInfo)
 
       let formData = new FormData();
@@ -1183,7 +1124,7 @@ export default {
 
       console.log(formData);
       this.$store
-        .dispatch("businessSettingInfo/updateEditor", {
+        .dispatch("businessSettingInfo/UpdateInfomation", {
           path: "business/update/"+this.url,
           formData: formData,
         })
@@ -1191,7 +1132,7 @@ export default {
         console.log(data);
         this.getBusinessInfo();
         console.log(this.business_form);
-        this.spinner = !this.spinner;
+        this.Lspinner = false;
         this.flashMessage.show({
           status: "success",
           message: "Changes Made Successfuly"
@@ -1199,10 +1140,10 @@ export default {
       })
       .catch(err => {
         console.log({ err: err });
-        this.spinner = !this.spinner;
+        this.Lspinner = false;
         this.flashMessage.show({
-          status: "success",
-          message: "Changes Made Successfuly"
+          status: "error",
+          message: "Unable To Make Changes"
         });
       });
     },

@@ -20,7 +20,6 @@ import { search } from "./search";
 
 Vue.use(Vuex);
  axios.defaults.baseURL = process.env.VUE_APP_API_URL; 
-//  axios.defaults.baseURL ="https://1a00-129-0-205-241.ngrok.io/api/v1"; 
 
 export default new Vuex.Store({
   modules: {

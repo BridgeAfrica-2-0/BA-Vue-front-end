@@ -122,8 +122,8 @@ import "@/assets/css/bootstrap.css";
 Vue.use(BootstrapVue);
 Vue.use(IconsPlugin);
 
-import InfiniteLoading from 'vue-infinite-loading';
-import VueEasyLightbox from 'vue-easy-lightbox'
+// import InfiniteLoading from 'vue-infinite-loading';
+// import VueEasyLightbox from 'vue-easy-lightbox'
 
 
 Vue.use(VueEasyLightbox);

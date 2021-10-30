@@ -9,7 +9,13 @@
         <img class="card-img album-img" :src="cover(album.cover)" alt="" />
       </span>
       <div class="createdesc botmedia">
-        <div class="botmediadess-position">
+        <div class="botmediadess-position" v-if="loading">
+          <b-spinner
+            style="width: 3rem; height: 3rem; color: #e75c18"
+            label="Large Spinner"
+          ></b-spinner>
+        </div>
+        <div class="botmediadess-position" v-else>
           <h6 style="font-size: 26px; font-weight: bold">
             {{ album.name }}
           </h6>
@@ -21,7 +27,7 @@
             v-if="upHere"
             variant="outline-primary"
             size="sm"
-            @click="showAlbumPictures"
+            @click="show"
           >
             Show
           </b-button>
@@ -60,7 +66,6 @@ import defaultImage from "@/assets/img/nothing.jpg";
 import { fullMediaLink } from "@/helpers";
 
 export default {
-
   props: [
     "album",
     "type",
@@ -72,6 +77,7 @@ export default {
 
   data: () => ({
     upHere: false,
+    loading: false,
   }),
 
   filters: {
@@ -86,6 +92,11 @@ export default {
 
     cover(cover) {
       return cover.length ? this.getFullMediaLink(cover[0]) : defaultImage;
+    },
+
+    show: async function () {
+      this.loading = true;
+      this.loading = await this.showAlbumPictures();
     },
   },
 };

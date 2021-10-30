@@ -221,8 +221,12 @@ export default {
       state.albums = newState
     },
 
+    updateAlbumItem(state, payload) {
+      const newState = state.albums.map(album => (album.id == payload.id) ? Object.assign(album, { items: ('remove' == payload.action) ? parseInt(album.items) - 1 : parseInt(album.items) + 1 }) : album)
+      state.albums = newState
+    },
+
     removeAlbum(state, uuid) {
-      console.log(state.albums)
       state.albums = state.albums.filter(album => album.id != uuid)
     },
 

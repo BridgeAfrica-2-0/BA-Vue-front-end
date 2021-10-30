@@ -162,7 +162,7 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
+import { mapActions, mapMutations } from "vuex";
 import { fullMediaLink } from "@/helpers";
 import { v4 } from "uuid";
 
@@ -240,6 +240,7 @@ export default {
         deleteImagePicture: this.deleteImagePicture,
         onDownloadPic: this.onDownloadPic,
         getAlbumImages: this.getAlbumImages,
+        updateItem: this.updateItem,
       }),
       business: () => ({
         submitPost: this.submitPostBusiness,
@@ -248,6 +249,7 @@ export default {
         deleteImagePicture: this.deleteImagePictureBusiness,
         onDownloadPic: this.onDownloadPicBusiness,
         getAlbumImages: this.getAlbumImagesBusiness,
+        updateItem: this.updateItemBusiness,
       }),
     };
 
@@ -273,7 +275,6 @@ export default {
   },
 
   methods: {
-    getFullMediaLink: fullMediaLink,
     ...mapActions({
       submitPost: "UserProfileOwner/submitPost",
       setProfilePicture: "UserProfileOwner/setProfilePic",
@@ -290,6 +291,13 @@ export default {
       getAlbumImagesBusiness: "businessOwner/getAlbumImages",
     }),
 
+    ...mapMutations({
+      updateItem: "UserProfileOwner/updateAlbumItem",
+      updateItemBusiness: "businessOwner/updateAlbumItem",
+    }),
+
+    getFullMediaLink: fullMediaLink,
+
     getYoutubeKey(path) {
       let videoID = path.split("v=")[1];
       const ampersandPosition = videoID.indexOf("&");
@@ -301,7 +309,7 @@ export default {
     },
 
     showImg(index) {
-      this.currentPicture = this.Slideimges.indexOf(index) 
+      this.currentPicture = this.Slideimges.indexOf(index);
       this.visible = true;
     },
     handleHide() {
@@ -374,8 +382,7 @@ export default {
           });
           // loader.hide();
         })
-        .catch((error) => {
-          console.log(error);
+        .catch(() => {
           this.sending = false;
           this.flashMessage.show({
             status: "error",
@@ -389,13 +396,18 @@ export default {
         .deleteImagePicture(id)
         .then(() => {
           this.removePicture(id, key);
+
+          this.pattern[this.type]().updateItem({
+            id: this.album,
+            action: "remove",
+          });
+
           this.flashMessage.show({
             status: "success",
             message: "Media Deleted",
           });
         })
-        .catch((error) => {
-          console.log(error);
+        .catch(() => {
           this.sending = false;
           this.flashMessage.show({
             status: "error",
@@ -475,6 +487,7 @@ export default {
       this.pattern[this.type]()
         .submitPost(payload)
         .then(() => {
+          this.pattern[this.type]().updateItem({ id: albumId, action: "add" });
           this.pattern[this.type]().getAlbumImages(data);
           this.loading = false;
           this.text = "";

@@ -131,6 +131,7 @@
       <span class="text-center ml-2 f-20"> {{ this.album_name }} </span>
 
       <Images
+        @update:item="() => updateItem()"
         :hasLoadPicture="hasLoadPicture"
         :album="album_id"
         :type="type"
@@ -286,16 +287,18 @@ export default {
             }
           : { data: album.id };
 
-      this.strategy[this.type]()
+      return this.strategy[this.type]()
         .showalbum(credentials.data)
         .then(() => {
           this.album_id = album.id;
           this.album_name = album.name;
           this.showalbum = true;
           this.hasLoadPicture = false;
+          return true
         })
         .catch(() => {
           this.hasLoadPicture = false;
+          return false
         });
     },
 

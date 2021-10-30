@@ -212,39 +212,54 @@
     <div class="hidedesktop" id="hidedesktop">
       <!-- navigation--------------- -->
       <div class="row parent">
-        <b-avatar class="avatar" text="1" :variant="success1"></b-avatar>
-        <h2 class="text cursor" @click="changeElementType(1)">In Progress</h2>
-        <div class="progress prog cursor gris" @click="changeElementType(1)">
+
+        <b-avatar id="a1" class="avatar bg-success" text="1" ></b-avatar>
+        <h2 class="text cursor" @click="changeElementType(1)">All</h2>
+        <div id="p1" class="progress prog cursor gris bg-success" @click="changeElementType(1)">
           <div
             class="progress-bar bg-success"
             role="progressbar"
-            :style="style1"
+            
             aria-valuenow="25"
             aria-valuemin="0"
             aria-valuemax="100"
           ></div>
         </div>
 
-        <b-avatar class="avatar" text="2" :variant="success2"></b-avatar>
-        <h2 class="text cursor" @click="changeElementType(2)">Complete</h2>
-        <div class="progress prog cursor gris" @click="changeElementType(2)">
+
+        <b-avatar id="a2" class="avatar" text="2" ></b-avatar>
+        <h2 class="text cursor" @click="changeElementType(2)">In Progress</h2>
+        <div id="p2" class="progress prog cursor gris" @click="changeElementType(2)">
           <div
             class="progress-bar bg-success"
             role="progressbar"
-            :style="style2"
+            
             aria-valuenow="25"
             aria-valuemin="0"
             aria-valuemax="100"
           ></div>
         </div>
 
-        <b-avatar class="avatar" text="3" :variant="success3"></b-avatar>
-        <h2 class="text cursor" @click="changeElementType(3)">Cancel</h2>
-        <div class="progress prog cursor gris" @click="changeElementType(3)">
+        <b-avatar id="a3" class="avatar" text="3" ></b-avatar>
+        <h2 class="text cursor" @click="changeElementType(3)">Complete</h2>
+        <div id="p3" class="progress prog cursor gris" @click="changeElementType(3)">
           <div
             class="progress-bar bg-success"
             role="progressbar"
-            :style="style3"
+            
+            aria-valuenow="25"
+            aria-valuemin="0"
+            aria-valuemax="100"
+          ></div>
+        </div>
+
+        <b-avatar id="a4" class="avatar" text="4" ></b-avatar>
+        <h2 class="text cursor" @click="changeElementType(4)">Cancel</h2>
+        <div id="p4" class="progress prog cursor gris " @click="changeElementType(4)">
+          <div
+            class="progress-bar bg-success"
+            role="progressbar"
+            
             aria-valuenow="25"
             aria-valuemin="0"
             aria-valuemax="100"
@@ -256,11 +271,31 @@
         <div class="col order"><h3>My orders</h3></div>
         <div class="status"><h3 class="text-danger">clear history</h3></div>
       </div>
-      <hr />
+      
 
       <div>
+
         <div v-if="status == 1" class="inprogress">
-          <div v-for="i in 4" :key="i">
+          <div class="show row ">
+             <div class="col-4 ">Show:</div> <div class="col "><b-form-select v-model="selected" :options="options"></b-form-select></div>
+          </div>
+          <div v-for="i in etat1" :key="i">
+
+              <div class="justify-content-start container">
+               <div class="container d-flex justify-content-end btn-marg ">
+                <div class="manage" >
+                  <b-dropdown variant="ligth" id="dropdown-1" text="Manage" class="m-md-2 ">
+                    <b-dropdown-item>Archive</b-dropdown-item>
+                    <b-dropdown-item>Delete</b-dropdown-item>
+                  
+                  </b-dropdown>
+                </div>
+              </div>
+               <span class="gras">Order</span> <span class="text-success">#12324253</span> <br>
+               <span class="flou">yaoundé 12/12/2021 12H00</span>
+                <hr /> 
+           </div>
+
             <div class="justify-content-between row">
               <div class="col-3">
                 <splide :options="{ rewind: true }" class="r-img">
@@ -271,6 +306,77 @@
               </div>
 
               <div class="col-2 text-end text-start bold">
+                <h3>Product Qte :</h3>
+                <h3>Price :</h3>
+               
+                <h3>shipping cost:</h3>
+                <h3>Total :</h3>
+              </div>
+
+              <div class="col-3 text-start">
+                <h3>4</h3>
+                <h3>2000 Fcfa</h3>
+                <h3>4000 Fcfa</h3>
+                <h3>6000 XAF</h3>
+                
+              </div>
+
+              <div class="col" id="hidedesktop1">
+                <h3 class="bold1">status</h3>
+                <h3 class="text-success">{{ i }}</h3>
+              </div>
+
+              <div class="container d-flex justify-content-end btn-marg">
+                <button class="button btn shadow">
+                  <h3 class="h3 button-text">Re-order</h3>
+                </button>
+              </div>
+              
+
+              <div class="justify-content-center container row">
+                <br />
+              </div>
+
+              <div class="justify-content-center container row">
+                <br />
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <div v-if="status == 2" class="inprogress">
+          <div class="show row ">
+             <div class="col-4 ">Show:</div> <div class="col "><b-form-select v-model="selected" :options="options"></b-form-select></div>
+          </div>
+          
+          <div v-for="i in 4" :key="i">
+
+              <div class="justify-content-start container">
+               <div class="container d-flex justify-content-end btn-marg ">
+                <div class="manage" >
+                  <b-dropdown variant="ligth" id="dropdown-1" text="Manage" class="m-md-2 ">
+                    <b-dropdown-item>Archive</b-dropdown-item>
+                    <b-dropdown-item>Delete</b-dropdown-item>
+                  
+                  </b-dropdown>
+                </div>
+              </div>
+               <span class="gras">Order</span> <span class="text-success">#12324253</span> <br>
+               <span class="flou">yaoundé 12/12/2021 12H00</span>
+                <hr /> 
+           </div>
+
+            <div class="justify-content-between row">
+              <div class="col-3">
+                <splide :options="{ rewind: true }" class="r-img">
+                  <splide-slide cl v-for="(im, index) in img" :key="index">
+                    <img :src="img[index]" class="r-img" />
+                  </splide-slide>
+                </splide>
+              </div>
+
+              <!-- <div class="col-2 text-end text-start bold">
                 <h3>Name :</h3>
                 <h3>Product ID :</h3>
                 <h3>Quantity :</h3>
@@ -286,6 +392,22 @@
                 <h3>12000 XAF</h3>
                 <h3>10000 XAF</h3>
                 <h3>13000 XAF</h3>
+              </div> -->
+
+              <div class="col-2 text-end text-start bold">
+                <h3>Product Qte :</h3>
+                <h3>Price :</h3>
+               
+                <h3>shipping cost:</h3>
+                <h3>Total :</h3>
+              </div>
+
+              <div class="col-3 text-start">
+                <h3>4</h3>
+                <h3>2000 Fcfa</h3>
+                <h3>4000 Fcfa</h3>
+                <h3>6000 XAF</h3>
+                
               </div>
 
               <div class="col" id="hidedesktop1">
@@ -298,13 +420,7 @@
                   <h3 class="h3 button-text">Re-order</h3>
                 </button>
               </div>
-              <!-- <div class="col" id="hidedesktop1">
-                <h3>status</h3>
-                <h3 class="text-success">{{ etat }}</h3>
-                <button class="button btn shadow btn-margd">
-                  <h3 class="h3 button-text">Re-order</h3>
-                </button>
-              </div> -->
+              
 
               <div class="justify-content-center container row">
                 <br />
@@ -317,7 +433,7 @@
           </div>
         </div>
 
-        <div v-if="status == 2" class="complete">
+        <div v-if="status == 3" class="complete">
           <div v-for="i in 4" :key="i">
             <div class="justify-content-between row">
               <div class="col-3">
@@ -367,7 +483,7 @@
             </div>
           </div>
         </div>
-        <div v-if="status == 3" class="cancel">
+        <div v-if="status == 4" class="cancel">
           <div v-for="i in 4" :key="i">
             <div class="justify-content-between row">
               <div class="col-3">
@@ -430,17 +546,16 @@ export default {
   data() {
     return {
       rimg: "",
-      style1: "width: 100%;",
-      style2: "",
-      style3: "",
-      success1: "success",
-      success2: "secondary",
-      success3: "secondary",
-
       status: 1,
-      etat: "pending",
-
+      etat: "All",
       img: ["http://urlr.me/YMQXD", "https://placekitten.com/400/300"],
+      options: [
+          { value: null, text: 'Please select an option' },
+          { value: 'a', text: 'last 5 days' },
+          { value: 'b', text: 'last 10 days' },
+         
+        ],
+        etat1: ["in progress", "complete", "cancel"]
     };
   },
 
@@ -449,32 +564,34 @@ export default {
       console.log("------------------" + p);
       this.status = p;
 
-      if (p == 1) {
-        this.style1 = "width: 100%;";
-        this.style2 = "";
-        this.style3 = "";
-        this.success1 = "success";
-        this.success2 = "secondary";
-        this.success3 = "secondary";
-        this.etat = "pending";
-      } else if (p == 2) {
-        this.style1 = "";
-        this.style2 = "width: 100%;";
-        this.style3 = "";
-        this.success1 = "secondary";
-        this.success2 = "success";
-        this.success3 = "secondary";
-        this.etat = "complete";
-      } else if (p == 3) {
-        this.style1 = "";
-        this.style2 = "";
-        this.style3 = "width: 100%;";
-        this.success1 = "secondary";
-        this.success2 = "secondary";
-        this.success3 = "success";
 
-        this.etat = "Canceled";
+      if (p == 1) {
+        
+        this.etat = "All";
+      } else if (p == 2) {
+
+        this.etat = "pending";
+      } else if (p == 3) {
+       
+        this.etat = "complete";
+      }else if(p == 4){
+        this.etat = "Canceled"
       }
+        //transition partie desktop 
+      const a = document.getElementById("a" + p);
+      const pr = document.getElementById("p" + p);
+
+      const as = document.querySelectorAll(".avatar");
+      as.forEach((dat) => {
+        dat.classList.remove("bg-success");
+      });
+      a.classList.add("bg-success");
+
+      const ps = document.querySelectorAll(".progress");
+      ps.forEach((dat) => {
+        dat.classList.remove("bg-success");
+      });
+      pr.classList.add("bg-success");
 
       //transition partie mobile
 
@@ -493,7 +610,20 @@ export default {
 
 <style scoped>
 /* style for desktop------------------------- */
-
+.flou{
+  color: #b6b2b2;
+}
+.show{
+  margin-bottom: 70px;
+  width: 280px;
+}
+.manage{
+  margin-bottom: -60px;
+  height: 50px;
+  width: 90px;
+ 
+ 
+}
 .avatar {
   margin-top: 23px;
   margin-right: 10px;
@@ -506,7 +636,7 @@ export default {
   height: 10px;
   margin-left: 20px;
   margin-right: 10px !important;
-  width: 200px !important;
+  width: 130px !important;
 }
 .parent {
   margin-left: 40px;
@@ -552,7 +682,9 @@ h3 {
 .bold h3 {
   font-weight: bold !important;
 }
-
+.gras{
+  font-weight: bold ;
+}
 /* end style for desktop ----------------------------- */
 
 /*  start style mobile------------------------- */

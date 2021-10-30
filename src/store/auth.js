@@ -1,5 +1,4 @@
 import axios from "axios";
-
 axios.defaults.baseURL = process.env.VUE_APP_API_URL;
 
 export default {
@@ -222,6 +221,6 @@ export default {
     getAuthToken(state) {
       return `Bearer ${state.user.accessToken}`
     },
-    
+
   },
 };

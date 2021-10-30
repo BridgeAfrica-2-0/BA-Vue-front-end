@@ -20,7 +20,7 @@
       <b-row>
         <b-col md="3" xl="3" lg="3" cols="5" sm="3">  
           <div class="center-img">
-            <img :src="item.picture" class="r-image" />
+            <img :src="item.image" class="r-image" />
           </div>
         </b-col>
         <b-col md="5" cols="7"  lg="7" xl="5" sm="5">
@@ -28,17 +28,24 @@
 
           <p class="textt">
             <strong class="net-title"> {{ item.name }} </strong> <br />
-            {{ item.category }}
+             <span class="m-1" v-for=" cat in item.categories" :key="cat "> {{cat}}  </span>
             <br />
             {{ item.followers }} Community <br />
 
             <span class="location">
               <b-icon-geo-alt class="ico"></b-icon-geo-alt>
-              {{ item.location_description }}
+             {{ item.address }}
             </span>
             <br />
 
-            {{ item.about_network }} <b-link>Read More</b-link>
+            <read-more
+                v-if="item.description"
+                more-str="read more"
+                :text="item.description"
+                link="#"
+                less-str="read less"
+                :max-chars="200"
+              ></read-more>
           </p>
         </b-col>
 

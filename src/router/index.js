@@ -56,9 +56,9 @@ const routes = [
     path: "/myorders",
     name: "orders",
     component: myorders,
-    meta: {
-      auth: true,
-    },
+    // meta: {
+    //   auth: true,
+    // },
   },
   {
     path: "/",

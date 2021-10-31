@@ -7,6 +7,7 @@
     ----------------------DEBUT -----------------------------------------------------
     -->
     <div id="hidemobile">
+
       <div class="justify-content-between d-flex row cd B">
         <div
           id="m1"
@@ -14,19 +15,30 @@
           @click="changeElementType(1)"
         >
           <div class="cercle1">1</div>
-          <h2 class="h2 text-position">In progress</h2>
+          <h2 class="h2 text-position">All</h2>
         </div>
-        <div
+
+         <div
           id="m2"
           class="mobile1 col t start-50"
           @click="changeElementType(2)"
         >
           <div class="cercle2">2</div>
 
+          <h2 class="h2 text-position text-center">In progress</h2>
+        </div>
+
+        <div
+          id="m3"
+          class="mobile3 col t start-50"
+          @click="changeElementType(3)"
+        >
+          <div class="cercle2">3</div>
+
           <h2 class="h2 text-position text-center">Complete</h2>
         </div>
-        <div id="m3" class="mobile2 col t" @click="changeElementType(3)">
-          <div class="cercle2">3</div>
+        <div id="m4" class="mobile2 col t" @click="changeElementType(4)">
+          <div class="cercle2">4</div>
           <h2 class="h2 text-position text-center">Cancel</h2>
         </div>
       </div>
@@ -44,11 +56,31 @@
 
       <div>
         <div v-if="status == 1" class="inprogress">
-          <div v-for="i in 4" :key="i">
-            <div class="justify-content-start container row">
-              <p class="h3">status:</p>
-              <h3 class="text-success h3 margstatus">{{ etat }}</h3>
+            <div class="show row ">
+              <div class="col-4 ">Show:</div> <div class="col "><b-form-select v-model="selected" :options="options"></b-form-select></div>
             </div>
+          <div v-for="i in etat1" :key="i">
+            <div class="justify-content-start container row marghr">
+              <div class="justify-content-start container">
+                  <div class="container d-flex justify-content-end btn-marg ">
+                    <div class="manage" >
+                      <b-dropdown variant="ligth" id="dropdown-1" text="Manage" class="m-md-2 ">
+                        <b-dropdown-item>Archive</b-dropdown-item>
+                        <b-dropdown-item>Delete</b-dropdown-item>
+                      
+                      </b-dropdown>
+                    </div>
+                  </div>
+                  <span class="gras">Order</span> <span class="text-success order">#12324253</span> <br>
+                  <span class="flou">yaoundé 12/12/2021 12H00</span>
+                    
+             </div>
+
+            
+              <p class="h3 statusp">status:</p>
+              <h3 class="text-success h3 margstatus">{{ i }}</h3>
+            </div>
+              <hr /> 
 
             <div class="justify-content-center row">
               <div class="col-4 margimg">
@@ -60,18 +92,17 @@
               </div>
 
               <div class="col-4 text-end">
-                <h3 class="h3 margm2">Name :</h3>
-                <h3 class="h3 margm2">Product ID :</h3>
-                <h3 class="h3 margm2">Quantity :</h3>
-                <h3 class="h3 margm2">price :</h3>
+                <h3 class="h3 margm2">Product Qte :</h3>
+                <h3 class="h3 margm2">Price:</h3>
+                
                 <h3 class="h3 margm2">shipping cost:</h3>
-                <h3 class="h3 margm2">Total Cost :</h3>
+                <h3 class="h3 margm2">Total :</h3>
+
               </div>
 
               <div class="col-4">
-                <h3 class="h3">Sneaker</h3>
-                <h3 class="h3">#123v3c13</h3>
-                <h3 class="h3">1 Item</h3>
+                <h3 class="h3">4</h3>
+                
                 <h3 class="h3">12000 XAF</h3>
                 <h3 class="h3">10000 XAF</h3>
                 <h3 class="h3">13000 XAF</h3>
@@ -89,19 +120,39 @@
                 </button>
               </div>
             </div>
-            <!-- <div class="justify-content-center container row">
-              <br />
-            </div> <hr /> -->
-            <hr />
+            <div class="justify-content-center container row">
+              <br />  <br />
+            </div> 
+            <!-- <hr /> -->
           </div>
         </div>
 
         <div v-if="status == 2" class="inprogress">
+            <div class="show row ">
+              <div class="col-4 ">Show:</div> <div class="col "><b-form-select v-model="selected" :options="options"></b-form-select></div>
+            </div>
           <div v-for="i in 4" :key="i">
-            <div class="justify-content-start container row">
-              <p class="h3">status:</p>
+            <div class="justify-content-start container row marghr">
+              <div class="justify-content-start container">
+                  <div class="container d-flex justify-content-end btn-marg ">
+                    <div class="manage" >
+                      <b-dropdown variant="ligth" id="dropdown-1" text="Manage" class="m-md-2 ">
+                        <b-dropdown-item>Archive</b-dropdown-item>
+                        <b-dropdown-item>Delete</b-dropdown-item>
+                      
+                      </b-dropdown>
+                    </div>
+                  </div>
+                  <span class="gras">Order</span> <span class="text-success order">#12324253</span> <br>
+                  <span class="flou">yaoundé 12/12/2021 12H00</span>
+                    
+             </div>
+
+            
+              <p class="h3 statusp">status:</p>
               <h3 class="text-success h3 margstatus">{{ etat }}</h3>
             </div>
+              <hr /> 
 
             <div class="justify-content-center row">
               <div class="col-4 margimg">
@@ -113,18 +164,17 @@
               </div>
 
               <div class="col-4 text-end">
-                <h3 class="h3 margm2">Name :</h3>
-                <h3 class="h3 margm2">Product ID :</h3>
-                <h3 class="h3 margm2">Quantity :</h3>
-                <h3 class="h3 margm2">price :</h3>
+                <h3 class="h3 margm2">Product Qte :</h3>
+                <h3 class="h3 margm2">Price:</h3>
+                
                 <h3 class="h3 margm2">shipping cost:</h3>
-                <h3 class="h3 margm2">Total Cost :</h3>
+                <h3 class="h3 margm2">Total :</h3>
+
               </div>
 
               <div class="col-4">
-                <h3 class="h3">Sneaker</h3>
-                <h3 class="h3">#123v3c13</h3>
-                <h3 class="h3">1 Item</h3>
+                <h3 class="h3">4</h3>
+                
                 <h3 class="h3">12000 XAF</h3>
                 <h3 class="h3">10000 XAF</h3>
                 <h3 class="h3">13000 XAF</h3>
@@ -142,19 +192,39 @@
                 </button>
               </div>
             </div>
-            <!-- <div class="justify-content-center container row">
-              <br />
-            </div> -->
-            <hr />
+            <div class="justify-content-center container row">
+              <br />  <br />
+            </div> 
+            <!-- <hr /> -->
           </div>
         </div>
 
-        <div v-if="status == 3" class="cancel">
+        <div v-if="status == 3" class="complete">
+            <div class="show row ">
+              <div class="col-4 ">Show:</div> <div class="col "><b-form-select v-model="selected" :options="options"></b-form-select></div>
+            </div>
           <div v-for="i in 4" :key="i">
-            <div class="justify-content-start container row">
-              <p class="h3">status:</p>
+            <div class="justify-content-start container row marghr">
+              <div class="justify-content-start container">
+                  <div class="container d-flex justify-content-end btn-marg ">
+                    <div class="manage" >
+                      <b-dropdown variant="ligth" id="dropdown-1" text="Manage" class="m-md-2 ">
+                        <b-dropdown-item>Archive</b-dropdown-item>
+                        <b-dropdown-item>Delete</b-dropdown-item>
+                      
+                      </b-dropdown>
+                    </div>
+                  </div>
+                  <span class="gras">Order</span> <span class="text-success order">#12324253</span> <br>
+                  <span class="flou">yaoundé 12/12/2021 12H00</span>
+                    
+             </div>
+
+            
+              <p class="h3 statusp">status:</p>
               <h3 class="text-success h3 margstatus">{{ etat }}</h3>
             </div>
+              <hr /> 
 
             <div class="justify-content-center row">
               <div class="col-4 margimg">
@@ -166,18 +236,17 @@
               </div>
 
               <div class="col-4 text-end">
-                <h3 class="h3 margm2">Name :</h3>
-                <h3 class="h3 margm2">Product ID :</h3>
-                <h3 class="h3 margm2">Quantity :</h3>
-                <h3 class="h3 margm2">price :</h3>
+                <h3 class="h3 margm2">Product Qte :</h3>
+                <h3 class="h3 margm2">Price:</h3>
+                
                 <h3 class="h3 margm2">shipping cost:</h3>
-                <h3 class="h3 margm2">Total Cost :</h3>
+                <h3 class="h3 margm2">Total :</h3>
+
               </div>
 
               <div class="col-4">
-                <h3 class="h3">Sneaker</h3>
-                <h3 class="h3">#123v3c13</h3>
-                <h3 class="h3">1 Item</h3>
+                <h3 class="h3">4</h3>
+                
                 <h3 class="h3">12000 XAF</h3>
                 <h3 class="h3">10000 XAF</h3>
                 <h3 class="h3">13000 XAF</h3>
@@ -195,12 +264,86 @@
                 </button>
               </div>
             </div>
-            <!-- <div class="justify-content-center container row">
-              <br />
-            </div> -->
-            <hr />
+            <div class="justify-content-center container row">
+              <br />  <br />
+            </div> 
+            <!-- <hr /> -->
           </div>
         </div>
+
+
+        <div v-if="status == 4" class="cancel">
+            <div class="show row ">
+              <div class="col-4 ">Show:</div> <div class="col "><b-form-select v-model="selected" :options="options"></b-form-select></div>
+            </div>
+          <div v-for="i in 4" :key="i">
+            <div class="justify-content-start container row marghr">
+              <div class="justify-content-start container">
+                  <div class="container d-flex justify-content-end btn-marg ">
+                    <div class="manage" >
+                      <b-dropdown variant="ligth" id="dropdown-1" text="Manage" class="m-md-2 ">
+                        <b-dropdown-item>Archive</b-dropdown-item>
+                        <b-dropdown-item>Delete</b-dropdown-item>
+                      
+                      </b-dropdown>
+                    </div>
+                  </div>
+                  <span class="gras">Order</span> <span class="text-success order">#12324253</span> <br>
+                  <span class="flou">yaoundé 12/12/2021 12H00</span>
+                    
+             </div>
+
+            
+              <p class="h3 statusp">status:</p>
+              <h3 class="text-success h3 margstatus">{{ etat }}</h3>
+            </div>
+              <hr /> 
+
+            <div class="justify-content-center row">
+              <div class="col-4 margimg">
+                <splide :options="{ rewind: true }" class="r-img1">
+                  <splide-slide cl v-for="(im, index) in img" :key="index">
+                    <img :src="img[index]" class="r-img1" />
+                  </splide-slide>
+                </splide>
+              </div>
+
+              <div class="col-4 text-end">
+                <h3 class="h3 margm2">Product Qte :</h3>
+                <h3 class="h3 margm2">Price:</h3>
+                
+                <h3 class="h3 margm2">shipping cost:</h3>
+                <h3 class="h3 margm2">Total :</h3>
+
+              </div>
+
+              <div class="col-4">
+                <h3 class="h3">4</h3>
+                
+                <h3 class="h3">12000 XAF</h3>
+                <h3 class="h3">10000 XAF</h3>
+                <h3 class="h3">13000 XAF</h3>
+              </div>
+            </div>
+
+            <div class="justify-content-center container row">
+              <br />
+            </div>
+
+            <div class="justify-content-center container row">
+              <div class="">
+                <button class="buttonm btn shadow text-center">
+                  <h3 class="h3 button-text">Re-order</h3>
+                </button>
+              </div>
+            </div>
+            <div class="justify-content-center container row">
+              <br />  <br />
+            </div> 
+            <!-- <hr /> -->
+          </div>
+        </div>
+
       </div>
     </div>
     <div class="justify-content-between row"></div>
@@ -376,23 +519,7 @@
                 </splide>
               </div>
 
-              <!-- <div class="col-2 text-end text-start bold">
-                <h3>Name :</h3>
-                <h3>Product ID :</h3>
-                <h3>Quantity :</h3>
-                <h3>price :</h3>
-                <h3>shipping cost:</h3>
-                <h3>Total Cost :</h3>
-              </div>
-
-              <div class="col-3 text-start">
-                <h3>Sneaker</h3>
-                <h3>#123v3c13</h3>
-                <h3>1 Item</h3>
-                <h3>12000 XAF</h3>
-                <h3>10000 XAF</h3>
-                <h3>13000 XAF</h3>
-              </div> -->
+              
 
               <div class="col-2 text-end text-start bold">
                 <h3>Product Qte :</h3>
@@ -434,7 +561,27 @@
         </div>
 
         <div v-if="status == 3" class="complete">
+          <div class="show row ">
+             <div class="col-4 ">Show:</div> <div class="col "><b-form-select v-model="selected" :options="options"></b-form-select></div>
+          </div>
+          
           <div v-for="i in 4" :key="i">
+
+              <div class="justify-content-start container">
+               <div class="container d-flex justify-content-end btn-marg ">
+                <div class="manage" >
+                  <b-dropdown variant="ligth" id="dropdown-1" text="Manage" class="m-md-2 ">
+                    <b-dropdown-item>Archive</b-dropdown-item>
+                    <b-dropdown-item>Delete</b-dropdown-item>
+                  
+                  </b-dropdown>
+                </div>
+              </div>
+               <span class="gras">Order</span> <span class="text-success">#12324253</span> <br>
+               <span class="flou">yaoundé 12/12/2021 12H00</span>
+                <hr /> 
+           </div>
+
             <div class="justify-content-between row">
               <div class="col-3">
                 <splide :options="{ rewind: true }" class="r-img">
@@ -444,23 +591,24 @@
                 </splide>
               </div>
 
+              
+
               <div class="col-2 text-end text-start bold">
-                <h3>Name :</h3>
-                <h3>Product ID :</h3>
-                <h3>Quantity :</h3>
-                <h3>price :</h3>
+                <h3>Product Qte :</h3>
+                <h3>Price :</h3>
+               
                 <h3>shipping cost:</h3>
-                <h3>Total Cost :</h3>
+                <h3>Total :</h3>
               </div>
 
               <div class="col-3 text-start">
-                <h3>Sneaker</h3>
-                <h3>#123v3c13</h3>
-                <h3>1 Item</h3>
-                <h3>12000 XAF</h3>
-                <h3>10000 XAF</h3>
-                <h3>13000 XAF</h3>
+                <h3>4</h3>
+                <h3>2000 Fcfa</h3>
+                <h3>4000 Fcfa</h3>
+                <h3>6000 XAF</h3>
+                
               </div>
+
               <div class="col" id="hidedesktop1">
                 <h3 class="bold1">status</h3>
                 <h3 class="text-success">{{ etat }}</h3>
@@ -471,20 +619,41 @@
                   <h3 class="h3 button-text">Re-order</h3>
                 </button>
               </div>
+              
 
               <div class="justify-content-center container row">
                 <br />
               </div>
 
-              <div class="justify-content-center container row"></div>
               <div class="justify-content-center container row">
                 <br />
               </div>
             </div>
           </div>
         </div>
-        <div v-if="status == 4" class="cancel">
+
+        <div v-if="status == 4" class="canel">
+          <div class="show row ">
+             <div class="col-4 ">Show:</div> <div class="col "><b-form-select v-model="selected" :options="options"></b-form-select></div>
+          </div>
+          
           <div v-for="i in 4" :key="i">
+
+              <div class="justify-content-start container">
+               <div class="container d-flex justify-content-end btn-marg ">
+                <div class="manage" >
+                  <b-dropdown variant="ligth" id="dropdown-1" text="Manage" class="m-md-2 ">
+                    <b-dropdown-item>Archive</b-dropdown-item>
+                    <b-dropdown-item>Delete</b-dropdown-item>
+                  
+                  </b-dropdown>
+                </div>
+              </div>
+               <span class="gras">Order</span> <span class="text-success">#12324253</span> <br>
+               <span class="flou">yaoundé 12/12/2021 12H00</span>
+                <hr /> 
+           </div>
+
             <div class="justify-content-between row">
               <div class="col-3">
                 <splide :options="{ rewind: true }" class="r-img">
@@ -494,23 +663,24 @@
                 </splide>
               </div>
 
+              
+
               <div class="col-2 text-end text-start bold">
-                <h3>Name :</h3>
-                <h3>Product ID :</h3>
-                <h3>Quantity :</h3>
-                <h3>price :</h3>
+                <h3>Product Qte :</h3>
+                <h3>Price :</h3>
+               
                 <h3>shipping cost:</h3>
-                <h3>Total Cost :</h3>
+                <h3>Total :</h3>
               </div>
 
               <div class="col-3 text-start">
-                <h3>Sneaker</h3>
-                <h3>#123v3c13</h3>
-                <h3>1 Item</h3>
-                <h3>12000 XAF</h3>
-                <h3>10000 XAF</h3>
-                <h3>13000 XAF</h3>
+                <h3>4</h3>
+                <h3>2000 Fcfa</h3>
+                <h3>4000 Fcfa</h3>
+                <h3>6000 XAF</h3>
+                
               </div>
+
               <div class="col" id="hidedesktop1">
                 <h3 class="bold1">status</h3>
                 <h3 class="text-success">{{ etat }}</h3>
@@ -521,12 +691,12 @@
                   <h3 class="h3 button-text">Re-order</h3>
                 </button>
               </div>
+              
 
               <div class="justify-content-center container row">
                 <br />
               </div>
 
-              <div class="justify-content-center container row"></div>
               <div class="justify-content-center container row">
                 <br />
               </div>
@@ -545,6 +715,7 @@ export default {
   components: { navbar },
   data() {
     return {
+      selected: '',
       rimg: "",
       status: 1,
       etat: "All",
@@ -790,20 +961,20 @@ h3 {
 }
 
 .mobile {
-  width: 200px;
+  width: 195px;
   height: 50px;
   color: white;
   background-color: #bfbfbf;
-  clip-path: polygon(75% 0%, 88% 52%, 75% 100%, 0% 100%, 0 52%, 0% 0%);
+  clip-path: polygon(75% 0%, 88% 50%, 75% 100%, 0% 100%, 0 52%, 0% 0%);
 }
 .mobile1 {
   width: 200px;
   height: 50px;
-  margin-left: -22px;
+  margin-left: -21px;
   color: white;
   z-index: 20px;
   background-color: #bfbfbf;
-  clip-path: polygon(75% 0%, 88% 52%, 75% 100%, 0% 100%, 11% 51%, 0% 0%);
+  clip-path: polygon(75% 0%, 88% 50%, 75% 100%, 0% 100%, 11% 50%, 0% 0%);
 }
 .mobile2 {
   width: 200px;
@@ -812,7 +983,16 @@ h3 {
   color: white;
   z-index: 20px;
   background-color: #bfbfbf;
-  clip-path: polygon(75% 0%, 75% 47%, 75% 100%, 0% 100%, 11% 51%, 0% 0%);
+  clip-path: polygon(75% 0%, 75% 50%, 75% 100%, 0% 100%, 11% 50%, 0% 0%);
+}
+.mobile3{
+  width: 200px;
+  height: 50px;
+  margin-left: -20px;
+  color: white;
+  z-index: 20px;
+  background-color: #bfbfbf;
+  clip-path: polygon(75% 0%, 88% 50%, 75% 100%, 0% 100%, 11% 50%, 0% 0%);
 }
 .green {
   background-color: #28a745;
@@ -932,7 +1112,11 @@ h3 {
     display: none;
   }
 }
-
+@media only screen and (max-width: 360px) {
+  .margclear{
+    font-size: 12px;
+  }
+}
 @media only screen and (max-width: 768px) {
   .bold h3 {
     font-weight: normal !important;
@@ -940,6 +1124,35 @@ h3 {
   .cercle2 {
     margin-left: 3px !important;
   }
+  .gras {
+    font-size: 12px !important;
+  }
+  .flou {
+    font-size: 12px !important;
+  }
+  .order{
+    font-size: 12px !important;
+  }
+  .statusp{
+    margin-left: 16px;
+  }
+  .marghr{
+    margin-bottom: -20px;
+  }
+  
+
+  @media only screen and (max-width: 470px) {
+  .h2 {
+  font-size: 10px !important;
+  margin-left: 12px;
+  }
+  .cercle2{
+    margin-left: -4px !important;
+    
+  }
+}
+
+
 
   #hidedesktop {
     display: none;

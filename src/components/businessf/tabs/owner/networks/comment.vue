@@ -39,12 +39,7 @@
           class="cursor"
         ></b-icon>
         {{ comment.reply_comment_count | nFormatter }}
-        <span
-          @click="showReply"
-          class="primary ml-2 reply"
-          v-if="'reply' == type"
-          ><b>Reply</b></span
-        >
+        <span @click="showReply" class="primary ml-2 reply"><b>Reply</b></span>
         <div v-if="reply">
           <b-row class="mt-2">
             <b-col cols="1">
@@ -55,18 +50,32 @@
               ></b-avatar>
             </b-col>
             <b-col cols="11">
-              <input placeholder="Post a Comment" class="comment" type="text" />
+              <input
+                placeholder="Post a Comment"
+                class="comment"
+                type="text"
+                @keypress.enter="onReply"
+                v-model="text"
+              />
+              <b-spinner
+                style="color: rgb(231, 92, 24); position: absolute; right: 17px"
+                v-if="createPostRequestIsActive"
+              ></b-spinner>
 
               <fas-icon
                 class="primary send-cmt"
                 :icon="['fas', 'paper-plane']"
+                @click="onReply"
+                v-if="text.trim().length > 2 && !createPostRequestIsActive"
               />
             </b-col>
             <b-col cols="12" class="mt-4">
               <Comment
-                v-for="comment in comments"
-                :key="comment.id"
-                :item="comment"
+                v-for="obj in comments"
+                :key="obj.id"
+                :item="obj"
+                :uuid="uuid"
+                type="reply"
               />
             </b-col>
           </b-row>
@@ -77,10 +86,11 @@
 </template>
 
 <script>
-import moment from "moment";
-import Comment from "./comment";
+import Comment from "./commentReply";
+import { commentMixins } from "@/mixins";
 
 export default {
+  mixins: [commentMixins],
   props: {
     item: {
       type: Object,
@@ -91,8 +101,9 @@ export default {
     },
     type: {
       type: String,
+      required: true,
       validator: function (value) {
-        if (["reply", "comment"].includes(value)) return true;
+        if (["comment"].includes(value)) return true;
       },
       default: function () {
         return "comment";
@@ -101,73 +112,6 @@ export default {
   },
   components: {
     Comment,
-  },
-  data() {
-    return {
-      reply: false,
-      comment: null,
-      comments: [],
-    };
-  },
-  created() {
-    this.comment = this.item;
-  },
-  computed: {
-    icon() {
-      console.log(this.comment);
-      return this.comment.is_liked ? "suit-heart-fill" : "suit-heart";
-    },
-  },
-
-  filters: {
-    nFormatter: function (num) {
-      if (num >= 1000000000) {
-        return (num / 1000000000).toFixed(1).replace(/\.0$/, "") + "G";
-      }
-      if (num >= 1000000) {
-        return (num / 1000000).toFixed(1).replace(/\.0$/, "") + "M";
-      }
-      if (num >= 1000) {
-        return (num / 1000).toFixed(1).replace(/\.0$/, "") + "K";
-      }
-      return num;
-    },
-    now: function (date) {
-      return moment(date).fromNow();
-    },
-  },
-  methods: {
-    onLike: async function () {
-      const request = await this.$repository.share.commentLike({
-        comment: this.comment.comment_id,
-        network: this.$route.params.id,
-      });
-
-      if (request.success)
-        this.comment = Object.assign(this.comment, {
-          is_liked: this.comment.is_liked ? 0 : 1,
-          comment_likes: !this.comment.is_liked
-            ? this.comment.comment_likes + 1
-            : this.comment.comment_likes
-            ? this.comment.comment_likes - 1
-            : 0,
-        });
-    },
-
-    onShowReply: async function () {
-      const request = await this.$repository.share.fetchReplyComment({
-        post: this.uuid,
-        comment: this.comment.id,
-        page: 1,
-      });
-
-      if (request.success) this.comments = request.data;
-    },
-
-    showReply() {
-      this.reply = !this.reply;
-      if (this.reply) this.onShowReply();
-    },
   },
 };
 </script>

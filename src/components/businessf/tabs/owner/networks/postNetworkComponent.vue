@@ -120,6 +120,7 @@
         :key="comment.id"
         :item="comment"
         :uuid="post.id"
+        type="comment"
       />
     </b-col>
   </b-row>

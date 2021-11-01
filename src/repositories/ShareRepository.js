@@ -144,12 +144,12 @@ class Repository {
     }
   }
 
-  async fetchReplyComment({ post, comment }) {
+  async fetchReplyComment({ post, comment, page }) {
     try {
-      const response = await axios.get(`reply/post/${post}/comment/${comment}`)
+      const response = await axios.get(`reply/post/${post}/comment/${comment}/${page}`)
       return {
         success: true,
-        data: response.data.message
+        data: response.data.data
       }
 
     } catch (error) {

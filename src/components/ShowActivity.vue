@@ -144,7 +144,7 @@ export default {
       let request =
         "business" == type
           ? await this.$repository.share.switch(item.business_id)
-          : await this.$repository.share.switch();
+          : {success:true};
 
       if (request.success) {
         this.flashMessage.success({

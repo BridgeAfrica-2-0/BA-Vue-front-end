@@ -154,9 +154,10 @@
 					Published
 				</b-form-checkbox>
 
-				<div>
+				<!-- CATEGORIES -->
+				<div class="mt-2">
 					<label class="typo__label"> Category </label>
-					<multiselect
+					<multi-select
 						v-model="multiselecvalue"
 						@input="subcategories"
 						tag-placeholder="Add this as new tag"
@@ -167,6 +168,21 @@
 						:multiple="true"
 						:taggable="true"
 						@tag="addTag"
+					></multi-select>
+				</div>
+				<!-- SUB-CATEGORIES -->
+				<div class="mt-2">
+					<label class="typo__label"> Sub Category</label>
+					<multiselect
+						v-model="filterselectvalue"
+						tag-placeholder="Add this as new tag"
+						placeholder="Search or add a tag"
+						label="name"
+						track-by="subcategoryId"
+						:options="scategories"
+						:multiple="true"
+						:taggable="true"
+						@tag="addFilter"
 					></multiselect>
 				</div>
 
@@ -184,7 +200,13 @@
 <script>
 	import Product from "../product";
 	import axios from "axios";
+	import MultiSelect from "vue-multiselect";
 	export default {
+		name: "MarketPlace",
+		components: {
+			MultiSelect,
+			Product,
+		},
 		data() {
 			return {
 				showModal: false,
@@ -205,16 +227,23 @@
 				val: "",
 				msg: "",
 				success: false,
+				multiselecvalue: [],
+				filterselectvalue: [],
+				multiselec: [
+					{ name: "Vue.js", code: "vu" },
+					{ name: "Javascript", code: "js" },
+					{ name: "Open Source", code: "os" },
+				],
 			};
 		},
-		components: {
-			Product,
-		},
-		beforeMount() {
-			this.loader = true;
-			// axios.defaults.headers.common["Authorization"] =
-			// 	"Bearer " + localStorage.getItem("access_token");
-			this.getProducts();
+
+		computed: {
+			pcategories() {
+				return this.$store.state.auth.categories;
+			},
+			scategories() {
+				return this.$store.state.auth.subcategories;
+			},
 		},
 		methods: {
 			getProducts: async function() {
@@ -276,6 +305,52 @@
 			createProduct() {
 				this.showModal = !this.showModal;
 			},
+			categories() {
+				this.$store
+					.dispatch("auth/categories")
+					.then(() => {
+						console.log("hey yeah");
+					})
+					.catch((err) => {
+						console.log({ err: err });
+					});
+			},
+			subcategories() {
+				let formData2 = new FormData();
+
+				formData2.append("categoryId", this.selectedcategories);
+
+				this.$store
+					.dispatch("auth/subcategories", formData2)
+					.then(() => {
+						console.log("hey yeah");
+					})
+					.catch((err) => {
+						console.log({ err: err });
+					});
+			},
+			addTag(newTag) {
+				const tag = {
+					name: newTag,
+					id: newTag.substring(0, 2) + Math.floor(Math.random() * 10000000),
+				};
+				this.multiselec.push(tag);
+				this.multiselecvalue.push(tag);
+			},
+		},
+		beforeMount() {
+			this.loader = true;
+			// axios.defaults.headers.common["Authorization"] =
+			// 	"Bearer " + localStorage.getItem("access_token");
+			//get market place product
+			this.getProducts();
+			this.categories();
+			
+
+			//get current business category
+			const businessId = this.$route.params;
+			console.log("business ID :", businessId);
+			this.$store.dispatch("market/getCategories", businessId);
 		},
 	};
 </script>

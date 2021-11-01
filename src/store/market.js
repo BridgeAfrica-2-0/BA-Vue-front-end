@@ -10,7 +10,7 @@ export default {
 
         loader: false,
         success: false,
-     //   token: "24|5uVwIzU7r82crJj936tmqkuIMRXxm1ADTCbuRceL"
+        //   token: "24|5uVwIzU7r82crJj936tmqkuIMRXxm1ADTCbuRceL"
     },
     getters: {
         getProducts(state) {
@@ -67,7 +67,7 @@ export default {
             return axios
                 .get("category/all", {
                     headers: {
-                     //   Authorization: `Bearer ${state.token}`
+                        //   Authorization: `Bearer ${state.token}`
                     }
                 })
                 .then(res => {
@@ -86,10 +86,10 @@ export default {
                         axios
                             .get(
                                 `subcategory/all/${data.cat_id}?business_id=${data.bussiness_id}`, {
-                                    headers: {
-                                 //       Authorization: `Bearer ${state.token}`
-                                    }
+                                headers: {
+                                    //       Authorization: `Bearer ${state.token}`
                                 }
+                            }
                             )
                             .then(res => {
                                 console.log("all loaded!");
@@ -118,17 +118,17 @@ export default {
             return axios
                 .get(`filters/subcategory/${sub_id}`, {
                     headers: {
-                    //    Authorization: `Bearer ${state.token}`
+                        //    Authorization: `Bearer ${state.token}`
                     }
                 })
         },
 
         getProducts({ commit }) {
             return axios.get("market", {
-                    headers: {
-                  //      Authorization: "Bearer 24|5uVwIzU7r82crJj936tmqkuIMRXxm1ADTCbuRceL",
-                    },
-                })
+                headers: {
+                    //      Authorization: "Bearer 24|5uVwIzU7r82crJj936tmqkuIMRXxm1ADTCbuRceL",
+                },
+            })
                 .then((res) => {
                     console.log("products list: ", res.data);
                     commit("setProducts", res.data);
@@ -141,10 +141,10 @@ export default {
             commit("setProducts", []);
 
             return axios.get(`market?page=${page}`, {
-                    headers: {
-                 //       Authorization: "Bearer 24|5uVwIzU7r82crJj936tmqkuIMRXxm1ADTCbuRceL",
-                    },
-                })
+                headers: {
+                    //       Authorization: "Bearer 24|5uVwIzU7r82crJj936tmqkuIMRXxm1ADTCbuRceL",
+                },
+            })
                 .then((res) => {
                     console.log("products list: ", res.data);
                     commit("setProducts", res.data);

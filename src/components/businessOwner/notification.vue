@@ -3,7 +3,9 @@
     <div class="container">
       <b-row>
         <b-col>
+
           <div class="b-bottomn f-left">
+
             <input
               class="m-left-top"
               type="checkbox"
@@ -43,13 +45,17 @@
         >
           <p class="">
             <span style="display:inline-flex">
-             <input
-                class="m-left-top my-checkbox"
+
+              <input
+                class="m-left-top"
+
                 type="checkbox"
                 :value="post.id"
                 :id="post.id"
                 :checked="post.checked"
-                @click="check(post,$event)"
+
+                @click="check(post, $event)"
+
               />
               <b-avatar
                 class="d-inline-block profile-pic"

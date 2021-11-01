@@ -173,7 +173,7 @@
 				<!-- SUB-CATEGORIES -->
 				<div class="mt-2">
 					<label class="typo__label"> Sub Category</label>
-					<multiselect
+					<multi-select
 						v-model="filterselectvalue"
 						tag-placeholder="Add this as new tag"
 						placeholder="Search or add a tag"
@@ -183,7 +183,39 @@
 						:multiple="true"
 						:taggable="true"
 						@tag="addFilter"
-					></multiselect>
+					></multi-select>
+				</div>
+				<label class="typo__label">Fiters </label>
+				<div>
+					<b-card no-body>
+						<b-tabs pills card vertical>
+							<b-tab
+								:title="filters.name"
+								v-for="filters in filterselectvalue"
+								:key="filters.id"
+								active
+								><b-card-text>
+									<b-form-group label="Filters" class="colorblack">
+										<b-form-checkbox-group
+											id=""
+											class="colorblack"
+											v-model="select_filterss"
+											name="filters"
+										>
+											<b-form-checkbox
+												class="colorblack"
+												v-for="fil in filters.filters"
+												:key="fil.id"
+												:value="fil.id"
+											>
+												{{ fil.name }}
+											</b-form-checkbox>
+										</b-form-checkbox-group>
+									</b-form-group>
+								</b-card-text></b-tab
+							>
+						</b-tabs>
+					</b-card>
 				</div>
 
 				<b-alert v-if="success" :variant="val" show> {{ msg }} </b-alert>
@@ -229,6 +261,7 @@
 				success: false,
 				multiselecvalue: [],
 				filterselectvalue: [],
+				select_filterss: [],
 				multiselec: [
 					{ name: "Vue.js", code: "vu" },
 					{ name: "Javascript", code: "js" },
@@ -243,6 +276,18 @@
 			},
 			scategories() {
 				return this.$store.state.auth.subcategories;
+			},
+			selectedcategories: function() {
+				let selectedUsers = [];
+
+				this.multiselecvalue.forEach((item) => {
+					if (item.id) {
+						selectedUsers.push(item.id);
+					} else {
+						selectedUsers.push(item.category_id);
+					}
+				});
+				return selectedUsers;
 			},
 		},
 		methods: {
@@ -337,6 +382,14 @@
 				this.multiselec.push(tag);
 				this.multiselecvalue.push(tag);
 			},
+			addFilter(newTag) {
+				const tag = {
+					name: newTag,
+					id: newTag.substring(0, 2) + Math.floor(Math.random() * 10000000),
+				};
+				this.multiselec.push(tag);
+				this.filterselectvalue.push(tag);
+			},
 		},
 		beforeMount() {
 			this.loader = true;
@@ -345,7 +398,6 @@
 			//get market place product
 			this.getProducts();
 			this.categories();
-			
 
 			//get current business category
 			const businessId = this.$route.params;

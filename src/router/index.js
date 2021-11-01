@@ -64,11 +64,7 @@ const routes = [
     //   auth: true,
     // },
   },
-  {
-    path: "/business_owner/myorders/:id",
-    name: "myorders",
-    component: myorders,
-  },
+  
 
   
   {

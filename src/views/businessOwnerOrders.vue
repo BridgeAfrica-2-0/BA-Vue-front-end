@@ -47,9 +47,7 @@
         <div class="col">
           <h3 class="text-danger text-center margclear">clear history</h3>
         </div>
-        <!-- <div class="status" v-if="titre">
-          <h5 class="text-danger">clear history</h5>
-        </div> -->
+        
       </div>
       <hr />
 

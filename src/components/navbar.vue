@@ -464,22 +464,10 @@
                     </div>
                      <hr />
 
-                    <router-link
-                      to="/myorders"
-                      class="other-menu suggest-item cursor-pointer text-decoration-none text-dark"
-                    >
-                      <span class="mr-2"
-                        ><fas-icon
-                          class="violet search"
-                          :icon="['fas', 'cart-arrow-down']"
-                      /></span>
-                     My orders
-                    </router-link>
-
-                    <hr />
+                   
 
                     <router-link
-                      to="/business_owner/myorders/:id"
+                      to="/myorders/"
                       class="other-menu suggest-item cursor-pointer text-decoration-none text-dark"
                     >
                       <span class="mr-2"
@@ -578,19 +566,10 @@
 
              <hr class="mup" />
 
-            <router-link
-              to="/myorders"
-              class="other-menu suggest-item cursor-pointer text-decoration-none text-dark"
-            >
-              <span class="mr-2"
-                ><fas-icon class="violet search" :icon="['fas', 'cart-arrow-down']"
-              /></span>
-             My orders
-            </router-link>
-            <hr class="mup" />
+            
 
             <router-link
-                      to="/business_owner/myorders/:id"
+                      to="/myorders/"
                       class="other-menu suggest-item cursor-pointer text-decoration-none text-dark"
                     >
                       <span class="mr-2"

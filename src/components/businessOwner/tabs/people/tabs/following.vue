@@ -45,12 +45,15 @@
       <b-col v-if="loader" class="load">
         <b-spinner class="spin" variant="primary"></b-spinner>
       </b-col>
-      <b-col v-if="followers.length < 1 && !loader" class="load">
-        <p>No one is following you !!</p>
-      </b-col>
+     
     </b-row>
 </b-col>
  </b-row>
+
+  <div v-if="followers.length < 1 && !loader" class="load">
+        <p>No one is following you !!</p>
+  </div>
+
   </div>
 </template>
 

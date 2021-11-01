@@ -42,7 +42,7 @@
         <b-tab > 
 
             <template slot="title"  >
-             Following  <span class="spa-color">  {{peoplecommunity.totat_following}}  </span>
+             Followings  <span class="spa-color">  {{peoplecommunity.totat_following}}  </span>
             </template>
 
       <div class="s-comcard">     <People  v-for="people in peoplecommunity.user_following"  v-bind:key="people.id"   v-bind:people="people" />       </div>
@@ -85,7 +85,7 @@
         
 
             <template slot="title"  >
-             Following  <span class="spa-color">  {{businesscommunity.totat_following}}   </span>
+             Followings  <span class="spa-color">  {{businesscommunity.totat_following}}   </span>
             </template>
         
         <div class="s-comcard">    <Business v-for="business in businesscommunity.Business_following"  v-bind:key="business.id"   v-bind:business="business" />    </div>

@@ -10,7 +10,7 @@ import VueGallerySlideshow from "vue-gallery-slideshow";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { fas } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
-import { fab } from "@fortawesome/free-brands-svg-icons";
+import { fab, faWindows } from "@fortawesome/free-brands-svg-icons";
 import vSelect from "vue-select";
 import Vuex from "vuex";
 import IconifyIcon from "@iconify/vue";
@@ -163,14 +163,25 @@ import i18n from "./i18n";
 Vue.config.productionTip = false;
 var user = null;
 
-import Echo from 'laravel-echo'
-window.io = require('socket.io-client')
+// import Echo from 'laravel-echo'
+// // window.io = require('socket.io-client')
 
 // window.Echo = new Echo({
+//         broadcaster: 'socket.io',
+//         host: "localhost:6001",
+//         client: require('socket.io-client'),
+//         auth: { headers: { Authorization: 'Bearer ' + JSON.parse(localStorage.getItem('user')).accessToken } }
+//     })
+// Vue.prototype.$echo = echo_instance
+
+// import VueEcho from 'vue-echo-laravel';
+// window.io = require('socket.io-client')
+
+// Vue.use(VueEcho, {
 //     broadcaster: 'socket.io',
-//     host: ' http: //localhost:6001',
-//     auth: { headers: { Authorization: 'Bearer ' + localStorage.getItem('token') } }
-// })
+//     host: "localhost:6001",
+//     auth: { headers: { Authorization: 'Bearer ' + JSON.parse(localStorage.getItem('user')).accessToken } }
+// });
 
 new Vue({
     router,

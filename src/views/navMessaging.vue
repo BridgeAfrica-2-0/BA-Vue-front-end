@@ -98,59 +98,119 @@
               </b-row>
               <input
                 type="text"
-                class="form-control input-background"
+                class="form-control input-background mb-6 pb-6"
                 placeholder="Search inbox"
               />
+              <b-row class="mt-12">
+                <b-col>
+                  <b-tabs content-class="mt-12 ma-4 pt-6" fill lazy>
+                    <b-tab title="Profile" active>
+                      <!-- Users Chats Available  -->
+
+                      <div class="messages">
+                        <b-row
+                          v-for="(chat, index) in chatList"
+                          :key="index"
+                          :class="[
+                            'p-2 message ',
+                            {
+                              messageSelected:
+                                index ==
+                                (chatSelected.clickedId != null
+                                  ? chatSelected.clickedId
+                                  : false)
+                                  ? chatSelected.active
+                                  : false,
+                            },
+                          ]"
+                          @click="selectedChat(chat, index)"
+                        >
+                          <b-col class="col-9">
+                            <span style="display: inline-flex">
+                              <b-avatar
+                                class="d-inline-block profile-pic"
+                                variant="primary"
+                                src="https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg"
+                              ></b-avatar>
+
+                              <h6 class="mt-2 d-inline-block ml-2">
+                                <b class="bold"> {{ chat.name }}</b>
+                                <p class="duration">{{ chat.startMessage }}</p>
+                              </h6>
+                            </span>
+                          </b-col>
+
+                          <b-col class="col-3 text-center">
+                            <small class="text-center">
+                              {{ chat.timeStamp }}
+                            </small>
+                            <p class="text-center">
+                              <b-badge variant="info">
+                                {{ chat.messageCount }}
+                              </b-badge>
+                            </p>
+                          </b-col>
+                        </b-row>
+                      </div>
+
+                      <!-- End Chats -->
+                    </b-tab>
+                    <b-tab title="Business">
+                      <!-- Users Chats Available  -->
+
+                      <div class="messages">
+                        <b-row
+                          v-for="(chat, index) in chatList"
+                          :key="index"
+                          :class="[
+                            'p-2 message ',
+                            {
+                              messageSelected:
+                                index ==
+                                (chatSelected.clickedId != null
+                                  ? chatSelected.clickedId
+                                  : false)
+                                  ? chatSelected.active
+                                  : false,
+                            },
+                          ]"
+                          @click="selectedChat(chat, index)"
+                        >
+                          <b-col class="col-9">
+                            <span style="display: inline-flex">
+                              <b-avatar
+                                class="d-inline-block profile-pic"
+                                variant="primary"
+                                src="https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg"
+                              ></b-avatar>
+
+                              <h6 class="mt-2 d-inline-block ml-2">
+                                <b class="bold"> {{ chat.name }}</b>
+                                <p class="duration">{{ chat.startMessage }}</p>
+                              </h6>
+                            </span>
+                          </b-col>
+
+                          <b-col class="col-3 text-center">
+                            <small class="text-center">
+                              {{ chat.timeStamp }}
+                            </small>
+                            <p class="text-center">
+                              <b-badge variant="info">
+                                {{ chat.messageCount }}
+                              </b-badge>
+                            </p>
+                          </b-col>
+                        </b-row>
+                      </div>
+
+                      <!-- End Chats -->
+                    </b-tab>
+                    <b-tab title="Network"><p>I'm a disabled tab!</p></b-tab>
+                  </b-tabs>
+                </b-col>
+              </b-row>
             </div>
-
-            <!-- Chats Available  -->
-            <div>
-              <div class="messages">
-                <b-row
-                  v-for="(chat, index) in chatList"
-                  :key="index"
-                  :class="[
-                    'p-2 message ',
-                    {
-                      messageSelected:
-                        index ==
-                        (chatSelected.clickedId != null
-                          ? chatSelected.clickedId
-                          : false)
-                          ? chatSelected.active
-                          : false,
-                    },
-                  ]"
-                  @click="selectedChat(chat, index)"
-                >
-                  <b-col class="col-9">
-                    <span style="display: inline-flex">
-                      <b-avatar
-                        class="d-inline-block profile-pic"
-                        variant="primary"
-                        src="https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg"
-                      ></b-avatar>
-
-                      <h6 class="mt-2 d-inline-block ml-2">
-                        <b class="bold"> {{ chat.name }}</b>
-                        <p class="duration">{{ chat.startMessage }}</p>
-                      </h6>
-                    </span>
-                  </b-col>
-
-                  <b-col class="col-3 text-center">
-                    <small class="text-center"> {{ chat.timeStamp }} </small>
-                    <p class="text-center">
-                      <b-badge variant="info">
-                        {{ chat.messageCount }}
-                      </b-badge>
-                    </p>
-                  </b-col>
-                </b-row>
-              </div>
-            </div>
-
-            <!-- End Chats -->
           </b-col>
 
           <!-- selected Chat  -->
@@ -208,16 +268,28 @@
                       size="60"
                     ></b-avatar>
                   </b-col>
+
                   <b-col class="detail" @click="info = true">
                     <h5>{{ receiver.name }}</h5>
                     <p>Online</p>
                   </b-col>
                   <b-col class="col-4">
+                    <input
+                    v-model="chatSearchKeyword"
+                    @keypress.enter="histUserToUser({receiverID:chatId, keyword:chatSearchKeyword})"
+                      type="text"
+                      class="form-control input-background mb-6 pb-6"
+                      placeholder="Search message"
+                    />
+                  </b-col>
+                  <b-col class="col-3">
                     <b-row class="mt-3 ml-5">
                       <b-col class="col-3">
                         <b-icon
+                        @click="histUserToUser({receiverID:chatId, keyword:chatSearchKeyword})"
                           class="msg-icon primary icon-size"
                           icon="search"
+                          style="cursor:pointer"
                         ></b-icon>
                       </b-col>
 
@@ -265,7 +337,7 @@
                   </b-col>
                   <b-col class="detail" @click="info = true">
                     <h5>General Chat</h5>
-                    <p>Online(4)</p>
+                    <!-- <p>Online({{online.length}})</p> -->
                   </b-col>
                   <b-col class="col-4">
                     <b-row class="mt-3 ml-5">
@@ -322,7 +394,7 @@
               </section>
 
               <section v-else class="chats" style="margin-left: 1px" ref="feed">
-                <div v-for="(message, index) in messages" :key="index" >
+                <div v-for="(message, index) in messages" :key="index">
                   <div v-if="message.sender != currentUser.user.name">
                     <b-row class="p-4">
                       <b-col>
@@ -341,8 +413,7 @@
                     <b-row class="p-4">
                       <b-col>
                         <p id="sent" class="msg-text-sent text">
-                          <b>Me</b
-                          >: {{ message.message }}
+                          <b>Me</b>: {{ message.message }}
                           <small class="float-right mt-2 text-white pr-1 pt-1">
                             {{ getCreatedAt(message.date) }}
                           </small>
@@ -568,6 +639,7 @@ import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
 import EmojiPicker from "vue-emoji-picker";
 import moment from "moment";
+import Echo from 'laravel-echo'
 
 export default {
   components: {
@@ -577,9 +649,12 @@ export default {
   },
   data() {
     return {
+      online: [],
       input: "",
       search: "",
-      socket: io("http://localhost:7000", {
+      chatSearchKeyword:"",
+      chatId:"",
+      socket: io("http://localhost:6001", {
         transports: ["websocket", "polling", "flashsocket"],
       }),
 
@@ -837,16 +912,23 @@ export default {
   },
   computed: {
     currentUser() {
-      return this.$store.getters["chat/getUser"];
+      return this.$store.getters["userChat/getUser"];
     },
     users() {
-      return this.$store.getters["chat/getUsers"];
+      return this.$store.getters["userChat/getUsers"];
     },
     userToUser() {
-      return this.$store.getters["chat/getUserToUser"];
+      return this.$store.getters["userChat/getUserToUser"];
     },
+    userToBiz() {
+      return this.$store.getters["userChat/getUserToBiz"];
+    },
+    userToNetwork() {
+      return this.$store.getters["userChat/getUserToNetwork"];
+    },
+
     loader() {
-      return this.$store.getters["chat/getLoader"];
+      return this.$store.getters["userChat/getLoader"];
     },
     receiver() {
       return this.userToUser[0] ? this.userToUser[0].receiver : "";
@@ -865,36 +947,42 @@ export default {
     },
   },
   mounted() {
-    this.$refs.feed.scrollTop =
-      this.$refs.feed.scrollHeight - this.$refs.feed.clientHeight;
+    window.Echo = new Echo({
+        broadcaster: 'socket.io',
+        host: "localhost:6001",
+        client: require('socket.io-client'),
+        auth: { headers: { Authorization: 'Bearer ' + JSON.parse(localStorage.getItem('user')).accessToken } }
+    })
+    // this.socket.emit("addUser", {
+    //   socketID: this.socket.id,
+    //   user: this.currentUser.user,
+    // });
 
     this.getUsers();
   },
   created() {
-    this.socket.on("generalMessage", (data) => {
-      console.log("Received");
-      console.log(data);
-      this.messages.push(data);
-    });
-    this.socket.on("privateMessage", (data) => {
-       
-      console.log("Received");
-      console.log(data);
+    //  this.socket.on("online", (data) => {
+    //   this.online=data;
+    // });
+    // this.socket.on("generalMessage", (data) => {
+    //   console.log("Received");
+    //   console.log(data);
+    //   this.messages.push(data);
+    // });
+    // this.socket.on("privateMessage", (data) => {
+    //   console.log("Received");
+    //   console.log(data);
 
-      // this.messages.push({
-      //   message: data.message,
-      //   type: 1,
-      //   user: data.user,
-      // });
-    });
-    this.socket.emit("addUser", {
-      socketID: this.socket.id,
-      user: this.currentUser.user,
-    });
+    //   // this.messages.push({
+    //   //   message: data.message,
+    //   //   type: 1,
+    //   //   user: data.user,
+    //   // });
+    // });
 
-    this.socket.on("addUser", (data) => {
-      console.log("User:", data);
-    });
+    // this.socket.on("addUser", (data) => {
+    //   console.log("User:", data);
+    // });
   },
   methods: {
     getCreatedAt(data) {
@@ -902,15 +990,40 @@ export default {
     },
     getUsers() {
       this.$store
-        .dispatch("chat/GET_USERS")
+        .dispatch("userChat/GET_USERS")
         .then(() => {
           console.log("->[Data logged]<-");
         })
         .catch(() => console.log("error"));
     },
-    async histUserToUser(receiverId) {
+
+    async histUserToUser(data) {
       await this.$store
-        .dispatch("chat/GET_USER_TO_USER", receiverId)
+        .dispatch("userChat/GET_USER_TO_USER", data)
+        .then(() => {
+          console.log("->[User selected]<-");
+          this.socket.emit("addUser", {
+            socketID: this.socket.id,
+            ...this.receiver,
+          });
+        })
+        .catch(() => console.log("error"));
+    },
+    async histUserToBiz(receiverId) {
+      await this.$store
+        .dispatch("userChat/GET_USER_TO_BIZ", receiverId)
+        .then(() => {
+          console.log("->[User selected]<-");
+          this.socket.emit("addUser", {
+            socketID: this.socket.id,
+            ...this.receiver,
+          });
+        })
+        .catch(() => console.log("error"));
+    },
+    async histUserToNetwork(receiverId) {
+      await this.$store
+        .dispatch("userChat/GET_USER_TO_NETWORK", receiverId)
         .then(() => {
           console.log("->[User selected]<-");
           this.socket.emit("addUser", {
@@ -921,14 +1034,16 @@ export default {
         .catch(() => console.log("error"));
     },
     selectedChat(chat, index) {
-      this.histUserToUser(index);
+      this.chatId = index
+      let data = { receiverID: index, keyword: null };
+      this.histUserToUser(data);
       this.newMsg = false;
       this.chatSelected = { active: true, clickedId: index, ...chat };
       console.log("[DEBUG] Chat selected:", this.chatSelected);
     },
     searchUser(keyword) {
       this.$store
-        .dispatch("chat/GET_USERS", keyword)
+        .dispatch("userChat/GET_USERS", keyword)
         .then(() => {
           console.log("->[Data logged]<-");
         })

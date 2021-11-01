@@ -1,15 +1,13 @@
 import axios from "axios";
-import { state } from "./search/state";
 
 export default {
     namespaced: true,
     state: {
         currentUser: JSON.parse(localStorage.getItem("user")),
         users: [],
-        bizToBiz: [],
-        bizToUser: [],
-        bizToNetwork: [],
         userToUser: [],
+        userToBiz: [],
+        userToNetwork: [],
 
         loader: false,
         success: false
@@ -53,17 +51,14 @@ export default {
     },
     mutations: {
         //set data
-        setBizToBiz(state, data) {
-            state.bizToBiz = data;
-        },
-        setBizToUser(state, data) {
-            state.bizToUser = data;
-        },
-        setBizToNetwork(state, data) {
-            state.bizToNetwork = data;
+        setUserToNetwork(state, data) {
+            state.userToNetwork = data;
         },
         setUserToUser(state, data) {
             state.userToUser = data;
+        },
+        setUserToBiz(state, data) {
+            state.userToBiz = data;
         },
         setUsers(state, data) {
             state.users = data;
@@ -107,8 +102,9 @@ export default {
             commit("setLoader", true);
 
             console.log("[DEBUG] user to user", data);
+            let keyword = data.keyword ? '/' + data.keyword : ''
 
-            await axios.get(`/messages/${data}`)
+            await axios.get(`/messages/${data.receiverID}${keyword}`)
                 .then((res) => {
                     commit("setLoader", false);
                     console.log("User to user: ", res.data.data);
@@ -129,6 +125,22 @@ export default {
                     commit("setLoader", false);
                     console.log("User to business: ", res.data.data);
                     commit("setUserToBiz", res.data.data);
+                })
+                .catch((err) => {
+                    commit("setLoader", false);
+                    console.log(err);
+                })
+        },
+        async GET_USER_TO_NETWORK({ commit }, data) {
+            commit("setLoader", true);
+
+            console.log("[DEBUG] user to network", data);
+
+            await axios.get(`/messages/network/${data}`)
+                .then((res) => {
+                    commit("setLoader", false);
+                    console.log("User to network: ", res.data.data);
+                    commit("setUserToNetwork", res.data.data);
                 })
                 .catch((err) => {
                     commit("setLoader", false);

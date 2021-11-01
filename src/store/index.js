@@ -1,5 +1,7 @@
 import Vue from "vue";
 import Vuex from "vuex";
+import axios from "axios";
+
 import auth from "./auth";
 import dashboard from "./dashboard";
 import businessOwner from "./businessOwner";
@@ -15,9 +17,8 @@ import profile from "./profile";
 import networkProfileMembers from "./networkProfileMembers";
 import follower from "./follower";
 import UserProfileOwner from "./UserProfileOwner"
-import axios from "axios";
 import { search } from "./search";
-import chat from "./chat";
+import userChat from "./messaging/user";
 
 
 Vue.use(Vuex);
@@ -43,7 +44,7 @@ export default new Vuex.Store({
         follower,
         search,
         UserProfileOwner,
-        chat
+        userChat
 
     }
 });

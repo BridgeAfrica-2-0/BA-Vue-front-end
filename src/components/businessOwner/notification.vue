@@ -188,7 +188,10 @@ export default {
   margin-top: 20px;
   margin-bottom: 30px;
   padding-bottom: 10px;
-  margin-left: -15px;
+  margin-left: 10px;
+
+  border-bottom: 0.5px solid;
+  border-color: gray;
 }
 
 .m-left {

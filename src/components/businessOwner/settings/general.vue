@@ -6,7 +6,7 @@
       <b-container>
         <b-form-group
           label-cols-lg="3"
-          label="Business Visibility"
+          label="$t('businessowner.Business Visibility')"
           label-size="md"
           label-class="font-weight-bold pt-0 username"
           class="mb-0 text"
@@ -22,12 +22,11 @@
       </b-container>
       <hr />
     </div>
-
     <div class="">
       <b-container>
         <b-form-group
           label-cols-lg="3"
-          label="Posting Permissions"
+          label="$t('businessowner.Posting_Permissions')"
           label-size="md"
           label-class="font-weight-bold pt-0 username"
           class="mb-0 text"
@@ -49,7 +48,7 @@
       <b-container>
         <b-form-group
           label-cols-lg="3"
-          label="Post Approval"
+          label="$t('businessowner.Post_Approval')"
           label-size="md"
           label-class="font-weight-bold pt-0 username"
           class="mb-0"
@@ -61,7 +60,7 @@
             value="accepted"
             unchecked-value="not_accepted"
           >
-            All business posts must be approved by an admin
+            {{$t("businessowner.All_business_posts_must_be_approved_by_an_admin")}}
           </b-form-checkbox>
         </b-form-group>
       </b-container>
@@ -72,7 +71,7 @@
       <b-container>
         <b-form-group
           label-cols-lg="3"
-          label="Keyword Alerts"
+          label="$t('businessowner.Keyword_Alerts')"
           label-size="md"
           label-class="font-weight-bold pt-0 username"
           class="mb-0 text"
@@ -80,7 +79,7 @@
           <b-form-textarea
             id="textarea"
           
-            placeholder="Enter something..."
+            placeholder="$t('businessowner.Enter_something')..."
             rows="3"
             max-rows="6"
           ></b-form-textarea>
@@ -93,7 +92,7 @@
       <b-container>
         <b-form-group
           label-cols-lg="3"
-          label="Marketplace"
+          label="$t('businessowner.Marketplace')"
           label-size="md"
           label-class="font-weight-bold pt-0 username"
           class="mb-0"
@@ -106,12 +105,12 @@
     </div>
 
     <b-container>
-      <b-link href="#foo" class="f-left text">Delete Business Identity</b-link>
+      <b-link href="#foo" class="f-left text">{{$t("businessowner.Delete_Business_Identity")}}</b-link>
     </b-container>
 
 
     <div class="b-bottomn">
-      <b-button variant="primary" class="a-button-l text">Save Changes</b-button>
+      <b-button variant="primary" class="a-button-l text">{{$t("businessowner.Save_Changes")}}</b-button>
       <br />
     </div>
     

@@ -8,9 +8,9 @@
       />
       <div class="photo-btns">
         <b-button class="sm" size="sm">
-          <b-icon icon="plus"></b-icon>Add Photos</b-button
+          <b-icon icon="plus"></b-icon>{{$t("businessf.Add_Photos")}}</b-button
         >
-        <b-button class="ml-2" size="sm">See All</b-button>
+        <b-button class="ml-2" size="sm">{{$t("businessf.See_All")}}</b-button>
       </div>
       <b-container fluid="md">
         <b-row class="mt-md-4">
@@ -39,14 +39,14 @@
                     <div>
                       <input type="file" id="img" name="img" accept="image/*" />
                     </div>
-                    <h4>Upload a New picture</h4>
+                    <h4>{{$t("businessf.Upload_a_New_picture")}}</h4>
                   </div>
 
                   <div class="col-sm-6 text-center">
                     <h1>
                       <fas-icon class="primary" :icon="['fas', 'edit']" />
                     </h1>
-                    <h4>Edit Your New picture</h4>
+                    <h4>{{$t("businessf.Edit_Your_New_picture")}}</h4>
                   </div>
                 </div>
               </div>
@@ -57,15 +57,15 @@
                   <h5
                     class="font-weight-bolder m-0 p-0 ml-2 d-inline-block header-text1"
                   >
-                    User Name
+                    {{$t("businessf.User_Name")}}
                   </h5>
                   <br />
                   <p class="m-0 ml-2 d-inline-block header-text2">
-                    Website
+                    {{$t("businessf.Website")}}
                   </p>
                   <br />
                   <p class="m-0 ml-2 d-inline-block header-text2">
-                    1.5k Community
+                    {{$t("businessf.1.5k Community")}}
                   </p>
                 </span>
                 <ul
@@ -90,14 +90,14 @@
                           class="drop-color font-weight-bolder"
                           :icon="['fas', 'user-plus']"
                         />
-                        Community</b-dropdown-item
+                        {{$t("businessf.Community")}}</b-dropdown-item
                       >
                       <b-dropdown-item href="#">
                         <fas-icon
                           class="drop-color font-weight-bolder"
                           :icon="['fas', 'comment']"
                         />
-                        Message</b-dropdown-item
+                        {{$t("businessf.Message")}}</b-dropdown-item
                       >
                       <b-dropdown-item href="#">
                         <b-dropdown
@@ -112,28 +112,28 @@
                               class="drop-color font-weight-bolder"
                               :icon="['fas', 'ellipsis-h']"
                             />
-                            Options
+                            {{$t("businessf.Options")}}
                           </template>
                           <b-dropdown-item href="#">
                             <fas-icon
                               class="drop-color font-weight-bolder"
                               :icon="['fas', 'user-plus']"
                             />
-                            Community</b-dropdown-item
+                            {{$t("businessf.Community")}}</b-dropdown-item
                           >
                           <b-dropdown-item href="#">
                             <fas-icon
                               class="drop-color font-weight-bolder"
                               :icon="['fas', 'comment']"
                             />
-                            Message</b-dropdown-item
+                            {{$t("businessf.Message")}}</b-dropdown-item
                           >
                           <b-dropdown-item href="#">
                             <fas-icon
                               class="drop-color font-weight-bolder"
                               :icon="['fas', 'trash-alt']"
                             />
-                            Message</b-dropdown-item
+                            {{$t("businessf.Message")}}</b-dropdown-item
                           >
                         </b-dropdown>
                       </b-dropdown-item>
@@ -155,15 +155,15 @@
                 >
                   <b-dropdown-item>
                     <b-icon icon="chat-fill" variant="primary"></b-icon>
-                    Message</b-dropdown-item
+                    {{$t("businessf.Message")}}</b-dropdown-item
                   >
                   <b-dropdown-item>
                     <b-icon icon="telephone-fill" variant="primary"></b-icon>
-                    Call Now</b-dropdown-item
+                    {{$t("businessf.Call_Now")}}</b-dropdown-item
                   >
                   <b-dropdown-item>
                     <b-icon icon="geo-alt" variant="primary"></b-icon> Get
-                    Direction</b-dropdown-item
+                    {{$t("businessf.Direction")}}</b-dropdown-item
                   >
                 </b-dropdown>
                 <b-button variant="outline-primary" size="sm"

@@ -25,7 +25,7 @@
     </div>
 
     <b-button class=" float-right see-all">
-      See All
+      {{$t("buinessf.See_All")}}
     </b-button>
 
     <b-row class="mt-4 desktop container-fluid">
@@ -40,7 +40,7 @@
             </b-link>
             <p>
               <br />
-              {{ business_info.community }} Community
+              {{ business_info.community }} {{$t("buinessf.Community")}}
             </p>
           </div>
         </b-row>
@@ -49,15 +49,15 @@
         <div class="float-right">
           <b-button class="community size" size="sm">
             <i class="fas fa-user-plus  fa-lg btn-icon "></i>
-            <span>Community</span></b-button
+            <span>{{$t("buinessf.Community")}}</span></b-button
           >
           <b-button class="message ml-1 size" size="sm">
             <i class="fas fa-envelope fa-lg btn-icon "></i>
-            <span>Message</span></b-button
+            <span>{{$t("buinessf.Message")}}</span></b-button
           >
           <b-button class="direction ml-1 size" variant="primary" size="sm">
             <i class="fas fa-map-marked-alt fa-lg btn-icon "></i>
-            <span>Direction</span></b-button
+            <span>{{$t("buinessf.Direction")}}</span></b-button
           >
           <b-dropdown
             class="ml-2  options dot-btn mt-2 mt-sm-2 mt-md-0 "
@@ -69,7 +69,7 @@
             </template>
             <b-dropdown-item>
               <b-icon icon="flag" variant="primary"></b-icon>
-              Report</b-dropdown-item
+              {{$t("buinessf.Report")}}</b-dropdown-item
             >
           </b-dropdown>
         </div>
@@ -86,7 +86,7 @@
               <h6 class="font-weight-bolder name">{{ business_info.name }}</h6>
               <p class="details">
                 <!-- www.bridgeafrica.com <br /> -->
-                {{ business_info.community }} Community
+                {{ business_info.community }} {{$t("buinessf.Community")}}
               </p>
             </div>
           </b-row>
@@ -94,7 +94,7 @@
         <b-col cols="2">
           <b-button class="community size" variant="primary">
             <i class="fas fa-user-plus  fa-lg btn-icon "></i>
-            <span>Community</span></b-button
+            <span>{{$t("buinessf.Community")}}</span></b-button
           >
         </b-col>
       </b-row>
@@ -106,7 +106,7 @@
 
       <b-button class="direction ml-1 m-msg size" variant="primary">
         <i class="fas fa-map-marked-alt fa-lg btn-icon "></i>
-        <span>Direction</span></b-button
+        <span>{{$t("buinessf.Direction")}}</span></b-button
       >
 
       <b-dropdown
@@ -119,7 +119,7 @@
         </template>
         <b-dropdown-item>
           <b-icon icon="flag" variant="primary"></b-icon>
-          Report</b-dropdown-item
+          {{$t("buinessf.Report")}}</b-dropdown-item
         >
       </b-dropdown>
     </div>
@@ -127,12 +127,12 @@
       <b-row>
         <b-col cols="12" class="p-0">
           <b-tabs content-class="mt-3 p-0" fill pills>
-            <b-tab title="Home"><HomePage /></b-tab>
-            <b-tab title="About"><About /></b-tab>
-            <b-tab title="Media"><Media /></b-tab>
-            <b-tab title="Market"><MarketPlace /></b-tab>
-            <b-tab title="Networks"><Networks /></b-tab>
-            <b-tab title="Community"><Community /></b-tab>
+            <b-tab title="$t('businessf.Home')"><HomePage /></b-tab>
+            <b-tab title="$t('businessf.About')"><About /></b-tab>
+            <b-tab title="$t('businessf.Media')"><Media /></b-tab>
+            <b-tab title="$t('businessf.Market')"><MarketPlace /></b-tab>
+            <b-tab title="$t('businessf.Networks')"><Networks /></b-tab>
+            <b-tab title="$t('businessf.Community')"><Community /></b-tab>
           </b-tabs>
         </b-col>
       </b-row>

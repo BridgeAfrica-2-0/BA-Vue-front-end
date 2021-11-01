@@ -5,10 +5,10 @@
         <div class="h-100 w-100">
           <div class="mx-auto text-center my-5">
             <h4 class="my-3 font-weight-bolder">
-              Confirm Payment
+              {{$t("businessowner.Confirm_Payment")}}
             </h4>
             <p class="my-2">
-              Upgrade your plans to get excting features
+              {{$t("businessowner.Upgrade your plans to get excting features")}}
             </p>
           </div>
         </div>
@@ -18,7 +18,7 @@
       <b-row>
         <b-col cols="12">
           <p class="text-center">
-            <span>Monthly Payment</span>
+            <span>{{$t("businessowner.Monthly_Payment")}}</span>
             <b-form-checkbox
               switch
               size=""
@@ -26,7 +26,7 @@
               class="ml-2 d-inline-block"
               button-variant="primary"
             ></b-form-checkbox>
-            <span>Annual Payment</span>
+            <span>{{$t("businessowner.Annual_Payment")}}</span>
           </p>
         </b-col>
       </b-row>
@@ -34,7 +34,7 @@
         <b-col>
           <p class="m-0 p-0">
             <span class="text-left">
-              <b>Premium Plan</b>
+              <b>{{$t("businessowner.Premium_Plan")}}</b>
             </span>
             <span class="float-right">
               <b>$ 00</b>
@@ -52,7 +52,7 @@
         <b-col>
           <p class="m-0 p-0">
             <span class="text-left">
-              <b>Selected Payment Method</b>
+              <b>{{$t("businessowner.Selected_Payment_Method")}}</b>
             </span>
             <span class="float-right">
               <b>Sub Total $ 00</b>
@@ -65,7 +65,7 @@
                 width="150"
                 class="mr-2"
                 alt=""
-              />Credit Card <a href="">(Change)</a>
+              />Credit Card <a href="">({{$t("businessowner.Change")}})</a>
             </span>
             <span class="float-right">
               <b>Taxes $ 00</b>
@@ -79,13 +79,12 @@
             <span class="text-left">
               <b
                 ><b-form-checkbox class="d-inline-block"
-                  >Automatically renew subscription until i turn it
-                  off</b-form-checkbox
+                  >{{$t("businessowner.Automatically_renew_subscription_until_it_turn_it_off.")}}</b-form-checkbox
                 ></b
               >
             </span>
             <span class="float-right">
-              <b>Total Payble</b>
+              <b>{{$t("businessowner.Total_Payable")}}</b>
             </span>
           </p>
           <p class="m-0 p-0 mt-3">
@@ -105,8 +104,8 @@
                 class="mr-2"
                 variant="primary"
               ></b-icon-info-circle-fill>
-              By confirming you agree to Terms & conditions
-              <a href="">Read more</a>
+              {{$t("businessowner.By_confirming_you_agree_to_Terms_&_conditions")}}
+              <a href="">{{$t("businessowner.Read_more")}}</a>
             </span>
             <span class="float-right">
               <b></b>
@@ -118,9 +117,9 @@
     <b-row class="mt-4 mb-3">
       <b-col cols="12" class="m-0 pr-3">
         <b-button variant="outline-dark" class="ml-3 float-right"
-          >Cancel</b-button
+          >{{$t("businessowner.Cancel")}}</b-button
         >
-        <b-button variant="primary" class="ml-3 float-right">Confirm</b-button>
+        <b-button variant="primary" class="ml-3 float-right">{{$t("businessowner.Confirm")}}</b-button>
       </b-col>
     </b-row>
   </div>

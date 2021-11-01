@@ -1,20 +1,20 @@
 <template>
   <b-container>
-    <h5 class="a-text">Assign Role</h5>
+    <h5 class="a-text">{{$t("businessowner.Assign_Role")}}</h5>
 
     <b-container class="b-bottom">
       <b-row>
         <b-col cols="5">
           <b-form-group
-            label-cols-lg="3"
-            label="User"
+            s-cols-lg="3"
+            label="$t('businessowner.User')"
             label-size="md"
             label-class="font-weight-bold pt-0"
             class="mb-0"
           >
             <b-form-select v-model="selected">
-              <b-form-select-option :value="null">Admin</b-form-select-option>
-              <b-form-select-option value="a">User</b-form-select-option>
+              <b-form-select-option :value="null">{{$t("businessowner.Admin")}}</b-form-select-option>
+              <b-form-select-option value="a">{{$t("businessowner.User")}}</b-form-select-option>
             </b-form-select>
           </b-form-group>
         </b-col>
@@ -22,39 +22,45 @@
         <b-col>
           <b-form-group
             label-cols-lg="3"
-            label="Role"
+            label="$t('businessowner.Role')"
             label-size="md"
             label-class="font-weight-bold pt-0"
             class="mb-0"
           >
             <b-form-select v-model="selected" class="mb-3">
-              <b-form-select-option :value="null">Admin</b-form-select-option>
-              <b-form-select-option value="a">User</b-form-select-option>
+              <b-form-select-option :value="null">{{$t("businessowner.Admin")}}</b-form-select-option>
+              <b-form-select-option value="a">{{$t("businessowner.User")}}</b-form-select-option>
             </b-form-select>
           </b-form-group>
         </b-col>
 
         <b-col>
-          <b-button variant="primary" class="assign-btn">Assign</b-button>
+          <b-button variant="primary" class="assign-btn">{{$t("businessowner.Assign")}}</b-button>
         </b-col>
       </b-row>
 
       <p class="text">
-        Admin can manage all aspects of the Business Identity. They can create
-        posts and send messages through inbox. They can respond to the delete
-        comments, Approve posts, view insights, manage the business settings,
-        update Business profile, assign roles and payments.
+        {{$t("businessowner.Admin_can_manage_all_aspects_of_the_Business_Identity")}}.
+        {{$t("businessowner.They_can_create_posts_and_send_messages_through_inbox")}}. 
+        {{$t("businessowner.They_can_respond_to_the_delete_comments")}},
+        {{$t("businessowner.Approve_posts")}}, 
+        {{$t("businessowner.view_insights")}}, 
+        {{$t("businessowner.manage_the_business_settings")}},
+        {{$t("businessowner.update_Business_profile")}}, 
+        {{$t("businessowner.assign_roles_and_payments")}}.
       </p>
       <br />
       <p class="text">
-        Editor can create posts and send messages through inbox, They can
-        respond to and delete comments, Approve posts, view insights
+        {{$t("businessowner.Editor_can_create_posts_and_send_messages_through_inbox")}}, 
+        {{$t("businessowner.They_can_respond_to_and_delete_comments")}}, 
+        {{$t("businessowner.Approve_posts")}}, 
+        {{$t("businessowner.view_insights")}}
       </p>
     </b-container>
 
     <div class="b-bottom">
       <b-container>
-        <h5 class="a-text">Existing Admins</h5>
+        <h5 class="a-text">{{$t("businessowner.Existing Admins")}}</h5>
         <b-list-group>
           <b-list class="d-flex align-items-center m-list">
             <b-avatar class="mr-3 profile-pic"   ></b-avatar>
@@ -62,7 +68,6 @@
             <span>
               <div>
                 <b-dropdown
-                  size="lg"
                   variant="link"
                   toggle-class="text-decoration-none"
                   no-caret
@@ -74,8 +79,8 @@
                       font-scale="1"
                     ></b-icon>
                   </template>
-                  <b-dropdown-item href="#">Edit</b-dropdown-item>
-                  <b-dropdown-item href="#"> Delete </b-dropdown-item>
+                  <b-dropdown-item href="#">{{$t("businessowner.Edit")}}</b-dropdown-item>
+                  <b-dropdown-item href="#">{{$t("businessowner.Delete")}} </b-dropdown-item>
                 </b-dropdown>
               </div>
             </span>
@@ -104,8 +109,8 @@
                       font-scale="1"
                     ></b-icon>
                   </template>
-                  <b-dropdown-item href="#">Edit</b-dropdown-item>
-                  <b-dropdown-item href="#"> Delete </b-dropdown-item>
+                  <b-dropdown-item href="#">{{$t("businessowner.Edit")}}</b-dropdown-item>
+                  <b-dropdown-item href="#">{{$t("businessowner.Delete")}} </b-dropdown-item>
                 </b-dropdown>
               </div>
             </span>
@@ -116,7 +121,7 @@
 
     <div class="b-bottom">
       <b-container>
-        <h5 class="a-text">Existing Editors</h5>
+        <h5 class="a-text">{{$t("businessowner.Existing_Editors")}}</h5>
         <b-list-group>
           <b-list class="d-flex align-items-center m-list">
             <b-avatar class="mr-3 profile-pic"   ></b-avatar>
@@ -136,8 +141,8 @@
                       font-scale="1"
                     ></b-icon>
                   </template>
-                  <b-dropdown-item href="#">Edit</b-dropdown-item>
-                  <b-dropdown-item href="#"> Delete </b-dropdown-item>
+                  <b-dropdown-item href="#">{{$t("businessowner.Edit")}}</b-dropdown-item>
+                  <b-dropdown-item href="#"> {{$t("businessowner.Delete")}} </b-dropdown-item>
                 </b-dropdown>
               </div>
             </span>
@@ -166,8 +171,8 @@
                       font-scale="1"
                     ></b-icon>
                   </template>
-                  <b-dropdown-item href="#">Edit</b-dropdown-item>
-                  <b-dropdown-item href="#"> Delete </b-dropdown-item>
+                  <b-dropdown-item href="#">{{$t("businessowner.Edit")}}</b-dropdown-item>
+                  <b-dropdown-item href="#">{{$t("businessowner.Delete")}} </b-dropdown-item>
                 </b-dropdown>
               </div>
             </span>

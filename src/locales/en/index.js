@@ -3,6 +3,7 @@
 import auth from './auth.json'
 import follower from './follower.json'
 import businessf from './businessf.json'
+import businessowner from './businessowner.json'
 
 
 export const defaultLocale = 'en'
@@ -11,6 +12,6 @@ export const en = {
  
   auth: auth,
   follower: follower,
-  businessf: businessf
-  
+  businessf: businessf,
+  businessowner:businessowner, 
 }

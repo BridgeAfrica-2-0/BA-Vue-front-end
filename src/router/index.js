@@ -25,6 +25,7 @@ import Visitor from "../views/visitor.vue";
 import profile_owner from "@/views/profileOwner";
 import businessFollower from "@/views/businessFollower";
 import businessOwner from "@/views/businessOwner";
+import businessEditor from "@/views/businessEditor";
 import businessVisitor from "@/views/businessVisitor";
 import search from "@/views/search";
 import forgotPassword from "@/views/forgotPassword";
@@ -39,7 +40,10 @@ import paidPlan from "@/views/paidPlan";
 import confirmPayment from "@/views/confirmPayment";
 import networks from "@/views/networks";
 import dashboard from "@/views/dashboard";
-import myordersbusiness from "@/views/myOders"
+
+import myorders from "@/views/myOders"
+
+
 
 import welcome from "@/views/welcome";
 
@@ -51,10 +55,19 @@ const routes = [
   //   name: "Home",
   //   component: Test,
   // },
+
+  {
+    path: "/myorders",
+    name: "orders",
+    component: myorders,
+    // meta: {
+    //   auth: true,
+    // },
+  },
   {
     path: "/business_owner/myorders/:id",
     name: "myorders",
-    component: myordersbusiness,
+    component: myorders,
   },
 
   
@@ -110,6 +123,12 @@ const routes = [
     component: businessOwner,
   },
 
+
+  {
+    path: "/business_editor/:id?",
+    name: "BusinessEditor",
+    component: businessEditor,
+  },
 
   {
     path: "/business_owner_setting_general",
@@ -223,7 +242,7 @@ const routes = [
   },
 
   {
-    path: "/follower/:id?",
+    path: "/profile/:id?",
     name: "Follower",
     component: Follower,
   },

@@ -462,6 +462,20 @@
                         </div>
                       </div>
                     </div>
+                     <hr />
+
+                    <router-link
+                      to="/myorders"
+                      class="other-menu suggest-item cursor-pointer text-decoration-none text-dark"
+                    >
+                      <span class="mr-2"
+                        ><fas-icon
+                          class="violet search"
+                          :icon="['fas', 'cart-arrow-down']"
+                      /></span>
+                     My orders
+                    </router-link>
+
                     <hr />
 
                     <a
@@ -492,7 +506,7 @@
                           :icon="['fas', 'globe-americas']"
                       /></span>
                       Language
-                    </div>
+                    </div>        
                     <hr class="h-divider" />
                     <a
                       href="https://bridgeafrica.info/nav/owner-other-menu.html"
@@ -548,6 +562,18 @@
                 </div>
               </div>
             </div>
+
+             <hr class="mup" />
+
+            <router-link
+              to="/myorders"
+              class="other-menu suggest-item cursor-pointer text-decoration-none text-dark"
+            >
+              <span class="mr-2"
+                ><fas-icon class="violet search" :icon="['fas', 'cart-arrow-down']"
+              /></span>
+             My orders
+            </router-link>
             <hr class="mup" />
 
             <a
@@ -624,7 +650,7 @@ export default {
   },
 
   methods: {
-    toggleinput() {
+    toggleinfput() {
       this.$refs.mobileinput.style.display = "block";
       this.isActive = true;
     },

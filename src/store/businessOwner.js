@@ -369,8 +369,6 @@ export default {
       return num;
     },
 
-
-
     loadMore({ commit }, url) {
 
       return axios.get(url)

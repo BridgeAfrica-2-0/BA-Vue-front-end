@@ -465,7 +465,7 @@
                     <hr />
 
                     <router-link
-                      to="/business_owner/myorders"
+                      to="/business_owner/myorders/:id"
                       class="other-menu suggest-item cursor-pointer text-decoration-none text-dark"
                     >
                       <span class="mr-2"
@@ -562,6 +562,19 @@
               </div>
             </div>
             <hr class="mup" />
+
+            <router-link
+                      to="/business_owner/myorders/:id"
+                      class="other-menu suggest-item cursor-pointer text-decoration-none text-dark"
+                    >
+                      <span class="mr-2"
+                        ><fas-icon
+                          class="violet search"
+                          :icon="['fas', 'cart-arrow-down']"
+                      /></span>
+                      My orders
+                  </router-link>
+                    <hr class="h-divider" />
 
             <a
               href="/settings"

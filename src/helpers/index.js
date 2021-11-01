@@ -6,9 +6,7 @@ export const fullMediaLink = (media) => {
         const scheme = axios.defaults.baseURL.substring(0, axios.defaults.baseURL.length - 8)
         return media.startsWith(scheme) ? media : `${scheme}${media}`
     }
-
     return ""
-
 }
 
 export const fromNow = (dateTime) => {

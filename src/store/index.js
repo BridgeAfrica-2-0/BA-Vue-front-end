@@ -21,7 +21,7 @@ import { social } from "./social";
 Vue.use(Vuex);
 //axios.defaults.baseURL = process.env.VUE_APP_API_URL;
 
-axios.defaults.baseURL = "https://team4test.maxinemoffett.com/api/v1/";
+axios.defaults.baseURL = "https://74ba-154-72-167-44.ngrok.io/api/v1/";
 
 export default new Vuex.Store({
   modules: {

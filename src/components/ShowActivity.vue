@@ -1,7 +1,7 @@
 <template>
   <div class="accordion" role="tablist">
     <FlashMessage style="zindex: 99999"/>
-    <b-card no-body class="mb-1">
+    <b-card no-body class="mb-1" style="width:100%">
       <b-card-header header-tag="header" class="p-1" role="tab">
         <p block v-b-toggle.accordion-1 variant="info">
           <b-icon :icon="openBusiness ? 'arrow-down' : 'arrow-up'"></b-icon>
@@ -75,7 +75,7 @@
             </div>
             <div class="d-flex flex-column ml-3">
               <div>
-                <span class="font-weight-bold">{{ item.network_name }}</span>
+                <span class="font-weight-bold">{{ item.name }}</span>
               </div>
             </div>
           </div>
@@ -160,13 +160,13 @@ export default {
         this.auth(
           "business" == type
             ? { user: { name: item.business_name, profile_picture: item.logo_path,id: item.business_id } }
-            : { user: { name: item.network_name, profile_picture: item.network_image,id: item.network_id } }
+            : { user: { name: item.name, profile_picture: item.network_image,id: item.network_id } }
         );
 
         if ("network" == type) {
           this.$router.push({
             name: "networks",
-            params: { id: item.network_id },
+            params: { id: item.id },
           });
         }
       }
@@ -201,5 +201,6 @@ export default {
 p {
   overflow-anchor: none;
   margin-bottom: 0;
+  
 }
 </style>

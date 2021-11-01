@@ -621,19 +621,7 @@ export default {
   },
 
   methods: {
-    nFormatter(num) {
-      if (num >= 1000000000) {
-        return (num / 1000000000).toFixed(1).replace(/\.0$/, "") + "G";
-      }
-      if (num >= 1000000) {
-        return (num / 1000000).toFixed(1).replace(/\.0$/, "") + "M";
-      }
-      if (num >= 1000) {
-        return (num / 1000).toFixed(1).replace(/\.0$/, "") + "K";
-      }
-      return num;
-    },
-
+   
     infiniteHandler($state) {
       this.axios
         .get("network/show/post/" + this.url + "/" + this.page)
@@ -938,7 +926,6 @@ export default {
               blockClass: "custom-block-class",
             });
             console.log({ err: err });
-            // loader.hide()
           }
         });
       this.loading = false;

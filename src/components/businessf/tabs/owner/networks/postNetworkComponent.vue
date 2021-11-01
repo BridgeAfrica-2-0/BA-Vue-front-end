@@ -38,7 +38,6 @@
       <b-row>
         <b-col cols="12" class="mt-2">
           <p class="post-text">
-            <!--     :text="post.content.details"   -->
             <read-more
               more-str="read more"
               :text="post.content"
@@ -115,15 +114,22 @@
       </b-row>
     </b-col>
     <b-col cols="12" class="mt-4" v-if="showComment">
-      <Comment v-for="comment in comments" :key="comment.id" :item="comment" :uuid="post.id" />
+      <Comment
+        v-for="comment in comments"
+        :key="comment.id"
+        :item="comment"
+        :uuid="post.id"
+      />
     </b-col>
   </b-row>
 </template>
 
 <script>
+import {mapMutations} from "vuex"
 import Comment from "./comment";
 import { ShareButton } from "@/components/shareButton";
-import moment from "moment";
+import { formatNumber, fromNow } from "@/helpers";
+
 
 export default {
   name: "postNetworkComponent",
@@ -169,24 +175,16 @@ export default {
   },
 
   filters: {
-    nFormatter: function (num) {
-      if (num >= 1000000000) {
-        return (num / 1000000000).toFixed(1).replace(/\.0$/, "") + "G";
-      }
-      if (num >= 1000000) {
-        return (num / 1000000).toFixed(1).replace(/\.0$/, "") + "M";
-      }
-      if (num >= 1000) {
-        return (num / 1000).toFixed(1).replace(/\.0$/, "") + "K";
-      }
-      return num;
-    },
-    now: function (date) {
-      return moment(date).fromNow();
-    },
+    nFormatter: formatNumber,
+    now: fromNow,
   },
 
   methods: {
+
+    ...mapMutations({
+      addNewComment: "networkProfile/updatePost",
+    }),
+
     onLike: async function () {
       const request = await this.$repository.share.postLike({
         post: this.post.id,
@@ -217,6 +215,10 @@ export default {
       if (request.success) {
         this.onShowComment();
         this.comment = "";
+        this.addNewComment({action:"add:comment:count", uuid:this.post.id})
+        this.flashMessage.success({
+          message: "Post created",
+        });
       }
 
       this.createPostRequestIsActive = false;
@@ -239,6 +241,8 @@ export default {
     },
   },
 };
+
+
 </script>
 
 <style scoped>

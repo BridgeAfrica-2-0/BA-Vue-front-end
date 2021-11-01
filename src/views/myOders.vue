@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    
+    <navbar />
     <hr />
     <!-- partie mobile--------------------------------------------------------------------- 
     
@@ -24,7 +24,7 @@
         >
           <div class="cercle2">2</div>
 
-          <h2 class="h2 text-position text-center">In process</h2>
+          <h2 class="h2 text-position text-center">In progress</h2>
         </div>
 
         <div
@@ -34,11 +34,11 @@
         >
           <div class="cercle2">3</div>
 
-          <h2 class="h2 text-position text-center">Shipped</h2>
+          <h2 class="h2 text-position text-center">Complete</h2>
         </div>
         <div id="m4" class="mobile2 col t" @click="changeElementType(4)">
           <div class="cercle2">4</div>
-          <h2 class="h2 text-position text-center">Re-shedle</h2>
+          <h2 class="h2 text-position text-center">Cancel</h2>
         </div>
       </div>
 
@@ -405,7 +405,7 @@
         </div>
 
         <b-avatar id="a2" class="avatar" text="2"></b-avatar>
-        <h2 class="text cursor" @click="changeElementType(2)">In Process</h2>
+        <h2 class="text cursor" @click="changeElementType(2)">In Progress</h2>
         <div
           id="p2"
           class="progress prog cursor gris"
@@ -421,7 +421,7 @@
         </div>
 
         <b-avatar id="a3" class="avatar" text="3"></b-avatar>
-        <h2 class="text cursor" @click="changeElementType(3)">Shipped</h2>
+        <h2 class="text cursor" @click="changeElementType(3)">Complete</h2>
         <div
           id="p3"
           class="progress prog cursor gris"
@@ -437,7 +437,7 @@
         </div>
 
         <b-avatar id="a4" class="avatar" text="4"></b-avatar>
-        <h2 class="text cursor" @click="changeElementType(4)">Re-shedule</h2>
+        <h2 class="text cursor" @click="changeElementType(4)">Cancel</h2>
         <div
           id="p4"
           class="progress prog cursor gris"
@@ -775,10 +775,10 @@
 </template>
 
 <script>
-
+import navbar from "@/components/navbar.vue";
 
 export default {
- 
+  components: { navbar },
   data() {
     return {
       selected: "",
@@ -803,11 +803,11 @@ export default {
       if (p == 1) {
         this.etat = "All";
       } else if (p == 2) {
-        this.etat = "In process";
+        this.etat = "pending";
       } else if (p == 3) {
-        this.etat = "Shipped";
+        this.etat = "complete";
       } else if (p == 4) {
-        this.etat = "Re-shedule";
+        this.etat = "Canceled";
       }
       //transition partie desktop
       const a = document.getElementById("a" + p);

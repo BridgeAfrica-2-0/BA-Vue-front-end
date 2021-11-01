@@ -39,7 +39,7 @@ import paidPlan from "@/views/paidPlan";
 import confirmPayment from "@/views/confirmPayment";
 import networks from "@/views/networks";
 import dashboard from "@/views/dashboard";
-import myordersBusiness from "@/views/businessOwnerOrders"
+import myorders from "@/views/myOders"
 
 import welcome from "@/views/welcome";
 
@@ -54,7 +54,7 @@ const routes = [
   {
     path: "/business_owner/myorders",
     name: "myorders",
-    component: myordersBusiness,
+    component: myorders,
   },
 
   {

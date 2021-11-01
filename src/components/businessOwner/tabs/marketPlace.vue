@@ -15,7 +15,7 @@
       </b-col>
     </div>
           <button class="button" @click="displayOrders">my orders</button>
-          <div class="orders" v-if="orders" >
+          <div class="orders"  >
             
             <Orders />
           </div>
@@ -154,7 +154,7 @@ import Orders from "@/views/businessOwnerOrders";
 export default {
   data() {
     return {
-      orders: false,
+      status: false,
       showModal: false,
       load: false,
       loader: false,
@@ -187,11 +187,11 @@ export default {
   },
   methods: {
     displayOrders(){ 
-      this.orders = !this.orders ;
-      
+      this.status = !this.status ;
+      console.log("----"+ this.status);
     },
     getProducts() {
-      axios.get("market").then((res) => { 
+      axios.get("market").then((res) => { console.log("-------"+res.data.data);
         this.loader = false ;
 
         this.products = res.data.data.data;

@@ -13,8 +13,8 @@
             <b-tab title="Business"  href="#business" class="m-0 p-0">
               <bussiness />
             </b-tab>
-            <b-tab title="Media">
-              <Media />
+            <b-tab title="Media" href="#media">
+              <Media type="profile" />
             </b-tab>
             <b-tab title="Networks">
               <Networks />
@@ -23,7 +23,6 @@
             <b-tab title="Community"  href="#community" class="m-0 p-0">
               <following />
             </b-tab>
-            
           </b-tabs>
         </b-col>
       </b-row>
@@ -53,6 +52,7 @@ export default {
     About,
     Media,
     Networks,
+   
   },
   data() {
     return {   
@@ -88,15 +88,23 @@ export default {
   computed: {},
    created() {
       this.tabIndex = this.tabs.findIndex(tab => tab === this.$route.hash);
+      
+      this.$store
+      .dispatch("profile/loadUserPostIntro", null)
+      .then((response) => {
+         console.log(response);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   },
   mounted(){
-
 
     this.$store
       .dispatch("profile/Tcommunity", null)
       .then((response) => {
        
-      })
+      })  
       .catch((error) => {
         console.log({error:error});
       });
@@ -140,9 +148,6 @@ export default {
         console.log({error:error});
       });
 
-
-
-      
       this.$store
       .dispatch("profile/NcommunityFollower", null)
       .then((response) => {
@@ -152,7 +157,6 @@ export default {
         console.log({error:error});
       });
 
-      
       this.$store
       .dispatch("profile/NcommunityFollowing", null)
       .then((response) => {

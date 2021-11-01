@@ -1,5 +1,4 @@
 import axios from "axios";
-
 axios.defaults.baseURL = process.env.VUE_APP_API_URL;
 
 export default {
@@ -29,7 +28,7 @@ export default {
       state.user = userData;
 
       localStorage.setItem("user", JSON.stringify(userData));
-     // axios.defaults.headers.common.Authorization = `Bearer ${userData.accessToken}`;
+      axios.defaults.headers.common.Authorization = `Bearer ${userData.accessToken}`;
 
       const userInfo = localStorage.getItem("user");
     },
@@ -218,5 +217,10 @@ export default {
     isLogged: (state) => !!state.user,
     isVerified: (state) => !!state.user,
     user: (state) => state.user,
+
+    getAuthToken(state) {
+      return `Bearer ${state.user.accessToken}`
+    },
+
   },
 };

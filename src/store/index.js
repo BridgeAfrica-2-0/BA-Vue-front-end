@@ -16,8 +16,8 @@ import axios from "axios";
 import { search } from "./search";
 
 Vue.use(Vuex);
- axios.defaults.baseURL = process.env.VUE_APP_API_URL;    
 
+axios.defaults.baseURL = process.env.VUE_APP_API_URL; 
 
 export default new Vuex.Store({
   modules: {
@@ -32,6 +32,7 @@ export default new Vuex.Store({
     follower,
     search,
     market,
-    UserProfileOwner
+    UserProfileOwner,
+    businessFollowers
   },
 });

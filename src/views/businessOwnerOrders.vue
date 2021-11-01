@@ -38,7 +38,7 @@
         </div>
         <div id="m4" class="mobile2 col t" @click="changeElementType(4)">
           <div class="cercle2">4</div>
-          <h2 class="h2 text-position text-center">Re-shedle</h2>
+          <h2 class="h2 text-position text-center">Re-shedule</h2>
         </div>
       </div>
 

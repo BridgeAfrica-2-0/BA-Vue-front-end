@@ -6,16 +6,16 @@
         <b-card title="" header-tag="header" footer-tag="footer">
           <span class="m-1">
             <h2 class="title intro-head">
-              <b>
+             
                 <fas-icon
                   class="icons"
                   :icon="['fas', 'exclamation-circle']"
                   size="lg"
                 />
                 Intro
-              </b>
+             
             </h2>
-            <span class="float-right btn m-0 p-0 action-intro" v-b-modal.modal-5
+            <span class="float-right btn m-0 p-0 action-intro" @click="editPage"  
               ><b-icon
                 icon="pencil-fill"
                 class="icon-size"
@@ -31,7 +31,7 @@
                 class="icon-size"
                 variant="primary"
               ></b-icon>
-              <b> Work at: </b>
+               Work at: 
               <span v-if="info.user_experience"> 
               <span
                 class="text"
@@ -48,7 +48,7 @@
                 class="icon-size"
                 variant="primary"
               ></b-icon>
-              <b> Studied at: </b>
+               Studied at: 
               <span v-if="info.user_education !=null">   
           <span
                 v-for="edu in info.user_education.slice(0, 1)"
@@ -68,7 +68,7 @@
                 class="icon-size"
                 variant="primary"
               ></b-icon>
-              <b> Home Town : </b>
+              Home Town : 
               <span class="text">
                 {{ info.user.neighbor }}
               </span>
@@ -79,7 +79,7 @@
                 class="icon-size"
                 variant="primary"
               ></b-icon
-              ><b> Current City : </b>
+              > Current City :
               <span class="text">
                 {{ info.user.city }}
               </span>
@@ -90,7 +90,7 @@
                 class="icon-size"
                 variant="primary"
               ></b-icon>
-              <b> Community: </b>
+               Community: 
               <span class="text">
                {{ nFormatter(total.total_community)}}
               </span>
@@ -102,6 +102,7 @@
           id="modal-5"
           title="Edit Intro"
           ref="modal"
+         
           @ok="handleOk"
         >
           <div class="">
@@ -274,6 +275,11 @@ export default {
        
         this.$refs["modal"].hide();
       this.$router.push("profile_owner#"+index);
+    },
+
+    editPage(){
+     
+      this.$router.push("profile_owner#about");
     }
    
   },

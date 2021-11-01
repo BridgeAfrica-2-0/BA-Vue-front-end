@@ -23,13 +23,11 @@ IconifyIcon.addIcon("home", homeIconData);
 Vue.use(Vuex);
 Vue.use(VueAxios, axios);
 
-
 import LoadScript from "vue-plugin-load-script";
 import InfiniteLoading from "vue-infinite-loading";
 
 import { loader } from "./mixins"
 
-//import LoadScript from "vue-plugin-load-script";
 
 Vue.use(LoadScript);
 
@@ -90,9 +88,9 @@ Vue.use(VueMaterial);
 import Lightbox from "@morioh/v-lightbox";
 import * as VueGoogleMaps from "gmap-vue";
 
-import VueSplide from "@splidejs/vue-splide";
-Vue.use(VueSplide);
-import "@splidejs/splide/dist/css/themes/splide-default.min.css";
+// import VueSplide from "@splidejs/vue-splide";
+// Vue.use(VueSplide);
+// import "@splidejs/splide/dist/css/themes/splide-default.min.css";
 
 // global register
 Vue.use(VueGallerySlideshow);
@@ -143,22 +141,32 @@ Vue.use(VueGoogleMaps, {
 import VueLoading from 'vue-loading-overlay';
 import 'vue-loading-overlay/dist/vue-loading.css';
 
-
+import VueYoutube from 'vue-youtube'
+ 
+Vue.use(VueYoutube)
 Vue.use(VueLoading);
 
 import VueAgile from 'vue-agile'
 
 Vue.use(VueAgile);
 
+import CoolLightBox from 'vue-cool-lightbox'
+import 'vue-cool-lightbox/dist/vue-cool-lightbox.min.css'
 
+Vue.use(CoolLightBox)
 
 
 Vue.component("v-select", vSelect);
 
 import i18n from "./i18n";
 
+import VueEasyLightbox from 'vue-easy-lightbox'
+
+// Method 1. via Vue.use
+Vue.use(VueEasyLightbox)
+
 Vue.config.productionTip = false;
-var user=null;
+var user = null;
 
 new Vue({
   router,
@@ -169,27 +177,27 @@ new Vue({
     const userInfo = localStorage.getItem("user");
     if (userInfo) {
       const userData = JSON.parse(userInfo);
-      user=userData;
+      user = userData;
       this.$store.commit("auth/setUserData", userData);
     }
     axios.interceptors.response.use(
       (response) => response,
       (error) => {
         if (error.response.status === 401) {
-          // this.$store.dispatch("auth/logout");
+           this.$store.dispatch("auth/logout");
           console.log("error has occure");
         }
         return Promise.reject(error);
       }
     );
 
-      axios.interceptors.request.use(function (config) {
+    axios.interceptors.request.use(function (config) {
 
-          if(user!=null){  
-          config.headers.Authorization =  `Bearer  ${user.accessToken}`;
-        }
-          return config;
-      });
+      if (user != null) {
+        config.headers.Authorization = `Bearer  ${user.accessToken}`;
+      }
+      return config;
+    });
 
   },
 

@@ -75,7 +75,7 @@
             </div>
             <div class="d-flex flex-column ml-3">
               <div>
-                <span class="font-weight-bold">{{ item.name }}</span>
+                <span class="font-weight-bold">{{ item.network_name }}</span>
               </div>
             </div>
           </div>
@@ -166,7 +166,7 @@ export default {
         if ("network" == type) {
           this.$router.push({
             name: "networks",
-            params: { id: item.id },
+            params: { id: item.network_id },
           });
         }
       }

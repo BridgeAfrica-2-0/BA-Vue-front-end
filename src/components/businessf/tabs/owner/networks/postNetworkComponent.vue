@@ -99,6 +99,7 @@
             class="comment"
             type="text"
             v-model="comment"
+            @keypress.enter="onCreateComment"
           />
           <b-spinner
             style="color: rgb(231, 92, 24); position: absolute; right: 17px"
@@ -125,11 +126,10 @@
 </template>
 
 <script>
-import {mapMutations} from "vuex"
+import { mapMutations } from "vuex";
 import Comment from "./comment";
 import { ShareButton } from "@/components/shareButton";
 import { formatNumber, fromNow } from "@/helpers";
-
 
 export default {
   name: "postNetworkComponent",
@@ -154,6 +154,7 @@ export default {
       comments: [],
       showComment: false,
       loadComment: false,
+      processLike: false,
       createPostRequestIsActive: false,
       comment: "",
     };
@@ -180,29 +181,35 @@ export default {
   },
 
   methods: {
-
     ...mapMutations({
       addNewComment: "networkProfile/updatePost",
     }),
 
     onLike: async function () {
-      const request = await this.$repository.share.postLike({
-        post: this.post.id,
-        network: this.$route.params.id,
-      });
+      if (!this.processLike) {
+        this.processLike = true;
 
-      if (request.success)
-        this.post = Object.assign(this.post, {
-          is_liked: 1,
-          likes_count: !this.post.is_liked
-            ? this.post.likes_count + 1
-            : this.post.likes_count
-            ? this.post.likes_count - 1
-            : 0,
+        const request = await this.$repository.share.postLike({
+          post: this.post.id,
+          network: this.$route.params.id,
         });
+
+        if (request.success)
+          this.post = Object.assign(this.post, {
+            is_liked: this.post.is_liked ? 0 : 1,
+            likes_count: !this.post.is_liked
+              ? this.post.likes_count + 1
+              : this.post.likes_count
+              ? this.post.likes_count - 1
+              : 0,
+          });
+        this.processLike = false;
+      }
     },
 
     onCreateComment: async function () {
+      if (!(this.comment.trim().length > 2 && !this.createPostRequestIsActive))
+        return false;
       this.createPostRequestIsActive = true;
       const request = await this.$repository.share.createComment({
         post: this.post.id,
@@ -215,7 +222,11 @@ export default {
       if (request.success) {
         this.onShowComment();
         this.comment = "";
-        this.addNewComment({action:"add:comment:count", uuid:this.post.id})
+        this.addNewComment({ action: "add:comment:count", uuid: this.post.id });
+        this.post = {
+          ...this.post,
+          comment_count: this.post.comment_count + 1,
+        };
         this.flashMessage.success({
           message: "Post created",
         });
@@ -241,8 +252,6 @@ export default {
     },
   },
 };
-
-
 </script>
 
 <style scoped>

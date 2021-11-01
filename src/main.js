@@ -18,15 +18,12 @@ import IconifyIcon from "@iconify/vue";
 import homeIconData from "@iconify-icons/mdi-light/home";
 import ReadMore from "vue-read-more";
 import VueSocialauth from "vue-social-auth";
-import Notifications from 'vue-notification'
 import VueSocialSharing from 'vue-social-sharing'
 
 import plugin from './http'
 
 Vue.use(plugin)
 
-
-Vue.use(Notifications)
 // import firebase from "firebase";
 IconifyIcon.addIcon("home", homeIconData);
 

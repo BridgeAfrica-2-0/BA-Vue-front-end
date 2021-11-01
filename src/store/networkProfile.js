@@ -90,10 +90,11 @@ export default {
     updatePost(state, payload) {
       console.log(payload)
       const strategy = {
-        "add:comment:count": (uuid) => state.ownerPost.map(post => (post.id == uuid) ? Object.assign({}, post, { comment_count: post.comment_count + 1 }) : post)
+        "add:comment:count": (uuid) => state.ownerPost.map(post => (post.id == uuid) ? { ...post, comment_count: post.comment_count + 1 } : post)
       }
 
       try {
+        console.log(strategy[payload.action](payload.uuid))
         state.ownerPost = strategy[payload.action](payload.uuid)
       } catch (error) {
         throw new Error(error)

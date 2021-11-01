@@ -35,7 +35,7 @@ class Repository {
 
   async getNetworks() {
     try {
-      const response = await axios.get(`profile/user/networks`)
+      const response = await axios.get(`profile/networks/user`)
       return {
         success: true,
         data: response.data.data

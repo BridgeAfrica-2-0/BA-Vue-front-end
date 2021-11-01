@@ -3,8 +3,12 @@
     <div class="container">
       <b-row>
         <b-col>
-          <div class="b-bottom f-left">
-            <input @click="selectall" type="checkbox" />
+          <div class="b-bottomn f-left ">
+            <input
+              class="m-left-top"
+              type="checkbox"
+              @click="selectall($event)"
+            />
             Select All
           </div>
         </b-col>
@@ -19,7 +23,7 @@
             >
             <b-button
               @click="deleteAll(selected)"
-              v-if="selected.length > 0"
+              v-if="testing > 0"
               variant="primary"
               class="a-button-l duration ml-1"
             >
@@ -40,12 +44,12 @@
           <p class="">
             <span style="display:inline-flex">
               <input
-                @click="select(post.id)"
-                type="checkbox"
-                v-model="status"
-                value="accepted"
                 class="m-left-top"
-                unchecked-value="not_accepted"
+                type="checkbox"
+                :value="post.id"
+                :id="post.id"
+                :checked="post.checked"
+                @click="check(post, $event)"
               />
               <b-avatar
                 class="d-inline-block profile-pic"
@@ -90,7 +94,6 @@ import { mapActions, mapGetters } from "vuex";
 export default {
   name: "notification",
   data: () => ({
-    all: 24,
     selected: [],
   }),
   beforeMount() {
@@ -137,17 +140,20 @@ export default {
     },
 
     // select all the notifications
-    selectall() {
-      this.getNotificationsStore.forEach((element) => {
-        this.selected.push(element);
-      });
-    },
-    select(notification, index) {
-      if (this.selected[index]) {
-        this.selected.splice(index, 1);
-        return;
+    selectall(e) {
+      if (e.target.checked) {
+        console.log("selected");
+        this.getNotificationsStore.forEach((element) => {
+          this.selected.push(element);
+        });
       }
-      this.selected.push(notification);
+    },
+
+    check(value, e) {
+      if (e.target.checked) {
+        this.selected.push(value);
+        console.log("selected");
+      }
     },
   },
 };

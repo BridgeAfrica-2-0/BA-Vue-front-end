@@ -1,4 +1,5 @@
 <template>
+<<<<<<< HEAD
 	<div>
 		<b-row>
 			<b-col md="12" lg="5" xl="4" class="p-0 m-0">
@@ -107,6 +108,106 @@
 								class="eedit"
 								variant=""
 							></b-icon>
+=======
+  <div>
+    <b-row>
+      <b-col md="12" lg="5" xl="4" class="p-0 m-0">
+        <!-- User Posts SideBar-->
+        <b-card title="" header-tag="header" footer-tag="footer">
+          <span class="m-1">
+            <h2 class="title intro-head">
+             
+                <fas-icon
+                  class="icons"
+                  :icon="['fas', 'exclamation-circle']"
+                  size="lg"
+                />
+                Intro
+             
+            </h2>
+            <span class="float-right btn m-0 p-0 action-intro" @click="editPage"  
+              ><b-icon
+                icon="pencil-fill"
+                class="icon-size"
+                variant="primary"
+              ></b-icon>
+            </span>
+          </span>
+          <!-- User Post Intro-->
+          <b-card-text class="text-left username intro-head">
+            <p>
+              <b-icon
+                icon="briefcase-fill"
+                class="icon-size"
+                variant="primary"
+              ></b-icon>
+               Work at: 
+              <span v-if="info.user_experience"> 
+              <span
+                class="text"
+                v-for="exp in info.user_experience.slice(0, 1)"
+                :key="exp.id"
+              >
+                {{ exp.company_name }}
+              </span>
+               </span>
+            </p>
+            <p>
+              <b-icon
+                icon="book-fill"
+                class="icon-size"
+                variant="primary"
+              ></b-icon>
+               Studied at: 
+              <span v-if="info.user_education !=null">   
+          <span
+                v-for="edu in info.user_education.slice(0, 1)"
+                :key="edu.id"
+                class="text"
+              >
+           
+                {{ edu.school_name }}</span
+              >
+
+             
+                </span>
+            </p>
+            <p>
+              <b-icon
+                icon="house-fill"
+                class="icon-size"
+                variant="primary"
+              ></b-icon>
+              Home Town : 
+              <span class="text">
+                {{ info.user.neighbor }}
+              </span>
+            </p>
+            <p>
+              <b-icon
+                icon="geo-alt-fill"
+                class="icon-size"
+                variant="primary"
+              ></b-icon
+              > Current City :
+              <span class="text">
+                {{ info.user.city }}
+              </span>
+            </p>
+            <p>
+              <b-icon
+                icon="people-fill"
+                class="icon-size"
+                variant="primary"
+              ></b-icon>
+               Community: 
+              <span class="text">
+               {{ nFormatter(total.total_community)}}
+              </span>
+            </p>
+          </b-card-text>
+        </b-card>
+>>>>>>> main
 
         <b-modal
           id="modal-5"
@@ -300,12 +401,28 @@
 
 			handleOk(bvModalEvt) {},
 
+<<<<<<< HEAD
 			switchTab(index) {
 				this.$refs["modal"].hide();
 				this.$router.push("profile_owner#" + index);
 			},
 		},
 	};
+=======
+    switchTab(index){
+       
+        this.$refs["modal"].hide();
+      this.$router.push("profile_owner#"+index);
+    },
+
+    editPage(){
+     
+      this.$router.push("profile_owner#about");
+    }
+   
+  },
+};
+>>>>>>> main
 </script>
 
 <style scoped>

@@ -25,6 +25,7 @@ import Visitor from "../views/visitor.vue";
 import profile_owner from "@/views/profileOwner";
 import businessFollower from "@/views/businessFollower";
 import businessOwner from "@/views/businessOwner";
+import businessEditor from "@/views/businessEditor";
 import businessVisitor from "@/views/businessVisitor";
 import search from "@/views/search";
 import forgotPassword from "@/views/forgotPassword";
@@ -106,6 +107,12 @@ const routes = [
     path: "/business_owner/:id?",
     name: "BusinessOwner",
     component: businessOwner,
+  },
+
+  {
+    path: "/business_editor/:id?",
+    name: "BusinessEditor",
+    component: businessEditor,
   },
 
   {
@@ -220,7 +227,7 @@ const routes = [
   },
 
   {
-    path: "/follower/:id?",
+    path: "/profile/:id?",
     name: "Follower",
     component: Follower,
   },

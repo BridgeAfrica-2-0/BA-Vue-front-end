@@ -244,7 +244,7 @@ export default {
     },
 
 
-
+   
 
     //set media data
 
@@ -260,6 +260,7 @@ export default {
 
 
     setProfileNetwork(state, data) {
+      console.log("commiting this issdshd");
       state.profileNetwork = data;
     },
 
@@ -291,6 +292,8 @@ export default {
     },
 
     ownerPost(state, data) {
+
+      
       state.ownerPost = data;
     },
 
@@ -381,9 +384,31 @@ export default {
 
   actions: {
 
+    deleteCover({commit}){
 
-    Tcommunity({ commit }) {
+      return axios
+      .delete('user/cover')
+      .then(({ data }) => {
+        console.log(data);
+      });
 
+    },
+
+
+    deleteBusiness({commit}, url){
+
+      return axios
+      .delete(url)
+      .then(({ data }) => {
+        console.log(data);
+      });
+
+    },
+  
+
+  
+    Tcommunity({commit}){
+     
       return axios
         .get('profile/total/community')
         .then(({ data }) => {
@@ -413,9 +438,72 @@ export default {
           return data;
         });
 
-    },
+      },
 
-    NcommunityFollower({ commit }) {
+   createContact({ commit },payload){
+       
+        console.log(payload)
+        return  axios.post("user/contact-create", {phone:payload.phone}, {
+         
+        })
+        .then((res) => {
+          console.log(res.data);
+        })
+        .catch((err) => {
+          console.log("Something went wrong");
+          console.log({err:err})
+        });
+ 
+
+   },
+
+
+
+
+
+
+
+
+
+updateContact({ commit },payload){
+       
+  console.log(payload)
+  return  axios.post("user/contact-update/"+payload.id, {phone:payload.phone}, {
+   
+  })
+  .then((res) => {
+    console.log(res.data);
+  })
+  .catch((err) => {
+    console.log("Something went wrong");
+    console.log({err:err})
+  });
+
+
+},
+
+
+deleteContact({ commit },payload){
+       
+  console.log(payload)
+  return  axios.post("user/contact-delete/"+payload.id,{
+   
+  })
+  .then((res) => {
+    console.log(res.data);
+  })
+  .catch((err) => {
+    console.log("Something went wrong");
+    console.log({err:err})
+  });
+
+
+},
+
+
+
+
+    NcommunityFollower({ commit }){
       return axios
         .get('profile/network/follower')
         .then(({ data }) => {

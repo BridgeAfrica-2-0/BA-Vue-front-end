@@ -3,7 +3,9 @@
     <div class="container">
       <b-row>
         <b-col>
-          <div class="b-bottomn f-left ">
+
+          <div class="b-bottomn f-left">
+
             <input
               class="m-left-top"
               type="checkbox"
@@ -43,13 +45,17 @@
         >
           <p class="">
             <span style="display:inline-flex">
+
               <input
                 class="m-left-top"
+
                 type="checkbox"
                 :value="post.id"
                 :id="post.id"
                 :checked="post.checked"
+
                 @click="check(post, $event)"
+
               />
               <b-avatar
                 class="d-inline-block profile-pic"
@@ -85,6 +91,8 @@
         </b-col>
         <hr width="100%" />
       </b-row>
+
+      
     </div>
   </div>
 </template>
@@ -160,6 +168,10 @@ export default {
 </script>
 
 <style scoped>
+.my-checkbox {
+  margin-right: 10px;
+}
+
 .load {
   display: flex;
   justify-content: center;

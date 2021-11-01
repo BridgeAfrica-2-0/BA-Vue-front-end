@@ -56,7 +56,7 @@
       <div>
         <div v-if="status == 1" class="inprogress">
           <div class="show row">
-            <div class="col-4">Show:</div>
+            <div class="col-3">Show:</div>
             <div class="col">
               <b-form-select
                 v-model="selected"
@@ -85,8 +85,10 @@
                 <span class="flou">yaoundé 12/12/2021 12H00</span>
               </div>
 
-              <p class="h3 statusp">status:</p>
-              <h3 class="text-success h3 margstatus">{{ i }}</h3>
+             <span class="row posstatus">
+                <p class="h3 statusp">status:</p>
+              <h3 class="text-success h3 margstatus ">{{ i }}</h3>
+             </span>
             </div>
             <hr />
 
@@ -137,7 +139,7 @@
 
         <div v-if="status == 2" class="inprogress">
           <div class="show row">
-            <div class="col-4">Show:</div>
+            <div class="col-3">Show:</div>
             <div class="col">
               <b-form-select
                 v-model="selected"
@@ -166,8 +168,10 @@
                 <span class="flou">yaoundé 12/12/2021 12H00</span>
               </div>
 
-              <p class="h3 statusp">status:</p>
-              <h3 class="text-success h3 margstatus">{{ etat }}</h3>
+              <span class="row posstatus">
+                <p class="h3 statusp">status:</p>
+              <h3 class="text-success h3 margstatus ">{{ etat }}</h3>
+             </span>
             </div>
             <hr />
 
@@ -218,7 +222,7 @@
 
         <div v-if="status == 3" class="complete">
           <div class="show row">
-            <div class="col-4">Show:</div>
+            <div class="col-3">Show:</div>
             <div class="col">
               <b-form-select
                 v-model="selected"
@@ -247,8 +251,10 @@
                 <span class="flou">yaoundé 12/12/2021 12H00</span>
               </div>
 
-              <p class="h3 statusp">status:</p>
-              <h3 class="text-success h3 margstatus">{{ etat }}</h3>
+              <span class="row posstatus">
+                <p class="h3 statusp">status:</p>
+              <h3 class="text-success h3 margstatus ">{{ etat }}</h3>
+             </span>
             </div>
             <hr />
 
@@ -299,7 +305,7 @@
 
         <div v-if="status == 4" class="cancel">
           <div class="show row">
-            <div class="col-4">Show:</div>
+            <div class="col-3">Show:</div>
             <div class="col">
               <b-form-select
                 v-model="selected"
@@ -328,8 +334,10 @@
                 <span class="flou">yaoundé 12/12/2021 12H00</span>
               </div>
 
-              <p class="h3 statusp">status:</p>
-              <h3 class="text-success h3 margstatus">{{ etat }}</h3>
+              <span class="row posstatus">
+                <p class="h3 statusp">status:</p>
+              <h3 class="text-success h3 margstatus ">{{ etat }}</h3>
+             </span>
             </div>
             <hr />
 
@@ -961,6 +969,10 @@ h3 {
   margin-top: 30px;
   margin-bottom: -20px;
 }
+.posstatus{
+  margin-left: 195px;
+  margin-top: -18px;
+}
 
 /*  end style mobile------------------------- */
 .cercle1 {
@@ -1198,6 +1210,10 @@ h3 {
   .marghr {
     margin-bottom: -20px;
   }
+  .manage{
+    margin-top: -6px !important;
+    margin-right: -12px !important;
+  }
 
   @media only screen and (max-width: 470px) {
     .h2 {
@@ -1208,7 +1224,10 @@ h3 {
       margin-left: -4px !important;
     }
   }
-
+   .manage{
+    margin-top: -6px !important;
+    margin-right: -12px !important;
+  }
   #hidedesktop {
     display: none;
   }

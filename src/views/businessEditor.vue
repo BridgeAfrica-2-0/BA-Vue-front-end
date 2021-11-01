@@ -1,4 +1,4 @@
-<template>
+ <template>
   <div class="" style="overflow-y: hidden; padding:0px">
     <navbar />
 
@@ -14,7 +14,7 @@
       <hr width="100%" class="d-none" d-md-block />
     </div>
 
-    <div class=" " v-if="selectedId == '0'">
+    <div class="mt-3" v-if="selectedId == '0'">
       <Business />
     </div>
 
@@ -26,15 +26,13 @@
       <Settings v-bind:currenttab="selectedId" />
     </div>
 
+    
+
     <div class="mt-3" v-if="selectedId == '3'">
       <Settings v-bind:currenttab="selectedId" />
     </div>
 
     <div class="mt-3" v-if="selectedId == '4'">
-      <Settings v-bind:currenttab="selectedId" />
-    </div>
-
-    <div class="mt-3" v-if="selectedId == '5'">
       <Settings v-bind:currenttab="selectedId" />
     </div>
 
@@ -44,11 +42,9 @@
 
 <script>
 import navbar from "@/components/navbar";
-import Business from "../components/businessOwner/business";
-//import Pending from "../components/businessOwner/pending";
-//import Insight from "../components/businessOwner/insight";
-//import Notification from "../components/businessOwner/notification";
-import Settings from "../components/businessOwner/settings";
+import Business from "../components/businessEditor/business";
+
+import Settings from "../components/businessEditor/settings";
 
 import Inbox from "../components/businessOwner/inbox";
 
@@ -62,12 +58,12 @@ export default {
   components: {
     navbar,
     Business,
-    //Pending,
+
     LyTab,
     Settings,
-    //  Insight,
+
     Inbox,
-    // Notification,
+ 
     Footer
   },
   data() {
@@ -80,7 +76,7 @@ export default {
 
         { label: "Inbox", icon: "" },
         { label: "Notification", icon: "" },
-        { label: "Pending Post", icon: "" },
+       
         { label: "Insight", icon: "" },
 
         { label: "Settings", icon: "" }

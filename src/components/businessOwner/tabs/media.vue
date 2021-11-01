@@ -58,7 +58,7 @@ export default {
     this.getAlbums();
     this.getImages();
   },
-  data: function() {
+  data: function () {
     return {
       url_data: null,
       images: [

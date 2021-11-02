@@ -36,7 +36,7 @@
 		</div>
 		<!-- ADDPRODUCT FORM -->
 		<b-modal hide-footer title="Add product" v-model="showModal">
-			<b-form>
+			<b-form >
 				<b-row>
 					<b-col cols="12" md="6">
 						<b-form-group
@@ -78,6 +78,7 @@
 								accept="image/*"
 								id="image"
 								v-show="false"
+								required
 							/>
 							<a href="#" data-toggle="modal" data-target="#createalbumModal">
 								<div class="drag-text">
@@ -101,6 +102,7 @@
 						class="mt-1"
 						type="number"
 						id="price"
+						required
 					></b-form-input>
 				</b-form-group>
 				<b-form-checkbox
@@ -123,6 +125,7 @@
 						v-model="newProduct.condition"
 						class="mt-1"
 						id="conditions"
+						required
 					></b-form-input>
 				</b-form-group>
 
@@ -211,7 +214,7 @@
 
 				<b-alert v-if="success" :variant="val" show> {{ msg }} </b-alert>
 				<b-button @click="addProduct" class="mt-2 btn-block" variant="primary">
-					<b-spinner v-if="load" variant="white"></b-spinner>
+					<b-spinner small v-if="load" variant="white"></b-spinner>
 
 					Add</b-button
 				>

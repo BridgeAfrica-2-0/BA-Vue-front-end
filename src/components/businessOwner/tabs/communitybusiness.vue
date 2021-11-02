@@ -14,17 +14,17 @@
         <b-col md="5" cols="7" lg="9" xl="5" sm="5">
           <p class="textt text">
             <strong class="title"> {{ follower.name }} </strong> <br />
-            Car marketing
+            {{ $t("businessowner.Car_marketing") }}
             <br />
-            20k Community <br />
+            20k {{ $t("businessowner.Community") }} <br />
 
             <span class="location">
-              <b-icon-geo-alt class="ico"></b-icon-geo-alt> Douala cameroon
+              <b-icon-geo-alt class="ico"></b-icon-geo-alt> {{ $t("businessowner.Douala") }} {{ $t("businessowner.Cameroon") }}
             </span>
             <br />
             {{ follower.about_business.substring(0, 30) }}
             <b-link v-if="follower.about_business.length > 30"
-              >Read More</b-link
+              >{{ $t("businessowner.Read_More") }}</b-link
             >
           </p>
         </b-col>
@@ -47,7 +47,7 @@
                   variant="primary"
                 >
                   <i class="fas fa-user-plus  fa-lg btn-icon "></i>
-                  <span class="btn-com">Community</span>
+                  <span class="btn-com">{{ $t("businessowner.Community") }}</span>
                 </b-button>
               </b-col>
 
@@ -66,7 +66,7 @@
                   variant="primary"
                 >
                   <i class="fas fa-envelope   fa-lg btn-icon "></i>
-                  <span class="btn-text">Message</span>
+                  <span class="btn-text">{{ $t("businessowner.Message") }}</span>
                 </b-button>
               </b-col>
 
@@ -85,7 +85,7 @@
                   variant="primary"
                 >
                   <i class="fas fa-map-marked-alt  fa-lg btn-icon "></i>
-                  <span class="btn-text">Direction</span>
+                  <span class="btn-text">{{ $t("businessowner.Direction") }}</span>
                 </b-button>
               </b-col>
             </b-row>

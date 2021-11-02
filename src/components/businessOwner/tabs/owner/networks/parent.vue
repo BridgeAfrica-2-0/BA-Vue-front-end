@@ -20,12 +20,12 @@ from '@/components/owner/tabs/bussiness';
         <b-row>
           <b-col cols="6">
             <h6 class="font-weight-bolder m-0 p-0 t-align">
-              Maketers Union Network
+              {{ $t("businessowner.Maketers_Union_Network") }}
             </h6>
           </b-col>
           <b-col cols="6">
             <b-button variant="primary" block size="sm" style="width: 120px;">
-              <b-icon icon="plus-circle"></b-icon> Community
+              <b-icon icon="plus-circle"></b-icon> {{ $t("businessowner.Community") }}
             </b-button>
           </b-col>
         </b-row>
@@ -37,25 +37,25 @@ from '@/components/owner/tabs/bussiness';
         <b-container>
           <b-row>
             <b-col>
-              <p><b-icon icon="globe" variant="primary"></b-icon> Private</p>
+              <p><b-icon icon="globe" variant="primary"></b-icon> {{ $t("businessowner.Private") }}</p>
             </b-col>
             <b-col>
               <p>
                 <b-icon icon="people-fill" variant="primary"></b-icon> 3.5K
-                Members
+                {{ $t("businessowner.Members") }}
               </p>
             </b-col>
           </b-row>
         </b-container>
 
-        <h6 class="mt-2 font-weight-bolder">About</h6>
+        <h6 class="mt-2 font-weight-bolder">{{ $t("businessowner.About") }}</h6>
         <p class="text-justify">
           Lorem Ipsum is simply dummy text of the printing and typesetting
           industry. Lorem Ipsum has been the industry's standard dummy text ever
           since the 1500s, when an unknown printer took a galley of type and
           scrambled it to make a type specimen book.
           <span class="d-inline-block float-right">
-            <a href="#">lire la Suite</a>
+            <a href="#">{{ $t("businessowner.Read_More") }}</a>
           </span>
         </p>
       </b-card-text>
@@ -63,7 +63,7 @@ from '@/components/owner/tabs/bussiness';
 
     <b-card class="mt-4" title="" header-tag="header" footer-tag="footer">
       <h4>
-        <b-icon icon="people" class="i-color"> </b-icon> Community
+        <b-icon icon="people" class="i-color"> </b-icon> {{ $t("businessowner.Community") }}
         <span class="i-color"> 7k </span>
       </h4>
 

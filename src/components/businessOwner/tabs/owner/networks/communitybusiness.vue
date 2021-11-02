@@ -21,14 +21,14 @@
         </b-col>
         <b-col md="6" cols="7" sm="7">
           <p class="text">
-            <strong> Super Car ltd </strong> <br />
-            <strong> Category : </strong> Car marketing <br />
-            <strong> Community : </strong> 20k <br />
-            <strong> Location :</strong> cameroon <br />
-            <strong> Keyword :</strong> car,swag <br />
+            <strong> {{ $t("businessowner.Super_Car_ltd") }} </strong> <br />
+            <strong> {{ $t("businessowner.Category") }} : </strong> {{ $t("businessowner.Car_marketing") }} <br />
+            <strong> {{ $t("businessowner.Community") }} : </strong> 20k <br />
+            <strong> {{ $t("businessowner.Location") }} :</strong> {{ $t("businessowner.Cameroon") }} <br />
+            <strong> {{ $t("businessowner.Keyword") }} :</strong> {{ $t("businessowner.car") }},{{ $t("businessowner.swag") }} <br />
 
-            <strong>About:</strong> super best car seller in the world
-            adipisicing elit. <b-link>Read More</b-link>
+            <strong>{{ $t("businessowner.About") }}:</strong> {{ $t("businessowner.super_best_car_seller_in_the_world") }}
+            adipisicing elit. <b-link>{{ $t("businessowner.Read_More") }}</b-link>
           </p>
         </b-col>
 
@@ -37,7 +37,7 @@
      <b-row>  <b-col md="12" sm="4" cols="4" class="mt-md-2">    
 
             <b-button block size="sm" class="b-background" variant="primary">
-              <b-icon class="ico" icon="plus-circle"> </b-icon> Community
+              <b-icon class="ico" icon="plus-circle"> </b-icon> {{ $t("businessowner.Community")}}
             </b-button>
 
             </b-col>  
@@ -45,7 +45,7 @@
         <b-col md="12" sm="4" cols="4" class="mt-md-2">  
 
             <b-button block size="sm" class="b-background" variant="primary">
-              <b-icon class="ico" icon="chat"> </b-icon> Message
+              <b-icon class="ico" icon="chat"> </b-icon> {{ $t("businessowner.Message")}}
             </b-button>
 
             </b-col>  
@@ -53,7 +53,7 @@
             <b-col md="12" sm="4" cols="4" class="mt-md-2">  
 
             <b-button block size="sm" class="b-background" variant="primary">
-              <b-icon-geo-alt ></b-icon-geo-alt>  Direction
+              <b-icon-geo-alt ></b-icon-geo-alt>  {{ $t("businessowner.Direction")}}
             </b-button>
 
             </b-col>  
@@ -85,14 +85,14 @@
         </b-col>
         <b-col md="6" cols="7" sm="7">
           <p class="text">
-            <strong> Super Car ltd </strong> <br />
-            <strong> Category : </strong> Car marketing <br />
-            <strong> Community : </strong> 20k <br />
-            <strong> Location :</strong> cameroon <br />
-            <strong> Keyword :</strong> car,swag <br />
+            <strong> {{ $t("businessowner.Super_Car_ltd") }} </strong> <br />
+            <strong> {{ $t("businessowner.Category") }} : </strong> {{ $t("businessowner.Car_marketing") }} <br />
+            <strong> {{ $t("businessowner.Community") }} : </strong> 20k <br />
+            <strong> {{ $t("businessowner.Location") }} :</strong> {{ $t("businessowner.Cameroon") }} <br />
+            <strong> {{ $t("businessowner.Keyword") }} :</strong> {{ $t("businessowner.car") }},{{ $t("businessowner.swag") }} <br />
 
-            <strong>About:</strong> super best car seller in the world
-            adipisicing elit. <b-link>Read More</b-link>
+            <strong>{{ $t("businessowner.About") }}:</strong> {{ $t("businessowner.super_best_car_seller_in_the_world") }}
+            adipisicing elit. <b-link>{{ $t("businessowner.Read_More") }}</b-link>
           </p>
         </b-col>
 
@@ -101,7 +101,7 @@
      <b-row>  <b-col md="12" sm="4" cols="4" class="mt-md-2">    
 
             <b-button block size="sm" class="b-background" variant="primary">
-              <b-icon class="ico" icon="plus-circle"> </b-icon> Community
+              <b-icon class="ico" icon="plus-circle"> </b-icon> {{ $t("businessowner.Community")}}
             </b-button>
 
             </b-col>  
@@ -109,7 +109,7 @@
         <b-col md="12" sm="4" cols="4" class="mt-md-2">  
 
             <b-button block size="sm" class="b-background" variant="primary">
-              <b-icon class="ico" icon="chat"> </b-icon> Message
+              <b-icon class="ico" icon="chat"> </b-icon> {{ $t("businessowner.Message")}}
             </b-button>
 
             </b-col>  
@@ -117,7 +117,7 @@
             <b-col md="12" sm="4" cols="4" class="mt-md-2">  
 
             <b-button block size="sm" class="b-background" variant="primary">
-             <b-icon-geo-alt ></b-icon-geo-alt> Direction
+             <b-icon-geo-alt ></b-icon-geo-alt> {{ $t("businessowner.Direction")}}
             </b-button>
 
             </b-col>  
@@ -142,14 +142,14 @@
         </b-col>
         <b-col md="6" cols="7" sm="7">
           <p class="text">
-            <strong> Super Car ltd </strong> <br />
-            <strong> Category : </strong> Car marketing <br />
-            <strong> Community : </strong> 20k <br />
-            <strong> Location :</strong> cameroon <br />
-            <strong> Keyword :</strong> car,swag <br />
+            <strong> {{ $t("businessowner.Super_Car_ltd") }} </strong> <br />
+            <strong> {{ $t("businessowner.Category") }} : </strong> {{ $t("businessowner.Car_marketing") }} <br />
+            <strong> {{ $t("businessowner.Community") }} : </strong> 20k <br />
+            <strong> {{ $t("businessowner.Location") }} :</strong> {{ $t("businessowner.Cameroon") }} <br />
+            <strong> {{ $t("businessowner.Keyword") }} :</strong> {{ $t("businessowner.car") }},{{ $t("businessowner.swag") }} <br />
 
-            <strong>About:</strong> super best car seller in the world
-            adipisicing elit. <b-link>Read More</b-link>
+            <strong>{{ $t("businessowner.About") }}:</strong> {{ $t("businessowner.super_best_car_seller_in_the_world") }}
+            adipisicing elit. <b-link>{{ $t("businessowner.Read_More") }}</b-link>
           </p>
         </b-col>
 
@@ -158,7 +158,7 @@
      <b-row>  <b-col md="12" sm="4" cols="4" class="mt-md-2">    
 
             <b-button block size="sm" class="b-background" variant="primary">
-              <b-icon class="ico" icon="plus-circle"> </b-icon> Community
+              <b-icon class="ico" icon="plus-circle"> </b-icon> {{ $t("businessowner.Community")}}
             </b-button>
 
             </b-col>  
@@ -166,7 +166,7 @@
         <b-col md="12" sm="4" cols="4" class="mt-md-2">  
 
             <b-button block size="sm" class="b-background" variant="primary">
-              <b-icon class="ico" icon="chat"> </b-icon> Message
+              <b-icon class="ico" icon="chat"> </b-icon> {{ $t("businessowner.Message")}}
             </b-button>
 
             </b-col>  
@@ -174,7 +174,7 @@
             <b-col md="12" sm="4" cols="4" class="mt-md-2">  
 
             <b-button block size="sm" class="b-background" variant="primary">
-               <b-icon-geo-alt ></b-icon-geo-alt> Direction
+               <b-icon-geo-alt ></b-icon-geo-alt> {{ $t("businessowner.Direction")}}
             </b-button>
 
             </b-col>  

@@ -16,7 +16,7 @@
         <b-tab  active>
 
          <template slot="title"  >
-             People  <span class="spa-color"> {{peoplecommunity.total_people}} </span>
+             {{ $t("businessowner.People") }}  <span class="spa-color"> {{peoplecommunity.total_people}} </span>
             </template>
 
 
@@ -30,7 +30,7 @@
         <b-tab  active>
           
             <template slot="title"  >
-             Followers  <span class="spa-color">   {{peoplecommunity.total_followers}}  </span>
+             {{ $t("businessowner.Followers") }}  <span class="spa-color">   {{peoplecommunity.total_followers}}  </span>
             </template>
 
          <div class="s-comcard">    <People  v-for="people in peoplecommunity.user_followers"  v-bind:key="people.id"   v-bind:people="people" />      </div>
@@ -42,7 +42,7 @@
         <b-tab > 
 
             <template slot="title"  >
-             Following  <span class="spa-color">  {{peoplecommunity.totat_following}}  </span>
+             {{ $t("businessowner.Following") }}  <span class="spa-color">  {{peoplecommunity.totat_following}}  </span>
             </template>
 
       <div class="s-comcard">     <People  v-for="people in peoplecommunity.user_following"  v-bind:key="people.id"   v-bind:people="people" />       </div>
@@ -61,7 +61,7 @@
         <b-tab >
 
             <template slot="title"  >
-             Businesses  <span class="spa-color">  {{businesscommunity.total_Business}}  </span>
+             {{ $t("businessowner.Businesses") }}  <span class="spa-color">  {{businesscommunity.total_Business}}  </span>
             </template>
         
         
@@ -70,7 +70,7 @@
         <b-tab  active>
 
          <template slot="title"  >
-             Followers  <span class="spa-color">   {{businesscommunity.total_followers}}   </span>
+             {{ $t("businessowner.Followers") }}  <span class="spa-color">   {{businesscommunity.total_followers}}   </span>
             </template>
         
          
@@ -85,7 +85,7 @@
         
 
             <template slot="title"  >
-             Following  <span class="spa-color">  {{businesscommunity.totat_following}}   </span>
+             {{ $t("businessowner.Following") }}  <span class="spa-color">  {{businesscommunity.totat_following}}   </span>
             </template>
         
         <div class="s-comcard">    <Business v-for="business in businesscommunity.Business_following"  v-bind:key="business.id"   v-bind:business="business" />    </div>

@@ -5,9 +5,9 @@
 
 
         <b-tabs  pills content-class="mt-3 f-left">
-          <b-tab title="People" active> <People />  </b-tab>
+          <b-tab :title="$t('businessowner.People')" active> <People />  </b-tab>
 
-          <b-tab title="Businesses"> <Businesses /> </b-tab>
+          <b-tab :title="$t('businessowner.Businesses')"> <Businesses /> </b-tab>
         </b-tabs>
 
 

@@ -1,7 +1,7 @@
 <template>
   <div>
     <h4 class="font-weight-bolder d-inline-block">
-      <b-icon-bell-fill></b-icon-bell-fill> Keywords Alerts
+      <b-icon-bell-fill></b-icon-bell-fill> {{ $t("businessowner.Keywords_Alerts") }}
     </h4>
 
     <hr width="100%" />
@@ -21,7 +21,7 @@
                 </b-col>
                 <b-col cols="10" md="11" class="pt-2">
                   <h5 class="m-0 font-weight-bolder">
-                    Mapoure Agrobusiness
+                   {{ $t("businessowner.Mapoure_Agrobusiness") }} 
                     <span class="float-right">
                       <b-dropdown
                         size="lg"
@@ -31,26 +31,26 @@
                       >
                         <template #button-content>
                           <b-icon-three-dots-vertical></b-icon-three-dots-vertical
-                          ><span class="sr-only">Settings</span>
+                          ><span class="sr-only">{{ $t("businessowner.Settings") }}</span>
                         </template>
                         <b-dropdown-item href="#">
-                          Ignore
+                          {{ $t("businessowner.Ignore") }}
                         </b-dropdown-item>
                         <b-dropdown-item href="#">
-                          Delete a Comment
+                          {{ $t("businessowner.Delete_a_Comment") }}
                         </b-dropdown-item>
                         <b-dropdown-item href="#">
-                          Send Messge To User
+                          {{ $t("businessowner.Send_Messge_To_User") }}
                         </b-dropdown-item>
                         <b-dropdown-item href="#">
-                          Remove User
+                          {{ $t("businessowner.Remove_User") }}
                         </b-dropdown-item>
                       </b-dropdown>
                     </span>
                   </h5>
                   <p>
-                    1h Ago -
-                    <span class="text-primary">Commented on a Post</span>
+                    {{ $t("businessowner.1h_Ago") }} -
+                    <span class="text-primary">{{ $t("businessowner.Commented_on_a_Post") }}</span>
                   </p>
                 </b-col>
               </b-row>

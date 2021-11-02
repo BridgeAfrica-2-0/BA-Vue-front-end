@@ -10,13 +10,13 @@
         <b-row>
           <b-col>
             <div class="b-bottomn f-left">  <H5> 
-              Settings    </H5>
+              {{ $t("businessowner.Settings") }}    </H5>
             </div>
           </b-col>
           <b-col>
             <div class="b-bottomn f-right">
               <b-button variant="primary" class="a-button-l">
-                Save Changes </b-button
+                {{ $t("businessowner.Save_Changes") }} </b-button
               >
             </div>
           </b-col>
@@ -38,7 +38,7 @@
             <b-container>
               <b-form-group
                 label-cols-lg="3"
-                label="Network Name"
+                :label="$t('businessowner.Network_Name')"
                 label-size="md"
                 label-class="font-weight-bold pt-0"
                 class="mb-0"
@@ -53,7 +53,7 @@
             <b-container>
               <b-form-group
                 label-cols-lg="3"
-                label="Website"
+                :label="$t('businessowner.Website')"
                 label-size="md"
                 label-class="font-weight-bold pt-0"
                 class="mb-0"
@@ -70,7 +70,7 @@
       <b-container>
         <b-form-group
           label-cols-lg="3"
-          label=" Description "
+          :label="$t('businessowner.Description') "
           label-size="md"
           label-class="font-weight-bold pt-0"
           class="mb-0"
@@ -78,7 +78,7 @@
           <b-form-textarea
             id="textarea"
             v-model="text"
-            placeholder="Enter something..."
+            :placeholder="$t('businessowner.Enter_something')"
             rows="3"
             max-rows="6"
           ></b-form-textarea>
@@ -95,7 +95,7 @@
       <b-container>
         <b-form-group
           label-cols-lg="3"
-          label="Privacy"
+          :label="$t('businessowner.Privacy')"
           label-size="md"
           label-class="font-weight-bold pt-0"
           class="mb-0"
@@ -119,7 +119,7 @@
       <b-container>
         <b-form-group
           label-cols-lg="3"
-          label="Visibility"
+          :label="$t('businessowner.Visibility')"
           label-size="md"
           label-class="font-weight-bold pt-0"
           class="mb-0"
@@ -147,7 +147,7 @@
       <b-container>
         <b-form-group
           label-cols-lg="3"
-          label="Posting Permission"
+          :label="$t('businessowner.Posting_Permission')"
           label-size="md"
           label-class="font-weight-bold pt-0"
           class="mb-0"
@@ -175,7 +175,7 @@
       <b-container>
         <b-form-group
           label-cols-lg="3"
-          label="Post Approval"
+          :label="$t('businessowner.Post_Approval')"
           label-size="md"
           label-class="font-weight-bold pt-0"
           class="mb-0"
@@ -200,7 +200,7 @@
       <b-container>
         <b-form-group
           label-cols-lg="3"
-          label="Posting Permissions"
+          :label="$t('businessowner.Posting_Permissions')"
           label-size="md"
           label-class="font-weight-bold pt-0"
           class="mb-0"
@@ -223,7 +223,7 @@
       <b-container>
         <b-form-group
           label-cols-lg="3"
-          label=" Allow Membership Request From Business"
+          :label="$t('businessowner.Allow_Membership_Request_From_Business') "
           label-size="md"
           label-class="font-weight-bold pt-0"
           class="mb-0"
@@ -248,7 +248,7 @@
       <b-container>
         <b-form-group
           label-cols-lg="3"
-          label="Marketplace"
+          :label="$t('businessowner.Marketplace')"
           label-size="md"
           label-class="font-weight-bold pt-0"
           class="mb-0"
@@ -260,7 +260,7 @@
     </div>
 
     <b-container>
-      <b-link href="#foo" class="f-left">Delete Business Identity</b-link>
+      <b-link href="#foo" class="f-left">{{ $t("businessowner.Delete_Business_Identity") }}</b-link>
     </b-container>
   </b-container>
 </template>

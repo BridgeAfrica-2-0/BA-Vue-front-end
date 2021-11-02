@@ -45,8 +45,8 @@
            <div class="title textt bold username"> <strong> {{ business.name }}  </strong></div>
           <p class="textt to">
              <br />
-             Car marketing  {{business.category}}
-              <br /> {{business.followers}} Community <br />
+             {{ $t("businessowner.Car_marketing") }}  {{business.category}}
+              <br /> {{business.followers}} {{ $t("businessowner.Community") }} <br />
             
             <span class="location"> <b-icon-geo-alt class="ico" ></b-icon-geo-alt> {{business.location_description}} </span> <br /> 
             
@@ -64,7 +64,7 @@
      <b-row>  <b-col md="12"  lg="4"  xl="4" sm="12" cols="4" class="mt-2 text-center">    
 
             <b-button block size="sm" class="b-background shadow " variant="primary">
-                <i class="fas fa-user-plus  fa-lg btn-icon "></i>  <span class="btn-com">Community</span>
+                <i class="fas fa-user-plus  fa-lg btn-icon "></i>  <span class="btn-com">{{ $t("businessowner.Community") }}</span>
             </b-button>   
 
             </b-col>  
@@ -74,7 +74,7 @@
            
 
              <b-button block size="sm" class="b-background shadow " variant="primary">
-                <i class="fas fa-envelope   fa-lg btn-icon "></i>  <span class="btn-text">Message</span>
+                <i class="fas fa-envelope   fa-lg btn-icon "></i>  <span class="btn-text">{{ $t("businessowner.Message") }}</span>
             </b-button>   
 
 
@@ -83,7 +83,7 @@
             <b-col  md="12"  lg="4"  xl="4" sm="12" cols="4"  class="mt-2 text-center">  
 
               <b-button block size="sm" class="b-background shadow " variant="primary">
-                <i class="fas fa-map-marked-alt  fa-lg btn-icon "></i>  <span class="btn-text">Direction</span>
+                <i class="fas fa-map-marked-alt  fa-lg btn-icon "></i>  <span class="btn-text">{{ $t("businessowner.Direction") }}</span>
             </b-button> 
 
            

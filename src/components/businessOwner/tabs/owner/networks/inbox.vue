@@ -17,7 +17,7 @@
                     ></b-avatar>
                   </b-col>
                   <b-col>
-                    <h4>Messages</h4>
+                    <h4>{{ $t("businessowner.Messages")}}</h4>
                   </b-col>
                   <b-col>
                     <b-icon
@@ -31,7 +31,7 @@
                   <input
                     type="text"
                     class="form-control"
-                    placeholder="Search inbox"
+                    :placeholder="$t('businessowner.Search_inbox')"
                   />
                 </b-container>
               </div>
@@ -70,7 +70,7 @@
                   <b-avatar variant="primary" text="BV" size="40"></b-avatar>
                 </b-col>
                 <b-col>
-                  <h3 class="">Messages</h3>
+                  <h3 class="">{{ $t("businessowner.Messages")}}</h3>
                 </b-col>
                 <b-col>
                   <b-icon
@@ -83,7 +83,7 @@
               <input
                 type="text"
                 class="form-control"
-                placeholder="Search inbox"
+                :placeholder="$t('businessowner.Search_inbox')"
               />
             </div>
             <div>
@@ -125,7 +125,7 @@
                 </b-col>
                 <b-col class="detale">
                   <h6>Louis Litt</h6>
-                  <small>Online</small>
+                  <small>{{ $t("businessowner.Online")}}</small>
                 </b-col>
                 <b-col>
                   <b-row class="mt-3">
@@ -151,7 +151,7 @@
                 </b-col>
                 <b-col class="detail">
                   <h5>Louis Litt</h5>
-                  <p>Online</p>
+                  <p>{{ $t("businessowner.Online")}}</p>
                 </b-col>
                 <b-col class="col-4">
                   <b-row class="mt-3 ml-5">
@@ -221,7 +221,7 @@
                   <b-form-textarea
                     id="textarea"
                     v-model="text"
-                    placeholder="Enter something..."
+                    :placeholder="$t('businessowner.Enter_something')"
                   ></b-form-textarea>
                 </b-col>
                 <b-col class="col-2">
@@ -250,8 +250,8 @@
                 </b-col>
               </b-row>
               <p v-if="checked" class="ml-5">
-                You have blocked messages and calls from this user.
-                <b-link @click="showInfo(true)">Unblock Now</b-link>
+               {{ $t("businessowner.You_have_blocked_messages_and_calls_from_this_user") }} .
+                <b-link @click="showInfo(true)">{{ $t("businessowner.Unblock_Now") }}</b-link>
               </p>
             </div>
           </b-col>
@@ -260,7 +260,7 @@
               <b-button class="primary-bg" @click="showInfo(false)">
                <fas-icon :icon="['fas', 'arrow-left']" />
               </b-button>
-              <span class="cnt-info"> Contact Info</span>
+              <span class="cnt-info"> {{ $t("businessowner.Contact_Info") }}</span>
             </div>
             <div class="info-bottom">
               <b-avatar
@@ -271,16 +271,16 @@
               ></b-avatar>
               <div class="info-detail">
                 <h1 class="info-name">Louis Litt</h1>
-                <b-link class="primary">View Profile</b-link>
+                <b-link class="primary">{{ $t("businessowner.View_Profile") }}</b-link>
               </div>
             </div>
             <div>
               <ul>
-                <li>Options</li>
+                <li>{{ $t("businessowner.Options") }}</li>
                 <li>
                   <b-row
                     ><b-col>
-                      Block Messages
+                      {{ $t("businessowner.Block_Messages") }}
                     </b-col>
                     <b-col>
                       <b-form-checkbox
@@ -293,16 +293,16 @@
                     </b-col>
                   </b-row>
                 </li>
-                <li>Report User</li>
+                <li>{{ $t("businessowner.Report_User") }}</li>
               </ul>
             </div>
             <div class="info-media">
              <b-row>
                <b-col>
-                  Media
+                  {{ $t("businessowner.Media") }}
                </b-col>
                <b-col cols="3">
-                 <b-link>See All</b-link>
+                 <b-link>{{ $t("businessowner.See_All") }}</b-link>
                </b-col>
              </b-row>
               <div class="media">
@@ -344,14 +344,14 @@
               <div class="info-nav">
                 <b-row>
                   <b-col class="col-1 mt-3">
-                    To
+                    {{ $t("businessowner.To") }}
                   </b-col>
                   <b-col>
                     <input
                       type="text"
                       name=""
                       class="form-control"
-                      placeholder="Type the name of person or group"
+                      :placeholder="$t('businessowner.Type_the_name_of_person_or_group')"
                     />
                   </b-col>
                 </b-row>
@@ -365,7 +365,7 @@
                     <b-form-textarea
                       id="text-area"
                       v-model="text"
-                      placeholder="Enter something..."
+                      :placeholder="$t('businessowner.Enter_something')"
                     ></b-form-textarea>
                   </b-col>
                   <b-col class="col-2">

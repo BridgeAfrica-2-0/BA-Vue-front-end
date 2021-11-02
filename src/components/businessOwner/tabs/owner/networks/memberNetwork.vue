@@ -8,7 +8,7 @@
           </b-input-group-prepend>
           <b-form-input
             aria-label="Text input with checkbox"
-            placeholder="Search Something"
+            :placeholder="$t('businessowner.Search_Something')"
           ></b-form-input>
         </b-input-group>
       </b-col>
@@ -17,7 +17,7 @@
     <b-row class="mt-4">
       <b-col cols="12">
         <h6 class="font-weight-bolder">
-          Network Admins (2)
+          {{ $t("businessowner.Network_Admins_2") }}
         </h6>
         <hr width="100%" />
         <div v-for="i in 2" :key="i">
@@ -30,7 +30,7 @@
                 size="3.5rem"
               ></b-avatar>
               <h5 class="m-0 font-weight-bolder d-inline-block ml-2">
-                Mapoure Agrobusiness
+                {{ $t("businessowner.Mapoure_Agrobusiness") }}
               </h5>
             </span>
             <span class="float-right mt-1">
@@ -42,13 +42,13 @@
               >
                 <template #button-content>
                   <b-icon-three-dots-vertical></b-icon-three-dots-vertical
-                  ><span class="sr-only">Settings</span>
+                  ><span class="sr-only">{{ $t("businessowner.Settings") }}</span>
                 </template>
                 <b-dropdown-item href="#">
-                  <b-icon-trash-fill></b-icon-trash-fill> Remove as Admin
+                  <b-icon-trash-fill></b-icon-trash-fill> {{ $t("businessowner.Remove_as_Admin") }}
                 </b-dropdown-item>
                 <b-dropdown-item href="#">
-                  <b-icon-trash-fill></b-icon-trash-fill> Remove From Networks
+                  <b-icon-trash-fill></b-icon-trash-fill> {{ $t("businessowner.Remove_From_Networks") }}
                 </b-dropdown-item>
               </b-dropdown>
             </span>
@@ -60,7 +60,7 @@
     <b-row class="mt-4">
       <b-col cols="12">
         <h6 class="font-weight-bolder">
-          Bussiness (2)
+          {{ $t("businessowner.Bussiness_2") }}
         </h6>
         <hr width="100%" />
         <div v-for="i in 2" :key="i">
@@ -73,7 +73,7 @@
                 size="3.5rem"
               ></b-avatar>
               <h5 class="m-0 font-weight-bolder d-inline-block ml-2">
-                Mapoure Agrobusiness
+                {{ $t("businessowner.Mapoure_Agrobusiness") }}
               </h5>
             </span>
             <span class="float-right mt-1">
@@ -85,10 +85,10 @@
               >
                 <template #button-content>
                   <b-icon-three-dots-vertical></b-icon-three-dots-vertical
-                  ><span class="sr-only">Settings</span>
+                  ><span class="sr-only">{{ $t("businessowner.Settings") }}</span>
                 </template>
                 <b-dropdown-item href="#">
-                  <b-icon-trash-fill></b-icon-trash-fill> Remove From Networks
+                  <b-icon-trash-fill></b-icon-trash-fill> {{ $t("businessowner.Remove_From_Networks") }}
                 </b-dropdown-item>
               </b-dropdown>
             </span>
@@ -100,7 +100,7 @@
     <b-row class="mt-4">
       <b-col cols="12">
         <h6 class="font-weight-bolder">
-          All Members (200)
+          {{ $t("businessowner.All_Members_200") }}
         </h6>
         <hr width="100%" />
         <div v-for="i in 6" :key="i">
@@ -113,7 +113,7 @@
                 size="3.5rem"
               ></b-avatar>
               <h5 class="m-0 font-weight-bolder d-inline-block ml-2">
-                Mapoure Agrobusiness
+                {{ $t("businessowner.Mapoure_Agrobusiness") }}
               </h5>
             </span>
             <span class="float-right mt-1">
@@ -125,13 +125,13 @@
               >
                 <template #button-content>
                   <b-icon-three-dots-vertical></b-icon-three-dots-vertical
-                  ><span class="sr-only">Settings</span>
+                  ><span class="sr-only">{{ $t("businessowner.Settings") }}</span>
                 </template>
                 <b-dropdown-item href="#">
-                  <b-icon-person-plus-fill></b-icon-person-plus-fill> Make Admin
+                  <b-icon-person-plus-fill></b-icon-person-plus-fill> {{ $t("businessowner.Make_Admin") }}
                 </b-dropdown-item>
                 <b-dropdown-item href="#">
-                  <b-icon-trash-fill></b-icon-trash-fill> Remove From Networks
+                  <b-icon-trash-fill></b-icon-trash-fill> {{ $t("businessowner.Remove_From_Networks") }}
                 </b-dropdown-item>
               </b-dropdown>
             </span>

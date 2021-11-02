@@ -162,7 +162,7 @@
         
         <div>
           <b-tabs pills  v-model="tabIndex"    vertical  class="itzlala"   nav-wrapper-class="w-15" >
-            <b-tab  title="General">
+            <b-tab  :title="$t('businessowner.General')">
              
 
               <b-card-text> <General /> </b-card-text
@@ -172,7 +172,7 @@
             
 
 
-             <b-tab title="Notification" >
+             <b-tab :title="$t('businessowner.Notification')" >
              
 
               <b-card-text> <Notification /> </b-card-text
@@ -187,12 +187,12 @@
 
 
 
-            <b-tab title="Business Info">                       
+            <b-tab :title="$t('businessowner.Business_Info')">                       
              
               <b-card-text> <Info /> </b-card-text
             ></b-tab>
 
-            <b-tab title="Business Roles">
+            <b-tab :title="$t('businessowner.Business_Roles')">
               
               <b-card-text> <Roles /> </b-card-text
             ></b-tab>
@@ -200,7 +200,7 @@
 
 
            
-            <b-tab title="Insight">
+            <b-tab :title="$t('businessowner.Insight')">
               
               <b-card-text> <Insight /> </b-card-text
             ></b-tab>
@@ -208,7 +208,7 @@
 
 
   
-            <b-tab title="Pending Post">
+            <b-tab :title="$t('businessowner.Pending_Post')">
              
               <b-card-text> <Pending /> </b-card-text
             ></b-tab>
@@ -218,18 +218,18 @@
 
 
 
-            <b-tab title="Payment">
+            <b-tab :title="$t('businessowner.Payment')">
               
 
               <b-card-text> <Payment /> </b-card-text
             ></b-tab>
 
-            <b-tab title="Account Type">
+            <b-tab :title="$t('businessowner.Account_Type')">
              
 
               <b-card-text> <Website /> </b-card-text
             ></b-tab>
-            <b-tab title="Blocking">
+            <b-tab :title="$t('businessowner.Blocking')">
               
 
               <b-card-text> <Blocking /> </b-card-text
@@ -362,14 +362,14 @@ currenttab: {
        seetings_id:0,
       bottomSelectedId: 0,
        items: [
-        {label: 'General' },
+        {label: this.$t('businessowner.General') },
        
-        {label: 'Business Info' },
-        {label: 'Business Roles'},
-         {label: 'payment '},   
-        {label: 'Account Type' }, 
+        {label: this.$t('businessowner.Business_Info') },
+        {label: this.$t('businessowner.Business_Roles')},
+         {label: this.$t('businessowner.payment')},   
+        {label: this.$t('businessowner.Account_Type') }, 
 
-        {label: 'Blocking'},
+        {label: this.$t('businessowner.Blocking')},
         
       ],
       options: {

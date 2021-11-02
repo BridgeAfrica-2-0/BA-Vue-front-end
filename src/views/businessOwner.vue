@@ -39,6 +39,13 @@
     </div>
 
     <Footer />
+    <span class="display-inline">
+        <b-link @click="$i18n.locale = 'en'"> {{ $t("english") }}</b-link>
+        <span class="vl"></span>
+        <b-link class="ml-2" @click="$i18n.locale = 'fr'">
+          {{ $t("french") }}
+        </b-link>
+      </span>
   </div>
 </template>
 
@@ -76,14 +83,14 @@ export default {
       bottomSelectedId: 0,
       url_data: null,
       items: [
-        { label: "Home ", icon: "" },
+        { label: this.$t('businessowner.Home'), icon: "" },
 
-        { label: "Inbox", icon: "" },
-        { label: "Notification", icon: "" },
-        { label: "Pending Post", icon: "" },
-        { label: "Insight", icon: "" },
+        { label: this.$t('businessowner.Inbox'), icon: "" },
+        { label: this.$t('businessowner.Notification'), icon: "" },
+        { label: this.$t('businessowner.Pending_Post'), icon: "" },
+        { label: this.$t('businessowner.Insight'), icon: "" },
 
-        { label: "Settings", icon: "" }
+        { label: this.$t('businessowner.Settings'), icon: "" }
       ],
       options: {
         activeColor: "#1d98bd"

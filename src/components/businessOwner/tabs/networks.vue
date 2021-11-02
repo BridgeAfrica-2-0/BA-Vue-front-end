@@ -2,7 +2,7 @@
   <div class=" t-color">
     <div>
       <fas-icon class=" icons" :icon="['fas', 'project-diagram']" size="lg" />
-      <span class="t-color"> Network </span>
+      <span class="t-color"> {{ $t("businessowner.Network") }} </span>
 
       <hr />
       <b-row>
@@ -48,7 +48,7 @@
                           @click="showEditNetwork(network)"
                         >
                           <b-icon icon="pencil" aria-hidden="true"></b-icon>
-                          Edit
+                          {{ $t("businessowner.Edit") }}
                         </b-dropdown-item-button>
                       </b-dropdown>
                     </b-col>
@@ -65,7 +65,7 @@
                   <br />
 
                   {{ network.description.substring(0, 90) }}
-                  <b-link>Read More</b-link>
+                  <b-link>{{ $t("businessowner.Read_More") }}</b-link>
                 </p>
               </b-col>
             </b-row>
@@ -78,14 +78,14 @@
     </b-col>
     <div class="engage" v-if="!getNetworksFromStore && !loader">
       <div class="mx-auto text-center my-5">
-        <h2 class="my-3">Builds networks around your Business</h2>
-        <p class="my-2">you want Engage, share, Make Plans and much more</p>
-        <p class="my-2">No network to show !!</p>
+        <h2 class="my-3">{{ $t("businessowner.Builds_networks_around_your_Business") }}</h2>
+        <p class="my-2">{{ $t("businessowner.you_want_Engage") }}, {{ $t("businessowner.share") }}, {{ $t("businessowner.Make_Plans") }} {{ $t("businessowner.and") }}{{ $t("businessowner.much_more") }} </p>
+        <p class="my-2">{{ $t("businessowner.No_network_to_show") }} !!</p>
         <p class="my-3"></p>
       </div>
     </div>
 
-    <b-modal hide-footer title="Edit network" size="lg" v-model="showModal">
+    <b-modal hide-footer :title="$t('businessowner.Edit_network')" size="lg" v-model="showModal">
       <b-container>
         <b-form>
           <div
@@ -107,10 +107,11 @@
               </a>
               <div class="post-pending pt-2">
                 <p>
-                  Approval Required <br />
-                  Bridge Africa admin will review your request to create a
-                  network and notify you upon approval you can the change the
-                  network settings and invite people to join your network
+                  {{ $t("businessowner.Approval_Required") }} <br />
+                  {{ $t("businessowner.Bridge_Africa_admin_will_review_your_request") }} 
+                  {{ $t("businessowner.to_create_a_network_and_notify_you") }} 
+                  {{ $t("businessowner.upon_approval_you_can_the_change_the_network_settings") }} 
+                  {{ $t("businessowner.and_invite_people_to_join_your_network") }}
                 </p>
               </div>
             </div>
@@ -118,7 +119,7 @@
 
           <b-form-group
             label-cols-lg="12"
-            label="Network Name"
+            :label="$t('businessowner.Network_Name')"
             label-size="md"
             label-class="font-weight-bold pt-0"
             class="mb-0"
@@ -133,7 +134,7 @@
           </b-form-group>
           <b-form-group
             label-cols-lg="12"
-            label="Business Category"
+            :label="$t('businessowner.Business_Category')"
             label-size="md"
             label-class="font-weight-bold pt-0"
             class="mb-0"
@@ -148,7 +149,7 @@
           </b-form-group>
           <b-form-group
             label-cols-lg="12"
-            label="Business Address"
+            :label="$t('businessowner.Business_Address')"
             label-size="md"
             label-class="font-weight-bold pt-0"
             class="mb-0"
@@ -163,7 +164,7 @@
           </b-form-group>
           <b-form-group
             label-cols-lg="12"
-            label=" Brief Description"
+            :label="$t('businessowner.Brief_Description')"
             label-size="md"
             label-class="font-weight-bold pt-0"
             class="mb-0"
@@ -171,7 +172,7 @@
             <b-form-textarea
               id="textarea"
               v-model="createdNetwork.description"
-              placeholder="Enter something..."
+              :placeholder="$t('businessowner.Enter_something')"
               rows="3"
               max-rows="6"
             ></b-form-textarea>
@@ -179,7 +180,7 @@
 
           <b-form-group
             label-cols-lg="12"
-            label="Purpose Of Network"
+            :label="$t('businessowner.Purpose_Of_Network')"
             label-size="md"
             label-class="font-weight-bold pt-0"
             class="mb-0"
@@ -195,7 +196,7 @@
 
           <b-form-group
             label-cols-lg="12"
-            label="Special Needs"
+            :label="$t('businessowner.Special_Needs')"
             label-size="md"
             label-class="font-weight-bold pt-0"
             class="mb-0"
@@ -210,7 +211,7 @@
           </b-form-group>
           <b-form-group
             label-cols-lg="12"
-            label="Bussiness Image"
+            :label="$t('businessowner.Bussiness_Image')"
             label-size="md"
             label-class="font-weight-bold pt-0"
             class="mb-0"
@@ -219,7 +220,7 @@
           </b-form-group>
           <b-form-group
             label-cols-md="6"
-            label="Allow Business to join network"
+            :label="$t('businessowner.Allow_Business_to_join_network')"
             label-size="md"
             label-class="font-weight-bold pt-0"
             class="mb-0"
@@ -234,11 +235,10 @@
             </b-form-checkbox>
           </b-form-group>
           <b-alert :show="success.state" :variant="success.success">
-            {{ success.msg }}</b-alert
-          >
+            {{ success.msg }}</b-alert>
           <b-spinner v-if="loader" variant="primary"></b-spinner>
           <b-button @click="edit" class="mt-2  button-btn" variant="primary">
-            Edit Network</b-button
+            {{ $t("businessowner.Edit_Network") }}</b-button
           >
         </b-form>
       </b-container>

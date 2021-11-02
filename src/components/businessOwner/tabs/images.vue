@@ -11,7 +11,7 @@
           ref="modalxl"
           centered
           hide-footer
-          title="Upoad Image"
+          :title="$t('businessowner.Upoad_Image')"
         >
           <br />
 
@@ -24,7 +24,7 @@
             id="textarea-small"
             class="mb-2 border-none"
             v-model="text"
-            placeholder="Enter a description"
+            :placeholder="$t('businessowner.Enter_a_description')"
           >
           </b-form-textarea>
 
@@ -32,7 +32,7 @@
 
           <b-button @click="submitPost" variant="primary" block
             ><b-icon icon="cursor-fill" variant="primary"></b-icon>
-            Publish</b-button
+            {{ $t("businessowner.Publish") }}</b-button
           >
         </b-modal>
 
@@ -50,7 +50,7 @@
             <a @click="$refs.movie.click()">
               <div class="drag-textt">
                 <fas-icon :icon="['fas', 'plus']" />
-                <h3>Add Item</h3>
+                <h3>{{ $t("businessowner.Add_Item") }}</h3>
               </div>
             </a>
           </div>
@@ -89,16 +89,16 @@
                   </template>
 
                   <b-dropdown-item @click="downloadPic(pictures.id)"
-                    >Download</b-dropdown-item
+                    >{{ $t("businessowner.Download") }}</b-dropdown-item
                   >
                   <b-dropdown-item @click="setProfilePic(pictures.id)"
-                    >Make Profile Picture</b-dropdown-item
+                    >{{ $t("businessowner.Make_Profile_Picture") }}</b-dropdown-item
                   >
                   <b-dropdown-item @click="setCoverPic(pictures.id)"
-                    >Make Cover Photo</b-dropdown-item
+                    >{{ $t("businessowner.Make_Cover_Photo") }}</b-dropdown-item
                   >
                   <b-dropdown-item @click="deleteImage(pictures.id)" href="#"
-                    >Delete</b-dropdown-item
+                    >{{ $t("businessowner.Delete") }}</b-dropdown-item
                   >
                 </b-dropdown>
               </li>

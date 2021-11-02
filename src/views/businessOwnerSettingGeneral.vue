@@ -3,47 +3,47 @@
     <navbar />
     <b-container fluid="xl" class="text-justify">
       <b-row>
-        <a class="settings" href="#">Settings</a>
+        <a class="settings" href="#">{{ $t("businessowner.Settings") }}</a>
         <b-tabs content-class="mt-3">
-          <b-tab title="Business"> </b-tab>
+          <b-tab :title="$t('businessowner.Business')"> </b-tab>
 
-          <b-tab title="Inbox"> </b-tab>
-          <b-tab title="Notification"> </b-tab>
+          <b-tab :title="$t('businessowner.Inbox')"> </b-tab>
+          <b-tab :title="$t('businessowner.Notification')"> </b-tab>
 
-          <b-tab title="Pending Post"> </b-tab>
+          <b-tab :title="$t('businessowner.Pending_Post')"> </b-tab>
 
-          <b-tab title="Insights"> </b-tab>
+          <b-tab :title="$t('businessowner.Insights')"> </b-tab>
         </b-tabs>
       </b-row>
     </b-container>
 
     <b-container class="">
       <b-container class="">
-        <h5 class="a-text"><b-icon-gear></b-icon-gear> Business Settings</h5>
+        <h5 class="a-text"><b-icon-gear></b-icon-gear> {{ $t("businessowner.Business_Settings") }}</h5>
       </b-container>
 
       <b-container class="bv-example-row">
         <div>
           <b-tabs pills card vertical>
-            <b-tab title="General" active
+            <b-tab :title="$t('businessowner.General')" active
               ><b-card-text> <General /> </b-card-text
             ></b-tab>
 
-            <b-tab title="Business Info"
+            <b-tab :title="$t('businessowner.Business_Info')"
               ><b-card-text> <Info /> </b-card-text
             ></b-tab>
 
-            <b-tab title="Business Roles"
+            <b-tab :title="$t('businessowner.Business_Roles')"
               ><b-card-text> <Roles /> </b-card-text
             ></b-tab>
 
-            <b-tab title="Payment "
+            <b-tab :title="$t('businessowner.Payment') "
               ><b-card-text> <Payment /> </b-card-text
             ></b-tab>
-            <b-tab title="Website "
+            <b-tab :title="$t('businessowner.Website') "
               ><b-card-text> <Website /> </b-card-text
             ></b-tab>
-            <b-tab title="Blocking "
+            <b-tab :title="$t('businessowner.Blocking') "
               ><b-card-text> <Blocking /> </b-card-text
             ></b-tab>
           </b-tabs>
@@ -53,7 +53,7 @@
       <br />
 
       <br />
-      style
+      {{ $t("businessowner.style") }}
       <Footer />
     </b-container>
   </b-container>

@@ -5,7 +5,7 @@
         <b-input-group class="mb-2 px-md-3 float-right">
           <b-form-input
             aria-label="Text input with checkbox"
-            placeholder="Search Something"
+            :placeholder="$t('businessowner.Search_Something')"
             v-model="searchQuery"
           ></b-form-input>
 
@@ -42,7 +42,7 @@
         <b-spinner class="spin" variant="primary"></b-spinner>
       </b-col>
       <b-col v-if="followers.length < 1 && !loader" class="load">
-        <p>No follower to show !!</p>
+        <p>{{ $t("businessowner.No_follower_to_show") }} !!</p>
       </b-col>
     </b-row>
   </div>

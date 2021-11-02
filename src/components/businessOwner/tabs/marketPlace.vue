@@ -11,17 +11,17 @@
         ></b-spinner>
       </b-col>
       <b-col v-if="products.lentgh < 1 && !loader" class="load">
-        <p>No notifications to show !!</p>
+        <p>{{ $t("businessowner.No_notifications_to_show") }} !!</p>
       </b-col>
     </div>
 
-    <b-modal hide-footer title="Add product" v-model="showModal">
+    <b-modal hide-footer :title="$t('businessowner.Add_product')" v-model="showModal">
       <b-form>
         <b-row>
           <b-col cols="12" md="6">
             <b-form-group
               id="input-group-1"
-              label="Product Name"
+              :label="$t('businessowner.Product_Name')"
               label-for="input-1"
               label-size="sm"
             >
@@ -36,7 +36,7 @@
 
             <b-form-group
               id="input-group-1"
-              label="Product Description"
+              :label="$t('businessowner.Product_Description')"
               label-for="input-1"
               label-size="sm"
             >
@@ -62,7 +62,7 @@
               <a href="#" data-toggle="modal" data-target="#createalbumModal">
                 <div class="drag-text">
                   <i class="fa fa-plus"></i>
-                  <h6>Product Image</h6>
+                  <h6>{{ $t("businessowner.Product_Image") }}</h6>
                 </div>
               </a>
               <div></div>
@@ -72,7 +72,7 @@
 
         <b-form-group
           id="input-group-1"
-          label="Product Description"
+          :label="$t('businessowner.Product_Description')"
           label-for="input-1"
           label-size="sm"
         >
@@ -97,12 +97,12 @@
           value="accepted"
           unchecked-value="not_accepted"
         >
-          This Product Is On Discount
+          {{ $t("businessowner.This_Product_Is_On_Discount") }}
         </b-form-checkbox>
 
         <b-form-group
           id="conditions"
-          label="Conditions"
+          :label="$t('businessowner.Conditions')"
           label-for="input-1"
           label-size="sm"
         >
@@ -118,7 +118,7 @@
           v-model="newProduct.is_service"
           unchecked-value="0"
         >
-          This Item Is A Service ?
+          {{ $t("businessowner.This_Item_Is_A_Service") }} ?
         </b-form-checkbox>
 
         <b-form-checkbox
@@ -126,17 +126,17 @@
           v-model="newProduct.in_stock"
           unchecked-value="0"
         >
-          In stock
+          {{ $t("businessowner.In_stock") }}
         </b-form-checkbox>
 
         <b-form-checkbox value="1" unchecked-value="0">
-          Published
+          {{ $t("businessowner.Published") }}
         </b-form-checkbox>
         <b-alert v-if="success" :variant="val" show> {{ msg }} </b-alert>
         <b-button @click="addProduct" class="mt-2 btn-block" variant="primary">
           <b-spinner v-if="load" variant="white"></b-spinner>
 
-          Add</b-button
+          {{ $t("businessowner.Add") }}</b-button
         >
       </b-form>
     </b-modal>

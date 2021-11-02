@@ -73,14 +73,14 @@ export default {
       selectedId: 0,
       bottomSelectedId: 0,
       items: [
-        { label: "Home ", icon: "fas fa-home fa-lg" },
+        { label: this.$t('businessowner.Home'), icon: "fas fa-home fa-lg" },
 
-        { label: "Inbox", icon: "fas fa-comments  fa-lg" },
-        { label: "Notification", icon: "fas fa-bell fa-lg" },
-        { label: "Pending Post", icon: "fas fa-sync fa-lg" },
-        { label: "Insight", icon: "fas fa-chart-line fa-lg" },
+        { label: this.$t('businessowner.Inbox'), icon: "fas fa-comments  fa-lg" },
+        { label: this.$t('businessowner.Notification'), icon: "fas fa-bell fa-lg" },
+        { label: this.$t('businessowner.Pending_Post'), icon: "fas fa-sync fa-lg" },
+        { label: this.$t('businessowner.Insight'), icon: "fas fa-chart-line fa-lg" },
 
-        { label: "Settings", icon: "fas fa-cog fa-lg" }
+        { label: this.$t('businessowner.Settings'), icon: "fas fa-cog fa-lg" }
       ],
       options: {
         activeColor: "#1d98bd"

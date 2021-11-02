@@ -13,13 +13,17 @@ import market from "./market";
 import hotbusiness from "./hotbusiness";
 import profile from "./profile";
 import follower from "./follower";
+import networkProfile from "./networkProfile";
+
 import UserProfileOwner from "./UserProfileOwner"
 import axios from "axios";
 import { search } from "./search";
+import { social } from "./social";
 
 Vue.use(Vuex);
 
 axios.defaults.baseURL = process.env.VUE_APP_API_URL; 
+
 
 export default new Vuex.Store({
   modules: {
@@ -35,10 +39,10 @@ export default new Vuex.Store({
     follower,
     search,
     market,
-
+    social,
+    networkProfile,
     UserProfileOwner,
     businessFollowers
-
   },
-};
+});
    

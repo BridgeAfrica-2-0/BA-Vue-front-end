@@ -12,15 +12,10 @@
             class="pull-left"
             no-caret
           >
-            <template #button-content>
-              <b-icon-filter></b-icon-filter><span class="sr-only">Search</span>
-            </template>
+            <template #button-content> <b-icon-filter></b-icon-filter><span class="sr-only">Search</span> </template>
             <p class="font-weight-bolder px-3 m-0">Feedbacks Type</p>
 
-            <b-dropdown-item
-              href="#"
-              action="suggestions"
-              @click="getSuggestions"
+            <b-dropdown-item href="#" action="suggestions" @click="getSuggestions"
               >suggestion for improvement</b-dropdown-item
             >
           </b-dropdown>
@@ -44,7 +39,7 @@
                   ></b-avatar>
                 </b-col>
                 <b-col cols="10" md="11" class="pt-2">
-                  <h5 class="m-0 font-weight-bolder  feedback-name ">
+                  <h5 class="m-0 font-weight-bolder feedback-name">
                     <b-link href="www.jackpot.com">
                       {{ post.profileName }}
                     </b-link>
@@ -72,20 +67,20 @@
 </template>
 
 <script>
-import axios from "axios";
+import axios from 'axios';
 export default {
-  name: "feedbackNetwork",
-  action: "feedback",
+  name: 'feedbackNetwork',
+  action: 'feedback',
   data: () => ({
     feedbackPosts: [],
     Suggestions: [],
     load: null,
   }),
   async beforeMount() {
-    if (this.action == "feedbacks") {
+    if (this.action == 'feedbacks') {
       await this.getFeedbacks();
     }
-    if (this.action == "suggestions") {
+    if (this.action == 'suggestions') {
       await this.getSuggestions();
     }
   },

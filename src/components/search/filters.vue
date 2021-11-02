@@ -1,6 +1,5 @@
 <template>
   <div>
-    {{ filterType }}
     <div v-if="filterType == '1' || filterType == '4'">
       <div v-if="subCategories.length">
         <span>
@@ -322,6 +321,9 @@
       <br />
     </div>
 
+    <component :is="currentFilter" />
+
+    <!--
     <div v-if="filterType == '2'">
       <b-form-group
         label-cols-lg="3"
@@ -383,7 +385,9 @@
         </b-form-select-option>
       </b-form-select>
     </div>
+    -->
 
+    <!--
     <div v-if="filterType == '5'">
       <b-form-group
         label-cols-lg="12"
@@ -429,6 +433,7 @@
         </b-form-select-option>
       </b-form-select>
     </div>
+    -->
 
     <b-modal ref="myfilters" id="Neighbourhood" hide-footer title=" ">
       <b-form-group
@@ -505,12 +510,27 @@
 </template>
 
 <script>
+import { PeopleFilter, PostFilter } from "@/components/search";
+
 export default {
   name: "filters",
 
   props: ["filterType", "Selectedcategory", "Selectedparentcategory"],
 
+  created() {
+    this.strategies = {
+      2: () => PeopleFilter,
+      5: () => PostFilter,
+    };
+  },
   watch: {
+    filterType: function (newId) {
+      try {
+        this.currentFilter = this.strategies[newId]();
+      } catch (error) {
+        this.currentFilter = null;
+      }
+    },
     Selectedparentcategory: function (newVal) {
       console.log(newVal);
 
@@ -787,7 +807,8 @@ export default {
       noFilter: "",
 
       // -----------------
-
+      strategies: null,
+      currentFilter: null,
       slide: 0,
       sliding: null,
 
@@ -1812,6 +1833,7 @@ export default {
       ],
     };
   },
+
   computed: {
     subCategories() {
       return this.$store.state.market.subCat;
@@ -1833,12 +1855,12 @@ export default {
 
           console.log(res.data.data);
           if (res.data.data.length === 0) {
-            let subName = ''
-            this.subCategories.map((sub)=>{
+            let subName = "";
+            this.subCategories.map((sub) => {
               if (sub.id === subId) {
-                subName = sub.name
+                subName = sub.name;
               }
-            })
+            });
             this.noFilter = `No filter available for ${subName}!`;
           }
 

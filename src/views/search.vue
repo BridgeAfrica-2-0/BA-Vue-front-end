@@ -375,10 +375,8 @@
               v-bind:Selectedcategory="Selectedcategory"
               v-bind:Selectedparentcategory="Selectedparentcategory"
             />
-
-            <PeopleFilter v-if="selectedId == 2" />
-            <PostFilter v-if="selectedId == 5" />
           </div>
+          
         </b-col>
 
         <b-col cols="12" md="8" lg="8" xl="6" ref="middleblock">
@@ -483,30 +481,7 @@
             </div>
 
             <!-- filter out only people -->
-
-            <div v-if="selectedId == '2'">
-              <h6>
-                Sponsored Result
-                <fas-icon
-                  class="icons"
-                  :icon="['fas', 'exclamation-circle']"
-                  size="lg"
-                />
-              </h6>
-
-              <div>
-                <Sponsor />
-              </div>
-              <h6>
-                <fas-icon class="icons" :icon="['fas', 'users']" size="lg" />
-                People
-              </h6>
-              <People
-                v-for="(people, index) in peoples"
-                :people="people"
-                :key="index"
-              />
-            </div>
+            <component :is="isComponent" :title="notFoundComponentTitle" />
 
             <!-- filter out just the network  -->
 
@@ -539,29 +514,6 @@
 
               <Market />
             </div>
-
-            <!-- Filter out just the post  -->
-
-            <div v-if="selectedId == '5'">
-              <h6>
-                Sponsored Result
-                <fas-icon
-                  class="icons"
-                  :icon="['fas', 'exclamation-circle']"
-                  size="lg"
-                />
-              </h6>
-
-              <div>
-                <Sponsor />
-              </div>
-              <h6>
-                <fas-icon class="icons" :icon="['fab', 'readme']" size="lg" />
-                Post
-              </h6>
-
-              <Post />
-            </div>
           </div>
         </b-col>
         <b-col cols="12" md="4" lg="4" xl="3" class="showmap" ref="mapblock">
@@ -573,8 +525,6 @@
 </template>
 
 <script>
-import _ from "lodash";
-
 import LyTab from "@/tab/src/index.vue";
 
 import Map from "@/components/search/map";
@@ -594,11 +544,11 @@ import SubNav from "@/components/subnav";
 
 import Sponsor from "@/components/search/sponsoredBusiness";
 
-import { PeopleFilter, PostFilter } from "@/components/search";
+import { PostComponent, PeopleComponent } from "@/components/search";
 
 import { loader } from "@/mixins";
 
-import { mapGetters, mapActions } from "vuex";
+import { mapActions } from "vuex";
 
 export default {
   components: {
@@ -614,31 +564,15 @@ export default {
     Network,
     Post,
     Market,
-    PeopleFilter,
-    PostFilter,
-
-
+    PostComponent,
+    PeopleComponent,
     // Footer,
   },
 
   mixins: [loader],
 
-  computed: {
-    ...mapGetters({
-      peoples: "search/GET_RESULT",
-    }),
-  },
-
   created() {
-    this.strategy = {
-      2: () => this.onFindUser(),
-    };
-    this.strategyForPlaceHolder = {
-      2: () => "Find User",
-      0: () => "All",
-    };
-
-    this.changePlaceHolder();
+    this.initialize();
   },
 
   data() {
@@ -647,8 +581,12 @@ export default {
         keyword: "",
         placeholder: "",
       },
+      strategyForComponent: null,
+      notFoundComponentTitle: "",
+      isComponent: null,
       strategy: {},
       strategyForPlaceHolder: {},
+      strategyForNotFoundComponentTitle: {},
       selected: "all",
       selectedId: 0,
       Setcategoryr: "all",
@@ -673,7 +611,6 @@ export default {
         { label: "Market" },
         { label: "Post" },
       ],
-
 
       Finished_Branded_Products_filters: [
         { value: "Peanuts", text: "Peanuts" },
@@ -1588,14 +1525,66 @@ export default {
 
   watch: {
     selectedId: function () {
+      this.changeComponent();
       this.changePlaceHolder();
+      this.changeNotFoundTitle();
     },
   },
 
   methods: {
     ...mapActions({
-      find: "search/FIND_USER",
+      userStore: "search/FIND_USER",
+      postStore: "search/FIND_POST",
+      postKeyword: "search/POST_KEYWORD",
+      lauchLoader: "search/LOADING",
+      page: "search/SET_CURRENT_PAGINATION_PAGE",
+      stack: "search/STACK_VALUE",
+      setCallback: "search/SET_CURRENT_PAGINATE_CALLBACK",
+      reset: "search/RESET_RESULT",
     }),
+
+    initialize() {
+      this.strategy = {
+        2: () => this.onFindUser(),
+        5: () => this.onFindPost(),
+      };
+
+      this.strategyForPlaceHolder = {
+        2: () => "Find User",
+        5: () => "Find Post",
+        0: () => "All",
+      };
+
+      this.strategyForComponent = {
+        2: () => PeopleComponent,
+        5: () => PostComponent,
+      };
+
+      this.strategyForNotFoundComponentTitle = {
+        2: () => "Not Find users",
+        5: () => "Not Find posts",
+      };
+
+      this.changePlaceHolder();
+    },
+
+    changeNotFoundTitle() {
+      try {
+        this.notFoundComponentTitle =
+          this.strategyForNotFoundComponentTitle[this.selectedId]();
+      } catch (error) {
+        this.notFoundComponentTitle = "";
+      }
+    },
+
+    changeComponent() {
+      try {
+        this.isComponent = this.strategyForComponent[this.selectedId]();
+      } catch (error) {
+        this.isComponent = null;
+      }
+    },
+
     changePlaceHolder() {
       try {
         const newPlaceholder = this.strategyForPlaceHolder[this.selectedId]();
@@ -1613,12 +1602,83 @@ export default {
       try {
         this.strategy[`${this.selectedId}`]();
       } catch (error) {
+        console.log(error);
         console.warn(`Implement function for selectedId=${this.selectedId}`);
       }
     },
+
+    async _onFindUser() {
+      try {
+        this.lauchLoader(true);
+        this.reset();
+        const request = await this.$repository.search.findUserByParam({
+          data: {
+            keyword: this.navBarParams.keyword.trim(),
+          },
+          page: 1,
+        });
+
+        if (request.success) {
+          this.setCallback(this.$repository.search.findUserByParam);
+          this.page(2);
+          this.userStore(request.data);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+      this.lauchLoader(false);
+    },
+
     onFindUser() {
-      if (this.navBarParams.keyword.trim())
-        this.find(this.navBarParams.keyword);
+      if (this.navBarParams.keyword.trim()) {
+        this.page(1);
+        this.postKeyword(this.navBarParams.keyword.trim());
+        this.stack({
+          data: {
+            keyword: this.navBarParams.keyword.trim(),
+          },
+        });
+        this._onFindUser();
+      } else this.onNotified("the word must have at least 3 letters");
+    },
+
+    async _onFindPost() {
+      try {
+        this.lauchLoader(true);
+        this.reset();
+        const request = await this.$repository.search.findPostByKeyword({
+          data: {
+            keyword: this.navBarParams.keyword.trim(),
+          },
+          page: 1,
+        });
+
+        if (request.success) {
+          this.page(2);
+          this.setCallback(this.$repository.search.findPostByKeyword);
+          this.postStore(request.data);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+      this.lauchLoader(false);
+    },
+
+    onFindPost() {
+      if (this.navBarParams.keyword.trim()) {
+        this.page(1);
+        this.postKeyword(this.navBarParams.keyword.trim());
+        this.stack({
+          data: {
+            keyword: this.navBarParams.keyword.trim(),
+          },
+          page: 1,
+        });
+
+        this._onFindPost();
+      } else {
+        this.onNotified("the word must have at least 3 letters");
+      }
     },
 
     SetCat(cat) {
@@ -1645,7 +1705,8 @@ export default {
           break;
 
         case "MC":
-          this.selectcategories = this.Mayor_councils_filters_and_public_institution;
+          this.selectcategories =
+            this.Mayor_councils_filters_and_public_institution;
 
           break;
 

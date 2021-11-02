@@ -1,3 +1,4 @@
+
 import Vue from "vue";
 import App from "./App.vue";
 import "./registerServiceWorker";
@@ -17,6 +18,12 @@ import IconifyIcon from "@iconify/vue";
 import homeIconData from "@iconify-icons/mdi-light/home";
 import ReadMore from "vue-read-more";
 import VueSocialauth from "vue-social-auth";
+import VueSocialSharing from 'vue-social-sharing'
+
+import plugin from './http'
+
+Vue.use(plugin)
+
 // import firebase from "firebase";
 IconifyIcon.addIcon("home", homeIconData);
 
@@ -150,6 +157,7 @@ import VueAgile from 'vue-agile'
 
 Vue.use(VueAgile);
 
+Vue.use(VueSocialSharing);
 import CoolLightBox from 'vue-cool-lightbox'
 import 'vue-cool-lightbox/dist/vue-cool-lightbox.min.css'
 
@@ -200,8 +208,5 @@ new Vue({
     });
 
   },
-
-
-  render: h => h(App),
-
+  render: (h) => h(App),
 }).$mount("#app");

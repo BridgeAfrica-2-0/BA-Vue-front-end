@@ -4,7 +4,6 @@
 
     <div class="row">
       <div class="container-fluid">
-
         <b-modal
           id="modalxl"
           ref="modalxl"
@@ -73,7 +72,7 @@
               <li class="nav-item dropdown m-0 p-0">
                 <b-dropdown
                   size="sm"
-                  class=" call-action"
+                  class="call-action"
                   variant="link"
                   toggle-class="text-decoration-none"
                   no-caret
@@ -102,7 +101,6 @@
                 </b-dropdown>
               </li>
             </ul>
-
           </div>
         </div>
       </div>
@@ -334,17 +332,12 @@ export default {
         });
     },
 
-
-
-
-
-
     submitPost() {
       let loader = this.$loading.show({
         container: this.fullPage ? null : this.$refs.preview,
         canCancel: true,
         onCancel: this.onCancel,
-        color: "#e75c18"
+        color: "#e75c18",
       });
 
       let formData = new FormData();
@@ -355,10 +348,10 @@ export default {
       this.axios
         .post("business/store/media/" + this.url + "/" + this.album, formData, {
           headers: {
-            "Content-Type": "multipart/form-data"
-          }
+            "Content-Type": "multipart/form-data",
+          },
         })
-        .then(response => {
+        .then((response) => {
           console.log(response);
 
           this.flashMessage.show({
@@ -366,14 +359,14 @@ export default {
 
             message: "Profile Updated",
 
-            blockClass: "custom-block-class"
+            blockClass: "custom-block-class",
           });
 
           loader.hide();
           this.$refs["modalxl"].hide();
         })
 
-        .catch(err => {
+        .catch((err) => {
           console.log({ err: err });
 
           if (err.response.status == 422) {
@@ -383,7 +376,7 @@ export default {
               status: "error",
 
               message: err.response.data.message,
-              blockClass: "custom-block-class"
+              blockClass: "custom-block-class",
             });
 
             loader.hide();
@@ -392,7 +385,7 @@ export default {
               status: "error",
 
               message: "Unable to upload your image",
-              blockClass: "custom-block-class"
+              blockClass: "custom-block-class",
             });
             console.log({ err: err });
 
@@ -400,9 +393,6 @@ export default {
           }
         });
     },
-
-
-
 
     selectMoviesOutsidePost(e) {
       this.profile_pic = e.target.files[0];
@@ -421,7 +411,7 @@ export default {
     this.url = this.$route.params.id;
   },
   watch: {
-    album: function(newVal) {
+    album: function (newVal) {
       this.album_id = newVal;
     },
   },

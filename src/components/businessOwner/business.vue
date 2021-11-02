@@ -6,12 +6,10 @@
         <b-row class="center-content">
           <b-col cols="12">
             <b-tabs lazy content-class="mt-3 mobile-tab" fill pills v-model="currentTab">
-            <b-tabs lazy content-class="mt-3 mobile-tab" fill pills>
               <b-tab title="Home"><HomePage /></b-tab>
               <b-tab title="About"><About /></b-tab>
               <b-tab title="Media"><Media type="business" /></b-tab>
               <b-tab title="Market"><MarketPlace /></b-tab>
-              <!--  <b-tab title="Networks"><Networks /></b-tab> -->
               <b-tab title="Community"><Followers /></b-tab>
             </b-tabs>
           </b-col>

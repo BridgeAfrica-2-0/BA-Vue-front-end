@@ -68,18 +68,18 @@ Vue.prototype.$axios = axios;
 //   });
 
 Vue.use(VueSocialauth, {
-  providers: {
-    facebook: {
-      clientId: process.env.VUE_APP_FACEBOOK_CLIENT_ID,
-      client_secret: process.env.VUE_APP_FACEBOOK_CLIENT_SECRETE,
-      redirectUri: process.env.VUE_APP_FACEBOOK_RETURN_URL,
+    providers: {
+        facebook: {
+            clientId: process.env.VUE_APP_FACEBOOK_CLIENT_ID,
+            client_secret: process.env.VUE_APP_FACEBOOK_CLIENT_SECRETE,
+            redirectUri: process.env.VUE_APP_FACEBOOK_RETURN_URL,
+        },
+        google: {
+            clientId: process.env.VUE_APP_GOOGLE_CLIENT_ID,
+            client_secret: process.env.VUE_APP_GOOGLE_CLIENT_SECRETE,
+            redirectUri: process.env.VUE_APP_GOOGLE_RETURN_URL,
+        },
     },
-    google: {
-      clientId: process.env.VUE_APP_GOOGLE_CLIENT_ID,
-      client_secret: process.env.VUE_APP_GOOGLE_CLIENT_SECRETE,
-      redirectUri: process.env.VUE_APP_GOOGLE_RETURN_URL,
-    },
-  },
 });
 
 import FlashMessage from "@smartweb/vue-flash-message";
@@ -132,16 +132,16 @@ Vue.use(IconsPlugin);
 //import InfiniteLoading from "vue-infinite-loading";
 
 Vue.use(InfiniteLoading, {
-  /* options */
+    /* options */
 });
 
 Vue.use(VueGoogleMaps, {
-  load: {
-    key: "AIzaSyAGZU6cqra18t1fhN1AbzRsEc_pgt7n2C8",
-    libraries: "places",
-  },
-  autobindAllEvents: false,
-  installComponents: true,
+    load: {
+        key: "AIzaSyAGZU6cqra18t1fhN1AbzRsEc_pgt7n2C8",
+        libraries: "places",
+    },
+    autobindAllEvents: false,
+    installComponents: true,
 });
 
 
@@ -177,6 +177,7 @@ Vue.config.productionTip = false;
 var user = null;
 
 new Vue({
+
   router,
   store,
   i18n,
@@ -210,3 +211,4 @@ new Vue({
   },
   render: (h) => h(App),
 }).$mount("#app");
+

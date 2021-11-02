@@ -2,55 +2,61 @@
   <div>
     <b-spinner v-if="loader" variant="primary" label="Spinning"></b-spinner>
 
-    <b-alert v-if="networks.data.length === 0" show variant="warning"
-      ><a href="#" class="alert-link"> No Network available! </a>
-    </b-alert>
-
+    <b-alert v-if="businesses.total == 0" show variant="warning"
+      ><a href="#" class="alert-link">
+        No data available for that search!
+      </a></b-alert
+    >
+    <div></div>
     <div
       class="people-style shadow"
-      v-for="(network, index) in networks.data"
+      v-for="(business, index) in businesses.data"
       :key="index"
     >
-      <b-row @mouseover="showAction = index" @mouseleave="showAction = null">
+      <b-row>
         <b-col md="3" xl="3" lg="3" cols="5" sm="3">
           <div class="center-img">
-            <img
-              src="https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg"
-              class="r-image"
-            />
+            <splide :options="options" class="r-image">
+              <splide-slide cl>
+                <img
+                  src="https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg"
+                  class="r-image"
+                />
+              </splide-slide>
+            </splide>
           </div>
         </b-col>
-        <b-col md="7" cols="7" lg="5" sm="5">
+        <b-col md="9" cols="7" lg="5" sm="5">
           <p class="textt">
-            <strong class="net-title"> {{ network.name }} </strong>
+            <strong class="title"> {{ business.name }} </strong> <br />
+            {{ business.category }}
             <br />
-            {{ network.purpose }}
-            <br />
-            {{ network.member_count }} Community member <br />
+            {{ business.followers }} Followers <br />
 
             <span class="location">
+              Lat: {{ business.lat }}<br />
+              Long: {{ business.lng }}<br />
               <b-icon-geo-alt class="ico"></b-icon-geo-alt>
-              {{ network.address }}
+              {{ business.location_description }}
             </span>
             <br />
-            {{ network.description }}
+            {{ business.about_business }}
             <br />
             <b-link>Read More</b-link>
           </p>
         </b-col>
 
-        <b-col
-          lg="4"
-          md="12"
-          xl="4"
-          cols="12"
-          sm="4"
-          v-if="index == showAction"
-        >
-          <b>{{ index }}</b>
+        <b-col lg="4" md="12" xl="4" cols="12" sm="4">
           <div class="s-button">
             <b-row>
-              <b-col md="4" lg="12" xl="12" sm="12" cols="4" class="mt-2">
+              <b-col
+                md="4"
+                lg="12"
+                xl="12"
+                sm="12"
+                cols="4"
+                class="mt-2 text-center"
+              >
                 <b-button
                   block
                   size="sm"
@@ -58,11 +64,18 @@
                   variant="primary"
                 >
                   <i class="fas fa-user-plus fa-lg btn-icon"></i>
-                  <span class="btn-com" v-b-modal.modal-sm>Community</span>
+                  <span class="btn-com">Community</span>
                 </b-button>
               </b-col>
 
-              <b-col md="4" lg="12" xl="12" sm="12" cols="4" class="mt-2">
+              <b-col
+                md="4"
+                lg="12"
+                xl="12"
+                sm="12"
+                cols="4"
+                class="mt-2 text-center"
+              >
                 <b-button
                   block
                   size="sm"
@@ -74,91 +87,56 @@
                 </b-button>
               </b-col>
 
-              <b-col md="4" lg="12" xl="12" sm="12" cols="4" class="mt-2">
+              <b-col
+                md="4"
+                lg="12"
+                xl="12"
+                sm="12"
+                cols="4"
+                class="mt-2 text-center"
+              >
+                <b-button
+                  block
+                  size="sm"
+                  class="b-background shadow"
+                  variant="primary"
+                >
+                  <i class="fas fa-map-marked-alt fa-lg btn-icon"></i>
+                  <span class="btn-text">Direction</span>
+                </b-button>
               </b-col>
             </b-row>
           </div>
         </b-col>
       </b-row>
     </div>
-    <!-- pagination -->
-
-    <b-pagination
-      v-if="networks.next || networks.previous"
-      v-model="currentPage"
-      :total-rows="networks.total"
-      :per-page="networks.per_page"
-      aria-controls="my-table"
-      @change="changePage"
-      align="center"
-      :disabled="networks.data.length > 0 ? false : true"
-    ></b-pagination>
-
-    <!-- End pagination -->
-
-    <b-modal id="modal-sm" size="sm" hide-header>
-      Do you want to join this network?
-    </b-modal>
   </div>
 </template>
 
 <script>
 export default {
-  props: ["title", "image"],
   data() {
     return {
-      showAction: null,
-      viewProduct: false,
-      total: 0,
-      per_page: 10,
-      list: [],
-      currentPage: 1,
-      nextLoad: false,
+      options: {
+        rewind: true,
+        autoplay: true,
+        perPage: 1,
+        pagination: false,
+
+        type: "loop",
+        perMove: 1,
+      },
     };
   },
   computed: {
-    networks() {
-      return this.$store.getters["networkSearch/getNetworks"];
+    businesses() {
+      return this.$store.getters["allSearch/getBusinesses"];
     },
     loader() {
-      return this.$store.getters["networkSearch/getLoader"];
+      return this.$store.getters["allSearch/getLoader"];
     },
   },
-  created() {
-    // this.networkSearch()
-    if (this.networks.data.length == 0) {
-      console.log("[debug] network on created:", this.networks);
 
-      this.networkSearch();
-    }
-  },
-
-  methods: {
-    changePage(value) {
-      this.$store.commit("networkSearch/setNetworks", { data: [] });
-      this.$store.commit("networkSearch/setLoader", true);
-      this.currentPage = value;
-      console.log("[debug] page before:", value);
-      this.networkSearch();
-    },
-
-    networkSearch() {
-      this.$store
-        .dispatch("networkSearch/SEARCH", {
-          country_id: 1,
-          page: this.currentPage,
-        })
-        .then((res) => {
-          this.total = this.networks.total;
-        })
-        .catch((err) => {
-          // this.prodLoader = false;
-          console.log("loader: ", this.prodLoader);
-          console.log("products error: ");
-          console.error(err);
-        });
-    },
-  },
 };
 </script>
 
@@ -224,7 +202,7 @@ export default {
     margin-top: -15px;
   }
 
-  .net-title {
+  .title {
     font-size: 16px;
     color: black;
 
@@ -277,7 +255,7 @@ export default {
 }
 
 @media only screen and (min-width: 768px) {
-  .net-title {
+  .title {
     font-size: 20px;
     color: black;
 

@@ -3,15 +3,21 @@ import Vuex from "vuex";
 import auth from "./auth";
 import dashboard from "./dashboard";
 import businessOwner from "./businessOwner";
+import marketSearch from "./marketSearch";
+import networkSearch from "./networkSearch";
+import allSearch from "./allSearch";
+import ProfileAndBusinessDetails from "./ProfileAndBusinessDetails";
 import networkDetails from "./networkDetails";
 import dashboardcommunity from "./dashboardcommunity";
+
 import networkSetting from "./networkSetting";
 
 import ProfileAndBusinessDetails from "./ProfileAndBusinessDetails";
+
 import businessFollowers from "./businessFollowers";
-import market from "./market";
 import hotbusiness from "./hotbusiness";
 import profile from "./profile";
+import networkProfileMembers from "./networkProfileMembers";
 import follower from "./follower";
 import networkProfile from "./networkProfile";
 
@@ -40,9 +46,14 @@ export default new Vuex.Store({
     search,
     market,
     social,
+    networkProfileMembers,
+        allSearch,
+     marketSearch,
+       networkSearch,
     networkProfile,
     UserProfileOwner,
     businessFollowers
   },
 });
    
+

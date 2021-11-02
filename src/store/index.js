@@ -12,7 +12,7 @@ import dashboardcommunity from "./dashboardcommunity";
 
 import networkSetting from "./networkSetting";
 
-import ProfileAndBusinessDetails from "./ProfileAndBusinessDetails";
+
 
 import businessFollowers from "./businessFollowers";
 import hotbusiness from "./hotbusiness";

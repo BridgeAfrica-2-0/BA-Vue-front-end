@@ -59,6 +59,15 @@
             ref="movie"
           />
 
+          <input
+            type="file"
+            id="cover_pic_edit"
+            @change="selectCropImageModal"
+            accept="video/mpeg, video/mp4, image/*"
+            hidden
+            ref="movie"
+          />
+
 
           
             <input
@@ -76,6 +85,8 @@
                 <div class=" ">
                   <span class="float-right profileedit-btn  put-topbtn ">
                     <b-button
+
+                    @click="editCoverNull" 
                       variant="primary"
                       class="  d-none d-md-inline edit-btn"
                       v-b-modal.modal-upp
@@ -130,7 +141,22 @@
               </div>
             </b-modal>
 
-            <b-modal id="modal-upp" ref="modal" title="Upload Profile Picture">
+            <!-- Crop cover photo Modal -->          
+            <b-modal id="coverphotoCrop" ref="coverphotoCrop" ok-title="Crop and Save" @ok="submitCroppedCover" title="Crop  Cover photo">
+              <div class="w3-container">
+               <div id="preview">
+               <vue-cropper
+                    :src="selectedFile"
+                     ref="cropper"
+                     :aspect-ratio="6.5/3"
+                    drag-mode="move"
+                    :view-mode="1"
+                  />
+                </div>
+              </div>
+            </b-modal>
+
+            <b-modal id="modal-upp" ref="modal" title="Upload Cover Picture">
               <div class="w3-container">
                 <div class="row pb3">
                   <div class="col-sm-6 text-center" style="border-right: 1px solid rgb(222, 226, 230);">
@@ -142,7 +168,7 @@
                     </h1>
                   </div>
                   <div class="col-sm-6 text-center">
-                    <h1>
+                    <h1 @click="selectEditCover">
                       <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="edit" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" class="primary svg-inline--fa fa-edit fa-w-18">
                         <path fill="currentColor" d="M402.6 83.2l90.2 90.2c3.8 3.8 3.8 10 0 13.8L274.4 405.6l-92.8 10.3c-12.4 1.4-22.9-9.1-21.5-21.5l10.3-92.8L388.8 83.2c3.8-3.8 10-3.8 13.8 0zm162-22.9l-48.8-48.8c-15.2-15.2-39.9-15.2-55.2 0l-35.4 35.4c-3.8 3.8-3.8 10 0 13.8l90.2 90.2c3.8 3.8 10 3.8 13.8 0l35.4-35.4c15.2-15.3 15.2-40 0-55.2zM384 346.2V448H64V128h229.8c3.2 0 6.2-1.3 8.5-3.5l40-40c7.6-7.6 2.2-20.5-8.5-20.5H48C21.5 64 0 85.5 0 112v352c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V306.2c0-10.7-12.9-16-20.5-8.5l-40 40c-2.2 2.3-3.5 5.3-3.5 8.5z" class=""></path>
                       </svg>
@@ -163,9 +189,15 @@
 
 <script>
 
-  export default {
-  name: "headPageOwner",
+import VueCropper from 'vue-cropperjs';
+import 'cropperjs/dist/cropper.css';
+import { h } from 'vue';
 
+  export default {
+    name: "headPageOwner",
+    components : {
+       VueCropper,
+    },
   
    data() {
       return {
@@ -173,7 +205,10 @@
           url:null,
           img_url:null,
           cover_photo:null,
+          mime_type:null,
           profile_photo:null,
+          cropedImage:null,
+          selectedFile:null,
 
           options: {
           
@@ -203,7 +238,6 @@
 
     
 methods: {
-
    nFormatter(num) {
       if (num >= 1000000000) {
         return (num / 1000000000).toFixed(1).replace(/\.0$/, '') + 'G';
@@ -230,9 +264,24 @@ methods: {
     document.getElementById("logo_pic").click();
   },
 
+  editCoverNull(){
+     this.img_url=null;
+     this.cover_photo=null;
+     this.mime_type=null;
+     this.cropedImage=null;
+     this.selectedFile=null;
+     document.getElementById("cover_pic").value=null; 
+     document.getElementById("cover_pic_edit").value=null; 
+  },
+
   selectCover(){
     document.getElementById("cover_pic").click();
     console.log("Cover test");
+  },
+
+  selectEditCover(){
+    document.getElementById("cover_pic_edit").click();
+    console.log("Cover Edit test");
   },
   
   selectMoviesOutsidePost(e) {
@@ -241,6 +290,24 @@ methods: {
     const file = e.target.files[0];
     this.img_url = URL.createObjectURL(file);
     this.$refs["coverphoto"].show();
+  },
+
+  selectCropImageModal(e) {
+    this.$refs["coverphotoCrop"].show();
+      const file = e.target.files[0]
+      this.mime_type = file.type
+      console.log(this.mime_type)
+      if (typeof FileReader === 'function') {
+        const reader = new FileReader()
+        reader.onload = (event) => {
+          this.selectedFile = event.target.result
+          console.log(this.$refs.cropper);
+          this.$refs.cropper.replace(this.selectedFile)
+        }
+        reader.readAsDataURL(file)
+      } else {
+        alert('Sorry, FileReader API not supported')
+      }
   },
 
   chooseProfile2: function() {
@@ -309,6 +376,75 @@ submitLogo(){
     });
 },
 
+submitCroppedCover()
+{
+
+ this.cropedImage = this.$refs.cropper.getCroppedCanvas().toDataURL()
+      this.$refs.cropper.getCroppedCanvas().toBlob((blob) => {
+        console.log('blob',blob)
+
+         let loader = this.$loading.show({                
+          container: this.fullPage ? null : this.$refs.preview,
+          canCancel: true,
+          onCancel: this.onCancel,
+          color:"#e75c18"
+        });
+        
+          let formData = new FormData();
+          formData.append("image", blob);
+            this.axios 
+              .post("user/upload-cover", formData, {
+                headers: {
+                  "Content-Type": "multipart/form-data",
+                },
+              })
+              .then((response) => {
+                console.log(response);
+                this.$store
+                  .dispatch("profile/loadUserPostIntro", null)
+                  .then((response) => {
+                    console.log(response);
+                    this.flashMessage.show({
+                      status: "success",
+                      message: "Cover Updated",
+                      blockClass: "custom-block-class",
+                    });
+                    loader.hide()
+                    this.$refs["modalxl"].hide();
+                  })
+                  .catch((error) => {
+                    console.log(error);
+                  });
+                
+                this.editCoverNull();
+
+                })
+                .catch((err) => {
+                  console.log({ err: err });
+                  if (err.response.status == 422) {
+                    console.log({ err: err });
+                    this.flashMessage.show({
+                      status: "error",
+                      message: err.response.data.message,
+                      blockClass: "custom-block-class",
+                    });
+                    loader.hide()
+                  } 
+                  else {
+                    this.flashMessage.show({
+                      status: "error",
+                      message: "Unable to upload your image",
+                      blockClass: "custom-block-class",
+                    });
+                    console.log({ err: err });
+                    loader.hide()
+                  }
+                });
+
+      }, this.mime_type)
+    
+},
+
 submitCover(){
   let loader = this.$loading.show({                
     container: this.fullPage ? null : this.$refs.preview,
@@ -341,6 +477,10 @@ submitCover(){
         .catch((error) => {
           console.log(error);
         });
+      
+      this.editCoverNull();
+
+        
     })
     .catch((err) => {
       console.log({ err: err });
@@ -419,6 +559,18 @@ computed: {
   max-width: 100%;
   max-height: 300px;
 }
+
+#previewEdit {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#previewEdit img {
+  max-width: 100%;
+  max-height: 300px;
+}
+
 
 
 .text-box {

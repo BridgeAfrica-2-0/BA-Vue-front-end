@@ -495,7 +495,7 @@
                   </b-dropdown>
                 </div>
               </div>
-              <router-link to="myorders/detail">
+              <router-link to="detail">
                 <span class="gras">Order</span>
               <span class="text-success">#12324253</span> <br />
               </router-link>

@@ -40,7 +40,10 @@ import paidPlan from "@/views/paidPlan";
 import confirmPayment from "@/views/confirmPayment";
 import networks from "@/views/networks";
 import dashboard from "@/views/dashboard";
-import myorders from  "@/components/myOders.vue"
+
+import myorders from "@/views/myOders"
+
+
 
 import welcome from "@/views/welcome";
 import ordersdetail from "@/views/odersDetail"
@@ -70,6 +73,9 @@ const routes = [
     //   auth: true,
     // },
   },
+  
+
+  
   {
     path: "/",
     name: "home",
@@ -121,6 +127,7 @@ const routes = [
     name: "BusinessOwner",
     component: businessOwner,
   },
+
 
   {
     path: "/business_editor/:id?",

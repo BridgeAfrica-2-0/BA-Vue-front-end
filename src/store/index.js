@@ -5,6 +5,8 @@ import dashboard from "./dashboard";
 import businessOwner from "./businessOwner";
 import networkDetails from "./networkDetails";
 import dashboardcommunity from "./dashboardcommunity";
+import networkSetting from "./networkSetting";
+
 import ProfileAndBusinessDetails from "./ProfileAndBusinessDetails";
 import businessFollowers from "./businessFollowers";
 import market from "./market";
@@ -16,12 +18,8 @@ import axios from "axios";
 import { search } from "./search";
 
 Vue.use(Vuex);
-  
 
- //axios.defaults.baseURL = process.env.VUE_APP_API_URL; 
-
- axios.defaults.baseURL ="https://test.maxinemoffett.com/api/v1"; 
-
+axios.defaults.baseURL = process.env.VUE_APP_API_URL; 
 
 export default new Vuex.Store({
   modules: {
@@ -32,10 +30,15 @@ export default new Vuex.Store({
     businessOwner,
     dashboard,
     hotbusiness,
+    networkSetting,
     profile,
     follower,
     search,
     market,
-    UserProfileOwner
+
+    UserProfileOwner,
+    businessFollowers
+
   },
-});
+};
+   

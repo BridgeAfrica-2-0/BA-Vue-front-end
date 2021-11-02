@@ -373,10 +373,10 @@ export default {
     async loadUserBusinessAbout(context, payload) {
       console.log(payload, "load user Business About start +++++");
       let response_ = null;
-      const id_Business = 47;
+      const id_Business = 2;
       await axios("business/info" +
           "/" +
-          id_Business,
+          payload.business_id,
         {
           method: "GET",
           headers: {
@@ -418,7 +418,7 @@ export default {
       const id_Business = 47;
       await axios( "business/update" +
           "/" +
-          id_Business,
+          payload.business_id,
         {
           method: "POST",
           headers: {
@@ -429,12 +429,17 @@ export default {
           body: JSON.stringify({
             name: payload.business_about.name,
             category: payload.business_about.category,
+            subCategoryId: payload.business_about.subCategoryId,
+            filterId: payload.business_about.filterId,
             keywords: payload.business_about.keywords,
             phone: payload.business_about.phone,
             email: payload.business_about.email,
-            region: payload.business_about.region,
-            city: payload.business_about.city,
             country: payload.business_about.country,
+            region: payload.business_about.region,
+            division: payload.business_about.division,
+            council: payload.business_about.council,
+            locality: payload.business_about.locality,
+            city: payload.business_about.city,
             openHours: payload.business_about.business_open_hours
           })
         }

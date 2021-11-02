@@ -8,7 +8,7 @@ export default {
     CommunityBusiness: [],
     ownerPost: [],
     profileBusiness: [],
-    profileNetwork:[],
+    profileNetwork: [],
     ownerPostImages: [],
     biography: null,
     basicInfo: [],
@@ -18,17 +18,19 @@ export default {
     workPlaces: [],
     educations: [],
     professions: [],
+    imagess: [],
+    networks: [],
 
-    profile_about:{"user":{},"user_address":[], "user_education":[],"user_experience":[],"user_websites":[]  },
-    profileIntro:{"user":{},"user_address":[], "user_education":[],"user_experience":[],"user_websites":[]  },
-    NcommunityFollower:{ "network_followers": [ ], "total_network_follower": 0 },
-    NcommunityFollowing:{ "network_following": [ ], "total_network_following": 0 },
-    BcommunityFollower:{ "business_followers": [ ], "total_business_follower": 0 },
-    BcommunityFollowing:{ "business_following": [ ], "total_business_following": 0 },
-  
-    UcommunityFollower:{ "user_followers": [ ], "total_user_follower": 0 },
-    UcommunityFollowing:{ "user_following": [ ], "total_user_following": 0 },
-    Tcommunity:[],
+    profile_about: { "user": {}, "user_address": [], "user_education": [], "user_experience": [], "user_websites": [] },
+    profileIntro: { "user": {}, "user_address": [], "user_education": [], "user_experience": [], "user_websites": [] },
+    NcommunityFollower: { "network_followers": [], "total_network_follower": 0 },
+    NcommunityFollowing: { "network_following": [], "total_network_following": 0 },
+    BcommunityFollower: { "business_followers": [], "total_business_follower": 0 },
+    BcommunityFollowing: { "business_following": [], "total_business_following": 0 },
+
+    UcommunityFollower: { "user_followers": [], "total_user_follower": 0 },
+    UcommunityFollowing: { "user_following": [], "total_user_following": 0 },
+    Tcommunity: [],
 
 
   },
@@ -36,7 +38,7 @@ export default {
     getAlbums(state) {
       return state.albums;
     },
-    
+
     getUserPostIntro(state) {
       return state.profileIntro;
     },
@@ -85,19 +87,19 @@ export default {
   },
   mutations: {
 
-   setTcommunity(state, data){
-   
-     state.Tcommunity=data;
+    setTcommunity(state, data) {
 
-   },
-    
-    setNcommunityFollower(state, data){
+      state.Tcommunity = data;
+
+    },
+
+    setNcommunityFollower(state, data) {
 
       state.NcommunityFollower = data;
 
     },
 
-    setUcommunityFollowing(state, data){
+    setUcommunityFollowing(state, data) {
 
 
       state.UcommunityFollowing = data;
@@ -105,25 +107,25 @@ export default {
     },
 
 
-    setUcommunityFollower(state, data){
-    
+    setUcommunityFollower(state, data) {
+
       state.UcommunityFollower = data;
 
     },
 
-    setBcommunityFollowing(state, data){
+    setBcommunityFollowing(state, data) {
       state.BcommunityFollowing = data;
 
     },
 
 
-    setBcommunityFollower(state, data){
+    setBcommunityFollower(state, data) {
 
       state.BcommunityFollower = data;
     },
 
 
-    setNcommunityFollowing(state, data){
+    setNcommunityFollowing(state, data) {
 
       state.NcommunityFollowing = data;
     },
@@ -138,9 +140,9 @@ export default {
       state.albums = data;
     },
 
-    setprofileNetwork(state, data){
-     
-      state.profileNetwork=data;
+    setprofileNetwork(state, data) {
+
+      state.profileNetwork = data;
 
     },
 
@@ -154,6 +156,16 @@ export default {
       state.ownerPostImages = data;
 
     },
+
+
+
+    setImagess(state, data) {
+
+      state.imagess = data;
+
+    },
+
+
 
     setAlbumImages(state, data) {
       state.albumImages = data;
@@ -199,11 +211,11 @@ export default {
       state.profileIntro = payload;
     },
     updateUserProfileAbout(state, payload) {
-      state.profile_about=payload;
+      state.profile_about = payload;
     },
     updateUserBiography(state, payload) {
-      state.biography=payload.user.biography;
-     
+      state.biography = payload.user.biography;
+
     },
 
     updateUserBirthDate(state, payload) {
@@ -280,76 +292,96 @@ export default {
       return num;
     },
 
-    loadMoreUserBusiness({commit}, url){
-         
+    getImages({ commit }, id) {
+      return axios.get("profile/user/media?id=" + id).then(({ data }) => {
+        commit("setImagess", data.data);
+        console.log(data);
+      });
+    },
+
+    loadMoreUserBusiness({ commit }, url) {
+
       return axios.get(url)
-      .then(({ data }) => {
+        .then(({ data }) => {
 
-       // console.log(data);
-       return data;
-      });
-
-    },
-     
-    Tcommunity({commit}, id){
-     
-      return axios
-      .get('profile/total/community?id='+id)
-      .then(({ data }) => {
-        commit('setTcommunity', data.data);
-        console.log(data);
-      });
+          // console.log(data);
+          return data;
+        });
 
     },
-    
-    NcommunityFollower({ commit }, id){
-      return axios
-      .get('profile/network/follower?id='+id)
-      .then(({ data }) => {
-        commit('setNcommunityFollower', data.data);
-        console.log(data);
-      });
+
+    loadMore({ commit }, url) {
+      console.log("hello you are loading now");
+      console.log(url);
+      return axios.get(url)
+        .then((data) => {
+          return data;
+        }).catch((err) => {
+          console.log("Something went wrong");
+          console.log({ err: err })
+        });
+
     },
-    NcommunityFollowing({ commit },id){
+
+    Tcommunity({ commit }, id) {
+
       return axios
-      .get('profile/network/following?id='+id)
-      .then(({ data }) => {
-        commit('setNcommunityFollowing', data.data);
-        console.log(data);
-      });
+        .get('profile/total/community?id=' + id)
+        .then(({ data }) => {
+          commit('setTcommunity', data.data);
+          console.log(data);
+        });
+
     },
-    BcommunityFollower({ commit },id){
+
+    NcommunityFollower({ commit }, id) {
       return axios
-      .get('profile/business/follower?id='+id)
-      .then(({ data }) => {
-        commit('setBcommunityFollower', data.data);
-        console.log(data);
-      });
+        .get('profile/network/follower?id=' + id)
+        .then(({ data }) => {
+          commit('setNcommunityFollower', data.data);
+          console.log(data);
+        });
     },
-    BcommunityFollowing({ commit }, id){
+    NcommunityFollowing({ commit }, id) {
       return axios
-      .get('profile/business/following?id='+id)
-      .then(({ data }) => {
-        commit('setBcommunityFollowing', data.data);  
-        console.log(data);
-      });
+        .get('profile/network/following?id=' + id)
+        .then(({ data }) => {
+          commit('setNcommunityFollowing', data.data);
+          console.log(data);
+        });
     },
-   
-    UcommunityFollower({ commit }, id){
+    BcommunityFollower({ commit }, id) {
       return axios
-      .get('profile/user/follower?id='+id)
-      .then(({ data }) => {
-        commit('setUcommunityFollower', data.data);
-        console.log(data);
-      });
+        .get('profile/business/follower?id=' + id)
+        .then(({ data }) => {
+          commit('setBcommunityFollower', data.data);
+          console.log(data);
+        });
     },
-    UcommunityFollowing({ commit }, id){
+    BcommunityFollowing({ commit }, id) {
       return axios
-      .get('profile/user/following?id='+id)
-      .then(({ data }) => {
-        commit('setUcommunityFollowing', data.data);      
-        console.log(data);
-      });
+        .get('profile/business/following?id=' + id)
+        .then(({ data }) => {
+          commit('setBcommunityFollowing', data.data);
+          console.log(data);
+        });
+    },
+
+    UcommunityFollower({ commit }, id) {
+      return axios
+        .get('profile/user/follower?id=' + id)
+        .then(({ data }) => {
+          commit('setUcommunityFollower', data.data);
+          console.log(data);
+        });
+    },
+    UcommunityFollowing({ commit }, id) {
+      return axios
+        .get('profile/user/following?id=' + id)
+        .then(({ data }) => {
+          commit('setUcommunityFollowing', data.data);
+          console.log(data);
+        });
     },
 
 
@@ -357,7 +389,7 @@ export default {
     profileBusiness({ commit }, id) {
 
       return axios
-        .get('business/userBusiness?id='+id)
+        .get('business/userBusiness?id=' + id)
         .then(({ data }) => {
           commit('setProfileBusiness', data.data);
           console.log(data);
@@ -366,12 +398,12 @@ export default {
     },
 
 
-    profileNetwork({ commit }, id) { 
+    profileNetwork({ commit }, id) {
 
       return axios
-        .get('profile/userBusiness?id='+id)
+        .get('network?id=' + id)
         .then(({ data }) => {
-          commit('setProfileNetwork', data.data);
+          commit('setprofileNetwork', data.data);
           console.log(data);
         });
 
@@ -388,20 +420,20 @@ export default {
         });
     },
 
-   
-    ownerPost({ commit }) {
-      return axios.get("post").then(({ data }) => {
+
+    ownerPost({ commit }, id) {
+      return axios.get("post?id=" + id).then(({ data }) => {
         commit("ownerPost", data.data);
         console.log(data);
       });
     },
 
-   
+
 
 
     profilecommunity({ commit }, id) {
       return axios
-        .get("profile/community?id="+id)
+        .get("profile/community?id=" + id)
         .then(({ data }) => {
           commit("setCommunityPeople", data.data.people[0]);
           commit("setCommunityBusiness", data.data.business[0]);
@@ -414,26 +446,26 @@ export default {
 
 
 
-     
 
-  
+
+
     async loadUserPostIntro(context, id) {
       let response_ = null;
-      await axios.get('userIntro?id='+id)
-       
+      await axios.get('userIntro?id=' + id)
+
         .then(response => {
           console.log("load user Intro Post test1 successsss +++");
           console.log(response);
           if (!response) {
             throw "Cannot Found User Post Intro";
           }
-         
+
           response_ = response.data[0];
           context.commit("editPostUserIntro", response.data.data);
         })
         .catch(error => {
 
-          console.log({error:error});
+          console.log({ error: error });
           console.log("Load User Intro Echec");
           if (error instanceof TypeError) {
             console.log(error.message);
@@ -448,7 +480,7 @@ export default {
 
 
       let response_ = null;
-      await axios.get('userIntro/biography?id='+id)
+      await axios.get('userIntro/biography?id=' + id)
         .then(({ data }) => {
           console.log(data, "load user biography response (1) +++++++");
 
@@ -497,10 +529,10 @@ export default {
 
 
 
-    async loadUserProfileAbout({commit}, id) {
+    async loadUserProfileAbout({ commit }, id) {
 
       let response_ = null;
-      await axios.get('userIntro?id='+id, {
+      await axios.get('userIntro?id=' + id, {
         method: "GET",
         headers: {
           Accept: "application/json",
@@ -509,34 +541,34 @@ export default {
       })
         .then(response => {
           console.log("load user profile about response (1) +++++++", response);
-         
+
           return response;
         })
         .then(response => {
-         
+
           if (!response) {
             console.log("Error from the server+++++++");
             throw new Error("Error of load profile about ++++++++");
           }
           commit("updateUserProfileAbout", response.data.data);
-      response_ = response;
+          response_ = response;
         })
         .catch(error => {
           console.log("error from browser or server error(1)", error);
           throw error;
         });
       return response_;
-    }, 
+    },
 
 
 
 
     async loadUserBasicInfosBirthDate(context, id) {
-    
+
       console.log("load user birth date start +++++");
 
       let response_ = null;
-      await axios.get('userIntro/dob?id='+id, {
+      await axios.get('userIntro/dob?id=' + id, {
         method: "GET",
         headers: {
           Accept: "application/json",
@@ -579,14 +611,14 @@ export default {
         })
         .catch(error => {
           console.log("error from browser or server error(1)");
-          console.log({error : error});
+          console.log({ error: error });
           throw error;
         });
       return response_;
     },
 
-    
-    
+
+
 
 
 

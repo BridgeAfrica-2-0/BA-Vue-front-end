@@ -1,4 +1,9 @@
 export const state = {
-    users:[],
-    isLoading: false,
+  users: [],
+  posts: [],
+  isLoading: false,
+  page: 1,
+  callback: null,
+  postKeyword: null,
+  stack: null
 }

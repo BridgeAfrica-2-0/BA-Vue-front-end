@@ -9,38 +9,51 @@ import allSearch from "./allSearch";
 import ProfileAndBusinessDetails from "./ProfileAndBusinessDetails";
 import networkDetails from "./networkDetails";
 import dashboardcommunity from "./dashboardcommunity";
+
+import networkSetting from "./networkSetting";
+
+import ProfileAndBusinessDetails from "./ProfileAndBusinessDetails";
+
 import businessFollowers from "./businessFollowers";
 import hotbusiness from "./hotbusiness";
 import profile from "./profile";
 import networkProfileMembers from "./networkProfileMembers";
 import follower from "./follower";
+import networkProfile from "./networkProfile";
+
 import UserProfileOwner from "./UserProfileOwner"
 import axios from "axios";
 import { search } from "./search";
+import { social } from "./social";
 
 Vue.use(Vuex);
 
-axios.defaults.baseURL = process.env.VUE_APP_API_URL;
-// axios.defaults.baseURL = process.env.VUE_APP_API_URL_DEV;
+axios.defaults.baseURL = process.env.VUE_APP_API_URL; 
 
 
 export default new Vuex.Store({
-    modules: {
-        auth,
-        networkDetails,
-        dashboardcommunity,
-        ProfileAndBusinessDetails,
-        businessOwner,
-        dashboard,
-        hotbusiness,
-        networkProfileMembers,
-        marketSearch,
-        networkSearch,
+  modules: {
+    auth,
+    networkDetails,
+    dashboardcommunity,
+    ProfileAndBusinessDetails,
+    businessOwner,
+    dashboard,
+    hotbusiness,
+    networkSetting,
+    profile,
+    follower,
+    search,
+    market,
+    social,
+    networkProfileMembers,
         allSearch,
-        profile,
-        follower,
-        search,
-        UserProfileOwner
-
-    }
+     marketSearch,
+       networkSearch,
+    networkProfile,
+    UserProfileOwner,
+    businessFollowers
+  },
 });
+   
+

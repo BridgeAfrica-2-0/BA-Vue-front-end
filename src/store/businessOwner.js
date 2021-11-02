@@ -1,6 +1,5 @@
-import axios from "axios";
-axios.defaults.headers.common["Authorization"] =
-  "Bearer " + localStorage.getItem("access_token");
+import axios from 'axios';
+axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('access_token');
 export default {
   namespaced: true,
   state: {
@@ -9,7 +8,7 @@ export default {
     success: {
       state: false,
       succes: false,
-      msg: "",
+      msg: '',
     },
     notifications: [],
     checked: false,
@@ -43,96 +42,94 @@ export default {
           number_posts: 0,
           total_likes: 0,
           total_shares: 0,
-          total_posts: 0
+          total_posts: 0,
         },
 
         business_about: {
           biography: {
-            title: "About Mapoure Agrobusiness",
+            title: 'About Mapoure Agrobusiness',
             description:
-              "Lorem ipsum dolor sit amet consectetur adipisicing elit.\n" +
-              "              Asperiores temporibus, rerum iste id obcaecati quae odit accusamus\n" +
-              "              reprehenderit, ipsa nam laudantium pariatur. Harum, soluta. Nam\n" +
-              "              accusantium hic numquam architecto debitis. Lorem ipsum dolor sit\n" +
-              "              amet consectetur adipisicing elit. Asperiores temporibus, rerum\n" +
-              "              iste id obcaecati quae odit accusamus reprehenderit, ipsa nam\n" +
-              "              laudantium pariatur. Harum, soluta. Nam accusantium hic numquam\n" +
-              "              architecto debitis. Asperiores temporibus, rerum iste id obcaecati\n" +
-              "              architecto debitis. Asperiores temporibus, rerum iste id obcaecati\n" +
-              "              architecto debitis. Asperiores temporibus, rerum iste id obcaecati\n" +
-              "              architecto debitis. Asperiores temporibus, rerum iste id obcaecati\n" +
-              "              architecto debitis. Asperiores temporibus, rerum iste id obcaecati\n" +
-              "              quae odit accusamus reprehenderit, ipsa nam laudantium pariatur.\n" +
-              "              quae odit accusamus reprehenderit, ipsa nam laudantium pariatur.\n" +
-              "              Harum, soluta. Nam accusantium hic numquam architecto debitis."
+              'Lorem ipsum dolor sit amet consectetur adipisicing elit.\n' +
+              '              Asperiores temporibus, rerum iste id obcaecati quae odit accusamus\n' +
+              '              reprehenderit, ipsa nam laudantium pariatur. Harum, soluta. Nam\n' +
+              '              accusantium hic numquam architecto debitis. Lorem ipsum dolor sit\n' +
+              '              amet consectetur adipisicing elit. Asperiores temporibus, rerum\n' +
+              '              iste id obcaecati quae odit accusamus reprehenderit, ipsa nam\n' +
+              '              laudantium pariatur. Harum, soluta. Nam accusantium hic numquam\n' +
+              '              architecto debitis. Asperiores temporibus, rerum iste id obcaecati\n' +
+              '              architecto debitis. Asperiores temporibus, rerum iste id obcaecati\n' +
+              '              architecto debitis. Asperiores temporibus, rerum iste id obcaecati\n' +
+              '              architecto debitis. Asperiores temporibus, rerum iste id obcaecati\n' +
+              '              architecto debitis. Asperiores temporibus, rerum iste id obcaecati\n' +
+              '              quae odit accusamus reprehenderit, ipsa nam laudantium pariatur.\n' +
+              '              quae odit accusamus reprehenderit, ipsa nam laudantium pariatur.\n' +
+              '              Harum, soluta. Nam accusantium hic numquam architecto debitis.',
           },
           address: {
-            businessName: "Current or Last Organization",
-            category: "Agriculture",
-            keywords: "Agriculture",
-            country: "Cameroun",
-            city: "Yaounde",
-            NeigbourHood: "Melen",
-            phones: { phone_1: "+237656602212", phone_2: "+237677754814" },
-            businessEmail: "info@businessname.com",
+            businessName: 'Current or Last Organization',
+            category: 'Agriculture',
+            keywords: 'Agriculture',
+            country: 'Cameroun',
+            city: 'Yaounde',
+            NeigbourHood: 'Melen',
+            phones: { phone_1: '+237656602212', phone_2: '+237677754814' },
+            businessEmail: 'info@businessname.com',
             businessHours: {
-              open: "Always Open",
+              open: 'Always Open',
               dayOfWorks: [
-                { day: "Monday", start: 1, end: 10, check: false },
-                { day: "Tuesday", start: null, end: null, check: false },
-                { day: "Wednesday", start: null, end: null, check: false },
-                { day: "Thursday", start: null, end: null, check: false },
-                { day: "Friday", start: null, end: null, check: false },
-                { day: "Saturday", start: null, end: null, check: false },
-                { day: "Sunday", start: null, end: null, check: false }
-              ]
-            }
-          }
+                { day: 'Monday', start: 1, end: 10, check: false },
+                { day: 'Tuesday', start: null, end: null, check: false },
+                { day: 'Wednesday', start: null, end: null, check: false },
+                { day: 'Thursday', start: null, end: null, check: false },
+                { day: 'Friday', start: null, end: null, check: false },
+                { day: 'Saturday', start: null, end: null, check: false },
+                { day: 'Sunday', start: null, end: null, check: false },
+              ],
+            },
+          },
         },
 
         business_about1: {
-          name: "Tierra Hermiston",
-          logo_path: "http://localhost:8000/storage",
-          category: "Hourse Marketing",
+          name: 'Tierra Hermiston',
+          logo_path: 'http://localhost:8000/storage',
+          category: 'Hourse Marketing',
           keywords: null,
           language: null,
           location_description:
-            "Tempore quo soluta voluptates quis. Doloremque autem minus ut nisi molestias maiores cum. Et assumenda velit expedita et et sint sed in.",
+            'Tempore quo soluta voluptates quis. Doloremque autem minus ut nisi molestias maiores cum. Et assumenda velit expedita et et sint sed in.',
           website: null,
           community: 6,
           phone: null,
           email: null,
           business_open_hours: [
             {
-              day: "monday",
-              opening_time: "09:05:12",
-              closing_time: "15:06:18"
+              day: 'monday',
+              opening_time: '09:05:12',
+              closing_time: '15:06:18',
             },
             {
-              day: "tuesday",
-              opening_time: "07:05:38",
-              closing_time: "14:05:43"
-            }
+              day: 'tuesday',
+              opening_time: '07:05:38',
+              closing_time: '14:05:43',
+            },
           ],
           region: null,
           address: null,
           city: null,
           country: null,
           lat: -56.200329,
-          lng: -6.249487
-        }
+          lng: -6.249487,
+        },
       },
-
-     
-
-
-      
     ]
-
   },
   getters: {
     getAlbums(state) {
       return state.albums;
+    },
+
+    getalbumImages(state) {
+      return state.albumImages
     },
 
     getdetails(state) {
@@ -148,6 +145,10 @@ export default {
 
     getImages(state) {
       return state.images;
+    },
+
+    getAllImages(state) {
+      return state.ownerPostImages;
     },
 
     getBusinessInfo(state) {
@@ -213,12 +214,24 @@ export default {
   },
   mutations: {
     //set media data
+    updateAlbum(state, payload) {
+      const newState = state.albums.map(album => (album.id == payload.id) ? Object.assign(album, { name: payload.name }) : album)
+      state.albums = newState
+    },
+
+    updateAlbumItem(state, payload) {
+      const newState = state.albums.map(album => (album.id == payload.id) ? Object.assign(album, { items: ('remove' == payload.action) ? parseInt(album.items) - 1 : parseInt(album.items) + 1 }) : album)
+      state.albums = newState
+    },
+
+    removeAlbum(state, uuid) {
+      state.albums = state.albums.filter(album => album.id != uuid)
+    },
 
     updateUserBusinessInsights(state, payload) {
       state.userData[0].business_insights = payload.businessInsights;
-    }, 
+    },
 
-     
     updateUserBusinessAbout(state, payload) {
       state.userData[0].business_about1 = payload.businessAbout;
     },
@@ -339,205 +352,161 @@ export default {
   actions: {
     nFormatter(num) {
       if (num >= 1000000000) {
-        return (num / 1000000000).toFixed(1).replace(/\.0$/, "") + "G";
+        return (num / 1000000000).toFixed(1).replace(/\.0$/, '') + 'G';
       }
       if (num >= 1000000) {
-        return (num / 1000000).toFixed(1).replace(/\.0$/, "") + "M";
+        return (num / 1000000).toFixed(1).replace(/\.0$/, '') + 'M';
       }
       if (num >= 1000) {
-        return (num / 1000).toFixed(1).replace(/\.0$/, "") + "K";
+        return (num / 1000).toFixed(1).replace(/\.0$/, '') + 'K';
       }
       return num;
- },
+    },
 
+    loadMore({ commit }, url) {
 
- async loadUserBusinessAbout(context, payload) {
-  console.log(payload, "load user Business About start +++++");
-  let response_ = null;
-  const id_Business = 47;
-  await axios("business/info" +
-      "/" +
-      id_Business,
-    {
-      method: "GET",
-      headers: {
-        Accept: "application/json",
-       
-      }
-    }
-  )
-    .then(response => {
-      console.log("load user Business About response (1) +++++++", response);
-      if (response.status !== 200 && response.status !== 201) {
-        throw "Error from the server";
-      }
-      return response.data;
-    })
-    .then(response => {
-      console.log(
-        "load user Business About response successsss +++",
-        response
-      );
-      if (!response) {
-        console.log("Error from the server+++++++");
-        throw new Error("Error for loading Business About +++++");
-      }
-      context.commit("updateUserBusinessAbout", {
-        businessAbout: response.data
-      });
-      response_ = response;
-    })
-    .catch(error => {
-      console.log("error from the server or the browser", error);
-    });
-  return response_;
-},
+      return axios.get(url)
+        .then((data) => {
+          return data;
+        });
 
+    },
 
-
-
-
-
-
-
-async updateUserBusinessAbout(context, payload) {
-  console.log(payload, "update user Business About start +++++");
-  let response_ = null;
-  const id_Business = 47;
-  await axios( "business/update" +
-      "/" +
-      id_Business,
-    {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-       
-      },
-      body: JSON.stringify({
-        name: payload.business_about.name,
-        category: payload.business_about.category,
-        keywords: payload.business_about.keywords,
-        phone: payload.business_about.phone,
-        email: payload.business_about.email,
-        region: payload.business_about.region,
-        city: payload.business_about.city,
-        country: payload.business_about.country,
-        openHours: payload.business_about.business_open_hours
+    async loadUserBusinessAbout(context, payload) {
+      let response_ = null;
+      const id_Business = 2;
+      await axios('business/info' + '/' + id_Business, {
+        method: 'GET',
+        headers: {
+          Accept: 'application/json',
+        },
       })
-    }
-  )
-    .then(response => {
-      console.log(
-        "update user Business About response (1) +++++++",
-        response
-      );
-      if (response.status !== 200 && response.status !== 201) {
-        throw "Error From The Server";
-      }
-      return response.data;
-    })
-    .then(response => {
-      console.log(
-        "update user Business About response successsss (2) +++",
-        response
-      );
-      if (!response) {
-        console.log("Error THe Server++++++");
-        throw new Error("Error For Updating Business About +++++");
-      }
-      context.commit("updateUserBusinessAbout", {
-        businessAbout: payload.business_about
-      });
-      response_ = response;
-    })
-    .catch(error => {
-      console.log("Error From the Server or Browser error(1)", error);
-      throw error;
-    });
-  return response_;
-},
+        .then(response => {
+          if (response.status !== 200 && response.status !== 201) {
+            throw 'Error from the server';
+          }
+          return response.data;
+        })
+        .then(response => {
+          if (!response) {
+            throw new Error('Error for loading Business About +++++');
+          }
+          context.commit('updateUserBusinessAbout', {
+            businessAbout: response.data,
+          });
+          response_ = response;
+        })
+        .catch(error => {});
+      return response_;
+    },
 
 
+    async updateUserBusinessAbout(context, payload) {
+      let response_ = null;
+      const id_Business = 2;
+      console.log(payload);
+      await axios('business/update' + '/' + id_Business, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+        body: JSON.stringify({
+          name: payload.business_about.name,
+          category: payload.business_about.category,
+          keywords: payload.business_about.keywords,
+          phone: payload.business_about.phone,
+          email: payload.business_about.email,
+          region: payload.business_about.region,
+          city: payload.business_about.city,
+          country: payload.business_about.country,
+          openHours: payload.business_about.business_open_hours,
+        }),
+      })
+        .then(response => {
+          console.log('update user Business About response (1) +++++++', response);
+          if (response.status !== 200 && response.status !== 201) {
+            throw 'Error From The Server';
+          }
+          return response.data;
+        })
+        .then(response => {
+          console.log('update user Business About response successsss (2) +++', response);
+          if (!response) {
+            console.log('Error THe Server++++++');
+            throw new Error('Error For Updating Business About +++++');
+          }
+          context.commit('updateUserBusinessAbout', {
+            businessAbout: payload.business_about,
+          });
+          response_ = response;
+        })
+        .catch(error => {
+          console.log('Error From the Server or Browser error(1)', error);
+          throw error;
+        });
+      return response_;
+    },
 
- async loadUserBusinessInsight(context, payload) {
-  console.log(payload);
-  console.log("load user Business Insight start +++++");
-  let response_ = null;
-  let url = null;
-  let config = {};
-  if (payload !== null) {
-    console.log("Payload does not null ++++++++++");
-    url ="business/insights/"+payload.business_id +
-      "?dateStarting=" +
-      payload.startDate +
-      "&dateClosing=" +
-      payload.endDate;
-    config = {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-      
+    async loadUserBusinessInsight(context, payload) {
+      let response_ = null;
+      let url = null;
+      let config = {};
+      if (payload !== null) {
+        url =
+          'business/insights/' +
+          payload.business_id +
+          '?dateStarting=' +
+          payload.startDate +
+          '&dateClosing=' +
+          payload.endDate;
+        config = {
+          method: 'POST',
+          headers: {
+            Accept: 'application/json',
+          },
+        };
+      } else {
+        url = 'business/insights';
+        config = {
+          method: 'POST',
+          headers: {
+            Accept: 'application/json',
+          },
+        };
       }
-    };
-  } else {
-    console.log("Payload is null");
-    url = 'business/insights';
-    config = {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-      
-      }
-    };
-  }
-  await axios(url, config)
-    .then(response => {
-      console.log(
-        "load user Business Insight response (1) +++++++",
-        response
-      );
-      if (response.status !== 200 && response.status !== 201) {
-        throw "Errors during processing by the server";
-      }
-      return response;
-    })
-    .then(response => {
-      console.log(
-        "load User Business Insight response successsss +++",
-        response
-      );
-      if (!response) {
-        console.log("Error From the server +++++++");
-        throw new Error("Error for loading Business Insight +++++");
-      }
-      context.commit("updateUserBusinessInsights", {
-        businessInsights: response.data
-      });
-      response_ = response;
-    })
-    .catch(error => {
-
-      console.log({error: error});
-      console.log("error from the server or the browser");
-      console.log(error);
-      context.commit("updateUserBusinessInsights", {
-        businessInsights: null
-      });
-    });
-  return response_;
-},
-     
-
-    getAlbumImages({ commit }, busineeId) {
-      return axios.get("business/album/show/" + busineeId).then(({ data }) => {
-        commit("setAlbumImages", data.data.media);
+      await axios(url, config)
+        .then(response => {
+          if (response.status !== 200 && response.status !== 201) {
+            throw 'Errors during processing by the server';
+          }
+          return response;
+        })
+        .then(response => {
+          if (!response) {
+            throw new Error('Error for loading Business Insight +++++');
+          }
+          context.commit('updateUserBusinessInsights', {
+            businessInsights: response.data,
+          });
+          response_ = response;
+        })
+        .catch(error => {
+          context.commit('updateUserBusinessInsights', {
+            businessInsights: null,
+          });
+        });
+      return response_;
+    },
+    getAlbumImages({ commit }, { businessId, albumId }) {
+      return axios.get("business/album/show/" + businessId + '/' + albumId).then(({ data }) => {
+        commit("setAlbumImages", data.data);
         console.log(data);
       });
     },
 
     getImages({ commit }, busineeId) {
-      return axios.get("business/post/" + busineeId).then(({ data }) => {
+      return axios.get("business/post/media/" + busineeId).then(({ data }) => {
         commit("setImages", data.data);
         console.log(data);
       });
@@ -580,6 +549,10 @@ async updateUserBusinessAbout(context, payload) {
         });
     },
 
+    async createAlbum({ commit }, { id, data }) {
+      const res = await axios.post("business/album/create/" + id, data);
+      commit("newAlbum", res.data);
+    },
     CommunityPeople({ commit }, businessId) {
       return axios
         .get("business/community/people/" + businessId)
@@ -588,6 +561,37 @@ async updateUserBusinessAbout(context, payload) {
           console.log(data);
         });
     },
+
+
+
+    updateAlbum({ commit }, payload) {
+      return axios.post(
+        "business/album/update/" + payload.url + "/" + payload.id,
+        {
+          name: payload.name,
+        }
+      ).then(({ data }) => {
+
+        commit("upAlbum", data.data);
+        console.log(data);
+      });
+    },
+
+    async deletedAlbum({ commit }, { businessID, albumID }) {
+      return await axios.delete(`business/album/${albumID}`);
+    },
+
+    async updatedAlbum({ commit }, { id, name }) {
+      return await axios.post(`business/album/update/${id}`, { name });
+    },
+
+    async deleteAlbum({ commit }, name, album_id) {
+      const res = await axios.post(
+        "business/album/edit/" + this.url + "/" + album_id,
+        { name }
+      );
+    },
+
 
     businessCommunityTotal({ commit }, businessId) {
       return axios
@@ -598,192 +602,105 @@ async updateUserBusinessAbout(context, payload) {
         });
     },
 
-    async createAlbum({ commit }, name) {
-      const res = await axios.post("business/album/create/" + this.url, {
-        name,
-      });
-      commit("newAlbum", res.data);
-    },
-
-    async updateAlbum({ commit }, edit_name, album_id) {
-      const res = await axios.post(
-        "business/album/update/" + this.url + "/" + album_id,
-        {
-          edit_name,
-        }
-      );
-      commit("upAlbum", res.data);
-    },
-
-    async deleteAlbum({ commit }, name, album_id) {
-      const res = await axios.post(
-        "business/album/edit/" + this.url + "/" + album_id,
-        { name }
-      );
-      commit("delAlbum", res.data);
-    },
-
-    // temporal signin to get token for developement purpose
     async signIn() {
       axios
-        .post("/user/login", {
-          email: "info@moazateeq.com",
-          password: "12345678",
+        .post('/user/login', {
+          email: 'info@moazateeq.com',
+          password: '12345678',
         })
-        .then((res) => {
-          localStorage.setItem("access_token", res.data.data.accessToken);
+        .then(res => {
+          localStorage.setItem('access_token', res.data.data.accessToken);
         });
     },
     // Get networks from the backend
     async getNetworks({ commit }) {
       let sucData = [];
       await axios
-        .get("network", {
+        .get('network', {
           headers: {
-            Authorization: "Bearer " + localStorage.getItem("access_token"),
+            Authorization: 'Bearer ' + localStorage.getItem('access_token'),
           },
         })
-        .then((res) => {
-          commit("setLoader", false);
-          commit("setSuccess", sucData);
-          commit("setNetworks", res.data.data);
+        .then(res => {
+          commit('setLoader', false);
+          commit('setSuccess', sucData);
+          commit('setNetworks', res.data.data);
           setTimeout(() => {
             sucData.state = false;
-            sucData.msg = "";
-            commit("setSuccess", sucData);
+            sucData.msg = '';
+            commit('setSuccess', sucData);
           }, 2000);
         })
-        .catch((err) => {
-          console.log("Unauthorized request !!");
+        .catch(err => {
+          console.log('Unauthorized request !!');
           let sucData = {
             state: true,
-            succes: "danger",
-            msg: "Unauthorized request !!",
+            succes: 'danger',
+            msg: 'Unauthorized request !!',
           };
-          commit("setLoader", false);
-          commit("setSuccess", sucData);
+          commit('setLoader', false);
+          commit('setSuccess', sucData);
           setTimeout(() => {
             sucData.state = false;
-            sucData.msg = "";
-            commit("setSuccess", sucData);
+            sucData.msg = '';
+            commit('setSuccess', sucData);
           }, 2000);
         });
     },
 
-    // Add network to the database but doesn't work correctly for now
+
     async addNetwork({ commit }, newNetwork) {
       console.log(newNetwork);
       axios
-        .post("/network", newNetwork, {
+        .post('/network', newNetwork, {
           headers: {
-            Authorization: "Bearer " + localStorage.getItem("access_token"),
+            Authorization: 'Bearer ' + localStorage.getItem('access_token'),
           },
         })
-        .then((res) => {
+        .then(res => {
           console.log(res.data);
         })
-        .catch((err) => {
-          console.log("Something went wrong");
+        .catch(err => {
+          console.log('Something went wrong');
         });
     },
     //delete network
-    async deleteNetwork() {},
+    async deleteNetwork() { },
+
     // Edit a network
     async editNetwork({ dispatch, commit }, editedNetwork) {
       commit("setLoader", true);
       axios
         .put(`network/${editedNetwork.id}`, editedNetwork, {
           headers: {
-            Authorization: "Bearer " + localStorage.getItem("access_token"),
+            Authorization: 'Bearer ' + localStorage.getItem('access_token'),
           },
         })
-        .then(async (res) => {
-          await dispatch("getNetworks");
+        .then(async res => {
+          await dispatch('getNetworks');
         })
-        .catch((err) => {
-          console.log("Something went wrong");
+        .catch(err => {
+          console.log('Something went wrong');
         });
-    },
-
-    // for images
-    async submitPost({ commit }, formData, headers) {
-      const res = await axios.post(
-        "business/store/media/" + this.url + "/" + this.album,
-        formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      );
-      commit("setSubmitPost", res.data);
-    },
-
-    async setProfilePic({ commit }, image_id, name) {
-      const res = await axios.post(
-        "business/album/edit/" + this.url + "/" + self.album_id,
-        {
-          name,
-        }
-      );
-      commit("setProfilePic", res.data);
-    },
-
-    async setCoverPic({ commit }, image_id, name) {
-      const res = await axios.post(
-        "business/make/coverpic/" + this.url + "/" + image_id,
-        {
-          name,
-        }
-      );
-      commit("setCoverPic", res.data);
-    },
-
-    async deleteImage({ commit }, image_id, name) {
-      const res = await axios.post(
-        "business/delete/media/" + this.url + "/" + image_id,
-        {
-          name,
-        }
-      );
-      commit("deleteImage", res.data);
-    },
-
-    async downloadPic({ commit }, image_id) {
-      const res = await axios.get(
-        "business/download/media/" + this.url + "/" + image_id
-      );
-      commit("downloadPic", res.data);
-
-          console.log("Something went wrong !!");
-          let sucData = {
-            state: true,
-            succes: "danger",
-            msg: "Something went wrong !!",
-          };
-          commit("setLoader", false);
-          commit("setSuccess", sucData);
-         
-        
     },
 
     // Getting the notifications
     async getNotifications({ dispatch, commit }) {
-      commit("setLoader", true);
+      commit('setLoader', true);
 
       await axios
-        .get("notification")
-        .then((res) => {
-          commit("setLoader", false);
-          commit("setSuccess", true);
-          commit("setNotifications", res.data.data);
+        .get('notification')
+        .then(res => {
+          commit('setLoader', false);
+          commit('setSuccess', true);
+          commit('setNotifications', res.data.data);
           setTimeout(() => {
-            commit("setSuccess", false);
+            commit('setSuccess', false);
           }, 2000);
         })
-        .catch((err) => {
-          commit("setLoader", false);
-          console.log("Unauthorized request !!");
+        .catch(err => {
+          commit('setLoader', false);
+          console.log('Unauthorized request !!');
         });
     },
 
@@ -793,7 +710,7 @@ async updateUserBusinessAbout(context, payload) {
         ids: [],
       };
 
-      payload.forEach((element) => {
+      payload.forEach(element => {
         let objId = {
           id: null,
         };
@@ -801,11 +718,11 @@ async updateUserBusinessAbout(context, payload) {
         items.ids.push(objId);
       });
       await axios
-        .post("notification/mark-read", items)
+        .post('notification/mark-read', items)
         .then(() => {
-          dispatch("getNotifications");
+          dispatch('getNotifications');
         })
-        .catch((err) => [console.log(err)]);
+        .catch(err => [console.log(err)]);
     },
 
     // Delete All Notifications
@@ -814,71 +731,95 @@ async updateUserBusinessAbout(context, payload) {
         ids: [],
       };
 
-      payload.forEach((element) => {
+      payload.forEach(element => {
         let objId = {
           id: null,
         };
         objId.id = element;
         items.ids.push(objId);
       });
-      await axios.post("notification/deleteAll", items).then(() => {
-        dispatch("getNotifications");
+      await axios.post('notification/deleteAll', items).then(() => {
+        dispatch('getNotifications');
       });
     },
     // delete a single notification
     delete({ dispatch }, id) {
       axios.delete(`notification/${id}`).then(() => {
-        dispatch("getNotifications");
+        dispatch('getNotifications');
       });
     },
 
     //Get pending posts from database
     async getPendingPost({ commit }) {
-      const res = await axios.get("");
+      const res = await axios.get('');
 
-      commit("getPosts", res.data);
+      commit('getPosts', res.data);
     },
 
     // Approve pending post
     async approvePost({ commit }, post) {
-      const res = await axios.post("/api/v1/business/post-approve", post);
+      const res = await axios.post('/api/v1/business/post-approve', post);
 
-      commit("Approve", res.data);
+      commit('Approve', res.data);
     },
 
     //disapprove pending post
     async disapprovePost({ commit }, post) {
-      const res = await axios.post("", post);
+      const res = await axios.post('', post);
 
-      commit("Disapprove", res.data);
+      commit('Disapprove', res.data);
     },
 
     //Getting all business following
     async allFollowing({ commit }) {
-      const res = await axios.get("/community/business-following");
+      const res = await axios.get('/community/business-following');
 
-      commit("Following", res.data);
+      commit('Following', res.data);
     },
 
     //Getting all business followers
     async allFollowers({ commit }) {
-      const res = await axios.get("/community/business-follower");
+      const res = await axios.get('/community/business-follower');
 
-      commit("Followers", res.data);
+      commit('Followers', res.data);
     },
 
     //Getting business people following
     async peopleFollowing({ commit }) {
-      const res = await axios.get("/api/v1/community/people-following");
+      const res = await axios.get('/api/v1/community/people-following');
 
-      commit("ppleFollowing", res.data);
+      commit('ppleFollowing', res.data);
     },
 
     //Getting business people following
     async peopleFollowers({ commit }) {
-      const res = await axios.get("/api/v1/community/people-follower");
+      const res = await axios.get('/api/v1/community/people-follower');
 
-      commit("ppleFollowers", res.data);
+      commit('ppleFollowers', res.data);
+    },
+
+    async submitPost({ commit }, payload) {
+      return axios.post(`business/store/media/${payload.businessID}/${payload.albumID}`, payload.data);
+    },
+
+    async setProfilePic({ commit }, { businessID, albumID }) {
+      return axios.post(`business/make/logopic/${businessID}/${albumID}`);
+    },
+
+    async setCoverPic({ commit }, { businessID, albumID }) {
+      return axios.post(`business/make/coverpic/${businessID}/${albumID}`);
+    },
+
+    async deleteImage({ commit }, id) {
+      return axios.delete(`business/picture/${id}`);
+    },
+
+    async downloadPic({ commit }, id) {
+      return axios({
+        url: `business/download/media/${id}`,
+        method: "get",
+        responseType: "blob"
+      });
     },
   },
 };

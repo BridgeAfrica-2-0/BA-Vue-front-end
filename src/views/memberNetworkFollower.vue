@@ -38,8 +38,8 @@ export default {
     Media,
     Members,
     Parent,
-    Feedback
-  }
+    Feedback,
+  },
 };
 </script>
 

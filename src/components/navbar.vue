@@ -505,30 +505,38 @@
                   data-original-title=""
                   title=""
                 >
-                  <!--            <fas-icon class="primary search" :icon="['fas', 'chevron-down']" />-->
                 </a>
                 <b-popover target="other-menu" triggers="hover" placement="top">
                   <div class="popover-body">
-                   
-                      <div
-                        class="d-inline-flex flex-row align-items-center mb-1 w-full"
-                      >
-                        <Activity />
-                      </div>
-                    
+                    <div
+                      class="
+                        d-inline-flex
+                        flex-row
+                        align-items-center
+                        mb-1
+                        w-full
+                      "
+                    >
+                      <Activity />
                     </div>
-                     <hr />
+
+                    <hr />
 
                     <router-link
                       to="/myorders"
-                      class="other-menu suggest-item cursor-pointer text-decoration-none text-dark"
+                      class="
+                        other-menu
+                        suggest-item
+                        cursor-pointer
+                        text-decoration-none text-dark
+                      "
                     >
                       <span class="mr-2"
                         ><fas-icon
                           class="violet search"
                           :icon="['fas', 'cart-arrow-down']"
                       /></span>
-                     My orders
+                      My orders
                     </router-link>
 
                     <hr />
@@ -566,7 +574,7 @@
                           :icon="['fas', 'globe-americas']"
                       /></span>
                       Language
-                    </div>        
+                    </div>
                     <hr class="h-divider" />
                     <a
                       href="https://bridgeafrica.info/nav/owner-other-menu.html"
@@ -628,16 +636,23 @@
               </div>
             </div>
 
-             <hr class="mup" />
+            <hr class="mup" />
 
             <router-link
               to="/myorders"
-              class="other-menu suggest-item cursor-pointer text-decoration-none text-dark"
+              class="
+                other-menu
+                suggest-item
+                cursor-pointer
+                text-decoration-none text-dark
+              "
             >
               <span class="mr-2"
-                ><fas-icon class="violet search" :icon="['fas', 'cart-arrow-down']"
+                ><fas-icon
+                  class="violet search"
+                  :icon="['fas', 'cart-arrow-down']"
               /></span>
-             My orders
+              My orders
             </router-link>
             <hr class="mup" />
 

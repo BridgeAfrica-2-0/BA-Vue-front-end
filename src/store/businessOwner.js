@@ -9,7 +9,7 @@ export default {
     success: {
       state: false,
       succes: false,
-      msg: "",
+      msg: "",    
     },
     notifications: [],
     checked: false,
@@ -19,13 +19,24 @@ export default {
     pendingPosts: [],
 
     Following: [],
-    Followers: [],
+    Followers: [],   
 
     peopleFollowing: [],
     peopleFollowers: [],
     communityPeople: [],
     CommunityBusiness: [],
     communityTotal: [],
+
+    NcommunityFollower: { "network_followers": [], "total_network_follower": 0 },
+    NcommunityFollowing: { "network_following": [], "total_network_following": 0 },
+    BcommunityFollower: { "business_followers": [], "total_business_follower": 0 },
+    BcommunityFollowing: { "business_following": [], "total_business_following": 0 },
+
+    UcommunityFollower: { "user_followers": [], "total_user_follower": 0 },
+    UcommunityFollowing: { "user_following": [], "total_user_following": 0 },
+    Tcommunity: [],
+
+
     businessInfo: [],
     albums: [],
     images: [],
@@ -248,7 +259,7 @@ export default {
     },
 
     setCommunityTotal(state, data) {
-      state.communityTotal = data;
+      state.Tcommunity = data;
     },
 
     ownerPost(state, data) {

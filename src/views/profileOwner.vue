@@ -23,7 +23,6 @@
             <b-tab title="Community"  href="#community" class="m-0 p-0">
               <following />
             </b-tab>
-            
           </b-tabs>
         </b-col>
       </b-row>
@@ -53,6 +52,7 @@ export default {
     About,
     Media,
     Networks,
+   
   },
   data() {
     return {   
@@ -89,7 +89,7 @@ export default {
    created() {
       this.tabIndex = this.tabs.findIndex(tab => tab === this.$route.hash);
       
-               this.$store
+      this.$store
       .dispatch("profile/loadUserPostIntro", null)
       .then((response) => {
          console.log(response);
@@ -99,7 +99,6 @@ export default {
       });
   },
   mounted(){
-
 
     this.$store
       .dispatch("profile/Tcommunity", null)
@@ -149,9 +148,6 @@ export default {
         console.log({error:error});
       });
 
-
-
-      
       this.$store
       .dispatch("profile/NcommunityFollower", null)
       .then((response) => {
@@ -161,7 +157,6 @@ export default {
         console.log({error:error});
       });
 
-      
       this.$store
       .dispatch("profile/NcommunityFollowing", null)
       .then((response) => {

@@ -121,11 +121,15 @@ export default {
           lng: -6.249487,
         },
       },
-    ],
+    ]
   },
   getters: {
     getAlbums(state) {
       return state.albums;
+    },
+
+    getalbumImages(state) {
+      return state.albumImages
     },
 
     getdetails(state) {
@@ -141,6 +145,10 @@ export default {
 
     getImages(state) {
       return state.images;
+    },
+
+    getAllImages(state) {
+      return state.ownerPostImages;
     },
 
     getBusinessInfo(state) {
@@ -206,6 +214,19 @@ export default {
   },
   mutations: {
     //set media data
+    updateAlbum(state, payload) {
+      const newState = state.albums.map(album => (album.id == payload.id) ? Object.assign(album, { name: payload.name }) : album)
+      state.albums = newState
+    },
+
+    updateAlbumItem(state, payload) {
+      const newState = state.albums.map(album => (album.id == payload.id) ? Object.assign(album, { items: ('remove' == payload.action) ? parseInt(album.items) - 1 : parseInt(album.items) + 1 }) : album)
+      state.albums = newState
+    },
+
+    removeAlbum(state, uuid) {
+      state.albums = state.albums.filter(album => album.id != uuid)
+    },
 
     updateUserBusinessInsights(state, payload) {
       state.userData[0].business_insights = payload.businessInsights;
@@ -342,6 +363,15 @@ export default {
       return num;
     },
 
+    loadMore({ commit }, url) {
+
+      return axios.get(url)
+        .then((data) => {
+          return data;
+        });
+
+    },
+
     async loadUserBusinessAbout(context, payload) {
       let response_ = null;
       const id_Business = 2;
@@ -369,6 +399,7 @@ export default {
         .catch(error => {});
       return response_;
     },
+
 
     async updateUserBusinessAbout(context, payload) {
       let response_ = null;
@@ -467,90 +498,110 @@ export default {
         });
       return response_;
     },
-
-    getAlbumImages({ commit }, busineeId) {
-      return axios.get('business/album/show/' + busineeId).then(({ data }) => {
-        commit('setAlbumImages', data.data.media);
+    getAlbumImages({ commit }, { businessId, albumId }) {
+      return axios.get("business/album/show/" + businessId + '/' + albumId).then(({ data }) => {
+        commit("setAlbumImages", data.data);
         console.log(data);
       });
     },
 
     getImages({ commit }, busineeId) {
-      return axios.get('business/post/' + busineeId).then(({ data }) => {
-        commit('setImages', data.data);
+      return axios.get("business/post/media/" + busineeId).then(({ data }) => {
+        commit("setImages", data.data);
         console.log(data);
       });
     },
 
     getAlbums({ commit }, busineeId) {
-      return axios.get('business/album/index/' + busineeId).then(({ data }) => {
-        commit('setAlbums', data.data);
+      return axios.get("business/album/index/" + busineeId).then(({ data }) => {
+        commit("setAlbums", data.data);
         console.log(data);
       });
     },
 
     ownerPost({ commit }, busineeId) {
-      return axios.get('business/show/post/' + busineeId).then(({ data }) => {
-        commit('ownerPost', data.data);
+      return axios.get("business/show/post/" + busineeId).then(({ data }) => {
+        commit("ownerPost", data.data);
         console.log(data);
       });
     },
 
     ownerPostImages({ commit }, busineeId) {
-      return axios.get('business/show/images/' + busineeId).then(({ data }) => {
-        commit('ownerPostImages', data.data);
+      return axios.get("business/show/images/" + busineeId).then(({ data }) => {
+        commit("ownerPostImages", data.data);
         console.log(data);
       });
     },
 
     businessInfo({ commit }, busineeId) {
-      return axios.get('business/info/' + busineeId).then(({ data }) => {
-        commit('setBusinessInfo', data.data);
+      return axios.get("business/info/" + busineeId).then(({ data }) => {
+        commit("setBusinessInfo", data.data);
         console.log(data);
       });
     },
 
     CommunityBusiness({ commit }, businessId) {
-      return axios.get('business/community/business/' + businessId).then(({ data }) => {
-        commit('setCommunityBusiness', data.data);
-        console.log(data);
-      });
+      return axios
+        .get("business/community/business/" + businessId)
+        .then(({ data }) => {
+          commit("setCommunityBusiness", data.data);
+          console.log(data);
+        });
     },
 
+    async createAlbum({ commit }, { id, data }) {
+      const res = await axios.post("business/album/create/" + id, data);
+      commit("newAlbum", res.data);
+    },
     CommunityPeople({ commit }, businessId) {
-      return axios.get('business/community/people/' + businessId).then(({ data }) => {
-        commit('setCommunityPeople', data.data);
+      return axios
+        .get("business/community/people/" + businessId)
+        .then(({ data }) => {
+          commit("setCommunityPeople", data.data);
+          console.log(data);
+        });
+    },
+
+
+
+    updateAlbum({ commit }, payload) {
+      return axios.post(
+        "business/album/update/" + payload.url + "/" + payload.id,
+        {
+          name: payload.name,
+        }
+      ).then(({ data }) => {
+
+        commit("upAlbum", data.data);
         console.log(data);
       });
     },
 
-    businessCommunityTotal({ commit }, businessId) {
-      return axios.get('business/community/total/' + businessId).then(({ data }) => {
-        commit('setCommunityTotal', data.data);
-        console.log(data);
-      });
+    async deletedAlbum({ commit }, { businessID, albumID }) {
+      return await axios.delete(`business/album/${albumID}`);
     },
 
-    async createAlbum({ commit }, name) {
-      const res = await axios.post('business/album/create/' + this.url, {
-        name,
-      });
-      commit('newAlbum', res.data);
-    },
-
-    async updateAlbum({ commit }, edit_name, album_id) {
-      const res = await axios.post('business/album/update/' + this.url + '/' + album_id, {
-        edit_name,
-      });
-      commit('upAlbum', res.data);
+    async updatedAlbum({ commit }, { id, name }) {
+      return await axios.post(`business/album/update/${id}`, { name });
     },
 
     async deleteAlbum({ commit }, name, album_id) {
-      const res = await axios.post('business/album/edit/' + this.url + '/' + album_id, { name });
-      commit('delAlbum', res.data);
+      const res = await axios.post(
+        "business/album/edit/" + this.url + "/" + album_id,
+        { name }
+      );
     },
 
-    // temporal signin to get token for developement purpose
+
+    businessCommunityTotal({ commit }, businessId) {
+      return axios
+        .get("business/community/total/" + businessId)
+        .then(({ data }) => {
+          commit("setCommunityTotal", data.data);
+          console.log(data);
+        });
+    },
+
     async signIn() {
       axios
         .post('/user/login', {
@@ -597,7 +648,7 @@ export default {
         });
     },
 
-    // Add network to the database but doesn't work correctly for now
+
     async addNetwork({ commit }, newNetwork) {
       console.log(newNetwork);
       axios
@@ -614,10 +665,11 @@ export default {
         });
     },
     //delete network
-    async deleteNetwork() {},
+    async deleteNetwork() { },
+
     // Edit a network
     async editNetwork({ dispatch, commit }, editedNetwork) {
-      commit('setLoader', true);
+      commit("setLoader", true);
       axios
         .put(`network/${editedNetwork.id}`, editedNetwork, {
           headers: {
@@ -630,51 +682,6 @@ export default {
         .catch(err => {
           console.log('Something went wrong');
         });
-    },
-
-    // for images
-    async submitPost({ commit }, formData, headers) {
-      const res = await axios.post('business/store/media/' + this.url + '/' + this.album, formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      });
-      commit('setSubmitPost', res.data);
-    },
-
-    async setProfilePic({ commit }, image_id, name) {
-      const res = await axios.post('business/album/edit/' + this.url + '/' + self.album_id, {
-        name,
-      });
-      commit('setProfilePic', res.data);
-    },
-
-    async setCoverPic({ commit }, image_id, name) {
-      const res = await axios.post('business/make/coverpic/' + this.url + '/' + image_id, {
-        name,
-      });
-      commit('setCoverPic', res.data);
-    },
-
-    async deleteImage({ commit }, image_id, name) {
-      const res = await axios.post('business/delete/media/' + this.url + '/' + image_id, {
-        name,
-      });
-      commit('deleteImage', res.data);
-    },
-
-    async downloadPic({ commit }, image_id) {
-      const res = await axios.get('business/download/media/' + this.url + '/' + image_id);
-      commit('downloadPic', res.data);
-
-      console.log('Something went wrong !!');
-      let sucData = {
-        state: true,
-        succes: 'danger',
-        msg: 'Something went wrong !!',
-      };
-      commit('setLoader', false);
-      commit('setSuccess', sucData);
     },
 
     // Getting the notifications
@@ -789,6 +796,30 @@ export default {
       const res = await axios.get('/api/v1/community/people-follower');
 
       commit('ppleFollowers', res.data);
+    },
+
+    async submitPost({ commit }, payload) {
+      return axios.post(`business/store/media/${payload.businessID}/${payload.albumID}`, payload.data);
+    },
+
+    async setProfilePic({ commit }, { businessID, albumID }) {
+      return axios.post(`business/make/logopic/${businessID}/${albumID}`);
+    },
+
+    async setCoverPic({ commit }, { businessID, albumID }) {
+      return axios.post(`business/make/coverpic/${businessID}/${albumID}`);
+    },
+
+    async deleteImage({ commit }, id) {
+      return axios.delete(`business/picture/${id}`);
+    },
+
+    async downloadPic({ commit }, id) {
+      return axios({
+        url: `business/download/media/${id}`,
+        method: "get",
+        responseType: "blob"
+      });
     },
   },
 };

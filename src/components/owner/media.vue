@@ -93,6 +93,7 @@ export default {
 
     height: 150px !important;
     object-fit: cover;
+    width: 100%;
 }
 
 

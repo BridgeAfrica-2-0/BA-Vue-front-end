@@ -6,9 +6,10 @@
         <b-row class="center-content">
           <b-col cols="12">
             <b-tabs lazy content-class="mt-3 mobile-tab" fill pills v-model="currentTab">
+            <b-tabs lazy content-class="mt-3 mobile-tab" fill pills>
               <b-tab title="Home"><HomePage /></b-tab>
               <b-tab title="About"><About /></b-tab>
-              <b-tab title="Media"><Media /></b-tab>
+              <b-tab title="Media"><Media type="business" /></b-tab>
               <b-tab title="Market"><MarketPlace /></b-tab>
               <!--  <b-tab title="Networks"><Networks /></b-tab> -->
               <b-tab title="Community"><Followers /></b-tab>
@@ -28,7 +29,6 @@ import MarketPlace from './tabs/marketPlace';
 import Followers from './tabs/memberNetwork';
 //import Networks from "./tabs/networks";
 import HeadPageOwner from '@/components/businessOwner/headPageOwner';
-
 export default {
   name: 'Home',
   components: {
@@ -47,7 +47,6 @@ export default {
   },
   computed: {},
   methods: {},
-
   created() {
     this.currentTab =
       localStorage.getItem('ba-business-active-tab') !== null ? localStorage.getItem('ba-business-active-tab') : 0;
@@ -60,6 +59,7 @@ export default {
   },
 };
 </script>
+
 <style>
 @media only screen and (max-width: 768px) {
   .mobile-tab .nav-fill > .nav-link,

@@ -18,6 +18,7 @@ export default {
     workPlaces: [],
     educations: [],
     professions: [],
+    imagess: [],
     networks: [],
 
     profile_about: { "user": {}, "user_address": [], "user_education": [], "user_experience": [], "user_websites": [] },
@@ -156,6 +157,16 @@ export default {
 
     },
 
+
+
+    setImagess(state, data) {
+
+      state.imagess = data;
+
+    },
+
+
+
     setAlbumImages(state, data) {
       state.albumImages = data;
     },
@@ -281,6 +292,13 @@ export default {
       return num;
     },
 
+    getImages({ commit }, id) {
+      return axios.get("profile/user/media?id=" + id).then(({ data }) => {
+        commit("setImagess", data.data);
+        console.log(data);
+      });
+    },
+
     loadMoreUserBusiness({ commit }, url) {
 
       return axios.get(url)
@@ -288,6 +306,19 @@ export default {
 
           // console.log(data);
           return data;
+        });
+
+    },
+
+    loadMore({ commit }, url) {
+      console.log("hello you are loading now");
+      console.log(url);
+      return axios.get(url)
+        .then((data) => {
+          return data;
+        }).catch((err) => {
+          console.log("Something went wrong");
+          console.log({ err: err })
         });
 
     },
@@ -370,9 +401,9 @@ export default {
     profileNetwork({ commit }, id) {
 
       return axios
-        .get('profile/userBusiness?id=' + id)
+        .get('network?id=' + id)
         .then(({ data }) => {
-          commit('setProfileNetwork', data.data);
+          commit('setprofileNetwork', data.data);
           console.log(data);
         });
 
@@ -390,8 +421,8 @@ export default {
     },
 
 
-    ownerPost({ commit }) {
-      return axios.get("post").then(({ data }) => {
+    ownerPost({ commit }, id) {
+      return axios.get("post?id=" + id).then(({ data }) => {
         commit("ownerPost", data.data);
         console.log(data);
       });

@@ -410,7 +410,6 @@
               </ul>
             </div>
           </div>
-
           -->
         </div>
       </div>
@@ -462,20 +461,16 @@ export default {
         console.log("Load User birth Date end ++++++", this.basicInfo);
       });
   },
-
   computed: {
     birthDate() {
       let dob = this.info.user.dob;
-
       let check = moment(dob, "YYYY/MM/DD");
-
       var month = check.format("M");
       var day = check.format("D");
       var year = check.format("YYYY");
       var date = year +'-'+ month +'-'+ day;
       return { date: date };
     },
-
     info() {
       return this.$store.state.profile.profileIntro;
     },
@@ -488,7 +483,6 @@ export default {
       );
       this.phoneInput = null;
     },
-
     saveBirthDate() {
       console.log("this.birthDate STARTTTTT");
       console.log(this.birthDate);
@@ -499,7 +493,6 @@ export default {
         .then((response) => {
           console.log("save new birth date user response (3) +++++", response);
           console.log("save new birth date user end +++++");
-
           this.$store
             .dispatch("profile/loadUserPostIntro", null)
             .then((response) => {
@@ -519,7 +512,6 @@ export default {
           this.$refs["model-6"].hide();
         });
     },
-
     saveGender() {
       console.log("save new gender user start +++++");
       console.log(this.basicInfo.gender);
@@ -536,7 +528,6 @@ export default {
             .catch((error) => {
               console.log(error);
             });
-
           console.log("save new gender user response (3)", response);
         })
         .catch((error) => {
@@ -547,7 +538,6 @@ export default {
         })
         .finally(() => {
           console.log("finally save new gender user ");
-
           this.$refs["modal-7"].hide();
         });
     },
@@ -567,7 +557,6 @@ export default {
         })
         .finally(() => {
           console.log("finally save new mobilePhones user ++++++ ");
-
           this.$refs["phonemodal"].hide();
         });
     },
@@ -619,11 +608,9 @@ export default {
             .catch((error) => {
               console.log(error);
             });
-
           this.$refs["hometownModal"].hide();
         });
     },
-
     saveWebsite() {
       this.$store
         .dispatch("profile/updateUserBasicInfosWebsites", {
@@ -645,15 +632,12 @@ export default {
             .catch((error) => {
               console.log(error);
             });
-
           this.$refs["websiteModal"].hide();
         });
     },
-
     deleteWebsite(website) {
       console.log("save new websites user start +++++");
       console.log(website);
-
       this.$store
         .dispatch("profile/deleteUserBasicInfosWebsites", {
           id: website.id,
@@ -670,10 +654,8 @@ export default {
           this.$refs["websiteEModal"].hide();
         });
     },
-
     saveEWebsite() {
       console.log("save new websites user start +++++");
-
       this.$store
         .dispatch("profile/updateUserBasicInfosEWebsites", {
           websites: this.websiteInput,
@@ -692,7 +674,6 @@ export default {
           this.$refs["websiteEModal"].hide();
         });
     },
-
     saveSocialLink() {
       console.log("save new sociallinks  user start +++++");
       if (this.basicInfo.socialLinks.includes(this.sociallinkInput)) {
@@ -734,7 +715,6 @@ export default {
           this.$refs["sociallinkModal"].hide();
         });
     },
-
     deleteElement(type, value) {
       switch (type) {
         case "website":
@@ -743,7 +723,6 @@ export default {
               return website !== value;
             }
           );
-
           break;
         case "socialLink":
           this.basicInfo.socialLinks = this.basicInfo.socialLinks.filter(
@@ -751,7 +730,6 @@ export default {
               return socialLink !== value;
             }
           );
-
           break;
         default:
           console.log("No Correspondance");

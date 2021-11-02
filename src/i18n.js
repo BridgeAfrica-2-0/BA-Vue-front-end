@@ -32,3 +32,4 @@ export default new VueI18n({
  // messages: loadLocaleMessages()
   messages
 });
+

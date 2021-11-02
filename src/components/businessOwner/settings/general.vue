@@ -6,7 +6,7 @@
       <b-container>
         <b-form-group
           label-cols-lg="3"
-          label="$t('businessowner.Business Visibility')"
+          :label="$t('businessowner.Business_Visibility')"
           label-size="md"
           label-class="font-weight-bold pt-0 username"
           class="mb-0 text"
@@ -26,7 +26,7 @@
       <b-container>
         <b-form-group
           label-cols-lg="3"
-          label="$t('businessowner.Posting_Permissions')"
+          :label="$t('businessowner.Posting_Permissions')"
           label-size="md"
           label-class="font-weight-bold pt-0 username"
           class="mb-0 text"
@@ -48,7 +48,7 @@
       <b-container>
         <b-form-group
           label-cols-lg="3"
-          label="$t('businessowner.Post_Approval')"
+          :label="$t('businessowner.Post_Approval')"
           label-size="md"
           label-class="font-weight-bold pt-0 username"
           class="mb-0"
@@ -71,7 +71,7 @@
       <b-container>
         <b-form-group
           label-cols-lg="3"
-          label="$t('businessowner.Keyword_Alerts')"
+          :label="$t('businessowner.Keyword_Alerts')"
           label-size="md"
           label-class="font-weight-bold pt-0 username"
           class="mb-0 text"
@@ -79,7 +79,7 @@
           <b-form-textarea
             id="textarea"
           
-            placeholder="$t('businessowner.Enter_something')..."
+            :placeholder="$t('businessowner.Enter_something')"
             rows="3"
             max-rows="6"
           ></b-form-textarea>
@@ -92,7 +92,7 @@
       <b-container>
         <b-form-group
           label-cols-lg="3"
-          label="$t('businessowner.Marketplace')"
+          :label="$t('businessowner.Marketplace')"
           label-size="md"
           label-class="font-weight-bold pt-0 username"
           class="mb-0"

@@ -12,7 +12,7 @@
             <b-container>
               <b-form-group
                 label-cols-lg="3"
-                label="$t('businessowner.Country')"
+                :label="$t('businessowner.Country')"
                 label-size="md"
                 label-class="font-weight-bold pt-0 username"
                 class="mb-0"

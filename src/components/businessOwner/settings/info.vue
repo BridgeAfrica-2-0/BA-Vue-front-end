@@ -9,7 +9,7 @@
             <b-container>
               <b-form-group
                 label-cols-lg="3"
-                label="$t('businessowner.Business_Name')"
+                :label="$t('businessowner.Business_Name')"
                 label-size="md"
                 label-class="font-weight-bold pt-0 username"
                 class="mb-0"
@@ -23,7 +23,7 @@
             <b-container>
               <b-form-group
                 label-cols-lg="3"
-                label="$t('businessowner.Category')"
+                :label="$t('businessowner.Category')"
                 label-size="md"
                 label-class="font-weight-bold pt-0 username"
                 class="mb-0"
@@ -44,7 +44,7 @@
             <b-container>
               <b-form-group
                 label-cols-lg="3"
-                label="$t('businessowner.Search_Keywords')"
+                :label="$t('businessowner.Search_Keywords')"
                 label-size="md"
                 label-class="font-weight-bold pt-0 username"
                 class="mb-0"
@@ -52,7 +52,7 @@
                 <b-form-textarea
                   id="textarea"
                   v-model="text"
-                  placeholder="$t('businessowner.Enter_something')..."
+                  :placeholder="$t('businessowner.Enter_something')"
                   rows="3"
                   max-rows="6"
                 ></b-form-textarea>
@@ -64,7 +64,7 @@
             <b-container>
               <b-form-group
                 label-cols-lg="3"
-                label="$t('businessowner.Language')"
+                :label="$t('businessowner.Language')"
                 label-size="md"
                 label-class="font-weight-bold pt-0 username"
                 class="mb-0"
@@ -82,7 +82,7 @@
             <b-container>
               <b-form-group
                 label-cols-lg="3"
-                label="$t('businessowner.Time_zone')"
+                :label="$t('businessowner.Time_zone')"
                 label-size="md"
                 label-class="font-weight-bold pt-0 username"
                 class="mb-0"
@@ -100,7 +100,7 @@
             <b-container>
               <b-form-group
                 label-cols-lg="3"
-                label="$t('businessowner.About')"
+                :label="$t('businessowner.About')"
                 label-size="md"
                 label-class="font-weight-bold pt-0 username"
                 class="mb-0"
@@ -108,7 +108,7 @@
                 <b-form-textarea
                   id="textarea"
                   v-model="text"
-                  placeholder="$t('businessowner.Enter_something')..."
+                  :placeholder="$t('businessowner.Enter_something')"
                   rows="3"
                   max-rows="6"
                 ></b-form-textarea>
@@ -120,7 +120,7 @@
             <b-container>
               <b-form-group
                 label-cols-lg="3"
-                label="$t('businessowner.Phone_1')"
+                :label="$t('businessowner.Phone_1')"
                 label-size="md"
                 label-class="font-weight-bold pt-0 username"
                 class="mb-0"
@@ -147,7 +147,7 @@
             <b-container>
               <b-form-group
                 label-cols-lg="3"
-                label="$t('businessowner.Phone_2')"
+                :label="$t('businessowner.Phone_2')"
                 label-size="md"
                 label-class="font-weight-bold pt-0 username"
                 class="mb-0"
@@ -173,7 +173,7 @@
             <b-container>
               <b-form-group
                 label-cols-lg="3"
-                label="$t('businessowner.Website')"
+                :label="$t('businessowner.Website')"
                 label-size="md"
                 label-class="font-weight-bold pt-0 username"
                 class="mb-0"
@@ -190,7 +190,7 @@
             <b-container>
               <b-form-group
                 label-cols-lg="3"
-                label="$t('businessowner.Email')"
+                :label="$t('businessowner.Email')"
                 label-size="md"
                 label-class="font-weight-bold pt-0 username"
                 class="mb-0"
@@ -212,7 +212,7 @@
             <b-container>
               <b-form-group
                 label-cols-lg="3"
-                label="$t('businessowner.Country')"
+                :label="$t('businessowner.Country')"
                 label-size="md"
                 label-class="font-weight-bold pt-0 username"
                 class="mb-0"
@@ -230,7 +230,7 @@
             <b-container>
               <b-form-group
                 label-cols-lg="3"
-                label="$t('businessowner.City')"
+                :label="$t('businessowner.City')"
                 label-size="md"
                 label-class="font-weight-bold pt-0 username"
                 class="mb-0"
@@ -244,7 +244,7 @@
             <b-container>
               <b-form-group
                 label-cols-lg="3"
-                label="$t('businessowner.Neighbourhood')"
+                :label="$t('businessowner.Neighbourhood')"
                 label-size="md"
                 label-class="font-weight-bold pt-0 username"
                 class="mb-0"
@@ -258,7 +258,7 @@
             <b-container>
               <b-form-group
                 label-cols-lg="3"
-                label="$t('businessowner.Three_Location_Description')"
+                :label="$t('businessowner.Three_Location_Description')"
                 label-size="md"
                 label-class="font-weight-bold pt-0 username"
                 class="mb-0"
@@ -272,7 +272,7 @@
             <b-container>
               <b-form-group
                 label-cols-lg="3"
-                label="$t('businessowner.Address')"
+                :label="$t('businessowner.Address')"
                 label-size="md"
                 label-class="font-weight-bold pt-0 username"
                 class="mb-0"
@@ -316,7 +316,7 @@
             <b-container>
               <b-form-group
                 label-cols-lg="3"
-                label="$t('businessowner.Business_Hours')"
+                :label="$t('businessowner.Business_Hours')"
                 label-size="md"
                 label-class="font-weight-bold pt-0 username"
                 class="mb-0"
@@ -417,7 +417,7 @@
             <b-container>
               <b-form-group
                 label-cols-lg="3"
-                label="$t('businessowner.Post_Aproval')"
+                :label="$t('businessowner.Post_Aproval')"
                 label-size="md"
                 label-class="font-weight-bold pt-0 username"
                 class="mb-0 text"
@@ -440,7 +440,7 @@
             <b-container>
               <b-form-group
                 label-cols-lg="3"
-                label="$t('businessowner.Keyword_Alerts')"
+                :label="$t('businessowner.Keyword_Alerts')"
                 label-size="md"
                 label-class="font-weight-bold pt-0 username"
                 class="mb-0"
@@ -448,7 +448,7 @@
                 <b-form-textarea
                   id="textarea"
                
-                  placeholder="$t('businessowner.Enter_something')..."
+                  :placeholder="$t('businessowner.Enter_something')"
                   rows="3"
                   max-rows="6"
                 ></b-form-textarea>
@@ -460,7 +460,7 @@
             <b-container>
               <b-form-group
                 label-cols-lg="3"
-                label="$t('businessowner.Marketplace')"
+                :label="$t('businessowner.Marketplace')"
                 label-size="md"
                 label-class="font-weight-bold pt-0 username"
                 class="mb-0"

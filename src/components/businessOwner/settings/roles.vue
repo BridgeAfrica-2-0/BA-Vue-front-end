@@ -7,7 +7,7 @@
         <b-col cols="5">
           <b-form-group
             s-cols-lg="3"
-            label="$t('businessowner.User')"
+            :label="$t('businessowner.User')"
             label-size="md"
             label-class="font-weight-bold pt-0"
             class="mb-0"
@@ -22,7 +22,7 @@
         <b-col>
           <b-form-group
             label-cols-lg="3"
-            label="$t('businessowner.Role')"
+            :label="$t('businessowner.Role')"
             label-size="md"
             label-class="font-weight-bold pt-0"
             class="mb-0"

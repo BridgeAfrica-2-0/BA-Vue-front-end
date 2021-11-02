@@ -1,4 +1,6 @@
 {
+    "english": "English",
+    "french": "French",
     "Blocked_users_can_no_longer_see_things_you_post_on_your_business":"Blocked users can no longer see things you post on your business",
     "invite_your_business_to_networks":"invite you business to networks",
     "start_a_conversation":"strat a conversation",
@@ -12,8 +14,8 @@
     "Save_Changes":"Save Changes",
     "Post_Approval":"Post Approval",
     "Posting_Permissions":"Posting Permissions",
-    "Business_Visibility":"Business_Visibility",
-    "Business_Name":"Business_Name",
+    "Business_Visibility":"Business Visibility",
+    "Business_Name":"Business Name",
     "About":"About",
     "select_option":"select option",
     "Website":"Website",
@@ -67,7 +69,7 @@
     "Delete":"Delete",
     "Edit":"Edit",
     "Role":"Role",
-    "Account_Type":" Account_Type",
+    "Account_Type":" Account Type",
     "change":"change",
     "Delete_Account":"Delete Account",
     "Not_Available":"Not Available",
@@ -107,7 +109,7 @@
     "You_can_get_access_to_features_like_mapping_your_domain":"You can get access to features like mapping your domain",
     "premium_template":"premium template",
     "premium_support_and_much_more":"premium support and much more",
-    "Simply_upgrade_your_plan":"Simply_upgrade_your_plan",
+    "Simply_upgrade_your_plan":"Simply upgrade your plan",
     "You_are_currently_subscribed_to_free_plan":"You are currently subscribed to free plan",
     "Add_Company_logo":"Add Company logo",
     "Choose_Another_Template":"Choose Another Template",
@@ -115,7 +117,7 @@
     "Selected_Template":"Selected Template",
     "Launch":"Launch",
     "Select_a_template":"Select a template",
-    "Create_personalised_website_for_your_business":"Create_personalised_website_for_your_business",
+    "Create_personalised_website_for_your_business":"Create personalised website for your business",
     "Start_with_a_template_and_make_it_your_own":"Start with a template and make it your own",
     "with_easy_drag_and_drop_&_1000s_of_design_features":"with easy drag and drop & 1000s of design features",
     "Select a template":"Select a template",
@@ -128,5 +130,6 @@
     "Business":"Business",
     "Shuffle":"Shuffle",
     "All":"All",
+    "Show":"Show"
 
 }

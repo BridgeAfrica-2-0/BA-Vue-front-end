@@ -3,8 +3,14 @@
     <div class="container">
       <b-row>
         <b-col>
+
           <div class="b-bottomn f-left">
-            <input @click="selectall" type="checkbox" />
+
+            <input
+              class="m-left-top"
+              type="checkbox"
+              @click="selectall($event)"
+            />
             Select All
           </div>
         </b-col>
@@ -19,6 +25,7 @@
             >
             <b-button
               @click="deleteAll(selected)"
+              v-if="testing > 0"
               variant="primary"
               class="a-button-l duration ml-1"
             >
@@ -30,38 +37,41 @@
       <br />
 
       <b-row>
-        <b-col cols="12" class="mr-3" v-for="i in 6" :key="i">
+        <b-col
+          cols="12"
+          class="mr-3"
+          v-for="post in getNotificationsStore"
+          :key="post.id"
+        >
           <p class="">
             <span style="display:inline-flex">
-              <b-form-checkbox
-                id="checkbox-1"
-                v-model="status"
-                name="checkbox-1"
-                value="accepted"
+
+              <input
                 class="m-left-top"
-                unchecked-value="not_accepted"
-              >
-              </b-form-checkbox>
+
+                type="checkbox"
+                :value="post.id"
+                :id="post.id"
+                :checked="post.checked"
+
+                @click="check(post, $event)"
+
+              />
               <b-avatar
                 class="d-inline-block profile-pic"
                 variant="primary"
-                src="https://business.bridgeafrica.info/assets/img/team/3.png"
+                :src="post.image"
               ></b-avatar>
               <h6 class="m-0  d-inline-block ml-2 username">
-                Mapoure Agrobusiness
-                <p class="duration">1hr</p>
+                {{ post.reference_type }}
+                <p class="duration">{{ post.created_at }}</p>
               </h6>
             </span>
             <span class="float-right mt-1"> </span>
           </p>
 
           <p class="text">
-            Lorem Ipsum is this is just a dummy text to post simply dummy text
-            of the printing and typesetting industry. Lorem Ipsum has been the
-            industry's standard dummy text ever since the 1500s, Lorem Ipsum is
-            simply dummy text of the printing and typesetting industry. Lorem
-            Ipsum has been the industry's standard dummy text ever since the
-            1500s,
+            {{ post.notification_text }}
           </p>
         </b-col>
 
@@ -71,12 +81,18 @@
             variant="primary"
           ></b-spinner>
         </b-col>
-        <b-col v-if="!getNotificationsStore && !loader" class="load">
-          <p>No notifications to show !!</p>
-
-          <hr width="100%" />
+        <b-col
+          v-if="!getNotificationsStore && !loader"
+          class="load text-center"
+        >
+          <b-row class="text-center">
+            <p>No notifications to show !!</p>
+          </b-row>
         </b-col>
+        <hr width="100%" />
       </b-row>
+
+      
     </div>
   </div>
 </template>
@@ -86,7 +102,6 @@ import { mapActions, mapGetters } from "vuex";
 export default {
   name: "notification",
   data: () => ({
-    all: 24,
     selected: [],
   }),
   beforeMount() {
@@ -101,6 +116,7 @@ export default {
     },
   },
   methods: {
+    // getting getters from the store
     ...mapGetters({
       sendNotifications: "businessOwner/sendNotifications",
       getLoader: "businessOwner/getLoader",
@@ -132,23 +148,30 @@ export default {
     },
 
     // select all the notifications
-    selectall() {
-      this.getNotificationsStore.forEach((element) => {
-        this.selected.push(element);
-      });
-    },
-    select(notification, index) {
-      if (this.selected[index]) {
-        this.selected.splice(index, 1);
-        return;
+    selectall(e) {
+      if (e.target.checked) {
+        console.log("selected");
+        this.getNotificationsStore.forEach((element) => {
+          this.selected.push(element);
+        });
       }
-      this.selected.push(notification);
+    },
+
+    check(value, e) {
+      if (e.target.checked) {
+        this.selected.push(value);
+        console.log("selected");
+      }
     },
   },
 };
 </script>
 
 <style scoped>
+.my-checkbox {
+  margin-right: 10px;
+}
+
 .load {
   display: flex;
   justify-content: center;
@@ -165,9 +188,7 @@ export default {
   margin-top: 20px;
   margin-bottom: 30px;
   padding-bottom: 10px;
-
-  border-bottom: 0.5px solid;
-  border-color: gray;
+  margin-left: -15px;
 }
 
 .m-left {

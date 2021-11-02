@@ -52,6 +52,7 @@ export default {
     About,
     Media,
     Networks,
+   
   },
   data() {
     return {
@@ -81,11 +82,10 @@ export default {
     },
   },
   computed: {},
-
-  created() {
-    this.tabIndex = this.tabs.findIndex((tab) => tab === this.$route.hash);
-
-    this.$store
+   created() {
+      this.tabIndex = this.tabs.findIndex(tab => tab === this.$route.hash);
+      
+      this.$store
       .dispatch("profile/loadUserPostIntro", null)
       .then((response) => {
         console.log(response);
@@ -94,7 +94,8 @@ export default {
         console.log(error);
       });
   },
-  mounted() {
+  mounted(){
+
     this.$store
       .dispatch("profile/Tcommunity", null)
       .then((response) => {})
@@ -130,14 +131,14 @@ export default {
         console.log({ error: error });
       });
 
-    this.$store
+      this.$store
       .dispatch("profile/NcommunityFollower", null)
       .then((response) => {})
       .catch((error) => {
         console.log({ error: error });
       });
 
-    this.$store
+      this.$store
       .dispatch("profile/NcommunityFollowing", null)
       .then((response) => {})
       .catch((error) => {

@@ -2,7 +2,6 @@
   <div>
     <FlashMessage />
 
-    {{ picturess }}
     <div class="row">
       <div class="container-fluid">
         <b-modal

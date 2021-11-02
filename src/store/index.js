@@ -19,9 +19,8 @@ import { search } from "./search";
 import { social } from "./social";
 
 Vue.use(Vuex);
-//axios.defaults.baseURL = process.env.VUE_APP_API_URL;
 
-axios.defaults.baseURL = "https://467d-154-72-167-44.ngrok.io/api/v1/";
+axios.defaults.baseURL = process.env.VUE_APP_API_URL; 
 
 export default new Vuex.Store({
   modules: {
@@ -32,13 +31,13 @@ export default new Vuex.Store({
     businessOwner,
     dashboard,
     hotbusiness,
-    businessFollowers,
     profile,
     follower,
     search,
     market,
     social,
     networkProfile,
-    UserProfileOwner
+    UserProfileOwner,
+    businessFollowers
   },
 });

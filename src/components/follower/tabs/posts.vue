@@ -17,7 +17,7 @@
 <script>
 import Intro from "../../intro";
 import Followers from "../sidebarcommunity";
-import Media from "../../media";
+import Media from "../media";
 import Post from "./owner_post";
 export default {
   name: "posts",

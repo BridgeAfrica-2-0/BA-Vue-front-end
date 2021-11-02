@@ -244,7 +244,7 @@ export default {
     },
 
 
-
+   
 
     //set media data
 
@@ -260,6 +260,7 @@ export default {
 
 
     setProfileNetwork(state, data) {
+      console.log("commiting this issdshd");
       state.profileNetwork = data;
     },
 
@@ -291,6 +292,8 @@ export default {
     },
 
     ownerPost(state, data) {
+
+      
       state.ownerPost = data;
     },
 
@@ -381,9 +384,31 @@ export default {
 
   actions: {
 
+    deleteCover({commit}){
 
-    Tcommunity({ commit }) {
+      return axios
+      .delete('user/cover')
+      .then(({ data }) => {
+        console.log(data);
+      });
 
+    },
+
+
+    deleteBusiness({commit}, url){
+
+      return axios
+      .delete(url)
+      .then(({ data }) => {
+        console.log(data);
+      });
+
+    },
+  
+
+  
+    Tcommunity({commit}){
+     
       return axios
         .get('profile/total/community')
         .then(({ data }) => {
@@ -413,9 +438,72 @@ export default {
           return data;
         });
 
-    },
+      },
 
-    NcommunityFollower({ commit }) {
+   createContact({ commit },payload){
+       
+        console.log(payload)
+        return  axios.post("user/contact-create", {phone:payload.phone}, {
+         
+        })
+        .then((res) => {
+          console.log(res.data);
+        })
+        .catch((err) => {
+          console.log("Something went wrong");
+          console.log({err:err})
+        });
+ 
+
+   },
+
+
+
+
+
+
+
+
+
+updateContact({ commit },payload){
+       
+  console.log(payload)
+  return  axios.post("user/contact-update/"+payload.id, {phone:payload.phone}, {
+   
+  })
+  .then((res) => {
+    console.log(res.data);
+  })
+  .catch((err) => {
+    console.log("Something went wrong");
+    console.log({err:err})
+  });
+
+
+},
+
+
+deleteContact({ commit },payload){
+       
+  console.log(payload)
+  return  axios.post("user/contact-delete/"+payload.id,{
+   
+  })
+  .then((res) => {
+    console.log(res.data);
+  })
+  .catch((err) => {
+    console.log("Something went wrong");
+    console.log({err:err})
+  });
+
+
+},
+
+
+
+
+    NcommunityFollower({ commit }){
       return axios
         .get('profile/network/follower')
         .then(({ data }) => {
@@ -799,12 +887,7 @@ export default {
       return response_;
     },
     async updateUserBasicInfosBirthDate(context, payload) {
-
-      let date = payload.dateOfBirth.year + "-" + payload.dateOfBirth.month + "-" + payload.dateOfBirth.day;
-      console.log("converting the date in to momonet ");
-      console.log(date);
-
-
+      let date = payload.dateOfBirth.date ;
       let response_ = null;
       await axios(
 
@@ -1010,19 +1093,10 @@ export default {
       console.log(payload, "edit user website start +++++");
 
       let response_ = null;
-      await axios.post(
-
-        "/userIntro/storeWebLink" +
-        "?webUrl=" +
-        payload.websites,
-        {
-          method: "POST",
-          headers: {
-            Accept: "application/json",
-
-          }
-        }
-      )
+      let url = "/userIntro/storeWebLink";
+      let formData = new FormData();
+      formData.append('webUrl', payload.websites)
+      await axios.post(url, formData)
         .then(response => {
           console.log("edit user websites response (1) +++++++", response);
           if (response.status !== 200 && response.status !== 201) {
@@ -1055,19 +1129,7 @@ export default {
       console.log(payload, "edit user website start +++++");
 
       let response_ = null;
-      await axios.patch(
-
-        "/userIntro/storeWebLink/" + payload.id +
-        "?webUrl=" +
-        payload.websites,
-        {
-          method: "POST",
-          headers: {
-            Accept: "application/json",
-
-          }
-        }
-      )
+      await axios.delete("/userIntro/deleteWebLink/" +payload.id)
         .then(response => {
           console.log("edit user websites response (1) +++++++", response);
           if (response.status !== 200 && response.status !== 201) {
@@ -1092,19 +1154,10 @@ export default {
       console.log(payload, "edit user website start +++++");
 
       let response_ = null;
-      await axios.put(
-
-        "/userIntro/storeWebLink/" + payload.id +
-        "?webUrl=" +
-        payload.websites,
-        {
-          method: "POST",
-          headers: {
-            Accept: "application/json",
-
-          }
-        }
-      )
+      let url = "/userIntro/updateWebLink/"+payload.id
+      let formData = new FormData();
+      formData.append('webUrl', payload.websites);
+      await axios.post(url, formData)
         .then(response => {
           console.log("edit user websites response (1) +++++++", response);
           if (response.status !== 200 && response.status !== 201) {
@@ -1218,7 +1271,9 @@ export default {
             jobResponsibilities: payload.workPlace.job_responsibilities,
             currentlyWorking: payload.workPlace === true ? 1 : 0,
             startDate: payload.workPlace.startDate,
-            endDate: payload.workPlace.endDate,
+            // endDate: null,
+            // endDate: payload.workPlace.endDate,
+            endDate: payload.workPlace === true ? null : payload.workPlace.endDate ,
           }
         };
       } else if (payload.method === "DELETE") {

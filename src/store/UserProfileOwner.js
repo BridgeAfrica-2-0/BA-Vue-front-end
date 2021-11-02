@@ -79,21 +79,31 @@ export default {
     setSubmitPost(state, payload) {
       state.images = payload;
     },
+
     setProfilePic(state, payload) {
       state.images = payload;
     },
+
     setCoverPic(state, payload) {
       state.images = payload;
     },
+
     deleteImage(state, payload) {
       state.images = payload;
     },
+
     downloadPic(state, payload) {
       state.images = payload;
     },
 
+
     updateAlbum(state, payload) {
-      const newState = state.albums.map(album => (album.id == payload.id) ? Object.assign(album, { name: payload.name }) : payload)
+      const newState = state.albums.map(album => (album.id == payload.id) ? Object.assign(album, { name: payload.name }) : album)
+      state.albums = newState
+    },
+
+    updateAlbumItem(state, payload) {
+      const newState = state.albums.map(album => (album.id == payload.id) ? Object.assign(album, { items: ('remove' == payload.action) ? parseInt(album.items) - 1 : parseInt(album.items) + 1 }) : album)
       state.albums = newState
     },
 
@@ -113,6 +123,7 @@ export default {
       const res = await axios.get("profile/post/media/");
       commit("ownerPostImages", res.data);
     },
+
 
     async getAlbumImages({ commit }, id) {
       const res = await axios.get(`profile/album/pictures/${id}`);
@@ -145,19 +156,19 @@ export default {
     },
 
     async submitPost({ commit }, payload) {
-      const res = await axios.post(`profile/upload/${payload.id}`, payload.data);
+      return axios.post(`profile/upload/${payload.albumID}`, payload.data);
     },
 
     async setProfilePic({ commit }, id) {
-      const res = await axios.post(`profile/makeProfile/picture/${id}`);
+      return axios.post(`profile/makeProfile/picture/${id}`);
     },
 
     async setCoverPic({ commit }, id) {
-      const res = await axios.post(`profile/makeCover/picture/${id}`);
+      return axios.post(`profile/makeCover/picture/${id}`);
     },
 
     async deleteImage({ commit }, id) {
-      const res = await axios.delete(`profile/image/${id}`);
+      return axios.delete(`profile/image/${id}`);
     },
 
     async downloadPic({ commit }, id) {

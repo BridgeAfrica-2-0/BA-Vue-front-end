@@ -99,24 +99,16 @@
 					<b-form-input
 						v-model="newProduct.price"
 						class="mt-1"
+						type="number"
 						id="price"
 					></b-form-input>
 				</b-form-group>
-				<!-- 
-				<b-form-checkbox
-					value="1"
-					v-model="newProduct.on_discount"
-					unchecked-value="0"
-				>
-					<b-form-input class="mt-1" id="price"></b-form-input>
-				</b-form-checkbox> -->
-
 				<b-form-checkbox
 					id="checkbox-1"
 					v-model="newProduct.on_discount"
 					name="checkbox-1"
-					value="accepted"
-					unchecked-value="not_accepted"
+					value="1"
+					unchecked-value="0"
 				>
 					This Product Is On Discount
 				</b-form-checkbox>
@@ -164,8 +156,7 @@
 						placeholder="Search or add a tag"
 						label="name"
 						track-by="id"
-						:options="pcategories"
-						:multiple="true"
+						:options="BuCategories"
 						:taggable="true"
 						@tag="addTag"
 					></multi-select>
@@ -247,13 +238,18 @@
 				newProduct: {
 					name: "",
 					description: "",
-					picture: "",
+					picture: null,
 					price: "",
 					in_stock: "",
-					on_discount: null,
-					discount_price: "",
+					on_discount: false,
+					discount_price: 0,
 					condition: "",
 					is_service: null,
+					status: 1,
+					business_id: "",
+					categoryId: "",
+					subCategoryId: "",
+					filterId: "",
 				},
 				products: [],
 				val: "",
@@ -269,25 +265,22 @@
 				],
 			};
 		},
-
 		computed: {
-			pcategories() {
-				return this.$store.state.auth.categories;
+			BuCategories() {
+				return this.$store.state.market.categories;
 			},
 			scategories() {
 				return this.$store.state.auth.subcategories;
 			},
 			selectedcategories: function() {
-				let selectedUsers = [];
-
-				this.multiselecvalue.forEach((item) => {
-					if (item.id) {
-						selectedUsers.push(item.id);
-					} else {
-						selectedUsers.push(item.category_id);
-					}
-				});
-				return selectedUsers;
+				let selectedCatUsers = [];
+				if (this.multiselecvalue.id) {
+					// selectedUsers.push(item.id);
+					selectedCatUsers.push(this.multiselecvalue.id);
+				} else {
+					selectedCatUsers.push(this.multiselecvalue.category_id);
+				}
+				return selectedCatUsers;
 			},
 		},
 		methods: {
@@ -310,19 +303,19 @@
 				this.load = true;
 				let fd = new FormData();
 
+				//init data
+				this.newProduct.business_id = this.$route.params.id;
+				this.newProduct.categoryId = this.multiselecvalue.id;
+				this.newProduct.subCategoryId = this.filterselectvalue
+					.map((el) => el.subcategory_id)
+					.join();
+				this.newProduct.filterId = this.select_filterss.join();
+
+				//transform product data in form data
 				for (const key in this.newProduct) {
 					fd.append(key, this.newProduct[key]);
 				}
-				// fd.append("name", this.newProduct.name);
-				// fd.append("description", this.newProduct.description);
-				// fd.append("picture", this.newProduct.picture);
-				// fd.append("price", this.newProduct.price);
-				// fd.append("in_stock", this.newProduct.in_stock);
-				// fd.append("on_discount", this.newProduct.on_discount);
-				// fd.append("discount_price", this.newProduct.discount_price);
-				// fd.append("condition", this.newProduct.condition);
-				// fd.append("is_service", this.newProduct.is_service);
-
+				console.log("NEW PRODUCT", this.newProduct);
 				axios
 					.post("market", fd)
 					.then((res) => {
@@ -345,34 +338,17 @@
 				document.querySelector("#image").click();
 			},
 			getImage(e) {
+				console.log(e.target.files[0]);
 				this.newProduct.picture = e.target.files[0];
 			},
 			createProduct() {
 				this.showModal = !this.showModal;
 			},
-			categories() {
-				this.$store
-					.dispatch("auth/categories")
-					.then(() => {
-						console.log("hey yeah");
-					})
-					.catch((err) => {
-						console.log({ err: err });
-					});
-			},
 			subcategories() {
+				//get subcategories
 				let formData2 = new FormData();
-
 				formData2.append("categoryId", this.selectedcategories);
-
-				this.$store
-					.dispatch("auth/subcategories", formData2)
-					.then(() => {
-						console.log("hey yeah");
-					})
-					.catch((err) => {
-						console.log({ err: err });
-					});
+				this.$store.dispatch("auth/subcategories", formData2);
 			},
 			addTag(newTag) {
 				const tag = {
@@ -393,16 +369,11 @@
 		},
 		beforeMount() {
 			this.loader = true;
-			// axios.defaults.headers.common["Authorization"] =
-			// 	"Bearer " + localStorage.getItem("access_token");
-			//get market place product
+			//get market place products
 			this.getProducts();
-			this.categories();
-
-			//get current business category
-			const businessId = this.$route.params;
-			console.log("business ID :", businessId);
-			this.$store.dispatch("market/getCategories", businessId);
+			//get categories for current business
+			const businessId = this.$route.params.id;
+			this.$store.dispatch("market/getBuCategories", businessId);
 		},
 	};
 </script>

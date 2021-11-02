@@ -43,6 +43,7 @@ import dashboard from "@/views/dashboard";
 import myorders from  "@/components/myOders.vue"
 
 import welcome from "@/views/welcome";
+import ordersdetail from "@/views/odersDetail"
 
 Vue.use(VueRouter);
 
@@ -53,6 +54,14 @@ const routes = [
   //   component: Test,
   // },
 
+  {
+    path: "/myorders/detail",
+    name: "ordersdetail",
+    component: ordersdetail,
+    // meta: {
+    //   auth: true,
+    // },
+  },
   {
     path: "/myorders",
     name: "orders",

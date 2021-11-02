@@ -152,8 +152,6 @@ export default {
   mounted() {
     this.url_data = this.$route.params.id;
 
-    console.log(this.url_data);
-
     this.businessInfo();
 
     this.CommunityBusiness();
@@ -162,7 +160,7 @@ export default {
 
     this.businessCommunityTotal();
     this.ownerPost();
-  }
+  },
 };
 </script>
 

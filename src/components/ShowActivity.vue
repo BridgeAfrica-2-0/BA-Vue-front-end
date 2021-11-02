@@ -1,7 +1,6 @@
 <template>
   <div class="accordion" role="tablist">
-    <FlashMessage style="zindex: 99999"/>
-    <b-card no-body class="mb-1" style="width:100%">
+    <b-card no-body class="mb-1" style="width: 100%">
       <b-card-header header-tag="header" class="p-1" role="tab">
         <p block v-b-toggle.accordion-1 variant="info">
           <b-icon :icon="openBusiness ? 'arrow-down' : 'arrow-up'"></b-icon>
@@ -13,24 +12,11 @@
           <div
             v-for="(item, index) in business"
             :key="index"
-            class="
-              d-inline-flex
-              flex-row
-              align-items-center
-              suggest-item
-              cursor-pointer
-              w-full
-            "
+            class="d-inline-flex flex-row align-items-center suggest-item cursor-pointer w-full"
             @click="activedBusiness(item)"
           >
             <div>
-              <img
-                :src="item.logo_path"
-                class="rounded-circle"
-                alt=""
-                width="30"
-                height="30"
-              />
+              <img :src="item.logo_path" class="rounded-circle" alt="" width="30" height="30" />
             </div>
             <div class="d-flex flex-column ml-3">
               <div>
@@ -55,23 +41,10 @@
             v-for="(item, index) in networks"
             :key="index"
             @click="activedNetwork(item)"
-            class="
-              d-inline-flex
-              flex-row
-              align-items-center
-              suggest-item
-              cursor-pointer
-              w-full
-            "
+            class="d-inline-flex flex-row align-items-center suggest-item cursor-pointer w-full"
           >
             <div>
-              <img
-                :src="item.network_image"
-                class="rounded-circle"
-                alt=""
-                width="30"
-                height="30"
-              />
+              <img :src="item.network_image" class="rounded-circle" alt="" width="30" height="30" />
             </div>
             <div class="d-flex flex-column ml-3">
               <div>
@@ -86,41 +59,39 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from "vuex";
+import { mapGetters, mapMutations } from 'vuex';
 export default {
   computed: {
     ...mapGetters({
-      networks: "social/FIND_USER_NETWORK",
-      business: "social/FIND_USER_BUSNESS",
-      hasLauchNetworkRequest: "social/INIT",
+      networks: 'social/FIND_USER_NETWORK',
+      business: 'social/FIND_USER_BUSNESS',
+      hasLauchNetworkRequest: 'social/INIT',
     }),
   },
 
   mounted() {
-    this.$root.$on("bv::collapse::state", (collapseId, isJustShown) => {
-     
-
-      if (collapseId == "accordion-2" && isJustShown) {
+    this.$root.$on('bv::collapse::state', (collapseId, isJustShown) => {
+      if (collapseId == 'accordion-2' && isJustShown) {
         this.openNetwork = true;
         this.openBusiness = false;
 
         return true;
       }
 
-      if (collapseId == "accordion-2" && !isJustShown) {
+      if (collapseId == 'accordion-2' && !isJustShown) {
         this.openNetwork = false;
         this.openBusiness = false;
 
         return true;
       }
 
-      if (collapseId == "accordion-1" && isJustShown) {
+      if (collapseId == 'accordion-1' && isJustShown) {
         this.openNetwork = false;
         this.openBusiness = true;
 
         return true;
       }
-      if (collapseId == "accordion-1" && !isJustShown) {
+      if (collapseId == 'accordion-1' && !isJustShown) {
         this.openNetwork = false;
         this.openBusiness = false;
 
@@ -132,40 +103,51 @@ export default {
   data: () => ({
     pending: false,
     openBusiness: false,
-    show:false,
+    show: false,
     openNetwork: false,
   }),
 
   methods: {
-    ...mapActions({
-      auth: "social/AUTH",
+    ...mapMutations({
+      auth: 'auth/profilConnected',
     }),
+
     process: async function (item, type) {
       let request =
-        "business" == type
-          ? await this.$repository.share.switch(item.business_id)
-          : {success:true};
+        'business' == type
+          ? await this.$repository.share.switch(item.business_id, 'business')
+          : await this.$repository.share.switch(item.network_id, 'network');
 
       if (request.success) {
         this.flashMessage.success({
           time: 5000,
           message:
-            "business" == type
-              ? "new" == request.data
-                ? `You are connected to ${item.business_name}`
-                : `You are already connected to ${item.business_name}`
-              : `You are connected to ${item.network_name}`,
+            'business' == type
+              ? 'new' == request.data
+                ? `You are now connected as ${item.business_name}`
+                : `You are already connected as ${item.business_name}`
+              : `You are connected as ${item.network_name}`,
         });
 
         this.auth(
-          "business" == type
-            ? { user: { name: item.business_name, profile_picture: item.logo_path,id: item.business_id } }
-            : { user: { name: item.name, profile_picture: item.network_image,id: item.network_id } }
+          'business' == type
+            ? {
+                name: item.business_name,
+                profile_picture: item.logo_path,
+                id: item.business_id,
+                user_type: 'business',
+              }
+            : {
+                name: item.network_name,
+                profile_picture: item.network_image,
+                id: item.network_id,
+                user_type: 'network',
+              },
         );
 
-        if ("network" == type) {
+        if ('network' == type && this.$router.name !== "network") {
           this.$router.push({
-            name: "networks",
+            name: 'networks',
             params: { id: item.network_id },
           });
         }
@@ -173,11 +155,11 @@ export default {
     },
 
     activedBusiness(item) {
-      if (!this.pending) this.process(item, "business");
+      if (!this.pending) this.process(item, 'business');
     },
 
     activedNetwork(item) {
-      if (!this.pending) this.process(item, "network");
+      if (!this.pending) this.process(item, 'network');
     },
   },
 };
@@ -201,6 +183,5 @@ export default {
 p {
   overflow-anchor: none;
   margin-bottom: 0;
-  
 }
 </style>

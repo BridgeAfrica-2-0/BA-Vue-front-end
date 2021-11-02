@@ -50,7 +50,7 @@
       </b-row>
 
       <b-row>
-        <b-col v-if="post.media.length > 0" cols="12" class="mt-2">
+        <b-col v-if="post.media.length" cols="12" class="mt-2">
           <div class="">
             <lightbox
               :cells="post.media.length"

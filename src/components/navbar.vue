@@ -78,6 +78,7 @@
                 data-original-title=""
                 title=""
               />
+                
 
               <input
                 id="search-location"
@@ -293,7 +294,17 @@
                   <div class="popover-body">
                     <p class="font-weight-bold">Notifications</p>
                     <hr class="h-divider" />
-                    <div class="d-inline-flex flex-row align-items-center suggest-item cursor-pointer">
+
+                    <div
+                      class="
+                        d-inline-flex
+                        flex-row
+                        align-items-center
+                        suggest-item
+                        cursor-pointer
+                      "
+                    >
+
                       <div>
                         <img src="@/assets/img/profile-pic.jpg" class="rounded-circle" alt="" width="30" height="30" />
                       </div>
@@ -303,7 +314,17 @@
                       </div>
                     </div>
                     <hr class="h-divider" />
-                    <div class="d-inline-flex flex-row align-items-center suggest-item cursor-pointer">
+
+                    <div
+                      class="
+                        d-inline-flex
+                        flex-row
+                        align-items-center
+                        suggest-item
+                        cursor-pointer
+                      "
+                    >
+
                       <div>
                         <img src="@/assets/img/profile-pic.jpg" class="rounded-circle" alt="" width="30" height="30" />
                       </div>
@@ -313,7 +334,17 @@
                       </div>
                     </div>
                     <hr class="h-divider" />
-                    <div class="d-inline-flex flex-row align-items-center suggest-item cursor-pointer">
+
+                    <div
+                      class="
+                        d-inline-flex
+                        flex-row
+                        align-items-center
+                        suggest-item
+                        cursor-pointer
+                      "
+                    >
+
                       <div>
                         <img src="@/assets/img/profile-pic.jpg" class="rounded-circle" alt="" width="30" height="30" />
                       </div>
@@ -323,7 +354,17 @@
                       </div>
                     </div>
                     <hr class="h-divider" />
-                    <div class="d-inline-flex flex-row align-items-center suggest-item cursor-pointer">
+
+                    <div
+                      class="
+                        d-inline-flex
+                        flex-row
+                        align-items-center
+                        suggest-item
+                        cursor-pointer
+                      "
+                    >
+
                       <div>
                         <img src="@/assets/img/profile-pic.jpg" class="rounded-circle" alt="" width="30" height="30" />
                       </div>
@@ -333,7 +374,17 @@
                       </div>
                     </div>
                     <hr class="h-divider" />
-                    <div class="d-inline-flex flex-row align-items-center suggest-item cursor-pointer">
+
+                    <div
+                      class="
+                        d-inline-flex
+                        flex-row
+                        align-items-center
+                        suggest-item
+                        cursor-pointer
+                      "
+                    >
+
                       <div>
                         <img src="@/assets/img/profile-pic.jpg" class="rounded-circle" alt="" width="30" height="30" />
                       </div>
@@ -380,9 +431,11 @@
 
                     <hr />
 
+
                     <router-link
                       to="/myorders/"
                       class="other-menu suggest-item cursor-pointer text-decoration-none text-dark"
+
                     >
                       <span class="mr-2"><fas-icon class="violet search" :icon="['fas', 'cart-arrow-down']" /></span>
                       My orders
@@ -406,7 +459,12 @@
                     <hr class="h-divider" />
                     <a
                       href="https://bridgeafrica.info/nav/owner-other-menu.html"
-                      class="other-menu suggest-item cursor-pointer text-decoration-none text-dark"
+                      class="
+                        other-menu
+                        suggest-item
+                        cursor-pointer
+                        text-decoration-none text-dark
+                      "
                     >
                       <span class="mr-2"><fas-icon class="violet search" :icon="['fas', 'sign-out-alt']" /></span>
                       Logout
@@ -445,6 +503,7 @@
 
             <hr class="mup" />
 
+
             <router-link to="/myorders/" class="other-menu suggest-item cursor-pointer text-decoration-none text-dark">
               <span class="mr-2"><fas-icon class="violet search" :icon="['fas', 'cart-arrow-down']" /></span>
               My orders
@@ -453,6 +512,7 @@
 
             <a href="/settings" class="other-menu suggest-item cursor-pointer text-decoration-none text-dark">
               <span class="mr-2"><fas-icon class="violet search" :icon="['fas', 'cogs']" /></span>
+
               Account Settings
             </a>
             <hr class="h-divider" />
@@ -468,7 +528,12 @@
             <hr class="h-divider" />
             <a
               href="https://bridgeafrica.info/nav/owner-other-menu.html"
-              class="other-menu suggest-item cursor-pointer text-decoration-none text-dark"
+              class="
+                other-menu
+                suggest-item
+                cursor-pointer
+                text-decoration-none text-dark
+              "
             >
               <span class="mr-2"><fas-icon class="violet search" :icon="['fas', 'sign-out-alt']" /></span>
               Logout
@@ -483,6 +548,7 @@
 </template>
 
 <script>
+
 import Button from '@/components/ButtonNavBarFind.vue';
 import Activity from '@/components/ShowActivity.vue';
 
@@ -493,16 +559,19 @@ export default {
   components: {
     Button,
     Activity,
+
   },
   props: {
     credentials: {
       type: Object,
       default: function () {
         return {
+
           keyword: '',
           placeholder: '',
         };
       },
+
     },
   },
 
@@ -540,6 +609,7 @@ export default {
       this.isActive = true;
     },
 
+
     getNetworks: async function () {
       let request = await this.$repository.share.getNetworks();
 
@@ -565,6 +635,7 @@ export default {
         console.log(error);
       }
     },
+
 
     togglenav() {
       if (this.shownav == false) {

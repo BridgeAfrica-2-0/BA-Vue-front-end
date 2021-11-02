@@ -2,11 +2,9 @@
   <div>
     <b-spinner v-if="prodLoader" variant="primary" label="Spinning"></b-spinner>
 
-    <b-alert v-if="products.data.length === 0" show variant="warning"
-      ><a href="#" class="alert-link">
-        No product available for that search!
-      </a></b-alert
-    >
+    <b-alert v-if="products.total == 0" show variant="warning"><a href="#" class="alert-link">
+      No product available for that search!
+      </a></b-alert>
 
     <div
       class="people-style shadow"
@@ -29,7 +27,7 @@
             <b-link class="text"> see more </b-link> <br />
 
             <span class="price">
-              <strong> {{ prod.price }} Fcfa </strong>
+              <strong> {{ prod.price }}  Fcfa </strong>
             </span>
           </p>
 
@@ -39,10 +37,10 @@
         </b-col>
       </b-row>
     </div>
-
     <!-- pagination -->
-    <b-pagination
-      v-if="products.next || products.previous"
+
+    <!-- <b-pagination
+    v-if="products.next"
       v-model="currentPage"
       :total-rows="total"
       :per-page="per_page"
@@ -50,9 +48,9 @@
       @change="changePage"
       align="center"
       :disabled="products.data.length > 0 ? false : true"
-    ></b-pagination>
+    ></b-pagination> -->
+
     <!-- End pagination -->
-    
     <b-modal hide-footer title="Edit product">
       <b-form>
         <b-row>
@@ -426,15 +424,13 @@ export default {
   },
   computed: {
     products() {
-      return this.$store.getters["marketSearch/getProducts"];
+      return this.$store.getters["allSearch/getProducts"];
     },
     prodLoader() {
-      return this.$store.getters["marketSearch/getLoader"];
+      return this.$store.getters["allSearch/getLoader"];
     },
   },
-  created() {
-    if (!this.products.length) this.getProducts();
-  },
+
 
   methods: {
     changePage(value) {
@@ -458,25 +454,6 @@ export default {
         });
     },
 
-    async getProducts() {
-      // this.prodLoader = true;
-      console.log("loader: ", this.prodLoader);
-
-      await this.$store
-        .dispatch("marketSearch/getProducts")
-        .then((res) => {
-          console.log("products list: ");
-          console.log(this.products);
-          // this.prodLoader = false;
-          this.total = this.products.total;
-        })
-        .catch((err) => {
-          // this.prodLoader = false;
-          console.log("loader: ", this.prodLoader);
-          console.log("products error: ");
-          console.error(err);
-        });
-    },
   },
 };
 </script>

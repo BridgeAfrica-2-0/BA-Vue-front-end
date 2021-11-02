@@ -2,7 +2,7 @@
   <div>
     <b-spinner v-if="loader" variant="primary" label="Spinning"></b-spinner>
 
-    <b-alert v-if="networks.data.length === 0" show variant="warning"
+    <b-alert v-if="networks.total == 0 || networks.data.length == 0" show variant="warning"
       ><a href="#" class="alert-link"> No Network available! </a>
     </b-alert>
 
@@ -83,7 +83,7 @@
     </div>
     <!-- pagination -->
 
-    <b-pagination
+    <!-- <b-pagination
       v-if="networks.next || networks.previous"
       v-model="currentPage"
       :total-rows="networks.total"
@@ -92,7 +92,7 @@
       @change="changePage"
       align="center"
       :disabled="networks.data.length > 0 ? false : true"
-    ></b-pagination>
+    ></b-pagination> -->
 
     <!-- End pagination -->
 
@@ -118,19 +118,11 @@ export default {
   },
   computed: {
     networks() {
-      return this.$store.getters["networkSearch/getNetworks"];
+      return this.$store.getters["allSearch/getNetworks"];
     },
     loader() {
-      return this.$store.getters["networkSearch/getLoader"];
+      return this.$store.getters["allSearch/getLoader"];
     },
-  },
-  created() {
-    // this.networkSearch()
-    if (this.networks.data.length == 0) {
-      console.log("[debug] network on created:", this.networks);
-
-      this.networkSearch();
-    }
   },
 
   methods: {
@@ -139,25 +131,9 @@ export default {
       this.$store.commit("networkSearch/setLoader", true);
       this.currentPage = value;
       console.log("[debug] page before:", value);
-      this.networkSearch();
+      // this.networkSearch();
     },
 
-    networkSearch() {
-      this.$store
-        .dispatch("networkSearch/SEARCH", {
-          country_id: 1,
-          page: this.currentPage,
-        })
-        .then((res) => {
-          this.total = this.networks.total;
-        })
-        .catch((err) => {
-          // this.prodLoader = false;
-          console.log("loader: ", this.prodLoader);
-          console.log("products error: ");
-          console.error(err);
-        });
-    },
   },
 };
 </script>

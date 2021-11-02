@@ -12,12 +12,10 @@
             class="pull-left"
             no-caret
           >
-            <template #button-content>
-              <b-icon-filter></b-icon-filter><span class="sr-only">Search</span>
-            </template>
+            <template #button-content> <b-icon-filter></b-icon-filter><span class="sr-only">Search</span> </template>
             <p class="font-weight-bolder px-3 m-0">Feedbacks Type</p>
 
-            <b-dropdown-item href="#"
+            <b-dropdown-item href="#" action="suggestions" @click="getSuggestions"
               >suggestion for improvement</b-dropdown-item
             >
           </b-dropdown>
@@ -26,7 +24,7 @@
     </b-row>
     <b-row>
       <b-col cols="12">
-        <div v-for="i in 4" :key="i" class="mb-4">
+        <div v-for="post in 4" :key="post" :loading="load" class="mb-4">
           <b-card class="mb-2">
             <b-card-text>
               <b-row class="px-md-3">
@@ -34,7 +32,7 @@
                   <b-avatar
                     class="d-inline-block"
                     variant="info"
-                    src="https://business.bridgeafrica.info/assets/img/team/3.png"
+                    :src="post.profileImage"
                     square
                     size="3.5rem"
                     rounded="xl"
@@ -42,25 +40,21 @@
                 </b-col>
                 <b-col cols="10" md="11" class="pt-2">
                   <h5 class="m-0 font-weight-bolder feedback-name">
-                    <b-link> Mapoure Agrobusiness </b-link>
+                    <b-link href="www.jackpot.com">
+                      {{ post.profileName }}
+                    </b-link>
                   </h5>
-                  <p>1h Ago</p>
+                  <p>{{ post.countDown }}</p>
                 </b-col>
               </b-row>
               <b-row>
                 <b-col cols="12" class="mt-2">
                   <p class="text-justify feedback-sent">
-                    Lorem Ipsum is simply dummy text of the printing and
-                    typesetting industry. Lorem Ipsum has been the industry's
-                    standard dummy text ever since the 1500s, Lorem Ipsum is
-                    simply dummy text of the printing and typesetting industry.
-                    Lorem Ipsum has been the industry's standard dummy text ever
-                    since the 1500s,
+                    {{ post.postContent }}
                     <br />
                     <br />
-                    Lorem Ipsum is simply dummy text of the printing and
-                    typesetting industry. Lorem Ipsum has been the industry's
-                    standard dummy text ever since the 1500s,
+
+                    {{ post.postContent }}
                   </p>
                 </b-col>
               </b-row>
@@ -73,18 +67,49 @@
 </template>
 
 <script>
+import axios from 'axios';
 export default {
-  name: "feedbackNetwork",
-  data() {
-    return {
-      selected: 1,
-      text: "",
-      options: [
-        { value: "1", text: "suggestion for improvement" },
-        { value: "2", text: "Progress to your program" },
-        { value: "3", text: "New Idea for PEA-JEUNES" },
-      ],
-    };
+  name: 'feedbackNetwork',
+  action: 'feedback',
+  data: () => ({
+    feedbackPosts: [],
+    Suggestions: [],
+    load: null,
+  }),
+  async beforeMount() {
+    if (this.action == 'feedbacks') {
+      await this.getFeedbacks();
+    }
+    if (this.action == 'suggestions') {
+      await this.getSuggestions();
+    }
+  },
+  methods: {
+    getFeedbacks() {
+      this.load = true;
+      axios
+        .get()
+        .then((res) => {
+          this.feedbackPosts = res.data.reverse();
+          this.load = false;
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+
+    getSuggestions() {
+      this.load = true;
+      axios
+        .get()
+        .then((res) => {
+          this.Suggestions = res.data.reverse();
+          this.load = false;
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
   },
 };
 </script>
@@ -114,5 +139,3 @@ export default {
   }
 }
 </style>
-
-

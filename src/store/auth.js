@@ -1,4 +1,5 @@
 import axios from "axios";
+import { state } from "./search/state";
 axios.defaults.baseURL = process.env.VUE_APP_API_URL;
 
 export default {
@@ -21,11 +22,13 @@ export default {
     municipality: [],
     locality: [],
     division: [],
+    profilConnected: null
   },
 
   mutations: {
     setUserData(state, userData) {
       state.user = userData;
+      state.profilConnected = {...userData.user, user_type:"user"}
 
       localStorage.setItem("user", JSON.stringify(userData));
       axios.defaults.headers.common.Authorization = `Bearer ${userData.accessToken}`;
@@ -93,6 +96,10 @@ export default {
       localStorage.removeItem("user");
       location.reload();
     },
+
+    profilConnected(state, payload) {
+      state.profilConnected = payload
+    }
   },
 
   actions: {
@@ -221,6 +228,8 @@ export default {
     getAuthToken(state) {
       return `Bearer ${state.user.accessToken}`
     },
+
+    profilConnected: (state) => state.profilConnected
 
   },
 };

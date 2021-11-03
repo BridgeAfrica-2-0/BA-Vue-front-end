@@ -37,25 +37,58 @@ export default {
     getmembers( {commit}, path ){
       console.log(path);
       return axios
-      .get(`network/${path}`)
+      .post(`network/${path}`)
       .then(({ data }) => {
           commit("setmembers", data.data);
         console.log(data);
       })
     },
-    getadmins( {commit}, path ){
-      console.log(path);
+    getMembers( data ){
+      console.log(data.path);
       return axios
-      .get(`network/${path}`)
+      .post('network/'+data.path, data.formData)
+      .then(({ data }) => {
+        console.log(data);
+        return data;
+      })
+    },
+
+    makeAdmin( data ){
+      console.log(data.path);
+      return axios
+      .post(`network/${data.path}`)
+      .then(({ data }) => {
+        console.log(data);
+        return data;
+      })
+    },
+
+    removeAsAdmin( data ){
+      console.log(data.path);
+      return axios
+      .put(`network/${data.path}`)
+      .then(({ data }) => {
+        console.log(data);
+        return data;
+      })
+    },
+ 
+    getadmins( {commit}, data){
+      console.log('getadmins: '+data.path);
+      console.log('keyword: '+data.keyword);
+      console.log(data.keyword);
+      return axios
+      .post(`network/${data.path}`, { "keyword": data.keyword})
       .then(({ data }) => {
           commit("setadmins", data.data);
         console.log(data);
       })
     },
-    getbusiness( {commit}, path ){
-      console.log(path);
+    getbusiness( {commit}, data ){
+        console.log('getbusiness: '+data.path);
+        console.log('keyword: '+data.keyword);
       return axios
-      .get(`network/${path}`)
+      .post(`network/${data.path}`, { "keyword": data.keyword})
       .then(({ data }) => {
           commit("setbusiness", data.data);
         console.log(data);

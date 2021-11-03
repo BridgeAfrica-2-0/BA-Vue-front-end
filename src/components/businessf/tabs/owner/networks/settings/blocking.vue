@@ -14,73 +14,57 @@
       class="bv-example-row"
     >
       <b-li-group>
-        <b-li v- class="d-flex align-items-center m-list">
-          <b-avatar
-            class="mr-3"
-            :text="blockuser.name.charAt([0])"
-            :src="blockuser.profile_picture"
-            size="4em"
-          ></b-avatar>
-          <span class="mr-auto">{{ blockuser.name }}</span>
-          <span class="" @click="UnblockBlockUser(blockuser)"
-            ><b-link href="#">Unblock</b-link></span
+        <b-li
+          v-for="blocked in getBlocked"
+          :key="blocked.id"
+          class="d-flex align-items-center m-list"
+        >
+          <b-avatar class="mr-3" size="4em">
+            <img :src="blocked.image" alt="" />
+          </b-avatar>
+          <span class="mr-auto">blocked.name</span>
+          <span class=""
+            ><b-link @click="unblock(getNetworks.id, blocked.id)"
+              >Unblock</b-link
+            ></span
           >
+          <hr width="100%" />
         </b-li>
-        <hr width="100%" />
+        <v-row>
+          <v-col>
+            <p class="text-center" v-if="getBlocked < 1">No Blocked Users</p>
+          </v-col>
+        </v-row>
       </b-li-group>
     </b-container>
   </b-container>
 </template>
 
 <script>
-import axios from "axios";
+import { mapGetters, mapActions } from "vuex";
 export default {
   name: "blocking",
-  data() {
-    return {
-      url: this.$route.params.id
-    };
-  },
   computed: {
-    blockusers() {
-      return this.$store.getters["NetworkSettings/getblockusers"];
-    }
-  },
-  mounted() {
-    this.blockUsers();
+    ...mapGetters({
+      getBlocked: "networkSetting/getBlocked",
+      getNetworks: "networkSetting/getNetworks",
+    }),
   },
   methods: {
-    blockUsers() {
-      this.$store
-        .dispatch("NetworkSettings/getblockusers", this.url)
-        .then(() => {
-          console.log("ohh year");
-        })
-        .catch(err => {
-          console.log({ err: err });
-        });
+    ...mapActions({
+      getBlockedUsers: "networkSetting/getBlockedUsers",
+      unblockUser: "networkSetting/unblockUser",
+      getNetworks: "networkSetting/getNetworks",
+    }),
+    unblock(networkId, userId) {
+      this.unblockUser(networkId, userId);
     },
-
-    UnblockBlockUser(blockuser) {
-      axios
-        .post("/network/update/unblocked-user/" + this.url, blockuser)
-        .then(response => {
-          console.log(response);
-          this.blockUsers();
-          this.flashMessage.show({
-            status: "success",
-            message: "User Unblocked"
-          });
-        })
-        .catch(err => {
-          console.log({ err: err });
-          this.flashMessage.show({
-            status: "error",
-            message: "Unable to Unblocked User"
-          });
-        });
-    }
-  }
+  },
+  beforeMount() {
+    this.getBlockedUsers();
+    this.getNetworks();
+    return this.getNetworks.id;
+  },
 };
 </script>
 

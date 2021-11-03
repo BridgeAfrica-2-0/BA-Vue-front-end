@@ -115,6 +115,7 @@ export default {
       if (this.reBounding && !this.touching) {
         return this.reBoundingDuration;
       }
+      else return 0
     },
     transitionTimingFunction() {
       return this.reBounding

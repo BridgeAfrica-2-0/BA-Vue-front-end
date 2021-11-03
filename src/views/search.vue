@@ -1,8 +1,17 @@
 <template>
   <div style="overflow-x: hidden; color: black">
-    <Nav :credentials.sync="navBarParams">
+    <!-- <Nav :credentials.sync="navBarParams">
       <template v-slot:button>
-        <Button @click.native="strategies" />
+        <Button @click.native="searchProducts" v-if="selectedId == 4" />
+        <Button @click.native="searchNetworks" v-if="selectedId == 3" />
+      </template>
+      
+    </Nav> -->
+    <Nav :credentials.sync="searchParams" id="top">
+      <template v-slot:button>
+        <Button @click.native="strategy['all']" v-if="selectedId == 0" />
+        <Button @click.native="strategy['network']" v-if="selectedId == 3" />
+        <Button @click.native="strategy['market']" v-if="selectedId == 4" />
       </template>
     </Nav>
 
@@ -375,10 +384,8 @@
               v-bind:Selectedcategory="Selectedcategory"
               v-bind:Selectedparentcategory="Selectedparentcategory"
             />
-
-            <PeopleFilter v-if="selectedId == 2" />
-            <PostFilter v-if="selectedId == 5" />
           </div>
+          
         </b-col>
 
         <b-col cols="12" md="8" lg="8" xl="6" ref="middleblock">
@@ -408,10 +415,10 @@
                 Businesses
               </h6>
 
-              <Business />
+              <MiniBusiness />
 
-              <span class="float-right mb-3">
-                <b-link> see more </b-link>
+              <span class="float-right mb-3" @click="selectedId = 1">
+                <b-link href="#top"> see more </b-link>
               </span>
               <br />
 
@@ -419,8 +426,11 @@
               <fas-icon class="icons" :icon="['fas', 'users']" size="lg" />
               <h6>People</h6>
 
-              <People />
-              <span class="float-right mb-3"> see more </span> <br />
+              <MiniPeople />
+              <span class="float-right mb-3" @click="selectedId = 2">
+                <b-link href="#top"> see more </b-link>
+              </span>
+              <br />
 
               <hr />
 
@@ -433,8 +443,11 @@
                 Network
               </h6>
 
-              <Network />
-              <span class="float-right mb-3"> see more </span> <br />
+              <MiniNetwork />
+              <span class="float-right mb-3" @click="selectedId = 3">
+                <b-link href="#top"> see more </b-link>
+              </span>
+              <br />
 
               <hr />
 
@@ -443,9 +456,12 @@
                 Market
               </h6>
 
-              <Market />
+              <MiniMarket />
 
-              <span class="float-right mb-3"> see more </span> <br />
+              <span class="float-right mb-3" @click="selectedId = 4">
+                <b-link href="#top"> see more </b-link>
+              </span>
+              <br />
 
               <hr />
 
@@ -454,9 +470,12 @@
                 Post
               </h6>
 
-              <Post />
+              <MiniPost />
 
-              <span class="float-right mb-3"> see more </span> <br />
+              <span class="float-right mb-3" @click="selectedId = 5">
+                <b-link href="#top"> see more </b-link>
+              </span>
+              <br />
 
               <hr />
             </div>
@@ -474,15 +493,10 @@
               </h6>
 
               <Business />
-
-              <Business />
-
-              <Business />
-
-              <Business />
             </div>
 
             <!-- filter out only people -->
+
 
             <div v-if="selectedId == '2'">
               <h6>
@@ -501,12 +515,16 @@
                 <fas-icon class="icons" :icon="['fas', 'users']" size="lg" />
                 People
               </h6>
+              
               <People
                 v-for="(people, index) in peoples"
                 :people="people"
                 :key="index"
               />
             </div>
+
+            <component :is="isComponent" :title="notFoundComponentTitle" />
+
 
             <!-- filter out just the network  -->
 
@@ -521,15 +539,9 @@
               </h6>
 
               <Network />
-
-              <Network />
-
-              <Network />
-
-              <Network />
             </div>
 
-            <!-- Filter out just the market place -->
+            <!-- Filter out just the market -->
 
             <div v-if="selectedId == '4'">
               <h6>
@@ -537,30 +549,32 @@
                 Market
               </h6>
 
-              <Market />
-            </div>
-
-            <!-- Filter out just the post  -->
-
-            <div v-if="selectedId == '5'">
-              <h6>
-                Sponsored Result
-                <fas-icon
-                  class="icons"
-                  :icon="['fas', 'exclamation-circle']"
-                  size="lg"
-                />
-              </h6>
-
               <div>
                 <Sponsor />
               </div>
-              <h6>
-                <fas-icon class="icons" :icon="['fab', 'readme']" size="lg" />
-                Post
-              </h6>
 
-              <Post />
+              <h6 class="mb-3">
+                <fas-icon class="icons" :icon="['fas', 'store']" size="lg" />
+                Market
+                <div class="float-right">
+                  <b-button
+                    size="sm"
+                    variant="outline-primary"
+                    @click="getProducts"
+                  >
+                    <b-spinner small v-if="prodLoader"></b-spinner>
+                    <span v-else>Load All market Products</span>
+                  </b-button>
+                </div>
+              </h6>
+              <b-alert
+                v-model="showDismissibleAlert"
+                variant="success"
+                dismissible
+              >
+                List of products up to date
+              </b-alert>
+              <Market class="mt-3" />
             </div>
           </div>
         </b-col>
@@ -573,19 +587,23 @@
 </template>
 
 <script>
+
 import _ from "lodash";
 
+
 import LyTab from "@/tab/src/index.vue";
-
 import Map from "@/components/search/map";
-
-import Button from "@/components/ButtonNavBarFind";
-
 import Business from "@/components/search/business";
 import People from "@/components/search/people";
 import Network from "@/components/search/network";
 import Post from "@/components/search/posts";
 import Market from "@/components/search/market";
+
+import MiniBusiness from "@/components/search/allSearchComps/allBusiness";
+import MiniPeople from "@/components/search/allSearchComps/allPeople";
+import MiniNetwork from "@/components/search/allSearchComps/allNetwork";
+import MiniPost from "@/components/search/allSearchComps/allPosts";
+import MiniMarket from "@/components/search/allSearchComps/allMarket";
 import Nav from "@/components/navbar";
 
 import Filters from "@/components/search/filters";
@@ -593,12 +611,13 @@ import Filters from "@/components/search/filters";
 import SubNav from "@/components/subnav";
 
 import Sponsor from "@/components/search/sponsoredBusiness";
+import Button from "@/components/ButtonNavBarFind";
 
-import { PeopleFilter, PostFilter } from "@/components/search";
+import { PostComponent, PeopleComponent } from "@/components/search";
 
 import { loader } from "@/mixins";
 
-import { mapGetters, mapActions } from "vuex";
+import { mapActions } from "vuex";
 
 export default {
   components: {
@@ -608,47 +627,79 @@ export default {
     SubNav,
     Filters,
     Map,
-    Business,
     Sponsor,
+
+    Business,
     People,
     Network,
     Post,
     Market,
+
+
+    MiniBusiness,
+    MiniPeople,
+    MiniNetwork,
+    MiniPost,
+    MiniMarket,
     PeopleFilter,
     PostFilter,
 
+
+    PostComponent,
+    PeopleComponent,
 
     // Footer,
   },
 
   mixins: [loader],
 
+
   computed: {
     ...mapGetters({
       peoples: "search/GET_RESULT",
     }),
+    products() {
+      return this.$store.state.market.products;
+    },
   },
 
   created() {
     this.strategy = {
-      2: () => this.onFindUser(),
+      users: () => this.onFindUser(),
+      all: () => this.getKeyword(),
+      market: () => this.searchProducts(),
+      network: () => this.searchNetworks(),
     };
-    this.strategyForPlaceHolder = {
-      2: () => "Find User",
-      0: () => "All",
-    };
+    this.getKeyword();
+    this.initialize();
 
-    this.changePlaceHolder();
   },
 
   data() {
     return {
       navBarParams: {
         keyword: "",
-        placeholder: "",
+        placeholder: "Find Pharmacy",
       },
+      strategy: null,
+      searchParams: {
+        keyword: "",
+        cat_id: "",
+        placeholder: "Find In All",
+      },
+
+
+      alert: false,
+      showDismissibleAlert: false,
+      prodLoader: false,
+
+      strategyForComponent: null,
+      notFoundComponentTitle: "",
+      isComponent: null,
       strategy: {},
       strategyForPlaceHolder: {},
+      strategyForNotFoundComponentTitle: {},
+
       selected: "all",
       selectedId: 0,
       Setcategoryr: "all",
@@ -661,6 +712,7 @@ export default {
       map: false,
       selectedfilter: "",
       showform: false,
+
       //selectcategories:[],
 
       categories_filters: [],
@@ -673,7 +725,6 @@ export default {
         { label: "Market" },
         { label: "Post" },
       ],
-
 
       Finished_Branded_Products_filters: [
         { value: "Peanuts", text: "Peanuts" },
@@ -1581,21 +1632,139 @@ export default {
       default_category: "",
 
       optionsnav: {
-        activeColor: "#1d98bd",
+        activeColor: "#top1d98bd",
       },
     };
   },
 
   watch: {
     selectedId: function () {
+      this.changeComponent();
       this.changePlaceHolder();
+      this.changeNotFoundTitle();
     },
   },
 
   methods: {
+    // [ED]----------
+    getKeyword() {
+      console.log("the keyword is: ", this.searchParams.keyword);
+      this.$store
+        .dispatch("allSearch/SEARCH", {
+          keyword: this.searchParams.keyword,
+        })
+        .then((res) => {
+          // console.log("categories loaded!");
+        })
+        .catch((err) => {
+          console.log("Error erro!");
+        });
+    },
+
+    async getProducts() {
+      this.prodLoader = true;
+      console.log("loader: ", this.prodLoader);
+      this.showDismissibleAlert = false;
+
+      this.$store.commit("setProducts", []);
+      // this.products = []
+      await this.$store
+        .dispatch("marketSearch/getProducts")
+        .then((res) => {
+          console.log("products list: ");
+          console.log(this.products);
+          this.prodLoader = false;
+          this.showDismissibleAlert = true;
+        })
+        .catch((err) => {
+          this.prodLoader = false;
+          console.log("products error: ");
+          console.error(err);
+          this.showDismissibleAlert = false;
+        });
+    },
+
+    searchProducts() {
+      this.$store
+        .dispatch("marketSearch/searchProducts", {
+          keyword: this.searchParams.keyword,
+        })
+        .then((res) => {
+          // console.log("categories loaded!");
+        })
+        .catch((err) => {
+          console.log("Error erro!");
+        });
+    },
+
+    searchNetworks() {
+      this.$store
+        .dispatch("networkSearch/SEARCH", {
+          keyword: this.searchParams.keyword,
+        })
+        .then((res) => {
+          // console.log("categories loaded!");
+        })
+        .catch((err) => {
+          console.log("Error erro!");
+        });
+    },
+    // ------------
+
+    // Eteme
     ...mapActions({
-      find: "search/FIND_USER",
+      userStore: "search/FIND_USER",
+      postStore: "search/FIND_POST",
+      postKeyword: "search/POST_KEYWORD",
+      lauchLoader: "search/LOADING",
+      page: "search/SET_CURRENT_PAGINATION_PAGE",
+      stack: "search/STACK_VALUE",
+      setCallback: "search/SET_CURRENT_PAGINATE_CALLBACK",
+      reset: "search/RESET_RESULT",
     }),
+
+    initialize() {
+      this.strategy = {
+        2: () => this.onFindUser(),
+        5: () => this.onFindPost(),
+      };
+
+      this.strategyForPlaceHolder = {
+        2: () => "Find User",
+        5: () => "Find Post",
+        0: () => "All",
+      };
+
+      this.strategyForComponent = {
+        2: () => PeopleComponent,
+        5: () => PostComponent,
+      };
+
+      this.strategyForNotFoundComponentTitle = {
+        2: () => "Not Find users",
+        5: () => "Not Find posts",
+      };
+
+      this.changePlaceHolder();
+    },
+
+    changeNotFoundTitle() {
+      try {
+        this.notFoundComponentTitle =
+          this.strategyForNotFoundComponentTitle[this.selectedId]();
+      } catch (error) {
+        this.notFoundComponentTitle = "";
+      }
+    },
+
+    changeComponent() {
+      try {
+        this.isComponent = this.strategyForComponent[this.selectedId]();
+      } catch (error) {
+        this.isComponent = null;
+      }
+    },
+
     changePlaceHolder() {
       try {
         const newPlaceholder = this.strategyForPlaceHolder[this.selectedId]();
@@ -1613,13 +1782,91 @@ export default {
       try {
         this.strategy[`${this.selectedId}`]();
       } catch (error) {
+        console.log(error);
         console.warn(`Implement function for selectedId=${this.selectedId}`);
       }
     },
+
+    async _onFindUser() {
+      try {
+        this.lauchLoader(true);
+        this.reset();
+        const request = await this.$repository.search.findUserByParam({
+          data: {
+            keyword: this.navBarParams.keyword.trim(),
+          },
+          page: 1,
+        });
+
+        if (request.success) {
+          this.setCallback(this.$repository.search.findUserByParam);
+          this.page(2);
+          this.userStore(request.data);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+      this.lauchLoader(false);
+    },
+
     onFindUser() {
+
+      this.find(this.navBarParams.username);
       if (this.navBarParams.keyword.trim())
         this.find(this.navBarParams.keyword);
+
+      if (this.navBarParams.keyword.trim()) {
+        this.page(1);
+        this.postKeyword(this.navBarParams.keyword.trim());
+        this.stack({
+          data: {
+            keyword: this.navBarParams.keyword.trim(),
+          },
+        });
+        this._onFindUser();
+      } else this.onNotified("the word must have at least 3 letters");
     },
+
+    async _onFindPost() {
+      try {
+        this.lauchLoader(true);
+        this.reset();
+        const request = await this.$repository.search.findPostByKeyword({
+          data: {
+            keyword: this.navBarParams.keyword.trim(),
+          },
+          page: 1,
+        });
+
+        if (request.success) {
+          this.page(2);
+          this.setCallback(this.$repository.search.findPostByKeyword);
+          this.postStore(request.data);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+      this.lauchLoader(false);
+    },
+
+    onFindPost() {
+      if (this.navBarParams.keyword.trim()) {
+        this.page(1);
+        this.postKeyword(this.navBarParams.keyword.trim());
+        this.stack({
+          data: {
+            keyword: this.navBarParams.keyword.trim(),
+          },
+          page: 1,
+        });
+
+        this._onFindPost();
+      } else {
+        this.onNotified("the word must have at least 3 letters");
+      }
+
+    },
+    // -------
 
     SetCat(cat) {
       console.log(cat);
@@ -1645,7 +1892,8 @@ export default {
           break;
 
         case "MC":
-          this.selectcategories = this.Mayor_councils_filters_and_public_institution;
+          this.selectcategories =
+            this.Mayor_councils_filters_and_public_institution;
 
           break;
 

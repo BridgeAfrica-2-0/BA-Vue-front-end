@@ -41,6 +41,10 @@ import confirmPayment from "@/views/confirmPayment";
 import networks from "@/views/networks";
 import dashboard from "@/views/dashboard";
 
+import myorders from "@/views/myOders"
+
+
+
 import welcome from "@/views/welcome";
 
 Vue.use(VueRouter);
@@ -51,6 +55,18 @@ const routes = [
   //   name: "Home",
   //   component: Test,
   // },
+
+  {
+    path: "/myorders",
+    name: "orders",
+    component: myorders,
+    // meta: {
+    //   auth: true,
+    // },
+  },
+  
+
+  
   {
     path: "/",
     name: "home",
@@ -102,6 +118,7 @@ const routes = [
     name: "BusinessOwner",
     component: businessOwner,
   },
+
 
   {
     path: "/business_editor/:id?",

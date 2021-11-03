@@ -4,14 +4,16 @@
   </div>
   <div class="row" v-else>
     <div class="container-fluid">
-      <p v-if="!allImages.length && !canUpload" style="font-size: 3rem">No items found</p>
+      <p v-if="!allImages.length && !canUpload" style="font-size: 3rem">
+        No items found
+      </p>
 
       <b-modal
         id="modalxl"
         ref="modalxl"
         centered
         hide-footer
-        title="Upoad Image"
+        :title="'image' == media ? 'Upload image' : 'Upload video'"
       >
         <br />
 
@@ -20,7 +22,6 @@
 
           <video controls v-else>
             <source :src="img_url" />
-            <source type="video/webm" />
           </video>
         </div>
 
@@ -64,9 +65,24 @@
           </a>
         </div>
       </div>
+
       <div v-for="(image, cmp) in allImages" :key="cmp">
         <div class="img-gall" v-for="(im, index) in image.media" :key="index">
-          <a v-if="typeOfMedia(im.path) == 'image'"
+          <Picture
+            :im="im"
+            :typeOfMedia="() => typeOfMedia(im.path)"
+            :getFullMediaLink="() => getFullMediaLink(im.path)"
+            :getYoutubeKey="() => getYoutubeKey(getFullMediaLink(im.path))"
+            :showImg="() => showImg(getFullMediaLink(im.path))"
+            :downloadPic="() => downloadPic(im)"
+            :setProfilePic="() => setProfilePic(im.id)"
+            :setCoverPic="() => setCoverPic(im.id)"
+            :deleteImage="() => deleteImage(im.id, cmp)"
+            :content="image.content"
+            :imageProps="imageProps"
+          />
+
+          <!-- <a v-if="typeOfMedia(im.path) == 'image' && !loading"
             ><b-img
               class="card-img btn p-0 album-img"
               thumbnail
@@ -80,30 +96,38 @@
           </a>
           <video
             controls
-            v-else-if="typeOfMedia(im.path) == 'videos'"
+            v-else-if="typeOfMedia(im.path) == 'video' && !loading"
             class="card-img btn p-0 album-img"
           >
             <source :src="getFullMediaLink(im.path)" />
           </video>
-
           <youtube
             class="card-img btn p-0 album-img"
-            v-else
+            v-if="typeOfMedia(im.path) == 'youtube' && !loading"
             :video-id="getYoutubeKey(getFullMediaLink(im.path))"
             :player-vars="playerVars"
           ></youtube>
 
+          <div class="botmediadess-position" v-if="loading">
+            <b-spinner
+              style="width: 3rem; height: 3rem; color: #e75c18"
+              label="Large Spinner"
+            ></b-spinner>
+          </div>
           <b-modal hide-footer :id="`modal-${im.id}`" title="Details" size="md">
             <img
               class="card-img"
               :src="getFullMediaLink(im.path)"
-              @click="() => showImg(index)"
+              @click="() => showImg(getFullMediaLink(im.path))"
               alt="media_img"
             />
             <p class="my-4">{{ image.content }}</p>
           </b-modal>
 
-          <div class="mediadesc"  v-if="!['youtube'].includes(typeOfMedia(im.path))">
+          <div
+            class="mediadesc"
+            v-if="!['youtube'].includes(typeOfMedia(im.path))"
+          >
             <ul class="navbar-nav pull-right options">
               <li class="nav-item dropdown m-0 p-0">
                 <b-dropdown
@@ -135,21 +159,22 @@
                     v-if="!['video'].includes(typeOfMedia(im.path))"
                     >Make Cover Photo</b-dropdown-item
                   >
-                  <b-dropdown-item href="#" @click="deleteImage(im.id)"
+                  <b-dropdown-item href="#" @click="deleteImage(im.id, cmp)"
                     >Delete</b-dropdown-item
                   >
                 </b-dropdown>
               </li>
             </ul>
-          </div>
+          </div> -->
 
           <br />
         </div>
       </div>
+
       <vue-easy-lightbox
         :visible="visible"
         :imgs="Slideimges"
-        :index="index"
+        :index="currentPicture"
         @hide="handleHide"
       ></vue-easy-lightbox>
     </div>
@@ -157,11 +182,15 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
+import Picture from "./imagesItems.vue";
+import { mapActions, mapMutations } from "vuex";
 import { fullMediaLink } from "@/helpers";
 import { v4 } from "uuid";
 
 export default {
+  components: {
+    Picture,
+  },
   props: {
     album: {},
     canUpload: {
@@ -171,6 +200,11 @@ export default {
       },
     },
     albumName: {
+      type: String,
+      required: true,
+    },
+
+    type: {
       type: String,
       required: true,
     },
@@ -205,11 +239,12 @@ export default {
       imageProps: { width: 205, height: 205 },
       Slideimges: [],
       visible: false,
-      index: 0,
+      currentPicture: 0,
       playerVars: {
         autoplay: 1,
       },
       text: "",
+      pattern: null,
     };
   },
 
@@ -219,6 +254,28 @@ export default {
 
   created() {
     this.allImages = this.images;
+
+    this.pattern = {
+      profile: () => ({
+        submitPost: this.submitPost,
+        setProfilePicture: this.setProfilePicture,
+        setCoverPicture: this.setCoverPicture,
+        deleteImagePicture: this.deleteImagePicture,
+        onDownloadPic: this.onDownloadPic,
+        getAlbumImages: this.getAlbumImages,
+        updateItem: this.updateItem,
+      }),
+      business: () => ({
+        submitPost: this.submitPostBusiness,
+        setProfilePicture: this.setProfilePictureBusiness,
+        setCoverPicture: this.setCoverPictureBusiness,
+        deleteImagePicture: this.deleteImagePictureBusiness,
+        onDownloadPic: this.onDownloadPicBusiness,
+        getAlbumImages: this.getAlbumImagesBusiness,
+        updateItem: this.updateItemBusiness,
+      }),
+    };
+
     this.strategy = {
       jpeg: () => "image",
       jpg: () => "image",
@@ -237,20 +294,32 @@ export default {
   },
 
   destroyed() {
-    this.$emit("close:album");
+    this.$emit("reste");
   },
 
   methods: {
-    getFullMediaLink: fullMediaLink,
     ...mapActions({
       submitPost: "UserProfileOwner/submitPost",
       setProfilePicture: "UserProfileOwner/setProfilePic",
       setCoverPicture: "UserProfileOwner/setCoverPic",
       deleteImagePicture: "UserProfileOwner/deleteImage",
       onDownloadPic: "UserProfileOwner/downloadPic",
-      //fetchImages: "UserProfileOwner/getImages",
       getAlbumImages: "UserProfileOwner/getAlbumImages",
+
+      submitPostBusiness: "businessOwner/submitPost",
+      setProfilePictureBusiness: "businessOwner/setProfilePic",
+      setCoverPictureBusiness: "businessOwner/setCoverPic",
+      deleteImagePictureBusiness: "businessOwner/deleteImage",
+      onDownloadPicBusiness: "businessOwner/downloadPic",
+      getAlbumImagesBusiness: "businessOwner/getAlbumImages",
     }),
+
+    ...mapMutations({
+      updateItem: "UserProfileOwner/updateAlbumItem",
+      updateItemBusiness: "businessOwner/updateAlbumItem",
+    }),
+
+    getFullMediaLink: fullMediaLink,
 
     getYoutubeKey(path) {
       let videoID = path.split("v=")[1];
@@ -263,21 +332,25 @@ export default {
     },
 
     showImg(index) {
-      this.index = index;
+      this.currentPicture = this.Slideimges.indexOf(index);
       this.visible = true;
     },
+
     handleHide() {
       this.visible = false;
     },
+
     showPic(image) {
       this.image_details = image;
       this.$refs["Details"].show();
     },
 
     loadImages() {
-      const pictures = this.allImages.map((e) =>
-        this.getFullMediaLink(e.media[0].path)
-      );
+      const pictures = this.allImages
+        .filter((e) => e.media.length)
+        .map((e) => {
+          return this.getFullMediaLink(e.media[0].path);
+        });
 
       this.Slideimges = pictures;
     },
@@ -314,9 +387,9 @@ export default {
     },
 
     downloadPic(media) {
-      //download(this.getFileExtension(media.path), `${v4()}.${this.getFileExtension(media.path)}`, media.type);
-
-      this.onDownloadPic(media.id)
+      this.loading = true;
+      this.pattern[this.type]()
+        .onDownloadPic(media.id)
         .then((response) => {
           var fileURL = window.URL.createObjectURL(new Blob([response.data]));
           var fileLink = document.createElement("a");
@@ -331,73 +404,103 @@ export default {
             status: "success",
             message: "Image Downloaded",
           });
-          // loader.hide();
+          this.loading = false;
+          return false;
         })
-        .catch((error) => {
-          console.log(error);
+        .catch(() => {
           this.sending = false;
+          this.loading = false;
           this.flashMessage.show({
             status: "error",
             message: "Unable to download ",
           });
+          return false;
         });
     },
 
     deleteImage(id, key) {
-      this.deleteImagePicture(id)
+      this.loading = true;
+      this.pattern[this.type]()
+        .deleteImagePicture(id)
         .then(() => {
           this.removePicture(id, key);
+
+          this.pattern[this.type]().updateItem({
+            id: this.album,
+            action: "remove",
+          });
+          this.loading = false;
           this.flashMessage.show({
             status: "success",
-            message: "Album Deleted",
+            message: "Media Deleted",
           });
+          return false;
         })
-        .catch((error) => {
-          console.log(error);
+        .catch(() => {
           this.sending = false;
+          this.loading = false;
           this.flashMessage.show({
             status: "error",
-            message: "Unable to delete image",
+            message: "Unable to delete media",
           });
+          return false;
         });
     },
     //set an image as a cover photo
 
     setCoverPic(id) {
-      this.setCoverPic(id)
+      this.loading = true;
+      const data =
+        "business" == this.type
+          ? { businessID: this.$route.params.id, albumID: id }
+          : id;
+
+      this.pattern[this.type]()
+        .setCoverPicture(data)
         .then(() => {
+          this.loading = false;
           this.flashMessage.show({
             status: "success",
             message: "Cover Picture succesfully set",
           });
+          return false;
         })
         .catch(() => {
           this.sending = false;
-
+          this.loading = false;
           this.flashMessage.show({
             status: "error",
             message: "Unable to set Cover Picture",
           });
+          return false;
         });
     },
     //set image as profile pic
 
     setProfilePic(id) {
-      this.setProfilePicture(id)
+      this.loading = true;
+      const data =
+        "business" == this.type
+          ? { businessID: this.$route.params.id, albumID: id }
+          : id;
+      this.pattern[this.type]()
+        .setProfilePicture(data)
         .then(() => {
+          this.loading = false;
           this.flashMessage.show({
             status: "success",
             message: "Profile Picture set",
           });
+          return false;
         })
-        .catch((err) => {
+        .catch(() => {
           this.sending = false;
-
+          this.loading = false;
           this.flashMessage.show({
             status: "error",
             message: "Unable to set your profile pic",
           });
-          console.log({ err: err });
+          return false;
         });
     },
 
@@ -409,21 +512,32 @@ export default {
       formData.append("media", this.profile_pic);
       formData.append("dob", this.text);
       let payload = {
-        id: albumId,
+        albumID: albumId,
+        businessID: "business" == this.type ? this.$route.params.id : null,
         data: formData,
       };
 
-      this.submitPost(payload)
+      const data =
+        "business" == this.type
+          ? { businessId: this.$route.params.id, albumId }
+          : albumId;
+
+      this.pattern[this.type]()
+        .submitPost(payload)
         .then(() => {
-          this.getAlbumImages(albumId)
+          this.pattern[this.type]().updateItem({ id: albumId, action: "add" });
+          this.pattern[this.type]().getAlbumImages(data);
           this.loading = false;
           this.text = "";
           this.flashMessage.show({
             status: "success",
-            message: "Profile Updated",
+            message: "Media Updated",
             blockClass: "custom-block-class",
           });
           this.$refs["modalxl"].hide();
+        })
+        .then(() => {
+          this.$emit("reste");
         })
         .catch(() => {
           this.loading = false;
@@ -437,7 +551,6 @@ export default {
     },
 
     selectMoviesOutsidePost(e) {
-      this.type = null;
       this.profile_pic = e.target.files[0];
       const file = e.target.files[0];
       this.img_url = URL.createObjectURL(file);
@@ -454,6 +567,13 @@ export default {
 </script>
 
 <style scoped>
+.botmediadess-position {
+  text-align: center;
+  bottom: -45%;
+  width: 100%;
+  font-size: 20px;
+  position: relative;
+}
 .custom-loader {
   width: 4rem !important;
   height: 4rem !important;

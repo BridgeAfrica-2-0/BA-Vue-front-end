@@ -14,7 +14,7 @@
       <hr width="100%" class="d-none" d-md-block />
     </div>
 
-    <div class="mt-3" v-if="selectedId == '0'">
+    <div class=" " v-if="selectedId == '0'">
       <Business />
     </div>
 
@@ -152,8 +152,6 @@ export default {
   mounted() {
     this.url_data = this.$route.params.id;
 
-    console.log(this.url_data);
-
     this.businessInfo();
 
     this.CommunityBusiness();
@@ -162,7 +160,7 @@ export default {
 
     this.businessCommunityTotal();
     this.ownerPost();
-  }
+  },
 };
 </script>
 

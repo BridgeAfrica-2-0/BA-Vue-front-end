@@ -617,7 +617,7 @@ import { PostComponent, PeopleComponent } from "@/components/search";
 
 import { loader } from "@/mixins";
 
-import { mapActions } from "vuex";
+ import { mapGetters,mapActions} from 'vuex';
 
 export default {
   components: {
@@ -630,7 +630,7 @@ export default {
     Sponsor,
 
     Business,
-    People,
+    People, 
     Network,
     Post,
     Market,
@@ -641,8 +641,7 @@ export default {
     MiniNetwork,
     MiniPost,
     MiniMarket,
-    PeopleFilter,
-    PostFilter,
+    
 
 
     PostComponent,

@@ -28,7 +28,9 @@ import { social } from "./social";
 
 Vue.use(Vuex);
 
-axios.defaults.baseURL = process.env.VUE_APP_API_URL; 
+//axios.defaults.baseURL = process.env.VUE_APP_API_URL; 
+
+axios.defaults.baseURL = "http://test.maxinemoffett.com/api/v1/"
 
 
 export default new Vuex.Store({
@@ -44,7 +46,7 @@ export default new Vuex.Store({
     profile,
     follower,
     search,
-    market,
+    
     social,
     networkProfileMembers,
         allSearch,

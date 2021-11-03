@@ -618,6 +618,8 @@ export default {
       2: () => PeopleFilter,
       5: () => PostFilter,
     };
+
+    this.getCountries();
   },
   watch: {
     filterType: function (newId) {
@@ -1971,9 +1973,7 @@ export default {
       return this.$store.getters["networkSearch/getNeighbourhoods"];
     },
   },
-  created() {
-    this.getCountries();
-  },
+
 
   methods: {
     getFilter(subCat) {
@@ -1991,7 +1991,7 @@ export default {
 
             let subName = "";
             this.subCategories.map((sub) => {
-              if (sub.id === subId) {
+              if (sub.id) {
                 subName = sub.name;
               }
             });

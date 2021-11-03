@@ -14,7 +14,7 @@
       <hr width="100%" class="d-none" d-md-block />
     </div>
 
-    <div class="mt-3" v-if="selectedId == '0'">
+    <div class=" " v-if="selectedId == '0'">
       <Business />
     </div>
 
@@ -45,9 +45,7 @@
 <script>
 import navbar from "@/components/navbar";
 import Business from "../components/businessOwner/business";
-//import Pending from "../components/businessOwner/pending";
-//import Insight from "../components/businessOwner/insight";
-//import Notification from "../components/businessOwner/notification";
+
 import Settings from "../components/businessOwner/settings";
 
 import Inbox from "../components/businessOwner/inbox";
@@ -62,12 +60,12 @@ export default {
   components: {
     navbar,
     Business,
-    //Pending,
+   
     LyTab,
     Settings,
-    //  Insight,
+   
     Inbox,
-    // Notification,
+   
     Footer
   },
   data() {
@@ -103,27 +101,7 @@ export default {
         });
     },
 
-    CommunityBusiness() {
-      this.$store
-        .dispatch("businessOwner/CommunityBusiness", this.url_data)
-        .then(() => {
-          console.log("hey yeah");
-        })
-        .catch(err => {
-          console.log({ err: err });
-        });
-    },
-
-    CommunityPeople() {
-      this.$store
-        .dispatch("businessOwner/CommunityPeople", this.url_data)
-        .then(() => {
-          console.log("hey yeah");
-        })
-        .catch(err => {
-          console.log({ err: err });
-        });
-    },
+  
 
     businessCommunityTotal() {
       this.$store
@@ -152,16 +130,11 @@ export default {
   mounted() {
     this.url_data = this.$route.params.id;
 
-    console.log(this.url_data);
 
-    this.businessInfo();
-
-    this.CommunityBusiness();
-
-    this.CommunityPeople();
-
-    this.businessCommunityTotal();
-    this.ownerPost();
+     this.businessInfo();
+   
+     this.businessCommunityTotal();
+     this.ownerPost();
   }
 };
 </script>

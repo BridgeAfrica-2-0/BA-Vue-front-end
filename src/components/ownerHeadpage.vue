@@ -1,5 +1,6 @@
 <template>
   <div class="p-0">
+    
     <b-container fluid class="p-0 gradient">
       <div class="container-flex">  
         <img  v-if="info.user.cover_picture =='' "
@@ -7,7 +8,7 @@
           class="img-fluid  banner"
           alt="Cover Image"
         />
-         <img  v-if="info.user.cover_picture !='' "
+         <img  v-if="info.user.cover_picture"
           :src="info.user.cover_picture"
           class="img-fluid  banner"
           alt="Cover Image"
@@ -16,41 +17,44 @@
 
       <div class="container-fluid p-63">
         <b-row class="mt-md-2 text-left">
-          <b-col cols="12" md="12" class="m-0 p-0 text-left put-top ">
-            <b-avatar v-if="info.user.profile_picture =='' "
+          <b-col cols="12" md="12" class="m-0 p-0 text-left put-top">
+            <b-avatar
+              v-if="info.user.profile_picture == ''"
               src="https://placekitten.com/400/300"
-              class="  avat  text-center"
+              class="avat text-center"
               badge-variant="primary"
               badge-offset="10px"
             >
             </b-avatar>
 
-
-            <b-avatar v-if="info.user.profile_picture !='' "
+            <b-avatar
+              v-if="info.user.profile_picture != ''"
               :src="info.user.profile_picture"
-              class="  avat  text-center"
+              class="avat text-center"
               badge-variant="primary"
               badge-offset="10px"
             >
             </b-avatar>
-
 
             <b-icon
               icon="camera-fill"
               class="avatar-header-icon btn cursor-pointer size"
-               @click="selectlogo" 
-              
+              @click="selectlogo"
             ></b-icon>
 
-            <span style="display: inline-block;">
-              <h6 class=" profile-name text-center ">
-                <b> <b-link> {{info.user.name}} </b-link> </b> <br />
-                <span class="duration">  {{ nFormatter(total.total_community)}} Community </span>
+            <span style="display: inline-block">
+              <h6 class="profile-name text-center">
+                <div class="username">
+                  <b> {{ info.user.name }} </b>
+                </div>
+
+                <span class="duration float-left">
+                  {{ nFormatter(total.total_community) }} Community
+                </span>
               </h6>
             </span>
-
              
-                <input
+        <input
             type="file"
             id="cover_pic"
             @change="selectMoviesOutsidePost"
@@ -68,27 +72,24 @@
             ref="movie"
           />
 
-
-          
             <input
-            type="file"
-            id="logo_pic"
-            @change="setlogo"
-            accept=" image/*"
-            hidden
-            ref="logo_pic"
-          />
-
+              type="file"
+              id="logo_pic"
+              @change="setlogo"
+              accept=" image/*"
+              hidden
+              ref="logo_pic"
+            />
 
             <div class="">
               <div class="text-box">
-                <div class=" ">
-                  <span class="float-right profileedit-btn  put-topbtn ">
+                <div class="">
+                  <span class="float-right profileedit-btn put-topbtn">
                     <b-button
 
                     @click="editCoverNull" 
                       variant="primary"
-                      class="  d-none d-md-inline edit-btn"
+                      class="d-none d-md-inline edit-btn"
                       v-b-modal.modal-upp
                     >
                       <fas-icon
@@ -101,42 +102,49 @@
 
                     <b-dropdown
                       id="dropdown-1"
-                      class="float-right options dot-btn mt-2 mt-sm-2 mt-md-0 mr-3"
+                      class="
+                        float-right
+                        options
+                        dot-btn
+                        mt-2 mt-sm-2 mt-md-0
+                        mr-3
+                      "
                       no-caret
                       variant="outline"
-                      style="border-color: #ffD20; color:  #ffD20"
+                      style="border-color: #ffD20; color: #ffD20"
                     >
                       <template #button-content>
                         <b-icon-three-dots></b-icon-three-dots>
                       </template>
 
-                     <b-dropdown-item  @click="selectCover" 
-                    > Change Cover</b-dropdown-item
-                  >
+                      <b-dropdown-item @click="selectCover">
+                        Change Cover</b-dropdown-item
+                      >
 
-  <!--
+                      <b-dropdown-item @click="RemoveCover">
+                        Remove cover
+                      </b-dropdown-item>
+
+                      <!--
                       <b-dropdown-item
                         >Invite Friends On Bridge Africa</b-dropdown-item
                       >
---> 
+-->
                       <b-dropdown-item>View As</b-dropdown-item>
                     </b-dropdown>
                   </span>
                 </div>
               </div>
             </div>
-            <b-modal id="logomodal" ref="logomodal"  @ok="submitLogo"  title="Upload Your Logo">
-                <div class="w3-container">
-                  <div id="preview">
-                    <img  :src="img_url" />
-                  </div>
-                </div>
-            </b-modal>
-            <!-- second modal box  to edit the big cover photo -->          
-            <b-modal id="coverphoto" ref="coverphoto" @ok="submitCover" title="Upload  Cover photo">
+            <b-modal
+              id="logomodal"
+              ref="logomodal"
+              @ok="submitLogo"
+              title="Upload Your Logo"
+            >
               <div class="w3-container">
                 <div id="preview">
-                  <img  :src="img_url" />
+                  <img :src="img_url" />
                 </div>
               </div>
             </b-modal>
@@ -179,6 +187,19 @@
               </div>
             </b-modal>
 
+            <!-- second modal box  to edit the big cover photo -->
+            <b-modal
+              id="coverphoto"
+              ref="coverphoto"
+              @ok="submitCover"
+              title="Upload  Cover photo"
+            >
+              <div class="w3-container">
+                <div id="preview">
+                  <img :src="img_url" />
+                </div>
+              </div>
+            </b-modal>
           </b-col>
         </b-row>
       </div>
@@ -193,41 +214,37 @@ import VueCropper from 'vue-cropperjs';
 import 'cropperjs/dist/cropper.css';
 import { h } from 'vue';
 
-  export default {
+export default {
     name: "headPageOwner",
     components : {
        VueCropper,
     },
-  
-   data() {
-      return {
+  data() {
+    return {
+      
+        url:null,
+        img_url:null,
+        cover_photo:null,
+        mime_type:null,
+        profile_photo:null,
+        cropedImage:null,
+        selectedFile:null,
 
-          url:null,
-          img_url:null,
-          cover_photo:null,
-          mime_type:null,
-          profile_photo:null,
-          cropedImage:null,
-          selectedFile:null,
+      options: {
+        rewind: true,
+        autoplay: true,
+        perPage: 3,
+        pagination: false,
 
-          options: {
-          
-          rewind : true,
-          autoplay: true,
-          perPage: 3,
-          pagination:false,
-        
-          
-          type   : 'loop',
-          perMove: 1,
+        type: "loop",
+        perMove: 1,
 
-
-          breakpoints: {
-          "760": {
+        breakpoints: {
+          760: {
             perPage: 1,
             gap: "0rem",
           },
-          "992": {
+          992: {
             perPage: 2,
             gap: "1rem",
           },
@@ -235,18 +252,18 @@ import { h } from 'vue';
         },
       };
     },
-
     
 methods: {
    nFormatter(num) {
+
       if (num >= 1000000000) {
-        return (num / 1000000000).toFixed(1).replace(/\.0$/, '') + 'G';
+        return (num / 1000000000).toFixed(1).replace(/\.0$/, "") + "G";
       }
       if (num >= 1000000) {
-        return (num / 1000000).toFixed(1).replace(/\.0$/, '') + 'M';
+        return (num / 1000000).toFixed(1).replace(/\.0$/, "") + "M";
       }
       if (num >= 1000) {
-        return (num / 1000).toFixed(1).replace(/\.0$/, '') + 'K';
+        return (num / 1000).toFixed(1).replace(/\.0$/, "") + "K";
       }
       return num;
     },
@@ -318,23 +335,23 @@ methods: {
     document.getElementById("profile-imag").click()
   },
 
-submitLogo(){
-  let loader = this.$loading.show({               
+  submitLogo(){
+    let loader = this.$loading.show({               
     container: this.fullPage ? null : this.$refs.preview,
     canCancel: true,
     onCancel: this.onCancel,
     color:"#e75c18"
-  });
+    });
 
-  let formData = new FormData();
-  formData.append("image", this.profile_photo);
-  this.axios 
-    .post("user/upload/profile-picture", formData, {
+    let formData = new FormData();
+    formData.append("image", this.profile_photo);
+    this.axios 
+      .post("user/upload/profile-picture", formData, {
       headers: {
         "Content-Type": "multipart/form-data",
       },
     })
-    .then((response) => {
+      .then((response) => {
       console.log(response);
       this.$store
         .dispatch("profile/loadUserPostIntro", null)
@@ -352,7 +369,7 @@ submitLogo(){
             console.log(error);
           });
     })
-    .catch((err) => {
+      .catch((err) => {
       console.log({ err: err });
       if (err.response.status == 422) {
         console.log({ err: err });
@@ -374,8 +391,8 @@ submitLogo(){
       }
 
     });
-},
-
+  },
+  
 submitCroppedCover()
 {
 
@@ -466,9 +483,10 @@ submitCover(){
         .dispatch("profile/loadUserPostIntro", null)
         .then((response) => {
           console.log(response);
+
           this.flashMessage.show({
-            status: "success",
-            message: "Cover Updated",
+            status: "error",
+            message: err.response.data.message,
             blockClass: "custom-block-class",
           });
           loader.hide()
@@ -494,61 +512,58 @@ submitCover(){
         loader.hide()
       } 
       else {
-        this.flashMessage.show({
+          this.flashMessage.show({
           status: "error",
-          message: "Unable to upload your image",
+          message: "Can not delete your cover",
           blockClass: "custom-block-class",
         });
-        console.log({ err: err });
-        loader.hide()
       }
-    });
+      });
   },
+
 },
 
 mounted(){
      this.url = this.$route.params.id;
 },
 
-computed: {
+computed: {    
+    total(){
+      return  this.$store.state.profile.Tcommunity;
+    },  
 
     
-    total(){
-    return  this.$store.state.profile.Tcommunity;
-   },
- 
-
-      profile_info() {
-
-         if(this.$store.state.businessOwner.businessInfo ==[] ){  
-      return  this.$store.state.businessOwner.businessInfo;   }else{
-
-        return  this.$store.state.businessOwner.businessInfo;
-      }
-
-     
+    info: function () {
+      return this.$store.getters["profile/getUserPostIntro"];
     },
+   
 
-
-     info :function(){
-
-        return this.$store.getters['profile/getUserPostIntro'];
-      }
-
-
-
-  },
-
-
-
+  }
 };
-
 </script>
 
 <style scoped>
+@media only screen and (min-width: 762px) {
+  .username {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    width: 100%;
+    height: 1.5em;
+    white-space: nowrap;
+    font-size: 32px !important;
+  }
+}
 
-
-
+@media only screen and (max-width: 762px) {
+  .username {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    width: 100%;
+    height: 1.5em;
+    white-space: nowrap;
+    font-size: 22px;
+  }
+}
 #preview {
   display: flex;
   justify-content: center;
@@ -570,8 +585,6 @@ computed: {
   max-width: 100%;
   max-height: 300px;
 }
-
-
 
 .text-box {
   margin-top: 1.5rem;

@@ -5,11 +5,11 @@
         <b-col>
           <div class="b-bottomn f-left">
             <b-form-checkbox
-              v-model="selectAll"
-              :indeterminate="indeterminate"
+              id="checkbox-1"
               name="checkbox-1"
-              @click="select"
               class="m-left-top username"
+              unchecked-value="not_accepted"
+              @click="selectAll"
             >
               {{ selectAll ? "Un-select All" : "Select All" }}
             </b-form-checkbox>
@@ -26,92 +26,75 @@
       <br />
 
       <b-row>
-        <b-col cols="12" class="mr-3" v-for="user in users" :key="user.id">
+        <b-col
+          cols="12"
+          class="mr-3"
+          v-for="post in allNotifications"
+          :key="post.id"
+        >
           <p class="">
             <span style="display:inline-flex">
               <b-form-checkbox
-                v-model="selected"
-                :value="user.name"
-                @change="updateCheckall"
+                id="checkbox-1"
                 name="checkbox-1"
+                value="accepted"
                 class="m-left-top"
+                unchecked-value="not_accepted"
+                @click="selectOne"
               >
               </b-form-checkbox>
               <b-avatar
                 class="d-inline-block profile-pic"
                 variant="primary"
-                :src="user.picture"
+                :src="post.image"
               ></b-avatar>
               <h6 class="m-0  d-inline-block ml-2 username">
-                {{ user.name }}
-                <div class="duration">{{ user.time }}hr</div>
+                {{ post.name }}
+                <p class="duration">{{ post.time }}</p>
               </h6>
             </span>
             <span class="float-right mt-1"> </span>
           </p>
 
           <p class="text">
-            {{ user.text }}
+            {{ post.description }}
           </p>
 
           <hr width="100%" />
         </b-col>
-        <div>
-          Selected: <strong>{{ selected }}</strong
-          ><br />
-          All Selected: <strong>{{ allSelected }}</strong>
-
-        </div>
+      </b-row>
+      <b-row>
+        <b-col>
+          <p class="text-center" v-if="allNotifications < 1">
+            No Notifications To Show
+          </p>
+        </b-col>
       </b-row>
     </div>
   </div>
 </template>
 
 <script>
+import { mapActions, mapGetters } from "vuex";
 export default {
   name: "notification",
-  data() {
-    return {
-      users: [],
-      selected: [],
-      selectAll: false,
-      indeterminate: false
-    };
+  data: () => ({
+    selected: [],
+    checkbox: true,
+  }),
+  beforeMount() {
+    this.getNotifications();
   },
-
-  methods: {
-    select() {
-      this.selected = [];
-      if (!this.selectAll) {
-        for (let i in this.users) {
-          this.selected.push(this.users[i]);
-        }
-      }
+  computed: {
+    ...mapGetters({
+      allNotifications: "networkSetting/allNotifications",
+    }),
+    methods: {
+      ...mapActions({
+        getNotifications: "networkSetting/getNotifications",
+      }),
     },
-
-    updateCheckall: function() {
-      if (this.users.length === this.selected.length) {
-        this.selectAll = true;
-      } else {
-        this.selectAll = false;
-      }
-    }
   },
-  watch: {
-    selected(newValue, oldValue) {
-      // Handle changes in individual users checkboxes
-      if (newValue.length === 0) {
-        this.indeterminate = false;
-        this.selectAll = false;
-      } else if (newValue.length === this.users.length) {
-        this.indeterminate = false;
-        this.selectAll = true;
-      } else {
-        this.indeterminate = true;
-        this.selectAll = false;
-      }
-    }
-  }
 };
 </script>
 

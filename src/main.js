@@ -163,16 +163,25 @@ import i18n from "./i18n";
 Vue.config.productionTip = false;
 var user = null;
 
+// import VueEcho from 'vue-echo-laravel';
 // import Echo from 'laravel-echo'
-// // window.io = require('socket.io-client')
+// const io = require("socket.io-client")
+// if (process.client) {
 
-// window.Echo = new Echo({
-//         broadcaster: 'socket.io',
-//         host: "localhost:6001",
-//         client: require('socket.io-client'),
-//         auth: { headers: { Authorization: 'Bearer ' + JSON.parse(localStorage.getItem('user')).accessToken } }
-//     })
-// Vue.prototype.$echo = echo_instance
+//     window.Echo = new Echo({
+//             broadcaster: 'socket.io',
+//             host: "loclhost:7000",
+//             client: require('socket.io-client'),
+//             auth: { headers: { Authorization: 'Bearer ' + JSON.parse(localStorage.getItem('user')).accessToken } }
+//         })
+//         // Vue.use(VueEcho, {
+//         //     broadcaster: 'socket.io',
+//         //     host: process.env.VUE_APP_API_URL_DEV,
+//         // });
+
+// }
+
+// Vue.prototype.$echo = Echo
 
 // import VueEcho from 'vue-echo-laravel';
 // window.io = require('socket.io-client')

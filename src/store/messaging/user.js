@@ -1,5 +1,7 @@
 import axios from "axios";
-
+// import Echo from 'laravel-echo'
+// var io = require('socket.io')()
+// const io = require('socket.io-client')
 export default {
     namespaced: true,
     state: {
@@ -8,11 +10,20 @@ export default {
         userToUser: [],
         userToBiz: [],
         userToNetwork: [],
+        // echo: new Echo({
+        //     broadcaster: 'socket.io',
+        //     host: "localhost:6001",
+        //     client: require('socket.io-client'),
+        //     auth: { headers: { Authorization: 'Bearer ' + JSON.parse(localStorage.getItem('user')).accessToken } }
+        // }),
 
         loader: false,
         success: false
     },
     getters: {
+        getEcho(state) {
+            return state.echo;
+        },
         // get data
         getBizToBiz(state) {
             return state.bizToBiz;

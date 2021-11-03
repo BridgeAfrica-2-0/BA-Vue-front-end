@@ -275,8 +275,13 @@
                   </b-col>
                   <b-col class="col-4">
                     <input
-                    v-model="chatSearchKeyword"
-                    @keypress.enter="histUserToUser({receiverID:chatId, keyword:chatSearchKeyword})"
+                      v-model="chatSearchKeyword"
+                      @keypress.enter="
+                        histUserToUser({
+                          receiverID: chatId,
+                          keyword: chatSearchKeyword,
+                        })
+                      "
                       type="text"
                       class="form-control input-background mb-6 pb-6"
                       placeholder="Search message"
@@ -286,10 +291,15 @@
                     <b-row class="mt-3 ml-5">
                       <b-col class="col-3">
                         <b-icon
-                        @click="histUserToUser({receiverID:chatId, keyword:chatSearchKeyword})"
+                          @click="
+                            histUserToUser({
+                              receiverID: chatId,
+                              keyword: chatSearchKeyword,
+                            })
+                          "
                           class="msg-icon primary icon-size"
                           icon="search"
-                          style="cursor:pointer"
+                          style="cursor: pointer"
                         ></b-icon>
                       </b-col>
 
@@ -394,6 +404,7 @@
               </section>
 
               <section v-else class="chats" style="margin-left: 1px" ref="feed">
+                {{messages}}
                 <div v-for="(message, index) in messages" :key="index">
                   <div v-if="message.sender != currentUser.user.name">
                     <b-row class="p-4">
@@ -634,12 +645,11 @@
 </template>
 
 <script>
-import io from "socket.io-client";
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
 import EmojiPicker from "vue-emoji-picker";
 import moment from "moment";
-import Echo from 'laravel-echo'
+import io from "socket.io-client";
 
 export default {
   components: {
@@ -649,12 +659,13 @@ export default {
   },
   data() {
     return {
+      room: "",
       online: [],
       input: "",
       search: "",
-      chatSearchKeyword:"",
-      chatId:"",
-      socket: io("http://localhost:6001", {
+      chatSearchKeyword: "",
+      chatId: "",
+      socket: io("http://localhost:7000", {
         transports: ["websocket", "polling", "flashsocket"],
       }),
 
@@ -926,7 +937,6 @@ export default {
     userToNetwork() {
       return this.$store.getters["userChat/getUserToNetwork"];
     },
-
     loader() {
       return this.$store.getters["userChat/getLoader"];
     },
@@ -947,44 +957,41 @@ export default {
     },
   },
   mounted() {
-    window.Echo = new Echo({
-        broadcaster: 'socket.io',
-        host: "localhost:6001",
-        client: require('socket.io-client'),
-        auth: { headers: { Authorization: 'Bearer ' + JSON.parse(localStorage.getItem('user')).accessToken } }
-    })
+    console.log("test:", window.Echo);
+
+    // window.Echo
+    //   .private("user.2")
+    //   .listen("MessageEvent", () => {
+    //     console.log("[DEBUG]...");
+    //   });
+
     // this.socket.emit("addUser", {
     //   socketID: this.socket.id,
     //   user: this.currentUser.user,
     // });
+    this.$refs.feed.scrollTop = this.$refs.feed.scrollHeight;
 
     this.getUsers();
   },
   created() {
-    //  this.socket.on("online", (data) => {
-    //   this.online=data;
-    // });
-    // this.socket.on("generalMessage", (data) => {
-    //   console.log("Received");
-    //   console.log(data);
-    //   this.messages.push(data);
-    // });
-    // this.socket.on("privateMessage", (data) => {
-    //   console.log("Received");
-    //   console.log(data);
-
-    //   // this.messages.push({
-    //   //   message: data.message,
-    //   //   type: 1,
-    //   //   user: data.user,
-    //   // });
-    // });
-
-    // this.socket.on("addUser", (data) => {
-    //   console.log("User:", data);
-    // });
+    this.socket.on("generalMessage", (data) => {
+      console.log("Received");
+      console.log(data);
+      this.messages.push(data);
+    });
+    this.socket.on("privateMessage", (data) => {
+      console.log("Received");
+      console.log(data);
+      this.userToUser.push(data);
+    });
   },
   methods: {
+    createRoom(receiver_id) {
+      let sender_id = this.currentUser.user.id;
+      this.room = [receiver_id, sender_id];
+      console.log(this.room);
+      this.socket.emit("create", this.room);
+    },
     getCreatedAt(data) {
       return moment(data).format("LT");
     },
@@ -1034,7 +1041,8 @@ export default {
         .catch(() => console.log("error"));
     },
     selectedChat(chat, index) {
-      this.chatId = index
+      this.createRoom(index);
+      this.chatId = index;
       let data = { receiverID: index, keyword: null };
       this.histUserToUser(data);
       this.newMsg = false;
@@ -1083,21 +1091,21 @@ export default {
       this.show = false;
     },
     send() {
-      // this.socket.emit("privateMessage", {
-      //   message: this.input,
-      //   sender: {socketId:this.socket.id, ...this.currentUser.user},
-      //   receiver: this.receiver,
-      // });
-      this.socket.emit("generalMessage", {
+      this.socket.emit("privateMessage", {
         message: this.input,
         sender: this.currentUser.user.name,
-        date: new Date(),
+        room: this.room,
       });
+      // this.socket.emit("generalMessage", {
+      //   message: this.input,
+      //   sender: this.currentUser.user.name,
+      //   date: new Date(),
+      // });
       console.log("SENT...");
-      this.$refs.feed.scrollTop =
-        this.$refs.feed.scrollHeight - this.$refs.feed.clientHeight;
+      this.$refs.feed.scrollTop = this.$refs.feed.scrollHeight;
       console.log("scroll...", this.$refs.feed.scrollHeight);
       this.message.type = "sent";
+
       let today = new Date();
       let h = today.getHours();
       let m = today.getMinutes();

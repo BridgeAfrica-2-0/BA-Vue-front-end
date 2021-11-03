@@ -424,15 +424,14 @@ mounted(){
 computed: {    
     total(){
       return  this.$store.state.profile.Tcommunity;
+    },  
+
+    
+    info: function () {
+      return this.$store.getters["profile/getUserPostIntro"];
     },
-    profile_info() {
-      if(this.$store.state.businessOwner.businessInfo ==[] ){  
-        return  this.$store.state.businessOwner.businessInfo;
-      }
-      else{
-        return  this.$store.state.businessOwner.businessInfo;
-      }
-    },
+   
+
   }
 };
 </script>

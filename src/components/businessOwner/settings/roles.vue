@@ -171,24 +171,19 @@ export default {
   margin-bottom: 15px;
   margin-top: 10px;
 }
-
 .b-bottom {
   margin-top: 20px;
   margin-bottom: 30px;
   padding-bottom: 10px;
   width: 100%;
-
   border-bottom: 1px solid;
 }
-
 .tabs {
   width: 100%;
 }
-
 .f-left {
   float: left;
 }
-
 .a-button-l {
   /*align-content: right;*/
   float: right;
@@ -203,13 +198,11 @@ export default {
   position: relative;
   top: 40px;
 }
-
 @media only screen and (max-width: 768px) {
   .settings {
     top: -5px;
     left: -20px;
   }
-
   .assign-btn {
     margin-top: 30px;
   }

@@ -1,7 +1,7 @@
+   
 import Vue from "vue";
 import Vuex from "vuex";
 import auth from "./auth";
-import dashboard from "./dashboard";
 import businessOwner from "./businessOwner";
 import marketSearch from "./marketSearch";
 import networkSearch from "./networkSearch";
@@ -20,12 +20,11 @@ import profile from "./profile";
 import networkProfileMembers from "./networkProfileMembers";
 import follower from "./follower";
 import networkProfile from "./networkProfile";
-
 import UserProfileOwner from "./UserProfileOwner"
-import axios from "axios";
 import { search } from "./search";
 import { social } from "./social";
 
+import axios from "axios";
 Vue.use(Vuex);
 
 //axios.defaults.baseURL = process.env.VUE_APP_API_URL; 
@@ -40,10 +39,10 @@ export default new Vuex.Store({
     dashboardcommunity,
     ProfileAndBusinessDetails,
     businessOwner,
-    dashboard,
     hotbusiness,
     networkSetting,
     profile,
+    networkProfile,
     follower,
     search,
     

@@ -10,7 +10,6 @@ import ProfileAndBusinessDetails from "./ProfileAndBusinessDetails";
 import networkDetails from "./networkDetails";
 import dashboardcommunity from "./dashboardcommunity";
 import NetworkSettings from "./NetworkSettings";
-import networkProfileMembers from "./networkProfileMembers";
 
 import businessFollowers from "./businessFollowers";
 import hotbusiness from "./hotbusiness";
@@ -36,7 +35,7 @@ export default new Vuex.Store({
     ProfileAndBusinessDetails,
     businessOwner,
     hotbusiness,
-    networkSetting,
+    NetworkSettings,
     profile,
     networkProfile,
     follower,
@@ -44,11 +43,9 @@ export default new Vuex.Store({
     networkProfileMembers,
     
     social,
-    networkProfileMembers,
         allSearch,
      marketSearch,
        networkSearch,
-    networkProfile,
     UserProfileOwner,
     businessFollowers
   },

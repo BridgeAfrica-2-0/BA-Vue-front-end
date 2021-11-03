@@ -44,7 +44,7 @@ export default {
       })
     },
     getMembers( data ){
-      console.log(path);
+      console.log(data.path);
       return axios
       .post('network/'+data.path, data.formData)
       .then(({ data }) => {
@@ -54,7 +54,7 @@ export default {
     },
 
     makeAdmin( data ){
-      console.log(path);
+      console.log(data.path);
       return axios
       .post(`network/${data.path}`)
       .then(({ data }) => {
@@ -64,7 +64,7 @@ export default {
     },
 
     removeAsAdmin( data ){
-      console.log(path);
+      console.log(data.path);
       return axios
       .put(`network/${data.path}`)
       .then(({ data }) => {

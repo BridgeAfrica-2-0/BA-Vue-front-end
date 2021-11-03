@@ -9,10 +9,7 @@ import allSearch from "./allSearch";
 import ProfileAndBusinessDetails from "./ProfileAndBusinessDetails";
 import networkDetails from "./networkDetails";
 import dashboardcommunity from "./dashboardcommunity";
-
-import networkSetting from "./networkSetting";
-
-
+import NetworkSettings from "./NetworkSettings";
 
 import businessFollowers from "./businessFollowers";
 import hotbusiness from "./hotbusiness";
@@ -27,9 +24,7 @@ import { social } from "./social";
 import axios from "axios";
 Vue.use(Vuex);
 
-//axios.defaults.baseURL = process.env.VUE_APP_API_URL; 
-
-axios.defaults.baseURL = "http://test.maxinemoffett.com/api/v1/"
+ axios.defaults.baseURL = process.env.VUE_APP_API_URL;
 
 
 export default new Vuex.Store({
@@ -40,21 +35,21 @@ export default new Vuex.Store({
     ProfileAndBusinessDetails,
     businessOwner,
     hotbusiness,
-    networkSetting,
+    NetworkSettings,
     profile,
     networkProfile,
     follower,
     search,
+    networkProfileMembers,
     
     social,
-    networkProfileMembers,
         allSearch,
      marketSearch,
        networkSearch,
-    networkProfile,
     UserProfileOwner,
     businessFollowers
   },
 });
+
    
 

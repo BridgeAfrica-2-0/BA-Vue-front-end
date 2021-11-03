@@ -1,16 +1,12 @@
 <template>
-  <div>
-    <b class="profession">Profession</b>
+  <div v-if="profession">
+    <b class="profession">Profession</b> 
     <hr />
-    <b-list-group-item class="d-flex align-items-center mb-4 item">
       <div class="datails">
-        <div class="row">
-          <div class="col">
-            <span class="mr-auto"> My Profession </span>
-          </div>
-        </div>
-      </div>
-    </b-list-group-item>
+       
+            <span class="mr-auto"> {{profession}} </span>
+         
+      </div> 
   </div>
 </template>
 
@@ -25,7 +21,15 @@ export default {
         { value: "public", text: "Public" }
       ]
     };
+  },
+
+  computed:{
+
+    profession(){
+      return this.$store.state.follower.profileIntro.user.profession;
+    }
   }
+
 };
 </script>
 <style scoped>

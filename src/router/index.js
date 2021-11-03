@@ -25,13 +25,14 @@ import Visitor from "../views/visitor.vue";
 import profile_owner from "@/views/profileOwner";
 import businessFollower from "@/views/businessFollower";
 import businessOwner from "@/views/businessOwner";
+import businessEditor from "@/views/businessEditor";
 import businessVisitor from "@/views/businessVisitor";
 import search from "@/views/search";
 import forgotPassword from "@/views/forgotPassword";
 import navMessage from "@/views/navMessaging";
 import Blec from "@/views/blec";
 import memberNetworkFollower from "@/views/memberNetworkFollower";
-// import Test from "@/views/test";
+ import govx from "@/views/test";
 import templateView from "@/views/templateView";
 import webSiteCreate from "@/views/webSiteCreate";
 import webSiteCreateTwo from "@/views/webSiteCreateTwo";
@@ -39,6 +40,10 @@ import paidPlan from "@/views/paidPlan";
 import confirmPayment from "@/views/confirmPayment";
 import networks from "@/views/networks";
 import dashboard from "@/views/dashboard";
+
+import myorders from "@/views/myOders"
+
+
 
 import welcome from "@/views/welcome";
 
@@ -50,6 +55,18 @@ const routes = [
   //   name: "Home",
   //   component: Test,
   // },
+
+  {
+    path: "/myorders",
+    name: "orders",
+    component: myorders,
+    // meta: {
+    //   auth: true,
+    // },
+  },
+  
+
+  
   {
     path: "/",
     name: "home",
@@ -63,6 +80,13 @@ const routes = [
     path: "/market",
     name: "market",
     component: market,
+  },
+
+
+  {
+    path: "/govx",
+    name: "govx",
+    component: govx,
   },
 
   {
@@ -84,9 +108,6 @@ const routes = [
     path: "/dashboard",
     name: "dashboard",
     component: dashboard,
-    meta: {
-      // auth: true
-    },
   },
 
   {
@@ -103,6 +124,13 @@ const routes = [
     path: "/business_owner/:id?",
     name: "BusinessOwner",
     component: businessOwner,
+  },
+
+
+  {
+    path: "/business_editor/:id?",
+    name: "BusinessEditor",
+    component: businessEditor,
   },
 
   {
@@ -178,8 +206,7 @@ const routes = [
   {
     path: "/businessfollower/:id?",
     name: "BusinessFollower",
-
-    component: businessFollower
+    component: businessFollower,
   },
   {
     path: "/businessvisitor",
@@ -218,7 +245,7 @@ const routes = [
   },
 
   {
-    path: "/follower",
+    path: "/profile/:id?",
     name: "Follower",
     component: Follower,
   },

@@ -35,9 +35,9 @@
             :key="albums.id"
           >
             <a>
-              <span @click="showlbum(albums.id, albums.album_name)">
-                <img class="card-img album-img" :src="albums.cover[0]" alt="" />
-              </span>
+            <span @click="showlbum(albums.id, albums.album_name)">
+                <img class="card-img album-img" :src="albums.media[0]" alt="" />
+              </span>  
 
               <div class="botmediadess">
                 <p>
@@ -52,7 +52,7 @@
                 <li class="nav-item dropdown">
                   <b-dropdown
                     size="sm"
-                    class=" call-action"
+                    class="call-action"
                     variant="link"
                     toggle-class="text-decoration-none"
                     no-caret
@@ -139,9 +139,7 @@
                     </ul>
                   </div>
                   <div class="input-group col-md-12 text-center mb-4 selec">
-                    <label
-                      class="col-md-4 control-label pr-0 text-design"
-                      for="name"
+                    <label class="col-md-4 control-label pr-0 text-design"
                       >14 Items -
                     </label>
                     <div class="col-md-5 pl-0 pr-0">
@@ -167,224 +165,17 @@
       </b-button>
       <span class="text-center ml-2 f-20"> {{ album_name }} </span>
 
-      <Images v-bind:album="album_id" />
+      <Images :album="album_id"  />
     </div>
   </div>
 </template>
 
 <script>
 import Images from "./image";
-import axios from "axios";
-
+import { mapActions } from "vuex";
 export default {
   components: { Images },
-
-  methods: {
-    hidealbum() {
-      this.showalbum = false;
-    },
-
-    showlbum(abum_id, album_name) {
-      this.album_name = album_name;
-      this.album_id = abum_id;
-      console.log(abum_id);
-      console.log("yoo yoo yooy ");
-      console.log(this.url);
-
-      let loader = this.$loading.show({
-        container: this.fullPage ? null : this.$refs.creatform,
-        canCancel: true,
-        onCancel: this.onCancel,
-        color: "#e75c18"
-      });
-
-      const albumUrl = this.url + "/" + abum_id;
-
-      this.$store
-        .dispatch("businessOwner/getAlbumImages", albumUrl)
-        .then(() => {
-          console.log("hey yeah photo loaded");
-
-          this.showalbum = true;
-          loader.hide();
-        })
-        .catch(err => {
-          console.log({ err: err });
-
-          loader.hide();
-        });
-    },
-
-    onClick(i) {
-      this.index = i;
-    },
-
-    editAlbum(album_id, album_name) {
-      this.edit_id = album_id;
-      this.edit_name = album_name;
-
-      this.$refs["editalbum"].show();
-    },
-
-    deleteAlbum(album_id) {
-      let loader = this.$loading.show({
-        container: this.fullPage ? null : this.$refs.creatform,
-        canCancel: true,
-        onCancel: this.onCancel,
-        color: "#e75c18"
-      });
-
-      axios
-        .post("business/album/edit/" + this.url + "/" + album_id, {
-          name: this.name
-        })
-        .then(response => {
-          console.log(response.data);
-
-          this.flashMessage.show({
-            status: "success",
-
-            message: "Album Deleted"
-          });
-
-          loader.hide();
-        })
-        .catch(err => {
-          this.sending = false;
-
-          if (err.response.status == 422) {
-            console.log({ err: err });
-
-            this.flashMessage.show({
-              status: "error",
-
-              message: err.response.data.message
-            });
-
-            loader.hide();
-          } else {
-            this.flashMessage.show({
-              status: "error",
-
-              message: "Unable to Delete your abum"
-            });
-            console.log({ err: err });
-
-            loader.hide();
-          }
-        });
-    },
-
-    updateAlbum(album_id) {
-      let loader = this.$loading.show({
-        container: this.fullPage ? null : this.$refs.creatform,
-        canCancel: true,
-        onCancel: this.onCancel,
-        color: "#e75c18"
-      });
-
-      axios
-        .post("business/album/update/" + this.url + "/" + album_id, {
-          name: this.edit_name
-        })
-        .then(response => {
-          console.log(response.data);
-
-          this.flashMessage.show({
-            status: "success",
-
-            message: "Album Updated"
-          });
-
-          loader.hide();
-        })
-        .catch(err => {
-          this.sending = false;
-
-          if (err.response.status == 422) {
-            console.log({ err: err });
-
-            this.flashMessage.show({
-              status: "error",
-
-              message: err.response.data.message
-            });
-
-            loader.hide();
-          } else {
-            this.flashMessage.show({
-              status: "error",
-
-              message: "Unable to create your Album"
-            });
-            console.log({ err: err });
-
-            loader.hide();
-          }
-        });
-    },
-
-    createAlbum() {
-      let loader = this.$loading.show({
-        container: this.fullPage ? null : this.$refs.creatform,
-        canCancel: true,
-        onCancel: this.onCancel,
-        color: "#e75c18"
-      });
-
-      axios
-        .post("business/album/create/9", {
-          name: this.name
-        })
-        .then(response => {
-          console.log(response.data);
-
-          this.flashMessage.show({
-            status: "success",
-
-            message: "Album Created"
-          });
-
-          loader.hide();
-        })
-        .catch(err => {
-          this.sending = false;
-
-          if (err.response.status == 422) {
-            console.log({ err: err });
-
-            this.flashMessage.show({
-              status: "error",
-
-              message: err.response.data.message
-            });
-
-            loader.hide();
-          } else {
-            this.flashMessage.show({
-              status: "error",
-
-              message: "Unable to create your Album"
-            });
-            console.log({ err: err });
-
-            loader.hide();
-          }
-        });
-    }
-  },
-
-  mounted() {
-    this.url = this.$route.params.id;
-  },
-
-  computed: {
-    albums() {
-      return this.$store.state.businessOwner.albums;
-    }
-  },
-
-  data: function() {
+  data: function () {
     return {
       showalbum: false,
       name: null,
@@ -392,48 +183,181 @@ export default {
       fullPage: null,
       album_id: null,
       album_name: null,
-
       edit_id: null,
       edit_name: null,
-
-      images: [
-        "https://placekitten.com/801/800",
-        "https://placekitten.com/802/800",
-        "https://placekitten.com/803/800",
-        "https://placekitten.com/804/800",
-        "https://placekitten.com/805/800",
-        "https://placekitten.com/806/800",
-        "https://placekitten.com/807/800",
-        "https://placekitten.com/808/800",
-        "https://placekitten.com/809/800"
-      ],
-      imagees: [
-        "https://i.wifegeek.com/200426/f9459c52.jpg",
-        "https://i.wifegeek.com/200426/5ce1e1c7.jpg",
-        "https://i.wifegeek.com/200426/5fa51df3.jpg",
-        "https://i.wifegeek.com/200426/663181fe.jpg",
-        "https://i.wifegeek.com/200426/2d110780.jpg",
-        "https://i.wifegeek.com/200426/e73cd3fa.jpg",
-        "https://i.wifegeek.com/200426/15160d6e.jpg",
-        "https://i.wifegeek.com/200426/d0c881ae.jpg",
-        "https://i.wifegeek.com/200426/a154fc3d.jpg",
-        "https://i.wifegeek.com/200426/71d3aa60.jpg",
-        "https://i.wifegeek.com/200426/d17ce9a0.jpg",
-        "https://i.wifegeek.com/200426/7c4deca9.jpg",
-        "https://i.wifegeek.com/200426/64672676.jpg",
-        "https://i.wifegeek.com/200426/de6ab9c6.jpg",
-        "https://i.wifegeek.com/200426/d8bcb6a7.jpg",
-        "https://i.wifegeek.com/200426/4085d03b.jpg",
-        "https://i.wifegeek.com/200426/177ef44c.jpg",
-        "https://i.wifegeek.com/200426/d74d9040.jpg",
-        "https://i.wifegeek.com/200426/81e24a47.jpg",
-        "https://i.wifegeek.com/200426/43e2e8bb.jpg"
-      ],
-      index: 0
+      images: [],
+      imagees: [ ],
+      index: 0,
     };
-  }
+  },
+  methods: {
+    hidealbum() {
+      this.showalbum = false;
+    },
+    showlbum(abum_id, album_name) {
+      this.album_name = album_name;
+      this.album_id = abum_id;
+      console.log(abum_id);
+      console.log("yoo yoo yooy ");
+      console.log(this.url);
+      let loader = this.$loading.show({
+        container: this.fullPage ? null : this.$refs.creatform,
+        canCancel: true,
+        onCancel: this.onCancel,
+        color: "#e75c18",
+      });
+      const albumUrl = this.url + "/" + abum_id;
+      this.$store
+        .dispatch("businessOwner/getAlbumImages", albumUrl)
+        .then(() => {
+          console.log("hey yeah photo loaded");
+          this.showalbum = true;
+          loader.hide();
+        })
+        .catch((err) => {
+          console.log({ err: err });
+          loader.hide();
+        });
+    },
+    onClick(i) {
+      this.index = i;
+    },
+    editAlbum(album_id, album_name) {
+      this.edit_id = album_id;
+      this.edit_name = album_name;
+      this.$refs["editalbum"].show();
+    },
+
+    ...mapActions({
+    createAlbumm: "businessOwner/createAlbum",       
+      updateAlbumm: "businessOwner/updateAlbum",
+      deleteAlbumm: "businessOwner/deleteAlbum",
+      getAlbums: "businessOwner/getAlbums",
+    }),
+
+    createAlbum() {
+      let loader = this.$loading.show({
+        container: this.fullPage ? null : this.$refs.creatform,
+        canCancel: true,
+        onCancel: this.onCancel,
+        color: "#e75c18",
+      });
+      this.createAlbumm({name:this.name, id:this.url })
+        .then((response) => {
+          this.flashMessage.show({
+            status: "success",
+            message: "Album Created",
+          });
+          this.getAlbums(this.url);
+          loader.hide();
+        })
+        .catch((err) => {
+          this.sending = false;
+          if (err.response.status == 422) {
+            console.log({ err: err });
+            this.flashMessage.show({
+              status: "error",
+              message: err.response.data.message,
+            });
+            loader.hide();
+          } else {
+            this.flashMessage.show({
+              status: "error",
+              message: "Unable to create your Album",
+            });
+            console.log({ err: err });
+            loader.hide();
+          }
+        });
+    },
+
+    updateAlbum(album ) {
+      let loader = this.$loading.show({
+        container: this.fullPage ? null : this.$refs.creatform,
+        canCancel: true,
+        onCancel: this.onCancel,
+        color: "#e75c18",
+      });
+      this.updateAlbumm({name:this.edit_name,url:this.url, id:album})
+        .then(() => {
+          this.flashMessage.show({
+            status: "success",
+            message: "Album Updated",
+          });
+          this.getAlbums(this.url);
+          loader.hide();
+            this.$refs["editalbum"].hide(); 
+        })
+        .catch((err) => {
+          this.sending = false;
+          if (err.response.status == 422) {
+            console.log({ err: err });
+            this.flashMessage.show({
+              status: "error",
+              message: err.response.data.message,
+            });
+            loader.hide();
+          } else {
+            this.flashMessage.show({
+              status: "error",
+              message: "Unable to create your Album",
+            });
+            console.log({ err: err });
+            loader.hide();
+          }
+        });
+    },
+
+    deleteAlbum(album) {
+     
+      let loader = this.$loading.show({
+        container: this.fullPage ? null : this.$refs.creatform,
+        canCancel: true,
+        onCancel: this.onCancel,
+        color: "#e75c18",
+      });
+      this.deleteAlbumm( { url:this.url, id:album})
+        .then(() => {
+          this.flashMessage.show({
+            status: "success",
+            message: "Album Deleted",
+          });
+          this.getAlbums(this.url);
+          loader.hide();
+        })
+        .catch((err) => {
+          this.sending = false;
+          if (err.response.status == 422) {
+            console.log({ err: err });
+            this.flashMessage.show({
+              status: "error",
+              message: err.response.data.message,
+            });
+            loader.hide();
+          } else {
+            this.flashMessage.show({
+              status: "error",
+              message: "Unable to Delete your abum",
+            });
+            console.log({ err: err });
+            loader.hide();
+          }
+        });
+    },
+  },
+  
+  beforeMount() {
+    this.url = this.$route.params.id;
+    this.getAlbums(this.url);
+  },
+  computed: {
+    albums() {
+      return this.$store.state.businessOwner.albums;
+    },
+  },
 };
 </script>
+
 
 <style>
 .call-action {
@@ -463,7 +387,7 @@ export default {
 @media (min-width: 960px) {
   .album-img {
     height: 300px !important;
-    object-fit: cover !important;
+    object-fit: contain !important;
   }
 
   .drag-textt {
@@ -551,7 +475,7 @@ export default {
 @media only screen and (min-width: 768px) and (max-width: 1331px) {
   .album-img {
     height: 300px !important;
-    object-fit: cover !important;
+    object-fit: contain !important;
   }
 
   .drag-textt {
@@ -599,7 +523,7 @@ export default {
 @media (max-width: 762px) {
   .album-img {
     height: 200px !important;
-    object-fit: cover !important;
+    object-fit: contain !important;
   }
 
   .drag-textt {

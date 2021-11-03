@@ -1,8 +1,8 @@
 <template>
-  <div style="overflow-y: hidden;">
+  <div style="overflow-y: hidden">
     <navbar />
 
-    <div class="container-fluid lynetowrk" style="margin-top:-30px">
+    <div class="container-fluid lynetowrk" style="margin-top: -30px">
       <ly-tab
         v-model="selectedId"
         :items="items"
@@ -16,14 +16,14 @@
     <div class="demo container-fluid p-0">
       <div class="mt-3" v-if="selectedId == '0'">
         <b-row class="center-content">
-          <b-col lg="5" xl="4" class=" ">
+          <b-col lg="5" xl="4" class="">
             <Parent />
           </b-col>
 
           <b-col
             lg="7"
             xl="8"
-            class="order-sm-0 mt-sm-10 mt-md-10 mt-xl-0  marg-tap"
+            class="order-sm-0 mt-sm-10 mt-md-10 mt-xl-0 marg-tap"
           >
             <Default />
           </b-col>
@@ -81,7 +81,7 @@ export default {
     Inbox,
     navbar,
     Footer,
-    Parent
+    Parent,
   },
 
   data() {
@@ -99,20 +99,20 @@ export default {
 
         { label: "Keyword Alert", icon: "" },
 
-        { label: "Settings", icon: "" }
+        { label: "Settings", icon: "" },
       ],
 
       options: {
-        activeColor: "#32a400"
-      }
+        activeColor: "#32a400",
+      },
     };
   },
 
   methods: {
     handleChange(item, index) {
       console.log(item, index);
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -121,7 +121,6 @@ export default {
   .marg-tap {
     margin-top: 20px;
   }
-
 }
 
 .m-top {
@@ -143,8 +142,6 @@ export default {
   background-clip: border-box;
   border: 1px solid rgba(0, 0, 0, 0.125);
 }
-
-
 
 .nav-text {
   cursor: pointer;

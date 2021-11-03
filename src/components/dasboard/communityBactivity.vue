@@ -230,7 +230,7 @@ export default {
 
 infiniteHandler($state) {
 
-        axios.get('business/show/post/'+this.url+"/"+this.page)
+        axios.get('profile/dashboard/post/business/'+this.businessId+"/"+this.page)
       .then(({ data }) => {
       // commit('ownerPost', data.data);
       //  console.log(data);
@@ -298,6 +298,12 @@ infiniteHandler($state) {
     
     },
 
+    businessId(){
+
+    return  this.$store.state.dashboard.dBusinessId; 
+
+    },
+
 
      owner_post() {
 
@@ -327,6 +333,19 @@ infiniteHandler($state) {
 
   padding: 2px !important;
 }
+
+
+
+
+.s-card{
+  height:560px !important; 
+  overflow: auto; 
+  overflow-x: hidden;
+  padding: 15px;
+
+
+}
+
 
 
 .action-intro {
@@ -497,15 +516,6 @@ infiniteHandler($state) {
 
 
 
-
-.s-card{
-  height:540px; 
-  overflow: auto; 
-  overflow-x: hidden;
-  padding: 15px;
-
-
-}
 
 
 </style>

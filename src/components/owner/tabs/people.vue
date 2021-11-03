@@ -1,13 +1,16 @@
 <template>
   <div>
     <div class="s-cardd">
-      <div class="people-style border shadow">
+     
+
+
+    <div class="people-style border shadow"  v-for="item in users" :key="item.id">
         <b-row class="mb-1">
           <b-col md="3" cols="4" lg="3" class="my-auto">
             <b-avatar
               class="p-avater"
               variant="primary"
-              src="https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg"
+              :src="item.profile_picture"
             ></b-avatar>
           </b-col>
 
@@ -19,7 +22,7 @@
                     <b-row>
                       <b-col md="6" lg="6" cols="6" sm="6" class="mt-lg-2">
                         <div class="mt-2 mt-lg-0 mt-xl-0 username">
-                          <b> howty Itz blec </b>
+                          <b> {{ item.name }} </b>
                         </div>
                       </b-col>
 
@@ -30,7 +33,7 @@
                         sm="6"
                         class="mt-3 mt-lg-2 mt-xl-2"
                       >
-                        <h6 class="follower">5K Community</h6>
+                        <h6 class="follower">{{ count(item.followers) }} Community</h6>
                       </b-col>
                     </b-row>
                   </div>
@@ -85,179 +88,125 @@
         </b-row>
       </div>
 
-      <div class="people-style border shadow">
-        <b-row class="mb-1">
-          <b-col md="3" cols="4" lg="3" class="my-auto">
-            <b-avatar
-              class="p-avater"
-              variant="primary"
-              src="https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg"
-            ></b-avatar>
-          </b-col>
 
-          <b-col md="8" cols="8" lg="8">
-            <div>
-              <b-row class="shift">
-                <b-col md="12" lg="12" sm="12" cols="12">
-                  <div class="e-name">
-                    <b-row>
-                      <b-col md="6" lg="6" cols="6" sm="6" class="mt-lg-2">
-                        <div class="mt-2 mt-lg-0 mt-xl-0 username">
-                          <b> howty Itz blec </b>
-                        </div>
-                      </b-col>
-
-                      <b-col
-                        md="6"
-                        lg="6"
-                        cols="6"
-                        sm="6"
-                        class="mt-3 mt-lg-2 mt-xl-2"
-                      >
-                        <h6 class="follower">5K Community</h6>
-                      </b-col>
-                    </b-row>
-                  </div>
-                </b-col>
-
-                <b-col lg="12" xl="12" cols="12" sm="12" md="12">
-                  <div class="e-name">
-                    <b-row class="mt-lg-0">
-                      <b-col
-                        md="6"
-                        lg="6"
-                        cols="6"
-                        sm="6"
-                        xl="6"
-                        class="mt-2 mt-lg-2 mt-xl-2 btn-2 center"
-                      >
-                        <b-button
-                          block
-                          variant="primary"
-                          size="sm"
-                          class="b-background flexx pobtn shadow mr-lg-3 mr-xl-3"
-                        >
-                          <i class="fas fa-envelope   fa-lg btn-icon "></i>
-                          <span class="btn-text">Message</span>
-                        </b-button>
-                      </b-col>
-
-                      <b-col
-                        md="6"
-                        lg="6"
-                        cols="6"
-                        sm="6"
-                        xl="6"
-                        class="mt-2 mt-lg-2 mt-xl-2 btn-2 center"
-                      >
-                        <b-button
-                          block
-                          size="sm"
-                          class="b-background flexx pobtn shadow mr-lg-3 mr-xl-3"
-                          variant="primary"
-                        >
-                          <i class="fas fa-user-plus  fa-lg btn-icon "></i>
-                          <span class="btn-com">Community</span>
-                        </b-button>
-                      </b-col>
-                    </b-row>
-                  </div>
-                </b-col>
-              </b-row>
-            </div>
-          </b-col>
-        </b-row>
-      </div>
-
-      <div class="people-style border shadow">
-        <b-row class="mb-1">
-          <b-col md="3" cols="4" lg="3" class="my-auto">
-            <b-avatar
-              class="p-avater"
-              variant="primary"
-              src="https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg"
-            ></b-avatar>
-          </b-col>
-
-          <b-col md="8" cols="8" lg="8">
-            <div>
-              <b-row class="shift">
-                <b-col md="12" lg="12" sm="12" cols="12">
-                  <div class="e-name">
-                    <b-row>
-                      <b-col md="6" lg="6" cols="6" sm="6" class="mt-lg-2">
-                        <div class="mt-2 mt-lg-0 mt-xl-0 username">
-                          <b> howty Itz blec </b>
-                        </div>
-                      </b-col>
-
-                      <b-col
-                        md="6"
-                        lg="6"
-                        cols="6"
-                        sm="6"
-                        class="mt-3 mt-lg-2 mt-xl-2"
-                      >
-                        <h6 class="follower">5K Community</h6>
-                      </b-col>
-                    </b-row>
-                  </div>
-                </b-col>
-
-                <b-col lg="12" xl="12" cols="12" sm="12" md="12">
-                  <div class="e-name">
-                    <b-row class="mt-lg-0">
-                      <b-col
-                        md="6"
-                        lg="6"
-                        cols="6"
-                        sm="6"
-                        xl="6"
-                        class="mt-2 mt-lg-2 mt-xl-2 btn-2 center"
-                      >
-                        <b-button
-                          block
-                          variant="primary"
-                          size="sm"
-                          class="b-background flexx pobtn shadow mr-lg-3 mr-xl-3"
-                        >
-                          <i class="fas fa-envelope   fa-lg btn-icon "></i>
-                          <span class="btn-text">Message</span>
-                        </b-button>
-                      </b-col>
-
-                      <b-col
-                        md="6"
-                        lg="6"
-                        cols="6"
-                        sm="6"
-                        xl="6"
-                        class="mt-2 mt-lg-2 mt-xl-2 btn-2 center"
-                      >
-                        <b-button
-                          block
-                          size="sm"
-                          class="b-background flexx pobtn shadow mr-lg-3 mr-xl-3"
-                          variant="primary"
-                        >
-                          <i class="fas fa-user-plus  fa-lg btn-icon "></i>
-                          <span class="btn-com">Community</span>
-                        </b-button>
-                      </b-col>
-                    </b-row>
-                  </div>
-                </b-col>
-              </b-row>
-            </div>
-          </b-col>
-        </b-row>
-      </div>
     </div>
+    
+  <infinite-loading @infinite="infiniteHandler"></infinite-loading>
   </div>
 </template>
 
 <script>
-export default {};
+
+import moment from "moment";
+import axios from "axios";
+export default {
+
+
+   props:['type'],
+  data() {
+    return {
+      page: 1,
+      options: {
+        rewind: true,
+        autoplay: true,
+        perPage: 1,
+        pagination: false,
+
+        type: "loop",
+        perMove: 1
+      }
+    };
+  },
+
+
+    computed:{
+ 
+   users(){
+
+      if(this.type=="Follower"){ 
+
+      return  this.$store.state.profile.UcommunityFollower.user_followers;  
+
+       }else{
+
+         return  this.$store.state.profile.UcommunityFollowing.user_following; 
+       }
+   }
+    
+    
+  },
+
+    methods:{
+
+
+      count(number) {
+      if (number >= 1000000) {
+        return number / 1000000 + "M";
+      }
+      if (number >= 1000) {
+        return number / 1000 + "K";
+      } else return number;
+    },
+
+      
+      
+    
+    infiniteHandler($state) {
+      console.log("hahahahahahahah");
+      let url = null;
+
+      if (this.type == "Follower") {
+      url = "profile/user/follower/";
+
+
+
+        
+      } else {
+        url = "profile/user/following/";
+      }
+      axios
+        .get(url + this.page)
+        .then(({ data }) => {
+
+           
+            if (this.type == "Follower") {
+             
+
+               if (data.data.user_followers.length) {
+           this.page += 1;
+           
+              this.users.push(...data.data.user_followers);
+            $state.loaded();
+          } else {
+            $state.complete();
+          }
+
+            } else {
+         
+
+             if (data.data.user_following.length) {
+           this.page += 1;
+           
+              this.users.push(...data.data.user_following);
+            $state.loaded();
+          } else {
+            $state.complete();
+          }
+
+
+            }
+
+            
+          console.log(data);
+         
+        })
+        .catch((err) => {
+          console.log({ err: err });
+        });
+    },
+
+  }  
+};
 </script>
 
 <style scoped>
@@ -300,7 +249,7 @@ export default {};
   }
 
   .s-cardd {
-    padding-left: 6px;
+    padding-left: 4px;
     padding-right: 4px;
   }
 }

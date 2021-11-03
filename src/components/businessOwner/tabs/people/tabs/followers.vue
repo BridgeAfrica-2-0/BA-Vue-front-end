@@ -1,86 +1,42 @@
 <template>
   <div>
-
-            <b-row>
-
-           
-      <b-col cols="12" md="6" >
-
-
+    <b-row>
+      <b-col cols="12" md="6">
         <b-input-group class="mb-2 px-md-3 float-right">
-         
           <b-form-input
             aria-label="Text input with checkbox"
             placeholder="Search Something"
+            v-model="keywords"
           ></b-form-input>
 
-           <b-input-group-prepend is-text>
-            <b-icon-search class="text-primary border-none"></b-icon-search>
+          <b-input-group-prepend is-text  @click="$refs.search.search()">
+            <b-icon-search  class="text-primary border-none"></b-icon-search>
           </b-input-group-prepend>
-
-
         </b-input-group>
       </b-col>
-
-
     </b-row>
+    <br />
+        <CommunityMembers  :searchh="keywords" ref="search" type="Follower" />
     
-    <br/>
-
-
-
-
-
-
-
-
-
-
-
-
-<b-row> 
-<b-col md="12" lg="6">  
-    <CommunityMembers/>
-
- </b-col>
-
-
- <b-col md="12" lg="6">  
-    <CommunityMembers/>
-
- </b-col>
-
-     </b-row>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- 
-
-
   </div>
 </template>
 
 <script>
-import CommunityMembers from "../../communityMember"
+import CommunityMembers from "../../communityMember";
 export default {
-  components:{
-      CommunityMembers
-  }
-}
+   data() {
+    return {
+        keywords:"",
+    }
+    },
+  components: {
+    CommunityMembers
+  },
+
+  computed: {
+   
+  },
+};
 </script>
 
-<style>
-
-</style>
+<style></style>

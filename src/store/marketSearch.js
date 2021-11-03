@@ -7,10 +7,9 @@ export default {
         categories: [],
         subCat: [],
         subFilter: [],
-
-        loader: false,
+        prodLoader: false,
         success: false,
-        token: "24|5uVwIzU7r82crJj936tmqkuIMRXxm1ADTCbuRceL"
+        token: "51|HZT2jfu5klFDkJhpvEI6dBhAQBDEdBQ2fABwhhaf"
     },
     getters: {
         getProducts(state) {
@@ -31,7 +30,7 @@ export default {
 
         // sending loader value
         getLoader(state) {
-            return state.loader;
+            return state.prodLoader;
         },
         // sending success value
         getSuccess(state) {
@@ -52,10 +51,8 @@ export default {
         setSubFilters(state, data) {
             state.subFilter = data
         },
-
-
         setLoader(state, payload) {
-            state.loader = payload;
+            state.prodLoader = payload;
         },
         setSuccess(state, payload) {
             state.success = payload;
@@ -65,11 +62,7 @@ export default {
     actions: {
         getCategories({ state, commit }, bussiness_id) {
             return axios
-                .get("category/all", {
-                    headers: {
-                        Authorization: `Bearer ${state.token}`
-                    }
-                })
+                .get("category")
                 .then(res => {
                     console.log("my Categories: ");
                     let categories = res.data.data;
@@ -85,17 +78,19 @@ export default {
 
                         axios
                             .get(
-                                `subcategory/all/${data.cat_id}?business_id=${data.bussiness_id}`, {
-                                    headers: {
-                                        Authorization: `Bearer ${state.token}`
-                                    }
-                                }
+                                `subcategory/${data.cat_id}?business_id=${data.bussiness_id}`
                             )
                             .then(res => {
                                 console.log("all loaded!");
+                                let sub_categories = []
+                                res.data.data.map((sub) => {
+                                        sub_categories.push({ cat_id: cat.id, ...sub })
+                                    })
+                                    // console.log("final sub categories: ", sub_categories);
+
                                 all.push({
                                     category: cat,
-                                    sub_cat: res.data.data
+                                    sub_cat: sub_categories
 
                                 });
                                 console.log(all);
@@ -116,42 +111,64 @@ export default {
 
         getFilter({ state }, sub_id) {
             return axios
-                .get(`filters/subcategory/${sub_id}`, {
+                .get(`filters/subcategory/${sub_id}`)
+        },
+
+        getProducts({ commit, state }) {
+            commit("setLoader", true);
+
+
+            return axios.get("market")
+                .then((res) => {
+                    commit("setLoader", false);
+
+                    console.log("products list: ", res.data);
+                    commit("setProducts", res.data);
+                })
+                .catch((err) => {
+                    commit("setLoader", false);
+
+                    console.error(err);
+                });
+        },
+        nextPage({ commit, state }, page) {
+            commit("setLoader", true);
+            commit("setProducts", { data: [] });
+
+            return axios.get(`market?page=${page}`)
+                .then((res) => {
+                    commit("setLoader", false);
+
+                    console.log("products list: ", res.data);
+                    commit("setProducts", res.data);
+                })
+                .catch((err) => {
+                    commit("setLoader", false);
+
+                    console.error(err);
+                });
+        },
+        searchProducts({ commit, state }, data) {
+            commit("setProducts", { data: [] });
+            commit("setLoader", true);
+
+            return axios.post("market/search", data, {
                     headers: {
                         Authorization: `Bearer ${state.token}`
                     }
                 })
-        },
-
-        getProducts({ commit }) {
-            return axios.get("market", {
-                    headers: {
-                        Authorization: "Bearer 24|5uVwIzU7r82crJj936tmqkuIMRXxm1ADTCbuRceL",
-                    },
-                })
                 .then((res) => {
-                    console.log("products list: ", res.data);
+                    commit("setLoader", false);
+                    console.log("Search results: ", res.data);
                     commit("setProducts", res.data);
+
                 })
                 .catch((err) => {
-                    console.error(err);
+                    commit("setLoader", false);
+                    console.log(err);
                 });
         },
-        nextPage({ commit }, page) {
-            commit("setProducts", []);
 
-            return axios.get(`market?page=${page}`, {
-                    headers: {
-                        Authorization: "Bearer 24|5uVwIzU7r82crJj936tmqkuIMRXxm1ADTCbuRceL",
-                    },
-                })
-                .then((res) => {
-                    console.log("products list: ", res.data);
-                    commit("setProducts", res.data);
-                })
-                .catch((err) => {
-                    console.error(err);
-                });
-        }
+
     }
 };

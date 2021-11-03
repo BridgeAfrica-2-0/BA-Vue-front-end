@@ -43,6 +43,35 @@ export default {
         console.log(data);
       })
     },
+    getMembers( data ){
+      console.log(path);
+      return axios
+      .post('network/'+data.path, data.formData)
+      .then(({ data }) => {
+        console.log(data);
+        return data;
+      })
+    },
+
+    makeAdmin( data ){
+      console.log(path);
+      return axios
+      .post(`network/${data.path}`)
+      .then(({ data }) => {
+        console.log(data);
+        return data;
+      })
+    },
+
+    removeAsAdmin( data ){
+      console.log(path);
+      return axios
+      .put(`network/${data.path}`)
+      .then(({ data }) => {
+        console.log(data);
+        return data;
+      })
+    },
  
     getadmins( {commit}, data){
       console.log('getadmins: '+data.path);

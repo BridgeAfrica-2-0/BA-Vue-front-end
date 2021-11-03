@@ -1,114 +1,28 @@
 <template>
-  <div class="main">
-    
-       <div class="splide"   v-if="!business_info.cover.length==0"  >
+  <div class="main"> 
+    <div class="splide" v-if="!business_info.cover.length == 0">
+      <splide :options="options" class="banner r-image">
+        <splide-slide v-for="cover in business_info.cover" :key="cover.id">
+          <img :src="cover.media_url" class="r-image" />
+        </splide-slide>
+      </splide>  
+    </div>
 
-    <splide :options="options" class="banner r-image"   >  
-     
- 
-  
-  
-  
-  
-           
-    
-  
-   <splide-slide   v-for="cover in business_info.cover" :key="  cover.id" >
-         
-  
-            <img  
-                
-              :src="cover.media_url"  
-                
-              class="r-image"  
-            />  
-  
-  
-    </splide-slide>  
+    <div v-else class="splide">
+      <splide :options="options" class="banner r-image">
+        <splide-slide>
+          <img src="@/assets/img/Business 1.jpg" class="r-image" />
+        </splide-slide>
 
+        <splide-slide>
+          <img src="@/assets/img/business 2.jpg" class="r-image" />
+        </splide-slide>
 
-
-              </splide>
-
-   </div>
-
-
-
-
-
-
-
-
-
-
-   <div v-else class="splide"  >
-
-    <splide :options="options" class="banner r-image"   >
-   
-
-
- 
-
-
-
-
-
-
-
-     
-
-     <splide-slide >
-       
-
-            <img
-              src="@/assets/img/Business 1.jpg"
-              
-              class="r-image"
-            />
-
-
-    </splide-slide>
-
-
-
-     <splide-slide >
-       
-       
-            <img
-             
-               src="@/assets/img/business 2.jpg"
-              
-              class="r-image"
-            />
-
-
-
-    </splide-slide>
-
-
-      <splide-slide >
-       
-
-            <img
-               src="@/assets/img/business 3.png"
-              
-              class="r-image"
-            />
-
-
-
-    </splide-slide>
-
-
-
- 
-
-   
-
-
-              </splide>
-
-   </div>
+        <splide-slide>
+          <img src="@/assets/img/business 3.png" class="r-image" />
+        </splide-slide>
+      </splide>
+    </div>
 
     <b-button class=" float-right see-all">
       See All
@@ -122,11 +36,11 @@
           </div>
           <div class="d-inline-block ml-4 float-left name-block">
             <b-link>
-              <h5 class="font-weight-bolder name">{{business_info.name}} </h5>
+              <h5 class="font-weight-bolder name">{{ business_info.name }}</h5>
             </b-link>
             <p>
               <br />
-              {{business_info.community}}  Community
+              {{ business_info.community }} Community
             </p>
           </div>
         </b-row>
@@ -166,13 +80,13 @@
         <b-col>
           <b-row>
             <div>
-              <img class="logo" :src="business_info.logo_path"  />
+              <img class="logo" :src="business_info.logo_path" />
             </div>
             <div class="d-inline-block mt-4 ml-4 float-left texts">
-              <h6 class="font-weight-bolder name">{{business_info.name}} </h6>
+              <h6 class="font-weight-bolder name">{{ business_info.name }}</h6>
               <p class="details">
-               <!-- www.bridgeafrica.com <br /> -->
-                {{business_info.community}}  Community
+                <!-- www.bridgeafrica.com <br /> -->
+                {{ business_info.community }} Community
               </p>
             </div>
           </b-row>
@@ -212,8 +126,8 @@
     <div class="body">
       <b-row>
         <b-col cols="12" class="p-0">
-          <b-tabs content-class="mt-3 p-0" fill pills>
-            <b-tab title="Home"><HomePage /></b-tab>
+          <b-tabs lazy content-class="mt-3 p-0" fill pills>
+            <b-tab  title="Home"><HomePage /></b-tab>
             <b-tab title="About"><About /></b-tab>
             <b-tab title="Media"><Media /></b-tab>
             <b-tab title="Market"><MarketPlace /></b-tab>
@@ -231,7 +145,7 @@ import HomePage from "../businessf/tabs/businessHome";
 import About from "./tabs/about";
 import Media from "./tabs/media";
 import MarketPlace from "./tabs/marketPlace";
-// import Community from "./tabs/memberNetwork";
+import Community from "./tabs/memberNetwork";
 import Networks from "./tabs/networks";
 
 export default {
@@ -241,12 +155,13 @@ export default {
     About,
     Media,
     MarketPlace,
+    Community,
     Networks,
   },
 
   data() {
     return {
-      url_data:null,
+      url_data: null,
       options: {
         rewind: true,
         autoplay: true,
@@ -271,35 +186,29 @@ export default {
   },
 
   computed: {
-
-     business_info() {
-      return  this.$store.state.businessOwner.businessInfo;  
-
-    
-    }
-
+    business_info() {
+      return this.$store.state.businessOwner.businessInfo;
+    },
+  },
+  created(){
+    this.url_data = this.$route.params.id;
+     this.businessInfo();
   },
 
-    mounted(){
-     this.url_data=this.$route.params.id;
+  mounted() {
+    
 
-     console.log(this.url_data);
+    console.log(this.url_data);
 
-     this.businessInfo();
+    this.CommunityBusiness();
 
-     this.CommunityBusiness();
+    this.CommunityPeople();
 
-     this.CommunityPeople();
-
-     this.businessCommunityTotal();
-     this.ownerPost();
-    },
-  methods: {  
-
-
-
-                  
-      businessInfo() {
+    this.businessCommunityTotal();
+    this.ownerPost();
+  },
+  methods: {
+    businessInfo() {
       this.$store
         .dispatch("businessOwner/businessInfo", this.url_data)
         .then(() => {
@@ -310,10 +219,7 @@ export default {
         });
     },
 
-
-
-
-   CommunityBusiness() {
+    CommunityBusiness() {
       this.$store
         .dispatch("businessOwner/CommunityBusiness", this.url_data)
         .then(() => {
@@ -324,9 +230,7 @@ export default {
         });
     },
 
-   
-
-   CommunityPeople() {
+    CommunityPeople() {
       this.$store
         .dispatch("businessOwner/CommunityPeople", this.url_data)
         .then(() => {
@@ -337,14 +241,9 @@ export default {
         });
     },
 
-
-
-
-
-
-       businessCommunityTotal() {
+    businessCommunityTotal() {
       this.$store
-        .dispatch("businessOwner/businessCommunityTotal",  this.url_data)
+        .dispatch("businessOwner/businessCommunityTotal", this.url_data)
         .then(() => {
           console.log("hey yeah");
         })
@@ -353,11 +252,7 @@ export default {
         });
     },
 
-
-
-
-
-   ownerPost() {
+    ownerPost() {
       this.$store
         .dispatch("businessOwner/ownerPost", this.url_data)
         .then(() => {
@@ -367,11 +262,6 @@ export default {
           console.log({ err: err });
         });
     },
-
-
-
-
-
   },
 };
 </script>

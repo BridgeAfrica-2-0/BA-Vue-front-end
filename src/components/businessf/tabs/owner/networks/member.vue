@@ -18,7 +18,7 @@
       </b-col>
     </b-row>
 
-    <b-row class="mt-4">
+    <b-row class="mt-4" v-if="admins.length != 0">
       <b-col cols="12">
         <h6 class="font-weight-bolder">
           Network Admins ({{nFormatter(admins.length)}})
@@ -257,10 +257,13 @@ export default {
       console.log('keyword: '+data);
       let formData = new FormData();
       formData.append('keyword', data);
-      this.axios
-      .post("network/"+this.url+"/members/list/"+this.page, formData)
-      .then(({ data }) => {
-       console.log(data);
+      this.$store
+        .dispatch("networkProfileMembers/getMembers", {
+          path: this.url+"/members/list/"+this.page,
+          formData: formData
+        })
+        .then(({ data }) => {
+          console.log(data);
        console.log(this.page);
         if (data.data.length) {
         this.page += 1;
@@ -296,26 +299,7 @@ export default {
           this.loading = false;
         });
     },
-    // getAdmins() {
-    //   this.loading = true;
-    //   console.log("getAdmins function");
-    //   const data = this.getRequestDatas(this.searchTitle);
-    //   console.log('keyword: '+data);
-    //   let formData = new FormData();
-    //   formData.append('keyword', data);
-    //   this.axios
-    //   .get("network/"+this.url+"/members/admin/"+this.page, formData)
-    //   .then(({ data }) => {
-    //     console.log(data);
-    //     console.log(this.page);
-    //     console.log(...data.data);
-    //     // this.admins = data.data;
-    //     this.admins.push(...data.data);
-
-    //   }) .catch((err) => {
-    //       console.log({ err: err });
-    //   })
-    // },
+ 
     getBusiness() {
       this.loading = true;
       const data = this.getRequestDatas(this.searchTitle);
@@ -346,8 +330,12 @@ export default {
 
     makeAdmin: function(user_id){
       this.loading = true;
-      this.axios.put("network/"+this.url+"/make/admin/"+user_id)
-      .then(() => {
+      this.$store
+        .dispatch("networkProfileMembers/makeAdmin", {
+          path: this.url+"/make/admin/"+user_id
+        })
+        .then(({ data }) => {
+          console.log(data);
         console.log('ohh yeah');
         this.searchTitle = "";
         this.getMembers();
@@ -370,8 +358,12 @@ export default {
     },
     removeAsAdmin: function(user_id){
       this.loading = true;
-      this.axios.put("network/"+this.url+"/remove/admin/"+user_id)
-      .then(() => {
+      this.$store
+        .dispatch("networkProfileMembers/removeAsAdmin", {
+          path: this.url+"/remove/admin/"+user_id
+        })
+        .then(({ data }) => {
+          console.log(data);
         console.log('ohh yeah');
         this.searchTitle = "";
         this.getMembers();
@@ -394,8 +386,12 @@ export default {
 		},
     removeFromNetworks: function(user_id){
       this.loading = true;
-      this.axios.delete("network/"+this.url+"/member/remove/"+user_id)
-      .then(() => {
+      this.$store
+        .dispatch("networkProfileMembers/removeAsAdmin", {
+          path: this.url+"/member/remove/"+user_id
+        })
+        .then(({ data }) => {
+          console.log(data);
         console.log('ohh yeah');
         this.searchTitle = "";
         this.getMembers();

@@ -2,7 +2,7 @@
   <div>
     <div
       class="people-style shadow"
-      v-for="item in $store.getters['hotbusiness/getdetails']"
+      v-for="item in business "
       :key="item.id"
     >
       <b-row>
@@ -34,7 +34,7 @@
               :text="item.about_business"
               link="#"
               less-str="read less"
-              :max-chars="15"
+              :max-chars="50"
             >
             </read-more>
               </p>
@@ -103,16 +103,20 @@
           </div>
         </b-col>
       </b-row>
+      
     </div>
+     <infinite-loading @infinite="infiniteHandler"></infinite-loading>
   </div>
 </template>
 
 <script>
+import axios from "axios";  
 export default {
   props: ["title", "image"],
 
   data() {
     return {
+       page: 1,
       options: {
         rewind: true,
         autoplay: true,
@@ -126,7 +130,7 @@ export default {
   },
   computed: {
     business() {
-      return this.$store.state["hotbusiness/bdetails"];
+      return this.$store.getters['hotbusiness/getdetails'];  
     }
   },
   created() {
@@ -138,6 +142,34 @@ export default {
       .catch(err => {
         console.log({ err: err });
       });
+  },
+
+  methods:{
+    
+    infiniteHandler($state) {
+     
+      let url = "profile/hot/business/";
+  
+   
+      axios
+        .get(url + this.page)
+        .then(({ data }) => {
+
+      if (data.data.length) {
+           this.page += 1;
+           
+              this.business.push(...data.data);
+            $state.loaded();
+          } else {
+            $state.complete();
+          }
+
+         
+        })
+        .catch((err) => {
+          console.log({ err: err });
+        });
+    },
   }
 };
 </script>

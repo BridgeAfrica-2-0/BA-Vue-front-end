@@ -4,34 +4,34 @@
       <span>
         <h6 class="title m-3">
           <fas-icon class="icons" :icon="['fas', 'users']" size="lg" />
-          <b> COMMUNITY </b> <span class="h4-color"> 7K </span>
+          <b> COMMUNITY </b> <span class="h4-color">  </span>
         </h6>
       </span>
 
-      <b-tabs pills content-class="mt-3  f-left ">
+      <b-tabs lazy pills content-class="mt-3  f-left ">
         <b-tab active>
-          <template slot="title">
-            People <span class="spa-color"> 7K </span>
-          </template>
+          <template slot="title">     
+            People <span class="spa-color">  </span>
+          </template>  
 
           <div>
             <b-row>
               <b-col>
-                <b-tabs fill pills content-class="mt-3  f-left m-up">
+                <b-tabs lazy fill pills content-class="mt-3  f-left m-up">
                   <b-tab active>
                     <template slot="title">
-                      Followers <span class="spa-color"> 7K </span>
+                      Followers <span class="spa-color">  </span>
                     </template>
 
-                    <div class="s-comcard"><People /></div>
+                    <div class="s-comcard"><People  :people="people.people_followers" /></div>
                   </b-tab>
 
                   <b-tab>
                     <template slot="title">
-                      Following <span class="spa-color"> 7K </span>
+                      Following <span class="spa-color">  </span>
                     </template>
 
-                    <div class="s-comcard"><People /></div>
+                    <div class="s-comcard"><People  :people="people.people_following" /></div>
                   </b-tab>
                 </b-tabs>
               </b-col>
@@ -39,31 +39,63 @@
           </div>
         </b-tab>
 
-        <b-tab>
+        <b-tab >
           <template slot="title">
-            Businesses <span class="spa-color"> 7K </span>
+            Businesses <span class="spa-color">  </span>
           </template>
 
           <div>
-            <b-tabs fill pills content-class="mt-3  f-left m-up checkcheck">
+            <b-tabs lazy fill pills content-class="mt-3  f-left m-up checkcheck">
               <b-tab active>
                 <template slot="title">
-                  Followers <span class="spa-color"> 7K </span>
+                  Followers <span class="spa-color">  </span>
                 </template>
 
-                <div class="s-comcard"><Business /></div>
+                <div class="s-comcard"><Business :business='business.business_followers' /></div>
               </b-tab>
 
               <b-tab>
                 <template slot="title">
-                  Following <span class="spa-color"> 7K </span>
+                  Following <span class="spa-color">  </span>
                 </template>
 
-                <div class="s-comcard"><Business /></div>
+                <div class="s-comcard"><Business   :business='business.business_following' /></div>
               </b-tab>
             </b-tabs>
           </div>
         </b-tab>
+
+
+
+
+
+
+         <b-tab>
+          <template slot="title">
+            Networks <span class="spa-color">  </span>
+          </template>
+
+          <div>
+            <b-tabs lazy fill pills content-class="mt-3  f-left m-up checkcheck">
+              <b-tab active>
+                <template slot="title">
+                  Followers <span class="spa-color">  </span>
+                </template>
+
+                <div class="s-comcard"><Network :network='network.business_followers' /></div>
+              </b-tab>
+
+              <b-tab>
+                <template slot="title">
+                  Following <span class="spa-color">  </span>
+                </template>
+
+                <div class="s-comcard"><Network   :network='network.business_following' /></div>
+              </b-tab>
+            </b-tabs>
+          </div>
+        </b-tab>
+
       </b-tabs>
     </div>
   </div>
@@ -72,14 +104,66 @@
 <script>
 import People from "./people";
 import Business from "./business";
+import Network from "./communitynetwork";
 
 export default {
   name: "comunitiDashboard",
 
   components: {
     People,
-    Business
+    Business,
+    Network
+  },
+
+  methods:{
+       
+       community() {
+         
+      this.$store
+        .dispatch("profile/profilecommunity", null)
+        .then(() => {
+          console.log("hey yeah");
+        })
+        .catch(err => {
+          console.log({ err: err });
+        });
+    },
+
+  },
+  mounted() {
+      this.isLoading = true;
+
+        
+    console.log("Load User Profile Community start+++++++");
+    this.community();
+    
+    },
+
+  computed: {
+    rows() {
+      return this.items.length;
+    },
+
+    business(){
+           
+           return this.$store.state.profile.CommunityBusiness
+
+    },
+
+
+     people() {
+      return this.$store.state.profile.communityPeople;
+    },
+
+     network(){
+           
+           return this.$store.state.profile.CommunityBusiness
+
+    },
+
+
   }
+  
 };
 </script>
 

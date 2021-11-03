@@ -6,7 +6,7 @@
 
     <div
       class="people-style shadow"
-      v-for="item in $store.getters['networkDetails/getdetails']"
+      v-for="item in network "
       :key="item.id"
     >
       <b-row>
@@ -30,7 +30,17 @@
             </span>
             <br />
 
-            {{ item.about_network }} <b-link>Read More</b-link>
+
+            <read-more
+              more-str="read more"
+              class="readmore"
+              :text="item.about_network"
+              link="#"
+              less-str="read less"
+              :max-chars="50"
+            >
+            </read-more>
+
           </p>
 
 
@@ -89,18 +99,39 @@
 
 
 
-
+ <infinite-loading @infinite="infiniteHandler"></infinite-loading>
   </div>
 </template>
 
 <script>
+import axios from "axios"; 
 export default {
   props: ["title", "image"],
+
+  data() {
+    return {
+       page: 1,
+      options: {
+        rewind: true,
+        autoplay: true,
+        perPage: 1,
+        pagination: false,
+
+        type: "loop",
+        perMove: 1
+      }
+    };
+  },
+
   computed: {
     business() {
       return this.$store.getters["networkDetails/getdetails.category"];
-    }
+    },
+
+    network(){
+      return this.$store.getters['networkDetails/getdetails']
   },
+  }, 
   created() {
     this.$store
       .dispatch("networkDetails/getndetails")
@@ -110,7 +141,37 @@ export default {
       .catch(err => {
         console.log({ err: err });
       });
+  },
+
+
+  methods:{
+    
+    infiniteHandler($state) {
+     
+      let url = "profile/popular/network/";
+  
+   
+      axios
+        .get(url + this.page)
+        .then(({ data }) => {
+
+      if (data.data.length) {
+           this.page += 1;
+           
+              this.network.push(...data.data);
+            $state.loaded();
+          } else {
+            $state.complete();
+          }
+
+         
+        })
+        .catch((err) => {
+          console.log({ err: err });
+        });
+    },
   }
+
 };
 </script>
 

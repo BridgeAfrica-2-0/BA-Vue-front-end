@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b>Basic Infomation</b>
+    <b>Basic Infomation</b>  {{info}}
     <hr />
     <div class="row">
       <div class="col">
@@ -117,7 +117,12 @@ export default {
       ]
     };
   },
-  methods: {}
+  methods: {},
+  computed:{
+    info(){
+   return this.$store.state.profile.profile_about;
+    },
+  }
 };
 </script>
 

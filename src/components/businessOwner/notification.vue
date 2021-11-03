@@ -1,96 +1,181 @@
 <template>
   <div class="container" style=" ">
-
-
- 
-
-        <div class="container">
-
-          <b-row>
+    <div class="container">
+      <b-row>
         <b-col>
+
           <div class="b-bottomn f-left">
-            <b-form-checkbox
-              id="checkbox-1"
-              v-model="status"
-              name="checkbox-1"
-              value="accepted"
-              class="m-left-top username"
-              unchecked-value="not_accepted"
-            >
-              Select All
-            </b-form-checkbox>
+
+            <input
+              class="m-left-top"
+              type="checkbox"
+              @click="selectall($event)"
+            />
+            Select All
           </div>
         </b-col>
         <b-col>
           <div class="b-bottomn f-right">
-            <b-button variant="primary" class="a-button-l duration">
+            <b-button
+              @click="readAll(selected)"
+              variant="primary"
+              class="a-button-l duration"
+            >
               Mark as Read</b-button
+            >
+            <b-button
+              @click="deleteAll(selected)"
+              v-if="testing > 0"
+              variant="primary"
+              class="a-button-l duration ml-1"
+            >
+              Delete</b-button
             >
           </div>
         </b-col>
       </b-row>
       <br />
 
- 
-       <b-row>
-        <b-col cols="12" class="mr-3" v-for="i in 6" :key="i">
+      <b-row>
+        <b-col
+          cols="12"
+          class="mr-3"
+          v-for="post in getNotificationsStore"
+          :key="post.id"
+        >
           <p class="">
             <span style="display:inline-flex">
-               <b-form-checkbox
-              id="checkbox-1"
-              v-model="status"
-              name="checkbox-1"
-              value="accepted"
-              class="m-left-top"
-              unchecked-value="not_accepted"
-            >
-             
-            </b-form-checkbox>
+
+              <input
+                class="m-left-top"
+
+                type="checkbox"
+                :value="post.id"
+                :id="post.id"
+                :checked="post.checked"
+
+                @click="check(post, $event)"
+
+              />
               <b-avatar
                 class="d-inline-block profile-pic"
                 variant="primary"
-                src="https://business.bridgeafrica.info/assets/img/team/3.png"
-               
+                :src="post.image"
               ></b-avatar>
               <h6 class="m-0  d-inline-block ml-2 username">
-                Mapoure Agrobusiness
-                 <p class="duration">1hr</p>
+                {{ post.reference_type }}
+                <p class="duration">{{ post.created_at }}</p>
               </h6>
             </span>
-            <span class="float-right mt-1">
-             
-
-            </span>
+            <span class="float-right mt-1"> </span>
           </p>
 
-
-           <p class="text">
-            Lorem Ipsum is this is just a dummy text to post simply dummy text
-            of the printing and typesetting industry. Lorem Ipsum has been the
-            industry's standard dummy text ever since the 1500s, Lorem Ipsum is
-            simply dummy text of the printing and typesetting industry. Lorem
-            Ipsum has been the industry's standard dummy text ever since the
-            1500s,
+          <p class="text">
+            {{ post.notification_text }}
           </p>
-
-          
-          <hr width="100%" />
         </b-col>
 
-        </b-row>
-        </div>
+        <b-col v-if="loader" class="load">
+          <b-spinner
+            style="width: 7rem; height: 7rem;"
+            variant="primary"
+          ></b-spinner>
+        </b-col>
+        <b-col
+          v-if="!getNotificationsStore && !loader"
+          class="load text-center"
+        >
+          <b-row class="text-center">
+            <p>No notifications to show !!</p>
+          </b-row>
+        </b-col>
+        <hr width="100%" />
+      </b-row>
+
+      
+    </div>
   </div>
 </template>
 
 <script>
+import { mapActions, mapGetters } from "vuex";
 export default {
-  name: "notification"
+  name: "notification",
+  data: () => ({
+    selected: [],
+  }),
+  beforeMount() {
+    this.getNotifications();
+  },
+  computed: {
+    getNotificationsStore() {
+      return this.sendNotifications();
+    },
+    loader() {
+      return this.getLoader();
+    },
+  },
+  methods: {
+    // getting getters from the store
+    ...mapGetters({
+      sendNotifications: "businessOwner/sendNotifications",
+      getLoader: "businessOwner/getLoader",
+      getSuccess: "businessOwner/getSuccess",
+    }),
+
+    // getting actions from the store
+    ...mapActions({
+      getNotifications: "businessOwner/getNotifications",
+      readNotifiactions: "businessOwner/readNotifiactions",
+      deleteNotifications: "businessOwner/deleteNotifications",
+      delete: "businessOwner/delete",
+    }),
+
+    readAll(data) {
+      this.readNotifiactions(data);
+    },
+    deleteAll(data) {
+      this.checked = false;
+      let ids = [];
+      data.forEach((element) => {
+        ids.push(element.id);
+      });
+      this.deleteNotifications(ids);
+    },
+
+    deleteOne(id) {
+      this.delete(id);
+    },
+
+    // select all the notifications
+    selectall(e) {
+      if (e.target.checked) {
+        console.log("selected");
+        this.getNotificationsStore.forEach((element) => {
+          this.selected.push(element);
+        });
+      }
+    },
+
+    check(value, e) {
+      if (e.target.checked) {
+        this.selected.push(value);
+        console.log("selected");
+      }
+    },
+  },
 };
 </script>
 
 <style scoped>
+.my-checkbox {
+  margin-right: 10px;
+}
 
-
+.load {
+  display: flex;
+  justify-content: center;
+}
 
 .f-left {
   float: left;
@@ -103,6 +188,7 @@ export default {
   margin-top: 20px;
   margin-bottom: 30px;
   padding-bottom: 10px;
+  margin-left: 10px;
 
   border-bottom: 0.5px solid;
   border-color: gray;
@@ -112,99 +198,74 @@ export default {
   margin-left: -20px;
 }
 
-
-
-
-.m-left-top{
+.m-left-top {
   margin-left: -15px;
 }
-.p-notifaction{
-
+.p-notifaction {
   padding: 30px;
 }
 
-h5{
-
+h5 {
   font-size: 15px;
 }
 
+.delete {
+  cursor: pointer;
+}
+
 @media screen and (min-width: 768px) {
-  
-  .btn{
-     font-size: 16px;
+  .btn {
+    font-size: 16px;
   }
 }
 
 @media screen and (max-width: 768px) {
-  
-  .btn{
-     font-size: 12px;
+  .btn {
+    font-size: 12px;
+  }
+}
+</style>
+
+<style>
+@media only screen and (min-width: 768px) {
+  .username {
+    font-size: 16px !important;
+  }
+
+  .duration {
+    font-size: 14px;
+    font-weight: 100;
+  }
+
+  .text {
+    font-size: 14px;
+  }
+
+  .profile-pic {
+    width: 64px !important;
+    height: 64px !important;
+    margin-top: -5px;
   }
 }
 
-
-
-</style>
-
-
-<style> 
-
-@media only screen and (min-width: 768px) {
-
-
-.username{
-   
-   font-size: 16px  !important;
-  
-  
-}
-
-.duration{
-  font-size: 14px;
-  font-weight: 100;
-
-}
-
-.text{
-  font-size: 14px;
-}
-
-.profile-pic{
-  width: 64px !important;
-  height: 64px  !important;
-  margin-top: -5px;
-}
-}
-
-
-
 @media only screen and (max-width: 768px) {
+  .username {
+    font-size: 14px !important;
+  }
 
+  .duration {
+    font-size: 12px;
+    font-weight: 100;
+  }
 
-.username{
-   
-   font-size: 14px  !important;
-     
+  .text {
+    font-size: 12px;
+  }
+
+  .profile-pic {
+    width: 30px !important;
+    margin-top: -5px;
+    height: 30px !important;
+  }
 }
-
-.duration{
-  font-size: 12px;
-   font-weight: 100;
-
-}
-
-.text{
-  font-size: 12px;
-}
-
-
-
-.profile-pic{
-  width: 30px  !important;
-   margin-top: -5px;
-  height: 30px  !important;
-}
-
-}
-
-   </style>
+</style>

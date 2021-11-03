@@ -7,25 +7,24 @@ import networkDetails from "./networkDetails";
 import dashboardcommunity from "./dashboardcommunity";
 import ProfileAndBusinessDetails from "./ProfileAndBusinessDetails";
 import NetworkSettings from "./NetworkSettings";
-import networkProfileMembers from './networkProfileMembers'
+import networkProfileMembers from "./networkProfileMembers";
 
 import businessFollowers from "./businessFollowers";
 import market from "./market";
 import hotbusiness from "./hotbusiness";
 import profile from "./profile";
 import follower from "./follower";
-import UserProfileOwner from "./UserProfileOwner"
-import checkout from "./checkout"
+import UserProfileOwner from "./UserProfileOwner";
+import checkout from "./checkout";
 import axios from "axios";
 import { search } from "./search";
+import productComments from "./productComments";
 
 Vue.use(Vuex);
-  
 
- axios.defaults.baseURL = process.env.VUE_APP_API_URL_DEV; 
+axios.defaults.baseURL = process.env.VUE_APP_API_URL_DEV;
 
-//  axios.defaults.baseURL ="https://test.maxinemoffett.com/api/v1"; 
-
+//  axios.defaults.baseURL ="https://test.maxinemoffett.com/api/v1";
 
 export default new Vuex.Store({
   modules: {
@@ -41,12 +40,10 @@ export default new Vuex.Store({
     follower,
     search,
     market,
-    UserProfileOwner, 
+    UserProfileOwner,
     checkout,
     networkProfileMembers,
-    businessFollowers
+    businessFollowers,
+    productComments,
   },
 });
-
-   
-

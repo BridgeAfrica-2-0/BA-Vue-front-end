@@ -643,23 +643,23 @@ computed: {
 .gradient{
 
   background-image: linear-gradient(1deg, black, transparent);  */
-/*  background-image: url("../assets/img/profile_back.png");  
+	/*  background-image: url("../assets/img/profile_back.png");  
 
 } 
  */
 
-.edit-btn:hover {
-  border-color: #b39500 !important ;
-  background-color: #b39500 !important ;
-}
+	.edit-btn:hover {
+		border-color: #b39500 !important ;
+		background-color: #b39500 !important ;
+	}
 
-.btn:focus {
-  border-color: #b39500 !important;
-  background-color: #b39500 !important ;
-}
+	.btn:focus {
+		border-color: #b39500 !important;
+		background-color: #b39500 !important ;
+	}
 
-.btn:active {
-  border-color: #e4c229 !important;
-  background-color: #b39500 !important ;
-}
+	.btn:active {
+		border-color: #e4c229 !important;
+		background-color: #b39500 !important ;
+	}
 </style>

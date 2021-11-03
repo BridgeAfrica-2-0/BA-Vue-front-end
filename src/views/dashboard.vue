@@ -11,8 +11,8 @@
         <b-card class=" border shadow hselect">
           <b-row>
             <b-col md="6" sm="12" class="">
-              <h6 class="font-weight-bolder text-design p-2">
-                Use Bridge Africa as Yourself or as one of your businesses 
+              <h6 class="font-weight-bolder text-design">
+                {{$t('dashboard.use_bridge')}} 
               </h6>
             </b-col>
             <b-col sm="12" md="6" class="mb-3">
@@ -48,7 +48,7 @@
             <div>
               <b-card class=" border shadow pr-3" style="height:350px">
                 <h6 class="font-weight-bolder text-design">
-                  Use Bridge Africa as Yourself or as one of your businesses
+                  {{$t('dashboard.use_bridge')}} 
                 </h6>
                 <b-form-select
                   v-model="selectedb"
@@ -105,7 +105,7 @@
                   :icon="['fas', 'hands-helping']"
                   size="lg"
                 />
-                <b> HOT BUSINESSES </b>
+                <b> {{$t('dashboard.hot_bussinesses').toUpperCase()}} </b>
               </h6>
 
               <div class="  p-tab">
@@ -121,7 +121,7 @@
                   :icon="['fas', 'project-diagram']"
                   size="lg"
                 />
-                <b> POPULAR NETWORKS </b>
+                <b> {{$t('dashboard.popular_networks').toUpperCase()}}</b>
               </h6>
 
               <div class=""><Popularnetwork /></div>
@@ -246,8 +246,6 @@ export default {
 
        
     },
-
-
 
    dashboardPpost(){
     

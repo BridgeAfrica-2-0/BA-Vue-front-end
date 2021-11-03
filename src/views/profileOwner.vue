@@ -5,8 +5,8 @@
     <div class=" container-fluid text-justify   corps prof center-content">
       <b-row class=""> 
         <b-col cols="12" class="p-3">
-          <b-tabs content-class="mt-3" pills small fill lazy  v-model="tabIndex">
-            <b-tab title="Posts" href="#post">
+          <b-tabs content-class="mt-3" pills small fill  v-model="tabIndex">
+            <b-tab :title="`${$t('profile_owner.posts')}`"   href="#post">
               <Post />
             </b-tab>
             <b-tab title="About" href="#about"><About /></b-tab>
@@ -20,9 +20,9 @@
               <Networks />
             </b-tab>
             
-            <b-tab title="Community"  href="#community" class="m-0 p-0">
-              <following />
-            </b-tab>
+            <!-- <b-tab :title="`${$t('profile_owner.media')}`"   href="#media"><Media /></b-tab> -->
+            <b-tab :title="`${$t('profile_owner.community')}`"  href="#community" class="m-0 p-0"
+              ><following></following>  </b-tab>
             
           </b-tabs>
         </b-col>

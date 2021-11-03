@@ -6,12 +6,6 @@
   >
     <div class="ly-tab-list" :style="style" ref="list">
       <slot></slot>
-      <div
-        class="ly-tab-active-bar"
-        v-if="!fixBottom"
-        :style="activeBarStyle"
-        ref="activeBar"
-      ></div>
     </div>
   </div>
 </template>
@@ -114,8 +108,9 @@ export default {
       }
       if (this.reBounding && !this.touching) {
         return this.reBoundingDuration;
+      } else {
+        return 0;
       }
-      else return 0
     },
     transitionTimingFunction() {
       return this.reBounding
@@ -338,8 +333,6 @@ export default {
   width: 100%;
   overflow: hidden;
   display: flex;
-  border-bottom: 1px solid #eee;
-  box-shadow: 0 0px 6px 1px #eee;
 }
 
 .ly-tabbar.ly-tabbar-fix-bottom {

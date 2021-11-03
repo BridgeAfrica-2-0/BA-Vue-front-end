@@ -2,10 +2,12 @@
   <div class="ly-tab">
     <ly-tabbar v-model="selectedId" v-bind="options">
       <ly-tab-item v-for="(item, index) in items" :key="index">
-        <span v-if="options.fixBottom && item.icon" slot="icon">
-          <i :class="item.icon"></i>
-        </span>
-        <span>{{ item[labelKey] }}</span>
+        <div style="display:inline-flex">
+          <span class="mr-1 primary">
+            <i :class="item.icon"></i>
+          </span>
+          <span>{{ item[labelKey] }}</span>
+        </div>
       </ly-tab-item>
     </ly-tabbar>
   </div>

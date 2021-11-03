@@ -680,7 +680,7 @@ export default {
         keyword: "",
         placeholder: "Find Pharmacy",
       },
-      strategy: null,
+     
       searchParams: {
         keyword: "",
         cat_id: "",

@@ -9,22 +9,22 @@
             :src="post.logo_path"
           ></b-avatar>
         </b-col>
-        <b-col cols="10" md="11" class="pt-2">
+        <b-col cols="10" md="11" class="pt-2" >
           <h5 class="m-0 font-weight-bolder">
             {{ post.bussines_name }}
-            <span class="float-right">
+            <span class="float-right" v-if="isOwner || createDeleteRequestIsActive">
               <b-dropdown variant="outline-primary" size="sm" no-caret>
                 <template #button-content>
                   <b-icon icon="three-dots" aria-hidden="true"></b-icon>
                 </template>
-                <b-dropdown-item-button variant="info" @click="editPost(post)">
+                <b-dropdown-item-button variant="info" @click="editPost()">
                   <b-icon icon="pencil" aria-hidden="true"></b-icon>
                   Edit
                 </b-dropdown-item-button>
 
                 <b-dropdown-item-button
                   variant="danger"
-                  @click="deletePost(post)"
+                  @click="removePost"
                 >
                   <b-icon icon="trash-fill" aria-hidden="true"></b-icon>
                   Delete
@@ -139,6 +139,16 @@ export default {
       type: Object,
       required: true,
     },
+    isOwner:{
+      type:Boolean,
+      required:true
+    },
+    editPost:{
+      required:true
+    },
+    deletePost:{
+      required:true
+    }
   },
   components: {
     Comment,
@@ -157,6 +167,7 @@ export default {
       loadComment: false,
       processLike: false,
       createPostRequestIsActive: false,
+      createDeleteRequestIsActive: false,
       comment: "",
     };
   },
@@ -185,6 +196,11 @@ export default {
     ...mapMutations({
       addNewComment: "networkProfile/updatePost",
     }),
+
+    removePost: async function(){
+      this.createDeleteRequestIsActive = true
+      this.createDeleteRequestIsActive = await this.deletePost()
+    },
 
     onLike: async function () {
       if (!this.processLike) {
@@ -243,13 +259,6 @@ export default {
       });
 
       if (request.success) this.comments = request.data;
-    },
-    deletePost(post) {
-      this.deletePost(post);
-    },
-
-    editPost(postarray) {
-      this.editPost(postarray);
     },
   },
 };

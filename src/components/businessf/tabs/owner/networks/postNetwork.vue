@@ -84,9 +84,6 @@
     <b-card class="px-md-3">
       <div class="">
         <div class="col-md-12 col-lg-12 d-flex align-items-stretch mb-lg-0" style="padding-left: 0; padding-top: 3px">
-          <!-- <b-button v-b-modal.modal-xl variant="primary">xl modal</b-button> -->
-          <!-- Modal For Create Post User-->
-          <!--   edit array   -->
           <b-modal id="modal-edit" ref="modal-edit" centered hide-footer title="Update Post" @hidden="resetPostData">
             <b-row ref="loader">
               <b-col cols="1" class="m-0 p-0"></b-col>
@@ -94,7 +91,7 @@
                 <b-avatar class="d-inline-block avat" variant="primary" :src="imageProfile"></b-avatar>
               </b-col>
               <b-col cols="9" class="pt-2" style="margin-left: -5px">
-                <h5 class="m-0 font-weight-bolder">{{ profileNamePost }}</h5>
+                <h5 class="m-0 font-weight-bolder">{{ profile.name }}</h5>
               </b-col>
             </b-row>
             <b-row>
@@ -176,8 +173,8 @@
                 <br />
 
                 <span>
-                  <b-button @click="updatePost" variant="primary" block
-                    ><b-icon icon="cursor-fill" variant="primary"></b-icon> Publish</b-button
+                  <b-button @click="updatePost" variant="primary" block :disabled="loading"
+                    ><b-icon icon="cursor-fill" variant="primary"></b-icon>Update post</b-button
                   >
                 </span>
               </b-col>
@@ -278,134 +275,14 @@
           </b-modal>
         </div>
       </div>
-
-      <!--<b-row
-        class="mt-4"
-        v-for="item in $store.getters.getPostLists"
+      <Post
+        v-for="item in owner_post"
         :key="item.post_id"
-      >-->
-      <!--
-      <b-row class="mt-4" v-for="item in owner_post" :key="item.post_id">
-        
-        <b-col cols="12" class="mt-4">
-          <b-row>
-            <b-col cols="2" md="1" class="m-0 p-0">
-              <b-avatar
-                class="d-inline-block avat"
-                variant="primary"
-                :src="item.logo_path"
-              ></b-avatar>
-            </b-col>
-            <b-col cols="10" md="11" class="pt-2">
-              <h5 class="m-0 font-weight-bolder">
-                {{ item.bussines_name }}
-                <span class="float-right">
-                  <b-dropdown variant="outline-primary" size="sm" no-caret>
-                    <template #button-content>
-                      <b-icon icon="three-dots" aria-hidden="true"></b-icon>
-                    </template>
-                    <b-dropdown-item-button
-                      variant="info"
-                      @click="editPost(item)"
-                    >
-                      <b-icon icon="pencil" aria-hidden="true"></b-icon>
-                      Edit
-                    </b-dropdown-item-button>
-
-                    <b-dropdown-item-button
-                      variant="danger"
-                      @click="deletePost(item)"
-                    >
-                      <b-icon icon="trash-fill" aria-hidden="true"></b-icon>
-                      Delete
-                    </b-dropdown-item-button>
-                  </b-dropdown>
-                </span>
-              </h5>
-              <p class="duration">{{ moment(item.created_at).fromNow() }}</p>
-            </b-col>
-          </b-row>
-          <b-row>
-            <b-col cols="12" class="mt-2">
-              <p class="post-text">
-                <read-more
-                  more-str="read more"
-                  :text="item.content"
-                  link="#"
-                  less-str="read less"
-                  :max-chars="200"
-                ></read-more>
-              </p>
-            </b-col>
-          </b-row>
-
-          <b-row>
-            <b-col v-if="item.media.length > 0" cols="12" class="mt-2">
-              <div class="">
-                <lightbox
-                  :cells="item.media.length"
-                  :items="
-                    item.media.map(function (a) {
-                      return a.media_url;
-                    })
-                  "
-                ></lightbox>
-              </div>
-            </b-col>
-            <b-col cols="12" class="mt-2">
-
-            </b-col>
-            <b-col class="mt-1">
-              <span @click="onLike" class="mr-3"
-                ><b-icon
-                  icon="suit-heart"
-                  variant="primary"
-                  aria-hidden="true"
-                ></b-icon>
-                {{ nFormatter(item.likes_count) }}
-              </span>
-              <span
-                ><b-icon
-                  icon="chat-fill"
-                  variant="primary"
-                  aria-hidden="true"
-                ></b-icon>
-                {{ nFormatter(item.comment_count) }}
-              </span>
-              <span>
-                <ShareButton
-                  type="network"
-                  :post="{ post_id: item.post_id, user_id: item.user_id }"
-                />
-              </span>
-            </b-col>
-          </b-row>
-
-          <b-row class="mt-2">
-            <b-col cols="3" md="1" class="m-md-0 p-md-0">
-              <b-avatar
-                variant="primary"
-                class="img-fluid avat-comment"
-              ></b-avatar>
-            </b-col>
-            <b-col cols="9" md="11" class="p-0 m-0 pr-3">
-              <input placeholder="Post a Comment" class="comment" type="text" />
-              <fas-icon
-                class="primary send-cmt"
-                :icon="['fas', 'paper-plane']"
-              />
-            </b-col>
-          </b-row>
-        </b-col>
-        <b-col cols="12" class="mt-4">
-          <Comment
-            v-for="comment in item.comments"
-            :key="comment.id"
-            :comment="comment"
-          />
-        </b-col>
-      </b-row> -->
-      <Post v-for="item in owner_post" :key="item.post_id" :item="item" />
+        :item="item"
+        :editPost="() => editPost(item)"
+        :deletePost="() => deletePost(item)"
+        :isOwner="profile.id == item.user_id"
+      />
       <infinite-loading @infinite="infiniteHandler"></infinite-loading>
     </b-card>
   </div>
@@ -413,7 +290,6 @@
 
 <script>
 import Post from './postNetworkComponent';
-import moment from 'moment';
 import { mapGetters, mapMutations } from 'vuex';
 
 export default {
@@ -423,7 +299,6 @@ export default {
   },
   data() {
     return {
-      moment: moment,
       page: 1,
       loading: false,
       // post:this.$store.state.networkProfile.ownerPost,
@@ -485,7 +360,7 @@ export default {
 
       if (response.success) this.auth(response.data);
     },
-    
+
     infiniteHandler($state) {
       this.axios
         .get('network/show/post/' + this.url + '/' + this.page)
@@ -506,27 +381,17 @@ export default {
     },
 
     deletePost(post) {
-      console.log(post);
+      return this.axios
+        .delete('network/' + this.$route.params.id + '/post/' + post.id)
 
-      // let loader = this.$loading.show({
-      //   container: this.fullPage ? null : this.$refs.creatform,
-      //   canCancel: true,
-      //   onCancel: this.onCancel,
-      //   color: "#e75c18",
-      // });
-      this.axios
-        .post('network/delete/post/' + post.post_id, {
-          name: this.name,
-        })
-        .then((response) => {
-          console.log(response.data);
-          this.ownerPost();
+        .then(() => this.ownerPost())
+        .then(() => {
           this.flashMessage.show({
             status: 'success',
             blockClass: 'custom-block-class',
             message: 'Post Deleted',
           });
-          // loader.hide();
+          return true;
         })
         .catch((err) => {
           this.sending = false;
@@ -550,77 +415,61 @@ export default {
 
             // loader.hide();
           }
+          return false;
         });
     },
 
     editPost(postarray) {
       this.edit_description = postarray.content;
       this.edit_image = postarray.media;
-      this.edit_id = postarray.post_id;
-      console.log(this.edit_image);
+      this.edit_id = postarray.id;
 
       this.$refs['modal-edit'].show();
     },
 
     updatePost() {
-      // let loader = this.$loading.show({
-      //   container: this.fullPage ? null : this.$refs.loader,
-      //   canCancel: true,
-      //   onCancel: this.onCancel,
-      //   color:"#e75c18"
-      // });
-      //  const fileImage = this.createPost.movies[0].target.files[0];
+      this.loading = true;
       this.fileImageArr = this.createPost.movies;
       let formData2 = new FormData();
       this.delete.forEach((value, index) => {
         formData2.append('deleteImg[' + index + ']', value.id);
-        console.log(value);
       });
       this.fileImageArr.forEach((value, index) => {
         formData2.append('media[' + index + ']', value.target.files[0]);
-        console.log(value);
       });
       formData2.append('type', 'image');
       formData2.append('content', this.edit_description);
+      formData2.append('networkId', this.$route.params.id);
       this.axios
         .post('network/edit/post/' + this.edit_id, formData2, {
           headers: {
             'Content-Type': 'multipart/form-data',
           },
         })
-        .then((response) => {
-          console.log(response);
+        .then(() => {
+          this.$store.state.networkProfile.ownerPost.splice(0, this.$store.state.networkProfile.ownerPost.length);
           this.ownerPost();
+        })
+        .then(() => {
           this.flashMessage.show({
             status: 'success',
             blockClass: 'custom-block-class',
             message: 'Content successfuly uploaded',
           });
+          this.loading = false;
           // loader.hide();
           this.$refs['modal-edit'].hide();
         })
         .catch((err) => {
-          if (err.response.status == 422) {
-            console.log({ err: err });
-            console.log(err.response.data.message);
-            this.flashMessage.show({
-              status: 'error',
-              message: err.response.data.message,
-              blockClass: 'custom-block-class',
-            });
-            // loader.hide()
-            this.$refs['modal-edit'].hide();
-          } else {
-            this.flashMessage.show({
-              status: 'error',
+          console.log(err);
+          this.flashMessage.show({
+            status: 'error',
+            message: 'Unable to Update your post',
+            blockClass: 'custom-block-class',
+          });
 
-              message: 'Unable to Update your post',
-              blockClass: 'custom-block-class',
-            });
-            console.log({ err: err });
-            // loader.hide()
-            this.$refs['modal-edit'].hide();
-          }
+          // loader.hide()
+          this.$refs['modal-edit'].hide();
         });
     },
 
@@ -708,7 +557,6 @@ export default {
       this.delete.push({
         id: eve.id,
       });
-      console.log(this.delete);
     },
 
     onCancel() {
@@ -727,7 +575,6 @@ export default {
     },
 
     async submitPost() {
-      
       this.loading = true;
 
       this.fileImageArr = this.createPost.movies;
@@ -751,6 +598,7 @@ export default {
             'Content-Type': 'multipart/form-data',
           },
         })
+        .then(() => this.ownerPost())
         .then(() => {
           this.flashMessage.show({
             status: 'success',
@@ -759,9 +607,10 @@ export default {
           });
           // loader.hide()
           this.$refs['modal-xl'].hide();
-          this.ownerPost();
+          this.loading = false;
         })
         .catch((err) => {
+          this.loading = false;
           if (err.response.status == 422) {
             console.log({ err: err });
             console.log(err.response.data.message);
@@ -790,8 +639,6 @@ export default {
       this.$refs['modal-3'].hide();
     },
     resetPostData() {
-      console.log('Test');
-      console.log('Reinitialisation des donnees du POST');
       if (!this.isSubmitted) {
         this.createPost.hyperlinks = [];
         this.createPost.movies = [];

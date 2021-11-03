@@ -1,52 +1,31 @@
 <template>
   <div style="overflow-x: hidden; color: black">
-    <!-- <Nav :credentials.sync="navBarParams">
-      <template v-slot:button>
-        <Button @click.native="searchProducts" v-if="selectedId == 4" />
-        <Button @click.native="searchNetworks" v-if="selectedId == 3" />
-      </template>
-      
-    </Nav> -->
     <Nav :credentials.sync="searchParams" id="top">
       <template v-slot:button>
         <Button @click.native="strategy['all']" v-if="selectedId == 0" />
         <Button @click.native="strategy['network']" v-if="selectedId == 3" />
         <Button @click.native="strategy['market']" v-if="selectedId == 4" />
+        <Button @click.native="searchProducts" v-if="selectedId == 4" />
+        <Button @click.native="searchNetworks" v-if="selectedId == 3" />
       </template>
     </Nav>
 
-    <SubNav
-      @category="getCategory"
-      @parentcategory="getparentCategory"
-      style="margin-top: -25px"
-    />
+    <SubNav @category="getCategory" @parentcategory="getparentCategory" style="margin-top: -25px" />
 
     <hr style="margin-top: -0px" class="d-none d-sm-none d-lg-block" />
 
     <div class="container searchly moveup">
-      <ly-tab
-        v-model="selectedId"
-        :items="items"
-        :options="optionsnav"
-        activeColor="#e75c18"
-        @change="handleChange"
-      >
+      <ly-tab v-model="selectedId" :items="items" :options="optionsnav" activeColor="#e75c18" @change="handleChange">
       </ly-tab>
     </div>
 
     <hr style="margin-top: -0px" />
 
-    <div
-      class="d-block d- d-sm-block d-md-block d-lg-block d-xl-none"
-      v-if="selectedId == '1' || selectedId == '4'"
-    >
+    <div class="d-block d- d-sm-block d-md-block d-lg-block d-xl-none" v-if="selectedId == '1' || selectedId == '4'">
       <b-row>
         <b-col cols="3" class="text-center">
           <b-link class="cat" @click="SetCat('Agriculture')">
-            <img
-              class="img-fluid picture logo-img"
-              src="@/assets/icons/mobile/agriculture.png"
-            />
+            <img class="img-fluid picture logo-img" src="@/assets/icons/mobile/agriculture.png" />
 
             Agriculture
           </b-link>
@@ -54,30 +33,21 @@
 
         <b-col cols="3" class="text-center">
           <b-link class="cat" @click="SetCat('Restaurants')">
-            <img
-              class="img-fluid picture logo-img"
-              src="@/assets/icons/mobile/restaurants.png"
-            />
+            <img class="img-fluid picture logo-img" src="@/assets/icons/mobile/restaurants.png" />
             Restaurants
           </b-link>
         </b-col>
 
         <b-col cols="3" class="text-center">
           <b-link class="cat" @click="SetCat('Clothing')">
-            <img
-              class="img-fluid picture logo-img"
-              src="@/assets/icons/mobile/clothing.png"
-            />
+            <img class="img-fluid picture logo-img" src="@/assets/icons/mobile/clothing.png" />
             Clothing
           </b-link>
         </b-col>
 
         <b-col cols="3" class="text-center">
           <b-link class="cat" @click="SetCat('MC')">
-            <img
-              class="img-fluid picture logo-img"
-              src="@/assets/icons/mobile/mayor.png"
-            />
+            <img class="img-fluid picture logo-img" src="@/assets/icons/mobile/mayor.png" />
 
             PI
           </b-link>
@@ -85,20 +55,14 @@
 
         <b-col cols="3" class="text-center mt-2">
           <b-link class="cat" @click="SetCat('Electronics')">
-            <img
-              class="img-fluid picture logo-img"
-              src="@/assets/icons/mobile/electronics.png"
-            />
+            <img class="img-fluid picture logo-img" src="@/assets/icons/mobile/electronics.png" />
             Electronics
           </b-link>
         </b-col>
 
         <b-col cols="3" class="text-center mt-2">
           <b-link class="cat" @click="SetCat('Handicraft')">
-            <img
-              class="img-fluid picture logo-img"
-              src="@/assets/icons/mobile/handicrft 2.png"
-            />
+            <img class="img-fluid picture logo-img" src="@/assets/icons/mobile/handicrft 2.png" />
 
             Handicraft
           </b-link>
@@ -106,20 +70,14 @@
 
         <b-col cols="3" class="text-center mt-2">
           <b-link class="cat" @click="SetCat('HU')">
-            <img
-              class="img-fluid picture logo-img"
-              src="@/assets/icons/mobile/health unit.png"
-            />
+            <img class="img-fluid picture logo-img" src="@/assets/icons/mobile/health unit.png" />
             Health
           </b-link>
         </b-col>
 
         <b-col cols="3" class="text-center mt-2">
           <b-link class="cat" v-b-modal="'myModalla'">
-            <img
-              class="img-fluid picture logo-img"
-              src="@/assets/icons/more.png"
-            />
+            <img class="img-fluid picture logo-img" src="@/assets/icons/more.png" />
             More
           </b-link>
         </b-col>
@@ -129,9 +87,7 @@
         <b-row>
           <b-col cols="6" class="p-2">
             <p>
-              <b-link @click="SetCat('Handicraft')" href="#">
-                Handicraft
-              </b-link>
+              <b-link @click="SetCat('Handicraft')" href="#"> Handicraft </b-link>
             </p>
 
             <p><b-link @click="SetCat('Hotels')" href="#"> Hotels </b-link></p>
@@ -154,9 +110,7 @@
 
           <b-col cols="6" class="p-2">
             <p>
-              <b-link @click="SetCat('Auto Mechanics')" href="#">
-                Auto Mechanics
-              </b-link>
+              <b-link @click="SetCat('Auto Mechanics')" href="#"> Auto Mechanics </b-link>
             </p>
             <p>
               <b-link @click="SetCat('Carding')" href="#"> Carding </b-link>
@@ -179,9 +133,7 @@
     <div class="container-fluid medium-filters">
       <b-row>
         <b-col cols="3">
-          <b-button class="shadow border mob-btn" v-b-modal="'myModall'">
-            Filter
-          </b-button>
+          <b-button class="shadow border mob-btn" v-b-modal="'myModall'"> Filter </b-button>
         </b-col>
 
         <b-modal ref="myfilters" id="myModall" hide-footer title=" ">
@@ -244,9 +196,7 @@
               </b-form-group>
 
               <b-form-select v-model="selected">
-                <b-form-select-option value="a">
-                  My Location
-                </b-form-select-option>
+                <b-form-select-option value="a"> My Location </b-form-select-option>
               </b-form-select>
 
               <br />
@@ -261,9 +211,7 @@
               </b-form-group>
 
               <b-form-select v-model="selected">
-                <b-form-select-option value="a">
-                  My Location
-                </b-form-select-option>
+                <b-form-select-option value="a"> My Location </b-form-select-option>
               </b-form-select>
 
               <br />
@@ -278,9 +226,7 @@
               </b-form-group>
 
               <b-form-select v-model="selected">
-                <b-form-select-option value="a">
-                  My Location
-                </b-form-select-option>
+                <b-form-select-option value="a"> My Location </b-form-select-option>
               </b-form-select>
 
               <br />
@@ -295,21 +241,13 @@
               label-class="font-weight-bold pt-0"
               class="mb-0 text-left"
             >
-              <b-form-checkbox id="" class="a-text" name="" value="">
-                Buea</b-form-checkbox
-              >
+              <b-form-checkbox id="" class="a-text" name="" value=""> Buea</b-form-checkbox>
 
-              <b-form-checkbox id="" class="a-text" name="" value="">
-                Tiko</b-form-checkbox
-              >
+              <b-form-checkbox id="" class="a-text" name="" value=""> Tiko</b-form-checkbox>
 
-              <b-form-checkbox id="" class="a-text" name="" value="">
-                Limbe</b-form-checkbox
-              >
+              <b-form-checkbox id="" class="a-text" name="" value=""> Limbe</b-form-checkbox>
 
-              <b-form-checkbox id="" class="a-text" name="" value="">
-                Mutengene</b-form-checkbox
-              >
+              <b-form-checkbox id="" class="a-text" name="" value=""> Mutengene</b-form-checkbox>
             </b-form-group>
 
             <br />
@@ -323,26 +261,16 @@
               label-class="font-weight-bold pt-0 text-left"
               class="mb-0"
             >
-              <b-form-checkbox id="" class="a-text" name="" value="">
-                3km</b-form-checkbox
-              >
+              <b-form-checkbox id="" class="a-text" name="" value=""> 3km</b-form-checkbox>
 
-              <b-form-checkbox id="" class="a-text" name="" value="">
-                9km</b-form-checkbox
-              >
+              <b-form-checkbox id="" class="a-text" name="" value=""> 9km</b-form-checkbox>
 
-              <b-form-checkbox id="" class="a-text" name="" value="">
-                15km</b-form-checkbox
-              >
+              <b-form-checkbox id="" class="a-text" name="" value=""> 15km</b-form-checkbox>
 
-              <b-form-checkbox id="" class="a-text" name="" value="">
-                25km</b-form-checkbox
-              >
+              <b-form-checkbox id="" class="a-text" name="" value=""> 25km</b-form-checkbox>
             </b-form-group>
 
-            <b-button variant="primary" class="m-3 float-right">
-              Search
-            </b-button>
+            <b-button variant="primary" class="m-3 float-right"> Search </b-button>
           </div>
 
           <div class="d-block text-center"></div>
@@ -353,25 +281,15 @@
     <div class="container-fluid mobile-filters mt-2 mb-3">
       <b-row>
         <b-col cols="5">
-          <b-button
-            class="shadow border mob-btn"
-            id="show-btn"
-            @click="showFilters"
-          >
-            Filter
-          </b-button>
+          <b-button class="shadow border mob-btn" id="show-btn" @click="showFilters"> Filter </b-button>
         </b-col>
 
         <b-col cols="3" md>
-          <b-button class="shadow border mob-btn" @click="togglelist">
-            List
-          </b-button>
+          <b-button class="shadow border mob-btn" @click="togglelist"> List </b-button>
         </b-col>
 
         <b-col cols="4">
-          <b-button class="shadow border mob-btn" @click="togglemap()">
-            Map
-          </b-button>
+          <b-button class="shadow border mob-btn" @click="togglemap()"> Map </b-button>
         </b-col>
       </b-row>
     </div>
@@ -385,7 +303,6 @@
               v-bind:Selectedparentcategory="Selectedparentcategory"
             />
           </div>
-          
         </b-col>
 
         <b-col cols="12" md="8" lg="8" xl="6" ref="middleblock">
@@ -395,11 +312,7 @@
             <div id="all" v-if="selectedId == '0'">
               <h6>
                 Sponsored Result
-                <fas-icon
-                  class="icons"
-                  :icon="['fas', 'exclamation-circle']"
-                  size="lg"
-                />
+                <fas-icon class="icons" :icon="['fas', 'exclamation-circle']" size="lg" />
               </h6>
 
               <div>
@@ -407,11 +320,7 @@
               </div>
 
               <h6>
-                <fas-icon
-                  class="icons"
-                  :icon="['fas', 'hands-helping']"
-                  size="lg"
-                />
+                <fas-icon class="icons" :icon="['fas', 'hands-helping']" size="lg" />
                 Businesses
               </h6>
 
@@ -435,11 +344,7 @@
               <hr />
 
               <h6>
-                <fas-icon
-                  class="icons"
-                  :icon="['fas', 'project-diagram']"
-                  size="lg"
-                />
+                <fas-icon class="icons" :icon="['fas', 'project-diagram']" size="lg" />
                 Network
               </h6>
 
@@ -484,11 +389,7 @@
 
             <div id="businesses" v-if="selectedId == '1'">
               <h6>
-                <fas-icon
-                  class="icons"
-                  :icon="['fas', 'hands-helping']"
-                  size="lg"
-                />
+                <fas-icon class="icons" :icon="['fas', 'hands-helping']" size="lg" />
                 Businesses
               </h6>
 
@@ -497,15 +398,10 @@
 
             <!-- filter out only people -->
 
-
             <div v-if="selectedId == '2'">
               <h6>
                 Sponsored Result
-                <fas-icon
-                  class="icons"
-                  :icon="['fas', 'exclamation-circle']"
-                  size="lg"
-                />
+                <fas-icon class="icons" :icon="['fas', 'exclamation-circle']" size="lg" />
               </h6>
 
               <div>
@@ -515,26 +411,17 @@
                 <fas-icon class="icons" :icon="['fas', 'users']" size="lg" />
                 People
               </h6>
-              
-              <People
-                v-for="(people, index) in peoples"
-                :people="people"
-                :key="index"
-              />
+
+              <People v-for="(people, index) in peoples" :people="people" :key="index" />
             </div>
 
             <component :is="isComponent" :title="notFoundComponentTitle" />
-
 
             <!-- filter out just the network  -->
 
             <div v-if="selectedId == '3'">
               <h6>
-                <fas-icon
-                  class="icons"
-                  :icon="['fas', 'project-diagram']"
-                  size="lg"
-                />
+                <fas-icon class="icons" :icon="['fas', 'project-diagram']" size="lg" />
                 Networks
               </h6>
 
@@ -557,21 +444,13 @@
                 <fas-icon class="icons" :icon="['fas', 'store']" size="lg" />
                 Market
                 <div class="float-right">
-                  <b-button
-                    size="sm"
-                    variant="outline-primary"
-                    @click="getProducts"
-                  >
+                  <b-button size="sm" variant="outline-primary" @click="getProducts">
                     <b-spinner small v-if="prodLoader"></b-spinner>
                     <span v-else>Load All market Products</span>
                   </b-button>
                 </div>
               </h6>
-              <b-alert
-                v-model="showDismissibleAlert"
-                variant="success"
-                dismissible
-              >
+              <b-alert v-model="showDismissibleAlert" variant="success" dismissible>
                 List of products up to date
               </b-alert>
               <Market class="mt-3" />
@@ -587,37 +466,35 @@
 </template>
 
 <script>
+import _ from 'lodash';
 
-import _ from "lodash";
+import LyTab from '@/tab/src/index.vue';
+import Map from '@/components/search/map';
+import Business from '@/components/search/business';
+import People from '@/components/search/people';
+import Network from '@/components/search/network';
+import Post from '@/components/search/posts';
+import Market from '@/components/search/market';
 
+import MiniBusiness from '@/components/search/allSearchComps/allBusiness';
+import MiniPeople from '@/components/search/allSearchComps/allPeople';
+import MiniNetwork from '@/components/search/allSearchComps/allNetwork';
+import MiniPost from '@/components/search/allSearchComps/allPosts';
+import MiniMarket from '@/components/search/allSearchComps/allMarket';
+import Nav from '@/components/navbar';
 
-import LyTab from "@/tab/src/index.vue";
-import Map from "@/components/search/map";
-import Business from "@/components/search/business";
-import People from "@/components/search/people";
-import Network from "@/components/search/network";
-import Post from "@/components/search/posts";
-import Market from "@/components/search/market";
+import Filters from '@/components/search/filters';
 
-import MiniBusiness from "@/components/search/allSearchComps/allBusiness";
-import MiniPeople from "@/components/search/allSearchComps/allPeople";
-import MiniNetwork from "@/components/search/allSearchComps/allNetwork";
-import MiniPost from "@/components/search/allSearchComps/allPosts";
-import MiniMarket from "@/components/search/allSearchComps/allMarket";
-import Nav from "@/components/navbar";
+import SubNav from '@/components/subnav';
 
-import Filters from "@/components/search/filters";
+import Sponsor from '@/components/search/sponsoredBusiness';
+import Button from '@/components/ButtonNavBarFind';
 
-import SubNav from "@/components/subnav";
+import { PostComponent, PeopleComponent } from '@/components/search';
 
-import Sponsor from "@/components/search/sponsoredBusiness";
-import Button from "@/components/ButtonNavBarFind";
+import { loader } from '@/mixins';
 
-import { PostComponent, PeopleComponent } from "@/components/search";
-
-import { loader } from "@/mixins";
-
-import { mapActions } from "vuex";
+import { mapActions, mapGetters } from 'vuex';
 
 export default {
   components: {
@@ -635,16 +512,11 @@ export default {
     Post,
     Market,
 
-
     MiniBusiness,
     MiniPeople,
     MiniNetwork,
     MiniPost,
     MiniMarket,
-    PeopleFilter,
-    PostFilter,
-
-
     PostComponent,
     PeopleComponent,
 
@@ -653,10 +525,9 @@ export default {
 
   mixins: [loader],
 
-
   computed: {
     ...mapGetters({
-      peoples: "search/GET_RESULT",
+      peoples: 'search/GET_RESULT',
     }),
     products() {
       return this.$store.state.market.products;
@@ -672,262 +543,259 @@ export default {
     };
     this.getKeyword();
     this.initialize();
-
   },
 
   data() {
     return {
       navBarParams: {
-        keyword: "",
-        placeholder: "Find Pharmacy",
+        keyword: '',
+        placeholder: 'Find Pharmacy',
       },
-      strategy: null,
       searchParams: {
-        keyword: "",
-        cat_id: "",
-        placeholder: "Find In All",
+        keyword: '',
+        cat_id: '',
+        placeholder: 'Find In All',
       },
-
 
       alert: false,
       showDismissibleAlert: false,
       prodLoader: false,
 
       strategyForComponent: null,
-      notFoundComponentTitle: "",
+      notFoundComponentTitle: '',
       isComponent: null,
       strategy: {},
       strategyForPlaceHolder: {},
       strategyForNotFoundComponentTitle: {},
 
-      selected: "all",
+      selected: 'all',
       selectedId: 0,
-      Setcategoryr: "all",
-      Selectedcategory: "all",
-      Selectedparentcategory: "Agriculture",
+      Setcategoryr: 'all',
+      Selectedcategory: 'all',
+      Selectedparentcategory: 'Agriculture',
       bottomSelectedId: 0,
-      location: "any",
-      category: "any",
-      post: "any",
+      location: 'any',
+      category: 'any',
+      post: 'any',
       map: false,
-      selectedfilter: "",
+      selectedfilter: '',
       showform: false,
 
       //selectcategories:[],
 
       categories_filters: [],
       items: [
-        { label: "All " },
+        { label: 'All ' },
 
-        { label: "Business" },
-        { label: "People" },
-        { label: "Network" },
-        { label: "Market" },
-        { label: "Post" },
+        { label: 'Business' },
+        { label: 'People' },
+        { label: 'Network' },
+        { label: 'Market' },
+        { label: 'Post' },
       ],
 
       Finished_Branded_Products_filters: [
-        { value: "Peanuts", text: "Peanuts" },
-        { value: "Chocolate", text: "Chocolate" },
+        { value: 'Peanuts', text: 'Peanuts' },
+        { value: 'Chocolate', text: 'Chocolate' },
 
-        { value: "Jam", text: "Jam" },
+        { value: 'Jam', text: 'Jam' },
       ],
 
       Coffee_filters: [
-        { value: "tea", text: "Tea" },
-        { value: "coffe", text: "Coffe" },
+        { value: 'tea', text: 'Tea' },
+        { value: 'coffe', text: 'Coffe' },
       ],
 
       Dairy_filters: [
-        { value: "Yoghurts", text: "Yoghurts" },
-        { value: "coffe", text: "Coffe" },
+        { value: 'Yoghurts', text: 'Yoghurts' },
+        { value: 'coffe', text: 'Coffe' },
 
-        { value: "Milk", text: "Milk" },
-        { value: "Butter", text: "Butter" },
-        { value: "Cheese", text: "Cheese" },
-        { value: "Ice_cream", text: "Ice cream " },
+        { value: 'Milk', text: 'Milk' },
+        { value: 'Butter', text: 'Butter' },
+        { value: 'Cheese', text: 'Cheese' },
+        { value: 'Ice_cream', text: 'Ice cream ' },
       ],
 
       Oils_filters: [
-        { value: "Coconut_oils", text: "Coconut oils" },
-        { value: "Palm_oil", text: "Palm oil" },
-        { value: "Palm_oil", text: "Palm oil" },
+        { value: 'Coconut_oils', text: 'Coconut oils' },
+        { value: 'Palm_oil', text: 'Palm oil' },
+        { value: 'Palm_oil', text: 'Palm oil' },
 
-        { value: "vetegetable_oil", text: " Vegetable " },
+        { value: 'vetegetable_oil', text: ' Vegetable ' },
       ],
 
       Beans_filters: [
-        { value: "Red_beans", text: "Red beans" },
-        { value: "Black_beans", text: "Black beans" },
+        { value: 'Red_beans', text: 'Red beans' },
+        { value: 'Black_beans', text: 'Black beans' },
 
-        { value: "White_beans", text: "White beans" },
-        { value: "Senegalese_beans", text: "Senegalese beans" },
-        { value: "Koki_beans", text: "Koki beans" },
+        { value: 'White_beans', text: 'White beans' },
+        { value: 'Senegalese_beans', text: 'Senegalese beans' },
+        { value: 'Koki_beans', text: 'Koki beans' },
       ],
 
       Spices_filters: [
-        { value: "Green_spices", text: "Green spices" },
-        { value: "Ginger", text: "Ginger" },
+        { value: 'Green_spices', text: 'Green spices' },
+        { value: 'Ginger', text: 'Ginger' },
 
-        { value: "Garlic", text: "Garlic" },
-        { value: "Djansang", text: "Djansang" },
+        { value: 'Garlic', text: 'Garlic' },
+        { value: 'Djansang', text: 'Djansang' },
 
-        { value: "Curry", text: "Curry" },
+        { value: 'Curry', text: 'Curry' },
 
-        { value: "white_pepper", text: "white pepper" },
+        { value: 'white_pepper', text: 'white pepper' },
 
-        { value: "Penja", text: "Penja" },
+        { value: 'Penja', text: 'Penja' },
       ],
 
       starch_filters: [
-        { value: "Cocoyam", text: "Cocoyam" },
-        { value: "Cassava", text: "Cassava" },
+        { value: 'Cocoyam', text: 'Cocoyam' },
+        { value: 'Cassava', text: 'Cassava' },
 
-        { value: "Plantains", text: "Plantains" },
-        { value: "Potatoes", text: "Potatoes" },
-        { value: "Plantains", text: "Plantains" },
-        { value: "Yams", text: "Yams" },
+        { value: 'Plantains', text: 'Plantains' },
+        { value: 'Potatoes', text: 'Potatoes' },
+        { value: 'Plantains', text: 'Plantains' },
+        { value: 'Yams', text: 'Yams' },
 
-        { value: "Beans", text: "Beans" },
+        { value: 'Beans', text: 'Beans' },
 
-        { value: "Garri", text: "Garri" },
-        { value: "Okra", text: "Okra" },
-        { value: "Corn", text: "Corn" },
-        { value: "Groundnuts", text: "Groundnuts" },
-        { value: "Bobolo", text: "Bobolo " },
+        { value: 'Garri', text: 'Garri' },
+        { value: 'Okra', text: 'Okra' },
+        { value: 'Corn', text: 'Corn' },
+        { value: 'Groundnuts', text: 'Groundnuts' },
+        { value: 'Bobolo', text: 'Bobolo ' },
       ],
 
       Cereals_filters: [
-        { value: "Wheat", text: "Wheat" },
-        { value: "Rice", text: "Rice" },
+        { value: 'Wheat', text: 'Wheat' },
+        { value: 'Rice', text: 'Rice' },
 
-        { value: "Maize", text: "Maize" },
-        { value: "Oat", text: "Oat" },
+        { value: 'Maize', text: 'Maize' },
+        { value: 'Oat', text: 'Oat' },
 
-        { value: "Barley", text: "Barley" },
+        { value: 'Barley', text: 'Barley' },
 
-        { value: "Millet", text: "Millet" },
+        { value: 'Millet', text: 'Millet' },
       ],
 
       Raw_material_filters: [
-        { value: "Cocoa", text: "Cocoa" },
-        { value: "Coffee", text: "Coffee" },
+        { value: 'Cocoa', text: 'Cocoa' },
+        { value: 'Coffee', text: 'Coffee' },
 
-        { value: "Rubber", text: "Rubber" },
-        { value: "Charcoal", text: "Charcoal" },
+        { value: 'Rubber', text: 'Rubber' },
+        { value: 'Charcoal', text: 'Charcoal' },
       ],
 
       Livestock_filters: [
-        { value: "Chicken", text: "Chicken" },
-        { value: "Beef", text: "Beef" },
+        { value: 'Chicken', text: 'Chicken' },
+        { value: 'Beef', text: 'Beef' },
 
-        { value: "Pork", text: "Pork" },
-        { value: "Bushmeat", text: "Bushmeat" },
-        { value: "Goats", text: "Goats" },
-        { value: "Duck", text: "Duck" },
-        { value: "Lambs", text: "Lambs" },
-        { value: "Rabbits", text: " Rabbits " },
-        { value: "Snails", text: "Snails " },
-        { value: "Eggs", text: "Eggs " },
-        { value: "Smoked_fish", text: "Smoked fish " },
-        { value: "Crayfish", text: "Crayfish " },
-        { value: "Smoked_fish", text: "Smoked fish " },
-        { value: "Smoked_beef", text: "Smoked beef " },
-        { value: "Smoked_chicken", text: "Smoked chicken " },
+        { value: 'Pork', text: 'Pork' },
+        { value: 'Bushmeat', text: 'Bushmeat' },
+        { value: 'Goats', text: 'Goats' },
+        { value: 'Duck', text: 'Duck' },
+        { value: 'Lambs', text: 'Lambs' },
+        { value: 'Rabbits', text: ' Rabbits ' },
+        { value: 'Snails', text: 'Snails ' },
+        { value: 'Eggs', text: 'Eggs ' },
+        { value: 'Smoked_fish', text: 'Smoked fish ' },
+        { value: 'Crayfish', text: 'Crayfish ' },
+        { value: 'Smoked_fish', text: 'Smoked fish ' },
+        { value: 'Smoked_beef', text: 'Smoked beef ' },
+        { value: 'Smoked_chicken', text: 'Smoked chicken ' },
 
-        { value: "Mackerel", text: "Mackerel " },
+        { value: 'Mackerel', text: 'Mackerel ' },
 
-        { value: "Bar_fish", text: "Bar fish " },
+        { value: 'Bar_fish', text: 'Bar fish ' },
 
-        { value: "Tilapia_fish", text: "Tilapia fish " },
+        { value: 'Tilapia_fish', text: 'Tilapia fish ' },
 
-        { value: "Carp_fish", text: "Carp fish " },
+        { value: 'Carp_fish', text: 'Carp fish ' },
 
-        { value: "Jawbone_fish", text: "Jawbone fish " },
+        { value: 'Jawbone_fish', text: 'Jawbone fish ' },
 
-        { value: "Belt_fish", text: "Belt fish " },
+        { value: 'Belt_fish', text: 'Belt fish ' },
 
-        { value: "Sardines_fish", text: "Sardines fish" },
+        { value: 'Sardines_fish', text: 'Sardines fish' },
 
-        { value: "Crabs", text: "Crabs" },
+        { value: 'Crabs', text: 'Crabs' },
       ],
 
       Vegetables_filters: [
-        { value: "Cucumbers", text: "Cucumbers" },
-        { value: "Tomato", text: "Tomato" },
+        { value: 'Cucumbers', text: 'Cucumbers' },
+        { value: 'Tomato', text: 'Tomato' },
 
-        { value: "Pepper", text: "Pepper" },
-        { value: "Carrots", text: "Carrots" },
-        { value: "Egusi", text: "Egusi" },
-        { value: "Salad", text: "Salad" },
+        { value: 'Pepper', text: 'Pepper' },
+        { value: 'Carrots', text: 'Carrots' },
+        { value: 'Egusi', text: 'Egusi' },
+        { value: 'Salad', text: 'Salad' },
 
-        { value: "Cauliflower", text: "Cauliflower" },
+        { value: 'Cauliflower', text: 'Cauliflower' },
 
-        { value: "Broccoli", text: "broccoli" },
+        { value: 'Broccoli', text: 'broccoli' },
 
-        { value: "Zucchini", text: "Zucchini" },
+        { value: 'Zucchini', text: 'Zucchini' },
 
-        { value: "Eggplants", text: "Eggplants" },
+        { value: 'Eggplants', text: 'Eggplants' },
 
-        { value: "Okra", text: "Okra" },
-        { value: "Green_leaf", text: "Green leaf" },
-        { value: "huckleberry", text: "huckleberry " },
-        { value: "Waterleaf", text: "Waterleaf " },
-        { value: "Bitter_leaf", text: "Bitter Leaf " },
+        { value: 'Okra', text: 'Okra' },
+        { value: 'Green_leaf', text: 'Green leaf' },
+        { value: 'huckleberry', text: 'huckleberry ' },
+        { value: 'Waterleaf', text: 'Waterleaf ' },
+        { value: 'Bitter_leaf', text: 'Bitter Leaf ' },
       ],
 
       Fruits_filters: [
-        { value: "Lemon", text: "Lemon" },
-        { value: "Orange", text: "Orange" },
+        { value: 'Lemon', text: 'Lemon' },
+        { value: 'Orange', text: 'Orange' },
 
-        { value: "Papaya", text: "Papaya" },
-        { value: "Pineapples", text: "Pineapples" },
-        { value: "Apples", text: "Apples" },
-        { value: "Strawberries", text: "Strawberries" },
-        { value: "Watermelon", text: "Watermelon" },
-        { value: "Coconut", text: "Coconut" },
-        { value: "Mangoes", text: "Mangoes " },
-        { value: "Avocado", text: "Avocado " },
-        { value: "Plums", text: "Plums " },
+        { value: 'Papaya', text: 'Papaya' },
+        { value: 'Pineapples', text: 'Pineapples' },
+        { value: 'Apples', text: 'Apples' },
+        { value: 'Strawberries', text: 'Strawberries' },
+        { value: 'Watermelon', text: 'Watermelon' },
+        { value: 'Coconut', text: 'Coconut' },
+        { value: 'Mangoes', text: 'Mangoes ' },
+        { value: 'Avocado', text: 'Avocado ' },
+        { value: 'Plums', text: 'Plums ' },
       ],
 
       selectcategories: [
-        { value: "Vegetables", text: "Vegetables" },
-        { value: "Starch", text: "Starch" },
+        { value: 'Vegetables', text: 'Vegetables' },
+        { value: 'Starch', text: 'Starch' },
 
-        { value: "Fruits", text: "Fruits" },
+        { value: 'Fruits', text: 'Fruits' },
 
-        { value: "Cereals", text: "Cereals" },
-        { value: "Oils", text: "Oils" },
-        { value: "Coffee", text: "Coffee" },
-        { value: "Spices", text: "Spices" },
+        { value: 'Cereals', text: 'Cereals' },
+        { value: 'Oils', text: 'Oils' },
+        { value: 'Coffee', text: 'Coffee' },
+        { value: 'Spices', text: 'Spices' },
 
-        { value: "Finished_Branded_Products", text: "Branded Products" },
+        { value: 'Finished_Branded_Products', text: 'Branded Products' },
 
-        { value: "Livestock", text: "Livestock" },
+        { value: 'Livestock', text: 'Livestock' },
 
-        { value: "Dairy", text: "Dairy" },
+        { value: 'Dairy', text: 'Dairy' },
 
-        { value: "Raw_material", text: "Raw material " },
+        { value: 'Raw_material', text: 'Raw material ' },
       ],
 
       categories: [
-        { item: "Professional_and_home_service", name: "Professionals" },
-        { item: "Agriculture ", name: "Agriculture " },
-        { item: "Restaurant ", name: " Restaurant " },
-        { item: "Electronics ", name: "Electronics " },
-        { item: "Handicraft", name: "Handicraft" },
-        { item: "clothing", name: "clothing" },
-        { item: "Mechanics", name: "Mechanics" },
-        { item: "Health_unit ", name: "Health unit " },
-        { item: "Bars", name: "Bars" },
-        { item: "Hair_and_beauty ", name: "Hair and beauty " },
-        { item: "Real_estate ", name: "Real_estate " },
-        { item: "Travelling ", name: "Travelling " },
-        { item: "Hotels", name: "Hotels" },
-        { item: "Station", name: " station  " },
-        { item: "Mayor_concils", name: "Mayor_concils" },
-        { item: "Taxis service", name: "Taxis service" },
+        { item: 'Professional_and_home_service', name: 'Professionals' },
+        { item: 'Agriculture ', name: 'Agriculture ' },
+        { item: 'Restaurant ', name: ' Restaurant ' },
+        { item: 'Electronics ', name: 'Electronics ' },
+        { item: 'Handicraft', name: 'Handicraft' },
+        { item: 'clothing', name: 'clothing' },
+        { item: 'Mechanics', name: 'Mechanics' },
+        { item: 'Health_unit ', name: 'Health unit ' },
+        { item: 'Bars', name: 'Bars' },
+        { item: 'Hair_and_beauty ', name: 'Hair and beauty ' },
+        { item: 'Real_estate ', name: 'Real_estate ' },
+        { item: 'Travelling ', name: 'Travelling ' },
+        { item: 'Hotels', name: 'Hotels' },
+        { item: 'Station', name: ' station  ' },
+        { item: 'Mayor_concils', name: 'Mayor_concils' },
+        { item: 'Taxis service', name: 'Taxis service' },
       ],
 
       //categories_filters:[],
@@ -935,704 +803,704 @@ export default {
       categories_sub_filters: [],
 
       agriculture_filters: [
-        { value: "Vegetables", text: "Vegetables" },
-        { value: "Starch", text: "Starch" },
+        { value: 'Vegetables', text: 'Vegetables' },
+        { value: 'Starch', text: 'Starch' },
 
-        { value: "Fruits", text: "Fruits" },
+        { value: 'Fruits', text: 'Fruits' },
 
-        { value: "Cereals", text: "Cereals" },
-        { value: "Oils", text: "Oils" },
-        { value: "Coffee", text: "Coffee" },
-        { value: "Spices", text: "Spices" },
-        { value: "Beans", text: "Beans" },
-        { value: "Finished_Branded_Products", text: "Branded Products" },
+        { value: 'Cereals', text: 'Cereals' },
+        { value: 'Oils', text: 'Oils' },
+        { value: 'Coffee', text: 'Coffee' },
+        { value: 'Spices', text: 'Spices' },
+        { value: 'Beans', text: 'Beans' },
+        { value: 'Finished_Branded_Products', text: 'Branded Products' },
 
-        { value: "Livestock", text: "Livestock" },
+        { value: 'Livestock', text: 'Livestock' },
 
-        { value: "Dairy", text: "Dairy" },
+        { value: 'Dairy', text: 'Dairy' },
 
-        { value: "Raw_material", text: "Raw material " },
+        { value: 'Raw_material', text: 'Raw material ' },
       ],
 
       Electronics_filters: [
-        { value: "phone", text: "Phone and accessories" },
-        { value: "Home Appliances", text: "Home Appliances" },
+        { value: 'phone', text: 'Phone and accessories' },
+        { value: 'Home Appliances', text: 'Home Appliances' },
 
-        { value: "Computers", text: "Computers, Tablets and accessories" },
+        { value: 'Computers', text: 'Computers, Tablets and accessories' },
 
-        { value: "Office Electronics", text: "Office Electronics " },
+        { value: 'Office Electronics', text: 'Office Electronics ' },
       ],
 
       Station: [
-        { value: "Gas station ", text: "Gas station " },
-        { value: "Petrol station ", text: "Petrol station " },
-        { value: "Fuel station ", text: "Fuel station " },
+        { value: 'Gas station ', text: 'Gas station ' },
+        { value: 'Petrol station ', text: 'Petrol station ' },
+        { value: 'Fuel station ', text: 'Fuel station ' },
       ],
 
       clothing_filters: [
-        { value: "men", text: "Men" },
+        { value: 'men', text: 'Men' },
 
-        { value: "Tailoring", text: "Tailoring" },
-        { value: "female", text: "Female" },
-        { value: "Men Accessories", text: "Men Accessories" },
-        { value: "Women accessories", text: "Women accessories" },
+        { value: 'Tailoring', text: 'Tailoring' },
+        { value: 'female', text: 'Female' },
+        { value: 'Men Accessories', text: 'Men Accessories' },
+        { value: 'Women accessories', text: 'Women accessories' },
       ],
 
       Health_unit_filters: [
-        { value: "Hospitals", text: "Hospitals" },
-        { value: "Clinics", text: "Clinics" },
+        { value: 'Hospitals', text: 'Hospitals' },
+        { value: 'Clinics', text: 'Clinics' },
 
-        { value: "COVID-19", text: "COVID-19" },
+        { value: 'COVID-19', text: 'COVID-19' },
 
-        { value: "Pharmacies", text: "Pharmacies " },
+        { value: 'Pharmacies', text: 'Pharmacies ' },
       ],
 
       restaurants_filters: [
-        { value: "African_food", text: "African food" },
+        { value: 'African_food', text: 'African food' },
 
-        { value: "Fast_food", text: "Fast food " },
-        { value: "European_food", text: "European food" },
-        { value: "French_restaurant", text: "French Restaurant " },
+        { value: 'Fast_food', text: 'Fast food ' },
+        { value: 'European_food', text: 'European food' },
+        { value: 'French_restaurant', text: 'French Restaurant ' },
 
-        { value: "Asian food", text: "Asian food" },
+        { value: 'Asian food', text: 'Asian food' },
 
-        { value: "Bars", text: "Bars" },
+        { value: 'Bars', text: 'Bars' },
 
-        { value: "Vegetarian", text: "Vegetarian" },
+        { value: 'Vegetarian', text: 'Vegetarian' },
 
-        { value: "Delivery", text: "Delivery" },
-        { value: "Catering", text: "Catering" },
-        { value: "Pizza", text: "Pizza" },
-        { value: "Bakery", text: "Bakery" },
+        { value: 'Delivery', text: 'Delivery' },
+        { value: 'Catering', text: 'Catering' },
+        { value: 'Pizza', text: 'Pizza' },
+        { value: 'Bakery', text: 'Bakery' },
       ],
 
       Mechanics_filters: [
-        { value: "Car care", text: "Car care " },
-        { value: "Spare parts", text: "Spare parts " },
+        { value: 'Car care', text: 'Car care ' },
+        { value: 'Spare parts', text: 'Spare parts ' },
 
-        { value: "Auto Dealers", text: "Auto Dealers" },
+        { value: 'Auto Dealers', text: 'Auto Dealers' },
       ],
 
       Handicrafts_filters: [
-        { value: "Home Decor", text: "Home Decor" },
-        { value: "Textile", text: "Textile" },
+        { value: 'Home Decor', text: 'Home Decor' },
+        { value: 'Textile', text: 'Textile' },
       ],
 
       Health_unit: [
-        { value: "Hopistal ", text: "Hopistal " },
-        { value: "clinic", text: "Clinic " },
+        { value: 'Hopistal ', text: 'Hopistal ' },
+        { value: 'clinic', text: 'Clinic ' },
       ],
 
       Pharmacies: [],
 
       Educations_filters: [
-        { value: "Primary Education", text: "Primary Education" },
+        { value: 'Primary Education', text: 'Primary Education' },
 
-        { value: "Secondary Education", text: "Secondary Education" },
+        { value: 'Secondary Education', text: 'Secondary Education' },
 
-        { value: "Tertiary Education", text: "Tertiary Education" },
+        { value: 'Tertiary Education', text: 'Tertiary Education' },
 
-        { value: "Vocational", text: "Vocational training centers" },
+        { value: 'Vocational', text: 'Vocational training centers' },
       ],
 
       Grooming_filters: [
-        { value: "Women Grooming", text: "Women Grooming" },
+        { value: 'Women Grooming', text: 'Women Grooming' },
 
-        { value: "Men Grooming", text: "Men Grooming" },
+        { value: 'Men Grooming', text: 'Men Grooming' },
       ],
 
       Transport_filters: [
-        { value: "bus parks", text: "bus parks" },
+        { value: 'bus parks', text: 'bus parks' },
 
-        { value: "car parks ", text: "car parks " },
-        { value: "train stations", text: "train stations " },
+        { value: 'car parks ', text: 'car parks ' },
+        { value: 'train stations', text: 'train stations ' },
 
-        { value: "seaports", text: "seaports" },
-        { value: "Taxis", text: "Taxis " },
-        { value: "import", text: "Import/Export " },
+        { value: 'seaports', text: 'seaports' },
+        { value: 'Taxis', text: 'Taxis ' },
+        { value: 'import', text: 'Import/Export ' },
       ],
 
       Hotels_filters: [
-        { value: "Hotels ", text: "Hotels " },
-        { value: "Resorts", text: "Resorts" },
-        { value: "Motels", text: "Motels" },
+        { value: 'Hotels ', text: 'Hotels ' },
+        { value: 'Resorts', text: 'Resorts' },
+        { value: 'Motels', text: 'Motels' },
       ],
 
       Hair_and_beauty: [
-        { value: "massage ", text: "massage " },
-        { value: "skin_care", text: "skin care " },
-        { value: "hair_care", text: "hair care" },
-        { value: "hair_salon", text: "hair salon" },
-        { value: "training", text: "training" },
-        { value: "tattoo", text: "tattoo" },
-        { value: "makeup_salon", text: "makeup_salon" },
-        { value: "teeth_whitening", text: "teeth whitening" },
-        { value: "nail_salon", text: "nail salon" },
+        { value: 'massage ', text: 'massage ' },
+        { value: 'skin_care', text: 'skin care ' },
+        { value: 'hair_care', text: 'hair care' },
+        { value: 'hair_salon', text: 'hair salon' },
+        { value: 'training', text: 'training' },
+        { value: 'tattoo', text: 'tattoo' },
+        { value: 'makeup_salon', text: 'makeup_salon' },
+        { value: 'teeth_whitening', text: 'teeth whitening' },
+        { value: 'nail_salon', text: 'nail salon' },
       ],
 
       Bars: [
-        { value: "wineries ", text: "wineries" },
-        { value: "nightclub", text: "nightclub " },
-        { value: "snack", text: "snack" },
-        { value: "drinks", text: "drinks" },
-        { value: "natural", text: "natural" },
+        { value: 'wineries ', text: 'wineries' },
+        { value: 'nightclub', text: 'nightclub ' },
+        { value: 'snack', text: 'snack' },
+        { value: 'drinks', text: 'drinks' },
+        { value: 'natural', text: 'natural' },
       ],
 
       Travelling: [
-        { value: "bus_park ", text: "bus park " },
-        { value: "car_parks ", text: "car parks  " },
-        { value: "train_parks", text: "train parks " },
-        { value: "ship", text: "ship" },
+        { value: 'bus_park ', text: 'bus park ' },
+        { value: 'car_parks ', text: 'car parks  ' },
+        { value: 'train_parks', text: 'train parks ' },
+        { value: 'ship', text: 'ship' },
       ],
 
       Hotels: [
-        { value: "5_stars ", text: "5 stars " },
-        { value: "4_stars", text: "4 stars " },
-        { value: "3_stars", text: "3_stars" },
-        { value: "Urban_hotel", text: "Urban_hotel" },
-        { value: "Resorts", text: "Resorts" },
+        { value: '5_stars ', text: '5 stars ' },
+        { value: '4_stars', text: '4 stars ' },
+        { value: '3_stars', text: '3_stars' },
+        { value: 'Urban_hotel', text: 'Urban_hotel' },
+        { value: 'Resorts', text: 'Resorts' },
       ],
 
       Professional_and_home_service: [
-        { value: "Legal_service", text: "Legal service " },
-        { value: "Marketing", text: "Marketing" },
+        { value: 'Legal_service', text: 'Legal service ' },
+        { value: 'Marketing', text: 'Marketing' },
 
         {
-          value: "Web, Graphic Design and Printing",
-          text: "Web, Graphic Design and Printing",
+          value: 'Web, Graphic Design and Printing',
+          text: 'Web, Graphic Design and Printing',
         },
 
         {
-          value: "Event Planning and Rentals",
-          text: "Event Planning and Rentals",
+          value: 'Event Planning and Rentals',
+          text: 'Event Planning and Rentals',
         },
 
-        { value: "Cleaning Services", text: "Cleaning Services" },
+        { value: 'Cleaning Services', text: 'Cleaning Services' },
 
-        { value: "Accounting", text: "Accounting" },
+        { value: 'Accounting', text: 'Accounting' },
 
-        { value: "Translation services", text: "Translation services" },
+        { value: 'Translation services', text: 'Translation services' },
 
-        { value: "Employment agency ", text: "Employment agency " },
+        { value: 'Employment agency ', text: 'Employment agency ' },
 
         {
-          value: "Real Estate Agency and Land",
-          text: "Real Estate Agency and Land",
+          value: 'Real Estate Agency and Land',
+          text: 'Real Estate Agency and Land',
         },
 
-        { value: "Housing and Construction", text: "Housing and Construction" },
+        { value: 'Housing and Construction', text: 'Housing and Construction' },
 
-        { value: "Internet and Media", text: "Internet and Media" },
+        { value: 'Internet and Media', text: 'Internet and Media' },
       ],
 
       Tailoringg: [
-        { value: "Shoes", text: "Shoes " },
-        { value: "Watch", text: "Watch " },
-        { value: "Perfume", text: "Perfume " },
-        { value: "Shirt", text: "Shirt " },
-        { value: "Bags", text: "Bags " },
-        { value: "Jeans", text: "Jeans " },
-        { value: "Cap", text: "Cap " },
-        { value: "Gloves", text: "Gloves " },
-        { value: "Suit", text: "Suit " },
-        { value: "Singlet", text: "Singlet  " },
-        { value: "sweater ", text: "sweater" },
+        { value: 'Shoes', text: 'Shoes ' },
+        { value: 'Watch', text: 'Watch ' },
+        { value: 'Perfume', text: 'Perfume ' },
+        { value: 'Shirt', text: 'Shirt ' },
+        { value: 'Bags', text: 'Bags ' },
+        { value: 'Jeans', text: 'Jeans ' },
+        { value: 'Cap', text: 'Cap ' },
+        { value: 'Gloves', text: 'Gloves ' },
+        { value: 'Suit', text: 'Suit ' },
+        { value: 'Singlet', text: 'Singlet  ' },
+        { value: 'sweater ', text: 'sweater' },
       ],
 
       Tailoring: [
-        { value: "Men_taloring", text: " Men" },
-        { value: "women_taloring", text: " Women" },
-        { value: "male_kid_taloring", text: " male kid" },
-        { value: "female_kid_taloring", text: "female kid" },
+        { value: 'Men_taloring', text: ' Men' },
+        { value: 'women_taloring', text: ' Women' },
+        { value: 'male_kid_taloring', text: ' male kid' },
+        { value: 'female_kid_taloring', text: 'female kid' },
       ],
 
       male: [
-        { value: "Shoes", text: "Shoes " },
-        { value: "Watch", text: "Watch " },
-        { value: "Perfume", text: "Perfume " },
-        { value: "Shirt", text: "Shirt " },
-        { value: "Bags", text: "Bags " },
-        { value: "Jeans", text: "Jeans " },
-        { value: "Cap", text: "Cap " },
-        { value: "Gloves", text: "Gloves " },
-        { value: "Suit", text: "Suit " },
-        { value: "Singlet", text: "Singlet  " },
-        { value: "sweater ", text: "sweater" },
+        { value: 'Shoes', text: 'Shoes ' },
+        { value: 'Watch', text: 'Watch ' },
+        { value: 'Perfume', text: 'Perfume ' },
+        { value: 'Shirt', text: 'Shirt ' },
+        { value: 'Bags', text: 'Bags ' },
+        { value: 'Jeans', text: 'Jeans ' },
+        { value: 'Cap', text: 'Cap ' },
+        { value: 'Gloves', text: 'Gloves ' },
+        { value: 'Suit', text: 'Suit ' },
+        { value: 'Singlet', text: 'Singlet  ' },
+        { value: 'sweater ', text: 'sweater' },
       ],
 
       female: [
-        { value: "Shoes", text: "Shoes " },
-        { value: "Watch", text: "Watch " },
-        { value: "Perfume", text: "Perfume " },
-        { value: "Shirt", text: "Shirt " },
-        { value: "Bags", text: "Bags " },
-        { value: "Jeans", text: "Jeans " },
-        { value: "Cap", text: "Cap " },
-        { value: "Gloves", text: "Gloves " },
-        { value: "Suit", text: "Suit " },
-        { value: "Singlet", text: "Singlet  " },
-        { value: "sweater ", text: "sweater" },
+        { value: 'Shoes', text: 'Shoes ' },
+        { value: 'Watch', text: 'Watch ' },
+        { value: 'Perfume', text: 'Perfume ' },
+        { value: 'Shirt', text: 'Shirt ' },
+        { value: 'Bags', text: 'Bags ' },
+        { value: 'Jeans', text: 'Jeans ' },
+        { value: 'Cap', text: 'Cap ' },
+        { value: 'Gloves', text: 'Gloves ' },
+        { value: 'Suit', text: 'Suit ' },
+        { value: 'Singlet', text: 'Singlet  ' },
+        { value: 'sweater ', text: 'sweater' },
 
-        { value: "Gown ", text: "Gown" },
-        { value: "Tops ", text: "Tops" },
-        { value: "sweater ", text: "sweater" },
+        { value: 'Gown ', text: 'Gown' },
+        { value: 'Tops ', text: 'Tops' },
+        { value: 'sweater ', text: 'sweater' },
       ],
 
       Professional_services: [
-        { value: "Web_designers", text: "Web designers " },
-        { value: "Graphic_designers", text: "Graphic designers  " },
-        { value: "Architect ", text: "Architect " },
-        { value: "Patent_law", text: "Patent law" },
+        { value: 'Web_designers', text: 'Web designers ' },
+        { value: 'Graphic_designers', text: 'Graphic designers  ' },
+        { value: 'Architect ', text: 'Architect ' },
+        { value: 'Patent_law', text: 'Patent law' },
 
-        { value: "Life_coach", text: "Life coach" },
-        { value: "Marketers ", text: "Marketers " },
-        { value: "Advertising ", text: "Advertising " },
-        { value: "Office_cleaning  ", text: "Office cleaning  " },
+        { value: 'Life_coach', text: 'Life coach' },
+        { value: 'Marketers ', text: 'Marketers ' },
+        { value: 'Advertising ', text: 'Advertising ' },
+        { value: 'Office_cleaning  ', text: 'Office cleaning  ' },
 
-        { value: "Billing_service", text: " Billing service" },
+        { value: 'Billing_service', text: ' Billing service' },
 
-        { value: "Wholesale ", text: "Wholesale " },
+        { value: 'Wholesale ', text: 'Wholesale ' },
 
-        { value: "Translation_service  ", text: "Translation service  " },
-        { value: "Employment_agency  ", text: "Employment agency  " },
-        { value: "Private_investigators ", text: "Private investigators " },
-        { value: "Personal_assistants ", text: "Personal assistants " },
-        { value: "Protocol ", text: "Protocol " },
+        { value: 'Translation_service  ', text: 'Translation service  ' },
+        { value: 'Employment_agency  ', text: 'Employment agency  ' },
+        { value: 'Private_investigators ', text: 'Private investigators ' },
+        { value: 'Personal_assistants ', text: 'Personal assistants ' },
+        { value: 'Protocol ', text: 'Protocol ' },
       ],
 
       Home_service: [
-        { value: "Electrician", text: "Electrician " },
+        { value: 'Electrician', text: 'Electrician ' },
 
-        { value: "Plumbing", text: "Plumbing" },
-        { value: "Carpeting", text: "Carpeting" },
-        { value: "Gardeners", text: "Gardeners" },
+        { value: 'Plumbing', text: 'Plumbing' },
+        { value: 'Carpeting', text: 'Carpeting' },
+        { value: 'Gardeners', text: 'Gardeners' },
 
-        { value: "Painters", text: "Painters" },
+        { value: 'Painters', text: 'Painters' },
       ],
 
       Financial_service: [
-        { value: "Insurance", text: "Insurance " },
+        { value: 'Insurance', text: 'Insurance ' },
 
-        { value: "Investing", text: "Investing" },
-        { value: "Banks", text: "Banks" },
+        { value: 'Investing', text: 'Investing' },
+        { value: 'Banks', text: 'Banks' },
       ],
 
       Real_estate: [
-        { value: "apartment", text: "apartment " },
-        { value: "property_management", text: "property management " },
-        { value: "university_housing", text: "university housing" },
-        { value: "home_staging", text: "home_staging" },
-        { value: "commercial", text: "commercial" },
-        { value: "developers", text: "developers" },
+        { value: 'apartment', text: 'apartment ' },
+        { value: 'property_management', text: 'property management ' },
+        { value: 'university_housing', text: 'university housing' },
+        { value: 'home_staging', text: 'home_staging' },
+        { value: 'commercial', text: 'commercial' },
+        { value: 'developers', text: 'developers' },
       ],
 
       Mayor_councils_filters_and_public_institution: [
-        { value: "Mayor Councils", text: "Mayor Councils" },
-        { value: "Schools", text: "Schools " },
+        { value: 'Mayor Councils', text: 'Mayor Councils' },
+        { value: 'Schools', text: 'Schools ' },
 
-        { value: "Hospitals", text: "Hospitals " },
+        { value: 'Hospitals', text: 'Hospitals ' },
 
-        { value: "Ministries", text: "Ministries " },
+        { value: 'Ministries', text: 'Ministries ' },
       ],
 
       Taxis_service: [
-        { value: "Urban ", text: "Urban" },
-        { value: "Airport", text: "Airport " },
-        { value: "Renting", text: "Renting" },
+        { value: 'Urban ', text: 'Urban' },
+        { value: 'Airport', text: 'Airport ' },
+        { value: 'Renting', text: 'Renting' },
       ],
 
       African_food: [
-        { value: "Kati-kati", text: "Kati-kati " },
-        { value: "Eru", text: "Eru " },
-        { value: "Ndole", text: "Ndole" },
-        { value: "Pepper soup", text: "Pepper soup" },
-        { value: "Grilled fish", text: "Grilled fish" },
-        { value: "Ndjama Ndjama", text: "Ndjama Ndjama" },
-        { value: "Koki", text: "Koki" },
-        { value: "Achu", text: "Achu" },
-        { value: "Mbongo Tchobi", text: "Mbongo Tchobi" },
-        { value: "Okok", text: "Okok" },
-        { value: "Okra", text: "Okra" },
+        { value: 'Kati-kati', text: 'Kati-kati ' },
+        { value: 'Eru', text: 'Eru ' },
+        { value: 'Ndole', text: 'Ndole' },
+        { value: 'Pepper soup', text: 'Pepper soup' },
+        { value: 'Grilled fish', text: 'Grilled fish' },
+        { value: 'Ndjama Ndjama', text: 'Ndjama Ndjama' },
+        { value: 'Koki', text: 'Koki' },
+        { value: 'Achu', text: 'Achu' },
+        { value: 'Mbongo Tchobi', text: 'Mbongo Tchobi' },
+        { value: 'Okok', text: 'Okok' },
+        { value: 'Okra', text: 'Okra' },
       ],
 
       Fast_food: [
-        { value: "Beef", text: " Beef" },
-        { value: "Pizza", text: "Pizza " },
-        { value: "Pork", text: "Pork" },
+        { value: 'Beef', text: ' Beef' },
+        { value: 'Pizza', text: 'Pizza ' },
+        { value: 'Pork', text: 'Pork' },
 
-        { value: "Hamburger", text: "Hamburger " },
-        { value: "Chicken", text: "Chicken" },
+        { value: 'Hamburger', text: 'Hamburger ' },
+        { value: 'Chicken', text: 'Chicken' },
 
-        { value: "Omelets", text: " Omelets" },
+        { value: 'Omelets', text: ' Omelets' },
 
-        { value: "Natural Juice", text: "Natural Juice" },
+        { value: 'Natural Juice', text: 'Natural Juice' },
 
-        { value: "Puff-puff", text: "Puff-puff" },
-        { value: "Grilled fish", text: "Grilled fish" },
-        { value: "Soya", text: "Soya" },
-        { value: "Shawarma", text: "Shawarma" },
+        { value: 'Puff-puff', text: 'Puff-puff' },
+        { value: 'Grilled fish', text: 'Grilled fish' },
+        { value: 'Soya', text: 'Soya' },
+        { value: 'Shawarma', text: 'Shawarma' },
 
-        { value: "Chai Tea", text: "Chai Tea" },
+        { value: 'Chai Tea', text: 'Chai Tea' },
       ],
 
       Asian_food_filters: [
-        { value: "Chinese Food", text: "Chinese Food " },
-        { value: "Indian Food", text: "Indian Food" },
+        { value: 'Chinese Food', text: 'Chinese Food ' },
+        { value: 'Indian Food', text: 'Indian Food' },
       ],
 
       Bars_filters: [
-        { value: "Non-alcoholic drinks", text: "Non-alcoholic drinks" },
-        { value: "Alcoholic drinks", text: "Alcoholic drinks" },
-        { value: "Snacks", text: "Snacks" },
-        { value: "Nightclubs", text: "Nightclubs" },
+        { value: 'Non-alcoholic drinks', text: 'Non-alcoholic drinks' },
+        { value: 'Alcoholic drinks', text: 'Alcoholic drinks' },
+        { value: 'Snacks', text: 'Snacks' },
+        { value: 'Nightclubs', text: 'Nightclubs' },
       ],
 
       phone_filters: [
-        { value: "Tecno", text: " Tecno" },
-        { value: "Infinix", text: "Infinix " },
-        { value: "Samsung", text: "Samsung" },
-        { value: "Iphone", text: " Iphone" },
-        { value: "Itel", text: "Itel " },
-        { value: "Huawei", text: "Huawei" },
+        { value: 'Tecno', text: ' Tecno' },
+        { value: 'Infinix', text: 'Infinix ' },
+        { value: 'Samsung', text: 'Samsung' },
+        { value: 'Iphone', text: ' Iphone' },
+        { value: 'Itel', text: 'Itel ' },
+        { value: 'Huawei', text: 'Huawei' },
 
-        { value: "LG", text: " LG" },
-        { value: "Nokia", text: "Nokia " },
-        { value: "Batteries", text: "Batteries" },
+        { value: 'LG', text: ' LG' },
+        { value: 'Nokia', text: 'Nokia ' },
+        { value: 'Batteries', text: 'Batteries' },
 
-        { value: "Chargers", text: "Chargers" },
-        { value: "headsets", text: "headsets" },
-        { value: "Phone casing", text: "Phone casing" },
+        { value: 'Chargers', text: 'Chargers' },
+        { value: 'headsets', text: 'headsets' },
+        { value: 'Phone casing', text: 'Phone casing' },
       ],
 
       Home_Appliances_filters: [
-        { value: "Refrigerator", text: " Refrigerator" },
-        { value: "Blender", text: "Blender " },
-        { value: "Microwave", text: "Microwave" },
-        { value: "Pressing Iron", text: " Pressing Iron" },
-        { value: "Waterheater", text: "Waterheater " },
-        { value: "AC", text: "AC" },
+        { value: 'Refrigerator', text: ' Refrigerator' },
+        { value: 'Blender', text: 'Blender ' },
+        { value: 'Microwave', text: 'Microwave' },
+        { value: 'Pressing Iron', text: ' Pressing Iron' },
+        { value: 'Waterheater', text: 'Waterheater ' },
+        { value: 'AC', text: 'AC' },
 
-        { value: "LG", text: " LG" },
-        { value: "Fan", text: "Fan " },
-        { value: "TV/Radio", text: "TV/Radio" },
+        { value: 'LG', text: ' LG' },
+        { value: 'Fan', text: 'Fan ' },
+        { value: 'TV/Radio', text: 'TV/Radio' },
 
-        { value: "Generator", text: "Generator" },
-        { value: "regulator", text: "regulator" },
-        { value: "Solar system", text: "Solar system" },
+        { value: 'Generator', text: 'Generator' },
+        { value: 'regulator', text: 'regulator' },
+        { value: 'Solar system', text: 'Solar system' },
 
-        { value: "Gas cooker", text: " Gas cooker" },
+        { value: 'Gas cooker', text: ' Gas cooker' },
       ],
 
       Computers_filters: [
-        { value: "Laptops", text: " Laptops" },
-        { value: "Desktops", text: "Desktops " },
-        { value: "Video Games", text: "Video Games" },
-        { value: "Gaming Consoles", text: " Gaming Consoles" },
-        { value: "Monitors", text: "Monitors " },
-        { value: "Computer accessories ", text: "Computer accessories " },
+        { value: 'Laptops', text: ' Laptops' },
+        { value: 'Desktops', text: 'Desktops ' },
+        { value: 'Video Games', text: 'Video Games' },
+        { value: 'Gaming Consoles', text: ' Gaming Consoles' },
+        { value: 'Monitors', text: 'Monitors ' },
+        { value: 'Computer accessories ', text: 'Computer accessories ' },
 
-        { value: "Tablets", text: " Tablets" },
-        { value: "Storage", text: "Storage" },
+        { value: 'Tablets', text: ' Tablets' },
+        { value: 'Storage', text: 'Storage' },
       ],
 
       Office_Electronics_filters: [
-        { value: "Laptops", text: " Laptops" },
-        { value: "Desktops", text: "Desktops " },
-        { value: "Scanners/Printers", text: "Scanners/Printers" },
-        { value: "AC", text: " AC" },
+        { value: 'Laptops', text: ' Laptops' },
+        { value: 'Desktops', text: 'Desktops ' },
+        { value: 'Scanners/Printers', text: 'Scanners/Printers' },
+        { value: 'AC', text: ' AC' },
       ],
 
       Home_Decor_filters: [
-        { value: "Juju hats", text: " Juju hats" },
-        { value: "Beaded Baskets", text: "Beaded Baskets " },
-        { value: "Carpentry", text: "Carpentry" },
-        { value: "Paintings", text: " Paintings" },
-        { value: "Hamburger", text: "Hamburger " },
+        { value: 'Juju hats', text: ' Juju hats' },
+        { value: 'Beaded Baskets', text: 'Beaded Baskets ' },
+        { value: 'Carpentry', text: 'Carpentry' },
+        { value: 'Paintings', text: ' Paintings' },
+        { value: 'Hamburger', text: 'Hamburger ' },
       ],
 
       Textile_filters: [
-        { value: "Embroidery", text: " Embroidery" },
-        { value: "Knitting", text: "Knitting " },
-        { value: "Weaving", text: "Weaving" },
-        { value: "Tailoring", text: " Tailoring" },
+        { value: 'Embroidery', text: ' Embroidery' },
+        { value: 'Knitting', text: 'Knitting ' },
+        { value: 'Weaving', text: 'Weaving' },
+        { value: 'Tailoring', text: ' Tailoring' },
       ],
 
       Car_care_filters: [
-        { value: "Car wash", text: " Car wash" },
-        { value: "mechanic", text: "mechanic " },
-        { value: "Parking", text: "Parking" },
-        { value: "maintenance products", text: " maintenance products" },
+        { value: 'Car wash', text: ' Car wash' },
+        { value: 'mechanic', text: 'mechanic ' },
+        { value: 'Parking', text: 'Parking' },
+        { value: 'maintenance products', text: ' maintenance products' },
       ],
 
       Spare_parts_filters: [
-        { value: "Tires", text: "Tires" },
-        { value: "lamps", text: "lamps" },
-        { value: "Steering", text: "Steering" },
-        { value: "wheel", text: "wheel" },
+        { value: 'Tires', text: 'Tires' },
+        { value: 'lamps', text: 'lamps' },
+        { value: 'Steering', text: 'Steering' },
+        { value: 'wheel', text: 'wheel' },
       ],
 
       Auto_Dealers_filters: [
-        { value: "Car sales and rentals", text: "Car sales and rentals" },
-        { value: "Bike sales and rentals", text: "Bike sales and rentals" },
+        { value: 'Car sales and rentals', text: 'Car sales and rentals' },
+        { value: 'Bike sales and rentals', text: 'Bike sales and rentals' },
       ],
 
       Hospitals_filters: [
-        { value: "public", text: "public" },
-        { value: "private", text: "private" },
+        { value: 'public', text: 'public' },
+        { value: 'private', text: 'private' },
       ],
 
       Clinics_filters: [
-        { value: "Dental clinics", text: "Dental clinics" },
-        { value: "Optics", text: "Optics" },
-        { value: "physical therapy", text: "physical therapy" },
+        { value: 'Dental clinics', text: 'Dental clinics' },
+        { value: 'Optics', text: 'Optics' },
+        { value: 'physical therapy', text: 'physical therapy' },
 
-        { value: "Maternal Health", text: "Maternal Health" },
+        { value: 'Maternal Health', text: 'Maternal Health' },
       ],
 
       primary_eduction_filters: [
-        { value: "Public schools", text: "Public schools" },
-        { value: "Private schools", text: "Private schools" },
+        { value: 'Public schools', text: 'Public schools' },
+        { value: 'Private schools', text: 'Private schools' },
       ],
 
       secondary_eduction_filters: [
-        { value: "Public schools", text: "Public schools" },
-        { value: "Private schools", text: "Private schools" },
+        { value: 'Public schools', text: 'Public schools' },
+        { value: 'Private schools', text: 'Private schools' },
       ],
 
       tertiary_eduction_filters: [
-        { value: "Public University", text: "Public University" },
-        { value: "Private University", text: "Private University" },
+        { value: 'Public University', text: 'Public University' },
+        { value: 'Private University', text: 'Private University' },
       ],
 
       Vocational_filters: [
-        { value: "Biomedical", text: "Biomedical" },
-        { value: "Cooking and Catering", text: "Cooking and Catering" },
-        { value: "Tailoring", text: "Tailoring" },
-        { value: "Construction", text: "Construction" },
-        { value: "Electrician", text: "Electrician" },
-        { value: "Mechanics", text: "Mechanics" },
-        { value: "Plumber", text: "Plumber" },
-        { value: "IT and Multimedia", text: "IT and Multimedia" },
+        { value: 'Biomedical', text: 'Biomedical' },
+        { value: 'Cooking and Catering', text: 'Cooking and Catering' },
+        { value: 'Tailoring', text: 'Tailoring' },
+        { value: 'Construction', text: 'Construction' },
+        { value: 'Electrician', text: 'Electrician' },
+        { value: 'Mechanics', text: 'Mechanics' },
+        { value: 'Plumber', text: 'Plumber' },
+        { value: 'IT and Multimedia', text: 'IT and Multimedia' },
       ],
 
       Women_Grooming_filters: [
-        { value: "massage", text: "massage" },
-        { value: "skin care", text: "skin care" },
-        { value: "hair salon ", text: "hair salon " },
-        { value: "tattoos", text: "tattoos" },
-        { value: "makeup salon", text: "makeup salon" },
-        { value: "teeth whitening", text: "teeth whitening" },
-        { value: "manicure and pedicure ", text: "manicure and pedicure " },
-        { value: "Eyelashes", text: "Eyelashes" },
+        { value: 'massage', text: 'massage' },
+        { value: 'skin care', text: 'skin care' },
+        { value: 'hair salon ', text: 'hair salon ' },
+        { value: 'tattoos', text: 'tattoos' },
+        { value: 'makeup salon', text: 'makeup salon' },
+        { value: 'teeth whitening', text: 'teeth whitening' },
+        { value: 'manicure and pedicure ', text: 'manicure and pedicure ' },
+        { value: 'Eyelashes', text: 'Eyelashes' },
 
-        { value: "Perfume", text: "Perfume" },
+        { value: 'Perfume', text: 'Perfume' },
       ],
 
       Men_Grooming_filters: [
-        { value: "massage", text: "massage" },
-        { value: "skin care", text: "skin care" },
-        { value: "Barbing salon ", text: "Barbing salon " },
-        { value: "tattoos", text: "tattoos" },
-        { value: "Teeth whitening", text: "Teeth whitening" },
-        { value: "touring", text: "touring" },
-        { value: "manicure and pedicure ", text: "manicure and pedicure " },
+        { value: 'massage', text: 'massage' },
+        { value: 'skin care', text: 'skin care' },
+        { value: 'Barbing salon ', text: 'Barbing salon ' },
+        { value: 'tattoos', text: 'tattoos' },
+        { value: 'Teeth whitening', text: 'Teeth whitening' },
+        { value: 'touring', text: 'touring' },
+        { value: 'manicure and pedicure ', text: 'manicure and pedicure ' },
 
-        { value: "Perfume", text: "Perfume" },
+        { value: 'Perfume', text: 'Perfume' },
       ],
 
       Men_taloring: [
-        { value: "Suits", text: " Suits" },
-        { value: "Dashiki", text: "Dashiki " },
-        { value: "Suits jacket", text: "Suits jacket" },
-        { value: "African attires", text: "African attires" },
-        { value: "Ankara", text: "Ankara" },
-        { value: "Traditional dresses", text: "Traditional dresses" },
-        { value: "Shirts", text: "Shirts" },
+        { value: 'Suits', text: ' Suits' },
+        { value: 'Dashiki', text: 'Dashiki ' },
+        { value: 'Suits jacket', text: 'Suits jacket' },
+        { value: 'African attires', text: 'African attires' },
+        { value: 'Ankara', text: 'Ankara' },
+        { value: 'Traditional dresses', text: 'Traditional dresses' },
+        { value: 'Shirts', text: 'Shirts' },
       ],
 
       women_taloring: [
-        { value: "Female suits", text: " Female suits" },
-        { value: "African print grown", text: "African print grown" },
+        { value: 'Female suits', text: ' Female suits' },
+        { value: 'African print grown', text: 'African print grown' },
         {
-          value: "Traditional wedding dress",
-          text: "Traditional wedding dress",
+          value: 'Traditional wedding dress',
+          text: 'Traditional wedding dress',
         },
-        { value: "Ankara", text: "Ankara " },
-        { value: "Shirt", text: "Shirt " },
-        { value: "Wax dress", text: "Wax dress" },
-        { value: "Traditional dress", text: "Traditional dress" },
+        { value: 'Ankara', text: 'Ankara ' },
+        { value: 'Shirt', text: 'Shirt ' },
+        { value: 'Wax dress', text: 'Wax dress' },
+        { value: 'Traditional dress', text: 'Traditional dress' },
       ],
 
       male_kid_taloring: [
-        { value: "School uniform", text: "School uniform" },
+        { value: 'School uniform', text: 'School uniform' },
 
-        { value: "Shirts", text: "Shirts" },
+        { value: 'Shirts', text: 'Shirts' },
 
-        { value: "Kid Suit", text: "Kid Suit " },
+        { value: 'Kid Suit', text: 'Kid Suit ' },
 
-        { value: "Kid Dashiki", text: "Kid Dashiki" },
+        { value: 'Kid Dashiki', text: 'Kid Dashiki' },
 
-        { value: "Kid Suits jacket", text: "Kid Suits jacket" },
+        { value: 'Kid Suits jacket', text: 'Kid Suits jacket' },
 
-        { value: "Kid African attires", text: "Kid African attires" },
+        { value: 'Kid African attires', text: 'Kid African attires' },
 
-        { value: "Kid Ankara", text: "Kid Ankara" },
-        { value: "Kid Traditional dresses", text: "Kid Traditional dresses" },
+        { value: 'Kid Ankara', text: 'Kid Ankara' },
+        { value: 'Kid Traditional dresses', text: 'Kid Traditional dresses' },
       ],
 
       female_kid_taloring: [
-        { value: "Kid  suits", text: "Kid  suits" },
+        { value: 'Kid  suits', text: 'Kid  suits' },
 
-        { value: "African print grown", text: "African print grown" },
+        { value: 'African print grown', text: 'African print grown' },
 
-        { value: "School uniform", text: "School uniform" },
+        { value: 'School uniform', text: 'School uniform' },
 
-        { value: "Kid Ankara ", text: "Kid Ankara " },
+        { value: 'Kid Ankara ', text: 'Kid Ankara ' },
 
-        { value: "Kid Wax dress", text: "Kid Wax dress" },
+        { value: 'Kid Wax dress', text: 'Kid Wax dress' },
 
-        { value: "Kid Traditional dress", text: "Kid Traditional dress" },
+        { value: 'Kid Traditional dress', text: 'Kid Traditional dress' },
 
-        { value: "shirt", text: "shirt" },
+        { value: 'shirt', text: 'shirt' },
       ],
 
       Women_clothing: [
-        { value: "Sweaters ", text: "Sweaters" },
-        { value: "Jeans", text: "Jeans" },
-        { value: "Tops", text: "Tops" },
-        { value: "Suits", text: "Suits" },
-        { value: "Skirt", text: "Skirt" },
-        { value: "Gowns", text: "Gowns" },
-        { value: "	Weddings dresses", text: "	Weddings dresses" },
-        { value: "Coats", text: "Coats" },
+        { value: 'Sweaters ', text: 'Sweaters' },
+        { value: 'Jeans', text: 'Jeans' },
+        { value: 'Tops', text: 'Tops' },
+        { value: 'Suits', text: 'Suits' },
+        { value: 'Skirt', text: 'Skirt' },
+        { value: 'Gowns', text: 'Gowns' },
+        { value: '	Weddings dresses', text: '	Weddings dresses' },
+        { value: 'Coats', text: 'Coats' },
       ],
 
       Women_accessories: [
-        { value: "Perfumes ", text: "Perfumes" },
-        { value: "Jewelry", text: "Jewelry" },
-        { value: "Bags", text: "Bags" },
-        { value: "Shoes", text: "Shoes" },
-        { value: "Watches", text: "Watches" },
-        { value: "Caps", text: "Caps" },
-        { value: "Head bands", text: "Head bands" },
+        { value: 'Perfumes ', text: 'Perfumes' },
+        { value: 'Jewelry', text: 'Jewelry' },
+        { value: 'Bags', text: 'Bags' },
+        { value: 'Shoes', text: 'Shoes' },
+        { value: 'Watches', text: 'Watches' },
+        { value: 'Caps', text: 'Caps' },
+        { value: 'Head bands', text: 'Head bands' },
       ],
 
       Men_Clothing: [
-        { value: "Shirts ", text: "Shirts" },
-        { value: "Jeans", text: "Jeans" },
-        { value: "Suits", text: "Suits" },
-        { value: "Singlets", text: "Singlets" },
-        { value: "CapSweaterss", text: "Sweaters" },
+        { value: 'Shirts ', text: 'Shirts' },
+        { value: 'Jeans', text: 'Jeans' },
+        { value: 'Suits', text: 'Suits' },
+        { value: 'Singlets', text: 'Singlets' },
+        { value: 'CapSweaterss', text: 'Sweaters' },
       ],
 
       Men_Accessories: [
-        { value: "Watches ", text: "Watches" },
-        { value: "Perfumes", text: "Perfumes" },
-        { value: "Bags", text: "Bags" },
-        { value: "Jewelry", text: "Jewelry" },
-        { value: "Caps", text: "Caps" },
-        { value: "Gloves", text: "Gloves" },
-        { value: "Shoes", text: "Shoes" },
+        { value: 'Watches ', text: 'Watches' },
+        { value: 'Perfumes', text: 'Perfumes' },
+        { value: 'Bags', text: 'Bags' },
+        { value: 'Jewelry', text: 'Jewelry' },
+        { value: 'Caps', text: 'Caps' },
+        { value: 'Gloves', text: 'Gloves' },
+        { value: 'Shoes', text: 'Shoes' },
       ],
 
       Legal_service: [
-        { value: "Lawyers ", text: "Lawyers" },
-        { value: "Business consulting", text: "Business consulting" },
-        { value: "Patent law", text: "Patent law" },
+        { value: 'Lawyers ', text: 'Lawyers' },
+        { value: 'Business consulting', text: 'Business consulting' },
+        { value: 'Patent law', text: 'Patent law' },
       ],
 
       Marketing: [
-        { value: "Hostesses ", text: "Hostesses" },
-        { value: "Advertising", text: "Advertising" },
+        { value: 'Hostesses ', text: 'Hostesses' },
+        { value: 'Advertising', text: 'Advertising' },
       ],
 
       Web_Graphic: [
-        { value: "graphics design ", text: "graphics design" },
-        { value: "printing", text: "printing" },
-        { value: "computer programmers", text: "computer programmers" },
-        { value: "computer hardware", text: "computer hardware" },
+        { value: 'graphics design ', text: 'graphics design' },
+        { value: 'printing', text: 'printing' },
+        { value: 'computer programmers', text: 'computer programmers' },
+        { value: 'computer hardware', text: 'computer hardware' },
         {
-          value: "computer hosting services",
-          text: "computer hosting services",
+          value: 'computer hosting services',
+          text: 'computer hosting services',
         },
       ],
 
       Event_Planning_and_Rentals: [
-        { value: "Event planning ", text: "Event planning" },
-        { value: "Rentals", text: "Rentals" },
-        { value: "Interior Design ", text: "Interior Design " },
+        { value: 'Event planning ', text: 'Event planning' },
+        { value: 'Rentals', text: 'Rentals' },
+        { value: 'Interior Design ', text: 'Interior Design ' },
       ],
 
       Cleaning_Services: [
-        { value: "Office cleaning ", text: "Office cleaning" },
-        { value: "Home cleaning", text: "Home cleaning" },
+        { value: 'Office cleaning ', text: 'Office cleaning' },
+        { value: 'Home cleaning', text: 'Home cleaning' },
       ],
 
       Real_Estate: [
-        { value: "Real Estate _Agency", text: "Real Estate _Agency" },
-        { value: "property management", text: "property management" },
-        { value: "commercial real estate", text: "commercial real estate" },
-        { value: "shared office space", text: "shared office space" },
+        { value: 'Real Estate _Agency', text: 'Real Estate _Agency' },
+        { value: 'property management', text: 'property management' },
+        { value: 'commercial real estate', text: 'commercial real estate' },
+        { value: 'shared office space', text: 'shared office space' },
       ],
 
       Housing_and_Construction: [
-        { value: "Plumbing", text: "Plumbing" },
-        { value: "Contractors", text: "Contractors" },
-        { value: "Carpenters", text: "Carpenters" },
+        { value: 'Plumbing', text: 'Plumbing' },
+        { value: 'Contractors', text: 'Contractors' },
+        { value: 'Carpenters', text: 'Carpenters' },
 
-        { value: "Painters", text: "Painters" },
-        { value: "Interior design", text: "Interior design" },
-        { value: "Electrician", text: "Electrician" },
+        { value: 'Painters', text: 'Painters' },
+        { value: 'Interior design', text: 'Interior design' },
+        { value: 'Electrician', text: 'Electrician' },
 
-        { value: "locksmiths", text: "Key’s locksmiths " },
+        { value: 'locksmiths', text: 'Key’s locksmiths ' },
 
-        { value: "Gardeners", text: "Gardeners" },
-        { value: "Gardeners", text: "Gardeners" },
+        { value: 'Gardeners', text: 'Gardeners' },
+        { value: 'Gardeners', text: 'Gardeners' },
 
-        { value: "Security system", text: "Security system" },
+        { value: 'Security system', text: 'Security system' },
       ],
 
       Internet_and_Media: [
-        { value: "TV Cable", text: "TV Cable" },
-        { value: "Internet services", text: "Internet services" },
-        { value: "Telephone services", text: "Telephone services" },
+        { value: 'TV Cable', text: 'TV Cable' },
+        { value: 'Internet services', text: 'Internet services' },
+        { value: 'Telephone services', text: 'Telephone services' },
       ],
 
       Mayor_Councils: [
-        { value: "Regions ", text: "Regions" },
-        { value: "Division", text: "Division" },
-        { value: "Sub-divisions ", text: "Sub-divisions" },
-        { value: "City", text: "City" },
+        { value: 'Regions ', text: 'Regions' },
+        { value: 'Division', text: 'Division' },
+        { value: 'Sub-divisions ', text: 'Sub-divisions' },
+        { value: 'City', text: 'City' },
       ],
 
       Schools: [
-        { value: "Public ", text: "Public" },
-        { value: "Private", text: "Private" },
+        { value: 'Public ', text: 'Public' },
+        { value: 'Private', text: 'Private' },
       ],
 
       Hospitals: [
-        { value: "Public ", text: "Public" },
-        { value: "Private", text: "Private" },
+        { value: 'Public ', text: 'Public' },
+        { value: 'Private', text: 'Private' },
 
-        { value: "Regions ", text: "Regions" },
-        { value: "Division", text: "Division" },
+        { value: 'Regions ', text: 'Regions' },
+        { value: 'Division', text: 'Division' },
 
-        { value: "Sub-divisions ", text: "Sub-divisions" },
-        { value: "City", text: "City" },
+        { value: 'Sub-divisions ', text: 'Sub-divisions' },
+        { value: 'City', text: 'City' },
       ],
 
       Ministries: [
-        { value: "Regions", text: "Regions" },
-        { value: "Division", text: "Division" },
+        { value: 'Regions', text: 'Regions' },
+        { value: 'Division', text: 'Division' },
 
-        { value: "Sub-divisions", text: "Sub-divisions" },
-        { value: "City", text: "City" },
+        { value: 'Sub-divisions', text: 'Sub-divisions' },
+        { value: 'City', text: 'City' },
       ],
 
-      default_category: "",
+      default_category: '',
 
       optionsnav: {
-        activeColor: "#top1d98bd",
+        activeColor: '#top1d98bd',
       },
     };
   },
@@ -1648,37 +1516,37 @@ export default {
   methods: {
     // [ED]----------
     getKeyword() {
-      console.log("the keyword is: ", this.searchParams.keyword);
+      console.log('the keyword is: ', this.searchParams.keyword);
       this.$store
-        .dispatch("allSearch/SEARCH", {
+        .dispatch('allSearch/SEARCH', {
           keyword: this.searchParams.keyword,
         })
         .then((res) => {
           // console.log("categories loaded!");
         })
         .catch((err) => {
-          console.log("Error erro!");
+          console.log('Error erro!');
         });
     },
 
     async getProducts() {
       this.prodLoader = true;
-      console.log("loader: ", this.prodLoader);
+      console.log('loader: ', this.prodLoader);
       this.showDismissibleAlert = false;
 
-      this.$store.commit("setProducts", []);
+      this.$store.commit('setProducts', []);
       // this.products = []
       await this.$store
-        .dispatch("marketSearch/getProducts")
+        .dispatch('marketSearch/getProducts')
         .then((res) => {
-          console.log("products list: ");
+          console.log('products list: ');
           console.log(this.products);
           this.prodLoader = false;
           this.showDismissibleAlert = true;
         })
         .catch((err) => {
           this.prodLoader = false;
-          console.log("products error: ");
+          console.log('products error: ');
           console.error(err);
           this.showDismissibleAlert = false;
         });
@@ -1686,41 +1554,41 @@ export default {
 
     searchProducts() {
       this.$store
-        .dispatch("marketSearch/searchProducts", {
+        .dispatch('marketSearch/searchProducts', {
           keyword: this.searchParams.keyword,
         })
         .then((res) => {
           // console.log("categories loaded!");
         })
         .catch((err) => {
-          console.log("Error erro!");
+          console.log('Error erro!');
         });
     },
 
     searchNetworks() {
       this.$store
-        .dispatch("networkSearch/SEARCH", {
+        .dispatch('networkSearch/SEARCH', {
           keyword: this.searchParams.keyword,
         })
         .then((res) => {
           // console.log("categories loaded!");
         })
         .catch((err) => {
-          console.log("Error erro!");
+          console.log('Error erro!');
         });
     },
     // ------------
 
     // Eteme
     ...mapActions({
-      userStore: "search/FIND_USER",
-      postStore: "search/FIND_POST",
-      postKeyword: "search/POST_KEYWORD",
-      lauchLoader: "search/LOADING",
-      page: "search/SET_CURRENT_PAGINATION_PAGE",
-      stack: "search/STACK_VALUE",
-      setCallback: "search/SET_CURRENT_PAGINATE_CALLBACK",
-      reset: "search/RESET_RESULT",
+      userStore: 'search/FIND_USER',
+      postStore: 'search/FIND_POST',
+      postKeyword: 'search/POST_KEYWORD',
+      lauchLoader: 'search/LOADING',
+      page: 'search/SET_CURRENT_PAGINATION_PAGE',
+      stack: 'search/STACK_VALUE',
+      setCallback: 'search/SET_CURRENT_PAGINATE_CALLBACK',
+      reset: 'search/RESET_RESULT',
     }),
 
     initialize() {
@@ -1730,9 +1598,9 @@ export default {
       };
 
       this.strategyForPlaceHolder = {
-        2: () => "Find User",
-        5: () => "Find Post",
-        0: () => "All",
+        2: () => 'Find User',
+        5: () => 'Find Post',
+        0: () => 'All',
       };
 
       this.strategyForComponent = {
@@ -1741,8 +1609,8 @@ export default {
       };
 
       this.strategyForNotFoundComponentTitle = {
-        2: () => "Not Find users",
-        5: () => "Not Find posts",
+        2: () => 'Not Find users',
+        5: () => 'Not Find posts',
       };
 
       this.changePlaceHolder();
@@ -1750,10 +1618,9 @@ export default {
 
     changeNotFoundTitle() {
       try {
-        this.notFoundComponentTitle =
-          this.strategyForNotFoundComponentTitle[this.selectedId]();
+        this.notFoundComponentTitle = this.strategyForNotFoundComponentTitle[this.selectedId]();
       } catch (error) {
-        this.notFoundComponentTitle = "";
+        this.notFoundComponentTitle = '';
       }
     },
 
@@ -1773,7 +1640,7 @@ export default {
         });
       } catch (error) {
         this.navBarParams = Object.assign(this.navBarParams, {
-          placeholder: "",
+          placeholder: '',
         });
       }
     },
@@ -1810,10 +1677,8 @@ export default {
     },
 
     onFindUser() {
-
       this.find(this.navBarParams.username);
-      if (this.navBarParams.keyword.trim())
-        this.find(this.navBarParams.keyword);
+      if (this.navBarParams.keyword.trim()) this.find(this.navBarParams.keyword);
 
       if (this.navBarParams.keyword.trim()) {
         this.page(1);
@@ -1824,7 +1689,7 @@ export default {
           },
         });
         this._onFindUser();
-      } else this.onNotified("the word must have at least 3 letters");
+      } else this.onNotified('the word must have at least 3 letters');
     },
 
     async _onFindPost() {
@@ -1862,104 +1727,102 @@ export default {
 
         this._onFindPost();
       } else {
-        this.onNotified("the word must have at least 3 letters");
+        this.onNotified('the word must have at least 3 letters');
       }
-
     },
     // -------
 
     SetCat(cat) {
       console.log(cat);
 
-      this.$refs["setcat"].hide();
+      this.$refs['setcat'].hide();
 
       this.Setcategoryr = cat;
 
       switch (cat) {
-        case "Agriculture":
+        case 'Agriculture':
           this.selectcategories = this.agriculture_filters;
 
           break;
 
-        case "Handicraft":
+        case 'Handicraft':
           this.selectcategories = this.Handicrafts_filters;
 
           break;
 
-        case "Electronics":
+        case 'Electronics':
           this.selectcategories = this.Electronics_filters;
 
           break;
 
-        case "MC":
-          this.selectcategories =
-            this.Mayor_councils_filters_and_public_institution;
+        case 'MC':
+          this.selectcategories = this.Mayor_councils_filters_and_public_institution;
 
           break;
 
-        case "HU":
+        case 'HU':
           this.selectcategories = this.Health_unit_filters;
 
           break;
 
-        case "Clothing":
+        case 'Clothing':
           this.selectcategories = this.clothing_filters;
 
           break;
 
-        case "Restaurants":
+        case 'Restaurants':
           this.selectcategories = this.restaurants_filters;
 
           break;
 
-        case "Hotels":
+        case 'Hotels':
           this.selectcategories = this.Hotels_filters;
 
           break;
 
-        case "Transport":
+        case 'Transport':
           this.selectcategories = this.Transport_filters;
 
           break;
 
-        case "Station":
+        case 'Station':
           this.selectcategories = this.Station;
 
           break;
 
-        case "Auto Mechanics":
+        case 'Auto Mechanics':
           this.selectcategories = this.Mechanics_filters;
 
           break;
 
-        case "Grooming":
+        case 'Grooming':
           this.selectcategories = this.Grooming_filters;
 
           break;
 
-        case "Education":
+        case 'Education':
           this.selectcategories = this.Educations_filters;
 
           break;
 
-        case "Carding":
+        case 'Carding':
           this.selectcategories = [];
 
           break;
 
-        case "Professional":
+        case 'Professional':
           this.selectcategories = this.Professional_and_home_service;
 
           break;
 
-        case "Tailoring":
+        case 'Tailoring':
           this.selectcategories = this.Tailoring;
-          console.log("fuck you");
+          console.log('fuck you');
 
           break;
       }
 
-      this.$refs["myfilters"].show();
+      this.$refs['myfilters'].show();
     },
 
     getCategory(value) {
@@ -1973,272 +1836,272 @@ export default {
       this.showform = false;
 
       switch (this.default_category) {
-        case "Primary Education":
+        case 'Primary Education':
           this.categories_filters = this.primary_eduction_filters;
           break;
 
-        case "Secondary Education":
+        case 'Secondary Education':
           this.categories_filters = this.secondary_eduction_filters;
           break;
 
-        case "Tertiary Education":
+        case 'Tertiary Education':
           this.categories_filters = this.tertiary_eduction_filters;
           break;
 
-        case "Vocational":
+        case 'Vocational':
           this.categories_filters = this.Vocational_filters;
           break;
 
-        case "Home Decor":
+        case 'Home Decor':
           this.categories_filters = this.Home_Decor_filters;
           break;
 
-        case "Textile":
+        case 'Textile':
           this.categories_filters = this.Textile_filters;
           break;
 
-        case "Professional_and_home_service":
+        case 'Professional_and_home_service':
           this.categories_filters = this.Professional_and_home_service;
 
           break;
 
-        case "Hotels":
+        case 'Hotels':
           this.categories_filters = this.Hotels;
           break;
 
-        case "Taxis":
+        case 'Taxis':
           this.categories_filters = this.Taxis_service;
           break;
 
-        case "Car care":
+        case 'Car care':
           this.categories_filters = this.Car_care_filters;
           break;
 
-        case "Auto Dealers":
+        case 'Auto Dealers':
           this.categories_filters = this.Auto_Dealers_filters;
           break;
 
-        case "Spare parts":
+        case 'Spare parts':
           this.categories_filters = this.Spare_parts_filters;
           break;
 
-        case "Women Grooming":
+        case 'Women Grooming':
           this.categories_filters = this.Women_Grooming_filters;
           break;
 
-        case "Men Grooming":
+        case 'Men Grooming':
           this.categories_filters = this.Men_Grooming_filters;
           break;
-        case "Legal_service":
+        case 'Legal_service':
           this.categories_filters = this.Legal_service;
 
           break;
 
-        case "male_kid_taloring":
+        case 'male_kid_taloring':
           this.categories_filters = this.male_kid_taloring;
 
           break;
 
-        case "women_taloring":
+        case 'women_taloring':
           this.categories_filters = this.women_taloring;
 
           break;
 
-        case "Men_taloring":
+        case 'Men_taloring':
           this.categories_filters = this.Men_taloring;
 
           break;
 
-        case "female_kid_taloring":
+        case 'female_kid_taloring':
           this.categories_filters = this.female_kid_taloring;
 
           break;
 
-        case "Marketing":
+        case 'Marketing':
           this.categories_filters = this.Marketing;
           break;
-        case "Web, Graphic Design and Printing":
+        case 'Web, Graphic Design and Printing':
           this.categories_filters = this.Web_Graphic;
           break;
-        case "Event Planning and Rentals":
+        case 'Event Planning and Rentals':
           this.categories_filters = this.Event_Planning_and_Rentals;
           break;
-        case "Cleaning Services":
+        case 'Cleaning Services':
           this.categories_filters = this.Cleaning_Services;
 
           break;
-        case "Real Estate Agency and Land":
+        case 'Real Estate Agency and Land':
           this.categories_filters = this.Real_Estate;
           break;
-        case "Housing and Construction":
+        case 'Housing and Construction':
           this.categories_filters = this.Housing_and_Construction;
           break;
-        case "Internet and Media":
+        case 'Internet and Media':
           this.categories_filters = this.Internet_and_Media;
           break;
-        case "Fruits":
+        case 'Fruits':
           this.categories_filters = this.Fruits_filters;
           break;
-        case "Coffee":
+        case 'Coffee':
           this.categories_filters = this.Coffee_filters;
           break;
-        case "Finished_Branded_Products":
+        case 'Finished_Branded_Products':
           this.categories_filters = this.Finished_Branded_Products_filters;
           break;
-        case "Vegetables":
+        case 'Vegetables':
           this.categories_filters = this.Vegetables_filters;
           break;
 
-        case "Starch":
+        case 'Starch':
           this.categories_filters = this.starch_filters;
 
           break;
 
-        case "Oils":
+        case 'Oils':
           this.categories_filters = this.Oils_filters;
 
           break;
 
-        case "Cereals":
+        case 'Cereals':
           this.categories_filters = this.Cereals_filters;
 
           break;
-        case "Raw_material":
+        case 'Raw_material':
           this.categories_filters = this.Raw_material_filters;
 
           break;
 
-        case "Livestock":
+        case 'Livestock':
           this.categories_filters = this.Livestock_filters;
 
           break;
-        case "Spices":
+        case 'Spices':
           this.categories_filters = this.Spices_filters;
           break;
 
-        case "Dairy":
+        case 'Dairy':
           this.categories_filters = this.Dairy_filters;
           break;
-        case "Beans":
+        case 'Beans':
           this.categories_filters = this.Beans_filters;
 
           break;
 
         //electronics
 
-        case "phone":
+        case 'phone':
           this.categories_filters = this.phone_filters;
 
           break;
-        case "Computers":
+        case 'Computers':
           this.categories_filters = this.Computers_filters;
 
           break;
-        case "Office Electronics":
+        case 'Office Electronics':
           this.categories_filters = this.Office_Electronics_filters;
 
           break;
-        case "Home Appliances":
+        case 'Home Appliances':
           this.categories_filters = this.Home_Appliances_filters;
 
           break;
 
         //restaurants
 
-        case "Bars":
+        case 'Bars':
           this.categories_filters = this.Bars_filters;
           break;
-        case "African_food":
+        case 'African_food':
           this.categories_filters = this.African_food;
-          console.log("dup ass");
+          console.log('dup ass');
           break;
-        case "Asian food":
+        case 'Asian food':
           this.categories_filters = this.Asian_food_filters;
           break;
-        case "Fast_food":
+        case 'Fast_food':
           this.categories_filters = this.Fast_food;
 
           break;
-        case "European food":
+        case 'European food':
           this.categories_filters = [];
           break;
 
-        case "Pizza":
+        case 'Pizza':
           this.categories_filters = [];
 
           break;
-        case "Bakery":
+        case 'Bakery':
           this.categories_filters = [];
 
           break;
-        case "Catering":
+        case 'Catering':
           this.categories_filters = [];
 
           break;
 
         //clothing cases
 
-        case "female":
+        case 'female':
           this.categories_filters = this.Women_clothing;
 
           break;
-        case "Women accessories":
+        case 'Women accessories':
           this.categories_filters = this.Women_accessories;
 
           break;
 
-        case "men":
+        case 'men':
           this.categories_filters = this.Men_Clothing;
 
           break;
-        case "Men Accessories":
+        case 'Men Accessories':
           this.categories_filters = this.Men_Accessories;
 
           break;
 
-        case "Tailoring":
+        case 'Tailoring':
           this.selectcategories = this.Tailoring;
-          console.log("fuck you");
+          console.log('fuck you');
           break;
 
         //health ubits
 
-        case "Hospitals":
+        case 'Hospitals':
           this.categories_filters = this.Hospitals_filters;
 
           this.showform = true;
 
           break;
-        case "Pharmacies":
+        case 'Pharmacies':
           this.categories_filters = this.Pharmacies;
 
           break;
 
-        case "Clinics":
+        case 'Clinics':
           this.categories_filters = this.Clinics_filters;
 
           break;
 
-        case "COVID-19":
+        case 'COVID-19':
           this.categories_filters = [];
 
           break;
 
         //   Mayor Council
 
-        case "Ministries":
+        case 'Ministries':
           this.categories_filters = [];
           this.showform = true;
 
           break;
 
-        case "Mayor Councils":
+        case 'Mayor Councils':
           this.categories_filters = [];
           this.showform = true;
 
           break;
 
-        case "Schools":
+        case 'Schools':
           this.categories_filters = this.Schools;
           this.showform = true;
 
@@ -2246,7 +2109,7 @@ export default {
 
         //More filters
 
-        case "Handicraft":
+        case 'Handicraft':
           this.categories_filters = this.Handicrafts_filters;
 
           break;
@@ -2258,17 +2121,17 @@ export default {
     },
 
     showFilters() {
-      this.$refs["myfilters"].show();
+      this.$refs['myfilters'].show();
     },
 
     togglemap() {
-      this.$refs.mapblock.style.display = "block";
-      this.$refs.middleblock.style.display = "none";
+      this.$refs.mapblock.style.display = 'block';
+      this.$refs.middleblock.style.display = 'none';
     },
 
     togglelist() {
-      this.$refs.mapblock.style.display = "none";
-      this.$refs.middleblock.style.display = "block";
+      this.$refs.mapblock.style.display = 'none';
+      this.$refs.middleblock.style.display = 'block';
     },
   },
 };

@@ -135,9 +135,7 @@
         <b-form-select v-model="selected">
           <b-form-select-option value="a"> My Location </b-form-select-option>
         </b-form-select>
-
         <br />
-
         <hr />
       </span>
 
@@ -613,12 +611,6 @@ export default {
 
   props: ["filterType", "Selectedcategory", "Selectedparentcategory"],
 
-  created() {
-    this.strategies = {
-      2: () => PeopleFilter,
-      5: () => PostFilter,
-    };
-  },
   watch: {
     filterType: function (newId) {
       try {
@@ -1973,6 +1965,10 @@ export default {
   },
   created() {
     this.getCountries();
+    this.strategies = {
+      2: () => PeopleFilter,
+      5: () => PostFilter,
+    };
   },
 
   methods: {
@@ -1991,7 +1987,7 @@ export default {
 
             let subName = "";
             this.subCategories.map((sub) => {
-              if (sub.id === subId) {
+              if (sub.id === subCat.id) {
                 subName = sub.name;
               }
             });

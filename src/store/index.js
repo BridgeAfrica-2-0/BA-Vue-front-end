@@ -9,11 +9,7 @@ import allSearch from "./allSearch";
 import ProfileAndBusinessDetails from "./ProfileAndBusinessDetails";
 import networkDetails from "./networkDetails";
 import dashboardcommunity from "./dashboardcommunity";
-
 import networkSetting from "./networkSetting";
-
-import ProfileAndBusinessDetails from "./ProfileAndBusinessDetails";
-
 import businessFollowers from "./businessFollowers";
 import hotbusiness from "./hotbusiness";
 import profile from "./profile";
@@ -27,7 +23,10 @@ import { search } from "./search";
 import { social } from "./social";
 
 Vue.use(Vuex);
-axios.defaults.baseURL = process.env.VUE_APP_API_URL;
+//axios.defaults.baseURL = process.env.VUE_APP_API_URL;
+
+axios.defaults.baseURL = "https://0fdb-154-72-150-90.ngrok.io/api/v1/"
+
 export default new Vuex.Store({
   modules: {
     auth,
@@ -41,7 +40,6 @@ export default new Vuex.Store({
     profile,
     follower,
     search,
-    market,
     social,
     networkProfileMembers,
     allSearch,

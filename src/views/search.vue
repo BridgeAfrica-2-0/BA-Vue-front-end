@@ -5,8 +5,8 @@
         <Button @click.native="strategy['all']" v-if="selectedId == 0" />
         <Button @click.native="strategy['network']" v-if="selectedId == 3" />
         <Button @click.native="strategy['market']" v-if="selectedId == 4" />
-        <Button @click.native="searchProducts" v-if="selectedId == 4" />
-        <Button @click.native="searchNetworks" v-if="selectedId == 3" />
+
+        <Button @click.native="strategies" v-if="[2, 5].includes(selectedId)" />
       </template>
     </Nav>
 
@@ -411,8 +411,6 @@
                 <fas-icon class="icons" :icon="['fas', 'users']" size="lg" />
                 People
               </h6>
-
-              <People v-for="(people, index) in peoples" :people="people" :key="index" />
             </div>
 
             <component :is="isComponent" :title="notFoundComponentTitle" />
@@ -494,7 +492,7 @@ import { PostComponent, PeopleComponent } from '@/components/search';
 
 import { loader } from '@/mixins';
 
-import { mapActions, mapGetters } from 'vuex';
+import { mapActions } from 'vuex';
 
 export default {
   components: {
@@ -526,9 +524,6 @@ export default {
   mixins: [loader],
 
   computed: {
-    ...mapGetters({
-      peoples: 'search/GET_RESULT',
-    }),
     products() {
       return this.$store.state.market.products;
     },
@@ -547,10 +542,6 @@ export default {
 
   data() {
     return {
-      navBarParams: {
-        keyword: '',
-        placeholder: 'Find Pharmacy',
-      },
       searchParams: {
         keyword: '',
         cat_id: '',
@@ -1635,11 +1626,11 @@ export default {
     changePlaceHolder() {
       try {
         const newPlaceholder = this.strategyForPlaceHolder[this.selectedId]();
-        this.navBarParams = Object.assign(this.navBarParams, {
+        this.searchParams = Object.assign(this.searchParams, {
           placeholder: newPlaceholder,
         });
       } catch (error) {
-        this.navBarParams = Object.assign(this.navBarParams, {
+        this.searchParams = Object.assign(this.searchParams, {
           placeholder: '',
         });
       }
@@ -1660,7 +1651,7 @@ export default {
         this.reset();
         const request = await this.$repository.search.findUserByParam({
           data: {
-            keyword: this.navBarParams.keyword.trim(),
+            keyword: this.searchParams.keyword.trim(),
           },
           page: 1,
         });
@@ -1670,22 +1661,21 @@ export default {
           this.page(2);
           this.userStore(request.data);
         }
+
+        this.lauchLoader(false);
       } catch (error) {
         console.log(error);
+        this.lauchLoader(false);
       }
-      this.lauchLoader(false);
     },
 
     onFindUser() {
-      this.find(this.navBarParams.username);
-      if (this.navBarParams.keyword.trim()) this.find(this.navBarParams.keyword);
-
-      if (this.navBarParams.keyword.trim()) {
+      if (this.searchParams.keyword.trim()) {
         this.page(1);
-        this.postKeyword(this.navBarParams.keyword.trim());
+        this.postKeyword(this.searchParams.keyword.trim());
         this.stack({
           data: {
-            keyword: this.navBarParams.keyword.trim(),
+            keyword: this.searchParams.keyword.trim(),
           },
         });
         this._onFindUser();
@@ -1698,7 +1688,7 @@ export default {
         this.reset();
         const request = await this.$repository.search.findPostByKeyword({
           data: {
-            keyword: this.navBarParams.keyword.trim(),
+            keyword: this.searchParams.keyword.trim(),
           },
           page: 1,
         });
@@ -1708,19 +1698,20 @@ export default {
           this.setCallback(this.$repository.search.findPostByKeyword);
           this.postStore(request.data);
         }
+        this.lauchLoader(false);
       } catch (error) {
         console.log(error);
+        this.lauchLoader(false);
       }
-      this.lauchLoader(false);
     },
 
     onFindPost() {
-      if (this.navBarParams.keyword.trim()) {
+      if (this.searchParams.keyword.trim()) {
         this.page(1);
-        this.postKeyword(this.navBarParams.keyword.trim());
+        this.postKeyword(this.searchParams.keyword.trim());
         this.stack({
           data: {
-            keyword: this.navBarParams.keyword.trim(),
+            keyword: this.searchParams.keyword.trim(),
           },
           page: 1,
         });

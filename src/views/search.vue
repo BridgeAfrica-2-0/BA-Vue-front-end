@@ -505,11 +505,10 @@ export default {
     Sponsor,
 
     Business,
-    People,
+    People, 
     Network,
     Post,
     Market,
-
     MiniBusiness,
     MiniPeople,
     MiniNetwork,
@@ -555,7 +554,6 @@ export default {
       strategyForComponent: null,
       notFoundComponentTitle: '',
       isComponent: null,
-      strategy: {},
       strategyForPlaceHolder: {},
       strategyForNotFoundComponentTitle: {},
 

@@ -6,6 +6,12 @@
   >
     <div class="ly-tab-list" :style="style" ref="list">
       <slot></slot>
+      <div
+        class="ly-tab-active-bar"
+        v-if="!fixBottom"
+        :style="activeBarStyle"
+        ref="activeBar"
+      ></div>
     </div>
   </div>
 </template>
@@ -22,8 +28,7 @@ export default {
       default: 3
     },
     activeColor: {
-      type: String,
-      default: "red"
+      type: String
     },
     fixBottom: {
       type: Boolean,
@@ -99,14 +104,14 @@ export default {
         width: `${this.activeBarWidth}px`,
         height: `${this.lineWidth}px`,
         transform: `translate3d(${this.activeBarX}px, 0, 0)`,
-        backgroundColor: this.activeColor
+        backgroundColor: "red",
+        marginTop: "-34px"
       };
     },
     transitionDuration() {
       if (this.touching || (!this.reBounding && !this.touching)) {
         return 0;
-      }
-      if (this.reBounding && !this.touching) {
+      } else if (this.reBounding && !this.touching) {
         return this.reBoundingDuration;
       } else {
         return 0;
@@ -365,6 +370,8 @@ export default {
   width: 30px;
   height: 3px;
   border-radius: 4px;
+  background-color: #32a400;
+  color: white;
 }
 
 .ly-tab-item {

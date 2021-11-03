@@ -1963,6 +1963,7 @@ export default {
       return this.$store.getters["networkSearch/getNeighbourhoods"];
     },
   },
+  
   created() {
     this.getCountries();
     this.strategies = {
@@ -1987,7 +1988,7 @@ export default {
 
             let subName = "";
             this.subCategories.map((sub) => {
-              if (sub.id === subCat.id) {
+              if (sub.id) {
                 subName = sub.name;
               }
             });

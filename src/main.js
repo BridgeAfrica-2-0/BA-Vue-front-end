@@ -36,6 +36,7 @@ import InfiniteLoading from "vue-infinite-loading";
 import { loader } from "./mixins"
 
 
+Vue.use(InfiniteLoading, { /* options */ });
 Vue.use(LoadScript);
 
 Vue.use(ReadMore);
@@ -95,7 +96,7 @@ Vue.use(VueMaterial);
 import Lightbox from "@morioh/v-lightbox";
 import * as VueGoogleMaps from "gmap-vue";
 
-import VueSplide from "@splidejs/vue-splide";
+ import VueSplide from "@splidejs/vue-splide";
 Vue.use(VueSplide);
 import "@splidejs/splide/dist/css/themes/splide-default.min.css";
 

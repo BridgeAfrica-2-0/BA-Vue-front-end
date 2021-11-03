@@ -2,16 +2,6 @@
   <div>
 
 
-
-
-
-
-
-
-
-
-
-
     <div class="people-style shadow">
       <b-row>
         <b-col md="3"  xl="5"  lg="5" cols="5"  sm="3">

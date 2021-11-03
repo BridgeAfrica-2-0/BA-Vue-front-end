@@ -38,12 +38,12 @@
         </div>
         <div id="m4" class="mobile2 col t" @click="changeElementType(4)">
           <div class="cercle2">4</div>
-          <h2 class="h2 text-position text-center">Re-shedule</h2>
+          <h2 class="h2 text-position text-center">re-shedule</h2>
         </div>
       </div>
 
       <div class="justify-content-between container row my-4">
-        <div class="col order"><h3 class="margclear1">My orders</h3></div>
+        <div class="col order"><h3 class="margclear1 bold1">My orders</h3></div>
         <div class="col">
           <h3 class="text-danger text-center margclear">clear history</h3>
         </div>
@@ -460,7 +460,7 @@
       </div>
 
       <div class="justify-content-between container row my-4">
-        <div class="col order"><h3>My orders</h3></div>
+        <div class="col order"><h3 class="bold1">My orders</h3></div>
         <div class="status"><h3 class="text-danger">clear history</h3></div>
       </div>
 
@@ -797,7 +797,7 @@ export default {
         { value: "a", text: "last 5 days" },
         { value: "b", text: "last 10 days" },
       ],
-      etat1: ["in progress", "complete", "cancel"],
+      etat1: ["in process", "complete", "cancel"],
     };
   },
 
@@ -1212,16 +1212,16 @@ h3 {
     margin-top: -6px !important;
     margin-right: -12px !important;
   }
-
+}
   @media only screen and (max-width: 470px) {
     .h2 {
       font-size: 10px !important;
-      margin-left: 12px;
+      margin-left: 7px;
     }
     .cercle2 {
       margin-left: -4px !important;
     }
-  }
+  
    .manage{
     margin-top: -6px !important;
     margin-right: -12px !important;

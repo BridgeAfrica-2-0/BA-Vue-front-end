@@ -126,8 +126,8 @@
     <div class="body">
       <b-row>
         <b-col cols="12" class="p-0">
-          <b-tabs content-class="mt-3 p-0" fill pills>
-            <b-tab title="Home"><HomePage /></b-tab>
+          <b-tabs lazy content-class="mt-3 p-0" fill pills>
+            <b-tab  title="Home"><HomePage /></b-tab>
             <b-tab title="About"><About /></b-tab>
             <b-tab title="Media"><Media /></b-tab>
             <b-tab title="Market"><MarketPlace /></b-tab>

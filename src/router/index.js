@@ -32,7 +32,7 @@ import forgotPassword from "@/views/forgotPassword";
 import navMessage from "@/views/navMessaging";
 import Blec from "@/views/blec";
 import memberNetworkFollower from "@/views/memberNetworkFollower";
-// import Test from "@/views/test";
+ import govx from "@/views/test";
 import templateView from "@/views/templateView";
 import webSiteCreate from "@/views/webSiteCreate";
 import webSiteCreateTwo from "@/views/webSiteCreateTwo";
@@ -40,6 +40,10 @@ import paidPlan from "@/views/paidPlan";
 import confirmPayment from "@/views/confirmPayment";
 import networks from "@/views/networks";
 import dashboard from "@/views/dashboard";
+
+import myorders from "@/views/myOders"
+
+
 
 import welcome from "@/views/welcome";
 import payment from "@/views/payment";
@@ -52,6 +56,18 @@ const routes = [
   //   name: "Home",
   //   component: Test,
   // },
+
+  {
+    path: "/myorders",
+    name: "orders",
+    component: myorders,
+    // meta: {
+    //   auth: true,
+    // },
+  },
+  
+
+  
   {
     path: "/",
     name: "home",
@@ -70,6 +86,13 @@ const routes = [
     path: "/checkout",
     name: "payment",
     component: payment
+  },
+
+
+  {
+    path: "/govx",
+    name: "govx",
+    component: govx,
   },
 
   {
@@ -108,6 +131,7 @@ const routes = [
     name: "BusinessOwner",
     component: businessOwner,
   },
+
 
   {
     path: "/business_editor/:id?",

@@ -16,9 +16,10 @@
         <Images
           :canUpload="canUpload"
           :hasLoadPicture="!hasLoadPicture"
-          :images="all(getPictures)"
+          :images="all()"
           :albumName="'notFound'"
           :showAlbum="showAlbum"
+          :type="type"
           v-else
         />
       </b-tab>
@@ -26,7 +27,7 @@
         <div v-if="!hasLoadAlbum">
           <b-spinner class="load" label="Large Spinner"></b-spinner>
         </div>
-        <Album :canUpload="!canUpload" v-else />
+        <Album :canUpload="!canUpload" :type="type" v-else />
       </b-tab>
     </b-tabs>
   </div>
@@ -56,7 +57,7 @@ export default {
       hasLoadAlbum: false,
       hasLoadPicture: false,
       showAlbum: false,
-      allImage: [],
+      strategy: null,
     };
   },
 
@@ -67,51 +68,61 @@ export default {
 
   computed: {
     ...mapGetters({
-      getPictures: "UserProfileOwner/getImages",
+      getProfilePictures: "UserProfileOwner/getImages",
+      getBusinessPictures: "businessOwner/getAllImages",
     }),
   },
 
   methods: {
-    //function to get album
-    all(images) {
-      const data = images
-        .filter((img) => img.media.length)
-        .map((img) => {
-          let render = img.media.map((picture) => {
-            return {
-              id: img.id,
-              content: img.content,
-              media: [
-                { path: picture.path, type: picture.type, id: picture.id },
-              ],
-            };
+    all() {
+      const wrapper = (data) => {
+        data
+          .filter((img) => img.media.length)
+          .map((img) => {
+            let render = img.media.map((picture) => {
+              return {
+                id: img.id,
+                content: img.content,
+                media: [{ path: picture.path, type: picture.type, id: picture.id }],
+              };
+            });
+
+            return render;
           });
 
-          return render;
-        });
-
-      return _.flatten(data);
+        return _.flatten(data);
+      };
+      return wrapper(this.strategy[this.type]().pictures);
     },
 
     getAlbums() {
-      if (!this.hasLoadAlbum) {
+      try {
+        const type = this.strategy[this.type]();
+
+        //if (!this.hasLoadAlbum) {
         this.$store
-          .dispatch("UserProfileOwner/getAlbums", this.urlData)
+          .dispatch(type.album, this.urlData)
           .then(() => {
-            console.log("hey yeah");
             this.hasLoadAlbum = true;
           })
           .catch((err) => {
             this.hasLoadAlbum = false;
-            console.log({ err: err });
+            console.log(err);
           });
+        //}
+      } catch (error) {
+        console.log(error);
+        throw new Error("Invalid type", this.type);
       }
     },
 
     getImages() {
-      if (!this.hasLoadPicture) {
+      try {
+        const type = this.strategy[this.type]();
+
+        //if (!this.hasLoadPicture) {
         this.$store
-          .dispatch("UserProfileOwner/getImages", this.urlData)
+          .dispatch(type.image, this.urlData)
           .then(() => {
             this.hasLoadPicture = true;
           })
@@ -119,12 +130,30 @@ export default {
             this.hasLoadPicture = false;
             console.log({ err: err });
           });
+        //}
+      } catch (error) {
+        console.log(error);
+        throw new Error("Invalid type", this.type);
       }
     },
   },
 
   created() {
     this.urlData = this.$route.params.id;
+
+    this.strategy = {
+      business: () => ({
+        album: "businessOwner/getAlbums",
+        image: "businessOwner/getImages",
+        pictures: this.getBusinessPictures,
+      }),
+      profile: () => ({
+        album: "UserProfileOwner/getAlbums",
+        image: "UserProfileOwner/getImages",
+        pictures: this.getProfilePictures,
+      }),
+    };
+
     this.getImages();
   },
 };

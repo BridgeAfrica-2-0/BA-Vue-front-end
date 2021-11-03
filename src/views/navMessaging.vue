@@ -989,7 +989,7 @@ export default {
     createRoom(receiver_id) {
       let sender_id = this.currentUser.user.id;
       this.room = [receiver_id, sender_id];
-      console.log(this.room);
+      console.log("ROOMS: ",this.room);
       this.socket.emit("create", this.room);
     },
     getCreatedAt(data) {

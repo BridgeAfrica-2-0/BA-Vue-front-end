@@ -2,7 +2,7 @@
   <div>
     <!-- {{ products }} -->
 
-    <b-spinner v-if="prodLoader" variant="primary" label="Spinning"></b-spinner>
+    <b-spinner v-if="prodLoader" variant="primary" :label="$t('search.Spinning')"></b-spinner>
 
     <div
       class="people-style shadow"
@@ -18,11 +18,11 @@
         <b-col cols="7" sm="8" md="7">
           <p class="text">
             <strong class="title"> {{ prod.name }} </strong> <br />
-            <strong> Description </strong> <br />
+            <strong> {{ $t("search.Description") }} </strong> <br />
             <span class="text">
               {{ prod.description }}
             </span>
-            <b-link class="text"> see more </b-link> <br />
+            <b-link class="text"> {{ $t("search.see_more") }} </b-link> <br />
 
             <span class="price">
               <strong> {{ prod.price }} Fcfa </strong>
@@ -30,7 +30,7 @@
           </p>
 
           <span class="float-right">
-            <b-button variant="primary" class=""> Buy now </b-button>
+            <b-button variant="primary" class=""> {{ $t("search.Buy_now") }} </b-button>
           </span>
         </b-col>
       </b-row>
@@ -47,13 +47,13 @@
     ></b-pagination>
     
     <!-- End pagination -->
-    <b-modal hide-footer title="Edit product">
+    <b-modal hide-footer :title="$t('search.Edit_product')">
       <b-form>
         <b-row>
           <b-col cols="12" md="6">
             <b-form-group
               id="input-group-1"
-              label="Product Name"
+              :label="$t('search.Product_Name')"
               label-for="input-1"
               label-size="sm"
             >
@@ -67,7 +67,7 @@
 
             <b-form-group
               id="input-group-1"
-              label="Product Description"
+              :label="$t('search.Product_Description')"
               label-for="input-1"
               label-size="sm"
             >
@@ -84,7 +84,7 @@
               <a href="#" data-toggle="modal" data-target="#createalbumModal">
                 <div class="drag-text">
                   <i class="fa fa-plus"></i>
-                  <h6>Product Image</h6>
+                  <h6>{{ $t("search.Product_Image") }}</h6>
                 </div>
               </a>
               <div></div>
@@ -94,7 +94,7 @@
 
         <b-form-group
           id="input-group-1"
-          label="product Price"
+          :label="$t('search.Product_Price')"
           label-for="input-1"
           label-size="sm"
         >
@@ -107,12 +107,12 @@
           value="accepted"
           unchecked-value="not_accepted"
         >
-          This Product Is On Discount
+          {{ $t("search.This_Product_Is_On_Discount") }}
         </b-form-checkbox>
 
         <b-form-group
           id="conditions"
-          label="Conditions"
+          :label="$t('search.Conditions')"
           label-for="input-1"
           label-size="sm"
         >
@@ -125,7 +125,7 @@
           value="accepted"
           unchecked-value="not_accepted"
         >
-          This Item Is A Service ?
+          {{ $t("search.This_Item_Is_A_Service") }}
         </b-form-checkbox>
 
         <b-form-checkbox
@@ -134,7 +134,7 @@
           value="accepted"
           unchecked-value="not_accepted"
         >
-          In stock
+          {{ $t("search.In_stock") }}
         </b-form-checkbox>
 
         <b-form-checkbox
@@ -143,17 +143,17 @@
           value="accepted"
           unchecked-value="not_accepted"
         >
-          Published
+          {{ $t("search.Published") }}
         </b-form-checkbox>
 
-        <b-button class="mt-2 btn-block" variant="primary"> Add</b-button>
+        <b-button class="mt-2 btn-block" variant="primary">{{ $t("search.Add") }} </b-button>
       </b-form>
     </b-modal>
 
     <b-modal
       v-model="viewProduct"
       hide-footer
-      title="Product Details"
+      :title="$t('search.Product_Details')"
       size="xl"
     >
       <b-row>
@@ -164,22 +164,22 @@
           ></b-img>
         </b-col>
         <b-col>
-          <h2 class="mb-4 text-center">Product Name</h2>
-          <p><span class="stock">In Stock</span></p>
+          <h2 class="mb-4 text-center">{{ $t("search.Product_Name") }}</h2>
+          <p><span class="stock">In_Stock</span></p>
           <p>0.00 XAF</p>
           <hr />
           <b-row>
             <b-col>
-              <b-button variant="primary">Message</b-button>
+              <b-button variant="primary">{{ $t("search.Message") }}</b-button>
             </b-col>
             <b-col>
               <b-button variant="outline-dark" class="float-right"
-                >Checkout on website</b-button
+                >{{ $t("search.Checkout_on_website") }}</b-button
               >
             </b-col>
           </b-row>
           <hr />
-          <h5>Product Detail</h5>
+          <h5>{{ $t("search.Product_Detail") }}</h5>
           <p>
             Lorem, ipsum dolor sit amet consectetur adipisicing elit. Corporis
             quod, reprehenderit neque atque recusandae laborum quia vel,
@@ -227,7 +227,7 @@
                   />
                 </a>
                 <input
-                  placeholder="Post a Comment"
+                  :placeholder="$t('search.Post_a_Comment')"
                   class="form-control adco comment"
                   type="text"
                 />
@@ -251,7 +251,7 @@
                       <div class="comment-heading">
                         <div class="pull-left">
                           <h5 class="user">Gavino Free</h5>
-                          <h5 class="time">5 minutes ago</h5>
+                          <h5 class="time">{{ $t("search.5_minutes_ago") }}</h5>
                         </div>
                       </div>
                       <p>
@@ -270,7 +270,7 @@
                         variant="primary"
                         aria-hidden="true"
                       ></b-icon>
-                      23 &nbsp; &nbsp; &nbsp; <a href="#">Reply</a>
+                      23 &nbsp; &nbsp; &nbsp; <a href="#">{{ $t("search.Reply") }}</a>
                     </div>
                   </div>
                   <ul class="comments-list">
@@ -287,7 +287,7 @@
                           <div class="comment-heading">
                             <div class="pull-left">
                               <h5 class="user">Gavino Free</h5>
-                              <h5 class="time">5 minutes ago</h5>
+                              <h5 class="time">{{ $t("search.5_minutes_ago") }}</h5>
                             </div>
                           </div>
                           <p>
@@ -304,7 +304,7 @@
                             variant="primary"
                             aria-hidden="true"
                           ></b-icon>
-                          23 &nbsp; &nbsp; &nbsp; <a href="#">Reply</a>
+                          23 &nbsp; &nbsp; &nbsp; <a href="#">{{ $t("search.Reply") }}</a>
                         </div>
                       </div>
                     </li>
@@ -321,7 +321,7 @@
                           <div class="comment-heading">
                             <div class="pull-left">
                               <h5 class="user">Gavino Free</h5>
-                              <h5 class="time">5 minutes ago</h5>
+                              <h5 class="time">{{ $t("search.5_minutes_ago") }}</h5>
                             </div>
                           </div>
                           <p>
@@ -334,7 +334,7 @@
                         </div>
                         <div class="col-md-12 pt-2 pl-0 mb-3">
                           <i class="fa heart fa-heart-o" aria-hidden="true"></i>
-                          23 &nbsp; &nbsp; &nbsp; <a href="#">Reply</a>
+                          23 &nbsp; &nbsp; &nbsp; <a href="#">{{ $t("search.Reply") }}</a>
                         </div>
                       </div>
                     </li>
@@ -347,7 +347,7 @@
                         />
                       </a>
                       <input
-                        placeholder="Post a Comment"
+                        :placeholder="$t('search.Post_a_Comment')"
                         class="form-control adco comment"
                         type="text"
                       />
@@ -374,7 +374,7 @@
                       <div class="comment-heading">
                         <div class="pull-left">
                           <h5 class="user">Gavino Free</h5>
-                          <h5 class="time">5 minutes ago</h5>
+                          <h5 class="time">{{ $t("search.5_minutes_ago") }}</h5>
                         </div>
                       </div>
                       <p>
@@ -393,7 +393,7 @@
                         variant="primary"
                         aria-hidden="true"
                       ></b-icon>
-                      23 &nbsp; &nbsp; &nbsp; <a href="#">Reply</a>
+                      23 &nbsp; &nbsp; &nbsp; <a href="#">{{ $t("search.Reply") }}</a>
                     </div>
                   </div>
                 </li>

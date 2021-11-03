@@ -26,7 +26,7 @@
               Blezour Blec 
             
             </h5>
-            <p class="duration">1h Ago</p>
+            <p class="duration">{{ $t("search.1h_Ago") }}</p>
           </b-col>
         </b-row>
         <b-row>
@@ -98,7 +98,7 @@
 
             
             </h5>
-            <p class="duration">1h Ago</p>
+            <p class="duration">{{ $t("search.1h_Ago") }}</p>
           </b-col>
         </b-row>
         <b-row>
@@ -156,7 +156,7 @@
               Blezour Blec 
              
             </h5>
-            <p class="duration">1h Ago</p>
+            <p class="duration">{{ $t("search.1h_Ago") }}</p>
           </b-col>
         </b-row>
         <b-row>
@@ -216,7 +216,7 @@
               Blezour Blec 
              
             </h5>
-            <p class="duration">1h Ago</p>
+            <p class="duration">{{ $t("search.1h_Ago") }}</p>
           </b-col>
         </b-row>
         <b-row>

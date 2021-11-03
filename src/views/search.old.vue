@@ -16,7 +16,7 @@
         <b-col v-if="selected != 'marketplace'" class="col-5 filter">
           <b-row>
             <b-col class="col-4 mt-2">
-              <small> Filter:</small>
+              <small> {{ $t("search.Filter") }}:</small>
             </b-col>
             <b-col>
               <div class="control-size">
@@ -34,7 +34,7 @@
         <b-col v-if="selected == 'business'" class="col-5 filter mb-2">
           <b-row>
             <b-col class="col-3 mt-2">
-              <small> Category:</small>
+              <small> {{ $t("search.Category") }}:</small>
             </b-col>
             <b-col>
               <div class="control-size">
@@ -49,10 +49,10 @@
             </b-col>
             <b-col>
               <b-button variant="primary" v-if="!map" @click="showMap(true)">
-                Show map
+                {{ $t("search.Show_map") }}
               </b-button>
               <b-button variant="primary" v-if="map" @click="showMap(false)">
-                Hide map
+                {{ $t("search.Hide_map") }}
               </b-button>
             </b-col>
           </b-row>
@@ -60,7 +60,7 @@
         <b-col v-if="selected == 'people'" class="col-5 mb-2">
           <b-row>
             <b-col class="col-3 mt-2">
-              <small> Workplace:</small>
+              <small> {{ $t("search.Workplace") }}:</small>
             </b-col>
             <b-col>
               <div class="control-size">
@@ -89,7 +89,7 @@
         <b-col v-if="selected == 'network'" class="col-5 filter mb-2">
           <b-row>
             <b-col class="col-3 mt-2">
-              <small> Category:</small>
+              <small> {{ $t("search.Category") }}:</small>
             </b-col>
             <b-col>
               <div class="control-size">
@@ -104,10 +104,10 @@
             </b-col>
             <b-col>
               <b-button variant="primary" v-if="!map" @click="showMap(true)">
-                Show map
+                {{ $t("search.Show_map") }}
               </b-button>
               <b-button variant="primary" v-if="map" @click="showMap(false)">
-                Hide map
+                {{ $t("search.Hide_map") }}
               </b-button>
             </b-col>
           </b-row>
@@ -115,7 +115,7 @@
         <b-col v-if="selected == 'posts'" class="col-5 filter mb-2">
           <b-row>
             <b-col class="col-3 mt-2">
-              <small> Posted By:</small>
+              <small> {{ $t("search.Posted_By") }}:</small>
             </b-col>
             <b-col>
               <div class="control-size">
@@ -189,7 +189,7 @@
               @click="showMap(true)"
               class="ml-2"
             >
-              Show map
+              {{ $t("search.Show_map") }}
             </b-button>
             <b-button
               size="sm"
@@ -198,7 +198,7 @@
               class="ml-2"
               @click="showMap(false)"
             >
-              Hide map
+              {{ $t("search.Hide_map") }}
             </b-button>
           </div>
         </b-col>
@@ -221,7 +221,7 @@
         <b-row>
           <b-col>
             <b-card>
-              <h3>Sponsored Businesses</h3>
+              <h3>{{ $t("search.Sponsored_Businesses") }}</h3>
               <div class="s-business">
                 <b-row class="ml-3">
                   <div class="left">
@@ -266,7 +266,7 @@
           <b-col>
             <b-card class="crd card">
               <span class="title"> </span>
-              <span class="ml-5 result "><small>398 Results found</small></span>
+              <span class="ml-5 result "><small>398 {{ $t("search.Results_found") }}</small></span>
               <Business class="mb-3" />
               <Business class="mb-3 btn-busi" />
             </b-card>
@@ -280,7 +280,7 @@
         <b-row class="mt-3 mb-2">
           <b-col>
             <span class="title"> </span>
-            <span class="ml-5 result"><small>398 Results found</small></span>
+            <span class="ml-5 result"><small>398 {{ $t("search.Results_found") }}</small></span>
 
             <People class="mt-4" />
           </b-col>
@@ -293,7 +293,7 @@
         <b-row>
           <b-col>
             <b-card>
-              <h3>Sponsored Networks</h3>
+              <h3>{{ $t("search.Sponsored_Networks") }}</h3>
               <div class="s-business">
                 <b-row class="ml-3">
                   <div class="left">
@@ -355,7 +355,7 @@
         <b-row class="mt-3 mb-2">
           <b-col>
             <span class="title"> </span>
-            <span class="ml-5 result"><small>398 Results found</small></span>
+            <span class="ml-5 result"><small>398 {{ $t("search.Results_found") }}</small></span>
 
             <Posts class="mt-4" />
           </b-col>
@@ -368,7 +368,7 @@
         <b-row>
           <b-col>
             <b-card>
-              <h3>Sponsored Businesses</h3>
+              <h3>{{ $t("search.Sponsored_Businesses") }}</h3>
               <div class="s-business">
                 <b-row class="ml-3">
                   <div class="left">
@@ -406,7 +406,7 @@
         <b-row class="mt-3 mb-2">
           <b-col>
             <span class="title"> </span>
-            <span class="ml-5 result"><small>398 Results found</small></span>
+            <span class="ml-5 result"><small>398 {{ $t("search.Results_found") }}</small></span>
             <Marketplace class="mt-4 mb-2" />
           </b-col>
           <b-col class="col-3 aads">

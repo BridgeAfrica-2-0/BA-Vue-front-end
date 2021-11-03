@@ -14,6 +14,7 @@
               <!--  <b-tab title="Networks"><Networks /></b-tab> -->
               <b-tab title="Community"><Followers /></b-tab>
             </b-tabs>
+            </b-tabs>
           </b-col>
         </b-row>
       </div>

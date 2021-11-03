@@ -13,9 +13,5 @@ export const actions = {
 
   [TYPES.INIT]({ commit }) {
     commit(TYPES.INIT)
-  }, // [TYPES.INIT]
-
-  [TYPES.AUTH]({ commit } , payload) {
-    commit(TYPES.AUTH, payload)
-  }, // [TYPES.INIT]
+  }, // [TYPES.INIT]/ [TYPES.INIT]
 }

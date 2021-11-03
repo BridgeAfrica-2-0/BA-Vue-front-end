@@ -680,7 +680,7 @@ export default {
         keyword: "",
         placeholder: "Find Pharmacy",
       },
-      strategy: null,
+     
       searchParams: {
         keyword: "",
         cat_id: "",
@@ -695,7 +695,6 @@ export default {
       strategyForComponent: null,
       notFoundComponentTitle: "",
       isComponent: null,
-      strategy: {},
       strategyForPlaceHolder: {},
       strategyForNotFoundComponentTitle: {},
 

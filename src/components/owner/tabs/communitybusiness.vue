@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="p-2">
     <b-row>
       <b-col lg="6" sm="12" class="p-2" v-for="item in businesses" :key="item.id">
         <div class="people-style shadow">
@@ -104,7 +104,8 @@
         </div>
       </b-col>
     </b-row>
-     <infinite-loading @infinite="infiniteHandler"></infinite-loading>
+     
+      <infinite-loading :identifier="infiniteId"  @infinite="infiniteHandler"  ref="infiniteLoading" ></infinite-loading>
   </div>
 </template>
 
@@ -113,11 +114,12 @@ import moment from "moment";
 import axios from "axios";
 
 export default {
-  props: ["type"],
+  props: ["type", "searchh"],
   
    data() {
     return {
       page: 1,
+      infiniteId: +new Date(),
       options: {
         rewind: true,
         autoplay: true,
@@ -128,6 +130,22 @@ export default {
         perMove: 1
       }
     };
+  },
+
+  computed:{
+   
+    businesses(){
+
+      if(this.type=="Follower"){ 
+
+      return  this.$store.state.profile.BcommunityFollower.business_followers;  
+
+       }else{
+
+         return  this.$store.state.profile.BcommunityFollowing.business_following; 
+       }
+   }
+
   },
    
   methods: {
@@ -141,7 +159,38 @@ export default {
     },
 
 
-      infiniteHandler($state) { 
+    
+
+       search(){
+     
+       console.log('search started');
+       
+         if(this.type=="Follower"){ 
+         
+        this.$store.commit("profile/setBcommunityFollower",{ "business_followers": [ ], "total_business_follower": 0 }); 
+
+       }else{
+       
+        
+        this.$store.commit("profile/setBcommunityFollowing",{ "business_following": [ ], "total_business_following": 0 }); 
+       }
+
+      this.page = 1;
+      this.infiniteId += 1;
+
+     
+     this.$refs.infiniteLoading.attemptLoad();
+    
+
+    },
+
+
+     
+
+
+     
+          infiniteHandler($state) { 
+           
 
       let url = null;
 
@@ -151,25 +200,52 @@ export default {
           url="profile/business/following/";
          }
       axios
-        .get(url + this.page)
+        .get(url + this.page+"?keyword="+this.searchh )
         .then(({ data }) => {
-          if (data.data.length) {
-            this.page += 1;
-           if(this.type=="Follower"){  
+          console.log(data);
+        
+          if(this.type=="Follower"){  
+
+
+          if (data.data.business_followers.length) {
+            
+         
             this.businesses.push(...data.data.business_followers); 
+            this.page += 1;
+            
+            $state.loaded();
+
            }else{
-              this.businesses.push(...data.data.business_following);
+              $state.complete();
+             
+           }
+        
+          }else{
+
+
+
+
+             if (data.data.business_following.length) {
+            
+         
+            this.businesses.push(...data.data.business_following); 
+            this.page += 1;
+            
+            $state.loaded();
+
+           }else{
+              $state.complete();
+             
            }
 
-            $state.loaded();
-          } else {
-            $state.complete();
           }
+           
         })
         .catch((err) => {
           console.log({ err: err });
         });
     },
+
 
   }
 };

@@ -1,5 +1,9 @@
 <template>
   <div>
+
+    
+
+
     <b-card class="mt-4" header-tag="header" footer-tag="footer">
       <h6 class="mb-3 d-inline-block title">
         <fas-icon
@@ -16,31 +20,61 @@
         </b-link></span
       >
 
-      <b-card-text>
+
+
+        <CoolLightBox 
+      :items="imgaray" 
+      :index="index"
+      @close="index = null">
+    </CoolLightBox>
+
+
+
         <b-row>   
 
 
-          <b-col cols="4"     v-for="pic in pictures" :key="pic.id"     class="p-1">
+          <b-col cols="6" md="4"    class="image p-1   imgheightt"
+        v-for="(image, imageIndex) in imgaray"
+        :key="imageIndex"
+        @click="index = imageIndex"  >
 
-            <img
+    <img
               class="mb-2  img-fluid imgheight"
-               :src="pic.image_url"
-              alt="Fluid image"
+               :src="image"
+            
             />
+        
           </b-col>     
 
         </b-row>
-      </b-card-text>
     </b-card>
   </div>
 </template>
 
 <script>
 export default {
+
+  data: function () {
+    return {
+     
+      index: null
+    };
+  },
+
   computed: {
     pictures() {
       return this.$store.getters["profile/getImages"] ;  
     },
+
+    imgaray(){
+      let arr=[];
+      this.pictures.forEach((value, index) => {
+        arr.push(value.image_url);
+       
+      });
+      return arr;
+    }
+
   },
 
   mounted(){
@@ -57,7 +91,11 @@ export default {
 
 .imgheight{
 
-    height: 200px !important;
+    height: 150px !important;
+    object-fit: cover;
+    width: 100%;
 }
+
+
 
 </style>

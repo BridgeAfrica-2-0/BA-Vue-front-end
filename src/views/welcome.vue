@@ -539,10 +539,10 @@
                   <label class="typo__label"> {{$t("sub_category")}}</label>
                   <multiselect
                     v-model="filterselectvalue"
-                    :tag-placeholder="$t('Add_this_as_new_tag')" 
-                    :placeholder="$t('Search_or_add_a_tag')" 
-                    label="subcategory"
-                    track-by="sub_cat_id"
+                    tag-placeholder="Add this as new tag"
+                    placeholder="Search or add a tag"
+                    label="name"
+                    track-by="subcategory_id"
                     :options="scategories"
                     :multiple="true"
                     :taggable="true"
@@ -555,7 +555,7 @@
                   <b-card no-body>
                     <b-tabs pills card vertical>
                       <b-tab
-                        :title="filters.subcategory"
+                        :title="filters.name"
                         v-for="filters in filterselectvalue"
                         :key="filters.id"
                         active
@@ -1135,12 +1135,8 @@ export default {
 
           console.log("sending");
 
-          this.axios
-            .post("business/create", formData2, {
-              headers: {
-                "Content-Type": "multipart/form-data",
-              },
-            })
+          axios
+            .post("business/create", formData2)
             .then((response) => {
               console.log(response);
 
@@ -1260,12 +1256,8 @@ export default {
         formData2.append("language", this.language);
         formData2.append("about_business", this.about);
 
-        this.axios
-          .post("business/create", formData2, {
-            headers: {
-              "Content-Type": "multipart/form-data",
-            },
-          })
+        axios
+          .post("business/create", formData2)
           .then((response) => {
             console.log(response);
 
@@ -1329,12 +1321,8 @@ export default {
         formData.append("lng", this.center.lng);
         formData.append("address", this.region);
 
-        this.axios
-          .post("/complete/profile", formData, {
-            headers: {
-              "Content-Type": "multipart/form-data",
-            },
-          })
+        axios
+          .post("/complete/profile", formData)
           .then((response) => {
             console.log(response);
 
@@ -1486,7 +1474,7 @@ export default {
     selectedsubcategories: function () {
       let sub_cat = [];
       this.filterselectvalue.forEach((item) => {
-        sub_cat.push(item.sub_cat_id);
+        sub_cat.push(item.subcategory_id);
       });
       return sub_cat;
     },

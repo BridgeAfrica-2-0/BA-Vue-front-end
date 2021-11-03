@@ -6,6 +6,8 @@ import businessOwner from "./businessOwner";
 import networkDetails from "./networkDetails";
 import dashboardcommunity from "./dashboardcommunity";
 import ProfileAndBusinessDetails from "./ProfileAndBusinessDetails";
+import NetworkSettings from "./NetworkSettings";
+
 import businessFollowers from "./businessFollowers";
 import market from "./market";
 import hotbusiness from "./hotbusiness";
@@ -33,11 +35,23 @@ export default new Vuex.Store({
     businessOwner,
     dashboard,
     hotbusiness,
+    NetworkSettings,
     profile,
     follower,
     search,
     market,
     UserProfileOwner, 
-    checkout
+    checkout,
+    networkProfileMembers,
+    
+    social,
+        allSearch,
+     marketSearch,
+       networkSearch,
+    UserProfileOwner,
+    businessFollowers
   },
 });
+
+   
+

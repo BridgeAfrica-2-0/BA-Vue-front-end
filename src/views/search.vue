@@ -645,9 +645,23 @@ export default {
     return {
       navBarParams: {
         keyword: "",
-        placeholder: "",
+        placeholder: "Find Pharmacy",
       },
-      strategy: {},
+     
+      searchParams: {
+        keyword: "",
+        cat_id: "",
+        placeholder: "Find In All",
+      },
+
+
+      alert: false,
+      showDismissibleAlert: false,
+      prodLoader: false,
+
+      strategyForComponent: null,
+      notFoundComponentTitle: "",
+      isComponent: null,
       strategyForPlaceHolder: {},
       selected: "all",
       selectedId: 0,

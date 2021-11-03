@@ -1397,9 +1397,15 @@
   resolved "https://registry.yarnpkg.com/@splidejs/splide/-/splide-3.2.1.tgz#f270ee96fb954f2addb38b16de12ae948e80a90c"
   integrity sha512-P6gBp+JtsG67ZnHWxzA8jGc7rZQ1nls7CDJQkQeexxXdFu+4myouRIzXhooU/uWdQDNEQ4ttgC3F1+T1tgstuw==
 
+<<<<<<< HEAD
 "@splidejs/vue-splide@github:splidejs/vue-splide":
   version "0.5.4"
   resolved "https://codeload.github.com/splidejs/vue-splide/tar.gz/cb090530026403decf636a3622beb75e0a76ab43"
+=======
+"@splidejs/vue-splide@splidejs/vue-splide":
+  version "0.5.5"
+  resolved "https://codeload.github.com/splidejs/vue-splide/tar.gz/130bac88f143168a7da0797f3323eed74eb22211"
+>>>>>>> main
   dependencies:
     "@splidejs/splide" "^3.2.0"
 

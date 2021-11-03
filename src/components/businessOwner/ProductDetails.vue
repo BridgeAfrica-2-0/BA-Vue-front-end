@@ -9,22 +9,22 @@
     <b-container>
       <b-row>
         <b-col cols="12" sm="12" md="4">
-          <ProductCaroussel />
+          <ProductCaroussel :productImages="productImages" />
         </b-col>
         <b-col cols="12" sm="12" md="8">
           <div>
-            <h4 class="font-weight-bold">Headset</h4>
-            <span class="text-success">In Stock</span>
-            <h4 class="font-weight-bold">5 000XAF</h4>
+            <h4 class="font-weight-bold">{{ product.name }}</h4>
+            <span class="text-success" v-if="product.in_stock">In Stock</span>
+            <span class="text-danger" v-else>Out of stock</span>
+            <h4 class="font-weight-bold">
+              {{ formatMoney(Number(product.price)) }}
+            </h4>
           </div>
           <hr class="h-divider" />
           <div>
             <h4>Product Desciption</h4>
             <p class="text-justify">
-              Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-              Blanditiis iste, dolor asperiores nisi ad ipsam laboriosam, fugiat
-              facilis amet eveniet, saepe dolores excepturi. Similique quas quae
-              ut eum totam explicabo.
+              {{ product.description }}
             </p>
           </div>
           <hr class="h-divider" />
@@ -59,10 +59,42 @@ export default {
       type: Boolean,
       default: false,
     },
+    product: {
+      type: Object,
+      required: true,
+    },
   },
   components: {
     ProductCaroussel,
     ProductComments,
+  },
+  data() {
+    return {
+      formatObject: new Intl.NumberFormat("fr-FR", {
+        style: "currency",
+        currency: "XAF",
+        minimumFractionDigits: 2,
+      }),
+      productImages: [
+        {
+          img: require("@/assets/img/payment/headset.jpg"),
+        },
+        {
+          img: require("@/assets/img/payment/headset1.jpg"),
+        },
+        {
+          img: require("@/assets/img/payment/headset2.jpg"),
+        },
+        {
+          img: require("@/assets/img/payment/headset3.jpg"),
+        },
+      ],
+    };
+  },
+  methods: {
+    formatMoney(money) {
+      return this.formatObject.format(money);
+    },
   },
 };
 </script>

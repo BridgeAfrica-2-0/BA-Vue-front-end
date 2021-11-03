@@ -6,7 +6,7 @@
           <div class="center-img">
             <img
               src="https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg"
-              class="r-image"
+              class="r-image cursor-pointer"
               @click="productDetails"
             />
           </div>
@@ -136,7 +136,7 @@
       </b-form>
     </b-modal>
     <!-- PRODUCT DETAILS MODAL -->
-    <ProductDetails :showModal="viewProduct"/>
+    <ProductDetails :showModal="viewProduct" :product="product" />
     <!-- <b-modal
       v-model="viewProduct"
       hide-footer
@@ -424,6 +424,9 @@ export default {
 .discount {
   color: orange;
   margin-left: 60px;
+}
+.cursor-pointer {
+  cursor: pointer;
 }
 
 p {

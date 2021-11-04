@@ -4,40 +4,7 @@
     <div class="row">
       <div class="container-fluid" v-if="showalbum == false">
         <div class="one2">
-          <div class="createp img-gall image-wrapp" v-if="OwnerRoute == true" >
-            <div class="">
-              <a v-b-modal.createalbumModal>
-                <div class="drag-textt">
-                  <fas-icon :icon="['fas', 'plus']" />
-                  <h3>Create Album</h3>
-                </div>
-              </a>
-            </div>
-          </div>
 
-          <b-modal hide-footer title="Create album" id="createalbumModal">
-            <div ref="creatform">
-              <b-form>
-                <b-form-input
-                  placeholder="Album name"
-                  v-model="albumInfo.name"
-                ></b-form-input>
-                <b-form-input
-                  placeholder="Album Type"
-                  class="mt-2"
-                  v-model="albumInfo.type"
-                ></b-form-input>
-                <b-button
-                  class="mt-2"
-                  variant="primary"
-                  @click="createAlbums"
-                  :disabled="loading || canCreateAlbum"
-                >
-                  Create</b-button
-                >
-              </b-form>
-            </div>
-          </b-modal>
 
           <AlbumItem
             v-for="album in strategy[type]().albums"
@@ -51,75 +18,7 @@
           />
         </div>
 
-        <b-modal hide-footer title="Edit album" ref="editalbum" id="editalbum">
-          <div ref="creatform">
-            <b-form>
-              <b-form-input
-                placeholder="Album name"
-                v-model="editName"
-              ></b-form-input>
-              <b-button
-                class="mt-2"
-                variant="primary"
-                @click="update"
-                :disabled="loading || editName.trim().length ? false : true"
-              >
-                Update</b-button
-              >
-            </b-form>
-          </div>
-        </b-modal>
-
-        <div class="two2 d-none">
-          <div class="row">
-            <div class="container">
-              <div class="col-md-4 mx-auto">
-                <form>
-                  <div class="form-group col-md-12 text-center mb-3">
-                    <ul class="navbar-nav">
-                      <li class="nav-item dropdown">
-                        <a
-                          class="nav-link dropdown-toggle1"
-                          href="#"
-                          id="navbarDropdown"
-                          role="button"
-                          data-toggle="dropdown"
-                          aria-haspopup="true"
-                          aria-expanded="false"
-                          >Custom Album 1
-                          <i class="fa fa-caret-down" aria-hidden="true"></i
-                        ></a>
-                        <div
-                          class="dropdown-menu dropdown-menu-right"
-                          aria-labelledby="navbarDropdown"
-                        >
-                          <a
-                            class="dropdown-item"
-                            data-toggle="modal"
-                            data-target="#namealbumModal"
-                            >Edit Name</a
-                          >
-                          <a class="dropdown-item">Delete Album</a>
-                        </div>
-                      </li>
-                    </ul>
-                  </div>
-                  <div class="input-group col-md-12 text-center mb-4 selec">
-                    <label class="col-md-4 control-label pr-0 text-design"
-                      >14 Items -
-                    </label>
-                    <div class="col-md-5 pl-0 pr-0">
-                      <select id="gender" class="form-control w-100">
-                        <option>Public</option>
-                        <option>Private</option>
-                      </select>
-                    </div>
-                  </div>
-                </form>
-              </div>
-            </div>
-          </div>
-        </div>
+        
       </div>
     </div>
     <!-- show  images in an album -->

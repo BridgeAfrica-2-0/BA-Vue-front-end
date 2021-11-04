@@ -16,18 +16,18 @@
         </b-col>
         <b-col md="9" cols="7" lg="5" sm="5">
           <p class="textt">
-            <strong class="title"> Super Car ltd </strong> <br />
-            Car marketing
+            <strong class="title"> {{$t("businessowner.Super_Car_ltd")}} </strong> <br />
+            {{$t("businessowner.Car_marketing")}}
             <br />
-            20k Community <br />
+            {{$t("businessowner.20k_Community")}} <br />
 
             <span class="location">
-              <b-icon-geo-alt class="ico"></b-icon-geo-alt> Douala cameroon
+              <b-icon-geo-alt class="ico"></b-icon-geo-alt> {{$t("businessowner.Douala_cameroon")}}
             </span>
             <br />
 
-            super best car seller in the world adipisicing elit. lorem epsep
-            this is <b-link>Read More</b-link>
+            {{$t("businessowner.super_best_car_seller_in_the_world")}}.adipisicing elit lorem epsep
+            this is <b-link>{{$t("businessowner.Read_More")}}</b-link>
           </p>
         </b-col>
 
@@ -49,7 +49,7 @@
                   variant="primary"
                 >
                   <i class="fas fa-user-plus  fa-lg btn-icon "></i>
-                  <span class="btn-com">Community</span>
+                  <span class="btn-com">{{$t("businessowner.Community")}}</span>
                 </b-button>
               </b-col>
 
@@ -68,7 +68,7 @@
                   variant="primary"
                 >
                   <i class="fas fa-envelope   fa-lg btn-icon "></i>
-                  <span class="btn-text">Message</span>
+                  <span class="btn-text">{{$t("businessowner.Message")}}</span>
                 </b-button>
               </b-col>
 
@@ -87,7 +87,7 @@
                   variant="primary"
                 >
                   <i class="fas fa-map-marked-alt  fa-lg btn-icon "></i>
-                  <span class="btn-text">Direction</span>
+                  <span class="btn-text">{{$t("businessowner.Direction")}}</span>
                 </b-button>
               </b-col>
             </b-row>
@@ -112,18 +112,18 @@
         </b-col>
         <b-col md="7" cols="7" lg="5" sm="5">
           <p class="textt">
-            <strong class="title"> Super Car ltd </strong> <br />
-            Car marketing
+            <strong class="title"> {{$t("businessowner.Super_Car_ltd")}} </strong> <br />
+            {{$t("businessowner.Car_marketing")}}
             <br />
-            20k Community <br />
+            {{$t("businessowner.20k_Community")}} <br />
 
             <span class="location">
-              <b-icon-geo-alt class="ico"></b-icon-geo-alt> Douala cameroon
+              <b-icon-geo-alt class="ico"></b-icon-geo-alt> {{$t("businessowner.Douala_cameroon")}}
             </span>
             <br />
 
-            super best car seller in the world adipisicing elit. lorem epsep
-            this is <b-link>Read More</b-link>
+            {{$t("businessowner.super best car seller in the world")}}adipisicing elit. lorem epsep
+            this is <b-link>{{$t("businessowner.Read_More")}}</b-link>
           </p>
         </b-col>
 
@@ -145,7 +145,7 @@
                   variant="primary"
                 >
                   <i class="fas fa-user-plus  fa-lg btn-icon "></i>
-                  <span class="btn-com">Community</span>
+                  <span class="btn-com">{{$t("businessowner.Community")}}</span>
                 </b-button>
               </b-col>
 
@@ -164,7 +164,7 @@
                   variant="primary"
                 >
                   <i class="fas fa-envelope   fa-lg btn-icon "></i>
-                  <span class="btn-text">Message</span>
+                  <span class="btn-text">{{$t("businessowner.Message")}}</span>
                 </b-button>
               </b-col>
 
@@ -183,7 +183,7 @@
                   variant="primary"
                 >
                   <i class="fas fa-map-marked-alt  fa-lg btn-icon "></i>
-                  <span class="btn-text">Direction</span>
+                  <span class="btn-text">{{$t("businessowner.Direction")}}</span>
                 </b-button>
               </b-col>
             </b-row>

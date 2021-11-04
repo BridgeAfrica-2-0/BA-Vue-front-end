@@ -6,10 +6,10 @@
       aria-controls="collapse-4"
       @click="visible = !visible"
     >
-      Toggle Collapse
+      {{$t("businessowner.Toggle_Collapse")}}
     </b-button>
     <b-collapse id="collapse-4" v-model="visible" class="mt-2">
-      <b-card>I should start open!</b-card>
+      <b-card>{{$t("businessowner.I_should_start_open")}}!</b-card>
     </b-collapse>
   </card>
 </template>

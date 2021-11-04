@@ -1,7 +1,7 @@
 <template>
   <div class="mx-4">
     <div class="fl mb-5">
-      <label for="datepicker-dateformat1">Posted Date</label>
+      <label for="datepicker-dateformat1">{{$t("businessowner.Posted_Date")}}</label>
       <b-form-datepicker
         id="datepicker-dateformat1"
         :date-format-options="{ year: 'numeric', month: 'short', day: '2-digit', weekday: 'short' }"
@@ -10,13 +10,13 @@
 
     </div>
     <b-row class="fl my-2" @click="showRecentPost">
-        <span>Recent post</span>
+        <span>{{$t("businessowner.Recent_post")}}</span>
         <b-icon-toggle-on v-if="isRecentPost"  class="color" font-scale="1.5"></b-icon-toggle-on> 
         <b-icon-toggle-off v-else  class="color" font-scale="1.5"></b-icon-toggle-off>   
     </b-row>
 
      <b-row class="fl my-2" @click="showPostHaveNotSeen">
-        <span>Post you've not see</span>
+        <span>{{$t("businessowner.Post_you_ve_not_seen")}}</span>
         <b-icon-toggle-on v-if="isPostHaveNotSeen"  class="color" font-scale="1.5"></b-icon-toggle-on> 
         <b-icon-toggle-off v-else class="color" font-scale="1.5"></b-icon-toggle-off>   
     </b-row>
@@ -28,7 +28,7 @@
       @click.prevent="toogleRootSection"
     >
       <b-row class="fl">
-        <span>Post from</span>
+        <span>{{$t("businessowner.Post_from")}}</span>
         <b-icon  :icon="rootSectionIsVisible ? 'arrow-down' : 'arrow-up'"></b-icon>
       </b-row>
     </a>
@@ -44,7 +44,7 @@
           @click.prevent="buisnessSectionIsVisible = !buisnessSectionIsVisible"
         >
           <b-row class="fl">
-            <span>Buisness</span>
+            <span>{{$t("businessowner.Buisness")}}</span>
             <b-icon  :icon="buisnessSectionIsVisible ? 'arrow-down' : 'arrow-up'"></b-icon>
           </b-row>
         </a>
@@ -75,7 +75,7 @@
           @click.prevent="peopleSectionIsVisible = !peopleSectionIsVisible"
         >
           <b-row class="fl">
-            <span>People</span>
+            <span>{{$t("businessowner.People")}}</span>
             <b-icon  :icon="peopleSectionIsVisible ? 'arrow-down' : 'arrow-up'"></b-icon>
           </b-row>
         </a>
@@ -106,7 +106,7 @@
           @click.prevent="networkSectionIsVisible = !networkSectionIsVisible"
         >
           <b-row class="fl">
-            <span>Network</span>
+            <span>{{$t("businessowner.Network")}}</span>
             <b-icon  :icon="networkSectionIsVisible ? 'arrow-down' : 'arrow-up'"></b-icon>
           </b-row>
         </a>

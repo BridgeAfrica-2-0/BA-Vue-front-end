@@ -1,7 +1,7 @@
 <template>
   <div class="mx-4">
     <b-form class="mb-4">
-      <label for="feedback-user">Profession</label>
+      <label for="feedback-user">{{$t("businessowner.Profession")}}</label>
       <b-form-input
         @input="debounceInput"
         id="feedback-user"
@@ -16,7 +16,7 @@
       @click.prevent="toogleRootSection"
     >
       <b-row class="fl px-3">
-        <span>People from</span>
+        <span>{{$t("businessowner.People_from")}}</span>
         <b-icon
           :icon="rootSectionIsVisible ? 'arrow-down' : 'arrow-up'"
         ></b-icon>
@@ -36,7 +36,7 @@
           @click.prevent="peopleSectionIsVisible = !peopleSectionIsVisible"
         >
           <b-row class="fl px-3">
-            <span>People </span>
+            <span>{{$t("businessowner.People")}} </span>
             <b-icon
               :icon="peopleSectionIsVisible ? 'arrow-down' : 'arrow-up'"
             ></b-icon>
@@ -72,7 +72,7 @@
           @click.prevent="buisnessSectionIsVisible = !buisnessSectionIsVisible"
         >
           <b-row class="fl px-3">
-            <span>Buisness </span>
+            <span>{{$t("businessowner.Buisness")}} </span>
             <b-icon
               :icon="buisnessSectionIsVisible ? 'arrow-down' : 'arrow-up'"
             ></b-icon>
@@ -108,7 +108,7 @@
           @click.prevent="networkSectionIsVisible = !networkSectionIsVisible"
         >
           <b-row class="fl px-3">
-            <span>Network</span>
+            <span>{{$t("businessowner.Network")}}</span>
             <b-icon
               :icon="networkSectionIsVisible ? 'arrow-down' : 'arrow-up'"
             ></b-icon>

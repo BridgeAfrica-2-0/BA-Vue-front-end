@@ -1,7 +1,7 @@
 <template>
   <div>
     <b-card class="text-center">
-      <b-card-text> Advertisement Area </b-card-text>
+      <b-card-text> {{$t("businessowner.Advertisement_Area")}} </b-card-text>
 
       <img
         class="img-fluid picture logo-img"

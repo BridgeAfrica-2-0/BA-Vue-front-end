@@ -1,6 +1,7 @@
 <template>
   <div class="p-2">
     <div class="s-ccard">
+    
       <b-row>
         <b-col lg="6" sm="12" class="p-2" v-for="item in users" :key="item.id">
           <div class="people-style border shadow">
@@ -183,6 +184,7 @@ export default {
       
      
       let url = null;
+      
 
       if (this.type == "Follower") {
      url = "business/community/people-follower/"+this.biz_id+"/"; 

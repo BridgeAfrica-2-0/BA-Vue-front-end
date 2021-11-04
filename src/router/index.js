@@ -160,7 +160,7 @@ const routes = [
     component: confirmPayment,
   },
   {
-    path: "/business_owner/network/:id?",
+    path: "/network/:id?",
     name: "networks",
     component: networks,
   },

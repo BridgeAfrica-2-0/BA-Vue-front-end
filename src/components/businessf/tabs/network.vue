@@ -1,41 +1,31 @@
 <template>
   <div>
+    <b-modal id="modal-sm" size="sm" hide-header>
+      Do you want to join this network?
+    </b-modal>
 
-    
-    <div class="people-style shadow"  v-for="item in businesses" :key="item.id">
+
+      
+
+          <div class="people-style shadow"  v-for="item in network" :key="item.id">
       <b-row>
         <b-col md="3" xl="5" lg="5" cols="5" sm="3">
-          <div class="center-img">
-            <splide :options="options" class="r-image">
-              <splide-slide>
-                <img
-                  :src="item.picture"
-                  class="r-image"
-                />
-              </splide-slide>
-            </splide>   
-          </div>
+         
+            <div class="center-img">
+            <img :src="item.picture" class="r-image" />
+          </div>   
+        
         </b-col>
+
+        
         <b-col md="5" cols="7" lg="7" xl="7" sm="5">
           <p class="textt">
-            <strong class="title"> {{ item.name }}</strong> <br />
+            <strong class="title"> {{ item.name }} </strong> <br />
             {{ item.category }}
             <br />
-            {{ count(item.followers) }} Community <br />
+           {{ item.followers }} Community<br />
 
-            <span class="location">
-              <b-icon-geo-alt class="ico"></b-icon-geo-alt>{{ item.country }}
-            </span>
-            <br />
-<read-more
-              more-str="read more"
-              class="readmore"
-              :text="item.about_business"
-              link="#"
-              less-str="read less"
-              :max-chars="15"
-            >
-            </read-more>
+           {{ item.about_network }} <b-link>Read More</b-link>
           </p>
         </b-col>
 
@@ -104,21 +94,21 @@
       </b-row>
     </div>
 
-  <infinite-loading @infinite="infiniteHandler"></infinite-loading>
+   
+  <infinite-loading @infinite="infiniteHandler"></infinite-loading>  
   </div>
 </template>
 
 <script>
 
-import moment from "moment";
 import axios from "axios";
-
+ 
 export default {
- props:['type'],
+  props: ["type"],
   data() {
     return {
       page: 1,
-      biz_id:null,
+       biz_id:null,
       options: {
         rewind: true,
         autoplay: true,
@@ -131,101 +121,97 @@ export default {
     };
   },
 
-  mounted(){
-
-    this.biz_id = this.$route.params.id;
-  },
-
-  computed:{
- 
-   businesses(){
+  computed: {
+   
+        network(){
 
       if(this.type=="Follower"){ 
 
-      return  this.$store.state.businessOwner.BcommunityFollower.business_followers;  
+      return  this.$store.state.businessOwner.NcommunityFollower.network_followers;  
 
        }else{
 
-         return  this.$store.state.businessOwner.BcommunityFollowing.business_following; 
+         return  this.$store.state.profile.NcommunityFollowing.network_following; 
        }
    }
-    
-    
+   
   },
+  
 
-  methods:{
+   mounted(){
+    this.biz_id = this.$route.params.id;
+ },
 
-     count(number) {
-      if (number >= 1000000) {
-        return number / 1000000 + "M";
-      }
-      if (number >= 1000) {
-        return number / 1000 + "K";
-      } else return number;
-    },
 
-          infiniteHandler($state) { 
+
+
+   methods:{
+      
+     
+      infiniteHandler($state) {       
+
+        console.log("loading network 1 1")
 
       let url = null;
 
+    
+
          if(this.type=="Follower"){  
          
-          url = "business/community/business-follower/"+this.biz_id+"/";
+           url = "business/community/network-follower/"+this.biz_id+"/";
          }else{
          
-          url = "business/community/business-following/"+this.biz_id+"/";
+           url = "business/community/network-following/"+this.biz_id+"/";
          }
       axios
-        .get(url + this.page)
+        .get(url + this.page)   
         .then(({ data }) => {
-        
-          if(this.type=="Follower"){  
-
-
-          if (data.data.business_followers.length) {
-            
+          console.log("lading network after response")
+          console.log(data);
+        if(this.type=="Follower"){
          
-            this.businesses.push(...data.data.business_followers); 
+
+          if (data.data.network_followers.length) {
             this.page += 1;
+            this.network.push(...data.data.network_followers);
+            
             
             $state.loaded();
-
            }else{
               $state.complete();
-             
            }
-        
-          }else{
 
 
-
-
-             if (data.data.business_following.length) {
+          } else {
             
-         
-            this.businesses.push(...data.data.business_following); 
+
+
+             if (data.data.network_following.length) {
             this.page += 1;
+      
+            this.network.push(...data.data.network_following);
+            
             
             $state.loaded();
-
            }else{
               $state.complete();
-             
            }
+
+
 
           }
-           
-        })
+        }) 
         .catch((err) => {
           console.log({ err: err });
         });
     },
 
-  }  
+  } ,
 
-
+ 
 };
 </script>
+
 
 <style scoped>
 @media only screen and (min-width: 768px) {

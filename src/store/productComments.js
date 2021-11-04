@@ -7,7 +7,7 @@ const getters = {};
 const actions = {
   async getComments({ commit }, details) {
     await axios
-      .get(`product/detail/${details.id}/comments`)
+      .get(`market/product/detail/${details.id}/comments/${details.page}`)
       .then((response) => {
         commit;
         console.log("Products comments", response.data);
@@ -17,7 +17,11 @@ const actions = {
       });
   },
 };
-const mutations = {};
+const mutations = {
+  loadComments: (state, newComments) => {
+    state.comments.push(newComments);
+  },
+};
 
 export default {
   namespaced: true,

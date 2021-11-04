@@ -1,10 +1,11 @@
 <template>
   <b-modal
-    v-model="showModal"
+    v-model="canShowModal"
     hide-footer
     id="product-details"
     size="xl"
     title="Product Details"
+    @close="closeModal"
   >
     <b-container>
       <b-row>
@@ -41,7 +42,7 @@
           </div>
           <hr class="h-divider" />
           <div class="mt-3">
-            <ProductComments />
+            <ProductComments :idproduct="product.id" />
           </div>
         </b-col>
       </b-row>
@@ -89,11 +90,21 @@ export default {
           img: require("@/assets/img/payment/headset3.jpg"),
         },
       ],
+      canShowModal: false,
     };
   },
   methods: {
     formatMoney(money) {
       return this.formatObject.format(money);
+    },
+    closeModal(){
+      console.log("close modal");
+      this.$emit('closemodal')
+    }
+  },
+  watch: {
+    showModal(newValue) {
+      this.canShowModal = newValue;
     },
   },
 };

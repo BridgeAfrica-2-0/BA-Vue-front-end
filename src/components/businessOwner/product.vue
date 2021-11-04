@@ -136,7 +136,11 @@
       </b-form>
     </b-modal>
     <!-- PRODUCT DETAILS MODAL -->
-    <ProductDetails :showModal="viewProduct" :product="product" />
+    <ProductDetails
+      @closemodal="closeDetailsProduct"
+      :showModal="viewProduct"
+      :product="product"
+    />
     <!-- <b-modal
       v-model="viewProduct"
       hide-footer
@@ -415,6 +419,9 @@ export default {
      */
     productDetails() {
       this.viewProduct = true;
+    },
+    closeDetailsProduct() {
+      this.viewProduct = false;
     },
   },
 };

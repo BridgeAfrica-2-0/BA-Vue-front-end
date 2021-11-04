@@ -42,6 +42,12 @@ export default {
   components: {
     Comments,
   },
+  props: {
+    idproduct: {
+      type: Number,
+      required:true
+    }
+  }, 
   data() {
     return {
       likes: 15,
@@ -74,6 +80,7 @@ export default {
           text: "lorem ipsum dolor again",
         },
       ],
+      current_comment_page: 1
     };
   },
   methods: {
@@ -87,7 +94,7 @@ export default {
     },
   },
   beforeMount() {
-    this.$store.dispatch("productComments/getComments", {id:1, page:1});
+    this.$store.dispatch("productComments/getComments", {id:this.idproduct, page:this.current_comment_page});
   },
 };
 </script>

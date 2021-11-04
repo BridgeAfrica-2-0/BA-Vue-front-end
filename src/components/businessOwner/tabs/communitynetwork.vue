@@ -89,6 +89,7 @@ export default {
    data() {
     return {
       page: 1,
+       biz_id:null,
       infiniteId: +new Date(),
       options: {
         rewind: true,
@@ -103,11 +104,11 @@ export default {
   },
   computed: {
    
-        network(){
+        network(){   
 
       if(this.type=="Follower"){ 
 
-      return  this.$store.state.profile.NcommunityFollower.network_followers;  
+      return  this.$store.state.businessOwner.NcommunityFollower.network_followers;    
 
        }else{
 
@@ -116,6 +117,11 @@ export default {
    }
    
   },
+
+
+   mounted(){
+    this.biz_id = this.$route.params.id;
+ },
 
 
   methods:{
@@ -153,9 +159,9 @@ export default {
       let url = null;
 
          if(this.type=="Follower"){  
-          url="profile/network/follower/"
+         url = "business/community/network-follower/"+this.biz_id+"/";
          }else{
-          url="profile/network/following/";
+          url = "business/community/network-following/"+this.biz_id+"/";
          }
          
       console.log(url + this.page+"?keyword="+this.searchh);

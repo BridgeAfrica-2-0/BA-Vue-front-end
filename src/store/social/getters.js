@@ -14,9 +14,4 @@ export const getters = {
   [TYPES.INIT](state) {
     return state.isLoading
   }, // [TYPES.INIT]
-
-  [TYPES.AUTH](state) {
-    return state.auth
-  }, // [TYPES.AUTH]
-
 }

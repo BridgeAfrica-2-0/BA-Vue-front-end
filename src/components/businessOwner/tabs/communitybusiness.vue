@@ -118,6 +118,7 @@ export default {
   
    data() {
     return {
+      biz_id:null,
       page: 1,
       infiniteId: +new Date(),
       options: {
@@ -138,14 +139,19 @@ export default {
 
       if(this.type=="Follower"){ 
 
-      return  this.$store.state.profile.BcommunityFollower.business_followers;  
+     return  this.$store.state.businessOwner.BcommunityFollower.business_followers; 
 
        }else{
 
-         return  this.$store.state.profile.BcommunityFollowing.business_following; 
+          return  this.$store.state.businessOwner.BcommunityFollowing.business_following; 
        }
    }
 
+  },
+
+   mounted(){
+
+    this.biz_id = this.$route.params.id; 
   },
    
   methods: {
@@ -167,12 +173,12 @@ export default {
        
          if(this.type=="Follower"){ 
          
-        this.$store.commit("profile/setBcommunityFollower",{ "business_followers": [ ], "total_business_follower": 0 }); 
+        this.$store.commit("businessOwner/setBcommunityFollower",{ "business_followers": [ ], "total_business_follower": 0 }); 
 
        }else{
        
         
-        this.$store.commit("profile/setBcommunityFollowing",{ "business_following": [ ], "total_business_following": 0 }); 
+        this.$store.commit("businessOwner/setBcommunityFollowing",{ "business_following": [ ], "total_business_following": 0 }); 
        }
 
       this.page = 1;
@@ -195,9 +201,9 @@ export default {
       let url = null;
 
          if(this.type=="Follower"){  
-          url="profile/business/follower/"
+         url = "business/community/business-follower/"+this.biz_id+"/";
          }else{
-          url="profile/business/following/";
+           url = "business/community/business-following/"+this.biz_id+"/";
          }
       axios
         .get(url + this.page+"?keyword="+this.searchh )

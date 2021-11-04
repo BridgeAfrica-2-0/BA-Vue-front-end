@@ -1,3 +1,4 @@
+
 import Vue from 'vue';
 import Vuex from 'vuex';
 import auth from './auth';
@@ -36,17 +37,17 @@ export default new Vuex.Store({
     hotbusiness,
     NetworkSettings,
     profile,
-    networkProfile,
     follower,
     search,
     UserProfileOwner,
     checkout,
-    networkProfileMembers,
-
     social,
-    allSearch,
     marketSearch,
     networkSearch,
+    social,
+    networkProfileMembers,
+    allSearch,
+    networkProfile,
     businessFollowers,
   },
 });

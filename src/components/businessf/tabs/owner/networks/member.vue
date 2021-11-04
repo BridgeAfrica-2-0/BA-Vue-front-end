@@ -12,7 +12,7 @@
             type="text"
             class="form-control"
             v-model="searchTitle"
-            @keyup="search" 
+            @keyup="search"
           ></b-form-input>
         </b-input-group>
       </b-col>
@@ -20,9 +20,7 @@
 
     <b-row class="mt-4" v-if="admins.length != 0">
       <b-col cols="12">
-        <h6 class="font-weight-bolder">
-          Network Admins ({{nFormatter(admins.length)}})
-        </h6>
+        <h6 class="font-weight-bolder">Network Admins ({{ nFormatter(admins.length) }})</h6>
         <hr width="100%" />
         <b-skeleton-wrapper :loading="loading">
           <template #loading>
@@ -44,19 +42,13 @@
                     size="3.5rem"
                   ></b-avatar>
                   <h5 class="m-0 bold username d-inline-block ml-2">
-                    {{admin.fullname}}
+                    {{ admin.fullname }}
                   </h5>
                 </span>
                 <span class="float-right mt-1">
-                  <b-dropdown
-                    size="lg"
-                    variant="link"
-                    toggle-class="text-decoration-none"
-                    no-caret
-                  >
+                  <b-dropdown size="lg" variant="link" toggle-class="text-decoration-none" no-caret>
                     <template #button-content>
-                      <b-icon-three-dots-vertical></b-icon-three-dots-vertical
-                      ><span class="sr-only">Settings</span>
+                      <b-icon-three-dots-vertical></b-icon-three-dots-vertical><span class="sr-only">Settings</span>
                     </template>
                     <b-dropdown-item href="#" @click="removeAsAdmin(admin.user_id)">
                       <b-icon-trash-fill></b-icon-trash-fill> Remove as Admin
@@ -75,10 +67,8 @@
     </b-row>
 
     <b-row class="mt-4">
-      <b-col cols="12" >
-        <h6 class="font-weight-bolder">
-          Bussiness ({{nFormatter(business.length)}})
-        </h6>
+      <b-col cols="12">
+        <h6 class="font-weight-bolder">Bussiness ({{ nFormatter(business.length) }})</h6>
         <hr width="100%" />
         <b-skeleton-wrapper :loading="loading">
           <template #loading>
@@ -101,19 +91,13 @@
                     size="3.5rem"
                   ></b-avatar>
                   <h5 class="m-0  username d-inline-block ml-2">
-                    {{busines.name}}
+                    {{ busines.name }}
                   </h5>
                 </span>
                 <span class="float-right mt-1">
-                  <b-dropdown
-                    size="lg"
-                    variant="link"
-                    toggle-class="text-decoration-none"
-                    no-caret
-                  >
+                  <b-dropdown size="lg" variant="link" toggle-class="text-decoration-none" no-caret>
                     <template #button-content>
-                      <b-icon-three-dots-vertical></b-icon-three-dots-vertical
-                      ><span class="sr-only">Settings</span>
+                      <b-icon-three-dots-vertical></b-icon-three-dots-vertical><span class="sr-only">Settings</span>
                     </template>
                     <b-dropdown-item href="#" @click="removeFromNetworks(busines.business_id)">
                       <b-icon-trash-fill></b-icon-trash-fill> Remove From Networks
@@ -128,11 +112,9 @@
       </b-col>
     </b-row>
 
-    <b-row class="mt-4" >
+    <b-row class="mt-4">
       <b-col cols="12">
-        <h6 class="font-weight-bolder">
-          All Members ({{nFormatter(members.length)}})
-        </h6>
+        <h6 class="font-weight-bolder">All Members ({{ nFormatter(members.length) }})</h6>
         <hr width="100%" />
         <b-skeleton-wrapper :loading="loading">
           <template #loading>
@@ -142,7 +124,7 @@
               <b-skeleton width="70%"></b-skeleton>
             </b-card>
           </template>
-          <div v-for="member in members" :key="member.id" >
+          <div v-for="member in members" :key="member.id">
             <p class="">
               <span class="">
                 <b-avatar
@@ -153,19 +135,13 @@
                   size="3.5rem"
                 ></b-avatar>
                 <h5 class="m-0 username d-inline-block ml-2">
-                  {{member.fullname}}
+                  {{ member.fullname }}
                 </h5>
               </span>
               <span class="float-right mt-1">
-                <b-dropdown
-                  size="lg"
-                  variant="link"
-                  toggle-class="text-decoration-none"
-                  no-caret
-                >
+                <b-dropdown size="lg" variant="link" toggle-class="text-decoration-none" no-caret>
                   <template #button-content>
-                    <b-icon-three-dots-vertical></b-icon-three-dots-vertical
-                    ><span class="sr-only">Settings</span>
+                    <b-icon-three-dots-vertical></b-icon-three-dots-vertical><span class="sr-only">Settings</span>
                   </template>
                   <b-dropdown-item href="#" @click="makeAdmin(member.user_id)">
                     <b-icon-person-plus-fill></b-icon-person-plus-fill> Make Admin
@@ -188,23 +164,22 @@
     </b-row>
 
     <FlashMessage />
-
   </div>
 </template>
 
 <script>
 export default {
-  name: "member",
+  name: 'member',
   data() {
     return {
-      url:null,
+      url: null,
       perPage: null,
       page: 0,
       currentPage: null,
-      searchTitle: "",
+      searchTitle: '',
 
       currentIndex: -1,
-      loading: false
+      loading: false,
     };
   },
   computed: {
@@ -219,15 +194,14 @@ export default {
     },
     business() {
       return this.$store.state.networkProfileMembers.business;
-    }
+    },
   },
-  mounted(){
-    this.url = this.$route.params.id
-    this.getAdmins()
-    this.getBusiness()
+  mounted() {
+    this.url = this.$route.params.id;
+    this.getAdmins();
+    this.getBusiness();
   },
-  methods:{
-
+  methods: {
     nFormatter(num) {
       if (num >= 1000000000) {
         return (num / 1000000000).toFixed(1).replace(/\.0$/, '') + 'G';
@@ -242,7 +216,7 @@ export default {
     },
 
     getRequestDatas(searchTitle) {
-      let data = "";
+      let data = '';
 
       if (searchTitle) {
         data = searchTitle;
@@ -252,44 +226,43 @@ export default {
     },
 
     infiniteHandler($state) {
-      console.log("loop");
+      console.log('loop');
       const data = this.getRequestDatas(this.searchTitle);
-      console.log('keyword: '+data);
+      console.log('keyword: ' + data);
       let formData = new FormData();
       formData.append('keyword', data);
       this.$store
-        .dispatch("networkProfileMembers/getMembers", {
-          path: this.url+"/members/list/"+this.page,
-          formData: formData
+        .dispatch('networkProfileMembers/getMembers', {
+          path: this.url + '/members/list/' + this.page,
+          formData: formData,
         })
         .then(({ data }) => {
           console.log(data);
-       console.log(this.page);
-        if (data.data.length) {
-        this.page += 1;
-        console.log(this.page);
-        console.log(...data.data);
-        this.members.push(...data.data);
-          $state.loaded();
+          console.log(this.page);
+          if (data.data.length) {
+            this.page += 1;
+            console.log(this.page);
+            console.log(...data.data);
+            this.members.push(...data.data);
+            $state.loaded();
           } else {
-          $state.complete();
-        }
-      }) .catch((err) => {
+            $state.complete();
+          }
+        })
+        .catch(err => {
           console.log({ err: err });
-      })
+        });
     },
-
-
 
     getAdmins() {
       this.loading = true;
       const data = this.getRequestDatas(this.searchTitle);
-      console.log('keyword: '+data);
+      console.log('keyword: ' + data);
       this.$store
-        .dispatch("networkProfileMembers/getadmins", {
-          'path':this.url+"/members/admin",
-          'keyword':data
-          })
+        .dispatch('networkProfileMembers/getadmins', {
+          path: this.url + '/members/admin',
+          keyword: data,
+        })
         .then(() => {
           console.log('Admins Available');
           this.loading = false;
@@ -299,15 +272,15 @@ export default {
           this.loading = false;
         });
     },
- 
+
     getBusiness() {
       this.loading = true;
       const data = this.getRequestDatas(this.searchTitle);
       this.$store
-        .dispatch("networkProfileMembers/getbusiness", {
-          'path':this.url+"/members/business",
-          'keyword':data
-          })
+        .dispatch('networkProfileMembers/getbusiness', {
+          path: this.url + '/members/business',
+          keyword: data,
+        })
         .then(() => {
           console.log('Business Available');
           this.loading = false;
@@ -321,99 +294,98 @@ export default {
       // this.loading = true;
       this.loading = true;
       this.page -= 1;
-      console.log("searching...");
+      console.log('searching...');
       console.log(this.searchTitle);
       this.infiniteHandler();
       this.getAdmins();
       this.getBusiness();
     },
 
-    makeAdmin: function(user_id){
+    makeAdmin: function(user_id) {
       this.loading = true;
       this.$store
-        .dispatch("networkProfileMembers/makeAdmin", {
-          path: this.url+"/make/admin/"+user_id
+        .dispatch('networkProfileMembers/makeAdmin', {
+          path: this.url + '/make/admin/' + user_id,
         })
         .then(({ data }) => {
           console.log(data);
-        console.log('ohh yeah');
-        this.searchTitle = "";
-        this.getMembers();
-        this.getAdmins();
-        this.getBusiness();
-        this.loading = false;
-        this.flashMessage.show({
-          status: "success",
-          message: "The Member Is Now Admin"
+          console.log('ohh yeah');
+          this.searchTitle = '';
+          this.getMembers();
+          this.getAdmins();
+          this.getBusiness();
+          this.loading = false;
+          this.flashMessage.show({
+            status: 'success',
+            message: 'The Member Is Now Admin',
+          });
+        })
+        .catch(err => {
+          console.log({ err: err });
+          this.loading = false;
+          this.flashMessage.show({
+            status: 'error',
+            message: 'Unable To Set Member As Admin',
+          });
         });
-      })
-      .catch(err => {
-        console.log({ err: err });
-        this.loading = false;
-        this.flashMessage.show({
-          status: "error",
-          message: "Unable To Set Member As Admin"
-        });
-      });
     },
-    removeAsAdmin: function(user_id){
+    removeAsAdmin: function(user_id) {
       this.loading = true;
       this.$store
-        .dispatch("networkProfileMembers/removeAsAdmin", {
-          path: this.url+"/remove/admin/"+user_id
+        .dispatch('networkProfileMembers/removeAsAdmin', {
+          path: this.url + '/remove/admin/' + user_id,
         })
         .then(({ data }) => {
           console.log(data);
-        console.log('ohh yeah');
-        this.searchTitle = "";
-        this.getMembers();
-        this.getAdmins();
-        this.getBusiness();
-        this.loading = false;
-        this.flashMessage.show({
-          status: "success",
-          message: "Member Successfully Removerd As Admin"
+          console.log('ohh yeah');
+          this.searchTitle = '';
+          this.getMembers();
+          this.getAdmins();
+          this.getBusiness();
+          this.loading = false;
+          this.flashMessage.show({
+            status: 'success',
+            message: 'Member Successfully Removerd As Admin',
+          });
+        })
+        .catch(err => {
+          console.log({ err: err });
+          this.loading = false;
+          this.flashMessage.show({
+            status: 'error',
+            message: 'Unable To Removerd Member As Admin',
+          });
         });
-      })
-      .catch(err => {
-        console.log({ err: err });
-        this.loading = false;
-        this.flashMessage.show({
-          status: "error",
-          message: "Unable To Removerd Member As Admin"
-        });
-      });
-		},
-    removeFromNetworks: function(user_id){
+    },
+    removeFromNetworks: function(user_id) {
       this.loading = true;
       this.$store
-        .dispatch("networkProfileMembers/removeAsAdmin", {
-          path: this.url+"/member/remove/"+user_id
+        .dispatch('networkProfileMembers/removeAsAdmin', {
+          path: this.url + '/member/remove/' + user_id,
         })
         .then(({ data }) => {
           console.log(data);
-        console.log('ohh yeah');
-        this.searchTitle = "";
-        this.getMembers();
-        this.getAdmins();
-        this.getBusiness();
-        this.loading = false;
-        this.flashMessage.show({
-          status: "success",
-          message: "Member Successfully Removerd From Network"
+          console.log('ohh yeah');
+          this.searchTitle = '';
+          this.getMembers();
+          this.getAdmins();
+          this.getBusiness();
+          this.loading = false;
+          this.flashMessage.show({
+            status: 'success',
+            message: 'Member Successfully Removerd From Network',
+          });
+        })
+        .catch(err => {
+          console.log({ err: err });
+          this.loading = false;
+          this.flashMessage.show({
+            status: 'error',
+            message: 'Unable to Removerd Member From Network',
+          });
         });
-      })
-      .catch(err => {
-        console.log({ err: err });
-        this.loading = false;
-        this.flashMessage.show({
-          status: "error",
-          message: "Unable to Removerd Member From Network"
-        });
-      });
-		},
-
-  }
+    },
+  },
 };
 </script>
 
@@ -421,10 +393,9 @@ export default {
 hr {
   border: solid 1px dimgray;
 }
-.scroll{
+.scroll {
   max-height: 200px;
   overflow-y: scroll;
   scrollbar-width: thin;
 }
-
 </style>

@@ -12,14 +12,10 @@
             class="pull-left"
             no-caret
           >
-            <template #button-content>
-              <b-icon-filter></b-icon-filter><span class="sr-only">Search</span>
-            </template>
+            <template #button-content> <b-icon-filter></b-icon-filter><span class="sr-only">Search</span> </template>
             <p class="font-weight-bolder px-3 m-0">Feedbacks Type</p>
             <b-dropdown-item href="#">Any</b-dropdown-item>
-            <b-dropdown-item href="#"
-              >suggestion for improvement</b-dropdown-item
-            >
+            <b-dropdown-item href="#">suggestion for improvement</b-dropdown-item>
             <b-dropdown-item href="#">Progress to your program</b-dropdown-item>
             <b-dropdown-item href="#">New Idea for PEA-JEUNES</b-dropdown-item>
           </b-dropdown>
@@ -52,17 +48,14 @@
               <b-row>
                 <b-col cols="12" class="mt-2">
                   <p class="text-justify feedback-sent">
-                    Lorem Ipsum is simply dummy text of the printing and
-                    typesetting industry. Lorem Ipsum has been the industry's
-                    standard dummy text ever since the 1500s, Lorem Ipsum is
-                    simply dummy text of the printing and typesetting industry.
-                    Lorem Ipsum has been the industry's standard dummy text ever
+                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+                    industry's standard dummy text ever since the 1500s, Lorem Ipsum is simply dummy text of the
+                    printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever
                     since the 1500s,
                     <br />
                     <br />
-                    Lorem Ipsum is simply dummy text of the printing and
-                    typesetting industry. Lorem Ipsum has been the industry's
-                    standard dummy text ever since the 1500s,
+                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+                    industry's standard dummy text ever since the 1500s,
                   </p>
                 </b-col>
               </b-row>
@@ -76,18 +69,18 @@
 
 <script>
 export default {
-  name: "feedbackNetwork",
+  name: 'feedbackNetwork',
   data() {
     return {
       selected: 1,
-      text: "",
+      text: '',
       options: [
-        { value: "1", text: "suggestion for improvement" },
-        { value: "2", text: "Progress to your program" },
-        { value: "3", text: "New Idea for PEA-JEUNES" }
-      ]
+        { value: '1', text: 'suggestion for improvement' },
+        { value: '2', text: 'Progress to your program' },
+        { value: '3', text: 'New Idea for PEA-JEUNES' },
+      ],
     };
-  }
+  },
 };
 </script>
 

@@ -21,71 +21,32 @@
             <br />
             20k Community <br />
 
-            <span class="location">
-              <b-icon-geo-alt class="ico"></b-icon-geo-alt> Douala cameroon
-            </span>
+            <span class="location"> <b-icon-geo-alt class="ico"></b-icon-geo-alt> Douala cameroon </span>
             <br />
 
-            super best car seller in the world adipisicing elit. lorem epsep
-            this is <b-link>Read More</b-link>
+            super best car seller in the world adipisicing elit. lorem epsep this is <b-link>Read More</b-link>
           </p>
         </b-col>
 
         <b-col lg="12" xl="4" md="4" cols="12" sm="4">
           <div class="s-button">
             <b-row>
-              <b-col
-                md="12"
-                lg="4"
-                xl="12"
-                sm="12"
-                cols="4"
-                class="mt-2 text-center"
-              >
-                <b-button
-                  block
-                  size="sm"
-                  class="b-background shadow "
-                  variant="primary"
-                >
+              <b-col md="12" lg="4" xl="12" sm="12" cols="4" class="mt-2 text-center">
+                <b-button block size="sm" class="b-background shadow " variant="primary">
                   <i class="fas fa-user-plus  fa-lg btn-icon "></i>
                   <span class="btn-com">Community</span>
                 </b-button>
               </b-col>
 
-              <b-col
-                md="12"
-                lg="4"
-                xl="12"
-                sm="12"
-                cols="4"
-                class="mt-2 text-center"
-              >
-                <b-button
-                  block
-                  size="sm"
-                  class="b-background shadow "
-                  variant="primary"
-                >
+              <b-col md="12" lg="4" xl="12" sm="12" cols="4" class="mt-2 text-center">
+                <b-button block size="sm" class="b-background shadow " variant="primary">
                   <i class="fas fa-envelope   fa-lg btn-icon "></i>
                   <span class="btn-text">Message</span>
                 </b-button>
               </b-col>
 
-              <b-col
-                md="12"
-                lg="4"
-                xl="12"
-                sm="12"
-                cols="4"
-                class="mt-2 text-center"
-              >
-                <b-button
-                  block
-                  size="sm"
-                  class="b-background shadow "
-                  variant="primary"
-                >
+              <b-col md="12" lg="4" xl="12" sm="12" cols="4" class="mt-2 text-center">
+                <b-button block size="sm" class="b-background shadow " variant="primary">
                   <i class="fas fa-map-marked-alt  fa-lg btn-icon "></i>
                   <span class="btn-text">Direction</span>
                 </b-button>
@@ -114,72 +75,32 @@
             <br />
             20k Community <br />
 
-            <span class="location">
-              <b-icon-geo-alt class="ico"></b-icon-geo-alt> Douala cameroon
-            </span>
+            <span class="location"> <b-icon-geo-alt class="ico"></b-icon-geo-alt> Douala cameroon </span>
             <br />
             {{ follower.about_business.substring(0, 30) }}
-            <b-link v-if="follower.about_business.length > 30"
-              >Read More</b-link
-            >
+            <b-link v-if="follower.about_business.length > 30">Read More</b-link>
           </p>
         </b-col>
 
         <b-col lg="12" xl="4" md="4" cols="12" sm="4">
           <div class="s-button">
             <b-row>
-              <b-col
-                md="12"
-                lg="4"
-                xl="12"
-                sm="12"
-                cols="4"
-                class="mt-2 text-center"
-              >
-                <b-button
-                  block
-                  size="sm"
-                  class="b-background shadow "
-                  variant="primary"
-                >
+              <b-col md="12" lg="4" xl="12" sm="12" cols="4" class="mt-2 text-center">
+                <b-button block size="sm" class="b-background shadow " variant="primary">
                   <i class="fas fa-user-plus  fa-lg btn-icon "></i>
                   <span class="btn-com">Community</span>
                 </b-button>
               </b-col>
 
-              <b-col
-                md="12"
-                lg="4"
-                xl="12"
-                sm="12"
-                cols="4"
-                class="mt-2 text-center"
-              >
-                <b-button
-                  block
-                  size="sm"
-                  class="b-background shadow "
-                  variant="primary"
-                >
+              <b-col md="12" lg="4" xl="12" sm="12" cols="4" class="mt-2 text-center">
+                <b-button block size="sm" class="b-background shadow " variant="primary">
                   <i class="fas fa-envelope   fa-lg btn-icon "></i>
                   <span class="btn-text">Message</span>
                 </b-button>
               </b-col>
 
-              <b-col
-                md="12"
-                lg="4"
-                xl="12"
-                sm="12"
-                cols="4"
-                class="mt-2 text-center"
-              >
-                <b-button
-                  block
-                  size="sm"
-                  class="b-background shadow "
-                  variant="primary"
-                >
+              <b-col md="12" lg="4" xl="12" sm="12" cols="4" class="mt-2 text-center">
+                <b-button block size="sm" class="b-background shadow " variant="primary">
                   <i class="fas fa-map-marked-alt  fa-lg btn-icon "></i>
                   <span class="btn-text">Direction</span>
                 </b-button>
@@ -194,7 +115,7 @@
 
 <script>
 export default {
-  props: ["follower"],
+  props: ['follower'],
 
   data() {
     return {
@@ -204,7 +125,7 @@ export default {
         perPage: 1,
         pagination: false,
 
-        type: "loop",
+        type: 'loop',
         perMove: 1,
       },
     };
@@ -279,13 +200,13 @@ export default {
     color: black;
 
     line-height: 35px;
-    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   }
 
   .textt {
     color: #000;
 
-    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
     font-weight: normal;
     font-size: 14px;
     line-height: 30px;
@@ -332,13 +253,13 @@ export default {
     color: black;
 
     line-height: 35px;
-    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   }
 
   .textt {
     color: #000;
 
-    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
     font-weight: normal;
     font-size: 14px;
     line-height: 30px;
@@ -464,7 +385,7 @@ export default {
 @media only screen and (min-width: 992px) and (max-width: 1265px) {
   .textt {
     color: #000;
-    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
     font-weight: normal;
     font-size: 14px;
     line-height: 30px;

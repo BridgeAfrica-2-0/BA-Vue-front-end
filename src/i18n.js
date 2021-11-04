@@ -1,11 +1,10 @@
-import Vue from "vue";
-import VueI18n from "vue-i18n";
+import Vue from 'vue';
+import VueI18n from 'vue-i18n';
 
+import { languages } from './locales/index.js';
+import { defaultLocale } from './locales/index.js';
 
-import { languages } from './locales/index.js'
-import { defaultLocale } from './locales/index.js'
-
-const messages = Object.assign(languages)
+const messages = Object.assign(languages);
 
 Vue.use(VueI18n);
 
@@ -24,11 +23,11 @@ Vue.use(VueI18n);
 //     }
 //   });
 //   return messages;
-// }    
+// }
 
 export default new VueI18n({
-  locale: process.env.VUE_APP_I18N_LOCALE || "en",
-  fallbackLocale: process.env.VUE_APP_I18N_FALLBACK_LOCALE || "en",
- // messages: loadLocaleMessages()
-  messages
+  locale: process.env.VUE_APP_I18N_LOCALE || 'en',
+  fallbackLocale: process.env.VUE_APP_I18N_FALLBACK_LOCALE || 'en',
+  // messages: loadLocaleMessages()
+  messages,
 });

@@ -6,12 +6,7 @@
       <b-row>
         <b-col cols="12" md="12" lg="9" xl="9">
           <div>
-            <b-tabs
-              pills
-              :vertical="vertical"
-              class="itzlala"
-              nav-wrapper-class="w-15"
-            >
+            <b-tabs pills :vertical="vertical" class="itzlala" nav-wrapper-class="w-15">
               <b-tab title="General">
                 <b-card-text class="mt-3">
                   <b-row>
@@ -126,22 +121,13 @@
                   <div class="container">
                     <span class="text text-left">
                       <br />
-                      Make more money by unlocking your marketplace features
-                      where you can sell products and services directly to
-                      customer and recieve instant payments
+                      Make more money by unlocking your marketplace features where you can sell products and services
+                      directly to customer and recieve instant payments
                     </span>
                   </div>
-                  <img
-                    src="@/assets/img/buynow.png"
-                    class="buynow"
-                    alt="buy now"
-                  />
+                  <img src="@/assets/img/buynow.png" class="buynow" alt="buy now" />
                   <div class="container text-center">
-                    <img
-                      src="@/assets/img/fruits.jpg"
-                      class="img-fluid banner"
-                      alt="Kitten"
-                    />
+                    <img src="@/assets/img/fruits.jpg" class="img-fluid banner" alt="Kitten" />
 
                     <b-button variant="primary" class="text-center mt-3">
                       Upgrade Now
@@ -186,11 +172,7 @@
                         label-class=" text"
                         class="mb-0"
                       >
-                        <b-form-input
-                          id="bname"
-                          placeholder=""
-                          required
-                        ></b-form-input>
+                        <b-form-input id="bname" placeholder="" required></b-form-input>
                       </b-form-group>
                     </b-container>
                   </div>
@@ -206,11 +188,7 @@
                         label-class=" text"
                         class="mb-0"
                       >
-                        <b-form-input
-                          id="bname"
-                          placeholder=""
-                          required
-                        ></b-form-input>
+                        <b-form-input id="bname" placeholder="" required></b-form-input>
                       </b-form-group>
                     </b-container>
                   </div>
@@ -226,11 +204,7 @@
                         label-class="text"
                         class="mb-0"
                       >
-                        <b-form-input
-                          id="bname"
-                          placeholder=""
-                          required
-                        ></b-form-input>
+                        <b-form-input id="bname" placeholder="" required></b-form-input>
                       </b-form-group>
                     </b-container>
                   </div>
@@ -249,8 +223,8 @@
 </template>
 
 <script>
-import Navbar from "@/components/navbar";
-import Footer from "@/components/footer";
+import Navbar from '@/components/navbar';
+import Footer from '@/components/footer';
 
 export default {
   components: {
@@ -277,12 +251,12 @@ export default {
       that.size = window.innerWidth;
       console.log(that);
 
-      console.log("lolo");
+      console.log('lolo');
     };
 
-    if (that.size == "") {
+    if (that.size == '') {
       that.size = window.innerWidth;
-      console.log("lolo");
+      console.log('lolo');
     }
   },
 };

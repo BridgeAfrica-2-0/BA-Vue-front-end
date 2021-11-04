@@ -6,18 +6,11 @@
       ><a href="#" class="alert-link"> No Network available! </a>
     </b-alert>
 
-    <div
-      class="people-style shadow"
-      v-for="(network, index) in networks.data"
-      :key="index"
-    >
+    <div class="people-style shadow" v-for="(network, index) in networks.data" :key="index">
       <b-row @mouseover="showAction = index" @mouseleave="showAction = null">
         <b-col md="3" xl="3" lg="3" cols="5" sm="3">
           <div class="center-img">
-            <img
-              src="https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg"
-              class="r-image"
-            />
+            <img src="https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg" class="r-image" />
           </div>
         </b-col>
         <b-col md="7" cols="7" lg="5" sm="5">
@@ -39,43 +32,25 @@
           </p>
         </b-col>
 
-        <b-col
-          lg="4"
-          md="12"
-          xl="4"
-          cols="12"
-          sm="4"
-          v-if="index == showAction"
-        >
+        <b-col lg="4" md="12" xl="4" cols="12" sm="4" v-if="index == showAction">
           <b>{{ index }}</b>
           <div class="s-button">
             <b-row>
               <b-col md="4" lg="12" xl="12" sm="12" cols="4" class="mt-2">
-                <b-button
-                  block
-                  size="sm"
-                  class="b-background shadow"
-                  variant="primary"
-                >
+                <b-button block size="sm" class="b-background shadow" variant="primary">
                   <i class="fas fa-user-plus fa-lg btn-icon"></i>
                   <span class="btn-com" v-b-modal.modal-sm>Community</span>
                 </b-button>
               </b-col>
 
               <b-col md="4" lg="12" xl="12" sm="12" cols="4" class="mt-2">
-                <b-button
-                  block
-                  size="sm"
-                  class="b-background shadow"
-                  variant="primary"
-                >
+                <b-button block size="sm" class="b-background shadow" variant="primary">
                   <i class="fas fa-envelope fa-lg btn-icon"></i>
                   <span class="btn-text">Message</span>
                 </b-button>
               </b-col>
 
-              <b-col md="4" lg="12" xl="12" sm="12" cols="4" class="mt-2">
-              </b-col>
+              <b-col md="4" lg="12" xl="12" sm="12" cols="4" class="mt-2"> </b-col>
             </b-row>
           </div>
         </b-col>
@@ -104,7 +79,7 @@
 
 <script>
 export default {
-  props: ["title", "image"],
+  props: ['title', 'image'],
   data() {
     return {
       showAction: null,
@@ -118,22 +93,21 @@ export default {
   },
   computed: {
     networks() {
-      return this.$store.getters["allSearch/getNetworks"];
+      return this.$store.getters['allSearch/getNetworks'];
     },
     loader() {
-      return this.$store.getters["allSearch/getLoader"];
+      return this.$store.getters['allSearch/getLoader'];
     },
   },
 
   methods: {
     changePage(value) {
-      this.$store.commit("networkSearch/setNetworks", { data: [] });
-      this.$store.commit("networkSearch/setLoader", true);
+      this.$store.commit('networkSearch/setNetworks', { data: [] });
+      this.$store.commit('networkSearch/setLoader', true);
       this.currentPage = value;
-      console.log("[debug] page before:", value);
+      console.log('[debug] page before:', value);
       // this.networkSearch();
     },
-
   },
 };
 </script>
@@ -205,13 +179,13 @@ export default {
     color: black;
 
     line-height: 35px;
-    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   }
 
   .textt {
     color: #000;
 
-    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
     font-weight: normal;
     font-size: 12px;
     line-height: 30px;
@@ -258,13 +232,13 @@ export default {
     color: black;
 
     line-height: 35px;
-    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   }
 
   .textt {
     color: #000;
 
-    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
     font-weight: normal;
     font-size: 14px;
     line-height: 30px;

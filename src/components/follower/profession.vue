@@ -1,12 +1,10 @@
 <template>
   <div v-if="profession">
-    <b class="profession">Profession</b> 
+    <b class="profession">Profession</b>
     <hr />
-      <div class="datails">
-       
-            <span class="mr-auto"> {{profession}} </span>
-         
-      </div> 
+    <div class="datails">
+      <span class="mr-auto"> {{ profession }} </span>
+    </div>
   </div>
 </template>
 
@@ -16,20 +14,18 @@ export default {
     return {
       selected: null,
       options: [
-        { value: null, text: "Select" },
-        { value: "private", text: "Private" },
-        { value: "public", text: "Public" }
-      ]
+        { value: null, text: 'Select' },
+        { value: 'private', text: 'Private' },
+        { value: 'public', text: 'Public' },
+      ],
     };
   },
 
-  computed:{
-
-    profession(){
+  computed: {
+    profession() {
       return this.$store.state.follower.profileIntro.user.profession;
-    }
-  }
-
+    },
+  },
 };
 </script>
 <style scoped>

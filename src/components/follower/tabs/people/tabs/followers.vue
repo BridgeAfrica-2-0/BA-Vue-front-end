@@ -9,33 +9,30 @@
             v-model="keywords"
           ></b-form-input>
 
-          <b-input-group-prepend is-text  @click="$refs.search.search()">
-            <b-icon-search  class="text-primary border-none"></b-icon-search>
+          <b-input-group-prepend is-text @click="$refs.search.search()">
+            <b-icon-search class="text-primary border-none"></b-icon-search>
           </b-input-group-prepend>
         </b-input-group>
       </b-col>
     </b-row>
     <br />
-        <CommunityMembers  :searchh="keywords" ref="search" type="Follower" />
-    
+    <CommunityMembers :searchh="keywords" ref="search" type="Follower" />
   </div>
 </template>
 
 <script>
-import CommunityMembers from "../../communityMember";
+import CommunityMembers from '../../communityMember';
 export default {
-   data() {
+  data() {
     return {
-        keywords:"",
-    }
-    },
+      keywords: '',
+    };
+  },
   components: {
-    CommunityMembers
+    CommunityMembers,
   },
 
-  computed: {
-   
-  },
+  computed: {},
 };
 </script>
 

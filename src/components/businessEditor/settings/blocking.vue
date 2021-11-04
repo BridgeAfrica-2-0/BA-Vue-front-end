@@ -2,9 +2,8 @@
   <b-container>
     <b-container class="bv-example-row">
       <p class="t-left text">
-        Blocked users can no longer see things you post on your business, invite
-        your business to networks, strat a conversation, or follow your
-        business.
+        Blocked users can no longer see things you post on your business, invite your business to networks, strat a
+        conversation, or follow your business.
       </p>
     </b-container>
 
@@ -15,20 +14,15 @@
           <span class="mr-auto username">J. Circlehead</span>
           <span class=""><b-link href="#">Unblock</b-link></span>
         </b-li>
-       <hr width="100%" />
+        <hr width="100%" />
 
         <b-li class="d-flex align-items-center">
-          <b-avatar
-            variant="primary"
-            text="BV"
-            class="mr-3"
-            size="4em"
-          ></b-avatar>
+          <b-avatar variant="primary" text="BV" class="mr-3" size="4em"></b-avatar>
           <span class="mr-auto username">itz blec blec</span>
           <span class=""><b-link href="#">Unblock</b-link></span>
         </b-li>
 
-         <hr width="100%" />
+        <hr width="100%" />
 
         <b-li class="d-flex align-items-center m-list">
           <b-avatar class="mr-3" size="4em"></b-avatar>
@@ -37,21 +31,12 @@
         </b-li>
         <hr width="100%" />
 
-
         <b-li class="d-flex align-items-center">
-          <b-avatar
-            variant="primary"
-            text="BV"
-            class="mr-3"
-            size="4em"
-          ></b-avatar>
+          <b-avatar variant="primary" text="BV" class="mr-3" size="4em"></b-avatar>
           <span class="mr-auto username">itz blec blec</span>
-          <span class=""><b-link href="#">Unblock</b-link></span> 
-         
+          <span class=""><b-link href="#">Unblock</b-link></span>
         </b-li>
         <hr width="100%" />
-
-
       </b-li-group>
     </b-container>
   </b-container>
@@ -59,7 +44,7 @@
 
 <script>
 export default {
-  name: "blocking"
+  name: 'blocking',
 };
 </script>
 

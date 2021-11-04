@@ -30,8 +30,7 @@
             <strong> Location :</strong> cameroon <br />
             <strong> Keyword :</strong> car,swag <br />
 
-            <strong>About:</strong> super best car seller in the world
-            adipisicing elit. <b-link>Read More</b-link>
+            <strong>About:</strong> super best car seller in the world adipisicing elit. <b-link>Read More</b-link>
           </p>
         </b-col>
       </b-row>

@@ -14,13 +14,13 @@
 </template>
 
 <script>
-import MediaPost from "../mediaPost";
-import Album from "../albums";
+import MediaPost from '../mediaPost';
+import Album from '../albums';
 export default {
   components: {
     MediaPost,
-    Album
-  }
+    Album,
+  },
 };
 </script>
 

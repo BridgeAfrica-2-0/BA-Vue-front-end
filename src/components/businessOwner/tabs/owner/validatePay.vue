@@ -79,8 +79,7 @@
             <span class="text-left">
               <b
                 ><b-form-checkbox class="d-inline-block"
-                  >Automatically renew subscription until i turn it
-                  off</b-form-checkbox
+                  >Automatically renew subscription until i turn it off</b-form-checkbox
                 ></b
               >
             </span>
@@ -100,11 +99,7 @@
         <b-col class="mt-2">
           <p class="m-0 p-0">
             <span class="text-left">
-              <b-icon-info-circle-fill
-                scale="1.3"
-                class="mr-2"
-                variant="primary"
-              ></b-icon-info-circle-fill>
+              <b-icon-info-circle-fill scale="1.3" class="mr-2" variant="primary"></b-icon-info-circle-fill>
               By confirming you agree to Terms & conditions
               <a href="">Read more</a>
             </span>
@@ -117,9 +112,7 @@
     </div>
     <b-row class="mt-4 mb-3">
       <b-col cols="12" class="m-0 pr-3">
-        <b-button variant="outline-dark" class="ml-3 float-right"
-          >Cancel</b-button
-        >
+        <b-button variant="outline-dark" class="ml-3 float-right">Cancel</b-button>
         <b-button variant="primary" class="ml-3 float-right">Confirm</b-button>
       </b-col>
     </b-row>
@@ -128,12 +121,12 @@
 
 <script>
 export default {
-  name: "validatePay",
+  name: 'validatePay',
   data() {
     return {
-      selected: true
+      selected: true,
     };
-  }
+  },
 };
 </script>
 
@@ -144,7 +137,7 @@ export default {
 .row-step {
   height: 1px;
   margin: 1rem 0 0 0;
-  content: "";
+  content: '';
   background-color: rgb(0 0 0);
   width: 100%;
 }

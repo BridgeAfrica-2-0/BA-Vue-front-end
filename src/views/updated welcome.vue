@@ -2,10 +2,7 @@
   <div class="p-0 m-0">
     <div class="col-md-12 ">
       <h2 class="p-3 bg-light shadow-sm mb-1">
-        <fas-icon
-          class="violet float-left mr-1 mt-1"
-          :icon="['fas', 'building']"
-        />Businesss
+        <fas-icon class="violet float-left mr-1 mt-1" :icon="['fas', 'building']" />Businesss
 
         <button
           type="button"
@@ -17,8 +14,8 @@
           Add Business
         </button>
 
-        methods: { showModal() { this.$refs['modal-1'].show() }, hideModal() {
-        this.$refs['modal-1'].hide() } }, mounted() { this.showModal(); },
+        methods: { showModal() { this.$refs['modal-1'].show() }, hideModal() { this.$refs['modal-1'].hide() } },
+        mounted() { this.showModal(); },
 
         <button
           type="button"
@@ -51,32 +48,21 @@
                   <br />
 
                   <p>
-                    Lorem Ipsum is simply dummy text of the printing and
-                    typesetting industry. Lorem Ipsum has been the industry's
-                    standard dummy text ever since the 1500s, when an unknown
-                    printer took a galley of type and scrambled it to make a
-                    type specimen book. It has
+                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+                    industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type
+                    and scrambled it to make a type specimen book. It has
                   </p>
 
                   <h4>Use Bridge Africa As A</h4>
 
                   <b-form-group>
-                    <b-form-radio-group
-                      id="radio-group-1"
-                      :options="options"
-                      name="radio-options"
-                    ></b-form-radio-group>
+                    <b-form-radio-group id="radio-group-1" :options="options" name="radio-options"></b-form-radio-group>
                   </b-form-group>
 
                   <br />
                   <br />
                 </div>
-                <input
-                  type="button"
-                  name="cancel"
-                  class="cancel btn btn-dark-gray"
-                  value="Cancel"
-                />
+                <input type="button" name="cancel" class="cancel btn btn-dark-gray" value="Cancel" />
                 <input
                   type="button"
                   name="next"
@@ -91,24 +77,12 @@
                   <h4>How to use the Search</h4>
 
                   <p>
-                    Lorem Ipsum is simply dummy text of the printing and
-                    typesetting industry. Lorem Ipsum has been the industry's
-                    standard dummy text and scrambled it to make a type specimen
-                    book. It has
+                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+                    industry's standard dummy text and scrambled it to make a type specimen book. It has
                   </p>
                 </div>
-                <input
-                  type="button"
-                  name="cancel"
-                  class="cancel btn btn-dark-gray"
-                  value="Cancel"
-                />
-                <input
-                  type="button"
-                  name="previous"
-                  class="previous ml-3 btn btn-dark"
-                  value="Previous"
-                />
+                <input type="button" name="cancel" class="cancel btn btn-dark-gray" value="Cancel" />
+                <input type="button" name="previous" class="previous ml-3 btn btn-dark" value="Previous" />
                 <input
                   type="button"
                   name="next"
@@ -121,18 +95,8 @@
               <fieldset class="position-relative opacity-100" v-if="welcome3">
                 <div class="form-card"></div>
 
-                <input
-                  type="button"
-                  name="cancel"
-                  class="cancel btn btn-dark-gray"
-                  value="Cancel"
-                />
-                <input
-                  type="button"
-                  name="previous"
-                  class="previous ml-3 btn btn-dark"
-                  value="Previous"
-                />
+                <input type="button" name="cancel" class="cancel btn btn-dark-gray" value="Cancel" />
+                <input type="button" name="previous" class="previous ml-3 btn btn-dark" value="Previous" />
                 <input
                   type="button"
                   name="Save"
@@ -145,8 +109,8 @@
               <fieldset>
                 <div class="form-card">
                   <h4 class="fs-title text-center">
-                    <i aria-hidden="true" class="fa fa-check-circle"></i> Your
-                    business identity is successfully created !
+                    <i aria-hidden="true" class="fa fa-check-circle"></i> Your business identity is successfully created
+                    !
                   </h4>
 
                   <div class="row justify-content-center">
@@ -154,12 +118,7 @@
                       <h5>Business Name Here</h5>
                       <a href="#">http://business.com</a>
                       <p><b>Business Category Name Here</b></p>
-                      <input
-                        type="button"
-                        name="Save"
-                        class="btn savebtnn orange"
-                        value="View Profile"
-                      />
+                      <input type="button" name="Save" class="btn savebtnn orange" value="View Profile" />
                     </div>
                   </div>
 
@@ -168,17 +127,14 @@
                       <div class="col-md-12 float-left border bg-modb p-3">
                         <p class="w-100">
                           <i class="fa fa-info-circle" aria-hidden="true"></i>
-                          Get your personalised website<span
-                            class="pull-right fontis pt-1"
+                          Get your personalised website<span class="pull-right fontis pt-1"
                             >Cureent Plan Basic (Free)</span
                           >
                         </p>
 
                         <p class="w-100 fontis">
-                          Now you can create personalised website for your
-                          business, select from a collection of free and premium
-                          templates, connect your domain, premium support and
-                          much more exciting features.
+                          Now you can create personalised website for your business, select from a collection of free
+                          and premium templates, connect your domain, premium support and much more exciting features.
                         </p>
 
                         <a class="pull-right" href="#">View Plans</a>
@@ -204,11 +160,7 @@
                   <strong>Contact</strong>
                 </li>
 
-                <li
-                  id="location"
-                  class=""
-                  v-bind:class="{ active: fieldset2, active: fieldset3 }"
-                >
+                <li id="location" class="" v-bind:class="{ active: fieldset2, active: fieldset3 }">
                   <strong>Location</strong>
                 </li>
               </ul>
@@ -218,11 +170,7 @@
                   <div class="row">
                     <div class="col-md-6">
                       <div class="image-upload-wrap">
-                        <a
-                          href="#"
-                          data-toggle="modal"
-                          data-target="#createalbumModal"
-                        >
+                        <a href="#" data-toggle="modal" data-target="#createalbumModal">
                           <div class="drag-text">
                             <i class="fa fa-plus" aria-hidden="true"></i>
                             <h3>Add Logo</h3>
@@ -255,9 +203,7 @@
                       <div class="form-group">
                         <label for="alias">Category:</label><br />
                         <select id="category" class="form-control ">
-                          <option value="" selected="" disabled=""
-                            >Select Category</option
-                          >
+                          <option value="" selected="" disabled="">Select Category</option>
                           <option>Category1</option>
                           <option>Category2</option>
                         </select>
@@ -281,9 +227,7 @@
                       <div class="form-group">
                         <label for="alias">Language:</label><br />
                         <select id="category" class="form-control ">
-                          <option value="" selected="" disabled=""
-                            >Select Language</option
-                          >
+                          <option value="" selected="" disabled="">Select Language</option>
                           <option>English</option>
                           <option>Hindi</option>
                         </select>
@@ -293,9 +237,7 @@
                       <div class="form-group">
                         <label for="username">TomeZone:</label><br />
                         <select id="category" class="form-control ">
-                          <option value="" selected="" disabled=""
-                            >Select Timezone</option
-                          >
+                          <option value="" selected="" disabled="">Select Timezone</option>
                           <option>(UTC - 09:00) Alaska</option>
                           <option>(UTC - 09:00) Alaska1</option>
                           <option>(UTC - 09:00) Alaska2</option>
@@ -320,12 +262,7 @@
                     </div>
                   </div>
                 </div>
-                <input
-                  type="button"
-                  name="cancel"
-                  class="cancel btn btn-dark-gray"
-                  value="Cancel"
-                />
+                <input type="button" name="cancel" class="cancel btn btn-dark-gray" value="Cancel" />
                 <input
                   type="button"
                   name="next"
@@ -339,34 +276,18 @@
                 <div class="form-card">
                   <div class="row">
                     <div class="input-group col-md-12 mb-4 selec">
-                      <label
-                        class="col-md-3 pl-0 control-label float-left"
-                        for="name"
-                        >Phone</label
-                      >
+                      <label class="col-md-3 pl-0 control-label float-left" for="name">Phone</label>
                       <div class="col-md-9 pl-0 pr-0">
-                        <select
-                          id="country"
-                          class="form-control col-md-2 mr-3 float-left"
-                        >
+                        <select id="country" class="form-control col-md-2 mr-3 float-left">
                           <option>USA(+1)</option>
                           <option>USA(+1)</option>
                           <option>USA(+1)</option>
                           <option>India(+91)</option>
                         </select>
-                        <input
-                          id="tel"
-                          name="tel"
-                          type="tel"
-                          placeholder=""
-                          class="form-control col-md-7"
-                        />
+                        <input id="tel" name="tel" type="tel" placeholder="" class="form-control col-md-7" />
                       </div>
                       <div class="checkbox">
-                        <label
-                          ><input type="checkbox" value="" />This business does
-                          not have a Phone</label
-                        >
+                        <label><input type="checkbox" value="" />This business does not have a Phone</label>
                       </div>
                     </div>
                   </div>
@@ -383,10 +304,7 @@
                           class="form-control"
                         />
                         <div class="checkbox">
-                          <label
-                            ><input type="checkbox" value="" />This business
-                            does not have a Website</label
-                          >
+                          <label><input type="checkbox" value="" />This business does not have a Website</label>
                         </div>
                       </div>
                     </div>
@@ -396,35 +314,16 @@
                     <div class="col-md-12">
                       <div class="form-group">
                         <label for="alias">Email</label><br />
-                        <input
-                          type="Email"
-                          name="Email"
-                          id="Emaisl"
-                          placeholder="Email.com"
-                          class="form-control"
-                        />
+                        <input type="Email" name="Email" id="Emaisl" placeholder="Email.com" class="form-control" />
                         <div class="checkbox">
-                          <label
-                            ><input type="checkbox" value="" />This business
-                            does not have a Email</label
-                          >
+                          <label><input type="checkbox" value="" />This business does not have a Email</label>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
-                <input
-                  type="button"
-                  name="cancel"
-                  class="cancel btn btn-dark-gray"
-                  value="Cancel"
-                />
-                <input
-                  type="button"
-                  name="previous"
-                  class="previous ml-3 btn btn-dark"
-                  value="Previous"
-                />
+                <input type="button" name="cancel" class="cancel btn btn-dark-gray" value="Cancel" />
+                <input type="button" name="previous" class="previous ml-3 btn btn-dark" value="Previous" />
                 <input
                   type="button"
                   name="next"
@@ -468,8 +367,7 @@
                   <div class="row">
                     <div class="col-md-12">
                       <div class="form-group">
-                        <label for="username">Three Location Descriptions</label
-                        ><br />
+                        <label for="username">Three Location Descriptions</label><br />
                         <div class="col-md-12 pl-0 pr-0">
                           Choix
                         </div>
@@ -492,18 +390,8 @@
                   </div>
                 </div>
 
-                <input
-                  type="button"
-                  name="cancel"
-                  class="cancel btn btn-dark-gray"
-                  value="Cancel"
-                />
-                <input
-                  type="button"
-                  name="previous"
-                  class="previous ml-3 btn btn-dark"
-                  value="Previous"
-                />
+                <input type="button" name="cancel" class="cancel btn btn-dark-gray" value="Cancel" />
+                <input type="button" name="previous" class="previous ml-3 btn btn-dark" value="Previous" />
                 <input
                   type="button"
                   name="Save"
@@ -516,8 +404,8 @@
               <fieldset>
                 <div class="form-card">
                   <h4 class="fs-title text-center">
-                    <i aria-hidden="true" class="fa fa-check-circle"></i> Your
-                    business identity is successfully created !
+                    <i aria-hidden="true" class="fa fa-check-circle"></i> Your business identity is successfully created
+                    !
                   </h4>
 
                   <div class="row justify-content-center">
@@ -525,12 +413,7 @@
                       <h5>Business Name Here</h5>
                       <a href="#">http://business.com</a>
                       <p><b>Business Category Name Here</b></p>
-                      <input
-                        type="button"
-                        name="Save"
-                        class="btn savebtnn orange"
-                        value="View Profile"
-                      />
+                      <input type="button" name="Save" class="btn savebtnn orange" value="View Profile" />
                     </div>
                   </div>
 
@@ -539,17 +422,14 @@
                       <div class="col-md-12 float-left border bg-modb p-3">
                         <p class="w-100">
                           <i class="fa fa-info-circle" aria-hidden="true"></i>
-                          Get your personalised website<span
-                            class="pull-right fontis pt-1"
+                          Get your personalised website<span class="pull-right fontis pt-1"
                             >Cureent Plan Basic (Free)</span
                           >
                         </p>
 
                         <p class="w-100 fontis">
-                          Now you can create personalised website for your
-                          business, select from a collection of free and premium
-                          templates, connect your domain, premium support and
-                          much more exciting features.
+                          Now you can create personalised website for your business, select from a collection of free
+                          and premium templates, connect your domain, premium support and much more exciting features.
                         </p>
 
                         <a class="pull-right" href="#">View Plans</a>
@@ -563,11 +443,7 @@
         </div>
       </b-modal>
 
-      <b-modal
-        id="modal-person"
-        title=" A Quick Guide to get you started"
-        hide-footer
-      >
+      <b-modal id="modal-person" title=" A Quick Guide to get you started" hide-footer>
         <div class="row">
           <div class="col-md-12 mx-0">
             <form id="msform">
@@ -580,11 +456,7 @@
                   <strong> Follow Business </strong>
                 </li>
 
-                <li
-                  id="location"
-                  class=""
-                  v-bind:class="{ active: fieldset2, active: fieldset3 }"
-                >
+                <li id="location" class="" v-bind:class="{ active: fieldset2, active: fieldset3 }">
                   <strong> Follow People </strong>
                 </li>
 
@@ -594,7 +466,7 @@
                   v-bind:class="{
                     active: fieldset2,
                     active: fieldset3,
-                    active: fieldset4
+                    active: fieldset4,
                   }"
                 >
                   <strong> Tutorials </strong>
@@ -606,11 +478,7 @@
                   <div class="row">
                     <div class="col-md-6">
                       <div class="image-upload-wrap">
-                        <a
-                          href="#"
-                          data-toggle="modal"
-                          data-target="#createalbumModal"
-                        >
+                        <a href="#" data-toggle="modal" data-target="#createalbumModal">
                           <div class="drag-text">
                             <i class="fa fa-plus" aria-hidden="true"></i>
                             <h3>Add Logo</h3>
@@ -622,21 +490,13 @@
                     <div class="col-md-6">
                       <div class="form-group">
                         <label for="username"> DOB :</label><br />
-                        <input
-                          type="date"
-                          name="dob"
-                          id="dob"
-                          placeholder="Busness Name"
-                          class="form-control"
-                        />
+                        <input type="date" name="dob" id="dob" placeholder="Busness Name" class="form-control" />
                       </div>
 
                       <div class="form-group">
                         <label for="alias">Gender:</label><br />
                         <select id="category" class="form-control ">
-                          <option value="" selected="" disabled=""
-                            >Select Gender</option
-                          >
+                          <option value="" selected="" disabled="">Select Gender</option>
                           <option>Male</option>
                           <option>Female</option>
                           <option>other</option>
@@ -645,35 +505,17 @@
 
                       <div class="form-group">
                         <label for="country"> Country :</label><br />
-                        <input
-                          type="text"
-                          name="alias"
-                          id="country"
-                          placeholder="country"
-                          class="form-control"
-                        />
+                        <input type="text" name="alias" id="country" placeholder="country" class="form-control" />
                       </div>
 
                       <div class="form-group">
                         <label for="city"> City :</label><br />
-                        <input
-                          type="text"
-                          name="alias"
-                          id="city"
-                          placeholder="country"
-                          class="form-control"
-                        />
+                        <input type="text" name="alias" id="city" placeholder="country" class="form-control" />
                       </div>
 
                       <div class="form-group">
                         <label for="Neighbor"> Neighbor :</label><br />
-                        <input
-                          type="text"
-                          name="alias"
-                          id="Neighbor"
-                          placeholder="Neighbor"
-                          class="form-control"
-                        />
+                        <input type="text" name="alias" id="Neighbor" placeholder="Neighbor" class="form-control" />
                       </div>
                     </div>
                   </div>
@@ -681,12 +523,7 @@
                   <br />
                   <br />
                 </div>
-                <input
-                  type="button"
-                  name="cancel"
-                  class="cancel btn btn-dark-gray"
-                  value="Cancel"
-                />
+                <input type="button" name="cancel" class="cancel btn btn-dark-gray" value="Cancel" />
                 <input
                   type="button"
                   name="next"
@@ -702,18 +539,8 @@
                     <Business />
                   </div>
                 </div>
-                <input
-                  type="button"
-                  name="cancel"
-                  class="cancel btn btn-dark-gray"
-                  value="Cancel"
-                />
-                <input
-                  type="button"
-                  name="previous"
-                  class="previous ml-3 btn btn-dark"
-                  value="Previous"
-                />
+                <input type="button" name="cancel" class="cancel btn btn-dark-gray" value="Cancel" />
+                <input type="button" name="previous" class="previous ml-3 btn btn-dark" value="Previous" />
                 <input
                   type="button"
                   name="next"
@@ -732,18 +559,8 @@
                   </div>
                 </div>
 
-                <input
-                  type="button"
-                  name="cancel"
-                  class="cancel btn btn-dark-gray"
-                  value="Cancel"
-                />
-                <input
-                  type="button"
-                  name="previous"
-                  class="previous ml-3 btn btn-dark"
-                  value="Previous"
-                />
+                <input type="button" name="cancel" class="cancel btn btn-dark-gray" value="Cancel" />
+                <input type="button" name="previous" class="previous ml-3 btn btn-dark" value="Previous" />
                 <input
                   type="button"
                   name="Save"
@@ -760,18 +577,8 @@
                   </div>
                 </div>
 
-                <input
-                  type="button"
-                  name="cancel"
-                  class="cancel btn btn-dark-gray"
-                  value="Cancel"
-                />
-                <input
-                  type="button"
-                  name="previous"
-                  class="previous ml-3 btn btn-dark"
-                  value="Previous"
-                />
+                <input type="button" name="cancel" class="cancel btn btn-dark-gray" value="Cancel" />
+                <input type="button" name="previous" class="previous ml-3 btn btn-dark" value="Previous" />
                 <input
                   type="button"
                   name="Save"
@@ -784,8 +591,8 @@
               <fieldset>
                 <div class="form-card">
                   <h4 class="fs-title text-center">
-                    <i aria-hidden="true" class="fa fa-check-circle"></i> Your
-                    business identity is successfully created !
+                    <i aria-hidden="true" class="fa fa-check-circle"></i> Your business identity is successfully created
+                    !
                   </h4>
 
                   <div class="row justify-content-center">
@@ -793,12 +600,7 @@
                       <h5>Business Name Here</h5>
                       <a href="#">http://business.com</a>
                       <p><b>Business Category Name Here</b></p>
-                      <input
-                        type="button"
-                        name="Save"
-                        class="btn savebtnn orange"
-                        value="View Profile"
-                      />
+                      <input type="button" name="Save" class="btn savebtnn orange" value="View Profile" />
                     </div>
                   </div>
 
@@ -807,17 +609,14 @@
                       <div class="col-md-12 float-left border bg-modb p-3">
                         <p class="w-100">
                           <i class="fa fa-info-circle" aria-hidden="true"></i>
-                          Get your personalised website<span
-                            class="pull-right fontis pt-1"
+                          Get your personalised website<span class="pull-right fontis pt-1"
                             >Cureent Plan Basic (Free)</span
                           >
                         </p>
 
                         <p class="w-100 fontis">
-                          Now you can create personalised website for your
-                          business, select from a collection of free and premium
-                          templates, connect your domain, premium support and
-                          much more exciting features.
+                          Now you can create personalised website for your business, select from a collection of free
+                          and premium templates, connect your domain, premium support and much more exciting features.
                         </p>
 
                         <a class="pull-right" href="#">View Plans</a>
@@ -863,13 +662,13 @@
 </template>
 
 <script>
-import People from "@/components/dasboard/suggestedpeople";
-import Business from "@/components/dasboard/communitybusiness";
+import People from '@/components/dasboard/suggestedpeople';
+import Business from '@/components/dasboard/communitybusiness';
 
-import Tutorial from "@/components/dasboard/tutorial";
+import Tutorial from '@/components/dasboard/tutorial';
 
 export default {
-  name: "welcome",
+  name: 'welcome',
   data() {
     return {
       fieldset1: true,
@@ -883,16 +682,16 @@ export default {
       welcome4: false,
 
       options: [
-        { text: "Business ", value: "business" },
-        { text: "Person", value: "person" }
-      ]
+        { text: 'Business ', value: 'business' },
+        { text: 'Person', value: 'person' },
+      ],
     };
   },
 
   components: {
     People,
     Business,
-    Tutorial
+    Tutorial,
   },
 
   methods: {
@@ -967,8 +766,8 @@ export default {
       this.fieldset2 = false;
       this.fieldset3 = false;
       this.fieldset4 = true;
-    }
-  }
+    },
+  },
 };
 </script>
 

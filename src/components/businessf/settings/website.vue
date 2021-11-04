@@ -56,11 +56,7 @@
             <b-link href="#" class="f-left">Visit Website</b-link>
             <b-link href="#" class="f-right">Open Editor</b-link>
 
-            <img
-              class="mb-2 img-fluid"
-              src="@/assets/img/web-template.jpg"
-              alt="Fluid image"
-            />
+            <img class="mb-2 img-fluid" src="@/assets/img/web-template.jpg" alt="Fluid image" />
           </b-col>
         </b-row>
       </b-container>
@@ -74,7 +70,7 @@
 
 <script>
 export default {
-  name: "website"
+  name: 'website',
 };
 </script>
 

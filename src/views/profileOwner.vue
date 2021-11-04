@@ -31,17 +31,17 @@
 </template>
 
 <script>
-import navbar from "@/components/navbar";
-import headPage from "@/components/ownerHeadpage";
-import Post from "@/components/owner/tabs/posts";
-import About from "@/components/owner/tabs/about";
-import Media from "@/components/owner/tabs/media";
-import Networks from "@/components/owner/tabs/networks";
-import Following from "@/components/owner/tabs/memberNetwork";
-import Bussiness from "@/components/owner/tabs/bussiness";
+import navbar from '@/components/navbar';
+import headPage from '@/components/ownerHeadpage';
+import Post from '@/components/owner/tabs/posts';
+import About from '@/components/owner/tabs/about';
+import Media from '@/components/owner/tabs/media';
+import Networks from '@/components/owner/tabs/networks';
+import Following from '@/components/owner/tabs/memberNetwork';
+import Bussiness from '@/components/owner/tabs/bussiness';
 
 export default {
-  name: "profileOwner",
+  name: 'profileOwner',
 
   components: {
     Bussiness,
@@ -52,19 +52,18 @@ export default {
     About,
     Media,
     Networks,
-   
   },
   data() {
     return {
       tabIndex: null,
-      tabs: ["#post", "#about", "#business", "#media", "#community"],
+      tabs: ['#post', '#about', '#business', '#media', '#community'],
     };
   },
 
   watch: {
     $route(to, from) {
       console.log(to.hash);
-      this.tabIndex = this.tabs.findIndex((tab) => tab === to.hash);
+      this.tabIndex = this.tabs.findIndex(tab => tab === to.hash);
 
       console.log(from);
     },
@@ -72,76 +71,75 @@ export default {
   methods: {
     ownerPost() {
       this.$store
-        .dispatch("UserProfileOwner/ownerPost", this.url_data)
+        .dispatch('UserProfileOwner/ownerPost', this.url_data)
         .then(() => {
-          console.log("hey yeah");
+          console.log('hey yeah');
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
     },
   },
   computed: {},
-   created() {
-      this.tabIndex = this.tabs.findIndex(tab => tab === this.$route.hash);
-      
-      this.$store
-      .dispatch("profile/loadUserPostIntro", null)
-      .then((response) => {
+  created() {
+    this.tabIndex = this.tabs.findIndex(tab => tab === this.$route.hash);
+
+    this.$store
+      .dispatch('profile/loadUserPostIntro', null)
+      .then(response => {
         console.log(response);
       })
-      .catch((error) => {
+      .catch(error => {
         console.log(error);
       });
   },
-  mounted(){
-
+  mounted() {
     this.$store
-      .dispatch("profile/Tcommunity", null)
-      .then((response) => {})
-      .catch((error) => {
-        console.log({ error: error });
-      });
-
-    this.$store
-      .dispatch("follower/UcommunityFollower", null)
-      .then((response) => {})
-      .catch((error) => {
+      .dispatch('profile/Tcommunity', null)
+      .then(response => {})
+      .catch(error => {
         console.log({ error: error });
       });
 
     this.$store
-      .dispatch("profile/UcommunityFollowing", null)
-      .then((response) => {})
-      .catch((error) => {
+      .dispatch('follower/UcommunityFollower', null)
+      .then(response => {})
+      .catch(error => {
         console.log({ error: error });
       });
 
     this.$store
-      .dispatch("profile/BcommunityFollower", null)
-      .then((response) => {})
-      .catch((error) => {
+      .dispatch('profile/UcommunityFollowing', null)
+      .then(response => {})
+      .catch(error => {
         console.log({ error: error });
       });
 
     this.$store
-      .dispatch("profile/BcommunityFollowing", null)
-      .then((response) => {})
-      .catch((error) => {
+      .dispatch('profile/BcommunityFollower', null)
+      .then(response => {})
+      .catch(error => {
         console.log({ error: error });
       });
 
-      this.$store
-      .dispatch("profile/NcommunityFollower", null)
-      .then((response) => {})
-      .catch((error) => {
+    this.$store
+      .dispatch('profile/BcommunityFollowing', null)
+      .then(response => {})
+      .catch(error => {
         console.log({ error: error });
       });
 
-      this.$store
-      .dispatch("profile/NcommunityFollowing", null)
-      .then((response) => {})
-      .catch((error) => {
+    this.$store
+      .dispatch('profile/NcommunityFollower', null)
+      .then(response => {})
+      .catch(error => {
+        console.log({ error: error });
+      });
+
+    this.$store
+      .dispatch('profile/NcommunityFollowing', null)
+      .then(response => {})
+      .catch(error => {
         console.log({ error: error });
       });
   },

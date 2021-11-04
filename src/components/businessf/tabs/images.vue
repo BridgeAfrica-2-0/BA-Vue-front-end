@@ -16,12 +16,8 @@
               <div class="slide" v-for="img_url in show_url" :key="img_url.id">
                 <img :src="img_url.media_ulr" alt="" />
               </div>
-              <template slot="prevButton"
-                ><i class="fas fa-chevron-left"></i
-              ></template>
-              <template slot="nextButton"
-                ><i class="fas fa-chevron-right"></i
-              ></template>
+              <template slot="prevButton"><i class="fas fa-chevron-left"></i></template>
+              <template slot="nextButton"><i class="fas fa-chevron-right"></i></template>
               <template slot="caption"> {{ content }}</template>
             </agile>
           </div>
@@ -48,17 +44,10 @@
                     no-caret
                   >
                     <template #button-content>
-                      <b-icon
-                        icon="three-dots-vertical"
-                        color="white"
-                        variant="light"
-                      >
-                      </b-icon>
+                      <b-icon icon="three-dots-vertical" color="white" variant="light"> </b-icon>
                     </template>
 
-                    <b-dropdown-item @click="downloadPic(pic.id)"
-                      >Download</b-dropdown-item
-                    >
+                    <b-dropdown-item @click="downloadPic(pic.id)">Download</b-dropdown-item>
                   </b-dropdown>
                 </li>
               </ul>
@@ -71,7 +60,7 @@
 </template>
 
 <script>
-import axios from "axios";
+import axios from 'axios';
 export default {
   components: {},
 
@@ -86,47 +75,47 @@ export default {
       console.log(img);
       this.content = content;
       this.show_url = img;
-      this.$refs["Details"].show();
+      this.$refs['Details'].show();
     },
 
     downloadPic(image_id) {
-      console.log("downloading");
+      console.log('downloading');
 
       let loader = this.$loading.show({
         container: this.fullPage,
         canCancel: true,
         onCancel: this.onCancel,
-        color: "#e75c18",
+        color: '#e75c18',
       });
 
       axios
-        .get("business/download/media/" + this.url + "/" + image_id, {})
-        .then((response) => {
+        .get('business/download/media/' + this.url + '/' + image_id, {})
+        .then(response => {
           var fileURL = window.URL.createObjectURL(new Blob([response.data]));
-          var fileLink = document.createElement("a");
+          var fileLink = document.createElement('a');
 
           fileLink.href = fileURL;
-          fileLink.setAttribute("download", "file.jpg");
+          fileLink.setAttribute('download', 'file.jpg');
           document.body.appendChild(fileLink);
 
           fileLink.click();
 
           this.flashMessage.show({
-            status: "success",
+            status: 'success',
 
-            message: "Image Downloaded",
+            message: 'Image Downloaded',
           });
 
           loader.hide();
         })
-        .catch((err) => {
+        .catch(err => {
           this.sending = false;
 
           if (err.response.status == 422) {
             console.log({ err: err });
 
             this.flashMessage.show({
-              status: "error",
+              status: 'error',
 
               message: err.response.data.message,
             });
@@ -134,9 +123,9 @@ export default {
             loader.hide();
           } else {
             this.flashMessage.show({
-              status: "error",
+              status: 'error',
 
-              message: "Unable to download ",
+              message: 'Unable to download ',
             });
             console.log({ err: err });
 
@@ -146,38 +135,38 @@ export default {
     },
 
     deleteImage(image_id) {
-      console.log("deleting ----------");
+      console.log('deleting ----------');
 
       let loader = this.$loading.show({
         container: this.fullPage,
         canCancel: true,
         onCancel: this.onCancel,
-        color: "#e75c18",
+        color: '#e75c18',
       });
 
       axios
-        .post("business/delete/media/" + this.url + "/" + image_id, {
+        .post('business/delete/media/' + this.url + '/' + image_id, {
           name: this.name,
         })
-        .then((response) => {
+        .then(response => {
           console.log(response.data);
 
           this.flashMessage.show({
-            status: "success",
+            status: 'success',
 
-            message: "Album Deleted",
+            message: 'Album Deleted',
           });
 
           loader.hide();
         })
-        .catch((err) => {
+        .catch(err => {
           this.sending = false;
 
           if (err.response.status == 422) {
             console.log({ err: err });
 
             this.flashMessage.show({
-              status: "error",
+              status: 'error',
 
               message: err.response.data.message,
             });
@@ -185,9 +174,9 @@ export default {
             loader.hide();
           } else {
             this.flashMessage.show({
-              status: "error",
+              status: 'error',
 
-              message: "Unable to Delete your Image",
+              message: 'Unable to Delete your Image',
             });
             console.log({ err: err });
 
@@ -203,32 +192,32 @@ export default {
         container: this.fullPage,
         canCancel: true,
         onCancel: this.onCancel,
-        color: "#e75c18",
+        color: '#e75c18',
       });
 
       axios
-        .post("business/make/coverpic/" + this.url + "/" + image_id, {
+        .post('business/make/coverpic/' + this.url + '/' + image_id, {
           name: this.name,
         })
-        .then((response) => {
+        .then(response => {
           console.log(response.data);
 
           this.flashMessage.show({
-            status: "success",
+            status: 'success',
 
-            message: "cover Picture succesfully set",
+            message: 'cover Picture succesfully set',
           });
 
           loader.hide();
         })
-        .catch((err) => {
+        .catch(err => {
           this.sending = false;
 
           if (err.response.status == 422) {
             console.log({ err: err });
 
             this.flashMessage.show({
-              status: "error",
+              status: 'error',
 
               message: err.response.data.message,
             });
@@ -236,9 +225,9 @@ export default {
             loader.hide();
           } else {
             this.flashMessage.show({
-              status: "error",
+              status: 'error',
 
-              message: "Unable to set your cover picture",
+              message: 'Unable to set your cover picture',
             });
             console.log({ err: err });
 
@@ -256,32 +245,32 @@ export default {
         container: this.fullPage ? null : this.$refs.creatform,
         canCancel: true,
         onCancel: this.onCancel,
-        color: "#e75c18",
+        color: '#e75c18',
       });
 
       axios
-        .post("business/album/edit/" + this.url + "/" + self.album_id, {
+        .post('business/album/edit/' + this.url + '/' + self.album_id, {
           name: this.name,
         })
-        .then((response) => {
+        .then(response => {
           console.log(response.data);
 
           this.flashMessage.show({
-            status: "success",
+            status: 'success',
 
-            message: "Profile Picture set",
+            message: 'Profile Picture set',
           });
 
           loader.hide();
         })
-        .catch((err) => {
+        .catch(err => {
           this.sending = false;
 
           if (err.response.status == 422) {
             console.log({ err: err });
 
             this.flashMessage.show({
-              status: "error",
+              status: 'error',
 
               message: err.response.data.message,
             });
@@ -289,9 +278,9 @@ export default {
             loader.hide();
           } else {
             this.flashMessage.show({
-              status: "error",
+              status: 'error',
 
-              message: "Unable to set your profile pic",
+              message: 'Unable to set your profile pic',
             });
             console.log({ err: err });
 
@@ -305,55 +294,55 @@ export default {
         container: this.fullPage ? null : this.$refs.preview,
         canCancel: true,
         onCancel: this.onCancel,
-        color: "#e75c18",
+        color: '#e75c18',
       });
 
       let formData = new FormData();
-      formData.append("media", this.profile_pic);
+      formData.append('media', this.profile_pic);
 
-      formData.append("dob", this.text);
+      formData.append('dob', this.text);
 
       this.axios
-        .post("business/store/media/" + this.url + "/" + this.album, formData, {
+        .post('business/store/media/' + this.url + '/' + this.album, formData, {
           headers: {
-            "Content-Type": "multipart/form-data",
+            'Content-Type': 'multipart/form-data',
           },
         })
-        .then((response) => {
+        .then(response => {
           console.log(response);
 
           this.flashMessage.show({
-            status: "success",
+            status: 'success',
 
-            message: "Profile Updated",
+            message: 'Profile Updated',
 
-            blockClass: "custom-block-class",
+            blockClass: 'custom-block-class',
           });
 
           loader.hide();
-          this.$refs["modalxl"].hide();
+          this.$refs['modalxl'].hide();
         })
 
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
 
           if (err.response.status == 422) {
             console.log({ err: err });
 
             this.flashMessage.show({
-              status: "error",
+              status: 'error',
 
               message: err.response.data.message,
-              blockClass: "custom-block-class",
+              blockClass: 'custom-block-class',
             });
 
             loader.hide();
           } else {
             this.flashMessage.show({
-              status: "error",
+              status: 'error',
 
-              message: "Unable to upload your image",
-              blockClass: "custom-block-class",
+              message: 'Unable to upload your image',
+              blockClass: 'custom-block-class',
             });
             console.log({ err: err });
 
@@ -368,7 +357,7 @@ export default {
 
       console.log(this.img_url);
 
-      this.$refs["modalxl"].show();
+      this.$refs['modalxl'].show();
     },
 
     onClick(i) {
@@ -380,7 +369,7 @@ export default {
     this.url = this.$route.params.id;
   },
 
-  props: ["album"],
+  props: ['album'],
 
   watch: {
     album: function(newVal) {
@@ -398,37 +387,37 @@ export default {
       profile_pic: null,
       text: null,
       images: [
-        "https://placekitten.com/801/800",
-        "https://placekitten.com/802/800",
-        "https://placekitten.com/803/800",
-        "https://placekitten.com/804/800",
-        "https://placekitten.com/805/800",
-        "https://placekitten.com/806/800",
-        "https://placekitten.com/807/800",
-        "https://placekitten.com/808/800",
-        "https://placekitten.com/809/800",
+        'https://placekitten.com/801/800',
+        'https://placekitten.com/802/800',
+        'https://placekitten.com/803/800',
+        'https://placekitten.com/804/800',
+        'https://placekitten.com/805/800',
+        'https://placekitten.com/806/800',
+        'https://placekitten.com/807/800',
+        'https://placekitten.com/808/800',
+        'https://placekitten.com/809/800',
       ],
       imagees: [
-        "https://i.wifegeek.com/200426/f9459c52.jpg",
-        "https://i.wifegeek.com/200426/5ce1e1c7.jpg",
-        "https://i.wifegeek.com/200426/5fa51df3.jpg",
-        "https://i.wifegeek.com/200426/663181fe.jpg",
-        "https://i.wifegeek.com/200426/2d110780.jpg",
-        "https://i.wifegeek.com/200426/e73cd3fa.jpg",
-        "https://i.wifegeek.com/200426/15160d6e.jpg",
-        "https://i.wifegeek.com/200426/d0c881ae.jpg",
-        "https://i.wifegeek.com/200426/a154fc3d.jpg",
-        "https://i.wifegeek.com/200426/71d3aa60.jpg",
-        "https://i.wifegeek.com/200426/d17ce9a0.jpg",
-        "https://i.wifegeek.com/200426/7c4deca9.jpg",
-        "https://i.wifegeek.com/200426/64672676.jpg",
-        "https://i.wifegeek.com/200426/de6ab9c6.jpg",
-        "https://i.wifegeek.com/200426/d8bcb6a7.jpg",
-        "https://i.wifegeek.com/200426/4085d03b.jpg",
-        "https://i.wifegeek.com/200426/177ef44c.jpg",
-        "https://i.wifegeek.com/200426/d74d9040.jpg",
-        "https://i.wifegeek.com/200426/81e24a47.jpg",
-        "https://i.wifegeek.com/200426/43e2e8bb.jpg",
+        'https://i.wifegeek.com/200426/f9459c52.jpg',
+        'https://i.wifegeek.com/200426/5ce1e1c7.jpg',
+        'https://i.wifegeek.com/200426/5fa51df3.jpg',
+        'https://i.wifegeek.com/200426/663181fe.jpg',
+        'https://i.wifegeek.com/200426/2d110780.jpg',
+        'https://i.wifegeek.com/200426/e73cd3fa.jpg',
+        'https://i.wifegeek.com/200426/15160d6e.jpg',
+        'https://i.wifegeek.com/200426/d0c881ae.jpg',
+        'https://i.wifegeek.com/200426/a154fc3d.jpg',
+        'https://i.wifegeek.com/200426/71d3aa60.jpg',
+        'https://i.wifegeek.com/200426/d17ce9a0.jpg',
+        'https://i.wifegeek.com/200426/7c4deca9.jpg',
+        'https://i.wifegeek.com/200426/64672676.jpg',
+        'https://i.wifegeek.com/200426/de6ab9c6.jpg',
+        'https://i.wifegeek.com/200426/d8bcb6a7.jpg',
+        'https://i.wifegeek.com/200426/4085d03b.jpg',
+        'https://i.wifegeek.com/200426/177ef44c.jpg',
+        'https://i.wifegeek.com/200426/d74d9040.jpg',
+        'https://i.wifegeek.com/200426/81e24a47.jpg',
+        'https://i.wifegeek.com/200426/43e2e8bb.jpg',
       ],
       index: 0,
     };

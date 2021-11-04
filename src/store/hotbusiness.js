@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from 'axios';
 
 export default {
   namespaced: true,
@@ -17,8 +17,8 @@ export default {
   },
   actions: {
     getbdetails({ commit }) {
-      return axios.get("profile/hot/business", {}).then(function({ data }) {
-        commit("set_details", data.data);
+      return axios.get('profile/hot/business', {}).then(function({ data }) {
+        commit('set_details', data.data);
         console.log(data);
       });
     },

@@ -8,11 +8,7 @@
       </a></b-alert
     >
 
-    <div
-      class="people-style shadow"
-      v-for="(prod, index) in products.data"
-      :key="index"
-    >
+    <div class="people-style shadow" v-for="(prod, index) in products.data" :key="index">
       <b-row>
         <b-col cols="5" lg="4" sm="4" md="5">
           <div class="center-img">
@@ -52,37 +48,17 @@
       :disabled="products.data.length > 0 ? false : true"
     ></b-pagination>
     <!-- End pagination -->
-    
+
     <b-modal hide-footer title="Edit product">
       <b-form>
         <b-row>
           <b-col cols="12" md="6">
-            <b-form-group
-              id="input-group-1"
-              label="Product Name"
-              label-for="input-1"
-              label-size="sm"
-            >
-              <b-form-input
-                id="input-1"
-                class="mt-1"
-                type="text"
-                required
-              ></b-form-input>
+            <b-form-group id="input-group-1" label="Product Name" label-for="input-1" label-size="sm">
+              <b-form-input id="input-1" class="mt-1" type="text" required></b-form-input>
             </b-form-group>
 
-            <b-form-group
-              id="input-group-1"
-              label="Product Description"
-              label-for="input-1"
-              label-size="sm"
-            >
-              <b-textarea
-                id="input-1"
-                class="mt-2"
-                type="text"
-                required
-              ></b-textarea>
+            <b-form-group id="input-group-1" label="Product Description" label-for="input-1" label-size="sm">
+              <b-textarea id="input-1" class="mt-2" type="text" required></b-textarea>
             </b-form-group>
           </b-col>
           <b-col cols="12" md="6">
@@ -98,57 +74,27 @@
           </b-col>
         </b-row>
 
-        <b-form-group
-          id="input-group-1"
-          label="product Price"
-          label-for="input-1"
-          label-size="sm"
-        >
+        <b-form-group id="input-group-1" label="product Price" label-for="input-1" label-size="sm">
           <b-form-input class="mt-1" id="price"></b-form-input>
         </b-form-group>
 
-        <b-form-checkbox
-          id="checkbox-1"
-          name="checkbox-1"
-          value="accepted"
-          unchecked-value="not_accepted"
-        >
+        <b-form-checkbox id="checkbox-1" name="checkbox-1" value="accepted" unchecked-value="not_accepted">
           This Product Is On Discount
         </b-form-checkbox>
 
-        <b-form-group
-          id="conditions"
-          label="Conditions"
-          label-for="input-1"
-          label-size="sm"
-        >
+        <b-form-group id="conditions" label="Conditions" label-for="input-1" label-size="sm">
           <b-form-input class="mt-1" id="conditions"></b-form-input>
         </b-form-group>
 
-        <b-form-checkbox
-          id="checkbox-1"
-          name="checkbox-1"
-          value="accepted"
-          unchecked-value="not_accepted"
-        >
+        <b-form-checkbox id="checkbox-1" name="checkbox-1" value="accepted" unchecked-value="not_accepted">
           This Item Is A Service ?
         </b-form-checkbox>
 
-        <b-form-checkbox
-          id="checkbox-1"
-          name="checkbox-1"
-          value="accepted"
-          unchecked-value="not_accepted"
-        >
+        <b-form-checkbox id="checkbox-1" name="checkbox-1" value="accepted" unchecked-value="not_accepted">
           In stock
         </b-form-checkbox>
 
-        <b-form-checkbox
-          id="checkbox-1"
-          name="checkbox-1"
-          value="accepted"
-          unchecked-value="not_accepted"
-        >
+        <b-form-checkbox id="checkbox-1" name="checkbox-1" value="accepted" unchecked-value="not_accepted">
           Published
         </b-form-checkbox>
 
@@ -156,18 +102,10 @@
       </b-form>
     </b-modal>
 
-    <b-modal
-      v-model="viewProduct"
-      hide-footer
-      title="Product Details"
-      size="xl"
-    >
+    <b-modal v-model="viewProduct" hide-footer title="Product Details" size="xl">
       <b-row>
         <b-col cols="5" class="mx-auto">
-          <b-img
-            class="img-fluid"
-            src="https://picsum.photos/600/300/?image=25"
-          ></b-img>
+          <b-img class="img-fluid" src="https://picsum.photos/600/300/?image=25"></b-img>
         </b-col>
         <b-col>
           <h2 class="mb-4 text-center">Product Name</h2>
@@ -179,46 +117,24 @@
               <b-button variant="primary">Message</b-button>
             </b-col>
             <b-col>
-              <b-button variant="outline-dark" class="float-right"
-                >Checkout on website</b-button
-              >
+              <b-button variant="outline-dark" class="float-right">Checkout on website</b-button>
             </b-col>
           </b-row>
           <hr />
           <h5>Product Detail</h5>
           <p>
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Corporis
-            quod, reprehenderit neque atque recusandae laborum quia vel,
-            assumenda repellendus rem ab ex, odio aperiam quidem id deleniti
-            commodi consequatur optio.
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Corporis quod, reprehenderit neque atque
+            recusandae laborum quia vel, assumenda repellendus rem ab ex, odio aperiam quidem id deleniti commodi
+            consequatur optio.
           </p>
           <hr />
           <b-row>
             <b-col class="">
-              <span class="mr-3"
-                ><b-icon
-                  icon="suit-heart"
-                  variant="primary"
-                  aria-hidden="true"
-                ></b-icon>
-                23</span
-              >
-              <span
-                ><b-icon
-                  icon="chat-fill"
-                  variant="primary"
-                  aria-hidden="true"
-                ></b-icon>
-                123</span
-              >
+              <span class="mr-3"><b-icon icon="suit-heart" variant="primary" aria-hidden="true"></b-icon> 23</span>
+              <span><b-icon icon="chat-fill" variant="primary" aria-hidden="true"></b-icon> 123</span>
             </b-col>
             <b-col class="">
-              <b-icon
-                class="float-right"
-                icon="share-fill"
-                variant="primary"
-                aria-hidden="true"
-              ></b-icon>
+              <b-icon class="float-right" icon="share-fill" variant="primary" aria-hidden="true"></b-icon>
             </b-col>
           </b-row>
           <br />
@@ -226,31 +142,16 @@
             <div class="post-footer">
               <div class="input-group post-div">
                 <a class="pull-left pr-2" href="#">
-                  <img
-                    class="post-userim"
-                    src="@/assets/img/photo1.jpg"
-                    alt="avatar"
-                  />
+                  <img class="post-userim" src="@/assets/img/photo1.jpg" alt="avatar" />
                 </a>
-                <input
-                  placeholder="Post a Comment"
-                  class="form-control adco comment"
-                  type="text"
-                />
+                <input placeholder="Post a Comment" class="form-control adco comment" type="text" />
 
-                <fas-icon
-                  class="primary send-cmt"
-                  :icon="['fas', 'paper-plane']"
-                />
+                <fas-icon class="primary send-cmt" :icon="['fas', 'paper-plane']" />
               </div>
               <ul class="comments-list allcomment pl-0 mt-4">
                 <li class="comment">
                   <a class="pull-left pr-4" href="#">
-                    <img
-                      class="post-userim"
-                      src="@/assets/img/photo2.jpg"
-                      alt="avatar"
-                    />
+                    <img class="post-userim" src="@/assets/img/photo2.jpg" alt="avatar" />
                   </a>
                   <div class="comment-body">
                     <div class="comment-body-in">
@@ -261,32 +162,20 @@
                         </div>
                       </div>
                       <p>
-                        Lorem Ipsum has been the industry's standard dummy text
-                        ever since the 1500s, when an unknown printer took a
-                        galley of type and scrambled it to make a type specimen
-                        book. It has survived not only five centuries<span
-                          class="text-size"
-                          >😛</span
-                        >
+                        Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown
+                        printer took a galley of type and scrambled it to make a type specimen book. It has survived not
+                        only five centuries<span class="text-size">😛</span>
                       </p>
                     </div>
                     <div class="col-md-12 pt-2 pl-0 mb-3">
-                      <b-icon
-                        icon="suit-heart"
-                        variant="primary"
-                        aria-hidden="true"
-                      ></b-icon>
+                      <b-icon icon="suit-heart" variant="primary" aria-hidden="true"></b-icon>
                       23 &nbsp; &nbsp; &nbsp; <a href="#">Reply</a>
                     </div>
                   </div>
                   <ul class="comments-list">
                     <li class="comment">
                       <a class="pull-left pr-4" href="#">
-                        <img
-                          class="post-userim"
-                          src="@/assets/img/photo2.jpg"
-                          alt="avatar"
-                        />
+                        <img class="post-userim" src="@/assets/img/photo2.jpg" alt="avatar" />
                       </a>
                       <div class="comment-body">
                         <div class="comment-body-in">
@@ -297,30 +186,20 @@
                             </div>
                           </div>
                           <p>
-                            Lorem Ipsum has been the industry's standard dummy
-                            text ever since the 1500s, when an unknown printer
-                            took a galley of type and scrambled it to make a
-                            type specimen book. It has survived not only five
-                            centuries<span class="text-size">😛</span>
+                            Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an
+                            unknown printer took a galley of type and scrambled it to make a type specimen book. It has
+                            survived not only five centuries<span class="text-size">😛</span>
                           </p>
                         </div>
                         <div class="col-md-12 pt-2 pl-0 mb-3">
-                          <b-icon
-                            icon="suit-heart"
-                            variant="primary"
-                            aria-hidden="true"
-                          ></b-icon>
+                          <b-icon icon="suit-heart" variant="primary" aria-hidden="true"></b-icon>
                           23 &nbsp; &nbsp; &nbsp; <a href="#">Reply</a>
                         </div>
                       </div>
                     </li>
                     <li class="comment">
                       <a class="pull-left pr-4" href="#">
-                        <img
-                          class="post-userim"
-                          src="@/assets/img/photo2.jpg"
-                          alt="avatar"
-                        />
+                        <img class="post-userim" src="@/assets/img/photo2.jpg" alt="avatar" />
                       </a>
                       <div class="comment-body">
                         <div class="comment-body-in">
@@ -331,11 +210,9 @@
                             </div>
                           </div>
                           <p>
-                            Lorem Ipsum has been the industry's standard dummy
-                            text ever since the 1500s, when an unknown printer
-                            took a galley of type and scrambled it to make a
-                            type specimen book. It has survived not only five
-                            centuries<span class="text-size">😛</span>
+                            Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an
+                            unknown printer took a galley of type and scrambled it to make a type specimen book. It has
+                            survived not only five centuries<span class="text-size">😛</span>
                           </p>
                         </div>
                         <div class="col-md-12 pt-2 pl-0 mb-3">
@@ -346,22 +223,11 @@
                     </li>
                     <div class="input-group post-div">
                       <a class="pull-left pr-4" href="#">
-                        <img
-                          class="post-userim"
-                          src="@/assets/img/photo1.jpg"
-                          alt="avatar"
-                        />
+                        <img class="post-userim" src="@/assets/img/photo1.jpg" alt="avatar" />
                       </a>
-                      <input
-                        placeholder="Post a Comment"
-                        class="form-control adco comment"
-                        type="text"
-                      />
+                      <input placeholder="Post a Comment" class="form-control adco comment" type="text" />
 
-                      <fas-icon
-                        class="primary send-cmt"
-                        :icon="['fas', 'paper-plane']"
-                      />
+                      <fas-icon class="primary send-cmt" :icon="['fas', 'paper-plane']" />
                     </div>
                   </ul>
                 </li>
@@ -369,11 +235,7 @@
               <ul class="comments-list allcomment pl-0 mt-4">
                 <li class="comment">
                   <a class="pull-left pr-4" href="#">
-                    <img
-                      class="post-userim"
-                      src="@/assets/img/photo2.jpg"
-                      alt="avatar"
-                    />
+                    <img class="post-userim" src="@/assets/img/photo2.jpg" alt="avatar" />
                   </a>
                   <div class="comment-body">
                     <div class="comment-body-in">
@@ -384,21 +246,13 @@
                         </div>
                       </div>
                       <p>
-                        Lorem Ipsum has been the industry's standard dummy text
-                        ever since the 1500s, when an unknown printer took a
-                        galley of type and scrambled it to make a type specimen
-                        book. It has survived not only five centuries<span
-                          class="text-size"
-                          >😛</span
-                        >
+                        Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown
+                        printer took a galley of type and scrambled it to make a type specimen book. It has survived not
+                        only five centuries<span class="text-size">😛</span>
                       </p>
                     </div>
                     <div class="col-md-12 pt-2 pl-0 mb-3">
-                      <b-icon
-                        icon="suit-heart"
-                        variant="primary"
-                        aria-hidden="true"
-                      ></b-icon>
+                      <b-icon icon="suit-heart" variant="primary" aria-hidden="true"></b-icon>
                       23 &nbsp; &nbsp; &nbsp; <a href="#">Reply</a>
                     </div>
                   </div>
@@ -426,10 +280,10 @@ export default {
   },
   computed: {
     products() {
-      return this.$store.getters["marketSearch/getProducts"];
+      return this.$store.getters['marketSearch/getProducts'];
     },
     prodLoader() {
-      return this.$store.getters["marketSearch/getLoader"];
+      return this.$store.getters['marketSearch/getLoader'];
     },
   },
   created() {
@@ -445,35 +299,35 @@ export default {
       this.currentPage = value;
 
       this.$store
-        .dispatch("marketSearch/nextPage", this.currentPage)
-        .then((res) => {
-          console.log("products list: ");
+        .dispatch('marketSearch/nextPage', this.currentPage)
+        .then(res => {
+          console.log('products list: ');
           console.log(this.products);
           // this.prodLoader = false;
         })
-        .catch((err) => {
+        .catch(err => {
           // this.prodLoader = false;
-          console.log("products error: ");
+          console.log('products error: ');
           console.error(err);
         });
     },
 
     async getProducts() {
       // this.prodLoader = true;
-      console.log("loader: ", this.prodLoader);
+      console.log('loader: ', this.prodLoader);
 
       await this.$store
-        .dispatch("marketSearch/getProducts")
-        .then((res) => {
-          console.log("products list: ");
+        .dispatch('marketSearch/getProducts')
+        .then(res => {
+          console.log('products list: ');
           console.log(this.products);
           // this.prodLoader = false;
           this.total = this.products.total;
         })
-        .catch((err) => {
+        .catch(err => {
           // this.prodLoader = false;
-          console.log("loader: ", this.prodLoader);
-          console.log("products error: ");
+          console.log('loader: ', this.prodLoader);
+          console.log('products error: ');
           console.error(err);
         });
     },
@@ -583,7 +437,7 @@ h6 {
   .text {
     color: #000;
 
-    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
     font-weight: normal;
     font-size: 14px;
     line-height: 30px;
@@ -622,7 +476,7 @@ h6 {
     color: black;
 
     line-height: 35px;
-    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   }
 
   .btn {
@@ -638,7 +492,7 @@ h6 {
   .text {
     color: #000;
 
-    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
     font-weight: normal;
     font-size: 14px;
     line-height: 30px;
@@ -684,7 +538,7 @@ h6 {
     color: black;
 
     line-height: 35px;
-    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   }
 }
 
@@ -763,7 +617,7 @@ h6 {
   .text {
     color: #000;
 
-    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
     font-weight: normal;
     font-size: 14px;
     line-height: 30px;
@@ -809,7 +663,7 @@ h6 {
     color: black;
 
     line-height: 35px;
-    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   }
 }
 </style>

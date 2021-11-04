@@ -2,60 +2,40 @@
   <div>
     <b class="social">Web & Soial Links</b>
     <hr />
-    
 
-
-
-
-
-
-     <div v-for="website in info.user_websites" :key="website.id">
-              <fas-icon
-                class="primary float-left mr-1 mt-1"
-                :icon="['fas', 'globe']"
-              />
-              <a :href="website" @click="redirect(website.website_url)" target="_blank">{{
-                website.website_url
-              }}</a>
-             
-            </div>
-
-
-
-
+    <div v-for="website in info.user_websites" :key="website.id">
+      <fas-icon class="primary float-left mr-1 mt-1" :icon="['fas', 'globe']" />
+      <a :href="website" @click="redirect(website.website_url)" target="_blank">{{ website.website_url }}</a>
+    </div>
   </div>
 </template>
 
-<script>  
+<script>
 export default {
   data() {
     return {
       selected: null,
       socialSelected: null,
       options: [
-        { value: null, text: "Select" },
-        { value: "private", text: "Private" },
-        { value: "public", text: "Public" }
+        { value: null, text: 'Select' },
+        { value: 'private', text: 'Private' },
+        { value: 'public', text: 'Public' },
       ],
       socials: [
-        { value: null, text: "Select" },
-        { value: "instagram", text: "Instagram" },
-        { value: "facebook", text: "FaceBook" },
-        { value: "twitter", text: "Twitter" },
-        { value: "google-plus", text: "Google+" }
-      ]
+        { value: null, text: 'Select' },
+        { value: 'instagram', text: 'Instagram' },
+        { value: 'facebook', text: 'FaceBook' },
+        { value: 'twitter', text: 'Twitter' },
+        { value: 'google-plus', text: 'Google+' },
+      ],
     };
   },
 
-   computed: {
-  
-
-      info(){
-   return this.$store.state.follower.profileIntro;
+  computed: {
+    info() {
+      return this.$store.state.follower.profileIntro;
     },
-
   },
-
 };
 </script>
 

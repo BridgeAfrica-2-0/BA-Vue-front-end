@@ -20,10 +20,7 @@
           <template #header>
             <b-row>
               <b-col cols="4" class="text-center my-auto">
-                <b-icon-check-square
-                  scale="3"
-                  class="icon-check"
-                ></b-icon-check-square>
+                <b-icon-check-square scale="3" class="icon-check"></b-icon-check-square>
               </b-col>
               <b-col cols="8" class="text-justify pl-5">
                 <p class="title-plan">Basic</p>
@@ -40,9 +37,7 @@
             <h5 class="font-weight-bold">Ticket Support</h5>
           </div>
           <div class="text1">
-            <h5 class="font-weight-bold">
-              Brige Africa Content <br />Intergration
-            </h5>
+            <h5 class="font-weight-bold">Brige Africa Content <br />Intergration</h5>
           </div>
           <div class="btn-wrap free text-center">
             <a href="#" class="btn-buy"></a>
@@ -51,18 +46,12 @@
         </b-card>
       </b-col>
       <b-col md="4" class="plan-2">
-        <b-button class="btn-block font-weight-bold" variant="primary"
-          >Most Popular</b-button
-        >
+        <b-button class="btn-block font-weight-bold" variant="primary">Most Popular</b-button>
         <b-card header-tag="header" footer-tag="footer">
           <template #header>
             <b-row>
               <b-col cols="4" class="text-center my-auto">
-                <b-icon-check-square
-                  scale="3"
-                  class="icon-check"
-                  v-if="choice"
-                ></b-icon-check-square>
+                <b-icon-check-square scale="3" class="icon-check" v-if="choice"></b-icon-check-square>
               </b-col>
               <b-col cols="8" class="text-justify pl-2">
                 <p class="title-plan">Advanced</p>
@@ -79,9 +68,7 @@
             <h5 class="font-weight-bold">Ticket Support</h5>
           </div>
           <div class="text1">
-            <h5 class="font-weight-bold">
-              Brige Africa Content <br />Intergration
-            </h5>
+            <h5 class="font-weight-bold">Brige Africa Content <br />Intergration</h5>
           </div>
           <div class="text1">
             <h5 class="font-weight-bold">Premium Template</h5>
@@ -91,9 +78,7 @@
           </div>
           <div class="btn-wrap free2 text-center">
             <a href="#" class="btn-buy"></a>
-            <b-button class="btn-block font-weight-bold" variant="primary"
-              >Subscribe Now</b-button
-            >
+            <b-button class="btn-block font-weight-bold" variant="primary">Subscribe Now</b-button>
           </div>
         </b-card>
       </b-col>
@@ -102,11 +87,7 @@
           <template #header>
             <b-row>
               <b-col cols="4" class="text-center my-auto">
-                <b-icon-check-square
-                  scale="3"
-                  class="icon-check"
-                  v-if="choice"
-                ></b-icon-check-square>
+                <b-icon-check-square scale="3" class="icon-check" v-if="choice"></b-icon-check-square>
               </b-col>
               <b-col cols="8" class="text-justify pl-1">
                 <p class="title-plan">Advanced</p>
@@ -123,9 +104,7 @@
             <h5 class="font-weight-bold">Ticket Support</h5>
           </div>
           <div class="text1">
-            <h5 class="font-weight-bold">
-              Brige Africa Content <br />Intergration
-            </h5>
+            <h5 class="font-weight-bold">Brige Africa Content <br />Intergration</h5>
           </div>
           <div class="text1">
             <h5 class="font-weight-bold">Premium Template</h5>
@@ -150,9 +129,7 @@
           </div>
           <div class="btn-wrap free3 text-center">
             <a href="#" class="btn-buy"></a>
-            <b-button class="btn-block font-weight-bold" variant="primary"
-              >Subscribe Now</b-button
-            >
+            <b-button class="btn-block font-weight-bold" variant="primary">Subscribe Now</b-button>
           </div>
         </b-card>
       </b-col>
@@ -162,15 +139,15 @@
 
 <script>
 export default {
-  name: "subscriptionPlan",
+  name: 'subscriptionPlan',
   components: {},
   data() {
     return {
-      choice: false
+      choice: false,
     };
   },
   computed: {},
-  methods: {}
+  methods: {},
 };
 </script>
 
@@ -186,7 +163,7 @@ export default {
   margin-top: 0px;
   margin-bottom: 5px;
   font-weight: 600;
-  font-family: "Poppins", sans-serif;
+  font-family: 'Poppins', sans-serif;
 }
 
 .icon-check {

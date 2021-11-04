@@ -26,20 +26,11 @@
       <div class="albums">
         <div v-for="item in images" :key="item.id" class="p-4 image">
           <span class="sp">
-            <b-img
-              @click="open"
-              src="https://picsum.photos/300/150/?image=41"
-              rounded
-              fluid
-              class="pic"
-            ></b-img>
+            <b-img @click="open" src="https://picsum.photos/300/150/?image=41" rounded fluid class="pic"></b-img>
           </span>
         </div>
         <b-modal hide-footer v-model="modalShow">
-          <b-img
-            fluid-grow
-            src="https://picsum.photos/300/150/?image=41"
-          ></b-img>
+          <b-img fluid-grow src="https://picsum.photos/300/150/?image=41"></b-img>
           <h3>Picture Title</h3>
         </b-modal>
       </div>
@@ -57,22 +48,22 @@ export default {
       posts: [
         {
           id: 1,
-          image: "https://picsum.photos/300/150/?image=41",
-          title: "Title 2",
+          image: 'https://picsum.photos/300/150/?image=41',
+          title: 'Title 2',
           text:
-            " Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum quam, doloribus id sit consequuntur tempora molestiae blanditiis."
-        }
+            ' Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum quam, doloribus id sit consequuntur tempora molestiae blanditiis.',
+        },
       ],
       images: [
         {
           id: 1,
-          image: "https://picsum.photos/300/150/?image=41"
+          image: 'https://picsum.photos/300/150/?image=41',
         },
         {
           id: 2,
-          image: "https://picsum.photos/300/150/?image=41"
-        }
-      ]
+          image: 'https://picsum.photos/300/150/?image=41',
+        },
+      ],
     };
   },
   methods: {
@@ -85,12 +76,12 @@ export default {
       this.albumShow = true;
     },
     showModal() {
-      this.$refs["modal-1"].show();
+      this.$refs['modal-1'].show();
     },
     open() {
       this.modalShow = !this.modalShow;
-    }
-  }
+    },
+  },
 };
 </script>
 

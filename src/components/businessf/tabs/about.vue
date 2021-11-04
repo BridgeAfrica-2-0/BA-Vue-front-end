@@ -28,7 +28,7 @@
           <div class="p-4">
             <p>
               <b-icon icon="briefcase-fill" class="primary icon"></b-icon>
-              <span v-for="category in business_about.category" :key="category.id">{{category.name}}, </span>
+              <span v-for="category in business_about.category" :key="category.id">{{ category.name }}, </span>
             </p>
             <p>
               <b-icon icon="search" class="primary icon"></b-icon>
@@ -44,7 +44,7 @@
             </p>
             <p>
               <b-icon icon="people-fill" class="primary icon"></b-icon>
-              <span>{{nFormatter(business_about.community)}} Community</span>
+              <span>{{ nFormatter(business_about.community) }} Community</span>
             </p>
             <p>
               <b-icon icon="telephone-fill" class="primary icon"></b-icon>
@@ -67,7 +67,9 @@
                     v-for="day in business_about.business_open_hours"
                     :key="day.day"
                     @click="selectHour(day)"
-                  > {{ day.opening_time }}AM - {{ day.closing_time }}PM</b-dropdown-item>
+                  >
+                    {{ day.opening_time }}AM - {{ day.closing_time }}PM</b-dropdown-item
+                  >
                 </b-dropdown></span
               >
             </p>
@@ -82,61 +84,59 @@
 export default {
   data() {
     return {
-      business_id:null,
+      business_id: null,
 
       edit1: false,
       edit2: false,
       openNow: null,
       dayOfWorks: [
-        { day: "Monday", opening_time: null, closing_time: null, check: false },
-        { day: "Tuesday", opening_time: null, closing_time: null, check: false },
-        { day: "Wednesday", opening_time: null, closing_time: null, check: false },
-        { day: "Thursday", opening_time: null, closing_time: null, check: false },
-        { day: "Friday", opening_time: null, closing_time: null, check: false },
-        { day: "Saturday", opening_time: null, closing_time: null, check: false },
-        { day: "Sunday", opening_time: null, closing_time: null, check: false }
+        { day: 'Monday', opening_time: null, closing_time: null, check: false },
+        { day: 'Tuesday', opening_time: null, closing_time: null, check: false },
+        { day: 'Wednesday', opening_time: null, closing_time: null, check: false },
+        { day: 'Thursday', opening_time: null, closing_time: null, check: false },
+        { day: 'Friday', opening_time: null, closing_time: null, check: false },
+        { day: 'Saturday', opening_time: null, closing_time: null, check: false },
+        { day: 'Sunday', opening_time: null, closing_time: null, check: false },
       ],
 
       textToo:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit.\n" +
-        "              Asperiores temporibus, rerum iste id obcaecati quae odit accusamus\n" +
-        "              reprehenderit, ipsa nam laudantium pariatur. Harum, soluta. Nam\n" +
-        "              accusantium hic numquam architecto debitis. Lorem ipsum dolor sit\n" +
-        "              amet consectetur adipisicing elit. Asperiores temporibus, rerum\n" +
-        "              iste id obcaecati quae odit accusamus reprehenderit, ipsa nam\n" +
-        "              laudantium pariatur. Harum, soluta. Nam accusantium hic numquam\n" +
-        "              architecto debitis. Asperiores temporibus, rerum iste id obcaecati\n" +
-        "              quae odit accusamus reprehenderit, ipsa nam laudantium pariatur.\n" +
-        "              Harum, soluta. Nam accusantium hic numquam architecto debitis.",
-      workedAt: "Current or Last Organization",
-      lastEducation: "Last Education",
-      homeTown: "Dummy",
-      cityName: "Dummy",
-      followed: "525",
-      telephone: "+1 (234) 567-8974",
-      email: "info@businessname.com",
+        'Lorem ipsum dolor sit amet consectetur adipisicing elit.\n' +
+        '              Asperiores temporibus, rerum iste id obcaecati quae odit accusamus\n' +
+        '              reprehenderit, ipsa nam laudantium pariatur. Harum, soluta. Nam\n' +
+        '              accusantium hic numquam architecto debitis. Lorem ipsum dolor sit\n' +
+        '              amet consectetur adipisicing elit. Asperiores temporibus, rerum\n' +
+        '              iste id obcaecati quae odit accusamus reprehenderit, ipsa nam\n' +
+        '              laudantium pariatur. Harum, soluta. Nam accusantium hic numquam\n' +
+        '              architecto debitis. Asperiores temporibus, rerum iste id obcaecati\n' +
+        '              quae odit accusamus reprehenderit, ipsa nam laudantium pariatur.\n' +
+        '              Harum, soluta. Nam accusantium hic numquam architecto debitis.',
+      workedAt: 'Current or Last Organization',
+      lastEducation: 'Last Education',
+      homeTown: 'Dummy',
+      cityName: 'Dummy',
+      followed: '525',
+      telephone: '+1 (234) 567-8974',
+      email: 'info@businessname.com',
     };
   },
 
   created() {
     this.business_id = this.$route.params.id;
-    console.log("Load Business About start +++++");
+    console.log('Load Business About start +++++');
     this.$store
-      .dispatch("businessOwner/loadUserBusinessAbout",  {
-        business_id:this.business_id
+      .dispatch('businessOwner/loadUserBusinessAbout', {
+        business_id: this.business_id,
       })
       .then(response => {
-        console.log(response, "load business about response end response (3) ++++");
+        console.log(response, 'load business about response end response (3) ++++');
         this.dayOfWorks = this.initialize(this.dayOfWorks);
         console.log(this.business_about);
       })
       .catch(error => {
-        console.log("error from the server or browser error(2) ++++", error);
+        console.log('error from the server or browser error(2) ++++', error);
       })
       .finally(() => {
-        this.business_about = JSON.parse(
-          JSON.stringify(this.$store.getters["businessOwner/getBusinessAbout"])
-        );
+        this.business_about = JSON.parse(JSON.stringify(this.$store.getters['businessOwner/getBusinessAbout']));
         console.log(this.business_about);
       });
   },
@@ -145,15 +145,12 @@ export default {
     hoursOpen() {
       console.log();
       return this.openNow === null
-        ? "Nothing"
-        : this.openNow.opening_time +
-            " AM - " +
-            this.openNow.closing_time +
-            " PM";
-    }
+        ? 'Nothing'
+        : this.openNow.opening_time + ' AM - ' + this.openNow.closing_time + ' PM';
+    },
   },
 
-  mounted(){
+  mounted() {
     this.business_id = this.$route.params.id;
   },
 
@@ -175,17 +172,17 @@ export default {
 
     nFormatter: function(num) {
       if (num >= 1000000000) {
-        return (num / 1000000000).toFixed(1).replace(/\.0$/, "") + "G";
+        return (num / 1000000000).toFixed(1).replace(/\.0$/, '') + 'G';
       }
       if (num >= 1000000) {
-        return (num / 1000000).toFixed(1).replace(/\.0$/, "") + "M";
+        return (num / 1000000).toFixed(1).replace(/\.0$/, '') + 'M';
       }
       if (num >= 1000) {
-        return (num / 1000).toFixed(1).replace(/\.0$/, "") + "K";
+        return (num / 1000).toFixed(1).replace(/\.0$/, '') + 'K';
       }
       return num;
     },
-  }
+  },
 };
 </script>
 

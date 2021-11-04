@@ -89,11 +89,11 @@ export default {
       this.load = true;
       axios
         .get()
-        .then((res) => {
+        .then(res => {
           this.feedbackPosts = res.data.reverse();
           this.load = false;
         })
-        .catch((err) => {
+        .catch(err => {
           console.log(err);
         });
     },
@@ -102,11 +102,11 @@ export default {
       this.load = true;
       axios
         .get()
-        .then((res) => {
+        .then(res => {
           this.Suggestions = res.data.reverse();
           this.load = false;
         })
-        .catch((err) => {
+        .catch(err => {
           console.log(err);
         });
     },

@@ -19,11 +19,7 @@
                   <option>Rating</option>
                 </select>
 
-                <b-form-input
-                  id="inline-form-input-name"
-                  class="br-0"
-                  placeholder="Search "
-                ></b-form-input>
+                <b-form-input id="inline-form-input-name" class="br-0" placeholder="Search "></b-form-input>
 
                 <gmap-autocomplete class="br">
                   <template v-slot:input="slotProps">
@@ -42,18 +38,11 @@
             </b-col>
 
             <b-col cols="12" md="2" class="t-center mt-2">
-              <b-button variant="primary" block>
-                <b-icon icon="search"></b-icon> Search
-              </b-button>
+              <b-button variant="primary" block> <b-icon icon="search"></b-icon> Search </b-button>
             </b-col>
           </b-row>
 
-          <b-dropdown
-            text="Primary"
-            variant="outline-primary"
-            no-caret
-            class="m-2 float-right d-blockk"
-          >
+          <b-dropdown text="Primary" variant="outline-primary" no-caret class="m-2 float-right d-blockk">
             <template #button-content>
               <span> Filter <b-icon icon="filter"> </b-icon> </span>
             </template>
@@ -93,11 +82,11 @@
 </template>
 
 <script>
-import Navbar from "@/components/navbar";
-import Footer from "@/components/footer";
-import Market from "@/components/market/market";
+import Navbar from '@/components/navbar';
+import Footer from '@/components/footer';
+import Market from '@/components/market/market';
 
-import caroussel from "@/components/market/caroussel";
+import caroussel from '@/components/market/caroussel';
 export default {
   components: {
     Navbar,
@@ -109,11 +98,11 @@ export default {
     return {
       selected: [], // Must be an array reference!
       options: [
-        { text: "Agriculture", value: "Agriculture" },
-        { text: "Handicfraft", value: "Handicfraft" },
-        { text: "Electronics", value: "Electronics" },
-        { text: "Restaurant", value: "Restaurant" },
-        { text: "clothing", value: "clothing" },
+        { text: 'Agriculture', value: 'Agriculture' },
+        { text: 'Handicfraft', value: 'Handicfraft' },
+        { text: 'Electronics', value: 'Electronics' },
+        { text: 'Restaurant', value: 'Restaurant' },
+        { text: 'clothing', value: 'clothing' },
       ],
     };
   },

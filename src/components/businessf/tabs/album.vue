@@ -18,22 +18,13 @@
           <b-modal hide-footer title="Create album" id="createalbumModal">
             <div ref="creatform">
               <b-form>
-                <b-form-input
-                  placeholder="Album name"
-                  v-model="name"
-                ></b-form-input>
-                <b-button class="mt-2" variant="primary" @click="createAlbum">
-                  Create</b-button
-                >
+                <b-form-input placeholder="Album name" v-model="name"></b-form-input>
+                <b-button class="mt-2" variant="primary" @click="createAlbum"> Create</b-button>
               </b-form>
             </div>
           </b-modal>
 
-          <div
-            class="createp img-gall predit2"
-            v-for="albums in albums"
-            :key="albums.id"
-          >
+          <div class="createp img-gall predit2" v-for="albums in albums" :key="albums.id">
             <a>
               <span @click="showlbum(albums.id, albums.album_name)">
                 <img class="card-img album-img" :src="albums.cover[0]" alt="" />
@@ -55,25 +46,11 @@
           </div>
         </div>
 
-        <b-modal
-          hide-footer
-          title="Create album"
-          ref="editalbum"
-          id="editalbum"
-        >
+        <b-modal hide-footer title="Create album" ref="editalbum" id="editalbum">
           <div ref="creatform">
             <b-form>
-              <b-form-input
-                placeholder="Album name"
-                v-model="edit_name"
-              ></b-form-input>
-              <b-button
-                class="mt-2"
-                variant="primary"
-                @click="updateAlbum(edit_id)"
-              >
-                Update</b-button
-              >
+              <b-form-input placeholder="Album name" v-model="edit_name"></b-form-input>
+              <b-button class="mt-2" variant="primary" @click="updateAlbum(edit_id)"> Update</b-button>
             </b-form>
           </div>
         </b-modal>
@@ -94,30 +71,17 @@
                           data-toggle="dropdown"
                           aria-haspopup="true"
                           aria-expanded="false"
-                          >Custom Album 1
-                          <i class="fa fa-caret-down" aria-hidden="true"></i
+                          >Custom Album 1 <i class="fa fa-caret-down" aria-hidden="true"></i
                         ></a>
-                        <div
-                          class="dropdown-menu dropdown-menu-right"
-                          aria-labelledby="navbarDropdown"
-                        >
-                          <a
-                            class="dropdown-item"
-                            data-toggle="modal"
-                            data-target="#namealbumModal"
-                            >Edit Name</a
-                          >
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                          <a class="dropdown-item" data-toggle="modal" data-target="#namealbumModal">Edit Name</a>
                           <a class="dropdown-item">Delete Album</a>
                         </div>
                       </li>
                     </ul>
                   </div>
                   <div class="input-group col-md-12 text-center mb-4 selec">
-                    <label
-                      class="col-md-4 control-label pr-0 text-design"
-                      for="name"
-                      >14 Items -
-                    </label>
+                    <label class="col-md-4 control-label pr-0 text-design" for="name">14 Items - </label>
                     <div class="col-md-5 pl-0 pr-0">
                       <select id="gender" class="form-control w-100">
                         <option>Public</option>
@@ -147,8 +111,8 @@
 </template>
 
 <script>
-import Images from "./image";
-import axios from "axios";
+import Images from './image';
+import axios from 'axios';
 
 export default {
   components: { Images },
@@ -162,27 +126,27 @@ export default {
       this.album_name = album_name;
       this.album_id = abum_id;
       console.log(abum_id);
-      console.log("yoo yoo yooy ");
+      console.log('yoo yoo yooy ');
       console.log(this.url);
 
       let loader = this.$loading.show({
         container: this.fullPage ? null : this.$refs.creatform,
         canCancel: true,
         onCancel: this.onCancel,
-        color: "#e75c18",
+        color: '#e75c18',
       });
 
-      const albumUrl = this.url + "/" + abum_id;
+      const albumUrl = this.url + '/' + abum_id;
 
       this.$store
-        .dispatch("businessOwner/getAlbumImages", albumUrl)
+        .dispatch('businessOwner/getAlbumImages', albumUrl)
         .then(() => {
-          console.log("hey yeah photo loaded");
+          console.log('hey yeah photo loaded');
 
           this.showalbum = true;
           loader.hide();
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
 
           loader.hide();
@@ -197,7 +161,7 @@ export default {
       this.edit_id = album_id;
       this.edit_name = album_name;
 
-      this.$refs["editalbum"].show();
+      this.$refs['editalbum'].show();
     },
 
     deleteAlbum(album_id) {
@@ -205,32 +169,32 @@ export default {
         container: this.fullPage ? null : this.$refs.creatform,
         canCancel: true,
         onCancel: this.onCancel,
-        color: "#e75c18",
+        color: '#e75c18',
       });
 
       axios
-        .post("business/album/edit/" + this.url + "/" + album_id, {
+        .post('business/album/edit/' + this.url + '/' + album_id, {
           name: this.name,
         })
-        .then((response) => {
+        .then(response => {
           console.log(response.data);
 
           this.flashMessage.show({
-            status: "success",
+            status: 'success',
 
-            message: "Album Deleted",
+            message: 'Album Deleted',
           });
 
           loader.hide();
         })
-        .catch((err) => {
+        .catch(err => {
           this.sending = false;
 
           if (err.response.status == 422) {
             console.log({ err: err });
 
             this.flashMessage.show({
-              status: "error",
+              status: 'error',
 
               message: err.response.data.message,
             });
@@ -238,9 +202,9 @@ export default {
             loader.hide();
           } else {
             this.flashMessage.show({
-              status: "error",
+              status: 'error',
 
-              message: "Unable to Delete your abum",
+              message: 'Unable to Delete your abum',
             });
             console.log({ err: err });
 
@@ -254,32 +218,32 @@ export default {
         container: this.fullPage ? null : this.$refs.creatform,
         canCancel: true,
         onCancel: this.onCancel,
-        color: "#e75c18",
+        color: '#e75c18',
       });
 
       axios
-        .post("business/album/update/" + this.url + "/" + album_id, {
+        .post('business/album/update/' + this.url + '/' + album_id, {
           name: this.edit_name,
         })
-        .then((response) => {
+        .then(response => {
           console.log(response.data);
 
           this.flashMessage.show({
-            status: "success",
+            status: 'success',
 
-            message: "Album Updated",
+            message: 'Album Updated',
           });
 
           loader.hide();
         })
-        .catch((err) => {
+        .catch(err => {
           this.sending = false;
 
           if (err.response.status == 422) {
             console.log({ err: err });
 
             this.flashMessage.show({
-              status: "error",
+              status: 'error',
 
               message: err.response.data.message,
             });
@@ -287,9 +251,9 @@ export default {
             loader.hide();
           } else {
             this.flashMessage.show({
-              status: "error",
+              status: 'error',
 
-              message: "Unable to create your Album",
+              message: 'Unable to create your Album',
             });
             console.log({ err: err });
 
@@ -303,32 +267,32 @@ export default {
         container: this.fullPage ? null : this.$refs.creatform,
         canCancel: true,
         onCancel: this.onCancel,
-        color: "#e75c18",
+        color: '#e75c18',
       });
 
       axios
-        .post("business/album/create/9", {
+        .post('business/album/create/9', {
           name: this.name,
         })
-        .then((response) => {
+        .then(response => {
           console.log(response.data);
 
           this.flashMessage.show({
-            status: "success",
+            status: 'success',
 
-            message: "Album Created",
+            message: 'Album Created',
           });
 
           loader.hide();
         })
-        .catch((err) => {
+        .catch(err => {
           this.sending = false;
 
           if (err.response.status == 422) {
             console.log({ err: err });
 
             this.flashMessage.show({
-              status: "error",
+              status: 'error',
 
               message: err.response.data.message,
             });
@@ -336,9 +300,9 @@ export default {
             loader.hide();
           } else {
             this.flashMessage.show({
-              status: "error",
+              status: 'error',
 
-              message: "Unable to create your Album",
+              message: 'Unable to create your Album',
             });
             console.log({ err: err });
 
@@ -371,37 +335,37 @@ export default {
       edit_name: null,
 
       images: [
-        "https://placekitten.com/801/800",
-        "https://placekitten.com/802/800",
-        "https://placekitten.com/803/800",
-        "https://placekitten.com/804/800",
-        "https://placekitten.com/805/800",
-        "https://placekitten.com/806/800",
-        "https://placekitten.com/807/800",
-        "https://placekitten.com/808/800",
-        "https://placekitten.com/809/800",
+        'https://placekitten.com/801/800',
+        'https://placekitten.com/802/800',
+        'https://placekitten.com/803/800',
+        'https://placekitten.com/804/800',
+        'https://placekitten.com/805/800',
+        'https://placekitten.com/806/800',
+        'https://placekitten.com/807/800',
+        'https://placekitten.com/808/800',
+        'https://placekitten.com/809/800',
       ],
       imagees: [
-        "https://i.wifegeek.com/200426/f9459c52.jpg",
-        "https://i.wifegeek.com/200426/5ce1e1c7.jpg",
-        "https://i.wifegeek.com/200426/5fa51df3.jpg",
-        "https://i.wifegeek.com/200426/663181fe.jpg",
-        "https://i.wifegeek.com/200426/2d110780.jpg",
-        "https://i.wifegeek.com/200426/e73cd3fa.jpg",
-        "https://i.wifegeek.com/200426/15160d6e.jpg",
-        "https://i.wifegeek.com/200426/d0c881ae.jpg",
-        "https://i.wifegeek.com/200426/a154fc3d.jpg",
-        "https://i.wifegeek.com/200426/71d3aa60.jpg",
-        "https://i.wifegeek.com/200426/d17ce9a0.jpg",
-        "https://i.wifegeek.com/200426/7c4deca9.jpg",
-        "https://i.wifegeek.com/200426/64672676.jpg",
-        "https://i.wifegeek.com/200426/de6ab9c6.jpg",
-        "https://i.wifegeek.com/200426/d8bcb6a7.jpg",
-        "https://i.wifegeek.com/200426/4085d03b.jpg",
-        "https://i.wifegeek.com/200426/177ef44c.jpg",
-        "https://i.wifegeek.com/200426/d74d9040.jpg",
-        "https://i.wifegeek.com/200426/81e24a47.jpg",
-        "https://i.wifegeek.com/200426/43e2e8bb.jpg",
+        'https://i.wifegeek.com/200426/f9459c52.jpg',
+        'https://i.wifegeek.com/200426/5ce1e1c7.jpg',
+        'https://i.wifegeek.com/200426/5fa51df3.jpg',
+        'https://i.wifegeek.com/200426/663181fe.jpg',
+        'https://i.wifegeek.com/200426/2d110780.jpg',
+        'https://i.wifegeek.com/200426/e73cd3fa.jpg',
+        'https://i.wifegeek.com/200426/15160d6e.jpg',
+        'https://i.wifegeek.com/200426/d0c881ae.jpg',
+        'https://i.wifegeek.com/200426/a154fc3d.jpg',
+        'https://i.wifegeek.com/200426/71d3aa60.jpg',
+        'https://i.wifegeek.com/200426/d17ce9a0.jpg',
+        'https://i.wifegeek.com/200426/7c4deca9.jpg',
+        'https://i.wifegeek.com/200426/64672676.jpg',
+        'https://i.wifegeek.com/200426/de6ab9c6.jpg',
+        'https://i.wifegeek.com/200426/d8bcb6a7.jpg',
+        'https://i.wifegeek.com/200426/4085d03b.jpg',
+        'https://i.wifegeek.com/200426/177ef44c.jpg',
+        'https://i.wifegeek.com/200426/d74d9040.jpg',
+        'https://i.wifegeek.com/200426/81e24a47.jpg',
+        'https://i.wifegeek.com/200426/43e2e8bb.jpg',
       ],
       index: 0,
     };

@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from 'axios';
 
 export default {
   namespaced: true,
@@ -153,151 +153,143 @@ export default {
     async getNetworks({ commit }, networkId) {
       const res = await axios.get(`network/${networkId}`);
 
-      commit("setNetwork", res.data);
+      commit('setNetwork', res.data);
     },
 
     async generalSave({ commit }, payload) {
-      const res = await axios.post(
-        `network/general-settings/${payload.networkId}`,
-        payload
-      );
+      const res = await axios.post(`network/general-settings/${payload.networkId}`, payload);
 
-      commit("generalSave", res.data);
+      commit('generalSave', res.data);
     },
 
     async saveChange({ commit }, info, networkId) {
       const res = await axios.post(`network/update/${networkId}`, info);
 
-      commit("saveChange", res.data);
+      commit('saveChange', res.data);
     },
 
     async getBlockedUsers({ commit }) {
-      const res = await axios.get("network/users/blocked");
+      const res = await axios.get('network/users/blocked');
 
-      commit("setBlockedUsers", res.data);
+      commit('setBlockedUsers', res.data);
     },
 
     async unblockUser({ commit }, networkId, userId) {
-      const res = await axios.post(
-        `network/users/unblocked/${networkId}/${userId}`
-      );
+      const res = await axios.post(`network/users/unblocked/${networkId}/${userId}`);
 
-      commit("setUnblock", res.data);
+      commit('setUnblock', res.data);
     },
 
     //getting network roles
     async getRoles({ commit }) {
-      const res = await axios.get("network/roles");
+      const res = await axios.get('network/roles');
 
-      commit("setRoles", res.data);
+      commit('setRoles', res.data);
     },
 
     //getting network members
     async getMembers({ commit }, networkId) {
       const res = await axios.get(`network/${networkId}/members`);
 
-      commit("setMembers", res.data);
+      commit('setMembers', res.data);
     },
 
     // assigning roles
     async assignRole({ commit }, payload) {
-      const res = await axios.post(
-        `network/roles/${payload.networkId}/assign`,
-        payload
-      );
+      const res = await axios.post(`network/roles/${payload.networkId}/assign`, payload);
 
-      commit("assignRole", res.data);
+      commit('assignRole', res.data);
     },
 
     // getting editors
     async getEditors({ commit }, id) {
       const res = await axios.get(`network/${id}/editors`);
 
-      commit("setEditors", res.data);
+      commit('setEditors', res.data);
     },
 
     //edit editor
     async editEditor({ commit }, id) {
       const res = await axios.post(`network/roles/${id}/assign`);
 
-      commit("editEditor", res.data);
+      commit('editEditor', res.data);
     },
 
     //edit editor
     async deleteEditor({ commit }, id) {
       const res = await axios.post(`network/roles/${id}`);
 
-      commit("deletetEditor", res.data);
+      commit('deletetEditor', res.data);
     },
 
     //getting membre request
     async getMemberRequest({ commit }, networkId) {
       const res = await axios.get(`network/${networkId}/members`);
 
-      commit("setMemberRequest", res.data);
+      commit('setMemberRequest', res.data);
     },
 
     //approve member request
     async approveUser({ commit }, payload) {
       const res = await axios.patch(`network/${payload.networkId}/members/${payload.id}/approve`, payload);
 
-      commit("setApprove", res.data);
+      commit('setApprove', res.data);
     },
 
     //decline member request
     async declineUser({ commit }, payload) {
       const res = await axios.post(`network/${payload.networkId}/members/${payload.id}/unapprove`, payload);
 
-      commit("setDecline", res.data);
+      commit('setDecline', res.data);
     },
 
-    //getting pending post, 
+    //getting pending post,
     async getPendingPost({ commit }, networkId) {
       const res = await axios.get(`network/${networkId}/post/pending`);
 
-      commit("setPendingPost", res.data);
+      commit('setPendingPost', res.data);
     },
 
     //approve pending post
     async approvedPost({ commit }, payload) {
       const res = await axios.post(`network/${payload.network_id}/post/approve`, payload);
 
-      commit("setApprovedPost", res.data);
+      commit('setApprovedPost', res.data);
     },
 
     //decline pending post
     async unapprovedPost({ commit }, payload) {
       const res = await axios.post(`network/${payload.network_id}/post/decline`, payload);
 
-      commit("setDeclinedPost", res.data);
+      commit('setDeclinedPost', res.data);
     },
 
     //getting keyword alerts
     async getAlerts({ commit }) {
-      const res = await axios.get("listPostKeywordAlert");
+      const res = await axios.get('listPostKeywordAlert');
 
-      commit("setAlerts", res.data);
+      commit('setAlerts', res.data);
     },
 
     //approve keyword alerts
     async approvedAlerts({ commit }, id) {
-      const res = await axios.post("approveAlertnetwork", id);
+      const res = await axios.post('approveAlertnetwork', id);
 
-      commit("setApprovedAlerts", res.data);
+      commit('setApprovedAlerts', res.data);
     },
 
     //decline keyword alerts
     async unapprovedAlerts({ commit }, id) {
-      const res = await axios.post("unapprovedAlertnetwork", id);
+      const res = await axios.post('unapprovedAlertnetwork', id);
 
-      commit("setDeclinedAlerts", res.data);
+      commit('setDeclinedAlerts', res.data);
     },
 
     //getting notifications
     async getNotifications({ commit }) {
-      const res = await axios.get("notification");
+      const res = await axios.get('notification');
 
-      commit("setNotification", res.data);
+      commit('setNotification', res.data);
     },
   },
 };

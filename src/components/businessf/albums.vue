@@ -12,21 +12,16 @@
         </b-col>
         <b-col cols="4" class="my-auto" v-for="post in albums" :key="post.id">
           <b-img
-              @click="openAlbum(post.id)"
-              class="image-album"
-              v-if="post.items[0].image"
-              :src="post.items[0].image"
+            @click="openAlbum(post.id)"
+            class="image-album"
+            v-if="post.items[0].image"
+            :src="post.items[0].image"
           ></b-img>
           <span class="album-text">
             <div>{{ post.name }}</div>
             <span> {{ post.items.length }} item(s)</span>
           </span>
-          <b-dropdown
-              class="options"
-              variant="primary"
-              size="sm"
-              id="dropdown-left"
-          >
+          <b-dropdown class="options" variant="primary" size="sm" id="dropdown-left">
             <template #button-content>
               <b-icon icon="three-dots" aria-hidden="true"></b-icon>
             </template>
@@ -50,10 +45,7 @@
       <b-row>
         <div class="albums">
           <b-modal hide-footer v-model="modalShow">
-            <b-img
-                fluid-grow
-                src="https://picsum.photos/300/150/?image=41"
-            ></b-img>
+            <b-img fluid-grow src="https://picsum.photos/300/150/?image=41"></b-img>
             <h3>Picture Title</h3>
           </b-modal>
         </div>
@@ -69,12 +61,7 @@
         <b-col md="4" v-if="image" class="album mt-2">
           <b-img @click="view" :src="image" class="image-album"></b-img>
         </b-col>
-        <b-col
-            md="4"
-            v-for="item in album[0]"
-            :key="item.id"
-            class="album mt-2"
-        >
+        <b-col md="4" v-for="item in album[0]" :key="item.id" class="album mt-2">
           <b-img @click="view" :src="item.image" class="image-album"></b-img>
         </b-col>
       </b-row>
@@ -99,20 +86,20 @@ export default {
       posts: [
         {
           id: 1,
-          image: "https://picsum.photos/300/150/?image=41",
-          title: "Title 2",
+          image: 'https://picsum.photos/300/150/?image=41',
+          title: 'Title 2',
           text:
-            " Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum quam, doloribus id sit consequuntur tempora molestiae blanditiis.",
+            ' Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum quam, doloribus id sit consequuntur tempora molestiae blanditiis.',
         },
       ],
       images: [
         {
           id: 1,
-          image: "https://picsum.photos/300/150/?image=41",
+          image: 'https://picsum.photos/300/150/?image=41',
         },
         {
           id: 2,
-          image: "https://picsum.photos/300/150/?image=41",
+          image: 'https://picsum.photos/300/150/?image=41',
         },
       ],
     };
@@ -146,11 +133,11 @@ export default {
       this.albumShow = true;
     },
     showModal() {
-      this.$refs["modal-1"].show();
+      this.$refs['modal-1'].show();
     },
-    open(){
-      this.modalShow = !this.modalShow
-    }
+    open() {
+      this.modalShow = !this.modalShow;
+    },
   },
 };
 </script>

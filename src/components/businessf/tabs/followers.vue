@@ -6,12 +6,7 @@
           <b-tabs content-class="mt-3" fill pills>
             <b-tab title="Followers (2)" active>
               <div class="media border-botmediatom mb-4">
-                <img
-                  src="@/assets/img/alima.jpg"
-                  alt="John Doe"
-                  class="mr-2 rounded-circle"
-                  style="width:60px;"
-                />
+                <img src="@/assets/img/alima.jpg" alt="John Doe" class="mr-2 rounded-circle" style="width:60px;" />
                 <div class="media-body">
                   <b><b-link>J. Circlehead</b-link></b>
                   <p class="">
@@ -25,13 +20,7 @@
                 </div>
 
                 <span class="pull-right my-auto">
-                  <b-dropdown
-                    id="dropdown-1"
-                    text="Contact"
-                    class="m-md-2 drop"
-                    variant="primary"
-                    size="sm"
-                  >
+                  <b-dropdown id="dropdown-1" text="Contact" class="m-md-2 drop" variant="primary" size="sm">
                     <b-dropdown-item>
                       <b-icon icon="chat-fill" variant="primary"></b-icon>
                       Message</b-dropdown-item
@@ -40,23 +29,13 @@
                       <b-icon icon="telephone-fill" variant="primary"></b-icon>
                       Call Now</b-dropdown-item
                     >
-                    <b-dropdown-item>
-                      <b-icon icon="geo-alt" variant="primary"></b-icon> Get
-                      Direction</b-dropdown-item
-                    >
+                    <b-dropdown-item> <b-icon icon="geo-alt" variant="primary"></b-icon> Get Direction</b-dropdown-item>
                   </b-dropdown>
-                  <b-button variant="outline-primary" size="sm"
-                    ><b-icon-plus></b-icon-plus> Community</b-button
-                  >
+                  <b-button variant="outline-primary" size="sm"><b-icon-plus></b-icon-plus> Community</b-button>
                 </span>
               </div>
               <div class="media border-botmediatom mb-4">
-                <img
-                  src="@/assets/img/alima.jpg"
-                  alt="John Doe"
-                  class="mr-2 rounded-circle"
-                  style="width:60px;"
-                />
+                <img src="@/assets/img/alima.jpg" alt="John Doe" class="mr-2 rounded-circle" style="width:60px;" />
                 <div class="media-body">
                   <b><b-link>J. Circlehead</b-link></b>
                   <p class="">
@@ -70,13 +49,7 @@
                 </div>
 
                 <span class="pull-right my-auto">
-                  <b-dropdown
-                    id="dropdown-1"
-                    text="Contact"
-                    class="m-md-2 drop"
-                    variant="primary"
-                    size="sm"
-                  >
+                  <b-dropdown id="dropdown-1" text="Contact" class="m-md-2 drop" variant="primary" size="sm">
                     <b-dropdown-item>
                       <b-icon icon="chat-fill" variant="primary"></b-icon>
                       Message</b-dropdown-item
@@ -85,25 +58,15 @@
                       <b-icon icon="telephone-fill" variant="primary"></b-icon>
                       Call Now</b-dropdown-item
                     >
-                    <b-dropdown-item>
-                      <b-icon icon="geo-alt" variant="primary"></b-icon> Get
-                      Direction</b-dropdown-item
-                    >
+                    <b-dropdown-item> <b-icon icon="geo-alt" variant="primary"></b-icon> Get Direction</b-dropdown-item>
                   </b-dropdown>
-                  <b-button variant="outline-primary" size="sm"
-                    ><b-icon-plus></b-icon-plus> Community</b-button
-                  >
+                  <b-button variant="outline-primary" size="sm"><b-icon-plus></b-icon-plus> Community</b-button>
                 </span>
               </div>
             </b-tab>
             <b-tab title="Following (1)">
               <div class="media border-botmediatom mb-4">
-                <img
-                  src="@/assets/img/alima.jpg"
-                  alt="John Doe"
-                  class="mr-2 rounded-circle"
-                  style="width:60px;"
-                />
+                <img src="@/assets/img/alima.jpg" alt="John Doe" class="mr-2 rounded-circle" style="width:60px;" />
                 <div class="media-body">
                   <b><b-link>J. Circlehead</b-link></b>
                   <p class="">
@@ -117,13 +80,7 @@
                 </div>
 
                 <span class="pull-right my-auto">
-                  <b-dropdown
-                    id="dropdown-1"
-                    text="Contact"
-                    class="m-md-2 drop"
-                    variant="primary"
-                    size="sm"
-                  >
+                  <b-dropdown id="dropdown-1" text="Contact" class="m-md-2 drop" variant="primary" size="sm">
                     <b-dropdown-item>
                       <b-icon icon="chat-fill" variant="primary"></b-icon>
                       Message</b-dropdown-item
@@ -132,14 +89,9 @@
                       <b-icon icon="telephone-fill" variant="primary"></b-icon>
                       Call Now</b-dropdown-item
                     >
-                    <b-dropdown-item>
-                      <b-icon icon="geo-alt" variant="primary"></b-icon> Get
-                      Direction</b-dropdown-item
-                    >
+                    <b-dropdown-item> <b-icon icon="geo-alt" variant="primary"></b-icon> Get Direction</b-dropdown-item>
                   </b-dropdown>
-                  <b-button variant="outline-primary" size="sm"
-                    ><b-icon-plus></b-icon-plus> Community</b-button
-                  >
+                  <b-button variant="outline-primary" size="sm"><b-icon-plus></b-icon-plus> Community</b-button>
                 </span>
               </div>
             </b-tab>
@@ -162,32 +114,20 @@
                 </div>
                 <div class="text-right col-md-4 my-auto">
                   <span class="pull-right my-auto">
-                    <b-dropdown
-                      id="dropdown-1"
-                      text="Contact"
-                      class="m-md-2 drop"
-                      variant="primary"
-                      size="sm"
-                    >
+                    <b-dropdown id="dropdown-1" text="Contact" class="m-md-2 drop" variant="primary" size="sm">
                       <b-dropdown-item>
                         <b-icon icon="chat-fill" variant="primary"></b-icon>
                         Message</b-dropdown-item
                       >
                       <b-dropdown-item>
-                        <b-icon
-                          icon="telephone-fill"
-                          variant="primary"
-                        ></b-icon>
+                        <b-icon icon="telephone-fill" variant="primary"></b-icon>
                         Call Now</b-dropdown-item
                       >
                       <b-dropdown-item>
-                        <b-icon icon="geo-alt" variant="primary"></b-icon> Get
-                        Direction</b-dropdown-item
+                        <b-icon icon="geo-alt" variant="primary"></b-icon> Get Direction</b-dropdown-item
                       >
                     </b-dropdown>
-                    <b-button variant="outline-primary" size="sm"
-                      ><b-icon-plus></b-icon-plus> Community</b-button
-                    >
+                    <b-button variant="outline-primary" size="sm"><b-icon-plus></b-icon-plus> Community</b-button>
                   </span>
                 </div>
               </div>
@@ -205,32 +145,20 @@
                 </div>
                 <div class="text-right col-md-4 my-auto">
                   <span class="pull-right my-auto">
-                    <b-dropdown
-                      id="dropdown-1"
-                      text="Contact"
-                      class="m-md-2 drop"
-                      variant="primary"
-                      size="sm"
-                    >
+                    <b-dropdown id="dropdown-1" text="Contact" class="m-md-2 drop" variant="primary" size="sm">
                       <b-dropdown-item>
                         <b-icon icon="chat-fill" variant="primary"></b-icon>
                         Message</b-dropdown-item
                       >
                       <b-dropdown-item>
-                        <b-icon
-                          icon="telephone-fill"
-                          variant="primary"
-                        ></b-icon>
+                        <b-icon icon="telephone-fill" variant="primary"></b-icon>
                         Call Now</b-dropdown-item
                       >
                       <b-dropdown-item>
-                        <b-icon icon="geo-alt" variant="primary"></b-icon> Get
-                        Direction</b-dropdown-item
+                        <b-icon icon="geo-alt" variant="primary"></b-icon> Get Direction</b-dropdown-item
                       >
                     </b-dropdown>
-                    <b-button variant="outline-primary" size="sm"
-                      ><b-icon-plus></b-icon-plus> Community</b-button
-                    >
+                    <b-button variant="outline-primary" size="sm"><b-icon-plus></b-icon-plus> Community</b-button>
                   </span>
                 </div>
               </div>
@@ -250,32 +178,20 @@
                 </div>
                 <div class="text-right col-md-4 my-auto">
                   <span class="pull-right my-auto">
-                    <b-dropdown
-                      id="dropdown-1"
-                      text="Contact"
-                      class="m-md-2 drop"
-                      variant="primary"
-                      size="sm"
-                    >
+                    <b-dropdown id="dropdown-1" text="Contact" class="m-md-2 drop" variant="primary" size="sm">
                       <b-dropdown-item>
                         <b-icon icon="chat-fill" variant="primary"></b-icon>
                         Message</b-dropdown-item
                       >
                       <b-dropdown-item>
-                        <b-icon
-                          icon="telephone-fill"
-                          variant="primary"
-                        ></b-icon>
+                        <b-icon icon="telephone-fill" variant="primary"></b-icon>
                         Call Now</b-dropdown-item
                       >
                       <b-dropdown-item>
-                        <b-icon icon="geo-alt" variant="primary"></b-icon> Get
-                        Direction</b-dropdown-item
+                        <b-icon icon="geo-alt" variant="primary"></b-icon> Get Direction</b-dropdown-item
                       >
                     </b-dropdown>
-                    <b-button variant="outline-primary" size="sm"
-                      ><b-icon-plus></b-icon-plus> Community</b-button
-                    >
+                    <b-button variant="outline-primary" size="sm"><b-icon-plus></b-icon-plus> Community</b-button>
                   </span>
                 </div>
               </div>

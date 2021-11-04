@@ -20,12 +20,12 @@ export default {
     return {
       selected: null,
       options: [
-        { value: null, text: "Select" },
-        { value: "private", text: "Private" },
-        { value: "public", text: "Public" }
-      ]
+        { value: null, text: 'Select' },
+        { value: 'private', text: 'Private' },
+        { value: 'public', text: 'Public' },
+      ],
     };
-  }
+  },
 };
 </script>
 

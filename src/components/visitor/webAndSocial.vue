@@ -4,15 +4,13 @@
     <hr />
     <div>
       <b-link class="link" v-b-modal.modal-7
-        ><b-icon icon="globe" class="primary"></b-icon>
-        https://www.yourwebsite.com</b-link
+        ><b-icon icon="globe" class="primary"></b-icon> https://www.yourwebsite.com</b-link
       >
     </div>
 
     <div>
       <b-link class="link" v-b-modal.modal-7
-        ><b-icon icon="facebook" class="primary"></b-icon>
-        https://www.facebook.com/yourid</b-link
+        ><b-icon icon="facebook" class="primary"></b-icon> https://www.facebook.com/yourid</b-link
       >
     </div>
   </div>
@@ -25,19 +23,19 @@ export default {
       selected: null,
       socialSelected: null,
       options: [
-        { value: null, text: "Select" },
-        { value: "private", text: "Private" },
-        { value: "public", text: "Public" }
+        { value: null, text: 'Select' },
+        { value: 'private', text: 'Private' },
+        { value: 'public', text: 'Public' },
       ],
       socials: [
-        { value: null, text: "Select" },
-        { value: "instagram", text: "Instagram" },
-        { value: "facebook", text: "FaceBook" },
-        { value: "twitter", text: "Twitter" },
-        { value: "google-plus", text: "Google+" }
-      ]
+        { value: null, text: 'Select' },
+        { value: 'instagram', text: 'Instagram' },
+        { value: 'facebook', text: 'FaceBook' },
+        { value: 'twitter', text: 'Twitter' },
+        { value: 'google-plus', text: 'Google+' },
+      ],
     };
-  }
+  },
 };
 </script>
 

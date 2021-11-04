@@ -76,66 +76,58 @@
     </div>
 
     <b-container>
-      <b-link href="#foo" class="f-left text" v-on:click="deleteNetwork"
-        >Delete Network</b-link
-      >
+      <b-link href="#foo" class="f-left text" v-on:click="deleteNetwork">Delete Network</b-link>
     </b-container>
 
     <div class="b-bottomn">
-      <b-button
-        variant="primary"
-        class="a-button-l text"
-        @click="save"
-        :loading="load"
-        >Save Changes</b-button
-      >
+      <b-button variant="primary" class="a-button-l text" @click="save" :loading="load">Save Changes</b-button>
       <br />
     </div>
   </b-container>
 </template>
 
 <script>
-import { mapActions, mapGetters } from "vuex";
+import { mapActions, mapGetters } from 'vuex';
 export default {
-  name: "general",
+  name: 'general',
   data: () => ({
     load: false,
-    permissions: "",
-    approval: "",
-    privacy: "",
-    networkId: "",
+    permissions: '',
+    approval: '',
+    privacy: '',
+    networkId: '',
     options: [
       {
-        text: "Admin Only",
-        value: "admin",
+        text: 'Admin Only',
+        value: 'admin',
       },
       {
-        text: "Editor",
-        value: "editor",
+        text: 'Editor',
+        value: 'editor',
       },
       {
-        text: "Member",
-        value: "member",
+        text: 'Member',
+        value: 'member',
       },
       {
-        text: "Editor And Member",
-        value: "editor and member",
+        text: 'Editor And Member',
+        value: 'editor and member',
       },
     ],
     lists: [
       {
-        text: "Approval by admin",
-        value: "admin approval",
+        text: 'Approval by admin',
+        value: 'admin approval',
         disabled: false,
       },
       {
-        text: "Approval by editor and admin",
-        value: "editor and admin approval",
+        text: 'Approval by editor and admin',
+        value: 'editor and admin approval',
         disabled: false,
       },
       {
-        text: "Approve only member post",
-        value: "only member post approval",
+        text: 'Approve only member post',
+        value: 'only member post approval',
         disabled: false,
       },
     ],
@@ -143,29 +135,29 @@ export default {
 
   computed: {
     ...mapGetters({
-      getNetwork: "networkSetting/getNetwork",
+      getNetwork: 'networkSetting/getNetwork',
     }),
   },
 
   methods: {
     ...mapActions({
-      generalSave: "networkSetting/generalSave",
+      generalSave: 'networkSetting/generalSave',
     }),
 
     check() {
-      if (this.permissions == "admin") {
+      if (this.permissions == 'admin') {
         this.lists[0].disabled = true;
         this.lists[1].disabled = true;
         this.lists[2].disabled = true;
-      } else if (this.permissions == "editor") {
+      } else if (this.permissions == 'editor') {
         this.lists[0].disabled = false;
         this.lists[1].disabled = false;
         this.lists[2].disabled = true;
-      } else if (this.permissions == "member") {
+      } else if (this.permissions == 'member') {
         this.lists[0].disabled = true;
         this.lists[1].disabled = true;
         this.lists[2].disabled = false;
-      } else if (this.permissions == "editor and member") {
+      } else if (this.permissions == 'editor and member') {
         this.lists[0].disabled = false;
         this.lists[1].disabled = false;
         this.lists[2].disabled = true;
@@ -184,9 +176,9 @@ export default {
       this.generalSave(payload)
         .then(() => {
           this.load = false;
-          alert("Successful");
+          alert('Successful');
         })
-        .catch((err) => {
+        .catch(err => {
           this.load = false;
           console.log(err);
         });

@@ -17,9 +17,7 @@
         </b-col>
         <b-col>
           <div class="b-bottomn f-right">
-            <b-button variant="primary" class="a-button-l duration">
-              Mark as Read</b-button
-            >
+            <b-button variant="primary" class="a-button-l duration"> Mark as Read</b-button>
           </div>
         </b-col>
       </b-row>
@@ -51,12 +49,10 @@
           </p>
 
           <p class="text">
-            Lorem Ipsum is this is just a dummy text to post simply dummy text
-            of the printing and typesetting industry. Lorem Ipsum has been the
-            industry's standard dummy text ever since the 1500s, Lorem Ipsum is
-            simply dummy text of the printing and typesetting industry. Lorem
-            Ipsum has been the industry's standard dummy text ever since the
-            1500s,
+            Lorem Ipsum is this is just a dummy text to post simply dummy text of the printing and typesetting industry.
+            Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, Lorem Ipsum is simply dummy
+            text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever
+            since the 1500s,
           </p>
 
           <hr width="100%" />
@@ -68,7 +64,7 @@
 
 <script>
 export default {
-  name: "notification"
+  name: 'notification',
 };
 </script>
 

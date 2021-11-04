@@ -8,8 +8,7 @@
               Create personalised website for your business
             </h2>
             <p class="my-2">
-              Start with a template and male it your own, with easy drag and
-              drop & 1000s of design features
+              Start with a template and male it your own, with easy drag and drop & 1000s of design features
             </p>
             <br /><br />
             <b-col class="my-3" cols="8" offset-md="2">
@@ -40,99 +39,57 @@
                 </p>
               </template>
               <p class="mt-1 m-0 p-0">
-                <span class="float-left m-0 p-0">
-                  Template Name <strong class="color-site">Free</strong>
-                </span>
+                <span class="float-left m-0 p-0"> Template Name <strong class="color-site">Free</strong> </span>
                 <span class="float-right p-0 m-0">
                   <b-link href="#foo">Choose Another Template</b-link>
                 </span>
               </p>
-              <img
-                src="https://business.bridgeafrica.info/assets/img/temp.png"
-                alt=""
-                class="template-pic"
-              />
+              <img src="https://business.bridgeafrica.info/assets/img/temp.png" alt="" class="template-pic" />
             </b-card>
           </b-col>
           <b-col md="6">
             <div id="fileUpdate" v-on:click="upload">
               <div id="fileUpdate-left">
-                <b-icon-image-fill
-                  class="upload-pic-icon"
-                  aria-hidden="true"
-                ></b-icon-image-fill>
+                <b-icon-image-fill class="upload-pic-icon" aria-hidden="true"></b-icon-image-fill>
                 <p class="upload-text">Add Company logo</p>
               </div>
               <div id="fileName"></div>
             </div>
-            <b-form-file
-              v-model="prod_photo"
-              id="prod_photo"
-              class="mt-3 d-none"
-              plain
-            ></b-form-file>
-            <b-form-group
-              id="fieldset-1"
-              label="Website Title*"
-              label-for="input-1"
-              class="mt-3"
-            >
+            <b-form-file v-model="prod_photo" id="prod_photo" class="mt-3 d-none" plain></b-form-file>
+            <b-form-group id="fieldset-1" label="Website Title*" label-for="input-1" class="mt-3">
               <b-form-input id="input-1" v-model="title" trim></b-form-input>
             </b-form-group>
 
-            <b-form-group
-              id="fieldset-1"
-              label="Pick a subdomain name*"
-              label-for="input-1"
-            >
-              <b-form-input
-                id="input-1"
-                v-model="title"
-                trim
-                placeholder="http://"
-              ></b-form-input>
+            <b-form-group id="fieldset-1" label="Pick a subdomain name*" label-for="input-1">
+              <b-form-input id="input-1" v-model="title" trim placeholder="http://"></b-form-input>
             </b-form-group>
             <b-row>
               <b-col cols="12">
                 <div class="message my-auto mx-auto text-center px-3 py-2">
                   <div class="d-inline-block">
-                    <b-icon-info-circle-fill
-                      scale="1.5"
-                    ></b-icon-info-circle-fill>
+                    <b-icon-info-circle-fill scale="1.5"></b-icon-info-circle-fill>
                   </div>
                   <div class="d-inline-block">
                     <h5 class="font-weight-bolder text-left mt-2">
                       You are currently subscribed to free plan
                     </h5>
                     <p class="text-left text-design">
-                      You can get access to features like mapping your domain,
-                      premium template, premium support and much more. Simply
-                      upgrade your plan.
+                      You can get access to features like mapping your domain, premium template, premium support and
+                      much more. Simply upgrade your plan.
                     </p>
                   </div>
 
                   <p class="text-right">
-                    <b-link href="/business_owner/create_website_plan"
-                      >Change Plan</b-link
-                    >
+                    <b-link href="/business_owner/create_website_plan">Change Plan</b-link>
                   </p>
                 </div>
               </b-col>
             </b-row>
             <b-row class="mt-2">
               <b-col cols="12" class="m-0 pr-3">
-                <b-button
-                  variant="outline-dark"
-                  class="ml-3 float-left"
-                  size="sm"
-                  >Cancel</b-button
-                >
-                <b-button variant="primary" class="ml-3 float-right" size="sm"
-                  >Save & Open Editor</b-button
-                >
-                <b-button variant="primary" class="ml-3 float-right" size="sm"
-                  >Save</b-button
-                >
+                <b-button variant="outline-dark" class="ml-3 float-left" size="sm">Cancel</b-button>
+                <b-button variant="primary" class="ml-3 float-right" size="sm">Save & Open Editor</b-button>
+                <b-button variant="primary" class="ml-3 float-right" size="sm">Save</b-button>
               </b-col>
             </b-row>
           </b-col>
@@ -144,20 +101,20 @@
 
 <script>
 export default {
-  name: "createWebsiteStep2",
+  name: 'createWebsiteStep2',
   data() {
     return {
-      prod_photo: "",
-      title: ""
+      prod_photo: '',
+      title: '',
     };
   },
   computed: {},
   methods: {
     upload() {
-      let formFile = document.getElementById("prod_photo");
+      let formFile = document.getElementById('prod_photo');
       formFile.click();
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -207,7 +164,7 @@ export default {
   flex: 1;
   height: 1px;
   margin: 0.5rem 0 0 0;
-  content: "";
+  content: '';
   background-color: rgb(100 161 72);
   width: 72%;
   left: 106px;

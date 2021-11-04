@@ -3,13 +3,7 @@
     <navbar />
 
     <div class="container-fluid">
-      <ly-tab
-        v-model="selectedId"
-        :items="items"
-        :options="options"
-        class="center-ly"
-      >
-      </ly-tab>
+      <ly-tab v-model="selectedId" :items="items" :options="options" class="center-ly"> </ly-tab>
 
       <hr width="100%" class="d-none" d-md-block />
     </div>
@@ -43,30 +37,30 @@
 </template>
 
 <script>
-import navbar from "@/components/navbar";
-import Business from "../components/businessOwner/business";
+import navbar from '@/components/navbar';
+import Business from '../components/businessOwner/business';
 
-import Settings from "../components/businessOwner/settings";
+import Settings from '../components/businessOwner/settings';
 
-import Inbox from "../components/businessOwner/inbox";
+import Inbox from '../components/businessOwner/inbox';
 
-import LyTab from "@/tab/src/index.vue";
+import LyTab from '@/tab/src/index.vue';
 
-import axios from "axios";
+import axios from 'axios';
 
-import Footer from "../components/footer";
+import Footer from '../components/footer';
 export default {
-  name: "Home",
+  name: 'Home',
   components: {
     navbar,
     Business,
-   
+
     LyTab,
     Settings,
-   
+
     Inbox,
-   
-    Footer
+
+    Footer,
   },
   data() {
     return {
@@ -74,40 +68,38 @@ export default {
       bottomSelectedId: 0,
       url_data: null,
       items: [
-        { label: "Home ", icon: "" },
+        { label: 'Home ', icon: '' },
 
-        { label: "Inbox", icon: "" },
-        { label: "Notification", icon: "" },
-        { label: "Pending Post", icon: "" },
-        { label: "Insight", icon: "" },
+        { label: 'Inbox', icon: '' },
+        { label: 'Notification', icon: '' },
+        { label: 'Pending Post', icon: '' },
+        { label: 'Insight', icon: '' },
 
-        { label: "Settings", icon: "" }
+        { label: 'Settings', icon: '' },
       ],
       options: {
-        activeColor: "#1d98bd"
-      }
+        activeColor: '#1d98bd',
+      },
     };
   },
 
   methods: {
     businessInfo() {
       this.$store
-        .dispatch("businessOwner/businessInfo", this.url_data)
+        .dispatch('businessOwner/businessInfo', this.url_data)
         .then(() => {
-          console.log("hey yeah");
+          console.log('hey yeah');
         })
         .catch(err => {
           console.log({ err: err });
         });
     },
 
-  
-
     businessCommunityTotal() {
       this.$store
-        .dispatch("businessOwner/businessCommunityTotal", this.url_data)
+        .dispatch('businessOwner/businessCommunityTotal', this.url_data)
         .then(() => {
-          console.log("hey yeah");
+          console.log('hey yeah');
         })
         .catch(err => {
           console.log({ err: err });
@@ -116,26 +108,25 @@ export default {
 
     ownerPost() {
       this.$store
-        .dispatch("businessOwner/ownerPost", this.url_data)
+        .dispatch('businessOwner/ownerPost', this.url_data)
         .then(() => {
-          console.log("hey yeah");
+          console.log('hey yeah');
         })
         .catch(err => {
           console.log({ err: err });
         });
-    }
+    },
   },
   computed: {},
 
   mounted() {
     this.url_data = this.$route.params.id;
 
+    this.businessInfo();
 
-     this.businessInfo();
-   
-     this.businessCommunityTotal();
-     this.ownerPost();
-  }
+    this.businessCommunityTotal();
+    this.ownerPost();
+  },
 };
 </script>
 

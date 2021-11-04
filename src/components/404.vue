@@ -21,7 +21,7 @@
       </div>
     </div>
   </section>
-</template>  
+</template>
 
 <script>
 export default {};
@@ -30,7 +30,7 @@ export default {};
 .page_404 {
   padding: 40px 0;
   background: #fff;
-  font-family: "Arvo", serif;
+  font-family: 'Arvo', serif;
 }
 
 .page_404 img {

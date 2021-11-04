@@ -58,13 +58,7 @@
 
     <div class="b-bottom">
       <b-container>
-        <b-form-group
-          label-cols-lg="3"
-          label="Email"
-          label-size="md"
-          label-class="font-weight-bold pt-0"
-          class="mb-0"
-        >
+        <b-form-group label-cols-lg="3" label="Email" label-size="md" label-class="font-weight-bold pt-0" class="mb-0">
           <b-form-input id="bname" placeholder="" required></b-form-input>
         </b-form-group>
       </b-container>
@@ -79,25 +73,14 @@
           label-class="font-weight-bold pt-0"
           class="mb-0"
         >
-          <country-select
-            v-model="country"
-            :country="country"
-            topCountry="US"
-            class="form-control"
-          />
+          <country-select v-model="country" :country="country" topCountry="US" class="form-control" />
         </b-form-group>
       </b-container>
     </div>
 
     <div class="b-bottom">
       <b-container>
-        <b-form-group
-          label-cols-lg="3"
-          label="City"
-          label-size="md"
-          label-class="font-weight-bold pt-0"
-          class="mb-0"
-        >
+        <b-form-group label-cols-lg="3" label="City" label-size="md" label-class="font-weight-bold pt-0" class="mb-0">
           <b-form-input id="bname" placeholder="" required></b-form-input>
         </b-form-group>
       </b-container>
@@ -140,12 +123,7 @@
           label-class="font-weight-bold pt-0"
           class="mb-0"
         >
-          <b-form-textarea
-            id="textarea"
-            placeholder="Enter something..."
-            rows="3"
-            max-rows="6"
-          ></b-form-textarea>
+          <b-form-textarea id="textarea" placeholder="Enter something..." rows="3" max-rows="6"></b-form-textarea>
         </b-form-group>
       </b-container>
     </div>
@@ -168,7 +146,7 @@
 
 <script>
 export default {
-  name: "general"
+  name: 'general',
 };
 </script>
 

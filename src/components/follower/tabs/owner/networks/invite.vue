@@ -38,13 +38,7 @@
                     <b-col cols="2"> </b-col>
 
                     <b-col cols="5">
-                      <b-button
-                        block
-                        variant="primary"
-                        size="sm"
-                        class="b-background f-15"
-                        style="font-size:15px"
-                      >
+                      <b-button block variant="primary" size="sm" class="b-background f-15" style="font-size:15px">
                         <b-icon icon="plus" class="ico   f-15 "> </b-icon>
                         Invite
                       </b-button>
@@ -88,13 +82,7 @@
                     <b-col cols="2"> </b-col>
 
                     <b-col cols="5">
-                      <b-button
-                        block
-                        variant="primary"
-                        size="sm"
-                        class="b-background f-15"
-                        style="font-size:15px"
-                      >
+                      <b-button block variant="primary" size="sm" class="b-background f-15" style="font-size:15px">
                         <b-icon icon="plus" class="ico   f-15 "> </b-icon>
                         Invite
                       </b-button>
@@ -138,13 +126,7 @@
                     <b-col cols="2"> </b-col>
 
                     <b-col cols="5">
-                      <b-button
-                        block
-                        variant="primary"
-                        size="sm"
-                        class="b-background f-15"
-                        style="font-size:15px"
-                      >
+                      <b-button block variant="primary" size="sm" class="b-background f-15" style="font-size:15px">
                         <b-icon icon="plus" class="ico   f-15 "> </b-icon>
                         Invite
                       </b-button>

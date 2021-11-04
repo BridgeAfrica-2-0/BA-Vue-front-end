@@ -1,7 +1,5 @@
 <template>
   <b-container>
-    
-
     <div class="">
       <b-container>
         <b-form-group
@@ -77,13 +75,7 @@
           label-class="font-weight-bold pt-0 username"
           class="mb-0 text"
         >
-          <b-form-textarea
-            id="textarea"
-          
-            placeholder="Enter something..."
-            rows="3"
-            max-rows="6"
-          ></b-form-textarea>
+          <b-form-textarea id="textarea" placeholder="Enter something..." rows="3" max-rows="6"></b-form-textarea>
         </b-form-group>
       </b-container>
       <hr />
@@ -98,8 +90,7 @@
           label-class="font-weight-bold pt-0 username"
           class="mb-0"
         >
-          <b-form-checkbox v-model="checked" name="check-button" switch>
-          </b-form-checkbox>
+          <b-form-checkbox v-model="checked" name="check-button" switch> </b-form-checkbox>
         </b-form-group>
       </b-container>
       <hr />
@@ -109,18 +100,16 @@
       <b-link href="#foo" class="f-left text">Delete Business Identity</b-link>
     </b-container>
 
-
     <div class="b-bottomn">
       <b-button variant="primary" class="a-button-l text">Save Changes</b-button>
       <br />
     </div>
-    
   </b-container>
 </template>
 
 <script>
 export default {
-  name: "general"
+  name: 'general',
 };
 </script>
 
@@ -135,7 +124,6 @@ export default {
 }
 
 .b-bottomn {
- 
   margin-bottom: 30px;
   padding-bottom: 10px;
 }
@@ -169,7 +157,7 @@ export default {
     top: -5px;
     left: -20px;
   }
-  .btn{
+  .btn {
     font-size: 12px;
   }
 }

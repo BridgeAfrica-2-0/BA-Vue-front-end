@@ -1,18 +1,16 @@
 <template>
   <div class="main">
-
     <div class="images">
       <div>
-        <img src="@/assets/img/banner.jpg" v-if="info.user.cover_picture == null " class="banner" />     <img  :src="info.user.cover_picture" v-if="info.user.cover_picture != null " class="banner" />      
+        <img src="@/assets/img/banner.jpg" v-if="info.user.cover_picture == null" class="banner" />
+        <img :src="info.user.cover_picture" v-if="info.user.cover_picture != null" class="banner" />
       </div>
       <b-row class="mt-2 mb-2 options">
         <b-col cols="6" class="avata">
-          <div>     
-            
-
-
-            <b-avatar v-if="info.user.profile_picture !=null "
-               :src="info.user.profile_picture"
+          <div>
+            <b-avatar
+              v-if="info.user.profile_picture != null"
+              :src="info.user.profile_picture"
               class=" float-left avatar"
               badge-variant="primary"
               badge-offset="10px"
@@ -20,25 +18,23 @@
             >
             </b-avatar>
 
-
-             <b-avatar v-if="info.user.profile_picture ==null "
-               src="https://placekitten.com/400/300"
+            <b-avatar
+              v-if="info.user.profile_picture == null"
+              src="https://placekitten.com/400/300"
               class=" float-left avatar"
               badge-variant="primary"
               badge-offset="10px"
               variant="white"
             >
             </b-avatar>
-
-
           </div>
           <div class="d-inline-block ml-4 float-left mt-4">
             <b-link>
-              <h5 class="font-weight-bolder name"> {{info.user.name}} </h5>
+              <h5 class="font-weight-bolder name">{{ info.user.name }}</h5>
             </b-link>
             <br />
 
-            <span class="k15 duration"> 0{{info.user.community}} Community </span>
+            <span class="k15 duration"> 0{{ info.user.community }} Community </span>
           </div>
         </b-col>
         <b-col cols="12">
@@ -52,12 +48,7 @@
               <span class="txt-btn">Message</span></b-button
             >
 
-            <b-dropdown
-              size="sm"
-              class="ml-2 dropdown"
-              no-caret
-              variant="outline-primary"
-            >
+            <b-dropdown size="sm" class="ml-2 dropdown" no-caret variant="outline-primary">
               <template #button-content>
                 <b-icon-three-dots></b-icon-three-dots>
               </template>
@@ -84,18 +75,12 @@
             </b-avatar>
           </div>
           <div class="d-inline-block mt-4 ml-4 float-left texts">
-            <h6 class="font-weight-bolder name ">  {{info.user.name}}  </h6>
-            <p class="details">
-              0{{info.user.community}} Community
-            </p>
+            <h6 class="font-weight-bolder name ">{{ info.user.name }}</h6>
+            <p class="details">0{{ info.user.community }} Community</p>
           </div>
         </b-col>
         <b-col cols="2">
-          <b-button
-            class="m-community size"
-            size="sm"
-            style="margin-top: -50px;"
-          >
+          <b-button class="m-community size" size="sm" style="margin-top: -50px;">
             <i class="fas fa-map-marked-alt fa-lg btn-icon "></i>
 
             <span class="txt-btn">Direction</span></b-button
@@ -114,12 +99,7 @@
         <span class="txt-btn">Community</span></b-button
       >
 
-      <b-dropdown
-        class="ml-1 dropdown"
-        no-caret
-        variant="outline-primary"
-        size="sm"
-      >
+      <b-dropdown class="ml-1 dropdown" no-caret variant="outline-primary" size="sm">
         <template #button-content>
           <b-icon icon="three-dots" aria-hidden="true"></b-icon>
         </template>
@@ -150,20 +130,19 @@
 </template>
 
 <script>
-import Post from "@/components/follower/tabs/posts";
-import About from "@/components/follower/tabs/about";
-import Media from "@/components/follower/tabs/media";
-import Community from "@/components/follower/tabs/community";
-import Businesses from "@/components/follower/tabs/businesses";
-import Network from "@/components/follower/tabs/networkk";
+import Post from '@/components/follower/tabs/posts';
+import About from '@/components/follower/tabs/about';
+import Media from '@/components/follower/tabs/media';
+import Community from '@/components/follower/tabs/community';
+import Businesses from '@/components/follower/tabs/businesses';
+import Network from '@/components/follower/tabs/networkk';
 
 export default {
-  name: "Home",
+  name: 'Home',
   data() {
     return {
-      foll_id: '',  
-     
-    };    
+      foll_id: '',
+    };
   },
 
   components: {
@@ -172,135 +151,78 @@ export default {
     Media,
     Community,
     Businesses,
-    Network
+    Network,
   },
 
+  mounted() {
+    this.foll_id = this.$route.params.id;
 
-  mounted(){
-     this.foll_id = this.$route.params.id;
-
-
-
-      this.$store
-      .dispatch("follower/loadUserPostIntro", this.foll_id)
-      .then((response) => {
-       
-      })
-      .catch((error) => {
-        console.log({error:error});
+    this.$store
+      .dispatch('follower/loadUserPostIntro', this.foll_id)
+      .then(response => {})
+      .catch(error => {
+        console.log({ error: error });
       });
 
-
- 
-      this.$store
-      .dispatch("follower/UcommunityFollower", this.foll_id)
-      .then((response) => {
-       
-      })
-      .catch((error) => {
-        console.log({error:error});
+    this.$store
+      .dispatch('follower/UcommunityFollower', this.foll_id)
+      .then(response => {})
+      .catch(error => {
+        console.log({ error: error });
       });
 
-
-
-      
-      this.$store
-      .dispatch("follower/UcommunityFollowing", this.foll_id)
-      .then((response) => {
-       
-      })
-      .catch((error) => {
-        console.log({error:error});
+    this.$store
+      .dispatch('follower/UcommunityFollowing', this.foll_id)
+      .then(response => {})
+      .catch(error => {
+        console.log({ error: error });
       });
 
-     
-      this.$store
-      .dispatch("follower/Tcommunity", this.foll_id)
-      .then((response) => {
-       
-      })
-      .catch((error) => {
-        console.log({error:error});
-      });
-  
-   
-      this.$store
-      .dispatch("follower/BcommunityFollower", this.foll_id)
-      .then((response) => {
-       
-      })
-      .catch((error) => {
-        console.log({error:error});
+    this.$store
+      .dispatch('follower/Tcommunity', this.foll_id)
+      .then(response => {})
+      .catch(error => {
+        console.log({ error: error });
       });
 
-     
-      this.$store
-      .dispatch("follower/BcommunityFollowing", this.foll_id)
-      .then((response) => {
-       
-      })
-      .catch((error) => {
-        console.log({error:error});
+    this.$store
+      .dispatch('follower/BcommunityFollower', this.foll_id)
+      .then(response => {})
+      .catch(error => {
+        console.log({ error: error });
       });
 
-
-
-      
-      this.$store
-      .dispatch("follower/NcommunityFollower", this.foll_id)
-      .then((response) => {
-       
-      })
-      .catch((error) => {
-        console.log({error:error});
+    this.$store
+      .dispatch('follower/BcommunityFollowing', this.foll_id)
+      .then(response => {})
+      .catch(error => {
+        console.log({ error: error });
       });
 
-      
-      this.$store
-      .dispatch("follower/NcommunityFollowing", this.foll_id)
-      .then((response) => {
-       
-      })
-      .catch((error) => {
-        console.log({error:error});
+    this.$store
+      .dispatch('follower/NcommunityFollower', this.foll_id)
+      .then(response => {})
+      .catch(error => {
+        console.log({ error: error });
       });
 
+    this.$store
+      .dispatch('follower/NcommunityFollowing', this.foll_id)
+      .then(response => {})
+      .catch(error => {
+        console.log({ error: error });
+      });
+  },
 
-
-
-    
-    
-
-
-      
-
-
-
-   
-
-
-},
-
-computed: {
-
-  
-
-      profile_info() {
-      return  this.$store.state.businessOwner.businessInfo;  
-
-    
+  computed: {
+    profile_info() {
+      return this.$store.state.businessOwner.businessInfo;
     },
 
-
-     info :function(){
-        return this.$store.getters['follower/getUserPostIntro'];
-      }
-
-
-
+    info: function() {
+      return this.$store.getters['follower/getUserPostIntro'];
+    },
   },
-
-
 };
 </script>
 

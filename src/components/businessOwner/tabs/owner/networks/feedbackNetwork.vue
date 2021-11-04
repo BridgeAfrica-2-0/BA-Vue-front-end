@@ -4,17 +4,8 @@
       <b-col cols="12">
         <b-card class="mb-2">
           <b-card-text>
-            <b-form-group
-              id="fieldset-1"
-              label="Your Feedback is about"
-              class="font-weight-bolder"
-              label-for="input-1"
-            >
-              <b-form-select
-                id="input-1"
-                v-model="selected"
-                :options="options"
-              ></b-form-select>
+            <b-form-group id="fieldset-1" label="Your Feedback is about" class="font-weight-bolder" label-for="input-1">
+              <b-form-select id="input-1" v-model="selected" :options="options"></b-form-select>
             </b-form-group>
             <b-form-group
               id="fieldset-1"
@@ -22,12 +13,7 @@
               label-for="textarea"
               class="font-weight-bolder"
             >
-              <b-form-textarea
-                id="textarea"
-                v-model="text"
-                rows="4"
-                max-rows="6"
-              ></b-form-textarea>
+              <b-form-textarea id="textarea" v-model="text" rows="4" max-rows="6"></b-form-textarea>
             </b-form-group>
           </b-card-text>
 
@@ -40,20 +26,11 @@
     <b-row>
       <b-col cols="12">
         <span class="float-right">
-          <b-dropdown
-            size="lg"
-            variant="link"
-            toggle-class="text-decoration-none"
-            no-caret
-          >
-            <template #button-content>
-              <b-icon-filter></b-icon-filter><span class="sr-only">Search</span>
-            </template>
+          <b-dropdown size="lg" variant="link" toggle-class="text-decoration-none" no-caret>
+            <template #button-content> <b-icon-filter></b-icon-filter><span class="sr-only">Search</span> </template>
             <p class="font-weight-bolder px-3 m-0">Feedbacks Type</p>
             <b-dropdown-item href="#">Any</b-dropdown-item>
-            <b-dropdown-item href="#"
-              >suggestion for improvement</b-dropdown-item
-            >
+            <b-dropdown-item href="#">suggestion for improvement</b-dropdown-item>
             <b-dropdown-item href="#">Progress to your program</b-dropdown-item>
             <b-dropdown-item href="#">New Idea for PEA-JEUNES</b-dropdown-item>
           </b-dropdown>
@@ -78,25 +55,20 @@
                   <h5 class="m-0 font-weight-bolder">
                     Mapoure Agrobusiness
                   </h5>
-                  <p>
-                    1h Ago - <span class="text-primary">Feedback Type</span>
-                  </p>
+                  <p>1h Ago - <span class="text-primary">Feedback Type</span></p>
                 </b-col>
               </b-row>
               <b-row>
                 <b-col cols="12" class="mt-2">
                   <p class="text-justify">
-                    Lorem Ipsum is simply dummy text of the printing and
-                    typesetting industry. Lorem Ipsum has been the industry's
-                    standard dummy text ever since the 1500s, Lorem Ipsum is
-                    simply dummy text of the printing and typesetting industry.
-                    Lorem Ipsum has been the industry's standard dummy text ever
+                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+                    industry's standard dummy text ever since the 1500s, Lorem Ipsum is simply dummy text of the
+                    printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever
                     since the 1500s,
                     <br />
                     <br />
-                    Lorem Ipsum is simply dummy text of the printing and
-                    typesetting industry. Lorem Ipsum has been the industry's
-                    standard dummy text ever since the 1500s,
+                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+                    industry's standard dummy text ever since the 1500s,
                   </p>
                 </b-col>
               </b-row>
@@ -110,18 +82,18 @@
 
 <script>
 export default {
-  name: "feedbackNetwork",
+  name: 'feedbackNetwork',
   data() {
     return {
       selected: 1,
-      text: "",
+      text: '',
       options: [
-        { value: "1", text: "suggestion for improvement" },
-        { value: "2", text: "Progress to your program" },
-        { value: "3", text: "New Idea for PEA-JEUNES" }
-      ]
+        { value: '1', text: 'suggestion for improvement' },
+        { value: '2', text: 'Progress to your program' },
+        { value: '3', text: 'New Idea for PEA-JEUNES' },
+      ],
     };
-  }
+  },
 };
 </script>
 

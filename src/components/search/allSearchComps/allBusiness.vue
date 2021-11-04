@@ -8,11 +8,7 @@
       </a></b-alert
     >
     <div></div>
-    <div
-      class="people-style shadow"
-      v-for="(business, index) in businesses.data"
-      :key="index"
-    >
+    <div class="people-style shadow" v-for="(business, index) in businesses.data" :key="index">
       <b-row>
         <b-col md="3" xl="3" lg="3" cols="5" sm="3">
           <div class="center-img">
@@ -49,58 +45,22 @@
         <b-col lg="4" md="12" xl="4" cols="12" sm="4">
           <div class="s-button">
             <b-row>
-              <b-col
-                md="4"
-                lg="12"
-                xl="12"
-                sm="12"
-                cols="4"
-                class="mt-2 text-center"
-              >
-                <b-button
-                  block
-                  size="sm"
-                  class="b-background shadow"
-                  variant="primary"
-                >
+              <b-col md="4" lg="12" xl="12" sm="12" cols="4" class="mt-2 text-center">
+                <b-button block size="sm" class="b-background shadow" variant="primary">
                   <i class="fas fa-user-plus fa-lg btn-icon"></i>
                   <span class="btn-com">Community</span>
                 </b-button>
               </b-col>
 
-              <b-col
-                md="4"
-                lg="12"
-                xl="12"
-                sm="12"
-                cols="4"
-                class="mt-2 text-center"
-              >
-                <b-button
-                  block
-                  size="sm"
-                  class="b-background shadow"
-                  variant="primary"
-                >
+              <b-col md="4" lg="12" xl="12" sm="12" cols="4" class="mt-2 text-center">
+                <b-button block size="sm" class="b-background shadow" variant="primary">
                   <i class="fas fa-envelope fa-lg btn-icon"></i>
                   <span class="btn-text">Message</span>
                 </b-button>
               </b-col>
 
-              <b-col
-                md="4"
-                lg="12"
-                xl="12"
-                sm="12"
-                cols="4"
-                class="mt-2 text-center"
-              >
-                <b-button
-                  block
-                  size="sm"
-                  class="b-background shadow"
-                  variant="primary"
-                >
+              <b-col md="4" lg="12" xl="12" sm="12" cols="4" class="mt-2 text-center">
+                <b-button block size="sm" class="b-background shadow" variant="primary">
                   <i class="fas fa-map-marked-alt fa-lg btn-icon"></i>
                   <span class="btn-text">Direction</span>
                 </b-button>
@@ -123,20 +83,19 @@ export default {
         perPage: 1,
         pagination: false,
 
-        type: "loop",
+        type: 'loop',
         perMove: 1,
       },
     };
   },
   computed: {
     businesses() {
-      return this.$store.getters["allSearch/getBusinesses"];
+      return this.$store.getters['allSearch/getBusinesses'];
     },
     loader() {
-      return this.$store.getters["allSearch/getLoader"];
+      return this.$store.getters['allSearch/getLoader'];
     },
   },
-
 };
 </script>
 
@@ -207,13 +166,13 @@ export default {
     color: black;
 
     line-height: 35px;
-    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   }
 
   .textt {
     color: #000;
 
-    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
     font-weight: normal;
     font-size: 12px;
     line-height: 30px;
@@ -260,13 +219,13 @@ export default {
     color: black;
 
     line-height: 35px;
-    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   }
 
   .textt {
     color: #000;
 
-    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
     font-weight: normal;
     font-size: 14px;
     line-height: 30px;

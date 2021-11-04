@@ -2,11 +2,7 @@
   <div class="p-0">
     <b-container fluid class="p-0 gradient">
       <div class="container-flex">
-        <img
-          src="@/assets/img/banner.jpg"
-          class="img-fluid  banner"
-          alt="Kitten"
-        />
+        <img src="@/assets/img/banner.jpg" class="img-fluid  banner" alt="Kitten" />
       </div>
 
       <div class="container p-63">
@@ -20,11 +16,7 @@
             >
             </b-avatar>
 
-            <b-icon
-              icon="camera-fill"
-              class="avatar-header-icon btn cursor-pointer size"
-              v-b-modal.modal-4
-            ></b-icon>
+            <b-icon icon="camera-fill" class="avatar-header-icon btn cursor-pointer size" v-b-modal.modal-4></b-icon>
 
             <div class="">
               <div class="text-box">
@@ -37,16 +29,8 @@
 
                 <div class=" ">
                   <span class="float-right profileedit-btn  put-topbtn ">
-                    <b-button
-                      variant="primary"
-                      class="edit-btn  d-none d-md-inline"
-                      v-b-modal.coverphoto
-                    >
-                      <fas-icon
-                        class="mr-2"
-                        :icon="['fas', 'pencil-alt']"
-                        size="lg"
-                      />
+                    <b-button variant="primary" class="edit-btn  d-none d-md-inline" v-b-modal.coverphoto>
+                      <fas-icon class="mr-2" :icon="['fas', 'pencil-alt']" size="lg" />
                       Edit
                     </b-button>
 
@@ -61,13 +45,9 @@
                         <b-icon-three-dots></b-icon-three-dots>
                       </template>
 
-                      <b-dropdown-item v-b-modal.coverphoto>
-                        Change Cover</b-dropdown-item
-                      >
+                      <b-dropdown-item v-b-modal.coverphoto> Change Cover</b-dropdown-item>
 
-                      <b-dropdown-item
-                        >Invite Friends On Bridge Africa</b-dropdown-item
-                      >
+                      <b-dropdown-item>Invite Friends On Bridge Africa</b-dropdown-item>
 
                       <b-dropdown-item>View As</b-dropdown-item>
                     </b-dropdown>
@@ -79,22 +59,12 @@
             <b-modal id="modal-4" title="Upload Profile Picture">
               <div class="w3-container">
                 <div class="row pb-3">
-                  <div
-                    class="col-sm-6 text-center"
-                    style="border-right:1px solid #dee2e6;"
-                    @click="chooseProfile1()"
-                  >
+                  <div class="col-sm-6 text-center" style="border-right:1px solid #dee2e6;" @click="chooseProfile1()">
                     <h1>
                       <fas-icon class="primary" :icon="['fas', 'upload']" />
                     </h1>
                     <div>
-                      <input
-                        type="file"
-                        id="profile-imag"
-                        hidden
-                        name="img"
-                        accept="image/*"
-                      />
+                      <input type="file" id="profile-imag" hidden name="img" accept="image/*" />
                     </div>
                     <h4>Upload a New picture</h4>
                   </div>
@@ -114,22 +84,12 @@
             <b-modal id="coverphoto" title="Upload Profile Picture">
               <div class="w3-container">
                 <div class="row pb-3">
-                  <div
-                    class="col-sm-6 text-center"
-                    style="border-right:1px solid #dee2e6;"
-                    @click="chooseProfile2()"
-                  >
+                  <div class="col-sm-6 text-center" style="border-right:1px solid #dee2e6;" @click="chooseProfile2()">
                     <h1>
                       <fas-icon class="primary" :icon="['fas', 'upload']" />
                     </h1>
                     <div>
-                      <input
-                        type="file"
-                        hidden
-                        id="cover-imag"
-                        name="img"
-                        accept="image/*"
-                      />
+                      <input type="file" hidden id="cover-imag" name="img" accept="image/*" />
                     </div>
                     <h4>Upload a New picture</h4>
                   </div>
@@ -152,17 +112,17 @@
 
 <script>
 export default {
-  name: "ownerheadPage",
+  name: 'ownerheadPage',
 
   methods: {
     chooseProfile2: function() {
-      document.getElementById("cover-imag").click();
+      document.getElementById('cover-imag').click();
     },
 
     chooseProfile1: function() {
-      document.getElementById("profile-imag").click();
-    }
-  }
+      document.getElementById('profile-imag').click();
+    },
+  },
 };
 </script>
 
@@ -338,6 +298,6 @@ export default {
 
 .gradient {
   /* background-image: linear-gradient(1deg, black, transparent);  */
-  background-image: url("../assets/img/profile_back.png");
+  background-image: url('../assets/img/profile_back.png');
 }
 </style>

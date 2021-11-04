@@ -8,13 +8,13 @@
 </template>
 
 <script>
-import Followers from "./tabs/followers";
-import Following from "./tabs/following";
+import Followers from './tabs/followers';
+import Following from './tabs/following';
 export default {
   components: {
     Followers,
-    Following
-  }
+    Following,
+  },
 };
 </script>
 

@@ -17,11 +17,7 @@
     <Loader v-if="!pageHasLoad || loaderState" />
     <NotFound v-if="!peoples.length && !loaderState" :title="title" />
     <div v-else>
-      <People
-        v-for="(people, index) in peoples"
-        :people="people"
-        :key="index"
-      />
+      <People v-for="(people, index) in peoples" :people="people" :key="index" />
     </div>
 
     <p class="text-center" v-if="haveNotData">Not Data</p>
@@ -30,16 +26,16 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from "vuex";
+import { mapGetters, mapActions } from 'vuex';
 
-import { loader, search } from "@/mixins";
+import { loader, search } from '@/mixins';
 
-import Sponsor from "@/components/search/sponsoredBusiness";
-import People from "@/components/search/people";
+import Sponsor from '@/components/search/sponsoredBusiness';
+import People from '@/components/search/people';
 
-import { ShareButton } from "@/components/shareButton";
+import { ShareButton } from '@/components/shareButton';
 
-import Loader from "@/components/Loader";
+import Loader from '@/components/Loader';
 
 export default {
   mixins: [loader, search],
@@ -56,18 +52,18 @@ export default {
 
   computed: {
     ...mapGetters({
-      peoples: "search/GET_RESULT_USER",
-      canScrool: "search/END_INITIAL_REQUEST",
-      getPage: "search/GET_CURRENT_PAGINATION_PAGE",
+      peoples: 'search/GET_RESULT_USER',
+      canScrool: 'search/END_INITIAL_REQUEST',
+      getPage: 'search/GET_CURRENT_PAGINATION_PAGE',
     }),
 
-    loadingIsActive: function () {
+    loadingIsActive: function() {
       return this.loaderState && this.peoples.length ? true : false;
     },
   },
 
   mounted() {
-    window.addEventListener("scroll", this.onscroll);
+    window.addEventListener('scroll', this.onscroll);
   },
 
   created() {
@@ -76,16 +72,16 @@ export default {
 
   methods: {
     ...mapActions({
-      userStore: "search/FIND_USER",
-      page: "search/SET_CURRENT_PAGINATION_PAGE",
-      setCallback: "search/SET_CURRENT_PAGINATE_CALLBACK",
-      stack: "search/STACK_VALUE",
+      userStore: 'search/FIND_USER',
+      page: 'search/SET_CURRENT_PAGINATION_PAGE',
+      setCallback: 'search/SET_CURRENT_PAGINATE_CALLBACK',
+      stack: 'search/STACK_VALUE',
     }),
 
-    init: async function () {
+    init: async function() {
       this.stack({
         data: {
-          keyword: "",
+          keyword: '',
         },
         page: 1,
       });
@@ -94,7 +90,7 @@ export default {
 
       const request = await this.$repository.search.findUserByParam({
         data: {
-          keyword: "",
+          keyword: '',
         },
         page: 1,
       });
@@ -110,18 +106,13 @@ export default {
       this.setLoaderState(false);
     },
 
-    onscroll: async function (event) {
+    onscroll: async function(event) {
       const scrollY = window.scrollY;
       const visible = document.documentElement.clientHeight;
       const pageHeight = document.documentElement.scrollHeight;
       const bottomOfPage = visible + scrollY >= pageHeight;
 
-      if (
-        this.callback &&
-        (bottomOfPage || pageHeight < visible) &&
-        !this.loading &&
-        !this.haveNotData
-      ) {
+      if (this.callback && (bottomOfPage || pageHeight < visible) && !this.loading && !this.haveNotData) {
         this.setLoaderState(true);
 
         const request = await this.callback({

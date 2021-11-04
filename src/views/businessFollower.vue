@@ -39,7 +39,6 @@ import Post from '@/components/businessfollower/tabs/posts';
 import About from '@/components/businessfollower/tabs/about';
 import Media from '@/components/businessfollower/tabs/media';
 import Networks from '@/components/businessfollower/tabs/networks';
-import Album from '@/components/businessfollower/tabs/album';
 
 export default {
   name: 'Home',
@@ -51,7 +50,6 @@ export default {
     About,
     Media,
     Networks,
-   
   },
   data() {
     return {

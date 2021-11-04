@@ -9,24 +9,24 @@
 
 <script>
 export default {
-  name: "LyTabItem",
+  name: 'LyTabItem',
   computed: {
     activeStyle() {
       return {
-        color: this.$parent.activeColor
+        color: this.$parent.activeColor,
       };
-    }
+    },
   },
   data() {
     return {
-      id: (this.$parent.$children.length || 1) - 1
+      id: (this.$parent.$children.length || 1) - 1,
     };
   },
   methods: {
     onItemClicked() {
-      this.$parent.$emit("input", this.id);
-    }
-  }
+      this.$parent.$emit('input', this.id);
+    },
+  },
 };
 </script>
 

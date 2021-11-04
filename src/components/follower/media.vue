@@ -2,20 +2,13 @@
   <div>
     <b-card class="mt-4" header-tag="header" footer-tag="footer">
       <h6 class="mb-3 d-inline-block title">
-        <fas-icon
-          class="mr-2 pt-1 icons"
-          :icon="['fas', 'file-image']"
-          size="lg"
-        />
+        <fas-icon class="mr-2 pt-1 icons" :icon="['fas', 'file-image']" size="lg" />
         <b> Media </b>
       </h6>
-       <span class="float-right">
-        <b-link
-          ><b-icon icon="eye-fill" variant="primary"> </b-icon> View All
-        </b-link></span
+      <span class="float-right">
+        <b-link><b-icon icon="eye-fill" variant="primary"> </b-icon> View All </b-link></span
       >
-      <CoolLightBox :items="imgaray" :index="index" @close="index = null">
-      </CoolLightBox>
+      <CoolLightBox :items="imgaray" :index="index" @close="index = null"> </CoolLightBox>
       <b-row>
         <b-col
           cols="6"
@@ -34,7 +27,7 @@
 
 <script>
 export default {
-  data: function () {
+  data: function() {
     return {
       foll_id: null,
       index: null,
@@ -59,9 +52,9 @@ export default {
     this.foll_id = this.$route.params.id;
 
     this.$store
-      .dispatch("follower/getImages", this.foll_id)
-      .then((response) => {})
-      .catch((error) => {
+      .dispatch('follower/getImages', this.foll_id)
+      .then(response => {})
+      .catch(error => {
         console.log({ error: error });
       });
   },

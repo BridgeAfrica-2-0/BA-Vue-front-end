@@ -9,21 +9,21 @@
 </template>
 
 <script>
-import navbar from "@/components/navbar";
-import Business from "../components/businessv/business";
-import Footer from "../components/footer";
+import navbar from '@/components/navbar';
+import Business from '../components/businessv/business';
+import Footer from '../components/footer';
 export default {
-  name: "Home",
+  name: 'Home',
   components: {
     navbar,
     Business,
-    Footer
+    Footer,
   },
   data() {
     return {};
   },
   computed: {},
-  methods: {}
+  methods: {},
 };
 </script>
 

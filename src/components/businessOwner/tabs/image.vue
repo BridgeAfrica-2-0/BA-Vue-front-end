@@ -2,13 +2,7 @@
   <div>
     <div class="row">
       <div class="container-fluid">
-        <b-modal
-          id="modalxl"
-          ref="modalxl"
-          centered
-          hide-footer
-          title="Upoad Image"
-        >
+        <b-modal id="modalxl" ref="modalxl" centered hide-footer title="Upoad Image">
           <br />
 
           <div id="preview" ref="preview">
@@ -27,8 +21,7 @@
           <br />
 
           <b-button @click="submitPost" variant="primary" block
-            ><b-icon icon="cursor-fill" variant="primary"></b-icon>
-            Publish</b-button
+            ><b-icon icon="cursor-fill" variant="primary"></b-icon> Publish</b-button
           >
         </b-modal>
 
@@ -72,55 +65,32 @@
           <div class="mediadesc">
             <ul class="navbar-nav pull-right">
               <li class="nav-item dropdown m-0 p-0">
-                <b-dropdown
-                  size="sm"
-                  class="call-action"
-                  variant="link"
-                  toggle-class="text-decoration-none"
-                  no-caret
-                >
+                <b-dropdown size="sm" class="call-action" variant="link" toggle-class="text-decoration-none" no-caret>
                   <template #button-content>
-                    <b-icon
-                      icon="three-dots-vertical"
-                      color="white"
-                      variant="light"
-                    >
-                    </b-icon>
+                    <b-icon icon="three-dots-vertical" color="white" variant="light"> </b-icon>
                   </template>
 
-                  <b-dropdown-item @click="downloadPic(pictures.id)"
-                    >Download</b-dropdown-item
-                  >
-                  <b-dropdown-item @click="setProfilePic(pictures.id)"
-                    >Make Profile Picture</b-dropdown-item
-                  >
-                  <b-dropdown-item @click="setCoverPic(pictures.id)"
-                    >Make Cover Photo</b-dropdown-item
-                  >
-                  <b-dropdown-item @click="deleteImage(pictures.id)" href="#"
-                    >Delete</b-dropdown-item
-                  >
+                  <b-dropdown-item @click="downloadPic(pictures.id)">Download</b-dropdown-item>
+                  <b-dropdown-item @click="setProfilePic(pictures.id)">Make Profile Picture</b-dropdown-item>
+                  <b-dropdown-item @click="setCoverPic(pictures.id)">Make Cover Photo</b-dropdown-item>
+                  <b-dropdown-item @click="deleteImage(pictures.id)" href="#">Delete</b-dropdown-item>
                 </b-dropdown>
               </li>
             </ul>
           </div>
         </div>
 
-        <infinite-loading
-          :identifier="infiniteId"
-          ref="infiniteLoading"
-          @infinite="infiniteHandler"
-        ></infinite-loading>
+        <infinite-loading :identifier="infiniteId" ref="infiniteLoading" @infinite="infiniteHandler"></infinite-loading>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import axios from "axios";
+import axios from 'axios';
 export default {
   components: {},
-  props: ["album"],
+  props: ['album'],
 
   computed: {
     pictures() {
@@ -130,10 +100,9 @@ export default {
 
   methods: {
     infiniteHandler($state) {
-      let urll =
-        "business/album/show/" + this.url + "/" + this.album + "/" + this.page;
+      let urll = 'business/album/show/' + this.url + '/' + this.album + '/' + this.page;
       this.$store
-        .dispatch("profileOwner/loadMore", urll)
+        .dispatch('profileOwner/loadMore', urll)
         .then(({ data }) => {
           console.log(data.data.media);
           if (data.data.media.length) {
@@ -145,7 +114,7 @@ export default {
             $state.complete();
           }
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
     },
@@ -153,47 +122,47 @@ export default {
     showPic(url) {
       console.log(url);
       this.show_url = url;
-      this.$refs["Details"].show();
+      this.$refs['Details'].show();
     },
 
     downloadPic(image_id) {
-      console.log("downloading");
+      console.log('downloading');
 
       let loader = this.$loading.show({
         container: this.fullPage,
         canCancel: true,
         onCancel: this.onCancel,
-        color: "#e75c18",
+        color: '#e75c18',
       });
 
       axios
-        .get("business/download/media/" + this.url + "/" + image_id, {})
-        .then((response) => {
+        .get('business/download/media/' + this.url + '/' + image_id, {})
+        .then(response => {
           var fileURL = window.URL.createObjectURL(new Blob([response.data]));
-          var fileLink = document.createElement("a");
+          var fileLink = document.createElement('a');
 
           fileLink.href = fileURL;
-          fileLink.setAttribute("download", "file.jpg");
+          fileLink.setAttribute('download', 'file.jpg');
           document.body.appendChild(fileLink);
 
           fileLink.click();
 
           this.flashMessage.show({
-            status: "success",
+            status: 'success',
 
-            message: "Image Downloaded",
+            message: 'Image Downloaded',
           });
 
           loader.hide();
         })
-        .catch((err) => {
+        .catch(err => {
           this.sending = false;
 
           if (err.response.status == 422) {
             console.log({ err: err });
 
             this.flashMessage.show({
-              status: "error",
+              status: 'error',
 
               message: err.response.data.message,
             });
@@ -201,9 +170,9 @@ export default {
             loader.hide();
           } else {
             this.flashMessage.show({
-              status: "error",
+              status: 'error',
 
-              message: "Unable to download ",
+              message: 'Unable to download ',
             });
             console.log({ err: err });
 
@@ -213,38 +182,38 @@ export default {
     },
 
     deleteImage(image_id) {
-      console.log("deleting ----------");
+      console.log('deleting ----------');
 
       let loader = this.$loading.show({
         container: this.fullPage,
         canCancel: true,
         onCancel: this.onCancel,
-        color: "#e75c18",
+        color: '#e75c18',
       });
 
       axios
-        .post("business/delete/media/" + this.url + "/" + image_id, {
+        .post('business/delete/media/' + this.url + '/' + image_id, {
           name: this.name,
         })
-        .then((response) => {
+        .then(response => {
           console.log(response.data);
 
           this.flashMessage.show({
-            status: "success",
+            status: 'success',
 
-            message: "Album Deleted",
+            message: 'Album Deleted',
           });
 
           loader.hide();
         })
-        .catch((err) => {
+        .catch(err => {
           this.sending = false;
 
           if (err.response.status == 422) {
             console.log({ err: err });
 
             this.flashMessage.show({
-              status: "error",
+              status: 'error',
 
               message: err.response.data.message,
             });
@@ -252,9 +221,9 @@ export default {
             loader.hide();
           } else {
             this.flashMessage.show({
-              status: "error",
+              status: 'error',
 
-              message: "Unable to Delete your Image",
+              message: 'Unable to Delete your Image',
             });
             console.log({ err: err });
 
@@ -270,32 +239,32 @@ export default {
         container: this.fullPage,
         canCancel: true,
         onCancel: this.onCancel,
-        color: "#e75c18",
+        color: '#e75c18',
       });
 
       axios
-        .post("business/make/coverpic/" + this.url + "/" + image_id, {
+        .post('business/make/coverpic/' + this.url + '/' + image_id, {
           name: this.name,
         })
-        .then((response) => {
+        .then(response => {
           console.log(response.data);
 
           this.flashMessage.show({
-            status: "success",
+            status: 'success',
 
-            message: "cover Picture succesfully set",
+            message: 'cover Picture succesfully set',
           });
 
           loader.hide();
         })
-        .catch((err) => {
+        .catch(err => {
           this.sending = false;
 
           if (err.response.status == 422) {
             console.log({ err: err });
 
             this.flashMessage.show({
-              status: "error",
+              status: 'error',
 
               message: err.response.data.message,
             });
@@ -303,9 +272,9 @@ export default {
             loader.hide();
           } else {
             this.flashMessage.show({
-              status: "error",
+              status: 'error',
 
-              message: "Unable to set your cover picture",
+              message: 'Unable to set your cover picture',
             });
             console.log({ err: err });
 
@@ -323,32 +292,32 @@ export default {
         container: this.fullPage ? null : this.$refs.creatform,
         canCancel: true,
         onCancel: this.onCancel,
-        color: "#e75c18",
+        color: '#e75c18',
       });
 
       axios
-        .post("business/album/edit/" + this.url + "/" + self.album_id, {
+        .post('business/album/edit/' + this.url + '/' + self.album_id, {
           name: this.name,
         })
-        .then((response) => {
+        .then(response => {
           console.log(response.data);
 
           this.flashMessage.show({
-            status: "success",
+            status: 'success',
 
-            message: "Profile Picture set",
+            message: 'Profile Picture set',
           });
 
           loader.hide();
         })
-        .catch((err) => {
+        .catch(err => {
           this.sending = false;
 
           if (err.response.status == 422) {
             console.log({ err: err });
 
             this.flashMessage.show({
-              status: "error",
+              status: 'error',
 
               message: err.response.data.message,
             });
@@ -356,9 +325,9 @@ export default {
             loader.hide();
           } else {
             this.flashMessage.show({
-              status: "error",
+              status: 'error',
 
-              message: "Unable to set your profile pic",
+              message: 'Unable to set your profile pic',
             });
             console.log({ err: err });
 
@@ -372,55 +341,55 @@ export default {
         container: this.fullPage ? null : this.$refs.preview,
         canCancel: true,
         onCancel: this.onCancel,
-        color: "#e75c18",
+        color: '#e75c18',
       });
 
       let formData = new FormData();
-      formData.append("media", this.profile_pic);
+      formData.append('media', this.profile_pic);
 
-      formData.append("dob", this.text);
+      formData.append('dob', this.text);
 
       this.axios
-        .post("business/store/media/" + this.url + "/" + this.album, formData, {
+        .post('business/store/media/' + this.url + '/' + this.album, formData, {
           headers: {
-            "Content-Type": "multipart/form-data",
+            'Content-Type': 'multipart/form-data',
           },
         })
-        .then((response) => {
+        .then(response => {
           console.log(response);
 
           this.flashMessage.show({
-            status: "success",
+            status: 'success',
 
-            message: "Profile Updated",
+            message: 'Profile Updated',
 
-            blockClass: "custom-block-class",
+            blockClass: 'custom-block-class',
           });
 
           loader.hide();
-          this.$refs["modalxl"].hide();
+          this.$refs['modalxl'].hide();
         })
 
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
 
           if (err.response.status == 422) {
             console.log({ err: err });
 
             this.flashMessage.show({
-              status: "error",
+              status: 'error',
 
               message: err.response.data.message,
-              blockClass: "custom-block-class",
+              blockClass: 'custom-block-class',
             });
 
             loader.hide();
           } else {
             this.flashMessage.show({
-              status: "error",
+              status: 'error',
 
-              message: "Unable to upload your image",
-              blockClass: "custom-block-class",
+              message: 'Unable to upload your image',
+              blockClass: 'custom-block-class',
             });
             console.log({ err: err });
 
@@ -435,7 +404,7 @@ export default {
 
       console.log(this.img_url);
 
-      this.$refs["modalxl"].show();
+      this.$refs['modalxl'].show();
     },
 
     onClick(i) {
@@ -448,11 +417,11 @@ export default {
   },
 
   watch: {
-    album: function (newVal) {
+    album: function(newVal) {
       this.album_id = newVal;
     },
   },
-  data: function () {
+  data: function() {
     return {
       show_url: null,
       album_id: null,

@@ -2,13 +2,7 @@
   <div class=" ">
     <b-card title="" class="">
       <b-container class="a-center">
-        <b-avatar
-          :src="require('@/assets/img/mayor.jpg')"
-          variant="primary"
-          square
-          rounded
-          class="network-logo"
-        >
+        <b-avatar :src="require('@/assets/img/mayor.jpg')" variant="primary" square rounded class="network-logo">
         </b-avatar>
       </b-container>
 
@@ -22,13 +16,7 @@
             </h6>
           </b-col>
           <b-col cols="6">
-            <b-button
-              variant="primary"
-              size="sm"
-              @click="addNetwork"
-              style="width: 120px;"
-              class="a-center"
-            >
+            <b-button variant="primary" size="sm" @click="addNetwork" style="width: 120px;" class="a-center">
               <b-icon icon="add"></b-icon> Community
             </b-button>
           </b-col>
@@ -57,10 +45,9 @@
 
         <h6 class="mt-2 font-weight-bolder title ">About</h6>
         <p class="text-justify text">
-          Lorem Ipsum is simply dummy text of the printing and typesetting
-          industry. Lorem Ipsum has been the industry's standard dummy text ever
-          since the 1500s, when an unknown printer took a galley of type and
-          scrambled it to make a type specimen book.
+          Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
+          standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to
+          make a type specimen book.
           <span class="d-inline-block float-right">
             <a href="#">lire la Suite</a>
           </span>
@@ -73,21 +60,21 @@
 </template>
 
 <script>
-import SidebarCommunity from "@/components/businessf/tabs/owner/networks/sidebarcommunity";
+import SidebarCommunity from '@/components/businessf/tabs/owner/networks/sidebarcommunity';
 
 export default {
-  name: "parent",
+  name: 'parent',
 
   data() {
     return {
       networkShow: true,
       showModal: false,
-      text: ""
+      text: '',
     };
   },
 
   components: {
-    SidebarCommunity
+    SidebarCommunity,
   },
 
   methods: {
@@ -96,10 +83,10 @@ export default {
     },
 
     addNetwork() {
-      console.log("hello");
+      console.log('hello');
       this.showModal = !this.showModal;
-    }
-  }
+    },
+  },
 };
 </script>
 

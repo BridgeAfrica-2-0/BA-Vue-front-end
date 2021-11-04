@@ -7,17 +7,8 @@
       </h6>
 
       <div>
-        <GmapMap
-          :center="center"
-          :zoom="12"
-          style="width:100%;  height: 250px;"
-        >
-          <GmapMarker
-            :key="index"
-            v-for="(m, index) in markers"
-            :position="m.position"
-            @click="center = m.position"
-          />
+        <GmapMap :center="center" :zoom="12" style="width:100%;  height: 250px;">
+          <GmapMarker :key="index" v-for="(m, index) in markers" :position="m.position" @click="center = m.position" />
         </GmapMap>
       </div>
     </b-card>
@@ -26,13 +17,13 @@
 
 <script>
 export default {
-  name: "GoogleMap",
+  name: 'GoogleMap',
   data() {
     return {
       center: { lat: 45.508, lng: -73.587 },
       currentPlace: null,
       markers: [],
-      places: []
+      places: [],
     };
   },
   mounted() {
@@ -46,7 +37,7 @@ export default {
       if (this.currentPlace) {
         const marker = {
           lat: this.currentPlace.geometry.location.lat(),
-          lng: this.currentPlace.geometry.location.lng()
+          lng: this.currentPlace.geometry.location.lng(),
         };
         this.markers.push({ position: marker });
         this.places.push(this.currentPlace);
@@ -58,11 +49,11 @@ export default {
       navigator.geolocation.getCurrentPosition(position => {
         this.center = {
           lat: position.coords.latitude,
-          lng: position.coords.longitude
+          lng: position.coords.longitude,
         };
       });
-    }
-  }
+    },
+  },
 };
 </script>
 

@@ -4,10 +4,7 @@
       <b-row>
         <b-col cols="5" lg="4" sm="4" md="5">
           <div class="center-img">
-            <img
-              src="https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg"
-              class="r-image"
-            />
+            <img src="https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg" class="r-image" />
           </div>
         </b-col>
         <b-col cols="7" sm="8" md="7">
@@ -35,32 +32,12 @@
       <b-form>
         <b-row>
           <b-col cols="12" md="6">
-            <b-form-group
-              id="input-group-1"
-              label="Product Name"
-              label-for="input-1"
-              label-size="sm"
-            >
-              <b-form-input
-                id="input-1"
-                class="mt-1"
-                type="text"
-                required
-              ></b-form-input>
+            <b-form-group id="input-group-1" label="Product Name" label-for="input-1" label-size="sm">
+              <b-form-input id="input-1" class="mt-1" type="text" required></b-form-input>
             </b-form-group>
 
-            <b-form-group
-              id="input-group-1"
-              label="Product Description"
-              label-for="input-1"
-              label-size="sm"
-            >
-              <b-textarea
-                id="input-1"
-                class="mt-2"
-                type="text"
-                required
-              ></b-textarea>
+            <b-form-group id="input-group-1" label="Product Description" label-for="input-1" label-size="sm">
+              <b-textarea id="input-1" class="mt-2" type="text" required></b-textarea>
             </b-form-group>
           </b-col>
           <b-col cols="12" md="6">
@@ -76,57 +53,27 @@
           </b-col>
         </b-row>
 
-        <b-form-group
-          id="input-group-1"
-          label="product Price"
-          label-for="input-1"
-          label-size="sm"
-        >
+        <b-form-group id="input-group-1" label="product Price" label-for="input-1" label-size="sm">
           <b-form-input class="mt-1" id="price"></b-form-input>
         </b-form-group>
 
-        <b-form-checkbox
-          id="checkbox-1"
-          name="checkbox-1"
-          value="accepted"
-          unchecked-value="not_accepted"
-        >
+        <b-form-checkbox id="checkbox-1" name="checkbox-1" value="accepted" unchecked-value="not_accepted">
           This Product Is On Discount
         </b-form-checkbox>
 
-        <b-form-group
-          id="conditions"
-          label="Conditions"
-          label-for="input-1"
-          label-size="sm"
-        >
+        <b-form-group id="conditions" label="Conditions" label-for="input-1" label-size="sm">
           <b-form-input class="mt-1" id="conditions"></b-form-input>
         </b-form-group>
 
-        <b-form-checkbox
-          id="checkbox-1"
-          name="checkbox-1"
-          value="accepted"
-          unchecked-value="not_accepted"
-        >
+        <b-form-checkbox id="checkbox-1" name="checkbox-1" value="accepted" unchecked-value="not_accepted">
           This Item Is A Service ?
         </b-form-checkbox>
 
-        <b-form-checkbox
-          id="checkbox-1"
-          name="checkbox-1"
-          value="accepted"
-          unchecked-value="not_accepted"
-        >
+        <b-form-checkbox id="checkbox-1" name="checkbox-1" value="accepted" unchecked-value="not_accepted">
           In stock
         </b-form-checkbox>
 
-        <b-form-checkbox
-          id="checkbox-1"
-          name="checkbox-1"
-          value="accepted"
-          unchecked-value="not_accepted"
-        >
+        <b-form-checkbox id="checkbox-1" name="checkbox-1" value="accepted" unchecked-value="not_accepted">
           Published
         </b-form-checkbox>
 
@@ -134,18 +81,10 @@
       </b-form>
     </b-modal>
 
-    <b-modal
-      v-model="viewProduct"
-      hide-footer
-      title="Product Details"
-      size="xl"
-    >
+    <b-modal v-model="viewProduct" hide-footer title="Product Details" size="xl">
       <b-row>
         <b-col cols="5" class="mx-auto">
-          <b-img
-            class="img-fluid"
-            src="https://picsum.photos/600/300/?image=25"
-          ></b-img>
+          <b-img class="img-fluid" src="https://picsum.photos/600/300/?image=25"></b-img>
         </b-col>
         <b-col>
           <h2 class="mb-4 text-center">{{ product.name }}</h2>
@@ -159,9 +98,7 @@
               <b-button variant="primary">Message</b-button>
             </b-col>
             <b-col>
-              <b-button variant="outline-dark" class="float-right"
-                >Checkout on website</b-button
-              >
+              <b-button variant="outline-dark" class="float-right">Checkout on website</b-button>
             </b-col>
           </b-row>
           <hr />
@@ -172,30 +109,11 @@
           <hr />
           <b-row>
             <b-col class="">
-              <span class="mr-3"
-                ><b-icon
-                  icon="suit-heart"
-                  variant="primary"
-                  aria-hidden="true"
-                ></b-icon>
-                23</span
-              >
-              <span
-                ><b-icon
-                  icon="chat-fill"
-                  variant="primary"
-                  aria-hidden="true"
-                ></b-icon>
-                123</span
-              >
+              <span class="mr-3"><b-icon icon="suit-heart" variant="primary" aria-hidden="true"></b-icon> 23</span>
+              <span><b-icon icon="chat-fill" variant="primary" aria-hidden="true"></b-icon> 123</span>
             </b-col>
             <b-col class="">
-              <b-icon
-                class="float-right"
-                icon="share-fill"
-                variant="primary"
-                aria-hidden="true"
-              ></b-icon>
+              <b-icon class="float-right" icon="share-fill" variant="primary" aria-hidden="true"></b-icon>
             </b-col>
           </b-row>
           <br />
@@ -203,31 +121,16 @@
             <div class="post-footer">
               <div class="input-group post-div">
                 <a class="pull-left pr-2" href="#">
-                  <img
-                    class="post-userim"
-                    src="@/assets/img/photo1.jpg"
-                    alt="avatar"
-                  />
+                  <img class="post-userim" src="@/assets/img/photo1.jpg" alt="avatar" />
                 </a>
-                <input
-                  placeholder="Post a Comment"
-                  class="form-control adco comment"
-                  type="text"
-                />
+                <input placeholder="Post a Comment" class="form-control adco comment" type="text" />
 
-                <fas-icon
-                  class="primary send-cmt"
-                  :icon="['fas', 'paper-plane']"
-                />
+                <fas-icon class="primary send-cmt" :icon="['fas', 'paper-plane']" />
               </div>
               <ul class="comments-list allcomment pl-0 mt-4">
                 <li class="comment">
                   <a class="pull-left pr-4" href="#">
-                    <img
-                      class="post-userim"
-                      src="@/assets/img/photo2.jpg"
-                      alt="avatar"
-                    />
+                    <img class="post-userim" src="@/assets/img/photo2.jpg" alt="avatar" />
                   </a>
                   <div class="comment-body">
                     <div class="comment-body-in">
@@ -238,32 +141,20 @@
                         </div>
                       </div>
                       <p>
-                        Lorem Ipsum has been the industry's standard dummy text
-                        ever since the 1500s, when an unknown printer took a
-                        galley of type and scrambled it to make a type specimen
-                        book. It has survived not only five centuries<span
-                          class="text-size"
-                          >😛</span
-                        >
+                        Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown
+                        printer took a galley of type and scrambled it to make a type specimen book. It has survived not
+                        only five centuries<span class="text-size">😛</span>
                       </p>
                     </div>
                     <div class="col-md-12 pt-2 pl-0 mb-3">
-                      <b-icon
-                        icon="suit-heart"
-                        variant="primary"
-                        aria-hidden="true"
-                      ></b-icon>
+                      <b-icon icon="suit-heart" variant="primary" aria-hidden="true"></b-icon>
                       23 &nbsp; &nbsp; &nbsp; <a href="#">Reply</a>
                     </div>
                   </div>
                   <ul class="comments-list">
                     <li class="comment">
                       <a class="pull-left pr-4" href="#">
-                        <img
-                          class="post-userim"
-                          src="@/assets/img/photo2.jpg"
-                          alt="avatar"
-                        />
+                        <img class="post-userim" src="@/assets/img/photo2.jpg" alt="avatar" />
                       </a>
                       <div class="comment-body">
                         <div class="comment-body-in">
@@ -274,30 +165,20 @@
                             </div>
                           </div>
                           <p>
-                            Lorem Ipsum has been the industry's standard dummy
-                            text ever since the 1500s, when an unknown printer
-                            took a galley of type and scrambled it to make a
-                            type specimen book. It has survived not only five
-                            centuries<span class="text-size">😛</span>
+                            Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an
+                            unknown printer took a galley of type and scrambled it to make a type specimen book. It has
+                            survived not only five centuries<span class="text-size">😛</span>
                           </p>
                         </div>
                         <div class="col-md-12 pt-2 pl-0 mb-3">
-                          <b-icon
-                            icon="suit-heart"
-                            variant="primary"
-                            aria-hidden="true"
-                          ></b-icon>
+                          <b-icon icon="suit-heart" variant="primary" aria-hidden="true"></b-icon>
                           23 &nbsp; &nbsp; &nbsp; <a href="#">Reply</a>
                         </div>
                       </div>
                     </li>
                     <li class="comment">
                       <a class="pull-left pr-4" href="#">
-                        <img
-                          class="post-userim"
-                          src="@/assets/img/photo2.jpg"
-                          alt="avatar"
-                        />
+                        <img class="post-userim" src="@/assets/img/photo2.jpg" alt="avatar" />
                       </a>
                       <div class="comment-body">
                         <div class="comment-body-in">
@@ -308,40 +189,24 @@
                             </div>
                           </div>
                           <p>
-                            Lorem Ipsum has been the industry's standard dummy
-                            text ever since the 1500s, when an unknown printer
-                            took a galley of type and scrambled it to make a
-                            type specimen book. It has survived not only five
-                            centuries<span class="text-size">😛</span>
+                            Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an
+                            unknown printer took a galley of type and scrambled it to make a type specimen book. It has
+                            survived not only five centuries<span class="text-size">😛</span>
                           </p>
                         </div>
                         <div class="col-md-12 pt-2 pl-0 mb-3">
-                          <i
-                            class="fa heart  fa-heart-o"
-                            aria-hidden="true"
-                          ></i>
+                          <i class="fa heart  fa-heart-o" aria-hidden="true"></i>
                           23 &nbsp; &nbsp; &nbsp; <a href="#">Reply</a>
                         </div>
                       </div>
                     </li>
                     <div class="input-group post-div">
                       <a class="pull-left pr-4" href="#">
-                        <img
-                          class="post-userim"
-                          src="@/assets/img/photo1.jpg"
-                          alt="avatar"
-                        />
+                        <img class="post-userim" src="@/assets/img/photo1.jpg" alt="avatar" />
                       </a>
-                      <input
-                        placeholder="Post a Comment"
-                        class="form-control adco comment"
-                        type="text"
-                      />
+                      <input placeholder="Post a Comment" class="form-control adco comment" type="text" />
 
-                      <fas-icon
-                        class="primary send-cmt"
-                        :icon="['fas', 'paper-plane']"
-                      />
+                      <fas-icon class="primary send-cmt" :icon="['fas', 'paper-plane']" />
                     </div>
                   </ul>
                 </li>
@@ -349,11 +214,7 @@
               <ul class="comments-list allcomment pl-0 mt-4">
                 <li class="comment">
                   <a class="pull-left pr-4" href="#">
-                    <img
-                      class="post-userim"
-                      src="@/assets/img/photo2.jpg"
-                      alt="avatar"
-                    />
+                    <img class="post-userim" src="@/assets/img/photo2.jpg" alt="avatar" />
                   </a>
                   <div class="comment-body">
                     <div class="comment-body-in">
@@ -364,21 +225,13 @@
                         </div>
                       </div>
                       <p>
-                        Lorem Ipsum has been the industry's standard dummy text
-                        ever since the 1500s, when an unknown printer took a
-                        galley of type and scrambled it to make a type specimen
-                        book. It has survived not only five centuries<span
-                          class="text-size"
-                          >😛</span
-                        >
+                        Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown
+                        printer took a galley of type and scrambled it to make a type specimen book. It has survived not
+                        only five centuries<span class="text-size">😛</span>
                       </p>
                     </div>
                     <div class="col-md-12 pt-2 pl-0 mb-3">
-                      <b-icon
-                        icon="suit-heart"
-                        variant="primary"
-                        aria-hidden="true"
-                      ></b-icon>
+                      <b-icon icon="suit-heart" variant="primary" aria-hidden="true"></b-icon>
                       23 &nbsp; &nbsp; &nbsp; <a href="#">Reply</a>
                     </div>
                   </div>
@@ -394,7 +247,7 @@
 
 <script>
 export default {
-  props: ["product"],
+  props: ['product'],
   data() {
     return {
       viewProduct: false,
@@ -510,7 +363,7 @@ h6 {
   .text {
     color: #000;
 
-    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
     font-weight: normal;
     font-size: 14px;
     line-height: 30px;
@@ -549,7 +402,7 @@ h6 {
     color: black;
 
     line-height: 35px;
-    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   }
 
   .btn {
@@ -565,7 +418,7 @@ h6 {
   .text {
     color: #000;
 
-    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
     font-weight: normal;
     font-size: 14px;
     line-height: 30px;
@@ -611,7 +464,7 @@ h6 {
     color: black;
 
     line-height: 35px;
-    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   }
 }
 
@@ -690,7 +543,7 @@ h6 {
   .text {
     color: #000;
 
-    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
     font-weight: normal;
     font-size: 14px;
     line-height: 30px;
@@ -736,7 +589,7 @@ h6 {
     color: black;
 
     line-height: 35px;
-    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   }
 }
 </style>

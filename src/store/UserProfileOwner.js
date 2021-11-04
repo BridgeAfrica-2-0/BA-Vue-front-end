@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from 'axios';
 
 export default {
   namespaced: true,
@@ -96,49 +96,53 @@ export default {
       state.images = payload;
     },
 
-
     updateAlbum(state, payload) {
-      const newState = state.albums.map(album => (album.id == payload.id) ? Object.assign(album, { name: payload.name }) : album)
-      state.albums = newState
+      const newState = state.albums.map(album =>
+        album.id == payload.id ? Object.assign(album, { name: payload.name }) : album,
+      );
+      state.albums = newState;
     },
 
     updateAlbumItem(state, payload) {
-      const newState = state.albums.map(album => (album.id == payload.id) ? Object.assign(album, { items: ('remove' == payload.action) ? parseInt(album.items) - 1 : parseInt(album.items) + 1 }) : album)
-      state.albums = newState
+      const newState = state.albums.map(album =>
+        album.id == payload.id
+          ? Object.assign(album, {
+              items: 'remove' == payload.action ? parseInt(album.items) - 1 : parseInt(album.items) + 1,
+            })
+          : album,
+      );
+      state.albums = newState;
     },
 
     removeAlbum(state, uuid) {
-      state.albums = state.albums.filter(album => album.id != uuid)
+      state.albums = state.albums.filter(album => album.id != uuid);
     },
-
   },
 
   actions: {
     async ownerPost({ commit }) {
-      const res = await axios.get("profile/post/media/");
-      commit("ownerPost", res.data);
+      const res = await axios.get('profile/post/media/');
+      commit('ownerPost', res.data);
     },
 
     async ownerPostImages({ commit }) {
-      const res = await axios.get("profile/post/media/");
-      commit("ownerPostImages", res.data);
+      const res = await axios.get('profile/post/media/');
+      commit('ownerPostImages', res.data);
     },
-
 
     async getAlbumImages({ commit }, id) {
       const res = await axios.get(`profile/album/pictures/${id}`);
-      commit("setAlbumImages", res.data.data);
+      commit('setAlbumImages', res.data.data);
     },
 
     // for albums
     async getAlbums({ commit }) {
-      const res = await axios.get("profile/album/show");
-      commit("setAlbums", res.data.data.album);
+      const res = await axios.get('profile/album/show');
+      commit('setAlbums', res.data.data.album);
     },
 
     async createAlbum({ commit }, albumInfo) {
-      return axios.post("profile/album/create", albumInfo);
-
+      return axios.post('profile/album/create', albumInfo);
     },
 
     async updateAlbum({ commit }, user) {
@@ -151,8 +155,8 @@ export default {
 
     // for images
     async getImages({ commit }) {
-      const res = await axios.get("profile/post/media");
-      commit("setImages", res.data.data);
+      const res = await axios.get('profile/post/media');
+      commit('setImages', res.data.data);
     },
 
     async submitPost({ commit }, payload) {
@@ -174,8 +178,8 @@ export default {
     async downloadPic({ commit }, id) {
       return axios({
         url: `profile/downloadMedia/${id}`,
-        method: "post",
-        responseType: "blob"
+        method: 'post',
+        responseType: 'blob',
       });
     },
   },

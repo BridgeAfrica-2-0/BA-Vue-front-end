@@ -4,7 +4,7 @@
       <md-card class="md-layout-item md-size-50 md-small-size-100 p-card">
         <md-card-header>
           <div class="md-title center f-22">
-            {{ $t("auth.Login_To_Bridge_Africa") }}
+            {{ $t('auth.Login_To_Bridge_Africa') }}
           </div>
         </md-card-header>
 
@@ -14,23 +14,16 @@
           <div class="center">
             <b-row>
               <b-col cols="12" md="6" lg="12" xl="6">
-                <md-button
-                  @click.prevent="authProvider('facebook')"
-                  class="md-raised md-primary b-w"
-                >
+                <md-button @click.prevent="authProvider('facebook')" class="md-raised md-primary b-w">
                   <b-icon icon="facebook" aria-hidden="true"></b-icon>
-                  {{ $t("Login_With_Facebook") }}
+                  {{ $t('Login_With_Facebook') }}
                 </md-button>
               </b-col>
 
               <b-col cols="12" md="6" lg="12" xl="6">
-                <md-button
-                  @click.prevent="authProvider('google')"
-                  class="b-color b-w"
-                  style="color: white"
-                >
+                <md-button @click.prevent="authProvider('google')" class="b-color b-w" style="color: white">
                   <b-icon icon="google" aria-hidden="true"></b-icon>
-                  {{ $t("login_with_google") }}
+                  {{ $t('login_with_google') }}
                 </md-button>
               </b-col>
             </b-row>
@@ -38,10 +31,10 @@
 
           <br />
 
-          <p class="t-center">-{{ $t("or") }} -</p>
+          <p class="t-center">-{{ $t('or') }} -</p>
 
           <md-field :class="getValidationClass('email')">
-            <label for="email"> {{ $t("email") }} </label>
+            <label for="email"> {{ $t('email') }} </label>
             <md-input
               type="email"
               name="email"
@@ -51,33 +44,22 @@
               :disabled="sending"
             />
             <span class="md-error" v-if="!$v.form.email.required">
-              {{ $t("the_email_is_required") }}
+              {{ $t('the_email_is_required') }}
             </span>
             <span class="md-error" v-else-if="!$v.form.email.email">
-              {{ $t("invalid_email") }}
+              {{ $t('invalid_email') }}
             </span>
           </md-field>
 
           <md-field>
-            <label for="password"> {{ $t("Password") }} </label>
-            <md-input
-              type="password"
-              name="password"
-              id="password"
-              v-model="form.password"
-              :disabled="sending"
-            />
+            <label for="password"> {{ $t('Password') }} </label>
+            <md-input type="password" name="password" id="password" v-model="form.password" :disabled="sending" />
           </md-field>
 
           <div class="md-layout md-gutter">
             <div class="md-layout-item md-small-size-100 m-left">
-              <b-form-checkbox
-                id="checkbox-1"
-                name="checkbox-1"
-                value="accepted"
-                unchecked-value="not_accepted"
-              >
-                {{ $t("remeber_me") }}
+              <b-form-checkbox id="checkbox-1" name="checkbox-1" value="accepted" unchecked-value="not_accepted">
+                {{ $t('remeber_me') }}
               </b-form-checkbox>
             </div>
 
@@ -92,26 +74,19 @@
         <div>
           <b-row>
             <b-col cols="6">
-              <md-button
-                type="submit"
-                :disabled="sending"
-                class="b-color f-left"
-                style="color: white"
-              >
-                {{ $t("login") }}
+              <md-button type="submit" :disabled="sending" class="b-color f-left" style="color: white">
+                {{ $t('login') }}
               </md-button>
             </b-col>
             <b-col cols="6">
               <router-link to="signup">
-                <md-button class="md-raised f-right"
-                  >{{ $t("signup") }}
-                </md-button>
+                <md-button class="md-raised f-right">{{ $t('signup') }} </md-button>
               </router-link>
             </b-col>
           </b-row>
 
           <router-link to="recoverPass1" class="nav-link text">
-            {{ $t("forget_password") }}
+            {{ $t('forget_password') }}
           </router-link>
         </div>
 
@@ -122,13 +97,13 @@
           <br />
 
           <label class="f-12">
-            {{ $t("by_loging_in_you_agree_to_bridge_africa") }}
+            {{ $t('by_loging_in_you_agree_to_bridge_africa') }}
           </label>
           <br />
 
           <label class="f-12">
-            <b-link href="#"> {{ $t("terms_and_conditions") }} </b-link> &
-            <b-link href="#"> {{ $t("Privacy_policies") }} </b-link>
+            <b-link href="#"> {{ $t('terms_and_conditions') }} </b-link> &
+            <b-link href="#"> {{ $t('Privacy_policies') }} </b-link>
           </label>
         </div>
       </md-card>
@@ -136,7 +111,7 @@
       <div class="md-layout-item md-size-50 md-small-size-100 b-div"></div>
 
       <md-snackbar :md-active.sync="userSaved">
-        {{ $t("the_user") }} {{ lastUser }} {{ $t("was_saved_with_success") }} !
+        {{ $t('the_user') }} {{ lastUser }} {{ $t('was_saved_with_success') }} !
       </md-snackbar>
     </form>
 
@@ -144,10 +119,10 @@
 
     <p class="text-center">
       <span class="display-inline">
-        <b-link @click="$i18n.locale = 'en'"> {{ $t("english") }} </b-link>
+        <b-link @click="$i18n.locale = 'en'"> {{ $t('english') }} </b-link>
         <span class="vl"></span>
         <b-link class="ml-2" @click="$i18n.locale = 'fr'">
-          {{ $t("french") }}
+          {{ $t('french') }}
         </b-link>
       </span>
       Bridge Africa © 2021
@@ -156,44 +131,44 @@
 </template>
 
 <script>
-import { validationMixin } from "vuelidate";
-import "vue-material/dist/vue-material.min.css";
+import { validationMixin } from 'vuelidate';
+import 'vue-material/dist/vue-material.min.css';
 
-import "@/assets/default.css";
-import { required, email } from "vuelidate/lib/validators";
+import '@/assets/default.css';
+import { required, email } from 'vuelidate/lib/validators';
 export default {
-  name: "FormValidation",
+  name: 'FormValidation',
   boolean: true,
   mixins: [validationMixin],
   data: () => ({
     form: {
       password: null,
-      email: null
+      email: null,
     },
 
-    langs: ["en", "fr"],
+    langs: ['en', 'fr'],
 
     userSaved: false,
     sending: false,
-    lastUser: null
+    lastUser: null,
   }),
   validations: {
     form: {
       password: {
-        required
+        required,
       },
       email: {
         required,
-        email
-      }
-    }
+        email,
+      },
+    },
   },
   methods: {
     getValidationClass(fieldName) {
       const field = this.$v.form[fieldName];
       if (field) {
         return {
-          "md-invalid": field.$invalid && field.$dirty
+          'md-invalid': field.$invalid && field.$dirty,
         };
       }
     },
@@ -213,21 +188,21 @@ export default {
 
     socialLogin(provider, response) {
       this.$http
-        .post("user/social/" + provider, response)
+        .post('user/social/' + provider, response)
         .then(({ data }) => {
           console.log(data.data);
 
-          this.$store.commit("auth/setUserData", data.data);
+          this.$store.commit('auth/setUserData', data.data);
           this.flashMessage.show({
-            status: "success",
+            status: 'success',
 
-            message: "Successfully Register"
+            message: 'Successfully Register',
           });
 
           if (this.$store.state.auth.user.user.profile_complete == null) {
-            this.$router.push({ name: "welcome" });
+            this.$router.push({ name: 'welcome' });
           } else {
-            this.$router.push({ name: "dashboard" });
+            this.$router.push({ name: 'dashboard' });
           }
         })
         .catch(err => {
@@ -249,17 +224,17 @@ export default {
 
     login() {
       this.$store
-        .dispatch("auth/login", {
+        .dispatch('auth/login', {
           email: this.form.email,
-          password: this.form.password
+          password: this.form.password,
         })
         .then(() => {
           this.sending = false;
 
           if (this.$store.state.auth.user.user.profile_complete == null) {
-            this.$router.push({ name: "welcome" });
+            this.$router.push({ name: 'welcome' });
           } else {
-            this.$router.push({ name: "dashboard" });
+            this.$router.push({ name: 'dashboard' });
           }
         })
         .catch(err => {
@@ -270,15 +245,15 @@ export default {
             console.log({ err: err });
 
             this.flashMessage.show({
-              status: "error",
+              status: 'error',
 
-              message: err.response.data.message
+              message: err.response.data.message,
             });
           } else {
             this.flashMessage.show({
-              status: "error",
+              status: 'error',
 
-              message: "An error has occure"
+              message: 'An error has occure',
             });
           }
         });
@@ -289,8 +264,8 @@ export default {
       if (!this.$v.$invalid) {
         this.saveUser();
       }
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -332,7 +307,7 @@ export default {
   padding-bottom: 80px;
 }
 .b-div {
-  background-image: url("ash.jpg");
+  background-image: url('ash.jpg');
   background-position: center;
   background-size: cover;
 }

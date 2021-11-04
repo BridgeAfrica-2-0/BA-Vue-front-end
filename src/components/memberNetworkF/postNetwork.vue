@@ -23,11 +23,9 @@
           <b-row>
             <b-col cols="12" class="mt-2">
               <p class="post-text">
-                Lorem Ipsum has been the industry's standard dummy text ever
-                since the 1500s, when an unknown printer took a galley of type
-                and scrambled it to make a type specimen book. It has survived
-                not only five centuries, but also the leap into electronic
-                typesetting, remaining essentially unchanged.😛
+                Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer
+                took a galley of type and scrambled it to make a type specimen book. It has survived not only five
+                centuries, but also the leap into electronic typesetting, remaining essentially unchanged.😛
               </p>
             </b-col>
           </b-row>
@@ -42,22 +40,8 @@
               </div>
             </b-col>
             <b-col class="mt-1">
-              <span class="mr-3"
-                ><b-icon
-                  icon="suit-heart"
-                  variant="primary"
-                  aria-hidden="true"
-                ></b-icon>
-                23</span
-              >
-              <span
-                ><b-icon
-                  icon="chat-fill"
-                  variant="primary"
-                  aria-hidden="true"
-                ></b-icon>
-                123</span
-              >
+              <span class="mr-3"><b-icon icon="suit-heart" variant="primary" aria-hidden="true"></b-icon> 23</span>
+              <span><b-icon icon="chat-fill" variant="primary" aria-hidden="true"></b-icon> 123</span>
 
               <span>
                 <fas-icon class="primary ml-3" :icon="['fas', 'share']" />
@@ -78,10 +62,7 @@
             <b-col cols="9" md="11" class="p-0 m-0 pr-3">
               <input placeholder="Post a Comment" class="comment" type="text" />
 
-              <fas-icon
-                class="primary send-cmt"
-                :icon="['fas', 'paper-plane']"
-              />
+              <fas-icon class="primary send-cmt" :icon="['fas', 'paper-plane']" />
             </b-col>
           </b-row>
 
@@ -113,11 +94,9 @@
           <b-row>
             <b-col cols="12" class="mt-2">
               <p class="post-text">
-                Lorem Ipsum has been the industry's standard dummy text ever
-                since the 1500s, when an unknown printer took a galley of type
-                and scrambled it to make a type specimen book. It has survived
-                not only five centuries, but also the leap into electronic
-                typesetting, remaining essentially unchanged.😛
+                Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer
+                took a galley of type and scrambled it to make a type specimen book. It has survived not only five
+                centuries, but also the leap into electronic typesetting, remaining essentially unchanged.😛
               </p>
             </b-col>
           </b-row>
@@ -126,22 +105,8 @@
               <lightbox :cells="2" :items="imagees"></lightbox>
             </b-col>
             <b-col class="mt-1">
-              <span class="mr-3"
-                ><b-icon
-                  icon="suit-heart"
-                  variant="primary"
-                  aria-hidden="true"
-                ></b-icon>
-                23</span
-              >
-              <span
-                ><b-icon
-                  icon="chat-fill"
-                  variant="primary"
-                  aria-hidden="true"
-                ></b-icon>
-                123</span
-              >
+              <span class="mr-3"><b-icon icon="suit-heart" variant="primary" aria-hidden="true"></b-icon> 23</span>
+              <span><b-icon icon="chat-fill" variant="primary" aria-hidden="true"></b-icon> 123</span>
 
               <span>
                 <fas-icon class="primary ml-3" :icon="['fas', 'share']" />
@@ -162,10 +127,7 @@
             <b-col cols="9" md="11" class="p-0 m-0 pr-3">
               <input placeholder="Post a Comment" class="comment" type="text" />
 
-              <fas-icon
-                class="primary send-cmt"
-                :icon="['fas', 'paper-plane']"
-              />
+              <fas-icon class="primary send-cmt" :icon="['fas', 'paper-plane']" />
             </b-col>
           </b-row>
 
@@ -197,11 +159,9 @@
           <b-row>
             <b-col cols="12" class="mt-2">
               <p class="post-text">
-                Lorem Ipsum has been the industry's standard dummy text ever
-                since the 1500s, when an unknown printer took a galley of type
-                and scrambled it to make a type specimen book. It has survived
-                not only five centuries, but also the leap into electronic
-                typesetting, remaining essentially unchanged.😛
+                Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer
+                took a galley of type and scrambled it to make a type specimen book. It has survived not only five
+                centuries, but also the leap into electronic typesetting, remaining essentially unchanged.😛
               </p>
             </b-col>
           </b-row>
@@ -210,22 +170,8 @@
               <lightbox :cells="4" :items="images"></lightbox>
             </b-col>
             <b-col class="mt-1">
-              <span class="mr-3"
-                ><b-icon
-                  icon="suit-heart"
-                  variant="primary"
-                  aria-hidden="true"
-                ></b-icon>
-                23</span
-              >
-              <span
-                ><b-icon
-                  icon="chat-fill"
-                  variant="primary"
-                  aria-hidden="true"
-                ></b-icon>
-                123</span
-              >
+              <span class="mr-3"><b-icon icon="suit-heart" variant="primary" aria-hidden="true"></b-icon> 23</span>
+              <span><b-icon icon="chat-fill" variant="primary" aria-hidden="true"></b-icon> 123</span>
 
               <span>
                 <fas-icon class="primary ml-3" :icon="['fas', 'share']" />
@@ -242,16 +188,9 @@
                   ></b-avatar>
                 </b-col>
                 <b-col cols="9" md="11" class="p-0 m-0 pr-3">
-                  <input
-                    placeholder="Post a Comment"
-                    class="comment"
-                    type="text"
-                  />
+                  <input placeholder="Post a Comment" class="comment" type="text" />
 
-                  <fas-icon
-                    class="primary send-cmt"
-                    :icon="['fas', 'paper-plane']"
-                  />
+                  <fas-icon class="primary send-cmt" :icon="['fas', 'paper-plane']" />
                 </b-col>
               </b-row>
             </b-col>
@@ -283,32 +222,16 @@
           <b-row>
             <b-col cols="12" class="mt-2">
               <p class="post-text">
-                Lorem Ipsum has been the industry's standard dummy text ever
-                since the 1500s, when an unknown printer took a galley of type
-                and scrambled it to make a type specimen book. It has survived
-                not only five centuries, but also the leap into electronic
-                typesetting, remaining essentially unchanged.😛
+                Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer
+                took a galley of type and scrambled it to make a type specimen book. It has survived not only five
+                centuries, but also the leap into electronic typesetting, remaining essentially unchanged.😛
               </p>
             </b-col>
           </b-row>
           <b-row>
             <b-col class="mt-1">
-              <span class="mr-3"
-                ><b-icon
-                  icon="suit-heart"
-                  variant="primary"
-                  aria-hidden="true"
-                ></b-icon>
-                23</span
-              >
-              <span
-                ><b-icon
-                  icon="chat-fill"
-                  variant="primary"
-                  aria-hidden="true"
-                ></b-icon>
-                123</span
-              >
+              <span class="mr-3"><b-icon icon="suit-heart" variant="primary" aria-hidden="true"></b-icon> 23</span>
+              <span><b-icon icon="chat-fill" variant="primary" aria-hidden="true"></b-icon> 123</span>
 
               <span>
                 <fas-icon class="primary ml-3" :icon="['fas', 'share']" />
@@ -326,16 +249,9 @@
                 </b-col>
                 <b-col cols="9" md="11" class="p-0 m-0 pr-3">
                   <b-input-group class="my-auto w-100 rounded">
-                    <input
-                      placeholder="Post a Comment"
-                      class="comment"
-                      type="text"
-                    />
+                    <input placeholder="Post a Comment" class="comment" type="text" />
 
-                    <fas-icon
-                      class="primary send-cmt"
-                      :icon="['fas', 'paper-plane']"
-                    />
+                    <fas-icon class="primary send-cmt" :icon="['fas', 'paper-plane']" />
                   </b-input-group>
                 </b-col>
               </b-row>
@@ -350,63 +266,60 @@
 </template>
 
 <script>
-import Comment from "./comment";
+import Comment from './comment';
 
 export default {
-  name: "postNetwork",
+  name: 'postNetwork',
   components: {
-    Comment
+    Comment,
   },
   data() {
     return {
       images: [
-        "https://i.wifegeek.com/200426/f9459c52.jpg",
-        "https://pbs.twimg.com/media/DoNa_wKUUAASSCF.jpg",
-        "https://pbs.twimg.com/media/DKO62sVXUAA0_AL.jpg",
-        "https://i.wifegeek.com/200426/2d110780.jpg",
-        "https://i.wifegeek.com/200426/e73cd3fa.jpg",
-        "https://i.wifegeek.com/200426/15160d6e.jpg",
-        "https://i.wifegeek.com/200426/d0c881ae.jpg",
-        "https://i.wifegeek.com/200426/a154fc3d.jpg",
-        "https://i.wifegeek.com/200426/71d3aa60.jpg",
-        "https://i.wifegeek.com/200426/d17ce9a0.jpg",
-        "https://i.wifegeek.com/200426/7c4deca9.jpg",
-        "https://i.wifegeek.com/200426/64672676.jpg",
-        "https://i.wifegeek.com/200426/de6ab9c6.jpg",
-        "https://i.wifegeek.com/200426/d8bcb6a7.jpg",
-        "https://i.wifegeek.com/200426/4085d03b.jpg",
-        "https://i.wifegeek.com/200426/177ef44c.jpg",
-        "https://i.wifegeek.com/200426/d74d9040.jpg",
-        "https://i.wifegeek.com/200426/81e24a47.jpg",
-        "https://i.wifegeek.com/200426/43e2e8bb.jpg"
+        'https://i.wifegeek.com/200426/f9459c52.jpg',
+        'https://pbs.twimg.com/media/DoNa_wKUUAASSCF.jpg',
+        'https://pbs.twimg.com/media/DKO62sVXUAA0_AL.jpg',
+        'https://i.wifegeek.com/200426/2d110780.jpg',
+        'https://i.wifegeek.com/200426/e73cd3fa.jpg',
+        'https://i.wifegeek.com/200426/15160d6e.jpg',
+        'https://i.wifegeek.com/200426/d0c881ae.jpg',
+        'https://i.wifegeek.com/200426/a154fc3d.jpg',
+        'https://i.wifegeek.com/200426/71d3aa60.jpg',
+        'https://i.wifegeek.com/200426/d17ce9a0.jpg',
+        'https://i.wifegeek.com/200426/7c4deca9.jpg',
+        'https://i.wifegeek.com/200426/64672676.jpg',
+        'https://i.wifegeek.com/200426/de6ab9c6.jpg',
+        'https://i.wifegeek.com/200426/d8bcb6a7.jpg',
+        'https://i.wifegeek.com/200426/4085d03b.jpg',
+        'https://i.wifegeek.com/200426/177ef44c.jpg',
+        'https://i.wifegeek.com/200426/d74d9040.jpg',
+        'https://i.wifegeek.com/200426/81e24a47.jpg',
+        'https://i.wifegeek.com/200426/43e2e8bb.jpg',
       ],
-      imagees: [
-        "https://pbs.twimg.com/media/DoNa_wKUUAASSCF.jpg",
-        "https://pbs.twimg.com/media/DKO62sVXUAA0_AL.jpg"
-      ]
+      imagees: ['https://pbs.twimg.com/media/DoNa_wKUUAASSCF.jpg', 'https://pbs.twimg.com/media/DKO62sVXUAA0_AL.jpg'],
     };
   },
 
   methods: {
     chooseImage: function() {
-      document.getElementById("image").click();
+      document.getElementById('image').click();
     },
 
     chooseVideo: function() {
-      document.getElementById("video").click();
+      document.getElementById('video').click();
     },
 
     chooseDocument: function() {
-      document.getElementById("document").click();
+      document.getElementById('document').click();
     },
 
     showModal() {
-      this.$refs["modal-3"].show();
+      this.$refs['modal-3'].show();
     },
     hideModal() {
-      this.$refs["modal-3"].hide();
-    }
-  }
+      this.$refs['modal-3'].hide();
+    },
+  },
 };
 </script>
 

@@ -1,12 +1,5 @@
 <template>
-  <b-button
-    block
-    size="sm"
-    id="btn-bg"
-    :class="styleClass"
-    variant="primary"
-    :disabled="isDisabled"
-  >
+  <b-button block size="sm" id="btn-bg" :class="styleClass" variant="primary" :disabled="isDisabled">
     <b-spinner small v-if="loading"></b-spinner>
     <i :class="fas" v-if="fas && !loading"></i>
     <span class="btn-com" v-if="!loading">{{ title }}</span>
@@ -33,22 +26,22 @@ export default {
       type: String,
     },
     styleClass: {
-      default: "btn btn-bg flexx pobtn mt-4 p-3 btn-primary btn-sm btn-block",
+      default: 'btn btn-bg flexx pobtn mt-4 p-3 btn-primary btn-sm btn-block',
       type: String,
     },
     disabled: {
-      default: function () {
+      default: function() {
         return false;
       },
     },
     loading: {
-      default: function () {
+      default: function() {
         return false;
       },
     },
     fas: {
       type: String,
-      default: "",
+      default: '',
     },
   },
 };

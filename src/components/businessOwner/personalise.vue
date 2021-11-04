@@ -4,8 +4,7 @@
       <b-card-text>
         <h5><b>Create your personalized website</b></h5>
         <p>
-          Start with a template and make it your own, with easy drag and drop &
-          1000s of design features
+          Start with a template and make it your own, with easy drag and drop & 1000s of design features
         </p>
         <b-button variant="primary">Choose a Template</b-button>
       </b-card-text>

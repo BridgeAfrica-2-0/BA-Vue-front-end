@@ -2,11 +2,7 @@
   <div>
     <b-row class="mt-2">
       <b-col>
-        <b-avatar
-          variant="info"
-          src="https://placekitten.com/300/300"
-          size="2rem"
-        ></b-avatar>
+        <b-avatar variant="info" src="https://placekitten.com/300/300" size="2rem"></b-avatar>
         <span class="float-right">
           <b-dropdown size="sm" variant="outline">
             <template class="more" #button-content>
@@ -17,10 +13,9 @@
           </b-dropdown>
         </span>
         <p class="msg">
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Est qui a,
-          consectetur explicabo atque totam ea facilis perferendis libero ab
-          officiis sint culpa cum similique adipisci doloremque recusandae,
-          sapiente minus!
+          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Est qui a, consectetur explicabo atque totam ea
+          facilis perferendis libero ab officiis sint culpa cum similique adipisci doloremque recusandae, sapiente
+          minus!
         </p>
         <b-icon icon="suit-heart" variant="primary" aria-hidden="true"></b-icon>
         23
@@ -28,19 +23,12 @@
         <div v-if="reply">
           <b-row class="mt-2">
             <b-col cols="1">
-              <b-avatar
-                variant="info"
-                src="https://placekitten.com/300/300"
-                size="2rem"
-              ></b-avatar>
+              <b-avatar variant="info" src="https://placekitten.com/300/300" size="2rem"></b-avatar>
             </b-col>
             <b-col cols="11">
               <input placeholder="Post a Comment" class="comment" type="text" />
 
-              <fas-icon
-                class="primary send-cmt"
-                :icon="['fas', 'paper-plane']"
-              />
+              <fas-icon class="primary send-cmt" :icon="['fas', 'paper-plane']" />
             </b-col>
           </b-row>
         </div>
@@ -53,14 +41,14 @@
 export default {
   data() {
     return {
-      reply: false
+      reply: false,
     };
   },
   methods: {
     showReply() {
       this.reply = !this.reply;
-    }
-  }
+    },
+  },
 };
 </script>
 

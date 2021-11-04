@@ -1,6 +1,5 @@
-import axios from "axios";
-axios.defaults.headers.common["Authorization"] =
-  "Bearer " + localStorage.getItem("access_token");
+import axios from 'axios';
+axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('access_token');
 export default {
   namespaced: true,
   state: {
@@ -83,48 +82,48 @@ export default {
   actions: {
     //getting business followers
     async gettingFollowers({ commit }) {
-      const res = await axios.get("/community/business-follower");
-      commit("allFollowers", res.data);
+      const res = await axios.get('/community/business-follower');
+      commit('allFollowers', res.data);
     },
 
     //getting business people followers
     async gettingPeopleFollowers({ commit }) {
-      const res = await axios.get("/community/people-follower");
-      commit("ppFollowers", res.data);
+      const res = await axios.get('/community/people-follower');
+      commit('ppFollowers', res.data);
     },
 
     //getting business folowings
     async gettingFollowings({ commit }) {
-      const res = await axios.get("/community/business-following");
-      commit("allFollowing", res.data);
+      const res = await axios.get('/community/business-following');
+      commit('allFollowing', res.data);
     },
 
     //getting business people folowings
     async gettingPeopleFollowings({ commit }) {
-      const res = await axios.get("/community/people-following");
-      commit("ppFollowing", res.data);
+      const res = await axios.get('/community/people-following');
+      commit('ppFollowing', res.data);
     },
 
     // joining a network
     async Joining({ commit }) {
-      const res = await axios.post("");
-      commit("Join", res.data);
+      const res = await axios.post('');
+      commit('Join', res.data);
     },
 
     // Getting the notifications
     async getNotifications({ dispatch, commit }) {
-      commit("setLoader", true);
+      commit('setLoader', true);
 
       await axios
-        .get("/notification")
-        .then((res) => {
-          commit("setLoader", false);
-          commit("setNotifications", res.data.data);
+        .get('/notification')
+        .then(res => {
+          commit('setLoader', false);
+          commit('setNotifications', res.data.data);
           setTimeout(() => {}, 2000);
         })
-        .catch((err) => {
-          commit("setLoader", false);
-          console.log("Unauthorized request !!");
+        .catch(err => {
+          commit('setLoader', false);
+          console.log('Unauthorized request !!');
         });
     },
 
@@ -134,7 +133,7 @@ export default {
         ids: [],
       };
 
-      payload.forEach((element) => {
+      payload.forEach(element => {
         let objId = {
           id: null,
         };
@@ -142,17 +141,17 @@ export default {
         items.ids.push(objId);
       });
       await axios
-        .post("/notification/mark-read", items)
+        .post('/notification/mark-read', items)
         .then(() => {
-          dispatch("getNotifications");
+          dispatch('getNotifications');
         })
-        .catch((err) => [console.log(err)]);
+        .catch(err => [console.log(err)]);
     },
 
     // delete a single notification
     deleteOne({ dispatch }, id) {
       axios.delete(`/notification/${id}`).then(() => {
-        dispatch("getNotifications");
+        dispatch('getNotifications');
       });
     },
 
@@ -162,15 +161,15 @@ export default {
         ids: [],
       };
 
-      payload.forEach((element) => {
+      payload.forEach(element => {
         let objId = {
           id: null,
         };
         objId.id = element;
         items.ids.push(objId);
       });
-      await axios.post("/notification/deleteAll", items).then(() => {
-        dispatch("getNotifications");
+      await axios.post('/notification/deleteAll', items).then(() => {
+        dispatch('getNotifications');
       });
     },
   },

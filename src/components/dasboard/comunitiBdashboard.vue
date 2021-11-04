@@ -4,12 +4,12 @@
       class="border-0 p-0 m-0"
       style="
     padding: 3px;"
-    >  
+    >
       <div class=" border shadow   p-tab p-3">
         <span>
           <h6 class="title">
             <fas-icon class="icons" :icon="['fas', 'users']" size="lg" />
-            <b> COMMUNITY </b> <span class="h4-color"> {{totalcommunity.total}} </span>
+            <b> COMMUNITY </b> <span class="h4-color"> {{ totalcommunity.total }} </span>
           </h6>
         </span>
 
@@ -18,7 +18,7 @@
             <template slot="title">
               People
               <span class="spa-color">
-                {{peoplecommunity.total_people}} 
+                {{ peoplecommunity.total_people }}
               </span>
             </template>
 
@@ -26,23 +26,18 @@
               <b-row>
                 <b-col class="p-2">
                   <b-tabs lazy fill pills content-class="mt-3  f-left m-up">
-
                     <b-tab active>
                       <template slot="title">
                         Followers
                         <span class="spa-color">
-                          {{peoplecommunity.total_followers}}
+                          {{ peoplecommunity.total_followers }}
                         </span>
                       </template>
 
                       <div class="s-comcard">
-                      
-                          <div>
-                            <People
-                              :people="peoplecommunity.user_followers" 
-                            />
-                          </div>  
-                        
+                        <div>
+                          <People :people="peoplecommunity.user_followers" />
+                        </div>
                       </div>
                     </b-tab>
 
@@ -50,18 +45,14 @@
                       <template slot="title">
                         Following
                         <span class="spa-color">
-                          {{peoplecommunity.total_following}} 
+                          {{ peoplecommunity.total_following }}
                         </span>
                       </template>
 
                       <div class="s-comcard">
-                      
-                          <div>
-                            <People
-                              :people="peoplecommunity.user_following"
-                            />
-                          </div>
-                        
+                        <div>
+                          <People :people="peoplecommunity.user_following" />
+                        </div>
                       </div>
                     </b-tab>
                   </b-tabs>
@@ -89,13 +80,9 @@
                   </template>
 
                   <div class="s-comcard">
-                  
-                      <div>
-                        <Business
-                          :business="businesscommunity.Business_followers" 
-                        />
-                      </div>
-                   
+                    <div>
+                      <Business :business="businesscommunity.Business_followers" />
+                    </div>
                   </div>
                 </b-tab>
 
@@ -103,31 +90,25 @@
                   <template slot="title">
                     Following
                     <span class="spa-color">
-                     {{businesscommunity.totat_following}}
+                      {{ businesscommunity.totat_following }}
                     </span>
                   </template>
 
                   <div class="s-comcard">
-                
-                      <div>
-                        <Business
-                          :business="businesscommunity.Business_following"
-                        />
-                      </div>
-                  
+                    <div>
+                      <Business :business="businesscommunity.Business_following" />
+                    </div>
                   </div>
                 </b-tab>
               </b-tabs>
             </div>
           </b-tab>
-         
-
 
           <b-tab>
             <template slot="title">
               Network
               <span class="spa-color">
-               0
+                0
               </span>
             </template>
 
@@ -137,18 +118,14 @@
                   <template slot="title">
                     Followers
                     <span class="spa-color">
-                     0
+                      0
                     </span>
                   </template>
 
                   <div class="s-comcard">
-                   
-                      <div>
-                        <Network
-                         :network="[]" 
-                        />
-                      </div>
-                  
+                    <div>
+                      <Network :network="[]" />
+                    </div>
                   </div>
                 </b-tab>
 
@@ -156,24 +133,19 @@
                   <template slot="title">
                     Following
                     <span class="spa-color">
-                 0
+                      0
                     </span>
                   </template>
 
                   <div class="s-comcard">
-                   
-                      <div class="p-2">
-                        <Network
-                          :network="[]" 
-                        />
-                      </div>
-                   
+                    <div class="p-2">
+                      <Network :network="[]" />
+                    </div>
                   </div>
                 </b-tab>
               </b-tabs>
             </div>
           </b-tab>
-
         </b-tabs>
       </div>
     </b-card>
@@ -181,69 +153,53 @@
 </template>
 
 <script>
-import People from "@/components/dasboard/communityBmember";
-import Business from "@/components/dasboard/communityBbusiness";
-import Network from "@/components/dasboard/communitynetwork";
+import People from '@/components/dasboard/communityBmember';
+import Business from '@/components/dasboard/communityBbusiness';
+import Network from '@/components/dasboard/communitynetwork';
 
 export default {
-  name: "comunitiDashboard",
+  name: 'comunitiDashboard',
 
   components: {
     People,
     Business,
-    Network
+    Network,
   },
-  computed: {   
+  computed: {
     business() {
-      return this.$store.getters["dashboardcommunity/getProfileCommunity"];
+      return this.$store.getters['dashboardcommunity/getProfileCommunity'];
     },
     com() {
-      return this.$store.getters["dashboardcommunity/getcom"];
+      return this.$store.getters['dashboardcommunity/getcom'];
     },
 
-
-     peoplecommunity() {
-
-      return  this.$store.state.businessOwner.communityPeople;  
-
-    
+    peoplecommunity() {
+      return this.$store.state.businessOwner.communityPeople;
     },
 
-
-
-      totalcommunity() {
-
-      return  this.$store.state.businessOwner.communityTotal;  
-
-    
+    totalcommunity() {
+      return this.$store.state.businessOwner.communityTotal;
     },
 
-
-
-      businesscommunity() {
-
-      return  this.$store.state.businessOwner.CommunityBusiness;  
-
-    
-    }
-
-
+    businesscommunity() {
+      return this.$store.state.businessOwner.CommunityBusiness;
+    },
   },
   created() {
     this.$store
-      .dispatch("dashboardcommunity/getdetails")
+      .dispatch('dashboardcommunity/getdetails')
 
       .then(() => {
-        console.log("the response");
+        console.log('the response');
       })
       .catch(err => {
         console.log({ err: err });
       });
     this.$store
-      .dispatch("dashboardcommunity/gettotalcommunity")
+      .dispatch('dashboardcommunity/gettotalcommunity')
 
       .then(() => {
-        console.log("the response");
+        console.log('the response');
       })
       .catch(err => {
         console.log({ err: err });
@@ -252,13 +208,13 @@ export default {
   methods: {
     count(number) {
       if (number >= 1000000) {
-        return number / 1000000 + "M";
+        return number / 1000000 + 'M';
       }
       if (number >= 1000) {
-        return number / 1000 + "K";
+        return number / 1000 + 'K';
       } else return number;
-    }
-  }
+    },
+  },
 };
 </script>
 

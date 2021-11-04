@@ -32,14 +32,11 @@
                       size="3.5rem"
                     ></b-avatar>
                     <h5 class="m-0 font-weight-bolder d-inline-block ml-2">
-                      <span class="text-primary">Bridge Africa</span> you are
-                      following
+                      <span class="text-primary">Bridge Africa</span> you are following
                     </h5>
                   </span>
                   <span class="float-right mt-1">
-                    <b-button variant="primary" class="mt-2"
-                      >Following
-                    </b-button>
+                    <b-button variant="primary" class="mt-2">Following </b-button>
                   </span>
                 </p>
                 <hr width="100%" />
@@ -54,14 +51,11 @@
                       size="3.5rem"
                     ></b-avatar>
                     <h5 class="m-0 font-weight-bolder d-inline-block ml-2">
-                      <span class="text-primary">Bridge Africa</span> is a
-                      business nearby
+                      <span class="text-primary">Bridge Africa</span> is a business nearby
                     </h5>
                   </span>
                   <span class="float-right mt-1">
-                    <b-button variant="outline-primary" class="mt-2"
-                      >Follow
-                    </b-button>
+                    <b-button variant="outline-primary" class="mt-2">Follow </b-button>
                   </span>
                 </p>
                 <hr width="100%" />
@@ -77,14 +71,11 @@
                       size="3.5rem"
                     ></b-avatar>
                     <h5 class="m-0 font-weight-bolder d-inline-block ml-2">
-                      <span class="text-primary">Boris Ebwanga</span> is someone
-                      you may know
+                      <span class="text-primary">Boris Ebwanga</span> is someone you may know
                     </h5>
                   </span>
                   <span class="float-right mt-1">
-                    <b-button variant="outline-primary" class="mt-2"
-                      >Follow
-                    </b-button>
+                    <b-button variant="outline-primary" class="mt-2">Follow </b-button>
                   </span>
                 </p>
                 <hr width="100%" />
@@ -99,15 +90,15 @@
 </template>
 
 <script>
-import Navbar from "@/components/navbar";
-import Footer from "@/components/footer";
+import Navbar from '@/components/navbar';
+import Footer from '@/components/footer';
 
 export default {
-  name: "dashboardInfo",
+  name: 'dashboardInfo',
   components: {
     Navbar,
-    Footer
-  }
+    Footer,
+  },
 };
 </script>
 

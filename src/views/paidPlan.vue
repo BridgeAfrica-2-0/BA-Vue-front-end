@@ -25,22 +25,22 @@
 </template>
 
 <script>
-import navbar from "@/components/navbar";
-import Footer from "@/components/footer";
-import SubscriptionPlan from "@/components/businessf/tabs/owner/subscriptionPlan";
+import navbar from '@/components/navbar';
+import Footer from '@/components/footer';
+import SubscriptionPlan from '@/components/businessf/tabs/owner/subscriptionPlan';
 
 export default {
-  name: "paidPlan",
+  name: 'paidPlan',
   components: {
     SubscriptionPlan,
     navbar,
-    Footer
+    Footer,
   },
   data() {
     return {};
   },
   computed: {},
-  methods: {}
+  methods: {},
 };
 </script>
 

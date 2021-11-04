@@ -1,9 +1,5 @@
 <template>
-  <div
-    class="ly-tabbar"
-    :class="{ 'ly-tabbar-fix-bottom': fixBottom }"
-    ref="viewArea"
-  >
+  <div class="ly-tabbar" :class="{ 'ly-tabbar-fix-bottom': fixBottom }" ref="viewArea">
     <div class="ly-tab-list" :style="style" ref="list">
       <slot></slot>
     </div>
@@ -11,33 +7,33 @@
 </template>
 
 <script>
-import { windowInit } from "./utils/requestAnimationFrame";
+import { windowInit } from './utils/requestAnimationFrame';
 
 export default {
-  name: "LyTabbar",
+  name: 'LyTabbar',
 
   props: {
     lineWidth: {
       type: Number,
-      default: 3
+      default: 3,
     },
     activeColor: {
       type: String,
-      default: "red"
+      default: 'red',
     },
     fixBottom: {
       type: Boolean,
-      default: false
+      default: false,
     },
     value: {
       type: Number,
-      default: 0
+      default: 0,
     },
 
     // 近似等于超出边界时最大可拖动距离(px);
     additionalX: {
       type: Number,
-      default: 50
+      default: 50,
     },
     // 惯性回弹指数(值越大，幅度越大，惯性回弹距离越长);
     reBoundExponent: {
@@ -45,7 +41,7 @@ export default {
       default: 10,
       validator(value) {
         return value > 0;
-      }
+      },
     },
     // 灵敏度(惯性滑动时的灵敏度,值越小，阻力越大),可近似认为速度减为零所需的时间(ms);
     sensitivity: {
@@ -53,13 +49,13 @@ export default {
       default: 1000,
       validator(value) {
         return value > 0;
-      }
+      },
     },
     // 回弹过程duration;
     reBoundingDuration: {
       type: Number,
-      default: 360
-    }
+      default: 360,
+    },
   },
 
   data() {
@@ -80,7 +76,7 @@ export default {
       frameEndTime: 0,
       inertiaFrame: 0,
       zeroSpeed: 0.001, // 当speed绝对值小于该值时认为速度为0 (可用于控制惯性滚动结束期的顺滑度)
-      acceleration: 0 // 惯性滑动加速度;
+      acceleration: 0, // 惯性滑动加速度;
     };
   },
 
@@ -90,7 +86,7 @@ export default {
       return {
         transitionTimingFunction: this.transitionTimingFunction,
         transitionDuration: `${this.transitionDuration}ms`,
-        transform: `translate3d(${this.translateX}px, 0px, 0px)`
+        transform: `translate3d(${this.translateX}px, 0px, 0px)`,
       };
     },
     activeBarStyle() {
@@ -99,7 +95,7 @@ export default {
         width: `${this.activeBarWidth}px`,
         height: `${this.lineWidth}px`,
         transform: `translate3d(${this.activeBarX}px, 0, 0)`,
-        backgroundColor: this.activeColor
+        backgroundColor: this.activeColor,
       };
     },
     transitionDuration() {
@@ -113,9 +109,7 @@ export default {
       }
     },
     transitionTimingFunction() {
-      return this.reBounding
-        ? "cubic-bezier(0.25, 0.46, 0.45, 0.94)"
-        : "cubic-bezier(0.1, 0.57, 0.1, 1)";
+      return this.reBounding ? 'cubic-bezier(0.25, 0.46, 0.45, 0.94)' : 'cubic-bezier(0.1, 0.57, 0.1, 1)';
     },
     // 可视区宽度;
     viewAreaWidth() {
@@ -131,14 +125,14 @@ export default {
     },
     isMoveRight() {
       return this.currentX >= this.startX;
-    }
+    },
   },
 
   watch: {
     value() {
       this.checkPosition();
       this.calcBarPosX();
-    }
+    },
   },
 
   mounted() {
@@ -204,25 +198,22 @@ export default {
     },
 
     bindEvent() {
-      this.$el.addEventListener("touchstart", this.handleTouchStart, false);
-      this.$el.addEventListener("touchmove", this.handleTouchMove, false);
-      this.$el.addEventListener("touchend", this.handleTouchEnd, false);
+      this.$el.addEventListener('touchstart', this.handleTouchStart, false);
+      this.$el.addEventListener('touchmove', this.handleTouchMove, false);
+      this.$el.addEventListener('touchend', this.handleTouchEnd, false);
     },
 
     removeEvent() {
-      this.$el.removeEventListener("touchstart", this.handleTouchStart);
-      this.$el.removeEventListener("touchmove", this.handleTouchMove);
-      this.$el.removeEventListener("touchend", this.handleTouchEnd);
+      this.$el.removeEventListener('touchstart', this.handleTouchStart);
+      this.$el.removeEventListener('touchmove', this.handleTouchMove);
+      this.$el.removeEventListener('touchend', this.handleTouchEnd);
     },
 
     // touch拖动
     moveFollowTouch() {
       if (this.isMoveLeft) {
         // 向左拖动
-        if (
-          (this.translateX <= 0 && this.translateX + this.listWidth > 0) ||
-          this.translateX > 0
-        ) {
+        if ((this.translateX <= 0 && this.translateX + this.listWidth > 0) || this.translateX > 0) {
           this.translateX += this.currentX - this.lastX;
         } else if (this.translateX + this.listWidth <= 0) {
           this.translateX +=
@@ -232,9 +223,7 @@ export default {
       } else {
         // 向右拖动
         if (this.translateX >= 0) {
-          this.translateX +=
-            (this.additionalX * (this.currentX - this.lastX)) /
-            (this.viewAreaWidth + this.translateX);
+          this.translateX += (this.additionalX * (this.currentX - this.lastX)) / (this.viewAreaWidth + this.translateX);
         } else if (
           (this.translateX <= 0 && this.translateX + this.listWidth >= 0) ||
           this.translateX + this.listWidth <= 0
@@ -255,27 +244,18 @@ export default {
           // 超出边界的过程;
           // 加速度指数变化;
           this.acceleration *=
-            (this.reBoundExponent +
-              Math.abs(this.translateX + this.listWidth)) /
-            this.reBoundExponent;
+            (this.reBoundExponent + Math.abs(this.translateX + this.listWidth)) / this.reBoundExponent;
           this.speed = Math.min(this.speed - this.acceleration, 0); // 为避免减速过程过短，此处加速度没有乘上frameTime;
         } else {
-          this.speed = Math.min(
-            this.speed - this.acceleration * this.frameTime,
-            0
-          );
+          this.speed = Math.min(this.speed - this.acceleration * this.frameTime, 0);
         }
       } else if (this.isMoveRight) {
         // 向右惯性滑动;
         if (this.translateX >= 0) {
-          this.acceleration *=
-            (this.reBoundExponent + this.translateX) / this.reBoundExponent;
+          this.acceleration *= (this.reBoundExponent + this.translateX) / this.reBoundExponent;
           this.speed = Math.max(this.speed - this.acceleration, 0);
         } else {
-          this.speed = Math.max(
-            this.speed - this.acceleration * this.frameTime,
-            0
-          );
+          this.speed = Math.max(this.speed - this.acceleration * this.frameTime, 0);
         }
       }
       this.translateX += (this.speed * this.frameTime) / 2;
@@ -321,8 +301,8 @@ export default {
       lastX < -this.listWidth && (lastX = -this.listWidth);
       this.reBounding = true;
       this.translateX = lastX;
-    }
-  }
+    },
+  },
 };
 </script>
 

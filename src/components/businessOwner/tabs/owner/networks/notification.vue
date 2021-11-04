@@ -18,9 +18,7 @@
           </b-col>
           <b-col>
             <div class="b-bottomn f-right">
-              <b-button variant="primary" class="a-button-l">
-                Mark as Read</b-button
-              >
+              <b-button variant="primary" class="a-button-l"> Mark as Read</b-button>
             </div>
           </b-col>
         </b-row>
@@ -50,18 +48,9 @@
             </span>
             <span class=" ">
               <div>
-                <b-dropdown
-                  size="lg"
-                  variant="link"
-                  toggle-class="text-decoration-none"
-                  no-caret
-                >
+                <b-dropdown size="lg" variant="link" toggle-class="text-decoration-none" no-caret>
                   <template #button-content>
-                    <b-icon
-                      icon="three-dots-vertical"
-                      animation="cylon-vertical"
-                      font-scale="1"
-                    ></b-icon>
+                    <b-icon icon="three-dots-vertical" animation="cylon-vertical" font-scale="1"></b-icon>
                   </template>
 
                   <b-dropdown-item href="#"> Delete </b-dropdown-item>
@@ -71,12 +60,10 @@
             </span>
           </b-list>
           <p>
-            Lorem Ipsum is this is just a dummy text to post simply dummy text
-            of the printing and typesetting industry. Lorem Ipsum has been the
-            industry's standard dummy text ever since the 1500s, Lorem Ipsum is
-            simply dummy text of the printing and typesetting industry. Lorem
-            Ipsum has been the industry's standard dummy text ever since the
-            1500s,
+            Lorem Ipsum is this is just a dummy text to post simply dummy text of the printing and typesetting industry.
+            Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, Lorem Ipsum is simply dummy
+            text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever
+            since the 1500s,
           </p>
         </b-container>
 
@@ -102,18 +89,9 @@
             </span>
             <span class=" ">
               <div>
-                <b-dropdown
-                  size="lg"
-                  variant="link"
-                  toggle-class="text-decoration-none"
-                  no-caret
-                >
+                <b-dropdown size="lg" variant="link" toggle-class="text-decoration-none" no-caret>
                   <template #button-content>
-                    <b-icon
-                      icon="three-dots-vertical"
-                      animation="cylon-vertical"
-                      font-scale="1"
-                    ></b-icon>
+                    <b-icon icon="three-dots-vertical" animation="cylon-vertical" font-scale="1"></b-icon>
                   </template>
 
                   <b-dropdown-item href="#"> Delete </b-dropdown-item>
@@ -123,12 +101,10 @@
             </span>
           </b-list>
           <p>
-            Lorem Ipsum is this is just a dummy text to post simply dummy text
-            of the printing and typesetting industry. Lorem Ipsum has been the
-            industry's standard dummy text ever since the 1500s, Lorem Ipsum is
-            simply dummy text of the printing and typesetting industry. Lorem
-            Ipsum has been the industry's standard dummy text ever since the
-            1500s,
+            Lorem Ipsum is this is just a dummy text to post simply dummy text of the printing and typesetting industry.
+            Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, Lorem Ipsum is simply dummy
+            text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever
+            since the 1500s,
           </p>
         </b-container>
       </b-container>
@@ -138,13 +114,13 @@
 
 <script>
 export default {
-  name: "notification",
+  name: 'notification',
   components: {},
   data() {
     return {};
   },
   computed: {},
-  methods: {}
+  methods: {},
 };
 </script>
 

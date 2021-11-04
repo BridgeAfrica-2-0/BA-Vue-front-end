@@ -21,18 +21,9 @@
           </span>
           <span class=" ">
             <div>
-              <b-dropdown
-                size="lg"
-                variant="link"
-                toggle-class="text-decoration-none"
-                no-caret
-              >
+              <b-dropdown size="lg" variant="link" toggle-class="text-decoration-none" no-caret>
                 <template #button-content>
-                  <b-icon
-                    icon="three-dots-vertical"
-                    animation="cylon-vertical"
-                    font-scale="1"
-                  ></b-icon>
+                  <b-icon icon="three-dots-vertical" animation="cylon-vertical" font-scale="1"></b-icon>
                 </template>
                 <b-dropdown-item href="#">Approve</b-dropdown-item>
                 <b-dropdown-item href="#"> Delete Post </b-dropdown-item>
@@ -44,15 +35,12 @@
           </span>
         </b-list>
         <p>
-          Lorem Ipsum is this is just a dummy text to post simply dummy text of
-          the printing and typesetting industry. Lorem Ipsum has been the
-          industry's standard dummy text ever since the 1500s, Lorem Ipsum is
-          simply dummy text of the printing and typesetting industry. Lorem
-          Ipsum has been the industry's standard dummy text ever since the
-          1500s, Lorem Ipsum is simply dummy text of the printing and
-          typesetting industry. Lorem Ipsum has been the industry's standard
-          dummy text ever since the 1500s, Lorem Ipsum has been the industry's
-          standard dummy text ever since the 1500s,
+          Lorem Ipsum is this is just a dummy text to post simply dummy text of the printing and typesetting industry.
+          Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, Lorem Ipsum is simply dummy text
+          of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since
+          the 1500s, Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+          industry's standard dummy text ever since the 1500s, Lorem Ipsum has been the industry's standard dummy text
+          ever since the 1500s,
         </p>
       </b-container>
 
@@ -62,18 +50,9 @@
           <span class="mr-auto">J. Circlehead</span>
           <span class=" ">
             <div>
-              <b-dropdown
-                size="lg"
-                variant="link"
-                toggle-class="text-decoration-none"
-                no-caret
-              >
+              <b-dropdown size="lg" variant="link" toggle-class="text-decoration-none" no-caret>
                 <template #button-content>
-                  <b-icon
-                    icon="three-dots-vertical"
-                    animation="cylon-vertical"
-                    font-scale="1"
-                  ></b-icon>
+                  <b-icon icon="three-dots-vertical" animation="cylon-vertical" font-scale="1"></b-icon>
                 </template>
                 <b-dropdown-item href="#">Approve</b-dropdown-item>
                 <b-dropdown-item href="#"> Delete Post </b-dropdown-item>
@@ -85,15 +64,12 @@
           </span>
         </b-list>
         <p>
-          Lorem Ipsum is this is just a dummy text to post simply dummy text of
-          the printing and typesetting industry. Lorem Ipsum has been the
-          industry's standard dummy text ever since the 1500s, Lorem Ipsum is
-          simply dummy text of the printing and typesetting industry. Lorem
-          Ipsum has been the industry's standard dummy text ever since the
-          1500s, Lorem Ipsum is simply dummy text of the printing and
-          typesetting industry. Lorem Ipsum has been the industry's standard
-          dummy text ever since the 1500s, Lorem Ipsum has been the industry's
-          standard dummy text ever since the 1500s,
+          Lorem Ipsum is this is just a dummy text to post simply dummy text of the printing and typesetting industry.
+          Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, Lorem Ipsum is simply dummy text
+          of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since
+          the 1500s, Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+          industry's standard dummy text ever since the 1500s, Lorem Ipsum has been the industry's standard dummy text
+          ever since the 1500s,
         </p>
       </b-container>
     </b-container>
@@ -102,13 +78,13 @@
 
 <script>
 export default {
-  name: "pending",
+  name: 'pending',
   components: {},
   data() {
     return {};
   },
   computed: {},
-  methods: {}
+  methods: {},
 };
 </script>
 

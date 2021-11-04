@@ -11,13 +11,9 @@
         style="text-shadow: 1px 1px 2px #333; border-radius:10px;"
       >
         <!-- Text slides with image -->
-        <b-carousel-slide
-          :img-src="require('@/assets/img/dash1.png')"
-        ></b-carousel-slide>
+        <b-carousel-slide :img-src="require('@/assets/img/dash1.png')"></b-carousel-slide>
 
-        <b-carousel-slide
-          :img-src="require('@/assets/img/dash2.jpg')"
-        ></b-carousel-slide>
+        <b-carousel-slide :img-src="require('@/assets/img/dash2.jpg')"></b-carousel-slide>
       </b-carousel>
     </div>
   </div>
@@ -28,9 +24,9 @@ export default {
   data() {
     return {
       slide: 0,
-      sliding: null
+      sliding: null,
     };
-  }
+  },
 };
 </script>
 

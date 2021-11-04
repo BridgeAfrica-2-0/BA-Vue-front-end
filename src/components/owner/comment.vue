@@ -2,11 +2,7 @@
   <div>
     <b-row class="mt-2">
       <b-col>
-        <b-avatar
-          variant="info"
-          src="https://placekitten.com/300/300"
-          class="avat-comment"
-        ></b-avatar>
+        <b-avatar variant="info" src="https://placekitten.com/300/300" class="avat-comment"></b-avatar>
         <span class="float-right">
           <b-dropdown size="sm" variant="outline " class="primary">
             <template class="more" #button-content> </template>
@@ -15,14 +11,7 @@
           </b-dropdown>
         </span>
         <p class="msg text">
-          <read-more
-            more-str="read more"
-            :text="msg"
-            link="#"
-            less-str="read less"
-            :max-chars="15000"
-          >
-          </read-more>
+          <read-more more-str="read more" :text="msg" link="#" less-str="read less" :max-chars="15000"> </read-more>
         </p>
         <b-icon icon="suit-heart" variant="primary" aria-hidden="true"></b-icon>
         23
@@ -30,19 +19,12 @@
         <div v-if="reply">
           <b-row class="mt-2">
             <b-col cols="1">
-              <b-avatar
-                variant="info"
-                src="https://placekitten.com/300/300"
-                class="avat-comment"
-              ></b-avatar>
+              <b-avatar variant="info" src="https://placekitten.com/300/300" class="avat-comment"></b-avatar>
             </b-col>
             <b-col cols="11">
               <input placeholder="Post a Comment" class="comment" type="text" />
 
-              <fas-icon
-                class="primary send-cmt"
-                :icon="['fas', 'paper-plane']"
-              />
+              <fas-icon class="primary send-cmt" :icon="['fas', 'paper-plane']" />
             </b-col>
           </b-row>
         </div>
@@ -58,14 +40,14 @@ export default {
       reply: false,
 
       msg:
-        " Lorem Ipsum has been the industry's   this is do goodfive centuries, but  the leap into electronic      this is do goodfive centuries, but  the leap into electronic        this is do goodfive centuries, but  the leap into electronic  this sis sit tit typesetting"
+        " Lorem Ipsum has been the industry's   this is do goodfive centuries, but  the leap into electronic      this is do goodfive centuries, but  the leap into electronic        this is do goodfive centuries, but  the leap into electronic  this sis sit tit typesetting",
     };
   },
   methods: {
     showReply() {
       this.reply = !this.reply;
-    }
-  }
+    },
+  },
 };
 </script>
 

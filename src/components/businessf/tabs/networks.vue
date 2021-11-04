@@ -4,16 +4,9 @@
       <fas-icon class="icons" :icon="['fas', 'project-diagram']" size="lg" />
       <span class="t-color"> Network </span>
 
-      <hr />    
+      <hr />
       <b-row>
-        <b-col
-          cols="12"
-          md="12"
-          lg="6"
-          class="p-0 mb-2"
-          v-for="network in network"
-          :key="network.id"
-        >   
+        <b-col cols="12" md="12" lg="6" class="p-0 mb-2" v-for="network in network" :key="network.id">
           <div class="people-style shadow h-100">
             <b-row>
               <b-col md="3" xl="3" lg="3" cols="5" sm="3">
@@ -24,7 +17,7 @@
               <b-col md="5" cols="7" lg="7" xl="5" sm="5">
                 <p class="textt">
                   <strong class="net-title"> {{ network.name }} </strong> <br />
-              <span v-for="cat in network.categories" :key="cat" >  {{cat}} </span>
+                  <span v-for="cat in network.categories" :key="cat"> {{ cat }} </span>
                   <br />
                   {{ network.followers }} Community <br />
 
@@ -34,14 +27,14 @@
                   </span>
                   <br />
 
-              <read-more
-                v-if="network.description"
-                more-str="read more"
-                :text="network.description"
-                link="#"
-                less-str="read less"
-                :max-chars="200"
-              ></read-more>  
+                  <read-more
+                    v-if="network.description"
+                    more-str="read more"
+                    :text="network.description"
+                    link="#"
+                    less-str="read less"
+                    :max-chars="200"
+                  ></read-more>
                 </p>
               </b-col>
 
@@ -49,77 +42,63 @@
                 <div class="s-button">
                   <b-row>
                     <b-col md="12" lg="4" xl="12" sm="12" cols="4" class="mt-2">
-                      <b-button
-                        block
-                        size="sm"
-                        class="b-background shadow"
-                        variant="primary"
-                      >
+                      <b-button block size="sm" class="b-background shadow" variant="primary">
                         <i class="fas fa-user-plus fa-lg btn-icon"></i>
-                        <span class="btn-com" v-b-modal.modal-sm
-                          >Community</span
-                        >
+                        <span class="btn-com" v-b-modal.modal-sm>Community</span>
                       </b-button>
                     </b-col>
 
                     <b-col md="12" lg="4" xl="12" sm="12" cols="4" class="mt-2">
-                      <b-button
-                        block
-                        size="sm"
-                        class="b-background shadow"
-                        variant="primary"
+                      <b-button block size="sm" class="b-background shadow" variant="primary"
                         ><i class="fas fa-envelope fa-lg btn-icon"></i>
                         <span class="btn-text">Message</span>
                       </b-button>
                     </b-col>
 
-                    <b-col md="12" lg="4" xl="12" sm="12" cols="4" class="mt-2">
-                    </b-col>
+                    <b-col md="12" lg="4" xl="12" sm="12" cols="4" class="mt-2"> </b-col>
                   </b-row>
                 </div>
               </b-col>
             </b-row>
           </div>
         </b-col>
-
       </b-row>
 
-      
-        <infinite-loading @infinite="infiniteHandler"></infinite-loading>
+      <infinite-loading @infinite="infiniteHandler"></infinite-loading>
     </div>
   </div>
 </template>
 
 <script>
-import { mapActions, mapGetters } from "vuex";
+import { mapActions, mapGetters } from 'vuex';
 export default {
   data() {
     return {
       page: 1,
       biz_id: null,
-     
+
       BaseURL: process.env.VUE_APP_API_URL,
       showModal: false,
-      selectedFile: "",
+      selectedFile: '',
       editNet: false,
       dat: true,
       viewnetwork: false,
       createdNetwork: {
-        name: "",
-        description: "",
-        purpose: "",
-        special_needs: "",
-        business_address: "",
-        business_image: "",
+        name: '',
+        description: '',
+        purpose: '',
+        special_needs: '',
+        business_address: '',
+        business_image: '',
         allow_business: 0,
       },
       chosenNetwork: {
-        name: "",
-        description: "",
-        purpose: "",
-        special_needs: "",
-        business_address: "",
-        business_image: "",
+        name: '',
+        description: '',
+        purpose: '',
+        special_needs: '',
+        business_address: '',
+        business_image: '',
         allow_business: 0,
       },
     };
@@ -133,7 +112,6 @@ export default {
   },
 
   computed: {
-
     network() {
       return this.$store.state.businessOwner.networks;
     },
@@ -149,28 +127,25 @@ export default {
     },
   },
   methods: {
-    
-
     ...mapActions({
-      addNetwork: "businessOwner/addNetwork",
-      getNetworks: "businessOwner/getNetworks",
-      editNetwork: "businessOwner/editNetwork",
+      addNetwork: 'businessOwner/addNetwork',
+      getNetworks: 'businessOwner/getNetworks',
+      editNetwork: 'businessOwner/editNetwork',
     }),
 
     infiniteHandler($state) {
-      let url = "business/network/" + this.biz_id + "/" + this.page;
+      let url = 'business/network/' + this.biz_id + '/' + this.page;
 
       if (this.page == 1) {
         this.network.splice(0);
       }
-   this.$store
-        .dispatch("businessOwner/loadMore", url)
+      this.$store
+        .dispatch('businessOwner/loadMore', url)
         .then(({ data }) => {
           console.log(data.data);
           if (data.data.length) {
-           
-              this.network.push(...data.data);
-            
+            this.network.push(...data.data);
+
             this.page += 1;
 
             $state.loaded();
@@ -178,7 +153,7 @@ export default {
             $state.complete();
           }
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
     },
@@ -190,17 +165,17 @@ export default {
     },
     showmodal(state, arg) {
       this.showModal = state;
-      if (arg == "edit") {
+      if (arg == 'edit') {
         this.editNet = true;
       } else {
         this.editNet = false;
-        this.createdNetwork.image = "";
-        this.createdNetwork.name = "";
-        this.createdNetwork.address = "";
-        this.createdNetwork.neighbourhood = "";
-        this.createdNetwork.description = "";
-        this.createdNetwork.purpose = "";
-        this.createdNetwork.special_needs = "";
+        this.createdNetwork.image = '';
+        this.createdNetwork.name = '';
+        this.createdNetwork.address = '';
+        this.createdNetwork.neighbourhood = '';
+        this.createdNetwork.description = '';
+        this.createdNetwork.purpose = '';
+        this.createdNetwork.special_needs = '';
         this.createdNetwork.allow_business = 0;
       }
     },
@@ -220,15 +195,15 @@ export default {
     },
     edit() {
       const fd = new FormData();
-      fd.append("_method", "PUT");
-      fd.append("name", this.createdNetwork.name);
-      fd.append("business_id", 1);
-      fd.append("business_address", this.createdNetwork.business_address);
-      fd.append("description", this.createdNetwork.description);
-      fd.append("purpose", this.createdNetwork.purpose);
-      fd.append("special_needs", this.createdNetwork.special_needs);
-      fd.append("business_image", this.createdNetwork.business_image);
-      fd.append("allow_busines", this.createdNetwork.allow_busines);
+      fd.append('_method', 'PUT');
+      fd.append('name', this.createdNetwork.name);
+      fd.append('business_id', 1);
+      fd.append('business_address', this.createdNetwork.business_address);
+      fd.append('description', this.createdNetwork.description);
+      fd.append('purpose', this.createdNetwork.purpose);
+      fd.append('special_needs', this.createdNetwork.special_needs);
+      fd.append('business_image', this.createdNetwork.business_image);
+      fd.append('allow_busines', this.createdNetwork.allow_busines);
       let data = {
         id: this.createdNetwork.id,
         data: fd,
@@ -241,7 +216,6 @@ export default {
   },
 };
 </script>
-
 
 <style scoped>
 @media only screen and (min-width: 768px) {
@@ -310,13 +284,13 @@ export default {
     color: black;
 
     line-height: 35px;
-    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   }
 
   .textt {
     color: #000;
 
-    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
     font-weight: normal;
     font-size: 14px;
     line-height: 30px;
@@ -363,13 +337,13 @@ export default {
     color: black;
 
     line-height: 35px;
-    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   }
 
   .textt {
     color: #000;
 
-    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
     font-weight: normal;
     font-size: 14px;
     line-height: 30px;

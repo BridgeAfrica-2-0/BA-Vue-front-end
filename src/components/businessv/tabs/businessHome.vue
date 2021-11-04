@@ -15,20 +15,20 @@
 </template>
 
 <script>
-import Intro from "../intro";
-import Invite from "../invite";
-import HotBusiness from "../hotBusinesses";
-import Post from "../../post";
-import Personalize from "../personalizeWeb";
+import Intro from '../intro';
+import Invite from '../invite';
+import HotBusiness from '../hotBusinesses';
+import Post from '../../post';
+import Personalize from '../personalizeWeb';
 export default {
-  name: "posts",
+  name: 'posts',
   components: {
     Intro,
     Invite,
     HotBusiness,
     Post,
-    Personalize
-  }
+    Personalize,
+  },
 };
 </script>
 

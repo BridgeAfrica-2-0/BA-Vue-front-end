@@ -13,25 +13,11 @@
                   <p><small>Public - 397 Members</small></p>
                 </b-col>
                 <b-col class="col-1">
-                  <b-button
-                    class="btnz"
-                    v-if="post.state"
-                    size="sm"
-                    variant="primary"
-                    ><small>
-                      <fas-icon
-                        class="mr-2"
-                        :icon="['fas', 'check']"
-                      />Joined</small
-                    ></b-button
+                  <b-button class="btnz" v-if="post.state" size="sm" variant="primary"
+                    ><small> <fas-icon class="mr-2" :icon="['fas', 'check']" />Joined</small></b-button
                   >
                   <b-button v-if="!post.state" size="sm" variant="success"
-                    ><small>
-                      <fas-icon
-                        class="mr-2"
-                        :icon="['fas', 'plus']"
-                      />Join</small
-                    ></b-button
+                    ><small> <fas-icon class="mr-2" :icon="['fas', 'plus']" />Join</small></b-button
                   >
                 </b-col>
               </b-row>
@@ -65,44 +51,44 @@ export default {
     return {
       networkshow: true,
       showModal: false,
-      text: "",
+      text: '',
       posts: [
         {
           id: 1,
-          image: "https://picsum.photos/300/150/?image=41",
-          title: "Title 2",
+          image: 'https://picsum.photos/300/150/?image=41',
+          title: 'Title 2',
           text:
-            " Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum quam, doloribus id sit consequuntur tempora molestiae blanditiis.",
+            ' Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum quam, doloribus id sit consequuntur tempora molestiae blanditiis.',
         },
         {
           id: 1,
-          image: "https://picsum.photos/300/150/?image=41",
-          title: "Title 2",
+          image: 'https://picsum.photos/300/150/?image=41',
+          title: 'Title 2',
           text:
-            " Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum quam, doloribus id sit consequuntur tempora molestiae blanditiis.",
+            ' Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum quam, doloribus id sit consequuntur tempora molestiae blanditiis.',
         },
         {
           id: 1,
-          image: "https://picsum.photos/300/150/?image=41",
-          title: "Title 2",
+          image: 'https://picsum.photos/300/150/?image=41',
+          title: 'Title 2',
           text:
-            " Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum quam, doloribus id sit consequuntur tempora molestiae blanditiis.",
-          state: "1",
+            ' Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum quam, doloribus id sit consequuntur tempora molestiae blanditiis.',
+          state: '1',
         },
         {
           id: 1,
-          image: "https://picsum.photos/300/150/?image=41",
-          title: "Title 2",
+          image: 'https://picsum.photos/300/150/?image=41',
+          title: 'Title 2',
           text:
-            " Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum quam, doloribus id sit consequuntur tempora molestiae blanditiis.",
+            ' Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum quam, doloribus id sit consequuntur tempora molestiae blanditiis.',
         },
         {
           id: 1,
-          image: "https://picsum.photos/300/150/?image=41",
-          title: "Title 2",
+          image: 'https://picsum.photos/300/150/?image=41',
+          title: 'Title 2',
           text:
-            " Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum quam, doloribus id sit consequuntur tempora molestiae blanditiis.",
-          state: "1",
+            ' Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum quam, doloribus id sit consequuntur tempora molestiae blanditiis.',
+          state: '1',
         },
       ],
     };

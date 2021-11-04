@@ -15,12 +15,12 @@
 </template>
 
 <script>
-import Intro from "@/components/businessf/intro";
-import comunitiDashboard from "@/components/businessOwner/tabs/comunitiDashboard"; 
+import Intro from '@/components/businessf/intro';
+import comunitiDashboard from '@/components/businessOwner/tabs/comunitiDashboard';
 
-import Post from "../ownerPost";
+import Post from '../ownerPost';
 export default {
-  name: "posts",
+  name: 'posts',
   components: {
     Intro,
 

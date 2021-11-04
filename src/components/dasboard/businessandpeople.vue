@@ -34,14 +34,14 @@
 </template>
 
 <script>
-import People from "@/components/dasboard/communityMember";
-import Business from "@/components/dasboard/communitybusiness";
+import People from '@/components/dasboard/communityMember';
+import Business from '@/components/dasboard/communitybusiness';
 
 export default {
   components: {
     People,
-    Business
-  }
+    Business,
+  },
 };
 </script>
 

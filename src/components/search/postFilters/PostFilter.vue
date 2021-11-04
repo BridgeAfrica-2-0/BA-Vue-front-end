@@ -16,13 +16,7 @@
       ></b-form-datepicker>
     </div>
 
-    <b-form-checkbox
-      @click="showRecentPost"
-      v-model="isRecentPost"
-      id="customSwitch1"
-      name="customSwitch1"
-      switch
-    >
+    <b-form-checkbox @click="showRecentPost" v-model="isRecentPost" id="customSwitch1" name="customSwitch1" switch>
       Recent Post
     </b-form-checkbox>
     <b-form-checkbox
@@ -37,10 +31,7 @@
 
     <div
       class="ab"
-      :class="[
-        'cursor mt-3',
-        rootSectionIsVisible ? 'w-100' : 'collapsed w-100',
-      ]"
+      :class="['cursor mt-3', rootSectionIsVisible ? 'w-100' : 'collapsed w-100']"
       :aria-expanded="rootSectionIsVisible ? 'true' : 'false'"
       aria-controls="collapse-4"
       @click.prevent="toogleRootSection"
@@ -54,24 +45,15 @@
         <!--begin buisness section-->
         <div
           class="db"
-          :class="[
-            'cursor',
-            buisnessSectionIsVisible ? 'w-100  my-2' : 'collapsed w-100',
-          ]"
+          :class="['cursor', buisnessSectionIsVisible ? 'w-100  my-2' : 'collapsed w-100']"
           :aria-expanded="buisnessSectionIsVisible ? 'true' : 'false'"
           aria-controls="collapse-2"
           @click.prevent="buisnessSectionIsVisible = !buisnessSectionIsVisible"
         >
-          <b-icon
-            :icon="buisnessSectionIsVisible ? 'arrow-down' : 'arrow-up'"
-          ></b-icon>
+          <b-icon :icon="buisnessSectionIsVisible ? 'arrow-down' : 'arrow-up'"></b-icon>
           <span>Buisness</span>
         </div>
-        <b-collapse
-          id="collapse-2"
-          v-model="buisnessSectionIsVisible"
-          class="mt-1"
-        >
+        <b-collapse id="collapse-2" v-model="buisnessSectionIsVisible" class="mt-1">
           <b-card>
             <b-form-group v-slot="{ bui }">
               <b-form-checkbox-group
@@ -89,24 +71,15 @@
         <!--begin people section-->
         <div
           class="db"
-          :class="[
-            'cursor',
-            peopleSectionIsVisible ? 'w-100' : 'collapsed w-100',
-          ]"
+          :class="['cursor', peopleSectionIsVisible ? 'w-100' : 'collapsed w-100']"
           :aria-expanded="peopleSectionIsVisible ? 'true' : 'false'"
           aria-controls="collapse-1"
           @click.prevent="peopleSectionIsVisible = !peopleSectionIsVisible"
         >
-          <b-icon
-            :icon="peopleSectionIsVisible ? 'arrow-down' : 'arrow-up'"
-          ></b-icon>
+          <b-icon :icon="peopleSectionIsVisible ? 'arrow-down' : 'arrow-up'"></b-icon>
           <span>People</span>
         </div>
-        <b-collapse
-          id="collapse-1"
-          v-model="peopleSectionIsVisible"
-          class="mt-1"
-        >
+        <b-collapse id="collapse-1" v-model="peopleSectionIsVisible" class="mt-1">
           <b-card>
             <b-form-group v-slot="{ people }">
               <b-form-checkbox-group
@@ -124,24 +97,15 @@
         <!--begin network section-->
         <div
           class="db"
-          :class="[
-            'cursor',
-            networkSectionIsVisible ? 'w-100' : 'collapsed w-100',
-          ]"
+          :class="['cursor', networkSectionIsVisible ? 'w-100' : 'collapsed w-100']"
           :aria-expanded="networkSectionIsVisible ? 'true' : 'false'"
           aria-controls="collapse-4"
           @click.prevent="networkSectionIsVisible = !networkSectionIsVisible"
         >
-          <b-icon
-            :icon="networkSectionIsVisible ? 'arrow-down' : 'arrow-up'"
-          ></b-icon>
+          <b-icon :icon="networkSectionIsVisible ? 'arrow-down' : 'arrow-up'"></b-icon>
           <span>Network</span>
         </div>
-        <b-collapse
-          id="collapse-4"
-          v-model="networkSectionIsVisible"
-          class="mt-1"
-        >
+        <b-collapse id="collapse-4" v-model="networkSectionIsVisible" class="mt-1">
           <b-card>
             <b-form-group v-slot="{ network }">
               <b-form-checkbox-group
@@ -168,16 +132,16 @@
 </template>
 
 <script>
-import _ from "lodash";
+import _ from 'lodash';
 
-import { mapActions, mapGetters } from "vuex";
+import { mapActions, mapGetters } from 'vuex';
 
 //import Button from "@/components/Button";
 
 const options = [
-  { text: "Follower", value: "Follower" },
-  { text: "Following", value: "Following" },
-  { text: "Community", value: "Community" },
+  { text: 'Follower', value: 'Follower' },
+  { text: 'Following', value: 'Following' },
+  { text: 'Community', value: 'Community' },
 ];
 
 export default {
@@ -196,82 +160,72 @@ export default {
     selectedBuisness: [],
     selectedNetwork: [],
     optionsPeople: options,
-    optionsBuisness: [
-      ...options,
-      { text: "Editor", value: "Editor" },
-      { text: "Owner", value: "Owner" },
-    ],
+    optionsBuisness: [...options, { text: 'Editor', value: 'Editor' }, { text: 'Owner', value: 'Owner' }],
     optionsNetwork: [
-      { text: "Editor", value: "Editor" },
-      { text: "Member", value: "Member" },
-      { text: "Owner", value: "Owner" },
+      { text: 'Editor', value: 'Editor' },
+      { text: 'Member', value: 'Member' },
+      { text: 'Owner', value: 'Owner' },
     ],
     strategies: null,
   }),
 
   watch: {
-    isRecentPost: function (newValue) {
+    isRecentPost: function(newValue) {
       if (!this.keyword && newValue) {
-        this.onNotified("the keyword does not exist");
+        this.onNotified('the keyword does not exist');
         this.isRecentPost = false;
         return false;
       }
 
       if (newValue) {
         this.page(1);
-        this.newCallbackForPagination(
-          this.$repository.search.findPostByKeyword
-        );
+        this.newCallbackForPagination(this.$repository.search.findPostByKeyword);
         this.stack({
           data: {
-            recent_post: "",
+            recent_post: '',
             keyword: this.keyword,
           },
         });
 
         this._onFindPost({
           data: {
-            recent_post: "",
+            recent_post: '',
             keyword: this.keyword,
           },
         });
       }
     },
 
-    isPostHaveNotSeen: function (newValue) {
+    isPostHaveNotSeen: function(newValue) {
       if (!this.keyword && newValue) {
         this.isPostHaveNotSeen = false;
-        this.onNotified("the keyword does not exist");
+        this.onNotified('the keyword does not exist');
         return false;
       }
       if (newValue) {
         this.page(1);
-        this.newCallbackForPagination(
-          this.$repository.search.findPostByKeyword
-        );
+        this.newCallbackForPagination(this.$repository.search.findPostByKeyword);
         this.stack({
-          data: { not_seen: "" },
+          data: { not_seen: '' },
           keyword: this.keyword,
         });
         this._onFindPost({
           data: {
-            not_seen: "",
+            not_seen: '',
             keyword: this.keyword,
           },
         });
       }
     },
 
-    created_at: function (newValue) {
+    created_at: function(newValue) {
       if (!this.keyword && newValue) {
-        this.onNotified("the keyword does not exist");
+        this.onNotified('the keyword does not exist');
         return false;
       }
       if (newValue) {
         this.page(1);
-        this.newCallbackForPagination(
-          this.$repository.search.findPostByKeyword
-        );
+        this.newCallbackForPagination(this.$repository.search.findPostByKeyword);
         this.stack({
           data: {
             created_at: this.created_at,
@@ -287,36 +241,36 @@ export default {
       }
     },
 
-    selectedPeople: function () {
+    selectedPeople: function() {
       this.onProcess();
     },
-    selectedBuisness: function () {
+    selectedBuisness: function() {
       this.onProcess();
     },
-    selectedNetwork: function () {
+    selectedNetwork: function() {
       this.onProcess();
     },
   },
 
   computed: {
     ...mapGetters({
-      keyword: "search/POST_KEYWORD",
+      keyword: 'search/POST_KEYWORD',
     }),
   },
 
   methods: {
     ...mapActions({
-      findPeoplePost: "search/FIND_POST",
-      newCallbackForPagination: "search/SET_CURRENT_PAGINATE_CALLBACK",
-      lauchLoader: "search/LOADING",
-      page: "search/SET_CURRENT_PAGINATION_PAGE",
-      stack: "search/STACK_VALUE",
-      reset: "search/RESET_RESULT",
+      findPeoplePost: 'search/FIND_POST',
+      newCallbackForPagination: 'search/SET_CURRENT_PAGINATE_CALLBACK',
+      lauchLoader: 'search/LOADING',
+      page: 'search/SET_CURRENT_PAGINATION_PAGE',
+      stack: 'search/STACK_VALUE',
+      reset: 'search/RESET_RESULT',
     }),
 
     hasKeyWord() {
       if (!this.keyword) {
-        this.onNotified("the keyword does not exist");
+        this.onNotified('the keyword does not exist');
         return false;
       } else return true;
     },
@@ -342,29 +296,22 @@ export default {
     },
 
     communityIsChecked(data) {
-      const useSelectFollowerAndFollowing = data.filter(
-        (item) => "Follower" == item || "Following" == item
-      );
+      const useSelectFollowerAndFollowing = data.filter(item => 'Follower' == item || 'Following' == item);
 
-      if (
-        useSelectFollowerAndFollowing.length == 2 &&
-        data.indexOf("Community") != -1
-      ) {
-        const newData = data.filter(
-          (item) => "Follower" !== item || "Following" !== item
-        );
+      if (useSelectFollowerAndFollowing.length == 2 && data.indexOf('Community') != -1) {
+        const newData = data.filter(item => 'Follower' !== item || 'Following' !== item);
       }
     },
 
     onNotified(message) {
       this.flashMessage.error({
-        title: "Important message",
+        title: 'Important message',
         message,
       });
     },
 
     map(data, type) {
-      return data.map((e) => ({
+      return data.map(e => ({
         key: type,
         value: `${type}_${e.toLowerCase()}`,
       }));
@@ -376,11 +323,11 @@ export default {
       const credentials = Object.keys(data);
       let render = [];
 
-      if (credentials.includes("users")) {
+      if (credentials.includes('users')) {
         let response = await this.$repository.search.findPostByKeyword({
           page: 1,
           data: {
-            ...data["users"],
+            ...data['users'],
             keyword: this.keyword,
           },
         });
@@ -388,11 +335,11 @@ export default {
         if (response.success) render = [...render, ...response.data];
       }
 
-      if (credentials.includes("buisness")) {
+      if (credentials.includes('buisness')) {
         let response = await this.$repository.search.findPostByBuisness({
           page: 1,
           data: {
-            ...data["buisness"],
+            ...data['buisness'],
             keyword: this.keyword,
           },
         });
@@ -400,11 +347,11 @@ export default {
         if (response.success) render = [...render, ...response.data];
       }
 
-      if (credentials.includes("network")) {
+      if (credentials.includes('network')) {
         let response = await this.$repository.search.findPostByNetWork({
           page: 1,
           data: {
-            ...data["network"],
+            ...data['network'],
             keyword: this.keyword,
           },
         });
@@ -417,7 +364,7 @@ export default {
       this.lauchLoader(false);
     },
 
-    onProcess: _.debounce(function (e) {
+    onProcess: _.debounce(function(e) {
       this.page(1);
       const user = this.map(this.selectedPeople, `user`);
       const buisness = this.map(this.selectedBuisness, `buisness`);
@@ -425,8 +372,8 @@ export default {
 
       const data = [...user, ...buisness, ...network].reduce((hash, item) => {
         if (hash[item.key]) {
-          hash[item.key] = { [item.value]: "", ...hash[item.key] };
-        } else hash[item.key] = { [item.value]: "" };
+          hash[item.key] = { [item.value]: '', ...hash[item.key] };
+        } else hash[item.key] = { [item.value]: '' };
 
         return hash;
       }, {});

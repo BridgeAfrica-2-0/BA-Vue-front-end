@@ -23,13 +23,13 @@
 </template>
 
 <script>
-import Navbar from "../components/navbar";
-import Footer from "../components/footer";
-import Posts from "../components/memberNetworkF/postNetwork";
-import Parent from "../components/memberNetworkF/parent";
-import Media from "../components/memberNetworkF/mediaNetwork";
-import Members from "../components/memberNetworkF/memberNetwork";
-import Feedback from "../components/memberNetworkF/feedback";
+import Navbar from '../components/navbar';
+import Footer from '../components/footer';
+import Posts from '../components/memberNetworkF/postNetwork';
+import Parent from '../components/memberNetworkF/parent';
+import Media from '../components/memberNetworkF/mediaNetwork';
+import Members from '../components/memberNetworkF/memberNetwork';
+import Feedback from '../components/memberNetworkF/feedback';
 export default {
   components: {
     Navbar,

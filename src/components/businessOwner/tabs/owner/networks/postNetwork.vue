@@ -24,30 +24,21 @@
               <b-button title="Add Movie" size="sm" variant="outline-primary">
                 <b-icon icon="camera-video-fill" aria-hidden="true"></b-icon>
               </b-button>
-              <b-button
-                title="Add Hyperlink"
-                size="sm"
-                variant="outline-primary"
-              >
+              <b-button title="Add Hyperlink" size="sm" variant="outline-primary">
                 <b-icon icon="link-45deg" aria-hidden="true"></b-icon>
               </b-button>
             </b-button-group>
           </span>
           <span class="float-right">
             <b-button variant="outline-primary" size="sm"
-              ><b-icon icon="cursor-fill" variant="primary"></b-icon>
-              Post</b-button
+              ><b-icon icon="cursor-fill" variant="primary"></b-icon> Post</b-button
             >
           </span>
         </b-col>
       </b-row>
 
-      <div
-        class="row sub-sidebar-2 pending-post-view mt-4 pb-0 border-dark border-2"
-      >
-        <div
-          class="col-md-12 col-lg-12 d-flex align-items-stretch mb-lg-0 position-define"
-        >
+      <div class="row sub-sidebar-2 pending-post-view mt-4 pb-0 border-dark border-2">
+        <div class="col-md-12 col-lg-12 d-flex align-items-stretch mb-lg-0 position-define">
           <a
             class="nav-link text-dark"
             href="#"
@@ -60,9 +51,7 @@
           </a>
           <div class="post-pending pt-2">
             <p>
-              Your 3 Post(s) are pending for approval.&nbsp;&nbsp;&nbsp;&nbsp;<a
-                href="#"
-                class="text-design"
+              Your 3 Post(s) are pending for approval.&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="text-design"
                 >View All</a
               >
             </p>
@@ -111,9 +100,7 @@
                     </b-dropdown-group>
                     <b-dropdown-divider></b-dropdown-divider>
                     <b-dropdown-item-button>Some action</b-dropdown-item-button>
-                    <b-dropdown-item-button
-                      >Some other action</b-dropdown-item-button
-                    >
+                    <b-dropdown-item-button>Some other action</b-dropdown-item-button>
                     <b-dropdown-divider></b-dropdown-divider>
                     <b-dropdown-item-button variant="danger">
                       <b-icon icon="trash-fill" aria-hidden="true"></b-icon>
@@ -128,39 +115,19 @@
           <b-row>
             <b-col cols="12" class="mt-2">
               <p>
-                Lorem Ipsum has been the industry's standard dummy text ever
-                since the 1500s, when an unknown printer took a galley of type
-                and scrambled it to make a type specimen book. It has survived
-                not only five centuries, but also the leap into electronic
-                typesetting, remaining essentially unchanged.😛
+                Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer
+                took a galley of type and scrambled it to make a type specimen book. It has survived not only five
+                centuries, but also the leap into electronic typesetting, remaining essentially unchanged.😛
               </p>
             </b-col>
           </b-row>
           <b-row>
             <b-col cols="12" class="mt-2">
-              <img
-                class="img-fluid"
-                src="@/assets/img/photo1.jpg"
-                alt="Photo1"
-              />
+              <img class="img-fluid" src="@/assets/img/photo1.jpg" alt="Photo1" />
             </b-col>
             <b-col class="mt-1">
-              <span class="mr-3"
-                ><b-icon
-                  icon="suit-heart"
-                  variant="primary"
-                  aria-hidden="true"
-                ></b-icon>
-                23</span
-              >
-              <span
-                ><b-icon
-                  icon="chat-fill"
-                  variant="primary"
-                  aria-hidden="true"
-                ></b-icon>
-                123</span
-              >
+              <span class="mr-3"><b-icon icon="suit-heart" variant="primary" aria-hidden="true"></b-icon> 23</span>
+              <span><b-icon icon="chat-fill" variant="primary" aria-hidden="true"></b-icon> 123</span>
             </b-col>
           </b-row>
           <b-row class="mt-2">
@@ -175,14 +142,10 @@
               <b-input-group class="my-auto w-100 rounded">
                 <template #append>
                   <b-input-group-text class=""
-                    ><strong class="color-site">
-                      <b-icon-cursor-fill></b-icon-cursor-fill> </strong
+                    ><strong class="color-site"> <b-icon-cursor-fill></b-icon-cursor-fill> </strong
                   ></b-input-group-text>
                 </template>
-                <b-form-input
-                  placeholder="Post  A Comment"
-                  class="border-right-0"
-                ></b-form-input>
+                <b-form-input placeholder="Post  A Comment" class="border-right-0"></b-form-input>
               </b-input-group>
             </b-col>
           </b-row>
@@ -230,9 +193,7 @@
                     </b-dropdown-group>
                     <b-dropdown-divider></b-dropdown-divider>
                     <b-dropdown-item-button>Some action</b-dropdown-item-button>
-                    <b-dropdown-item-button
-                      >Some other action</b-dropdown-item-button
-                    >
+                    <b-dropdown-item-button>Some other action</b-dropdown-item-button>
                     <b-dropdown-divider></b-dropdown-divider>
                     <b-dropdown-item-button variant="danger">
                       <b-icon icon="trash-fill" aria-hidden="true"></b-icon>
@@ -247,11 +208,9 @@
           <b-row>
             <b-col cols="12" class="mt-2">
               <p>
-                Lorem Ipsum has been the industry's standard dummy text ever
-                since the 1500s, when an unknown printer took a galley of type
-                and scrambled it to make a type specimen book. It has survived
-                not only five centuries, but also the leap into electronic
-                typesetting, remaining essentially unchanged.😛
+                Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer
+                took a galley of type and scrambled it to make a type specimen book. It has survived not only five
+                centuries, but also the leap into electronic typesetting, remaining essentially unchanged.😛
               </p>
             </b-col>
           </b-row>
@@ -260,22 +219,8 @@
               <lightbox :cells="2" :items="imagees"></lightbox>
             </b-col>
             <b-col class="mt-1">
-              <span class="mr-3"
-                ><b-icon
-                  icon="suit-heart"
-                  variant="primary"
-                  aria-hidden="true"
-                ></b-icon>
-                23</span
-              >
-              <span
-                ><b-icon
-                  icon="chat-fill"
-                  variant="primary"
-                  aria-hidden="true"
-                ></b-icon>
-                123</span
-              >
+              <span class="mr-3"><b-icon icon="suit-heart" variant="primary" aria-hidden="true"></b-icon> 23</span>
+              <span><b-icon icon="chat-fill" variant="primary" aria-hidden="true"></b-icon> 123</span>
             </b-col>
           </b-row>
           <b-row class="mt-2">
@@ -290,14 +235,10 @@
               <b-input-group class="my-auto w-100 rounded">
                 <template #append>
                   <b-input-group-text class=""
-                    ><strong class="color-site">
-                      <b-icon-cursor-fill></b-icon-cursor-fill> </strong
+                    ><strong class="color-site"> <b-icon-cursor-fill></b-icon-cursor-fill> </strong
                   ></b-input-group-text>
                 </template>
-                <b-form-input
-                  placeholder="Post  A Comment"
-                  class="border-right-0"
-                ></b-form-input>
+                <b-form-input placeholder="Post  A Comment" class="border-right-0"></b-form-input>
               </b-input-group>
             </b-col>
           </b-row>
@@ -345,9 +286,7 @@
                     </b-dropdown-group>
                     <b-dropdown-divider></b-dropdown-divider>
                     <b-dropdown-item-button>Some action</b-dropdown-item-button>
-                    <b-dropdown-item-button
-                      >Some other action</b-dropdown-item-button
-                    >
+                    <b-dropdown-item-button>Some other action</b-dropdown-item-button>
                     <b-dropdown-divider></b-dropdown-divider>
                     <b-dropdown-item-button variant="danger">
                       <b-icon icon="trash-fill" aria-hidden="true"></b-icon>
@@ -362,11 +301,9 @@
           <b-row>
             <b-col cols="12" class="mt-2">
               <p>
-                Lorem Ipsum has been the industry's standard dummy text ever
-                since the 1500s, when an unknown printer took a galley of type
-                and scrambled it to make a type specimen book. It has survived
-                not only five centuries, but also the leap into electronic
-                typesetting, remaining essentially unchanged.😛
+                Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer
+                took a galley of type and scrambled it to make a type specimen book. It has survived not only five
+                centuries, but also the leap into electronic typesetting, remaining essentially unchanged.😛
               </p>
             </b-col>
           </b-row>
@@ -375,22 +312,8 @@
               <lightbox :cells="4" :items="images"></lightbox>
             </b-col>
             <b-col class="mt-1">
-              <span class="mr-3"
-                ><b-icon
-                  icon="suit-heart"
-                  variant="primary"
-                  aria-hidden="true"
-                ></b-icon>
-                23</span
-              >
-              <span
-                ><b-icon
-                  icon="chat-fill"
-                  variant="primary"
-                  aria-hidden="true"
-                ></b-icon>
-                123</span
-              >
+              <span class="mr-3"><b-icon icon="suit-heart" variant="primary" aria-hidden="true"></b-icon> 23</span>
+              <span><b-icon icon="chat-fill" variant="primary" aria-hidden="true"></b-icon> 123</span>
             </b-col>
             <b-col cols="12">
               <b-row class="mt-2">
@@ -405,14 +328,10 @@
                   <b-input-group class="my-auto w-100 rounded">
                     <template #append>
                       <b-input-group-text class=""
-                        ><strong class="color-site">
-                          <b-icon-cursor-fill></b-icon-cursor-fill> </strong
+                        ><strong class="color-site"> <b-icon-cursor-fill></b-icon-cursor-fill> </strong
                       ></b-input-group-text>
                     </template>
-                    <b-form-input
-                      placeholder="Post  A Comment"
-                      class="border-right-0"
-                    ></b-form-input>
+                    <b-form-input placeholder="Post  A Comment" class="border-right-0"></b-form-input>
                   </b-input-group>
                 </b-col>
               </b-row>
@@ -462,9 +381,7 @@
                     </b-dropdown-group>
                     <b-dropdown-divider></b-dropdown-divider>
                     <b-dropdown-item-button>Some action</b-dropdown-item-button>
-                    <b-dropdown-item-button
-                      >Some other action</b-dropdown-item-button
-                    >
+                    <b-dropdown-item-button>Some other action</b-dropdown-item-button>
                     <b-dropdown-divider></b-dropdown-divider>
                     <b-dropdown-item-button variant="danger">
                       <b-icon icon="trash-fill" aria-hidden="true"></b-icon>
@@ -479,32 +396,16 @@
           <b-row>
             <b-col cols="12" class="mt-2">
               <p>
-                Lorem Ipsum has been the industry's standard dummy text ever
-                since the 1500s, when an unknown printer took a galley of type
-                and scrambled it to make a type specimen book. It has survived
-                not only five centuries, but also the leap into electronic
-                typesetting, remaining essentially unchanged.😛
+                Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer
+                took a galley of type and scrambled it to make a type specimen book. It has survived not only five
+                centuries, but also the leap into electronic typesetting, remaining essentially unchanged.😛
               </p>
             </b-col>
           </b-row>
           <b-row>
             <b-col class="mt-1">
-              <span class="mr-3"
-                ><b-icon
-                  icon="suit-heart"
-                  variant="primary"
-                  aria-hidden="true"
-                ></b-icon>
-                23</span
-              >
-              <span
-                ><b-icon
-                  icon="chat-fill"
-                  variant="primary"
-                  aria-hidden="true"
-                ></b-icon>
-                123</span
-              >
+              <span class="mr-3"><b-icon icon="suit-heart" variant="primary" aria-hidden="true"></b-icon> 23</span>
+              <span><b-icon icon="chat-fill" variant="primary" aria-hidden="true"></b-icon> 123</span>
             </b-col>
             <b-col cols="12">
               <b-row class="mt-2">
@@ -519,14 +420,10 @@
                   <b-input-group class="my-auto w-100 rounded">
                     <template #append>
                       <b-input-group-text class=""
-                        ><strong class="color-site">
-                          <b-icon-cursor-fill></b-icon-cursor-fill> </strong
+                        ><strong class="color-site"> <b-icon-cursor-fill></b-icon-cursor-fill> </strong
                       ></b-input-group-text>
                     </template>
-                    <b-form-input
-                      placeholder="Post  A Comment"
-                      class="border-right-0"
-                    ></b-form-input>
+                    <b-form-input placeholder="Post  A Comment" class="border-right-0"></b-form-input>
                   </b-input-group>
                 </b-col>
               </b-row>
@@ -540,37 +437,34 @@
 
 <script>
 export default {
-  name: "postNetwork",
+  name: 'postNetwork',
   data() {
     return {
       images: [
-        "https://i.wifegeek.com/200426/f9459c52.jpg",
-        "https://i.wifegeek.com/200426/5ce1e1c7.jpg",
-        "https://i.wifegeek.com/200426/5fa51df3.jpg",
-        "https://i.wifegeek.com/200426/663181fe.jpg",
-        "https://i.wifegeek.com/200426/2d110780.jpg",
-        "https://i.wifegeek.com/200426/e73cd3fa.jpg",
-        "https://i.wifegeek.com/200426/15160d6e.jpg",
-        "https://i.wifegeek.com/200426/d0c881ae.jpg",
-        "https://i.wifegeek.com/200426/a154fc3d.jpg",
-        "https://i.wifegeek.com/200426/71d3aa60.jpg",
-        "https://i.wifegeek.com/200426/d17ce9a0.jpg",
-        "https://i.wifegeek.com/200426/7c4deca9.jpg",
-        "https://i.wifegeek.com/200426/64672676.jpg",
-        "https://i.wifegeek.com/200426/de6ab9c6.jpg",
-        "https://i.wifegeek.com/200426/d8bcb6a7.jpg",
-        "https://i.wifegeek.com/200426/4085d03b.jpg",
-        "https://i.wifegeek.com/200426/177ef44c.jpg",
-        "https://i.wifegeek.com/200426/d74d9040.jpg",
-        "https://i.wifegeek.com/200426/81e24a47.jpg",
-        "https://i.wifegeek.com/200426/43e2e8bb.jpg"
+        'https://i.wifegeek.com/200426/f9459c52.jpg',
+        'https://i.wifegeek.com/200426/5ce1e1c7.jpg',
+        'https://i.wifegeek.com/200426/5fa51df3.jpg',
+        'https://i.wifegeek.com/200426/663181fe.jpg',
+        'https://i.wifegeek.com/200426/2d110780.jpg',
+        'https://i.wifegeek.com/200426/e73cd3fa.jpg',
+        'https://i.wifegeek.com/200426/15160d6e.jpg',
+        'https://i.wifegeek.com/200426/d0c881ae.jpg',
+        'https://i.wifegeek.com/200426/a154fc3d.jpg',
+        'https://i.wifegeek.com/200426/71d3aa60.jpg',
+        'https://i.wifegeek.com/200426/d17ce9a0.jpg',
+        'https://i.wifegeek.com/200426/7c4deca9.jpg',
+        'https://i.wifegeek.com/200426/64672676.jpg',
+        'https://i.wifegeek.com/200426/de6ab9c6.jpg',
+        'https://i.wifegeek.com/200426/d8bcb6a7.jpg',
+        'https://i.wifegeek.com/200426/4085d03b.jpg',
+        'https://i.wifegeek.com/200426/177ef44c.jpg',
+        'https://i.wifegeek.com/200426/d74d9040.jpg',
+        'https://i.wifegeek.com/200426/81e24a47.jpg',
+        'https://i.wifegeek.com/200426/43e2e8bb.jpg',
       ],
-      imagees: [
-        "https://i.wifegeek.com/200426/f9459c52.jpg",
-        "https://i.wifegeek.com/200426/5ce1e1c7.jpg"
-      ]
+      imagees: ['https://i.wifegeek.com/200426/f9459c52.jpg', 'https://i.wifegeek.com/200426/5ce1e1c7.jpg'],
     };
-  }
+  },
 };
 </script>
 

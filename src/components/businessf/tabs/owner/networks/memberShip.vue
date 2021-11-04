@@ -1,18 +1,10 @@
 <template>
   <b-container>
     <div class="s-card">
-      <div
-        v-for="member in allMemberRequest"
-        :key="member.id"
-        class="people-style border shadow"
-      >
+      <div v-for="member in allMemberRequest" :key="member.id" class="people-style border shadow">
         <b-row class="mb-1">
           <b-col md="3" cols="4" sm="3" lg="3" class="my-auto">
-            <b-avatar
-              class="p-avater"
-              variant="primary"
-              :src="member.image"
-            ></b-avatar>
+            <b-avatar class="p-avater" variant="primary" :src="member.image"></b-avatar>
           </b-col>
 
           <b-col md="8" cols="8" lg="8" sm="8">
@@ -21,27 +13,13 @@
                 <b-col md="12" lg="12" xl="6" sm="6">
                   <div class="e-name">
                     <b-row>
-                      <b-col
-                        md="6"
-                        lg="6"
-                        cols="6"
-                        sm="12"
-                        xl="12"
-                        class="mt-lg-2"
-                      >
+                      <b-col md="6" lg="6" cols="6" sm="12" xl="12" class="mt-lg-2">
                         <div class="mt-2 mt-lg-0 mt-xl-0 username">
                           <b>{{ member.name }}</b>
                         </div>
                       </b-col>
 
-                      <b-col
-                        md="6"
-                        lg="6"
-                        cols="6"
-                        sm="12"
-                        xl="12"
-                        class="mt-3 mt-lg-2 mt-xl-0"
-                      >
+                      <b-col md="6" lg="6" cols="6" sm="12" xl="12" class="mt-3 mt-lg-2 mt-xl-0">
                         <h6 class="follower">{{ member.community }}</h6>
                       </b-col>
                     </b-row>
@@ -51,49 +29,20 @@
                 <b-col lg="12" xl="6" cols="12" sm="6" md="12">
                   <div>
                     <b-row class="mt-lg-0">
-                      <b-col
-                        md="6"
-                        lg="6"
-                        cols="6"
-                        sm="12"
-                        xl="12"
-                        class="mt-2 mt-lg-2 mt-xl-2 btn-2 center"
-                      >
-                        <b-button
-                          block
-                          variant="primary"
-                          size="sm"
-                          class="b-background flexx pobtn shadow"
-                        >
-                          <span
-                            class="btn-text text-center"
-                            @click="approve(member.id)"
-                            :loading="load"
-                            >Approve</span
-                          >
+                      <b-col md="6" lg="6" cols="6" sm="12" xl="12" class="mt-2 mt-lg-2 mt-xl-2 btn-2 center">
+                        <b-button block variant="primary" size="sm" class="b-background flexx pobtn shadow">
+                          <span class="btn-text text-center" @click="approve(member.id)" :loading="load">Approve</span>
                         </b-button>
                       </b-col>
 
-                      <b-col
-                        md="6"
-                        lg="6"
-                        cols="6"
-                        sm="12"
-                        xl="12"
-                        class="mt-2 mt-lg-2 mt-xl-2 btn-2 center"
-                      >
+                      <b-col md="6" lg="6" cols="6" sm="12" xl="12" class="mt-2 mt-lg-2 mt-xl-2 btn-2 center">
                         <b-button
                           block
                           size="sm"
                           class="b-background flexx pobtn shadow   text-center "
                           variant="primary"
                         >
-                          <span
-                            class="btn-com  text-center"
-                            @click="decline(member.id)"
-                            :loading="load"
-                            >Decline</span
-                          >
+                          <span class="btn-com  text-center" @click="decline(member.id)" :loading="load">Decline</span>
                         </b-button>
                       </b-col>
                     </b-row>
@@ -116,16 +65,16 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from "vuex";
+import { mapActions, mapGetters } from 'vuex';
 export default {
   data: () => ({
     load: null,
-    networkId: "",
+    networkId: '',
   }),
   computed: {
     ...mapGetters({
-      allMemberRequest: "networkSetting/allMemberRequest",
-      getNetwork: "networkSetting/getNetwork",
+      allMemberRequest: 'networkSetting/allMemberRequest',
+      getNetwork: 'networkSetting/getNetwork',
     }),
   },
   beforeMount() {
@@ -134,9 +83,9 @@ export default {
   },
   methods: {
     ...mapActions({
-      getMemberRequest: "networkSetting/getMemberRequest",
-      approveUser: "networkSetting/approveUser",
-      declineUser: "networkSetting/declineUser",
+      getMemberRequest: 'networkSetting/getMemberRequest',
+      approveUser: 'networkSetting/approveUser',
+      declineUser: 'networkSetting/declineUser',
     }),
 
     approve(id) {
@@ -150,14 +99,14 @@ export default {
         .then(() => {
           this.load = false;
         })
-        .catch((err) => {
+        .catch(err => {
           this.load = false;
           console.log(err);
         });
     },
 
     decline(id) {
-       this.load = true;
+      this.load = true;
       this.networkId = this.getNetwork.id;
       let payload = {
         networkId: this.networkId,
@@ -167,7 +116,7 @@ export default {
         .then(() => {
           this.load = false;
         })
-        .catch((err) => {
+        .catch(err => {
           this.load = false;
           console.log(err);
         });

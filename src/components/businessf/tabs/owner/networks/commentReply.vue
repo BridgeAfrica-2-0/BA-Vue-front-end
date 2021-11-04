@@ -2,11 +2,7 @@
   <div>
     <b-row class="mt-2">
       <b-col>
-        <b-avatar
-          variant="info"
-          :src="item.network_picture"
-          class="avat-comment"
-        ></b-avatar>
+        <b-avatar variant="info" :src="item.network_picture" class="avat-comment"></b-avatar>
         <span class="float-right">
           <b-dropdown size="sm" variant="outline " class="primary">
             <template class="more" #button-content> </template>
@@ -15,13 +11,7 @@
           </b-dropdown>
         </span>
         <p class="msg text">
-          <read-more
-            more-str="read more"
-            :text="item.comment"
-            link="#"
-            less-str="read less"
-            :max-chars="15000"
-          >
+          <read-more more-str="read more" :text="item.comment" link="#" less-str="read less" :max-chars="15000">
           </read-more>
         </p>
       </b-col>
@@ -45,11 +35,11 @@ export default {
     type: {
       type: String,
       required: true,
-      validator: function (value) {
-        if (["reply"].includes(value)) return true;
+      validator: function(value) {
+        if (['reply'].includes(value)) return true;
       },
-      default: function () {
-        return "reply";
+      default: function() {
+        return 'reply';
       },
     },
   },
@@ -109,7 +99,6 @@ export default {
   }
 }
 </style>
-
 
 <style>
 #readmore {

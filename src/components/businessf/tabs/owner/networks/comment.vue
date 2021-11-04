@@ -2,11 +2,7 @@
   <div>
     <b-row class="mt-2">
       <b-col>
-        <b-avatar
-          variant="info"
-          :src="comment.user_picture"
-          class="avat-comment"
-        ></b-avatar>
+        <b-avatar variant="info" :src="comment.user_picture" class="avat-comment"></b-avatar>
         <span class="float-right">
           <b-dropdown size="sm" variant="outline " class="primary">
             <template class="more" #button-content> </template>
@@ -15,39 +11,18 @@
           </b-dropdown>
         </span>
         <p class="msg text">
-          <read-more
-            more-str="read more"
-            :text="comment.comment"
-            link="#"
-            less-str="read less"
-            :max-chars="15000"
-          >
+          <read-more more-str="read more" :text="comment.comment" link="#" less-str="read less" :max-chars="15000">
           </read-more>
         </p>
-        <b-icon
-          :icon="icon"
-          variant="primary"
-          aria-hidden="true"
-          class="cursor"
-          @click="onLike"
-        ></b-icon>
+        <b-icon :icon="icon" variant="primary" aria-hidden="true" class="cursor" @click="onLike"></b-icon>
         {{ comment.comment_likes | nFormatter }}
-        <b-icon
-          icon="chat"
-          variant="primary"
-          aria-hidden="true"
-          class="cursor"
-        ></b-icon>
+        <b-icon icon="chat" variant="primary" aria-hidden="true" class="cursor"></b-icon>
         {{ comment.reply_comment_count | nFormatter }}
         <span @click="showReply" class="primary ml-2 reply"><b>Reply</b></span>
         <div v-if="reply">
           <b-row class="mt-2">
             <b-col cols="1">
-              <b-avatar
-                variant="info"
-                src="https://placekitten.com/300/300"
-                class="avat-comment"
-              ></b-avatar>
+              <b-avatar variant="info" src="https://placekitten.com/300/300" class="avat-comment"></b-avatar>
             </b-col>
             <b-col cols="11">
               <input
@@ -70,13 +45,7 @@
               />
             </b-col>
             <b-col cols="12" class="mt-4">
-              <Comment
-                v-for="obj in comments"
-                :key="obj.id"
-                :item="obj"
-                :uuid="uuid"
-                type="reply"
-              />
+              <Comment v-for="obj in comments" :key="obj.id" :item="obj" :uuid="uuid" type="reply" />
             </b-col>
           </b-row>
         </div>
@@ -86,8 +55,8 @@
 </template>
 
 <script>
-import Comment from "./commentReply";
-import { commentMixins } from "@/mixins";
+import Comment from './commentReply';
+import { commentMixins } from '@/mixins';
 
 export default {
   mixins: [commentMixins],
@@ -102,11 +71,11 @@ export default {
     type: {
       type: String,
       required: true,
-      validator: function (value) {
-        if (["comment"].includes(value)) return true;
+      validator: function(value) {
+        if (['comment'].includes(value)) return true;
       },
-      default: function () {
-        return "comment";
+      default: function() {
+        return 'comment';
       },
     },
   },
@@ -169,7 +138,6 @@ export default {
   }
 }
 </style>
-
 
 <style>
 #readmore {

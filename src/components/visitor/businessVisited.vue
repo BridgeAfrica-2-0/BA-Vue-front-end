@@ -4,10 +4,7 @@
     <hr />
     <div class="row">
       <div class="col">
-        <b-list-group-item
-          class="d-flex align-items-center mb-4 "
-          style="border: none"
-        >
+        <b-list-group-item class="d-flex align-items-center mb-4 " style="border: none">
           <b-avatar class="mr-3 avat"></b-avatar>
           <div class="datails">
             <div class="row">
@@ -28,7 +25,7 @@
 export default {
   data() {
     return {};
-  }
+  },
 };
 </script>
 

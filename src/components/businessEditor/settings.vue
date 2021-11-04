@@ -2,20 +2,8 @@
   <div>
     <div class="mt-3 d-block d-md-none" v-if="selectedIdd == '0'">
       <div class="d-block d-md-none" style="margin-top: 30px">
-        <ly-tab
-          v-model="seetings_id"
-          :items="items"
-          :options="options"
-          class="center-ly"
-          vertical
-        >
-        </ly-tab>
+        <ly-tab v-model="seetings_id" :items="items" :options="options" class="center-ly" vertical> </ly-tab>
       </div>
-
-      
-
-
-     
     </div>
 
     <div class="mt-3 d-block d-md-none" v-if="selectedIdd == '2'">
@@ -26,32 +14,18 @@
       <Insight />
     </div>
 
-    
-
     <b-row class="center-content d-none d-md-block">
       <b-col cols="10">
         <div class="bv-example-row">
           <div>
-            <b-tabs
-              pills lazy
-              v-model="tabIndex"
-              vertical
-              class="itzlala"
-              nav-wrapper-class="w-15"
-            >
-           
-
+            <b-tabs pills lazy v-model="tabIndex" vertical class="itzlala" nav-wrapper-class="w-15">
               <b-tab title="Notification">
                 <b-card-text> <Notification /> </b-card-text
               ></b-tab>
 
-
               <b-tab title="Insight">
                 <b-card-text> <Insight /> </b-card-text
               ></b-tab>
-
-             
-
             </b-tabs>
           </div>
         </div>
@@ -66,17 +40,14 @@
 </template>
 
 <script>
-
-
-
-import Notification from "@/components/businessOwner/notification";
-import LyTab from "@/tab/src/index.vue";
-import Insight from "@/components/businessOwner/insight";
+import Notification from '@/components/businessOwner/notification';
+import LyTab from '@/tab/src/index.vue';
+import Insight from '@/components/businessOwner/insight';
 
 export default {
-  name: "settings",
+  name: 'settings',
 
-  props: ["currenttab"],
+  props: ['currenttab'],
 
   watch: {
     currenttab: {
@@ -85,35 +56,33 @@ export default {
         console.log(newVal, oldVal);
 
         if (newVal == 3) {
-          this.selectedIdd = "3";
-          this.tabIndex = "1";
+          this.selectedIdd = '3';
+          this.tabIndex = '1';
         }
 
         if (newVal == 2) {
-          this.selectedIdd = "2";
-          this.tabIndex = "0";
+          this.selectedIdd = '2';
+          this.tabIndex = '0';
         }
 
         if (newVal == 4) {
-          this.selectedIdd = "7";
-          this.tabIndex = "4";
+          this.selectedIdd = '7';
+          this.tabIndex = '4';
         }
 
         if (newVal == 5) {
-          this.selectedIdd = "0";
-          this.tabIndex = "0";
+          this.selectedIdd = '0';
+          this.tabIndex = '0';
         }
       },
     },
   },
 
   components: {
-  
     Notification,
-   
+
     LyTab,
     Insight,
-   
   },
 
   data() {
@@ -123,12 +92,9 @@ export default {
       selectedIdd: 0,
       seetings_id: 0,
       bottomSelectedId: 0,
-      items: [
-       
-
-      ],
+      items: [],
       options: {
-        activeColor: "#1d98bd",
+        activeColor: '#1d98bd',
       },
     };
   },

@@ -1,12 +1,7 @@
 <template>
   <div>
     <div class="comment">
-      <b-dropdown
-        class="options float-right"
-        variant="outline"
-        size="sm"
-        id="dropdown-left"
-      >
+      <b-dropdown class="options float-right" variant="outline" size="sm" id="dropdown-left">
         <template #button-content>
           <b-icon icon="three-dots" aria-hidden="true"></b-icon>
         </template>
@@ -21,22 +16,14 @@
       </b-dropdown>
       <h4>Username</h4>
       <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam vero, amet
-        incidunt minus quisquam officiis sapiente beatae magnam facilis. Nihil
-        voluptatibus reiciendis suscipit rem, illo reprehenderit corrupti
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam vero, amet incidunt minus quisquam officiis
+        sapiente beatae magnam facilis. Nihil voluptatibus reiciendis suscipit rem, illo reprehenderit corrupti
         similique laudantium iusto.
       </p>
     </div>
     <b-row>
       <b-col class="mt-1">
-        <span class="mr-3"
-          ><b-icon
-            icon="suit-heart"
-            variant="primary"
-            aria-hidden="true"
-          ></b-icon>
-          23</span
-        >
+        <span class="mr-3"><b-icon icon="suit-heart" variant="primary" aria-hidden="true"></b-icon> 23</span>
         <span class="reply">Reply</span>
       </b-col>
     </b-row>

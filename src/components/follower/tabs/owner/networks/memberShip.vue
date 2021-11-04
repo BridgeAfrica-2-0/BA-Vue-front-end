@@ -17,27 +17,13 @@
                 <b-col md="12" lg="12" xl="6" sm="6">
                   <div class="e-name">
                     <b-row>
-                      <b-col
-                        md="6"
-                        lg="6"
-                        cols="6"
-                        sm="12"
-                        xl="12"
-                        class="mt-lg-2"
-                      >
+                      <b-col md="6" lg="6" cols="6" sm="12" xl="12" class="mt-lg-2">
                         <div class="mt-2 mt-lg-0 mt-xl-0 username">
                           <b> howty Itz blec </b>
                         </div>
                       </b-col>
 
-                      <b-col
-                        md="6"
-                        lg="6"
-                        cols="6"
-                        sm="12"
-                        xl="12"
-                        class="mt-3 mt-lg-2 mt-xl-0"
-                      >
+                      <b-col md="6" lg="6" cols="6" sm="12" xl="12" class="mt-3 mt-lg-2 mt-xl-0">
                         <h6 class="follower">5K Community</h6>
                       </b-col>
                     </b-row>
@@ -47,38 +33,14 @@
                 <b-col lg="12" xl="6" cols="12" sm="6" md="12">
                   <div>
                     <b-row class="mt-lg-0">
-                      <b-col
-                        md="6"
-                        lg="6"
-                        cols="6"
-                        sm="12"
-                        xl="12"
-                        class="mt-2 mt-lg-2 mt-xl-2 btn-2 center"
-                      >
-                        <b-button
-                          block
-                          variant="primary"
-                          size="sm"
-                          class="b-background flexx pobtn shadow"
-                        >
+                      <b-col md="6" lg="6" cols="6" sm="12" xl="12" class="mt-2 mt-lg-2 mt-xl-2 btn-2 center">
+                        <b-button block variant="primary" size="sm" class="b-background flexx pobtn shadow">
                           <span class="btn-text">Approve</span>
                         </b-button>
                       </b-col>
 
-                      <b-col
-                        md="6"
-                        lg="6"
-                        cols="6"
-                        sm="12"
-                        xl="12"
-                        class="mt-2 mt-lg-2 mt-xl-2 btn-2 center"
-                      >
-                        <b-button
-                          block
-                          size="sm"
-                          class="b-background flexx pobtn shadow"
-                          variant="primary"
-                        >
+                      <b-col md="6" lg="6" cols="6" sm="12" xl="12" class="mt-2 mt-lg-2 mt-xl-2 btn-2 center">
+                        <b-button block size="sm" class="b-background flexx pobtn shadow" variant="primary">
                           <span class="btn-com">Decline</span>
                         </b-button>
                       </b-col>
@@ -107,27 +69,13 @@
                 <b-col md="12" lg="12" xl="6" sm="6">
                   <div class="e-name">
                     <b-row>
-                      <b-col
-                        md="6"
-                        lg="6"
-                        cols="6"
-                        sm="12"
-                        xl="12"
-                        class="mt-lg-2"
-                      >
+                      <b-col md="6" lg="6" cols="6" sm="12" xl="12" class="mt-lg-2">
                         <div class="mt-2 mt-lg-0 mt-xl-0 username">
                           <b> howty Itz blec </b>
                         </div>
                       </b-col>
 
-                      <b-col
-                        md="6"
-                        lg="6"
-                        cols="6"
-                        sm="12"
-                        xl="12"
-                        class="mt-3 mt-lg-2 mt-xl-0"
-                      >
+                      <b-col md="6" lg="6" cols="6" sm="12" xl="12" class="mt-3 mt-lg-2 mt-xl-0">
                         <h6 class="follower">5K Community</h6>
                       </b-col>
                     </b-row>
@@ -137,38 +85,14 @@
                 <b-col lg="12" xl="6" cols="12" sm="6" md="12">
                   <div>
                     <b-row class="mt-lg-0">
-                      <b-col
-                        md="6"
-                        lg="6"
-                        cols="6"
-                        sm="12"
-                        xl="12"
-                        class="mt-2 mt-lg-2 mt-xl-2 btn-2 center"
-                      >
-                        <b-button
-                          block
-                          variant="primary"
-                          size="sm"
-                          class="b-background flexx pobtn shadow"
-                        >
+                      <b-col md="6" lg="6" cols="6" sm="12" xl="12" class="mt-2 mt-lg-2 mt-xl-2 btn-2 center">
+                        <b-button block variant="primary" size="sm" class="b-background flexx pobtn shadow">
                           <span class="btn-text">Approve</span>
                         </b-button>
                       </b-col>
 
-                      <b-col
-                        md="6"
-                        lg="6"
-                        cols="6"
-                        sm="12"
-                        xl="12"
-                        class="mt-2 mt-lg-2 mt-xl-2 btn-2 center"
-                      >
-                        <b-button
-                          block
-                          size="sm"
-                          class="b-background flexx pobtn shadow"
-                          variant="primary"
-                        >
+                      <b-col md="6" lg="6" cols="6" sm="12" xl="12" class="mt-2 mt-lg-2 mt-xl-2 btn-2 center">
+                        <b-button block size="sm" class="b-background flexx pobtn shadow" variant="primary">
                           <span class="btn-com">Decline</span>
                         </b-button>
                       </b-col>
@@ -197,27 +121,13 @@
                 <b-col md="12" lg="12" xl="6" sm="6">
                   <div class="e-name">
                     <b-row>
-                      <b-col
-                        md="6"
-                        lg="6"
-                        cols="6"
-                        sm="12"
-                        xl="12"
-                        class="mt-lg-2"
-                      >
+                      <b-col md="6" lg="6" cols="6" sm="12" xl="12" class="mt-lg-2">
                         <div class="mt-2 mt-lg-0 mt-xl-0 username">
                           <b> howty Itz blec </b>
                         </div>
                       </b-col>
 
-                      <b-col
-                        md="6"
-                        lg="6"
-                        cols="6"
-                        sm="12"
-                        xl="12"
-                        class="mt-3 mt-lg-2 mt-xl-0"
-                      >
+                      <b-col md="6" lg="6" cols="6" sm="12" xl="12" class="mt-3 mt-lg-2 mt-xl-0">
                         <h6 class="follower">5K Community</h6>
                       </b-col>
                     </b-row>
@@ -227,38 +137,14 @@
                 <b-col lg="12" xl="6" cols="12" sm="6" md="12">
                   <div>
                     <b-row class="mt-lg-0">
-                      <b-col
-                        md="6"
-                        lg="6"
-                        cols="6"
-                        sm="12"
-                        xl="12"
-                        class="mt-2 mt-lg-2 mt-xl-2 btn-2 center"
-                      >
-                        <b-button
-                          block
-                          variant="primary"
-                          size="sm"
-                          class="b-background flexx pobtn shadow"
-                        >
+                      <b-col md="6" lg="6" cols="6" sm="12" xl="12" class="mt-2 mt-lg-2 mt-xl-2 btn-2 center">
+                        <b-button block variant="primary" size="sm" class="b-background flexx pobtn shadow">
                           <span class="btn-text">Approve</span>
                         </b-button>
                       </b-col>
 
-                      <b-col
-                        md="6"
-                        lg="6"
-                        cols="6"
-                        sm="12"
-                        xl="12"
-                        class="mt-2 mt-lg-2 mt-xl-2 btn-2 center"
-                      >
-                        <b-button
-                          block
-                          size="sm"
-                          class="b-background flexx pobtn shadow"
-                          variant="primary"
-                        >
+                      <b-col md="6" lg="6" cols="6" sm="12" xl="12" class="mt-2 mt-lg-2 mt-xl-2 btn-2 center">
+                        <b-button block size="sm" class="b-background flexx pobtn shadow" variant="primary">
                           <span class="btn-com">Decline</span>
                         </b-button>
                       </b-col>
@@ -287,27 +173,13 @@
                 <b-col md="12" lg="12" xl="6" sm="6">
                   <div class="e-name">
                     <b-row>
-                      <b-col
-                        md="6"
-                        lg="6"
-                        cols="6"
-                        sm="12"
-                        xl="12"
-                        class="mt-lg-2"
-                      >
+                      <b-col md="6" lg="6" cols="6" sm="12" xl="12" class="mt-lg-2">
                         <div class="mt-2 mt-lg-0 mt-xl-0 username">
                           <b> howty Itz blec </b>
                         </div>
                       </b-col>
 
-                      <b-col
-                        md="6"
-                        lg="6"
-                        cols="6"
-                        sm="12"
-                        xl="12"
-                        class="mt-3 mt-lg-2 mt-xl-0"
-                      >
+                      <b-col md="6" lg="6" cols="6" sm="12" xl="12" class="mt-3 mt-lg-2 mt-xl-0">
                         <h6 class="follower">5K Community</h6>
                       </b-col>
                     </b-row>
@@ -317,38 +189,14 @@
                 <b-col lg="12" xl="6" cols="12" sm="6" md="12">
                   <div>
                     <b-row class="mt-lg-0">
-                      <b-col
-                        md="6"
-                        lg="6"
-                        cols="6"
-                        sm="12"
-                        xl="12"
-                        class="mt-2 mt-lg-2 mt-xl-2 btn-2 center"
-                      >
-                        <b-button
-                          block
-                          variant="primary"
-                          size="sm"
-                          class="b-background flexx pobtn shadow"
-                        >
+                      <b-col md="6" lg="6" cols="6" sm="12" xl="12" class="mt-2 mt-lg-2 mt-xl-2 btn-2 center">
+                        <b-button block variant="primary" size="sm" class="b-background flexx pobtn shadow">
                           <span class="btn-text">Approve</span>
                         </b-button>
                       </b-col>
 
-                      <b-col
-                        md="6"
-                        lg="6"
-                        cols="6"
-                        sm="12"
-                        xl="12"
-                        class="mt-2 mt-lg-2 mt-xl-2 btn-2 center"
-                      >
-                        <b-button
-                          block
-                          size="sm"
-                          class="b-background flexx pobtn shadow"
-                          variant="primary"
-                        >
+                      <b-col md="6" lg="6" cols="6" sm="12" xl="12" class="mt-2 mt-lg-2 mt-xl-2 btn-2 center">
+                        <b-button block size="sm" class="b-background flexx pobtn shadow" variant="primary">
                           <span class="btn-com">Decline</span>
                         </b-button>
                       </b-col>
@@ -377,27 +225,13 @@
                 <b-col md="12" lg="12" xl="6" sm="6">
                   <div class="e-name">
                     <b-row>
-                      <b-col
-                        md="6"
-                        lg="6"
-                        cols="6"
-                        sm="12"
-                        xl="12"
-                        class="mt-lg-2"
-                      >
+                      <b-col md="6" lg="6" cols="6" sm="12" xl="12" class="mt-lg-2">
                         <div class="mt-2 mt-lg-0 mt-xl-0 username">
                           <b> howty Itz blec </b>
                         </div>
                       </b-col>
 
-                      <b-col
-                        md="6"
-                        lg="6"
-                        cols="6"
-                        sm="12"
-                        xl="12"
-                        class="mt-3 mt-lg-2 mt-xl-0"
-                      >
+                      <b-col md="6" lg="6" cols="6" sm="12" xl="12" class="mt-3 mt-lg-2 mt-xl-0">
                         <h6 class="follower">5K Community</h6>
                       </b-col>
                     </b-row>
@@ -407,38 +241,14 @@
                 <b-col lg="12" xl="6" cols="12" sm="6" md="12">
                   <div>
                     <b-row class="mt-lg-0">
-                      <b-col
-                        md="6"
-                        lg="6"
-                        cols="6"
-                        sm="12"
-                        xl="12"
-                        class="mt-2 mt-lg-2 mt-xl-2 btn-2 center"
-                      >
-                        <b-button
-                          block
-                          variant="primary"
-                          size="sm"
-                          class="b-background flexx pobtn shadow"
-                        >
+                      <b-col md="6" lg="6" cols="6" sm="12" xl="12" class="mt-2 mt-lg-2 mt-xl-2 btn-2 center">
+                        <b-button block variant="primary" size="sm" class="b-background flexx pobtn shadow">
                           <span class="btn-text">Approve</span>
                         </b-button>
                       </b-col>
 
-                      <b-col
-                        md="6"
-                        lg="6"
-                        cols="6"
-                        sm="12"
-                        xl="12"
-                        class="mt-2 mt-lg-2 mt-xl-2 btn-2 center"
-                      >
-                        <b-button
-                          block
-                          size="sm"
-                          class="b-background flexx pobtn shadow"
-                          variant="primary"
-                        >
+                      <b-col md="6" lg="6" cols="6" sm="12" xl="12" class="mt-2 mt-lg-2 mt-xl-2 btn-2 center">
+                        <b-button block size="sm" class="b-background flexx pobtn shadow" variant="primary">
                           <span class="btn-com">Decline</span>
                         </b-button>
                       </b-col>
@@ -467,27 +277,13 @@
                 <b-col md="12" lg="12" xl="6" sm="6">
                   <div class="e-name">
                     <b-row>
-                      <b-col
-                        md="6"
-                        lg="6"
-                        cols="6"
-                        sm="12"
-                        xl="12"
-                        class="mt-lg-2"
-                      >
+                      <b-col md="6" lg="6" cols="6" sm="12" xl="12" class="mt-lg-2">
                         <div class="mt-2 mt-lg-0 mt-xl-0 username">
                           <b> howty Itz blec </b>
                         </div>
                       </b-col>
 
-                      <b-col
-                        md="6"
-                        lg="6"
-                        cols="6"
-                        sm="12"
-                        xl="12"
-                        class="mt-3 mt-lg-2 mt-xl-0"
-                      >
+                      <b-col md="6" lg="6" cols="6" sm="12" xl="12" class="mt-3 mt-lg-2 mt-xl-0">
                         <h6 class="follower">5K Community</h6>
                       </b-col>
                     </b-row>
@@ -497,38 +293,14 @@
                 <b-col lg="12" xl="6" cols="12" sm="6" md="12">
                   <div>
                     <b-row class="mt-lg-0">
-                      <b-col
-                        md="6"
-                        lg="6"
-                        cols="6"
-                        sm="12"
-                        xl="12"
-                        class="mt-2 mt-lg-2 mt-xl-2 btn-2 center"
-                      >
-                        <b-button
-                          block
-                          variant="primary"
-                          size="sm"
-                          class="b-background flexx pobtn shadow"
-                        >
+                      <b-col md="6" lg="6" cols="6" sm="12" xl="12" class="mt-2 mt-lg-2 mt-xl-2 btn-2 center">
+                        <b-button block variant="primary" size="sm" class="b-background flexx pobtn shadow">
                           <span class="btn-text">Approve</span>
                         </b-button>
                       </b-col>
 
-                      <b-col
-                        md="6"
-                        lg="6"
-                        cols="6"
-                        sm="12"
-                        xl="12"
-                        class="mt-2 mt-lg-2 mt-xl-2 btn-2 center"
-                      >
-                        <b-button
-                          block
-                          size="sm"
-                          class="b-background flexx pobtn shadow"
-                          variant="primary"
-                        >
+                      <b-col md="6" lg="6" cols="6" sm="12" xl="12" class="mt-2 mt-lg-2 mt-xl-2 btn-2 center">
+                        <b-button block size="sm" class="b-background flexx pobtn shadow" variant="primary">
                           <span class="btn-com">Decline</span>
                         </b-button>
                       </b-col>

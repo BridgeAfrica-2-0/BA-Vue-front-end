@@ -40,10 +40,7 @@
               </div>
 
               <p>
-                <b-icon
-                  icon="briefcase-fill"
-                  class="primary icon-size"
-                ></b-icon>
+                <b-icon icon="briefcase-fill" class="primary icon-size"></b-icon>
                 Agriculture
               </p>
               <p>
@@ -63,10 +60,7 @@
                 1.1M Community
               </p>
               <p>
-                <b-icon
-                  icon="telephone-fill"
-                  class="primary icon-size"
-                ></b-icon>
+                <b-icon icon="telephone-fill" class="primary icon-size"></b-icon>
                 +1(542) 565- 536
               </p>
               <p>
@@ -90,31 +84,14 @@
       </b-row>
     </b-card>
 
-    <b-modal
-      id="bv-modal-example1"
-      hide-footer
-      title="Business Name"
-      v-model="edit1"
-      size="md"
-    >
+    <b-modal id="bv-modal-example1" hide-footer title="Business Name" v-model="edit1" size="md">
       <b-form> </b-form>
     </b-modal>
-    <b-modal
-      id="bv-modal-example2"
-      hide-footer
-      title="Edit Address"
-      v-model="edit2"
-    >
+    <b-modal id="bv-modal-example2" hide-footer title="Edit Address" v-model="edit2">
       <b-form>
         <div class="form-group">
           <label for="username">Busness Name:</label><br />
-          <input
-            type="text"
-            name="username"
-            id="username"
-            placeholder="Busness Name"
-            class="form-control"
-          />
+          <input type="text" name="username" id="username" placeholder="Busness Name" class="form-control" />
         </div>
 
         <div class="form-group">
@@ -131,89 +108,27 @@
           <div class="col-md-12 pl-0 pr-0">
             No Choices
 
-            <input
-              type="text"
-              name="alias"
-              id="alias"
-              placeholder="Enter your Keywords"
-              class="form-control"
-            />
+            <input type="text" name="alias" id="alias" placeholder="Enter your Keywords" class="form-control" />
           </div>
         </div>
-        <b-form-group
-          id="input-group-1"
-          label="Country"
-          label-for="input-1"
-          label-size="sm"
-        >
-          <b-form-input
-            id="input-1"
-            class="mt-1"
-            type="text"
-            required
-          ></b-form-input>
+        <b-form-group id="input-group-1" label="Country" label-for="input-1" label-size="sm">
+          <b-form-input id="input-1" class="mt-1" type="text" required></b-form-input>
         </b-form-group>
-        <b-form-group
-          id="input-group-2"
-          label="City"
-          label-for="input-2"
-          label-size="sm"
-        >
-          <b-form-input
-            id="input-1"
-            class="mt-1"
-            type="text"
-            required
-          ></b-form-input>
+        <b-form-group id="input-group-2" label="City" label-for="input-2" label-size="sm">
+          <b-form-input id="input-1" class="mt-1" type="text" required></b-form-input>
         </b-form-group>
-        <b-form-group
-          id="input-group-2"
-          label="Neigbourhood"
-          label-for="input-2"
-          label-size="sm"
-        >
-          <b-form-input
-            id="input-1"
-            class="mt-1"
-            type="text"
-            required
-          ></b-form-input>
+        <b-form-group id="input-group-2" label="Neigbourhood" label-for="input-2" label-size="sm">
+          <b-form-input id="input-1" class="mt-1" type="text" required></b-form-input>
         </b-form-group>
 
-        <b-form-group
-          id="input-group-2"
-          label="Phone Contact"
-          label-for="input-2"
-          label-size="sm"
-        >
-          <b-form-input
-            id="input-1"
-            class="mt-1"
-            v-model="telephone"
-            type="tel"
-            required
-          ></b-form-input>
+        <b-form-group id="input-group-2" label="Phone Contact" label-for="input-2" label-size="sm">
+          <b-form-input id="input-1" class="mt-1" v-model="telephone" type="tel" required></b-form-input>
         </b-form-group>
-        <b-form-group
-          id="input-group-2"
-          label="Business Email"
-          label-for="input-2"
-          label-size="sm"
-        >
-          <b-form-input
-            id="input-1"
-            class="mt-1"
-            v-model="email"
-            type="email"
-            required
-          ></b-form-input>
+        <b-form-group id="input-group-2" label="Business Email" label-for="input-2" label-size="sm">
+          <b-form-input id="input-1" class="mt-1" v-model="email" type="email" required></b-form-input>
         </b-form-group>
 
-        <b-button
-          class="mt-3 btn-block"
-          variant="primary"
-          @click="validate('bv-modal-example2')"
-        >
+        <b-button class="mt-3 btn-block" variant="primary" @click="validate('bv-modal-example2')">
           Modify
         </b-button>
       </b-form>
@@ -227,30 +142,30 @@ export default {
     return {
       edit1: false,
       edit2: false,
-      leftTitle: "About Mapoure Agrobusiness",
+      leftTitle: 'About Mapoure Agrobusiness',
       textToo:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit.\n" +
-        "              Asperiores temporibus, rerum iste id obcaecati quae odit accusamus\n" +
-        "              reprehenderit, ipsa nam laudantium pariatur. Harum, soluta. Nam\n" +
-        "              accusantium hic numquam architecto debitis. Lorem ipsum dolor sit\n" +
-        "              amet consectetur adipisicing elit. Asperiores temporibus, rerum\n" +
-        "              iste id obcaecati quae odit accusamus reprehenderit, ipsa nam\n" +
-        "              laudantium pariatur. Harum, soluta. Nam accusantium hic numquam\n" +
-        "              architecto debitis. Asperiores temporibus, rerum iste id obcaecati\n" +
-        "              architecto debitis. Asperiores temporibus, rerum iste id obcaecati\n" +
-        "              architecto debitis. Asperiores temporibus, rerum iste id obcaecati\n" +
-        "              architecto debitis. Asperiores temporibus, rerum iste id obcaecati\n" +
-        "              architecto debitis. Asperiores temporibus, rerum iste id obcaecati\n" +
-        "              quae odit accusamus reprehenderit, ipsa nam laudantium pariatur.\n" +
-        "              quae odit accusamus reprehenderit, ipsa nam laudantium pariatur.\n" +
-        "              Harum, soluta. Nam accusantium hic numquam architecto debitis.",
-      workedAt: "Current or Last Organization",
-      lastEducation: "Last Education",
-      homeTown: "Dummy",
-      cityName: "Dummy",
-      followed: "525",
-      telephone: "+1 (234) 567-8974",
-      email: "info@businessname.com"
+        'Lorem ipsum dolor sit amet consectetur adipisicing elit.\n' +
+        '              Asperiores temporibus, rerum iste id obcaecati quae odit accusamus\n' +
+        '              reprehenderit, ipsa nam laudantium pariatur. Harum, soluta. Nam\n' +
+        '              accusantium hic numquam architecto debitis. Lorem ipsum dolor sit\n' +
+        '              amet consectetur adipisicing elit. Asperiores temporibus, rerum\n' +
+        '              iste id obcaecati quae odit accusamus reprehenderit, ipsa nam\n' +
+        '              laudantium pariatur. Harum, soluta. Nam accusantium hic numquam\n' +
+        '              architecto debitis. Asperiores temporibus, rerum iste id obcaecati\n' +
+        '              architecto debitis. Asperiores temporibus, rerum iste id obcaecati\n' +
+        '              architecto debitis. Asperiores temporibus, rerum iste id obcaecati\n' +
+        '              architecto debitis. Asperiores temporibus, rerum iste id obcaecati\n' +
+        '              architecto debitis. Asperiores temporibus, rerum iste id obcaecati\n' +
+        '              quae odit accusamus reprehenderit, ipsa nam laudantium pariatur.\n' +
+        '              quae odit accusamus reprehenderit, ipsa nam laudantium pariatur.\n' +
+        '              Harum, soluta. Nam accusantium hic numquam architecto debitis.',
+      workedAt: 'Current or Last Organization',
+      lastEducation: 'Last Education',
+      homeTown: 'Dummy',
+      cityName: 'Dummy',
+      followed: '525',
+      telephone: '+1 (234) 567-8974',
+      email: 'info@businessname.com',
     };
   },
   methods: {
@@ -275,8 +190,8 @@ export default {
      */
     validate(idForm) {
       this.$bvModal.hide(idForm);
-    }
-  }
+    },
+  },
 };
 </script>
 

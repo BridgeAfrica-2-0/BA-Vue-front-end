@@ -9,9 +9,7 @@
         <b-collapse id="nav-collapse" is-nav>
           <b-navbar-nav>
             <b-nav-item href="/">Home</b-nav-item>
-            <b-nav-item
-              ><router-link to="/about">About</router-link></b-nav-item
-            >
+            <b-nav-item><router-link to="/about">About</router-link></b-nav-item>
           </b-navbar-nav>
 
           <!-- Right aligned nav items -->
@@ -19,22 +17,14 @@
             <b-nav-item-dropdown right v-if="login">
               <!-- Using 'button-content' slot -->
               <template #button-content>
-                <b-avatar
-                  variant="info"
-                  src="https://placekitten.com/300/300"
-                  class="mr-3"
-                ></b-avatar>
+                <b-avatar variant="info" src="https://placekitten.com/300/300" class="mr-3"></b-avatar>
                 <span class="mr-auto">{{ userData[0].fullname }}</span>
               </template>
               <b-dropdown-item href="/logout">Sign Out</b-dropdown-item>
             </b-nav-item-dropdown>
             <b-navbar-nav v-else>
-              <b-nav-item
-                ><router-link to="/login">Login</router-link></b-nav-item
-              >
-              <b-nav-item
-                ><router-link to="/signin">SignIn</router-link></b-nav-item
-              >
+              <b-nav-item><router-link to="/login">Login</router-link></b-nav-item>
+              <b-nav-item><router-link to="/signin">SignIn</router-link></b-nav-item>
             </b-navbar-nav>
           </b-navbar-nav>
         </b-collapse>
@@ -46,37 +36,16 @@
           <b-col md="6" class="mx-auto my-5">
             <b-card title="Modifications" tag="article" class="my-auto mx-auto">
               <div class="step-2">
-                <b-card-text class="w-75 mx-auto mt-5">
-                  Modificaton ({{ id }})
-                </b-card-text>
+                <b-card-text class="w-75 mx-auto mt-5"> Modificaton ({{ id }}) </b-card-text>
                 <b-form class="w-75 mx-auto">
                   <b-form-group id="input-group-4">
-                    <b-form-input
-                      id="input-4"
-                      v-model="id"
-                      type="text"
-                      :placeholder="id"
-                      :value="id"
-                      disabled
-                    />
+                    <b-form-input id="input-4" v-model="id" type="text" :placeholder="id" :value="id" disabled />
                   </b-form-group>
                   <b-form-group id="input-group-4">
-                    <b-form-input
-                      id="input-4"
-                      v-model="name"
-                      type="text"
-                      :value="name"
-                      disabled
-                    />
+                    <b-form-input id="input-4" v-model="name" type="text" :value="name" disabled />
                   </b-form-group>
                   <b-form-group id="input-group-4">
-                    <b-form-input
-                      id="input-4"
-                      v-model="location"
-                      type="text"
-                      :value="location"
-                      disabled
-                    />
+                    <b-form-input id="input-4" v-model="location" type="text" :value="location" disabled />
                   </b-form-group>
                   <b-form-textarea
                     id="textarea"
@@ -101,16 +70,16 @@
 </template>
 
 <script>
-import { mapGetters, mapState } from "vuex";
+import { mapGetters, mapState } from 'vuex';
 
 export default {
-  name: "service",
+  name: 'service',
   data() {
     return {
-      id: "",
-      name: "",
-      location: "",
-      description: ""
+      id: '',
+      name: '',
+      location: '',
+      description: '',
     };
   },
   beforeMount() {
@@ -120,7 +89,7 @@ export default {
       (this.description = this.$store.state.service[0].Resume);
   },
   computed: {
-    ...mapState(["login", "service", "userData"]),
+    ...mapState(['login', 'service', 'userData']),
     ...mapGetters({}),
     noMore() {
       return this.count >= this.totalPages - 1;
@@ -133,9 +102,9 @@ export default {
     },
     logged() {
       return this.$store.getters.loggedIn;
-    }
+    },
   },
-  methods: {}
+  methods: {},
 };
 </script>
 

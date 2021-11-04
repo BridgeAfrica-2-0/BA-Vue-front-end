@@ -19,12 +19,7 @@
     <br />
 
     <b-row>
-      <b-col
-        v-for="(follower, index) in theFollowers"
-        :key="index"
-        md="12"
-        lg="6"
-      >
+      <b-col v-for="(follower, index) in theFollowers" :key="index" md="12" lg="6">
         <CommunityMembers :follower="follower" />
       </b-col>
       <b-col v-if="loader" class="load">
@@ -49,8 +44,8 @@
 </template>
 
 <script>
-import CommunityMembers from "../../communityMember";
-import { mapActions, mapGetters } from "vuex";
+import CommunityMembers from '../../communityMember';
+import { mapActions, mapGetters } from 'vuex';
 export default {
   components: {
     CommunityMembers,
@@ -58,23 +53,23 @@ export default {
   data: () => ({
     loader: false,
     followers: [],
-    searchQuery: "",
+    searchQuery: '',
   }),
   computed: {
     theFollowers() {
       if (this.searchQuery) {
-        return this.followers.filter((item) => {
+        return this.followers.filter(item => {
           return this.searchQuery
             .toLowerCase()
-            .split(" ")
-            .every((v) => item.name.toLowerCase().includes(v));
+            .split(' ')
+            .every(v => item.name.toLowerCase().includes(v));
         });
       } else {
         return this.getPeopleFollowers;
       }
     },
 
-    ...mapGetters(["getPeopleFollowers"]),
+    ...mapGetters(['getPeopleFollowers']),
   },
   beforeMount() {
     this.getPeopleFollowers();
@@ -83,7 +78,7 @@ export default {
     this.gettingPeopleFollowers();
   },
   methods: {
-    ...mapActions(["gettingPeopleFollowers"]),
+    ...mapActions(['gettingPeopleFollowers']),
   },
 };
 </script>

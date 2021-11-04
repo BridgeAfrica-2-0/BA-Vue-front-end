@@ -4,7 +4,7 @@
 
 <script>
 export default {
-  name: "activitiDashboard"
+  name: 'activitiDashboard',
 };
 </script>
 

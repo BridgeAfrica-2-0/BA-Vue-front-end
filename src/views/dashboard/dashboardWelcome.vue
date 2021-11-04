@@ -8,35 +8,16 @@
             <template #header>
               <h6 class="mb-0 d-inline-block">Intro</h6>
               <span class="float-right btn m-0 p-0 mt-1 action-intro"
-                ><b-icon icon="pencil-fill" variant="primary"></b-icon> Edit
-                Profile</span
+                ><b-icon icon="pencil-fill" variant="primary"></b-icon> Edit Profile</span
               >
             </template>
-            <img
-              src="https://dashboard.bridgeafrica.info/resources/images/profile-pic.jpg"
-              class="info-image"
-            />
+            <img src="https://dashboard.bridgeafrica.info/resources/images/profile-pic.jpg" class="info-image" />
             <b-card-text class="text-left text-size mt-2">
-              <p>
-                <b-icon icon="briefcase-fill" variant="primary"></b-icon> Work
-                at: Current or Last Organization
-              </p>
-              <p>
-                <b-icon icon="book-fill" variant="primary"></b-icon> Studied at:
-                Last Education
-              </p>
-              <p>
-                <b-icon icon="house-fill" variant="primary"></b-icon> Home Town
-                Name:Dummy
-              </p>
-              <p>
-                <b-icon icon="geo-alt-fill" variant="primary"></b-icon> Current
-                City Name:Dummy
-              </p>
-              <p>
-                <b-icon icon="people-fill" variant="primary"></b-icon> Followed
-                by: 525
-              </p>
+              <p><b-icon icon="briefcase-fill" variant="primary"></b-icon> Work at: Current or Last Organization</p>
+              <p><b-icon icon="book-fill" variant="primary"></b-icon> Studied at: Last Education</p>
+              <p><b-icon icon="house-fill" variant="primary"></b-icon> Home Town Name:Dummy</p>
+              <p><b-icon icon="geo-alt-fill" variant="primary"></b-icon> Current City Name:Dummy</p>
+              <p><b-icon icon="people-fill" variant="primary"></b-icon> Followed by: 525</p>
             </b-card-text>
           </b-card>
 
@@ -45,9 +26,7 @@
               <h6 class="font-weight-bolder">
                 Invite friends on Bridge Africa
               </h6>
-              <b-button variant="outline-primary" class="btn-block mt-2">
-                <b-icon-plus></b-icon-plus> Invite</b-button
-              >
+              <b-button variant="outline-primary" class="btn-block mt-2"> <b-icon-plus></b-icon-plus> Invite</b-button>
             </div>
           </b-card>
         </b-col>
@@ -79,9 +58,7 @@
                   </h5>
                 </span>
                 <span class="float-right mt-1">
-                  <b-button variant="outline-primary" class="mt-2"
-                    >Follow
-                  </b-button>
+                  <b-button variant="outline-primary" class="mt-2">Follow </b-button>
                 </span>
               </p>
               <hr width="100%" />
@@ -111,9 +88,7 @@
                   </h5>
                 </span>
                 <span class="float-right mt-1">
-                  <b-button variant="outline-primary" class="mt-2"
-                    >Follow
-                  </b-button>
+                  <b-button variant="outline-primary" class="mt-2">Follow </b-button>
                 </span>
               </p>
               <hr width="100%" />
@@ -133,9 +108,7 @@
             <hr width="100%" />
             <div class="h-100 w-100">
               <div class="mx-auto text-center my-5">
-                <b-button variant="outline-primary" class="my-2">
-                  Upload Picture</b-button
-                >
+                <b-button variant="outline-primary" class="my-2"> Upload Picture</b-button>
                 <p class="m-0">Or</p>
                 <p class="mb-2">No Profile Pic</p>
                 <p class="my-0"><a href="#">Take A Photo</a></p>
@@ -148,9 +121,7 @@
             <b-row>
               <b-col cols="7">
                 <div class="d-flex flex-row align-items-center px-1">
-                  <div
-                    class="my-border rounded-circle welcome-section-number mr-2"
-                  >
+                  <div class="my-border rounded-circle welcome-section-number mr-2">
                     3
                   </div>
                   <div class="h5 font-weight-bold mb-0">
@@ -164,9 +135,7 @@
               </b-col>
               <b-col cols="5">
                 <p class="">
-                  <b-button variant="outline-primary" class="my-2 float-right">
-                    Upload Picture</b-button
-                  >
+                  <b-button variant="outline-primary" class="my-2 float-right"> Upload Picture</b-button>
                 </p>
               </b-col>
             </b-row>
@@ -180,12 +149,12 @@
 </template>
 
 <script>
-import Navbar from "@/components/navbar";
-import Footer from "@/components/footer";
+import Navbar from '@/components/navbar';
+import Footer from '@/components/footer';
 
 export default {
-  name: "dashboardWelcome",
-  components: { Navbar, Footer }
+  name: 'dashboardWelcome',
+  components: { Navbar, Footer },
 };
 </script>
 

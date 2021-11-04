@@ -18,19 +18,19 @@
 </template>
 
 <script>
-import FeedbackNetwork from "@/components/businessf/tabs/owner/networks/feedbackNetwork";
-import MediaNetwork from "@/components/businessf/tabs/owner/networks/mediaNetwork";
-import MemberNetwork from "@/components/businessf/tabs/owner/networks/memberNetwork";
-import PostNetwork from "@/components/businessf/tabs/owner/networks/postNetwork";
+import FeedbackNetwork from '@/components/businessf/tabs/owner/networks/feedbackNetwork';
+import MediaNetwork from '@/components/businessf/tabs/owner/networks/mediaNetwork';
+import MemberNetwork from '@/components/businessf/tabs/owner/networks/memberNetwork';
+import PostNetwork from '@/components/businessf/tabs/owner/networks/postNetwork';
 
 export default {
-  name: "default",
+  name: 'default',
   components: {
     PostNetwork,
     MemberNetwork,
     MediaNetwork,
-    FeedbackNetwork
-  }
+    FeedbackNetwork,
+  },
 };
 </script>
 

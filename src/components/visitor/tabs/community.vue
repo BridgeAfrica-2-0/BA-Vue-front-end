@@ -10,13 +10,13 @@
 </template>
 
 <script>
-import People from "./people/people";
-import Businesses from "./businesses/businesses";
+import People from './people/people';
+import Businesses from './businesses/businesses';
 export default {
   components: {
     People,
-    Businesses
-  }
+    Businesses,
+  },
 };
 </script>
 

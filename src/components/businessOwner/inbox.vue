@@ -26,21 +26,12 @@
                 </b-col>
               </b-row>
               <b-container>
-                <input
-                  type="text"
-                  class="form-control input-background"
-                  placeholder="Search inbox"
-                />
+                <input type="text" class="form-control input-background" placeholder="Search inbox" />
               </b-container>
             </div>
             <div>
               <div class="messages-mobile">
-                <b-row
-                  v-for="message in messages"
-                  :key="message.id"
-                  class="p-2 message"
-                  @click="showMessages(false)"
-                >
+                <b-row v-for="message in messages" :key="message.id" class="p-2 message" @click="showMessages(false)">
                   <b-col class="col-10">
                     <span style="display: inline-flex mb-2">
                       <b-avatar
@@ -91,20 +82,11 @@
                   ></b-icon>
                 </b-col>
               </b-row>
-              <input
-                type="text"
-                class="form-control input-background"
-                placeholder="Search inbox"
-              />
+              <input type="text" class="form-control input-background" placeholder="Search inbox" />
             </div>
             <div>
               <div class="messages">
-                <b-row
-                  v-for="message in messages"
-                  :key="message.id"
-                  class="p-2 message"
-                  @click="showInfo(false)"
-                >
+                <b-row v-for="message in messages" :key="message.id" class="p-2 message" @click="showInfo(false)">
                   <b-col class="col-9">
                     <span style="display: inline-flex">
                       <b-avatar
@@ -143,12 +125,7 @@
               <div class="chat-nav shadow">
                 <b-row class="mobile">
                   <b-col class="col-1">
-                    <b-icon
-                      @click="showMessages(true)"
-                      icon="arrow-left"
-                      aria-hidden="true"
-                      class="primary"
-                    ></b-icon>
+                    <b-icon @click="showMessages(true)" icon="arrow-left" aria-hidden="true" class="primary"></b-icon>
                   </b-col>
                   <b-col class="col-3">
                     <b-avatar
@@ -168,12 +145,7 @@
                         <b-icon icon="search" class="primary"></b-icon>
                       </b-col>
                       <b-col class="col-3">
-                        <b-icon
-                          icon="three-dots"
-                          @click="showInfo(true)"
-                          aria-hidden="true"
-                          class="primary"
-                        ></b-icon>
+                        <b-icon icon="three-dots" @click="showInfo(true)" aria-hidden="true" class="primary"></b-icon>
                       </b-col>
                     </b-row>
                   </b-col>
@@ -193,10 +165,7 @@
                   <b-col class="col-4">
                     <b-row class="mt-3 ml-5">
                       <b-col class="col-3">
-                        <b-icon
-                          class="msg-icon primary icon-size"
-                          icon="search"
-                        ></b-icon>
+                        <b-icon class="msg-icon primary icon-size" icon="search"></b-icon>
                       </b-col>
 
                       <b-col>
@@ -208,9 +177,7 @@
                           variant="outline-light"
                         >
                           <template #button-content>
-                            <b-icon-three-dots
-                              class="primary"
-                            ></b-icon-three-dots>
+                            <b-icon-three-dots class="primary"></b-icon-three-dots>
                           </template>
 
                           <b-dropdown-item-button @click="showInfo(true)">
@@ -314,10 +281,7 @@
                             />
                           </svg>
                         </div>
-                        <div
-                          slot="emoji-picker"
-                          slot-scope="{ emojis, insert, display }"
-                        >
+                        <div slot="emoji-picker" slot-scope="{ emojis, insert, display }">
                           <div
                             class="emoji-picker"
                             :style="{
@@ -329,10 +293,7 @@
                               <input type="text" v-model="search" v-focus />
                             </div>
                             <div>
-                              <div
-                                v-for="(emojiGroup, category) in emojis"
-                                :key="category"
-                              >
+                              <div v-for="(emojiGroup, category) in emojis" :key="category">
                                 <h5>{{ category }}</h5>
                                 <div class="emojis">
                                   <span
@@ -388,10 +349,7 @@
                             />
                           </svg>
                         </div>
-                        <div
-                          slot="emoji-picker"
-                          slot-scope="{ emojis, insert, display }"
-                        >
+                        <div slot="emoji-picker" slot-scope="{ emojis, insert, display }">
                           <div
                             class="emoji-picker"
                             :style="{
@@ -403,10 +361,7 @@
                               <input type="text" v-model="search" v-focus />
                             </div>
                             <div>
-                              <div
-                                v-for="(emojiGroup, category) in emojis"
-                                :key="category"
-                              >
+                              <div v-for="(emojiGroup, category) in emojis" :key="category">
                                 <h5>{{ category }}</h5>
                                 <div class="emojis">
                                   <span
@@ -426,11 +381,7 @@
                   </b-col>
 
                   <b-col cols="2" class="p-0">
-                    <b-icon
-                      @click="send"
-                      class="msg-icon primary icon-size icon-top"
-                      icon="cursor-fill"
-                    ></b-icon>
+                    <b-icon @click="send" class="msg-icon primary icon-size icon-top" icon="cursor-fill"></b-icon>
                   </b-col>
                 </b-row>
                 <p v-if="checked" class="ml-5">
@@ -467,13 +418,7 @@
                   <b-row
                     ><b-col> Block Messages </b-col>
                     <b-col>
-                      <b-form-checkbox
-                        v-model="checked"
-                        name="check-button"
-                        class="primary"
-                        switch
-                      >
-                      </b-form-checkbox>
+                      <b-form-checkbox v-model="checked" name="check-button" class="primary" switch> </b-form-checkbox>
                     </b-col>
                   </b-row>
                 </li>
@@ -481,10 +426,7 @@
               </ul>
             </div>
           </b-col>
-          <b-col
-            v-if="newMsg == true && info == false"
-            class="p-0 col-xl-8 col-12"
-          >
+          <b-col v-if="newMsg == true && info == false" class="p-0 col-xl-8 col-12">
             <div class="new-msg back-image" style="margin-right: 17px">
               <div class="info-nav">
                 <b-row>
@@ -501,11 +443,7 @@
 
                     <br />
 
-                    <div
-                      class="table-responsive"
-                      v-if="showsearch == true"
-                      style="overflow-x: hidden"
-                    >
+                    <div class="table-responsive" v-if="showsearch == true" style="overflow-x: hidden">
                       <table v-if="resources.length" class="table">
                         <thead>
                           <tr>
@@ -516,11 +454,7 @@
                                 </b-col>
                                 <b-col>
                                   <span>
-                                    <input
-                                      type="checkbox"
-                                      @click="selectAll"
-                                      v-model="allSelected"
-                                    />
+                                    <input type="checkbox" @click="selectAll" v-model="allSelected" />
                                   </span>
                                 </b-col>
                               </b-row>
@@ -530,11 +464,7 @@
                         <tbody>
                           <tr></tr>
 
-                          <tr
-                            v-for="item in resultQuery"
-                            :key="item.key"
-                            class="p-2 message"
-                          >
+                          <tr v-for="item in resultQuery" :key="item.key" class="p-2 message">
                             <td>
                               <b-row>
                                 <b-col cols="6">
@@ -549,13 +479,7 @@
                                 </b-col>
                                 <b-col>
                                   <span>
-                                    <b-form-checkbox
-                                      class=""
-                                      id=""
-                                      name=""
-                                      v-model="userIds"
-                                      :value="item.id"
-                                    >
+                                    <b-form-checkbox class="" id="" name="" v-model="userIds" :value="item.id">
                                     </b-form-checkbox>
                                   </span>
                                 </b-col>
@@ -590,11 +514,7 @@
                   </b-col>
 
                   <b-col cols="2" class="p-0">
-                    <b-icon
-                      @click="send"
-                      class="msg-icon primary icon-size icon-top"
-                      icon="cursor-fill"
-                    ></b-icon>
+                    <b-icon @click="send" class="msg-icon primary icon-size icon-top" icon="cursor-fill"></b-icon>
                   </b-col>
                 </b-row>
               </div>
@@ -607,7 +527,7 @@
 </template>
 
 <script>
-import EmojiPicker from "vue-emoji-picker";
+import EmojiPicker from 'vue-emoji-picker';
 
 export default {
   components: {
@@ -615,217 +535,211 @@ export default {
   },
   data() {
     return {
-      input: "",
-      search: "",
+      input: '',
+      search: '',
 
       showsearch: true,
       selecteduser: false,
 
       searchQuery: null,
       resources1: [
-        { title: "ABE Attendance", uri: "aaaa.com", category: "a", icon: null },
+        { title: 'ABE Attendance', uri: 'aaaa.com', category: 'a', icon: null },
         {
-          title: "Accounting Services",
-          uri: "aaaa.com",
-          category: "a",
+          title: 'Accounting Services',
+          uri: 'aaaa.com',
+          category: 'a',
           icon: null,
         },
-        { title: "Administration", uri: "aaaa.com", category: "a", icon: null },
+        { title: 'Administration', uri: 'aaaa.com', category: 'a', icon: null },
         {
-          title: "Advanced Student Lookup",
-          uri: "bbbb.com",
-          category: "b",
+          title: 'Advanced Student Lookup',
+          uri: 'bbbb.com',
+          category: 'b',
           icon: null,
         },
-        { title: "Art & Sciences", uri: "bbbb.com", category: "b", icon: null },
+        { title: 'Art & Sciences', uri: 'bbbb.com', category: 'b', icon: null },
         {
-          title: "Auxiliares Services",
-          uri: "bbbb.com",
-          category: "b",
+          title: 'Auxiliares Services',
+          uri: 'bbbb.com',
+          category: 'b',
           icon: null,
         },
-        { title: "Basic Skills", uri: "cccc.com", category: "c", icon: null },
+        { title: 'Basic Skills', uri: 'cccc.com', category: 'c', icon: null },
         {
-          title: "Board of Trustees",
-          uri: "dddd.com",
-          category: "d",
+          title: 'Board of Trustees',
+          uri: 'dddd.com',
+          category: 'd',
           icon: null,
         },
       ],
       resources: [
         {
-          name: "blezour blec",
-          profile:
-            "https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg",
-          type: "person",
-          id: "1",
+          name: 'blezour blec',
+          profile: 'https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg',
+          type: 'person',
+          id: '1',
         },
         {
-          name: "itz blec blec",
-          profile:
-            "https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg",
-          type: "person",
-          id: "2",
+          name: 'itz blec blec',
+          profile: 'https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg',
+          type: 'person',
+          id: '2',
         },
 
         {
-          name: "Maxine Moffet",
-          profile:
-            "https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg",
-          type: "person",
-          id: "3",
+          name: 'Maxine Moffet',
+          profile: 'https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg',
+          type: 'person',
+          id: '3',
         },
 
         {
-          name: "Alicia kays",
-          profile:
-            "https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg",
-          type: "person",
-          id: "4",
+          name: 'Alicia kays',
+          profile: 'https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg',
+          type: 'person',
+          id: '4',
         },
 
         {
-          name: "Lorem Ipsum",
-          profile:
-            "https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg",
-          type: "person",
-          id: "5",
+          name: 'Lorem Ipsum',
+          profile: 'https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg',
+          type: 'person',
+          id: '5',
         },
         {
-          name: "blezour blec",
-          profile:
-            "https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg",
-          type: "person",
-          id: "6",
+          name: 'blezour blec',
+          profile: 'https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg',
+          type: 'person',
+          id: '6',
         },
       ],
       message: {
-        type: "",
-        name: "Louis Litt",
-        timeStamp: "",
-        message: "",
+        type: '',
+        name: 'Louis Litt',
+        timeStamp: '',
+        message: '',
       },
       newMsg: false,
       show: false,
       info: false,
       checked: false,
-      text: "",
+      text: '',
       selected: [],
       chats: [
         {
           id: 0,
-          type: "received",
-          name: "Louis Litt",
-          timeStamp: "3:00 PM",
+          type: 'received',
+          name: 'Louis Litt',
+          timeStamp: '3:00 PM',
 
           message:
-            "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Explicabo, quos? Fuga, nam dolores? Tempora, qui.",
+            'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Explicabo, quos? Fuga, nam dolores? Tempora, qui.',
         },
         {
           id: 1,
-          type: "sent",
-          name: "Louis Litt",
-          timeStamp: "3:00 PM",
+          type: 'sent',
+          name: 'Louis Litt',
+          timeStamp: '3:00 PM',
           message:
-            "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Explicabo, quos? Fuga, nam dolores? Tempora, qui.",
+            'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Explicabo, quos? Fuga, nam dolores? Tempora, qui.',
         },
         {
           id: 2,
-          type: "received",
-          name: "Louis Litt",
-          timeStamp: "3:00 PM",
+          type: 'received',
+          name: 'Louis Litt',
+          timeStamp: '3:00 PM',
           message:
-            "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Explicabo, quos? Fuga, nam dolores? Tempora, qui.",
+            'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Explicabo, quos? Fuga, nam dolores? Tempora, qui.',
         },
         {
           id: 3,
-          type: "sent",
-          name: "Louis Litt",
-          timeStamp: "3:00 PM",
+          type: 'sent',
+          name: 'Louis Litt',
+          timeStamp: '3:00 PM',
           message:
-            "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Explicabo, quos? Fuga, nam dolores? Tempora, qui.",
+            'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Explicabo, quos? Fuga, nam dolores? Tempora, qui.',
         },
         {
           id: 4,
-          type: "received",
-          name: "Louis Litt",
-          timeStamp: "3:00 PM",
+          type: 'received',
+          name: 'Louis Litt',
+          timeStamp: '3:00 PM',
           message:
-            "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Explicabo, quos? Fuga, nam dolores? Tempora, qui.",
+            'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Explicabo, quos? Fuga, nam dolores? Tempora, qui.',
         },
         {
           id: 5,
-          type: "sent",
-          name: "Louis Litt",
-          timeStamp: "3:00 PM",
+          type: 'sent',
+          name: 'Louis Litt',
+          timeStamp: '3:00 PM',
           message:
-            "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Explicabo, quos? Fuga, nam dolores? Tempora, qui.",
+            'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Explicabo, quos? Fuga, nam dolores? Tempora, qui.',
         },
       ],
       messages: [
         {
           id: 0,
-          name: "Blezour blec",
-          startMessage: "Hello Blec lola blec ",
-          timeStamp: "3:00pm",
-          messageCount: "10",
+          name: 'Blezour blec',
+          startMessage: 'Hello Blec lola blec ',
+          timeStamp: '3:00pm',
+          messageCount: '10',
         },
         {
           id: 1,
-          name: "Blec blezour blec",
-          startMessage: "yoo nigga sup lola blec",
-          timeStamp: "7:00am",
-          messageCount: "60",
+          name: 'Blec blezour blec',
+          startMessage: 'yoo nigga sup lola blec',
+          timeStamp: '7:00am',
+          messageCount: '60',
         },
 
         {
           id: 3,
-          name: "baba blecc ",
-          startMessage: "Lorem ipsum la lola blec vlr ",
-          timeStamp: "9:00am",
-          messageCount: "60",
+          name: 'baba blecc ',
+          startMessage: 'Lorem ipsum la lola blec vlr ',
+          timeStamp: '9:00am',
+          messageCount: '60',
         },
         {
           id: 4,
-          name: "Louis Litt",
-          startMessage: "Lorem  sit amet this is goo.",
-          timeStamp: "6:00am",
-          messageCount: "6",
+          name: 'Louis Litt',
+          startMessage: 'Lorem  sit amet this is goo.',
+          timeStamp: '6:00am',
+          messageCount: '6',
         },
         {
           id: 5,
-          name: "Louis Litt",
-          startMessage: "Lorem this   sit amet.",
-          timeStamp: "7:00am",
-          messageCount: "100",
+          name: 'Louis Litt',
+          startMessage: 'Lorem this   sit amet.',
+          timeStamp: '7:00am',
+          messageCount: '100',
         },
         {
           id: 6,
-          name: "Louis Litt",
-          startMessage: "Lorem ithe amet.",
-          timeStamp: "7:00am",
-          messageCount: "3",
+          name: 'Louis Litt',
+          startMessage: 'Lorem ithe amet.',
+          timeStamp: '7:00am',
+          messageCount: '3',
         },
         {
           id: 7,
-          name: "Louis Litt",
-          startMessage: "Lordol sit amet.",
-          timeStamp: "7:00am",
-          messageCount: "10",
+          name: 'Louis Litt',
+          startMessage: 'Lordol sit amet.',
+          timeStamp: '7:00am',
+          messageCount: '10',
         },
         {
           id: 8,
-          name: "Louis Litt",
-          startMessage: "Lorem vheck ",
-          timeStamp: "7:00am",
-          messageCount: "40",
+          name: 'Louis Litt',
+          startMessage: 'Lorem vheck ',
+          timeStamp: '7:00am',
+          messageCount: '40',
         },
         {
           id: 9,
-          name: "Louis Litt",
-          startMessage: "Lorem papa .",
-          timeStamp: "7:00am",
-          messageCount: "15",
+          name: 'Louis Litt',
+          startMessage: 'Lorem papa .',
+          timeStamp: '7:00am',
+          messageCount: '15',
         },
       ],
     };
@@ -849,7 +763,7 @@ export default {
     },
 
     selectAll() {
-      console.log("hekkko");
+      console.log('hekkko');
       this.userIds = [];
 
       var userr;
@@ -880,30 +794,30 @@ export default {
       console.log(this.checked);
     },
     newMessage(arg) {
-      console.log("hey");
+      console.log('hey');
       this.newMsg = arg;
       this.show = false;
     },
     send() {
-      this.message.type = "sent";
+      this.message.type = 'sent';
       let today = new Date();
       let h = today.getHours();
       let m = today.getMinutes();
-      this.message.timeStamp = h + ":" + m;
+      this.message.timeStamp = h + ':' + m;
       this.message.message = this.text;
       this.chats.push(this.message);
-      this.text = "";
+      this.text = '';
     },
   },
 
   computed: {
     resultQuery() {
       if (this.searchQuery) {
-        return this.resources.filter((item) => {
+        return this.resources.filter(item => {
           return this.searchQuery
             .toLowerCase()
-            .split(" ")
-            .every((v) => item.name.toLowerCase().includes(v));
+            .split(' ')
+            .every(v => item.name.toLowerCase().includes(v));
         });
       } else {
         return this.resources;
@@ -946,7 +860,7 @@ export default {
 }
 
 .back-image {
-  background-image: url("../../assets/message_back.jpg");
+  background-image: url('../../assets/message_back.jpg');
   background-repeat: no-repeat;
   background-size: cover;
 }
@@ -1309,7 +1223,7 @@ li {
   justify-content: space-between;
 }
 .emoji-picker .emojis:after {
-  content: "";
+  content: '';
   flex: auto;
 }
 .emoji-picker .emojis span {

@@ -19,26 +19,13 @@
         </b-col>
         <b-col>
           <div class="b-bottomn f-right">
-            <b-button
-              variant="success"
-              class="a-button-l"
-              @click="readNotifiactions(selected)"
-            >
-              Mark as Read</b-button
-            >
-            <b-button
-              @click="deleteAll(selected)"
-              variant="primary"
-              class="a-button-l duration ml-1"
-            >
-              Delete</b-button
-            >
+            <b-button variant="success" class="a-button-l" @click="readNotifiactions(selected)"> Mark as Read</b-button>
+            <b-button @click="deleteAll(selected)" variant="primary" class="a-button-l duration ml-1"> Delete</b-button>
           </div>
         </b-col>
       </b-row>
     </b-container>
-      <br />
-
+    <br />
 
     <div v-for="post in sendNotifications" :key="post.id">
       <b-container class="bb-bottom">
@@ -53,30 +40,16 @@
             @click="select"
           >
           </b-form-checkbox>
-          <b-avatar
-            size="4em"
-            class="mr-3 d-inline-block profile-pic"
-            variant="primary"
-            :src="post.image"
-          ></b-avatar>
+          <b-avatar size="4em" class="mr-3 d-inline-block profile-pic" variant="primary" :src="post.image"></b-avatar>
           <span class="mr-auto">
             {{ post.reference_type }}
             <p>{{ post.created_at }}</p>
           </span>
           <span class=" ">
             <div>
-              <b-dropdown
-                size="lg"
-                variant="link"
-                toggle-class="text-decoration-none"
-                no-caret
-              >
+              <b-dropdown size="lg" variant="link" toggle-class="text-decoration-none" no-caret>
                 <template #button-content>
-                  <b-icon
-                    icon="three-dots-vertical"
-                    animation="cylon-vertical"
-                    font-scale="1"
-                  ></b-icon>
+                  <b-icon icon="three-dots-vertical" animation="cylon-vertical" font-scale="1"></b-icon>
                 </template>
 
                 <b-dropdown-item href="#" @click="deleteOne(post.id)">
@@ -93,24 +66,20 @@
           {{ post.notification_text }}
         </p>
         <b-col v-if="loader" class="load">
-          <b-spinner
-            style="width: 7rem; height: 7rem;"
-            variant="primary"
-          ></b-spinner>
+          <b-spinner style="width: 7rem; height: 7rem;" variant="primary"></b-spinner>
         </b-col>
         <b-col v-if="!sendNotifications && !loader" class="load">
           <p>No notifications to show !!</p>
         </b-col>
       </b-container>
     </div>
-
   </div>
 </template>
 
 <script>
-import { mapActions, mapGetters } from "vuex";
+import { mapActions, mapGetters } from 'vuex';
 export default {
-  name: "notification",
+  name: 'notification',
   components: {},
   data() {
     return { selected: [] };
@@ -120,17 +89,17 @@ export default {
   },
   computed: {
     ...mapGetters({
-      sendNotifications: "businessFollowers/sendNotifications",
-      getLoader: "businessFollowers/getLoader",
+      sendNotifications: 'businessFollowers/sendNotifications',
+      getLoader: 'businessFollowers/getLoader',
     }),
   },
   methods: {
     // getting actions from store
     ...mapActions({
-      getNotifications: "businessFollowers/getNotifications",
-      readNotifiactions: "businessFollowers/readNotifiactions",
-      deleteNotifications: "businessFollowers/deleteNotifications",
-      deleteOne: "businessFollowers/deleteOne",
+      getNotifications: 'businessFollowers/getNotifications',
+      readNotifiactions: 'businessFollowers/readNotifiactions',
+      deleteNotifications: 'businessFollowers/deleteNotifications',
+      deleteOne: 'businessFollowers/deleteOne',
     }),
 
     select(notification, index) {
@@ -143,7 +112,7 @@ export default {
 
     // select all the notifications
     selectall() {
-      this.sendNotifications.forEach((element) => {
+      this.sendNotifications.forEach(element => {
         this.selected.push(element);
       });
     },
@@ -151,7 +120,7 @@ export default {
     deleteAll(data) {
       this.checked = false;
       let ids = [];
-      data.forEach((element) => {
+      data.forEach(element => {
         ids.push(element.id);
       });
       this.deleteNotifications(ids);
@@ -186,14 +155,10 @@ export default {
   margin-left: -20px;
 }
 
-
-
-
-.m-left-top{
+.m-left-top {
   margin-left: -15px;
 }
-.p-notifaction{
-
+.p-notifaction {
   padding: 30px;
 }
 </style>

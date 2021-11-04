@@ -96,8 +96,7 @@
           label-class="font-weight-bold pt-0"
           class="mb-0"
         >
-          <b-form-checkbox v-model="checked" name="check-button" switch>
-          </b-form-checkbox>
+          <b-form-checkbox v-model="checked" name="check-button" switch> </b-form-checkbox>
         </b-form-group>
       </b-container>
     </div>
@@ -110,7 +109,7 @@
 
 <script>
 export default {
-  name: "general"
+  name: 'general',
 };
 </script>
 
@@ -125,7 +124,6 @@ export default {
 }
 
 .b-bottomn {
- 
   margin-bottom: 30px;
   padding-bottom: 10px;
 }

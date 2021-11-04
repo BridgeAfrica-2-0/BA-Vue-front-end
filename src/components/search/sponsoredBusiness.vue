@@ -19,71 +19,32 @@
                 <br />
                 20k Community <br />
 
-                <span class="location">
-                  <b-icon-geo-alt class="ico"></b-icon-geo-alt> Douala cameroon
-                </span>
+                <span class="location"> <b-icon-geo-alt class="ico"></b-icon-geo-alt> Douala cameroon </span>
                 <br />
 
-                super best car seller in the world adipisicing elit. lorem epsep
-                this is <b-link>Read More</b-link>
+                super best car seller in the world adipisicing elit. lorem epsep this is <b-link>Read More</b-link>
               </p>
             </b-col>
 
             <b-col lg="4" md="12" xl="4" cols="12" sm="4">
               <div class="s-button">
                 <b-row>
-                  <b-col
-                    md="4"
-                    lg="12"
-                    xl="12"
-                    sm="12"
-                    cols="4"
-                    class="mt-2 text-center"
-                  >
-                    <b-button
-                      block
-                      size="sm"
-                      class="b-background shadow "
-                      variant="primary"
-                    >
+                  <b-col md="4" lg="12" xl="12" sm="12" cols="4" class="mt-2 text-center">
+                    <b-button block size="sm" class="b-background shadow " variant="primary">
                       <i class="fas fa-user-plus  fa-lg btn-icon "></i>
                       <span class="btn-com">Community</span>
                     </b-button>
                   </b-col>
 
-                  <b-col
-                    md="4"
-                    lg="12"
-                    xl="12"
-                    sm="12"
-                    cols="4"
-                    class="mt-2 text-center"
-                  >
-                    <b-button
-                      block
-                      size="sm"
-                      class="b-background shadow "
-                      variant="primary"
-                    >
+                  <b-col md="4" lg="12" xl="12" sm="12" cols="4" class="mt-2 text-center">
+                    <b-button block size="sm" class="b-background shadow " variant="primary">
                       <i class="fas fa-envelope   fa-lg btn-icon "></i>
                       <span class="btn-text">Message</span>
                     </b-button>
                   </b-col>
 
-                  <b-col
-                    md="4"
-                    lg="12"
-                    xl="12"
-                    sm="12"
-                    cols="4"
-                    class="mt-2 text-center"
-                  >
-                    <b-button
-                      block
-                      size="sm"
-                      class="b-background shadow "
-                      variant="primary"
-                    >
+                  <b-col md="4" lg="12" xl="12" sm="12" cols="4" class="mt-2 text-center">
+                    <b-button block size="sm" class="b-background shadow " variant="primary">
                       <i class="fas fa-map-marked-alt  fa-lg btn-icon "></i>
                       <span class="btn-text">Direction</span>
                     </b-button>
@@ -100,7 +61,7 @@
 
 <script>
 export default {
-  props: ["title", "image"],
+  props: ['title', 'image'],
 
   data() {
     return {
@@ -109,30 +70,30 @@ export default {
         autoplay: true,
         perPage: 1,
         width: 800,
-        height: "17rem",
-        gap: "1rem",
-        type: "loop",
+        height: '17rem',
+        gap: '1rem',
+        type: 'loop',
         perMove: 1,
         pagination: false,
 
         margin: {
-          right: "5rem",
-          left: "5rem"
+          right: '5rem',
+          left: '5rem',
         },
 
         breakpoints: {
-          "760": {
+          '760': {
             perPage: 1,
-            gap: "1rem"
+            gap: '1rem',
           },
-          "1500": {
+          '1500': {
             perPage: 1,
-            gap: "1rem"
-          }
-        }
-      }
+            gap: '1rem',
+          },
+        },
+      },
     };
-  }
+  },
 };
 </script>
 
@@ -203,13 +164,13 @@ export default {
     color: black;
 
     line-height: 35px;
-    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   }
 
   .textt {
     color: #000;
 
-    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
     font-weight: normal;
     font-size: 12px;
     line-height: 30px;
@@ -256,13 +217,13 @@ export default {
     color: black;
 
     line-height: 35px;
-    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   }
 
   .textt {
     color: #000;
 
-    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
     font-weight: normal;
     font-size: 14px;
     line-height: 30px;

@@ -24,13 +24,13 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from "vuex";
+import { mapGetters, mapActions } from 'vuex';
 
-import Sponsor from "@/components/search/sponsoredBusiness";
-import { loader, search } from "@/mixins";
+import Sponsor from '@/components/search/sponsoredBusiness';
+import { loader, search } from '@/mixins';
 
-import Post from "@/components/search/posts";
-import Loader from "@/components/Loader";
+import Post from '@/components/search/posts';
+import Loader from '@/components/Loader';
 
 export default {
   mixins: [loader, search],
@@ -46,18 +46,18 @@ export default {
 
   computed: {
     ...mapGetters({
-      posts: "search/GET_RESULT_POST",
-      getPage: "search/GET_CURRENT_PAGINATION_PAGE",
-      getStack: "search/STACK_VALUE",
+      posts: 'search/GET_RESULT_POST',
+      getPage: 'search/GET_CURRENT_PAGINATION_PAGE',
+      getStack: 'search/STACK_VALUE',
     }),
-    
-    loadingIsActive: function () {
+
+    loadingIsActive: function() {
       return this.loaderState && this.posts.length ? true : false;
     },
   },
 
   mounted() {
-    window.addEventListener("scroll", this.onscroll);
+    window.addEventListener('scroll', this.onscroll);
   },
 
   created() {
@@ -66,16 +66,16 @@ export default {
 
   methods: {
     ...mapActions({
-      postStore: "search/FIND_POST",
-      page: "search/SET_CURRENT_PAGINATION_PAGE",
-      setCallback: "search/SET_CURRENT_PAGINATE_CALLBACK",
-      stack: "search/STACK_VALUE",
+      postStore: 'search/FIND_POST',
+      page: 'search/SET_CURRENT_PAGINATION_PAGE',
+      setCallback: 'search/SET_CURRENT_PAGINATE_CALLBACK',
+      stack: 'search/STACK_VALUE',
     }),
 
-    init: async function () {
+    init: async function() {
       this.stack({
         data: {
-          keyword: "",
+          keyword: '',
         },
         page: 1,
       });
@@ -85,7 +85,7 @@ export default {
 
       const request = await this.$repository.search.findPostByKeyword({
         data: {
-          keyword: "",
+          keyword: '',
         },
         page: 1,
       });
@@ -100,18 +100,13 @@ export default {
       this.setLoaderState(false);
     },
 
-    onscroll: async function (event) {
+    onscroll: async function(event) {
       const scrollY = window.scrollY;
       const visible = document.documentElement.clientHeight;
       const pageHeight = document.documentElement.scrollHeight;
       const bottomOfPage = visible + scrollY >= pageHeight;
 
-      if (
-        this.callback &&
-        (bottomOfPage || pageHeight < visible) &&
-        !this.loaderState &&
-        !this.haveNotData
-      ) {
+      if (this.callback && (bottomOfPage || pageHeight < visible) && !this.loaderState && !this.haveNotData) {
         this.setLoaderState(true);
 
         const request = await this.callback({

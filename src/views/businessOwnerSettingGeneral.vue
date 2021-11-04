@@ -60,23 +60,23 @@
 </template>
 
 <script>
-import navbar from "@/components/navbar";
+import navbar from '@/components/navbar';
 //import Business from "../components/businessf/business";
-import General from "../components/businessf/settings/general";
+import General from '../components/businessf/settings/general';
 
-import Roles from "../components/businessf/settings/roles";
+import Roles from '../components/businessf/settings/roles';
 
-import Info from "../components/businessf/settings/info";
+import Info from '../components/businessf/settings/info';
 
-import Website from "../components/businessf/settings/website";
+import Website from '../components/businessf/settings/website';
 
-import Payment from "../components/businessf/settings/payment";
+import Payment from '../components/businessf/settings/payment';
 
-import Blocking from "../components/businessf/settings/blocking";
+import Blocking from '../components/businessf/settings/blocking';
 
-import Footer from "../components/footer";
+import Footer from '../components/footer';
 export default {
-  name: "businessOwnerSettingBlocking",
+  name: 'businessOwnerSettingBlocking',
   components: {
     navbar,
     General,
@@ -86,13 +86,13 @@ export default {
     Payment,
     Roles,
 
-    Footer
+    Footer,
   },
   data() {
     return {};
   },
   computed: {},
-  methods: {}
+  methods: {},
 };
 </script>
 

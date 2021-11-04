@@ -5,11 +5,11 @@
 </template>
 
 <script>
-import Business from "../businessmain";
+import Business from '../businessmain';
 export default {
   components: {
-    Business
-  }
+    Business,
+  },
 };
 </script>
 

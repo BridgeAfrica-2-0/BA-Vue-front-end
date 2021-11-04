@@ -30,21 +30,12 @@
       <b-col cols="4">
         <b-row>
           <b-col>
-            <b-dropdown
-              id="dropdown-1"
-              text="Contact"
-              class="m-md-2 drop"
-              variant="primary"
-              size="sm"
-            >
+            <b-dropdown id="dropdown-1" text="Contact" class="m-md-2 drop" variant="primary" size="sm">
               <b-dropdown-item>
                 <b-icon icon="chat-fill" variant="primary"></b-icon>
                 Message</b-dropdown-item
               >
-              <b-dropdown-item>
-                <b-icon icon="geo-alt" variant="primary"></b-icon> Get
-                Direction</b-dropdown-item
-              >
+              <b-dropdown-item> <b-icon icon="geo-alt" variant="primary"></b-icon> Get Direction</b-dropdown-item>
             </b-dropdown>
           </b-col>
           <b-col>

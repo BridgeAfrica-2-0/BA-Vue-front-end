@@ -35,18 +35,9 @@
                 <b-icon icon="book-fill" class="primary"></b-icon> Studied at:
                 {{ lastEducation }}
               </p>
-              <p>
-                <b-icon icon="house-fill" class="primary"></b-icon> Home Town
-                Name: {{ homeTown }}
-              </p>
-              <p>
-                <b-icon icon="geo-alt-fill" class="primary"></b-icon> Current
-                City Name: {{ cityName }}
-              </p>
-              <p>
-                <b-icon icon="people-fill" class="primary"></b-icon> Followed
-                by: {{ followed }}
-              </p>
+              <p><b-icon icon="house-fill" class="primary"></b-icon> Home Town Name: {{ homeTown }}</p>
+              <p><b-icon icon="geo-alt-fill" class="primary"></b-icon> Current City Name: {{ cityName }}</p>
+              <p><b-icon icon="people-fill" class="primary"></b-icon> Followed by: {{ followed }}</p>
               <p>
                 <b-icon icon="phone-fill" class="primary"></b-icon>
                 {{ telephone }}
@@ -60,18 +51,9 @@
                 <span class="ml-2 btn-item">Open Now</span>
               </p>
               <p>
-                <b-dropdown
-                  size="sm"
-                  variant="outline"
-                  text="6:00AM - 7:00PM"
-                  class="ml-2"
-                >
-                  <b-dropdown-item-button
-                    >6:00AM - 7:00PM</b-dropdown-item-button
-                  >
-                  <b-dropdown-item-button
-                    >6:00AM - 7:00PM</b-dropdown-item-button
-                  >
+                <b-dropdown size="sm" variant="outline" text="6:00AM - 7:00PM" class="ml-2">
+                  <b-dropdown-item-button>6:00AM - 7:00PM</b-dropdown-item-button>
+                  <b-dropdown-item-button>6:00AM - 7:00PM</b-dropdown-item-button>
                 </b-dropdown>
               </p>
             </b-card-text>
@@ -88,25 +70,25 @@ export default {
     return {
       edit1: false,
       edit2: false,
-      leftTitle: "About Mapoure Agrobusiness",
+      leftTitle: 'About Mapoure Agrobusiness',
       textToo:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit.\n" +
-        "              Asperiores temporibus, rerum iste id obcaecati quae odit accusamus\n" +
-        "              reprehenderit, ipsa nam laudantium pariatur. Harum, soluta. Nam\n" +
-        "              accusantium hic numquam architecto debitis. Lorem ipsum dolor sit\n" +
-        "              amet consectetur adipisicing elit. Asperiores temporibus, rerum\n" +
-        "              iste id obcaecati quae odit accusamus reprehenderit, ipsa nam\n" +
-        "              laudantium pariatur. Harum, soluta. Nam accusantium hic numquam\n" +
-        "              architecto debitis. Asperiores temporibus, rerum iste id obcaecati\n" +
-        "              quae odit accusamus reprehenderit, ipsa nam laudantium pariatur.\n" +
-        "              Harum, soluta. Nam accusantium hic numquam architecto debitis.",
-      workedAt: "Current or Last Organization",
-      lastEducation: "Last Education",
-      homeTown: "Dummy",
-      cityName: "Dummy",
-      followed: "525",
-      telephone: "+1 (234) 567-8974",
-      email: "info@businessname.com"
+        'Lorem ipsum dolor sit amet consectetur adipisicing elit.\n' +
+        '              Asperiores temporibus, rerum iste id obcaecati quae odit accusamus\n' +
+        '              reprehenderit, ipsa nam laudantium pariatur. Harum, soluta. Nam\n' +
+        '              accusantium hic numquam architecto debitis. Lorem ipsum dolor sit\n' +
+        '              amet consectetur adipisicing elit. Asperiores temporibus, rerum\n' +
+        '              iste id obcaecati quae odit accusamus reprehenderit, ipsa nam\n' +
+        '              laudantium pariatur. Harum, soluta. Nam accusantium hic numquam\n' +
+        '              architecto debitis. Asperiores temporibus, rerum iste id obcaecati\n' +
+        '              quae odit accusamus reprehenderit, ipsa nam laudantium pariatur.\n' +
+        '              Harum, soluta. Nam accusantium hic numquam architecto debitis.',
+      workedAt: 'Current or Last Organization',
+      lastEducation: 'Last Education',
+      homeTown: 'Dummy',
+      cityName: 'Dummy',
+      followed: '525',
+      telephone: '+1 (234) 567-8974',
+      email: 'info@businessname.com',
     };
   },
   methods: {
@@ -131,8 +113,8 @@ export default {
      */
     validate(idForm) {
       this.$bvModal.hide(idForm);
-    }
-  }
+    },
+  },
 };
 </script>
 

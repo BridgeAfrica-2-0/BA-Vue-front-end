@@ -1,31 +1,27 @@
 <template>
   <div>
-    <div
-      v-for="value in business_around"
-      v-bind:key="value.name"
-      class="people-style shadow"
-    >
+    <div v-for="value in business_around" v-bind:key="value.name" class="people-style shadow">
       <b-row>
         <b-col md="4" xl="3" lg="3" cols="5" sm="3">
           <div class="center-img">
             <splide :options="options" class="r-image">
               <splide-slide cl>
-                <img :src="value.logo_path" class="r-image" />      
+                <img :src="value.logo_path" class="r-image" />
               </splide-slide>
             </splide>
           </div>
         </b-col>
         <b-col md="8" cols="7" lg="7" xl="5" sm="5">
-           <div class="title textt bold username"> <strong> {{ value.name }}  </strong></div>
-          <p class="textt"  >
+          <div class="title textt bold username">
+            <strong> {{ value.name }} </strong>
+          </div>
+          <p class="textt">
             <br />
             {{ value.category }}
             <br />
             {{ value.followers }} Community <br />
 
-            <span class="location">
-              <b-icon-geo-alt class="ico"></b-icon-geo-alt> Douala cameroon
-            </span>
+            <span class="location"> <b-icon-geo-alt class="ico"></b-icon-geo-alt> Douala cameroon </span>
             <br />
 
             <read-more
@@ -43,58 +39,22 @@
         <b-col lg="12" xl="4" md="12" cols="12" sm="4">
           <div class="s-button">
             <b-row>
-              <b-col
-                md="4"
-                lg="4"
-                xl="12"
-                sm="12"
-                cols="4"
-                class="mt-2 text-center"
-              >
-                <b-button
-                  block
-                  size="sm"
-                  class="b-background shadow"
-                  variant="primary"
-                >
+              <b-col md="4" lg="4" xl="12" sm="12" cols="4" class="mt-2 text-center">
+                <b-button block size="sm" class="b-background shadow" variant="primary">
                   <i class="fas fa-user-plus fa-lg btn-icon"></i>
                   <span class="btn-com">Community</span>
                 </b-button>
               </b-col>
 
-              <b-col
-                md="4"
-                lg="4"
-                xl="12"
-                sm="12"
-                cols="4"
-                class="mt-2 text-center"
-              >
-                <b-button
-                  block
-                  size="sm"
-                  class="b-background shadow"
-                  variant="primary"
-                >
+              <b-col md="4" lg="4" xl="12" sm="12" cols="4" class="mt-2 text-center">
+                <b-button block size="sm" class="b-background shadow" variant="primary">
                   <i class="fas fa-envelope fa-lg btn-icon"></i>
                   <span class="btn-text">Message</span>
                 </b-button>
               </b-col>
 
-              <b-col
-                md="4"
-                lg="4"
-                xl="12"
-                sm="12"
-                cols="4"
-                class="mt-2 text-center"
-              >
-                <b-button
-                  block
-                  size="sm"
-                  class="b-background shadow"
-                  variant="primary"
-                >
+              <b-col md="4" lg="4" xl="12" sm="12" cols="4" class="mt-2 text-center">
+                <b-button block size="sm" class="b-background shadow" variant="primary">
                   <i class="fas fa-map-marked-alt fa-lg btn-icon"></i>
                   <span class="btn-text">Direction</span>
                 </b-button>
@@ -109,7 +69,7 @@
 
 <script>
 export default {
-  props: ["title", "image"],
+  props: ['title', 'image'],
 
   data() {
     return {
@@ -119,34 +79,28 @@ export default {
         perPage: 1,
         pagination: false,
 
-        type: "loop",
-        perMove: 1
-      }
+        type: 'loop',
+        perMove: 1,
+      },
     };
   },
 
   computed: {
     business_around() {
       return this.$store.state.auth.businessAround;
-    }
-  }
+    },
+  },
 };
 </script>
 
 <style scoped>
-
-
- .username {
-    
-    text-overflow: ellipsis;
-    overflow: hidden;
-    width: 100%;
-    height: 1.6em;
-    white-space: nowrap;
-  }
-
-
-
+.username {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  width: 100%;
+  height: 1.6em;
+  white-space: nowrap;
+}
 
 @media only screen and (min-width: 768px) {
   .btn-text {
@@ -214,13 +168,13 @@ export default {
     color: black;
 
     line-height: 35px;
-    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   }
 
   .textt {
     color: #000;
 
-    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
     font-weight: normal;
     font-size: 12px;
     line-height: 30px;
@@ -267,13 +221,13 @@ export default {
     color: black;
 
     line-height: 35px;
-    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   }
 
   .textt {
     color: #000;
 
-    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
     font-weight: normal;
     font-size: 14px;
     line-height: 30px;
@@ -399,8 +353,8 @@ export default {
 }
 </style>
 
-<style >
+<style>
 .readmore p {
-    margin: 0px !important;
+  margin: 0px !important;
 }
 </style>

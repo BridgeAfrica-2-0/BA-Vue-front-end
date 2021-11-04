@@ -1,15 +1,5 @@
 <template>
   <div>
-
-
-
-
-
-
-
-
-
-
     <div class="people-style border shadow">
       <b-row>
         <b-col cols="6">
@@ -30,8 +20,7 @@
             <strong> Location :</strong> cameroon <br />
             <strong> Keyword :</strong> car,swag <br />
 
-            <strong>About:</strong> super best car seller in the world
-            adipisicing elit. <b-link>Read More</b-link>
+            <strong>About:</strong> super best car seller in the world adipisicing elit. <b-link>Read More</b-link>
           </p>
         </b-col>
       </b-row>
@@ -57,15 +46,6 @@
       </b-row>
     </div>
 
-
-
-
-
-
-
-
-
-
     <div class="people-style border shadow">
       <b-row>
         <b-col cols="6">
@@ -86,8 +66,7 @@
             <strong> Location :</strong> cameroon <br />
             <strong> Keyword :</strong> car,swag <br />
 
-            <strong>About:</strong> super best car seller in the world
-            adipisicing elit. <b-link>Read More</b-link>
+            <strong>About:</strong> super best car seller in the world adipisicing elit. <b-link>Read More</b-link>
           </p>
         </b-col>
       </b-row>
@@ -113,8 +92,6 @@
       </b-row>
     </div>
 
-
-
     <div class="people-style border shadow">
       <b-row>
         <b-col cols="6">
@@ -135,8 +112,7 @@
             <strong> Location :</strong> cameroon <br />
             <strong> Keyword :</strong> car,swag <br />
 
-            <strong>About:</strong> super best car seller in the world
-            adipisicing elit. <b-link>Read More</b-link>
+            <strong>About:</strong> super best car seller in the world adipisicing elit. <b-link>Read More</b-link>
           </p>
         </b-col>
       </b-row>
@@ -161,23 +137,12 @@
         </b-col>
       </b-row>
     </div>
-
-
-
-
-
-
-
-
-
-
-
   </div>
 </template>
 
 <script>
 export default {
-  props: ["title", "image"]
+  props: ['title', 'image'],
 };
 </script>
 
@@ -230,8 +195,7 @@ export default {
 
   border-bottom-right-radius: 5px;
 }
-.r-image{
-
+.r-image {
   border-radius: 8px;
 }
 

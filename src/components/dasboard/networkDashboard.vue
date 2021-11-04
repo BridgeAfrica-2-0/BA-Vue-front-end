@@ -3,10 +3,7 @@
     <b-card class="border shadow ">
       <span>
         <h4>
-          <img
-            class="img-fluid picture logo-img"
-            src="@/assets/icons/network.png"
-          />
+          <img class="img-fluid picture logo-img" src="@/assets/icons/network.png" />
           NETWORKS
           <h6 style="float:right" class="see-all-link">666 result found</h6>
         </h4>
@@ -41,24 +38,14 @@
                   <div class="s-button">
                     <b-row>
                       <b-col md="12" cols="4" sm="4" class="mt-md-2">
-                        <b-button
-                          block
-                          size="sm"
-                          class="b-background"
-                          variant="primary"
-                        >
+                        <b-button block size="sm" class="b-background" variant="primary">
                           <b-icon class="ico" icon="plus-circle"> </b-icon>
                           Community
                         </b-button>
                       </b-col>
 
                       <b-col md="12" sm="4" cols="4" class="mt-md-2">
-                        <b-button
-                          block
-                          size="sm"
-                          class="b-background"
-                          variant="primary"
-                        >
+                        <b-button block size="sm" class="b-background" variant="primary">
                           <b-icon class="ico" icon="chat"> </b-icon> Message
                         </b-button>
                       </b-col>
@@ -79,7 +66,7 @@
 
 <script>
 export default {
-  props: ["title", "image"]
+  props: ['title', 'image'],
 };
 </script>
 

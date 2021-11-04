@@ -5,9 +5,7 @@
         <img src="../assets/logo.png" class="image" alt="" />
         <div class="step-2">
           <b-card-text class="w-75 mx-auto mt-5">
-            <b-alert show v-if="!match" variant="danger"
-              >Passwords do not match</b-alert
-            >
+            <b-alert show v-if="!match" variant="danger">Passwords do not match</b-alert>
             <div class="row">
               <div class="col text-left">Create New Password</div>
             </div>
@@ -16,31 +14,15 @@
             <b-form-group id="input-group-4">
               <md-field>
                 <label for="password1"> Password</label>
-                <md-input
-                  type="password"
-                  name="password1"
-                  id="password1"
-                  v-model="password1"
-                  required
-                />
+                <md-input type="password" name="password1" id="password1" v-model="password1" required />
               </md-field>
 
               <md-field>
                 <label for="password2"> Confirm Password</label>
-                <md-input
-                  type="password"
-                  name="password2"
-                  id="password2"
-                  v-model="password2"
-                  required
-                />
+                <md-input type="password" name="password2" id="password2" v-model="password2" required />
               </md-field>
             </b-form-group>
-            <b-button
-              class="btnz"
-              @click.prevent="next"
-              variant="outline-primary"
-            >
+            <b-button class="btnz" @click.prevent="next" variant="outline-primary">
               Finish
             </b-button>
           </b-form>
@@ -51,29 +33,29 @@
 </template>
 
 <script>
-import axios from "axios";
+import axios from 'axios';
 export default {
   data() {
     return {
-      code: "",
-      password1: "",
-      password2: "",
-      match: true
+      code: '',
+      password1: '',
+      password2: '',
+      match: true,
     };
   },
   methods: {
     change(e) {
       e.preventDefault();
-      window.location.href = "recoverPass1";
+      window.location.href = 'recoverPass1';
     },
     recover(e) {
       e.preventDefault();
       if (this.password1 == this.password2) {
-        window.location.href = "login";
+        window.location.href = 'login';
       } else {
         this.match = false;
-        this.password1 = "";
-        this.password2 = "";
+        this.password1 = '';
+        this.password2 = '';
       }
     },
 
@@ -81,13 +63,12 @@ export default {
       if (this.password1 == this.password2) {
         console.log(this.$store.state.auth.passwordToken.user.phone);
 
-        const resetpasswordUrl =
-          "user/resetpassword/" + this.$store.state.auth.passwordToken.user.id;
+        const resetpasswordUrl = 'user/resetpassword/' + this.$store.state.auth.passwordToken.user.id;
         axios
           .post(resetpasswordUrl, {
             password: this.password1,
             password_confirmation: this.password2,
-            phone: this.$store.state.auth.passwordToken.user.phone
+            phone: this.$store.state.auth.passwordToken.user.phone,
           })
           .then(response => {
             if (response.status === 200) {
@@ -96,13 +77,12 @@ export default {
               setTimeout(function() {}, delayInMilliseconds);
 
               this.flashMessage.show({
-                status: "success",
-                title: "Password Reset Success",
-                message:
-                  "You have successfully Reset your password you will be redirected in a second"
+                status: 'success',
+                title: 'Password Reset Success',
+                message: 'You have successfully Reset your password you will be redirected in a second',
               });
 
-              this.$router.push({ name: "Login" });
+              this.$router.push({ name: 'Login' });
             } else {
               console.log(response.data);
             }
@@ -113,19 +93,19 @@ export default {
               console.log(err.response.data.message);
 
               this.flashMessage.show({
-                status: "error",
+                status: 'error',
 
-                message: err.response.data.message
+                message: err.response.data.message,
               });
             }
           });
       } else {
         this.match = false;
-        this.password1 = "";
-        this.password2 = "";
+        this.password1 = '';
+        this.password2 = '';
       }
-    }
-  }
+    },
+  },
 };
 </script>
 

@@ -17,10 +17,10 @@
 export default {
   data() {
     return {
-      defaultbio: "no additional infomation to show !!"
+      defaultbio: 'no additional infomation to show !!',
     };
   },
-  methods: {}
+  methods: {},
 };
 </script>
 

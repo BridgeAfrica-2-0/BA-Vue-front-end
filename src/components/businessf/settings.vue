@@ -4,11 +4,11 @@
       <div class="">
         <h5 class="a-text"><b-icon-gear></b-icon-gear> Business Settings</h5>
       </div>
-      <hr class="solid">
+      <hr class="solid" />
 
       <div class="bv-example-row">
         <div>
-          <b-tabs pills  vertical>
+          <b-tabs pills vertical>
             <b-tab active>
               <template slot="title" class="t-color">
                 <h6 class="t-color">General</h6>
@@ -65,20 +65,20 @@
 </template>
 
 <script>
-import General from "@/components/businessf/settings/general";
+import General from '@/components/businessf/settings/general';
 
-import Roles from "@/components/businessf/settings/roles";
+import Roles from '@/components/businessf/settings/roles';
 
-import Info from "@/components/businessf/settings/info";
+import Info from '@/components/businessf/settings/info';
 
-import Website from "@/components/businessf/settings/website";
+import Website from '@/components/businessf/settings/website';
 
-import Payment from "@/components/businessf/settings/payment";
+import Payment from '@/components/businessf/settings/payment';
 
-import Blocking from "@/components/businessf/settings/blocking";
+import Blocking from '@/components/businessf/settings/blocking';
 
 export default {
-  name: "settings",
+  name: 'settings',
   components: {
     General,
     Roles,
@@ -86,13 +86,13 @@ export default {
     Info,
     Website,
     Payment,
-    Blocking
+    Blocking,
   },
   data() {
     return {};
   },
   computed: {},
-  methods: {}
+  methods: {},
 };
 </script>
 

@@ -1,5 +1,5 @@
-import Businesses from '@/components/follower/tabs/businesses'; import Bussiness
-from '@/components/owner/tabs/bussiness';
+import Businesses from '@/components/follower/tabs/businesses'; import Bussiness from
+'@/components/owner/tabs/bussiness';
 
 <template>
   <b-container fluid="" class="text-justify ">
@@ -40,20 +40,16 @@ from '@/components/owner/tabs/bussiness';
               <p><b-icon icon="globe" variant="primary"></b-icon> Private</p>
             </b-col>
             <b-col>
-              <p>
-                <b-icon icon="people-fill" variant="primary"></b-icon> 3.5K
-                Members
-              </p>
+              <p><b-icon icon="people-fill" variant="primary"></b-icon> 3.5K Members</p>
             </b-col>
           </b-row>
         </b-container>
 
         <h6 class="mt-2 font-weight-bolder">About</h6>
         <p class="text-justify">
-          Lorem Ipsum is simply dummy text of the printing and typesetting
-          industry. Lorem Ipsum has been the industry's standard dummy text ever
-          since the 1500s, when an unknown printer took a galley of type and
-          scrambled it to make a type specimen book.
+          Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
+          standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to
+          make a type specimen book.
           <span class="d-inline-block float-right">
             <a href="#">lire la Suite</a>
           </span>
@@ -73,10 +69,10 @@ from '@/components/owner/tabs/bussiness';
 </template>
 
 <script>
-import SidebarCommunity from "@/components/businessf/tabs/owner/networks/sidebarcommunity";
+import SidebarCommunity from '@/components/businessf/tabs/owner/networks/sidebarcommunity';
 
 export default {
-  name: "parent",
+  name: 'parent',
 
   components: {
     SidebarCommunity,

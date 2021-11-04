@@ -238,12 +238,7 @@
           </b-col>
         </b-row>
 
-        <b-modal
-          v-model="viewProduct"
-          hide-footer
-          title="Product Details"
-          size="xl"
-        >
+        <b-modal v-model="viewProduct" hide-footer title="Product Details" size="xl">
           <b-row>
             <b-col cols="5" class="mx-auto">
               <b-img
@@ -262,66 +257,33 @@
                   <b-button variant="primary">Message</b-button>
                 </b-col>
                 <b-col>
-                  <b-button variant="outline-dark" class="float-right"
-                    >Checkout on website</b-button
-                  >
+                  <b-button variant="outline-dark" class="float-right">Checkout on website</b-button>
                 </b-col>
               </b-row>
               <hr />
               <h5>Product Detail</h5>
               <p>
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                Corporis quod, reprehenderit neque atque recusandae laborum quia
-                vel, assumenda repellendus rem ab ex, odio aperiam quidem id
-                deleniti commodi consequatur optio.
+                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Corporis quod, reprehenderit neque atque
+                recusandae laborum quia vel, assumenda repellendus rem ab ex, odio aperiam quidem id deleniti commodi
+                consequatur optio.
               </p>
               <hr />
               <b-row>
                 <b-col class="">
-                  <span class="mr-3"
-                    ><b-icon
-                      icon="suit-heart"
-                      variant="primary"
-                      aria-hidden="true"
-                    ></b-icon>
-                    23</span
-                  >
-                  <span
-                    ><b-icon
-                      icon="chat-fill"
-                      variant="primary"
-                      aria-hidden="true"
-                    ></b-icon>
-                    123</span
-                  >
+                  <span class="mr-3"><b-icon icon="suit-heart" variant="primary" aria-hidden="true"></b-icon> 23</span>
+                  <span><b-icon icon="chat-fill" variant="primary" aria-hidden="true"></b-icon> 123</span>
                 </b-col>
                 <b-col class="">
-                  <b-icon
-                    class="float-right"
-                    icon="share-fill"
-                    variant="primary"
-                    aria-hidden="true"
-                  ></b-icon>
+                  <b-icon class="float-right" icon="share-fill" variant="primary" aria-hidden="true"></b-icon>
                 </b-col>
               </b-row>
               <br />
               <b-row class="mt-2">
                 <b-col>
-                  <b-avatar
-                    variant="info"
-                    src="https://placekitten.com/300/300"
-                    size="2rem"
-                  ></b-avatar>
-                  <input
-                    placeholder="Post a Comment"
-                    class="comment"
-                    type="text"
-                  />
+                  <b-avatar variant="info" src="https://placekitten.com/300/300" size="2rem"></b-avatar>
+                  <input placeholder="Post a Comment" class="comment" type="text" />
 
-                  <fas-icon
-                    class="primary send-cmt"
-                    :icon="['fas', 'paper-plane']"
-                  />
+                  <fas-icon class="primary send-cmt" :icon="['fas', 'paper-plane']" />
                 </b-col>
               </b-row>
               <Comment />
@@ -340,15 +302,15 @@
 </template>
 
 <script>
-import Comment from "@/components/comment";
+import Comment from '@/components/comment';
 export default {
   data() {
     return {
-      viewProduct: false
+      viewProduct: false,
     };
   },
   components: {
-    Comment
+    Comment,
   },
   methods: {
     /**
@@ -358,8 +320,8 @@ export default {
      */
     productDetails() {
       this.viewProduct = true;
-    }
-  }
+    },
+  },
 };
 </script>
 

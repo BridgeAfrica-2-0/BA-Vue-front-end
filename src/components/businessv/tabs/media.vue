@@ -14,13 +14,13 @@
 </template>
 
 <script>
-import Posts from "../posts";
-import Album from "../albums";
+import Posts from '../posts';
+import Album from '../albums';
 export default {
   components: {
     Posts,
-    Album
-  }
+    Album,
+  },
 };
 </script>
 

@@ -8,13 +8,13 @@
 </template>
 
 <script>
-import Posts from "./tabs/posts";
-import Albums from "./tabs/album";
+import Posts from './tabs/posts';
+import Albums from './tabs/album';
 export default {
   components: {
     Posts,
-    Albums
-  }
+    Albums,
+  },
 };
 </script>
 

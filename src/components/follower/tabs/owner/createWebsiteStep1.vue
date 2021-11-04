@@ -8,8 +8,7 @@
               Create personalised website for your business
             </h2>
             <p class="my-2">
-              Start with a template and male it your own, with easy drag and
-              drop & 1000s of design features
+              Start with a template and male it your own, with easy drag and drop & 1000s of design features
             </p>
             <br /><br />
             <b-col class="my-3" cols="8" offset-md="2">
@@ -31,12 +30,7 @@
         <p class="float-right">
           <span>Show: &nbsp;</span>
           <span class="d-inline-block">
-            <b-form-select
-              class="d-inline-block"
-              v-model="selected"
-              :options="options"
-              size="sm"
-            ></b-form-select>
+            <b-form-select class="d-inline-block" v-model="selected" :options="options" size="sm"></b-form-select>
           </span>
         </p>
       </b-col>
@@ -46,14 +40,10 @@
         <b-nav pills fill>
           <b-nav-item v-on:click="filter('all')">All</b-nav-item>
           <b-nav-item v-on:click="shuffle">Shuffle</b-nav-item>
-          <b-nav-item v-on:click="filter('agriculture')"
-            >Agriculture</b-nav-item
-          >
+          <b-nav-item v-on:click="filter('agriculture')">Agriculture</b-nav-item>
           <b-nav-item v-on:click="filter('business')">Business</b-nav-item>
           <b-nav-item v-on:click="filter('event')">Event</b-nav-item>
-          <b-nav-item v-on:click="filter('personalcare')"
-            >Personal Care</b-nav-item
-          >
+          <b-nav-item v-on:click="filter('personalcare')">Personal Care</b-nav-item>
           <b-nav-item v-on:click="filter('pharmacy')">Pharmacy</b-nav-item>
           <b-nav-item v-on:click="filter('food')">Food</b-nav-item>
           <b-nav-item v-on:click="filter('other')">Others</b-nav-item>
@@ -63,17 +53,8 @@
     <b-row>
       <b-col cols="12">
         <div id="list-complete-demo" class="demo">
-          <transition-group
-            name="list-complete"
-            class="list-complete"
-            tag="section"
-          >
-            <b-col
-              md="4"
-              v-for="item in filteredItems"
-              v-bind:key="item.id"
-              class="list-complete-item"
-            >
+          <transition-group name="list-complete" class="list-complete" tag="section">
+            <b-col md="4" v-for="item in filteredItems" v-bind:key="item.id" class="list-complete-item">
               <b-card header-tag="header" footer-tag="footer">
                 <template #header>
                   <p>
@@ -101,81 +82,72 @@
 
 <script>
 export default {
-  name: "createWebsiteStep1",
+  name: 'createWebsiteStep1',
   data() {
     return {
-      selected: "f",
+      selected: 'f',
       options: [
-        { value: "a", text: "Any" },
-        { value: "f", text: "Free Only" },
-        { value: "p", text: "Premium Only" }
+        { value: 'a', text: 'Any' },
+        { value: 'f', text: 'Free Only' },
+        { value: 'p', text: 'Premium Only' },
       ],
       items: [
         {
           id: 1,
-          img:
-            "https://business.bridgeafrica.info/assets/img/portfolio/portfoliu1.png",
-          type: "Premium",
-          tags: ["all", "agriculture"]
+          img: 'https://business.bridgeafrica.info/assets/img/portfolio/portfoliu1.png',
+          type: 'Premium',
+          tags: ['all', 'agriculture'],
         },
         {
           id: 2,
-          img:
-            "https://business.bridgeafrica.info/assets/img/portfolio/portfoliu2.png",
-          type: "Free",
-          tags: ["all", "business"]
+          img: 'https://business.bridgeafrica.info/assets/img/portfolio/portfoliu2.png',
+          type: 'Free',
+          tags: ['all', 'business'],
         },
         {
           id: 3,
-          img:
-            "https://business.bridgeafrica.info/assets/img/portfolio/portfoliu1.png",
-          type: "Premium",
-          tags: ["all", "agriculture"]
+          img: 'https://business.bridgeafrica.info/assets/img/portfolio/portfoliu1.png',
+          type: 'Premium',
+          tags: ['all', 'agriculture'],
         },
         {
           id: 4,
-          img:
-            "https://business.bridgeafrica.info/assets/img/portfolio/portfoliu2.png",
-          type: "Premium",
-          tags: ["all", "event"]
+          img: 'https://business.bridgeafrica.info/assets/img/portfolio/portfoliu2.png',
+          type: 'Premium',
+          tags: ['all', 'event'],
         },
         {
           id: 5,
-          img:
-            "https://business.bridgeafrica.info/assets/img/portfolio/portfoliu1.png",
-          type: "Premium",
-          tags: ["all", "personalcare"]
+          img: 'https://business.bridgeafrica.info/assets/img/portfolio/portfoliu1.png',
+          type: 'Premium',
+          tags: ['all', 'personalcare'],
         },
         {
           id: 6,
-          img:
-            "https://business.bridgeafrica.info/assets/img/portfolio/portfoliu2.png",
-          type: "Free",
-          tags: ["all", "pharmacy"]
+          img: 'https://business.bridgeafrica.info/assets/img/portfolio/portfoliu2.png',
+          type: 'Free',
+          tags: ['all', 'pharmacy'],
         },
         {
           id: 7,
-          img:
-            "https://business.bridgeafrica.info/assets/img/portfolio/portfoliu1.png",
-          type: "Free",
-          tags: ["all", "pharmacy"]
+          img: 'https://business.bridgeafrica.info/assets/img/portfolio/portfoliu1.png',
+          type: 'Free',
+          tags: ['all', 'pharmacy'],
         },
         {
           id: 8,
-          img:
-            "https://business.bridgeafrica.info/assets/img/portfolio/portfoliu2.png",
-          type: "Free",
-          tags: ["all", "food"]
+          img: 'https://business.bridgeafrica.info/assets/img/portfolio/portfoliu2.png',
+          type: 'Free',
+          tags: ['all', 'food'],
         },
         {
           id: 9,
-          img:
-            "https://business.bridgeafrica.info/assets/img/portfolio/portfoliu1.png",
-          type: "Premium",
-          tags: ["all", "other"]
-        }
+          img: 'https://business.bridgeafrica.info/assets/img/portfolio/portfoliu1.png',
+          type: 'Premium',
+          tags: ['all', 'other'],
+        },
       ],
-      currentTag: "all"
+      currentTag: 'all',
     };
   },
   computed: {
@@ -184,7 +156,7 @@ export default {
       return this.items.filter(function(item) {
         return item.tags.indexOf(filter) !== -1;
       });
-    }
+    },
   },
   methods: {
     shuffle: function() {
@@ -192,8 +164,8 @@ export default {
     },
     filter: function(tag) {
       this.currentTag = tag;
-    }
-  }
+    },
+  },
 };
 </script>
 

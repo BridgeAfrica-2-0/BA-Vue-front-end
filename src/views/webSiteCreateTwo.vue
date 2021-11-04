@@ -21,9 +21,7 @@
           <div class="d-inline-block float-right mt-3">
             <p>
               Current Plan: <span class="font-weight-bolder">Basic</span>
-              <b-button variant="primary" class="ml-3" size="sm"
-                >Change</b-button
-              >
+              <b-button variant="primary" class="ml-3" size="sm">Change</b-button>
             </p>
           </div>
         </b-col>
@@ -35,22 +33,22 @@
 </template>
 
 <script>
-import CreateWebsiteStep2 from "@/components/businessf/tabs/owner/createWebsiteStep2";
-import navbar from "@/components/navbar";
-import Footer from "@/components/footer";
+import CreateWebsiteStep2 from '@/components/businessf/tabs/owner/createWebsiteStep2';
+import navbar from '@/components/navbar';
+import Footer from '@/components/footer';
 
 export default {
-  name: "webSiteCreateTwo",
+  name: 'webSiteCreateTwo',
   components: {
     CreateWebsiteStep2,
     navbar,
-    Footer
+    Footer,
   },
   data() {
     return {};
   },
   computed: {},
-  methods: {}
+  methods: {},
 };
 </script>
 

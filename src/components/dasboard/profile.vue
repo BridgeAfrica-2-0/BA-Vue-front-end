@@ -7,7 +7,6 @@
             <fas-icon class="icons" :icon="['fas', 'user']" size="lg" />
             <b> Profile </b>
           </h6>
- 
 
           <h6 class="float-right text-success font-weight-bolder">
             <b-button variant="outline-primary upgrade-btn mt-top-60" size="sm"
@@ -17,16 +16,8 @@
         </h3>
       </span>
 
-      <div
-        class="d-flex col-md-12 mt-2 ml-35"
-       
-      >
-        <b-avatar
-          class="p-avater"
-          variant="primary"
-          :src="profile.picture"
-          size="5em"
-        ></b-avatar>
+      <div class="d-flex col-md-12 mt-2 ml-35">
+        <b-avatar class="p-avater" variant="primary" :src="profile.picture" size="5em"></b-avatar>
 
         <div class="text-lost">
           <h6>
@@ -34,14 +25,12 @@
           </h6>
           <p class="mb-1">
             {{ profile.followers }} Community
-            <span class="float-right m-60"
-              >Current Plan: <span class="text-success">Basic</span></span
-            >
+            <span class="float-right m-60">Current Plan: <span class="text-success">Basic</span></span>
           </p>
 
           <p class="mb-1">
             <b-icon-person-fill class="text-primary"></b-icon-person-fill>
-        <router-link to="profile_owner">    Visit Profile   </router-link>
+            <router-link to="profile_owner"> Visit Profile </router-link>
           </p>
           <p class="mb-1 ">
             <b-icon-chat-fill class="text-primary"></b-icon-chat-fill>
@@ -65,36 +54,29 @@
 
 <script>
 export default {
-  name: "profile",
- 
+  name: 'profile',
 
   computed: {
     details() {
-      return this.$store.getters["ProfileAndBusinessDetails/getdetails"];
-     
+      return this.$store.getters['ProfileAndBusinessDetails/getdetails'];
     },
 
-    profile(){
-    return this.$store.state.ProfileAndBusinessDetails.profile;
+    profile() {
+      return this.$store.state.ProfileAndBusinessDetails.profile;
     },
-
-   
   },
   mounted() {
     this.$store
-      .dispatch("ProfileAndBusinessDetails/getdetails")
+      .dispatch('ProfileAndBusinessDetails/getdetails')
       .then(() => {
-      
-        console.log("the response");
+        console.log('the response');
       })
       .catch(err => {
         console.log({ err: err });
       });
   },
 
-  methods:{
-   
-  }
+  methods: {},
 };
 </script>
 

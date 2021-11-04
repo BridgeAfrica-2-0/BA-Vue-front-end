@@ -14,9 +14,10 @@
         </b-list-group-item>
       </div>
       <div class="col-2">
-           <b-button class="btn" variant="outline-primary">
-               <b-icon icon="plus" class="mr-1"></b-icon>
-               Follow</b-button>
+        <b-button class="btn" variant="outline-primary">
+          <b-icon icon="plus" class="mr-1"></b-icon>
+          Follow</b-button
+        >
       </div>
     </div>
   </div>

@@ -14,18 +14,18 @@
 </template>
 
 <script>
-import Intro from "../../intro";
-import Followers from "../../followers";
-import Media from "../../media";
-import Post from "../../post";
+import Intro from '../../intro';
+import Followers from '../../followers';
+import Media from '../../media';
+import Post from '../../post';
 export default {
-  name: "posts",
+  name: 'posts',
   components: {
     Intro,
     Followers,
     Media,
-    Post
-  }
+    Post,
+  },
 };
 </script>
 

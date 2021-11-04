@@ -1,98 +1,69 @@
 <template>
   <div>
-    
-
     <b-card class="px-md-3 mt-3">
-      
-     
       <div v-for="item in owner_post" :key="item.post_id">
-       
-        <div  class="mt-2">
-          <div class="d-inline-flex"> 
-            <span  md="1" class="m-0 p-0">
-              <b-avatar
-                class="d-inline-block avat"
-                variant="primary"
-                :src="item.profile_picture"
-              ></b-avatar>
+        <div class="mt-2">
+          <div class="d-inline-flex">
+            <span md="1" class="m-0 p-0">
+              <b-avatar class="d-inline-block avat" variant="primary" :src="item.profile_picture"></b-avatar>
             </span>
-            <div  class="pl-2 pl-md-3  pt-md-2">
+            <div class="pl-2 pl-md-3  pt-md-2">
               <h5 class="m-0  usernamee">
                 {{ item.name }}
-               
               </h5>
               <p class="durationn">{{ moment(item.created_at).fromNow() }}</p>
             </div>
 
-
-             <div class="toright pt-2"> </div>
-
+            <div class="toright pt-2"></div>
           </div>
           <div class="m-0 p-0">
-            
-              <p  class="post-text">
-                <!--     :text="item.content.details"   -->
-                <read-more v-if="item.content"
-                  more-str="read more"
-                  :text="item.content"
-                  link="#"
-                  less-str="read less"
-                  :max-chars="200"
-                ></read-more>
-              </p>
-           
+            <p class="post-text">
+              <!--     :text="item.content.details"   -->
+              <read-more
+                v-if="item.content"
+                more-str="read more"
+                :text="item.content"
+                link="#"
+                less-str="read less"
+                :max-chars="200"
+              ></read-more>
+            </p>
           </div>
 
-           <div   v-if="item.media.length > 0" class="">
+          <div v-if="item.media.length > 0" class="">
+            <span v-for="video in mapvideo(item.media)" :key="video">
+              <youtube
+                class="w-100 videoh"
+                :video-id="getId(video)"
+                :player-vars="playerVars"
+                @playing="playing"
+              ></youtube>
+            </span>
 
+            <light css=" " :cells="item.media.length" :items="mapmediae(item.media)"></light>
 
-             <span v-for="video in mapvideo(item.media)" :key='video' > 
-
-
-            <youtube  class="w-100 videoh" :video-id="getId(video)" :player-vars="playerVars" @playing="playing"></youtube>
-
-           </span>
- 
             <light
               css=" "
               :cells="item.media.length"
-              :items="mapmediae(item.media)"
+              :items="
+                item.media.map(function(a) {
+                  return a.media_url;
+                })
+              "
             ></light>
-
-
-                <light
-                css=" "
-                  :cells="item.media.length"
-                  :items="
-                    item.media.map(function (a) {
-                      return a.media_url;
-                    })
-                  "
-                ></light> 
-              </div>
+          </div>
           <b-row>
-
-           
-
             <!--   v-if="item.content.movies.length <= 0"  -->
             <b-col cols="12" class="mt-2">
               <!--  :src="$store.getters.getProfilePicture"  -->
             </b-col>
             <b-col class="mt-1">
               <span class="mr-3"
-                ><b-icon
-                  icon="suit-heart"
-                  variant="primary"
-                  aria-hidden="true"
-                ></b-icon>
+                ><b-icon icon="suit-heart" variant="primary" aria-hidden="true"></b-icon>
                 {{ nFormatter(item.likes_count) }}
               </span>
               <span
-                ><b-icon
-                  icon="chat-fill"
-                  variant="primary"
-                  aria-hidden="true"
-                ></b-icon>
+                ><b-icon icon="chat-fill" variant="primary" aria-hidden="true"></b-icon>
                 {{ nFormatter(item.comment_count) }}
               </span>
 
@@ -103,54 +74,40 @@
           </b-row>
 
           <!--  :src="$store.getters.getProfilePicture"  -->
-         
         </div>
 
-         <div class="mt-2 d-inline-flex w-100">
-            <div  class="m-md-0 p-md-0">
-              <b-avatar
-                variant="primary"
-                :src="info.user.profile_picture"
-                class="img-fluid avat-comment"
-              ></b-avatar>
-            </div>
-
-            <div  class="p-0 m-0 pr-3 inline-comment">
-              <input placeholder="Post a Comment" class="comment" type="text" />
-
-              <fas-icon
-                class="primary send-cmt"
-                :icon="['fas', 'paper-plane']"
-              />
-            </div>
-
+        <div class="mt-2 d-inline-flex w-100">
+          <div class="m-md-0 p-md-0">
+            <b-avatar variant="primary" :src="info.user.profile_picture" class="img-fluid avat-comment"></b-avatar>
           </div>
 
-        <Comment
-          v-for="comment in item.comments"
-          :key="comment.id"
-          :comment="comment"
-        />
-        <hr>
+          <div class="p-0 m-0 pr-3 inline-comment">
+            <input placeholder="Post a Comment" class="comment" type="text" />
+
+            <fas-icon class="primary send-cmt" :icon="['fas', 'paper-plane']" />
+          </div>
+        </div>
+
+        <Comment v-for="comment in item.comments" :key="comment.id" :comment="comment" />
+        <hr />
       </div>
 
-      <infinite-loading :identifier="infiniteId"   ref="infiniteLoading"   @infinite="infiniteHandler"></infinite-loading>
+      <infinite-loading :identifier="infiniteId" ref="infiniteLoading" @infinite="infiniteHandler"></infinite-loading>
     </b-card>
   </div>
 </template>
 
 <script>
-import Comment from "../comment";
-import light from "../../lightbox";
-import moment from "moment";
-import axios from "axios";
+import Comment from '../comment';
+import light from '../../lightbox';
+import moment from 'moment';
+import axios from 'axios';
 
 export default {
-  name: "postNetwork",
+  name: 'postNetwork',
   components: {
     Comment,
     light,
-   
   },
   data() {
     return {
@@ -160,7 +117,7 @@ export default {
       moment: moment,
       page: 1,
       infiniteId: +new Date(),
-      
+
       url: null,
       delete: [],
       edit_description: null,
@@ -168,18 +125,15 @@ export default {
       edit_id: null,
 
       fullPage: false,
-      images: ["https://i.wifegeek.com/200426/f9459c52.jpg"],
-      imagees: [
-        "https://i.wifegeek.com/200426/f9459c52.jpg",
-        "https://i.wifegeek.com/200426/5ce1e1c7.jpg",
-      ],
+      images: ['https://i.wifegeek.com/200426/f9459c52.jpg'],
+      imagees: ['https://i.wifegeek.com/200426/f9459c52.jpg', 'https://i.wifegeek.com/200426/5ce1e1c7.jpg'],
       ima: [
-        "https://pbs.twimg.com/media/DoNa_wKUUAASSCF.jpg",
-        "https://pbs.twimg.com/media/DKO62sVXUAA0_AL.jpg",
-        "https://i.wifegeek.com/200426/5ce1e1c7.jpg",
+        'https://pbs.twimg.com/media/DoNa_wKUUAASSCF.jpg',
+        'https://pbs.twimg.com/media/DKO62sVXUAA0_AL.jpg',
+        'https://i.wifegeek.com/200426/5ce1e1c7.jpg',
       ],
       createPost: {
-        postBusinessUpdate: "",
+        postBusinessUpdate: '',
         movies: [],
         hyperlinks: [],
       },
@@ -189,79 +143,62 @@ export default {
   },
 
   methods: {
+    mapmediae(media) {
+      let mediaarr = [];
 
-
-     mapmediae(media){
-
-       let mediaarr=[];
-
-       media.forEach((item) => {
-
+      media.forEach(item => {
         let type = this.checkMediaType(item.media_type);
-       if(type != "video") {  
-        mediaarr.push(item.media_url);
-         }
-
-       });
+        if (type != 'video') {
+          mediaarr.push(item.media_url);
+        }
+      });
 
       return mediaarr;
-
     },
 
-
-
-  getId (video_url) {
-      return this.$youtube.getIdFromUrl(video_url)
+    getId(video_url) {
+      return this.$youtube.getIdFromUrl(video_url);
     },
-    
-      mapvideo(media){
 
-       let mediaarr=[];
+    mapvideo(media) {
+      let mediaarr = [];
 
-       media.forEach((item) => {
-
+      media.forEach(item => {
         let type = this.checkMediaType(item.media_type);
-       if(type == "video") {  
-        mediaarr.push(item.media_url);
-         }
-
-       });
+        if (type == 'video') {
+          mediaarr.push(item.media_url);
+        }
+      });
 
       return mediaarr;
-
     },
 
-
-    checkMediaType(media){
-
-     return media.split("/")[0] ;  
-
+    checkMediaType(media) {
+      return media.split('/')[0];
     },
-
 
     nFormatter(num) {
       if (num >= 1000000000) {
-        return (num / 1000000000).toFixed(1).replace(/\.0$/, "") + "G";
+        return (num / 1000000000).toFixed(1).replace(/\.0$/, '') + 'G';
       }
       if (num >= 1000000) {
-        return (num / 1000000).toFixed(1).replace(/\.0$/, "") + "M";
+        return (num / 1000000).toFixed(1).replace(/\.0$/, '') + 'M';
       }
       if (num >= 1000) {
-        return (num / 1000).toFixed(1).replace(/\.0$/, "") + "K";
+        return (num / 1000).toFixed(1).replace(/\.0$/, '') + 'K';
       }
       return num;
     },
 
-   
     infiniteHandler($state) {
-     
-      let url= "user/post/" + this.page+"?id="+this.url;
-      
-       this.$store.dispatch("follower/loadMore",url)
-     
+      let url = 'user/post/' + this.page + '?id=' + this.url;
+
+      this.$store
+        .dispatch('follower/loadMore', url)
+
         .then(({ data }) => {
           console.log(data);
-          if (data.data.length) { 
+          if (data.data.length) {
             this.page += 1;
 
             this.owner_post.push(...data.data);
@@ -270,29 +207,23 @@ export default {
             $state.complete();
           }
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
     },
-
-   
-   
   },
   computed: {
     imageProfile() {
-      return "yoo";
+      return 'yoo';
     },
 
-     info: function () {
-      return this.$store.getters["follower/getUserPostIntro"];
+    info: function() {
+      return this.$store.getters['follower/getUserPostIntro'];
     },
 
-   
     owner_post() {
       return this.$store.state.follower.ownerPost;
     },
-
-  
   },
   mounted() {
     this.url = this.$route.params.id;
@@ -300,21 +231,17 @@ export default {
 };
 </script>
 
-<style >
-  
-  .h-lg-250{
+<style>
+.h-lg-250 {
+  height: 350px !important;
+}
 
-   height: 350px !important;   
-  }
-
-  .lb-item{
-    background-size: auto;
-  }
- 
+.lb-item {
+  background-size: auto;
+}
 </style>
 
 <style scoped>
-
 .custom-block-class {
   position: absolute;
   z-index: 1;
@@ -327,13 +254,12 @@ export default {
 }
 
 .upload-cancel {
-   
-   z-index: 1;
-    margin-top: -40%;
-    float: right;
-    margin-left: -10px;
-    right: -97%;
-    position: relative;
+  z-index: 1;
+  margin-top: -40%;
+  float: right;
+  margin-left: -10px;
+  right: -97%;
+  position: relative;
 }
 
 .upload-cancel:hover {
@@ -342,17 +268,15 @@ export default {
 }
 
 .oorange {
-  
   color: red;
-    font-size: 20px;
-    background: white;
-    border-radius: 50%;
-
+  font-size: 20px;
+  background: white;
+  border-radius: 50%;
 }
 
-.h300px{
+.h300px {
   height: 300px;
-  overflow-x:hidden;
+  overflow-x: hidden;
 }
 
 #preview img {
@@ -379,26 +303,22 @@ export default {
   color: #e75c18;
 }
 @media (max-width: 762px) {
-.usernamee{
-  font-weight: 600;
-  font-size: 15px;
-  color:black;
+  .usernamee {
+    font-weight: 600;
+    font-size: 15px;
+    color: black;
+  }
 }
-
-
-
-}
-.inline-comment{
+.inline-comment {
   width: 95%;
 }
 
 @media (min-width: 762px) {
-
-  .usernamee{
-  font-weight: 600;
-  font-size: 20px;
-  color:black;
-}
+  .usernamee {
+    font-weight: 600;
+    font-size: 20px;
+    color: black;
+  }
 
   .avat {
     width: 64px;
@@ -511,12 +431,10 @@ export default {
   }
 }
 .bordder {
- 
-
   border: 1px solid gray;
-    height: 50px;
-    padding: 6px;
-    border-radius: 10px;
+  height: 50px;
+  padding: 6px;
+  border-radius: 10px;
 }
 .username {
   color: black;
@@ -546,25 +464,22 @@ export default {
   border-color: red;
 }
 
-.durationn{
-  font-weight:400;
+.durationn {
+  font-weight: 400;
   font-size: 15px;
-  color:black
-
-
+  color: black;
 }
-
 </style>
 <style>
 .custom-block-class {
   position: absolute;
   z-index: 1;
 }
-.post-text p{
+.post-text p {
   margin: 0px;
 }
-.toright{
+.toright {
   position: absolute;
-    right: 1%;
+  right: 1%;
 }
 </style>

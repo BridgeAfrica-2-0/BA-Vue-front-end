@@ -13,12 +13,12 @@
 </template>
 
 <script>
-import navbar from "@/components/navbar";
-import notFound from "@/components/404";
-import Profile from "../components/follower/follower";
-import Footer from "../components/footer";
+import navbar from '@/components/navbar';
+import notFound from '@/components/404';
+import Profile from '../components/follower/follower';
+import Footer from '../components/footer';
 export default {
-  name: "Home",
+  name: 'Home',
   components: {
     navbar,
     Profile,
@@ -31,8 +31,8 @@ export default {
     };
   },
   computed: {
-    info: function () {
-      let user = this.$store.getters["follower/getUserPostIntro"];
+    info: function() {
+      let user = this.$store.getters['follower/getUserPostIntro'];
       if (this.isloaded) {
         if (Object.keys(user.user).length) {
           return true;
@@ -44,8 +44,8 @@ export default {
       }
     },
 
-    profile: function () {
-      return this.$store.getters["follower/getUserPostIntro"];
+    profile: function() {
+      return this.$store.getters['follower/getUserPostIntro'];
     },
   },
 
@@ -53,11 +53,11 @@ export default {
     this.foll_id = this.$route.params.id;
 
     this.$store
-      .dispatch("follower/loadUserPostIntro", this.foll_id)
-      .then((response) => {
+      .dispatch('follower/loadUserPostIntro', this.foll_id)
+      .then(response => {
         this.isloaded = true;
       })
-      .catch((error) => {
+      .catch(error => {
         console.log({ error: error });
       });
   },

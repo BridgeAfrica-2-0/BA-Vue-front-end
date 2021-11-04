@@ -15,12 +15,7 @@
 
     <b-row>
       <b-col cols="12" class="f-left">
-        <div
-          v-for="post in allPendingPost"
-          :key="post.id"
-          :loading="load"
-          class="mb-4"
-        >
+        <div v-for="post in allPendingPost" :key="post.id" :loading="load" class="mb-4">
           <div class="mb-2">
             <div class="f-left">
               <b-row class="px-md-3">
@@ -36,26 +31,14 @@
                   <h6 class="m-0 font-weight-bolder">
                     {{ post.name }}
                     <span class="float-right">
-                      <b-dropdown
-                        size="lg"
-                        variant="link"
-                        toggle-class="text-decoration-none"
-                        no-caret
-                      >
+                      <b-dropdown size="lg" variant="link" toggle-class="text-decoration-none" no-caret>
                         <template #button-content>
-                          <b-icon-three-dots-vertical></b-icon-three-dots-vertical
-                          ><span class="sr-only">Settings</span>
+                          <b-icon-three-dots-vertical></b-icon-three-dots-vertical><span class="sr-only">Settings</span>
                         </template>
-                        <b-dropdown-item
-                          @click="approved(post.id)"
-                          :loading="load"
-                        >
+                        <b-dropdown-item @click="approved(post.id)" :loading="load">
                           Approved
                         </b-dropdown-item>
-                        <b-dropdown-item
-                          @click="unapproved(post.id)"
-                          :loading="load"
-                        >
+                        <b-dropdown-item @click="unapproved(post.id)" :loading="load">
                           Unapproved
                         </b-dropdown-item>
                       </b-dropdown>
@@ -92,27 +75,27 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from "vuex";
+import { mapActions, mapGetters } from 'vuex';
 export default {
-  name: "pendingPost",
+  name: 'pendingPost',
   data: () => ({
     load: null,
-    networkId: "",
+    networkId: '',
   }),
   beforeMount() {
     this.getPendingPost();
   },
   computed: {
     ...mapGetters({
-      getNetwork: "networkSetting/getNetwork",
-      allPendingPost: "networkSetting/allPendingPost",
+      getNetwork: 'networkSetting/getNetwork',
+      allPendingPost: 'networkSetting/allPendingPost',
     }),
   },
   methods: {
     ...mapActions({
-      getPendingPost: "networkSetting/getPendingPost",
-      approvedPost: "networkSetting/approvedPost",
-      unapprovedPost: "networkSetting/unapprovedPost",
+      getPendingPost: 'networkSetting/getPendingPost',
+      approvedPost: 'networkSetting/approvedPost',
+      unapprovedPost: 'networkSetting/unapprovedPost',
     }),
     approved(id) {
       this.load = true;
@@ -125,7 +108,7 @@ export default {
         .then(() => {
           this.load = false;
         })
-        .catch((err) => {
+        .catch(err => {
           this.load = true;
           console.log(err);
         });
@@ -142,7 +125,7 @@ export default {
         .then(() => {
           this.load = false;
         })
-        .catch((err) => {
+        .catch(err => {
           this.load = true;
           console.log(err);
         });

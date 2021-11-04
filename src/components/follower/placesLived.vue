@@ -25,12 +25,12 @@
         Current City:
       </div>
       <div class="col">
-        {{info.user.city}}
+        {{ info.user.city }}
       </div>
     </div>
     <div class=" basic row">
       <div class="col">
-         Home City:
+        Home City:
       </div>
       <div class="col">
         {{ info.user.home_town }}
@@ -44,12 +44,10 @@ export default {
   data() {
     return {};
   },
-   computed:{
-
-    info(){
+  computed: {
+    info() {
       return this.$store.state.follower.profileIntro;
-    }
-
+    },
   },
 };
 </script>

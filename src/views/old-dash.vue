@@ -10,8 +10,7 @@
           <b-input-group class="my-auto input-size ">
             <template #append>
               <b-input-group-text class=" b-groupe  shadow "
-                ><strong class="color-sit">
-                  <b-icon-search></b-icon-search> </strong
+                ><strong class="color-sit"> <b-icon-search></b-icon-search> </strong
               ></b-input-group-text>
             </template>
 
@@ -27,8 +26,7 @@
           <b-input-group class="my-auto input-size">
             <template #append>
               <b-input-group-text class=" b-groupe shadow "
-                ><strong class="color-sit">
-                  <b-icon icon="chevron-down"> </b-icon> </strong
+                ><strong class="color-sit"> <b-icon icon="chevron-down"> </b-icon> </strong
               ></b-input-group-text>
             </template>
 
@@ -47,8 +45,7 @@
             <b-input-group class="my-auto input-size">
               <template #append>
                 <b-input-group-text class=" b-groupe  shadow "
-                  ><strong class="color-sit">
-                    <b-icon-search></b-icon-search> </strong
+                  ><strong class="color-sit"> <b-icon-search></b-icon-search> </strong
                 ></b-input-group-text>
               </template>
 
@@ -66,16 +63,11 @@
             <b-input-group class="my-auto input-size">
               <template #append>
                 <b-input-group-text class=" b-groupe shadow "
-                  ><strong class="color-sit">
-                    <b-icon icon="search"> </b-icon> </strong
+                  ><strong class="color-sit"> <b-icon icon="search"> </b-icon> </strong
                 ></b-input-group-text>
               </template>
 
-              <b-form-input
-                id=" posted_by"
-                class=" w-25 wi-25 border shadow "
-                placeholder="Posted Date"
-              ></b-form-input>
+              <b-form-input id=" posted_by" class=" w-25 wi-25 border shadow " placeholder="Posted Date"></b-form-input>
             </b-input-group>
           </div>
         </b-col>
@@ -91,8 +83,7 @@
             <b-input-group class="my-auto input-size">
               <template #append>
                 <b-input-group-text class=" b-groupe shadow "
-                  ><strong class="color-sit">
-                    <b-icon icon="chevron-down"> </b-icon> </strong
+                  ><strong class="color-sit"> <b-icon icon="chevron-down"> </b-icon> </strong
                 ></b-input-group-text>
               </template>
 
@@ -112,8 +103,7 @@
             <b-input-group class="my-auto input-size">
               <template #append>
                 <b-input-group-text class=" b-groupe shadow "
-                  ><strong class="color-sit">
-                    <b-icon icon="chevron-down"> </b-icon> </strong
+                  ><strong class="color-sit"> <b-icon icon="chevron-down"> </b-icon> </strong
                 ></b-input-group-text>
               </template>
 
@@ -127,18 +117,11 @@
             </b-input-group>
           </div>
 
-          <div
-            v-if="
-              selected == 'business' ||
-                selected == 'network' ||
-                selected == 'marketplace'
-            "
-          >
+          <div v-if="selected == 'business' || selected == 'network' || selected == 'marketplace'">
             <b-input-group class="my-auto input-size">
               <template #append>
                 <b-input-group-text class=" b-groupe shadow "
-                  ><strong class="color-sit">
-                    <b-icon icon="chevron-down"> </b-icon> </strong
+                  ><strong class="color-sit"> <b-icon icon="chevron-down"> </b-icon> </strong
                 ></b-input-group-text>
               </template>
 
@@ -154,13 +137,7 @@
         </b-col>
 
         <b-col md="3" sm="12" class="mt-2">
-          <div
-            v-if="
-              selected == 'business' ||
-                selected == 'network' ||
-                selected == 'marketplace'
-            "
-          >
+          <div v-if="selected == 'business' || selected == 'network' || selected == 'marketplace'">
             <div class="a-center">
               <b-form-checkbox id="checkbox-1" name="checkbox-1">
                 Show Map
@@ -172,8 +149,7 @@
             <b-input-group class="my-auto input-size">
               <template #append>
                 <b-input-group-text class=" b-groupe shadow "
-                  ><strong class="color-sit">
-                    <b-icon icon="chevron-down"> </b-icon> </strong
+                  ><strong class="color-sit"> <b-icon icon="chevron-down"> </b-icon> </strong
                 ></b-input-group-text>
               </template>
 
@@ -191,16 +167,11 @@
             <b-input-group class="my-auto input-size">
               <template #append>
                 <b-input-group-text class=" b-groupe shadow "
-                  ><strong class="color-sit">
-                    <b-icon icon="search"> </b-icon> </strong
+                  ><strong class="color-sit"> <b-icon icon="search"> </b-icon> </strong
                 ></b-input-group-text>
               </template>
 
-              <b-form-input
-                id=" posted_by"
-                class=" w-25 wi-25 border shadow "
-                placeholder="Posted By"
-              ></b-form-input>
+              <b-form-input id=" posted_by" class=" w-25 wi-25 border shadow " placeholder="Posted By"></b-form-input>
             </b-input-group>
           </div>
         </b-col>
@@ -215,10 +186,7 @@
               <div style="p-div">
                 <span>
                   <h4>
-                    <img
-                      class="img-fluid picture logo-img"
-                      src="@/assets/icons/bus.png"
-                    />
+                    <img class="img-fluid picture logo-img" src="@/assets/icons/bus.png" />
                     BUSINESSES
                     <h6 style="float:right">
                       <!--      <b-link class="see-all-link"> <u> see all </u> </b-link>   -->
@@ -233,10 +201,7 @@
               <div class="p-div">
                 <span>
                   <h4>
-                    <img
-                      class="img-fluid picture logo-img"
-                      src="@/assets/icons/people.png"
-                    />
+                    <img class="img-fluid picture logo-img" src="@/assets/icons/people.png" />
                     People
                     <h6 style="float:right">
                       <!--   <b-link class="see-all-link"> <u> see all </u> </b-link> -->
@@ -255,10 +220,7 @@
         <b-card class="shadow ">
           <span>
             <h4>
-              <img
-                class="img-fluid picture logo-img "
-                src="@/assets/icons/people.png"
-              />
+              <img class="img-fluid picture logo-img " src="@/assets/icons/people.png" />
               People
               <h6 style="float:right">
                 <!--     <b-link class="see-all-link" > <u> see all </u> </b-link>   -->
@@ -280,10 +242,7 @@
         <b-card class="shadow ">
           <span>
             <h4>
-              <img
-                class="img-fluid picture logo-img"
-                src="@/assets/icons/bus.png"
-              />
+              <img class="img-fluid picture logo-img" src="@/assets/icons/bus.png" />
               Business
               <h6 style="float:right">
                 <!--    <b-link class="see-all-link"> <u> see all </u> </b-link>  -->
@@ -301,9 +260,7 @@
         <br />
       </div>
 
-      <div v-if="selected == 'network'">
-        <network-dashboard></network-dashboard> <br />
-      </div>
+      <div v-if="selected == 'network'"><network-dashboard></network-dashboard> <br /></div>
 
       <Post v-if="selected == 'posts'" />
 
@@ -324,10 +281,7 @@
               </h6>
             </b-col>
             <b-col sm="12" md="6">
-              <b-form-select
-                v-model="selectedb"
-                :options="boptions"
-              ></b-form-select>
+              <b-form-select v-model="selectedb" :options="boptions"></b-form-select>
             </b-col>
           </b-row>
         </b-card>
@@ -350,10 +304,7 @@
                 <h4 class="font-weight-bolder text-design">
                   Use Bridge Africa as Yourself or as one of your businesses
                 </h4>
-                <b-form-select
-                  v-model="selectedb"
-                  :options="boptions"
-                ></b-form-select>
+                <b-form-select v-model="selectedb" :options="boptions"></b-form-select>
               </b-card>
             </div>
           </b-col>
@@ -392,129 +343,129 @@
 </template>
 
 <script>
-import Navbar from "@/components/navbar";
-import CarousselDashboard from "@/components/dasboard/carousselDashboard";
-import NetworkDashboard from "@/components/dasboard/networkDashboard";
-import BusinessDashboard from "@/components/dasboard/businessDashboard";
-import ComunitiDashboard from "@/components/dasboard/comunitiDashboard";
-import Insights from "@/components/dasboard/insights";
-import CommunityActivity from "@/components/dasboard/communityActivity";
+import Navbar from '@/components/navbar';
+import CarousselDashboard from '@/components/dasboard/carousselDashboard';
+import NetworkDashboard from '@/components/dasboard/networkDashboard';
+import BusinessDashboard from '@/components/dasboard/businessDashboard';
+import ComunitiDashboard from '@/components/dasboard/comunitiDashboard';
+import Insights from '@/components/dasboard/insights';
+import CommunityActivity from '@/components/dasboard/communityActivity';
 
-import Tutorial from "@/components/dasboard/tutorial";
+import Tutorial from '@/components/dasboard/tutorial';
 
-import Profile from "@/components/dasboard/profile";
-import Post from "@/components/dasboard/post";
+import Profile from '@/components/dasboard/profile';
+import Post from '@/components/dasboard/post';
 
 //import SelectBH from "@/components/dasboard/selectbusinessh";
 
-import People from "@/components/dasboard/communityMember";
-import Business from "@/components/dasboard/communitybusiness";
+import People from '@/components/dasboard/communityMember';
+import Business from '@/components/dasboard/communitybusiness';
 
 //import SelectBusiness from "@/components/dasboard/selectbusiness";
-import Map from "@/components/dasboard/map";
+import Map from '@/components/dasboard/map';
 
-import EmptyBusiness from "@/components/dasboard/emptybusiness";
+import EmptyBusiness from '@/components/dasboard/emptybusiness';
 
-import Popularnetwork from "@/components/dasboard/popularnetwork";
-import Hotbusiness from "@/components/dasboard/hotbusiness";
+import Popularnetwork from '@/components/dasboard/popularnetwork';
+import Hotbusiness from '@/components/dasboard/hotbusiness';
 
-import Market from "@/components/dasboard/market";
+import Market from '@/components/dasboard/market';
 
 export default {
-  name: "dashboard",
+  name: 'dashboard',
   data() {
     return {
       slide: 0,
       sliding: null,
 
-      selected: "all",
-      location: "any",
-      category: "any",
-      post: "any",
-      selectedb: "owner",
+      selected: 'all',
+      location: 'any',
+      category: 'any',
+      post: 'any',
+      selectedb: 'owner',
 
-      educatio: "any",
+      educatio: 'any',
 
-      professio: "any",
+      professio: 'any',
 
-      workplac: "any",
+      workplac: 'any',
 
       map: false,
 
       boptions: [
-        { value: "owner", text: "Owner's Name" },
-        { value: "a", text: "Business Name 1" },
-        { value: "b", text: "Business Name 2" },
-        { value: "c", text: "Business Name 3" }
+        { value: 'owner', text: "Owner's Name" },
+        { value: 'a', text: 'Business Name 1' },
+        { value: 'b', text: 'Business Name 2' },
+        { value: 'c', text: 'Business Name 3' },
       ],
 
       optionss: [
-        { id: "all", label: "All" },
-        { id: "business", label: "Business" },
-        { id: "people", label: "People" },
-        { id: "network", label: "Network" },
-        { id: "marketplace", label: "Markeplace", notEnabled: true },
-        { id: "posts", label: "Posts" }
+        { id: 'all', label: 'All' },
+        { id: 'business', label: 'Business' },
+        { id: 'people', label: 'People' },
+        { id: 'network', label: 'Network' },
+        { id: 'marketplace', label: 'Markeplace', notEnabled: true },
+        { id: 'posts', label: 'Posts' },
       ],
 
       options: [
-        { item: "all", name: "All" },
-        { item: "business", name: "Business" },
-        { item: "people", name: "People" },
-        { item: "network", name: "Network" },
-        { item: "marketplace", name: "Markeplace", notEnabled: false },
-        { item: "posts", name: "Posts" }
+        { item: 'all', name: 'All' },
+        { item: 'business', name: 'Business' },
+        { item: 'people', name: 'People' },
+        { item: 'network', name: 'Network' },
+        { item: 'marketplace', name: 'Markeplace', notEnabled: false },
+        { item: 'posts', name: 'Posts' },
       ],
       filters: [
-        { item: "any", name: "Location : Any" },
-        { item: "yaounde", name: "Yaounde, Cameroon" },
-        { item: "dhaka ", name: "Dhaka, Bangladesh" },
-        { item: "new york", name: "New York, United States" },
-        { item: "douala", name: "Douala, Cameroon" },
-        { item: "karachi", name: "Karachi, Pakistan" }
+        { item: 'any', name: 'Location : Any' },
+        { item: 'yaounde', name: 'Yaounde, Cameroon' },
+        { item: 'dhaka ', name: 'Dhaka, Bangladesh' },
+        { item: 'new york', name: 'New York, United States' },
+        { item: 'douala', name: 'Douala, Cameroon' },
+        { item: 'karachi', name: 'Karachi, Pakistan' },
       ],
       categories: [
-        { item: "any", name: "Category : Any" },
-        { item: "restaurant", name: "Restaurant" },
-        { item: "home service", name: "Home Services" },
-        { item: "auto service", name: "Auto Services" },
-        { item: "argiculture", name: "Agriculture" },
-        { item: "technology", name: "Technology" }
+        { item: 'any', name: 'Category : Any' },
+        { item: 'restaurant', name: 'Restaurant' },
+        { item: 'home service', name: 'Home Services' },
+        { item: 'auto service', name: 'Auto Services' },
+        { item: 'argiculture', name: 'Agriculture' },
+        { item: 'technology', name: 'Technology' },
       ],
       posts: [
-        { item: "any", name: "Post: Any" },
-        { item: "people", name: "People I am following" },
-        { item: "business", name: "Businesses i am following" },
-        { item: "networks", name: "Networks I am following" }
+        { item: 'any', name: 'Post: Any' },
+        { item: 'people', name: 'People I am following' },
+        { item: 'business', name: 'Businesses i am following' },
+        { item: 'networks', name: 'Networks I am following' },
       ],
 
       education: [
-        { item: "any", name: "Education: Any" },
-        { item: "ub", name: "University Of Buea" },
-        { item: "uba", name: "University Of Yaounde" },
-        { item: "uy", name: "University Of Yaounde 1" }
+        { item: 'any', name: 'Education: Any' },
+        { item: 'ub', name: 'University Of Buea' },
+        { item: 'uba', name: 'University Of Yaounde' },
+        { item: 'uy', name: 'University Of Yaounde 1' },
       ],
 
       profession: [
-        { item: "any", name: "Profession: Any" },
-        { item: "engineer", name: "Engineen" },
-        { item: "teacher", name: "Teacher" },
-        { item: "farmer", name: "Farmer" }
+        { item: 'any', name: 'Profession: Any' },
+        { item: 'engineer', name: 'Engineen' },
+        { item: 'teacher', name: 'Teacher' },
+        { item: 'farmer', name: 'Farmer' },
       ],
 
       workplace: [
-        { item: "any", name: "Post: Any" },
-        { item: "yaounde", name: "Yaounde" },
-        { item: "douala", name: "Douala" },
-        { item: "Buea", name: "Buea" }
+        { item: 'any', name: 'Post: Any' },
+        { item: 'yaounde', name: 'Yaounde' },
+        { item: 'douala', name: 'Douala' },
+        { item: 'Buea', name: 'Buea' },
       ],
 
       sponsoredBusinesses: [
-        { title: "Business 1" },
-        { title: "Business 2" },
-        { title: "Business 3" },
-        { title: "Business 4" }
-      ]
+        { title: 'Business 1' },
+        { title: 'Business 2' },
+        { title: 'Business 3' },
+        { title: 'Business 4' },
+      ],
     };
   },
   components: {
@@ -536,9 +487,9 @@ export default {
     People,
     Business,
     CarousselDashboard,
-    Navbar
+    Navbar,
   },
-  methods: {}
+  methods: {},
 };
 </script>
 
@@ -614,7 +565,7 @@ select {
   -webkit-appearance: none;
   -moz-appearance: none;
   text-indent: 1px;
-  text-overflow: "";
+  text-overflow: '';
 }
 
 .a-center {

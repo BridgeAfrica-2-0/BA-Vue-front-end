@@ -7,13 +7,7 @@
     <b-container class="b-bottom">
       <b-row>
         <b-col cols="5">
-          <b-form-group
-            label-cols-lg="3"
-            label="User"
-            label-size="md"
-            label-class="font-weight-bold pt-0"
-            class="mb-0"
-          >
+          <b-form-group label-cols-lg="3" label="User" label-size="md" label-class="font-weight-bold pt-0" class="mb-0">
             <b-form-select v-model="selected">
               <b-form-select-option :value="null">Admin</b-form-select-option>
               <b-form-select-option value="a">User</b-form-select-option>
@@ -22,13 +16,7 @@
         </b-col>
 
         <b-col>
-          <b-form-group
-            label-cols-lg="3"
-            label="Role"
-            label-size="md"
-            label-class="font-weight-bold pt-0"
-            class="mb-0"
-          >
+          <b-form-group label-cols-lg="3" label="Role" label-size="md" label-class="font-weight-bold pt-0" class="mb-0">
             <b-form-select v-model="selected" class="mb-3">
               <b-form-select-option :value="null">Admin</b-form-select-option>
               <b-form-select-option value="a">User</b-form-select-option>
@@ -42,15 +30,14 @@
       </b-row>
 
       <p class="a-text">
-        Admin can manage all aspects of the Business Identity. They can create
-        posts and send messages through inbox. They can respond to the delete
-        comments, Approve posts, view insights, manage the business settings,
-        update Business profile, assign roles and payments.
+        Admin can manage all aspects of the Business Identity. They can create posts and send messages through inbox.
+        They can respond to the delete comments, Approve posts, view insights, manage the business settings, update
+        Business profile, assign roles and payments.
       </p>
       <br />
       <p class="a-text">
-        Editor can create posts and send messages through inbox, They can
-        respond to and delete comments, Approve posts, view insights
+        Editor can create posts and send messages through inbox, They can respond to and delete comments, Approve posts,
+        view insights
       </p>
     </b-container>
 
@@ -67,18 +54,9 @@
             <span class="mr-auto">J. Circlehead</span>
             <span>
               <div>
-                <b-dropdown
-                  size="lg"
-                  variant="link"
-                  toggle-class="text-decoration-none"
-                  no-caret
-                >
+                <b-dropdown size="lg" variant="link" toggle-class="text-decoration-none" no-caret>
                   <template #button-content>
-                    <b-icon
-                      icon="three-dots-vertical"
-                      animation="cylon-vertical"
-                      font-scale="1"
-                    ></b-icon>
+                    <b-icon icon="three-dots-vertical" animation="cylon-vertical" font-scale="1"></b-icon>
                   </template>
                   <b-dropdown-item href="#">Edit</b-dropdown-item>
                   <b-dropdown-item href="#"> Delete </b-dropdown-item>
@@ -88,27 +66,13 @@
           </b-list>
 
           <b-list class="d-flex align-items-center">
-            <b-avatar
-              variant="primary"
-              text="BV"
-              class="mr-3"
-              size="4em"
-            ></b-avatar>
+            <b-avatar variant="primary" text="BV" class="mr-3" size="4em"></b-avatar>
             <span class="mr-auto">itz blec blec</span>
             <span>
               <div>
-                <b-dropdown
-                  size="lg"
-                  variant="link"
-                  toggle-class="text-decoration-none"
-                  no-caret
-                >
+                <b-dropdown size="lg" variant="link" toggle-class="text-decoration-none" no-caret>
                   <template #button-content>
-                    <b-icon
-                      icon="three-dots-vertical"
-                      animation="cylon-vertical"
-                      font-scale="1"
-                    ></b-icon>
+                    <b-icon icon="three-dots-vertical" animation="cylon-vertical" font-scale="1"></b-icon>
                   </template>
                   <b-dropdown-item href="#">Edit</b-dropdown-item>
                   <b-dropdown-item href="#"> Delete </b-dropdown-item>
@@ -133,18 +97,9 @@
             <span class="mr-auto">J. Circlehead</span>
             <span>
               <div>
-                <b-dropdown
-                  size="lg"
-                  variant="link"
-                  toggle-class="text-decoration-none"
-                  no-caret
-                >
+                <b-dropdown size="lg" variant="link" toggle-class="text-decoration-none" no-caret>
                   <template #button-content>
-                    <b-icon
-                      icon="three-dots-vertical"
-                      animation="cylon-vertical"
-                      font-scale="1"
-                    ></b-icon>
+                    <b-icon icon="three-dots-vertical" animation="cylon-vertical" font-scale="1"></b-icon>
                   </template>
                   <b-dropdown-item href="#">Edit</b-dropdown-item>
                   <b-dropdown-item href="#"> Delete </b-dropdown-item>
@@ -154,27 +109,13 @@
           </b-list>
 
           <b-list class="d-flex align-items-center">
-            <b-avatar
-              variant="primary"
-              text="BV"
-              class="mr-3"
-              size="4em"
-            ></b-avatar>
+            <b-avatar variant="primary" text="BV" class="mr-3" size="4em"></b-avatar>
             <span class="mr-auto">itz blec blec</span>
             <span>
               <div>
-                <b-dropdown
-                  size="lg"
-                  variant="link"
-                  toggle-class="text-decoration-none"
-                  no-caret
-                >
+                <b-dropdown size="lg" variant="link" toggle-class="text-decoration-none" no-caret>
                   <template #button-content>
-                    <b-icon
-                      icon="three-dots-vertical"
-                      animation="cylon-vertical"
-                      font-scale="1"
-                    ></b-icon>
+                    <b-icon icon="three-dots-vertical" animation="cylon-vertical" font-scale="1"></b-icon>
                   </template>
                   <b-dropdown-item href="#">Edit</b-dropdown-item>
                   <b-dropdown-item href="#"> Delete </b-dropdown-item>
@@ -190,7 +131,7 @@
 
 <script>
 export default {
-  name: "roles"
+  name: 'roles',
 };
 </script>
 

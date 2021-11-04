@@ -1,15 +1,9 @@
 <template>
   <div>
     <b-container fluid>
-      <img
-        src="@/assets/img/banner.jpg"
-        class="img-fluid header-pic"
-        alt="Kitten"
-      />
+      <img src="@/assets/img/banner.jpg" class="img-fluid header-pic" alt="Kitten" />
       <div class="photo-btns">
-        <b-button class="sm" size="sm">
-          <b-icon icon="plus"></b-icon>Add Photos</b-button
-        >
+        <b-button class="sm" size="sm"> <b-icon icon="plus"></b-icon>Add Photos</b-button>
         <b-button class="ml-2" size="sm">See All</b-button>
       </div>
       <b-container fluid="md">
@@ -20,19 +14,12 @@
               class="float-left img-avatar"
               badge-variant="primary"
             ></b-avatar>
-            <b-icon
-              icon="camera-fill"
-              class="avatar-header-icon btn cursor-pointer"
-              v-b-modal.modal-4
-            ></b-icon>
+            <b-icon icon="camera-fill" class="avatar-header-icon btn cursor-pointer" v-b-modal.modal-4></b-icon>
 
             <b-modal id="modal-4" title="Upload Profile Picture">
               <div class="w3-container">
                 <div class="row pb-3">
-                  <div
-                    class="col-sm-6 text-center"
-                    style="border-right:1px solid #dee2e6;"
-                  >
+                  <div class="col-sm-6 text-center" style="border-right:1px solid #dee2e6;">
                     <h1>
                       <fas-icon class="primary" :icon="['fas', 'upload']" />
                     </h1>
@@ -54,9 +41,7 @@
             <div class="my-auto">
               <div class="text-box">
                 <span>
-                  <h5
-                    class="font-weight-bolder m-0 p-0 ml-2 d-inline-block header-text1"
-                  >
+                  <h5 class="font-weight-bolder m-0 p-0 ml-2 d-inline-block header-text1">
                     User Name
                   </h5>
                   <br />
@@ -68,71 +53,36 @@
                     1.5k Community
                   </p>
                 </span>
-                <ul
-                  class="navbar-nav pull-right purple float-right position-loup mr-4"
-                >
+                <ul class="navbar-nav pull-right purple float-right position-loup mr-4">
                   <li class="nav-item dropdown">
-                    <b-dropdown
-                      size="sm"
-                      class=""
-                      variant="link"
-                      toggle-class="text-decoration-none"
-                      no-caret
-                    >
+                    <b-dropdown size="sm" class="" variant="link" toggle-class="text-decoration-none" no-caret>
                       <template #button-content>
-                        <fas-icon
-                          class="drop-color font-weight-bolder"
-                          :icon="['fas', 'ellipsis-h']"
-                        />
+                        <fas-icon class="drop-color font-weight-bolder" :icon="['fas', 'ellipsis-h']" />
                       </template>
                       <b-dropdown-item href="#">
-                        <fas-icon
-                          class="drop-color font-weight-bolder"
-                          :icon="['fas', 'user-plus']"
-                        />
+                        <fas-icon class="drop-color font-weight-bolder" :icon="['fas', 'user-plus']" />
                         Community</b-dropdown-item
                       >
                       <b-dropdown-item href="#">
-                        <fas-icon
-                          class="drop-color font-weight-bolder"
-                          :icon="['fas', 'comment']"
-                        />
+                        <fas-icon class="drop-color font-weight-bolder" :icon="['fas', 'comment']" />
                         Message</b-dropdown-item
                       >
                       <b-dropdown-item href="#">
-                        <b-dropdown
-                          size="sm"
-                          class=""
-                          variant="link"
-                          toggle-class="text-decoration-none"
-                          no-caret
-                        >
+                        <b-dropdown size="sm" class="" variant="link" toggle-class="text-decoration-none" no-caret>
                           <template #button-content>
-                            <fas-icon
-                              class="drop-color font-weight-bolder"
-                              :icon="['fas', 'ellipsis-h']"
-                            />
+                            <fas-icon class="drop-color font-weight-bolder" :icon="['fas', 'ellipsis-h']" />
                             Options
                           </template>
                           <b-dropdown-item href="#">
-                            <fas-icon
-                              class="drop-color font-weight-bolder"
-                              :icon="['fas', 'user-plus']"
-                            />
+                            <fas-icon class="drop-color font-weight-bolder" :icon="['fas', 'user-plus']" />
                             Community</b-dropdown-item
                           >
                           <b-dropdown-item href="#">
-                            <fas-icon
-                              class="drop-color font-weight-bolder"
-                              :icon="['fas', 'comment']"
-                            />
+                            <fas-icon class="drop-color font-weight-bolder" :icon="['fas', 'comment']" />
                             Message</b-dropdown-item
                           >
                           <b-dropdown-item href="#">
-                            <fas-icon
-                              class="drop-color font-weight-bolder"
-                              :icon="['fas', 'trash-alt']"
-                            />
+                            <fas-icon class="drop-color font-weight-bolder" :icon="['fas', 'trash-alt']" />
                             Message</b-dropdown-item
                           >
                         </b-dropdown>
@@ -146,13 +96,7 @@
           <b-col md="6" class="">
             <div class="my-auto options">
               <span class="float-right">
-                <b-dropdown
-                  id="dropdown-1"
-                  text="Contact"
-                  class="m-md-2 drop"
-                  variant="primary"
-                  size="sm"
-                >
+                <b-dropdown id="dropdown-1" text="Contact" class="m-md-2 drop" variant="primary" size="sm">
                   <b-dropdown-item>
                     <b-icon icon="chat-fill" variant="primary"></b-icon>
                     Message</b-dropdown-item
@@ -161,14 +105,9 @@
                     <b-icon icon="telephone-fill" variant="primary"></b-icon>
                     Call Now</b-dropdown-item
                   >
-                  <b-dropdown-item>
-                    <b-icon icon="geo-alt" variant="primary"></b-icon> Get
-                    Direction</b-dropdown-item
-                  >
+                  <b-dropdown-item> <b-icon icon="geo-alt" variant="primary"></b-icon> Get Direction</b-dropdown-item>
                 </b-dropdown>
-                <b-button variant="outline-primary" size="sm"
-                  ><b-icon-plus></b-icon-plus> Community</b-button
-                >
+                <b-button variant="outline-primary" size="sm"><b-icon-plus></b-icon-plus> Community</b-button>
               </span>
             </div>
           </b-col>
@@ -180,7 +119,7 @@
 
 <script>
 export default {
-  name: "headPageOwner"
+  name: 'headPageOwner',
 };
 </script>
 

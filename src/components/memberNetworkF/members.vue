@@ -43,16 +43,16 @@ export default {
     return {
       admins: [
         {
-          name: "   Interacting as Mapoure Agrobusiness",
-          avatar: "https://placekitten.com/300/300"
+          name: '   Interacting as Mapoure Agrobusiness',
+          avatar: 'https://placekitten.com/300/300',
         },
         {
-          name: "   Interacting as Mapoure Agrobusiness",
-          avatar: "https://placekitten.com/300/300"
-        }
-      ]
+          name: '   Interacting as Mapoure Agrobusiness',
+          avatar: 'https://placekitten.com/300/300',
+        },
+      ],
     };
-  }
+  },
 };
 </script>
 

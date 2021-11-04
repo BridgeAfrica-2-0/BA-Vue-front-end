@@ -3,10 +3,7 @@
     <b class="work">WorkPlace</b>
     <hr />
 
-    <b-list-group-item
-      class="d-flex align-items-center mb-4 "
-      style="border: none"
-    >
+    <b-list-group-item class="d-flex align-items-center mb-4 " style="border: none">
       <b-avatar class="mr-3 avatar"></b-avatar>
       <div class="datails">
         <div class="row">
@@ -14,8 +11,7 @@
             <span class="mr-auto"> <b>Company</b> </span>
             <p><b>Position - 7 Feb</b></p>
             <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas
-              quibusdam harum maxime!
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas quibusdam harum maxime!
             </p>
           </div>
         </div>
@@ -28,7 +24,7 @@
 export default {
   data() {
     return {};
-  }
+  },
 };
 </script>
 

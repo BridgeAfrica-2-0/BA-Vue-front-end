@@ -10,12 +10,12 @@
 </template>
 
 <script>
-import NetworkPosts from "@/components/businessf/tabs/owner/networks/posts";
-import AlbumsPosts from "@/components/businessf/tabs/owner/networks/albums";
+import NetworkPosts from '@/components/businessf/tabs/owner/networks/posts';
+import AlbumsPosts from '@/components/businessf/tabs/owner/networks/albums';
 
 export default {
-  name: "mediaNetwork",
-  components: { AlbumsPosts, NetworkPosts }
+  name: 'mediaNetwork',
+  components: { AlbumsPosts, NetworkPosts },
 };
 </script>
 

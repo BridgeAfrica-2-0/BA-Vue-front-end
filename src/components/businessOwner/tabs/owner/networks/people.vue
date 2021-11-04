@@ -1,10 +1,5 @@
 <template>
   <div>
-    
-
-
-
-    
     <div class="people-style border shadow">
       <b-row class="">
         <b-col cols="4" class="my-auto">
@@ -27,22 +22,12 @@
             <div class="p-buttons">
               <b-row>
                 <b-col cols="5">
-                  <b-button
-                    block
-                    variant="primary"
-                    size="sm"
-                    class="b-background"
-                  >
+                  <b-button block variant="primary" size="sm" class="b-background">
                     <b-icon icon="chat" class="ico"> </b-icon> Message
                   </b-button>
                 </b-col>
                 <b-col cols="6">
-                  <b-button
-                    block
-                    size="sm"
-                    class="b-background btn2"
-                    variant="primary"
-                  >
+                  <b-button block size="sm" class="b-background btn2" variant="primary">
                     <b-icon icon="plus-circle" class="ico"> </b-icon> community
                   </b-button>
                 </b-col>
@@ -53,18 +38,6 @@
       </b-row>
     </div>
 
-
-
-
-
-
-
-
-
-
-
-
-    
     <div class="people-style border shadow">
       <b-row class="">
         <b-col cols="4" class="my-auto">
@@ -87,22 +60,12 @@
             <div class="p-buttons">
               <b-row>
                 <b-col cols="5">
-                  <b-button
-                    block
-                    variant="primary"
-                    size="sm"
-                    class="b-background"
-                  >
+                  <b-button block variant="primary" size="sm" class="b-background">
                     <b-icon icon="chat" class="ico"> </b-icon> Message
                   </b-button>
                 </b-col>
                 <b-col cols="6">
-                  <b-button
-                    block
-                    size="sm"
-                    class="b-background btn2"
-                    variant="primary"
-                  >
+                  <b-button block size="sm" class="b-background btn2" variant="primary">
                     <b-icon icon="plus-circle" class="ico"> </b-icon> community
                   </b-button>
                 </b-col>
@@ -113,21 +76,6 @@
       </b-row>
     </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
     <div class="people-style border shadow">
       <b-row class="">
         <b-col cols="4" class="my-auto">
@@ -150,22 +98,12 @@
             <div class="p-buttons">
               <b-row>
                 <b-col cols="5">
-                  <b-button
-                    block
-                    variant="primary"
-                    size="sm"
-                    class="b-background"
-                  >
+                  <b-button block variant="primary" size="sm" class="b-background">
                     <b-icon icon="chat" class="ico"> </b-icon> Message
                   </b-button>
                 </b-col>
                 <b-col cols="6">
-                  <b-button
-                    block
-                    size="sm"
-                    class="b-background btn2"
-                    variant="primary"
-                  >
+                  <b-button block size="sm" class="b-background btn2" variant="primary">
                     <b-icon icon="plus-circle" class="ico"> </b-icon> community
                   </b-button>
                 </b-col>
@@ -176,18 +114,6 @@
       </b-row>
     </div>
 
-
-
-
-
-
-
-
-
-
-
-
-    
     <div class="people-style border shadow">
       <b-row class="">
         <b-col cols="4" class="my-auto">
@@ -210,22 +136,12 @@
             <div class="p-buttons">
               <b-row>
                 <b-col cols="5">
-                  <b-button
-                    block
-                    variant="primary"
-                    size="sm"
-                    class="b-background"
-                  >
+                  <b-button block variant="primary" size="sm" class="b-background">
                     <b-icon icon="chat" class="ico"> </b-icon> Message
                   </b-button>
                 </b-col>
                 <b-col cols="6">
-                  <b-button
-                    block
-                    size="sm"
-                    class="b-background btn2"
-                    variant="primary"
-                  >
+                  <b-button block size="sm" class="b-background btn2" variant="primary">
                     <b-icon icon="plus-circle" class="ico"> </b-icon> community
                   </b-button>
                 </b-col>
@@ -236,12 +152,11 @@
       </b-row>
     </div>
   </div>
-
 </template>
 
 <script>
 export default {
-  props: ["title", "image"]
+  props: ['title', 'image'],
 };
 </script>
 

@@ -4,12 +4,8 @@
       <span>
         <h4 class="mb-3">
           <h6 class="title">
-            <fas-icon
-              class="icons"
-              :icon="['fas', 'hands-helping']"
-              size="lg"
-            />
-            <b> {{business.name}} </b>    
+            <fas-icon class="icons" :icon="['fas', 'hands-helping']" size="lg" />
+            <b> {{ business.name }} </b>
           </h6>
 
           <h6 class="float-right text-success font-weight-bolder">
@@ -23,38 +19,35 @@
       <div class="d-flex col-md-12 mt-2">
         <img class="img-fluid picture" :src="business.picture" />
         <div class="text-lost">
-          <b>  {{business.name}}  </b>
+          <b> {{ business.name }} </b>
           <p class="mb-1">
-              {{business.followers}}  Community <br />
-            <span class=""
-              >Current Plan: <span class="text-success">Basic</span></span
-            >
+            {{ business.followers }} Community <br />
+            <span class="">Current Plan: <span class="text-success">Basic</span></span>
           </p>
-          <p class="mb-1 mb-3">  <span v-for="cat in business.category" :key="cat.name">  {{cat.name}}  </span> </p>
+          <p class="mb-1 mb-3">
+            <span v-for="cat in business.category" :key="cat.name"> {{ cat.name }} </span>
+          </p>
           <p class="mb-1">
             <b-icon-person-fill class="text-primary"></b-icon-person-fill>
-              <router-link :to="'business_owner/'+business.id">
-                 Visit Profile
-          </router-link>
-
-
+            <router-link :to="'business_owner/' + business.id">
+              Visit Profile
+            </router-link>
           </p>
           <p class="mb-1 ">
             <b-icon-chat-fill class="text-primary"></b-icon-chat-fill>
             Message
             <span class="badge rounded-pill bg-primary float-right mt-1">
-              {{business.message}}
+              {{ business.message }}
             </span>
           </p>
           <p class="mb-1 ">
             <b-icon-bell-fill class="text-primary"></b-icon-bell-fill>
             Notifications
-            <span class="badge rounded-pill bg-primary float-right mt-1">  {{business.notification}} </span>
-            
+            <span class="badge rounded-pill bg-primary float-right mt-1"> {{ business.notification }} </span>
           </p>
           <p class="mb-1 ">
             <b-icon-globe class="text-primary"></b-icon-globe>
-            <a > Visit Website</a>
+            <a> Visit Website</a>
           </p>
           <p class="mb-1 ">
             <b-icon-shop class="text-primary"></b-icon-shop>
@@ -67,27 +60,26 @@
 </template>
 
 <script>
-import ProfileAndBusinessDetails from "../../store/ProfileAndBusinessDetails";
+import ProfileAndBusinessDetails from '../../store/ProfileAndBusinessDetails';
 
 export default {
-  name: "businessDashboard",
-  props: ["selectedb"],
+  name: 'businessDashboard',
+  props: ['selectedb'],
   computed: {
-
     business() {
       return this.$store.state.dashboard.dashboard_business;
-    }
+    },
   },
   created() {
     this.$store
-      .dispatch("ProfileAndBusinessDetails/getdetails")
+      .dispatch('ProfileAndBusinessDetails/getdetails')
       .then(() => {
-        console.log("the response");
+        console.log('the response');
       })
       .catch(err => {
         console.log({ err: err });
       });
-  }
+  },
 };
 </script>
 
@@ -165,17 +157,12 @@ export default {
 }
 
 .picture {
-  
   border-radius: 10px;
-    width: 48%;
-    height: 250px;
-    flex-basis: 40%;
-    object-fit: contain;
+  width: 48%;
+  height: 250px;
+  flex-basis: 40%;
+  object-fit: contain;
 }
-
-
-
-
 
 .text-lost {
   flex-basis: 90%;

@@ -21,29 +21,18 @@
           <div class="d-inline-block float-right mt-3">
             <p>
               Current Plan: <span class="font-weight-bolder">Basic</span>
-              <b-button
-                variant="primary"
-                class="ml-3"
-                size="sm"
-                v-b-modal.modal-center
-                >Change</b-button
-              >
+              <b-button variant="primary" class="ml-3" size="sm" v-b-modal.modal-center>Change</b-button>
             </p>
           </div>
           <b-modal id="modal-center" centered>
             <h2 class="text-center"><b>Paid Subscription Required</b></h2>
             <p class="my-4 text-center px-3">
-              You must subscribe to a paid in order to gain access to premium
-              template
+              You must subscribe to a paid in order to gain access to premium template
             </p>
 
             <template #modal-footer>
               <div class="w-100">
-                <b-button
-                  variant="outline-dark"
-                  class="float-left"
-                  @click="stat"
-                >
+                <b-button variant="outline-dark" class="float-left" @click="stat">
                   No, Thanks
                 </b-button>
 
@@ -62,16 +51,16 @@
 </template>
 
 <script>
-import navbar from "@/components/navbar";
-import Footer from "@/components/footer";
-import CreateWebsiteStep1 from "@/components/businessf/tabs/owner/createWebsiteStep1";
+import navbar from '@/components/navbar';
+import Footer from '@/components/footer';
+import CreateWebsiteStep1 from '@/components/businessf/tabs/owner/createWebsiteStep1';
 
 export default {
-  name: "webSiteCreate",
+  name: 'webSiteCreate',
   components: {
     CreateWebsiteStep1,
     navbar,
-    Footer
+    Footer,
   },
   data() {
     return {};
@@ -80,8 +69,8 @@ export default {
   methods: {
     stat() {
       return false;
-    }
-  }
+    },
+  },
 };
 </script>
 

@@ -2,36 +2,26 @@
   <b-modal :id="modal" hide-footer :title="title">
     <slot name="owner"> </slot>
 
-    <b-form-input
-      :placeholder="placeholder"
-      class="input-search"
-      v-model="text"
-      type="search"
-    ></b-form-input>
+    <b-form-input :placeholder="placeholder" class="input-search" v-model="text" type="search"></b-form-input>
     <h6 class="mt-3 fw-b">{{ subtitle }}</h6>
 
     <b-list-group>
       <Loader v-if="loading" />
-      <Contact
-        v-for="(contact, index) in contacts"
-        :contact="contact"
-        :key="index"
-        :post="post"
-      />
+      <Contact v-for="(contact, index) in contacts" :contact="contact" :key="index" :post="post" />
     </b-list-group>
   </b-modal>
 </template>
 
 <script>
-import _ from "lodash";
-import Contact from "./Link.vue";
+import _ from 'lodash';
+import Contact from './Link.vue';
 
-import Loader from "@/components/Loader";
+import Loader from '@/components/Loader';
 export default {
-  name: "Box",
+  name: 'Box',
 
   watch: {
-    id: function (value) {
+    id: function(value) {
       if (this.isActivated && this.modal == this.id) this.getContacts();
     },
   },
@@ -43,7 +33,7 @@ export default {
 
   data: () => ({
     loading: false,
-    text: "",
+    text: '',
     contacts: [],
   }),
 
@@ -80,11 +70,11 @@ export default {
   },
 
   methods: {
-    getContacts: async function () {
+    getContacts: async function() {
       this.loading = true;
       const response = await this.$repository.share.getNetworkorBusiness();
 
-      if ("network" == this.type) this.contacts = response.data.network;
+      if ('network' == this.type) this.contacts = response.data.network;
       else this.contacts = response.data.business;
 
       this.loading = false;

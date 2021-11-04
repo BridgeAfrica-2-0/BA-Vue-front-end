@@ -182,22 +182,10 @@
               ></b-form-select>
             </div>
 
-            <b-button
-              size="sm"
-              variant="primary"
-              v-if="!map"
-              @click="showMap(true)"
-              class="ml-2"
-            >
+            <b-button size="sm" variant="primary" v-if="!map" @click="showMap(true)" class="ml-2">
               Show map
             </b-button>
-            <b-button
-              size="sm"
-              variant="primary"
-              v-if="map"
-              class="ml-2"
-              @click="showMap(false)"
-            >
+            <b-button size="sm" variant="primary" v-if="map" class="ml-2" @click="showMap(false)">
               Hide map
             </b-button>
           </div>

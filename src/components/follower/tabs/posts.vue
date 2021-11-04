@@ -15,18 +15,18 @@
 </template>
 
 <script>
-import Intro from "../../intro";
-import Followers from "../sidebarcommunity";
-import Media from "../media";
-import Post from "./owner_post";
+import Intro from '../../intro';
+import Followers from '../sidebarcommunity';
+import Media from '../media';
+import Post from './owner_post';
 export default {
-  name: "posts",
+  name: 'posts',
   components: {
     Intro,
     Followers,
     Media,
-    Post
-  }
+    Post,
+  },
 };
 </script>
 

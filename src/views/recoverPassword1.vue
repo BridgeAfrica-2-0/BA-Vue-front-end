@@ -13,20 +13,11 @@
           <b-form class="w-75 mx-auto">
             <md-field>
               <label for="phone"> Phone</label>
-              <md-input
-                type="text"
-                name="phone"
-                id="phone"
-                v-model="phone"
-                required
-              />
+              <md-input type="text" name="phone" id="phone" v-model="phone" required />
             </md-field>
 
             <br />
-            <b-button
-              class="btn btn-primary button float-right"
-              @click.prevent="verify"
-            >
+            <b-button class="btn btn-primary button float-right" @click.prevent="verify">
               Next
             </b-button>
           </b-form>
@@ -39,23 +30,23 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
+import { mapActions } from 'vuex';
 export default {
   data() {
     return {
-      phone: "",
+      phone: '',
     };
   },
   methods: {
-    ...mapActions(["auth/recoverPassword2"]),
+    ...mapActions(['auth/recoverPassword2']),
 
     verify() {
       this.$store
-        .dispatch("auth/recoverPassword2", {
+        .dispatch('auth/recoverPassword2', {
           phone: this.phone,
         })
         .then(() => {
-          this.$router.push({ name: "RecoverPass2" });
+          this.$router.push({ name: 'RecoverPass2' });
         })
         .catch(err => {
           if (err.response.status === 422) {
@@ -63,7 +54,7 @@ export default {
             console.log(err.response.data.message);
 
             this.flashMessage.show({
-              status: "error",
+              status: 'error',
 
               message: err.response.data.message,
             });

@@ -57,11 +57,9 @@
           </div>
           <div class="d-flex align-items-center py-3 px-2 mb-2">
             <p>
-              Le lorem ipsum est, en imprimerie, une provisoire pour calibrer
-              une mise en page, le texte définitif venant remplacer le
-              faux-texte dès qu'il est prêt ou que la mise en page est achevée.
-              Généralement, on utilise un texte en faux latin, le Lorem ipsum ou
-              Lipsum.
+              Le lorem ipsum est, en imprimerie, une provisoire pour calibrer une mise en page, le texte définitif
+              venant remplacer le faux-texte dès qu'il est prêt ou que la mise en page est achevée. Généralement, on
+              utilise un texte en faux latin, le Lorem ipsum ou Lipsum.
             </p>
           </div>
         </div>
@@ -94,23 +92,14 @@
     <Post :id="modal" :isActivated="strategy" modal="modal-4" />
     <!-- modal-4 -->
 
-    <b-dropdown
-      size="lg"
-      variant="link"
-      toggle-class="text-decoration-none"
-      no-caret
-      position="bottom"
-    >
+    <b-dropdown size="lg" variant="link" toggle-class="text-decoration-none" no-caret position="bottom">
       <template #button-content>
         <fas-icon class="primary ml-3" icon="['fas', 'share']" />
       </template>
 
       <b-dropdown-text class="box-title"> Share </b-dropdown-text>
 
-      <b-dropdown-item
-        class="d-flex py-2 cursor-pointer"
-        @click="shareToYourProfile"
-      >
+      <b-dropdown-item class="d-flex py-2 cursor-pointer" @click="shareToYourProfile">
         <span class="text-ored">
           <b-icon-bell-fill class="col-bg"></b-icon-bell-fill>
         </span>
@@ -119,10 +108,7 @@
         </div>
       </b-dropdown-item>
 
-      <b-dropdown-item
-        class="d-flex py-2 cursor-pointer"
-        @click="open('modal-4')"
-      >
+      <b-dropdown-item class="d-flex py-2 cursor-pointer" @click="open('modal-4')">
         <span class="text-ored">
           <b-icon-bell-fill class="col-bg"></b-icon-bell-fill>
         </span>
@@ -131,11 +117,7 @@
         </div>
       </b-dropdown-item>
 
-      <b-dropdown-item
-        v-if="'network' !== type"
-        class="d-flex py-2 cursor-pointer"
-        @click="open('modal-2')"
-      >
+      <b-dropdown-item v-if="'network' !== type" class="d-flex py-2 cursor-pointer" @click="open('modal-2')">
         <span class="text-ored">
           <b-icon-bell-fill class="col-bg"></b-icon-bell-fill>
         </span>
@@ -144,11 +126,7 @@
         </div>
       </b-dropdown-item>
 
-      <b-dropdown-item
-        v-if="'business' !== type"
-        class="d-flex py-2 cursor-pointer"
-        @click="open('modal-3')"
-      >
+      <b-dropdown-item v-if="'business' !== type" class="d-flex py-2 cursor-pointer" @click="open('modal-3')">
         <span class="text-ored">
           <b-icon-bell-fill class="col-bg"></b-icon-bell-fill>
         </span>
@@ -239,9 +217,7 @@
       </b-dropdown-item>
       <b-popover target="sharing-via" triggers="hover" placement="left">
         <div class="popover-body">
-          <div
-            class="d-inline-flex flex-row align-items-center suggest-item py-2 cursor-pointer"
-          >
+          <div class="d-inline-flex flex-row align-items-center suggest-item py-2 cursor-pointer">
             <span class="text-ored">
               <b-icon-bell-fill class="col-bg"></b-icon-bell-fill>
             </span>
@@ -250,9 +226,7 @@
             </div>
           </div>
 
-          <div
-            class="d-inline-flex flex-row align-items-center suggest-item py-2 cursor-pointer"
-          >
+          <div class="d-inline-flex flex-row align-items-center suggest-item py-2 cursor-pointer">
             <span class="text-ored">
               <b-icon-bell-fill class="col-bg"></b-icon-bell-fill>
             </span>
@@ -261,9 +235,7 @@
             </div>
           </div>
 
-          <div
-            class="d-inline-flex flex-row align-items-center suggest-item py-2 cursor-pointer"
-          >
+          <div class="d-inline-flex flex-row align-items-center suggest-item py-2 cursor-pointer">
             <span class="text-ored">
               <b-icon-bell-fill class="col-bg"></b-icon-bell-fill>
             </span>
@@ -277,21 +249,20 @@
   </div>
 </template>
 
-
 <script>
-import Box from "./Box";
-import Post from "./SharePost";
+import Box from './Box';
+import Post from './SharePost';
 
 export default {
-  name: "ShareButton",
+  name: 'ShareButton',
   props: {
     post: {
       type: Object,
     },
     type: {
       type: String,
-      validator: function (value) {
-        if (["network", "business", "profile"].includes(value)) return true;
+      validator: function(value) {
+        if (['network', 'business', 'profile'].includes(value)) return true;
       },
     },
   },
@@ -306,13 +277,8 @@ export default {
   }),
 
   computed: {
-    strategy: function () {
-      if (
-        ["modal-1", "modal-2", "modal-3", "modal-4", "modal-5"].includes(
-          this.modal
-        )
-      )
-        return true;
+    strategy: function() {
+      if (['modal-1', 'modal-2', 'modal-3', 'modal-4', 'modal-5'].includes(this.modal)) return true;
       else return false;
     },
   },
@@ -323,22 +289,21 @@ export default {
       this.modal = id;
     },
 
-    shareToYourProfile: async function () {
+    shareToYourProfile: async function() {
       let data = {
-        [this.type]: "",
+        [this.type]: '',
         post_id: parseInt(this.post.post_id),
         source_id: parseInt(this.post.user_id),
       };
 
-      if ("profile" !== this.type)
-        data = Object.assign(data, { target_id: this.post.target_id });
+      if ('profile' !== this.type) data = Object.assign(data, { target_id: this.post.target_id });
 
       const request = await this.$repository.share.userPost(data);
 
       if (request.success)
         this.flashMessage.success({
           time: 5000,
-          message: "Operation success",
+          message: 'Operation success',
         });
     },
   },

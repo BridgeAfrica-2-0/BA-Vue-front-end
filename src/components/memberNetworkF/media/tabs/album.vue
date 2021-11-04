@@ -24,10 +24,7 @@
       <b-row>
         <div class="albums">
           <b-modal hide-footer v-model="modalShow">
-            <b-img
-              fluid-grow
-              src="https://picsum.photos/300/150/?image=41"
-            ></b-img>
+            <b-img fluid-grow src="https://picsum.photos/300/150/?image=41"></b-img>
             <h3>Picture Title</h3>
           </b-modal>
         </div>
@@ -43,12 +40,7 @@
         <b-col md="4" v-if="image" class="album mt-2">
           <b-img @click="view" :src="image" class="image-album"></b-img>
         </b-col>
-        <b-col
-          md="4"
-          v-for="item in album[0]"
-          :key="item.id"
-          class="album mt-2"
-        >
+        <b-col md="4" v-for="item in album[0]" :key="item.id" class="album mt-2">
           <b-img @click="view" :src="item.image" class="image-album"></b-img>
         </b-col>
       </b-row>
@@ -71,131 +63,122 @@ export default {
       pictureShow: false,
       modalShow: false,
       showModal: false,
-      text: "",
+      text: '',
       posts: [
         {
           id: 1,
-          image: "https://picsum.photos/300/150/?image=41",
-          title: "Title 2",
+          image: 'https://picsum.photos/300/150/?image=41',
+          title: 'Title 2',
           text:
-            " Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum quam, doloribus id sit consequuntur tempora molestiae blanditiis."
+            ' Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum quam, doloribus id sit consequuntur tempora molestiae blanditiis.',
         },
         {
           id: 1,
-          image: "https://picsum.photos/300/150/?image=41",
-          title: "Title 2",
+          image: 'https://picsum.photos/300/150/?image=41',
+          title: 'Title 2',
           text:
-            " Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum quam, doloribus id sit consequuntur tempora molestiae blanditiis."
+            ' Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum quam, doloribus id sit consequuntur tempora molestiae blanditiis.',
         },
         {
           id: 1,
-          image: "https://picsum.photos/300/150/?image=41",
-          title: "Title 2",
+          image: 'https://picsum.photos/300/150/?image=41',
+          title: 'Title 2',
           text:
-            " Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum quam, doloribus id sit consequuntur tempora molestiae blanditiis."
+            ' Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum quam, doloribus id sit consequuntur tempora molestiae blanditiis.',
         },
         {
           id: 1,
-          image: "https://picsum.photos/300/150/?image=41",
-          title: "Title 2",
+          image: 'https://picsum.photos/300/150/?image=41',
+          title: 'Title 2',
           text:
-            " Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum quam, doloribus id sit consequuntur tempora molestiae blanditiis."
+            ' Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum quam, doloribus id sit consequuntur tempora molestiae blanditiis.',
         },
         {
           id: 1,
-          image: "https://picsum.photos/300/150/?image=41",
-          title: "Title 2",
+          image: 'https://picsum.photos/300/150/?image=41',
+          title: 'Title 2',
           text:
-            " Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum quam, doloribus id sit consequuntur tempora molestiae blanditiis."
+            ' Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum quam, doloribus id sit consequuntur tempora molestiae blanditiis.',
         },
         {
           id: 1,
-          image: "https://picsum.photos/300/150/?image=41",
-          title: "Title 2",
+          image: 'https://picsum.photos/300/150/?image=41',
+          title: 'Title 2',
           text:
-            " Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum quam, doloribus id sit consequuntur tempora molestiae blanditiis."
-        }
+            ' Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum quam, doloribus id sit consequuntur tempora molestiae blanditiis.',
+        },
       ],
       images: [
         {
           id: 1,
-          image: "https://picsum.photos/300/150/?image=41"
+          image: 'https://picsum.photos/300/150/?image=41',
         },
         {
           id: 2,
-          image: "https://picsum.photos/300/150/?image=41"
-        }
+          image: 'https://picsum.photos/300/150/?image=41',
+        },
       ],
 
       albums: [
         {
           id: 1,
-          name: "Album 1",
+          name: 'Album 1',
           items: [
             {
               id: 1,
-              image:
-                "https://business.bridgeafrica.info/assets/img/portfolio/media2.png"
+              image: 'https://business.bridgeafrica.info/assets/img/portfolio/media2.png',
             },
             {
               id: 2,
-              image:
-                "https://business.bridgeafrica.info/assets/img/portfolio/media3.png"
-            }
-          ]
+              image: 'https://business.bridgeafrica.info/assets/img/portfolio/media3.png',
+            },
+          ],
         },
         {
           id: 2,
-          name: "Album 2",
+          name: 'Album 2',
           items: [
             {
               id: 1,
-              image:
-                "https://business.bridgeafrica.info/assets/img/portfolio/media.png"
+              image: 'https://business.bridgeafrica.info/assets/img/portfolio/media.png',
             },
             {
               id: 2,
-              image:
-                "https://business.bridgeafrica.info/assets/img/portfolio/media2.png"
+              image: 'https://business.bridgeafrica.info/assets/img/portfolio/media2.png',
             },
             {
               id: 3,
-              image:
-                "https://business.bridgeafrica.info/assets/img/portfolio/media3.png"
-            }
-          ]
+              image: 'https://business.bridgeafrica.info/assets/img/portfolio/media3.png',
+            },
+          ],
         },
 
         {
           id: 3,
-          name: "Album 3",
+          name: 'Album 3',
           items: [
             {
               id: 1,
-              image:
-                "https://business.bridgeafrica.info/assets/img/portfolio/media2.png"
+              image: 'https://business.bridgeafrica.info/assets/img/portfolio/media2.png',
             },
             {
               id: 2,
-              image:
-                "https://business.bridgeafrica.info/assets/img/portfolio/media3.png"
+              image: 'https://business.bridgeafrica.info/assets/img/portfolio/media3.png',
             },
             {
               id: 3,
-              image:
-                "https://business.bridgeafrica.info/assets/img/portfolio/media.png"
+              image: 'https://business.bridgeafrica.info/assets/img/portfolio/media.png',
             },
             {
               id: 4,
-              image:
-                "https://business.bridgeafrica.info/assets/img/portfolio/media3.png"
-            }
-          ]
-        }
+              image: 'https://business.bridgeafrica.info/assets/img/portfolio/media3.png',
+            },
+          ],
+        },
       ],
 
       album: [],
-      image: ""
+      image: '',
     };
   },
   methods: {
@@ -247,7 +230,7 @@ export default {
       @return void
       */
     chooseFile() {
-      let defaultBtn = document.getElementById("default-btn");
+      let defaultBtn = document.getElementById('default-btn');
       defaultBtn.click();
     },
     /**
@@ -275,9 +258,9 @@ export default {
     },
 
     removeImage: function() {
-      this.image = "";
-    }
-  }
+      this.image = '';
+    },
+  },
 };
 </script>
 
@@ -340,7 +323,7 @@ export default {
   height: fit-content;
 }
 
-input[type="file"] {
+input[type='file'] {
   display: none;
 }
 @media only screen and (max-width: 768px) {

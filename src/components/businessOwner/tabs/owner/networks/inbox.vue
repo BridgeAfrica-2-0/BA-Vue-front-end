@@ -7,48 +7,26 @@
           <div v-if="show">
             <b-col class="pr-0">
               <div class="right-mobile">
-                
                 <b-row>
                   <b-col>
-                    <b-avatar
-                      variant="primary"
-                      text="LV"
-                      size="50"
-                    ></b-avatar>
+                    <b-avatar variant="primary" text="LV" size="50"></b-avatar>
                   </b-col>
                   <b-col>
                     <h4>Messages</h4>
                   </b-col>
                   <b-col>
-                    <b-icon
-                      @click="newMessage(true)"
-                      class="new-message primary"
-                      icon="pencil-fill"
-                    ></b-icon>
+                    <b-icon @click="newMessage(true)" class="new-message primary" icon="pencil-fill"></b-icon>
                   </b-col>
                 </b-row>
                 <b-container>
-                  <input
-                    type="text"
-                    class="form-control"
-                    placeholder="Search inbox"
-                  />
+                  <input type="text" class="form-control" placeholder="Search inbox" />
                 </b-container>
               </div>
               <div>
                 <div class="messages-mobile">
-                  <b-row
-                    v-for="message in messages"
-                    :key="message.id"
-                    class="p-2 message"
-                    @click="showMessages(false)"
-                  >
+                  <b-row v-for="message in messages" :key="message.id" class="p-2 message" @click="showMessages(false)">
                     <b-col class="col-3">
-                      <b-avatar
-                        variant="primary"
-                        text="BL"
-                        size="40"
-                      ></b-avatar>
+                      <b-avatar variant="primary" text="BL" size="40"></b-avatar>
                     </b-col>
                     <b-col>
                       <h6>{{ message.name }}</h6>
@@ -73,27 +51,14 @@
                   <h3 class="">Messages</h3>
                 </b-col>
                 <b-col>
-                  <b-icon
-                    @click="newMessage(true)"
-                    class="new-message primary"
-                    icon="pencil-fill"
-                  ></b-icon>
+                  <b-icon @click="newMessage(true)" class="new-message primary" icon="pencil-fill"></b-icon>
                 </b-col>
               </b-row>
-              <input
-                type="text"
-                class="form-control"
-                placeholder="Search inbox"
-              />
+              <input type="text" class="form-control" placeholder="Search inbox" />
             </div>
             <div>
               <div class="messages">
-                <b-row
-                  v-for="message in messages"
-                  :key="message.id"
-                  class="p-2 message"
-                  @click="showInfo(false)"
-                >
+                <b-row v-for="message in messages" :key="message.id" class="p-2 message" @click="showInfo(false)">
                   <b-col class="col-2">
                     <b-avatar variant="primary" text="BV" size="40"></b-avatar>
                   </b-col>
@@ -113,12 +78,7 @@
             <div class="chat-nav">
               <b-row class="mobile">
                 <b-col class="col-1">
-                  <b-icon
-                    @click="showMessages(true)"
-                    icon="three-dots"
-                    aria-hidden="true"
-                    class="primary"
-                  ></b-icon>
+                  <b-icon @click="showMessages(true)" icon="three-dots" aria-hidden="true" class="primary"></b-icon>
                 </b-col>
                 <b-col class="col-2">
                   <b-avatar variant="primary" text="BV" size="30"></b-avatar>
@@ -136,11 +96,7 @@
                       <b-icon icon="telephone-fill" class="primary"></b-icon>
                     </b-col>
                     <b-col class="col-2">
-                      <b-icon
-                        @click="showInfo(true)"
-                        icon="info-circle"
-                        class="primary"
-                      ></b-icon>
+                      <b-icon @click="showInfo(true)" icon="info-circle" class="primary"></b-icon>
                     </b-col>
                   </b-row>
                 </b-col>
@@ -156,24 +112,13 @@
                 <b-col class="col-4">
                   <b-row class="mt-3 ml-5">
                     <b-col class="col-3">
-                      <b-icon
-                        class="msg-icon primary"
-                        icon="search"
-                        size="10"
-                      ></b-icon>
+                      <b-icon class="msg-icon primary" icon="search" size="10"></b-icon>
                     </b-col>
                     <b-col class="col-3">
-                      <b-icon
-                        class="msg-icon primary"
-                        icon="telephone-fill"
-                      ></b-icon>
+                      <b-icon class="msg-icon primary" icon="telephone-fill"></b-icon>
                     </b-col>
                     <b-col>
-                      <b-icon
-                        @click="showInfo(true)"
-                        class="msg-icon primary"
-                        icon="info-circle"
-                      ></b-icon>
+                      <b-icon @click="showInfo(true)" class="msg-icon primary" icon="info-circle"></b-icon>
                     </b-col>
                   </b-row>
                 </b-col>
@@ -218,33 +163,18 @@
                   <b-avatar variant="primary" text="BV" size="40"></b-avatar>
                 </b-col>
                 <b-col>
-                  <b-form-textarea
-                    id="textarea"
-                    v-model="text"
-                    placeholder="Enter something..."
-                  ></b-form-textarea>
+                  <b-form-textarea id="textarea" v-model="text" placeholder="Enter something..."></b-form-textarea>
                 </b-col>
                 <b-col class="col-2">
                   <b-row class="p-2 icons">
                     <b-col class="col-2">
-                      <b-icon
-                        class="msg-icon"
-                        icon="smiley"
-                        variant="primary"
-                      ></b-icon>
+                      <b-icon class="msg-icon" icon="smiley" variant="primary"></b-icon>
                     </b-col>
                     <b-col class="col-3">
-                      <b-icon
-                        class="msg-icon primary"
-                        icon="paperclip"
-                      ></b-icon>
+                      <b-icon class="msg-icon primary" icon="paperclip"></b-icon>
                     </b-col>
                     <b-col class="col-2">
-                      <b-icon
-                        @click="send"
-                        class="msg-icon primary"
-                        icon="cursor-fill"
-                      ></b-icon>
+                      <b-icon @click="send" class="msg-icon primary" icon="cursor-fill"></b-icon>
                     </b-col>
                   </b-row>
                 </b-col>
@@ -258,17 +188,12 @@
           <b-col v-if="info">
             <div class="info-nav">
               <b-button class="primary-bg" @click="showInfo(false)">
-               <fas-icon :icon="['fas', 'arrow-left']" />
+                <fas-icon :icon="['fas', 'arrow-left']" />
               </b-button>
               <span class="cnt-info"> Contact Info</span>
             </div>
             <div class="info-bottom">
-              <b-avatar
-                class="info-avatar"
-                variant="primary"
-                text="BV"
-                size="200"
-              ></b-avatar>
+              <b-avatar class="info-avatar" variant="primary" text="BV" size="200"></b-avatar>
               <div class="info-detail">
                 <h1 class="info-name">Louis Litt</h1>
                 <b-link class="primary">View Profile</b-link>
@@ -283,13 +208,7 @@
                       Block Messages
                     </b-col>
                     <b-col>
-                      <b-form-checkbox
-                        v-model="checked"
-                        name="check-button"
-                        class="primary"
-                        switch
-                      >
-                      </b-form-checkbox>
+                      <b-form-checkbox v-model="checked" name="check-button" class="primary" switch> </b-form-checkbox>
                     </b-col>
                   </b-row>
                 </li>
@@ -297,45 +216,20 @@
               </ul>
             </div>
             <div class="info-media">
-             <b-row>
-               <b-col>
+              <b-row>
+                <b-col>
                   Media
-               </b-col>
-               <b-col cols="3">
-                 <b-link>See All</b-link>
-               </b-col>
-             </b-row>
+                </b-col>
+                <b-col cols="3">
+                  <b-link>See All</b-link>
+                </b-col>
+              </b-row>
               <div class="media">
-                <img
-                  src="@/assets/img/about1.jpg"
-                  height="100"
-                  alt=""
-                  srcset=""
-                />
-                <img
-                  src="@/assets/img/about1.jpg"
-                  height="100"
-                  alt=""
-                  srcset=""
-                />
-                <img
-                  src="@/assets/img/about1.jpg"
-                  height="100"
-                  alt=""
-                  srcset=""
-                />
-                <img
-                  src="@/assets/img/about1.jpg"
-                  height="100"
-                  alt=""
-                  srcset=""
-                />
-                <img
-                  src="@/assets/img/about1.jpg"
-                  height="100"
-                  alt=""
-                  srcset=""
-                />
+                <img src="@/assets/img/about1.jpg" height="100" alt="" srcset="" />
+                <img src="@/assets/img/about1.jpg" height="100" alt="" srcset="" />
+                <img src="@/assets/img/about1.jpg" height="100" alt="" srcset="" />
+                <img src="@/assets/img/about1.jpg" height="100" alt="" srcset="" />
+                <img src="@/assets/img/about1.jpg" height="100" alt="" srcset="" />
               </div>
             </div>
           </b-col>
@@ -347,12 +241,7 @@
                     To
                   </b-col>
                   <b-col>
-                    <input
-                      type="text"
-                      name=""
-                      class="form-control"
-                      placeholder="Type the name of person or group"
-                    />
+                    <input type="text" name="" class="form-control" placeholder="Type the name of person or group" />
                   </b-col>
                 </b-row>
               </div>
@@ -362,11 +251,7 @@
                     <b-avatar variant="primary" text="BV" size="40"></b-avatar>
                   </b-col>
                   <b-col>
-                    <b-form-textarea
-                      id="text-area"
-                      v-model="text"
-                      placeholder="Enter something..."
-                    ></b-form-textarea>
+                    <b-form-textarea id="text-area" v-model="text" placeholder="Enter something..."></b-form-textarea>
                   </b-col>
                   <b-col class="col-2">
                     <b-row class="p-2 icons">
@@ -374,16 +259,10 @@
                         <b-icon class="msg-icon primary" icon="smiley"></b-icon>
                       </b-col>
                       <b-col class="col-3">
-                        <b-icon
-                          class="msg-icon primary"
-                          icon="paperclip"
-                        ></b-icon>
+                        <b-icon class="msg-icon primary" icon="paperclip"></b-icon>
                       </b-col>
                       <b-col class="col-2">
-                        <b-icon
-                          class="msg-icon primary"
-                          icon="cursor-fill"
-                        ></b-icon>
+                        <b-icon class="msg-icon primary" icon="cursor-fill"></b-icon>
                       </b-col>
                     </b-row>
                   </b-col>
@@ -394,135 +273,133 @@
         </b-row>
       </div>
     </div>
-   
   </div>
 </template>
 
 <script>
-import Navbar from "@/components/navbar";
+import Navbar from '@/components/navbar';
 
 export default {
   components: {
     Navbar,
-
   },
   data() {
     return {
       message: {
-        type: "",
-        name: "Louis Litt",
-        timeStamp: "",
-        message: "",
+        type: '',
+        name: 'Louis Litt',
+        timeStamp: '',
+        message: '',
       },
       newMsg: false,
       show: false,
       info: false,
       checked: false,
-      text: "",
+      text: '',
       chats: [
         {
           id: 0,
-          type: "received",
-          name: "Louis Litt",
-          timeStamp: "3:00 PM",
+          type: 'received',
+          name: 'Louis Litt',
+          timeStamp: '3:00 PM',
           message:
-            "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Explicabo, quos? Fuga, nam dolores? Tempora, qui.",
+            'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Explicabo, quos? Fuga, nam dolores? Tempora, qui.',
         },
         {
           id: 1,
-          type: "sent",
-          name: "Louis Litt",
-          timeStamp: "3:00 PM",
+          type: 'sent',
+          name: 'Louis Litt',
+          timeStamp: '3:00 PM',
           message:
-            "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Explicabo, quos? Fuga, nam dolores? Tempora, qui.",
+            'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Explicabo, quos? Fuga, nam dolores? Tempora, qui.',
         },
         {
           id: 2,
-          type: "received",
-          name: "Louis Litt",
-          timeStamp: "3:00 PM",
+          type: 'received',
+          name: 'Louis Litt',
+          timeStamp: '3:00 PM',
           message:
-            "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Explicabo, quos? Fuga, nam dolores? Tempora, qui.",
+            'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Explicabo, quos? Fuga, nam dolores? Tempora, qui.',
         },
         {
           id: 3,
-          type: "sent",
-          name: "Louis Litt",
-          timeStamp: "3:00 PM",
+          type: 'sent',
+          name: 'Louis Litt',
+          timeStamp: '3:00 PM',
           message:
-            "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Explicabo, quos? Fuga, nam dolores? Tempora, qui.",
+            'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Explicabo, quos? Fuga, nam dolores? Tempora, qui.',
         },
         {
           id: 4,
-          type: "received",
-          name: "Louis Litt",
-          timeStamp: "3:00 PM",
+          type: 'received',
+          name: 'Louis Litt',
+          timeStamp: '3:00 PM',
           message:
-            "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Explicabo, quos? Fuga, nam dolores? Tempora, qui.",
+            'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Explicabo, quos? Fuga, nam dolores? Tempora, qui.',
         },
         {
           id: 5,
-          type: "sent",
-          name: "Louis Litt",
-          timeStamp: "3:00 PM",
+          type: 'sent',
+          name: 'Louis Litt',
+          timeStamp: '3:00 PM',
           message:
-            "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Explicabo, quos? Fuga, nam dolores? Tempora, qui.",
+            'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Explicabo, quos? Fuga, nam dolores? Tempora, qui.',
         },
       ],
       messages: [
         {
           id: 0,
-          name: "Louis Litt",
-          startMessage: "Lorem ipsum dolor sit amet.",
-          timeStamp: "7:00am",
+          name: 'Louis Litt',
+          startMessage: 'Lorem ipsum dolor sit amet.',
+          timeStamp: '7:00am',
         },
         {
           id: 1,
-          name: "Louis Litt",
-          startMessage: "Lorem ipsum dolor sit amet.",
-          timeStamp: "7:00am",
+          name: 'Louis Litt',
+          startMessage: 'Lorem ipsum dolor sit amet.',
+          timeStamp: '7:00am',
         },
         {
           id: 3,
-          name: "Louis Litt",
-          startMessage: "Lorem ipsum dolor sit amet.",
-          timeStamp: "7:00am",
+          name: 'Louis Litt',
+          startMessage: 'Lorem ipsum dolor sit amet.',
+          timeStamp: '7:00am',
         },
         {
           id: 4,
-          name: "Louis Litt",
-          startMessage: "Lorem ipsum dolor sit amet.",
-          timeStamp: "7:00am",
+          name: 'Louis Litt',
+          startMessage: 'Lorem ipsum dolor sit amet.',
+          timeStamp: '7:00am',
         },
         {
           id: 5,
-          name: "Louis Litt",
-          startMessage: "Lorem ipsum dolor sit amet.",
-          timeStamp: "7:00am",
+          name: 'Louis Litt',
+          startMessage: 'Lorem ipsum dolor sit amet.',
+          timeStamp: '7:00am',
         },
         {
           id: 6,
-          name: "Louis Litt",
-          startMessage: "Lorem ipsum dolor sit amet.",
-          timeStamp: "7:00am",
+          name: 'Louis Litt',
+          startMessage: 'Lorem ipsum dolor sit amet.',
+          timeStamp: '7:00am',
         },
         {
           id: 7,
-          name: "Louis Litt",
-          startMessage: "Lorem ipsum dolor sit amet.",
-          timeStamp: "7:00am",
+          name: 'Louis Litt',
+          startMessage: 'Lorem ipsum dolor sit amet.',
+          timeStamp: '7:00am',
         },
         {
           id: 8,
-          name: "Louis Litt",
-          startMessage: "Lorem ipsum dolor sit amet.",
-          timeStamp: "7:00am",
+          name: 'Louis Litt',
+          startMessage: 'Lorem ipsum dolor sit amet.',
+          timeStamp: '7:00am',
         },
         {
           id: 9,
-          name: "Louis Litt",
-          startMessage: "Lorem ipsum dolor sit amet.",
-          timeStamp: "7:00am",
+          name: 'Louis Litt',
+          startMessage: 'Lorem ipsum dolor sit amet.',
+          timeStamp: '7:00am',
         },
       ],
     };
@@ -537,19 +414,19 @@ export default {
       console.log(this.checked);
     },
     newMessage(arg) {
-      console.log("hey");
+      console.log('hey');
       this.newMsg = arg;
       this.show = false;
     },
     send() {
-      this.message.type = "sent";
+      this.message.type = 'sent';
       let today = new Date();
       let h = today.getHours();
       let m = today.getMinutes();
-      this.message.timeStamp = h + ":" + m;
+      this.message.timeStamp = h + ':' + m;
       this.message.message = this.text;
       this.chats.push(this.message);
-      this.text = "";
+      this.text = '';
     },
   },
 };

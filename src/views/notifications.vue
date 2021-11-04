@@ -20,18 +20,10 @@
         <b-col v-if="checked" class="col-1">
           <b-row class="mobile-actions">
             <b-col class="col-1 mt-4">
-              <b-icon
-                class="msg-icon mark-as"
-                icon="pen"
-                variant="primary"
-              ></b-icon>
+              <b-icon class="msg-icon mark-as" icon="pen" variant="primary"></b-icon>
             </b-col>
             <b-col class="col-1 mt-4">
-              <b-icon
-                class="msg-icon del"
-                icon="trash"
-                variant="primary"
-              ></b-icon>
+              <b-icon class="msg-icon del" icon="trash" variant="primary"></b-icon>
             </b-col>
           </b-row>
         </b-col>
@@ -62,18 +54,10 @@
           <b-col class="col-1">
             <b-row>
               <b-col class="show">
-                <b-icon
-                  class="msg-icon pen"
-                  icon="pen"
-                  variant="primary"
-                ></b-icon>
+                <b-icon class="msg-icon pen" icon="pen" variant="primary"></b-icon>
               </b-col>
               <b-col class="show">
-                <b-icon
-                  class="msg-icon trash show"
-                  icon="trash"
-                  variant="primary"
-                ></b-icon>
+                <b-icon class="msg-icon trash show" icon="trash" variant="primary"></b-icon>
               </b-col>
             </b-row>
           </b-col>
@@ -85,25 +69,25 @@
 </template>
 
 <script>
-import Navbar from "@/components/navbar";
-import Footer from "@/components/footer";
+import Navbar from '@/components/navbar';
+import Footer from '@/components/footer';
 export default {
   components: {
     Navbar,
-    Footer
+    Footer,
   },
 
   data() {
     return {
       checked: false,
-      checkAll: false
+      checkAll: false,
     };
   },
   methods: {
     checkedAll() {
       this.checked = true;
-    }
-  }
+    },
+  },
 };
 </script>
 

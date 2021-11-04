@@ -8,10 +8,9 @@
               <div class="c516 c513">
                 <div>
                   <h1>Welcome!</h1>
-                  <br>
+                  <br />
                   <h5>
-                    Create a free membership to shop special discounts on
-                    premium brands, travel and tickets.
+                    Create a free membership to shop special discounts on premium brands, travel and tickets.
                   </h5>
 
                   <form>
@@ -84,8 +83,7 @@
                           text-transform: none;
                         "
                       >
-                        <span class="MuiButton-label">Continue</span
-                        ><span class="MuiTouchRipple-root"></span>
+                        <span class="MuiButton-label">Continue</span><span class="MuiTouchRipple-root"></span>
                       </button>
                     </div>
                   </form>
@@ -98,11 +96,9 @@
                 <ul class="MuiList-root MuiList-padding">
                   <div>
                     <div v-if="profession_name == null">
-
                       <h1 class="no-padding-bottom">What's your background?</h1>
-                     
 
-                     <br>
+                      <br />
                       <li
                         class="MuiListItem-root MuiListItem-gutters"
                         tabindex="0"
@@ -116,22 +112,12 @@
                           cursor: pointer;
                         "
                       >
-                        <div
-                          class="MuiListItemText-root"
-                          style="font-size: 14px; cursor: pointer"
-                        >
+                        <div class="MuiListItemText-root" style="font-size: 14px; cursor: pointer">
                           {{ blec.name }}
                         </div>
                         <div class="MuiListItemIcon-root">
-                          <svg
-                            class="MuiSvgIcon-root"
-                            focusable="false"
-                            viewBox="0 0 24 24"
-                            aria-hidden="true"
-                          >
-                            <path
-                              d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"
-                            ></path>
+                          <svg class="MuiSvgIcon-root" focusable="false" viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path>
                           </svg>
                         </div>
                       </li>
@@ -140,7 +126,7 @@
                     <div v-if="profession_name == 'U.S. Military'">
                       <div v-if="show_branch">
                         <h1 class="no-padding-bottom">What's your Branch?</h1>
-                      <br>
+                        <br />
                         <li
                           class="MuiListItem-root MuiListItem-gutters"
                           tabindex="0"
@@ -154,22 +140,12 @@
                             cursor: pointer;
                           "
                         >
-                          <div
-                            class="MuiListItemText-root"
-                            style="font-size: 14px; cursor: pointer"
-                          >
+                          <div class="MuiListItemText-root" style="font-size: 14px; cursor: pointer">
                             {{ blec.name }}
                           </div>
                           <div class="MuiListItemIcon-root">
-                            <svg
-                              class="MuiSvgIcon-root"
-                              focusable="false"
-                              viewBox="0 0 24 24"
-                              aria-hidden="true"
-                            >
-                              <path
-                                d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"
-                              ></path>
+                            <svg class="MuiSvgIcon-root" focusable="false" viewBox="0 0 24 24" aria-hidden="true">
+                              <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path>
                             </svg>
                           </div>
                         </li>
@@ -187,16 +163,14 @@
                             color: rgb(0, 161, 223);
                           "
                         >
-                          <path
-                            d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"
-                          ></path>
+                          <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"></path>
                         </svg>
                         <a href="#" @click="resetBranch"> back </a>
                       </div>
 
                       <div v-if="show_status">
                         <h1 class="no-padding-bottom">What's your Status?</h1>
-                        <br>
+                        <br />
                         <li
                           class="MuiListItem-root MuiListItem-gutters"
                           tabindex="0"
@@ -210,22 +184,12 @@
                             cursor: pointer;
                           "
                         >
-                          <div
-                            class="MuiListItemText-root"
-                            style="font-size: 14px; cursor: pointer"
-                          >
+                          <div class="MuiListItemText-root" style="font-size: 14px; cursor: pointer">
                             {{ blec.name }}
                           </div>
                           <div class="MuiListItemIcon-root">
-                            <svg
-                              class="MuiSvgIcon-root"
-                              focusable="false"
-                              viewBox="0 0 24 24"
-                              aria-hidden="true"
-                            >
-                              <path
-                                d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"
-                              ></path>
+                            <svg class="MuiSvgIcon-root" focusable="false" viewBox="0 0 24 24" aria-hidden="true">
+                              <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path>
                             </svg>
                           </div>
                         </li>
@@ -242,9 +206,7 @@
                             color: rgb(0, 161, 223);
                           "
                         >
-                          <path
-                            d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"
-                          ></path>
+                          <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"></path>
                         </svg>
                         <a href="#" @click="resetStatus"> back </a>
                       </div>
@@ -253,7 +215,7 @@
                     <div v-else-if="profession_name == 'U.S. Military Family'">
                       <div v-if="show_related">
                         <h1 class="no-padding-bottom">How are you related?</h1>
-                      <br>
+                        <br />
                         <li
                           class="MuiListItem-root MuiListItem-gutters"
                           tabindex="0"
@@ -267,22 +229,12 @@
                             cursor: pointer;
                           "
                         >
-                          <div
-                            class="MuiListItemText-root"
-                            style="font-size: 14px; cursor: pointer"
-                          >
+                          <div class="MuiListItemText-root" style="font-size: 14px; cursor: pointer">
                             {{ blec.name }}
                           </div>
                           <div class="MuiListItemIcon-root">
-                            <svg
-                              class="MuiSvgIcon-root"
-                              focusable="false"
-                              viewBox="0 0 24 24"
-                              aria-hidden="true"
-                            >
-                              <path
-                                d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"
-                              ></path>
+                            <svg class="MuiSvgIcon-root" focusable="false" viewBox="0 0 24 24" aria-hidden="true">
+                              <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path>
                             </svg>
                           </div>
                         </li>
@@ -300,20 +252,18 @@
                             color: rgb(0, 161, 223);
                           "
                         >
-                          <path
-                            d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"
-                          ></path>
+                          <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"></path>
                         </svg>
                         <a href="#" @click="resetRelated"> back </a>
                       </div>
 
                       <div v-if="show_related_profession">
-                        <h1 class="no-padding-bottom"> What's your Branch </h1>
-                        <br>
-                        <li   
+                        <h1 class="no-padding-bottom">What's your Branch</h1>
+                        <br />
+                        <li
                           class="MuiListItem-root MuiListItem-gutters"
                           tabindex="0"
-                          v-for="blec in US_Military "
+                          v-for="blec in US_Military"
                           :key="blec.id"
                           @click="relatedProfession(blec)"
                           style="
@@ -323,22 +273,12 @@
                             cursor: pointer;
                           "
                         >
-                          <div
-                            class="MuiListItemText-root"
-                            style="font-size: 14px; cursor: pointer"
-                          >
+                          <div class="MuiListItemText-root" style="font-size: 14px; cursor: pointer">
                             {{ blec.name }}
                           </div>
                           <div class="MuiListItemIcon-root">
-                            <svg
-                              class="MuiSvgIcon-root"
-                              focusable="false"
-                              viewBox="0 0 24 24"
-                              aria-hidden="true"
-                            >
-                              <path
-                                d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"
-                              ></path>
+                            <svg class="MuiSvgIcon-root" focusable="false" viewBox="0 0 24 24" aria-hidden="true">
+                              <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path>
                             </svg>
                           </div>
                         </li>
@@ -356,26 +296,15 @@
                             color: rgb(0, 161, 223);
                           "
                         >
-                          <path
-                            d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"
-                          ></path>
+                          <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"></path>
                         </svg>
                         <a href="#" @click="resetRelatedProfession"> back </a>
                       </div>
                     </div>
 
-
-
-
-                    <div v-else-if="profession_name=='Law Enforcement' "> 
-
-
-                      <div v-if="show_departement">      
-
-                        <h1 class="no-padding-bottom"> Select Your Department </h1>
-   
-                       
-  
+                    <div v-else-if="profession_name == 'Law Enforcement'">
+                      <div v-if="show_departement">
+                        <h1 class="no-padding-bottom">Select Your Department</h1>
 
                         <h4 class="c5137"><strong>State &amp; Local</strong></h4>
 
@@ -392,34 +321,21 @@
                             cursor: pointer;
                           "
                         >
-                          <div
-                            class="MuiListItemText-root"
-                            style="font-size: 14px; cursor: pointer"
-                          >
+                          <div class="MuiListItemText-root" style="font-size: 14px; cursor: pointer">
                             {{ blec.name }}
                           </div>
                           <div class="MuiListItemIcon-root">
-                            <svg
-                              class="MuiSvgIcon-root"
-                              focusable="false"
-                              viewBox="0 0 24 24"
-                              aria-hidden="true"
-                            >
-                              <path
-                                d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"
-                              ></path>
+                            <svg class="MuiSvgIcon-root" focusable="false" viewBox="0 0 24 24" aria-hidden="true">
+                              <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path>
                             </svg>
                           </div>
                         </li>
 
+                        <br />
 
-
-                      <br>
-
-                      
                         <h4 class="c5137"><strong>Federal</strong></h4>
 
-                           <li
+                        <li
                           class="MuiListItem-root MuiListItem-gutters"
                           tabindex="0"
                           v-for="blec in Law_Enforcement_federal"
@@ -432,28 +348,15 @@
                             cursor: pointer;
                           "
                         >
-                          <div
-                            class="MuiListItemText-root"
-                            style="font-size: 14px; cursor: pointer"
-                          >
+                          <div class="MuiListItemText-root" style="font-size: 14px; cursor: pointer">
                             {{ blec.name }}
                           </div>
                           <div class="MuiListItemIcon-root">
-                            <svg
-                              class="MuiSvgIcon-root"
-                              focusable="false"
-                              viewBox="0 0 24 24"
-                              aria-hidden="true"
-                            >
-                              <path
-                                d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"
-                              ></path>
+                            <svg class="MuiSvgIcon-root" focusable="false" viewBox="0 0 24 24" aria-hidden="true">
+                              <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path>
                             </svg>
                           </div>
                         </li>
-
-
-
 
                         <svg
                           class="MuiSvgIcon-root"
@@ -468,16 +371,10 @@
                             color: rgb(0, 161, 223);
                           "
                         >
-                          <path
-                            d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"
-                          ></path>
+                          <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"></path>
                         </svg>
                         <a href="#" @click="resetDepartement"> back </a>
-                     
-                      </div>  
-
-
-    
+                      </div>
 
                       <div v-if="showlawenforcementstatus">
                         <h1 class="no-padding-bottom">Profession</h1>
@@ -495,22 +392,12 @@
                             cursor: pointer;
                           "
                         >
-                          <div
-                            class="MuiListItemText-root"
-                            style="font-size: 14px; cursor: pointer"
-                          >
+                          <div class="MuiListItemText-root" style="font-size: 14px; cursor: pointer">
                             {{ blec.name }}
                           </div>
                           <div class="MuiListItemIcon-root">
-                            <svg
-                              class="MuiSvgIcon-root"
-                              focusable="false"
-                              viewBox="0 0 24 24"
-                              aria-hidden="true"
-                            >
-                              <path
-                                d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"
-                              ></path>
+                            <svg class="MuiSvgIcon-root" focusable="false" viewBox="0 0 24 24" aria-hidden="true">
+                              <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path>
                             </svg>
                           </div>
                         </li>
@@ -528,30 +415,19 @@
                             color: rgb(0, 161, 223);
                           "
                         >
-                          <path
-                            d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"
-                          ></path>
+                          <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"></path>
                         </svg>
-                        <a href="#" @click="resetLawEnforcementStatus"> back </a> 
+                        <a href="#" @click="resetLawEnforcementStatus"> back </a>
                       </div>
-
-
-
-
                     </div>
-
-
 
                     <!-- governement employee -->
 
-                     <div v-else-if="profession_name=='Government Employee' "> 
+                    <div v-else-if="profession_name == 'Government Employee'">
+                      <div v-if="show_departement">
+                        <h1 class="no-padding-bottom">Select Your Department</h1>
 
-
-                      <div v-if="show_departement">      
-
-                        <h1 class="no-padding-bottom"> Select Your Department </h1>
-
-                          <h4 class="c5137"><strong>State & Local </strong></h4>
+                        <h4 class="c5137"><strong>State & Local </strong></h4>
 
                         <li
                           class="MuiListItem-root MuiListItem-gutters"
@@ -566,33 +442,21 @@
                             cursor: pointer;
                           "
                         >
-                          <div
-                            class="MuiListItemText-root"
-                            style="font-size: 14px; cursor: pointer"
-                          >
+                          <div class="MuiListItemText-root" style="font-size: 14px; cursor: pointer">
                             {{ blec.name }}
                           </div>
                           <div class="MuiListItemIcon-root">
-                            <svg
-                              class="MuiSvgIcon-root"
-                              focusable="false"
-                              viewBox="0 0 24 24"
-                              aria-hidden="true"
-                            >
-                              <path
-                                d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"
-                              ></path>
+                            <svg class="MuiSvgIcon-root" focusable="false" viewBox="0 0 24 24" aria-hidden="true">
+                              <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path>
                             </svg>
                           </div>
                         </li>
 
+                        <br />
 
+                        <h4 class="c5137"><strong>Federal</strong></h4>
 
-                      <br>
-
-                      <h4 class="c5137"><strong>Federal</strong></h4>
-
-                           <li
+                        <li
                           class="MuiListItem-root MuiListItem-gutters"
                           tabindex="0"
                           v-for="blec in Government_Employee_federal"
@@ -605,28 +469,15 @@
                             cursor: pointer;
                           "
                         >
-                          <div
-                            class="MuiListItemText-root"
-                            style="font-size: 14px; cursor: pointer"
-                          >
+                          <div class="MuiListItemText-root" style="font-size: 14px; cursor: pointer">
                             {{ blec.name }}
                           </div>
                           <div class="MuiListItemIcon-root">
-                            <svg
-                              class="MuiSvgIcon-root"
-                              focusable="false"
-                              viewBox="0 0 24 24"
-                              aria-hidden="true"
-                            >
-                              <path
-                                d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"
-                              ></path>
+                            <svg class="MuiSvgIcon-root" focusable="false" viewBox="0 0 24 24" aria-hidden="true">
+                              <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path>
                             </svg>
                           </div>
                         </li>
-
-
-
 
                         <svg
                           class="MuiSvgIcon-root"
@@ -641,20 +492,14 @@
                             color: rgb(0, 161, 223);
                           "
                         >
-                          <path
-                            d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"
-                          ></path>
+                          <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"></path>
                         </svg>
                         <a href="#" @click="resetDepartement"> back </a>
-                     
-                      </div>  
-
-
-    
+                      </div>
 
                       <div v-if="showlawenforcementstatus">
                         <h1 class="no-padding-bottom">Profession</h1>
-                        <br>
+                        <br />
 
                         <li
                           class="MuiListItem-root MuiListItem-gutters"
@@ -669,22 +514,12 @@
                             cursor: pointer;
                           "
                         >
-                          <div
-                            class="MuiListItemText-root"
-                            style="font-size: 14px; cursor: pointer"
-                          >
+                          <div class="MuiListItemText-root" style="font-size: 14px; cursor: pointer">
                             {{ blec.name }}
                           </div>
                           <div class="MuiListItemIcon-root">
-                            <svg
-                              class="MuiSvgIcon-root"
-                              focusable="false"
-                              viewBox="0 0 24 24"
-                              aria-hidden="true"
-                            >
-                              <path
-                                d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"
-                              ></path>
+                            <svg class="MuiSvgIcon-root" focusable="false" viewBox="0 0 24 24" aria-hidden="true">
+                              <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path>
                             </svg>
                           </div>
                         </li>
@@ -702,35 +537,20 @@
                             color: rgb(0, 161, 223);
                           "
                         >
-                          <path
-                            d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"
-                          ></path>
+                          <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"></path>
                         </svg>
-                        <a href="#" @click="resetLawEnforcementStatus"> back </a> 
+                        <a href="#" @click="resetLawEnforcementStatus"> back </a>
                       </div>
-
-
-
-
                     </div>
-
 
                     <!-- end of governement employee -->
 
-
                     <!-- start of Medical services -->
 
-
-
-
-                       <div v-else-if="profession_name=='Medical Services' "> 
-
-
-                      <div v-if="show_departement">      
-
-                        <h1 class="no-padding-bottom"> Select Your Department </h1>
-<br>
-                       
+                    <div v-else-if="profession_name == 'Medical Services'">
+                      <div v-if="show_departement">
+                        <h1 class="no-padding-bottom">Select Your Department</h1>
+                        <br />
 
                         <li
                           class="MuiListItem-root MuiListItem-gutters"
@@ -745,29 +565,17 @@
                             cursor: pointer;
                           "
                         >
-                          <div
-                            class="MuiListItemText-root"
-                            style="font-size: 14px; cursor: pointer"
-                          >
+                          <div class="MuiListItemText-root" style="font-size: 14px; cursor: pointer">
                             {{ blec.name }}
                           </div>
                           <div class="MuiListItemIcon-root">
-                            <svg
-                              class="MuiSvgIcon-root"
-                              focusable="false"
-                              viewBox="0 0 24 24"
-                              aria-hidden="true"
-                            >
-                              <path
-                                d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"
-                              ></path>
+                            <svg class="MuiSvgIcon-root" focusable="false" viewBox="0 0 24 24" aria-hidden="true">
+                              <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path>
                             </svg>
                           </div>
                         </li>
 
-
-
-                      <br>
+                        <br />
 
                         <svg
                           class="MuiSvgIcon-root"
@@ -782,20 +590,14 @@
                             color: rgb(0, 161, 223);
                           "
                         >
-                          <path
-                            d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"
-                          ></path>
+                          <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"></path>
                         </svg>
                         <a href="#" @click="resetDepartement"> back </a>
-                     
-                      </div>  
-
-
-    
+                      </div>
 
                       <div v-if="showlawenforcementstatus">
                         <h1 class="no-padding-bottom">Profession</h1>
-                        <br>
+                        <br />
 
                         <li
                           class="MuiListItem-root MuiListItem-gutters"
@@ -810,22 +612,12 @@
                             cursor: pointer;
                           "
                         >
-                          <div
-                            class="MuiListItemText-root"
-                            style="font-size: 14px; cursor: pointer"
-                          >
+                          <div class="MuiListItemText-root" style="font-size: 14px; cursor: pointer">
                             {{ blec.name }}
                           </div>
                           <div class="MuiListItemIcon-root">
-                            <svg
-                              class="MuiSvgIcon-root"
-                              focusable="false"
-                              viewBox="0 0 24 24"
-                              aria-hidden="true"
-                            >
-                              <path
-                                d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"
-                              ></path>
+                            <svg class="MuiSvgIcon-root" focusable="false" viewBox="0 0 24 24" aria-hidden="true">
+                              <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path>
                             </svg>
                           </div>
                         </li>
@@ -843,38 +635,21 @@
                             color: rgb(0, 161, 223);
                           "
                         >
-                          <path
-                            d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"
-                          ></path>
+                          <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"></path>
                         </svg>
-                        <a href="#" @click="resetLawEnforcementStatus"> back </a> 
+                        <a href="#" @click="resetLawEnforcementStatus"> back </a>
                       </div>
-
-
-
-
                     </div>
-
 
                     <!-- end of medical services -->
 
-
                     <!--  start of fire deparetement -->
 
+                    <div v-else-if="profession_name == 'Fire'">
+                      <div v-if="show_departement">
+                        <h1 class="no-padding-bottom">Select Your Department</h1>
 
-
-
-                    
-
-
-                       <div v-else-if="profession_name=='Fire' "> 
-
-
-                      <div v-if="show_departement">      
-
-                        <h1 class="no-padding-bottom"> Select Your Department </h1>
-
-                        <br>
+                        <br />
                         <li
                           class="MuiListItem-root MuiListItem-gutters"
                           tabindex="0"
@@ -888,29 +663,17 @@
                             cursor: pointer;
                           "
                         >
-                          <div
-                            class="MuiListItemText-root"
-                            style="font-size: 14px; cursor: pointer"
-                          >
+                          <div class="MuiListItemText-root" style="font-size: 14px; cursor: pointer">
                             {{ blec.name }}
                           </div>
                           <div class="MuiListItemIcon-root">
-                            <svg
-                              class="MuiSvgIcon-root"
-                              focusable="false"
-                              viewBox="0 0 24 24"
-                              aria-hidden="true"
-                            >
-                              <path
-                                d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"
-                              ></path>
+                            <svg class="MuiSvgIcon-root" focusable="false" viewBox="0 0 24 24" aria-hidden="true">
+                              <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path>
                             </svg>
                           </div>
                         </li>
 
-
-
-                      <br>
+                        <br />
 
                         <svg
                           class="MuiSvgIcon-root"
@@ -925,16 +688,10 @@
                             color: rgb(0, 161, 223);
                           "
                         >
-                          <path
-                            d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"
-                          ></path>
+                          <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"></path>
                         </svg>
                         <a href="#" @click="resetDepartement"> back </a>
-                     
-                      </div>  
-
-
-    
+                      </div>
 
                       <div v-if="showlawenforcementstatus">
                         <h1 class="no-padding-bottom">Profession</h1>
@@ -952,22 +709,12 @@
                             cursor: pointer;
                           "
                         >
-                          <div
-                            class="MuiListItemText-root"
-                            style="font-size: 14px; cursor: pointer"
-                          >
+                          <div class="MuiListItemText-root" style="font-size: 14px; cursor: pointer">
                             {{ blec.name }}
                           </div>
                           <div class="MuiListItemIcon-root">
-                            <svg
-                              class="MuiSvgIcon-root"
-                              focusable="false"
-                              viewBox="0 0 24 24"
-                              aria-hidden="true"
-                            >
-                              <path
-                                d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"
-                              ></path>
+                            <svg class="MuiSvgIcon-root" focusable="false" viewBox="0 0 24 24" aria-hidden="true">
+                              <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path>
                             </svg>
                           </div>
                         </li>
@@ -985,27 +732,13 @@
                             color: rgb(0, 161, 223);
                           "
                         >
-                          <path
-                            d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"
-                          ></path>
+                          <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"></path>
                         </svg>
-                        <a href="#" @click="resetLawEnforcementStatus"> back </a> 
+                        <a href="#" @click="resetLawEnforcementStatus"> back </a>
                       </div>
-
-
-
-
                     </div>
 
-
-                   <!-- end of fire deparetement -->
-
-
-
-
-
-
-
+                    <!-- end of fire deparetement -->
                   </div>
                 </ul>
               </div>
@@ -1014,7 +747,7 @@
                 <div class="c516 c513">
                   <div>
                     <h1>Great! Let's start the verification process.</h1>
-<br>
+                    <br />
                     <form>
                       <div>
                         <div style="padding-top: 15px">
@@ -1056,7 +789,6 @@
                                 value=""
                               />
                             </div>
-                            
                           </div>
                         </div>
                       </div>
@@ -1202,19 +934,13 @@
                           text-transform: none;
                         "
                       >
-                        <span class="MuiButton-label">Continue</span
-                        ><span class="MuiTouchRipple-root"></span>
+                        <span class="MuiButton-label">Continue</span><span class="MuiTouchRipple-root"></span>
                       </button>
                     </div>
 
                     <div style="margin-top: 20px; display: table">
                       <div style="float: left; margin-right: 16px">
-                        <svg
-                          class="MuiSvgIcon-root"
-                          focusable="false"
-                          viewBox="0 0 24 24"
-                          aria-hidden="true"
-                        >
+                        <svg class="MuiSvgIcon-root" focusable="false" viewBox="0 0 24 24" aria-hidden="true">
                           <path
                             d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"
                           ></path>
@@ -1230,8 +956,7 @@
                           font-size: 14px;
                         "
                       >
-                        Trusted by over a million  members who've
-                        joined reward-america since 2012.
+                        Trusted by over a million members who've joined reward-america since 2012.
                       </p>
                     </div>
                     <div class="c5131">
@@ -1250,9 +975,7 @@
                               color: rgb(0, 161, 223);
                             "
                           >
-                            <path
-                              d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"
-                            ></path></svg
+                            <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"></path></svg
                           >Back</span
                         ></a
                       >
@@ -1269,20 +992,19 @@
 </template>
 
 <script>
-import axios from "axios";
+import axios from 'axios';
 export default {
   data() {
     return {
-      message: "Hello Vue!",
+      message: 'Hello Vue!',
       profession_name: null,
       branch_name: null,
       show_branch: false,
       show_status: false,
-      show_departement:true,
-      departemnet_name:null,
-      departement_status:null,
-      showlawenforcementstatus:false,
-  
+      show_departement: true,
+      departemnet_name: null,
+      departement_status: null,
+      showlawenforcementstatus: false,
 
       showemail: true,
       show_related: true,
@@ -1302,228 +1024,227 @@ export default {
       last_name: null,
 
       related: [
-        { id: 1, name: " Spouse ", value: "spouse" },
-        { id: 1, name: " Dependent ", value: "dependent" },
+        { id: 1, name: ' Spouse ', value: 'spouse' },
+        { id: 1, name: ' Dependent ', value: 'dependent' },
       ],
 
       Law_Enforcement_local: [
         {
           id: 1,
-          name: " City Police Department ",
-          value: "City_Police_Department",
+          name: ' City Police Department ',
+          value: 'City_Police_Department',
         },
-        { id: 1, name: " State Police ", value: "State_Police" },
+        { id: 1, name: ' State Police ', value: 'State_Police' },
         {
           id: 1,
-          name: " State Highway Patrol ",
-          value: "State Highway Patrol",
+          name: ' State Highway Patrol ',
+          value: 'State Highway Patrol',
         },
-        { id: 1, name: "Sheriff", value: "Sheriff" },
+        { id: 1, name: 'Sheriff', value: 'Sheriff' },
         {
           id: 1,
-          name: " Department of Corrections ",
-          value: "Department_of_Corrections",
+          name: ' Department of Corrections ',
+          value: 'Department_of_Corrections',
         },
 
-        { id: 1, name: " Dependent ", value: "dependent" },
+        { id: 1, name: ' Dependent ', value: 'dependent' },
       ],
 
       Law_Enforcement_federal: [
         {
           id: 1,
-          name: " Other State/Local Law Enforcement ",
-          value: "Other State_Local_Law_Enforcement",
+          name: ' Other State/Local Law Enforcement ',
+          value: 'Other State_Local_Law_Enforcement',
         },
         {
           id: 1,
-          name: " Bureau of Alcohol, Tobacco, Firearms and Explosives (ATF) ",
-          value: "Bureau_of_Alcohol",
+          name: ' Bureau of Alcohol, Tobacco, Firearms and Explosives (ATF) ',
+          value: 'Bureau_of_Alcohol',
         },
         {
           id: 1,
-          name: " Drug Enforcement Administration (DEA) ",
-          value: "DEA",
+          name: ' Drug Enforcement Administration (DEA) ',
+          value: 'DEA',
         },
-        { id: 1, name: " Federal Air Marshal ", value: "FAM" },
+        { id: 1, name: ' Federal Air Marshal ', value: 'FAM' },
         {
           id: 1,
-          name: " Federal Bureau of Investigation (FBI) ",
-          value: "FBI",
+          name: ' Federal Bureau of Investigation (FBI) ',
+          value: 'FBI',
         },
-        { id: 1, name: " Federal Bureau of Prisons (BOP) ", value: "BOP" },
+        { id: 1, name: ' Federal Bureau of Prisons (BOP) ', value: 'BOP' },
         {
           id: 1,
-          name: " Immigration and Customs Enforcement (ICE) ",
-          value: "ICE",
-        },
-        {
-          id: 1,
-          name: " Transportation Security Administration (TSA) ",
-          value: "TSA",
+          name: ' Immigration and Customs Enforcement (ICE) ',
+          value: 'ICE',
         },
         {
           id: 1,
-          name: " U.S. Customs and Border Protection (CBP) ",
-          value: "CBP",
+          name: ' Transportation Security Administration (TSA) ',
+          value: 'TSA',
         },
-        { id: 1, name: " U.S. Marshals ", value: "US_Marshals" },
-        { id: 1, name: " U.S. Secret Service ", value: "Secret_Service" },
-        { id: 1, name: " U.S. Capitol Police ", value: "Capitol_police" },
+        {
+          id: 1,
+          name: ' U.S. Customs and Border Protection (CBP) ',
+          value: 'CBP',
+        },
+        { id: 1, name: ' U.S. Marshals ', value: 'US_Marshals' },
+        { id: 1, name: ' U.S. Secret Service ', value: 'Secret_Service' },
+        { id: 1, name: ' U.S. Capitol Police ', value: 'Capitol_police' },
 
         {
           id: 1,
-          name: " Other Federal Law Enforcement ",
-          value: "Other_Federal_Law_Enforcement",
+          name: ' Other Federal Law Enforcement ',
+          value: 'Other_Federal_Law_Enforcement',
         },
       ],
 
       fire: [
-        { id: 1, name: " National Parks Service (NPS) ", value: "NPS" },
-        { id: 1, name: " Bureau of Land Management(BLM) ", value: "BLM" },
-        { id: 1, name: " U.S. Forest Service ", value: "US_Forest_Service" },
+        { id: 1, name: ' National Parks Service (NPS) ', value: 'NPS' },
+        { id: 1, name: ' Bureau of Land Management(BLM) ', value: 'BLM' },
+        { id: 1, name: ' U.S. Forest Service ', value: 'US_Forest_Service' },
         {
           id: 1,
-          name: " Other Federal Fire Department ",
-          value: "Other_Federal_Fire_Department",
+          name: ' Other Federal Fire Department ',
+          value: 'Other_Federal_Fire_Department',
         },
         {
           id: 1,
-          name: " Municipal Fire Department ",
-          value: "Municipal_Fire_Department",
+          name: ' Municipal Fire Department ',
+          value: 'Municipal_Fire_Department',
         },
       ],
 
       Medical_Services: [
-        { id: 4, name: "EMT / Paramedic", value: "EMPT" },
-        { id: 4, name: "Nurse (RN, NP, CNA, LPN)", value: "nurse" },
-        { id: 4, name: "Hospital Physician / PA", value: "PA" },
-        { id: 4, name: "Hospital Tech / Therapist", value: "therapist" },
-        { id: 4, name: "Hospital Staff", value: "Hospital_Staff" },
+        { id: 4, name: 'EMT / Paramedic', value: 'EMPT' },
+        { id: 4, name: 'Nurse (RN, NP, CNA, LPN)', value: 'nurse' },
+        { id: 4, name: 'Hospital Physician / PA', value: 'PA' },
+        { id: 4, name: 'Hospital Tech / Therapist', value: 'therapist' },
+        { id: 4, name: 'Hospital Staff', value: 'Hospital_Staff' },
       ],
 
       Government_Employee: [
-        { id: 4, name: "Federal", value: "federal" },
-        { id: 4, name: "State", value: "state" },
+        { id: 4, name: 'Federal', value: 'federal' },
+        { id: 4, name: 'State', value: 'state' },
       ],
 
       Government_Employee_federal: [
-        { id: 4, name: "US Postal Service", value: "Post_service" },
-        { id: 4, name: "Department of Veterans Affairs", value: "DOVA" },
-        { id: 4, name: "Department of The Army", value: "DOA" },
-        { id: 4, name: "Department of The Navy", value: "DON" },
-        { id: 4, name: "Department of The Air Force", value: "DOAF" },
-        { id: 4, name: "Department of Defense", value: "DOD" },
-        { id: 4, name: "Department of Agriculture", value: "DOAr" },
-        { id: 4, name: "Internal Revenue Service", value: "IRS" },
+        { id: 4, name: 'US Postal Service', value: 'Post_service' },
+        { id: 4, name: 'Department of Veterans Affairs', value: 'DOVA' },
+        { id: 4, name: 'Department of The Army', value: 'DOA' },
+        { id: 4, name: 'Department of The Navy', value: 'DON' },
+        { id: 4, name: 'Department of The Air Force', value: 'DOAF' },
+        { id: 4, name: 'Department of Defense', value: 'DOD' },
+        { id: 4, name: 'Department of Agriculture', value: 'DOAr' },
+        { id: 4, name: 'Internal Revenue Service', value: 'IRS' },
         {
           id: 4,
-          name: "Social Security Administration",
-          value: "Social_Security_Administration",
+          name: 'Social Security Administration',
+          value: 'Social_Security_Administration',
         },
-        { id: 4, name: "Department of Homeland Security", value: "DOHLS" },
-        { id: 4, name: "Department of Education", value: "DOE" },
+        { id: 4, name: 'Department of Homeland Security', value: 'DOHLS' },
+        { id: 4, name: 'Department of Education', value: 'DOE' },
         {
           id: 4,
-          name: "Department of Health and Human Services",
-          value: "DOHAHR",
+          name: 'Department of Health and Human Services',
+          value: 'DOHAHR',
         },
-        { id: 4, name: "Department of Transportation", value: "DOT" },
-        { id: 4, name: "Department of Justice", value: "DOJ" },
-        { id: 4, name: "Other Federal Agency", value: "OFA" },
+        { id: 4, name: 'Department of Transportation', value: 'DOT' },
+        { id: 4, name: 'Department of Justice', value: 'DOJ' },
+        { id: 4, name: 'Other Federal Agency', value: 'OFA' },
       ],
 
       Government_Employee_state: [
-        { id: 4, name: " Public Works", value: "fire" },
-        { id: 4, name: "Education", value: "fire" },
-        { id: 4, name: "Justice / Courthouse", value: "fire" },
-        { id: 4, name: "Corrections", value: "fire" },
-        { id: 4, name: "Transportation / Transit", value: "fire" },
-        { id: 4, name: "Public Safety", value: "fire" },
-        { id: 4, name: "Public Safety", value: "fire" },
-        { id: 4, name: "Health and Human Services", value: "fire" },
-        { id: 4, name: "Game, Fish and Wildlife", value: "fire" },
-        { id: 4, name: "Parks and Recreation", value: "fire" },
-        { id: 4, name: "Child, Family and Social Services", value: "fire" },
-        { id: 4, name: "Other State / Local Agency", value: "others" },
+        { id: 4, name: ' Public Works', value: 'fire' },
+        { id: 4, name: 'Education', value: 'fire' },
+        { id: 4, name: 'Justice / Courthouse', value: 'fire' },
+        { id: 4, name: 'Corrections', value: 'fire' },
+        { id: 4, name: 'Transportation / Transit', value: 'fire' },
+        { id: 4, name: 'Public Safety', value: 'fire' },
+        { id: 4, name: 'Public Safety', value: 'fire' },
+        { id: 4, name: 'Health and Human Services', value: 'fire' },
+        { id: 4, name: 'Game, Fish and Wildlife', value: 'fire' },
+        { id: 4, name: 'Parks and Recreation', value: 'fire' },
+        { id: 4, name: 'Child, Family and Social Services', value: 'fire' },
+        { id: 4, name: 'Other State / Local Agency', value: 'others' },
       ],
 
       options: [
-        { id: 1, name: "U.S. Military", value: "US_Military" },
-        { id: 2, name: "U.S. Military Family", value: "U_S_Military_Family" },
-        { id: 3, name: "Law Enforcement", value: "Law_Enforcement" },
-        { id: 4, name: "Fire", value: "fire" },
-        { id: 5, name: "Medical Services", value: "Medical_Services" },
-        { id: 6, name: "Government Employee", value: "Government_Employee" },
+        { id: 1, name: 'U.S. Military', value: 'US_Military' },
+        { id: 2, name: 'U.S. Military Family', value: 'U_S_Military_Family' },
+        { id: 3, name: 'Law Enforcement', value: 'Law_Enforcement' },
+        { id: 4, name: 'Fire', value: 'fire' },
+        { id: 5, name: 'Medical Services', value: 'Medical_Services' },
+        { id: 6, name: 'Government Employee', value: 'Government_Employee' },
       ],
       US_Military: [
-        { id: 1, name: "Airforce", value: "airforce" },
-        { id: 2, name: "Army", value: "army" },
-        { id: 3, name: "Coast-Guard", value: "coast_guard" },
-        { id: 4, name: "Navy", value: "navy" },
-        { id: 5, name: "Air National Guard", value: "air_national_guard" },
-        { id: 6, name: "Army Nationa Guard", value: "army_national_guard" },
+        { id: 1, name: 'Airforce', value: 'airforce' },
+        { id: 2, name: 'Army', value: 'army' },
+        { id: 3, name: 'Coast-Guard', value: 'coast_guard' },
+        { id: 4, name: 'Navy', value: 'navy' },
+        { id: 5, name: 'Air National Guard', value: 'air_national_guard' },
+        { id: 6, name: 'Army Nationa Guard', value: 'army_national_guard' },
       ],
 
       airforce: [
-        { id: 1, name: "Active", value: "active" },
-        { id: 2, name: "Veteran", value: "veteran" },
-        { id: 3, name: "Retired", value: "retired" },
-        { id: 4, name: "Reserve", value: "reserve" },
-        { id: 5, name: "US Air Academic", value: "us_air_academic" },
-        { id: 6, name: "ROTC", value: "rotc" },
+        { id: 1, name: 'Active', value: 'active' },
+        { id: 2, name: 'Veteran', value: 'veteran' },
+        { id: 3, name: 'Retired', value: 'retired' },
+        { id: 4, name: 'Reserve', value: 'reserve' },
+        { id: 5, name: 'US Air Academic', value: 'us_air_academic' },
+        { id: 6, name: 'ROTC', value: 'rotc' },
       ],
 
       army: [
-        { id: 1, name: "Active", value: "active" },
-        { id: 2, name: "Veteran", value: "veteran" },
-        { id: 3, name: "Retired", value: "retired" },
-        { id: 4, name: "Reserve", value: "reserve" },
-        { id: 5, name: "West Point", value: "west_point" },
-        { id: 6, name: "ROTC", value: "rotc" },
+        { id: 1, name: 'Active', value: 'active' },
+        { id: 2, name: 'Veteran', value: 'veteran' },
+        { id: 3, name: 'Retired', value: 'retired' },
+        { id: 4, name: 'Reserve', value: 'reserve' },
+        { id: 5, name: 'West Point', value: 'west_point' },
+        { id: 6, name: 'ROTC', value: 'rotc' },
       ],
 
       coast_guard: [
-        { id: 1, name: "Active", value: "active" },
-        { id: 2, name: "Veteran", value: "veteran" },
-        { id: 3, name: "Retired", value: "retired" },
-        { id: 4, name: "Reserve", value: "reserve" },
-        { id: 5, name: "Coast Guard Academy", value: "coast_Guard_academy" },
+        { id: 1, name: 'Active', value: 'active' },
+        { id: 2, name: 'Veteran', value: 'veteran' },
+        { id: 3, name: 'Retired', value: 'retired' },
+        { id: 4, name: 'Reserve', value: 'reserve' },
+        { id: 5, name: 'Coast Guard Academy', value: 'coast_Guard_academy' },
       ],
 
       marines: [
-        { id: 1, name: "Active", value: "active" },
-        { id: 2, name: "Veteran", value: "veteran" },
-        { id: 3, name: "Retired", value: "retired" },
-        { id: 4, name: "Reserve", value: "reserve" },
+        { id: 1, name: 'Active', value: 'active' },
+        { id: 2, name: 'Veteran', value: 'veteran' },
+        { id: 3, name: 'Retired', value: 'retired' },
+        { id: 4, name: 'Reserve', value: 'reserve' },
 
-        { id: 5, name: "ROTC", value: "rotc" },
+        { id: 5, name: 'ROTC', value: 'rotc' },
       ],
 
       navy: [
-        { id: 1, name: "Active", value: "active" },
-        { id: 2, name: "Veteran", value: "veteran" },
-        { id: 3, name: "Retired", value: "retired" },
-        { id: 4, name: "Reserve", value: "reserve" },
-        { id: 5, name: "US Naval Academic", value: "us_naval_academic" },
-        { id: 6, name: "ROTC", value: "rotc" },
+        { id: 1, name: 'Active', value: 'active' },
+        { id: 2, name: 'Veteran', value: 'veteran' },
+        { id: 3, name: 'Retired', value: 'retired' },
+        { id: 4, name: 'Reserve', value: 'reserve' },
+        { id: 5, name: 'US Naval Academic', value: 'us_naval_academic' },
+        { id: 6, name: 'ROTC', value: 'rotc' },
       ],
 
       army_national_guard: [
-        { id: 1, name: "Active", value: "active" },
-        { id: 2, name: "Veteran", value: "veteran" },
-        { id: 3, name: "Retired", value: "retired" },
+        { id: 1, name: 'Active', value: 'active' },
+        { id: 2, name: 'Veteran', value: 'veteran' },
+        { id: 3, name: 'Retired', value: 'retired' },
       ],
 
       air_national_guard: [
-        { id: 1, name: "Active", value: "active" },
-        { id: 2, name: "Veteran", value: "veteran" },
-        { id: 3, name: "Retired", value: "retired" },
+        { id: 1, name: 'Active', value: 'active' },
+        { id: 2, name: 'Veteran', value: 'veteran' },
+        { id: 3, name: 'Retired', value: 'retired' },
       ],
 
-       common_status: [
-        { id: 1, name: "Current Employee", value: "current_employee" },
-        { id: 2, name: "Formal Empoyee", value: "formal_employee" },
-        
+      common_status: [
+        { id: 1, name: 'Current Employee', value: 'current_employee' },
+        { id: 2, name: 'Formal Empoyee', value: 'formal_employee' },
       ],
     };
   },
@@ -1535,65 +1256,54 @@ export default {
   methods: {
     storedata() {
       let formData2 = new FormData();
-      formData2.append("first_name", this.first_name);
-      formData2.append("last_name", this.last_name);
-      formData2.append("email", this.email);
-      formData2.append("profession", this.profession_name);
-      formData2.append("branch", this.branch_name);
-      formData2.append("status", this.status_name);
-      formData2.append("password", this.password);
+      formData2.append('first_name', this.first_name);
+      formData2.append('last_name', this.last_name);
+      formData2.append('email', this.email);
+      formData2.append('profession', this.profession_name);
+      formData2.append('branch', this.branch_name);
+      formData2.append('status', this.status_name);
+      formData2.append('password', this.password);
 
       axios
-        .post("api/widget/json/post/save-user", formData2, {
+        .post('api/widget/json/post/save-user', formData2, {
           headers: {
-            "Content-Type": "multipart/form-data",
+            'Content-Type': 'multipart/form-data',
           },
         })
-        .then((res) => {
+        .then(res => {
           console.log(res);
-          alert("user data saved");
+          alert('user data saved');
         })
-        .catch((error) => {
+        .catch(error => {
           console.log({ error: error });
           // Manage errors if found any
         });
     },
 
-    setdepartment(value){
-
+    setdepartment(value) {
       this.departemnet_name = value.name;
-      this.show_departement=false;
-      this.showlawenforcementstatus=true;
-
+      this.show_departement = false;
+      this.showlawenforcementstatus = true;
     },
-
-
 
     resetDepartement() {
-       
       this.profession_name = null;
-      
-      
     },
 
-  resetLawEnforcementStatus(){
-     this.showlawenforcementstatus=false;
-     this.show_departement=true;
-  },
+    resetLawEnforcementStatus() {
+      this.showlawenforcementstatus = false;
+      this.show_departement = true;
+    },
 
-
-      setdepartmentStatus(value){
-
+    setdepartmentStatus(value) {
       this.departement_status = value.name;
-      
-      this.showlawenforcementstatus=false;
-      this.complete=true;
 
+      this.showlawenforcementstatus = false;
+      this.complete = true;
     },
-
 
     relatedd(value) {
-      console.log("mother fucker baby");
+      console.log('mother fucker baby');
 
       this.show_related = false;
       this.show_related_profession = true;
@@ -1604,10 +1314,6 @@ export default {
       this.show_related_profession = false;
       this.show_related = true;
     },
-
-
-     
-
 
     resetRelated() {
       this.profession_name = null;
@@ -1638,34 +1344,34 @@ export default {
 
     profession(value) {
       switch (value.value) {
-        case "US_Military":
+        case 'US_Military':
           this.background = this.US_Military;
 
           this.profession_name = value.name;
           break;
 
-        case "U_S_Military_Family":
+        case 'U_S_Military_Family':
           this.background = this.U_S_Military_Family;
           this.profession_name = value.name;
           break;
 
-        case "Law_Enforcement":
+        case 'Law_Enforcement':
           this.background = this.Law_Enforcement;
           this.profession_name = value.name;
           break;
 
-        case "fire":
+        case 'fire':
           this.background = this.Fire;
           this.profession_name = value.name;
-          console.log("fire selected");
+          console.log('fire selected');
           break;
 
-        case "Medical_Services":
+        case 'Medical_Services':
           this.background = this.Medical_Services;
           this.profession_name = value.name;
           break;
 
-        case "Government_Employee":
+        case 'Government_Employee':
           this.background = this.Government_Employee;
           this.profession_name = value.name;
           break;
@@ -1678,28 +1384,28 @@ export default {
       console.log(value);
 
       switch (value.value) {
-        case "airforce":
+        case 'airforce':
           this.branch = this.airforce;
 
           break;
 
-        case "army":
+        case 'army':
           this.branch = this.army;
           break;
 
-        case "coast_guard":
+        case 'coast_guard':
           this.branch = this.coast_guard;
           break;
 
-        case "navy":
+        case 'navy':
           this.branch = this.navy;
           break;
 
-        case "air_national_guard":
+        case 'air_national_guard':
           this.branch = this.air_national_guard;
           break;
 
-        case "army_national_guard":
+        case 'army_national_guard':
           this.branch = this.army_national_guard;
           break;
       }
@@ -1711,25 +1417,34 @@ export default {
   },
 };
 </script>
- 
-<style scoped>
 
+<style scoped>
 .c5137 {
-    margin: 25px 0px 7px;  
-      padding: 0px;
+  margin: 25px 0px 7px;
+  padding: 0px;
 }
 
 h1 {
-    font-size: 1.5em !important;
+  font-size: 1.5em !important;
 }
-@media only screen and (min-width: 575px) { 
-h1, h2, h3, h4, h5, h6, p, ul {
+@media only screen and (min-width: 575px) {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  p,
+  ul {
     margin: 20 px 0;
-}}
+  }
+}
 
-
-body.fonts-loaded h1, body.fonts-loaded h2, body.fonts-loaded h3, body.fonts-loaded h4 {
-    font-weight: normal;
+body.fonts-loaded h1,
+body.fonts-loaded h2,
+body.fonts-loaded h3,
+body.fonts-loaded h4 {
+  font-weight: normal;
 }
 
 .MuiFilledInput-input {
@@ -1775,7 +1490,7 @@ body.fonts-loaded h1, body.fonts-loaded h2, body.fonts-loaded h3, body.fonts-loa
   font-size: 1rem;
   box-sizing: border-box;
   align-items: center;
-  font-family: "Geomanist Regular", Helvetica, sans-serif;
+  font-family: 'Geomanist Regular', Helvetica, sans-serif;
   font-weight: 400;
   line-height: 1.1876em;
 }
@@ -1784,7 +1499,7 @@ body.fonts-loaded h1, body.fonts-loaded h2, body.fonts-loaded h3, body.fonts-loa
   left: 0;
   right: 0;
   bottom: -1px;
-  content: "\00a0";
+  content: '\00a0';
   position: absolute;
   transition: border-bottom-color 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
   border-bottom: 1px solid rgba(0, 0, 0, 0.42);
@@ -1800,7 +1515,7 @@ body.fonts-loaded h1, body.fonts-loaded h2, body.fonts-loaded h3, body.fonts-loa
   left: 0;
   right: 0;
   bottom: -1px;
-  content: "";
+  content: '';
   position: absolute;
   transform: scaleX(0);
   transition: transform 200ms cubic-bezier(0, 0, 0.2, 1) 0ms;
@@ -1842,8 +1557,7 @@ body.fonts-loaded h1, body.fonts-loaded h2, body.fonts-loaded h3, body.fonts-loa
 
 .MuiButton-contained {
   color: rgba(0, 0, 0, 0.87);
-  box-shadow: 0px 3px 1px -2px rgb(0 0 0 / 20%),
-    0px 2px 2px 0px rgb(0 0 0 / 14%), 0px 1px 5px 0px rgb(0 0 0 / 12%);
+  box-shadow: 0px 3px 1px -2px rgb(0 0 0 / 20%), 0px 2px 2px 0px rgb(0 0 0 / 14%), 0px 1px 5px 0px rgb(0 0 0 / 12%);
   background-color: #e0e0e0;
 }
 
@@ -1854,8 +1568,7 @@ body.fonts-loaded h1, body.fonts-loaded h2, body.fonts-loaded h3, body.fonts-loa
   font-size: 0.875rem;
   min-width: 64 px;
   box-sizing: border-box;
-  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
-    box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
     border 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
   font-family: Geomanist Regular, Helvetica, sans-serif;
   font-weight: 400;
@@ -1906,36 +1619,20 @@ body.fonts-loaded h1, body.fonts-loaded h2, body.fonts-loaded h3, body.fonts-loa
   background: #84fab0;
 
   /* Chrome 10-25, Safari 5.1-6 */
-  background: -webkit-linear-gradient(
-    to right,
-    rgba(132, 250, 176, 0.5),
-    rgba(143, 211, 244, 0.5)
-  );
+  background: -webkit-linear-gradient(to right, rgba(132, 250, 176, 0.5), rgba(143, 211, 244, 0.5));
 
   /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-  background: linear-gradient(
-    to right,
-    rgba(132, 250, 176, 0.5),
-    rgba(143, 211, 244, 0.5)
-  );
+  background: linear-gradient(to right, rgba(132, 250, 176, 0.5), rgba(143, 211, 244, 0.5));
 }
 .gradient-custom-4 {
   /* fallback for old browsers */
   background: #84fab0;
 
   /* Chrome 10-25, Safari 5.1-6 */
-  background: -webkit-linear-gradient(
-    to right,
-    rgba(132, 250, 176, 1),
-    rgba(143, 211, 244, 1)
-  );
+  background: -webkit-linear-gradient(to right, rgba(132, 250, 176, 1), rgba(143, 211, 244, 1));
 
   /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-  background: linear-gradient(
-    to right,
-    rgba(132, 250, 176, 1),
-    rgba(143, 211, 244, 1)
-  );
+  background: linear-gradient(to right, rgba(132, 250, 176, 1), rgba(143, 211, 244, 1));
 }
 
 body {
@@ -2131,7 +1828,7 @@ body::backdrop {
   box-sizing: border-box;
   text-align: left;
   align-items: center;
-  font-family: "Geomanist Regular", Helvetica, sans-serif;
+  font-family: 'Geomanist Regular', Helvetica, sans-serif;
   padding-top: 8px;
   padding-bottom: 8px;
   justify-content: flex-start;
@@ -2434,37 +2131,37 @@ body::backdrop {
 @font-face {
   font-weight: 400;
   font-style: normal;
-  font-family: "Circular-Loom";
+  font-family: 'Circular-Loom';
 
-  src: url("https://cdn.loom.com/assets/fonts/circular/CircularXXWeb-Book-cd7d2bcec649b1243839a15d5eb8f0a3.woff2")
-    format("woff2");
+  src: url('https://cdn.loom.com/assets/fonts/circular/CircularXXWeb-Book-cd7d2bcec649b1243839a15d5eb8f0a3.woff2')
+    format('woff2');
 }
 
 @font-face {
   font-weight: 500;
   font-style: normal;
-  font-family: "Circular-Loom";
+  font-family: 'Circular-Loom';
 
-  src: url("https://cdn.loom.com/assets/fonts/circular/CircularXXWeb-Medium-d74eac43c78bd5852478998ce63dceb3.woff2")
-    format("woff2");
+  src: url('https://cdn.loom.com/assets/fonts/circular/CircularXXWeb-Medium-d74eac43c78bd5852478998ce63dceb3.woff2')
+    format('woff2');
 }
 
 @font-face {
   font-weight: 700;
   font-style: normal;
-  font-family: "Circular-Loom";
+  font-family: 'Circular-Loom';
 
-  src: url("https://cdn.loom.com/assets/fonts/circular/CircularXXWeb-Bold-83b8ceaf77f49c7cffa44107561909e4.woff2")
-    format("woff2");
+  src: url('https://cdn.loom.com/assets/fonts/circular/CircularXXWeb-Bold-83b8ceaf77f49c7cffa44107561909e4.woff2')
+    format('woff2');
 }
 
 @font-face {
   font-weight: 900;
   font-style: normal;
-  font-family: "Circular-Loom";
+  font-family: 'Circular-Loom';
 
-  src: url("https://cdn.loom.com/assets/fonts/circular/CircularXXWeb-Black-bf067ecb8aa777ceb6df7d72226febca.woff2")
-    format("woff2");
+  src: url('https://cdn.loom.com/assets/fonts/circular/CircularXXWeb-Black-bf067ecb8aa777ceb6df7d72226febca.woff2')
+    format('woff2');
 }
 
 .fb_hidden {
@@ -2489,7 +2186,7 @@ body::backdrop {
   color: #000;
   cursor: auto;
   direction: ltr;
-  font-family: "lucida grande", tahoma, verdana, arial, sans-serif;
+  font-family: 'lucida grande', tahoma, verdana, arial, sans-serif;
   font-size: 11px;
   font-style: normal;
   font-variant: normal;
@@ -2547,8 +2244,7 @@ body::backdrop {
 }
 
 .fb_dialog_close_icon {
-  background: url(https://static.xx.fbcdn.net/rsrc.php/v3/yq/r/IE9JII6Z1Ys.png)
-    no-repeat scroll 0 0 transparent;
+  background: url(https://static.xx.fbcdn.net/rsrc.php/v3/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 0 transparent;
   cursor: pointer;
   display: block;
   height: 15px;
@@ -2572,13 +2268,11 @@ body::backdrop {
 }
 
 .fb_dialog_close_icon:hover {
-  background: url(https://static.xx.fbcdn.net/rsrc.php/v3/yq/r/IE9JII6Z1Ys.png)
-    no-repeat scroll 0 -15px transparent;
+  background: url(https://static.xx.fbcdn.net/rsrc.php/v3/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 -15px transparent;
 }
 
 .fb_dialog_close_icon:active {
-  background: url(https://static.xx.fbcdn.net/rsrc.php/v3/yq/r/IE9JII6Z1Ys.png)
-    no-repeat scroll 0 -30px transparent;
+  background: url(https://static.xx.fbcdn.net/rsrc.php/v3/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 -30px transparent;
 }
 
 .fb_dialog_iframe {
@@ -2595,8 +2289,7 @@ body::backdrop {
 }
 
 .fb_dialog_content .dialog_title > span {
-  background: url(https://static.xx.fbcdn.net/rsrc.php/v3/yd/r/Cou7n-nqK52.gif)
-    no-repeat 5px 50%;
+  background: url(https://static.xx.fbcdn.net/rsrc.php/v3/yd/r/Cou7n-nqK52.gif) no-repeat 5px 50%;
   float: left;
   padding: 5px 0 7px 26px;
 }
@@ -2613,8 +2306,7 @@ body.fb_hidden {
 }
 
 .fb_dialog.fb_dialog_mobile.loading {
-  background: url(https://static.xx.fbcdn.net/rsrc.php/v3/ya/r/3rhSv5V8j3o.gif)
-    white no-repeat 50% 50%;
+  background: url(https://static.xx.fbcdn.net/rsrc.php/v3/ya/r/3rhSv5V8j3o.gif) white no-repeat 50% 50%;
   min-height: 100%;
   min-width: 100%;
   overflow: hidden;
@@ -2737,8 +2429,7 @@ body.fb_hidden {
 }
 
 .fb_dialog_content .dialog_content {
-  background: url(https://static.xx.fbcdn.net/rsrc.php/v3/y9/r/jKEcVPZFk-2.gif)
-    no-repeat 50% 50%;
+  background: url(https://static.xx.fbcdn.net/rsrc.php/v3/y9/r/jKEcVPZFk-2.gif) no-repeat 50% 50%;
   border: 1px solid #4a4a4a;
   border-bottom: 0;
   border-top: 0;

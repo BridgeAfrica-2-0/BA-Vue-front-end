@@ -3,13 +3,7 @@
     <navbar />
 
     <div class="container-fluid">
-      <ly-tab
-        v-model="selectedId"
-        :items="items"
-        :options="options"
-        class="center-ly"
-      >
-      </ly-tab>
+      <ly-tab v-model="selectedId" :items="items" :options="options" class="center-ly"> </ly-tab>
 
       <hr width="100%" />
     </div>
@@ -43,20 +37,20 @@
 </template>
 
 <script>
-import navbar from "@/components/navbar";
-import Business from "../components/businessOwner/business";
+import navbar from '@/components/navbar';
+import Business from '../components/businessOwner/business';
 //import Pending from "../components/businessOwner/pending";
 //import Insight from "../components/businessOwner/insight";
 //import Notification from "../components/businessOwner/notification";
-import Settings from "../components/businessOwner/settings";
+import Settings from '../components/businessOwner/settings';
 
-import Inbox from "../components/businessOwner/inbox";
+import Inbox from '../components/businessOwner/inbox';
 
-import LyTab from "@/tab/src/index.vue";
+import LyTab from '@/tab/src/index.vue';
 
-import Footer from "../components/footer";
+import Footer from '../components/footer';
 export default {
-  name: "Home",
+  name: 'Home',
   components: {
     navbar,
     Business,
@@ -66,28 +60,28 @@ export default {
     //  Insight,
     Inbox,
     // Notification,
-    Footer
+    Footer,
   },
   data() {
     return {
       selectedId: 0,
       bottomSelectedId: 0,
       items: [
-        { label: "Home ", icon: "fas fa-home fa-lg" },
+        { label: 'Home ', icon: 'fas fa-home fa-lg' },
 
-        { label: "Inbox", icon: "fas fa-comments  fa-lg" },
-        { label: "Notification", icon: "fas fa-bell fa-lg" },
-        { label: "Pending Post", icon: "fas fa-sync fa-lg" },
-        { label: "Insight", icon: "fas fa-chart-line fa-lg" },
+        { label: 'Inbox', icon: 'fas fa-comments  fa-lg' },
+        { label: 'Notification', icon: 'fas fa-bell fa-lg' },
+        { label: 'Pending Post', icon: 'fas fa-sync fa-lg' },
+        { label: 'Insight', icon: 'fas fa-chart-line fa-lg' },
 
-        { label: "Settings", icon: "fas fa-cog fa-lg" }
+        { label: 'Settings', icon: 'fas fa-cog fa-lg' },
       ],
       options: {
-        activeColor: "#1d98bd"
-      }
+        activeColor: '#1d98bd',
+      },
     };
   },
-  computed: {}
+  computed: {},
 };
 </script>
 

@@ -6,12 +6,7 @@
 
     <FlashMessage />
 
-    <div
-      v-if="first_page == 'true'"
-      class="container border mt-5 modal-lg p-welcome"
-      id="modal-3"
-      ref="modal-3"
-    >
+    <div v-if="first_page == 'true'" class="container border mt-5 modal-lg p-welcome" id="modal-3" ref="modal-3">
       <div>
         <h4 class="text-center username f-30">
           Hello <b> {{ username }} </b> let's get started
@@ -20,20 +15,14 @@
         <br />
 
         <p class="text f-16">
-          is simply dummy text of the printing and typesetting industry. Lorem
-          Ipsum has been the industry's standard dummy text ever since the
-          1500s, when an unknown printer took a galley of type and scrambled it
-          to make a type specimen book. It has survived not only five centuries,
-          but also the leap into electronic typesetting, remaining essentially
-          unchanged. It was popularised in the 1960s with the release of
-          Letraset sheets containing Lorem Ipsum passages, and more recently
-          with desktop publishing
+          is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard
+          dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type
+          specimen book. It has survived not only five centuries, but also the leap into electronic typesetting,
+          remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets
+          containing Lorem Ipsum passages, and more recently with desktop publishing
         </p>
 
-        <b-form-group
-          label="Use BridgeAfirca.com as a"
-          label-class=" f-20 text-center"
-        >
+        <b-form-group label="Use BridgeAfirca.com as a" label-class=" f-20 text-center">
           <b-form-radio-group
             id="radio-group-1"
             v-model="useas"
@@ -52,31 +41,12 @@
     </div>
 
     <div class="modal-backdro">
-      <div
-        v-if="selectedusecase == 'person'"
-        class="container border mt-4 modal-lg"
-        ref="modal-1"
-        id="modal-1"
-      >
+      <div v-if="selectedusecase == 'person'" class="container border mt-4 modal-lg" ref="modal-1" id="modal-1">
         <div>
-          <form-wizard
-            @on-complete="onComplete"
-            @on-loading="setLoading"
-            color="#e75c18"
-          >
-            <input
-              id="profile2"
-              accept="video/mpeg,video/mp4,image/*"
-              type="file"
-              @change="onFileChange"
-              hidden
-            />
+          <form-wizard @on-complete="onComplete" @on-loading="setLoading" color="#e75c18">
+            <input id="profile2" accept="video/mpeg,video/mp4,image/*" type="file" @change="onFileChange" hidden />
 
-            <tab-content
-              title=" Complete Profile "
-              :before-change="updateUserProfile"
-            > 
-
+            <tab-content title=" Complete Profile " :before-change="updateUserProfile">
               <div class="form-card">
                 <div class="row">
                   <div class="col-md-6">
@@ -85,26 +55,13 @@
                     </div>
                     <br />
                     <div class="text-center">
-                      <b-button
-                        v-if="img_url"
-                        @click="chooseProfile2()"
-                        variant="primary"
-                        class="mt-3 text-center"
-                      >
+                      <b-button v-if="img_url" @click="chooseProfile2()" variant="primary" class="mt-3 text-center">
                         change Image
                       </b-button>
                     </div>
 
-                    <div
-                      class="image-upload-wrap"
-                      v-if="!img_url"
-                      @click="chooseProfile2()"
-                    >
-                      <a
-                        href="#"
-                        data-toggle="modal"
-                        data-target="#createalbumModal"
-                      >
+                    <div class="image-upload-wrap" v-if="!img_url" @click="chooseProfile2()">
+                      <a href="#" data-toggle="modal" data-target="#createalbumModal">
                         <div class="drag-text">
                           <i class="fa fa-plus"> </i>
                           <h3 class="username">Add Profile Photo</h3>
@@ -115,8 +72,7 @@
                   </div>
                   <div class="col-md-6">
                     <div class="form-group" label-class="username">
-                      <label for="username" class="username"> DOB :</label
-                      ><br />
+                      <label for="username" class="username"> DOB :</label><br />
                       <input
                         type="date"
                         name="dob"
@@ -129,12 +85,7 @@
 
                     <div class="form-group">
                       <label for="alias" class="username">Gender:</label><br />
-                      <select
-                        id="category"
-                        v-model="gender"
-                        class="form-control text"
-                        label-class="text"
-                      >
+                      <select id="category" v-model="gender" class="form-control text" label-class="text">
                         <option value="" selected="" disabled="">
                           Select Gender
                         </option>
@@ -145,27 +96,15 @@
                     </div>
 
                     <div class="form-group">
-                      <label for="country" class="username"> Country :</label
-                      ><br />
+                      <label for="country" class="username"> Country :</label><br />
 
-                      <country-select
-                        v-model="country"
-                        :country="country"
-                        topCountry="CM"
-                        class="form-control text"
-                      />
+                      <country-select v-model="country" :country="country" topCountry="CM" class="form-control text" />
                     </div>
 
                     <div class="form-group">
-                      <label for="country" class="username"> Region :</label
-                      ><br />
+                      <label for="country" class="username"> Region :</label><br />
 
-                      <region-select
-                        v-model="region"
-                        :country="country"
-                        :region="region"
-                        class="form-control text"
-                      />
+                      <region-select v-model="region" :country="country" :region="region" class="form-control text" />
                     </div>
 
                     <div class="form-group">
@@ -181,8 +120,7 @@
                     </div>
 
                     <div class="form-group">
-                      <label for="Neighbor" class="username"> Neighbor :</label
-                      ><br />
+                      <label for="Neighbor" class="username"> Neighbor :</label><br />
                       <input
                         type="text"
                         name="alias"
@@ -193,17 +131,9 @@
                       />
                     </div>
 
-                    <gmap-autocomplete
-                      @place_changed="initMarker"
-                      class="form-control mb-2"
-                    >
-                    </gmap-autocomplete>
+                    <gmap-autocomplete @place_changed="initMarker" class="form-control mb-2"> </gmap-autocomplete>
 
-                    <gmap-map
-                      :zoom="14"
-                      :center="center"
-                      style="width: 100%; height: 200px"
-                    >
+                    <gmap-map :zoom="14" :center="center" style="width: 100%; height: 200px">
                       <gmap-marker
                         :key="index"
                         v-for="(m, index) in locationMarkers"
@@ -245,30 +175,13 @@
       </div>
     </div>
 
-    <div
-      v-if="selectedusecase == 'business'"
-      class="container border mt-4 modal-lg"
-      ref="modal-2"
-      id="modal-2"
-    >
+    <div v-if="selectedusecase == 'business'" class="container border mt-4 modal-lg" ref="modal-2" id="modal-2">
       <form novalidate>
-        <input
-          id="profile2"
-          accept="video/mpeg,video/mp4,image/*"
-          type="file"
-          @change="onFileChange"
-          hidden
-        />
+        <input id="profile2" accept="video/mpeg,video/mp4,image/*" type="file" @change="onFileChange" hidden />
 
         <div>
-          
           <form-wizard @on-complete="onComplete">
-           
-             <tab-content
-              title=" Complete Profile "
-              :before-change="updateUserProfile"
-            > 
-
+            <tab-content title=" Complete Profile " :before-change="updateUserProfile">
               <div class="form-card">
                 <div class="row">
                   <div class="col-md-6">
@@ -277,26 +190,13 @@
                     </div>
                     <br />
                     <div class="text-center">
-                      <b-button
-                        v-if="img_url"
-                        @click="chooseProfile2()"
-                        variant="primary"
-                        class="mt-3 text-center"
-                      >
+                      <b-button v-if="img_url" @click="chooseProfile2()" variant="primary" class="mt-3 text-center">
                         change Image
                       </b-button>
                     </div>
 
-                    <div
-                      class="image-upload-wrap"
-                      v-if="!img_url"
-                      @click="chooseProfile2()"
-                    >
-                      <a
-                        href="#"
-                        data-toggle="modal"
-                        data-target="#createalbumModal"
-                      >
+                    <div class="image-upload-wrap" v-if="!img_url" @click="chooseProfile2()">
+                      <a href="#" data-toggle="modal" data-target="#createalbumModal">
                         <div class="drag-text">
                           <i class="fa fa-plus"> </i>
                           <h3 class="username">Add Profile Photo</h3>
@@ -307,8 +207,7 @@
                   </div>
                   <div class="col-md-6">
                     <div class="form-group" label-class="username">
-                      <label for="username" class="username"> DOB :</label
-                      ><br />
+                      <label for="username" class="username"> DOB :</label><br />
                       <input
                         type="date"
                         name="dob"
@@ -321,12 +220,7 @@
 
                     <div class="form-group">
                       <label for="alias" class="username">Gender:</label><br />
-                      <select
-                        id="category"
-                        v-model="gender"
-                        class="form-control text"
-                        label-class="text"
-                      >
+                      <select id="category" v-model="gender" class="form-control text" label-class="text">
                         <option value="" selected="" disabled="">
                           Select Gender
                         </option>
@@ -337,27 +231,15 @@
                     </div>
 
                     <div class="form-group">
-                      <label for="country" class="username"> Country :</label
-                      ><br />
+                      <label for="country" class="username"> Country :</label><br />
 
-                      <country-select
-                        v-model="country"
-                        :country="country"
-                        topCountry="CM"
-                        class="form-control text"
-                      />
+                      <country-select v-model="country" :country="country" topCountry="CM" class="form-control text" />
                     </div>
 
                     <div class="form-group">
-                      <label for="country" class="username"> Region :</label
-                      ><br />
+                      <label for="country" class="username"> Region :</label><br />
 
-                      <region-select
-                        v-model="region"
-                        :country="country"
-                        :region="region"
-                        class="form-control text"
-                      />
+                      <region-select v-model="region" :country="country" :region="region" class="form-control text" />
                     </div>
 
                     <div class="form-group">
@@ -373,8 +255,7 @@
                     </div>
 
                     <div class="form-group">
-                      <label for="Neighbor" class="username"> Neighbor :</label
-                      ><br />
+                      <label for="Neighbor" class="username"> Neighbor :</label><br />
                       <input
                         type="text"
                         name="alias"
@@ -388,18 +269,10 @@
                     <div class="form-group">
                       <label for="Neighbor" class="username"> Adress :</label>
 
-                      <gmap-autocomplete
-                        @place_changed="initMarker"
-                        class="form-control"
-                      >
-                      </gmap-autocomplete>
+                      <gmap-autocomplete @place_changed="initMarker" class="form-control"> </gmap-autocomplete>
                     </div>
 
-                    <gmap-map
-                      :zoom="14"
-                      :center="center"
-                      style="width: 100%; height: 200px"
-                    >
+                    <gmap-map :zoom="14" :center="center" style="width: 100%; height: 200px">
                       <gmap-marker
                         :key="index"
                         v-for="(m, index) in locationMarkers"
@@ -412,45 +285,24 @@
               </div>
             </tab-content>
 
-            <tab-content
-              title="Business Indentity"
-              :before-change="validateBusiness"
-            >
+            <tab-content title="Business Indentity" :before-change="validateBusiness">
               <div class="form-card">
                 <div class="row">
                   <div class="col-md-6">
-                    <input
-                      id="logo"
-                      type="file"
-                      @change="onLogoChange"
-                      hidden
-                    />
+                    <input id="logo" type="file" @change="onLogoChange" hidden />
 
                     <div id="preview">
                       <img v-if="logoimg_url" :src="logoimg_url" />
                     </div>
                     <br />
                     <div class="text-center">
-                      <b-button
-                        v-if="logoimg_url"
-                        @click="chooselogo()"
-                        variant="primary"
-                        class="mt-3 text-center"
-                      >
+                      <b-button v-if="logoimg_url" @click="chooselogo()" variant="primary" class="mt-3 text-center">
                         change Image
                       </b-button>
                     </div>
 
-                    <div
-                      class="image-upload-wrap"
-                      v-if="!logoimg_url"
-                      @click="chooselogo()"
-                    >
-                      <a
-                        href="#"
-                        data-toggle="modal"
-                        data-target="#createalbumModal"
-                      >
+                    <div class="image-upload-wrap" v-if="!logoimg_url" @click="chooselogo()">
+                      <a href="#" data-toggle="modal" data-target="#createalbumModal">
                         <div class="drag-text">
                           <i class="fa fa-plus"> </i>
                           <h3 class="username">Business Logo</h3>
@@ -460,11 +312,7 @@
                     </div>
                   </div>
                   <div class="col-md-6">
-                    <b-form-group
-                      id="business_name"
-                      label="Business Name"
-                      label-for="business_name"
-                    >
+                    <b-form-group id="business_name" label="Business Name" label-for="business_name">
                       <b-form-input
                         id="business_name"
                         name="business_name"
@@ -529,23 +377,11 @@
                 <div>
                   <b-card no-body>
                     <b-tabs pills card vertical>
-                      <b-tab
-                        :title="filters.name"
-                        v-for="filters in filterselectvalue"
-                        :key="filters.id"
-                        active
+                      <b-tab :title="filters.name" v-for="filters in filterselectvalue" :key="filters.id" active
                         ><b-card-text>
                           <b-form-group label="Filters">
-                            <b-form-checkbox-group
-                              id=""
-                              v-model="select_filterss"
-                              name="filters"
-                            >
-                              <b-form-checkbox
-                                v-for="fil in filters.filters"
-                                :key="fil.id"
-                                :value="fil.id"
-                              >
+                            <b-form-checkbox-group id="" v-model="select_filterss" name="filters">
+                              <b-form-checkbox v-for="fil in filters.filters" :key="fil.id" :value="fil.id">
                                 {{ fil.name }}
                               </b-form-checkbox>
                             </b-form-checkbox-group>
@@ -559,77 +395,63 @@
                 <div class="row">
                   <div class="col-md-6">
                     <div class="form-group">
-                      <label for="country" class="username"> Country :</label
-                      ><br />
+                      <label for="country" class="username"> Country :</label><br />
                       <multiselect
                         v-model="countryy"
                         @input="Region"
-                     
                         placeholder="Search "
                         label="name"
                         track-by="id"
                         :options="countries"
                         :multiple="true"
-                       
                       ></multiselect>
                     </div>
                   </div>
 
                   <div class="col-md-6">
                     <div class="form-group">
-                      <label for="country" class="username"> Region :</label
-                      ><br />
+                      <label for="country" class="username"> Region :</label><br />
                       <multiselect
                         v-model="regionn"
                         @input="Division"
-                        
                         placeholder="Search "
                         label="name"
                         track-by="id"
                         :options="regions"
                         :multiple="true"
                         :taggable="false"
-                        
                       ></multiselect>
                     </div>
                   </div>
 
                   <div class="col-md-6">
                     <div class="form-group">
-                      <label for="country" class="username"> Division :</label
-                      ><br />
+                      <label for="country" class="username"> Division :</label><br />
                       <multiselect
                         v-model="division"
                         @input="Municipality"
-                       
                         placeholder="Search "
                         label="name"
                         track-by="id"
                         :options="divisions"
                         :multiple="true"
                         :taggable="true"
-                       
                       ></multiselect>
                     </div>
                   </div>
 
                   <div class="col-md-6">
                     <div class="form-group">
-                      <label for="country" class="username">
-                        Municipality :</label
-                      ><br />
+                      <label for="country" class="username"> Municipality :</label><br />
 
                       <multiselect
                         v-model="municipality"
                         @input="Locality"
-                      
                         placeholder="Search "
                         label="name"
                         track-by="id"
                         :options="municipalities"
                         :multiple="true"
-                       
-                       
                       ></multiselect>
                     </div>
                   </div>
@@ -638,18 +460,15 @@
                 <div class="row">
                   <div class="col-md-6">
                     <div class="form-group">
-                      <label for="Neighbor" class="username"> Neighbor :</label
-                      ><br />
+                      <label for="Neighbor" class="username"> Neighbor :</label><br />
                       <multiselect
                         v-model="locality"
-                       
                         placeholder="Search "
                         label="name"
                         track-by="id"
                         :options="localities"
                         :multiple="true"
                         :taggable="false"
-                      
                       ></multiselect>
                     </div>
                   </div>
@@ -672,8 +491,7 @@
                 <div class="row">
                   <div class="col-md-6">
                     <div class="form-group">
-                      <label for="country" class="username"> Keywords :</label
-                      ><br />
+                      <label for="country" class="username"> Keywords :</label><br />
 
                       <multiselect
                         v-model="business_keyword"
@@ -691,14 +509,8 @@
 
                   <div class="col-md-6">
                     <div class="form-group">
-                      <label for="alias" class="username">Language:</label
-                      ><br />
-                      <select
-                        id="category"
-                        class="form-control text"
-                        name="language"
-                        v-model="language"
-                      >
+                      <label for="alias" class="username">Language:</label><br />
+                      <select id="category" class="form-control text" name="language" v-model="language">
                         <option value="" selected="" disabled="">
                           Select Language
                         </option>
@@ -712,14 +524,9 @@
                 <div class="row">
                   <div class="col-md-6">
                     <div class="form-group">
-                      <label for="username" class="username">TimeZone:</label
-                      ><br />
+                      <label for="username" class="username">TimeZone:</label><br />
 
-                      <b-form-select
-                        id="timezone"
-                        v-model="time_zone"
-                        :options="timezone"
-                      ></b-form-select>
+                      <b-form-select id="timezone" v-model="time_zone" :options="timezone"></b-form-select>
                     </div>
                   </div>
 
@@ -727,20 +534,12 @@
                     <div class="form-group">
                       <label for="Neighbor" class="username"> Adress :</label>
 
-                      <gmap-autocomplete
-                        @place_changed="initMarker"
-                        class="form-control"
-                      >
-                      </gmap-autocomplete>
+                      <gmap-autocomplete @place_changed="initMarker" class="form-control"> </gmap-autocomplete>
                     </div>
                   </div>
                 </div>
 
-                <gmap-map
-                  :zoom="14"
-                  :center="center"
-                  style="width: 100%; height: 200px"
-                >
+                <gmap-map :zoom="14" :center="center" style="width: 100%; height: 200px">
                   <gmap-marker
                     :key="index"
                     v-for="(m, index) in locationMarkers"
@@ -778,53 +577,53 @@
 </template>
 
 <script>
-import People from "@/components/dasboard/suggestedpeople";
+import People from '@/components/dasboard/suggestedpeople';
 
-import Business from "@/components/dasboard/welcomebusinesses";
+import Business from '@/components/dasboard/welcomebusinesses';
 
-import Tutorial from "@/components/dasboard/tutorial";
+import Tutorial from '@/components/dasboard/tutorial';
 
-import axios from "axios";
+import axios from 'axios';
 
-import Multiselect from "vue-multiselect";
-import { validationMixin } from "vuelidate";
+import Multiselect from 'vue-multiselect';
+import { validationMixin } from 'vuelidate';
 
-import { required, email, minLength } from "vuelidate/lib/validators";
+import { required, email, minLength } from 'vuelidate/lib/validators';
 
 export default {
   mixins: [validationMixin],
   data() {
     return {
-      useas: "",
+      useas: '',
       municipality: [],
       locality: [],
       division: [],
-      selectedusecase: "",
-      keywordds:[],
-      first_page: "true",
-      country: "",
+      selectedusecase: '',
+      keywordds: [],
+      first_page: 'true',
+      country: '',
       countryy: [],
       regionn: [],
-      region: "",
+      region: '',
       username: this.$store.state.auth.user.user.name,
       img_url: null,
       select_filterss: [],
       sendingP: false,
       address: null,
       sendingB: false,
-      profile_pic: "",
+      profile_pic: '',
       dob: null,
       gender: null,
       city: null,
       Neighbor: null,
       step1: false,
       step2: false,
-      logo_pic: "",
+      logo_pic: '',
       logoimg_url: null,
       form: {
         business_name: null,
       },
-      business_category: "Testing",
+      business_category: 'Testing',
       business_keyword: [],
       time_zone: null,
       language: null,
@@ -842,22 +641,22 @@ export default {
       multiselecvalue: [],
       filterselectvalue: [],
       multiselec: [
-        { name: "Vue.js", code: "vu" },
-        { name: "Javascript", code: "js" },
-        { name: "Open Source", code: "os" },
+        { name: 'Vue.js', code: 'vu' },
+        { name: 'Javascript', code: 'js' },
+        { name: 'Open Source', code: 'os' },
       ],
 
       timezone: [
-        { text: "(GMT+1) West African ", value: "+1" },
-        { text: "(GMT-11:00) Midway Island, Samoa", value: "-11" },
+        { text: '(GMT+1) West African ', value: '+1' },
+        { text: '(GMT-11:00) Midway Island, Samoa', value: '-11' },
       ],
 
       options: [
-        { text: " Person", value: "person" },
-        { text: " Business ", value: "business" },
+        { text: ' Person', value: 'person' },
+        { text: ' Business ', value: 'business' },
       ],
 
-      category: "",
+      category: '',
     };
   },
 
@@ -874,7 +673,6 @@ export default {
   },
 
   methods: {
-
     addTag(newTag) {
       const tag = {
         name: newTag,
@@ -884,8 +682,7 @@ export default {
       this.multiselecvalue.push(tag);
     },
 
-
-     addkeywords(newTag) {
+    addkeywords(newTag) {
       const tag = {
         name: newTag,
         id: newTag.substring(0, 2) + Math.floor(Math.random() * 10000000),
@@ -893,12 +690,6 @@ export default {
       this.keywordds.push(tag);
       this.business_keyword.push(tag);
     },
-
-
-
-
-
-
 
     addCategoryTag(newTag) {
       const tag = {
@@ -920,130 +711,130 @@ export default {
 
     categories() {
       this.$store
-        .dispatch("auth/categories")
+        .dispatch('auth/categories')
         .then(() => {
-          console.log("hey yeah");
+          console.log('hey yeah');
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
     },
 
     subcategories() {
       let formData2 = new FormData();
-      formData2.append("categoryId", this.selectedcategories);
+      formData2.append('categoryId', this.selectedcategories);
 
       this.$store
-        .dispatch("auth/subcategories", formData2)
+        .dispatch('auth/subcategories', formData2)
         .then(() => {
-          console.log("hey yeah");
+          console.log('hey yeah');
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
     },
 
     filters() {
       this.$store
-        .dispatch("auth/filters")
+        .dispatch('auth/filters')
         .then(() => {
-          console.log("hey yeah");
+          console.log('hey yeah');
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
     },
 
     Setcategoryfiters() {
       this.$store
-        .dispatch("auth/Setcategoryfiters")
+        .dispatch('auth/Setcategoryfiters')
         .then(() => {
-          console.log("hey yeah");
+          console.log('hey yeah');
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
     },
 
     Country() {
       this.$store
-        .dispatch("auth/country")
+        .dispatch('auth/country')
         .then(() => {
-          console.log("hey yeah");
+          console.log('hey yeah');
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
     },
 
     profileBusiness() {
       this.$store
-        .dispatch("profile/profileBusiness")
+        .dispatch('profile/profileBusiness')
         .then(() => {
-          console.log("hey yeah");
+          console.log('hey yeah');
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
     },
 
     Region() {
       let formData2 = new FormData();
-      formData2.append("countryId", this.selectedcountry);
+      formData2.append('countryId', this.selectedcountry);
 
       this.$store
-        .dispatch("auth/region", formData2)
+        .dispatch('auth/region', formData2)
         .then(() => {
-          console.log("hey yeah");
+          console.log('hey yeah');
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
     },
 
     Division() {
       let formData2 = new FormData();
-      formData2.append("regionId", this.selectedregion);
+      formData2.append('regionId', this.selectedregion);
 
       this.$store
-        .dispatch("auth/division", formData2)
+        .dispatch('auth/division', formData2)
         .then(() => {
-          console.log("hey yeah");
+          console.log('hey yeah');
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
     },
 
     Municipality() {
       let formData2 = new FormData();
-      formData2.append("divisionId", this.selecteddivision);
+      formData2.append('divisionId', this.selecteddivision);
 
       this.$store
-        .dispatch("auth/municipality", formData2)
+        .dispatch('auth/municipality', formData2)
         .then(() => {
-          console.log("hey yeah");
+          console.log('hey yeah');
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
     },
 
     Locality() {
       let formData2 = new FormData();
-      formData2.append("councilId", this.selectedmunicipality);
+      formData2.append('councilId', this.selectedmunicipality);
 
       this.$store
-        .dispatch("auth/locality", formData2)
+        .dispatch('auth/locality', formData2)
         .then(() => {
-          console.log("hey yeah");
+          console.log('hey yeah');
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
     },
 
-    setLoading: function (value) {
+    setLoading: function(value) {
       this.loadingWizard = value;
     },
 
@@ -1065,67 +856,67 @@ export default {
       return new Promise((resolve, reject) => {
         this.$v.form.$touch();
         if (this.$v.form.$anyError) {
-          console.log("error error");
+          console.log('error error');
           resolve(false);
           return false;
         } else {
-          console.log("no error error");
+          console.log('no error error');
 
           let loader = this.$loading.show({
             container: this.fullPage ? null : this.$refs.loader,
             canCancel: true,
             onCancel: this.onCancel,
-            color: "#e75c18",
+            color: '#e75c18',
           });
 
           this.sendingB = true;
 
           let formData2 = new FormData();
 
-          formData2.append("category", this.business_category);
+          formData2.append('category', this.business_category);
 
-          formData2.append("categoryId", this.selectedcategories);
-          formData2.append("subCategoryId", this.selectedsubcategories);
-          formData2.append("filterId", this.select_filterss);
+          formData2.append('categoryId', this.selectedcategories);
+          formData2.append('subCategoryId', this.selectedsubcategories);
+          formData2.append('filterId', this.select_filterss);
 
-          formData2.append("logo_path", this.logo_pic);
-          formData2.append("region", this.selectedregion);
-          formData2.append("city", this.city);
-          formData2.append("country", this.selectedcountry);
+          formData2.append('logo_path', this.logo_pic);
+          formData2.append('region', this.selectedregion);
+          formData2.append('city', this.city);
+          formData2.append('country', this.selectedcountry);
 
-          formData2.append("address", this.address);
-          formData2.append("division", this.selecteddivision);
-          formData2.append("council", this.selectedmunicipality);
+          formData2.append('address', this.address);
+          formData2.append('division', this.selecteddivision);
+          formData2.append('council', this.selectedmunicipality);
 
-          formData2.append("neigborhood", this.selectedlocality);
-          formData2.append("lat", this.center.lat);
-          formData2.append("lng", this.center.lng);
+          formData2.append('neigborhood', this.selectedlocality);
+          formData2.append('lat', this.center.lat);
+          formData2.append('lng', this.center.lng);
 
-          formData2.append("name", this.form.business_name);
+          formData2.append('name', this.form.business_name);
           //  formData2.append("keywords", this.selectedKeywords);
-          formData2.append("keywords", "blec this");
-          formData2.append("timezone", this.time_zone);
-          formData2.append("language", this.language);
-          formData2.append("about_business", this.about);
+          formData2.append('keywords', 'blec this');
+          formData2.append('timezone', this.time_zone);
+          formData2.append('language', this.language);
+          formData2.append('about_business', this.about);
 
-          console.log("sending");
+          console.log('sending');
 
           axios
-            .post("business/create", formData2)
-            .then((response) => {
+            .post('business/create', formData2)
+            .then(response => {
               console.log(response);
 
               this.sendingB = false;
 
               this.flashMessage.show({
-                status: "success",
+                status: 'success',
 
-                message: "Business Profile Created",
+                message: 'Business Profile Created',
               });
               loader.hide();
               resolve(true);
             })
-            .catch((err) => {
+            .catch(err => {
               console.log({ err: err });
 
               this.sendingB = false;
@@ -1135,17 +926,17 @@ export default {
                 console.log(err.response.data.message);
 
                 this.flashMessage.show({
-                  status: "error",
+                  status: 'error',
 
                   message: err.response.data.message,
-                  blockClass: "custom-block-class",
+                  blockClass: 'custom-block-class',
                 });
               } else {
                 this.flashMessage.show({
-                  status: "error",
+                  status: 'error',
 
-                  message: "Unable to Create Your Business",
-                  blockClass: "custom-block-class",
+                  message: 'Unable to Create Your Business',
+                  blockClass: 'custom-block-class',
                 });
                 console.log({ err: err });
               }
@@ -1158,22 +949,22 @@ export default {
 
     businessAround() {
       this.$store
-        .dispatch("auth/businessAround")
+        .dispatch('auth/businessAround')
         .then(() => {
-          console.log("hey yeah");
+          console.log('hey yeah');
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
     },
 
     peopleAround() {
       this.$store
-        .dispatch("auth/peopleAround")
+        .dispatch('auth/peopleAround')
         .then(() => {
-          console.log("hey yeah");
+          console.log('hey yeah');
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
     },
@@ -1197,56 +988,56 @@ export default {
       }
     },
 
-    locateGeoLocation: function () {
-      navigator.geolocation.getCurrentPosition((res) => {
+    locateGeoLocation: function() {
+      navigator.geolocation.getCurrentPosition(res => {
         this.center = {
           lat: res.coords.latitude,
           lng: res.coords.longitude,
         };
       });
     },
-    createBusiness: function () {
+    createBusiness: function() {
       return new Promise((resolve, reject) => {
         this.sendingB = true;
 
         let formData2 = new FormData();
-        formData2.append("logo_path", this.logo_pic);
-        formData2.append("region", this.selectedregion);
-        formData2.append("city", this.city);
-        formData2.append("country", this.selectedcountry);
+        formData2.append('logo_path', this.logo_pic);
+        formData2.append('region', this.selectedregion);
+        formData2.append('city', this.city);
+        formData2.append('country', this.selectedcountry);
 
-        formData2.append("address", this.adress);
-        formData2.append("division", this.selecteddivision);
-        formData2.append("council", this.selectedmunicipality);
+        formData2.append('address', this.adress);
+        formData2.append('division', this.selecteddivision);
+        formData2.append('council', this.selectedmunicipality);
 
-        formData2.append("neighborh", this.selectedlocality);
-        formData2.append("lat", this.center.lat);
-        formData2.append("lng", this.center.lng);
+        formData2.append('neighborh', this.selectedlocality);
+        formData2.append('lat', this.center.lat);
+        formData2.append('lng', this.center.lng);
 
-        formData2.append("name", this.form.business_name);
-        formData2.append("category", this.business_category);
+        formData2.append('name', this.form.business_name);
+        formData2.append('category', this.business_category);
         //  formData2.append("keywords", this.selectedKeywords);
-        formData2.append("keywords", "blec this");
-        formData2.append("timezone", this.time_zone);
-        formData2.append("language", this.language);
-        formData2.append("about_business", this.about);
+        formData2.append('keywords', 'blec this');
+        formData2.append('timezone', this.time_zone);
+        formData2.append('language', this.language);
+        formData2.append('about_business', this.about);
 
         axios
-          .post("business/create", formData2)
-          .then((response) => {
+          .post('business/create', formData2)
+          .then(response => {
             console.log(response);
 
             this.sendingB = false;
 
             this.flashMessage.show({
-              status: "success",
-              blockClass: "custom-block-class",
-              message: "Business Profile Created",
+              status: 'success',
+              blockClass: 'custom-block-class',
+              message: 'Business Profile Created',
             });
 
             resolve(true);
           })
-          .catch((err) => {
+          .catch(err => {
             console.log({ err: err });
 
             this.sendingB = false;
@@ -1256,17 +1047,17 @@ export default {
               console.log(err.response.data.message);
 
               this.flashMessage.show({
-                status: "error",
+                status: 'error',
 
                 message: err.response.data.message,
-                blockClass: "custom-block-class",
+                blockClass: 'custom-block-class',
               });
             } else {
               this.flashMessage.show({
-                status: "error",
+                status: 'error',
 
-                message: "Unable to Create Your Business",
-                blockClass: "custom-block-class",
+                message: 'Unable to Create Your Business',
+                blockClass: 'custom-block-class',
               });
               console.log({ err: err });
             }
@@ -1276,40 +1067,40 @@ export default {
       });
     },
 
-    updateUserProfile: function () {
+    updateUserProfile: function() {
       return new Promise((resolve, reject) => {
-        console.log("sending user data");
+        console.log('sending user data');
 
         this.sendingP = true;
 
         let formData = new FormData();
-        formData.append("profile_picture", this.profile_pic);
+        formData.append('profile_picture', this.profile_pic);
 
-        formData.append("dob", this.dob);
-        formData.append("gender", this.gender);
-        formData.append("city", this.city);
-        formData.append("country", this.country);
-        formData.append("region", this.region);
-        formData.append("city", this.city);
-        formData.append("neighbor", this.Neighbor);
-        formData.append("lat", this.center.lat);
-        formData.append("lng", this.center.lng);
-        formData.append("address", this.region);
+        formData.append('dob', this.dob);
+        formData.append('gender', this.gender);
+        formData.append('city', this.city);
+        formData.append('country', this.country);
+        formData.append('region', this.region);
+        formData.append('city', this.city);
+        formData.append('neighbor', this.Neighbor);
+        formData.append('lat', this.center.lat);
+        formData.append('lng', this.center.lng);
+        formData.append('address', this.region);
 
         axios
-          .post("/complete/profile", formData)
-          .then((response) => {
+          .post('/complete/profile', formData)
+          .then(response => {
             console.log(response);
 
             this.step1 = true;
             this.sending = false;
 
             this.flashMessage.show({
-              status: "success",
+              status: 'success',
 
-              message: "Profile Updated",
+              message: 'Profile Updated',
 
-              blockClass: "custom-block-class",
+              blockClass: 'custom-block-class',
             });
 
             this.peopleAround();
@@ -1318,7 +1109,7 @@ export default {
 
             resolve(true);
           })
-          .catch((err) => {
+          .catch(err => {
             console.log({ err: err });
 
             this.sending = false;
@@ -1329,17 +1120,17 @@ export default {
               console.log(err.response.data.message);
 
               this.flashMessage.show({
-                status: "error",
+                status: 'error',
 
                 message: err.response.data.message,
-                blockClass: "custom-block-class",
+                blockClass: 'custom-block-class',
               });
             } else {
               this.flashMessage.show({
-                status: "error",
-                title: "Registration Failed",
-                message: "Unable to update your Information",
-                blockClass: "custom-block-class",
+                status: 'error',
+                title: 'Registration Failed',
+                message: 'Unable to update your Information',
+                blockClass: 'custom-block-class',
               });
               console.log({ err: err });
             }
@@ -1349,25 +1140,25 @@ export default {
       });
     },
 
-    onComplete: function () {
+    onComplete: function() {
       this.$store
-        .dispatch("auth/completeWelcome")
+        .dispatch('auth/completeWelcome')
         .then(() => {
-          console.log("hey yeah");
+          console.log('hey yeah');
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
 
-      this.$router.push("/dashboard");
+      this.$router.push('/dashboard');
     },
 
-    chooseProfile1: function () {
-      document.getElementById("profile1").click();
+    chooseProfile1: function() {
+      document.getElementById('profile1').click();
     },
 
-    chooseProfile2: function () {
-      document.getElementById("profile2").click();
+    chooseProfile2: function() {
+      document.getElementById('profile2').click();
     },
 
     onFileChange(e) {
@@ -1382,20 +1173,20 @@ export default {
       this.logoimg_url = URL.createObjectURL(logofile);
     },
 
-    chooselogo: function () {
-      document.getElementById("logo").click();
+    chooselogo: function() {
+      document.getElementById('logo').click();
     },
 
     showModal() {
-      this.$refs["modal-3"].show();
+      this.$refs['modal-3'].show();
     },
     hideModal() {
-      this.$refs["modal-3"].hide();
+      this.$refs['modal-3'].hide();
     },
 
     choseModal() {
-      if (this.useas == "") {
-        this.useas = "person";
+      if (this.useas == '') {
+        this.useas = 'person';
         this.selectedusecase = this.useas;
       } else {
         this.selectedusecase = this.useas;
@@ -1424,59 +1215,59 @@ export default {
   },
 
   computed: {
-    selectedcategories: function () {
+    selectedcategories: function() {
       let selectedUsers = [];
-      this.multiselecvalue.forEach((item) => {
+      this.multiselecvalue.forEach(item => {
         selectedUsers.push(item.id);
       });
       return selectedUsers;
     },
-    selectedKeywords: function () {
+    selectedKeywords: function() {
       let selectedUsers = [];
-      this.business_keyword.forEach((item) => {
+      this.business_keyword.forEach(item => {
         selectedUsers.push(item.id);
       });
       return selectedUsers;
     },
 
-    selectedsubcategories: function () {
+    selectedsubcategories: function() {
       let sub_cat = [];
-      this.filterselectvalue.forEach((item) => {
+      this.filterselectvalue.forEach(item => {
         sub_cat.push(item.subcategory_id);
       });
       return sub_cat;
     },
-    selectedcountry: function () {
+    selectedcountry: function() {
       let sub_cat = [];
-      this.countryy.forEach((item) => {
+      this.countryy.forEach(item => {
         sub_cat.push(item.id);
       });
       return sub_cat;
     },
-    selectedregion: function () {
+    selectedregion: function() {
       let sub_cat = [];
-      this.regionn.forEach((item) => {
+      this.regionn.forEach(item => {
         sub_cat.push(item.id);
       });
       return sub_cat;
     },
-    selecteddivision: function () {
+    selecteddivision: function() {
       let sub_cat = [];
-      this.division.forEach((item) => {
+      this.division.forEach(item => {
         sub_cat.push(item.id);
       });
       return sub_cat;
     },
-    selectedmunicipality: function () {
+    selectedmunicipality: function() {
       let sub_cat = [];
-      this.municipality.forEach((item) => {
+      this.municipality.forEach(item => {
         sub_cat.push(item.id);
       });
       return sub_cat;
     },
-    selectedlocality: function () {
+    selectedlocality: function() {
       let sub_cat = [];
-      this.locality.forEach((item) => {
+      this.locality.forEach(item => {
         sub_cat.push(item.id);
       });
       return sub_cat;
@@ -1516,7 +1307,7 @@ export default {
     },
   },
 };
-import "vue-form-wizard/dist/vue-form-wizard.min.css";
+import 'vue-form-wizard/dist/vue-form-wizard.min.css';
 </script>
 
 <style>
@@ -1689,4 +1480,4 @@ import "vue-form-wizard/dist/vue-form-wizard.min.css";
 }
 </style>
 
-<style src="vue-multiselect/dist/vue-multiselect.min.css"></style>  
+<style src="vue-multiselect/dist/vue-multiselect.min.css"></style>

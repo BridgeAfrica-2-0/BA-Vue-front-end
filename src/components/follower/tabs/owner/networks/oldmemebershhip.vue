@@ -19,10 +19,7 @@
           <b-input-group-prepend is-text>
             <b-icon-search class="text-primary border-none"></b-icon-search>
           </b-input-group-prepend>
-          <b-form-input
-            aria-label="Text input with checkbox"
-            placeholder="Search Something"
-          ></b-form-input>
+          <b-form-input aria-label="Text input with checkbox" placeholder="Search Something"></b-form-input>
         </b-input-group>
       </b-col>
 
@@ -55,27 +52,13 @@
                     <b-col md="12" xl="6" sm="12">
                       <div class="e-name">
                         <b-row>
-                          <b-col
-                            md="9"
-                            lg="9"
-                            cols="7"
-                            sm="7"
-                            xl="12"
-                            class="mt-lg-2 "
-                          >
+                          <b-col md="9" lg="9" cols="7" sm="7" xl="12" class="mt-lg-2 ">
                             <h6 class="mt-3">
                               <b> howty blec </b>
                             </h6>
                           </b-col>
 
-                          <b-col
-                            md="3"
-                            lg="3"
-                            cols="5"
-                            sm="5"
-                            xl="11"
-                            class="mt-3 mt-xl-0 "
-                          >
+                          <b-col md="3" lg="3" cols="5" sm="5" xl="11" class="mt-3 mt-xl-0 ">
                             <h6 class="follower">
                               5K Follower
                             </h6>
@@ -87,39 +70,15 @@
                     <b-col lg="">
                       <div>
                         <b-row>
-                          <b-col
-                            md="6"
-                            lg="6"
-                            cols="6"
-                            sm="6"
-                            xl="12"
-                            class="mt-xl-2  center"
-                          >
-                            <b-button
-                              block
-                              variant="primary"
-                              size="sm"
-                              class="b-background  flexx pobtn"
-                            >
+                          <b-col md="6" lg="6" cols="6" sm="6" xl="12" class="mt-xl-2  center">
+                            <b-button block variant="primary" size="sm" class="b-background  flexx pobtn">
                               <b-icon icon="chat" class="mr-1"> </b-icon>
                               Message
                             </b-button>
                           </b-col>
 
-                          <b-col
-                            md="6"
-                            lg="6"
-                            cols="6"
-                            sm="6"
-                            xl="12"
-                            class="mt-xl-2 btn-2  center"
-                          >
-                            <b-button
-                              block
-                              size="sm"
-                              class="b-background flexx  pobtn"
-                              variant="primary"
-                            >
+                          <b-col md="6" lg="6" cols="6" sm="6" xl="12" class="mt-xl-2 btn-2  center">
+                            <b-button block size="sm" class="b-background flexx  pobtn" variant="primary">
                               <b-icon icon="plus-circle" class="mr-1"> </b-icon>
                               community
                             </b-button>
@@ -133,16 +92,9 @@
 
               <b-col cols="1">
                 <span class="float-right a-dots">
-                  <b-dropdown
-                    size="lg"
-                    variant="link"
-                    toggle-class="text-decoration-none"
-                    no-caret
-                    class="a-dbutton"
-                  >
+                  <b-dropdown size="lg" variant="link" toggle-class="text-decoration-none" no-caret class="a-dbutton">
                     <template #button-content>
-                      <b-icon-three-dots-vertical></b-icon-three-dots-vertical
-                      ><span class="sr-only">Settings</span>
+                      <b-icon-three-dots-vertical></b-icon-three-dots-vertical><span class="sr-only">Settings</span>
                     </template>
                     <b-dropdown-item href="#">
                       Approve
@@ -175,27 +127,13 @@
                     <b-col md="12" xl="6" sm="12">
                       <div class="e-name">
                         <b-row>
-                          <b-col
-                            md="9"
-                            lg="9"
-                            cols="7"
-                            sm="7"
-                            xl="12"
-                            class="mt-lg-2 "
-                          >
+                          <b-col md="9" lg="9" cols="7" sm="7" xl="12" class="mt-lg-2 ">
                             <h6 class="mt-3">
                               <b> howty blec </b>
                             </h6>
                           </b-col>
 
-                          <b-col
-                            md="3"
-                            lg="3"
-                            cols="5"
-                            sm="5"
-                            xl="11"
-                            class="mt-3 mt-xl-0 "
-                          >
+                          <b-col md="3" lg="3" cols="5" sm="5" xl="11" class="mt-3 mt-xl-0 ">
                             <h6 class="follower">
                               5K Follower
                             </h6>
@@ -207,39 +145,15 @@
                     <b-col lg="">
                       <div>
                         <b-row>
-                          <b-col
-                            md="6"
-                            lg="6"
-                            cols="6"
-                            sm="6"
-                            xl="12"
-                            class="mt-xl-2  center"
-                          >
-                            <b-button
-                              block
-                              variant="primary"
-                              size="sm"
-                              class="b-background  flexx pobtn"
-                            >
+                          <b-col md="6" lg="6" cols="6" sm="6" xl="12" class="mt-xl-2  center">
+                            <b-button block variant="primary" size="sm" class="b-background  flexx pobtn">
                               <b-icon icon="chat" class="mr-1"> </b-icon>
                               Message
                             </b-button>
                           </b-col>
 
-                          <b-col
-                            md="6"
-                            lg="6"
-                            cols="6"
-                            sm="6"
-                            xl="12"
-                            class="mt-xl-2 btn-2  center"
-                          >
-                            <b-button
-                              block
-                              size="sm"
-                              class="b-background flexx  pobtn"
-                              variant="primary"
-                            >
+                          <b-col md="6" lg="6" cols="6" sm="6" xl="12" class="mt-xl-2 btn-2  center">
+                            <b-button block size="sm" class="b-background flexx  pobtn" variant="primary">
                               <b-icon icon="plus-circle" class="mr-1"> </b-icon>
                               community
                             </b-button>
@@ -253,16 +167,9 @@
 
               <b-col cols="1">
                 <span class="float-right a-dots">
-                  <b-dropdown
-                    size="lg"
-                    variant="link"
-                    toggle-class="text-decoration-none"
-                    no-caret
-                    class="a-dbutton"
-                  >
+                  <b-dropdown size="lg" variant="link" toggle-class="text-decoration-none" no-caret class="a-dbutton">
                     <template #button-content>
-                      <b-icon-three-dots-vertical></b-icon-three-dots-vertical
-                      ><span class="sr-only">Settings</span>
+                      <b-icon-three-dots-vertical></b-icon-three-dots-vertical><span class="sr-only">Settings</span>
                     </template>
                     <b-dropdown-item href="#">
                       Approve
@@ -296,29 +203,29 @@
 
 <script>
 export default {
-  name: "memberShip",
+  name: 'memberShip',
   data() {
     return {
       perPage: 3,
       currentPage: 1,
       items: [
-        { id: 1, first_name: "Fred", last_name: "Flintstone" },
-        { id: 2, first_name: "Wilma", last_name: "Flintstone" },
-        { id: 3, first_name: "Barney", last_name: "Rubble" },
-        { id: 4, first_name: "Betty", last_name: "Rubble" },
-        { id: 5, first_name: "Pebbles", last_name: "Flintstone" },
-        { id: 6, first_name: "Bamm Bamm", last_name: "Rubble" },
-        { id: 7, first_name: "The Great", last_name: "Gazzoo" },
-        { id: 8, first_name: "Rockhead", last_name: "Slate" },
-        { id: 9, first_name: "Pearl", last_name: "Slaghoople" }
-      ]
+        { id: 1, first_name: 'Fred', last_name: 'Flintstone' },
+        { id: 2, first_name: 'Wilma', last_name: 'Flintstone' },
+        { id: 3, first_name: 'Barney', last_name: 'Rubble' },
+        { id: 4, first_name: 'Betty', last_name: 'Rubble' },
+        { id: 5, first_name: 'Pebbles', last_name: 'Flintstone' },
+        { id: 6, first_name: 'Bamm Bamm', last_name: 'Rubble' },
+        { id: 7, first_name: 'The Great', last_name: 'Gazzoo' },
+        { id: 8, first_name: 'Rockhead', last_name: 'Slate' },
+        { id: 9, first_name: 'Pearl', last_name: 'Slaghoople' },
+      ],
     };
   },
   computed: {
     rows() {
       return this.items.length;
-    }
-  }
+    },
+  },
 };
 </script>
 

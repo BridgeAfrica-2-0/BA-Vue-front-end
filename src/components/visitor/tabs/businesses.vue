@@ -21,16 +21,16 @@
 </template>
 
 <script>
-import Business from "../business";
+import Business from '../business';
 export default {
   data() {
     return {
-      noBusiness: false
+      noBusiness: false,
     };
   },
   components: {
-    Business
-  }
+    Business,
+  },
 };
 </script>
 

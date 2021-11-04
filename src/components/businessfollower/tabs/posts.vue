@@ -6,127 +6,71 @@
         <b-card title="" header-tag="header" footer-tag="footer">
           <span class="m-1">
             <h2 class="title intro-head">
-             
-                <fas-icon
-                  class="icons"
-                  :icon="['fas', 'exclamation-circle']"
-                  size="lg"
-                />
-                Intro
-             
+              <fas-icon class="icons" :icon="['fas', 'exclamation-circle']" size="lg" />
+              Intro
             </h2>
-            <span class="float-right btn m-0 p-0 action-intro" @click="editPage"  
-              ><b-icon
-                icon="pencil-fill"
-                class="icon-size"
-                variant="primary"
-              ></b-icon>
+            <span class="float-right btn m-0 p-0 action-intro" @click="editPage"
+              ><b-icon icon="pencil-fill" class="icon-size" variant="primary"></b-icon>
             </span>
           </span>
           <!-- User Post Intro-->
           <b-card-text class="text-left username intro-head">
             <p>
-              <b-icon
-                icon="briefcase-fill"
-                class="icon-size"
-                variant="primary"
-              ></b-icon>
-               Work at: 
-              <span v-if="info.user_experience"> 
-              <span
-                class="text"
-                v-for="exp in info.user_experience.slice(0, 1)"
-                :key="exp.id"
-              >
-                {{ exp.company_name }}
-              </span>
-               </span>
-            </p>
-            <p>
-              <b-icon
-                icon="book-fill"
-                class="icon-size"
-                variant="primary"
-              ></b-icon>
-               Studied at: 
-              <span v-if="info.user_education !=null">   
-          <span
-                v-for="edu in info.user_education.slice(0, 1)"
-                :key="edu.id"
-                class="text"
-              >
-           
-                {{ edu.school_name }}</span
-              >
-
-             
+              <b-icon icon="briefcase-fill" class="icon-size" variant="primary"></b-icon>
+              Work at:
+              <span v-if="info.user_experience">
+                <span class="text" v-for="exp in info.user_experience.slice(0, 1)" :key="exp.id">
+                  {{ exp.company_name }}
                 </span>
+              </span>
             </p>
             <p>
-              <b-icon
-                icon="house-fill"
-                class="icon-size"
-                variant="primary"
-              ></b-icon>
-              Home Town : 
+              <b-icon icon="book-fill" class="icon-size" variant="primary"></b-icon>
+              Studied at:
+              <span v-if="info.user_education != null">
+                <span v-for="edu in info.user_education.slice(0, 1)" :key="edu.id" class="text">
+                  {{ edu.school_name }}</span
+                >
+              </span>
+            </p>
+            <p>
+              <b-icon icon="house-fill" class="icon-size" variant="primary"></b-icon>
+              Home Town :
               <span class="text">
                 {{ info.user.neighbor }}
               </span>
             </p>
             <p>
-              <b-icon
-                icon="geo-alt-fill"
-                class="icon-size"
-                variant="primary"
-              ></b-icon
-              > Current City :
+              <b-icon icon="geo-alt-fill" class="icon-size" variant="primary"></b-icon> Current City :
               <span class="text">
                 {{ info.user.city }}
               </span>
             </p>
             <p>
-              <b-icon
-                icon="people-fill"
-                class="icon-size"
-                variant="primary"
-              ></b-icon>
-               Community: 
+              <b-icon icon="people-fill" class="icon-size" variant="primary"></b-icon>
+              Community:
               <span class="text">
-               {{ nFormatter(total.total_community)}}
+                {{ nFormatter(total.total_community) }}
               </span>
             </p>
           </b-card-text>
         </b-card>
 
-        <b-modal
-          id="modal-5"
-          title="Edit Intro"
-          ref="modal"
-         
-          @ok="handleOk"
-        >
+        <b-modal id="modal-5" title="Edit Intro" ref="modal" @ok="handleOk">
           <div class="">
-             
             <p>
               <b> Work at: </b>
-              <span v-if="info.user_experience">  
-              <span
-                class="text"
-                v-for="exp in info.user_experience.slice(0, 1)"
-                :key="exp.id"
-              >
-                {{ exp.company_name }}
-              </span>  </span>
+              <span v-if="info.user_experience">
+                <span class="text" v-for="exp in info.user_experience.slice(0, 1)" :key="exp.id">
+                  {{ exp.company_name }}
+                </span>
+              </span>
             </p>
             <p>
               <b> Studied at: </b>
-       
-              <span v-if="info.user_education !=null">
-                <span
-                v-for="edu in info.user_education.slice(0, 1)"
-                :key="edu.id"
-                class="text"
-                >
+
+              <span v-if="info.user_education != null">
+                <span v-for="edu in info.user_education.slice(0, 1)" :key="edu.id" class="text">
                   {{ edu.school_name }}
                 </span>
               </span>
@@ -143,8 +87,6 @@
                 {{ info.user.city }}
               </span>
             </p>
-           
-         
           </div>
         </b-modal>
 
@@ -160,16 +102,16 @@
 </template>
 
 <script>
-import "@morioh/v-lightbox/dist/lightbox.css";
+import '@morioh/v-lightbox/dist/lightbox.css';
 //import Followers from "../../followers";
-import Community from "../sidebarcommunity"; 
+import Community from '../sidebarcommunity';
 //import Community from "./comunitiDashboard";
-import Owner_post from "./owner_post";
-import Media from "../media";
+import Owner_post from './owner_post';
+import Media from '../media';
 // import CreatePost from "../../createPost";
 // import Post from "../../post";
 export default {
-  name: "posts",
+  name: 'posts',
   components: {
     //Followers,
     Media,
@@ -177,70 +119,56 @@ export default {
     Community,
   },
 
- 
   mounted() {
-    console.log("Load User Info");
+    console.log('Load User Info');
     this.$store
-      .dispatch("profile/loadUserPostIntro", null)
-      .then((response) => {
-        console.log("Load User Intro test+++++ res");
+      .dispatch('profile/loadUserPostIntro', null)
+      .then(response => {
+        console.log('Load User Intro test+++++ res');
         console.log(response);
-        console.log("Load User Intro Finish Loading");
-        this.userProfileOwner = this.$store.getters["profile/getUserPostIntro"];
+        console.log('Load User Intro Finish Loading');
+        this.userProfileOwner = this.$store.getters['profile/getUserPostIntro'];
         this.userProfileOwnerInput.workedAt = this.userProfileOwner.workedAt;
         this.userProfileOwnerInput.studiedAt = this.userProfileOwner.studiedAt;
         this.userProfileOwnerInput.homeTown = this.userProfileOwner.homeTown;
-        this.userProfileOwnerInput.currentCity =
-          this.userProfileOwner.currentCity;
-        this.userProfileOwnerInput.numbersOfFollowers =
-          this.userProfileOwner.numbersOfFollowers;
+        this.userProfileOwnerInput.currentCity = this.userProfileOwner.currentCity;
+        this.userProfileOwnerInput.numbersOfFollowers = this.userProfileOwner.numbersOfFollowers;
         return response;
       })
-      .catch((error) => {
+      .catch(error => {
         console.log(error);
       });
 
-
-
-
-        this.$store
-      .dispatch("profile/getImages")
-      .then((response) => {
-       
-      })
-      .catch((error) => {
-        console.log({error:error});
-      });  
-      
+    this.$store
+      .dispatch('profile/getImages')
+      .then(response => {})
+      .catch(error => {
+        console.log({ error: error });
+      });
   },
   computed: {
-    info: function () {
-      return this.$store.getters["profile/getUserPostIntro"];
+    info: function() {
+      return this.$store.getters['profile/getUserPostIntro'];
     },
 
-    
-    total(){
-    return  this.$store.state.profile.Tcommunity;
-   },
- 
-   
-
+    total() {
+      return this.$store.state.profile.Tcommunity;
+    },
   },
   data() {
     return {
-     
       userProfileOwner: {
-        workedAt: "Current or Last Organization",
-        studiedAt: "Last Education",
-        homeTown: "Dummy",
-        currentCity: "Dummy",
+        workedAt: 'Current or Last Organization',
+        studiedAt: 'Last Education',
+        homeTown: 'Dummy',
+        currentCity: 'Dummy',
         numbersOfFollowers: 256,
       },
       userProfileOwnerInput: {
-        workedAt: "",
-        studiedAt: "",
-        homeTown: "",
-        currentCity: "",
+        workedAt: '',
+        studiedAt: '',
+        homeTown: '',
+        currentCity: '',
         numbersOfFollowers: 0,
       },
       workedAtState: null,
@@ -250,9 +178,7 @@ export default {
     };
   },
   methods: {
-    
-
-     nFormatter(num) {
+    nFormatter(num) {
       if (num >= 1000000000) {
         return (num / 1000000000).toFixed(1).replace(/\.0$/, '') + 'G';
       }
@@ -265,30 +191,22 @@ export default {
       return num;
     },
 
-   
-    handleOk(bvModalEvt) {
-    
-     
+    handleOk(bvModalEvt) {},
+
+    switchTab(index) {
+      this.$refs['modal'].hide();
+      this.$router.push('profile_owner#' + index);
     },
 
-    switchTab(index){
-       
-        this.$refs["modal"].hide();
-      this.$router.push("profile_owner#"+index);
+    editPage() {
+      this.$router.push('profile_owner#about');
     },
-
-    editPage(){
-     
-      this.$router.push("profile_owner#about");
-    }
-   
   },
 };
 </script>
 
 <style scoped>
-
-.eedit:hover{
+.eedit:hover {
   font-size: 18px;
   color: #e75c18;
 }

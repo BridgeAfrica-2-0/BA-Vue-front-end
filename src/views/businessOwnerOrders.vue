@@ -1,6 +1,5 @@
 <template>
   <div class="container">
-    
     <hr />
     <!-- partie mobile--------------------------------------------------------------------- 
     
@@ -8,30 +7,18 @@
     -->
     <div id="hidemobile">
       <div class="justify-content-between d-flex row cd B">
-        <div
-          id="m1"
-          class="mobile green t col transition pl-4"
-          @click="changeElementType(1)"
-        >
+        <div id="m1" class="mobile green t col transition pl-4" @click="changeElementType(1)">
           <div class="cercle1">1</div>
           <h2 class="h2 text-position">All</h2>
         </div>
 
-        <div
-          id="m2"
-          class="mobile1 col t start-50"
-          @click="changeElementType(2)"
-        >
+        <div id="m2" class="mobile1 col t start-50" @click="changeElementType(2)">
           <div class="cercle2">2</div>
 
           <h2 class="h2 text-position text-center">In process</h2>
         </div>
 
-        <div
-          id="m3"
-          class="mobile3 col t start-50"
-          @click="changeElementType(3)"
-        >
+        <div id="m3" class="mobile3 col t start-50" @click="changeElementType(3)">
           <div class="cercle2">3</div>
 
           <h2 class="h2 text-position text-center">Shipped</h2>
@@ -47,7 +34,6 @@
         <div class="col">
           <h3 class="text-danger text-center margclear">clear history</h3>
         </div>
-        
       </div>
       <hr />
 
@@ -56,10 +42,7 @@
           <div class="show row">
             <div class="col-3">Show:</div>
             <div class="col">
-              <b-form-select
-                v-model="selected"
-                :options="options"
-              ></b-form-select>
+              <b-form-select v-model="selected" :options="options"></b-form-select>
             </div>
           </div>
           <div v-for="i in etat1" :key="i">
@@ -67,12 +50,7 @@
               <div class="justify-content-start container">
                 <div class="container d-flex justify-content-end btn-marg">
                   <div class="manage">
-                    <b-dropdown
-                      variant="ligth"
-                      id="dropdown-1"
-                      text="Manage"
-                      class="m-md-2"
-                    >
+                    <b-dropdown variant="ligth" id="dropdown-1" text="Manage" class="m-md-2">
                       <b-dropdown-item>Archive</b-dropdown-item>
                       <b-dropdown-item>Delete</b-dropdown-item>
                     </b-dropdown>
@@ -83,10 +61,10 @@
                 <span class="flou">yaoundé 12/12/2021 12H00</span>
               </div>
 
-             <span class="row posstatus">
+              <span class="row posstatus">
                 <p class="h3 statusp">status:</p>
-              <h3 class="text-success h3 margstatus ">{{ i }}</h3>
-             </span>
+                <h3 class="text-success h3 margstatus ">{{ i }}</h3>
+              </span>
             </div>
             <hr />
 
@@ -139,10 +117,7 @@
           <div class="show row">
             <div class="col-3">Show:</div>
             <div class="col">
-              <b-form-select
-                v-model="selected"
-                :options="options"
-              ></b-form-select>
+              <b-form-select v-model="selected" :options="options"></b-form-select>
             </div>
           </div>
           <div v-for="i in 4" :key="i">
@@ -150,12 +125,7 @@
               <div class="justify-content-start container">
                 <div class="container d-flex justify-content-end btn-marg">
                   <div class="manage">
-                    <b-dropdown
-                      variant="ligth"
-                      id="dropdown-1"
-                      text="Manage"
-                      class="m-md-2"
-                    >
+                    <b-dropdown variant="ligth" id="dropdown-1" text="Manage" class="m-md-2">
                       <b-dropdown-item>Archive</b-dropdown-item>
                       <b-dropdown-item>Delete</b-dropdown-item>
                     </b-dropdown>
@@ -168,8 +138,8 @@
 
               <span class="row posstatus">
                 <p class="h3 statusp">status:</p>
-              <h3 class="text-success h3 margstatus ">{{ etat }}</h3>
-             </span>
+                <h3 class="text-success h3 margstatus ">{{ etat }}</h3>
+              </span>
             </div>
             <hr />
 
@@ -222,10 +192,7 @@
           <div class="show row">
             <div class="col-3">Show:</div>
             <div class="col">
-              <b-form-select
-                v-model="selected"
-                :options="options"
-              ></b-form-select>
+              <b-form-select v-model="selected" :options="options"></b-form-select>
             </div>
           </div>
           <div v-for="i in 4" :key="i">
@@ -233,12 +200,7 @@
               <div class="justify-content-start container">
                 <div class="container d-flex justify-content-end btn-marg">
                   <div class="manage">
-                    <b-dropdown
-                      variant="ligth"
-                      id="dropdown-1"
-                      text="Manage"
-                      class="m-md-2"
-                    >
+                    <b-dropdown variant="ligth" id="dropdown-1" text="Manage" class="m-md-2">
                       <b-dropdown-item>Archive</b-dropdown-item>
                       <b-dropdown-item>Delete</b-dropdown-item>
                     </b-dropdown>
@@ -251,8 +213,8 @@
 
               <span class="row posstatus">
                 <p class="h3 statusp">status:</p>
-              <h3 class="text-success h3 margstatus ">{{ etat }}</h3>
-             </span>
+                <h3 class="text-success h3 margstatus ">{{ etat }}</h3>
+              </span>
             </div>
             <hr />
 
@@ -305,10 +267,7 @@
           <div class="show row">
             <div class="col-3">Show:</div>
             <div class="col">
-              <b-form-select
-                v-model="selected"
-                :options="options"
-              ></b-form-select>
+              <b-form-select v-model="selected" :options="options"></b-form-select>
             </div>
           </div>
           <div v-for="i in 4" :key="i">
@@ -316,12 +275,7 @@
               <div class="justify-content-start container">
                 <div class="container d-flex justify-content-end btn-marg">
                   <div class="manage">
-                    <b-dropdown
-                      variant="ligth"
-                      id="dropdown-1"
-                      text="Manage"
-                      class="m-md-2"
-                    >
+                    <b-dropdown variant="ligth" id="dropdown-1" text="Manage" class="m-md-2">
                       <b-dropdown-item>Archive</b-dropdown-item>
                       <b-dropdown-item>Delete</b-dropdown-item>
                     </b-dropdown>
@@ -334,8 +288,8 @@
 
               <span class="row posstatus">
                 <p class="h3 statusp">status:</p>
-              <h3 class="text-success h3 margstatus ">{{ etat }}</h3>
-             </span>
+                <h3 class="text-success h3 margstatus ">{{ etat }}</h3>
+              </span>
             </div>
             <hr />
 
@@ -396,11 +350,7 @@
       <div class="row parent">
         <b-avatar id="a1" class="avatar bg-success" text="1"></b-avatar>
         <h2 class="text cursor" @click="changeElementType(1)">All</h2>
-        <div
-          id="p1"
-          class="progress prog cursor gris bg-success"
-          @click="changeElementType(1)"
-        >
+        <div id="p1" class="progress prog cursor gris bg-success" @click="changeElementType(1)">
           <div
             class="progress-bar bg-success"
             role="progressbar"
@@ -412,11 +362,7 @@
 
         <b-avatar id="a2" class="avatar" text="2"></b-avatar>
         <h2 class="text cursor" @click="changeElementType(2)">In Process</h2>
-        <div
-          id="p2"
-          class="progress prog cursor gris"
-          @click="changeElementType(2)"
-        >
+        <div id="p2" class="progress prog cursor gris" @click="changeElementType(2)">
           <div
             class="progress-bar bg-success"
             role="progressbar"
@@ -428,11 +374,7 @@
 
         <b-avatar id="a3" class="avatar" text="3"></b-avatar>
         <h2 class="text cursor" @click="changeElementType(3)">Shipped</h2>
-        <div
-          id="p3"
-          class="progress prog cursor gris"
-          @click="changeElementType(3)"
-        >
+        <div id="p3" class="progress prog cursor gris" @click="changeElementType(3)">
           <div
             class="progress-bar bg-success"
             role="progressbar"
@@ -444,11 +386,7 @@
 
         <b-avatar id="a4" class="avatar" text="4"></b-avatar>
         <h2 class="text cursor" @click="changeElementType(4)">Re-shedule</h2>
-        <div
-          id="p4"
-          class="progress prog cursor gris"
-          @click="changeElementType(4)"
-        >
+        <div id="p4" class="progress prog cursor gris" @click="changeElementType(4)">
           <div
             class="progress-bar bg-success"
             role="progressbar"
@@ -469,22 +407,14 @@
           <div class="show row">
             <div class="col-4">Show:</div>
             <div class="col">
-              <b-form-select
-                v-model="selected"
-                :options="options"
-              ></b-form-select>
+              <b-form-select v-model="selected" :options="options"></b-form-select>
             </div>
           </div>
           <div v-for="i in etat1" :key="i">
             <div class="justify-content-start container">
               <div class="container d-flex justify-content-end btn-marg">
                 <div class="manage">
-                  <b-dropdown
-                    variant="ligth"
-                    id="dropdown-1"
-                    text="Manage"
-                    class="m-md-2"
-                  >
+                  <b-dropdown variant="ligth" id="dropdown-1" text="Manage" class="m-md-2">
                     <b-dropdown-item>Archive</b-dropdown-item>
                     <b-dropdown-item>Delete</b-dropdown-item>
                   </b-dropdown>
@@ -546,10 +476,7 @@
           <div class="show row">
             <div class="col-4">Show:</div>
             <div class="col">
-              <b-form-select
-                v-model="selected"
-                :options="options"
-              ></b-form-select>
+              <b-form-select v-model="selected" :options="options"></b-form-select>
             </div>
           </div>
 
@@ -557,12 +484,7 @@
             <div class="justify-content-start container">
               <div class="container d-flex justify-content-end btn-marg">
                 <div class="manage">
-                  <b-dropdown
-                    variant="ligth"
-                    id="dropdown-1"
-                    text="Manage"
-                    class="m-md-2"
-                  >
+                  <b-dropdown variant="ligth" id="dropdown-1" text="Manage" class="m-md-2">
                     <b-dropdown-item>Archive</b-dropdown-item>
                     <b-dropdown-item>Delete</b-dropdown-item>
                   </b-dropdown>
@@ -624,10 +546,7 @@
           <div class="show row">
             <div class="col-4">Show:</div>
             <div class="col">
-              <b-form-select
-                v-model="selected"
-                :options="options"
-              ></b-form-select>
+              <b-form-select v-model="selected" :options="options"></b-form-select>
             </div>
           </div>
 
@@ -635,12 +554,7 @@
             <div class="justify-content-start container">
               <div class="container d-flex justify-content-end btn-marg">
                 <div class="manage">
-                  <b-dropdown
-                    variant="ligth"
-                    id="dropdown-1"
-                    text="Manage"
-                    class="m-md-2"
-                  >
+                  <b-dropdown variant="ligth" id="dropdown-1" text="Manage" class="m-md-2">
                     <b-dropdown-item>Archive</b-dropdown-item>
                     <b-dropdown-item>Delete</b-dropdown-item>
                   </b-dropdown>
@@ -702,10 +616,7 @@
           <div class="show row">
             <div class="col-4">Show:</div>
             <div class="col">
-              <b-form-select
-                v-model="selected"
-                :options="options"
-              ></b-form-select>
+              <b-form-select v-model="selected" :options="options"></b-form-select>
             </div>
           </div>
 
@@ -713,12 +624,7 @@
             <div class="justify-content-start container">
               <div class="container d-flex justify-content-end btn-marg">
                 <div class="manage">
-                  <b-dropdown
-                    variant="ligth"
-                    id="dropdown-1"
-                    text="Manage"
-                    class="m-md-2"
-                  >
+                  <b-dropdown variant="ligth" id="dropdown-1" text="Manage" class="m-md-2">
                     <b-dropdown-item>Archive</b-dropdown-item>
                     <b-dropdown-item>Delete</b-dropdown-item>
                   </b-dropdown>
@@ -781,64 +687,61 @@
 </template>
 
 <script>
-
-
 export default {
- 
   data() {
     return {
-      selected: "",
-      rimg: "",
+      selected: '',
+      rimg: '',
       status: 1,
-      etat: "All",
-      img: ["http://urlr.me/YMQXD", "https://placekitten.com/400/300"],
+      etat: 'All',
+      img: ['http://urlr.me/YMQXD', 'https://placekitten.com/400/300'],
       options: [
-        { value: null, text: "Please select an option" },
-        { value: "a", text: "last 5 days" },
-        { value: "b", text: "last 10 days" },
+        { value: null, text: 'Please select an option' },
+        { value: 'a', text: 'last 5 days' },
+        { value: 'b', text: 'last 10 days' },
       ],
-      etat1: ["in progress", "complete", "cancel"],
+      etat1: ['in progress', 'complete', 'cancel'],
     };
   },
 
   methods: {
     changeElementType(p) {
-      console.log("------------------" + p);
+      console.log('------------------' + p);
       this.status = p;
 
       if (p == 1) {
-        this.etat = "All";
+        this.etat = 'All';
       } else if (p == 2) {
-        this.etat = "In process";
+        this.etat = 'In process';
       } else if (p == 3) {
-        this.etat = "Shipped";
+        this.etat = 'Shipped';
       } else if (p == 4) {
-        this.etat = "Re-shedule";
+        this.etat = 'Re-shedule';
       }
       //transition partie desktop
-      const a = document.getElementById("a" + p);
-      const pr = document.getElementById("p" + p);
+      const a = document.getElementById('a' + p);
+      const pr = document.getElementById('p' + p);
 
-      const as = document.querySelectorAll(".avatar");
-      as.forEach((dat) => {
-        dat.classList.remove("bg-success");
+      const as = document.querySelectorAll('.avatar');
+      as.forEach(dat => {
+        dat.classList.remove('bg-success');
       });
-      a.classList.add("bg-success");
+      a.classList.add('bg-success');
 
-      const ps = document.querySelectorAll(".progress");
-      ps.forEach((dat) => {
-        dat.classList.remove("bg-success");
+      const ps = document.querySelectorAll('.progress');
+      ps.forEach(dat => {
+        dat.classList.remove('bg-success');
       });
-      pr.classList.add("bg-success");
+      pr.classList.add('bg-success');
 
       //transition partie mobile
 
-      const el = document.getElementById("m" + p);
-      const els = document.querySelectorAll(".t");
-      els.forEach((dat) => {
-        dat.classList.remove("green");
+      const el = document.getElementById('m' + p);
+      const els = document.querySelectorAll('.t');
+      els.forEach(dat => {
+        dat.classList.remove('green');
       });
-      el.classList.add("green");
+      el.classList.add('green');
     },
   },
 
@@ -967,7 +870,7 @@ h3 {
   margin-top: 30px;
   margin-bottom: -20px;
 }
-.posstatus{
+.posstatus {
   margin-left: 195px;
   margin-top: -18px;
 }
@@ -1208,7 +1111,7 @@ h3 {
   .marghr {
     margin-bottom: -20px;
   }
-  .manage{
+  .manage {
     margin-top: -6px !important;
     margin-right: -12px !important;
   }
@@ -1222,7 +1125,7 @@ h3 {
       margin-left: -4px !important;
     }
   }
-   .manage{
+  .manage {
     margin-top: -6px !important;
     margin-right: -12px !important;
   }

@@ -4,13 +4,7 @@
 
     <div class="row">
       <div class="container-fluid">
-        <b-modal
-          id="modalxl"
-          ref="modalxl"
-          centered
-          hide-footer
-          title="Upoad Image"
-        >
+        <b-modal id="modalxl" ref="modalxl" centered hide-footer title="Upoad Image">
           <br />
 
           <div id="preview" ref="preview">
@@ -29,8 +23,7 @@
           <br />
 
           <b-button @click="submitPost" variant="primary" block
-            ><b-icon icon="cursor-fill" variant="primary"></b-icon>
-            Publish</b-button
+            ><b-icon icon="cursor-fill" variant="primary"></b-icon> Publish</b-button
           >
         </b-modal>
 
@@ -70,34 +63,15 @@
           <div class="mediadesc">
             <ul class="navbar-nav pull-right">
               <li class="nav-item dropdown m-0 p-0">
-                <b-dropdown
-                  size="sm"
-                  class="call-action"
-                  variant="link"
-                  toggle-class="text-decoration-none"
-                  no-caret
-                >
+                <b-dropdown size="sm" class="call-action" variant="link" toggle-class="text-decoration-none" no-caret>
                   <template #button-content>
-                    <b-icon
-                      icon="three-dots-vertical"
-                      color="white"
-                      variant="light"
-                    >
-                    </b-icon>
+                    <b-icon icon="three-dots-vertical" color="white" variant="light"> </b-icon>
                   </template>
 
-                  <b-dropdown-item @click="downloadPic(pictures.id)"
-                    >Download</b-dropdown-item
-                  >
-                  <b-dropdown-item @click="setProfilePic(pictures.id)"
-                    >Make Profile Picture</b-dropdown-item
-                  >
-                  <b-dropdown-item @click="setCoverPic(pictures.id)"
-                    >Make Cover Photo</b-dropdown-item
-                  >
-                  <b-dropdown-item @click="deleteImage(pictures.id)" href="#"
-                    >Delete</b-dropdown-item
-                  >
+                  <b-dropdown-item @click="downloadPic(pictures.id)">Download</b-dropdown-item>
+                  <b-dropdown-item @click="setProfilePic(pictures.id)">Make Profile Picture</b-dropdown-item>
+                  <b-dropdown-item @click="setCoverPic(pictures.id)">Make Cover Photo</b-dropdown-item>
+                  <b-dropdown-item @click="deleteImage(pictures.id)" href="#">Delete</b-dropdown-item>
                 </b-dropdown>
               </li>
             </ul>
@@ -109,9 +83,9 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
+import { mapActions } from 'vuex';
 export default {
-  props: ["album"],
+  props: ['album'],
 
   data() {
     return {
@@ -122,40 +96,40 @@ export default {
       img_url: null,
       profile_pic: null,
       text: null,
-      headers: { "Content-Type": "multipart/form-data" },
+      headers: { 'Content-Type': 'multipart/form-data' },
 
       images: [
-        "https://placekitten.com/801/800",
-        "https://placekitten.com/802/800",
-        "https://placekitten.com/803/800",
-        "https://placekitten.com/804/800",
-        "https://placekitten.com/805/800",
-        "https://placekitten.com/806/800",
-        "https://placekitten.com/807/800",
-        "https://placekitten.com/808/800",
-        "https://placekitten.com/809/800",
+        'https://placekitten.com/801/800',
+        'https://placekitten.com/802/800',
+        'https://placekitten.com/803/800',
+        'https://placekitten.com/804/800',
+        'https://placekitten.com/805/800',
+        'https://placekitten.com/806/800',
+        'https://placekitten.com/807/800',
+        'https://placekitten.com/808/800',
+        'https://placekitten.com/809/800',
       ],
       imagees: [
-        "https://i.wifegeek.com/200426/f9459c52.jpg",
-        "https://i.wifegeek.com/200426/5ce1e1c7.jpg",
-        "https://i.wifegeek.com/200426/5fa51df3.jpg",
-        "https://i.wifegeek.com/200426/663181fe.jpg",
-        "https://i.wifegeek.com/200426/2d110780.jpg",
-        "https://i.wifegeek.com/200426/e73cd3fa.jpg",
-        "https://i.wifegeek.com/200426/15160d6e.jpg",
-        "https://i.wifegeek.com/200426/d0c881ae.jpg",
-        "https://i.wifegeek.com/200426/a154fc3d.jpg",
-        "https://i.wifegeek.com/200426/71d3aa60.jpg",
-        "https://i.wifegeek.com/200426/d17ce9a0.jpg",
-        "https://i.wifegeek.com/200426/7c4deca9.jpg",
-        "https://i.wifegeek.com/200426/64672676.jpg",
-        "https://i.wifegeek.com/200426/de6ab9c6.jpg",
-        "https://i.wifegeek.com/200426/d8bcb6a7.jpg",
-        "https://i.wifegeek.com/200426/4085d03b.jpg",
-        "https://i.wifegeek.com/200426/177ef44c.jpg",
-        "https://i.wifegeek.com/200426/d74d9040.jpg",
-        "https://i.wifegeek.com/200426/81e24a47.jpg",
-        "https://i.wifegeek.com/200426/43e2e8bb.jpg",
+        'https://i.wifegeek.com/200426/f9459c52.jpg',
+        'https://i.wifegeek.com/200426/5ce1e1c7.jpg',
+        'https://i.wifegeek.com/200426/5fa51df3.jpg',
+        'https://i.wifegeek.com/200426/663181fe.jpg',
+        'https://i.wifegeek.com/200426/2d110780.jpg',
+        'https://i.wifegeek.com/200426/e73cd3fa.jpg',
+        'https://i.wifegeek.com/200426/15160d6e.jpg',
+        'https://i.wifegeek.com/200426/d0c881ae.jpg',
+        'https://i.wifegeek.com/200426/a154fc3d.jpg',
+        'https://i.wifegeek.com/200426/71d3aa60.jpg',
+        'https://i.wifegeek.com/200426/d17ce9a0.jpg',
+        'https://i.wifegeek.com/200426/7c4deca9.jpg',
+        'https://i.wifegeek.com/200426/64672676.jpg',
+        'https://i.wifegeek.com/200426/de6ab9c6.jpg',
+        'https://i.wifegeek.com/200426/d8bcb6a7.jpg',
+        'https://i.wifegeek.com/200426/4085d03b.jpg',
+        'https://i.wifegeek.com/200426/177ef44c.jpg',
+        'https://i.wifegeek.com/200426/d74d9040.jpg',
+        'https://i.wifegeek.com/200426/81e24a47.jpg',
+        'https://i.wifegeek.com/200426/43e2e8bb.jpg',
       ],
       index: 0,
     };
@@ -169,53 +143,53 @@ export default {
   },
   methods: {
     ...mapActions({
-      submitPost: "businessOwner/submitPost",
-      setProfilePic: "businessOwner/setProfilePic",
-      setCoverPic: "businessOwner/setCoverPic",
-      deleteImage: "businessOwner/deleteImage",
-      downloadPic: "businessOwner/downloadPic",
+      submitPost: 'businessOwner/submitPost',
+      setProfilePic: 'businessOwner/setProfilePic',
+      setCoverPic: 'businessOwner/setCoverPic',
+      deleteImage: 'businessOwner/deleteImage',
+      downloadPic: 'businessOwner/downloadPic',
     }),
 
     showPic(url) {
       console.log(url);
       this.show_url = url;
-      this.$refs["Details"].show();
+      this.$refs['Details'].show();
     },
     downloadPic(image_id) {
-      console.log("downloading");
+      console.log('downloading');
       let loader = this.$loading.show({
         container: this.fullPage,
         canCancel: true,
         onCancel: this.onCancel,
-        color: "#e75c18",
+        color: '#e75c18',
       });
       this.downloadPic(image_id)
-        .then((response) => {
+        .then(response => {
           var fileURL = window.URL.createObjectURL(new Blob([response.data]));
-          var fileLink = document.createElement("a");
+          var fileLink = document.createElement('a');
           fileLink.href = fileURL;
-          fileLink.setAttribute("download", "file.jpg");
+          fileLink.setAttribute('download', 'file.jpg');
           document.body.appendChild(fileLink);
           fileLink.click();
           this.flashMessage.show({
-            status: "success",
-            message: "Image Downloaded",
+            status: 'success',
+            message: 'Image Downloaded',
           });
           loader.hide();
         })
-        .catch((err) => {
+        .catch(err => {
           this.sending = false;
           if (err.response.status == 422) {
             console.log({ err: err });
             this.flashMessage.show({
-              status: "error",
+              status: 'error',
               message: err.response.data.message,
             });
             loader.hide();
           } else {
             this.flashMessage.show({
-              status: "error",
-              message: "Unable to download ",
+              status: 'error',
+              message: 'Unable to download ',
             });
             console.log({ err: err });
             loader.hide();
@@ -223,35 +197,35 @@ export default {
         });
     },
     deleteImage(image_id) {
-      console.log("deleting ----------");
+      console.log('deleting ----------');
       let loader = this.$loading.show({
         container: this.fullPage,
         canCancel: true,
         onCancel: this.onCancel,
-        color: "#e75c18",
+        color: '#e75c18',
       });
       this.deleteImage(image_id, this.name)
-        .then((response) => {
+        .then(response => {
           console.log(response.data);
           this.flashMessage.show({
-            status: "success",
-            message: "Album Deleted",
+            status: 'success',
+            message: 'Album Deleted',
           });
           loader.hide();
         })
-        .catch((err) => {
+        .catch(err => {
           this.sending = false;
           if (err.response.status == 422) {
             console.log({ err: err });
             this.flashMessage.show({
-              status: "error",
+              status: 'error',
               message: err.response.data.message,
             });
             loader.hide();
           } else {
             this.flashMessage.show({
-              status: "error",
-              message: "Unable to Delete your Image",
+              status: 'error',
+              message: 'Unable to Delete your Image',
             });
             console.log({ err: err });
             loader.hide();
@@ -264,30 +238,30 @@ export default {
         container: this.fullPage,
         canCancel: true,
         onCancel: this.onCancel,
-        color: "#e75c18",
+        color: '#e75c18',
       });
       this.setCoverPic(image_id, this.name)
-        .then((response) => {
+        .then(response => {
           console.log(response.data);
           this.flashMessage.show({
-            status: "success",
-            message: "cover Picture succesfully set",
+            status: 'success',
+            message: 'cover Picture succesfully set',
           });
           loader.hide();
         })
-        .catch((err) => {
+        .catch(err => {
           this.sending = false;
           if (err.response.status == 422) {
             console.log({ err: err });
             this.flashMessage.show({
-              status: "error",
+              status: 'error',
               message: err.response.data.message,
             });
             loader.hide();
           } else {
             this.flashMessage.show({
-              status: "error",
-              message: "Unable to set your cover picture",
+              status: 'error',
+              message: 'Unable to set your cover picture',
             });
             console.log({ err: err });
             loader.hide();
@@ -301,30 +275,30 @@ export default {
         container: this.fullPage ? null : this.$refs.creatform,
         canCancel: true,
         onCancel: this.onCancel,
-        color: "#e75c18",
+        color: '#e75c18',
       });
       this.setProfilePic(image_id, this.name)
-        .then((response) => {
+        .then(response => {
           console.log(response.data);
           this.flashMessage.show({
-            status: "success",
-            message: "Profile Picture set",
+            status: 'success',
+            message: 'Profile Picture set',
           });
           loader.hide();
         })
-        .catch((err) => {
+        .catch(err => {
           this.sending = false;
           if (err.response.status == 422) {
             console.log({ err: err });
             this.flashMessage.show({
-              status: "error",
+              status: 'error',
               message: err.response.data.message,
             });
             loader.hide();
           } else {
             this.flashMessage.show({
-              status: "error",
-              message: "Unable to set your profile pic",
+              status: 'error',
+              message: 'Unable to set your profile pic',
             });
             console.log({ err: err });
             loader.hide();
@@ -337,55 +311,55 @@ export default {
         container: this.fullPage ? null : this.$refs.preview,
         canCancel: true,
         onCancel: this.onCancel,
-        color: "#e75c18",
+        color: '#e75c18',
       });
 
       let formData = new FormData();
-      formData.append("media", this.profile_pic);
+      formData.append('media', this.profile_pic);
 
-      formData.append("dob", this.text);
+      formData.append('dob', this.text);
 
       this.axios
-        .post("business/store/media/" + this.url + "/" + this.album, formData, {
+        .post('business/store/media/' + this.url + '/' + this.album, formData, {
           headers: {
-            "Content-Type": "multipart/form-data",
+            'Content-Type': 'multipart/form-data',
           },
         })
-        .then((response) => {
+        .then(response => {
           console.log(response);
 
           this.flashMessage.show({
-            status: "success",
+            status: 'success',
 
-            message: "Profile Updated",
+            message: 'Profile Updated',
 
-            blockClass: "custom-block-class",
+            blockClass: 'custom-block-class',
           });
 
           loader.hide();
-          this.$refs["modalxl"].hide();
+          this.$refs['modalxl'].hide();
         })
 
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
 
           if (err.response.status == 422) {
             console.log({ err: err });
 
             this.flashMessage.show({
-              status: "error",
+              status: 'error',
 
               message: err.response.data.message,
-              blockClass: "custom-block-class",
+              blockClass: 'custom-block-class',
             });
 
             loader.hide();
           } else {
             this.flashMessage.show({
-              status: "error",
+              status: 'error',
 
-              message: "Unable to upload your image",
-              blockClass: "custom-block-class",
+              message: 'Unable to upload your image',
+              blockClass: 'custom-block-class',
             });
             console.log({ err: err });
 
@@ -400,7 +374,7 @@ export default {
       const file = e.target.files[0];
       this.img_url = URL.createObjectURL(file);
       console.log(this.img_url);
-      this.$refs["modalxl"].show();
+      this.$refs['modalxl'].show();
     },
     onClick(i) {
       this.index = i;
@@ -411,7 +385,7 @@ export default {
     this.url = this.$route.params.id;
   },
   watch: {
-    album: function (newVal) {
+    album: function(newVal) {
       this.album_id = newVal;
     },
   },

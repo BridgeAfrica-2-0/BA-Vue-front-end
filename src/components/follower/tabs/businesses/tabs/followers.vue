@@ -10,41 +10,30 @@
           ></b-form-input>
 
           <b-input-group-prepend is-text>
-            <b-icon-search class="text-primary border-none"  @click="$refs.search.search()"></b-icon-search>
+            <b-icon-search class="text-primary border-none" @click="$refs.search.search()"></b-icon-search>
           </b-input-group-prepend>
         </b-input-group>
       </b-col>
     </b-row>
     <br />
 
-
-        <CommunityBusiness  :searchh="search" ref="search" type="Follower" />
-        
-     
+    <CommunityBusiness :searchh="search" ref="search" type="Follower" />
   </div>
 </template>
 
 <script>
-import CommunityBusiness from "../../communitybusiness";
+import CommunityBusiness from '../../communitybusiness';
 export default {
-
-   data() {
+  data() {
     return {
-        search:"",
-    }
-    },
-  components: {
-    CommunityBusiness
+      search: '',
+    };
   },
-  
-  methods:{
+  components: {
+    CommunityBusiness,
+  },
 
-
-
-  }
-
-  
-
+  methods: {},
 };
 </script>
 

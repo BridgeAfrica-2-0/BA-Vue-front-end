@@ -11,27 +11,20 @@
               unchecked-value="not_accepted"
               @click="selectAll"
             >
-              {{ selectAll ? "Un-select All" : "Select All" }}
+              {{ selectAll ? 'Un-select All' : 'Select All' }}
             </b-form-checkbox>
           </div>
         </b-col>
         <b-col>
           <div class="b-bottomn f-right">
-            <b-button variant="primary" class="a-button-l duration">
-              Mark as Read</b-button
-            >
+            <b-button variant="primary" class="a-button-l duration"> Mark as Read</b-button>
           </div>
         </b-col>
       </b-row>
       <br />
 
       <b-row>
-        <b-col
-          cols="12"
-          class="mr-3"
-          v-for="post in allNotifications"
-          :key="post.id"
-        >
+        <b-col cols="12" class="mr-3" v-for="post in allNotifications" :key="post.id">
           <p class="">
             <span style="display:inline-flex">
               <b-form-checkbox
@@ -43,11 +36,7 @@
                 @click="selectOne"
               >
               </b-form-checkbox>
-              <b-avatar
-                class="d-inline-block profile-pic"
-                variant="primary"
-                :src="post.image"
-              ></b-avatar>
+              <b-avatar class="d-inline-block profile-pic" variant="primary" :src="post.image"></b-avatar>
               <h6 class="m-0  d-inline-block ml-2 username">
                 {{ post.name }}
                 <p class="duration">{{ post.time }}</p>
@@ -75,9 +64,9 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from "vuex";
+import { mapActions, mapGetters } from 'vuex';
 export default {
-  name: "notification",
+  name: 'notification',
   data: () => ({
     selected: [],
     checkbox: true,
@@ -87,11 +76,11 @@ export default {
   },
   computed: {
     ...mapGetters({
-      allNotifications: "networkSetting/allNotifications",
+      allNotifications: 'networkSetting/allNotifications',
     }),
     methods: {
       ...mapActions({
-        getNotifications: "networkSetting/getNotifications",
+        getNotifications: 'networkSetting/getNotifications',
       }),
     },
   },

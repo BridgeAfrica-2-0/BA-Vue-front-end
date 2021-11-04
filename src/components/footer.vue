@@ -17,24 +17,14 @@
               <ul class="list-group list-unstyled">
                 <li class="nav-item dropdown show">
                   <b>Language</b>
-                  <b-dropdown
-                    size="sm"
-                    variant="outline"
-                    text="English"
-                    class="m-2"
-                  >
+                  <b-dropdown size="sm" variant="outline" text="English" class="m-2">
                     <b-dropdown-item-button>English</b-dropdown-item-button>
                     <b-dropdown-item-button>French</b-dropdown-item-button>
                   </b-dropdown>
                 </li>
                 <li class="nav-item dropdown show">
                   <b>Country</b>
-                  <b-dropdown
-                    size="sm"
-                    variant="outline"
-                    text="Cameroon"
-                    class="ml-2"
-                  >
+                  <b-dropdown size="sm" variant="outline" text="Cameroon" class="ml-2">
                     <b-dropdown-item-button>Cameroon</b-dropdown-item-button>
                     <b-dropdown-item-button>Nageria</b-dropdown-item-button>
                   </b-dropdown>
@@ -109,31 +99,21 @@ li {
 .nav-pills .show > .nav-link {
   background-color: #e6e6e6;
 }
-
 </style>
 
-
-<style >
-
-
-
-::-webkit-scrollbar-track
-{
-	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-	background-color: #F5F5F5;
+<style>
+::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  background-color: #f5f5f5;
 }
 
-::-webkit-scrollbar
-{
-	width: 5px !important;
-	background-color: #F5F5F5;
+::-webkit-scrollbar {
+  width: 5px !important;
+  background-color: #f5f5f5;
 }
 
-::-webkit-scrollbar-thumb
-{
-	background-color: #000000;
-	border: 2px solid #555555;
+::-webkit-scrollbar-thumb {
+  background-color: #000000;
+  border: 2px solid #555555;
 }
-
-  
 </style>

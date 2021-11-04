@@ -4,11 +4,7 @@
       <b-row class="mt-2">
         <b-col cols="12" class="my-auto">
           <p class="float-left m-0 p-0">
-            <img
-              src="@/assets/img/logo_bridge_africa.png"
-              class="w-50 h-50 m-0 mr-3"
-              alt="Kitten"
-            />
+            <img src="@/assets/img/logo_bridge_africa.png" class="w-50 h-50 m-0 mr-3" alt="Kitten" />
             <span class="my-auto d-inline-block head-text">
               Template Preview
             </span>
@@ -73,13 +69,13 @@
 
 <script>
 export default {
-  name: "templateView",
+  name: 'templateView',
   components: {},
   data() {
     return {};
   },
   computed: {},
-  methods: {}
+  methods: {},
 };
 </script>
 

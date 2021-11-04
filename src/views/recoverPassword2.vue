@@ -10,23 +10,14 @@
             <b-form-group id="input-group-4">
               <md-field>
                 <label for="otp"> OTP</label>
-                <md-input
-                  type="text"
-                  name="otp"
-                  id="otp"
-                  v-model="code"
-                  required
-                />
+                <md-input type="text" name="otp" id="otp" v-model="code" required />
               </md-field>
             </b-form-group>
 
             <b-row class="mt-2">
               <b-col cols="6"> </b-col>
               <b-col cols="6">
-                <b-button
-                  class="btn btn-primary button float-right"
-                  @click.prevent="next"
-                >
+                <b-button class="btn btn-primary button float-right" @click.prevent="next">
                   Next
                 </b-button>
               </b-col>
@@ -40,23 +31,23 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
-import axios from "axios";
+import { mapGetters } from 'vuex';
+import axios from 'axios';
 export default {
   data() {
     return {
-      code: "",
+      code: '',
     };
   },
-  computed: mapGetters(["recoverPassData"]),
+  computed: mapGetters(['recoverPassData']),
   methods: {
     change() {
-      this.$router.push({ name: "RecoverPass1" });
+      this.$router.push({ name: 'RecoverPass1' });
     },
 
     next() {
       console.log(this.$store.state.auth.passwordToken);
-      const otpVerifcationUrl = "user/verifyResetOtp";
+      const otpVerifcationUrl = 'user/verifyResetOtp';
       axios
         .post(otpVerifcationUrl, {
           OTP: this.code,
@@ -65,7 +56,7 @@ export default {
         .then(response => {
           if (response.status === 200) {
             console.log(response);
-            this.$router.push({ name: "RecoverPass3" });
+            this.$router.push({ name: 'RecoverPass3' });
           } else {
             console.log(response.data);
           }
@@ -76,7 +67,7 @@ export default {
             console.log(err.response.data.message);
 
             this.flashMessage.show({
-              status: "error",
+              status: 'error',
 
               message: err.response.data.message,
             });

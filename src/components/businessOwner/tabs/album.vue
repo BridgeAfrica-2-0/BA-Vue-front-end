@@ -18,26 +18,17 @@
           <b-modal hide-footer title="Create album" id="createalbumModal">
             <div ref="creatform">
               <b-form>
-                <b-form-input
-                  placeholder="Album name"
-                  v-model="name"
-                ></b-form-input>
-                <b-button class="mt-2" variant="primary" @click="createAlbum">
-                  Create</b-button
-                >
+                <b-form-input placeholder="Album name" v-model="name"></b-form-input>
+                <b-button class="mt-2" variant="primary" @click="createAlbum"> Create</b-button>
               </b-form>
             </div>
           </b-modal>
 
-          <div
-            class="createp img-gall predit2"
-            v-for="albums in albums"
-            :key="albums.id"
-          >
+          <div class="createp img-gall predit2" v-for="albums in albums" :key="albums.id">
             <a>
-            <span @click="showlbum(albums.id, albums.album_name)">
+              <span @click="showlbum(albums.id, albums.album_name)">
                 <img class="card-img album-img" :src="albums.media[0]" alt="" />
-              </span>  
+              </span>
 
               <div class="botmediadess">
                 <p>
@@ -50,30 +41,14 @@
             <div class="mediadesc">
               <ul class="navbar-nav pull-right">
                 <li class="nav-item dropdown">
-                  <b-dropdown
-                    size="sm"
-                    class="call-action"
-                    variant="link"
-                    toggle-class="text-decoration-none"
-                    no-caret
-                  >
+                  <b-dropdown size="sm" class="call-action" variant="link" toggle-class="text-decoration-none" no-caret>
                     <template #button-content>
-                      <b-icon
-                        icon="three-dots-vertical"
-                        color="white"
-                        variant="light"
-                      >
-                      </b-icon>
+                      <b-icon icon="three-dots-vertical" color="white" variant="light"> </b-icon>
                     </template>
 
-                    <b-dropdown-item
-                      @click="editAlbum(albums.id, albums.album_name)"
-                      >Edit</b-dropdown-item
-                    >
+                    <b-dropdown-item @click="editAlbum(albums.id, albums.album_name)">Edit</b-dropdown-item>
 
-                    <b-dropdown-item @click="deleteAlbum(albums.id)"
-                      >Delete</b-dropdown-item
-                    >
+                    <b-dropdown-item @click="deleteAlbum(albums.id)">Delete</b-dropdown-item>
                   </b-dropdown>
                 </li>
               </ul>
@@ -81,25 +56,11 @@
           </div>
         </div>
 
-        <b-modal
-          hide-footer
-          title="Create album"
-          ref="editalbum"
-          id="editalbum"
-        >
+        <b-modal hide-footer title="Create album" ref="editalbum" id="editalbum">
           <div ref="creatform">
             <b-form>
-              <b-form-input
-                placeholder="Album name"
-                v-model="edit_name"
-              ></b-form-input>
-              <b-button
-                class="mt-2"
-                variant="primary"
-                @click="updateAlbum(edit_id)"
-              >
-                Update</b-button
-              >
+              <b-form-input placeholder="Album name" v-model="edit_name"></b-form-input>
+              <b-button class="mt-2" variant="primary" @click="updateAlbum(edit_id)"> Update</b-button>
             </b-form>
           </div>
         </b-modal>
@@ -120,28 +81,17 @@
                           data-toggle="dropdown"
                           aria-haspopup="true"
                           aria-expanded="false"
-                          >Custom Album 1
-                          <i class="fa fa-caret-down" aria-hidden="true"></i
+                          >Custom Album 1 <i class="fa fa-caret-down" aria-hidden="true"></i
                         ></a>
-                        <div
-                          class="dropdown-menu dropdown-menu-right"
-                          aria-labelledby="navbarDropdown"
-                        >
-                          <a
-                            class="dropdown-item"
-                            data-toggle="modal"
-                            data-target="#namealbumModal"
-                            >Edit Name</a
-                          >
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                          <a class="dropdown-item" data-toggle="modal" data-target="#namealbumModal">Edit Name</a>
                           <a class="dropdown-item">Delete Album</a>
                         </div>
                       </li>
                     </ul>
                   </div>
                   <div class="input-group col-md-12 text-center mb-4 selec">
-                    <label class="col-md-4 control-label pr-0 text-design"
-                      >14 Items -
-                    </label>
+                    <label class="col-md-4 control-label pr-0 text-design">14 Items - </label>
                     <div class="col-md-5 pl-0 pr-0">
                       <select id="gender" class="form-control w-100">
                         <option>Public</option>
@@ -165,17 +115,17 @@
       </b-button>
       <span class="text-center ml-2 f-20"> {{ album_name }} </span>
 
-      <Images :album="album_id"  />
+      <Images :album="album_id" />
     </div>
   </div>
 </template>
 
 <script>
-import Images from "./image";
-import { mapActions } from "vuex";
+import Images from './image';
+import { mapActions } from 'vuex';
 export default {
   components: { Images },
-  data: function () {
+  data: function() {
     return {
       showalbum: false,
       name: null,
@@ -186,7 +136,7 @@ export default {
       edit_id: null,
       edit_name: null,
       images: [],
-      imagees: [ ],
+      imagees: [],
       index: 0,
     };
   },
@@ -198,23 +148,23 @@ export default {
       this.album_name = album_name;
       this.album_id = abum_id;
       console.log(abum_id);
-      console.log("yoo yoo yooy ");
+      console.log('yoo yoo yooy ');
       console.log(this.url);
       let loader = this.$loading.show({
         container: this.fullPage ? null : this.$refs.creatform,
         canCancel: true,
         onCancel: this.onCancel,
-        color: "#e75c18",
+        color: '#e75c18',
       });
-      const albumUrl = this.url + "/" + abum_id;
+      const albumUrl = this.url + '/' + abum_id;
       this.$store
-        .dispatch("businessOwner/getAlbumImages", albumUrl)
+        .dispatch('businessOwner/getAlbumImages', albumUrl)
         .then(() => {
-          console.log("hey yeah photo loaded");
+          console.log('hey yeah photo loaded');
           this.showalbum = true;
           loader.hide();
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
           loader.hide();
         });
@@ -225,14 +175,14 @@ export default {
     editAlbum(album_id, album_name) {
       this.edit_id = album_id;
       this.edit_name = album_name;
-      this.$refs["editalbum"].show();
+      this.$refs['editalbum'].show();
     },
 
     ...mapActions({
-    createAlbumm: "businessOwner/createAlbum",       
-      updateAlbumm: "businessOwner/updateAlbum",
-      deleteAlbumm: "businessOwner/deleteAlbum",
-      getAlbums: "businessOwner/getAlbums",
+      createAlbumm: 'businessOwner/createAlbum',
+      updateAlbumm: 'businessOwner/updateAlbum',
+      deleteAlbumm: 'businessOwner/deleteAlbum',
+      getAlbums: 'businessOwner/getAlbums',
     }),
 
     createAlbum() {
@@ -240,30 +190,30 @@ export default {
         container: this.fullPage ? null : this.$refs.creatform,
         canCancel: true,
         onCancel: this.onCancel,
-        color: "#e75c18",
+        color: '#e75c18',
       });
-      this.createAlbumm({name:this.name, id:this.url })
-        .then((response) => {
+      this.createAlbumm({ name: this.name, id: this.url })
+        .then(response => {
           this.flashMessage.show({
-            status: "success",
-            message: "Album Created",
+            status: 'success',
+            message: 'Album Created',
           });
           this.getAlbums(this.url);
           loader.hide();
         })
-        .catch((err) => {
+        .catch(err => {
           this.sending = false;
           if (err.response.status == 422) {
             console.log({ err: err });
             this.flashMessage.show({
-              status: "error",
+              status: 'error',
               message: err.response.data.message,
             });
             loader.hide();
           } else {
             this.flashMessage.show({
-              status: "error",
-              message: "Unable to create your Album",
+              status: 'error',
+              message: 'Unable to create your Album',
             });
             console.log({ err: err });
             loader.hide();
@@ -271,36 +221,36 @@ export default {
         });
     },
 
-    updateAlbum(album ) {
+    updateAlbum(album) {
       let loader = this.$loading.show({
         container: this.fullPage ? null : this.$refs.creatform,
         canCancel: true,
         onCancel: this.onCancel,
-        color: "#e75c18",
+        color: '#e75c18',
       });
-      this.updateAlbumm({name:this.edit_name,url:this.url, id:album})
+      this.updateAlbumm({ name: this.edit_name, url: this.url, id: album })
         .then(() => {
           this.flashMessage.show({
-            status: "success",
-            message: "Album Updated",
+            status: 'success',
+            message: 'Album Updated',
           });
           this.getAlbums(this.url);
           loader.hide();
-            this.$refs["editalbum"].hide(); 
+          this.$refs['editalbum'].hide();
         })
-        .catch((err) => {
+        .catch(err => {
           this.sending = false;
           if (err.response.status == 422) {
             console.log({ err: err });
             this.flashMessage.show({
-              status: "error",
+              status: 'error',
               message: err.response.data.message,
             });
             loader.hide();
           } else {
             this.flashMessage.show({
-              status: "error",
-              message: "Unable to create your Album",
+              status: 'error',
+              message: 'Unable to create your Album',
             });
             console.log({ err: err });
             loader.hide();
@@ -309,35 +259,34 @@ export default {
     },
 
     deleteAlbum(album) {
-     
       let loader = this.$loading.show({
         container: this.fullPage ? null : this.$refs.creatform,
         canCancel: true,
         onCancel: this.onCancel,
-        color: "#e75c18",
+        color: '#e75c18',
       });
-      this.deleteAlbumm( { url:this.url, id:album})
+      this.deleteAlbumm({ url: this.url, id: album })
         .then(() => {
           this.flashMessage.show({
-            status: "success",
-            message: "Album Deleted",
+            status: 'success',
+            message: 'Album Deleted',
           });
           this.getAlbums(this.url);
           loader.hide();
         })
-        .catch((err) => {
+        .catch(err => {
           this.sending = false;
           if (err.response.status == 422) {
             console.log({ err: err });
             this.flashMessage.show({
-              status: "error",
+              status: 'error',
               message: err.response.data.message,
             });
             loader.hide();
           } else {
             this.flashMessage.show({
-              status: "error",
-              message: "Unable to Delete your abum",
+              status: 'error',
+              message: 'Unable to Delete your abum',
             });
             console.log({ err: err });
             loader.hide();
@@ -345,7 +294,7 @@ export default {
         });
     },
   },
-  
+
   beforeMount() {
     this.url = this.$route.params.id;
     this.getAlbums(this.url);
@@ -357,7 +306,6 @@ export default {
   },
 };
 </script>
-
 
 <style>
 .call-action {

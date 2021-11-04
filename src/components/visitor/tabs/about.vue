@@ -24,15 +24,15 @@
 </template>
 
 <script>
-import Biography from "../biography";
-import ContactAndInfo from "../contactAndBasicInfo";
-import WorkAndEducation from "../workAndEducation";
+import Biography from '../biography';
+import ContactAndInfo from '../contactAndBasicInfo';
+import WorkAndEducation from '../workAndEducation';
 export default {
   components: {
     Biography,
     ContactAndInfo,
-    WorkAndEducation
-  }
+    WorkAndEducation,
+  },
 };
 </script>
 

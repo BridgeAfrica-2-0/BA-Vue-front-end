@@ -29,13 +29,7 @@
                 <p class="s-text">Total Posts: 79</p>
               </h3>
             </b-col>
-            <b-col cols="8">
-              <img
-                fluid-grow
-                class="i-size"
-                src="../../assets/img/curv.png"
-                alt=""
-              /> </b-col
+            <b-col cols="8"> <img fluid-grow class="i-size" src="../../assets/img/curv.png" alt="" /> </b-col
           ></b-row>
         </b-card>
       </b-col>
@@ -68,13 +62,7 @@
                 <p class="s-text">Total Posts: 79</p>
               </h3>
             </b-col>
-            <b-col cols="8">
-              <img
-                fluid-grow
-                class="i-size"
-                src="../../assets/img/pchart.png"
-                alt=""
-              /> </b-col
+            <b-col cols="8"> <img fluid-grow class="i-size" src="../../assets/img/pchart.png" alt="" /> </b-col
           ></b-row>
         </b-card>
       </b-col>
@@ -107,13 +95,7 @@
                 <p class="s-text">Total Posts: 79</p>
               </h3>
             </b-col>
-            <b-col cols="8">
-              <img
-                fluid-grow
-                class="i-size"
-                src="../../assets/img/ggraph.png"
-                alt=""
-              /> </b-col
+            <b-col cols="8"> <img fluid-grow class="i-size" src="../../assets/img/ggraph.png" alt="" /> </b-col
           ></b-row>
         </b-card>
       </b-col>
@@ -125,13 +107,13 @@
 
 <script>
 export default {
-  name: "insight",
+  name: 'insight',
   components: {},
   data() {
     return {};
   },
   computed: {},
-  methods: {}
+  methods: {},
 };
 </script>
 
@@ -177,6 +159,6 @@ export default {
 .card-title {
   color: #000;
   margin-bottom: 1.2rem;
-  font-family: "Overpass";
+  font-family: 'Overpass';
 }
 </style>

@@ -30,23 +30,13 @@
       </b-col>
       <b-col cols="6">
         <p class="float-right">
-          <b-button size="sm">
-            <b-icon icon="check" variant="grey"></b-icon> Following</b-button
-          >
-          <b-dropdown
-            id="dropdown-1"
-            text="Contact"
-            class="m-md-2 drop"
-            size="sm"
-          >
+          <b-button size="sm"> <b-icon icon="check" variant="grey"></b-icon> Following</b-button>
+          <b-dropdown id="dropdown-1" text="Contact" class="m-md-2 drop" size="sm">
             <b-dropdown-item>
               <b-icon icon="chat-fill" variant="primary"></b-icon>
               Message</b-dropdown-item
             >
-            <b-dropdown-item>
-              <b-icon icon="geo-alt" variant="primary"></b-icon> Get
-              Direction</b-dropdown-item
-            >
+            <b-dropdown-item> <b-icon icon="geo-alt" variant="primary"></b-icon> Get Direction</b-dropdown-item>
           </b-dropdown>
           <b-dropdown size="sm">
             <template #button-content>
@@ -85,10 +75,7 @@
               <template #button-content>
                 <b-icon icon="three-dots" aria-hidden="true"></b-icon>
               </template>
-              <b-dropdown-item>
-                <b-icon icon="geo-alt" variant="primary"></b-icon> Get
-                Direction</b-dropdown-item
-              >
+              <b-dropdown-item> <b-icon icon="geo-alt" variant="primary"></b-icon> Get Direction</b-dropdown-item>
               <b-dropdown-item>
                 <b-icon icon="chat-fill" variant="primary"></b-icon>
                 Message</b-dropdown-item
@@ -122,21 +109,21 @@
 </template>
 
 <script>
-import Post from "@/components/visitor/tabs/posts";
-import About from "@/components/visitor/tabs/about";
-import Media from "@/components/visitor/tabs/media";
-import Community from "@/components/visitor/tabs/community";
-import Businesses from "@/components/visitor/tabs/businesses";
+import Post from '@/components/visitor/tabs/posts';
+import About from '@/components/visitor/tabs/about';
+import Media from '@/components/visitor/tabs/media';
+import Community from '@/components/visitor/tabs/community';
+import Businesses from '@/components/visitor/tabs/businesses';
 
 export default {
-  name: "Home",
+  name: 'Home',
   components: {
     Post,
     About,
     Media,
     Community,
-    Businesses
-  }
+    Businesses,
+  },
 };
 </script>
 

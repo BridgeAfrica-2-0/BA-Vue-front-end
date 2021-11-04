@@ -8,12 +8,7 @@
 
     <b-container class="payment-type">
       <b-form-group v-slot="{ ariaDescribedby }">
-        <b-form-radio
-          v-model="selected"
-          :aria-describedby="ariaDescribedby"
-          id="Paypal"
-          name="paypal"
-          value="paypal"
+        <b-form-radio v-model="selected" :aria-describedby="ariaDescribedby" id="Paypal" name="paypal" value="paypal"
           >Paypal</b-form-radio
         >
         <br />
@@ -38,30 +33,26 @@
       </b-form-group>
 
       <div class="payment-image col-md-6">
-        <img
-          class="mb-2 img-fluid"
-          src="@/assets/img/credit-cards-logos.png"
-          alt="Fluid image"
-        />
+        <img class="mb-2 img-fluid" src="@/assets/img/credit-cards-logos.png" alt="Fluid image" />
       </div>
 
       <b-container class="h-background">
         <div class="account-headnig">
-          <h3  class="heading-user h3-color">4755-xxxx-xxxx</h3>
+          <h3 class="heading-user h3-color">4755-xxxx-xxxx</h3>
           <p class="card-name">123456789</p>
         </div>
       </b-container>
 
       <div class=" mb-0">
-        <b-icon icon="plus" class='b-color' ></b-icon>  
+        <b-icon icon="plus" class="b-color"></b-icon>
         <b-link href="#">Add new Credit/Debit card</b-link>
       </div>
       <br />
 
       <div class=" mb-0">
         <p>
-          <b-icon icon="lock" class="b-color"></b-icon> Your payment
-          information is secure, <b-link href="#">Read more</b-link>
+          <b-icon icon="lock" class="b-color"></b-icon> Your payment information is secure,
+          <b-link href="#">Read more</b-link>
         </p>
       </div>
     </b-container>
@@ -70,7 +61,7 @@
 
 <script>
 export default {
-  name: "payment"
+  name: 'payment',
 };
 </script>
 
@@ -81,13 +72,11 @@ export default {
   text-align: left;
 }
 
-
-.h3-color{
+.h3-color {
   color: #000;
 }
 
-
-.b-color{
+.b-color {
   color: #7952b3;
 }
 .tabs {

@@ -1,175 +1,125 @@
 <template>
   <div>
-    <fas-icon
-      class="primary mr-2 pt-1 icon-size primary"
-      :icon="['fas', 'handshake']"
-    />
+    <fas-icon class="primary mr-2 pt-1 icon-size primary" :icon="['fas', 'handshake']" />
     Businesses
 
     <hr />
 
     <div class="business" v-if="noBusiness == false">
       <b-row>
-        <b-col lg="6" class="p-0 mb-2" v-for="item in busineses" :key="item.id" > 
-         
-          
-              <div class="people-style shadow h-100">
-      <b-row>
-        <b-col md="3" xl="3" lg="3" cols="5" sm="3">
-          <div class="center-img">
-            <splide :options="options" class="r-image">
-              <splide-slide cl>
-                 <img :src="item.logo_path" class="r-image" />  
-              </splide-slide>
-            </splide>
-          </div>
-        </b-col>
-        <b-col md="5" cols="7" lg="9" xl="5" sm="5">
-          <p class="textt text">
-            <strong class="title"> {{ item.name }} </strong> <br />
-             <span v-for="cat in item.category" :key="cat.id"> {{cat.name}}   
-            </span>
-            <br />
-            {{ count(item.followers) }} Community <br />
-
-            <span class="location">
-              <b-icon-geo-alt class="ico"></b-icon-geo-alt> {{ item.city }}, <span v-for="nei in item.neigborhood" :key="nei.id"> {{nei.name}}   </span>
-            </span>
-            <br />
-          
-
-           <read-more
-              more-str="read more"
-              class="readmore"
-              :text="item.about_business"
-              link="#"
-              less-str="read less"
-              :max-chars="100"
-            >
-            </read-more>
-
-          </p>
-        </b-col>
-
-        <b-col lg="12" xl="4" md="4" cols="12" sm="4">
-          <div class="s-button">
+        <b-col lg="6" class="p-0 mb-2" v-for="item in busineses" :key="item.id">
+          <div class="people-style shadow h-100">
             <b-row>
-              <b-col
-                md="12"
-                lg="4"
-                xl="12"
-                sm="12"
-                cols="4"
-                class="mt-2 text-center"
-              >
-                <b-button
-                  block
-                  size="sm"
-                  class="b-background shadow "
-                  variant="primary"
-                >
-                  <i class="fas fa-user-plus  fa-lg btn-icon "></i>
-                  <span class="btn-com">Community</span>
-                </b-button>
+              <b-col md="3" xl="3" lg="3" cols="5" sm="3">
+                <div class="center-img">
+                  <splide :options="options" class="r-image">
+                    <splide-slide cl>
+                      <img :src="item.logo_path" class="r-image" />
+                    </splide-slide>
+                  </splide>
+                </div>
+              </b-col>
+              <b-col md="5" cols="7" lg="9" xl="5" sm="5">
+                <p class="textt text">
+                  <strong class="title"> {{ item.name }} </strong> <br />
+                  <span v-for="cat in item.category" :key="cat.id"> {{ cat.name }} </span>
+                  <br />
+                  {{ count(item.followers) }} Community <br />
+
+                  <span class="location">
+                    <b-icon-geo-alt class="ico"></b-icon-geo-alt> {{ item.city }},
+                    <span v-for="nei in item.neigborhood" :key="nei.id"> {{ nei.name }} </span>
+                  </span>
+                  <br />
+
+                  <read-more
+                    more-str="read more"
+                    class="readmore"
+                    :text="item.about_business"
+                    link="#"
+                    less-str="read less"
+                    :max-chars="100"
+                  >
+                  </read-more>
+                </p>
               </b-col>
 
-              <b-col
-                md="12"
-                lg="4"
-                xl="12"
-                sm="12"
-                cols="4"
-                class="mt-2 text-center"
-              >
-                <b-button
-                  block
-                  size="sm"
-                  class="b-background shadow "
-                  variant="primary"
-                >
-                  <i class="fas fa-envelope   fa-lg btn-icon "></i>
-                  <span class="btn-text">Message</span>
-                </b-button>
-              </b-col>
+              <b-col lg="12" xl="4" md="4" cols="12" sm="4">
+                <div class="s-button">
+                  <b-row>
+                    <b-col md="12" lg="4" xl="12" sm="12" cols="4" class="mt-2 text-center">
+                      <b-button block size="sm" class="b-background shadow " variant="primary">
+                        <i class="fas fa-user-plus  fa-lg btn-icon "></i>
+                        <span class="btn-com">Community</span>
+                      </b-button>
+                    </b-col>
 
-              <b-col
-                md="12"
-                lg="4"
-                xl="12"
-                sm="12"
-                cols="4"
-                class="mt-2 text-center"
-              >
-                <b-button
-                  block
-                  size="sm"
-                  class="b-background shadow "
-                  variant="primary"
-                >
-                  <i class="fas fa-map-marked-alt  fa-lg btn-icon "></i>
-                  <span class="btn-text">Direction</span>
-                </b-button>
+                    <b-col md="12" lg="4" xl="12" sm="12" cols="4" class="mt-2 text-center">
+                      <b-button block size="sm" class="b-background shadow " variant="primary">
+                        <i class="fas fa-envelope   fa-lg btn-icon "></i>
+                        <span class="btn-text">Message</span>
+                      </b-button>
+                    </b-col>
+
+                    <b-col md="12" lg="4" xl="12" sm="12" cols="4" class="mt-2 text-center">
+                      <b-button block size="sm" class="b-background shadow " variant="primary">
+                        <i class="fas fa-map-marked-alt  fa-lg btn-icon "></i>
+                        <span class="btn-text">Direction</span>
+                      </b-button>
+                    </b-col>
+                  </b-row>
+                </div>
               </b-col>
             </b-row>
           </div>
         </b-col>
       </b-row>
-    </div>
-    
-    
-    
-    
-     </b-col>
 
-      </b-row>
-      
-  <infinite-loading @infinite="infiniteHandler"></infinite-loading> 
+      <infinite-loading @infinite="infiniteHandler"></infinite-loading>
     </div>
     <div v-show="noBusiness" class="no-business">
       <b-container>
         <h2>No Businesses Listed</h2>
         <hr />
       </b-container>
-      <p>User  has not listed any business. Please check back later</p>
+      <p>User has not listed any business. Please check back later</p>
     </div>
   </div>
 </template>
 
 <script>
-import axios from "axios";
+import axios from 'axios';
 export default {
   data() {
     return {
       noBusiness: false,
-      foll_id:"",
-      page:1
+      foll_id: '',
+      page: 1,
     };
   },
- 
- methods:{
-      count(number) {
+
+  methods: {
+    count(number) {
       if (number >= 1000000) {
-        return number / 1000000 + "M";
+        return number / 1000000 + 'M';
       }
       if (number >= 1000) {
-        return number / 1000 + "K";
+        return number / 1000 + 'K';
       } else return number;
     },
 
-     infiniteHandler($state) {
-
-        if(this.page==1){
-        
-         this.busineses.splice(0);
-        
+    infiniteHandler($state) {
+      if (this.page == 1) {
+        this.busineses.splice(0);
       }
-     let url="business/userBusiness/"+this.page+"?id="+this.foll_id;
-    
-       this.$store.dispatch("follower/loadMoreUserBusiness",url)
+      let url = 'business/userBusiness/' + this.page + '?id=' + this.foll_id;
+
+      this.$store
+        .dispatch('follower/loadMoreUserBusiness', url)
         .then(({ data }) => {
-          console.log("lala baledddd");
+          console.log('lala baledddd');
           console.log(data);
-          if (data.length) {    
+          if (data.length) {
             this.page += 1;
 
             this.busineses.push(...data);
@@ -178,33 +128,25 @@ export default {
             $state.complete();
           }
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
     },
-
-
-
- },
-  computed:{
-      
-      busineses(){
-        return this.$store.state.follower.profileBusiness;
-      }
   },
-  mounted(){
-
-     this.foll_id = this.$route.params.id;
-      this.$store
-      .dispatch("follower/profileBusiness", this.foll_id)
-      .then((response) => {
-       
-      })
-      .catch((error) => {
-        console.log({error:error});
+  computed: {
+    busineses() {
+      return this.$store.state.follower.profileBusiness;
+    },
+  },
+  mounted() {
+    this.foll_id = this.$route.params.id;
+    this.$store
+      .dispatch('follower/profileBusiness', this.foll_id)
+      .then(response => {})
+      .catch(error => {
+        console.log({ error: error });
       });
-
-  }
+  },
 };
 </script>
 
@@ -221,7 +163,6 @@ export default {
   height: 24px;
   width: 24px;
 }
-
 
 .primary-bg {
   background-color: rgb(242, 242, 242);
@@ -244,9 +185,6 @@ p {
     margin-left: 6px;
   }
 }
-
-
-
 
 @media only screen and (min-width: 768px) {
   .btn-text {
@@ -314,13 +252,13 @@ p {
     color: black;
 
     line-height: 35px;
-    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   }
 
   .textt {
     color: #000;
 
-    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
     font-weight: normal;
     font-size: 14px;
     line-height: 30px;
@@ -367,13 +305,13 @@ p {
     color: black;
 
     line-height: 35px;
-    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   }
 
   .textt {
     color: #000;
 
-    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
     font-weight: normal;
     font-size: 14px;
     line-height: 30px;
@@ -499,7 +437,7 @@ p {
 @media only screen and (min-width: 992px) and (max-width: 1265px) {
   .textt {
     color: #000;
-    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
     font-weight: normal;
     font-size: 14px;
     line-height: 30px;

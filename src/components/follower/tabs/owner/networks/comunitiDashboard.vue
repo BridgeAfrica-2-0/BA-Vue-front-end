@@ -4,29 +4,21 @@
       <div class=" border shadow   p-tab" style="padding:20px">
         <span>
           <h4>
-            <img
-              class="img-fluid picture"
-              src="@/assets/icons/people.png"
-              style="width: 60px;"
-            />
+            <img class="img-fluid picture" src="@/assets/icons/people.png" style="width: 60px;" />
             COMMUNITY <span class="h4-color"> 7K </span>
           </h4>
         </span>
 
         <b-tabs pills content-class="mt-3  f-left ">
           <b-tab active>
-            <template slot="title">
-              People <span class="spa-color"> 7K </span>
-            </template>
+            <template slot="title"> People <span class="spa-color"> 7K </span> </template>
 
             <div>
               <b-row>
                 <b-col>
                   <b-tabs fill pills content-class="mt-3  f-left m-up">
                     <b-tab active>
-                      <template slot="title">
-                        Followers <span class="spa-color"> 7K </span>
-                      </template>
+                      <template slot="title"> Followers <span class="spa-color"> 7K </span> </template>
 
                       <div class="s-comcard">
                         <b-row>
@@ -41,9 +33,7 @@
                     </b-tab>
 
                     <b-tab>
-                      <template slot="title">
-                        Following <span class="spa-color"> 7K </span>
-                      </template>
+                      <template slot="title"> Following <span class="spa-color"> 7K </span> </template>
 
                       <div class="s-comcard">
                         <b-row>
@@ -63,16 +53,12 @@
           </b-tab>
 
           <b-tab>
-            <template slot="title">
-              Businesses <span class="spa-color"> 7K </span>
-            </template>
+            <template slot="title"> Businesses <span class="spa-color"> 7K </span> </template>
 
             <div>
               <b-tabs fill pills content-class="mt-3  f-left m-up checkcheck">
                 <b-tab active>
-                  <template slot="title">
-                    Followers <span class="spa-color"> 7K </span>
-                  </template>
+                  <template slot="title"> Followers <span class="spa-color"> 7K </span> </template>
 
                   <div class="s-comcard">
                     <b-row>
@@ -87,9 +73,7 @@
                 </b-tab>
 
                 <b-tab>
-                  <template slot="title">
-                    Following <span class="spa-color"> 7K </span>
-                  </template>
+                  <template slot="title"> Following <span class="spa-color"> 7K </span> </template>
 
                   <div class="s-comcard">
                     <b-row>
@@ -112,16 +96,16 @@
 </template>
 
 <script>
-import People from "@/components/dasboard/communityMember";
-import Business from "@/components/dasboard/communitybusiness";
+import People from '@/components/dasboard/communityMember';
+import Business from '@/components/dasboard/communitybusiness';
 
 export default {
-  name: "comunitiDashboard",
+  name: 'comunitiDashboard',
 
   components: {
     People,
-    Business
-  }
+    Business,
+  },
 };
 </script>
 

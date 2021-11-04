@@ -4,9 +4,7 @@
       <b-container class="bv-example-row">
         <b-form>
           <div class="b-bottomm">
-            <b-button variant="primary" class="a-button-l"
-              >Save Changes</b-button
-            >
+            <b-button variant="primary" class="a-button-l">Save Changes</b-button>
             <br />
             <br />
           </div>
@@ -35,9 +33,7 @@
                 class="mb-0"
               >
                 <b-form-select v-model="selected">
-                  <b-form-select-option value="a">
-                    --select option</b-form-select-option
-                  >
+                  <b-form-select-option value="a"> --select option</b-form-select-option>
                 </b-form-select>
               </b-form-group>
             </b-container>
@@ -73,9 +69,7 @@
                 class="mb-0"
               >
                 <b-form-select v-model="selected">
-                  <b-form-select-option value="a">
-                    --select option</b-form-select-option
-                  >
+                  <b-form-select-option value="a"> --select option</b-form-select-option>
                 </b-form-select>
               </b-form-group>
             </b-container>
@@ -91,9 +85,7 @@
                 class="mb-0"
               >
                 <b-form-select v-model="selected">
-                  <b-form-select-option value="a">
-                    --select option</b-form-select-option
-                  >
+                  <b-form-select-option value="a"> --select option</b-form-select-option>
                 </b-form-select>
               </b-form-group>
             </b-container>
@@ -131,9 +123,7 @@
                 <b-row>
                   <b-col>
                     <b-form-select v-model="selected">
-                      <b-form-select-option value="a">
-                        --select option</b-form-select-option
-                      >
+                      <b-form-select-option value="a"> --select option</b-form-select-option>
                     </b-form-select>
                   </b-col>
 
@@ -230,9 +220,7 @@
                 label-class="font-weight-bold pt-0"
                 class="mb-0"
               >
-                <b-form-checkbox id="" class="a-text" name="" value="">
-                  This Business has an address</b-form-checkbox
-                >
+                <b-form-checkbox id="" class="a-text" name="" value=""> This Business has an address</b-form-checkbox>
 
                 <b-container>
                   <b-row>
@@ -283,44 +271,29 @@
                   <br />
                   <b-container>
                     <b-row>
-                      <b-col
-                        ><b-form-checkbox id="" class="a-text" name="" value="">
-                          Monday</b-form-checkbox
-                        ></b-col
-                      >
-                      <b-col><b-form-input name=""></b-form-input></b-col>-
-                      -<b-col><b-form-input name=""></b-form-input></b-col>
+                      <b-col><b-form-checkbox id="" class="a-text" name="" value=""> Monday</b-form-checkbox></b-col>
+                      <b-col><b-form-input name=""></b-form-input></b-col>- -<b-col
+                        ><b-form-input name=""></b-form-input
+                      ></b-col>
                     </b-row>
                     <br />
 
                     <b-row>
-                      <b-col
-                        ><b-form-checkbox id="" class="a-text" name="" value="">
-                          Tuesday</b-form-checkbox
-                        ></b-col
-                      >
+                      <b-col><b-form-checkbox id="" class="a-text" name="" value=""> Tuesday</b-form-checkbox></b-col>
                       <b-col><b-form-input name=""></b-form-input></b-col>- -
                       <b-col><b-form-input name=""></b-form-input></b-col>
                     </b-row>
                     <br />
 
                     <b-row>
-                      <b-col
-                        ><b-form-checkbox id="" class="a-text" name="" value="">
-                          Wednesday</b-form-checkbox
-                        ></b-col
-                      >
+                      <b-col><b-form-checkbox id="" class="a-text" name="" value=""> Wednesday</b-form-checkbox></b-col>
                       <b-col><b-form-input name=""></b-form-input></b-col>- -
                       <b-col><b-form-input name=""></b-form-input></b-col>
                     </b-row>
                     <br />
 
                     <b-row>
-                      <b-col
-                        ><b-form-checkbox id="" class="a-text" name="" value="">
-                          Thursday</b-form-checkbox
-                        ></b-col
-                      >
+                      <b-col><b-form-checkbox id="" class="a-text" name="" value=""> Thursday</b-form-checkbox></b-col>
                       <b-col><b-form-input name=""></b-form-input></b-col>- -
                       <b-col><b-form-input name=""></b-form-input></b-col>
                     </b-row>
@@ -349,11 +322,7 @@
                     <br />
 
                     <b-row>
-                      <b-col
-                        ><b-form-checkbox id="" name="" class="a-text" value="">
-                          Sunday</b-form-checkbox
-                        ></b-col
-                      >
+                      <b-col><b-form-checkbox id="" name="" class="a-text" value=""> Sunday</b-form-checkbox></b-col>
                       <b-col><b-form-input name=""></b-form-input></b-col>- -
                       <b-col><b-form-input name=""></b-form-input></b-col>
                     </b-row>
@@ -415,8 +384,7 @@
                 label-class="font-weight-bold pt-0"
                 class="mb-0"
               >
-                <b-form-checkbox v-model="checked" name="check-button" switch>
-                </b-form-checkbox>
+                <b-form-checkbox v-model="checked" name="check-button" switch> </b-form-checkbox>
               </b-form-group>
             </b-container>
           </div>
@@ -434,7 +402,7 @@
 
 <script>
 export default {
-  name: "info"
+  name: 'info',
 };
 </script>
 

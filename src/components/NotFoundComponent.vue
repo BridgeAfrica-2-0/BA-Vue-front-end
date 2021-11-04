@@ -4,12 +4,12 @@
 
 <script>
 export default {
-  name: "NotFoundComponent",
+  name: 'NotFoundComponent',
 
   props: {
     title: {
       type: String,
-      default: () => "Not Found",
+      default: () => 'Not Found',
     },
   },
 };

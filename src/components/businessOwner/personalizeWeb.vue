@@ -4,9 +4,7 @@
       <h6 class="mb-2 "><b>Your personalized website</b></h6>
 
       <fas-icon class="view" :icon="['fas', 'eye']" />
-      <b-img
-        src="https://business.bridgeafrica.info/assets/img/portfolio/portfoliu2.png"
-      ></b-img>
+      <b-img src="https://business.bridgeafrica.info/assets/img/portfolio/portfoliu2.png"></b-img>
     </b-card>
   </div>
 </template>

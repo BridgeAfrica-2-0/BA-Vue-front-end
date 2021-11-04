@@ -23,11 +23,7 @@
 
           <div class="createp img-gall predit2" @click="showlbum">
             <a href="#!">
-              <img
-                class="card-img"
-                src="@/assets/img/wankue-filler.jpg"
-                alt=""
-              />
+              <img class="card-img" src="@/assets/img/wankue-filler.jpg" alt="" />
               <div class="createdesc botmedia">
                 <div class="botmediades">
                   <h6>Profile Picture</h6>
@@ -39,18 +35,9 @@
             <div class="mediadesc">
               <ul class="navbar-nav pull-right">
                 <li class="nav-item dropdown">
-                  <b-dropdown
-                    size="sm"
-                    class="float-right"
-                    variant="link"
-                    toggle-class="text-decoration-none"
-                    no-caret
-                  >
+                  <b-dropdown size="sm" class="float-right" variant="link" toggle-class="text-decoration-none" no-caret>
                     <template #button-content>
-                      <fas-icon
-                        class="drop-color font-weight-bolder"
-                        :icon="['fas', 'ellipsis-v']"
-                      />
+                      <fas-icon class="drop-color font-weight-bolder" :icon="['fas', 'ellipsis-v']" />
                     </template>
 
                     <b-dropdown-item href="#">Edit</b-dropdown-item>
@@ -64,11 +51,7 @@
 
           <div class="createp img-gall predit2" @click="showlbum">
             <a href="#!">
-              <img
-                class="card-img"
-                src="@/assets/img/wankue-filler.jpg"
-                alt=""
-              />
+              <img class="card-img" src="@/assets/img/wankue-filler.jpg" alt="" />
               <div class="createdesc botmedia">
                 <div class="botmediades">
                   <h6>Cover Photos</h6>
@@ -80,18 +63,9 @@
             <div class="mediadesc">
               <ul class="navbar-nav pull-right">
                 <li class="nav-item dropdown">
-                  <b-dropdown
-                    size="sm"
-                    class="float-right"
-                    variant="link"
-                    toggle-class="text-decoration-none"
-                    no-caret
-                  >
+                  <b-dropdown size="sm" class="float-right" variant="link" toggle-class="text-decoration-none" no-caret>
                     <template #button-content>
-                      <fas-icon
-                        class="drop-color font-weight-bolder"
-                        :icon="['fas', 'ellipsis-v']"
-                      />
+                      <fas-icon class="drop-color font-weight-bolder" :icon="['fas', 'ellipsis-v']" />
                     </template>
 
                     <b-dropdown-item href="#">Edit</b-dropdown-item>
@@ -105,11 +79,7 @@
 
           <div class="createp img-gall predit2">
             <a href="#!">
-              <img
-                class="card-img"
-                src="@/assets/img/wankue-filler.jpg"
-                alt=""
-              />
+              <img class="card-img" src="@/assets/img/wankue-filler.jpg" alt="" />
               <div class="createdesc botmedia">
                 <div class="botmediades">
                   <h6>Custom Album 1</h6>
@@ -121,18 +91,9 @@
             <div class="mediadesc">
               <ul class="navbar-nav pull-right">
                 <li class="nav-item dropdown">
-                  <b-dropdown
-                    size="sm"
-                    class="float-right"
-                    variant="link"
-                    toggle-class="text-decoration-none"
-                    no-caret
-                  >
+                  <b-dropdown size="sm" class="float-right" variant="link" toggle-class="text-decoration-none" no-caret>
                     <template #button-content>
-                      <fas-icon
-                        class="drop-color font-weight-bolder"
-                        :icon="['fas', 'ellipsis-v']"
-                      />
+                      <fas-icon class="drop-color font-weight-bolder" :icon="['fas', 'ellipsis-v']" />
                     </template>
 
                     <b-dropdown-item href="#">Edit</b-dropdown-item>
@@ -146,11 +107,7 @@
 
           <div class="createp img-gall predit2" @click="showlbum">
             <a href="#!">
-              <img
-                class="card-img"
-                src="@/assets/img/wankue-filler.jpg"
-                alt=""
-              />
+              <img class="card-img" src="@/assets/img/wankue-filler.jpg" alt="" />
               <div class="createdesc botmedia">
                 <div class="botmediades">
                   <h6>Custom Album 2</h6>
@@ -162,18 +119,9 @@
             <div class="mediadesc">
               <ul class="navbar-nav pull-right">
                 <li class="nav-item dropdown">
-                  <b-dropdown
-                    size="sm"
-                    class="float-right"
-                    variant="link"
-                    toggle-class="text-decoration-none"
-                    no-caret
-                  >
+                  <b-dropdown size="sm" class="float-right" variant="link" toggle-class="text-decoration-none" no-caret>
                     <template #button-content>
-                      <fas-icon
-                        class="drop-color font-weight-bolder"
-                        :icon="['fas', 'ellipsis-v']"
-                      />
+                      <fas-icon class="drop-color font-weight-bolder" :icon="['fas', 'ellipsis-v']" />
                     </template>
 
                     <b-dropdown-item href="#">Edit</b-dropdown-item>
@@ -187,11 +135,7 @@
 
           <div class="createp img-gall predit2" @click="showlbum">
             <a href="#!">
-              <img
-                class="card-img"
-                src="@/assets/img/wankue-filler.jpg"
-                alt=""
-              />
+              <img class="card-img" src="@/assets/img/wankue-filler.jpg" alt="" />
               <div class="createdesc botmedia">
                 <div class="botmediades">
                   <h6>Custom Album 3</h6>
@@ -203,18 +147,9 @@
             <div class="mediadesc">
               <ul class="navbar-nav pull-right">
                 <li class="nav-item dropdown">
-                  <b-dropdown
-                    size="sm"
-                    class="float-right"
-                    variant="link"
-                    toggle-class="text-decoration-none"
-                    no-caret
-                  >
+                  <b-dropdown size="sm" class="float-right" variant="link" toggle-class="text-decoration-none" no-caret>
                     <template #button-content>
-                      <fas-icon
-                        class="drop-color font-weight-bolder"
-                        :icon="['fas', 'ellipsis-v']"
-                      />
+                      <fas-icon class="drop-color font-weight-bolder" :icon="['fas', 'ellipsis-v']" />
                     </template>
 
                     <b-dropdown-item href="#">Edit</b-dropdown-item>
@@ -243,30 +178,17 @@
                           data-toggle="dropdown"
                           aria-haspopup="true"
                           aria-expanded="false"
-                          >Custom Album 1
-                          <i class="fa fa-caret-down" aria-hidden="true"></i
+                          >Custom Album 1 <i class="fa fa-caret-down" aria-hidden="true"></i
                         ></a>
-                        <div
-                          class="dropdown-menu dropdown-menu-right"
-                          aria-labelledby="navbarDropdown"
-                        >
-                          <a
-                            class="dropdown-item"
-                            data-toggle="modal"
-                            data-target="#namealbumModal"
-                            >Edit Name</a
-                          >
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                          <a class="dropdown-item" data-toggle="modal" data-target="#namealbumModal">Edit Name</a>
                           <a class="dropdown-item">Delete Album</a>
                         </div>
                       </li>
                     </ul>
                   </div>
                   <div class="input-group col-md-12 text-center mb-4 selec">
-                    <label
-                      class="col-md-4 control-label pr-0 text-design"
-                      for="name"
-                      >14 Items -
-                    </label>
+                    <label class="col-md-4 control-label pr-0 text-design" for="name">14 Items - </label>
                     <div class="col-md-5 pl-0 pr-0">
                       <select id="gender" class="form-control w-100">
                         <option>Public</option>
@@ -296,7 +218,7 @@
 </template>
 
 <script>
-import Images from "./images";
+import Images from './images';
 
 export default {
   components: { Images },
@@ -311,48 +233,48 @@ export default {
 
     onClick(i) {
       this.index = i;
-    }
+    },
   },
   data: function() {
     return {
       showalbum: false,
 
       images: [
-        "https://placekitten.com/801/800",
-        "https://placekitten.com/802/800",
-        "https://placekitten.com/803/800",
-        "https://placekitten.com/804/800",
-        "https://placekitten.com/805/800",
-        "https://placekitten.com/806/800",
-        "https://placekitten.com/807/800",
-        "https://placekitten.com/808/800",
-        "https://placekitten.com/809/800"
+        'https://placekitten.com/801/800',
+        'https://placekitten.com/802/800',
+        'https://placekitten.com/803/800',
+        'https://placekitten.com/804/800',
+        'https://placekitten.com/805/800',
+        'https://placekitten.com/806/800',
+        'https://placekitten.com/807/800',
+        'https://placekitten.com/808/800',
+        'https://placekitten.com/809/800',
       ],
       imagees: [
-        "https://i.wifegeek.com/200426/f9459c52.jpg",
-        "https://i.wifegeek.com/200426/5ce1e1c7.jpg",
-        "https://i.wifegeek.com/200426/5fa51df3.jpg",
-        "https://i.wifegeek.com/200426/663181fe.jpg",
-        "https://i.wifegeek.com/200426/2d110780.jpg",
-        "https://i.wifegeek.com/200426/e73cd3fa.jpg",
-        "https://i.wifegeek.com/200426/15160d6e.jpg",
-        "https://i.wifegeek.com/200426/d0c881ae.jpg",
-        "https://i.wifegeek.com/200426/a154fc3d.jpg",
-        "https://i.wifegeek.com/200426/71d3aa60.jpg",
-        "https://i.wifegeek.com/200426/d17ce9a0.jpg",
-        "https://i.wifegeek.com/200426/7c4deca9.jpg",
-        "https://i.wifegeek.com/200426/64672676.jpg",
-        "https://i.wifegeek.com/200426/de6ab9c6.jpg",
-        "https://i.wifegeek.com/200426/d8bcb6a7.jpg",
-        "https://i.wifegeek.com/200426/4085d03b.jpg",
-        "https://i.wifegeek.com/200426/177ef44c.jpg",
-        "https://i.wifegeek.com/200426/d74d9040.jpg",
-        "https://i.wifegeek.com/200426/81e24a47.jpg",
-        "https://i.wifegeek.com/200426/43e2e8bb.jpg"
+        'https://i.wifegeek.com/200426/f9459c52.jpg',
+        'https://i.wifegeek.com/200426/5ce1e1c7.jpg',
+        'https://i.wifegeek.com/200426/5fa51df3.jpg',
+        'https://i.wifegeek.com/200426/663181fe.jpg',
+        'https://i.wifegeek.com/200426/2d110780.jpg',
+        'https://i.wifegeek.com/200426/e73cd3fa.jpg',
+        'https://i.wifegeek.com/200426/15160d6e.jpg',
+        'https://i.wifegeek.com/200426/d0c881ae.jpg',
+        'https://i.wifegeek.com/200426/a154fc3d.jpg',
+        'https://i.wifegeek.com/200426/71d3aa60.jpg',
+        'https://i.wifegeek.com/200426/d17ce9a0.jpg',
+        'https://i.wifegeek.com/200426/7c4deca9.jpg',
+        'https://i.wifegeek.com/200426/64672676.jpg',
+        'https://i.wifegeek.com/200426/de6ab9c6.jpg',
+        'https://i.wifegeek.com/200426/d8bcb6a7.jpg',
+        'https://i.wifegeek.com/200426/4085d03b.jpg',
+        'https://i.wifegeek.com/200426/177ef44c.jpg',
+        'https://i.wifegeek.com/200426/d74d9040.jpg',
+        'https://i.wifegeek.com/200426/81e24a47.jpg',
+        'https://i.wifegeek.com/200426/43e2e8bb.jpg',
       ],
-      index: 0
+      index: 0,
     };
-  }
+  },
 };
 </script>
 

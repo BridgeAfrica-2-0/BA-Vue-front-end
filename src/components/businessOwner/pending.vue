@@ -1,11 +1,7 @@
 <template>
   <div>
     <b-container fluid style="padding-left:30px; padding-right:30px">
-      <b-container
-        class="bb-bottom"
-        v-for="(post, index) in posts"
-        :key="index"
-      >
+      <b-container class="bb-bottom" v-for="(post, index) in posts" :key="index">
         <b-list class="d-flex align-items-center m-list">
           <b-avatar class="mr-3 profile-pic"></b-avatar>
           <span class="mr-auto username">
@@ -14,18 +10,11 @@
           </span>
           <span class=" ">
             <div>
-              <b-dropdown
-                size="lg"
-                variant="link"
-                toggle-class="text-decoration-none"
-                no-caret
-              >
+              <b-dropdown size="lg" variant="link" toggle-class="text-decoration-none" no-caret>
                 <template #button-content>
                   <b-icon icon="three-dots-vertical" font-scale="1"></b-icon>
                 </template>
-                <b-dropdown-item href="#" @click="approvePost">
-                  Approve</b-dropdown-item
-                >
+                <b-dropdown-item href="#" @click="approvePost"> Approve</b-dropdown-item>
                 <b-dropdown-item href="#" @click="disapprovePost">
                   Un Approved
                 </b-dropdown-item>
@@ -39,22 +28,19 @@
       </b-container>
 
       <b-col v-if="loader" class="loader">
-        <b-spinner
-          style="width: 7rem; height: 7rem;"
-          variant="primary"
-        ></b-spinner>
+        <b-spinner style="width: 7rem; height: 7rem;" variant="primary"></b-spinner>
       </b-col>
     </b-container>
   </div>
 </template>
 
 <script>
-import { mapActions, mapGetters } from "vuex";
+import { mapActions, mapGetters } from 'vuex';
 
 export default {
-  name: "pending",
+  name: 'pending',
   computed: {
-    ...mapGetters(["posts"]),
+    ...mapGetters(['posts']),
   },
 
   created() {
@@ -62,7 +48,7 @@ export default {
   },
 
   methods: {
-    ...mapActions(["approvePost", "disapprovePost", "getPendingPost"]),
+    ...mapActions(['approvePost', 'disapprovePost', 'getPendingPost']),
     approvePost() {
       this.approvePost(this.post);
     },

@@ -1,10 +1,8 @@
 <template>
-
   <div class="t-color">
-    
     <div>
       <fas-icon class="icons" :icon="['fas', 'project-diagram']" size="lg" />
-      <span class="t-color">  Network </span>
+      <span class="t-color"> Network </span>
 
       <b-button
         class="btn btn-outline-primary pull-right float-right mb-2 blec-font"
@@ -13,102 +11,69 @@
         >Add Network</b-button
       >
 
-      <hr />   
+      <hr />
       <b-row>
-        <b-col
-          cols="12"
-          md="12"
-          lg="6"
-          class="p-0 pr-1 mb-2"
-          v-for="(network, index) in profileNetworks"
-          :key="index"
-        >
-
-        
-        
-
-
-         <div class="people-style shadow h-100">
-                <b-link
-                >
-                  <div class="float-right others">
-
-
-                    <b-dropdown size="lg"  variant="link" toggle-class="text-decoration-none" no-caret>
-                 <template #button-content>
-                  <b-icon
-                      icon="three-dots-vertical"
-                      variant="primary"
-                      class="icon-size"
-                                      ></b-icon>
-                      </template>
-                      <b-dropdown-item 
-                                    
-                                     @click="showEditNetwork(network)"  v-b-modal.updateBusinessModal variant="">Edit</b-dropdown-item>
-                      <b-dropdown-item  @click="deleteNetwork(network)" > Delete</b-dropdown-item>
-                    </b-dropdown>
-  
-                    
-                  </div>
-                </b-link>
-                <div class="inline-flex">
-                  <div >
-                    <div class="center-img">
-                      
-                         <img :src="network.image" class="r-image" /> 
-                        
-                    </div>
-                  </div>
-
-                  <div>
-                    <p class="textt text">
-                     
-                      <strong class="title">
-                       <router-link to="/businessfollower">
-                          {{ network.name }} <span v-if="network.is_approve == 1">  (Approved) </span>    <span v-else> (UnApproved)  </span>
-                        </router-link>
-                      </strong>
-                      <br />   
-                   
-                      
-                      <span class="m-1" v-for=" cat in network.categories" :key="cat "> {{cat}}  </span>
-                      <br />
-                      
-                    {{ network.member_count }}  Community  <br />
-
-                      <span class="location">
-                        <b-icon-geo-alt class="ico"></b-icon-geo-alt>
-                        {{ network.city }} {{ network.country }}  {{ network.address }} 
-                      </span>
-                      <br />
-
-                      <read-more
-                        more-str="read more"
-                        class="readmore"
-                        :text="network.description"
-                        link="#"
-                        less-str="read less"
-                        :max-chars="100"
-                      >
-                      </read-more>
-                    </p>
-                  </div>
+        <b-col cols="12" md="12" lg="6" class="p-0 pr-1 mb-2" v-for="(network, index) in profileNetworks" :key="index">
+          <div class="people-style shadow h-100">
+            <b-link>
+              <div class="float-right others">
+                <b-dropdown size="lg" variant="link" toggle-class="text-decoration-none" no-caret>
+                  <template #button-content>
+                    <b-icon icon="three-dots-vertical" variant="primary" class="icon-size"></b-icon>
+                  </template>
+                  <b-dropdown-item @click="showEditNetwork(network)" v-b-modal.updateBusinessModal variant=""
+                    >Edit</b-dropdown-item
+                  >
+                  <b-dropdown-item @click="deleteNetwork(network)"> Delete</b-dropdown-item>
+                </b-dropdown>
+              </div>
+            </b-link>
+            <div class="inline-flex">
+              <div>
+                <div class="center-img">
+                  <img :src="network.image" class="r-image" />
                 </div>
               </div>
 
+              <div>
+                <p class="textt text">
+                  <strong class="title">
+                    <router-link to="/businessfollower">
+                      {{ network.name }} <span v-if="network.is_approve == 1"> (Approved) </span>
+                      <span v-else> (UnApproved) </span>
+                    </router-link>
+                  </strong>
+                  <br />
 
+                  <span class="m-1" v-for="cat in network.categories" :key="cat"> {{ cat }} </span>
+                  <br />
 
+                  {{ network.member_count }} Community <br />
 
-  
+                  <span class="location">
+                    <b-icon-geo-alt class="ico"></b-icon-geo-alt>
+                    {{ network.city }} {{ network.country }} {{ network.address }}
+                  </span>
+                  <br />
+
+                  <read-more
+                    more-str="read more"
+                    class="readmore"
+                    :text="network.description"
+                    link="#"
+                    less-str="read less"
+                    :max-chars="100"
+                  >
+                  </read-more>
+                </p>
+              </div>
+            </div>
+          </div>
         </b-col>
       </b-row>
     </div>
 
-    <infinite-loading
-      :identifier="infiniteId"
-      ref="infiniteLoading"
-      @infinite="infiniteHandler"
-    ></infinite-loading>
+    <infinite-loading :identifier="infiniteId" ref="infiniteLoading" @infinite="infiniteHandler"></infinite-loading>
 
     <div class="h-100 w-100" v-if="networks.length < 1 && !loader">
       <div class="mx-auto text-center my-5">
@@ -116,26 +81,16 @@
         <p class="my-2">Create network to stay in touch with just the people</p>
         <p class="my-2">you want Engage, share, Make Plans and much more</p>
         <p class="my-3">
-          <b-button @click="showmodal(true, 'add')" variant="primary"
-            >Add Network</b-button
-          >
+          <b-button @click="showmodal(true, 'add')" variant="primary">Add Network</b-button>
         </p>
       </div>
     </div>
 
-    <b-modal
-      hide-footer
-      :title="editNet ? 'Edit network' : 'Add Network'"
-      size="lg"
-      v-model="showModal"
-      ref="netmodal"
-    >   <FlashMessage />
+    <b-modal hide-footer :title="editNet ? 'Edit network' : 'Add Network'" size="lg" v-model="showModal" ref="netmodal">
+      <FlashMessage />
       <b-container>
         <b-form>
-          <div
-            v-if="!editNet"
-            class="row sub-sidebar-2 pending-post-view mt-4 pb-0"
-          >
+          <div v-if="!editNet" class="row sub-sidebar-2 pending-post-view mt-4 pb-0">
             <div
               class="
                 col-md-12 col-lg-12
@@ -158,29 +113,16 @@
               <div class="post-pending pt-2">
                 <p>
                   Approval Required <br />
-                  Bridge Africa admin will review your request to create a
-                  network and notify you upon approval you can the change the
-                  network settings and invite people to join your network
+                  Bridge Africa admin will review your request to create a network and notify you upon approval you can
+                  the change the network settings and invite people to join your network
                 </p>
               </div>
             </div>
           </div>
           <b-row>
             <b-col md="6">
-              <b-form-group
-                label-cols-lg="12"
-                label="Network Name"
-                label-size="md"
-                label-class=" pt-0 "
-                class="mb-0"
-              >
-                <b-form-input
-                  v-model="createdNetwork.name"
-                  id="network_name"
-                  placeholder=""
-                  required
-                >
-                </b-form-input>
+              <b-form-group label-cols-lg="12" label="Network Name" label-size="md" label-class=" pt-0 " class="mb-0">
+                <b-form-input v-model="createdNetwork.name" id="network_name" placeholder="" required> </b-form-input>
               </b-form-group>
             </b-col>
             <b-col md="6">
@@ -191,30 +133,14 @@
                 label-class=" pt-0"
                 class="mb-0"
               >
-                <b-form-input
-                  v-model="createdNetwork.network_category"
-                  id="network_name"
-                  placeholder=""
-                  required
-                >
+                <b-form-input v-model="createdNetwork.network_category" id="network_name" placeholder="" required>
                 </b-form-input>
               </b-form-group>
             </b-col>
 
             <b-col md="6">
-              <b-form-group
-                label-cols-lg="12"
-                label="Network Address"
-                label-size="md"
-                label-class=" pt-0"
-                class="mb-0"
-              >
-                <b-form-input
-                  v-model="createdNetwork.address"
-                  id="network_name"
-                  placeholder=""
-                  required
-                >
+              <b-form-group label-cols-lg="12" label="Network Address" label-size="md" label-class=" pt-0" class="mb-0">
+                <b-form-input v-model="createdNetwork.address" id="network_name" placeholder="" required>
                 </b-form-input>
               </b-form-group>
             </b-col>
@@ -222,7 +148,7 @@
             <b-col md="6">
               <div class="form-group">
                 <label for="country" class="username"> Country :</label><br />
-  <multiselect
+                <multiselect
                   v-model="country"
                   @input="Region"
                   placeholder="Search "
@@ -251,7 +177,7 @@
             <b-col md="6">
               <div class="form-group">
                 <label for="country" class="username"> Division :</label><br />
-            <multiselect
+                <multiselect
                   v-model="division"
                   @input="Municipality"
                   placeholder="Search"
@@ -264,10 +190,9 @@
             </b-col>
             <b-col md="6">
               <div class="form-group">
-                <label for="country" class="username"> Municipality :</label
-                ><br />
+                <label for="country" class="username"> Municipality :</label><br />
 
-             <multiselect
+                <multiselect
                   v-model="municipality"
                   @input="Locality"
                   placeholder="Search"
@@ -292,53 +217,19 @@
               </div>
             </b-col>
             <b-col md="6">
-              <b-form-group
-                label-cols-lg="12"
-                label="City"
-                label-size="md"
-                label-class=" pt-0"
-                class="mb-0"
-              >
-                <b-form-input
-                  v-model="createdNetwork.city"
-                  id="network_name"
-                  placeholder=""
-                  required
-                >
+              <b-form-group label-cols-lg="12" label="City" label-size="md" label-class=" pt-0" class="mb-0">
+                <b-form-input v-model="createdNetwork.city" id="network_name" placeholder="" required> </b-form-input>
+              </b-form-group>
+            </b-col>
+            <b-col md="6">
+              <b-form-group label-cols-lg="12" label="Primary Phone" label-size="md" label-class="pt-0" class="mb-0">
+                <b-form-input v-model="createdNetwork.primary_phone" id="network_name" placeholder="" required>
                 </b-form-input>
               </b-form-group>
             </b-col>
             <b-col md="6">
-              <b-form-group
-                label-cols-lg="12"
-                label="Primary Phone"
-                label-size="md"
-                label-class="pt-0"
-                class="mb-0"
-              >
-                <b-form-input
-                  v-model="createdNetwork.primary_phone"
-                  id="network_name"
-                  placeholder=""
-                  required
-                >
-                </b-form-input>
-              </b-form-group>
-            </b-col>
-            <b-col md="6">
-              <b-form-group
-                label-cols-lg="12"
-                label="Secondary Phone"
-                label-size="md"
-                label-class=" pt-0"
-                class="mb-0"
-              >
-                <b-form-input
-                  v-model="createdNetwork.secondary_phone"
-                  id="network_name"
-                  placeholder=""
-                  required
-                >
+              <b-form-group label-cols-lg="12" label="Secondary Phone" label-size="md" label-class=" pt-0" class="mb-0">
+                <b-form-input v-model="createdNetwork.secondary_phone" id="network_name" placeholder="" required>
                 </b-form-input>
               </b-form-group>
             </b-col>
@@ -377,13 +268,7 @@
               </b-form-group>
             </b-col>
             <b-col md="6">
-              <b-form-group
-                label-cols-lg="12"
-                label="Special Needs"
-                label-size="md"
-                label-class=" pt-0"
-                class="mb-0"
-              >
+              <b-form-group label-cols-lg="12" label="Special Needs" label-size="md" label-class=" pt-0" class="mb-0">
                 <b-form-textarea
                   id="textarea"
                   v-model="createdNetwork.special_needs"
@@ -394,47 +279,21 @@
               </b-form-group>
             </b-col>
             <b-col md="6">
-              <b-form-group
-                label-cols-lg="12"
-                label="Network Image"
-                label-size="md"
-                label-class="pt-0"
-                class="mb-0"
-              >
-                <input
-                  @change="onLogoChangge"
-                  hidden
-                  type="file"
-                  id="net_pic"
-                  ref="net_pic"
-                  accept="image/*"
-                />
+              <b-form-group label-cols-lg="12" label="Network Image" label-size="md" label-class="pt-0" class="mb-0">
+                <input @change="onLogoChangge" hidden type="file" id="net_pic" ref="net_pic" accept="image/*" />
 
                 <div id="preview">
                   <img v-if="logoimg_url" :src="logoimg_url" />
                 </div>
                 <br />
                 <div class="text-center">
-                  <b-button
-                    v-if="logoimg_url"
-                    @click="chooseNlogo()"
-                    variant="primary"
-                    class="mt-3 text-center"
-                  >
+                  <b-button v-if="logoimg_url" @click="chooseNlogo()" variant="primary" class="mt-3 text-center">
                     change Image
                   </b-button>
                 </div>
 
-                <div
-                  class="image-upload-wrap"
-                  v-if="!logoimg_url"
-                  @click="chooseNlogo()"
-                >
-                  <a
-                    href="#"
-                    data-toggle="modal"
-                    data-target="#createalbumModal"
-                  >
+                <div class="image-upload-wrap" v-if="!logoimg_url" @click="chooseNlogo()">
+                  <a href="#" data-toggle="modal" data-target="#createalbumModal">
                     <div class="drag-text">
                       <i class="fa fa-plus"> </i>
                       <h3 class="username">Business Logo</h3>
@@ -464,28 +323,17 @@
             </b-col>
           </b-row>
 
-          <b-alert :show="success.state" variant="info">
-            {{ success.msg }}</b-alert
-          >
+          <b-alert :show="success.state" variant="info"> {{ success.msg }}</b-alert>
           <b-spinner v-if="loader" variant="primary"></b-spinner>
           <b-button @click="action" class="mt-2 button-btn" variant="primary">
-            {{ editNet ? "Edit Network" : "Add Network" }}
+            {{ editNet ? 'Edit Network' : 'Add Network' }}
           </b-button>
         </b-form>
       </b-container>
     </b-modal>
 
-    <b-modal
-      v-model="viewnetwork"
-      id="modal-1"
-      :title="chosenNetwork.name"
-      hide-footer
-    >
-      <lightbox
-        visible="true"
-        css=" h-10"
-        :items="chosenNetwork.image"
-      ></lightbox>
+    <b-modal v-model="viewnetwork" id="modal-1" :title="chosenNetwork.name" hide-footer>
+      <lightbox visible="true" css=" h-10" :items="chosenNetwork.image"></lightbox>
       <p class="text-pop">
         <strong class="net-title">
           <router-link to="/businessfollower">
@@ -510,8 +358,8 @@
 </template>
 
 <script>
-import axios from "axios";
-import Multiselect from "vue-multiselect";
+import axios from 'axios';
+import Multiselect from 'vue-multiselect';
 export default {
   data() {
     return {
@@ -520,7 +368,7 @@ export default {
       logoimg_url: null,
       BaseURL: process.env.VUE_APP_API_URL,
       showModal: false,
-      selectedFile: "",
+      selectedFile: '',
       editNet: false,
       logo: null,
       country: [],
@@ -535,41 +383,41 @@ export default {
       loader: false,
       success: {
         state: false,
-        variant: "",
-        msg: "",
+        variant: '',
+        msg: '',
       },
       createdNetwork: {
-        name: "",
-        description: "",
-        neighbourhood: "",
-        city: "",
-        network_category: "",
-        purpose: "",
-        primary_phone: "",
-        email: "",
+        name: '',
+        description: '',
+        neighbourhood: '',
+        city: '',
+        network_category: '',
+        purpose: '',
+        primary_phone: '',
+        email: '',
         country_id: 0,
         network_category_id: 0,
-        secondary_phone: "",
-        special_needs: "",
-        address: "",
-        image: "",
+        secondary_phone: '',
+        special_needs: '',
+        address: '',
+        image: '',
         allow_business: 0,
       },
       chosenNetwork: {
-        name: "",
-        description: "",
-        neighbourhood: "",
-        city: "",
-        network_category: "",
-        purpose: "",
-        email: "",
+        name: '',
+        description: '',
+        neighbourhood: '',
+        city: '',
+        network_category: '',
+        purpose: '',
+        email: '',
         country_id: 0,
         network_category_id: 0,
-        primary_phone: "",
-        secondary_phone: "",
-        special_needs: "",
-        address: "",
-        image: "",
+        primary_phone: '',
+        secondary_phone: '',
+        special_needs: '',
+        address: '',
+        image: '',
         allow_business: 0,
       },
     };
@@ -582,21 +430,15 @@ export default {
   mounted() {
     //this.getNetworks();
     this.Country();
-    
   },
 
-  
-
   computed: {
-    profileNetworks: function () {
-      
+    profileNetworks: function() {
       return this.$store.state.profile.profilenetwork;
-     
-     
     },
 
-    pagee: function(){
-       return this.page;
+    pagee: function() {
+      return this.page;
     },
 
     countries() {
@@ -619,57 +461,55 @@ export default {
       return this.$store.state.auth.locality;
     },
 
-    selectedcountry: function () {
+    selectedcountry: function() {
       return this.country.id;
     },
-    selectedregion: function () {
+    selectedregion: function() {
       return this.region.id;
     },
 
-    selecteddivision: function () {
+    selecteddivision: function() {
       return this.division.id;
     },
-    selectedmunicipality: function () {
+    selectedmunicipality: function() {
       return this.municipality.id;
     },
-    selectedlocality: function () {
+    selectedlocality: function() {
       return this.locality.id;
     },
   },
 
   methods: {
-
     flashErrors(errors) {
-      let err = "";
-      Object.values(errors).forEach((element) => {
+      let err = '';
+      Object.values(errors).forEach(element => {
         err = element[0];
       });
 
       return err;
     },
 
-    netCategory(category){
-    let cat="";
+    netCategory(category) {
+      let cat = '';
 
-    category.forEach((item) => {
-        cat=cat+item+",";
-
+      category.forEach(item => {
+        cat = cat + item + ',';
       });
 
-return cat;
+      return cat;
     },
 
     chooseNlogo() {
-      document.getElementById("net_pic").click();
+      document.getElementById('net_pic').click();
     },
 
     Country() {
       this.$store
-        .dispatch("auth/country")
+        .dispatch('auth/country')
         .then(() => {
-          console.log("hey yeah");
+          console.log('hey yeah');
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
     },
@@ -682,56 +522,56 @@ return cat;
 
     Region() {
       let formData2 = new FormData();
-      formData2.append("countryId", this.selectedcountry);
+      formData2.append('countryId', this.selectedcountry);
 
       this.$store
-        .dispatch("auth/region", formData2)
+        .dispatch('auth/region', formData2)
         .then(() => {
-          console.log("hey yeah");
+          console.log('hey yeah');
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
     },
 
     Division() {
       let formData2 = new FormData();
-      formData2.append("regionId", this.selectedregion);
+      formData2.append('regionId', this.selectedregion);
 
       this.$store
-        .dispatch("auth/division", formData2)
+        .dispatch('auth/division', formData2)
         .then(() => {
-          console.log("hey yeah");
+          console.log('hey yeah');
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
     },
 
     Municipality() {
       let formData2 = new FormData();
-      formData2.append("divisionId", this.selecteddivision);
+      formData2.append('divisionId', this.selecteddivision);
 
       this.$store
-        .dispatch("auth/municipality", formData2)
+        .dispatch('auth/municipality', formData2)
         .then(() => {
-          console.log("hey yeah");
+          console.log('hey yeah');
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
     },
 
     Locality() {
       let formData2 = new FormData();
-      formData2.append("councilId", this.selectedmunicipality);
+      formData2.append('councilId', this.selectedmunicipality);
 
       this.$store
-        .dispatch("auth/locality", formData2)
+        .dispatch('auth/locality', formData2)
         .then(() => {
-          console.log("hey yeah");
+          console.log('hey yeah');
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
     },
@@ -750,31 +590,30 @@ return cat;
     // },
 
     getNetworks() {
-      console.log("network loading !!!!!");
+      console.log('network loading !!!!!');
       this.$store
-        .dispatch("profile/profileNetwork")
+        .dispatch('profile/profileNetwork')
         .then(() => {
-          console.log("hey yeah");
+          console.log('hey yeah');
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
     },
 
     infiniteHandler($state) {
-      console.log("network?page=" + this.page);
-      let url = "network?page=" + this.page;
-      if(this.page==1){
-        
-         this.profileNetworks.splice(0);
-        
+      console.log('network?page=' + this.page);
+      let url = 'network?page=' + this.page;
+      if (this.page == 1) {
+        this.profileNetworks.splice(0);
       }
-      
-       this.$store.dispatch("profile/loadMore",url)
-    
+
+      this.$store
+        .dispatch('profile/loadMore', url)
+
         .then(({ data }) => {
           console.log(data.data);
-          console.log("yoyoyooyoy");
+          console.log('yoyoyooyoy');
           if (data.data.length) {
             this.page += 1;
 
@@ -784,82 +623,73 @@ return cat;
             $state.complete();
           }
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
 
+          if (err.response.status == 422) {
+            this.flashMessage.show({
+              status: 'error',
 
+              message: this.flashErrors(err.response.data.errors),
+              blockClass: 'custom-block-class',
+            });
+          } else {
+            this.flashMessage.show({
+              status: 'error',
 
-
-           if (err.response.status == 422) {
-              
-
-              this.flashMessage.show({
-                status: "error",
-
-                message: this.flashErrors(err.response.data.errors),
-                blockClass: "custom-block-class",
-              });
-            } else {
-              this.flashMessage.show({
-                status: "error",
-
-                message: "Unable to Create Your Network",
-                blockClass: "custom-block-class",
-              });
-              console.log({ err: err });
-            }
-
-
+              message: 'Unable to Create Your Network',
+              blockClass: 'custom-block-class',
+            });
+            console.log({ err: err });
+          }
         });
     },
 
     // Add network to the database but doesn't work correctly for now
     addNetwork(newNetwork) {
-     
-       let loader = this.$loading.show({
+      let loader = this.$loading.show({
         container: this.fullPage ? null : this.$refs.preview,
         canCancel: true,
         onCancel: this.onCancel,
-        color: "#e75c18",
+        color: '#e75c18',
       });
 
       axios
-        .post("network", newNetwork)
-        .then((res) => {
+        .post('network', newNetwork)
+        .then(res => {
           loader.hide();
           this.success.state = true;
-          this.success.msg = "Operation was successful !!";
-          
-           this.flashMessage.show({
-                status: "success",
+          this.success.msg = 'Operation was successful !!';
 
-                message: "Network created",
+          this.flashMessage.show({
+            status: 'success',
 
-                blockClass: "custom-block-class",
-            });
+            message: 'Network created',
 
-              this.$refs["netmodal"].hide();
+            blockClass: 'custom-block-class',
+          });
+
+          this.$refs['netmodal'].hide();
 
           setTimeout(() => {
             this.success.state = false;
           }, 5000);
-
 
           this.getNetworks();
 
           this.page = 1;
           this.infiniteId += 1;
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
           this.success.state = true;
-           this.flashMessage.show({
-                status: "error",
+          this.flashMessage.show({
+            status: 'error',
 
-                message: "Something went wrong",
+            message: 'Something went wrong',
 
-                blockClass: "custom-block-class",
-              });
+            blockClass: 'custom-block-class',
+          });
           this.success.msg = "Something wen't wrong !!";
           setTimeout(() => {
             this.success.state = false;
@@ -870,50 +700,45 @@ return cat;
 
     // Edit a network
     editNetwork(editedNetwork) {
-
       let loader = this.$loading.show({
         container: this.fullPage ? null : this.$refs.preview,
         canCancel: true,
         onCancel: this.onCancel,
-        color: "#e75c18",
+        color: '#e75c18',
       });
 
       axios
         .post(`network/${editedNetwork.id}`, editedNetwork.data)
-        .then((res) => {
+        .then(res => {
           this.success.state = true;
-          this.success.msg = "Operation was successful !!";
+          this.success.msg = 'Operation was successful !!';
           setTimeout(() => {
             this.success.state = false;
           }, 5000);
-          this.getNetworks();   
+          this.getNetworks();
           loader.hide();
         })
-        .catch((err) => {
-          console.log({err:err});
+        .catch(err => {
+          console.log({ err: err });
           this.success.state = true;
           this.success.msg = "Something wen't wrong !!";
 
-          
+          if (err.response.status == 422) {
+            this.flashMessage.show({
+              status: 'error',
 
-           if (err.response.status == 422) {
-              
+              message: this.flashErrors(err.response.data.errors),
+              blockClass: 'custom-block-class',
+            });
+          } else {
+            this.flashMessage.show({
+              status: 'error',
 
-              this.flashMessage.show({
-                status: "error",
-
-                message: this.flashErrors(err.response.data.errors),
-                blockClass: "custom-block-class",
-              });
-            } else {
-              this.flashMessage.show({
-                status: "error",
-
-                message: "Unable to Create Your Network",
-                blockClass: "custom-block-class",
-              });
-              console.log({ err: err });
-            }
+              message: 'Unable to Create Your Network',
+              blockClass: 'custom-block-class',
+            });
+            console.log({ err: err });
+          }
           loader.hide();
           setTimeout(() => {
             this.success.state = false;
@@ -926,15 +751,15 @@ return cat;
     deleteNetwork(network) {
       axios
         .delete(`network/${network.id}`)
-        .then((res) => {
+        .then(res => {
           this.success.state = true;
-          this.success.msg = "Operation was successful !!";
+          this.success.msg = 'Operation was successful !!';
           setTimeout(() => {
             this.success.state = false;
           }, 5000);
           this.getNetworks();
         })
-        .catch((err) => {
+        .catch(err => {
           this.success.state = true;
           this.success.msg = "Something wen't wrong !!";
           setTimeout(() => {
@@ -946,30 +771,29 @@ return cat;
     // Action handler
     action() {
       const fd = new FormData();
-      fd.append("business_id", "1");
-      fd.append("name", this.createdNetwork.name);
-      fd.append("address", this.createdNetwork.address);
-      fd.append("neighbourhood", this.createdNetwork.neighbourhood);
-      fd.append("city", this.createdNetwork.city);
-      fd.append("country_id", 2);
-      fd.append("primary_phone", this.createdNetwork.primary_phone);
-      fd.append("secondary_phone", this.createdNetwork.secondary_phone);
-      fd.append("email", "dev@bav.com");
-      fd.append("network_category", this.createdNetwork.network_category);
-      fd.append("network_category_id", 1);
-      fd.append("description", this.createdNetwork.description);
-      fd.append("purpose", this.createdNetwork.purpose);
-      fd.append("special_needs", this.createdNetwork.special_needs);
-      fd.append("region_id", this.selectedregion);
-      fd.append("country_id", this.selectedcountry);
-      fd.append("division_id", this.selecteddivision);
-      fd.append("council_id", this.selectedmunicipality);
-      fd.append("image", this.logo);
+      fd.append('business_id', '1');
+      fd.append('name', this.createdNetwork.name);
+      fd.append('address', this.createdNetwork.address);
+      fd.append('neighbourhood', this.createdNetwork.neighbourhood);
+      fd.append('city', this.createdNetwork.city);
+      fd.append('country_id', 2);
+      fd.append('primary_phone', this.createdNetwork.primary_phone);
+      fd.append('secondary_phone', this.createdNetwork.secondary_phone);
+      fd.append('email', 'dev@bav.com');
+      fd.append('network_category', this.createdNetwork.network_category);
+      fd.append('network_category_id', 1);
+      fd.append('description', this.createdNetwork.description);
+      fd.append('purpose', this.createdNetwork.purpose);
+      fd.append('special_needs', this.createdNetwork.special_needs);
+      fd.append('region_id', this.selectedregion);
+      fd.append('country_id', this.selectedcountry);
+      fd.append('division_id', this.selecteddivision);
+      fd.append('council_id', this.selectedmunicipality);
+      fd.append('image', this.logo);
 
-
-      fd.append("allow_business", this.createdNetwork.allow_business);
+      fd.append('allow_business', this.createdNetwork.allow_business);
       if (this.editNet) {
-        fd.append("_method", "PUT");
+        fd.append('_method', 'PUT');
         let data = {
           data: fd,
           id: this.createdNetwork.id,
@@ -987,42 +811,37 @@ return cat;
     },
     showmodal(state, arg) {
       this.showModal = state;
-      if (arg == "edit") {
+      if (arg == 'edit') {
         this.editNet = true;
       } else {
         this.editNet = false;
-        this.createdNetwork.image = "";
-        this.createdNetwork.name = "";
-        this.createdNetwork.address = "";
-        this.createdNetwork.neighbourhood = "";
-        this.createdNetwork.description = "";
-        this.createdNetwork.purpose = "";
-        this.createdNetwork.special_needs = "";
+        this.createdNetwork.image = '';
+        this.createdNetwork.name = '';
+        this.createdNetwork.address = '';
+        this.createdNetwork.neighbourhood = '';
+        this.createdNetwork.description = '';
+        this.createdNetwork.purpose = '';
+        this.createdNetwork.special_needs = '';
         this.createdNetwork.allow_business = 0;
       }
     },
 
     //Show Edit network modal
     showEditNetwork(network) {
-
-
       axios
-        .get("network/edit/"+network.id)
+        .get('network/edit/' + network.id)
         .then(({ data }) => {
           console.log(data);
 
-      this.country=data.data.country[0];
-      this.region=data.data.region[0];
-      this.division=data.data.division[0];
-      this.municipality=data.data.council[0];
-      this.locality=data.data.locality[0];
-          
+          this.country = data.data.country[0];
+          this.region = data.data.region[0];
+          this.division = data.data.division[0];
+          this.municipality = data.data.council[0];
+          this.locality = data.data.locality[0];
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
-    
-        
 
       this.createdNetwork.id = network.id;
       this.createdNetwork.image = network.image;
@@ -1035,8 +854,8 @@ return cat;
       this.createdNetwork.network_category_id = network.network_category_id;
       this.createdNetwork.business_id = network.business_id;
       this.createdNetwork.address = network.address;
-      this.createdNetwork.neighbourhood = network.neighbourhood;    
-      this.createdNetwork.network_category =  this.netCategory( network.categories);
+      this.createdNetwork.neighbourhood = network.neighbourhood;
+      this.createdNetwork.network_category = this.netCategory(network.categories);
       this.createdNetwork.description = network.description;
       this.createdNetwork.purpose = network.purpose;
       this.createdNetwork.special_needs = network.special_needs;
@@ -1047,12 +866,12 @@ return cat;
       this.createdNetwork.division = network.division;
       this.createdNetwork.municipality = network.municipality;
       this.createdNetwork.localities = network.localities;
-      
-         this.Region();
-         this.Division();
-         this.Municipality();
-         this.Locality();
-      this.showmodal(true, "edit");
+
+      this.Region();
+      this.Division();
+      this.Municipality();
+      this.Locality();
+      this.showmodal(true, 'edit');
     },
     selectImage(e) {
       this.createdNetwork.image = e.target.files[0];
@@ -1062,8 +881,8 @@ return cat;
 </script>
 
 <style scoped>
-.inline-flex{
- display: inline-flex;
+.inline-flex {
+  display: inline-flex;
 }
 
 @media only screen and (max-width: 768px) {
@@ -1189,9 +1008,9 @@ p {
   margin-top: -0px;
 }
 
-.others{
-      position: absolute;
-    right: 0px;
+.others {
+  position: absolute;
+  right: 0px;
 }
 
 .network {
@@ -1212,7 +1031,6 @@ p {
   .create {
     height: 150px;
   }
- 
 
   .white-box {
     position: relative;
@@ -1327,12 +1145,12 @@ p {
     color: black;
 
     line-height: 35px;
-    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   }
   .text-pop {
     color: #000;
 
-    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
     font-weight: normal;
     font-size: 14px;
     line-height: 30px;
@@ -1345,7 +1163,6 @@ p {
 
     padding: 1px;
     text-align: left;
-
 
     margin-right: -5px;
 
@@ -1354,7 +1171,7 @@ p {
   .textt {
     color: #000;
 
-    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
     font-weight: normal;
     font-size: 14px;
     line-height: 30px;
@@ -1367,7 +1184,7 @@ p {
 
     padding: 1px;
     text-align: left;
-  padding-left: 10px !important;
+    padding-left: 10px !important;
 
     margin-right: -5px;
 
@@ -1377,7 +1194,7 @@ p {
   .text-pop {
     color: #000;
 
-    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
     font-weight: normal;
     font-size: 14px;
     line-height: 30px;
@@ -1392,8 +1209,6 @@ p {
     padding-left: 10px;
     text-align: left;
 
-    
-
     margin-right: -5px;
 
     line-height: 25px;
@@ -1402,7 +1217,7 @@ p {
   .text {
     color: #000;
 
-    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
     font-weight: normal;
     font-size: 14px;
     line-height: 30px;
@@ -1415,8 +1230,6 @@ p {
 
     padding: 1px;
     text-align: left;
-
-   
 
     margin-right: -5px;
 
@@ -1441,12 +1254,12 @@ p {
     color: black;
 
     line-height: 35px;
-    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   }
   .text-pop {
     color: #000;
 
-    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
     font-weight: normal;
     font-size: 14px;
     line-height: 30px;
@@ -1469,7 +1282,7 @@ p {
   .textt {
     color: #000;
 
-    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
     font-weight: normal;
     font-size: 14px;
     line-height: 30px;

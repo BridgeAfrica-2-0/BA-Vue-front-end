@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from 'axios';
 
 export default {
   namespaced: true,
@@ -10,15 +10,15 @@ export default {
 
   actions: {
     getdetails({ commit }) {
-      return axios.get("/profile/community", {}).then(function({ data }) {
-        commit("setdetails", data.data);
+      return axios.get('/profile/community', {}).then(function({ data }) {
+        commit('setdetails', data.data);
         console.log(data);
       });
     },
 
     gettotalcommunity({ commit }) {
-      return axios.get("/profile/total/community", {}).then(function({ data }) {
-        commit("setcom", data.data);
+      return axios.get('/profile/total/community', {}).then(function({ data }) {
+        commit('setcom', data.data);
         console.log(data);
       });
     },

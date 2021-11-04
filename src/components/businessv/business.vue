@@ -30,23 +30,13 @@
       </b-col>
       <b-col cols="6">
         <p class="float-right">
-          <b-button size="sm">
-            <b-icon icon="check" variant="grey"></b-icon> Following</b-button
-          >
-          <b-dropdown
-            id="dropdown-1"
-            text="Contact"
-            class="m-md-2 drop"
-            size="sm"
-          >
+          <b-button size="sm"> <b-icon icon="check" variant="grey"></b-icon> Following</b-button>
+          <b-dropdown id="dropdown-1" text="Contact" class="m-md-2 drop" size="sm">
             <b-dropdown-item>
               <b-icon icon="chat-fill" variant="primary"></b-icon>
               Message</b-dropdown-item
             >
-            <b-dropdown-item>
-              <b-icon icon="geo-alt" variant="primary"></b-icon> Get
-              Direction</b-dropdown-item
-            >
+            <b-dropdown-item> <b-icon icon="geo-alt" variant="primary"></b-icon> Get Direction</b-dropdown-item>
           </b-dropdown>
           <b-dropdown size="sm">
             <template #button-content>
@@ -84,10 +74,7 @@
               <template #button-content>
                 <b-icon icon="three-dots" aria-hidden="true"></b-icon>
               </template>
-              <b-dropdown-item>
-                <b-icon icon="house-fill" variant="primary"></b-icon> Get
-                Direction</b-dropdown-item
-              >
+              <b-dropdown-item> <b-icon icon="house-fill" variant="primary"></b-icon> Get Direction</b-dropdown-item>
               <b-dropdown-item>
                 <b-icon icon="chat" variant="primary"></b-icon>
                 Message</b-dropdown-item
@@ -121,28 +108,28 @@
 </template>
 
 <script>
-import HomePage from "../businessf/tabs/businessHome";
-import About from "./tabs/about";
-import Media from "./tabs/media";
-import MarketPlace from "./tabs/marketPlace";
-import Community from "./tabs/community";
-import Networks from "./tabs/networks";
+import HomePage from '../businessf/tabs/businessHome';
+import About from './tabs/about';
+import Media from './tabs/media';
+import MarketPlace from './tabs/marketPlace';
+import Community from './tabs/community';
+import Networks from './tabs/networks';
 
 export default {
-  name: "Home",
+  name: 'Home',
   components: {
     HomePage,
     About,
     Media,
     MarketPlace,
     Community,
-    Networks
+    Networks,
   },
   data() {
     return {};
   },
   computed: {},
-  methods: {}
+  methods: {},
 };
 </script>
 

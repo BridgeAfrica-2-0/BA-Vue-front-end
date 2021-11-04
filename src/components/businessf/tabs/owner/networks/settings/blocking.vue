@@ -2,32 +2,19 @@
   <b-container>
     <b-container class="bv-example-row">
       <p class="t-left text">
-        Blocked users can no longer see things you post on your business, invite
-        your business to networks, strat a conversation, or follow your
-        business.
+        Blocked users can no longer see things you post on your business, invite your business to networks, strat a
+        conversation, or follow your business.
       </p>
     </b-container>
 
-    <b-container
-      v-for="blockuser in blockusers"
-      :key="blockuser.id"
-      class="bv-example-row"
-    >
+    <b-container v-for="blockuser in blockusers" :key="blockuser.id" class="bv-example-row">
       <b-li-group>
-        <b-li
-          v-for="blocked in getBlocked"
-          :key="blocked.id"
-          class="d-flex align-items-center m-list"
-        >
+        <b-li v-for="blocked in getBlocked" :key="blocked.id" class="d-flex align-items-center m-list">
           <b-avatar class="mr-3" size="4em">
             <img :src="blocked.image" alt="" />
           </b-avatar>
           <span class="mr-auto">blocked.name</span>
-          <span class=""
-            ><b-link @click="unblock(getNetworks.id, blocked.id)"
-              >Unblock</b-link
-            ></span
-          >
+          <span class=""><b-link @click="unblock(getNetworks.id, blocked.id)">Unblock</b-link></span>
           <hr width="100%" />
         </b-li>
         <v-row>
@@ -41,20 +28,20 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from "vuex";
+import { mapGetters, mapActions } from 'vuex';
 export default {
-  name: "blocking",
+  name: 'blocking',
   computed: {
     ...mapGetters({
-      getBlocked: "networkSetting/getBlocked",
-      getNetworks: "networkSetting/getNetworks",
+      getBlocked: 'networkSetting/getBlocked',
+      getNetworks: 'networkSetting/getNetworks',
     }),
   },
   methods: {
     ...mapActions({
-      getBlockedUsers: "networkSetting/getBlockedUsers",
-      unblockUser: "networkSetting/unblockUser",
-      getNetworks: "networkSetting/getNetworks",
+      getBlockedUsers: 'networkSetting/getBlockedUsers',
+      unblockUser: 'networkSetting/unblockUser',
+      getNetworks: 'networkSetting/getNetworks',
     }),
     unblock(networkId, userId) {
       this.unblockUser(networkId, userId);

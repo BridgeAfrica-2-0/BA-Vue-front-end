@@ -35,9 +35,9 @@ export default {
   data() {
     return {
       slide: 0,
-      sliding: null
+      sliding: null,
     };
-  }
+  },
 };
 </script>
 

@@ -11,12 +11,7 @@
               label-class="font-weight-bold pt-0 username"
               class="mb-0 text"
             >
-              <b-form-input
-                id="textarea"
-                placeholder="Enter keyword alert..."
-                rows="3"
-                max-rows="6"
-              ></b-form-input>
+              <b-form-input id="textarea" placeholder="Enter keyword alert..." rows="3" max-rows="6"></b-form-input>
             </b-form-group>
           </b-container>
           <hr />
@@ -27,38 +22,21 @@
             <div>
               <b-row class="px-md-3">
                 <b-col cols="2" md="1" class="m-0 p-0">
-                  <b-avatar
-                    class="d-inline-block mt-1"
-                    variant="info"
-                    :src="post.image"
-                    size="3.5rem"
-                  ></b-avatar>
+                  <b-avatar class="d-inline-block mt-1" variant="info" :src="post.image" size="3.5rem"></b-avatar>
                 </b-col>
                 <b-col cols="10" md="11" class="pt-2">
                   <h5 class="m-0 font-weight-bolder">
                     {{ post.name }}
                     <span class="float-right">
-                      <b-dropdown
-                        size="lg"
-                        variant="link"
-                        toggle-class="text-decoration-none"
-                        no-caret
-                      >
+                      <b-dropdown size="lg" variant="link" toggle-class="text-decoration-none" no-caret>
                         <template #button-content>
-                          <b-icon-three-dots-vertical></b-icon-three-dots-vertical
-                          ><span class="sr-only">Settings</span>
+                          <b-icon-three-dots-vertical></b-icon-three-dots-vertical><span class="sr-only">Settings</span>
                         </template>
 
-                        <b-dropdown-item
-                          @click="approved(post.id)"
-                          :loading="load"
-                        >
+                        <b-dropdown-item @click="approved(post.id)" :loading="load">
                           Approved
                         </b-dropdown-item>
-                        <b-dropdown-item
-                          @click="unapproved(post.id)"
-                          :loading="load"
-                        >
+                        <b-dropdown-item @click="unapproved(post.id)" :loading="load">
                           Unapproved
                         </b-dropdown-item>
                       </b-dropdown>
@@ -96,24 +74,24 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from "vuex";
+import { mapActions, mapGetters } from 'vuex';
 export default {
-  name: "keywordAlert",
+  name: 'keywordAlert',
   data: () => ({
     load: null,
-    networkId: ''
+    networkId: '',
   }),
   computed: {
     ...mapGetters({
-      allAlerts: "networkSetting/allAlerts",
-      getNetwork: "networkSetting/getNetwork",
+      allAlerts: 'networkSetting/allAlerts',
+      getNetwork: 'networkSetting/getNetwork',
     }),
   },
   methods: {
     ...mapActions({
-      getAlerts: "networkSetting/getAlerts",
-      approvedAlerts: "networkSetting/approvedAlerts",
-      unapprovedAlerts: "networkSetting/unapprovedAlerts",
+      getAlerts: 'networkSetting/getAlerts',
+      approvedAlerts: 'networkSetting/approvedAlerts',
+      unapprovedAlerts: 'networkSetting/unapprovedAlerts',
     }),
 
     approved(id) {
@@ -122,19 +100,19 @@ export default {
         .then(() => {
           this.load = false;
         })
-        .catch((err) => {
+        .catch(err => {
           this.load = true;
           console.log(err);
         });
     },
 
     unapproved(id) {
-     this.load = true;
+      this.load = true;
       this.unapprovedAlerts(id)
         .then(() => {
           this.load = false;
         })
-        .catch((err) => {
+        .catch(err => {
           this.load = true;
           console.log(err);
         });

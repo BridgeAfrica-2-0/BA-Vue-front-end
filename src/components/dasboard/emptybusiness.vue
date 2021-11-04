@@ -4,11 +4,11 @@
       <span>
         <h6 class="mybusi">
           <fas-icon class="icons" :icon="['fas', 'hands-helping']" size="lg" />
-          <b> My Businesses </b>  
+          <b> My Businesses </b>
         </h6>
       </span>
       <div class="s-card " style="overflow: -moz-scrollbars-vertical">
-        <div v-if="business.lenght ==0">
+        <div v-if="business.lenght == 0">
           <b-row>
             <b-col>
               <div class="p-top">
@@ -23,34 +23,26 @@
           </b-row>
         </div>
 
-        <Business  :business="business"   v-if="business.lenght !=0" />
-
-
-
-
-
-
+        <Business :business="business" v-if="business.lenght != 0" />
       </div>
     </b-card>
   </div>
 </template>
 
 <script>
-import Business from "@/components/dasboard/businesses";
+import Business from '@/components/dasboard/businesses';
 export default {
-  name: "emptybusiness",
-  
+  name: 'emptybusiness',
+
   components: {
     Business,
-    },
-  
-  computed: {
-   
+  },
 
-    business(){
-    return this.$store.state.ProfileAndBusinessDetails.business;
-    }
-  }
+  computed: {
+    business() {
+      return this.$store.state.ProfileAndBusinessDetails.business;
+    },
+  },
 };
 </script>
 

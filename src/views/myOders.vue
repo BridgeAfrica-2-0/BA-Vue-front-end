@@ -1,12 +1,10 @@
 <template>
-    
-       <myoders />   
-   
+  <myoders />
 </template>
 
 <script>
-import myoders from "@/components/myOders.vue"
+import myoders from '@/components/myOders.vue';
 export default {
-    components: {myoders}
-}
+  components: { myoders },
+};
 </script>

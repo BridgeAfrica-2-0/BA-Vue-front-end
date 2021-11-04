@@ -6,10 +6,7 @@
           <b-input-group-prepend is-text>
             <b-icon-search class="text-primary border-none"></b-icon-search>
           </b-input-group-prepend>
-          <b-form-input
-            aria-label="Text input with checkbox"
-            placeholder="Search Something"
-          ></b-form-input>
+          <b-form-input aria-label="Text input with checkbox" placeholder="Search Something"></b-form-input>
         </b-input-group>
       </b-col>
     </b-row>
@@ -34,19 +31,11 @@
               </h5>
             </span>
             <span class="float-right mt-1">
-              <b-dropdown
-                size="lg"
-                variant="link"
-                toggle-class="text-decoration-none"
-                no-caret
-              >
+              <b-dropdown size="lg" variant="link" toggle-class="text-decoration-none" no-caret>
                 <template #button-content>
-                  <b-icon-three-dots-vertical></b-icon-three-dots-vertical
-                  ><span class="sr-only">Settings</span>
+                  <b-icon-three-dots-vertical></b-icon-three-dots-vertical><span class="sr-only">Settings</span>
                 </template>
-                <b-dropdown-item href="#">
-                  <b-icon-trash-fill></b-icon-trash-fill> Remove as Admin
-                </b-dropdown-item>
+                <b-dropdown-item href="#"> <b-icon-trash-fill></b-icon-trash-fill> Remove as Admin </b-dropdown-item>
                 <b-dropdown-item href="#">
                   <b-icon-trash-fill></b-icon-trash-fill> Remove From Networks
                 </b-dropdown-item>
@@ -77,15 +66,9 @@
               </h5>
             </span>
             <span class="float-right mt-1">
-              <b-dropdown
-                size="lg"
-                variant="link"
-                toggle-class="text-decoration-none"
-                no-caret
-              >
+              <b-dropdown size="lg" variant="link" toggle-class="text-decoration-none" no-caret>
                 <template #button-content>
-                  <b-icon-three-dots-vertical></b-icon-three-dots-vertical
-                  ><span class="sr-only">Settings</span>
+                  <b-icon-three-dots-vertical></b-icon-three-dots-vertical><span class="sr-only">Settings</span>
                 </template>
                 <b-dropdown-item href="#">
                   <b-icon-trash-fill></b-icon-trash-fill> Remove From Networks
@@ -117,15 +100,9 @@
               </h5>
             </span>
             <span class="float-right mt-1">
-              <b-dropdown
-                size="lg"
-                variant="link"
-                toggle-class="text-decoration-none"
-                no-caret
-              >
+              <b-dropdown size="lg" variant="link" toggle-class="text-decoration-none" no-caret>
                 <template #button-content>
-                  <b-icon-three-dots-vertical></b-icon-three-dots-vertical
-                  ><span class="sr-only">Settings</span>
+                  <b-icon-three-dots-vertical></b-icon-three-dots-vertical><span class="sr-only">Settings</span>
                 </template>
                 <b-dropdown-item href="#">
                   <b-icon-person-plus-fill></b-icon-person-plus-fill> Make Admin
@@ -157,29 +134,29 @@
 
 <script>
 export default {
-  name: "memberNetwork",
+  name: 'memberNetwork',
   data() {
     return {
       perPage: 3,
       currentPage: 1,
       items: [
-        { id: 1, first_name: "Fred", last_name: "Flintstone" },
-        { id: 2, first_name: "Wilma", last_name: "Flintstone" },
-        { id: 3, first_name: "Barney", last_name: "Rubble" },
-        { id: 4, first_name: "Betty", last_name: "Rubble" },
-        { id: 5, first_name: "Pebbles", last_name: "Flintstone" },
-        { id: 6, first_name: "Bamm Bamm", last_name: "Rubble" },
-        { id: 7, first_name: "The Great", last_name: "Gazzoo" },
-        { id: 8, first_name: "Rockhead", last_name: "Slate" },
-        { id: 9, first_name: "Pearl", last_name: "Slaghoople" }
-      ]
+        { id: 1, first_name: 'Fred', last_name: 'Flintstone' },
+        { id: 2, first_name: 'Wilma', last_name: 'Flintstone' },
+        { id: 3, first_name: 'Barney', last_name: 'Rubble' },
+        { id: 4, first_name: 'Betty', last_name: 'Rubble' },
+        { id: 5, first_name: 'Pebbles', last_name: 'Flintstone' },
+        { id: 6, first_name: 'Bamm Bamm', last_name: 'Rubble' },
+        { id: 7, first_name: 'The Great', last_name: 'Gazzoo' },
+        { id: 8, first_name: 'Rockhead', last_name: 'Slate' },
+        { id: 9, first_name: 'Pearl', last_name: 'Slaghoople' },
+      ],
     };
   },
   computed: {
     rows() {
       return this.items.length;
-    }
-  }
+    },
+  },
 };
 </script>
 

@@ -6,29 +6,17 @@
       <fas-icon class="primary search" :icon="['fas', 'search']" />
       <b-card-text>
         <b-list-group-item class="d-flex align-items-center m-0 p-2">
-          <b-avatar
-            variant="info"
-            src="https://placekitten.com/300/300"
-            class="mr-3"
-          ></b-avatar>
+          <b-avatar variant="info" src="https://placekitten.com/300/300" class="mr-3"></b-avatar>
           <span class="mr-auto font-weight-bolder">Username</span>
           <b-button class="btn-primary" size="sm"> Invite</b-button>
         </b-list-group-item>
         <b-list-group-item class="d-flex align-items-center m-0 p-2">
-          <b-avatar
-            variant="info"
-            src="https://placekitten.com/300/300"
-            class="mr-3"
-          ></b-avatar>
+          <b-avatar variant="info" src="https://placekitten.com/300/300" class="mr-3"></b-avatar>
           <span class="mr-auto font-weight-bolder">Username</span>
           <b-button class="btn-primary" size="sm"> Invite</b-button>
         </b-list-group-item>
         <b-list-group-item class="d-flex align-items-center m-0 p-2">
-          <b-avatar
-            variant="info"
-            src="https://placekitten.com/300/300"
-            class="mr-3"
-          ></b-avatar>
+          <b-avatar variant="info" src="https://placekitten.com/300/300" class="mr-3"></b-avatar>
           <span class="mr-auto font-weight-bolder">Username</span>
           <b-button class="btn-primary" size="sm"> Invite</b-button>
         </b-list-group-item>

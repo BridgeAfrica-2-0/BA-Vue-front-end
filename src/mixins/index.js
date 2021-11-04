@@ -1,88 +1,81 @@
+import { mapGetters, mapActions } from 'vuex';
 
-import { mapGetters, mapActions } from "vuex";
+import NotFound from '@/components/NotFoundComponent';
+import ClipLoader from 'vue-spinner/src/ClipLoader.vue';
 
-import NotFound from "@/components/NotFoundComponent"
-import ClipLoader from 'vue-spinner/src/ClipLoader.vue'
-
-
-import { formatNumber, fromNow } from "@/helpers";
+import { formatNumber, fromNow } from '@/helpers';
 
 export const cancelRequest = {
-  destroyed() {
-
-  }
-}
+  destroyed() {},
+};
 
 export const loader = {
   methods: {
     onNotified(text) {
       this.$notify({
-        group: "notification",
-        title: "Important message",
-        type: "warn",
+        group: 'notification',
+        title: 'Important message',
+        type: 'warn',
         duration: 5000,
         text,
       });
     },
     ...mapActions({
-      setLoaderState: "search/LOADING"
-    })
+      setLoaderState: 'search/LOADING',
+    }),
   },
   computed: {
     ...mapGetters({
-      loaderState: "search/LOADING"
-    })
+      loaderState: 'search/LOADING',
+    }),
   },
   data: () => ({
-    overlay: null
+    overlay: null,
   }),
-
-}
+};
 
 export const search = {
   components: {
     NotFound,
-    ScrollLoader: ClipLoader
+    ScrollLoader: ClipLoader,
   },
   props: {
     title: {
-      type: String
-    }
+      type: String,
+    },
   },
 
   data: () => ({
-    haveNotData: false
+    haveNotData: false,
   }),
 
   destroyed() {
-    console.log("destroy component")
+    console.log('destroy component');
     this.page(1);
     this.$store.commit('search/RESET_RESULT');
-    window.removeEventListener('scroll', this.onscroll)
+    window.removeEventListener('scroll', this.onscroll);
   },
 
   computed: {
     ...mapGetters({
-      callback: "search/GET_CURRENT_PAGINATE_CALLBACK",
-      getStack: "search/STACK_VALUE",
+      callback: 'search/GET_CURRENT_PAGINATE_CALLBACK',
+      getStack: 'search/STACK_VALUE',
     }),
   },
   methods: {
     ...mapActions({
-      page: "search/SET_CURRENT_PAGINATION_PAGE",
+      page: 'search/SET_CURRENT_PAGINATION_PAGE',
     }),
-  }
-}
-
+  },
+};
 
 export const commentMixins = {
-
   data() {
     return {
       reply: false,
       comment: null,
       comments: [],
-      text: "",
+      text: '',
       createPostRequestIsActive: false,
     };
   },
@@ -91,7 +84,7 @@ export const commentMixins = {
   },
   computed: {
     icon() {
-      return this.comment.is_liked ? "suit-heart-fill" : "suit-heart";
+      return this.comment.is_liked ? 'suit-heart-fill' : 'suit-heart';
     },
   },
 
@@ -101,7 +94,7 @@ export const commentMixins = {
   },
 
   methods: {
-    onLike: async function () {
+    onLike: async function() {
       const request = await this.$repository.share.commentLike({
         comment: this.comment.comment_id,
         network: this.$route.params.id,
@@ -113,27 +106,25 @@ export const commentMixins = {
           comment_likes: !this.comment.is_liked
             ? this.comment.comment_likes + 1
             : this.comment.comment_likes
-              ? this.comment.comment_likes - 1
-              : 0,
+            ? this.comment.comment_likes - 1
+            : 0,
         });
     },
 
-    onShowReply: async function () {
+    onShowReply: async function() {
       const request = await this.$repository.share.fetchReplyComment({
         post: this.uuid,
         comment: this.comment.comment_id,
         page: 1,
       });
 
-
       if (request.success) this.comments = request.data;
     },
 
-    onReply: async function () {
-      if (!(this.text.trim().length > 2 && !this.createPostRequestIsActive))
-        return false;
+    onReply: async function() {
+      if (!(this.text.trim().length > 2 && !this.createPostRequestIsActive)) return false;
 
-      this.createPostRequestIsActive = true
+      this.createPostRequestIsActive = true;
 
       const request = await this.$repository.share.createReplyComment({
         post: this.uuid,
@@ -146,16 +137,14 @@ export const commentMixins = {
 
       if (request.success) {
         this.onShowReply();
-        this.text = "";
+        this.text = '';
 
         this.comment = Object.assign(this.comment, {
           reply_comment_count: this.comment.reply_comment_count + 1,
         });
-
-
       }
 
-      this.createPostRequestIsActive = false
+      this.createPostRequestIsActive = false;
     },
 
     showReply() {
@@ -163,4 +152,4 @@ export const commentMixins = {
       if (this.reply) this.onShowReply();
     },
   },
-}
+};

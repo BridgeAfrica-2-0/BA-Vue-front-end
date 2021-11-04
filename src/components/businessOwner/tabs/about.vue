@@ -38,18 +38,11 @@
           <b-card>
             <b-card-text>
               <div class="edit" v-b-modal.addressBusinessModal>
-                <b-icon
-                  icon="pencil-fill"
-                  variant="primary"
-                  @click="load"
-                ></b-icon>
+                <b-icon icon="pencil-fill" variant="primary" @click="load"></b-icon>
               </div>
 
               <p>
-                <b-icon
-                  icon="briefcase-fill"
-                  class="primary icon-size"
-                ></b-icon>
+                <b-icon icon="briefcase-fill" class="primary icon-size"></b-icon>
                 <span v-for="category in business_about.category" :key="category.id">{{ category.name }}, </span>
                 <!-- {{ business_about.category[0].name }} -->
               </p>
@@ -64,22 +57,19 @@
               </p>
               <p>
                 <b-icon icon="link" class="primary icon-size"></b-icon>
-                {{ business_about.website ? business_about.website : "No Website Available" }}
+                {{ business_about.website ? business_about.website : 'No Website Available' }}
               </p>
               <p>
                 <b-icon icon="people-fill" class="primary icon-size"></b-icon>
                 {{ nFormatter(business_about.community) }} Community
               </p>
               <p>
-                <b-icon
-                  icon="telephone-fill"
-                  class="primary icon-size"
-                ></b-icon>
-                {{ business_about.phone ? business_about.phone : "No Phone Number Available"}}
+                <b-icon icon="telephone-fill" class="primary icon-size"></b-icon>
+                {{ business_about.phone ? business_about.phone : 'No Phone Number Available' }}
               </p>
               <p>
                 <b-icon icon="envelope-fill" class="primary icon-size"></b-icon>
-                {{ business_about.email ? business_about.email :  "No Email Available"}}
+                {{ business_about.email ? business_about.email : 'No Email Available' }}
               </p>
               <p>
                 <b-icon icon="clock" class="primary icon-size"></b-icon>
@@ -93,7 +83,8 @@
                     v-for="day in business_about.business_open_hours"
                     :key="day.day"
                     @click="selectHour(day)"
-                  >{{ day.opening_time }}AM - {{ day.closing_time }}PM</b-dropdown-item>
+                    >{{ day.opening_time }}AM - {{ day.closing_time }}PM</b-dropdown-item
+                  >
                 </b-dropdown>
               </p>
             </b-card-text>
@@ -203,26 +194,12 @@
         <div>
           <b-card no-body>
             <b-tabs pills card vertical>
-              <b-tab
-                :title="filters.name"
-                v-for="filters in filterselectvalue"
-                :key="filters.id"
-                active
+              <b-tab :title="filters.name" v-for="filters in filterselectvalue" :key="filters.id" active
                 ><b-card-text>
                   <!-- {{filters.filters}} -->
                   <b-form-group label="Filters" class="colorblack">
-                    <b-form-checkbox-group
-                      id=""
-                      class="colorblack"
-                      v-model="select_filterss"
-                      name="filters"
-                    >
-                      <b-form-checkbox
-                      class="colorblack"
-                        v-for="fil in filters.filters"
-                        :key="fil.id"
-                        :value="fil.id"
-                      >
+                    <b-form-checkbox-group id="" class="colorblack" v-model="select_filterss" name="filters">
+                      <b-form-checkbox class="colorblack" v-for="fil in filters.filters" :key="fil.id" :value="fil.id">
                         {{ fil.name }}
                       </b-form-checkbox>
                     </b-form-checkbox-group>
@@ -248,12 +225,7 @@
             ></b-form-tags>
           </div>
         </div>
-        <b-form-group
-          id="input-group-1"
-          label="Country"
-          label-for="input-1"
-          label-size="sm"
-        >
+        <b-form-group id="input-group-1" label="Country" label-for="input-1" label-size="sm">
           <multiselect
             v-model="country"
             @input="Region"
@@ -264,12 +236,8 @@
             :multiple="true"
           ></multiselect>
         </b-form-group>
-        
-  
-        <b-form-group
-          label="Region"
-          label-size="sm"
-        >
+
+        <b-form-group label="Region" label-size="sm">
           <multiselect
             v-model="region"
             @input="Division"
@@ -280,12 +248,8 @@
             :multiple="true"
           ></multiselect>
         </b-form-group>
-        
-    
-        <b-form-group
-          label="Division"
-          label-size="sm"
-        >
+
+        <b-form-group label="Division" label-size="sm">
           <multiselect
             v-model="division"
             @input="Municipality"
@@ -296,12 +260,8 @@
             :multiple="true"
           ></multiselect>
         </b-form-group>
-        
 
-        <b-form-group
-          label="Municipality"
-          label-size="sm"
-        >
+        <b-form-group label="Municipality" label-size="sm">
           <multiselect
             v-model="municipality"
             @input="Locality"
@@ -312,11 +272,8 @@
             :multiple="true"
           ></multiselect>
         </b-form-group>
-    
-        <b-form-group
-          label="Neighbourhood"
-          label-size="sm"
-        >
+
+        <b-form-group label="Neighbourhood" label-size="sm">
           <multiselect
             v-model="locality"
             placeholder="Search"
@@ -327,12 +284,7 @@
           ></multiselect>
         </b-form-group>
 
-        <b-form-group
-          id="input-group-2"
-          label="Website"
-          label-for="input-2"
-          label-size="sm"
-        >
+        <b-form-group id="input-group-2" label="Website" label-for="input-2" label-size="sm">
           <b-form-input
             id="input-1"
             class="mt-1"
@@ -342,21 +294,11 @@
           ></b-form-input>
         </b-form-group>
 
-        <b-form-group
-          id="input-group-2"
-          label="Phone Contact"
-          label-for="input-2"
-          label-size="sm"
-        >
+        <b-form-group id="input-group-2" label="Phone Contact" label-for="input-2" label-size="sm">
           <VuePhoneNumberInput v-model="business_about_input.phone" />
         </b-form-group>
 
-        <b-form-group
-          id="input-group-2"
-          label="Business Email"
-          label-for="input-2"
-          label-size="sm"
-        >
+        <b-form-group id="input-group-2" label="Business Email" label-for="input-2" label-size="sm">
           <b-form-input
             id="input-1"
             class="mt-1"
@@ -369,13 +311,7 @@
 
         <div class="b-bottom">
           <b-container>
-            <b-form-group
-              label-cols-lg="12"
-              label="Business Hours"
-              label-size="md"
-              label-class=" pt-0 "
-              class="mb-0"
-            >
+            <b-form-group label-cols-lg="12" label="Business Hours" label-size="md" label-class=" pt-0 " class="mb-0">
               <b-form-group class="mb-0" v-slot="{ ariaDescribedby }">
                 <b-form-radio-group
                   class="a-text text"
@@ -388,13 +324,7 @@
                 <b-container>
                   <b-row v-for="day in dayOfWorks" :key="day.day">
                     <b-col cols="6"
-                      ><b-form-checkbox
-                        id=""
-                        class="a-text text"
-                        name="works"
-                        v-model="day.check"
-                        :checked="day.check"
-                      >
+                      ><b-form-checkbox id="" class="a-text text" name="works" v-model="day.check" :checked="day.check">
                         {{ day.day }}</b-form-checkbox
                       ></b-col
                     >
@@ -434,9 +364,9 @@
 
 <script>
 //import moment from "moment";
-import VuePhoneNumberInput from "vue-phone-number-input";
-import "vue-phone-number-input/dist/vue-phone-number-input.css";
-import Multiselect from "vue-multiselect";
+import VuePhoneNumberInput from 'vue-phone-number-input';
+import 'vue-phone-number-input/dist/vue-phone-number-input.css';
+import Multiselect from 'vue-multiselect';
 export default {
   components: {
     Multiselect,
@@ -445,10 +375,10 @@ export default {
 
   data() {
     return {
-      business_id:null,
+      business_id: null,
 
       limit: 20,
-      editbiz: "",
+      editbiz: '',
       multiselecvalue: [],
       filterselectvalue: [],
       select_filterss: [],
@@ -458,91 +388,91 @@ export default {
       municipality: [],
       locality: [],
       dayOfWorks: [
-        { 
-          day: "Monday", 
-          opening_time: null, 
-          closing_time: null, 
-          check: false 
-        },
         {
-          day: "Tuesday",
+          day: 'Monday',
           opening_time: null,
           closing_time: null,
-          check: false
+          check: false,
         },
         {
-          day: "Wednesday",
+          day: 'Tuesday',
           opening_time: null,
           closing_time: null,
-          check: false
+          check: false,
         },
         {
-          day: "Thursday",
+          day: 'Wednesday',
           opening_time: null,
           closing_time: null,
-          check: false
+          check: false,
         },
-        { day: "Friday", opening_time: null, closing_time: null, check: false },
         {
-          day: "Saturday",
+          day: 'Thursday',
           opening_time: null,
           closing_time: null,
-          check: false
+          check: false,
         },
-        { day: "Sunday", opening_time: null, closing_time: null, check: false }
+        { day: 'Friday', opening_time: null, closing_time: null, check: false },
+        {
+          day: 'Saturday',
+          opening_time: null,
+          closing_time: null,
+          check: false,
+        },
+        { day: 'Sunday', opening_time: null, closing_time: null, check: false },
       ],
-      business_about: "",
+      business_about: '',
       business_about_input: {
-        name: "TONTON LA FORCE",
-        logo_path: "http://localhost:8000/storage",
-        category: "Hourse Marketing",
+        name: 'TONTON LA FORCE',
+        logo_path: 'http://localhost:8000/storage',
+        category: 'Hourse Marketing',
         keywords: null,
         language: null,
         location_description:
-          "Tempore quo soluta voluptates quis. Doloremque autem minus ut nisi molestias maiores cum. Et assumenda velit expedita et et sint sed in.",
+          'Tempore quo soluta voluptates quis. Doloremque autem minus ut nisi molestias maiores cum. Et assumenda velit expedita et et sint sed in.',
         website: null,
         community: 6,
         phone: null,
         email: null,
         business_open_hours: [
           {
-            day: "monday",
-            opening_time: "09:05:12",
-            closing_time: "15:06:18"
+            day: 'monday',
+            opening_time: '09:05:12',
+            closing_time: '15:06:18',
           },
           {
-            day: "tuesday",
-            opening_time: "07:05:38",
-            closing_time: "14:05:43"
-          }
+            day: 'tuesday',
+            opening_time: '07:05:38',
+            closing_time: '14:05:43',
+          },
         ],
         region: null,
         address: null,
         city: null,
         country: null,
         lat: -56.200329,
-        lng: -6.249487
+        lng: -6.249487,
       },
       openNow: null,
-      open: null
+      open: null,
     };
   },
   watch: {
     open(value) {
-      console.log("change open value ", value);
+      console.log('change open value ', value);
     },
     dayOfWorks: {
       handler(newValue, oldValue) {
         let num = 0;
-        newValue.map((day) => {
+        newValue.map(day => {
           if (day.check) {
             num = num + 1;
           }
         });
         if (num >= 7) {
-          this.open = "Always Open";
+          this.open = 'Always Open';
         } else {
-          this.open = "Open for selected hours";
+          this.open = 'Open for selected hours';
         }
       },
       deep: true,
@@ -550,27 +480,22 @@ export default {
   },
   created() {
     this.business_id = this.$route.params.id;
-    console.log("Load Business About start +++++");
+    console.log('Load Business About start +++++');
     this.$store
-      .dispatch("businessOwner/loadUserBusinessAbout", {
+      .dispatch('businessOwner/loadUserBusinessAbout', {
         business_abobusiness_id: this.business_about_input,
-        business_id: this.business_id
+        business_id: this.business_id,
       })
       .then(response => {
-        console.log(
-          response,
-          "load business about response end response (3) ++++"
-        );
+        console.log(response, 'load business about response end response (3) ++++');
         this.dayOfWorks = this.initialize(this.dayOfWorks);
         console.log(this.business_about);
       })
       .catch(error => {
-        console.log("error from the server or browser error(2) ++++", error);
+        console.log('error from the server or browser error(2) ++++', error);
       })
       .finally(() => {
-        this.business_about = JSON.parse(
-          JSON.stringify(this.$store.getters["businessOwner/getBusinessAbout"])
-        );
+        this.business_about = JSON.parse(JSON.stringify(this.$store.getters['businessOwner/getBusinessAbout']));
         console.log(this.business_about);
       });
   },
@@ -607,49 +532,49 @@ export default {
     },
     selectedcategories: function() {
       let selectedUsers = [];
-      this.multiselecvalue.forEach((item) => {
+      this.multiselecvalue.forEach(item => {
         selectedUsers.push(item.id);
       });
       return selectedUsers;
     },
     selectedsubcategories: function() {
       let sub_cat = [];
-      this.filterselectvalue.forEach((item) => {
+      this.filterselectvalue.forEach(item => {
         sub_cat.push(item.sub_cat_id);
       });
       return sub_cat;
     },
     selectedcountry: function() {
       let sub_cat = [];
-      this.country.forEach((item) => {
+      this.country.forEach(item => {
         sub_cat.push(item.id);
       });
       return sub_cat;
     },
     selectedregion: function() {
       let sub_cat = [];
-      this.region.forEach((item) => {
+      this.region.forEach(item => {
         sub_cat.push(item.id);
       });
       return sub_cat;
     },
     selecteddivision: function() {
       let sub_cat = [];
-      this.division.forEach((item) => {
+      this.division.forEach(item => {
         sub_cat.push(item.id);
       });
       return sub_cat;
     },
     selectedmunicipality: function() {
       let sub_cat = [];
-      this.municipality.forEach((item) => {
+      this.municipality.forEach(item => {
         sub_cat.push(item.id);
       });
       return sub_cat;
     },
     selectedlocality: function() {
       let sub_cat = [];
-      this.locality.forEach((item) => {
+      this.locality.forEach(item => {
         sub_cat.push(item.id);
       });
       return sub_cat;
@@ -657,23 +582,20 @@ export default {
     hoursOpen() {
       console.log();
       return this.openNow === null
-        ? "Nothing"
-        : this.openNow.opening_time +
-            " AM - " +
-            this.openNow.closing_time +
-            " PM";
+        ? 'Nothing'
+        : this.openNow.opening_time + ' AM - ' + this.openNow.closing_time + ' PM';
     },
   },
   methods: {
     nFormatter: function(num) {
       if (num >= 1000000000) {
-        return (num / 1000000000).toFixed(1).replace(/\.0$/, "") + "G";
+        return (num / 1000000000).toFixed(1).replace(/\.0$/, '') + 'G';
       }
       if (num >= 1000000) {
-        return (num / 1000000).toFixed(1).replace(/\.0$/, "") + "M";
+        return (num / 1000000).toFixed(1).replace(/\.0$/, '') + 'M';
       }
       if (num >= 1000) {
-        return (num / 1000).toFixed(1).replace(/\.0$/, "") + "K";
+        return (num / 1000).toFixed(1).replace(/\.0$/, '') + 'K';
       }
       return num;
     },
@@ -681,12 +603,9 @@ export default {
       this.openNow = day;
     },
     initialize(daysOfWorks) {
-      const zdaysOfWorks = daysOfWorks.map((day) => {
-        this.open =
-          this.business_about.business_open_hours.length >= 7
-            ? "Always Open"
-            : "Open for selected hours";
-        this.business_about.business_open_hours.map((dayOpen) => {
+      const zdaysOfWorks = daysOfWorks.map(day => {
+        this.open = this.business_about.business_open_hours.length >= 7 ? 'Always Open' : 'Open for selected hours';
+        this.business_about.business_open_hours.map(dayOpen => {
           if (day.day.toLowerCase() === dayOpen.day.toLowerCase()) {
             day.closing_time = dayOpen.closing_time;
             day.opening_time = dayOpen.opening_time;
@@ -699,9 +618,7 @@ export default {
       return zdaysOfWorks;
     },
     cancel() {
-      this.business_about_input = JSON.parse(
-        JSON.stringify(this.business_about)
-      );
+      this.business_about_input = JSON.parse(JSON.stringify(this.business_about));
     },
     /**
      *
@@ -709,82 +626,60 @@ export default {
      */
     validate(type) {
       switch (type) {
-        case "modifyBiography":
-          console.log(
-            "vuex store +++++ " +
-              this.$store.getters["businessOwner/getBusinessAbout"]
-          );
-          console.log(this.$store.getters["businessOwner/getBusinessAbout"]);
-          console.log("Modify Business Biography start++++");
+        case 'modifyBiography':
+          console.log('vuex store +++++ ' + this.$store.getters['businessOwner/getBusinessAbout']);
+          console.log(this.$store.getters['businessOwner/getBusinessAbout']);
+          console.log('Modify Business Biography start++++');
           this.test();
           this.$store
-            .dispatch("businessOwner/updateUserBusinessAbout", {
+            .dispatch('businessOwner/updateUserBusinessAbout', {
               business_about: this.business_about_input,
               business_id: this.business_id,
             })
-            .then((response) => {
-              console.log(
-                "fetch finished on the database response (3) ",
-                response
-              );
-              console.log("Modify Business Biography end++++");
-            })
-            .catch((error) => {
-              console.log(
-                error,
-                "Modify Business Biography end error (2) ++++"
-              );
-            })
-            .finally(() => {
-              console.log("Finally Modify Business About Biography  +++++");
-              this.business_about = JSON.parse(
-                JSON.stringify(
-                  this.$store.getters["businessOwner/getBusinessAbout"]
-                )
-              );
-              console.log(this.business_about);
-              this.$refs["biographyModal"].hide();
-            });
-          break;
-        case "editAddress":
-          this.test();
-          this.business_about_input["category"]=this.selectedcategories;
-          this.business_about_input["subCategoryId"]=this.selectedsubcategories;
-          this.business_about_input["filterId"]=this.select_filterss;
-          this.business_about_input["country"]=this.selectedcountry;
-          this.business_about_input["region"]=this.selectedregion;
-          this.business_about_input["division"]=this.selecteddivision;
-          this.business_about_input["council"]=this.selectedmunicipality;
-          this.business_about_input["locality"]=this.selectedlocality;
-          console.log(this.business_about_input);
-          this.$store
-            .dispatch("businessOwner/updateUserBusinessAbout", {
-              business_about: this.business_about_input,
-              business_id: this.business_id
-            })
             .then(response => {
-              console.log(
-                "update user business about response ++++++",
-                response
-              );
-              this.business_about = this.$store.getters[
-                "businessOwner/getBusinessAbout"
-              ];
-              console.log("update user business about end");
+              console.log('fetch finished on the database response (3) ', response);
+              console.log('Modify Business Biography end++++');
             })
             .catch(error => {
-              console.log(error, "update user business about end++++");
+              console.log(error, 'Modify Business Biography end error (2) ++++');
             })
             .finally(() => {
-              console.log("Finally Update Business About Biography  +++++");
-              this.business_about = JSON.parse(
-                JSON.stringify(
-                  this.$store.getters["businessOwner/getBusinessAbout"]
-                )
-              );
+              console.log('Finally Modify Business About Biography  +++++');
+              this.business_about = JSON.parse(JSON.stringify(this.$store.getters['businessOwner/getBusinessAbout']));
               console.log(this.business_about);
-              this.$refs["addressBusinessModal"].hide();
-              this.$refs["biographyModal"].hide();
+              this.$refs['biographyModal'].hide();
+            });
+          break;
+        case 'editAddress':
+          this.test();
+          this.business_about_input['category'] = this.selectedcategories;
+          this.business_about_input['subCategoryId'] = this.selectedsubcategories;
+          this.business_about_input['filterId'] = this.select_filterss;
+          this.business_about_input['country'] = this.selectedcountry;
+          this.business_about_input['region'] = this.selectedregion;
+          this.business_about_input['division'] = this.selecteddivision;
+          this.business_about_input['council'] = this.selectedmunicipality;
+          this.business_about_input['locality'] = this.selectedlocality;
+          console.log(this.business_about_input);
+          this.$store
+            .dispatch('businessOwner/updateUserBusinessAbout', {
+              business_about: this.business_about_input,
+              business_id: this.business_id,
+            })
+            .then(response => {
+              console.log('update user business about response ++++++', response);
+              this.business_about = this.$store.getters['businessOwner/getBusinessAbout'];
+              console.log('update user business about end');
+            })
+            .catch(error => {
+              console.log(error, 'update user business about end++++');
+            })
+            .finally(() => {
+              console.log('Finally Update Business About Biography  +++++');
+              this.business_about = JSON.parse(JSON.stringify(this.$store.getters['businessOwner/getBusinessAbout']));
+              console.log(this.business_about);
+              this.$refs['addressBusinessModal'].hide();
+              this.$refs['biographyModal'].hide();
             });
           break;
       }
@@ -795,32 +690,33 @@ export default {
         .map(day => [day.day, day.opening_time, day.closing_time]);
     },
     load() {
-      this.business_about_input = JSON.parse(
-        JSON.stringify(this.business_about)
-      );
+      this.business_about_input = JSON.parse(JSON.stringify(this.business_about));
     },
 
-    editBusiness(){
-      console.log("editBusiness");
-      this.axios.get("business/edit/"+this.business_id).then(({ data }) => {
-        console.log(data);
-        this.editbiz=data.data;
-        this.setEditData(data.data)
-      }).catch((err) => {
+    editBusiness() {
+      console.log('editBusiness');
+      this.axios
+        .get('business/edit/' + this.business_id)
+        .then(({ data }) => {
+          console.log(data);
+          this.editbiz = data.data;
+          this.setEditData(data.data);
+        })
+        .catch(err => {
           console.log({ err: err });
         });
     },
-     setEditData(business){
-      console.log("setting editBusiness data");
+    setEditData(business) {
+      console.log('setting editBusiness data');
       console.log(business);
-      this.multiselecvalue=business.category;
-      this.filterselectvalue=business.subCategory;
-      this.select_filterss=business.filter;
-      this.country=business.country;
-      this.region=business.region;
-      this.division=business.division
-      this.municipality=business.council
-      this.locality=business.neigborhood;
+      this.multiselecvalue = business.category;
+      this.filterselectvalue = business.subCategory;
+      this.select_filterss = business.filter;
+      this.country = business.country;
+      this.region = business.region;
+      this.division = business.division;
+      this.municipality = business.council;
+      this.locality = business.neigborhood;
       this.subcategories();
       this.Region();
       this.Division();
@@ -845,106 +741,106 @@ export default {
     },
     categories() {
       this.$store
-        .dispatch("auth/categories")
+        .dispatch('auth/categories')
         .then(() => {
-          console.log("hey yeah");
+          console.log('hey yeah');
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
     },
     subcategories() {
       let formData2 = new FormData();
-      formData2.append("categoryId", this.selectedcategories);
+      formData2.append('categoryId', this.selectedcategories);
       this.$store
-        .dispatch("auth/subcategories", formData2)
+        .dispatch('auth/subcategories', formData2)
         .then(() => {
-          console.log("hey yeah");
+          console.log('hey yeah');
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
     },
     filters() {
       this.$store
-        .dispatch("auth/filters")
+        .dispatch('auth/filters')
         .then(() => {
-          console.log("hey yeah");
+          console.log('hey yeah');
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
     },
     Setcategoryfiters() {
       this.$store
-        .dispatch("auth/Setcategoryfiters")
+        .dispatch('auth/Setcategoryfiters')
         .then(() => {
-          console.log("hey yeah");
+          console.log('hey yeah');
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
     },
     Country() {
       this.$store
-        .dispatch("auth/country")
+        .dispatch('auth/country')
         .then(() => {
-          console.log("hey yeah");
+          console.log('hey yeah');
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
     },
     Region() {
       let formData2 = new FormData();
-      formData2.append("countryId", this.selectedcountry);
+      formData2.append('countryId', this.selectedcountry);
       this.$store
-        .dispatch("auth/region", formData2)
+        .dispatch('auth/region', formData2)
         .then(() => {
-          console.log("hey yeah");
+          console.log('hey yeah');
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
     },
     Division() {
       let formData2 = new FormData();
-      formData2.append("regionId", this.selectedregion);
+      formData2.append('regionId', this.selectedregion);
       this.$store
-        .dispatch("auth/division", formData2)
+        .dispatch('auth/division', formData2)
         .then(() => {
-          console.log("hey yeah");
+          console.log('hey yeah');
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
     },
     Municipality() {
       let formData2 = new FormData();
-      formData2.append("divisionId", this.selecteddivision);
+      formData2.append('divisionId', this.selecteddivision);
       this.$store
-        .dispatch("auth/municipality", formData2)
+        .dispatch('auth/municipality', formData2)
         .then(() => {
-          console.log("hey yeah");
+          console.log('hey yeah');
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
     },
     Locality() {
-      console.log("Locality");
+      console.log('Locality');
       let formData2 = new FormData();
-      formData2.append("councilId", this.selectedmunicipality);
+      formData2.append('councilId', this.selectedmunicipality);
       this.$store
-        .dispatch("auth/locality", formData2)
+        .dispatch('auth/locality', formData2)
         .then(() => {
-          console.log("hey yeah");
+          console.log('hey yeah');
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
     },
-  }
+  },
 };
 </script>
 

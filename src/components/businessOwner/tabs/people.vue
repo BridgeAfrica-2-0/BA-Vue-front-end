@@ -1,17 +1,12 @@
 <template>
   <div>
     <div class="s-cardd">
-     
-  {{users}}
+      {{ users }}
 
-    <div class="people-style border shadow"  v-for="item in users" :key="item.id">
+      <div class="people-style border shadow" v-for="item in users" :key="item.id">
         <b-row class="mb-1">
           <b-col md="3" cols="4" lg="3" class="my-auto">
-            <b-avatar
-              class="p-avater"
-              variant="primary"
-              :src="item.profile_picture"
-            ></b-avatar>
+            <b-avatar class="p-avater" variant="primary" :src="item.profile_picture"></b-avatar>
           </b-col>
 
           <b-col md="8" cols="8" lg="8">
@@ -26,13 +21,7 @@
                         </div>
                       </b-col>
 
-                      <b-col
-                        md="6"
-                        lg="6"
-                        cols="6"
-                        sm="6"
-                        class="mt-3 mt-lg-2 mt-xl-2"
-                      >
+                      <b-col md="6" lg="6" cols="6" sm="6" class="mt-3 mt-lg-2 mt-xl-2">
                         <h6 class="follower">{{ count(item.followers) }} Community</h6>
                       </b-col>
                     </b-row>
@@ -42,14 +31,7 @@
                 <b-col lg="12" xl="12" cols="12" sm="12" md="12">
                   <div class="e-name">
                     <b-row class="mt-lg-0">
-                      <b-col
-                        md="6"
-                        lg="6"
-                        cols="6"
-                        sm="6"
-                        xl="6"
-                        class="mt-2 mt-lg-2 mt-xl-2 btn-2 center"
-                      >
+                      <b-col md="6" lg="6" cols="6" sm="6" xl="6" class="mt-2 mt-lg-2 mt-xl-2 btn-2 center">
                         <b-button
                           block
                           variant="primary"
@@ -61,14 +43,7 @@
                         </b-button>
                       </b-col>
 
-                      <b-col
-                        md="6"
-                        lg="6"
-                        cols="6"
-                        sm="6"
-                        xl="6"
-                        class="mt-2 mt-lg-2 mt-xl-2 btn-2 center"
-                      >
+                      <b-col md="6" lg="6" cols="6" sm="6" xl="6" class="mt-2 mt-lg-2 mt-xl-2 btn-2 center">
                         <b-button
                           block
                           size="sm"
@@ -87,128 +62,95 @@
           </b-col>
         </b-row>
       </div>
-
-
     </div>
-    
-  <infinite-loading @infinite="infiniteHandler"></infinite-loading>
+
+    <infinite-loading @infinite="infiniteHandler"></infinite-loading>
   </div>
 </template>
 
 <script>
-
-import moment from "moment";
-import axios from "axios";
+import moment from 'moment';
+import axios from 'axios';
 export default {
-
-
-   props:['type'],
+  props: ['type'],
   data() {
     return {
       page: 1,
-      biz_id:null,
+      biz_id: null,
       options: {
         rewind: true,
         autoplay: true,
         perPage: 1,
         pagination: false,
 
-        type: "loop",
-        perMove: 1
-      }
+        type: 'loop',
+        perMove: 1,
+      },
     };
   },
- 
- mounted(){
+
+  mounted() {
     this.biz_id = this.$route.params.id;
- },
-
-    computed:{
- 
-   users(){
-
-      if(this.type=="Follower"){ 
-
-      return  this.$store.state.businessOwner.UcommunityFollower.user_followers;  
-
-       }else{
-
-         return  this.$store.state.businessOwner.UcommunityFollowing.user_following; 
-       }
-   }
-    
-    
   },
 
-    methods:{
+  computed: {
+    users() {
+      if (this.type == 'Follower') {
+        return this.$store.state.businessOwner.UcommunityFollower.user_followers;
+      } else {
+        return this.$store.state.businessOwner.UcommunityFollowing.user_following;
+      }
+    },
+  },
 
-
-      count(number) {
+  methods: {
+    count(number) {
       if (number >= 1000000) {
-        return number / 1000000 + "M";
+        return number / 1000000 + 'M';
       }
       if (number >= 1000) {
-        return number / 1000 + "K";
+        return number / 1000 + 'K';
       } else return number;
     },
 
-      
-      
-    
     infiniteHandler($state) {
-    
-      let url = null; 
+      let url = null;
 
-      if (this.type == "Follower") {
-
-      url = "business/community/people-follower/"+this.biz_id+"/";
-
-        
+      if (this.type == 'Follower') {
+        url = 'business/community/people-follower/' + this.biz_id + '/';
       } else {
-        url = "business/community/people-following/"+this.biz_id+"/";
+        url = 'business/community/people-following/' + this.biz_id + '/';
       }
       axios
         .get(url + this.page)
         .then(({ data }) => {
+          if (this.type == 'Follower') {
+            if (data.data.user_followers.length) {
+              this.page += 1;
 
-           
-            if (this.type == "Follower") {
-             
-
-               if (data.data.user_followers.length) {
-           this.page += 1;
-           
               this.users.push(...data.data.user_followers);
-            $state.loaded();
-          } else {
-            $state.complete();
-          }
-
+              $state.loaded();
             } else {
-         
-
-             if (data.data.user_following.length) {
-           this.page += 1;
-           
-              this.users.push(...data.data.user_following);
-            $state.loaded();
+              $state.complete();
+            }
           } else {
-            $state.complete();
+            if (data.data.user_following.length) {
+              this.page += 1;
+
+              this.users.push(...data.data.user_following);
+              $state.loaded();
+            } else {
+              $state.complete();
+            }
           }
 
-
-            }
-
-            
           console.log(data);
-         
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
     },
-
-  }  
+  },
 };
 </script>
 

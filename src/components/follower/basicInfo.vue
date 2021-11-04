@@ -25,18 +25,16 @@
 export default {
   data() {
     return {
-      dateOfBirth: "20/20/2020",  
-      gender: "Male"
+      dateOfBirth: '20/20/2020',
+      gender: 'Male',
     };
   },
   methods: {},
 
-   computed:{
-
-    info(){
+  computed: {
+    info() {
       return this.$store.state.follower.profileIntro;
-    }
-
+    },
   },
 };
 </script>

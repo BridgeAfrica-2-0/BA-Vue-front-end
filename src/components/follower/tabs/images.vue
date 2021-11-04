@@ -7,32 +7,17 @@
         </b-modal>
         <div class="img-gall" v-for="pictures in picturess" :key="pictures.id">
           <a href="#!"
-            ><img
-              class="card-img btn p-0"
-              :src="pictures.media_url"
-              alt=""
-              @click="showPic(pictures.media_url)"
+            ><img class="card-img btn p-0" :src="pictures.media_url" alt="" @click="showPic(pictures.media_url)"
           /></a>
 
           <div class="mediadesc">
             <ul class="navbar-nav pull-right">
               <li class="nav-item dropdown m-0 p-0">
-                <b-dropdown
-                  size="sm"
-                  class="float-right"
-                  variant="link"
-                  toggle-class="text-decoration-none"
-                  no-caret
-                >
+                <b-dropdown size="sm" class="float-right" variant="link" toggle-class="text-decoration-none" no-caret>
                   <template #button-content>
-                    <fas-icon
-                      class="drop-color font-weight-bolder"
-                      :icon="['fas', 'ellipsis-v']"
-                    />
+                    <fas-icon class="drop-color font-weight-bolder" :icon="['fas', 'ellipsis-v']" />
                   </template>
-                  <b-dropdown-item @click="downloadPic(pictures.id)"
-                    >Download</b-dropdown-item
-                  >
+                  <b-dropdown-item @click="downloadPic(pictures.id)">Download</b-dropdown-item>
                 </b-dropdown>
               </li>
             </ul>
@@ -44,45 +29,45 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
+import { mapActions } from 'vuex';
 export default {
   components: {},
-  props: ["album"],
+  props: ['album'],
 
   data: function() {
     return {
       images: [
-        "https://placekitten.com/801/800",
-        "https://placekitten.com/802/800",
-        "https://placekitten.com/803/800",
-        "https://placekitten.com/804/800",
-        "https://placekitten.com/805/800",
-        "https://placekitten.com/806/800",
-        "https://placekitten.com/807/800",
-        "https://placekitten.com/808/800",
-        "https://placekitten.com/809/800",
+        'https://placekitten.com/801/800',
+        'https://placekitten.com/802/800',
+        'https://placekitten.com/803/800',
+        'https://placekitten.com/804/800',
+        'https://placekitten.com/805/800',
+        'https://placekitten.com/806/800',
+        'https://placekitten.com/807/800',
+        'https://placekitten.com/808/800',
+        'https://placekitten.com/809/800',
       ],
       imagees: [
-        "https://i.wifegeek.com/200426/f9459c52.jpg",
-        "https://i.wifegeek.com/200426/5ce1e1c7.jpg",
-        "https://i.wifegeek.com/200426/5fa51df3.jpg",
-        "https://i.wifegeek.com/200426/663181fe.jpg",
-        "https://i.wifegeek.com/200426/2d110780.jpg",
-        "https://i.wifegeek.com/200426/e73cd3fa.jpg",
-        "https://i.wifegeek.com/200426/15160d6e.jpg",
-        "https://i.wifegeek.com/200426/d0c881ae.jpg",
-        "https://i.wifegeek.com/200426/a154fc3d.jpg",
-        "https://i.wifegeek.com/200426/71d3aa60.jpg",
-        "https://i.wifegeek.com/200426/d17ce9a0.jpg",
-        "https://i.wifegeek.com/200426/7c4deca9.jpg",
-        "https://i.wifegeek.com/200426/64672676.jpg",
-        "https://i.wifegeek.com/200426/de6ab9c6.jpg",
-        "https://i.wifegeek.com/200426/d8bcb6a7.jpg",
-        "https://i.wifegeek.com/200426/4085d03b.jpg",
-        "https://i.wifegeek.com/200426/177ef44c.jpg",
-        "https://i.wifegeek.com/200426/d74d9040.jpg",
-        "https://i.wifegeek.com/200426/81e24a47.jpg",
-        "https://i.wifegeek.com/200426/43e2e8bb.jpg",
+        'https://i.wifegeek.com/200426/f9459c52.jpg',
+        'https://i.wifegeek.com/200426/5ce1e1c7.jpg',
+        'https://i.wifegeek.com/200426/5fa51df3.jpg',
+        'https://i.wifegeek.com/200426/663181fe.jpg',
+        'https://i.wifegeek.com/200426/2d110780.jpg',
+        'https://i.wifegeek.com/200426/e73cd3fa.jpg',
+        'https://i.wifegeek.com/200426/15160d6e.jpg',
+        'https://i.wifegeek.com/200426/d0c881ae.jpg',
+        'https://i.wifegeek.com/200426/a154fc3d.jpg',
+        'https://i.wifegeek.com/200426/71d3aa60.jpg',
+        'https://i.wifegeek.com/200426/d17ce9a0.jpg',
+        'https://i.wifegeek.com/200426/7c4deca9.jpg',
+        'https://i.wifegeek.com/200426/64672676.jpg',
+        'https://i.wifegeek.com/200426/de6ab9c6.jpg',
+        'https://i.wifegeek.com/200426/d8bcb6a7.jpg',
+        'https://i.wifegeek.com/200426/4085d03b.jpg',
+        'https://i.wifegeek.com/200426/177ef44c.jpg',
+        'https://i.wifegeek.com/200426/d74d9040.jpg',
+        'https://i.wifegeek.com/200426/81e24a47.jpg',
+        'https://i.wifegeek.com/200426/43e2e8bb.jpg',
       ],
       index: 0,
     };
@@ -96,53 +81,53 @@ export default {
 
   methods: {
     ...mapActions({
-      downloadPic: "UserProfileOwner/downloadPic",
+      downloadPic: 'UserProfileOwner/downloadPic',
     }),
 
     showPic(url) {
       console.log(url);
       this.show_url = url;
-      this.$refs["Details"].show();
+      this.$refs['Details'].show();
     },
 
     downloadPic(image_id) {
-      console.log("downloading");
+      console.log('downloading');
 
       let loader = this.$loading.show({
         container: this.fullPage,
         canCancel: true,
         onCancel: this.onCancel,
-        color: "#e75c18",
+        color: '#e75c18',
       });
       this.downloadPic(image_id)
-        .then((response) => {
+        .then(response => {
           var fileURL = window.URL.createObjectURL(new Blob([response.data]));
-          var fileLink = document.createElement("a");
+          var fileLink = document.createElement('a');
 
           fileLink.href = fileURL;
-          fileLink.setAttribute("download", "file.jpg");
+          fileLink.setAttribute('download', 'file.jpg');
           document.body.appendChild(fileLink);
 
           fileLink.click();
           this.flashMessage.show({
-            status: "success",
-            message: "Image Downloaded",
+            status: 'success',
+            message: 'Image Downloaded',
           });
           loader.hide();
         })
-        .catch((err) => {
+        .catch(err => {
           this.sending = false;
           if (err.response.status == 422) {
             console.log({ err: err });
             this.flashMessage.show({
-              status: "error",
+              status: 'error',
               message: err.response.data.message,
             });
             loader.hide();
           } else {
             this.flashMessage.show({
-              status: "error",
-              message: "Unable to download ",
+              status: 'error',
+              message: 'Unable to download ',
             });
             console.log({ err: err });
             loader.hide();

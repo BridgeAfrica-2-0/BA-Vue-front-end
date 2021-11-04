@@ -2,14 +2,7 @@
   <div>
     <div class="mt-3 d-block d-md-none" v-if="selectedIdd == '0'">
       <div class="d-block d-md-none" style="margin-top: 30px">
-        <ly-tab
-          v-model="seetings_id"
-          :items="items"
-          :options="options"
-          class="center-ly"
-          vertical
-        >
-        </ly-tab>
+        <ly-tab v-model="seetings_id" :items="items" :options="options" class="center-ly" vertical> </ly-tab>
       </div>
 
       <div class="mt-3 d-block d-md-none" v-if="seetings_id == '0'">
@@ -53,13 +46,7 @@
       <b-col cols="10">
         <div class="bv-example-row">
           <div>
-            <b-tabs
-              pills
-              v-model="tabIndex"
-              vertical
-              class="itzlala"
-              nav-wrapper-class="w-15"
-            >
+            <b-tabs pills v-model="tabIndex" vertical class="itzlala" nav-wrapper-class="w-15">
               <b-tab title="General">
                 <b-card-text> <General /> </b-card-text
               ></b-tab>
@@ -108,26 +95,26 @@
 </template>
 
 <script>
-import General from "@/components/businessOwner/settings/general";
+import General from '@/components/businessOwner/settings/general';
 
-import Roles from "@/components/businessOwner/settings/roles";
+import Roles from '@/components/businessOwner/settings/roles';
 
-import Info from "@/components/businessOwner/settings/info";
+import Info from '@/components/businessOwner/settings/info';
 
-import Website from "@/components/businessOwner/settings/website";
+import Website from '@/components/businessOwner/settings/website';
 
-import Payment from "@/components/businessOwner/settings/payment";
+import Payment from '@/components/businessOwner/settings/payment';
 
-import Blocking from "@/components/businessOwner/settings/blocking";
-import Notification from "@/components/businessOwner/notification";
-import LyTab from "@/tab/src/index.vue";
-import Pending from "@/components/businessOwner/pending";
-import Insight from "@/components/businessOwner/insight";
+import Blocking from '@/components/businessOwner/settings/blocking';
+import Notification from '@/components/businessOwner/notification';
+import LyTab from '@/tab/src/index.vue';
+import Pending from '@/components/businessOwner/pending';
+import Insight from '@/components/businessOwner/insight';
 
 export default {
-  name: "settings",
+  name: 'settings',
 
-  props: ["currenttab"],
+  props: ['currenttab'],
 
   watch: {
     currenttab: {
@@ -136,23 +123,23 @@ export default {
         console.log(newVal, oldVal);
 
         if (newVal == 3) {
-          this.selectedIdd = "8";
-          this.tabIndex = "5";
+          this.selectedIdd = '8';
+          this.tabIndex = '5';
         }
 
         if (newVal == 2) {
-          this.selectedIdd = "6";
-          this.tabIndex = "1";
+          this.selectedIdd = '6';
+          this.tabIndex = '1';
         }
 
         if (newVal == 4) {
-          this.selectedIdd = "7";
-          this.tabIndex = "4";
+          this.selectedIdd = '7';
+          this.tabIndex = '4';
         }
 
         if (newVal == 5) {
-          this.selectedIdd = "0";
-          this.tabIndex = "0";
+          this.selectedIdd = '0';
+          this.tabIndex = '0';
         }
       },
     },
@@ -179,17 +166,17 @@ export default {
       seetings_id: 0,
       bottomSelectedId: 0,
       items: [
-        { label: "General" },
+        { label: 'General' },
 
-        { label: "Business Info" },
-        { label: "Business Roles" },
-        { label: "payment " },
-        { label: "Account Type" },
+        { label: 'Business Info' },
+        { label: 'Business Roles' },
+        { label: 'payment ' },
+        { label: 'Account Type' },
 
-        { label: "Blocking" },
+        { label: 'Blocking' },
       ],
       options: {
-        activeColor: "#1d98bd",
+        activeColor: '#1d98bd',
       },
     };
   },

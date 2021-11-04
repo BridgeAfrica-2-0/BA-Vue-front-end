@@ -25,22 +25,22 @@
 </template>
 
 <script>
-import navbar from "@/components/navbar";
-import Footer from "@/components/footer";
-import ValidatePay from "@/components/businessf/tabs/owner/validatePay";
+import navbar from '@/components/navbar';
+import Footer from '@/components/footer';
+import ValidatePay from '@/components/businessf/tabs/owner/validatePay';
 
 export default {
-  name: "confirmPayment",
+  name: 'confirmPayment',
   components: {
     ValidatePay,
     navbar,
-    Footer
+    Footer,
   },
   data() {
     return {};
   },
   computed: {},
-  methods: {}
+  methods: {},
 };
 </script>
 

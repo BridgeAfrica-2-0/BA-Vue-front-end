@@ -1,9 +1,5 @@
 <template>
-  <a
-    class="ly-tab-item"
-    :style="$parent.value === id ? activeStyle : {}"
-    @click="onItemClicked"
-  >
+  <a class="ly-tab-item" :style="$parent.value === id ? activeStyle : {}" @click="onItemClicked">
     <div class="ly-tab-item-icon" v-if="$parent.fixBottom">
       <slot name="icon"></slot>
     </div>
@@ -13,24 +9,24 @@
 
 <script>
 export default {
-  name: "LyTabItem",
+  name: 'LyTabItem',
   computed: {
     activeStyle() {
       return {
-        color: "#e75c18"
+        color: '#e75c18',
       };
-    }
+    },
   },
   data() {
     return {
-      id: (this.$parent.$children.length || 1) - 1
+      id: (this.$parent.$children.length || 1) - 1,
     };
   },
   methods: {
     onItemClicked() {
-      this.$parent.$emit("input", this.id);
-    }
-  }
+      this.$parent.$emit('input', this.id);
+    },
+  },
 };
 </script>
 
@@ -45,7 +41,7 @@ export default {
     text-align: center;
     cursor: default;
 
-    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
     font-weight: normal;
     font-size: 16px;
     line-height: 20px;
@@ -62,7 +58,7 @@ export default {
     text-align: center;
     cursor: default;
 
-    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
     font-weight: normal;
     font-size: 12px;
     line-height: 20px;

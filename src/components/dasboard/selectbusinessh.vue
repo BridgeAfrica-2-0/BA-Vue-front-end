@@ -17,18 +17,18 @@
 
 <script>
 export default {
-  name: "selectbusinessh",
+  name: 'selectbusinessh',
   data() {
     return {
       selected: null,
       options: [
         { value: null, text: "Owner's Name" },
-        { value: "a", text: "Business Name 1" },
-        { value: "b", text: "Business Name 2" },
-        { value: "c", text: "Business Name 3" }
-      ]
+        { value: 'a', text: 'Business Name 1' },
+        { value: 'b', text: 'Business Name 2' },
+        { value: 'c', text: 'Business Name 3' },
+      ],
     };
-  }
+  },
 };
 </script>
 

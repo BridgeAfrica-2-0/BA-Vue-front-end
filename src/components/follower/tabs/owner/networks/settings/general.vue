@@ -71,9 +71,7 @@
     </b-container>
 
     <div class="b-bottomn">
-      <b-button variant="primary" class="a-button-l text"
-        >Save Changes</b-button
-      >
+      <b-button variant="primary" class="a-button-l text">Save Changes</b-button>
       <br />
     </div>
   </b-container>
@@ -81,7 +79,7 @@
 
 <script>
 export default {
-  name: "general"
+  name: 'general',
 };
 </script>
 

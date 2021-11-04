@@ -11,11 +11,7 @@
             @click="showSubCat(category.category.id)"
             @mouseleave="hideSubCat(category.category.id)"
           >
-            <b-nav-item-dropdown
-              id="dropdown-1"
-              :text="category.category.name"
-              :ref="category.category.id"
-            >
+            <b-nav-item-dropdown id="dropdown-1" :text="category.category.name" :ref="category.category.id">
               <hr
                 style="
                   margin-top: -10px;
@@ -74,11 +70,7 @@
 
               <div>
                 <b-row>
-                  <b-col
-                    cols="6"
-                    v-for="(category, index) in categories.slice(6)"
-                    :key="index"
-                  >
+                  <b-col cols="6" v-for="(category, index) in categories.slice(6)" :key="index">
                     <b-dropdown-item class="ml-1" href="#">
                       <img
                         v-if="category.category.cat_image"
@@ -113,19 +105,19 @@
 
 <script>
 export default {
-  name: "subnav",
+  name: 'subnav',
   data() {
     return {};
   },
   computed: {
-    option(){
-      return[{},{}]
+    option() {
+      return [{}, {}];
     },
     categories() {
-      return this.$store.getters["marketSearch/getCategories"];
+      return this.$store.getters['marketSearch/getCategories'];
     },
     subCategories() {
-      return this.$store.getters["marketSearch/getSubCat"];
+      return this.$store.getters['marketSearch/getSubCat'];
     },
   },
   created() {
@@ -136,29 +128,29 @@ export default {
     getCategories() {
       let bussiness_id = this.$route.params;
       this.$store
-        .dispatch("marketSearch/getCategories", bussiness_id)
-        .then((res) => {
+        .dispatch('marketSearch/getCategories', bussiness_id)
+        .then(res => {
           // console.log("categories loaded!");
         })
-        .catch((err) => {
-          console.log("Error erro!");
+        .catch(err => {
+          console.log('Error erro!');
         });
     },
 
     category(category) {
-      this.$emit("category", category);
+      this.$emit('category', category);
       console.log(category);
     },
     showSubCat(catId, subCat) {
       // console.log("[debuging] ", subCat);
       this.$refs[catId][0].visible = true;
-      this.$emit("parentcategory", catId);
+      this.$emit('parentcategory', catId);
 
       // this.subCategories.push(subCat);
-      this.$store.commit("marketSearch/setSubCat", subCat);
+      this.$store.commit('marketSearch/setSubCat', subCat);
 
       if (!subCat.length) this.hideSubCat(catId);
-      console.log("Subcat:", this.subCategories);
+      console.log('Subcat:', this.subCategories);
 
       // // Search by categories
       this.searchProducts({ cat_id: catId });
@@ -171,23 +163,23 @@ export default {
 
     searchProducts(data) {
       this.$store
-        .dispatch("marketSearch/searchProducts", data)
-        .then((res) => {
+        .dispatch('marketSearch/searchProducts', data)
+        .then(res => {
           // console.log("categories loaded!");
         })
-        .catch((err) => {
-          console.log("Error erro!");
+        .catch(err => {
+          console.log('Error erro!');
         });
     },
     searchAll(data) {
-      console.log("the category is: ", data);
+      console.log('the category is: ', data);
       this.$store
-        .dispatch("allSearch/SEARCH", data)
-        .then((res) => {
+        .dispatch('allSearch/SEARCH', data)
+        .then(res => {
           // console.log("categories loaded!");
         })
-        .catch((err) => {
-          console.log("Error erro!");
+        .catch(err => {
+          console.log('Error erro!');
         });
     },
 
@@ -195,14 +187,14 @@ export default {
 
     onOverMore() {
       this.$refs.more.visible = true;
-      this.$emit("parentcategory", "more");
+      this.$emit('parentcategory', 'more');
     },
     showMoreSubCat(catId, subCat) {
-      console.log("[debuging] cat:  ", catId);
-      console.log("[debuging] subcat:  ", subCat);
+      console.log('[debuging] cat:  ', catId);
+      console.log('[debuging] subcat:  ', subCat);
 
       // this.subCategories.push(subCat);
-      this.$store.commit("marketSearch/setSubCat", subCat);
+      this.$store.commit('marketSearch/setSubCat', subCat);
       // console.log("Subcat:", this.subCategories);
 
       // // Search by categories
@@ -215,22 +207,22 @@ export default {
     getFilter(subCat) {
       // this.filterLoader = true;
       // this.noFilter = "";
-      console.log("[DEBUG] Subcategories: ", subCat);
+      console.log('[DEBUG] Subcategories: ', subCat);
 
       this.$store
-        .dispatch("marketSearch/getFilter", subCat.id)
-        .then((res) => {
+        .dispatch('marketSearch/getFilter', subCat.id)
+        .then(res => {
           this.searchProducts({ cat_id: subCat.cat_id, sub_cat: subCat.id });
-          console.log("Filters: ");
+          console.log('Filters: ');
           console.log(res.data.data);
           // if (res.data.data.length === 0) {
           //   this.noFilter = `No filter available for ${subCat.name}!`;
           // }
 
           // this.filterLoader = false;
-          this.$store.commit("marketSearch/setSubFilters", res.data.data);
+          this.$store.commit('marketSearch/setSubFilters', res.data.data);
         })
-        .catch((err) => {
+        .catch(err => {
           console.error(err);
           this.filterLoader = false;
         });

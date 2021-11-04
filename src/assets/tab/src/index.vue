@@ -14,52 +14,52 @@
 </template>
 
 <script>
-import LyTabbar from "./tabbar";
-import LyTabItem from "./tab-item";
+import LyTabbar from './tabbar';
+import LyTabItem from './tab-item';
 
 export default {
-  name: "LyTab",
+  name: 'LyTab',
   components: {
     LyTabbar,
-    LyTabItem
+    LyTabItem,
   },
   props: {
     value: {
       type: Number,
-      default: 0
+      default: 0,
     },
     items: {
       type: Array,
       default() {
         return [];
-      }
+      },
     },
     options: {
       type: Object,
       default() {
         return {};
-      }
-    }
+      },
+    },
   },
   data() {
     return {
-      selectedId: this.value
+      selectedId: this.value,
     };
   },
   computed: {
     labelKey() {
-      return this.options.labelKey || "label";
-    }
+      return this.options.labelKey || 'label';
+    },
   },
   watch: {
     value(value) {
       this.selectedId = value;
     },
     selectedId(value) {
-      this.$emit("input", value);
-      this.$emit("change", this.items[value], value);
-    }
-  }
+      this.$emit('input', value);
+      this.$emit('change', this.items[value], value);
+    },
+  },
 };
 </script>
 

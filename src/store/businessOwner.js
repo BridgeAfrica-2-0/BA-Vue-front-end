@@ -8,7 +8,7 @@ export default {
     success: {
       state: false,
       succes: false,
-      msg: "",    
+      msg: '',
     },
     notifications: [],
     checked: false,
@@ -18,7 +18,7 @@ export default {
     pendingPosts: [],
 
     Following: [],
-    Followers: [],   
+    Followers: [],
 
     peopleFollowing: [],
     peopleFollowers: [],
@@ -26,15 +26,14 @@ export default {
     CommunityBusiness: [],
     communityTotal: [],
 
-    NcommunityFollower: { "network_followers": [], "total_network_follower": 0 },
-    NcommunityFollowing: { "network_following": [], "total_network_following": 0 },
-    BcommunityFollower: { "business_followers": [], "total_business_follower": 0 },
-    BcommunityFollowing: { "business_following": [], "total_business_following": 0 },
+    NcommunityFollower: { network_followers: [], total_network_follower: 0 },
+    NcommunityFollowing: { network_following: [], total_network_following: 0 },
+    BcommunityFollower: { business_followers: [], total_business_follower: 0 },
+    BcommunityFollowing: { business_following: [], total_business_following: 0 },
 
-    UcommunityFollower: { "user_followers": [], "total_user_follower": 0 },
-    UcommunityFollowing: { "user_following": [], "total_user_following": 0 },
+    UcommunityFollower: { user_followers: [], total_user_follower: 0 },
+    UcommunityFollowing: { user_following: [], total_user_following: 0 },
     Tcommunity: [],
-
 
     businessInfo: [],
     albums: [],
@@ -132,7 +131,7 @@ export default {
           lng: -6.249487,
         },
       },
-    ]
+    ],
   },
   getters: {
     getAlbums(state) {
@@ -140,7 +139,7 @@ export default {
     },
 
     getalbumImages(state) {
-      return state.albumImages
+      return state.albumImages;
     },
 
     getdetails(state) {
@@ -226,17 +225,25 @@ export default {
   mutations: {
     //set media data
     updateAlbum(state, payload) {
-      const newState = state.albums.map(album => (album.id == payload.id) ? Object.assign(album, { name: payload.name }) : album)
-      state.albums = newState
+      const newState = state.albums.map(album =>
+        album.id == payload.id ? Object.assign(album, { name: payload.name }) : album,
+      );
+      state.albums = newState;
     },
 
     updateAlbumItem(state, payload) {
-      const newState = state.albums.map(album => (album.id == payload.id) ? Object.assign(album, { items: ('remove' == payload.action) ? parseInt(album.items) - 1 : parseInt(album.items) + 1 }) : album)
-      state.albums = newState
+      const newState = state.albums.map(album =>
+        album.id == payload.id
+          ? Object.assign(album, {
+              items: 'remove' == payload.action ? parseInt(album.items) - 1 : parseInt(album.items) + 1,
+            })
+          : album,
+      );
+      state.albums = newState;
     },
 
     removeAlbum(state, uuid) {
-      state.albums = state.albums.filter(album => album.id != uuid)
+      state.albums = state.albums.filter(album => album.id != uuid);
     },
 
     updateUserBusinessInsights(state, payload) {
@@ -375,28 +382,20 @@ export default {
     },
 
     loadMore({ commit }, url) {
-
-      return axios.get(url)
-        .then((data) => {
-          return data;
-        });
-
+      return axios.get(url).then(data => {
+        return data;
+      });
     },
 
     async loadUserBusinessAbout(context, payload) {
       let response_ = null;
       const id_Business = 2;
-      await axios("business/info" +
-          "/" +
-          payload.business_id,
-        {
-          method: "GET",
-          headers: {
-            Accept: "application/json",
-           
-          }
-        }
-      )
+      await axios('business/info' + '/' + payload.business_id, {
+        method: 'GET',
+        headers: {
+          Accept: 'application/json',
+        },
+      })
         .then(response => {
           if (response.status !== 200 && response.status !== 201) {
             throw 'Error from the server';
@@ -416,38 +415,32 @@ export default {
       return response_;
     },
 
-
     async updateUserBusinessAbout(context, payload) {
       let response_ = null;
       const id_Business = 47;
-      await axios( "business/update" +
-          "/" +
-          payload.business_id,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json",
-           
-          },
-          body: JSON.stringify({
-            name: payload.business_about.name,
-            category: payload.business_about.category,
-            subCategoryId: payload.business_about.subCategoryId,
-            filterId: payload.business_about.filterId,
-            keywords: payload.business_about.keywords,
-            phone: payload.business_about.phone,
-            email: payload.business_about.email,
-            country: payload.business_about.country,
-            region: payload.business_about.region,
-            division: payload.business_about.division,
-            council: payload.business_about.council,
-            locality: payload.business_about.locality,
-            city: payload.business_about.city,
-            openHours: payload.business_about.business_open_hours
-          })
-        }
-      )
+      await axios('business/update' + '/' + payload.business_id, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+        body: JSON.stringify({
+          name: payload.business_about.name,
+          category: payload.business_about.category,
+          subCategoryId: payload.business_about.subCategoryId,
+          filterId: payload.business_about.filterId,
+          keywords: payload.business_about.keywords,
+          phone: payload.business_about.phone,
+          email: payload.business_about.email,
+          country: payload.business_about.country,
+          region: payload.business_about.region,
+          division: payload.business_about.division,
+          council: payload.business_about.council,
+          locality: payload.business_about.locality,
+          city: payload.business_about.city,
+          openHours: payload.business_about.business_open_hours,
+        }),
+      })
         .then(response => {
           console.log('update user Business About response (1) +++++++', response);
           if (response.status !== 200 && response.status !== 201) {
@@ -524,82 +517,74 @@ export default {
       return response_;
     },
     getAlbumImages({ commit }, { businessId, albumId }) {
-      return axios.get("business/album/show/" + businessId + '/' + albumId).then(({ data }) => {
-        commit("setAlbumImages", data.data);
+      return axios.get('business/album/show/' + businessId + '/' + albumId).then(({ data }) => {
+        commit('setAlbumImages', data.data);
         console.log(data);
       });
     },
 
     getImages({ commit }, busineeId) {
-      return axios.get("business/post/media/" + busineeId).then(({ data }) => {
-        commit("setImages", data.data);
+      return axios.get('business/post/media/' + busineeId).then(({ data }) => {
+        commit('setImages', data.data);
         console.log(data);
       });
     },
 
     getAlbums({ commit }, busineeId) {
-      return axios.get("business/album/index/" + busineeId).then(({ data }) => {
-        commit("setAlbums", data.data);
+      return axios.get('business/album/index/' + busineeId).then(({ data }) => {
+        commit('setAlbums', data.data);
         console.log(data);
       });
     },
 
     ownerPost({ commit }, busineeId) {
-      return axios.get("business/show/post/" + busineeId).then(({ data }) => {
-        commit("ownerPost", data.data);
+      return axios.get('business/show/post/' + busineeId).then(({ data }) => {
+        commit('ownerPost', data.data);
         console.log(data);
       });
     },
 
     ownerPostImages({ commit }, busineeId) {
-      return axios.get("business/show/images/" + busineeId).then(({ data }) => {
-        commit("ownerPostImages", data.data);
+      return axios.get('business/show/images/' + busineeId).then(({ data }) => {
+        commit('ownerPostImages', data.data);
         console.log(data);
       });
     },
 
     businessInfo({ commit }, busineeId) {
-      return axios.get("business/info/" + busineeId).then(({ data }) => {
-        commit("setBusinessInfo", data.data);
+      return axios.get('business/info/' + busineeId).then(({ data }) => {
+        commit('setBusinessInfo', data.data);
         console.log(data);
       });
     },
 
     CommunityBusiness({ commit }, businessId) {
-      return axios
-        .get("business/community/business/" + businessId)
-        .then(({ data }) => {
-          commit("setCommunityBusiness", data.data);
-          console.log(data);
-        });
+      return axios.get('business/community/business/' + businessId).then(({ data }) => {
+        commit('setCommunityBusiness', data.data);
+        console.log(data);
+      });
     },
 
     async createAlbum({ commit }, { id, data }) {
-      const res = await axios.post("business/album/create/" + id, data);
-      commit("newAlbum", res.data);
+      const res = await axios.post('business/album/create/' + id, data);
+      commit('newAlbum', res.data);
     },
     CommunityPeople({ commit }, businessId) {
-      return axios
-        .get("business/community/people/" + businessId)
-        .then(({ data }) => {
-          commit("setCommunityPeople", data.data);
-          console.log(data);
-        });
-    },
-
-
-
-    updateAlbum({ commit }, payload) {
-      return axios.post(
-        "business/album/update/" + payload.url + "/" + payload.id,
-        {
-          name: payload.name,
-        }
-      ).then(({ data }) => {
-
-        commit("upAlbum", data.data);
+      return axios.get('business/community/people/' + businessId).then(({ data }) => {
+        commit('setCommunityPeople', data.data);
         console.log(data);
       });
+    },
+
+    updateAlbum({ commit }, payload) {
+      return axios
+        .post('business/album/update/' + payload.url + '/' + payload.id, {
+          name: payload.name,
+        })
+        .then(({ data }) => {
+          commit('upAlbum', data.data);
+          console.log(data);
+        });
     },
 
     async deletedAlbum({ commit }, { businessID, albumID }) {
@@ -611,20 +596,14 @@ export default {
     },
 
     async deleteAlbum({ commit }, name, album_id) {
-      const res = await axios.post(
-        "business/album/edit/" + this.url + "/" + album_id,
-        { name }
-      );
+      const res = await axios.post('business/album/edit/' + this.url + '/' + album_id, { name });
     },
 
-
     businessCommunityTotal({ commit }, businessId) {
-      return axios
-        .get("business/community/total/" + businessId)
-        .then(({ data }) => {
-          commit("setCommunityTotal", data.data);
-          console.log(data);
-        });
+      return axios.get('business/community/total/' + businessId).then(({ data }) => {
+        commit('setCommunityTotal', data.data);
+        console.log(data);
+      });
     },
 
     async signIn() {
@@ -673,7 +652,6 @@ export default {
         });
     },
 
-
     async addNetwork({ commit }, newNetwork) {
       console.log(newNetwork);
       axios
@@ -690,11 +668,11 @@ export default {
         });
     },
     //delete network
-    async deleteNetwork() { },
+    async deleteNetwork() {},
 
     // Edit a network
     async editNetwork({ dispatch, commit }, editedNetwork) {
-      commit("setLoader", true);
+      commit('setLoader', true);
       axios
         .put(`network/${editedNetwork.id}`, editedNetwork, {
           headers: {
@@ -842,8 +820,8 @@ export default {
     async downloadPic({ commit }, id) {
       return axios({
         url: `business/download/media/${id}`,
-        method: "get",
-        responseType: "blob"
+        method: 'get',
+        responseType: 'blob',
       });
     },
   },

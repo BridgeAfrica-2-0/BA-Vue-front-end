@@ -5,64 +5,31 @@
         <Product :product="product" />
       </div>
       <b-col v-if="loader" class="load">
-        <b-spinner
-          style="width: 7rem; height: 7rem;"
-          variant="primary"
-        ></b-spinner>
+        <b-spinner style="width: 7rem; height: 7rem;" variant="primary"></b-spinner>
       </b-col>
       <b-col v-if="products.lentgh < 1 && !loader" class="load">
         <p>No notifications to show !!</p>
       </b-col>
     </div>
-          <button class="button" @click="displayOrders">my orders</button>
-          <div class="orders"  >
-            
-            <Orders />
-          </div>
+    <button class="button" @click="displayOrders">my orders</button>
+    <div class="orders">
+      <Orders />
+    </div>
     <b-modal hide-footer title="Add product" v-model="showModal">
       <b-form>
         <b-row>
           <b-col cols="12" md="6">
-            <b-form-group
-              id="input-group-1"
-              label="Product Name"
-              label-for="input-1"
-              label-size="sm"
-            >
-              <b-form-input
-                id="input-1"
-                class="mt-1"
-                type="text"
-                v-model="newProduct.name"
-                required
-              ></b-form-input>
+            <b-form-group id="input-group-1" label="Product Name" label-for="input-1" label-size="sm">
+              <b-form-input id="input-1" class="mt-1" type="text" v-model="newProduct.name" required></b-form-input>
             </b-form-group>
 
-            <b-form-group
-              id="input-group-1"
-              label="Product Description"
-              label-for="input-1"
-              label-size="sm"
-            >
-              <b-textarea
-                id="input-1"
-                class="mt-2"
-                v-model="newProduct.description"
-                type="text"
-                required
-              ></b-textarea>
+            <b-form-group id="input-group-1" label="Product Description" label-for="input-1" label-size="sm">
+              <b-textarea id="input-1" class="mt-2" v-model="newProduct.description" type="text" required></b-textarea>
             </b-form-group>
           </b-col>
           <b-col cols="12" md="6">
             <div class="image-upload-wrap" @click="picImage">
-              <input
-                type="file"
-                name=""
-                @change="getImage"
-                accept="image/*"
-                id="image"
-                v-show="false"
-              />
+              <input type="file" name="" @change="getImage" accept="image/*" id="image" v-show="false" />
               <a href="#" data-toggle="modal" data-target="#createalbumModal">
                 <div class="drag-text">
                   <i class="fa fa-plus"></i>
@@ -74,62 +41,27 @@
           </b-col>
         </b-row>
 
-        <b-form-group
-          id="input-group-1"
-          label="Product Description"
-          label-for="input-1"
-          label-size="sm"
-        >
-          <b-form-input
-            v-model="newProduct.price"
-            class="mt-1"
-            id="price"
-          ></b-form-input>
+        <b-form-group id="input-group-1" label="Product Description" label-for="input-1" label-size="sm">
+          <b-form-input v-model="newProduct.price" class="mt-1" id="price"></b-form-input>
         </b-form-group>
 
-        <b-form-checkbox
-          value="1"
-          v-model="newProduct.on_discount"
-          unchecked-value="0"
-        >
+        <b-form-checkbox value="1" v-model="newProduct.on_discount" unchecked-value="0">
           <b-form-input class="mt-1" id="price"></b-form-input>
         </b-form-checkbox>
 
-        <b-form-checkbox
-          id="checkbox-1"
-          name="checkbox-1"
-          value="accepted"
-          unchecked-value="not_accepted"
-        >
+        <b-form-checkbox id="checkbox-1" name="checkbox-1" value="accepted" unchecked-value="not_accepted">
           This Product Is On Discount
         </b-form-checkbox>
 
-        <b-form-group
-          id="conditions"
-          label="Conditions"
-          label-for="input-1"
-          label-size="sm"
-        >
-          <b-form-input
-            v-model="newProduct.condition"
-            class="mt-1"
-            id="conditions"
-          ></b-form-input>
+        <b-form-group id="conditions" label="Conditions" label-for="input-1" label-size="sm">
+          <b-form-input v-model="newProduct.condition" class="mt-1" id="conditions"></b-form-input>
         </b-form-group>
 
-        <b-form-checkbox
-          value="1"
-          v-model="newProduct.is_service"
-          unchecked-value="0"
-        >
+        <b-form-checkbox value="1" v-model="newProduct.is_service" unchecked-value="0">
           This Item Is A Service ?
         </b-form-checkbox>
 
-        <b-form-checkbox
-          value="1"
-          v-model="newProduct.in_stock"
-          unchecked-value="0"
-        >
+        <b-form-checkbox value="1" v-model="newProduct.in_stock" unchecked-value="0">
           In stock
         </b-form-checkbox>
 
@@ -148,9 +80,9 @@
 </template>
 
 <script>
-import Product from "../product";
-import axios from "axios";
-import Orders from "@/views/businessOwnerOrders";
+import Product from '../product';
+import axios from 'axios';
+import Orders from '@/views/businessOwnerOrders';
 export default {
   data() {
     return {
@@ -159,40 +91,40 @@ export default {
       load: false,
       loader: false,
       newProduct: {
-        name: "",
-        description: "",
-        picture: "",
-        price: "",
-        in_stock: "",
+        name: '',
+        description: '',
+        picture: '',
+        price: '',
+        in_stock: '',
         on_discount: null,
-        discount_price: "",
-        condition: "",
+        discount_price: '',
+        condition: '',
         is_service: null,
       },
       products: [],
-      val: "",
-      msg: "",
+      val: '',
+      msg: '',
       success: false,
     };
   },
   components: {
     Product,
-    Orders
+    Orders,
   },
   beforeMount() {
     this.loader = true;
-    axios.defaults.headers.common["Authorization"] =
-      "Bearer " + localStorage.getItem("access_token");
+    axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('access_token');
     this.getProducts();
   },
   methods: {
-    displayOrders(){ 
-      this.status = !this.status ;
-      console.log("----"+ this.status);
+    displayOrders() {
+      this.status = !this.status;
+      console.log('----' + this.status);
     },
     getProducts() {
-      axios.get("market").then((res) => { console.log("-------"+res.data.data);
-        this.loader = false ;
+      axios.get('market').then(res => {
+        console.log('-------' + res.data.data);
+        this.loader = false;
 
         this.products = res.data.data.data;
       });
@@ -200,27 +132,27 @@ export default {
     addProduct() {
       this.load = true;
       let fd = new FormData();
-      fd.append("name", this.newProduct.name);
-      fd.append("description", this.newProduct.description);
-      fd.append("picture", this.newProduct.picture);
-      fd.append("price", this.newProduct.price);
-      fd.append("in_stock", this.newProduct.in_stock);
-      fd.append("on_discount", this.newProduct.on_discount);
-      fd.append("discount_price", this.newProduct.discount_price);
-      fd.append("condition", this.newProduct.condition);
-      fd.append("is_service", this.newProduct.is_service);
+      fd.append('name', this.newProduct.name);
+      fd.append('description', this.newProduct.description);
+      fd.append('picture', this.newProduct.picture);
+      fd.append('price', this.newProduct.price);
+      fd.append('in_stock', this.newProduct.in_stock);
+      fd.append('on_discount', this.newProduct.on_discount);
+      fd.append('discount_price', this.newProduct.discount_price);
+      fd.append('condition', this.newProduct.condition);
+      fd.append('is_service', this.newProduct.is_service);
 
       axios
-        .post("market", fd)
-        .then((res) => {
+        .post('market', fd)
+        .then(res => {
           this.load = false;
-          (this.success = true), (this.val = "success");
-          this.msg = "Operation was successful !!";
+          (this.success = true), (this.val = 'success');
+          this.msg = 'Operation was successful !!';
           this.getProducts();
         })
-        .catch((err) => {
+        .catch(err => {
           this.load = false;
-          (this.success = true), (this.val = "danger");
+          (this.success = true), (this.val = 'danger');
           this.msg = "Something wen't wrong !!";
 
           setTimeout(() => {
@@ -229,7 +161,7 @@ export default {
         });
     },
     picImage() {
-      document.querySelector("#image").click();
+      document.querySelector('#image').click();
     },
     getImage(e) {
       this.newProduct.picture = e.target.files[0];

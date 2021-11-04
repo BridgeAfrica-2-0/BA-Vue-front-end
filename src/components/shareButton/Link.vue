@@ -12,12 +12,11 @@
   </b-list-group-item>
 </template>
 
-
 <script>
-import Button from "@/components/Button";
+import Button from '@/components/Button';
 
 export default {
-  name: "Link",
+  name: 'Link',
 
   props: {
     contact: {
@@ -33,14 +32,14 @@ export default {
   },
 
   data: () => ({
-    loading:false
+    loading: false,
   }),
 
   methods: {
-    share: async function () {
-      this.loading = true
+    share: async function() {
+      this.loading = true;
       const data = {
-        [this.type]: "",
+        [this.type]: '',
         post_id: this.post.post_id,
         source_id: this.post.user_id,
         target_id: this.contact.target_id,
@@ -48,7 +47,7 @@ export default {
 
       const request = await this.$repository.share.userPost(data);
 
-      this.loading = false
+      this.loading = false;
     },
   },
 };

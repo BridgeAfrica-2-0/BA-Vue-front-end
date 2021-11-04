@@ -2,9 +2,7 @@
   <div>
     <b-row class="mt-4">
       <b-col cols="12">
-        <h4 class="font-weight-bolder d-inline-block">
-          <b-icon-person-plus></b-icon-person-plus> Membership Requests
-        </h4>
+        <h4 class="font-weight-bolder d-inline-block"><b-icon-person-plus></b-icon-person-plus> Membership Requests</h4>
         <span class="float-right">35 Pending</span>
 
         <hr width="100%" />
@@ -22,15 +20,9 @@
               </h5>
             </span>
             <span class="float-right mt-1">
-              <b-dropdown
-                size="lg"
-                variant="link"
-                toggle-class="text-decoration-none"
-                no-caret
-              >
+              <b-dropdown size="lg" variant="link" toggle-class="text-decoration-none" no-caret>
                 <template #button-content>
-                  <b-icon-three-dots-vertical></b-icon-three-dots-vertical
-                  ><span class="sr-only">Settings</span>
+                  <b-icon-three-dots-vertical></b-icon-three-dots-vertical><span class="sr-only">Settings</span>
                 </template>
                 <b-dropdown-item href="#">
                   Approve
@@ -63,29 +55,29 @@
 
 <script>
 export default {
-  name: "memberShip",
+  name: 'memberShip',
   data() {
     return {
       perPage: 3,
       currentPage: 1,
       items: [
-        { id: 1, first_name: "Fred", last_name: "Flintstone" },
-        { id: 2, first_name: "Wilma", last_name: "Flintstone" },
-        { id: 3, first_name: "Barney", last_name: "Rubble" },
-        { id: 4, first_name: "Betty", last_name: "Rubble" },
-        { id: 5, first_name: "Pebbles", last_name: "Flintstone" },
-        { id: 6, first_name: "Bamm Bamm", last_name: "Rubble" },
-        { id: 7, first_name: "The Great", last_name: "Gazzoo" },
-        { id: 8, first_name: "Rockhead", last_name: "Slate" },
-        { id: 9, first_name: "Pearl", last_name: "Slaghoople" }
-      ]
+        { id: 1, first_name: 'Fred', last_name: 'Flintstone' },
+        { id: 2, first_name: 'Wilma', last_name: 'Flintstone' },
+        { id: 3, first_name: 'Barney', last_name: 'Rubble' },
+        { id: 4, first_name: 'Betty', last_name: 'Rubble' },
+        { id: 5, first_name: 'Pebbles', last_name: 'Flintstone' },
+        { id: 6, first_name: 'Bamm Bamm', last_name: 'Rubble' },
+        { id: 7, first_name: 'The Great', last_name: 'Gazzoo' },
+        { id: 8, first_name: 'Rockhead', last_name: 'Slate' },
+        { id: 9, first_name: 'Pearl', last_name: 'Slaghoople' },
+      ],
     };
   },
   computed: {
     rows() {
       return this.items.length;
-    }
-  }
+    },
+  },
 };
 </script>
 

@@ -3,13 +3,7 @@
     <navbar />
 
     <div class="container-fluid lynetowrk">
-      <ly-tab
-        v-model="selectedId"
-        :items="items"
-        :options="options"
-        @change="handleChange"
-      >
-      </ly-tab>
+      <ly-tab v-model="selectedId" :items="items" :options="options" @change="handleChange"> </ly-tab>
       <hr />
     </div>
 
@@ -20,11 +14,7 @@
             <Parent />
           </b-col>
 
-          <b-col
-            lg="7"
-            xl="8"
-            class="order-sm-0 mt-sm-10 mt-md-10 mt-xl-0  marg-tap"
-          >
+          <b-col lg="7" xl="8" class="order-sm-0 mt-sm-10 mt-md-10 mt-xl-0  marg-tap">
             <Default />
           </b-col>
         </b-row>
@@ -64,19 +54,19 @@
 </template>
 
 <script>
-import navbar from "@/components/navbar";
-import Footer from "@/components/footer";
-import Default from "@/components/businessf/tabs/owner/networks/defaultNetworks";
+import navbar from '@/components/navbar';
+import Footer from '@/components/footer';
+import Default from '@/components/businessf/tabs/owner/networks/defaultNetworks';
 
-import Inbox from "@/components/businessf/tabs/owner/networks/inbox";
-import General from "@/components/businessf/tabs/owner/networks/general";
+import Inbox from '@/components/businessf/tabs/owner/networks/inbox';
+import General from '@/components/businessf/tabs/owner/networks/general';
 
-import LyTab from "@/tab/src/index.vue";
+import LyTab from '@/tab/src/index.vue';
 
-import Parent from "@/components/businessf/tabs/owner/networks/parent";
+import Parent from '@/components/businessf/tabs/owner/networks/parent';
 
 export default {
-  name: "networks",
+  name: 'networks',
   components: {
     General,
 
@@ -94,20 +84,20 @@ export default {
       bottomSelectedId: 0,
 
       items: [
-        { label: "Home ", icon: "fas fa-home fa-lg " },
+        { label: 'Home ', icon: 'fas fa-home fa-lg ' },
 
-        { label: "Inbox", icon: "fas fa-comments fa-lg " },
-        { label: "Notification", icon: "fas fa-bell fa-lg" },
-        { label: "Member Request", icon: "fas  fa-user-plus fa-lg" },
-        { label: "Pending Post", icon: "fas fa-sync fa-lg" },
+        { label: 'Inbox', icon: 'fas fa-comments fa-lg ' },
+        { label: 'Notification', icon: 'fas fa-bell fa-lg' },
+        { label: 'Member Request', icon: 'fas  fa-user-plus fa-lg' },
+        { label: 'Pending Post', icon: 'fas fa-sync fa-lg' },
 
-        { label: "Keyword Alert", icon: "fas fa-exclamation-triangle fa-lg" },
-        { label: "Roles", icon: "fas fa-user-cog fa-lg" },
-        { label: "Settings", icon: "fas fa-cog fa-lg" },
+        { label: 'Keyword Alert', icon: 'fas fa-exclamation-triangle fa-lg' },
+        { label: 'Roles', icon: 'fas fa-user-cog fa-lg' },
+        { label: 'Settings', icon: 'fas fa-cog fa-lg' },
       ],
 
       options: {
-        activeColor: "#32a400",
+        activeColor: '#32a400',
       },
     };
   },

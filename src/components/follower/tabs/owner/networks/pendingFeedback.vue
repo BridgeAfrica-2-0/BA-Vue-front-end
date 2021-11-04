@@ -1,8 +1,6 @@
 <template>
   <div>
-    <h5 class="font-weight-bolder d-inline-block">
-      <b-icon-star-fill></b-icon-star-fill> Pending Feedbacks
-    </h5>
+    <h5 class="font-weight-bolder d-inline-block"><b-icon-star-fill></b-icon-star-fill> Pending Feedbacks</h5>
     <span class="float-right">35 Pending</span>
 
     <hr width="100%" />
@@ -24,15 +22,9 @@
                   <h5 class="m-0 font-weight-bolder">
                     Mapoure Agrobusiness
                     <span class="float-right">
-                      <b-dropdown
-                        size="lg"
-                        variant="link"
-                        toggle-class="text-decoration-none"
-                        no-caret
-                      >
+                      <b-dropdown size="lg" variant="link" toggle-class="text-decoration-none" no-caret>
                         <template #button-content>
-                          <b-icon-three-dots-vertical></b-icon-three-dots-vertical
-                          ><span class="sr-only">Settings</span>
+                          <b-icon-three-dots-vertical></b-icon-three-dots-vertical><span class="sr-only">Settings</span>
                         </template>
                         <b-dropdown-item href="#">
                           Approve
@@ -43,25 +35,20 @@
                       </b-dropdown>
                     </span>
                   </h5>
-                  <p>
-                    1h Ago - <span class="text-primary">Feedback Type</span>
-                  </p>
+                  <p>1h Ago - <span class="text-primary">Feedback Type</span></p>
                 </b-col>
               </b-row>
               <b-row>
                 <b-col cols="12" class="mt-2">
                   <p class="text-justify">
-                    Lorem Ipsum is simply dummy text of the printing and
-                    typesetting industry. Lorem Ipsum has been the industry's
-                    standard dummy text ever since the 1500s, Lorem Ipsum is
-                    simply dummy text of the printing and typesetting industry.
-                    Lorem Ipsum has been the industry's standard dummy text ever
+                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+                    industry's standard dummy text ever since the 1500s, Lorem Ipsum is simply dummy text of the
+                    printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever
                     since the 1500s,
                     <br />
                     <br />
-                    Lorem Ipsum is simply dummy text of the printing and
-                    typesetting industry. Lorem Ipsum has been the industry's
-                    standard dummy text ever since the 1500s,
+                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+                    industry's standard dummy text ever since the 1500s,
                   </p>
                 </b-col>
               </b-row>
@@ -75,7 +62,7 @@
 
 <script>
 export default {
-  name: "pendingFeedback"
+  name: 'pendingFeedback',
 };
 </script>
 

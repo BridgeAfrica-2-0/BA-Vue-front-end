@@ -2,12 +2,12 @@
   <div class="txt">
     <b class="contact">Contact Infomation</b>
     <hr />
-    <div class="contact row" >
+    <div class="contact row">
       <div class="col">
         Mobile Phone:
       </div>
       <div class="col">
-       {{info.user.phone}}
+        {{ info.user.phone }}
       </div>
     </div>
   </div>
@@ -20,12 +20,10 @@ export default {
   },
   methods: {},
 
-    computed:{
-
-    info(){
+  computed: {
+    info() {
       return this.$store.state.follower.profileIntro;
-    }
-
+    },
   },
 };
 </script>

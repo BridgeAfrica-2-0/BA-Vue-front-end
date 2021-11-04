@@ -78,7 +78,6 @@
                 data-original-title=""
                 title=""
               />
-                
 
               <input
                 id="search-location"
@@ -135,7 +134,7 @@
 
               <div class="nav-item">
                 <a id="messages" class="nav-link" data-toggle="popover" role="button" data-original-title="" title=""
-                  ><span class="text-ored"><fas-icon class="primary" :icon="['fas', 'comment']" /></span
+                  ><span class="text-ored"><fas-icon class="primary" :icon="['fas', 'comment']"/></span
                 ></a>
                 <b-popover target="messages" triggers="hover" placement="top">
                   <div class="popover-body">
@@ -304,7 +303,6 @@
                         cursor-pointer
                       "
                     >
-
                       <div>
                         <img src="@/assets/img/profile-pic.jpg" class="rounded-circle" alt="" width="30" height="30" />
                       </div>
@@ -324,7 +322,6 @@
                         cursor-pointer
                       "
                     >
-
                       <div>
                         <img src="@/assets/img/profile-pic.jpg" class="rounded-circle" alt="" width="30" height="30" />
                       </div>
@@ -344,7 +341,6 @@
                         cursor-pointer
                       "
                     >
-
                       <div>
                         <img src="@/assets/img/profile-pic.jpg" class="rounded-circle" alt="" width="30" height="30" />
                       </div>
@@ -364,7 +360,6 @@
                         cursor-pointer
                       "
                     >
-
                       <div>
                         <img src="@/assets/img/profile-pic.jpg" class="rounded-circle" alt="" width="30" height="30" />
                       </div>
@@ -384,7 +379,6 @@
                         cursor-pointer
                       "
                     >
-
                       <div>
                         <img src="@/assets/img/profile-pic.jpg" class="rounded-circle" alt="" width="30" height="30" />
                       </div>
@@ -403,14 +397,12 @@
 
               <div class="nav-item" id="profilepic">
                 <a class="nav-link text-dark" href="">
-                  <span
-                    ><img :src="auth.user.profile_picture" class="rounded-circle" alt="" width="50" height="50"
-                  /></span>
+                  <span><img :src="user.profile_picture" class="rounded-circle" alt="" width="50" height="50"/></span>
                 </a>
               </div>
 
               <b-tooltip target="profilepic" variant="light" triggers="hover">
-                {{ auth.user.name }}
+                {{ user.name }}
               </b-tooltip>
 
               <div class="nav-item">
@@ -431,29 +423,27 @@
 
                     <hr />
 
-
                     <router-link
                       to="/myorders/"
                       class="other-menu suggest-item cursor-pointer text-decoration-none text-dark"
-
                     >
-                      <span class="mr-2"><fas-icon class="violet search" :icon="['fas', 'cart-arrow-down']" /></span>
+                      <span class="mr-2"><fas-icon class="violet search" :icon="['fas', 'cart-arrow-down']"/></span>
                       My orders
                     </router-link>
                     <hr class="h-divider" />
 
                     <a href="/settings" class="other-menu suggest-item cursor-pointer text-decoration-none text-dark">
-                      <span class="mr-2"><fas-icon class="violet search" :icon="['fas', 'cogs']" /></span>
+                      <span class="mr-2"><fas-icon class="violet search" :icon="['fas', 'cogs']"/></span>
                       Account Settings
                     </a>
                     <hr class="h-divider" />
                     <div class="other-menu suggest-item cursor-pointer">
-                      <span class="mr-1"><fas-icon class="violet search" :icon="['fas', 'question']" /></span>
+                      <span class="mr-1"><fas-icon class="violet search" :icon="['fas', 'question']"/></span>
                       Help and Support
                     </div>
                     <hr class="h-divider" />
                     <div class="other-menu suggest-item cursor-pointer">
-                      <span class="mr-2"><fas-icon class="violet search" :icon="['fas', 'globe-americas']" /></span>
+                      <span class="mr-2"><fas-icon class="violet search" :icon="['fas', 'globe-americas']"/></span>
                       Language
                     </div>
                     <hr class="h-divider" />
@@ -466,7 +456,7 @@
                         text-decoration-none text-dark
                       "
                     >
-                      <span class="mr-2"><fas-icon class="violet search" :icon="['fas', 'sign-out-alt']" /></span>
+                      <span class="mr-2"><fas-icon class="violet search" :icon="['fas', 'sign-out-alt']"/></span>
                       Logout
                     </a>
                   </div>
@@ -484,7 +474,7 @@
                   <img src="@/assets/img/profile-pic.jpg" class="rounded-circle" alt="" width="30" height="30" />
                 </div>
                 <div class="d-flex flex-column ml-1 line-size">
-                  <div class="font-weight-bold">{{ auth.user.name }}</div>
+                  <div class="font-weight-bold">{{ user.name }}</div>
                   <div class="small text-muted">Active</div>
                 </div>
               </div>
@@ -503,26 +493,25 @@
 
             <hr class="mup" />
 
-
             <router-link to="/myorders/" class="other-menu suggest-item cursor-pointer text-decoration-none text-dark">
-              <span class="mr-2"><fas-icon class="violet search" :icon="['fas', 'cart-arrow-down']" /></span>
+              <span class="mr-2"><fas-icon class="violet search" :icon="['fas', 'cart-arrow-down']"/></span>
               My orders
             </router-link>
             <hr class="h-divider" />
 
             <a href="/settings" class="other-menu suggest-item cursor-pointer text-decoration-none text-dark">
-              <span class="mr-2"><fas-icon class="violet search" :icon="['fas', 'cogs']" /></span>
+              <span class="mr-2"><fas-icon class="violet search" :icon="['fas', 'cogs']"/></span>
 
               Account Settings
             </a>
             <hr class="h-divider" />
             <div class="other-menu suggest-item cursor-pointer">
-              <span class="mr-1"><fas-icon class="violet search" :icon="['fas', 'question']" /></span>
+              <span class="mr-1"><fas-icon class="violet search" :icon="['fas', 'question']"/></span>
               Help and Support
             </div>
             <hr class="h-divider" />
             <div class="other-menu suggest-item cursor-pointer">
-              <span class="mr-2"><fas-icon class="violet search" :icon="['fas', 'globe-americas']" /></span>
+              <span class="mr-2"><fas-icon class="violet search" :icon="['fas', 'globe-americas']"/></span>
               Language
             </div>
             <hr class="h-divider" />
@@ -535,7 +524,7 @@
                 text-decoration-none text-dark
               "
             >
-              <span class="mr-2"><fas-icon class="violet search" :icon="['fas', 'sign-out-alt']" /></span>
+              <span class="mr-2"><fas-icon class="violet search" :icon="['fas', 'sign-out-alt']"/></span>
               Logout
             </a>
           </div>
@@ -548,7 +537,6 @@
 </template>
 
 <script>
-
 import Button from '@/components/ButtonNavBarFind.vue';
 import Activity from '@/components/ShowActivity.vue';
 
@@ -559,19 +547,16 @@ export default {
   components: {
     Button,
     Activity,
-
   },
   props: {
     credentials: {
       type: Object,
-      default: function () {
+      default: function() {
         return {
-
           keyword: '',
           placeholder: '',
         };
       },
-
     },
   },
 
@@ -585,13 +570,8 @@ export default {
   computed: {
     ...mapGetters({
       hasLauchNetworkRequest: 'social/INIT',
-      user: 'auth/user',
-      social: 'social/AUTH',
+      user: 'auth/profilConnected',
     }),
-
-    auth() {
-      return this.social ? this.social : this.user;
-    },
   },
 
   created() {
@@ -609,14 +589,13 @@ export default {
       this.isActive = true;
     },
 
-
-    getNetworks: async function () {
+    getNetworks: async function() {
       let request = await this.$repository.share.getNetworks();
 
       if (request.success) this.setNetworks(request.data);
     },
 
-    getBusiness: async function () {
+    getBusiness: async function() {
       let request = await this.$repository.share.getBusiness();
 
       if (request.success) this.setBusiness(request.data);
@@ -635,7 +614,6 @@ export default {
         console.log(error);
       }
     },
-
 
     togglenav() {
       if (this.shownav == false) {

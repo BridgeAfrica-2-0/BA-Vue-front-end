@@ -4,31 +4,16 @@
     <hr />
 
     <div class="row" v-for="workPlace in work" :key="workPlace.id">
-      <b-list-group-item
-        class="d-flex align-items-center mb-4 item border-none"
-      >
-
+      <b-list-group-item class="d-flex align-items-center mb-4 item border-none">
         <div class="media-body">
           <h6 class="mb-0">
             <b>{{ workPlace.company_name }} ({{ workPlace.position }})</b>
           </h6>
-          <b
-            v-if="
-              workPlace.end_year || workPlace.end_month || workPlace.end_day
-            "
-          >
-            {{ workPlace.start_year }}/{{ workPlace.start_month }}/{{
-              workPlace.start_day
-            }}
-            - {{ workPlace.end_year }}/{{ workPlace.end_month }}/{{
-              workPlace.end_day
-            }}
+          <b v-if="workPlace.end_year || workPlace.end_month || workPlace.end_day">
+            {{ workPlace.start_year }}/{{ workPlace.start_month }}/{{ workPlace.start_day }} -
+            {{ workPlace.end_year }}/{{ workPlace.end_month }}/{{ workPlace.end_day }}
           </b>
-          <b v-else
-            >{{ workPlace.start_year }}/{{ workPlace.start_month }}/{{
-              workPlace.start_day
-            }}</b
-          >
+          <b v-else>{{ workPlace.start_year }}/{{ workPlace.start_month }}/{{ workPlace.start_day }}</b>
 
           <p class="mb-1">
             {{ workPlace.job_responsibilities }}

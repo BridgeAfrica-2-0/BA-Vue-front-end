@@ -11,11 +11,7 @@
         >
         </b-avatar>
 
-        <b-icon
-          icon="camera"
-          class=" cursor-pointer network-avatar-icon"
-          v-b-modal.modal-4
-        ></b-icon>
+        <b-icon icon="camera" class=" cursor-pointer network-avatar-icon" v-b-modal.modal-4></b-icon>
       </b-container>
 
       <br />
@@ -26,13 +22,7 @@
             <h6 class="  m-0 p-0 a-center network-name "><b> Heavy Gym </b></h6>
           </b-col>
           <b-col cols="6">
-            <b-button
-              variant="primary"
-              size="sm"
-              @click="addNetwork"
-              style="width: 120px;"
-              class="a-center"
-            >
+            <b-button variant="primary" size="sm" @click="addNetwork" style="width: 120px;" class="a-center">
               <b-icon icon="pencil"></b-icon> Edit
             </b-button>
           </b-col>
@@ -61,10 +51,9 @@
 
         <h6 class="mt-2 font-weight-bolder title ">About</h6>
         <p class="text-justify text">
-          Lorem Ipsum is simply dummy text of the printing and typesetting
-          industry. Lorem Ipsum has been the industry's standard dummy text ever
-          since the 1500s, when an unknown printer took a galley of type and
-          scrambled it to make a type specimen book.
+          Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
+          standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to
+          make a type specimen book.
           <span class="d-inline-block float-right">
             <a href="#">lire la Suite</a>
           </span>
@@ -84,8 +73,7 @@
             label-class="font-weight-bold pt-0"
             class="mb-0"
           >
-            <b-form-input id="network_name" placeholder="" required>
-            </b-form-input>
+            <b-form-input id="network_name" placeholder="" required> </b-form-input>
           </b-form-group>
 
           <b-form-group
@@ -111,8 +99,7 @@
             label-class="font-weight-bold pt-0"
             class="mb-0"
           >
-            <b-form-input id="network_name" placeholder="" required>
-            </b-form-input>
+            <b-form-input id="network_name" placeholder="" required> </b-form-input>
           </b-form-group>
 
           <b-form-group
@@ -132,8 +119,7 @@
             label-class="font-weight-bold pt-0"
             class="mb-0"
           >
-            <b-form-input id="network_name" placeholder="" required>
-            </b-form-input>
+            <b-form-input id="network_name" placeholder="" required> </b-form-input>
           </b-form-group>
 
           <b-form-group
@@ -143,8 +129,7 @@
             label-class="font-weight-bold pt-0"
             class="mb-0"
           >
-            <b-form-input id="network_name" placeholder="" required>
-            </b-form-input>
+            <b-form-input id="network_name" placeholder="" required> </b-form-input>
           </b-form-group>
 
           <b-form-group
@@ -157,9 +142,7 @@
             <b-form-checkbox name="check-button" switch> </b-form-checkbox>
           </b-form-group>
 
-          <b-button class="mt-2 " style="float:right" variant="primary">
-            Update Network</b-button
-          >
+          <b-button class="mt-2 " style="float:right" variant="primary"> Update Network</b-button>
         </b-form>
       </b-container>
     </b-modal>
@@ -167,10 +150,7 @@
     <b-modal id="modal-4" title="Upload Profile Picture">
       <div class="w3-container">
         <div class="row pb-3">
-          <div
-            class="col-sm-6 text-center"
-            style="border-right:1px solid #dee2e6;"
-          >
+          <div class="col-sm-6 text-center" style="border-right:1px solid #dee2e6;">
             <h1>
               <fas-icon class="primary" :icon="['fas', 'upload']" />
             </h1>
@@ -193,16 +173,16 @@
 </template>
 
 <script>
-import SidebarCommunity from "@/components/businessf/tabs/owner/networks/sidebarcommunity";
+import SidebarCommunity from '@/components/businessf/tabs/owner/networks/sidebarcommunity';
 
 export default {
-  name: "parent",
+  name: 'parent',
 
   data() {
     return {
       networkShow: true,
       showModal: false,
-      text: "",
+      text: '',
     };
   },
 
@@ -216,7 +196,7 @@ export default {
     },
 
     addNetwork() {
-      console.log("hello");
+      console.log('hello');
       this.showModal = !this.showModal;
     },
   },

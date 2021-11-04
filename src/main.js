@@ -148,13 +148,13 @@ Vue.use(VueGoogleMaps, {
 });
 
 
-import VueLoading from 'vue-loading-overlay';
-import 'vue-loading-overlay/dist/vue-loading.css';
+// import VueLoading from 'vue-loading-overlay';
+// import 'vue-loading-overlay/dist/vue-loading.css';
 
 import VueYoutube from 'vue-youtube'
  
 Vue.use(VueYoutube)
-Vue.use(VueLoading);
+// Vue.use(VueLoading);
 
 import VueAgile from 'vue-agile'
 
@@ -171,10 +171,7 @@ Vue.component("v-select", vSelect);
 
 import i18n from "./i18n";
 
-import VueEasyLightbox from 'vue-easy-lightbox'
 
-// Method 1. via Vue.use
-Vue.use(VueEasyLightbox)
 
 Vue.config.productionTip = false;
 var user = null;

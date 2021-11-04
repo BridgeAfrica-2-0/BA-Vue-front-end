@@ -22,9 +22,7 @@ export default {
 
 
   getters: {
-    getnetworkInfo(state) {
-        return state.networkInfo;
-    },
+
     getAlbums(state) {
       return state.albums;
     },
@@ -126,15 +124,6 @@ export default {
 
   actions: {
 
-    getnetworkInfo( {commit}, networkId ){
-      return axios
-      .get(`network/${networkId}/about/information`)
-      .then(({ data }) => {
-          commit("setnetworkInfo", data.data);
-        console.log(data);
-
-      })
-    },
 
     updateNetwork( {commit}, networkData ){
       console.log("networkData.path",networkData.path);

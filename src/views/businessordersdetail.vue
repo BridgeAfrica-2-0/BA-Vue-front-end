@@ -1,10 +1,10 @@
 <template >
   <div>
     <navbar />
-    <div class="container body">
+    <div class="container body p-0" >
       <h1>Order Details</h1>
 
-      <div class="card my-2 shadow">
+      <div class="card  my-2 shadow">
         <div class="card-body row">
           <div class="col">
             <span class="marge row">
@@ -64,10 +64,15 @@
         </div>
       </div>
 
-      <div class="card my-1 shadow">
-        <div class="card-body">
+      <div class="card my-1 shadow ">
+        <div class="card-body ">
           <div class="row container mx-5 rowmobile">
+
+             
+            
+
             <b-avatar  id="a1" class="avatar" text=" "></b-avatar>
+             
             <b-progress
               id="p1"
               :value="value"
@@ -78,6 +83,7 @@
             </b-progress>
 
             <b-avatar  id="a2" class="avatar" text=" "></b-avatar>
+            
             <b-progress
               id="p2"
               :value="value"
@@ -103,12 +109,23 @@
               variant="success"
               class="mb-3 size"
             ></b-progress>
+
+              <b-avatar  id="a5" class="avatar" text=" "></b-avatar>
+            <b-progress
+              id="p5"
+              :value="value"
+              :max="max"
+              variant="success"
+              class="mb-3 size"
+            ></b-progress>
+
           </div>
-          <div class="row sizestate">
-            <span class="col-3  "><h3>payment made</h3></span>
-            <span class="col-2 text-start "><h3>processing</h3></span>
-            <span class="col-2 text-start "><h3>complete</h3></span>
-            <span class="col-2 text-center"><h3>receive</h3></span>
+          <div class="row sizestate container">
+            <div class="col-2 text-center"><h3>order</h3></div>
+            <div class="col-2  text-center "><h3>processing</h3></div>
+            <div class="col-2 text-start "><h3 class="t">shipped</h3></div>
+            <div class="col-2 text-start "><h3 class="t">delivred</h3></div>
+             <div class="col-3 text-start "><h3 class="t">payment received</h3></div>
           </div>
 
           <div class="justify-content-between row my-5" v-for="i in 2" :key="i">
@@ -281,7 +298,7 @@ color: #e75c18;
     height: 15px;
 }
   .progress {
-  width: 200px;
+  width: 150px;
 }
 
 .marge {
@@ -347,6 +364,7 @@ h3 {
 /* .marge {
   margin-right: 380px;
 }*/
+
 .margtext .text-success{
   font-size: 10px !important;
  
@@ -382,7 +400,7 @@ height: 10px;
   margin-top: 4px;
   margin-left: -3px;
   margin-right: -3px;
-   width: 50px;
+   width: 45px;
 }
   
   h3 {
@@ -425,18 +443,18 @@ height: 10px;
 
 }
 .rowmobile{
-  margin-left: -5px !important;
+  margin-left: -10px !important;
 }
 
 .sizestate h3{
  font-size: 8px;
- margin-left: -18px;
+ margin-left: -28px;
  margin-top: -10px;
 
 }
 
 .shipad{
-  width: 325px !important;
+  width: 340px !important;
  
 }
  

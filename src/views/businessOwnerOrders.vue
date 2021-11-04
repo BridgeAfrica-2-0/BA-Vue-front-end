@@ -75,6 +75,8 @@
                     >
                       <b-dropdown-item>Archive</b-dropdown-item>
                       <b-dropdown-item>Delete</b-dropdown-item>
+                      <b-dropdown-item>shipped</b-dropdown-item>
+                    <b-dropdown-item>reshedule</b-dropdown-item>
                     </b-dropdown>
                   </div>
                 </div>
@@ -158,6 +160,8 @@
                     >
                       <b-dropdown-item>Archive</b-dropdown-item>
                       <b-dropdown-item>Delete</b-dropdown-item>
+                      <b-dropdown-item>shipped</b-dropdown-item>
+                    <b-dropdown-item>reshedule</b-dropdown-item>
                     </b-dropdown>
                   </div>
                 </div>
@@ -241,6 +245,8 @@
                     >
                       <b-dropdown-item>Archive</b-dropdown-item>
                       <b-dropdown-item>Delete</b-dropdown-item>
+                      <b-dropdown-item>shipped</b-dropdown-item>
+                    <b-dropdown-item>reshedule</b-dropdown-item>
                     </b-dropdown>
                   </div>
                 </div>
@@ -324,6 +330,8 @@
                     >
                       <b-dropdown-item>Archive</b-dropdown-item>
                       <b-dropdown-item>Delete</b-dropdown-item>
+                      <b-dropdown-item>shipped</b-dropdown-item>
+                    <b-dropdown-item>reshedule</b-dropdown-item>
                     </b-dropdown>
                   </div>
                 </div>
@@ -427,7 +435,7 @@
         </div>
 
         <b-avatar id="a3" class="avatar" text="3"></b-avatar>
-        <h2 class="text cursor" @click="changeElementType(3)">Shipped</h2>
+        <h2 class="text cursor" @click="changeElementType(3)"> Re-shedule</h2>
         <div
           id="p3"
           class="progress prog cursor gris"
@@ -443,7 +451,7 @@
         </div>
 
         <b-avatar id="a4" class="avatar" text="4"></b-avatar>
-        <h2 class="text cursor" @click="changeElementType(4)">Re-shedule</h2>
+        <h2 class="text cursor" @click="changeElementType(4)">Shipped</h2>
         <div
           id="p4"
           class="progress prog cursor gris"
@@ -487,11 +495,15 @@
                   >
                     <b-dropdown-item>Archive</b-dropdown-item>
                     <b-dropdown-item>Delete</b-dropdown-item>
+                    <b-dropdown-item>shipped</b-dropdown-item>
+                    <b-dropdown-item>reshedule</b-dropdown-item>
                   </b-dropdown>
                 </div>
               </div>
+              <router-link to="/business_owner/ordersdetail">
               <span class="gras">Order</span>
               <span class="text-success">#12324253</span> <br />
+              </router-link>
               <span class="flou">yaoundé 12/12/2021 12H00</span>
               <hr />
             </div>
@@ -565,6 +577,8 @@
                   >
                     <b-dropdown-item>Archive</b-dropdown-item>
                     <b-dropdown-item>Delete</b-dropdown-item>
+                    <b-dropdown-item>shipped</b-dropdown-item>
+                    <b-dropdown-item>reshedule</b-dropdown-item>
                   </b-dropdown>
                 </div>
               </div>
@@ -643,6 +657,8 @@
                   >
                     <b-dropdown-item>Archive</b-dropdown-item>
                     <b-dropdown-item>Delete</b-dropdown-item>
+                    <b-dropdown-item>shipped</b-dropdown-item>
+                    <b-dropdown-item>reshedule</b-dropdown-item>
                   </b-dropdown>
                 </div>
               </div>
@@ -721,6 +737,8 @@
                   >
                     <b-dropdown-item>Archive</b-dropdown-item>
                     <b-dropdown-item>Delete</b-dropdown-item>
+                    <b-dropdown-item>shipped</b-dropdown-item>
+                    <b-dropdown-item>reshedule</b-dropdown-item>
                   </b-dropdown>
                 </div>
               </div>
@@ -811,9 +829,9 @@ export default {
       } else if (p == 2) {
         this.etat = "In process";
       } else if (p == 3) {
-        this.etat = "Shipped";
-      } else if (p == 4) {
         this.etat = "Re-shedule";
+      } else if (p == 4) {
+        this.etat = "Shipped";
       }
       //transition partie desktop
       const a = document.getElementById("a" + p);

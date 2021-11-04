@@ -46,7 +46,8 @@ import myorders from "@/views/myOders"
 
 
 import welcome from "@/views/welcome";
-import ordersdetail from "@/views/odersDetail"
+import ordersdetail from "@/views/odersDetail";
+import businessordersdetail from "@/views/businessordersdetail"
 
 Vue.use(VueRouter);
 
@@ -61,6 +62,15 @@ const routes = [
     path: "/myorders/detail",
     name: "ordersdetail",
     component: ordersdetail,
+    // meta: {
+    //   auth: true,
+    // },
+  },
+
+  {
+    path: "/business_owner/ordersdetail",
+    name: "ordersdetail",
+    component: businessordersdetail,
     // meta: {
     //   auth: true,
     // },

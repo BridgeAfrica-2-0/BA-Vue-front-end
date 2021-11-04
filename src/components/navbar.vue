@@ -61,7 +61,7 @@
                   <option value="Yaounde " />
                 </datalist>
               </b-input-group>
-            </span>
+            </span> 
           </form>
 
           <span class="d-none d-lg-block">

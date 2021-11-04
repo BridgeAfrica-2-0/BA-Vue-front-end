@@ -12,9 +12,17 @@
             label-class="font-weight-bold pt-0"
             class="mb-0"
           >
+<<<<<<< HEAD
             <b-form-select v-model="selected">
               <b-form-select-option :value="null">{{$t("buinessf.Admin")}}</b-form-select-option>
               <b-form-select-option value="a">{{$t("buinessf.User")}}</b-form-select-option>
+=======
+            <b-form-select v-model="name">
+              <div v-for="following in followings" :key="following.id">
+                <b-form-select-option :value="NULL">Select Follower</b-form-select-option>
+                <b-form-select-option :value="following.name">{{following.name}}</b-form-select-option>
+              </div>
+>>>>>>> main
             </b-form-select>
           </b-form-group>
         </b-col>
@@ -27,15 +35,20 @@
             label-class="font-weight-bold pt-0"
             class="mb-0"
           >
-            <b-form-select v-model="selected" class="mb-3">
-              <b-form-select-option :value="null">Admin</b-form-select-option>
-              <b-form-select-option value="a">User</b-form-select-option>
+            <b-form-select v-model="role" class="mb-3">
+                <b-form-select-option :value="Admin">Admin</b-form-select-option>
+                <b-form-select-option :value="Editor">Editor</b-form-select-option>
+                <b-form-select-option :value="Users">Users</b-form-select-option>
             </b-form-select>
           </b-form-group>
         </b-col>
 
         <b-col>
+<<<<<<< HEAD
           <b-button variant="primary" class="">{{$t("buinessf.Assign")}}</b-button>
+=======
+          <b-button variant="primary" class="" @click="assignRole()">Assign</b-button>
+>>>>>>> main
         </b-col>
       </b-row>
 
@@ -185,8 +198,106 @@
 </template>
 
 <script>
+import { validationMixin } from "vuelidate";
+import axios from "axios";
+import { required, email, minLength } from "vuelidate/lib/validators";
 export default {
-  name: "roles"
+  name: "roles",
+  mixins: [validationMixin],
+  data() {
+			return {
+				followings:'',
+				allRoles:'',
+
+        form: {
+          name: "",
+          role: "",
+        },
+			}
+	},
+  validations: {
+    form: {
+      name: {
+        required,
+      },
+
+      role: {
+        required,
+      },
+    },
+  },
+
+  computed: {
+    followers() {
+      return this.$store.getters.getfollowers.followers;
+    },
+    roles() {
+      return this.$store.getters.getroles.roles;
+    },
+  },
+
+  
+  mounted(){
+    this.getFollowers() 
+    this.getRoles() 
+  },
+
+  methods:{
+     
+    getFollowers() {
+    this.$store
+      .dispatch("businessRole/getfollowers")
+      .then(response => {
+        this.followings=response.data.data;
+      })
+      .catch(err => {
+        console.log({ err: err });
+      });
+    },
+    getRoles() {
+    this.$store
+      .dispatch("businessRole/getroles")
+      .then(response => {
+        this.allRoles=response.data.data;
+      })
+      .catch( err => {
+        console.log({ err: err });
+      });
+    },
+    assignRole: function(){
+      return new Promise((resolve, reject) => {
+        let formData = new FormData();
+        formData.append("name", this.form.name);
+        formData.append("role", this.form.role);
+
+        this.axios.post("role/assignRole/{business}", formData)
+        .then(response => {
+          console.log(response);
+
+          this.flashMessage.show({
+            status: "success",
+            message: "New Role Assigned"
+          });
+            
+          resolve(true);
+        })
+        .catch(err => {
+          console.log({ err: err });
+          this.flashMessage.show({
+            status: "error",
+            message: "Unable to Assigned New Role"
+          });
+          resolve(false);
+        });
+      });
+		},
+
+
+
+  },
+
+  
+
 };
 </script>
 

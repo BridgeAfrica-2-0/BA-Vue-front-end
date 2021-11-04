@@ -63,7 +63,7 @@
         <h5 class="a-text">{{$t("businessowner.Existing Admins")}}</h5>
         <b-list-group>
           <b-list class="d-flex align-items-center m-list">
-            <b-avatar class="mr-3 profile-pic"   ></b-avatar>
+            <b-avatar class="mr-3 profile-pic"></b-avatar>
             <span class="mr-auto username">J. Circlehead</span>
             <span>
               <div>
@@ -73,11 +73,7 @@
                   no-caret
                 >
                   <template #button-content>
-                    <b-icon
-                      icon="three-dots-vertical"
-                    
-                      font-scale="1"
-                    ></b-icon>
+                    <b-icon icon="three-dots-vertical" font-scale="1"></b-icon>
                   </template>
                   <b-dropdown-item href="#">{{$t("businessowner.Edit")}}</b-dropdown-item>
                   <b-dropdown-item href="#">{{$t("businessowner.Delete")}} </b-dropdown-item>
@@ -91,7 +87,6 @@
               variant="primary"
               text="BV"
               class="mr-3 profile-pic"
-            
             ></b-avatar>
             <span class="mr-auto">itz blec blec</span>
             <span>
@@ -103,11 +98,7 @@
                   no-caret
                 >
                   <template #button-content>
-                    <b-icon
-                      icon="three-dots-vertical"
-                     
-                      font-scale="1"
-                    ></b-icon>
+                    <b-icon icon="three-dots-vertical" font-scale="1"></b-icon>
                   </template>
                   <b-dropdown-item href="#">{{$t("businessowner.Edit")}}</b-dropdown-item>
                   <b-dropdown-item href="#">{{$t("businessowner.Delete")}} </b-dropdown-item>
@@ -124,7 +115,7 @@
         <h5 class="a-text">{{$t("businessowner.Existing_Editors")}}</h5>
         <b-list-group>
           <b-list class="d-flex align-items-center m-list">
-            <b-avatar class="mr-3 profile-pic"   ></b-avatar>
+            <b-avatar class="mr-3 profile-pic"></b-avatar>
             <span class="mr-auto username">J. Circlehead</span>
             <span>
               <div>
@@ -135,11 +126,7 @@
                   no-caret
                 >
                   <template #button-content>
-                    <b-icon
-                      icon="three-dots-vertical"
-                    
-                      font-scale="1"
-                    ></b-icon>
+                    <b-icon icon="three-dots-vertical" font-scale="1"></b-icon>
                   </template>
                   <b-dropdown-item href="#">{{$t("businessowner.Edit")}}</b-dropdown-item>
                   <b-dropdown-item href="#"> {{$t("businessowner.Delete")}} </b-dropdown-item>
@@ -153,7 +140,6 @@
               variant="primary"
               text="BV"
               class="mr-3 profile-pic"
-           
             ></b-avatar>
             <span class="mr-auto username">itz blec blec</span>
             <span>
@@ -165,11 +151,7 @@
                   no-caret
                 >
                   <template #button-content>
-                    <b-icon
-                      icon="three-dots-vertical"
-                    
-                      font-scale="1"
-                    ></b-icon>
+                    <b-icon icon="three-dots-vertical" font-scale="1"></b-icon>
                   </template>
                   <b-dropdown-item href="#">{{$t("businessowner.Edit")}}</b-dropdown-item>
                   <b-dropdown-item href="#">{{$t("businessowner.Delete")}} </b-dropdown-item>
@@ -185,7 +167,7 @@
 
 <script>
 export default {
-  name: "roles"
+  name: "roles",
 };
 </script>
 
@@ -194,24 +176,19 @@ export default {
   margin-bottom: 15px;
   margin-top: 10px;
 }
-
 .b-bottom {
   margin-top: 20px;
   margin-bottom: 30px;
   padding-bottom: 10px;
   width: 100%;
-
   border-bottom: 1px solid;
 }
-
 .tabs {
   width: 100%;
 }
-
 .f-left {
   float: left;
 }
-
 .a-button-l {
   /*align-content: right;*/
   float: right;
@@ -226,16 +203,13 @@ export default {
   position: relative;
   top: 40px;
 }
-
 @media only screen and (max-width: 768px) {
   .settings {
     top: -5px;
     left: -20px;
   }
-
-
-  .assign-btn{
-    margin-top:30px
+  .assign-btn {
+    margin-top: 30px;
   }
 }
 </style>

@@ -30,8 +30,15 @@ IconifyIcon.addIcon("home", homeIconData);
 Vue.use(Vuex);
 Vue.use(VueAxios, axios);
 
-import LoadScript from "vue-plugin-load-script";
+<<<<<<< HEAD
+=======
 import InfiniteLoading from "vue-infinite-loading";
+
+Vue.use(InfiniteLoading, { /* options */ });
+import VModal from 'vue-js-modal';
+Vue.use(VModal);
+>>>>>>> networkProfile(feedback)
+import LoadScript from "vue-plugin-load-script";
 
 import { loader } from "./mixins"
 

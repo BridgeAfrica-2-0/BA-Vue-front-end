@@ -19,16 +19,13 @@ import follower from "./follower";
 import networkProfile from "./networkProfile";
 import UserProfileOwner from "./UserProfileOwner"
 import networkProfileCommunitySidebar from "./networkProfileCommunitySidebar";
+import networkProfileFeedback  from "./networkProfileFeedback";
 import { search } from "./search";
 import { social } from "./social";
 
 import axios from "axios";
 Vue.use(Vuex);
-
  axios.defaults.baseURL = process.env.VUE_APP_API_URL;
-
-
-
 export default new Vuex.Store({
   modules: {
     auth,
@@ -36,6 +33,7 @@ export default new Vuex.Store({
     dashboardcommunity,
     ProfileAndBusinessDetails,
     businessOwner,
+    networkProfileFeedback,
     hotbusiness,
     NetworkSettings,
     profile,

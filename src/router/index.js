@@ -33,7 +33,7 @@ import navMessage from "@/views/navMessaging";
 import Blec from "@/views/blec";
 import memberNetworkFollower from "@/views/memberNetworkFollower";
  import govx from "@/views/test";
-import editors from "@/views/editors";
+import networkEditors from "@/views/networkEditors";
 // import Test from "@/views/test";
 import templateView from "@/views/templateView";
 import webSiteCreate from "@/views/webSiteCreate";
@@ -167,7 +167,7 @@ const routes = [
     component: networks,
   },
   {
-    path: "/networks",
+    path: "/networks/:id?",
     name: "networks",
     component: networks,
   },
@@ -177,9 +177,9 @@ const routes = [
     component: editors,
   },
   {
-    path: "/editors/:id?",
-    name: "editors",
-    component: editors,
+    path: "/network_editors/:id?",
+    name: "NetworkEditors",
+    component: networkEditors,
   },
   {
     path: "/login",

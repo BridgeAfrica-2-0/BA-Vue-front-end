@@ -45,7 +45,7 @@
         </infinite-loading>
       </b-col>
     </b-row>
-    
+
     <FlashMessage />
   </div>
 </template>
@@ -62,7 +62,7 @@ export default {
       searchTitle: "",
       page: 0,
       loading: false,
-      peoplefollowers: [],
+      networkfollowers: [],
       displayfollowers: []
     };
   },
@@ -111,9 +111,9 @@ export default {
       console.log('keyword: '+keyword);
       let formData = new FormData();
       formData.append('keyword', keyword);
-      console.log("network/"+this.url+"/people/follower/"+this.page);
+      console.log("network/"+this.url+"/network/follower/"+this.page);
       this.axios
-      .post("network/"+this.url+"/people/follower/"+this.page, formData)
+      .post("network/"+this.url+"/network/follower/"+this.page, formData)
       .then(({ data }) => {
        console.log(data);
        console.log(this.page);
@@ -126,8 +126,8 @@ export default {
             this.page += 1;
             console.log(this.page);
             console.log(...data.data);
-            this.peoplefollowers.push(...data.data);
-            this.displayfollowers = this.peoplefollowers;
+            this.networkfollowers.push(...data.data);
+            this.displayfollowers = this.networkfollowers;
             $state.loaded();
           } else {
             $state.complete();
@@ -139,7 +139,6 @@ export default {
       this.loading = false;
     },
 
-        
     BlockUser(user_id) {
       this.loading = true;
       console.log("network/"+this.url+"/lock/user/"+user_id);

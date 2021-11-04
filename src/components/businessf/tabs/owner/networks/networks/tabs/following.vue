@@ -21,7 +21,7 @@
 
     <b-row cols="2">
       <b-col class="ml-0 mr-0"
-        v-for="member in displayfollowers"
+        v-for="member in displayfollowing"
         :key="member.id"
       >
         <b-skeleton-wrapper :loading="loading" >
@@ -45,7 +45,7 @@
         </infinite-loading>
       </b-col>
     </b-row>
-    
+
     <FlashMessage />
   </div>
 </template>
@@ -62,8 +62,8 @@ export default {
       searchTitle: "",
       page: 0,
       loading: false,
-      peoplefollowers: [],
-      displayfollowers: []
+      networkfollowing: [],
+      displayfollowing: []
     };
   },
   mounted(){
@@ -111,14 +111,14 @@ export default {
       console.log('keyword: '+keyword);
       let formData = new FormData();
       formData.append('keyword', keyword);
-      console.log("network/"+this.url+"/people/follower/"+this.page);
+      console.log("network/"+this.url+"/network/following/"+this.page);
       this.axios
-      .post("network/"+this.url+"/people/follower/"+this.page, formData)
+      .post("network/"+this.url+"/network/following/"+this.page, formData)
       .then(({ data }) => {
        console.log(data);
        console.log(this.page);
         if(keyword){
-          this.displayfollowers = data.data;
+          this.displayfollowing = data.data;
           this.searchTitle = "";
           $state.complete();
         }else{
@@ -126,8 +126,8 @@ export default {
             this.page += 1;
             console.log(this.page);
             console.log(...data.data);
-            this.peoplefollowers.push(...data.data);
-            this.displayfollowers = this.peoplefollowers;
+            this.networkfollowing.push(...data.data);
+            this.displayfollowing = this.networkfollowing;
             $state.loaded();
           } else {
             $state.complete();
@@ -139,7 +139,6 @@ export default {
       this.loading = false;
     },
 
-        
     BlockUser(user_id) {
       this.loading = true;
       console.log("network/"+this.url+"/lock/user/"+user_id);

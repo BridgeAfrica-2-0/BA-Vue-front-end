@@ -46,6 +46,7 @@ import myorders from "@/views/myOders"
 
 
 import welcome from "@/views/welcome";
+import payment from "@/views/payment";
 
 Vue.use(VueRouter);
 
@@ -80,6 +81,11 @@ const routes = [
     path: "/market",
     name: "market",
     component: market,
+  },
+  {
+    path: "/checkout",
+    name: "payment",
+    component: payment
   },
 
 
@@ -161,7 +167,7 @@ const routes = [
   },
   {
     path: "/business_owner/network/:id?",
-    name: "networks",
+    name: "networks_business",
     component: networks,
   },
   {

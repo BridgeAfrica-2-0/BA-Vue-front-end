@@ -1,4 +1,3 @@
-
 import Vue from 'vue';
 import Vuex from 'vuex';
 import auth from './auth';
@@ -44,10 +43,10 @@ export default new Vuex.Store({
     social,
     marketSearch,
     networkSearch,
-    social,
     networkProfileMembers,
     allSearch,
     networkProfile,
     businessFollowers,
   },
 });
+

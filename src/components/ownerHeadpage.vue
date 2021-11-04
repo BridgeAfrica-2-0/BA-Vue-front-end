@@ -8,6 +8,7 @@
           class="img-fluid  banner"
           alt="Cover Image"
         />
+        err
          <img  v-if="info.user.cover_picture"
           :src="info.user.cover_picture"
           class="img-fluid  banner"
@@ -486,7 +487,7 @@ submitCover(){
 
           this.flashMessage.show({
             status: "error",
-            message: err.response.data.message,
+            message: response.data.message,
             blockClass: "custom-block-class",
           });
           loader.hide()

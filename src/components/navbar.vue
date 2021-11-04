@@ -78,6 +78,7 @@
                 data-original-title=""
                 title=""
               />
+                
 
               <input
                 id="search-location"
@@ -134,7 +135,7 @@
 
               <div class="nav-item">
                 <a id="messages" class="nav-link" data-toggle="popover" role="button" data-original-title="" title=""
-                  ><span class="text-ored"><fas-icon class="primary" :icon="['fas', 'comment']"/></span
+                  ><span class="text-ored"><fas-icon class="primary" :icon="['fas', 'comment']" /></span
                 ></a>
                 <b-popover target="messages" triggers="hover" placement="top">
                   <div class="popover-body">
@@ -303,6 +304,7 @@
                         cursor-pointer
                       "
                     >
+
                       <div>
                         <img src="@/assets/img/profile-pic.jpg" class="rounded-circle" alt="" width="30" height="30" />
                       </div>
@@ -322,6 +324,7 @@
                         cursor-pointer
                       "
                     >
+
                       <div>
                         <img src="@/assets/img/profile-pic.jpg" class="rounded-circle" alt="" width="30" height="30" />
                       </div>
@@ -341,6 +344,7 @@
                         cursor-pointer
                       "
                     >
+
                       <div>
                         <img src="@/assets/img/profile-pic.jpg" class="rounded-circle" alt="" width="30" height="30" />
                       </div>
@@ -360,6 +364,7 @@
                         cursor-pointer
                       "
                     >
+
                       <div>
                         <img src="@/assets/img/profile-pic.jpg" class="rounded-circle" alt="" width="30" height="30" />
                       </div>
@@ -379,6 +384,7 @@
                         cursor-pointer
                       "
                     >
+
                       <div>
                         <img src="@/assets/img/profile-pic.jpg" class="rounded-circle" alt="" width="30" height="30" />
                       </div>
@@ -397,7 +403,7 @@
 
               <div class="nav-item" id="profilepic">
                 <a class="nav-link text-dark" href="">
-                  <span><img :src="user.profile_picture" class="rounded-circle" alt="" width="50" height="50"/></span>
+                  <span><img :src="user.profile_picture" class="rounded-circle" alt="" width="50" height="50" /></span>
                 </a>
               </div>
 
@@ -423,27 +429,29 @@
 
                     <hr />
 
+
                     <router-link
                       to="/myorders/"
                       class="other-menu suggest-item cursor-pointer text-decoration-none text-dark"
+
                     >
-                      <span class="mr-2"><fas-icon class="violet search" :icon="['fas', 'cart-arrow-down']"/></span>
+                      <span class="mr-2"><fas-icon class="violet search" :icon="['fas', 'cart-arrow-down']" /></span>
                       My orders
                     </router-link>
                     <hr class="h-divider" />
 
                     <a href="/settings" class="other-menu suggest-item cursor-pointer text-decoration-none text-dark">
-                      <span class="mr-2"><fas-icon class="violet search" :icon="['fas', 'cogs']"/></span>
+                      <span class="mr-2"><fas-icon class="violet search" :icon="['fas', 'cogs']" /></span>
                       Account Settings
                     </a>
                     <hr class="h-divider" />
                     <div class="other-menu suggest-item cursor-pointer">
-                      <span class="mr-1"><fas-icon class="violet search" :icon="['fas', 'question']"/></span>
+                      <span class="mr-1"><fas-icon class="violet search" :icon="['fas', 'question']" /></span>
                       Help and Support
                     </div>
                     <hr class="h-divider" />
                     <div class="other-menu suggest-item cursor-pointer">
-                      <span class="mr-2"><fas-icon class="violet search" :icon="['fas', 'globe-americas']"/></span>
+                      <span class="mr-2"><fas-icon class="violet search" :icon="['fas', 'globe-americas']" /></span>
                       Language
                     </div>
                     <hr class="h-divider" />
@@ -456,7 +464,7 @@
                         text-decoration-none text-dark
                       "
                     >
-                      <span class="mr-2"><fas-icon class="violet search" :icon="['fas', 'sign-out-alt']"/></span>
+                      <span class="mr-2"><fas-icon class="violet search" :icon="['fas', 'sign-out-alt']" /></span>
                       Logout
                     </a>
                   </div>
@@ -493,25 +501,26 @@
 
             <hr class="mup" />
 
+
             <router-link to="/myorders/" class="other-menu suggest-item cursor-pointer text-decoration-none text-dark">
-              <span class="mr-2"><fas-icon class="violet search" :icon="['fas', 'cart-arrow-down']"/></span>
+              <span class="mr-2"><fas-icon class="violet search" :icon="['fas', 'cart-arrow-down']" /></span>
               My orders
             </router-link>
             <hr class="h-divider" />
 
             <a href="/settings" class="other-menu suggest-item cursor-pointer text-decoration-none text-dark">
-              <span class="mr-2"><fas-icon class="violet search" :icon="['fas', 'cogs']"/></span>
+              <span class="mr-2"><fas-icon class="violet search" :icon="['fas', 'cogs']" /></span>
 
               Account Settings
             </a>
             <hr class="h-divider" />
             <div class="other-menu suggest-item cursor-pointer">
-              <span class="mr-1"><fas-icon class="violet search" :icon="['fas', 'question']"/></span>
+              <span class="mr-1"><fas-icon class="violet search" :icon="['fas', 'question']" /></span>
               Help and Support
             </div>
             <hr class="h-divider" />
             <div class="other-menu suggest-item cursor-pointer">
-              <span class="mr-2"><fas-icon class="violet search" :icon="['fas', 'globe-americas']"/></span>
+              <span class="mr-2"><fas-icon class="violet search" :icon="['fas', 'globe-americas']" /></span>
               Language
             </div>
             <hr class="h-divider" />
@@ -524,7 +533,7 @@
                 text-decoration-none text-dark
               "
             >
-              <span class="mr-2"><fas-icon class="violet search" :icon="['fas', 'sign-out-alt']"/></span>
+              <span class="mr-2"><fas-icon class="violet search" :icon="['fas', 'sign-out-alt']" /></span>
               Logout
             </a>
           </div>
@@ -537,21 +546,30 @@
 </template>
 
 <script>
+
+import Button from '@/components/ButtonNavBarFind.vue';
+import Activity from '@/components/ShowActivity.vue';
+
+import { mapGetters, mapActions } from 'vuex';
+
 export default {
   name: 'navbar',
   components: {
     Button,
     Activity,
+
   },
   props: {
     credentials: {
       type: Object,
-      default: function() {
+      default: function () {
         return {
+
           keyword: '',
           placeholder: '',
         };
       },
+
     },
   },
 
@@ -584,22 +602,226 @@ export default {
       this.isActive = true;
     },
 
-    getNetworks: async function() {
+
+    getNetworks: async function () {
       let request = await this.$repository.share.getNetworks();
 
       if (request.success) this.setNetworks(request.data);
     },
 
-    getBusiness: async function() {
+    getBusiness: async function () {
       let request = await this.$repository.share.getBusiness();
+
+      if (request.success) this.setBusiness(request.data);
+    },
+
+    init() {
+      try {
+        if (!this.hasLauchNetworkRequest) {
+          console.log('init navbar', this.hasLauchNetworkRequest);
+          this.getNetworks();
+          this.getBusiness();
+
+          this.lauchNetworkRequest();
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    },
+
+
+    togglenav() {
+      if (this.shownav == false) {
+        this.shownav = true;
+        console.log(this.shownav);
+      } else {
+        this.shownav = false;
+        console.log(this.shownav);
+      }
     },
   },
 };
 </script>
 
-<style>
-.user_img {
-  width: 40px;
-  height: 40px;
+<style scoped>
+.hov:hover {
+  background-color: #eeeeef;
+  border-color: #eeeeef;
+}
+
+@media (min-width: 992px) {
+  .balogo {
+    width: 170px;
+  }
+}
+
+@media (max-width: 992px) {
+  .balogo {
+    width: 100px;
+    margin-left: -30px;
+  }
+}
+
+.b-shadow {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.b-radius {
+  border-radius: 10px;
+}
+
+.color-sit {
+  background-color: #e75c18;
+}
+
+@media only screen and (max-width: 992px) {
+  .search-mobile {
+    border-left: none;
+  }
+
+  .color-mobile {
+    background-color: white;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .search-h {
+    height: 48px;
+  }
+}
+
+.input-size {
+  width: 401px;
+}
+
+.input-size-phone {
+  width: 401px;
+}
+
+.color-site {
+  color: #e75c18;
+}
+
+.col-bg {
+  color: #e75c18;
+}
+
+/*Responsive Side*/
+
+@media (max-width: 576px) {
+  .lb-grid {
+    height: 200px;
+  }
+  .corps {
+    margin-top: 2rem !important;
+  }
+
+  .montre {
+    display: none;
+  }
+}
+@media (min-width: 576px) {
+  .lb-grid {
+    height: 300px;
+  }
+  .show {
+    display: block;
+  }
+}
+@media (min-width: 768px) {
+  .lb-grid {
+    height: 350px;
+  }
+  .show {
+    display: block;
+  }
+}
+@media (min-width: 992px) {
+  .lb-grid {
+    height: 400px;
+  }
+  .show {
+    display: block;
+  }
+}
+@media (min-width: 1200px) {
+  .lb-grid {
+    height: 500px;
+  }
+  .corps {
+    margin-top: 6rem !important;
+  }
+
+  .show {
+    display: block;
+  }
+}
+@media (min-width: 1400px) {
+  .lb-grid {
+    height: 500px;
+  }
+
+  .corps {
+    margin-top: 6rem !important;
+  }
+
+  .show {
+    display: block;
+  }
+}
+
+.website-logo-name {
+  font-size: 24px;
+  color: #2e2e2e;
+  margin-top: 2px;
+}
+.vl {
+  border-left: 1px solid #dee2e6;
+  height: 20px;
+}
+.text-ored {
+  color: #e75c18;
+}
+
+.text-dark {
+  font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 600;
+  color: rgba(43, 39, 60, 1);
+  text-align: left;
+}
+
+.line-size {
+  width: 150px;
+}
+
+.blec-container {
+  width: 95%;
+}
+
+@media (max-width: 992px) {
+  .navbar-toggler {
+    padding: 0.25rem 0.75rem;
+    font-size: 1.25rem;
+    line-height: 1;
+    background-color: transparent;
+    border: 1px solid transparent;
+    border-radius: 0.25rem;
+    position: absolute !important;
+
+    margin-top: -100px !important;
+
+    right: 13px !important;
+  }
+
+  .togglebtn {
+    margin-top: -145px !important;
+  }
+}
+
+.mup {
+  margin-top: -5px;
 }
 </style>

@@ -19,11 +19,11 @@ import checkout from "./checkout";
 import axios from "axios";
 import { search } from "./search";
 import productComments from "./productComments";
+import productDetails from "./productDetails";
 
 Vue.use(Vuex);
 
 axios.defaults.baseURL = process.env.VUE_APP_API_URL_DEV;
-
 
 export default new Vuex.Store({
   modules: {
@@ -44,5 +44,6 @@ export default new Vuex.Store({
     networkProfileMembers,
     businessFollowers,
     productComments,
+    productDetails,
   },
 });

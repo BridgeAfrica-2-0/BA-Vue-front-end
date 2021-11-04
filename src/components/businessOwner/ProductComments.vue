@@ -10,7 +10,7 @@
             </div>
             <div class="ml-3">
               <b-icon variant="primary" icon="chat-fill" class="mr-2"></b-icon
-              ><span>30</span>
+              ><span>{{ comments.length }}</span>
             </div>
           </div>
         </b-col>
@@ -24,7 +24,6 @@
                 'comments-wrapper',
               ]"
               :comments="comments"
-              :current_user="current_user"
               @submit-comment="submitComment"
             ></comments>
           </div>
@@ -45,9 +44,9 @@ export default {
   props: {
     idproduct: {
       type: Number,
-      required:true
-    }
-  }, 
+      required: true,
+    },
+  },
   data() {
     return {
       likes: 15,
@@ -55,46 +54,51 @@ export default {
         avatar: "http://via.placeholder.com/100x100/a74848",
         user: "exampleCreator",
       },
-      current_user: {
-        avatar: "http://via.placeholder.com/100x100/a74848",
-        user: "exampler",
-      },
-      comments: [
-        {
-          id: 1,
-          user: "example",
-          avatar: "http://via.placeholder.com/100x100/a74848",
-          text:
-            "lorem ipsum dolor lorem ipsum dolor lorem ipsum dolor lorem ipsum dolor lorem ipsum dolor lorem ipsum dolor lorem ipsum dolor ",
-        },
-        {
-          id: 2,
-          user: "example1",
-          avatar: "http://via.placeholder.com/100x100/2d58a7",
-          text: "lorem ipsum dolor",
-        },
-        {
-          id: 3,
-          user: "example2",
-          avatar: "http://via.placeholder.com/100x100/36846e",
-          text: "lorem ipsum dolor again",
-        },
-      ],
-      current_comment_page: 1
+      current_comment_page: 1,
+      loadComments: [],
     };
+  },
+  computed: {
+    comments() {
+      return this.loadComments;
+    },
   },
   methods: {
     submitComment: function(reply) {
-      this.comments.push({
-        id: this.comments.length + 1,
-        user: this.current_user.user,
-        avatar: this.current_user.avatar,
+      // this.comments.push({
+      //   id: this.comments.length + 1,
+      //   user: this.current_user.user,
+      //   avatar: this.current_user.avatar,
+      //   text: reply,
+      // });
+      const comment = {
+        idproduct: this.idproduct,
         text: reply,
+      };
+
+      this.$store.dispatch("productComments/postComment", comment).then(() => {
+        this.$store
+          .dispatch("productComments/getComments", {
+            id: this.idproduct,
+            page: this.current_comment_page,
+          })
+          .then((data) => {
+            this.loadComments = data;
+            console.log(this.loadComments);
+          });
       });
     },
   },
   beforeMount() {
-    this.$store.dispatch("productComments/getComments", {id:this.idproduct, page:this.current_comment_page});
+    this.$store
+      .dispatch("productComments/getComments", {
+        id: this.idproduct,
+        page: this.current_comment_page,
+      })
+      .then((data) => {
+        this.loadComments = data;
+        console.log(this.loadComments);
+      });
   },
 };
 </script>

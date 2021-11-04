@@ -41,13 +41,13 @@
 		},
 		methods: {
 			submitComment() {
-				if (this.reply != "") {
+				if (this.reply !== "") {
 					this.$emit("submit-comment", this.reply);
 					this.reply = "";
 				}
 			},
 		},
-		props: ["comments", "current_user", "comments_wrapper_classes"],
+		props: ["comments", "comments_wrapper_classes"],
 	};
 </script>
 

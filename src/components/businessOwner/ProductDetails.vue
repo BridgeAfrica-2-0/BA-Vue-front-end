@@ -33,10 +33,14 @@
           <div
             class="buttons my-3 d-flex justify-content-between align-items-center"
           >
-            <b-button variant="primary" class="font-weight-light shadow-sm"
-              >Buy Now</b-button
-            >
-            <b-button variant="success" class="font-weight-light shadow-sm"
+            <b-button variant="primary" class="font-weight-light shadow-sm">
+              <span v-if="packageProduct === 'basic'"> Messages </span>
+              <span v-else-if="packageProduct === 'premium'">Buy Now</span>
+            </b-button>
+            <b-button
+              variant="success"
+              class="font-weight-light shadow-sm"
+              @click="closeModal"
               >Check On Website</b-button
             >
           </div>
@@ -91,21 +95,32 @@ export default {
         },
       ],
       canShowModal: false,
+      packageProduct: "basic",
     };
   },
+  computed: {},
   methods: {
     formatMoney(money) {
       return this.formatObject.format(money);
     },
-    closeModal(){
+    closeModal() {
       console.log("close modal");
-      this.$emit('closemodal')
-    }
+      this.$emit("closemodal");
+    },
   },
   watch: {
     showModal(newValue) {
       this.canShowModal = newValue;
     },
+  },
+  mounted() {
+    //get prooduct package type
+    this.$store
+      .dispatch("productDetails/getProductDetails", this.product.id)
+      .then((product) => {
+        this.packageProduct = product.package[0] || this.packageProduct;
+        console.log("Package for product : ", this.packageProduct);
+      });
   },
 };
 </script>

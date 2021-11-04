@@ -34,15 +34,6 @@ export default {
 
   actions: {
 
-    getmembers( {commit}, path ){
-      console.log(path);
-      return axios
-      .post(`network/${path}`)
-      .then(({ data }) => {
-          commit("setmembers", data.data);
-        console.log(data);
-      })
-    },
     getMembers( data ){
       console.log(data.path);
       return axios

@@ -22,25 +22,25 @@
 
 
     <b-row>
-      <b-col v-if="peoplefollowers.total == 0" >
+      <b-col v-if="networkfollowers.total == 0" >
         No Community Members
       </b-col>
       <b-col col="6" class="ml-0 mr-0"
         :class="{ active: index == currentIndex }"
-        v-for="(member, index) in peoplefollowers.data"
+        v-for="(member, index) in networkfollowers.data"
         :key="index"
         v-else
       >
         <div style="display:none;">{{member['communityNum'] = nFormatter(member.followers)}}</div>
-        <CommunityMembers :member="member" />
+        <CommunityNetwork :member="member" />
       </b-col>
     </b-row>
-    <b-row  v-if="peoplefollowers.total != 0">
+    <b-row  v-if="networkfollowers.total != 0">
       <b-col cols="12">
         <span class="float-right">
           <b-pagination
             v-model="currentPage"
-            :total-rows="peoplefollowers.total"
+            :total-rows="networkfollowers.total"
             :per-page="perPage"
             @change="handlePageChange"
             aria-controls="my-table"
@@ -52,10 +52,11 @@
 </template>
 
 <script>
-import CommunityMembers from "../../communityMember"
+
+import CommunityNetwork from "../../communitynetwork"
 export default {
   components: {
-    CommunityMembers
+    CommunityNetwork
   },
   data() {
     return {
@@ -67,14 +68,14 @@ export default {
     };
   },
   computed: {
-    peoplefollowers() {
-      return this.$store.state.networkProfileCommunity.peoplefollowers;
+    networkfollowers() {
+      return this.$store.state.networkProfileCommunity.networkfollowers;
     }
   },
   mounted(){
     this.url = this.$route.params.id;
-    this.perpage = this.peoplefollowers.per_page;
-    this.PeopleFollowers();
+    this.perpage = this.networkfollowers.per_page;
+    this.networkFollowers();
   },
   methods:{
     nFormatter: function(num) {
@@ -102,21 +103,20 @@ export default {
     search() {
       console.log("searching...");
       console.log(this.searchTitle);
-      this.PeopleFollowers()
+      this.networkFollowers()
     },
     handlePageChange(value) {
-      // this.loading = true;
       this.currentPage = value;
       console.log(this.currentPage);
-      this.PeopleFollowers();
+      this.networkFollowers();
     },
 
-    PeopleFollowers() {
+    networkFollowers() {
       let data = this.getRequestDatas(this.searchTitle, this.currentPage)
     this.$store
-      .dispatch("networkProfileCommunity/getPeopleFollowers", this.url+"/people/follower"+data)
+      .dispatch("networkProfileCommunity/getNetworkFollowers", this.url+"/network/follower"+data)
       .then(() => {
-        console.log('ohh year: followers');
+        console.log('ohh year: network followers');
       })
       .catch(err => {
         console.log({ err: err });

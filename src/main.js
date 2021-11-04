@@ -37,10 +37,14 @@ import VModal from 'vue-js-modal';
 Vue.use(VModal);
 import LoadScript from "vue-plugin-load-script";
 
+import VueEasyLightbox from 'vue-easy-lightbox'
+
 import { loader } from "./mixins"
 
 
 
+Vue.use(VueEasyLightbox);
+Vue.use(InfiniteLoading);
 Vue.use(LoadScript);
 IconifyIcon.addIcon('home', homeIconData);
 

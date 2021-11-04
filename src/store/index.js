@@ -21,6 +21,7 @@ import networkProfile from "./networkProfile";
 import UserProfileOwner from "./UserProfileOwner"
 import networkProfileCommunitySidebar from "./networkProfileCommunitySidebar";
 import networkProfileFeedback  from "./networkProfileFeedback";
+import networkProfileMedia from "./networkProfileMedia";
 import { search } from "./search";
 import { social } from "./social";
 
@@ -51,6 +52,7 @@ export default new Vuex.Store({
     businessFollowers,
     networkProfileCommunitySidebar,
     networkProfileCommunity,
+    networkProfileMedia,
   }
 });
 

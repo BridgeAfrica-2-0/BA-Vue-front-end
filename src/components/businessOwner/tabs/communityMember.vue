@@ -69,7 +69,8 @@ export default {
   data() {
     return {
       page: 1,
-      infiniteId: +new Date(),
+       biz_id:null,
+       infiniteId: +new Date(),
       options: {
         rewind: true,
         autoplay: true,
@@ -84,23 +85,37 @@ export default {
 
   computed: {
     users() {
-      if (this.type == 'Follower') {
-        return this.$store.state.profile.UcommunityFollower.user_followers;
+      if (this.type == "Follower") {
+
+       return  this.$store.state.businessOwner.UcommunityFollower.user_followers;  
+     
+
       } else {
-        return this.$store.state.profile.UcommunityFollowing.user_following;
+      return  this.$store.state.businessOwner.UcommunityFollowing.user_following; 
+    
       }
     },
   },
+   mounted(){
+    this.biz_id = this.$route.params.id;
+ },
 
   methods: {
-    search() {
-      console.log('search started');
 
-      if (this.type == 'Follower') {
-        this.$store.commit('profile/setUcommunityFollower', { user_followers: [], total_user_follower: 0 });
-      } else {
-        this.$store.commit('profile/setUcommunityFollowing', { user_following: [], total_user_following: 0 });
-      }
+
+    search(){
+     
+       console.log('search started');
+       
+         if(this.type=="Follower"){ 
+         
+        this.$store.commit("businessOwner/setUcommunityFollower",{ "user_followers": [ ], "total_user_follower": 0 }); 
+
+       }else{
+       
+        
+        this.$store.commit("businessOwner/setUcommunityFollowing",{ "user_following": [ ], "total_user_following": 0 }); 
+       }
 
       this.page = 1;
       this.infiniteId += 1;
@@ -120,10 +135,14 @@ export default {
     infiniteHandler($state) {
       let url = null;
 
-      if (this.type == 'Follower') {
-        url = 'profile/user/follower/';
+      if (this.type == "Follower") {
+     url = "business/community/people-follower/"+this.biz_id+"/"; 
+
+
+
+        
       } else {
-        url = 'profile/user/following/';
+        url = "business/community/people-following/"+this.biz_id+"/";
       }
 
       axios

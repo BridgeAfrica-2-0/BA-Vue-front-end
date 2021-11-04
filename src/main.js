@@ -36,6 +36,7 @@ import InfiniteLoading from "vue-infinite-loading";
 import { loader } from "./mixins"
 
 
+Vue.use(InfiniteLoading, { /* options */ });
 Vue.use(LoadScript);
 
 Vue.use(ReadMore);
@@ -95,9 +96,9 @@ Vue.use(VueMaterial);
 import Lightbox from "@morioh/v-lightbox";
 import * as VueGoogleMaps from "gmap-vue";
 
-//   import VueSplide from "@splidejs/vue-splide";
-//  Vue.use(VueSplide);
-//  import "@splidejs/splide/dist/css/themes/splide-default.min.css";
+//  import VueSplide from "@splidejs/vue-splide";
+// Vue.use(VueSplide);
+// import "@splidejs/splide/dist/css/themes/splide-default.min.css";
 
 // global register
 Vue.use(VueGallerySlideshow);
@@ -145,13 +146,13 @@ Vue.use(VueGoogleMaps, {
 });
 
 
-// import VueLoading from 'vue-loading-overlay';
-// import 'vue-loading-overlay/dist/vue-loading.css';
+import VueLoading from 'vue-loading-overlay';
+import 'vue-loading-overlay/dist/vue-loading.css';
 
 import VueYoutube from 'vue-youtube'
  
 Vue.use(VueYoutube)
-// Vue.use(VueLoading);
+Vue.use(VueLoading);
 
 import VueAgile from 'vue-agile'
 

@@ -15,8 +15,4 @@ export const mutations = {
     state.isLoading = true
   }, // [TYPES.INIT]
 
-  [TYPES.AUTH](state,payload) {
-    state.auth = payload
-  }, // [TYPES.AUTH]
-
 }

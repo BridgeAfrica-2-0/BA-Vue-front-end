@@ -52,8 +52,6 @@ import Inbox from "../components/businessOwner/inbox";
 
 import LyTab from "@/tab/src/index.vue";
 
-import axios from "axios";
-
 import Footer from "../components/footer";
 export default {
   name: "Home",

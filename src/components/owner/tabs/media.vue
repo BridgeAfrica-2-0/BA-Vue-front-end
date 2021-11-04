@@ -1,12 +1,8 @@
 <template>
   <div>
-    <fas-icon
-      class="violet mr-2 pt-1 icon-size primary"
-      :icon="['fas', 'file-image']"
-    />Media
+    <fas-icon class="violet mr-2 pt-1 icon-size primary" :icon="['fas', 'file-image']" />Media
 
     <hr />
-
     <b-tabs content-class="mt-3" pills>
       <b-tab title="Posts" active @click="getImages">
         <div v-if="!hasLoadPicture">
@@ -34,19 +30,19 @@
 </template>
 
 <script>
-import Album from "./album";
-import Images from "./images";
+import Album from './album';
+import Images from './images';
 
-import _ from "lodash";
+import _ from 'lodash';
 
-import { mapGetters } from "vuex";
+import { mapGetters } from 'vuex';
 
 export default {
   props: {
     type: {
       type: String,
       validator: function (value) {
-        return ["profile", "network", "business"].indexOf(value) !== -1;
+        return ['profile', 'network', 'business'].indexOf(value) !== -1;
       },
     },
   },
@@ -68,8 +64,8 @@ export default {
 
   computed: {
     ...mapGetters({
-      getProfilePictures: "UserProfileOwner/getImages",
-      getBusinessPictures: "businessOwner/getAllImages",
+      getProfilePictures: 'UserProfileOwner/getImages',
+      getBusinessPictures: 'businessOwner/getAllImages',
     }),
   },
 
@@ -106,20 +102,19 @@ export default {
             this.hasLoadAlbum = true;
           })
           .catch((err) => {
-            this.hasLoadAlbum = false;
+            this.hasLoadAlbum = true;
             console.log(err);
           });
         //}
       } catch (error) {
         console.log(error);
-        throw new Error("Invalid type", this.type);
+        throw new Error('Invalid type', this.type);
       }
     },
 
     getImages() {
       try {
         const type = this.strategy[this.type]();
-
         //if (!this.hasLoadPicture) {
         this.$store
           .dispatch(type.image, this.urlData)
@@ -127,13 +122,13 @@ export default {
             this.hasLoadPicture = true;
           })
           .catch((err) => {
-            this.hasLoadPicture = false;
+            this.hasLoadPicture = true;
             console.log({ err: err });
           });
         //}
       } catch (error) {
         console.log(error);
-        throw new Error("Invalid type", this.type);
+        throw new Error('Invalid type', this.type);
       }
     },
   },
@@ -143,13 +138,13 @@ export default {
 
     this.strategy = {
       business: () => ({
-        album: "businessOwner/getAlbums",
-        image: "businessOwner/getImages",
+        album: 'businessOwner/getAlbums',
+        image: 'businessOwner/getImages',
         pictures: this.getBusinessPictures,
       }),
       profile: () => ({
-        album: "UserProfileOwner/getAlbums",
-        image: "UserProfileOwner/getImages",
+        album: 'UserProfileOwner/getAlbums',
+        image: 'UserProfileOwner/getImages',
         pictures: this.getProfilePictures,
       }),
     };

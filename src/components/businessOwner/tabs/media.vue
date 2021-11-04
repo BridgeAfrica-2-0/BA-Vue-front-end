@@ -6,7 +6,7 @@
     />Media
 
     <hr />
-
+    
     <b-tabs lazy content-class="mt-3" pills>
       <b-tab title="Posts" active> <Images /> </b-tab>
       <b-tab title="Albums"> <Album /> </b-tab>

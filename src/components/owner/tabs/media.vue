@@ -73,10 +73,7 @@ export default {
     all() {
       const wrapper = (data) => {
         const newData = data
-          .filter((img) => {
-            console.log(img.media.length);
-            return img.media.length ? true : false;
-          })
+          .filter((img) => img.media.length)
           .map((img) => {
             let render = img.media.map((picture) => {
               return {
@@ -88,7 +85,6 @@ export default {
 
             return render;
           });
-        console.log(_.flatten(newData));
         return _.flatten(newData);
       };
       return wrapper(this.strategy[this.type]().pictures);

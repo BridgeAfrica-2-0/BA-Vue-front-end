@@ -235,6 +235,19 @@ export default {
       state.albums = newState
     },
 
+    updatePost(state, payload) {
+      const strategy = {
+        "add:comment:count": (uuid) => state.ownerPost.map(post => (post.post_id == uuid) ? { ...post, comment_count: post.comment_count + 1 } : post)
+      }
+
+      try {
+        state.ownerPost = strategy[payload.action](payload.uuid)
+      } catch (error) {
+        throw new Error(error)
+      }
+
+    },
+
     removeAlbum(state, uuid) {
       state.albums = state.albums.filter(album => album.id != uuid)
     },

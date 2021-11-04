@@ -100,11 +100,48 @@ export default {
     });
   },
 
+  created() {
+    this.strategy = {
+      business: {
+        newType: (item) => ({
+          name: item.business_name,
+          profile_picture: item.logo_path,
+          id: item.business_id,
+          user_type: 'business',
+        }),
+        redirect: (obj) => {
+          if (obj.routeName !== 'BusinessOwner')
+            this.$router.push({
+              name: obj.routeName,
+              params: { id: obj.routeId },
+            });
+        },
+      },
+
+      network: {
+        newType: (item) => ({
+          name: item.network_name,
+          profile_picture: item.network_image,
+          id: item.network_id,
+          user_type: 'network',
+        }),
+        redirect: (obj) => {
+          if (obj.routeName !== 'networks')
+            this.$router.push({
+              name: obj.routeName,
+              params: { id: obj.routeId },
+            });
+        },
+      },
+    };
+  },
+
   data: () => ({
     pending: false,
     openBusiness: false,
     show: false,
     openNetwork: false,
+    strategy: null,
   }),
 
   methods: {
@@ -113,45 +150,22 @@ export default {
     }),
 
     process: async function (item, type) {
-      let request =
-        'business' == type
-          ? await this.$repository.share.switch(item.business_id, 'business')
-          : await this.$repository.share.switch(item.network_id, 'network');
-
-      if (request.success) {
-        this.flashMessage.success({
-          time: 5000,
-          message:
-            'business' == type
-              ? 'new' == request.data
-                ? `You are now connected as ${item.business_name}`
-                : `You are already connected as ${item.business_name}`
-              : `You are connected as ${item.network_name}`,
-        });
-
-        this.auth(
+      this.flashMessage.success({
+        time: 5000,
+        message:
           'business' == type
-            ? {
-                name: item.business_name,
-                profile_picture: item.logo_path,
-                id: item.business_id,
-                user_type: 'business',
-              }
-            : {
-                name: item.network_name,
-                profile_picture: item.network_image,
-                id: item.network_id,
-                user_type: 'network',
-              },
-        );
+            ? `You are now connected as ${item.business_name}`
+            : `You are connected as ${item.network_name}`,
+      });
 
-        if ('network' == type && this.$router.name !== "network") {
-          this.$router.push({
-            name: 'networks',
-            params: { id: item.network_id },
-          });
-        }
-      }
+      this.auth(this.strategy[type].newType(item));
+
+      const data = {
+        routeName: 'network' == type ? 'networks' : 'business',
+        routeId: 'network' == type ? item.network_id : item.business_id,
+      };
+
+      this.strategy[type].redirect(data);
     },
 
     activedBusiness(item) {

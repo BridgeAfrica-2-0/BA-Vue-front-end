@@ -7,8 +7,7 @@
       <p v-if="!allImages.length && !canUpload" style="font-size: 3rem">
         No items found
       </p>
-      {{allImages}}
-
+    
       <b-modal
         id="modalxl"
         ref="modalxl"

@@ -49,7 +49,7 @@ export default new Vuex.Store({
        networkSearch,
     UserProfileOwner,
     businessFollowers,
-    networkProfileCommunitySidebar
+    networkProfileCommunitySidebar,
     networkProfileCommunity,
   }
 });

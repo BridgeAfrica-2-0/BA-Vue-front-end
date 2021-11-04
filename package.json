@@ -16,7 +16,6 @@
         "@iconify-icons/mdi-light": "^1.1.0",
         "@morioh/v-lightbox": "^1.0.3",
         "@smartweb/vue-flash-message": "^0.6.10",
-        "@splidejs/vue-splide": "splidejs/vue-splide",
         "axios": "^0.21.4",
         "bootstrap": "^4.5.3",
         "bootstrap-vue": "^2.21.2",

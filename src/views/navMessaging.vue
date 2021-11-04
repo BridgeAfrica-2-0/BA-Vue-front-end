@@ -404,7 +404,7 @@
               </section>
 
               <section v-else class="chats" style="margin-left: 1px" ref="feed">
-                {{messages}}
+               
                 <div v-for="(message, index) in messages" :key="index">
                   <div v-if="message.sender != currentUser.user.name">
                     <b-row class="p-4">

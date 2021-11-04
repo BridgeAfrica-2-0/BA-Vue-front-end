@@ -1,7 +1,7 @@
 <template >
   <div>
     <navbar />
-    <div class="container body">
+    <div class=" body">
       <h1>Order Details</h1>
 
       <div class="card my-2 shadow">
@@ -67,7 +67,7 @@
       <div class="card my-1 shadow">
         <div class="card-body">
           <div class="row container mx-5 rowmobile">
-            <b-avatar size="15px" id="a1" class="avatar" text=" "></b-avatar>
+            <b-avatar  id="a1" class="avatar" text=" "></b-avatar>
             <b-progress
               id="p1"
               :value="value"
@@ -77,7 +77,7 @@
             >
             </b-progress>
 
-            <b-avatar size="15px" id="a2" class="avatar" text=" "></b-avatar>
+            <b-avatar  id="a2" class="avatar" text=" "></b-avatar>
             <b-progress
               id="p2"
               :value="value"
@@ -86,7 +86,7 @@
               class="mb-3 size"
             ></b-progress>
 
-            <b-avatar size="15px" id="a3" class="avatar" text=" "></b-avatar>
+            <b-avatar  id="a3" class="avatar" text=" "></b-avatar>
             <b-progress
               id="p3"
               :value="value"
@@ -95,7 +95,7 @@
               class="mb-3 size"
             ></b-progress>
 
-            <b-avatar size="15px" id="a4" class="avatar" text=" "></b-avatar>
+            <b-avatar  id="a4" class="avatar" text=" "></b-avatar>
             <b-progress
               id="p4"
               :value="value"
@@ -119,9 +119,9 @@
                 </splide-slide>
               </splide>
             </div>
-            <div class="ligne"></div>
+            <div class="ligne"> <br></div>
 
-            <div class="col-2  text-end bold ">
+            <div class="col-3  text-end bold  margtext">
               <h3 class="h3 margm2">Name:</h3>
               <h3 class="h3 margm2">product ID :</h3>
 
@@ -131,7 +131,7 @@
               <h3 class="h3 margm2">total cost :</h3>
             </div>
 
-            <div class="col-3  text-start ">
+            <div class="col-3  text-start  margtext">
               <h3>sneaker</h3>
               <h3>#125FF55</h3>
               <h3>4</h3>
@@ -140,12 +140,12 @@
               <h3>9000 Fcfa</h3>
             </div>
 
-            <div class="col " >
+            <div class="col margtext" >
               <h3 class="bold1">status</h3>
               <h3 class="text-success">pending</h3>
             </div>
 
-            <div class="col  " >
+            <div class="col margtext" >
               
               <h3 class="text-success">WRITE A REVIEW</h3>
             </div>
@@ -161,18 +161,19 @@
         </div>
       </div>
 
-      <div class="row my-1 shadow">
+      <div class="row my-1 ">
         <div class="col-6">
-          <div class="card">
+          <div class="card shipad shadow">
             <div class="card-body row">
               <span>shipping Adress</span>
               <br /><br /><br />
             </div>
           </div>
         </div>
+         <div class="ligne"> </div>
 
         <div class="col-6">
-          <div class="card">
+          <div class="card shipad my-1 shadow">
             <div class="card-body">
               <div class="col bold">
                 <span class="row">
@@ -275,6 +276,10 @@ color: #e75c18;
 
 /* style pour le desktop (-------------------) */
 @media only screen and (min-width: 988px) {
+  .avatar{
+    width: 15px;
+    height: 15px;
+}
   .progress {
   width: 200px;
 }
@@ -321,7 +326,7 @@ color: #e75c18;
   font-weight: bold;
 }
 h3 {
-  font-size: 16px;
+  font-size: 14px;
   /* font-weight: bold; */
 }
 /* 
@@ -342,6 +347,17 @@ h3 {
 /* .marge {
   margin-right: 380px;
 }*/
+.margtext h3{
+  margin-left: -16px;
+  margin-right: -20px;
+}
+.margtext .text-success{
+  font-size: 10px !important;
+}
+.avatar{
+width: 10px;
+height: 10px;
+}
 .marge1 {
   /* margin-right: 300px; */
   font-size: 10px !important;
@@ -357,8 +373,8 @@ h3 {
   width: 200px;
 }
 .size {
-  height: 5px;
-  margin-top: 5px;
+  height: 3px;
+  margin-top: 4px;
   margin-left: -3px;
   margin-right: -3px;
    width: 50px;
@@ -369,8 +385,9 @@ h3 {
   /* font-weight: bold; */
 }
 .margimg {
-  /* margin-left: -15px; */
+   margin-left: -15px; 
 }
+
 .couleur1{
  
   font-size:  10px;
@@ -393,8 +410,8 @@ h3 {
 } */
 .r-img {
   border-radius: 4px;
-  height: 110px;
-  width: 125px;
+  height: 150px;
+  width: 300px;
 }
 
 .margtotal {
@@ -408,7 +425,12 @@ h3 {
 .sizestate h3{
  font-size: 8px;
  margin-left: -18px;
+ margin-top: -10px;
 
+}
+
+.shipad{
+  width: 365px !important;
 }
  
 

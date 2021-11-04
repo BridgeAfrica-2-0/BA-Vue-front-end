@@ -12,8 +12,6 @@ import dashboardcommunity from "./dashboardcommunity";
 
 import networkSetting from "./networkSetting";
 
-
-
 import businessFollowers from "./businessFollowers";
 import hotbusiness from "./hotbusiness";
 import profile from "./profile";
@@ -51,7 +49,6 @@ export default new Vuex.Store({
         allSearch,
      marketSearch,
        networkSearch,
-    networkProfile,
     UserProfileOwner,
     businessFollowers
   },

@@ -695,7 +695,6 @@ export default {
       strategyForComponent: null,
       notFoundComponentTitle: "",
       isComponent: null,
-      strategy: {},
       strategyForPlaceHolder: {},
       strategyForNotFoundComponentTitle: {},
 

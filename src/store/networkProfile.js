@@ -11,7 +11,6 @@ export default {
     communityPeople: [],
     CommunityBusiness: [],
     communityTotal: [],
-    networkInfo: [],
     albums: [],
     images: [],
     albumImages: [],

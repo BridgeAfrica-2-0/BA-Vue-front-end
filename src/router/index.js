@@ -33,6 +33,8 @@ import navMessage from "@/views/navMessaging";
 import Blec from "@/views/blec";
 import memberNetworkFollower from "@/views/memberNetworkFollower";
  import govx from "@/views/test";
+import editors from "@/views/editors";
+// import Test from "@/views/test";
 import templateView from "@/views/templateView";
 import webSiteCreate from "@/views/webSiteCreate";
 import webSiteCreateTwo from "@/views/webSiteCreateTwo";
@@ -170,6 +172,16 @@ const routes = [
     component: networks,
   },
   {
+    path: "/business_owner/editors/:id?",
+    name: "editors",
+    component: editors,
+  },
+  {
+    path: "/editors/:id?",
+    name: "editors",
+    component: editors,
+  },
+  {
     path: "/login",
     name: "Login",
     component: Login,
@@ -281,6 +293,7 @@ const routes = [
     name: "Membar Network Follower",
     component: memberNetworkFollower,
   },
+
 ];
 
 const router = new VueRouter({

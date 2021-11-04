@@ -5,6 +5,7 @@ export default {
     state: {
         currentUser: JSON.parse(localStorage.getItem("user")),
         users: [],
+        chatList: [],
         userToUser: [],
         userToBiz: [],
         userToNetwork: [],
@@ -31,6 +32,9 @@ export default {
         },
         getUser(state) {
             return state.currentUser;
+        },
+        getChatList(state) {
+            return state.chatList;
         },
 
         getPosts(state) {
@@ -66,6 +70,9 @@ export default {
         setUser(state, data) {
             state.currentUser = data
         },
+        setChatList(state, data) {
+            state.chatList = data
+        },
 
 
         setLoader(state, payload) {
@@ -94,6 +101,39 @@ export default {
                 })
                 .catch((err) => {
                     commit("setLoader", false);
+                    console.log(err);
+                })
+        },
+        GET_USERS_CHAT_LIST({ commit, state }, data) {
+            commit("setUsers", []);
+
+            commit("setLoader", true);
+            let keyword = data ? '/' + data : ''
+
+            axios.get(`/messages`)
+                .then((res) => {
+                    commit("setLoader", false);
+                    console.log("All chat list: ", res.data.data);
+                    commit("setChatList", res.data.data ? res.data.data : {
+                        data: []
+                    });
+
+                })
+                .catch((err) => {
+                    commit("setLoader", false);
+                    console.log(err);
+                })
+        },
+
+
+        SAVE_USERS_CHAT({ commit, dispatch }, data) {
+            commit("setUsers", []);
+
+            axios.post(`/messages/UserToUser`, data)
+                .then((res) => {
+                    console.log("Message saved...", res.data.data);
+                })
+                .catch((err) => {
                     console.log(err);
                 })
         },

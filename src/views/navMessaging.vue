@@ -108,14 +108,22 @@
                       <!-- Users Chats Available  -->
 
                       <div class="messages">
+                        <div v-if="loader" class="text-center mt-12 pt-12">
+                          <b-spinner
+                            variant="primary"
+                            label="Spinning"
+                            class="centralizer"
+                          ></b-spinner>
+                        </div>
                         <b-row
+                          v-else
                           v-for="(chat, index) in chatList"
                           :key="index"
                           :class="[
                             'p-2 message ',
                             {
                               messageSelected:
-                                index ==
+                                chat.sender_id ==
                                 (chatSelected.clickedId != null
                                   ? chatSelected.clickedId
                                   : false)
@@ -123,7 +131,7 @@
                                   : false,
                             },
                           ]"
-                          @click="selectedChat(chat, index)"
+                          @click="selectedChat(chat, chat.sender_id)"
                         >
                           <b-col class="col-9">
                             <span style="display: inline-flex">
@@ -135,18 +143,18 @@
 
                               <h6 class="mt-2 d-inline-block ml-2">
                                 <b class="bold"> {{ chat.name }}</b>
-                                <p class="duration">{{ chat.startMessage }}</p>
+                                <p class="duration">{{ chat.message }}</p>
                               </h6>
                             </span>
                           </b-col>
 
                           <b-col class="col-3 text-center">
                             <small class="text-center">
-                              {{ chat.timeStamp }}
+                              {{ getCreatedAt(chat.created_at) }}
                             </small>
                             <p class="text-center">
                               <b-badge variant="info">
-                                {{ chat.messageCount }}
+                                {{ chat.sender_id }}
                               </b-badge>
                             </p>
                           </b-col>
@@ -241,7 +249,7 @@
                   </b-col>
 
                   <b-col class="detale">
-                    <h6>{{ receiver.name }}</h6>
+                    <h6>{{ chatSelected.name }}</h6>
                     <small>Online </small>
                   </b-col>
                   <b-col cols="3">
@@ -270,7 +278,7 @@
                   </b-col>
 
                   <b-col class="detail" @click="info = true">
-                    <h5>{{ receiver.name }}</h5>
+                    <h5>{{ chatSelected.name }}</h5>
                     <p>Online</p>
                   </b-col>
                   <b-col class="col-4">
@@ -376,7 +384,7 @@
                   ></b-spinner>
                 </div>
                 <div v-else v-for="chat in userToUser" :key="chat.id">
-                  <div v-if="currentUser.user.id == chat.sender_id">
+                  <div v-if="currentUser.user.id != chat.sender_id">
                     <b-row class="p-4">
                       <b-col>
                         <p class="msg-text mt-0 text">
@@ -404,7 +412,6 @@
               </section>
 
               <section v-else class="chats" style="margin-left: 1px" ref="feed">
-               
                 <div v-for="(message, index) in messages" :key="index">
                   <div v-if="message.sender != currentUser.user.name">
                     <b-row class="p-4">
@@ -665,43 +672,13 @@ export default {
       search: "",
       chatSearchKeyword: "",
       chatId: "",
-      socket: io("http://localhost:7000", {
+      // socket: io("https://ba-chat-server.herokuapp.com", {
+      //   transports: ["websocket", "polling", "flashsocket"],
+      // }),
+      socket: io("localhost:7000", {
         transports: ["websocket", "polling", "flashsocket"],
       }),
-
       chatSelected: [],
-      chatList: [
-        {
-          id: 0,
-          name: "Blezour blec",
-          startMessage: "Hello Blec lola blec ",
-          timeStamp: "3:00pm",
-          messageCount: "10",
-        },
-        {
-          id: 1,
-          name: "Blec blezour blec",
-          startMessage: "yoo nigga sup lola blec",
-          timeStamp: "7:00am",
-          messageCount: "60",
-        },
-
-        {
-          id: 2,
-          name: "Edouard yonga",
-          startMessage: "Lorem ipsum la lola blec vlr ",
-          timeStamp: "9:00am",
-          messageCount: "60",
-        },
-        {
-          id: 4,
-          name: "baba blecc ",
-          startMessage: "Lorem ipsum la lola blec vlr ",
-          timeStamp: "9:00am",
-          messageCount: "60",
-        },
-      ],
-
       showsearch: true,
       selecteduser: false,
       searchQuery: "",
@@ -922,6 +899,9 @@ export default {
     },
   },
   computed: {
+    chatList() {
+      return this.$store.getters["userChat/getChatList"];
+    },
     currentUser() {
       return this.$store.getters["userChat/getUser"];
     },
@@ -957,21 +937,9 @@ export default {
     },
   },
   mounted() {
-    console.log("test:", window.Echo);
-
-    // window.Echo
-    //   .private("user.2")
-    //   .listen("MessageEvent", () => {
-    //     console.log("[DEBUG]...");
-    //   });
-
-    // this.socket.emit("addUser", {
-    //   socketID: this.socket.id,
-    //   user: this.currentUser.user,
-    // });
     this.$refs.feed.scrollTop = this.$refs.feed.scrollHeight;
-
     this.getUsers();
+    this.getChatList();
   },
   created() {
     this.socket.on("generalMessage", (data) => {
@@ -983,13 +951,14 @@ export default {
       console.log("Received");
       console.log(data);
       this.userToUser.push(data);
+      this.saveMessage(data);
     });
   },
   methods: {
     createRoom(receiver_id) {
       let sender_id = this.currentUser.user.id;
       this.room = [receiver_id, sender_id];
-      console.log("ROOMS: ",this.room);
+      console.log("ROOMS: ", this.room);
       this.socket.emit("create", this.room);
     },
     getCreatedAt(data) {
@@ -998,6 +967,14 @@ export default {
     getUsers() {
       this.$store
         .dispatch("userChat/GET_USERS")
+        .then(() => {
+          console.log("->[Data logged]<-");
+        })
+        .catch(() => console.log("error"));
+    },
+    getChatList() {
+      this.$store
+        .dispatch("userChat/GET_USERS_CHAT_LIST")
         .then(() => {
           console.log("->[Data logged]<-");
         })
@@ -1057,6 +1034,15 @@ export default {
         })
         .catch(() => console.log("error"));
     },
+    saveMessage(data) {
+      console.log("[DEBUG SAVE]", data);
+      this.$store
+        .dispatch("userChat/SAVE_USERS_CHAT", data)
+        .then(() => {
+          console.log("Chat saved");
+        })
+        .catch(() => console.log("error"));
+    },
     //-------
 
     insert(emoji) {
@@ -1093,9 +1079,11 @@ export default {
     send() {
       this.socket.emit("privateMessage", {
         message: this.input,
-        sender: this.currentUser.user.name,
+        sender_id: this.currentUser.user.id,
         room: this.room,
+        receiver_id: this.chatSelected.id,
       });
+
       // this.socket.emit("generalMessage", {
       //   message: this.input,
       //   sender: this.currentUser.user.name,

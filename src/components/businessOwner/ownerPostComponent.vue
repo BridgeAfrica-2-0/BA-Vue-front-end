@@ -105,14 +105,15 @@
         />
       </div>
     </div>
-    <Comment v-for="comment in comments" :key="comment.id" :comment="comment" />
+    <Loader v-if="loadComment" />
+    <Comment v-for="comment in comments" :key="comment.id" :item="comment" :uuid="post.post_id" />
     <hr />
   </div>
 </template>
 
 <script>
 import { formatNumber, fromNow } from '@/helpers';
-
+import Loader from '@/components/Loader';
 import { mapMutations } from 'vuex';
 
 import Comment from './comment';
@@ -125,6 +126,7 @@ export default {
   components: {
     Comment,
     light,
+    Loader,
   },
 
   watch: {
@@ -143,6 +145,7 @@ export default {
     showComment: false,
     processLike: false,
     createCommentRequestIsActive: false,
+    loadComment: false,
   }),
 
   created() {
@@ -194,6 +197,7 @@ export default {
     onCreateComment: async function () {
       if (!(this.comment.trim().length > 2 && !this.createCommentRequestIsActive)) return false;
       this.createCommentRequestIsActive = true;
+      this.loadComment = true;
       const request = await this.$repository.share.createComment({
         post: this.post.post_id,
         data: {
@@ -215,16 +219,19 @@ export default {
         });
       }
 
-      this.createPostRequestIsActive = false;
+      this.createCommentRequestIsActive = false;
+      this.loadComment = false;
     },
 
     onShowComment: async function () {
+      this.loadComment = true;
       const request = await this.$repository.post.fetch({
         uuid: this.post.post_id,
         page: 1,
       });
-      console.log(request.data);
       if (request.success) this.comments = request.data;
+
+      this.loadComment = false;
     },
   },
 };

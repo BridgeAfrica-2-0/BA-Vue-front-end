@@ -393,8 +393,8 @@
       </div> -->
 
       <Post
-        v-for="item in owner_post"
-        :key="item.post_id"
+        v-for="(item, index) in owner_post"
+        :key="index"
         :post="item"
         :mapvideo="() => mapvideo(item.media)"
         :mapmediae="() => mapmediae(item.media)"
@@ -483,6 +483,11 @@ export default {
   },
 
   methods: {
+    async getAuth() {
+      const response = await this.$repository.share.WhoIsConnect({ networkId: this.$route.params.id });
+
+      if (response.success) this.auth(response.data);
+    },
     init: async function () {
       await this.$repository.share.switch(this.$route.params.id, 'business');
     },
@@ -926,6 +931,7 @@ export default {
     },
 
     owner_post() {
+      console.log(this.$store.state.businessOwner.ownerPost);
       return this.$store.state.businessOwner.ownerPost;
     },
 

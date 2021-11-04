@@ -359,6 +359,7 @@ export default {
 
       if (response.success) this.auth(response.data);
     },
+    
 
     infiniteHandler($state) {
       this.axios

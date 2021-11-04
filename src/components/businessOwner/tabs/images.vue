@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <template>
   <div>
     <FlashMessage />
@@ -601,3 +602,5 @@ export default {
   color: #000;
 }
 </style>
+=======
+>>>>>>> networkProfile(sidebar_community)

@@ -18,6 +18,7 @@ import networkProfileMembers from "./networkProfileMembers";
 import follower from "./follower";
 import networkProfile from "./networkProfile";
 import UserProfileOwner from "./UserProfileOwner"
+import networkProfileCommunitySidebar from "./networkProfileCommunitySidebar";
 import { search } from "./search";
 import { social } from "./social";
 
@@ -25,6 +26,7 @@ import axios from "axios";
 Vue.use(Vuex);
 
  axios.defaults.baseURL = process.env.VUE_APP_API_URL;
+
 
 
 export default new Vuex.Store({
@@ -47,9 +49,12 @@ export default new Vuex.Store({
      marketSearch,
        networkSearch,
     UserProfileOwner,
-    businessFollowers
-  },
+    businessFollowers,
+    networkProfileCommunitySidebar
+  }
 });
 
-   
+
+
+
 

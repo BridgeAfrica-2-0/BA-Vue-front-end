@@ -135,9 +135,7 @@
         <b-form-select v-model="selected">
           <b-form-select-option value="a"> My Location </b-form-select-option>
         </b-form-select>
-
         <br />
-
         <hr />
       </span>
 
@@ -613,14 +611,6 @@ export default {
 
   props: ["filterType", "Selectedcategory", "Selectedparentcategory"],
 
-  created() {
-    this.strategies = {
-      2: () => PeopleFilter,
-      5: () => PostFilter,
-    };
-
-    this.getCountries();
-  },
   watch: {
     filterType: function (newId) {
       try {
@@ -1973,7 +1963,14 @@ export default {
       return this.$store.getters["networkSearch/getNeighbourhoods"];
     },
   },
-
+  
+  created() {
+    this.getCountries();
+    this.strategies = {
+      2: () => PeopleFilter,
+      5: () => PostFilter,
+    };
+  },
 
   methods: {
     getFilter(subCat) {

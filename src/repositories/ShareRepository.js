@@ -65,12 +65,29 @@ class Repository {
     }
   }
 
-  async switch(uuid) {
+  async switch(uuid, type="network") {
     try {
-      const response = (uuid) ? await axios.get(`switch?id=${uuid}`) : await axios.get(`switch`)
+      const response = ("network" == type) ? await axios.post(`switch`, {networkId:uuid}) :  (uuid) ? await axios.get(`switch?id=${uuid}`) : await axios.get(`switch`)
       return {
         success: true,
         data: response.data.message
+      }
+
+    } catch (error) {
+      return {
+        success: false,
+        data: error
+      }
+    }
+  }
+
+
+  async WhoIsConnect({networkId}) {
+    try {
+      const response = await axios.get(`interface?networkId=${networkId}`)
+      return {
+        success: true,
+        data: response.data.data
       }
 
     } catch (error) {

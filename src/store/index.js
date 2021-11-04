@@ -40,12 +40,14 @@ export default new Vuex.Store({
     hotbusiness,
     NetworkSettings,
     profile,
-    networkProfile,
     follower,
     search,
-    networkProfileMembers,
-    
+    UserProfileOwner,
+    checkout,
     social,
+    marketSearch,
+    networkSearch,
+    networkProfileMembers,
         allSearch,
      marketSearch,
        networkSearch,
@@ -55,6 +57,8 @@ export default new Vuex.Store({
     networkProfileCommunity,
     networkProfileMedia,
     networkProfileMemberRequest,
+    networkProfile,
+    businessFollowers,
   }
 });
 

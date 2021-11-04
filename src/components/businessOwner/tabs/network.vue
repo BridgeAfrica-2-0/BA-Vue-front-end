@@ -108,6 +108,7 @@ export default {
   data() {
     return {
       page: 1,
+       biz_id:null,
       options: {
         rewind: true,
         autoplay: true,
@@ -135,6 +136,11 @@ export default {
    }
    
   },
+  
+
+   mounted(){
+    this.biz_id = this.$route.params.id;
+ },
 
 
 
@@ -142,7 +148,7 @@ export default {
    methods:{
       
      
-      infiniteHandler($state) {
+      infiniteHandler($state) {       
 
         console.log("loading network 1 1")
 

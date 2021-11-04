@@ -4,7 +4,7 @@
       <span>
         <h6 class="mybusi">
           <fas-icon class="icons" :icon="['fas', 'hands-helping']" size="lg" />
-          <b> My Businesses </b>  
+          <b> {{$t('business.my_businesses')}} </b>  
         </h6>
       </span>
       <div class="s-card " style="overflow: -moz-scrollbars-vertical">
@@ -13,23 +13,16 @@
             <b-col>
               <div class="p-top">
                 <br />
-                <h6>No Business</h6>
+                <h6>{{$t('business.no_business')}}</h6>
 
                 <b-button variant="primary" class="busi-btn">
-                  Add Business
+                  {{$t('business.add_business')}}
                 </b-button>
               </div>
             </b-col>
           </b-row>
         </div>
-
         <Business  :business="business"   v-if="business.lenght !=0" />
-
-
-
-
-
-
       </div>
     </b-card>
   </div>

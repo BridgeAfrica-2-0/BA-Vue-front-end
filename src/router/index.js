@@ -24,6 +24,7 @@ import Follower from "../views/follower.vue";
 import Visitor from "../views/visitor.vue";
 import profile_owner from "@/views/profileOwner";
 import businessFollower from "@/views/businessFollower";
+import profileFollower from "@/views/profileFollower";
 import businessOwner from "@/views/businessOwner";
 import businessEditor from "@/views/businessEditor";
 import businessVisitor from "@/views/businessVisitor";
@@ -48,6 +49,7 @@ import myorders from "@/views/myOders"
 
 
 import welcome from "@/views/welcome";
+import payment from "@/views/payment";
 
 Vue.use(VueRouter);
 
@@ -83,6 +85,11 @@ const routes = [
     name: "market",
     component: market,
   },
+  {
+    path: "/checkout",
+    name: "payment",
+    component: payment
+  },
 
 
   {
@@ -116,6 +123,11 @@ const routes = [
     path: "/profile_owner",
     name: "profile_owner",
     component: profile_owner,
+  },
+  {
+    path: "/profilefollower/:id?",
+    name: "ProfileFollower",
+    component: profileFollower,
   },
   {
     path: "/template_viewer",
@@ -163,7 +175,7 @@ const routes = [
   },
   {
     path: "/business_owner/network/:id?",
-    name: "networks",
+    name: "networks_business",
     component: networks,
   },
   {

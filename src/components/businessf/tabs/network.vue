@@ -1,46 +1,41 @@
 <template>
   <div>
+    <b-modal id="modal-sm" size="sm" hide-header>
+      Do you want to join this network?
+    </b-modal>
 
-  <b-spinner v-if="prodLoader" variant="primary" label="Spinning"></b-spinner>
 
-    <div class="people-style shadow" v-for="biz in business.data" :key="biz.business_id">
+      
+
+          <div class="people-style shadow"  v-for="item in network" :key="item.id">
       <b-row>
-        <b-col md="3" xl="3" lg="3" cols="5" sm="3">
-          <div class="center-img">
-            <splide :options="options" class="r-image">
-              <splide-slide cl>
-                <img
-                  src="https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg"
-                  class="r-image"
-                />
-              </splide-slide>
-            </splide>
-          </div>
+        <b-col md="3" xl="5" lg="5" cols="5" sm="3">
+         
+            <div class="center-img">
+            <img :src="item.picture" class="r-image" />
+          </div>   
+        
         </b-col>
-        <b-col md="9" cols="7" lg="5" sm="5">
+
+        
+        <b-col md="5" cols="7" lg="7" xl="7" sm="5">
           <p class="textt">
-            <strong class="title"> Super Car ltd </strong> <br />
-            Car marketing
+            <strong class="title"> {{ item.name }} </strong> <br />
+            {{ item.category }}
             <br />
-            20k Community <br />
+           {{ item.followers }} Community<br />
 
-            <span class="location">
-              <b-icon-geo-alt class="ico"></b-icon-geo-alt> Douala cameroon
-            </span>
-            <br />
-
-            super best car seller in the world adipisicing elit. lorem epsep
-            this is <b-link>Read More</b-link>
+           {{ item.about_network }} <b-link>Read More</b-link>
           </p>
         </b-col>
 
-        <b-col lg="4" md="12" xl="4" cols="12" sm="4">
+        <b-col lg="12" xl="12" md="4" cols="12" sm="4">
           <div class="s-button">
             <b-row>
               <b-col
-                md="4"
-                lg="12"
-                xl="12"
+                md="12"
+                lg="4"
+                xl="4"
                 sm="12"
                 cols="4"
                 class="mt-2 text-center"
@@ -57,9 +52,9 @@
               </b-col>
 
               <b-col
-                md="4"
-                lg="12"
-                xl="12"
+                md="12"
+                lg="4"
+                xl="4"
                 sm="12"
                 cols="4"
                 class="mt-2 text-center"
@@ -76,9 +71,9 @@
               </b-col>
 
               <b-col
-                md="4"
-                lg="12"
-                xl="12"
+                md="12"
+                lg="4"
+                xl="4"
                 sm="12"
                 cols="4"
                 class="mt-2 text-center"
@@ -99,36 +94,21 @@
       </b-row>
     </div>
 
-  
-
-
-    <b-pagination
-      v-model="currentPage"
-      :total-rows="total"
-      :per-page="per_page"
-      aria-controls="my-table"
-      @change="changePage"
-      align="center"
-    ></b-pagination>
-
+   
+  <infinite-loading @infinite="infiniteHandler"></infinite-loading>  
   </div>
 </template>
 
 <script>
-import { mapGetters, mapActions } from "vuex";
-export default {
-  props: ["title", "image"],
 
+import axios from "axios";
+ 
+export default {
+  props: ["type"],
   data() {
     return {
-
-       total:0,
-      per_page:10,
-      list: [],
-      currentPage: 1,
-      nextLoad: false,
-     
-
+      page: 1,
+       biz_id:null,
       options: {
         rewind: true,
         autoplay: true,
@@ -141,79 +121,97 @@ export default {
     };
   },
 
+  computed: {
+   
+        network(){
 
- computed: {
-    ...mapGetters({
-      searchstate: "business/getSearchState",
-      business: "business/getBusiness",
-      sponsorbusiness: "business/getSponsorBusinesses",
-      prodLoader: "business/getloadingState"
+      if(this.type=="Follower"){ 
 
-    }),
-  },
+      return  this.$store.state.businessOwner.NcommunityFollower.network_followers;  
 
-  mounted(){
-    this.getBusiness();
-  },
+       }else{
 
-   methods: {
-
-      ...mapActions({
-      
-      findBusiness: "business/FIND_BUSINESS",
-       nextPage: "business/NEXT_PAGE",
-    }),
-
-    getBusiness(){
-
-
-       console.log("business search mounted");
-          this.$store.commit("business/setLoading", true);
-      
-      
-      
-         
-         this.findBusiness({})
-        .then((res) => {
-          console.log("business list: ");
-          console.log(this.business);
-          this.$store.commit("business/setLoading", false);
-         
-           
-          this.total = this.business.total
-        })
-        .catch((err) => {
-           this.$store.commit("business/setLoading", false);
-         
-          console.error(err);
-        });
-
-    },
-
-    changePage(value) {
-
-      console.log("next page loading ");
-      
-    
-      this.$store.commit("business/setLoading", true);
-      this.currentPage = value;
-     
-         
-         this.nextPage( this.currentPage )
-        .then((res) => {
-          console.log("business list: ");
-          console.log(this.business);
-          this.prodLoader = false;
-        })
-        .catch((err) => {
-          this.prodLoader = false;
-          this.total = this.business.total
-          console.error(err);
-        });
-    },
+         return  this.$store.state.profile.NcommunityFollowing.network_following; 
+       }
    }
+   
+  },
+  
+
+   mounted(){
+    this.biz_id = this.$route.params.id;
+ },
+
+
+
+
+   methods:{
+      
+     
+      infiniteHandler($state) {       
+
+        console.log("loading network 1 1")
+
+      let url = null;
+
+    
+
+         if(this.type=="Follower"){  
+         
+           url = "business/community/network-follower/"+this.biz_id+"/";
+         }else{
+         
+           url = "business/community/network-following/"+this.biz_id+"/";
+         }
+      axios
+        .get(url + this.page)   
+        .then(({ data }) => {
+          console.log("lading network after response")
+          console.log(data);
+        if(this.type=="Follower"){
+         
+
+          if (data.data.network_followers.length) {
+            this.page += 1;
+            this.network.push(...data.data.network_followers);
+            
+            
+            $state.loaded();
+           }else{
+              $state.complete();
+           }
+
+
+          } else {
+            
+
+
+             if (data.data.network_following.length) {
+            this.page += 1;
+      
+            this.network.push(...data.data.network_following);
+            
+            
+            $state.loaded();
+           }else{
+              $state.complete();
+           }
+
+
+
+          }
+        }) 
+        .catch((err) => {
+          console.log({ err: err });
+        });
+    },
+
+  } ,
+
+ 
 };
 </script>
+
 
 <style scoped>
 @media only screen and (min-width: 768px) {
@@ -290,7 +288,7 @@ export default {
 
     font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-weight: normal;
-    font-size: 12px;
+    font-size: 14px;
     line-height: 30px;
     color: rgba(117, 114, 128, 1);
     text-align: left;
@@ -348,7 +346,7 @@ export default {
     color: rgba(117, 114, 128, 1);
     text-align: left;
 
-    font-weight: normal;  
+    font-weight: normal;
     line-height: 20px;
     font-style: normal;
 
@@ -368,9 +366,12 @@ export default {
 
   .btn {
     padding-top: 6px;
-
     height: 38px;
-    width: 123px;
+    width: 110px;
+    font-size: 12px;
+    margin-left: -10px;
+
+    padding-top: 8px;
   }
 
   .r-image {
@@ -421,9 +422,6 @@ export default {
     border: 1px solid rgba(0, 0, 0, 0.125);
     margin-bottom: 10px;
 
-    margin-left: -15px;
-    margin-right: -15px;
-
     margin-right: 8px;
 
     padding: 7px;
@@ -466,6 +464,16 @@ export default {
 @media only screen and (max-width: 520px) {
   .btn {
     display: flex;
+  }
+}
+
+@media only screen and (min-width: 992px) and (max-width: 1331px) {
+  .btn {
+    width: 98px;
+    height: 33px;
+    font-size: 12px;
+    margin-left: -10px;
+    padding-top: 8px;
   }
 }
 </style>

@@ -11,9 +11,10 @@ import networkProfileCommunity from "./networkProfileCommunity";
 import networkDetails from "./networkDetails";
 import dashboardcommunity from "./dashboardcommunity";
 import NetworkSettings from "./NetworkSettings";
-
+import checkout from "./checkout";
 import businessFollowers from "./businessFollowers";
-import hotbusiness from "./hotbusiness";
+import hotbusiness from "./hotbusiness";   
+import business from "./business";
 import profile from "./profile";
 import networkProfileMembers from "./networkProfileMembers";
 import follower from "./follower";
@@ -29,8 +30,10 @@ import { social } from "./social";
 
 import axios from "axios";
 Vue.use(Vuex);
-//  axios.defaults.baseURL = process.env.VUE_APP_API_URL;
- axios.defaults.baseURL = "https://test.maxinemoffett.com/api/v1";
+
+//axios.defaults.baseURL = process.env.VUE_APP_API_URL;  
+axios.defaults.baseURL = "http://test.maxinemoffett.com/api/v1"
+
 export default new Vuex.Store({
   modules: {
     auth,
@@ -38,6 +41,7 @@ export default new Vuex.Store({
     dashboardcommunity,
     ProfileAndBusinessDetails,
     businessOwner,
+    business,
     networkProfileFeedback,
     hotbusiness,
     NetworkSettings,

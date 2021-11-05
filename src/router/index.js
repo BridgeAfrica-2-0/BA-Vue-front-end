@@ -174,8 +174,8 @@ const routes = [
     component: confirmPayment,
   },
   {
-    path: "/business_owner/network/:id?",
-    name: "networks_business",
+    path: "/network/:id?",
+    name: "networks",
     component: networks,
   },
   {

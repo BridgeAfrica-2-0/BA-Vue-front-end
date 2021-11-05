@@ -19,7 +19,7 @@
     </b-row>
     <br/>
 
-    <b-row cols="2">
+    <b-row cols="1">
       <b-col class="ml-0 mr-0"
         v-for="member in displayfollowing"
         :key="member.id"
@@ -33,7 +33,7 @@
             </b-card>
           </template>
         <div style="display:none;">{{member['communityNum'] = nFormatter(member.followers)}}</div>
-        <CommunityMembers :member="member" />
+        <CommunityBusiness :member="member" />
         </b-skeleton-wrapper>
       </b-col>
     </b-row>
@@ -49,10 +49,10 @@
 </template>
 
 <script>
-import CommunityMembers from "../../communityMember"
+import CommunityBusiness from "../../communitybusiness"
 export default {
   components: {
-    CommunityMembers
+    CommunityBusiness
   },
   data() {
     return {

@@ -23,8 +23,8 @@
               <b-icon-geo-alt class="ico"></b-icon-geo-alt> {{ member.city }}
             </span>
             <br />
-            <span v-if="member.description.length<65">{{ member.description}}</span>
-            <span v-else >{{ member.description.substring(0,65)+"..." }} <b-link>Read More</b-link></span>
+            <span v-if="member.description.length<55">{{ member.description}}</span>
+            <span v-else >{{ member.description.substring(0,55)+"..." }} <b-link>Read More</b-link></span>
           </p>
         </b-col>
 

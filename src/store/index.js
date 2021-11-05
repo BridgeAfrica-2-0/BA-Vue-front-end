@@ -17,6 +17,7 @@ import hotbusiness from "./hotbusiness";
 import profile from "./profile";
 import networkProfileMembers from "./networkProfileMembers";
 import follower from "./follower";
+import checkout from "./checkout";
 import networkProfile from "./networkProfile";
 import UserProfileOwner from "./UserProfileOwner"
 import networkProfileCommunitySidebar from "./networkProfileCommunitySidebar";
@@ -28,7 +29,8 @@ import { social } from "./social";
 
 import axios from "axios";
 Vue.use(Vuex);
- axios.defaults.baseURL = process.env.VUE_APP_API_URL;
+//  axios.defaults.baseURL = process.env.VUE_APP_API_URL;
+ axios.defaults.baseURL = "https://test.maxinemoffett.com/api/v1";
 export default new Vuex.Store({
   modules: {
     auth,
@@ -49,16 +51,12 @@ export default new Vuex.Store({
     networkSearch,
     networkProfileMembers,
         allSearch,
-     marketSearch,
-       networkSearch,
-    UserProfileOwner,
     businessFollowers,
     networkProfileCommunitySidebar,
     networkProfileCommunity,
     networkProfileMedia,
     networkProfileMemberRequest,
     networkProfile,
-    businessFollowers,
   }
 });
 

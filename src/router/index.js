@@ -184,11 +184,6 @@ const routes = [
     component: networks,
   },
   {
-    path: "/business_owner/editors/:id?",
-    name: "editors",
-    component: editors,
-  },
-  {
     path: "/network_editors/:id?",
     name: "NetworkEditors",
     component: networkEditors,

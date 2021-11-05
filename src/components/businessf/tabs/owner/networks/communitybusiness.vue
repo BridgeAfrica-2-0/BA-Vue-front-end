@@ -19,12 +19,12 @@
             {{ member.communityNum }}
             Community <br />
 
-            <span class="location">
+            <!-- <span class="location">
               <b-icon-geo-alt class="ico"></b-icon-geo-alt> {{ member.location_description }}
-            </span>
-            <br />
-            <span v-if="member.about_business.length<65">{{ member.about_business}}</span>
-            <span v-else >{{ member.about_business.substring(0,65)+"..." }} <b-link>Read More</b-link></span>
+            </span> -->
+            <!-- <br /> -->
+            <span v-if="member.about_business.length<55">{{ member.about_business}}</span>
+            <span v-else >{{ member.about_business.substring(0,55)+"..." }} <b-link>Read More</b-link></span>
           </p>
         </b-col>
 

@@ -41,7 +41,7 @@
                           >
                             <h6 class="follower m-15">
                               {{ count(item.followers) }}
-                              Community
+                             {{ $t("profile.community") }}
                             </h6>
                           </b-col>
                         </b-row>
@@ -65,7 +65,7 @@
                               class="b-background flexx pobtn shadow"
                             >
                               <i class="fas fa-envelope   fa-lg btn-icon "></i>
-                              <span class="btn-text">Message</span>
+                              <span class="btn-text"> {{ $t("profile.messages") }}</span>
                             </b-button>
                           </b-col>
 
@@ -83,7 +83,7 @@
                               variant="primary"
                             >
                               <i class="fas fa-user-plus  fa-lg btn-icon "></i>
-                              <span class="btn-com">Community</span>
+                              <span class="btn-com">{{ $t("profile.community") }}</span>
                             </b-button>
                           </b-col>
                         </b-row>

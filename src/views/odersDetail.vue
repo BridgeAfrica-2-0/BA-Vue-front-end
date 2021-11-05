@@ -1,10 +1,10 @@
 <template >
   <div>
     <navbar />
-    <div class="container body">
-      <h1>Order Details</h1>
+    <div class="content body ">
+      <h1 class="h1">Order Details</h1>
 
-      <div class="card my-2 shadow">
+      <div class="card my-2 p-0 ">
         <div class="card-body row">
           <div class="col">
             <span class="marge row">
@@ -13,13 +13,13 @@
             </span>
             <span class="flou marge1"><h3 class="  marge1">yaoundé, 12/12/2021,12:00</h3></span>
           </div>
-          <div class="col ">
-            <span class=" "> <h3 class="margtotal ">Total : 199500 Fcfa</h3> </span>
+          <div class="col p-0">
+            <span class="bold "> <h3 class="margtotal ">Total : 199500 Fcfa</h3> </span>
           </div>
         </div>
       </div>
 
-      <div class="card my-1 shadow">
+      <div class="card my-1 p-0">
         <div class="card-body row">
           <div class="col">
             <span class="mr-2 row "
@@ -30,7 +30,7 @@
               Card</span
             >
             <span class="row">
-              <span class="my-1 col"> <h3>sold by: marcellin , danaz</h3></span>
+              <span class=" col"> <h3>sold by: marcellin , danaz</h3></span>
 
               <div>
                 <button v-b-modal="'my-modal'" variant="ligth" class="border mx-4 button">
@@ -64,9 +64,9 @@
         </div>
       </div>
 
-      <div class="card my-1 shadow">
+      <div class="card my-1 cardborder">
         <div class="card-body">
-          <div class="row container mx-5 rowmobile">
+          <div class="row container  rowmobile">
             <b-avatar  id="a1" class="avatar" text=" "></b-avatar>
             <b-progress
               id="p1"
@@ -104,11 +104,11 @@
               class="mb-3 size"
             ></b-progress>
           </div>
-          <div class="row sizestate">
-            <span class="col-3  "><h3>payment made</h3></span>
-            <span class="col-2 text-start "><h3>processing</h3></span>
-            <span class="col-2 text-start "><h3>complete</h3></span>
-            <span class="col-2 text-center"><h3>receive</h3></span>
+          <div class="row sizestate ">
+            <div class="col-3  "><h3>payment made</h3></div>
+            <div class="col-2 text-start p-0"><h3>processing</h3></div>
+            <div class="col-2 text-start "><h3>complete</h3></div>
+            <div class="col-2 text-center"><h3>receive</h3></div>
           </div>
 
           <div class="justify-content-between row my-5" v-for="i in 2" :key="i">
@@ -150,20 +150,20 @@
               <h3 class="text-success">WRITE A REVIEW</h3>
             </div>
 
-            <div class="justify-content-center container row">
+            <!-- <div class="justify-content-center container row">
               <br />
             </div>
 
             <div class="justify-content-center container row">
               <br />
-            </div>
+            </div> -->
           </div>
         </div>
       </div>
 
       <div class="row my-1 ">
         <div class="col-6">
-          <div class="card shipad shadow">
+          <div class="card shipad ">
             <div class="card-body row">
               <span>shipping Adress</span>
               <br /><br /><br />
@@ -173,7 +173,7 @@
          <div class="ligne"> </div>
 
         <div class="col-6">
-          <div class="card shipad my-1 shadow">
+          <div class="card shipad my-1 ">
             <div class="card-body">
               <div class="col bold">
                 <span class="row">
@@ -239,9 +239,7 @@ export default {
 </script>
 
 <style scoped>
-.body {
-  background-color: rgba(213, 214, 214, 0.473);
-}
+
 
 
 .hr {
@@ -276,6 +274,20 @@ color: #e75c18;
 
 /* style pour le desktop (-------------------) */
 @media only screen and (min-width: 988px) {
+  .body {
+  background-color: rgba(213, 214, 214, 0.473);
+}
+
+.content{
+   width: 80%;
+  padding-right: var(--bs-gutter-x, 0.75rem);
+  padding-left: var(--bs-gutter-x, 0.75rem);
+  margin-right: auto;
+  margin-left: auto;
+}
+.rowmobile{
+  margin-left: 50px;
+}
   .avatar{
     width: 15px;
     height: 15px;
@@ -347,6 +359,14 @@ h3 {
 /* .marge {
   margin-right: 380px;
 }*/
+.cardborder{
+  border: none;
+}
+
+.bold h3 {
+  font-weight: bold !important;
+}
+
 .margtext .text-success{
   font-size: 10px !important;
  
@@ -360,8 +380,8 @@ h3 {
   
 }
 .avatar{
-width: 10px;
-height: 10px;
+width: 8px;
+height: 8px;
 }
 .marge1 {
   /* margin-right: 300px; */
@@ -379,10 +399,10 @@ height: 10px;
 }
 .size {
   height: 3px;
-  margin-top: 4px;
+  margin-top: 3px;
   margin-left: -3px;
   margin-right: -3px;
-   width: 50px;
+   width: 67px;
 }
   
   h3 {
@@ -416,7 +436,7 @@ height: 10px;
 .r-img {
   border-radius: 4px;
   height: 150px;
-  width: 300px;
+  width: 340px;
 }
 
 .margtotal {
@@ -425,7 +445,7 @@ height: 10px;
 
 }
 .rowmobile{
-  margin-left: -5px !important;
+  margin-left: -0.1px !important;
 }
 
 .sizestate h3{
@@ -434,10 +454,16 @@ height: 10px;
  margin-top: -10px;
 
 }
+.sizestate{
+  margin-left: 20px;
+}
 
 .shipad{
   width: 325px !important;
  
+}
+h1{
+  font-size: 16px;
 }
  
 

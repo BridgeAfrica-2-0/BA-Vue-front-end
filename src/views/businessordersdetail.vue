@@ -256,9 +256,7 @@ export default {
 </script>
 
 <style scoped>
-.body {
-  background-color: rgba(213, 214, 214, 0.473);
-}
+
 
 
 .hr {
@@ -293,6 +291,9 @@ color: #e75c18;
 
 /* style pour le desktop (-------------------) */
 @media only screen and (min-width: 988px) {
+  .body {
+  background-color: rgba(213, 214, 214, 0.473);
+}
   .avatar{
     width: 15px;
     height: 15px;
@@ -356,6 +357,12 @@ h3 {
 .m{
   margin-left: 10px;
 }
+
+.rowmobile{
+  margin-right: -10px ;
+}
+
+
 }
 
 /* style de l'afichage mobile */
@@ -443,7 +450,7 @@ height: 10px;
 
 }
 .rowmobile{
-  margin-left: -10px !important;
+  margin-left: -15px !important;
 }
 
 .sizestate h3{

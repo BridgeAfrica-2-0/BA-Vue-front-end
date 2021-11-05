@@ -47,6 +47,7 @@
                   id="search-ba"
                   type="search"
                   list="browsers"
+                  v-model="credentials.location"
                   data-toggle="popover"
                   class="form-control search-mobile"
                   style="border-left: none"
@@ -85,6 +86,7 @@
                 ref="foo"
                 type="search"
                 list="browsers"
+                v-model="credentials.location"
                 data-toggle="popover"
                 class="form-control search-h"
                 placeholder="Where "
@@ -566,6 +568,7 @@ export default {
         return {
 
           keyword: '',
+          location: '',
           placeholder: '',
         };
       },

@@ -1,168 +1,148 @@
 <template>
   <div>
-    <div class="people-style p-3 shadow">
+    <div class="people-style shadow">
       <b-row>
         <b-col cols="5" lg="4" sm="4" md="5">
           <div class="center-img">
             <img
-              :src="product.picture"
-              class="r-image cursor-pointer"
               @click="productDetails"
+              src="https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg"
+              class="r-image"
             />
           </div>
         </b-col>
         <b-col cols="7" sm="8" md="7">
           <p class="text">
-            <strong class="title cursor-pointer" @click="productDetails">
-              {{ product.name }}
+            <strong class="title">
+              <b-link @click="productDetails"> Sneakers Blec cc </b-link>
             </strong>
             <br />
             <strong> Description </strong> <br />
-            {{ product.description.substring(0, 30) }}
-            <b-link v-if="product.description.length >= 30"> see more </b-link>
-            <br />
-
-            <span class="price">
-              <strong> {{ product.price }} </strong>
+            <span class="text">
+              This is just a dummy text dumy dummy things are always dummy and
+              dummy add things are always dummy hjykt
             </span>
-            <br />
+            <b-link class="text"> see more </b-link> <br />
+
+            <span class="price"> <strong> 12,000 Fcfa </strong> </span> <br />
           </p>
-          <p>
-            <b-button variant="primary" @click="handleAddToCard"
-              ><span>Add to Cart</span>
-            </b-button>
-          </p>
+
+          <span class="float-right">
+            <b-button variant="primary" class=""> Buy now </b-button>
+          </span>
         </b-col>
       </b-row>
 
-      <!-- <div>
+      <div>
         <br />
-      </div> -->
+      </div>
     </div>
-    <!-- EDIT PRODUCT MODAL -->
 
-    <b-modal hide-footer title="Edit product">
-      <b-form>
-        <b-row>
-          <b-col cols="12" md="6">
-            <b-form-group
-              id="input-group-1"
-              label="Product Name"
-              label-for="input-1"
-              label-size="sm"
-            >
-              <b-form-input
-                id="input-1"
-                class="mt-1"
-                type="text"
-                required
-              ></b-form-input>
-            </b-form-group>
+    <b-modal
+      v-model="viewProduct"
+      hide-footer
+      title="Product Details"
+      size="xl"
+    >
+      <b-row>
+        <b-col cols="5" class="mx-auto">
+          <b-img
+            class="img-fluid"
+            src="https://picsum.photos/600/300/?image=25"
+          ></b-img>
+        </b-col>
+        <b-col>
+          <h2 class="mb-4 text-center">Product Name</h2>
+          <p><span class="stock">In Stock</span></p>
+          <p>0.00 XAF</p>
+          <hr />
+          <b-row>
+            <b-col>
+              <b-button variant="primary">Message</b-button>
+            </b-col>
+            <b-col>
+              <b-button variant="outline-dark" class="float-right"
+                >Checkout on website</b-button
+              >
+            </b-col>
+          </b-row>
+          <hr />
+          <h5>Product Description</h5>
+          <p>
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Corporis
+            quod, reprehenderit neque atque recusandae laborum quia vel,
+            assumenda repellendus rem ab ex, odio aperiam quidem id deleniti
+            commodi consequatur optio.
+          </p>
+          <hr />
 
-            <b-form-group
-              id="input-group-1"
-              label="Product Description"
-              label-for="input-1"
-              label-size="sm"
-            >
-              <b-textarea
-                id="input-1"
-                class="mt-2"
-                type="text"
-                required
-              ></b-textarea>
-            </b-form-group>
-          </b-col>
-          <b-col cols="12" md="6">
-            <div class="image-upload-wrap">
-              <a href="#" data-toggle="modal" data-target="#createalbumModal">
-                <div class="drag-text">
-                  <i class="fa fa-plus"></i>
-                  <h6>Product Image</h6>
-                </div>
-              </a>
-              <div></div>
-            </div>
-          </b-col>
-        </b-row>
+          <b-row>
+            <b-col class="">
+              <span class="mr-3"
+                ><b-icon
+                  icon="suit-heart"
+                  variant="primary"
+                  aria-hidden="true"
+                ></b-icon>
+                23</span
+              >
+              <span
+                ><b-icon
+                  icon="chat-fill"
+                  variant="primary"
+                  aria-hidden="true"
+                ></b-icon>
+                123</span
+              >
+            </b-col>
+            <b-col class="">
+              <b-icon
+                class="float-right"
+                icon="share-fill"
+                variant="primary"
+                aria-hidden="true"
+              ></b-icon>
+            </b-col>
+          </b-row>
+          <br />
+          <b-row class="mt-2">
+            <b-col>
+              <b-avatar
+                variant="info"
+                src="https://placekitten.com/300/300"
+                size="2rem"
+              ></b-avatar>
+              <input placeholder="Post a Comment" class="comment" type="text" />
 
-        <b-form-group
-          id="input-group-1"
-          label="product Price"
-          label-for="input-1"
-          label-size="sm"
-        >
-          <b-form-input class="mt-1" id="price"></b-form-input>
-        </b-form-group>
-
-        <b-form-checkbox
-          id="checkbox-1"
-          name="checkbox-1"
-          value="accepted"
-          unchecked-value="not_accepted"
-        >
-          This Product Is On Discount
-        </b-form-checkbox>
-
-        <b-form-group
-          id="conditions"
-          label="Conditions"
-          label-for="input-1"
-          label-size="sm"
-        >
-          <b-form-input class="mt-1" id="conditions"></b-form-input>
-        </b-form-group>
-
-        <b-form-checkbox
-          id="checkbox-1"
-          name="checkbox-1"
-          value="accepted"
-          unchecked-value="not_accepted"
-        >
-          This Item Is A Service ?
-        </b-form-checkbox>
-
-        <b-form-checkbox
-          id="checkbox-1"
-          name="checkbox-1"
-          value="accepted"
-          unchecked-value="not_accepted"
-        >
-          In stock
-        </b-form-checkbox>
-
-        <b-form-checkbox
-          id="checkbox-1"
-          name="checkbox-1"
-          value="accepted"
-          unchecked-value="not_accepted"
-        >
-          Published
-        </b-form-checkbox>
-
-        <b-button class="mt-2 btn-block" variant="primary"> Add</b-button>
-      </b-form>
+              <fas-icon
+                class="primary send-cmt"
+                :icon="['fas', 'paper-plane']"
+              />
+            </b-col>
+          </b-row>
+          <Comment />
+          <b-row>
+            <b-col class="col-1"></b-col>
+            <b-col>
+              <Comment />
+            </b-col>
+          </b-row>
+        </b-col>
+      </b-row>
     </b-modal>
-    <!-- PRODUCT DETAILS MODAL -->
-    <ProductDetails
-      @closemodal="closeDetailsProduct"
-      :showModal="viewProduct"
-      :product="product"
-    />
   </div>
 </template>
 
 <script>
-import ProductDetails from "./ProductDetails.vue";
+import Comment from "./comment";
 export default {
-  props: ["product"],
   data() {
     return {
       viewProduct: false,
     };
   },
   components: {
-    ProductDetails,
+    Comment,
   },
   methods: {
     /**
@@ -173,13 +153,6 @@ export default {
     productDetails() {
       this.viewProduct = true;
     },
-    closeDetailsProduct() {
-      this.viewProduct = false;
-    },
-    handleAddToCard() {
-      console.log("add to card");
-      this.$store.dispatch("cart/addToCart", this.product.id);
-    },
   },
 };
 </script>
@@ -189,8 +162,76 @@ export default {
   color: orange;
   margin-left: 60px;
 }
-.cursor-pointer {
+
+p {
+  text-align: left;
+}
+
+input {
+  border-radius: 15px;
+  padding: 5px;
+  border: solid 1px #ccc;
+  width: 250px;
+}
+input:focus {
+  outline-color: none;
+  border: none;
+}
+.post {
+  position: relative;
+  left: -24px;
+}
+
+.prod {
+  max-width: 14rem;
   cursor: pointer;
+}
+.stock {
+  color: green;
+}
+.btn:focus {
+  outline: none;
+}
+.comment {
+  width: 90%;
+  border: solid 1px #ccc;
+  border-radius: 25px;
+  background-color: #ddd;
+  height: 35px;
+  padding-left: 10px;
+  margin-left: 20px;
+}
+.comment:focus {
+  outline: none;
+}
+.send-cmt {
+  position: relative;
+  margin-left: 93%;
+  top: -28px;
+  cursor: pointer;
+}
+
+h6 {
+  text-align: center;
+  font-weight: bold;
+}
+.short {
+  text-align: center;
+}
+.price {
+  text-align: center;
+}
+.buy {
+  border-radius: 0px;
+  width: 100%;
+}
+.reply {
+  cursor: pointer;
+}
+
+.discount {
+  color: orange;
+  margin-left: 60px;
 }
 
 p {
@@ -274,6 +315,9 @@ h6 {
   background-clip: border-box;
   border: 1px solid rgba(0, 0, 0, 0.125);
   margin-bottom: 10px;
+
+  padding: 3px;
+  padding-bottom: 26px;
 }
 
 @media only screen and (max-width: 540px) {
@@ -309,6 +353,7 @@ h6 {
     border-bottom-right-radius: 10px;
 
     width: 100px;
+
     height: 100px;
     padding: 4px;
   }
@@ -372,7 +417,7 @@ h6 {
     padding-top: 6px;
 
     height: 38px;
-    min-width: 123px;
+    width: 123px;
   }
 
   .title {

@@ -20,6 +20,7 @@ import axios from "axios";
 import { search } from "./search";
 import productComments from "./productComments";
 import productDetails from "./productDetails";
+import cart from "./cart";
 
 Vue.use(Vuex);
 
@@ -29,6 +30,7 @@ export default new Vuex.Store({
   modules: {
     auth,
     networkDetails,
+    cart,
     dashboardcommunity,
     ProfileAndBusinessDetails,
     businessOwner,

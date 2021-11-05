@@ -13,7 +13,10 @@
         </b-col>
         <b-col cols="7" sm="8" md="7">
           <p class="text">
-            <strong class="title"> {{ product.name }} </strong> <br />
+            <strong class="title cursor-pointer" @click="productDetails">
+              {{ product.name }}
+            </strong>
+            <br />
             <strong> Description </strong> <br />
             {{ product.description.substring(0, 30) }}
             <b-link v-if="product.description.length >= 30"> see more </b-link>
@@ -23,11 +26,6 @@
               <strong> {{ product.price }} </strong>
             </span>
             <br />
-          </p>
-          <p>
-            <b-button variant="primary" @click="handleAddToCard"
-              ><span>Add to Cart</span>
-            </b-button>
           </p>
         </b-col>
       </b-row>

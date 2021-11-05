@@ -25,6 +25,8 @@
               ]"
               :comments="comments"
               @submit-comment="submitComment"
+              :idproduct="idproduct"
+              @deletecomment="handleDeleteComment"
             ></comments>
           </div>
         </b-col>
@@ -64,6 +66,11 @@ export default {
     },
   },
   methods: {
+    handleDeleteComment(idcomment) {
+      this.loadComments = this.loadComments.filter(
+        (el) => el.comment_id !== idcomment
+      );
+    },
     submitComment: function(reply) {
       // this.comments.push({
       //   id: this.comments.length + 1,
@@ -88,6 +95,9 @@ export default {
           });
       });
     },
+  },
+  created() {
+    this.$store.dispatch("productComments/getProductLikes", this.idproduct);
   },
   beforeMount() {
     this.$store

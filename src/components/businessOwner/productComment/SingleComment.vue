@@ -26,7 +26,7 @@
                 <template #button-content>
                   <b-icon icon="three-dots-vertical"></b-icon>
                 </template>
-                <b-dropdown-item-button>
+                <b-dropdown-item-button @click="deleteComment">
                   <b-icon
                     variant="purple"
                     class="mr-2"
@@ -63,7 +63,7 @@
 import moment from "moment";
 export default {
   name: "singleComment",
-  props: ["comment"],
+  props: ["comment", "idproduct"],
   computed: {
     current_user() {
       return {
@@ -76,7 +76,16 @@ export default {
     },
   },
   methods: {
-    deleteComment() {},
+    deleteComment() {
+      this.$store
+        .dispatch("productComments/deleteComment", {
+          idproduct: this.idproduct,
+          idcomment: this.comment.comment_id,
+        })
+        .then(() => {
+          this.$emit("deletecomment", this.comment.comment_id);
+        });
+    },
   },
 };
 </script>

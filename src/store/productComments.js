@@ -19,6 +19,20 @@ const actions = {
         });
     });
   },
+  async getProductLikes({ commit }, idproduct) {
+    return await new Promise((resolve, reject) => {
+      axios
+        .get(`/market/product/detail/${idproduct}/like`)
+        .then((response) => {
+          commit;
+          console.log(response.data);
+          resolve(response.data.data);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    });
+  },
   async postComment({ commit }, newComment) {
     await axios
       .post(`/market/product/${newComment.idproduct}/comment/create`, {

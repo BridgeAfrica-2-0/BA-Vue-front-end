@@ -10,7 +10,7 @@
     <b-container>
       <b-row>
         <b-col cols="12" sm="12" md="4">
-          <ProductCaroussel :productImages="productImages" />
+          <ProductCaroussel :productImages="[{ img: product.picture }]" />
         </b-col>
         <b-col cols="12" sm="12" md="8">
           <div>
@@ -80,20 +80,6 @@ export default {
         currency: "XAF",
         minimumFractionDigits: 2,
       }),
-      productImages: [
-        {
-          img: require("@/assets/img/payment/headset.jpg"),
-        },
-        {
-          img: require("@/assets/img/payment/headset1.jpg"),
-        },
-        {
-          img: require("@/assets/img/payment/headset2.jpg"),
-        },
-        {
-          img: require("@/assets/img/payment/headset3.jpg"),
-        },
-      ],
       canShowModal: false,
       packageProduct: "basic",
     };

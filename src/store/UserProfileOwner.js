@@ -12,6 +12,7 @@ export default {
     ownerPost: [],
     ownerPostImages: [],
   },
+
   getters: {
     getAlbums(state) {
       return state.albums;
@@ -19,6 +20,10 @@ export default {
 
     getImages(state) {
       return state.images;
+    },
+
+    getalbumImages(state) {
+      return state.albumImages;
     },
 
     // sending loader value
@@ -30,6 +35,7 @@ export default {
       return state.success;
     },
   },
+
   mutations: {
     //set media data
 
@@ -69,40 +75,45 @@ export default {
     upAlbum(state, payload) {
       state.albums = payload;
     },
-    //for album images
+    //for  images
     setSubmitPost(state, payload) {
-      state.albums = payload;
+      state.images = payload;
     },
+
     setProfilePic(state, payload) {
       state.images = payload;
     },
+
     setCoverPic(state, payload) {
       state.images = payload;
     },
+
     deleteImage(state, payload) {
       state.images = payload;
     },
+
     downloadPic(state, payload) {
       state.images = payload;
     },
+
+
+    updateAlbum(state, payload) {
+      const newState = state.albums.map(album => (album.id == payload.id) ? Object.assign(album, { name: payload.name }) : album)
+      state.albums = newState
+    },
+
+    updateAlbumItem(state, payload) {
+      const newState = state.albums.map(album => (album.id == payload.id) ? Object.assign(album, { items: ('remove' == payload.action) ? parseInt(album.items) - 1 : parseInt(album.items) + 1 }) : album)
+      state.albums = newState
+    },
+
+    removeAlbum(state, uuid) {
+      state.albums = state.albums.filter(album => album.id != uuid)
+    },
+
   },
 
   actions: {
-    async getAlbumImages({ commit }) {
-      const res = await axios.get("profile/post/media/");
-      commit("setAlbumImages", res.data);
-    },
-
-    async getImages({ commit }) {
-      const res = await axios.get("profile/post/media/");
-      commit("setImages", res.data);
-    },
-
-    async getAlbums({ commit }) {
-      const res = await axios.get("profile/post/media/");
-      commit("setAlbums", res.data);
-    },
-
     async ownerPost({ commit }) {
       const res = await axios.get("profile/post/media/");
       commit("ownerPost", res.data);
@@ -113,80 +124,59 @@ export default {
       commit("ownerPostImages", res.data);
     },
 
-    async createAlbum({ commit }, name) {
-      const res = await axios.post("profile/album/create/" + this.url, {
-        name,
-      });
-      commit("newAlbum", res.data);
+
+    async getAlbumImages({ commit }, id) {
+      const res = await axios.get(`profile/album/pictures/${id}`);
+      commit("setAlbumImages", res.data.data);
     },
 
-    async updateAlbum({ commit }, edit_name, album_id) {
-      const res = await axios.post(
-        "profile/album/edit/" + this.url + "/" + album_id,
-        {
-          edit_name,
-        }
-      );
-      commit("upAlbum", res.data);
+    // for albums
+    async getAlbums({ commit }) {
+      const res = await axios.get("profile/album/show");
+      commit("setAlbums", res.data.data.album);
     },
 
-    async deleteAlbum({ commit }, name, album_id) {
-      const res = await axios.post(
-        "profile/album/delete/" + this.url + "/" + album_id,
-        { name }
-      );
-      commit("delAlbum", res.data);
+    async createAlbum({ commit }, albumInfo) {
+      return axios.post("profile/album/create", albumInfo);
+
+    },
+
+    async updateAlbum({ commit }, user) {
+      return axios.post(`profile/album/edit/${user.id}`, user);
+    },
+
+    async deleteAlbum({ commit }, id) {
+      return axios.delete(`profile/album/delete/${id}`);
     },
 
     // for images
-    async submitPost({ commit }, formData, headers) {
-      const res = await axios.post(
-        "profile/post/media/" + this.url + "/" + this.album,
-        formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      );
-      commit("setSubmitPost", res.data);
+    async getImages({ commit }) {
+      const res = await axios.get("profile/post/media");
+      commit("setImages", res.data.data);
     },
 
-    async setProfilePic({ commit }, image_id, name) {
-      const res = await axios.post(
-        "profile/makeProfile/picture/" + this.url + "/" + self.album_id,
-        {
-          name,
-        }
-      );
-      commit("setProfilePic", res.data);
+    async submitPost({ commit }, payload) {
+      return axios.post(`profile/upload/${payload.albumID}`, payload.data);
     },
 
-    async setCoverPic({ commit }, image_id, name) {
-      const res = await axios.post(
-        "profile/makeCover/picture/" + this.url + "/" + image_id,
-        {
-          name,
-        }
-      );
-      commit("setCoverPic", res.data);
+    async setProfilePic({ commit }, id) {
+      return axios.post(`profile/makeProfile/picture/${id}`);
     },
 
-    async deleteImage({ commit }, image_id, name) {
-      const res = await axios.post(
-        "profile/albumPicture/delete/" + this.url + "/" + image_id,
-        {
-          name,
-        }
-      );
-      commit("deleteImage", res.data);
+    async setCoverPic({ commit }, id) {
+      return axios.post(`profile/makeCover/picture/${id}`);
     },
 
-    async downloadPic({ commit }, image_id) {
-      const res = await axios.get(
-        "profile/downloadMedia/" + this.url + "/" + image_id
-      );
-      commit("downloadPic", res.data);
+    async deleteImage({ commit }, id) {
+      return axios.delete(`profile/image/${id}`);
+    },
+
+    async downloadPic({ commit }, id) {
+      return axios({
+        url: `profile/downloadMedia/${id}`,
+        method: "post",
+        responseType: "blob"
+      });
     },
   },
 };

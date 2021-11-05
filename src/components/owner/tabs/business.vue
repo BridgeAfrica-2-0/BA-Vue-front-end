@@ -136,11 +136,11 @@ export default {
 
       if(this.type=="Follower"){ 
 
-      return  this.$store.state.follower.BcommunityFollower.business_followers;  
+      return  this.$store.state.profile.BcommunityFollower.business_followers;  
 
        }else{
 
-         return  this.$store.state.follower.BcommunityFollowing.business_following; 
+         return  this.$store.state.profile.BcommunityFollowing.business_following; 
        }
    }
     

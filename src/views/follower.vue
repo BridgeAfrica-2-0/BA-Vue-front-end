@@ -1,20 +1,20 @@
 <template>
   <div class="body">
-    <navbar />
-    <Profile />
-    <Footer />
-    <span class="display-inline">
-        <b-link @click="$i18n.locale = 'en'"> {{ $t("auth.english") }}</b-link>
-        <span class="vl"></span>
-        <b-link class="ml-2" @click="$i18n.locale = 'fr'">
-          {{ $t("auth.french") }}
-        </b-link>
-      </span>
+    <span v-if="isloaded">
+      <navbar />
+
+      <Profile v-if="info" />
+
+      <notFound v-else />
+
+      <Footer />
+    </span>
   </div>
 </template>
 
 <script>
 import navbar from "@/components/navbar";
+import notFound from "@/components/404";
 import Profile from "../components/follower/follower";
 import Footer from "../components/footer";
 export default {
@@ -22,13 +22,46 @@ export default {
   components: {
     navbar,
     Profile,
-    Footer
+    Footer,
+    notFound,
   },
   data() {
-    return {};
+    return {
+      isloaded: false,
+    };
   },
-  computed: {},
-  methods: {}
+  computed: {
+    info: function () {
+      let user = this.$store.getters["follower/getUserPostIntro"];
+      if (this.isloaded) {
+        if (Object.keys(user.user).length) {
+          return true;
+        } else {
+          return false;
+        }
+      } else {
+        return true;
+      }
+    },
+
+    profile: function () {
+      return this.$store.getters["follower/getUserPostIntro"];
+    },
+  },
+
+  created() {
+    this.foll_id = this.$route.params.id;
+
+    this.$store
+      .dispatch("follower/loadUserPostIntro", this.foll_id)
+      .then((response) => {
+        this.isloaded = true;
+      })
+      .catch((error) => {
+        console.log({ error: error });
+      });
+  },
+  methods: {},
 };
 </script>
 
@@ -45,7 +78,6 @@ export default {
 }
 
 @media only screen and (max-width: 768px) {
-
   .settings {
     top: -5px;
     left: -20px;

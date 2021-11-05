@@ -1,4 +1,4 @@
-   
+
 import Vue from "vue";
 import Vuex from "vuex";
 import auth from "./auth";
@@ -20,15 +20,15 @@ import follower from "./follower";
 import networkProfile from "./networkProfile";
 import UserProfileOwner from "./UserProfileOwner"
 import networkProfileCommunitySidebar from "./networkProfileCommunitySidebar";
-import networkProfileFeedback  from "./networkProfileFeedback";
+import networkProfileFeedback from "./networkProfileFeedback";
 import networkProfileMedia from "./networkProfileMedia";
-import networkProfileMemberRequest  from "./networkProfileMemberRequest";
+import networkProfileMemberRequest from "./networkProfileMemberRequest";
 import { search } from "./search";
 import { social } from "./social";
 
 import axios from "axios";
 Vue.use(Vuex);
- axios.defaults.baseURL = process.env.VUE_APP_API_URL;
+axios.defaults.baseURL = process.env.VUE_APP_API_URL;
 export default new Vuex.Store({
   modules: {
     auth,
@@ -48,17 +48,13 @@ export default new Vuex.Store({
     marketSearch,
     networkSearch,
     networkProfileMembers,
-        allSearch,
-     marketSearch,
-       networkSearch,
-    UserProfileOwner,
+    allSearch,
     businessFollowers,
     networkProfileCommunitySidebar,
     networkProfileCommunity,
     networkProfileMedia,
     networkProfileMemberRequest,
     networkProfile,
-    businessFollowers,
   }
 });
 

@@ -30,14 +30,21 @@ IconifyIcon.addIcon("home", homeIconData);
 Vue.use(Vuex);
 Vue.use(VueAxios, axios);
 
-import LoadScript from "vue-plugin-load-script";
 import InfiniteLoading from "vue-infinite-loading";
+
+Vue.use(InfiniteLoading, { /* options */ });
+import VModal from 'vue-js-modal';
+Vue.use(VModal);
+import LoadScript from "vue-plugin-load-script";
+
+import VueEasyLightbox from 'vue-easy-lightbox'
 
 import { loader } from "./mixins"
 
-
-Vue.use(InfiniteLoading, { /* options */ });
+Vue.use(VueEasyLightbox);
+Vue.use(InfiniteLoading);
 Vue.use(LoadScript);
+IconifyIcon.addIcon('home', homeIconData);
 
 Vue.use(ReadMore);
 Vue.prototype.$axios = axios;
@@ -130,11 +137,6 @@ import "@/assets/css/bootstrap.css";
 Vue.use(BootstrapVue);
 Vue.use(IconsPlugin);
 
-//import InfiniteLoading from "vue-infinite-loading";
-
-Vue.use(InfiniteLoading, {
-    /* options */
-});
 
 Vue.use(VueGoogleMaps, {
     load: {
@@ -146,13 +148,13 @@ Vue.use(VueGoogleMaps, {
 });
 
 
-import VueLoading from 'vue-loading-overlay';
-import 'vue-loading-overlay/dist/vue-loading.css';
+// import VueLoading from 'vue-loading-overlay';
+// import 'vue-loading-overlay/dist/vue-loading.css';
 
 import VueYoutube from 'vue-youtube'
  
 Vue.use(VueYoutube)
-Vue.use(VueLoading);
+// Vue.use(VueLoading);
 
 import VueAgile from 'vue-agile'
 
@@ -169,10 +171,7 @@ Vue.component("v-select", vSelect);
 
 import i18n from "./i18n";
 
-import VueEasyLightbox from 'vue-easy-lightbox'
 
-// Method 1. via Vue.use
-Vue.use(VueEasyLightbox)
 
 Vue.config.productionTip = false;
 var user = null;

@@ -1604,7 +1604,10 @@ export default {
                { id: 1, name: " Pay Stub ", value: "pay_stub", text:"Please upload a recent pay stub that clearly shows the department issuing the payment, your position and your full name. Paystub MUST show your position" },],
         
 
-
+         fire_active:[
+            { id: 1, name: " Departement ID ", value: "departement_id", text:"Please upload a picture of your official department ID card that clearly shows your photo (if applicable), full name and status." },
+             { id: 1, name: " IAFF membership card ", value: "IAFF",test:"Please upload a picture of your IAFF Membership Card that clearly shows your full name" },
+         ],
 
       Law_Enforcement_local: [
         {

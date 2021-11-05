@@ -103,84 +103,37 @@
 </template>
 
 <script>
-import Business from "@/components/owner/tabs/business";
-import People from "@/components/owner/tabs/people";
-import Network from "@/components/owner/tabs/network";
-export default {
-  name: "comunitiDashboard",  
+	import Business from "@/components/follower/tabs/business";
+	import People from "@/components/follower/tabs/people";
+	import Network from "@/components/follower/tabs/network";
+	export default {
+		name: "comunitiDashboard",
 
-  components: {
-    People,
-    Business,
-    Network,
-  },
-  
-  methods:{
-      nFormatter(num) {
-      if (num >= 1000000000) {
-        return (num / 1000000000).toFixed(1).replace(/\.0$/, '') + 'G';
-      }
-      if (num >= 1000000) {
-        return (num / 1000000).toFixed(1).replace(/\.0$/, '') + 'M';
-      }
-      if (num >= 1000) {
-        return (num / 1000).toFixed(1).replace(/\.0$/, '') + 'K';
-      }
-      return num;
-    },
-  },
+		components: {
+			People,
+			Business,
+			Network,
+		},
 
+		methods: {
+			nFormatter(num) {
+				if (num >= 1000000000) {
+					return (num / 1000000000).toFixed(1).replace(/\.0$/, "") + "G";
+				}
+				if (num >= 1000000) {
+					return (num / 1000000).toFixed(1).replace(/\.0$/, "") + "M";
+				}
+				if (num >= 1000) {
+					return (num / 1000).toFixed(1).replace(/\.0$/, "") + "K";
+				}
+				return num;
+			},
+		},
 
-  computed:{
-   
-   
-
-     total(){
-    return  this.$store.state.profile.Tcommunity;
-   },
-
-    business() {
-      return this.$store.getters["dashboardcommunity/getProfileCommunity"];
-    },
-    com() {
-      return this.$store.getters["dashboardcommunity/getcom"];
-    }
-
-  }
-};
+		computed: {
+			total() {
+				return this.$store.state.follower.Tcommunity;
+			},
+		},
+	};
 </script>
-
-<style>
-.lala .nav-fill {
-  margin-top: -19px;
-  border: 1px solid rgba(0, 0, 0, 0.125);
-}
-
-.spa-color {
-  color: white;
-  margin-left: 10px;
-  font-size: 14px;
-}
-
-.h4-color {
-  color: orangered;
-  margin-left: 10px;
-  font-size: 14px;
-}
-
-.m-up {
-  margin-top: -5px;
-}
-
-@media only screen and (min-width: 768px) {
-  .title {
-    font-size: 20px;
-  }
-}
-
-@media only screen and (min-width: 768px) {
-  .title {
-    font-size: 16px;
-  }
-}
-</style>

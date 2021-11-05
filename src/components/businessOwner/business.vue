@@ -22,7 +22,7 @@
 <script>
 import HomePage from '../businessOwner/tabs/businessHome';
 import About from './tabs/about';
-import Media from './tabs/media';
+import Media from '@/components/owner/tabs/media';
 import MarketPlace from './tabs/marketPlace';
 import Followers from './tabs/memberNetwork';
 //import Networks from "./tabs/networks";

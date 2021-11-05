@@ -62,7 +62,7 @@ export default {
 
       FIND_BUSINESS({ commit }, payload) {
         console.log("business search start");
-      return axios.get(`search`,  {
+      return axios.post(`search`,  {
         keyword : payload.keyword,
         location : payload.location,
       
@@ -97,7 +97,7 @@ export default {
 
       console.log(pagge);
       console.log(payload.keyword);
-    return axios.get(`search?page=blec`,  {
+    return axios.post(`search?page=blec`,  {
       keyword : payload.keyword,
       location : payload.location, 
       categoryId: payload.category,

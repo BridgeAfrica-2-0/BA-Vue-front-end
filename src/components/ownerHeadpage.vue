@@ -2,10 +2,18 @@
   <div class="p-0">
     <b-container fluid class="p-0 gradient">
       <div class="container-flex">
-        <img v-if="info.user.cover_picture == ''" src="@/assets/img/banner.jpg" <<<<<<< HEAD class="img-fluid banner"
-        ======= class="img-fluid banner" alt="Cover Image" /> err
-        <img v-if="info.user.cover_picture" :src="info.user.cover_picture" class="img-fluid banner" />>>>>>> main
-        alt="Cover Image" />
+        <img
+          v-if="info.user.cover_picture == ''"
+          src="@/assets/img/banner.jpg"
+          class="img-fluid  banner"
+          alt="Cover Image"
+        />
+        err
+         <img  v-if="info.user.cover_picture"
+          :src="info.user.cover_picture"
+          class="img-fluid  banner"
+          alt="Cover Image"
+        />
         <img v-if="info.user.cover_picture" :src="info.user.cover_picture" class="img-fluid banner" alt="Cover Image" />
       </div>
 
@@ -465,7 +473,6 @@ export default {
               });
               loader.hide();
               this.$refs['modalxl'].hide();
-              this.editCoverNull();
             })
             .catch((error) => {
               console.log(error);
@@ -730,23 +737,23 @@ export default {
 .gradient{
 
   background-image: linear-gradient(1deg, black, transparent);  */
-/*  background-image: url("../assets/img/profile_back.png");  
+	/*  background-image: url("../assets/img/profile_back.png");  
 
 } 
  */
 
-.edit-btn:hover {
-  border-color: #b39500 !important ;
-  background-color: #b39500 !important ;
-}
+	.edit-btn:hover {
+		border-color: #b39500 !important ;
+		background-color: #b39500 !important ;
+	}
 
-.btn:focus {
-  border-color: #b39500 !important;
-  background-color: #b39500 !important ;
-}
+	.btn:focus {
+		border-color: #b39500 !important;
+		background-color: #b39500 !important ;
+	}
 
-.btn:active {
-  border-color: #e4c229 !important;
-  background-color: #b39500 !important ;
-}
+	.btn:active {
+		border-color: #e4c229 !important;
+		background-color: #b39500 !important ;
+	}
 </style>

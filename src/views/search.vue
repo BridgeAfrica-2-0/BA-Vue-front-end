@@ -505,7 +505,7 @@ export default {
     Sponsor,
 
     Business,
-    People, 
+    People,
     Network,
     Post,
     Market,

@@ -16,6 +16,7 @@
 
     <Loader v-if="!pageHasLoad || loaderState" />
     <NotFound v-if="!peoples.length && !loaderState" :title="title" />
+
     <div v-else>
       <People
         v-for="(people, index) in peoples"
@@ -49,6 +50,7 @@ export default {
     ShareButton,
     Loader,
   },
+
 
   data: () => ({
     pageHasLoad: false,

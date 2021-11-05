@@ -39,7 +39,7 @@
     </b-row>
     <b-row >
       <b-col col="12">
-        <infinite-loading @infinite="infiniteHandler">
+        <infinite-loading @infinite="infiniteHandler"> 
           <div class="text-red" slot="no-more">No More Request</div>
           <div class="text-red" slot="no-results">No More Request</div>
         </infinite-loading>

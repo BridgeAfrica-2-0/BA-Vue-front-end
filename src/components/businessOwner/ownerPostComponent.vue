@@ -45,11 +45,11 @@
       </div>
 
       <div v-if="item.media.length > 0" class="">
-        <span v-for="video in mapvideo" :key="video">
+        <span v-for="video in mapvideo()" :key="video">
           <youtube class="w-100 videoh" :video-id="getId(video)" :player-vars="playerVars" @playing="playing"></youtube>
         </span>
 
-        <light css=" " :cells="item.media.length" :items="mapmediae"></light>
+        <light css=" " :cells="item.media.length" :items="mapmediae()"></light>
       </div>
       <b-row>
         <!--   v-if="item.content.movies.length <= 0"  -->
@@ -61,13 +61,8 @@
             ><b-icon :icon="icon" variant="primary" aria-hidden="true"></b-icon>
             {{ item.likes_count | nFormatter }}
           </span>
-          <span class="cursor"
-            ><b-icon
-              icon="chat-fill"
-              variant="primary"
-              aria-hidden="true"
-              @click="() => (showComment = !showComment)"
-            ></b-icon>
+          <span class="cursor" @click="() => (showComment = !showComment)"
+            ><b-icon icon="chat-fill" variant="primary" aria-hidden="true"></b-icon>
             {{ item.comment_count | nFormatter }}
           </span>
 
@@ -76,8 +71,6 @@
           </span>
         </b-col>
       </b-row>
-
-      <!--  :src="$store.getters.getProfilePicture"  -->
     </div>
 
     <div class="mt-2 d-inline-flex w-100">
@@ -107,7 +100,7 @@
     </div>
     <Loader v-if="loadComment" />
     <Comment v-for="comment in comments" :key="comment.id" :item="comment" :uuid="post.post_id" />
-    <NoMoreData v-if="comments.length && !loadComment" :hasData="hasData" @click.native="onShowComment"/>
+    <NoMoreData v-if="comments.length && !loadComment" :hasData="hasData" @click.native="onShowComment" />
     <hr />
   </div>
 </template>

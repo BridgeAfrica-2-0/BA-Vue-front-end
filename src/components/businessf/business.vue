@@ -59,7 +59,12 @@
             <i class="fas fa-map-marked-alt fa-lg btn-icon "></i>
             <span>Direction</span></b-button
           >
-          <b-dropdown class="ml-2  options dot-btn mt-2 mt-sm-2 mt-md-0 " no-caret variant="outline-primary">
+          <b-dropdown
+            class="ml-2   dot-btn mt-2 mt-sm-2 mt-md-0 "
+            no-caret
+            dropleft
+            variant="link"
+          >
             <template #button-content>
               <b-icon-three-dots></b-icon-three-dots>
             </template>
@@ -188,9 +193,6 @@ export default {
   mounted() {
     console.log(this.url_data);
 
-    this.CommunityBusiness();
-
-    this.CommunityPeople();
 
     this.businessCommunityTotal();
     this.ownerPost();
@@ -199,28 +201,6 @@ export default {
     businessInfo() {
       this.$store
         .dispatch('businessOwner/businessInfo', this.url_data)
-        .then(() => {
-          console.log('hey yeah');
-        })
-        .catch(err => {
-          console.log({ err: err });
-        });
-    },
-
-    CommunityBusiness() {
-      this.$store
-        .dispatch('businessOwner/CommunityBusiness', this.url_data)
-        .then(() => {
-          console.log('hey yeah');
-        })
-        .catch(err => {
-          console.log({ err: err });
-        });
-    },
-
-    CommunityPeople() {
-      this.$store
-        .dispatch('businessOwner/CommunityPeople', this.url_data)
         .then(() => {
           console.log('hey yeah');
         })

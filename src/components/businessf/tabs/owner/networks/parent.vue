@@ -1,10 +1,10 @@
 <template>
-  <div class="">
+  <div v-if="networkInfo">
     <b-card title="" class="">
       <b-container class="a-center">
         <!-- :src="require('@/assets/img/mayor.jpg')" -->
         <b-avatar
-          :src="networkInfo[0].image"
+          :src="networkInfo.image"
           variant="primary"
           square
           rounded
@@ -25,7 +25,7 @@
         <b-row>
           <b-col cols="6">
             <h6 class="m-0 p-0 a-center network-name">
-              <b> {{ networkInfo[0].name }}</b>
+              <b> {{ networkInfo.name }}</b>
             </h6>
           </b-col>
           <b-col cols="6">
@@ -57,7 +57,7 @@
               <p class="a-center">
                 <b-icon icon="people-fill" variant="primary"></b-icon>
                 <span class="pivate text">
-                  {{ nFormatter(networkInfo[0].community) }}
+                  {{ nFormatter(networkInfo.community) }}
                   community
                 </span>
               </p>
@@ -66,15 +66,15 @@
         </b-container>
         <h6 class="mt-2 font-weight-bolder title">About</h6>
         <p class="text-justify text">
-          <span v-if="networkInfo[0].description.length < 130">{{
-            networkInfo[0].description
+          <span v-if="networkInfo.description.length < 130">{{
+            networkInfo.description
           }}</span>
           <span v-else>{{
-            networkInfo[0].description.substring(0, 130) + moreText
+            networkInfo.description.substring(0, 130) + moreText
           }}</span>
           <span v-if="moreText === '...'" class="d-inline-block float-right">
             <a
-              @click="moreText = networkInfo[0].description"
+              @click="moreText = networkInfo.description"
               style="cursor: pointer"
               >lire la Suite</a
             >
@@ -149,8 +149,8 @@
           >
             <b-form-input
               id="tel-1"
-              v-model="updateNetwork_form.phone1"
-              name="phone1"
+              v-model="updateNetwork_form.primary_phone"
+              name="primary_phone"
               type="tel"
               required
             >
@@ -166,8 +166,8 @@
           >
             <b-form-input
               id="tel-2"
-              v-model="updateNetwork_form.phone2"
-              name="phone2"
+              v-model="updateNetwork_form.secondary_phone"
+              name="secondary_phone"
               type="tel"
               required
             >
@@ -266,6 +266,9 @@
       </b-button>
     </b-modal>
   </div>
+  <div v-else class="text-center">
+    <b-spinner variant="primary" label="Text Centered" style="width: 3rem; height: 3rem;"></b-spinner>
+  </div>
 </template>
 
 <script>
@@ -315,13 +318,13 @@ export default {
 
     addNetwork() {
       this.updateNetwork_form = {
-        name: this.networkInfo[0].name,
-        description: this.networkInfo[0].description,
-        email: this.networkInfo[0].email,
-        phone1: this.networkInfo[0].phone1,
-        phone2: this.networkInfo[0].phone2,
-        address: this.networkInfo[0].address,
-        allow_business: this.networkInfo[0].allow_business,
+        name: this.networkInfo.name,
+        description: this.networkInfo.description,
+        email: this.networkInfo.email,
+        primary_phone: this.networkInfo.primary_phone,
+        secondary_phone: this.networkInfo.secondary_phone,
+        address: this.networkInfo.address,
+        allow_business: this.networkInfo.allow_business,
       };
       console.log(this.networkInfo[0]);
       console.log("hello");

@@ -60,8 +60,8 @@
                   <option value=" Current Location "></option>
                   <option value="Yaounde " />
                 </datalist>
-              </b-input-group>
-            </span>
+              </b-input-group>       
+            </span> 
           </form>
 
           <span class="d-none d-lg-block">

@@ -129,26 +129,57 @@
           ></b-form-input>
         </b-form-group>
 
-        <b-form-checkbox
-          value="1"
-          v-model="newProduct.is_service"
-          unchecked-value="0"
+        <!-- CHECKBOX FLEX BOX -->
+        <div class="d-flex justify-content-between align-items-start flex-wrap">
+          <b-form-checkbox
+            value="1"
+            v-model="newProduct.is_service"
+            unchecked-value="0"
+          >
+            This Item Is A Service ?
+          </b-form-checkbox>
+
+          <b-form-checkbox
+            value="1"
+            v-model="newProduct.in_stock"
+            unchecked-value="0"
+          >
+            In stock
+          </b-form-checkbox>
+
+          <b-form-checkbox value="1" unchecked-value="0">
+            Published
+          </b-form-checkbox>
+        </div>
+        <!-- TAX and KG -->
+        <b-form-group
+          id="tax"
+          label="Tax"
+          label-for="input-tax"
+          label-size="sm"
         >
-          This Item Is A Service ?
-        </b-form-checkbox>
-
-        <b-form-checkbox
-          value="1"
-          v-model="newProduct.in_stock"
-          unchecked-value="0"
+          <b-form-input
+            v-model="newProduct.tax"
+            class="mt-1"
+            id="tax"
+            type="number"
+            required
+          ></b-form-input>
+        </b-form-group>
+        <b-form-group
+          id="kg"
+          label="Kilogramme"
+          label-for="input-kg"
+          label-size="sm"
         >
-          In stock
-        </b-form-checkbox>
-
-        <b-form-checkbox value="1" unchecked-value="0">
-          Published
-        </b-form-checkbox>
-
+          <b-form-input
+            v-model="newProduct.kg"
+            class="mt-1"
+            id="kg"
+            type="number"
+            required
+          ></b-form-input>
+        </b-form-group>
         <!-- CATEGORIES -->
         <div class="mt-2">
           <label class="typo__label"> Category </label>
@@ -253,6 +284,8 @@ export default {
         categoryId: "",
         subCategoryId: "",
         filterId: "",
+        tax: "",
+        kg: "",
       },
       products: [],
       val: "",

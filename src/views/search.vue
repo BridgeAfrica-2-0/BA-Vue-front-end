@@ -2,7 +2,12 @@
   <div style="overflow-x: hidden; color: black">
     <Nav :credentials.sync="navBarParams">
       <template v-slot:button>
-        <Button @click.native="strategies" />
+        <Button @click.native="strategy['all']" v-if="selectedId == 0" />
+        <Button @click.native="strategy['network']" v-if="selectedId == 3" />
+        <Button @click.native="strategy['market']" v-if="selectedId == 4" />
+         <Button @click.native="strategy['1']" v-if="selectedId == 1" />
+
+        <Button @click.native="strategies" v-if="[2, 5].includes(selectedId)" />
       </template>
     </Nav>
 

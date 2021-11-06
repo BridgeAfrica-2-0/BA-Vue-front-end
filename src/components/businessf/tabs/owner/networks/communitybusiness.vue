@@ -81,13 +81,12 @@
             Car marketing
             <br /> 20k Community <br />
 
-            <span class="location">
-              <b-icon-geo-alt class="ico"></b-icon-geo-alt> Douala cameroon
-            </span> <br />
-
-
-            super best car seller in the world
-            adipisicing elit. lorem epsep this is <b-link>Read More</b-link>
+            <!-- <span class="location">
+              <b-icon-geo-alt class="ico"></b-icon-geo-alt> {{ member.location_description }}
+            </span> -->
+            <!-- <br /> -->
+            <span v-if="member.about_business.length<55">{{ member.about_business}}</span>
+            <span v-else >{{ member.about_business.substring(0,55)+"..." }} <b-link>Read More</b-link></span>
           </p>
         </b-col>
 

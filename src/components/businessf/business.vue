@@ -200,9 +200,6 @@ export default {
 
     console.log(this.url_data);
 
-    this.CommunityBusiness();
-
-    this.CommunityPeople();
 
     this.businessCommunityTotal();
     this.ownerPost();
@@ -219,28 +216,9 @@ export default {
         });
     },
 
-    CommunityBusiness() {
-      this.$store
-        .dispatch("businessOwner/CommunityBusiness", this.url_data)
-        .then(() => {
-          console.log("hey yeah");
-        })
-        .catch((err) => {
-          console.log({ err: err });
-        });
-    },
+  
 
-    CommunityPeople() {
-      this.$store
-        .dispatch("businessOwner/CommunityPeople", this.url_data)
-        .then(() => {
-          console.log("hey yeah");
-        })
-        .catch((err) => {
-          console.log({ err: err });
-        });
-    },
-
+   
     businessCommunityTotal() {
       this.$store
         .dispatch("businessOwner/businessCommunityTotal", this.url_data)

@@ -17,6 +17,13 @@ import follower from "./follower";
 import UserProfileOwner from "./UserProfileOwner";
 import checkout from "./checkout";
 import axios from "axios";
+
+
+// import networkProfile from "./networkProfile";
+// import networkProfileCommunitySidebar from "./networkProfileCommunitySidebar";
+// import networkProfileFeedback from "./networkProfileFeedback";
+// import networkProfileMedia from "./networkProfileMedia";
+// import networkProfileMemberRequest from "./networkProfileMemberRequest";
 import { search } from "./search";
 import productComments from "./productComments";
 import productDetails from "./productDetails";
@@ -47,5 +54,9 @@ export default new Vuex.Store({
     businessFollowers,
     productComments,
     productDetails,
+    // networkProfileCommunitySidebar,
+    // networkProfileMedia,
+    // networkProfileMemberRequest,
+    // networkProfile,
   },
 });

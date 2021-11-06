@@ -1,5 +1,5 @@
 <template>
-  <div class=" ">
+  <div v-if="networkInfo">
     <b-card title="" class="">
       <b-container class="a-center">
         <b-avatar
@@ -189,6 +189,9 @@
         </div>
       </div>
     </b-modal>
+  </div>
+  <div v-else class="text-center">
+    <b-spinner variant="primary" label="Text Centered" style="width: 3rem; height: 3rem;"></b-spinner>
   </div>
 </template>
 

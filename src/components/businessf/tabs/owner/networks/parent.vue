@@ -1,5 +1,5 @@
 <template>
-  <div class="">
+  <div v-if="networkInfo">
     <b-card title="" class="">
       <b-container class="a-center">
         <!-- :src="require('@/assets/img/mayor.jpg')" -->
@@ -265,6 +265,9 @@
         <b-spinner v-if="SPupdateN" small type="grow"></b-spinner> Upload
       </b-button>
     </b-modal>
+  </div>
+  <div v-else class="text-center">
+    <b-spinner variant="primary" label="Text Centered" style="width: 3rem; height: 3rem;"></b-spinner>
   </div>
 </template>
 

@@ -19,7 +19,7 @@
     </b-row>
     <br/>
 
-    <b-row cols="2">
+    <b-row cols="1">
       <b-col class="ml-0 mr-0"
         v-for="member in displayfollowing"
         :key="member.id"
@@ -33,13 +33,13 @@
             </b-card>
           </template>
         <div style="display:none;">{{member['communityNum'] = nFormatter(member.followers)}}</div>
-        <CommunityMembers :member="member" @BlockUser="BlockUser" />
+        <CommunityNetworks :member="member" @BlockUser="BlockUser" />
         </b-skeleton-wrapper>
       </b-col>
     </b-row>
     <b-row >
       <b-col col="12">
-        <infinite-loading @infinite="infiniteHandler">
+        <infinite-loading @infinite="infiniteHandler"> 
           <div class="text-red" slot="no-more">No More Request</div>
           <div class="text-red" slot="no-results">No More Request</div>
         </infinite-loading>
@@ -51,10 +51,10 @@
 </template>
 
 <script>
-import CommunityMembers from "../../communityMember"
+import CommunityNetworks from "../../communitynetwork"
 export default {
   components: {
-    CommunityMembers
+    CommunityNetworks
   },
   data() {
     return {

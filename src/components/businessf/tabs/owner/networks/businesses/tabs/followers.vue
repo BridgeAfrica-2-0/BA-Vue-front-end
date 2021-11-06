@@ -19,7 +19,7 @@
     </b-row>
     <br/>
 
-    <b-row cols="2">
+    <b-row cols="1">
       <b-col class="ml-0 mr-0"
         v-for="member in displayfollowers"
         :key="member.id"
@@ -32,8 +32,8 @@
               <b-skeleton width="70%"></b-skeleton>
             </b-card>
           </template>
-        <div style="display:none;">{{member['communityNum'] = nFormatter(member.followers)}}</div>
-        <CommunityMembers :member="member" @BlockUser="BlockUser" />
+          <div style="display:none;">{{member['communityNum'] = nFormatter(member.followers)}}</div>
+          <CommunityBusiness :member="member" @BlockUser="BlockUser" />
         </b-skeleton-wrapper>
       </b-col>
     </b-row>
@@ -51,10 +51,10 @@
 </template>
 
 <script>
-import CommunityMembers from "../../communityMember"
+import CommunityBusiness from "../../communitybusiness"
 export default {
   components: {
-    CommunityMembers
+    CommunityBusiness
   },
   data() {
     return {

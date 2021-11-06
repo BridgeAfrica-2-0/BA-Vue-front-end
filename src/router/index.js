@@ -183,7 +183,6 @@ const routes = [
     name: "networks",
     component: networks,
   },
- 
   {
     path: "/network_editors/:id?",
     name: "NetworkEditors",

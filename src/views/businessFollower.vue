@@ -35,10 +35,10 @@
 import navbar from '@/components/navbar';
 import Business from '../components/businessf/business';
 import Footer from '../components/footer';
-import Post from '@/components/businessfollower/tabs/posts';
-import About from '@/components/businessfollower/tabs/about';
-import Media from '@/components/businessfollower/tabs/media';
-import Networks from '@/components/businessfollower/tabs/networks';
+import Post from '@/components/businessf/tabs/posts';
+import About from '@/components/businessf/tabs/about';
+import Media from '@/components/businessf/tabs/media';
+import Networks from '@/components/businessf/tabs/networks';
 
 export default {
   name: 'Home',

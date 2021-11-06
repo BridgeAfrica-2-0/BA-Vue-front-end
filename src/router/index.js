@@ -24,7 +24,6 @@ import Follower from "../views/follower.vue";
 import Visitor from "../views/visitor.vue";
 import profile_owner from "@/views/profileOwner";
 import businessFollower from "@/views/businessFollower";
-import profileFollower from "@/views/profileFollower";
 import businessOwner from "@/views/businessOwner";
 import businessEditor from "@/views/businessEditor";
 import businessVisitor from "@/views/businessVisitor";
@@ -123,11 +122,6 @@ const routes = [
     path: "/profile_owner",
     name: "profile_owner",
     component: profile_owner,
-  },
-  {
-    path: "/profilefollower/:id?",
-    name: "ProfileFollower",
-    component: profileFollower,
   },
   {
     path: "/template_viewer",

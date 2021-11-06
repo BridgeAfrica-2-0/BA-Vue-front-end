@@ -174,19 +174,14 @@ const routes = [
     component: confirmPayment,
   },
   {
-    path: "/business_owner/network/:id?",
-    name: "networks_business",
+    path: "/network/:id?",
+    name: "networks",
     component: networks,
   },
   {
     path: "/networks/:id?",
     name: "networks",
     component: networks,
-  },
-  {
-    path: "/business_owner/editors/:id?",
-    name: "editors",
-    component: editors,
   },
   {
     path: "/network_editors/:id?",

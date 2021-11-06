@@ -2,7 +2,285 @@
   <div>
     <div id="app">
       <div id="verify-container">
+
+
+
+
+
+
+        
         <div class="c516 c513">
+
+
+
+
+     <div  class="c515 c512" id="verify-container">
+              <div class="c516 c513">
+                <div>
+                  <h1> Email Verification </h1>
+                  <br>
+                  <h5>
+                   Please enter your department email address (typically ends in .gov or .mil)
+                  </h5>
+
+                  <form>
+                    <div>
+                      <div style="padding-top: 15px">
+                        <div
+                          class=" mt-3
+                            MuiFormControl-root
+                            MuiTextField-root
+                            MuiFormControl-fullWidth
+                          "
+                        >
+                         
+
+                          <div
+                            class="
+                              MuiInputBase-root
+                              MuiFilledInput-root MuiFilledInput-underline
+                              Mui-error Mui-error
+                              MuiInputBase-fullWidth MuiInputBase-formControl
+                            "
+                          >
+                            <input
+                              aria-invalid="true"
+                              name="first-name"
+                              v-model="email"
+                              type="text"
+                              aria-label="First name"
+                              placeholder="Your Departement Email"
+                              class="
+                                form-control
+                                MuiInputBase-input
+                                MuiFilledInput-input
+                              "
+                              value=""
+                            />
+                          </div>
+                        </div>
+
+
+
+
+
+
+
+
+
+
+
+                        <div
+                          class=" mt-3
+                            MuiFormControl-root
+                            MuiTextField-root
+                            MuiFormControl-fullWidth
+                          "
+                        >
+                         
+
+                          <div
+                            class="
+                              MuiInputBase-root
+                              MuiFilledInput-root MuiFilledInput-underline
+                              Mui-error Mui-error
+                              MuiInputBase-fullWidth MuiInputBase-formControl
+                            "
+                          >
+                            <input
+                              aria-invalid="true"
+                              name="first-name"
+                              v-model="email"
+                              type="text"
+                              aria-label=""
+                              placeholder="Confirm your Email"
+                              class="
+                                form-control
+                                MuiInputBase-input
+                                MuiFilledInput-input
+                              "
+                              value=""
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div>
+                      <div style="padding-top: 15px"></div>
+                    </div>
+
+                    <div style="padding-top: 20px">
+                      <button
+                        @click="getStarted"
+                        class="
+                          MuiButtonBase-root
+                          MuiButton-root MuiButton-contained MuiButton-fullWidth
+                        "
+                        tabindex="0"
+                        label="Continue"
+                        style="
+                          box-shadow: none;
+                          height: 60px;
+                          border-radius: 3px;
+                          font-size: 0.875rem;
+                          text-transform: none;
+                        "
+                      >
+                        <span class="MuiButton-label">Continue</span
+                        ><span class="MuiTouchRipple-root"></span>
+                      </button>
+                      
+                      <br> <br>
+
+                    We take your security seriously:  <br>
+
+                    <li>  Our system will check if this is an official department email address.   </li>
+                 <li>    We will not sell or spam this email address; it will only be used to verify your membership.  </li>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+   <div>
+            <h1 role="heading" aria-level="1">Document Verification</h1>
+            <p class="no-margin-bottom no-padding-bottom" role="heading" aria-level="2"><span>Please upload a document
+                    from the list below that proves your Active Duty status. </span></p>
+            <ul class="MuiList-root MuiList-padding" style="padding-top: 20px;">
+               
+
+               <li
+                          class="MuiListItem-root MuiListItem-gutters"
+                          tabindex="0"
+                          v-for="blec in doc_type"
+                          :key="blec.id"
+                          @click="branchh(blec)"
+                          style="
+                            margin-bottom: -1px;
+                            border: 1px solid rgb(224, 224, 224);
+                            font-size: 14px;
+                            cursor: pointer;
+                          "
+                        >
+                          <div
+                            class="MuiListItemText-root"
+                            style="font-size: 14px; cursor: pointer"
+                          >
+                            {{ blec.name }}
+                          </div>
+                          <div class="MuiListItemIcon-root">
+                            <svg
+                              class="MuiSvgIcon-root"
+                              focusable="false"
+                              viewBox="0 0 24 24"
+                              aria-hidden="true"
+                            >
+                              <path
+                                d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"
+                              ></path>
+                            </svg>
+                          </div>
+                        </li>
+
+            </ul>
+
+
+            <div class="c5138"><a class="c5132" target="" href="/"><span><svg class="MuiSvgIcon-root" focusable="false"
+                            viewBox="0 0 24 24" aria-hidden="true"
+                            style="width: 20px; height: 20px; vertical-align: bottom; margin: 0px -2px 0px -6px; color: rgb(0, 161, 223);">
+                            <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"></path>
+                        </svg>Back</span></a></div>
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+           <div>
+            <h1 role="heading" aria-level="1">Here are two easy ways to verify your status</h1>
+            <div>
+                <div><button class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-fullWidth"
+                        tabindex="0" type="button" label="Upload a document"
+                        style="box-shadow: none; height: 60px; border-radius: 3px; font-size: 0.875rem; text-transform: none;"><span
+                            class="MuiButton-label"><svg class="MuiSvgIcon-root" focusable="false" viewBox="0 0 24 24"
+                                aria-hidden="true" style="padding-right: 10px;">
+                                <path d="M5 4v2h14V4H5zm0 10h4v6h6v-6h4l-7-7-7 7z"></path>
+                            </svg>Upload a document</span><span class="MuiTouchRipple-root"></span></button>
+                    <p class="no-margin" style="padding: 10px 0px 0px; line-height: 14px;"><small
+                            style="font-size: 12px;">A safe, fast and secure way to verify your service. Choose from a
+                            list of eligible documents on the next screen. All documents are deleted from our system
+                            after verification.</small></p>
+                </div>
+            </div>
+            <div>
+                <div>
+                    <p class="text-muted text-center">Or</p><button
+                        class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-fullWidth" tabindex="0"
+                        type="button" label="Enter your department email"
+                        style="box-shadow: none; height: 60px; border-radius: 3px; font-size: 0.875rem; text-transform: none;"><span
+                            class="MuiButton-label"><svg class="MuiSvgIcon-root" focusable="false" viewBox="0 0 24 24"
+                                aria-hidden="true" style="padding-right: 10px;">
+                                <path
+                                    d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z">
+                                </path>
+                            </svg> Enter your department email</span><span class="MuiTouchRipple-root"></span></button>
+                    <p class="no-margin" style="padding: 10px 0px 0px; line-height: 14px;"><small
+                            style="font-size: 12px;">We will send you a one-time email in order to verify that you own
+                            the address provided. We will not sell or spam the email address.</small></p>
+                </div>
+            </div>
+            <div class="c5138"><a class="c5132" target="" href="/"><span><svg class="MuiSvgIcon-root" focusable="false"
+                            viewBox="0 0 24 24" aria-hidden="true"
+                            style="width: 20px; height: 20px; vertical-align: bottom; margin: 0px -2px 0px -6px; color: rgb(0, 161, 223);">
+                            <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"></path>
+                        </svg>Back</span></a></div>
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
           <div>
             <div v-if="showemail" class="c515 c512" id="verify-container">
               <div class="c516 c513">
@@ -1306,6 +1584,31 @@ export default {
         { id: 1, name: " Dependent ", value: "dependent" },
       ],
 
+      doc_type:[
+        
+        { id: 1, name: " Leaving and Earning Statement ", value: "leaving_and_earning", text:"Please upload a recent Leave & Earnings Statement that clearly shows your full name" },
+        { id: 1, name: " PCS Orders ", value: "pcs_orders", text:"Please upload a picture of your Permanent Change of Station Orders (PCS) that clearly show your full name." },
+        { id: 1, name: " Others ", value: " others ", text:"Please upload an official document that proves your Active Duty status and includes your full name" },
+        ],
+
+        veteran_doc_type:[ { id: 1, name: " State Driver's License/ID ", value: "State_Driver_License/ID", text:"If your state driver's license displays a Veteran designation, you may upload it here. Make sure the picture clearly shows your photo, full name and Veteran designation. If the Veteran designation is on the back of the ID, please upload a picture of both sides."  },
+         { id: 1, name: " VA Proof of Service Letter ", value: "VA Proof_of_Service_Letter", text:"Please upload a picture of an official VA Proof of Service Letter that clearly shows your full name and honorable service designation." },
+          { id: 1, name: " Veteran Health ID Card (VHIC) ", value: "VHIC", text:"Please upload a picture of your VHIC that clearly shows your full name and photo" },
+           { id: 1, name: " Veteran ID Card ", value: "Veteran_ID_Card", text:"Please upload a picture of your federal, state or local Veteran ID card that clearly shows your full name and photo." },
+            { id: 1, name: " DD214 ", value: "DD214" , text:"Please upload a picture of your DD214 that clearly shows your full name, date of discharge and character of service. You may redact your social security number" },
+              { id: 1, name: " Other ", value: "Other" , text:"Please upload an official document that proves your Active Duty status and includes your full name" },
+              ],
+
+
+              police_active:[ { id: 1, name: " Departement ID ", value: "id", text:'Please upload a picture of your official department ID card that clearly shows your photo (if applicable), full name and status' },
+               { id: 1, name: " Pay Stub ", value: "pay_stub", text:"Please upload a recent pay stub that clearly shows the department issuing the payment, your position and your full name. Paystub MUST show your position" },],
+        
+
+         fire_active:[
+            { id: 1, name: " Departement ID ", value: "departement_id", text:"Please upload a picture of your official department ID card that clearly shows your photo (if applicable), full name and status." },
+             { id: 1, name: " IAFF membership card ", value: "IAFF",test:"Please upload a picture of your IAFF Membership Card that clearly shows your full name" },
+         ],
+
       Law_Enforcement_local: [
         {
           id: 1,
@@ -1533,6 +1836,12 @@ export default {
   },
 
   methods: {
+
+    selectValidationDocument(){
+
+
+    },
+
     storedata() {
       let formData2 = new FormData();
       formData2.append("first_name", this.first_name);

@@ -4,86 +4,51 @@
       Do you want to join this network?
     </b-modal>
 
-
-      
-
-          <div class="people-style shadow"  v-for="item in network" :key="item.id">
+    <div class="people-style shadow" v-for="item in network" :key="item.id">
       <b-row>
         <b-col md="3" xl="5" lg="5" cols="5" sm="3">
-         
-            <div class="center-img">
+          <div class="center-img">
             <img :src="item.picture" class="r-image" />
-          </div>   
-        
+          </div>
         </b-col>
 
-        
         <b-col md="5" cols="7" lg="7" xl="7" sm="5">
           <p class="textt">
             <strong class="title"> {{ item.name }} </strong> <br />
             {{ item.category }}
             <br />
-           {{ item.followers }} Community<br />
+            {{ item.followers }} Community<br />
 
-           {{ item.about_network }} <b-link>Read More</b-link>
+            {{ item.about_network }} <b-link>Read More</b-link>
           </p>
         </b-col>
 
         <b-col lg="12" xl="12" md="4" cols="12" sm="4">
           <div class="s-button">
             <b-row>
-              <b-col
-                md="12"
-                lg="4"
-                xl="4"
-                sm="12"
-                cols="4"
-                class="mt-2 text-center"
-              >
+              <b-col md="12" lg="4" xl="4" sm="12" cols="4" class="mt-2 text-center">
                 <b-button
                   block
                   size="sm"
-                  class="b-background shadow "
+                  class="b-background shadow"
+                  :class="item.is_follow !== 0 && 'u-btn'"
                   variant="primary"
+                  @click="handleFollow(item)"
                 >
-                  <i class="fas fa-user-plus  fa-lg btn-icon "></i>
+                  <i class="fas fa-lg btn-icon" :class="item.is_follow !== 0 ? 'fa-user-minus' : 'fa-user-plus'"></i>
                   <span class="btn-com">Community</span>
                 </b-button>
               </b-col>
 
-              <b-col
-                md="12"
-                lg="4"
-                xl="4"
-                sm="12"
-                cols="4"
-                class="mt-2 text-center"
-              >
-                <b-button
-                  block
-                  size="sm"
-                  class="b-background shadow "
-                  variant="primary"
-                >
+              <b-col md="12" lg="4" xl="4" sm="12" cols="4" class="mt-2 text-center">
+                <b-button block size="sm" class="b-background shadow " variant="primary">
                   <i class="fas fa-envelope   fa-lg btn-icon "></i>
                   <span class="btn-text">Message</span>
                 </b-button>
               </b-col>
 
-              <b-col
-                md="12"
-                lg="4"
-                xl="4"
-                sm="12"
-                cols="4"
-                class="mt-2 text-center"
-              >
-                <b-button
-                  block
-                  size="sm"
-                  class="b-background shadow "
-                  variant="primary"
-                >
+              <b-col md="12" lg="4" xl="4" sm="12" cols="4" class="mt-2 text-center">
+                <b-button block size="sm" class="b-background shadow " variant="primary">
                   <i class="fas fa-map-marked-alt  fa-lg btn-icon "></i>
                   <span class="btn-text">Direction</span>
                 </b-button>
@@ -94,114 +59,100 @@
       </b-row>
     </div>
 
-   
-  <infinite-loading @infinite="infiniteHandler"></infinite-loading>  
+    <infinite-loading @infinite="infiniteHandler"></infinite-loading>
   </div>
 </template>
 
 <script>
+import axios from 'axios';
 
-import axios from "axios";
- 
 export default {
-  props: ["type"],
+  props: ['type'],
   data() {
     return {
       page: 1,
+      biz_id: null,
+      network: [],
       options: {
         rewind: true,
         autoplay: true,
         perPage: 1,
         pagination: false,
 
-        type: "loop",
-        perMove: 1
-      }
+        type: 'loop',
+        perMove: 1,
+      },
     };
   },
 
   computed: {
-   
-        network(){
-
-      if(this.type=="Follower"){ 
-
-      return  this.$store.state.profile.NcommunityFollower.network_followers;  
-
-       }else{
-
-         return  this.$store.state.profile.NcommunityFollowing.network_following; 
-       }
-   }
-   
+    old_network() {
+      if (this.type == 'Follower') {
+        return this.$store.state.businessOwner.NcommunityFollower.network_followers;
+      } else {
+        return this.$store.state.profile.NcommunityFollowing.network_following;
+      }
+    },
   },
 
+  methods: {
+    infiniteHandler($state) {
+      console.log('loading network 1 1');
 
+      const url =
+        this.type === 'Follower'
+          ? `profile/network/follower/${this.biz_id}/`
+          : `profile/network/following/${this.biz_id}/`;
 
-
-   methods:{
-      
-     
-      infiniteHandler($state) {
-
-        console.log("loading network 1 1")
-
-      let url = null;
-
-         if(this.type=="Follower"){  
-          url="profile/network/follower/"
-         }else{
-          url="profile/network/following/";
-         }
       axios
-        .get(url + this.page)   
+        .get(url + this.page)
         .then(({ data }) => {
-          console.log("lading network after response")
+          console.log('lading network after response');
           console.log(data);
-        if(this.type=="Follower"){
-         
+          if (this.type == 'Follower') {
+            if (data.data.network_followers.length) {
+              this.page += 1;
+              this.network.push(...data.data.network_followers);
 
-          if (data.data.network_followers.length) {
-            this.page += 1;
-            this.network.push(...data.data.network_followers);
-            
-            
-            $state.loaded();
-           }else{
+              $state.loaded();
+            } else {
               $state.complete();
-           }
-
-
+            }
           } else {
-            
+            if (data.data.network_following.length) {
+              this.page += 1;
 
+              this.network.push(...data.data.network_following);
 
-             if (data.data.network_following.length) {
-            this.page += 1;
-      
-            this.network.push(...data.data.network_following);
-            
-            
-            $state.loaded();
-           }else{
+              $state.loaded();
+            } else {
               $state.complete();
-           }
-
-
-
+            }
           }
-        }) 
-        .catch((err) => {
+        })
+        .catch(err => {
           console.log({ err: err });
         });
     },
 
-  } ,
+    async handleFollow(user) {
+      const uri = user.is_follow === 0 ? `/follow-community` : `/unfollow`;
+      const nextFollowState = user.is_follow === 0 ? 1 : 0;
+      const data = {
+        id: user.id,
+        type: 'network',
+      };
 
- 
+      await axios
+        .post(uri, data)
+        .then(response => {
+          user.is_follow = nextFollowState;
+        })
+        .catch(err => console.log(err));
+    },
+  },
 };
 </script>
-
 
 <style scoped>
 @media only screen and (min-width: 768px) {
@@ -235,6 +186,9 @@ export default {
   }
 }
 
+.u-btn {
+  filter: grayscale(0.6);
+}
 .btnpngs {
   width: 20px;
   margin-right: 5px;
@@ -270,13 +224,13 @@ export default {
     color: black;
 
     line-height: 35px;
-    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   }
 
   .textt {
     color: #000;
 
-    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
     font-weight: normal;
     font-size: 14px;
     line-height: 30px;
@@ -323,13 +277,13 @@ export default {
     color: black;
 
     line-height: 35px;
-    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   }
 
   .textt {
     color: #000;
 
-    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
     font-weight: normal;
     font-size: 14px;
     line-height: 30px;

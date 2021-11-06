@@ -2,6 +2,8 @@
 import { mapGetters, mapActions } from "vuex";
 
 import NotFound from "@/components/NotFoundComponent"
+import NoMoreData from "@/components/businessOwner/PaginationMessage"
+
 import ClipLoader from 'vue-spinner/src/ClipLoader.vue'
 
 
@@ -84,7 +86,7 @@ export const commentMixinsBuisness = {
       comments: [],
       text: "",
       createPostRequestIsActive: false,
-      loadComment:false
+      loadComment: false
     };
   },
   created() {
@@ -124,11 +126,14 @@ export const commentMixinsBuisness = {
       const request = await this.$repository.share.fetchReplyComment({
         post: this.uuid,
         comment: this.comment.comment_id,
-        page: 1,
+        page: this.page,
       });
 
-
-      if (request.success) this.comments = request.data;
+      if (request.success) {
+        this.comments = [...this.comments, ...request.data];
+        this.hasData = request.data.length ? true : false;
+        this.page = request.data.length ? this.page + 1 : this.page;
+      }
 
       this.loadComment = false
     },
@@ -166,6 +171,16 @@ export const commentMixinsBuisness = {
       if (this.reply) this.onShowReply();
     },
   },
+}
+
+export const NoMoreDataForComment = {
+  components: {
+    NoMoreData
+  },
+  data: () => ({
+    hasData: true,
+    page: 1
+  })
 }
 
 export const commentMixins = {

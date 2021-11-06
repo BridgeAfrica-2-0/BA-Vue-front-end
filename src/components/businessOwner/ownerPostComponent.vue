@@ -107,6 +107,7 @@
     </div>
     <Loader v-if="loadComment" />
     <Comment v-for="comment in comments" :key="comment.id" :item="comment" :uuid="post.post_id" />
+    <NoMoreData v-if="comments.length && !loadComment" :hasData="hasData" @click.native="onShowComment"/>
     <hr />
   </div>
 </template>
@@ -115,6 +116,7 @@
 import { formatNumber, fromNow } from '@/helpers';
 import Loader from '@/components/Loader';
 import { mapMutations } from 'vuex';
+import { NoMoreDataForComment } from '@/mixins';
 
 import Comment from './comment';
 import light from '../lightbox';
@@ -123,6 +125,7 @@ export default {
   name: 'ownerPostComponent',
   props: ['post', 'mapvideo', 'mapmediae', 'businessLogo', 'editPost', 'deletePost'],
 
+  mixins: [NoMoreDataForComment],
   components: {
     Comment,
     light,
@@ -224,12 +227,20 @@ export default {
     },
 
     onShowComment: async function () {
+      if (!this.hasData) return false;
+
       this.loadComment = true;
+
       const request = await this.$repository.post.fetch({
         uuid: this.post.post_id,
-        page: 1,
+        page: this.page,
       });
-      if (request.success) this.comments = request.data;
+
+      if (request.success) {
+        this.comments = [...this.comments, ...request.data];
+        this.hasData = request.data.length ? true : false;
+        this.page = request.data.length ? this.page + 1 : this.page;
+      }
 
       this.loadComment = false;
     },

@@ -783,6 +783,7 @@ export default {
 
     submitPost() {
       this.isUploading = true;
+      
       let loader = this.$loading.show({
         container: this.fullPage ? null : this.$refs.loader,
         canCancel: true,

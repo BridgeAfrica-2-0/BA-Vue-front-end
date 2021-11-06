@@ -44,6 +44,7 @@
             <b-col cols="12" class="mt-4">
               <Loader v-if="loadComment" />
               <Reply v-for="obj in comments" :key="obj.id" :item="obj" :uuid="uuid" type="reply" />
+              <NoMoreData v-if="comments.length && !loadComment" :hasData="hasData" @click.native="onShowReply" />
             </b-col>
           </b-row>
         </div>
@@ -54,12 +55,12 @@
 
 <script>
 import Reply from './commentReply.vue';
-import { commentMixinsBuisness } from '@/mixins';
+import { commentMixinsBuisness, NoMoreDataForComment } from '@/mixins';
 
 import Loader from '@/components/Loader';
 
 export default {
-  mixins: [commentMixinsBuisness],
+  mixins: [commentMixinsBuisness, NoMoreDataForComment],
   components: {
     Reply,
     Loader,

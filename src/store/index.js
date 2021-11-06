@@ -29,7 +29,7 @@ import { social } from "./social";
 import axios from "axios";
 Vue.use(Vuex);
 
-axios.defaults.baseURL = "https://99b4-154-72-167-68.ngrok.io/api/v1/"
+axios.defaults.baseURL = "https://6ca2-154-72-167-49.ngrok.io/api/v1/"
 
 export default new Vuex.Store({
   modules: {

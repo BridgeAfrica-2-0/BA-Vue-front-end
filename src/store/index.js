@@ -18,7 +18,7 @@ import business from "./business";
 import profile from "./profile";
 import networkProfileMembers from "./networkProfileMembers";
 import follower from "./follower";
-import checkout from "./checkout";
+
 import networkProfile from "./networkProfile";
 import UserProfileOwner from "./UserProfileOwner"
 import networkProfileCommunitySidebar from "./networkProfileCommunitySidebar";
@@ -32,7 +32,7 @@ import axios from "axios";
 Vue.use(Vuex);
 
 //axios.defaults.baseURL = process.env.VUE_APP_API_URL;  
-axios.defaults.baseURL = "http://test.maxinemoffett.com/api/v1"
+axios.defaults.baseURL = "http://edson.maxinemoffett.com/api/v1"
 
 export default new Vuex.Store({
   modules: {

@@ -3,14 +3,15 @@
 
   <b-spinner v-if="prodLoader" variant="primary" label="Spinning"></b-spinner>
 
-    <div class="people-style shadow" v-for="biz in business.data" :key="biz.business_id">
+<NotFound v-if="!business.data.length && !prodLoader" :title="title" />
+    <div class="people-style shadow" v-for="biz in business.data" :key="biz.business_id">   
       <b-row>
         <b-col md="3" xl="3" lg="3" cols="5" sm="3">
           <div class="center-img">
             <splide :options="options" class="r-image">
               <splide-slide cl>
                 <img
-                  src="https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg"
+                  :src="biz.logo_path"
                   class="r-image"
                 />
               </splide-slide>
@@ -19,18 +20,25 @@
         </b-col>
         <b-col md="9" cols="7" lg="5" sm="5">
           <p class="textt">
-            <strong class="title"> Super Car ltd </strong> <br />
-            Car marketing
+            <strong class="title"> {{biz.name}} </strong> <br />
+            <span v-for="cat in biz.category" :key="cat.name"> {{cat.name}} </span>
             <br />
-            20k Community <br />
+            {{ count( biz.followers) }} Community <br />
 
             <span class="location">
-              <b-icon-geo-alt class="ico"></b-icon-geo-alt> Douala cameroon
+              <b-icon-geo-alt class="ico"></b-icon-geo-alt> {{ biz.country }}
             </span>
             <br />
+  <read-more
+              more-str="read more"
+              class="readmore"
+              :text="biz.about_business"
+              link="#"
+              less-str="read less"
+              :max-chars="15"
+            >
+            </read-more>
 
-            super best car seller in the world adipisicing elit. lorem epsep
-            this is <b-link>Read More</b-link>
           </p>
         </b-col>
 
@@ -102,7 +110,7 @@
   
 
 
-    <b-pagination
+    <b-pagination v-if="business.data"
       v-model="currentPage"
       :total-rows="total"
       :per-page="per_page"
@@ -157,6 +165,15 @@ export default {
   },
 
    methods: {
+
+     count(number) {
+      if (number >= 1000000) {
+        return number / 1000000 + "M";
+      }
+      if (number >= 1000) {
+        return number / 1000 + "K";
+      } else return number;
+    },
 
       ...mapActions({
       

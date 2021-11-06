@@ -12,6 +12,9 @@
           ></b-icon>
           <span class="font-weight-bold">Market</span>
         </p>
+        <b-button variant="outline-primary">
+          <b-icon icon="cart" class="mr-2"></b-icon>Cart</b-button
+        >
       </div>
       <div class="col-12">
         <hr class="h-divider" />

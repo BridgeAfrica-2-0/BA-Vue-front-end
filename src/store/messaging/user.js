@@ -104,26 +104,55 @@ export default {
                     console.log(err);
                 })
         },
+        // [BUGGY]
         GET_USERS_CHAT_LIST({ commit, state }, data) {
             commit("setUsers", []);
 
             commit("setLoader", true);
-            let keyword = data ? '/' + data : ''
+            let keyword = data.keyword ? '/' + data.keyword : ''
 
-            axios.get(`/messages`)
-                .then((res) => {
-                    commit("setLoader", false);
-                    console.log("All chat list: ", res.data.data);
-                    commit("setChatList", res.data.data ? res.data.data : {
-                        data: []
-                    });
-
-                })
-                .catch((err) => {
-                    commit("setLoader", false);
-                    console.log(err);
-                })
+            if (data.type == 'user') {
+                axios.get(`/messages/userListing`)
+                    .then((res) => {
+                        commit("setLoader", false);
+                        console.log("User chat list: ", res.data.data);
+                        commit("setChatList", res.data.data ? res.data.data : {
+                            data: []
+                        });
+                    })
+                    .catch((err) => {
+                        commit("setLoader", false);
+                        console.log(err);
+                    })
+            } else if (data.type == 'business') {
+                axios.get(`/messages/userBusiness`)
+                    .then((res) => {
+                        commit("setLoader", false);
+                        console.log("Business chat list: ", res.data.data);
+                        commit("setChatList", res.data.data ? res.data.data : {
+                            data: []
+                        });
+                    })
+                    .catch((err) => {
+                        commit("setLoader", false);
+                        console.log(err);
+                    })
+            } else {
+                axios.get(`/messages/userNetwork`)
+                    .then((res) => {
+                        commit("setLoader", false);
+                        console.log("Network chat list: ", res.data.data);
+                        commit("setChatList", res.data.data ? res.data.data : {
+                            data: []
+                        });
+                    })
+                    .catch((err) => {
+                        commit("setLoader", false);
+                        console.log(err);
+                    })
+            }
         },
+        // ----------------------------------------
 
 
         SAVE_USERS_CHAT({ commit, dispatch }, data) {
@@ -140,11 +169,10 @@ export default {
 
         async GET_USER_TO_USER({ commit }, data) {
             commit("setLoader", true);
-
             console.log("[DEBUG] user to user", data);
             let keyword = data.keyword ? '/' + data.keyword : ''
 
-            await axios.get(`/messages/${data.receiverID}${keyword}`)
+            await axios.get(`/messages/user/${data.receiverID + keyword}`)
                 .then((res) => {
                     commit("setLoader", false);
                     console.log("User to user: ", res.data.data);
@@ -157,14 +185,14 @@ export default {
         },
         async GET_USER_TO_BIZ({ commit }, data) {
             commit("setLoader", true);
-
             console.log("[DEBUG] user to business", data);
+            let keyword = data.keyword ? '/' + data.keyword : ''
 
-            await axios.get(`/messages/business/${data}`)
+            await axios.get(`/messages/business/${data.receiverID + keyword}`)
                 .then((res) => {
                     commit("setLoader", false);
                     console.log("User to business: ", res.data.data);
-                    commit("setUserToBiz", res.data.data);
+                    commit("setUserToUser", res.data.data);
                 })
                 .catch((err) => {
                     commit("setLoader", false);
@@ -173,14 +201,13 @@ export default {
         },
         async GET_USER_TO_NETWORK({ commit }, data) {
             commit("setLoader", true);
-
             console.log("[DEBUG] user to network", data);
 
             await axios.get(`/messages/network/${data}`)
                 .then((res) => {
                     commit("setLoader", false);
                     console.log("User to network: ", res.data.data);
-                    commit("setUserToNetwork", res.data.data);
+                    commit("setUserToUser", res.data.data);
                 })
                 .catch((err) => {
                     commit("setLoader", false);

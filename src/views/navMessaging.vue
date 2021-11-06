@@ -104,7 +104,11 @@
               <b-row class="mt-12">
                 <b-col>
                   <b-tabs content-class="mt-12 ma-4 pt-6" fill lazy>
-                    <b-tab title="Profile" active>
+                    <b-tab
+                      title="Profile"
+                      active
+                      @click="getChatList({ type: 'user' })"
+                    >
                       <!-- Users Chats Available  -->
 
                       <div class="messages">
@@ -163,18 +167,30 @@
 
                       <!-- End Chats -->
                     </b-tab>
-                    <b-tab title="Business">
+
+                    <b-tab
+                      title="Business"
+                      @click="getChatList({ type: 'business' })"
+                    >
                       <!-- Users Chats Available  -->
 
                       <div class="messages">
+                        <div v-if="loader" class="text-center mt-12 pt-12">
+                          <b-spinner
+                            variant="primary"
+                            label="Spinning"
+                            class="centralizer"
+                          ></b-spinner>
+                        </div>
                         <b-row
+                          v-else
                           v-for="(chat, index) in chatList"
                           :key="index"
                           :class="[
                             'p-2 message ',
                             {
                               messageSelected:
-                                index ==
+                                chat.sender_id ==
                                 (chatSelected.clickedId != null
                                   ? chatSelected.clickedId
                                   : false)
@@ -182,7 +198,7 @@
                                   : false,
                             },
                           ]"
-                          @click="selectedChat(chat, index)"
+                          @click="selectedChat(chat, chat.sender_id)"
                         >
                           <b-col class="col-9">
                             <span style="display: inline-flex">
@@ -194,18 +210,18 @@
 
                               <h6 class="mt-2 d-inline-block ml-2">
                                 <b class="bold"> {{ chat.name }}</b>
-                                <p class="duration">{{ chat.startMessage }}</p>
+                                <p class="duration">{{ chat.message }}</p>
                               </h6>
                             </span>
                           </b-col>
 
                           <b-col class="col-3 text-center">
                             <small class="text-center">
-                              {{ chat.timeStamp }}
+                              {{ getCreatedAt(chat.created_at) }}
                             </small>
                             <p class="text-center">
                               <b-badge variant="info">
-                                {{ chat.messageCount }}
+                                {{ chat.sender_id }}
                               </b-badge>
                             </p>
                           </b-col>
@@ -214,7 +230,68 @@
 
                       <!-- End Chats -->
                     </b-tab>
-                    <b-tab title="Network"><p>I'm a disabled tab!</p></b-tab>
+                    <b-tab
+                      title="Network"
+                      @click="getChatList({ type: 'network' })"
+                    >
+                      <!-- Users Chats Available  -->
+
+                      <div class="messages">
+                        <div v-if="loader" class="text-center mt-12 pt-12">
+                          <b-spinner
+                            variant="primary"
+                            label="Spinning"
+                            class="centralizer"
+                          ></b-spinner>
+                        </div>
+                        <b-row
+                          v-else
+                          v-for="(chat, index) in chatList"
+                          :key="index"
+                          :class="[
+                            'p-2 message ',
+                            {
+                              messageSelected:
+                                chat.sender_id ==
+                                (chatSelected.clickedId != null
+                                  ? chatSelected.clickedId
+                                  : false)
+                                  ? chatSelected.active
+                                  : false,
+                            },
+                          ]"
+                          @click="selectedChat(chat, chat.sender_id)"
+                        >
+                          <b-col class="col-9">
+                            <span style="display: inline-flex">
+                              <b-avatar
+                                class="d-inline-block profile-pic"
+                                variant="primary"
+                                src="https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg"
+                              ></b-avatar>
+
+                              <h6 class="mt-2 d-inline-block ml-2">
+                                <b class="bold"> {{ chat.name }}</b>
+                                <p class="duration">{{ chat.message }}</p>
+                              </h6>
+                            </span>
+                          </b-col>
+
+                          <b-col class="col-3 text-center">
+                            <small class="text-center">
+                              {{ getCreatedAt(chat.created_at) }}
+                            </small>
+                            <p class="text-center">
+                              <b-badge variant="info">
+                                {{ chat.sender_id }}
+                              </b-badge>
+                            </p>
+                          </b-col>
+                        </b-row>
+                      </div>
+
+                      <!-- End Chats -->
+                    </b-tab>
                   </b-tabs>
                 </b-col>
               </b-row>
@@ -345,7 +422,7 @@
                     </b-row>
                   </b-col>
                 </b-row>
-                <b-row class="desk" v-else>
+                <!-- <b-row class="desk" v-else>
                   <b-col class="col-2" @click="info = true">
                     <b-avatar
                       variant="primary"
@@ -355,7 +432,7 @@
                   </b-col>
                   <b-col class="detail" @click="info = true">
                     <h5>General Chat</h5>
-                    <!-- <p>Online({{online.length}})</p> -->
+                     <p>Online({{online.length}})</p> 
                   </b-col>
                   <b-col class="col-4">
                     <b-row class="mt-3 ml-5">
@@ -367,7 +444,7 @@
                       </b-col>
                     </b-row>
                   </b-col>
-                </b-row>
+                </b-row> -->
               </div>
 
               <section
@@ -387,7 +464,16 @@
                   <div v-if="currentUser.user.id != chat.sender_id">
                     <b-row class="p-4">
                       <b-col>
-                        <p class="msg-text mt-0 text">
+                        <p v-if="chat.attachment" class="msg-text mt-0 text">
+                          {{ chat.attachment.name }}...
+                          <b class="">
+                            {{ chat.attachment.size }}
+                          </b>
+                          <small class="float-right mt-2 text-white pr-1 pt-1">
+                            {{ chat.created_at }}
+                          </small>
+                        </p>
+                        <p v-if="chat.message" class="msg-text mt-0 text">
                           {{ chat.message }}
                           <small class="float-right mt-2 text-white pr-1 pt-1">
                             {{ chat.created_at }}
@@ -399,6 +485,19 @@
                   <div v-else>
                     <b-row class="p-4">
                       <b-col>
+                        <p
+                          v-if="chat.attachment"
+                          id="sent"
+                          class="msg-text-sent text"
+                        >
+                          {{ chat.attachment.name }}...
+                          <b class="">
+                            {{ chat.attachment.size }}
+                          </b>
+                          <small class="float-right mt-2 text-white pr-1 pt-1">
+                            {{ chat.created_at }}
+                          </small>
+                        </p>
                         <p id="sent" class="msg-text-sent text">
                           {{ chat.message }}
                           <small class="float-right mt-2 text-white pr-1 pt-1">
@@ -411,7 +510,7 @@
                 </div>
               </section>
 
-              <section v-else class="chats" style="margin-left: 1px" ref="feed">
+              <!-- <section v-else class="chats" style="margin-left: 1px" ref="feed">
                 <div v-for="(message, index) in messages" :key="index">
                   <div v-if="message.sender != currentUser.user.name">
                     <b-row class="p-4">
@@ -440,27 +539,49 @@
                     </b-row>
                   </div>
                 </div>
-              </section>
+              </section> -->
 
-              <!-- <section v-else class="chats" style="margin-left: 1px" ref="feed">
+              <section v-else class="chats" style="margin-left: 1px" ref="feed">
                 <div class="mt-12 pt-12">
                   <h1 class="text-center">Select a chat</h1>
                 </div>
-              </section> -->
+              </section>
 
               <div class="bottom">
+                <b-row class="text-center">
+                  <!-- <p class="py-2 text-primary" v-if="this.file">
+                    {{ this.file.name }} <b class="text-bold">{{ convert(this.file.size) }}</b>
+                  </p> -->
+                  <b-alert :show="this.filePreview" class="mt-4" variant="warning" dismissible>
+                     {{ this.file.name }}<b class="pl-2 text-bold">{{ convert(this.file.size) }}</b>
+                    </b-alert>
+                </b-row>
                 <b-row v-if="!checked">
                   <b-col cols="2" class="p-0">
-                    <b-icon
-                      class="
-                        msg-icon
-                        primary
-                        icon-size icon-top
-                        float-right
-                        text-right
-                      "
-                      icon="paperclip"
-                    ></b-icon>
+                    <label for="file">
+                      <b-icon
+                        for="file"
+                        class="
+                          msg-icon
+                          primary
+                          icon-size icon-top
+                          float-right
+                          text-right
+                        "
+                        icon="paperclip"
+                      >
+                      </b-icon>
+                      <i class="ion-images"></i>
+                      <input
+                        style="display: none"
+                        type="file"
+                        id="file"
+                        ref="file"
+                        v-on:change="handleFileUpload()"
+                      />
+                    </label>
+
+                    <!-- <button v-on:click="submitFile()">Submit</button> -->
                   </b-col>
                   <b-col cols="8" class="p-0">
                     <b-form-input
@@ -468,7 +589,7 @@
                       v-model="input"
                       @keypress.enter="send"
                       class="input-background"
-                      placeholder="Enter the message..."
+                      placeholder="Enter a message..."
                     ></b-form-input>
 
                     <div class="wrapper">
@@ -532,11 +653,12 @@
                   <b-col cols="2" class="p-0">
                     <b-icon
                       @click="send"
-                      class="msg-icon primary icon-size icon-top"
+                      class="ml-12 pl-12 msg-icon primary icon-size icon-top"
                       icon="cursor-fill"
                     ></b-icon>
                   </b-col>
                 </b-row>
+
                 <!-- <p v-if="checked" class="ml-5">
                   You have blocked messages and calls from this user.
                   <b-link @click="showInfo(true)">Unblock Now</b-link>
@@ -655,8 +777,9 @@
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
 import EmojiPicker from "vue-emoji-picker";
-import moment from "moment";
 import io from "socket.io-client";
+import convertSize from "convert-size";
+import moment from "moment";
 
 export default {
   components: {
@@ -666,6 +789,8 @@ export default {
   },
   data() {
     return {
+      filePreview:false,
+      file: "",
       room: "",
       online: [],
       input: "",
@@ -939,7 +1064,7 @@ export default {
   mounted() {
     this.$refs.feed.scrollTop = this.$refs.feed.scrollHeight;
     this.getUsers();
-    this.getChatList();
+    this.getChatList({ type: "user" });
   },
   created() {
     this.socket.on("generalMessage", (data) => {
@@ -951,10 +1076,17 @@ export default {
       console.log("Received");
       console.log(data);
       this.userToUser.push(data);
-      this.saveMessage(data);
+      console.log(this.userToUser);
+
+      // this.saveMessage(data);
     });
   },
   methods: {
+    convert(data) {
+      return (data);
+      // return convertSize(data);
+
+    },
     createRoom(receiver_id) {
       let sender_id = this.currentUser.user.id;
       this.room = [receiver_id, sender_id];
@@ -972,9 +1104,9 @@ export default {
         })
         .catch(() => console.log("error"));
     },
-    getChatList() {
+    getChatList(data) {
       this.$store
-        .dispatch("userChat/GET_USERS_CHAT_LIST")
+        .dispatch("userChat/GET_USERS_CHAT_LIST", data)
         .then(() => {
           console.log("->[Data logged]<-");
         })
@@ -1076,12 +1208,45 @@ export default {
       this.newMsg = arg;
       this.show = false;
     },
+    submitFile() {
+      // console.log("Form data: ",formData);
+      //     axios.post( '/single-file',
+      //         formData,
+      //         {
+      //         headers: {
+      //             'Content-Type': 'multipart/form-data'
+      //         }
+      //       }
+      //     ).then(function(){
+      //   console.log('SUCCESS!!');
+      // })
+      // .catch(function(){
+      //   console.log('FAILURE!!');
+      // });
+    },
+    handleFileUpload() {
+      this.file = this.$refs.file.files[0];
+      this.filePreview = true
+      console.log("preview:",this.filePreview);
+    },
     send() {
+      let formData = new FormData();
+      let attachment = this.file;
+      console.log("attachment:", attachment);
+      // if (this.file) {
+      //   let formData = new FormData();
+      //   attachment = formData.append("file", this.file);
+      // } else attachment = null;
       this.socket.emit("privateMessage", {
         message: this.input,
         sender_id: this.currentUser.user.id,
         room: this.room,
         receiver_id: this.chatSelected.id,
+        attachment: {
+          name: this.file.name,
+          size: convertSize(this.file.size),
+          file: attachment,
+        },
       });
 
       // this.socket.emit("generalMessage", {
@@ -1089,6 +1254,7 @@ export default {
       //   sender: this.currentUser.user.name,
       //   date: new Date(),
       // });
+      this.submitFile();
       console.log("SENT...");
       this.$refs.feed.scrollTop = this.$refs.feed.scrollHeight;
       console.log("scroll...", this.$refs.feed.scrollHeight);
@@ -1101,6 +1267,8 @@ export default {
       this.message.message = this.input;
       this.chats.push(this.message);
       this.input = "";
+      this.file = null;
+
     },
   },
 };
@@ -1224,10 +1392,8 @@ h1 {
   margin-left: 400px;
 }
 .bottom {
-  padding-left: 10px;
-
-  height: 60px;
-
+  padding-left: 50px;
+  min-height: 60px;
   border-bottom-right-radius: 15px;
   background-color: white;
 }

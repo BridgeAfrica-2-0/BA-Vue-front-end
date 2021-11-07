@@ -38,8 +38,8 @@
                     ><fas-icon
                       class="couleur1 search margbtn "
                       :icon="['fas', 'envelope']"
-                    />
-                    <h3 class="couleur1"> Chat Now</h3>
+                    /> 
+                    <h3 class="couleur1 ecart"> chat now</h3>
                   </span>
                 </button>
                 <b-modal id="my-modal">
@@ -240,7 +240,9 @@ export default {
 
 <style scoped>
 
-
+.ecart{
+  margin-left: 2px;
+}
 
 .hr {
   height: 0.1px;

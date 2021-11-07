@@ -7,7 +7,7 @@
     ----------------------DEBUT -----------------------------------------------------
     -->
     <div id="hidemobile">
-      <div class="justify-content-between d-flex row cd B">
+      <div class="justify-content-between d-flex row cd B" style="margin-left: 7px">
         <div
           id="m1"
           class="mobile green t col transition pl-4"
@@ -34,11 +34,11 @@
         >
           <div class="cercle2">3</div>
 
-          <h2 class="h2 text-position text-center">Shipped</h2>
+          <h2 class="h2 text-position text-center">re-shedule</h2>
         </div>
         <div id="m4" class="mobile2 col t" @click="changeElementType(4)">
           <div class="cercle2">4</div>
-          <h2 class="h2 text-position text-center">re-shedule</h2>
+          <h2 class="h2 text-position text-center">Shipped </h2>
         </div>
       </div>
 
@@ -475,7 +475,7 @@
       <div>
         <div v-if="status == 1" class="inprogress">
           <div class="show row">
-            <div class="col-4">Show:</div>
+            <div class="col-3">Show:</div>
             <div class="col">
               <b-form-select
                 v-model="selected"
@@ -556,7 +556,7 @@
 
         <div v-if="status == 2" class="inprogress">
           <div class="show row">
-            <div class="col-4">Show:</div>
+            <div class="col-3">Show:</div>
             <div class="col">
               <b-form-select
                 v-model="selected"
@@ -636,7 +636,7 @@
 
         <div v-if="status == 3" class="complete">
           <div class="show row">
-            <div class="col-4">Show:</div>
+            <div class="col-3">Show:</div>
             <div class="col">
               <b-form-select
                 v-model="selected"
@@ -716,7 +716,7 @@
 
         <div v-if="status == 4" class="canel">
           <div class="show row">
-            <div class="col-4">Show:</div>
+            <div class="col-3">Show:</div>
             <div class="col">
               <b-form-select
                 v-model="selected"
@@ -870,8 +870,10 @@ export default {
   color: #b6b2b2;
 }
 .show {
+    margin-left: 2px;
   margin-bottom: 70px;
-  width: 280px;
+   width: 370px;
+
 }
 .manage {
   margin-bottom: -60px;
@@ -893,7 +895,7 @@ export default {
   width: 130px !important;
 }
 .parent {
-  margin-left: 40px;
+  margin-left: 10px;
 }
 .margd1 {
   margin-left: 50px;
@@ -1064,7 +1066,7 @@ h3 {
   clip-path: polygon(75% 0%, 88% 50%, 75% 100%, 0% 100%, 11% 50%, 0% 0%);
 }
 .mobile2 {
-  width: 200px;
+  width: 201px;
   height: 50px;
   margin-left: -20px;
   color: white;
@@ -1193,7 +1195,14 @@ h3 {
   }
   .cercle2 {
     margin-left: 50px !important;
+    width: 18px ;
+    height: 18px;
+     line-height: 20px;
   }
+.cercle1{
+   width: 18px ;
+    height: 18px;
+}
 
   #hidedesktop {
     display: none;
@@ -1210,6 +1219,8 @@ h3 {
   }
   .cercle2 {
     margin-left: 3px !important;
+     width: 17px;
+       height: 17px;
   }
   .gras {
     font-size: 12px !important;
@@ -1234,7 +1245,7 @@ h3 {
   @media only screen and (max-width: 470px) {
     .h2 {
       font-size: 10px !important;
-      margin-left: 7px;
+      margin-left: 5px;
     }
     .cercle2 {
       margin-left: -4px !important;

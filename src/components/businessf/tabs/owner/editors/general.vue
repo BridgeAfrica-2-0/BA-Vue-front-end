@@ -267,18 +267,18 @@
 
 
 
-import Roles from "@/components/businessf/tabs/owner/networks/roles";
+import Roles from "@/components/businessf/tabs/owner/editors/roles";
 
-import MemberShip from "@/components/businessf/tabs/owner/networks/memberShip";
-import KeywordAlert from "@/components/businessf/tabs/owner/networks/keywordAlert";
+import MemberShip from "@/components/businessf/tabs/owner/editors/memberShip";
+import KeywordAlert from "@/components/businessf/tabs/owner/editors/keywordAlert";
 
-import PendingPost from "@/components/businessf/tabs/owner/networks/pendingPost";
+import PendingPost from "@/components/businessf/tabs/owner/editors/pendingPost";
 
-import Notification from "@/components/businessf/tabs/owner/networks/notification";
+import Notification from "@/components/businessf/tabs/owner/editors/notification";
 
-import Settings from "@/components/businessf/tabs/owner/networks/settings";
-import General from "@/components/businessf/tabs/owner/networks/settings/general";
-import Blocking from "@/components/businessf/tabs/owner/networks/settings/blocking";
+import Settings from "@/components/businessf/tabs/owner/editors/settings";
+import General from "@/components/businessf/tabs/owner/editors/settings/general";
+import Blocking from "@/components/businessf/tabs/owner/editors/settings/blocking";
 import LyTab from "@/tab/src/index.vue";
 
 

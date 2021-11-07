@@ -105,15 +105,16 @@
         </b-row>
         </b-skeleton-wrapper>
       </div>
-      
+      <b-row>
+        <b-col cols="12">
+          <infinite-loading @infinite="infiniteHandler">
+            <div class="text-red" slot="no-more">No More Request</div>
+            <div class="text-red" slot="no-results">No More Request</div>
+          </infinite-loading>
+        </b-col>
+      </b-row>
 
       <FlashMessage />
-
-      <infinite-loading @infinite="infiniteHandler">
-        <div class="text-red" slot="no-more">No More Request</div>
-        <div class="text-red" slot="no-results">No More Request</div>
-      </infinite-loading>
-
     </div>
   </b-container>
 </template>
@@ -140,8 +141,11 @@ export default {
     infiniteHandler($state) {
        console.log("loop");
       this.axios
-      .get("network/"+this.url+"/members/request/"+this.page)
+      .get("network/"+this.url+"/members/users/request/"+this.page)
       .then(({ data }) => {
+        console.log("// convert array to th object");
+        let obj = Object.assign({}, data);
+        console.log(obj);
        console.log(data);
        console.log(this.page);
         if (data.data.length) {
@@ -163,6 +167,7 @@ export default {
       this.axios.get("network/"+this.url+"/members/request/approve/"+user_id)
       .then(() => {
         this.infiniteHandler();
+        // this.$refs.infiniteLoading.$emit('$InfiniteLoading:reset');
         console.log('ohh yeah');
         this.loading = false;
         this.flashMessage.show({
@@ -185,6 +190,7 @@ export default {
       this.axios.get("network/"+this.url+"/members/request/decline/"+user_id)
       .then(() => {
         this.infiniteHandler();
+        // this.$refs.infiniteLoading.$emit('$InfiniteLoading:reset');
         console.log('ohh yeah');
         this.loading = false;
         this.flashMessage.show({

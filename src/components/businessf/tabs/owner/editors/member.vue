@@ -207,9 +207,6 @@ export default {
     };
   },
   computed: {
-    // rows() {
-    //   return this.$store.state.networkProfileMembers.members.total;
-    // },
     members() {
       return this.$store.state.networkProfileMembers.members;
     },

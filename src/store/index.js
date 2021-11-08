@@ -2,6 +2,11 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import auth from "./auth";
+import businessBlocking from "./businessBlocking";
+import dashboard from "./dashboard";
+import businessGeneral from "./businessGeneral";
+import businessRole from "./businessRole";
+import businessAccountType from "./businessAccountType";
 import businessOwner from "./businessOwner";
 import marketSearch from "./marketSearch";
 import networkSearch from "./networkSearch";
@@ -39,8 +44,13 @@ export default new Vuex.Store({
     auth,
     networkDetails,
     dashboardcommunity,
-    ProfileAndBusinessDetails,
     businessOwner,
+    businessBlocking,
+    dashboard,
+    businessGeneral,
+    ProfileAndBusinessDetails,
+    businessRole,
+    businessAccountType,
     business,
     networkProfileFeedback,
     hotbusiness,

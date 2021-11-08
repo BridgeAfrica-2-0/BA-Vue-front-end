@@ -199,25 +199,7 @@ new Vue({
       return config;
     });
 
-<<<<<<< HEAD
-
-                }
-                return Promise.reject(error);
-            }
-        );
-
-        axios.interceptors.request.use(function (config) {
-
-if (user!=null){    
-          config.headers.Authorization =  `Bearer  ${user.accessToken}`;
-        }
-          return config;
-      });
-
-    },
-=======
   },
->>>>>>> main
 
 
   render: h => h(App),

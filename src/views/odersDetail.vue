@@ -471,12 +471,16 @@ h1{
 
 }
 
-@media only screen and (min-width: 400px) {
+@media only screen and (min-width: 360px) {
 
   
 
   .size {
-    /* width: 70px; */
+    height: 3px;
+  /* margin-top: 3px;
+  margin-left: -3px;
+  margin-right: -3px; */
+   width: 65px;
   }
 
 }

@@ -64,7 +64,7 @@
         </div>
       </div>
 
-      <div class="card my-1 shadow ">
+      <div class="card my-1  cardborder">
         <div class="card-body ">
           <div class="row container mx-5 rowmobile">
 
@@ -294,6 +294,7 @@ color: #e75c18;
   .body {
   background-color: rgba(213, 214, 214, 0.473);
 }
+
   .avatar{
     width: 15px;
     height: 15px;
@@ -376,6 +377,10 @@ h3 {
   font-size: 10px !important;
  
 }
+
+.cardborder{
+  border: none;
+}
 .margtext h3{
   margin-left: -16px;
   margin-right: -20px;
@@ -438,12 +443,12 @@ height: 10px;
   margin-right: -20px;
   font-weight: bold;
 } */
+
 .r-img {
   border-radius: 4px;
   height: 150px;
-  width: 300px;
+  width: 340px;
 }
-
 .margtotal {
   margin-left: 20px;
   

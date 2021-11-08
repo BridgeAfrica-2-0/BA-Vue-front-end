@@ -87,8 +87,114 @@
 </template>
 
 <script>
+import axios from "axios";
 export default {
-  props: ["follower"],
+  props: ["type", "searchh"],
+  data() {
+    return {
+      page: 1,
+      biz_id: null,
+      infiniteId: +new Date(),
+      options: {
+        rewind: true,
+        autoplay: true,
+        perPage: 2,
+        pagination: false,
+
+        type: "loop",
+        perMove: 1,
+      },
+    };
+  },
+
+  computed: {
+    users() {
+      if (this.type == "Follower") {
+        return this.$store.state.businessOwner.UcommunityFollower
+          .user_followers;
+      } else {
+        return this.$store.state.businessOwner.UcommunityFollowing
+          .user_following;
+      }
+    },
+  },
+  mounted() {
+    this.biz_id = this.$route.params.id;
+  },
+
+  methods: {
+    search() {
+      console.log("search started");
+
+      if (this.type == "Follower") {
+        this.$store.commit("businessOwner/setUcommunityFollower", {
+          user_followers: [],
+          total_user_follower: 0,
+        });
+      } else {
+        this.$store.commit("businessOwner/setUcommunityFollowing", {
+          user_following: [],
+          total_user_following: 0,
+        });
+      }
+
+      this.page = 1;
+      this.infiniteId += 1;
+
+      this.$refs.infiniteLoading.attemptLoad();
+    },
+
+    count(number) {
+      if (number >= 1000000) {
+        return number / 1000000 + "M";
+      }
+      if (number >= 1000) {
+        return number / 1000 + "K";
+      } else return number;
+    },
+
+    infiniteHandler($state) {
+      let url = null;
+
+      if (this.type == "Follower") {
+        url = "business/community/visitor/people-follower/" + this.biz_id + "/";
+      } else {
+        url =
+          "business/community/visitor/people-following/" + this.biz_id + "/";
+      }
+
+      axios
+        .get(url + this.page + "?keyword=" + this.searchh)
+        .then(({ data }) => {
+          console.log(data);
+          if (this.type == "Follower") {
+            if (data.data.user_followers.length) {
+              this.page += 1;
+
+              console.log(this.users);
+              this.users.push(...data.data.user_followers);
+              $state.loaded();
+            } else {
+              $state.complete();
+            }
+          } else {
+            if (data.data.user_following.length) {
+              this.page += 1;
+
+              this.users.push(...data.data.user_following);
+              $state.loaded();
+            } else {
+              $state.complete();
+            }
+          }
+
+          console.log(data);
+        })
+        .catch((err) => {
+          console.log({ err: err });
+        });
+    },
+  },
 };
 </script>
 

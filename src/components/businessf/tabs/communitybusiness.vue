@@ -193,6 +193,7 @@
 </template>
 
 <script>
+import axios from 'axios'
 export default {
   props: ["follower"],
 
@@ -209,6 +210,128 @@ export default {
       },
     };
   },
+
+  computed:{
+   
+    businesses(){
+
+      if(this.type=="Follower"){ 
+
+     return  this.$store.state.businessOwner.BcommunityFollower.business_followers; 
+
+       }else{
+
+          return  this.$store.state.businessOwner.BcommunityFollowing.business_following; 
+       }
+   }
+
+  },
+
+   mounted(){
+
+    this.biz_id = this.$route.params.id; 
+  },
+   
+  methods: {
+    count(number) {
+      if (number >= 1000000) {
+        return number / 1000000 + "M";
+      }
+      if (number >= 1000) {
+        return number / 1000 + "K";
+      } else return number;
+    },
+
+
+    
+
+       search(){
+     
+       console.log('search started');
+       
+         if(this.type=="Follower"){ 
+         
+        this.$store.commit("businessOwner/setBcommunityFollower",{ "business_followers": [ ], "total_business_follower": 0 }); 
+
+       }else{
+       
+        
+        this.$store.commit("businessOwner/setBcommunityFollowing",{ "business_following": [ ], "total_business_following": 0 }); 
+       }
+
+      this.page = 1;
+      this.infiniteId += 1;
+
+     
+     this.$refs.infiniteLoading.attemptLoad();
+    
+
+    },
+
+
+     
+
+
+     
+          infiniteHandler($state) { 
+           
+
+      let url = null;
+
+         if(this.type=="Follower"){  
+         url = "business/community/visitor/business-follower/"+this.biz_id+"/";
+         }else{
+           url = "business/community/visitor/business-following/"+this.biz_id+"/";
+         }
+      axios
+        .get(url + this.page+"?keyword="+this.searchh )
+        .then(({ data }) => {
+          console.log(data);
+        
+          if(this.type=="Follower"){  
+
+
+          if (data.data.business_followers.length) {
+            
+         
+            this.businesses.push(...data.data.business_followers); 
+            this.page += 1;
+            
+            $state.loaded();
+
+           }else{
+              $state.complete();
+             
+           }
+        
+          }else{
+
+
+
+
+             if (data.data.business_following.length) {
+            
+         
+            this.businesses.push(...data.data.business_following); 
+            this.page += 1;
+            
+            $state.loaded();
+
+           }else{
+              $state.complete();
+             
+           }
+
+          }
+           
+        })
+        .catch((err) => {
+          console.log({ err: err });
+        });
+    },
+
+
+  }
 };
 </script>
 

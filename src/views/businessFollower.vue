@@ -2,6 +2,7 @@
   <div>
     <navbar />
     <Business />
+
     <Footer />
   </div>
 </template>
@@ -18,9 +19,7 @@ export default {
     Business,
     Footer,
   },
-  data() {
-    return {};
-  },
+  data() {},
   computed: {},
   methods: {},
 };

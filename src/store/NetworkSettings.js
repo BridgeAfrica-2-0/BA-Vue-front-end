@@ -24,7 +24,7 @@ export default {
     getroles({ commit }) {
       return axios.get("/network/roles/").then(({ data }) => {
         commit("setroles", data.data);
-        console.log(data);
+        console.log("ROLES",data);
         console.log("roles data");
       });
     },

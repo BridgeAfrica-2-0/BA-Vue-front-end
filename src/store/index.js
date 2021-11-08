@@ -10,6 +10,7 @@ import ProfileAndBusinessDetails from "./ProfileAndBusinessDetails";
 import networkProfileCommunity from "./networkProfileCommunity";
 import networkDetails from "./networkDetails";
 import dashboardcommunity from "./dashboardcommunity";
+import networkSetting from "./networkSetting";
 import NetworkSettings from "./NetworkSettings";
 import checkout from "./checkout";
 import businessFollowers from "./businessFollowers";
@@ -44,6 +45,7 @@ export default new Vuex.Store({
     business,
     networkProfileFeedback,
     hotbusiness,
+    networkSetting,
     NetworkSettings,
     profile,
     follower,

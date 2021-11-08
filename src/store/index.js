@@ -18,7 +18,7 @@ import business from "./business";
 import profile from "./profile";
 import networkProfileMembers from "./networkProfileMembers";
 import follower from "./follower";
-import checkout from "./checkout";
+
 import networkProfile from "./networkProfile";
 import UserProfileOwner from "./UserProfileOwner"
 import networkProfileCommunitySidebar from "./networkProfileCommunitySidebar";
@@ -51,11 +51,7 @@ export default new Vuex.Store({
     marketSearch,
     networkSearch,
     networkProfileMembers,
-<<<<<<< HEAD
     allSearch,
-=======
-        allSearch,
->>>>>>> 891d07fd0d9986e82b682ea3120fe886fa058222
     businessFollowers,
     networkProfileCommunitySidebar,
     networkProfileCommunity,

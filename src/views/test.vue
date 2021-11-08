@@ -13,274 +13,6 @@
 
 
 
-
-     <div  class="c515 c512" id="verify-container">
-              <div class="c516 c513">
-                <div>
-                  <h1> Email Verification </h1>
-                  <br>
-                  <h5>
-                   Please enter your department email address (typically ends in .gov or .mil)
-                  </h5>
-
-                  <form>
-                    <div>
-                      <div style="padding-top: 15px">
-                        <div
-                          class=" mt-3
-                            MuiFormControl-root
-                            MuiTextField-root
-                            MuiFormControl-fullWidth
-                          "
-                        >
-                         
-
-                          <div
-                            class="
-                              MuiInputBase-root
-                              MuiFilledInput-root MuiFilledInput-underline
-                              Mui-error Mui-error
-                              MuiInputBase-fullWidth MuiInputBase-formControl
-                            "
-                          >
-                            <input
-                              aria-invalid="true"
-                              name="first-name"
-                              v-model="email"
-                              type="text"
-                              aria-label="First name"
-                              placeholder="Your Departement Email"
-                              class="
-                                form-control
-                                MuiInputBase-input
-                                MuiFilledInput-input
-                              "
-                              value=""
-                            />
-                          </div>
-                        </div>
-
-
-
-
-
-
-
-
-
-
-
-                        <div
-                          class=" mt-3
-                            MuiFormControl-root
-                            MuiTextField-root
-                            MuiFormControl-fullWidth
-                          "
-                        >
-                         
-
-                          <div
-                            class="
-                              MuiInputBase-root
-                              MuiFilledInput-root MuiFilledInput-underline
-                              Mui-error Mui-error
-                              MuiInputBase-fullWidth MuiInputBase-formControl
-                            "
-                          >
-                            <input
-                              aria-invalid="true"
-                              name="first-name"
-                              v-model="email"
-                              type="text"
-                              aria-label=""
-                              placeholder="Confirm your Email"
-                              class="
-                                form-control
-                                MuiInputBase-input
-                                MuiFilledInput-input
-                              "
-                              value=""
-                            />
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div>
-                      <div style="padding-top: 15px"></div>
-                    </div>
-
-                    <div style="padding-top: 20px">
-                      <button
-                        @click="getStarted"
-                        class="
-                          MuiButtonBase-root
-                          MuiButton-root MuiButton-contained MuiButton-fullWidth
-                        "
-                        tabindex="0"
-                        label="Continue"
-                        style="
-                          box-shadow: none;
-                          height: 60px;
-                          border-radius: 3px;
-                          font-size: 0.875rem;
-                          text-transform: none;
-                        "
-                      >
-                        <span class="MuiButton-label">Continue</span
-                        ><span class="MuiTouchRipple-root"></span>
-                      </button>
-                      
-                      <br> <br>
-
-                    We take your security seriously:  <br>
-
-                    <li>  Our system will check if this is an official department email address.   </li>
-                 <li>    We will not sell or spam this email address; it will only be used to verify your membership.  </li>
-                    </div>
-                  </form>
-                </div>
-              </div>
-            </div>
-
-
-
-
-
-
-
-
-
-
-
-
-   <div>
-            <h1 role="heading" aria-level="1">Document Verification</h1>
-            <p class="no-margin-bottom no-padding-bottom" role="heading" aria-level="2"><span>Please upload a document
-                    from the list below that proves your Active Duty status. </span></p>
-            <ul class="MuiList-root MuiList-padding" style="padding-top: 20px;">
-               
-
-               <li
-                          class="MuiListItem-root MuiListItem-gutters"
-                          tabindex="0"
-                          v-for="blec in doc_type"
-                          :key="blec.id"
-                          @click="branchh(blec)"
-                          style="
-                            margin-bottom: -1px;
-                            border: 1px solid rgb(224, 224, 224);
-                            font-size: 14px;
-                            cursor: pointer;
-                          "
-                        >
-                          <div
-                            class="MuiListItemText-root"
-                            style="font-size: 14px; cursor: pointer"
-                          >
-                            {{ blec.name }}
-                          </div>
-                          <div class="MuiListItemIcon-root">
-                            <svg
-                              class="MuiSvgIcon-root"
-                              focusable="false"
-                              viewBox="0 0 24 24"
-                              aria-hidden="true"
-                            >
-                              <path
-                                d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"
-                              ></path>
-                            </svg>
-                          </div>
-                        </li>
-
-            </ul>
-
-
-            <div class="c5138"><a class="c5132" target="" href="/"><span><svg class="MuiSvgIcon-root" focusable="false"
-                            viewBox="0 0 24 24" aria-hidden="true"
-                            style="width: 20px; height: 20px; vertical-align: bottom; margin: 0px -2px 0px -6px; color: rgb(0, 161, 223);">
-                            <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"></path>
-                        </svg>Back</span></a></div>
-        </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-           <div>
-            <h1 role="heading" aria-level="1">Here are two easy ways to verify your status</h1>
-            <div>
-                <div><button class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-fullWidth"
-                        tabindex="0" type="button" label="Upload a document"
-                        style="box-shadow: none; height: 60px; border-radius: 3px; font-size: 0.875rem; text-transform: none;"><span
-                            class="MuiButton-label"><svg class="MuiSvgIcon-root" focusable="false" viewBox="0 0 24 24"
-                                aria-hidden="true" style="padding-right: 10px;">
-                                <path d="M5 4v2h14V4H5zm0 10h4v6h6v-6h4l-7-7-7 7z"></path>
-                            </svg>Upload a document</span><span class="MuiTouchRipple-root"></span></button>
-                    <p class="no-margin" style="padding: 10px 0px 0px; line-height: 14px;"><small
-                            style="font-size: 12px;">A safe, fast and secure way to verify your service. Choose from a
-                            list of eligible documents on the next screen. All documents are deleted from our system
-                            after verification.</small></p>
-                </div>
-            </div>
-            <div>
-                <div>
-                    <p class="text-muted text-center">Or</p><button
-                        class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-fullWidth" tabindex="0"
-                        type="button" label="Enter your department email"
-                        style="box-shadow: none; height: 60px; border-radius: 3px; font-size: 0.875rem; text-transform: none;"><span
-                            class="MuiButton-label"><svg class="MuiSvgIcon-root" focusable="false" viewBox="0 0 24 24"
-                                aria-hidden="true" style="padding-right: 10px;">
-                                <path
-                                    d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z">
-                                </path>
-                            </svg> Enter your department email</span><span class="MuiTouchRipple-root"></span></button>
-                    <p class="no-margin" style="padding: 10px 0px 0px; line-height: 14px;"><small
-                            style="font-size: 12px;">We will send you a one-time email in order to verify that you own
-                            the address provided. We will not sell or spam the email address.</small></p>
-                </div>
-            </div>
-            <div class="c5138"><a class="c5132" target="" href="/"><span><svg class="MuiSvgIcon-root" focusable="false"
-                            viewBox="0 0 24 24" aria-hidden="true"
-                            style="width: 20px; height: 20px; vertical-align: bottom; margin: 0px -2px 0px -6px; color: rgb(0, 161, 223);">
-                            <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"></path>
-                        </svg>Back</span></a></div>
-        </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
           <div>
             <div v-if="showemail" class="c515 c512" id="verify-container">
               <div class="c516 c513">
@@ -480,7 +212,7 @@
                           tabindex="0"
                           v-for="blec in branch"
                           :key="blec.id"
-                          @click="setStatus(blec.value)"
+                          @click="setStatus(blec)"
                           style="
                             margin-bottom: -1px;
                             border: 1px solid rgb(224, 224, 224);
@@ -1290,9 +1022,221 @@
 
               <div v-if="complete" class="c515 c512" id="verify-container">
                 <div class="c516 c513">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div v-if="show_status">
+                        <h1 class="no-padding-bottom">What's your Status?</h1>
+                        <br>
+                        <li
+                          class="MuiListItem-root MuiListItem-gutters"
+                          tabindex="0"
+                          v-for="blec in branch"
+                          :key="blec.id"
+                          @click="setStatus(blec)"
+                          style="
+                            margin-bottom: -1px;
+                            border: 1px solid rgb(224, 224, 224);
+                            font-size: 14px;
+                            cursor: pointer;
+                          "
+                        >
+                          <div
+                            class="MuiListItemText-root"
+                            style="font-size: 14px; cursor: pointer"
+                          >
+                            {{ blec.name }}
+                          </div>
+                          <div class="MuiListItemIcon-root">
+                            <svg
+                              class="MuiSvgIcon-root"
+                              focusable="false"
+                              viewBox="0 0 24 24"
+                              aria-hidden="true"
+                            >
+                              <path
+                                d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"
+                              ></path>
+                            </svg>
+                          </div>
+                        </li>
+                        <svg
+                          class="MuiSvgIcon-root"
+                          focusable="false"
+                          viewBox="0 0 24 24"
+                          aria-hidden="true"
+                          style="
+                            width: 20px;
+                            height: 20px;
+                            vertical-align: bottom;
+                            margin: 0px -2px 0px -6px;
+                            color: rgb(0, 161, 223);
+                          "
+                        >
+                          <path
+                            d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"
+                          ></path>
+                        </svg>
+                        <a href="#" @click="resetStatus"> back </a>
+                      </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="c515 c512" id="verify-container"><div class="c516 c513"><div><h1 role="heading" aria-level="1"> {{doc_name}}
+  
+   </h1><p class="no-margin-bottom no-padding-bottom" role="heading" aria-level="2"><span>
+     <p> {{doc_description}}.</p>
+<p>Make sure the text in the image is legible without smudging or distortions. A bad quality image can delay your approval.</p></span></p><form><div><div style="padding-top: 20px;"><div><input id="desktop-file-input" type="file" accept=".pdf, .jpg, .jpeg, .png, .bmp" aria-label="Upload photo or PDF" style="display: none;"><label for="desktop-file-input"><span class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-fullWidth" tabindex="0" role="button" aria-disabled="false" label="Upload photo or PDF" id="desktop-file-button" style="box-shadow: none; height: 60px; border-radius: 3px; font-size: 0.875rem; text-transform: none;"><span class="MuiButton-label">Upload photo or PDF</span><span class="MuiTouchRipple-root"></span></span></label></div></div></div></form><p class="no-margin" style="padding: 10px 0px 0px;"><small>We take your security seriously:</small></p><ul style="margin: 0px; padding: 10px 0px 20px 17px; line-height: 13px;"><li style="padding-bottom: 5px;"><small>Your document is encrypted and we don't save any senstive info.</small></li><li style="padding-bottom: 5px;"><small>All documents are instantly deleted from our system after verification</small></li><li><small>If your document contains your social security number, please cross it out. We don't need your social to verify your status.</small></li></ul><div class="c5134"><a class="c5135" target="" href="/"><span><svg class="MuiSvgIcon-root" focusable="false" viewBox="0 0 24 24" aria-hidden="true" style="width: 20px; height: 20px; vertical-align: bottom; margin: 0px -2px 0px -6px; color: rgb(0, 161, 223);"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"></path></svg>Back</span></a></div></div></div></div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                  
+   <div>
+            <h1 role="heading" aria-level="1">Document Verification</h1>
+            <p class="no-margin-bottom no-padding-bottom" role="heading" aria-level="2"><span>Please upload a document
+                    from the list below that proves your {{status_name}} status. </span></p>
+            <ul class="MuiList-root MuiList-padding" style="padding-top: 20px;">
+               
+
+               <li
+                          class="MuiListItem-root MuiListItem-gutters"
+                          tabindex="0"
+                          v-for="blec in doc_options"
+                          :key="blec.id"
+                          @click="selectValidationDocument(blec)"  
+                          style="
+                            margin-bottom: -1px;
+                            border: 1px solid rgb(224, 224, 224);
+                            font-size: 14px;
+                            cursor: pointer;
+                          "
+                        >
+                          <div
+                            class="MuiListItemText-root"
+                            style="font-size: 14px; cursor: pointer"
+                          >
+                            {{ blec.name }}
+                          </div>
+                          <div class="MuiListItemIcon-root">
+                            <svg
+                              class="MuiSvgIcon-root"
+                              focusable="false"
+                              viewBox="0 0 24 24"
+                              aria-hidden="true"
+                            >
+                              <path
+                                d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"
+                              ></path>
+                            </svg>
+                          </div>
+                        </li>
+
+            </ul>
+
+
+            <div class="c5138"><a class="c5132" @click="showStat" target="" href="#"><span><svg class="MuiSvgIcon-root" focusable="false"
+                            viewBox="0 0 24 24" aria-hidden="true"
+                            style="width: 20px; height: 20px; vertical-align: bottom; margin: 0px -2px 0px -6px; color: rgb(0, 161, 223);">
+                            <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"></path>
+                        </svg>Back</span></a></div>
+      
+      
+      
+      
+        </div>
+
+
+
+
+         <b-button variant="primary" @click=" verifDoc">  switch verif  </b-button>
+
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                   <div>
                     <h1>Great! Let's start the verification process.</h1>
-<br>
+                     <br>
                     <form>
                       <div>
                         <div style="padding-top: 15px">
@@ -1553,6 +1497,9 @@ export default {
     return {
       message: "Hello Vue!",
       profession_name: null,
+      doc_name:null,
+      doc_description:null,
+      status_name: null,
       branch_name: null,
       show_branch: false,
       show_status: false,
@@ -1560,7 +1507,7 @@ export default {
       departemnet_name:null,
       departement_status:null,
       showlawenforcementstatus:false,
-  
+      doc_option_msg :null,
 
       showemail: true,
       show_related: true,
@@ -1574,7 +1521,8 @@ export default {
       selected: [],
       background: [],
       branch: [],
-      status_name: [],
+      doc_options:[],
+      
       dob: [],
       first_name: null,
       last_name: null,
@@ -1584,14 +1532,14 @@ export default {
         { id: 1, name: " Dependent ", value: "dependent" },
       ],
 
-      doc_type:[
+      military_active:[
         
         { id: 1, name: " Leaving and Earning Statement ", value: "leaving_and_earning", text:"Please upload a recent Leave & Earnings Statement that clearly shows your full name" },
         { id: 1, name: " PCS Orders ", value: "pcs_orders", text:"Please upload a picture of your Permanent Change of Station Orders (PCS) that clearly show your full name." },
         { id: 1, name: " Others ", value: " others ", text:"Please upload an official document that proves your Active Duty status and includes your full name" },
         ],
 
-        veteran_doc_type:[ { id: 1, name: " State Driver's License/ID ", value: "State_Driver_License/ID", text:"If your state driver's license displays a Veteran designation, you may upload it here. Make sure the picture clearly shows your photo, full name and Veteran designation. If the Veteran designation is on the back of the ID, please upload a picture of both sides."  },
+        military_vetaran:[ { id: 1, name: " State Driver's License/ID ", value: "State_Driver_License/ID", text:"If your state driver's license displays a Veteran designation, you may upload it here. Make sure the picture clearly shows your photo, full name and Veteran designation. If the Veteran designation is on the back of the ID, please upload a picture of both sides."  },
          { id: 1, name: " VA Proof of Service Letter ", value: "VA Proof_of_Service_Letter", text:"Please upload a picture of an official VA Proof of Service Letter that clearly shows your full name and honorable service designation." },
           { id: 1, name: " Veteran Health ID Card (VHIC) ", value: "VHIC", text:"Please upload a picture of your VHIC that clearly shows your full name and photo" },
            { id: 1, name: " Veteran ID Card ", value: "Veteran_ID_Card", text:"Please upload a picture of your federal, state or local Veteran ID card that clearly shows your full name and photo." },
@@ -1837,10 +1785,46 @@ export default {
 
   methods: {
 
-    selectValidationDocument(){
+    showStat(){
+this.show_status=true;
+    },
 
+    selectValidationDocument(value){
+     
+     this.doc_name=value.name;
+     this.doc_description=value.text;
 
     },
+
+
+    verifDoc(){
+   
+   console.log(this.profession_name);
+
+ console.log(this.status_name);
+       switch (this.profession_name) {
+        case "U.S. Military":
+        
+
+          if(this.status_name == "Veteran"){
+             
+            this.doc_options=this.military_vetaran; 
+
+          }else if( this.status_name =="Retired" ){
+
+            this.doc_options=this.military_vetaran;
+          }
+          else{
+               this.doc_options = this.military_active;
+          }
+
+         
+          break;
+
+
+       }
+    },
+
 
     storedata() {
       let formData2 = new FormData();
@@ -1937,7 +1921,8 @@ export default {
     },
 
     setStatus(value) {
-      this.status_name = value;
+      console.log(value);
+      this.status_name = value.name;
       this.complete = true;
     },
 

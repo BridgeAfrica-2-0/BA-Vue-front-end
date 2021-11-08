@@ -41,7 +41,8 @@ import confirmPayment from "@/views/confirmPayment";
 import networks from "@/views/networks";
 import dashboard from "@/views/dashboard";
 
-import myorders from "@/views/myOders"
+import myorders from "@/views/myOders";
+import card from "@/views/card";
 
 
 
@@ -74,6 +75,12 @@ const routes = [
     meta: {
       auth: true,
     },
+  },
+
+  {
+    path: "/card",
+    name: "card",
+    component: card,
   },
 
   {

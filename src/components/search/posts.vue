@@ -24,22 +24,44 @@
             <lightbox :cells="post.media.length" :items="post.media" v-else></lightbox>
           </b-col>
           <b-col class="mt-1">
-            <span class="mr-3 cursor"
-              ><b-icon icon="suit-heart" variant="primary" aria-hidden="true"></b-icon>
+            <span class="mr-3 cursor" @click="onLike"
+              ><b-icon :icon="icon" variant="primary" aria-hidden="true"></b-icon>
               {{ post.likes_count | formatNumber }}</span
             >
-            <span class="cursor" @click="() => (toggle = !toggle)">
+            <span class="cursor" @click="onToggle">
               <b-icon icon="chat-fill" variant="primary" aria-hidden="true"></b-icon>
               {{ post.comment_count | formatNumber }}</span
             >
           </b-col>
         </b-row>
-        <div v-show="toggle">
-          <Loader v-if="loadComment" />
-          <Comment v-for="(comment, index) in comments" :key="index" :comment="comment" />
+        <div class="mt-2 d-inline-flex w-100" v-if="toggle">
+          <div class="m-md-0 p-md-0">
+            <b-avatar variant="primary" square :src="post.profile_picture" class="img-fluid avat-comment"></b-avatar>
+          </div>
 
-          <NoMoreData v-if="comments.length && !loadComment" :hasData="hasData" @click.native="onShowComment" />
+          <div class="p-0 m-0 pr-3 inline-comment" style="width: 100%">
+            <input
+              placeholder="Post a Comment"
+              class="comment"
+              type="text"
+              v-model="comment"
+              @keypress.enter="onCreateComment"
+            />
+            <b-spinner
+              style="color: rgb(231, 92, 24); position: absolute; right: 17px"
+              v-if="createCommentRequestIsActive"
+            ></b-spinner>
+            <fas-icon
+              class="primary send-cmt"
+              :icon="['fas', 'paper-plane']"
+              @click="onCreateComment"
+              v-if="comment.trim().length > 2 && !createCommentRequestIsActive"
+            />
+          </div>
         </div>
+        <Comment v-for="comment in comments" :key="comment.id" :item="comment" :uuid="post.post_id" />
+        <Loader v-if="loadComment" />
+        <NoMoreData v-if="comments.length && !loadComment" :hasData="hasData" @click.native="onShowComment" />
       </b-col>
     </b-row>
   </div>
@@ -47,15 +69,19 @@
 
 <script>
 import Comment from '@/components/businessOwner/comment.vue';
+import Loader from '@/components/Loader';
 
 import { fromNow, formatNumber } from '@/helpers';
 
 import { NoMoreDataForComment } from '@/mixins';
 
+import { mapGetters } from 'vuex';
+
 export default {
   name: 'postNetwork',
+  mixins: [NoMoreDataForComment],
   props: {
-    post: {
+    item: {
       type: Object,
       require: true,
     },
@@ -63,10 +89,7 @@ export default {
 
   components: {
     Comment,
-  },
-
-  created() {
-    this.comments = this.post.comments;
+    Loader,
   },
 
   filters: {
@@ -74,14 +97,81 @@ export default {
     formatNumber,
   },
 
+  computed: {
+    ...mapGetters({
+      profile: 'auth/profilConnected',
+    }),
+    icon() {
+      return this.post.is_liked ? 'suit-heart-fill' : 'suit-heart';
+    },
+  },
+
+  created() {
+    this.post = this.item;
+  },
+
   data() {
     return {
       toggle: false,
       comments: [],
+      loadComment: false,
+      comment: '',
+      showComment: false,
+      processLike: false,
+      createCommentRequestIsActive: false,
     };
   },
 
   methods: {
+    onCreateComment: async function () {
+      if (!(this.comment.trim().length > 2 && !this.createCommentRequestIsActive)) return false;
+      this.createCommentRequestIsActive = true;
+      this.loadComment = true;
+      const request = await this.$repository.share.createComment({
+        post: this.post.post_id,
+        data: {
+          networkId: this.profile.id,
+          comment: this.comment,
+        },
+      });
+
+      if (request.success) {
+        this.page = 1;
+        this.onShowComment();
+        this.comment = '';
+        this.post = {
+          ...this.post,
+          comment_count: this.post.comment_count + 1,
+        };
+        this.flashMessage.success({
+          message: 'Comment created',
+        });
+      }
+
+      this.createCommentRequestIsActive = false;
+      this.loadComment = false;
+    },
+    onLike: async function () {
+      if (!this.processLike) {
+        this.processLike = true;
+
+        const request = await this.$repository.share.postLike({
+          post: this.post.post_id,
+          network: this.profile.id,
+        });
+
+        if (request.success)
+          this.post = Object.assign(this.post, {
+            is_liked: this.post.is_liked ? 0 : 1,
+            likes_count: !this.post.is_liked
+              ? this.post.likes_count + 1
+              : this.post.likes_count
+              ? this.post.likes_count - 1
+              : 0,
+          });
+        this.processLike = false;
+      }
+    },
     chooseImage: function () {
       document.getElementById('image').click();
     },
@@ -100,6 +190,12 @@ export default {
     hideModal() {
       this.$refs['modal-3'].hide();
     },
+
+    onToggle() {
+      this.toggle = !this.toggle;
+      if (this.toggle) this.onShowComment();
+    },
+
     onShowComment: async function () {
       if (!this.hasData) return false;
 

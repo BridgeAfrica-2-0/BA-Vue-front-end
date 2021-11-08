@@ -42,9 +42,9 @@
               />
             </b-col>
             <b-col cols="12" class="mt-4">
-              <Loader v-if="loadComment" />
               <Reply v-for="obj in comments" :key="obj.id" :item="obj" :uuid="uuid" type="reply" />
-              <NoMoreData v-if="comments.length && !loadComment" :hasData="hasData" @click.native="onShowReply" />
+              <Loader v-if="loadComment" />
+              <!-- <NoMoreData v-if="comments.length && !loadComment" :hasData="hasData" @click.native="onShowReply" /> -->
             </b-col>
           </b-row>
         </div>
@@ -66,7 +66,7 @@ export default {
     Loader,
   },
 
-  props: ['item', 'uuid'],
+  props: ['item', 'uuid', 'profileID'],
   data() {
     return {
       reply: false,

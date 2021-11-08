@@ -98,8 +98,9 @@
         />
       </div>
     </div>
-    <Loader v-if="loadComment" />
+
     <Comment v-for="comment in comments" :key="comment.id" :item="comment" :uuid="post.post_id" />
+    <Loader v-if="loadComment" />
     <NoMoreData v-if="comments.length && !loadComment" :hasData="hasData" @click.native="onShowComment" />
     <hr />
   </div>

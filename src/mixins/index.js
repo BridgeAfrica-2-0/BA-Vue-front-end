@@ -1,5 +1,5 @@
 
-import { mapGetters, mapActions } from "vuex";
+import { mapGetters, mapActions, mapMutations } from "vuex";
 
 import NotFound from "@/components/NotFoundComponent"
 import NoMoreData from "@/components/businessOwner/PaginationMessage"
@@ -78,7 +78,6 @@ export const search = {
 
 
 export const commentMixinsBuisness = {
-
   data() {
     return {
       reply: false,
@@ -89,10 +88,15 @@ export const commentMixinsBuisness = {
       loadComment: false
     };
   },
+
   created() {
     this.comment = this.item;
   },
+
   computed: {
+    ...mapGetters({
+      profile: 'auth/profilConnected',
+    }),
     icon() {
       return this.comment.is_liked ? "suit-heart-fill" : "suit-heart";
     },
@@ -104,10 +108,14 @@ export const commentMixinsBuisness = {
   },
 
   methods: {
+    ...mapMutations({
+      auth: 'auth/profilConnected',
+    }),
+
     onLike: async function () {
       const request = await this.$repository.share.commentLike({
         comment: this.comment.comment_id,
-        network: this.$route.params.id,
+        network: ("search" != this.$route.name) ? this.$route.params.id : this.profile.id,
       });
 
       if (request.success)
@@ -150,11 +158,12 @@ export const commentMixinsBuisness = {
         comment: this.comment.comment_id,
         data: {
           comment: this.text,
-          networkId: this.$route.params.id,
+          networkId: ("search" != this.$route.name) ? this.$route.params.id : this.profile.id,
         },
       });
 
       if (request.success) {
+        this.page = 1
         this.onShowReply();
         this.text = "";
 

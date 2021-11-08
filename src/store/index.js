@@ -13,7 +13,7 @@ import dashboardcommunity from "./dashboardcommunity";
 import NetworkSettings from "./NetworkSettings";
 import checkout from "./checkout";
 import businessFollowers from "./businessFollowers";
-import hotbusiness from "./hotbusiness";   
+import hotbusiness from "./hotbusiness";
 import business from "./business";
 import profile from "./profile";
 import networkProfileMembers from "./networkProfileMembers";
@@ -30,7 +30,8 @@ import { social } from "./social";
 
 import axios from "axios";
 Vue.use(Vuex);
-axios.defaults.baseURL = process.env.VUE_APP_API_URL;
+// axios.defaults.baseURL = process.env.VUE_APP_API_URL;
+axios.defaults.baseURL = "https://a97d-154-72-150-87.ngrok.io/api/v1/"
 export default new Vuex.Store({
   modules: {
     auth,

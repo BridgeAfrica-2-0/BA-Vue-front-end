@@ -19,6 +19,8 @@ import follower from "./follower";
 import UserProfileOwner from "./UserProfileOwner"
 import { search } from "./search";
 import userChat from "./messaging/user";
+import businessChat from "./messaging/business";
+
 
 
 Vue.use(Vuex);
@@ -44,7 +46,9 @@ export default new Vuex.Store({
         follower,
         search,
         UserProfileOwner,
-        userChat
+        userChat,
+        businessChat
+
 
     }
 });

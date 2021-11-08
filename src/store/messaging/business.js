@@ -4,31 +4,20 @@ export default {
     namespaced: true,
     state: {
         currentUser: JSON.parse(localStorage.getItem("user")),
-        users: [],
+        bizs: [],
+        chats: [],
         chatList: [],
-        userToUser: [],
-        userToBiz: [],
-        userToNetwork: [],
 
         loader: false,
         success: false
     },
     getters: {
         // get data
-        getBizToBiz(state) {
-            return state.bizToBiz;
+        getBizs(state) {
+            return state.bizs;
         },
-        getBizToUser(state) {
-            return state.bizToUser;
-        },
-        getBizToNetwork(state) {
-            return state.bizToNetwork;
-        },
-        getUserToUser(state) {
-            return state.userToUser;
-        },
-        getUsers(state) {
-            return state.users;
+        getChats(state) {
+            return state.chats;
         },
         getUser(state) {
             return state.currentUser;
@@ -55,19 +44,14 @@ export default {
     },
     mutations: {
         //set data
-        setUserToNetwork(state, data) {
-            state.userToNetwork = data;
+
+        setChats(state, data) {
+            state.chats = data
         },
-        setUserToUser(state, data) {
-            state.userToUser = data;
-        },
-        setUserToBiz(state, data) {
-            state.userToBiz = data;
-        },
-        setUsers(state, data) {
+        setBizs(state, data) {
             state.users = data;
         },
-        setUser(state, data) {
+        setBiz(state, data) {
             state.currentUser = data
         },
         setChatList(state, data) {
@@ -84,18 +68,18 @@ export default {
     },
 
     actions: {
-        GET_USERS({ commit, state }, data) {
-            commit("setUsers", []);
+        GET_BIZS({ commit, state }, data) {
+            commit("setBizs", []);
 
             commit("setLoader", true);
             let keyword = data ? '/' + data : ''
-            let usersFinal = []
+            let bizsFinal = []
             axios.get(`/user/all-user${keyword}`)
                 .then((res) => {
                     commit("setLoader", false);
-                    let users = res.data.data
-                    usersFinal = users.filter((user) => { return user.id != state.currentUser.user.id })
-                    commit("setUsers", usersFinal);
+                    let bizs = res.data.data
+                    bizsFinal = bizs.filter((biz) => { return biz.id != state.currentUser.user.id })
+                    commit("setBizs", bizsFinal);
 
                 })
                 .catch((err) => {
@@ -104,17 +88,16 @@ export default {
                 })
         },
         // [NO BUG]
-        GET_USERS_CHAT_LIST({ commit, state }, data) {
-            commit("setUsers", []);
+        GET_BIZS_CHAT_LIST({ commit, state }, data) {
 
             commit("setLoader", true);
             let keyword = data.keyword ? '/' + data.keyword : ''
 
             if (data.type == 'user') {
-                axios.get(`/messages/userListing${keyword}`)
+                axios.get(`/messages/businessUser/2${keyword}`)
                     .then((res) => {
                         commit("setLoader", false);
-                        console.log("User chat list: ", res.data.data);
+                        console.log("business chat list: ", res.data.data);
                         commit("setChatList", res.data.data ? res.data.data : {
                             data: []
                         });
@@ -124,7 +107,7 @@ export default {
                         console.log(err);
                     })
             } else if (data.type == 'business') {
-                axios.get(`/messages/userBusiness${keyword}`)
+                axios.get(`/messages/businessListing/2${keyword}`)
                     .then((res) => {
                         commit("setLoader", false);
                         console.log("Business chat list: ", res.data.data);
@@ -137,10 +120,10 @@ export default {
                         console.log(err);
                     })
             } else {
-                axios.get(`/messages/userNetwork${keyword}`)
+                axios.get(`/messages/businessNetwork/2${keyword}`)
                     .then((res) => {
                         commit("setLoader", false);
-                        console.log("Network chat list: ", res.data.data);
+                        console.log("Business chat list: ", res.data.data);
                         commit("setChatList", res.data.data ? res.data.data : {
                             data: []
                         });
@@ -170,49 +153,49 @@ export default {
                 })
         },
 
-        async GET_USER_TO_USER({ commit }, data) {
+        async GET_BIZ_TO_BIZ({ commit }, data) {
             commit("setLoader", true);
             console.log("[DEBUG] user to user", data);
             let keyword = data.keyword ? '/' + data.keyword : ''
 
-            await axios.get(`/messages/user/${data.receiverID + keyword}`)
+            await axios.get(`/messages/2/business/${data.receiverID + keyword}`)
                 .then((res) => {
                     commit("setLoader", false);
-                    console.log("User to user: ", res.data.data);
-                    commit("setUserToUser", res.data.data);
+                    console.log("Business to business: ", res.data.data);
+                    commit("setChats", res.data.data);
                 })
                 .catch((err) => {
                     commit("setLoader", false);
                     console.log(err);
                 })
         },
-        async GET_USER_TO_BIZ({ commit }, data) {
+        async GET_BIZ_TO_USER({ commit }, data) {
             commit("setLoader", true);
             console.log("[DEBUG] user to business", data);
             let keyword = data.keyword ? '/' + data.keyword : ''
 
-            await axios.get(`/messages/business/${data.receiverID + keyword}`)
+            await axios.get(`/messages/business/1/user/${data.receiverID + keyword}`)
                 .then((res) => {
                     commit("setLoader", false);
                     console.log("User to business: ", res.data.data);
-                    commit("setUserToUser", res.data.data);
+                    commit("setChats", res.data.data);
                 })
                 .catch((err) => {
                     commit("setLoader", false);
                     console.log(err);
                 })
         },
-        async GET_USER_TO_NETWORK({ commit }, data) {
+        async GET_BIZ_TO_NETWORK({ commit }, data) {
             commit("setLoader", true);
             console.log("[DEBUG] user to network", data);
             let keyword = data.keyword ? '/' + data.keyword : ''
 
 
-            await axios.get(`/messages/network/${data.receiverID + keyword}`)
+            await axios.get(`/messages/business/1/network/${data.receiverID + keyword}`)
                 .then((res) => {
                     commit("setLoader", false);
                     console.log("User to network: ", res.data.data);
-                    commit("setUserToUser", res.data.data);
+                    commit("setChats", res.data.data);
                 })
                 .catch((err) => {
                     commit("setLoader", false);

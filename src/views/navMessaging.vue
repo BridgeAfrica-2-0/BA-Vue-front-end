@@ -101,7 +101,7 @@
                 <b-col>
                   <b-tabs content-class="mt-12 ma-4 pt-6" fill lazy>
                     <b-tab
-                      title="Profile"
+                      title="User"
                       active
                       @click="getChatList({ type: 'user' })"
                     >
@@ -147,7 +147,7 @@
                             },
                           ]"
                           @click="
-                            selectedChat({ chat: chat, id: chat.receiver_id })
+                            selectedChat({ type: 'user', chat: chat, id: chat.receiver_id })
                           "
                         >
                           <b-col class="col-9">
@@ -227,7 +227,7 @@
                             },
                           ]"
                           @click="
-                            selectedChat({ chat: chat, id: chat.receiver_id })
+                            selectedChat({ type: 'business', chat: chat, id: chat.receiver_id })
                           "
                         >
                           <b-col class="col-9">
@@ -306,7 +306,7 @@
                             },
                           ]"
                           @click="
-                            selectedChat({ chat: chat, id: chat.receiver_id })
+                            selectedChat({type: 'network', chat: chat, id: chat.receiver_id })
                           "
                         >
                           <b-col class="col-9">
@@ -1136,7 +1136,14 @@ export default {
       console.log(data);
       this.userToUser.push(data);
       console.log(this.userToUser);
-      // this.saveMessage(data);
+
+      let formData = new FormData()
+      formData.append("attachment",data.attachment)
+      formData.append("sender_id",data.sender_id)
+      formData.append("message",data.message)
+      formData.append("receiver_id",data.receiver_id)
+
+      this.saveMessage(formData);
     });
   },
   methods: {
@@ -1216,7 +1223,14 @@ export default {
       this.createRoom(data.id);
       this.chatId = data.id;
       let receiver = { receiverID: data.id, keyword: null };
+      if (data.type == "business") {
+      this.histUserToBiz(receiver);
+
+      } else if (data.type == "network") {
+      this.histUserToNetwork(receiver);
+      } else {
       this.histUserToUser(receiver);
+      }
       this.newMsg = false;
       this.chatSelected = { active: true, clickedId: data.id, ...data.chat };
       console.log("[DEBUG] Chat selected:", this.chatSelected);
@@ -1278,22 +1292,6 @@ export default {
       this.newMsg = arg;
       this.show = false;
     },
-    submitFile() {
-      // console.log("Form data: ",formData);
-      //     axios.post( '/single-file',
-      //         formData,
-      //         {
-      //         headers: {
-      //             'Content-Type': 'multipart/form-data'
-      //         }
-      //       }
-      //     ).then(function(){
-      //   console.log('SUCCESS!!');
-      // })
-      // .catch(function(){
-      //   console.log('FAILURE!!');
-      // });
-    },
     handleFileUpload() {
       this.file = this.$refs.file.files[0];
       this.filePreview = true;
@@ -1327,7 +1325,7 @@ export default {
         sender_id: this.currentUser.user.id,
         room: this.room,
         receiver_id: this.chatSelected.id,
-        attachment: attachment,
+        attachment: this.file,
       });
 
       // this.socket.emit("generalMessage", {
@@ -1335,7 +1333,6 @@ export default {
       //   sender: this.currentUser.user.name,
       //   date: new Date(),
       // });
-      this.submitFile();
       console.log("SENT...");
 
       this.scrollToBottom();

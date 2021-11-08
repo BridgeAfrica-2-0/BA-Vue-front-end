@@ -1,7 +1,7 @@
 <template>
   <b-container>
     <b-container class="bv-example-row">
-      <p class="t-left">
+      <p class="t-left text">
         Blocked users can no longer see things you post on your business, invite
         your business to networks, strat a conversation, or follow your
         business.
@@ -44,7 +44,6 @@
 </template>
 
 <script>
-import axios from "axios";
 export default {
   name: "blocking",
   data() {

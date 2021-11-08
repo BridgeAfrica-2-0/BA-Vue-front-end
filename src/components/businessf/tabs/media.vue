@@ -3,7 +3,6 @@
     <fas-icon
       class="violet mr-2 pt-1 icon-size primary"
       :icon="['fas', 'file-image']"
-    
     />Media
 
     <hr />
@@ -31,7 +30,7 @@ export default {
 
     //function to get albums
 
-    getAlbums(){
+    getAlbums() {
       this.$store
         .dispatch("businessOwner/getAlbums", this.url_data)
         .then(() => {
@@ -40,14 +39,10 @@ export default {
         .catch((err) => {
           console.log({ err: err });
         });
-   
     },
 
-
-
-    getImages(){
-        
-        this.$store
+    getImages() {
+      this.$store
         .dispatch("businessOwner/getImages", this.url_data)
         .then(() => {
           console.log("hey yeah");
@@ -55,20 +50,17 @@ export default {
         .catch((err) => {
           console.log({ err: err });
         });
-   
-
-    }
+    },
   },
 
-  mounted(){
-     
-       this.url_data=this.$route.params.id;
-       this.getAlbums();
-       this.getImages();
+  mounted() {
+    this.url_data = this.$route.params.id;
+    this.getAlbums();
+    this.getImages();
   },
   data: function() {
     return {
-      url_data:null,
+      url_data: null,
       images: [
         "https://placekitten.com/801/800",
         "https://placekitten.com/802/800",

@@ -1,9 +1,7 @@
 <template>
   <b-container>
-
-    <FlashMessage />
-
     <h5 class="a-text">Assign Role</h5>
+
     <b-container class="b-bottom">
       <b-row>
         <b-col cols="5">
@@ -35,19 +33,12 @@
             label-class="font-weight-bold pt-0"
             class="mb-0"
           >
-            <b-form-select
-              id="role"
-              v-model="form.role"
-              :options="roles"
-              name="role"
-              value-field="id"
-              text-field="name"
-              class="mb-3"
-            >
+            <b-form-select v-model="selected" class="mb-3">
+              <b-form-select-option :value="null">Admin</b-form-select-option>
+              <b-form-select-option value="a">User</b-form-select-option>
             </b-form-select>
           </b-form-group>
         </b-col>
-
 
         <b-col>
           <b-button variant="primary" class="" @click="assignRole()">
@@ -55,14 +46,15 @@
           </b-button>
         </b-col>
       </b-row>
-      <p class="a-text">
+
+      <p class="text">
         Admin can manage all aspects of the Business Identity. They can create
         posts and send messages through inbox. They can respond to the delete
         comments, Approve posts, view insights, manage the business settings,
         update Business profile, assign roles and payments.
       </p>
       <br />
-      <p class="a-text">
+      <p class="text">
         Editor can create posts and send messages through inbox, They can
         respond to and delete comments, Approve posts, view insights
       </p>
@@ -154,7 +146,6 @@
 </template>
 
 <script>
-
 export default {
   name: "roles",
   data() {
@@ -318,24 +309,19 @@ export default {
   margin-bottom: 15px;
   margin-top: 10px;
 }
-
 .b-bottom {
   margin-top: 20px;
   margin-bottom: 30px;
   padding-bottom: 10px;
   width: 100%;
-
   border-bottom: 1px solid;
 }
-
 .tabs {
   width: 100%;
 }
-
 .f-left {
   float: left;
 }
-
 .a-button-l {
   /*align-content: right;*/
   float: right;
@@ -350,7 +336,6 @@ export default {
   position: relative;
   top: 40px;
 }
-
 @media only screen and (max-width: 768px) {
   .settings {
     top: -5px;

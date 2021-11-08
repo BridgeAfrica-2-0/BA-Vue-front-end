@@ -13,10 +13,10 @@
           label-cols-lg="3"
           label="Business Visibility"
           label-size="md"
-          label-class="font-weight-bold pt-0"
-          class="mb-0"
+          label-class="font-weight-bold pt-0 username"
+          class="mb-0 text"
         >
-          <b-form-group class="mb-0">
+          <b-form-group class="mb-0" >
             <b-form-radio-group
               class="pt-2"
               :options="businessVisibility"
@@ -30,18 +30,19 @@
           </b-form-group>
         </b-form-group>
       </b-container>
+      <hr />
     </div>
 
-    <div class="b-bottom">
+    <div class="">
       <b-container>
         <b-form-group
           label-cols-lg="3"
           label="Posting Permissions"
           label-size="md"
-          label-class="font-weight-bold pt-0"
-          class="mb-0"
+          label-class="font-weight-bold pt-0 username"
+          class="mb-0 text"
         >
-          <b-form-group class="mb-0">
+          <b-form-group class="mb-0" >
             <b-form-radio-group
               class="pt-2"
               :options="postingPermissions"
@@ -55,6 +56,8 @@
           </b-form-group>
         </b-form-group>
       </b-container>
+
+      <hr />
     </div>
 
     <div v-if="business_form.permissions == 'Allow editor to post'" class="b-bottom">
@@ -63,7 +66,7 @@
           label-cols-lg="3"
           label="Post Approval"
           label-size="md"
-          label-class="font-weight-bold pt-0"
+          label-class="font-weight-bold pt-0 username"
           class="mb-0"
         >
           <b-form-checkbox
@@ -76,16 +79,17 @@
           </b-form-checkbox>
         </b-form-group>
       </b-container>
+      <hr />
     </div>
 
-    <div class="b-bottom">
+    <div class="">
       <b-container>
         <b-form-group
           label-cols-lg="3"
           label="Keyword Alerts"
           label-size="md"
-          label-class="font-weight-bold pt-0"
-          class="mb-0"
+          label-class="font-weight-bold pt-0 username"
+          class="mb-0 text"
         >
           <b-form-tags
             input-id="tags-separators"
@@ -100,15 +104,16 @@
           ></b-form-tags>
         </b-form-group>
       </b-container>
+      <hr />
     </div>
 
-    <div class="b-bottom">
+    <div class="">
       <b-container>
         <b-form-group
           label-cols-lg="3"
           label="Marketplace"
           label-size="md"
-          label-class="font-weight-bold pt-0"
+          label-class="font-weight-bold pt-0 username"
           class="mb-0"
         >
           <b-form-checkbox 
@@ -122,6 +127,7 @@
           </b-form-checkbox>
         </b-form-group>
       </b-container>
+      <hr />
     </div>
 
     <b-container>
@@ -148,7 +154,6 @@
 </template>
 
 <script>
-
 export default {
   name: "general",
   data(){

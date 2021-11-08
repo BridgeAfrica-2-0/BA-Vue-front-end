@@ -1,38 +1,39 @@
 <template>
   <div>
-    <div class="people-style shadow">
+
+    
+    <div class="people-style shadow"  v-for="item in businesses" :key="item.id">
       <b-row>
         <b-col md="3" xl="5" lg="5" cols="5" sm="3">
           <div class="center-img">
             <splide :options="options" class="r-image">
               <splide-slide>
-                <img :src="business.logo_path" class="r-image" />
+                <img
+                  :src="item.picture"
+                  class="r-image"
+                />
               </splide-slide>
-            </splide>
+            </splide>   
           </div>
         </b-col>
         <b-col md="5" cols="7" lg="7" xl="7" sm="5">
-          <div class="title textt bold username">
-            <strong> {{ business.name }} </strong>
-          </div>
-          <p class="textt to">
+          <p class="textt">
+            <strong class="title"> {{ item.name }}</strong> <br />
+            {{ item.category }}
             <br />
-            Car marketing {{ business.category }} <br />
-            {{ business.followers }} Community <br />
+            {{ count(item.followers) }} Community <br />
 
             <span class="location">
-              <b-icon-geo-alt class="ico"></b-icon-geo-alt>
-              {{ business.location_description }}
+              <b-icon-geo-alt class="ico"></b-icon-geo-alt>{{ item.country }}
             </span>
             <br />
-
-            <read-more
-              class="readmore"
+<read-more
               more-str="read more"
-              :text="business.about_business"
+              class="readmore"
+              :text="item.about_business"
               link="#"
               less-str="read less"
-              :max-chars="25"
+              :max-chars="15"
             >
             </read-more>
           </p>
@@ -102,15 +103,22 @@
         </b-col>
       </b-row>
     </div>
+
+  <infinite-loading @infinite="infiniteHandler"></infinite-loading>
   </div>
 </template>
 
 <script>
-export default {
-  props: ["business"],
 
+import moment from "moment";
+import axios from "axios";
+
+export default {
+ props:['type'],
   data() {
     return {
+      page: 1,
+      biz_id:null,
       options: {
         rewind: true,
         autoplay: true,
@@ -118,26 +126,108 @@ export default {
         pagination: false,
 
         type: "loop",
-        perMove: 1,
-      },
+        perMove: 1
+      }
     };
   },
+
+  mounted(){
+
+    this.biz_id = this.$route.params.id;
+  },
+
+  computed:{
+ 
+   businesses(){
+
+      if(this.type=="Follower"){ 
+
+      return  this.$store.state.businessOwner.BcommunityFollower.business_followers;  
+
+       }else{
+
+         return  this.$store.state.businessOwner.BcommunityFollowing.business_following; 
+       }
+   }
+    
+    
+  },
+
+  methods:{
+
+     count(number) {
+      if (number >= 1000000) {
+        return number / 1000000 + "M";
+      }
+      if (number >= 1000) {
+        return number / 1000 + "K";
+      } else return number;
+    },
+
+          infiniteHandler($state) { 
+
+      let url = null;
+
+         if(this.type=="Follower"){  
+         
+          url = "business/community/visitor/business-follower/"+this.biz_id+"/";
+         }else{
+         
+          url = "business/community/visitor/business-following/"+this.biz_id+"/";
+         }
+      axios
+        .get(url + this.page)
+        .then(({ data }) => {
+        
+          if(this.type=="Follower"){  
+
+
+          if (data.data.business_followers.length) {
+            
+         
+            this.businesses.push(...data.data.business_followers); 
+            this.page += 1;
+            
+            $state.loaded();
+
+           }else{
+              $state.complete();
+             
+           }
+        
+          }else{
+
+
+
+
+             if (data.data.business_following.length) {
+            
+         
+            this.businesses.push(...data.data.business_following); 
+            this.page += 1;
+            
+            $state.loaded();
+
+           }else{
+              $state.complete();
+             
+           }
+
+          }
+           
+        })
+        .catch((err) => {
+          console.log({ err: err });
+        });
+    },
+
+  }  
+
+
 };
 </script>
 
 <style scoped>
-.username {
-  text-overflow: ellipsis;
-  overflow: hidden;
-
-  height: 1.6em;
-  white-space: nowrap;
-}
-
-.to {
-  margin-top: -15px;
-}
-
 @media only screen and (min-width: 768px) {
   .btn-text {
     margin-left: 8px;
@@ -399,29 +489,5 @@ export default {
     margin-left: -10px;
     padding-top: 8px;
   }
-}
-</style>
-<style>
-.readmore p {
-  margin: 0px !important;
-}
-
-::-webkit-scrollbar {
-  width: 10px;
-}
-
-/* Track */
-::-webkit-scrollbar-track {
-  background: #f1f1f1;
-}
-
-/* Handle */
-::-webkit-scrollbar-thumb {
-  background: #888;
-}
-
-/* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
-  background: #555;
 }
 </style>

@@ -89,14 +89,13 @@ export default {
 
             commit("setLoader", true);
             let keyword = data ? '/' + data : ''
-
+            let usersFinal = []
             axios.get(`/user/all-user${keyword}`)
                 .then((res) => {
                     commit("setLoader", false);
-                    console.log("All Users: ", res.data.data);
-                    commit("setUsers", res.data.data ? res.data.data : {
-                        data: []
-                    });
+                    let users = res.data.data
+                    usersFinal = users.filter((user) => { return user.id != state.currentUser.user.id })
+                    commit("setUsers", usersFinal);
 
                 })
                 .catch((err) => {
@@ -112,7 +111,7 @@ export default {
             let keyword = data.keyword ? '/' + data.keyword : ''
 
             if (data.type == 'user') {
-                axios.get(`/messages/userListing`)
+                axios.get(`/messages/userListing${keyword}`)
                     .then((res) => {
                         commit("setLoader", false);
                         console.log("User chat list: ", res.data.data);
@@ -125,7 +124,7 @@ export default {
                         console.log(err);
                     })
             } else if (data.type == 'business') {
-                axios.get(`/messages/userBusiness`)
+                axios.get(`/messages/userBusiness${keyword}`)
                     .then((res) => {
                         commit("setLoader", false);
                         console.log("Business chat list: ", res.data.data);
@@ -138,7 +137,7 @@ export default {
                         console.log(err);
                     })
             } else {
-                axios.get(`/messages/userNetwork`)
+                axios.get(`/messages/userNetwork${keyword}`)
                     .then((res) => {
                         commit("setLoader", false);
                         console.log("Network chat list: ", res.data.data);

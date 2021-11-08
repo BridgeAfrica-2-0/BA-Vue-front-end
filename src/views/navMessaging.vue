@@ -96,11 +96,7 @@
                   ></b-icon>
                 </b-col>
               </b-row>
-              <input
-                type="text"
-                class="form-control input-background mb-6 pb-6"
-                placeholder="Search inbox"
-              />
+
               <b-row class="mt-12">
                 <b-col>
                   <b-tabs content-class="mt-12 ma-4 pt-6" fill lazy>
@@ -110,9 +106,24 @@
                       @click="getChatList({ type: 'user' })"
                     >
                       <!-- Users Chats Available  -->
+                      <b-row class="pa-6">
+                        <b-col class="mb-6 pb-6">
+                          <input
+                            v-model="searchQuery"
+                            class="form-control input-background"
+                            placeholder="Search chat list"
+                            @keypress.enter="
+                              getChatList({
+                                type: 'user',
+                                keyword: searchQuery,
+                              })
+                            "
+                          />
+                        </b-col>
+                      </b-row>
 
                       <div class="messages">
-                        <div v-if="loader" class="text-center mt-12 pt-12">
+                        <div v-if="loader" class="text-center mt-6 pt-6">
                           <b-spinner
                             variant="primary"
                             label="Spinning"
@@ -127,7 +138,7 @@
                             'p-2 message ',
                             {
                               messageSelected:
-                                chat.sender_id ==
+                                chat.receiver_id ==
                                 (chatSelected.clickedId != null
                                   ? chatSelected.clickedId
                                   : false)
@@ -135,7 +146,9 @@
                                   : false,
                             },
                           ]"
-                          @click="selectedChat(chat, chat.sender_id)"
+                          @click="
+                            selectedChat({ chat: chat, id: chat.receiver_id })
+                          "
                         >
                           <b-col class="col-9">
                             <span style="display: inline-flex">
@@ -158,7 +171,7 @@
                             </small>
                             <p class="text-center">
                               <b-badge variant="info">
-                                {{ chat.sender_id }}
+                                {{ chat.receiver_id }}
                               </b-badge>
                             </p>
                           </b-col>
@@ -172,7 +185,22 @@
                       title="Business"
                       @click="getChatList({ type: 'business' })"
                     >
-                      <!-- Users Chats Available  -->
+                      <!-- Business Chats Available  -->
+                      <b-row class="pa-6">
+                        <b-col class="mb-6 pb-6">
+                          <input
+                            v-model="searchQuery"
+                            class="form-control input-background"
+                            placeholder="Search chat list"
+                            @keypress.enter="
+                              getChatList({
+                                type: 'business',
+                                keyword: searchQuery,
+                              })
+                            "
+                          />
+                        </b-col>
+                      </b-row>
 
                       <div class="messages">
                         <div v-if="loader" class="text-center mt-12 pt-12">
@@ -190,7 +218,7 @@
                             'p-2 message ',
                             {
                               messageSelected:
-                                chat.sender_id ==
+                                chat.receiver_id ==
                                 (chatSelected.clickedId != null
                                   ? chatSelected.clickedId
                                   : false)
@@ -198,7 +226,9 @@
                                   : false,
                             },
                           ]"
-                          @click="selectedChat(chat, chat.sender_id)"
+                          @click="
+                            selectedChat({ chat: chat, id: chat.receiver_id })
+                          "
                         >
                           <b-col class="col-9">
                             <span style="display: inline-flex">
@@ -221,7 +251,7 @@
                             </small>
                             <p class="text-center">
                               <b-badge variant="info">
-                                {{ chat.sender_id }}
+                                {{ chat.receiver_id }}
                               </b-badge>
                             </p>
                           </b-col>
@@ -234,7 +264,22 @@
                       title="Network"
                       @click="getChatList({ type: 'network' })"
                     >
-                      <!-- Users Chats Available  -->
+                      <!-- network Chats Available  -->
+                      <b-row class="pa-6">
+                        <b-col class="mb-6 pb-6">
+                          <input
+                            v-model="searchQuery"
+                            class="form-control input-background"
+                            placeholder="Search chat list"
+                            @keypress.enter="
+                              getChatList({
+                                type: 'network',
+                                keyword: searchQuery,
+                              })
+                            "
+                          />
+                        </b-col>
+                      </b-row>
 
                       <div class="messages">
                         <div v-if="loader" class="text-center mt-12 pt-12">
@@ -252,7 +297,7 @@
                             'p-2 message ',
                             {
                               messageSelected:
-                                chat.sender_id ==
+                                chat.receiver_id ==
                                 (chatSelected.clickedId != null
                                   ? chatSelected.clickedId
                                   : false)
@@ -260,7 +305,9 @@
                                   : false,
                             },
                           ]"
-                          @click="selectedChat(chat, chat.sender_id)"
+                          @click="
+                            selectedChat({ chat: chat, id: chat.receiver_id })
+                          "
                         >
                           <b-col class="col-9">
                             <span style="display: inline-flex">
@@ -283,7 +330,7 @@
                             </small>
                             <p class="text-center">
                               <b-badge variant="info">
-                                {{ chat.sender_id }}
+                                {{ chat.receiver_id }}
                               </b-badge>
                             </p>
                           </b-col>
@@ -498,7 +545,11 @@
                             {{ chat.created_at }}
                           </small>
                         </p>
-                        <p id="sent" class="msg-text-sent text">
+                        <p
+                          v-if="chat.message"
+                          id="sent"
+                          class="msg-text-sent text"
+                        >
                           {{ chat.message }}
                           <small class="float-right mt-2 text-white pr-1 pt-1">
                             {{ getCreatedAt(chat.created_at) }}
@@ -552,9 +603,18 @@
                   <!-- <p class="py-2 text-primary" v-if="this.file">
                     {{ this.file.name }} <b class="text-bold">{{ convert(this.file.size) }}</b>
                   </p> -->
-                  <b-alert :show="this.filePreview" class="mt-4" variant="warning" dismissible>
-                     {{ this.file.name }}<b class="pl-2 text-bold">{{ convert(this.file.size) }}</b>
-                    </b-alert>
+                  <b-alert
+                    :show="this.filePreview"
+                    class="mt-4"
+                    variant="warning"
+                    dismissible
+                    @dismissed="dismissed"
+                  >
+                    {{ this.file.name
+                    }}<b class="pl-2 text-bold">{{
+                      convert(this.file.size)
+                    }}</b>
+                  </b-alert>
                 </b-row>
                 <b-row v-if="!checked">
                   <b-col cols="2" class="p-0">
@@ -577,7 +637,7 @@
                         type="file"
                         id="file"
                         ref="file"
-                        v-on:change="handleFileUpload()"
+                        @change="handleFileUpload()"
                       />
                     </label>
 
@@ -746,7 +806,7 @@
                             v-for="(user, index) in users"
                             :key="index"
                             class="p-2 message"
-                            @click="showInfo(false)"
+                            @click="selectedChat({ chat: user, id: user.id })"
                           >
                             <td>
                               <b-avatar
@@ -789,7 +849,7 @@ export default {
   },
   data() {
     return {
-      filePreview:false,
+      filePreview: false,
       file: "",
       room: "",
       online: [],
@@ -1062,7 +1122,6 @@ export default {
     },
   },
   mounted() {
-    this.$refs.feed.scrollTop = this.$refs.feed.scrollHeight;
     this.getUsers();
     this.getChatList({ type: "user" });
   },
@@ -1077,15 +1136,17 @@ export default {
       console.log(data);
       this.userToUser.push(data);
       console.log(this.userToUser);
-
       // this.saveMessage(data);
     });
   },
   methods: {
     convert(data) {
-      return (data);
+      return data;
       // return convertSize(data);
-
+    },
+    dismissed() {
+      this.file = "";
+      this.filePreview = false;
     },
     createRoom(receiver_id) {
       let sender_id = this.currentUser.user.id;
@@ -1105,6 +1166,7 @@ export default {
         .catch(() => console.log("error"));
     },
     getChatList(data) {
+      this.scrollToBottom();
       this.$store
         .dispatch("userChat/GET_USERS_CHAT_LIST", data)
         .then(() => {
@@ -1149,16 +1211,25 @@ export default {
         })
         .catch(() => console.log("error"));
     },
-    selectedChat(chat, index) {
-      this.createRoom(index);
-      this.chatId = index;
-      let data = { receiverID: index, keyword: null };
-      this.histUserToUser(data);
+    selectedChat(data) {
+      // this.scrollToBottom();
+      this.createRoom(data.id);
+      this.chatId = data.id;
+      let receiver = { receiverID: data.id, keyword: null };
+      this.histUserToUser(receiver);
       this.newMsg = false;
-      this.chatSelected = { active: true, clickedId: index, ...chat };
+      this.chatSelected = { active: true, clickedId: data.id, ...data.chat };
       console.log("[DEBUG] Chat selected:", this.chatSelected);
     },
     searchUser(keyword) {
+      this.$store
+        .dispatch("userChat/GET_USERS", keyword)
+        .then(() => {
+          console.log("->[Data logged]<-");
+        })
+        .catch(() => console.log("error"));
+    },
+    searchChatList(keyword) {
       this.$store
         .dispatch("userChat/GET_USERS", keyword)
         .then(() => {
@@ -1187,7 +1258,6 @@ export default {
 
     selectuser() {
       this.showsearch = false;
-
       this.selecteduser = true;
     },
 
@@ -1226,13 +1296,28 @@ export default {
     },
     handleFileUpload() {
       this.file = this.$refs.file.files[0];
-      this.filePreview = true
-      console.log("preview:",this.filePreview);
+      this.filePreview = true;
+      console.log("preview:", this.filePreview);
+    },
+    scrollToBottom() {
+      this.$refs.feed.scrollTo({
+        top: this.$refs.feed.scrollHeight + 2000,
+        behavior: "smooth",
+      });
+      // this.$refs.feed.scrollTop = this.$refs.feed.scrollHeight - this.$refs.feed.clientHeight;
+      console.log(this.$refs.feed.scrollTop);
     },
     send() {
       let formData = new FormData();
-      let attachment = this.file;
-      console.log("attachment:", attachment);
+      let attachment = this.file
+        ? {
+            name: this.file.name,
+            size: convertSize(this.file.size),
+            file: attachment,
+          }
+        : undefined;
+
+      // console.log("attachment:", attachment);
       // if (this.file) {
       //   let formData = new FormData();
       //   attachment = formData.append("file", this.file);
@@ -1242,11 +1327,7 @@ export default {
         sender_id: this.currentUser.user.id,
         room: this.room,
         receiver_id: this.chatSelected.id,
-        attachment: {
-          name: this.file.name,
-          size: convertSize(this.file.size),
-          file: attachment,
-        },
+        attachment: attachment,
       });
 
       // this.socket.emit("generalMessage", {
@@ -1256,10 +1337,8 @@ export default {
       // });
       this.submitFile();
       console.log("SENT...");
-      this.$refs.feed.scrollTop = this.$refs.feed.scrollHeight;
-      console.log("scroll...", this.$refs.feed.scrollHeight);
-      this.message.type = "sent";
 
+      this.scrollToBottom();
       let today = new Date();
       let h = today.getHours();
       let m = today.getMinutes();
@@ -1267,8 +1346,7 @@ export default {
       this.message.message = this.input;
       this.chats.push(this.message);
       this.input = "";
-      this.file = null;
-
+      this.dismissed();
     },
   },
 };
@@ -1313,7 +1391,8 @@ export default {
   padding: 10px;
 }
 .chats {
-  height: 710px;
+  border: 2px solid green;
+  height: 740px;
   overflow-y: scroll;
   overflow-x: hidden;
 }
@@ -1439,7 +1518,7 @@ li {
   width: 100%;
 }
 .newMsg-bottom {
-  margin-top: 717px;
+  margin-top: 710px;
 }
 .new-msg {
   background-color: #ccc;

@@ -709,7 +709,7 @@ export default {
   },
   computed: {
     users() {
-      return this.$store.getters["chat/getUsers"];
+      return this.$store.getters["userChat/getUsers"];
     },
   },
   created() {

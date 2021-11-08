@@ -83,7 +83,7 @@ export default {
     UnblockBlockUser(blockuser) {
       this.loading = true;
       console.log("business/unblocking/"+this.url+"/"+blockuser.user_id);
-			axios.delete("business/unblocking/"+this.url+"/"+blockuser.user_id)
+			this.axios.delete("business/unblocking/"+this.url+"/"+blockuser.user_id)
 			.then(response => {
 			  console.log(response);
         this.blockUsers();

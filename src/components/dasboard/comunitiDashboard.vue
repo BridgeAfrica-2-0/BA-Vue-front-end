@@ -9,14 +9,22 @@
         <span>
           <h6 class="title">
             <fas-icon class="icons" :icon="['fas', 'users']" size="lg" />
+<<<<<<< HEAD
             <b> {{$t("dashboard.COMMUNITY")}} </b> <span class="h4-color"> {{ nFormatter(total.total_community)}} </span>
+=======
+            <b> {{ $t("profile.community").toUpperCase() }} </b> <span class="h4-color"> {{ com.total }} </span>
+>>>>>>> main
           </h6>
         </span>
 
         <b-tabs lazy pills content-class="mt-3  f-left ">
           <b-tab active>
             <template slot="title">
+<<<<<<< HEAD
               {{$t("dashboard.People")}}
+=======
+             	{{ $t("profile.people") }}
+>>>>>>> main
               <span class="spa-color">
                {{ nFormatter(total.total_people)}} 
               </span>
@@ -28,7 +36,11 @@
                   <b-tabs lazy fill pills content-class="mt-3  f-left m-up">
                     <b-tab active>
                       <template slot="title">
+<<<<<<< HEAD
                         {{$t("dashboard.Followers")}}
+=======
+                        {{ $t("profile.followers") }}
+>>>>>>> main
                         <span class="spa-color">
                          {{ nFormatter(total.total_user_follower)}}
                         </span>
@@ -46,7 +58,11 @@
 
                     <b-tab>
                       <template slot="title">
+<<<<<<< HEAD
                         {{$t("dashboard.Following")}}
+=======
+                         {{ $t("profile.following") }}
+>>>>>>> main
                         <span class="spa-color">
                            {{ nFormatter(total.total_user_following)}}
                         </span>
@@ -70,7 +86,11 @@
 
           <b-tab>
             <template slot="title">
+<<<<<<< HEAD
               {{$t("dashboard.Businesses")}} 
+=======
+              {{ $t("profile.businesses") }}
+>>>>>>> main
               <span class="spa-color">
                {{ nFormatter(total.total_business)}}
               </span>
@@ -80,7 +100,11 @@
               <b-tabs  lazy fill pills content-class="mt-3  f-left m-up checkcheck">
                 <b-tab active>
                   <template slot="title">
+<<<<<<< HEAD
                     {{$t("dashboard.Followers")}}
+=======
+                    {{ $t("profile.followers") }}
+>>>>>>> main
                     <span class="spa-color">
                     {{ nFormatter(total.total_business_follower)}}
                     </span>
@@ -99,7 +123,11 @@
 
                 <b-tab>
                   <template slot="title">
+<<<<<<< HEAD
                     {{$t("dashboard.Following")}}
+=======
+                    {{ $t("profile.following") }}
+>>>>>>> main
                     <span class="spa-color">
                       {{ nFormatter(total.total_business_following)}}
                     </span>
@@ -122,7 +150,11 @@
 
                     <b-tab>
             <template slot="title">
+<<<<<<< HEAD
               {{$t("dashboard.Network")}}
+=======
+              {{ $t("profile.network") }}
+>>>>>>> main
               <span class="spa-color">
              {{ nFormatter(total.total_network)}}
               </span>
@@ -132,7 +164,11 @@
               <b-tabs lazy fill pills content-class="mt-3  f-left m-up checkcheck">
                 <b-tab active>
                   <template slot="title">
+<<<<<<< HEAD
                     {{$t("dashboard.Followers")}}
+=======
+                    {{ $t("profile.followers") }}
+>>>>>>> main
                     <span class="spa-color">
                    {{ nFormatter(total.total_network_follower)}}
                     </span>
@@ -151,7 +187,11 @@
 
                 <b-tab>
                   <template slot="title">
+<<<<<<< HEAD
                     {{$t("dashboard.Following")}}
+=======
+                    {{ $t("profile.following") }}
+>>>>>>> main
                     <span class="spa-color">
                       {{ nFormatter(total.total_network_following)}}
                     </span>

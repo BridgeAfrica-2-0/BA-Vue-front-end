@@ -511,10 +511,17 @@
                   <label class="typo__label"> {{$t("welcome.Sub_Category")}}</label>
                   <multiselect
                     v-model="filterselectvalue"
+<<<<<<< HEAD
                     :tag-placeholder="$t('welcome.Add_this_as_new_tag')"
                     :placeholder="$t('welcome.Search_or_add_a_tag')"
                     :label="$t('welcome.subcategory')"
                     track-by="sub_cat_id"
+=======
+                    tag-placeholder="Add this as new tag"
+                    placeholder="Search or add a tag"
+                    label="name"
+                    track-by="subcategory_id"
+>>>>>>> main
                     :options="scategories"
                     :multiple="true"
                     :taggable="true"
@@ -527,7 +534,7 @@
                   <b-card no-body>
                     <b-tabs pills card vertical>
                       <b-tab
-                        :title="filters.subcategory"
+                        :title="filters.name"
                         v-for="filters in filterselectvalue"
                         :key="filters.id"
                         active
@@ -1441,7 +1448,7 @@ export default {
     selectedsubcategories: function () {
       let sub_cat = [];
       this.filterselectvalue.forEach((item) => {
-        sub_cat.push(item.sub_cat_id);
+        sub_cat.push(item.subcategory_id);
       });
       return sub_cat;
     },

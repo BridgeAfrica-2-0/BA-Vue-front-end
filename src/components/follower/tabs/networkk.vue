@@ -1,18 +1,26 @@
 <template>
   <div>
+
+    <fas-icon
+      class="primary mr-2 pt-1 icon-size primary"
+      :icon="['fas', 'handshake']"
+    />
+    Network
+
+    <hr />
     <b-modal id="modal-sm" size="sm" hide-header>
       Do you want to join this network? 
     </b-modal>
 
 
     <b-row>
-        <b-col lg="6" sm="12" class="p-2" v-for="item in network" :key="item.id">
+        <b-col lg="6" sm="12" class="p-2 mb-2" v-for="item in network" :key="item.id">
 
-    <div class="people-style shadow">
+    <div class="people-style shadow h-100">
       <b-row>
         <b-col md="3" xl="3" lg="3" cols="5" sm="3">  
           <div class="center-img">
-            <img :src="item.picture" class="r-image" />
+            <img :src="item.image" class="r-image" />
           </div>
         </b-col>
         <b-col md="5" cols="7"  lg="7" xl="5" sm="5">
@@ -20,17 +28,24 @@
 
           <p class="textt">
             <strong class="net-title"> {{ item.name }} </strong> <br />
-            {{ item.category }}
+             <span class="m-1" v-for=" cat in item.categories" :key="cat "> {{cat}}  </span>
             <br />
             {{ item.followers }} Community <br />
 
             <span class="location">
               <b-icon-geo-alt class="ico"></b-icon-geo-alt>
-              {{ item.location_description }}
+             {{ item.address }}
             </span>
             <br />
 
-            {{ item.about_network }} <b-link>Read More</b-link>
+            <read-more
+                v-if="item.description"
+                more-str="read more"
+                :text="item.description"
+                link="#"
+                less-str="read less"
+                :max-chars="200"
+              ></read-more>
           </p>
         </b-col>
 
@@ -73,10 +88,10 @@
       </b-row>
     </div>
         </b-col>
+        
     </b-row>
 
-     
-  <infinite-loading @infinite="infiniteHandler"></infinite-loading>  
+     <infinite-loading @infinite="infiniteHandler"></infinite-loading> 
 
   </div>
 </template>
@@ -88,7 +103,8 @@ export default {
    data() {
     return {
       page: 1,
-      options: {
+      foll_id:'',
+       options: {
         rewind: true,
         autoplay: true,
         perPage: 1,
@@ -105,7 +121,7 @@ export default {
  
       
 
-         return  this.$store.state.follower.NcommunityFollowing.network_follower; 
+         return  this.$store.state.follower.profileNetwork; 
        
    }
    
@@ -115,16 +131,8 @@ export default {
 
    mounted(){
 
+      this.foll_id = this.$route.params.id;
      
-      this.$store
-      .dispatch("follower/profileNetwork", null)
-      .then((response) => {
-       
-      })
-      .catch((error) => {
-        console.log({error:error});
-      });
-
   },
 
   methods:{ 
@@ -133,20 +141,26 @@ export default {
       
        infiniteHandler($state) {
 
-      let url = null;
+     let url = "network?page=" + this.page+"&id="+this.foll_id;
 
          
-          url="profile/network/following/";
+          console.log( "network?page=" + this.page+"&id="+this.foll_id);
+          if(this.page==1){
+        
+         this.network.splice(0);
+        
+      }
          
       axios
         .get(url + this.page)
         .then(({ data }) => {
+          console.log(data.data);
           if (data.data.length) {
-            this.page += 1;
-   
+            
+   if(this.page==1){
             this.network.push(...data.data); 
-           
-
+   }   
+   this.page += 1;
 
             $state.loaded();
           } else {

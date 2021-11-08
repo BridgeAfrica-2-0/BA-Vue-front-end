@@ -1,6 +1,6 @@
 <template>
   <div>
-    <FlashMessage />
+    <FlashMessage class="glash" />
     <div class="row">
       <div class="container-fluid" v-if="showalbum == false">
         <div class="one2">
@@ -19,16 +19,35 @@
             <div ref="creatform">
               <b-form>
                 <b-form-input
+<<<<<<< HEAD
                   :placeholder="$t('profileowner.Album_name')"
                   v-model="name"
                 ></b-form-input>
                 <b-button class="mt-2" variant="primary" @click="createAlbum">
                   {{$t("profileowner.Create")}}</b-button
+=======
+                  placeholder="Album name"
+                  v-model="albumInfo.name"
+                ></b-form-input>
+                <b-form-input
+                  placeholder="Album Type"
+                  class="mt-2"
+                  v-model="albumInfo.type"
+                ></b-form-input>
+                <b-button
+                  class="mt-2"
+                  variant="primary"
+                  @click="createAlbums"
+                  :disabled="loading || canCreateAlbum"
+                >
+                  Create</b-button
+>>>>>>> main
                 >
               </b-form>
             </div>
           </b-modal>
 
+<<<<<<< HEAD
           <div
             class="createp img-gall predit2"
             v-for="albums in albums"
@@ -92,11 +111,32 @@
               <b-form-input
                 :placeholder="$t('profileowner.Album_name')"
                 v-model="edit_name"
+=======
+          <AlbumItem
+            v-for="album in strategy[type]().albums"
+            :key="album.id"
+            :album="album"
+            :editAlbum="() => editAlbum(album)"
+            :deleteAlbums="() => deleteAlbums(album.id)"
+            :canBeUpdate="!canBeUpdate(album)"
+            :showAlbumPictures="() => showAlbumPictures(album)"
+            :type="type"
+          />
+        </div>
+
+        <b-modal hide-footer title="Edit album" ref="editalbum" id="editalbum">
+          <div ref="creatform">
+            <b-form>
+              <b-form-input
+                placeholder="Album name"
+                v-model="editName"
+>>>>>>> main
               ></b-form-input>
               <b-button
                 class="mt-2"
                 variant="primary"
-                @click="updateAlbum(edit_id)"
+                @click="update"
+                :disabled="loading || editName.trim().length ? false : true"
               >
                 {{$t("profileowner.Update")}}</b-button
               >
@@ -156,234 +196,307 @@
         </div>
       </div>
     </div>
-
     <!-- show  images in an album -->
 
-    <div class="container-flex" v-if="showalbum == true">
+    <div class="container-flex" v-if="showalbum">
       <b-button variant="outline-primary" size="sm" @click="hidealbum">
         {{$t("profileowner.Back")}}
       </b-button>
-      <span class="text-center ml-2 f-20"> {{ album_name }} </span>
+      <span class="text-center ml-2 f-20"> {{ this.album_name }} </span>
 
-      <Images v-bind:album="album_id" />
+      <Images
+        @update:item="() => updateItem()"
+        :hasLoadPicture="hasLoadPicture"
+        :album="album_id"
+        :type="type"
+        :albumName="album_name"
+        :showAlbum="canViewAlbum"
+        :canUpload="
+          ['profile_picture', 'Profile', 'Cover', 'cover_photo', 'logo', 'post'].includes(
+            album_name
+          ) ? false: true || canUpload
+        "
+        :images="strategy[type]().showAlbumImages"
+        @reste="hidealbum"
+      />
     </div>
   </div>
 </template>
 
 <script>
 import Images from "./images";
-import { mapActions } from "vuex";
+import AlbumItem from "./albumItem";
+import { mapActions, mapGetters, mapMutations } from "vuex";
+
+import defaultImage from "@/assets/img/nothing.jpg";
+
+import { fullMediaLink } from "@/helpers";
 export default {
-  components: { Images },
-  data: function() {
+  components: {
+    Images,
+    AlbumItem,
+  },
+
+  props: {
+    canUpload: {
+      type: Boolean,
+    },
+    type: {
+      type: String,
+      require: true,
+    },
+  },
+
+  data: function () {
     return {
+      hasLoadPicture: true,
+      canViewAlbum: true,
       showalbum: false,
-      name: null,
-      url: null,
-      fullPage: null,
-      album_id: null,
-      album_name: null,
-      edit_id: null,
-      edit_name: null,
-      images: [
-        "https://placekitten.com/801/800",
-        "https://placekitten.com/802/800",
-        "https://placekitten.com/803/800",
-        "https://placekitten.com/804/800",
-        "https://placekitten.com/805/800",
-        "https://placekitten.com/806/800",
-        "https://placekitten.com/807/800",
-        "https://placekitten.com/808/800",
-        "https://placekitten.com/809/800",
-      ],
-      imagees: [
-        "https://i.wifegeek.com/200426/f9459c52.jpg",
-        "https://i.wifegeek.com/200426/5ce1e1c7.jpg",
-        "https://i.wifegeek.com/200426/5fa51df3.jpg",
-        "https://i.wifegeek.com/200426/663181fe.jpg",
-        "https://i.wifegeek.com/200426/2d110780.jpg",
-        "https://i.wifegeek.com/200426/e73cd3fa.jpg",
-        "https://i.wifegeek.com/200426/15160d6e.jpg",
-        "https://i.wifegeek.com/200426/d0c881ae.jpg",
-        "https://i.wifegeek.com/200426/a154fc3d.jpg",
-        "https://i.wifegeek.com/200426/71d3aa60.jpg",
-        "https://i.wifegeek.com/200426/d17ce9a0.jpg",
-        "https://i.wifegeek.com/200426/7c4deca9.jpg",
-        "https://i.wifegeek.com/200426/64672676.jpg",
-        "https://i.wifegeek.com/200426/de6ab9c6.jpg",
-        "https://i.wifegeek.com/200426/d8bcb6a7.jpg",
-        "https://i.wifegeek.com/200426/4085d03b.jpg",
-        "https://i.wifegeek.com/200426/177ef44c.jpg",
-        "https://i.wifegeek.com/200426/d74d9040.jpg",
-        "https://i.wifegeek.com/200426/81e24a47.jpg",
-        "https://i.wifegeek.com/200426/43e2e8bb.jpg",
-      ],
-      index: 0,
+      albumInfo: {
+        name: "",
+        type: "",
+      },
+      loading: false,
+      editName: "",
+      editId: "",
+      url: "",
+      fullPage: "",
+      album_id: "",
+      album_name: "",
+      album_type: "",
+      edit_name: "",
+      strategy: null,
     };
   },
-  methods: {
-    hidealbum() {
-      this.showalbum = false;
-    },
-    showlbum(abum_id, album_name) {
-      this.album_name = album_name;
-      this.album_id = abum_id;
-      console.log(abum_id);
-      console.log("yoo yoo yooy ");
-      console.log(this.url);
-      let loader = this.$loading.show({
-        container: this.fullPage ? null : this.$refs.creatform,
-        canCancel: true,
-        onCancel: this.onCancel,
-        color: "#e75c18",
-      });
-      const albumUrl = this.url + "/" + abum_id;
-      this.$store
-        .dispatch("UserProfileOwner/getAlbumImages", albumUrl)
-        .then(() => {
-          console.log("hey yeah photo loaded");
-          this.showalbum = true;
-          loader.hide();
-        })
-        .catch((err) => {
-          console.log({ err: err });
-          loader.hide();
-        });
-    },
-    onClick(i) {
-      this.index = i;
-    },
-    editAlbum(album_id, album_name) {
-      this.edit_id = album_id;
-      this.edit_name = album_name;
-      this.$refs["editalbum"].show();
-    },
+  created() {
+    this.url = this.$route.params.id;
 
+    this.strategy = {
+      business: () => ({
+        albums: this.getAlbumsBusiness,
+        showalbum: this.getAlbumProfileImages,
+        showAlbumImages: this.albumImagesBusiness,
+        createAlbum: this.createAlbumBusiness,
+        fetchAlbums: this.fetchAlbumsBusiness,
+        deleteAlbum: this.deleteAlbumBusiness,
+        remove: this.removeBusiness,
+        updateAlbum: this.updateAlbumBusiness,
+        mapUpdate: this.mapUpdateBusiness,
+      }),
+      profile: () => ({
+        albums: this.getAlbumsProfile,
+        showalbum: this.getAlbumImages,
+        showAlbumImages: this.albumImagesProfile,
+        createAlbum: this.createAlbum,
+        fetchAlbums: this.fetchAlbums,
+        deleteAlbum: this.deleteAlbum,
+        updateAlbum: this.updateAlbum,
+        remove: this.remove,
+        mapUpdate: this.mapUpdate,
+      }),
+    };
+  },
+
+  filters: {
+    path: fullMediaLink,
+    plural: function (val) {
+      return val ? `${val} items` : "No item";
+    },
+  },
+
+  computed: {
+    ...mapGetters({
+      getAlbumsProfile: "UserProfileOwner/getAlbums",
+      getAlbumImageProfile: "UserProfileOwner/getAlbumImage",
+      albumImagesProfile: "UserProfileOwner/getalbumImages",
+
+      getAlbumsBusiness: "businessOwner/getAlbums",
+      getAlbumImageBusiness: "businessOwner/getAlbumImage",
+      albumImagesBusiness: "businessOwner/getalbumImages",
+    }),
+
+    canCreateAlbum() {
+      return this.albumInfo.name && this.albumInfo.type ? false : true;
+    },
+  },
+
+  methods: {
     ...mapActions({
       createAlbum: "UserProfileOwner/createAlbum",
       updateAlbum: "UserProfileOwner/updateAlbum",
       deleteAlbum: "UserProfileOwner/deleteAlbum",
-      getAlbums: "UserProfileOwner/getAlbums",
+      getAlbumImages: "UserProfileOwner/getAlbumImages",
+      fetchAlbums: "UserProfileOwner/getAlbums",
+
+      createAlbumBusiness: "businessOwner/createAlbum",
+      getAlbumProfileImages: "businessOwner/getAlbumImages",
+      fetchAlbumsBusiness: "businessOwner/getAlbums",
+      deleteAlbumBusiness: "businessOwner/deletedAlbum",
+      updateAlbumBusiness: "businessOwner/updatedAlbum",
     }),
 
-    createAlbum() {
-      let loader = this.$loading.show({
-        container: this.fullPage ? null : this.$refs.creatform,
-        canCancel: true,
-        onCancel: this.onCancel,
-        color: "#e75c18",
-      });
-      this.createAlbum(this.name)
-        .then((response) => {
+    getFullMediaLink: fullMediaLink,
+
+    cover(cover) {
+      return cover.length ? this.getFullMediaLink(cover[0]) : defaultImage;
+    },
+
+    ...mapMutations({
+      mapUpdate: "UserProfileOwner/updateAlbum",
+      remove: "UserProfileOwner/removeAlbum",
+
+      mapUpdateBusiness: "businessOwner/updateAlbum",
+      removeBusiness: "businessOwner/removeAlbum",
+    }),
+
+    hidealbum() {
+      this.showalbum = false;
+    },
+
+    showAlbumPictures(album) {
+      const credentials =
+        "business" == this.type
+          ? {
+              data: { businessId: this.$route.params.id, albumId: album.id },
+            }
+          : { data: album.id };
+
+      return this.strategy[this.type]()
+        .showalbum(credentials.data)
+        .then(() => {
+          this.album_id = album.id;
+          this.album_name = album.name;
+          this.showalbum = true;
+          this.hasLoadPicture = false;
+          return true
+        })
+        .catch(() => {
+          this.hasLoadPicture = false;
+          return false
+        });
+    },
+
+    canBeUpdate(album) {
+      return ["profile_picture", 'Profile', 'Cover', "cover_photo", "logo", "post"].includes(
+        album.name
+      )
+        ? false
+        : true;
+    },
+
+    createAlbums() {
+      this.loading = true;
+
+      const data =
+        "business" == this.type
+          ? { id: this.$route.params.id, data: this.albumInfo }
+          : this.albumInfo;
+
+      this.strategy[this.type]()
+        .createAlbum(data)
+        .then(() => {
+          this.strategy[this.type]().fetchAlbums(this.$route.params.id);
+        })
+        .then(() => {
+          this.$bvModal.hide("createalbumModal");
+          this.albumInfo = {
+            name: "",
+            type: "",
+          };
           this.flashMessage.show({
             status: "success",
             message: "Album Created",
           });
-          loader.hide();
+
+          this.loading = false;
         })
-        .catch((err) => {
+        .catch(() => {
+          this.loading = false;
           this.sending = false;
-          if (err.response.status == 422) {
-            console.log({ err: err });
-            this.flashMessage.show({
-              status: "error",
-              message: err.response.data.message,
-            });
-            loader.hide();
-          } else {
-            this.flashMessage.show({
-              status: "error",
-              message: "Unable to create your Album",
-            });
-            console.log({ err: err });
-            loader.hide();
-          }
+          this.$bvModal.hide("createalbumModal");
+          this.flashMessage.show({
+            status: "error",
+            message: "Album already exists with this name",
+          });
         });
     },
 
-    updateAlbum() {
-      let loader = this.$loading.show({
-        container: this.fullPage ? null : this.$refs.creatform,
-        canCancel: true,
-        onCancel: this.onCancel,
-        color: "#e75c18",
-      });
-      this.updateAlbum(this.edit_name, this.album_id)
+    editAlbum(item) {
+      this.editId = item.id;
+      this.editName = item.name;
+      this.$refs["editalbum"].show();
+    },
+
+    update() {
+      this.updateAlbums(this.editId, this.editName);
+    },
+
+    updateAlbums(id, name) {
+      this.loading = true;
+
+      this.strategy[this.type]()
+        .updateAlbum({
+          id: id,
+          name: name,
+        })
         .then(() => {
+          this.strategy[this.type]().mapUpdate({ name, id });
+          this.$bvModal.hide("editalbum");
           this.flashMessage.show({
             status: "success",
             message: "Album Updated",
           });
-          loader.hide();
+          this.loading = false;
+          this.editId = "";
+          this.editName = "";
         })
-        .catch((err) => {
+        .catch(() => {
           this.sending = false;
-          if (err.response.status == 422) {
-            console.log({ err: err });
-            this.flashMessage.show({
-              status: "error",
-              message: err.response.data.message,
-            });
-            loader.hide();
-          } else {
-            this.flashMessage.show({
-              status: "error",
-              message: "Unable to create your Album",
-            });
-            console.log({ err: err });
-            loader.hide();
-          }
+          this.flashMessage.show({
+            status: "error",
+            message: "Unable to update your Album",
+          });
         });
     },
 
-    deleteAlbum() {
-      let loader = this.$loading.show({
-        container: this.fullPage ? null : this.$refs.creatform,
-        canCancel: true,
-        onCancel: this.onCancel,
-        color: "#e75c18",
-      });
-      this.deleteAlbum(this.name, this.album_id)
+    deleteAlbums(id) {
+      const data =
+        "business" == this.type
+          ? { businessID: this.$route.params.id, albumID: id }
+          : id;
+
+      this.strategy[this.type]()
+        .deleteAlbum(data)
         .then(() => {
+          this.strategy[this.type]().remove(id);
           this.flashMessage.show({
             status: "success",
             message: "Album Deleted",
           });
-          loader.hide();
         })
         .catch((err) => {
           this.sending = false;
-          if (err.response.status == 422) {
-            console.log({ err: err });
-            this.flashMessage.show({
-              status: "error",
-              message: err.response.data.message,
-            });
-            loader.hide();
-          } else {
-            this.flashMessage.show({
-              status: "error",
-              message: "Unable to Delete your abum",
-            });
-            console.log({ err: err });
-            loader.hide();
-          }
+
+          this.flashMessage.show({
+            status: "error",
+            message: "Unable to Delete your abum",
+          });
         });
-    },
-  },
-  mounted() {
-    this.url = this.$route.params.id;
-  },
-  beforeMount() {
-    this.getAlbums();
-  },
-  computed: {
-    albums() {
-      return this.$store.state.UserProfileOwner.albums;
     },
   },
 };
 </script>
+
+<style scoped>
+._vue-flash-msg-body._vue-flash-msg-body_success,
+._vue-flash-msg-body._vue-flash-msg-body_error {
+  z-index: 10000 !important;
+}
+.options {
+  background: #e75c18 !important;
+  border-radius: 50%;
+}
+</style>
 
 <style>
 .text-design {

@@ -22,7 +22,8 @@
               <h6 class="mb-0">
                 <b>{{ workPlace.company_name }} ({{workPlace.position}})</b>
               </h6>
-              <b>{{ workPlace.start_year }}/{{workPlace.start_month}}/{{workPlace.start_day}} -   {{ workPlace.end_year }}/{{workPlace.end_month}}/{{workPlace.end_day}}</b>
+              <b v-if="workPlace.end_year || workPlace.end_month || workPlace.end_day">{{ workPlace.start_year }}/{{ workPlace.start_month }}/{{ workPlace.start_day }} - {{ workPlace.end_year }}/{{ workPlace.end_month }}/{{ workPlace.end_day }}</b>
+              <b v-else>{{ workPlace.start_year }}/{{ workPlace.start_month }}/{{ workPlace.start_day }}</b>
               <p class="mb-1">
                 {{ workPlace.job_responsibilities }}
               </p>
@@ -110,21 +111,23 @@
         id="checkbox-1"
         v-model="editData.currently_working"
         name="checkbox-1"
-        :checked="editData.currently_working === 1 ? true : false"
+        checked="1"
+        unchecked="0"
       >
         {{ $t("profileowner.Currently_Working")}}
       </b-form-checkbox>
       <label>{{ $t("profileowner.Start_Date")}}</label>
       <b-form-datepicker
         id="example-datepicker"
-        v-model="editData.start_year"
+        v-model="editData.startDate"
         class="mb-2"
         :placeholder="$t('profileowner.Start_Date')"
       ></b-form-datepicker>
       <label>{{ $t("profileowner.End_Date")}}</label>
       <b-form-datepicker
+        v-if="!editData.currently_working"
         id="example-datepicker"
-        v-model="editData.end_year"
+        v-model="editData.endDate"
         class="mb-2"
         :placeholder="$t('profileowner.End_Date')"
       ></b-form-datepicker>
@@ -175,19 +178,23 @@
       </b-form-checkbox>
       <label>{{ $t("profileowner.Start_Date")}}</label>
       <b-form-datepicker
-        id="example-datepicker"
+        id="startDate"
         v-model="workPlaceInput.startDate"
         class="mb-2"
         :placeholder="$t('profileowner.Start_Date')"
       ></b-form-datepicker>
       <label>{{ $t("profileowner.End_Date")}}</label>
       <b-form-datepicker
-        id="example-datepicker"
+        v-if="!workPlaceInput.currentlyWorking"
+        id="endDater"
         v-model="workPlaceInput.endDate"
         class="mb-2"
         :placeholder="$t('profileowner.End_Date')"
       ></b-form-datepicker>
     </b-modal>
+
+    <FlashMessage />
+
   </div>
 </template>
 
@@ -227,11 +234,13 @@ export default {
   },
 
   computed:{
-       work(){
+    work(){
+      console.log("this.$store.state.profile.profile_about.user_experience");
       return this.$store.state.profile.profile_about.user_experience;
     },
 
      workk(){
+       console.log("this.$store.state.profile.profile_about");
       return this.$store.state.profile.profile_about;
     }
 
@@ -240,7 +249,16 @@ export default {
 
     editt(value){
 
+      console.log("this.editData Before Assign", value)
        this.editData = value;
+       this.editData['startDate'] = value.start_day+'-'+value.start_month+'-'+value.start_year;
+       if(value.currently_working){
+         this.editData['endDate'] = value.end_day+'-'+value.end_month+'-'+value.end_year;
+       } else{
+         console.log('falseeeeeeee')
+         this.editData['endDate'] = null;
+       }
+       console.log("this.editData Before Update", this.editData)
        this.$refs["edit-contact"].show(); 
     },
     cancel() {
@@ -261,47 +279,33 @@ export default {
     },
 
 
-    updatesave(){
-    
-    let method="PUT"
-    console.log(this.editData);
-
-     this.$store
+     updatesave: function(){
+      console.log(this.editData);
+       this.$store
         .dispatch("profile/updateUserWorkPlaces", {
           workPlace: this.editData,
-          method: method,
+          method: 'PUT',
         })
         .then((response) => {
-          console.log(
-            response,
-            "save/update/delete new workPlace user end +++++"
-          );
+          console.log( response, "lewsi save/update/delete new workPlace user end +++++" );
         })
         .catch((error) => {
-          console.log(
-            error,
-            "not save/update/delete new workPlace user end error (2) +++++"
-          );
+          console.log( error, "lewis not save/update/delete new workPlace user end error (2) +++++");
         })
-
         .finally(() => {
+          this.$store.dispatch("profile/loadUserProfileAbout", null);
           this.educationAndWorks = JSON.parse(
             JSON.stringify(
               this.$store.getters["profile/getProfileAboutEducationAndWorks"]
             )
           );
-          console.log(
-            "Finally save/update/delete new workplace user +++++",
-            this.educationAndWorks,
-            "+++++++++++"
-          );
-          this.$refs["edit-contact"].hide();
+          console.log("Lewis Finally save/update/delete new workplace user +++++", this.educationAndWorks, "+++++++++++");
         });
-
-    },
+		},
 
     save() {
       console.log("Save/edit/delete WorkPlace User Profile About");
+      console.log(this.workPlaceInput);
       let method = "";
       if (this.index !== null) {
         this.educationAndWorks.workPlaces[this.index] = this.workPlaceInput;
@@ -317,16 +321,13 @@ export default {
           method: method,
         })
         .then((response) => {
-          console.log(
-            response,
-            "save/update/delete new workPlace user end +++++"
-          );
+          console.log( response, "save/update/delete new workPlace user end +++++" );
         })
         .catch((error) => {
-          console.log(
-            error,
-            "not save/update/delete new workPlace user end error (2) +++++"
-          );
+          console.log( error, "not save/update/delete new workPlace user end error (2) +++++");
+          this.$store.dispatch("profile/loadUserProfileAbout", null);
+          // this.educationAndWorks.workPlaces = this.work;
+          // this.work = this.$store.state.profile.profile_about.user_experience;
         })
         .finally(() => {
           this.educationAndWorks = JSON.parse(
@@ -334,46 +335,40 @@ export default {
               this.$store.getters["profile/getProfileAboutEducationAndWorks"]
             )
           );
-          console.log(
-            "Finally save/update/delete new workplace user +++++",
-            this.educationAndWorks,
-            "+++++++++++"
-          );
+          console.log("Finally save/update/delete new workplace user +++++", this.educationAndWorks, "+++++++++++");
           this.$refs["add-contact"].hide();
         });
     },
-    deleteWorkPlace(type, value) {
-      switch (type) {
-        case "workPlaces":
-          console.log("delete one workplace");
-          this.educationAndWorks.workPlaces =
-            this.educationAndWorks.workPlaces.filter((workPlace) => {
-              return workPlace.companyName !== value;
-            });
-          this.$store.state.userData[0].profile_about.educationAndWorks =
-            this.educationAndWorks;
-          break;
-        case "educations":
-          this.educationAndWorks.educations =
-            this.educationAndWorks.educations.filter((education) => {
-              return education !== value;
-            });
-          this.$store.state.userData[0].profile_about.educationAndWorks =
-            this.educationAndWorks;
-          break;
-        case "professions":
-          this.educationAndWorks.professions =
-            this.educationAndWorks.professions.filter((profession) => {
-              return profession !== value;
-            });
-          this.$store.state.userData[0].profile_about.educationAndWorks =
-            this.educationAndWorks;
-          break;
-        default:
-          console.log("No Correspondance");
-          break;
-      }
+    
+    deleteWorkPlace(workPlace_id) {
+
+       console.log("Lewis delete WorkPlace User Profile About", workPlace_id);
+
+      this.$store
+        .dispatch("profile/updateUserWorkPlaces", {
+          workPlace: workPlace_id,
+          method: 'DELETE',
+        })
+        .then((response) => {
+          console.log( response, "Lewis delete new workPlace user end +++++" );
+        })
+        .catch((error) => {
+          console.log( error, "not Lewis delete new workPlace user end error (2) +++++");
+          // this.educationAndWorks.workPlaces = this.work;
+          // this.work = this.$store.state.profile.profile_about.user_experience;
+        })
+        .finally(() => {
+          this.$store.dispatch("profile/loadUserProfileAbout", null);
+          this.educationAndWorks = JSON.parse(
+            JSON.stringify(
+              this.$store.getters["profile/getProfileAboutEducationAndWorks"]
+            )
+          );
+          console.log("Finally Lewis delete new workplace user +++++", this.educationAndWorks, "+++++++++++");
+        });
+
     },
+
     edit(type, value) {
       switch (type) {
         case "workPlaces":

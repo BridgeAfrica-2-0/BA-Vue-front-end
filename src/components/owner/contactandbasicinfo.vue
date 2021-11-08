@@ -67,7 +67,7 @@
               class="mt-2 mb-2"
               :placeholder="$t('profileowner.current_city')"
               type="text"
-              v-model="basicInfo.currentCity"
+              v-model="info.user.city"
             ></b-form-input>
 
             <div class="fosrm-group text-right w-100">
@@ -126,6 +126,33 @@
 
             <div class="fosrm-group text-right w-100">
               <button type="submit" class="btn btn-primary orange">{{ $t("profileowner.Save")}}</button>
+            </div>
+          </form>
+        </div>
+      </b-modal>
+
+      <b-modal
+        id="websiteEModal"
+        ref="websiteEModal"
+        title="Edit website"
+        hide-footer
+        @close="cancel"
+      >
+        <div class="modal-body">
+          <form
+            class="form"
+            action=""
+            method="post"
+            @submit.prevent="saveEWebsite"
+          >
+            <b-form-input
+              class="mt-2 mb-2"
+              placeholder="Website"
+              v-model="websiteInput"
+            ></b-form-input>
+
+            <div class="fosrm-group text-right w-100">
+              <button type="submit" class="btn btn-primary orange">Save</button>
             </div>
           </form>
         </div>
@@ -455,15 +482,20 @@
           >
             {{ phone }}
           </div>
-        </div>
+        </div> 
+        <button>
         <a v-b-modal.phonemodal data-target="#phonemodal">
-          {{ $t("profileowner.Add_Other_Phones")}}</a
-        >
+         
+          {{ $t("profileowner.Add_Other_Phones")}}</a>
+          Edit
+        </button>
       </div>
     </div>
-    <div class="row mb-4">
-      <div class="col"></div>
+
+    <div class="row">
+      <div class="col-md-12"><b>Places you lived</b></div>
     </div>
+    <hr>
     <div class="row mb-4">
       <div class="col">
         <h6 class="mb-0"><b>{{ $t("profileowner.Places_you_lived")}}</b></h6>
@@ -549,9 +581,12 @@
                 class="primary float-left mr-1 mt-1"
                 :icon="['fas', 'globe']"
               />
-              <a :href="website" @click="redirect(website.website_url)" target="_blank">{{
-                website.website_url
-              }}</a>
+              <a
+                :href="website"
+                @click="redirect(website.website_url)"
+                target="_blank"
+                >{{ website.website_url }}</a
+              >
               <ul class="website navbar-nav pull-right">
                 <li class="nav-item dropdown">
                   <b-dropdown
@@ -572,10 +607,7 @@
           </div>
         </div>
         <div class="media mt-4">
-
-
-
-<!--
+          <!--
           <div class="media-body">
             <a v-b-modal.sociallinkModal data-target="#sociallinkModal">
               <fas-icon
@@ -611,7 +643,6 @@
               </ul>
             </div>
           </div>
-
           -->
         </div>
       </div>
@@ -620,9 +651,11 @@
 </template>
 
 <script>
+import moment from "moment";
 export default {
   data() {
     return {
+      websiteId: null,
       basicInfo: {
         dateOfBirth: { day: "12", month: "1", year: "2000" },
         gender: "M",
@@ -661,24 +694,19 @@ export default {
         console.log("Load User birth Date end ++++++", this.basicInfo);
       });
   },
-
-
-  
   computed: {
     birthDate() {
-      return (
-        this.basicInfo.dateOfBirth.date_1.day +
-        "-" +
-        this.basicInfo.dateOfBirth.date_1.month +
-        "-" +
-        this.basicInfo.dateOfBirth.date_2.year
-      );
+      let dob = this.info.user.dob;
+      let check = moment(dob, "YYYY/MM/DD");
+      var month = check.format("M");
+      var day = check.format("D");
+      var year = check.format("YYYY");
+      var date = year +'-'+ month +'-'+ day;
+      return { date: date };
     },
-
-      info(){
-   return this.$store.state.profile.profile_about;
+    info() {
+      return this.$store.state.profile.profileIntro;
     },
-
   },
   methods: {
     cancel() {
@@ -689,15 +717,23 @@ export default {
       this.phoneInput = null;
     },
     saveBirthDate() {
-      console.log("save new birth date user start +++++");
-      console.log(this.basicInfo.dateOfBirth);
+      console.log("this.birthDate STARTTTTT");
+      console.log(this.birthDate);
       this.$store
         .dispatch("profile/updateUserBasicInfosBirthDate", {
-          dateOfBirth: this.basicInfo.dateOfBirth,
+          dateOfBirth: this.birthDate,
         })
         .then((response) => {
           console.log("save new birth date user response (3) +++++", response);
           console.log("save new birth date user end +++++");
+          this.$store
+            .dispatch("profile/loadUserPostIntro", null)
+            .then((response) => {
+              console.log(response);
+            })
+            .catch((error) => {
+              console.log(error);
+            });
         })
         .catch((error) => {
           console.log(
@@ -706,12 +742,6 @@ export default {
           );
         })
         .finally(() => {
-          this.basicInfo = JSON.parse(
-            JSON.stringify(
-              this.$store.getters["profile/getProfileAboutBasicInfos"]
-            )
-          );
-          console.log(this.basicInfo);
           this.$refs["model-6"].hide();
         });
     },
@@ -723,6 +753,14 @@ export default {
           gender: this.basicInfo.gender,
         })
         .then((response) => {
+          this.$store
+            .dispatch("profile/loadUserPostIntro", null)
+            .then((response) => {
+              console.log(response);
+            })
+            .catch((error) => {
+              console.log(error);
+            });
           console.log("save new gender user response (3)", response);
         })
         .catch((error) => {
@@ -733,31 +771,16 @@ export default {
         })
         .finally(() => {
           console.log("finally save new gender user ");
-          this.basicInfo = JSON.parse(
-            JSON.stringify(
-              this.$store.getters["profile/getProfileAboutBasicInfos"]
-            )
-          );
-          console.log(this.basicInfo);
           this.$refs["modal-7"].hide();
         });
     },
     savePhoneNumber() {
-      console.log("save new phone Number user start +++++");
-      if (this.basicInfo.mobilePhones.includes(this.phoneInput)) {
-        console.log("Phone Number In Duplication  +++++++");
-      } else {
-        console.log("Phone Number Not In Duplication +++++++");
-        this.basicInfo.mobilePhones.push(this.phoneInput);
-      }
-      this.phoneInput = null;
-      console.log(this.basicInfo.mobilePhones);
       this.$store
         .dispatch("profile/updateUserBasicInfosMobilePhones", {
-          mobilePhones: this.basicInfo.mobilePhones,
+          mobilePhones: this.info.user.phone,
         })
         .then((response) => {
-          console.log("save new phone number user response (3) ++++", response);
+          console.log("update phone user response (3) ++++", response);
         })
         .catch((error) => {
           console.log(
@@ -767,12 +790,6 @@ export default {
         })
         .finally(() => {
           console.log("finally save new mobilePhones user ++++++ ");
-          this.basicInfo = JSON.parse(
-            JSON.stringify(
-              this.$store.getters["profile/getProfileAboutBasicInfos"]
-            )
-          );
-          console.log(this.basicInfo);
           this.$refs["phonemodal"].hide();
         });
     },
@@ -781,7 +798,7 @@ export default {
       console.log(this.basicInfo.currentCity);
       this.$store
         .dispatch("profile/updateUserBasicInfosCurrentCity", {
-          currentCity: this.basicInfo.currentCity,
+          currentCity: this.info.user.city,
         })
         .then((response) => {
           console.log(
@@ -807,47 +824,75 @@ export default {
         });
     },
     saveHomeTown() {
-      console.log("save new home Town  user start +++++");
-      console.log(this.basicInfo.homeTown);
       this.$store
         .dispatch("profile/updateUserBasicInfosHomeTown", {
-          homeTown: this.basicInfo.homeTown,
+          homeTown: this.info.user.home_town,
         })
-        .then((response) => {
-          console.log(
-            "save new current home town user response (3) ++++++",
-            response
-          );
-        })
+        .then((response) => {})
         .catch((error) => {
           console.log(error, "not save new homeTown user end error (2)+++++");
         })
         .finally(() => {
-          console.log("finally save new current Home Town user ");
-          this.basicInfo = JSON.parse(
-            JSON.stringify(
-              this.$store.getters["profile/getProfileAboutBasicInfos"]
-            )
-          );
-          console.log(this.basicInfo);
+          this.$store
+            .dispatch("profile/loadUserPostIntro", null)
+            .then((response) => {
+              console.log(response);
+            })
+            .catch((error) => {
+              console.log(error);
+            });
           this.$refs["hometownModal"].hide();
         });
     },
     saveWebsite() {
-      console.log("save new websites user start +++++");
-      if (this.basicInfo.websites.includes(this.websiteInput)) {
-        console.log("Duplication of website  +++++++");
-      } else if (this.index !== null) {
-        this.basicInfo.websites[this.index] = this.websiteInput;
-      } else {
-        console.log("website don't duplicate +++++++++");
-        this.basicInfo.websites.push(this.websiteInput);
-      }
-      this.websiteInput = null;
-      console.log(this.basicInfo.websites);
       this.$store
         .dispatch("profile/updateUserBasicInfosWebsites", {
-          websites: this.basicInfo.websites,
+          websites: this.websiteInput,
+        })
+        .then((response) => {
+          console.log("save new websites user response (3) ++++++", response);
+          console.log("save new websites user end +++++");
+        })
+        .catch((error) => {
+          console.log(error, "not save new websites user end error (2) +++++");
+        })
+        .finally(() => {
+          this.$store
+            .dispatch("profile/loadUserPostIntro", null)
+            .then((response) => {
+              console.log(response);
+            })
+            .catch((error) => {
+              console.log(error);
+            });
+          this.$refs["websiteModal"].hide();
+        });
+    },
+    deleteWebsite(website) {
+      console.log("save new websites user start +++++");
+      console.log(website);
+      this.$store
+        .dispatch("profile/deleteUserBasicInfosWebsites", {
+          id: website.id,
+        })
+        .then((response) => {
+          console.log("save new websites user response (3) ++++++", response);
+        })
+        .catch((error) => {
+          console.log(error, "not save new websites user end error (2) +++++");
+        })
+        .finally(() => {
+          console.log("finally save new website user ");
+          this.$store.dispatch("profile/loadUserPostIntro", null)
+          this.$refs["websiteEModal"].hide();
+        });
+    },
+    saveEWebsite() {
+      console.log("save new websites user start +++++");
+      this.$store
+        .dispatch("profile/updateUserBasicInfosEWebsites", {
+          websites: this.websiteInput,
+          id: this.websiteId,
         })
         .then((response) => {
           console.log("save new websites user response (3) ++++++", response);
@@ -858,13 +903,8 @@ export default {
         })
         .finally(() => {
           console.log("finally save new website user ");
-          this.basicInfo = JSON.parse(
-            JSON.stringify(
-              this.$store.getters["profile/getProfileAboutBasicInfos"]
-            )
-          );
-          console.log(this.basicInfo);
-          this.$refs["websiteModal"].hide();
+          this.$store.dispatch("profile/loadUserPostIntro", null)
+          this.$refs["websiteEModal"].hide();
         });
     },
     saveSocialLink() {
@@ -916,8 +956,6 @@ export default {
               return website !== value;
             }
           );
-          this.$store.state.userData[0].profile_about.basicInfo =
-            this.basicInfo;
           break;
         case "socialLink":
           this.basicInfo.socialLinks = this.basicInfo.socialLinks.filter(
@@ -925,8 +963,6 @@ export default {
               return socialLink !== value;
             }
           );
-          this.$store.state.userData[0].profile_about.basicInfo =
-            this.basicInfo;
           break;
         default:
           console.log("No Correspondance");
@@ -937,12 +973,13 @@ export default {
       switch (type) {
         case "website":
           console.log("edit website");
-          this.index = this.basicInfo.websites.findIndex((website) => {
+          this.index = this.info.user_websites.findIndex((website) => {
             return website === value;
           });
           console.log(this.index);
-          this.websiteInput = value;
-          this.$refs["websiteModal"].show();
+          this.websiteInput = value.website_url;
+          this.websiteId = value.id;
+          this.$refs["websiteEModal"].show();
           break;
         case "socialLink":
           console.log("edit socialLink");

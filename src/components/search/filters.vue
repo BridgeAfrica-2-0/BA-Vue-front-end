@@ -1,16 +1,16 @@
 <template>
   <div>
-    {{ filterType }}
+
     <div v-if="filterType == '1' || filterType == '4'">
       <div v-if="subCategories.length">
         <span>
           <b-form-radio
-            v-for="(subCat, index) in subCategories"
+            v-for="(subCat, index) in subCategories.slice(0, 4)"
             v-model="selected_sub_cat"
             :key="index"
             :value="subCat.id"
             name="subcategories-list"
-            @change="getFilter(subCat.id)"
+            @change="getFilter(subCat)"
             class="m-1 br-3"
           >
             {{ subCat.name }}
@@ -27,11 +27,11 @@
         <span v-if="subFilter.length">
           <h6>Filters</h6>
           <b-form-radio
-            v-for="(filter, i) in subFilter"
+            v-for="(filter, i) in subFilter.slice(0, 4)"
             :key="i.value"
             v-model="selectedFilter"
             :value="filter.id"
-            @change="switchcategoriesfilters"
+            @change="searchByFilter(filter)"
             name="sub-filters"
             class="m-1 br-3"
           >
@@ -53,7 +53,7 @@
             :key="i.value"
             v-model="selectedFilter"
             :value="filter.id"
-            @change="switchcategoriesfilters"
+            @change="searchByFilter(filter)"
             name="sub-filters"
           >
             {{ filter.name }}
@@ -135,9 +135,7 @@
         <b-form-select v-model="selected">
           <b-form-select-option value="a"> My Location </b-form-select-option>
         </b-form-select>
-
         <br />
-
         <hr />
       </span>
 
@@ -207,6 +205,7 @@
             min="1000"
             max="200000000"
             step="0.5"
+            @change="searchByDistance"
           ></b-form-input>
           <div class="mt-2 text-left">min: 1000 Max: {{ priceRange }}</div>
         </span>
@@ -214,40 +213,37 @@
     </div>
 
     <div v-if="filterType == '0'">
-      <span v-if="showform == true">
+      <b-button
+        v-if="networkSelect.category"
+        class="float-right"
+        size="sm"
+        variant="outline-primary"
+        @click="allSearchByCat({})"
+        >Reset</b-button
+      >
+      <br />
+      <!-- Category -->
+      <div v-if="categories.length > 0">
         <b-form-group
           label-cols-lg="3"
-          label="Region"
+          label="Categories"
           label-size="md"
           label-class="font-weight-bold pt-0"
-          class="mb-0 text-left"
+          class="mb-0 pt-6 text-left"
         >
         </b-form-group>
-
-        <b-form-select v-model="selected">
-          <b-form-select-option value="a"> Yaounde </b-form-select-option>
-        </b-form-select>
-
-        <br />
-
-        <b-form-group
-          label-cols-lg="3"
-          label="Division"
-          label-size="md"
-          label-class="font-weight-bold pt-0"
-          class="mb-0 text-left"
+        <b-form-select
+          v-model="networkSelect.category"
+          :options="categories"
+          value-field="category.id"
+          text-field="category.name"
+          @change="allSearchByCat({ cat_id: networkSelect.category })"
         >
-        </b-form-group>
-
-        <b-form-select v-model="selected">
-          <b-form-select-option value="a"> My Location </b-form-select-option>
         </b-form-select>
+      </div>
 
-        <br />
-
-        <hr />
-      </span>
-
+      <hr />
+      <!-- 
       <b-form-group
         label-cols-lg="12"
         label="Neighbourhood"
@@ -303,25 +299,151 @@
       </b-form-group>
 
       <b-link v-b-modal="'distance'"> See all </b-link>
+       -->
     </div>
 
+    <!-- Network -->
     <div v-if="filterType == '3'">
-      <b-form-group
-        label-cols-lg="3"
-        label="Location"
-        label-size="md"
-        label-class="font-weight-bold pt-0"
-        class="mb-0 text-left"
+      <b-button
+        v-if="networkFilter.region || networkFilter.category"
+        class="float-right"
+        size="sm"
+        variant="outline-primary"
+        @click="networkFilterReset()"
+        >Reset</b-button
       >
-      </b-form-group>
+      <br />
+      <div>
+        <!-- Category -->
+        <div v-if="categories.length > 0">
+          <b-form-group
+            label-cols-lg="3"
+            label="Categories"
+            label-size="md"
+            label-class="font-weight-bold pt-0"
+            class="mb-0 pt-6 text-left"
+          >
+          </b-form-group>
+          <b-form-select
+            v-model="networkSelect.category"
+            :options="categories"
+            value-field="category.id"
+            text-field="category.name"
+            @change="searchNetworks({ cat_id: networkSelect.category })"
+          >
+          </b-form-select>
+        </div>
+        <!-- Country -->
+        <div>
+          <b-form-group
+            label-cols-lg="3"
+            label="Country"
+            label-size="md"
+            label-class="font-weight-bold pt-0"
+            class="mb-0 pt-6 text-left"
+          >
+          </b-form-group>
+          <b-form-select
+            v-model="networkSelect.country"
+            :options="countries"
+            value-field="id"
+            text-field="name"
+            @change="networkFilterFill()"
+          >
+          </b-form-select>
+        </div>
 
-      <b-form-select v-model="selected">
-        <b-form-select-option value="a"> Yaounde </b-form-select-option>
-      </b-form-select>
+        <!-- Region -->
+        <div v-if="networkFilter.region">
+          <b-form-group
+            label-cols-lg="3"
+            label="Region"
+            label-size="md"
+            label-class="font-weight-bold pt-0"
+            class="mb-0 text-left"
+          >
+          </b-form-group>
+
+          <b-form-select
+            v-model="networkSelect.region"
+            :options="regions"
+            value-field="id"
+            text-field="name"
+            @change="networkFilterFill()"
+          >
+          </b-form-select>
+        </div>
+
+        <!-- Division -->
+        <div v-if="networkFilter.division">
+          <b-form-group
+            label-cols-lg="3"
+            label="Division"
+            label-size="md"
+            label-class="font-weight-bold pt-0"
+            class="mb-0 text-left"
+          >
+          </b-form-group>
+          <b-form-select
+            v-model="networkSelect.division"
+            :options="divisions"
+            value-field="id"
+            text-field="name"
+            @change="networkFilterFill()"
+          >
+          </b-form-select>
+        </div>
+
+        <!-- Council -->
+        <div v-if="networkFilter.council">
+          <b-form-group
+            label-cols-lg="3"
+            label="Council"
+            label-size="md"
+            label-class="font-weight-bold pt-0"
+            class="mb-0 text-left"
+          >
+          </b-form-group>
+          <b-form-select
+            v-model="networkSelect.council"
+            :options="councils"
+            value-field="id"
+            text-field="name"
+            @change="networkFilterFill()"
+          >
+          </b-form-select>
+        </div>
+
+        <!-- Neighbourhood -->
+        <div v-if="networkFilter.neighbourhood">
+          <b-form-group
+            label-cols-lg="3"
+            label="Neighbourhood"
+            label-size="md"
+            label-class="font-weight-bold pt-0"
+            class="mb-0 text-left"
+          >
+          </b-form-group>
+          <b-form-select
+            v-model="networkSelect.neighbourhood"
+            :options="neighbourhoods"
+            value-field="id"
+            text-field="name"
+            @change="
+              searchNetworks({ neighborhood_id: networkSelect.neighbourhood })
+            "
+          >
+          </b-form-select>
+        </div>
+      </div>
 
       <br />
     </div>
+    <!-- End Network -->
 
+    <component :is="currentFilter" />
+
+    <!--
     <div v-if="filterType == '2'">
       <b-form-group
         label-cols-lg="3"
@@ -345,45 +467,27 @@
       </b-form-group>
       People
       <b-form-select v-model="selectsp">
-        <b-form-select-option value="a">
-          Followers
-        </b-form-select-option>
-        <b-form-select-option value="b">
-          Followings
-        </b-form-select-option>
-        <b-form-select-option value="c">
-          Community
-        </b-form-select-option>
+        <b-form-select-option value="a"> Followers </b-form-select-option>
+        <b-form-select-option value="b"> Followings </b-form-select-option>
+        <b-form-select-option value="c"> Community </b-form-select-option>
       </b-form-select>
       Business
       <b-form-select v-model="selectsb">
-        <b-form-select-option value="a">
-          Followers
-        </b-form-select-option>
-        <b-form-select-option value="b">
-          Followings
-        </b-form-select-option>
-        <b-form-select-option value="c">
-          Community
-        </b-form-select-option>
+        <b-form-select-option value="a"> Followers </b-form-select-option>
+        <b-form-select-option value="b"> Followings </b-form-select-option>
+        <b-form-select-option value="c"> Community </b-form-select-option>
       </b-form-select>
       Network
       <b-form-select v-model="selectsn">
-        <b-form-select-option value="a">
-          Followers
-        </b-form-select-option>
-        <b-form-select-option value="b">
-          Followings
-        </b-form-select-option>
-        <b-form-select-option value="c">
-          community
-        </b-form-select-option>
-        <b-form-select-option value="d">
-          Members
-        </b-form-select-option>
+        <b-form-select-option value="a"> Followers </b-form-select-option>
+        <b-form-select-option value="b"> Followings </b-form-select-option>
+        <b-form-select-option value="c"> community </b-form-select-option>
+        <b-form-select-option value="d"> Members </b-form-select-option>
       </b-form-select>
     </div>
+    -->
 
+    <!--
     <div v-if="filterType == '5'">
       <b-form-group
         label-cols-lg="12"
@@ -417,18 +521,13 @@
       </b-form-checkbox>
       <br />
       Post From
-      <b-form-select v-model="selectsp" >
-        <b-form-select-option value="a" >
-          editors
-        </b-form-select-option>
-        <b-form-select-option value="b">
-          Members
-        </b-form-select-option>
-        <b-form-select-option value="c">
-          Owner
-        </b-form-select-option>
+      <b-form-select v-model="selectsp">
+        <b-form-select-option value="a"> editors </b-form-select-option>
+        <b-form-select-option value="b"> Members </b-form-select-option>
+        <b-form-select-option value="c"> Owner </b-form-select-option>
       </b-form-select>
     </div>
+    -->
 
     <b-modal ref="myfilters" id="Neighbourhood" hide-footer title=" ">
       <b-form-group
@@ -490,7 +589,7 @@
           v-model="selected_sub_cat"
           :key="i"
           :value="sub.id"
-          @change="selectedsidebar"
+          @change="searchByFilter(filter)"
           name="subCategories-list-modal"
           class=""
         >
@@ -505,12 +604,21 @@
 </template>
 
 <script>
+import { PeopleFilter, PostFilter } from "@/components/search";
+
 export default {
   name: "filters",
 
   props: ["filterType", "Selectedcategory", "Selectedparentcategory"],
 
   watch: {
+    filterType: function (newId) {
+      try {
+        this.currentFilter = this.strategies[newId]();
+      } catch (error) {
+        this.currentFilter = null;
+      }
+    },
     Selectedparentcategory: function (newVal) {
       console.log(newVal);
 
@@ -786,12 +894,28 @@ export default {
       filterLoader: false,
       noFilter: "",
 
+      networkFilter: {
+        category: false,
+        region: false,
+        division: false,
+        council: false,
+        neighbourhood: false,
+      },
+      networkSelect: {
+        category: null,
+        country: null,
+        region: null,
+        division: null,
+        council: null,
+        neighbourhood: null,
+      },
       // -----------------
-
+      strategies: null,
+      currentFilter: null,
       slide: 0,
       sliding: null,
 
-      priceRange: "1000",
+      priceRange: 1000,
       showform: false,
       selectsp: "",
       selectsb: "",
@@ -1812,74 +1936,263 @@ export default {
       ],
     };
   },
+
   computed: {
+    categories() {
+      return this.$store.getters["marketSearch/getCategories"];
+    },
     subCategories() {
-      return this.$store.state.market.subCat;
+      return this.$store.getters["marketSearch/getSubCat"];
     },
     subFilter() {
-      return this.$store.state.market.subFilter;
+      return this.$store.getters["marketSearch/getSubFilters"];
     },
+    countries() {
+      return this.$store.getters["networkSearch/getCountries"];
+    },
+    regions() {
+      return this.$store.getters["networkSearch/getRegions"];
+    },
+    divisions() {
+      return this.$store.getters["networkSearch/getDivisions"];
+    },
+    councils() {
+      return this.$store.getters["networkSearch/getCouncils"];
+    },
+    neighbourhoods() {
+      return this.$store.getters["networkSearch/getNeighbourhoods"];
+    },
+  },
+  
+  created() {
+    this.getCountries();
+    this.strategies = {
+      2: () => PeopleFilter,
+      5: () => PostFilter,
+    };
   },
 
   methods: {
-    getFilter(subId) {
-      this.filterLoader = true;
+    getFilter(subCat) {
+      // this.filterLoader = true;
       this.noFilter = "";
+      this.$store.commit("marketSearch/setSubFilters", []);
 
       this.$store
-        .dispatch("market/getFilter", subId)
+        .dispatch("marketSearch/getFilter", subCat.id)
         .then((res) => {
+          this.searchProducts({ cat_id: subCat.cat_id, sub_cat: subCat.id });
           console.log("Filters: ");
-
           console.log(res.data.data);
           if (res.data.data.length === 0) {
-            let subName = ''
-            this.subCategories.map((sub)=>{
-              if (sub.id === subId) {
-                subName = sub.name
+
+            let subName = "";
+            this.subCategories.map((sub) => {
+              if (sub.id) {
+                subName = sub.name;
               }
-            })
+            });
             this.noFilter = `No filter available for ${subName}!`;
+
           }
 
-          this.filterLoader = false;
-          this.$store.commit("market/setSubFilters", res.data.data);
+          // this.filterLoader = false;
+          let filter = [];
+          res.data.data.map((filt) => {
+            filter.push({
+              cat_id: subCat.cat_id,
+              sub_cat_id: subCat.id,
+              ...filt,
+            });
+          });
+
+          this.$store.commit("marketSearch/setSubFilters", filter);
+          console.log("[DeBUG] FILTER: ", this.subFilter);
         })
         .catch((err) => {
           console.error(err);
-          this.filterLoader = false;
+          // this.filterLoader = false;
         });
     },
-    switchcategoriesfilters() {
-      this.showform = false;
-      console.log(this.selectedfilter);
 
-      switch (this.selectedfilter) {
-        case "male":
-          this.categories_sub_filters = this.male;
-          break;
-
-        case "female":
-          this.categories_sub_filters = this.female;
-          break;
-
-        case "Legal_service":
-          this.categories_sub_filters = this.Legal_service;
-          break;
-
-        case "Professional_services":
-          this.categories_sub_filters = this.Professional_services;
-          break;
-
-        case "Home_service":
-          this.categories_sub_filters = this.Home_service;
-          break;
-
-        case "Financial_service":
-          this.categories_sub_filters = this.Financial_service;
-          break;
-      }
+    searchProducts(data) {
+      this.$store
+        .dispatch("marketSearch/searchProducts", data)
+        .then((res) => {
+          // console.log("categories loaded!");
+        })
+        .catch((err) => {
+          console.log("Error erro!");
+        });
     },
+
+    searchByFilter(filter) {
+      // this.showform = false;
+      console.log("[DEBUG] Filter: ", filter);
+      this.searchProducts({
+        cat_id: filter.cat_id,
+        sub_cat: filter.sub_cat_id,
+        filter_id: filter.id,
+      });
+    },
+
+    searchByDistance(value) {
+      console.log("[DEBUG] PRICE: ", value);
+      console.log("[DEBUG] subcat: ", this.subCategories[0].cat_id);
+      let catId = this.subCategories[0].cat_id;
+      let data = {
+        cat_id: catId,
+        price_range: `${[1000, value]}`,
+      };
+      this.searchProducts(data);
+    },
+
+    // Network search filter
+    getCountries() {
+      console.log("[debug] Networks: ", this.networkSelect);
+      this.$store
+        .dispatch("networkSearch/COUNTRIES")
+        .then((res) => {
+          // console.log("categories loaded!");
+          console.log("countries: ", this.countries);
+        })
+        .catch((err) => {
+          console.log("Error erro!");
+        });
+
+      console.log("zzzz[debug]country: ", this.countries);
+    },
+    getRegions() {
+      console.log("[debug] Networks: ", this.networkSelect);
+      const data = { country_id: this.networkSelect.country };
+      this.searchNetworks(data);
+
+      this.$store
+        .dispatch("networkSearch/REGIONS", data)
+        .then((res) => {
+          console.log("regions: ", this.regions);
+        })
+        .catch((err) => {
+          console.log("Error erro!");
+        });
+      // this.networkSelect = {
+      //   division:null,
+      //   council:null,
+      //   neighbourhood:null
+
+      // }
+    },
+    getDivisions() {
+      console.log("[debug] networks: ", this.networkSelect);
+      const data = { region_id: this.networkSelect.region };
+      this.searchNetworks(data);
+      this.$store
+        .dispatch("networkSearch/DIVISIONS", data)
+        .then((res) => {
+          console.log("divisions: ", this.divisions);
+        })
+        .catch((err) => {
+          console.log("Error erro!");
+        });
+    },
+    getCouncils() {
+      console.log("[debug] networks: ", this.networkSelect);
+      const data = { division_id: this.networkSelect.division };
+      this.searchNetworks(data);
+      this.$store
+        .dispatch("networkSearch/COUNCILS", data)
+        .then((res) => {
+          console.log("councils: ", this.councils);
+        })
+        .catch((err) => {
+          console.log("Error erro!");
+        });
+    },
+    getNeighbourhoods(data) {
+      console.log("[debug] Neighbourhoods: ", this.neighbourhoods);
+      this.searchNetworks(data);
+      this.$store
+        .dispatch("networkSearch/NEIGHBOURHOODS", data)
+        .then((res) => {
+          console.log("Neighbourhoods: ", this.neighbourhoods);
+        })
+        .catch((err) => {
+          console.log("Error erro!");
+        });
+    },
+
+    networkFilterFill() {
+      if (this.networkFilter.region == false) this.getRegions();
+
+      if (
+        this.networkFilter.region == true &&
+        this.networkFilter.division == false &&
+        this.networkFilter.council == false
+      ) {
+        this.getDivisions();
+        this.networkFilter.division = true;
+      } else if (
+        this.networkFilter.division == true &&
+        this.networkFilter.council == false
+      ) {
+        this.getCouncils();
+        this.networkFilter.council = true;
+      } else if (this.networkFilter.council == true) {
+        this.getNeighbourhoods({ council_id: this.networkSelect.council });
+        this.searchNetworks({ council_id: this.networkSelect.council });
+        this.networkFilter.neighbourhood = true;
+      }
+
+      this.networkFilter.region = true;
+    },
+
+    networkFilterReset() {
+      this.searchNetworks({});
+
+      this.networkFilter = {
+        category: false,
+        region: false,
+        division: false,
+        council: false,
+        neighbourhood: false,
+      };
+
+      this.networkSelect = {
+        country: [],
+        region: [],
+        division: [],
+        council: [],
+        neighbourhood: [],
+      };
+    },
+
+    async searchNetworks(data) {
+      this.networkFilter.category = true;
+      await this.$store
+        .dispatch("networkSearch/SEARCH", data)
+        .then((res) => {
+          // console.log("categories loaded!");
+        })
+        .catch((err) => {
+          console.log("Error erro!");
+        });
+    },
+    // END Network search filter
+
+    // All Search
+    allSearchByCat(data) {
+      console.log("the category is: ", data);
+      this.$store
+        .dispatch("allSearch/SEARCH", data)
+        .then((res) => {
+          // console.log("categories loaded!");
+        })
+        .catch((err) => {
+          console.log("Error erro!");
+        });
+    },
+
+    // Not ED code
 
     selectedsidebar() {
       console.log(this.default_category);

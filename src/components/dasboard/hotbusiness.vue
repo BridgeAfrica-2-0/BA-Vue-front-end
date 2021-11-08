@@ -16,11 +16,15 @@
               </div>
             </b-col>
             <b-col md="5" cols="7" lg="7" xl="5" sm="5">
-              <p class="textt">
+              <p class="text">
             <strong class="title"> {{ item.name }} </strong> <br />
                 {{ item.category }}
             <br />
+<<<<<<< HEAD
             {{ item.followers }} {{$t("dashboard.Community")}} <br />
+=======
+            {{ item.followers }} {{ $t("business.community") }} <br />
+>>>>>>> main
 
                 <span class="location">
               <b-icon-geo-alt class="ico"></b-icon-geo-alt>
@@ -58,7 +62,11 @@
                   variant="primary"
                 >
                   <i class="fas fa-user-plus  fa-lg btn-icon "></i>
+<<<<<<< HEAD
                   <span class="btn-com">{{$t("dashboard.Community")}}</span>
+=======
+                  <span class="btn-com">{{ $t("business.community") }}</span>
+>>>>>>> main
                 </b-button>
               </b-col>
 
@@ -77,7 +85,11 @@
                   variant="primary"
                 >
                   <i class="fas fa-envelope   fa-lg btn-icon "></i>
+<<<<<<< HEAD
                   <span class="btn-text">{{$t("dashboard.Message")}}</span>
+=======
+                  <span class="btn-text">{{ $t("business.messages") }}</span>
+>>>>>>> main
                 </b-button>
               </b-col>
 
@@ -96,7 +108,11 @@
                   variant="primary"
                 >
                   <i class="fas fa-map-marked-alt  fa-lg btn-icon "></i>
+<<<<<<< HEAD
                   <span class="btn-text">{{$t("dashboard.Direction")}}</span>
+=======
+                  <span class="btn-text">{{ $t("business.direction") }}</span>
+>>>>>>> main
                 </b-button>
               </b-col>
             </b-row>

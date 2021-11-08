@@ -3,7 +3,11 @@
     <b-card class=" border shadow pr-3" style="height:350px">
       <h6 class="title">
         <fas-icon class="icons" :icon="['fas', 'map-marker-alt']" size="lg" />
+<<<<<<< HEAD
         <b> {{$t("dashboard.GET_DIRECTIONS")}} </b>
+=======
+        <b> {{$t("business.get_direction").toUpperCase()}} </b>
+>>>>>>> main
       </h6>
 
       <div>

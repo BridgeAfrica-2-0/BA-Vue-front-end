@@ -10,8 +10,13 @@
         <span class="float-right">
           <b-dropdown size="sm" variant="outline " class="primary">
             <template class="more" #button-content> </template>
+<<<<<<< HEAD
             <b-dropdown-item> {{$t("dashboard.Edit")}} </b-dropdown-item>
             <b-dropdown-item>{{$t("dashboard.Delete")}}</b-dropdown-item>
+=======
+            <b-dropdown-item> {{$t('business.edit')}} </b-dropdown-item>
+            <b-dropdown-item>{{$t('business.delete')}}</b-dropdown-item>
+>>>>>>> main
           </b-dropdown>
         </span>
         <p class="msg text">
@@ -26,7 +31,11 @@
         </p>
         <b-icon icon="suit-heart" variant="primary" aria-hidden="true"></b-icon>
         23
+<<<<<<< HEAD
         <span @click="showReply" class="primary ml-2 reply"><b>{{$t("dashboard.Reply")}}</b></span>
+=======
+        <span @click="showReply" class="primary ml-2 reply"><b>{{$t('business.reply')}}</b></span>
+>>>>>>> main
         <div v-if="reply">
           <b-row class="mt-2">
             <b-col cols="1">
@@ -37,7 +46,7 @@
               ></b-avatar>
             </b-col>
             <b-col cols="11">
-              <input placeholder="Post a Comment" class="comment" type="text" />
+              <input :placeholder="`${$t('business.post_comment')}`" class="comment" type="text" />
 
               <fas-icon
                 class="primary send-cmt"

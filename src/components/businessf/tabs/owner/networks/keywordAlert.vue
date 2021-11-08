@@ -22,7 +22,6 @@
           <hr />
         </div>
 
-<<<<<<< HEAD
          <div class="">
       <b-container>
         <b-form-group
@@ -68,9 +67,6 @@
 
 
         <div v-for="post in posts" :key="post.id" class="mb-4">
-=======
-        <div v-for="post in allAlerts" :key="post.id" class="mb-4">
->>>>>>> main
           <div class="mb-2">
             <div>
               <b-row class="px-md-3">
@@ -78,21 +74,13 @@
                   <b-avatar
                     class="d-inline-block mt-1"
                     variant="info"
-<<<<<<< HEAD
                     :src="post.logo_path"
-=======
-                    :src="post.image"
->>>>>>> main
                     size="3.5rem"
                   ></b-avatar>
                 </b-col>
                 <b-col cols="10" md="11" class="pt-2">
                   <h5 class="m-0 font-weight-bolder">
-<<<<<<< HEAD
                     {{post.network_name}}
-=======
-                    {{ post.name }}
->>>>>>> main
                     <span class="float-right">
                       <b-dropdown
                         size="lg"
@@ -105,49 +93,25 @@
                           ><span class="sr-only">Settings</span>
                         </template>
 
-<<<<<<< HEAD
                         <b-dropdown-item  href="#" @click="approvePost(post.id)">
                           Approved
                         </b-dropdown-item>
                         <b-dropdown-item href="#" @click="unApprovePost(post.id)">
                           decline
-=======
-                        <b-dropdown-item
-                          @click="approved(post.id)"
-                          :loading="load"
-                        >
-                          Approved
-                        </b-dropdown-item>
-                        <b-dropdown-item
-                          @click="unapproved(post.id)"
-                          :loading="load"
-                        >
-                          Unapproved
->>>>>>> main
                         </b-dropdown-item>
                       </b-dropdown>
                     </span>
                   </h5>
                   <p>
-<<<<<<< HEAD
                   {{  moment(post.created_at).fromNow() }}
                     <span class="text-primary">Commented on a Post</span>
-=======
-                    {{ post.time }} -
-                    <span class="text-primary">{{ post.comment }}</span>
->>>>>>> main
                   </p>
                 </b-col>
               </b-row>
               <b-row>
                 <b-col cols="12" class="mt-2">
-<<<<<<< HEAD
                   <p class="text-justify text"> 
                     {{post.content}}
-=======
-                  <p class="text-justify text">
-                    {{ post.description }}
->>>>>>> main
                   </p>
                 
                    <div class="" v-if="post.media.length">
@@ -184,7 +148,6 @@
 </template>
 
 <script>
-<<<<<<< HEAD
 import axios from "axios"
 import moment from "moment"
 
@@ -318,52 +281,6 @@ export default {
   computed: {
    
   }
-=======
-import { mapActions, mapGetters } from "vuex";
-export default {
-  name: "keywordAlert",
-  data: () => ({
-    load: null,
-    networkId: ''
-  }),
-  computed: {
-    ...mapGetters({
-      allAlerts: "networkSetting/allAlerts",
-      getNetwork: "networkSetting/getNetwork",
-    }),
-  },
-  methods: {
-    ...mapActions({
-      getAlerts: "networkSetting/getAlerts",
-      approvedAlerts: "networkSetting/approvedAlerts",
-      unapprovedAlerts: "networkSetting/unapprovedAlerts",
-    }),
-
-    approved(id) {
-      this.load = true;
-      this.approvedAlerts(id)
-        .then(() => {
-          this.load = false;
-        })
-        .catch((err) => {
-          this.load = true;
-          console.log(err);
-        });
-    },
-
-    unapproved(id) {
-     this.load = true;
-      this.unapprovedAlerts(id)
-        .then(() => {
-          this.load = false;
-        })
-        .catch((err) => {
-          this.load = true;
-          console.log(err);
-        });
-    },
-  },
->>>>>>> main
 };
 </script>
 

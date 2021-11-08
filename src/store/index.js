@@ -8,7 +8,7 @@ import allSearch from "./allSearch";
 import ProfileAndBusinessDetails from "./ProfileAndBusinessDetails";
 import networkProfileCommunity from "./networkProfileCommunity";
 import networkDetails from "./networkDetails";
-import dashboardcommunity from "./dashboardcommunity";
+import dashboardCommunity from "./dashboardcommunity";
 import NetworkSettings from "./NetworkSettings";
 import checkout from "./checkout";
 import businessFollowers from "./businessFollowers";

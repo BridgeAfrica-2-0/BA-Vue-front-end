@@ -14,7 +14,7 @@
 
     <div class="mt-3 d-block d-md-none" v-if="selectedIdd == '5'">
       <KeywordAlert />
-    </div>
+    </div>  
 
     <div class="mt-3 d-block d-md-none" v-if="selectedIdd == '6'">
       <div class="d-block d-md-none" style="margin-top: 30px">
@@ -46,7 +46,7 @@
       <b-col cols="10">
         <div class="bv-example-row">
           <div>
-            <b-tabs pills v-model="tabIndex" vertical class="itzlala" nav-wrapper-class="w-15">
+            <b-tabs  lazy  pills v-model="tabIndex" vertical class="itzlala" nav-wrapper-class="w-15">
               <b-tab title="Notifications">
                 <b-card-text> <Notification /> </b-card-text
               ></b-tab>

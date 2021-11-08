@@ -51,7 +51,7 @@ export default {
 
     //all keyword alerts
     allAlerts(state) {
-      return state.keywordAlerts;
+      return state.keywordAlerts; 
     },
 
     //all notifications
@@ -257,6 +257,16 @@ export default {
 
       commit("setPendingPost", res.data);
     },
+
+    loadMore({ commit }, url) {
+
+      return axios.get(url)
+        .then((data) => {
+          return data;
+        });
+
+    },
+  
 
     //approve pending post
     async approvedPost({ commit }, payload) {

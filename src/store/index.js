@@ -11,6 +11,7 @@ import networkProfileCommunity from "./networkProfileCommunity";
 import networkDetails from "./networkDetails";
 import dashboardcommunity from "./dashboardcommunity";
 import NetworkSettings from "./NetworkSettings";
+import networkSetting from "./networkSetting";
 import checkout from "./checkout";
 import businessFollowers from "./businessFollowers";
 import hotbusiness from "./hotbusiness";   
@@ -31,8 +32,10 @@ import { social } from "./social";
 import axios from "axios";
 Vue.use(Vuex);
 
- axios.defaults.baseURL = process.env.VUE_APP_API_URL;  
- //axios.defaults.baseURL = "http://edson.maxinemoffett.com/api/v1"
+  // axios.defaults.baseURL = process.env.VUE_APP_API_URL;  
+  axios.defaults.baseURL = "http://test.maxinemoffett.com/api/v1"
+
+ //axios.defaults.baseURL= "https://df36-154-72-167-91.ngrok.io/api/v1/"
 
 export default new Vuex.Store({
   modules: {
@@ -45,8 +48,9 @@ export default new Vuex.Store({
     networkProfileFeedback,
     hotbusiness,
     NetworkSettings,
+    networkSetting,
     profile,
-    follower,
+    follower, 
     search,
     UserProfileOwner,
     checkout,

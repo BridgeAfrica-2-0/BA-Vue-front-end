@@ -127,10 +127,10 @@
     <div class="body">
       <b-row>
         <b-col cols="12" class="p-0">
-          <b-tabs lazy content-class="mt-3 p-0" fill pills>
+          <b-tabs lazy content-class="mt-3 p-0" fill pills> 
             <b-tab  title="Home"><HomePage /></b-tab>
             <b-tab title="About"><About /></b-tab>
-            <b-tab title="Media"><Media /></b-tab>
+            <b-tab title="Media"><Media type="business" /></b-tab>
             <b-tab title="Market"><MarketPlace /></b-tab>
             <b-tab title="Networks"><Networks /></b-tab>
             <b-tab title="Community"><Community /></b-tab>
@@ -144,7 +144,7 @@
 <script>
 import HomePage from "../businessf/tabs/businessHome";
 import About from "./tabs/about";
-import Media from "./tabs/media";
+import Media from '@/components/owner/tabs/media';
 import MarketPlace from "./tabs/marketPlace";
 import Community from "./tabs/memberNetwork";
 import Networks from "./tabs/networks";

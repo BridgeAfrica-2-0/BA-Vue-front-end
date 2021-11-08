@@ -53,4 +53,19 @@ export default {
     left: -20px;
   }
 }
+.main{
+    width: 100%;
+    overflow-x: hidden !important;
+}
+  
+</style>
+
+
+<style >
+
+.main{
+    width: 100%;
+    overflow-x: hidden !important;
+}
+  
 </style>

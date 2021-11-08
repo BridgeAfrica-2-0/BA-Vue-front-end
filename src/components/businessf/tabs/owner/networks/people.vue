@@ -1,15 +1,10 @@
 <template>
   <div>
     <div style="overflow-y: scroll;" class="s-cardd">
-
       <div v-for="people in peoples" :key="people.id" class="people-style border shadow">
         <b-row class="mb-1">
           <b-col md="3" cols="4" lg="3" class="my-auto">
-            <b-avatar
-              class="p-avater"
-              variant="primary"
-              :src="people.profile_picutre"
-            ></b-avatar>
+            <b-avatar class="p-avater" variant="primary" :src="people.profile_picutre"></b-avatar>
           </b-col>
 
           <b-col md="8" cols="8" lg="8">
@@ -20,18 +15,12 @@
                     <b-row>
                       <b-col md="6" lg="6" cols="6" sm="6" class="mt-lg-2">
                         <div class="mt-2 mt-lg-0 mt-xl-0 username">
-                          <b> {{people.name}} </b>
+                          <b> {{ people.name }} </b>
                         </div>
                       </b-col>
 
-                      <b-col
-                        md="6"
-                        lg="6"
-                        cols="6"
-                        sm="6"
-                        class="mt-3 mt-lg-2 mt-xl-2"
-                      >
-                        <h6 class="follower">{{people.followers}} Community</h6>
+                      <b-col md="6" lg="6" cols="6" sm="6" class="mt-3 mt-lg-2 mt-xl-2">
+                        <h6 class="follower">{{ people.followers }} Community</h6>
                       </b-col>
                     </b-row>
                   </div>
@@ -69,9 +58,14 @@
                             shadow
                             mr-lg-3 mr-xl-3
                           "
+                          :class="people.is_follow === 0 && 'u-btn'"
                           variant="primary"
+                          @click="handleFollow(people)"
                         >
-                          <i class="fas fa-user-plus fa-lg btn-icon"></i>
+                          <i
+                            class="fas fa-lg btn-icon"
+                            :class="people.is_follow === 0 ? 'fa-user-minus' : 'fa-user-plus'"
+                          ></i>
                           <span class="btn-com">Community</span>
                         </b-button>
                       </b-col>
@@ -83,16 +77,32 @@
           </b-col>
         </b-row>
       </div>
-
-      
     </div>
     <!-- {{peoples}} -->
   </div>
 </template>
 
 <script>
+import axios from 'axios';
 export default {
-  props: ["peoples"],
+  props: ['peoples'],
+  methods: {
+    async handleFollow(user) {
+      const uri = user.is_follow === 0 ? `/follow-community` : `/unfollow`;
+      const nextFollowState = user.is_follow === 0 ? 1 : 0;
+      const data = {
+        id: user.id,
+        type: 'user',
+      };
+
+      await axios
+        .post(uri, data)
+        .then(response => {
+          user.is_follow = nextFollowState;
+        })
+        .catch(err => console.log(err));
+    },
+  },
 };
 </script>
 
@@ -150,6 +160,10 @@ export default {
 
 .btn {
   border-radius: 5px;
+}
+
+.u-btn {
+  filter: grayscale(0.6);
 }
 
 .flexx {

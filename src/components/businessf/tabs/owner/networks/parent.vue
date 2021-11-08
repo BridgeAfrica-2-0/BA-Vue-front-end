@@ -2,25 +2,10 @@
   <div v-if="networkInfo">
     <b-card title="" class="">
       <b-container class="a-center">
-        <!-- :src="require('@/assets/img/mayor.jpg')" -->
-        <b-avatar
-          :src="networkInfo.image"
-          variant="primary"
-          square
-          rounded
-          class="network-logo"
-        >
-        </b-avatar>
-
-        <b-icon
-          icon="camera"
-          class="cursor-pointer network-avatar-icon"
-          v-b-modal.modal-4
-        ></b-icon>
+        <b-avatar :src="networkInfo.image" variant="primary" square rounded class="network-logo"> </b-avatar>
+        <b-icon icon="camera" class="cursor-pointer network-avatar-icon" v-b-modal.modal-4></b-icon>
       </b-container>
-
       <br />
-
       <b-container>
         <b-row>
           <b-col cols="6">
@@ -29,21 +14,13 @@
             </h6>
           </b-col>
           <b-col cols="6">
-            <b-button
-              variant="primary"
-              size="sm"
-              @click="addNetwork"
-              style="width: 120px"
-              class="a-center"
-            >
+            <b-button variant="primary" size="sm" @click="addNetwork" style="width: 120px" class="a-center">
               <b-icon icon="pencil"></b-icon> Edit
             </b-button>
           </b-col>
         </b-row>
       </b-container>
-
       <br />
-
       <b-card-text class="text-left">
         <b-container>
           <b-row>
@@ -66,18 +43,10 @@
         </b-container>
         <h6 class="mt-2 font-weight-bolder title">About</h6>
         <p class="text-justify text">
-          <span v-if="networkInfo.description.length < 130">{{
-            networkInfo.description
-          }}</span>
-          <span v-else>{{
-            networkInfo.description.substring(0, 130) + moreText
-          }}</span>
+          <span v-if="networkInfo.description.length < 130">{{ networkInfo.description }}</span>
+          <span v-else>{{ networkInfo.description.substring(0, 130) + moreText }}</span>
           <span v-if="moreText === '...'" class="d-inline-block float-right">
-            <a
-              @click="moreText = networkInfo.description"
-              style="cursor: pointer"
-              >lire la Suite</a
-            >
+            <a @click="moreText = networkInfo.description" style="cursor: pointer">lire la Suite</a>
           </span>
         </p>
       </b-card-text>
@@ -95,13 +64,7 @@
             label-class="font-weight-bold pt-0"
             class="mb-0"
           >
-            <b-form-input
-              id="network_name"
-              v-model="updateNetwork_form.name"
-              name="name"
-              type="text"
-              required
-            >
+            <b-form-input id="network_name" v-model="updateNetwork_form.name" name="name" type="text" required>
             </b-form-input>
           </b-form-group>
 
@@ -130,13 +93,7 @@
             label-class="font-weight-bold pt-0"
             class="mb-0"
           >
-            <b-form-input
-              id="email"
-              v-model="updateNetwork_form.email"
-              name="email"
-              type="email"
-              required
-            >
+            <b-form-input id="email" v-model="updateNetwork_form.email" name="email" type="email" required>
             </b-form-input>
           </b-form-group>
 
@@ -181,13 +138,7 @@
             label-class="font-weight-bold pt-0"
             class="mb-0"
           >
-            <b-form-input
-              id="network_name"
-              v-model="updateNetwork_form.address"
-              name="address"
-              type="text"
-              required
-            >
+            <b-form-input id="network_name" v-model="updateNetwork_form.address" name="address" type="text" required>
             </b-form-input>
           </b-form-group>
 
@@ -198,23 +149,12 @@
             label-class="font-weight-bold pt-0"
             class="mb-0"
           >
-            <b-form-checkbox
-              v-model="updateNetwork_form.allow_business"
-              switch
-              value="1"
-              unchecked-value="0"
-            >
+            <b-form-checkbox v-model="updateNetwork_form.allow_business" switch value="1" unchecked-value="0">
             </b-form-checkbox>
           </b-form-group>
 
-          <b-button
-            class="mt-2"
-            style="float: right"
-            variant="primary"
-            @click="updateNetwork()"
-          >
-            <b-spinner v-if="SPupdateN" small type="grow"></b-spinner> Update
-            Network
+          <b-button class="mt-2" style="float: right" variant="primary" @click="updateNetwork()">
+            <b-spinner v-if="SPupdateN" small type="grow"></b-spinner> Update Network
           </b-button>
         </b-form>
         <FlashMessage />
@@ -224,22 +164,12 @@
     <b-modal hide-footer id="modal-4" title="Upload Profile Picture">
       <div class="w3-container">
         <div class="row pb-3">
-          <div
-            class="col-sm-6 text-center"
-            style="border-right: 1px solid #dee2e6"
-          >
+          <div class="col-sm-6 text-center" style="border-right: 1px solid #dee2e6">
             <h1>
               <fas-icon class="primary" :icon="['fas', 'upload']" />
             </h1>
             <div>
-              <input
-                type="file"
-                id="file"
-                ref="file"
-                @change="handleFileUpload"
-                name="img"
-                accept="image/*"
-              />
+              <input type="file" id="file" ref="file" @change="handleFileUpload" name="img" accept="image/*" />
             </div>
             <h4>Upload a New picture</h4>
           </div>
@@ -256,12 +186,7 @@
         </div>
         <FlashMessage />
       </div>
-      <b-button
-        style="float: right"
-        class="mt-2"
-        variant="primary"
-        @click="submitFile"
-      >
+      <b-button style="float: right" class="mt-2" variant="primary" @click="submitFile">
         <b-spinner v-if="SPupdateN" small type="grow"></b-spinner> Upload
       </b-button>
     </b-modal>
@@ -272,10 +197,10 @@
 </template>
 
 <script>
-import SidebarCommunity from "@/components/businessf/tabs/owner/networks/sidebarcommunity";
+import SidebarCommunity from '@/components/businessf/tabs/owner/networks/sidebarcommunity';
 
 export default {
-  name: "parent",
+  name: 'parent',
 
   data() {
     return {
@@ -283,9 +208,9 @@ export default {
       networkShow: true,
       showModal: false,
       SPupdateN: false,
-      moreText: "...",
-      fileToUpload: "",
-      selectedImagePrv: "",
+      moreText: '...',
+      fileToUpload: '',
+      selectedImagePrv: '',
       updateNetwork_form: null,
       overlay: false,
     };
@@ -307,7 +232,7 @@ export default {
   },
 
   methods: {
-    init: async function () {
+    init: async function() {
       this.url = this.$route.params.id;
       await this.getNetworkInfo();
     },
@@ -327,40 +252,40 @@ export default {
         allow_business: this.networkInfo.allow_business,
       };
       console.log(this.networkInfo[0]);
-      console.log("hello");
+      console.log('hello');
       this.showModal = !this.showModal;
     },
 
     nFormatter(num) {
       if (num >= 1000000000) {
-        return (num / 1000000000).toFixed(1).replace(/\.0$/, "") + "G";
+        return (num / 1000000000).toFixed(1).replace(/\.0$/, '') + 'G';
       }
       if (num >= 1000000) {
-        return (num / 1000000).toFixed(1).replace(/\.0$/, "") + "M";
+        return (num / 1000000).toFixed(1).replace(/\.0$/, '') + 'M';
       }
       if (num >= 1000) {
-        return (num / 1000).toFixed(1).replace(/\.0$/, "") + "K";
+        return (num / 1000).toFixed(1).replace(/\.0$/, '') + 'K';
       }
       return num;
     },
 
     getNetworkInfo() {
       this.$store
-        .dispatch("networkProfile/getnetworkInfo", this.url)
+        .dispatch('networkProfile/getnetworkInfo', this.url)
         .then(() => {
-          console.log("ohh yeah");
+          console.log('ohh yeah');
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
     },
 
-    updateNetwork: function () {
+    updateNetwork: function() {
       this.SPupdateN = true;
-      console.log("this.updateNetwork_form", this.updateNetwork_form);
+      console.log('this.updateNetwork_form', this.updateNetwork_form);
       this.$store
-        .dispatch("networkProfile/updateNetwork", {
-          path: "network/" + this.url + "/about/update",
+        .dispatch('networkProfile/updateNetwork', {
+          path: 'network/' + this.url + '/about/update',
           formData: this.updateNetwork_form,
         })
         .then(({ data }) => {
@@ -368,16 +293,16 @@ export default {
           this.SPupdateN = false;
           this.getNetworkInfo();
           this.flashMessage.show({
-            status: "success",
-            message: "Changes Made Successfuly",
+            status: 'success',
+            message: 'Changes Made Successfuly',
           });
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
           this.SPupdateN = false;
           this.flashMessage.show({
-            status: "error",
-            message: "Unable To Make Changes ",
+            status: 'error',
+            message: 'Unable To Make Changes ',
           });
         });
     },
@@ -385,12 +310,12 @@ export default {
     submitFile() {
       this.SPupdateN = !this.SPupdateN;
       let formData = new FormData();
-      formData.append("image", this.fileToUpload);
-      console.log("this.fileToUpload", this.fileToUpload);
-      console.log("formData", formData);
+      formData.append('image', this.fileToUpload);
+      console.log('this.fileToUpload', this.fileToUpload);
+      console.log('formData', formData);
       this.$store
-        .dispatch("networkProfile/submitFile", {
-          path: "network/" + this.url + "/about/update/logo",
+        .dispatch('networkProfile/submitFile', {
+          path: 'network/' + this.url + '/about/update/logo',
           formData: formData,
         })
         .then(({ data }) => {
@@ -398,16 +323,16 @@ export default {
           this.getNetworkInfo();
           this.SPupdateN = !this.SPupdateN;
           this.flashMessage.show({
-            status: "success",
-            message: "Image Uploaded Successfuly",
+            status: 'success',
+            message: 'Image Uploaded Successfuly',
           });
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
           this.SPupdateN = !this.SPupdateN;
           this.flashMessage.show({
-            status: "error",
-            message: "Unable To Uploaded Image ",
+            status: 'error',
+            message: 'Unable To Uploaded Image ',
           });
         });
     },

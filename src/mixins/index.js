@@ -57,7 +57,6 @@ export const search = {
   }),
 
   destroyed() {
-    console.log("destroy component")
     this.page(1);
     this.$store.commit('search/RESET_RESULT');
     window.removeEventListener('scroll', this.onscroll)
@@ -115,7 +114,7 @@ export const commentMixinsBuisness = {
     onLike: async function () {
       const request = await this.$repository.share.commentLike({
         comment: this.comment.comment_id,
-        network: ("search" != this.$route.name) ? this.$route.params.id : this.profile.id,
+        network: this.profile.id,
       });
 
       if (request.success)
@@ -158,7 +157,7 @@ export const commentMixinsBuisness = {
         comment: this.comment.comment_id,
         data: {
           comment: this.text,
-          networkId: ("search" != this.$route.name) ? this.$route.params.id : this.profile.id,
+          networkId:this.profile.id,
         },
       });
 
@@ -221,7 +220,7 @@ export const commentMixins = {
     onLike: async function () {
       const request = await this.$repository.share.commentLike({
         comment: this.comment.comment_id,
-        network: this.$route.params.id,
+        network: this.profile.id,
       });
 
       if (request.success)
@@ -257,7 +256,7 @@ export const commentMixins = {
         comment: this.comment.comment_id,
         data: {
           comment: this.text,
-          networkId: this.$route.params.id,
+          networkId: this.profile.id,
         },
       });
 

@@ -48,7 +48,6 @@ export default new Vuex.Store({
     businessBlocking,
     dashboard,
     businessGeneral,
-    market,
     ProfileAndBusinessDetails,
     businessRole,
     businessAccountType,

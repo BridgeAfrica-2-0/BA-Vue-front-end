@@ -13,8 +13,8 @@
             <template class="more" #button-content>
              
             </template>
-            <b-dropdown-item> Edit </b-dropdown-item>
-            <b-dropdown-item>Delete</b-dropdown-item>
+            <b-dropdown-item> {{$t("search.Edit")}} </b-dropdown-item>
+            <b-dropdown-item>{{$t("search.Delete")}}</b-dropdown-item>
           </b-dropdown>
         </span>
         <p class="msg text">

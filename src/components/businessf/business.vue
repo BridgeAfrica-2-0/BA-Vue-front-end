@@ -1,11 +1,11 @@
 <template>
-  <div class="main">
+  <div class="main"> 
     <div class="splide" v-if="!business_info.cover.length == 0">
       <splide :options="options" class="banner r-image">
         <splide-slide v-for="cover in business_info.cover" :key="cover.id">
           <img :src="cover.media_url" class="r-image" />
         </splide-slide>
-      </splide>
+      </splide>  
     </div>
 
     <div v-else class="splide">
@@ -60,9 +60,10 @@
             <span>Direction</span></b-button
           >
           <b-dropdown
-            class="ml-2  options dot-btn mt-2 mt-sm-2 mt-md-0 "
+            class="ml-2   dot-btn mt-2 mt-sm-2 mt-md-0 "
             no-caret
-            variant="outline-primary"
+            dropleft
+            variant="link"
           >
             <template #button-content>
               <b-icon-three-dots></b-icon-three-dots>
@@ -126,8 +127,8 @@
     <div class="body">
       <b-row>
         <b-col cols="12" class="p-0">
-          <b-tabs content-class="mt-3 p-0" fill pills>
-            <b-tab title="Home"><HomePage /></b-tab>
+          <b-tabs lazy content-class="mt-3 p-0" fill pills>
+            <b-tab  title="Home"><HomePage /></b-tab>
             <b-tab title="About"><About /></b-tab>
             <b-tab title="Media"><Media /></b-tab>
             <b-tab title="Market"><MarketPlace /></b-tab>
@@ -190,17 +191,16 @@ export default {
       return this.$store.state.businessOwner.businessInfo;
     },
   },
+  created(){
+    this.url_data = this.$route.params.id;
+     this.businessInfo();
+  },
 
   mounted() {
-    this.url_data = this.$route.params.id;
+    
 
     console.log(this.url_data);
 
-    this.businessInfo();
-
-    this.CommunityBusiness();
-
-    this.CommunityPeople();
 
     this.businessCommunityTotal();
     this.ownerPost();
@@ -217,28 +217,9 @@ export default {
         });
     },
 
-    CommunityBusiness() {
-      this.$store
-        .dispatch("businessOwner/CommunityBusiness", this.url_data)
-        .then(() => {
-          console.log("hey yeah");
-        })
-        .catch((err) => {
-          console.log({ err: err });
-        });
-    },
+  
 
-    CommunityPeople() {
-      this.$store
-        .dispatch("businessOwner/CommunityPeople", this.url_data)
-        .then(() => {
-          console.log("hey yeah");
-        })
-        .catch((err) => {
-          console.log({ err: err });
-        });
-    },
-
+   
     businessCommunityTotal() {
       this.$store
         .dispatch("businessOwner/businessCommunityTotal", this.url_data)

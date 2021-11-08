@@ -367,27 +367,6 @@ import Images from "./images";
 
 export default {
   components: {Images},
-  methods: {
-
-
-      hidealbum(){
-
-         this.showalbum=false;
-      },
-
-
-
-       showlbum(){
-
-         this.showalbum=true;
-      },
-
-
-      
-    onClick(i) {
-      this.index = i;
-    }
-  },
   data: function() {
       
     return {
@@ -430,7 +409,21 @@ export default {
       ],
       index: 0
     };
-  }
+  },
+  methods: {
+    hidealbum() {
+      this.showalbum = false;
+    },
+
+    showlbum() {
+      this.showalbum = true;
+    },
+
+    onClick(i) {
+      this.index = i;
+    }
+  },
+  
 };
 </script>
 

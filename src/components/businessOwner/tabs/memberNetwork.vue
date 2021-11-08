@@ -1,30 +1,34 @@
 <template>
   <div class="mt-3">
-    <b-container fluid>
-      <b-card class="f-left">
+    <div class="">
+      <b-card
+        class="f-left"
+        style="padding:0px; margin-left: -12px;
+    margin-right: -12px;"
+      >
+        <b-tabs lazy  pills content-class="mt-3 f-left">
+          <b-tab title="People" active> <People /> </b-tab>
+  
+          <b-tab title="Businesses" > <Businesses /> </b-tab>
 
-
-        <b-tabs  pills content-class="mt-3 f-left">
-          <b-tab title="People" active> <People />  </b-tab>
-
-          <b-tab title="Businesses"> <Businesses /> </b-tab>
+           <b-tab title="Network" > <Network /> </b-tab>
         </b-tabs>
-
-
       </b-card>
-    </b-container>
+    </div>
   </div>
 </template>
 
 <script>
 import People from "./people/people";
 import Businesses from "./businesses/businesses";
+import Network from "./network/network";
 
 export default {
   name: "memberNetwork",
   components: {
     People,
-    Businesses
+    Businesses,
+    Network,
   },
   data() {
     return {
@@ -43,6 +47,31 @@ export default {
       ]
     };
   },
+
+   methods:{
+       
+       community() {
+         
+      this.$store
+        .dispatch("profile/profilecommunity", null)
+        .then(() => {
+          console.log("hey yeah");
+        })
+        .catch(err => {
+          console.log({ err: err });
+        });
+    },
+
+  },
+  mounted() {
+      this.isLoading = true;
+
+     
+    console.log("Load User Profile Community start+++++++");
+    this.community();
+    
+    },
+
   computed: {
     rows() {
       return this.items.length;
@@ -80,7 +109,6 @@ hr {
 }
 
 .card-body{
-  padding-left: 0px;
-  padding-right: 0px;
+  padding: 2px;
 }
 </style>

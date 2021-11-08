@@ -3,29 +3,61 @@
     block
     size="sm"
     id="btn-bg"
-    class="btn btn-bg flexx pobtn mt-4 p-3 btn-primary btn-sm btn-block"
+    :class="styleClass"
     variant="primary"
+    :disabled="isDisabled"
   >
-    <i :class="fas"></i>
-    <span class="btn-com">{{ title }}</span>
+    <b-spinner small v-if="loading"></b-spinner>
+    <i :class="fas" v-if="fas && !loading"></i>
+    <span class="btn-com" v-if="!loading">{{ title }}</span>
   </b-button>
 </template>
 <script>
 export default {
+  data: () => ({
+    isDisabled: false,
+  }),
+
+  created() {
+    this.isDisabled = this.disabled;
+  },
+  watch: {
+    loading(value) {
+      this.isDisabled = value ? true : false;
+    },
+  },
+
   props: {
     title: {
       required: true,
-      type: String
+      type: String,
+    },
+    styleClass: {
+      default: "btn btn-bg flexx pobtn mt-4 p-3 btn-primary btn-sm btn-block",
+      type: String,
+    },
+    disabled: {
+      default: function () {
+        return false;
+      },
+    },
+    loading: {
+      default: function () {
+        return false;
+      },
     },
     fas: {
-      required: true,
       type: String,
+      default: "",
     },
   },
 };
 </script>
 
 <style scoped>
+.btn-com {
+  font-size: 17px;
+}
 #btn-bg {
   background-color: #e75c18 !important;
   color: white !important;

@@ -107,7 +107,7 @@
       </div>
       <b-row>
         <b-col cols="12">
-          <infinite-loading @infinite="infiniteHandler">
+          <infinite-loading @infinite="infiniteHandler" ref="infiniteHandler" :identifier="infiniteId">
             <div class="text-red" slot="no-more">No More Request</div>
             <div class="text-red" slot="no-results">No More Request</div>
           </infinite-loading>

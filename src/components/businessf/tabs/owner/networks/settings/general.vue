@@ -19,7 +19,7 @@
               :aria-describedby="ariaDescribedby"
             ></b-form-radio-group>
           </b-form-group>
-          <div class="mt-3">{{ privacy }}</div>
+          <!-- <div class="mt-3">{{ privacy }}</div> -->
         </b-form-group>
       </b-container>
       <hr />
@@ -43,7 +43,7 @@
               @change="check"
             ></b-form-radio-group>
           </b-form-group>
-          <div class="mt-3">{{ permissions }}</div>
+          <!-- <div class="mt-3">{{ permissions }}</div> -->
         </b-form-group>
       </b-container>
 
@@ -70,7 +70,7 @@
           >
           </b-form-checkbox-group>
         </b-form-group>
-        <div class="mt-3">{{ approval }}</div>
+        <!-- <div class="mt-3">{{ approval }}</div> -->
       </b-container>
       <hr />
     </div>
@@ -117,10 +117,6 @@ export default {
         text: "Member",
         value: "member",
       },
-      {
-        text: "Editor And Member",
-        value: "editor and member",
-      },
     ],
     lists: [
       {
@@ -133,11 +129,6 @@ export default {
         value: "editor and admin approval",
         disabled: false,
       },
-      {
-        text: "Approve only member post",
-        value: "only member post approval",
-        disabled: false,
-      },
     ],
   }),
 
@@ -145,6 +136,14 @@ export default {
     ...mapGetters({
       getNetwork: "networkSetting/getNetwork",
     }),
+    networkInfo() {
+      return this.$store.state.networkSetting.networks;
+    },
+  },
+
+  mounted() {
+    this.url = this.$route.params.id;
+    this.getNetworkInfo();
   },
 
   methods: {
@@ -156,20 +155,27 @@ export default {
       if (this.permissions == "admin") {
         this.lists[0].disabled = true;
         this.lists[1].disabled = true;
-        this.lists[2].disabled = true;
       } else if (this.permissions == "editor") {
         this.lists[0].disabled = false;
         this.lists[1].disabled = false;
-        this.lists[2].disabled = true;
       } else if (this.permissions == "member") {
         this.lists[0].disabled = true;
         this.lists[1].disabled = true;
-        this.lists[2].disabled = false;
-      } else if (this.permissions == "editor and member") {
-        this.lists[0].disabled = false;
-        this.lists[1].disabled = false;
-        this.lists[2].disabled = true;
       }
+    },
+
+    getNetworkInfo() {
+      this.laod = true;
+      this.$store
+        .dispatch("networkSetting/getNetworks", this.url)
+        .then(() => {
+          console.log('getNetworkInfo');
+          this.laod = false;
+        })
+        .catch(err => {
+          console.log({ err: err });
+          this.laod = false;
+        });
     },
 
     save() {

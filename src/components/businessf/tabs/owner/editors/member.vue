@@ -180,7 +180,7 @@
         </b-skeleton-wrapper>
       </b-col>
       <b-col col="12">
-        <infinite-loading @infinite="infiniteHandler">
+        <infinite-loading @infinite="infiniteHandler" ref="infiniteHandler" :identifier="infiniteId">
           <div class="text-red" slot="no-more">No More Request</div>
           <div class="text-red" slot="no-results">No More Request</div>
         </infinite-loading>
@@ -327,7 +327,7 @@ export default {
       this.page -= 1;
       console.log("searching...");
       console.log(this.searchTitle);
-      this.infiniteHandler();
+      this.$refs.infiniteLoading('$InfiniteLoading:reset');
       this.getAdmins();
       this.getBusiness();
     },

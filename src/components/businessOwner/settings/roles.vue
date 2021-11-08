@@ -56,7 +56,7 @@
       <br />
       <p class="text">
         Editor can create posts and send messages through inbox, They can
-        respond to and delete comments, Approve posts, view insights
+        respond to and delete comments, Approve posts, view insights.
       </p>
     </b-container>
 

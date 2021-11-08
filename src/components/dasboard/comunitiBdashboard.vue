@@ -9,22 +9,14 @@
         <span>
           <h6 class="title">
             <fas-icon class="icons" :icon="['fas', 'users']" size="lg" />
-<<<<<<< HEAD
             <b> {{$t("dashboard.COMMUNITY")}} </b> <span class="h4-color"> {{totalcommunity.total}} </span>
-=======
-            <b>  {{ $t("business.community").toUpperCase() }} </b> <span class="h4-color"> {{totalcommunity.total}} </span>
->>>>>>> main
           </h6>
         </span>
 
         <b-tabs lazy pills content-class="mt-3  f-left ">
           <b-tab active>
             <template slot="title">
-<<<<<<< HEAD
               {{$t("dashboard.People")}}
-=======
-              {{ $t("business.people") }}
->>>>>>> main
               <span class="spa-color">
                 {{peoplecommunity.total_people}} 
               </span>
@@ -37,11 +29,7 @@
 
                     <b-tab active>
                       <template slot="title">
-<<<<<<< HEAD
                         {{$t("dashboard.Followers")}}
-=======
-                        {{ $t("business.followers") }}
->>>>>>> main
                         <span class="spa-color">
                           {{peoplecommunity.total_followers}}
                         </span>
@@ -60,11 +48,7 @@
 
                     <b-tab>
                       <template slot="title">
-<<<<<<< HEAD
                         {{$t("dashboard.Following")}}
-=======
-                        {{ $t("business.following") }}
->>>>>>> main
                         <span class="spa-color">
                           {{peoplecommunity.total_following}} 
                         </span>
@@ -88,11 +72,7 @@
 
           <b-tab>
             <template slot="title">
-<<<<<<< HEAD
               {{$t("dashboard.Businesses")}}
-=======
-              {{ $t("business.businesses") }}
->>>>>>> main
               <span class="spa-color">
                 {{ count(businesscommunity.total_Business) }}
               </span>
@@ -102,11 +82,7 @@
               <b-tabs lazy fill pills content-class="mt-3  f-left m-up checkcheck">
                 <b-tab active>
                   <template slot="title">
-<<<<<<< HEAD
                     {{$t("dashboard.Followers")}}
-=======
-                     {{ $t("business.followers") }}
->>>>>>> main
                     <span class="spa-color">
                       {{ count(businesscommunity.total_followers) }}
                     </span>
@@ -125,11 +101,7 @@
 
                 <b-tab>
                   <template slot="title">
-<<<<<<< HEAD
                     {{$t("dashboard.Following")}}
-=======
-                    {{ $t("business.following") }}
->>>>>>> main
                     <span class="spa-color">
                      {{businesscommunity.totat_following}}
                     </span>
@@ -153,11 +125,7 @@
 
           <b-tab>
             <template slot="title">
-<<<<<<< HEAD
               {{$t("dashboard.Network")}}
-=======
-             {{ $t("business.network") }}
->>>>>>> main
               <span class="spa-color">
                0
               </span>
@@ -167,11 +135,7 @@
               <b-tabs lazy fill pills content-class="mt-3  f-left m-up checkcheck">
                 <b-tab active>
                   <template slot="title">
-<<<<<<< HEAD
                     {{$t("dashboard.Followers")}}
-=======
-                   {{ $t("business.followers ") }}
->>>>>>> main
                     <span class="spa-color">
                      0
                     </span>
@@ -190,11 +154,7 @@
 
                 <b-tab>
                   <template slot="title">
-<<<<<<< HEAD
                     {{$t("dashboard.Following")}}
-=======
-                    {{ $t("business.following") }}
->>>>>>> main
                     <span class="spa-color">
                  0
                     </span>

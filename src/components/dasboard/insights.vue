@@ -1,5 +1,4 @@
 <template>
-<<<<<<< HEAD
   <div>
     <b-card class="  border shadow c-h">
       <span>
@@ -39,31 +38,6 @@
     
     </b-card>
   </div>
-=======
-	<div>
-		<b-card class="border shadow c-h">
-			<span>
-				<h6 class="mb-3 pl-1 title">
-					<fas-icon class="icons" :icon="['fas', 'chart-line']" size="lg" />
-
-					<b> {{ $t("business.insights").toUpperCase() }} </b>
-				</h6>
-			</span>
-			<p class="text">
-				{{ $t("business.discover_customers_shares") }} 
-			</p>
-
-			<div class="a-content">
-				<line-chart
-					ref="skills_chart"
-					:chart-data="chartDat[0]"
-					:options="options"
-					class="chart"
-				></line-chart>
-			</div>
-		</b-card>
-	</div>
->>>>>>> main
 </template>
 
 <script>

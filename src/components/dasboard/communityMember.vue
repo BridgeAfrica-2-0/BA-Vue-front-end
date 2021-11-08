@@ -41,11 +41,7 @@
                           >
                             <h6 class="follower m-15">
                               {{ count(item.followers) }}
-<<<<<<< HEAD
                               {{$t("dashboard.Community")}}
-=======
-                             {{ $t("profile.community") }}
->>>>>>> main
                             </h6>
                           </b-col>
                         </b-row>
@@ -69,11 +65,7 @@
                               class="b-background flexx pobtn shadow"
                             >
                               <i class="fas fa-envelope   fa-lg btn-icon "></i>
-<<<<<<< HEAD
                               <span class="btn-text">{{$t("dashboard.Message")}}</span>
-=======
-                              <span class="btn-text"> {{ $t("profile.messages") }}</span>
->>>>>>> main
                             </b-button>
                           </b-col>
 
@@ -91,11 +83,7 @@
                               variant="primary"
                             >
                               <i class="fas fa-user-plus  fa-lg btn-icon "></i>
-<<<<<<< HEAD
                               <span class="btn-com">{{$t("dashboard.Community")}}</span>
-=======
-                              <span class="btn-com">{{ $t("profile.community") }}</span>
->>>>>>> main
                             </b-button>
                           </b-col>
                         </b-row>

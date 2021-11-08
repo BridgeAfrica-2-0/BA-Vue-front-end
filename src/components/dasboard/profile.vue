@@ -1,5 +1,4 @@
 <template>
-<<<<<<< HEAD
   <div>
     <b-card class="border shadow card pr-3 " style="height:300px">
       <span>
@@ -62,70 +61,6 @@
       </div>
     </b-card>
   </div>
-=======
-	<div>
-		<b-card class="border shadow card pr-3 " style="height:300px">
-			<span>
-				<h3 class="name">
-					<h6 class="name">
-						<fas-icon class="icons" :icon="['fas', 'user']" size="lg" />
-						<b> {{ $t("profile.title") }} </b>
-					</h6>
-
-					<h6 class="float-right text-success font-weight-bolder">
-						<b-button
-							variant="outline-primary upgrade-btn mt-top-60"
-							class="text-capitalize"
-							size="sm"
-							><b-icon-star class="left"></b-icon-star> &nbsp;&nbsp;
-							{{ $t("profile.upgrade_plan") }}
-						</b-button>
-					</h6>
-				</h3>
-			</span>
-
-			<div class="d-flex col-md-12 mt-2 ml-35">
-				<b-avatar
-					class="p-avater"
-					variant="primary"
-					:src="profile.picture"
-					size="5em"
-				></b-avatar>
-
-				<div class="text-lost">
-					<h6>
-						<b class="name"> {{ profile.name }} </b>
-					</h6>
-					<p class="mb-1">
-						{{ profile.followers }} {{ community }}
-						<span class="float-right m-60"
-							>{{ $t("profile.current_plan") }}: <span class="text-success">{{ $t("profile.basic") }}</span></span
-						>
-					</p>
-
-					<p class="mb-1">
-						<b-icon-person-fill class="text-primary"></b-icon-person-fill>
-						<router-link to="profile_owner"> {{ $t("profile.visit_profile") }}</router-link>
-					</p>
-					<p class="mb-1 ">
-						<b-icon-chat-fill class="text-primary"></b-icon-chat-fill>
-						{{ $t("profile.messages") }}
-						<span class="badge rounded-pill bg-primary float-right mt-1">
-							{{ profile.message }}
-						</span>
-					</p>
-					<p class="mb-1 ">
-						<b-icon-bell-fill class="text-primary"></b-icon-bell-fill>
-            {{ $t("profile.notifications") }}
-						<span class="badge rounded-pill bg-primary float-right mt-1">
-							{{ profile.notification }}
-						</span>
-					</p>
-				</div>
-			</div>
-		</b-card>
-	</div>
->>>>>>> main
 </template>
 
 <script>

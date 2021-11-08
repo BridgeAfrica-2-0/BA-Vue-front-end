@@ -511,17 +511,10 @@
                   <label class="typo__label"> {{$t("welcome.Sub_Category")}}</label>
                   <multiselect
                     v-model="filterselectvalue"
-<<<<<<< HEAD
                     :tag-placeholder="$t('welcome.Add_this_as_new_tag')"
                     :placeholder="$t('welcome.Search_or_add_a_tag')"
                     :label="$t('welcome.subcategory')"
                     track-by="sub_cat_id"
-=======
-                    tag-placeholder="Add this as new tag"
-                    placeholder="Search or add a tag"
-                    label="name"
-                    track-by="subcategory_id"
->>>>>>> main
                     :options="scategories"
                     :multiple="true"
                     :taggable="true"

@@ -4,11 +4,7 @@
       <span>
         <h6 class="mybusi">
           <fas-icon class="icons" :icon="['fas', 'hands-helping']" size="lg" />
-<<<<<<< HEAD
           <b> {{$t("dashboard.My_Businesses")}} </b>  
-=======
-          <b> {{$t('business.my_businesses')}} </b>  
->>>>>>> main
         </h6>
       </span>
       <div class="s-card " style="overflow: -moz-scrollbars-vertical">
@@ -17,17 +13,10 @@
             <b-col>
               <div class="p-top">
                 <br />
-<<<<<<< HEAD
                 <h6>{{$t("dashboard.No_Business")}}</h6>
 
                 <b-button variant="primary" class="busi-btn">
                   {{$t("dashboard.Add_Business")}}
-=======
-                <h6>{{$t('business.no_business')}}</h6>
-
-                <b-button variant="primary" class="busi-btn">
-                  {{$t('business.add_business')}}
->>>>>>> main
                 </b-button>
               </div>
             </b-col>

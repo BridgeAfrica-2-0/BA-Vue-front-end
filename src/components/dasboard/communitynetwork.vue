@@ -1,11 +1,7 @@
 <template>
   <div>
     <b-modal id="modal-sm" size="sm" hide-header>
-<<<<<<< HEAD
       {{$t("dashboard.Do_you_want_to_join_this_network")}}
-=======
-       {{ $t("network.do_you_want_join_network") }}
->>>>>>> main
     </b-modal>
 
     <b-row>
@@ -57,11 +53,7 @@
                   variant="primary"
                 >
                   <i class="fas fa-user-plus  fa-lg btn-icon "></i>
-<<<<<<< HEAD
                   <span class="btn-com" v-b-modal.modal-sm>{{$t("dashboard.Community")}}</span>
-=======
-                  <span class="btn-com" v-b-modal.modal-sm>{{ $t("network.community") }}</span>
->>>>>>> main
                 </b-button>
               </b-col>
 
@@ -73,11 +65,7 @@
                   variant="primary"
 
                   ><i class="fas fa-envelope   fa-lg btn-icon "></i>
-<<<<<<< HEAD
                   <span class="btn-text">{{$t("dashboard.Message")}}</span>
-=======
-                  <span class="btn-text">{{ $t("network.messages") }}</span>
->>>>>>> main
                 </b-button>
               </b-col>
 

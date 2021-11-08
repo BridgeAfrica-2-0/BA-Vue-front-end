@@ -14,11 +14,7 @@
 
           <h6 class="float-right text-success font-weight-bolder">
             <b-button variant="outline-primary" class="upgrade-btn" size="sm"
-<<<<<<< HEAD
               ><b-icon-star></b-icon-star> &nbsp;&nbsp;{{$t("dashboard.Upgrade_Plan")}}</b-button
-=======
-              ><b-icon-star></b-icon-star> &nbsp;&nbsp; {{$t("business.upgrade_plan")}}</b-button
->>>>>>> main
             >
           </h6>
         </h4>
@@ -29,66 +25,40 @@
         <div class="text-lost">
           <b>  {{business.name}}  </b>
           <p class="mb-1">
-<<<<<<< HEAD
               {{business.followers}}  {{$t("dashboard.Community")}} <br />
             <span class=""
               >{{$t("dashboard.Current_Plan")}}: <span class="text-success">{{$t("dashboard.Basic")}}</span></span
-=======
-              {{business.followers}} {{$t("business.community")}} <br />
-            <span class=""
-              >{{$t("business.current_plan")}}: <span class="text-success">{{$t("business.basic")}}</span></span
->>>>>>> main
             >
           </p>
           <p class="mb-1 mb-3">  <span v-for="cat in business.category" :key="cat.name">  {{cat.name}}  </span> </p>
           <p class="mb-1">
             <b-icon-person-fill class="text-primary"></b-icon-person-fill>
               <router-link :to="'business_owner/'+business.id">
-<<<<<<< HEAD
                  {{$t("dashboard.Visit_Profile")}}
-=======
-                 {{$t("business.visit_profile")}}
->>>>>>> main
           </router-link>
 
 
           </p>
           <p class="mb-1 ">
             <b-icon-chat-fill class="text-primary"></b-icon-chat-fill>
-<<<<<<< HEAD
             {{$t("dashboard.Message")}}
-=======
-            {{$t("business.messages")}}
->>>>>>> main
             <span class="badge rounded-pill bg-primary float-right mt-1">
               {{business.message}}
             </span>
           </p>
           <p class="mb-1 ">
             <b-icon-bell-fill class="text-primary"></b-icon-bell-fill>
-<<<<<<< HEAD
             {{$t("dashboard.Notifications")}}
-=======
-            {{$t("business.notifications")}}
->>>>>>> main
             <span class="badge rounded-pill bg-primary float-right mt-1">  {{business.notification}} </span>
             
           </p>
           <p class="mb-1 ">
             <b-icon-globe class="text-primary"></b-icon-globe>
-<<<<<<< HEAD
             <a > {{$t("dashboard.Visit_Website")}}</a>
           </p>
           <p class="mb-1 ">
             <b-icon-shop class="text-primary"></b-icon-shop>
             {{$t("dashboard.Market_Place")}}
-=======
-            <a> {{$t("business.visit_website")}}</a>
-          </p>
-          <p class="mb-1 ">
-            <b-icon-shop class="text-primary"></b-icon-shop>
-            {{$t("business.market_place")}}
->>>>>>> main
           </p>
         </div>
       </div>

@@ -11,13 +11,8 @@
         <b-card class=" border shadow hselect">
           <b-row>
             <b-col md="6" sm="12" class="">
-<<<<<<< HEAD
               <h6 class="font-weight-bolder text-design p-2">
                 {{$t("dashboard.Use_Bridge_Africa_as_Yourself_or_as_one_of_your_businesses")}} 
-=======
-              <h6 class="font-weight-bolder text-design">
-                {{$t('dashboard.use_bridge')}} 
->>>>>>> main
               </h6>
             </b-col>
             <b-col sm="12" md="6" class="mb-3">
@@ -53,11 +48,7 @@
             <div>
               <b-card class=" border shadow pr-3" style="height:350px">
                 <h6 class="font-weight-bolder text-design">
-<<<<<<< HEAD
                   {{$t("dashboard.Use_Bridge_Africa_as_Yourself_or_as_one_of_your_businesses")}}
-=======
-                  {{$t('dashboard.use_bridge')}} 
->>>>>>> main
                 </h6>
                 <b-form-select
                   v-model="selectedb"
@@ -114,11 +105,7 @@
                   :icon="['fas', 'hands-helping']"
                   size="lg"
                 />
-<<<<<<< HEAD
                 <b> {{ $t("dashboard.HOT_BUSINESSES") }} </b>
-=======
-                <b> {{$t('dashboard.hot_bussinesses').toUpperCase()}} </b>
->>>>>>> main
               </h6>
 
               <div class="  p-tab">
@@ -134,11 +121,7 @@
                   :icon="['fas', 'project-diagram']"
                   size="lg"
                 />
-<<<<<<< HEAD
                 <b> {{ $t("dashboard.POPULAR_NETWORKS") }} </b>
-=======
-                <b> {{$t('dashboard.popular_networks').toUpperCase()}}</b>
->>>>>>> main
               </h6>
 
               <div class=""><Popularnetwork /></div>

@@ -1,5 +1,4 @@
 <template>
-<<<<<<< HEAD
   <div>
     <b-modal id="modal-sm" size="sm" hide-header>
       {{$t("dashboard.Do_you_want_to_join_this_network")}}
@@ -102,81 +101,6 @@
 
  <infinite-loading @infinite="infiniteHandler"></infinite-loading>
   </div>
-=======
-	<div>
-		<b-modal id="modal-sm" size="sm" hide-header>
-      {{ $t("network.do_you _want_join_network") }}
-		</b-modal>
-
-		<div class="people-style shadow" v-for="item in network" :key="item.id">
-			<b-row>
-				<b-col md="3" xl="3" lg="3" cols="5" sm="3">
-					<div class="center-img">
-						<img :src="item.picture" class="r-image" />
-					</div>
-				</b-col>
-				<b-col md="5" cols="7" lg="7" xl="5" sm="5">
-					<p class="textt">
-						<strong class="net-title"> {{ item.name }} </strong> <br />
-						{{ item.category }}
-						<br />
-						{{ item.followers }}  {{ $t("network.community") }} <br />
-
-						<span class="location">
-							<b-icon-geo-alt class="ico"></b-icon-geo-alt>
-							{{ item.location_description }}
-						</span>
-						<br />
-
-						<read-more
-							more-str="read more"
-							class="readmore"
-							:text="item.about_network"
-							link="#"
-							less-str="read less"
-							:max-chars="50"
-						>
-						</read-more>
-					</p>
-				</b-col>
-
-				<b-col lg="12" md="4" xl="4" cols="12" sm="4">
-					<div class="s-button">
-						<b-row>
-							<b-col md="12" lg="4" xl="12" sm="12" cols="4" class="mt-2">
-								<b-button
-									block
-									size="sm"
-									class="b-background shadow"
-									variant="primary"
-								>
-									<i class="fas fa-user-plus  fa-lg btn-icon "></i>
-									<span class="btn-com" v-b-modal.modal-sm>{{ $t("network.community") }}</span>
-								</b-button>
-							</b-col>
-
-							<b-col md="12" lg="4" xl="12" sm="12" cols="4" class="mt-2">
-								<b-button
-									block
-									size="sm"
-									class="b-background shadow"
-									variant="primary"
-									><i class="fas fa-envelope   fa-lg btn-icon "></i>
-									<span class="btn-text">{{ $t("network.messages") }}</span>
-								</b-button>
-							</b-col>
-
-							<b-col md="12" lg="4" xl="12" sm="12" cols="4" class="mt-2">
-							</b-col>
-						</b-row>
-					</div>
-				</b-col>
-			</b-row>
-		</div>
-
-		<infinite-loading @infinite="infiniteHandler"></infinite-loading>
-	</div>
->>>>>>> main
 </template>
 
 <script>

@@ -19,11 +19,7 @@
                 {{ item.category }}
                 <br />
                 {{ count(item.followers) }}
-<<<<<<< HEAD
                 {{$t("dashboard.Community")}} <br />
-=======
-                {{ $t("business.community") }} <br />
->>>>>>> main
 
                 <span class="location">
                   <b-icon-geo-alt class="ico"></b-icon-geo-alt
@@ -60,11 +56,7 @@
                       variant="primary"
                     >
                       <i class="fas fa-user-plus  fa-lg btn-icon "></i>
-<<<<<<< HEAD
                       <span class="btn-com">{{$t("dashboard.Community")}}</span>
-=======
-                      <span class="btn-com">{{ $t("business.community") }}</span>
->>>>>>> main
                     </b-button>
                   </b-col>
 
@@ -83,11 +75,7 @@
                       variant="primary"
                     >
                       <i class="fas fa-envelope   fa-lg btn-icon "></i>
-<<<<<<< HEAD
                       <span class="btn-text">{{$t("dashboard.Message")}}</span>
-=======
-                      <span class="btn-text">{{ $t("business.messages") }}</span>
->>>>>>> main
                     </b-button>
                   </b-col>
 
@@ -106,11 +94,7 @@
                       variant="primary"
                     >
                       <i class="fas fa-map-marked-alt  fa-lg btn-icon "></i>
-<<<<<<< HEAD
                       <span class="btn-text">{{$t("dashboard.Direction")}}</span>
-=======
-                      <span class="btn-text">{{ $t("business.direction") }}</span>
->>>>>>> main
                     </b-button>
                   </b-col>
                 </b-row>

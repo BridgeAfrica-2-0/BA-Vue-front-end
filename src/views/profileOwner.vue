@@ -6,21 +6,21 @@
       <b-row class="">
         <b-col cols="12" class="p-3">
           <b-tabs content-class="mt-3" pills small fill lazy v-model="tabIndex">
-            <b-tab title="Posts" href="#post">
+            <b-tab :title="$t('profileowner.Posts')" href="#post">
               <Post />
             </b-tab>
-            <b-tab title="About" href="#about"><About /></b-tab>
-            <b-tab title="Business" href="#business" class="m-0 p-0">
+            <b-tab :title="$t('profileowner.About')" href="#about"><About /></b-tab>
+            <b-tab :title="$t('profileowner.Business')" href="#business" class="m-0 p-0">
               <bussiness />
             </b-tab>
-            <b-tab title="Media" href="#media">
+            <b-tab :title="$t('profileowner.Media')" href="#media">
               <Media type="profile" />
             </b-tab>
-            <b-tab title="Networks">
+            <b-tab :title="$t('profileowner.Networks')">
               <Networks />
             </b-tab>
 
-            <b-tab title="Community" href="#community" class="m-0 p-0">
+            <b-tab :title="$t('profileowner.Community')" href="#community" class="m-0 p-0">
               <following />
             </b-tab>
           </b-tabs>

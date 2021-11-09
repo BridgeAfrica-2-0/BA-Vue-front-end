@@ -21,11 +21,13 @@ export default {
     municipality: [],
     locality: [],
     division: [],
+    profilConnected: null
   },
 
   mutations: {
     setUserData(state, userData) {
       state.user = userData;
+      state.profilConnected = { ...userData.user, user_type: "user" }
 
       localStorage.setItem("user", JSON.stringify(userData));
       axios.defaults.headers.common.Authorization = `Bearer ${userData.accessToken}`;
@@ -93,6 +95,10 @@ export default {
       localStorage.removeItem("user");
       location.reload();
     },
+
+    profilConnected(state, payload) {
+      state.profilConnected = payload
+    }
   },
 
   actions: {
@@ -104,7 +110,6 @@ export default {
 
     country({ commit }) {
       return axios.get("countries").then(({ data }) => {
-        console.log(data);
         commit("setCountry", data.data);
       });
     },
@@ -131,7 +136,7 @@ export default {
     },
 
     division({ commit }, data) {
-      return axios.get("divisions ", data).then(({ data }) => {
+      return axios.get("divisions", data).then(({ data }) => {
         console.log(data);
         commit("setDivision", data.data);
       });
@@ -221,6 +226,8 @@ export default {
     getAuthToken(state) {
       return `Bearer ${state.user.accessToken}`
     },
+
+    profilConnected: (state) => state.profilConnected
 
   },
 };

@@ -12,88 +12,46 @@
         </ly-tab>
       </div>
 
-      <div class="mt-3 d-block d-md-none" v-if="seetings_id == '0'">
-        <General />
-      </div>
+      
 
-      <div class="mt-3 d-block d-md-none" v-if="seetings_id == '4'">
-        <Website />
-      </div>
 
-      <div class="mt-3 d-block d-md-none" v-if="seetings_id == '3'">
-        <Payment />
-      </div>
-
-      <div class="mt-3 d-block d-md-none" v-if="seetings_id == '2'">
-        <Roles />
-      </div>
-
-      <div class="mt-3 d-block d-md-none" v-if="seetings_id == '1'">
-        <Info />
-      </div>
-
-      <div class="mt-3 d-block d-md-none" v-if="seetings_id == '5'">
-        <Blocking />
-      </div>
+     
     </div>
 
-    <div class="mt-3 d-block d-md-none" v-if="selectedIdd == '6'">
+    <div class="mt-3 d-block d-md-none" v-if="selectedIdd == '2'">
       <Notification />
     </div>
 
-    <div class="mt-3 d-block d-md-none" v-if="selectedIdd == '7'">
+    <div class="mt-3 d-block d-md-none" v-if="selectedIdd == '3'">
       <Insight />
     </div>
 
-    <div class="mt-3 d-block d-md-none" v-if="selectedIdd == '8'">
-      <Pending />
-    </div>
+    
 
     <b-row class="center-content d-none d-md-block">
       <b-col cols="10">
         <div class="bv-example-row">
           <div>
             <b-tabs
-              pills
+              pills lazy
               v-model="tabIndex"
               vertical
               class="itzlala"
               nav-wrapper-class="w-15"
             >
-              <b-tab title="General">
-                <b-card-text> <General /> </b-card-text
-              ></b-tab>
+           
 
               <b-tab title="Notification">
                 <b-card-text> <Notification /> </b-card-text
               ></b-tab>
 
-              <b-tab title="Business Info">
-                <b-card-text> <Info /> </b-card-text
-              ></b-tab>
-
-              <b-tab title="Business Roles">
-                <b-card-text> <Roles /> </b-card-text
-              ></b-tab>
 
               <b-tab title="Insight">
                 <b-card-text> <Insight /> </b-card-text
               ></b-tab>
 
-              <b-tab title="Pending Post">
-                <b-card-text> <Pending /> </b-card-text
-              ></b-tab>
+             
 
-              <b-tab title="Payment">
-                <b-card-text> <Payment /> </b-card-text
-              ></b-tab>
-
-              <b-tab title="Account Type">
-                <b-card-text> <Website /> </b-card-text
-              ></b-tab>
-              <b-tab title="Blocking">
-                <b-card-text> <Blocking /> </b-card-text
-              ></b-tab>
             </b-tabs>
           </div>
         </div>
@@ -108,20 +66,11 @@
 </template>
 
 <script>
-import General from "@/components/businessOwner/settings/general";
 
-import Roles from "@/components/businessOwner/settings/roles";
 
-import Info from "@/components/businessOwner/settings/info";
 
-import Website from "@/components/businessOwner/settings/website";
-
-import Payment from "@/components/businessOwner/settings/payment";
-
-import Blocking from "@/components/businessOwner/settings/blocking";
 import Notification from "@/components/businessOwner/notification";
 import LyTab from "@/tab/src/index.vue";
-import Pending from "@/components/businessOwner/pending";
 import Insight from "@/components/businessOwner/insight";
 
 export default {
@@ -136,13 +85,13 @@ export default {
         console.log(newVal, oldVal);
 
         if (newVal == 3) {
-          this.selectedIdd = "8";
-          this.tabIndex = "5";
+          this.selectedIdd = "3";
+          this.tabIndex = "1";
         }
 
         if (newVal == 2) {
-          this.selectedIdd = "6";
-          this.tabIndex = "1";
+          this.selectedIdd = "2";
+          this.tabIndex = "0";
         }
 
         if (newVal == 4) {
@@ -159,16 +108,12 @@ export default {
   },
 
   components: {
-    General,
-    Roles,
+  
     Notification,
-    Pending,
+   
     LyTab,
     Insight,
-    Info,
-    Website,
-    Payment,
-    Blocking,
+   
   },
 
   data() {
@@ -179,14 +124,8 @@ export default {
       seetings_id: 0,
       bottomSelectedId: 0,
       items: [
-        { label: "General" },
+       
 
-        { label: "Business Info" },
-        { label: "Business Roles" },
-        { label: "payment " },
-        { label: "Account Type" },
-
-        { label: "Blocking" },
       ],
       options: {
         activeColor: "#1d98bd",

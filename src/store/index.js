@@ -9,6 +9,7 @@ import businessAccountType from "./businessAccountType";
 import businessOwner from "./businessOwner";
 import networkDetails from "./networkDetails";
 import dashboardcommunity from "./dashboardcommunity";
+import networkSetting from "./networkSetting";
 import NetworkSettings from "./NetworkSettings";
 import networkProfileMembers from "./networkProfileMembers";
 
@@ -55,6 +56,7 @@ export default new Vuex.Store({
     businessAccountType,
     // networkProfileFeedback,
     hotbusiness,
+    networkSetting,
     NetworkSettings,
     profile,
     follower,

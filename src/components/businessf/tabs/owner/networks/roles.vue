@@ -70,7 +70,7 @@
     <div class="b-bottom">
       <b-container>
         <h5 class="a-text">Existing Editors</h5>
-        <span v-for="editor in editors" :key="editor.id">
+        <span v-for="editor in allEditors" :key="editor.id">
           <span class="d-flex align-items-center m-list">
             <b-avatar class="mr-3 profile-pic" :src="editor.picture"></b-avatar>
             <span class="mr-auto username">{{ editor.name }}</span>
@@ -106,50 +106,6 @@
       </b-container>
     </div>
 
-    <div>
-      <b-modal id="edit-editor" hide-footer>
-        <template #modal-title>
-          EDIT EDITOR: {{ clickedObject.name }}
-        </template>
-        <div class="d-block text-center">
-          <b-form-group
-            label-cols-lg="3"
-            label="Role"
-            label-size="md"
-            label-class="font-weight-bold pt-0"
-            class="mb-0"
-          >
-            <b-form-select
-              id="role"
-              v-model="form.role_id"
-              :options="roles"
-              name="role"
-              value-field="id"
-              text-field="name"
-              class="mb-3"
-            >
-            </b-form-select>
-          </b-form-group>
-        </div>
-        <b-button
-          class="mt-3"
-          block
-          variant="primary"
-          @click="editEditor(clickedObject)"
-          >EDIT</b-button
-        >
-      </b-modal>
-
-      <b-modal id="delete-editor" hide-footer>
-        <template #modal-title> !!! <code>WARRING</code> !!! </template>
-        <div class="d-block text-center">
-          <h3>You Are About To Delete: {{ clickedObject.name }}!</h3>
-        </div>
-        <b-button class="mt-3" block @click="deleteEditor(clickedObject)"
-          >Delete</b-button
-        >
-      </b-modal>
-    </div>
   </b-container>
 </template>
 

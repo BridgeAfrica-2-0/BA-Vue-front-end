@@ -187,8 +187,14 @@ export default {
 
     //getting network roles
     async getRoles({ commit }) {
-      const res = await axios.get("network/roles");
-
+      const res = await axios.get("network/roles")
+      .then((res)=>{
+        console.log("ROLES",res.data);
+      })
+      .catch((error)=>{
+        console.log(error);
+      });
+      
       commit("setRoles", res.data);
     },
 

@@ -68,7 +68,7 @@
     <div class="b-bottom">
       <b-container>
         <h5 class="a-text">Existing Editors</h5>
-        <span v-for="editor in editors" :key="editor.id">
+        <span v-for="editor in allEditors" :key="editor.id">
           <span class="d-flex align-items-center m-list">
             <b-avatar class="mr-3 profile-pic"></b-avatar>
             <span class="mr-auto username">J. Circlehead</span>
@@ -129,43 +129,7 @@
       </b-container>
     </div>
 
-    <div class="b-bottom">
-      <b-container>
-        <h5 class="a-text">Existing Editors</h5>
-        <span>
-          <span
-            v-for="editor in allEditors"
-            :key="editor.id"
-            class="d-flex align-items-center m-list"
-          >
-            <b-avatar class="mr-3 profile-pic">
-              <img :src="editor.image" alt="" />
-            </b-avatar>
-            <span class="mr-auto username">{{ editor.name }}</span>
-            <span>
-              <div>
-                <b-dropdown
-                  size="lg"
-                  variant="link"
-                  toggle-class="text-decoration-none"
-                  no-caret
-                >
-                  <template #button-content>
-                    <b-icon icon="three-dots-vertical" font-scale="1"></b-icon>
-                  </template>
-                  <b-dropdown-item @click="editEditors(editor.id)"
-                    >Edit</b-dropdown-item
-                  >
-                  <b-dropdown-item @click="deleteEditors(editor.id)">
-                    Delete
-                  </b-dropdown-item>
-                </b-dropdown>
-              </div>
-            </span>
-          </span>
-        </span>
-      </b-container>
-    </div>
+
   </b-container>
 </template>
 

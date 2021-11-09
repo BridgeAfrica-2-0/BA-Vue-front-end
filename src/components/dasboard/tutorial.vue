@@ -17,8 +17,13 @@
                 class="s-embed"
               ></b-embed>
               <p class="text">
+<<<<<<< HEAD
+                {{$t("video_name")}}<br />
+                 {{$t("video_description")}}
+=======
                 {{ $t("tutorial.video_name") }} <br />
                 {{ $t("tutorial.video_description") }}
+>>>>>>> main
               </p>
             </div>
           </b-col>

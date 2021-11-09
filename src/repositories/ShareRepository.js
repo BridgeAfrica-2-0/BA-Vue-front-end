@@ -67,7 +67,7 @@ class Repository {
 
   async switch(uuid, type="network") {
     try {
-      const response = ("network" == type) ? await axios.post(`switch`, {networkId:uuid}) :  (uuid) ? await axios.get(`switch?id=${uuid}`) : await axios.get(`switch`)
+      const response = ("network" == type) ? await axios.post(`switch`, {networkId:uuid}) :  (uuid) ? await axios.post(`switch?id=${uuid}`) : await axios.post(`switch`)
       return {
         success: true,
         data: response.data.message
@@ -80,7 +80,6 @@ class Repository {
       }
     }
   }
-
 
   async WhoIsConnect({networkId}) {
     try {
@@ -146,6 +145,22 @@ class Repository {
   }
 
   async createComment({ post, data }) {
+    try {
+      const response = await axios.post(`post/comment/${post}`, data)
+      return {
+        success: true,
+        data: response.data.message
+      }
+
+    } catch (error) {
+      return {
+        success: false,
+        data: error
+      }
+    }
+  }
+
+  async createBusinessComment({ post, data }) {
     try {
       const response = await axios.post(`post/comment/${post}`, data)
       return {

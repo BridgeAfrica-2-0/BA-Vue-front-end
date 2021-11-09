@@ -20,6 +20,7 @@
 </template>
 
 <script>
+
 import HomePage from '../businessOwner/tabs/businessHome';
 import About from './tabs/about';
 import Media from '@/components/owner/tabs/media';

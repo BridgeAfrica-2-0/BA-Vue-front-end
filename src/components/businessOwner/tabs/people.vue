@@ -1,8 +1,7 @@
 <template>
   <div>
     <div class="s-cardd">
-     
-  {{users}}
+    
 
     <div class="people-style border shadow"  v-for="item in users" :key="item.id">
         <b-row class="mb-1">

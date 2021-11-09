@@ -159,9 +159,9 @@ export default {
       let url = null;
 
          if(this.type=="Follower"){  
-         url = "business/community/network-follower/"+this.biz_id+"/";
+         url = "business/community/visitor/network-follower/"+this.biz_id+"/";
          }else{
-          url = "business/community/network-following/"+this.biz_id+"/";
+          url = "business/community/visitor/network-following/"+this.biz_id+"/";
          }
          
       console.log(url + this.page+"?keyword="+this.searchh);

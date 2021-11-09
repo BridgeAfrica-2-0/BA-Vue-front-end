@@ -19,7 +19,7 @@
     </div>
 
     <p class="text-center" v-if="haveNotData">Not Data</p>
-    <ScrollLoader :loading="loadingIsActive" color="#ced4da" />
+    <ScrollLoader :loading="loadingIsActive" color="#ced4da" v-if="this.getKeywork" />
   </div>
 </template>
 
@@ -49,6 +49,7 @@ export default {
       posts: 'search/GET_RESULT_POST',
       getPage: 'search/GET_CURRENT_PAGINATION_PAGE',
       getStack: 'search/STACK_VALUE',
+      getKeywork: 'search/POST_KEYWORD',
     }),
 
     loadingIsActive: function () {
@@ -111,6 +112,7 @@ export default {
     },
 
     onscroll: async function (event) {
+      if (!this.getKeywork) return false;
       const scrollY = window.scrollY;
       const visible = document.documentElement.clientHeight;
       const pageHeight = document.documentElement.scrollHeight;

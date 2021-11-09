@@ -150,22 +150,30 @@ export default {
     }),
 
     process: async function (item, type) {
-      this.flashMessage.success({
-        time: 5000,
-        message:
-          'business' == type
-            ? `You are now connected as ${item.business_name}`
-            : `You are connected as ${item.network_name}`,
-      });
+      try {
+        this.flashMessage.success({
+          time: 5000,
+          message:
+            'business' == type
+              ? `You are now connected as ${item.business_name}`
+              : `You are connected as ${item.network_name}`,
+        });
 
-      this.auth(this.strategy[type].newType(item));
+        console.log(item);
 
-      const data = {
-        routeName: 'network' == type ? 'networks' : 'business',
-        routeId: 'network' == type ? item.network_id : item.business_id,
-      };
+        this.auth(this.strategy[type].newType(item));
 
-      this.strategy[type].redirect(data);
+        const data = {
+          routeName: 'network' == type ? 'networks' : 'BusinessOwner',
+          routeId: 'network' == type ? item.network_id : item.business_id,
+        };
+
+        console.log(data);
+
+        this.strategy[type].redirect(data);
+      } catch (error) {
+        console.log(error);
+      }
     },
 
     activedBusiness(item) {

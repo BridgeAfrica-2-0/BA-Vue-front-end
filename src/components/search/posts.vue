@@ -24,11 +24,11 @@
             <lightbox :cells="post.media.length" :items="post.media" v-else></lightbox>
           </b-col>
           <b-col class="mt-1">
-            <span class="mr-3 cursor" @click="onLike"
+            <span class="mr-3 cursor"
               ><b-icon :icon="icon" variant="primary" aria-hidden="true"></b-icon>
               {{ post.likes_count | formatNumber }}</span
             >
-            <span class="cursor" @click="onToggle">
+            <span class="cursor">
               <b-icon icon="chat-fill" variant="primary" aria-hidden="true"></b-icon>
               {{ post.comment_count | formatNumber }}</span
             >

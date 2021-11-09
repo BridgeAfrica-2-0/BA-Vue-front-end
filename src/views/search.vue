@@ -5,7 +5,7 @@
         <Button @click.native="strategy['all']" v-if="selectedId == 0" />
         <Button @click.native="strategy['network']" v-if="selectedId == 3" />
         <Button @click.native="strategy['market']" v-if="selectedId == 4" />
-         <Button @click.native="strategy['1']" v-if="selectedId == 1" />
+        <Button @click.native="strategy['1']" v-if="selectedId == 1" />
 
         <Button @click.native="strategies" v-if="[2, 5].includes(selectedId)" />
       </template>
@@ -393,8 +393,6 @@
                 <fas-icon class="icons" :icon="['fas', 'hands-helping']" size="lg" />
                 Businesses
               </h6>
-
-
             </div>
 
             <!-- filter out only people -->
@@ -491,7 +489,7 @@ import Button from '@/components/ButtonNavBarFind';
 
 import { PostComponent, PeopleComponent } from '@/components/search';
 
-import BusinessComponent from "@/components/search/business";
+import BusinessComponent from '@/components/search/business';
 
 import { loader } from '@/mixins';
 
@@ -508,7 +506,7 @@ export default {
     Sponsor,
     BusinessComponent,
     //Business,
-    People, 
+    People,
     Network,
     Post,
     Market,
@@ -1522,20 +1520,15 @@ export default {
         });
     },
 
- onFindBusiness() {
-      
-       this.$store.commit("business/setLoading", true);
+    onFindBusiness() {
+      this.$store.commit('business/setLoading', true);
 
-      console.log("loolodidhd ddhdjddh");
+      console.log('loolodidhd ddhdjddh');
       console.log(this.searchParams.keyword.trim());
-       if (this.searchParams.keyword.trim())
-
-        this.findBusiness({keyword:this.searchParams.keyword, location:this.searchParams.location });
-         this.$store.commit("business/setLoading", false);
-
-      
+      if (this.searchParams.keyword.trim())
+        this.findBusiness({ keyword: this.searchParams.keyword, location: this.searchParams.location });
+      this.$store.commit('business/setLoading', false);
     },
-
 
     async getProducts() {
       this.prodLoader = true;
@@ -1597,7 +1590,7 @@ export default {
       stack: 'search/STACK_VALUE',
       setCallback: 'search/SET_CURRENT_PAGINATE_CALLBACK',
       reset: 'search/RESET_RESULT',
-       findBusiness: "business/FIND_BUSINESS",
+      findBusiness: 'business/FIND_BUSINESS',
     }),
 
     initialize() {
@@ -1611,13 +1604,13 @@ export default {
         2: () => 'Find User',
         5: () => 'Find Post',
         0: () => 'All',
-         1: () => "Find Businesses",
+        1: () => 'Find Businesses',
       };
 
       this.strategyForComponent = {
         2: () => PeopleComponent,
         5: () => PostComponent,
-         1: () => BusinessComponent,
+        1: () => BusinessComponent,
       };
 
       this.strategyForNotFoundComponentTitle = {
@@ -1709,7 +1702,7 @@ export default {
         this.lauchLoader(true);
         this.reset();
         const request = await this.$repository.search.findPostByKeyword({
-          data: {   
+          data: {
             keyword: this.searchParams.keyword.trim(),
           },
           page: 1,

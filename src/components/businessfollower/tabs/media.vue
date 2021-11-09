@@ -42,12 +42,12 @@ export default {
   props: {
     type: {
       type: String,
-      validator: function(value) {
+      validator: function (value) {
         return ['profile', 'network', 'business'].indexOf(value) !== -1;
       },
     },
   },
-  data: function() {
+  data: function () {
     return {
       canUpload: false,
       loading: false,
@@ -68,16 +68,17 @@ export default {
     ...mapGetters({
       getProfilePictures: 'UserProfileOwner/getImages',
       getBusinessPictures: 'businessOwner/getAllImages',
+      getBusinessNetwork: 'networkProfileMedia/getAllImages',
     }),
   },
 
   methods: {
     all() {
-      const wrapper = data => {
+      const wrapper = (data) => {
         data
-          .filter(img => img.media.length)
-          .map(img => {
-            let render = img.media.map(picture => {
+          .filter((img) => img.media.length)
+          .map((img) => {
+            let render = img.media.map((picture) => {
               return {
                 id: img.id,
                 content: img.content,
@@ -103,7 +104,7 @@ export default {
           .then(() => {
             this.hasLoadAlbum = true;
           })
-          .catch(err => {
+          .catch((err) => {
             this.hasLoadAlbum = false;
             console.log(err);
           });
@@ -124,7 +125,7 @@ export default {
           .then(() => {
             this.hasLoadPicture = true;
           })
-          .catch(err => {
+          .catch((err) => {
             this.hasLoadPicture = false;
             console.log({ err: err });
           });
@@ -149,6 +150,11 @@ export default {
         album: 'UserProfileOwner/getAlbums',
         image: 'UserProfileOwner/getImages',
         pictures: this.getProfilePictures,
+      }),
+      networks: () => ({
+        album: 'networkProfileMedia/getAlbums',
+        image: 'networkProfileMedia/getImages',
+        pictures: this.getNetworkPictures,
       }),
     };
 

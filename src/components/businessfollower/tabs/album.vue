@@ -20,9 +20,7 @@
     <!-- show  images in an album -->
 
     <div class="container-flex" v-if="showalbum">
-      <b-button variant="outline-primary" size="sm" @click="hidealbum">
-        Back
-      </b-button>
+      <b-button variant="outline-primary" size="sm" @click="hidealbum"> Back </b-button>
       <span class="text-center ml-2 f-20"> {{ this.album_name }} </span>
 
       <Images
@@ -68,7 +66,7 @@ export default {
     },
   },
 
-  data: function() {
+  data: function () {
     return {
       hasLoadPicture: true,
       canViewAlbum: true,
@@ -96,7 +94,7 @@ export default {
     this.strategy = {
       business: () => ({
         albums: this.getAlbumsBusiness,
-        showalbum: this.getAlbumProfileImages,
+        showalbum: this.getAlbumBusinessImages,
         showAlbumImages: this.albumImagesBusiness,
         createAlbum: this.createAlbumBusiness,
         fetchAlbums: this.fetchAlbumsBusiness,
@@ -116,12 +114,24 @@ export default {
         remove: this.remove,
         mapUpdate: this.mapUpdate,
       }),
+
+      network: () => ({
+        albums: this.getAlbumsNetwork,
+        showalbum: this.getAlbumNetworkImages,
+        showAlbumImages: this.albumImagesNetwork,
+        createAlbum: this.createAlbumNetwork,
+        fetchAlbums: this.fetchAlbumsNetwork,
+        deleteAlbum: this.deleteAlbumNetwork,
+        remove: this.removeNetwork,
+        updateAlbum: this.updateAlbumNetwork,
+        mapUpdate: this.mapUpdateNetwork,
+      }),
     };
   },
 
   filters: {
     path: fullMediaLink,
-    plural: function(val) {
+    plural: function (val) {
       return val ? `${val} items` : 'No item';
     },
   },
@@ -135,6 +145,10 @@ export default {
       getAlbumsBusiness: 'businessOwner/getAlbums',
       getAlbumImageBusiness: 'businessOwner/getAlbumImage',
       albumImagesBusiness: 'businessOwner/getalbumImages',
+
+      getAlbumsNetwork: 'networkProfileMedia/getAlbums',
+      getAlbumImageNetwork: 'networkProfileMedia/getAlbumImage',
+      albumImagesNetwork: 'networkProfileMedia/getalbumImages',
     }),
 
     canCreateAlbum() {
@@ -151,10 +165,16 @@ export default {
       fetchAlbums: 'UserProfileOwner/getAlbums',
 
       createAlbumBusiness: 'businessOwner/createAlbum',
-      getAlbumProfileImages: 'businessOwner/getAlbumImages',
+      getAlbumBusinessImages: 'businessOwner/getAlbumImages',
       fetchAlbumsBusiness: 'businessOwner/getAlbums',
       deleteAlbumBusiness: 'businessOwner/deletedAlbum',
       updateAlbumBusiness: 'businessOwner/updatedAlbum',
+
+      createAlbumNetwork: 'networkProfileMedia/createAlbum',
+      getAlbumNetworkImages: 'networkProfileMedia/getAlbumImages',
+      fetchAlbumsNetwork: 'networkProfileMedia/getAlbums',
+      deleteAlbumNetwork: 'networkProfileMedia/deletedAlbum',
+      updateAlbumNetwork: 'networkProfileMedia/updatedAlbum',
     }),
 
     getFullMediaLink: fullMediaLink,
@@ -169,6 +189,9 @@ export default {
 
       mapUpdateBusiness: 'businessOwner/updateAlbum',
       removeBusiness: 'businessOwner/removeAlbum',
+
+      mapUpdateNetwork: 'networkProfileMedia/updateAlbum',
+      removeNetwork: 'networkProfileMedia/removeAlbum',
     }),
 
     hidealbum() {
@@ -288,7 +311,7 @@ export default {
             message: 'Album Deleted',
           });
         })
-        .catch(err => {
+        .catch((err) => {
           this.sending = false;
 
           this.flashMessage.show({

@@ -4,9 +4,7 @@
   </div>
   <div class="row" v-else>
     <div class="container-fluid">
-      <p v-if="!allImages.length && !canUpload" style="font-size: 3rem">
-        No items found
-      </p>
+      <p v-if="!allImages.length && !canUpload" style="font-size: 3rem">No items found</p>
 
       <b-modal
         id="modalxl"
@@ -163,7 +161,7 @@ export default {
     album: {},
     canUpload: {
       type: Boolean,
-      default: function() {
+      default: function () {
         return false;
       },
     },
@@ -179,7 +177,7 @@ export default {
 
     hasLoadPicture: {
       type: Boolean,
-      default: function() {
+      default: function () {
         return false;
       },
     },
@@ -190,7 +188,7 @@ export default {
 
     showAlbum: {
       type: Boolean,
-      default: function() {
+      default: function () {
         return false;
       },
     },
@@ -242,6 +240,15 @@ export default {
         getAlbumImages: this.getAlbumImagesBusiness,
         updateItem: this.updateItemBusiness,
       }),
+      network: () => ({
+        submitPost: this.submitPostNetwork,
+        setProfilePicture: this.setProfilePictureNetwork,
+        setCoverPicture: this.setCoverPictureNetwork,
+        deleteImagePicture: this.deleteImagePictureNetwork,
+        onDownloadPic: this.onDownloadPicNetwork,
+        getAlbumImages: this.getAlbumImagesNetwork,
+        updateItem: this.updateItemNetwork,
+      }),
     };
 
     this.strategy = {
@@ -280,11 +287,19 @@ export default {
       deleteImagePictureBusiness: 'businessOwner/deleteImage',
       onDownloadPicBusiness: 'businessOwner/downloadPic',
       getAlbumImagesBusiness: 'businessOwner/getAlbumImages',
+
+      submitPostNetwork: 'networkProfile/submitPost',
+      setProfilePictureNetwork: 'networkProfile/setProfilePic',
+      setCoverPictureNetwork: 'networkProfile/setCoverPic',
+      deleteImagePictureNetwork: 'networkProfile/deleteImage',
+      onDownloadPicNetwork: 'networkProfile/downloadPic',
+      getAlbumImagesNetwork: 'networkProfile/getAlbumImages',
     }),
 
     ...mapMutations({
       updateItem: 'UserProfileOwner/updateAlbumItem',
       updateItemBusiness: 'businessOwner/updateAlbumItem',
+      updateItemNetwork: 'networkProfile/updateAlbumItem',
     }),
 
     getFullMediaLink: fullMediaLink,
@@ -315,8 +330,8 @@ export default {
 
     loadImages() {
       const pictures = this.allImages
-        .filter(e => e.media.length)
-        .map(e => {
+        .filter((e) => e.media.length)
+        .map((e) => {
           return this.getFullMediaLink(e.media[0].path);
         });
 
@@ -343,7 +358,7 @@ export default {
     removePicture(imageID, key) {
       const newImage = this.allImages.map((im, index) => {
         if (index == key) {
-          return im.media.filter(i => i.id != imageID);
+          return im.media.filter((i) => i.id != imageID);
         } else {
           return im;
         }
@@ -356,7 +371,7 @@ export default {
       this.loading = true;
       this.pattern[this.type]()
         .onDownloadPic(media.id)
-        .then(response => {
+        .then((response) => {
           var fileURL = window.URL.createObjectURL(new Blob([response.data]));
           var fileLink = document.createElement('a');
           fileLink.href = fileURL;

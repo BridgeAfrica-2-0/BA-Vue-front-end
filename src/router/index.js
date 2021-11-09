@@ -24,13 +24,17 @@ import Follower from "../views/follower.vue";
 import Visitor from "../views/visitor.vue";
 import profile_owner from "@/views/profileOwner";
 import businessFollower from "@/views/businessFollower";
+import profileFollower from "@/views/profileFollower";
 import businessOwner from "@/views/businessOwner";
+import businessEditor from "@/views/businessEditor";
 import businessVisitor from "@/views/businessVisitor";
 import search from "@/views/search";
 import forgotPassword from "@/views/forgotPassword";
 import navMessage from "@/views/navMessaging";
 import Blec from "@/views/blec";
 import memberNetworkFollower from "@/views/memberNetworkFollower";
+import govx from "@/views/test";
+import networkEditors from "@/views/networkEditors";
 // import Test from "@/views/test";
 import templateView from "@/views/templateView";
 import webSiteCreate from "@/views/webSiteCreate";
@@ -40,16 +44,33 @@ import confirmPayment from "@/views/confirmPayment";
 import networks from "@/views/networks";
 import dashboard from "@/views/dashboard";
 
+import myorders from "@/views/myOders"
+import notFound from "@/components/404"
+
+
+
 import welcome from "@/views/welcome";
+import payment from "@/views/payment";
 
 Vue.use(VueRouter);
 
-const routes = [
-    // {
-    //   path: "/test",
-    //   name: "Home",
-    //   component: Test,
-    // },
+const routes = [{
+        path: "/notFound",
+        name: "notFound",
+        component: notFound,
+    },
+
+    {
+        path: "/myorders",
+        name: "orders",
+        component: myorders,
+        // meta: {
+        //   auth: true,
+        // },
+    },
+
+
+
     {
         path: "/",
         name: "home",
@@ -63,6 +84,18 @@ const routes = [
         path: "/market",
         name: "market",
         component: market,
+    },
+    {
+        path: "/checkout",
+        name: "payment",
+        component: payment
+    },
+
+
+    {
+        path: "/govx",
+        name: "govx",
+        component: govx,
     },
 
     {
@@ -92,6 +125,11 @@ const routes = [
         component: profile_owner,
     },
     {
+        path: "/profilefollower/:id?",
+        name: "ProfileFollower",
+        component: profileFollower,
+    },
+    {
         path: "/template_viewer",
         name: "templateViewer",
         component: templateView,
@@ -100,6 +138,13 @@ const routes = [
         path: "/business_owner/:id?",
         name: "BusinessOwner",
         component: businessOwner,
+    },
+
+
+    {
+        path: "/business_editor/:id?",
+        name: "BusinessEditor",
+        component: businessEditor,
     },
 
     {
@@ -129,14 +174,19 @@ const routes = [
         component: confirmPayment,
     },
     {
-        path: "/business_owner/network/:id?",
+        path: "/network/:id?",
         name: "networks",
         component: networks,
     },
     {
-        path: "/networks",
+        path: "/networks/:id?",
         name: "networks",
         component: networks,
+    },
+    {
+        path: "/network_editors/:id?",
+        name: "NetworkEditors",
+        component: networkEditors,
     },
     {
         path: "/login",
@@ -214,7 +264,7 @@ const routes = [
     },
 
     {
-        path: "/follower/:id?",
+        path: "/profile/:id?",
         name: "Follower",
         component: Follower,
     },
@@ -246,10 +296,11 @@ const routes = [
     },
 
     {
-        path: "/memberNetworkFollower",
+        path: "/memberNetworkFollower/:id?",
         name: "Membar Network Follower",
         component: memberNetworkFollower,
     },
+
 ];
 
 const router = new VueRouter({

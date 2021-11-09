@@ -4,12 +4,7 @@
       <div class="container-fluid">
         <div class="col-md-12 col-lg-2 col-xl-2 text-center">
           <span class="d-block d-lg-none">
-            <b-icon
-              icon="house-fill"
-              style="float: left"
-              font-scale="1.5; margin-top:5px"
-              variant="primary"
-            ></b-icon>
+            <b-icon icon="house-fill" style="float: left" font-scale="1.5; margin-top:5px" variant="primary"></b-icon>
           </span>
 
           <a class="d-inline-block align-top mt-1" href="#">
@@ -21,15 +16,8 @@
           <form class="d-block d-lg-none">
             <b-input-group class="b-shadow mt-3">
               <div class="input-group-append color-mobile" style="border: none">
-                <span
-                  class="input-group-text border-left-0 color-mobile"
-                  style="width: 40px; border-right: none"
-                >
-                  <b-icon
-                    icon="search"
-                    style="color: #e75c18"
-                    font-scale="1.5"
-                  ></b-icon>
+                <span class="input-group-text border-left-0 color-mobile" style="width: 40px; border-right: none">
+                  <b-icon icon="search" style="color: #e75c18" font-scale="1.5"></b-icon>
                 </span>
               </div>
 
@@ -49,19 +37,9 @@
 
             <span style="display: none" ref="mobileinput">
               <b-input-group class="b-shadow mt-2">
-                <div
-                  class="input-group-append color-mobile"
-                  style="border: none"
-                >
-                  <span
-                    class="input-group-text border-left-0 color-mobile"
-                    style="width: 40px; border-right: none"
-                  >
-                    <b-icon
-                      icon="geo-alt"
-                      style="color: #e75c18"
-                      font-scale="1.5"
-                    ></b-icon>
+                <div class="input-group-append color-mobile" style="border: none">
+                  <span class="input-group-text border-left-0 color-mobile" style="width: 40px; border-right: none">
+                    <b-icon icon="geo-alt" style="color: #e75c18" font-scale="1.5"></b-icon>
                   </span>
                 </div>
 
@@ -82,8 +60,8 @@
                   <option value=" Current Location "></option>
                   <option value="Yaounde " />
                 </datalist>
-              </b-input-group>
-            </span>
+              </b-input-group>       
+            </span> 
           </form>
 
           <span class="d-none d-lg-block">
@@ -155,17 +133,8 @@
               </div>
 
               <div class="nav-item">
-                <a
-                  id="messages"
-                  class="nav-link"
-                  data-toggle="popover"
-                  role="button"
-                  data-original-title=""
-                  title=""
-                  ><span class="text-ored"
-                    ><fas-icon
-                      class="primary"
-                      :icon="['fas', 'comment']" /></span
+                <a id="messages" class="nav-link" data-toggle="popover" role="button" data-original-title="" title=""
+                  ><span class="text-ored"><fas-icon class="primary" :icon="['fas', 'comment']" /></span
                 ></a>
                 <b-popover target="messages" triggers="hover" placement="top">
                   <div class="popover-body">
@@ -311,30 +280,20 @@
                       <div class="small text-muted">1-Apr-19</div>
                     </div>
                     <hr class="h-divider" />
-                    <a
-                      href="https://bridgeafrica.info/nav/inbox.html"
-                      class="text-ored"
-                      ><u>See Inbox</u></a
-                    >
+                    <a href="https://bridgeafrica.info/nav/inbox.html" class="text-ored"><u>See Inbox</u></a>
                   </div>
                 </b-popover>
               </div>
 
               <div class="nav-item">
-                <a
-                  id="notif"
-                  class="nav-link"
-                  data-toggle="popover"
-                  role="button"
-                  data-original-title=""
-                  title=""
-                  ><span class="text-ored"
-                    ><b-icon-bell-fill class="col-bg"></b-icon-bell-fill></span
+                <a id="notif" class="nav-link" data-toggle="popover" role="button" data-original-title="" title=""
+                  ><span class="text-ored"><b-icon-bell-fill class="col-bg"></b-icon-bell-fill></span
                 ></a>
                 <b-popover target="notif" triggers="hover" placement="top">
                   <div class="popover-body">
                     <p class="font-weight-bold">Notifications</p>
                     <hr class="h-divider" />
+
                     <div
                       class="
                         d-inline-flex
@@ -344,24 +303,17 @@
                         cursor-pointer
                       "
                     >
+
                       <div>
-                        <img
-                          src="@/assets/img/profile-pic.jpg"
-                          class="rounded-circle"
-                          alt=""
-                          width="30"
-                          height="30"
-                        />
+                        <img src="@/assets/img/profile-pic.jpg" class="rounded-circle" alt="" width="30" height="30" />
                       </div>
                       <div class="d-flex flex-column ml-3">
-                        <div>
-                          <span class="font-weight-bold">David</span> started
-                          following you
-                        </div>
+                        <div><span class="font-weight-bold">David</span> started following you</div>
                         <div class="small text-muted">1m</div>
                       </div>
                     </div>
                     <hr class="h-divider" />
+
                     <div
                       class="
                         d-inline-flex
@@ -371,24 +323,17 @@
                         cursor-pointer
                       "
                     >
+
                       <div>
-                        <img
-                          src="@/assets/img/profile-pic.jpg"
-                          class="rounded-circle"
-                          alt=""
-                          width="30"
-                          height="30"
-                        />
+                        <img src="@/assets/img/profile-pic.jpg" class="rounded-circle" alt="" width="30" height="30" />
                       </div>
                       <div class="d-flex flex-column ml-3">
-                        <div>
-                          <span class="font-weight-bold">Alina</span> commented
-                          on your post
-                        </div>
+                        <div><span class="font-weight-bold">Alina</span> commented on your post</div>
                         <div class="small text-muted">1m</div>
                       </div>
                     </div>
                     <hr class="h-divider" />
+
                     <div
                       class="
                         d-inline-flex
@@ -398,24 +343,17 @@
                         cursor-pointer
                       "
                     >
+
                       <div>
-                        <img
-                          src="@/assets/img/profile-pic.jpg"
-                          class="rounded-circle"
-                          alt=""
-                          width="30"
-                          height="30"
-                        />
+                        <img src="@/assets/img/profile-pic.jpg" class="rounded-circle" alt="" width="30" height="30" />
                       </div>
                       <div class="d-flex flex-column ml-3">
-                        <div>
-                          <span class="font-weight-bold">Maxine</span> liked
-                          your post
-                        </div>
+                        <div><span class="font-weight-bold">Maxine</span> liked your post</div>
                         <div class="small text-muted">1m</div>
                       </div>
                     </div>
                     <hr class="h-divider" />
+
                     <div
                       class="
                         d-inline-flex
@@ -425,24 +363,17 @@
                         cursor-pointer
                       "
                     >
+
                       <div>
-                        <img
-                          src="@/assets/img/profile-pic.jpg"
-                          class="rounded-circle"
-                          alt=""
-                          width="30"
-                          height="30"
-                        />
+                        <img src="@/assets/img/profile-pic.jpg" class="rounded-circle" alt="" width="30" height="30" />
                       </div>
                       <div class="d-flex flex-column ml-3">
-                        <div>
-                          <span class="font-weight-bold">Paul</span> approuved
-                          your request to join the network
-                        </div>
+                        <div><span class="font-weight-bold">Paul</span> approuved your request to join the network</div>
                         <div class="small text-muted">1m</div>
                       </div>
                     </div>
                     <hr class="h-divider" />
+
                     <div
                       class="
                         d-inline-flex
@@ -452,27 +383,17 @@
                         cursor-pointer
                       "
                     >
+
                       <div>
-                        <img
-                          src="@/assets/img/profile-pic.jpg"
-                          class="rounded-circle"
-                          alt=""
-                          width="30"
-                          height="30"
-                        />
+                        <img src="@/assets/img/profile-pic.jpg" class="rounded-circle" alt="" width="30" height="30" />
                       </div>
                       <div class="d-flex flex-column ml-3">
-                        <div>
-                          <span class="font-weight-bold">David</span> started
-                          following you
-                        </div>
+                        <div><span class="font-weight-bold">David</span> started following you</div>
                         <div class="small text-muted">1m</div>
                       </div>
                     </div>
                     <hr class="h-divider" />
-                    <a
-                      href="https://bridgeafrica.info/nav/notifications-view-all.html"
-                      class="text-ored"
+                    <a href="https://bridgeafrica.info/nav/notifications-view-all.html" class="text-ored"
                       ><u>See all Notifications</u></a
                     >
                   </div>
@@ -481,19 +402,12 @@
 
               <div class="nav-item" id="profilepic">
                 <a class="nav-link text-dark" href="">
-                  <span
-                    ><img
-                      src="@/assets/img/profile-pic.jpg"
-                      class="rounded-circle"
-                      alt=""
-                      width="50"
-                      height="50"
-                  /></span>
+                  <span><img :src="user.profile_picture" class="rounded-circle" alt="" width="50" height="50" /></span>
                 </a>
               </div>
 
               <b-tooltip target="profilepic" variant="light" triggers="hover">
-                Maxine Moff
+                {{ user.name }}
               </b-tooltip>
 
               <div class="nav-item">
@@ -505,62 +419,38 @@
                   data-original-title=""
                   title=""
                 >
-                  <!--            <fas-icon class="primary search" :icon="['fas', 'chevron-down']" />-->
                 </a>
                 <b-popover target="other-menu" triggers="hover" placement="top">
                   <div class="popover-body">
-                    <div>
-                      <div
-                        class="d-inline-flex flex-row align-items-center mb-1"
-                      >
-                        <div>
-                          <img
-                            src="@/assets/img/logo3.png"
-                            class="rounded-circle"
-                            alt=""
-                            width="25"
-                            height="25"
-                          />
-                        </div>
-                        <div class="ml-3 mt-2">
-                          <p class="font-weight-bold">Your Businesses</p>
-                        </div>
-                      </div>
+                    <div class="d-inline-flex flex-row align-items-center mb-1 w-full">
+                      <Activity />
                     </div>
+
                     <hr />
 
-                    <a
-                      href="/settings"
-                      class="
-                        other-menu
-                        suggest-item
-                        cursor-pointer
-                        text-decoration-none text-dark
-                      "
+
+                    <router-link
+                      to="/myorders/"
+                      class="other-menu suggest-item cursor-pointer text-decoration-none text-dark"
+
                     >
-                      <span class="mr-2"
-                        ><fas-icon
-                          class="violet search"
-                          :icon="['fas', 'cogs']"
-                      /></span>
+                      <span class="mr-2"><fas-icon class="violet search" :icon="['fas', 'cart-arrow-down']" /></span>
+                      My orders
+                    </router-link>
+                    <hr class="h-divider" />
+
+                    <a href="/settings" class="other-menu suggest-item cursor-pointer text-decoration-none text-dark">
+                      <span class="mr-2"><fas-icon class="violet search" :icon="['fas', 'cogs']" /></span>
                       Account Settings
                     </a>
                     <hr class="h-divider" />
                     <div class="other-menu suggest-item cursor-pointer">
-                      <span class="mr-1"
-                        ><fas-icon
-                          class="violet search"
-                          :icon="['fas', 'question']"
-                      /></span>
+                      <span class="mr-1"><fas-icon class="violet search" :icon="['fas', 'question']" /></span>
                       Help and Support
                     </div>
                     <hr class="h-divider" />
                     <div class="other-menu suggest-item cursor-pointer">
-                      <span class="mr-2"
-                        ><fas-icon
-                          class="violet search"
-                          :icon="['fas', 'globe-americas']"
-                      /></span>
+                      <span class="mr-2"><fas-icon class="violet search" :icon="['fas', 'globe-americas']" /></span>
                       Language
                     </div>
                     <hr class="h-divider" />
@@ -573,11 +463,7 @@
                         text-decoration-none text-dark
                       "
                     >
-                      <span class="mr-2"
-                        ><fas-icon
-                          class="violet search"
-                          :icon="['fas', 'sign-out-alt']"
-                      /></span>
+                      <span class="mr-2"><fas-icon class="violet search" :icon="['fas', 'sign-out-alt']" /></span>
                       Logout
                     </a>
                   </div>
@@ -592,16 +478,10 @@
             <div class="mt-3">
               <div class="d-inline-flex flex-row align-items-center">
                 <div>
-                  <img
-                    src="@/assets/img/profile-pic.jpg"
-                    class="rounded-circle"
-                    alt=""
-                    width="30"
-                    height="30"
-                  />
+                  <img src="@/assets/img/profile-pic.jpg" class="rounded-circle" alt="" width="30" height="30" />
                 </div>
                 <div class="d-flex flex-column ml-1 line-size">
-                  <div class="font-weight-bold">Maxine Moffet GG</div>
+                  <div class="font-weight-bold">{{ user.name }}</div>
                   <div class="small text-muted">Active</div>
                 </div>
               </div>
@@ -610,49 +490,36 @@
 
               <div class="d-inline-flex flex-row align-items-center mb-1">
                 <div>
-                  <img
-                    src="@/assets/img/logo3.png"
-                    class="rounded-circle"
-                    alt=""
-                    width="25"
-                    height="25"
-                  />
+                  <img src="@/assets/img/logo3.png" class="rounded-circle" alt="" width="25" height="25" />
                 </div>
                 <div class="ml-3 mt-2">
                   <p class="font-weight-bold">Your Businesses</p>
                 </div>
               </div>
             </div>
+
             <hr class="mup" />
 
-            <a
-              href="/settings"
-              class="
-                other-menu
-                suggest-item
-                cursor-pointer
-                text-decoration-none text-dark
-              "
-            >
-              <span class="mr-2"
-                ><fas-icon class="violet search" :icon="['fas', 'cogs']"
-              /></span>
+
+            <router-link to="/myorders/" class="other-menu suggest-item cursor-pointer text-decoration-none text-dark">
+              <span class="mr-2"><fas-icon class="violet search" :icon="['fas', 'cart-arrow-down']" /></span>
+              My orders
+            </router-link>
+            <hr class="h-divider" />
+
+            <a href="/settings" class="other-menu suggest-item cursor-pointer text-decoration-none text-dark">
+              <span class="mr-2"><fas-icon class="violet search" :icon="['fas', 'cogs']" /></span>
+
               Account Settings
             </a>
             <hr class="h-divider" />
             <div class="other-menu suggest-item cursor-pointer">
-              <span class="mr-1"
-                ><fas-icon class="violet search" :icon="['fas', 'question']"
-              /></span>
+              <span class="mr-1"><fas-icon class="violet search" :icon="['fas', 'question']" /></span>
               Help and Support
             </div>
             <hr class="h-divider" />
             <div class="other-menu suggest-item cursor-pointer">
-              <span class="mr-2"
-                ><fas-icon
-                  class="violet search"
-                  :icon="['fas', 'globe-americas']"
-              /></span>
+              <span class="mr-2"><fas-icon class="violet search" :icon="['fas', 'globe-americas']" /></span>
               Language
             </div>
             <hr class="h-divider" />
@@ -665,11 +532,7 @@
                 text-decoration-none text-dark
               "
             >
-              <span class="mr-2"
-                ><fas-icon
-                  class="violet search"
-                  :icon="['fas', 'sign-out-alt']"
-              /></span>
+              <span class="mr-2"><fas-icon class="violet search" :icon="['fas', 'sign-out-alt']" /></span>
               Logout
             </a>
           </div>
@@ -682,12 +545,19 @@
 </template>
 
 <script>
-import Button from "@/components/ButtonNavBarFind";
+import Button from '@/components/ButtonNavBarFind.vue';
+import Activity from '@/components/ShowActivity.vue';
+
+import { mapGetters, mapActions } from 'vuex';
+
+
 
 export default {
-  name: "navbar",
+  name: 'navbar',
   components: {
     Button,
+    Activity,
+
   },
   props: {
     credentials: {
@@ -698,8 +568,9 @@ export default {
           placeholder: "",
         };
       },
+      },
+
     },
-  },
 
   data() {
     return {
@@ -711,11 +582,28 @@ export default {
     users() {
       return this.$store.getters["userChat/getUsers"];
     },
+     ...mapGetters({
+      hasLauchNetworkRequest: 'social/INIT',
+      user: 'auth/profilConnected',
+    }),
   },
+
   created() {
+    this.init();
     this.getUsers();
+
   },
+
   methods: {
+    ...mapActions({
+      setNetworks: 'social/FIND_USER_NETWORK',
+      setBusiness: 'social/FIND_USER_BUSNESS',
+      lauchNetworkRequest: 'social/INIT',
+    }),
+    toggleinfput() {
+      this.$refs.mobileinput.style.display = 'block';
+      this.isActive = true;
+    },
     getUsers() {
       this.$store
         .dispatch("userChat/GET_USERS",'')
@@ -726,10 +614,35 @@ export default {
     },
     toggleinput() {
       this.$refs.mobileinput.style.display = "block";
-      this.isActive = true;
     },
 
-    // eteme code
+
+    getNetworks: async function () {
+      let request = await this.$repository.share.getNetworks();
+
+      if (request.success) this.setNetworks(request.data);
+    },
+
+    getBusiness: async function () {
+      let request = await this.$repository.share.getBusiness();
+
+      if (request.success) this.setBusiness(request.data);
+    },
+
+    init() {
+      try {
+        if (!this.hasLauchNetworkRequest) {
+          console.log('init navbar', this.hasLauchNetworkRequest);
+          this.getNetworks();
+          this.getBusiness();
+
+          this.lauchNetworkRequest();
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    },
+
 
     togglenav() {
       if (this.shownav == false) {
@@ -885,7 +798,7 @@ export default {
 }
 
 .text-dark {
-  font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-weight: normal;
   font-size: 14px;
   line-height: 20px;

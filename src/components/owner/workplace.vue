@@ -22,7 +22,8 @@
               <h6 class="mb-0">
                 <b>{{ workPlace.company_name }} ({{workPlace.position}})</b>
               </h6>
-              <b>{{ workPlace.start_year }}/{{ workPlace.start_month }}/{{ workPlace.start_day }} - {{ workPlace.end_year }}/{{ workPlace.end_month }}/{{ workPlace.end_day }}</b>
+              <b v-if="workPlace.end_year || workPlace.end_month || workPlace.end_day">{{ workPlace.start_year }}/{{ workPlace.start_month }}/{{ workPlace.start_day }} - {{ workPlace.end_year }}/{{ workPlace.end_month }}/{{ workPlace.end_day }}</b>
+              <b v-else>{{ workPlace.start_year }}/{{ workPlace.start_month }}/{{ workPlace.start_day }}</b>
               <p class="mb-1">
                 {{ workPlace.job_responsibilities }}
               </p>
@@ -120,8 +121,9 @@
         class="mb-2"
         placeholder="Start Date"
       ></b-form-datepicker>
-      <label>End Date</label>
+      <label v-if="!editData.currently_working">End Date</label>
       <b-form-datepicker
+        v-if="!editData.currently_working"
         id="example-datepicker"
         v-model="editData.endDate"
         class="mb-2"
@@ -179,8 +181,9 @@
         class="mb-2"
         placeholder="Start Date"
       ></b-form-datepicker>
-      <label for="endDate">End Date</label>
+      <label v-if="!workPlaceInput.currentlyWorking" for="endDate">End Date</label>
       <b-form-datepicker
+        v-if="!workPlaceInput.currentlyWorking"
         id="endDater"
         v-model="workPlaceInput.endDate"
         class="mb-2"
@@ -247,7 +250,12 @@ export default {
       console.log("this.editData Before Assign", value)
        this.editData = value;
        this.editData['startDate'] = value.start_day+'-'+value.start_month+'-'+value.start_year;
-       this.editData['endDate'] = value.end_day+'-'+value.end_month+'-'+value.end_year;
+       if(value.currently_working){
+         this.editData['endDate'] = value.end_day+'-'+value.end_month+'-'+value.end_year;
+       } else{
+         console.log('falseeeeeeee')
+         this.editData['endDate'] = null;
+       }
        console.log("this.editData Before Update", this.editData)
        this.$refs["edit-contact"].show(); 
     },

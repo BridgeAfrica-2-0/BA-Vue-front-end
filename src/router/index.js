@@ -41,17 +41,34 @@ import confirmPayment from "@/views/confirmPayment";
 import networks from "@/views/networks";
 import dashboard from "@/views/dashboard";
 
+import myorders from "@/views/myOders"
+import notFound from "@/components/404"
+
+
+
 import welcome from "@/views/welcome";
 import payment from "@/views/payment";
 
 Vue.use(VueRouter);
 
 const routes = [
-  // {
-  //   path: "/test",
-  //   name: "Home",
-  //   component: Test,
-  // },
+  {
+    path: "/notFound",
+    name: "notFound",
+    component: notFound,
+  },
+
+  {
+    path: "/myorders",
+    name: "orders",
+    component: myorders,
+    // meta: {
+    //   auth: true,
+    // },
+  },
+  
+
+  
   {
     path: "/",
     name: "home",

@@ -64,10 +64,6 @@
             </b-tabs>
           </div>
         </b-tab>
-
-
-
- 
           <b-tab>
           <template slot="title">
             Network <span class="spa-color">  {{ nFormatter(total.total_network)}}</span>
@@ -108,7 +104,6 @@ import People from "@/components/businessf/tabs/people";
 import Network from "@/components/businessf/tabs/networks";
 export default {
   name: "comunitiDashboard",  
-
   components: {
     People,
     Business,
@@ -129,7 +124,6 @@ export default {
       return num;
     },
   },
-
 
   computed:{
    

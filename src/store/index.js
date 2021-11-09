@@ -35,7 +35,7 @@ import cart from "./cart";
 
 Vue.use(Vuex);
 
- axios.defaults.baseURL = process.env.VUE_APP_API_URL;
+axios.defaults.baseURL = process.env.VUE_APP_API_URL;
 // axios.defaults.baseURL = "http://edson.maxinemoffett.com/api/v1";
 
 export default new Vuex.Store({
@@ -43,7 +43,9 @@ export default new Vuex.Store({
     auth,
     networkDetails,
     cart,
+
     dashboardcommunity,
+
     businessOwner,
     businessBlocking,
     dashboard,
@@ -65,6 +67,5 @@ export default new Vuex.Store({
     businessFollowers,
     productComments,
     productDetails,
-
   },
 });

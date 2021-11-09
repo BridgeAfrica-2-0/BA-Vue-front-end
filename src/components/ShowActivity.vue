@@ -109,13 +109,7 @@ export default {
           id: item.business_id,
           user_type: 'business',
         }),
-        redirect: (obj) => {
-          if (obj.routeName !== 'BusinessOwner')
-            this.$router.push({
-              name: obj.routeName,
-              params: { id: obj.routeId },
-            });
-        },
+        redirect: (obj) => this.redirection(obj),
       },
 
       network: {
@@ -125,13 +119,7 @@ export default {
           id: item.network_id,
           user_type: 'network',
         }),
-        redirect: (obj) => {
-          if (obj.routeName !== 'networks')
-            this.$router.push({
-              name: obj.routeName,
-              params: { id: obj.routeId },
-            });
-        },
+        redirect: (obj) => this.redirection(obj),
       },
     };
   },
@@ -149,6 +137,14 @@ export default {
       auth: 'auth/profilConnected',
     }),
 
+    redirection(obj) {
+      if (obj.routeName !== this.$router.name)
+        this.$router.push({
+          name: obj.routeName,
+          params: { id: obj.routeId },
+        });
+    },
+
     process: async function (item, type) {
       try {
         this.flashMessage.success({
@@ -159,16 +155,12 @@ export default {
               : `You are connected as ${item.network_name}`,
         });
 
-        console.log(item);
-
         this.auth(this.strategy[type].newType(item));
 
         const data = {
           routeName: 'network' == type ? 'networks' : 'BusinessOwner',
           routeId: 'network' == type ? item.network_id : item.business_id,
         };
-
-        console.log(data);
 
         this.strategy[type].redirect(data);
       } catch (error) {

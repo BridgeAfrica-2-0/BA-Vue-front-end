@@ -2,7 +2,7 @@
   <div>
     <FlashMessage style="z-index: 99999" :position="'right top'" />
     <div class="fl mb-3">
-      <label for="datepicker-dateformat1">Posted Date</label>
+      <label for="datepicker-dateformat1">{{$t("search.Posted_Date")}}</label>
       <b-form-datepicker
         v-model="created_at"
         id="datepicker-dateformat1"
@@ -23,7 +23,7 @@
       name="customSwitch1"
       switch
     >
-      Recent Post
+      {{$t("search.Recent_Post")}}
     </b-form-checkbox>
     <b-form-checkbox
       @click="showPostHaveNotSeen"
@@ -32,7 +32,7 @@
       name="customSwitch2"
       switch
     >
-      Post you've not seen
+      {{$t("search.Post_you_ve_not_seen")}}
     </b-form-checkbox>
 
     <div
@@ -46,7 +46,7 @@
       @click.prevent="toogleRootSection"
     >
       <b-icon :icon="rootSectionIsVisible ? 'arrow-down' : 'arrow-up'"></b-icon>
-      <span>Post from</span>
+      <span>{{$t("search.Post_from")}}</span>
     </div>
 
     <b-collapse id="collapse-4" v-model="rootSectionIsVisible">
@@ -100,7 +100,7 @@
           <b-icon
             :icon="peopleSectionIsVisible ? 'arrow-down' : 'arrow-up'"
           ></b-icon>
-          <span>People</span>
+          <span>{{$t("search.People")}}</span>
         </div>
         <b-collapse
           id="collapse-1"
@@ -157,7 +157,7 @@
         <!--end network section-->
         <!--<Button
           @click.native="onProcess"
-          title="Search"
+          :title="$t('search.Search')"
           class="mt-4"
           fas="fas fa-search  fa-lg btn-icon"
           style="align-items: center"
@@ -358,7 +358,7 @@ export default {
 
     onNotified(message) {
       this.flashMessage.error({
-        title: "Important message",
+       title: "$t('search.Important_message')",
         message,
       });
     },

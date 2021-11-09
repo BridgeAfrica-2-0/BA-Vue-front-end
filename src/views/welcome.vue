@@ -14,23 +14,24 @@
     >
       <div>
         <h4 class="text-center username f-30">
-          {{ $t("hello") }} <b> {{ username }} </b> {{ $t("let_start") }} 
+          Hello <b> {{ username }} </b> let's get started
         </h4>
         <br />
         <br />
 
-        <span class="text f-16">
-          <b>  {{ $t("up_welcome_message") }} </b> <br /> 
-          {{ $t("welcome_message") }}
-          
-        </span>
-
-         <hr class="localfoter" />
-
-    
+        <p class="text f-16">
+          is simply dummy text of the printing and typesetting industry. Lorem
+          Ipsum has been the industry's standard dummy text ever since the
+          1500s, when an unknown printer took a galley of type and scrambled it
+          to make a type specimen book. It has survived not only five centuries,
+          but also the leap into electronic typesetting, remaining essentially
+          unchanged. It was popularised in the 1960s with the release of
+          Letraset sheets containing Lorem Ipsum passages, and more recently
+          with desktop publishing
+        </p>
 
         <b-form-group
-          :label="$t('use_bridge_africa') "
+          label="Use BridgeAfirca.com as a"
           label-class=" f-20 text-center"
         >
           <b-form-radio-group
@@ -44,23 +45,11 @@
         </b-form-group>
         <div class="text-center">
           <b-button variant="outline-primary" @click="choseModal">
-            {{$t("continue")}} <b-icon icon="arrow-right"> </b-icon>
+            Continue <b-icon icon="arrow-right"> </b-icon>
           </b-button>
         </div>
       </div>
     </div>
-
-    <!-- <p class="text-center">
-      <span class="display-inline">
-        <b-link @click="$i18n.locale = 'en'"> {{ $t("english") }} </b-link>
-        <span class="vl"></span>
-        <b-link class="ml-2" @click="$i18n.locale = 'fr'">
-          {{ $t("french") }}
-        </b-link>
-      </span>
-      Bridge Africa © 2021
-    </p> -->
-
 
     <div class="modal-backdro">
       <div
@@ -83,14 +72,10 @@
               hidden
             />
 
-         .   <tab-content
-              :title= " $t('complete_profile') "
+            <tab-content
+              title=" Complete Profile "
               :before-change="updateUserProfile"
             > 
- <!-- <tab-content
-              :title= " $t('complete_profile') "
-              
-            >  -->
 
               <div class="form-card">
                 <div class="row">
@@ -105,8 +90,8 @@
                         @click="chooseProfile2()"
                         variant="primary"
                         class="mt-3 text-center"
-                      > 
-                      {{$t('change_image')}}
+                      >
+                        change Image
                       </b-button>
                     </div>
 
@@ -122,7 +107,7 @@
                       >
                         <div class="drag-text">
                           <i class="fa fa-plus"> </i>
-                          <h3 class="username">{{$t("add_photo")}}</h3>
+                          <h3 class="username">Add Profile Photo</h3>
                         </div>
                       </a>
                       <div></div>
@@ -130,7 +115,7 @@
                   </div>
                   <div class="col-md-6">
                     <div class="form-group" label-class="username">
-                      <label for="username" class="username"> {{$t("dob")}} :</label
+                      <label for="username" class="username"> DOB :</label
                       ><br />
                       <input
                         type="date"
@@ -143,7 +128,7 @@
                     </div>
 
                     <div class="form-group">
-                      <label for="alias" class="username">{{$t("gender")}}:</label><br />
+                      <label for="alias" class="username">Gender:</label><br />
                       <select
                         id="category"
                         v-model="gender"
@@ -151,16 +136,16 @@
                         label-class="text"
                       >
                         <option value="" selected="" disabled="">
-                          {{$t("select_gender")}}
+                          Select Gender
                         </option>
-                        <option value="male">{{$t("male")}}</option>
-                        <option value="female">{{$t("female")}}</option>
-                        <option value="others">{{$t("other")}}</option>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                        <option value="others">other</option>
                       </select>
                     </div>
 
                     <div class="form-group">
-                      <label for="country" class="username"> {{$t("country")}} :</label
+                      <label for="country" class="username"> Country :</label
                       ><br />
 
                       <country-select
@@ -184,26 +169,26 @@
                     </div>
 
                     <div class="form-group">
-                      <label for="city" class="username"> {{$t("city")}} :</label><br />
+                      <label for="city" class="username"> City :</label><br />
                       <input
                         type="text"
                         name="alias"
                         id="City"
                         v-model="city"
-                        :placeholder="$t('city') "
+                        placeholder="city"
                         class="form-control text"
                       />
                     </div>
 
                     <div class="form-group">
-                      <label for="Neighbor" class="username"> {{$t("neighborhood")}} :</label
+                      <label for="Neighbor" class="username"> Neighbor :</label
                       ><br />
                       <input
                         type="text"
                         name="alias"
                         v-model="Neighbor"
                         id="Neighbor"
-                        :placeholder="$t('neighborhood')"
+                        placeholder="Neighbor"
                         class="form-control text"
                       />
                     </div>
@@ -236,19 +221,19 @@
               </div>
             </tab-content>
 
-            <tab-content :title="$t('follow_business')">
+            <tab-content title="Follow Businesses">
               <div class="div-h">
                 <Business />
               </div>
             </tab-content>
 
-            <tab-content :title="$t('follow_people')">
+            <tab-content title="Follow People">
               <div class="div-h">
                 <People />
               </div>
             </tab-content>
 
-            <tab-content :title="$t('tutorial')">
+            <tab-content title="Tutorial">
               <div class="div-h">
                 <Tutorial />
               </div>
@@ -280,15 +265,9 @@
           <form-wizard @on-complete="onComplete">
            
              <tab-content
-              :title="$t('complete_profile') "
+              title=" Complete Profile "
               :before-change="updateUserProfile"
             > 
-
-  <!-- <tab-content
-              :title="$t('complete_profile') "
-              
-            >  -->
-
 
               <div class="form-card">
                 <div class="row">
@@ -320,7 +299,7 @@
                       >
                         <div class="drag-text">
                           <i class="fa fa-plus"> </i>
-                          <h3 class="username">{{$t('add_photo')}}</h3>
+                          <h3 class="username">Add Profile Photo</h3>
                         </div>
                       </a>
                       <div></div>
@@ -328,7 +307,7 @@
                   </div>
                   <div class="col-md-6">
                     <div class="form-group" label-class="username">
-                      <label for="username" class="username"> {{$t('dob')}} :</label
+                      <label for="username" class="username"> DOB :</label
                       ><br />
                       <input
                         type="date"
@@ -341,7 +320,7 @@
                     </div>
 
                     <div class="form-group">
-                      <label for="alias" class="username">{{$t('gender')}}:</label><br />
+                      <label for="alias" class="username">Gender:</label><br />
                       <select
                         id="category"
                         v-model="gender"
@@ -351,14 +330,14 @@
                         <option value="" selected="" disabled="">
                           Select Gender
                         </option>
-                        <option value="male">{{$t('male')}}</option>
-                        <option value="female">{{$t('female')}}</option>
-                        <option value="others">{{$t('other')}}</option>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                        <option value="others">other</option>
                       </select>
                     </div>
 
                     <div class="form-group">
-                      <label for="country" class="username"> {{$t('country')}} :</label
+                      <label for="country" class="username"> Country :</label
                       ><br />
 
                       <country-select
@@ -382,32 +361,32 @@
                     </div>
 
                     <div class="form-group">
-                      <label for="city" class="username"> {{$t('city')}} :</label><br />
+                      <label for="city" class="username"> City :</label><br />
                       <input
                         type="text"
                         name="alias"
                         id="City"
                         v-model="city"
-                        :placeholder="$t('city')"
+                        placeholder="city"
                         class="form-control text"
                       />
                     </div>
 
                     <div class="form-group">
-                      <label for="Neighbor" class="username"> {{$t('neighborhood')}} :</label
+                      <label for="Neighbor" class="username"> Neighbor :</label
                       ><br />
                       <input
                         type="text"
                         name="alias"
                         v-model="Neighbor"
                         id="Neighbor"
-                        :placeholder="$t('neighborhood') "
+                        placeholder="Neighbor"
                         class="form-control text"
                       />
                     </div>
 
                     <div class="form-group">
-                      <label for="Neighbor" class="username"> {{$t('adress')}}  :</label>
+                      <label for="Neighbor" class="username"> Adress :</label>
 
                       <gmap-autocomplete
                         @place_changed="initMarker"
@@ -434,13 +413,9 @@
             </tab-content>
 
             <tab-content
-              :title="$t('business_identity')"
+              title="Business Indentity"
               :before-change="validateBusiness"
-            > 
-             <!-- <tab-content
-              :title="$t('business_identity')"
-              
-            > -->
+            >
               <div class="form-card">
                 <div class="row">
                   <div class="col-md-6">
@@ -462,7 +437,7 @@
                         variant="primary"
                         class="mt-3 text-center"
                       >
-                       {{$t('change_image')}}
+                        change Image
                       </b-button>
                     </div>
 
@@ -478,7 +453,7 @@
                       >
                         <div class="drag-text">
                           <i class="fa fa-plus"> </i>
-                          <h3 class="username">{{$t('business_logo')}}</h3>
+                          <h3 class="username">Business Logo</h3>
                         </div>
                       </a>
                       <div></div>
@@ -487,7 +462,7 @@
                   <div class="col-md-6">
                     <b-form-group
                       id="business_name"
-                      :label="$t('business_name')"
+                      label="Business Name"
                       label-for="business_name"
                     >
                       <b-form-input
@@ -506,13 +481,13 @@
                     <div></div>
 
                     <div class="form-group">
-                      <label for="username" class="username">{{$t("about")}}</label><br />
+                      <label for="username" class="username">About</label><br />
                       <textarea
                         type="textarea"
                         name="business_about"
                         v-model="about"
                         id="description"
-                        :placeholder="$t('brief_description')"
+                        placeholder="Brief description about your Busness"
                         class="form-control text"
                       ></textarea>
                     </div>
@@ -520,12 +495,12 @@
                 </div>
 
                 <div>
-                  <label class="typo__label"> {{$t("category")}} </label>
+                  <label class="typo__label"> Category </label>
                   <multiselect
                     v-model="multiselecvalue"
                     @input="subcategories"
-                    :tag-placeholder="$t('Add_this_as_new_tag')"
-                    :placeholder="$t('Search_or_add_a_tag')"
+                    tag-placeholder="Add this as new tag"
+                    placeholder="Search or add a tag"
                     label="name"
                     track-by="id"
                     :options="pcategories"
@@ -536,7 +511,7 @@
                 </div>
 
                 <div>
-                  <label class="typo__label"> {{$t("sub_category")}}</label>
+                  <label class="typo__label"> Sub Category</label>
                   <multiselect
                     v-model="filterselectvalue"
                     tag-placeholder="Add this as new tag"
@@ -550,7 +525,7 @@
                   ></multiselect>
                 </div>
 
-                <label class="typo__label">{{$t("filters")}}</label>
+                <label class="typo__label">Fiters</label>
                 <div>
                   <b-card no-body>
                     <b-tabs pills card vertical>
@@ -560,7 +535,7 @@
                         :key="filters.id"
                         active
                         ><b-card-text>
-                          <b-form-group :label="$t('filters')">
+                          <b-form-group label="Filters">
                             <b-form-checkbox-group
                               id=""
                               v-model="select_filterss"
@@ -584,13 +559,13 @@
                 <div class="row">
                   <div class="col-md-6">
                     <div class="form-group">
-                      <label for="country" class="username"> {{$t("country")}} :</label
+                      <label for="country" class="username"> Country :</label
                       ><br />
                       <multiselect
                         v-model="countryy"
                         @input="Region"
                      
-                        :placeholder="$t('Search')"
+                        placeholder="Search "
                         label="name"
                         track-by="id"
                         :options="countries"
@@ -608,7 +583,7 @@
                         v-model="regionn"
                         @input="Division"
                         
-                        :placeholder="$t('Search')"
+                        placeholder="Search "
                         label="name"
                         track-by="id"
                         :options="regions"
@@ -621,13 +596,13 @@
 
                   <div class="col-md-6">
                     <div class="form-group">
-                      <label for="country" class="username"> {{$t("Division")}} :</label
+                      <label for="country" class="username"> Division :</label
                       ><br />
                       <multiselect
                         v-model="division"
                         @input="Municipality"
                        
-                        :placeholder="$t('Search')"
+                        placeholder="Search "
                         label="name"
                         track-by="id"
                         :options="divisions"
@@ -641,14 +616,14 @@
                   <div class="col-md-6">
                     <div class="form-group">
                       <label for="country" class="username">
-                        {{$t("Municipality")}} :</label
+                        Municipality :</label
                       ><br />
 
                       <multiselect
                         v-model="municipality"
                         @input="Locality"
                       
-                        :placeholder="$t('Search')"
+                        placeholder="Search "
                         label="name"
                         track-by="id"
                         :options="municipalities"
@@ -663,12 +638,12 @@
                 <div class="row">
                   <div class="col-md-6">
                     <div class="form-group">
-                      <label for="Neighbor" class="username"> {{$t("Neighborhood")}} :</label
+                      <label for="Neighbor" class="username"> Neighbor :</label
                       ><br />
                       <multiselect
                         v-model="locality"
                        
-                        :placeholder="$t('Search')"
+                        placeholder="Search "
                         label="name"
                         track-by="id"
                         :options="localities"
@@ -681,13 +656,13 @@
 
                   <div class="col-md-6">
                     <div class="form-group">
-                      <label for="city" class="username"> {{$t("city")}} :</label><br />
+                      <label for="city" class="username"> City :</label><br />
                       <input
                         type="text"
                         name="alias"
                         id="City"
                         v-model="city"
-                        :placeholder="$t('city')"
+                        placeholder="city"
                         class="form-control text"
                       />
                     </div>
@@ -697,13 +672,13 @@
                 <div class="row">
                   <div class="col-md-6">
                     <div class="form-group">
-                      <label for="country" class="username"> {{$t("Keywords")}} :</label
+                      <label for="country" class="username"> Keywords :</label
                       ><br />
 
                       <multiselect
                         v-model="business_keyword"
-                        :tag-placeholder="$t('Add_this_as_new_Keyword')"
-                        :placeholder="$t('Add_New_Keyword')"
+                        tag-placeholder="Add this as new Keyword"
+                        placeholder="Add New Keyword"
                         label="name"
                         track-by="id"
                         :options="keywordds"
@@ -716,7 +691,7 @@
 
                   <div class="col-md-6">
                     <div class="form-group">
-                      <label for="alias" class="username">{{$t("Language")}}:</label
+                      <label for="alias" class="username">Language:</label
                       ><br />
                       <select
                         id="category"
@@ -725,10 +700,10 @@
                         v-model="language"
                       >
                         <option value="" selected="" disabled="">
-                          {{$t("Select_Language")}}
+                          Select Language
                         </option>
-                        <option>{{$t("English")}}</option>
-                        <option>{{$t("French")}}</option>
+                        <option>English</option>
+                        <option>Hindi</option>
                       </select>
                     </div>
                   </div>
@@ -737,7 +712,7 @@
                 <div class="row">
                   <div class="col-md-6">
                     <div class="form-group">
-                      <label for="username" class="username">{{$t("TimeZone")}}:</label
+                      <label for="username" class="username">TimeZone:</label
                       ><br />
 
                       <b-form-select
@@ -750,7 +725,7 @@
 
                   <div class="col-md-6">
                     <div class="form-group">
-                      <label for="Neighbor" class="username"> {{$t("Adress")}} :</label>
+                      <label for="Neighbor" class="username"> Adress :</label>
 
                       <gmap-autocomplete
                         @place_changed="initMarker"
@@ -776,19 +751,19 @@
               </div>
             </tab-content>
 
-            <tab-content :title="$t('follow_business')">
+            <tab-content title="Follow Businesses">
               <div class="div-h">
                 <Business />
               </div>
             </tab-content>
 
-            <tab-content :title="$t('follow_people')">
+            <tab-content title="Follow People">
               <div class="div-h">
                 <People />
               </div>
             </tab-content>
 
-            <tab-content :title="$t('tutorial')">
+            <tab-content title="Tutorial">
               <div class="div-h">
                 <Tutorial />
               </div>
@@ -877,10 +852,10 @@ export default {
         { text: "(GMT-11:00) Midway Island, Samoa", value: "-11" },
       ],
 
-      // options: [
-      //   { text: this.$i18n.t("type"), value: "person" },
-      //   { text: " Business ", value: "business" },
-      // ],
+      options: [
+        { text: " Person", value: "person" },
+        { text: " Business ", value: "business" },
+      ],
 
       category: "",
     };
@@ -1449,13 +1424,6 @@ export default {
   },
 
   computed: {
-
-
-     options(){ return  [
-        { text: this.$i18n.t("person"), value: "person" },
-        { text: this.$i18n.t("business"), value: "business" },
-      ]
-  },
     selectedcategories: function () {
       let selectedUsers = [];
       this.multiselecvalue.forEach((item) => {

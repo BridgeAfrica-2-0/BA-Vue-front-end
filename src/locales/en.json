@@ -28,69 +28,9 @@
     "last_Name_is_required": "Last Name is required",
     "Sign_Up_with_Google": "Sign Up with Google",
     "Sign_Up_with_facebook": "Sign Up with facebook",
-    "Login_To_Bridge_Africa": "Login To Bridge Africa",
-
-    "person": "Person",
-    "business": "business",
-    "continue": "Continue",
-    "use_bridge_africa": "Use BridgeAfirca.com as a",
-    "up_welcome_message" : "welcome and thank you for joining BridgeAfrica.com !",
-    "welcome_message": "  on BidgeAfrica you can quickly create your website in under 5 minutes ; access an online marketplace for buying and selling ; search for and compare product prices amough our localised business directly and engage with your commmunity. Get started and buy and sell Online",
-    "hello": "Hello",
-    "let_start": "get started",
-    "complete_profile": "complete  profile",
-    "add_photo": "Add Profile Photo",
-    "dob": "DOB",
-    "gender": "Gender",
-    "country": "Country",
-    "city": "City",
-    "neighborhood": "Neighborhood",
-    "adress" : "Adress",
-    "select_gender": "select gender",
-    "male": "male",
-    "female": "female",
-    "other": "other",
-    "follow_business": "follow business", 
-    "read_more" : "read more",
-    "read_less": "read less",
-    "back" : "back",
-    "follow_people" : "follow people",
-    "tutorial": "tutorial",
-    "video_name" : "video name",
-    "video_description" : "video description",
-    "finish" : "finish",
-
-
-    "business_identity" : "business identity",
-    "community": "community",
-    "business_logo" : "Business logo",
-    "business_name" : "business name",
-    "change_image" : " change Image",
-    "about" : "About",
-    "brief_description" : "Brief description about your Busness",
-    "category": "Category",
-    "Add_this_as_new_tag" : "Add this as new tag",
-    "Search_or_add_a_tag" : "Search or add a tag",
-    "sub_category" : "Sub Category",
-    "filters" : "Filters",
-    "Search" : "Search",
-    "Division": "Division",
-    "Municipality" : "Municipality",
-    "Neighborhood" : "Neighborhood",
-    "Keywords" : "Keywords",
-    "Add_this_as_new_Keyword" : "Add this as new Keyword",
-    "Add_New_Keyword" : "Add New Keyword",
-    "Language" : "Language",
-    "Select_Language" : "Select Language",
-    "English" : "English",
-    "French" : "French",
-    "TimeZone" : "TimeZone",
-    "Adress" : "Adress"
-   
-    
-
     
     
+
     
     
   }

@@ -1,11 +1,11 @@
 <template>
-  <div class="main"> 
+  <div class="main">
     <div class="splide" v-if="!business_info.cover.length == 0">
       <splide :options="options" class="banner r-image">
         <splide-slide v-for="cover in business_info.cover" :key="cover.id">
           <img :src="cover.media_url" class="r-image" />
         </splide-slide>
-      </splide>  
+      </splide>
     </div>
 
     <div v-else class="splide">
@@ -60,9 +60,10 @@
             <span>Direction</span></b-button
           >
           <b-dropdown
-            class="ml-2  options dot-btn mt-2 mt-sm-2 mt-md-0 "
+            class="ml-2   dot-btn mt-2 mt-sm-2 mt-md-0 "
             no-caret
-            variant="outline-primary"
+            dropleft
+            variant="link"
           >
             <template #button-content>
               <b-icon-three-dots></b-icon-three-dots>
@@ -100,20 +101,14 @@
       </b-row>
     </div>
     <div class="mb-1 m-btn">
-      <b-button class="message m-fol">
-        <i class="fas fa-envelope fa-lg btn-icon "></i> <span>Message</span>
-      </b-button>
+      <b-button class="message m-fol"> <i class="fas fa-envelope fa-lg btn-icon "></i> <span>Message</span> </b-button>
 
       <b-button class="direction ml-1 m-msg size" variant="primary">
         <i class="fas fa-map-marked-alt fa-lg btn-icon "></i>
         <span>Direction</span></b-button
       >
 
-      <b-dropdown
-        class="ml-1 options dot-btn mt-1 mt-sm-2 mt-md-0 "
-        no-caret
-        variant="outline-primary"
-      >
+      <b-dropdown class="ml-1 options dot-btn mt-1 mt-sm-2 mt-md-0 " no-caret variant="outline-primary">
         <template #button-content>
           <b-icon-three-dots></b-icon-three-dots>
         </template>
@@ -127,7 +122,7 @@
       <b-row>
         <b-col cols="12" class="p-0">
           <b-tabs lazy content-class="mt-3 p-0" fill pills>
-            <b-tab  title="Home"><HomePage /></b-tab>
+            <b-tab title="Home"><HomePage /></b-tab>
             <b-tab title="About"><About /></b-tab>
             <b-tab title="Media"><Media /></b-tab>
             <b-tab title="Market"><MarketPlace /></b-tab>
@@ -141,15 +136,15 @@
 </template>
 
 <script>
-import HomePage from "../businessf/tabs/businessHome";
-import About from "./tabs/about";
-import Media from "./tabs/media";
-import MarketPlace from "./tabs/marketPlace";
-import Community from "./tabs/memberNetwork";
-import Networks from "./tabs/networks";
+import HomePage from '../businessf/tabs/businessHome';
+import About from './tabs/about';
+import Media from './tabs/media';
+import MarketPlace from './tabs/marketPlace';
+import Community from './tabs/memberNetwork';
+import Networks from './tabs/networks';
 
 export default {
-  name: "Home",
+  name: 'Home',
   components: {
     HomePage,
     About,
@@ -168,17 +163,17 @@ export default {
         perPage: 3,
         pagination: false,
 
-        type: "loop",
+        type: 'loop',
         perMove: 1,
 
         breakpoints: {
-          "760": {
+          '760': {
             perPage: 1,
-            gap: "0rem",
+            gap: '0rem',
           },
-          "992": {
+          '992': {
             perPage: 2,
-            gap: "1rem",
+            gap: '1rem',
           },
         },
       },
@@ -190,19 +185,14 @@ export default {
       return this.$store.state.businessOwner.businessInfo;
     },
   },
-  created(){
+  created() {
     this.url_data = this.$route.params.id;
-     this.businessInfo();
+    this.businessInfo();
   },
 
   mounted() {
-    
-
     console.log(this.url_data);
 
-    this.CommunityBusiness();
-
-    this.CommunityPeople();
 
     this.businessCommunityTotal();
     this.ownerPost();
@@ -210,55 +200,33 @@ export default {
   methods: {
     businessInfo() {
       this.$store
-        .dispatch("businessOwner/businessInfo", this.url_data)
+        .dispatch('businessOwner/businessInfo', this.url_data)
         .then(() => {
-          console.log("hey yeah");
+          console.log('hey yeah');
         })
-        .catch((err) => {
-          console.log({ err: err });
-        });
-    },
-
-    CommunityBusiness() {
-      this.$store
-        .dispatch("businessOwner/CommunityBusiness", this.url_data)
-        .then(() => {
-          console.log("hey yeah");
-        })
-        .catch((err) => {
-          console.log({ err: err });
-        });
-    },
-
-    CommunityPeople() {
-      this.$store
-        .dispatch("businessOwner/CommunityPeople", this.url_data)
-        .then(() => {
-          console.log("hey yeah");
-        })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
     },
 
     businessCommunityTotal() {
       this.$store
-        .dispatch("businessOwner/businessCommunityTotal", this.url_data)
+        .dispatch('businessOwner/businessCommunityTotal', this.url_data)
         .then(() => {
-          console.log("hey yeah");
+          console.log('hey yeah');
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
     },
 
     ownerPost() {
       this.$store
-        .dispatch("businessOwner/ownerPost", this.url_data)
+        .dispatch('businessOwner/ownerPost', this.url_data)
         .then(() => {
-          console.log("hey yeah");
+          console.log('hey yeah');
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
     },
@@ -321,15 +289,15 @@ img {
 }
 
 p {
-  font-family: "Open Sans Helvetica";
+  font-family: 'Open Sans Helvetica';
 }
 span {
   font-size: 16px;
   margin-left: 4px;
-  font-family: "Open Sans Helvetica";
+  font-family: 'Open Sans Helvetica';
 }
 p {
-  font-family: "Open Sans Helvetica";
+  font-family: 'Open Sans Helvetica';
   font-size: 14px;
 }
 .btns {
@@ -370,7 +338,7 @@ p {
   position: relative;
   top: 11px;
   font-size: 20px;
-  font-family: "Open Sans Helvetica";
+  font-family: 'Open Sans Helvetica';
 }
 
 .name-block {
@@ -473,10 +441,10 @@ p {
   .name {
     position: relative;
     font-size: 16px;
-    font-family: "Open Sans Helvetica";
+    font-family: 'Open Sans Helvetica';
   }
   p {
-    font-family: "Open Sans Helvetica";
+    font-family: 'Open Sans Helvetica';
     font-size: 12px;
   }
   .m-fol {

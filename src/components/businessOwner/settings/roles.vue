@@ -341,8 +341,8 @@ export default {
     top: -5px;
     left: -20px;
   }
-  .assign-btn{
-    margin-top:30px
+  .assign-btn {
+    margin-top: 30px;
   }
 }
 </style>

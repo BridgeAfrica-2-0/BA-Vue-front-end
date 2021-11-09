@@ -59,7 +59,7 @@
         <b-modal id="modal-5" title="Edit Intro" ref="modal" @ok="handleOk">
           <div class="">
             <p>
-              <b> Work at: </b>
+              <b> Work at:</b>
               <span v-if="info.user_experience">
                 <span class="text" v-for="exp in info.user_experience.slice(0, 1)" :key="exp.id">
                   {{ exp.company_name }}

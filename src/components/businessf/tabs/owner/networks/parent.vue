@@ -1,5 +1,5 @@
 <template>
-  <div class="">
+  <div v-if="networkInfo">
     <b-card title="" class="">
       <b-container class="a-center">
         <!-- :src="require('@/assets/img/mayor.jpg')" -->
@@ -119,7 +119,6 @@
               type="text"
               rows="3"
               max-rows="6"
-              required
             ></b-form-textarea>
           </b-form-group>
 
@@ -217,7 +216,6 @@
             Network
           </b-button>
         </b-form>
-        <FlashMessage />
       </b-container>
     </b-modal>
 
@@ -265,14 +263,15 @@
       </b-button>
     </b-modal>
   </div>
+  <div v-else class="text-center">
+    <b-spinner variant="primary" label="Text Centered" style="width: 3rem; height: 3rem;"></b-spinner>
+  </div>
 </template>
 
 <script>
 import SidebarCommunity from "@/components/businessf/tabs/owner/networks/sidebarcommunity";
-
 export default {
   name: "parent",
-
   data() {
     return {
       url: null,
@@ -286,15 +285,8 @@ export default {
       overlay: false,
     };
   },
-
   components: {
-    SidebarCommunity,
-  },
-
-  computed: {
-    networkInfo() {
-      return this.$store.state.networkProfile.networkInfo;
-    },
+    SidebarCommunity
   },
 
   created() {
@@ -311,7 +303,6 @@ export default {
     openNetwork() {
       this.networkShow = false;
     },
-
     addNetwork() {
       this.updateNetwork_form = {
         name: this.networkInfo.name,
@@ -423,7 +414,6 @@ export default {
   text-align: center;
   align-content: center;
   justify-content: center;
-
   display: flex;
 }
 .b-none {
@@ -432,68 +422,53 @@ export default {
 .t-align {
   text-align: left;
 }
-
 .i-color {
   color: #e75c18;
 }
-
 @media only screen and (min-width: 768px) {
   .network-avatar-icon {
     position: absolute;
     width: 2rem;
     height: 2rem;
-
     top: 200px;
     margin-left: 200px;
-
     padding: 0px 0px;
     color: #ffff;
     background: #e75c18;
     border-radius: 25px;
     border: 4px solid #ffff;
   }
-
   .network-name {
     font-size: 20px;
   }
-
   .pivate {
     padding-left: 8px;
     text-align: left;
   }
-
   .network-logo {
     width: 200px !important;
     height: 200px !important;
   }
 }
-
 @media only screen and (max-width: 768px) {
   .network-logo {
     width: 200px !important;
     height: 200px !important;
   }
-
   .network-name {
     font-size: 16px;
   }
-
   .pivate {
     font-size: 12px;
-
     padding-left: 8px;
-
     text-align: left;
   }
-
   .network-avatar-icon {
     position: absolute;
     width: 2rem;
     height: 2rem;
-
     top: 200px;
     margin-left: 200px;
-
     padding: 0px 0px;
     color: #ffff;
     background: #e75c18;

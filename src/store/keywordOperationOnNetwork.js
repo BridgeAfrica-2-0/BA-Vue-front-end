@@ -1,8 +1,7 @@
 import axios from "axios"
 //axios.defaults.baseURL = "https://alert.maxinemoffett.com/api/v1/";
 
-axios.defaults.headers.common["Authorization"] =
-  "Bearer " + localStorage.getItem("access_token");
+
 
   export default {
     namespaced: true,

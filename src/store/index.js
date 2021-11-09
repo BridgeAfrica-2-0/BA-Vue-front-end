@@ -19,7 +19,7 @@ import dashboardCommunity from "./dashboardcommunity";
 import NetworkSettings from "./NetworkSettings";
 import checkout from "./checkout";
 import businessFollowers from "./businessFollowers";
-import hotbusiness from "./hotbusiness";   
+import hotbusiness from "./hotbusiness";
 import business from "./business";
 import profile from "./profile";
 import networkProfileMembers from "./networkProfileMembers";
@@ -28,25 +28,22 @@ import networkProfile from "./networkProfile";
 import UserProfileOwner from "./UserProfileOwner"
 import businessSettingInfo from "./businessSettingInfo"
 import networkProfileCommunitySidebar from "./networkProfileCommunitySidebar";
-import networkProfileFeedback  from "./networkProfileFeedback";
+import networkProfileFeedback from "./networkProfileFeedback";
 import networkProfileMedia from "./networkProfileMedia";
-import networkProfileMemberRequest  from "./networkProfileMemberRequest";
+import networkProfileMemberRequest from "./networkProfileMemberRequest";
 import { search } from "./search";
 import { social } from "./social";
 
 import axios from "axios";
 Vue.use(Vuex);
 
-//  axios.defaults.baseURL = process.env.VUE_APP_API_URL;  
- axios.defaults.baseURL = "http://edson.maxinemoffett.com/api/v1"
+axios.defaults.baseURL = process.env.VUE_APP_API_URL;
 
 export default new Vuex.Store({
   modules: {
     auth,
     networkDetails,
-
-    dashboardcommunity,
-
+    dashboardCommunity,
     businessOwner,
     businessBlocking,
     dashboard,
@@ -74,7 +71,7 @@ export default new Vuex.Store({
     networkProfileCommunity,
     networkProfileMedia,
     networkProfileMemberRequest,
-    networkProfile,
+    networkProfile
   }
 });
 

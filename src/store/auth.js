@@ -1,5 +1,4 @@
 import axios from "axios";
-import { state } from "./search/state";
 axios.defaults.baseURL = process.env.VUE_APP_API_URL;
 
 export default {
@@ -28,7 +27,7 @@ export default {
   mutations: {
     setUserData(state, userData) {
       state.user = userData;
-      state.profilConnected = {...userData.user, user_type:"user"}
+      state.profilConnected = { ...userData.user, user_type: "user" }
 
       localStorage.setItem("user", JSON.stringify(userData));
       axios.defaults.headers.common.Authorization = `Bearer ${userData.accessToken}`;

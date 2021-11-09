@@ -8,58 +8,101 @@
       </p>
     </b-container>
 
-    <b-container class="bv-example-row text">
-      <b-li-group>
-        <b-li class="d-flex align-items-center m-list">
-          <b-avatar class="mr-3" size="4em"></b-avatar>
-          <span class="mr-auto username">J. Circlehead</span>
-          <span class=""><b-link href="#">Unblock</b-link></span>
-        </b-li>
-       <hr width="100%" />
-
-        <b-li class="d-flex align-items-center">
-          <b-avatar
-            variant="primary"
-            text="BV"
-            class="mr-3"
-            size="4em"
-          ></b-avatar>
-          <span class="mr-auto username">itz blec blec</span>
-          <span class=""><b-link href="#">Unblock</b-link></span>
-        </b-li>
-
-         <hr width="100%" />
-
-        <b-li class="d-flex align-items-center m-list">
-          <b-avatar class="mr-3" size="4em"></b-avatar>
-          <span class="mr-auto username">J. Circlehead</span>
-          <span class=""><b-link href="#">Unblock</b-link></span>
-        </b-li>
-        <hr width="100%" />
-
-
-        <b-li class="d-flex align-items-center">
-          <b-avatar
-            variant="primary"
-            text="BV"
-            class="mr-3"
-            size="4em"
-          ></b-avatar>
-          <span class="mr-auto username">itz blec blec</span>
-          <span class=""><b-link href="#">Unblock</b-link></span> 
-         
-        </b-li>
-        <hr width="100%" />
-
-
-      </b-li-group>
+    <b-container v-if="blockusers != 0" class="bv-example-row">
+      <b-list-group v-for="blockuser in blockusers" :key="blockuser.id">
+        <b-skeleton-wrapper :loading="loading">
+          <template #loading>
+            <b-card>
+              <b-skeleton type="avatar"></b-skeleton>
+              <b-skeleton width="55%"></b-skeleton>
+              <b-skeleton width="70%"></b-skeleton>
+            </b-card>
+          </template>
+          <b-list class="d-flex align-items-center m-list">
+            <b-avatar
+              variant="primary"
+              :text="blockuser.name.charAt(0)"
+              :src="blockuser.profile_picture"
+              class="mr-3"
+              size="4em"
+            ></b-avatar>
+            <span class="mr-auto">{{blockuser.name}}</span>
+            <span class="mr-auto" @click="UnblockBlockUser(blockuser)"><b-link href="#">Unblock</b-link></span>
+          </b-list>
+        </b-skeleton-wrapper>
+      </b-list-group>
     </b-container>
+    <b-container v-else>
+      <b-card bg-variant="white" text-variant="black" class="text-center">
+        <b-card-text>No Blocked User Available.</b-card-text>
+      </b-card>
+    </b-container>
+
+    <FlashMessage />
+
   </b-container>
 </template>
 
 <script>
 export default {
-  name: "blocking"
+  name: "blocking",
+  data() {
+    return {
+      url: null,
+      loading: false,
+    }
+	},
+
+  computed: {
+    blockusers() {
+      return this.$store.state.businessBlocking.blockusers;
+    }
+  },
+
+  mounted(){
+    this.url = this.$route.params.id;
+    this.blockUsers();
+  },
+  
+  methods:{
+     
+    blockUsers() {
+      this.loading = true;
+    this.$store
+      .dispatch("businessBlocking/getblockusers", this.url)
+      .then(() => {
+        console.log('ohh year');
+        this.loading = false;
+      })
+      .catch(err => {
+        console.log({ err: err });
+        this.loading = false;
+      });
+    },
+     
+    UnblockBlockUser(blockuser) {
+      this.loading = true;
+      console.log("business/unblocking/"+this.url+"/"+blockuser.user_id);
+			this.axios.delete("business/unblocking/"+this.url+"/"+blockuser.user_id)
+			.then(response => {
+			  console.log(response);
+        this.blockUsers();
+        this.loading = false;
+        this.flashMessage.show({
+          status: "success",
+          message: "User Unblocked"
+        });
+			})
+      .catch(err => {
+        console.log({ err: err });
+        this.loading = false;
+        this.flashMessage.show({
+          status: "error",
+          message: "Unable to Unblocked User"
+        });
+      });
+    }
+  },
 };
 </script>
 

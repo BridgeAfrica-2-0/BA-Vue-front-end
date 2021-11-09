@@ -50,7 +50,12 @@ import notFound from "@/components/404"
 
 
 import welcome from "@/views/welcome";
+
+import ordersdetail from "@/views/odersDetail";
+import businessordersdetail from "@/views/businessordersdetail"
+
 import payment from "@/views/payment";
+
 
 Vue.use(VueRouter);
 
@@ -61,6 +66,23 @@ const routes = [
     component: notFound,
   },
 
+  {
+    path: "/myorders/detail",
+    name: "ordersdetail",
+    component: ordersdetail,
+    // meta: {
+    //   auth: true,
+    // },
+  },
+
+  {
+    path: "/business_owner/ordersdetail",
+    name: "ordersdetail",
+    component: businessordersdetail,
+    // meta: {
+    //   auth: true,
+    // },
+  },
   {
     path: "/myorders",
     name: "orders",

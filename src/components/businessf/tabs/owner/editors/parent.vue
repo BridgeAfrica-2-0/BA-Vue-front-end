@@ -69,7 +69,7 @@
 </template>
 
 <script>
-import SidebarCommunity from '@/components/businessf/tabs/owner/editors/sidebarcommunity';
+import SidebarCommunity from '@/components/businessf/tabs/owner/networks/sidebarcommunity';
 export default {
   name: 'parent',
   components: {

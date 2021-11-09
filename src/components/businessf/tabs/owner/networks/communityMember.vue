@@ -4,11 +4,7 @@
       <div class="people-style border shadow">
         <b-row class="mb-1">
           <b-col md="3" cols="4" sm="4" class="my-auto">
-            <b-avatar
-              class="p-avater"
-              variant="primary"
-              :src="member.profile_picture"
-            ></b-avatar>
+            <b-avatar class="p-avater" variant="primary" :src="member.profile_picture"></b-avatar>
           </b-col>
 
           <b-col md="8" cols="8" sm="8">
@@ -23,20 +19,28 @@
                         </div>
                       </b-col>
 
+                      <b-col md="6" lg="12" cols="6" xl="12" class="mt-3 mt-lg-1 mt-xl-3">
+                        <h6 class="follower m-15">
+                          {{ member.communityNum }}
+                          Community
+                        </h6>
+                      </b-col>
                       <b-col
+                        @click="$emit('BlockUser', member.id)"
                         md="6"
                         lg="12"
                         cols="6"
                         xl="12"
                         class="mt-3 mt-lg-1 mt-xl-3"
+                        style="cursor:pointer;"
                       >
-                        <h6 class="follower m-15">
-                          {{  member.communityNum }}
-                          Community
-                        </h6>
-                      </b-col>
-                      <b-col @click="$emit('BlockUser', member.id)" md="6" lg="12" cols="6" xl="12" class="mt-3 mt-lg-1 mt-xl-3" style="cursor:pointer;">
-                        <b-icon font-scale="1" icon="exclamation-octagon" v-b-tooltip.hover title="Block This User" variant="danger"></b-icon>
+                        <b-icon
+                          font-scale="1"
+                          icon="exclamation-octagon"
+                          v-b-tooltip.hover
+                          title="Block This User"
+                          variant="danger"
+                        ></b-icon>
                       </b-col>
                     </b-row>
                   </div>
@@ -45,38 +49,25 @@
                 <b-col lg="6" xl="6" cols="12" md="12">
                   <div>
                     <b-row class="mt-lg-0">
-                      <b-col
-                        md="6"
-                        lg="12"
-                        cols="6"
-                        xl="12"
-                        class="mt-2 mt-lg-2 mt-xl-2 btn-2 center"
-                      >
-                        <b-button
-                          block
-                          variant="primary"
-                          size="sm"
-                          class="b-background flexx pobtn shadow"
-                        >
+                      <b-col md="6" lg="12" cols="6" xl="12" class="mt-2 mt-lg-2 mt-xl-2 btn-2 center">
+                        <b-button block variant="primary" size="sm" class="b-background flexx pobtn shadow">
                           <i class="fas fa-envelope fa-lg btn-icon"></i>
                           <span class="btn-text">Message</span>
                         </b-button>
                       </b-col>
 
-                      <b-col
-                        md="6"
-                        lg="12"
-                        cols="6"
-                        xl="12"
-                        class="mt-2 mt-lg-2 mt-xl-2 btn-2 center"
-                      >
+                      <b-col md="6" lg="12" cols="6" xl="12" class="mt-2 mt-lg-2 mt-xl-2 btn-2 center">
                         <b-button
                           block
                           size="sm"
                           class="b-background flexx pobtn shadow"
                           variant="primary"
+                          @click="handleFollow(member)"
                         >
-                          <i class="fas fa-user-plus fa-lg btn-icon"></i>
+                          <i
+                            class="fas fa-lg btn-icon"
+                            :class="member.is_follow === 0 ? 'fa-user-minus' : 'fa-user-plus'"
+                          ></i>
                           <span class="btn-com">Community</span>
                         </b-button>
                       </b-col>
@@ -93,8 +84,26 @@
 </template>
 
 <script>
+import axios from 'axios';
 export default {
-  props: ["member"],
+  props: ['member'],
+  methods: {
+    async handleFollow(user) {
+      const uri = user.is_follow === 0 ? `/follow-community` : `/unfollow`;
+      const nextFollowState = user.is_follow === 0 ? 1 : 0;
+      const data = {
+        id: user.id,
+        type: 'user',
+      };
+
+      await axios
+        .post(uri, data)
+        .then(response => {
+          user.is_follow = nextFollowState;
+        })
+        .catch(err => console.log(err));
+    },
+  },
 };
 </script>
 
@@ -406,5 +415,3 @@ export default {
   font-size: 12px !important;
 }
 </style>
-
-

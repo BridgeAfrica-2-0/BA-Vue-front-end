@@ -23,66 +23,30 @@
               <b-icon-geo-alt class="ico"></b-icon-geo-alt> {{ member.location_description }}
             </span> -->
             <!-- <br /> -->
-            <span v-if="member.about_business.length<55">{{ member.about_business}}</span>
-            <span v-else >{{ member.about_business.substring(0,55)+"..." }} <b-link>Read More</b-link></span>
+            <span v-if="member.about_business.length < 55">{{ member.about_business }}</span>
+            <span v-else>{{ member.about_business.substring(0, 55) + '...' }} <b-link>Read More</b-link></span>
           </p>
         </b-col>
 
         <b-col lg="12" xl="4" md="4" cols="12" sm="4">
           <div class="s-button">
             <b-row>
-              <b-col
-                md="12"
-                lg="4"
-                xl="12"
-                sm="12"
-                cols="4"
-                class="mt-2 text-center"
-              >
-                <b-button
-                  block
-                  size="sm"
-                  class="b-background shadow"
-                  variant="primary"
-                >
-                  <i class="fas fa-user-plus fa-lg btn-icon"></i>
+              <b-col md="12" lg="4" xl="12" sm="12" cols="4" class="mt-2 text-center">
+                <b-button block size="sm" class="b-background shadow" variant="primary" @click="handleFollow(member)">
+                  <i class="fas fa-lg btn-icon" :class="member.is_follow === 0 ? 'fa-user-minus' : 'fa-user-plus'"></i>
                   <span class="btn-com">Community</span>
                 </b-button>
               </b-col>
 
-              <b-col
-                md="12"
-                lg="4"
-                xl="12"
-                sm="12"
-                cols="4"
-                class="mt-2 text-center"
-              >
-                <b-button
-                  block
-                  size="sm"
-                  class="b-background shadow"
-                  variant="primary"
-                >
+              <b-col md="12" lg="4" xl="12" sm="12" cols="4" class="mt-2 text-center">
+                <b-button block size="sm" class="b-background shadow" variant="primary">
                   <i class="fas fa-envelope fa-lg btn-icon"></i>
                   <span class="btn-text">Message</span>
                 </b-button>
               </b-col>
 
-              <b-col
-                md="12"
-                lg="4"
-                xl="12"
-                sm="12"
-                cols="4"
-                class="mt-2 text-center"
-              >
-                <b-button
-                  block
-                  size="sm"
-                  class="b-background shadow"
-                  variant="primary"
-                >
+              <b-col md="12" lg="4" xl="12" sm="12" cols="4" class="mt-2 text-center">
+                <b-button block size="sm" class="b-background shadow" variant="primary">
                   <i class="fas fa-map-marked-alt fa-lg btn-icon"></i>
                   <span class="btn-text">Direction</span>
                 </b-button>
@@ -96,8 +60,9 @@
 </template>
 
 <script>
+import axios from 'axios';
 export default {
-  props: ["member"],
+  props: ['member'],
   data() {
     return {
       options: {
@@ -105,24 +70,29 @@ export default {
         autoplay: true,
         perPage: 1,
         pagination: false,
-        type: "loop",
+        type: 'loop',
         perMove: 1,
       },
     };
   },
   method: {
-    // nFormatter(num) {
-    //   if (num >= 1000000000) {
-    //     return (num / 1000000000).toFixed(1).replace(/\.0$/, "") + "G";
-    //   }
-    //   if (num >= 1000000) {
-    //     return (num / 1000000).toFixed(1).replace(/\.0$/, "") + "M";
-    //   }
-    //   if (num >= 1000) {
-    //     return (num / 1000).toFixed(1).replace(/\.0$/, "") + "K";
-    //   }
-    //   return num;
-    // },
+    async handleFollow(user) {
+
+      console.log(user)
+      const uri = user.is_follow === 0 ? `/follow-community` : `/unfollow`;
+      const nextFollowState = user.is_follow === 0 ? 1 : 0;
+      const data = {
+        id: user.id,
+        type: 'business',
+      };
+
+      await axios
+        .post(uri, data)
+        .then(response => {
+          user.is_follow = nextFollowState;
+        })
+        .catch(err => console.log(err));
+    },
   },
 };
 </script>
@@ -180,11 +150,11 @@ export default {
     font-size: 16px;
     color: black;
     line-height: 35px;
-    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   }
   .textt {
     color: #000;
-    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
     font-weight: normal;
     font-size: 14px;
     line-height: 30px;
@@ -219,11 +189,11 @@ export default {
     font-size: 20px;
     color: black;
     line-height: 35px;
-    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   }
   .textt {
     color: #000;
-    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
     font-weight: normal;
     font-size: 14px;
     line-height: 30px;
@@ -314,7 +284,7 @@ export default {
 @media only screen and (min-width: 992px) and (max-width: 1265px) {
   .textt {
     color: #000;
-    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
     font-weight: normal;
     font-size: 14px;
     line-height: 30px;

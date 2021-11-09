@@ -18,7 +18,7 @@
         </p>
         <b-icon icon="suit-heart" variant="primary" aria-hidden="true"></b-icon>
         23
-        <span @click="showReply" class="primary ml-2 reply"><b>Reply</b></span>
+        <span @click="showReply" class="primary ml-2 reply"><b>{{$t("businessf.Reply")}}</b></span>
         <div v-if="reply">
           <b-row class="mt-2">
             <b-col cols="1">

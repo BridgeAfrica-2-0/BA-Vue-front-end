@@ -19,7 +19,7 @@
             <strong class="title"> {{$t("search.Super_Car_ltd")}} </strong> <br />
             {{$t("search.Car_marketing")}}
             <br />
-            {{$t("search.20k_ommunity")}} <br />
+            {{$t("search.20K_Community")}} <br />
 
             <span class="location">
               <b-icon-geo-alt class="ico"></b-icon-geo-alt> {{$t("search.Douala_cameroon")}}
@@ -115,7 +115,7 @@
             <strong class="title"> {{$t("search.Super_Car_ltd")}} </strong> <br />
             {{$t("search.Car_marketing")}}
             <br />
-            {{$t("search.20k_Community")}} <br />
+            {{$t("search.20K_Community")}} <br />
 
             <span class="location">
               <b-icon-geo-alt class="ico"></b-icon-geo-alt> {{$t("search.Douala_cameroon")}}
@@ -191,6 +191,16 @@
         </b-col>
       </b-row>
     </div>
+    <p class="text-center">
+      <span class="display-inline">
+        <b-link @click="$i18n.locale = 'en'"> {{ $t("auth.english") }}</b-link>
+        <span class="vl"></span>
+        <b-link class="ml-2" @click="$i18n.locale = 'fr'">
+          {{ $t("auth.french") }}
+        </b-link>
+      </span>
+      Bridge Africa © 2021
+    </p>
   </div>
 </template>
 

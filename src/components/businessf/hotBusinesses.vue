@@ -2,7 +2,7 @@
   <div class="hot mt-2 p-2">
     <b-row>
       <b-col>
-        <p><b>Hot Businesses</b></p>
+        <p><b>{{$t("businessf.Hot_Businesses")}}</b></p>
       </b-col>
       <b-col class="col-2">
         <fas-icon :icon="['fas', 'angle-left']" />
@@ -51,14 +51,14 @@
         </b-col>
         <b-col md="5" cols="7"  lg="7" xl="7"  sm="5">
           <p class="textt">
-            <strong class="title"> Super Car ltd </strong> <br />
-             Car marketing  
-              <br />  20k Community <br />
+            <strong class="title"> {{$t("businessf.Super_Car_ltd")}} </strong> <br />
+             {{$t("businessf.Car_marketing")}}  
+              <br />  {{$t("businessf.20k_Community")}} <br />
             
-            <span class="location"> <b-icon-geo-alt class="ico" ></b-icon-geo-alt> Douala cameroon  </span> <br /> 
+            <span class="location"> <b-icon-geo-alt class="ico" ></b-icon-geo-alt> {{$t("businessf.Douala_cameroon")}}  </span> <br /> 
             
 
-             super best car seller in the world
+             {{$t("businessf.super_best_car_seller_in_the_world")}} 
             adipisicing elit. lorem epsep this is  <b-link>Read More</b-link>
           </p>
         </b-col>
@@ -73,7 +73,7 @@
      <b-row>  <b-col md="12"  lg="4"  xl="4" sm="12" cols="4" class="mt-2 text-center">    
 
             <b-button block size="sm" class="b-background shadow " variant="primary">
-                <i class="fas fa-user-plus  fa-lg btn-icon "></i>  <span class="btn-com">Community</span>
+                <i class="fas fa-user-plus  fa-lg btn-icon "></i>  <span class="btn-com">{{$t("businessf.Community")}}</span>
             </b-button>   
 
             </b-col>  
@@ -83,7 +83,7 @@
            
 
              <b-button block size="sm" class="b-background shadow " variant="primary">
-                <i class="fas fa-envelope   fa-lg btn-icon "></i>  <span class="btn-text">Message</span>
+                <i class="fas fa-envelope   fa-lg btn-icon "></i>  <span class="btn-text">{{$t("businessf.Message")}}</span>
             </b-button>   
 
 
@@ -92,7 +92,7 @@
             <b-col  md="12"  lg="4"  xl="4" sm="12" cols="4"  class="mt-2 text-center">  
 
               <b-button block size="sm" class="b-background shadow " variant="primary">
-                <i class="fas fa-map-marked-alt  fa-lg btn-icon "></i>  <span class="btn-text">Direction</span>
+                <i class="fas fa-map-marked-alt  fa-lg btn-icon "></i>  <span class="btn-text">{{$t("businessf.Direction")}}</span>
             </b-button> 
 
            

@@ -2,7 +2,8 @@
   <b-container>
     <b-container>
       <p class="a-text">
-        Select a payment method for your bridget africa account
+        {{$t("businessf.")}}
+{{$t("businessf.Select_a_payment_method_for_your_bridge_africa_account")}}
       </p>
     </b-container>
 
@@ -24,7 +25,7 @@
           name="mobile-payment"
           value="mobile-money"
         >
-          Mobile Payment
+          {{$t("businessf.Mobile_Payment")}}
         </b-form-radio>
         <br />
         <b-form-radio

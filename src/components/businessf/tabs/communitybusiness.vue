@@ -201,9 +201,9 @@ export default {
       let url = null;
 
          if(this.type=="Follower"){  
-         url = "business/community/business-follower/"+this.biz_id+"/";
+         url = "business/community/visitor/business-follower/"+this.biz_id+"/";
          }else{
-           url = "business/community/business-following/"+this.biz_id+"/";
+           url = "business/community/visitor/business-following/"+this.biz_id+"/";
          }
       axios
         .get(url + this.page+"?keyword="+this.searchh )

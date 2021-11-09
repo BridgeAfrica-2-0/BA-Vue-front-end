@@ -187,13 +187,13 @@ export default {
       
 
       if (this.type == "Follower") {
-     url = "business/community/people-follower/"+this.biz_id+"/"; 
+     url = "business/community/visitor/people-follower/"+this.biz_id+"/"; 
 
 
 
         
       } else {
-        url = "business/community/people-following/"+this.biz_id+"/";
+        url = "business/community/visitor/people-following/"+this.biz_id+"/";
       }
 
       axios

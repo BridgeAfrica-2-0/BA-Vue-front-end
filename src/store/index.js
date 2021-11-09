@@ -1,6 +1,11 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import auth from "./auth";
+import businessBlocking from "./businessBlocking";
+import dashboard from "./dashboard";
+import businessGeneral from "./businessGeneral";
+import businessRole from "./businessRole";
+import businessAccountType from "./businessAccountType";
 import businessOwner from "./businessOwner";
 import marketSearch from "./marketSearch";
 import networkSearch from "./networkSearch";
@@ -19,6 +24,7 @@ import networkProfileMembers from "./networkProfileMembers";
 import follower from "./follower";
 import networkProfile from "./networkProfile";
 import UserProfileOwner from "./UserProfileOwner"
+import businessSettingInfo from "./businessSettingInfo"
 import networkProfileCommunitySidebar from "./networkProfileCommunitySidebar";
 import networkProfileFeedback  from "./networkProfileFeedback";
 import networkProfileMedia from "./networkProfileMedia";
@@ -29,16 +35,23 @@ import { social } from "./social";
 import axios from "axios";
 Vue.use(Vuex);
 
-//axios.defaults.baseURL = process.env.VUE_APP_API_URL;  
-axios.defaults.baseURL = "http://edson.maxinemoffett.com/api/v1"
+//  axios.defaults.baseURL = process.env.VUE_APP_API_URL;  
+ axios.defaults.baseURL = "http://edson.maxinemoffett.com/api/v1"
 
 export default new Vuex.Store({
   modules: {
     auth,
     networkDetails,
-    dashboardCommunity,
-    ProfileAndBusinessDetails,
+
+    dashboardcommunity,
+
     businessOwner,
+    businessBlocking,
+    dashboard,
+    ProfileAndBusinessDetails,
+    businessGeneral,
+    businessRole,
+    businessAccountType,
     business,
     networkProfileFeedback,
     hotbusiness,
@@ -47,12 +60,13 @@ export default new Vuex.Store({
     follower,
     search,
     UserProfileOwner,
+    businessSettingInfo,
     checkout,
     social,
     marketSearch,
     networkSearch,
     networkProfileMembers,
-        allSearch,
+    allSearch,
     businessFollowers,
     networkProfileCommunitySidebar,
     networkProfileCommunity,

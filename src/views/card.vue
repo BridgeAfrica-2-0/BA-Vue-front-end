@@ -2,10 +2,10 @@
   <div class="container">
       <navbar />
     <div class="row">
-      <div class="col-12 col-md-9">
+      <div class="col-12 col-lg-12 col-xl-9">
         <hr />
         <div class="row">
-          <div class="col"><h3 class="mx-5">PRODUCT DETAILS</h3></div>
+          <div class="col-12  col-lg-7 col-xl-6"><h3 class="mx-5">PRODUCT DETAILS</h3></div>
           <div class="col">
             <div class="row desktop">
               <h3 class="mx-5">Quantity</h3>
@@ -17,7 +17,7 @@
         <hr />
         <div v-for="i in 4" :key="i">
           <div class="row ">
-            <div class="col-4 col-md-3">
+            <div class="col-4 col-lg-3 col-xl-3">
               <splide :options="{ rewind: true }" class="r-img">
                 <splide-slide cl v-for="(im, index) in img" :key="index">
                   <img :src="img[index]" class="r-img" />
@@ -25,7 +25,7 @@
               </splide>
             </div>
 
-            <div class="col-8 col-md-4 text-end text-start bold ">
+            <div class="col-8 col-lg-8 col-xl-4 text-end text-start bold ">
               <div class="row">
                 <div class="col-5 p-0"><h3>Name of item :</h3></div>
                 <div class="col"><h3 class="h3">product name</h3></div>
@@ -43,19 +43,35 @@
                 <div class="col">
                   <h3 class="h3">
                     Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Maxime quibusdam consequuntur sequi itaque..
+                    Maxime ..
                   </h3>
                 </div>
               </div>
+              <!-- display only for mobile -->
+              <div class="row hidemobile">
+                <div class="col-4 p-0 ">
+                  <input type="number" value="2" class="numbersize " />
+                </div>
+                <div class="col text-success p-0"><h3 class="top">5000 XAF</h3></div>
+                <div class="col p-0 text-success  text-center"><h3 class="top">10000 XAF</h3></div>
+                <div class="col-1 p-0 ">
+                  <fas-icon
+                    class="couleur search  marg4 "
+                    :icon="['fas', 'trash-alt']"
+                  />
+                </div>
+
+              </div>
             </div>
             <div class="row line"></div>
-            <div class="col marg5">
+            <!-- display only for desktop -->
+            <div class="col hidedesktop">
               <div class="row ">
                 <div class="col-4 p-0 bg-y ">
                   <input type="number" value="2" class="numbersize marg1" />
                 </div>
-                <div class="col text-success p-0 "><h3 class="marg2">5000 XAF</h3></div>
-                <div class="col p-0 text-success  text-center"><h3 class="marg3">10000 XAF</h3></div>
+                <div class="col text-success p-0 "><h3 class="marg2 top">5000 XAF</h3></div>
+                <div class="col p-0 text-success  text-center"><h3 class="marg3 top">10000 XAF</h3></div>
                 <div class="col-1 p-0  ">
                   <fas-icon
                     class="couleur search  marg4"
@@ -68,7 +84,7 @@
         </div>
       </div>
       <div class=" line"></div>
-      <div class="col-12 col-md-3 color">
+      <div class="col-12 col-lg-12  col-xl-3 color">
         <h3 class="my-2">ORDER SUMMARY</h3>
         <hr />
         <div class="row">
@@ -115,15 +131,16 @@ export default {
 </script>
 <style scoped>
 
-@media only screen and (max-width: 1201px) {
+@media only screen and (max-width: 1199px) {
   .desktop{
     display: none;
   }
+
   .color {
   background-color: #c5c5c546;
   margin-top: 15px;
   /* height: 500px; */
-  
+  padding-right: 10px;
 }
 
 .marg1{
@@ -141,6 +158,10 @@ export default {
 }
 .marg5{
   margin-top: -20px ;
+  
+}
+.hidedesktop{
+  display: none;
 }
 h3 {
   font-size: 12px;
@@ -179,8 +200,12 @@ h3 {
 
 .r-img {
   border-radius: 5px;
-  height: 150px;
+  height: 140px;
   
+}
+
+.top{
+  margin-top: 6px;
 }
 
 }
@@ -188,9 +213,13 @@ h3 {
 
 /* style for desktop ------------------------------------ */
 @media only screen and (min-width: 1200px) {
+  
 h3 {
   font-size: 14px;
   font-weight: bold;
+}
+.hidemobile{
+  display: none;
 }
 .h3 {
   font-weight: normal;
@@ -228,5 +257,12 @@ h3 {
   width: 40px;
   height: 20px;
 }
+.top{
+  margin-top: 5px;
 }
+}
+
+
+
+
 </style>

@@ -149,6 +149,8 @@ Vue.use(VueGoogleMaps, {
 import VueLoading from 'vue-loading-overlay';
 import 'vue-loading-overlay/dist/vue-loading.css';
 
+
+Vue.use(VueLoading);
 import VueYoutube from 'vue-youtube'
  
 Vue.use(VueYoutube)

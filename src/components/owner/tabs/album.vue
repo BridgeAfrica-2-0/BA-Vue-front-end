@@ -96,7 +96,7 @@
         </div>
       </div>
     </div>
-    
+
     <div class="container-flex" v-if="showalbum">
       <b-button variant="outline-primary" size="sm" @click="hidealbum"> Back </b-button>
       <span class="text-center ml-2 f-20"> {{ this.album_name }} </span>
@@ -230,7 +230,7 @@ export default {
 
       getAlbumsNetwork: 'networkProfileMedia/getAlbums',
       getAlbumImageNetwork: 'networkProfileMedia/getAlbumImage',
-      albumImagesNetwork: 'networkProfileMedia/getalbumImages',
+      albumImagesNetwork: 'networkProfileMedia/getAllImages',
     }),
 
     canCreateAlbum() {
@@ -314,7 +314,10 @@ export default {
     createAlbums() {
       this.loading = true;
 
-      const data = 'business' == this.type ? { id: this.$route.params.id, data: this.albumInfo } : this.albumInfo;
+      const data =
+        'business' == this.type || 'network' == this.type
+          ? { id: this.$route.params.id, data: this.albumInfo }
+          : this.albumInfo;
 
       this.strategy[this.type]()
         .createAlbum(data)
@@ -386,7 +389,8 @@ export default {
     },
 
     deleteAlbums(id) {
-      const data = 'business' == this.type ? { businessID: this.$route.params.id, albumID: id } : id;
+      const data =
+        'business' == this.type || 'network' == this.type ? { businessID: this.$route.params.id, albumID: id } : id;
 
       this.strategy[this.type]()
         .deleteAlbum(data)

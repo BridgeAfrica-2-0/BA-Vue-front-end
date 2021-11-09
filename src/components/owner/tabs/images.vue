@@ -71,92 +71,8 @@
             :deleteImage="() => deleteImage(im.id, cmp)"
             :content="image.content"
             :imageProps="imageProps"
+            :type="type"
           />
-
-          <!-- <a v-if="typeOfMedia(im.path) == 'image' && !loading"
-            ><b-img
-              class="card-img btn p-0 album-img"
-              thumbnail
-              fluid
-              rounded
-              :src="getFullMediaLink(im.path)"
-              alt="media_img"
-              v-b-modal="`modal-${im.id}`"
-              v-bind="imageProps"
-            ></b-img>
-          </a>
-          <video
-            controls
-            v-else-if="typeOfMedia(im.path) == 'video' && !loading"
-            class="card-img btn p-0 album-img"
-          >
-            <source :src="getFullMediaLink(im.path)" />
-          </video>
-          <youtube
-            class="card-img btn p-0 album-img"
-            v-if="typeOfMedia(im.path) == 'youtube' && !loading"
-            :video-id="getYoutubeKey(getFullMediaLink(im.path))"
-            :player-vars="playerVars"
-          ></youtube>
-
-          <div class="botmediadess-position" v-if="loading">
-            <b-spinner
-              style="width: 3rem; height: 3rem; color: #e75c18"
-              label="Large Spinner"
-            ></b-spinner>
-          </div>
-          <b-modal hide-footer :id="`modal-${im.id}`" title="Details" size="md">
-            <img
-              class="card-img"
-              :src="getFullMediaLink(im.path)"
-              @click="() => showImg(getFullMediaLink(im.path))"
-              alt="media_img"
-            />
-            <p class="my-4">{{ image.content }}</p>
-          </b-modal>
-
-          <div
-            class="mediadesc"
-            v-if="!['youtube'].includes(typeOfMedia(im.path))"
-          >
-            <ul class="navbar-nav pull-right options">
-              <li class="nav-item dropdown m-0 p-0">
-                <b-dropdown
-                  size="sm"
-                  class="float-right"
-                  variant="link"
-                  toggle-class="text-decoration-none"
-                  no-caret
-                >
-                  <template #button-content>
-                    <b-icon
-                      icon="three-dots-vertical"
-                      color="white"
-                      variant="light"
-                    >
-                    </b-icon>
-                  </template>
-                  <b-dropdown-item @click="downloadPic(im)">
-                    Download</b-dropdown-item
-                  >
-                  <b-dropdown-item
-                    href="#"
-                    @click="setProfilePic(im.id)"
-                    v-if="!['video'].includes(typeOfMedia(im.path))"
-                    >Make Profile Picture</b-dropdown-item
-                  >
-                  <b-dropdown-item
-                    @click="setCoverPic(im.id)"
-                    v-if="!['video'].includes(typeOfMedia(im.path))"
-                    >Make Cover Photo</b-dropdown-item
-                  >
-                  <b-dropdown-item href="#" @click="deleteImage(im.id, cmp)"
-                    >Delete</b-dropdown-item
-                  >
-                </b-dropdown>
-              </li>
-            </ul>
-          </div> -->
 
           <br />
         </div>
@@ -313,18 +229,18 @@ export default {
       onDownloadPicBusiness: 'businessOwner/downloadPic',
       getAlbumImagesBusiness: 'businessOwner/getAlbumImages',
 
-      submitPostNetwork: 'networkProfile/submitPost',
-      setProfilePictureNetwork: 'networkProfile/setProfilePic',
-      setCoverPictureNetwork: 'networkProfile/setCoverPic',
-      deleteImagePictureNetwork: 'networkProfile/deleteImage',
-      onDownloadPicNetwork: 'networkProfile/downloadPic',
-      getAlbumImagesNetwork: 'networkProfile/getAlbumImages',
+      submitPostNetwork: 'networkProfileMedia/submitPost',
+      setProfilePictureNetwork: 'networkProfileMedia/setProfilePic',
+      setCoverPictureNetwork: 'networkProfileMedia/setCoverPic',
+      deleteImagePictureNetwork: 'networkProfileMedia/deleteImage',
+      onDownloadPicNetwork: 'networkProfileMedia/downloadPic',
+      getAlbumImagesNetwork: 'networkProfileMedia/getAlbumImages',
     }),
 
     ...mapMutations({
       updateItem: 'UserProfileOwner/updateAlbumItem',
       updateItemBusiness: 'businessOwner/updateAlbumItem',
-      updateItemNetwork: 'networkProfile/updateAlbumItem',
+      updateItemNetwork: 'networkProfileMedia/updateAlbumItem',
     }),
 
     getFullMediaLink: fullMediaLink,
@@ -510,7 +426,7 @@ export default {
       formData.append('dob', this.text);
       let payload = {
         albumID: albumId,
-        businessID: 'business' == this.type ? this.$route.params.id : null,
+        businessID: 'business' == this.type || 'network' == this.type ? this.$route.params.id : null,
         data: formData,
       };
 

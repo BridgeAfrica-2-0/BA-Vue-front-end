@@ -94,17 +94,15 @@ export default {
     getAlbums() {
       try {
         const type = this.strategy[this.type]();
-        console.log(type.album)
-
+        
         //if (!this.hasLoadAlbum) {
         this.$store
-          .dispatch(type.album, this.urlData)
+          .dispatch(type.album, this.$route.params.id)
           .then(() => {
             this.hasLoadAlbum = true;
           })
           .catch((err) => {
             this.hasLoadAlbum = true;
-            console.log(err);
           });
         //}
       } catch (error) {
@@ -118,13 +116,12 @@ export default {
         const type = this.strategy[this.type]();
         //if (!this.hasLoadPicture) {
         this.$store
-          .dispatch(type.image, this.urlData)
+          .dispatch(type.image, this.$route.params.id)
           .then(() => {
             this.hasLoadPicture = true;
           })
-          .catch((err) => {
+          .catch(() => {
             this.hasLoadPicture = true;
-            console.log({ err: err });
           });
         //}
       } catch (error) {
@@ -135,8 +132,6 @@ export default {
   },
 
   created() {
-    this.urlData = this.$route.params.id;
-
     this.strategy = {
       business: () => ({
         album: 'businessOwner/getAlbums',

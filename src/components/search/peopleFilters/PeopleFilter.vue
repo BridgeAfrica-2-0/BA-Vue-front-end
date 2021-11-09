@@ -1,5 +1,5 @@
 <template>
-  <div class="mx-4">
+  <div>
     <b-form class="mb-4">
       <label for="feedback-user">{{$t("search.Profession")}}</label>
       <b-form-input
@@ -132,12 +132,12 @@
           </b-card>
         </b-collapse>
         <!--end network section-->
-        <Button
+        <!---<Button
           @click.native="onProcess"
           :title="$t('search.Search')"
           class="mt-4"
           fas="fas fa-search  fa-lg btn-icon "
-        />
+        /> -->
       </b-card>
     </b-collapse>
   </div>
@@ -146,7 +146,7 @@
 <script>
 import _ from "lodash";
 
-import { mapActions } from "vuex";
+import { mapActions, mapGetters } from "vuex";
 
 const options = [
   { text: "Follower", value: "Follower" },
@@ -154,12 +154,12 @@ const options = [
   { text: "Community", value: "Community" },
 ];
 
-import Button from "@/components/Button";
+//import Button from "@/components/Button";
 
 export default {
-  components: {
+  /*components: {
     Button,
-  },
+  },*/
   data: () => ({
     profession: null,
     rootSectionIsVisible: false,
@@ -174,17 +174,40 @@ export default {
     optionsNetwork: [...options, { text: "Member", value: "Member" }],
   }),
 
+  watch: {
+    selectedPeople: function () {
+      this.onProcess();
+    },
+    selectedBuisness: function () {
+      this.onProcess();
+    },
+    selectedNetwork: function () {
+      this.onProcess();
+    },
+  },
+
+  computed: {
+    ...mapGetters({
+      keyword: "search/POST_KEYWORD",
+    }),
+  },
+
   methods: {
     ...mapActions({
-      findProfession: "search/FIND_PROFESSION",
-      findCommunity: "search/FIND_COMMUNITY",
+      userStore: "search/FIND_USER",
+      lauchLoader: "search/LOADING",
+      setCallback: "search/SET_CURRENT_PAGINATE_CALLBACK",
+      stack: "search/STACK_VALUE",
+      page: "search/SET_CURRENT_PAGINATION_PAGE",
+      reset: "search/RESET_RESULT",
     }),
 
     map(data, type) {
       return data.map((e) => `${type}_${e.toLowerCase()}`);
     },
 
-    onProcess() {
+    onProcess: _.debounce(function (e) {
+      this.page(1);
       const user = this.map(this.selectedPeople, `user`);
       const buisness = this.map(this.selectedBuisness, `buisness`);
       const network = this.map(this.selectedNetwork, `network`);
@@ -194,21 +217,55 @@ export default {
         return hash;
       }, {});
 
-      const loader = this.$loading.show({
-        container: this.$refs.formContainer,
-        canCancel: true,
-      });
+      this.stack({ data: { ...data, keyword: this.keyword }, page: 1 });
 
-      this.findCommunity(data);
+      this.setCallback(this.$repository.search.findUserByParam);
+      this._onFindUser({
+        data: { ...data, keyword: this.keyword },
+        page: 1,
+      });
+    }, 2000),
+
+    async _onFindUser(payload) {
+      try {
+        this.lauchLoader(true);
+        this.reset();
+        const request = await this.$repository.search.findUserByParam(payload);
+
+        if (request.success) {
+          this.userStore(request.data);
+          this.page(2);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+
+      this.lauchLoader(false);
     },
 
     debounceInput: _.debounce(function (e) {
-      this.findProfession(e);
+      if (e) {
+        this.page(1);
+        this.stack({
+          data: {
+            profession: e,
+            keyword: this.keyword,
+          },
+          page: 1,
+        });
+        this.setCallback(this.$repository.search.findUserByParam);
+        this._onFindUser({
+          data: {
+            profession: e,
+            keyword: this.keyword,
+          },
+          page: 1,
+        });
+      }
     }, 1000),
 
     toogleRootSection() {
       this.rootSectionIsVisible = !this.rootSectionIsVisible;
-
       if (!this.rootSectionIsVisible) this.closeAllSections();
     },
     closeAllSections() {

@@ -1,13 +1,15 @@
 <template>
   <div>
     <div class="s-cardd">
-      <div class="people-style border shadow">
+  
+
+    <div class="people-style border shadow"  v-for="item in users" :key="item.id">
         <b-row class="mb-1">
           <b-col md="3" cols="4" lg="3" class="my-auto">
             <b-avatar
               class="p-avater"
               variant="primary"
-              :src="people.profile_picutre"
+              :src="item.profile_picture"
             ></b-avatar>
           </b-col>
 
@@ -19,7 +21,7 @@
                     <b-row>
                       <b-col md="6" lg="6" cols="6" sm="6" class="mt-lg-2">
                         <div class="mt-2 mt-lg-0 mt-xl-0 username">
-                          <b> {{ people.name }} </b>
+                          <b> {{ item.name }} </b>
                         </div>
                       </b-col>
 
@@ -30,9 +32,7 @@
                         sm="6"
                         class="mt-3 mt-lg-2 mt-xl-2"
                       >
-                        <h6 class="follower">
-                          {{ people.followers }} Community
-                        </h6>
+                        <h6 class="follower">{{ count(item.followers) }} Community</h6>
                       </b-col>
                     </b-row>
                   </div>
@@ -87,22 +87,137 @@
         </b-row>
       </div>
 
-      url = "business/community/visitor/people-follower/"+this.biz_id+"/"; }
-      else { url =
-      "business/community/visitor/people-following/"+this.biz_id+"/"; } axios
-      .get(url + this.page) .then(({ data }) => {
+
     </div>
+    
+  <infinite-loading @infinite="infiniteHandler"></infinite-loading>
   </div>
 </template>
 
 <script>
+
+import moment from "moment";
+import axios from "axios";
 export default {
-  props: ["people"],
+
+
+   props:['type'],
+  data() {
+    return {
+      page: 1,
+      biz_id:null,
+      options: {
+        rewind: true,
+        autoplay: true,
+        perPage: 1,
+        pagination: false,
+
+        type: "loop",
+        perMove: 1
+      }
+    };
+  },
+ 
+ mounted(){
+    this.biz_id = this.$route.params.id;
+ },
+
+    computed:{
+ 
+   users(){
+
+      if(this.type=="Follower"){ 
+
+      return  this.$store.state.businessOwner.UcommunityFollower.user_followers;  
+
+       }else{
+
+         return  this.$store.state.businessOwner.UcommunityFollowing.user_following; 
+       }
+   }
+    
+    
+  },
+
+    methods:{
+
+
+      count(number) {
+      if (number >= 1000000) {
+        return number / 1000000 + "M";
+      }
+      if (number >= 1000) {
+        return number / 1000 + "K";
+      } else return number;
+    },
+
+      
+      
+    
+    infiniteHandler($state) {
+    
+      let url = null; 
+
+      if (this.type == "Follower") {
+
+      url = "business/community/visitor/people-follower/"+this.biz_id+"/";
+
+        
+      } else {
+        url = "business/community/visitor/people-following/"+this.biz_id+"/";
+      }
+      axios
+        .get(url + this.page)
+        .then(({ data }) => {
+
+           
+            if (this.type == "Follower") {
+             
+
+               if (data.data.user_followers.length) {
+           this.page += 1;
+           
+              this.users.push(...data.data.user_followers);
+            $state.loaded();
+          } else {
+            $state.complete();
+          }
+
+            } else {
+         
+
+             if (data.data.user_following.length) {
+           this.page += 1;
+           
+              this.users.push(...data.data.user_following);
+            $state.loaded();
+          } else {
+            $state.complete();
+          }
+
+
+            }
+
+            
+          console.log(data);
+         
+        })
+        .catch((err) => {
+          console.log({ err: err });
+        });
+    },
+
+  }  
 };
 </script>
 
 <style scoped>
 @media only screen and (min-width: 768px) {
+  .s-cardd {
+    padding-left: 6px;
+    padding-right: 6px;
+  }
+
   .btn-text {
     margin-left: 8px;
   }
@@ -135,9 +250,9 @@ export default {
     margin-right: 5px;
   }
 
-  .s-ccard {
-    padding-left: 7px;
-    padding-right: 5px;
+  .s-cardd {
+    padding-left: 4px;
+    padding-right: 4px;
   }
 }
 
@@ -234,7 +349,7 @@ f-right {
 }
 
 .follower {
-  font-size: 12px;
+  font-size: 10px;
 }
 
 .people-style {
@@ -251,7 +366,6 @@ f-right {
   background-color: #fff;
   background-clip: border-box;
   border: 1px solid rgba(0, 0, 0, 0.125);
-  margin: 5px;
   margin-bottom: 10px;
 }
 
@@ -260,7 +374,6 @@ f-right {
     width: 123px;
     height: 38px;
     font-size: 14px;
-    padding-top: 8px;
   }
 
   .center {
@@ -299,9 +412,6 @@ f-right {
     background-clip: border-box;
     border: 1px solid rgba(0, 0, 0, 0.125);
     margin-bottom: 10px;
-
-    margin-right: 2px;
-    margin-left: 2px;
   }
 
   h6 {
@@ -352,9 +462,6 @@ f-right {
     background-clip: border-box;
     border: 1px solid rgba(0, 0, 0, 0.125);
     margin-bottom: 10px;
-
-    margin-right: 2px;
-    margin-left: 2px;
   }
 
   h6 {
@@ -388,10 +495,9 @@ f-right {
   }
 
   .btn {
-    width: 105px;
+    width: 123px;
     height: 38px;
-    font-size: 12px;
-    padding-top: 8px;
+    font-size: 14px;
   }
 
   .center {
@@ -478,12 +584,11 @@ f-right {
   }
 }
 
-@media only screen and (min-width: 992px) and (max-width: 1331px) {
+@media only screen and (min-width: 992px) and (max-width: 1421px) {
   .btn {
     width: 115px;
-    height: 30px;
-    font-size: 12px;
-    padding-top: 8px;
+    height: 38px;
+    font-size: 14px;
   }
 }
 </style>

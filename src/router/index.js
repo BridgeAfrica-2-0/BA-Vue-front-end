@@ -24,6 +24,7 @@ import Follower from "../views/follower.vue";
 import Visitor from "../views/visitor.vue";
 import profile_owner from "@/views/profileOwner";
 import businessFollower from "@/views/businessFollower";
+import profileFollower from "@/views/profileFollower";
 import businessOwner from "@/views/businessOwner";
 import businessEditor from "@/views/businessEditor";
 import businessVisitor from "@/views/businessVisitor";
@@ -32,6 +33,8 @@ import forgotPassword from "@/views/forgotPassword";
 import navMessage from "@/views/navMessaging";
 import Blec from "@/views/blec";
 import memberNetworkFollower from "@/views/memberNetworkFollower";
+ import govx from "@/views/test";
+import networkEditors from "@/views/networkEditors";
 // import Test from "@/views/test";
 import templateView from "@/views/templateView";
 import webSiteCreate from "@/views/webSiteCreate";
@@ -41,7 +44,7 @@ import confirmPayment from "@/views/confirmPayment";
 import networks from "@/views/networks";
 import dashboard from "@/views/dashboard";
 
-// import myorders from "@/views/myOders"
+import myorders from "@/views/myOders"
 import notFound from "@/components/404"
 
 
@@ -56,6 +59,15 @@ const routes = [
     path: "/notFound",
     name: "notFound",
     component: notFound,
+  },
+
+  {
+    path: "/myorders",
+    name: "orders",
+    component: myorders,
+    // meta: {
+    //   auth: true,
+    // },
   },
   
 
@@ -78,6 +90,13 @@ const routes = [
     path: "/checkout",
     name: "payment",
     component: payment
+  },
+
+
+  {
+    path: "/govx",
+    name: "govx",
+    component: govx,
   },
 
   {
@@ -107,6 +126,11 @@ const routes = [
     component: profile_owner,
   },
   {
+    path: "/profilefollower/:id?",
+    name: "ProfileFollower",
+    component: profileFollower,
+  },
+  {
     path: "/template_viewer",
     name: "templateViewer",
     component: templateView,
@@ -116,6 +140,7 @@ const routes = [
     name: "BusinessOwner",
     component: businessOwner,
   },
+
 
   {
     path: "/business_editor/:id?",
@@ -150,20 +175,20 @@ const routes = [
     component: confirmPayment,
   },
   {
-    path: "/business_owner/network/:id?",
-    name: "networks_business",
-    component: networks,
-  },
-  {
-    path: "/networks",
+    path: "/network/:id?",
     name: "networks",
     component: networks,
   },
-  // {
-  //   path: "/network_editors/:id?",
-  //   name: "NetworkEditors",
-  //   component: networkEditors,
-  // },
+  {
+    path: "/networks/:id?",
+    name: "networks",
+    component: networks,
+  },
+  {
+    path: "/network_editors/:id?",
+    name: "NetworkEditors",
+    component: networkEditors,
+  },
   {
     path: "/login",
     name: "Login",
@@ -272,10 +297,11 @@ const routes = [
   },
 
   {
-    path: "/memberNetworkFollower",
+    path: "/memberNetworkFollower/:id?",
     name: "Membar Network Follower",
     component: memberNetworkFollower,
   },
+
 ];
 
 const router = new VueRouter({

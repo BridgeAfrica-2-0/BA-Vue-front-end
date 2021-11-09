@@ -15,7 +15,7 @@
                     <b-row>
                       <b-col md="6" lg="6" cols="6" sm="6" class="mt-lg-2">
                         <div class="mt-2 mt-lg-0 mt-xl-0 username">
-                          <b> {{ people.name }} </b>
+                          <b> {{ item.name }} </b>
                         </div>
                       </b-col>
 
@@ -162,6 +162,11 @@ export default {
 
 <style scoped>
 @media only screen and (min-width: 768px) {
+  .s-cardd {
+    padding-left: 6px;
+    padding-right: 6px;
+  }
+
   .btn-text {
     margin-left: 8px;
   }
@@ -194,9 +199,9 @@ export default {
     margin-right: 5px;
   }
 
-  .s-ccard {
-    padding-left: 7px;
-    padding-right: 5px;
+  .s-cardd {
+    padding-left: 4px;
+    padding-right: 4px;
   }
 }
 
@@ -297,7 +302,7 @@ f-right {
 }
 
 .follower {
-  font-size: 12px;
+  font-size: 10px;
 }
 
 .people-style {
@@ -314,7 +319,6 @@ f-right {
   background-color: #fff;
   background-clip: border-box;
   border: 1px solid rgba(0, 0, 0, 0.125);
-  margin: 5px;
   margin-bottom: 10px;
 }
 
@@ -323,7 +327,6 @@ f-right {
     width: 123px;
     height: 38px;
     font-size: 14px;
-    padding-top: 8px;
   }
 
   .center {
@@ -362,9 +365,6 @@ f-right {
     background-clip: border-box;
     border: 1px solid rgba(0, 0, 0, 0.125);
     margin-bottom: 10px;
-
-    margin-right: 2px;
-    margin-left: 2px;
   }
 
   h6 {
@@ -415,9 +415,6 @@ f-right {
     background-clip: border-box;
     border: 1px solid rgba(0, 0, 0, 0.125);
     margin-bottom: 10px;
-
-    margin-right: 2px;
-    margin-left: 2px;
   }
 
   h6 {
@@ -451,10 +448,9 @@ f-right {
   }
 
   .btn {
-    width: 105px;
+    width: 123px;
     height: 38px;
-    font-size: 12px;
-    padding-top: 8px;
+    font-size: 14px;
   }
 
   .center {
@@ -541,12 +537,11 @@ f-right {
   }
 }
 
-@media only screen and (min-width: 992px) and (max-width: 1331px) {
+@media only screen and (min-width: 992px) and (max-width: 1421px) {
   .btn {
     width: 115px;
-    height: 30px;
-    font-size: 12px;
-    padding-top: 8px;
+    height: 38px;
+    font-size: 14px;
   }
 }
 </style>

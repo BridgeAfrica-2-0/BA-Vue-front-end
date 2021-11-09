@@ -1161,23 +1161,18 @@ export default {
   margin-bottom: 20px;
   padding-bottom: 10px;
 }
-
 .tabs {
   width: 100%;
 }
-
 .i-width {
   width: 40%;
 }
-
 .b-bottomm {
   padding-bottom: 10px;
 }
-
 .f-left {
   float: left;
 }
-
 .a-button-l {
   align-content: right;
   float: right;
@@ -1187,19 +1182,16 @@ export default {
   padding-left: 10px;
   padding-right: 10px;
 }
-
 .a-align {
   text-align: left;
   padding-left: 10px;
   padding-right: 10px;
 }
-
 .settings {
   margin-left: 90%;
   position: relative;
   top: 40px;
 }
-
 @media only screen and (max-width: 768px) {
   .settings {
     top: -5px;

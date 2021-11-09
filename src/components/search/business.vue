@@ -107,58 +107,8 @@
       </b-row>
     </div>
 
-    <div class="people-style shadow">
-      <b-row>
-        <b-col md="3" xl="3" lg="3" cols="5" sm="3">
-          <div class="center-img">
-            <splide :options="options" class="r-image">
-              <splide-slide cl>
-                <img
-                  src="https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg"
-                  class="r-image"
-                />
-              </splide-slide>
-            </splide>
-          </div>
-        </b-col>
-        <b-col md="7" cols="7" lg="5" sm="5">
-          <p class="textt">
-            <strong class="title"> Super Car ltd </strong> <br />
-            Car marketing
-            <br />
-            20k Community <br />
+  
 
-            <span class="location">
-              <b-icon-geo-alt class="ico"></b-icon-geo-alt> Douala cameroon
-            </span>
-            <br />
-
-            super best car seller in the world adipisicing elit. lorem epsep
-            this is <b-link>Read More</b-link>
-          </p>
-        </b-col>
-
-        <b-col lg="4" md="12" xl="4" cols="12" sm="4">
-          <div class="s-button">
-            <b-row>
-              <b-col
-                md="4"
-                lg="12"
-                xl="12"
-                sm="12"
-                cols="4"
-                class="mt-2 text-center"
-              >
-                <b-button
-                  block
-                  size="sm"
-                  class="b-background shadow "
-                  variant="primary"
-                >
-                  <i class="fas fa-user-plus  fa-lg btn-icon "></i>
-                  <span class="btn-com">Community</span>
-                </b-button>
-              </b-col>
 
     <b-pagination v-if="business.data"
       v-model="currentPage"
@@ -169,39 +119,24 @@
       align="center"
     ></b-pagination>
 
-              <b-col
-                md="4"
-                lg="12"
-                xl="12"
-                sm="12"
-                cols="4"
-                class="mt-2 text-center"
-              >
-                <b-button
-                  block
-                  size="sm"
-                  class="b-background shadow "
-                  variant="primary"
-                >
-                  <i class="fas fa-map-marked-alt  fa-lg btn-icon "></i>
-                  <span class="btn-text">Direction</span>
-                </b-button>
-              </b-col>
-            </b-row>
-          </div>
-        </b-col>
-      </b-row>
-    </div>
   </div>
 </template>
 
 <script>
-import {mapGetters, mapActions} from "vuex"
+import { mapGetters, mapActions } from "vuex";
 export default {
   props: ["title", "image"],
 
   data() {
     return {
+
+       total:0,
+      per_page:10,
+      list: [],
+      currentPage: 1,
+      nextLoad: false,
+     
+
       options: {
         rewind: true,
         autoplay: true,
@@ -430,7 +365,7 @@ export default {
     color: rgba(117, 114, 128, 1);
     text-align: left;
 
-    font-weight: normal;
+    font-weight: normal;  
     line-height: 20px;
     font-style: normal;
 

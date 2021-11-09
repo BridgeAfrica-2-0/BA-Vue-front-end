@@ -1,14 +1,18 @@
 <template>
   <div>
-         <b-row>
+
+    <b-row>
       <b-col cols="12" class="mx-auto">
         <b-input-group class="mb-2 px-md-3 mx-auto">
-          <b-input-group-prepend is-text>
+          <b-input-group-prepend @click="search" is-text style="cursor:pointer;">
             <b-icon-search class="text-primary border-none"></b-icon-search>
           </b-input-group-prepend>
           <b-form-input
             aria-label="Text input with checkbox"
             placeholder="Search Something"
+            type="text"
+            class="form-control"
+            v-model="searchTitle"
           ></b-form-input>
         </b-input-group>
       </b-col>
@@ -42,6 +46,7 @@
       </b-col>
     </b-row>
 
+    <FlashMessage />
   </div>
 </template>
 
@@ -158,7 +163,7 @@ export default {
     }
 
   }
-}
+};
 </script>
 
 <style>

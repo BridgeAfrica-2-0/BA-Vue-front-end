@@ -11,7 +11,7 @@
   
           <b-tab title="Businesses" > <Businesses /> </b-tab>
 
-           <!-- <b-tab title="Network" > <Network /> </b-tab> -->
+           <b-tab title="Network" > <Network /> </b-tab>
         </b-tabs>
       </b-card>
     </div>
@@ -21,14 +21,14 @@
 <script>
 import People from "./people/people";
 import Businesses from "./businesses/businesses";
-// import Network from "./networks/network";
+import Network from "./network/network";
 
 export default {
   name: "memberNetwork",
   components: {
     People,
     Businesses,
-    // Network,
+    Network,
   },
   data() {
     return {

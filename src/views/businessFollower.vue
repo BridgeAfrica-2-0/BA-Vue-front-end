@@ -2,24 +2,39 @@
   <div>
     <navbar />
     <Business />
-
+   
     <Footer />
   </div>
 </template>
 
 <script>
-import navbar from "@/components/navbar";
-import Business from "../components/businessf/business";
-import Footer from "../components/footer";
+import navbar from '@/components/navbar';
+import Business from '../components/businessf/business';
+import Footer from '../components/footer';
+
 
 export default {
-  name: "Home",
+  name: 'Home',
   components: {
     navbar,
     Business,
     Footer,
+   
   },
-  data() {},
+  data() {
+    return {
+      tabIndex: null,
+      tabs: ['#post', '#about', '#business', '#media', '#community'],
+    };
+  },
+  watch: {
+    $route(to, from) {
+      console.log(to.hash);
+      this.tabIndex = this.tabs.findIndex(tab => tab === to.hash);
+
+      console.log(from);
+    },
+  },
   computed: {},
   methods: {},
 };

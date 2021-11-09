@@ -22,7 +22,6 @@
           label-size="md"
           label-class="font-weight-bold pt-0"
           class="mb-0"
-          v-model="item.category"
         >
           <b-form-input id="bname" placeholder="" v-model="item.category" required></b-form-input>
         </b-form-group>
@@ -36,6 +35,7 @@
           label="Phone 1"
           label-size="md"
           label-class="font-weight-bold pt-0"
+          :state="phone1"
           class="mb-0"
         >
           <b-form-input id="bname" placeholder="" v-model="item.phoneOne" required></b-form-input>
@@ -126,10 +126,10 @@
         >
           <b-form-textarea
             id="textarea"
-            placeholder="Enter something..."
+            v-model="form.Description"
+            :placeholder="networkinfo.Description"
             rows="3"
             max-rows="6"
-            v-model="item.description"
           ></b-form-textarea>
         </b-form-group>
       </b-container>

@@ -1,8 +1,12 @@
 <template>
   <div>
-    <fas-icon class="violet mr-2 pt-1 icon-size primary" :icon="['fas', 'file-image']" />Media
+    <fas-icon
+      class="violet mr-2 pt-1 icon-size primary"
+      :icon="['fas', 'file-image']"
+    />Media
 
     <hr />
+
     <b-tabs content-class="mt-3" pills>
       <b-tab title="Posts" active @click="getImages">
         <div v-if="!hasLoadPicture">
@@ -12,10 +16,9 @@
         <Images
           :canUpload="canUpload"
           :hasLoadPicture="!hasLoadPicture"
-          :images="all()"
+          :images="all(getPictures)"
           :albumName="'notFound'"
           :showAlbum="showAlbum"
-          :type="type"
           v-else
         />
       </b-tab>
@@ -23,26 +26,26 @@
         <div v-if="!hasLoadAlbum">
           <b-spinner class="load" label="Large Spinner"></b-spinner>
         </div>
-        <Album :canUpload="!canUpload" :type="type" v-else />
+        <Album :canUpload="!canUpload" v-else />
       </b-tab>
     </b-tabs>
   </div>
 </template>
 
 <script>
-import Album from './album';
-import Images from './images';
+import Album from "./album";
+import Images from "./images";
 
-import _ from 'lodash';
+import _ from "lodash";
 
-import { mapGetters } from 'vuex';
+import { mapGetters } from "vuex";
 
 export default {
   props: {
     type: {
       type: String,
       validator: function (value) {
-        return ['profile', 'network', 'business'].indexOf(value) !== -1;
+        return ["profile", "network", "business"].indexOf(value) !== -1;
       },
     },
   },
@@ -53,7 +56,7 @@ export default {
       hasLoadAlbum: false,
       hasLoadPicture: false,
       showAlbum: false,
-      strategy: null,
+      allImage: [],
     };
   },
 
@@ -64,91 +67,64 @@ export default {
 
   computed: {
     ...mapGetters({
-      getProfilePictures: 'UserProfileOwner/getImages',
-      getBusinessPictures: 'businessOwner/getAllImages',
+      getPictures: "UserProfileOwner/getImages",
     }),
   },
 
   methods: {
-    all() {
-      const wrapper = (data) => {
-        data
-          .filter((img) => img.media.length)
-          .map((img) => {
-            let render = img.media.map((picture) => {
-              return {
-                id: img.id,
-                content: img.content,
-                media: [{ path: picture.path, type: picture.type, id: picture.id }],
-              };
-            });
-
-            return render;
+    //function to get album
+    all(images) {
+      const data = images
+        .filter((img) => img.media.length)
+        .map((img) => {
+          let render = img.media.map((picture) => {
+            return {
+              id: img.id,
+              content: img.content,
+              media: [
+                { path: picture.path, type: picture.type, id: picture.id },
+              ],
+            };
           });
 
-        return _.flatten(data);
-      };
-      return wrapper(this.strategy[this.type]().pictures);
+          return render;
+        });
+
+      return _.flatten(data);
     },
 
     getAlbums() {
-      try {
-        const type = this.strategy[this.type]();
-
-        //if (!this.hasLoadAlbum) {
+      if (!this.hasLoadAlbum) {
         this.$store
-          .dispatch(type.album, this.urlData)
+          .dispatch("UserProfileOwner/getAlbums", this.urlData)
           .then(() => {
+            console.log("hey yeah");
             this.hasLoadAlbum = true;
           })
           .catch((err) => {
-            this.hasLoadAlbum = true;
-            console.log(err);
+            this.hasLoadAlbum = false;
+            console.log({ err: err });
           });
-        //}
-      } catch (error) {
-        console.log(error);
-        throw new Error('Invalid type', this.type);
       }
     },
 
     getImages() {
-      try {
-        const type = this.strategy[this.type]();
-        //if (!this.hasLoadPicture) {
+      if (!this.hasLoadPicture) {
         this.$store
-          .dispatch(type.image, this.urlData)
+          .dispatch("UserProfileOwner/getImages", this.urlData)
           .then(() => {
             this.hasLoadPicture = true;
           })
           .catch((err) => {
-            this.hasLoadPicture = true;
+            this.hasLoadPicture = false;
             console.log({ err: err });
           });
-        //}
-      } catch (error) {
-        console.log(error);
-        throw new Error('Invalid type', this.type);
       }
     },
   },
 
   created() {
     this.urlData = this.$route.params.id;
-
-    this.strategy = {
-      business: () => ({
-        album: 'businessOwner/getAlbums',
-        image: 'businessOwner/getImages',
-        pictures: this.getBusinessPictures,
-      }),
-      profile: () => ({
-        album: 'UserProfileOwner/getAlbums',
-        image: 'UserProfileOwner/getImages',
-        pictures: this.getProfilePictures,
-      }),
-    };
-
     this.getImages();
   },
 };

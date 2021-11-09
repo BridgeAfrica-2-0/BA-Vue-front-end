@@ -19,9 +19,9 @@ import ReadMore from 'vue-read-more';
 import VueSocialauth from 'vue-social-auth';
 import VueSocialSharing from 'vue-social-sharing';
 
-import plugin from './http';
+// import plugin from './http';
 
-Vue.use(plugin);
+// Vue.use(plugin);
 
 // import firebase from "firebase";
 IconifyIcon.addIcon('home', homeIconData);
@@ -96,9 +96,9 @@ Vue.use(VueMaterial);
 import Lightbox from '@morioh/v-lightbox';
 import * as VueGoogleMaps from 'gmap-vue';
 
-//import VueSplide from "@splidejs/vue-splide";
-//Vue.use(VueSplide);
-import "@splidejs/splide/dist/css/themes/splide-default.min.css";
+//  import VueSplide from "@splidejs/vue-splide";
+// Vue.use(VueSplide);
+// import "@splidejs/splide/dist/css/themes/splide-default.min.css";
 
 // global register
 Vue.use(VueGallerySlideshow);

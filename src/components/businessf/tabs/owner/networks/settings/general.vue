@@ -14,12 +14,11 @@
           <b-form-group class="mb-0" v-slot="{ ariaDescribedby }">
             <b-form-radio-group
               class="pt-2 text"
-              v-model="privacy"
               :options="['Public', 'Private']"
               :aria-describedby="ariaDescribedby"
+              v-model="form.privacy"
             ></b-form-radio-group>
           </b-form-group>
-          <div class="mt-3">{{ privacy }}</div>
         </b-form-group>
       </b-container>
       <hr />
@@ -36,14 +35,12 @@
         >
           <b-form-group class="mb-0" v-slot="{ ariaDescribedby }">
             <b-form-radio-group
-              :options="options"
-              v-model="permissions"
+              class="pt-2 text "
+              :options="['Admin only', 'Allow visitors/followers to post']"
               :aria-describedby="ariaDescribedby"
-              name="radio-options"
-              @change="check"
+              v-model="form.post_permission"
             ></b-form-radio-group>
           </b-form-group>
-          <div class="mt-3">{{ permissions }}</div>
         </b-form-group>
       </b-container>
 
@@ -58,19 +55,17 @@
           label-size="md"
           label-class="font-weight-bold pt-0 username"
           class="mb-0"
-          v-slot="{ ariaDescribedby }"
         >
-          <b-form-checkbox-group
+          <b-form-checkbox
             class="text"
-            name="checkbox-options"
-            :options="lists"
-            v-model="approval"
-            :aria-describedby="ariaDescribedby"
-            @change="test"
+            name="checkbox-1"
+            value="accepted"
+            unchecked-value="not_accepted"
+            v-model="form.post_approval"
           >
-          </b-form-checkbox-group>
+            All posts must be approved by an admin
+          </b-form-checkbox>
         </b-form-group>
-        <div class="mt-3">{{ approval }}</div>
       </b-container>
       <hr />
     </div>
@@ -82,11 +77,7 @@
     </b-container>
 
     <div class="b-bottomn">
-      <b-button
-        variant="primary"
-        class="a-button-l text"
-        @click="save"
-        :loading="load"
+      <b-button variant="primary" class="a-button-l text" v-on:click="submit()"
         >Save Changes</b-button
       >
       <br />
@@ -95,103 +86,61 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from "vuex";
 export default {
   name: "general",
-  data: () => ({
-    load: false,
-    permissions: "",
-    approval: "",
-    privacy: "",
-    networkId: "",
-    options: [
-      {
-        text: "Admin Only",
-        value: "admin",
+  data() {
+    return {
+      url: this.$route.params.id,
+      form: {
+        privacy: "",
+        post_permission: "",
+        post_approval: ""
       },
-      {
-        text: "Editor",
-        value: "editor",
-      },
-      {
-        text: "Member",
-        value: "member",
-      },
-      {
-        text: "Editor And Member",
-        value: "editor and member",
-      },
-    ],
-    lists: [
-      {
-        text: "Approval by admin",
-        value: "admin approval",
-        disabled: false,
-      },
-      {
-        text: "Approval by editor and admin",
-        value: "editor and admin approval",
-        disabled: false,
-      },
-      {
-        text: "Approve only member post",
-        value: "only member post approval",
-        disabled: false,
-      },
-    ],
-  }),
-
-  computed: {
-    ...mapGetters({
-      getNetwork: "networkSetting/getNetwork",
-    }),
+      network_id: ""
+    };
   },
 
   methods: {
-    ...mapActions({
-      generalSave: "networkSetting/generalSave",
-    }),
-
-    check() {
-      if (this.permissions == "admin") {
-        this.lists[0].disabled = true;
-        this.lists[1].disabled = true;
-        this.lists[2].disabled = true;
-      } else if (this.permissions == "editor") {
-        this.lists[0].disabled = false;
-        this.lists[1].disabled = false;
-        this.lists[2].disabled = true;
-      } else if (this.permissions == "member") {
-        this.lists[0].disabled = true;
-        this.lists[1].disabled = true;
-        this.lists[2].disabled = false;
-      } else if (this.permissions == "editor and member") {
-        this.lists[0].disabled = false;
-        this.lists[1].disabled = false;
-        this.lists[2].disabled = true;
-      }
-    },
-
-    save() {
-      this.laod = true;
-      this.networkId = this.getNetwork.id;
-      let payload = {
-        networkId: this.networkId,
-        privacy: this.privacy,
-        post_permission: this.permissions,
-        post_approval: this.approval,
-      };
-      this.generalSave(payload)
-        .then(() => {
-          this.load = false;
-          alert("Successful");
+    submit() {
+      this.axios
+        .post("/network/generalSettings/" + this.url, this.form)
+        .then(res => {
+          console.log(this.form);
+          this.flashMessage.success({
+            title: "OK",
+            message: "Changes Made Successfuly",
+            icon: true
+          });
         })
-        .catch((err) => {
-          this.load = false;
-          console.log(err);
+        .catch(() => {
+          this.flashMessage.error({
+            title: "Error",
+            message: "Changes not made",
+            icon: true
+          });
         });
     },
-  },
+
+    deleteNetwork() {
+      this.$axios
+        .delete("/api/v1/network/delete/", this.url)
+        .then(function(response) {
+          console.log(this.form);
+          this.flashMessage.success({
+            title: "OK",
+            message: "Deleted Successfuly",
+            icon: true
+          });
+        })
+        .catch(() => {
+          this.flashMessage.error({
+            title: "Error",
+            message: "Deletion Unsuccessful",
+            icon: true
+          });
+        });
+    }
+  }
 };
 </script>
 

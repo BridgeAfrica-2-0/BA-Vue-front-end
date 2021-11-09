@@ -36,7 +36,7 @@ import { social } from "./social";
 import axios from "axios";
 Vue.use(Vuex);
 // axios.defaults.baseURL = process.env.VUE_APP_API_URL;
-axios.defaults.baseURL = "https://a97d-154-72-150-87.ngrok.io/api/v1/"
+axios.defaults.baseURL = "https:team4test.maxine/api/v1/"
 export default new Vuex.Store({
   modules: {
     auth,

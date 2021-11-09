@@ -44,7 +44,7 @@
             <b-dropdown-item @click="onSetCoverPic()" v-if="canMakeCover"
               >Make Cover Photo</b-dropdown-item
             >
-            <b-dropdown-item href="#" @click="onDeleteImage()">Delete</b-dropdown-item>
+            <b-dropdown-item href="#" @click="onDeleteImage()" v-if="canUpload">Delete</b-dropdown-item>
           </b-dropdown>
         </li>
       </ul>
@@ -59,6 +59,7 @@ export default {
   props: [
     'im',
     'imageProps',
+    'canUpload',
     'content',
     'typeOfMedia',
     'getFullMediaLink',
@@ -79,7 +80,11 @@ export default {
 
   computed:{
     canMakeCover(){
-      return ('network' != this.type) ? true : !['video'].includes(this.typeOfMedia()) ? true : false
+      return ('network' == this.type) ? false : !['video'].includes(this.typeOfMedia()) ? true : false
+    },
+
+    canDelete(){
+      return ('network' == this.type) ? false : !['video'].includes(this.typeOfMedia()) ? true : false
     }
   },
 

@@ -22,15 +22,6 @@
             <source :src="img_url" />
           </video>
         </div>
-        <!-- <b-form-textarea
-          id="textarea-small"
-          class="mb-2 border-none"
-          v-model="text"
-          placeholder="Enter a description"
-        >
-        </b-form-textarea> -->
-
-        <br />
 
         <b-button @click="submitPosts" variant="primary" block :disabled="loading"
           ><b-icon icon="cursor-fill" variant="primary"></b-icon> Publish</b-button
@@ -395,7 +386,8 @@ export default {
 
     setProfilePic(id) {
       this.loading = true;
-      const data = 'business' == this.type ? { businessID: this.$route.params.id, albumID: id } : id;
+      const data =
+        'business' == this.type || 'network' == this.type ? { businessID: this.$route.params.id, albumID: id } : id;
       this.pattern[this.type]()
         .setProfilePicture(data)
         .then(() => {

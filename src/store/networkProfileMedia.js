@@ -84,7 +84,7 @@ export default {
     },
 
     async setProfilePic({ commit }, { businessID, albumID }) {
-      return axios.post(`network/make/logopic/${businessID}/${albumID}`);
+      return axios.post(`network/make/profile/${businessID}/${albumID}`);
     },
 
     async setCoverPic({ commit }, { businessID, albumID }) {

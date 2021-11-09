@@ -19,7 +19,7 @@
     </b-row>
     <br/>
 
-    <b-row cols="2">
+    <b-row cols="1">
       <b-col class="ml-0 mr-0"
         v-for="member in displayfollowing"
         :key="member.id"

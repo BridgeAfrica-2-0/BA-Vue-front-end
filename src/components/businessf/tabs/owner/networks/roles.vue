@@ -1,8 +1,6 @@
 <template>
   <b-container>
-    {{"followers: "+followers}}
     <h5 class="a-text">Assign Role</h5>
-    {{"roles: "+roles}}
 
     <b-container class="b-bottom">
       <b-row>
@@ -17,13 +15,12 @@
             <b-form-select
               id="follower"
               v-model="form.name"
-              :options="followers.user_followers"
+              :options="followers"
               name="followers"
-              value-field="id"
-              text-field="name"
+              value-field="user_id"
+              text-field="fullname"
               class="mb-3"
-            >
-            </b-form-select>
+            ></b-form-select>
           </b-form-group>
         </b-col>
 
@@ -35,10 +32,15 @@
             label-class="font-weight-bold pt-0"
             class="mb-0"
           >
-            <b-form-select v-model="selected" class="mb-3">
-              <b-form-select-option :value="null">Admin</b-form-select-option>
-              <b-form-select-option value="a">User</b-form-select-option>
-            </b-form-select>
+           <b-form-select
+              id="roles"
+              v-model="form.role"
+              :options="roles"
+              name="roles"
+              value-field="id"
+              text-field="name"
+              class="mb-3"
+            ></b-form-select>
           </b-form-group>
         </b-col>
 

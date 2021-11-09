@@ -28,10 +28,10 @@ export default {
       return state.blockusers;
     },
     getblocknetworks(state) {
-      return state.blockusers;
+      return state.blocknetworks;
     },
-    getblockbusiness(state) {
-      return state.blockusers;
+    getblockbusinesses(state) {
+      return state.blockbusiness;
     },
     getNinfo(state) {
       return state.networkinfo;
@@ -57,13 +57,16 @@ export default {
       state.editors = editors;
     },
     setuserblocking(state, blockusers) {
+      console.log("setuserblocking");
       state.blockusers = blockusers;
     },
-    getblocknetworks(state, blocknetworks) {
-      state.blockusers = blocknetworks;
+    setnetworkblocking(state, blocknetworks) {
+      console.log("setnetworkblocking");
+      state.blocknetworks = blocknetworks;
     },
-    getblockbusiness(state, blockbusiness) {
-      state.blockusers = blockbusiness;
+    setbusinessblocking(state, blockbusiness) {
+      console.log("setbusinessblocking");
+      state.blockbusiness = blockbusiness;
     },
     setnetworkinfo(state, networkinfo) {
       state.networkinfo = networkinfo;
@@ -74,14 +77,16 @@ export default {
     getfollowers({ commit }, networkId) {
       console.log("networkId: ", networkId);
       return axios
-        .post(`/network/${networkId}/members/list`).then(({ data }) => {
-          commit("setfollowers", data.data.data);
+        .post(`/network/${networkId}/members/list`)
+        .then(({ data }) => {
+          commit("setfollowers", data.data);
           console.log("data: ", data);
         });
     },
 
     getroles({ commit }) {
-      return axios.get("/network/roles/list").then(({ data }) => {
+      return axios.get("/network/roles/list")
+      .then(({ data }) => {
         commit("setroles", data.data);
         console.log(data);
         console.log("roles data");
@@ -102,6 +107,7 @@ export default {
     },
 
     getblockusers({ commit }, networkId) {
+      console.log("getblockusers")
       return axios
         .get(`/network/users/blocked/${networkId}`)
         .then(({ data }) => {
@@ -110,6 +116,7 @@ export default {
         });
     },
     getblocknetworks({ commit }, networkId) {
+      console.log("getblocknetworks");
       return axios
         .get(`/network/networks/blocked/${networkId}`)
         .then(({ data }) => {
@@ -117,7 +124,8 @@ export default {
           console.log("getblocknetworks", data);
         });
     },
-    getblockbusiness({ commit }, networkId) {
+    getblockbusinesses({ commit }, networkId) {
+      console.log("getblockbusinesses");
       return axios
         .get(`/network/businesses/blocked/${networkId}`)
         .then(({ data }) => {
@@ -136,6 +144,14 @@ export default {
     generalSave({ commit }, payload) {
       console.log("payload", payload)
       return axios.post(`/network/${payload.path}`, payload.formData)
+      .then(({ data }) => {
+        return data;
+      });
+    },
+
+    UnBlock({ commit }, payload) {
+      console.log("payload", payload)
+      return axios.delete(`/network/${payload.path}`)
       .then(({ data }) => {
         return data;
       });

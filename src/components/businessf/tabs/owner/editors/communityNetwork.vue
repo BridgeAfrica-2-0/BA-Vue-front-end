@@ -51,8 +51,11 @@
                   size="sm"
                   class="b-background shadow"
                   variant="primary"
+                   @click="handleFollow(member)"
                 >
-                  <i class="fas fa-user-plus fa-lg btn-icon"></i>
+                  <i
+                    class="fas fa-lg btn-icon"
+                    :class="member.is_follow === 0 ? 'fa-user-minus' : 'fa-user-plus'"></i>
                   <span class="btn-com">Community</span>
                 </b-button>
               </b-col>
@@ -103,6 +106,7 @@
 </template>
 
 <script>
+import axios from 'axios';
 export default {
   props: ["member"],
   data() {
@@ -116,6 +120,23 @@ export default {
         perMove: 1,
       },
     };
+  },
+   methods: {
+    async handleFollow(user) {
+      const uri = user.is_follow === 0 ? `/follow-community` : `/unfollow`;
+      const nextFollowState = user.is_follow === 0 ? 1 : 0;
+      const data = {
+        id: user.id,
+        type: 'network',
+      };
+
+      await axios
+        .post(uri, data)
+        .then(response => {
+          user.is_follow = nextFollowState;
+        })
+        .catch(err => console.log(err));
+    }
   },
 };
 </script>

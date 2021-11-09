@@ -41,7 +41,7 @@ import confirmPayment from "@/views/confirmPayment";
 import networks from "@/views/networks";
 import dashboard from "@/views/dashboard";
 
-import myorders from "@/views/myOders"
+// import myorders from "@/views/myOders"
 import notFound from "@/components/404"
 
 
@@ -56,15 +56,6 @@ const routes = [
     path: "/notFound",
     name: "notFound",
     component: notFound,
-  },
-
-  {
-    path: "/myorders",
-    name: "orders",
-    component: myorders,
-    // meta: {
-    //   auth: true,
-    // },
   },
   
 

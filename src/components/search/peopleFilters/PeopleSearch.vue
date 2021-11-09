@@ -117,15 +117,15 @@ export default {
       this.setLoaderState(false);
     },
 
-    onscroll: async function (event) {
+    onscroll: async function () {
       const scrollY = window.scrollY;
       const visible = document.documentElement.clientHeight;
       const pageHeight = document.documentElement.scrollHeight;
       const bottomOfPage = visible + scrollY >= pageHeight;
 
-      if (this.callback && (bottomOfPage || pageHeight < visible) && !this.loading && !this.haveNotData) {
+      if (this.callback && (bottomOfPage || pageHeight < visible) && !this.loaderState && !this.haveNotData) {
         this.setLoaderState(true);
-
+        console.log('on scrool');
         const request = await this.callback({
           ...this.getStack,
           page: this.getPage,

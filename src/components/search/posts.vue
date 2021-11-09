@@ -59,9 +59,15 @@
             />
           </div>
         </div>
-        <Comment v-for="comment in comments" :key="comment.id" :item="comment" :uuid="post.post_id" />
+        <Comment v-for="(comment, index) in comments" :key="index" :item="comment" :uuid="post.post_id" />
         <Loader v-if="loadComment" />
-        <NoMoreData v-if="comments.length && !loadComment" :hasData="hasData" @click.native="onShowComment" />
+        <NoMoreData
+          v-if="comments.length && !loadComment"
+          :hasData="hasData"
+          @click.native="onShowComment"
+          :moreDataTitle="'Show more post'"
+          :noDataTitle="'No post'"
+        />
       </b-col>
     </b-row>
   </div>
@@ -101,6 +107,7 @@ export default {
     ...mapGetters({
       profile: 'auth/profilConnected',
     }),
+
     icon() {
       return this.post.is_liked ? 'suit-heart-fill' : 'suit-heart';
     },

@@ -14,7 +14,7 @@
           <read-more more-str="read more" :text="comment.comment" link="#" less-str="read less" :max-chars="15000">
           </read-more>
         </p>
-        <b-icon icon="suit-heart" variant="primary" aria-hidden="true" @click="onLike" class="cursor"></b-icon>
+        <b-icon :icon="icon" variant="primary" aria-hidden="true" @click="onLike" class="cursor"></b-icon>
         {{ comment.comment_likes | nFormatter }}
         <span @click="showReply" class="primary ml-2 reply"><b>Reply</b></span>
         <div v-if="reply">
@@ -41,10 +41,17 @@
                 v-if="text.trim().length > 2 && !createPostRequestIsActive"
               />
             </b-col>
-            <b-col cols="12" class="mt-4">
-              <Reply v-for="obj in comments" :key="obj.id" :item="obj" :uuid="uuid" type="reply" />
+            <b-col cols="12" class="mt-4 ml-3 mr-3">
               <Loader v-if="loadComment" />
-              <!-- <NoMoreData v-if="comments.length && !loadComment" :hasData="hasData" @click.native="onShowReply" /> -->
+              <Reply v-for="(obj, index) in comments" :key="index" :item="obj" :uuid="uuid" type="reply" />
+
+              <NoMoreData
+                v-if="comments.length && !loadComment"
+                :hasData="hasData"
+                @click.native="onShowReply"
+                :moreDataTitle="'Show more comments'"
+                :noDataTitle="'No comment'"
+              />
             </b-col>
           </b-row>
         </div>

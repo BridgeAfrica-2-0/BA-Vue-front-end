@@ -14,14 +14,14 @@
         </b-col>
         <b-col md="6" cols="7" sm="7">
           <p class="text">
-            <strong> Super Car ltd </strong> <br />
-            <strong> Category : </strong> Car marketing <br />
-            <strong> Community : </strong> 20k <br />
-            <strong> Location :</strong> cameroon <br />
-            <strong> Keyword :</strong> car,swag <br />
+            <strong> {{$t("search.Super_Car_ltd")}} </strong> <br />
+            <strong> {{$t("search.Category")}} : </strong> {{$t("search.Car_marketing")}} <br />
+            <strong> {{$t("search.Community")}} : </strong> 20k <br />
+            <strong> {{$t("search.Location")}} :</strong> {{$t("search.cameroon")}} <br />
+            <strong> {{$t("search.Keyword")}} :</strong> {{$t("search.car")}},{{$t("search.swag")}} <br />
 
-            <strong>About:</strong> super best car seller in the world
-            adipisicing elit. <b-link>Read More</b-link>
+            <strong>{{$t("search.About")}}:</strong> {{$t("search.super_best_car_seller_in_the_world")}}
+            adipisicing elit. <b-link>{{$t("search.Read_More")}}</b-link>
           </p>
         </b-col>
 
@@ -35,7 +35,7 @@
                   class="b-background"
                   variant="primary"
                 >
-                  <b-icon class="ico" icon="plus-circle"> </b-icon> Community
+                  <b-icon class="ico" icon="plus-circle"> </b-icon> {{$t("search.Community")}}
                 </b-button>
               </b-col>
 
@@ -46,7 +46,7 @@
                   class="b-background"
                   variant="primary"
                 >
-                  <b-icon class="ico" icon="chat"> </b-icon> Message
+                  <b-icon class="ico" icon="chat"> </b-icon> {{$t("search.Message")}}
                 </b-button>
               </b-col>
 
@@ -57,7 +57,7 @@
                   class="b-background"
                   variant="primary"
                 >
-                  <b-icon icon="direction" class="ico"> </b-icon> Direction
+                  <b-icon icon="direction" class="ico"> </b-icon> {{$t("search.Direction")}}
                 </b-button>
               </b-col>
             </b-row>

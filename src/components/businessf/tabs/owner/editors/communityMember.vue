@@ -69,14 +69,18 @@
                         cols="6"
                         xl="12"
                         class="mt-2 mt-lg-2 mt-xl-2 btn-2 center"
+                        :class="member.is_follow === 0 && 'u-btn'"
                       >
                         <b-button
                           block
                           size="sm"
                           class="b-background flexx pobtn shadow"
                           variant="primary"
+                          @click="handleFollow(member)"
                         >
-                          <i class="fas fa-user-plus fa-lg btn-icon"></i>
+                          <i
+                            class="fas fa-lg btn-icon"
+                            :class="member.is_follow === 0 ? 'fa-user-minus' : 'fa-user-plus'"></i>
                           <span class="btn-com">Community</span>
                         </b-button>
                       </b-col>
@@ -93,8 +97,26 @@
 </template>
 
 <script>
+import axios from 'axios';
 export default {
   props: ["member"],
+  methods: {
+    async handleFollow(user) {
+      const uri = user.is_follow === 0 ? `/follow-community` : `/unfollow`;
+      const nextFollowState = user.is_follow === 0 ? 1 : 0;
+      const data = {
+        id: user.id,
+        type: 'user',
+      };
+
+      await axios
+        .post(uri, data)
+        .then(response => {
+          user.is_follow = nextFollowState;
+        })
+        .catch(err => console.log(err));
+    }
+  }
 };
 </script>
 

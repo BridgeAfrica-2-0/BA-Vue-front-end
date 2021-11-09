@@ -407,7 +407,6 @@
                 </a>
               </div>
 
-
               <b-tooltip target="profilepic" variant="light" triggers="hover">
                 {{ user.name }}
               </b-tooltip>
@@ -590,7 +589,6 @@ export default {
 
   created() {
     this.init();
-    console.log(this.user)
   },
 
   methods: {

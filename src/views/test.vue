@@ -2,6 +2,30 @@
   <div>
     <div id="app">
       <div id="verify-container">
+
+
+
+
+
+
+
+
+ <!--  start copying from herhe -->
+
+
+
+
+
+ 
+
+
+
+
+    <!--     start copying from here -->
+
+
+
+
         <div class="c516 c513">
           <div>
             <div v-if="showemail" class="c515 c512" id="verify-container">
@@ -9,10 +33,10 @@
                 <div>
                   <h1 class="text-center">Welcome!</h1>
                   <br />
-                  <h5 class="text-center">Create a free membership to shop special discounts on premium brands, travel and tickets.</h5>
+                  <p class="text-center">Create a free membership to shop special discounts on premium brands, travel and tickets.</p>
 
                   <br />
-                  <br />
+                 
 
                   <div>
                     <div style="padding-top: 15px">
@@ -767,70 +791,14 @@
 
               <div v-if="complete" class="c515 c512" id="verify-container">
                 <div class="c516 c513">
-                  <!-- 
+                
 
 
 
 
 
+   
 
-
-<div v-if="show_status">
-                        <h1 class="no-padding-bottom">What's your Status?</h1>
-                        <br>
-                        <li
-                          class="MuiListItem-root MuiListItem-gutters"
-                          tabindex="0"
-                          v-for="blec in branch"
-                          :key="blec.id"
-                          @click="setStatus(blec)"
-                          style="
-                            margin-bottom: -1px;
-                            border: 1px solid rgb(224, 224, 224);
-                            font-size: 14px;
-                            cursor: pointer;
-                          "
-                        >
-                          <div
-                            class="MuiListItemText-root"
-                            style="font-size: 14px; cursor: pointer"
-                          >
-                            {{ blec.name }}
-                          </div>
-                          <div class="MuiListItemIcon-root">
-                            <svg
-                              class="MuiSvgIcon-root"
-                              focusable="false"
-                              viewBox="0 0 24 24"
-                              aria-hidden="true"
-                            >
-                              <path
-                                d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"
-                              ></path>
-                            </svg>
-                          </div>
-                        </li>
-                        <svg
-                          class="MuiSvgIcon-root"
-                          focusable="false"
-                          viewBox="0 0 24 24"
-                          aria-hidden="true"
-                          style="
-                            width: 20px;
-                            height: 20px;
-                            vertical-align: bottom;
-                            margin: 0px -2px 0px -6px;
-                            color: rgb(0, 161, 223);
-                          "
-                        >
-                          <path
-                            d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"
-                          ></path>
-                        </svg>
-                        <a href="#" @click="resetStatus"> back </a>
-                      </div>
-
- -->
 
                   <div v-if="show_selected_doc" class="" id="verify-container">
                     <div class="c516 c513">
@@ -1404,6 +1372,13 @@
             </div>
           </div>
         </div>
+		
+		
+
+
+ <!-- end copying -->
+
+
       </div>
     </div>
   </div>
@@ -1412,6 +1387,18 @@
 <script>
 import axios from 'axios';
 export default {
+
+  // start copying from here
+
+
+
+
+
+
+
+
+
+
   data() {
     return {
       message: 'Hello Vue!',
@@ -1984,14 +1971,13 @@ export default {
       formData2.append('profession', this.profession_name);
       formData2.append('branch', this.branch_name);
       formData2.append('status', this.status_name);
-      formData2.append('doctype', this.status_name);
+      formData2.append('doctype', this.doc_name);
       formData2.append('password', this.password);
       formData2.append('document1', doc1);
       formData2.append('document2', doc2);
 
        formData2.append('zip', this.zip);
         formData2.append('tel', this.tel);
-         formData2.append('doc_name', this.doc_name);
          
 
 
@@ -2112,7 +2098,7 @@ export default {
       this.complete = true;
     },
 
-    getStarted() {
+   async getStarted() {
       if (this.email == null) {
         this.email_error = true;
         this.error_description = 'Email is Required';
@@ -2120,25 +2106,28 @@ export default {
         let formData2 = new FormData();
         formData2.append('email', this.email);
 
-        axios
-          .post('api/widget/json/post/validate-email', formData2, {
+      await  axios
+          .post('api/widget/json/post/verify_email', formData2, {
             headers: {
               'Content-Type': 'multipart/form-data',
             },
           })
           .then((res) => {
             console.log(res);
-            alert('user data saved');
+
+            
+           this.showemail = false;
+           
           })
           .catch((error) => {
             console.log({ error: error });
             // Manage errors if found any
+            console.log(error.response.data);
 
             this.email_error = true;
-            this.error_description = 'Invalid Email';
+            this.error_description = error.response.data;
           });
 
-        this.showemail = false;
       }
     },
 
@@ -2215,6 +2204,19 @@ export default {
       this.show_status = true;
     },
   },
+
+
+
+
+
+
+
+
+
+
+
+
+  // end copying from here
 };
 </script>
  

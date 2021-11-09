@@ -1,7 +1,7 @@
 <template>
   <div>
     <h6>
-      Sponsored Result
+      {{$t("search.Sponsored_Result")}}
       <fas-icon class="icons" :icon="['fas', 'exclamation-circle']" size="lg" />
     </h6>
 
@@ -10,7 +10,7 @@
     </div>
     <h6>
       <fas-icon class="icons" :icon="['fas', 'users']" size="lg" />
-      People
+      {{$t("search.People")}}
     </h6>
     <ShareButton :post="{ post_id: 1, user_id: 1 }" type="profile" />
 
@@ -24,7 +24,7 @@
       />
     </div>
 
-    <p class="text-center" v-if="haveNotData">Not Data</p>
+    <p class="text-center" v-if="haveNotData">{{$t("search.Not_Data")}}</p>
     <ScrollLoader :loading="loadingIsActive" color="#ced4da" />
   </div>
 </template>

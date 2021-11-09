@@ -1,10 +1,10 @@
 <template>
   <div>
-    <b-spinner v-if="loader" variant="primary" label="Spinning"></b-spinner>
+    <b-spinner v-if="loader" variant="primary" label="$t('search.Spinning')"></b-spinner>
 
     <b-alert v-if="businesses.total == 0" show variant="warning"
       ><a href="#" class="alert-link">
-        No data available for that search!
+        {{$t("search.No_data_available_for_that_search")}}!
       </a></b-alert
     >
     <div></div>
@@ -31,7 +31,7 @@
             <strong class="title"> {{ business.name }} </strong> <br />
             {{ business.category }}
             <br />
-            {{ business.followers }} Followers <br />
+            {{ business.followers }}{{$t("search.Followers")}}<br />
 
             <span class="location">
               Lat: {{ business.lat }}<br />
@@ -42,7 +42,7 @@
             <br />
             {{ business.about_business }}
             <br />
-            <b-link>Read More</b-link>
+            <b-link>{{$t("search.Read_More")}}</b-link>
           </p>
         </b-col>
 
@@ -64,7 +64,7 @@
                   variant="primary"
                 >
                   <i class="fas fa-user-plus fa-lg btn-icon"></i>
-                  <span class="btn-com">Community</span>
+                  <span class="btn-com">{{$t("search.Community")}}</span>
                 </b-button>
               </b-col>
 
@@ -83,7 +83,7 @@
                   variant="primary"
                 >
                   <i class="fas fa-envelope fa-lg btn-icon"></i>
-                  <span class="btn-text">Message</span>
+                  <span class="btn-text">{{$t("search.Message")}}</span>
                 </b-button>
               </b-col>
 
@@ -102,7 +102,7 @@
                   variant="primary"
                 >
                   <i class="fas fa-map-marked-alt fa-lg btn-icon"></i>
-                  <span class="btn-text">Direction</span>
+                  <span class="btn-text">{{$t("search.Direction")}}</span>
                 </b-button>
               </b-col>
             </b-row>

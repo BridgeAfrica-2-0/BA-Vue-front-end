@@ -1,7 +1,7 @@
 <template>
   <div>
     <h6>
-      Sponsored Result
+      {{ $t('search.Sponsored_Result') }}
       <fas-icon class="icons" :icon="['fas', 'exclamation-circle']" size="lg" />
     </h6>
 
@@ -10,7 +10,7 @@
     </div>
     <h6>
       <fas-icon class="icons" :icon="['fab', 'readme']" size="lg" />
-      Posting
+      {{ $t('search.Posting') }}
     </h6>
     <Loader v-if="!pageHasLoad || loaderState" />
     <NotFound v-if="!posts.length && !loaderState" :title="title" />
@@ -18,7 +18,7 @@
       <Post v-for="(post, index) in posts" :item="post" :key="index" />
     </div>
 
-    <p class="text-center" v-if="haveNotData">Not Data</p>
+    <p class="text-center" v-if="haveNotData">{{ $t('search.Not_Data') }}</p>
     <ScrollLoader :loading="loadingIsActive" color="#ced4da" v-if="this.getKeywork" />
   </div>
 </template>

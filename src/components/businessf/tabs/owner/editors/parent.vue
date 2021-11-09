@@ -2,16 +2,8 @@
   <div class=" ">
     <b-card title="" class="">
       <b-container class="a-center">
-          <!-- :src="require('@/assets/img/mayor.jpg')" -->
-        <b-avatar
-          :src="networkInfo[0].image"
-          variant="primary"
-          square
-          rounded
-          class="network-logo"
-        >
-        </b-avatar>
-
+        <!-- :src="require('@/assets/img/mayor.jpg')" -->
+        <b-avatar :src="networkInfo.image" variant="primary" square rounded class="network-logo"> </b-avatar>
       </b-container>
 
       <br />
@@ -19,19 +11,15 @@
       <b-container>
         <b-row>
           <b-col cols="6">
-            <h6 class="  m-0 p-0 a-center network-name "><b> {{ networkInfo[0].name }}</b></h6>
+            <h6 class="  m-0 p-0 a-center network-name ">
+              <b> {{ networkInfo.name }}</b>
+            </h6>
           </b-col>
           <b-col cols="6">
-            <b-button
-              variant="primary"
-              size="sm"
-              @click="addFollower"
-              style="width: 120px;"
-              class="a-center"
-            >
+            <b-button variant="primary" size="sm" @click="addFollower" style="width: 120px;" class="a-center">
               <b-spinner v-if="SPcommunity" small></b-spinner>
-              <b-icon v-if="!SPcommunity" icon="pencil"></b-icon> 
-              <span v-if="networkInfo[0].is_follow"> Unfollow</span> <span v-else> Follow</span>
+              <b-icon v-if="!SPcommunity" icon="pencil"></b-icon>
+              <span v-if="networkInfo.is_follow"> Unfollow</span> <span v-else> Follow</span>
             </b-button>
             <b-tooltip target="Follow-Unfollow" variant="secondary">Click To Follow/Unfollow</b-tooltip>
           </b-col>
@@ -53,40 +41,39 @@
               <p class="a-center">
                 <b-icon icon="people-fill" variant="primary"></b-icon>
                 <span class="pivate text">
-                  {{ nFormatter(networkInfo[0].commuity) }}
-                  community 
+                  {{ nFormatter(networkInfo.commuity) }}
+                  community
                 </span>
               </p>
             </b-col>
           </b-row>
         </b-container>
         <h6 class="mt-2 font-weight-bolder title ">About</h6>
-        <p v-if="networkInfo[0].description.length<130" class="text-justify text">{{ networkInfo[0].description }}</p>
+        <p v-if="networkInfo.description.length < 130" class="text-justify text">{{ networkInfo.description }}</p>
         <p v-else class="text-justify text">
-          {{ networkInfo[0].description.substring(0,130)+"..." }}
+          {{ networkInfo.description.substring(0, 130) + '...' }}
           <span class="d-inline-block float-right">
             <a @click="$bvToast.show('example-toast')" style="cursor:pointer;">lire la Suite</a>
           </span>
         </p>
         <b-toast id="example-toast" static no-auto-hide>
-          {{ networkInfo[0].description }}
+          {{ networkInfo.description }}
         </b-toast>
       </b-card-text>
     </b-card>
-    
+
     <FlashMessage />
 
     <SidebarCommunity />
-
   </div>
 </template>
 
 <script>
-import SidebarCommunity from "@/components/businessf/tabs/owner/editors/sidebarcommunity";
+import SidebarCommunity from '@/components/businessf/tabs/owner/editors/sidebarcommunity';
 export default {
-  name: "parent",
+  name: 'parent',
   components: {
-    SidebarCommunity
+    SidebarCommunity,
   },
   data() {
     return {
@@ -94,9 +81,8 @@ export default {
       networkShow: true,
       showModal: false,
       Pcommunity: false,
-      text: "",
+      text: '',
       file: '',
-
     };
   },
   computed: {
@@ -104,20 +90,20 @@ export default {
       return this.$store.state.networkProfile.networkInfo;
     },
   },
-  mounted(){
+  mounted() {
     this.url = this.$route.params.id;
-    this.getNetworkInfo() 
+    this.getNetworkInfo();
   },
   methods: {
     nFormatter: function(num) {
       if (num >= 1000000000) {
-        return (num / 1000000000).toFixed(1).replace(/\.0$/, "") + "G";
+        return (num / 1000000000).toFixed(1).replace(/\.0$/, '') + 'G';
       }
       if (num >= 1000000) {
-        return (num / 1000000).toFixed(1).replace(/\.0$/, "") + "M";
+        return (num / 1000000).toFixed(1).replace(/\.0$/, '') + 'M';
       }
       if (num >= 1000) {
-        return (num / 1000).toFixed(1).replace(/\.0$/, "") + "K";
+        return (num / 1000).toFixed(1).replace(/\.0$/, '') + 'K';
       }
       return num;
     },
@@ -126,42 +112,42 @@ export default {
     },
     addFollower: function() {
       this.SPcommunity = !this.SPcommunity;
-      this.axios.post("network/"+this.url+"/about/follow")
-      .then(() => {
-        this.getNetworkInfo();
-        this.SPcommunity = !this.SPcommunity;
-        if (this.networkInfo[0].is_follow) {
+      this.axios
+        .post('network/' + this.url + '/about/follow')
+        .then(() => {
+          this.getNetworkInfo();
+          this.SPcommunity = !this.SPcommunity;
+          if (this.networkInfo[0].is_follow) {
+            this.flashMessage.show({
+              status: 'success',
+              message: 'You Are Not more Following',
+            });
+          } else {
+            this.flashMessage.show({
+              status: 'success',
+              message: 'You Are Now Following',
+            });
+          }
+        })
+        .catch(err => {
+          console.log({ err: err });
           this.flashMessage.show({
-            status: "success",
-            message: "You Are Not more Following"
+            status: 'error',
+            message: 'Unable To follow',
           });
-        } else {
-          this.flashMessage.show({
-            status: "success",
-            message: "You Are Now Following"
-          });
-        }
-      })
-      .catch(err => {
-        console.log({ err: err });
-        this.flashMessage.show({
-          status: "error",
-          message: "Unable To follow"
         });
-      });
     },
     getNetworkInfo() {
       this.$store
-      .dispatch("networkProfile/getnetworkInfo", this.url)
-      .then(() => {
-        console.log('ohh yeah');
-      })
-      .catch(err => {
-        console.log({ err: err });
-      });
-    }
-
-  }
+        .dispatch('networkProfile/getnetworkInfo', this.url)
+        .then(() => {
+          console.log('ohh yeah');
+        })
+        .catch(err => {
+          console.log({ err: err });
+        });
+    },
+  },
 };
 </script>
 

@@ -1,7 +1,7 @@
 <template>
   <div>
     <h6>
-      Sponsored Result
+      {{ $t('search.Sponsored_Result') }}
       <fas-icon class="icons" :icon="['fas', 'exclamation-circle']" size="lg" />
     </h6>
 
@@ -10,7 +10,7 @@
     </div>
     <h6>
       <fas-icon class="icons" :icon="['fab', 'readme']" size="lg" />
-      Posting
+      {{ $t('search.Posting') }}
     </h6>
     <Loader v-if="!pageHasLoad || loaderState" />
     <NotFound v-if="!posts.length && !loaderState" :title="title" />
@@ -18,8 +18,8 @@
       <Post v-for="(post, index) in posts" :item="post" :key="index" />
     </div>
 
-    <p class="text-center" v-if="haveNotData">Not Data</p>
-    <ScrollLoader :loading="loadingIsActive" color="#ced4da" />
+    <p class="text-center" v-if="haveNotData">{{ $t('search.Not_Data') }}</p>
+    <ScrollLoader :loading="loadingIsActive" color="#ced4da" v-if="this.getKeywork" />
   </div>
 </template>
 
@@ -49,6 +49,7 @@ export default {
       posts: 'search/GET_RESULT_POST',
       getPage: 'search/GET_CURRENT_PAGINATION_PAGE',
       getStack: 'search/STACK_VALUE',
+      getKeywork: 'search/POST_KEYWORD',
     }),
 
     loadingIsActive: function () {
@@ -111,6 +112,7 @@ export default {
     },
 
     onscroll: async function () {
+      if (!this.getKeywork) return false;
       const scrollY = window.scrollY;
       const visible = document.documentElement.clientHeight;
       const pageHeight = document.documentElement.scrollHeight;

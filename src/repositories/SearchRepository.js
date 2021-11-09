@@ -6,7 +6,8 @@ class Repository {
   async findUserByParam(credentials) {
     try {
       const { page, data } = credentials
-      const response = await axios.post(`search/listUsers/${page}?keyword=${data.keyword}`, { ...data, page })
+
+      const response = (data.keyword) ? await axios.post(`search/listUsers/${page}?keyword=${data.keyword}`, { ...data, page }) : await axios.post(`search/listUsers/${page}`, { ...data, page })
       return {
         success: (response.data.data) ? true : false,
         data: (response.data.data) ? response.data.data : []

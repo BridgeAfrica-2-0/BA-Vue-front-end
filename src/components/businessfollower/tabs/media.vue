@@ -68,7 +68,6 @@ export default {
     ...mapGetters({
       getProfilePictures: 'UserProfileOwner/getImages',
       getBusinessPictures: 'businessOwner/getAllImages',
-      getBusinessNetwork: 'networkProfileMedia/getAllImages',
     }),
   },
 
@@ -150,12 +149,7 @@ export default {
         album: 'UserProfileOwner/getAlbums',
         image: 'UserProfileOwner/getImages',
         pictures: this.getProfilePictures,
-      }),
-      networks: () => ({
-        album: 'networkProfileMedia/getAlbums',
-        image: 'networkProfileMedia/getImages',
-        pictures: this.getNetworkPictures,
-      }),
+      })
     };
 
     this.getImages();

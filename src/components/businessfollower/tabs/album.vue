@@ -114,18 +114,6 @@ export default {
         remove: this.remove,
         mapUpdate: this.mapUpdate,
       }),
-
-      network: () => ({
-        albums: this.getAlbumsNetwork,
-        showalbum: this.getAlbumNetworkImages,
-        showAlbumImages: this.albumImagesNetwork,
-        createAlbum: this.createAlbumNetwork,
-        fetchAlbums: this.fetchAlbumsNetwork,
-        deleteAlbum: this.deleteAlbumNetwork,
-        remove: this.removeNetwork,
-        updateAlbum: this.updateAlbumNetwork,
-        mapUpdate: this.mapUpdateNetwork,
-      }),
     };
   },
 
@@ -145,10 +133,6 @@ export default {
       getAlbumsBusiness: 'businessOwner/getAlbums',
       getAlbumImageBusiness: 'businessOwner/getAlbumImage',
       albumImagesBusiness: 'businessOwner/getalbumImages',
-
-      getAlbumsNetwork: 'networkProfileMedia/getAlbums',
-      getAlbumImageNetwork: 'networkProfileMedia/getAlbumImage',
-      albumImagesNetwork: 'networkProfileMedia/getalbumImages',
     }),
 
     canCreateAlbum() {
@@ -169,12 +153,6 @@ export default {
       fetchAlbumsBusiness: 'businessOwner/getAlbums',
       deleteAlbumBusiness: 'businessOwner/deletedAlbum',
       updateAlbumBusiness: 'businessOwner/updatedAlbum',
-
-      createAlbumNetwork: 'networkProfileMedia/createAlbum',
-      getAlbumNetworkImages: 'networkProfileMedia/getAlbumImages',
-      fetchAlbumsNetwork: 'networkProfileMedia/getAlbums',
-      deleteAlbumNetwork: 'networkProfileMedia/deletedAlbum',
-      updateAlbumNetwork: 'networkProfileMedia/updatedAlbum',
     }),
 
     getFullMediaLink: fullMediaLink,
@@ -189,9 +167,6 @@ export default {
 
       mapUpdateBusiness: 'businessOwner/updateAlbum',
       removeBusiness: 'businessOwner/removeAlbum',
-
-      mapUpdateNetwork: 'networkProfileMedia/updateAlbum',
-      removeNetwork: 'networkProfileMedia/removeAlbum',
     }),
 
     hidealbum() {

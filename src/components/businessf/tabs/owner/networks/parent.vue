@@ -252,7 +252,6 @@
             <h4>Edit Your New picture</h4>
           </div>
         </div>
-        <FlashMessage />
       </div>
       <b-button
         style="float: right"

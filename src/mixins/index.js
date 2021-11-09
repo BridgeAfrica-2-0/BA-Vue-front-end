@@ -1,7 +1,9 @@
 
-import { mapGetters, mapActions } from "vuex";
+import { mapGetters, mapActions, mapMutations } from "vuex";
 
 import NotFound from "@/components/NotFoundComponent"
+import NoMoreData from "@/components/businessOwner/PaginationMessage"
+
 import ClipLoader from 'vue-spinner/src/ClipLoader.vue'
 
 
@@ -55,7 +57,6 @@ export const search = {
   }),
 
   destroyed() {
-    console.log("destroy component")
     this.page(1);
     this.$store.commit('search/RESET_RESULT');
     window.removeEventListener('scroll', this.onscroll)
@@ -74,6 +75,121 @@ export const search = {
   }
 }
 
+
+export const commentMixinsBuisness = {
+  data() {
+    return {
+      reply: false,
+      comment: null,
+      comments: [],
+      text: "",
+      createPostRequestIsActive: false,
+      loadComment: false
+    };
+  },
+
+  created() {
+    this.comment = this.item;
+  },
+
+  computed: {
+    ...mapGetters({
+      profile: 'auth/profilConnected',
+    }),
+    icon() {
+      return this.comment.is_liked ? "suit-heart-fill" : "suit-heart";
+    },
+  },
+
+  filters: {
+    nFormatter: formatNumber,
+    now: fromNow,
+  },
+
+  methods: {
+    ...mapMutations({
+      auth: 'auth/profilConnected',
+    }),
+
+    onLike: async function () {
+      const request = await this.$repository.share.commentLike({
+        comment: this.comment.comment_id,
+        network: this.profile.id,
+      });
+
+      if (request.success)
+        this.comment = Object.assign(this.comment, {
+          is_liked: this.comment.is_liked ? 0 : 1,
+          comment_likes: !this.comment.is_liked
+            ? this.comment.comment_likes + 1
+            : this.comment.comment_likes
+              ? this.comment.comment_likes - 1
+              : 0,
+        });
+    },
+
+    onShowReply: async function () {
+      this.loadComment = true
+      const request = await this.$repository.share.fetchReplyComment({
+        post: this.uuid,
+        comment: this.comment.comment_id,
+        page: this.page,
+      });
+
+      if (request.success) {
+        this.comments = [...this.comments, ...request.data];
+        this.hasData = request.data.length ? true : false;
+        this.page = request.data.length ? this.page + 1 : this.page;
+      }
+
+      this.loadComment = false
+    },
+
+    onReply: async function () {
+      if (!(this.text.trim().length > 2 && !this.createPostRequestIsActive))
+        return false;
+
+      this.createPostRequestIsActive = true
+      this.loadComment = true
+
+      const request = await this.$repository.share.createReplyComment({
+        post: this.uuid,
+        comment: this.comment.comment_id,
+        data: {
+          comment: this.text,
+          networkId:this.profile.id,
+        },
+      });
+
+      if (request.success) {
+        this.page = 1
+        this.onShowReply();
+        this.text = "";
+
+        this.comment = Object.assign(this.comment, {
+          reply_comment_count: this.comment.reply_comment_count + 1,
+        });
+      }
+      this.createPostRequestIsActive = false
+      this.loadComment = false
+    },
+
+    showReply() {
+      this.reply = !this.reply;
+      if (this.reply) this.onShowReply();
+    },
+  },
+}
+
+export const NoMoreDataForComment = {
+  components: {
+    NoMoreData
+  },
+  data: () => ({
+    hasData: true,
+    page: 1
+  })
+}
 
 export const commentMixins = {
 
@@ -104,7 +220,7 @@ export const commentMixins = {
     onLike: async function () {
       const request = await this.$repository.share.commentLike({
         comment: this.comment.comment_id,
-        network: this.$route.params.id,
+        network: this.profile.id,
       });
 
       if (request.success)
@@ -140,7 +256,7 @@ export const commentMixins = {
         comment: this.comment.comment_id,
         data: {
           comment: this.text,
-          networkId: this.$route.params.id,
+          networkId: this.profile.id,
         },
       });
 

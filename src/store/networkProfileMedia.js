@@ -28,9 +28,9 @@ export default {
       state.owneralbums = owneralbums;
     },
 
-    setImages(state, ownerpostimages){
-   
-      state.ownerpostimages = ownerpostimages;  
+    setImages(state, ownerpostimages) {
+
+      state.ownerpostimages = ownerpostimages;
     },
 
     setAlbumImages(state, albumimages) {
@@ -41,20 +41,20 @@ export default {
 
   actions: {
 
-    getAlbumImages( {commit}, network_and_album_Id){
+    getAlbumImages({ commit }, network_and_album_Id) {
       return axios
-      .get('network/album/show/'+network_and_album_Id)
-      .then(({ data }) => {
-       commit('setAlbumImages', data.data);
-        console.log(data);
-        console.log('network/album/show/'+network_and_album_Id);
-      });
+        .get('network/album/show/' + network_and_album_Id)
+        .then(({ data }) => {
+          commit('setAlbumImages', data.data);
+          console.log(data);
+          console.log('network/album/show/' + network_and_album_Id);
+        });
     },
 
     getImages({ commit }, networkId) {
       return axios
         .get(`network/post/media/${networkId}`)
-          .then(({ data }) => {
+        .then(({ data }) => {
           commit("setImages", data.data);
           console.log(data);
           console.log(`network/post/media/${networkId}`);
@@ -64,11 +64,33 @@ export default {
     getAlbums({ commit }, networkId) {
       return axios
         .get(`network/album/index/${networkId}`)
-          .then(({ data }) => {
+        .then(({ data }) => {
           commit("setAlbums", data.data);
-          console.log(data);
-          console.log(`network/album/index/${networkId}`);
         });
+    },
+
+    async submitPost({ commit }, payload) {
+      return axios.post(`business/store/media/${payload.businessID}/${payload.albumID}`, payload.data);
+    },
+
+    async setProfilePic({ commit }, { businessID, albumID }) {
+      return axios.post(`business/make/logopic/${businessID}/${albumID}`);
+    },
+
+    async setCoverPic({ commit }, { businessID, albumID }) {
+      return axios.post(`business/make/coverpic/${businessID}/${albumID}`);
+    },
+
+    async deleteImage({ commit }, id) {
+      return axios.delete(`business/picture/${id}`);
+    },
+
+    async downloadPic({ commit }, id) {
+      return axios({
+        url: `business/download/media/${id}`,
+        method: "get",
+        responseType: "blob"
+      });
     },
 
   }

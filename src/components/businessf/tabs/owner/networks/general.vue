@@ -81,10 +81,6 @@
             </b-tabs>
           </div>
         </div>
-
-        <br />
-
-        <br />
       </b-col>
       <b-col cols="2"> </b-col>
     </b-row>

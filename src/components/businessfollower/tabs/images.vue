@@ -240,15 +240,6 @@ export default {
         getAlbumImages: this.getAlbumImagesBusiness,
         updateItem: this.updateItemBusiness,
       }),
-      network: () => ({
-        submitPost: this.submitPostNetwork,
-        setProfilePicture: this.setProfilePictureNetwork,
-        setCoverPicture: this.setCoverPictureNetwork,
-        deleteImagePicture: this.deleteImagePictureNetwork,
-        onDownloadPic: this.onDownloadPicNetwork,
-        getAlbumImages: this.getAlbumImagesNetwork,
-        updateItem: this.updateItemNetwork,
-      }),
     };
 
     this.strategy = {
@@ -287,19 +278,11 @@ export default {
       deleteImagePictureBusiness: 'businessOwner/deleteImage',
       onDownloadPicBusiness: 'businessOwner/downloadPic',
       getAlbumImagesBusiness: 'businessOwner/getAlbumImages',
-
-      submitPostNetwork: 'networkProfile/submitPost',
-      setProfilePictureNetwork: 'networkProfile/setProfilePic',
-      setCoverPictureNetwork: 'networkProfile/setCoverPic',
-      deleteImagePictureNetwork: 'networkProfile/deleteImage',
-      onDownloadPicNetwork: 'networkProfile/downloadPic',
-      getAlbumImagesNetwork: 'networkProfile/getAlbumImages',
     }),
 
     ...mapMutations({
       updateItem: 'UserProfileOwner/updateAlbumItem',
       updateItemBusiness: 'businessOwner/updateAlbumItem',
-      updateItemNetwork: 'networkProfile/updateAlbumItem',
     }),
 
     getFullMediaLink: fullMediaLink,

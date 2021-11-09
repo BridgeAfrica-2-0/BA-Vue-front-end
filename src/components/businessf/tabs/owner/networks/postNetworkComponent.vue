@@ -208,7 +208,7 @@ export default {
 
         const request = await this.$repository.share.postLike({
           post: this.post.id,
-          network: this.$route.params.id,
+          network: this.profile.id,
         });
 
         if (request.success)
@@ -231,7 +231,7 @@ export default {
       const request = await this.$repository.share.createComment({
         post: this.post.id,
         data: {
-          networkId: this.$route.params.id,
+          networkId: this.profile.id,
           comment: this.comment,
         },
       });

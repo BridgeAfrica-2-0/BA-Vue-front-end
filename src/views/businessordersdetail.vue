@@ -87,7 +87,7 @@
             <div class="col-3   margimg">
               <splide :options="{ rewind: true }" class="r-img">
                 <splide-slide cl v-for="(im, index) in img" :key="index">
-                  <img :src="img[index]" class="r-img" />
+                  <img :src="item.product_picture" class="r-img" />
                 </splide-slide>
               </splide>
             </div>

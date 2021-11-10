@@ -33,7 +33,7 @@ import forgotPassword from "@/views/forgotPassword";
 import navMessage from "@/views/navMessaging";
 import Blec from "@/views/blec";
 import memberNetworkFollower from "@/views/memberNetworkFollower";
- import govx from "@/views/test";
+import govx from "@/views/test";
 import networkEditors from "@/views/networkEditors";
 // import Test from "@/views/test";
 import templateView from "@/views/templateView";
@@ -47,6 +47,7 @@ import dashboard from "@/views/dashboard";
 import myorders from "@/views/myOders"
 import notFound from "@/components/404"
 
+import PostRedirectWithEmail from "@/views/PostRedirectWithEmail"
 
 
 import welcome from "@/views/welcome";
@@ -69,9 +70,15 @@ const routes = [
     //   auth: true,
     // },
   },
-  
 
-  
+  {
+    path: "/post/:id",
+    name: "single:post",
+    props:true,
+    component: PostRedirectWithEmail,
+  },
+
+
   {
     path: "/",
     name: "home",

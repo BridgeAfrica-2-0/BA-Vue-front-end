@@ -17,6 +17,21 @@ class Repository {
       }
     }
   }
+  async get(uuid) {
+    try {
+      const response = await axios.get(`siglepost/${uuid}`)
+      return {
+        success: (response.data.data) ? true : false,
+        data: (response.data.data) ? response.data.data : []
+      }
+
+    } catch (error) {
+      return {
+        success: false,
+        data: error
+      }
+    }
+  }
 
 }
 

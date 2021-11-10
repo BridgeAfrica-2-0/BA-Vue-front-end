@@ -274,6 +274,7 @@
           </b-modal>
         </div>
       </div>
+
       <Post
         v-for="item in owner_post"
         :key="item.post_id"
@@ -319,6 +320,7 @@ export default {
       fileImageArr: [],
     };
   },
+
 
   computed: {
     ...mapGetters({

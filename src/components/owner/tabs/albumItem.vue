@@ -12,7 +12,7 @@
         <div class="botmediadess-position" v-if="loading">
           <b-spinner
             style="width: 3rem; height: 3rem; color: #e75c18"
-            label="Large Spinner"
+            :label="$t('profileowner.Large_Spinner')"
           ></b-spinner>
         </div>
         <div class="botmediadess-position" v-else>
@@ -29,7 +29,7 @@
             size="sm"
             @click="show"
           >
-            Show
+            {{ $t('profileowner.Show') }}
           </b-button>
         </div>
       </div>
@@ -50,9 +50,9 @@
               </b-icon>
             </template>
 
-            <b-dropdown-item @click="editAlbum">Edit</b-dropdown-item>
+            <b-dropdown-item @click="editAlbum">{{ $t('profileowner.Edit') }}</b-dropdown-item>
 
-            <b-dropdown-item @click="deleteAlbums">Delete</b-dropdown-item>
+            <b-dropdown-item @click="deleteAlbums">{{ $t('profileowner.Delete') }}</b-dropdown-item>
           </b-dropdown>
         </li>
       </ul>

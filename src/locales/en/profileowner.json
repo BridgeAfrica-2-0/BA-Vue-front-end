@@ -165,7 +165,7 @@
     "School": "School",
     "Graduated": "Graduated",
     "To": "To",
-    "View_All": "View_All",
+    "View_All": "View All",
     "South_Africa": "South Africa",
     "Add_Other_Places": "Add Other Places",
     "City": "City",
@@ -214,5 +214,14 @@
     "Post_a_business_update": "Post a business update",
     "Change_Cover": "Change Cover",
     "View_As": "View As",
-    "Upload_Cover_photo": "Upload Cover photo"
+    "Upload_Cover_photo": "Upload Cover photo",
+    "https_www_yourwebsite_com": "https://www.yourwebsite.com",
+    "Get_Directions": "Get Directions",
+    "Profile_was_succesfully_Cancelled": "Profile was succesfully Cancelled",
+    "Profile_was_succesfully_Edited": "Profile was succesfully Edited",
+    "Current_or_Last_Organization": "Current or Last Organization",
+    "Last_Education": "Last Education",
+    "Large_Spinner": "Large Spinner",
+    "No_items_found": "No items found",
+    "Photo_Video": "Photo / Video"
 }

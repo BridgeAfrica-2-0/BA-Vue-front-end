@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="s-cardd" style="overflow-y: scroll;">
+    <div style="overflow-y: scroll;" class="s-cardd">
 
       <div v-for="people in peoples" :key="people.id" class="people-style border shadow">
         <b-row class="mb-1">
@@ -31,7 +31,7 @@
                         sm="6"
                         class="mt-3 mt-lg-2 mt-xl-2"
                       >
-                        <h6 class="follower">{{ this.$emit("nFormatter", people.followers)}} Community</h6>
+                        <h6 class="follower">{{people.followers}} Community</h6>
                       </b-col>
                     </b-row>
                   </div>
@@ -40,14 +40,7 @@
                 <b-col lg="12" xl="12" cols="12" sm="12" md="12">
                   <div class="e-name">
                     <b-row class="mt-lg-0">
-                      <b-col
-                        md="6"
-                        lg="6"
-                        cols="6"
-                        sm="6"
-                        xl="6"
-                        class="mt-2 mt-lg-2 mt-xl-2 btn-2 center"
-                      >
+                      <b-col md="6" lg="6" cols="6" sm="6" xl="6" class="mt-2 mt-lg-2 mt-xl-2 btn-2 center">
                         <b-button
                           block
                           variant="primary"
@@ -65,14 +58,7 @@
                         </b-button>
                       </b-col>
 
-                      <b-col
-                        md="6"
-                        lg="6"
-                        cols="6"
-                        sm="6"
-                        xl="6"
-                        class="mt-2 mt-lg-2 mt-xl-2 btn-2 center"
-                      >
+                      <b-col md="6" lg="6" cols="6" sm="6" xl="6" class="mt-2 mt-lg-2 mt-xl-2 btn-2 center">
                         <b-button
                           block
                           size="sm"

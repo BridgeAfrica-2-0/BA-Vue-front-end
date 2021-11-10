@@ -1,5 +1,6 @@
 <template>
   <b-container>
+    <FlashMessage />
     <h5 class="a-text">Assign Role</h5>
 
     <b-container class="b-bottom">
@@ -68,15 +69,15 @@
       <b-container>
         <h5 class="a-text">Existing Editors</h5>
         <div v-if="editors != 0">
-          <b-list-group v-for="editor in editors" :key="editor.id">
+          <b-list-group v-for="editor in editors" :key="editor.user_id">
             <b-list class="d-flex align-items-center m-list">
               <b-avatar 
                 class="mr-3" 
-                :text="editor.name.charAt(0)"
+                :text="editor.fullname.charAt(0)"
                 :src="editor.profile_picture"
                 size="4em"
               ></b-avatar>
-              <span class="mr-auto">{{editor.name}}</span>
+              <span class="mr-auto">{{editor.fullname}}</span>
               <span>
                 <div>
                   <b-dropdown
@@ -109,7 +110,7 @@
         <div>
           <b-modal id="edit-editor" hide-footer>
             <template #modal-title>
-              EDIT EDITOR: {{clickedObject.name}}
+              EDIT EDITOR: {{clickedObject.fullname}}
             </template>
             <div class="d-block text-center">
                <b-form-group
@@ -124,7 +125,7 @@
                     v-model="form.role"
                     :options="roles"
                     name="role"
-                    value-field="id"
+                    value-field="name"
                     text-field="name"
                     class="mb-3"
                   >
@@ -139,13 +140,14 @@
               !!! <code>WARRING</code> !!!
             </template>
             <div class="d-block text-center">
-              <h3>You Are About To Delete: {{clickedObject.name}}!</h3>
+              <h3>You Are About To Delete: {{clickedObject.fullname}}!</h3>
             </div>
             <b-button class="mt-3" block @click="$bvModal.hide('delete-editor'); deleteEditor(clickedObject)">Delete</b-button>
           </b-modal>
         </div>
       </b-container>
     </div>
+
   </b-container>
 </template>
 
@@ -218,8 +220,9 @@ export default {
       });
     },
     editEditor: function(clickedObject){
+      console.log(clickedObject);
       let formData = new FormData();
-      formData.append('user_id', this.clickedObject.id);
+      formData.append('user_id', clickedObject.user_id);
       formData.append('role', this.form.role);
       this.$store
         .dispatch("NetworkSettings/updateEditor", {
@@ -280,7 +283,7 @@ export default {
     deleteEditor: function(clickedObject){
       this.$store
         .dispatch("NetworkSettings/deleteEditor", {
-          path: "business/role/delete/"+clickedObject.id,
+          path: "business/role/delete/"+clickedObject.user_id,
         })
         .then(({ data }) => {
         console.log(data);

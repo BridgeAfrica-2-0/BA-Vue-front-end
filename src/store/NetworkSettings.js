@@ -94,7 +94,7 @@ export default {
     },
 
     geteditors({ commit }, networkId) {
-      return axios.get(`/network/${networkId}/members/editor`).then(({ data }) => {
+      return axios.post(`/network/${networkId}/members/editor`).then(({ data }) => {
         commit("seteditors", data.data);
         console.log(data);
       });

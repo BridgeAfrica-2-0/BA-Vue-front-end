@@ -340,7 +340,15 @@
 
 
 
-
+  <b-progress
+                  v-if="isUploading"
+                  :value="uploadPercentage"
+                  variant="primary"
+                  class="m13"
+                  show-progress
+                  :animated="animate"
+                ></b-progress>
+                <hr />
 
                 <br />
                 <span>
@@ -356,15 +364,23 @@
           </b-modal>
         </div>
       </div>
+
       <Post
         v-for="item in owner_post"
-        :key="item.post_id"
+        :key="item.id"
         :item="item"
         :editPost="() => editPost(item)"
         :deletePost="() => deletePost(item)"
         :isOwner="profile.id == item.user_id"
       />
-      <infinite-loading @infinite="infiniteHandler"></infinite-loading>
+   
+      
+      <infinite-loading
+        :identifier="infiniteId"
+        ref="infiniteLoading"
+        @infinite="infiniteHandler"
+      ></infinite-loading>
+
     </b-card>
   </div>
 </template>
@@ -382,6 +398,9 @@ export default {
     return {
       page: 1,
       loading: false,
+      infiniteId: +new Date(),
+        uploadPercentage: 0,
+       isUploading: false,
       // post:this.$store.state.networkProfile.ownerPost,
       url: null,
       delete: [],
@@ -495,6 +514,11 @@ export default {
     
 
     infiniteHandler($state) {
+
+       if (this.page == 1) {
+        this.owner_post.splice(0);
+      }
+
       this.axios
         .get('network/show/post/' + this.url + '/' + this.page)
         .then(({ data }) => {
@@ -517,8 +541,10 @@ export default {
       return this.axios
         .delete('network/' + this.$route.params.id + '/post/' + post.id)
 
-        .then(() => this.ownerPost())
+       // .then(() => this.ownerPost())
         .then(() => {
+          this.page = 1;
+          this.infiniteId += 1;
           this.flashMessage.show({
             status: 'success',
             blockClass: 'custom-block-class',
@@ -584,6 +610,8 @@ export default {
           this.ownerPost();
         })
         .then(() => {
+          this.page = 1;
+          this.infiniteId += 1;
           this.flashMessage.show({
             status: 'success',
             blockClass: 'custom-block-class',
@@ -673,7 +701,7 @@ export default {
 
 
 
-    
+
     selectDocument(event) {
       console.log(event);
       this.createPost.hyperlinks.push({
@@ -726,7 +754,7 @@ export default {
 
     async submitPost() {
       this.loading = true;
-
+       this.isUploading = true;
       this.fileImageArr = this.createPost.movies;
 
       let formData2 = new FormData();
@@ -747,9 +775,17 @@ export default {
           headers: {
             'Content-Type': 'multipart/form-data',
           },
+
+          
+          onUploadProgress: function (progressEvent) {
+            this.uploadPercentage = parseInt(
+              Math.round((progressEvent.loaded / progressEvent.total) * 100)
+            );
+          }.bind(this),
+
         })
-        .then(() => this.ownerPost())
-        .then(() => {
+       // .then(() => this.ownerPost())
+        .then((res) => {
           this.flashMessage.show({
             status: 'success',
             blockClass: 'custom-block-class',
@@ -757,7 +793,10 @@ export default {
           });
           // loader.hide()
           this.$refs['modal-xl'].hide();
+           this.isUploading = false;
           this.loading = false;
+          this.page = 1;
+          this.infiniteId += 1;
         })
         .catch((err) => {
           this.loading = false;

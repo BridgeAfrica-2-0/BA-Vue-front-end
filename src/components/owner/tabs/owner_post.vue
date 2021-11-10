@@ -106,6 +106,21 @@
 
           <!--   edit array   -->
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
           <b-modal
             id="modal-edit"
             ref="modal-edit"
@@ -256,6 +271,29 @@
             </b-row>
           </b-modal>
           <!-- create post -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
           <b-modal
             id="modal-xl"
             ref="modal-xl"
@@ -383,6 +421,17 @@
 
                 
 
+
+
+
+
+
+
+
+
+
+
+
                 <b-progress
                   v-if="isUploading"
                   :value="uploadPercentage"
@@ -403,6 +452,7 @@
               <b-col cols="1" md="1" class="m-0 p-0"></b-col>
             </b-row>
           </b-modal>
+
         </div>
       </div>
 
@@ -846,6 +896,7 @@ export default {
     chooseDocument() {
       document.getElementById("chosefile").click();
     },
+
     selectMovies(event) {
       const file = event.target;
 
@@ -877,6 +928,8 @@ export default {
         reader.readAsDataURL(file.files[0]);
       }
     },
+
+    
     selectMoviesOutsidePost(event) {
       const file = event.target;
 
@@ -953,7 +1006,7 @@ export default {
         });
     },
 
-    submitPost() {
+    submitPost() {   
       this.isUploading = true;
       let loader = this.$loading.show({
         container: this.$refs.loader,
@@ -961,7 +1014,7 @@ export default {
         onCancel: this.onCancel,
         color: "#e75c18",
       });
-
+  
       let fileImage = null;
 
       let formData2 = new FormData();

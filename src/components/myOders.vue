@@ -7,34 +7,19 @@
     ----------------------DEBUT -----------------------------------------------------
     -->
     <div id="hidemobile">
-      <div
-        class="justify-content-between d-flex row cd B"
-        style="margin-left: 8px"
-      >
-        <div
-          id="m1"
-          class="mobile green t col transition pl-4"
-          @click="changeElementType(1)"
-        >
+      <div class="justify-content-between d-flex row cd B" style="margin-left: 8px">
+        <div id="m1" class="mobile green t col transition pl-4" @click="changeElementType(1)">
           <div class="cercle1">1</div>
           <h2 class="h2 text-position">All</h2>
         </div>
 
-        <div
-          id="m2"
-          class="mobile1 col t start-50"
-          @click="changeElementType(2)"
-        >
+        <div id="m2" class="mobile1 col t start-50" @click="changeElementType(2)">
           <div class="cercle2">2</div>
 
           <h2 class="h2 text-position text-center">In progress</h2>
         </div>
 
-        <div
-          id="m3"
-          class="mobile3 col t start-50"
-          @click="changeElementType(3)"
-        >
+        <div id="m3" class="mobile3 col t start-50" @click="changeElementType(3)">
           <div class="cercle2">3</div>
 
           <h2 class="h2 text-position text-center">Complete</h2>
@@ -65,10 +50,7 @@
           <div class="show row">
             <div class="col-3">Show:</div>
             <div class="col">
-              <b-form-select
-                v-model="selected"
-                :options="options"
-              ></b-form-select>
+              <b-form-select v-model="selected" :options="options"></b-form-select>
             </div>
           </div>
           <div v-for="i in etat1" :key="i">
@@ -80,20 +62,13 @@
                 <span class="gras"
                   >Order <span class="text-success order">#12324253</span>
                   <br />
-                  <span class="flou row" style="margin-left: 1px"
-                    >yaoundé 12/12/2021 12H00</span
-                  >
+                  <span class="flou row" style="margin-left: 1px">yaoundé 12/12/2021 12H00</span>
                 </span>
               </div>
 
               <div class="col">
                 <div class="row drop">
-                  <b-dropdown
-                    variant="ligth"
-                    id="dropdown-1"
-                    text="Manage"
-                    class="m-md-2 noborder"
-                  >
+                  <b-dropdown variant="ligth" id="dropdown-1" text="Manage" class="m-md-2 noborder">
                     <b-dropdown-item>archive</b-dropdown-item>
                     <b-dropdown-item>delete</b-dropdown-item>
                   </b-dropdown>
@@ -106,7 +81,6 @@
               </div>
             </div>
 
-            
             <hr />
 
             <div class="justify-content-center row">
@@ -158,10 +132,7 @@
           <div class="show row">
             <div class="col-3">Show:</div>
             <div class="col">
-              <b-form-select
-                v-model="selected"
-                :options="options"
-              ></b-form-select>
+              <b-form-select v-model="selected" :options="options"></b-form-select>
             </div>
           </div>
           <div v-for="i in etat1" :key="i">
@@ -170,20 +141,13 @@
                 <span class="gras"
                   >Order <span class="text-success order">#12324253</span>
                   <br />
-                  <span class="flou row" style="margin-left: 1px"
-                    >yaoundé 12/12/2021 12H00</span
-                  >
+                  <span class="flou row" style="margin-left: 1px">yaoundé 12/12/2021 12H00</span>
                 </span>
               </div>
 
               <div class="col">
                 <div class="row drop">
-                  <b-dropdown
-                    variant="ligth"
-                    id="dropdown-1"
-                    text="Manage"
-                    class="m-md-2"
-                  >
+                  <b-dropdown variant="ligth" id="dropdown-1" text="Manage" class="m-md-2">
                     <b-dropdown-item>archive</b-dropdown-item>
                     <b-dropdown-item>delete</b-dropdown-item>
                   </b-dropdown>
@@ -247,10 +211,7 @@
           <div class="show row">
             <div class="col-3">Show:</div>
             <div class="col">
-              <b-form-select
-                v-model="selected"
-                :options="options"
-              ></b-form-select>
+              <b-form-select v-model="selected" :options="options"></b-form-select>
             </div>
           </div>
           <div v-for="i in etat1" :key="i">
@@ -259,20 +220,13 @@
                 <span class="gras"
                   >Order <span class="text-success order">#12324253</span>
                   <br />
-                  <span class="flou row" style="margin-left: 1px"
-                    >yaoundé 12/12/2021 12H00</span
-                  >
+                  <span class="flou row" style="margin-left: 1px">yaoundé 12/12/2021 12H00</span>
                 </span>
               </div>
 
               <div class="col">
                 <div class="row drop">
-                  <b-dropdown
-                    variant="ligth"
-                    id="dropdown-1"
-                    text="Manage"
-                    class="m-md-2"
-                  >
+                  <b-dropdown variant="ligth" id="dropdown-1" text="Manage" class="m-md-2">
                     <b-dropdown-item>archive</b-dropdown-item>
                     <b-dropdown-item>delete</b-dropdown-item>
                   </b-dropdown>
@@ -336,10 +290,7 @@
           <div class="show row">
             <div class="col-3">Show:</div>
             <div class="col">
-              <b-form-select
-                v-model="selected"
-                :options="options"
-              ></b-form-select>
+              <b-form-select v-model="selected" :options="options"></b-form-select>
             </div>
           </div>
           <div v-for="i in etat1" :key="i">
@@ -348,20 +299,13 @@
                 <span class="gras"
                   >Order <span class="text-success order">#12324253</span>
                   <br />
-                  <span class="flou row" style="margin-left: 1px"
-                    >yaoundé 12/12/2021 12H00</span
-                  >
+                  <span class="flou row" style="margin-left: 1px">yaoundé 12/12/2021 12H00</span>
                 </span>
               </div>
 
               <div class="col">
                 <div class="row drop">
-                  <b-dropdown
-                    variant="ligth"
-                    id="dropdown-1"
-                    text="Manage"
-                    class="m-md-2"
-                  >
+                  <b-dropdown variant="ligth" id="dropdown-1" text="Manage" class="m-md-2">
                     <b-dropdown-item>archive</b-dropdown-item>
                     <b-dropdown-item>delete</b-dropdown-item>
                   </b-dropdown>
@@ -433,11 +377,7 @@
       <div class="row parent">
         <b-avatar id="a1" class="avatar bg-success" text="1"></b-avatar>
         <h2 class="text cursor" @click="changeElementType(1)">All</h2>
-        <div
-          id="p1"
-          class="progress prog cursor gris bg-success"
-          @click="changeElementType(1)"
-        >
+        <div id="p1" class="progress prog cursor gris bg-success" @click="changeElementType(1)">
           <div
             class="progress-bar bg-success"
             role="progressbar"
@@ -449,11 +389,7 @@
 
         <b-avatar id="a2" class="avatar" text="2"></b-avatar>
         <h2 class="text cursor" @click="changeElementType(2)">In Progress</h2>
-        <div
-          id="p2"
-          class="progress prog cursor gris"
-          @click="changeElementType(2)"
-        >
+        <div id="p2" class="progress prog cursor gris" @click="changeElementType(2)">
           <div
             class="progress-bar bg-success"
             role="progressbar"
@@ -465,11 +401,7 @@
 
         <b-avatar id="a3" class="avatar" text="3"></b-avatar>
         <h2 class="text cursor" @click="changeElementType(3)">Complete</h2>
-        <div
-          id="p3"
-          class="progress prog cursor gris"
-          @click="changeElementType(3)"
-        >
+        <div id="p3" class="progress prog cursor gris" @click="changeElementType(3)">
           <div
             class="progress-bar bg-success"
             role="progressbar"
@@ -481,11 +413,7 @@
 
         <b-avatar id="a4" class="avatar" text="4"></b-avatar>
         <h2 class="text cursor" @click="changeElementType(4)">Cancel</h2>
-        <div
-          id="p4"
-          class="progress prog cursor gris"
-          @click="changeElementType(4)"
-        >
+        <div id="p4" class="progress prog cursor gris" @click="changeElementType(4)">
           <div
             class="progress-bar bg-success"
             role="progressbar"
@@ -506,22 +434,14 @@
           <div class="show row">
             <div class="col-3">Show:</div>
             <div class="col">
-              <b-form-select
-                v-model="selected"
-                :options="options"
-              ></b-form-select>
+              <b-form-select v-model="selected" :options="options"></b-form-select>
             </div>
           </div>
           <div v-for="i in etat1" :key="i">
             <div class="justify-content-start container">
               <div class="container d-flex justify-content-end btn-marg">
                 <div class="manage">
-                  <b-dropdown
-                    variant="ligth"
-                    id="dropdown-1"
-                    text="Manage"
-                    class="m-md-2"
-                  >
+                  <b-dropdown variant="ligth" id="dropdown-1" text="Manage" class="m-md-2">
                     <b-dropdown-item>Archive</b-dropdown-item>
                     <b-dropdown-item>Delete</b-dropdown-item>
                   </b-dropdown>
@@ -585,10 +505,7 @@
           <div class="show row">
             <div class="col-3">Show:</div>
             <div class="col">
-              <b-form-select
-                v-model="selected"
-                :options="options"
-              ></b-form-select>
+              <b-form-select v-model="selected" :options="options"></b-form-select>
             </div>
           </div>
 
@@ -596,12 +513,7 @@
             <div class="justify-content-start container">
               <div class="container d-flex justify-content-end btn-marg">
                 <div class="manage">
-                  <b-dropdown
-                    variant="ligth"
-                    id="dropdown-1"
-                    text="Manage"
-                    class="m-md-2"
-                  >
+                  <b-dropdown variant="ligth" id="dropdown-1" text="Manage" class="m-md-2">
                     <b-dropdown-item>Archive</b-dropdown-item>
                     <b-dropdown-item>Delete</b-dropdown-item>
                   </b-dropdown>
@@ -663,10 +575,7 @@
           <div class="show row">
             <div class="col-3">Show:</div>
             <div class="col">
-              <b-form-select
-                v-model="selected"
-                :options="options"
-              ></b-form-select>
+              <b-form-select v-model="selected" :options="options"></b-form-select>
             </div>
           </div>
 
@@ -674,12 +583,7 @@
             <div class="justify-content-start container">
               <div class="container d-flex justify-content-end btn-marg">
                 <div class="manage">
-                  <b-dropdown
-                    variant="ligth"
-                    id="dropdown-1"
-                    text="Manage"
-                    class="m-md-2"
-                  >
+                  <b-dropdown variant="ligth" id="dropdown-1" text="Manage" class="m-md-2">
                     <b-dropdown-item>Archive</b-dropdown-item>
                     <b-dropdown-item>Delete</b-dropdown-item>
                   </b-dropdown>
@@ -741,10 +645,7 @@
           <div class="show row">
             <div class="col-3">Show:</div>
             <div class="col">
-              <b-form-select
-                v-model="selected"
-                :options="options"
-              ></b-form-select>
+              <b-form-select v-model="selected" :options="options"></b-form-select>
             </div>
           </div>
 
@@ -752,12 +653,7 @@
             <div class="justify-content-start container">
               <div class="container d-flex justify-content-end btn-marg">
                 <div class="manage">
-                  <b-dropdown
-                    variant="ligth"
-                    id="dropdown-1"
-                    text="Manage"
-                    class="m-md-2"
-                  >
+                  <b-dropdown variant="ligth" id="dropdown-1" text="Manage" class="m-md-2">
                     <b-dropdown-item>Archive</b-dropdown-item>
                     <b-dropdown-item>Delete</b-dropdown-item>
                   </b-dropdown>
@@ -820,68 +716,70 @@
 </template>
 
 <script>
-import navbar from "./navbar.vue";
+import navbar from './navbar.vue';
 
 export default {
   components: { navbar },
   data() {
     return {
-      selected: "",
-      rimg: "",
+      selected: '',
+      rimg: '',
       status: 1,
-      etat: "All",
-      img: ["http://urlr.me/YMQXD", "https://placekitten.com/400/300"],
+      etat: 'All',
+      img: ['http://urlr.me/YMQXD', 'https://placekitten.com/400/300'],
       options: [
-        { value: null, text: "Please select an option" },
-        { value: "a", text: "last 5 days" },
-        { value: "b", text: "last 10 days" },
+        { value: null, text: 'Please select an option' },
+        { value: 'a', text: 'last 5 days' },
+        { value: 'b', text: 'last 10 days' },
       ],
-      etat1: ["pending", "complete", "cancel"],
+      etat1: ['pending', 'complete', 'cancel'],
     };
   },
 
   methods: {
     changeElementType(p) {
-      console.log("------------------" + p);
+      console.log('------------------' + p);
       this.status = p;
 
       if (p == 1) {
-        this.etat = "All";
+        this.etat = 'All';
       } else if (p == 2) {
-        this.etat = "pending";
+        this.etat = 'pending';
       } else if (p == 3) {
-        this.etat = "complete";
+        this.etat = 'complete';
       } else if (p == 4) {
-        this.etat = "Canceled";
+        this.etat = 'Canceled';
       }
       //transition partie desktop
-      const a = document.getElementById("a" + p);
-      const pr = document.getElementById("p" + p);
+      const a = document.getElementById('a' + p);
+      const pr = document.getElementById('p' + p);
 
-      const as = document.querySelectorAll(".avatar");
-      as.forEach((dat) => {
-        dat.classList.remove("bg-success");
+      const as = document.querySelectorAll('.avatar');
+      as.forEach(dat => {
+        dat.classList.remove('bg-success');
       });
-      a.classList.add("bg-success");
+      a.classList.add('bg-success');
 
-      const ps = document.querySelectorAll(".progress");
-      ps.forEach((dat) => {
-        dat.classList.remove("bg-success");
+      const ps = document.querySelectorAll('.progress');
+      ps.forEach(dat => {
+        dat.classList.remove('bg-success');
       });
-      pr.classList.add("bg-success");
+      pr.classList.add('bg-success');
 
       //transition partie mobile
 
-      const el = document.getElementById("m" + p);
-      const els = document.querySelectorAll(".t");
-      els.forEach((dat) => {
-        dat.classList.remove("green");
+      const el = document.getElementById('m' + p);
+      const els = document.querySelectorAll('.t');
+      els.forEach(dat => {
+        dat.classList.remove('green');
       });
-      el.classList.add("green");
+      el.classList.add('green');
     },
   },
 
-  mounted() {},
+  beforeMount() {
+    this.$store.dispatch('profileOrders/getMyOrders', 1);
+  },
 };
 </script>
 
@@ -965,7 +863,7 @@ h3 {
 
 /*  start style mobile------------------------- */
 
-.noborder{
+.noborder {
   border: none !important;
 }
 .drop {

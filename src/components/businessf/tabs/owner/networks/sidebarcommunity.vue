@@ -54,6 +54,27 @@
             </b-tabs>
           </div>
         </b-tab>
+        <b-tab>
+          <template slot="title">
+            Networks <span class="spa-color"> {{nFormatter(businessdetails.total_Network)}} </span>
+          </template>
+          <div>
+            <b-tabs fill pills content-class="mt-3  f-left m-up checkcheck">
+              <b-tab active>
+                <template slot="title">
+                  Followers <span class="spa-color"> {{nFormatter(businessdetails.total_followers)}} </span>
+                </template>
+                <div class="s-comcard"><Network :businesses="businessdetails.Business_followers" /></div>
+              </b-tab>
+              <b-tab>
+                <template slot="title">
+                  Following <span class="spa-color"> {{nFormatter(businessdetails.totat_following)}} </span>
+                </template>
+                <div class="s-comcard"><Network :businesses="businessdetails.Business_following" /></div>
+              </b-tab>
+            </b-tabs>
+          </div>
+        </b-tab>
       </b-tabs>
     </div>
   </div>
@@ -61,6 +82,7 @@
 <script>
 import People from "./people";
 import Business from "./business";
+//import Network from "./network";
 export default {
   name: "sidebarcommunity",
   components: {
@@ -78,6 +100,9 @@ export default {
     },
     businessdetails() {
       return this.$store.state.networkProfileCommunitySidebar.businessdetails;
+    },
+    networkdetails() {
+      return this.$store.state.networkProfileCommunitySidebar.networkdetails;
     }
   },
   mounted(){
@@ -113,6 +138,17 @@ export default {
     this.$store
       .dispatch("networkProfileCommunitySidebar/getBusinessDetails", this.url)
       .then(() => {
+        console.log('ohh year');
+      })
+      .catch(err => {
+        console.log({ err: err });
+      });
+    },
+    networkDetails() {
+    this.$store
+      .dispatch("networkProfileCommunitySidebar/getNetworkDetails", this.url)
+      .then(() => {
+        console.log('networkDetails');
         console.log('ohh year');
       })
       .catch(err => {

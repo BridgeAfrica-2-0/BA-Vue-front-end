@@ -27,7 +27,6 @@ import follower from "./follower";
 import keywordOperationOnNetwork from "./keywordOperationOnNetwork";
 
 // import UserProfileOwner from "./UserProfileOwner";
-import axios from "axios";
 import networkProfile from "./networkProfile";
 import UserProfileOwner from "./UserProfileOwner"
 import businessSettingInfo from "./businessSettingInfo"
@@ -38,7 +37,7 @@ import networkProfileMemberRequest from "./networkProfileMemberRequest";
 import { search } from "./search";
 import { social } from "./social";
 
-// import axios from "axios";
+import axios from "axios";
 Vue.use(Vuex);
 
 //  axios.defaults.baseURL = process.env.VUE_APP_API_URL;  

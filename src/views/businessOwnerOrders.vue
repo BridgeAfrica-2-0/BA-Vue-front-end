@@ -483,7 +483,7 @@
               ></b-form-select>
             </div>
           </div>
-          <div v-for="i in etat1" :key="i">
+          <div v-for="item in getAll" :key="item.oderId">
             <div class="justify-content-start container">
               <div class="container d-flex justify-content-end btn-marg">
                 <div class="manage">
@@ -500,11 +500,11 @@
                   </b-dropdown>
                 </div>
               </div>
-              <router-link to="/business_owner/ordersdetail">
-              <span class="gras">Order</span>
-              <span class="text-success">#12324253</span> <br />
-              </router-link>
-              <span class="flou">yaoundé 12/12/2021 12H00</span>
+             
+              <span class="gras" @click="setData">Order</span>
+              <span class="text-success">#{{item.oderId}}</span> <br />
+             
+              <span class="flou">{{item.shippingAddress}}{{dateFormat(item.dateCreated)}}</span>
               <hr />
             </div>
 
@@ -526,15 +526,15 @@
               </div>
 
               <div class="col-3 text-start">
-                <h3>4</h3>
-                <h3>2000 Fcfa</h3>
-                <h3>4000 Fcfa</h3>
-                <h3>6000 XAF</h3>
+                <h3>{{item.Totalproduct}}</h3>
+                <h3>{{item.Totalprice}} Fcfa</h3>
+                <h3>{{item.shipping_cost}} Fcfa</h3>
+                <h3>{{item.total}} Fcfa</h3>
               </div>
 
               <div class="col" id="hidedesktop1">
                 <h3 class="bold1">status</h3>
-                <h3 class="text-success">{{ i }}</h3>
+                <h3 class="text-success">{{ item.status }}</h3>
               </div>
 
               <div class="container d-flex justify-content-end btn-marg">
@@ -816,6 +816,9 @@ export default {
         { value: "b", text: "last 10 days" },
       ],
       etat1: ["in process", "complete", "cancel"],
+      process: [],
+      reschedule: [],
+      shipped: []
     };
   },
 
@@ -858,9 +861,49 @@ export default {
       });
       el.classList.add("green");
     },
+
+    setData(){
+     console.log(this.$store.state.orderBusiness.all);
+      console.log("setdata");
+      this.$store
+        .dispatch("orderBusiness/getOrder", 1 )
+        .then(() => {
+          console.log("hey yeah");
+        })
+        .catch((err) => {
+          console.log({ err: err });
+        });
+    },
+
+    dateFormat(data){
+      let format = new Date(data)
+      let mois = format.getDate;
+      let anne = format.getFullYear;
+      let jour = format.getDay; format.get
+      let heure = format.getTime
+      let newDate = jour+"-"+mois+"-"+anne+", "+heure;
+     return format;
+    }
   },
 
-  mounted() {},
+  computed :{
+    getAll(){
+    return  this.$store.state.orderBusiness.all;
+    }
+      
+  },
+
+  mounted() {
+    let data = "1/1";
+    this.$store
+        .dispatch("orderBusiness/getOrder", data)
+        .then(() => {
+          console.log("hey yeah");
+        })
+        .catch((err) => {
+          console.log({ err: err });
+        });
+  },
 };
 </script>
 

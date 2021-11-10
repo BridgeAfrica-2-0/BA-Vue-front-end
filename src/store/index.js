@@ -25,6 +25,7 @@ import profile from "./profile";
 import networkProfileMembers from "./networkProfileMembers";
 import follower from "./follower";
 import keywordOperationOnNetwork from "./keywordOperationOnNetwork";
+import orderBusiness from "./orderBusiness";
 
 // import UserProfileOwner from "./UserProfileOwner";
 import axios from "axios";
@@ -64,6 +65,7 @@ export default new Vuex.Store({
     search,
     // market,
     keywordOperationOnNetwork,
+    orderBusiness,
 
     UserProfileOwner,
     businessSettingInfo,

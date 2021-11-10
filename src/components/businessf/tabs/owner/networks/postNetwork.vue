@@ -359,7 +359,6 @@ export default {
 
       if (response.success) this.auth(response.data);
     },
-    
 
     infiniteHandler($state) {
       this.axios
@@ -584,9 +583,6 @@ export default {
 
       this.fileImageArr.forEach((value, index) => {
         formData2.append('media[' + index + ']', value.target.files[0]);
-        console.log(value);
-        console.log(value.target.files[0]);
-        console.log('testingggg');
       });
 
       formData2.append('type', 'image');
@@ -603,7 +599,7 @@ export default {
           this.flashMessage.show({
             status: 'success',
             blockClass: 'custom-block-class',
-            message: 'Content successfuly uploaded',
+            message: 'Content successfuly created',
           });
           // loader.hide()
           this.$refs['modal-xl'].hide();

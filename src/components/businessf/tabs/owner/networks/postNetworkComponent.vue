@@ -191,7 +191,7 @@ export default {
     nFormatter: formatNumber,
     now: fromNow,
   },
-
+  
   methods: {
     ...mapMutations({
       addNewComment: "networkProfile/updatePost",

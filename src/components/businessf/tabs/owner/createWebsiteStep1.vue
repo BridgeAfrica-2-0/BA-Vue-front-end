@@ -5,21 +5,20 @@
         <div class="h-100 w-100">
           <div class="mx-auto text-center my-5">
             <h2 class="my-3 font-weight-bolder">
-              Create personalised website for your business
+              {{ $t('network.Create_personalised_website_for_your_business') }}
             </h2>
             <p class="my-2">
-              Start with a template and male it your own, with easy drag and
-              drop & 1000s of design features
+              {{ $t('network.Start_with_a_template_and_make_it_your_own,_with_easy_drag_and_drop_&_1000s_of_design_features') }}
             </p>
             <br /><br />
             <b-col class="my-3" cols="8" offset-md="2">
               <p class="d-inline-block float-left">
                 <b-icon-card-image class="select-temp"></b-icon-card-image>
-                <span class="d-block mt-1">Select a template</span>
+                <span class="d-block mt-1">{{ $t('network.Select_a_template') }}</span>
               </p>
               <p class="d-inline-block float-right">
                 <b-icon-cursor-fill class="select-temp2"></b-icon-cursor-fill>
-                <span class="d-block mt-1">Launch</span>
+                <span class="d-block mt-1">{{ $t('network.Launch') }}</span>
               </p>
             </b-col>
           </div>
@@ -44,19 +43,19 @@
     <b-row>
       <b-col cols="12">
         <b-nav pills fill>
-          <b-nav-item v-on:click="filter('all')">All</b-nav-item>
-          <b-nav-item v-on:click="shuffle">Shuffle</b-nav-item>
+          <b-nav-item v-on:click="filter('all')">{{ $t('network.All') }}</b-nav-item>
+          <b-nav-item v-on:click="shuffle">{{ $t('network.Shuffle') }}</b-nav-item>
           <b-nav-item v-on:click="filter('agriculture')"
-            >Agriculture</b-nav-item
+            >{{ $t('network.Agriculture') }}</b-nav-item
           >
-          <b-nav-item v-on:click="filter('business')">Business</b-nav-item>
-          <b-nav-item v-on:click="filter('event')">Event</b-nav-item>
+          <b-nav-item v-on:click="filter('business')">{{ $t('network.Business') }}</b-nav-item>
+          <b-nav-item v-on:click="filter('event')">{{ $t('network.Event') }}</b-nav-item>
           <b-nav-item v-on:click="filter('personalcare')"
             >Personal Care</b-nav-item
           >
-          <b-nav-item v-on:click="filter('pharmacy')">Pharmacy</b-nav-item>
-          <b-nav-item v-on:click="filter('food')">Food</b-nav-item>
-          <b-nav-item v-on:click="filter('other')">Others</b-nav-item>
+          <b-nav-item v-on:click="filter('pharmacy')">{{ $t('network.Pharmacy') }}</b-nav-item>
+          <b-nav-item v-on:click="filter('food')">{{ $t('network.Food') }}</b-nav-item>
+          <b-nav-item v-on:click="filter('other')">{{ $t('network.Others') }}</b-nav-item>
         </b-nav>
       </b-col>
     </b-row>
@@ -78,7 +77,7 @@
                 <template #header>
                   <p>
                     <span class="float-left">
-                      Template Name
+                      {{ $t('network.Template_Name') }}
                     </span>
                     <span class="float-right">
                       <b-icon-eye-fill class="mr-3"></b-icon-eye-fill>

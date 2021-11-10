@@ -4,7 +4,7 @@
       <span>
         <h6 class="title m-3">
           <fas-icon class="icons" :icon="['fas', 'users']" size="lg" />
-          <b> COMMUNITY </b> <span class="h4-color"> {{nFormatter(userdetails.total_people+businessdetails.total_Business)}}</span>
+          <b> {{ $t('network.COMMUNITY') }} </b> <span class="h4-color"> {{nFormatter(userdetails.total_people+businessdetails.total_Business)}}</span>
         </h6>
       </span>
       <b-tabs pills content-class="mt-3  f-left ">
@@ -54,7 +54,7 @@
             </b-tabs>
           </div>
         </b-tab>
-        <b-tab>
+        <!-- <b-tab>
           <template slot="title">
             Networks <span class="spa-color"> {{nFormatter(businessdetails.total_Network)}} </span>
           </template>
@@ -74,7 +74,7 @@
               </b-tab>
             </b-tabs>
           </div>
-        </b-tab>
+        </b-tab> -->
       </b-tabs>
     </div>
   </div>
@@ -82,12 +82,13 @@
 <script>
 import People from "./people";
 import Business from "./business";
-import Network from "./network";
+// import Network from "./network";
 export default {
   name: "sidebarcommunity",
   components: {
     People,
     Business,
+    // Network
   },
   data() {
     return {

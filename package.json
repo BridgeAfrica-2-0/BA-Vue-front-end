@@ -24,7 +24,7 @@
     "core-js": "^3.6.5",
     "dotenv": "^10.0.0",
     "emoji-vue": "^0.2.4",
-    "firebase": "^8.8.1",
+    "firebase": "^6.2.2",
     "gmap-vue": "^1.5.0",
     "infinite-loading": "^0.2.8",
     "lodash": "^4.17.21",

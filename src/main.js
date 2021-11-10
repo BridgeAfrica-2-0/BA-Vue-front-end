@@ -23,7 +23,7 @@ import plugin from './http';
 
 Vue.use(plugin);
 
-// import firebase from "firebase";
+
 IconifyIcon.addIcon('home', homeIconData);
 
 Vue.use(Vuex);
@@ -32,8 +32,6 @@ Vue.use(VueAxios, axios);
 import LoadScript from 'vue-plugin-load-script';
 import InfiniteLoading from 'vue-infinite-loading';
 
-import { loader } from './mixins';
-
 Vue.use(InfiniteLoading, {
   /* options */
 });
@@ -41,6 +39,8 @@ Vue.use(LoadScript);
 
 Vue.use(ReadMore);
 Vue.prototype.$axios = axios;
+import Notifications from 'vue-notification'
+Vue.use(Notifications)
 
 // const firebaseConfig = {
 //   apiKey: process.env.API_KEY,
@@ -175,6 +175,22 @@ Vue.use(VueEasyLightbox);
 Vue.config.productionTip = false;
 var user = null;
 
+import * as firebase from "firebase/app";
+import 'firebase/messaging';
+
+firebase.initializeApp({
+  messagingSenderId: "518469069539"
+});
+
+navigator.serviceWorker.register('firebase-messaging-sw.js', { scope: "firebase-cloud-messaging-push-scope" })
+  .then((registration) => {
+    const messaging = firebase.messaging();
+    messaging.useServiceWorker(registration);
+  }).catch(err => {
+    console.log(err)
+  })
+
+
 new Vue({
   router,
   store,
@@ -198,7 +214,7 @@ new Vue({
       },
     );
 
-    axios.interceptors.request.use(function(config) {
+    axios.interceptors.request.use(function (config) {
       if (user != null) {
         config.headers.Authorization = `Bearer  ${user.accessToken}`;
       }

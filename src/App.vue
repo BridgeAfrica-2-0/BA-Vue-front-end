@@ -1,23 +1,45 @@
 <template>
   <div id="app" class="" ref="formContainer">
+    <notifications group="notification" />
     <router-view />
   </div>
 </template>
 <script>
 /* eslint-disable */
+import * as firebase from 'firebase/app';
+import 'firebase/messaging';
 
-export default {};
+export default {
+  created() {
+    try {
+      firebase
+        .messaging()
+        .requestPermission()
+        .then(() => {
+          console.log('Notification permission granted');
+          return firebase
+            .messaging()
+            .getToken()
+            .then((token) => console.info(token))
+            .catch((error) => console.error(error));
+        })
+        .catch((error) => console.error(error));
+    } catch (error) {
+      console.log(error);
+    }
+  },
+};
 </script>
 
 
 <style lang="less">
-@import "./assets/css/main.css";
-@import "./assets/css/style.css";
-@import "./assets/css/bootstrap.css";
+@import './assets/css/main.css';
+@import './assets/css/style.css';
+@import './assets/css/bootstrap.css';
 
-@import "./assets/icon/iconfont.css";
+@import './assets/icon/iconfont.css';
 
-@import "https://pro.fontawesome.com/releases/v5.10.0/css/all.css";
+@import 'https://pro.fontawesome.com/releases/v5.10.0/css/all.css';
 
 #app {
   font-family: Open Sans, Helvetica Neue, Helvetica, Arial, sans-serif;

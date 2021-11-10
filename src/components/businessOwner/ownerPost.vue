@@ -95,6 +95,7 @@
                 <div class="cursor">
                   <b-form-textarea
                     id="textarea-small"
+                    autofocus
                     class="mb-2 border-none"
                     placeholder="Post a business update"
                     v-model="edit_description"
@@ -708,10 +709,10 @@ export default {
       }
     },
 
-    selectMoviesOutsidePost(event) {
+    selectMoviesOutsidePost(event) {     
       const file = event.target;
 
-      if (file.files) {
+      if (file.files) {    
         let reader = new FileReader();
         reader.onload = (e) => {
           this.createPost.movies.push({

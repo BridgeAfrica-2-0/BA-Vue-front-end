@@ -16,7 +16,7 @@ import ProfileAndBusinessDetails from "./ProfileAndBusinessDetails";
 import networkProfileCommunity from "./networkProfileCommunity";
 import networkDetails from "./networkDetails";
 
-import dashboardCommunity from "./dashboardcommunity";
+// import dashboardCommunity from "./dashboardcommunity";
 
 import NetworkSettings from "./NetworkSettings";
 import checkout from "./checkout";
@@ -31,8 +31,6 @@ import UserProfileOwner from "./UserProfileOwner"
 import { search } from "./search";
 import userChat from "./messaging/user";
 import businessChat from "./messaging/business";
-
-
 import businessSettingInfo from "./businessSettingInfo"
 import networkProfileCommunitySidebar from "./networkProfileCommunitySidebar";
 import networkProfileFeedback from "./networkProfileFeedback";
@@ -40,7 +38,7 @@ import networkProfileMedia from "./networkProfileMedia";
 import networkProfileMemberRequest from "./networkProfileMemberRequest";
 import { social } from "./social";
 
-import axios from "axios";
+// import axios from "axios";
 Vue.use(Vuex);
 
 // axios.defaults.baseURL = process.env.VUE_APP_API_URL;
@@ -50,11 +48,10 @@ export default new Vuex.Store({
     modules: {
         auth,
         networkDetails,
-        dashboardcommunity,
+        // dashboardcommunity,
         ProfileAndBusinessDetails,
         businessOwner,
         businessBlocking,
-        dashboardCommunity,
         dashboard,
         hotbusiness,
         networkProfileMembers,

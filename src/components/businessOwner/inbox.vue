@@ -519,7 +519,7 @@
                   ></b-spinner>
                 </div>
                 <div v-else v-for="chat in chats" :key="chat.id">
-                  <div v-if="currentUser.user.id != chat.sender_business_id">
+                  <div v-if="2 != chat.sender_business_id">
                     <b-row class="p-4">
                       <b-col>
                         <p v-if="chat.attachment" class="msg-text mt-0 text">
@@ -532,7 +532,7 @@
                           </small>
                         </p>
                         <p v-if="chat.message" class="msg-text mt-0 text">
-                          {{ chat.message }}
+                          {{ chat.message }}<b>  ->////{{chat.sender_business_id}}</b>
                           <small class="float-right mt-2 text-white pr-1 pt-1">
                             {{ chat.created_at }}
                           </small>
@@ -561,7 +561,7 @@
                           id="sent"
                           class="msg-text-sent text"
                         >
-                          {{ chat.message }}
+                          {{ chat.message }}-->///{{chat.sender_business_id}}
                           <small class="float-right mt-2 text-white pr-1 pt-1">
                             {{ getCreatedAt(chat.created_at) }}
                           </small>
@@ -796,7 +796,7 @@
                       class="input-background"
                       style="width: 100%"
                       placeholder="Type the name of person or Business..."
-                      @keydown="searchUser(searchQuery)"
+                      @keydown="getBizs(searchQuery)"
                     ></b-form-input>
 
                     <br />
@@ -814,19 +814,19 @@
                         </thead>
                         <tbody>
                           <tr
-                            v-for="(user, index) in users"
+                            v-for="(biz, index) in bizs"
                             :key="index"
                             class="p-2 message"
-                            @click="selectedChat({ chat: user, id: user.id })"
+                            @click="selectedChat({ chat: biz, id: biz.id })"
                           >
                             <td>
                               <b-avatar
                                 class="d-inline-block"
                                 variant="primary"
                                 size="30"
-                                :src="user.profile"
+                              
                               ></b-avatar>
-                              <span class="bold"> {{ user.name }} </span>
+                              <span class="bold"> {{ biz.name }} </span>
                             </td>
                           </tr>
                         </tbody>
@@ -1032,6 +1032,9 @@ export default {
     };
   },
   computed: {
+    bizs() {
+      return this.$store.getters["businessChat/getBizs"];
+    },
     chatList() {
       return this.$store.getters["businessChat/getChatList"];
     },
@@ -1065,7 +1068,7 @@ export default {
     },
   },
   mounted() {
-    this.getUsers();
+    this.getBizs();
     this.getChatList({ type: "user" });
   },
   created() {
@@ -1115,14 +1118,16 @@ export default {
     getCreatedAt(data) {
       return moment(data).format("LT");
     },
-    getUsers() {
+    
+    getBizs(keyword) {
       this.$store
-        .dispatch("userChat/GET_USERS")
+        .dispatch("businessChat/GET_BIZS",keyword)
         .then(() => {
         })
         .catch(() => console.log("error"));
     },
     getChatList(data) {
+      // alert("Clicked!")
       this.scrollToBottom();
       this.$store
         .dispatch("businessChat/GET_BIZS_CHAT_LIST", data)
@@ -1180,14 +1185,6 @@ export default {
       this.newMsg = false;
       this.chatSelected = { active: true, clickedId: data.id, ...data.chat };
       console.log("[DEBUG] Chat selected:", this.chatSelected);
-    },
-    searchUser(keyword) {
-      this.$store
-        .dispatch("userChat/GET_USERS", keyword)
-        .then(() => {
-          console.log("->[Data logged]<-");
-        })
-        .catch(() => console.log("error"));
     },
     searchChatList(keyword) {
       this.$store

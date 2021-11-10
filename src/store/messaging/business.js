@@ -49,7 +49,7 @@ export default {
             state.chats = data
         },
         setBizs(state, data) {
-            state.users = data;
+            state.bizs = data;
         },
         setBiz(state, data) {
             state.currentUser = data
@@ -73,13 +73,11 @@ export default {
 
             commit("setLoader", true);
             let keyword = data ? '/' + data : ''
-            let bizsFinal = []
-            axios.get(`/user/all-user${keyword}`)
+            axios.get(`/business/all${keyword}`)
                 .then((res) => {
                     commit("setLoader", false);
                     let bizs = res.data.data
-                    bizsFinal = bizs.filter((biz) => { return biz.id != state.currentUser.user.id })
-                    commit("setBizs", bizsFinal);
+                    commit("setBizs", bizs);
 
                 })
                 .catch((err) => {

@@ -21,6 +21,7 @@
         "bootstrap": "^4.5.3",
         "bootstrap-vue": "^2.21.2",
         "chart.js": "2.9.4",
+        "convert-size": "^1.2.0",
         "core-js": "^3.6.5",
         "dotenv": "^10.0.0",
         "emoji-vue": "^0.2.4",

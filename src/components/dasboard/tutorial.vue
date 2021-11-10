@@ -2,7 +2,7 @@
   <div>
     <b-card class=" border shadow ">
       <h6 class="title">
-        <fas-icon class="icons" :icon="['fas', 'video']" /> <b> {{ $t('dashboard.title') }}</b>
+        <fas-icon class="icons" :icon="['fas', 'video']" /> <b> {{ $t('dashboard.Title') }}</b>
       </h6>
 
       <div class="s-card">

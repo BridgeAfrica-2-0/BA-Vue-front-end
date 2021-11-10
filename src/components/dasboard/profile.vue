@@ -5,7 +5,7 @@
 				<h3 class="name">
 					<h6 class="name">
 						<fas-icon class="icons" :icon="['fas', 'user']" size="lg" />
-						<b> {{ $t('dashboard.title') }} </b>
+						<b> {{ $t('dashboard.Title') }} </b>
 					</h6>
 
 					<h6 class="float-right text-success font-weight-bolder">

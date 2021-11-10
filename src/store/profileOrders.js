@@ -5,6 +5,7 @@ const state = {
 const getters = {};
 const actions = {
   async getMyOrders({ commit }) {
+    commit('removeOrder');
     let page = 1;
     let dataLength = 0;
     do {
@@ -27,6 +28,9 @@ const mutations = {
   addPageOrder: (state, newpage) => {
     state.myOrders = state.myOrders.concat(newpage);
     console.log('My Orders on state', state.myOrders);
+  },
+  removeOrder: state => {
+    state.myOrders = [];
   },
 };
 

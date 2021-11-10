@@ -45,7 +45,7 @@
       </div>
       <hr />
 
-      <div>
+      <div id="orderAllList">
         <div v-if="status == 1" class="inprogress">
           <div class="show row">
             <div class="col-3">Show:</div>
@@ -53,16 +53,20 @@
               <b-form-select v-model="selected" :options="options"></b-form-select>
             </div>
           </div>
-          <div v-for="i in etat1" :key="i">
+
+          <div v-for="order in myOrders" :key="order.oderId">
             <!-- <div class="justify-content-start  row marghr"> -->
             <!-- <div class="justify-content-start container"> -->
 
             <div class="row">
               <div class="col">
                 <span class="gras"
-                  >Order <span class="text-success order">#12324253</span>
+                  >Order <span class="text-success order">{{ order.oderId }}</span>
                   <br />
-                  <span class="flou row" style="margin-left: 1px">yaoundé 12/12/2021 12H00</span>
+                  <span class="flou row" style="margin-left: 1px"
+                    ><span class="mr-1">{{ order.shippingAddress }}</span
+                    >- <span class="ml-1">{{ momentFormat(order.dateCreated) }}</span></span
+                  >
                 </span>
               </div>
 
@@ -74,9 +78,9 @@
                   </b-dropdown>
                 </div>
 
-                <div class="row" style="margin-left: 73px; margin-top: 5px">
+                <div class="row" style="margin-left: 73px; margin-top: 20px">
                   <p class="h3">status:</p>
-                  <h3 class="text-success h3">{{ i }}</h3>
+                  <h3 class="text-success h3">{{ order.status }}</h3>
                 </div>
               </div>
             </div>
@@ -101,11 +105,11 @@
               </div>
 
               <div class="col-4">
-                <h3 class="h3">4</h3>
+                <h3 class="h3">{{ order.Totalproduct }}</h3>
 
-                <h3 class="h3">12000 XAF</h3>
-                <h3 class="h3">10000 XAF</h3>
-                <h3 class="h3">13000 XAF</h3>
+                <h3 class="h3">{{ order.Totalprice }}</h3>
+                <h3 class="h3">{{ order.shipping_cost }}</h3>
+                <h3 class="h3">{{ order.total }}</h3>
               </div>
             </div>
 
@@ -125,6 +129,18 @@
               <br />
             </div>
             <!-- <hr /> -->
+          </div>
+          <div class="d-flex justify-content-center mb-4" v-if="isLoadingAll">
+            <b-spinner style="width: 3rem; height: 3rem;" label="Loading..."></b-spinner>
+          </div>
+          <div class="col-12 d-flex justify-content-center">
+            <b-pagination
+              v-model="currentPageAll"
+              pills
+              aria-controls="orderAllList"
+              :per-page="per_page"
+              :total-rows="myOrders.length"
+            ></b-pagination>
           </div>
         </div>
 
@@ -717,6 +733,7 @@
 
 <script>
 import navbar from './navbar.vue';
+import moment from 'moment';
 
 export default {
   components: { navbar },
@@ -733,6 +750,9 @@ export default {
         { value: 'b', text: 'last 10 days' },
       ],
       etat1: ['pending', 'complete', 'cancel'],
+      isLoadingAll: false,
+      currentPageAll: 1,
+      per_page: 10,
     };
   },
 
@@ -775,6 +795,9 @@ export default {
       });
       el.classList.add('green');
     },
+    momentFormat(date) {
+      return moment(date).calendar();
+    },
   },
   computed: {
     myOrders() {
@@ -783,7 +806,10 @@ export default {
   },
 
   beforeMount() {
-    this.$store.dispatch('profileOrders/getMyOrders');
+    this.isLoadingAll = true;
+    this.$store.dispatch('profileOrders/getMyOrders').finally(() => {
+      this.isLoadingAll = false;
+    });
   },
 };
 </script>

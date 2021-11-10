@@ -82,7 +82,7 @@
 <script>
 import People from "./people";
 import Business from "./business";
-//import Network from "./network";
+import Network from "./network";
 export default {
   name: "sidebarcommunity",
   components: {

@@ -1,5 +1,5 @@
 <template>
-  <span></span>
+  <notifications group="notification" />
 </template>
 
 <script>
@@ -14,7 +14,6 @@ export default {
       from: '',
       subject: '',
       userimg: '',
-      messaging: firebase.messaging(),
       currentMessage: '',
     };
   },
@@ -22,11 +21,10 @@ export default {
   methods: {
     receiveMessage() {
       try {
-        this.messaging.onMessage((payload) => {
+        firebase.messaging().onMessage((payload) => {
           // debugger
           this.currentMessage = payload;
-          // console.log(this.currentMessage);
-          // console.log('Message received. ', payload);
+          console.log(this.currentMessage);
           let message;
           message = payload.data.username + ':\n\n' + payload.data.message;
           this.setNotificationBoxForm(payload.data.shipmentWallNumber, payload.data.username, payload.data.message);
@@ -42,12 +40,7 @@ export default {
       this.from = from;
       this.subject = subject;
 
-      const message = `<span>
-    <b>${this.from}</b>
-</span>
-<br>
-<br>
-${this.subject}`;
+      const message = `<span><b>${this.from}</b></span><br>${this.subject}`;
 
       this.$notify({
         group: 'notification',
@@ -60,14 +53,9 @@ ${this.subject}`;
   },
 
   created() {
+    console.info('create notification info');
     this.receiveMessage();
   },
-
-  validations: function () {
-    return {};
-  },
-
-  computed: {},
 };
 </script>
 

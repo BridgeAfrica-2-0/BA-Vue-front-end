@@ -39,6 +39,7 @@ Vue.use(LoadScript);
 
 Vue.use(ReadMore);
 Vue.prototype.$axios = axios;
+
 import Notifications from 'vue-notification'
 Vue.use(Notifications)
 

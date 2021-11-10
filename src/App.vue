@@ -1,6 +1,6 @@
 <template>
   <div id="app" class="" ref="formContainer">
-    <notifications group="notification" />
+    <Notification />
     <router-view />
   </div>
 </template>
@@ -9,7 +9,12 @@
 import * as firebase from 'firebase/app';
 import 'firebase/messaging';
 
+import Notification from '@/components/NotificationBox';
+
 export default {
+  components: {
+    Notification,
+  },
   created() {
     try {
       firebase
@@ -20,7 +25,10 @@ export default {
           return firebase
             .messaging()
             .getToken()
-            .then((token) => console.info(token))
+            .then((token) => {
+              console.info(token);
+              // this.$repository.post.SendToken(token)
+            })
             .catch((error) => console.error(error));
         })
         .catch((error) => console.error(error));

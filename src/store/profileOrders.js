@@ -1,26 +1,31 @@
-import axios from 'axios'
+import axios from 'axios';
 const state = {
   myOrders: [],
 };
 const getters = {};
 const actions = {
-  async getMyOrders({commit}, page){
-    return await new Promise((resolve, reject)=>{
-      axios.get(`getOrderUser/${page}`)
-      .then((response)=>{
-        commit
-        console.log(response.data);
-        resolve(response)
-      })
-      .catch((error)=>{
-        console.log(error);
-        reject()
-      })
-    })
-
-  }
+  async getMyOrders({ commit }) {
+    let page = 1;
+    let dataLength = 0;
+    do {
+      await axios
+        .get(`order/getOrderUser/${page}`)
+        .then(response => {
+          commit('addPageorder', ...response.data.data);
+          dataLength = response.data.data.length;
+          console.log(response.data);
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    } while (dataLength > 0);
+  },
 };
-const mutations = {};
+const mutations = {
+  addPageOrder: (state, newpage) => {
+    state.myOrders.push(newpage);
+  },
+};
 
 export default {
   namespaced: true,

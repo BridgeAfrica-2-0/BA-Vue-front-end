@@ -778,7 +778,7 @@ export default {
   },
 
   beforeMount() {
-    this.$store.dispatch('profileOrders/getMyOrders', 1);
+    this.$store.dispatch('profileOrders/getMyOrders');
   },
 };
 </script>

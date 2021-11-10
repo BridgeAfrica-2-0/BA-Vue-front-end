@@ -23,9 +23,9 @@
         </b-col>
         <b-col cols="7" sm="8" md="7" >
          <p class="text">
-            <strong class="title"> <b-link  @click="productDetails">  Sneakers Blec cc  </b-link>  </strong> <br /> <strong> Description </strong>  <br />    <span class="text">
+            <strong class="title"> <b-link  @click="productDetails">  Sneakers Blec cc  </b-link>  </strong> <br /> <strong> {{$t("businessf.Description")}} </strong>  <br />    <span class="text">
             This is just a dummy text dumy dummy things are always dummy and dummy add  things are always dummy  hjykt    </span>
-            <b-link class="text"> see more   </b-link>   <br />
+            <b-link class="text"> {{$t("businessf.see_more")}}   </b-link>   <br />
              
             <span class="price"> <strong> 12,000 Fcfa  </strong> </span> <br />
             
@@ -82,22 +82,22 @@
           ></b-img>
         </b-col>
         <b-col>
-          <h2 class="mb-4 text-center">Product Name</h2>
-          <p><span class="stock">In Stock</span></p>
+          <h2 class="mb-4 text-center">{{$t("businessf.Product_Name")}}</h2>
+          <p><span class="stock">{{$t("businessf.In_Stock")}}</span></p>
           <p>0.00 XAF</p>
           <hr />
           <b-row>
             <b-col>
-              <b-button variant="primary">Message</b-button>
+              <b-button variant="primary">{{$t("businessf.Message")}}</b-button>
             </b-col>
             <b-col>
               <b-button variant="outline-dark" class="float-right"
-                >Checkout on website</b-button
+                >{{$t("businessf.Checkout_on_website")}}</b-button
               >
             </b-col>
           </b-row>
           <hr />
-          <h5>Product Description</h5>
+          <h5>{{$t("businessf.Product_Description")}}</h5>
           <p>
             Lorem, ipsum dolor sit amet consectetur adipisicing elit. Corporis
             quod, reprehenderit neque atque recusandae laborum quia vel,
@@ -152,7 +152,7 @@
                 src="https://placekitten.com/300/300"
                 size="2rem"
               ></b-avatar>
-              <input placeholder="Post a Comment" class="comment" type="text" />
+              <input :placeholder="$t('businessf.Post_a_Comment')" class="comment" type="text" />
 
               <fas-icon
                 class="primary send-cmt"

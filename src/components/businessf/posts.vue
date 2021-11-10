@@ -13,7 +13,7 @@
             </b-col>
             <b-col cols="10" md="11" class="pt-2">
               <h5 class="m-0 font-weight-bolder">
-                Heavy Gym
+                {{$t("businessf.Heavy_Gym")}}
                 <span class="float-right"> </span>
               </h5>
               <p class="duration">1h Ago</p>
@@ -73,7 +73,7 @@
               ></b-avatar>
             </b-col>
             <b-col cols="9" md="11" class="p-0 m-0 pr-3">
-              <input placeholder="Post a Comment" class="comment" type="text" />
+              <input :placeholder="$t('businessf.Post_a_Comment')" class="comment" type="text" />
 
               <fas-icon
                 class="primary send-cmt"
@@ -101,7 +101,7 @@
               ></b-avatar>
             </b-col>
             <b-col cols="10" md="11" class="pt-2">
-              <h5 class="m-0 font-weight-bolder">Heavy Gym</h5>
+              <h5 class="m-0 font-weight-bolder">{{$t("businessf.Heavy_Gym")}}</h5>
               <p class="duration">1h Ago</p>
             </b-col>
           </b-row>
@@ -153,7 +153,7 @@
               ></b-avatar>
             </b-col>
             <b-col cols="9" md="11" class="p-0 m-0 pr-3">
-              <input placeholder="Post a Comment" class="comment" type="text" />
+              <input :placeholder="$t('businessf.Post_a_Comment')" class="comment" type="text" />
 
               <fas-icon
                 class="primary send-cmt"
@@ -181,8 +181,8 @@
               ></b-avatar>
             </b-col>
             <b-col cols="10" md="11" class="pt-2">
-              <h5 class="m-0 font-weight-bolder">Post with 3 pics</h5>
-              <p class="duration">1h Ago</p>
+              <h5 class="m-0 font-weight-bolder">{{$t("businessf.Post_with_3_pics")}}</h5>
+              <p class="duration">{{$t("businessf.1h_Ago")}}</p>
             </b-col>
           </b-row>
           <b-row>
@@ -233,7 +233,7 @@
               ></b-avatar>
             </b-col>
             <b-col cols="9" md="11" class="p-0 m-0 pr-3">
-              <input placeholder="Post a Comment" class="comment" type="text" />
+              <input :placeholder="$t('businessf.Post_a_Comment')" class="comment" type="text" />
 
               <fas-icon
                 class="primary send-cmt"
@@ -312,7 +312,7 @@
                 </b-col>
                 <b-col cols="9" md="11" class="p-0 m-0 pr-3">
                   <input
-                    placeholder="Post a Comment"
+                    :placeholder="$t('businessf.Post_a_Comment')"
                     class="comment"
                     type="text"
                   />
@@ -393,7 +393,7 @@
                 <b-col cols="9" md="11" class="p-0 m-0 pr-3">
                   <b-input-group class="my-auto w-100 rounded">
                     <input
-                      placeholder="Post a Comment"
+                      :placeholder="$t('businessf.Post_a_Comment')"
                       class="comment"
                       type="text"
                     />

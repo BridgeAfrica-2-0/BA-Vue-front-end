@@ -61,7 +61,7 @@ export default new Vuex.Store({
     profile,
     follower,
     search,
-    market,
+    // market,
     keywordOperationOnNetwork,
 
     UserProfileOwner,

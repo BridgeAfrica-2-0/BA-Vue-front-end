@@ -11,19 +11,22 @@ const actions = {
       await axios
         .get(`order/getOrderUser/${page}`)
         .then(response => {
-          commit('addPageorder', ...response.data.data);
+          commit('addPageOrder', response.data.data);
           dataLength = response.data.data.length;
           console.log(response.data);
         })
         .catch(error => {
           console.log(error);
         });
+      page++;
     } while (dataLength > 0);
+    console.log('listing order user finish');
   },
 };
 const mutations = {
   addPageOrder: (state, newpage) => {
-    state.myOrders.push(newpage);
+    state.myOrders = state.myOrders.concat(newpage);
+    console.log('My Orders on state', state.myOrders);
   },
 };
 

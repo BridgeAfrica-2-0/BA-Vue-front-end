@@ -776,6 +776,11 @@ export default {
       el.classList.add('green');
     },
   },
+  computed: {
+    myOrders() {
+      return this.$store.state.profileOrders.myOrders;
+    },
+  },
 
   beforeMount() {
     this.$store.dispatch('profileOrders/getMyOrders');

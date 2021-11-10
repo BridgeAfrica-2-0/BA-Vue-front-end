@@ -37,6 +37,8 @@ import networkProfileMemberRequest from "./networkProfileMemberRequest";
 import { search } from "./search";
 import { social } from "./social";
 
+import businessOrderDetails from "./businessOrderDetails"
+
 import axios from "axios";
 Vue.use(Vuex);
 
@@ -78,7 +80,8 @@ export default new Vuex.Store({
     networkProfileCommunity,
     networkProfileMedia,
     networkProfileMemberRequest,
-    networkProfile
+    networkProfile,
+    businessOrderDetails,
   }
 });
 

@@ -23,7 +23,7 @@
         <div v-if="!hasLoadAlbum">
           <b-spinner class="load" label="Large Spinner"></b-spinner>
         </div>
-        <Album :canUpload="!canUpload" :type="type" v-else />
+        <Album :canUpload="!canUpload" :type="type" v-else :getAlbums="getAlbums" :getImages="getImages"/>
       </b-tab>
     </b-tabs>
   </div>
@@ -72,7 +72,7 @@ export default {
   methods: {
     all() {
       const wrapper = (data) => {
-        data
+        const newData = data
           .filter((img) => img.media.length)
           .map((img) => {
             let render = img.media.map((picture) => {
@@ -85,8 +85,7 @@ export default {
 
             return render;
           });
-
-        return _.flatten(data);
+        return _.flatten(newData);
       };
       return wrapper(this.strategy[this.type]().pictures);
     },

@@ -54,6 +54,7 @@
         <div class="bv-example-row">
           <div>
             <b-tabs
+            lazy
               pills
               v-model="tabIndex"
               vertical
@@ -121,7 +122,7 @@ import Payment from "@/components/businessOwner/settings/payment";
 import Blocking from "@/components/businessOwner/settings/blocking";
 import Notification from "@/components/businessOwner/notification";
 import LyTab from "@/tab/src/index.vue";
-import Pending from "@/components/businessOwner/pending";
+import Pending from "@/components/businessOwner/pending";   
 import Insight from "@/components/businessOwner/insight";
 
 export default {

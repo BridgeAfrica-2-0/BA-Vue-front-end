@@ -158,10 +158,10 @@ export default {
 
          if(this.type=="Follower"){  
          
-           url = "business/community/network-follower/"+this.biz_id+"/";
+           url = "business/community/visitor/network-follower/"+this.biz_id+"/";
          }else{
          
-           url = "business/community/network-following/"+this.biz_id+"/";
+           url = "business/community/visitor/network-following/"+this.biz_id+"/";
          }
       axios
         .get(url + this.page)   

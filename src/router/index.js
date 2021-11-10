@@ -45,21 +45,44 @@ import networks from "@/views/networks";
 import dashboard from "@/views/dashboard";
 
 import myorders from "@/views/myOders"
+import notFound from "@/components/404"
 
 
 
 import welcome from "@/views/welcome";
+
+import ordersdetail from "@/views/odersDetail";
+import businessordersdetail from "@/views/businessordersdetail"
+
 import payment from "@/views/payment";
+
 
 Vue.use(VueRouter);
 
 const routes = [
-  // {
-  //   path: "/test",
-  //   name: "Home",
-  //   component: Test,
-  // },
+  {
+    path: "/notFound",
+    name: "notFound",
+    component: notFound,
+  },
 
+  {
+    path: "/myorders/detail",
+    name: "ordersdetail",
+    component: ordersdetail,
+    // meta: {
+    //   auth: true,
+    // },
+  },
+
+  {
+    path: "/business_owner/ordersdetail",
+    name: "ordersdetail",
+    component: businessordersdetail,
+    // meta: {
+    //   auth: true,
+    // },
+  },
   {
     path: "/myorders",
     name: "orders",

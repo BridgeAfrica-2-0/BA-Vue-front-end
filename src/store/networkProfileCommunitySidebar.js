@@ -49,6 +49,16 @@ export default {
       })
     },
 
+    getNetworkDetails( {commit}, networkId ){
+      return axios
+      .get(`network/community/networks/${networkId}`)
+      .then(({ data }) => {
+          commit("setnetworkDetails", data.data);
+        console.log(data);
+
+      })
+    },
+
 
   },
 };

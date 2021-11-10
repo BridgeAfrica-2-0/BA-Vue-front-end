@@ -197,12 +197,12 @@ const routes = [
     component: confirmPayment,
   },
   {
-    path: "/network/:id?",
+    path: "/business_owner/network/:id?",
     name: "networks",
     component: networks,
   },
   {
-    path: "/networks/:id?",
+    path: "/network/:id?",
     name: "networks",
     component: networks,
   },

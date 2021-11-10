@@ -117,15 +117,15 @@ export default {
       handler(newVal) {
         console.log(newVal);
 
-        if (newVal == 3) {
-          this.selectedIdd = '3';
-
-          this.tabIndex = '1';
-        }
 
         if (newVal == 2) {
           this.selectedIdd = '2';
           this.tabIndex = '0';
+        }
+
+        if (newVal == 3) {
+          this.selectedIdd = '3';
+          this.tabIndex = '4';
         }
 
         if (newVal == 4) {

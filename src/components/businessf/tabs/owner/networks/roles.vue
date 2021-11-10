@@ -1,6 +1,5 @@
 <template>
   <b-container>
-    <flashMessage />
     <h5 class="a-text">Assign Role</h5>
 
     <b-container class="b-bottom">
@@ -13,13 +12,15 @@
             label-class="font-weight-bold pt-0"
             class="mb-0"
           >
-            <b-form-select v-model="roleAssignment.user">
-              <b-form-select-option
-                v-for="(member, index) in memberString"
-                :key="index"
-                >{{ member }}</b-form-select-option
-              >
-            </b-form-select>
+            <b-form-select
+              id="follower"
+              v-model="form.name"
+              :options="followers"
+              name="followers"
+              value-field="user_id"
+              text-field="fullname"
+              class="mb-3"
+            ></b-form-select>
           </b-form-group>
         </b-col>
 
@@ -31,24 +32,22 @@
             label-class="font-weight-bold pt-0"
             class="mb-0"
           >
-      
-      <b-form-select v-model="roleAssignment.role" class="mb-3">
-              <b-form-select-option
-                v-for="(member, index) in roleString"
-                :key="index"
-                >{{ roleString }}</b-form-select-option
-              >
-            </b-form-select>
+           <b-form-select
+              id="roles"
+              v-model="form.role"
+              :options="roles"
+              name="roles"
+              value-field="id"
+              text-field="name"
+              class="mb-3"
+            ></b-form-select>
           </b-form-group>
         </b-col>
 
         <b-col>
-          <b-button
-            variant="primary"
-            class="assign-btn"
-            @click="assign(user.id, role.id)"
-            >Assign</b-button
-          >
+          <b-button variant="primary" class="" @click="assignRole()">
+            <b-spinner v-if="SPassign" small type="grow"></b-spinner>Assign
+          </b-button>
         </b-col>
       </b-row>
 
@@ -61,191 +60,252 @@
       <br />
       <p class="text">
         Editor can create posts and send messages through inbox, They can
-        respond to and delete comments, Approve posts, view insights
+        respond to and delete comments, Approve posts, view insights.
       </p>
     </b-container>
 
     <div class="b-bottom">
       <b-container>
         <h5 class="a-text">Existing Editors</h5>
-        <span v-for="editor in editors" :key="editor.id">
-          <span class="d-flex align-items-center m-list">
-            <b-avatar class="mr-3 profile-pic"></b-avatar>
-            <span class="mr-auto username">J. Circlehead</span>
-            <span>
-              <div>
-                <b-dropdown
-                  size="lg"
-                  variant="link"
-                  toggle-class="text-decoration-none"
-                  no-caret
-                >
-                  <template #button-content>
-                    <b-icon icon="three-dots-vertical" font-scale="1"></b-icon>
-                  </template>
-                  <b-dropdown-item href="#">Edit</b-dropdown-item>
-                  <b-dropdown-item href="#"> Delete </b-dropdown-item>
-                </b-dropdown>
-              </div>
-            </span>
-          </span>
+        <div v-if="editors != 0">
+          <b-list-group v-for="editor in editors" :key="editor.id">
+            <b-list class="d-flex align-items-center m-list">
+              <b-avatar 
+                class="mr-3" 
+                :text="editor.name.charAt(0)"
+                :src="editor.profile_picture"
+                size="4em"
+              ></b-avatar>
+              <span class="mr-auto">{{editor.name}}</span>
+              <span>
+                <div>
+                  <b-dropdown
+                    size="lg"
+                    variant="link"
+                    toggle-class="text-decoration-none"
+                    no-caret
+                  >
+                    <template #button-content>
+                      <b-icon
+                        icon="three-dots-vertical"
+                        animation="cylon-vertical"
+                        font-scale="1"
+                      ></b-icon>
+                    </template>
+                    <b-dropdown-item href="#" @click="$bvModal.show('edit-editor'); selectObject(editor)">Edit</b-dropdown-item>
+                    <b-dropdown-item href="#" @click="$bvModal.show('delete-editor'); selectObject(editor)"> Delete </b-dropdown-item>
+                  </b-dropdown>
+                </div>
+              </span>
+            </b-list>
+          </b-list-group>
+        </div>
+        <div v-else>
+          <b-card bg-variant="white" text-variant="black" class="text-center">
+            <b-card-text>No Editor Available.</b-card-text>
+          </b-card>
+        </div>
 
-          <span class="d-flex align-items-center">
-            <b-avatar
-              variant="primary"
-              text="BV"
-              class="mr-3 profile-pic"
-            ></b-avatar>
-            <span class="mr-auto">itz blec blec</span>
-            <span>
-              <div>
-                <b-dropdown
-                  size="lg"
-                  variant="link"
-                  toggle-class="text-decoration-none"
-                  no-caret
+        <div>
+          <b-modal id="edit-editor" hide-footer>
+            <template #modal-title>
+              EDIT EDITOR: {{clickedObject.name}}
+            </template>
+            <div class="d-block text-center">
+               <b-form-group
+                  label-cols-lg="3"
+                  label="Role"
+                  label-size="md"
+                  label-class="font-weight-bold pt-0"
+                  class="mb-0"
                 >
-                  <template #button-content>
-                    <b-icon icon="three-dots-vertical" font-scale="1"></b-icon>
-                  </template>
-                  <b-dropdown-item
-                    href="#"
-                    @click="$bvModal.show('edit-editor'), selectObject(editor)"
-                    >Edit</b-dropdown-item
+                  <b-form-select
+                    id="role"
+                    v-model="form.role"
+                    :options="roles"
+                    name="role"
+                    value-field="id"
+                    text-field="name"
+                    class="mb-3"
                   >
-                  <b-dropdown-item
-                    href="#"
-                    @click="
-                      $bvModal.show('delete-editor'), selectObject(editor)
-                    "
-                  >
-                    Delete
-                  </b-dropdown-item>
-                </b-dropdown>
-              </div>
-            </span>
-          </span>
-        </span>
-      </b-container>
-    </div>
+                  </b-form-select>
+                </b-form-group>
+            </div>
+            <b-button class="mt-3" block variant="primary" @click="$bvModal.hide('edit-editor'); editEditor(clickedObject)">EDIT</b-button>
+          </b-modal>
 
-    <div class="b-bottom">
-      <b-container>
-        <h5 class="a-text">Existing Editors</h5>
-        <span>
-          <span
-            v-for="editor in allEditors"
-            :key="editor.id"
-            class="d-flex align-items-center m-list"
-          >
-            <b-avatar class="mr-3 profile-pic">
-              <img :src="editor.image" alt="" />
-            </b-avatar>
-            <span class="mr-auto username">{{ editor.name }}</span>
-            <span>
-              <div>
-                <b-dropdown
-                  size="lg"
-                  variant="link"
-                  toggle-class="text-decoration-none"
-                  no-caret
-                >
-                  <template #button-content>
-                    <b-icon icon="three-dots-vertical" font-scale="1"></b-icon>
-                  </template>
-                  <b-dropdown-item @click="editEditors(editor.id)"
-                    >Edit</b-dropdown-item
-                  >
-                  <b-dropdown-item @click="deleteEditors(editor.id)">
-                    Delete
-                  </b-dropdown-item>
-                </b-dropdown>
-              </div>
-            </span>
-          </span>
-        </span>
+          <b-modal id="delete-editor" hide-footer>
+            <template #modal-title>
+              !!! <code>WARRING</code> !!!
+            </template>
+            <div class="d-block text-center">
+              <h3>You Are About To Delete: {{clickedObject.name}}!</h3>
+            </div>
+            <b-button class="mt-3" block @click="$bvModal.hide('delete-editor'); deleteEditor(clickedObject)">Delete</b-button>
+          </b-modal>
+        </div>
       </b-container>
     </div>
   </b-container>
 </template>
 
 <script>
-import { mapActions, mapGetters } from "vuex";
 export default {
   name: "roles",
-  data: () => ({
-    roleString: [],
-    memberString: [],
-    roleAssignment: {
-      user: "",
-      role: "",
-    },
-    networkId: "",
-    load: "",
-  }),
-  async beforeMount() {
-    this.getRoles();
+  data() {
+			return {
+        url: null,
+        SPassign: false,
+        clickedObject: {},
+        form: {
+          name: "",
+          role: "",
+        },
+        
+			}
+	},
 
-    this.allRoles.forEach((role) => {
-      this.roleString.push(role);
-    });
-
-    this.allMembers.forEach((member) => {
-      this.memberString.push(member);
-    });
-  },
   computed: {
-    ...mapGetters({
-      getNetwork: "networkSetting/getNetwork",
-      allRoles: "networkSetting/allRoles",
-      allMembers: "networkSetting/allMembers",
-      allEditors: "networkSetting/allEditors",
-    }),
-  },
-  methods: {
-    ...mapActions({
-      getRoles: "networkSetting/getRoles",
-      getMembers: "networkSetting/getMembers",
-      assignRole: "networkSetting/assignRole",
-      getEditors: "networkSetting/getEditors",
-      editEditor: "networkSetting/editEditor",
-      deleteEditor: "networkSetting/deleteEditor",
-    }),
-
-    assign(user_id, role_id) {
-      this.networkId = this.getNetwork.id;
-      let payload = {
-        networkId: this.networkId,
-        user_id: user_id,
-        role_id: role_id,
-      };
-      this.assignRole(payload);
+    followers() {
+      return this.$store.state.NetworkSettings.followers;
     },
-
-    editEditors(id) {
-      this.load = true;
-      this.editEditor(id)
-        .then(() => {
-          this.load = false;
-        })
-        .catch((err) => {
-          this.load = false;
-          console.log(err);
-        });
+    roles() {
+       return this.$store.state.NetworkSettings.roles;
     },
-
-    deleteEditors(id) {
-      this.load = true;
-      this.deleteEditor(id)
-        .then(() => {
-          this.load = false;
-        })
-        .catch((err) => {
-          this.load = false;
-          console.log(err);
-        });
+    editors() {
+      return this.$store.state.NetworkSettings.editors;
     },
   },
+ 
+  mounted(){
+    this.url = this.$route.params.id
+    this.getFollowers() 
+    this.getRoles() 
+    this.displayEditor() 
+  },
+
+  methods:{
+     
+    getFollowers() {
+      console.log("getFollowers");
+      this.$store
+      .dispatch("NetworkSettings/getfollowers", this.url)
+      .then(() => {
+        console.log('ohh yeah');
+      })
+      .catch(err => {
+        console.log({ err: err });
+      });
+    },
+    getRoles() {
+    this.$store
+      .dispatch("NetworkSettings/getroles")
+      .then(() => {
+        console.log('ohh yeah');
+      })
+      .catch( err => {
+        console.log({ err: err });
+      });
+    },
+    displayEditor() {
+    this.$store
+      .dispatch("NetworkSettings/geteditors", this.url)
+      .then(() => {
+        console.log('ohh yeah');
+      })
+      .catch( err => {
+        console.log({ err: err });
+      });
+    },
+    editEditor: function(clickedObject){
+      let formData = new FormData();
+      formData.append('role', this.form.role);
+      this.$store
+        .dispatch("NetworkSettings/updateEditor", {
+          path: "business/role/update/"+clickedObject.id,
+          formData: formData,
+        })
+        .then(({ data }) => {
+        console.log(data);
+        console.log('ohh yeah');
+        this.displayEditor();
+        this.flashMessage.show({
+          status: "success",
+          message: "New Role Updated"
+        });
+      })
+      .catch(err => {
+        console.log({ err: err });
+        this.flashMessage.show({
+          status: "error",
+          message: "Unable to Update New Role"
+        });
+      });
+		},
+    assignRole: function(){
+      this.SPassign = true;
+      let formData = new FormData();
+      formData.append('user_id', this.form.name);
+      formData.append('role_id', this.form.role);
+      console.log('name: ', this.form.name);
+      console.log('role: ', this.form.role);
+      console.log(formData);
+      this.$store
+        .dispatch("NetworkSettings/updateEditor", {
+          path: "business/role/assignRole/"+this.url,
+          formData: formData,
+        })
+        .then(({ data }) => {
+        console.log(data);
+        console.log('ohh yeah');
+        this.getFollowers();
+        this.displayEditor();
+        this.SPassign = false;
+        this.flashMessage.show({
+          status: "success",
+          message: "New Role Assigned"
+        });
+          
+      })
+      .catch(err => {
+        console.log({ err: err });
+        this.SPassign = false;
+        this.flashMessage.show({
+          status: "error",
+          message: "Unable to Assigned New Role"
+        });
+      });
+		},
+    deleteEditor: function(clickedObject){
+      this.$store
+        .dispatch("NetworkSettings/deleteEditor", {
+          path: "business/role/delete/"+clickedObject.id,
+        })
+        .then(({ data }) => {
+        console.log(data);
+        console.log('ohh yeah');
+        this.displayEditor();
+        this.flashMessage.show({
+          status: "success",
+          message: "Editor Deleted"
+        });
+          
+      })
+      .catch(err => {
+        console.log({ err: err });
+        this.flashMessage.show({
+          status: "error",
+          message: "Unable To Delete Editor"
+        });
+      });
+		},
+
+    selectObject(object){
+			this.clickedObject = object
+		},
+
+  },
+
 };
 </script>
 
@@ -273,6 +333,7 @@ export default {
 }
 
 .a-button-l {
+  /*align-content: right;*/
   float: right;
 }
 .a-text {
@@ -292,8 +353,9 @@ export default {
     left: -20px;
   }
 
-  .assign-btn {
-    margin-top: 30px;
+
+  .assign-btn{
+    margin-top:30px
   }
 }
 </style>

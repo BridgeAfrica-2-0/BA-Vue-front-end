@@ -1,20 +1,64 @@
 
+import * as firebase from 'firebase/app';
+import 'firebase/messaging';
+
 import { mapGetters, mapActions, mapMutations } from "vuex";
+import { formatNumber, fromNow } from "@/helpers";
 
 import NotFound from "@/components/NotFoundComponent"
 import NoMoreData from "@/components/businessOwner/PaginationMessage"
-
 import ClipLoader from 'vue-spinner/src/ClipLoader.vue'
 
+export const notification = {
+  data() {
+    return {
+      title: '',
+      from: '',
+      subject: '',
+      userimg: '',
+      currentMessage: '',
+    };
+  },
 
-import { formatNumber, fromNow } from "@/helpers";
+  methods: {
+    receiveMessage() {
+      console.log("call echo")
+      try {
+        firebase.messaging().onMessage((payload) => {
+          // debugger
+          this.currentMessage = payload;
+          console.log(this.currentMessage);
+          let message;
+          message = payload.data.username + ':\n\n' + payload.data.message;
+          this.setNotificationBoxForm(payload.data.shipmentWallNumber, payload.data.username, payload.data.message);
+          console.log(message);
+        });
+      } catch (e) {
+        console.log(e);
+      }
+    },
 
-export const cancelRequest = {
-  destroyed() {
+    setNotificationBoxForm(title, from, subject) {
+      this.title = title;
+      this.from = from;
+      this.subject = subject;
 
-  }
+      const message = `<span><b>${this.from}</b></span><br>${this.subject}`;
+
+      this.$notify({
+        group: 'foo',
+        type: 'success',
+        title: this.title,
+        text: message,
+        duration: 5000,
+      });
+    },
+  },
+
+  created() {
+    console.info('create notification info');
+  },
 }
-
 export const loader = {
   methods: {
     onNotified(text) {

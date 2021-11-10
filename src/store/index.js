@@ -40,7 +40,9 @@ import { social } from "./social";
 import axios from "axios";
 Vue.use(Vuex);
 
-axios.defaults.baseURL = process.env.VUE_APP_API_URL;  
+//axios.defaults.baseURL = process.env.VUE_APP_API_URL;  
+axios.defaults.baseURL = "https://edson.maxinemoffett.com/api/v1"
+// axios.defaults.baseURL = "https://eb5c-154-72-167-106.ngrok.io/api/v1"
 
 export default new Vuex.Store({
   modules: {
@@ -61,7 +63,6 @@ export default new Vuex.Store({
     profile,
     follower,
     search,
-    market,
     keywordOperationOnNetwork,
 
     UserProfileOwner,

@@ -37,7 +37,7 @@
               v-model="form.role"
               :options="roles"
               name="roles"
-              value-field="id"
+              value-field="name"
               text-field="name"
               class="mb-3"
             ></b-form-select>
@@ -219,10 +219,11 @@ export default {
     },
     editEditor: function(clickedObject){
       let formData = new FormData();
+      formData.append('user_id', this.clickedObject.id);
       formData.append('role', this.form.role);
       this.$store
         .dispatch("NetworkSettings/updateEditor", {
-          path: "business/role/update/"+clickedObject.id,
+          path: "roles/"+this.url+"/assign",
           formData: formData,
         })
         .then(({ data }) => {
@@ -246,13 +247,13 @@ export default {
       this.SPassign = true;
       let formData = new FormData();
       formData.append('user_id', this.form.name);
-      formData.append('role_id', this.form.role);
-      console.log('name: ', this.form.name);
+      formData.append('role', this.form.role);
+      console.log('user_id: ', this.form.name);
       console.log('role: ', this.form.role);
       console.log(formData);
       this.$store
         .dispatch("NetworkSettings/updateEditor", {
-          path: "business/role/assignRole/"+this.url,
+          path: "roles/"+this.url+"/assign",
           formData: formData,
         })
         .then(({ data }) => {

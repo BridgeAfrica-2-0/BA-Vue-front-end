@@ -93,14 +93,15 @@ export default {
       });
     },
 
-    geteditors({ commit }, businessId) {
-      return axios.get(`/network/roles/user/${businessId}`).then(({ data }) => {
+    geteditors({ commit }, networkId) {
+      return axios.get(`/network/${networkId}/members/editor`).then(({ data }) => {
         commit("seteditors", data.data);
         console.log(data);
       });
     },
-    updateEditor({ commit }, businessId) {
-      return axios.get(`/network/roles/user/${businessId}`).then(({ data }) => {
+    updateEditor({ commit }, data) {
+      console.log("updateEditor", data);
+      return axios.post(`/network/${data.path}`, data.formData).then(({ data }) => {
         console.log(data);
         return data;
       });

@@ -96,6 +96,7 @@
                   >
                     <b-dropdown-item>archive</b-dropdown-item>
                     <b-dropdown-item>delete</b-dropdown-item>
+                    <b-dropdown-item>Completed</b-dropdown-item>
                   </b-dropdown>
                 </div>
 
@@ -186,6 +187,7 @@
                   >
                     <b-dropdown-item>archive</b-dropdown-item>
                     <b-dropdown-item>delete</b-dropdown-item>
+                    <b-dropdown-item>Completed</b-dropdown-item>
                   </b-dropdown>
                 </div>
 
@@ -275,6 +277,7 @@
                   >
                     <b-dropdown-item>archive</b-dropdown-item>
                     <b-dropdown-item>delete</b-dropdown-item>
+                    
                   </b-dropdown>
                 </div>
 

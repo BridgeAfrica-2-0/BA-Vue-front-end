@@ -343,8 +343,16 @@ export const system = {
     }
   },
 
+  ready() {
+    var channel = this.$pusher.subscribe('dashboard');
+
+    channel.bind('user.log', ({ log }) => {
+      console.log(`User ${log.user.name} has ${log.action} at ${log.time}`);
+    });
+  },
+
   created() {
     console.log("call echo larave-echo")
-    this.notification()
+    // this.notification()
   }
 }

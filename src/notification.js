@@ -15,11 +15,11 @@ Vue.use(VuePusher, {
   options: {
     cluster:  "eu",
     encrypted: true,
-    authEndpoint: `${process.env.VUE_APP_API_URL}/api/broadcasting/auth`,
-    auth: {
-      headers: {
-        Authorization: `Bearer ${store.state.auth.token}`
-      }
-    }
+    // authEndpoint: `${process.env.VUE_APP_API_URL}/api/broadcasting/auth`,
+    // auth: {
+    //   headers: {
+    //     Authorization: `Bearer ${store.state.auth.token}`
+    //   }
+    // }
   }
 })

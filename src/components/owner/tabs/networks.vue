@@ -125,7 +125,7 @@
 
     <b-modal
       hide-footer
-      :title="editNet ? 'Edit network' : 'Add Network'"
+      :title="editNet ? $t('profileowner.Edit_network') : $t('profileowner.Add_Network')"
       size="lg"
       v-model="showModal"
       ref="netmodal"
@@ -469,7 +469,7 @@
           >
           <b-spinner v-if="loader" variant="primary"></b-spinner>
           <b-button @click="action" class="mt-2 button-btn" variant="primary">
-            {{ editNet ? "Edit Network" : "Add Network" }}
+            {{ editNet ? $t('profileowner.Edit_Network') : $t('profileowner.Add_Network') }}
           </b-button>
         </b-form>
       </b-container>

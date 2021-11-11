@@ -223,5 +223,12 @@
     "Last_Education": "Last Education",
     "Large_Spinner": "Large Spinner",
     "No_items_found": "No items found",
-    "Photo_Video": "Photo / Video"
+    "Photo_Video": "Photo / Video",
+    "Get_Direction": "Get Direction",
+    "CONTACT_BASIC_INFO": "CONTACT & BASIC INFO",
+    "WORK_EDUCATION": "WORK & EDUCATION",
+    "Edit_Profile": "Edit Profile",
+    "Album_Type": "Album Type",
+    "to_create_a": "to create a",
+    "network": "network"
 }

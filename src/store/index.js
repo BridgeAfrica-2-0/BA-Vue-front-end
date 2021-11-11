@@ -35,13 +35,15 @@ import networkProfileCommunitySidebar from './networkProfileCommunitySidebar';
 import networkProfileFeedback from './networkProfileFeedback';
 import networkProfileMedia from './networkProfileMedia';
 import networkProfileMemberRequest from './networkProfileMemberRequest';
+import orderBusiness from './orderBusiness';
 import { search } from './search';
 import { social } from './social';
 
 import axios from 'axios';
 Vue.use(Vuex);
 
-axios.defaults.baseURL = process.env.VUE_APP_API_URL;  
+// axios.defaults.baseURL = process.env.VUE_APP_API_URL;  
+axios.defaults.baseURL = "http://alert.maxinemoffett.com/api/v1";  
 
 export default new Vuex.Store({
   modules: {
@@ -78,5 +80,6 @@ export default new Vuex.Store({
     networkProfileMedia,
     networkProfileMemberRequest,
     networkProfile,
+    orderBusiness
   },
 });

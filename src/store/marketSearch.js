@@ -9,7 +9,6 @@ export default {
         subFilter: [],
         prodLoader: false,
         success: false,
-        token: "51|HZT2jfu5klFDkJhpvEI6dBhAQBDEdBQ2fABwhhaf"
     },
     getters: {
         getProducts(state) {
@@ -152,16 +151,17 @@ export default {
             commit("setProducts", { data: [] });
             commit("setLoader", true);
 
-            return axios.post("market/search", data, {
-                    headers: {
-                        Authorization: `Bearer ${state.token}`
-                    }
-                })
+            let keyword = data.keyword ? data.keyword : ''
+            let cat_id = data.cat_id ? data.cat_id : ''
+            let sub_cat = data.sub_cat ? data.sub_cat : ''
+            let filter_id = data.filter_id ? data.filter_id : ''
+            let page = data.page ? data.page : ''
+
+            return axios.get(`search/market?keyword=${keyword}&catId=${cat_id}&subCatId=${sub_cat}&filterId=${filter_id}&page=${page}`)
                 .then((res) => {
                     commit("setLoader", false);
                     console.log("Search results: ", res.data);
                     commit("setProducts", res.data);
-
                 })
                 .catch((err) => {
                     commit("setLoader", false);

@@ -1904,7 +1904,7 @@ export default {
       this.searchProducts({
         cat_id: filter.cat_id,
         sub_cat: filter.sub_cat_id,
-        filter_id: filter.id,
+        filter_id: filter.id
       });
     },
 

@@ -199,7 +199,7 @@
                   <b-form-textarea
                     id="textarea-small"
                     class="mb-2 border-none"
-                    placeholder=" $t('network.Post_a_business_update')"
+                    :placeholder=" $t('network.Post_a_business_update')"
                     v-model="createPost.postNetworkUpdate"
                     :class="{
                       'is-valid': createPost.postNetworkUpdate !== '',
@@ -235,7 +235,7 @@
                         <fas-icon class="icons" :icon="['fas', 'photo-video']" size="lg" />
                       </b-button>
                       <b-button
-                        title=" $t('network.Add_Hyperlink')"
+                        :title=" $t('network.Add_Hyperlink')"
                         size="sm"
                         variant="outline-primary"
                         @click="$refs.document.click()"
@@ -409,7 +409,7 @@ export default {
             this.flashMessage.show({
               status: 'error',
               blockClass: 'custom-block-class',
-              message: 'Unable to Delete your Post',
+              message:  this.$t('network.Unable_to_Delete_your_Post'),
             });
             console.log({ err: err });
 

@@ -44,7 +44,7 @@
                       >
                         <template #button-content>
                           <b-icon-three-dots-vertical></b-icon-three-dots-vertical
-                          ><span class="sr-only">Settings</span>
+                          ><span class="sr-only">{{ $t('network.Settings') }} </span>
                         </template>
                         <b-dropdown-item
                           @click="approved(post.id)"

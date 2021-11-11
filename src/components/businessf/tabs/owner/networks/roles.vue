@@ -241,14 +241,14 @@ export default {
         this.displayEditor();
         this.flashMessage.show({
           status: "success",
-          message: "New Role Updated"
+          message: this.$t('network.New_Role_Updated')
         });
       })
       .catch(err => {
         console.log({ err: err });
         this.flashMessage.show({
           status: "error",
-          message: "Unable to Update New Role"
+          message: this.$t('network.Unable_to_Update_New_Role')
         });
       });
 		},
@@ -273,7 +273,7 @@ export default {
         this.SPassign = false;
         this.flashMessage.show({
           status: "success",
-          message: "New Role Assigned"
+          message: this.$t('network.New_Role_Assigned')
         });
           
       })
@@ -282,7 +282,7 @@ export default {
         this.SPassign = false;
         this.flashMessage.show({
           status: "error",
-          message: "Unable to Assigned New Role"
+          message: this.$t('network.Unable_to_Assigned_New_Role')
         });
       });
 		},
@@ -297,7 +297,7 @@ export default {
         this.displayEditor();
         this.flashMessage.show({
           status: "success",
-          message: "Editor Deleted"
+          message: this.$t('network.Editor_Deleted')
         });
           
       })
@@ -305,7 +305,7 @@ export default {
         console.log({ err: err });
         this.flashMessage.show({
           status: "error",
-          message: "Unable To Delete Editor"
+          message: "this.$t('network.Unable_To_Delete_Editor')"
         });
       });
 		},

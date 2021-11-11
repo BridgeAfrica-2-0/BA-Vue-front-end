@@ -6,16 +6,16 @@
 
     <b-card no-body class="desktop">
       <b-tabs pills card vertical>
-        <b-tab title="BIOGRAPHY" active><Biography /></b-tab>  
-        <b-tab title="CONTACT & BASIC INFO"><ContactandInfo /> </b-tab>
-        <b-tab title="WORK & EDUCATION"><WorkAndEducation /></b-tab>  
+        <b-tab :title="$t('profileowner.BIOGRAPHY')" active><Biography /></b-tab>  
+        <b-tab :title="$t('profileowner.CONTACT_BASIC_INFO')"><ContactandInfo /> </b-tab>
+        <b-tab :title="$t('profileowner.WORK_EDUCATION')"><WorkAndEducation /></b-tab>  
       </b-tabs>
     </b-card>
     <b-card no-body class="mobile p-2">
       <b-tabs pills card justified>
-        <b-tab title="BIOGRAPHY" active><Biography /></b-tab>
-        <b-tab title="CONTACT & BASIC INFO"><ContactandInfo /> </b-tab>
-        <b-tab title="WORK & EDUCATION"><WorkAndEducation /></b-tab>
+        <b-tab :title="$t('profileowner.BIOGRAPHY')" active><Biography /></b-tab>
+        <b-tab :title="$t('profileowner.CONTACT_BASIC_INFO')"><ContactandInfo /> </b-tab>
+        <b-tab :title="$t('profileowner.WORK_EDUCATION')"><WorkAndEducation /></b-tab>
       </b-tabs>
     </b-card>
   </div>

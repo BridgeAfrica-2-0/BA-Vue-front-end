@@ -19,7 +19,7 @@
                   class="md-raised md-primary b-w"
                 >
                   <b-icon icon="facebook" aria-hidden="true"></b-icon>
-                  {{ $t("Login_With_Facebook") }}
+                  {{ $t("auth.Login_With_Facebook") }}
                 </md-button>
               </b-col>
 
@@ -30,7 +30,7 @@
                   style="color: white"
                 >
                   <b-icon icon="google" aria-hidden="true"></b-icon>
-                  {{ $t("login_with_google") }}
+                  {{ $t("auth.login_with_google") }}
                 </md-button>
               </b-col>
             </b-row>
@@ -38,10 +38,10 @@
 
           <br />
 
-          <p class="t-center">-{{ $t("or") }} -</p>
+          <p class="t-center">-{{ $t("auth.OR") }} -</p>
 
           <md-field :class="getValidationClass('email')">
-            <label for="email"> {{ $t("email") }} </label>
+            <label for="email"> {{ $t("auth.email") }} </label>
             <md-input
               type="email"
               name="email"
@@ -51,15 +51,15 @@
               :disabled="sending"
             />
             <span class="md-error" v-if="!$v.form.email.required">
-              {{ $t("the_email_is_required") }}
+              {{ $t("auth.the_email_is_required") }}
             </span>
             <span class="md-error" v-else-if="!$v.form.email.email">
-              {{ $t("invalid_email") }}
+              {{ $t("auth.invalid_email") }}
             </span>
           </md-field>
 
           <md-field>
-            <label for="password"> {{ $t("Password") }} </label>
+            <label for="password"> {{ $t("auth.Password") }} </label>
             <md-input
               type="password"
               name="password"
@@ -77,7 +77,7 @@
                 value="accepted"
                 unchecked-value="not_accepted"
               >
-                {{ $t("remeber_me") }}
+                {{ $t("auth.remeber_me") }}
               </b-form-checkbox>
             </div>
 
@@ -98,20 +98,20 @@
                 class="b-color f-left"
                 style="color: white"
               >
-                {{ $t("login") }}
+                {{ $t("auth.login") }}
               </md-button>
             </b-col>
             <b-col cols="6">
               <router-link to="signup">
                 <md-button class="md-raised f-right"
-                  >{{ $t("signup") }}
+                  >{{ $t("auth.signup") }}
                 </md-button>
               </router-link>
             </b-col>
           </b-row>
 
           <router-link to="recoverPass1" class="nav-link text">
-            {{ $t("forget_password") }}
+            {{ $t("auth.forget_password") }}
           </router-link>
         </div>
 
@@ -122,13 +122,13 @@
           <br />
 
           <label class="f-12">
-            {{ $t("by_loging_in_you_agree_to_bridge_africa") }}
+            {{ $t("auth.by_loging_in_you_agree_to_bridge_africa") }}
           </label>
           <br />
 
           <label class="f-12">
-            <b-link href="#"> {{ $t("terms_and_conditions") }} </b-link> &
-            <b-link href="#"> {{ $t("Privacy_policies") }} </b-link>
+            <b-link href="#"> {{ $t("auth.terms_and_conditions") }} </b-link> &
+            <b-link href="#"> {{ $t("auth.Privacy_policies") }} </b-link>
           </label>
         </div>
       </md-card>
@@ -136,7 +136,7 @@
       <div class="md-layout-item md-size-50 md-small-size-100 b-div"></div>
 
       <md-snackbar :md-active.sync="userSaved">
-        {{ $t("the_user") }} {{ lastUser }} {{ $t("was_saved_with_success") }} !
+        {{ $t("auth.the_user") }} {{ lastUser }} {{ $t("auth.was_saved_with_success") }} !
       </md-snackbar>
     </form>
 
@@ -144,10 +144,10 @@
 
     <p class="text-center">
       <span class="display-inline">
-        <b-link @click="$i18n.locale = 'en'"> {{ $t("english") }} </b-link>
+        <b-link @click="$i18n.locale = 'en'"> {{ $t("auth.english") }} </b-link>
         <span class="vl"></span>
         <b-link class="ml-2" @click="$i18n.locale = 'fr'">
-          {{ $t("french") }}
+          {{ $t("auth.french") }}
         </b-link>
       </span>
       Bridge Africa © 2021
@@ -221,7 +221,7 @@ export default {
           this.flashMessage.show({
             status: "success",
 
-            message: "Successfully Register"
+            message: this.$t('auth.Successfully_Register')
           });
 
           if (this.$store.state.auth.user.user.profile_complete == null) {
@@ -278,7 +278,7 @@ export default {
             this.flashMessage.show({
               status: "error",
 
-              message: "An error has occure"
+              message: this.$t('auth.An_error_has_occured')
             });
           }
         });

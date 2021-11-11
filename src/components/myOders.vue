@@ -157,7 +157,7 @@
               <div class="row">
                 <div class="col">
                   <span class="gras"
-                    >Order <span class="text-success order">{{ order.oderId }}</span>
+                    >Order <span class="text-success order">#{{ order.oderId }}</span>
                     <br />
                     <span class="flou row" style="margin-left: 1px"
                       ><span class="mr-1">{{ order.shippingAddress }}</span
@@ -251,7 +251,7 @@
               <div class="row">
                 <div class="col">
                   <span class="gras"
-                    >Order <span class="text-success order">{{ order.oderId }}</span>
+                    >Order <span class="text-success order">#{{ order.oderId }}</span>
                     <br />
                     <span class="flou row" style="margin-left: 1px"
                       ><span class="mr-1">{{ order.shippingAddress }}</span
@@ -345,7 +345,7 @@
               <div class="row">
                 <div class="col">
                   <span class="gras"
-                    >Order <span class="text-success order">{{ order.oderId }}</span>
+                    >Order <span class="text-success order">#{{ order.oderId }}</span>
                     <br />
                     <span class="flou row" style="margin-left: 1px"
                       ><span class="mr-1">{{ order.shippingAddress }}</span

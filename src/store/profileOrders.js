@@ -7,11 +7,6 @@ const getters = {
     return state.myOrders;
   },
   getPendingOrders: state => {
-    // state.myOrders.filter(order => order.status === 'pending')
-    // let tab =
-    // if (!tab) {
-    //   tab = [];
-    // }
     return state.myOrders.filter(order => order.status === 'pending') || [];
   },
   getCompleteOrders: state => {
@@ -45,7 +40,6 @@ const actions = {
 const mutations = {
   addPageOrder: (state, newpage) => {
     state.myOrders = state.myOrders.concat(newpage);
-    console.log('My Orders on state', state.myOrders);
   },
   removeOrder: state => {
     state.myOrders = [];

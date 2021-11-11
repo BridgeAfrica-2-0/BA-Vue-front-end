@@ -13,7 +13,7 @@
               unchecked-value="not_accepted"
               @click="selectall"
             >
-              Select All
+              {{$t("businessf.Select_All")}}
             </b-form-checkbox>
           </div>
         </b-col>
@@ -24,14 +24,14 @@
               class="a-button-l"
               @click="readNotifiactions(selected)"
             >
-              Mark as Read</b-button
+              {{$t("businessf.Mark_as_Read")}}</b-button
             >
             <b-button
               @click="deleteAll(selected)"
               variant="primary"
               class="a-button-l duration ml-1"
             >
-              Delete</b-button
+              {{$t("businessf.Delete")}}</b-button
             >
           </div>
         </b-col>
@@ -80,10 +80,10 @@
                 </template>
 
                 <b-dropdown-item href="#" @click="deleteOne(post.id)">
-                  Delete
+                  {{$t("businessf.Delete")}}
                 </b-dropdown-item>
                 <b-dropdown-item href="#" @click="readNotifiactions(selected)">
-                  Read
+                  {{$t("businessf.Read")}}
                 </b-dropdown-item>
               </b-dropdown>
             </div>
@@ -99,7 +99,7 @@
           ></b-spinner>
         </b-col>
         <b-col v-if="!sendNotifications && !loader" class="load">
-          <p>No notifications to show !!</p>
+          <p>{{$t("businessf.No_notifications_to_show")}} !!</p>
         </b-col>
       </b-container>
     </div>

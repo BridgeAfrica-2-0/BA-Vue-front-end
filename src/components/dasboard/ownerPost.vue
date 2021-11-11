@@ -16,7 +16,7 @@
               <h5 class="m-0 font-weight-bolder">
                 John Doe
               </h5>
-              <p>1h Ago</p>
+              <p>{{ $t('dashboard.1h_Ago') }}</p>
             </b-col>
           </b-row>
           <b-row>
@@ -74,7 +74,7 @@
                   ></b-input-group-text>
                 </template>
                 <b-form-input
-                  placeholder="Add A Comment"
+                  :placeholder="$t('dashboard.Add_A_Comment')"
                   class="border-right-0"
                 ></b-form-input>
               </b-input-group>

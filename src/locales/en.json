@@ -29,6 +29,9 @@
 	"Sign_Up_with_Google": "Sign Up with Google",
 	"Sign_Up_with_facebook": "Sign Up with facebook",
 	"Login_To_Bridge_Africa": "Login To Bridge Africa",
+	"Sign_up_To_Bridge_Africa": "Inscrivez-vous à Bridge Africa",
+    "password_is_required": "Mot de passe requis",
+    "tel_is_required": "tél est requis",
 	"nav": {
 		"home": "Home",
 		"market": "Market",

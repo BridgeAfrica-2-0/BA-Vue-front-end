@@ -27,7 +27,7 @@
                   class="btn btn-primary button float-right"
                   @click.prevent="next"
                 >
-                  Next
+                  Prochaine
                 </b-button>
               </b-col>
             </b-row>

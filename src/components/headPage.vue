@@ -74,9 +74,11 @@
                   >
                   <b-dropdown-item>View As</b-dropdown-item>
                 </b-dropdown>
+              </b-button-group>
               </span>
             </div>
-         
+        </div>
+      </div>
       </b-container>
     </b-container>
   </div>

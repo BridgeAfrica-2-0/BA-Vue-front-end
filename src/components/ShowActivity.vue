@@ -100,11 +100,36 @@ export default {
     });
   },
 
+  created() {
+    this.strategy = {
+      business: {
+        newType: (item) => ({
+          name: item.business_name,
+          profile_picture: item.logo_path,
+          id: item.business_id,
+          user_type: 'business',
+        }),
+        redirect: (obj) => this.redirection(obj),
+      },
+
+      network: {
+        newType: (item) => ({
+          name: item.network_name,
+          profile_picture: item.network_image,
+          id: item.network_id,
+          user_type: 'network',
+        }),
+        redirect: (obj) => this.redirection(obj),
+      },
+    };
+  },
+
   data: () => ({
     pending: false,
     openBusiness: false,
     show: false,
     openNetwork: false,
+    strategy: null,
   }),
 
   methods: {
@@ -112,45 +137,34 @@ export default {
       auth: 'auth/profilConnected',
     }),
 
-    process: async function (item, type) {
-      let request =
-        'business' == type
-          ? await this.$repository.share.switch(item.business_id, 'business')
-          : await this.$repository.share.switch(item.network_id, 'network');
+    redirection(obj) {
+      if (obj.routeName !== this.$router.name)
+        this.$router.push({
+          name: obj.routeName,
+          params: { id: obj.routeId },
+        });
+    },
 
-      if (request.success) {
+    process: async function (item, type) {
+      try {
         this.flashMessage.success({
           time: 5000,
           message:
             'business' == type
-              ? 'new' == request.data
-                ? `You are now connected as ${item.business_name}`
-                : `You are already connected as ${item.business_name}`
+              ? `You are now connected as ${item.business_name}`
               : `You are connected as ${item.network_name}`,
         });
 
-        this.auth(
-          'business' == type
-            ? {
-                name: item.business_name,
-                profile_picture: item.logo_path,
-                id: item.business_id,
-                user_type: 'business',
-              }
-            : {
-                name: item.network_name,
-                profile_picture: item.network_image,
-                id: item.network_id,
-                user_type: 'network',
-              },
-        );
+        this.auth(this.strategy[type].newType(item));
 
-        if ('network' == type && this.$router.name !== "network") {
-          this.$router.push({
-            name: 'networks',
-            params: { id: item.network_id },
-          });
-        }
+        const data = {
+          routeName: 'network' == type ? 'networks' : 'BusinessOwner',
+          routeId: 'network' == type ? item.network_id : item.business_id,
+        };
+
+        this.strategy[type].redirect(data);
+      } catch (error) {
+        console.log(error);
       }
     },
 

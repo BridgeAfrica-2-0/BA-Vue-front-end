@@ -45,7 +45,7 @@
             :album="album"
             :editAlbum="() => editAlbum(album)"
             :deleteAlbums="() => deleteAlbums(album.id)"
-            :canBeUpdate="!canBeUpdate(album)"
+            :canBeUpdate="canBeUpdate(album)"
             :showAlbumPictures="() => showAlbumPictures(album)"
             :type="type"
           />
@@ -138,9 +138,9 @@
         :albumName="album_name"
         :showAlbum="canViewAlbum"
         :canUpload="
-          ['profile_picture', 'Profile', 'Cover', 'cover_photo', 'logo', 'post'].includes(
-            album_name
-          ) ? false: true || canUpload
+          ['profile_picture', 'Profile', 'Cover', 'cover_photo', 'Cover Photo', 'logo', 'Logo', 'post'].includes(album_name)
+            ? false
+            : true
         "
         :images="strategy[type]().showAlbumImages"
         @reste="hidealbum"
@@ -149,14 +149,15 @@
   </div>
 </template>
 
+
 <script>
-import Images from "./images";
-import AlbumItem from "./albumItem";
-import { mapActions, mapGetters, mapMutations } from "vuex";
+import Images from './images';
+import AlbumItem from './albumItem';
+import { mapActions, mapGetters, mapMutations } from 'vuex';
 
-import defaultImage from "@/assets/img/nothing.jpg";
+import defaultImage from '@/assets/img/nothing.jpg';
 
-import { fullMediaLink } from "@/helpers";
+import { fullMediaLink } from '@/helpers';
 export default {
   components: {
     Images,
@@ -171,6 +172,8 @@ export default {
       type: String,
       require: true,
     },
+    getImages:{},
+    getAlbums:{}
   },
 
   data: function () {
@@ -179,18 +182,18 @@ export default {
       canViewAlbum: true,
       showalbum: false,
       albumInfo: {
-        name: "",
-        type: "",
+        name: '',
+        type: '',
       },
       loading: false,
-      editName: "",
-      editId: "",
-      url: "",
-      fullPage: "",
-      album_id: "",
-      album_name: "",
-      album_type: "",
-      edit_name: "",
+      editName: '',
+      editId: '',
+      url: '',
+      fullPage: '',
+      album_id: '',
+      album_name: '',
+      album_type: '',
+      edit_name: '',
       strategy: null,
     };
   },
@@ -226,19 +229,19 @@ export default {
   filters: {
     path: fullMediaLink,
     plural: function (val) {
-      return val ? `${val} items` : "No item";
+      return val ? `${val} items` : 'No item';
     },
   },
 
   computed: {
     ...mapGetters({
-      getAlbumsProfile: "UserProfileOwner/getAlbums",
-      getAlbumImageProfile: "UserProfileOwner/getAlbumImage",
-      albumImagesProfile: "UserProfileOwner/getalbumImages",
+      getAlbumsProfile: 'UserProfileOwner/getAlbums',
+      getAlbumImageProfile: 'UserProfileOwner/getAlbumImage',
+      albumImagesProfile: 'UserProfileOwner/getalbumImages',
 
-      getAlbumsBusiness: "businessOwner/getAlbums",
-      getAlbumImageBusiness: "businessOwner/getAlbumImage",
-      albumImagesBusiness: "businessOwner/getalbumImages",
+      getAlbumsBusiness: 'businessOwner/getAlbums',
+      getAlbumImageBusiness: 'businessOwner/getAlbumImage',
+      albumImagesBusiness: 'businessOwner/getalbumImages',
     }),
 
     canCreateAlbum() {
@@ -248,17 +251,17 @@ export default {
 
   methods: {
     ...mapActions({
-      createAlbum: "UserProfileOwner/createAlbum",
-      updateAlbum: "UserProfileOwner/updateAlbum",
-      deleteAlbum: "UserProfileOwner/deleteAlbum",
-      getAlbumImages: "UserProfileOwner/getAlbumImages",
-      fetchAlbums: "UserProfileOwner/getAlbums",
+      createAlbum: 'UserProfileOwner/createAlbum',
+      updateAlbum: 'UserProfileOwner/updateAlbum',
+      deleteAlbum: 'UserProfileOwner/deleteAlbum',
+      getAlbumImages: 'UserProfileOwner/getAlbumImages',
+      fetchAlbums: 'UserProfileOwner/getAlbums',
 
-      createAlbumBusiness: "businessOwner/createAlbum",
-      getAlbumProfileImages: "businessOwner/getAlbumImages",
-      fetchAlbumsBusiness: "businessOwner/getAlbums",
-      deleteAlbumBusiness: "businessOwner/deletedAlbum",
-      updateAlbumBusiness: "businessOwner/updatedAlbum",
+      createAlbumBusiness: 'businessOwner/createAlbum',
+      getAlbumProfileImages: 'businessOwner/getAlbumImages',
+      fetchAlbumsBusiness: 'businessOwner/getAlbums',
+      deleteAlbumBusiness: 'businessOwner/deletedAlbum',
+      updateAlbumBusiness: 'businessOwner/updatedAlbum',
     }),
 
     getFullMediaLink: fullMediaLink,
@@ -268,11 +271,11 @@ export default {
     },
 
     ...mapMutations({
-      mapUpdate: "UserProfileOwner/updateAlbum",
-      remove: "UserProfileOwner/removeAlbum",
+      mapUpdate: 'UserProfileOwner/updateAlbum',
+      remove: 'UserProfileOwner/removeAlbum',
 
-      mapUpdateBusiness: "businessOwner/updateAlbum",
-      removeBusiness: "businessOwner/removeAlbum",
+      mapUpdateBusiness: 'businessOwner/updateAlbum',
+      removeBusiness: 'businessOwner/removeAlbum',
     }),
 
     hidealbum() {
@@ -281,7 +284,7 @@ export default {
 
     showAlbumPictures(album) {
       const credentials =
-        "business" == this.type
+        'business' == this.type
           ? {
               data: { businessId: this.$route.params.id, albumId: album.id },
             }
@@ -294,18 +297,16 @@ export default {
           this.album_name = album.name;
           this.showalbum = true;
           this.hasLoadPicture = false;
-          return true
+          return true;
         })
         .catch(() => {
           this.hasLoadPicture = false;
-          return false
+          return false;
         });
     },
 
     canBeUpdate(album) {
-      return ["profile_picture", 'Profile', 'Cover', "cover_photo", "logo", "post"].includes(
-        album.name
-      )
+      return ['profile_picture', 'Profile', 'Cover', 'cover_photo', 'Cover Photo', 'logo', 'Logo', 'post'].includes(album.name)
         ? false
         : true;
     },
@@ -313,36 +314,36 @@ export default {
     createAlbums() {
       this.loading = true;
 
-      const data =
-        "business" == this.type
-          ? { id: this.$route.params.id, data: this.albumInfo }
-          : this.albumInfo;
+      const data = 'business' == this.type ? { id: this.$route.params.id, data: this.albumInfo } : this.albumInfo;
 
       this.strategy[this.type]()
         .createAlbum(data)
         .then(() => {
           this.strategy[this.type]().fetchAlbums(this.$route.params.id);
+          this.getAlbums()
+
         })
         .then(() => {
-          this.$bvModal.hide("createalbumModal");
+          this.$bvModal.hide('createalbumModal');
           this.albumInfo = {
-            name: "",
-            type: "",
+            name: '',
+            type: '',
           };
           this.flashMessage.show({
-            status: "success",
-            message: "Album Created",
+            status: 'success',
+            message: 'Album Created',
           });
 
           this.loading = false;
         })
-        .catch(() => {
+        .catch((error) => {
+          console.log(error)
           this.loading = false;
           this.sending = false;
-          this.$bvModal.hide("createalbumModal");
+          this.$bvModal.hide('createalbumModal');
           this.flashMessage.show({
-            status: "error",
-            message: "Album already exists with this name",
+            status: 'error',
+            message: error.response.data.message,
           });
         });
     },
@@ -350,7 +351,7 @@ export default {
     editAlbum(item) {
       this.editId = item.id;
       this.editName = item.name;
-      this.$refs["editalbum"].show();
+      this.$refs['editalbum'].show();
     },
 
     update() {
@@ -367,45 +368,42 @@ export default {
         })
         .then(() => {
           this.strategy[this.type]().mapUpdate({ name, id });
-          this.$bvModal.hide("editalbum");
+          this.$bvModal.hide('editalbum');
           this.flashMessage.show({
-            status: "success",
-            message: "Album Updated",
+            status: 'success',
+            message: 'Album Updated',
           });
           this.loading = false;
-          this.editId = "";
-          this.editName = "";
+          this.editId = '';
+          this.editName = '';
         })
-        .catch(() => {
+        .catch((error) => {
           this.sending = false;
           this.flashMessage.show({
-            status: "error",
-            message: "Unable to update your Album",
+            status: 'error',
+            message: error.response.data.message,
           });
         });
     },
 
     deleteAlbums(id) {
-      const data =
-        "business" == this.type
-          ? { businessID: this.$route.params.id, albumID: id }
-          : id;
+      const data = 'business' == this.type ? { businessID: this.$route.params.id, albumID: id } : id;
 
       this.strategy[this.type]()
         .deleteAlbum(data)
         .then(() => {
           this.strategy[this.type]().remove(id);
           this.flashMessage.show({
-            status: "success",
-            message: "Album Deleted",
+            status: 'success',
+            message: 'Album Deleted',
           });
         })
-        .catch((err) => {
+        .catch((error) => {
           this.sending = false;
 
           this.flashMessage.show({
-            status: "error",
-            message: "Unable to Delete your abum",
+            status: 'error',
+            message: error.response.data.message,
           });
         });
     },

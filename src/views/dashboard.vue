@@ -170,17 +170,12 @@ export default {
   data() {
     return {
       slide: 0,
-
       sliding: null,
        url_data:null,
       selectedb: "owner",
-
       map: false,
-
       category: "",
-
       boptions: [],
-
       detail: null
     };
   },
@@ -247,11 +242,9 @@ export default {
 
        }
 
-       
     },
 
    dashboardPpost(){
-    
        this.$store
         .dispatch("dashboard/dashboardPpost")
         .then(() => {
@@ -260,11 +253,9 @@ export default {
         .catch(err => {
           console.log({ err: err });
         });
-
    },
 
    dashboardBpost(){
-    
       this.$store
         .dispatch("dashboard/dashboardBpost", this.url_data)
         .then(() => {
@@ -309,11 +300,6 @@ export default {
           console.log({ err: err });
         });
     },
-
-   
-
-
-
     getbusiness() {
 
       console.log(

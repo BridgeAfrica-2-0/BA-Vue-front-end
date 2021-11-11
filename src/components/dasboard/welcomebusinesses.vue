@@ -29,11 +29,11 @@
             <br />
 
             <read-more
-              more-str="read more"
+              :more-str="$t('read_more')"
               class="readmore"
               :text="value.about_business"
               link="#"
-              less-str="read less"
+              :less-str="$t('read_less')"
               :max-chars="50"
             >
             </read-more>

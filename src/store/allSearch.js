@@ -79,9 +79,11 @@ export default {
             console.log("[DEBUG] NETWORK SEARCH", data);
             let page = 1
             const TYPES = ['business', 'user', 'network', 'market', 'post']
+            let catId = data.cat_id ? "catId=" + data.cat_id : ''
+            let keyword = data.keyword ? "keyword=" + data.keyword : ''
 
             TYPES.map((type) => {
-                axios.get(`/search/${type}`, data)
+                axios.get(`/search/${type}?${catId}&${keyword}`)
                     .then((res) => {
                         if (type == 'business') {
                             commit("setBusinesses", res.data);

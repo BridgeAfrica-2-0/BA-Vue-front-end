@@ -86,7 +86,7 @@
                 list="browsers"
                 data-toggle="popover"
                 class="form-control search-h"
-                placeholder="Where "
+                placeholder="Where"
                 aria-label="search bridge africa"
                 data-original-title=""
                 title=""
@@ -94,7 +94,7 @@
 
               <datalist id="browsers">
                 <option value=" Current Location "></option>
-                <option value="Yaounde " />
+                <option value="Yaounde" />
               </datalist>
               <slot name="button">
                 <Button />

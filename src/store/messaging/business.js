@@ -135,20 +135,35 @@ export default {
         // ----------------------------------------
 
 
-        SAVE_USERS_CHAT({ commit, dispatch }, data) {
+        SAVE_BUSINESS_CHAT({ commit }, data) {
             commit("setUsers", []);
+            console.log("[DEBUG]", data);
 
-            axios.post(`/messages/UserToUser`, data, {
-                    headers: {
-                        'Content-Type': 'multipart/form-data'
-                    }
-                })
-                .then((res) => {
-                    console.log("Message saved...", res.data.data);
-                })
-                .catch((err) => {
-                    console.log(err);
-                })
+            if (data.type == 'business') {
+                axios.post(`/messages/BusinesstoBusiness`, data)
+                    .then((res) => {
+                        console.log("Message saved...", res.data.data);
+                    })
+                    .catch((err) => {
+                        console.log(err);
+                    })
+            } else if (data.type == 'user') {
+                axios.post(`/messages/BusinesstoUser`, data)
+                    .then((res) => {
+                        console.log("Message saved...", res.data.data);
+                    })
+                    .catch((err) => {
+                        console.log(err);
+                    })
+            } else {
+                axios.post(`/messages/BusinesstoNetwork`, data)
+                    .then((res) => {
+                        console.log("Message saved...", res.data.data);
+                    })
+                    .catch((err) => {
+                        console.log(err);
+                    })
+            }
         },
 
         async GET_BIZ_TO_BIZ({ commit }, data) {

@@ -29,7 +29,9 @@
         <b-col md="9" cols="7" lg="5" sm="5">
           <p class="textt">
             <strong class="title"> {{ business.name }} </strong> <br />
-            {{ business.category }}
+            <span v-for="(cat,index) in business.category" :key="index">
+              {{ cat.name }},
+            </span>
             <br />
             {{ business.followers }} Followers <br />
 

@@ -2,10 +2,10 @@
   <div style="overflow-x: hidden; color: black">
     <Nav :credentials.sync="searchParams" id="top">
       <template v-slot:button>
-        <Button @click.native="strategy['all']" v-if="selectedId == 0" />
-        <Button @click.native="strategy['network']" v-if="selectedId == 3" />
-        <Button @click.native="strategy['market']" v-if="selectedId == 4" />
-        <Button @click.native="strategy['1']" v-if="selectedId == 1" />
+        <Button @click.native="strategY['all']" v-if="selectedId == 0" />
+        <Button @click.native="strategY['network']" v-if="selectedId == 3" />
+        <Button @click.native="strategY['market']" v-if="selectedId == 4" />
+        <Button @click.native="strategY['1']" v-if="selectedId == 1" />
 
         <Button @click.native="strategies" v-if="[2, 5].includes(selectedId)" />
       </template>
@@ -530,7 +530,7 @@ export default {
   },
 
   created() {
-    this.strategy = {
+    this.strategY = {
       users: () => this.onFindUser(),
       all: () => this.getKeyword(),
       market: () => this.searchProducts(),
@@ -548,6 +548,7 @@ export default {
         cat_id: '',
         placeholder: 'Find In All',
       },
+      strategY: null,
 
       alert: false,
       showDismissibleAlert: false,

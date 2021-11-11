@@ -172,7 +172,7 @@
         <b-form-checkbox id="" class="a-text" name="" value=""> 25km</b-form-checkbox>
       </b-form-group>
 
-      <b-link v-b-modal="'distance'"> See all </b-link>
+      <b-link v-b-modal="'distance'"> {{$t("search.See_all")}} </b-link>
 
       <div>
         <span v-if="filterType == '4'">

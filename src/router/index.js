@@ -50,7 +50,12 @@ import notFound from "@/components/404"
 
 
 import welcome from "@/views/welcome";
+
+import ordersdetail from "@/views/odersDetail";
+import businessordersdetail from "@/views/businessordersdetail"
+
 import payment from "@/views/payment";
+
 
 Vue.use(VueRouter);
 
@@ -300,6 +305,7 @@ const routes = [{
         name: "Membar Network Follower",
         component: memberNetworkFollower,
     },
+
 
 ];
 

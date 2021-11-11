@@ -1,9 +1,5 @@
 <template>
-  <div
-    class="createp img-gall predit2"
-    @mouseover="upHere = true"
-    @mouseleave="upHere = false"
-  >
+  <div class="createp img-gall predit2" @mouseover="upHere = true" @mouseleave="upHere = false">
     <a>
       <span>
         <img class="card-img album-img" :src="cover(album.cover)" alt="" />
@@ -12,7 +8,7 @@
         <div class="botmediadess-position" v-if="loading">
           <b-spinner
             style="width: 3rem; height: 3rem; color: #e75c18"
-            label="Large Spinner"
+            :label="$t('profileowner.Large_Spinner')"
           ></b-spinner>
         </div>
         <div class="botmediadess-position" v-else>
@@ -29,30 +25,23 @@
             size="sm"
             @click="show"
           >
-            Show
+            {{ $t('profileowner.Show') }}
           </b-button>
         </div>
       </div>
     </a>
 
-    <div class="mediadesc" v-if="!canBeUpdate">
+    <div class="mediadesc" v-if="canBeUpdate">
       <ul class="navbar-nav pull-right options">
         <li class="nav-item dropdown">
-          <b-dropdown
-            size="sm"
-            class="call-action"
-            variant="link"
-            toggle-class="text-decoration-none"
-            no-caret
-          >
+          <b-dropdown size="sm" class="call-action" variant="link" toggle-class="text-decoration-none" no-caret>
             <template #button-content>
-              <b-icon icon="three-dots-vertical" color="white" variant="light">
-              </b-icon>
+              <b-icon icon="three-dots-vertical" color="white" variant="light"> </b-icon>
             </template>
 
-            <b-dropdown-item @click="editAlbum">Edit</b-dropdown-item>
+            <b-dropdown-item @click="editAlbum">{{ $t('profileowner.Edit') }}</b-dropdown-item>
 
-            <b-dropdown-item @click="deleteAlbums">Delete</b-dropdown-item>
+            <b-dropdown-item @click="deleteAlbums">{{ $t('profileowner.Delete') }}</b-dropdown-item>
           </b-dropdown>
         </li>
       </ul>
@@ -61,19 +50,12 @@
 </template>
 
 <script>
-import defaultImage from "@/assets/img/nothing.jpg";
+import defaultImage from '@/assets/img/nothing.jpg';
 
-import { fullMediaLink } from "@/helpers";
+import { fullMediaLink } from '@/helpers';
 
 export default {
-  props: [
-    "album",
-    "type",
-    "deleteAlbums",
-    "editAlbum",
-    "canBeUpdate",
-    "showAlbumPictures",
-  ],
+  props: ['album', 'type', 'deleteAlbums', 'editAlbum', 'canBeUpdate', 'showAlbumPictures'],
 
   data: () => ({
     upHere: false,
@@ -83,7 +65,7 @@ export default {
   filters: {
     path: fullMediaLink,
     plural: function (val) {
-      return val ? `${val} items` : "No item";
+      return val ? `${val} items` : 'No item';
     },
   },
 

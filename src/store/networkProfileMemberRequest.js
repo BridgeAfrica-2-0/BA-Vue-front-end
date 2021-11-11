@@ -21,14 +21,13 @@ export default {
 
   actions: {
 
-    getMemberRequests( {commit}, path ){
+    getMemberRequests( {commit}, data ){
+      console.log(data.path);
       return axios
-      .get(`network/${path}`)
+      .get(`network/${data.path}`)
       .then(({ data }) => {
-        commit("setMemberRequests", data.data);
         console.log(data);
-        console.log(path);
-
+        return data;
       })
     },
 

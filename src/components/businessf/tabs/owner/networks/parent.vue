@@ -1,6 +1,6 @@
 <template>
-  <div v-if="networkInfo">
-    <b-card title="" class="">
+  <div>
+    <b-card v-if="networkInfo != 0" title="" class="">
       <b-container class="a-center">
         <!-- :src="require('@/assets/img/mayor.jpg')" -->
         <b-avatar
@@ -81,6 +81,9 @@
           </span>
         </p>
       </b-card-text>
+    </b-card>
+    <b-card v-else class="text-center">
+      <b-spinner variant="primary" label="Text Centered" style="width: 3rem; height: 3rem;"></b-spinner>
     </b-card>
 
     <SidebarCommunity />
@@ -252,7 +255,6 @@
             <h4>Edit Your New picture</h4>
           </div>
         </div>
-        <FlashMessage />
       </div>
       <b-button
         style="float: right"
@@ -263,9 +265,6 @@
         <b-spinner v-if="SPupdateN" small type="grow"></b-spinner> Upload
       </b-button>
     </b-modal>
-  </div>
-  <div v-else class="text-center">
-    <b-spinner variant="primary" label="Text Centered" style="width: 3rem; height: 3rem;"></b-spinner>
   </div>
 </template>
 
@@ -292,7 +291,13 @@ export default {
 
   created() {
     this.init();
-    console.log(this.networkInfo);
+    // console.log(this.networkInfo);
+  },
+
+  computed: {
+    networkInfo() {
+      return this.$store.state.networkProfile.networkInfo;
+    },
   },
 
   methods: {

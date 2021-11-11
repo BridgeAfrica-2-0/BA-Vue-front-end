@@ -21,19 +21,19 @@
             <br />
             {{ value.category }}
             <br />
-            {{ value.followers }} Community <br />
+            {{ value.followers }} {{ $t('dashboard.Community') }} <br />
 
             <span class="location">
-              <b-icon-geo-alt class="ico"></b-icon-geo-alt> Douala cameroon
+              <b-icon-geo-alt class="ico"></b-icon-geo-alt> {{ $t('dashboard.Douala') }} {{ $t('dashboard.Cameroon') }}
             </span>
             <br />
 
             <read-more
-              more-str="read more"
+              :more-str="$t('read_more')"
               class="readmore"
               :text="value.about_business"
               link="#"
-              less-str="read less"
+              :less-str="$t('read_less')"
               :max-chars="50"
             >
             </read-more>
@@ -58,7 +58,7 @@
                   variant="primary"
                 >
                   <i class="fas fa-user-plus fa-lg btn-icon"></i>
-                  <span class="btn-com">Community</span>
+                  <span class="btn-com">{{ $t('dashboard.Community') }}</span>
                 </b-button>
               </b-col>
 
@@ -77,7 +77,7 @@
                   variant="primary"
                 >
                   <i class="fas fa-envelope fa-lg btn-icon"></i>
-                  <span class="btn-text">Message</span>
+                  <span class="btn-text">{{ $t('dashboard.Message') }}</span>
                 </b-button>
               </b-col>
 
@@ -96,7 +96,7 @@
                   variant="primary"
                 >
                   <i class="fas fa-map-marked-alt fa-lg btn-icon"></i>
-                  <span class="btn-text">Direction</span>
+                  <span class="btn-text">{{ $t('dashboard.Direction') }}</span>
                 </b-button>
               </b-col>
             </b-row>

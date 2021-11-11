@@ -5,7 +5,7 @@
 				<h3 class="name">
 					<h6 class="name">
 						<fas-icon class="icons" :icon="['fas', 'user']" size="lg" />
-						<b> {{ $t("profile.title") }} </b>
+						<b> {{ $t('dashboard.Title') }} </b>
 					</h6>
 
 					<h6 class="float-right text-success font-weight-bolder">
@@ -14,7 +14,7 @@
 							class="text-capitalize"
 							size="sm"
 							><b-icon-star class="left"></b-icon-star> &nbsp;&nbsp;
-							{{ $t("profile.upgrade_plan") }}
+							{{ $t('dashboard.Upgrade_Plan') }}
 						</b-button>
 					</h6>
 				</h3>
@@ -35,24 +35,24 @@
 					<p class="mb-1">
 						{{ profile.followers }} {{ community }}
 						<span class="float-right m-60"
-							>{{ $t("profile.current_plan") }}: <span class="text-success">{{ $t("profile.basic") }}</span></span
+							>{{ $t('dashboard.Current_Plan') }}: <span class="text-success">{{ $t('dashboard.Basic') }}</span></span
 						>
 					</p>
 
 					<p class="mb-1">
 						<b-icon-person-fill class="text-primary"></b-icon-person-fill>
-						<router-link to="profile_owner"> {{ $t("profile.visit_profile") }}</router-link>
+						<router-link to="profile_owner"> {{ $t('dashboard.Visit_Profile') }}</router-link>
 					</p>
 					<p class="mb-1 ">
 						<b-icon-chat-fill class="text-primary"></b-icon-chat-fill>
-						{{ $t("profile.messages") }}
+						{{ $t('dashboard.Messages') }}
 						<span class="badge rounded-pill bg-primary float-right mt-1">
 							{{ profile.message }}
 						</span>
 					</p>
 					<p class="mb-1 ">
 						<b-icon-bell-fill class="text-primary"></b-icon-bell-fill>
-            {{ $t("profile.notifications") }}
+            				{{ $t('dashboard.Notifications') }}
 						<span class="badge rounded-pill bg-primary float-right mt-1">
 							{{ profile.notification }}
 						</span>
@@ -73,18 +73,18 @@
 	    community(){
 	      if((this.$i18n.locale==='en')){
 	        if(this.profile.followers>1){
-	          return "communities"
+	          return "Communities"
 	        }
-          return "community"
+          return "Community"
 
 	      }else if(this.$i18n.locale==='fr'){
 	        if(this.profile.followers>1){
-	          return "communautés"
+	          return "Communautés"
 	        }
-          return "communauté"
+          return "Communauté"
 
 	      }
-        return "community"
+        return "Community"
 	    },
 	    profile(){
 	    return this.$store.state.ProfileAndBusinessDetails.profile;

@@ -7,7 +7,7 @@
     ----------------------DEBUT -----------------------------------------------------
     -->
     <div id="hidemobile">
-      <div class="justify-content-between d-flex row cd B">
+      <div class="justify-content-between d-flex row cd B" style="margin-left: 7px">
         <div
           id="m1"
           class="mobile green t col transition pl-4"
@@ -34,16 +34,16 @@
         >
           <div class="cercle2">3</div>
 
-          <h2 class="h2 text-position text-center">Shipped</h2>
+          <h2 class="h2 text-position text-center">re-shedule</h2>
         </div>
         <div id="m4" class="mobile2 col t" @click="changeElementType(4)">
           <div class="cercle2">4</div>
-          <h2 class="h2 text-position text-center">Re-shedule</h2>
+          <h2 class="h2 text-position text-center">Shipped </h2>
         </div>
       </div>
 
       <div class="justify-content-between container row my-4">
-        <div class="col order"><h3 class="margclear1">My orders</h3></div>
+        <div class="col order"><h3 class="margclear1 bold1">My orders</h3></div>
         <div class="col">
           <h3 class="text-danger text-center margclear">clear history</h3>
         </div>
@@ -75,6 +75,8 @@
                     >
                       <b-dropdown-item>Archive</b-dropdown-item>
                       <b-dropdown-item>Delete</b-dropdown-item>
+                      <b-dropdown-item>shipped</b-dropdown-item>
+                    <b-dropdown-item>reshedule</b-dropdown-item>
                     </b-dropdown>
                   </div>
                 </div>
@@ -158,6 +160,8 @@
                     >
                       <b-dropdown-item>Archive</b-dropdown-item>
                       <b-dropdown-item>Delete</b-dropdown-item>
+                      <b-dropdown-item>shipped</b-dropdown-item>
+                    <b-dropdown-item>reshedule</b-dropdown-item>
                     </b-dropdown>
                   </div>
                 </div>
@@ -241,6 +245,8 @@
                     >
                       <b-dropdown-item>Archive</b-dropdown-item>
                       <b-dropdown-item>Delete</b-dropdown-item>
+                      <b-dropdown-item>shipped</b-dropdown-item>
+                    <b-dropdown-item>reshedule</b-dropdown-item>
                     </b-dropdown>
                   </div>
                 </div>
@@ -324,6 +330,8 @@
                     >
                       <b-dropdown-item>Archive</b-dropdown-item>
                       <b-dropdown-item>Delete</b-dropdown-item>
+                      <b-dropdown-item>shipped</b-dropdown-item>
+                    <b-dropdown-item>reshedule</b-dropdown-item>
                     </b-dropdown>
                   </div>
                 </div>
@@ -427,7 +435,7 @@
         </div>
 
         <b-avatar id="a3" class="avatar" text="3"></b-avatar>
-        <h2 class="text cursor" @click="changeElementType(3)">Shipped</h2>
+        <h2 class="text cursor" @click="changeElementType(3)"> Re-shedule</h2>
         <div
           id="p3"
           class="progress prog cursor gris"
@@ -443,7 +451,7 @@
         </div>
 
         <b-avatar id="a4" class="avatar" text="4"></b-avatar>
-        <h2 class="text cursor" @click="changeElementType(4)">Re-shedule</h2>
+        <h2 class="text cursor" @click="changeElementType(4)">Shipped</h2>
         <div
           id="p4"
           class="progress prog cursor gris"
@@ -460,14 +468,14 @@
       </div>
 
       <div class="justify-content-between container row my-4">
-        <div class="col order"><h3>My orders</h3></div>
+        <div class="col order"><h3 class="bold1">My orders</h3></div>
         <div class="status"><h3 class="text-danger">clear history</h3></div>
       </div>
 
       <div>
         <div v-if="status == 1" class="inprogress">
           <div class="show row">
-            <div class="col-4">Show:</div>
+            <div class="col-3">Show:</div>
             <div class="col">
               <b-form-select
                 v-model="selected"
@@ -487,11 +495,15 @@
                   >
                     <b-dropdown-item>Archive</b-dropdown-item>
                     <b-dropdown-item>Delete</b-dropdown-item>
+                    <b-dropdown-item>shipped</b-dropdown-item>
+                    <b-dropdown-item>reshedule</b-dropdown-item>
                   </b-dropdown>
                 </div>
               </div>
+              <router-link to="/business_owner/ordersdetail">
               <span class="gras">Order</span>
               <span class="text-success">#12324253</span> <br />
+              </router-link>
               <span class="flou">yaoundé 12/12/2021 12H00</span>
               <hr />
             </div>
@@ -544,7 +556,7 @@
 
         <div v-if="status == 2" class="inprogress">
           <div class="show row">
-            <div class="col-4">Show:</div>
+            <div class="col-3">Show:</div>
             <div class="col">
               <b-form-select
                 v-model="selected"
@@ -565,6 +577,8 @@
                   >
                     <b-dropdown-item>Archive</b-dropdown-item>
                     <b-dropdown-item>Delete</b-dropdown-item>
+                    <b-dropdown-item>shipped</b-dropdown-item>
+                    <b-dropdown-item>reshedule</b-dropdown-item>
                   </b-dropdown>
                 </div>
               </div>
@@ -619,10 +633,11 @@
             </div>
           </div>
         </div>
+        
 
         <div v-if="status == 3" class="complete">
           <div class="show row">
-            <div class="col-4">Show:</div>
+            <div class="col-3">Show:</div>
             <div class="col">
               <b-form-select
                 v-model="selected"
@@ -643,6 +658,8 @@
                   >
                     <b-dropdown-item>Archive</b-dropdown-item>
                     <b-dropdown-item>Delete</b-dropdown-item>
+                    <b-dropdown-item>shipped</b-dropdown-item>
+                    <b-dropdown-item>reshedule</b-dropdown-item>
                   </b-dropdown>
                 </div>
               </div>
@@ -700,7 +717,7 @@
 
         <div v-if="status == 4" class="canel">
           <div class="show row">
-            <div class="col-4">Show:</div>
+            <div class="col-3">Show:</div>
             <div class="col">
               <b-form-select
                 v-model="selected"
@@ -797,9 +814,11 @@ export default {
         { value: "a", text: "last 5 days" },
         { value: "b", text: "last 10 days" },
       ],
-      etat1: ["in progress", "complete", "cancel"],
+      etat1: ["in process", "complete", "cancel"],
     };
   },
+
+  mounted() {},
 
   methods: {
     changeElementType(p) {
@@ -811,9 +830,9 @@ export default {
       } else if (p == 2) {
         this.etat = "In process";
       } else if (p == 3) {
-        this.etat = "Shipped";
-      } else if (p == 4) {
         this.etat = "Re-shedule";
+      } else if (p == 4) {
+        this.etat = "Shipped";
       }
       //transition partie desktop
       const a = document.getElementById("a" + p);
@@ -842,7 +861,7 @@ export default {
     },
   },
 
-  mounted() {},
+
 };
 </script>
 
@@ -852,8 +871,10 @@ export default {
   color: #b6b2b2;
 }
 .show {
+    margin-left: 2px;
   margin-bottom: 70px;
-  width: 280px;
+   width: 370px;
+
 }
 .manage {
   margin-bottom: -60px;
@@ -875,7 +896,7 @@ export default {
   width: 130px !important;
 }
 .parent {
-  margin-left: 40px;
+  margin-left: 10px;
 }
 .margd1 {
   margin-left: 50px;
@@ -1046,7 +1067,7 @@ h3 {
   clip-path: polygon(75% 0%, 88% 50%, 75% 100%, 0% 100%, 11% 50%, 0% 0%);
 }
 .mobile2 {
-  width: 200px;
+  width: 201px;
   height: 50px;
   margin-left: -20px;
   color: white;
@@ -1175,7 +1196,14 @@ h3 {
   }
   .cercle2 {
     margin-left: 50px !important;
+    width: 18px ;
+    height: 18px;
+     line-height: 20px;
   }
+.cercle1{
+   width: 18px ;
+    height: 18px;
+}
 
   #hidedesktop {
     display: none;
@@ -1192,6 +1220,8 @@ h3 {
   }
   .cercle2 {
     margin-left: 3px !important;
+     width: 17px;
+       height: 17px;
   }
   .gras {
     font-size: 12px !important;
@@ -1212,16 +1242,16 @@ h3 {
     margin-top: -6px !important;
     margin-right: -12px !important;
   }
-
+}
   @media only screen and (max-width: 470px) {
     .h2 {
       font-size: 10px !important;
-      margin-left: 12px;
+      margin-left: 5px;
     }
     .cercle2 {
       margin-left: -4px !important;
     }
-  }
+  
    .manage{
     margin-top: -6px !important;
     margin-right: -12px !important;

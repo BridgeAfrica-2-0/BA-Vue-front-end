@@ -7,6 +7,7 @@
         <Button @click.native="strategY['market']" v-if="selectedId == 4" />
         <Button @click.native="strategY['1']" v-if="selectedId == 1" />
 
+
         <Button @click.native="strategies" v-if="[2, 5].includes(selectedId)" />
       </template>
     </Nav>

@@ -8,7 +8,7 @@
 						:icon="['fab', 'readme']"
 						size="lg"
 					/>
-					<b> {{ $t("business.post") }} </b>
+					<b> {{ $t('dashboard.Post') }} </b>
 				</h6>
 			</span>
 
@@ -97,7 +97,7 @@
 							</b-col>
 							<b-col cols="9" md="11" class="p-0 m-0 pr-3">
 								<input
-									:placeholder="`${$t('business.post_comment')}`"
+									:placeholder="`${$t('dashboard.Post_Comment')}`"
 									class="comment"
 									type="text"
 								/>

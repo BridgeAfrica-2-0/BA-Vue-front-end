@@ -7,7 +7,7 @@
           <b-avatar variant="primary" class="img-fluid avat-comment" :src="business_logo"></b-avatar>
         </b-col>
         <b-col cols="9" md="11" class="p-0 m-0 pr-3">
-          <input placeholder="Post a business update" v-b-modal.modal-xl class="comment" type="text" />
+          <input :placeholder="$t('network.Post_a_business_update')" v-b-modal.modal-xl class="comment" type="text" />
           <fas-icon class="primary send-cmt" :icon="['fas', 'paper-plane']" />
         </b-col>
       </b-row>
@@ -27,14 +27,14 @@
             <!-- Add Movie -->
             <b-col cols="5" class="text-right m-0 p-0">
               <b-button
-                title="Add Movie"
+                :title="$t('network.Add_Movie')"
                 size="sm"
                 variant="outline-primary"
                 @click="$refs.movie.click()"
                 class="post-btn"
               >
                 <fas-icon class="icons" :icon="['fas', 'photo-video']" size="lg" />
-                <span class="username"> Photo/ Video</span>
+                <span class="username"> {{ $t('network.Photo_Video') }} </span>
               </b-button>
             </b-col>
             <!-- Attach File-->
@@ -48,21 +48,21 @@
                 ref="document2"
               />
               <b-button
-                title="Add Hyperlink"
+                :title="$t('network.Add_Hyperlink')"
                 size="sm"
                 variant="outline-primary"
                 @click="$refs.document2.click()"
                 class="post-btn"
               >
                 <fas-icon class="icons" :icon="['fas', 'file']" size="lg" />
-                <span class="username"> Attach File </span>
+                <span class="username"> {{ $t('network.Attach_File') }}  </span>
               </b-button>
             </b-col>
             <!-- Post-->
             <b-col cols="3" class="text-right p-0 m-0">
-              <b-button title="Add Hyperlink" size="sm" variant="outline-primary" @click="createPost_" class="post-btn">
+              <b-button :title="$t('network.Add_Hyperlink')" size="sm" variant="outline-primary" @click="createPost_" class="post-btn">
                 <fas-icon class="icons" :icon="['fas', 'paper-plane']" size="lg" />
-                <span class="username"> Post </span>
+                <span class="username"> {{ $t('network.Post') }}  </span>
               </b-button>
             </b-col>
           </b-row>
@@ -70,10 +70,10 @@
       </b-row>
       <div class="pending-post-view pt-2 mt-3">
         <p>
-          Your 3 Post(s) are pending for approval.&nbsp;&nbsp;&nbsp;&nbsp;<a
+          {{ $t('network.Your_3_Posts_are_pending_for_approval') }} .&nbsp;&nbsp;&nbsp;&nbsp;<a
             @click="this.$router.push({ name: '/pendingPost' })"
             style="color: #e75c18; text-decoration: underline"
-            >View All</a
+            >{{ $t('network.View_All') }} </a
           >
         </p>
       </div>
@@ -83,7 +83,7 @@
     <b-card class="px-md-3">
       <div class="">
         <div class="col-md-12 col-lg-12 d-flex align-items-stretch mb-lg-0" style="padding-left: 0; padding-top: 3px">
-          <b-modal id="modal-edit" ref="modal-edit" centered hide-footer title="Update Post" @hidden="resetPostData">
+          <b-modal id="modal-edit" ref="modal-edit" centered hide-footer :title="$t('network.Update_Post')" @hidden="resetPostData">
             <b-row ref="loader">
               <b-col cols="1" class="m-0 p-0"></b-col>
               <b-col cols="2" class="m-0 p-0">
@@ -101,7 +101,7 @@
                   <b-form-textarea
                     id="textarea-small"
                     class="mb-2 border-none"
-                    placeholder="Post a network update"
+                    :placeholder="$t('network.Post_a_network_update')"
                     v-model="edit_description"
                     :class="{
                       'is-valid': createPost.postNetworkUpdate !== '',
@@ -112,7 +112,7 @@
                   <i></i>
                 </div>
                 <div class="bordder">
-                  <span class="float-left"> Add to Your Post </span>
+                  <span class="float-left"> {{ $t('network.Add_to_Your_Post') }}  </span>
                   <span class="float-right">
                     <b-button-group size="sm" class="">
                       <input id="video" type="file" hidden />
@@ -137,7 +137,7 @@
                         <fas-icon class="icons" :icon="['fas', 'photo-video']" size="lg" />
                       </b-button>
                       <b-button
-                        title="Add Hyperlink"
+                        :title="$t('network.Add_Hyperlink')"
                         size="sm"
                         variant="outline-primary"
                         @click="$refs.document.click()"
@@ -150,7 +150,7 @@
                 <br />
                 <div v-for="hyperlink in createPost.hyperlinks" :key="hyperlink.fileName" class="bordder">
                   <span class="float-left"> {{ hyperlink.fileName }} </span>
-                  <span class="float-right" @click="deleteItem(hyperlink.fileName)">delete </span>
+                  <span class="float-right" @click="deleteItem(hyperlink.fileName)">{{ $t('network.delete') }} </span>
                 </div>
                 <div v-for="(movie, index) in edit_image" :key="movie.id" class="">
                   <div id="preview">
@@ -173,7 +173,7 @@
 
                 <span>
                   <b-button @click="updatePost" variant="primary" block :disabled="loading"
-                    ><b-icon icon="cursor-fill" variant="primary"></b-icon>Update post</b-button
+                    ><b-icon icon="cursor-fill" variant="primary"></b-icon>{{ $t('network.Update_post') }}</b-button
                   >
                 </span>
               </b-col>
@@ -199,7 +199,7 @@
                   <b-form-textarea
                     id="textarea-small"
                     class="mb-2 border-none"
-                    placeholder="Post a business update"
+                    placeholder=" $t('network.Post_a_business_update')"
                     v-model="createPost.postNetworkUpdate"
                     :class="{
                       'is-valid': createPost.postNetworkUpdate !== '',
@@ -210,7 +210,7 @@
                   <i></i>
                 </div>
                 <div class="bordder">
-                  <span class="float-left"> Add to Your Post </span>
+                  <span class="float-left">{{ $t('network.Add_to_Your_Post') }}  </span>
                   <span class="float-right">
                     <b-button-group size="sm" class="">
                       <input id="video" type="file" hidden />
@@ -235,7 +235,7 @@
                         <fas-icon class="icons" :icon="['fas', 'photo-video']" size="lg" />
                       </b-button>
                       <b-button
-                        title="Add Hyperlink"
+                        title=" $t('network.Add_Hyperlink')"
                         size="sm"
                         variant="outline-primary"
                         @click="$refs.document.click()"
@@ -248,7 +248,7 @@
                 <br />
                 <div v-for="hyperlink in createPost.hyperlinks" :key="hyperlink.fileName" class="bordder">
                   <span class="float-left"> {{ hyperlink.fileName }} </span>
-                  <span class="float-right" @click="deleteItem(hyperlink.fileName)"> delete </span>
+                  <span class="float-right" @click="deleteItem(hyperlink.fileName)"> {{ $t('network.Delete') }}  </span>
                 </div>
 
                 <div v-for="movie in createPost.movies" :key="movie.fileName" class="">
@@ -265,7 +265,7 @@
                   <b-button @click="submitPost" variant="primary" block :disabled="loading">
                     <b-icon v-if="!loading" icon="cursor-fill" variant="primary"></b-icon>
                     <b-spinner v-else small></b-spinner>
-                    Publish</b-button
+                    {{ $t('network.Publish') }} </b-button
                   >
                 </span>
               </b-col>

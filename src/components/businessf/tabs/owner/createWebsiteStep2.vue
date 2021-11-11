@@ -8,7 +8,8 @@
               {{ $t('network.Create_personalised_website_for_your_business') }}
             </h2>
             <p class="my-2">
-              {{ $t('network.Start_with_a_template_and_male_it_your_own,_with_easy_drag_and_drop_&_1000s_of_design_features') }}
+              {{ $t('network.Start_with_a_template_and_male_it_your_own') }},
+               {{ $t('network.with_easy_drag_and_drop_and_1000s_of_design_features') }}
             </p>
             <br /><br />
             <b-col class="my-3" cols="8" offset-md="2">
@@ -81,7 +82,7 @@
 
             <b-form-group
               id="fieldset-1"
-              label="Pick a subdomain name*"
+              :label=" $t('network.Pick_a_subdomain_name')"
               label-for="input-1"
             >
               <b-form-input
@@ -104,7 +105,10 @@
                       {{ $t('network.You_are_currently_subscribed_to_free_plan') }}
                     </h5>
                     <p class="text-left text-design">
-                      {{ $t('network.You_can_get_access_to_features_like_mapping_your_domain,_premium_template,_premium_support_and_much_more._Simply_upgrade_your_plan.') }}
+                      {{ $t('network.You_can_get_access_to_features_like_mapping_your_domain') }},
+                      {{ $t('network.Simply_upgrade_your_plan') }}.
+                      {{ $t('network.premium_template') }}, 
+                      {{ $t('network.premium_support_and_much_more') }}.
                     </p>
                   </div>
 

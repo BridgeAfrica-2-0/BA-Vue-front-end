@@ -36,7 +36,7 @@
           </p>
           <p class="font-italic m-0 p-0">
           <span class="float-left">
-            {{ $t('network.Expiry:_1_Month') }} (dd/MM/YY - dd/MM/YY)
+            {{ $t('network.Expiry_1_Month') }} (dd/MM/YY - dd/MM/YY)
           </span>
           </p>
         </b-col>

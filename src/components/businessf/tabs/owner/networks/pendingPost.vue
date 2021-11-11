@@ -50,13 +50,13 @@
                           @click="approved(post.id)"
                           :loading="load"
                         >
-                          Approved
+                          {{ $t('network.Approved') }}
                         </b-dropdown-item>
                         <b-dropdown-item
                           @click="unapproved(post.id)"
                           :loading="load"
                         >
-                          Unapproved
+                          {{ $t('network.Unapproved') }}
                         </b-dropdown-item>
                       </b-dropdown>
                     </span>
@@ -84,7 +84,7 @@
     <b-row>
       <b-col>
         <p class="text-center" v-if="allPendingPost < 1">
-          No Pending Posts To Show
+          {{ $t('network.No_Pending_Posts_To_Show') }}
         </p>
       </b-col>
     </b-row>

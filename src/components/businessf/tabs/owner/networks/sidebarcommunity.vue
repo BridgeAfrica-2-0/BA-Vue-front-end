@@ -10,7 +10,7 @@
       <b-tabs pills content-class="mt-3  f-left ">
         <b-tab active>
           <template slot="title">
-            People <span class="spa-color"> {{nFormatter(userdetails.total_people)}} </span>
+           {{ $t('network.People') }}  <span class="spa-color"> {{nFormatter(userdetails.total_people)}} </span>
           </template>
           <div>
             <b-row>
@@ -18,13 +18,13 @@
                 <b-tabs fill pills content-class="mt-3  f-left m-up">
                   <b-tab active>
                     <template slot="title">
-                      Followers <span class="spa-color"> {{nFormatter(userdetails.total_followers)}} </span>
+                      {{ $t('network.Followers') }} <span class="spa-color"> {{nFormatter(userdetails.total_followers)}} </span>
                     </template>
                     <div class="s-comcard"><People :peoples="userdetails.user_followers" /></div>
                   </b-tab>
                   <b-tab>
                     <template slot="title">
-                      Following <span class="spa-color"> {{nFormatter(userdetails.totat_following)}} </span>
+                      {{ $t('network.Following') }} <span class="spa-color"> {{nFormatter(userdetails.totat_following)}} </span>
                     </template>
                     <div class="s-comcard"><People :peoples="userdetails.user_following" /></div>
                   </b-tab>
@@ -35,19 +35,19 @@
         </b-tab>
         <b-tab>
           <template slot="title">
-            Businesses <span class="spa-color"> {{nFormatter(businessdetails.total_Business)}} </span>
+            {{ $t('network.Businesses') }} <span class="spa-color"> {{nFormatter(businessdetails.total_Business)}} </span>
           </template>
           <div>
             <b-tabs fill pills content-class="mt-3  f-left m-up checkcheck">
               <b-tab active>
                 <template slot="title">
-                  Followers <span class="spa-color"> {{nFormatter(businessdetails.total_followers)}} </span>
+                  {{ $t('network.Followers') }} <span class="spa-color"> {{nFormatter(businessdetails.total_followers)}} </span>
                 </template>
                 <div class="s-comcard"><Business :businesses="businessdetails.Business_followers" /></div>
               </b-tab>
               <b-tab>
                 <template slot="title">
-                  Following <span class="spa-color"> {{nFormatter(businessdetails.totat_following)}} </span>
+                  {{ $t('network.Following') }} <span class="spa-color"> {{nFormatter(businessdetails.totat_following)}} </span>
                 </template>
                 <div class="s-comcard"><Business :businesses="businessdetails.Business_following" /></div>
               </b-tab>
@@ -56,19 +56,19 @@
         </b-tab>
         <!-- <b-tab>
           <template slot="title">
-            Networks <span class="spa-color"> {{nFormatter(businessdetails.total_Network)}} </span>
+            {{ $t('network.Networks') }} <span class="spa-color"> {{nFormatter(businessdetails.total_Network)}} </span>
           </template>
           <div>
             <b-tabs fill pills content-class="mt-3  f-left m-up checkcheck">
               <b-tab active>
                 <template slot="title">
-                  Followers <span class="spa-color"> {{nFormatter(businessdetails.total_followers)}} </span>
+                  {{ $t('network.Followers') }} <span class="spa-color"> {{nFormatter(businessdetails.total_followers)}} </span>
                 </template>
                 <div class="s-comcard"><Network :businesses="businessdetails.Business_followers" /></div>
               </b-tab>
               <b-tab>
                 <template slot="title">
-                  Following <span class="spa-color"> {{nFormatter(businessdetails.totat_following)}} </span>
+                   {{ $t('network.Following') }}<span class="spa-color"> {{nFormatter(businessdetails.totat_following)}} </span>
                 </template>
                 <div class="s-comcard"><Network :businesses="businessdetails.Business_following" /></div>
               </b-tab>

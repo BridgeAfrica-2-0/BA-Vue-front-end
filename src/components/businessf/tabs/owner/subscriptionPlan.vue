@@ -66,13 +66,13 @@
               </b-col>
               <b-col cols="8" class="text-justify pl-2">
                 <p class="title-plan">{{ $t('network.Advanced') }}</p>
-                <h3 class="subtitle-plan">{{ $t('network.$00/month') }}</h3>
+                <h3 class="subtitle-plan">$00/{{ $t('network.month') }}</h3>
               </b-col>
             </b-row>
           </template>
 
           <div class="text1">
-            <h5 class="font-weight-bold">{{ $t('network.Subdomain_URL') }}</h5>
+            <h5 class="font-weight-bold">{{ $t('network.Subdomain') }}URL</h5>
             <p>http://website.com</p>
           </div>
           <div class="text1">
@@ -110,7 +110,7 @@
               </b-col>
               <b-col cols="8" class="text-justify pl-1">
                 <p class="title-plan">{{ $t('network.Advanced') }}</p>
-                <h3 class="subtitle-plan">{{ $t('network.$12/month') }}</h3>
+                <h3 class="subtitle-plan">$12/{{ $t('network.month') }}</h3>
               </b-col>
             </b-row>
           </template>

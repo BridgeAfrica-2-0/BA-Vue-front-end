@@ -4,8 +4,8 @@
       <b-container>
         <b-form-group
           label-cols-lg="3"
-          label="Network Name"
-          label-size="md"
+          :label=  "$t('network.Network_Name')"
+          label-size=" md"
           label-class="font-weight-bold pt-0"
           class="mb-0"
         >
@@ -23,9 +23,9 @@
       <b-container>
         <b-form-group
           label-cols-lg="3"
-          label="Category"
+          :label=" $t('network.Category')"
           label-size="md"
-          label-class="font-weight-bold pt-0"
+          label-class=" font-weight-bold pt-0"
           class="mb-0"
           v-model="item.category"
         >
@@ -43,7 +43,7 @@
       <b-container>
         <b-form-group
           label-cols-lg="3"
-          label="Phone 1"
+          :label=" $t('network.Phone_1')"
           label-size="md"
           label-class="font-weight-bold pt-0"
           class="mb-0"
@@ -62,7 +62,7 @@
       <b-container>
         <b-form-group
           label-cols-lg="3"
-          label="Phone 2"
+          :label=" $t('network.Phone_2')"
           label-size="md"
           label-class="font-weight-bold pt-0"
           class="mb-0"
@@ -81,7 +81,7 @@
       <b-container>
         <b-form-group
           label-cols-lg="3"
-          label="Email"
+          :label=" $t('network.Email')"
           label-size="md"
           label-class="font-weight-bold pt-0"
           class="mb-0"
@@ -100,7 +100,7 @@
       <b-container>
         <b-form-group
           label-cols-lg="3"
-          label="Country"
+          :label=" $t('network.Country')"
           label-size="md"
           label-class="font-weight-bold pt-0"
           class="mb-0"
@@ -119,7 +119,7 @@
       <b-container>
         <b-form-group
           label-cols-lg="3"
-          label="City"
+          :label=" $t('network.City')"
           label-size="md"
           label-class="font-weight-bold pt-0"
           class="mb-0"
@@ -138,7 +138,7 @@
       <b-container>
         <b-form-group
           label-cols-lg="3"
-          label="Neighborhood"
+          :label=" $t('network.Neighborhood')"
           label-size="md"
           label-class="font-weight-bold pt-0"
           class="mb-0"
@@ -157,7 +157,7 @@
       <b-container>
         <b-form-group
           label-cols-lg="3"
-          label="Website"
+          :label=" $t('network.Website')"
           label-size="md"
           label-class="font-weight-bold pt-0"
           class="mb-0"
@@ -176,14 +176,14 @@
       <b-container>
         <b-form-group
           label-cols-lg="3"
-          label=" Description "
+          :label="  $t('network.Description') "
           label-size="md"
           label-class="font-weight-bold pt-0"
           class="mb-0"
         >
           <b-form-textarea
             id="textarea"
-            placeholder="Enter something..."
+            placeholder=" $t('network.Enter_something')"
             rows="3"
             max-rows="6"
             v-model="item.description"
@@ -202,7 +202,7 @@
               class="a-button-l b-font"
               :loading="loader"
             >
-              Save Changes
+              {{ $t('network.Save_Changes') }}
             </b-button>
           </div>
         </b-col>

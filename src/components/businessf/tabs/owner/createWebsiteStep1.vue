@@ -8,7 +8,8 @@
               {{ $t('network.Create_personalised_website_for_your_business') }}
             </h2>
             <p class="my-2">
-              {{ $t('network.Start_with_a_template_and_make_it_your_own,_with_easy_drag_and_drop_&_1000s_of_design_features') }}
+              {{ $t('network.Start_with_a_template_and_make_it_your_own') }},
+              {{ $t('network.with_easy_drag_and_drop_and_1000s_of_design_features') }} 
             </p>
             <br /><br />
             <b-col class="my-3" cols="8" offset-md="2">

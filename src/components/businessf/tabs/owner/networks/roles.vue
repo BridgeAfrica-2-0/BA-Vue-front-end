@@ -1,13 +1,14 @@
 <template>
   <b-container>
-    <h5 class="a-text">Assign Role</h5>
+    <FlashMessage />
+    <h5 class="a-text">{{ $t('network.Assign_Role') }}</h5>
 
     <b-container class="b-bottom">
       <b-row>
         <b-col cols="5">
           <b-form-group
             label-cols-lg="3"
-            label="User"
+            :label="$t('network.User')"
             label-size="md"
             label-class="font-weight-bold pt-0"
             class="mb-0"
@@ -27,7 +28,7 @@
         <b-col>
           <b-form-group
             label-cols-lg="3"
-            label="Role"
+            :label=" $t('network.Role')"
             label-size="md"
             label-class="font-weight-bold pt-0"
             class="mb-0"
@@ -37,7 +38,7 @@
               v-model="form.role"
               :options="roles"
               name="roles"
-              value-field="id"
+              value-field="name"
               text-field="name"
               class="mb-3"
             ></b-form-select>
@@ -46,37 +47,43 @@
 
         <b-col>
           <b-button variant="primary" class="" @click="assignRole()">
-            <b-spinner v-if="SPassign" small type="grow"></b-spinner>Assign
+            <b-spinner v-if="SPassign" small type="grow"></b-spinner> {{ $t('network.Assign') }}
           </b-button>
         </b-col>
       </b-row>
 
       <p class="text">
-        Admin can manage all aspects of the Business Identity. They can create
-        posts and send messages through inbox. They can respond to the delete
-        comments, Approve posts, view insights, manage the business settings,
-        update Business profile, assign roles and payments.
+       {{ $t('network.Admin_can_manage_all_aspects_of_the_Business_Identity') }}.   
+       {{ $t('network.They_can_create_posts_and_send_messages_through_inbox') }}.
+        {{ $t('network.They_can_respond_to_the_delete_comments') }}, 
+        {{ $t('network.Approve_posts') }}, 
+        {{ $t('network.view_insights') }},
+         {{ $t('network.manage_the_business_settings') }},
+        {{ $t('network.update_Business_profile') }},
+         {{ $t('network.assign_roles_and_payments') }}.
       </p>
       <br />
       <p class="text">
-        Editor can create posts and send messages through inbox, They can
-        respond to and delete comments, Approve posts, view insights.
+        {{ $t('network.Editor_can_create_posts_and_send_messages_through_inbox') }}, 
+        {{ $t('network.They_can_respond_to_and_delete_comments') }}, 
+        {{ $t('network.Approve_posts') }}, 
+        {{ $t('network.view_insights') }}.
       </p>
     </b-container>
 
     <div class="b-bottom">
       <b-container>
-        <h5 class="a-text">Existing Editors</h5>
+        <h5 class="a-text">{{ $t('network.Existing_Editors') }}</h5>
         <div v-if="editors != 0">
-          <b-list-group v-for="editor in editors" :key="editor.id">
+          <b-list-group v-for="editor in editors" :key="editor.user_id">
             <b-list class="d-flex align-items-center m-list">
               <b-avatar 
                 class="mr-3" 
-                :text="editor.name.charAt(0)"
+                :text="editor.fullname.charAt(0)"
                 :src="editor.profile_picture"
                 size="4em"
               ></b-avatar>
-              <span class="mr-auto">{{editor.name}}</span>
+              <span class="mr-auto">{{editor.fullname}}</span>
               <span>
                 <div>
                   <b-dropdown
@@ -92,8 +99,8 @@
                         font-scale="1"
                       ></b-icon>
                     </template>
-                    <b-dropdown-item href="#" @click="$bvModal.show('edit-editor'); selectObject(editor)">Edit</b-dropdown-item>
-                    <b-dropdown-item href="#" @click="$bvModal.show('delete-editor'); selectObject(editor)"> Delete </b-dropdown-item>
+                    <b-dropdown-item href="#" @click="$bvModal.show('edit-editor'); selectObject(editor)">{{ $t('network.Edit') }}</b-dropdown-item>
+                    <b-dropdown-item href="#" @click="$bvModal.show('delete-editor'); selectObject(editor)"> {{ $t('network.Delete') }} </b-dropdown-item>
                   </b-dropdown>
                 </div>
               </span>
@@ -102,19 +109,19 @@
         </div>
         <div v-else>
           <b-card bg-variant="white" text-variant="black" class="text-center">
-            <b-card-text>No Editor Available.</b-card-text>
+            <b-card-text>{{ $t('network.No_Editor_Available') }}.</b-card-text>
           </b-card>
         </div>
 
         <div>
           <b-modal id="edit-editor" hide-footer>
             <template #modal-title>
-              EDIT EDITOR: {{clickedObject.name}}
+              EDIT EDITOR: {{clickedObject.fullname}}
             </template>
             <div class="d-block text-center">
                <b-form-group
                   label-cols-lg="3"
-                  label="Role"
+                  :label=" $t('network.Role')"
                   label-size="md"
                   label-class="font-weight-bold pt-0"
                   class="mb-0"
@@ -124,14 +131,14 @@
                     v-model="form.role"
                     :options="roles"
                     name="role"
-                    value-field="id"
+                    value-field="name"
                     text-field="name"
                     class="mb-3"
                   >
                   </b-form-select>
                 </b-form-group>
             </div>
-            <b-button class="mt-3" block variant="primary" @click="$bvModal.hide('edit-editor'); editEditor(clickedObject)">EDIT</b-button>
+            <b-button class="mt-3" block variant="primary" @click="$bvModal.hide('edit-editor'); editEditor(clickedObject)">{{ $t('network.EDIT') }}</b-button>
           </b-modal>
 
           <b-modal id="delete-editor" hide-footer>
@@ -139,13 +146,14 @@
               !!! <code>WARRING</code> !!!
             </template>
             <div class="d-block text-center">
-              <h3>You Are About To Delete: {{clickedObject.name}}!</h3>
+              <h3>{{ $t('network.You_Are_About_To_Delete') }}: {{clickedObject.fullname}}!</h3>
             </div>
-            <b-button class="mt-3" block @click="$bvModal.hide('delete-editor'); deleteEditor(clickedObject)">Delete</b-button>
+            <b-button class="mt-3" block @click="$bvModal.hide('delete-editor'); deleteEditor(clickedObject)">{{ $t('network.Delete') }}</b-button>
           </b-modal>
         </div>
       </b-container>
     </div>
+
   </b-container>
 </template>
 
@@ -218,11 +226,13 @@ export default {
       });
     },
     editEditor: function(clickedObject){
+      console.log(clickedObject);
       let formData = new FormData();
+      formData.append('user_id', clickedObject.user_id);
       formData.append('role', this.form.role);
       this.$store
         .dispatch("NetworkSettings/updateEditor", {
-          path: "business/role/update/"+clickedObject.id,
+          path: "roles/"+this.url+"/assign",
           formData: formData,
         })
         .then(({ data }) => {
@@ -246,13 +256,13 @@ export default {
       this.SPassign = true;
       let formData = new FormData();
       formData.append('user_id', this.form.name);
-      formData.append('role_id', this.form.role);
-      console.log('name: ', this.form.name);
+      formData.append('role', this.form.role);
+      console.log('user_id: ', this.form.name);
       console.log('role: ', this.form.role);
       console.log(formData);
       this.$store
         .dispatch("NetworkSettings/updateEditor", {
-          path: "business/role/assignRole/"+this.url,
+          path: "roles/"+this.url+"/assign",
           formData: formData,
         })
         .then(({ data }) => {
@@ -279,7 +289,7 @@ export default {
     deleteEditor: function(clickedObject){
       this.$store
         .dispatch("NetworkSettings/deleteEditor", {
-          path: "business/role/delete/"+clickedObject.id,
+          path: "business/role/delete/"+clickedObject.user_id,
         })
         .then(({ data }) => {
         console.log(data);

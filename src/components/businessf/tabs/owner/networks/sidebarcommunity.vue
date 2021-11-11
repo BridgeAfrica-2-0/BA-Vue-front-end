@@ -56,21 +56,21 @@
         </b-tab>
         <b-tab>
           <template slot="title">
-            Networks <span class="spa-color"> {{nFormatter(businessdetails.total_Network)}} </span>
+            Networks <span class="spa-color"> {{nFormatter(networkdetails.total_Network)}} </span>
           </template>
           <div>
             <b-tabs fill pills content-class="mt-3  f-left m-up checkcheck">
               <b-tab active>
                 <template slot="title">
-                  Followers <span class="spa-color"> {{nFormatter(businessdetails.total_followers)}} </span>
+                  Followers <span class="spa-color"> {{nFormatter(networkdetails.total_followers)}} </span>
                 </template>
-                <div class="s-comcard"><Network :businesses="businessdetails.Business_followers" /></div>
+                <div class="s-comcard"><Network :networks="networkdetails.Network_followers" /></div>
               </b-tab>
               <b-tab>
                 <template slot="title">
-                  Following <span class="spa-color"> {{nFormatter(businessdetails.totat_following)}} </span>
+                  Following <span class="spa-color"> {{nFormatter(networkdetails.totat_following)}} </span>
                 </template>
-                <div class="s-comcard"><Network :businesses="businessdetails.Business_following" /></div>
+                <div class="s-comcard"><Network :networks="networkdetails.Network_following" /></div>
               </b-tab>
             </b-tabs>
           </div>
@@ -82,12 +82,13 @@
 <script>
 import People from "./people";
 import Business from "./business";
-//import Network from "./network";
+import Network from "./network";
 export default {
   name: "sidebarcommunity",
   components: {
     People,
     Business,
+    Network
   },
   data() {
     return {
@@ -109,6 +110,7 @@ export default {
     this.url = this.$route.params.id;
     this.UserDetails();
     this.businessDetails();
+    this.networkDetails();
   },
   methods:{    
     nFormatter: function(num) {
@@ -145,10 +147,10 @@ export default {
       });
     },
     networkDetails() {
+    console.log('networkDetails');
     this.$store
       .dispatch("networkProfileCommunitySidebar/getNetworkDetails", this.url)
       .then(() => {
-        console.log('networkDetails');
         console.log('ohh year');
       })
       .catch(err => {

@@ -107,7 +107,7 @@
       </div>
       <b-row>
         <b-col cols="12">
-          <infinite-loading @infinite="infiniteHandler" ref="infiniteHandler" :identifier="infiniteId">
+          <infinite-loading @infinite="infiniteHandler" ref="infiniteHandler">
             <div class="text-red" slot="no-more">No More Request</div>
             <div class="text-red" slot="no-results">No More Request</div>
           </infinite-loading>
@@ -120,7 +120,6 @@
 </template>
 
 <script>
-import axios from "axios";
 export default {
   data() {
     return {

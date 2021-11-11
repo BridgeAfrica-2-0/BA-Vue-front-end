@@ -632,6 +632,7 @@
             </div>
           </div>
         </div>
+        
 
         <div v-if="status == 3" class="complete">
           <div class="show row">
@@ -736,8 +737,6 @@
                   >
                     <b-dropdown-item>Archive</b-dropdown-item>
                     <b-dropdown-item>Delete</b-dropdown-item>
-                    <b-dropdown-item>shipped</b-dropdown-item>
-                    <b-dropdown-item>reshedule</b-dropdown-item>
                   </b-dropdown>
                 </div>
               </div>
@@ -818,6 +817,8 @@ export default {
     };
   },
 
+  mounted() {},
+
   methods: {
     changeElementType(p) {
       console.log("------------------" + p);
@@ -859,7 +860,7 @@ export default {
     },
   },
 
-  mounted() {},
+
 };
 </script>
 

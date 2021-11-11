@@ -14,7 +14,7 @@
 
           <h6 class="float-right text-success font-weight-bolder">
             <b-button variant="outline-primary" class="upgrade-btn" size="sm"
-              ><b-icon-star></b-icon-star> &nbsp;&nbsp; {{$t("business.upgrade_plan")}}</b-button
+              ><b-icon-star></b-icon-star> &nbsp;&nbsp; {{ $t('dashboard.Upgrade_Plan') }}</b-button
             >
           </h6>
         </h4>
@@ -25,40 +25,40 @@
         <div class="text-lost">
           <b>  {{business.name}}  </b>
           <p class="mb-1">
-              {{business.followers}} {{$t("business.community")}} <br />
+              {{business.followers}} {{ $t('dashboard.Community') }} <br />
             <span class=""
-              >{{$t("business.current_plan")}}: <span class="text-success">{{$t("business.basic")}}</span></span
+              >{{ $t('dashboard.Current_Plan') }}: <span class="text-success">{{ $t('dashboard.Basic') }}</span></span
             >
           </p>
           <p class="mb-1 mb-3">  <span v-for="cat in business.category" :key="cat.name">  {{cat.name}}  </span> </p>
           <p class="mb-1">
             <b-icon-person-fill class="text-primary"></b-icon-person-fill>
               <router-link :to="'business_owner/'+business.id">
-                 {{$t("business.visit_profile")}}
+                 {{ $t('dashboard.Visit_Profile') }}
           </router-link>
 
 
           </p>
           <p class="mb-1 ">
             <b-icon-chat-fill class="text-primary"></b-icon-chat-fill>
-            {{$t("business.messages")}}
+            {{ $t('dashboard.Messages') }}
             <span class="badge rounded-pill bg-primary float-right mt-1">
               {{business.message}}
             </span>
           </p>
           <p class="mb-1 ">
             <b-icon-bell-fill class="text-primary"></b-icon-bell-fill>
-            {{$t("business.notifications")}}
+            {{ $t('dashboard.Notifications') }}
             <span class="badge rounded-pill bg-primary float-right mt-1">  {{business.notification}} </span>
             
           </p>
           <p class="mb-1 ">
             <b-icon-globe class="text-primary"></b-icon-globe>
-            <a> {{$t("business.visit_website")}}</a>
+            <a> {{ $t('dashboard.Visit_Website') }}</a>
           </p>
           <p class="mb-1 ">
             <b-icon-shop class="text-primary"></b-icon-shop>
-            {{$t("business.market_place")}}
+            {{ $t('dashboard.Market_Place') }}
           </p>
         </div>
       </div>

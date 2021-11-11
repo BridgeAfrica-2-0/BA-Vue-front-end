@@ -86,7 +86,7 @@
 
                     <b-dropdown
                       id="dropdown-1"
-                      class="float-right options dot-btn mt-2 mt-sm-2 mt-md-0 mr-3"
+                      class="float-right  dot-btn mt-2 mt-sm-2 mt-md-0 mr-3"
                       no-caret
                       variant="outline"
                       style="border-color: #ffD20; color: #ffD20"

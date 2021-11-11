@@ -1,7 +1,7 @@
 <template>
   <div>
     <b-modal id="modal-sm" size="sm" hide-header>
-       {{ $t("network.do_you_want_join_network") }}
+       {{ $t('dashboard.Do_you_want_to_join_this_network') }}
     </b-modal>
 
     <b-row>
@@ -21,7 +21,7 @@
             <strong class="net-title"> {{ item.name }} </strong> <br />
             {{ item.category }}
             <br />
-            {{ item.followers }} Community <br />
+            {{ item.followers }} {{ $t('dashboard.Community') }} <br />
 
             <span class="location">
               <b-icon-geo-alt class="ico"></b-icon-geo-alt>
@@ -53,7 +53,7 @@
                   variant="primary"
                 >
                   <i class="fas fa-user-plus  fa-lg btn-icon "></i>
-                  <span class="btn-com" v-b-modal.modal-sm>{{ $t("network.community") }}</span>
+                  <span class="btn-com" v-b-modal.modal-sm>{{ $t('dashboard.Community') }}</span>
                 </b-button>
               </b-col>
 
@@ -65,7 +65,7 @@
                   variant="primary"
 
                   ><i class="fas fa-envelope   fa-lg btn-icon "></i>
-                  <span class="btn-text">{{ $t("network.messages") }}</span>
+                  <span class="btn-text">{{ $t('dashboard.Messages') }}</span>
                 </b-button>
               </b-col>
 

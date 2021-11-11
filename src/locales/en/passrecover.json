@@ -1,0 +1,14 @@
+{
+    "Recover_Password": "Recover Password",
+    "Enter_Your_Phone_Number": "Enter Your Phone Number",
+    "Phone": "Phone",
+    "Next": "Next",
+    "OTP": "OTP",
+    "Passwords_do_not_match": "Passwords do not match",
+    "Create_New_Password": "Create New Password",
+    "Password": "Password",
+    "Confirm_Password": "Confirm Password",
+    "Finish": "Finish",
+    "Password_Reset_Success": "Password Reset Success",
+    "You_have_successfull_Reset_your_password_you_will_be_redirected_in_a_second": "You have successfull Reset your password. You will be redirected in a second"
+}

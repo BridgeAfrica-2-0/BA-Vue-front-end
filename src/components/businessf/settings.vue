@@ -2,7 +2,7 @@
   <div class=" ">
     <div class="">
       <div class="">
-        <h5 class="a-text"><b-icon-gear></b-icon-gear> Business Settings</h5>
+        <h5 class="a-text"><b-icon-gear></b-icon-gear> {{$t("businessf.Business_Settings")}}</h5>
       </div>
       <hr class="solid">
 
@@ -11,7 +11,7 @@
           <b-tabs pills  vertical>
             <b-tab active>
               <template slot="title" class="t-color">
-                <h6 class="t-color">General</h6>
+                <h6 class="t-color">{{$t("businessf.General")}}</h6>
               </template>
 
               <b-card-text> <General /> </b-card-text
@@ -19,21 +19,21 @@
 
             <b-tab>
               <template slot="title" class="t-color">
-                <h6 class="t-color">Business Info</h6>
+                <h6 class="t-color">{{$t("businessf.Business_Info")}}</h6>
               </template>
               <b-card-text> <Info /> </b-card-text
             ></b-tab>
 
             <b-tab>
               <template slot="title" class="t-color">
-                <h6 class="t-color">Business Roles</h6>
+                <h6 class="t-color">{{$t("businessf.Business_Roles")}}</h6>
               </template>
               <b-card-text> <Roles /> </b-card-text
             ></b-tab>
 
             <b-tab>
               <template slot="title" class="t-color">
-                <h6 class="t-color">Payment</h6>
+                <h6 class="t-color">{{$t("businessf.Payment")}}</h6>
               </template>
 
               <b-card-text> <Payment /> </b-card-text
@@ -41,14 +41,14 @@
 
             <b-tab>
               <template slot="title" class="t-color">
-                <h6 class="t-color">Website</h6>
+                <h6 class="t-color">{{$t("businessf.Website")}}</h6>
               </template>
 
               <b-card-text> <Website /> </b-card-text
             ></b-tab>
             <b-tab>
               <template slot="title" class="t-color">
-                <h6 class="t-color">Blocking</h6>
+                <h6 class="t-color">{{$t("businessf.Blocking")}}</h6>
               </template>
 
               <b-card-text> <Blocking /> </b-card-text

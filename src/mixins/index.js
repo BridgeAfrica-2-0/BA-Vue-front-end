@@ -1,6 +1,7 @@
 
-import * as firebase from 'firebase/app';
-import 'firebase/messaging';
+// import * as firebase from 'firebase/app';
+
+// import 'firebase/messaging';
 
 import { mapGetters, mapActions, mapMutations } from "vuex";
 import { formatNumber, fromNow } from "@/helpers";
@@ -8,6 +9,7 @@ import { formatNumber, fromNow } from "@/helpers";
 import NotFound from "@/components/NotFoundComponent"
 import NoMoreData from "@/components/businessOwner/PaginationMessage"
 import ClipLoader from 'vue-spinner/src/ClipLoader.vue'
+
 
 export const notification = {
   data() {
@@ -22,20 +24,20 @@ export const notification = {
 
   methods: {
     receiveMessage() {
-      console.log("call echo")
-      try {
-        firebase.messaging().onMessage((payload) => {
-          // debugger
-          this.currentMessage = payload;
-          console.log(this.currentMessage);
-          let message;
-          message = payload.data.username + ':\n\n' + payload.data.message;
-          this.setNotificationBoxForm(payload.data.shipmentWallNumber, payload.data.username, payload.data.message);
-          console.log(message);
-        });
-      } catch (e) {
-        console.log(e);
-      }
+      // console.log("call echo firebase")
+      // try {
+      //   firebase.messaging().onMessage((payload) => {
+      //     // debugger
+      //     this.currentMessage = payload;
+      //     console.log(this.currentMessage);
+      //     let message;
+      //     message = payload.data.username + ':\n\n' + payload.data.message;
+      //     this.setNotificationBoxForm(payload.data.shipmentWallNumber, payload.data.username, payload.data.message);
+      //     console.log(message);
+      //   });
+      // } catch (e) {
+      //   console.log(e);
+      // }
     },
 
     setNotificationBoxForm(title, from, subject) {
@@ -45,13 +47,13 @@ export const notification = {
 
       const message = `<span><b>${this.from}</b></span><br>${this.subject}`;
 
-      this.$notify({
-        group: 'foo',
-        type: 'success',
-        title: this.title,
-        text: message,
-        duration: 5000,
-      });
+      // this.$notify({
+      //   group: 'foo',
+      //   type: 'success',
+      //   title: this.title,
+      //   text: message,
+      //   duration: 5000,
+      // });
     },
   },
 
@@ -118,7 +120,6 @@ export const search = {
     }),
   }
 }
-
 
 export const commentMixinsBuisness = {
   data() {
@@ -201,7 +202,7 @@ export const commentMixinsBuisness = {
         comment: this.comment.comment_id,
         data: {
           comment: this.text,
-          networkId:this.profile.id,
+          networkId: this.profile.id,
         },
       });
 
@@ -323,4 +324,27 @@ export const commentMixins = {
       if (this.reply) this.onShowReply();
     },
   },
+}
+
+export const system = {
+
+  methods: {
+    ...mapMutations({
+      newNotificationBusiness: "notification/NEW_BUSINESS_NOTIFICATION",
+      newNotificationProfile: "notification/NEW_PROFILE_NOTIFICATION",
+      newNotificationNetwork: "notification/NEW_NETWORK_NOTIFICATION",
+    }),
+
+    notification() {
+      window.Echo.private('chat')
+        .listen('MessageSent', (e) => {
+          console.log(e)
+        });
+    }
+  },
+
+  created() {
+    console.log("call echo larave-echo")
+    this.notification()
+  }
 }

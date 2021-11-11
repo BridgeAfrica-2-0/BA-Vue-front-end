@@ -1,40 +1,39 @@
 <template>
   <div id="app" class="" ref="formContainer">
-    <notifications group="foo" />
+    <!-- <notifications group="foo" /> -->
     <router-view />
   </div>
 </template>
 <script>
 /* eslint-disable */
-import * as firebase from 'firebase/app';
-import 'firebase/messaging';
+// import * as firebase from 'firebase/app';
+// import 'firebase/messaging';
 
-import { notification } from '@/mixins';
-
+import { system } from '@/mixins';
 export default {
-  mixins: [notification],
+  mixins: [system],
   created() {
-    try {
-      firebase
-        .messaging()
-        .requestPermission()
-        .then(() => {
-          console.log('Notification permission granted');
-          return firebase
-            .messaging()
-            .getToken()
-            .then((token) => {
-              console.info(token);
-              // this.$repository.post.SendToken(token)
-              return true;
-            })
-            .then(() => this.receiveMessage())
-            .catch((error) => console.error(error));
-        })
-        .catch((error) => console.error(error));
-    } catch (error) {
-      console.log(error);
-    }
+    // try {
+    //   firebase
+    //     .messaging()
+    //     .requestPermission()
+    //     .then(() => {
+    //       console.log('Notification permission granted');
+    //       return firebase
+    //         .messaging()
+    //         .getToken()
+    //         .then((token) => {
+    //           console.info(token);
+    //           // this.$repository.post.SendToken(token)
+    //           return true;
+    //         })
+    //         .then(() => this.receiveMessage())
+    //         .catch((error) => console.error(error));
+    //     })
+    //     .catch((error) => console.error(error));
+    // } catch (error) {
+    //   console.log(error);
+    // }
   },
 };
 </script>

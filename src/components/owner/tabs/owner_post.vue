@@ -13,7 +13,7 @@
         </b-col>
         <b-col cols="9" md="11" class="p-0 m-0 pr-3">
           <input
-            placeholder="Post a business update"
+            :placeholder="$t('profileowner.Post_a_business_update')"
             v-b-modal.modal-xl
             class="comment commentt "
             type="text"
@@ -37,7 +37,7 @@
             <!-- Add Movie -->
             <b-col cols="5" class="text-right m-0 p-0">
               <b-button
-                title="Add Movie"
+                :title="$t('profileowner.Add_Movie')"
                 size="sm"
                 variant="outline-primary"
                 @click="$refs.movie.click()"
@@ -48,7 +48,7 @@
                   :icon="['fas', 'photo-video']"
                   size="lg"
                 />
-                <span class="username"> Photo/ Video </span>
+                <span class="username"> {{ $t('profileowner.Photo_Video') }} </span>
               </b-button>
             </b-col>
             <!-- Attach File-->
@@ -62,7 +62,7 @@
                 ref="document2"
               />
               <b-button
-                title="Add Hyperlink"
+                :title="$t('profileowner.Add_Hyperlink')"
                 size="sm"
                 variant="outline-primary"
                 @click="$refs.document2.click()"
@@ -75,7 +75,7 @@
             <!-- Post-->
             <b-col cols="3" class="text-right p-0 m-0">
               <b-button
-                title="Add Hyperlink"
+                :title="$t('profileowner.Add_Hyperlink')"
                 size="sm"
                 variant="outline-primary"
                 @click="createPost_"
@@ -86,7 +86,7 @@
                   :icon="['fas', 'paper-plane']"
                   size="lg"
                 />
-                <span class="username"> Post </span>
+                <span class="username"> {{ $t('profileowner.Post') }} </span>
               </b-button>
             </b-col>
           </b-row>
@@ -126,7 +126,7 @@
             ref="modal-edit"
             centered
             hide-footer
-            title="Update Post"
+            :title="$t('profileowner.Update_Post')"
             @hidden="resetPostData"
           >
             <FlashMessage />
@@ -152,13 +152,13 @@
                     id="textarea-small"
                     autofocus
                     class="mb-2 border-none"
-                    placeholder="Post a business update"
+                    :placeholder="$t('profileowner.Post_a_business_update')"
                     v-model="edit_description"
                    
                   ></b-form-textarea>
                 </div>
                 <div class="bordder">
-                  <span class="float-left"> Add to Your Post </span>
+                  <span class="float-left"> {{ $t('profileowner.Add_to_Your_Post') }} </span>
                   <span class="float-right">
                     <b-button-group size="sm" class="">
                       <input id="video" type="file" hidden />
@@ -180,7 +180,7 @@
                       />
 
                       <b-button
-                        title="Add Movie"
+                        :title="$t('profileowner.Add_Movie')"
                         size="sm"
                         variant="outline-primary"
                         @click="$refs.movies.click()"
@@ -192,7 +192,7 @@
                         />
                       </b-button>
                       <b-button
-                        title="Add Hyperlink"
+                        :title="$t('profileowner.Add_Hyperlink')"
                         size="sm"
                         variant="outline-primary"
                         @click="$refs.document.click()"
@@ -219,7 +219,7 @@
                       class="float-right"
                       @click="deleteItem(hyperlink.fileName)"
                     >
-                      delete
+                      {{ $t('profileowner.delete') }}
                     </span>
                   </div>
 
@@ -263,7 +263,7 @@
                 <span>
                   <b-button @click="updatePost" variant="primary" block
                     ><b-icon icon="cursor-fill" variant="primary"></b-icon>
-                    Publish</b-button
+                    {{ $t('profileowner.Publish') }}</b-button
                   >
                 </span>
               </b-col>
@@ -299,7 +299,7 @@
             ref="modal-xl"
             centered
             hide-footer
-            title="Create Post"
+            :title="$t('profileowner.Create_Post')"
             @hidden="resetPostData"
           >
             <FlashMessage />
@@ -325,13 +325,13 @@
                     id="textarea-small"
                     class="mb-2 border-none"
                     autofocus
-                    placeholder="Post a business update"
+                    :placeholder="$t('profileowner.Post_a_business_update')"
                     v-model="createPost.postBusinessUpdate"
                    
                   ></b-form-textarea>
                 </div>
                 <div class="bordder">
-                  <span class="float-left"> Add to Your Post </span>
+                  <span class="float-left"> {{ $t('profileowner.Add_to_Your_Post') }} </span>
                   <span class="float-right">
                     <b-button-group size="sm" class="">
                       <input id="video" type="file" hidden />
@@ -353,7 +353,7 @@
                       />
 
                       <b-button
-                        title="Add Movie"
+                        :title="$t('profileowner.Add_Movie')"
                         size="sm"
                         variant="outline-primary"
                         @click="$refs.movies.click()"
@@ -365,7 +365,7 @@
                         />
                       </b-button>
                       <b-button
-                        title="Add Hyperlink"
+                        :title="$t('profileowner.Add_Hyperlink')"
                         size="sm"
                         variant="outline-primary"
                         @click="$refs.document.click()"
@@ -392,7 +392,7 @@
                       class="float-right"
                       @click="deleteItem(hyperlink.fileName)"
                     >
-                      delete
+                      {{ $t('profileowner.delete') }}
                     </span>
                   </div>
 
@@ -445,7 +445,7 @@
                 <span>
                   <b-button @click="submitPost" variant="primary" block
                     ><b-icon icon="cursor-fill" variant="primary"></b-icon>
-                    Publish</b-button
+                    {{ $t('profileowner.Publish') }}</b-button
                   >
                 </span>
               </b-col>
@@ -485,7 +485,7 @@
 
                 <b-dropdown-item-button variant="info" @click="editPost(item)">
                   <b-icon icon="pencil" aria-hidden="true"></b-icon>
-                  Edit
+                  {{ $t('profileowner.Edit') }}
                 </b-dropdown-item-button>
 
                 <b-dropdown-item-button
@@ -493,7 +493,7 @@
                   @click="deletePost(item)"
                 >
                   <b-icon icon="trash-fill" aria-hidden="true"></b-icon>
-                  Delete
+                  {{ $t('profileowner.Delete') }}
                 </b-dropdown-item-button>
               </b-dropdown>
             </div>
@@ -569,7 +569,7 @@
           </div>
 
           <div class="p-0 m-0 pr-3 inline-comment">
-            <input placeholder="Post a Comment" class="comment" type="text" />
+            <input :placeholder="$t('profileowner.Post_a_Comment')" class="comment" type="text" />
 
             <fas-icon class="primary send-cmt" :icon="['fas', 'paper-plane']" />
           </div>
@@ -767,7 +767,7 @@ export default {
           this.flashMessage.show({
             status: "success",
             blockClass: "custom-block-class",
-            message: "Post Deleted",
+            message: this.$t('profileowner.Post_Deleted'),
           });
           this.reloads();
           this.page = 1;
@@ -791,7 +791,7 @@ export default {
             this.flashMessage.show({
               status: "error",
               blockClass: "custom-block-class",
-              message: "Unable to Delete your Post",
+              message: this.$t('profileowner.Unable_to_Delete_your_Post'),
             });
             console.log({ err: err });
 
@@ -850,7 +850,7 @@ export default {
           this.flashMessage.show({
             status: "success",
             blockClass: "custom-block-class",
-            message: "Content successfuly uploaded",
+            message: this.$t('profileowner.Content_successfuly_uploaded'),
           });
 
           this.reloads();
@@ -879,7 +879,7 @@ export default {
             this.flashMessage.show({
               status: "error",
 
-              message: "Unable to Update your post",
+              message: this.$t('profileowner.Unable_to_Update_your_post'),
               blockClass: "custom-block-class",
             });
             console.log({ err: err });
@@ -1054,7 +1054,7 @@ export default {
           this.flashMessage.show({
             status: "success",
             blockClass: "custom-block-class",
-            message: "Content successfuly uploaded",
+            message: this.$t('profileowner.Content_successfuly_uploaded'),
           });
           this.isUploading = false;
           loader.hide();
@@ -1084,7 +1084,7 @@ export default {
             this.flashMessage.show({
               status: "error",
 
-              message: "Unable to Create Your Post",
+              message: this.$t('profileowner.Unable_to_Create_Your_Post'),
               blockClass: "custom-block-class",
             });
             console.log({ err: err });

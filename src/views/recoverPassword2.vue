@@ -9,7 +9,7 @@
           <b-form class="w-75 mx-auto">
             <b-form-group id="input-group-4">
               <md-field>
-                <label for="otp"> OTP</label>
+                <label for="otp"> {{ $t('passrecover.OTP') }}</label>
                 <md-input
                   type="text"
                   name="otp"
@@ -27,7 +27,7 @@
                   class="btn btn-primary button float-right"
                   @click.prevent="next"
                 >
-                  Next
+                  {{ $t('passrecover.Next') }}
                 </b-button>
               </b-col>
             </b-row>

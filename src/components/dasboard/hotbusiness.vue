@@ -20,7 +20,7 @@
             <strong class="title"> {{ item.name }} </strong> <br />
                 {{ item.category }}
             <br />
-            {{ item.followers }} {{ $t("business.community") }} <br />
+            {{ item.followers }} {{ $t('dashboard.Community') }} <br />
 
                 <span class="location">
               <b-icon-geo-alt class="ico"></b-icon-geo-alt>
@@ -58,7 +58,7 @@
                   variant="primary"
                 >
                   <i class="fas fa-user-plus  fa-lg btn-icon "></i>
-                  <span class="btn-com">{{ $t("business.community") }}</span>
+                  <span class="btn-com">{{ $t('dashboard.Community') }}</span>
                 </b-button>
               </b-col>
 
@@ -77,7 +77,7 @@
                   variant="primary"
                 >
                   <i class="fas fa-envelope   fa-lg btn-icon "></i>
-                  <span class="btn-text">{{ $t("business.messages") }}</span>
+                  <span class="btn-text">{{ $t('dashboard.Messages') }}</span>
                 </b-button>
               </b-col>
 
@@ -96,7 +96,7 @@
                   variant="primary"
                 >
                   <i class="fas fa-map-marked-alt  fa-lg btn-icon "></i>
-                  <span class="btn-text">{{ $t("business.direction") }}</span>
+                  <span class="btn-text">{{ $t('dashboard.Direction') }}</span>
                 </b-button>
               </b-col>
             </b-row>

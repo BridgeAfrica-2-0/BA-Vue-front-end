@@ -320,6 +320,9 @@ export default {
 </script>
 
 <style scoped>
+.orders{
+  margin: 0 auto;
+}
 .order-button {
   height: 40px;
   color: white;

@@ -2,6 +2,7 @@
   <div>
     <navbar />
     <Business />
+   
     <Footer />
     <p class="text-center">
       <span class="display-inline">
@@ -19,19 +20,32 @@
 </template>
 
 <script>
-import navbar from "@/components/navbar";
-import Business from "../components/businessf/business";
-import Footer from "../components/footer";
+import navbar from '@/components/navbar';
+import Business from '../components/businessf/business';
+import Footer from '../components/footer';
+
 
 export default {
-  name: "Home",
+  name: 'Home',
   components: {
     navbar,
     Business,
     Footer,
+   
   },
   data() {
-    return {};
+    return {
+      tabIndex: null,
+      tabs: ['#post', '#about', '#business', '#media', '#community'],
+    };
+  },
+  watch: {
+    $route(to, from) {
+      console.log(to.hash);
+      this.tabIndex = this.tabs.findIndex(tab => tab === to.hash);
+
+      console.log(from);
+    },
   },
   computed: {},
   methods: {},

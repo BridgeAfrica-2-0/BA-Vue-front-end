@@ -5,6 +5,7 @@
         <Button @click.native="strategy['all']" v-if="selectedId == 0" />
         <Button @click.native="strategy['network']" v-if="selectedId == 3" />
         <Button @click.native="strategy['market']" v-if="selectedId == 4" />
+        <Button @click.native="strategy['1']" v-if="selectedId == 1" />
 
         <Button @click.native="strategies" v-if="[2, 5].includes(selectedId)" />
       </template>
@@ -392,8 +393,6 @@
                 <fas-icon class="icons" :icon="['fas', 'hands-helping']" size="lg" />
                 Businesses
               </h6>
-
-              <Business />
             </div>
 
             <!-- filter out only people -->
@@ -468,7 +467,7 @@ import _ from 'lodash';
 
 import LyTab from '@/tab/src/index.vue';
 import Map from '@/components/search/map';
-import Business from '@/components/search/business';
+//import Business from '@/components/search/business';
 import People from '@/components/search/people';
 import Network from '@/components/search/network';
 import Post from '@/components/search/posts';
@@ -490,6 +489,8 @@ import Button from '@/components/ButtonNavBarFind';
 
 import { PostComponent, PeopleComponent } from '@/components/search';
 
+import BusinessComponent from '@/components/search/business';
+
 import { loader } from '@/mixins';
 
 import { mapActions } from 'vuex';
@@ -503,9 +504,9 @@ export default {
     Filters,
     Map,
     Sponsor,
-
-    Business,
-    People, 
+    BusinessComponent,
+    //Business,
+    People,
     Network,
     Post,
     Market,
@@ -534,6 +535,7 @@ export default {
       all: () => this.getKeyword(),
       market: () => this.searchProducts(),
       network: () => this.searchNetworks(),
+      business: () => this.onFindBusiness(),
     };
     this.getKeyword();
     this.initialize();
@@ -1518,6 +1520,16 @@ export default {
         });
     },
 
+    onFindBusiness() {
+      this.$store.commit('business/setLoading', true);
+
+      console.log('loolodidhd ddhdjddh');
+      console.log(this.searchParams.keyword.trim());
+      if (this.searchParams.keyword.trim())
+        this.findBusiness({ keyword: this.searchParams.keyword, location: this.searchParams.location });
+      this.$store.commit('business/setLoading', false);
+    },
+
     async getProducts() {
       this.prodLoader = true;
       console.log('loader: ', this.prodLoader);
@@ -1578,28 +1590,33 @@ export default {
       stack: 'search/STACK_VALUE',
       setCallback: 'search/SET_CURRENT_PAGINATE_CALLBACK',
       reset: 'search/RESET_RESULT',
+      findBusiness: 'business/FIND_BUSINESS',
     }),
 
     initialize() {
       this.strategy = {
         2: () => this.onFindUser(),
         5: () => this.onFindPost(),
+        1: () => this.onFindBusiness(),
       };
 
       this.strategyForPlaceHolder = {
         2: () => 'Find User',
         5: () => 'Find Post',
         0: () => 'All',
+        1: () => 'Find Businesses',
       };
 
       this.strategyForComponent = {
         2: () => PeopleComponent,
         5: () => PostComponent,
+        1: () => BusinessComponent,
       };
 
       this.strategyForNotFoundComponentTitle = {
         2: () => 'Not Find users',
         5: () => 'Not Find posts',
+        1: () => 'Not Find Business',
       };
 
       this.changePlaceHolder();

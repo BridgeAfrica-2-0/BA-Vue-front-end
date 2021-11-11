@@ -125,6 +125,20 @@ export default {
   },
   computed: {},
 
+    created() {
+    this.foll_id = this.$route.params.id;  
+
+    this.$store
+      .dispatch("follower/loadUserPostIntro", this.foll_id)
+      .then((response) => {
+        this.isloaded = true;
+      })
+      .catch((error) => {
+        console.log({ error: error });
+      });
+  },
+  
+
   mounted() {
     this.url_data = this.$route.params.id;
 

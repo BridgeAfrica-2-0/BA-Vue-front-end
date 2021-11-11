@@ -1,25 +1,15 @@
 <template>
   <div>
-   
-
-
-
-
-
-
-           
-    <div class="people-style shadow">
+    <div class="people-style p-3 shadow">
       <b-row>
         <b-col cols="5" lg="4" sm="4" md="5">
-         <div class="center-img" >
-            <img   @click="productDetails"
-              src="https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg"
-              
-              class="r-image"
+          <div class="center-img">
+            <img
+              :src="product.picture"
+              class="r-image cursor-pointer"
+              @click="productDetails"
             />
           </div>
-
-               
         </b-col>
         <b-col cols="7" sm="8" md="7" >
          <p class="text">
@@ -67,7 +57,7 @@
 
 
 
-
+<div>
     <b-modal
       v-model="viewProduct"
       hide-footer
@@ -99,10 +89,9 @@
           <hr />
           <h5>{{$t("businessf.Product_Description")}}</h5>
           <p>
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Corporis
-            quod, reprehenderit neque atque recusandae laborum quia vel,
-            assumenda repellendus rem ab ex, odio aperiam quidem id deleniti
-            commodi consequatur optio.
+            <b-button variant="primary" @click="handleAddToCard"
+              ><span>{{$t("businessf.Add_to_Cart")}}</span>
+            </b-button>
           </p>
           <hr />
 
@@ -170,19 +159,134 @@
         </b-col>
       </b-row>
     </b-modal>
+      <!-- <div>
+        <br />
+      </div> -->
+    </div>
+    <!-- EDIT PRODUCT MODAL -->
+
+    <b-modal hide-footer title="$t('businessf.Edit_product')">
+      <b-form>
+        <b-row>
+          <b-col cols="12" md="6">
+            <b-form-group
+              id="input-group-1"
+              :label="$t('businessf.Product_Name')"
+              label-for="input-1"
+              label-size="sm"
+            >
+              <b-form-input
+                id="input-1"
+                class="mt-1"
+                type="text"
+                required
+              ></b-form-input>
+            </b-form-group>
+
+            <b-form-group
+              id="input-group-1"
+              :label="$t('businessf.Product_Description')"
+              label-for="input-1"
+              label-size="sm"
+            >
+              <b-textarea
+                id="input-1"
+                class="mt-2"
+                type="text"
+                required
+              ></b-textarea>
+            </b-form-group>
+          </b-col>
+          <b-col cols="12" md="6">
+            <div class="image-upload-wrap">
+              <a href="#" data-toggle="modal" data-target="#createalbumModal">
+                <div class="drag-text">
+                  <i class="fa fa-plus"></i>
+                  <h6>{{$t("businessf.Product_Image")}}</h6>
+                </div>
+              </a>
+              <div></div>
+            </div>
+          </b-col>
+        </b-row>
+
+        <b-form-group
+          id="input-group-1"
+          :label="$t('businessf.product_Price')"
+          label-for="input-1"
+          label-size="sm"
+        >
+          <b-form-input class="mt-1" id="price"></b-form-input>
+        </b-form-group>
+
+        <b-form-checkbox
+          id="checkbox-1"
+          name="checkbox-1"
+          value="accepted"
+          unchecked-value="not_accepted"
+        >
+          {{$t("businessf.This_Product_Is_On_Discount")}}
+        </b-form-checkbox>
+
+        <b-form-group
+          id="conditions"
+          :label="$t('businessf.Conditions')"
+          label-for="input-1"
+          label-size="sm"
+        >
+          <b-form-input class="mt-1" id="conditions"></b-form-input>
+        </b-form-group>
+
+        <b-form-checkbox
+          id="checkbox-1"
+          name="checkbox-1"
+          value="accepted"
+          unchecked-value="not_accepted"
+        >
+          {{$t("businessf.This_Item_Is_A_Service")}} ?
+        </b-form-checkbox>
+
+        <b-form-checkbox
+          id="checkbox-1"
+          name="checkbox-1"
+          value="accepted"
+          unchecked-value="not_accepted"
+        >
+          {{$t("businessf.In_stock")}}
+        </b-form-checkbox>
+
+        <b-form-checkbox
+          id="checkbox-1"
+          name="checkbox-1"
+          value="accepted"
+          unchecked-value="not_accepted"
+        >
+          {{$t("businessf.Published")}}
+        </b-form-checkbox>
+
+        <b-button class="mt-2 btn-block" variant="primary"> {{$t("businessf.Add")}}</b-button>
+      </b-form>
+    </b-modal>
+     PRODUCT DETAILS MODAL
+    <ProductDetails
+      @closemodal="closeDetailsProduct"
+      :showModal="viewProduct"
+      :product="product"
+      /> 
   </div>
 </template>
 
 <script>
-import Comment from "./comment";
+import ProductDetails from "./ProductDetails.vue";
 export default {
+  props: ["product"],
   data() {
     return {
       viewProduct: false,
     };
   },
   components: {
-    Comment,
+    ProductDetails,
   },
   methods: {
     /**
@@ -193,6 +297,13 @@ export default {
     productDetails() {
       this.viewProduct = true;
     },
+    closeDetailsProduct() {
+      this.viewProduct = false;
+    },
+    handleAddToCard() {
+      console.log("add to card");
+      this.$store.dispatch("cart/addToCart", this.product.id);
+    },
   },
 };
 </script>
@@ -202,79 +313,8 @@ export default {
   color: orange;
   margin-left: 60px;
 }
-
-p {
-  text-align: left;
-}
-
-input {
-  border-radius: 15px;
-  padding: 5px;
-  border: solid 1px #ccc;
-  width: 250px;
-}
-input:focus {
-  outline-color: none;
-  border: none;
-}
-.post {
-  position: relative;
-  left: -24px;
-}
-
-.prod {
-  max-width: 14rem;
+.cursor-pointer {
   cursor: pointer;
-}
-.stock {
-  color: green;
-}
-.btn:focus {
-  outline: none;
-}
-.comment {
-  width: 90%;
-  border: solid 1px #ccc;
-  border-radius: 25px;
-  background-color: #ddd;
-  height: 35px;
-  padding-left: 10px;
-  margin-left: 20px;
-}
-.comment:focus {
-  outline: none;
-}
-.send-cmt {
-  position: relative;
-  margin-left: 93%;
-  top: -28px;
-  cursor: pointer;
-}
-
-h6 {
-  text-align: center;
-  font-weight: bold;
-}
-.short {
-  text-align: center;
-}
-.price {
-  text-align: center;
-}
-.buy {
-  border-radius: 0px;
-  width: 100%;
-}
-.reply {
-  cursor: pointer;
-}
-
-
-
-
-.discount {
-  color: orange;
-  margin-left: 60px;
 }
 
 p {
@@ -323,40 +363,25 @@ h6 {
 .reply {
   cursor: pointer;
 }
-
-
-
 
 @media only screen and (min-width: 768px) {
-
-
-.center-img{
-  margin-right: -60px;
+  .center-img {
+    margin-right: -60px;
+  }
 }
 
-
-}
-
-
-
-
-
-.buybtn{
+.buybtn {
   width: 100px;
 }
 
-.marketbtn{
- 
+.marketbtn {
   margin-bottom: 3px;
   float: right;
 }
 
-.price{
-
+.price {
   font-size: 18px;
 }
-
-
 
 .people-style {
   border-top-left-radius: 10px;
@@ -373,168 +398,115 @@ h6 {
   background-clip: border-box;
   border: 1px solid rgba(0, 0, 0, 0.125);
   margin-bottom: 10px;
-
-  padding: 3px;
- padding-bottom: 26px;
- 
-
 }
-
-
-
-
 
 @media only screen and (max-width: 540px) {
+  .text {
+    color: #000;
 
-
-
-  
-.text {
-  color: #000;
-  
-    font-family: 'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif;
+    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-weight: normal;
     font-size: 14px;
     line-height: 30px;
-    color: rgba(117,114,128,1);
+    color: rgba(117, 114, 128, 1);
     text-align: left;
 
-Font-weight: normal ;
-Line-height:20px ;
-font-style:normal;
+    font-weight: normal;
+    line-height: 20px;
+    font-style: normal;
 
+    padding: 1px;
+    text-align: left;
 
-padding: 1px;
-  text-align: left;
+    margin-left: -30px;
 
-  
+    line-height: 25px;
+  }
 
- margin-left: -30px;
+  .r-image {
+    border-top-left-radius: 10px;
 
-  line-height: 25px;
+    border-bottom-left-radius: 10px;
+
+    border-top-right-radius: 10px;
+
+    border-bottom-right-radius: 10px;
+
+    width: 100px;
+    height: 100px;
+    padding: 4px;
+  }
+
+  .title {
+    font-size: 16px;
+    color: black;
+
+    line-height: 35px;
+    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  }
+
+  .btn {
+    padding-top: 6px;
+    font-size: 10px;
+
+    height: 28px;
+    width: 85px;
+  }
 }
 
+@media only screen and (min-width: 540px) and (max-width: 762px) {
+  .text {
+    color: #000;
 
-
-.r-image {
-  
- border-top-left-radius: 10px;
-
-  border-bottom-left-radius: 10px;
-
-  border-top-right-radius: 10px;
-
-  border-bottom-right-radius: 10px;
-
-
-  width: 100px;
-
-height: 100px;
-padding: 4px;
-}
-
-
-.title{
-  font-size: 16px;
-   color:black;
- 
- line-height: 35px;
-  font-family: 'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif;
-}
-
-.btn{
-
-  padding-top: 6px;
-  font-size:10px;
-
-  Height : 28px;
-Width:85px;
-
-}
-
-
-}
-
-
-
-
-@media only screen and (min-width: 540px) and  (max-width: 762px) {
-
-
-
-
-.text {
-  color: #000;
-  
-    font-family: 'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif;
+    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-weight: normal;
     font-size: 14px;
     line-height: 30px;
-    color: rgba(117,114,128,1);
+    color: rgba(117, 114, 128, 1);
     text-align: left;
 
-Font-weight: normal ;
-Line-height:20px ;
-font-style:normal;
+    font-weight: normal;
+    line-height: 20px;
+    font-style: normal;
 
+    padding: 1px;
+    text-align: left;
 
-padding: 1px;
-  text-align: left;
+    margin-right: -5px;
 
-  
+    line-height: 25px;
+  }
 
-  margin-right: -5px;
+  .r-image {
+    border-top-left-radius: 10px;
 
-  line-height: 25px;
+    border-bottom-left-radius: 10px;
+
+    border-top-right-radius: 10px;
+
+    border-bottom-right-radius: 10px;
+
+    height: 100px;
+    width: 100px;
+
+    padding: 4px;
+  }
+
+  .btn {
+    padding-top: 6px;
+
+    height: 38px;
+    min-width: 123px;
+  }
+
+  .title {
+    font-size: 20px;
+    color: black;
+
+    line-height: 35px;
+    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  }
 }
-
-
-
-
-.r-image {
-  
- border-top-left-radius: 10px;
-
-  border-bottom-left-radius: 10px;
-
-  border-top-right-radius: 10px;
-
-  border-bottom-right-radius: 10px;
-
-
-   Height : 100px;
-Width:100px;
-
-padding: 4px;
-}
-
-
-
-
-.btn{
-  padding-top: 6px;
-
-  Height : 38px;
-Width:123px
-
-}
-
-
-
-
-
-.title{
-  font-size: 20px;
-   color:black;
- 
- line-height: 35px;
-  font-family: 'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif;
-}
-
-}
-
-
-
 
 .discount {
   color: orange;
@@ -607,83 +579,57 @@ h6 {
   cursor: pointer;
 }
 
-
-
-
-
 @media only screen and (min-width: 762px) {
+  .text {
+    color: #000;
 
-
-
-
-.text {
-  color: #000;
-  
-    font-family: 'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif;
+    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-weight: normal;
     font-size: 14px;
     line-height: 30px;
-    color: rgba(117,114,128,1);
+    color: rgba(117, 114, 128, 1);
     text-align: left;
 
-Font-weight: normal ;
-Line-height:20px ;
-font-style:normal;
+    font-weight: normal;
+    line-height: 20px;
+    font-style: normal;
 
+    padding: 1px;
+    text-align: left;
 
-padding: 1px;
-  text-align: left;
+    margin-right: -5px;
 
-  
+    line-height: 25px;
+  }
 
-  margin-right: -5px;
+  .r-image {
+    border-top-left-radius: 10px;
 
-  line-height: 25px;
+    border-bottom-left-radius: 10px;
+
+    border-top-right-radius: 10px;
+
+    border-bottom-right-radius: 10px;
+
+    height: 160px;
+    width: 160px;
+
+    padding: 4px;
+  }
+
+  .btn {
+    padding-top: 6px;
+
+    height: 38px;
+    width: 123px;
+  }
+
+  .title {
+    font-size: 20px;
+    color: black;
+
+    line-height: 35px;
+    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  }
 }
-
-
-
-
-.r-image {
-  
- border-top-left-radius: 10px;
-
-  border-bottom-left-radius: 10px;
-
-  border-top-right-radius: 10px;
-
-  border-bottom-right-radius: 10px;
-
-
-   Height : 160px;
-Width:160px;
-
-padding: 4px;
-}
-
-
-
-
-.btn{
-  padding-top: 6px;
-
-  Height : 38px;
-Width:123px
-
-}
-
-
-
-
-
-.title{
-  font-size: 20px;
-   color:black;
- 
- line-height: 35px;
-  font-family: 'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif;
-}
-
-}
-
 </style>

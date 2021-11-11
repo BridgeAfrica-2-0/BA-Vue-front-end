@@ -151,7 +151,7 @@ export default {
   },
   actions: {
     async getNetworks({ commit }, networkId) {
-      const res = await axios.get(`network/${networkId}`);
+      const res = await axios.get(`/network/${networkId}`);
 
       commit("setNetwork", res.data);
     },

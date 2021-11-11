@@ -29,7 +29,7 @@
     <div class="botmediadess-position" v-if="loading">
       <b-spinner
         style="width: 3rem; height: 3rem; color: #e75c18"
-        label="Large Spinner"
+        :label="$t('profileowner.Large_Spinner')"
       ></b-spinner>
     </div>
     <b-modal hide-footer :id="`modal-${im.id}`" title="Details" size="md">
@@ -57,21 +57,21 @@
               </b-icon>
             </template>
             <b-dropdown-item @click="onDownloadPic()">
-              Download</b-dropdown-item
+              {{ $t('profileowner.Download') }}</b-dropdown-item
             >
             <b-dropdown-item
               href="#"
               @click="onSetProfilePic()"
               v-if="!['video'].includes(typeOfMedia())"
-              >Make Profile Picture</b-dropdown-item
+              >{{ $t('profileowner.Make_Profile_Picture') }}</b-dropdown-item
             >
             <b-dropdown-item
               @click="onSetCoverPic()"
               v-if="!['video'].includes(typeOfMedia())"
-              >Make Cover Photo</b-dropdown-item
+              >{{ $t('profileowner.Make_Cover_Photo') }}</b-dropdown-item
             >
             <b-dropdown-item href="#" @click="onDeleteImage()"
-              >Delete</b-dropdown-item
+              >{{ $t('profileowner.Delete') }}</b-dropdown-item
             >
           </b-dropdown>
         </li>

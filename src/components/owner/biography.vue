@@ -12,7 +12,7 @@
         @click="edit(1)"
         variant="primary"
         size="sm"
-      >Edit Profile
+      >{{ $t('profileowner.Edit_Profile') }}
       </button>
     </span>
     
@@ -40,9 +40,9 @@
           max-rows="6"
         ></b-form-textarea>
         <div class="pt-2 action-btn">
-          <b-button variant="success" type="submit">Save</b-button>
+          <b-button variant="success" type="submit">{{ $t('profileowner.Save') }}</b-button>
           <b-button class="ml-2" variant="primary" @click="edit(0)"
-            >Cancel</b-button
+            >{{ $t('profileowner.Cancel') }}</b-button
           >
         </div>
       </b-form>
@@ -108,7 +108,7 @@ export default {
         );
         console.log(this.biography, "Update Biography User Cancel ++++++");
         this.edited = true;
-        this.successmsg = "Profile was succesfully Cancelled";
+        this.successmsg = this.$t('profileowner.Profile_was_succesfully_Cancelled');
         setInterval(() => {
           this.edited = false;
         }, 2000);
@@ -117,7 +117,7 @@ export default {
     },
     save() {
       this.edited = true;
-      this.successmsg = "Profile was succesfully Edited";
+      this.successmsg = this.$t('profileowner.Profile_was_succesfully_Edited');
       this.editing = false;
       setInterval(() => {
         this.edited = false;

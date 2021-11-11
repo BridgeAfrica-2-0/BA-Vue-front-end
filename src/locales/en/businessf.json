@@ -163,7 +163,17 @@
     "Country":"Country",
     "Region":"Region",
     "Business_Email":"Business Email",
-    "Modify":"Modify"
+    "Modify":"Modify",
+    "Published":"Published",
+    "Add":"Add",
+    "Conditions":"Conditions",
+    "This_Product_Is_On_Discount":"This Product Is On Discount",
+    "product_Price":"product Price",
+    "Product_Image":"Product Image",
+    "Edit_product":"Edit product",
+    "Add_to_Cart":"Ajouter au panier",
+    "This_Item_Is_A_Service":"This Item Is A Service",
+    "In_stock":"In stock"
 
     
 

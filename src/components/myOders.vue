@@ -7,7 +7,10 @@
     ----------------------DEBUT -----------------------------------------------------
     -->
     <div id="hidemobile">
-      <div class="justify-content-between d-flex row cd B">
+      <div
+        class="justify-content-between d-flex row cd B"
+        style="margin-left: 8px"
+      >
         <div
           id="m1"
           class="mobile green t col transition pl-4"
@@ -42,8 +45,12 @@
         </div>
       </div>
 
-      <div class="justify-content-between container row my-4">
-        <div class="col order"><h3 class="margclear1">My orders</h3></div>
+      <!-- <div class="justify-content-between  row my-4">
+           <h3 class="margclear1 bold1 bg-danger">My orders</h3>
+            <h3 class="text-danger text-center margclear bg-warning">clear history</h3>
+            </div> -->
+      <div class="justify-content-between row my-4">
+        <div class="col order"><h3 class="margclear1 bold1">My orders</h3></div>
         <div class="col">
           <h3 class="text-danger text-center margclear">clear history</h3>
         </div>
@@ -65,32 +72,41 @@
             </div>
           </div>
           <div v-for="i in etat1" :key="i">
-            <div class="justify-content-start container row marghr">
-              <div class="justify-content-start container">
-                <div class="container d-flex justify-content-end btn-marg">
-                  <div class="manage">
-                    <b-dropdown
-                      variant="ligth"
-                      id="dropdown-1"
-                      text="Manage"
-                      class="m-md-2"
-                    >
-                      <b-dropdown-item>Archive</b-dropdown-item>
-                      <b-dropdown-item>Delete</b-dropdown-item>
-                    </b-dropdown>
-                  </div>
-                </div>
-                <span class="gras">Order</span>
-                <span class="text-success order">#12324253</span> <br />
-                <span class="flou">yaoundé 12/12/2021 12H00</span>
+            <!-- <div class="justify-content-start  row marghr"> -->
+            <!-- <div class="justify-content-start container"> -->
+
+            <div class="row">
+              <div class="col">
+                <span class="gras"
+                  >Order <span class="text-success order">#12324253</span>
+                  <br />
+                  <span class="flou row" style="margin-left: 1px"
+                    >yaoundé 12/12/2021 12H00</span
+                  >
+                </span>
               </div>
 
-              <span class="row posstatus">
-                <p class="h3 statusp">status:</p>
-              <h3 class="text-success h3 margstatus ">{{ i }}</h3>
-             </span>
+              <div class="col">
+                <div class="row drop">
+                  <b-dropdown
+                    variant="ligth"
+                    id="dropdown-1"
+                    text="Manage"
+                    class="m-md-2 noborder"
+                  >
+                    <b-dropdown-item>archive</b-dropdown-item>
+                    <b-dropdown-item>delete</b-dropdown-item>
+                  </b-dropdown>
+                </div>
 
+                <div class="row" style="margin-left: 73px; margin-top: 5px">
+                  <p class="h3">status:</p>
+                  <h3 class="text-success h3">{{ i }}</h3>
+                </div>
+              </div>
             </div>
+
+            
             <hr />
 
             <div class="justify-content-center row">
@@ -140,7 +156,7 @@
 
         <div v-if="status == 2" class="inprogress">
           <div class="show row">
-            <div class="col-4">Show:</div>
+            <div class="col-3">Show:</div>
             <div class="col">
               <b-form-select
                 v-model="selected"
@@ -148,32 +164,38 @@
               ></b-form-select>
             </div>
           </div>
-          <div v-for="i in 4" :key="i">
-            <div class="justify-content-start container row marghr">
-              <div class="justify-content-start container">
-                <div class="container d-flex justify-content-end btn-marg">
-                  <div class="manage">
-                    <b-dropdown
-                      variant="ligth"
-                      id="dropdown-1"
-                      text="Manage"
-                      class="m-md-2"
-                    >
-                      <b-dropdown-item>Archive</b-dropdown-item>
-                      <b-dropdown-item>Delete</b-dropdown-item>
-                    </b-dropdown>
-                  </div>
-                </div>
-                <span class="gras">Order</span>
-                <span class="text-success order">#12324253</span> <br />
-                <span class="flou">yaoundé 12/12/2021 12H00</span>
+          <div v-for="i in etat1" :key="i">
+            <div class="row">
+              <div class="col">
+                <span class="gras"
+                  >Order <span class="text-success order">#12324253</span>
+                  <br />
+                  <span class="flou row" style="margin-left: 1px"
+                    >yaoundé 12/12/2021 12H00</span
+                  >
+                </span>
               </div>
 
-               <span class="row posstatus">
-                <p class="h3 statusp">status:</p>
-              <h3 class="text-success h3 margstatus ">{{ etat }}</h3>
-             </span>
+              <div class="col">
+                <div class="row drop">
+                  <b-dropdown
+                    variant="ligth"
+                    id="dropdown-1"
+                    text="Manage"
+                    class="m-md-2"
+                  >
+                    <b-dropdown-item>archive</b-dropdown-item>
+                    <b-dropdown-item>delete</b-dropdown-item>
+                  </b-dropdown>
+                </div>
+
+                <div class="row" style="margin-left: 73px; margin-top: 5px">
+                  <p class="h3">status:</p>
+                  <h3 class="text-success h3">{{ etat }}</h3>
+                </div>
+              </div>
             </div>
+
             <hr />
 
             <div class="justify-content-center row">
@@ -223,7 +245,7 @@
 
         <div v-if="status == 3" class="complete">
           <div class="show row">
-            <div class="col-4">Show:</div>
+            <div class="col-3">Show:</div>
             <div class="col">
               <b-form-select
                 v-model="selected"
@@ -231,33 +253,38 @@
               ></b-form-select>
             </div>
           </div>
-          <div v-for="i in 4" :key="i">
-            <div class="justify-content-start container row marghr">
-              <div class="justify-content-start container">
-                <div class="container d-flex justify-content-end btn-marg">
-                  <div class="manage">
-                    <b-dropdown
-                      variant="ligth"
-                      id="dropdown-1"
-                      text="Manage"
-                      class="m-md-2"
-                    >
-                      <b-dropdown-item>Archive</b-dropdown-item>
-                      <b-dropdown-item>Delete</b-dropdown-item>
-                    </b-dropdown>
-                  </div>
-                </div>
-                <span class="gras">Order</span>
-                <span class="text-success order">#12324253</span> <br />
-                <span class="flou">yaoundé 12/12/2021 12H00</span>
+          <div v-for="i in etat1" :key="i">
+            <div class="row">
+              <div class="col">
+                <span class="gras"
+                  >Order <span class="text-success order">#12324253</span>
+                  <br />
+                  <span class="flou row" style="margin-left: 1px"
+                    >yaoundé 12/12/2021 12H00</span
+                  >
+                </span>
               </div>
 
-              <span class="row posstatus">
-                <p class="h3 statusp">status:</p>
-              <h3 class="text-success h3 margstatus ">{{ etat }}</h3>
-             </span>
+              <div class="col">
+                <div class="row drop">
+                  <b-dropdown
+                    variant="ligth"
+                    id="dropdown-1"
+                    text="Manage"
+                    class="m-md-2"
+                  >
+                    <b-dropdown-item>archive</b-dropdown-item>
+                    <b-dropdown-item>delete</b-dropdown-item>
+                  </b-dropdown>
+                </div>
 
+                <div class="row" style="margin-left: 73px; margin-top: 5px">
+                  <p class="h3">status:</p>
+                  <h3 class="text-success h3">{{ etat }}</h3>
+                </div>
+              </div>
             </div>
+
             <hr />
 
             <div class="justify-content-center row">
@@ -307,7 +334,7 @@
 
         <div v-if="status == 4" class="cancel">
           <div class="show row">
-            <div class="col-4">Show:</div>
+            <div class="col-3">Show:</div>
             <div class="col">
               <b-form-select
                 v-model="selected"
@@ -315,33 +342,38 @@
               ></b-form-select>
             </div>
           </div>
-          <div v-for="i in 4" :key="i">
-            <div class="justify-content-start container row marghr">
-              <div class="justify-content-start container">
-                <div class="container d-flex justify-content-end btn-marg">
-                  <div class="manage">
-                    <b-dropdown
-                      variant="ligth"
-                      id="dropdown-1"
-                      text="Manage"
-                      class="m-md-2"
-                    >
-                      <b-dropdown-item>Archive</b-dropdown-item>
-                      <b-dropdown-item>Delete</b-dropdown-item>
-                    </b-dropdown>
-                  </div>
-                </div>
-                <span class="gras">Order</span>
-                <span class="text-success order">#12324253</span> <br />
-                <span class="flou">yaoundé 12/12/2021 12H00</span>
+          <div v-for="i in etat1" :key="i">
+            <div class="row">
+              <div class="col">
+                <span class="gras"
+                  >Order <span class="text-success order">#12324253</span>
+                  <br />
+                  <span class="flou row" style="margin-left: 1px"
+                    >yaoundé 12/12/2021 12H00</span
+                  >
+                </span>
               </div>
 
-              <span class="row posstatus">
-                <p class="h3 statusp">status:</p>
-              <h3 class="text-success h3 margstatus ">{{ etat }}</h3>
-             </span>
+              <div class="col">
+                <div class="row drop">
+                  <b-dropdown
+                    variant="ligth"
+                    id="dropdown-1"
+                    text="Manage"
+                    class="m-md-2"
+                  >
+                    <b-dropdown-item>archive</b-dropdown-item>
+                    <b-dropdown-item>delete</b-dropdown-item>
+                  </b-dropdown>
+                </div>
 
+                <div class="row" style="margin-left: 73px; margin-top: 5px">
+                  <p class="h3">status:</p>
+                  <h3 class="text-success h3">{{ etat }}</h3>
+                </div>
+              </div>
             </div>
+
             <hr />
 
             <div class="justify-content-center row">
@@ -465,14 +497,14 @@
       </div>
 
       <div class="justify-content-between container row my-4">
-        <div class="col order"><h3>My orders</h3></div>
+        <div class="col order"><h3 class="bold1">My orders</h3></div>
         <div class="status"><h3 class="text-danger">clear history</h3></div>
       </div>
 
       <div>
         <div v-if="status == 1" class="inprogress">
           <div class="show row">
-            <div class="col-4">Show:</div>
+            <div class="col-3">Show:</div>
             <div class="col">
               <b-form-select
                 v-model="selected"
@@ -495,8 +527,10 @@
                   </b-dropdown>
                 </div>
               </div>
-              <span class="gras">Order</span>
-              <span class="text-success">#12324253</span> <br />
+              <router-link to="detail">
+                <span class="gras">Order</span>
+                <span class="text-success">#12324253</span> <br />
+              </router-link>
               <span class="flou">yaoundé 12/12/2021 12H00</span>
               <hr />
             </div>
@@ -549,7 +583,7 @@
 
         <div v-if="status == 2" class="inprogress">
           <div class="show row">
-            <div class="col-4">Show:</div>
+            <div class="col-3">Show:</div>
             <div class="col">
               <b-form-select
                 v-model="selected"
@@ -627,7 +661,7 @@
 
         <div v-if="status == 3" class="complete">
           <div class="show row">
-            <div class="col-4">Show:</div>
+            <div class="col-3">Show:</div>
             <div class="col">
               <b-form-select
                 v-model="selected"
@@ -705,7 +739,7 @@
 
         <div v-if="status == 4" class="canel">
           <div class="show row">
-            <div class="col-4">Show:</div>
+            <div class="col-3">Show:</div>
             <div class="col">
               <b-form-select
                 v-model="selected"
@@ -802,7 +836,7 @@ export default {
         { value: "a", text: "last 5 days" },
         { value: "b", text: "last 10 days" },
       ],
-      etat1: ["in progress", "complete", "cancel"],
+      etat1: ["pending", "complete", "cancel"],
     };
   },
 
@@ -857,8 +891,9 @@ export default {
   color: #b6b2b2;
 }
 .show {
+  margin-left: 2px;
   margin-bottom: 70px;
-  width: 280px;
+  width: 370px;
 }
 .manage {
   margin-bottom: -60px;
@@ -880,7 +915,7 @@ export default {
   width: 130px !important;
 }
 .parent {
-  margin-left: 40px;
+  margin-left: 10px;
 }
 .margd1 {
   margin-left: 50px;
@@ -929,6 +964,16 @@ h3 {
 /* end style for desktop ----------------------------- */
 
 /*  start style mobile------------------------- */
+
+.noborder{
+  border: none !important;
+}
+.drop {
+  height: 20px;
+  width: 30px;
+  padding-left: 88px;
+  /* position: absolute; */
+}
 .r-img1 {
   border-radius: 4px;
   height: 110px;
@@ -964,7 +1009,8 @@ h3 {
   font-size: 12px;
 }
 .margclear {
-  margin-left: 40px;
+  margin-left: 50px;
+  padding-left: 27px;
   margin-top: 30px;
   margin-bottom: -20px;
 }
@@ -972,7 +1018,7 @@ h3 {
   margin-top: 30px;
   margin-bottom: -20px;
 }
-.posstatus{
+.posstatus {
   margin-left: 195px;
   margin-top: -18px;
 }
@@ -1187,7 +1233,7 @@ h3 {
 }
 @media only screen and (max-width: 360px) {
   .margclear {
-    font-size: 12px;
+    font-size: 12px !important;
   }
 }
 @media only screen and (max-width: 768px) {
@@ -1207,12 +1253,12 @@ h3 {
     font-size: 12px !important;
   }
   .statusp {
-    margin-left: 16px;
+    margin-left: 86px;
   }
   .marghr {
     margin-bottom: -20px;
   }
-  .manage{
+  .manage {
     margin-top: -6px !important;
     margin-right: -12px !important;
   }
@@ -1225,10 +1271,10 @@ h3 {
     .cercle2 {
       margin-left: -4px !important;
     }
-    .manage{
-    margin-top: -6px !important;
-    margin-right: -12px !important;
-  }
+    .manage {
+      margin-top: -6px !important;
+      margin-right: -12px !important;
+    }
   }
 
   #hidedesktop {

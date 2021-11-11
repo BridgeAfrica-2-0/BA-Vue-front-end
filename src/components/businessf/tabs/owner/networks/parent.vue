@@ -1,10 +1,10 @@
 <template>
-  <div class="">
-    <b-card title="" class="">
+  <div>
+    <b-card v-if="networkInfo != 0" title="" class="">
       <b-container class="a-center">
         <!-- :src="require('@/assets/img/mayor.jpg')" -->
         <b-avatar
-          :src="networkInfo[0].image"
+          :src="networkInfo.image"
           variant="primary"
           square
           rounded
@@ -25,7 +25,7 @@
         <b-row>
           <b-col cols="6">
             <h6 class="m-0 p-0 a-center network-name">
-              <b> {{ networkInfo[0].name }}</b>
+              <b> {{ networkInfo.name }}</b>
             </h6>
           </b-col>
           <b-col cols="6">
@@ -57,7 +57,7 @@
               <p class="a-center">
                 <b-icon icon="people-fill" variant="primary"></b-icon>
                 <span class="pivate text">
-                  {{ nFormatter(networkInfo[0].community) }}
+                  {{ nFormatter(networkInfo.community) }}
                   community
                 </span>
               </p>
@@ -66,21 +66,24 @@
         </b-container>
         <h6 class="mt-2 font-weight-bolder title">About</h6>
         <p class="text-justify text">
-          <span v-if="networkInfo[0].description.length < 130">{{
-            networkInfo[0].description
+          <span v-if="networkInfo.description.length < 130">{{
+            networkInfo.description
           }}</span>
           <span v-else>{{
-            networkInfo[0].description.substring(0, 130) + moreText
+            networkInfo.description.substring(0, 130) + moreText
           }}</span>
           <span v-if="moreText === '...'" class="d-inline-block float-right">
             <a
-              @click="moreText = networkInfo[0].description"
+              @click="moreText = networkInfo.description"
               style="cursor: pointer"
               >lire la Suite</a
             >
           </span>
         </p>
       </b-card-text>
+    </b-card>
+    <b-card v-else class="text-center">
+      <b-spinner variant="primary" label="Text Centered" style="width: 3rem; height: 3rem;"></b-spinner>
     </b-card>
 
     <SidebarCommunity />
@@ -119,7 +122,6 @@
               type="text"
               rows="3"
               max-rows="6"
-              required
             ></b-form-textarea>
           </b-form-group>
 
@@ -149,8 +151,8 @@
           >
             <b-form-input
               id="tel-1"
-              v-model="updateNetwork_form.phone1"
-              name="phone1"
+              v-model="updateNetwork_form.primary_phone"
+              name="primary_phone"
               type="tel"
               required
             >
@@ -166,8 +168,8 @@
           >
             <b-form-input
               id="tel-2"
-              v-model="updateNetwork_form.phone2"
-              name="phone2"
+              v-model="updateNetwork_form.secondary_phone"
+              name="secondary_phone"
               type="tel"
               required
             >
@@ -217,7 +219,6 @@
             Network
           </b-button>
         </b-form>
-        <FlashMessage />
       </b-container>
     </b-modal>
 
@@ -254,7 +255,6 @@
             <h4>Edit Your New picture</h4>
           </div>
         </div>
-        <FlashMessage />
       </div>
       <b-button
         style="float: right"
@@ -270,10 +270,8 @@
 
 <script>
 import SidebarCommunity from "@/components/businessf/tabs/owner/networks/sidebarcommunity";
-
 export default {
   name: "parent",
-
   data() {
     return {
       url: null,
@@ -287,20 +285,19 @@ export default {
       overlay: false,
     };
   },
-
   components: {
-    SidebarCommunity,
+    SidebarCommunity
+  },
+
+  created() {
+    this.init();
+    // console.log(this.networkInfo);
   },
 
   computed: {
     networkInfo() {
       return this.$store.state.networkProfile.networkInfo;
     },
-  },
-
-  created() {
-    this.init();
-    console.log(this.networkInfo);
   },
 
   methods: {
@@ -312,16 +309,15 @@ export default {
     openNetwork() {
       this.networkShow = false;
     },
-
     addNetwork() {
       this.updateNetwork_form = {
-        name: this.networkInfo[0].name,
-        description: this.networkInfo[0].description,
-        email: this.networkInfo[0].email,
-        phone1: this.networkInfo[0].phone1,
-        phone2: this.networkInfo[0].phone2,
-        address: this.networkInfo[0].address,
-        allow_business: this.networkInfo[0].allow_business,
+        name: this.networkInfo.name,
+        description: this.networkInfo.description,
+        email: this.networkInfo.email,
+        primary_phone: this.networkInfo.primary_phone,
+        secondary_phone: this.networkInfo.secondary_phone,
+        address: this.networkInfo.address,
+        allow_business: this.networkInfo.allow_business,
       };
       console.log(this.networkInfo[0]);
       console.log("hello");
@@ -424,7 +420,6 @@ export default {
   text-align: center;
   align-content: center;
   justify-content: center;
-
   display: flex;
 }
 .b-none {
@@ -433,68 +428,53 @@ export default {
 .t-align {
   text-align: left;
 }
-
 .i-color {
   color: #e75c18;
 }
-
 @media only screen and (min-width: 768px) {
   .network-avatar-icon {
     position: absolute;
     width: 2rem;
     height: 2rem;
-
     top: 200px;
     margin-left: 200px;
-
     padding: 0px 0px;
     color: #ffff;
     background: #e75c18;
     border-radius: 25px;
     border: 4px solid #ffff;
   }
-
   .network-name {
     font-size: 20px;
   }
-
   .pivate {
     padding-left: 8px;
     text-align: left;
   }
-
   .network-logo {
     width: 200px !important;
     height: 200px !important;
   }
 }
-
 @media only screen and (max-width: 768px) {
   .network-logo {
     width: 200px !important;
     height: 200px !important;
   }
-
   .network-name {
     font-size: 16px;
   }
-
   .pivate {
     font-size: 12px;
-
     padding-left: 8px;
-
     text-align: left;
   }
-
   .network-avatar-icon {
     position: absolute;
     width: 2rem;
     height: 2rem;
-
     top: 200px;
     margin-left: 200px;
-
     padding: 0px 0px;
     color: #ffff;
     background: #e75c18;

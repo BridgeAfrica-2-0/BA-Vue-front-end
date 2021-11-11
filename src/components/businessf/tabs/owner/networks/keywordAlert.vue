@@ -6,14 +6,14 @@
           <b-container>
             <b-form-group
               label-cols-lg="3"
-              label="Keyword Alerts"
+              :label="$t('network.Keyword_Alerts')"
               label-size="md"
               label-class="font-weight-bold pt-0 username"
               class="mb-0 text"
             >
               <b-form-input
                 id="textarea"
-                placeholder="Enter keyword alert..."
+                :placeholder="$t('network.Enter_keyword_alert')"
                 rows="3"
                 max-rows="6"
               ></b-form-input>
@@ -26,7 +26,7 @@
       <b-container>
         <b-form-group
           label-cols-lg="2"
-          label="Keyword Alerts"
+          :label="$t('network.Keyword_Alerts')"
           label-size="md"
           label-class="font-weight-bold pt-0 username"
           class="mb-0 text"
@@ -38,7 +38,7 @@
             
             input-id="tags-separators"
             separator=" ,"
-            placeholder="Enter keyword alert separate by space or , ..."
+            :placeholder="$t('network.Enter_keyword_alert_separate_by_space_or')"
             rows="3"
             w-100
             max-rows="6"
@@ -53,7 +53,7 @@
           </div>
           <div class="col-1 m-1 text-end">
             
-            <b-button type="button" @click="addKeyword" variant="primary">Ajouter</b-button>
+            <b-button type="button" @click="addKeyword" variant="primary">{{ $t('network.Add') }}</b-button>
           </div>
         </div>
         </b-form-group>
@@ -90,21 +90,21 @@
                       >
                         <template #button-content>
                           <b-icon-three-dots-vertical></b-icon-three-dots-vertical
-                          ><span class="sr-only">Settings</span>
+                          ><span class="sr-only">{{ $t('network.Settings') }}</span>
                         </template>
 
                         <b-dropdown-item  href="#" @click="approvePost(post.id)">
-                          Approved
+                          {{ $t('network.Approved') }}
                         </b-dropdown-item>
                         <b-dropdown-item href="#" @click="unApprovePost(post.id)">
-                          decline
+                          {{ $t('network.Decline') }}
                         </b-dropdown-item>
                       </b-dropdown>
                     </span>
                   </h5>
                   <p>
                   {{  moment(post.created_at).fromNow() }}
-                    <span class="text-primary">Commented on a Post</span>
+                    <span class="text-primary">{{ $t('network.Commented_on_a_Post') }}</span>
                   </p>
                 </b-col>
               </b-row>
@@ -138,7 +138,7 @@
         <b-row>
           <b-col>
             <p class="text-center" v-if="allAlerts < 1">
-              No Keyword Alerts To Show
+              {{ $t('network.No_Keyword_Alerts_To_Show') }}
             </p>
           </b-col>
         </b-row>

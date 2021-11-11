@@ -45,7 +45,7 @@
       </div>
       <hr />
 
-      <div id="orderAllList">
+      <div>
         <div v-if="status == 1" class="inprogress">
           <div class="show row">
             <div class="col-3">Show:</div>
@@ -53,94 +53,93 @@
               <b-form-select v-model="selected" :options="options"></b-form-select>
             </div>
           </div>
-
-          <div v-for="order in myOrders" :key="order.oderId">
-            <!-- <div class="justify-content-start  row marghr"> -->
-            <!-- <div class="justify-content-start container"> -->
-
-            <div class="row">
-              <div class="col">
-                <span class="gras"
-                  >Order <span class="text-success order">{{ order.oderId }}</span>
-                  <br />
-                  <span class="flou row" style="margin-left: 1px"
-                    ><span class="mr-1">{{ order.shippingAddress }}</span
-                    >- <span class="ml-1">{{ momentFormat(order.dateCreated) }}</span></span
-                  >
-                </span>
-              </div>
-
-              <div class="col">
-                <div class="row drop">
-                  <b-dropdown variant="ligth" id="dropdown-1" text="Manage" class="m-md-2 noborder">
-                    <b-dropdown-item>archive</b-dropdown-item>
-                    <b-dropdown-item>delete</b-dropdown-item>
-                  </b-dropdown>
+          <!-- ALL ORDERS MOBILE-->
+          <div id="orderAllList" class="allorders">
+            <div v-for="order in currentOrdersShow" :key="order.oderId">
+              <div class="row">
+                <div class="col">
+                  <span class="gras"
+                    >Order <span class="text-success order">{{ order.oderId }}</span>
+                    <br />
+                    <span class="flou row" style="margin-left: 1px"
+                      ><span class="mr-1">{{ order.shippingAddress }}</span
+                      >- <span class="ml-1">{{ momentFormat(order.dateCreated) }}</span></span
+                    >
+                  </span>
                 </div>
 
-                <div class="row" style="margin-left: 73px; margin-top: 20px">
-                  <p class="h3">status:</p>
-                  <h3 class="text-success h3">{{ order.status }}</h3>
+                <div class="col">
+                  <div class="row drop">
+                    <b-dropdown variant="ligth" id="dropdown-1" text="Manage" class="m-md-2 noborder">
+                      <b-dropdown-item>archive</b-dropdown-item>
+                      <b-dropdown-item>delete</b-dropdown-item>
+                    </b-dropdown>
+                  </div>
+
+                  <div class="row" style="margin-left: 73px; margin-top: 20px">
+                    <p class="h3">status:</p>
+                    <h3 class="text-success h3">{{ order.status }}</h3>
+                  </div>
                 </div>
               </div>
-            </div>
 
-            <hr />
+              <hr />
 
-            <div class="justify-content-center row">
-              <div class="col-4 margimg">
-                <splide :options="{ rewind: true }" class="r-img1">
-                  <splide-slide cl v-for="(im, index) in img" :key="index">
-                    <img :src="img[index]" class="r-img1" />
-                  </splide-slide>
-                </splide>
+              <div class="justify-content-center row">
+                <div class="col-4 margimg">
+                  <splide :options="{ rewind: true }" class="r-img1">
+                    <splide-slide cl v-for="(im, index) in img" :key="index">
+                      <img :src="img[index]" class="r-img1" />
+                    </splide-slide>
+                  </splide>
+                </div>
+
+                <div class="col-4 text-end">
+                  <h3 class="h3 margm2">Product Qte :</h3>
+                  <h3 class="h3 margm2">Price:</h3>
+
+                  <h3 class="h3 margm2">shipping cost:</h3>
+                  <h3 class="h3 margm2">Total :</h3>
+                </div>
+
+                <div class="col-4">
+                  <h3 class="h3">{{ order.Totalproduct }}</h3>
+
+                  <h3 class="h3">{{ order.Totalprice }}</h3>
+                  <h3 class="h3">{{ order.shipping_cost }}</h3>
+                  <h3 class="h3">{{ order.total }}</h3>
+                </div>
               </div>
 
-              <div class="col-4 text-end">
-                <h3 class="h3 margm2">Product Qte :</h3>
-                <h3 class="h3 margm2">Price:</h3>
-
-                <h3 class="h3 margm2">shipping cost:</h3>
-                <h3 class="h3 margm2">Total :</h3>
+              <div class="justify-content-center container row">
+                <br />
               </div>
 
-              <div class="col-4">
-                <h3 class="h3">{{ order.Totalproduct }}</h3>
-
-                <h3 class="h3">{{ order.Totalprice }}</h3>
-                <h3 class="h3">{{ order.shipping_cost }}</h3>
-                <h3 class="h3">{{ order.total }}</h3>
+              <div class="justify-content-center container row">
+                <div class="">
+                  <button class="buttonm btn shadow text-center">
+                    <h3 class="h3 button-text">Re-order</h3>
+                  </button>
+                </div>
               </div>
-            </div>
-
-            <div class="justify-content-center container row">
-              <br />
-            </div>
-
-            <div class="justify-content-center container row">
-              <div class="">
-                <button class="buttonm btn shadow text-center">
-                  <h3 class="h3 button-text">Re-order</h3>
-                </button>
+              <div class="justify-content-center container row">
+                <br />
+                <br />
               </div>
+              <!-- <hr /> -->
             </div>
-            <div class="justify-content-center container row">
-              <br />
-              <br />
+            <div class="d-flex justify-content-center mb-4" v-if="isLoadingAll">
+              <b-spinner style="width: 3rem; height: 3rem;" label="Loading..."></b-spinner>
             </div>
-            <!-- <hr /> -->
-          </div>
-          <div class="d-flex justify-content-center mb-4" v-if="isLoadingAll">
-            <b-spinner style="width: 3rem; height: 3rem;" label="Loading..."></b-spinner>
-          </div>
-          <div class="col-12 d-flex justify-content-center">
-            <b-pagination
-              v-model="currentPageAll"
-              pills
-              aria-controls="orderAllList"
-              :per-page="per_page"
-              :total-rows="myOrders.length"
-            ></b-pagination>
+            <div class="col-12 d-flex justify-content-center">
+              <b-pagination
+                v-model="currentPageAll"
+                pills
+                aria-controls="orderAllList"
+                :per-page="per_page"
+                :total-rows="myOrders.length"
+              ></b-pagination>
+            </div>
           </div>
         </div>
 
@@ -151,75 +150,91 @@
               <b-form-select v-model="selected" :options="options"></b-form-select>
             </div>
           </div>
-          <div v-for="i in etat1" :key="i">
-            <div class="row">
-              <div class="col">
-                <span class="gras"
-                  >Order <span class="text-success order">#12324253</span>
-                  <br />
-                  <span class="flou row" style="margin-left: 1px">yaoundé 12/12/2021 12H00</span>
-                </span>
-              </div>
 
-              <div class="col">
-                <div class="row drop">
-                  <b-dropdown variant="ligth" id="dropdown-1" text="Manage" class="m-md-2">
-                    <b-dropdown-item>archive</b-dropdown-item>
-                    <b-dropdown-item>delete</b-dropdown-item>
-                  </b-dropdown>
+          <!-- IN PROGRESS ORDERS MOBILE -->
+          <div id="orderInProgress" class="inprogress-order">
+            <div v-for="order in currentOrdersPending" :key="order.oderId">
+              <div class="row">
+                <div class="col">
+                  <span class="gras"
+                    >Order <span class="text-success order">{{ order.oderId }}</span>
+                    <br />
+                    <span class="flou row" style="margin-left: 1px"
+                      ><span class="mr-1">{{ order.shippingAddress }}</span
+                      >- <span class="ml-1">{{ momentFormat(order.dateCreated) }}</span></span
+                    >
+                  </span>
                 </div>
 
-                <div class="row" style="margin-left: 73px; margin-top: 5px">
-                  <p class="h3">status:</p>
-                  <h3 class="text-success h3">{{ etat }}</h3>
+                <div class="col">
+                  <div class="row drop">
+                    <b-dropdown variant="ligth" id="dropdown-1" text="Manage" class="m-md-2 noborder">
+                      <b-dropdown-item>archive</b-dropdown-item>
+                      <b-dropdown-item>delete</b-dropdown-item>
+                    </b-dropdown>
+                  </div>
+
+                  <div class="row" style="margin-left: 73px; margin-top: 20px">
+                    <p class="h3">status:</p>
+                    <h3 class="text-success h3">{{ order.status }}</h3>
+                  </div>
                 </div>
               </div>
-            </div>
 
-            <hr />
+              <hr />
 
-            <div class="justify-content-center row">
-              <div class="col-4 margimg">
-                <splide :options="{ rewind: true }" class="r-img1">
-                  <splide-slide cl v-for="(im, index) in img" :key="index">
-                    <img :src="img[index]" class="r-img1" />
-                  </splide-slide>
-                </splide>
+              <div class="justify-content-center row">
+                <div class="col-4 margimg">
+                  <splide :options="{ rewind: true }" class="r-img1">
+                    <splide-slide cl v-for="(im, index) in img" :key="index">
+                      <img :src="img[index]" class="r-img1" />
+                    </splide-slide>
+                  </splide>
+                </div>
+
+                <div class="col-4 text-end">
+                  <h3 class="h3 margm2">Product Qte :</h3>
+                  <h3 class="h3 margm2">Price:</h3>
+
+                  <h3 class="h3 margm2">shipping cost:</h3>
+                  <h3 class="h3 margm2">Total :</h3>
+                </div>
+
+                <div class="col-4">
+                  <h3 class="h3">{{ order.Totalproduct }}</h3>
+
+                  <h3 class="h3">{{ order.Totalprice }}</h3>
+                  <h3 class="h3">{{ order.shipping_cost }}</h3>
+                  <h3 class="h3">{{ order.total }}</h3>
+                </div>
               </div>
 
-              <div class="col-4 text-end">
-                <h3 class="h3 margm2">Product Qte :</h3>
-                <h3 class="h3 margm2">Price:</h3>
-
-                <h3 class="h3 margm2">shipping cost:</h3>
-                <h3 class="h3 margm2">Total :</h3>
+              <div class="justify-content-center container row">
+                <br />
               </div>
 
-              <div class="col-4">
-                <h3 class="h3">4</h3>
-
-                <h3 class="h3">12000 XAF</h3>
-                <h3 class="h3">10000 XAF</h3>
-                <h3 class="h3">13000 XAF</h3>
+              <div class="justify-content-center container row">
+                <div class="">
+                  <button class="buttonm btn shadow text-center">
+                    <h3 class="h3 button-text">Re-order</h3>
+                  </button>
+                </div>
               </div>
-            </div>
-
-            <div class="justify-content-center container row">
-              <br />
-            </div>
-
-            <div class="justify-content-center container row">
-              <div class="">
-                <button class="buttonm btn shadow text-center">
-                  <h3 class="h3 button-text">Re-order</h3>
-                </button>
+              <div class="justify-content-center container row">
+                <br />
+                <br />
               </div>
+              <!-- <hr /> -->
             </div>
-            <div class="justify-content-center container row">
-              <br />
-              <br />
+            <div class="col-12 d-flex justify-content-center">
+              <b-pagination
+                v-model="currentPagePending"
+                pills
+                aria-controls="orderInProgress"
+                :per-page="per_page"
+                :total-rows="ordersPending.length"
+              ></b-pagination>
             </div>
-            <!-- <hr /> -->
           </div>
         </div>
 
@@ -230,75 +245,90 @@
               <b-form-select v-model="selected" :options="options"></b-form-select>
             </div>
           </div>
-          <div v-for="i in etat1" :key="i">
-            <div class="row">
-              <div class="col">
-                <span class="gras"
-                  >Order <span class="text-success order">#12324253</span>
-                  <br />
-                  <span class="flou row" style="margin-left: 1px">yaoundé 12/12/2021 12H00</span>
-                </span>
-              </div>
-
-              <div class="col">
-                <div class="row drop">
-                  <b-dropdown variant="ligth" id="dropdown-1" text="Manage" class="m-md-2">
-                    <b-dropdown-item>archive</b-dropdown-item>
-                    <b-dropdown-item>delete</b-dropdown-item>
-                  </b-dropdown>
+          <!-- IN COMPLETE ORDERS MOBILE -->
+          <div id="orderComplete" class="complete-order">
+            <div v-for="order in currentOrdersComplete" :key="order.oderId">
+              <div class="row">
+                <div class="col">
+                  <span class="gras"
+                    >Order <span class="text-success order">{{ order.oderId }}</span>
+                    <br />
+                    <span class="flou row" style="margin-left: 1px"
+                      ><span class="mr-1">{{ order.shippingAddress }}</span
+                      >- <span class="ml-1">{{ momentFormat(order.dateCreated) }}</span></span
+                    >
+                  </span>
                 </div>
 
-                <div class="row" style="margin-left: 73px; margin-top: 5px">
-                  <p class="h3">status:</p>
-                  <h3 class="text-success h3">{{ etat }}</h3>
+                <div class="col">
+                  <div class="row drop">
+                    <b-dropdown variant="ligth" id="dropdown-1" text="Manage" class="m-md-2 noborder">
+                      <b-dropdown-item>archive</b-dropdown-item>
+                      <b-dropdown-item>delete</b-dropdown-item>
+                    </b-dropdown>
+                  </div>
+
+                  <div class="row" style="margin-left: 73px; margin-top: 20px">
+                    <p class="h3">status:</p>
+                    <h3 class="text-success h3">{{ order.status }}</h3>
+                  </div>
                 </div>
               </div>
-            </div>
 
-            <hr />
+              <hr />
 
-            <div class="justify-content-center row">
-              <div class="col-4 margimg">
-                <splide :options="{ rewind: true }" class="r-img1">
-                  <splide-slide cl v-for="(im, index) in img" :key="index">
-                    <img :src="img[index]" class="r-img1" />
-                  </splide-slide>
-                </splide>
+              <div class="justify-content-center row">
+                <div class="col-4 margimg">
+                  <splide :options="{ rewind: true }" class="r-img1">
+                    <splide-slide cl v-for="(im, index) in img" :key="index">
+                      <img :src="img[index]" class="r-img1" />
+                    </splide-slide>
+                  </splide>
+                </div>
+
+                <div class="col-4 text-end">
+                  <h3 class="h3 margm2">Product Qte :</h3>
+                  <h3 class="h3 margm2">Price:</h3>
+
+                  <h3 class="h3 margm2">shipping cost:</h3>
+                  <h3 class="h3 margm2">Total :</h3>
+                </div>
+
+                <div class="col-4">
+                  <h3 class="h3">{{ order.Totalproduct }}</h3>
+
+                  <h3 class="h3">{{ order.Totalprice }}</h3>
+                  <h3 class="h3">{{ order.shipping_cost }}</h3>
+                  <h3 class="h3">{{ order.total }}</h3>
+                </div>
               </div>
 
-              <div class="col-4 text-end">
-                <h3 class="h3 margm2">Product Qte :</h3>
-                <h3 class="h3 margm2">Price:</h3>
-
-                <h3 class="h3 margm2">shipping cost:</h3>
-                <h3 class="h3 margm2">Total :</h3>
+              <div class="justify-content-center container row">
+                <br />
               </div>
 
-              <div class="col-4">
-                <h3 class="h3">4</h3>
-
-                <h3 class="h3">12000 XAF</h3>
-                <h3 class="h3">10000 XAF</h3>
-                <h3 class="h3">13000 XAF</h3>
+              <div class="justify-content-center container row">
+                <div class="">
+                  <button class="buttonm btn shadow text-center">
+                    <h3 class="h3 button-text">Re-order</h3>
+                  </button>
+                </div>
               </div>
-            </div>
-
-            <div class="justify-content-center container row">
-              <br />
-            </div>
-
-            <div class="justify-content-center container row">
-              <div class="">
-                <button class="buttonm btn shadow text-center">
-                  <h3 class="h3 button-text">Re-order</h3>
-                </button>
+              <div class="justify-content-center container row">
+                <br />
+                <br />
               </div>
+              <!-- <hr /> -->
             </div>
-            <div class="justify-content-center container row">
-              <br />
-              <br />
+            <div class="col-12 d-flex justify-content-center">
+              <b-pagination
+                v-model="currentPageComplete"
+                pills
+                aria-controls="orderComplete"
+                :per-page="per_page"
+                :total-rows="ordersComplete.length"
+              ></b-pagination>
             </div>
-            <!-- <hr /> -->
           </div>
         </div>
 
@@ -309,75 +339,90 @@
               <b-form-select v-model="selected" :options="options"></b-form-select>
             </div>
           </div>
-          <div v-for="i in etat1" :key="i">
-            <div class="row">
-              <div class="col">
-                <span class="gras"
-                  >Order <span class="text-success order">#12324253</span>
-                  <br />
-                  <span class="flou row" style="margin-left: 1px">yaoundé 12/12/2021 12H00</span>
-                </span>
-              </div>
-
-              <div class="col">
-                <div class="row drop">
-                  <b-dropdown variant="ligth" id="dropdown-1" text="Manage" class="m-md-2">
-                    <b-dropdown-item>archive</b-dropdown-item>
-                    <b-dropdown-item>delete</b-dropdown-item>
-                  </b-dropdown>
+          <!-- IN CANCEL ORDERS MOBILE -->
+          <div id="orderCancel" class="cancel-order">
+            <div v-for="order in currentOrdersCancel" :key="order.oderId">
+              <div class="row">
+                <div class="col">
+                  <span class="gras"
+                    >Order <span class="text-success order">{{ order.oderId }}</span>
+                    <br />
+                    <span class="flou row" style="margin-left: 1px"
+                      ><span class="mr-1">{{ order.shippingAddress }}</span
+                      >- <span class="ml-1">{{ momentFormat(order.dateCreated) }}</span></span
+                    >
+                  </span>
                 </div>
 
-                <div class="row" style="margin-left: 73px; margin-top: 5px">
-                  <p class="h3">status:</p>
-                  <h3 class="text-success h3">{{ etat }}</h3>
+                <div class="col">
+                  <div class="row drop">
+                    <b-dropdown variant="ligth" id="dropdown-1" text="Manage" class="m-md-2 noborder">
+                      <b-dropdown-item>archive</b-dropdown-item>
+                      <b-dropdown-item>delete</b-dropdown-item>
+                    </b-dropdown>
+                  </div>
+
+                  <div class="row" style="margin-left: 73px; margin-top: 20px">
+                    <p class="h3">status:</p>
+                    <h3 class="text-success h3">{{ order.status }}</h3>
+                  </div>
                 </div>
               </div>
-            </div>
 
-            <hr />
+              <hr />
 
-            <div class="justify-content-center row">
-              <div class="col-4 margimg">
-                <splide :options="{ rewind: true }" class="r-img1">
-                  <splide-slide cl v-for="(im, index) in img" :key="index">
-                    <img :src="img[index]" class="r-img1" />
-                  </splide-slide>
-                </splide>
+              <div class="justify-content-center row">
+                <div class="col-4 margimg">
+                  <splide :options="{ rewind: true }" class="r-img1">
+                    <splide-slide cl v-for="(im, index) in img" :key="index">
+                      <img :src="img[index]" class="r-img1" />
+                    </splide-slide>
+                  </splide>
+                </div>
+
+                <div class="col-4 text-end">
+                  <h3 class="h3 margm2">Product Qte :</h3>
+                  <h3 class="h3 margm2">Price:</h3>
+
+                  <h3 class="h3 margm2">shipping cost:</h3>
+                  <h3 class="h3 margm2">Total :</h3>
+                </div>
+
+                <div class="col-4">
+                  <h3 class="h3">{{ order.Totalproduct }}</h3>
+
+                  <h3 class="h3">{{ order.Totalprice }}</h3>
+                  <h3 class="h3">{{ order.shipping_cost }}</h3>
+                  <h3 class="h3">{{ order.total }}</h3>
+                </div>
               </div>
 
-              <div class="col-4 text-end">
-                <h3 class="h3 margm2">Product Qte :</h3>
-                <h3 class="h3 margm2">Price:</h3>
-
-                <h3 class="h3 margm2">shipping cost:</h3>
-                <h3 class="h3 margm2">Total :</h3>
+              <div class="justify-content-center container row">
+                <br />
               </div>
 
-              <div class="col-4">
-                <h3 class="h3">4</h3>
-
-                <h3 class="h3">12000 XAF</h3>
-                <h3 class="h3">10000 XAF</h3>
-                <h3 class="h3">13000 XAF</h3>
+              <div class="justify-content-center container row">
+                <div class="">
+                  <button class="buttonm btn shadow text-center">
+                    <h3 class="h3 button-text">Re-order</h3>
+                  </button>
+                </div>
               </div>
-            </div>
-
-            <div class="justify-content-center container row">
-              <br />
-            </div>
-
-            <div class="justify-content-center container row">
-              <div class="">
-                <button class="buttonm btn shadow text-center">
-                  <h3 class="h3 button-text">Re-order</h3>
-                </button>
+              <div class="justify-content-center container row">
+                <br />
+                <br />
               </div>
+              <!-- <hr /> -->
             </div>
-            <div class="justify-content-center container row">
-              <br />
-              <br />
+            <div class="col-12 d-flex justify-content-center">
+              <b-pagination
+                v-model="currentPageCancel"
+                pills
+                aria-controls="orderCancel"
+                :per-page="per_page"
+                :total-rows="ordersCancel.length"
+              ></b-pagination>
             </div>
-            <!-- <hr /> -->
           </div>
         </div>
       </div>
@@ -734,6 +779,7 @@
 <script>
 import navbar from './navbar.vue';
 import moment from 'moment';
+import { mapGetters } from 'vuex';
 
 export default {
   components: { navbar },
@@ -752,7 +798,15 @@ export default {
       etat1: ['pending', 'complete', 'cancel'],
       isLoadingAll: false,
       currentPageAll: 1,
+      currentPagePending: 1,
+      currentPageComplete: 1,
+      currentPageCancel: 1,
       per_page: 10,
+      formatObject: new Intl.NumberFormat('fr-FR', {
+        style: 'currency',
+        currency: 'XAF',
+        minimumFractionDigits: 2,
+      }),
     };
   },
 
@@ -798,11 +852,49 @@ export default {
     momentFormat(date) {
       return moment(date).calendar();
     },
+    formatMoney(money) {
+      return this.formatObject.format(money);
+    },
   },
   computed: {
     myOrders() {
-      return this.$store.state.profileOrders.myOrders;
+      return this.$store.getters['profileOrders/getAllOrders'];
     },
+    ordersPending() {
+      return this.$store.getters['profileOrders/getPendingOrders'];
+    },
+    ordersComplete() {
+      return this.$store.getters['profileOrders/getCompleteOrders'];
+    },
+    ordersCancel() {
+      return this.$store.getters['profileOrders/getCancelOrders'];
+    },
+    currentOrdersShow() {
+      return this.myOrders.slice((this.currentPageAll - 1) * this.per_page, this.currentPageAll * this.per_page);
+    },
+    currentOrdersPending() {
+      return this.ordersPending.slice(
+        (this.currentPagePending - 1) * this.per_page,
+        this.currentPagePending * this.per_page,
+      );
+    },
+    currentOrdersComplete() {
+      return this.ordersComplete.slice(
+        (this.currentPageComplete - 1) * this.per_page,
+        this.currentPageComplete * this.per_page,
+      );
+    },
+    currentOrdersCancel() {
+      return this.ordersCancel.slice(
+        (this.currentPageCancel - 1) * this.per_page,
+        this.currentPageCancel * this.per_page,
+      );
+    },
+  },
+  watch: {
+    // currentPageAll: function(val) {
+    //   this.orderForCurrentPage = this.myOrders.slice((val - 1) * this.per_page, val * this.per_page);
+    // },
   },
 
   beforeMount() {

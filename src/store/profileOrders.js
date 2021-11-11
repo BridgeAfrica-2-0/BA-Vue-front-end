@@ -2,7 +2,25 @@ import axios from 'axios';
 const state = {
   myOrders: [],
 };
-const getters = {};
+const getters = {
+  getAllOrders: state => {
+    return state.myOrders;
+  },
+  getPendingOrders: state => {
+    // state.myOrders.filter(order => order.status === 'pending')
+    // let tab =
+    // if (!tab) {
+    //   tab = [];
+    // }
+    return state.myOrders.filter(order => order.status === 'pending') || [];
+  },
+  getCompleteOrders: state => {
+    return state.myOrders.filter(order => order.status === 'complete') || [];
+  },
+  getCancelOrders: state => {
+    return state.myOrders.filter(order => order.status === 'cancel') || [];
+  },
+};
 const actions = {
   async getMyOrders({ commit }) {
     commit('removeOrder');

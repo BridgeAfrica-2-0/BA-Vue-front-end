@@ -192,7 +192,7 @@ var user = null;
 //     console.log(err)
 //   })
 
-import './bootstrap'
+import './notification'
 
 new Vue({
   router,

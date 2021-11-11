@@ -26,7 +26,7 @@
               v-b-modal.modal-4
             ></b-icon>
 
-            <b-modal id="modal-4" title="$t('businessf.Upload_Profile_Picture')">
+            <b-modal id="modal-4" :title="$t('businessf.Upload_Profile_Picture')">
               <div class="w3-container">
                 <div class="row pb-3">
                   <div

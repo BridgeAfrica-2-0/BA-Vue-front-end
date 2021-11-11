@@ -16,7 +16,7 @@
                 {{$t("businessf.Heavy_Gym")}}
                 <span class="float-right"> </span>
               </h5>
-              <p class="duration">1h Ago</p>
+              <p class="duration">{{$t("businessf.1h_Ago")}}</p>
             </b-col>
           </b-row>
           <b-row>
@@ -102,7 +102,7 @@
             </b-col>
             <b-col cols="10" md="11" class="pt-2">
               <h5 class="m-0 font-weight-bolder">{{$t("businessf.Heavy_Gym")}}</h5>
-              <p class="duration">1h Ago</p>
+              <p class="duration">{{$t("businessf.1h_Ago")}}</p>
             </b-col>
           </b-row>
           <b-row>
@@ -260,8 +260,8 @@
               ></b-avatar>
             </b-col>
             <b-col cols="10" md="11" class="pt-2">
-              <h5 class="m-0 font-weight-bolder">Heavy Gym</h5>
-              <p class="duration">1h Ago</p>
+              <h5 class="m-0 font-weight-bolder">{{$t("businessf.Heavy_Gym")}}</h5>
+              <p class="duration">{{$t("businessf.1h_Ago")}}</p>
             </b-col>
           </b-row>
           <b-row>
@@ -343,8 +343,8 @@
               ></b-avatar>
             </b-col>
             <b-col cols="10" md="11" class="pt-2">
-              <h5 class="m-0 font-weight-bolder">Heavy Gym</h5>
-              <p class="duration">1h Ago</p>
+              <h5 class="m-0 font-weight-bolder">{{$t("businessf.Heavy_Gym")}}</h5>
+              <p class="duration">{{$t("businessf.1h_Ago")}}</p>
             </b-col>
           </b-row>
           <b-row>

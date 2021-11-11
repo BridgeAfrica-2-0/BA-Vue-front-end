@@ -32,7 +32,7 @@
           </p>
 
 
-          <span class="float-right">    <b-button variant="primary" class=""> Buy now </b-button>     </span>
+          <span class="float-right">    <b-button variant="primary" class=""> {{$t("businessf.Buy_now")}} </b-button>     </span>
 
 
         </b-col>
@@ -71,7 +71,7 @@
     <b-modal
       v-model="viewProduct"
       hide-footer
-      title="Product Details"
+      title="$t('businessf.Product_Details')"
       size="xl"
     >
       <b-row>

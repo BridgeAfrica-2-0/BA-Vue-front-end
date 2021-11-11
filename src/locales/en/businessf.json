@@ -143,7 +143,29 @@
     "Business_Info":"Business Info",
     "Business_Roles":"Business Roles",
     "Payment":"Payment",
-    "Blocking":"Blocking"   
+    "Blocking":"Blocking",
+    "Your_payment_information_is_secure":"Your payment information is secure",
+    "Read_more":"Read more",
+    "Add_new_Credit_Debit_card":"Add new_Credit_Debit_card",
+    "Credit_Debit_card":"Credit Debit card",
+    "Read_More":"Read More",
+    "Product_Details":"Product Details",
+    "Open_now":"Open now",
+    "Type_the_name_of_person_or_group":"Type the name of person or group",
+    "Buy_now":"Buy now",
+    "item":"item",
+    "www_business_com":"www business com",
+    "Search_inbox":"Search inbox",
+    "Edit_Address":"Edit Address",
+    "Busness_Name":"Busness Name",
+    "Phone_Contact":"Phone Contact",
+    "Keywords":"Keywords",
+    "Country":"Country",
+    "Region":"Region",
+    "Business_Email":"Business Email",
+    "Modify":"Modify"
+
+    
 
 
 

@@ -127,12 +127,12 @@
       <b-row>
         <b-col cols="12" class="p-0">
           <b-tabs lazy content-class="mt-3 p-0" fill pills>
-            <b-tab  title="$t('businessf.Home')"><HomePage /></b-tab>
-            <b-tab title="$t('businessf.About')"><About /></b-tab>
-            <b-tab title="$t('businessf.Media')"><Media /></b-tab>
-            <b-tab title="$t('businessf.Market')"><MarketPlace /></b-tab>
-            <b-tab title="$t('businessf.Networks')"><Networks /></b-tab>
-            <b-tab title="$t('businessf.Community')"><Community /></b-tab>
+            <b-tab  :title="$t('businessf.Home')"><HomePage /></b-tab>
+            <b-tab :title="$t('businessf.About')"><About /></b-tab>
+            <b-tab :title="$t('businessf.Media')"><Media /></b-tab>
+            <b-tab :title="$t('businessf.Market')"><MarketPlace /></b-tab>
+            <b-tab :title="$t('businessf.Networks')"><Networks /></b-tab>
+            <b-tab :title="$t('businessf.Community')"><Community /></b-tab>
           </b-tabs>
         </b-col>
       </b-row>

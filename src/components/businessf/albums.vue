@@ -19,7 +19,7 @@
           ></b-img>
           <span class="album-text">
             <div>{{ post.name }}</div>
-            <span> {{ post.items.length }} item(s)</span>
+            <span> {{ post.items.length }} {{$t("businessf.item")}}(s)</span>
           </span>
           <b-dropdown
               class="options"

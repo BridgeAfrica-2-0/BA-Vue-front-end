@@ -29,7 +29,7 @@
               ></b-avatar>
             </b-col>
             <b-col cols="11">
-              <input placeholder="Post a Comment" class="comment" type="text" />
+              <input placeholder="$t('businessf.Post_a_Comment')" class="comment" type="text" />
 
               <fas-icon
                 class="primary send-cmt"

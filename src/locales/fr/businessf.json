@@ -141,7 +141,27 @@
     "Business_Info":"Informations sure l'entreprise",
     "Business_Roles":"Rôles des entreprise",
     "Payment":"Paiement",
-    "Blocking":"Blocage"   
+    "Blocking":"Blocage",
+    "Your_payment_information_is_secure":"Vos informations de paiement sont sécurisées",
+    "Read more":"Lire plus",
+    "Add_new_Credit_Debit_card":"Ajouter un nouvelle carte de crédit/débit",
+    "Credit_Debit_card":"Carte de crédit et de débit",
+    "Read_More":"Lire la suite",
+    "Product_Details":"Détails du produit",
+    "Open_now":"Ouvrir maintenant",
+    "Type_the_name_of_person_or_group":"Tapez le nom de la personne ou du groupe",
+    "Buy_now":"Achetez maintenant",
+    "item":"article",
+    "www_business_com":"www entreprise com",
+    "Search_inbox":"Recherche dans la boîte de réception",
+    "Edit_Address":"Modifier l'adresse",
+    "Busness_Name":"Noms de l'entreprise",
+    "Phone_Contact":"Contact Téléphone",
+    "Keywords":"Mots-clés",
+    "Country":"Pays",
+    "Region":"Région",
+    "Business_Email":"Courriel professionnel",
+    "Modify":"Modifier"
 
 }
         

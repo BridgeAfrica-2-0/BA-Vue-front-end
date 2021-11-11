@@ -59,7 +59,7 @@
             
 
              {{$t("businessf.super_best_car_seller_in_the_world")}} 
-            adipisicing elit. lorem epsep this is  <b-link>Read More</b-link>
+            adipisicing elit. lorem epsep this is  <b-link>{{$t("businessf.Read_More")}}</b-link>
           </p>
         </b-col>
 

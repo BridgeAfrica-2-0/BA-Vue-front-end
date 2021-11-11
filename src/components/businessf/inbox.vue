@@ -70,7 +70,7 @@
                   <b-avatar variant="primary" text="BV" size="40"></b-avatar>
                 </b-col>
                 <b-col>
-                  <h3 class="">Messages</h3>
+                  <h3 class="">{{$t("businessf.Messages")}}</h3>
                 </b-col>
                 <b-col>
                   <b-icon
@@ -83,7 +83,7 @@
               <input
                 type="text"
                 class="form-control"
-                placeholder="Search inbox"
+                placeholder="$t('businessf.Search_inbox')"
               />
             </div>
             <div>
@@ -221,7 +221,7 @@
                   <b-form-textarea
                     id="textarea"
                     v-model="text"
-                    placeholder="Enter something..."
+                    placeholder="$t('businessf.Enter_something')"
                   ></b-form-textarea>
                 </b-col>
                 <b-col class="col-2">
@@ -351,7 +351,7 @@
                       type="text"
                       name=""
                       class="form-control"
-                      placeholder="Type the name of person or group"
+                      placeholder="$t('businessf.Type_the_name_of_person_or_group')"
                     />
                   </b-col>
                 </b-row>

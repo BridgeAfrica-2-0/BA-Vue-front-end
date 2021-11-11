@@ -34,7 +34,7 @@
           id="Credit-card"
           name="credit-card"
           value="credit-card"
-          >Credit/Debit card</b-form-radio
+          >{{$t("businessf.Credit_Debit_card")}}</b-form-radio
         >
       </b-form-group>
 
@@ -55,14 +55,14 @@
 
       <div class=" mb-0">
         <b-icon icon="plus" class='b-color' ></b-icon>  
-        <b-link href="#">Add new Credit/Debit card</b-link>
+        <b-link href="#">{{$t("businessf.Add_new_Credit_Debit_card")}} </b-link>
       </div>
       <br />
 
       <div class=" mb-0">
         <p>
-          <b-icon icon="lock" class="b-color"></b-icon> Your payment
-          information is secure, <b-link href="#">Read more</b-link>
+          <b-icon icon="lock" class="b-color"></b-icon> {{$t("businessf.Your_payment_information_is_secure")}}
+          , <b-link href="#">{{$t("businessf.Read_more")}}</b-link>
         </p>
       </div>
     </b-container>

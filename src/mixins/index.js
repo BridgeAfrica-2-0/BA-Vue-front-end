@@ -157,7 +157,7 @@ export const commentMixinsBuisness = {
         comment: this.comment.comment_id,
         data: {
           comment: this.text,
-          networkId:this.profile.id,
+          networkId: this.profile.id,
         },
       });
 
@@ -267,10 +267,7 @@ export const commentMixins = {
         this.comment = Object.assign(this.comment, {
           reply_comment_count: this.comment.reply_comment_count + 1,
         });
-
-
       }
-
       this.createPostRequestIsActive = false
     },
 

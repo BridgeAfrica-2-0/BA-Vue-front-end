@@ -2,7 +2,7 @@
 import axios from "axios"
 
 class Repository {
-  async fetch({uuid, page}) {
+  async fetch({ uuid, page }) {
     try {
       const response = await axios.get(`post/comment/${uuid}/${page}`)
       return {
@@ -19,10 +19,10 @@ class Repository {
   }
   async get(uuid) {
     try {
-      const response = await axios.get(`siglepost/${uuid}`)
+      const response = await axios.get(`single/post/${uuid}`)
       return {
-        success: (response.data.data) ? true : false,
-        data: (response.data.data) ? response.data.data : []
+        success:true ,
+        data: response.data.data
       }
 
     } catch (error) {

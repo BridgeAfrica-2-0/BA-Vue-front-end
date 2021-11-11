@@ -206,6 +206,9 @@ export const commentMixins = {
     this.comment = this.item;
   },
   computed: {
+    ...mapGetters({
+      profile: 'auth/profilConnected',
+    }),
     icon() {
       return this.comment.is_liked ? "suit-heart-fill" : "suit-heart";
     },

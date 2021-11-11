@@ -1,15 +1,11 @@
 <template>
-  <b-row class="mt-4">
+  <b-row class="mt-4 p-3">
     <b-col cols="12" class="mt-4">
       <b-row>
         <b-col cols="2" md="1" class="m-0 p-0">
-          <b-avatar
-            class="d-inline-block avat"
-            variant="primary"
-            :src="post.logo_path"
-          ></b-avatar>
+          <b-avatar class="d-inline-block avat" variant="primary" :src="post.logo_path"></b-avatar>
         </b-col>
-        <b-col cols="10" md="11" class="pt-2" >
+        <b-col cols="10" md="11" class="pt-2">
           <h5 class="m-0 font-weight-bolder">
             {{ post.bussines_name }}
             <span class="float-right" v-if="isOwner || createDeleteRequestIsActive">
@@ -22,10 +18,7 @@
                   Edit
                 </b-dropdown-item-button>
 
-                <b-dropdown-item-button
-                  variant="danger"
-                  @click="removePost"
-                >
+                <b-dropdown-item-button variant="danger" @click="removePost">
                   <b-icon icon="trash-fill" aria-hidden="true"></b-icon>
                   Delete
                 </b-dropdown-item-button>
@@ -72,18 +65,11 @@
             {{ post.likes_count | nFormatter }}
           </span>
           <span class="cursor" @click="() => (showComment = !showComment)"
-            ><b-icon
-              icon="chat-fill"
-              variant="primary"
-              aria-hidden="true"
-            ></b-icon>
+            ><b-icon icon="chat-fill" variant="primary" aria-hidden="true"></b-icon>
             {{ post.comment_count | nFormatter }}
           </span>
           <span class="cursor">
-            <ShareButton
-              type="network"
-              :post="{ post_id: post.post_id, user_id: post.user_id }"
-            />
+            <ShareButton type="network" :post="{ post_id: post.post_id, user_id: post.user_id }" />
           </span>
         </b-col>
       </b-row>
@@ -115,40 +101,34 @@
       </b-row>
     </b-col>
     <b-col cols="12" class="mt-4" v-if="showComment">
-      <Comment
-        v-for="comment in comments"
-        :key="comment.id"
-        :item="comment"
-        :uuid="post.id"
-        type="comment"
-      />
+      <Comment v-for="comment in comments" :key="comment.id" :item="comment" :uuid="post.id" type="comment" />
     </b-col>
   </b-row>
 </template>
 
 <script>
-import { mapMutations } from "vuex";
-import Comment from "./comment";
-import { ShareButton } from "@/components/shareButton";
-import { formatNumber, fromNow } from "@/helpers";
+import { mapMutations, mapGetters } from 'vuex';
+import Comment from './comment';
+import { ShareButton } from '@/components/shareButton';
+import { formatNumber, fromNow } from '@/helpers';
 
 export default {
-  name: "postNetworkComponent",
+  name: 'postNetworkComponent',
   props: {
     item: {
       type: Object,
       required: true,
     },
-    isOwner:{
-      type:Boolean,
-      required:true
+    isOwner: {
+      type: Boolean,
+      required: true,
     },
-    editPost:{
-      required:true
+    editPost: {
+      required: true,
     },
-    deletePost:{
-      required:true
-    }
+    deletePost: {
+      required: true,
+    },
   },
   components: {
     Comment,
@@ -156,6 +136,7 @@ export default {
   },
 
   created() {
+    console.log(this.item);
     this.post = this.item;
   },
 
@@ -168,13 +149,16 @@ export default {
       processLike: false,
       createPostRequestIsActive: false,
       createDeleteRequestIsActive: false,
-      comment: "",
+      comment: '',
     };
   },
 
   computed: {
+    ...mapGetters({
+      profile: 'auth/profilConnected',
+    }),
     icon() {
-      return this.post.is_liked ? "suit-heart-fill" : "suit-heart";
+      return this.post.is_liked ? 'suit-heart-fill' : 'suit-heart';
     },
   },
 
@@ -191,15 +175,15 @@ export default {
     nFormatter: formatNumber,
     now: fromNow,
   },
-  
+
   methods: {
     ...mapMutations({
-      addNewComment: "networkProfile/updatePost",
+      addNewComment: 'networkProfile/updatePost',
     }),
 
-    removePost: async function(){
-      this.createDeleteRequestIsActive = true
-      this.createDeleteRequestIsActive = await this.deletePost()
+    removePost: async function () {
+      this.createDeleteRequestIsActive = true;
+      this.createDeleteRequestIsActive = await this.deletePost();
     },
 
     onLike: async function () {
@@ -225,8 +209,7 @@ export default {
     },
 
     onCreateComment: async function () {
-      if (!(this.comment.trim().length > 2 && !this.createPostRequestIsActive))
-        return false;
+      if (!(this.comment.trim().length > 2 && !this.createPostRequestIsActive)) return false;
       this.createPostRequestIsActive = true;
       const request = await this.$repository.share.createComment({
         post: this.post.id,
@@ -238,14 +221,14 @@ export default {
 
       if (request.success) {
         this.onShowComment();
-        this.comment = "";
-        this.addNewComment({ action: "add:comment:count", uuid: this.post.id });
+        this.comment = '';
+        this.addNewComment({ action: 'add:comment:count', uuid: this.post.id });
         this.post = {
           ...this.post,
           comment_count: this.post.comment_count + 1,
         };
         this.flashMessage.success({
-          message: "Post created",
+          message: 'Post created',
         });
       }
 

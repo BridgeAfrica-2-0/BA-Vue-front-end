@@ -1,6 +1,7 @@
 <template>
   <div class="settings-notifications">
     <!-- HEARDER -->
+
     <div class="d-flex justify-content-between align-items-end mb-4">
       <b-form-checkbox
         v-model="selectAll"
@@ -13,6 +14,7 @@
       </b-form-checkbox>
       <b-button class="btn-mark-as cursor-pointer" @click="handleMarkAsRead" variant="primary">Mark as Read</b-button>
     </div>
+    <b-alert :show="haveNotifications" variant="secondary">No Notifications</b-alert>
     <!-- NOTIFICATIONS CONTENT -->
     <div id="notifs">
       <!-- NOTIFICATIONS ITEMS -->
@@ -91,8 +93,28 @@ export default {
       ],
     };
   },
+  computed: {
+    haveNotifications() {
+      return !(this.notifs.length > 0);
+    },
+    checkedNotif() {
+      return this.notifs.map(notif => {
+        return {
+          id: notif.id,
+          status: this.selectedNotif.includes(notif.id) ? 'check' : 'uncheck',
+        };
+      });
+    },
+  },
   methods: {
     toggleAll(checked) {
+      if (!checked) {
+        this.selectNotif = [];
+        console.log('De selected all Notifs');
+      } else {
+        this.selectNotif = this.notifs.map(notif => notif.id);
+        console.log('All notifs', this.selectNotif);
+      }
       console.log('Selected All', checked);
     },
     selectNotif(value) {
@@ -117,12 +139,12 @@ export default {
       }
       console.log('No things to Delete');
     },
-    handleLoadNotificatifion(){
-        //GET user/notifications/page=?
-        //POST user/notifications/read
-        //id:1,2,3,5
-        //
-    }
+    handleLoadNotificatifion() {
+      //GET user/notifications/page=?
+      //POST user/notifications/read
+      //id:1,2,3,5
+      //
+    },
   },
 };
 </script>

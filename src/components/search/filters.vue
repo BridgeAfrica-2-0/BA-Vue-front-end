@@ -473,7 +473,7 @@
       </div>
 
       <br />
-      <b-button variant="primary" class="m-3 float-right">{{$t("search.Search0cc")}} </b-button>
+      <b-button variant="primary" class="m-3 float-right">{{$t("search.Search")}} </b-button>
     </b-modal>
   </div>
 </template>

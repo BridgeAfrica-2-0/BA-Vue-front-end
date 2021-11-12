@@ -1,7 +1,7 @@
 <template>
   <div>
 
-  <b-spinner v-if="prodLoader" variant="primary" label="Spinning"></b-spinner>
+  <b-spinner v-if="prodLoader" variant="primary" :label="$t('search.Spinning')"></b-spinner>
 
 <NotFound v-if="!business.data.length && !prodLoader" :title="title" />
     <div class="people-style shadow" v-for="biz in business.data" :key="biz.business_id">   
@@ -23,7 +23,7 @@
             <strong class="title"> {{biz.name}} </strong> <br />
             <span v-for="cat in biz.category" :key="cat.name"> {{cat.name}} </span>
             <br />
-            {{ count( biz.followers) }} Community <br />
+            {{ count( biz.followers) }} {{$t("search.Community")}} <br />
 
             <span class="location">
               <b-icon-geo-alt class="ico"></b-icon-geo-alt> {{ biz.country }}

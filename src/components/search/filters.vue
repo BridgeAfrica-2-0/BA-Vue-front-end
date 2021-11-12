@@ -20,7 +20,7 @@
 
         <b-spinner v-if="filterLoader" variant="primary" :label="$t('search.Spinning')"></b-spinner>
         <span v-if="subFilter.length">
-          <h6>Filters</h6>
+          <h6>{{$t("search.Filters")}}</h6>
           <b-form-radio
             v-for="(filter, i) in subFilter.slice(0, 4)"
             :key="i.value"
@@ -198,7 +198,7 @@
         size="sm"
         variant="outline-primary"
         @click="allSearchByCat({})"
-        >Reset</b-button
+        >{{$t("search.Reset")}}</b-button
       >
       <br />
       <!-- Category -->
@@ -441,7 +441,7 @@
     <b-modal ref="myfilters" id="distance" hide-footer title=" ">
       <b-form-group
         label-cols-lg="12"
-        :label="Distance"
+        :label="$t('search.Distance')"
         label-size="md"
         label-class="font-weight-bold pt-0 text-left"
         class="mb-0 text-left"
@@ -473,7 +473,7 @@
       </div>
 
       <br />
-      <b-button variant="primary" class="m-3 float-right"> Search </b-button>
+      <b-button variant="primary" class="m-3 float-right">{{$t("search.Search")}} </b-button>
     </b-modal>
   </div>
 </template>

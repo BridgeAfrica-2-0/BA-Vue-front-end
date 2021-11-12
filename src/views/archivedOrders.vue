@@ -34,6 +34,7 @@
               <div class="col">
                 <div class="row drop">
                   <b-dropdown variant="ligth" id="dropdown-1" text="Manage" class="m-md-2 noborder">
+                    <b-dropdown-item>Unarchived Order</b-dropdown-item>
                     <b-dropdown-item>delete</b-dropdown-item>
                   </b-dropdown>
                 </div>
@@ -97,23 +98,17 @@
     <div class="justify-content-between row"></div>
     <div class="hidedesktop" id="hidedesktop">
       <div class="justify-content-between container row my-4">
-        <div class="col order"><h3 class="bold1">Archived Orders</h3></div>
+        <div class="col order"><h3 class="bold1">Unarchived Orders</h3></div>
         <div class="status"><h3 class="text-danger">clear history</h3></div>
       </div>
-
-      <div>
+      <div class="mt-5">
         <div class="inprogress">
-          <div class="show row">
-            <div class="col-3">Show:</div>
-            <div class="col">
-              <b-form-select v-model="selected" :options="options"></b-form-select>
-            </div>
-          </div>
           <div v-for="i in etat1" :key="i">
             <div class="justify-content-start container">
               <div class="container d-flex justify-content-end btn-marg">
                 <div class="manage">
                   <b-dropdown variant="ligth" id="dropdown-1" text="Manage" class="m-md-2">
+                    <b-dropdown-item>Unarchived Order</b-dropdown-item>
                     <b-dropdown-item>Delete</b-dropdown-item>
                   </b-dropdown>
                 </div>

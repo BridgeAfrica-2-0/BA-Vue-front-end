@@ -1,5 +1,5 @@
 <template>
-  <header class="shadow-nav">
+  <header class="">
     <nav class="navbar navbar-expand-xl p-3 mb-3 rounded">
       <div class="container-fluid">
         <div class="col-md-12 col-lg-2 col-xl-2 text-center">

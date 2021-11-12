@@ -6,35 +6,10 @@
 </template>
 <script>
 /* eslint-disable */
-// import * as firebase from 'firebase/app';
-// import 'firebase/messaging';
 
-import { system } from '@/mixins';
+import { Redis } from '@/mixins';
 export default {
-  mixins: [system],
-  created() {
-    // try {
-    //   firebase
-    //     .messaging()
-    //     .requestPermission()
-    //     .then(() => {
-    //       console.log('Notification permission granted');
-    //       return firebase
-    //         .messaging()
-    //         .getToken()
-    //         .then((token) => {
-    //           console.info(token);
-    //           // this.$repository.post.SendToken(token)
-    //           return true;
-    //         })
-    //         .then(() => this.receiveMessage())
-    //         .catch((error) => console.error(error));
-    //     })
-    //     .catch((error) => console.error(error));
-    // } catch (error) {
-    //   console.log(error);
-    // }
-  },
+  mixins: [Redis],
 };
 </script>
 

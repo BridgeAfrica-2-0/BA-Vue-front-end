@@ -1,6 +1,4 @@
-
 // import * as firebase from 'firebase/app';
-
 // import 'firebase/messaging';
 
 import { mapGetters, mapActions, mapMutations } from "vuex";
@@ -11,7 +9,7 @@ import NoMoreData from "@/components/businessOwner/PaginationMessage"
 import ClipLoader from 'vue-spinner/src/ClipLoader.vue'
 
 
-export const notification = {
+export const FireBase = {
   data() {
     return {
       title: '',
@@ -24,7 +22,7 @@ export const notification = {
 
   methods: {
     receiveMessage() {
-      // console.log("call echo firebase")
+      console.log("call echo firebase")
       // try {
       //   firebase.messaging().onMessage((payload) => {
       //     // debugger
@@ -326,7 +324,7 @@ export const commentMixins = {
   },
 }
 
-export const system = {
+export const Pusher = {
 
   methods: {
     ...mapMutations({
@@ -335,8 +333,7 @@ export const system = {
       newNotificationNetwork: "notification/NEW_NETWORK_NOTIFICATION",
     }),
 
-    notification() {
-     
+    pusher() {
       // Network notification
       window.Echo.channel('network-11-5')
         .listen("NetworkNotificationEvent", payload => console.log(payload))
@@ -347,9 +344,72 @@ export const system = {
     }
   },
 
+  created() {
+    console.log("call echo pusher")
+    this.pusher()
+  }
+}
+
+export const Redis = {
+
+  methods: {
+    ...mapMutations({
+      newNotificationBusiness: "notification/NEW_BUSINESS_NOTIFICATION",
+      newNotificationProfile: "notification/NEW_PROFILE_NOTIFICATION",
+      newNotificationNetwork: "notification/NEW_NETWORK_NOTIFICATION",
+    }),
+
+    initBusinessNotification: async function () {
+      const response = this.$repository.notification.business()
+      if (response.status)
+        this.newNotificationBusiness({ init: true, data: response.data })
+    },
+
+    redis() {
+      window.Echo.channel('user.2')
+        .listen("UserEvent", payload => console.log(payload))
+    }
+  },
 
   created() {
-    console.log("call echo larave-echo")
-    this.notification()
+    this.initBusinessNotification()
+    console.log("call echo redis")
+    this.redis()
+  }
+}
+
+
+export const FirebaseNotification = {
+
+  methods: {
+
+    notified() {
+      // try {
+      //   firebase
+      //     .messaging()
+      //     .requestPermission()
+      //     .then(() => {
+      //       console.log('Notification permission granted');
+      //       return firebase
+      //         .messaging()
+      //         .getToken()
+      //         .then((token) => {
+      //           console.info(token);
+      //           // this.$repository.post.SendToken(token)
+      //           return true;
+      //         })
+      //         .then(() => this.receiveMessage())
+      //         .catch((error) => console.error(error));
+      //     })
+      //     .catch((error) => console.error(error));
+      // } catch (error) {
+      //   console.log(error);
+      // }
+    }
+  },
+
+  created() {
+    console.log("call laravel firebase")
+    this.notified()
   }
 }

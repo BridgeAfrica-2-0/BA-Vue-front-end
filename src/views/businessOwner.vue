@@ -14,29 +14,7 @@
       <hr width="100%" class="d-none" d-md-block />
     </div>
 
-    <div class=" " v-if="selectedId == '0'">
-      <Business />
-    </div>
-
-    <div class="mt-3" v-if="selectedId == '1'">
-      <Inbox />
-    </div>
-
-    <div class="mt-3" v-if="selectedId == '2'">
-      <Settings v-bind:currenttab="selectedId" />
-    </div>
-
-    <div class="mt-3" v-if="selectedId == '3'">
-      <Settings v-bind:currenttab="selectedId" />
-    </div>
-
-    <div class="mt-3" v-if="selectedId == '4'">
-      <Settings v-bind:currenttab="selectedId" />
-    </div>
-
-    <div class="mt-3" v-if="selectedId == '5'">
-      <Settings v-bind:currenttab="selectedId" />
-    </div>
+   
 
     <Footer />
   </div>

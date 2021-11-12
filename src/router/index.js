@@ -55,7 +55,6 @@ import ordersdetail from "@/views/odersDetail";
 import businessordersdetail from "@/views/businessordersdetail"
 
 import payment from "@/views/payment";
-import profileNotification from "@/views/profileNotification";
 
 
 Vue.use(VueRouter);
@@ -114,13 +113,6 @@ const routes = [
     name: "payment",
     component: payment
   },
-
-  {
-    path: "/notifications",
-    name: "all-notification",
-    component: profileNotification
-  },
-
   {
     path: "/govx",
     name: "govx",

@@ -60,8 +60,8 @@
                   <option value=" Current Location "></option>
                   <option value="Yaounde " />
                 </datalist>
-              </b-input-group>       
-            </span> 
+              </b-input-group>
+            </span>
           </form>
 
           <span class="d-none d-lg-block">
@@ -78,7 +78,6 @@
                 data-original-title=""
                 title=""
               />
-                
 
               <input
                 id="search-location"
@@ -295,16 +294,7 @@
                     <p class="font-weight-bold">Notifications</p>
                     <hr class="h-divider" />
 
-                    <div
-                      class="
-                        d-inline-flex
-                        flex-row
-                        align-items-center
-                        suggest-item
-                        cursor-pointer
-                      "
-                    >
-
+                    <div class="d-inline-flex flex-row align-items-center suggest-item cursor-pointer">
                       <div>
                         <img src="@/assets/img/profile-pic.jpg" class="rounded-circle" alt="" width="30" height="30" />
                       </div>
@@ -315,16 +305,7 @@
                     </div>
                     <hr class="h-divider" />
 
-                    <div
-                      class="
-                        d-inline-flex
-                        flex-row
-                        align-items-center
-                        suggest-item
-                        cursor-pointer
-                      "
-                    >
-
+                    <div class="d-inline-flex flex-row align-items-center suggest-item cursor-pointer">
                       <div>
                         <img src="@/assets/img/profile-pic.jpg" class="rounded-circle" alt="" width="30" height="30" />
                       </div>
@@ -335,16 +316,7 @@
                     </div>
                     <hr class="h-divider" />
 
-                    <div
-                      class="
-                        d-inline-flex
-                        flex-row
-                        align-items-center
-                        suggest-item
-                        cursor-pointer
-                      "
-                    >
-
+                    <div class="d-inline-flex flex-row align-items-center suggest-item cursor-pointer">
                       <div>
                         <img src="@/assets/img/profile-pic.jpg" class="rounded-circle" alt="" width="30" height="30" />
                       </div>
@@ -355,16 +327,7 @@
                     </div>
                     <hr class="h-divider" />
 
-                    <div
-                      class="
-                        d-inline-flex
-                        flex-row
-                        align-items-center
-                        suggest-item
-                        cursor-pointer
-                      "
-                    >
-
+                    <div class="d-inline-flex flex-row align-items-center suggest-item cursor-pointer">
                       <div>
                         <img src="@/assets/img/profile-pic.jpg" class="rounded-circle" alt="" width="30" height="30" />
                       </div>
@@ -375,16 +338,7 @@
                     </div>
                     <hr class="h-divider" />
 
-                    <div
-                      class="
-                        d-inline-flex
-                        flex-row
-                        align-items-center
-                        suggest-item
-                        cursor-pointer
-                      "
-                    >
-
+                    <div class="d-inline-flex flex-row align-items-center suggest-item cursor-pointer">
                       <div>
                         <img src="@/assets/img/profile-pic.jpg" class="rounded-circle" alt="" width="30" height="30" />
                       </div>
@@ -394,9 +348,9 @@
                       </div>
                     </div>
                     <hr class="h-divider" />
-                    <router-link :to="{name:'all-notification'}" class="text-ored"
-                      ><u>See all Notifications</u>
-                    </router-link>
+                    <a href="https://bridgeafrica.info/nav/notifications-view-all.html" class="text-ored"
+                      ><u>See all Notifications</u></a
+                    >
                   </div>
                 </b-popover>
               </div>
@@ -429,23 +383,19 @@
 
                     <hr />
 
-
                     <router-link
                       to="/myorders/"
                       class="other-menu suggest-item cursor-pointer text-decoration-none text-dark"
-
                     >
                       <span class="mr-2"><fas-icon class="violet search" :icon="['fas', 'cart-arrow-down']" /></span>
                       My orders
                     </router-link>
                     <hr class="h-divider" />
 
-
-
-                    <router-link :to="{name: 'settings'}" class="other-menu suggest-item cursor-pointer text-decoration-none text-dark">
+                    <a href="/settings" class="other-menu suggest-item cursor-pointer text-decoration-none text-dark">
                       <span class="mr-2"><fas-icon class="violet search" :icon="['fas', 'cogs']" /></span>
                       Account Settings
-                    </router-link>
+                    </a>
                     <hr class="h-divider" />
                     <div class="other-menu suggest-item cursor-pointer">
                       <span class="mr-1"><fas-icon class="violet search" :icon="['fas', 'question']" /></span>
@@ -459,12 +409,7 @@
                     <hr class="h-divider" />
                     <a
                       href="https://bridgeafrica.info/nav/owner-other-menu.html"
-                      class="
-                        other-menu
-                        suggest-item
-                        cursor-pointer
-                        text-decoration-none text-dark
-                      "
+                      class="other-menu suggest-item cursor-pointer text-decoration-none text-dark"
                     >
                       <span class="mr-2"><fas-icon class="violet search" :icon="['fas', 'sign-out-alt']" /></span>
                       Logout
@@ -503,18 +448,17 @@
 
             <hr class="mup" />
 
-
             <router-link to="/myorders/" class="other-menu suggest-item cursor-pointer text-decoration-none text-dark">
               <span class="mr-2"><fas-icon class="violet search" :icon="['fas', 'cart-arrow-down']" /></span>
               My orders
             </router-link>
             <hr class="h-divider" />
 
-            <router-link :to="{name: 'settings'}" class="other-menu suggest-item cursor-pointer text-decoration-none text-dark">
+            <a href="/settings" class="other-menu suggest-item cursor-pointer text-decoration-none text-dark">
               <span class="mr-2"><fas-icon class="violet search" :icon="['fas', 'cogs']" /></span>
 
               Account Settings
-            </router-link>
+            </a>
             <hr class="h-divider" />
             <div class="other-menu suggest-item cursor-pointer">
               <span class="mr-1"><fas-icon class="violet search" :icon="['fas', 'question']" /></span>
@@ -528,12 +472,7 @@
             <hr class="h-divider" />
             <a
               href="https://bridgeafrica.info/nav/owner-other-menu.html"
-              class="
-                other-menu
-                suggest-item
-                cursor-pointer
-                text-decoration-none text-dark
-              "
+              class="other-menu suggest-item cursor-pointer text-decoration-none text-dark"
             >
               <span class="mr-2"><fas-icon class="violet search" :icon="['fas', 'sign-out-alt']" /></span>
               Logout
@@ -548,51 +487,41 @@
 </template>
 
 <script>
-
 import Button from '@/components/ButtonNavBarFind.vue';
 import Activity from '@/components/ShowActivity.vue';
-
 import { mapGetters, mapActions } from 'vuex';
-
 export default {
   name: 'navbar',
   components: {
     Button,
     Activity,
-
   },
   props: {
     credentials: {
       type: Object,
       default: function () {
         return {
-
           keyword: '',
           placeholder: '',
         };
       },
-
     },
   },
-
   data() {
     return {
       isActive: false,
       shownav: false,
     };
   },
-
   computed: {
     ...mapGetters({
       hasLauchNetworkRequest: 'social/INIT',
       user: 'auth/profilConnected',
     }),
   },
-
   created() {
     this.init();
   },
-
   methods: {
     ...mapActions({
       setNetworks: 'social/FIND_USER_NETWORK',
@@ -603,35 +532,26 @@ export default {
       this.$refs.mobileinput.style.display = 'block';
       this.isActive = true;
     },
-
-
     getNetworks: async function () {
       let request = await this.$repository.share.getNetworks();
-
       if (request.success) this.setNetworks(request.data);
     },
-
     getBusiness: async function () {
       let request = await this.$repository.share.getBusiness();
-
       if (request.success) this.setBusiness(request.data);
     },
-
     init() {
       try {
         if (!this.hasLauchNetworkRequest) {
           console.log('init navbar', this.hasLauchNetworkRequest);
           this.getNetworks();
           this.getBusiness();
-
           this.lauchNetworkRequest();
         }
       } catch (error) {
         console.log(error);
       }
     },
-
-
     togglenav() {
       if (this.shownav == false) {
         this.shownav = true;
@@ -823,16 +743,16 @@ export default {
   }
 }
 .shadow-nav {
-    box-shadow: 0 0.25rem 0.5rem rgb(0 0 0 / 10%) !important;
+  box-shadow: 0 0.25rem 0.5rem rgb(0 0 0 / 10%) !important;
 }
 .mup {
   margin-top: -5px;
 }
 .fixed-top {
-    position: fixed;
-    top: 0;
-    right: 0;
-    left: 0;
-    z-index: 1030;
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 1030;
 }
 </style>

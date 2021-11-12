@@ -336,23 +336,20 @@ export const system = {
     }),
 
     notification() {
-      window.Echo.private('chat')
-        .listen('MessageSent', (e) => {
-          console.log(e)
-        });
+     
+      // Network notification
+      window.Echo.channel('network-11-5')
+        .listen("NetworkNotificationEvent", payload => console.log(payload))
+
+      // Business notification
+      window.Echo.channel('network-11-5')
+        .listen("NetworkNotificationEvent", payload => this.newNotificationBusiness(payload))
     }
   },
 
-  ready() {
-    var channel = this.$pusher.subscribe('dashboard');
-
-    channel.bind('user.log', ({ log }) => {
-      console.log(`User ${log.user.name} has ${log.action} at ${log.time}`);
-    });
-  },
 
   created() {
     console.log("call echo larave-echo")
-    // this.notification()
+    this.notification()
   }
 }

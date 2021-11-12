@@ -18,6 +18,9 @@ import networkDetails from "./networkDetails";
 
 // import dashboardCommunity from "./dashboardcommunity";
 
+
+
+import orderBusiness from './orderBusiness';
 import NetworkSettings from "./NetworkSettings";
 import checkout from "./checkout";
 import businessFollowers from "./businessFollowers";
@@ -79,7 +82,7 @@ export default new Vuex.Store({
         networkProfileMedia,
         networkProfileMemberRequest,
         networkProfile,
-
+        orderBusiness
 
     }
 });

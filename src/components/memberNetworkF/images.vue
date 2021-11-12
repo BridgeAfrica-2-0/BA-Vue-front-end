@@ -17,7 +17,7 @@
                 v-bind="imageProps"
               ></b-img>
             </a>
-            <b-modal hide-footer :id="'modal-'+image.media_id" title="Details">
+            <b-modal hide-footer :id="'modal-'+image.media_id" :title=" $t('network.Details')">
               <img class="card-img" :src="image.media_url" @click="() => showImg(index)" alt="media_img" />
               <p class="my-4">{{image.post_content[0]}}</p>
             </b-modal>

@@ -84,7 +84,7 @@
               ></b-avatar>
             </b-col>
             <b-col cols="9" md="11" class="p-0 m-0 pr-3">
-              <input placeholder="Post a Comment" class="comment" type="text" />
+              <input :placeholder="$t('network.Post_a_Comment')" class="comment" type="text" />
               <fas-icon
                 class="primary send-cmt"
                 :icon="['fas', 'paper-plane']"
@@ -235,7 +235,7 @@ export default {
           this.flashMessage.show({
             status: "success",
             blockClass: "custom-block-class",
-            message: "Post Deleted",
+            message: this.$t('network.Post_Deleted'),
           });
           // loader.hide();
         })
@@ -253,7 +253,7 @@ export default {
             this.flashMessage.show({
               status: "error",
               blockClass: "custom-block-class",
-              message: "Unable to Delete your Post",
+              message: "this.$t('network.Unable_to_Delete_your_Post')",
             });
             console.log({ err: err });
             // loader.hide();
@@ -301,7 +301,7 @@ export default {
           this.flashMessage.show({
             status: "success",
             blockClass: "custom-block-class",
-            message: "Content successfuly uploaded",
+            message: this.$t('network.Content_successfuly_uploaded'),
           });
           // loader.hide();
           this.$refs["modal-edit"].hide();
@@ -320,7 +320,7 @@ export default {
           } else {
             this.flashMessage.show({
               status: "error",
-              message: "Unable to Update your post",
+              message: this.$t('network.Unable_to_Update_your_post'),
               blockClass: "custom-block-class",
             });
             console.log({ err: err });
@@ -461,7 +461,7 @@ export default {
           this.flashMessage.show({
             status: "success",
             blockClass: "custom-block-class",
-            message: "Content successfuly uploaded",
+            message: this.$t('network.Content_successfuly_uploaded'),
           });
           // loader.hide()
           this.$refs["modal-xl"].hide();
@@ -480,7 +480,7 @@ export default {
           } else {
             this.flashMessage.show({
               status: "error",
-              message: "Unable to Create Your Post",
+              message:  this.$t('network.Unable_to_Create_Your_Post'),
               blockClass: "custom-block-class",
             });
             console.log({ err: err });

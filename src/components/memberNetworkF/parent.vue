@@ -32,9 +32,9 @@
             >
               <b-spinner v-if="SPcommunity" small></b-spinner>
               <b-icon v-if="!SPcommunity" icon="pencil"></b-icon> 
-              <span v-if="networkInfo.is_follow"> Unfollow</span> <span v-else> Follow</span>
+              <span v-if="networkInfo.is_follow">{{ $t('network.Unfollow') }} </span> <span v-else> Follow</span>
             </b-button>
-            <b-tooltip target="Follow-Unfollow" variant="secondary">Click To Follow/Unfollow</b-tooltip>
+            <b-tooltip target="Follow-Unfollow" variant="secondary">{{ $t('network.Click_To_Follow_Unfollow') }}</b-tooltip>
           </b-col>
         </b-row>
       </b-container>
@@ -47,7 +47,7 @@
             <b-col>
               <p class="a-center ">
                 <b-icon icon="globe" variant="primary"></b-icon>
-                <span class="pivate text"> Private </span>
+                <span class="pivate text"> {{ $t('network.Private') }}  </span>
               </p>
             </b-col>
             <b-col>
@@ -55,18 +55,18 @@
                 <b-icon icon="people-fill" variant="primary"></b-icon>
                 <span class="pivate text">
                   {{ nFormatter(networkInfo.commuity) }}
-                  community 
+                  {{ $t('network.community ') }}
                 </span>
               </p>
             </b-col>
           </b-row>
         </b-container>
-        <h6 class="mt-2 font-weight-bolder title ">About</h6>
+        <h6 class="mt-2 font-weight-bolder title ">{{ $t('network.About') }} </h6>
         <p v-if="networkInfo.description.length<130" class="text-justify text">{{ networkInfo.description }}</p>
         <p v-else class="text-justify text">
           {{ networkInfo.description.substring(0,130)+"..." }}
           <span class="d-inline-block float-right">
-            <a @click="$bvToast.show('example-toast')" style="cursor:pointer;">lire la Suite</a>
+            <a @click="$bvToast.show('example-toast')" style="cursor:pointer;">{{ $t('network.lire_la_Suite') }} </a>
           </span>
         </p>
         <b-toast id="example-toast" static no-auto-hide>
@@ -137,13 +137,13 @@ export default {
           this.buttonStatus = false;
           this.flashMessage.show({
             status: "success",
-            message: "You Are Not more Following"
+            message:  this.$t('network.You_Are_Not_more_Following')
           });
         } else {
           this.buttonStatus = false;
           this.flashMessage.show({
             status: "success",
-            message: "You Are Now Following"
+            message:  this.$t('network.You_Are_Now_Following')
           });
         }
       })
@@ -152,7 +152,7 @@ export default {
         this.buttonStatus = false;
         this.flashMessage.show({
           status: "error",
-          message: "Unable To follow"
+          message: this.$t('network.Unable_To_follow')
         });
       });
     },

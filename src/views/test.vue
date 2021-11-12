@@ -5,8 +5,19 @@
 
 
 
-         <div class=content>
-  <div class="wrapper-1">
+
+
+
+
+
+
+
+
+        
+
+  
+
+  <div v-if="finish" class="wrapper-1">
     <div class="wrapper-2">
       <h1 class="h1text">Thank you !</h1>
       <p>CHECK YOUR EMAIL NOW! </p>
@@ -14,13 +25,13 @@
       <p class="small-text">IMPORTANT: To Temporaly activate your account, verify your email address through the message we just emailed you.
 
 NOTE: IT MAY LAND IN YOUR SPAM FOLDER  </p>
-      <button class="go-home">
+     <a href="/">  <button class="go-home">
       go home
-      </button>
+      </button></a>
     </div>
     
 </div>
-</div>
+
 
 
 
@@ -37,9 +48,9 @@ NOTE: IT MAY LAND IN YOUR SPAM FOLDER  </p>
 
 
 
-        <div class="c516 c513">
+        <div class="wrapper-1">
           <div>
-            <div v-if="showemail" class="c515 c512" id="verify-container">
+            <div v-if="showemail" class="" >
               <div class="c516 c513">
                 <div>
                   <h1 class="text-center">Welcome!</h1>
@@ -119,7 +130,7 @@ NOTE: IT MAY LAND IN YOUR SPAM FOLDER  </p>
               </div>
             </div>
 
-            <div v-else class="c515 c512">
+            <div v-else class=" ">
               <div v-if="!complete" class="c516 c513">
                 <ul class="MuiList-root MuiList-padding">
                   <div>
@@ -800,7 +811,7 @@ NOTE: IT MAY LAND IN YOUR SPAM FOLDER  </p>
                 </ul>
               </div>
 
-              <div v-if="complete" class="c515 c512" id="verify-container">
+              <div v-if="complete" class="" id="verify-container">
                 <div class="c516 c513">
                 
 
@@ -1174,7 +1185,10 @@ NOTE: IT MAY LAND IN YOUR SPAM FOLDER  </p>
                           font-size: 0.875rem;
                           text-transform: none;
                         "
-                      >
+                      ><div v-if="isDisabled" class="spinner-border" role="status">
+  
+                       </div>  
+
                         <span class="MuiButton-label">Finish Registration</span><span class="MuiTouchRipple-root"></span>
                       </button>
                       
@@ -1419,6 +1433,7 @@ export default {
       message: 'Hello Vue!',
 
        isDisabled:false,
+       finish:false,
         storeerror:"",
       document: [],
       show_complete_form:false,
@@ -1890,6 +1905,9 @@ export default {
 
 
     },
+  
+
+
 
     showStat() {
       this.show_status = true;
@@ -1961,7 +1979,7 @@ export default {
 
         this.password_error=true;
 
-         this.isDisabled=false;
+         this.isDisabled=true;
 
         return true;
       }
@@ -2015,6 +2033,8 @@ export default {
         })
         .then((res) => {
           console.log(res);
+          this.finish=true;
+          this.show_complete_form=false;
          
         })
         .catch((error) => {
@@ -2143,7 +2163,7 @@ export default {
             console.log({ error: error });
             // Manage errors if found any
             console.log(error.response.data);
-this.showemail = false;
+
             this.email_error = true;
             this.error_description = error.response.data;
           });
@@ -2338,15 +2358,15 @@ flex-direction: column;
 }
   
 }
-
+.small-text{
+  font-size: 1em !important;
+}
 </style>
  
 <style >
 
 
-.small-text{
-  font-size: 1em !important;
-}
+
 .activee{
 
     background: gray !important; 

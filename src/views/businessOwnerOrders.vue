@@ -833,7 +833,7 @@ export default {
   data() {
     return {
       moment: moment,
-      rows: this.limitall,
+      rows: 0,
       currentPage: 0,
       perPage: 10,
       selected: '',
@@ -973,11 +973,15 @@ limitshipped(){
 
   mounted() {
     // this.all = this.$store.state.orderBusiness.all;
-    let data = '1/1';
+    let url =  window.location.href.split("/");
+    let data = url[window.location.href.split("/").length - 1];
+    console.log(data);
     this.$store
       .dispatch('orderBusiness/getOrder', data)
       .then(() => {
         console.log('hey yeah');
+      
+        this.rows = this.limitall
       })
       .catch((err) => {
         console.log({ err: err });

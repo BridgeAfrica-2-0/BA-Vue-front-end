@@ -45,6 +45,7 @@ import networks from "@/views/networks";
 import dashboard from "@/views/dashboard";
 
 import myorders from "@/views/myOders"
+import archivedOrders from "@/views/archivedOrders"
 import notFound from "@/components/404"
 
 
@@ -74,6 +75,14 @@ const routes = [{
         // },
     },
 
+    {
+        path: "/archived-orders",
+        name: "archivedOrders",
+        component: archivedOrders,
+        // meta: {
+        //   auth: true,
+        // },
+    },
 
 
     {

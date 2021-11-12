@@ -73,5 +73,15 @@
  "Neighbourhood":"Neighbourhood",
  "Distance":"Distance",
  "City":"City",
- "Sub Division":"Sub Division"
+ "Sub Division":"Sub Division",
+ "Reset":"Reset",
+ "Filters":"Filters",
+ "Shipping_Network":"Shipping Network",
+ "Public":"Public",
+ "20k_Members":"20k Members",
+ "Business_Name":"Business Name",
+ "20k_Community":"20k Community",
+ "Market":"Market",
+ "See_All":"See All",
+ "Visit_Shop":"Visit Shop"
 }

@@ -8,7 +8,7 @@
 						:icon="['fab', 'readme']"
 						size="lg"
 					/>
-					<b>{{$t('business.posts')}} </b>
+					<b>{{ $t('dashboard.Posts') }} </b>
 				</h6>
 			</span>
 

@@ -5,11 +5,11 @@
 				<h6 class="mb-3 pl-1 title">
 					<fas-icon class="icons" :icon="['fas', 'chart-line']" size="lg" />
 
-					<b> {{ $t("business.insights").toUpperCase() }} </b>
+					<b> {{ $t("dashboard.insights").toUpperCase() }} </b>
 				</h6>
 			</span>
 			<p class="text">
-				{{ $t("business.discover_customers_shares") }} 
+				{{ $t("dashboard.discover_customers_shares") }} 
 			</p>
 
 			<div class="a-content">

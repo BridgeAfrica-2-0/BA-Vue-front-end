@@ -4,7 +4,7 @@
       <fas-icon
         class="violet float-left mr-1 icon-size primary"
         :icon="['fas', 'building']"
-      />Businesss
+      />{{ $t('profileowner.Business') }}
       <button
         type="button"
         data-toggle="modal"
@@ -13,7 +13,7 @@
         style="margin-top: -6px"
         v-b-modal.createBusinessModal
       >
-        Add Business
+        {{ $t('profileowner.Add_Business') }}
       </button>
 
       <hr />
@@ -21,7 +21,7 @@
       <b-modal
         id="createBusinessModal"
         ref="createBusinessModal"
-        title="Add Bussiness"
+        :title="$t('profileowner.Add_Bussiness')"
         size="lg"
         hide-footer
         @close="cancel"
@@ -29,7 +29,7 @@
         <div>
           <FlashMessage />
           <form-wizard @on-complete="createBusiness">
-            <tab-content title="Business Indentity">
+            <tab-content :title="$t('profileowner.Business_Indentity')">
               <div class="form-card">
                 <div class="row">
                   <div class="col-md-6">
@@ -51,7 +51,7 @@
                         variant="primary"
                         class="mt-3 text-center"
                       >
-                        change Image
+                        {{ $t('profileowner.change_Image') }}
                       </b-button>
                     </div>
 
@@ -67,7 +67,7 @@
                       >
                         <div class="drag-text">
                           <i class="fa fa-plus"> </i>
-                          <h3 class="username">Business Logo</h3>
+                          <h3 class="username">{{ $t('profileowner.Business_Logo') }}</h3>
                         </div>
                       </a>
                       <div></div>
@@ -76,7 +76,7 @@
                   <div class="col-md-6">
                     <b-form-group
                       id="business_name"
-                      label="Business Name"
+                      :label="$t('profileowner.Business_Name')"
                       label-for="business_name"
                     >
                       <b-form-input
@@ -88,19 +88,19 @@
                       ></b-form-input>
 
                       <b-form-invalid-feedback id="business_name-feedback"
-                        >Business Name Is Required.</b-form-invalid-feedback
+                        >{{ $t('profileowner.Business_Name_Is_Required') }}.</b-form-invalid-feedback
                       >
                     </b-form-group>
 
                     <div class="form-group">
-                      <label for="country" class="username"> Keywords :</label
+                      <label for="country" class="username"> {{ $t('profileowner.Keywords') }} :</label
                       ><br />
 
                       <multiselect
                         v-model="business_keyword"
-                        tag-placeholder="Add this as new Keyword"
-                        placeholder="Add New Keyword"
-                        label="name"
+                        tag-:placeholder="$t('profileowner.Add_this_as_new_Keyword')"
+                        :placeholder="$t('profileowner.Add_New_Keyword')"
+                        :label="$t('profileowner.name')"
                         track-by="id"
                         :options="keywordds"
                         :multiple="true"
@@ -110,13 +110,13 @@
                     </div>
 
                     <div class="form-group">
-                      <label for="username" class="username">About</label><br />
+                      <label for="username" class="username">{{ $t('profileowner.About') }}</label><br />
                       <textarea
                         type="textarea"
                         name="business_about"
                         v-model="about"
                         id="description"
-                        placeholder="Brief description about your Busness"
+                        :placeholder="$t('profileowner.Brief_description_about_your_Busness')"
                         class="form-control text"
                       ></textarea>
                     </div>
@@ -124,13 +124,13 @@
                 </div>
 
                 <div>
-                  <label class="typo__label"> Category </label>
+                  <label class="typo__label"> {{ $t('profileowner.Category') }} </label>
                   <multiselect
                     v-model="multiselecvalue"
                     @input="subcategories"
-                    tag-placeholder="Add this as new tag"
-                    placeholder="Search or add a tag"
-                    label="name"
+                    tag-:placeholder="$t('profileowner.Add_this_as_new_tag')"
+                    :placeholder="$t('profileowner.Search_or_add_a_tag')"
+                    :label="$t('profileowner.name')"
                     track-by="id"
                     :options="pcategories"
                     :multiple="true"
@@ -140,12 +140,12 @@
                 </div>
 
                 <div>
-                  <label class="typo__label"> Sub Category</label>
+                  <label class="typo__label"> {{ $t('profileowner.Sub_Category') }}</label>
                   <multiselect
                     v-model="filterselectvalue"
-                    tag-placeholder="Add this as new tag"
-                    placeholder="Search or add a tag"
-                    label="name" 
+                    tag-:placeholder="$t('profileowner.Add_this_as_new_tag')"
+                    :placeholder="$t('profileowner.Search_or_add_a_tag')"
+                    :label="$t('profileowner.name')" 
                     track-by="subcategory_id"
                     :options="scategories"
                     :multiple="true"
@@ -154,7 +154,7 @@
                   ></multiselect>
                 </div>
 
-                <label class="typo__label">Fiters </label>
+                <label class="typo__label">{{$t('profileowner.Fiters')}} </label>
                 <div>
                   <b-card no-body>
                     <b-tabs pills card vertical>
@@ -164,7 +164,7 @@
                         :key="filters.id"
                         active
                         ><b-card-text>
-                          <b-form-group label="Filters" class="colorblack">
+                          <b-form-group :label="$t('profileowner.Filters')" class="colorblack">
                             <b-form-checkbox-group
                               id=""
                               class="colorblack"
@@ -194,13 +194,13 @@
                 <div class="row">
                   <div class="col-md-6">
                     <div class="form-group">
-                      <label for="country" class="username"> Country :</label
+                      <label for="country" class="username"> {{$t('profileowner.Country')}} :</label
                       ><br />
                       <multiselect
                         v-model="country"
                         @input="Region"
-                        placeholder="Search "
-                        label="name"
+                        :placeholder="$t('profileowner.Search')"
+                        :label="$t('profileowner.name')"
                         track-by="id"
                         :options="countries"
                         :multiple="true"
@@ -210,13 +210,13 @@
 
                   <div class="col-md-6">
                     <div class="form-group">
-                      <label for="country" class="username"> Region :</label
+                      <label for="country" class="username"> {{ $t('profileowner.Region') }} :</label
                       ><br />
                       <multiselect
                         v-model="region"
                         @input="Division"
-                        placeholder="Search"
-                        label="name"
+                        :placeholder="$t('profileowner.Search')"
+                        :label="$t('profileowner.name')"
                         track-by="id"
                         :options="regions"
                         :multiple="true"
@@ -226,13 +226,13 @@
 
                   <div class="col-md-6">
                     <div class="form-group">
-                      <label for="country" class="username"> Division :</label
+                      <label for="country" class="username"> {{ $t('profileowner.Division') }} :</label
                       ><br />
                       <multiselect
                         v-model="division"
                         @input="Municipality"
-                        placeholder="Search"
-                        label="name"
+                        :placeholder="$t('profileowner.Search')"
+                        :label="$t('profileowner.name')"
                         track-by="id"
                         :options="divisions"
                         :multiple="true"
@@ -243,14 +243,14 @@
                   <div class="col-md-6">
                     <div class="form-group">
                       <label for="country" class="username">
-                        Municipality :</label
+                        {{ $t('profileowner.Municipality') }} :</label
                       ><br />
 
                       <multiselect
                         v-model="municipality"
                         @input="Locality"
-                        placeholder="Search"
-                        label="name"
+                        :placeholder="$t('profileowner.Search')"
+                        :label="$t('profileowner.name')"
                         track-by="id"
                         :options="municipalities"
                         :multiple="true"
@@ -262,12 +262,12 @@
                 <div class="row">
                   <div class="col-md-6">
                     <div class="form-group">
-                      <label for="Neighbor" class="username"> Neighbor :</label
+                      <label for="Neighbor" class="username"> {{ $t('profileowner.Neighbor') }} :</label
                       ><br />
                       <multiselect
                         v-model="locality"
-                        placeholder="Search"
-                        label="name"
+                        :placeholder="$t('profileowner.Search')"
+                        :label="$t('profileowner.name')"
                         track-by="id"
                         :options="localities"
                         :multiple="true"
@@ -277,14 +277,14 @@
 
                   <b-col md="6">
                     <div class="form-group">
-                      <label for="website" class="username"> city :</label
+                      <label for="website" class="username"> {{ $t('profileowner.City') }} :</label
                       ><br />
                       <input
                         type="text"
                         name="alias"
                         v-model="city"
                         id="city"
-                        placeholder="City"
+                        :placeholder="$t('profileowner.City')"
                         class="form-control text"
                       />
                     </div>
@@ -292,7 +292,7 @@
 
                   <div class="col-md-6">
                     <div class="form-group">
-                      <label for="Neighbor" class="username"> Adress :</label>
+                      <label for="Neighbor" class="username"> {{ $t('profileowner.Adress') }} :</label>
 
                       <gmap-autocomplete
                         @place_changed="initMarker"
@@ -318,15 +318,15 @@
               </div>
             </tab-content>
 
-            <tab-content title=" Contact ">
+            <tab-content :title="$t('profileowner.Contact')">
               <b-card>
                 <b-row>
                   <b-col md="6">
-                    <label class="username"> Phone1 </label>
+                    <label class="username"> {{ $t('profileowner.Phone1') }} </label>
                     <VuePhoneNumberInput v-model="phone1" />
                   </b-col>
                   <b-col md="6">
-                    <label class="username"> Phone2 </label>
+                    <label class="username"> {{ $t('profileowner.Phone2') }} </label>
                     <VuePhoneNumberInput v-model="phone2" />
                   </b-col>
                 </b-row>
@@ -334,14 +334,14 @@
                 <b-row>
                   <b-col md="6">
                     <div class="form-group">
-                      <label for="website" class="username"> Website :</label
+                      <label for="website" class="username"> {{ $t('profileowner.Website') }} :</label
                       ><br />
                       <input
                         type="text"
                         name="alias"
                         v-model="website"
                         id="Website"
-                        placeholder="Website"
+                        :placeholder="$t('profileowner.Website')"
                         class="form-control text"
                       />
                     </div>
@@ -349,13 +349,13 @@
 
                   <b-col md="6">
                     <div class="form-group">
-                      <label for="email" class="username"> Email :</label><br />
+                      <label for="email" class="username"> {{ $t('profileowner.Email') }} :</label><br />
                       <input
                         type="email"
                         name="alias"
                         v-model="email"
                         id="email"
-                        placeholder="Email"
+                        :placeholder="$t('profileowner.Email')"
                         class="form-control text"
                       />
                     </div>
@@ -363,7 +363,7 @@
 
                   <div class="col-md-6">
                     <div class="form-group">
-                      <label for="username" class="username">TimeZone:</label
+                      <label for="username" class="username">{{ $t('profileowner.TimeZone') }}:</label
                       ><br />
 
                       <b-form-select
@@ -385,7 +385,7 @@
       <b-modal
         id="updateBusinessModal"
         ref="updateBusinessModal"
-        title="Update Bussiness"
+        :title="$t('profileowner.Update_Bussiness')"
         size="lg"
         hide-footer
         @close="cancel"
@@ -394,7 +394,7 @@
         <div>
           <FlashMessage />
           <form-wizard @on-complete="updateBusiness">
-            <tab-content title="Business Indentity">
+            <tab-content :title="$t('profileowner.Business_Indentity')">
               <div class="form-card">
                 <div class="row">
                   <div class="col-md-6">
@@ -416,7 +416,7 @@
                         variant="primary"
                         class="mt-3 text-center"
                       >
-                        change Image
+                        {{ $t('profileowner.change_Image') }}
                       </b-button>
                     </div>
 
@@ -432,7 +432,7 @@
                       >
                         <div class="drag-text">
                           <i class="fa fa-plus"> </i>
-                          <h3 class="username">Business Logo</h3>
+                          <h3 class="username">{{ $t('profileowner.Business_Logo') }}</h3>
                         </div>
                       </a>
                       <div></div>
@@ -441,7 +441,7 @@
                   <div class="col-md-6">
                     <b-form-group
                       id="business_name"
-                      label="Business Name"
+                      :label="$t('profileowner.Business_Name')"
                       label-for="business_name"
                     >
                       <b-form-input
@@ -453,19 +453,19 @@
                       ></b-form-input>
 
                       <b-form-invalid-feedback id="business_name-feedback"
-                        >Business Name Is Required.</b-form-invalid-feedback
+                        >{{ $t('profileowner.Business_Name_Is_Required') }}.</b-form-invalid-feedback
                       >
                     </b-form-group>
 
                     <div class="form-group">
-                      <label for="country" class="username"> Keywords :</label
+                      <label for="country" class="username"> {{ $t('profileowner.Keywords') }} :</label
                       ><br />
                     
                       <multiselect
                         v-model="business_keyword"
-                        tag-placeholder="Add this as new Keyword"
-                        placeholder="Add New Keyword"
-                        label="name"
+                        tag-:placeholder="$t('profileowner.Add_this_as_new_Keyword')"
+                        :placeholder="$t('profileowner.Add_New_Keyword')"
+                        :label="$t('profileowner.name')"
                         track-by="id"
                         :options="keywordds"
                         :multiple="true"
@@ -475,13 +475,13 @@
                     </div>
 
                     <div class="form-group">
-                      <label for="username" class="username">About</label><br />
+                      <label for="username" class="username">{{ $t('profileowner.About') }}</label><br />
                       <textarea
                         type="textarea"
                         name="business_about"
                         v-model="about"
                         id="description"
-                        placeholder="Brief description about your Busness"
+                        :placeholder="$t('profileowner.Brief_description_about_your_Business')"
                         class="form-control text"
                       ></textarea>
                     </div>
@@ -489,13 +489,13 @@
                 </div>
 
                 <div>
-                  <label class="typo__label"> Category </label>
+                  <label class="typo__label"> {{ $t('profileowner.Category') }} </label>
                   <multiselect
                     v-model="multiselecvalue"
                     @input="subcategories"
-                    tag-placeholder="Add this as new tag"
-                    placeholder="Search or add a tag"
-                    label="name"
+                    tag-:placeholder="$t('profileowner.Add_this_as_new_tag')"
+                    :placeholder="$t('profileowner.Search_or_add_a_tag')"
+                    :label="$t('profileowner.name')"
                     track-by="id"
                     :options="pcategories"
                     :multiple="true"
@@ -505,12 +505,12 @@
                 </div>
 
                 <div>
-                  <label class="typo__label"> Sub Category</label> 
+                  <label class="typo__label"> {{ $t('profileowner.Sub_Category') }}</label> 
                   <multiselect
                     v-model="filterselectvalue"
-                    tag-placeholder="Add this as new tag"
-                    placeholder="Search or add a tag"
-                    label="name"
+                    tag-:placeholder="$t('profileowner.Add_this_as_new_tag')"
+                    :placeholder="$t('profileowner.Search_or_add_a_tag')"
+                    :label="$t('profileowner.name')"
                     track-by="subcategoryId"
                     :options="scategories"
                     :multiple="true"
@@ -519,7 +519,7 @@
                   ></multiselect>
                 </div>
 
-                <label class="typo__label">Fiters </label>
+                <label class="typo__label">{{$t('profileowner.Fiters')}} </label>
                 <div>
                   <b-card no-body>
                     <b-tabs pills card vertical>
@@ -529,7 +529,7 @@
                         :key="filters.id"
                         active
                         ><b-card-text>
-                          <b-form-group label="Filters" class="colorblack">
+                          <b-form-group :label="$t('profileowner.Filters')" class="colorblack">
                             <b-form-checkbox-group
                               id=""
                               class="colorblack"
@@ -554,18 +554,18 @@
               </div>
             </tab-content>
 
-            <tab-content title=" Location ">
+            <tab-content :title="$t('profileowner.Location') ">
               <div class="form-card">
                 <div class="row">
                   <div class="col-md-6">
                     <div class="form-group">
-                      <label for="country" class="username"> Country :</label
+                      <label for="country" class="username"> {{ $t('profileowner.Country') }} :</label
                       ><br />
                       <multiselect
                         v-model="country"
                         @input="Region"
-                        placeholder="Search "
-                        label="name"
+                        :placeholder="$t('profileowner.Search')"
+                        :label="$t('profileowner.name')"
                         track-by="id"
                         :options="countries"
                         :multiple="true"
@@ -575,13 +575,13 @@
 
                   <div class="col-md-6">
                     <div class="form-group">
-                      <label for="country" class="username"> Region :</label
+                      <label for="country" class="username"> {{ $t('profileowner.Region') }} :</label
                       ><br />
                       <multiselect
                         v-model="region"
                         @input="Division"
-                        placeholder="Search"
-                        label="name"
+                        :placeholder="$t('profileowner.Search')"
+                        :label="$t('profileowner.name')"
                         track-by="id"
                         :options="regions"
                         :multiple="true"
@@ -591,13 +591,13 @@
 
                   <div class="col-md-6">
                     <div class="form-group">
-                      <label for="country" class="username"> Division :</label
+                      <label for="country" class="username"> {{ $t('profileowner.Division') }} :</label
                       ><br />
                       <multiselect
                         v-model="division"
                         @input="Municipality"
-                        placeholder="Search"
-                        label="name"
+                        :placeholder="$t('profileowner.Search')"
+                        :label="$t('profileowner.name')"
                         track-by="id"
                         :options="divisions"
                         :multiple="true"
@@ -608,14 +608,14 @@
                   <div class="col-md-6">
                     <div class="form-group">
                       <label for="country" class="username">
-                        Municipality :</label
+                        {{ $t('profileowner.Municipality') }} :</label
                       ><br />
 
                       <multiselect
                         v-model="municipality"
                         @input="Locality"
-                        placeholder="Search"
-                        label="name"
+                        :placeholder="$t('profileowner.Search')"
+                        :label="$t('profileowner.name')"
                         track-by="id"
                         :options="municipalities"
                         :multiple="true"
@@ -627,12 +627,12 @@
                 <div class="row">
                   <div class="col-md-6">
                     <div class="form-group">
-                      <label for="Neighbor" class="username"> Neighbor :</label
+                      <label for="Neighbor" class="username"> {{ $t('profileowner.Neighbor') }} :</label
                       ><br />
                       <multiselect
                         v-model="locality"
-                        placeholder="Search"
-                        label="name"
+                        :placeholder="$t('profileowner.Search')"
+                        :label="$t('profileowner.name')"
                         track-by="id"
                         :options="localities"
                         :multiple="true"
@@ -642,14 +642,14 @@
 
                   <b-col md="6">
                     <div class="form-group">
-                      <label for="website" class="username"> city :</label
+                      <label for="website" class="username"> {{ $t('profileowner.City') }} :</label
                       ><br />
                       <input
                         type="text"
                         name="alias"
                         v-model="city"
                         id="city"
-                        placeholder="City"
+                        :placeholder="$t('profileowner.City')"
                         class="form-control text"
                       />
                     </div>
@@ -657,7 +657,7 @@
 
                   <div class="col-md-6">
                     <div class="form-group">
-                      <label for="Neighbor" class="username"> Adress :</label>
+                      <label for="Neighbor" class="username"> {{ $t('profileowner.Adress') }} :</label>
 
                       <gmap-autocomplete
                         @place_changed="initMarker"
@@ -687,11 +687,11 @@
               <b-card>
                 <b-row>
                   <b-col md="6">
-                    <label class="username"> Phone1 </label>
+                    <label class="username"> {{ $t('profileowner.Phone1') }} </label>
                     <VuePhoneNumberInput v-model="phone1" />
                   </b-col>
                   <b-col md="6">
-                    <label class="username"> Phone2 </label>
+                    <label class="username"> {{ $t('profileowner.Phone2') }} </label>
                     <VuePhoneNumberInput v-model="phone2" />
                   </b-col>
                 </b-row>
@@ -699,14 +699,14 @@
                 <b-row>
                   <b-col md="6">
                     <div class="form-group">
-                      <label for="website" class="username"> Website :</label
+                      <label for="website" class="username"> {{ $t('profileowner.Website') }} :</label
                       ><br />
                       <input
                         type="text"
                         name="alias"
                         v-model="website"
                         id="Website"
-                        placeholder="Website"
+                        :placeholder="$t('profileowner.Website')"
                         class="form-control text"
                       />
                     </div>
@@ -714,13 +714,13 @@
 
                   <b-col md="6">
                     <div class="form-group">
-                      <label for="email" class="username"> Email :</label><br />
+                      <label for="email" class="username"> {{ $t('profileowner.Email') }} :</label><br />
                       <input
                         type="text"
                         name="alias"
                         v-model="email"
                         id="email"
-                        placeholder="Email"
+                        :placeholder="$t('profileowner.Email')"
                         class="form-control text"
                       />
                     </div>
@@ -728,7 +728,7 @@
 
                   <div class="col-md-6">
                     <div class="form-group">
-                      <label for="username" class="username">TimeZone:</label
+                      <label for="username" class="username">{{ $t('profileowner.TimeZone') }}:</label
                       ><br />
 
                       <b-form-select
@@ -778,10 +778,10 @@
                         @click="editBusiness(business.id)"
                         v-b-modal.updateBusinessModal
                         variant=""
-                        >Edit</b-dropdown-item
+                        >{{ $t('profileowner.Edit') }}</b-dropdown-item
                       >
                       <b-dropdown-item @click="deleteBusiness(business.id)">
-                        Delete</b-dropdown-item
+                        {{ $t('profileowner.Delete')}}</b-dropdown-item
                       >
                     </b-dropdown>
                   </div>
@@ -813,7 +813,7 @@
                         </span>
                       </span>
                       <br />
-                      {{ business.community }} Community <br />
+                      {{ business.community }} {{ $t('profileowner.Community') }} <br />
 
                       <span class="location">
                         <b-icon-geo-alt class="ico"></b-icon-geo-alt>
@@ -999,7 +999,7 @@ export default {
       this.$store
         .dispatch("profile/deleteBusiness", url)
         .then(() => {
-          console.log("wow biz deleted");
+          console.log("wow biz {{ $t('profileowner.delete')}}d");
 
           loader.hide();
 
@@ -1009,7 +1009,7 @@ export default {
           this.flashMessage.show({
             status: "success",
 
-            message: "Business Deleted",
+            message: "Business {{ $t('profileowner.Delete')}}d",
 
             blockClass: "custom-block-class",
           });
@@ -1020,7 +1020,7 @@ export default {
           this.flashMessage.show({
             status: "error",
 
-            message: "Unable to Delete this Business",
+            message: "Unable to {{ $t('profileowner.Delete')}} this Business",
 
             blockClass: "custom-block-class",
           });

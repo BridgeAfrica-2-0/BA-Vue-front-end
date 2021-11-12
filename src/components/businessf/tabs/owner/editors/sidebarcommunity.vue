@@ -20,13 +20,13 @@
                     <template slot="title">
                       Followers <span class="spa-color"> {{nFormatter(userdetails.total_followers)}} </span>
                     </template>
-                    <div class="s-comcard"><People :peoples="userdetails.user_followers"  @nFormatter="nFormatter"/></div>
+                    <div class="s-comcard"><People :peoples="userdetails.user_followers" /></div>
                   </b-tab>
                   <b-tab>
                     <template slot="title">
                       Following <span class="spa-color"> {{nFormatter(userdetails.totat_following)}} </span>
                     </template>
-                    <div class="s-comcard"><People :peoples="userdetails.user_following"  @nFormatter="nFormatter"/></div>
+                    <div class="s-comcard"><People :peoples="userdetails.user_following" /></div>
                   </b-tab>
                 </b-tabs>
               </b-col>
@@ -43,13 +43,34 @@
                 <template slot="title">
                   Followers <span class="spa-color"> {{nFormatter(businessdetails.total_followers)}} </span>
                 </template>
-                <div class="s-comcard"><Business :businesses="businessdetails.Business_followers" @nFormatter="nFormatter"/></div>
+                <div class="s-comcard"><Business :businesses="businessdetails.Business_followers" /></div>
               </b-tab>
               <b-tab>
                 <template slot="title">
                   Following <span class="spa-color"> {{nFormatter(businessdetails.totat_following)}} </span>
                 </template>
-                <div class="s-comcard"><Business :businesses="businessdetails.Business_following" @nFormatter="nFormatter"/></div>
+                <div class="s-comcard"><Business :businesses="businessdetails.Business_following" /></div>
+              </b-tab>
+            </b-tabs>
+          </div>
+        </b-tab>
+        <b-tab>
+          <template slot="title">
+            Networks <span class="spa-color"> {{nFormatter(networkdetails.total_Network)}} </span>
+          </template>
+          <div>
+            <b-tabs fill pills content-class="mt-3  f-left m-up checkcheck">
+              <b-tab active>
+                <template slot="title">
+                  Followers <span class="spa-color"> {{nFormatter(networkdetails.total_followers)}} </span>
+                </template>
+                <div class="s-comcard"><Network :networks="networkdetails.Network_followers" /></div>
+              </b-tab>
+              <b-tab>
+                <template slot="title">
+                  Following <span class="spa-color"> {{nFormatter(networkdetails.totat_following)}} </span>
+                </template>
+                <div class="s-comcard"><Network :networks="networkdetails.Network_following" /></div>
               </b-tab>
             </b-tabs>
           </div>
@@ -61,11 +82,13 @@
 <script>
 import People from "./people";
 import Business from "./business";
+import Network from "./network";
 export default {
   name: "sidebarcommunity",
   components: {
     People,
     Business,
+    Network
   },
   data() {
     return {
@@ -78,12 +101,16 @@ export default {
     },
     businessdetails() {
       return this.$store.state.networkProfileCommunitySidebar.businessdetails;
+    },
+    networkdetails() {
+      return this.$store.state.networkProfileCommunitySidebar.networkdetails;
     }
   },
   mounted(){
     this.url = this.$route.params.id;
     this.UserDetails();
     this.businessDetails();
+    this.networkDetails();
   },
   methods:{    
     nFormatter: function(num) {
@@ -98,6 +125,7 @@ export default {
       }
       return num;
     },
+
     UserDetails() {
     this.$store
       .dispatch("networkProfileCommunitySidebar/getUserDetails", this.url)
@@ -118,6 +146,17 @@ export default {
         console.log({ err: err });
       });
     },
+    networkDetails() {
+    console.log('networkDetails');
+    this.$store
+      .dispatch("networkProfileCommunitySidebar/getNetworkDetails", this.url)
+      .then(() => {
+        console.log('ohh year');
+      })
+      .catch(err => {
+        console.log({ err: err });
+      });
+    },
   }
 };
 </script>
@@ -127,24 +166,29 @@ export default {
   margin-top: -19px;
   border: 1px solid rgba(0, 0, 0, 0.125);
 }
+
 .spa-color {
   color: white;
   margin-left: 10px;
   font-size: 14px;
 }
+
 .h4-color {
   color: orangered;
   margin-left: 10px;
   font-size: 14px;
 }
+
 .m-up {
   margin-top: -5px;
 }
+
 @media only screen and (min-width: 768px) {
   .title {
     font-size: 20px;
   }
 }
+
 @media only screen and (min-width: 768px) {
   .title {
     font-size: 16px;

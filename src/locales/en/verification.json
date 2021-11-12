@@ -1,0 +1,14 @@
+{
+    "Verification": "Verification",
+    "You_will_get_an_OTP_by_SMS": "You will get an OTP by SMS",
+    "OTP": "OTP",
+    "Verify": "Verify",
+    "Didnt_recieved_the_verification_OTP": "Didn't recieved the verification OTP?",
+    "Resend_OTP": "Resend OTP",
+    "Successfully_Send": "Successfully Send",
+    "SMS_successfully_send_check_your_inbox": "SMS successfully send check your inbox",
+    "Send_Failed": "Send Failed",
+    "Message_not_send": "Message not send",
+    "Verification_Failed": "Verification Failed",
+    "Unable_to_verify_your_account": "Unable to verify your account"
+}

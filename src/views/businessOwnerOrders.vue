@@ -73,8 +73,8 @@
             <div class="justify-content-center row">
               <div class="col-4 margimg">
                 <splide :options="{ rewind: true }" class="r-img1">
-                  <splide-slide cl v-for="(im, index) in item.img " :key="index">
-                    <img :src="item.img[index]" class="r-img1" />
+                  <splide-slide cl v-for="(im, index) in item.productImg " :key="index">
+                    <img :src="item.productImg[index]" class="r-img1" />
                   </splide-slide>
                 </splide>
               </div>
@@ -165,8 +165,8 @@
             <div class="justify-content-center row">
               <div class="col-4 margimg">
                 <splide :options="{ rewind: true }" class="r-img1">
-                  <splide-slide cl v-for="(im, index) in item.img " :key="index">
-                    <img :src="item.img[index]" class="r-img1" />
+                  <splide-slide cl v-for="(im, index) in item.productImg " :key="index">
+                    <img :src="item.productImg[index]" class="r-img1" />
                   </splide-slide>
                 </splide>
               </div>
@@ -256,8 +256,8 @@
             <div class="justify-content-center row">
               <div class="col-4 margimg">
                 <splide :options="{ rewind: true }" class="r-img1">
-                  <splide-slide cl v-for="(im, index) in item.img " :key="index">
-                    <img :src="item.img[index]" class="r-img1" />
+                  <splide-slide cl v-for="(im, index) in item.productImg " :key="index">
+                    <img :src="item.productImg[index]" class="r-img1" />
                   </splide-slide>
                 </splide>
               </div>
@@ -349,8 +349,8 @@
             <div class="justify-content-center row">
               <div class="col-4 margimg">
                 <splide :options="{ rewind: true }" class="r-img1">
-                  <splide-slide cl v-for="(im, index) in item.img " :key="index">
-                    <img :src="item.img[index]" class="r-img1" />
+                  <splide-slide cl v-for="(im, index) in item.productImg " :key="index">
+                    <img :src="item.productImg[index]" class="r-img1" />
                   </splide-slide>
                 </splide>
               </div>
@@ -466,7 +466,7 @@
       </div>
 
       <div class="justify-content-between container row my-4">
-        <div class="col order"><h3 class="bold1" @click="setData">My orders</h3></div>
+        <div class="col order"><h3 class="bold1" >My orders</h3></div>
         <div class="status"><h3 class="text-danger">clear history</h3></div>
       </div>
 
@@ -491,7 +491,7 @@
                 </div>
               </div>
 
-              <span class="gras" @click="setData">Order</span>
+              <span class="gras" >Order</span>
               <span class="text-success">#{{ item.oderId }}</span> <br />
 
               <span class="flou">{{ item.shippingAddress }}{{ moment(item.dateCreated).format('DD/MM/YYYY HH:mm') }}</span>
@@ -501,8 +501,8 @@
             <div class="justify-content-between row">
               <div class="col-3">
                 <splide :options="{ rewind: true }" class="r-img">
-                  <splide-slide cl v-for="(im, index) in item.img " :key="index">
-                    <img :src="item.img[index]" class="r-img" />
+                  <splide-slide cl v-for="(im, index) in item.productImg " :key="index">
+                    <img :src="item.productImg[index]" class="r-img" />
                   </splide-slide>
                 </splide>
               </div>
@@ -588,8 +588,8 @@
             <div class="justify-content-between row">
               <div class="col-3">
                 <splide :options="{ rewind: true }" class="r-img">
-                  <splide-slide cl v-for="(im, index) in item.img " :key="index">
-                    <img :src="item.img[index]" class="r-img" />
+                  <splide-slide cl v-for="(im, index) in item.productImg " :key="index">
+                    <img :src="item.productImg[index]" class="r-img" />
                   </splide-slide>
                 </splide>
               </div>
@@ -674,8 +674,8 @@
             <div class="justify-content-between row">
               <div class="col-3">
                 <splide :options="{ rewind: true }" class="r-img">
-                  <splide-slide cl v-for="(im, index) in item.img " :key="index">
-                    <img :src="item.img[index]" class="r-img" />
+                  <splide-slide cl v-for="(im, index) in item.productImg " :key="index">
+                    <img :src="item.productImg[index]" class="r-img" />
                   </splide-slide>
                 </splide>
               </div>
@@ -761,8 +761,8 @@
             <div class="justify-content-between row">
               <div class="col-3">
                 <splide :options="{ rewind: true }" class="r-img">
-                  <splide-slide cl v-for="(im, index) in item.img " :key="index">
-                    <img :src="item.img[index]" class="r-img" />
+                  <splide-slide cl v-for="(im, index) in item.productImg " :key="index">
+                    <img :src="item.productImg[index]" class="r-img" />
                   </splide-slide>
                 </splide>
               </div>
@@ -906,28 +906,9 @@ export default {
      
     },
 
-    setData() {
-      // console.log(this.getShipped);
-      // this.getpage() 
-     
-      // console.log('setdata1');
-      let data = '1/1';
-      this.$store
-      .dispatch('orderBusiness/getOrder', data)
-      .then(() => {
-        console.log('hey yeah');
-      })
-      .catch((err) => {
-        console.log({ err: err });
-      }); 
-     
-    },
+    
 
-    dateFormat(data) {
-      let format = new Date(data);
-
-      return format;
-    },
+    
   },
 
   computed: {
@@ -972,7 +953,7 @@ limitshipped(){
   },
 
   mounted() {
-    // this.all = this.$store.state.orderBusiness.all;
+   
     let url =  window.location.href.split("/");
     let data = url[window.location.href.split("/").length - 1];
     console.log(data);

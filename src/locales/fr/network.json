@@ -84,7 +84,7 @@
     "Post_Title":"Titre du poste",
     "Post_a_Comment":"Poster un commentaire",
     "Photo_Video":"Photo/ Vidéo",
-   " Your_3_Posts_are_pending_for_approval":"Vos 3 Post(s) sont en attente d'approbation",
+   " Your_Posts_are_pending_for_approval":"Vos 3 Post(s) sont en attente d'approbation",
     "Post_a_business_update": "Publier une mise à jour de l'activité",
     "Add_Movie":"Ajouter un film",
     "Add_Hyperlink":"Ajouter un hyperlien",
@@ -136,7 +136,10 @@
     "Pending":"En attente",
     "Search_Something":"Rechercher quelque chose",
     "Send_Request":"Envoyer la demande",
-    "K_Follower":" 5K abonné"
+    "K_Follower":" 5K abonné",
+    "Your_3_Posts_are_pending_for_approval":"Your 3 Posts are pending for approval",
+    "View_All":"voir tout"
+  
    
 
 }

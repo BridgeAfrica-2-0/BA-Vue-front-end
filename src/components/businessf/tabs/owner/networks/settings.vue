@@ -183,7 +183,7 @@
         >
           <b-form-textarea
             id="textarea"
-            placeholder=" $t('network.Enter_something')"
+            :placeholder=" $t('network.Enter_something')"
             rows="3"
             max-rows="6"
             v-model="item.description"

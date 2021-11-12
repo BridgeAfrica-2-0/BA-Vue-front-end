@@ -73,7 +73,7 @@
           {{ $t('network.Your_3_Posts_are_pending_for_approval') }} .&nbsp;&nbsp;&nbsp;&nbsp;<a
             @click="this.$router.push({ name: '/pendingPost' })"
             style="color: #e75c18; text-decoration: underline"
-            >{{ $t('network.View_All') }} </a
+            > {{ $t('network.View_All') }} </a
           >
         </p>
       </div>
@@ -133,7 +133,7 @@
                         ref="document"
                       />
 
-                      <b-button title="Add Movie" size="sm" variant="outline-primary" @click="$refs.movies.click()">
+                      <b-button :title=" $t('network.Add_Movie')" size="sm" variant="outline-primary" @click="$refs.movies.click()">
                         <fas-icon class="icons" :icon="['fas', 'photo-video']" size="lg" />
                       </b-button>
                       <b-button

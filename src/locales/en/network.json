@@ -135,6 +135,14 @@
     "Pending":"Pending",
     "Search_Something":"Search Something",
     "Send_Request":"Send Request",
-    "K_Follower":" 5K Follower"
+    "K_Follower":" 5K Follower",
+   " Add_Movie":"Add_Movie",
+   "delete":"delete",
+   "Update_post":"Update post",
+   "Enter_something":"Enter something",
+   "Your_3_Posts_are_pending_for_approval":"Your 3 Posts are pending for approval",
+   "View_All":"View All"
+   
+    
 
 }

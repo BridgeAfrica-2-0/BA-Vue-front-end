@@ -34,7 +34,7 @@
               <div class="col">
                 <div class="row drop">
                   <b-dropdown variant="ligth" id="dropdown-1" text="Manage" class="m-md-2 noborder">
-                    <b-dropdown-item>Unarchived Order</b-dropdown-item>
+                    <b-dropdown-item>Unarchived</b-dropdown-item>
                     <b-dropdown-item>delete</b-dropdown-item>
                   </b-dropdown>
                 </div>
@@ -103,12 +103,12 @@
       </div>
       <div class="mt-5">
         <div class="inprogress">
-          <div v-for="i in etat1" :key="i">
+          <div v-for="(i, index) in etat1" :key="index">
             <div class="justify-content-start container">
               <div class="container d-flex justify-content-end btn-marg">
                 <div class="manage">
                   <b-dropdown variant="ligth" id="dropdown-1" text="Manage" class="m-md-2">
-                    <b-dropdown-item>Unarchived Order</b-dropdown-item>
+                    <b-dropdown-item>Unarchived</b-dropdown-item>
                     <b-dropdown-item>Delete</b-dropdown-item>
                   </b-dropdown>
                 </div>
@@ -165,6 +165,15 @@
               </div>
             </div>
           </div>
+          <div class="d-flex justify-content-center">
+            <b-pagination
+              v-model="currentPage"
+              :total-rows="rows"
+              :per-page="perPage"
+              aria-controls="my-table"
+              pills
+            ></b-pagination>
+          </div>
         </div>
       </div>
     </div>
@@ -181,6 +190,8 @@ export default {
       rimg: '',
       status: 1,
       etat: 'All',
+      currentPage: 1,
+      perPage: 3,
       img: ['http://urlr.me/YMQXD', 'https://placekitten.com/400/300'],
       options: [
         { value: null, text: 'Please select an option' },
@@ -189,6 +200,11 @@ export default {
       ],
       etat1: ['archived', 'archived', 'archived'],
     };
+  },
+  computed: {
+    rows() {
+      return this.perPage;
+    },
   },
 };
 </script>

@@ -148,5 +148,7 @@
     "Messages": "Messages",
     "Home": "Accueil",
     "Inbox": "Messagerie",
-    "Notification": "Notification"
+    "Notification": "Notification",
+    "Your_3_Post_s_are_pending_for_approval": "Vos (3) publications son en attente d'approbation",
+    "View_All": "Voir Tout"
 }

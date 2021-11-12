@@ -1,5 +1,8 @@
 import axios from "axios";
-
+import io from 'socket.io-client';
+const socket = io('localhost:7000', {
+    transports: ['websocket', 'polling', 'flashsocket'],
+})
 export default {
     namespaced: true,
     state: {
@@ -68,6 +71,26 @@ export default {
     },
 
     actions: {
+        CREATE_ROOM({ commit }, data) {
+            socket.emit('create-biz', [data.receiver_id, data.sender_id]);
+        },
+        selectedChat(data) {
+            // this.scrollToBottom();
+            this.createRoom(data.id);
+            this.chatId = data.id;
+            let receiver = { receiverID: data.id, keyword: null };
+            if (data.type == 'user') {
+                this.histBizToUser(receiver);
+            } else if (data.type == 'network') {
+                this.histBizToNetwork(receiver);
+            } else {
+                this.histBizToBiz(receiver);
+            }
+            this.newMsg = false;
+            this.chatSelected = { active: true, clickedId: data.id, ...data.chat };
+            console.log('[DEBUG] Chat selected:', this.chatSelected);
+        },
+
         GET_BIZS({ commit, state }, data) {
             commit("setBizs", []);
 

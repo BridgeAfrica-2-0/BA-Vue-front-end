@@ -1,20 +1,14 @@
 <template>
-  <div class="" style="overflow-y: hidden; padding:0px">
+  <div class="" style="overflow-y: hidden; padding: 0px">
     <navbar />
 
     <div class="container-fluid">
-      <ly-tab
-        v-model="selectedId"
-        :items="items"
-        :options="options"
-        class="center-ly"
-      >
-      </ly-tab>
+      <ly-tab v-model="selectedId" :items="items" :options="options" class="center-ly"> </ly-tab>
 
       <hr width="100%" class="d-none" d-md-block />
     </div>
 
-    <div class=" " v-if="selectedId == '0'">
+    <div class="mt-3" v-if="selectedId == '0'">
       <Business />
     </div>
 
@@ -43,97 +37,129 @@
 </template>
 
 <script>
-import navbar from "@/components/navbar";
-import Business from "../components/businessOwner/business";
+import navbar from '@/components/navbar';
+import Business from '../components/businessOwner/business';
+//import Pending from "../components/businessOwner/pending";
+//import Insight from "../components/businessOwner/insight";
+//import Notification from "../components/businessOwner/notification";
+import Settings from '../components/businessOwner/settings';
 
-import Settings from "../components/businessOwner/settings";
+import Inbox from '../components/businessOwner/inbox';
 
-import Inbox from "../components/businessOwner/inbox";
+import LyTab from '@/tab/src/index.vue';
 
-import LyTab from "@/tab/src/index.vue";
+import axios from 'axios';
 
-import Footer from "../components/footer";
+import Footer from '../components/footer';
 export default {
-  name: "Home",
+  name: 'Home',
   components: {
     navbar,
     Business,
-   
+    //Pending,
     LyTab,
     Settings,
-   
+    //  Insight,
     Inbox,
-   
-    Footer
+    // Notification,
+    Footer,
   },
   data() {
     return {
-      selectedId: 0,
       bottomSelectedId: 0,
       url_data: null,
       items: [
-        { label: "Home ", icon: "" },
+        { label: 'Home ', icon: '' },
 
-        { label: "Inbox", icon: "" },
-        { label: "Notification", icon: "" },
-        { label: "Pending Post", icon: "" },
-        { label: "Insight", icon: "" },
+        { label: 'Inbox', icon: '' },
+        { label: 'Notification', icon: '' },
+        { label: 'Pending Post', icon: '' },
+        { label: 'Insight', icon: '' },
 
-        { label: "Settings", icon: "" }
+        { label: 'Settings', icon: '' },
       ],
       options: {
-        activeColor: "#1d98bd"
-      }
+        activeColor: '#1d98bd',
+      },
     };
   },
 
   methods: {
     businessInfo() {
       this.$store
-        .dispatch("businessOwner/businessInfo", this.url_data)
+        .dispatch('businessOwner/businessInfo', this.url_data)
         .then(() => {
-          console.log("hey yeah");
+          console.log('hey yeah');
         })
-        .catch(err => {
+        .catch((err) => {
           console.log({ err: err });
         });
     },
 
-  
+    CommunityBusiness() {
+      this.$store
+        .dispatch('businessOwner/CommunityBusiness', this.url_data)
+        .then(() => {
+          console.log('hey yeah');
+        })
+        .catch((err) => {
+          console.log({ err: err });
+        });
+    },
+
+    CommunityPeople() {
+      this.$store
+        .dispatch('businessOwner/CommunityPeople', this.url_data)
+        .then(() => {
+          console.log('hey yeah');
+        })
+        .catch((err) => {
+          console.log({ err: err });
+        });
+    },
 
     businessCommunityTotal() {
       this.$store
-        .dispatch("businessOwner/businessCommunityTotal", this.url_data)
+        .dispatch('businessOwner/businessCommunityTotal', this.url_data)
         .then(() => {
-          console.log("hey yeah");
+          console.log('hey yeah');
         })
-        .catch(err => {
+        .catch((err) => {
           console.log({ err: err });
         });
     },
 
     ownerPost() {
       this.$store
-        .dispatch("businessOwner/ownerPost", this.url_data)
+        .dispatch('businessOwner/ownerPost', this.url_data)
         .then(() => {
-          console.log("hey yeah");
+          console.log('hey yeah');
         })
-        .catch(err => {
+        .catch((err) => {
           console.log({ err: err });
         });
-    }
+    },
   },
-  computed: {},
+  computed: {
+    selectedId() {
+      return this.$store.getters['businessOwner/getSelectedTab'];
+    },
+  },
 
   mounted() {
     this.url_data = this.$route.params.id;
 
+    console.log(this.url_data);
 
-     this.businessInfo();
-   
-     this.businessCommunityTotal();
-     this.ownerPost();
-  }
+    this.businessInfo();
+
+    this.CommunityBusiness();
+
+    this.CommunityPeople();
+
+    this.businessCommunityTotal();
+    this.ownerPost();
+  },
 };
 </script>
 

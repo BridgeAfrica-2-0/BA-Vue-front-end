@@ -2,7 +2,7 @@
   <div>
     <navbar />
     <div class="container body p-0">
-      <h1>Order Details</h1>
+      <h1 >Order Details</h1>
 
       <div class="card  my-2 shadow">
         <div class="card-body row">
@@ -86,13 +86,41 @@
           <div class="justify-content-between row my-5" v-for="item in orderDetails.orderItems" :key="item.id">
             <div class="col-3   margimg">
               <splide :options="{ rewind: true }" class="r-img">
-                <splide-slide cl v-for="(im, index) in img" :key="index">
+                <splide-slide >
                   <img :src="item.product_picture" class="r-img" />
                 </splide-slide>
               </splide>
             </div>
             <div class="ligne"><br /></div>
-            <div class="col-3  text-end bold  margtext">
+
+            <div class="col-6   text-end   margtext">
+              <div class="row">
+                 <div class="col-3 bold"><h3 class="h3 margm2">Name:</h3></div>
+                <div class="col"> <h3>{{ item.product_name }}</h3></div>
+              </div>
+              <div class="row">
+                <div class="col-3 bold"><h3 class="h3 margm2">product ID :</h3></div>
+                <div class="col"><h3>{{ item.product_id }}</h3></div>
+              </div>
+              <div class="row">
+                <div class="col-3 bold">  <h3 class="h3 margm2">Quantity:</h3></div>
+                <div class="col"><h3>{{ item.quantity }}</h3></div>
+              </div>
+              <div class="row">
+                <div class="col-3 bold"> <h3 class="h3 margm2">price :</h3></div>
+                <div class="col"> <h3>{{ item.price }} XAF</h3></div>
+              </div>
+              <div class="row">
+                <div class="col-3 bold"><h3 class="h3 margm2">shipping cost:</h3></div>
+                <div class="col"> <h3>{{ item.shipping_amount }} XAF</h3></div>
+              </div>
+              <div class="row">
+                <div class="col-3 bold"><h3 class="h3 margm2">total cost :</h3></div>
+                <div class="col"><h3>{{ parseInt(item.sub_total) + parseInt(item.tax_amount) + parseInt(item.shipping_amount) }} XAF</h3></div>
+              </div>
+            </div>
+
+            <!-- <div class="col-3   text-end bold  margtext">
               <h3 class="h3 margm2">Name:</h3>
               <h3 class="h3 margm2">product ID :</h3>
               <h3 class="h3 margm2">Quantity:</h3>
@@ -107,7 +135,7 @@
               <h3>{{ item.price }} XAF</h3>
               <h3>{{ item.shipping_amount }} XAF</h3>
               <h3>{{ parseInt(item.sub_total) + parseInt(item.tax_amount) + parseInt(item.shipping_amount) }} XAF</h3>
-            </div>
+            </div> -->
 
             <div class="col margtext">
               <h3 class="bold1">status</h3>
@@ -126,6 +154,18 @@
               <br />
             </div>
           </div>
+
+           <b-pagination
+     
+      v-model="currentPage"
+      :total-rows="total"
+      :per-page="per_page"
+      aria-controls="my-table"
+      @change="changePage"
+      align="center"
+    
+    ></b-pagination>
+    
         </div>
       </div>
 
@@ -185,6 +225,9 @@ export default {
   components: { navbar },
   data() {
     return {
+      currentPage: 1,
+      per_page: 5,
+      total: 10,
       value: 0,
       max: 50,
       img: ['http://urlr.me/YMQXD', 'https://placekitten.com/400/300'],
@@ -217,12 +260,43 @@ export default {
 
   methods: {
     getBusinessOrderDetails() {
-      this.$store.dispatch('businessOrderDetails/getOrderDetails').then(response => {
+      let data = {
+        orderId: 23,
+        businessId: 1
+      }
+      this.$store.dispatch('businessOrderDetails/getOrderDetails', data).then(response => {
         console.log(response);
       });
     },
+
+  changePage(value) {
+      // this.$store.commit("marketSearch/setProducts", '');
+      // this.$store.commit("marketSearch/setLoader", true);
+      // this.prodLoader = true;
+      this.currentPage = value;
+      let data = {
+        orderId: 23,
+        businessId: 1,
+        page: this.currentPage 
+      }
+      this.$store
+        .dispatch("businessOrderDetails/nextPage", data)
+        .then((res) => {
+          console.log("products total: ");
+          // console.log(this.products);
+          // this.prodLoader = false;
+          this.total = this.orderDetails.total;
+          console.log(this.total);
+        })
+        .catch((err) => {
+          // this.prodLoader = false;
+          console.log("products error: ");
+          console.error(err);
+        });
+    },
   },
 };
+
 </script>
 
 <style scoped>

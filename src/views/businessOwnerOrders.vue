@@ -73,8 +73,8 @@
             <div class="justify-content-center row">
               <div class="col-4 margimg">
                 <splide :options="{ rewind: true }" class="r-img1">
-                  <splide-slide cl v-for="(im, index) in img" :key="index">
-                    <img :src="img[index]" class="r-img1" />
+                  <splide-slide cl v-for="(im, index) in item.img " :key="index">
+                    <img :src="item.img[index]" class="r-img1" />
                   </splide-slide>
                 </splide>
               </div>
@@ -165,8 +165,8 @@
             <div class="justify-content-center row">
               <div class="col-4 margimg">
                 <splide :options="{ rewind: true }" class="r-img1">
-                  <splide-slide cl v-for="(im, index) in img" :key="index">
-                    <img :src="img[index]" class="r-img1" />
+                  <splide-slide cl v-for="(im, index) in item.img " :key="index">
+                    <img :src="item.img[index]" class="r-img1" />
                   </splide-slide>
                 </splide>
               </div>
@@ -256,8 +256,8 @@
             <div class="justify-content-center row">
               <div class="col-4 margimg">
                 <splide :options="{ rewind: true }" class="r-img1">
-                  <splide-slide cl v-for="(im, index) in img" :key="index">
-                    <img :src="img[index]" class="r-img1" />
+                  <splide-slide cl v-for="(im, index) in item.img " :key="index">
+                    <img :src="item.img[index]" class="r-img1" />
                   </splide-slide>
                 </splide>
               </div>
@@ -349,8 +349,8 @@
             <div class="justify-content-center row">
               <div class="col-4 margimg">
                 <splide :options="{ rewind: true }" class="r-img1">
-                  <splide-slide cl v-for="(im, index) in img" :key="index">
-                    <img :src="img[index]" class="r-img1" />
+                  <splide-slide cl v-for="(im, index) in item.img " :key="index">
+                    <img :src="item.img[index]" class="r-img1" />
                   </splide-slide>
                 </splide>
               </div>
@@ -494,15 +494,15 @@
               <span class="gras" @click="setData">Order</span>
               <span class="text-success">#{{ item.oderId }}</span> <br />
 
-              <span class="flou">{{ item.shippingAddress }}{{ dateFormat(item.dateCreated) }}</span>
+              <span class="flou">{{ item.shippingAddress }}{{ moment(item.dateCreated).format('DD/MM/YYYY HH:mm') }}</span>
               <hr />
             </div>
 
             <div class="justify-content-between row">
               <div class="col-3">
                 <splide :options="{ rewind: true }" class="r-img">
-                  <splide-slide cl v-for="(im, index) in img" :key="index">
-                    <img :src="img[index]" class="r-img" />
+                  <splide-slide cl v-for="(im, index) in item.img " :key="index">
+                    <img :src="item.img[index]" class="r-img" />
                   </splide-slide>
                 </splide>
               </div>
@@ -588,8 +588,8 @@
             <div class="justify-content-between row">
               <div class="col-3">
                 <splide :options="{ rewind: true }" class="r-img">
-                  <splide-slide cl v-for="(im, index) in img" :key="index">
-                    <img :src="img[index]" class="r-img" />
+                  <splide-slide cl v-for="(im, index) in item.img " :key="index">
+                    <img :src="item.img[index]" class="r-img" />
                   </splide-slide>
                 </splide>
               </div>
@@ -674,8 +674,8 @@
             <div class="justify-content-between row">
               <div class="col-3">
                 <splide :options="{ rewind: true }" class="r-img">
-                  <splide-slide cl v-for="(im, index) in img" :key="index">
-                    <img :src="img[index]" class="r-img" />
+                  <splide-slide cl v-for="(im, index) in item.img " :key="index">
+                    <img :src="item.img[index]" class="r-img" />
                   </splide-slide>
                 </splide>
               </div>
@@ -761,8 +761,8 @@
             <div class="justify-content-between row">
               <div class="col-3">
                 <splide :options="{ rewind: true }" class="r-img">
-                  <splide-slide cl v-for="(im, index) in img" :key="index">
-                    <img :src="img[index]" class="r-img" />
+                  <splide-slide cl v-for="(im, index) in item.img " :key="index">
+                    <img :src="item.img[index]" class="r-img" />
                   </splide-slide>
                 </splide>
               </div>
@@ -833,14 +833,14 @@ export default {
   data() {
     return {
       moment: moment,
-      rows: 12,
+      rows: this.limitall,
       currentPage: 0,
-      perPage: 2,
+      perPage: 10,
       selected: '',
       rimg: '',
       status: 1,
       etat: 'All',
-      img: ['http://urlr.me/YMQXD', 'https://placekitten.com/400/300'],
+      
       options: [
         { value: null, text: 'Please select an option' },
         { value: 'a', text: 'last 5 days' },
@@ -859,7 +859,7 @@ export default {
 
       if (p == 1) {
         this.etat = 'All';
-        this.rows = this.getAll.length;
+        this.rows = this.limitall;
       
         this.currentPage= 1;
       } else if (p == 2) {
@@ -907,10 +907,19 @@ export default {
     },
 
     setData() {
-      console.log(this.getShipped);
-      this.getpage() 
+      // console.log(this.getShipped);
+      // this.getpage() 
      
-      console.log('setdata1');
+      // console.log('setdata1');
+      let data = '1/1';
+      this.$store
+      .dispatch('orderBusiness/getOrder', data)
+      .then(() => {
+        console.log('hey yeah');
+      })
+      .catch((err) => {
+        console.log({ err: err });
+      }); 
      
     },
 
@@ -944,6 +953,10 @@ export default {
     let start = this.getCurrentpage * this.perPage;
     return this.$store.getters["orderBusiness/shipped"].slice(start - this.perPage, start - this.perPage+this.perPage );
   },
+
+limitall(){
+  return  this.$store.state.orderBusiness.all.length ;
+},
 
 limitprocess(){
   return this.$store.getters["orderBusiness/process"].length;

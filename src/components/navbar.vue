@@ -393,7 +393,7 @@
                       </div>
                     </div>
                     <hr class="h-divider" />
-                    <a href="https://bridgeafrica.info/nav/notifications-view-all.html" class="text-ored"
+                    <a href="/settings" class="text-ored"
                       ><u>See all Notifications</u></a
                     >
                   </div>

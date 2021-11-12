@@ -1391,26 +1391,16 @@
   resolved "https://registry.yarnpkg.com/@soda/get-current-script/-/get-current-script-1.0.2.tgz#a53515db25d8038374381b73af20bb4f2e508d87"
   integrity sha512-T7VNNlYVM1SgQ+VsMYhnDkcGmWhQdL0bDyGm5TlQ3GBXnJscEClUUOKduWTmm2zCnvNLC1hc3JpuXjs/nFOc5w==
 
-"@splidejs/splide-extension-video@^0.4.6":
-  version "0.4.6"
-  resolved "https://registry.yarnpkg.com/@splidejs/splide-extension-video/-/splide-extension-video-0.4.6.tgz#fe832e0a2f87a56896e800aead73e6ef78f2cb96"
-  integrity sha512-UEqxkuYClYDhV+DsX9384wKj6FWwWN3HUvUXcNPVKZiHvh0Zn0t1M2w/hcDRJ3VtCxFhx92Kgzlkf22HqdyF+g==
-  dependencies:
-    "@vimeo/player" "^2.10.0"
+"@splidejs/splide@^3.3.0":
+  version "3.3.1"
+  resolved "https://registry.yarnpkg.com/@splidejs/splide/-/splide-3.3.1.tgz#9cc7fdcb7192d8549051b4acddf18793fafb67c9"
+  integrity sha512-wb2ZQ7R/7aEJrpC68QNAuPVpsrix9hz3/gTgwy4org+6S2Kf4sQHZzWzj9Yd7NFxlNGVtnvZJjWqPwsrAgTiZg==
 
-"@splidejs/splide@^2.4.13":
-  version "2.4.21"
-  resolved "https://registry.yarnpkg.com/@splidejs/splide/-/splide-2.4.21.tgz#ad1954d8d8822c9bfea0d3dc6a119358b88581ad"
-  integrity sha512-LdIwSnmNsGybCCnA3QG2dOeRv/rQl46jf7FflXxMGX0ADYWyL6UJHWJbMZvHBi5I67uRJY1ga/W+CvJ39nH26A==
-
-"@splidejs/vue-splide@0.3.5":
-  version "0.3.5"
-  resolved "https://registry.yarnpkg.com/@splidejs/vue-splide/-/vue-splide-0.3.5.tgz#375d3c615fd88c612f46b8029b4ad2007ad6991b"
-  integrity sha512-eI4Kl2v+yAGKMVa9MtfIIPPZtplTfKPx4rCJlZqfethl3tCOGQwL9MxSyLk6bUhl31aOuClxmXQv8O5ubU8fNQ==
+"@splidejs/vue-splide@splidejs/vue-splide":
+  version "0.5.7"
+  resolved "https://codeload.github.com/splidejs/vue-splide/tar.gz/4f78022b187b3b790a0495889031d2160a222c15"
   dependencies:
-    "@splidejs/splide" "^2.4.13"
-    "@splidejs/splide-extension-video" "^0.4.6"
-    vue "^2.6.12"
+    "@splidejs/splide" "^3.3.0"
 
 "@types/body-parser@*":
   version "1.19.1"
@@ -1592,14 +1582,6 @@
     "@types/webpack-sources" "*"
     anymatch "^3.0.0"
     source-map "^0.6.0"
-
-"@vimeo/player@^2.10.0":
-  version "2.16.1"
-  resolved "https://registry.yarnpkg.com/@vimeo/player/-/player-2.16.1.tgz#ed2237b8224dd764419b16ec4e6c3ede5bb2224e"
-  integrity sha512-47pUwVFAYBKbmOpxF6CzQc0VwbVi7LCv8i1H44XgRRoMoI7jwAOSi4CDGinjEMoKOKxsn5/p8ze50XZYwgTVWA==
-  dependencies:
-    native-promise-only "0.8.1"
-    weakmap-polyfill "2.0.1"
 
 "@vue/babel-helper-vue-jsx-merge-props@^1.2.1":
   version "1.2.1"
@@ -3444,6 +3426,18 @@ content-type@~1.0.4:
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/content-type/-/content-type-1.0.4.tgz#e138cc75e040c727b1966fe5e5f8c9aee256fe3b"
   integrity sha512-hIP3EEPs8tB9AT1L+NUqtwOAps4mk2Zob89MWXMHjHWg9milF/j4osnnQLXBCBFBk/tvIG/tUc9mOUJiPBhPXA==
+
+convert-pro@*:
+  version "1.3.1"
+  resolved "https://registry.yarnpkg.com/convert-pro/-/convert-pro-1.3.1.tgz#eb064a6af2ce47e5bb3df84383f60d06be489ae7"
+  integrity sha512-igjLJtSJRhcz5/FXMnpexOT+bzetWhZ+azxL1pHkPIhUWOBTZy0eee6QL5EFF5/l/8XP0fHoFxCfQFLbUxMogg==
+
+convert-size@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/convert-size/-/convert-size-1.2.0.tgz#270bdfaea2dfa86549250ce10f3d37ebc510221e"
+  integrity sha512-4NKr5crbmFi+hGAzEkEyL24WwJJ0cJqZaRXcJsHeuwrqlC/I2TmzJhjSVbrFPCH+jQxPgsS356uRcXXSkQEqeQ==
+  dependencies:
+    convert-pro "*"
 
 convert-source-map@^1.7.0:
   version "1.8.0"
@@ -7196,11 +7190,6 @@ nanoscroller@^0.8.7:
     css "*"
     jquery ">=1.6"
 
-native-promise-only@0.8.1:
-  version "0.8.1"
-  resolved "https://registry.yarnpkg.com/native-promise-only/-/native-promise-only-0.8.1.tgz#20a318c30cb45f71fe7adfbf7b21c99c1472ef11"
-  integrity sha1-IKMYwwy0X3H+et+/eyHJnBRy7xE=
-
 native-request@^1.0.5:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/native-request/-/native-request-1.1.0.tgz#acdb30fe2eefa3e1bc8c54b3a6852e9c5c0d3cb0"
@@ -10886,11 +10875,6 @@ wcwidth@^1.0.1:
   integrity sha1-8LDc+RW8X/FSivrbLA4XtTLaL+g=
   dependencies:
     defaults "^1.0.3"
-
-weakmap-polyfill@2.0.1:
-  version "2.0.1"
-  resolved "https://registry.yarnpkg.com/weakmap-polyfill/-/weakmap-polyfill-2.0.1.tgz#ff0278c7f75bb0c492fc3343257f3e87114d709a"
-  integrity sha512-Jy177Lvb1LCrPQDWJsXyyqf4eOhcdvQHFGoCqSv921kVF5i42MVbr4e2WEwetuTLBn1NX0IhPzTmMu0N3cURqQ==
 
 webidl-conversions@^3.0.0:
   version "3.0.1"

@@ -2,12 +2,12 @@
     "Search_Something": "Search Something",
     "No_More_Request": "No More Request",
     "Business_Name": "Business Name",
-    "mywebsite_com": "monsiteweb.com",
+    "mywebsite_com": "mywebsite.com",
     "Category": "Category",
     "Community": "Community",
     "Location": "Location",
     "Keyword": "Keyword",
-    "About": "",
+    "About": "About",
     "Business_Category": "Business Category",
     "11M_Community": "1.1M Community",
     "Neighbourhood": "Neighbourhood",
@@ -37,11 +37,12 @@
     "Feedback": "Feedback",
     "Your_Feedback_is_about": "Your Feedback is about",
     "Brief_description_of_your_feedback": "Brief description of your feedback",
-    "Enter_something": "Enterom Sething...",
+    "Enter_something": "Enter Something...",
     "Submit": "Submit",
     "Feedback_Type": "Feedback Type",
     "Reset": "Reset",
     "Apply": "Apply",
-    "Details": "Details"
+    "Details": "Details",
+    "Members": "Members"
 
 }

@@ -8,7 +8,7 @@ import passrecover from './passrecover.json'
 import welcome from './welcome.json'
 import dashboard from './dashboard.json'
 import profileowner from './profileowner.json'
-import membernet from './membernet.json'
+import memnetwork from './memnetwork.json'
 
 export const defaultLocale = 'en'
 
@@ -23,5 +23,5 @@ export const en = {
     dashboard: dashboard,
     profileowner: profileowner,
     welcome: welcome,
-    membernet: membernet,
+    memnetwork: memnetwork,
 }

@@ -174,67 +174,74 @@ import axios from "axios"
   actions : {
   
     getOrder({ commit,state },data) {
+        let pages = 1;
+        let continu = true
+     while (continu) {
+        return axios.get(`/order/getOrderBusiness/${data}/${pages}` ).then( response  => {
+          continu = response.data.data.length ;
+          pages++
+            
+          response.data.data.forEach(element => {
         
-        // return axios.get("/order/getOrderBusiness/"+data ).then( response  => {
-
+            commit("setAll", element);
+          });
+    
           
-        //     console.log("getOrder");
-        //  console.log(response);
-        //     //  commit("setAll", response.data.data);
-        // });
-
+        });
         
-        let page = 0;
-        let stop = 20;
-
-        while(stop >= page){
-
-
-        let data = [ {
-          oderId: page+2,
-          shippingAddress: "yaounde",
-          dateCreated: "2021-11-04T13:33:49.000000Z",
-          Totalproduct: 1,
-          Totalprice: 5000,
-          shipping_cost: 19300,
-          total: 24300,
-          status: "process",
-          img: ['http://urlr.me/YMQXD', 'https://placekitten.com/400/300']
-      },
-      {
-          oderId: page+1,
-          shippingAddress: "poste",
-          dateCreated: "2021-11-04T13:35:51.000000Z",
-          Totalproduct: 2,
-          Totalprice: 13500,
-          shipping_cost: 35000,
-          total: 48500,
-          status: "shipped",
-          img: ['http://urlr.me/YMQXD', 'https://placekitten.com/400/300']
-      },
-      {
-          oderId: page,
-          shippingAddress: "obili",
-          dateCreated: "2021-11-04T13:36:17.000000Z",
-          Totalproduct: 1,
-          Totalprice: 20000,
-          shipping_cost: 1000,
-          total: 21000,
-          status: "re-shedule",
-          img: ['http://urlr.me/YMQXD', 'https://placekitten.com/400/300']
-      } ]
-
-
-      data.forEach(element => {
+      }
         
-        commit("setAll", element);
-      });
+      //   let page = 0;
+      //   let stop = 20;
 
-          console.log(state.all);
+      //   while(stop >= page){
+
+
+      //   let data = [ {
+      //     oderId: page+2,
+      //     shippingAddress: "yaounde",
+      //     dateCreated: "2021-11-04T13:33:49.000000Z",
+      //     Totalproduct: 1,
+      //     Totalprice: 5000,
+      //     shipping_cost: 19300,
+      //     total: 24300,
+      //     status: "process",
+      //     img: ['http://urlr.me/YMQXD', 'https://placekitten.com/400/300']
+      // },
+      // {
+      //     oderId: page+1,
+      //     shippingAddress: "poste",
+      //     dateCreated: "2021-11-04T13:35:51.000000Z",
+      //     Totalproduct: 2,
+      //     Totalprice: 13500,
+      //     shipping_cost: 35000,
+      //     total: 48500,
+      //     status: "shipped",
+      //     img: ['http://urlr.me/YMQXD', 'https://placekitten.com/400/300']
+      // },
+      // {
+      //     oderId: page,
+      //     shippingAddress: "obili",
+      //     dateCreated: "2021-11-04T13:36:17.000000Z",
+      //     Totalproduct: 1,
+      //     Totalprice: 20000,
+      //     shipping_cost: 1000,
+      //     total: 21000,
+      //     status: "re-shedule",
+      //     img: ['http://urlr.me/YMQXD', 'https://placekitten.com/400/300']
+      // } ]
+
+
+      // data.forEach(element => {
+        
+      //   commit("setAll", element);
+      // });
+
+      //     console.log(state.all);
       
-          page++;
-          console.log(page);
-        }
+      //     page++;
+      //     console.log(page);
+      //   }
     
     }
     

@@ -33,7 +33,7 @@ import forgotPassword from "@/views/forgotPassword";
 import navMessage from "@/views/navMessaging";
 import Blec from "@/views/blec";
 import memberNetworkFollower from "@/views/memberNetworkFollower";
- import govx from "@/views/test";
+import govx from "@/views/test";
 import networkEditors from "@/views/networkEditors";
 // import Test from "@/views/test";
 import templateView from "@/views/templateView";
@@ -55,6 +55,7 @@ import ordersdetail from "@/views/odersDetail";
 import businessordersdetail from "@/views/businessordersdetail"
 
 import payment from "@/views/payment";
+import profileNotification from "@/views/profileNotification";
 
 
 Vue.use(VueRouter);
@@ -91,9 +92,9 @@ const routes = [
     //   auth: true,
     // },
   },
-  
 
-  
+
+
   {
     path: "/",
     name: "home",
@@ -114,6 +115,11 @@ const routes = [
     component: payment
   },
 
+  {
+    path: "/notifications",
+    name: "all-notification",
+    component: profileNotification
+  },
 
   {
     path: "/govx",

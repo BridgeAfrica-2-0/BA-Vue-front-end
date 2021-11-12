@@ -1,5 +1,5 @@
 <template>
-  <header class="">
+  <header class="shadow-nav">
     <nav class="navbar navbar-expand-xl p-3 mb-3 rounded">
       <div class="container-fluid">
         <div class="col-md-12 col-lg-2 col-xl-2 text-center">
@@ -394,9 +394,9 @@
                       </div>
                     </div>
                     <hr class="h-divider" />
-                    <a href="https://bridgeafrica.info/nav/notifications-view-all.html" class="text-ored"
-                      ><u>See all Notifications</u></a
-                    >
+                    <router-link :to="{name:'all-notification'}" class="text-ored"
+                      ><u>See all Notifications</u>
+                    </router-link>
                   </div>
                 </b-popover>
               </div>
@@ -440,10 +440,12 @@
                     </router-link>
                     <hr class="h-divider" />
 
-                    <a href="/settings" class="other-menu suggest-item cursor-pointer text-decoration-none text-dark">
+
+
+                    <router-link :to="{name: 'settings'}" class="other-menu suggest-item cursor-pointer text-decoration-none text-dark">
                       <span class="mr-2"><fas-icon class="violet search" :icon="['fas', 'cogs']" /></span>
                       Account Settings
-                    </a>
+                    </router-link>
                     <hr class="h-divider" />
                     <div class="other-menu suggest-item cursor-pointer">
                       <span class="mr-1"><fas-icon class="violet search" :icon="['fas', 'question']" /></span>
@@ -508,11 +510,11 @@
             </router-link>
             <hr class="h-divider" />
 
-            <a href="/settings" class="other-menu suggest-item cursor-pointer text-decoration-none text-dark">
+            <router-link :to="{name: 'settings'}" class="other-menu suggest-item cursor-pointer text-decoration-none text-dark">
               <span class="mr-2"><fas-icon class="violet search" :icon="['fas', 'cogs']" /></span>
 
               Account Settings
-            </a>
+            </router-link>
             <hr class="h-divider" />
             <div class="other-menu suggest-item cursor-pointer">
               <span class="mr-1"><fas-icon class="violet search" :icon="['fas', 'question']" /></span>
@@ -820,8 +822,17 @@ export default {
     margin-top: -145px !important;
   }
 }
-
+.shadow-nav {
+    box-shadow: 0 0.25rem 0.5rem rgb(0 0 0 / 10%) !important;
+}
 .mup {
   margin-top: -5px;
+}
+.fixed-top {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 1030;
 }
 </style>

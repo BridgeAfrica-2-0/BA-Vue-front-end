@@ -454,8 +454,8 @@
                       Language
                     </div>
                     <hr class="h-divider" />
-                    <a
-                      href="https://bridgeafrica.info/nav/owner-other-menu.html"
+                    <a @click="logout"
+                      href="#"
                       class="
                         other-menu
                         suggest-item
@@ -524,7 +524,8 @@
             </div>
             <hr class="h-divider" />
             <a
-              href="https://bridgeafrica.info/nav/owner-other-menu.html"
+              href="#"
+              @click="logout"
               class="
                 other-menu
                 suggest-item
@@ -599,6 +600,7 @@ export default {
       setNetworks: 'social/FIND_USER_NETWORK',
       setBusiness: 'social/FIND_USER_BUSNESS',
       lauchNetworkRequest: 'social/INIT',
+       Logout: 'auth/logout',
     }),
     toggleinfput() {
       this.$refs.mobileinput.style.display = 'block';
@@ -612,6 +614,12 @@ export default {
         })
         .catch(() => console.log("error"));
     },
+
+    logout(){
+
+      this.Logout();
+    },
+
     toggleinput() {
       this.$refs.mobileinput.style.display = "block";
     },

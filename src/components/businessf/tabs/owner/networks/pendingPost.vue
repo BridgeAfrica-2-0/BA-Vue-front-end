@@ -322,6 +322,20 @@ export default {
 
 
  
+   
+
+
+    ownerPost() {
+      this.$store
+        .dispatch('profile/ownerPost')
+        .then(() => {
+          console.log('hey yeah');
+        })
+        .catch(err => {
+          console.log({ err: err });
+        });
+    },
+
 
 
 

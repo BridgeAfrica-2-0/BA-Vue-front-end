@@ -122,17 +122,26 @@ const routes = [{
         path: "/dashboard",
         name: "dashboard",
         component: dashboard,
+        meta: {
+            auth: true,
+        },
     },
 
     {
         path: "/profile_owner",
         name: "profile_owner",
         component: profile_owner,
+        meta: {
+            auth: true,
+        },
     },
     {
         path: "/profilefollower/:id?",
         name: "ProfileFollower",
         component: profileFollower,
+        meta: {
+            auth: true,
+        },
     },
     {
         path: "/template_viewer",
@@ -143,6 +152,9 @@ const routes = [{
         path: "/business_owner/:id?",
         name: "BusinessOwner",
         component: businessOwner,
+        meta: {
+            auth: true,
+        },
     },
 
 
@@ -150,6 +162,9 @@ const routes = [{
         path: "/business_editor/:id?",
         name: "BusinessEditor",
         component: businessEditor,
+        meta: {
+            auth: true,
+        },
     },
 
     {
@@ -182,16 +197,25 @@ const routes = [{
         path: "/network/:id?",
         name: "networks",
         component: networks,
+        meta: {
+            auth: true,
+        },
     },
     {
         path: "/networks/:id?",
         name: "networks",
         component: networks,
+        meta: {
+            auth: true,
+        },
     },
     {
         path: "/network_editors/:id?",
         name: "NetworkEditors",
         component: networkEditors,
+        meta: {
+            auth: true,
+        },
     },
     {
         path: "/login",
@@ -231,6 +255,9 @@ const routes = [{
         path: "/businessfollower/:id?",
         name: "BusinessFollower",
         component: businessFollower,
+        meta: {
+            auth: true,
+        },
     },
     {
         path: "/businessvisitor",
@@ -272,6 +299,9 @@ const routes = [{
         path: "/profile/:id?",
         name: "Follower",
         component: Follower,
+        meta: {
+            auth: true,
+        },
     },
     {
         path: "/profilevisitor",

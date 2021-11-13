@@ -3,6 +3,7 @@
 		<!-- <b-button v-b-modal.product-details variant="primary">Product Details</b-button>
 		<ProductDetails/> -->
 		<!-- Stepper header start-->
+
 		<b-container class="my-4" fluid="lg">
 			<hr class="h-divider" />
 			<PaymentProgress
@@ -62,6 +63,7 @@
 				</b-col>
 			</b-row>
 		</b-container>
+		<FlashMessage />
 	</div>
 </template>
 <script>
@@ -72,10 +74,11 @@
 	import ConfirmPayment from "./ConfirmPayment";
 	import PaymentProgress from "./PaymentProgress";
 	import CreateShippingAddress from "./CreateShippingAddress";
+	import axios from "axios";
 	// import ProductDetails from "./ProductDetails";
 
 	export default {
-		name: "PaymentStepper",
+		name: "PaymentStepper", 
 		components: {
 			Order,
 			ShippingAdress,
@@ -162,12 +165,33 @@
 					},
 				];
 			},
-			handleConfirmPayment() {
+			handleConfirmPayment({number, amount, operator = 'MTN', order_id = 23}) {
 				// this.$emit("nextpaymentstep");
 				// this.showRequestPayment = false;
 				// this.showConfirmPayment = true;
-				this.showConfirmPayment = true;
-				this.onClickNext();
+				// this.showConfirmPayment = true;
+				// this.onClickNext();
+				if (process.env.NODE_ENV == "development") {
+					number = 46733123451;
+					amount = 100;
+				}
+				const data = {
+					phone: number,
+					amount: amount,
+					orderId: order_id,
+					operator: operator,
+				}
+				axios.post('mtn/start-momo-transaction', data)
+					.then((response) => {
+						console.log(response);
+					}).catch(error => {
+						this.flashMessage.show({
+							status: "error",
+
+							message: "Transaction Failed"
+						});
+						console.dir(error)
+					})
 			},
 		},
 	};

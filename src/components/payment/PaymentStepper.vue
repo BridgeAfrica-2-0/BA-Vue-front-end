@@ -169,8 +169,7 @@
 				// this.$emit("nextpaymentstep");
 				// this.showRequestPayment = false;
 				// this.showConfirmPayment = true;
-				// this.showConfirmPayment = true;
-				// this.onClickNext();
+				
 				if (process.env.NODE_ENV == "development") {
 					number = 46733123451;
 					amount = 100;
@@ -183,6 +182,8 @@
 				}
 				axios.post('mtn/start-momo-transaction', data)
 					.then((response) => {
+						this.showConfirmPayment = true;
+						this.onClickNext();
 						console.log(response);
 					}).catch(error => {
 						this.flashMessage.show({
@@ -191,7 +192,7 @@
 							message: "Transaction Failed"
 						});
 						console.dir(error)
-					})
+					});
 			},
 		},
 	};

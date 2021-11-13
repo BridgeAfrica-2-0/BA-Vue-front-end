@@ -33,7 +33,7 @@ import LoadScript from 'vue-plugin-load-script';
 import InfiniteLoading from 'vue-infinite-loading';
 
 Vue.use(InfiniteLoading, {
-    /* options */
+  /* options */
 });
 Vue.use(LoadScript);
 
@@ -70,18 +70,18 @@ Vue.prototype.$axios = axios;
 //   });
 
 Vue.use(VueSocialauth, {
-    providers: {
-        facebook: {
-            clientId: process.env.VUE_APP_FACEBOOK_CLIENT_ID,
-            client_secret: process.env.VUE_APP_FACEBOOK_CLIENT_SECRETE,
-            redirectUri: process.env.VUE_APP_FACEBOOK_RETURN_URL,
-        },
-        google: {
-            clientId: process.env.VUE_APP_GOOGLE_CLIENT_ID,
-            client_secret: process.env.VUE_APP_GOOGLE_CLIENT_SECRETE,
-            redirectUri: process.env.VUE_APP_GOOGLE_RETURN_URL,
-        },
+  providers: {
+    facebook: {
+      clientId: process.env.VUE_APP_FACEBOOK_CLIENT_ID,
+      client_secret: process.env.VUE_APP_FACEBOOK_CLIENT_SECRETE,
+      redirectUri: process.env.VUE_APP_FACEBOOK_RETURN_URL,
     },
+    google: {
+      clientId: process.env.VUE_APP_GOOGLE_CLIENT_ID,
+      client_secret: process.env.VUE_APP_GOOGLE_CLIENT_SECRETE,
+      redirectUri: process.env.VUE_APP_GOOGLE_RETURN_URL,
+    },
+  },
 });
 
 import FlashMessage from '@smartweb/vue-flash-message';
@@ -136,25 +136,25 @@ Vue.use(IconsPlugin);
 //import InfiniteLoading from "vue-infinite-loading";
 
 Vue.use(InfiniteLoading, {
-    /* options */
+  /* options */
 });
 
 Vue.use(VueGoogleMaps, {
-    load: {
-        key: 'AIzaSyAGZU6cqra18t1fhN1AbzRsEc_pgt7n2C8',
-        libraries: 'places',
-    },
-    autobindAllEvents: false,
-    installComponents: true,
+  load: {
+    key: 'AIzaSyAGZU6cqra18t1fhN1AbzRsEc_pgt7n2C8',
+    libraries: 'places',
+  },
+  autobindAllEvents: false,
+  installComponents: true,
 });
 
- import VueLoading from 'vue-loading-overlay';
- import 'vue-loading-overlay/dist/vue-loading.css';
+import VueLoading from 'vue-loading-overlay';
+import 'vue-loading-overlay/dist/vue-loading.css';
 
 import VueYoutube from 'vue-youtube'
 
 Vue.use(VueYoutube)
- Vue.use(VueLoading);
+Vue.use(VueLoading);
 
 import VueAgile from 'vue-agile';
 
@@ -178,7 +178,7 @@ Vue.use(VueEasyLightbox);
 Vue.config.productionTip = false;
 var user = null;
 
-import './pusher-notification';
+// import './pusher-notification';
 import './redis-notification'
 
 new Vue({

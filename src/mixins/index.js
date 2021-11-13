@@ -367,10 +367,10 @@ export const Redis = {
 
     redis() {
       console.log("call echo redis")
-      // window.Redis.channel('laravel_database_user.2')
-      //   .listen(".UserEvent", payload => {
-      //     console.log(payload)
-      //   })
+      window.Redis.channel('user.545')
+        .listen(".UserEvent", payload => {
+          console.log(payload)
+        })
     }
   },
 

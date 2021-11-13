@@ -1,6 +1,6 @@
 <template>
-  <b-container v-if="networkInfo" style="text-align:left">
-    {{networkInfo}}
+  <b-container v-if="editnetworkinfo" style="text-align:left">
+    <!-- {{editnetworkinfo}} -->
     <FlashMessage />
     <div class="b-bottom">
       <b-container>
@@ -14,7 +14,7 @@
           <b-form-input
             id="bname"
             placeholder=""
-            v-model="networkInfo.admin_name"
+            v-model="editnetworkinfo.admin_name"
             required
           ></b-form-input>
         </b-form-group>
@@ -54,7 +54,7 @@
           label-class="font-weight-bold pt-0"
           class="mb-0"
         >
-          <VuePhoneNumberInput v-model="networkInfo.primary_phone" />
+          <VuePhoneNumberInput v-model="editnetworkinfo.primary_phone" />
         </b-form-group>
       </b-container>
     </div>
@@ -68,7 +68,7 @@
           label-class="font-weight-bold pt-0"
           class="mb-0"
         >
-          <VuePhoneNumberInput v-model="networkInfo.secondary_phone" />
+          <VuePhoneNumberInput v-model="editnetworkinfo.secondary_phone" />
         </b-form-group>
       </b-container>
     </div>
@@ -85,7 +85,7 @@
           <b-form-input
             id="bname"
             placeholder=""
-            v-model="networkInfo.email"
+            v-model="editnetworkinfo.email"
             required
           ></b-form-input>
         </b-form-group>
@@ -209,7 +209,7 @@
           <b-form-input
             id="bname"
             placeholder=""
-            v-model="networkInfo.city"
+            v-model="editnetworkinfo.city"
             required
           ></b-form-input>
         </b-form-group>
@@ -230,7 +230,7 @@
           <b-form-input
             id="bname"
             placeholder=""
-            v-model="networkInfo.website"
+            v-model="editnetworkinfo.website"
             required
           ></b-form-input>
         </b-form-group>
@@ -251,7 +251,7 @@
             placeholder="Enter something..."
             rows="3"
             max-rows="6"
-            v-model="networkInfo.description"
+            v-model="editnetworkinfo.description"
           ></b-form-textarea>
         </b-form-group>
       </b-container>
@@ -265,7 +265,7 @@
               variant="primary"
               class="a-button-l b-font"
               :loading="loader"
-              @click="updateInfo(networkInfo)"
+              @click="updateInfo(editnetworkinfo)"
               :disabled="Lspinner"
             ><b-spinner v-if="Lspinner" small type="grow"></b-spinner> Save Changes
             </b-button>
@@ -311,8 +311,8 @@ export default {
     ...mapGetters({
       getNetworks: "networkSetting/getNetworks",
     }),
-    networkInfo() {
-      return this.$store.state.networkProfile.networkInfo;
+    editnetworkinfo() {
+      return this.$store.state.NetworkSettings.editnetworkinfo;
     },
     pcategories() {
       return this.$store.state.auth.categories;
@@ -380,10 +380,9 @@ export default {
   },
   beforeMount() {
     this.url = this.$route.params.id;
-    this.getNetworkInfo();
+    this.getEditNetworkInfo();
   },
   mounted(){
-    // this.getNetworkInfo();
     this.categories();
     this.Country();
   },
@@ -393,25 +392,12 @@ export default {
       saveChange: "networkSetting/saveChange",
       getNetworks: "networkSetting/getNetworks",
     }),
-    // getNetworkInfo() {
-    //   console.log("getNetworkInfo");
-    //   this.$store
-    //     .dispatch("networkProfile/getnetworkInfo", this.url)
-    //     .then(() => {
-    //       console.log("Network Information Available ");
-    //       this.setEditData();
-    //       console.log("Setting Network Available Information");
-    //     })
-    //     .catch((err) => {
-    //       console.log({ err: err });
-    //     });
-    // },
-    getNetworkInfo() {
-      console.log("getNetworkInfo");
+    getEditNetworkInfo() {
+      console.log("getEditNetworkInfo");
       this.$store
-        .dispatch("networkProfile/getEditNetworkInfo", this.url)
+        .dispatch("NetworkSettings/getEditNetworkInfo", this.url)
         .then(() => {
-          console.log("Network Information Available ");
+          console.log("Edit Network Information Available ");
           this.setEditData();
           console.log("Setting Network Available Information");
         })
@@ -495,13 +481,13 @@ export default {
     },
     setEditData(){
       console.log("setting Network data");
-      console.log(this.networkInfo);
-      this.multiselecvalue=this.networkInfo.assign_categories;
-      // this.country=this.networkInfo.country;
-      // this.region=this.networkInfo.region;
-      // this.division=this.networkInfo.division;
-      // this.municipality=this.networkInfo.council;
-      // this.locality=this.networkInfo.neighborhood;
+      console.log(this.editnetworkinfo);
+      this.multiselecvalue=this.editnetworkinfo.assign_categories;
+      this.country=this.editnetworkinfo.country;
+      this.region=this.editnetworkinfo.region;
+      this.division=this.editnetworkinfo.division;
+      this.municipality=this.editnetworkinfo.council;
+      this.locality=this.editnetworkinfo.neighborhood;
 
       this.Region();
       this.Division();
@@ -509,28 +495,27 @@ export default {
       this.Locality();
     },
 
-    updateInfo(networkInfo) {
+    updateInfo(editnetworkinfo) {
       this.Lspinner = true;
-      console.log("updateInfo", networkInfo)
+      console.log("updateInfo", editnetworkinfo)
 
       let formData = new FormData();
-      formData.append('business_id', networkInfo.business_id);
-      formData.append('name', networkInfo.admin_name);
+      formData.append('name', editnetworkinfo.admin_name);
       formData.append('categoryId', this.selectedcategories);
       formData.append("country", this.selectedcountry);
       formData.append("region", this.selectedregion);
       formData.append("division", this.selecteddivision);
       formData.append("council", this.selectedmunicipality);
       formData.append("neighborhood_id", this.selectedlocality);
-      formData.append('primary_phone', networkInfo.primary_phone);
-      formData.append('secondary_phone', networkInfo.secondary_phone);
-      formData.append('email', networkInfo.email);
-      formData.append('city', networkInfo.city);
-      formData.append('city', networkInfo.website);
-      formData.append('description', networkInfo.description);
+      formData.append('primary_phone', editnetworkinfo.primary_phone);
+      formData.append('secondary_phone', editnetworkinfo.secondary_phone);
+      formData.append('email', editnetworkinfo.email);
+      formData.append('city', editnetworkinfo.city);
+      formData.append('website', editnetworkinfo.website);
+      formData.append('description', editnetworkinfo.description);
       console.log(formData);
       this.$store
-        .dispatch("NerworkSettings/updateNetworkInfo", {
+        .dispatch("NetworkSettings/updateNetworkInfo", {
           path: "update/"+this.url,
           formData: formData,
         })

@@ -366,14 +366,16 @@ export const Redis = {
     },
 
     redis() {
-      window.Echo.channel('user.2')
-        .listen("UserEvent", payload => console.log(payload))
+      console.log("call echo redis")
+      // window.Redis.channel('laravel_database_user.2')
+      //   .listen(".UserEvent", payload => {
+      //     console.log(payload)
+      //   })
     }
   },
 
   created() {
     this.initBusinessNotification()
-    console.log("call echo redis")
     this.redis()
   }
 }

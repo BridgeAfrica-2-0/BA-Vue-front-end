@@ -63,7 +63,6 @@
               </b-input-group>
             </span>
           </form>
-
           <span class="d-none d-lg-block">
             <form class="form-inline input-group b-shadow b-radius">
               <input
@@ -125,11 +124,11 @@
           <div style="float: right">
             <b-collapse id="nav-collapse" is-nav>
               <div class="nav-item">
-                <a class="nav-link text-dark hov" href=""> Home </a>
+                <a @click.prevent="navLink('home')" class="nav-link text-dark hov" href=""> Home </a>
               </div>
 
               <div class="nav-item">
-                <a class="nav-link text-dark hov" href=""> Market </a>
+                <a @click.prevent="navLink('market')" class="nav-link text-dark hov" href=""> Market </a>
               </div>
 
               <div class="nav-item">
@@ -528,6 +527,23 @@ export default {
       setBusiness: 'social/FIND_USER_BUSNESS',
       lauchNetworkRequest: 'social/INIT',
     }),
+
+    navLink(type) {
+      const link = {
+        home: () => {
+          const routeName = this.profile ? 'dashbord' : 'home';
+          if (this.$route.name != routeName) this.$router.push({ name: routeName });
+        },
+        market: () => {
+          if (this.$route.name != 'market') this.$router.push({ name: 'market' });
+        },
+      };
+      try {
+        link[type]();
+      } catch (error) {
+        throw new Error(error);
+      }
+    },
     toggleinfput() {
       this.$refs.mobileinput.style.display = 'block';
       this.isActive = true;

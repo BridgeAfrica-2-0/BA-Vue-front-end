@@ -78,6 +78,7 @@
                 data-original-title=""
                 title=""
               />
+                
 
               <input
                 id="search-location"
@@ -86,7 +87,7 @@
                 list="browsers"
                 data-toggle="popover"
                 class="form-control search-h"
-                placeholder="Where"
+                placeholder="Where "
                 aria-label="search bridge africa"
                 data-original-title=""
                 title=""
@@ -94,7 +95,7 @@
 
               <datalist id="browsers">
                 <option value=" Current Location "></option>
-                <option value="Yaounde" />
+                <option value="Yaounde " />
               </datalist>
               <slot name="button">
                 <Button />
@@ -546,12 +547,11 @@
 </template>
 
 <script>
+
 import Button from '@/components/ButtonNavBarFind.vue';
 import Activity from '@/components/ShowActivity.vue';
 
 import { mapGetters, mapActions } from 'vuex';
-
-
 
 export default {
   name: 'navbar',
@@ -565,13 +565,14 @@ export default {
       type: Object,
       default: function () {
         return {
-          keyword: "",
-          placeholder: "",
+
+          keyword: '',
+          placeholder: '',
         };
-      },
       },
 
     },
+  },
 
   data() {
     return {
@@ -579,11 +580,9 @@ export default {
       shownav: false,
     };
   },
+
   computed: {
-    users() {
-      return this.$store.getters["userChat/getUsers"];
-    },
-     ...mapGetters({
+    ...mapGetters({
       hasLauchNetworkRequest: 'social/INIT',
       user: 'auth/profilConnected',
     }),
@@ -591,8 +590,6 @@ export default {
 
   created() {
     this.init();
-    this.getUsers();
-
   },
 
   methods: {

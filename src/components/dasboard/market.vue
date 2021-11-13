@@ -3,9 +3,9 @@
     <b-card class="border shadow ">
       <span>
         <h4>
-          Market
+          {{ $t('dashboard.Market') }}
           <h6 style="float:right">
-            <b-link> <u> see all </u> </b-link>
+            <b-link> <u> {{ $t('dashboard.see_all') }} </u> </b-link>
           </h6>
         </h4>
       </span>
@@ -22,7 +22,7 @@
               class="mb-5 prod"
             >
               <b-card-text>
-                <h6>Product Name</h6>
+                <h6>{{ $t('dashboard.Product_Name') }}</h6>
                 <p class="short">
                   <small>Lorem ipsum dolor sit amet consectetur.</small>
                 </p>
@@ -31,7 +31,7 @@
                 <p class="price">1400XAF</p>
               </b-card-text>
               <div>
-                <b-button variant="primary" class="buy">Buy Now</b-button>
+                <b-button variant="primary" class="buy">{{ $t('dashboard.Buy_Now') }}</b-button>
               </div>
             </b-card>
           </b-col>
@@ -46,7 +46,7 @@
               class="mb-5 prod"
             >
               <b-card-text>
-                <h6>Product Name</h6>
+                <h6>{{ $t('dashboard.Product_Name') }}</h6>
                 <p class="short">
                   <small>Lorem ipsum dolor sit amet consectetur.</small>
                 </p>
@@ -55,7 +55,7 @@
                 <p class="price">1400XAF</p>
               </b-card-text>
               <div>
-                <b-button variant="primary" class="buy">Buy Now</b-button>
+                <b-button variant="primary" class="buy">{{ $t('dashboard.Buy_Now') }}</b-button>
               </div>
             </b-card>
           </b-col>
@@ -70,7 +70,7 @@
               class="mb-5 prod"
             >
               <b-card-text>
-                <h6>Product Name</h6>
+                <h6>{{ $t('dashboard.Product_Name') }}</h6>
                 <p class="short">
                   <small>Lorem ipsum dolor sit amet consectetur.</small>
                 </p>
@@ -79,7 +79,7 @@
                 <p class="price">1400XAF</p>
               </b-card-text>
               <div>
-                <b-button variant="primary" class="buy">Buy Now</b-button>
+                <b-button variant="primary" class="buy">{{ $t('dashboard.Buy_Now') }}</b-button>
               </div>
             </b-card>
           </b-col>
@@ -94,7 +94,7 @@
               class="mb-5 prod"
             >
               <b-card-text>
-                <h6>Product Name</h6>
+                <h6>{{ $t('dashboard.Product_Name') }}</h6>
                 <p class="short">
                   <small>Lorem ipsum dolor sit amet consectetur.</small>
                 </p>
@@ -103,7 +103,7 @@
                 <p class="price">1400XAF</p>
               </b-card-text>
               <div>
-                <b-button variant="primary" class="buy">Buy Now</b-button>
+                <b-button variant="primary" class="buy">{{ $t('dashboard.Buy_Now') }}</b-button>
               </div>
             </b-card>
           </b-col>
@@ -118,7 +118,7 @@
               class="mb-5 prod"
             >
               <b-card-text>
-                <h6>Product Name</h6>
+                <h6>{{ $t('dashboard.Product_Name') }}</h6>
                 <p class="short">
                   <small>Lorem ipsum dolor sit amet consectetur.</small>
                 </p>
@@ -127,7 +127,7 @@
                 <p class="price">1400XAF</p>
               </b-card-text>
               <div>
-                <b-button variant="primary" class="buy">Buy Now</b-button>
+                <b-button variant="primary" class="buy">{{ $t('dashboard.Buy_Now') }}</b-button>
               </div>
             </b-card>
           </b-col>
@@ -142,7 +142,7 @@
               class="mb-5 prod"
             >
               <b-card-text>
-                <h6>Product Name</h6>
+                <h6>{{ $t('dashboard.Product_Name') }}</h6>
                 <p class="short">
                   <small>Lorem ipsum dolor sit amet consectetur.</small>
                 </p>
@@ -151,7 +151,7 @@
                 <p class="price">1400XAF</p>
               </b-card-text>
               <div>
-                <b-button variant="primary" class="buy">Buy Now</b-button>
+                <b-button variant="primary" class="buy">{{ $t('dashboard.Buy_Now') }}</b-button>
               </div>
             </b-card>
           </b-col>
@@ -160,7 +160,7 @@
         <b-modal
           v-model="viewProduct"
           hide-footer
-          title="Product Details"
+          :title="$t('dashboard.Product_Details')"
           size="xl"
         >
           <b-row>
@@ -171,22 +171,22 @@
               ></b-img>
             </b-col>
             <b-col>
-              <h2 class="mb-4 text-center">Product Name</h2>
-              <p><span class="stock">In Stock</span></p>
+              <h2 class="mb-4 text-center">{{ $t('dashboard.Product_Name') }}</h2>
+              <p><span class="stock">{{ $t('dashboard.In_Stock') }}</span></p>
               <p>0.00 XAF</p>
               <hr />
               <b-row>
                 <b-col>
-                  <b-button variant="primary">Message</b-button>
+                  <b-button variant="primary">{{ $t('dashboard.Message') }}</b-button>
                 </b-col>
                 <b-col>
                   <b-button variant="outline-dark" class="float-right"
-                    >Checkout on website</b-button
+                    >{{ $t('dashboard.Checkout_on_website') }}</b-button
                   >
                 </b-col>
               </b-row>
               <hr />
-              <h5>Product Detail</h5>
+              <h5>{{ $t('dashboard.Product_Detail') }}</h5>
               <p>
                 Lorem, ipsum dolor sit amet consectetur adipisicing elit.
                 Corporis quod, reprehenderit neque atque recusandae laborum quia
@@ -231,7 +231,7 @@
                     size="2rem"
                   ></b-avatar>
                   <input
-                    placeholder="Post a Comment"
+                    :placeholder="$t('dashboard.Post_a_Comment')"
                     class="comment"
                     type="text"
                   />

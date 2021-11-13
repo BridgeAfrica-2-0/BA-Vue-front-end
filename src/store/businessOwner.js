@@ -387,6 +387,20 @@ export default {
       return num;
     },
 
+
+
+
+    roleCheck({ commit },id){
+        
+      
+      return axios.get("business/role-check?id="+id)
+        .then((data) => {
+          return data;
+        });
+
+
+    },
+
     loadMore({ commit }, url) {
 
       return axios.get(url)

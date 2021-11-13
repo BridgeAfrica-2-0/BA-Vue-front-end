@@ -1,10 +1,15 @@
 <template>
   <div>
+    
+     <span v-if="isloaded">
     <navbar />
     <Business />
    
     <Footer />
+     </span>
   </div>
+  
+  
 </template>
 
 <script>
@@ -24,9 +29,37 @@ export default {
   data() {
     return {
       tabIndex: null,
+       foll_id:null,
+       isloaded: false,
       tabs: ['#post', '#about', '#business', '#media', '#community'],
     };
   },
+    created() {
+    this.foll_id = this.$route.params.id;  
+
+    this.$store
+      .dispatch("businessOwner/roleCheck", this.foll_id)
+      .then((data) => {
+       
+        this.isloaded = true;
+      })
+      .catch((error) => {
+        console.log({ error: error });
+
+        console.log(error.response.status );
+
+         if (error.response.status == 404) {
+           
+            this.$router.push({ name: "notFound" });
+          } 
+
+
+      });
+  },
+
+
+
+
   watch: {
     $route(to, from) {
       console.log(to.hash);

@@ -96,7 +96,7 @@
                 <option value="Yaounde " />
               </datalist>
               <slot name="button">
-                <Button />
+                <Button @click.native="getKeyword" />
               </slot>
             </form>
           </span>
@@ -501,7 +501,7 @@ export default {
       default: function () {
         return {
           keyword: '',
-          placeholder: '',
+          placeholder: 'All',
         };
       },
     },
@@ -528,6 +528,21 @@ export default {
       lauchNetworkRequest: 'social/INIT',
     }),
 
+    getKeyword() {
+      if (!this.credentials.keyword) return false;
+
+      if (this.$route.name != 'Search') {
+        this.$store
+          .dispatch('allSearch/SEARCH', {
+            keyword: this.credentials.keyword,
+          })
+          .catch((err) => {
+            console.log('Error erro!');
+          });
+
+        this.$router.push({ name: 'Search' });
+      }
+    },
     navLink(type) {
       const link = {
         home: () => {
@@ -559,7 +574,6 @@ export default {
     init() {
       try {
         if (!this.hasLauchNetworkRequest) {
-          console.log('init navbar', this.hasLauchNetworkRequest);
           this.getNetworks();
           this.getBusiness();
           this.lauchNetworkRequest();

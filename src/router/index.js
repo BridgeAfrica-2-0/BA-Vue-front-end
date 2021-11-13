@@ -295,7 +295,7 @@ const routes = [
     component: Visitor,
   },
   {
-    path: "/search/:id",
+    path: "/search",
     name: "Search",
     component: search,
   },

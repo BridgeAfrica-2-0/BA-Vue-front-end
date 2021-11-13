@@ -1,5 +1,6 @@
 <template>
   <div>
+
     <div v-if="filterType == '1' || filterType == '4'">
       <div v-if="subCategories.length">
         <span>
@@ -1852,6 +1853,8 @@ export default {
       this.noFilter = '';
       this.$store.commit('marketSearch/setSubFilters', []);
 
+       if(this.filterType==4){  
+
       this.$store
         .dispatch('marketSearch/getFilter', subCat.id)
         .then((res) => {
@@ -1885,11 +1888,63 @@ export default {
           console.error(err);
           // this.filterLoader = false;
         });
+         } else if( this.filterType==1){
+           
+// method to search for a business lol
+
+        this.$store
+        .dispatch('marketSearch/getFilter', subCat.id)
+        .then((res) => {
+          this.searchProducts({ cat_id: subCat.cat_id, sub_cat: subCat.id });  
+          console.log('Filters: ');
+          console.log(res.data.data);
+          if (res.data.data.length === 0) {
+            let subName = '';
+            this.subCategories.map((sub) => {
+              if (sub.id) {
+                subName = sub.name;
+              }
+            });
+            this.noFilter = `No filter available for ${subName}!`;
+          }
+
+          // this.filterLoader = false;
+          let filter = [];
+          res.data.data.map((filt) => {
+            filter.push({
+              cat_id: subCat.cat_id,
+              sub_cat_id: subCat.id,
+              ...filt,
+            });
+          });
+
+          this.$store.commit('marketSearch/setSubFilters', filter);
+          console.log('[DeBUG] FILTER: ', this.subFilter);
+        })
+        .catch((err) => {
+          console.error(err);
+          // this.filterLoader = false;
+        });
+
+
+
+         } 
     },
 
     searchProducts(data) {
       this.$store
         .dispatch('marketSearch/searchProducts', data)
+        .then((res) => {
+          // console.log("categories loaded!");
+        })
+        .catch((err) => {
+          console.log('Error erro!');
+        });
+    },
+
+     searchBusiness(data) {
+      this.$store
+        .dispatch('business/FIND_BUSINESS', data)
         .then((res) => {
           // console.log("categories loaded!");
         })

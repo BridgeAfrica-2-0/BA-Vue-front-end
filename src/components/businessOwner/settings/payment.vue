@@ -2,98 +2,62 @@
   <b-container>
     <b-container>
       <p class="text">
-        Select a payment method for your bridget africa account
+       Sélectionnez un mode de paiement pour votre compte bridget afrique
       </p>
     </b-container>
 
+    <div class="b-bottom">
+      <b-container>
+        <b-form-group
+          label-cols-lg="3"
+          label="Pays"
+          label-size="md"
+          label-class="font-weight-bold pt-0 username"
+          class="mb-0"
+        >
+          <country-select v-model="country" :country="country" topCountry="US" class="form-control text" />
+        </b-form-group>
+      </b-container>
+    </div>
 
-       
-<div class="b-bottom">
-            <b-container>
-              <b-form-group
-                label-cols-lg="3"
-                label="Country"
-                label-size="md"
-                label-class="font-weight-bold pt-0 username"
-                class="mb-0"
-              >
-
-              
-                <country-select v-model="country" :country="country" topCountry="US"  class="form-control text" />
-
-              </b-form-group>
-
-
-            </b-container>
-          </div>
-
-
-  <br />
+    <br />
 
     <b-container class="payment-type">
       <b-form-group v-slot="{ ariaDescribedby }">
-        <b-form-radio
-          id="mtn"
-          name="mtn"
-          class="text"
-          value="mtn"
-          >MTN Mobile Payment</b-form-radio
-        >
+        <b-form-radio id="mtn" name="mtn" class="text" value="mtn">MTN Mobile Paiement</b-form-radio>
         <br />
-        <b-form-radio
-       
-          id="Mobile Payment"
-          name="mobile-payment"
-          value="mobile-money"
-           class="text"
-        >
-         Orange  Mobile Payment
+        <b-form-radio id="Mobile Payment" name="mobile-payment" value="mobile-money" class="text">
+          Orange Mobile Paiement
         </b-form-radio>
 
         <br />
-      
 
-         <b-form-radio
-          
+        <b-form-radio
           :aria-describedby="ariaDescribedby"
           id="Credit-card"
           name="credit-card"
-           class="text"
-           
+          class="text"
           value="credit-card"
-          > Express Union</b-form-radio
+        >
+          Express Union</b-form-radio
         >
 
-
-
-
-
-      
         <br />
-      
 
-         <b-form-radio
-          
+        <b-form-radio
           :aria-describedby="ariaDescribedby"
           id="Credit-card"
           name="credit-card"
-           class="text"
+          class="text"
           value="credit-card"
-          > GIMAC </b-form-radio
         >
-
-
+          GIMAC
+        </b-form-radio>
       </b-form-group>
-
-      
-
-     
-
 
       <div class=" mb-0">
         <p class="text">
-           Your payment
-          information is secure
+          Vos informations de paiement sont sécurisées
         </p>
       </div>
     </b-container>
@@ -102,7 +66,7 @@
 
 <script>
 export default {
-  name: "payment"
+  name: 'payment',
 };
 </script>
 
@@ -113,13 +77,11 @@ export default {
   text-align: left;
 }
 
-
-.h3-color{
+.h3-color {
   color: #000;
 }
 
-
-.b-color{
+.b-color {
   color: #7952b3;
 }
 .tabs {
@@ -141,11 +103,10 @@ export default {
 }
 
 @media only screen and (max-width: 1065px) {
-.payment-image {
-  margin-top: 0px;
-  float: right;
-}
-
+  .payment-image {
+    margin-top: 0px;
+    float: right;
+  }
 }
 .a-text {
   text-align: left;

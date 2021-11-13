@@ -11,7 +11,7 @@
               type="checkbox"
               @click="selectall($event)"
             />
-            Select All
+           Tout sélectionner
           </div>
         </b-col>
         <b-col>
@@ -21,7 +21,7 @@
               variant="primary"
               class="a-button-l duration"
             >
-              Mark as Read</b-button
+             Marquer comme lu</b-button
             >
             <b-button
               @click="deleteAll(selected)"
@@ -29,7 +29,7 @@
               variant="primary"
               class="a-button-l duration ml-1"
             >
-              Delete</b-button
+              Effacer</b-button
             >
           </div>
         </b-col>
@@ -86,7 +86,7 @@
           class="load text-center"
         >
           <b-row class="text-center">
-            <p>No notifications to show !!</p>
+            <p>Aucune notification à afficher!!</p>
           </b-row>
         </b-col>
         <hr width="100%" />

@@ -11,16 +11,16 @@
         <b-card>
           <div class="text-center ">
             <span class="username text-center mb-3">
-              <b> Upgrade Your Business Account </b>
+              <b> Mettez à niveau votre compte d'entreprise </b>
             </span>
           </div>
 
           <div class="container">
             <span class="text text-left">
               <br />
-              Make more money by unlocking your marketplace features where you
-              can sell products and services directly to customer and recieve
-              instant payments
+              Gagnez plus d'argent en débloquant les fonctionnalités de votre marché où vous
+              peut vendre des produits et services directement au client et recevoir
+              paiements instantanés
             </span>
           </div>
           <img src="@/assets/img/buynow.png" class="buynow" alt="buy now" />
@@ -32,7 +32,7 @@
             />
 
             <b-button variant="primary" class="text-center mt-3">
-              Upgrade Now
+              Mettre à jour maintenant
             </b-button>
           </div>
         </b-card>

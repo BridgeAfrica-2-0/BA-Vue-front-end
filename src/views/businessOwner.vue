@@ -72,14 +72,14 @@ export default {
       bottomSelectedId: 0,
       url_data: null,
       items: [
-        { label: "Home ", icon: "" },
+        { label: "Accueil ", icon: "" },
 
-        { label: "Inbox", icon: "" },
+        { label: "Boîte de réception", icon: "" },
         { label: "Notification", icon: "" },
-        { label: "Pending Post", icon: "" },
-        { label: "Insight", icon: "" },
+        { label: "Message en attente", icon: "" },
+        { label: "Aperçu", icon: "" },
 
-        { label: "Settings", icon: "" }
+        { label: "Paramètres", icon: "" }
       ],
       options: {
         activeColor: "#1d98bd"

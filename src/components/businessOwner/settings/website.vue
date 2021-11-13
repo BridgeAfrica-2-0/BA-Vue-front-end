@@ -8,11 +8,11 @@
               <b-table-simple hover small caption-top responsive>
                 <b-thead>
                   <b-tr>
-                    <b-th class="a-text username"> Account Type </b-th>
+                    <b-th class="a-text username"> Type de compte </b-th>
 
                     <b-th>
                       <b-button variant="outline" class="btn-outline-primary">
-                        change
+                        monnaie
                       </b-button>
                     </b-th>
                   </b-tr>
@@ -20,18 +20,18 @@
 
                 <b-tbody>
                   <b-tr>
-                    <b-td class="a-text"> Basics </b-td>
+                    <b-td class="a-text"> Notions de base </b-td>
 
                     <b-td class="a-text">
-                      <b-link href="#">Upgrade</b-link>
+                      <b-link href="#">Améliorer</b-link>
                     </b-td>
                   </b-tr>
                   <br />
 
                   <b-tr>
-                    <b-td class="a-text"> Premium</b-td>
+                    <b-td class="a-text"> Prime</b-td>
 
-                    <b-td><b-link href="#"> Not Available </b-link> </b-td>
+                    <b-td><b-link href="#"> Pas disponible </b-link> </b-td>
                   </b-tr>
 
                   <br />
@@ -42,7 +42,7 @@
             </div>
 
             <b-button variant="outline" class="btn-outline-primary" @click="deleteAccount()">
-              Delete Account
+              Supprimer le compte
             </b-button>
           </b-col>
 

@@ -163,7 +163,6 @@ const routes = [
     component: businessOwner,
   },
 
-
   {
     path: "/business_editor/:id?",
     name: "BusinessEditor",

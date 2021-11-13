@@ -61,7 +61,7 @@
               class="itzlala"
               nav-wrapper-class="w-15"
             >
-              <b-tab title="General">
+              <b-tab title="Général">
                 <b-card-text> <General /> </b-card-text
               ></b-tab>
 
@@ -69,30 +69,30 @@
                 <b-card-text> <Notification /> </b-card-text
               ></b-tab>
 
-              <b-tab title="Business Info">
+              <b-tab title="Informations sur l'entreprise">
                 <b-card-text> <Info /> </b-card-text
               ></b-tab>
 
-              <b-tab title="Business Roles">
+              <b-tab title="Rôles commerciaux">
                 <b-card-text> <Roles /> </b-card-text
               ></b-tab>
 
-              <b-tab title="Insight">
+              <b-tab title="Aperçu">
                 <b-card-text> <Insight /> </b-card-text
               ></b-tab>
 
-              <b-tab title="Pending Post">
+              <b-tab title="Message en attente">
                 <b-card-text> <Pending /> </b-card-text
               ></b-tab>
 
-              <b-tab title="Payment">
+              <b-tab title="Paiement">
                 <b-card-text> <Payment /> </b-card-text
               ></b-tab>
 
-              <b-tab title="Account Type">
+              <b-tab title="Type de compte">
                 <b-card-text> <Website /> </b-card-text
               ></b-tab>
-              <b-tab title="Blocking">
+              <b-tab title="Blocage">
                 <b-card-text> <Blocking /> </b-card-text
               ></b-tab>
             </b-tabs>
@@ -180,14 +180,14 @@ export default {
       seetings_id: 0,
       bottomSelectedId: 0,
       items: [
-        { label: "General" },
+        { label: "Général" },
 
-        { label: "Business Info" },
-        { label: "Business Roles" },
-        { label: "payment " },
-        { label: "Account Type" },
+        { label: "Informations sur l'entreprise" },
+        { label: "Rôles commerciaux" },
+        { label: "Paiement " },
+        { label: "Type de compte" },
 
-        { label: "Blocking" },
+        { label: "Blocage" },
       ],
       options: {
         activeColor: "#1d98bd",

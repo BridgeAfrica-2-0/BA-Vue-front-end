@@ -5,9 +5,9 @@
       <div class="col-12 d-flex align-items-center justify-content-between">
         <p>
           <b-icon font-scale="1.8" icon="shop" variant="primary" class="mr-2"></b-icon>
-          <span class="font-weight-bold">Market</span>
+          <span class="font-weight-bold">Marché</span>
         </p>
-        <b-button variant="outline-primary" @click="createProduct">Add Product</b-button>
+        <b-button variant="outline-primary" @click="createProduct">Ajouter un produit</b-button>
       </div>
       <div class="col-12">
         <hr class="h-divider" />
@@ -21,11 +21,11 @@
         <b-spinner style="width: 7rem; height: 7rem;" variant="primary"></b-spinner>
       </b-col>
       <b-col class="my-4 load" v-if="products.length < 1 && !loader">
-        <p>No Products in Market !!</p>
+        <p>Aucun produit sur le marché !!</p>
       </b-col>
     </div>
 
-    <button class="order-button" @click="displayOrders">my orders</button>
+    <button class="order-button" @click="displayOrders">Mes commandes</button>
     <div class="orders">
       <Orders />
     </div>
@@ -34,11 +34,11 @@
       <b-form>
         <b-row>
           <b-col cols="12" md="6">
-            <b-form-group id="input-group-1" label="Product Name" label-for="input-1" label-size="sm">
+            <b-form-group id="input-group-1" label="Nom du produit" label-for="input-1" label-size="sm">
               <b-form-input id="input-1" class="mt-1" type="text" v-model="newProduct.name" required></b-form-input>
             </b-form-group>
 
-            <b-form-group id="input-group-1" label="Product Description" label-for="input-1" label-size="sm">
+            <b-form-group id="input-group-1" label="Description du produit" label-for="input-1" label-size="sm">
               <b-textarea id="input-1" class="mt-2" v-model="newProduct.description" type="text" required></b-textarea>
             </b-form-group>
           </b-col>
@@ -48,15 +48,13 @@
               <a href="#" data-toggle="modal" data-target="#createalbumModal">
                 <div class="drag-text">
                   <i class="fa fa-plus"></i>
-                  <h6>Product Image</h6>
+                  <h6>Image du produit</h6>
                 </div>
               </a>
-              <div></div>
             </div>
           </b-col>
         </b-row>
-
-        <b-form-group id="input-group-1" label="Product Price" label-for="input-1" label-size="sm">
+        <b-form-group id="input-group-1" label="Prix ​​du produit" label-for="input-1" label-size="sm">
           <b-form-input v-model="newProduct.price" class="mt-1" type="number" id="price" required></b-form-input>
         </b-form-group>
         <b-form-checkbox
@@ -66,7 +64,7 @@
           value="1"
           unchecked-value="0"
         >
-          This Product Is On Discount
+          Ce produit est en promotion
         </b-form-checkbox>
 
         <b-form-group id="conditions" label="Conditions" label-for="input-1" label-size="sm">
@@ -76,19 +74,19 @@
         <!-- CHECKBOX FLEX BOX -->
         <div class="d-flex justify-content-between align-items-start flex-wrap">
           <b-form-checkbox value="1" v-model="newProduct.is_service" unchecked-value="0">
-            This Item Is A Service ?
+            Cet article est un service ?
           </b-form-checkbox>
 
           <b-form-checkbox value="1" v-model="newProduct.in_stock" unchecked-value="0">
-            In stock
+            En stock
           </b-form-checkbox>
 
           <b-form-checkbox value="1" unchecked-value="0">
-            Published
+            Publié
           </b-form-checkbox>
         </div>
         <!-- TAX and KG -->
-        <b-form-group id="tax" label="Tax" label-for="input-tax" label-size="sm">
+        <b-form-group id="tax" label="Impôt" label-for="input-tax" label-size="sm">
           <b-form-input v-model="newProduct.tax" class="mt-1" id="tax" type="number" required></b-form-input>
         </b-form-group>
         <b-form-group id="kg" label="Kilogramme" label-for="input-kg" label-size="sm">
@@ -96,12 +94,12 @@
         </b-form-group>
         <!-- CATEGORIES -->
         <div class="mt-2">
-          <label class="typo__label"> Category </label>
+          <label class="typo__label"> Catégorie </label>
           <multi-select
             v-model="multiselecvalue"
             @input="subcategories"
             tag-placeholder="Add this as new tag"
-            placeholder="Search or add a tag"
+            placeholder="Rechercher ou ajouter une balise"
             label="name"
             track-by="id"
             :options="BuCategories"
@@ -111,11 +109,11 @@
         </div>
         <!-- SUB-CATEGORIES -->
         <div class="mt-2">
-          <label class="typo__label"> Sub Category</label>
+          <label class="typo__label"> Sous-catégorie</label>
           <multi-select
             v-model="filterselectvalue"
-            tag-placeholder="Add this as new tag"
-            placeholder="Search or add a tag"
+            tag-placeholder="Ajouter ceci en tant que nouvelle balise"
+            placeholder="Rechercher ou ajouter une balise"
             label="name"
             track-by="subcategoryId"
             :options="scategories"
@@ -124,13 +122,13 @@
             @tag="addFilter"
           ></multi-select>
         </div>
-        <label class="typo__label">Fiters </label>
+        <label class="typo__label">Monteurs </label>
         <div>
           <b-card no-body>
             <b-tabs pills card vertical>
               <b-tab :title="filters.name" v-for="filters in filterselectvalue" :key="filters.id" active
                 ><b-card-text>
-                  <b-form-group label="Filters" class="colorblack">
+                  <b-form-group label="Monteurs" class="colorblack">
                     <b-form-checkbox-group id="" class="colorblack" v-model="select_filterss" name="filters">
                       <b-form-checkbox class="colorblack" v-for="fil in filters.filters" :key="fil.id" :value="fil.id">
                         {{ fil.name }}
@@ -147,7 +145,7 @@
         <b-button @click="addProduct" class="mt-2 btn-block" variant="primary">
           <b-spinner small v-if="load" variant="white"></b-spinner>
 
-          Add</b-button
+          Ajouter</b-button
         >
       </b-form>
     </b-modal>

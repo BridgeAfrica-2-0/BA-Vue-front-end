@@ -10,7 +10,7 @@
           <b-container>
             <b-form-group
               label-cols-lg="3"
-              label="Business Name"
+              label="Nom de l'entreprise"
               label-size="md"
               label-class="font-weight-bold pt-0 username"
               class="mb-0"
@@ -31,7 +31,7 @@
           <b-container>
             <b-form-group
               label-cols-lg="3"
-              label="Category"
+              label="Catégorie"
               label-size="md"
               label-class="font-weight-bold pt-0 username"
               class="mb-0"
@@ -39,9 +39,9 @@
               <multiselect
                 v-model="multiselecvalue"
                 @input="subcategories"
-                tag-placeholder="Add this as new tag"
-                placeholder="Search or add a tag"
-                label="name"
+                tag-placeholder="Ajouter ceci en tant que nouvelle balise"
+                placeholder="Rechercher ou ajouter une balise"
+                label="Nom"
                 track-by="id"
                 :options="pcategories"
                 :multiple="true"
@@ -58,7 +58,7 @@
           <b-container>
             <b-form-group
               label-cols-lg="3"
-              label="Sub Category"
+              label="Sous-catégorie"
               label-size="md"
               label-class="font-weight-bold pt-0 username"
               class="mb-0"
@@ -66,8 +66,8 @@
               <multiselect
                 v-model="filterselectvalue"
                 tag-placeholder="Add this as new tag"
-                placeholder="Search or add a tag"
-                label="name"
+                placeholder="Rechercher ou ajouter une balise"
+                label="Nom"
                 track-by="subcategory_id"
                 :options="scategories"
                 :multiple="true"
@@ -118,7 +118,7 @@
           <b-container>
             <b-form-group
               label-cols-lg="3"
-              label="Search Keywords"
+              label="Rechercher des mots-clés"
               label-size="md"
               label-class="font-weight-bold pt-0 username"
               class="mb-0"
@@ -130,7 +130,7 @@
                 tag-variant="primary"
                 :limit="limit"
                 :tag-validator="validator"
-                placeholder="Enter new keywords separated by space, comma or semicolon"
+                placeholder="Saisissez de nouveaux mots-clés séparés par un espace, une virgule ou un point-virgule"
                 no-add-on-enter
               ></b-form-tags>
             </b-form-group>
@@ -141,7 +141,7 @@
           <b-container>
             <b-form-group
               label-cols-lg="3"
-              label="Phone 1"
+              label="Téléphone 1"
               label-size="md"
               label-class="font-weight-bold pt-0 username"
               class="mb-0"
@@ -154,7 +154,7 @@
           <b-container>
             <b-form-group
               label-cols-lg="3"
-              label="Phone 2"
+              label="Téléphone 2"
               label-size="md"
               label-class="font-weight-bold pt-0 username"
               class="mb-0"
@@ -185,7 +185,7 @@
           <b-container>
             <b-form-group
               label-cols-lg="3"
-              label="Time zone"
+              label="Fuseau horaire"
               label-size="md"
               label-class="font-weight-bold pt-0 username"
               class="mb-0"
@@ -207,7 +207,7 @@
           <b-container>
             <b-form-group
               label-cols-lg="3"
-              label="About"
+              label="Sur"
               label-size="md"
               label-class="font-weight-bold pt-0 username"
               class="mb-0"
@@ -228,7 +228,7 @@
           <b-container>
             <b-form-group
               label-cols-lg="3"
-              label="Website"
+              label="Site Internet"
               label-size="md"
               label-class="font-weight-bold pt-0 username"
               class="mb-0"
@@ -249,7 +249,7 @@
                 unchecked-value="website A/V"
                 v-model="businessForm_website"
               >
-                This Business does not have a Website
+                Cette entreprise n'a pas de site Web
               </b-form-checkbox>
             </b-form-group>
           </b-container>
@@ -259,7 +259,7 @@
           <b-container>
             <b-form-group
               label-cols-lg="3"
-              label="Email"
+              label="E-mail"
               label-size="md"
               label-class="font-weight-bold pt-0 username"
               class="mb-0"
@@ -279,7 +279,7 @@
                 unchecked-value="email A/V"
                 v-model="businessForm_email"
               >
-                This Business does not have a Email
+               Cette entreprise n'a pas d'e-mail
               </b-form-checkbox>
             </b-form-group>
           </b-container>
@@ -291,7 +291,7 @@
           <b-container>
             <b-form-group
               label-cols-lg="3"
-              label="Country"
+              label="Pays"
               label-size="md"
               label-class="font-weight-bold pt-0 username"
               class="mb-0"
@@ -299,8 +299,8 @@
               <multiselect
                 v-model="country"
                 @input="Region"
-                placeholder="Search "
-                label="name"
+                placeholder="Chercher "
+                label="Nom"
                 track-by="id"
                 :options="countries"
                 :multiple="true"
@@ -315,7 +315,7 @@
           <b-container>
             <b-form-group
               label-cols-lg="3"
-              label="Region"
+              label="Région"
               label-size="md"
               label-class="font-weight-bold pt-0 username"
               class="mb-0"
@@ -323,8 +323,8 @@
               <multiselect
                 v-model="region"
                 @input="Division"
-                placeholder="Search"
-                label="name"
+                placeholder="Chercher"
+                label="nom"
                 track-by="id"
                 :options="regions"
                 :multiple="true"
@@ -347,8 +347,8 @@
               <multiselect
                 v-model="division"
                 @input="Municipality"
-                placeholder="Search"
-                label="name"
+                placeholder="Chercher"
+                label="nom"
                 track-by="id"
                 :options="divisions"
                 :multiple="true"
@@ -363,7 +363,7 @@
           <b-container>
             <b-form-group
               label-cols-lg="3"
-              label="Municipality"
+              label="Municipalité"
               label-size="md"
               label-class="font-weight-bold pt-0 username"
               class="mb-0"
@@ -371,8 +371,8 @@
               <multiselect
                 v-model="municipality"
                 @input="Locality"
-                placeholder="Search"
-                label="name"
+                placeholder="Chercher"
+                label="nom"
                 track-by="id"
                 :options="municipalities"
                 :multiple="true"
@@ -387,15 +387,15 @@
           <b-container>
             <b-form-group
               label-cols-lg="3"
-              label="Neighbourhood"
+              label="Quartier"
               label-size="md"
               label-class="font-weight-bold pt-0 username"
               class="mb-0"
             >
               <multiselect
                 v-model="locality"
-                placeholder="Search"
-                label="name"
+                placeholder="Chercher"
+                label="nom"
                 track-by="id"
                 :options="localities"
                 :multiple="true"
@@ -408,7 +408,7 @@
           <b-container>
             <b-form-group
               label-cols-lg="3"
-              label="Three Location Description"
+              label="Description des trois emplacements"
               label-size="md"
               label-class="font-weight-bold pt-0 username"
               class="mb-0"
@@ -417,7 +417,7 @@
                 id="bname"
                 name="locationdesc"
                 v-model="businessInfo.location_description"
-                placeholder="Enter something..."
+                placeholder="Entrez quelque chose..."
                 rows="3"
                 max-rows="6"
               ></b-form-textarea>
@@ -429,7 +429,7 @@
           <b-container>
             <b-form-group
               label-cols-lg="3"
-              label="Address"
+              label="Adresse"
               label-size="md"
               label-class="font-weight-bold pt-0 username"
               class="mb-0"
@@ -441,27 +441,27 @@
                 v-model="Aaddress"
                 value="address A/V"
               >
-                This Business has an address</b-form-checkbox
+               Cette entreprise a une adresse</b-form-checkbox
               >
 
               <b-container v-if="Aaddress">
                 <b-row class="text">
                   <b-col>
-                    <p>Street Address</p>
+                    <p>Adresse de la rue</p>
                     <b-form-input
                       name=""
                       v-model="businessInfo.Street"
                     ></b-form-input>
                   </b-col>
                   <b-col>
-                    <p>City</p>
+                    <p>Ville</p>
                     <b-form-input
                       name=""
                       v-model="businessInfo.city"
                     ></b-form-input
                   ></b-col>
                   <b-col>
-                    <p>Postal Code</p>
+                    <p>code postal</p>
                     <b-form-input
                       name=""
                       v-model="businessInfo.PostalCode"
@@ -486,7 +486,7 @@
           <b-container>
             <b-form-group
               label-cols-lg="3"
-              label="Business Hours"
+              label="Heures de travail"
               label-size="md"
               label-class="font-weight-bold pt-0 username"
               class="mb-0"
@@ -499,7 +499,7 @@
                   value="1"
                   @change="setOpenHours('null', 'null', 'null')"
                 >
-                  {{ openHour ? "Always Open": "Open for selected hours" }}
+                  {{ openHour ? "Toujours ouvert": "Ouvert à certaines heures" }}
                 </b-form-checkbox>
                 <br />
                 <b-container v-if="!openHour">
@@ -545,7 +545,7 @@
 
         <div class="b-bottomm">
           <b-button variant="primary" class="a-button-l" @click="updateInfo(businessInfo)"
-          ><b-spinner v-if="Lspinner" small type="grow"></b-spinner>Save Changes</b-button>
+          ><b-spinner v-if="Lspinner" small type="grow"></b-spinner>Sauvegarder les modifications</b-button>
           <br />
           <br />
         </div>

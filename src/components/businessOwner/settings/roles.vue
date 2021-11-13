@@ -1,13 +1,13 @@
 <template>
   <b-container>
-    <h5 class="a-text">Assign Role</h5>
+    <h5 class="a-text">Attribuer un rôle</h5>
 
     <b-container class="b-bottom">
       <b-row>
         <b-col cols="5">
           <b-form-group
             label-cols-lg="3"
-            label="User"
+            label="Utilisateur"
             label-size="md"
             label-class="font-weight-bold pt-0"
             class="mb-0"
@@ -28,41 +28,41 @@
         <b-col>
           <b-form-group
             label-cols-lg="3"
-            label="Role"
+            label="Rôle"
             label-size="md"
             label-class="font-weight-bold pt-0"
             class="mb-0"
           >
             <b-form-select v-model="selected" class="mb-3">
-              <b-form-select-option :value="null">Admin</b-form-select-option>
-              <b-form-select-option value="a">User</b-form-select-option>
+              <b-form-select-option :value="null">Administrateur</b-form-select-option>
+              <b-form-select-option value="a">Utilisateur</b-form-select-option>
             </b-form-select>
           </b-form-group>
         </b-col>
 
         <b-col>
           <b-button variant="primary" class="" @click="assignRole()">
-            <b-spinner v-if="SPassign" small type="grow"></b-spinner>Assign
+            <b-spinner v-if="SPassign" small type="grow"></b-spinner>Attribuer
           </b-button>
         </b-col>
       </b-row>
 
       <p class="text">
-        Admin can manage all aspects of the Business Identity. They can create
-        posts and send messages through inbox. They can respond to the delete
-        comments, Approve posts, view insights, manage the business settings,
-        update Business profile, assign roles and payments.
+        L'administrateur peut gérer tous les aspects de l'identité de l'entreprise. Ils peuvent créer
+        messages et envoyer des messages via la boîte de réception. Ils peuvent répondre à la suppression
+        commentaires, approuver les publications, afficher les informations, gérer les paramètres de l'entreprise,
+        mettre à jour le profil de l'entreprise, attribuer des rôles et des paiements.
       </p>
       <br />
       <p class="text">
-        Editor can create posts and send messages through inbox, They can
-        respond to and delete comments, Approve posts, view insights.
+        L'éditeur peut créer des articles et envoyer des messages via la boîte de réception, ils peuvent
+        répondre aux commentaires et les supprimer, approuver les publications, afficher les informations.
       </p>
     </b-container>
 
     <div class="b-bottom">
       <b-container>
-        <h5 class="a-text">Existing Editors</h5>
+        <h5 class="a-text">Éditeurs existants</h5>
         <div v-if="editors != 0">
           <b-list-group v-for="editor in editors" :key="editor.id">
             <b-list class="d-flex align-items-center m-list">
@@ -88,8 +88,8 @@
                         font-scale="1"
                       ></b-icon>
                     </template>
-                    <b-dropdown-item href="#" @click="$bvModal.show('edit-editor'); selectObject(editor)">Edit</b-dropdown-item>
-                    <b-dropdown-item href="#" @click="$bvModal.show('delete-editor'); selectObject(editor)"> Delete </b-dropdown-item>
+                    <b-dropdown-item href="#" @click="$bvModal.show('edit-editor'); selectObject(editor)">Éditer</b-dropdown-item>
+                    <b-dropdown-item href="#" @click="$bvModal.show('delete-editor'); selectObject(editor)"> Effacer </b-dropdown-item>
                   </b-dropdown>
                 </div>
               </span>
@@ -98,19 +98,19 @@
         </div>
         <div v-else>
           <b-card bg-variant="white" text-variant="black" class="text-center">
-            <b-card-text>No Editor Available.</b-card-text>
+            <b-card-text>Aucun éditeur disponible.</b-card-text>
           </b-card>
         </div>
 
         <div>
           <b-modal id="edit-editor" hide-footer>
             <template #modal-title>
-              EDIT EDITOR: {{clickedObject.name}}
+             ÉDITER L'ÉDITEUR: {{clickedObject.name}}
             </template>
             <div class="d-block text-center">
                <b-form-group
                   label-cols-lg="3"
-                  label="Role"
+                  label="Rôle"
                   label-size="md"
                   label-class="font-weight-bold pt-0"
                   class="mb-0"
@@ -127,17 +127,17 @@
                   </b-form-select>
                 </b-form-group>
             </div>
-            <b-button class="mt-3" block variant="primary" @click="$bvModal.hide('edit-editor'); editEditor(clickedObject)">EDIT</b-button>
+            <b-button class="mt-3" block variant="primary" @click="$bvModal.hide('edit-editor'); editEditor(clickedObject)">ÉDITER</b-button>
           </b-modal>
 
           <b-modal id="delete-editor" hide-footer>
             <template #modal-title>
-              !!! <code>WARRING</code> !!!
+              !!! <code>EN GUERRE</code> !!!
             </template>
             <div class="d-block text-center">
-              <h3>You Are About To Delete: {{clickedObject.name}}!</h3>
+              <h3>Vous êtes sur le point de supprimer: {{clickedObject.name}}!</h3>
             </div>
-            <b-button class="mt-3" block @click="$bvModal.hide('delete-editor'); deleteEditor(clickedObject)">Delete</b-button>
+            <b-button class="mt-3" block @click="$bvModal.hide('delete-editor'); deleteEditor(clickedObject)">Effacer</b-button>
           </b-modal>
         </div>
       </b-container>
@@ -233,7 +233,7 @@ export default {
         console.log({ err: err });
         this.flashMessage.show({
           status: "error",
-          message: "Unable to Update New Role"
+          message: "Impossible de mettre à jour le nouveau rôle"
         });
       });
 		},
@@ -258,7 +258,7 @@ export default {
         this.SPassign = false;
         this.flashMessage.show({
           status: "success",
-          message: "New Role Assigned"
+          message: "Nouveau rôle attribué"
         });
           
       })
@@ -267,7 +267,7 @@ export default {
         this.SPassign = false;
         this.flashMessage.show({
           status: "error",
-          message: "Unable to Assigned New Role"
+          message: "Impossible d'attribuer un nouveau rôle"
         });
       });
 		},
@@ -282,7 +282,7 @@ export default {
         this.displayEditor();
         this.flashMessage.show({
           status: "success",
-          message: "Editor Deleted"
+          message: "Éditeur supprimé"
         });
           
       })
@@ -290,7 +290,7 @@ export default {
         console.log({ err: err });
         this.flashMessage.show({
           status: "error",
-          message: "Unable To Delete Editor"
+          message: "Impossible de supprimer l'éditeur"
         });
       });
 		},

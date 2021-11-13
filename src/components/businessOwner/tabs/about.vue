@@ -1,7 +1,7 @@
 <template>
   <div>
     <b-icon icon="person-fill" class="icon-size" variant="primary"></b-icon>
-    <b>About</b>
+    <b>Sur</b>
     <hr />
     <b-card>
       <div class="mb-3">
@@ -68,7 +68,7 @@
               </p>
               <p>
                 <b-icon icon="people-fill" class="primary icon-size"></b-icon>
-                {{ nFormatter(business_about.community) }} Community
+                {{ nFormatter(business_about.community) }} Communauté
               </p>
               <p>
                 <b-icon
@@ -83,7 +83,7 @@
               </p>
               <p>
                 <b-icon icon="clock" class="primary icon-size"></b-icon>
-                <b-link> Open now </b-link>
+                <b-link> Ouvrez maintenant </b-link>
                 <br />
                 <b-dropdown size="sm" variant="transperent">
                   <template #button-content>
@@ -114,12 +114,12 @@
     >
       <b-form @submit.prevent="validate('editAddress')">
         <div class="form-group">
-          <label for="title">Bussiness Name:</label><br />
+          <label for="title">Nom de l'entreprise:</label><br />
           <input
             type="text"
             name="title"
             id="title"
-            placeholder="Title"
+            placeholder="Titre"
             class="form-control"
             v-model="business_about_input.name"
             required
@@ -127,20 +127,20 @@
         </div>
 
         <div class="form-group">
-          <label for="description">Description:</label><br />
+          <label for="description">La description:</label><br />
           <textarea
             type="text"
             id="description"
             name="description"
             v-model="business_about_input.about_business"
             class="mb-3 form-control"
-            placeholder="description"
+            placeholder="la description"
             required
           ></textarea>
         </div>
 
         <b-button class="mt-3 btn-block" variant="primary" type="submit">
-          Modify
+          Modifier
         </b-button>
       </b-form>
     </b-modal>
@@ -149,19 +149,19 @@
       id="addressBusinessModal"
       ref="addressBusinessModal"
       hide-footer
-      title="Edit Address"
+      title="Modifier l'adresse"
       size="lg"
       @close="cancel"
       @keyup="validate('editAddress')"
     >
       <b-form @submit.prevent="validate('editAddress')">
         <div class="form-group">
-          <label for="username">Business Name:</label><br />
+          <label for="username">Nom de l'entreprise:</label><br />
           <input
             type="text"
             name="username"
             id="username"
-            placeholder="Business Name"
+            placeholder="Nom de l'entreprise"
             v-model="business_about_input.name"
             class="form-control"
             required
@@ -169,12 +169,12 @@
         </div>
 
         <div class="form-group">
-          <label for="alias">Category:</label><br />
+          <label for="alias">Catégorie:</label><br />
           <multiselect
             v-model="multiselecvalue"
             @input="subcategories"
-            tag-placeholder="Add this as new tag"
-            placeholder="Search or add a tag"
+            tag-placeholder="Ajouter ceci en tant que nouvelle balise"
+            placeholder="Rechercher ou ajouter une balise"
             label="name"
             track-by="id"
             :options="pcategories"
@@ -188,8 +188,8 @@
           <label for="alias">Sub-Category:</label><br />
           <multiselect
             v-model="filterselectvalue"
-            tag-placeholder="Add this as new tag"
-            placeholder="Search or add a tag"
+            tag-placeholder="Ajouter ceci en tant que nouvelle balise"
+            placeholder="Rechercher ou ajouter une balise"
             label="name"
             track-by="subcategory_id"
             :options="scategories"
@@ -199,7 +199,7 @@
           ></multiselect>
         </div>
 
-        <label class="typo__label">Fiters</label>
+        <label class="typo__label">Monteurs</label>
         <div>
           <b-card no-body>
             <b-tabs pills card vertical>
@@ -234,7 +234,7 @@
         </div>
 
         <div class="form-group">
-          <label for="username">Keywords</label><br />
+          <label for="username">Mots clés</label><br />
           <div class="col-md-12 pl-0 pr-0">
             <b-form-tags
               input-id="tags-basic"
@@ -243,7 +243,7 @@
               tag-variant="primary"
               :limit="limit"
               :tag-validator="validator"
-              placeholder="Enter new keywords separated by space, comma or semicolon"
+              placeholder="Saisissez de nouveaux mots-clés séparés par un espace, une virgule ou un point-virgule"
               no-add-on-enter
             ></b-form-tags>
           </div>
@@ -257,7 +257,7 @@
           <multiselect
             v-model="country"
             @input="Region"
-            placeholder="Search "
+            placeholder="Chercher "
             label="name"
             track-by="id"
             :options="countries"
@@ -267,13 +267,13 @@
         
   
         <b-form-group
-          label="Region"
+          label="Région"
           label-size="sm"
         >
           <multiselect
             v-model="region"
             @input="Division"
-            placeholder="Search"
+            placeholder="Chercher"
             label="name"
             track-by="id"
             :options="regions"
@@ -289,7 +289,7 @@
           <multiselect
             v-model="division"
             @input="Municipality"
-            placeholder="Search"
+            placeholder="Chercher"
             label="name"
             track-by="id"
             :options="divisions"
@@ -299,13 +299,13 @@
         
 
         <b-form-group
-          label="Municipality"
+          label="Municipalité"
           label-size="sm"
         >
           <multiselect
             v-model="municipality"
             @input="Locality"
-            placeholder="Search"
+            placeholder="Chercher"
             label="name"
             track-by="id"
             :options="municipalities"
@@ -314,13 +314,13 @@
         </b-form-group>
     
         <b-form-group
-          label="Neighbourhood"
+          label="Quartier"
           label-size="sm"
         >
           <multiselect
             v-model="locality"
-            placeholder="Search"
-            label="name"
+            placeholder="Chercher"
+            label="Nom"
             track-by="id"
             :options="localities"
             :multiple="true"
@@ -329,7 +329,7 @@
 
         <b-form-group
           id="input-group-2"
-          label="Website"
+          label="Site Internet"
           label-for="input-2"
           label-size="sm"
         >
@@ -344,7 +344,7 @@
 
         <b-form-group
           id="input-group-2"
-          label="Phone Contact"
+          label="Contact téléphonique"
           label-for="input-2"
           label-size="sm"
         >
@@ -353,7 +353,7 @@
 
         <b-form-group
           id="input-group-2"
-          label="Business Email"
+          label="Courriel professionnel"
           label-for="input-2"
           label-size="sm"
         >
@@ -362,7 +362,7 @@
             class="mt-1"
             v-model="business_about_input.email"
             type="email"
-            placeholder="Enter your email"
+            placeholder="Entrer votre Email"
             required
           ></b-form-input>
         </b-form-group>
@@ -371,7 +371,7 @@
           <b-container>
             <b-form-group
               label-cols-lg="12"
-              label="Business Hours"
+              label="Heures de travail"
               label-size="md"
               label-class=" pt-0 "
               class="mb-0"
@@ -379,7 +379,7 @@
               <b-form-group class="mb-0" v-slot="{ ariaDescribedby }">
                 <b-form-radio-group
                   class="a-text text"
-                  :options="['Always Open', 'Open for selected hours']"
+                  :options="['Toujours ouvert', 'Ouvert à certaines heures']"
                   name="open"
                   :aria-describedby="ariaDescribedby"
                   v-model="open"
@@ -404,7 +404,7 @@
                         name="start"
                         type="text"
                         v-model="day.opening_time"
-                        :required="day.check ? 'required' : null"
+                        :required="day.check ? 'obligatoire' : null"
                       ></b-form-input
                     ></b-col>
                     --
@@ -413,7 +413,7 @@
                         name="end"
                         type="text"
                         v-model="day.closing_time"
-                        :required="day.check ? 'required' : null"
+                        :required="day.check ? 'obligatoire' : null"
                       ></b-form-input
                     ></b-col>
                   </b-row>
@@ -425,7 +425,7 @@
         </div>
 
         <b-button class="mt-3 btn-block" variant="primary" type="submit">
-          Modify
+          Modifier
         </b-button>
       </b-form>
     </b-modal>

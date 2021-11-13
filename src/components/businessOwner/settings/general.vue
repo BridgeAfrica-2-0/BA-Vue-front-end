@@ -3,7 +3,7 @@
     <FlashMessage />
     <div class="b-bottomn">
       <b-button variant="primary" class="a-button-l" @click="updateGeneralInfo()">
-        <b-spinner v-if="SPupdateGeneralInfo" small type="grow"></b-spinner> Save Changes
+        <b-spinner v-if="SPupdateGeneralInfo" small type="grow"></b-spinner> Sauvegarder les modifications
       </b-button>
       <br />
     </div>
@@ -37,7 +37,7 @@
       <b-container>
         <b-form-group
           label-cols-lg="3"
-          label="Posting Permissions"
+          label="Autorisations de publication"
           label-size="md"
           label-class="font-weight-bold pt-0 username"
           class="mb-0 text"
@@ -64,7 +64,7 @@
       <b-container>
         <b-form-group
           label-cols-lg="3"
-          label="Post Approval"
+          label="Après l'approbation"
           label-size="md"
           label-class="font-weight-bold pt-0 username"
           class="mb-0"
@@ -75,7 +75,7 @@
             value="1"
             unchecked-value="0"
           >
-            All business posts must be approved by an admin
+            Tous les messages commerciaux doivent être approuvés par un administrateur
           </b-form-checkbox>
         </b-form-group>
       </b-container>
@@ -86,7 +86,7 @@
       <b-container>
         <b-form-group
           label-cols-lg="3"
-          label="Keyword Alerts"
+          label="Alertes de mots clés"
           label-size="md"
           label-class="font-weight-bold pt-0 username"
           class="mb-0 text"
@@ -98,7 +98,7 @@
             separator=" ,;"
             :limit="limit"
             :tag-validator="validator"
-            placeholder="Enter new keywords_alert separated by space, comma or semicolon"
+            placeholder="Entrez de nouveaux mots-clés_alert séparés par un espace, une virgule ou un point-virgule"
             no-add-on-enter
             required
           ></b-form-tags>
@@ -111,7 +111,7 @@
       <b-container>
         <b-form-group
           label-cols-lg="3"
-          label="Marketplace"
+          label="Marché"
           label-size="md"
           label-class="font-weight-bold pt-0 username"
           class="mb-0"
@@ -135,12 +135,12 @@
       <div>
         <b-modal id="delete-business" hide-footer>
           <template #modal-title>
-            !!! <code>DELETE BUSINESS</code> !!! 
+            !!! <code>SUPPRIMER L'AFFAIRE</code> !!! 
           </template>
           <div class="d-block text-center">
-            <h3>Delete Business: {{clickedObject.business_id}}!</h3>
+            <h3>Supprimer l'entreprise: {{clickedObject.business_id}}!</h3>
           </div>
-          <b-button class="mt-2" style="float:right" variant="primary" @click="$bvModal.hide('delete-business'); deleteBusiness(clickedObject.business_id)">Delete Business</b-button>
+          <b-button class="mt-2" style="float:right" variant="primary" @click="$bvModal.hide('delete-business'); deleteBusiness(clickedObject.business_id)">supprimer l'entreprise</b-button>
           <b-button class="mt-2 " style="float:right" @click="$bvModal.hide('delete-business')">Cancel</b-button>
         </b-modal>
       </div>
@@ -164,12 +164,12 @@ export default {
         limit: 20,
         busiess_id: "",
         businessVisibility: [
-          { label: "Published", value: "publish" },
-          { label: "Unpublish", value: "unpublish" },
+          { label: "Publié", value: "publish" },
+          { label: "Dépublier", value: "unpublish" },
         ],
         postingPermissions: [ 
-          { label: 'Admin only', value: 'Admin only' }, 
-          { label: 'Allow editor to post', value: 'Allow editor to post'}
+          { label: 'Administrateur uniquement', value: 'Admin only' }, 
+          { label: 'Autoriser l éditeur à publier', value: 'Allow editor to post'}
         ],
         permission: null,
         business_form: null

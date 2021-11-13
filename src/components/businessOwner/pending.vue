@@ -1,24 +1,9 @@
 <template>
   <div>
     <FlashMessage />
-   
 
     <!-- User Posts Listing Section-->
     <b-card class="px-md-3">
-      
-
-
-
-
-
-
-
-
-
-
-
-
-
       <div v-for="item in owner_post" :key="item.post_id">
         <div class="mt-2">
           <div class="d-inline-flex">
@@ -40,12 +25,12 @@
 
                 <b-dropdown-item-button variant="info" @click="approvedPost(item)">
                   <b-icon icon="pencil" aria-hidden="true"></b-icon>
-                  Approved
+                  Approuvé
                 </b-dropdown-item-button>
 
                 <b-dropdown-item-button variant="danger" @click="deletePost(item)">
                   <b-icon icon="trash-fill" aria-hidden="true"></b-icon>
-                  Delete
+                  Effacer
                 </b-dropdown-item-button>
               </b-dropdown>
             </div>
@@ -76,8 +61,6 @@
 
             <light css=" " :cells="item.media.length" :items="mapmediae(item.media)"></light>
           </div>
-          
-
         </div>
 
         <hr />
@@ -89,7 +72,6 @@
 </template>
 
 <script>
-
 import light from '@/components/lightbox';
 
 import moment from 'moment';
@@ -98,7 +80,6 @@ import axios from 'axios';
 export default {
   name: 'postNetwork',
   components: {
- 
     light,
   },
   data() {
@@ -189,20 +170,14 @@ export default {
       this.$store.commit('profile/ownerPost', []);
     },
 
-
-
-
-   
-
     infiniteHandler($state) {
-      let url="business/show/unapprove-post/" + this.url + "/" + this.page;
-       if (this.page == 1) {
+      let url = 'business/show/unapprove-post/' + this.url + '/' + this.page;
+      if (this.page == 1) {
         this.owner_post.splice(0);
       }
-       this.$store
-        .dispatch("businessOwner/loadMore", url)
+      this.$store
+        .dispatch('businessOwner/loadMore', url)
         .then(({ data }) => {
-          
           if (data.data.length) {
             this.page += 1;
 
@@ -212,18 +187,12 @@ export default {
             $state.complete();
           }
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
     },
 
-
-
-
-
-
-    approvedPost(post){
-      
+    approvedPost(post) {
       let loader = this.$loading.show({
         container: this.fullPage ? null : this.$refs.creatform,
         canCancel: true,
@@ -272,16 +241,9 @@ export default {
             loader.hide();
           }
         });
-
     },
-   
-
-
-
 
     deletePost(post) {
-     
-
       let loader = this.$loading.show({
         container: this.fullPage ? null : this.$refs.creatform,
         canCancel: true,
@@ -290,7 +252,7 @@ export default {
       });
 
       axios
-        .delete("business/delete/post/" + post.post_id, {
+        .delete('business/delete/post/' + post.post_id, {
           name: this.name,
         })
         .then(response => {
@@ -332,10 +294,6 @@ export default {
         });
     },
 
- 
-   
-
-
     ownerPost() {
       this.$store
         .dispatch('profile/ownerPost')
@@ -346,10 +304,6 @@ export default {
           console.log({ err: err });
         });
     },
-
-
-
-
 
     showModal() {
       this.$refs['modal-3'].show();

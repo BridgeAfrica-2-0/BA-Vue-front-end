@@ -1,10 +1,10 @@
 <template>
   <div>
-    <fas-icon class="violet mr-2 pt-1 icon-size primary" :icon="['fas', 'file-image']" />Media
+    <fas-icon class="violet mr-2 pt-1 icon-size primary" :icon="['fas', 'file-image']" />Médias
 
     <hr />
     <b-tabs content-class="mt-3" pills>
-      <b-tab title="Posts" active @click="getImages">
+      <b-tab title="Des postes" active @click="getImages">
         <div v-if="!hasLoadPicture">
           <b-spinner class="load" label="Large Spinner"></b-spinner>
         </div>

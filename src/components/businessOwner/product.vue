@@ -17,9 +17,9 @@
               {{ product.name }}
             </strong>
             <br />
-            <strong> Description </strong> <br />
+            <strong> La description </strong> <br />
             {{ product.description.substring(0, 30) }}
-            <b-link v-if="product.description.length >= 30"> see more </b-link>
+            <b-link v-if="product.description.length >= 30"> voir plus </b-link>
             <br />
 
             <span class="price">
@@ -42,7 +42,7 @@
           <b-col cols="12" md="6">
             <b-form-group
               id="input-group-1"
-              label="Product Name"
+              label="Nom du produit"
               label-for="input-1"
               label-size="sm"
             >
@@ -56,7 +56,7 @@
 
             <b-form-group
               id="input-group-1"
-              label="Product Description"
+              label="Description du produit"
               label-for="input-1"
               label-size="sm"
             >
@@ -73,7 +73,7 @@
               <a href="#" data-toggle="modal" data-target="#createalbumModal">
                 <div class="drag-text">
                   <i class="fa fa-plus"></i>
-                  <h6>Product Image</h6>
+                  <h6>Image du produit</h6>
                 </div>
               </a>
               <div></div>
@@ -83,7 +83,7 @@
 
         <b-form-group
           id="input-group-1"
-          label="product Price"
+          label="prix du produit"
           label-for="input-1"
           label-size="sm"
         >
@@ -96,7 +96,7 @@
           value="accepted"
           unchecked-value="not_accepted"
         >
-          This Product Is On Discount
+          Ce produit est en promotion
         </b-form-checkbox>
 
         <b-form-group
@@ -114,7 +114,7 @@
           value="accepted"
           unchecked-value="not_accepted"
         >
-          This Item Is A Service ?
+         Cet article est un service ?
         </b-form-checkbox>
 
         <b-form-checkbox
@@ -123,7 +123,7 @@
           value="accepted"
           unchecked-value="not_accepted"
         >
-          In stock
+         En stock
         </b-form-checkbox>
 
         <b-form-checkbox
@@ -132,10 +132,10 @@
           value="accepted"
           unchecked-value="not_accepted"
         >
-          Published
+          Publié
         </b-form-checkbox>
 
-        <b-button class="mt-2 btn-block" variant="primary"> Add</b-button>
+        <b-button class="mt-2 btn-block" variant="primary"> Ajouter</b-button>
       </b-form>
     </b-modal>
     <!-- PRODUCT DETAILS MODAL -->

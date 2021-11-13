@@ -9,7 +9,7 @@
               <a v-b-modal.createalbumModal>
                 <div class="drag-textt">
                   <fas-icon :icon="['fas', 'plus']" />
-                  <h3>Create Album</h3>
+                  <h3>Créer un album</h3>
                 </div>
               </a>
             </div>
@@ -18,10 +18,10 @@
           <b-modal hide-footer title="Create album" id="createalbumModal">
             <div ref="creatform">
               <b-form>
-                <b-form-input placeholder="Album name" v-model="albumInfo.name"></b-form-input>
-                <b-form-input placeholder="Album Type" class="mt-2" v-model="albumInfo.type"></b-form-input>
+                <b-form-input placeholder="Nom de l'album" v-model="albumInfo.name"></b-form-input>
+                <b-form-input placeholder="Type d'album" class="mt-2" v-model="albumInfo.type"></b-form-input>
                 <b-button class="mt-2" variant="primary" @click="createAlbums" :disabled="loading || canCreateAlbum">
-                  Create</b-button
+                  Créer</b-button
                 >
               </b-form>
             </div>
@@ -42,14 +42,14 @@
         <b-modal hide-footer title="Edit album" ref="editalbum" id="editalbum">
           <div ref="creatform">
             <b-form>
-              <b-form-input placeholder="Album name" v-model="editName"></b-form-input>
+              <b-form-input placeholder="Nom de l'album" v-model="editName"></b-form-input>
               <b-button
                 class="mt-2"
                 variant="primary"
                 @click="update"
                 :disabled="loading || editName.trim().length ? false : true"
               >
-                Update</b-button
+                Mettre à jour</b-button
               >
             </b-form>
           </div>
@@ -75,7 +75,7 @@
                         ></a>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                           <a class="dropdown-item" data-toggle="modal" data-target="#namealbumModal">Edit Name</a>
-                          <a class="dropdown-item">Delete Album</a>
+                          <a class="dropdown-item">Supprimer l'album</a>
                         </div>
                       </li>
                     </ul>
@@ -85,7 +85,7 @@
                     <div class="col-md-5 pl-0 pr-0">
                       <select id="gender" class="form-control w-100">
                         <option>Public</option>
-                        <option>Private</option>
+                        <option>Privé</option>
                       </select>
                     </div>
                   </div>
@@ -99,7 +99,7 @@
     <!-- show  images in an album -->
 
     <div class="container-flex" v-if="showalbum">
-      <b-button variant="outline-primary" size="sm" @click="hidealbum"> Back </b-button>
+      <b-button variant="outline-primary" size="sm" @click="hidealbum"> Arrière </b-button>
       <span class="text-center ml-2 f-20"> {{ this.album_name }} </span>
 
       <Images

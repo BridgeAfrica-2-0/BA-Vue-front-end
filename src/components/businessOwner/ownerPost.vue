@@ -9,7 +9,7 @@
           <b-avatar variant="primary" square class="img-fluid avat-comment" :src="business_intro.logo_path"></b-avatar>
         </b-col>
         <b-col cols="9" md="11" class="p-0 m-0 pr-3">
-          <input placeholder="Post a business update" v-b-modal.modal-xl class="comment" type="text" />
+          <input placeholder="Publier une mise à jour commerciale" v-b-modal.modal-xl class="comment" type="text" />
           <fas-icon class="primary send-cmt" :icon="['fas', 'paper-plane']" />
         </b-col>
       </b-row>
@@ -36,7 +36,7 @@
                 class="post-btn"
               >
                 <fas-icon class="icons" :icon="['fas', 'photo-video']" size="lg" />
-                <span class="username"> Photo/ Video</span>
+                <span class="username"> Photo/ Vidéo</span>
               </b-button>
             </b-col>
             <!-- Attach File-->
@@ -57,14 +57,14 @@
                 class="post-btn"
               >
                 <fas-icon class="icons" :icon="['fas', 'file']" size="lg" />
-                <span class="username"> Attach File </span>
+                <span class="username"> Pièce jointe </span>
               </b-button>
             </b-col>
             <!-- Post-->
             <b-col cols="3" class="text-right p-0 m-0">
               <b-button title="Add Hyperlink" size="sm" variant="outline-primary" @click="createPost_" class="post-btn">
                 <fas-icon class="icons" :icon="['fas', 'paper-plane']" size="lg" />
-                <span class="username"> Post </span>
+                <span class="username"> Poster </span>
               </b-button>
             </b-col>
           </b-row>
@@ -97,14 +97,14 @@
                     id="textarea-small"
                     autofocus
                     class="mb-2 border-none"
-                    placeholder="Post a business update"
+                    placeholder="Publier une mise à jour commerciale"
                     v-model="edit_description"
                   ></b-form-textarea>
 
                   <i></i>
                 </div>
                 <div class="bordder">
-                  <span class="float-left"> Add to Your Post </span>
+                  <span class="float-left"> Ajouter à votre message </span>
                   <span class="float-right">
                     <b-button-group size="sm" class="">
                       <input id="video" type="file" hidden />
@@ -143,7 +143,7 @@
 
                 <div v-for="hyperlink in createPost.hyperlinks" :key="hyperlink.fileName" class="bordder">
                   <span class="float-left"> {{ hyperlink.fileName }} </span>
-                  <span class="float-right" @click="deleteItem(hyperlink.fileName)"> delete </span>
+                  <span class="float-right" @click="deleteItem(hyperlink.fileName)"> effacer </span>
                 </div>
 
                 <div v-for="(movie, index) in edit_image" :key="movie.id" class="">
@@ -178,7 +178,7 @@
 
                 <span>
                   <b-button @click="updatePost" variant="primary" block
-                    ><b-icon icon="cursor-fill" variant="primary"></b-icon> Publish</b-button
+                    ><b-icon icon="cursor-fill" variant="primary"></b-icon> Publier</b-button
                   >
                 </span>
               </b-col>
@@ -212,12 +212,12 @@
                     id="textarea-small"
                     autofocus
                     class="mb-2 border-none"
-                    placeholder="Post a business update"
+                    placeholder="Publier une mise à jour commerciale"
                     v-model="createPost.postBusinessUpdate"
                   ></b-form-textarea>
                 </div>
                 <div class="bordder">
-                  <span class="float-left"> Add to Your Post </span>
+                  <span class="float-left"> Ajouter à votre message </span>
                   <span class="float-right">
                     <b-button-group size="sm" class="">
                       <input id="video" type="file" hidden />
@@ -257,7 +257,7 @@
                 <div class="h300px">
                   <div v-for="hyperlink in createPost.hyperlinks" :key="hyperlink.fileName" class="bordder">
                     <span class="float-left"> {{ hyperlink.fileName }} </span>
-                    <span class="float-right" @click="deleteItem(hyperlink.fileName)"> delete </span>
+                    <span class="float-right" @click="deleteItem(hyperlink.fileName)"> effacer </span>
                   </div>
 
                   <div v-for="movie in createPost.movies" :key="movie.fileName" class="">
@@ -286,7 +286,7 @@
                 <hr />
                 <span>
                   <b-button @click="submitPost" variant="primary" block
-                    ><b-icon icon="cursor-fill" variant="primary"></b-icon> Publish</b-button
+                    ><b-icon icon="cursor-fill" variant="primary"></b-icon> Publier</b-button
                   >
                 </span>
               </b-col>

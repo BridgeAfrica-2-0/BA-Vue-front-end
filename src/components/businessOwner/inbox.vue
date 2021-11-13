@@ -29,7 +29,7 @@
                 <input
                   type="text"
                   class="form-control input-background"
-                  placeholder="Search inbox"
+                  placeholder="Rechercher dans la boîte de réception"
                 />
               </b-container>
             </div>
@@ -94,7 +94,7 @@
               <input
                 type="text"
                 class="form-control input-background"
-                placeholder="Search inbox"
+                placeholder="Rechercher dans la boîte de réception"
               />
             </div>
             <div>
@@ -495,7 +495,7 @@
                       v-model="searchQuery"
                       class="input-background"
                       style="width: 100%"
-                      placeholder="Type the name of person or Business..."
+                      placeholder="Tapez le nom de la personne ou de l'entreprise..."
                       @click="showsearchh()"
                     ></b-form-input>
 
@@ -512,7 +512,7 @@
                             <td>
                               <b-row>
                                 <b-col cols="6">
-                                  <span class="bold"> Send to all </span>
+                                  <span class="bold"> Envoyer à tous </span>
                                 </b-col>
                                 <b-col>
                                   <span>
@@ -565,7 +565,7 @@
                         </tbody>
                       </table>
                       <b-button variant="primary" size="sm" class="pl-3 pr-3">
-                        Send
+                        Envoyer
                       </b-button>
                     </div>
                   </b-col>
@@ -585,7 +585,7 @@
                       id="textarea"
                       v-model="text"
                       class="input-background"
-                      placeholder="Enter something..."
+                      placeholder="Entrez quelque chose..."
                     ></b-form-input>
                   </b-col>
 

@@ -2,9 +2,9 @@
   <b-container>
     <b-container class="bv-example-row">
       <p class="t-left text">
-        Blocked users can no longer see things you post on your business, invite
-        your business to networks, strat a conversation, or follow your
-        business.
+        Les utilisateurs bloqués ne peuvent plus voir les choses que vous publiez sur votre entreprise, invitez
+        votre entreprise aux réseaux, lancez une conversation ou suivez votre
+        Entreprise.
       </p>
     </b-container>
 
@@ -27,14 +27,14 @@
               size="4em"
             ></b-avatar>
             <span class="mr-auto">{{blockuser.name}}</span>
-            <span class="mr-auto" @click="UnblockBlockUser(blockuser)"><b-link href="#">Unblock</b-link></span>
+            <span class="mr-auto" @click="UnblockBlockUser(blockuser)"><b-link href="#">Débloquer</b-link></span>
           </b-list>
         </b-skeleton-wrapper>
       </b-list-group>
     </b-container>
     <b-container v-else>
       <b-card bg-variant="white" text-variant="black" class="text-center">
-        <b-card-text>No Blocked User Available.</b-card-text>
+        <b-card-text>Aucun utilisateur bloqué disponible.</b-card-text>
       </b-card>
     </b-container>
 

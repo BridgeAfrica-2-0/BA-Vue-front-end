@@ -4,7 +4,7 @@
 			<div style="float:right" class="edit cursor-pointer" @click="editContact">
 				<b-icon icon="pencil-fill" variant="primary"></b-icon>
 			</div>
-			<h6 class="mb-2"><b>Intro</b></h6>
+			<h6 class="mb-2"><b>Introduction</b></h6>
 
 			<b-card-text>
 				<p class="d-flex justify-content-start align-items-start">
@@ -29,7 +29,7 @@
 				</p>
 				<p class="d-flex justify-content-start align-items-start">
 					<b-icon icon="people-fill" class="primary icon-size"></b-icon>
-					{{ business_intro.community }} Community
+					{{ business_intro.community }} Communauté
 				</p>
 				<p class="d-flex justify-content-start align-items-start">
 					<b-icon icon="telephone-fill" class="primary icon-size"></b-icon>
@@ -41,7 +41,7 @@
 				</p>
 				<p class="d-flex justify-content-start align-items-start">
 					<b-icon icon="clock" class="primary icon-size"></b-icon>
-					<b-link class="mr-2"> Open now</b-link>
+					<b-link class="mr-2"> Ouvrez maintenant</b-link>
 					<b-dropdown size="sm" variant="transperent">
 						<template #button-content>
 							{{ business_intro.business_open_hours[0].day }}
@@ -123,7 +123,7 @@
 				{{ blec }}
 				<b-row>
 					<div class="form-group col-md-6">
-						<label for="username">Busness Name:</label><br />
+						<label for="username">Nom de l'entreprise:</label><br />
 						<input
 							type="text"
 							name="name"
@@ -135,7 +135,7 @@
 					</div>
 
 					<div class="form-group col-md-6">
-						<label for="alias">Category:</label><br />
+						<label for="alias">Catégorie:</label><br />
 
 						<b-form-select
 							:options="categories"
@@ -183,7 +183,7 @@
 
 				<b-row>
 					<div class="form-group col-md-6">
-						<label for="keywords">Keywords</label><br />
+						<label for="keywords">Mots clés</label><br />
 						<div class="col-md-12 pl-0 pr-0">
 							<b-form-tags
 								input-id="alias"
@@ -193,7 +193,7 @@
 					</div>
 
 					<div class="form-group col-md-6">
-						<label for="country" class="username"> Country :</label><br />
+						<label for="country" class="username"> Pays :</label><br />
 
 						<country-select
 							v-model="form.country"
@@ -206,7 +206,7 @@
 
 				<b-row>
 					<div class="form-group col-md-6">
-						<label for="country" class="username"> Region :</label><br />
+						<label for="country" class="username"> Région :</label><br />
 						<region-select
 							v-model="form.region"
 							:country="country"
@@ -232,7 +232,7 @@
 				</b-row>
 
 				<b-button class="mt-3 btn-block" variant="primary" @click="validate">
-					Modify
+					Modifier
 				</b-button>
 			</b-form>
 		</b-modal>

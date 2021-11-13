@@ -68,18 +68,26 @@ export default {
       // TotalShippingFee: 2000,
       // Total: 62300,
     },
+    total: 1,
   },
 
   getters: {
     getOrderDetails(state) {
       return state.order_details;
     },
+
+    getTotal(state){
+      return state.total;
+    }
   },
 
   mutations: {
     setOrderDetails(state, order_details) {
       state.order_details = order_details;
     },
+    setTotal(state, newtotal){
+      state.total= newtotal
+    }
   },
 
   actions: {
@@ -89,16 +97,20 @@ export default {
         console.log(response);
         commit('setOrderDetails', response.data.data);
         console.log(state.order_details);
+        commit('setTotal',response.data.total);
+        
       });
     },
 
-    nextPage({commit }, data){
+    nextPage({commit , state}, data){
 
       return axios.get(`/order/${data.orderId}/${data.businessId}/items?page=${data.page}`).then( response  => {
         console.log("----------------------------------s");
         console.log(response);
         commit('setOrderDetails', response.data.data);
         console.log(state.order_details);
+
+        commit('setTotal',response.data.total)
       });
 
     }

@@ -76,7 +76,7 @@ const routes = [
   },
 
   {
-    path: "/business_owner/ordersdetail",
+    path: "/business_owner/ordersdetail/:id?",
     name: "ordersdetail",
     component: businessordersdetail,
     // meta: {

@@ -201,46 +201,6 @@
       <b-container>
         <b-form-group
           label-cols-lg="3"
-          label="City"
-          label-size="md"
-          label-class="font-weight-bold pt-0"
-          class="mb-0"
-        >
-          <b-form-input
-            id="bname"
-            placeholder=""
-            v-model="editnetworkinfo.city"
-            required
-          ></b-form-input>
-        </b-form-group>
-      </b-container>
-    </div>
-
-
-
-    <div class="b-bottom">
-      <b-container>
-        <b-form-group
-          label-cols-lg="3"
-          label="Website"
-          label-size="md"
-          label-class="font-weight-bold pt-0"
-          class="mb-0"
-        >
-          <b-form-input
-            id="bname"
-            placeholder=""
-            v-model="editnetworkinfo.website"
-            required
-          ></b-form-input>
-        </b-form-group>
-      </b-container>
-    </div>
-
-    <div class="b-bottom">
-      <b-container>
-        <b-form-group
-          label-cols-lg="3"
           label=" Description "
           label-size="md"
           label-class="font-weight-bold pt-0"
@@ -501,17 +461,15 @@ export default {
 
       let formData = new FormData();
       formData.append('name', editnetworkinfo.admin_name);
-      formData.append('categoryId', this.selectedcategories);
-      formData.append("country", this.selectedcountry);
-      formData.append("region", this.selectedregion);
-      formData.append("division", this.selecteddivision);
-      formData.append("council", this.selectedmunicipality);
+      formData.append('network_categories_id', this.selectedcategories);
+      formData.append("country_id", this.selectedcountry);
+      formData.append("region_id", this.selectedregion);
+      formData.append("division_id", this.selecteddivision);
+      formData.append("council_id", this.selectedmunicipality);
       formData.append("neighborhood_id", this.selectedlocality);
       formData.append('primary_phone', editnetworkinfo.primary_phone);
       formData.append('secondary_phone', editnetworkinfo.secondary_phone);
       formData.append('email', editnetworkinfo.email);
-      formData.append('city', editnetworkinfo.city);
-      formData.append('website', editnetworkinfo.website);
       formData.append('description', editnetworkinfo.description);
       console.log(formData);
       this.$store
@@ -521,7 +479,7 @@ export default {
         })
         .then(({ data }) => {
         console.log(data);
-        this.getNetworkInfo();
+        this.getEditNetworkInfo();
         console.log(this.networkInfo);
         this.Lspinner = false;
         this.flashMessage.show({

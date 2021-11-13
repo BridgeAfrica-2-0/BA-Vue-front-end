@@ -39,7 +39,7 @@
       </div>
       <div v-if="blocknetworks != 0">
         <h6 class="font-weight-bolder">
-          Blocked Users ({{blocknetworks.length}})
+          Blocked Networks ({{blocknetworks.length}})
         </h6>
         <hr width="100%" />
         <b-list-group v-for="blocknetwork in blocknetworks" :key="blocknetwork.id">
@@ -67,7 +67,7 @@
       </div>
       <div v-if="blockbusiness != 0">
         <h6 class="font-weight-bolder">
-          Blocked Users ({{blockbusiness.length}})
+          Blocked Businesses ({{blockbusiness.length}})
         </h6>
         <hr width="100%" />
         <b-list-group v-for="blockbusines in blockbusiness" :key="blockbusines.id">

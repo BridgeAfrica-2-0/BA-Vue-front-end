@@ -11,7 +11,7 @@
 								:icon="['fas', 'exclamation-circle']"
 								size="lg"
 							/>
-							Intro
+							{{ $t('profileowner.Intro') }}
 						</h2>
 						<span class="float-right btn m-0 p-0 action-intro" @click="editPage"
 							><b-icon
@@ -29,7 +29,7 @@
 								class="icon-size"
 								variant="primary"
 							></b-icon>
-							Work at:
+							{{ $t('profileowner.Work_at') }}:
 							<span v-if="info.user_experience">
 								<span
 									class="text"
@@ -46,7 +46,7 @@
 								class="icon-size"
 								variant="primary"
 							></b-icon>
-							Studied at:
+							{{ $t('profileowner.Studied_at') }}:
 							<span v-if="info.user_education != null">
 								<span
 									v-for="edu in info.user_education.slice(0, 1)"
@@ -63,7 +63,7 @@
 								class="icon-size"
 								variant="primary"
 							></b-icon>
-							Home Town :
+							{{ $t('profileowner.Home_Town') }} :
 							<span class="text">
 								{{ info.user.neighbor }}
 							</span>
@@ -74,7 +74,7 @@
 								class="icon-size"
 								variant="primary"
 							></b-icon>
-							Current City :
+							{{ $t('profileowner.Current_City') }} :
 							<span class="text">
 								{{ info.user.city }}
 							</span>
@@ -85,7 +85,7 @@
 								class="icon-size"
 								variant="primary"
 							></b-icon>
-							Community:
+							{{ $t('profileowner.Community') }}:
 							<span class="text">
 								{{ nFormatter(total.total_community) }}
 							</span>
@@ -93,10 +93,10 @@
 					</b-card-text>
 				</b-card>
 
-				<b-modal id="modal-5" title="Edit Intro" ref="modal" @ok="handleOk">
+				<b-modal id="modal-5" :title="$t('profileowner.Edit_Intro')" ref="modal" @ok="handleOk">
 					<div class="">
 						<p>
-							<b> Work at: </b>
+							<b> {{ $t('profileowner.Work_at') }}: </b>
 							<span v-if="info.user_experience">
 								<span
 									class="text"
@@ -108,7 +108,7 @@
 							</span>
 						</p>
 						<p>
-							<b> Studied at: </b>
+							<b> {{ $t('profileowner.Studied_at') }}: </b>
 
 							<span v-if="info.user_education != null">
 								<span
@@ -121,13 +121,13 @@
 							</span>
 						</p>
 						<p>
-							<b> Home Town : </b>
+							<b> {{ $t('profileowner.Home_Town') }} : </b>
 							<span class="text">
 								{{ info.user.neighbor }}
 							</span>
 						</p>
 						<p>
-							<b> Current City : </b>
+							<b> {{ $t('profileowner.Current_City') }} : </b>
 							<span class="text">
 								{{ info.user.city }}
 							</span>
@@ -135,7 +135,7 @@
 					</div>
 					<!-- </b-modal> -->
 
-					<b> {{ $t("profile_owner.posts_tab.studied_at") }}: </b>
+					<b> {{ $t("profileowner.Studied_at") }}: </b>
 					<span
 						v-for="edu in info.user_education.slice(0, 1)"
 						:key="edu.id"
@@ -152,7 +152,7 @@
 							variant=""
 						></b-icon>
 
-						<b> {{ $t("profile_owner.posts_tab.home_town") }}: </b>
+						<b> {{ $t("profileowner.home_town") }}: </b>
 						<span class="text">
 							{{ info.user.neighbor }}
 						</span>
@@ -164,7 +164,7 @@
 							class="eedit"
 							variant=""
 						></b-icon>
-						<b> {{ $t("profile_owner.posts_tab.current_city") }} : </b>
+						<b> {{ $t("profileowner.current_city") }} : </b>
 						<span class="text">
 							{{ info.user.city }}
 						</span>
@@ -242,8 +242,8 @@
 		data() {
 			return {
 				userProfileOwner: {
-					workedAt: "Current or Last Organization",
-					studiedAt: "Last Education",
+					workedAt: this.$t('profileowner.Current_or_Last_Organization'),
+					studiedAt: this.$t('profileowner.Last_Education'),
 					homeTown: "Dummy",
 					currentCity: "Dummy",
 					numbersOfFollowers: 256,

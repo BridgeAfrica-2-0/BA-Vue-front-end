@@ -71,7 +71,7 @@
 
             <b-form-group
               id="input-group-1"
-              label="$t('search.ProductDescription')"
+              label="$t('search_Description')"
               label-for="input-1"
               label-size="sm"
             >

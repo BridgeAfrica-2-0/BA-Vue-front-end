@@ -406,9 +406,14 @@
                       Language
                     </div>
                     <hr class="h-divider" />
-                    <a
-                      href="https://bridgeafrica.info/nav/owner-other-menu.html"
-                      class="other-menu suggest-item cursor-pointer text-decoration-none text-dark"
+                    <a @click="logout"
+                      href="#"
+                      class="
+                        other-menu
+                        suggest-item
+                        cursor-pointer
+                        text-decoration-none text-dark
+                      "
                     >
                       <span class="mr-2"><fas-icon class="violet search" :icon="['fas', 'sign-out-alt']" /></span>
                       Logout
@@ -470,8 +475,14 @@
             </div>
             <hr class="h-divider" />
             <a
-              href="https://bridgeafrica.info/nav/owner-other-menu.html"
-              class="other-menu suggest-item cursor-pointer text-decoration-none text-dark"
+              href="#"
+              @click="logout"
+              class="
+                other-menu
+                suggest-item
+                cursor-pointer
+                text-decoration-none text-dark
+              "
             >
               <span class="mr-2"><fas-icon class="violet search" :icon="['fas', 'sign-out-alt']" /></span>
               Logout
@@ -526,6 +537,7 @@ export default {
       setNetworks: 'social/FIND_USER_NETWORK',
       setBusiness: 'social/FIND_USER_BUSNESS',
       lauchNetworkRequest: 'social/INIT',
+       Logout: 'auth/logout',
     }),
 
     getKeyword() {
@@ -563,6 +575,25 @@ export default {
       this.$refs.mobileinput.style.display = 'block';
       this.isActive = true;
     },
+    getUsers() {
+      this.$store
+        .dispatch("userChat/GET_USERS",'')
+        .then(() => {
+          console.log("->[Data logged]<-");
+        })
+        .catch(() => console.log("error"));
+    },
+
+    logout(){
+
+      this.Logout();
+    },
+
+    toggleinput() {
+      this.$refs.mobileinput.style.display = "block";
+    },
+
+
     getNetworks: async function () {
       let request = await this.$repository.share.getNetworks();
       if (request.success) this.setNetworks(request.data);

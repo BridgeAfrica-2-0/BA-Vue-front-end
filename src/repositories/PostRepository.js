@@ -25,7 +25,6 @@ class Repository {
         success: (response.data.data) ? true : false,
         data: (response.data.data) ? response.data.data : []
       }
-
     } catch (error) {
       return {
         success: false,

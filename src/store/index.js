@@ -40,6 +40,7 @@ import networkProfileFeedback from "./networkProfileFeedback";
 import networkProfileMedia from "./networkProfileMedia";
 import networkProfileMemberRequest from "./networkProfileMemberRequest";
 import { social } from "./social";
+import profileOrderDetail from "./profileOrderDetail";
 
 // import axios from "axios";
 Vue.use(Vuex);
@@ -82,7 +83,8 @@ export default new Vuex.Store({
         networkProfileMedia,
         networkProfileMemberRequest,
         networkProfile,
-        orderBusiness
+        orderBusiness,
+        profileOrderDetail
 
     }
 });

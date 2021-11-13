@@ -74,7 +74,14 @@ const routes = [{
         // },
     },
 
-
+    {
+        path: "/profileordersdetail",
+        name: "orders",
+        component: ordersdetail,
+        // meta: {
+        //   auth: true,
+        // },
+    },
 
     {
         path: "/",

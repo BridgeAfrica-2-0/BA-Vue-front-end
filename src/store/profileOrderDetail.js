@@ -6,6 +6,7 @@ export default {
   state: {
     order_details: {},
     total: 1,
+    status: 0
   },
 
   getters: {
@@ -15,6 +16,14 @@ export default {
 
     getTotal(state){
       return state.total;
+    },
+
+    getStatus(state){
+       if( state.order_details.orderItems.filter(item => item.status == "pending")){
+         return 2 ;
+       }else if(state.order_details.orderItems.filter(item => item.status == "shipped")){
+         return 4
+       }
     }
   },
 

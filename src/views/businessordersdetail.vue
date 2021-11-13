@@ -164,19 +164,19 @@
               <div class="row bold text-center"><h3>shipping Adress</h3></div>
               <br />
               <div class="row">
-                <div class="col-3">city</div>
+                <div class="col-3 bold"><h3>city</h3></div>
                 <div class="col"> {{orderDetails.shippingAdress.city}}</div>
               </div>
                <div class="row">
-                <div class="col-3">name</div>
+                <div class="col-3 bold"><h3>name</h3></div>
                 <div class="col"> {{orderDetails.shippingAdress.name}}</div>
               </div>
               <div class="row">
-                <div class="col-3">phone</div>
+                <div class="col-3 bold"><h3>phone</h3></div>
                 <div class="col"> {{orderDetails.shippingAdress.phone}}</div>
               </div>
                <div class="row">
-                <div class="col-3">email</div>
+                <div class="col-3 bold"><h3>email</h3></div>
                 <div class="col"> {{orderDetails.shippingAdress.email}}</div>
               </div>
               

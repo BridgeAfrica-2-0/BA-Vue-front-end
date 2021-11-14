@@ -21,9 +21,11 @@ export default {
     getStatus(state){
        if( state.order_details.orderItems.filter(item => item.status == "pending")){
          return 2 ;
-       }else if(state.order_details.orderItems.filter(item => item.status == "shipped")){
-         return 4
-       }
+       }else if(state.order_details.orderItems.filter(item => item.status == "complete")){
+         return 3;
+       }else if(state.order_details.orderItems.filter(item => item.status == "cancel")){
+        return 4;
+      }
     }
   },
 

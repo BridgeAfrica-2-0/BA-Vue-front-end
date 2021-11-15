@@ -36,6 +36,7 @@ import networkProfileMedia from "./networkProfileMedia";
 import networkProfileMemberRequest from "./networkProfileMemberRequest";
 import { social } from "./social";
 import { notification } from "./notifications"
+import keywordOperationOnNetwork from './keywordOperationOnNetwork'
 
 // import axios from "axios";
 Vue.use(Vuex);
@@ -69,12 +70,7 @@ export default new Vuex.Store({
     business,
     networkProfileFeedback,
     NetworkSettings,
-    profile,
-    follower,
-    search,
     keywordOperationOnNetwork,
-
-    UserProfileOwner,
     businessSettingInfo,
     checkout,
     social,

@@ -131,6 +131,7 @@
                 <a @click.prevent="navLink('market')" class="nav-link text-dark hov" href=""> Market </a>
               </div>
 
+              <!-- Messages Started -->
               <div class="nav-item">
                 <a id="messages" class="nav-link" data-toggle="popover" role="button" data-original-title="" title=""
                   ><span class="text-ored"><fas-icon class="primary" :icon="['fas', 'comment']" /></span
@@ -138,152 +139,44 @@
                 <b-popover target="messages" triggers="hover" placement="top">
                   <div class="popover-body">
                     <p class="font-weight-bold">Messages</p>
-                    <hr class="h-divider" />
-                    <div
-                      class="
-                        d-inline-flex
-                        flex-row
-                        justify-content-between
-                        align-items-center
-                        suggest-item
-                        cursor-pointer
-                      "
-                    >
-                      <div class="d-inline-flex flex-row align-items-center">
-                        <div>
-                          <img
-                            src="@/assets/img/profile-pic.jpg"
-                            class="rounded-circle"
-                            alt=""
-                            width="30"
-                            height="30"
-                          />
+                    <div v-for="message in messages" :key="message.id">
+                      <hr class="h-divider" />
+                      <div
+                        class="
+                          d-inline-flex
+                          flex-row
+                          justify-content-between
+                          align-items-center
+                          suggest-item
+                          cursor-pointer
+                        "
+                      >
+                        <div class="d-inline-flex flex-row align-items-center">
+                          <div>
+                            <img
+                              src="@/assets/img/profile-pic.jpg"
+                              class="rounded-circle"
+                              alt=""
+                              width="30"
+                              height="30"
+                            />
+                          </div>
+                          <div class="d-flex flex-column ml-1 line-size">
+                            <div class="font-weight-bold">{{ message.sender_business ? message.sender_business.name : '' }}</div>
+                            <div class="small text-muted">{{ message.message.substring(0, 20) }}</div>
+                          </div>
                         </div>
-                        <div class="d-flex flex-column ml-1 line-size">
-                          <div class="font-weight-bold">David</div>
-                          <div class="small text-muted">Hi</div>
-                        </div>
-                      </div>
-                      <div class="small text-muted">1 min ago</div>
-                    </div>
-                    <hr class="h-divider" />
-                    <div
-                      class="
-                        d-inline-flex
-                        flex-row
-                        justify-content-between
-                        align-items-center
-                        suggest-item
-                        cursor-pointer
-                      "
-                    >
-                      <div class="d-inline-flex flex-row align-items-center">
-                        <div>
-                          <img
-                            src="@/assets/img/profile-pic.jpg"
-                            class="rounded-circle"
-                            alt=""
-                            width="30"
-                            height="30"
-                          />
-                        </div>
-                        <div class="d-flex flex-column ml-1 line-size">
-                          <div class="font-weight-bold">Alina</div>
-                          <div class="small text-muted">How are you</div>
+                        <div class="small text-muted">
+                          {{ message.created_at | moment("from", "now") }}
                         </div>
                       </div>
-                      <div class="small text-muted">3 hours ago</div>
-                    </div>
-                    <hr class="h-divider" />
-                    <div
-                      class="
-                        d-inline-flex
-                        flex-row
-                        justify-content-between
-                        align-items-center
-                        suggest-item
-                        cursor-pointer
-                      "
-                    >
-                      <div class="d-inline-flex flex-row align-items-center">
-                        <div>
-                          <img
-                            src="@/assets/img/profile-pic.jpg"
-                            class="rounded-circle"
-                            alt=""
-                            width="30"
-                            height="30"
-                          />
-                        </div>
-                        <div class="d-flex flex-column ml-1 line-size">
-                          <div class="font-weight-bold">Maxine</div>
-                          <div class="small text-muted">Please call me</div>
-                        </div>
-                      </div>
-                      <div class="small text-muted">Yesterday</div>
-                    </div>
-                    <hr class="h-divider" />
-                    <div
-                      class="
-                        d-inline-flex
-                        flex-row
-                        justify-content-between
-                        align-items-center
-                        suggest-item
-                        cursor-pointer
-                      "
-                    >
-                      <div class="d-inline-flex flex-row align-items-center">
-                        <div>
-                          <img
-                            src="@/assets/img/profile-pic.jpg"
-                            class="rounded-circle"
-                            alt=""
-                            width="30"
-                            height="30"
-                          />
-                        </div>
-                        <div class="d-flex flex-column ml-1 line-size">
-                          <div class="font-weight-bold">Ali</div>
-                          <div class="small text-muted">Hello</div>
-                        </div>
-                      </div>
-                      <div class="small text-muted">20-Jan</div>
-                    </div>
-                    <hr class="h-divider" />
-                    <div
-                      class="
-                        d-inline-flex
-                        flex-row
-                        justify-content-between
-                        align-items-center
-                        suggest-item
-                        cursor-pointer
-                      "
-                    >
-                      <div class="d-inline-flex flex-row align-items-center">
-                        <div>
-                          <img
-                            src="@/assets/img/profile-pic.jpg"
-                            class="rounded-circle"
-                            alt=""
-                            width="30"
-                            height="30"
-                          />
-                        </div>
-                        <div class="d-flex flex-column ml-1 line-size">
-                          <div class="font-weight-bold">Paul</div>
-                          <div class="small text-muted">1m</div>
-                        </div>
-                      </div>
-                      <div class="small text-muted">1-Apr-19</div>
                     </div>
                     <hr class="h-divider" />
                     <a href="https://bridgeafrica.info/nav/inbox.html" class="text-ored"><u>See Inbox</u></a>
                   </div>
                 </b-popover>
               </div>
-
+              <!-- Messages Ended -->
               <!-- Notifications Started -->
               <div class="nav-item">
                 <a id="notif" class="nav-link" data-toggle="popover" role="button" data-original-title="" title=""
@@ -487,6 +380,7 @@ export default {
       isActive: false,
       shownav: false,
       notifications: [],
+      messages: [],
     };
   },
   computed: {
@@ -498,6 +392,7 @@ export default {
   created() {
     this.init();
     this.getNotifications();
+    this.getMessages();
   },
   methods: {
     ...mapActions({
@@ -597,6 +492,14 @@ export default {
           this.notifications = response.data.data;
         })
         .catch(error => console.log("Error In Notification  => " + error));
+    },
+    async getMessages(){
+      await axios
+        .get(`messages/latest/user`)
+        .then(response => {
+          this.messages = response.data.data;
+        })
+        .catch(error => console.log(error));
     }
   },
 };

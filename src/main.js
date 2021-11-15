@@ -178,8 +178,7 @@ Vue.use(VueEasyLightbox);
 Vue.config.productionTip = false;
 var user = null;
 
-// import './pusher-notification';
-import './redis-notification'
+
 
 new Vue({
   router,

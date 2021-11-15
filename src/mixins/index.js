@@ -8,6 +8,8 @@ import NotFound from "@/components/NotFoundComponent"
 import NoMoreData from "@/components/businessOwner/PaginationMessage"
 import ClipLoader from 'vue-spinner/src/ClipLoader.vue'
 
+//import  {initPusher} from '@/pusher-notification';
+import { initRedis } from '@/redis-notification'
 
 export const FireBase = {
   data() {
@@ -351,6 +353,15 @@ export const Pusher = {
 }
 
 export const Redis = {
+  data: () => ({
+    $event: null,
+  }),
+
+  computed: {
+    ...mapGetters({
+      authToken: 'auth/getAuthToken'
+    }),
+  },
 
   methods: {
     ...mapMutations({
@@ -359,6 +370,10 @@ export const Redis = {
       newNotificationNetwork: "notification/NEW_NETWORK_NOTIFICATION",
     }),
 
+    lauchRedis() {
+      initRedis(this.authToken)
+    },
+
     initBusinessNotification: async function () {
       const response = this.$repository.notification.business()
       if (response.status)
@@ -366,6 +381,7 @@ export const Redis = {
     },
 
     redis() {
+      this.lauchRedis()
       console.log("call echo redis")
       window.Redis.channel('user.545')
         .listen(".UserEvent", payload => {
@@ -377,6 +393,14 @@ export const Redis = {
   created() {
     this.initBusinessNotification()
     this.redis()
+
+    this.$store.watch(
+      () => this.authToken,
+      () => console.log('ok change'),
+      {
+        deep: true
+      }
+    )
   }
 }
 

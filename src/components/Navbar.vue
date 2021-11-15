@@ -128,160 +128,27 @@
               </div>
 
               <div class="nav-item">
-                <a @click.prevent="navLink('market')" class="nav-link text-dark hov" href=""> Market </a>
+                <router-link :to="{ name: 'market' }" class="nav-link text-dark hov" href=""> Market </router-link>
               </div>
 
               <div class="nav-item">
-                <a id="messages" class="nav-link" data-toggle="popover" role="button" data-original-title="" title=""
-                  ><span class="text-ored"><fas-icon class="primary" :icon="['fas', 'comment']" /></span
+                <a
+                  v-if="hasNewMessage"
+                  id="messages"
+                  class="nav-link"
+                  data-toggle="popover"
+                  role="button"
+                  data-original-title=""
+                  title=""
+                  ><span class="text-ored"><fas-icon class="primary" :icon="['fas', 'comment']" /><b-badge class="msg-number">{{hasNewMessage}}</b-badge></span
                 ></a>
-                <b-popover target="messages" triggers="hover" placement="top">
-                  <div class="popover-body">
-                    <p class="font-weight-bold">Messages</p>
-                    <hr class="h-divider" />
-                    <div
-                      class="
-                        d-inline-flex
-                        flex-row
-                        justify-content-between
-                        align-items-center
-                        suggest-item
-                        cursor-pointer
-                      "
-                    >
-                      <div class="d-inline-flex flex-row align-items-center">
-                        <div>
-                          <img
-                            src="@/assets/img/profile-pic.jpg"
-                            class="rounded-circle"
-                            alt=""
-                            width="30"
-                            height="30"
-                          />
-                        </div>
-                        <div class="d-flex flex-column ml-1 line-size">
-                          <div class="font-weight-bold">David</div>
-                          <div class="small text-muted">Hi</div>
-                        </div>
-                      </div>
-                      <div class="small text-muted">1 min ago</div>
-                    </div>
-                    <hr class="h-divider" />
-                    <div
-                      class="
-                        d-inline-flex
-                        flex-row
-                        justify-content-between
-                        align-items-center
-                        suggest-item
-                        cursor-pointer
-                      "
-                    >
-                      <div class="d-inline-flex flex-row align-items-center">
-                        <div>
-                          <img
-                            src="@/assets/img/profile-pic.jpg"
-                            class="rounded-circle"
-                            alt=""
-                            width="30"
-                            height="30"
-                          />
-                        </div>
-                        <div class="d-flex flex-column ml-1 line-size">
-                          <div class="font-weight-bold">Alina</div>
-                          <div class="small text-muted">How are you</div>
-                        </div>
-                      </div>
-                      <div class="small text-muted">3 hours ago</div>
-                    </div>
-                    <hr class="h-divider" />
-                    <div
-                      class="
-                        d-inline-flex
-                        flex-row
-                        justify-content-between
-                        align-items-center
-                        suggest-item
-                        cursor-pointer
-                      "
-                    >
-                      <div class="d-inline-flex flex-row align-items-center">
-                        <div>
-                          <img
-                            src="@/assets/img/profile-pic.jpg"
-                            class="rounded-circle"
-                            alt=""
-                            width="30"
-                            height="30"
-                          />
-                        </div>
-                        <div class="d-flex flex-column ml-1 line-size">
-                          <div class="font-weight-bold">Maxine</div>
-                          <div class="small text-muted">Please call me</div>
-                        </div>
-                      </div>
-                      <div class="small text-muted">Yesterday</div>
-                    </div>
-                    <hr class="h-divider" />
-                    <div
-                      class="
-                        d-inline-flex
-                        flex-row
-                        justify-content-between
-                        align-items-center
-                        suggest-item
-                        cursor-pointer
-                      "
-                    >
-                      <div class="d-inline-flex flex-row align-items-center">
-                        <div>
-                          <img
-                            src="@/assets/img/profile-pic.jpg"
-                            class="rounded-circle"
-                            alt=""
-                            width="30"
-                            height="30"
-                          />
-                        </div>
-                        <div class="d-flex flex-column ml-1 line-size">
-                          <div class="font-weight-bold">Ali</div>
-                          <div class="small text-muted">Hello</div>
-                        </div>
-                      </div>
-                      <div class="small text-muted">20-Jan</div>
-                    </div>
-                    <hr class="h-divider" />
-                    <div
-                      class="
-                        d-inline-flex
-                        flex-row
-                        justify-content-between
-                        align-items-center
-                        suggest-item
-                        cursor-pointer
-                      "
-                    >
-                      <div class="d-inline-flex flex-row align-items-center">
-                        <div>
-                          <img
-                            src="@/assets/img/profile-pic.jpg"
-                            class="rounded-circle"
-                            alt=""
-                            width="30"
-                            height="30"
-                          />
-                        </div>
-                        <div class="d-flex flex-column ml-1 line-size">
-                          <div class="font-weight-bold">Paul</div>
-                          <div class="small text-muted">1m</div>
-                        </div>
-                      </div>
-                      <div class="small text-muted">1-Apr-19</div>
-                    </div>
-                    <hr class="h-divider" />
-                    <a href="https://bridgeafrica.info/nav/inbox.html" class="text-ored"><u>See Inbox</u></a>
-                  </div>
-                </b-popover>
+
+                <a id="messages" class="nav-link" role="button" data-original-title="" title="" v-else
+                  ><span class="text-ored"><fas-icon class="primary" :icon="['fas', 'comment']" />
+                      
+                    </span></a>
+
+                <MessageNotification v-if="hasNewMessage" />
               </div>
 
               <div class="nav-item">
@@ -383,7 +250,7 @@
                     <hr />
 
                     <router-link
-                      to="/myorders/"
+                      :to="{ name: 'orders' }"
                       class="other-menu suggest-item cursor-pointer text-decoration-none text-dark"
                     >
                       <span class="mr-2"><fas-icon class="violet search" :icon="['fas', 'cart-arrow-down']" /></span>
@@ -391,10 +258,13 @@
                     </router-link>
                     <hr class="h-divider" />
 
-                    <a href="/settings" class="other-menu suggest-item cursor-pointer text-decoration-none text-dark">
+                    <router-link
+                      :to="{ name: 'settings' }"
+                      class="other-menu suggest-item cursor-pointer text-decoration-none text-dark"
+                    >
                       <span class="mr-2"><fas-icon class="violet search" :icon="['fas', 'cogs']" /></span>
                       Account Settings
-                    </a>
+                    </router-link>
                     <hr class="h-divider" />
                     <div class="other-menu suggest-item cursor-pointer">
                       <span class="mr-1"><fas-icon class="violet search" :icon="['fas', 'question']" /></span>
@@ -406,14 +276,10 @@
                       Language
                     </div>
                     <hr class="h-divider" />
-                    <a @click="logout"
+                    <a
+                      @click="logout"
                       href="#"
-                      class="
-                        other-menu
-                        suggest-item
-                        cursor-pointer
-                        text-decoration-none text-dark
-                      "
+                      class="other-menu suggest-item cursor-pointer text-decoration-none text-dark"
                     >
                       <span class="mr-2"><fas-icon class="violet search" :icon="['fas', 'sign-out-alt']" /></span>
                       Logout
@@ -452,17 +318,23 @@
 
             <hr class="mup" />
 
-            <router-link to="/myorders/" class="other-menu suggest-item cursor-pointer text-decoration-none text-dark">
+            <router-link
+              :to="{ name: 'orders' }"
+              class="other-menu suggest-item cursor-pointer text-decoration-none text-dark"
+            >
               <span class="mr-2"><fas-icon class="violet search" :icon="['fas', 'cart-arrow-down']" /></span>
               My orders
             </router-link>
             <hr class="h-divider" />
 
-            <a href="/settings" class="other-menu suggest-item cursor-pointer text-decoration-none text-dark">
+            <router-link
+              :to="{ name: 'settings' }"
+              class="other-menu suggest-item cursor-pointer text-decoration-none text-dark"
+            >
               <span class="mr-2"><fas-icon class="violet search" :icon="['fas', 'cogs']" /></span>
 
               Account Settings
-            </a>
+            </router-link>
             <hr class="h-divider" />
             <div class="other-menu suggest-item cursor-pointer">
               <span class="mr-1"><fas-icon class="violet search" :icon="['fas', 'question']" /></span>
@@ -474,16 +346,7 @@
               Language
             </div>
             <hr class="h-divider" />
-            <a
-              href="#"
-              @click="logout"
-              class="
-                other-menu
-                suggest-item
-                cursor-pointer
-                text-decoration-none text-dark
-              "
-            >
+            <a href="#" @click="logout" class="other-menu suggest-item cursor-pointer text-decoration-none text-dark">
               <span class="mr-2"><fas-icon class="violet search" :icon="['fas', 'sign-out-alt']" /></span>
               Logout
             </a>
@@ -499,12 +362,14 @@
 <script>
 import Button from '@/components/ButtonNavBarFind.vue';
 import Activity from '@/components/ShowActivity.vue';
+import MessageNotification from '@/components/NavBarMessageNotification';
 import { mapGetters, mapActions } from 'vuex';
 export default {
   name: 'navbar',
   components: {
     Button,
     Activity,
+    MessageNotification,
   },
   props: {
     credentials: {
@@ -526,6 +391,7 @@ export default {
   computed: {
     ...mapGetters({
       hasLauchNetworkRequest: 'social/INIT',
+      hasNewMessage: 'notification/HAS_MESSAGE',
       user: 'auth/profilConnected',
     }),
   },
@@ -537,7 +403,7 @@ export default {
       setNetworks: 'social/FIND_USER_NETWORK',
       setBusiness: 'social/FIND_USER_BUSNESS',
       lauchNetworkRequest: 'social/INIT',
-       Logout: 'auth/logout',
+      Logout: 'auth/logout',
     }),
 
     getKeyword() {
@@ -561,9 +427,6 @@ export default {
           const routeName = this.profile ? 'dashbord' : 'home';
           if (this.$route.name != routeName) this.$router.push({ name: routeName });
         },
-        market: () => {
-          if (this.$route.name != 'market') this.$router.push({ name: 'market' });
-        },
       };
       try {
         link[type]();
@@ -577,22 +440,21 @@ export default {
     },
     getUsers() {
       this.$store
-        .dispatch("userChat/GET_USERS",'')
+        .dispatch('userChat/GET_USERS', '')
         .then(() => {
-          console.log("->[Data logged]<-");
+          console.log('->[Data logged]<-');
         })
-        .catch(() => console.log("error"));
+        .catch(() => console.log('error'));
     },
 
-    logout(){
-
-      this.Logout();
+    logout: async function () {
+      const response = await this.$repository.notification.logOut();
+      if (response.success) this.Logout();
     },
 
     toggleinput() {
-      this.$refs.mobileinput.style.display = "block";
+      this.$refs.mobileinput.style.display = 'block';
     },
-
 
     getNetworks: async function () {
       let request = await this.$repository.share.getNetworks();
@@ -815,5 +677,13 @@ export default {
   right: 0;
   left: 0;
   z-index: 1030;
+}
+.msg-number {
+  color: black;
+  background: transparent;
+  position: relative;
+  top: -9 px;
+  right: 9 px;
+  font-weight: bold;
 }
 </style>

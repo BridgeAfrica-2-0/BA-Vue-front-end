@@ -1,7 +1,7 @@
 import * as TYPES from './types'
 
 export const mutations = {
-
+  
   [TYPES.NEW_BUSINESS_NOTIFICATION](state, payload) {
     if (payload.init)
       state.buissness = payload.data
@@ -22,5 +22,12 @@ export const mutations = {
     else
       state.profile = [payload.data, ...state.profile]
   }, // [TYPES.INIT]
+
+  [TYPES.NEW_MESSAGE](state, payload) {
+    if (payload.init)
+      state.messages = payload.data
+    else
+      state.messages = [payload.data, ...state.messages]
+  }, // [TYPES.NEW_NETWORK_MESSAGE]
 
 }

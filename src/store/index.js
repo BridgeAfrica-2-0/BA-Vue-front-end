@@ -14,11 +14,7 @@ import allSearch from "./allSearch";
 import ProfileAndBusinessDetails from "./ProfileAndBusinessDetails";
 import networkProfileCommunity from "./networkProfileCommunity";
 import networkDetails from "./networkDetails";
-
- import dashboardcommunity from "./dashboardcommunity";
-
-
-
+import dashboardcommunity from "./dashboardcommunity";
 import orderBusiness from './orderBusiness';
 import NetworkSettings from "./NetworkSettings";
 import checkout from "./checkout";
@@ -39,6 +35,7 @@ import networkProfileFeedback from "./networkProfileFeedback";
 import networkProfileMedia from "./networkProfileMedia";
 import networkProfileMemberRequest from "./networkProfileMemberRequest";
 import { social } from "./social";
+import { notification } from "./notifications"
 
 // import axios from "axios";
 Vue.use(Vuex);
@@ -46,44 +43,44 @@ Vue.use(Vuex);
 //  axios.defaults.baseURL = process.env.VUE_APP_API_URL;
 axios.defaults.baseURL = "https://test.maxinemoffett.com/api/v1/";
 
-
 export default new Vuex.Store({
-    modules: {
-        auth,
-        networkDetails,
-        dashboardcommunity,
-        ProfileAndBusinessDetails,
-        businessOwner,
-        businessBlocking,
-        dashboard,
-        hotbusiness,
-        networkProfileMembers,
-        marketSearch,
-        networkSearch,
-        allSearch,
-        profile,
-        follower,
-        search,
-        UserProfileOwner,
-        userChat,
-        businessChat,
-        businessGeneral,
-        businessRole,
-        businessAccountType,
-        business,
-        networkProfileFeedback,
-        NetworkSettings,
-        businessSettingInfo,
-        checkout,
-        social,
-        businessFollowers,
-        networkProfileCommunitySidebar,
-        networkProfileCommunity,
-        networkProfileMedia,
-        networkProfileMemberRequest,
-        networkProfile,
-        orderBusiness
+  modules: {
+    auth,
+    networkDetails,
+    dashboardcommunity,
+    ProfileAndBusinessDetails,
+    businessOwner,
+    businessBlocking,
+    dashboard,
+    hotbusiness,
+    networkProfileMembers,
+    marketSearch,
+    networkSearch,
+    allSearch,
+    profile,
+    follower,
+    search,
+    UserProfileOwner,
+    userChat,
+    businessChat,
+    businessGeneral,
+    businessRole,
+    businessAccountType,
+    business,
+    networkProfileFeedback,
+    NetworkSettings,
+    businessSettingInfo,
+    checkout,
+    social,
+    businessFollowers,
+    networkProfileCommunitySidebar,
+    networkProfileCommunity,
+    networkProfileMedia,
+    networkProfileMemberRequest,
+    networkProfile,
+    orderBusiness,
+    notification
 
-    }
+  }
 });
 

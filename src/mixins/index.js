@@ -1,20 +1,64 @@
+// import * as firebase from 'firebase/app';
+// import 'firebase/messaging';
 
 import { mapGetters, mapActions, mapMutations } from "vuex";
+import { formatNumber, fromNow } from "@/helpers";
 
 import NotFound from "@/components/NotFoundComponent"
 import NoMoreData from "@/components/businessOwner/PaginationMessage"
-
 import ClipLoader from 'vue-spinner/src/ClipLoader.vue'
 
 
-import { formatNumber, fromNow } from "@/helpers";
+export const FireBase = {
+  data() {
+    return {
+      title: '',
+      from: '',
+      subject: '',
+      userimg: '',
+      currentMessage: '',
+    };
+  },
 
-export const cancelRequest = {
-  destroyed() {
+  methods: {
+    receiveMessage() {
+      console.log("call echo firebase")
+      // try {
+      //   firebase.messaging().onMessage((payload) => {
+      //     // debugger
+      //     this.currentMessage = payload;
+      //     console.log(this.currentMessage);
+      //     let message;
+      //     message = payload.data.username + ':\n\n' + payload.data.message;
+      //     this.setNotificationBoxForm(payload.data.shipmentWallNumber, payload.data.username, payload.data.message);
+      //     console.log(message);
+      //   });
+      // } catch (e) {
+      //   console.log(e);
+      // }
+    },
 
-  }
+    setNotificationBoxForm(title, from, subject) {
+      this.title = title;
+      this.from = from;
+      this.subject = subject;
+
+      const message = `<span><b>${this.from}</b></span><br>${this.subject}`;
+
+      // this.$notify({
+      //   group: 'foo',
+      //   type: 'success',
+      //   title: this.title,
+      //   text: message,
+      //   duration: 5000,
+      // });
+    },
+  },
+
+  created() {
+    console.info('create notification info');
+  },
 }
-
 export const loader = {
   methods: {
     onNotified(text) {
@@ -74,7 +118,6 @@ export const search = {
     }),
   }
 }
-
 
 export const commentMixinsBuisness = {
   data() {
@@ -157,7 +200,7 @@ export const commentMixinsBuisness = {
         comment: this.comment.comment_id,
         data: {
           comment: this.text,
-          networkId:this.profile.id,
+          networkId: this.profile.id,
         },
       });
 
@@ -279,4 +322,96 @@ export const commentMixins = {
       if (this.reply) this.onShowReply();
     },
   },
+}
+
+export const Pusher = {
+
+  methods: {
+    ...mapMutations({
+      newNotificationBusiness: "notification/NEW_BUSINESS_NOTIFICATION",
+      newNotificationProfile: "notification/NEW_PROFILE_NOTIFICATION",
+      newNotificationNetwork: "notification/NEW_NETWORK_NOTIFICATION",
+    }),
+
+    pusher() {
+      // Network notification
+      window.Echo.channel('network-11-5')
+        .listen("NetworkNotificationEvent", payload => console.log(payload))
+
+      // Business notification
+      window.Echo.channel('network-11-5')
+        .listen("NetworkNotificationEvent", payload => this.newNotificationBusiness(payload))
+    }
+  },
+
+  created() {
+    console.log("call echo pusher")
+    this.pusher()
+  }
+}
+
+export const Redis = {
+
+  methods: {
+    ...mapMutations({
+      newNotificationBusiness: "notification/NEW_BUSINESS_NOTIFICATION",
+      newNotificationProfile: "notification/NEW_PROFILE_NOTIFICATION",
+      newNotificationNetwork: "notification/NEW_NETWORK_NOTIFICATION",
+    }),
+
+    initBusinessNotification: async function () {
+      const response = this.$repository.notification.business()
+      if (response.status)
+        this.newNotificationBusiness({ init: true, data: response.data })
+    },
+
+    redis() {
+      console.log("call echo redis")
+      window.Redis.channel('user.545')
+        .listen(".UserEvent", payload => {
+          console.log(payload)
+        })
+    }
+  },
+
+  created() {
+    this.initBusinessNotification()
+    this.redis()
+  }
+}
+
+
+export const FirebaseNotification = {
+
+  methods: {
+
+    notified() {
+      // try {
+      //   firebase
+      //     .messaging()
+      //     .requestPermission()
+      //     .then(() => {
+      //       console.log('Notification permission granted');
+      //       return firebase
+      //         .messaging()
+      //         .getToken()
+      //         .then((token) => {
+      //           console.info(token);
+      //           // this.$repository.post.SendToken(token)
+      //           return true;
+      //         })
+      //         .then(() => this.receiveMessage())
+      //         .catch((error) => console.error(error));
+      //     })
+      //     .catch((error) => console.error(error));
+      // } catch (error) {
+      //   console.log(error);
+      // }
+    }
+  },
+
+  created() {
+    console.log("call laravel firebase")
+    this.notified()
+  }
 }

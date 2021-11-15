@@ -36,6 +36,7 @@ import networkProfileMedia from "./networkProfileMedia";
 import networkProfileMemberRequest from "./networkProfileMemberRequest";
 import { social } from "./social";
 import { notification } from "./notifications"
+import keywordOperationOnNetwork from './keywordOperationOnNetwork'
 
 Vue.use(Vuex);
 
@@ -43,43 +44,43 @@ Vue.use(Vuex);
 axios.defaults.baseURL = "https://team4test.maxinemoffett.com/api/v1/";
 
 export default new Vuex.Store({
-    modules: {
-        auth,
-        networkDetails,
-        dashboardcommunity,
-        ProfileAndBusinessDetails,
-        businessOwner,
-        businessBlocking,
-        dashboard,
-        hotbusiness,
-        networkProfileMembers,
-        marketSearch,
-        networkSearch,
-        allSearch,
-        profile,
-        follower,
-        search,
-        UserProfileOwner,
-        userChat,
-        businessChat,
-        businessGeneral,
-        businessRole,
-        businessAccountType,
-        business,
-        networkProfileFeedback,
-        NetworkSettings,
-        businessSettingInfo,
-        checkout,
-        social,
-        businessFollowers,
-        networkProfileCommunitySidebar,
-        networkProfileCommunity,
-        networkProfileMedia,
-        networkProfileMemberRequest,
-        networkProfile,
-        orderBusiness,
-        notification
-
-    }
+  modules: {
+    auth,
+    networkDetails,
+    dashboardcommunity,
+    ProfileAndBusinessDetails,
+    businessOwner,
+    businessBlocking,
+    dashboard,
+    hotbusiness,
+    networkProfileMembers,
+    marketSearch,
+    networkSearch,
+    allSearch,
+    profile,
+    follower,
+    search,
+    UserProfileOwner,
+    userChat,
+    businessChat,
+    businessGeneral,
+    businessRole,
+    businessAccountType,
+    business,
+    networkProfileFeedback,
+    NetworkSettings,
+    keywordOperationOnNetwork,
+    businessSettingInfo,
+    checkout,
+    social,
+    businessFollowers,
+    networkProfileCommunitySidebar,
+    networkProfileCommunity,
+    networkProfileMedia,
+    networkProfileMemberRequest,
+    networkProfile,
+    orderBusiness,
+    notification
+  }
 });
 

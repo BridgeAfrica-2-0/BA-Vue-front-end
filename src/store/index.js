@@ -69,15 +69,12 @@ export default new Vuex.Store({
     business,
     networkProfileFeedback,
     NetworkSettings,
-<<<<<<< HEAD
     profile,
     follower,
     search,
     keywordOperationOnNetwork,
 
     UserProfileOwner,
-=======
->>>>>>> main
     businessSettingInfo,
     checkout,
     social,

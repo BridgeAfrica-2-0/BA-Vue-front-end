@@ -1,84 +1,101 @@
 <template>
   <div>
-
     <div class="products ">
-      <div class="col-md-6" v-for="post in posts" :key="post.id">
-        <Product />
+      <!-- MARKET HEADER BAR -->
+      <div class="col-12 d-flex align-items-center justify-content-between">
+        <p>
+          <b-icon
+            font-scale="1.8"
+            icon="shop"
+            variant="primary"
+            class="mr-2"
+          ></b-icon>
+          <span class="font-weight-bold">Market</span>
+        </p>
+        <b-button variant="outline-primary">
+          <b-icon icon="cart" class="mr-2"></b-icon>Cart</b-button
+        >
       </div>
+      <div class="col-12">
+        <hr class="h-divider" />
+      </div>
+
+      <!-- MARKET PRODUCT LIST -->
+      <div class="col-md-6" v-for="(product, index) in products" :key="index">
+        <Product :product="product" />
+      </div>
+      <b-col v-if="loader" class="load">
+        <b-spinner
+          style="width: 7rem; height: 7rem;"
+          variant="primary"
+        ></b-spinner>
+      </b-col>
+      <b-col class="my-4 load" v-if="products.length < 1 && !loader">
+        <p>No Products in Market !!</p>
+      </b-col>
     </div>
+    <!-- ADDPRODUCT FORM -->
   </div>
 </template>
 
 <script>
 import Product from "../product";
+import axios from "axios";
 export default {
-  data() {
-    return {
-      showModal: false,
-
-      text: "",
-      image: "",
-      posts: [
-        {
-          id: 1,
-          image: "https://picsum.photos/300/150/?image=41",
-          title: "Title 2",
-          text:
-            " Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum quam, doloribus id sit consequuntur tempora molestiae blanditiis.",
-        },
-        {
-          id: 1,
-          image: "https://picsum.photos/300/150/?image=41",
-          title: "Title 2",
-          text:
-            " Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum quam, doloribus id sit consequuntur tempora molestiae blanditiis.",
-        },
-        {
-          id: 1,
-          image: "https://picsum.photos/300/150/?image=41",
-          title: "Title 2",
-          text:
-            " Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum quam, doloribus id sit consequuntur tempora molestiae blanditiis.",
-        },
-        {
-          id: 1,
-          image: "https://picsum.photos/300/150/?image=41",
-          title: "Title 2",
-          text:
-            " Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum quam, doloribus id sit consequuntur tempora molestiae blanditiis.",
-        },
-        {
-          id: 1,
-          image: "https://picsum.photos/300/150/?image=41",
-          title: "Title 2",
-          text:
-            " Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum quam, doloribus id sit consequuntur tempora molestiae blanditiis.",
-        },
-      ],
-      images: [
-        {
-          id: 1,
-          image: "https://picsum.photos/300/150/?image=41",
-        },
-        {
-          id: 2,
-          image: "https://picsum.photos/300/150/?image=41",
-        },
-      ],
-    };
-  },
+  name: "MarketPlace",
   components: {
     Product,
   },
+  data() {
+    return {
+      showModal: false,
+      load: false,
+      loader: false,
+      products: [],
+      val: "",
+      msg: "",
+      success: false,
+      multiselecvalue: [],
+      filterselectvalue: [],
+      select_filterss: [],
+      multiselec: [
+        { name: "Vue.js", code: "vu" },
+        { name: "Javascript", code: "js" },
+        { name: "Open Source", code: "os" },
+      ],
+    };
+  },
+
   methods: {
-    createProduct() {
-      this.showModal = !this.showModal;
+    getProducts: async function() {
+      await axios
+        .get("/market")
+        .then((res) => {
+          console.log(res.data);
+          this.products = res.data.data;
+          console.log(this.products);
+        })
+        .catch((error) => {
+          console.log(error);
+        })
+        .finally(() => {
+          this.loader = false;
+        });
     },
+  },
+  beforeMount() {
+    this.loader = true;
+    //get market place products
+    this.getProducts();
   },
 };
 </script>
 
 <style scoped>
+.load {
+  display: flex;
+  justify-content: center;
+}
 .products {
   display: flex;
   flex-wrap: wrap;
@@ -99,10 +116,6 @@ export default {
   left: 100px;
   color: white;
   font-weight: 200;
-}
-.icon {
-  height: 24px;
-  width: 24px;
 }
 
 .product:hover .text-static {
@@ -136,10 +149,6 @@ export default {
 .sp:hover .pic-name {
   opacity: 1;
 }
-/* 
-.primary-bg{
-  background-color: grey;
-} */
 
 .pic {
   cursor: pointer;
@@ -189,6 +198,9 @@ export default {
   }
   .text {
     margin-top: 30px;
+  }
+  .btn {
+    font-size: 12px;
   }
 }
 </style>

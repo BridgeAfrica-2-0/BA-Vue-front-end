@@ -53,20 +53,7 @@ export default {
   data() {
     return {
       posts: [
-        {
-          id: 1,
-          video: "https://www.youtube.com/embed/nMBQrM1FHZw",
-          title: "Title 1",
-          text:
-            " Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum quam, doloribus id sit consequuntur tempora molestiae blanditiis."
-        },
-        {
-          id: 2,
-          image: "https://picsum.photos/300/150/?image=41",
-          title: "Title 2",
-          text:
-            " Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum quam, doloribus id sit consequuntur tempora molestiae blanditiis."
-        }
+        
       ]
     };
   },

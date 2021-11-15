@@ -2,9 +2,9 @@
   <div>
     <b-card class="mt-4" header-tag="header" footer-tag="footer">
       <p class="t-center">
-        <b>Invite your followers to follow this business</b>
+        <b>{{$t("businessf.Invite_your_followers_to_follow_this_business")}}</b>
       </p>
-      <input class="form-control mb-2" placeholder="Search ..." type="text" />
+      <input class="form-control mb-2" :placeholder="$t('businessf.Search')" type="text" />
       <fas-icon class="primary search" :icon="['fas', 'search']" />
       <b-card-text>
 
@@ -52,7 +52,7 @@
                     size="sm"
                     class="b-background"
                   >
-                    <b-icon icon="plus" class="ico"> </b-icon> Invite
+                    <b-icon icon="plus" class="ico"> </b-icon> {{$t("businessf.Invite")}}
                   </b-button>
                 </b-col>
                 <b-col cols="3">
@@ -107,7 +107,7 @@
                     size="sm"
                     class="b-background"
                   >
-                    <b-icon icon="plus" class="ico"> </b-icon> Invite
+                    <b-icon icon="plus" class="ico"> </b-icon> {{$t("businessf.Invite")}}
                   </b-button>
                 </b-col>
                 <b-col cols="3">
@@ -168,7 +168,7 @@
                     size="sm"
                     class="b-background"
                   >
-                    <b-icon icon="plus" class="ico"> </b-icon> Invite
+                    <b-icon icon="plus" class="ico"> </b-icon> {{$t("businessf.Invite")}}
                   </b-button>
                 </b-col>
                 <b-col cols="3">
@@ -193,7 +193,7 @@
       </b-card-text>
 
       <span class="float-right">
-        <a class="primary" href="#">See More</a>
+        <a class="primary" href="#">{{$t("businessf.See_More")}}</a>
       </span>
     </b-card>
   </div>

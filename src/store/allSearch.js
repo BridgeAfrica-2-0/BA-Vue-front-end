@@ -10,8 +10,7 @@ export default {
         posts: { data: [] },
 
         loader: false,
-        success: false,
-        token: "51|HZT2jfu5klFDkJhpvEI6dBhAQBDEdBQ2fABwhhaf"
+        success: false
     },
     getters: {
         // get data
@@ -77,12 +76,14 @@ export default {
             commit("setPosts", { data: [] });
             commit("setLoader", true);
 
-            console.log("[DEBUG] HELLO NETWORK SEARCH", data);
+            console.log("[DEBUG] NETWORK SEARCH", data);
             let page = 1
             const TYPES = ['business', 'user', 'network', 'market', 'post']
+            let catId = data.cat_id ? "catId=" + data.cat_id : ''
+            let keyword = data.keyword ? "keyword=" + data.keyword : ''
 
             TYPES.map((type) => {
-                axios.post(`/search/${type}`, data)
+                axios.get(`/search/${type}?${catId}&${keyword}`)
                     .then((res) => {
                         if (type == 'business') {
                             commit("setBusinesses", res.data);

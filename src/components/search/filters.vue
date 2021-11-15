@@ -1,5 +1,6 @@
 <template>
   <div>
+
     <div v-if="filterType == '1' || filterType == '4'">
       <div v-if="subCategories.length">
         <span>
@@ -20,7 +21,7 @@
 
         <b-spinner v-if="filterLoader" variant="primary" :label="$t('search.Spinning')"></b-spinner>
         <span v-if="subFilter.length">
-          <h6>Filters</h6>
+          <h6>{{$t("search.Filters")}}</h6>
           <b-form-radio
             v-for="(filter, i) in subFilter.slice(0, 4)"
             :key="i.value"
@@ -172,7 +173,7 @@
         <b-form-checkbox id="" class="a-text" name="" value=""> 25km</b-form-checkbox>
       </b-form-group>
 
-      <b-link v-b-modal="'distance'"> See all </b-link>
+      <b-link v-b-modal="'distance'"> {{$t("search.See_all")}} </b-link>
 
       <div>
         <span v-if="filterType == '4'">
@@ -198,7 +199,7 @@
         size="sm"
         variant="outline-primary"
         @click="allSearchByCat({})"
-        >Reset</b-button
+        >{{$t("search.Reset")}}</b-button
       >
       <br />
       <!-- Category -->
@@ -441,7 +442,7 @@
     <b-modal ref="myfilters" id="distance" hide-footer title=" ">
       <b-form-group
         label-cols-lg="12"
-        :label="Distance"
+        :label="$t('search.Distance')"
         label-size="md"
         label-class="font-weight-bold pt-0 text-left"
         class="mb-0 text-left"
@@ -473,7 +474,7 @@
       </div>
 
       <br />
-      <b-button variant="primary" class="m-3 float-right"> Search </b-button>
+      <b-button variant="primary" class="m-3 float-right">{{$t("search.Search")}} </b-button>
     </b-modal>
   </div>
 </template>
@@ -1852,6 +1853,8 @@ export default {
       this.noFilter = '';
       this.$store.commit('marketSearch/setSubFilters', []);
 
+       if(this.filterType==4){  
+
       this.$store
         .dispatch('marketSearch/getFilter', subCat.id)
         .then((res) => {
@@ -1885,11 +1888,63 @@ export default {
           console.error(err);
           // this.filterLoader = false;
         });
+         } else if( this.filterType==1){
+           
+// method to search for a business lol
+
+        this.$store
+        .dispatch('marketSearch/getFilter', subCat.id)
+        .then((res) => {
+          this.searchProducts({ cat_id: subCat.cat_id, sub_cat: subCat.id });  
+          console.log('Filters: ');
+          console.log(res.data.data);
+          if (res.data.data.length === 0) {
+            let subName = '';
+            this.subCategories.map((sub) => {
+              if (sub.id) {
+                subName = sub.name;
+              }
+            });
+            this.noFilter = `No filter available for ${subName}!`;
+          }
+
+          // this.filterLoader = false;
+          let filter = [];
+          res.data.data.map((filt) => {
+            filter.push({
+              cat_id: subCat.cat_id,
+              sub_cat_id: subCat.id,
+              ...filt,
+            });
+          });
+
+          this.$store.commit('marketSearch/setSubFilters', filter);
+          console.log('[DeBUG] FILTER: ', this.subFilter);
+        })
+        .catch((err) => {
+          console.error(err);
+          // this.filterLoader = false;
+        });
+
+
+
+         } 
     },
 
     searchProducts(data) {
       this.$store
         .dispatch('marketSearch/searchProducts', data)
+        .then((res) => {
+          // console.log("categories loaded!");
+        })
+        .catch((err) => {
+          console.log('Error erro!');
+        });
+    },
+
+     searchBusiness(data) {
+      this.$store
+        .dispatch('business/FIND_BUSINESS', data)
         .then((res) => {
           // console.log("categories loaded!");
         })
@@ -1904,7 +1959,7 @@ export default {
       this.searchProducts({
         cat_id: filter.cat_id,
         sub_cat: filter.sub_cat_id,
-        filter_id: filter.id,
+        filter_id: filter.id
       });
     },
 

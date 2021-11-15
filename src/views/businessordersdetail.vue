@@ -19,7 +19,7 @@
           </div>
           <div class="col ">
             <span class=" ">
-              <h3 class="margtotal ">Total : {{ orderDetails.TotalPrice }} Fcfa</h3>
+              <h3 class="margtotal ">Total : {{ orderDetails.TotalPrice }} XAF</h3>
             </span>
           </div>
         </div>
@@ -142,7 +142,7 @@
           <div v-if="show" class="text-center">
               <b-spinner label="Spinning"></b-spinner>
           </div>
-
+              
            <b-pagination
      
       v-model="currentPage"
@@ -191,16 +191,16 @@
               <div class="col bold">
                 <span class="row">
                   <span class="col"><h3>Total summary :</h3></span>
-                  <span class="col">{{ orderDetails.TotalPrice }} Fcfa</span></span
+                  <span class="col">{{ orderDetails.TotalPrice }} XAF</span></span
                 >
                 <span class="row">
                   <span class="col"><h3>Total price :</h3></span>
-                  <span class="col">{{ orderDetails.Total }} Fcfa</span></span
+                  <span class="col">{{ orderDetails.Total }} XAF</span></span
                 >
                 <span class="row">
                   <span class="col"><h3>total shipping fee :</h3></span
                   ><span class="col">
-                    {{ parseInt(orderDetails.Total) - parseInt(orderDetails.TotalPrice) }} Fcfa</span
+                    {{ parseInt(orderDetails.Total) - parseInt(orderDetails.TotalPrice) }} XAF</span
                   ></span
                 >
               </div>
@@ -208,7 +208,7 @@
 
               <div class="row bold">
                 <span class="col"><h3>Total :</h3></span>
-                <span class="col"> {{ orderDetails.TotalPrice }} Fcfa</span>
+                <span class="col"> {{ orderDetails.TotalPrice }} XAF</span>
               </div>
             </div>
           </div>
@@ -242,18 +242,7 @@ export default {
   },
 
   mounted() {
-    const progress = document.querySelectorAll('.size');
-    for (let i = 1; i <= progress.length; i++) {
-      let a = document.getElementById('a' + i);
-      let p = document.getElementById('p' + i);
-      if (i <= this.status) {
-        p.classList.add('bg-success');
-        a.classList.add('bg-success');
-      } else {
-        p.classList.add('bg-secondary');
-        a.classList.add('bg-secondary');
-      }
-    }
+    
 
     this.getBusinessOrderDetails();
   
@@ -265,10 +254,33 @@ export default {
     },
     getTotal(){
       return this.$store.getters['businessOrderDetails/getTotal'];
+    },
+
+     getStatus(){
+        return this.$store.getters['profileOrderDetail/getStatus'];
     }
   },
 
   methods: {
+
+     transition(){console.log("transition");
+        const progress = document.querySelectorAll('.size');
+    console.log(progress);
+    for (let i = 1; i <= progress.length; i++) {
+      let a = document.getElementById('a' + i);
+      let p = document.getElementById('p' + i);
+      if (i <= this.status) {
+        p.classList.add('bg-success');
+        a.classList.add('bg-success');
+        console.log(p);
+      } else {
+        p.classList.add('bg-secondary');
+        a.classList.add('bg-secondary');
+        console.log(p);
+      }
+    }
+     },
+
     getBusinessOrderDetails() {
       let url = window.location.href.split("/")
       
@@ -279,6 +291,8 @@ export default {
       this.$store.dispatch('businessOrderDetails/getOrderDetails', data).then(response => {
         console.log(response);
         this.show = false
+         this.status = this.getStatus
+          this.transition();
       });
     },
 
@@ -301,7 +315,8 @@ export default {
           this.total =this.getTotal
         console.log(this.total);
           this.show = false
-          
+          this.status = this.getStatus;
+           this.transition();
         })
         .catch((err) => {
           // this.prodLoader = false; business_owner/ordersdetail

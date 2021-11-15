@@ -57,8 +57,8 @@
                 />
 
                 <datalist id="browsers">
-                  <option value=" Current Location "></option>
-                  <option value="Yaounde " />
+                  <option value=" Localisation actuelle "></option>
+                  <option value="Yaoundé" />
                 </datalist>
               </b-input-group>       
             </span> 
@@ -87,15 +87,15 @@
                 list="browsers"
                 data-toggle="popover"
                 class="form-control search-h"
-                placeholder="Where "
+                placeholder="où "
                 aria-label="search bridge africa"
                 data-original-title=""
                 title=""
               />
 
               <datalist id="browsers">
-                <option value=" Current Location "></option>
-                <option value="Yaounde " />
+                <option value=" Localisation actuelle "></option>
+                <option value="Yaoundé " />
               </datalist>
               <slot name="button">
                 <Button />
@@ -126,11 +126,11 @@
           <div style="float: right">
             <b-collapse id="nav-collapse" is-nav>
               <div class="nav-item">
-                <a class="nav-link text-dark hov" href=""> Home </a>
+                <a class="nav-link text-dark hov" href=""> Accueil </a>
               </div>
 
               <div class="nav-item">
-                <a class="nav-link text-dark hov" href=""> Market </a>
+                <a class="nav-link text-dark hov" href=""> Marché </a>
               </div>
 
               <div class="nav-item">
@@ -139,7 +139,7 @@
                 ></a>
                 <b-popover target="messages" triggers="hover" placement="top">
                   <div class="popover-body">
-                    <p class="font-weight-bold">Messages</p>
+                    <p class="font-weight-bold">messages</p>
                     <hr class="h-divider" />
                     <div
                       class="
@@ -166,7 +166,7 @@
                           <div class="small text-muted">Hi</div>
                         </div>
                       </div>
-                      <div class="small text-muted">1 min ago</div>
+                      <div class="small text-muted">il y a 1 minute</div>
                     </div>
                     <hr class="h-divider" />
                     <div
@@ -191,10 +191,10 @@
                         </div>
                         <div class="d-flex flex-column ml-1 line-size">
                           <div class="font-weight-bold">Alina</div>
-                          <div class="small text-muted">How are you</div>
+                          <div class="small text-muted">Comment vas-tu</div>
                         </div>
                       </div>
-                      <div class="small text-muted">3 hours ago</div>
+                      <div class="small text-muted">il y a 3 heures</div>
                     </div>
                     <hr class="h-divider" />
                     <div
@@ -219,10 +219,10 @@
                         </div>
                         <div class="d-flex flex-column ml-1 line-size">
                           <div class="font-weight-bold">Maxine</div>
-                          <div class="small text-muted">Please call me</div>
+                          <div class="small text-muted">S'il te plait appelle moi</div>
                         </div>
                       </div>
-                      <div class="small text-muted">Yesterday</div>
+                      <div class="small text-muted">hier</div>
                     </div>
                     <hr class="h-divider" />
                     <div
@@ -247,7 +247,7 @@
                         </div>
                         <div class="d-flex flex-column ml-1 line-size">
                           <div class="font-weight-bold">Ali</div>
-                          <div class="small text-muted">Hello</div>
+                          <div class="small text-muted">Bonjour</div>
                         </div>
                       </div>
                       <div class="small text-muted">20-Jan</div>
@@ -281,7 +281,7 @@
                       <div class="small text-muted">1-Apr-19</div>
                     </div>
                     <hr class="h-divider" />
-                    <a href="https://bridgeafrica.info/nav/inbox.html" class="text-ored"><u>See Inbox</u></a>
+                    <a href="https://bridgeafrica.info/nav/inbox.html" class="text-ored"><u>Voir la boîte de réception</u></a>
                   </div>
                 </b-popover>
               </div>
@@ -309,7 +309,7 @@
                         <img src="@/assets/img/profile-pic.jpg" class="rounded-circle" alt="" width="30" height="30" />
                       </div>
                       <div class="d-flex flex-column ml-3">
-                        <div><span class="font-weight-bold">David</span> started following you</div>
+                        <div><span class="font-weight-bold">David</span> commencé à te suivre</div>
                         <div class="small text-muted">1m</div>
                       </div>
                     </div>
@@ -329,7 +329,7 @@
                         <img src="@/assets/img/profile-pic.jpg" class="rounded-circle" alt="" width="30" height="30" />
                       </div>
                       <div class="d-flex flex-column ml-3">
-                        <div><span class="font-weight-bold">Alina</span> commented on your post</div>
+                        <div><span class="font-weight-bold">Alina</span> a commenté votre message</div>
                         <div class="small text-muted">1m</div>
                       </div>
                     </div>
@@ -349,7 +349,7 @@
                         <img src="@/assets/img/profile-pic.jpg" class="rounded-circle" alt="" width="30" height="30" />
                       </div>
                       <div class="d-flex flex-column ml-3">
-                        <div><span class="font-weight-bold">Maxine</span> liked your post</div>
+                        <div><span class="font-weight-bold">Maxine</span> aimé votre message</div>
                         <div class="small text-muted">1m</div>
                       </div>
                     </div>
@@ -369,7 +369,7 @@
                         <img src="@/assets/img/profile-pic.jpg" class="rounded-circle" alt="" width="30" height="30" />
                       </div>
                       <div class="d-flex flex-column ml-3">
-                        <div><span class="font-weight-bold">Paul</span> approuved your request to join the network</div>
+                        <div><span class="font-weight-bold">Paul</span> a approuvé votre demande d'adhésion au réseau</div>
                         <div class="small text-muted">1m</div>
                       </div>
                     </div>
@@ -389,13 +389,13 @@
                         <img src="@/assets/img/profile-pic.jpg" class="rounded-circle" alt="" width="30" height="30" />
                       </div>
                       <div class="d-flex flex-column ml-3">
-                        <div><span class="font-weight-bold">David</span> started following you</div>
+                        <div><span class="font-weight-bold">David</span> commencé à te suivre</div>
                         <div class="small text-muted">1m</div>
                       </div>
                     </div>
                     <hr class="h-divider" />
                     <a href="https://bridgeafrica.info/nav/notifications-view-all.html" class="text-ored"
-                      ><u>See all Notifications</u></a
+                      ><u>Voir toutes les notifications</u></a
                     >
                   </div>
                 </b-popover>
@@ -436,23 +436,23 @@
 
                     >
                       <span class="mr-2"><fas-icon class="violet search" :icon="['fas', 'cart-arrow-down']" /></span>
-                      My orders
+                      Mes commandes
                     </router-link>
                     <hr class="h-divider" />
 
                     <a href="/settings" class="other-menu suggest-item cursor-pointer text-decoration-none text-dark">
                       <span class="mr-2"><fas-icon class="violet search" :icon="['fas', 'cogs']" /></span>
-                      Account Settings
+                     Paramètres du compte
                     </a>
                     <hr class="h-divider" />
                     <div class="other-menu suggest-item cursor-pointer">
                       <span class="mr-1"><fas-icon class="violet search" :icon="['fas', 'question']" /></span>
-                      Help and Support
+                      Aide et soutien
                     </div>
                     <hr class="h-divider" />
                     <div class="other-menu suggest-item cursor-pointer">
                       <span class="mr-2"><fas-icon class="violet search" :icon="['fas', 'globe-americas']" /></span>
-                      Language
+                      Langue
                     </div>
                     <hr class="h-divider" />
                     <a
@@ -465,7 +465,7 @@
                       "
                     >
                       <span class="mr-2"><fas-icon class="violet search" :icon="['fas', 'sign-out-alt']" /></span>
-                      Logout
+                      Se déconnecter
                     </a>
                   </div>
                 </b-popover>
@@ -494,7 +494,7 @@
                   <img src="@/assets/img/logo3.png" class="rounded-circle" alt="" width="25" height="25" />
                 </div>
                 <div class="ml-3 mt-2">
-                  <p class="font-weight-bold">Your Businesses</p>
+                  <p class="font-weight-bold">Vos entreprises</p>
                 </div>
               </div>
             </div>
@@ -504,24 +504,24 @@
 
             <router-link to="/myorders/" class="other-menu suggest-item cursor-pointer text-decoration-none text-dark">
               <span class="mr-2"><fas-icon class="violet search" :icon="['fas', 'cart-arrow-down']" /></span>
-              My orders
+               Mes commandes
             </router-link>
             <hr class="h-divider" />
 
             <a href="/settings" class="other-menu suggest-item cursor-pointer text-decoration-none text-dark">
               <span class="mr-2"><fas-icon class="violet search" :icon="['fas', 'cogs']" /></span>
 
-              Account Settings
+              Paramètres du compte
             </a>
             <hr class="h-divider" />
             <div class="other-menu suggest-item cursor-pointer">
               <span class="mr-1"><fas-icon class="violet search" :icon="['fas', 'question']" /></span>
-              Help and Support
+              Aide et soutien
             </div>
             <hr class="h-divider" />
             <div class="other-menu suggest-item cursor-pointer">
               <span class="mr-2"><fas-icon class="violet search" :icon="['fas', 'globe-americas']" /></span>
-              Language
+              Langue
             </div>
             <hr class="h-divider" />
             <a
@@ -534,7 +534,7 @@
               "
             >
               <span class="mr-2"><fas-icon class="violet search" :icon="['fas', 'sign-out-alt']" /></span>
-              Logout
+              Se déconnecter
             </a>
           </div>
         </b-modal>

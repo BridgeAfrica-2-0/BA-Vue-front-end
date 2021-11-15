@@ -7,16 +7,16 @@
 						<div class="col-lg-9">
 							<ul class="list-group list-unstyled">
 								<li>
-									<a href="#">{{ $t("footer.home") }}</a>
+									<a href="#">{{ $t("footer.Accueil") }}</a>
 								</li>
 								<li>
-									<a href="#">{{ $t("footer.about_us") }}</a>
+									<a href="#">{{ $t("footer.à propos de nous") }}</a>
 								</li>
 								<li>
-									<a href="#">{{ $t("footer.privacy_policy") }}</a>
+									<a href="#">{{ $t("footer.politique de confidentialité") }}</a>
 								</li>
 								<li>
-									<a href="#">{{ $t("footer.contact_us") }}</a>
+									<a href="#">{{ $t("footer.Nous contacter") }}</a>
 								</li>
 								<li>
 									<a href="#">{{ $t("footer.blog") }}</a>
@@ -26,26 +26,26 @@
 						<div class="col-lg-3">
 							<ul class="list-group list-unstyled">
 								<li class="nav-item dropdown show">
-									<b>{{ $t("footer.language") }}</b>
+									<b>{{ $t("footer.Langue") }}</b>
 									<b-dropdown
 										size="sm"
 										variant="outline"
-										text="English"
+										text="Anglais"
 										class="m-2"
 									>
-										<b-dropdown-item-button @click="setLocale('en')">English</b-dropdown-item-button>
-										<b-dropdown-item-button @click="setLocale('fr')">French</b-dropdown-item-button>
+										<b-dropdown-item-button @click="setLocale('en')">Anglais</b-dropdown-item-button>
+										<b-dropdown-item-button @click="setLocale('fr')">français</b-dropdown-item-button>
 									</b-dropdown>
 								</li>
 								<li class="nav-item dropdown show">
-									<b>{{ $t("footer.country") }}</b>
+									<b>{{ $t("footer.pays") }}</b>
 									<b-dropdown
 										size="sm"
 										variant="outline"
-										text="Cameroon"
+										text="Cameroun"
 										class="ml-2"
 									>
-										<b-dropdown-item-button>Cameroon</b-dropdown-item-button>
+										<b-dropdown-item-button>Cameroun</b-dropdown-item-button>
 										<b-dropdown-item-button>Nigeria</b-dropdown-item-button>
 									</b-dropdown>
 								</li>

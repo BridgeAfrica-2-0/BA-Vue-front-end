@@ -5,6 +5,7 @@
         <img src="../assets/logo.png" class="image" alt="" />
         <div class="step-2">
           <b-card-text class="w-75 mx-auto mt-5 text-left">
+
             <span class="verif-text mb-5">Récupérer mot de passe </span> <br />
             <br />
 
@@ -13,6 +14,7 @@
           <b-form class="w-75 mx-auto">
             <md-field>
               <label for="phone"> Téléphone</label>
+
               <md-input
                 type="text"
                 name="phone"
@@ -27,7 +29,9 @@
               class="btn btn-primary button float-right"
               @click.prevent="verify"
             >
+
              Prochaine
+
             </b-button>
           </b-form>
         </div>

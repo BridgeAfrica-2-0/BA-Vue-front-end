@@ -6,7 +6,10 @@
       </span>
       <div class="createdesc botmedia">
         <div class="botmediadess-position" v-if="loading">
-          <b-spinner style="width: 3rem; height: 3rem; color: #e75c18" label="Large Spinner"></b-spinner>
+          <b-spinner
+            style="width: 3rem; height: 3rem; color: #e75c18"
+            :label="$t('profileowner.Large_Spinner')"
+          ></b-spinner>
         </div>
         <div class="botmediadess-position" v-else>
           <h6 style="font-size: 26px; font-weight: bold">
@@ -16,7 +19,14 @@
             {{ album.items | plural }}
           </p>
 
-          <b-button v-if="upHere" variant="outline-primary" size="sm" @click="show"> Show </b-button>
+          <b-button
+            v-if="upHere"
+            variant="outline-primary"
+            size="sm"
+            @click="show"
+          >
+            {{ $t('profileowner.Show') }}
+          </b-button>
         </div>
       </div>
     </a>
@@ -29,9 +39,9 @@
               <b-icon icon="three-dots-vertical" color="white" variant="light"> </b-icon>
             </template>
 
-            <b-dropdown-item @click="editAlbum">Edit</b-dropdown-item>
+            <b-dropdown-item @click="editAlbum">{{ $t('profileowner.Edit') }}</b-dropdown-item>
 
-            <b-dropdown-item @click="deleteAlbums">Delete</b-dropdown-item>
+            <b-dropdown-item @click="deleteAlbums">{{ $t('profileowner.Delete') }}</b-dropdown-item>
           </b-dropdown>
         </li>
       </ul>

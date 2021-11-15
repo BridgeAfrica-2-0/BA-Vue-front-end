@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    
+    <FlashMessage />
     <hr />
     <!-- partie mobile--------------------------------------------------------------------- 
     
@@ -73,10 +73,12 @@
                       text="Manage"
                       class="m-md-2"
                     >
+
                       <b-dropdown-item>Archiver</b-dropdown-item>
                       <b-dropdown-item>Effacer</b-dropdown-item>
                       <b-dropdown-item>Expédié</b-dropdown-item>
                     <b-dropdown-item>reprogrammer</b-dropdown-item>
+
                     </b-dropdown>
                   </div>
                 </div>
@@ -124,8 +126,10 @@
 
             <div class="justify-content-center container row">
               <div class="">
+
                 <button class="buttonm btn shadow text-center">
                   <h3 class="h3 button-text">Réorganiser</h3>
+
                 </button>
               </div>
             </div>
@@ -158,10 +162,12 @@
                       text="Manage"
                       class="m-md-2"
                     >
+
                       <b-dropdown-item>Archiver</b-dropdown-item>
                       <b-dropdown-item>Effacer</b-dropdown-item>
                       <b-dropdown-item>Expédié</b-dropdown-item>
                     <b-dropdown-item>reprogrammer</b-dropdown-item>
+
                     </b-dropdown>
                   </div>
                 </div>
@@ -209,8 +215,10 @@
 
             <div class="justify-content-center container row">
               <div class="">
+
                 <button class="buttonm btn shadow text-center">
                   <h3 class="h3 button-text">Réorganiser</h3>
+
                 </button>
               </div>
             </div>
@@ -243,10 +251,12 @@
                       text="Manage"
                       class="m-md-2"
                     >
+
                       <b-dropdown-item>Archiver</b-dropdown-item>
                       <b-dropdown-item>Effacer</b-dropdown-item>
                       <b-dropdown-item>Expédié</b-dropdown-item>
                     <b-dropdown-item>reprogrammer</b-dropdown-item>
+
                     </b-dropdown>
                   </div>
                 </div>
@@ -294,8 +304,10 @@
 
             <div class="justify-content-center container row">
               <div class="">
+
                 <button class="buttonm btn shadow text-center">
                   <h3 class="h3 button-text">Réorganiser</h3>
+
                 </button>
               </div>
             </div>
@@ -328,10 +340,12 @@
                       text="Manage"
                       class="m-md-2"
                     >
+
                       <b-dropdown-item>Archiver</b-dropdown-item>
                       <b-dropdown-item>Effacer</b-dropdown-item>
                       <b-dropdown-item>Expédié</b-dropdown-item>
                     <b-dropdown-item>reprogrammer</b-dropdown-item>
+
                     </b-dropdown>
                   </div>
                 </div>
@@ -378,6 +392,7 @@
             </div>
 
             <div class="justify-content-center container row">
+
               <div class="">
                 <button class="buttonm btn shadow text-center">
                   <h3 class="h3 button-text">Réorganiser</h3>
@@ -385,6 +400,7 @@
               </div>
             </div>
             <div class="justify-content-center container row">
+
               <br />
               <br />
             </div>
@@ -493,10 +509,12 @@
                     text="Faire en sorte"
                     class="m-md-2"
                   >
+
                     <b-dropdown-item>Archiver</b-dropdown-item>
                     <b-dropdown-item>Effacer</b-dropdown-item>
                     <b-dropdown-item>Expédié</b-dropdown-item>
                     <b-dropdown-item>reprogrammer</b-dropdown-item>
+
                   </b-dropdown>
                 </div>
               </div>
@@ -538,8 +556,10 @@
               </div>
 
               <div class="container d-flex justify-content-end btn-marg">
+
                 <button class="button btn shadow">
                   <h3 class="h3 button-text">Réorganiser</h3>
+
                 </button>
               </div>
 
@@ -575,10 +595,12 @@
                     text="Faire en sorte"
                     class="m-md-2"
                   >
+
                     <b-dropdown-item>Archiver</b-dropdown-item>
                     <b-dropdown-item>Effacer</b-dropdown-item>
                     <b-dropdown-item>Expédié</b-dropdown-item>
                     <b-dropdown-item>reprogrammer</b-dropdown-item>
+
                   </b-dropdown>
                 </div>
               </div>
@@ -618,8 +640,10 @@
               </div>
 
               <div class="container d-flex justify-content-end btn-marg">
+
                 <button class="button btn shadow">
                   <h3 class="h3 button-text">Réorganiser</h3>
+
                 </button>
               </div>
 
@@ -633,6 +657,7 @@
             </div>
           </div>
         </div>
+        
 
         <div v-if="status == 3" class="complete">
           <div class="show row">
@@ -655,10 +680,12 @@
                     text="Faire en sorte"
                     class="m-md-2"
                   >
+
                     <b-dropdown-item>Archiver</b-dropdown-item>
                     <b-dropdown-item>Effacer</b-dropdown-item>
                     <b-dropdown-item>Expédié</b-dropdown-item>
                     <b-dropdown-item>reprogrammer</b-dropdown-item>
+
                   </b-dropdown>
                 </div>
               </div>
@@ -698,8 +725,10 @@
               </div>
 
               <div class="container d-flex justify-content-end btn-marg">
+
                 <button class="button btn shadow">
                   <h3 class="h3 button-text">Réorganiser</h3>
+
                 </button>
               </div>
 
@@ -735,10 +764,12 @@
                     text="Faire en sorte"
                     class="m-md-2"
                   >
+
                    <b-dropdown-item>Archiver</b-dropdown-item>
                     <b-dropdown-item>Effacer</b-dropdown-item>
                     <b-dropdown-item>Expédié</b-dropdown-item>
                     <b-dropdown-item>reprogrammer</b-dropdown-item>
+
                   </b-dropdown>
                 </div>
               </div>
@@ -777,11 +808,13 @@
                 <h3 class="text-success">{{ etat }}</h3>
               </div>
 
+
               <div class="container d-flex justify-content-end btn-marg">
                 <button class="button btn shadow">
                   <h3 class="h3 button-text">Réorganiser</h3>
                 </button>
               </div>
+
 
               <div class="justify-content-center container row">
                 <br />
@@ -795,6 +828,7 @@
         </div>
       </div>
     </div>
+
   </div>
 </template>
 
@@ -805,6 +839,7 @@ export default {
  
   data() {
     return {
+      url: null,
       selected: "",
       rimg: "",
       status: 1,
@@ -817,6 +852,10 @@ export default {
       ],
       etat1: ["in process", "complete", "cancel"],
     };
+  },
+
+  mounted() {
+   this.url = this.$route.params.id;
   },
 
   methods: {
@@ -858,9 +897,41 @@ export default {
       });
       el.classList.add("green");
     },
+
+    updateStatus(order_id, status) {
+      console.log("updateStatus")
+      console.log("order_id", order_id)
+      console.log("business_id", this.url)
+      console.log("status", status)
+      let formData = new FormData();
+      formData.append("order_id", order_id)
+      formData.append("business_id", this.url)
+      formData.append("status", status)
+      this.$store
+        .dispatch("orderBusiness/updateOrderStatus", 
+        {
+          path: "order/updateOrder",
+          formData: formData
+        })
+        .then(({data}) => {
+          console.log('ohh year');
+          console.log(data);
+          this.flashMessage.show({
+            status: "success",
+            message: "Status Changed To "+status
+          });
+        })
+        .catch(err => {
+          console.log({ err: err });
+          this.flashMessage.show({
+            status: "error",
+            message: "Unable to Change Status"
+          });
+        });
+    },
   },
 
-  mounted() {},
+
 };
 </script>
 

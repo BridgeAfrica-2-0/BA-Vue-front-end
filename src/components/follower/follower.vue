@@ -5,7 +5,7 @@
       <div>
         <img src="@/assets/img/banner.jpg" v-if="info.user.cover_picture == null " class="banner" />     <img  :src="info.user.cover_picture" v-if="info.user.cover_picture != null " class="banner" />      
       </div>
-      <b-row class="mt-2 mb-2 options">
+      <b-row class="mt-2 mb-2 ">
         <b-col cols="6" class="avata">
           <div>     
             
@@ -55,8 +55,9 @@
             <b-dropdown
               size="sm"
               class="ml-2 dropdown"
+              dropleft
               no-caret
-              variant="outline-primary"
+              variant="link"
             >
               <template #button-content>
                 <b-icon-three-dots></b-icon-three-dots>

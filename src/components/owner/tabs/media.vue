@@ -1,12 +1,14 @@
 <template>
   <div>
+
     <fas-icon class="violet mr-2 pt-1 icon-size primary" :icon="['fas', 'file-image']" />Médias
 
     <hr />
     <b-tabs content-class="mt-3" pills>
       <b-tab title="Des postes" active @click="getImages">
+
         <div v-if="!hasLoadPicture">
-          <b-spinner class="load" label="Large Spinner"></b-spinner>
+          <b-spinner class="load" :label="$t('profileowner.Large_Spinner')"></b-spinner>
         </div>
 
         <Images
@@ -19,9 +21,9 @@
           v-else
         />
       </b-tab>
-      <b-tab title="Albums" @click="getAlbums">
+      <b-tab :title="$t('profileowner.Albums')" @click="getAlbums">
         <div v-if="!hasLoadAlbum">
-          <b-spinner class="load" label="Large Spinner"></b-spinner>
+          <b-spinner class="load" :label="$t('profileowner.Large_Spinner')"></b-spinner>
         </div>
         <Album :canUpload="!canUpload" :type="type" v-else :getAlbums="getAlbums" :getImages="getImages"/>
       </b-tab>

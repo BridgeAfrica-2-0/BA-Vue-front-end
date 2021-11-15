@@ -4,7 +4,9 @@
 			<div style="float:right" class="edit cursor-pointer" @click="editContact">
 				<b-icon icon="pencil-fill" variant="primary"></b-icon>
 			</div>
+
 			<h6 class="mb-2"><b>Introduction</b></h6>
+
 
 			<b-card-text>
 				<p class="d-flex justify-content-start align-items-start">
@@ -29,7 +31,9 @@
 				</p>
 				<p class="d-flex justify-content-start align-items-start">
 					<b-icon icon="people-fill" class="primary icon-size"></b-icon>
+
 					{{ business_intro.community }} Communauté
+
 				</p>
 				<p class="d-flex justify-content-start align-items-start">
 					<b-icon icon="telephone-fill" class="primary icon-size"></b-icon>
@@ -41,7 +45,9 @@
 				</p>
 				<p class="d-flex justify-content-start align-items-start">
 					<b-icon icon="clock" class="primary icon-size"></b-icon>
+
 					<b-link class="mr-2"> Ouvrez maintenant</b-link>
+
 					<b-dropdown size="sm" variant="transperent">
 						<template #button-content>
 							{{ business_intro.business_open_hours[0].day }}
@@ -115,7 +121,7 @@
 		<b-modal
 			id="bv-modal-example2"
 			hide-footer
-			title="Edit Address"
+			:title="$t('businessf.Edit_Address')"
 			v-model="edit2"
 			size="lg"
 		>
@@ -123,19 +129,23 @@
 				{{ blec }}
 				<b-row>
 					<div class="form-group col-md-6">
+
 						<label for="username">Nom de l'entreprise:</label><br />
+
 						<input
 							type="text"
 							name="name"
 							id="name"
-							placeholder="Busness Name"
+							:placeholder="$t('businessf.Busness_Name')"
 							class="form-control"
 							v-model="form.name"
 						/>
 					</div>
 
 					<div class="form-group col-md-6">
+
 						<label for="alias">Catégorie:</label><br />
+
 
 						<b-form-select
 							:options="categories"
@@ -150,7 +160,7 @@
 				<b-row>
 					<b-form-group
 						id="input-group-2"
-						label="Phone Contact"
+						:label="$t('businessf.Phone_Contact')"
 						label-for="input-2"
 						label-size="sm"
 						class="col-md-6"
@@ -167,7 +177,7 @@
 					<b-form-group
 						class="col-md-6"
 						id="input-group-2"
-						label="Business Email"
+						:label="$t('businessf.Business_Email')"
 						label-for="input-2"
 						label-size="sm"
 					>
@@ -183,7 +193,9 @@
 
 				<b-row>
 					<div class="form-group col-md-6">
+
 						<label for="keywords">Mots clés</label><br />
+
 						<div class="col-md-12 pl-0 pr-0">
 							<b-form-tags
 								input-id="alias"
@@ -193,7 +205,9 @@
 					</div>
 
 					<div class="form-group col-md-6">
+
 						<label for="country" class="username"> Pays :</label><br />
+
 
 						<country-select
 							v-model="form.country"
@@ -206,7 +220,9 @@
 
 				<b-row>
 					<div class="form-group col-md-6">
+
 						<label for="country" class="username"> Région :</label><br />
+
 						<region-select
 							v-model="form.region"
 							:country="country"
@@ -216,7 +232,7 @@
 					</div>
 					<b-form-group
 						id="input-group-2"
-						label="City"
+						:label="$t('businessf.City')"
 						label-for="input-2"
 						label-size="sm"
 						class="col-md-6"
@@ -232,7 +248,9 @@
 				</b-row>
 
 				<b-button class="mt-3 btn-block" variant="primary" @click="validate">
+
 					Modifier
+
 				</b-button>
 			</b-form>
 		</b-modal>
@@ -485,6 +503,5 @@
 		width: 24px;
 		height: 24px;
 	}
-	.cursor-pointer {
-	}
+	
 </style>

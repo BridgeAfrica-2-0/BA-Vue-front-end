@@ -4,7 +4,9 @@
       <md-card class="md-layout-item md-size-50 md-small-size-100 p-card">
         <md-card-header>
           <div class="md-title center">
+
             {{ $t("auth.Sign_up_To_Bridge_Africa") }}
+
           </div>
         </md-card-header>
         <FlashMessage />
@@ -36,7 +38,9 @@
 
           <br />
 
+
           <p class="t-center">- {{ $t("OU") }} -</p>
+
 
           <div class="md-layout md-gutter">
             <div class="md-layout-item md-small-size-100 m-left">
@@ -99,7 +103,9 @@
           </md-field>
 
           <md-field :class="getValidationClass('password')">
+
             <label for="password"> {{ $t("auth.password") }} </label>
+
             <md-input
               type="password"
               name="password"
@@ -123,7 +129,9 @@
               :disabled="sending"
             />
             <span class="md-error" v-if="!$v.form.confirmPassword.required"
+
               >Password is required {{ $t("auth.password_is_required") }}
+
             </span>
           </md-field>
         </md-card-content>
@@ -257,6 +265,16 @@ export default {
         });
     },
 
+
+     flashErrors(errors) {
+      let err = "";
+      Object.values(errors).forEach((element) => {
+        err = element[0];
+      });
+
+      return err;
+    },
+
     socialLogin(provider, response) {
       this.$http
         .post("user/social/" + provider, response)
@@ -331,7 +349,8 @@ export default {
             this.flashMessage.show({
               status: "error",
 
-              message: err.response.data.message,
+              message: this.flashErrors(err.response.data.errors),
+               blockClass: "custom-block-class",
             });
           } else {
             this.flashMessage.show({

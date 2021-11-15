@@ -38,7 +38,9 @@
 
           <br />
 
+
           <p class="t-center">-{{ $t("auth.or") }} -</p>
+n
 
           <md-field :class="getValidationClass('email')">
             <label for="email"> {{ $t("auth.email") }} </label>
@@ -59,7 +61,9 @@
           </md-field>
 
           <md-field>
+
             <label for="password"> {{ $t("auth.password") }} </label>
+
             <md-input
               type="password"
               name="password"
@@ -215,13 +219,15 @@ export default {
       this.$http
         .post("user/social/" + provider, response)
         .then(({ data }) => {
-          console.log(data.data);
+          console.log(data);
 
           this.$store.commit("auth/setUserData", data.data);
           this.flashMessage.show({
             status: "success",
 
+
             message: "S'inscrire avec succès"
+
           });
 
           if (this.$store.state.auth.user.user.profile_complete == null) {
@@ -272,13 +278,12 @@ export default {
             this.flashMessage.show({
               status: "error",
 
-              message: err.response.data.message
             });
           } else {
             this.flashMessage.show({
               status: "error",
 
-              message: "An error has occure"
+              message: this.$t('auth.An_error_has_occured')
             });
           }
         });

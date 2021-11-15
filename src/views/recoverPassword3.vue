@@ -6,16 +6,20 @@
         <div class="step-2">
           <b-card-text class="w-75 mx-auto mt-5">
             <b-alert show v-if="!match" variant="danger"
+
               >Les mots de passe ne correspondent pas</b-alert
             >
             <div class="row">
               <div class="col text-left">Créer un nouveau mot de passe</div>
+
             </div>
           </b-card-text>
           <b-form class="w-75 mx-auto">
             <b-form-group id="input-group-4">
               <md-field>
+
                 <label for="password1"> Mot de passe</label>
+
                 <md-input
                   type="password"
                   name="password1"
@@ -26,7 +30,9 @@
               </md-field>
 
               <md-field>
+
                 <label for="password2"> Confirmez le mot de passe</label>
+
                 <md-input
                   type="password"
                   name="password2"
@@ -41,7 +47,9 @@
               @click.prevent="next"
               variant="outline-primary"
             >
+
               Finir
+
             </b-button>
           </b-form>
         </div>
@@ -97,9 +105,11 @@ export default {
 
               this.flashMessage.show({
                 status: "success",
-                title: "Password Reset Success",
+                title: this.$t('passrecover.Password_Reset_Success'),
                 message:
+
                   "Vous avez réussi à réinitialiser votre mot de passe, vous serez redirigé dans une seconde"
+
               });
 
               this.$router.push({ name: "Login" });

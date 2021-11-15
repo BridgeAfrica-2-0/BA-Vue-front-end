@@ -27,7 +27,13 @@
 
     <button class="order-button" @click="displayOrders">Mes commandes</button>
     <div class="orders">
-      <Orders />
+      <Orders v-show="orders" ref="orders" />
+    </div>
+    <div class="archive">
+      <Archive v-show="archive" ref="archive" />
+    </div>
+    <div class="text-center">
+      <b-link @click="swap" >Archive</b-link>
     </div>
     <!-- ADDPRODUCT FORM -->
     <b-modal hide-footer title="Add product" v-model="showModal">
@@ -157,15 +163,20 @@ import Product from '../product';
 import axios from 'axios';
 import MultiSelect from 'vue-multiselect';
 import Orders from '@/views/businessOwnerOrders';
+import Archive from '../archive';
 export default {
   name: 'MarketPlace',
   components: {
     MultiSelect,
     Product,
     Orders,
+    Archive,
   },
   data() {
     return {
+      orders: true,
+      archive: false,
+
       showModal: false,
       load: false,
       loader: false,
@@ -220,6 +231,15 @@ export default {
     },
   },
   methods: {
+    swap(){
+      console.log("orders: ",this.orders);
+      console.log("archive: ",this.archive);
+      this.orders = !this.orders;
+      this.archive = !this.archive;
+      console.log("-------------------");
+      console.log("orders: ",this.orders);
+      console.log("archive: ",this.archive);
+    },
     displayOrders() {
       this.status = !this.status;
       console.log('----' + this.status);

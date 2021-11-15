@@ -111,7 +111,7 @@
           </div>
 
           <div class="p-0 m-0 pr-3 inline-comment">
-            <input placeholder="Post a Comment" class="comment" type="text" />
+            <input :placeholder="$t('businessf.Post_a_Comment')" class="comment" type="text" />
 
             <fas-icon class="primary send-cmt" :icon="['fas', 'paper-plane']" />
           </div>

@@ -1,10 +1,12 @@
 <template>
   <div v-if="hasLoadPicture">
-    <b-spinner class="custom-loader" label="Large Spinner"></b-spinner>
+    <b-spinner class="custom-loader" :label="$t('profileowner.Large_Spinner')"></b-spinner>
   </div>
   <div class="row" v-else>
     <div class="container-fluid">
+
       <p v-if="!allImages.length && !canUpload" style="font-size: 3rem">Aucun élément trouvé</p>
+
 
       <b-modal
         id="modalxl"
@@ -32,8 +34,10 @@
 
         <br />
 
+
         <b-button @click="submitPosts" variant="primary" block :disabled="loading"
           ><b-icon icon="cursor-fill" variant="primary"></b-icon> Publier</b-button
+
         >
       </b-modal>
 
@@ -51,7 +55,9 @@
           <a @click="$refs.movie.click()">
             <div class="drag-textt">
               <fas-icon :icon="['fas', 'plus']" />
+
               <h3>Ajouter un item</h3>
+
             </div>
           </a>
         </div>

@@ -33,7 +33,7 @@ import forgotPassword from "@/views/forgotPassword";
 import navMessage from "@/views/navMessaging";
 import Blec from "@/views/blec";
 import memberNetworkFollower from "@/views/memberNetworkFollower";
- import govx from "@/views/test";
+import govx from "@/views/test";
 import networkEditors from "@/views/networkEditors";
 // import Test from "@/views/test";
 import templateView from "@/views/templateView";
@@ -58,6 +58,7 @@ import payment from "@/views/payment";
 
 
 Vue.use(VueRouter);
+
 
 const routes = [
   {
@@ -309,19 +310,69 @@ const routes = [
     path: "/messaging",
     name: "Nav Meassage",
     component: navMessage,
-  },
 
-  {
-    path: "/blec",
-    name: "Blec",
-    component: Blec,
   },
+},
+{
+  path: "/services/:id",
+  name: "Service",
+  component: service,
+},
+{
+  path: "/services/modify/:id",
+  name: "Modify",
+  component: Modifier,
+  beforeEnter: (to, from, next) => {
+    console.log("dedans");
+    if (store.state.login && store.state.isToi) {
+      next();
+    } else {
+      next({ name: "Login" });
+    }
+  },
+},
 
-  {
-    path: "/memberNetworkFollower/:id?",
-    name: "Membar Network Follower",
-    component: memberNetworkFollower,
+{
+  path: "/profile/:id?",
+  name: "Follower",
+  component: Follower,
+  meta: {
+    auth: true,
   },
+},
+{
+  path: "/profilevisitor",
+  name: "visitor",
+  component: Visitor,
+},
+{
+  path: "/search",
+  name: "Search",
+  component: search,
+},
+{
+  path: "/forgotpass",
+  name: "ForgotPassword",
+  component: forgotPassword,
+},
+{
+  path: "/messaging",
+  name: "Nav Meassage",
+  component: navMessage,
+},
+
+{
+  path: "/blec",
+  name: "Blec",
+  component: Blec,
+},
+
+{
+  path: "/memberNetworkFollower/:id?",
+  name: "Membar Network Follower",
+  component: memberNetworkFollower,
+},
+
 
 ];
 

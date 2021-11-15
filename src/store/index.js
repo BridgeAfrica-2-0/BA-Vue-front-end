@@ -39,6 +39,7 @@ import networkProfileCommunitySidebar from "./networkProfileCommunitySidebar";
 import networkProfileFeedback from "./networkProfileFeedback";
 import networkProfileMedia from "./networkProfileMedia";
 import networkProfileMemberRequest from "./networkProfileMemberRequest";
+import networkNotification from "./networkNotification";
 import { social } from "./social";
 
 // import axios from "axios";
@@ -82,7 +83,8 @@ export default new Vuex.Store({
         networkProfileMedia,
         networkProfileMemberRequest,
         networkProfile,
-        orderBusiness
+        orderBusiness,
+        networkNotification,
 
     }
 });

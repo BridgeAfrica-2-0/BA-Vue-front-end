@@ -471,6 +471,18 @@ export default {
       formData.append('secondary_phone', editnetworkinfo.secondary_phone);
       formData.append('email', editnetworkinfo.email);
       formData.append('description', editnetworkinfo.description);
+
+      console.log('name', editnetworkinfo.admin_name);
+      console.log('network_categories_id', this.selectedcategories);
+      console.log("country_id", this.selectedcountry);
+      console.log("region_id", this.selectedregion);
+      console.log("division_id", this.selecteddivision);
+      console.log("council_id", this.selectedmunicipality);
+      console.log("neighborhood_id", this.selectedlocality);
+      console.log('primary_phone', editnetworkinfo.primary_phone);
+      console.log('secondary_phone', editnetworkinfo.secondary_phone);
+      console.log('email', editnetworkinfo.email);
+      console.log('description', editnetworkinfo.description);
       console.log(formData);
       this.$store
         .dispatch("NetworkSettings/updateNetworkInfo", {

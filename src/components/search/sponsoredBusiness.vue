@@ -94,16 +94,40 @@ export default {
       },
     };
   },
-  computed: {
-    selectedId() {
-      return this.$store.getters['businessOwner/getSelectedTab'];
+  computer: {
+    chatSelected() {
+      return {
+        type: 'business',
+        biz: '2',
+      };
     },
   },
+
   methods: {
-    bussinessOwnerMsg() {
-      // this.selectedId = 2;
-      this.$store.commit("businessOwner/setSelectedTab", 1)
-      this.$router.push('/business_owner/2');
+    cta_business() {
+      this.$store
+        .dispatch('businessChat/cta_business', {receiverId:4,name:"135woods ed...",type:"business"})
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    getChatList() {
+
+      this.$store
+        .dispatch('businessChat/GET_BIZS_CHAT_LIST', {type:"business"})
+        .then(() => {
+          console.log('->[Data logged]<-');
+        })
+        .catch(() => console.log('error'));
+    },
+
+    async bussinessOwnerMsg() {
+      this.cta_business()
+      await this.getChatList()
+      this.$router.push({ path: '/business_owner/2', query: { tabId: 1 } });
     },
   },
 };

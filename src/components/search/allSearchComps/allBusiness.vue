@@ -83,6 +83,7 @@
                   size="sm"
                   class="b-background shadow"
                   variant="primary"
+                  @click="bussinessOwnerMsg(business)"
                 >
                   <i class="fas fa-envelope fa-lg btn-icon"></i>
                   <span class="btn-text">Message</span>
@@ -138,6 +139,33 @@ export default {
       return this.$store.getters["allSearch/getLoader"];
     },
   },
+  methods:{
+        cta_business(data) {
+      this.$store
+        .dispatch('businessChat/cta_business', {receiverId:4,name:data.name,type:"business"})
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    getChatList() {
+      this.$store
+        .dispatch('businessChat/GET_BIZS_CHAT_LIST', {type:"business"})
+        .then(() => {
+          console.log('->[Data logged]<-');
+        })
+        .catch(() => console.log('error'));
+    },
+
+    async bussinessOwnerMsg(data) {
+      // console.log(data);
+      this.cta_business(data)
+      // await this.getChatList()
+      this.$router.push({ path: '/business_owner/2', query: { tabId: 1, msgTabId:1 } });
+    },
+  }
 
 };
 </script>

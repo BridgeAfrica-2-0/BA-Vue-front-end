@@ -66,6 +66,7 @@ export default {
   },
   data() {
     return {
+      selectedId:0,
       bottomSelectedId: 0,
       url_data: null,
       items: [
@@ -80,8 +81,11 @@ export default {
       ],
       options: {
         activeColor: '#1d98bd',
-      },
+      }
     };
+  },
+  created(){
+    this.selectedId = this.$route.query.tabId
   },
 
   methods: {
@@ -138,11 +142,6 @@ export default {
         .catch((err) => {
           console.log({ err: err });
         });
-    },
-  },
-  computed: {
-    selectedId() {
-      return this.$store.getters['businessOwner/getSelectedTab'];
     },
   },
 

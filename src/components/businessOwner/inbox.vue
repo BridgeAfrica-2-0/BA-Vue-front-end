@@ -75,7 +75,7 @@
                 </b-col>
                 <b-col>
                   <h1 class="mt-4 title text-bold">
-                    {{ currentUser.user.name.split(' ')[0] }}
+                    {{ currentBiz ? currentBiz.name : 'loading...' }}
                   </h1>
                 </b-col>
                 <b-col>
@@ -89,15 +89,15 @@
 
               <b-row class="mt-12">
                 <b-col>
-                  <b-tabs content-class="mt-12 ma-4 pt-6" fill lazy>
-                    <b-tab title="Users" active @click="getChatList({ type: 'user' })">
+                  <b-tabs v-model="tabIndex" content-class="mt-12 ma-4 pt-6" fill>
+                    <b-tab title="Users" @click="getChatList({ type: 'user' })">
                       <!-- Users Chats Available  -->
                       <b-row class="pa-6">
                         <b-col class="mb-6 pb-6">
                           <input
                             v-model="searchQuery"
                             class="form-control input-background"
-                            placeholder="Search chat list"
+                            :placeholder="`Search chat list ${tabIndex}`"
                             @keypress.enter="
                               getChatList({
                                 type: 'user',
@@ -163,7 +163,6 @@
 
                       <!-- End Chats -->
                     </b-tab>
-
                     <b-tab title="Business" @click="getChatList({ type: 'business' })">
                       <!-- Business Chats Available  -->
                       <b-row class="pa-6">
@@ -171,7 +170,7 @@
                           <input
                             v-model="searchQuery"
                             class="form-control input-background"
-                            placeholder="Search chat list"
+                            :placeholder="`Search chat list ${tabIndex}`"
                             @keypress.enter="
                               getChatList({
                                 type: 'business',
@@ -245,7 +244,7 @@
                           <input
                             v-model="searchQuery"
                             class="form-control input-background"
-                            placeholder="Search chat list"
+                            :placeholder="`Search chat list ${tabIndex}`"
                             @keypress.enter="
                               getChatList({
                                 type: 'network',
@@ -743,8 +742,8 @@ export default {
       input: '',
       search: '',
       chatSearchKeyword: '',
-      chatId: '',
-      type: '',
+      tabIndex: 2,
+
       // socket: io("https://ba-chat-server.herokuapp.com", {
       //   transports: ["websocket", "polling", "flashsocket"],
       // }),
@@ -826,12 +825,7 @@ export default {
           id: '6',
         },
       ],
-      message: {
-        type: '',
-        name: '{{ receiver.name }}',
-        timeStamp: '',
-        message: '',
-      },
+      message: null,
       newMsg: false,
       show: false,
       info: false,
@@ -839,81 +833,30 @@ export default {
       text: '',
       selected: [],
 
-      messages: [
-        {
-          id: 0,
-          name: 'Blezour blec',
-          message: 'Hello Blec lola blec ',
-          timeStamp: '3:00pm',
-          messageCount: '10',
-        },
-        {
-          id: 1,
-          name: 'Blec blezour blec',
-          message: 'yoo nigga sup lola blec',
-          timeStamp: '7:00am',
-          messageCount: '60',
-        },
-
-        {
-          id: 3,
-          name: 'baba blecc ',
-          message: 'Lorem ipsum la lola blec vlr ',
-          timeStamp: '9:00am',
-          messageCount: '60',
-        },
-        {
-          id: 4,
-          name: 'Louis Litt',
-          message: 'Lorem  sit amet this is goo.',
-          timeStamp: '6:00am',
-          messageCount: '6',
-        },
-        {
-          id: 5,
-          name: 'Louis Litt',
-          message: 'Lorem this   sit amet.',
-          timeStamp: '7:00am',
-          messageCount: '100',
-        },
-        {
-          id: 6,
-          name: 'Louis Litt',
-          message: 'Lorem ithe amet.',
-          timeStamp: '7:00am',
-          messageCount: '3',
-        },
-        {
-          id: 7,
-          name: 'Louis Litt',
-          message: 'Lordol sit amet.',
-          timeStamp: '7:00am',
-          messageCount: '10',
-        },
-        {
-          id: 8,
-          name: 'Louis Litt',
-          message: 'Lorem vheck ',
-          timeStamp: '7:00am',
-          messageCount: '40',
-        },
-        {
-          id: 9,
-          name: 'Louis Litt',
-          message: 'Lorem papa .',
-          timeStamp: '7:00am',
-          messageCount: '15',
-        },
-      ],
+      messages: null,
     };
   },
   computed: {
+    chatId() {
+      return this.$store.getters['businessChat/getSelectedChatId'];
+    },
+    currentBizId() {
+      return this.$store.getters['businessChat/getCurrentBizId'];
+    },
+    currentBiz() {
+      return this.$store.getters['businessChat/getCurrentBiz'];
+    },
     bizs() {
       return this.$store.getters['businessChat/getBizs'];
     },
     chatList() {
       return this.$store.getters['businessChat/getChatList'];
     },
+
+    type() {
+      return this.$store.getters['businessChat/getChatType'];
+    },
+
     currentUser() {
       return this.$store.getters['userChat/getUser'];
     },
@@ -925,7 +868,7 @@ export default {
     },
 
     loader() {
-      return this.$store.getters['userChat/getLoader'];
+      return this.$store.getters['businessChat/getLoader'];
     },
     receiver() {
       return this.chats[0] ? this.chats[0].receiver : '';
@@ -944,10 +887,21 @@ export default {
     },
   },
   mounted() {
-    this.getBizs();
-    this.getChatList({ type: 'user' });
+    // if (this.chatList) {
+    // this.getChatList({ type: 'business' });
+    // } else console.log('chatlist Not empty!');
   },
-  created() {
+  async created() {
+    this.$store.commit('businessChat/setCurrentBizId', this.$route.params.id);
+    await this.getBizs();
+    this.tabIndex = this.$route.query.msgTabId
+
+    if (this.tabIndex == 1) {
+      this.getChatList({ type: 'business' });
+    } else if (this.tabIndex == 2) {
+      this.getChatList({ type: 'network' });
+    } else this.getChatList({ type: 'user' });
+
     this.socket.on('generalMessage', (data) => {
       console.log('Received');
       console.log(data);
@@ -995,7 +949,7 @@ export default {
     },
     createRoom(receiver_business_id) {
       // let sender_business_id = this.currentUser.user.id;
-      let sender_business_id = 2;
+      let sender_business_id = this.currentBizId;
       this.room = [receiver_business_id, sender_business_id];
       console.log('ROOMS: ', this.room);
       this.socket.emit('create-biz', this.room);
@@ -1007,52 +961,39 @@ export default {
     getBizs(keyword) {
       this.$store
         .dispatch('businessChat/GET_BIZS', keyword)
-        .then(() => {})
+        .then(() => {
+          console.log('currentBiz: ', this.currentBiz);
+        })
         .catch(() => console.log('error'));
     },
     getChatList(data) {
       // alert("Clicked!")
-      this.type = data.type;
+      // this.type = data.type;
+      console.log('tab type:', this.tabIndex);
+
       this.scrollToBottom();
       this.$store
         .dispatch('businessChat/GET_BIZS_CHAT_LIST', data)
-        .then(() => {
-          console.log('->[Data logged]<-');
-        })
+        .then(() => {})
         .catch(() => console.log('error'));
     },
 
     async histBizToBiz(data) {
       await this.$store
         .dispatch('businessChat/GET_BIZ_TO_BIZ', data)
-        .then(() => {
-          this.socket.emit('addUser', {
-            socketID: this.socket.id,
-            ...this.receiver,
-          });
-        })
+        .then(() => {})
         .catch(() => console.log('error'));
     },
     async histBizToUser(receiverId) {
       await this.$store
         .dispatch('businessChat/GET_BIZ_TO_USER', receiverId)
-        .then(() => {
-          this.socket.emit('addUser', {
-            socketID: this.socket.id,
-            ...this.receiver,
-          });
-        })
+        .then(() => {})
         .catch(() => console.log('error'));
     },
     async histBizToNetwork(receiverId) {
       await this.$store
         .dispatch('businessChat/GET_BIZ_TO_NETWORK', receiverId)
-        .then(() => {
-          this.socket.emit('addUser', {
-            socketID: this.socket.id,
-            ...this.receiver,
-          });
-        })
+        .then(() => {})
         .catch(() => console.log('error'));
     },
     saveMessage(data) {
@@ -1065,6 +1006,7 @@ export default {
         .catch(() => console.log('error'));
     },
     selectedChat(data) {
+      console.log('type tabs:', this.tabIndex);
       // this.scrollToBottom();
       this.createRoom(data.id);
       this.chatId = data.id;
@@ -1077,9 +1019,16 @@ export default {
         this.histBizToBiz(receiver);
       }
       this.newMsg = false;
-      this.chatSelected = { active: true, clickedId: data.id, ...data.chat };
+      // this.chatSelected = { active: true, clickedId: data.id, ...data.chat };
+      this.chatSelected = { active: true, clickedId: data.id, name: data.chat.name };
+
       console.log('[DEBUG] Chat selected:', this.chatSelected);
     },
+
+    // selected chat ID or receiver ID
+    // type
+    //
+
     searchChatList(keyword) {
       this.$store
         .dispatch('userChat/GET_USERS', keyword)
@@ -1107,7 +1056,7 @@ export default {
       this.socket.emit('privateMessage', {
         type: this.type,
         message: this.input,
-        sender_business_id: this.currentUser.user.id,
+        sender_business_id: this.currentBizId,
         room: this.room,
         receiver_business_id: this.chatSelected.id,
         receiver_id: this.chatId,

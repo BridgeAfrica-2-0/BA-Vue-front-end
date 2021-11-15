@@ -60,8 +60,8 @@
                   <option value=" Current Location "></option>
                   <option value="Yaounde " />
                 </datalist>
-              </b-input-group>
-            </span>
+              </b-input-group>       
+            </span> 
           </form>
 
           <span class="d-none d-lg-block">
@@ -134,7 +134,7 @@
 
               <div class="nav-item">
                 <a id="messages" class="nav-link" data-toggle="popover" role="button" data-original-title="" title=""
-                  ><span class="text-ored"><fas-icon class="primary" :icon="['fas', 'comment']"/></span
+                  ><span class="text-ored"><fas-icon class="primary" :icon="['fas', 'comment']" /></span
                 ></a>
                 <b-popover target="messages" triggers="hover" placement="top">
                   <div class="popover-body">
@@ -289,15 +289,120 @@
                 <a id="notif" class="nav-link" data-toggle="popover" role="button" data-original-title="" title=""
                   ><span class="text-ored"><b-icon-bell-fill class="col-bg"></b-icon-bell-fill></span
                 ></a>
-                <!-- NOTIFICATIONS COMPONENT -->
                 <b-popover target="notif" triggers="hover" placement="top">
-                  <NavBarNotifications />
+                  <div class="popover-body">
+                    <p class="font-weight-bold">Notifications</p>
+                    <hr class="h-divider" />
+
+                    <div
+                      class="
+                        d-inline-flex
+                        flex-row
+                        align-items-center
+                        suggest-item
+                        cursor-pointer
+                      "
+                    >
+
+                      <div>
+                        <img src="@/assets/img/profile-pic.jpg" class="rounded-circle" alt="" width="30" height="30" />
+                      </div>
+                      <div class="d-flex flex-column ml-3">
+                        <div><span class="font-weight-bold">David</span> started following you</div>
+                        <div class="small text-muted">1m</div>
+                      </div>
+                    </div>
+                    <hr class="h-divider" />
+
+                    <div
+                      class="
+                        d-inline-flex
+                        flex-row
+                        align-items-center
+                        suggest-item
+                        cursor-pointer
+                      "
+                    >
+
+                      <div>
+                        <img src="@/assets/img/profile-pic.jpg" class="rounded-circle" alt="" width="30" height="30" />
+                      </div>
+                      <div class="d-flex flex-column ml-3">
+                        <div><span class="font-weight-bold">Alina</span> commented on your post</div>
+                        <div class="small text-muted">1m</div>
+                      </div>
+                    </div>
+                    <hr class="h-divider" />
+
+                    <div
+                      class="
+                        d-inline-flex
+                        flex-row
+                        align-items-center
+                        suggest-item
+                        cursor-pointer
+                      "
+                    >
+
+                      <div>
+                        <img src="@/assets/img/profile-pic.jpg" class="rounded-circle" alt="" width="30" height="30" />
+                      </div>
+                      <div class="d-flex flex-column ml-3">
+                        <div><span class="font-weight-bold">Maxine</span> liked your post</div>
+                        <div class="small text-muted">1m</div>
+                      </div>
+                    </div>
+                    <hr class="h-divider" />
+
+                    <div
+                      class="
+                        d-inline-flex
+                        flex-row
+                        align-items-center
+                        suggest-item
+                        cursor-pointer
+                      "
+                    >
+
+                      <div>
+                        <img src="@/assets/img/profile-pic.jpg" class="rounded-circle" alt="" width="30" height="30" />
+                      </div>
+                      <div class="d-flex flex-column ml-3">
+                        <div><span class="font-weight-bold">Paul</span> approuved your request to join the network</div>
+                        <div class="small text-muted">1m</div>
+                      </div>
+                    </div>
+                    <hr class="h-divider" />
+
+                    <div
+                      class="
+                        d-inline-flex
+                        flex-row
+                        align-items-center
+                        suggest-item
+                        cursor-pointer
+                      "
+                    >
+
+                      <div>
+                        <img src="@/assets/img/profile-pic.jpg" class="rounded-circle" alt="" width="30" height="30" />
+                      </div>
+                      <div class="d-flex flex-column ml-3">
+                        <div><span class="font-weight-bold">David</span> started following you</div>
+                        <div class="small text-muted">1m</div>
+                      </div>
+                    </div>
+                    <hr class="h-divider" />
+                    <a href="https://bridgeafrica.info/nav/notifications-view-all.html" class="text-ored"
+                      ><u>See all Notifications</u></a
+                    >
+                  </div>
                 </b-popover>
               </div>
 
               <div class="nav-item" id="profilepic">
                 <a class="nav-link text-dark" href="">
-                  <span><img :src="user.profile_picture" class="rounded-circle" alt="" width="50" height="50"/></span>
+                  <span><img :src="user.profile_picture" class="rounded-circle" alt="" width="50" height="50" /></span>
                 </a>
               </div>
 
@@ -323,27 +428,29 @@
 
                     <hr />
 
+
                     <router-link
                       to="/myorders/"
                       class="other-menu suggest-item cursor-pointer text-decoration-none text-dark"
+
                     >
-                      <span class="mr-2"><fas-icon class="violet search" :icon="['fas', 'cart-arrow-down']"/></span>
+                      <span class="mr-2"><fas-icon class="violet search" :icon="['fas', 'cart-arrow-down']" /></span>
                       My orders
                     </router-link>
                     <hr class="h-divider" />
 
                     <a href="/settings" class="other-menu suggest-item cursor-pointer text-decoration-none text-dark">
-                      <span class="mr-2"><fas-icon class="violet search" :icon="['fas', 'cogs']"/></span>
+                      <span class="mr-2"><fas-icon class="violet search" :icon="['fas', 'cogs']" /></span>
                       Account Settings
                     </a>
                     <hr class="h-divider" />
                     <div class="other-menu suggest-item cursor-pointer">
-                      <span class="mr-1"><fas-icon class="violet search" :icon="['fas', 'question']"/></span>
+                      <span class="mr-1"><fas-icon class="violet search" :icon="['fas', 'question']" /></span>
                       Help and Support
                     </div>
                     <hr class="h-divider" />
                     <div class="other-menu suggest-item cursor-pointer">
-                      <span class="mr-2"><fas-icon class="violet search" :icon="['fas', 'globe-americas']"/></span>
+                      <span class="mr-2"><fas-icon class="violet search" :icon="['fas', 'globe-americas']" /></span>
                       Language
                     </div>
                     <hr class="h-divider" />
@@ -356,7 +463,7 @@
                         text-decoration-none text-dark
                       "
                     >
-                      <span class="mr-2"><fas-icon class="violet search" :icon="['fas', 'sign-out-alt']"/></span>
+                      <span class="mr-2"><fas-icon class="violet search" :icon="['fas', 'sign-out-alt']" /></span>
                       Logout
                     </a>
                   </div>
@@ -393,25 +500,26 @@
 
             <hr class="mup" />
 
+
             <router-link to="/myorders/" class="other-menu suggest-item cursor-pointer text-decoration-none text-dark">
-              <span class="mr-2"><fas-icon class="violet search" :icon="['fas', 'cart-arrow-down']"/></span>
+              <span class="mr-2"><fas-icon class="violet search" :icon="['fas', 'cart-arrow-down']" /></span>
               My orders
             </router-link>
             <hr class="h-divider" />
 
             <a href="/settings" class="other-menu suggest-item cursor-pointer text-decoration-none text-dark">
-              <span class="mr-2"><fas-icon class="violet search" :icon="['fas', 'cogs']"/></span>
+              <span class="mr-2"><fas-icon class="violet search" :icon="['fas', 'cogs']" /></span>
 
               Account Settings
             </a>
             <hr class="h-divider" />
             <div class="other-menu suggest-item cursor-pointer">
-              <span class="mr-1"><fas-icon class="violet search" :icon="['fas', 'question']"/></span>
+              <span class="mr-1"><fas-icon class="violet search" :icon="['fas', 'question']" /></span>
               Help and Support
             </div>
             <hr class="h-divider" />
             <div class="other-menu suggest-item cursor-pointer">
-              <span class="mr-2"><fas-icon class="violet search" :icon="['fas', 'globe-americas']"/></span>
+              <span class="mr-2"><fas-icon class="violet search" :icon="['fas', 'globe-americas']" /></span>
               Language
             </div>
             <hr class="h-divider" />
@@ -424,7 +532,7 @@
                 text-decoration-none text-dark
               "
             >
-              <span class="mr-2"><fas-icon class="violet search" :icon="['fas', 'sign-out-alt']"/></span>
+              <span class="mr-2"><fas-icon class="violet search" :icon="['fas', 'sign-out-alt']" /></span>
               Logout
             </a>
           </div>
@@ -439,28 +547,30 @@
 <script>
 import Button from '@/components/ButtonNavBarFind.vue';
 import Activity from '@/components/ShowActivity.vue';
-import NavBarNotifications from '@/components/NavBarNotifications.vue';
 
 import { mapGetters, mapActions } from 'vuex';
+
+
 
 export default {
   name: 'navbar',
   components: {
     Button,
     Activity,
-    NavBarNotifications,
+
   },
   props: {
     credentials: {
       type: Object,
-      default: function() {
+      default: function () {
         return {
-          keyword: '',
-          placeholder: '',
+          keyword: "",
+          placeholder: "",
         };
       },
+      },
+
     },
-  },
 
   data() {
     return {
@@ -470,9 +580,9 @@ export default {
   },
   computed: {
     users() {
-      return this.$store.getters['userChat/getUsers'];
+      return this.$store.getters["userChat/getUsers"];
     },
-    ...mapGetters({
+     ...mapGetters({
       hasLauchNetworkRequest: 'social/INIT',
       user: 'auth/profilConnected',
     }),
@@ -481,6 +591,7 @@ export default {
   created() {
     this.init();
     this.getUsers();
+
   },
 
   methods: {
@@ -495,23 +606,24 @@ export default {
     },
     getUsers() {
       this.$store
-        .dispatch('userChat/GET_USERS', '')
+        .dispatch("userChat/GET_USERS",'')
         .then(() => {
-          console.log('->[Data logged]<-');
+          console.log("->[Data logged]<-");
         })
-        .catch(() => console.log('error'));
+        .catch(() => console.log("error"));
     },
     toggleinput() {
-      this.$refs.mobileinput.style.display = 'block';
+      this.$refs.mobileinput.style.display = "block";
     },
 
-    getNetworks: async function() {
+
+    getNetworks: async function () {
       let request = await this.$repository.share.getNetworks();
 
       if (request.success) this.setNetworks(request.data);
     },
 
-    getBusiness: async function() {
+    getBusiness: async function () {
       let request = await this.$repository.share.getBusiness();
 
       if (request.success) this.setBusiness(request.data);
@@ -530,6 +642,7 @@ export default {
         console.log(error);
       }
     },
+
 
     togglenav() {
       if (this.shownav == false) {

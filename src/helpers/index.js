@@ -1,7 +1,10 @@
 import moment from 'moment'
 import axios from "axios"
 
+export const getRootSchemeForRedis = () => axios.defaults.baseURL.substring(0, axios.defaults.baseURL.length - 8)
+
 export const fullMediaLink = (media) => {
+  console.log(media)
   if (media) {
     const scheme = axios.defaults.baseURL.substring(0, axios.defaults.baseURL.length - 8)
     const render = media.startsWith("https://www.youtube.com")
@@ -9,8 +12,7 @@ export const fullMediaLink = (media) => {
       : media.startsWith(scheme)
         ? media
         : media.startsWith("/storage/") ? `${scheme}${media}`
-          : `https://www.youtube.com/watch?v=${media}`
-
+          : media
     return render
   }
   return ""

@@ -14,7 +14,19 @@ class Repository {
         success: false,
       }
     }
+  }
 
+  async logOut() {
+    try {
+      const response = await axios.post("/logout")
+      return {
+        success: true,
+      }
+    } catch (error) {
+      return {
+        success: false,
+      }
+    }
   }
 
   async profile() {

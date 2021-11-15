@@ -41,7 +41,6 @@
       />
       <p class="my-4">{{ content }}</p>
     </b-modal>
-
     <div class="mediadesc" v-if="!['youtube'].includes(typeOfMedia())">
       <ul class="navbar-nav pull-right options">
         <li class="nav-item dropdown m-0 p-0">

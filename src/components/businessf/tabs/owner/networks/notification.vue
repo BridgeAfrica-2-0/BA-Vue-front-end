@@ -24,6 +24,13 @@
               :disabled="indeterminate ? false : true"
               class="a-button-l duration"
             >Mark as Read</b-button>
+            &nbsp;
+            <b-button 
+              variant="outline-primary"
+              @click="Delete" 
+              :disabled="indeterminate ? false : true"
+              class="a-button-l duration"
+            >Delete</b-button>
           </div>
         </b-col>
       </b-row>
@@ -35,8 +42,12 @@
           ><br />
           All Selected: <strong>{{ selectAll }}</strong>
         </div>
-        <b-col cols="12" class="mr-3 " v-for="notification in notifications" :key="notification.id">
-          <div :class="notification.is_read ? 'text-black' : 'font-weight-bold'">
+        <b-col cols="12"
+          :class="{ active: index == currentPage }"
+          v-for="(notification, index) in notifications.data"
+          :key="index"
+        >
+          <div :class="notification.mark_as_read ? 'text-secondary' : 'font-weight-bold'">
           <p class="">
             <span style="display:inline-flex">
               <b-form-checkbox
@@ -67,8 +78,18 @@
 
           <hr width="100%" />
         </b-col>
+        <b-col cols="12" v-if="notifications.total > notifications.per_page">
+          <div class="b-bottomn f-right">
+            <b-pagination
+              v-model="currentPage"
+              :total-rows="notifications.total"
+              :per-page="notifications.per_page"
+              @change="handlePageChange"
+            ></b-pagination>
+          </div>
+        </b-col>
       </b-row>
-      {{notifications}}
+      <!-- {{notifications}} -->
     </div>
 
     <FlashMessage />
@@ -86,6 +107,7 @@ export default {
       url: null,
       moment: moment,
       loader:false,
+      currentPage: 0,
 
       // notifications: [ 
       //   {
@@ -155,7 +177,7 @@ export default {
       if (newValue.length === 0) {
         this.indeterminate = false;
         this.selectAll = false;
-      } else if (newValue.length === this.notifications.length) {
+      } else if (newValue.length === this.notifications.data.length) {
         this.indeterminate = false;
         this.selectAll = true;
       } else {
@@ -174,14 +196,14 @@ export default {
       console.log("checked: "+checked);
       this.selected = [];
       if (checked) {
-        for (let notification in this.notifications) {
-            this.selected.push(this.notifications[notification].notification_id.toString());
-            console.log("this.notifications[notification].notification_id: "+this.notifications[notification].notification_id);
+        for (let notification in this.notifications.data) {
+            this.selected.push(this.notifications.data[notification].id.toString());
+            console.log("this.notifications.data[notification].id: "+this.notifications.data[notification].id);
         }
       }
     },
     updateCheckall: function() {
-      if (this.notifications.length === this.selected.length) {
+      if (this.notifications.data.length === this.selected.length) {
         this.selectAll = true;
       } else {
         this.selectAll = false;
@@ -190,7 +212,11 @@ export default {
     getNotifications() {
       console.log('getNotifications Mounted');
     this.$store
-      .dispatch("networkNotification/getNotifications", {"id":this.url,"path":"notifications"})
+      .dispatch("networkNotification/getNotifications", 
+      {
+        "id":this.url,
+        "path":"notifications?page="+this.currentPage
+        })
       .then(() => {
         console.log('ohh yeah');
       })
@@ -206,8 +232,14 @@ export default {
         console.log(this.selected[i]);
         formData.append('ids['+i+']', this.selected[i]);
       }
-      this.axios.post("network/"+this.url+"/notifications/mark", formData)
-      .then(() => {
+      this.$store
+      .dispatch("networkNotification/MarkAsRead", 
+      {
+        "path": this.url+"/notifications/mark",
+        "formData": formData
+      })
+      .then(({data}) => {
+        console.log(data);
         console.log('ohh yeah');
         this.getNotifications();
         this.indeterminate = true;
@@ -225,6 +257,46 @@ export default {
         });
       });
 		},
+
+    Delete: function(){
+      this.indeterminate = false;
+      let formData = new FormData();
+      for (let i = 0; i < this.selected.length; i++) {
+        console.log(this.selected[i]);
+        formData.append('ids['+i+']', this.selected[i]);
+      }
+      this.$store
+      .dispatch("networkNotification/Delete", 
+      {
+        "path": this.url+"/notifications/delete",
+        "formData": formData
+      })
+      .then(({data}) => {
+        console.log(data);
+        console.log('ohh yeah');
+        this.getNotifications();
+        this.indeterminate = true;
+        this.flashMessage.show({
+          status: "success",
+          message: "Marked As Read"
+        });
+      })
+      .catch(err => {
+        console.log({ err: err });
+        this.indeterminate = true;
+        this.flashMessage.show({
+          status: "error",
+          message: "Unable To Mark As Read"
+        });
+      });
+		},
+
+    handlePageChange(value) {
+      console.log("value: "+value)
+      console.log("currentPage: "+this.currentPage)
+      this.currentPage = value;
+      this.getNotifications(); 
+    },
 
   }
 

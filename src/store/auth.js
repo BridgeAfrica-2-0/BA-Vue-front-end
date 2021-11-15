@@ -35,6 +35,18 @@ export default {
       const userInfo = localStorage.getItem('user');
     },
 
+
+    setUserDataa(state, userData) {
+      state.user.user = userData.user;
+
+      localStorage.setItem("user.user", JSON.stringify(userData.user));
+
+
+    },
+
+
+
+
     setCountry(state, data) {
       state.country = data;
     },
@@ -103,8 +115,9 @@ export default {
 
   actions: {
     login({ commit }, credentials) {
-      return axios.post('user/login', credentials).then(({ data }) => {
-        commit('setUserData', data.data);
+      return axios.post("user/login", credentials).then(({ data }) => {
+        console.log(data);
+        commit("setUserData", data.data);
       });
     },
 
@@ -156,26 +169,16 @@ export default {
       });
     },
 
-    filters({ commit }) {
-      return axios.get('user/completewelcome').then(({ data }) => {
-        console.log(data);
-        commit('setFilters', data.data);
-      });
-    },
+  
 
-    Setcategoryfiters({ commit }) {
-      return axios.get('user/completewelcome').then(({ data }) => {
-        console.log(data);
-        commit('Setcategoryfiters', data.data);
-      });
-    },
 
     completeWelcome({ commit }) {
       return axios.get('user/completewelcome').then(({ data }) => {
         console.log(data);
-        commit('setUserData', data.data);
+        commit("setUserDataa", data.data);
       });
     },
+
 
     businessAround({ commit }) {
       return axios.get('business/around').then(({ data }) => {

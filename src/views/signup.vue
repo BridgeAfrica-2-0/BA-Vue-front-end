@@ -257,6 +257,16 @@ export default {
         });
     },
 
+
+     flashErrors(errors) {
+      let err = "";
+      Object.values(errors).forEach((element) => {
+        err = element[0];
+      });
+
+      return err;
+    },
+
     socialLogin(provider, response) {
       this.$http
         .post("user/social/" + provider, response)
@@ -331,7 +341,8 @@ export default {
             this.flashMessage.show({
               status: "error",
 
-              message: err.response.data.message,
+              message: this.flashErrors(err.response.data.errors),
+               blockClass: "custom-block-class",
             });
           } else {
             this.flashMessage.show({

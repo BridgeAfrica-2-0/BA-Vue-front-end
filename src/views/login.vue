@@ -215,7 +215,7 @@ export default {
       this.$http
         .post("user/social/" + provider, response)
         .then(({ data }) => {
-          console.log(data.data);
+          console.log(data);
 
           this.$store.commit("auth/setUserData", data.data);
           this.flashMessage.show({
@@ -272,7 +272,6 @@ export default {
             this.flashMessage.show({
               status: "error",
 
-              message: err.response.data.message
             });
           } else {
             this.flashMessage.show({

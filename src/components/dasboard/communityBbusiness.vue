@@ -16,7 +16,7 @@
             <b-col md="5" cols="7" lg="7" xl="5" sm="5">
               <p class="textt">
                 <strong class="title"> {{ item.name }} </strong> <br />
-                {{ item.category }}
+                {{ item.category[0] }} 
                 <br />
                 {{ count(item.followers) }}
                  {{ $t('dashboard.Community') }} <br />

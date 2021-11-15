@@ -11,6 +11,7 @@ export default {
      sponsoredBusinesses:[],
      searchState:{},
      isLoading:false,
+     geo:{},
 
     
 
@@ -19,13 +20,18 @@ export default {
 
   mutations: {
     setLoading(state, data) {
-      console.log("setting oader mother fucker");
+      console.log("setting search data");
       console.log(data);
       state.isLoading = data;
+     
 
     },
 
-
+    
+    setGeo(state, data){
+      state.geo = data;
+    },
+     
     setBusinesses(state, data) {
       state.businesses = data;
 
@@ -55,17 +61,24 @@ export default {
     
 
 
-  
+     getGeo({ commit }, payload){
+       console.log("setting geo location");
+       console.log(payload);
+      commit("setGeo", payload);
+
+     },
 
 
 
 
-      FIND_BUSINESS({ commit }, payload) {
+     async  FIND_BUSINESS({ commit,state }, payload) {
         console.log("business search start");
-      return axios.get(`search`,  {
+      return await axios.get(`search`,  {
         keyword : payload.keyword,
         location : payload.location,
-      
+        lat:state.geo.lat,
+        lng:state.geo.lng,
+
         categoryId: payload.category,
         subCategoryId: payload.subcategory,
         filterId: payload.filter,
@@ -104,6 +117,8 @@ export default {
       subCategoryId: payload.subcategory,
       filterId: payload.filter,
       distance: payload.distance,
+      lat:state.geo.lat,
+      lng:state.geo.lng,
       neighbourhoodId: payload.neighbourhood,
       
     }).then(({ data }) => {

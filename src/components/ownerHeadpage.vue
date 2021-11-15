@@ -8,7 +8,7 @@
           class="img-fluid  banner"
           alt="Cover Image"
         />
-        err
+        
          <img  v-if="info.user.cover_picture"
           :src="info.user.cover_picture"
           class="img-fluid  banner"

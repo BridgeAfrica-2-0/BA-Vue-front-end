@@ -23,7 +23,6 @@
         >
       </div>
     </div>
-    <b-alert :show="haveNotifications" variant="secondary">No Notifications</b-alert>
     <!-- NOTIFICATIONS CONTENT -->
     <div id="notifs">
       <!-- NOTIFICATIONS ITEMS -->
@@ -36,7 +35,6 @@
                 :value="{ id: notif.id, status: 'check' }"
                 :unchecked-value="{ id: notif.id, status: 'uncheck' }"
                 @change="selectNotif"
-                class="cursor-pointer"
               >
               </b-form-checkbox>
               <!-- AVATAR NOTIF -->
@@ -47,7 +45,7 @@
                 <p class="mb-0 text-secondary">{{ formatDate(notif.created_at) }}</p>
               </div>
             </div>
-            <p>
+            <p class="mb-0">
               {{
                 notif.notification_text.length > 226
                   ? `${notif.notification_text.slice(0, 226)}...`
@@ -55,13 +53,18 @@
               }}
             </p>
           </div>
-          <b-badge pill variant="primary"> </b-badge>
+          <b-badge v-if="!notif.mark_as_read" pill variant="primary"><span class="text-primary">.</span></b-badge>
         </div>
 
         <hr />
       </div>
     </div>
-    <infinite-loading @infinite="infiniteHandler"></infinite-loading>
+    <infinite-loading @infinite="infiniteHandler">
+      <div slot="no-more">No More Notifications</div>
+      <div slot="no-results">
+        <b-alert show variant="secondary">No Notifications</b-alert>
+      </div>
+    </infinite-loading>
   </div>
 </template>
 
@@ -90,7 +93,6 @@ export default {
       if (this.allNotifs) {
         numNotifs = this.allNotifs.length;
       }
-      console.log('Num Notif', numNotifs);
       return !(numNotifs > 0);
     },
     checkedNotif() {
@@ -101,9 +103,6 @@ export default {
         };
       });
     },
-    // ...mapGetters({
-    //   allNotifs: 'notifications/NEW_PROFILE_NOTIFICATION',
-    // }),
   },
   methods: {
     toggleAll(checked) {
@@ -160,7 +159,7 @@ export default {
           .then(response => {
             console.log(response.data);
             //this.$store.commit('notifications/DELETE_PROFILE_NOTIF', response.data.data);
-            this.deleleNotif(response.data.data);
+            this.deleteNotif(response.data.data);
             this.selectedNotif = [];
           })
           .finally(() => {
